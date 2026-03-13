@@ -1,0 +1,430 @@
+{
+  "bulbasaur": [
+    {
+      "into": "ivysaur",
+      "level": 16
+    }
+  ],
+  "ivysaur": [
+    {
+      "into": "venusaur",
+      "level": 32
+    }
+  ],
+  "charmander": [
+    {
+      "into": "charmeleon",
+      "level": 16
+    }
+  ],
+  "charmeleon": [
+    {
+      "into": "charizard",
+      "level": 36
+    }
+  ],
+  "squirtle": [
+    {
+      "into": "wartortle",
+      "level": 16
+    }
+  ],
+  "wartortle": [
+    {
+      "into": "blastoise",
+      "level": 36
+    }
+  ],
+  "caterpie": [
+    {
+      "into": "metapod",
+      "level": 7
+    }
+  ],
+  "metapod": [
+    {
+      "into": "butterfree",
+      "level": 10
+    }
+  ],
+  "weedle": [
+    {
+      "into": "kakuna",
+      "level": 7
+    }
+  ],
+  "kakuna": [
+    {
+      "into": "beedrill",
+      "level": 10
+    }
+  ],
+  "pidgey": [
+    {
+      "into": "pidgeotto",
+      "level": 18
+    }
+  ],
+  "pidgeotto": [
+    {
+      "into": "pidgeot",
+      "level": 36
+    }
+  ],
+  "spearow": [
+    {
+      "into": "fearow",
+      "level": 20
+    }
+  ],
+  "doduo": [
+    {
+      "into": "dodrio",
+      "level": 31
+    }
+  ],
+  "ekans": [
+    {
+      "into": "arbok",
+      "level": 22
+    }
+  ],
+  "nidoranF": [
+    {
+      "into": "nidorina",
+      "level": 16
+    }
+  ],
+  "nidoranM": [
+    {
+      "into": "nidorino",
+      "level": 16
+    }
+  ],
+  "zubat": [
+    {
+      "into": "golbat",
+      "level": 22
+    }
+  ],
+  "grimer": [
+    {
+      "into": "muk",
+      "level": 38
+    }
+  ],
+  "koffing": [
+    {
+      "into": "weezing",
+      "level": 35
+    }
+  ],
+  "oddish": [
+    {
+      "into": "gloom",
+      "level": 21
+    }
+  ],
+  "bellsprout": [
+    {
+      "into": "weepinbell",
+      "level": 21
+    }
+  ],
+  "mankey": [
+    {
+      "into": "primeape",
+      "level": 28
+    }
+  ],
+  "machop": [
+    {
+      "into": "machoke",
+      "level": 28
+    }
+  ],
+  "abra": [
+    {
+      "into": "kadabra",
+      "level": 16
+    }
+  ],
+  "drowzee": [
+    {
+      "into": "hypno",
+      "level": 26
+    }
+  ],
+  "diglett": [
+    {
+      "into": "dugtrio",
+      "level": 26
+    }
+  ],
+  "cubone": [
+    {
+      "into": "marowak",
+      "level": 28
+    }
+  ],
+  "sandshrew": [
+    {
+      "into": "sandslash",
+      "level": 22
+    }
+  ],
+  "geodude": [
+    {
+      "into": "graveler",
+      "level": 25
+    }
+  ],
+  "rhyhorn": [
+    {
+      "into": "rhydon",
+      "level": 42
+    }
+  ],
+  "psyduck": [
+    {
+      "into": "golduck",
+      "level": 33
+    }
+  ],
+  "tentacool": [
+    {
+      "into": "tentacruel",
+      "level": 30
+    }
+  ],
+  "poliwag": [
+    {
+      "into": "poliwhirl",
+      "level": 25
+    }
+  ],
+  "horsea": [
+    {
+      "into": "seadra",
+      "level": 32
+    }
+  ],
+  "goldeen": [
+    {
+      "into": "seaking",
+      "level": 33
+    }
+  ],
+  "krabby": [
+    {
+      "into": "kingler",
+      "level": 28
+    }
+  ],
+  "seel": [
+    {
+      "into": "dewgong",
+      "level": 34
+    }
+  ],
+  "slowpoke": [
+    {
+      "into": "slowbro",
+      "level": 37
+    }
+  ],
+  "magikarp": [
+    {
+      "into": "gyarados",
+      "level": 20
+    }
+  ],
+  "rattata": [
+    {
+      "into": "raticate",
+      "level": 20
+    }
+  ],
+  "meowth": [
+    {
+      "into": "persian",
+      "level": 28
+    }
+  ],
+  "ponyta": [
+    {
+      "into": "rapidash",
+      "level": 40
+    }
+  ],
+  "voltorb": [
+    {
+      "into": "electrode",
+      "level": 30
+    }
+  ],
+  "magnemite": [
+    {
+      "into": "magneton",
+      "level": 30
+    }
+  ],
+  "gastly": [
+    {
+      "into": "haunter",
+      "level": 25
+    }
+  ],
+  "paras": [
+    {
+      "into": "parasect",
+      "level": 24
+    }
+  ],
+  "venonat": [
+    {
+      "into": "venomoth",
+      "level": 31
+    }
+  ],
+  "omanyte": [
+    {
+      "into": "omastar",
+      "level": 40
+    }
+  ],
+  "kabuto": [
+    {
+      "into": "kabutops",
+      "level": 40
+    }
+  ],
+  "dratini": [
+    {
+      "into": "dragonair",
+      "level": 30
+    }
+  ],
+  "dragonair": [
+    {
+      "into": "dragonite",
+      "level": 55
+    }
+  ],
+  "pikachu": [
+    {
+      "into": "raichu",
+      "item": "thunderStone"
+    }
+  ],
+  "nidorina": [
+    {
+      "into": "nidoqueen",
+      "item": "moonStone"
+    }
+  ],
+  "nidorino": [
+    {
+      "into": "nidoking",
+      "item": "moonStone"
+    }
+  ],
+  "clefairy": [
+    {
+      "into": "clefable",
+      "item": "moonStone"
+    }
+  ],
+  "jigglypuff": [
+    {
+      "into": "wigglytuff",
+      "item": "moonStone"
+    }
+  ],
+  "vulpix": [
+    {
+      "into": "ninetales",
+      "item": "fireStone"
+    }
+  ],
+  "growlithe": [
+    {
+      "into": "arcanine",
+      "item": "fireStone"
+    }
+  ],
+  "gloom": [
+    {
+      "into": "vileplume",
+      "item": "leafStone"
+    }
+  ],
+  "weepinbell": [
+    {
+      "into": "victreebel",
+      "item": "leafStone"
+    }
+  ],
+  "poliwhirl": [
+    {
+      "into": "poliwrath",
+      "item": "waterStone"
+    }
+  ],
+  "shellder": [
+    {
+      "into": "cloyster",
+      "item": "waterStone"
+    }
+  ],
+  "exeggcute": [
+    {
+      "into": "exeggutor",
+      "item": "leafStone"
+    }
+  ],
+  "staryu": [
+    {
+      "into": "starmie",
+      "item": "waterStone"
+    }
+  ],
+  "eevee": [
+    {
+      "into": "vaporeon",
+      "item": "waterStone"
+    },
+    {
+      "into": "jolteon",
+      "item": "thunderStone"
+    },
+    {
+      "into": "flareon",
+      "item": "fireStone"
+    }
+  ],
+  "kadabra": [
+    {
+      "into": "alakazam",
+      "item": "linkCable"
+    }
+  ],
+  "machoke": [
+    {
+      "into": "machamp",
+      "item": "linkCable"
+    }
+  ],
+  "graveler": [
+    {
+      "into": "golem",
+      "item": "linkCable"
+    }
+  ],
+  "haunter": [
+    {
+      "into": "gengar",
+      "item": "linkCable"
+    }
+  ]
+}

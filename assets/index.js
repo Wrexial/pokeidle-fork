@@ -15000,7 +15000,7 @@ let pokemonSpecies = {
 }
   , preEvolutionMap = Object.fromEntries(Object.entries(evolutionData).flatMap( ([s,u]) => u.map(d => [d.into, s])));
 function getPokemonSpriteUrl(s, u=!1, d=!1) {
-    const o = "/assets/sprites/pokemon/versions/generation-v/black-white/animated";
+    const o = "/sprites/pokemon/versions/generation-v/black-white/animated";
     return d && u ? `${o}/back/shiny/${s}.gif` : d ? `${o}/shiny/${s}.gif` : u ? `${o}/back/${s}.gif` : `${o}/${s}.gif`
 }
 const jf = 0;
@@ -19440,7 +19440,7 @@ function Ih() {
                     }),
                     children: [c.jsx("img", {
                         src: getPokemonSpriteUrl(d.id),
-                        onError: e => e.target.src = '/assets/sprites/pokemon/0.gif',
+                        onError: e => e.target.src = '/sprites/pokemon/0.gif',
                         alt: d.name,
                         className: "starter-sprite"
                     }), c.jsx("h3", {
@@ -21092,7 +21092,7 @@ function ng() {
             children: c.jsx("img", {
                 className: g,
                 src: getPokemonSpriteUrl(f ? y.id : o.id, !1, d.isShiny),
-                onError: e => e.target.src = '/assets/sprites/pokemon/0.gif',
+                onError: e => e.target.src = '/sprites/pokemon/0.gif',
                 alt: f ? y.name : o.name
             })
         }), c.jsx("div", {
@@ -21259,7 +21259,7 @@ const trainerClassMap = {
     blackbelt: "blackbelt"
 };
 function getTrainerSpriteUrl(s) {
-    return `/assets/sprites/trainers/${trainerClassMap[s]}.png`
+    return `/sprites/trainers/${trainerClassMap[s]}.png`
 }
 const ug = {
     youngster: 16,
@@ -21938,7 +21938,7 @@ const ug = {
     }]
 };
 function getBossTrainerSpriteUrl(s) {
-    return s ? `/assets/sprites/trainers/${s}.png` : "/assets/sprites/trainers/acetrainer.png"
+    return s ? `/sprites/trainers/${s}.png` : "/sprites/trainers/acetrainer.png"
 }
 const yf = [{
     id: "brock",
@@ -22391,7 +22391,7 @@ function vf() {
                 className: "sprite-shadow"
             }), c.jsx("img", {
                 src: getPokemonSpriteUrl(pokemonSpecies[p.speciesKey].id, !1, p.isShiny),
-                onError: e => e.target.src = '/assets/sprites/pokemon/0.gif',
+                onError: e => e.target.src = '/sprites/pokemon/0.gif',
                 alt: p.name
             })]
         }), c.jsxs("div", {
@@ -22400,7 +22400,7 @@ function vf() {
                 className: "sprite-shadow"
             }), c.jsx("img", {
                 src: getPokemonSpriteUrl(_.id, !0, g.playerPokemon?.isShiny),
-                onError: e => e.target.src = '/assets/sprites/pokemon/0.gif',
+                onError: e => e.target.src = '/sprites/pokemon/0.gif',
                 alt: h.name
             })]
         }), c.jsx("div", {
@@ -23972,7 +23972,7 @@ function Gf({pokemon: s, source: u, partyLength: d, onAction: o, onClose: y, evo
             children: [c.jsx("img", {
                 className: "stats-panel-sprite",
                 src: getPokemonSpriteUrl(p.id, !1, s.isShiny),
-                onError: e => e.target.src = '/assets/sprites/pokemon/0.gif',
+                onError: e => e.target.src = '/sprites/pokemon/0.gif',
                 alt: s.name
             }), c.jsxs("div", {
                 className: "stats-panel-name-block",
@@ -24212,7 +24212,7 @@ function qf({inspected: s, setInspected: u, releaseConfirm: d, setReleaseConfirm
                             children: [c.jsx("img", {
                                 className: "party-sprite",
                                 src: getPokemonSpriteUrl(_e.id, !1, Q.isShiny),
-                                onError: e => e.target.src = '/assets/sprites/pokemon/0.gif',
+                                onError: e => e.target.src = '/sprites/pokemon/0.gif',
                                 alt: Q.name
                             }), c.jsxs("div", {
                                 className: "party-info",
@@ -24296,7 +24296,7 @@ const Pf = Io.memo(function({speciesKey: u, status: d, rarity: o, isSelected: y,
         }), c.jsx("img", {
             className: `pokedex-tile-sprite ${d}`,
             src: getPokemonSpriteUrl(p.id),
-            onError: e => e.target.src = '/assets/sprites/pokemon/0.gif',
+            onError: e => e.target.src = '/sprites/pokemon/0.gif',
             alt: d === "unseen" ? "???" : p.name,
             loading: "lazy"
         }), c.jsx("div", {
@@ -24397,7 +24397,7 @@ function jg({onClose: s}) {
                     children: [c.jsx("img", {
                         className: `stats-panel-sprite ${p}`,
                         src: getPokemonSpriteUrl(h.id),
-                        onError: e => e.target.src = '/assets/sprites/pokemon/0.gif',
+                        onError: e => e.target.src = '/sprites/pokemon/0.gif',
                         alt: p === "unseen" ? "???" : h.name
                     }), c.jsxs("div", {
                         className: "stats-panel-name-block",
@@ -24535,7 +24535,7 @@ function Xf({inspected: s, setInspected: u, setReleaseConfirm: d, dragSource: o=
                                 onDragEnd: v,
                                 children: c.jsx("img", {
                                     src: getPokemonSpriteUrl(_e.id, !1, J.isShiny),
-                                    onError: e => e.target.src = '/assets/sprites/pokemon/0.gif',
+                                    onError: e => e.target.src = '/sprites/pokemon/0.gif',
                                     alt: J.name,
                                     style: {
                                         imageRendering: "pixelated"
@@ -24973,7 +24973,7 @@ const martShopItems = {
             children: [c.jsx("img", {
                 className: `stats-panel-sprite ${f}`,
                 src: getPokemonSpriteUrl(w.id),
-            onError: e => e.target.src = '/assets/sprites/pokemon/0.gif',
+            onError: e => e.target.src = '/sprites/pokemon/0.gif',
                 alt: f === "unseen" ? "???" : w.name
             }), c.jsxs("div", {
                 className: "stats-panel-name-block",
@@ -25427,7 +25427,7 @@ function Vf({onOpenCatchSettings: s}) {
                 }), h && c.jsxs("div", {
                     className: "raid-legendary-info",
                     children: [c.jsx("img", {
-                        src: `/assets/sprites/pokemon/${h.id}.png`,
+                        src: `/sprites/pokemon/${h.id}.png`,
                         alt: h.name,
                         className: "raid-legendary-sprite"
                     }), c.jsx("div", {
@@ -25752,7 +25752,7 @@ const Gg = [{
                         children: [c.jsx("img", {
                             className: "catch-modal-species-sprite",
                             src: getPokemonSpriteUrl(z.id),
-                            onError: e => e.target.src = '/assets/sprites/pokemon/0.gif',
+                            onError: e => e.target.src = '/sprites/pokemon/0.gif',
                             alt: z.name
                         }), c.jsx("span", {
                             className: "catch-modal-species-name",

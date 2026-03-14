@@ -15030,7 +15030,7 @@ function generateIVs() {
         speed: Math.floor(Math.random() * 32)
     }
 }
-function Mf() {
+function getPerfectIVs() {
     return {
         hp: 31,
         attack: 31,
@@ -15040,6 +15040,7 @@ function Mf() {
         speed: 31
     }
 }
+
 let moveLearnsets = {
     bulbasaur: [[1, "tackle"], [1, "growl"], [3, "vineWhip"], [7, "leechSeed"], [9, "poisonPowder"], [13, "razorLeaf"], [15, "sleepPowder"], [20, "sludge"]],
     charmander: [[1, "scratch"], [1, "growl"], [4, "ember"], [8, "metalClaw"], [12, "fireSpin"], [17, "dragonRage"], [24, "flamethrower"]],
@@ -15193,12 +15194,31 @@ let moveLearnsets = {
     mewtwo: [[1, "confusion"], [1, "disable"], [8, "barrier"], [15, "psybeam"], [22, "psychic"], [29, "amnesia"], [36, "hyperBeam"]],
     mew: [[1, "pound"], [1, "confusion"], [10, "psychic"], [20, "ancientPower"], [30, "amnesia"], [40, "hyperBeam"]]
 };
-function calculateRequiredExperience(s, u) {
-    if (s <= 1)
+
+function calculateRequiredExperience(currentLevel, growthRate) {
+    if (currentLevel <= 1)
         return 0;
-    const d = s;
-    return Math.floor(u === "mediumFast" ? d * d * d : 6 / 5 * d * d * d - 15 * d * d + 100 * d - 140)
+    const d = currentLevel;
+    let value;
+    
+    switch(growthRate){
+        case "fast":
+            value = (4 * d * d * d) / 5;
+            break;
+            case "mediumFast":
+                value = d * d * d;
+            break;
+            case "slow":
+            value = (5 * d * d * d) / 4;
+            break;
+            case "mediumSlow":
+            default:
+                value = 6 / 5 * d * d * d - 15 * d * d + 100 * d - 140;
+                
+    }
+    return Math.floor(value)
 }
+
 function Dh(s, u) {
     return Math.floor(s.baseExpYield * u / 7)
 }
@@ -23415,7 +23435,7 @@ function Ng() {
                     const X = G[Math.floor(Math.random() * G.length)]
                       , Z = X.team.map(F => {
                         const q = pokemonSpecies[F.speciesKey]
-                          , le = calculatePokemonStats(q, F.level, Mf())
+                          , le = calculatePokemonStats(q, F.level, getPerfectIVs())
                           , ve = resolvePokemonMoves(F.speciesKey, F.level);
                         return {
                             speciesKey: F.speciesKey,
@@ -25840,7 +25860,7 @@ function If() {
 function Po(s) {
     return s.map(u => {
         const d = pokemonSpecies[u.speciesKey]
-          , o = calculatePokemonStats(d, u.level, Mf())
+          , o = calculatePokemonStats(d, u.level, getPerfectIVs())
           , y = resolvePokemonMoves(u.speciesKey, u.level);
         return {
             speciesKey: u.speciesKey,

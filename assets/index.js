@@ -15020,7 +15020,7 @@ function calculatePokemonStats(s, u, d) {
         speed: Ul(s.baseStats.speed, u, d.speed)
     }
 }
-function Un() {
+function generateIVs() {
     return {
         hp: Math.floor(Math.random() * 32),
         attack: Math.floor(Math.random() * 32),
@@ -15243,10 +15243,10 @@ function Mh(s, u) {
     }
     return y
 }
-function Xl(s, u) {
+function resolvePokemonMoves(s, u) {
     return (moveLearnsets[s] || []).filter( ([y]) => y <= u).map( ([,y]) => y).slice(-4)
 }
-const Xe = {
+const mapData = {
     indigoPlat: {
         id: "indigoPlat",
         name: "Indigo Plateau",
@@ -16309,7 +16309,7 @@ const Xe = {
         }
     }
 }
-  , Pn = {
+  , mapEncounterData = {
     route1: {
         name: "Route 1",
         encounters: [{
@@ -17932,9 +17932,9 @@ const Hh = {
 };
 function pf(s, u, d, o=!1) {
     const y = pokemonSpecies[s]
-      , f = Un()
+      , f = generateIVs()
       , g = calculatePokemonStats(y, u, f)
-      , x = Xl(s, u);
+      , x = resolvePokemonMoves(s, u);
     return {
         id: String(d),
         speciesKey: s,
@@ -17956,7 +17956,7 @@ function pf(s, u, d, o=!1) {
 function Yl(s) {
     const u = new Set(s.unlockedLocations)
       , d = s.defeatedGyms.length;
-    for (const [o,y] of Object.entries(Xe)) {
+    for (const [o,y] of Object.entries(mapData)) {
         if (u.has(o))
             continue;
         const f = y.unlock;
@@ -18119,7 +18119,7 @@ function Yh(s, u) {
                   , v = A.filter(S => !k.unlockedLocations.includes(S));
                 let _ = k.battleLog;
                 for (const S of v) {
-                    const D = Xe[S];
+                    const D = mapData[S];
                     D && (_ = [..._, `${D.name} is now accessible!`].slice(-50))
                 }
                 return {
@@ -18348,7 +18348,7 @@ function Yh(s, u) {
             const {locationId: d} = u.payload;
             if (!s.unlockedLocations.includes(d) || d === s.currentLocation)
                 return s;
-            const o = Xe[d]
+            const o = mapData[d]
               , y = o.routeKey || s.currentRoute
               , f = Yl(s);
             return {
@@ -18475,7 +18475,7 @@ function Yh(s, u) {
     case "TOGGLE_ROUTE_CATCH_ALL":
         {
             const {routeKey: d, enabled: o} = u.payload
-              , y = Pn[d];
+              , y = mapEncounterData[d];
             if (!y)
                 return s;
             const f = {
@@ -18901,8 +18901,8 @@ function Yh(s, u) {
             }
             if (s.currentLocation === "raidIsland") {
                 const y = s.preRaidLocation || "palletTown"
-                  , f = Xe[y]?.routeKey || "route1"
-                  , g = Xe[y]?.name || "Pallet Town";
+                  , f = mapData[y]?.routeKey || "route1"
+                  , g = mapData[y]?.name || "Pallet Town";
                 return {
                     ...s,
                     phase: "idle",
@@ -19192,14 +19192,14 @@ function Gh({children: s}) {
                         }
                     }
                     ),
-                    x.ivs || (x.ivs = Un()),
+                    x.ivs || (x.ivs = generateIVs()),
                     h = h.map(S => S.ivs ? S : {
                         ...S,
-                        ivs: Un()
+                        ivs: generateIVs()
                     }),
                     p = p.map(S => S.ivs ? S : {
                         ...S,
-                        ivs: Un()
+                        ivs: generateIVs()
                     });
                     const w = f.catchSettings || {};
                     for (const S of Object.keys(w))
@@ -19341,13 +19341,13 @@ function Re() {
         throw new Error("useGame must be used within GameProvider");
     return s
 }
-const qh = 8192
-  , Ph = 4096;
-function qn(s=!1) {
-    const u = s ? Ph : qh;
-    return Math.floor(Math.random() * u) === 0
+const shinyFullOddsChance = 8192
+  , shinyWithCharmChance = 4096;
+function checkShinyOdds(isDexComplete=!1) {
+    const odds = isDexComplete ? shinyWithCharmChance : shinyFullOddsChance;
+    return Math.floor(Math.random() * odds) === 0
 }
-function Xh(s, u) {
+function resolveActiveModifiers(s, u) {
     const d = [];
     for (const o of s)
         o.type === "repel" && o.routeKey === u && o.speciesKey ? d.push({
@@ -19359,7 +19359,7 @@ function Xh(s, u) {
         });
     return d
 }
-function Vh(s, u, d=!1) {
+function resolvePokemonEncounter(s, u, d=!1) {
     const o = s.encounters.map(x => {
         const h = u?.find(p => p.speciesKey === x.speciesKey);
         return h ? {
@@ -19378,7 +19378,7 @@ function Vh(s, u, d=!1) {
                 species: pokemonSpecies[x.speciesKey],
                 speciesKey: x.speciesKey,
                 level: h,
-                isShiny: qn(d)
+                isShiny: checkShinyOdds(d)
             }
         }
     const g = o[o.length - 1];
@@ -19386,7 +19386,7 @@ function Vh(s, u, d=!1) {
         species: pokemonSpecies[g.speciesKey],
         speciesKey: g.speciesKey,
         level: g.minLevel,
-        isShiny: qn(d)
+        isShiny: checkShinyOdds(d)
     }
 }
 const Qh = ["bulbasaur", "charmander", "squirtle"];
@@ -19415,7 +19415,7 @@ function Ih() {
                         type: "SELECT_STARTER",
                         payload: {
                             speciesKey: u,
-                            isShiny: qn()
+                            isShiny: checkShinyOdds()
                         }
                     }),
                     children: [c.jsx("img", {
@@ -22258,7 +22258,7 @@ function vf() {
       , Q = D?.data?.target === "enemy" && ve
       , J = z?.data?.target === "enemy"
       , _e = z?.data?.target === "player"
-      , je = Xe[g.currentLocation]?.type === "town"
+      , je = mapData[g.currentLocation]?.type === "town"
       , N = {
         vermilionCity: "/backgrounds/town_port.png",
         cinnabarIsland: "/backgrounds/town_port.png",
@@ -22399,7 +22399,7 @@ function vf() {
                     message: ""
                 } : null),
                 speed: g.speed,
-                isAtTown: Xe[g.currentLocation]?.type === "town"
+                isAtTown: mapData[g.currentLocation]?.type === "town"
             }), c.jsxs("div", {
                 className: "bottom-right-panel",
                 children: [c.jsx("button", {
@@ -23393,30 +23393,30 @@ function Ng() {
     }
     , [])
       , g = O.useCallback( () => {
-        const p = y.current;
-        if (p.pendingEvents.length > 0) {
+        const currentGameState = y.current;
+        if (currentGameState.pendingEvents.length > 0) {
             u({
                 type: "CONSUME_EVENT"
             });
             return
         }
-        const w = 151 //Object.keys(pokemonSpecies).length
-          , k = p.pokedexCaught.length >= w;
-        switch (p.phase) {
+        const totalCatchablePokedex = 151 //Object.keys(pokemonSpecies).length
+          , finishedDex = currentGameState.pokedexCaught.length >= totalCatchablePokedex;
+        switch (currentGameState.phase) {
         case "idle":
             {
-                if (!p.playerPokemon)
+                if (!currentGameState.playerPokemon)
                     return;
-                const A = Xe[p.currentLocation];
-                if (A && A.type === "town") {
-                    const G = rg[p.currentLocation];
+                const currentLocationData = mapData[currentGameState.currentLocation];
+                if (currentLocationData && currentLocationData.type === "town") {
+                    const G = rg[currentGameState.currentLocation];
                     if (!G?.length)
                         return;
                     const X = G[Math.floor(Math.random() * G.length)]
                       , Z = X.team.map(F => {
                         const q = pokemonSpecies[F.speciesKey]
                           , le = calculatePokemonStats(q, F.level, Mf())
-                          , ve = Xl(F.speciesKey, F.level);
+                          , ve = resolvePokemonMoves(F.speciesKey, F.level);
                         return {
                             speciesKey: F.speciesKey,
                             name: q.name,
@@ -23431,7 +23431,7 @@ function Ng() {
                             speed: le.speed,
                             moves: ve,
                             isPlayer: !1,
-                            isShiny: qn()
+                            isShiny: checkShinyOdds(finishedDex)
                         }
                     }
                     );
@@ -23446,17 +23446,17 @@ function Ng() {
                     });
                     return
                 }
-                if (A.type === "raid" && p.inRaid && p.raidLegendary) {
-                    const G = Wa.find(Ne => Ne.speciesKey === p.raidLegendary);
+                if (currentLocationData.type === "raid" && currentGameState.inRaid && currentGameState.raidLegendary) {
+                    const G = Wa.find(Ne => Ne.speciesKey === currentGameState.raidLegendary);
                     if (!G)
                         return;
                     const X = pokemonSpecies[G.speciesKey];
                     if (!X)
                         return;
-                    const Z = p.raidLevel
-                      , F = Un()
+                    const Z = currentGameState.raidLevel
+                      , F = generateIVs()
                       , q = calculatePokemonStats(X, Z, F)
-                      , le = Xl(G.speciesKey, Z)
+                      , le = resolvePokemonMoves(G.speciesKey, Z)
                       , ve = {
                         speciesKey: G.speciesKey,
                         name: X.name,
@@ -23471,7 +23471,7 @@ function Ng() {
                         speed: q.speed,
                         moves: le,
                         isPlayer: !1,
-                        isShiny: qn(k)
+                        isShiny: checkShinyOdds(finishedDex)
                     };
                     u({
                         type: "START_ENCOUNTER",
@@ -23499,75 +23499,75 @@ function Ng() {
                     }));
                     return
                 }
-                const v = Pn[p.currentRoute];
-                if (!v)
+                const encounterData = mapEncounterData[currentGameState.currentRoute];
+                if (!encounterData)
                     return;
-                const _ = Xh(p.activeEffects, p.currentRoute)
-                  , S = Vh(v, _, k)
-                  , D = calculatePokemonStats(S.species, S.level, Un())
-                  , z = Xl(S.speciesKey, S.level)
-                  , V = {
-                    speciesKey: S.speciesKey,
-                    name: S.species.name,
-                    types: S.species.types,
-                    level: S.level,
-                    currentHp: D.hp,
-                    maxHp: D.hp,
-                    attack: D.attack,
-                    defense: D.defense,
-                    spAttack: D.spAttack,
-                    spDefense: D.spDefense,
-                    speed: D.speed,
-                    moves: z,
+                const activeModifierMultipliers = resolveActiveModifiers(currentGameState.activeEffects, currentGameState.currentRoute)
+                  , spawningPokemonData = resolvePokemonEncounter(encounterData, activeModifierMultipliers, finishedDex)
+                  , pokemonBaseStats = calculatePokemonStats(spawningPokemonData.species, spawningPokemonData.level, generateIVs())
+                  , pokemonMoves = resolvePokemonMoves(spawningPokemonData.speciesKey, spawningPokemonData.level)
+                  , pokemonData = {
+                    speciesKey: spawningPokemonData.speciesKey,
+                    name: spawningPokemonData.species.name,
+                    types: spawningPokemonData.species.types,
+                    level: spawningPokemonData.level,
+                    currentHp: pokemonBaseStats.hp,
+                    maxHp: pokemonBaseStats.hp,
+                    attack: pokemonBaseStats.attack,
+                    defense: pokemonBaseStats.defense,
+                    spAttack: pokemonBaseStats.spAttack,
+                    spDefense: pokemonBaseStats.spDefense,
+                    speed: pokemonBaseStats.speed,
+                    moves: pokemonMoves,
                     isPlayer: !1,
-                    isShiny: S.isShiny
+                    isShiny: spawningPokemonData.isShiny
                 };
                 u({
                     type: "START_ENCOUNTER",
                     payload: {
-                        enemy: V
+                        enemy: pokemonData
                     }
                 }),
                 u({
                     type: "MARK_SEEN",
                     payload: {
-                        speciesKey: S.speciesKey
+                        speciesKey: spawningPokemonData.speciesKey
                     }
                 }),
-                S.isShiny && (u({
+                spawningPokemonData.isShiny && (u({
                     type: "MARK_SHINY_SEEN",
                     payload: {
-                        speciesKey: S.speciesKey
+                        speciesKey: spawningPokemonData.speciesKey
                     }
                 }),
                 u({
                     type: "ADD_LOG",
                     payload: {
-                        message: `✦ A shiny ${S.species.name} appeared!`
+                        message: `✦ A shiny ${spawningPokemonData.species.name} appeared!`
                     }
                 }));
                 break
             }
         case "battling":
             {
-                if (!p.playerPokemon || !p.enemyPokemon)
+                if (!currentGameState.playerPokemon || !currentGameState.enemyPokemon)
                     return;
-                const A = p.playerVolatile ?? ql()
+                const A = currentGameState.playerVolatile ?? ql()
                   , v = {
-                    speciesKey: p.playerPokemon.speciesKey,
-                    name: p.playerPokemon.name,
-                    types: pokemonSpecies[p.playerPokemon.speciesKey].types,
-                    level: p.playerPokemon.level,
-                    currentHp: p.playerPokemon.currentHp,
-                    maxHp: p.playerPokemon.maxHp,
-                    attack: p.playerPokemon.attack,
-                    defense: p.playerPokemon.defense,
-                    spAttack: p.playerPokemon.spAttack,
-                    spDefense: p.playerPokemon.spDefense,
-                    speed: p.playerPokemon.speed,
-                    moves: p.playerPokemon.moves,
+                    speciesKey: currentGameState.playerPokemon.speciesKey,
+                    name: currentGameState.playerPokemon.name,
+                    types: pokemonSpecies[currentGameState.playerPokemon.speciesKey].types,
+                    level: currentGameState.playerPokemon.level,
+                    currentHp: currentGameState.playerPokemon.currentHp,
+                    maxHp: currentGameState.playerPokemon.maxHp,
+                    attack: currentGameState.playerPokemon.attack,
+                    defense: currentGameState.playerPokemon.defense,
+                    spAttack: currentGameState.playerPokemon.spAttack,
+                    spDefense: currentGameState.playerPokemon.spDefense,
+                    speed: currentGameState.playerPokemon.speed,
+                    moves: currentGameState.playerPokemon.moves,
                     isPlayer: !0,
-                    isShiny: p.playerPokemon.isShiny,
+                    isShiny: currentGameState.playerPokemon.isShiny,
                     statStages: {
                         ...A.statStages
                     },
@@ -23576,9 +23576,9 @@ function Ng() {
                     lockTurnsRemaining: A.lockTurnsRemaining
                 }
                   , _ = {
-                    ...p.enemyPokemon
+                    ...currentGameState.enemyPokemon
                 }
-                  , S = (p.trainerBattle ?? p.bossBattle) !== null
+                  , S = (currentGameState.trainerBattle ?? currentGameState.bossBattle) !== null
                   , D = Sg(v, _, S);
                 u({
                     type: "EXECUTE_TURN",
@@ -23609,15 +23609,15 @@ function Ng() {
             }
         case "victory":
             {
-                if (!p.playerPokemon || !p.enemyPokemon) {
+                if (!currentGameState.playerPokemon || !currentGameState.enemyPokemon) {
                     u({
                         type: "PHASE_IDLE"
                     });
                     return
                 }
-                const A = p.activeEffects.some(z => z.type === "expShare");
-                if (p.playerPokemon.currentHp <= 0) {
-                    const z = p.party.findIndex( (V, G) => G !== p.activePlayerPokemonIndex && V.currentHp > 0);
+                const A = currentGameState.activeEffects.some(z => z.type === "expShare");
+                if (currentGameState.playerPokemon.currentHp <= 0) {
+                    const z = currentGameState.party.findIndex( (V, G) => G !== currentGameState.activePlayerPokemonIndex && V.currentHp > 0);
                     u(z !== -1 ? {
                         type: "SWITCH_PLAYER_POKEMON",
                         payload: {
@@ -23626,12 +23626,12 @@ function Ng() {
                     } : {
                         type: "START_HEALING"
                     }),
-                    Go(u, p.playerPokemon, p.enemyPokemon, p.bossBattle ?? p.trainerBattle ? 1.5 : 1, A, p.party, p.activePlayerPokemonIndex);
+                    Go(u, currentGameState.playerPokemon, currentGameState.enemyPokemon, currentGameState.bossBattle ?? currentGameState.trainerBattle ? 1.5 : 1, A, currentGameState.party, currentGameState.activePlayerPokemonIndex);
                     return
                 }
-                const v = p.bossBattle ?? p.trainerBattle;
+                const v = currentGameState.bossBattle ?? currentGameState.trainerBattle;
                 if (v) {
-                    Go(u, p.playerPokemon, p.enemyPokemon, 1.5, A, p.party, p.activePlayerPokemonIndex);
+                    Go(u, currentGameState.playerPokemon, currentGameState.enemyPokemon, 1.5, A, currentGameState.party, currentGameState.activePlayerPokemonIndex);
                     const z = v.currentTrainerPokemonIndex + 1;
                     if (z < v.trainerTeam.length)
                         u({
@@ -23643,7 +23643,7 @@ function Ng() {
                     else {
                         const V = Math.max(...v.trainerTeam.map(X => X.level))
                           , G = ug[v.trainerClass] * V;
-                        p.bossBattle ? u({
+                        currentGameState.bossBattle ? u({
                             type: "BOSS_BATTLE_END",
                             payload: {
                                 won: !0,
@@ -23659,11 +23659,11 @@ function Ng() {
                     }
                     return
                 }
-                const _ = p.enemyPokemon;
-                Go(u, p.playerPokemon, _, 1, A, p.party, p.activePlayerPokemonIndex);
-                const S = _.isShiny && p.alwaysCatchShinies;
-                if (S || Ag(p, p.currentRoute, _.speciesKey, _.level, _.isShiny)) {
-                    const z = S ? Uf(_.speciesKey, Fo, p.inventory) : Tg(p, p.currentRoute, _.speciesKey);
+                const _ = currentGameState.enemyPokemon;
+                Go(u, currentGameState.playerPokemon, _, 1, A, currentGameState.party, currentGameState.activePlayerPokemonIndex);
+                const S = _.isShiny && currentGameState.alwaysCatchShinies;
+                if (S || Ag(currentGameState, currentGameState.currentRoute, _.speciesKey, _.level, _.isShiny)) {
+                    const z = S ? Uf(_.speciesKey, Fo, currentGameState.inventory) : Tg(currentGameState, currentGameState.currentRoute, _.speciesKey);
                     z ? Lg(_.speciesKey, z) ? (u({
                         type: "CATCH_POKEMON",
                         payload: {
@@ -23709,8 +23709,8 @@ function Ng() {
             }
         case "defeat":
             {
-                const A = p.activePlayerPokemonIndex
-                  , v = p.party.findIndex( (_, S) => S > A && _.currentHp > 0);
+                const A = currentGameState.activePlayerPokemonIndex
+                  , v = currentGameState.party.findIndex( (_, S) => S > A && _.currentHp > 0);
                 if (v !== -1)
                     u({
                         type: "SWITCH_PLAYER_POKEMON",
@@ -23719,16 +23719,16 @@ function Ng() {
                         }
                     });
                 else {
-                    if (p.bossBattle ?? p.trainerBattle) {
-                        const S = Math.min(p.money, Math.max(...p.party.map(D => D.level)) * 12);
-                        p.bossBattle ? (u({
+                    if (currentGameState.bossBattle ?? currentGameState.trainerBattle) {
+                        const S = Math.min(currentGameState.money, Math.max(...currentGameState.party.map(D => D.level)) * 12);
+                        currentGameState.bossBattle ? (u({
                             type: "BOSS_BATTLE_END",
                             payload: {
                                 won: !1,
                                 moneyDelta: -S
                             }
                         }),
-                        (p.bossBattle.bossType === "e4" || p.bossBattle.bossType === "champion") && u({
+                        (currentGameState.bossBattle.bossType === "e4" || currentGameState.bossBattle.bossType === "champion") && u({
                             type: "RESET_ELITE_FOUR"
                         })) : u({
                             type: "TRAINER_BATTLE_END",
@@ -23776,7 +23776,7 @@ function Ng() {
         const w = s.unlockedLocations.filter(A => !p.includes(A));
         if (w.length === 0)
             return;
-        const k = w.filter(A => A !== "raidIsland").map(A => Xe[A]).filter(Boolean).sort( (A, v) => v.unlockOrder - A.unlockOrder)[0];
+        const k = w.filter(A => A !== "raidIsland").map(A => mapData[A]).filter(Boolean).sort( (A, v) => v.unlockOrder - A.unlockOrder)[0];
         k && (h.current = k.id)
     }
     , [s.unlockedLocations, s.autoProceed]),
@@ -24286,7 +24286,7 @@ const Pf = Io.memo(function({speciesKey: u, status: d, rarity: o, isSelected: y,
     }) : null
 })
   , Ja = {};
-for (const s of Object.values(Pn))
+for (const s of Object.values(mapEncounterData))
     for (const u of s.encounters)
         Ja[u.speciesKey] || (Ja[u.speciesKey] = []),
         Ja[u.speciesKey].includes(s.name) || Ja[u.speciesKey].push(s.name);
@@ -25368,8 +25368,8 @@ function Yg({itemId: s, name: u, description: d, price: o, owned: y, money: f, q
 }
 function Vf({onOpenCatchSettings: s}) {
     const {state: u, dispatch: d} = Re()
-      , o = Xe[u.currentLocation]
-      , y = Object.values(Xe).filter(h => {
+      , o = mapData[u.currentLocation]
+      , y = Object.values(mapData).filter(h => {
         if (u.unlockedLocations.includes(h.id))
             return !1;
         const p = h.unlock;
@@ -25378,7 +25378,7 @@ function Vf({onOpenCatchSettings: s}) {
     ).sort( (h, p) => h.unlockOrder - p.unlockOrder)[0]
       , f = u.defeatedGyms.length
       , g = o?.routeKey
-      , x = g ? Pn[g] : null;
+      , x = g ? mapEncounterData[g] : null;
     if (!o)
         return null;
     if (o.type === "raid") {
@@ -25479,7 +25479,7 @@ function Vf({onOpenCatchSettings: s}) {
                   , p = [];
                 if (h.battlesAtLocation)
                     for (const w of h.battlesAtLocation) {
-                        const k = Xe[w.locationId]?.name ?? w.locationId
+                        const k = mapData[w.locationId]?.name ?? w.locationId
                           , A = u.battlesWonByLocation[w.locationId] ?? 0;
                         p.push({
                             label: `Battles at ${k}`,
@@ -25841,7 +25841,7 @@ function Po(s) {
     return s.map(u => {
         const d = pokemonSpecies[u.speciesKey]
           , o = calculatePokemonStats(d, u.level, Mf())
-          , y = Xl(u.speciesKey, u.level);
+          , y = resolvePokemonMoves(u.speciesKey, u.level);
         return {
             speciesKey: u.speciesKey,
             name: d.name,
@@ -25856,7 +25856,7 @@ function Po(s) {
             speed: o.speed,
             moves: y,
             isPlayer: !1,
-            isShiny: qn()
+            isShiny: checkShinyOdds()
         }
     }
     )
@@ -26140,7 +26140,7 @@ function Pg() {
       , h = O.useCallback( () => y(!1), [])
       , p = O.useCallback( () => g(!0), [])
       , w = O.useCallback( () => g(!1), [])
-      , k = Xe[s.currentLocation]
+      , k = mapData[s.currentLocation]
       , A = k?.type === "raid"
       , v = A ? "raidIsland" : k?.routeKey
       , _ = A ? Wa.map(z => ({
@@ -26149,7 +26149,7 @@ function Pg() {
         minLevel: z.level,
         maxLevel: z.level
     })) : null
-      , S = v && !A ? Pn[v] : null
+      , S = v && !A ? mapEncounterData[v] : null
       , D = A ? _ : S?.encounters;
     return c.jsxs("div", {
         className: "side-panel right-panel",
@@ -26226,10 +26226,10 @@ function Vg({location: s, isCurrent: u, isUnlocked: d, isClickable: o, onClick: 
         })]
     })
 }
-const Qg = Object.keys(Xe);
+const Qg = Object.keys(mapData);
 function Cf(s, u) {
-    const d = Xe[s]
-      , o = Xe[u]
+    const d = mapData[s]
+      , o = mapData[u]
       , y = Math.abs(o.position.x - d.position.x)
       , f = Math.abs(o.position.y - d.position.y);
     return y >= f ? [{
@@ -26257,7 +26257,7 @@ function Cf(s, u) {
 function Jf() {
     const {state: s, dispatch: u} = Re()
       , {currentLocation: d, unlockedLocations: o} = s
-      , y = Xe[d];
+      , y = mapData[d];
     function f(h) {
         if (h === "raidIsland") {
             if (s.raidCooldownEnd && Date.now() < s.raidCooldownEnd)
@@ -26280,7 +26280,7 @@ function Jf() {
     }
     const g = []
       , x = new Set;
-    for (const h of Object.values(Xe))
+    for (const h of Object.values(mapData))
         for (const p of h.connections) {
             const w = [h.id, p].sort().join("-");
             x.has(w) || (x.add(w),
@@ -26329,7 +26329,7 @@ function Jf() {
                 }
                 )]
             }), Qg.map(h => {
-                const p = Xe[h]
+                const p = mapData[h]
                   , w = o.includes(h);
                 if (p.type === "raid" && !w)
                     return null;
@@ -26372,7 +26372,7 @@ function Zg() {
       , [A,v] = O.useState("location")
       , [_,S] = O.useState(!1)
       , [D,z] = O.useState(!1)
-      , V = Xe[s.currentLocation]
+      , V = mapData[s.currentLocation]
       , G = V?.type === "raid"
       , X = G ? "raidIsland" : V?.routeKey
       , Z = G ? Wa.map(W => ({
@@ -26381,7 +26381,7 @@ function Zg() {
         minLevel: W.level,
         maxLevel: W.level
     })) : null
-      , F = X && !G ? Pn[X] : null
+      , F = X && !G ? mapEncounterData[X] : null
       , q = G ? Z : F?.encounters
       , le = h ? s.box.find(W => W.id === h.id) ?? null : null
       , ve = O.useCallback( () => {

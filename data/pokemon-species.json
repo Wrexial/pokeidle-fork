@@ -516,7 +516,7 @@
     "growthRate": "mediumFast",
     "catchRate": 90
   },
-  "nidoran f": {
+  "nidoranF": {
     "id": 29,
     "name": "Nidoran f",
     "types": [
@@ -571,7 +571,7 @@
     "growthRate": "mediumSlow",
     "catchRate": 45
   },
-  "nidoran m": {
+  "nidoranM": {
     "id": 32,
     "name": "Nidoran m",
     "types": [
@@ -2230,7 +2230,7 @@
     "growthRate": "slow",
     "catchRate": 60
   },
-  "mr. mime": {
+  "mrMime": {
     "id": 122,
     "name": "Mr. Mime",
     "types": [
@@ -8089,7 +8089,7 @@
     "growthRate": "mediumFast",
     "catchRate": 255
   },
-  "mime jr.": {
+  "mimeJR": {
     "id": 439,
     "name": "Mime Jr.",
     "types": [

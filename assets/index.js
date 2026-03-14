@@ -12443,7 +12443,7 @@ function Ch() {
     Oo.exports
 }
 var Rh = Ch();
-const pokemonSpecies = {
+let pokemonSpecies = {
     bulbasaur: {
         id: 1,
         name: "Bulbasaur",
@@ -19420,6 +19420,7 @@ function Ih() {
                     }),
                     children: [c.jsx("img", {
                         src: getPokemonSpriteUrl(d.id),
+                        onError: e => e.target.src = '/assets/sprites/pokemon/0.gif',
                         alt: d.name,
                         className: "starter-sprite"
                     }), c.jsx("h3", {
@@ -21071,6 +21072,7 @@ function ng() {
             children: c.jsx("img", {
                 className: g,
                 src: getPokemonSpriteUrl(f ? y.id : o.id, !1, d.isShiny),
+                onError: e => e.target.src = '/assets/sprites/pokemon/0.gif',
                 alt: f ? y.name : o.name
             })
         }), c.jsx("div", {
@@ -22231,7 +22233,7 @@ function vf() {
       , [y,f] = O.useState(!1)
       , {state: g, dispatch: x} = Re()
       , {playerPokemon: h, enemyPokemon: p, battleEvents: w} = g
-      , k = O.useMemo( () => Object.keys(pokemonSpecies).length, [])
+      , k = O.useMemo( () => 151, []) //Object.keys(pokemonSpecies).length
       , A = g.pokedexCaught.length >= k;
     if (g.phase === "evolving")
         return c.jsx(ng, {});
@@ -22369,6 +22371,7 @@ function vf() {
                 className: "sprite-shadow"
             }), c.jsx("img", {
                 src: getPokemonSpriteUrl(pokemonSpecies[p.speciesKey].id, !1, p.isShiny),
+                onError: e => e.target.src = '/assets/sprites/pokemon/0.gif',
                 alt: p.name
             })]
         }), c.jsxs("div", {
@@ -22377,6 +22380,7 @@ function vf() {
                 className: "sprite-shadow"
             }), c.jsx("img", {
                 src: getPokemonSpriteUrl(_.id, !0, g.playerPokemon?.isShiny),
+                onError: e => e.target.src = '/assets/sprites/pokemon/back/0.gif',
                 alt: h.name
             })]
         }), c.jsx("div", {
@@ -23396,7 +23400,7 @@ function Ng() {
             });
             return
         }
-        const w = Object.keys(pokemonSpecies).length
+        const w = 151 //Object.keys(pokemonSpecies).length
           , k = p.pokedexCaught.length >= w;
         switch (p.phase) {
         case "idle":
@@ -23948,6 +23952,7 @@ function Gf({pokemon: s, source: u, partyLength: d, onAction: o, onClose: y, evo
             children: [c.jsx("img", {
                 className: "stats-panel-sprite",
                 src: getPokemonSpriteUrl(p.id, !1, s.isShiny),
+                onError: e => e.target.src = '/assets/sprites/pokemon/0.gif',
                 alt: s.name
             }), c.jsxs("div", {
                 className: "stats-panel-name-block",
@@ -24187,6 +24192,7 @@ function qf({inspected: s, setInspected: u, releaseConfirm: d, setReleaseConfirm
                             children: [c.jsx("img", {
                                 className: "party-sprite",
                                 src: getPokemonSpriteUrl(_e.id, !1, Q.isShiny),
+                                onError: e => e.target.src = '/assets/sprites/pokemon/0.gif',
                                 alt: Q.name
                             }), c.jsxs("div", {
                                 className: "party-info",
@@ -24270,6 +24276,7 @@ const Pf = Io.memo(function({speciesKey: u, status: d, rarity: o, isSelected: y,
         }), c.jsx("img", {
             className: `pokedex-tile-sprite ${d}`,
             src: getPokemonSpriteUrl(p.id),
+            onError: e => e.target.src = '/assets/sprites/pokemon/0.gif',
             alt: d === "unseen" ? "???" : p.name,
             loading: "lazy"
         }), c.jsx("div", {
@@ -24370,6 +24377,7 @@ function jg({onClose: s}) {
                     children: [c.jsx("img", {
                         className: `stats-panel-sprite ${p}`,
                         src: getPokemonSpriteUrl(h.id),
+                        onError: e => e.target.src = '/assets/sprites/pokemon/0.gif',
                         alt: p === "unseen" ? "???" : h.name
                     }), c.jsxs("div", {
                         className: "stats-panel-name-block",
@@ -24507,6 +24515,7 @@ function Xf({inspected: s, setInspected: u, setReleaseConfirm: d, dragSource: o=
                                 onDragEnd: v,
                                 children: c.jsx("img", {
                                     src: getPokemonSpriteUrl(_e.id, !1, J.isShiny),
+                                    onError: e => e.target.src = '/assets/sprites/pokemon/0.gif',
                                     alt: J.name,
                                     style: {
                                         imageRendering: "pixelated"
@@ -24944,6 +24953,7 @@ const Af = {
             children: [c.jsx("img", {
                 className: `stats-panel-sprite ${f}`,
                 src: getPokemonSpriteUrl(w.id),
+            onError: e => e.target.src = '/assets/sprites/pokemon/0.gif',
                 alt: f === "unseen" ? "???" : w.name
             }), c.jsxs("div", {
                 className: "stats-panel-name-block",
@@ -25722,6 +25732,7 @@ const Gg = [{
                         children: [c.jsx("img", {
                             className: "catch-modal-species-sprite",
                             src: getPokemonSpriteUrl(z.id),
+                            onError: e => e.target.src = '/assets/sprites/pokemon/0.gif',
                             alt: z.name
                         }), c.jsx("span", {
                             className: "catch-modal-species-name",
@@ -26756,6 +26767,14 @@ function e0() {
         })
     })
 }
-Rh.createRoot(document.getElementById("root")).render(c.jsx(O.StrictMode, {
-    children: c.jsx(e0, {})
-}));
+async function startApp() {
+    await window.gameDataReady;
+    
+    pokemonSpecies = window.gameDataInjector.data.pokemonSpecies;
+    evolutionData = window.gameDataInjector.data.evolutionData;
+
+    Rh.createRoot(document.getElementById("root")).render(c.jsx(O.StrictMode, {
+        children: c.jsx(e0, {})
+    }));
+}
+startApp();

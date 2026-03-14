@@ -145,7 +145,7 @@
       "level": 22
     }
   ],
-  "nidoran f": [
+  "nidoranF": [
     {
       "into": "nidorina",
       "level": 16
@@ -157,7 +157,7 @@
       "level": 35
     }
   ],
-  "nidoran m": [
+  "nidoranM": [
     {
       "into": "nidorino",
       "level": 16
@@ -561,9 +561,9 @@
       "level": 35
     }
   ],
-  "mime jr.": [
+  "mimeJR": [
     {
-      "into": "mr. mime",
+      "into": "mrMime",
       "level": 15
     }
   ],

@@ -61,6 +61,8 @@ class GameDataInjector {
         trainerClasses
       };
 
+      window.gameDataInjector.data = this.data;
+
       console.log('✅ Game data loaded successfully');
       console.log(`   📊 Loaded ${Object.keys(pokemonSpecies).length} Pokémon species`);
       console.log(`   🔄 Loaded ${Object.keys(evolutionData).length} evolution chains`);

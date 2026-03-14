@@ -15040,7 +15040,7 @@ function Mf() {
         speed: 31
     }
 }
-const moveLearnsets = {
+let moveLearnsets = {
     bulbasaur: [[1, "tackle"], [1, "growl"], [3, "vineWhip"], [7, "leechSeed"], [9, "poisonPowder"], [13, "razorLeaf"], [15, "sleepPowder"], [20, "sludge"]],
     charmander: [[1, "scratch"], [1, "growl"], [4, "ember"], [8, "metalClaw"], [12, "fireSpin"], [17, "dragonRage"], [24, "flamethrower"]],
     squirtle: [[1, "tackle"], [1, "tailWhip"], [4, "waterGun"], [7, "bubble"], [10, "bite"], [13, "waterPulse"]],
@@ -19630,7 +19630,7 @@ function tg() {
         }, d))]
     })
 }
-const nt = {
+let moveData = {
     tackle: {
         name: "Tackle",
         type: "Normal",
@@ -20954,7 +20954,7 @@ function ag({onClose: s}) {
                 className: "move-panel-slots",
                 children: [0, 1, 2, 3].map(k => {
                     const A = f[k]
-                      , v = A ? nt[A] : null;
+                      , v = A ? moveData[A] : null;
                     return v ? c.jsxs("div", {
                         className: `move-panel-slot type-bg-${v.type.toLowerCase()}`,
                         onClick: () => p(A),
@@ -20977,7 +20977,7 @@ function ag({onClose: s}) {
             }), c.jsx("div", {
                 className: "move-panel-list",
                 children: x.map( ({moveId: k, learnLevel: A}) => {
-                    const v = nt[k];
+                    const v = moveData[k];
                     if (!v)
                         return null;
                     const _ = f.includes(k);
@@ -22380,7 +22380,7 @@ function vf() {
                 className: "sprite-shadow"
             }), c.jsx("img", {
                 src: getPokemonSpriteUrl(_.id, !0, g.playerPokemon?.isShiny),
-                onError: e => e.target.src = '/assets/sprites/pokemon/back/0.gif',
+                onError: e => e.target.src = '/assets/sprites/pokemon/0.gif',
                 alt: h.name
             })]
         }), c.jsx("div", {
@@ -22409,7 +22409,7 @@ function vf() {
                 }), c.jsx("div", {
                     className: "move-grid",
                     children: h.moves.map(P => {
-                        const ae = nt[P];
+                        const ae = moveData[P];
                         return ae ? c.jsxs("div", {
                             className: `move-cell type-bg-${ae.type.toLowerCase()}`,
                             children: [c.jsxs("div", {
@@ -22528,7 +22528,7 @@ function bf() {
         })
     }) : null
 }
-const yg = {
+const typechart = {
     Normal: {
         Rock: .5,
         Ghost: 0,
@@ -22688,7 +22688,7 @@ const yg = {
 function hg(s, u) {
     let d = 1;
     for (const o of u)
-        d *= yg[s]?.[o] ?? 1;
+        d *= typechart[s]?.[o] ?? 1;
     return d
 }
 function zf(s, u) {
@@ -22744,7 +22744,7 @@ function xf(s, u, d, o, y, f, g, x, h, p) {
     let w = s[0]
       , k = -1;
     for (const A of s) {
-        const v = nt[A];
+        const v = moveData[A];
         if (!v || v.power === 0)
             continue;
         const _ = v.category === "physical" ? d : o
@@ -22777,12 +22777,12 @@ function xf(s, u, d, o, y, f, g, x, h, p) {
     }
     return {
         moveId: w,
-        move: nt[w]
+        move: moveData[w]
     }
 }
 function bg(s) {
     const u = s.filter(y => {
-        const f = nt[y];
+        const f = moveData[y];
         return f && f.power > 0
     }
     )
@@ -22790,7 +22790,7 @@ function bg(s) {
       , o = d[Math.floor(Math.random() * d.length)];
     return {
         moveId: o,
-        move: nt[o]
+        move: moveData[o]
     }
 }
 function Sf(s, u) {
@@ -22810,10 +22810,10 @@ function Sg(s, u, d=!1) {
     let g, x;
     if (y)
         g = s.moves[0],
-        x = nt[g];
+        x = moveData[g];
     else if (s.lockedMove)
         g = s.lockedMove,
-        x = nt[g];
+        x = moveData[g];
     else {
         const v = xf(s.moves, s.level, s.attack, s.spAttack, s.types, u.types, u.defense, u.spDefense, s.statStages, u.statStages);
         g = v.moveId,
@@ -22822,10 +22822,10 @@ function Sg(s, u, d=!1) {
     let h, p;
     if (f)
         h = u.moves[0],
-        p = nt[h];
+        p = moveData[h];
     else if (u.lockedMove)
         h = u.lockedMove,
-        p = nt[h];
+        p = moveData[h];
     else {
         const v = d ? xf(u.moves, u.level, u.attack, u.spAttack, u.types, s.types, s.defense, s.spDefense, u.statStages, s.statStages) : bg(u.moves);
         h = v.moveId,
@@ -22885,7 +22885,7 @@ function Sg(s, u, d=!1) {
             });
             continue
         }
-        const S = nt[v.moveId];
+        const S = moveData[v.moveId];
         if (!S)
             continue;
         if (v.attacker.lockedMove && v.attacker.lockTurnsRemaining !== void 0 && v.attacker.lockTurnsRemaining > 0 && v.attacker.lockTurnsRemaining--,
@@ -23289,7 +23289,7 @@ function Go(s, u, d, o, y=!1, f=[], g=0) {
           , S = calculatePokemonStats(k, _.newLevel, u.ivs)
           , D = v.flatMap(z => z.newMoves);
         D.forEach(z => {
-            const V = nt[z];
+            const V = moveData[z];
             V && s({
                 type: "ADD_LOG",
                 payload: {
@@ -23339,7 +23339,7 @@ function Go(s, u, d, o, y=!1, f=[], g=0) {
                       , F = calculatePokemonStats(V, Z.newLevel, z.ivs)
                       , q = X.flatMap(le => le.newMoves);
                     q.forEach(le => {
-                        const ve = nt[le];
+                        const ve = moveData[le];
                         ve && s({
                             type: "ADD_LOG",
                             payload: {
@@ -24004,7 +24004,7 @@ function Gf({pokemon: s, source: u, partyLength: d, onAction: o, onClose: y, evo
                 className: "stats-panel-moves-title",
                 children: "Moves"
             }), s.moves.map(S => {
-                const D = nt[S];
+                const D = moveData[S];
                 return D ? c.jsxs("div", {
                     className: `stats-panel-move type-bg-${D.type.toLowerCase()}`,
                     children: [c.jsx("span", {
@@ -24739,7 +24739,7 @@ function Mg() {
         })]
     })
 }
-const Af = {
+const martShopItems = {
     viridianCity: {
         name: "Viridian Mart",
         items: [{
@@ -24869,14 +24869,14 @@ const Af = {
         }]
     }
 }
-  , _g = {
+  , rarities = {
     common: "Common",
     uncommon: "Uncommon",
     rare: "Rare",
     very_rare: "Very Rare",
     ultra_rare: "Ultra Rare"
 }
-  , Bg = {
+  , statColours = {
     hp: "#60a040",
     attack: "#c86828",
     defense: "#c8a828",
@@ -24978,7 +24978,7 @@ const Af = {
             className: "pokedex-detail-encounter-info",
             children: c.jsx("span", {
                 className: `pokedex-detail-rarity rarity-text-${o}`,
-                children: _g[o]
+                children: rarities[o]
             })
         }), x && f !== "unseen" && c.jsxs("div", {
             className: "pokedex-detail-effects",
@@ -25010,7 +25010,7 @@ const Af = {
                             className: "stats-panel-stat-fill",
                             style: {
                                 width: `${X}%`,
-                                backgroundColor: Bg[G.key]
+                                backgroundColor: statColours[G.key]
                             }
                         })
                     }), c.jsx("span", {
@@ -25466,8 +25466,8 @@ function Vf({onOpenCatchSettings: s}) {
                         className: "location-status-label",
                         children: "Trainer battles"
                     })
-                }), Af[u.currentLocation] && c.jsx(Hg, {
-                    shopDef: Af[u.currentLocation]
+                }), martShopItems[u.currentLocation] && c.jsx(Hg, {
+                    shopDef: martShopItems[u.currentLocation]
                 })]
             }), x && g && c.jsx(Nf, {
                 routeKey: g,
@@ -26772,6 +26772,8 @@ async function startApp() {
     
     pokemonSpecies = window.gameDataInjector.data.pokemonSpecies;
     evolutionData = window.gameDataInjector.data.evolutionData;
+    moveLearnsets = window.gameDataInjector.data.moveLearnsets;
+    moveData = window.gameDataInjector.data.moveData;
 
     Rh.createRoot(document.getElementById("root")).render(c.jsx(O.StrictMode, {
         children: c.jsx(e0, {})

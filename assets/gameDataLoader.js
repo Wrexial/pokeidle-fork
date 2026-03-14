@@ -9,7 +9,8 @@ let gameData = {
   pokemonSpecies: null,
   evolutionData: null,
   moveLearnsets: null,
-  trainerClasses: null
+  trainerClasses: null,
+  moveData: null,
 };
 
 /**
@@ -17,17 +18,19 @@ let gameData = {
  */
 export async function loadGameData() {
   try {
-    const [species, evolution, moves, trainers] = await Promise.all([
+    const [species, evolution, moves, trainers, moveData] = await Promise.all([
       fetch('/data/pokemon-species.json').then(r => r.json()),
       fetch('/data/evolution-data.json').then(r => r.json()),
       fetch('/data/move-learnsets.json').then(r => r.json()),
-      fetch('/data/trainer-classes.json').then(r => r.json())
+      fetch('/data/trainer-classes.json').then(r => r.json()),
+      fetch('/data/move-data.json').then(r => r.json()),
     ]);
 
     gameData.pokemonSpecies = species;
     gameData.evolutionData = evolution;
     gameData.moveLearnsets = moves;
     gameData.trainerClasses = trainers;
+    gameData.moveData = moveData;
 
     console.log('✅ Game data loaded successfully');
     return gameData;

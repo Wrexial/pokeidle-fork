@@ -9,6 +9,20 @@
  * <script type="module" src="/assets/index.js"></script>
  */
 
+const dataFilesToLoad = [
+    { key: 'pokemonSpecies', path: '/data/pokemon-species.json', label: 'Pokémon species' },
+    { key: 'evolutionData', path: '/data/evolution-data.json', label: 'evolution chains' },
+    { key: 'moveLearnsets', path: '/data/move-learnsets.json', label: 'move learnsets' },
+    { key: 'trainerClasses', path: '/data/trainer-classes.json', label: 'trainer classes' },
+    { key: 'moveData', path: '/data/move-data.json', label: 'move data' },
+    { key: 'mapData', path: '/data/map-data.json', label: 'map data' },
+    { key: 'mapEncounterData', path: '/data/encounter-data.json', label: 'encounter data' },
+    { key: 'trainerData', path: '/data/trainer-data.json', label: 'trainer data' },
+    { key: 'gymLeaderData', path: '/data/gym-leader-data.json', label: 'gym leader data' },
+    { key: 'elite4Data', path: '/data/elite-4-data.json', label: 'elite 4 data' },
+    { key: 'championData', path: '/data/champion-data.json', label: 'champion data' },
+];
+
 class GameDataInjector {
   constructor() {
     this.data = {};
@@ -16,6 +30,10 @@ class GameDataInjector {
     this.error = null;
     
     // Expose to window for global access
+    this.waitPromise = new Promise((resolve, reject) => {
+        this.resolvePromise = resolve;
+        this.rejectPromise = reject;
+    });
     window.gameDataInjector = {
       data: this.data,
       isLoading: () => this.isLoading,
@@ -33,61 +51,32 @@ class GameDataInjector {
     try {
       console.log('📦 Loading game data...');
       
-      // Load all data files in parallel
-      const [pokemonSpecies, evolutionData, moveLearnsets, trainerClasses, moveData, mapData,mapEncounterData] = await Promise.all([
-        fetch('/data/pokemon-species.json').then(r => {
-          if (!r.ok) throw new Error(`HTTP ${r.status}: ${r.statusText}`);
-          return r.json();
-        }),
-        fetch('/data/evolution-data.json').then(r => {
-          if (!r.ok) throw new Error(`HTTP ${r.status}: ${r.statusText}`);
-          return r.json();
-        }),
-        fetch('/data/move-learnsets.json').then(r => {
-          if (!r.ok) throw new Error(`HTTP ${r.status}: ${r.statusText}`);
-          return r.json();
-        }),
-        fetch('/data/trainer-classes.json').then(r => {
-          if (!r.ok) throw new Error(`HTTP ${r.status}: ${r.statusText}`);
-          return r.json();
-        }),
-        fetch('/data/move-data.json').then(r => {
-          if (!r.ok) throw new Error(`HTTP ${r.status}: ${r.statusText}`);
-          return r.json();
-        }),
-        fetch('/data/map-data.json').then(r => {
-            if (!r.ok) throw new Error(`HTTP ${r.status}: ${r.statusText}`);
-            return r.json();
-        }),
-        fetch('/data/encounter-data.json').then(r => {
-            if (!r.ok) throw new Error(`HTTP ${r.status}: ${r.statusText}`);
-            return r.json();
+      const dataPromises = dataFilesToLoad.map(fileInfo =>
+        fetch(fileInfo.path).then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText} for ${fileInfo.path}`);
+          }
+          return response.json();
         })
-      ]);
+      );
 
-      // Store data
-      this.data = {
-        pokemonSpecies,
-        evolutionData,
-        moveLearnsets,
-        trainerClasses,
-        moveData,
-        mapData,
-        mapEncounterData,
-      };
+      const loadedData = await Promise.all(dataPromises);
+
+      this.data = dataFilesToLoad.reduce((acc, fileInfo, index) => {
+        acc[fileInfo.key] = loadedData[index];
+        return acc;
+      }, {});
 
       window.gameDataInjector.data = this.data;
 
       console.log('✅ Game data loaded successfully');
-      console.log(`   📊 Loaded ${Object.keys(pokemonSpecies).length} Pokémon species`);
-      console.log(`   🔄 Loaded ${Object.keys(evolutionData).length} evolution chains`);
-      console.log(`   🎯 Loaded ${Object.keys(moveLearnsets).length} move learnsets`);
-      console.log(`   👥 Loaded ${Object.keys(trainerClasses).length} trainer classes`);
-      console.log(`   🎯 Loaded ${Object.keys(moveData).length} move data`);
-      console.log(`   👥 Loaded ${Object.keys(mapData).length} map data`);
-      console.log(`   👥 Loaded ${Object.keys(mapEncounterData).length} encounter data`);
+      dataFilesToLoad.forEach(fileInfo => {
+        const data = this.data[fileInfo.key];
+        console.log(`   📦 Loaded ${Object.keys(data).length} ${fileInfo.label}`);
+      });
 
       this.isLoading = false;
+      this.resolvePromise(this.data);
       return this.data;
 
     } catch (error) {
@@ -102,6 +91,7 @@ class GameDataInjector {
       });
       
       this.isLoading = false;
+      this.rejectPromise(error);
       throw error;
     }
   }

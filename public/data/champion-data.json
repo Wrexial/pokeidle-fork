@@ -1,0 +1,32 @@
+{
+    "id": "blue",
+    "name": "Blue",
+    "title": "Pokemon League Champion",
+    "spriteKey": "blue-gen3",
+    "team": [
+        {
+            "speciesKey": "pidgeot",
+            "level": 61
+        },
+        {
+            "speciesKey": "alakazam",
+            "level": 59
+        },
+        {
+            "speciesKey": "rhydon",
+            "level": 61
+        },
+        {
+            "speciesKey": "gyarados",
+            "level": 63
+        },
+        {
+            "speciesKey": "arcanine",
+            "level": 63
+        },
+        {
+            "speciesKey": "venusaur",
+            "level": 65
+        }
+    ]
+}

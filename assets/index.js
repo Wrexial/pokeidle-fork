@@ -14841,7 +14841,7 @@ const trainerClassMap = {
 function getTrainerSpriteUrl(s) {
     return `/sprites/trainers/${trainerClassMap[s]}.png`
 }
-const ug = {
+let ug = {
     youngster: 16,
     lass: 16,
     bugCatcher: 12,
@@ -14861,935 +14861,19 @@ const ug = {
     ace: 36,
     blackbelt: 24
 }
-  , rg = {
-    viridianCity: [{
-        id: "viridian_1",
-        name: "Youngster Joey",
-        trainerClass: "youngster",
-        team: [{
-            speciesKey: "rattata",
-            level: 6
-        }, {
-            speciesKey: "pidgey",
-            level: 5
-        }]
-    }, {
-        id: "viridian_2",
-        name: "Lass Sally",
-        trainerClass: "lass",
-        team: [{
-            speciesKey: "nidoranF",
-            level: 6
-        }, {
-            speciesKey: "nidoranM",
-            level: 6
-        }]
-    }, {
-        id: "viridian_3",
-        name: "Youngster Ben",
-        trainerClass: "youngster",
-        team: [{
-            speciesKey: "rattata",
-            level: 7
-        }, {
-            speciesKey: "spearow",
-            level: 7
-        }]
-    }, {
-        id: "viridian_4",
-        name: "Lass Robin",
-        trainerClass: "lass",
-        team: [{
-            speciesKey: "pidgey",
-            level: 5
-        }, {
-            speciesKey: "pidgey",
-            level: 7
-        }, {
-            speciesKey: "pidgey",
-            level: 9
-        }]
-    }],
-    pewterCity: [{
-        id: "pewter_1",
-        name: "Hiker Marcos",
-        trainerClass: "hiker",
-        team: [{
-            speciesKey: "geodude",
-            level: 10
-        }, {
-            speciesKey: "onix",
-            level: 12
-        }]
-    }, {
-        id: "pewter_2",
-        name: "Bug Catcher Rick",
-        trainerClass: "bugCatcher",
-        team: [{
-            speciesKey: "caterpie",
-            level: 9
-        }, {
-            speciesKey: "weedle",
-            level: 9
-        }, {
-            speciesKey: "metapod",
-            level: 10
-        }, {
-            speciesKey: "kakuna",
-            level: 10
-        }]
-    }, {
-        id: "pewter_3",
-        name: "Hiker Liam",
-        trainerClass: "hiker",
-        team: [{
-            speciesKey: "geodude",
-            level: 11
-        }, {
-            speciesKey: "geodude",
-            level: 11
-        }, {
-            speciesKey: "geodude",
-            level: 13
-        }]
-    }, {
-        id: "pewter_4",
-        name: "Bug Catcher Doug",
-        trainerClass: "bugCatcher",
-        team: [{
-            speciesKey: "caterpie",
-            level: 11
-        }, {
-            speciesKey: "metapod",
-            level: 11
-        }, {
-            speciesKey: "butterfree",
-            level: 14
-        }]
-    }, {
-        id: "pewter_5",
-        name: "Hiker Franklin",
-        trainerClass: "hiker",
-        team: [{
-            speciesKey: "geodude",
-            level: 12
-        }, {
-            speciesKey: "onix",
-            level: 14
-        }]
-    }],
-    ceruleanCity: [{
-        id: "cerulean_1",
-        name: "Swimmer Luis",
-        trainerClass: "swimmer",
-        team: [{
-            speciesKey: "staryu",
-            level: 16
-        }, {
-            speciesKey: "goldeen",
-            level: 18
-        }]
-    }, {
-        id: "cerulean_2",
-        name: "Camper Lola",
-        trainerClass: "camper",
-        team: [{
-            speciesKey: "oddish",
-            level: 16
-        }, {
-            speciesKey: "bellsprout",
-            level: 16
-        }, {
-            speciesKey: "pidgeotto",
-            level: 18
-        }]
-    }, {
-        id: "cerulean_3",
-        name: "Swimmer Diana",
-        trainerClass: "swimmer",
-        team: [{
-            speciesKey: "poliwag",
-            level: 17
-        }, {
-            speciesKey: "shellder",
-            level: 17
-        }, {
-            speciesKey: "horsea",
-            level: 19
-        }]
-    }, {
-        id: "cerulean_4",
-        name: "Camper Jeff",
-        trainerClass: "camper",
-        team: [{
-            speciesKey: "sandshrew",
-            level: 18
-        }, {
-            speciesKey: "ekans",
-            level: 18
-        }, {
-            speciesKey: "rattata",
-            level: 20
-        }]
-    }, {
-        id: "cerulean_5",
-        name: "Swimmer Tara",
-        trainerClass: "swimmer",
-        team: [{
-            speciesKey: "staryu",
-            level: 19
-        }, {
-            speciesKey: "staryu",
-            level: 19
-        }, {
-            speciesKey: "goldeen",
-            level: 21
-        }]
-    }],
-    vermilionCity: [{
-        id: "vermilion_1",
-        name: "Sailor Eddie",
-        trainerClass: "sailor",
-        team: [{
-            speciesKey: "machop",
-            level: 20
-        }, {
-            speciesKey: "tentacool",
-            level: 20
-        }]
-    }, {
-        id: "vermilion_2",
-        name: "Gentleman Arthur",
-        trainerClass: "gentleman",
-        team: [{
-            speciesKey: "voltorb",
-            level: 22
-        }, {
-            speciesKey: "magnemite",
-            level: 22
-        }]
-    }, {
-        id: "vermilion_3",
-        name: "Sailor Dylan",
-        trainerClass: "sailor",
-        team: [{
-            speciesKey: "machop",
-            level: 19
-        }, {
-            speciesKey: "machop",
-            level: 21
-        }, {
-            speciesKey: "tentacool",
-            level: 22
-        }]
-    }, {
-        id: "vermilion_4",
-        name: "Gentleman Brooks",
-        trainerClass: "gentleman",
-        team: [{
-            speciesKey: "pikachu",
-            level: 22
-        }, {
-            speciesKey: "magnemite",
-            level: 24
-        }]
-    }, {
-        id: "vermilion_5",
-        name: "Sailor Huey",
-        trainerClass: "sailor",
-        team: [{
-            speciesKey: "machop",
-            level: 22
-        }, {
-            speciesKey: "shellder",
-            level: 22
-        }, {
-            speciesKey: "machoke",
-            level: 24
-        }]
-    }],
-    lavenderTown: [{
-        id: "lavender_1",
-        name: "Channeler Hope",
-        trainerClass: "channeler",
-        team: [{
-            speciesKey: "gastly",
-            level: 23
-        }, {
-            speciesKey: "gastly",
-            level: 25
-        }]
-    }, {
-        id: "lavender_2",
-        name: "Channeler Patricia",
-        trainerClass: "channeler",
-        team: [{
-            speciesKey: "gastly",
-            level: 24
-        }, {
-            speciesKey: "haunter",
-            level: 26
-        }]
-    }, {
-        id: "lavender_3",
-        name: "Channeler Carly",
-        trainerClass: "channeler",
-        team: [{
-            speciesKey: "gastly",
-            level: 22
-        }, {
-            speciesKey: "cubone",
-            level: 24
-        }, {
-            speciesKey: "haunter",
-            level: 26
-        }]
-    }, {
-        id: "lavender_4",
-        name: "Channeler Laurel",
-        trainerClass: "channeler",
-        team: [{
-            speciesKey: "cubone",
-            level: 25
-        }, {
-            speciesKey: "gastly",
-            level: 25
-        }, {
-            speciesKey: "haunter",
-            level: 28
-        }]
-    }],
-    celadonCity: [{
-        id: "celadon_1",
-        name: "Beauty Bridget",
-        trainerClass: "beauty",
-        team: [{
-            speciesKey: "clefairy",
-            level: 26
-        }, {
-            speciesKey: "meowth",
-            level: 26
-        }]
-    }, {
-        id: "celadon_2",
-        name: "CoolTrainer Samuel",
-        trainerClass: "coolTrainer",
-        team: [{
-            speciesKey: "eevee",
-            level: 26
-        }, {
-            speciesKey: "exeggcute",
-            level: 28
-        }, {
-            speciesKey: "pidgeotto",
-            level: 28
-        }]
-    }, {
-        id: "celadon_3",
-        name: "Beauty Tamia",
-        trainerClass: "beauty",
-        team: [{
-            speciesKey: "oddish",
-            level: 26
-        }, {
-            speciesKey: "clefairy",
-            level: 28
-        }, {
-            speciesKey: "jigglypuff",
-            level: 28
-        }]
-    }, {
-        id: "celadon_4",
-        name: "CoolTrainer Alexa",
-        trainerClass: "coolTrainer",
-        team: [{
-            speciesKey: "gloom",
-            level: 27
-        }, {
-            speciesKey: "exeggcute",
-            level: 27
-        }, {
-            speciesKey: "weepinbell",
-            level: 30
-        }]
-    }, {
-        id: "celadon_5",
-        name: "Beauty Lola",
-        trainerClass: "beauty",
-        team: [{
-            speciesKey: "vulpix",
-            level: 28
-        }, {
-            speciesKey: "clefairy",
-            level: 28
-        }]
-    }],
-    saffronCity: [{
-        id: "saffron_1",
-        name: "Psychic Cameron",
-        trainerClass: "psychic",
-        team: [{
-            speciesKey: "kadabra",
-            level: 30
-        }, {
-            speciesKey: "drowzee",
-            level: 30
-        }]
-    }, {
-        id: "saffron_2",
-        name: "Scientist Taylor",
-        trainerClass: "scientist",
-        team: [{
-            speciesKey: "voltorb",
-            level: 29
-        }, {
-            speciesKey: "magnemite",
-            level: 29
-        }, {
-            speciesKey: "electrode",
-            level: 32
-        }]
-    }, {
-        id: "saffron_3",
-        name: "Psychic Tyron",
-        trainerClass: "psychic",
-        team: [{
-            speciesKey: "abra",
-            level: 28
-        }, {
-            speciesKey: "kadabra",
-            level: 31
-        }, {
-            speciesKey: "mrMime",
-            level: 34
-        }]
-    }, {
-        id: "saffron_4",
-        name: "Scientist Ivan",
-        trainerClass: "scientist",
-        team: [{
-            speciesKey: "magnemite",
-            level: 30
-        }, {
-            speciesKey: "voltorb",
-            level: 30
-        }, {
-            speciesKey: "magneton",
-            level: 34
-        }]
-    }, {
-        id: "saffron_5",
-        name: "Psychic Johan",
-        trainerClass: "psychic",
-        team: [{
-            speciesKey: "drowzee",
-            level: 30
-        }, {
-            speciesKey: "hypno",
-            level: 34
-        }]
-    }],
-    fuchsiaCity: [{
-        id: "fuchsia_1",
-        name: "Tamer Phil",
-        trainerClass: "tamer",
-        team: [{
-            speciesKey: "arbok",
-            level: 34
-        }, {
-            speciesKey: "sandslash",
-            level: 34
-        }]
-    }, {
-        id: "fuchsia_2",
-        name: "Juggler Dalton",
-        trainerClass: "juggler",
-        team: [{
-            speciesKey: "voltorb",
-            level: 31
-        }, {
-            speciesKey: "voltorb",
-            level: 33
-        }, {
-            speciesKey: "voltorb",
-            level: 35
-        }, {
-            speciesKey: "electrode",
-            level: 38
-        }]
-    }, {
-        id: "fuchsia_3",
-        name: "Tamer Edgar",
-        trainerClass: "tamer",
-        team: [{
-            speciesKey: "arbok",
-            level: 33
-        }, {
-            speciesKey: "weezing",
-            level: 35
-        }, {
-            speciesKey: "primeape",
-            level: 35
-        }]
-    }, {
-        id: "fuchsia_4",
-        name: "Juggler Nelson",
-        trainerClass: "juggler",
-        team: [{
-            speciesKey: "drowzee",
-            level: 32
-        }, {
-            speciesKey: "hypno",
-            level: 36
-        }, {
-            speciesKey: "kadabra",
-            level: 36
-        }]
-    }, {
-        id: "fuchsia_5",
-        name: "Tamer Vincent",
-        trainerClass: "tamer",
-        team: [{
-            speciesKey: "rhyhorn",
-            level: 36
-        }, {
-            speciesKey: "primeape",
-            level: 36
-        }]
-    }],
-    cinnabarIsland: [{
-        id: "cinnabar_1",
-        name: "Scientist Beau",
-        trainerClass: "scientist",
-        team: [{
-            speciesKey: "grimer",
-            level: 36
-        }, {
-            speciesKey: "koffing",
-            level: 38
-        }, {
-            speciesKey: "weezing",
-            level: 40
-        }]
-    }, {
-        id: "cinnabar_2",
-        name: "Super Nerd Derek",
-        trainerClass: "superNerd",
-        team: [{
-            speciesKey: "magmar",
-            level: 38
-        }, {
-            speciesKey: "ponyta",
-            level: 38
-        }]
-    }, {
-        id: "cinnabar_3",
-        name: "Scientist Ted",
-        trainerClass: "scientist",
-        team: [{
-            speciesKey: "grimer",
-            level: 37
-        }, {
-            speciesKey: "muk",
-            level: 40
-        }, {
-            speciesKey: "electrode",
-            level: 40
-        }]
-    }, {
-        id: "cinnabar_4",
-        name: "Super Nerd Zack",
-        trainerClass: "superNerd",
-        team: [{
-            speciesKey: "ponyta",
-            level: 36
-        }, {
-            speciesKey: "rapidash",
-            level: 40
-        }, {
-            speciesKey: "growlithe",
-            level: 42
-        }]
-    }, {
-        id: "cinnabar_5",
-        name: "Scientist Connor",
-        trainerClass: "scientist",
-        team: [{
-            speciesKey: "voltorb",
-            level: 38
-        }, {
-            speciesKey: "electrode",
-            level: 38
-        }, {
-            speciesKey: "magneton",
-            level: 42
-        }]
-    }],
-    indigoPlat: [{
-        id: "indigo_1",
-        name: "Ace Trainer Chloe",
-        trainerClass: "ace",
-        team: [{
-            speciesKey: "pidgeot",
-            level: 48
-        }, {
-            speciesKey: "alakazam",
-            level: 50
-        }, {
-            speciesKey: "arcanine",
-            level: 50
-        }]
-    }, {
-        id: "indigo_2",
-        name: "CoolTrainer Naomi",
-        trainerClass: "coolTrainer",
-        team: [{
-            speciesKey: "exeggutor",
-            level: 48
-        }, {
-            speciesKey: "cloyster",
-            level: 48
-        }, {
-            speciesKey: "machamp",
-            level: 50
-        }, {
-            speciesKey: "arcanine",
-            level: 52
-        }]
-    }, {
-        id: "indigo_3",
-        name: "Ace Trainer Jason",
-        trainerClass: "ace",
-        team: [{
-            speciesKey: "gyarados",
-            level: 50
-        }, {
-            speciesKey: "nidoking",
-            level: 50
-        }, {
-            speciesKey: "dragonair",
-            level: 52
-        }]
-    }, {
-        id: "indigo_4",
-        name: "CoolTrainer Vincent",
-        trainerClass: "coolTrainer",
-        team: [{
-            speciesKey: "rhydon",
-            level: 48
-        }, {
-            speciesKey: "slowbro",
-            level: 50
-        }, {
-            speciesKey: "gengar",
-            level: 52
-        }, {
-            speciesKey: "starmie",
-            level: 55
-        }]
-    }, {
-        id: "indigo_5",
-        name: "Ace Trainer Lauren",
-        trainerClass: "ace",
-        team: [{
-            speciesKey: "venusaur",
-            level: 50
-        }, {
-            speciesKey: "charizard",
-            level: 50
-        }, {
-            speciesKey: "blastoise",
-            level: 50
-        }]
-    }, {
-        id: "indigo_6",
-        name: "CoolTrainer Grayson",
-        trainerClass: "coolTrainer",
-        team: [{
-            speciesKey: "dragonite",
-            level: 55
-        }, {
-            speciesKey: "lapras",
-            level: 50
-        }, {
-            speciesKey: "snorlax",
-            level: 52
-        }]
-    }]
-};
+  , trainerData = {};
 function getBossTrainerSpriteUrl(s) {
     return s ? `/sprites/trainers/${s}.png` : "/sprites/trainers/acetrainer.png"
 }
-const yf = [{
-    id: "brock",
-    name: "Brock",
-    title: "Pewter City Gym Leader",
-    locationKey: "pewterCity",
-    badgeName: "Boulder Badge",
-    badgeColor: "#a0a0a0",
-    spriteKey: "brock-gen3",
-    team: [{
-        speciesKey: "geodude",
-        level: 12
-    }, {
-        speciesKey: "onix",
-        level: 14
-    }]
-}, {
-    id: "misty",
-    name: "Misty",
-    title: "Cerulean City Gym Leader",
-    locationKey: "ceruleanCity",
-    badgeName: "Cascade Badge",
-    badgeColor: "#4a90d9",
-    spriteKey: "misty-gen3",
-    team: [{
-        speciesKey: "staryu",
-        level: 18
-    }, {
-        speciesKey: "starmie",
-        level: 21
-    }]
-}, {
-    id: "surge",
-    name: "Lt. Surge",
-    title: "Vermilion City Gym Leader",
-    locationKey: "vermilionCity",
-    badgeName: "Thunder Badge",
-    badgeColor: "#f0c030",
-    spriteKey: "ltsurge-gen3",
-    team: [{
-        speciesKey: "voltorb",
-        level: 21
-    }, {
-        speciesKey: "pikachu",
-        level: 18
-    }, {
-        speciesKey: "raichu",
-        level: 24
-    }]
-}, {
-    id: "erika",
-    name: "Erika",
-    title: "Celadon City Gym Leader",
-    locationKey: "celadonCity",
-    badgeName: "Rainbow Badge",
-    badgeColor: "#78c850",
-    spriteKey: "erika-gen3",
-    team: [{
-        speciesKey: "victreebel",
-        level: 29
-    }, {
-        speciesKey: "tangela",
-        level: 24
-    }, {
-        speciesKey: "vileplume",
-        level: 29
-    }]
-}, {
-    id: "koga",
-    name: "Koga",
-    title: "Fuchsia City Gym Leader",
-    locationKey: "fuchsiaCity",
-    badgeName: "Soul Badge",
-    badgeColor: "#a040a0",
-    spriteKey: "koga-gen3",
-    team: [{
-        speciesKey: "koffing",
-        level: 37
-    }, {
-        speciesKey: "muk",
-        level: 39
-    }, {
-        speciesKey: "koffing",
-        level: 37
-    }, {
-        speciesKey: "weezing",
-        level: 43
-    }]
-}, {
-    id: "sabrina",
-    name: "Sabrina",
-    title: "Saffron City Gym Leader",
-    locationKey: "saffronCity",
-    badgeName: "Marsh Badge",
-    badgeColor: "#e868a8",
-    spriteKey: "sabrina-gen3",
-    team: [{
-        speciesKey: "kadabra",
-        level: 38
-    }, {
-        speciesKey: "mrMime",
-        level: 37
-    }, {
-        speciesKey: "venomoth",
-        level: 38
-    }, {
-        speciesKey: "alakazam",
-        level: 43
-    }]
-}, {
-    id: "blaine",
-    name: "Blaine",
-    title: "Cinnabar Island Gym Leader",
-    locationKey: "cinnabarIsland",
-    badgeName: "Volcano Badge",
-    badgeColor: "#f08030",
-    spriteKey: "blaine-gen3",
-    team: [{
-        speciesKey: "growlithe",
-        level: 42
-    }, {
-        speciesKey: "ponyta",
-        level: 40
-    }, {
-        speciesKey: "rapidash",
-        level: 42
-    }, {
-        speciesKey: "arcanine",
-        level: 47
-    }]
-}, {
-    id: "giovanni",
-    name: "Giovanni",
-    title: "Viridian City Gym Leader",
-    locationKey: "viridianCity",
-    badgeName: "Earth Badge",
-    badgeColor: "#e0c068",
-    spriteKey: "giovanni-gen3",
-    team: [{
-        speciesKey: "rhyhorn",
-        level: 45
-    }, {
-        speciesKey: "dugtrio",
-        level: 42
-    }, {
-        speciesKey: "nidoqueen",
-        level: 44
-    }, {
-        speciesKey: "nidoking",
-        level: 45
-    }, {
-        speciesKey: "rhydon",
-        level: 50
-    }]
-}]
-  , hf = [{
-    id: "lorelei",
-    name: "Lorelei",
-    title: "Elite Four",
-    spriteKey: "lorelei-gen3",
-    team: [{
-        speciesKey: "dewgong",
-        level: 54
-    }, {
-        speciesKey: "cloyster",
-        level: 53
-    }, {
-        speciesKey: "slowbro",
-        level: 54
-    }, {
-        speciesKey: "jynx",
-        level: 56
-    }, {
-        speciesKey: "lapras",
-        level: 56
-    }]
-}, {
-    id: "bruno",
-    name: "Bruno",
-    title: "Elite Four",
-    spriteKey: "bruno-gen3",
-    team: [{
-        speciesKey: "onix",
-        level: 53
-    }, {
-        speciesKey: "hitmonchan",
-        level: 55
-    }, {
-        speciesKey: "hitmonlee",
-        level: 55
-    }, {
-        speciesKey: "onix",
-        level: 56
-    }, {
-        speciesKey: "machamp",
-        level: 58
-    }]
-}, {
-    id: "agatha",
-    name: "Agatha",
-    title: "Elite Four",
-    spriteKey: "agatha-gen3",
-    team: [{
-        speciesKey: "gengar",
-        level: 56
-    }, {
-        speciesKey: "golbat",
-        level: 56
-    }, {
-        speciesKey: "haunter",
-        level: 55
-    }, {
-        speciesKey: "arbok",
-        level: 58
-    }, {
-        speciesKey: "gengar",
-        level: 60
-    }]
-}, {
-    id: "lance",
-    name: "Lance",
-    title: "Elite Four",
-    spriteKey: "lance-gen3",
-    team: [{
-        speciesKey: "gyarados",
-        level: 58
-    }, {
-        speciesKey: "dragonair",
-        level: 56
-    }, {
-        speciesKey: "dragonair",
-        level: 56
-    }, {
-        speciesKey: "aerodactyl",
-        level: 60
-    }, {
-        speciesKey: "dragonite",
-        level: 62
-    }]
-}]
-  , zn = {
-    id: "blue",
-    name: "Blue",
-    title: "Pokemon League Champion",
-    spriteKey: "blue-gen3",
-    team: [{
-        speciesKey: "pidgeot",
-        level: 61
-    }, {
-        speciesKey: "alakazam",
-        level: 59
-    }, {
-        speciesKey: "rhydon",
-        level: 61
-    }, {
-        speciesKey: "gyarados",
-        level: 63
-    }, {
-        speciesKey: "arcanine",
-        level: 63
-    }, {
-        speciesKey: "venusaur",
-        level: 65
-    }]
-}
-  , pg = {
+let gymLeaderData = []
+  , elite4Data = []
+  , championData = {}
+  , moveIcons = {
     physical: "✴",
     special: "◎",
     status: "☯"
 }
-  , gf = {
+  , locationImages = {
     route1: "/backgrounds/grassland.png",
     route2: "/backgrounds/grassland.png",
     route4: "/backgrounds/grassland.png",
@@ -15864,7 +14948,7 @@ function vf() {
         cinnabarIsland: "/backgrounds/town_port.png",
         fuchsiaCity: "/backgrounds/town_port.png"
     }[g.currentLocation] || "/backgrounds/town.png"
-      , Y = S || je ? N : gf[g.currentRoute] || gf.route1;
+      , Y = S || je ? N : locationImages[g.currentRoute] || locationImages.route1;
     return c.jsxs("div", {
         className: "battle-scene",
         style: {
@@ -16016,7 +15100,7 @@ function vf() {
                                 className: "move-top-row",
                                 children: [c.jsx("span", {
                                     className: "move-category-icon",
-                                    children: pg[ae.category]
+                                    children: moveIcons[ae.category]
                                 }), c.jsx("span", {
                                     className: "move-name",
                                     children: ae.name
@@ -16680,161 +15764,8 @@ function kg(s) {
         return "Speed"
     }
 }
-const wg = {
-    bulbasaur: 45,
-    ivysaur: 45,
-    venusaur: 45,
-    charmander: 45,
-    charmeleon: 45,
-    charizard: 45,
-    squirtle: 45,
-    wartortle: 45,
-    blastoise: 45,
-    caterpie: 255,
-    metapod: 120,
-    butterfree: 45,
-    weedle: 255,
-    kakuna: 120,
-    beedrill: 45,
-    pidgey: 255,
-    pidgeotto: 120,
-    pidgeot: 45,
-    rattata: 255,
-    raticate: 127,
-    spearow: 255,
-    fearow: 90,
-    ekans: 255,
-    arbok: 90,
-    pikachu: 190,
-    raichu: 75,
-    sandshrew: 255,
-    sandslash: 90,
-    nidoranF: 235,
-    nidorina: 120,
-    nidoqueen: 45,
-    nidoranM: 235,
-    nidorino: 120,
-    nidoking: 45,
-    clefairy: 150,
-    clefable: 25,
-    vulpix: 190,
-    ninetales: 75,
-    jigglypuff: 170,
-    wigglytuff: 50,
-    zubat: 255,
-    golbat: 90,
-    oddish: 255,
-    gloom: 120,
-    vileplume: 45,
-    paras: 190,
-    parasect: 75,
-    venonat: 190,
-    venomoth: 75,
-    diglett: 255,
-    dugtrio: 50,
-    meowth: 255,
-    persian: 90,
-    psyduck: 190,
-    golduck: 75,
-    mankey: 190,
-    primeape: 75,
-    growlithe: 190,
-    arcanine: 75,
-    poliwag: 255,
-    poliwhirl: 120,
-    poliwrath: 45,
-    abra: 200,
-    kadabra: 100,
-    alakazam: 50,
-    machop: 180,
-    machoke: 90,
-    machamp: 45,
-    bellsprout: 255,
-    weepinbell: 120,
-    victreebel: 45,
-    tentacool: 190,
-    tentacruel: 60,
-    geodude: 255,
-    graveler: 120,
-    golem: 45,
-    ponyta: 190,
-    rapidash: 60,
-    slowpoke: 190,
-    slowbro: 75,
-    magnemite: 190,
-    magneton: 60,
-    farfetchd: 45,
-    doduo: 190,
-    dodrio: 45,
-    seel: 190,
-    dewgong: 75,
-    grimer: 190,
-    muk: 75,
-    shellder: 190,
-    cloyster: 60,
-    gastly: 190,
-    haunter: 90,
-    gengar: 45,
-    onix: 45,
-    drowzee: 190,
-    hypno: 75,
-    krabby: 225,
-    kingler: 60,
-    voltorb: 190,
-    electrode: 60,
-    exeggcute: 90,
-    exeggutor: 45,
-    cubone: 190,
-    marowak: 75,
-    hitmonlee: 45,
-    hitmonchan: 45,
-    lickitung: 45,
-    koffing: 190,
-    weezing: 60,
-    rhyhorn: 120,
-    rhydon: 60,
-    chansey: 30,
-    tangela: 45,
-    kangaskhan: 45,
-    horsea: 225,
-    seadra: 75,
-    goldeen: 225,
-    seaking: 60,
-    staryu: 225,
-    starmie: 60,
-    mrMime: 45,
-    scyther: 45,
-    jynx: 45,
-    electabuzz: 45,
-    magmar: 45,
-    pinsir: 45,
-    tauros: 45,
-    magikarp: 255,
-    gyarados: 45,
-    lapras: 45,
-    ditto: 35,
-    eevee: 45,
-    vaporeon: 45,
-    jolteon: 45,
-    flareon: 45,
-    porygon: 45,
-    omanyte: 45,
-    omastar: 45,
-    kabuto: 45,
-    kabutops: 45,
-    aerodactyl: 45,
-    snorlax: 25,
-    articuno: 3,
-    zapdos: 3,
-    moltres: 3,
-    dratini: 45,
-    dragonair: 45,
-    dragonite: 45,
-    mewtwo: 3,
-    mew: 45
-};
 function Hf(s) {
-    return wg[s] ?? 255
+    return pokemonSpecies[s].catchRate ?? 255
 }
 function Eg(s, u) {
     const d = Hf(s)
@@ -17009,7 +15940,7 @@ function Ng() {
                     return;
                 const currentLocationData = mapData[currentGameState.currentLocation];
                 if (currentLocationData && currentLocationData.type === "town") {
-                    const G = rg[currentGameState.currentLocation];
+                    const G = trainerData[currentGameState.currentLocation];
                     if (!G?.length)
                         return;
                     const X = G[Math.floor(Math.random() * G.length)]
@@ -19493,7 +18424,7 @@ function Zf({onOpenShop: s}) {
         d({
             type: "RESET_ELITE_FOUR"
         });
-        const w = [...hf.map(v => ({
+        const w = [...elite4Data.map(v => ({
             bossId: v.id,
             bossType: "e4",
             trainerName: v.name,
@@ -19501,12 +18432,12 @@ function Zf({onOpenShop: s}) {
             trainerTeam: Po(v.team),
             spriteKey: v.spriteKey
         })), {
-            bossId: zn.id,
+            bossId: championData.id,
             bossType: "champion",
-            trainerName: zn.name,
+            trainerName: championData.name,
             trainerClass: "ace",
-            trainerTeam: Po(zn.team),
-            spriteKey: zn.spriteKey
+            trainerTeam: Po(championData.team),
+            spriteKey: championData.spriteKey
         }]
           , [k,...A] = w;
         d({
@@ -19525,7 +18456,7 @@ function Zf({onOpenShop: s}) {
         className: "gym-panel",
         children: [c.jsx("div", {
             className: "gym-badge-display",
-            children: yf.map(w => {
+            children: gymLeaderData.map(w => {
                 const k = u.defeatedGyms.includes(w.id);
                 return c.jsx("div", {
                     className: `gym-badge-slot${k ? " earned" : ""}`,
@@ -19541,7 +18472,7 @@ function Zf({onOpenShop: s}) {
             children: [c.jsx("div", {
                 className: "gym-section-title",
                 children: "Gym Leaders"
-            }), yf.map( (w, k) => {
+            }), gymLeaderData.map( (w, k) => {
                 const A = u.unlockedLocations.includes(w.locationKey)
                   , v = u.defeatedGyms.includes(w.id)
                   , _ = u.defeatedGyms.length >= k
@@ -19589,7 +18520,7 @@ function Zf({onOpenShop: s}) {
                     marginBottom: "6px"
                 },
                 children: "BEGIN CHALLENGE"
-            }), hf.map(w => {
+            }), elite4Data.map(w => {
                 const k = u.defeatedEliteFour.includes(w.id)
                   , A = u.bossBattle?.bossType === "e4" && u.bossBattle?.bossId === w.id;
                 return c.jsxs("div", {
@@ -19618,10 +18549,10 @@ function Zf({onOpenShop: s}) {
                     className: "gym-row-info",
                     children: [c.jsx("span", {
                         className: "gym-leader-name",
-                        children: zn.name
+                        children: championData.name
                     }), c.jsx("span", {
                         className: "gym-badge-label",
-                        children: zn.title
+                        children: championData.title
                     })]
                 }), c.jsx("div", {
                     className: "gym-row-status",
@@ -20377,6 +19308,10 @@ async function startApp() {
     Object.assign(mapEncounterData, loadedGameData.mapEncounterData);
     Object.assign(moveData, loadedGameData.moveData);
     Object.assign(trainerClassMap, loadedGameData.trainerClasses);
+    Object.assign(trainerData, loadedGameData.trainerData);
+    Object.assign(gymLeaderData, loadedGameData.gymLeaderData);
+    Object.assign(elite4Data, loadedGameData.elite4Data);
+    Object.assign(championData, loadedGameData.championData);
     Object.assign(mapAreas, Object.keys(mapData));
     preEvolutionMap = Object.fromEntries(Object.entries(evolutionData).flatMap( ([s,u]) => u.map(d => [d.into, s])));
 

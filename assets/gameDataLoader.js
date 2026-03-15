@@ -6,13 +6,6 @@
  */
 
 let gameData = {
-  pokemonSpecies: null,
-  evolutionData: null,
-  moveLearnsets: null,
-  trainerClasses: null,
-  moveData: null,
-  mapData: null,
-  mapEncounterData: null,
 };
 
 /**

@@ -1065,6 +1065,7 @@
         "name": "training area",
         "type": "route",
         "description": "WTF?!",
+        "routeKey": "trainingArea",
         "connections": ["victoryRoad"],
         "unlock": {
             "battlesAtLocation": [{

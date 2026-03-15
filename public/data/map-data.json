@@ -1060,19 +1060,26 @@
             "y": 14
         }
     },
-    "gmIsland": {
-        "id": "gmIsland",
-        "name": "GM Island",
+    "trainingArea": {
+        "id": "trainingArea",
+        "name": "training area",
         "type": "route",
         "description": "WTF?!",
-        "connections": [],
+        "connections": ["victoryRoad"],
         "unlock": {
-            "championDefeated": true
+            "battlesAtLocation": [{
+                "locationId": "victoryRoad",
+                "count": 30
+            }, {
+                "locationId": "cinnabarIsland",
+                "count": 15
+            }],
+            "badgesRequired": 8
         },
         "unlockOrder": 50,
         "position": {
-            "x": 1,
-            "y": 1
+            "x": 5,
+            "y": 16
         }
     }
 }

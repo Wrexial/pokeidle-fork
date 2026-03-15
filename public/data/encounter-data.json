@@ -1660,5 +1660,22 @@
                 "maxLevel": 52
             }
         ]
+    },
+    "trainingArea": {
+        "name": "Training Area",
+        "encounters": [
+            {
+                "speciesKey": "chansey",
+                "weight": 90,
+                "minLevel": 1,
+                "maxLevel": 100
+            },
+            {
+                "speciesKey": "blissey",
+                "weight": 10,
+                "minLevel": 1,
+                "maxLevel": 100
+            }
+        ]
     }
 }

@@ -14818,7 +14818,7 @@ function sg({onClose: s}) {
         })
     })
 }
-const trainerClassMap = {
+const trainerClasses = {
     youngster: "youngster",
     lass: "lass",
     bugCatcher: "bugcatcher",
@@ -14839,7 +14839,7 @@ const trainerClassMap = {
     blackbelt: "blackbelt"
 };
 function getTrainerSpriteUrl(s) {
-    return `/sprites/trainers/${trainerClassMap[s]}.png`
+    return `/sprites/trainers/${trainerClasses[s]}.png`
 }
 let ug = {
     youngster: 16,
@@ -19307,7 +19307,7 @@ async function startApp() {
     Object.assign(mapData, loadedGameData.mapData);
     Object.assign(mapEncounterData, loadedGameData.mapEncounterData);
     Object.assign(moveData, loadedGameData.moveData);
-    Object.assign(trainerClassMap, loadedGameData.trainerClasses);
+    Object.assign(trainerClasses, loadedGameData.trainerClasses);
     Object.assign(trainerData, loadedGameData.trainerData);
     Object.assign(gymLeaderData, loadedGameData.gymLeaderData);
     Object.assign(elite4Data, loadedGameData.elite4Data);

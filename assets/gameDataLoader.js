@@ -12,6 +12,7 @@ let gameData = {
   trainerClasses: null,
   moveData: null,
   mapData: null,
+  mapEncounterData: null,
 };
 
 /**

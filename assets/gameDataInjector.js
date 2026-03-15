@@ -34,7 +34,7 @@ class GameDataInjector {
       console.log('📦 Loading game data...');
       
       // Load all data files in parallel
-      const [pokemonSpecies, evolutionData, moveLearnsets, trainerClasses, moveData, mapData] = await Promise.all([
+      const [pokemonSpecies, evolutionData, moveLearnsets, trainerClasses, moveData, mapData,mapEncounterData] = await Promise.all([
         fetch('/data/pokemon-species.json').then(r => {
           if (!r.ok) throw new Error(`HTTP ${r.status}: ${r.statusText}`);
           return r.json();
@@ -58,6 +58,10 @@ class GameDataInjector {
         fetch('/data/map-data.json').then(r => {
             if (!r.ok) throw new Error(`HTTP ${r.status}: ${r.statusText}`);
             return r.json();
+        }),
+        fetch('/data/encounter-data.json').then(r => {
+            if (!r.ok) throw new Error(`HTTP ${r.status}: ${r.statusText}`);
+            return r.json();
         })
       ]);
 
@@ -69,6 +73,7 @@ class GameDataInjector {
         trainerClasses,
         moveData,
         mapData,
+        mapEncounterData,
       };
 
       window.gameDataInjector.data = this.data;
@@ -80,6 +85,7 @@ class GameDataInjector {
       console.log(`   👥 Loaded ${Object.keys(trainerClasses).length} trainer classes`);
       console.log(`   🎯 Loaded ${Object.keys(moveData).length} move data`);
       console.log(`   👥 Loaded ${Object.keys(mapData).length} map data`);
+      console.log(`   👥 Loaded ${Object.keys(mapEncounterData).length} encounter data`);
 
       this.isLoading = false;
       return this.data;

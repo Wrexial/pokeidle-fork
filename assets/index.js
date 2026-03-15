@@ -19782,84 +19782,84 @@ function Xg(s) {
       , o = u % 60;
     return `${d}:${String(o).padStart(2, "0")}`
 }
-function Vg({location: s, isCurrent: u, isUnlocked: d, isClickable: o, onClick: y, cooldownEnd: f}) {
+function Vg({location: location, isCurrent: isCurrent, isUnlocked: isUnlocked, isClickable: isClickable, onClick: onClick, cooldownEnd: cooldownEnd}) {
     const [g,x] = O.useState(!1)
       , [,h] = O.useState(0)
-      , p = s.type === "town"
-      , w = s.type === "raid"
-      , k = d ? s.name : "???"
-      , A = Date.now()
-      , v = w && f != null && A < f;
+      , isTown = location.type === "town"
+      , isRaid = location.type === "raid"
+      , locationName = isUnlocked ? location.name : "???"
+      , timeNow = Date.now()
+      , raidOnCooldown = isRaid && cooldownEnd != null && timeNow < cooldownEnd;
     O.useEffect( () => {
-        if (!v)
+        if (!raidOnCooldown)
             return;
         const D = setInterval( () => h(z => z + 1), 1e3);
         return () => clearInterval(D)
     }
-    , [v]);
-    const _ = u || g;
+    , [raidOnCooldown]);
+    const _ = isCurrent || g;
     let S = "map-node";
-    return w ? S += " raid" : p ? S += " town" : S += " route",
-    v && (S += " cooldown"),
-    u ? S += " current" : o ? S += " clickable" : d || (S += " locked"),
+    return isRaid ? S += " raid" : isTown ? S += " town" : S += " route",
+    raidOnCooldown && (S += " cooldown"),
+    isCurrent ? S += " current" : isClickable ? S += " clickable" : isUnlocked || (S += " locked"),
     c.jsxs("div", {
         className: S,
         style: {
-            left: `${s.position.x}%`,
-            top: `${s.position.y}%`
+            left: `${location.position.x}%`,
+            top: `${location.position.y}%`
         },
-        onClick: o ? y : void 0,
-        title: d ? s.description : "Unknown location",
+        onClick: isClickable ? onClick : void 0,
+        title: isUnlocked ? location.description : "Unknown location",
         onMouseEnter: () => x(!0),
         onMouseLeave: () => x(!1),
         children: [c.jsx("div", {
             className: "map-node-dot",
-            children: u && c.jsx("div", {
+            children: isCurrent && c.jsx("div", {
                 className: "map-node-blink"
             })
         }), _ && c.jsx("span", {
             className: "map-node-label",
-            children: k
-        }), v && f && c.jsx("span", {
+            children: locationName
+        }), raidOnCooldown && cooldownEnd && c.jsx("span", {
             className: "raid-cooldown-timer",
-            children: Xg(f - Date.now())
+            children: Xg(cooldownEnd - Date.now())
         })]
     })
 }
 const mapAreas = Object.keys(mapData);
-function Cf(s, u) {
-    const d = mapData[s]
-      , o = mapData[u]
-      , y = Math.abs(o.position.x - d.position.x)
-      , f = Math.abs(o.position.y - d.position.y);
-    return y >= f ? [{
-        x1: d.position.x,
-        y1: d.position.y,
-        x2: o.position.x,
-        y2: d.position.y
+function createRoads(s, u) {
+    const fromLocation = mapData[s]
+      , toLocation = mapData[u]
+      , deltaX = Math.abs(toLocation.position.x - fromLocation.position.x)
+      , deltaY = Math.abs(toLocation.position.y - fromLocation.position.y);
+    return deltaX >= deltaY ? [{
+        x1: fromLocation.position.x,
+        y1: fromLocation.position.y,
+        x2: toLocation.position.x,
+        y2: fromLocation.position.y
     }, {
-        x1: o.position.x,
-        y1: d.position.y,
-        x2: o.position.x,
-        y2: o.position.y
+        x1: toLocation.position.x,
+        y1: fromLocation.position.y,
+        x2: toLocation.position.x,
+        y2: toLocation.position.y
     }] : [{
-        x1: d.position.x,
-        y1: d.position.y,
-        x2: d.position.x,
-        y2: o.position.y
+        x1: fromLocation.position.x,
+        y1: fromLocation.position.y,
+        x2: fromLocation.position.x,
+        y2: toLocation.position.y
     }, {
-        x1: d.position.x,
-        y1: o.position.y,
-        x2: o.position.x,
-        y2: o.position.y
+        x1: fromLocation.position.x,
+        y1: toLocation.position.y,
+        x2: toLocation.position.x,
+        y2: toLocation.position.y
     }]
 }
 function Jf() {
     const {state: s, dispatch: u} = Re()
       , {currentLocation: d, unlockedLocations: o} = s
       , y = mapData[d];
-    function f(h) {
-        if (h === "raidIsland") {
+    function f(location) {
+        if (location === "raidIsland") {
             if (s.raidCooldownEnd && Date.now() < s.raidCooldownEnd)
                 return;
             const p = Wa[Math.floor(Math.random() * Wa.length)];
@@ -19874,7 +19874,7 @@ function Jf() {
         u({
             type: "TRAVEL",
             payload: {
-                locationId: h
+                locationId: location
             }
         })
     }
@@ -19909,7 +19909,7 @@ function Jf() {
                 className: "town-map-svg",
                 children: [g.map( ({from: h, to: p}) => {
                     const k = `map-road-border${o.includes(h) && o.includes(p) ? " unlocked" : " locked"}`;
-                    return Cf(h, p).map( (A, v) => c.jsx("line", {
+                    return createRoads(h, p).map( (A, v) => c.jsx("line", {
                         x1: `${A.x1}%`,
                         y1: `${A.y1}%`,
                         x2: `${A.x2}%`,
@@ -19919,7 +19919,7 @@ function Jf() {
                 }
                 ), g.map( ({from: h, to: p}) => {
                     const k = `map-road-fill${o.includes(h) && o.includes(p) ? " unlocked" : " locked"}`;
-                    return Cf(h, p).map( (A, v) => c.jsx("line", {
+                    return createRoads(h, p).map( (A, v) => c.jsx("line", {
                         x1: `${A.x1}%`,
                         y1: `${A.y1}%`,
                         x2: `${A.x2}%`,

@@ -19826,7 +19826,7 @@ function Vg({location: s, isCurrent: u, isUnlocked: d, isClickable: o, onClick: 
         })]
     })
 }
-const Qg = Object.keys(mapData);
+const mapAreas = Object.keys(mapData);
 function Cf(s, u) {
     const d = mapData[s]
       , o = mapData[u]
@@ -19928,7 +19928,7 @@ function Jf() {
                     }, `fill-${h}-${p}-${v}`))
                 }
                 )]
-            }), Qg.map(h => {
+            }), mapAreas.map(h => {
                 const p = mapData[h]
                   , w = o.includes(h);
                 if (p.type === "raid" && !w)
@@ -20369,13 +20369,16 @@ function e0() {
 }
 async function startApp() {
     await window.gameDataReady;
-    
-    pokemonSpecies = window.gameDataInjector.data.pokemonSpecies;
-    evolutionData = window.gameDataInjector.data.evolutionData;
-    moveLearnsets = window.gameDataInjector.data.moveLearnsets;
-    moveData = window.gameDataInjector.data.moveData;
-    mapData = window.gameDataInjector.data.mapData;
-    mapEncounterData = window.gameDataInjector.data.mapEncounterData;
+    const loadedGameData = window.gameDataInjector.data;
+    Object.assign(pokemonSpecies, loadedGameData.pokemonSpecies);
+    Object.assign(evolutionData, loadedGameData.evolutionData);
+    Object.assign(moveLearnsets, loadedGameData.moveLearnsets);
+    Object.assign(mapData, loadedGameData.mapData);
+    Object.assign(mapEncounterData, loadedGameData.mapEncounterData);
+    Object.assign(moveData, loadedGameData.moveData);
+    Object.assign(trainerClassMap, loadedGameData.trainerClasses);
+    Object.assign(mapAreas, Object.keys(mapData));
+    preEvolutionMap = Object.fromEntries(Object.entries(evolutionData).flatMap( ([s,u]) => u.map(d => [d.into, s])));
 
     Rh.createRoot(document.getElementById("root")).render(c.jsx(O.StrictMode, {
         children: c.jsx(e0, {})

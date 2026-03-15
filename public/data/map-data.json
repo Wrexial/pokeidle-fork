@@ -1069,7 +1069,7 @@
         "unlock": {
             "championDefeated": true
         },
-        "unlockOrder": 42,
+        "unlockOrder": 50,
         "position": {
             "x": 1,
             "y": 1

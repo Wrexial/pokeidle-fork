@@ -12,9 +12,9 @@
 const dataFilesToLoad = [
     { key: 'pokemonSpecies', path: '/data/pokemon-species.json', label: 'Pokémon species' },
     { key: 'evolutionData', path: '/data/evolution-data.json', label: 'evolution chains' },
-    { key: 'moveLearnsets', path: '/data/move-learnsets.json', label: 'move learnsets' },
+    { key: 'moveLearnsets', path: '/data/possible-learnsets.json', label: 'move learnsets' },//move-learnsets
     { key: 'trainerClasses', path: '/data/trainer-classes.json', label: 'trainer classes' },
-    { key: 'moveData', path: '/data/move-data.json', label: 'move data' },
+    { key: 'moveData', path: '/data/possible-moves.json', label: 'move data' }, //move-data
     { key: 'mapData', path: '/data/map-data.json', label: 'map data' },
     { key: 'mapEncounterData', path: '/data/encounter-data.json', label: 'encounter data' },
     { key: 'trainerData', path: '/data/trainer-data.json', label: 'trainer data' },

@@ -13074,6 +13074,17 @@ function getPokemonSpriteUrl(s, u = !1, d = !1) {
         ? `${o}/back/${s}.gif`
         : `${o}/${s}.gif`
 }
+function getPokemonSpriteFallbackUrl(s, u = !1, d = !1){
+  const o = '/sprites/pokemon/versions/generation-v/black-white/animated'
+  return d && u
+    ? `${o}/back/shiny/substitute.gif`
+    : d
+      ? `${o}/shiny/substitute.gif`
+      : u
+        ? `${o}/back/substitute.gif`
+        : `${o}/substitute.gif`
+
+}
 const jf = 0
 function Kh(s, u, d) {
   return Math.floor(((2 * s + d + Math.floor(jf / 4)) * u) / 100) + u + 10
@@ -15098,7 +15109,7 @@ function Ih() {
               children: [
                 c.jsx('img', {
                   src: getPokemonSpriteUrl(d.id),
-                  onError: (e) => (e.target.src = '/sprites/pokemon/0.gif'),
+                  onError: (e) => (e.target.src = getPokemonSpriteFallbackUrl(d.id)),
                   alt: d.name,
                   className: 'starter-sprite',
                 }),
@@ -15570,7 +15581,7 @@ function ng() {
         children: c.jsx('img', {
           className: g,
           src: getPokemonSpriteUrl(f ? y.id : o.id, !1, d.isShiny),
-          onError: (e) => (e.target.src = '/sprites/pokemon/0.gif'),
+          onError: (e) => (e.target.src = getPokemonSpriteFallbackUrl(f ? y.id : o.id, !1, d.isShiny)),
           alt: f ? y.name : o.name,
         }),
       }),
@@ -16023,7 +16034,11 @@ function vf() {
                 !1,
                 p.isShiny
               ),
-              onError: (e) => (e.target.src = '/sprites/pokemon/0.gif'),
+              onError: (e) => (e.target.src = getPokemonSpriteFallbackUrl(
+                pokemonSpecies[p.speciesKey].id,
+                !1,
+                p.isShiny
+              )),
               alt: p.name,
             }),
           ],
@@ -16036,7 +16051,7 @@ function vf() {
           }),
           c.jsx('img', {
             src: getPokemonSpriteUrl(_.id, !0, g.playerPokemon?.isShiny),
-            onError: (e) => (e.target.src = '/sprites/pokemon/0.gif'),
+            onError: (e) => (e.target.src = getPokemonSpriteFallbackUrl(_.id, !0, g.playerPokemon?.isShiny)),
             alt: h.name,
           }),
         ],
@@ -17689,7 +17704,7 @@ function Gf({
           c.jsx('img', {
             className: 'stats-panel-sprite',
             src: getPokemonSpriteUrl(p.id, !1, s.isShiny),
-            onError: (e) => (e.target.src = '/sprites/pokemon/0.gif'),
+            onError: (e) => (e.target.src = getPokemonSpriteFallbackUrl(p.id, !1, s.isShiny)),
             alt: s.name,
           }),
           c.jsxs('div', {
@@ -18029,7 +18044,7 @@ function qf({
                           className: 'party-sprite',
                           src: getPokemonSpriteUrl(_e.id, !1, Q.isShiny),
                           onError: (e) =>
-                            (e.target.src = '/sprites/pokemon/0.gif'),
+                            (e.target.src = getPokemonSpriteFallbackUrl(_e.id, !1, Q.isShiny)),
                           alt: Q.name,
                         }),
                         c.jsxs('div', {
@@ -18162,7 +18177,7 @@ let Pf = Io.memo(function ({
             c.jsx('img', {
               className: `pokedex-tile-sprite ${d}`,
               src: getPokemonSpriteUrl(p.id),
-              onError: (e) => (e.target.src = '/sprites/pokemon/0.gif'),
+              onError: (e) => (e.target.src = getPokemonSpriteFallbackUrl(p.id)),
               alt: d === 'unseen' ? '???' : p.name,
               loading: 'lazy',
             }),
@@ -18300,7 +18315,7 @@ function jg({ onClose: s }) {
                   c.jsx('img', {
                     className: `stats-panel-sprite ${p}`,
                     src: getPokemonSpriteUrl(h.id),
-                    onError: (e) => (e.target.src = '/sprites/pokemon/0.gif'),
+                    onError: (e) => (e.target.src = getPokemonSpriteFallbackUrl(h.id)),
                     alt: p === 'unseen' ? '???' : h.name,
                   }),
                   c.jsxs('div', {
@@ -18511,7 +18526,7 @@ function Xf({
                         children: c.jsx('img', {
                           src: getPokemonSpriteUrl(_e.id, !1, J.isShiny),
                           onError: (e) =>
-                            (e.target.src = '/sprites/pokemon/0.gif'),
+                            (e.target.src = getPokemonSpriteFallbackUrl(_e.id, !1, J.isShiny)),
                           alt: J.name,
                           style: {
                             imageRendering: 'pixelated',
@@ -19052,7 +19067,7 @@ const martShopItems = {
             c.jsx('img', {
               className: `stats-panel-sprite ${f}`,
               src: getPokemonSpriteUrl(w.id),
-              onError: (e) => (e.target.src = '/sprites/pokemon/0.gif'),
+              onError: (e) => (e.target.src = getPokemonSpriteFallbackUrl(w.id)),
               alt: f === 'unseen' ? '???' : w.name,
             }),
             c.jsxs('div', {
@@ -20087,7 +20102,7 @@ const Gg = [
                     c.jsx('img', {
                       className: 'catch-modal-species-sprite',
                       src: getPokemonSpriteUrl(z.id),
-                      onError: (e) => (e.target.src = '/sprites/pokemon/0.gif'),
+                      onError: (e) => (e.target.src = getPokemonSpriteFallbackUrl(z.id)),
                       alt: z.name,
                     }),
                     c.jsx('span', {

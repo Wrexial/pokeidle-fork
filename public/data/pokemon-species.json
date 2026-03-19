@@ -18655,7 +18655,7 @@
     "catchRate": 3
   },
   "m-venusaur": {
-    "id": 1009,
+    "id": 10033,
     "name": "Mega Venusaur",
     "types": [
       "Grass",
@@ -18674,7 +18674,7 @@
     "catchRate": 45
   },
   "m-charizard x": {
-    "id": 1010,
+    "id": 10034,
     "name": "Mega Charizard X",
     "types": [
       "Fire",
@@ -18693,7 +18693,7 @@
     "catchRate": 45
   },
   "m-charizard y": {
-    "id": 1011,
+    "id": 10035,
     "name": "Mega Charizard Y",
     "types": [
       "Fire",
@@ -18712,7 +18712,7 @@
     "catchRate": 45
   },
   "m-blastoise": {
-    "id": 1012,
+    "id": 10036,
     "name": "Mega Blastoise",
     "types": [
       "Water"
@@ -18730,7 +18730,7 @@
     "catchRate": 45
   },
   "m-beedrill": {
-    "id": 1013,
+    "id": 0,
     "name": "Mega Beedrill",
     "types": [
       "Bug",
@@ -18749,7 +18749,7 @@
     "catchRate": 45
   },
   "m-pidgeot": {
-    "id": 1014,
+    "id": 10073,
     "name": "Mega Pidgeot",
     "types": [
       "Normal",
@@ -18768,7 +18768,7 @@
     "catchRate": 45
   },
   "a-rattata": {
-    "id": 1015,
+    "id": 10091,
     "name": "A-Rattata",
     "types": [
       "Normal",
@@ -18787,7 +18787,7 @@
     "catchRate": 255
   },
   "a-raticate": {
-    "id": 1016,
+    "id": 10092,
     "name": "A-Raticate",
     "types": [
       "Normal",
@@ -18806,7 +18806,7 @@
     "catchRate": 127
   },
   "a-raichu": {
-    "id": 1017,
+    "id": 10100,
     "name": "A-Raichu",
     "types": [
       "Electric",
@@ -18825,7 +18825,7 @@
     "catchRate": 75
   },
   "a-sandshrew": {
-    "id": 1018,
+    "id": 10101,
     "name": "A-Sandshrew",
     "types": [
       "Ice",
@@ -18844,7 +18844,7 @@
     "catchRate": 255
   },
   "a-sandslash": {
-    "id": 1019,
+    "id": 10102,
     "name": "A-Sandslash",
     "types": [
       "Ice",
@@ -18863,7 +18863,7 @@
     "catchRate": 90
   },
   "a-vulpix": {
-    "id": 1020,
+    "id": 10103,
     "name": "A-Vulpix",
     "types": [
       "Ice"
@@ -18881,7 +18881,7 @@
     "catchRate": 190
   },
   "a-ninetales": {
-    "id": 1021,
+    "id": 10103,
     "name": "A-Ninetales",
     "types": [
       "Ice"
@@ -18899,7 +18899,7 @@
     "catchRate": 75
   },
   "a-diglett": {
-    "id": 1022,
+    "id": 10105,
     "name": "A-Diglett",
     "types": [
       "Ground",
@@ -18918,7 +18918,7 @@
     "catchRate": 255
   },
   "a-dugtrio": {
-    "id": 1023,
+    "id": 10106,
     "name": "A-Dugtrio",
     "types": [
       "Ground",
@@ -18937,7 +18937,7 @@
     "catchRate": 50
   },
   "a-meowth": {
-    "id": 1024,
+    "id": 10107,
     "name": "A-Meowth",
     "types": [
       "Dark"
@@ -18955,7 +18955,7 @@
     "catchRate": 255
   },
   "g-meowth": {
-    "id": 1025,
+    "id": 10161,
     "name": "G-Meowth",
     "types": [
       "Steel"
@@ -18973,7 +18973,7 @@
     "catchRate": 255
   },
   "a-persian": {
-    "id": 1026,
+    "id": 10108,
     "name": "A-Persian",
     "types": [
       "Dark"
@@ -18991,7 +18991,7 @@
     "catchRate": 90
   },
   "h-growlithe": {
-    "id": 1027,
+    "id": 10229,
     "name": "Hisuian Growlithe",
     "types": [
       "Fire",
@@ -19010,7 +19010,7 @@
     "catchRate": 190
   },
   "h-arcanine": {
-    "id": 1028,
+    "id": 10230,
     "name": "Hisuian Arcanine",
     "types": [
       "Fire",
@@ -19029,7 +19029,7 @@
     "catchRate": 75
   },
   "m-alakazam": {
-    "id": 1029,
+    "id": 10037,
     "name": "Mega Alakazam",
     "types": [
       "Psychic"
@@ -19047,7 +19047,7 @@
     "catchRate": 50
   },
   "a-geodude": {
-    "id": 1030,
+    "id": 10109,
     "name": "A-Geodude",
     "types": [
       "Rock",
@@ -19066,7 +19066,7 @@
     "catchRate": 255
   },
   "a-graveler": {
-    "id": 1031,
+    "id": 10110,
     "name": "A-Graveler",
     "types": [
       "Rock",
@@ -19085,7 +19085,7 @@
     "catchRate": 120
   },
   "a-golem": {
-    "id": 1032,
+    "id": 10111,
     "name": "A-Golem",
     "types": [
       "Rock",
@@ -19104,7 +19104,7 @@
     "catchRate": 45
   },
   "g-ponyta": {
-    "id": 1033,
+    "id": 10162,
     "name": "G-Ponyta",
     "types": [
       "Psychic"
@@ -19122,7 +19122,7 @@
     "catchRate": 190
   },
   "g-rapidash": {
-    "id": 1034,
+    "id": 10163,
     "name": "G-Rapidash",
     "types": [
       "Psychic",
@@ -19141,7 +19141,7 @@
     "catchRate": 60
   },
   "g-farfetch'd": {
-    "id": 1035,
+    "id": 0,
     "name": "G-Farfetch'd",
     "types": [
       "Fighting"
@@ -19159,7 +19159,7 @@
     "catchRate": 45
   },
   "g-slowpoke": {
-    "id": 1036,
+    "id": 0,
     "name": "G-Slowpoke",
     "types": [
       "Psychic"
@@ -19177,7 +19177,7 @@
     "catchRate": 190
   },
   "m-slowbro": {
-    "id": 1037,
+    "id": 0,
     "name": "Mega Slowbro",
     "types": [
       "Water",
@@ -19196,7 +19196,7 @@
     "catchRate": 75
   },
   "g-slowbro": {
-    "id": 1038,
+    "id": 0,
     "name": "G-Slowbro",
     "types": [
       "Poison",
@@ -19215,7 +19215,7 @@
     "catchRate": 75
   },
   "a-grimer": {
-    "id": 1039,
+    "id": 0,
     "name": "A-Grimer",
     "types": [
       "Poison",
@@ -19234,7 +19234,7 @@
     "catchRate": 190
   },
   "a-muk": {
-    "id": 1040,
+    "id": 0,
     "name": "A-Muk",
     "types": [
       "Poison",
@@ -19253,7 +19253,7 @@
     "catchRate": 75
   },
   "m-gengar": {
-    "id": 1041,
+    "id": 0,
     "name": "Mega Gengar",
     "types": [
       "Ghost",
@@ -19272,7 +19272,7 @@
     "catchRate": 45
   },
   "h-voltorb": {
-    "id": 1042,
+    "id": 0,
     "name": "Hisuian Voltorb",
     "types": [
       "Electric",
@@ -19291,7 +19291,7 @@
     "catchRate": 190
   },
   "h-electrode": {
-    "id": 1043,
+    "id": 0,
     "name": "Hisuian Electrode",
     "types": [
       "Electric",
@@ -19310,7 +19310,7 @@
     "catchRate": 60
   },
   "a-exeggutor": {
-    "id": 1044,
+    "id": 0,
     "name": "A-Exeggutor",
     "types": [
       "Grass",
@@ -19329,7 +19329,7 @@
     "catchRate": 45
   },
   "a-marowak": {
-    "id": 1045,
+    "id": 0,
     "name": "A-Marowak",
     "types": [
       "Fire",
@@ -19348,7 +19348,7 @@
     "catchRate": 75
   },
   "g-weezing": {
-    "id": 1046,
+    "id": 0,
     "name": "G-Weezing",
     "types": [
       "Poison",
@@ -19367,7 +19367,7 @@
     "catchRate": 60
   },
   "m-kangaskhan": {
-    "id": 1047,
+    "id": 0,
     "name": "Mega Kangaskhan",
     "types": [
       "Normal"
@@ -19385,7 +19385,7 @@
     "catchRate": 45
   },
   "g-mr. mime": {
-    "id": 1048,
+    "id": 0,
     "name": "G-Mr. Mime",
     "types": [
       "Ice",
@@ -19404,7 +19404,7 @@
     "catchRate": 45
   },
   "m-pinsir": {
-    "id": 1049,
+    "id": 0,
     "name": "Mega Pinsir",
     "types": [
       "Bug",
@@ -19423,7 +19423,7 @@
     "catchRate": 45
   },
   "p-tauros": {
-    "id": 1050,
+    "id": 0,
     "name": "Paldean Tauros (Combat)",
     "types": [
       "Fighting"
@@ -19441,7 +19441,7 @@
     "catchRate": 45
   },
   "p-tauros-b": {
-    "id": 1051,
+    "id": 0,
     "name": "Paldean Tauros (Blaze)",
     "types": [
       "Fighting",
@@ -19460,7 +19460,7 @@
     "catchRate": 45
   },
   "p-tauros-a": {
-    "id": 1052,
+    "id": 0,
     "name": "Paldean Tauros (Aqua)",
     "types": [
       "Fighting",
@@ -19479,7 +19479,7 @@
     "catchRate": 45
   },
   "m-gyarados": {
-    "id": 1053,
+    "id": 0,
     "name": "Mega Gyarados",
     "types": [
       "Water",
@@ -19498,7 +19498,7 @@
     "catchRate": 45
   },
   "m-aerodactyl": {
-    "id": 1054,
+    "id": 0,
     "name": "Mega Aerodactyl",
     "types": [
       "Rock",
@@ -19517,7 +19517,7 @@
     "catchRate": 45
   },
   "g-articuno": {
-    "id": 1055,
+    "id": 0,
     "name": "G-Articuno",
     "types": [
       "Psychic",
@@ -19536,7 +19536,7 @@
     "catchRate": 3
   },
   "g-zapdos": {
-    "id": 1056,
+    "id": 0,
     "name": "G-Zapdos",
     "types": [
       "Fighting",
@@ -19555,7 +19555,7 @@
     "catchRate": 3
   },
   "g-moltres": {
-    "id": 1057,
+    "id": 0,
     "name": "G-Moltres",
     "types": [
       "Dark",
@@ -19574,7 +19574,7 @@
     "catchRate": 3
   },
   "m-dragonite": {
-    "id": 1058,
+    "id": 0,
     "name": "Mega Dragonite",
     "types": [
       "Dragon",
@@ -19593,7 +19593,7 @@
     "catchRate": 45
   },
   "m-mewtwo x": {
-    "id": 1059,
+    "id": 0,
     "name": "Mega Mewtwo X",
     "types": [
       "Psychic",
@@ -19612,7 +19612,7 @@
     "catchRate": 3
   },
   "m-mewtwo y": {
-    "id": 1060,
+    "id": 0,
     "name": "Mega Mewtwo Y",
     "types": [
       "Psychic"
@@ -19630,7 +19630,7 @@
     "catchRate": 3
   },
   "h-typhlosion": {
-    "id": 1061,
+    "id": 0,
     "name": "Hisuian Typhlosion",
     "types": [
       "Fire",
@@ -19649,7 +19649,7 @@
     "catchRate": 45
   },
   "m-feraligatr": {
-    "id": 1062,
+    "id": 0,
     "name": "Mega Feraligatr",
     "types": [
       "Water",
@@ -19668,7 +19668,7 @@
     "catchRate": 45
   },
   "m-ampharos": {
-    "id": 1063,
+    "id": 0,
     "name": "Mega Ampharos",
     "types": [
       "Electric",
@@ -19687,7 +19687,7 @@
     "catchRate": 45
   },
   "p-wooper": {
-    "id": 1064,
+    "id": 0,
     "name": "Paldean Wooper",
     "types": [
       "Poison",
@@ -19706,7 +19706,7 @@
     "catchRate": 255
   },
   "g-slowking": {
-    "id": 1065,
+    "id": 0,
     "name": "G-Slowking",
     "types": [
       "Poison",
@@ -19725,7 +19725,7 @@
     "catchRate": 70
   },
   "m-steelix": {
-    "id": 1066,
+    "id": 0,
     "name": "Mega Steelix",
     "types": [
       "Steel",
@@ -19744,7 +19744,7 @@
     "catchRate": 25
   },
   "h-qwilfish": {
-    "id": 1067,
+    "id": 0,
     "name": "Hisuian Qwilfish",
     "types": [
       "Dark",
@@ -19763,7 +19763,7 @@
     "catchRate": 45
   },
   "m-scizor": {
-    "id": 1068,
+    "id": 0,
     "name": "Mega Scizor",
     "types": [
       "Bug",
@@ -19782,7 +19782,7 @@
     "catchRate": 25
   },
   "m-heracross": {
-    "id": 1069,
+    "id": 0,
     "name": "Mega Heracross",
     "types": [
       "Bug",
@@ -19801,7 +19801,7 @@
     "catchRate": 45
   },
   "h-sneasel": {
-    "id": 1070,
+    "id": 0,
     "name": "Hisuian Sneasel",
     "types": [
       "Fighting",
@@ -19820,7 +19820,7 @@
     "catchRate": 60
   },
   "g-corsola": {
-    "id": 1071,
+    "id": 0,
     "name": "G-Corsola",
     "types": [
       "Ghost"
@@ -19838,7 +19838,7 @@
     "catchRate": 60
   },
   "m-houndoom": {
-    "id": 1072,
+    "id": 0,
     "name": "Mega Houndoom",
     "types": [
       "Dark",
@@ -19857,7 +19857,7 @@
     "catchRate": 45
   },
   "m-tyranitar": {
-    "id": 1073,
+    "id": 0,
     "name": "Mega Tyranitar",
     "types": [
       "Rock",
@@ -19876,7 +19876,7 @@
     "catchRate": 45
   },
   "m-sceptile": {
-    "id": 1074,
+    "id": 0,
     "name": "Mega Sceptile",
     "types": [
       "Grass",
@@ -19895,7 +19895,7 @@
     "catchRate": 45
   },
   "m-blaziken": {
-    "id": 1075,
+    "id": 0,
     "name": "Mega Blaziken",
     "types": [
       "Fire",
@@ -19914,7 +19914,7 @@
     "catchRate": 45
   },
   "m-swampert": {
-    "id": 1076,
+    "id": 0,
     "name": "Mega Swampert",
     "types": [
       "Water",
@@ -19933,7 +19933,7 @@
     "catchRate": 45
   },
   "g-zigzagoon": {
-    "id": 1077,
+    "id": 0,
     "name": "G-Zigzagoon",
     "types": [
       "Dark",
@@ -19952,7 +19952,7 @@
     "catchRate": 255
   },
   "g-linoone": {
-    "id": 1078,
+    "id": 0,
     "name": "G-Linoone",
     "types": [
       "Dark",
@@ -19971,7 +19971,7 @@
     "catchRate": 90
   },
   "m-gardevoir": {
-    "id": 1079,
+    "id": 0,
     "name": "Mega Gardevoir",
     "types": [
       "Psychic",
@@ -19990,7 +19990,7 @@
     "catchRate": 45
   },
   "m-sableye": {
-    "id": 1080,
+    "id": 0,
     "name": "Mega Sableye",
     "types": [
       "Dark",
@@ -20009,7 +20009,7 @@
     "catchRate": 45
   },
   "m-mawile": {
-    "id": 1081,
+    "id": 0,
     "name": "Mega Mawile",
     "types": [
       "Steel",
@@ -20028,7 +20028,7 @@
     "catchRate": 45
   },
   "m-aggron": {
-    "id": 1082,
+    "id": 0,
     "name": "Mega Aggron",
     "types": [
       "Steel"
@@ -20046,7 +20046,7 @@
     "catchRate": 45
   },
   "m-medicham": {
-    "id": 1083,
+    "id": 0,
     "name": "Mega Medicham",
     "types": [
       "Fighting",
@@ -20065,7 +20065,7 @@
     "catchRate": 90
   },
   "m-manectric": {
-    "id": 1084,
+    "id": 0,
     "name": "Mega Manectric",
     "types": [
       "Electric"
@@ -20083,7 +20083,7 @@
     "catchRate": 45
   },
   "m-sharpedo": {
-    "id": 1085,
+    "id": 0,
     "name": "Mega Sharpedo",
     "types": [
       "Water",
@@ -20102,7 +20102,7 @@
     "catchRate": 60
   },
   "m-camerupt": {
-    "id": 1086,
+    "id": 0,
     "name": "Mega Camerupt",
     "types": [
       "Fire",
@@ -20121,7 +20121,7 @@
     "catchRate": 150
   },
   "m-altaria": {
-    "id": 1087,
+    "id": 0,
     "name": "Mega Altaria",
     "types": [
       "Dragon",
@@ -20140,7 +20140,7 @@
     "catchRate": 45
   },
   "m-banette": {
-    "id": 1088,
+    "id": 0,
     "name": "Mega Banette",
     "types": [
       "Ghost"
@@ -20158,7 +20158,7 @@
     "catchRate": 45
   },
   "m-absol": {
-    "id": 1089,
+    "id": 0,
     "name": "Mega Absol",
     "types": [
       "Dark"
@@ -20176,7 +20176,7 @@
     "catchRate": 30
   },
   "m-glalie": {
-    "id": 1090,
+    "id": 0,
     "name": "Mega Glalie",
     "types": [
       "Ice"
@@ -20194,7 +20194,7 @@
     "catchRate": 75
   },
   "m-salamence": {
-    "id": 1091,
+    "id": 0,
     "name": "Mega Salamence",
     "types": [
       "Dragon",
@@ -20213,7 +20213,7 @@
     "catchRate": 45
   },
   "m-metagross": {
-    "id": 1092,
+    "id": 0,
     "name": "Mega Metagross",
     "types": [
       "Steel",
@@ -20232,7 +20232,7 @@
     "catchRate": 3
   },
   "m-latias": {
-    "id": 1093,
+    "id": 0,
     "name": "Mega Latias",
     "types": [
       "Dragon",
@@ -20251,7 +20251,7 @@
     "catchRate": 3
   },
   "m-latios": {
-    "id": 1094,
+    "id": 0,
     "name": "Mega Latios",
     "types": [
       "Dragon",
@@ -20270,7 +20270,7 @@
     "catchRate": 3
   },
   "p-kyogre": {
-    "id": 1095,
+    "id": 0,
     "name": "P-Kyogre",
     "types": [
       "Water"
@@ -20288,7 +20288,7 @@
     "catchRate": 3
   },
   "p-groudon": {
-    "id": 1096,
+    "id": 0,
     "name": "P-Groudon",
     "types": [
       "Fire",
@@ -20307,7 +20307,7 @@
     "catchRate": 3
   },
   "m-rayquaza": {
-    "id": 1097,
+    "id": 0,
     "name": "Mega Rayquaza",
     "types": [
       "Dragon",
@@ -20326,7 +20326,7 @@
     "catchRate": 45
   },
   "deoxys-a": {
-    "id": 1098,
+    "id": 0,
     "name": "Deoxys-A",
     "types": [
       "Psychic"
@@ -20344,7 +20344,7 @@
     "catchRate": 3
   },
   "deoxys-d": {
-    "id": 1099,
+    "id": 0,
     "name": "Deoxys-D",
     "types": [
       "Psychic"
@@ -20362,7 +20362,7 @@
     "catchRate": 3
   },
   "deoxys-s": {
-    "id": 1100,
+    "id": 0,
     "name": "Deoxys-S",
     "types": [
       "Psychic"
@@ -20380,7 +20380,7 @@
     "catchRate": 3
   },
   "m-lopunny": {
-    "id": 1101,
+    "id": 0,
     "name": "Mega Lopunny",
     "types": [
       "Normal",
@@ -20399,7 +20399,7 @@
     "catchRate": 60
   },
   "m-garchomp": {
-    "id": 1102,
+    "id": 0,
     "name": "Mega Garchomp",
     "types": [
       "Dragon",
@@ -20418,7 +20418,7 @@
     "catchRate": 45
   },
   "m-lucario": {
-    "id": 1103,
+    "id": 0,
     "name": "Mega Lucario",
     "types": [
       "Fighting",
@@ -20437,7 +20437,7 @@
     "catchRate": 45
   },
   "m-abomasnow": {
-    "id": 1104,
+    "id": 0,
     "name": "Mega Abomasnow",
     "types": [
       "Grass",
@@ -20456,7 +20456,7 @@
     "catchRate": 60
   },
   "m-gallade": {
-    "id": 1105,
+    "id": 0,
     "name": "Mega Gallade",
     "types": [
       "Psychic",
@@ -20475,7 +20475,7 @@
     "catchRate": 45
   },
   "h-rotom": {
-    "id": 1106,
+    "id": 0,
     "name": "H-Rotom",
     "types": [
       "Electric",
@@ -20494,7 +20494,7 @@
     "catchRate": 45
   },
   "w-rotom": {
-    "id": 1107,
+    "id": 0,
     "name": "W-Rotom",
     "types": [
       "Electric",
@@ -20513,7 +20513,7 @@
     "catchRate": 45
   },
   "f-rotom": {
-    "id": 1108,
+    "id": 0,
     "name": "F-Rotom",
     "types": [
       "Electric",
@@ -20532,7 +20532,7 @@
     "catchRate": 45
   },
   "fan-rotom": {
-    "id": 1109,
+    "id": 0,
     "name": "Fan-Rotom",
     "types": [
       "Electric",
@@ -20551,7 +20551,7 @@
     "catchRate": 45
   },
   "m-rotom": {
-    "id": 1110,
+    "id": 0,
     "name": "M-Rotom",
     "types": [
       "Electric",
@@ -20570,7 +20570,7 @@
     "catchRate": 45
   },
   "dialga-o": {
-    "id": 1111,
+    "id": 0,
     "name": "Dialga Origin",
     "types": [
       "Steel",
@@ -20589,7 +20589,7 @@
     "catchRate": 3
   },
   "palkia-o": {
-    "id": 1112,
+    "id": 0,
     "name": "Palkia Origin",
     "types": [
       "Water",
@@ -20608,7 +20608,7 @@
     "catchRate": 3
   },
   "giratina-o": {
-    "id": 1113,
+    "id": 0,
     "name": "Giratina-O",
     "types": [
       "Ghost",
@@ -20627,7 +20627,7 @@
     "catchRate": 3
   },
   "shaymin-s": {
-    "id": 1114,
+    "id": 0,
     "name": "Shaymin-S",
     "types": [
       "Grass",
@@ -20646,7 +20646,7 @@
     "catchRate": 45
   },
   "h-samurott": {
-    "id": 1115,
+    "id": 0,
     "name": "Hisuian Samurott",
     "types": [
       "Water",
@@ -20665,7 +20665,7 @@
     "catchRate": 45
   },
   "m-audino": {
-    "id": 1116,
+    "id": 0,
     "name": "Mega Audino",
     "types": [
       "Normal",
@@ -20684,7 +20684,7 @@
     "catchRate": 255
   },
   "h-lilligant": {
-    "id": 1117,
+    "id": 0,
     "name": "Hisuian Lilligant",
     "types": [
       "Grass",
@@ -20703,7 +20703,7 @@
     "catchRate": 75
   },
   "basculin-w": {
-    "id": 1118,
+    "id": 0,
     "name": "White Striped Basculin",
     "types": [
       "Water"
@@ -20721,7 +20721,7 @@
     "catchRate": 25
   },
   "darmanitan-z": {
-    "id": 1119,
+    "id": 0,
     "name": "Darmanitan-Z",
     "types": [
       "Fire",
@@ -20740,7 +20740,7 @@
     "catchRate": 60
   },
   "g-darumaka": {
-    "id": 1120,
+    "id": 0,
     "name": "G-Darumaka",
     "types": [
       "Ice"
@@ -20758,7 +20758,7 @@
     "catchRate": 120
   },
   "g-darmanitan": {
-    "id": 1121,
+    "id": 0,
     "name": "G-Darmanitan",
     "types": [
       "Ice"
@@ -20776,7 +20776,7 @@
     "catchRate": 60
   },
   "g-darmanitan-z": {
-    "id": 1122,
+    "id": 0,
     "name": "G-Darmanitan-Z",
     "types": [
       "Ice",
@@ -20795,7 +20795,7 @@
     "catchRate": 60
   },
   "g-yamask": {
-    "id": 1123,
+    "id": 0,
     "name": "G-Yamask",
     "types": [
       "Ground",
@@ -20814,7 +20814,7 @@
     "catchRate": 190
   },
   "h-zorua": {
-    "id": 1124,
+    "id": 0,
     "name": "Hisuian Zorua",
     "types": [
       "Normal",
@@ -20833,7 +20833,7 @@
     "catchRate": 75
   },
   "h-zoroark": {
-    "id": 1125,
+    "id": 0,
     "name": "Hisuian Zoroark",
     "types": [
       "Normal",
@@ -20852,7 +20852,7 @@
     "catchRate": 45
   },
   "g-stunfisk": {
-    "id": 1126,
+    "id": 0,
     "name": "G-Stunfisk",
     "types": [
       "Ground",
@@ -20871,7 +20871,7 @@
     "catchRate": 75
   },
   "h-braviary": {
-    "id": 1127,
+    "id": 0,
     "name": "Hisuian Braviary",
     "types": [
       "Psychic",
@@ -20890,7 +20890,7 @@
     "catchRate": 60
   },
   "tornadus-t": {
-    "id": 1128,
+    "id": 0,
     "name": "Tornadus-T",
     "types": [
       "Flying"
@@ -20908,7 +20908,7 @@
     "catchRate": 3
   },
   "thundurus-t": {
-    "id": 1129,
+    "id": 0,
     "name": "Thundurus-T",
     "types": [
       "Electric",
@@ -20927,7 +20927,7 @@
     "catchRate": 3
   },
   "landorus-t": {
-    "id": 1130,
+    "id": 0,
     "name": "Landorus-T",
     "types": [
       "Ground",
@@ -20946,7 +20946,7 @@
     "catchRate": 3
   },
   "b-kyurem": {
-    "id": 1131,
+    "id": 0,
     "name": "B-Kyurem",
     "types": [
       "Dragon",
@@ -20965,7 +20965,7 @@
     "catchRate": 3
   },
   "w-kyurem": {
-    "id": 1132,
+    "id": 0,
     "name": "W-Kyurem",
     "types": [
       "Dragon",
@@ -20984,7 +20984,7 @@
     "catchRate": 3
   },
   "keldeo-r": {
-    "id": 1133,
+    "id": 0,
     "name": "Keldeo-R",
     "types": [
       "Water",
@@ -21003,7 +21003,7 @@
     "catchRate": 3
   },
   "meloetta-p": {
-    "id": 1134,
+    "id": 0,
     "name": "Meloetta-P",
     "types": [
       "Normal",
@@ -21022,7 +21022,7 @@
     "catchRate": 3
   },
   "ash-greninja": {
-    "id": 1135,
+    "id": 0,
     "name": "Ash-Greninja",
     "types": [
       "Water",
@@ -21041,7 +21041,7 @@
     "catchRate": 45
   },
   "aegislash-b": {
-    "id": 1136,
+    "id": 0,
     "name": "Aegislash-B",
     "types": [
       "Steel",
@@ -21060,7 +21060,7 @@
     "catchRate": 45
   },
   "h-sliggoo": {
-    "id": 1137,
+    "id": 0,
     "name": "Hisuian Sliggoo",
     "types": [
       "Steel",
@@ -21079,7 +21079,7 @@
     "catchRate": 45
   },
   "h-goodra": {
-    "id": 1138,
+    "id": 0,
     "name": "Hisuian Goodra",
     "types": [
       "Steel",
@@ -21098,7 +21098,7 @@
     "catchRate": 45
   },
   "h-avalugg": {
-    "id": 1139,
+    "id": 0,
     "name": "Hisuian Avalugg",
     "types": [
       "Ice",
@@ -21117,7 +21117,7 @@
     "catchRate": 55
   },
   "zygarde-10": {
-    "id": 1140,
+    "id": 0,
     "name": "Zygarde-10",
     "types": [
       "Dragon",
@@ -21136,7 +21136,7 @@
     "catchRate": 3
   },
   "zygarde-c": {
-    "id": 1141,
+    "id": 0,
     "name": "Zygarde-C",
     "types": [
       "Dragon",
@@ -21155,7 +21155,7 @@
     "catchRate": 3
   },
   "m-diancie": {
-    "id": 1142,
+    "id": 0,
     "name": "Mega Diancie",
     "types": [
       "Rock",
@@ -21174,7 +21174,7 @@
     "catchRate": 3
   },
   "hoopa-u": {
-    "id": 1143,
+    "id": 0,
     "name": "Hoopa-U",
     "types": [
       "Psychic",
@@ -21193,7 +21193,7 @@
     "catchRate": 3
   },
   "h-decidueye": {
-    "id": 1144,
+    "id": 0,
     "name": "Hisuian Decidueye",
     "types": [
       "Grass",
@@ -21212,7 +21212,7 @@
     "catchRate": 45
   },
   "lycanroc-m": {
-    "id": 1145,
+    "id": 0,
     "name": "Lycanroc-M",
     "types": [
       "Rock"
@@ -21230,7 +21230,7 @@
     "catchRate": 90
   },
   "lycanroc-d": {
-    "id": 1146,
+    "id": 0,
     "name": "Lycanroc-D",
     "types": [
       "Rock"
@@ -21248,7 +21248,7 @@
     "catchRate": 90
   },
   "wishiwashi-s": {
-    "id": 1147,
+    "id": 0,
     "name": "Wishiwashi-S",
     "types": [
       "Water"
@@ -21266,7 +21266,7 @@
     "catchRate": 60
   },
   "necrozma-s": {
-    "id": 1148,
+    "id": 0,
     "name": "Necrozma-S",
     "types": [
       "Psychic",
@@ -21285,7 +21285,7 @@
     "catchRate": 255
   },
   "necrozma-l": {
-    "id": 1149,
+    "id": 0,
     "name": "Necrozma-L",
     "types": [
       "Psychic",
@@ -21304,7 +21304,7 @@
     "catchRate": 255
   },
   "u-necrozma": {
-    "id": 1150,
+    "id": 0,
     "name": "U-Necrozma",
     "types": [
       "Psychic",
@@ -21323,7 +21323,7 @@
     "catchRate": 255
   },
   "indeedee-f": {
-    "id": 1151,
+    "id": 0,
     "name": "Indeedee-F",
     "types": [
       "Psychic",
@@ -21342,7 +21342,7 @@
     "catchRate": 30
   },
   "zacian-cs": {
-    "id": 1152,
+    "id": 0,
     "name": "Zacian-CS",
     "types": [
       "Fairy",
@@ -21361,7 +21361,7 @@
     "catchRate": 10
   },
   "zamazenta-cs": {
-    "id": 1153,
+    "id": 0,
     "name": "Zamazenta-CS",
     "types": [
       "Fighting",
@@ -21380,7 +21380,7 @@
     "catchRate": 10
   },
   "urshifu-rss": {
-    "id": 1154,
+    "id": 0,
     "name": "Urshifu-RSS",
     "types": [
       "Fighting",
@@ -21399,7 +21399,7 @@
     "catchRate": 3
   },
   "calyrex-ir": {
-    "id": 1155,
+    "id": 0,
     "name": "Calyrex-IR",
     "types": [
       "Psychic",
@@ -21418,7 +21418,7 @@
     "catchRate": 3
   },
   "calyrex-sr": {
-    "id": 1156,
+    "id": 0,
     "name": "Calyrex-SR",
     "types": [
       "Psychic",
@@ -21437,7 +21437,7 @@
     "catchRate": 3
   },
   "gx-venusaur": {
-    "id": 1157,
+    "id": 0,
     "name": "Gigantamax Venusaur",
     "types": [
       "Grass",
@@ -21456,7 +21456,7 @@
     "catchRate": 45
   },
   "gx-charizard": {
-    "id": 1158,
+    "id": 0,
     "name": "Gigantamax Charizard",
     "types": [
       "Fire",
@@ -21475,7 +21475,7 @@
     "catchRate": 45
   },
   "gx-blastoise": {
-    "id": 1159,
+    "id": 0,
     "name": "Gigantamax Blastoise",
     "types": [
       "Water"
@@ -21493,7 +21493,7 @@
     "catchRate": 45
   },
   "gx-butterfree": {
-    "id": 1160,
+    "id": 0,
     "name": "Gigantamax Butterfree",
     "types": [
       "Bug",
@@ -21512,7 +21512,7 @@
     "catchRate": 45
   },
   "gx-pikachu": {
-    "id": 1161,
+    "id": 0,
     "name": "Gigantamax Pikachu",
     "types": [
       "Electric"
@@ -21530,7 +21530,7 @@
     "catchRate": 190
   },
   "gx-meowth": {
-    "id": 1162,
+    "id": 0,
     "name": "Gigantamax Meowth",
     "types": [
       "Normal"
@@ -21548,7 +21548,7 @@
     "catchRate": 255
   },
   "gx-machamp": {
-    "id": 1163,
+    "id": 0,
     "name": "Gigantamax Machamp",
     "types": [
       "Fighting"
@@ -21566,7 +21566,7 @@
     "catchRate": 45
   },
   "gx-gengar": {
-    "id": 1164,
+    "id": 0,
     "name": "Gigantamax Gengar",
     "types": [
       "Ghost",
@@ -21585,7 +21585,7 @@
     "catchRate": 45
   },
   "gx-kingler": {
-    "id": 1165,
+    "id": 0,
     "name": "Gigantamax Kingler",
     "types": [
       "Water"
@@ -21603,7 +21603,7 @@
     "catchRate": 60
   },
   "gx-lapras": {
-    "id": 1166,
+    "id": 0,
     "name": "Gigantamax Lapras",
     "types": [
       "Water",
@@ -21622,7 +21622,7 @@
     "catchRate": 45
   },
   "gx-eevee": {
-    "id": 1167,
+    "id": 0,
     "name": "Gigantamax Eevee",
     "types": [
       "Normal"
@@ -21640,7 +21640,7 @@
     "catchRate": 45
   },
   "gx-snorlax": {
-    "id": 1168,
+    "id": 0,
     "name": "Gigantamax Snorlax",
     "types": [
       "Normal"
@@ -21658,7 +21658,7 @@
     "catchRate": 25
   },
   "gx-garbodor": {
-    "id": 1169,
+    "id": 0,
     "name": "Gigantamax Garbodor",
     "types": [
       "Poison"
@@ -21676,7 +21676,7 @@
     "catchRate": 60
   },
   "gx-melmetal": {
-    "id": 1170,
+    "id": 0,
     "name": "Gigantamax Melmetal",
     "types": [
       "Steel"
@@ -21694,7 +21694,7 @@
     "catchRate": 3
   },
   "gx-rillaboom": {
-    "id": 1171,
+    "id": 0,
     "name": "Gigantamax Rillaboom",
     "types": [
       "Grass"
@@ -21712,7 +21712,7 @@
     "catchRate": 45
   },
   "gx-cinderace": {
-    "id": 1172,
+    "id": 0,
     "name": "Gigantamax Cinderace",
     "types": [
       "Fire"
@@ -21730,7 +21730,7 @@
     "catchRate": 45
   },
   "gx-inteleon": {
-    "id": 1173,
+    "id": 0,
     "name": "Gigantamax Inteleon",
     "types": [
       "Water"
@@ -21748,7 +21748,7 @@
     "catchRate": 45
   },
   "gx-corviknight": {
-    "id": 1174,
+    "id": 0,
     "name": "Gigantamax Corviknight",
     "types": [
       "Flying",
@@ -21767,7 +21767,7 @@
     "catchRate": 45
   },
   "gx-orbeetle": {
-    "id": 1175,
+    "id": 0,
     "name": "Gigantamax Orbeetle",
     "types": [
       "Bug",
@@ -21786,7 +21786,7 @@
     "catchRate": 45
   },
   "gx-drednaw": {
-    "id": 1176,
+    "id": 0,
     "name": "Gigantamax Drednaw",
     "types": [
       "Water",
@@ -21805,7 +21805,7 @@
     "catchRate": 75
   },
   "gx-coalossal": {
-    "id": 1177,
+    "id": 0,
     "name": "Gigantamax Coalossal",
     "types": [
       "Rock",
@@ -21824,7 +21824,7 @@
     "catchRate": 45
   },
   "gx-flapple": {
-    "id": 1178,
+    "id": 0,
     "name": "Gigantamax Flapple",
     "types": [
       "Dragon",
@@ -21843,7 +21843,7 @@
     "catchRate": 45
   },
   "gx-appletun": {
-    "id": 1179,
+    "id": 0,
     "name": "Gigantamax Appletun",
     "types": [
       "Dragon",
@@ -21862,7 +21862,7 @@
     "catchRate": 45
   },
   "gx-sandaconda": {
-    "id": 1180,
+    "id": 0,
     "name": "Gigantamax Sandaconda",
     "types": [
       "Ground"
@@ -21880,7 +21880,7 @@
     "catchRate": 120
   },
   "gx-toxtricity": {
-    "id": 1181,
+    "id": 0,
     "name": "Gigantamax Toxtricity",
     "types": [
       "Electric",
@@ -21899,7 +21899,7 @@
     "catchRate": 45
   },
   "gx-centiskorch": {
-    "id": 1182,
+    "id": 0,
     "name": "Gigantamax Centiskorch",
     "types": [
       "Fire",
@@ -21918,7 +21918,7 @@
     "catchRate": 75
   },
   "gx-hatterene": {
-    "id": 1183,
+    "id": 0,
     "name": "Gigantamax Hatterene",
     "types": [
       "Psychic",
@@ -21937,7 +21937,7 @@
     "catchRate": 45
   },
   "gx-grimmsnarl": {
-    "id": 1184,
+    "id": 0,
     "name": "Gigantamax Grimmsnarl",
     "types": [
       "Dark",
@@ -21956,7 +21956,7 @@
     "catchRate": 45
   },
   "gx-alcremie": {
-    "id": 1185,
+    "id": 0,
     "name": "Gigantamax Alcremie",
     "types": [
       "Fairy"
@@ -21974,7 +21974,7 @@
     "catchRate": 100
   },
   "gx-copperajah": {
-    "id": 1186,
+    "id": 0,
     "name": "Gigantamax Copperajah",
     "types": [
       "Steel"
@@ -21992,7 +21992,7 @@
     "catchRate": 90
   },
   "gx-duraludon": {
-    "id": 1187,
+    "id": 0,
     "name": "Gigantamax Duraludon",
     "types": [
       "Steel",
@@ -22011,7 +22011,7 @@
     "catchRate": 45
   },
   "gx-eternatus": {
-    "id": 1188,
+    "id": 0,
     "name": "Eternamax Eternatus",
     "types": [
       "Poison",
@@ -22030,7 +22030,7 @@
     "catchRate": 255
   },
   "gx-urshifu-sss": {
-    "id": 1189,
+    "id": 0,
     "name": "Gigantamax Urshifu-SSS",
     "types": [
       "Fighting",
@@ -22049,7 +22049,7 @@
     "catchRate": 3
   },
   "gx-urshifu-rss": {
-    "id": 1190,
+    "id": 0,
     "name": "Gigantamax Urshifu-RSS",
     "types": [
       "Fighting",
@@ -22068,7 +22068,7 @@
     "catchRate": 3
   },
   "basculegion-f": {
-    "id": 1191,
+    "id": 0,
     "name": "Basculegion Female",
     "types": [
       "Water",
@@ -22087,7 +22087,7 @@
     "catchRate": 135
   },
   "enamorus-t": {
-    "id": 1192,
+    "id": 0,
     "name": "Enamorus Therian",
     "types": [
       "Fairy",
@@ -22106,7 +22106,7 @@
     "catchRate": 3
   },
   "oinkologne-f": {
-    "id": 1193,
+    "id": 0,
     "name": "Oinkologne Female",
     "types": [
       "Normal"
@@ -22124,7 +22124,7 @@
     "catchRate": 100
   },
   "palafin-h": {
-    "id": 1194,
+    "id": 0,
     "name": "Palafin Hero Form",
     "types": [
       "Water"
@@ -22142,7 +22142,7 @@
     "catchRate": 45
   },
   "missingno": {
-    "id": 1195,
+    "id": 0,
     "name": "MissingNo.",
     "types": [
       "Normal"

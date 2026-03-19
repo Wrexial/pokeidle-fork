@@ -13075,14 +13075,14 @@ function getPokemonSpriteUrl(s, u = !1, d = !1) {
         : `${o}/${s}.gif`
 }
 function getPokemonSpriteFallbackUrl(s, u = !1, d = !1){
-  const o = '/sprites/pokemon/versions/generation-v/black-white/animated'
+  const o = '/sprites/pokemon'
   return d && u
-    ? `${o}/back/shiny/substitute.gif`
+    ? `${o}/back/shiny/${s}.png`
     : d
-      ? `${o}/shiny/substitute.gif`
+      ? `${o}/shiny/${s}.png`
       : u
-        ? `${o}/back/substitute.gif`
-        : `${o}/substitute.gif`
+        ? `${o}/back/${s}.png`
+        : `${o}/${s}.png`
 
 }
 const jf = 0

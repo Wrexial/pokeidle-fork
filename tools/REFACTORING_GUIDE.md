@@ -1,3 +1,8 @@
+> **Status: done (differently).** The monolith has been split into ES modules
+> under `src/` (see `AGENTS.md` → "Source layout") using
+> `tools/decompile/split-modules.mjs`. This document is kept as historical
+> design context; the actual target structure differs from the sketch below.
+
 # Pokemon Idle Refactoring Guide
 
 ## Overview

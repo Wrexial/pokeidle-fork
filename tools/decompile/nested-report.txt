@@ -1,0 +1,89 @@
+### getItemInfo
+  L347  item name.description
+  L354  item name.description
+  L361  item name.description
+
+### gameReducer
+  L643  log  -
+  L867  box  -
+  L978  box  -
+  L1000  rule mode.levelThreshold.enabledBalls
+  L1153  team -
+  L1186  won  -
+  L1218  won  -
+  L1337  ball buyPrice.name
+  L1339  cost -
+  L1353  item buyPrice.name
+  L1355  cost -
+  L1528  box  splice
+  L1539  left speciesKey.level.isShiny
+  L1594  cost -
+  L1662  item duration.name
+
+### GameProvider
+  L1785  box  map
+  L1821  rule enabledBalls.pokeball
+  L1826  seen -
+
+### StarterSelect
+  L2082  type toLowerCase
+
+### resolveBattleTurn
+  L3630  side -
+  L3633  key  -
+  L3637  verb -
+
+### useGameLoop
+  L4051  ivs  -
+  L4462  locA unlockOrder
+  L4462  locB unlockOrder
+
+### StatsPanel
+  L4690  type toLowerCase
+
+### PokedexModal
+  L5259  next -
+  L5300  type toLowerCase
+
+### PartyBoxPanel
+  L5591  rect top.height
+
+### EncounterDetailPanel
+  L6053  type toLowerCase
+
+### RouteEncounterGrid
+  L6262  left weight
+  L6366  tier -
+
+### ShopPanel
+  L6435  item buyPrice.name.description
+  L6453  ball buyPrice.name.description
+
+### LocationPanel
+  L6601  left unlockOrder
+
+### CatchSettingsModal
+  L6833  rule -
+  L6853  rule -
+  L6872  rule enabledBalls
+  L6893  rule enabled
+  L7055  rule enabled
+
+### BagPanel
+  L7150  item name
+
+### GymPanel
+  L7273  team id.name.team.spriteKey
+
+### RewardShopModal
+  L7534  item name.description
+
+### TownMap
+  L7847  toId -
+  L7863  toId -
+
+### PatchNotesModal
+  L8403  item -
+
+### PatchNotesPage
+  L8499  item -

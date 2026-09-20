@@ -8,9 +8,10 @@ Guidance for AI coding agents working in this repository.
 catch, battle gym leaders / Elite 4 / champion). It is a client-only app; there
 is no backend and no persistence layer beyond the browser.
 
-The game logic is a bundled React 19 + Vite app committed to
-`assets/index.js`. Game *content* (species, moves, maps, trainers, sprites) is
-kept as editable JSON/PNG under `public/` and loaded at runtime.
+The game logic lives in `src/` as ES modules that import React 19 / ReactDOM
+from npm and are bundled by Vite. Game *content* (species, moves, maps,
+trainers, sprites) is kept as editable JSON/PNG under `public/` and loaded at
+runtime.
 
 ## Commands
 
@@ -28,6 +29,49 @@ Formatting: `.prettierrc.json` is the intended style (`semi: false`,
 as a dependency and there is no format script. Match the surrounding code
 style; do not reformat/minify unrelated code.
 
+`src/` was decompiled from a single minified bundle. The vendored React copy has
+been removed (React is now a real dependency), all identifiers were renamed to
+descriptive names, and the monolith was split into modules (see
+`tools/decompile/`).
+
+`tools/decompile/` holds AST-based, scope-safe rename tools (Babel). They emit
+minimal textual edits (no codegen), so formatting is preserved, and they refuse
+to run on collisions:
+
+```bash
+# top-level identifiers (applied; RENAMES is now empty)
+node tools/decompile/rename.mjs [--write]
+
+# function-scope locals (params + body vars) — see LOCAL_RENAMES
+node tools/decompile/rename-locals.mjs [--write] [--fn SomeFunction]
+
+# nested/block-scoped locals, targeted by declaration line — see NESTED_RENAMES
+node tools/decompile/rename-nested.mjs [--write] [--fn SomeFunction] [--pass2]
+
+# collapse `{ key: key }` object properties to shorthand
+node tools/decompile/collapse-shorthand.mjs [--write]
+
+# reporting
+node tools/decompile/dump-scopes.mjs [FunctionName]   # fn params + scope bindings
+node tools/decompile/dump-nested.mjs                   # nested-report.txt
+node tools/decompile/deps.mjs                          # top-level dependency graph
+
+# split the monolith into src/ modules (already applied)
+node tools/decompile/split-modules.mjs [--write]
+
+# split src/game/logic.js into game sub-modules (already applied)
+node tools/decompile/split-logic.mjs [--write]
+```
+
+The whole codebase has now been de-minified and modularised with these tools:
+top-level names, function parameters/body variables, and nested (block/callback)
+bindings are all descriptive, and the code is split into `src/`. The rename
+tools are effectively **one-shot records** of the renames that were applied
+(re-running a pass reports the old names as "not found"); to rename new code,
+add entries targeting the *current* names.
+`rename-nested.mjs` keys entries by declaration line, because short names are
+reused with different roles in sibling scopes (e.g. every `gameReducer` case).
+
 Python tools (the `tools/*.py` scrapers) use the checked-in venv:
 `.venv/Scripts/python.exe` (Windows). The repo is developed on Windows, so
 prefer cross-platform paths/commands.
@@ -37,16 +81,16 @@ prefer cross-platform paths/commands.
 ```
 index.html
   ├─ <script type="module" src="./assets/gameDataInjector.js">   (loads JSON)
-  └─ <script type="module" src="./assets/index.js">              (the app)
+  └─ <script type="module" src="./src/main.js">                  (the app)
 ```
 
 1. `assets/gameDataInjector.js` `fetch`es every file in `dataFilesToLoad`
    concurrently, stores them on `window.gameDataInjector.data`, and resolves
    `window.gameDataReady`.
-2. The hand-written prelude at the very top of `assets/index.js` awaits
-   `window.gameDataReady` and destructures the data into module-level variables
-   (`pokemonSpecies`, `evolutionData`, `moveData`, `mapData`, …).
-3. The rest of `assets/index.js` (the bundled React app) reads those variables.
+2. `src/data/gameData.js` awaits `window.gameDataReady` (top-level await) and
+   re-exports the data (`pokemonSpecies`, `evolutionData`, `moveData`,
+   `mapData`, …) plus derived maps (`preEvolutionMap`, `pokedexIndexes`, …).
+3. The rest of `src/` imports that data as needed.
 
 `assets/gameDataLoader.js` and `assets/dataIntegrationUtils.js` are optional
 helper/debug modules describing the integration; the live path is
@@ -67,7 +111,17 @@ window.gameDataDebug.lookupPokemon('pikachu')
 | Path | Purpose |
 | --- | --- |
 | `index.html` | Entry point; wires the two scripts above. |
-| `assets/index.js` | **The whole game app** (React 19 bundle, partially de-minified). Edit this for gameplay/UI changes. |
+| `src/main.js` | App entry: mounts `App` (plus `AppContent`). Renders the root. |
+| `src/data/gameData.js` | Loads and re-exports all game JSON + derived maps. |
+| `src/data/constants.js` | Static tables/constants (items, moves chart, prices, UI constants…). |
+| `src/game/pokemon.js` | Species/stat/exp/learnset math, sprite URLs, `createPokemon`. |
+| `src/game/combat.js` | Battle math: type chart, damage, stat stages, AI, `resolveBattleTurn`. |
+| `src/game/catching.js` | Catch rate/chance, ball selection, auto-catch rules, encounter rarity. |
+| `src/game/progression.js` | Encounters, EXP awards, unlocks, party sync, effects/items, roads. |
+| `src/game/reducer.js` | `initialGameState` + `gameReducer` (the whole state machine). |
+| `src/game/context.js` | `GameContext`, `GameProvider`, `useGame`. |
+| `src/hooks.js` | `useTypewriter`, `useIsMobile`, `useGameLoop`. |
+| `src/components/*.js` | UI, grouped by area (`battle`, `party`, `pokedex`, `shop`, `location`, `settings`, `layout`, `common`). |
 | `assets/gameDataInjector.js` | Loads `public/data/*.json` into `window.gameDataInjector`. Add new data files here. |
 | `assets/style.css` | All game styling + CSS variables (theme colors). |
 | `assets/fonts.css` | Local "Press Start 2P" `@font-face` declarations. |
@@ -77,7 +131,7 @@ window.gameDataDebug.lookupPokemon('pikachu')
 | `public/backgrounds/` | Battle/location backgrounds. |
 | `public/heal-animation-web.mp4` | Healing animation. |
 | `ui/` | UI textures (parchment, wood button). |
-| `tools/` | One-off scrapers/converters for generating the data JSON. Not part of the build. |
+| `tools/` | One-off scrapers/converters for generating the data JSON, plus `tools/decompile/` (AST rename tool). Not part of the build. |
 | `dist/` | Build output. Gitignored — never edit or commit. |
 
 ## Data files (`public/data/`)
@@ -121,23 +175,26 @@ Data conventions:
 - Sprites are referenced by that `id`; a missing `.gif` falls back to the
   static `.png` (see commit "Fallback to static img").
 
-When adding/renaming species or keys, grep `assets/index.js` for the key —
-the bundle references keys and ids directly, and cross-file references
+When adding/renaming species or keys, grep `src/` for the key —
+the code references keys and ids directly, and cross-file references
 (evolutions, encounters, learnsets) must stay consistent.
 
-## Editing `assets/index.js`
+## Source layout (`src/`)
 
-- It is a **single ~21k-line file**: a small hand-written prelude followed by a
-  partially de-minified React bundle. It is the source of truth for game logic;
-  recent commits edit it directly.
-- It is *not* generated by `npm run build` from a `src/` directory (there is no
-  `src/`). The `src/` modular split described in `tools/REFACTORING_GUIDE.md`
-  was planned but **not implemented**.
-- Prefer targeted edits. When searching, use `rg`/grep with the descriptive
-  variable names (many were de-minified, e.g. `mapData`, `encounterData`,
-  `gymLeaderData`); some internal names are still minified.
-- React 19, `React.createElement`/`jsx` style. Keep changes consistent with
-  the existing pattern in the file.
+- Split into modules by layer. Imports form a DAG (no cycles). The rough order
+  is `data → game/pokemon|combat → game/progression → game/catching → game/reducer
+  → game/context → hooks → components → main`.
+- All identifiers are descriptive (top-level, params, locals, and nested
+  block/callback bindings). Short names only remain where they read naturally
+  (`id`, `ms`, `item`, `rule`, `key`, `type`, …).
+- React 19, `jsx`/`jsxs` runtime calls (imported from `react/jsx-runtime`); there
+  is no JSX syntax, so no React Vite plugin is needed. Keep changes consistent
+  with the existing `jsx('div', { ... })` pattern.
+- `tools/index-backup.js` still contains the original minified 26k-line bundle
+  if you ever need to compare against the pre-decompilation source.
+- To add/rename/move modules, edit `MODULES` in
+  `tools/decompile/split-modules.mjs` and re-run it (regenerates `src/` from the
+  former monolith — only do this while `tools/index-backup.js` still matches).
 
 ## Tools (`tools/`)
 

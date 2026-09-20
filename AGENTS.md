@@ -278,7 +278,10 @@ One-off scripts used to build the data JSON (not run during dev/build):
   writing `regions.json` (region metadata + per-region legendary pools).
   Idempotent — safe to re-run; tags Kanto locations/leaders with
   `region: "kanto"`. Routes without scraped encounters (e.g. Paldea's province
-  areas) fall back to a generation-based species slice.
+  areas) fall back to a generation-based species slice. Encounter levels are
+  reassigned by `levelRoutes()`: each region has a disjoint level band
+  (`regionBand()`), and its routes are spread across it in order of their real
+  difficulty, so zones ramp smoothly instead of inheriting huge raw ranges.
 - `RawMoveData`, `index-backup.js` — large reference/backup data; leave alone.
 - `kill-vite.cjs` — kills orphaned Vite dev servers on the port range (Windows
   `taskkill`, else `kill`). Run `npm run kill-vite`, or `--dry` to preview.

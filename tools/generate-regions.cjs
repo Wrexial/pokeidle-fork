@@ -36,6 +36,18 @@ const REGIONS = [
   { id: 'paldea', name: 'Paldea', gen: 9, entry: 'los-platos' },
 ]
 const GEN_BASE_LEVEL = { 2: 28, 3: 37, 4: 46, 5: 55, 6: 64, 7: 73, 8: 82, 9: 91 }
+// The regions form a linear level ramp: each region's band runs from its start
+// level up to just below the next region's start, so wild Pokemon scale with
+// your progress and regions don't overlap.
+const REGION_ORDER = ['kanto', 'johto', 'hoenn', 'sinnoh', 'unova', 'kalos', 'alola', 'galar', 'paldea']
+const REGION_START_LEVEL = { kanto: 5, johto: 28, hoenn: 37, sinnoh: 46, unova: 55, kalos: 64, alola: 73, galar: 82, paldea: 91 }
+const regionBand = (regionId) => {
+  const index = REGION_ORDER.indexOf(regionId)
+  const start = REGION_START_LEVEL[regionId] ?? 5
+  const end =
+    index + 1 < REGION_ORDER.length ? REGION_START_LEVEL[REGION_ORDER[index + 1]] - 1 : 100
+  return { start, end }
+}
 const TRAINER_CLASSES = ['youngster', 'lass', 'bugCatcher', 'hiker', 'camper', 'beauty', 'coolTrainer', 'psychic', 'scientist', 'ace', 'blackbelt', 'swimmer']
 const LEADER_SPRITES = ['acetrainer', 'hiker', 'beauty', 'blackbelt', 'psychic', 'scientist', 'camper', 'swimmer', 'gentleman', 'juggler']
 const BADGE_COLORS = ['#a0a0a0', '#4878b0', '#c8a030', '#48a048', '#b83028', '#a060c0', '#e08040', '#40c0c0']
@@ -113,6 +125,34 @@ const makeTeam = (list, offset, size, baseLevel, step = 1) =>
     speciesKey: list[(offset + i) % list.length].key,
     level: clampLevel(baseLevel + i * step),
   }))
+
+/**
+ * Dynamic per-zone levelling: spread a region's routes across its level band,
+ * following the order of the routes' real difficulty (median level). Each zone
+ * gets a tight level window instead of one huge aggregate range.
+ *
+ * @param {string} regionId
+ * @param {Record<string, { minLevel: number, maxLevel: number }[]>} entriesByKey
+ */
+function levelRoutes(regionId, entriesByKey) {
+  const { start, end } = regionBand(regionId)
+  const span = end - start
+  const keys = Object.keys(entriesByKey).filter((key) => entriesByKey[key]?.length)
+  const centerOf = (key) => {
+    const mins = entriesByKey[key].map((entry) => entry.minLevel).sort((a, b) => a - b)
+    return mins[Math.floor(mins.length / 2)] ?? start
+  }
+  const ranked = [...keys].sort((a, b) => centerOf(a) - centerOf(b))
+  const rank = new Map(ranked.map((key, i) => [key, i]))
+  for (const key of keys) {
+    const t = keys.length <= 1 ? 0 : rank.get(key) / (keys.length - 1)
+    const zoneLevel = Math.max(2, Math.min(100, Math.round(start + t * span)))
+    for (const entry of entriesByKey[key]) {
+      entry.minLevel = zoneLevel
+      entry.maxLevel = Math.max(zoneLevel, Math.min(100, zoneLevel + 2))
+    }
+  }
+}
 
 // --- generate ----------------------------------------------------------------
 const regions = [{ id: 'kanto', name: 'Kanto', generation: 1, order: 1, entry: 'palletTown', startLevel: 5, raidPool: KANTO_LEGENDARIES }]
@@ -196,6 +236,7 @@ for (const region of REGIONS) {
   }
   const place = (node) => placeAt(positions[node]?.x ?? 50, positions[node]?.y ?? 50)
   const base = GEN_BASE_LEVEL[gen]
+  const band = regionBand(regionId)
   const starters = GEN_STARTERS[gen]
   const all = speciesForGen(gen)
   const wild = all.filter((s) => s.catchRate > 3 && !starters.includes(s.key))
@@ -210,22 +251,16 @@ for (const region of REGIONS) {
   }
   regions.push(regionObj)
 
-  // encounters: real per-route species when available, else a generation slice
+  // encounters: real per-route species when available, else a generation slice.
+  // Levels here are placeholders; levelRoutes() re-bands them per zone below.
   const perRoute = 8
   const routeEncounter = {}
   routeNodes.forEach((node, i) => {
-    const minLevel = clampLevel(base + Math.max(0, depth[node] - 1) * 2),
-      maxLevel = clampLevel(minLevel + 8),
+    const placeholder = clampLevel(base + Math.max(0, depth[node] - 1) * 2),
       real = realEncounters[regionId]?.[node]
     let encounters
-    const levelOffset = base - 2
     if (real && real.length) {
-      // shift authentic levels into this region's level band
-      encounters = real.map((e) => ({
-        ...e,
-        minLevel: clampLevel(e.minLevel + levelOffset),
-        maxLevel: clampLevel(e.maxLevel + levelOffset),
-      }))
+      encounters = real.map((e) => ({ ...e }))
     } else if (wild.length) {
       const start =
         routeNodes.length <= 1
@@ -236,18 +271,34 @@ for (const region of REGIONS) {
         .map((s, idx) => ({
           speciesKey: s.key,
           weight: encounterWeight(s, idx),
-          minLevel,
-          maxLevel,
+          minLevel: placeholder,
+          maxLevel: placeholder,
         }))
     } else {
       encounters = []
     }
-    if (i === 0)
-      for (const key of starters)
-        if (species[key] && !encounters.some((e) => e.speciesKey === key))
-          encounters.push({ speciesKey: key, weight: 1, minLevel, maxLevel })
     routeEncounter[node] = { name: display[node] ?? node, encounters }
   })
+
+  // dynamic per-zone levelling across this region's routes
+  const routeEntries = {}
+  for (const node of routeNodes) routeEntries[locId(regionId, node)] = routeEncounter[node].encounters
+  levelRoutes(regionId, routeEntries)
+
+  // starters are a rare find on the first route (added after levelling so they
+  // don't skew the difficulty ranking)
+  const firstBucket = routeNodes.length ? routeEncounter[routeNodes[0]].encounters : null
+  if (firstBucket) {
+    const zoneLevel = firstBucket[0]?.minLevel ?? base
+    for (const key of starters)
+      if (species[key] && !firstBucket.some((e) => e.speciesKey === key))
+        firstBucket.push({
+          speciesKey: key,
+          weight: 1,
+          minLevel: zoneLevel,
+          maxLevel: clampLevel(zoneLevel + 2),
+        })
+  }
 
   // Raid pool = this generation's species that can't be obtained in the region
   // (not found in the wild and not reachable by evolving a wild Pokemon).
@@ -321,7 +372,7 @@ for (const region of REGIONS) {
           id: `${id}_t${i + 1}`,
           name: `${name} Trainer ${i + 1}`,
           trainerClass: TRAINER_CLASSES[(gen * 3 + i) % TRAINER_CLASSES.length],
-          team: makeTeam(pool, i * 2, 2, clampLevel(base + i * 2), 1),
+          team: makeTeam(pool, i * 2, 2, clampLevel(band.start + 1 + i), 1),
         }))
     }
   }
@@ -372,7 +423,7 @@ for (const region of REGIONS) {
       badgeName: `${name} Badge ${i + 1}`,
       badgeColor: BADGE_COLORS[i % BADGE_COLORS.length],
       spriteKey: LEADER_SPRITES[(gen + i) % LEADER_SPRITES.length],
-      team: makeTeam(roster, i * 3, 3, clampLevel(base + i * 3), 1),
+      team: makeTeam(roster, i * 3, 3, clampLevel(band.start + 1 + i), 1),
     })
   })
   ;(ELITE_FOUR[regionId] ?? []).forEach((memberName, i) => {
@@ -382,7 +433,7 @@ for (const region of REGIONS) {
       title: `${name} Elite Four`,
       region: regionId,
       spriteKey: 'acetrainer',
-      team: makeTeam(roster, 24 + i * 4, 5, clampLevel(base + 28 + i * 2), 1),
+      team: makeTeam(roster, 24 + i * 4, 5, clampLevel(band.end - 3 + i), 1),
     })
   })
   champData.push({
@@ -391,7 +442,7 @@ for (const region of REGIONS) {
     title: `${name} Champion`,
     region: regionId,
     spriteKey: 'acetrainer',
-    team: makeTeam(roster, 44, 6, clampLevel(base + 38), 1),
+    team: makeTeam(roster, 44, 6, clampLevel(band.end), 1),
   })
 }
 
@@ -410,11 +461,26 @@ if (realEncounters.kanto) {
       refreshed++
     }
   }
-  const safari = encounterData.safariZone
-  if (safari)
+  // Kanto gets the same dynamic per-zone levelling as the other regions
+  const kantoEntries = {}
+  for (const loc of Object.values(mapData)) {
+    if ((loc.region ?? 'kanto') !== 'kanto' || !loc.routeKey) continue
+    if (encounterData[loc.routeKey]) kantoEntries[loc.routeKey] = encounterData[loc.routeKey].encounters
+  }
+  levelRoutes('kanto', kantoEntries)
+  // re-add the Kanto starters as rare Safari Zone finds, at that zone's level
+  const safariAfter = encounterData.safariZone
+  if (safariAfter) {
+    const zoneLevel = safariAfter.encounters[0]?.minLevel ?? 20
     for (const key of ['bulbasaur', 'charmander', 'squirtle'])
-      if (species[key] && !safari.encounters.some((e) => e.speciesKey === key))
-        safari.encounters.push({ speciesKey: key, weight: 1, minLevel: 20, maxLevel: 25 })
+      if (species[key] && !safariAfter.encounters.some((e) => e.speciesKey === key))
+        safariAfter.encounters.push({
+          speciesKey: key,
+          weight: 1,
+          minLevel: zoneLevel,
+          maxLevel: clampLevel(zoneLevel + 2),
+        })
+  }
   console.log('kanto buckets refreshed:', refreshed)
 }
 

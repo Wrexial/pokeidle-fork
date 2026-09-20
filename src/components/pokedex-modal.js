@@ -8,19 +8,37 @@ import { useGame } from '../game/context.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
 import { PokedexTile } from './pokedex-tile.js'
 
+const GEN_RANGES = [
+  [1, 151], [152, 251], [252, 386], [387, 493], [494, 649],
+  [650, 721], [722, 809], [810, 905], [906, 1025],
+]
+
 /** @param {{ onClose: () => void }} props */
 export function PokedexModal({ onClose }) {
   const { state } = useGame(),
     [selected, setSelected] = React.useState(/** @type {string | null} */ (null)),
+    [gen, setGen] = React.useState(0),
     getStatus = /** @param {string} speciesKey */ (speciesKey) =>
       state.pokedexCaught.includes(speciesKey)
         ? 'caught'
         : state.pokedexSeen.includes(speciesKey)
           ? 'seen'
           : 'unseen',
-    caughtCount = state.pokedexCaught.length,
-    seenCount = new Set([...state.pokedexSeen, ...state.pokedexCaught]).size,
-    totalEntries = pokedexIndexes.length,
+    caughtSet = new Set(state.pokedexCaught),
+    seenSet = new Set([...state.pokedexSeen, ...state.pokedexCaught]),
+    filteredIndexes = React.useMemo(
+      () =>
+        gen === 0
+          ? pokedexIndexes
+          : pokedexIndexes.filter(
+              (entry) =>
+                entry[1].id >= GEN_RANGES[gen - 1][0] && entry[1].id <= GEN_RANGES[gen - 1][1]
+            ),
+      [gen]
+    ),
+    caughtCount = filteredIndexes.filter(([speciesKey]) => caughtSet.has(speciesKey)).length,
+    seenCount = filteredIndexes.filter(([speciesKey]) => seenSet.has(speciesKey)).length,
+    totalEntries = filteredIndexes.length,
     selectedSpecies = selected ? pokemonSpecies[selected] : null,
     selectedStatus = selected ? getStatus(selected) : 'unseen',
     statRows = selectedSpecies
@@ -83,10 +101,26 @@ export function PokedexModal({ onClose }) {
           ],
         }),
         jsx('div', {
+          className: 'pokedex-gen-tabs',
+          children: [{ id: 0, label: 'All' }]
+            .concat(Array.from({ length: 9 }, (_, i) => ({ id: i + 1, label: String(i + 1) })))
+            .map((option) =>
+              jsx(
+                'button',
+                {
+                  className: `pokedex-gen-tab${gen === option.id ? ' active' : ''}`,
+                  onClick: () => setGen(option.id),
+                  children: option.label,
+                },
+                option.id
+              )
+            ),
+        }),
+        jsx('div', {
           className: 'pokedex-modal-grid-scroll',
           children: jsx('div', {
             className: 'pokedex-grid',
-            children: pokedexIndexes.map(([speciesKey]) => {
+            children: filteredIndexes.map(([speciesKey]) => {
               const status = getStatus(speciesKey)
               return jsx(
                 PokedexTile,

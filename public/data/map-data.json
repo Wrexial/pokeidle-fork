@@ -240,7 +240,11 @@
    "palletTown",
    "viridianCity"
   ],
-  "unlock": {},
+  "unlock": {
+   "requires": [
+    "palletTown"
+   ]
+  },
   "unlockOrder": 0,
   "position": {
    "x": 22,
@@ -257,7 +261,10 @@
    "route1",
    "route21"
   ],
-  "unlock": {},
+  "unlock": {
+   "entry": true,
+   "previous": "paldea"
+  },
   "unlockOrder": 0,
   "position": {
    "x": 22,
@@ -1434,7 +1441,8 @@
    "johto-route-29"
   ],
   "unlock": {
-   "championDefeated": "kanto"
+   "entry": true,
+   "previous": "kanto"
   },
   "unlockOrder": 100,
   "position": {
@@ -2393,7 +2401,8 @@
    "hoenn-route-101"
   ],
   "unlock": {
-   "championDefeated": "johto"
+   "entry": true,
+   "previous": "johto"
   },
   "unlockOrder": 131,
   "position": {
@@ -3970,7 +3979,8 @@
    "sinnoh-route-201"
   ],
   "unlock": {
-   "championDefeated": "hoenn"
+   "entry": true,
+   "previous": "hoenn"
   },
   "unlockOrder": 182,
   "position": {
@@ -5364,7 +5374,8 @@
    "unova-route-14"
   ],
   "unlock": {
-   "championDefeated": "sinnoh"
+   "entry": true,
+   "previous": "sinnoh"
   },
   "unlockOrder": 227,
   "position": {
@@ -6848,7 +6859,8 @@
    "kalos-shalour-city"
   ],
   "unlock": {
-   "championDefeated": "unova"
+   "entry": true,
+   "previous": "unova"
   },
   "unlockOrder": 271,
   "position": {
@@ -8128,7 +8140,8 @@
    "alola-route-1"
   ],
   "unlock": {
-   "championDefeated": "kalos"
+   "entry": true,
+   "previous": "kalos"
   },
   "unlockOrder": 310,
   "position": {
@@ -8921,7 +8934,8 @@
    "galar-route-1"
   ],
   "unlock": {
-   "championDefeated": "alola"
+   "entry": true,
+   "previous": "alola"
   },
   "unlockOrder": 336,
   "position": {
@@ -9692,7 +9706,8 @@
    "paldea-south-province-area-one"
   ],
   "unlock": {
-   "championDefeated": "galar"
+   "entry": true,
+   "previous": "galar"
   },
   "unlockOrder": 358,
   "position": {

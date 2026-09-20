@@ -197,8 +197,11 @@ Data conventions:
   `battlesAtLocation`, `badgesRequired`, `championDefeated` (a region id, or
   `true` meaning Kanto), and `requires` (locations that must already be
   unlocked) — all resolved to a fixpoint in `computeUnlockedLocations`. Region
-  entry towns require the previous region's champion; other routes unlock after
-  winning battles at their parent location.
+  **entry towns** use `{ entry: true, previous: '<regionId>' }`: they open if the
+  region is the player's `startRegion`, otherwise only once the `previous`
+  region's Champion is beaten (Kanto's previous is Paldea, so the chain cycles
+  and nothing is unreachable). Other routes unlock after winning battles at their
+  parent location.
 - `regions.json` also carries `raidPool` — the generation's species that cannot
   be obtained in that region (not in any wild table and not reachable by
   evolution). Those are the Pokemon found on the region's Raid Island.

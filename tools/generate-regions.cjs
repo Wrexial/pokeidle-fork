@@ -272,7 +272,7 @@ for (const region of REGIONS) {
     const isRoute = isRouteNode(node)
     const unlock =
       node === entryNode
-        ? { championDefeated: prevRegionId }
+        ? { entry: true, previous: prevRegionId }
         : depth[node] === 1
           ? { requires: [locId(regionId, entryNode)] }
           : parent[node]
@@ -442,6 +442,12 @@ for (const loc of Object.values(mapData)) {
     best.connections.push(loc.id)
   }
 }
+
+// Region entry points are gated on the player's starting region: a start region
+// is open immediately, and every other region opens by beating the previous
+// region's Champion (cycling Kanto <- Paldea so nothing is unreachable).
+if (mapData.palletTown) mapData.palletTown.unlock = { entry: true, previous: 'paldea' }
+if (mapData.route1) mapData.route1.unlock = { requires: ['palletTown'] }
 
 write('regions.json', regions)
 write('map-data.json', mapData)

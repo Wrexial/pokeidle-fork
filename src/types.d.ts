@@ -119,6 +119,7 @@ type TrainerBattle = {
 
 type GameState = {
   phase: string
+  startRegion: string
   playerPokemon: Pokemon | null
   enemyPokemon: any
   party: Pokemon[]
@@ -199,6 +200,10 @@ type MapLocation = {
     badgesRequired?: number
     championDefeated?: boolean | string
     requires?: string[]
+    /** region-entry gate: unlocked if it's the player's start region, or if
+     * the `previous` region's champion has been beaten */
+    entry?: boolean
+    previous?: string
   }
   unlockOrder: number
   position: { x: number; y: number }

@@ -10,6 +10,7 @@ import { computeUnlockedLocations, isActiveEffectItem, loadActivePokemonFromPart
 /** @type {GameState} */
 export const initialGameState = {
   phase: 'starterSelect',
+  startRegion: 'kanto',
   playerPokemon: null,
   enemyPokemon: null,
   currentRoute: 'route1',
@@ -88,6 +89,7 @@ export function gameReducer(state, action) {
       return {
         ...state,
         phase: 'idle',
+        startRegion: regionId,
         playerPokemon: starterPokemon,
         party: [starterPokemon],
         nextPokemonId: state.nextPokemonId + 1,

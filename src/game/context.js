@@ -104,6 +104,7 @@ export function GameProvider({ children }) {
             {
               ...initialState,
               phase: 'idle',
+              startRegion: saved.startRegion || 'kanto',
               playerPokemon: party[0] || playerPokemon,
               currentRoute: saved.currentRoute || initialState.currentRoute,
               speed: saved.speed || initialState.speed,
@@ -173,6 +174,7 @@ export function GameProvider({ children }) {
       if (state.playerPokemon && (state.phase === 'idle' || state.phase === 'victory')) {
         const saveData = {
           playerPokemon: state.playerPokemon,
+          startRegion: state.startRegion,
           currentRoute: state.currentRoute,
           speed: state.speed,
           wildBattlesWon: state.wildBattlesWon,

@@ -2,7 +2,7 @@
 
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
 import { martShopItems } from '../data/items.js'
-import { encounterData, raidPoolFor, mapData, pokemonSpecies } from '../data/gameData.js'
+import { encounterData, mapData, pokemonSpecies, regions, raidPoolFor } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { RouteEncounterGrid } from './route-encounter-grid.js'
 import { ShopPanel } from './shop-panel.js'
@@ -19,7 +19,8 @@ export function LocationPanel({ onOpenCatchSettings }) {
           unlockRule.battlesAtLocation !== void 0 ||
           unlockRule.badgesRequired !== void 0 ||
           unlockRule.championDefeated ||
-          unlockRule.requires !== void 0
+          unlockRule.requires !== void 0 ||
+          unlockRule.entry !== void 0
         )
       })
       .sort((left, right) => left.unlockOrder - right.unlockOrder)[0],
@@ -192,6 +193,18 @@ export function LocationPanel({ onOpenCatchSettings }) {
                     met: state.unlockedLocations.includes(requiredId),
                   })
                 ),
+              unlockRule.entry &&
+                requirements.push({
+                  label: unlockRule.previous
+                    ? `Beat the ${
+                        regions.find((region) => region.id === unlockRule.previous)?.name ??
+                        unlockRule.previous
+                      } Champion`
+                    : 'Start in this region',
+                  current: unlockRule.previous && state.defeatedChampions.includes(unlockRule.previous) ? 1 : 0,
+                  required: 1,
+                  met: !unlockRule.previous || state.defeatedChampions.includes(unlockRule.previous),
+                }),
               jsxs('div', {
                 className: 'location-next-unlock',
                 children: [

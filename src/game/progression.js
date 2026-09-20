@@ -86,7 +86,12 @@ export function computeUnlockedLocations(state) {
           !state.defeatedChampions.includes(
             unlockRule.championDefeated === true ? 'kanto' : unlockRule.championDefeated
           )) ||
-        (unlockRule.requires && unlockRule.requires.some((id) => !unlocked.has(id)))
+        (unlockRule.requires && unlockRule.requires.some((id) => !unlocked.has(id))) ||
+        (unlockRule.entry &&
+          !(
+            state.startRegion === (location.region ?? 'kanto') ||
+            (unlockRule.previous && state.defeatedChampions.includes(unlockRule.previous))
+          ))
       if (!blocked) {
         unlocked.add(locationId)
         changed = true

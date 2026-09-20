@@ -13,7 +13,7 @@ export const CHANGELOG = [
           heading: 'New Regions',
           items: [
             'Eight new regions are now reachable: Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar and Paldea',
-            "Each region unlocks after you beat the previous region's Elite Four and Champion",
+            'Your chosen region is open from the start; every other region unlocks after you beat the previous region\u2019s Elite Four and Champion',
             'Within a region, routes unlock as you win battles on the previous route',
             'Every region reproduces its real map — actual towns and routes with their genuine connections — plus a Raid Island and gyms',
           ],

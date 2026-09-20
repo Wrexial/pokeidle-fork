@@ -316,6 +316,10 @@ One-off scripts used to build the data JSON (not run during dev/build):
   reassigned by `levelRoutes()`: each region has a disjoint level band
   (`regionBand()`), and its routes are spread across it in order of their real
   difficulty, so zones ramp smoothly instead of inheriting huge raw ranges.
+  Gym leaders are placed in their real city via `GYM_TOWNS` (matched against
+  the region's town nodes by display name), falling back to spreading them
+  across towns in BFS order — Alola has island trials, not gyms, so it always
+  falls back.
 - `RawMoveData`, `index-backup.js` — large reference/backup data; leave alone.
 - `kill-vite.cjs` — kills orphaned Vite dev servers on the port range (Windows
   `taskkill`, else `kill`). Run `npm run kill-vite`, or `--dry` to preview.

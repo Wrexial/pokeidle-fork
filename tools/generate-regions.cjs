@@ -68,6 +68,21 @@ const GYM_LEADERS = {
   galar: ['Milo', 'Nessa', 'Kabu', 'Bea', 'Opal', 'Gordie', 'Piers', 'Raihan'],
   paldea: ['Katy', 'Brassius', 'Iono', 'Kofu', 'Larry', 'Ryme', 'Tulip', 'Grusha'],
 }
+// The real town each leader sits in, in the same order as GYM_LEADERS (matched
+// by display name against the region's scraped town nodes). This is why the
+// zone lock is meaningful: e.g. Falkner is in Violet City, not the entry town.
+// Alola has island trials rather than gyms (and no Poni town), so it keeps the
+// spread-across-towns fallback.
+const GYM_TOWNS = {
+  johto: ['Violet City', 'Azalea Town', 'Goldenrod City', 'Ecruteak City', 'Cianwood City', 'Olivine City', 'Mahogany Town', 'Blackthorn City'],
+  hoenn: ['Rustboro City', 'Dewford Town', 'Mauville City', 'Lavaridge Town', 'Petalburg City', 'Fortree City', 'Mossdeep City', 'Sootopolis City'],
+  sinnoh: ['Oreburgh City', 'Eterna City', 'Veilstone City', 'Pastoria City', 'Hearthome City', 'Canalave City', 'Snowpoint City', 'Sunyshore City'],
+  unova: ['Striaton City', 'Nacrene City', 'Castelia City', 'Nimbasa City', 'Driftveil City', 'Mistralton City', 'Icirrus City', 'Opelucid City'],
+  kalos: ['Santalune City', 'Cyllage City', 'Shalour City', 'Coumarine City', 'Lumiose City', 'Laverre City', 'Anistar City', 'Snowbelle City'],
+  galar: ['Turffield', 'Hulbury', 'Motostoke', 'Stow On Side', 'Ballonlea', 'Circhester', 'Spikemuth', 'Hammerlocke'],
+  // Grusha's gym is on Glaseado Mountain (not a town); Zapapico is the closest.
+  paldea: ['Cortondo', 'Artazon', 'Levincia', 'Cascarrafa', 'Medali', 'Montenevera', 'Alfornada', 'Zapapico'],
+}
 const ELITE_FOUR = {
   johto: ['Will', 'Koga', 'Bruno', 'Karen'], hoenn: ['Sidney', 'Phoebe', 'Glacia', 'Drake'],
   sinnoh: ['Aaron', 'Bertha', 'Flint', 'Lucian'], unova: ['Shauntal', 'Grimsley', 'Caitlin', 'Marshal'],
@@ -438,12 +453,17 @@ for (const region of REGIONS) {
   const gymTowns = townNodes.length ? townNodes : [entryNode]
   const roster = wild.length ? wild : all
   ;(GYM_LEADERS[regionId] ?? []).forEach((leaderName, i) => {
+    const preferredTown = (GYM_TOWNS[regionId] ?? [])[i],
+      preferredNode = preferredTown
+        ? townNodes.find((node) => (display[node] ?? node) === preferredTown)
+        : null,
+      townNode = preferredNode ?? gymTowns[i % gymTowns.length]
     gymData.push({
       id: `${regionId}-gym-${i + 1}`,
       name: leaderName,
       title: `${name} Gym Leader`,
       region: regionId,
-      locationKey: locId(regionId, gymTowns[i % gymTowns.length]),
+      locationKey: locId(regionId, townNode),
       badgeName: `${name} Badge ${i + 1}`,
       badgeColor: BADGE_COLORS[i % BADGE_COLORS.length],
       spriteKey: LEADER_SPRITES[(gen + i) % LEADER_SPRITES.length],

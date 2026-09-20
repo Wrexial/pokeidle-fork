@@ -130,7 +130,7 @@ export function BattleScene() {
                     }),
                     jsx('p', {
                       children:
-                        'Click on Route 1 to begin your pokemon adventure!',
+                        'Head out to a route to begin your Pokemon adventure!',
                     }),
                     jsxs('div', {
                       className: 'info-shiny-stats',

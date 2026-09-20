@@ -34,7 +34,8 @@ export const CHANGELOG = [
         {
           heading: 'Regional Starters',
           items: [
-            "Each region's three starter Pokemon can be found as rare encounters on its first route",
+            "Pick a starter from any of the nine regions \u2014 your choice determines where your journey begins",
+            "Each region's three starter Pokemon can also be found as rare encounters on its first route",
           ],
         },
         {

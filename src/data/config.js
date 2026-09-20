@@ -17,7 +17,20 @@ export const shinyFullOddsChance = 8192
 
 export const shinyWithCharmChance = 4096
 
-export const starterSpecies = ['bulbasaur', 'charmander', 'squirtle']
+/** @type {Record<string, string[]>} */
+export const regionalStarters = {
+  kanto: ['bulbasaur', 'charmander', 'squirtle'],
+  johto: ['chikorita', 'cyndaquil', 'totodile'],
+  hoenn: ['treecko', 'torchic', 'mudkip'],
+  sinnoh: ['turtwig', 'chimchar', 'piplup'],
+  unova: ['snivy', 'tepig', 'oshawott'],
+  kalos: ['chespin', 'fennekin', 'froakie'],
+  alola: ['rowlet', 'litten', 'popplio'],
+  galar: ['grookey', 'scorbunny', 'sobble'],
+  paldea: ['sprigatito', 'fuecoco', 'quaxly'],
+}
+
+export const starterSpecies = regionalStarters.kanto
 
 export const SAVE_KEY_ALT = 'pokemon-idle-save'
 

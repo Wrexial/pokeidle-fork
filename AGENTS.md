@@ -188,6 +188,10 @@ Data conventions:
 - Some special/placeholder forms use `"id": 0` intentionally (see commit
   "All id's now 0 for special pokemon"). Region wild encounters only use species
   with `id > 0` (forms with ids above 1025 are excluded).
+- `regions.json` entries carry `entry` (the starting town's location id) and
+  `startLevel`; `SELECT_STARTER` uses these to place the player: choosing a
+  region's starter starts the run on that region's first route. Regional
+  starters live in `regionalStarters` in `src/data/config.js`.
 - `map-data.json` locations carry a `region` id; wild routes also reference an
   `encounter-data.json` bucket via `routeKey`. Unlock rules support
   `battlesAtLocation`, `badgesRequired`, `championDefeated`, and `requires`

@@ -4,6 +4,8 @@
   "name": "Kanto",
   "generation": 1,
   "order": 1,
+  "entry": "palletTown",
+  "startLevel": 5,
   "legendaries": [
    {
     "speciesKey": "articuno",
@@ -32,6 +34,8 @@
   "name": "Johto",
   "generation": 2,
   "order": 2,
+  "entry": "johto-new-bark-town",
+  "startLevel": 28,
   "legendaries": [
    {
     "speciesKey": "raikou",
@@ -60,6 +64,8 @@
   "name": "Hoenn",
   "generation": 3,
   "order": 3,
+  "entry": "hoenn-littleroot-town",
+  "startLevel": 37,
   "legendaries": [
    {
     "speciesKey": "beldum",
@@ -116,6 +122,8 @@
   "name": "Sinnoh",
   "generation": 4,
   "order": 4,
+  "entry": "sinnoh-twinleaf-town",
+  "startLevel": 46,
   "legendaries": [
    {
     "speciesKey": "uxie",
@@ -172,6 +180,8 @@
   "name": "Unova",
   "generation": 5,
   "order": 5,
+  "entry": "unova-nuvema-town",
+  "startLevel": 55,
   "legendaries": [
    {
     "speciesKey": "victini",
@@ -232,6 +242,8 @@
   "name": "Kalos",
   "generation": 6,
   "order": 6,
+  "entry": "kalos-vaniville-town",
+  "startLevel": 64,
   "legendaries": [
    {
     "speciesKey": "zygarde",
@@ -256,6 +268,8 @@
   "name": "Alola",
   "generation": 7,
   "order": 7,
+  "entry": "alola-iki-town",
+  "startLevel": 73,
   "legendaries": [
    {
     "speciesKey": "type: null",
@@ -308,6 +322,8 @@
   "name": "Galar",
   "generation": 8,
   "order": 8,
+  "entry": "galar-postwick",
+  "startLevel": 82,
   "legendaries": [
    {
     "speciesKey": "kubfu",
@@ -352,6 +368,8 @@
   "name": "Paldea",
   "generation": 9,
   "order": 9,
+  "entry": "paldea-los-platos",
+  "startLevel": 91,
   "legendaries": [
    {
     "speciesKey": "koraidon",

@@ -1,14 +1,21 @@
 // Split from a grouped component file — see tools/decompile/split-components.mjs
 
+import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
-import { starterSpecies } from '../data/config.js'
-import { pokemonSpecies } from '../data/gameData.js'
+import { regionalStarters } from '../data/config.js'
+import { pokemonSpecies, regions } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { calculatePokemonStats, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
 import { checkShinyOdds } from '../game/progression.js'
 
 export function StarterSelect() {
   const { dispatch } = useGame()
+  const [regionId, setRegionId] = React.useState('kanto'),
+    regionOrder = React.useMemo(() => [...regions].sort((a, b) => a.order - b.order), []),
+    region = regions.find((candidate) => candidate.id === regionId),
+    starters = regionalStarters[regionId] ?? regionalStarters.kanto,
+    startLevel = region?.startLevel ?? 5
+
   return jsxs('div', {
     className: 'starter-select',
     children: [
@@ -16,18 +23,37 @@ export function StarterSelect() {
         className: 'starter-title',
         children: 'Choose Your Starter!',
       }),
+      jsx('p', {
+        className: 'starter-subtitle',
+        children: 'Your choice decides which region your journey begins in.',
+      }),
+      jsx('div', {
+        className: 'map-region-tabs starter-region-tabs',
+        children: regionOrder.map((candidate) =>
+          jsx(
+            'button',
+            {
+              className: `map-region-tab${regionId === candidate.id ? ' active' : ''}`,
+              onClick: () => setRegionId(candidate.id),
+              children: candidate.name,
+            },
+            candidate.id
+          )
+        ),
+      }),
       jsx('div', {
         className: 'starter-cards',
-        children: starterSpecies.map((speciesKey) => {
-          const species = pokemonSpecies[speciesKey],
-            stats = calculatePokemonStats(species, 5, {
-              hp: 15,
-              attack: 15,
-              defense: 15,
-              spAttack: 15,
-              spDefense: 15,
-              speed: 15,
-            })
+        children: starters.map((speciesKey) => {
+          const species = pokemonSpecies[speciesKey]
+          if (!species) return null
+          const stats = calculatePokemonStats(species, startLevel, {
+            hp: 15,
+            attack: 15,
+            defense: 15,
+            spAttack: 15,
+            spDefense: 15,
+            speed: 15,
+          })
           return jsxs(
             'div',
             {
@@ -38,6 +64,7 @@ export function StarterSelect() {
                   payload: {
                     speciesKey,
                     isShiny: checkShinyOdds(),
+                    region: regionId,
                   },
                 }),
               children: [

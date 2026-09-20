@@ -2,7 +2,7 @@
 
 import { RAID_COOLDOWN_MS, defaultCatchSettings } from '../data/config.js'
 import { activeItems, pokeBalls } from '../data/items.js'
-import { encounterData, mapData, moveLearnsets, pokemonSpecies } from '../data/gameData.js'
+import { encounterData, mapData, moveLearnsets, pokemonSpecies, regions } from '../data/gameData.js'
 import { createVolatileState } from './combat.js'
 import { calculatePokemonStats, createPokemon } from './pokemon.js'
 import { computeUnlockedLocations, isActiveEffectItem, loadActivePokemonFromParty, prepareNextBattle, syncActivePokemonIntoParty, tickBattleCounters } from './progression.js'
@@ -70,7 +70,20 @@ export const initialGameState = {
 export function gameReducer(state, action) {
   switch (action.type) {
     case 'SELECT_STARTER': {
-      const starterPokemon = createPokemon(action.payload.speciesKey, 5, state.nextPokemonId, action.payload.isShiny),
+      const regionId = action.payload.region ?? 'kanto',
+        region = regions.find((candidate) => candidate.id === regionId),
+        entryTown = region?.entry,
+        firstRoute =
+          entryTown && mapData[entryTown]
+            ? mapData[entryTown].connections.find((id) => mapData[id]?.type === 'route')
+            : null,
+        starterLevel = region?.startLevel ?? 5,
+        starterPokemon = createPokemon(
+          action.payload.speciesKey,
+          starterLevel,
+          state.nextPokemonId,
+          action.payload.isShiny
+        ),
         speciesKey = action.payload.speciesKey
       return {
         ...state,
@@ -78,7 +91,14 @@ export function gameReducer(state, action) {
         playerPokemon: starterPokemon,
         party: [starterPokemon],
         nextPokemonId: state.nextPokemonId + 1,
-        battleLog: [`You chose ${starterPokemon.name}!`],
+        currentLocation: firstRoute ?? entryTown ?? state.currentLocation,
+        currentRoute: firstRoute ?? state.currentRoute,
+        unlockedLocations: entryTown
+          ? [...new Set([entryTown, ...(firstRoute ? [firstRoute] : [])])]
+          : state.unlockedLocations,
+        battleLog: [
+          `You began your journey in ${region?.name ?? 'Kanto'} with ${starterPokemon.name}!`,
+        ],
         pokedexSeen: state.pokedexSeen.includes(speciesKey)
           ? state.pokedexSeen
           : [...state.pokedexSeen, speciesKey],

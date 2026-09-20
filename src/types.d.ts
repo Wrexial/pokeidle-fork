@@ -174,6 +174,8 @@ type Region = {
   name: string
   generation: number
   order: number
+  entry?: string
+  startLevel?: number
   legendaries?: { speciesKey: string; level: number }[]
 }
 

@@ -114,7 +114,7 @@ const makeTeam = (list, offset, size, baseLevel, step = 1) =>
   }))
 
 // --- generate ----------------------------------------------------------------
-const regions = [{ id: 'kanto', name: 'Kanto', generation: 1, order: 1, legendaries: KANTO_LEGENDARIES }]
+const regions = [{ id: 'kanto', name: 'Kanto', generation: 1, order: 1, entry: 'palletTown', startLevel: 5, legendaries: KANTO_LEGENDARIES }]
 let unlockOrder = 100
 const deepRoutes = {} // regionId -> deepest route locId
 
@@ -198,6 +198,8 @@ for (const region of REGIONS) {
     name,
     generation: gen,
     order: gen,
+    entry: locId(regionId, entryNode),
+    startLevel: base,
     legendaries: legendaries.map((s) => ({ speciesKey: s.key, level: clampLevel(base + 35) })),
   })
 
@@ -209,8 +211,14 @@ for (const region of REGIONS) {
       maxLevel = clampLevel(minLevel + 8),
       real = realEncounters[regionId]?.[node]
     let encounters
+    const levelOffset = base - 2
     if (real && real.length) {
-      encounters = real.map((e) => ({ ...e }))
+      // shift authentic levels into this region's level band
+      encounters = real.map((e) => ({
+        ...e,
+        minLevel: clampLevel(e.minLevel + levelOffset),
+        maxLevel: clampLevel(e.maxLevel + levelOffset),
+      }))
     } else if (wild.length) {
       const start =
         routeNodes.length <= 1

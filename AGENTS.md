@@ -20,7 +20,17 @@ npm run dev        # Vite dev server (http://localhost:5173)
 npm run build      # production build -> dist/  (gitignored)
 npm run preview    # serve the production build
 npm run typecheck  # tsc --noEmit over src/ (jsconfig.json, checkJs)
+npm run kill-vite  # kill orphaned dev servers (see note below)
 ```
+
+**Windows + stale dev servers:** backgrounding `npm run dev` and stopping it
+with `pkill -f vite` does **not** work on Windows (`node.exe` isn't matched), so
+dev servers pile up on ports 5173, 5174, … and the browser can end up talking to
+a stale one. That shows up as confusing runtime errors, e.g.
+`Uncaught SyntaxError: The requested module '/src/components/x.js' does not
+provide an export named 'X'`. If you see something like that after edits, don't
+trust HMR — stop the server (Ctrl-C) and run `npm run kill-vite` (dry run with
+`node tools/kill-vite.cjs --dry`) before restarting `npm run dev`.
 
 There is **no test suite and no linter**. `npm run typecheck` runs the TypeScript
 compiler in JS-checking mode (`jsconfig.json` + `@types/react`) and should stay
@@ -270,6 +280,8 @@ One-off scripts used to build the data JSON (not run during dev/build):
   `region: "kanto"`. Routes without scraped encounters (e.g. Paldea's province
   areas) fall back to a generation-based species slice.
 - `RawMoveData`, `index-backup.js` — large reference/backup data; leave alone.
+- `kill-vite.cjs` — kills orphaned Vite dev servers on the port range (Windows
+  `taskkill`, else `kill`). Run `npm run kill-vite`, or `--dry` to preview.
 - `*.md` in `tools/` (`SUMMARY.md`, `DATA_INTEGRATION.md`,
   `REFACTORING_GUIDE.md`, `QUICKSTART_DATA_INTEGRATION.md`) — historical design
   docs. Some counts/claims there are outdated (e.g. they still say "151

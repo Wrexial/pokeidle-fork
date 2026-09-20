@@ -906,7 +906,7 @@
     },
     {
      "speciesKey": "bayleef",
-     "level": 28
+     "level": 29
     }
    ]
   },
@@ -921,7 +921,7 @@
     },
     {
      "speciesKey": "cyndaquil",
-     "level": 30
+     "level": 31
     }
    ]
   },
@@ -936,7 +936,7 @@
     },
     {
      "speciesKey": "typhlosion",
-     "level": 32
+     "level": 33
     }
    ]
   }
@@ -953,7 +953,7 @@
     },
     {
      "speciesKey": "grovyle",
-     "level": 37
+     "level": 38
     }
    ]
   },
@@ -968,7 +968,7 @@
     },
     {
      "speciesKey": "torchic",
-     "level": 39
+     "level": 40
     }
    ]
   },
@@ -983,7 +983,7 @@
     },
     {
      "speciesKey": "blaziken",
-     "level": 41
+     "level": 42
     }
    ]
   }
@@ -1000,7 +1000,7 @@
     },
     {
      "speciesKey": "grotle",
-     "level": 46
+     "level": 47
     }
    ]
   },
@@ -1015,7 +1015,7 @@
     },
     {
      "speciesKey": "chimchar",
-     "level": 48
+     "level": 49
     }
    ]
   },
@@ -1030,7 +1030,7 @@
     },
     {
      "speciesKey": "infernape",
-     "level": 50
+     "level": 51
     }
    ]
   }
@@ -1047,7 +1047,7 @@
     },
     {
      "speciesKey": "snivy",
-     "level": 55
+     "level": 56
     }
    ]
   },
@@ -1062,7 +1062,7 @@
     },
     {
      "speciesKey": "serperior",
-     "level": 57
+     "level": 58
     }
    ]
   },
@@ -1077,7 +1077,7 @@
     },
     {
      "speciesKey": "pignite",
-     "level": 59
+     "level": 60
     }
    ]
   }
@@ -1094,7 +1094,7 @@
     },
     {
      "speciesKey": "quilladin",
-     "level": 64
+     "level": 65
     }
    ]
   },
@@ -1109,7 +1109,7 @@
     },
     {
      "speciesKey": "fennekin",
-     "level": 66
+     "level": 67
     }
    ]
   },
@@ -1124,7 +1124,7 @@
     },
     {
      "speciesKey": "delphox",
-     "level": 68
+     "level": 69
     }
    ]
   }
@@ -1141,7 +1141,7 @@
     },
     {
      "speciesKey": "dartrix",
-     "level": 73
+     "level": 74
     }
    ]
   },
@@ -1156,7 +1156,7 @@
     },
     {
      "speciesKey": "litten",
-     "level": 75
+     "level": 76
     }
    ]
   },
@@ -1171,7 +1171,7 @@
     },
     {
      "speciesKey": "incineroar",
-     "level": 77
+     "level": 78
     }
    ]
   }
@@ -1188,7 +1188,7 @@
     },
     {
      "speciesKey": "thwackey",
-     "level": 82
+     "level": 83
     }
    ]
   },
@@ -1203,7 +1203,7 @@
     },
     {
      "speciesKey": "scorbunny",
-     "level": 84
+     "level": 85
     }
    ]
   },
@@ -1218,7 +1218,7 @@
     },
     {
      "speciesKey": "cinderace",
-     "level": 86
+     "level": 87
     }
    ]
   }
@@ -1235,7 +1235,7 @@
     },
     {
      "speciesKey": "floragato",
-     "level": 91
+     "level": 92
     }
    ]
   },
@@ -1250,7 +1250,7 @@
     },
     {
      "speciesKey": "fuecoco",
-     "level": 93
+     "level": 94
     }
    ]
   },
@@ -1265,7 +1265,7 @@
     },
     {
      "speciesKey": "skeledirge",
-     "level": 95
+     "level": 96
     }
    ]
   }

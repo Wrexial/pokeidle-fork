@@ -164,7 +164,7 @@ These are loaded by `assets/gameDataInjector.js` (`key` → file):
 | `trainerData` | `trainer-data.json` |
 | `gymLeaderData` | `gym-leader-data.json` |
 | `elite4Data` | `elite-4-data.json` |
-| `championData` | `champion-data.json` |
+| `championData` | `champion-data.json` (array, one per region) |
 | `regions` | `regions.json` |
 
 **Watch out:** `move-data.json` and `move-learnsets.json` are *not* loaded by
@@ -235,10 +235,13 @@ One-off scripts used to build the data JSON (not run during dev/build):
 - `scrape_pokemondb.cjs`, `download_pokemon_sprites.cjs`, `extract_data.cjs` —
   Node scripts.
 - `generate-regions.cjs` — generates the non-Kanto region content (towns, wild
-  routes, encounters, trainers, marts) for generations 2-9 from
-  `pokemon-species.json` and merges it into `map-data.json` /
-  `encounter-data.json` / `trainer-data.json`. Idempotent — safe to re-run,
-  and it tags Kanto locations with `region: "kanto"`.
+  routes, encounters, trainers, marts, Raid Islands, and gym/Elite Four/Champion
+  leagues) for generations 2-9 from `pokemon-species.json`, merging it into
+  `map-data.json` / `encounter-data.json` / `trainer-data.json` /
+  `gym-leader-data.json` / `elite-4-data.json` / `champion-data.json`, and
+  writing `regions.json` (region metadata + per-region legendary pools).
+  Idempotent — safe to re-run, and it tags Kanto locations/leaders with
+  `region: "kanto"`.
 - `RawMoveData`, `index-backup.js` — large reference/backup data; leave alone.
 - `*.md` in `tools/` (`SUMMARY.md`, `DATA_INTEGRATION.md`,
   `REFACTORING_GUIDE.md`, `QUICKSTART_DATA_INTEGRATION.md`) — historical design

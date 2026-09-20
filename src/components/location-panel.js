@@ -1,9 +1,8 @@
 // Split from a grouped component file — see tools/decompile/split-components.mjs
 
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
-import { legendaryPool } from '../data/config.js'
 import { martShopItems } from '../data/items.js'
-import { encounterData, mapData, pokemonSpecies } from '../data/gameData.js'
+import { encounterData, legendaryPoolFor, mapData, pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { RouteEncounterGrid } from './route-encounter-grid.js'
 import { ShopPanel } from './shop-panel.js'
@@ -76,8 +75,8 @@ export function LocationPanel({ onOpenCatchSettings }) {
               ],
             }),
           jsx(RouteEncounterGrid, {
-            routeKey: 'raidIsland',
-            encounters: legendaryPool.map((legendary) => ({
+            routeKey: location.id,
+            encounters: legendaryPoolFor(location.region ?? 'kanto').map((legendary) => ({
               speciesKey: legendary.speciesKey,
               weight: 1,
               minLevel: legendary.level,
@@ -179,10 +178,10 @@ export function LocationPanel({ onOpenCatchSettings }) {
                 }),
               unlockRule.championDefeated &&
                 requirements.push({
-                  label: 'Beat Champion',
-                  current: state.championDefeated ? 1 : 0,
+                  label: 'Beat Kanto Champion',
+                  current: state.defeatedChampions.includes('kanto') ? 1 : 0,
                   required: 1,
-                  met: state.championDefeated,
+                  met: state.defeatedChampions.includes('kanto'),
                 }),
               unlockRule.requires &&
                 unlockRule.requires.forEach((requiredId) =>

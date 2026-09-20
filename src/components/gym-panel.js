@@ -1,99 +1,114 @@
 // Split from a grouped component file — see tools/decompile/split-components.mjs
 
 import { jsx, jsxs } from 'react/jsx-runtime'
-import { championData, elite4Data, gymLeaderData } from '../data/gameData.js'
+import { championData, elite4Data, gymLeaderData, mapData, regions } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { buildTrainerTeam } from '../game/progression.js'
 
 /** @param {{ onOpenShop: () => void }} props */
 export function GymPanel({ onOpenShop }) {
   const { state, dispatch } = useGame(),
+    regionId = mapData[state.currentLocation]?.region ?? 'kanto',
+    region = regions.find((candidate) => candidate.id === regionId),
+    regionGyms = gymLeaderData.filter((gym) => (gym.region ?? 'kanto') === regionId),
+    regionEliteFour = elite4Data.filter((member) => (member.region ?? 'kanto') === regionId),
+    regionChampion = championData.find((champion) => (champion.region ?? 'kanto') === regionId),
+    defeatedRegionGyms = regionGyms.filter((gym) => state.defeatedGyms.includes(gym.id)).length,
     canFight = state.party.some((member) => member.currentHp > 0),
     isBusy = state.phase === 'evolving' || state.phase === 'healing',
-    fightable = canFight && !isBusy,
-    startGymBattle = /** @param {string} member @param {string} badgeId @param {any[]} index @param {string} badge */ (member, badgeId, index, badge) => {
-      fightable &&
-        ((state.phase === 'battling' ||
-          state.phase === 'victory' ||
-          state.phase === 'defeat') &&
-          dispatch({
-            type: 'PHASE_IDLE',
-          }),
-        dispatch({
-          type: 'START_HEALING',
-          payload: {
-            pendingBossBattle: {
-              bossId: member,
-              bossType: 'gym',
-              trainerName: badgeId,
-              trainerClass: 'ace',
-              trainerTeam: buildTrainerTeam(index),
-              spriteKey: badge,
-            },
-          },
-        }))
-    },
-    startEliteChallenge = () => {
-      if (!fightable) return
-      ;((state.phase === 'battling' ||
-        state.phase === 'victory' ||
-        state.phase === 'defeat') &&
-        dispatch({
-          type: 'PHASE_IDLE',
-        }),
-        dispatch({
-          type: 'RESET_ELITE_FOUR',
-        }))
-      const leader = [
-          ...elite4Data.map((team) => ({
-            bossId: team.id,
-            bossType: 'e4',
-            trainerName: team.name,
-            trainerClass: 'ace',
-            trainerTeam: buildTrainerTeam(team.team),
-            spriteKey: team.spriteKey,
-          })),
-          {
-            bossId: championData.id,
-            bossType: 'champion',
-            trainerName: championData.name,
-            trainerClass: 'ace',
-            trainerTeam: buildTrainerTeam(championData.team),
-            spriteKey: championData.spriteKey,
-          },
-        ],
-        [defeatedElite, ...isActive] = leader
+    fightable = canFight && !isBusy
+
+  /** @param {any} leader */
+  function startGymBattle(leader) {
+    if (!fightable) return
+    if (state.phase === 'battling' || state.phase === 'victory' || state.phase === 'defeat')
       dispatch({
-        type: 'START_HEALING',
-        payload: {
-          pendingBossBattle: {
-            ...defeatedElite,
-            bossQueue: isActive,
-          },
-        },
+        type: 'PHASE_IDLE',
       })
-    },
-    indigoUnlocked = state.unlockedLocations.includes('indigoPlat'),
+    dispatch({
+      type: 'START_HEALING',
+      payload: {
+        pendingBossBattle: {
+          bossId: leader.id,
+          bossType: 'gym',
+          trainerName: leader.name,
+          trainerClass: 'ace',
+          trainerTeam: buildTrainerTeam(leader.team),
+          spriteKey: leader.spriteKey,
+          region: regionId,
+        },
+      },
+    })
+  }
+
+  function startEliteChallenge() {
+    if (!fightable || !regionChampion) return
+    if (state.phase === 'battling' || state.phase === 'victory' || state.phase === 'defeat')
+      dispatch({
+        type: 'PHASE_IDLE',
+      })
+    dispatch({
+      type: 'RESET_ELITE_FOUR',
+    })
+    const leader = [
+        ...regionEliteFour.map((member) => ({
+          bossId: member.id,
+          bossType: 'e4',
+          trainerName: member.name,
+          trainerClass: 'ace',
+          trainerTeam: buildTrainerTeam(member.team),
+          spriteKey: member.spriteKey,
+          region: regionId,
+        })),
+        {
+          bossId: regionChampion.id,
+          bossType: 'champion',
+          trainerName: regionChampion.name,
+          trainerClass: 'ace',
+          trainerTeam: buildTrainerTeam(regionChampion.team),
+          spriteKey: regionChampion.spriteKey,
+          region: regionId,
+        },
+      ],
+      [firstFight, ...remainingFights] = leader
+    dispatch({
+      type: 'START_HEALING',
+      payload: {
+        pendingBossBattle: {
+          ...firstFight,
+          bossQueue: remainingFights,
+        },
+      },
+    })
+  }
+
+  const leagueUnlocked = regionGyms.length > 0 && defeatedRegionGyms >= regionGyms.length,
     inGauntlet =
       state.bossBattle &&
       (state.bossBattle.bossType === 'e4' || state.bossBattle.bossType === 'champion')
+
   return jsxs('div', {
     className: 'gym-panel',
     children: [
+      jsxs('div', {
+        className: 'gym-section-title',
+        style: { marginBottom: '4px' },
+        children: `${region?.name ?? 'Kanto'} League`,
+      }),
       jsx('div', {
         className: 'gym-badge-display',
-        children: gymLeaderData.map((gymLeader) => {
-          const unlocked = state.defeatedGyms.includes(gymLeader.id)
+        children: regionGyms.map((gymLeader) => {
+          const earned = state.defeatedGyms.includes(gymLeader.id)
           return jsx(
             'div',
             {
-              className: `gym-badge-slot${unlocked ? ' earned' : ''}`,
-              style: unlocked
+              className: `gym-badge-slot${earned ? ' earned' : ''}`,
+              style: earned
                 ? {
                     backgroundColor: gymLeader.badgeColor,
                   }
                 : void 0,
-              title: unlocked ? gymLeader.badgeName : '???',
+              title: earned ? gymLeader.badgeName : '???',
             },
             gymLeader.id
           )
@@ -106,10 +121,10 @@ export function GymPanel({ onOpenShop }) {
             className: 'gym-section-title',
             children: 'Gym Leaders',
           }),
-          gymLeaderData.map((leader, leaderIndex) => {
+          regionGyms.map((leader, leaderIndex) => {
             const unlocked = state.unlockedLocations.includes(leader.locationKey),
               defeated = state.defeatedGyms.includes(leader.id),
-              unlockedByOrder = state.defeatedGyms.length >= leaderIndex,
+              unlockedByOrder = defeatedRegionGyms >= leaderIndex,
               canStart = unlocked && unlockedByOrder
             return jsxs(
               'div',
@@ -141,7 +156,7 @@ export function GymPanel({ onOpenShop }) {
                         ? jsx('button', {
                             className: 'gym-fight-btn',
                             disabled: !fightable,
-                            onClick: () => startGymBattle(leader.id, leader.name, leader.team, leader.spriteKey),
+                            onClick: () => startGymBattle(leader),
                             children: 'FIGHT',
                           })
                         : jsx('span', {
@@ -157,7 +172,8 @@ export function GymPanel({ onOpenShop }) {
           }),
         ],
       }),
-      indigoUnlocked &&
+      leagueUnlocked &&
+        regionChampion &&
         jsxs('div', {
           className: 'gym-section',
           children: [
@@ -175,11 +191,10 @@ export function GymPanel({ onOpenShop }) {
               },
               children: 'BEGIN CHALLENGE',
             }),
-            elite4Data.map((member) => {
+            regionEliteFour.map((member) => {
               const defeated = state.defeatedEliteFour.includes(member.id),
                 isActive =
-                  state.bossBattle?.bossType === 'e4' &&
-                  state.bossBattle?.bossId === member.id
+                  state.bossBattle?.bossType === 'e4' && state.bossBattle?.bossId === member.id
               return jsxs(
                 'div',
                 {
@@ -213,25 +228,25 @@ export function GymPanel({ onOpenShop }) {
               )
             }),
             jsxs('div', {
-              className: `gym-row${state.championDefeated ? ' defeated' : ''}${state.bossBattle?.bossType === 'champion' ? ' active-gauntlet' : ''}`,
+              className: `gym-row${state.defeatedChampions.includes(regionId) ? ' defeated' : ''}${state.bossBattle?.bossType === 'champion' ? ' active-gauntlet' : ''}`,
               children: [
                 jsxs('div', {
                   className: 'gym-row-info',
                   children: [
                     jsx('span', {
                       className: 'gym-leader-name',
-                      children: championData.name,
+                      children: regionChampion.name,
                     }),
                     jsx('span', {
                       className: 'gym-badge-label',
-                      children: championData.title,
+                      children: regionChampion.title,
                     }),
                   ],
                 }),
                 jsx('div', {
                   className: 'gym-row-status',
                   children:
-                    state.championDefeated &&
+                    state.defeatedChampions.includes(regionId) &&
                     jsx('span', {
                       className: 'gym-defeated-mark',
                       children: '✓',

@@ -1,6 +1,6 @@
 // Split from the former assets/index.js — see tools/decompile/split-modules.mjs
 
-import { RAID_COOLDOWN_MS, defaultCatchSettings, legendaryPool } from '../data/config.js'
+import { RAID_COOLDOWN_MS, defaultCatchSettings } from '../data/config.js'
 import { activeItems, pokeBalls } from '../data/items.js'
 import { encounterData, mapData, moveLearnsets, pokemonSpecies } from '../data/gameData.js'
 import { createVolatileState } from './combat.js'
@@ -49,11 +49,12 @@ export const initialGameState = {
   shinySeen: [],
   defeatedGyms: [],
   defeatedEliteFour: [],
-  championDefeated: !1,
+  defeatedChampions: [],
   victoryTokens: 0,
   autoProceed: !1,
   raidCooldownEnd: null,
   raidLegendary: null,
+  raidRegion: null,
   inRaid: !1,
   raidLevel: 0,
   preRaidLocation: null,
@@ -616,6 +617,7 @@ export function gameReducer(state, action) {
           trainerTeam,
           bossQueue,
           spriteKey,
+          region,
         } = action.payload,
         firstPokemon = trainerTeam[0]
       return {
@@ -643,6 +645,7 @@ export function gameReducer(state, action) {
           trainerTeam,
           currentTrainerPokemonIndex: 0,
           spriteKey,
+          region,
         },
         bossQueue: bossQueue ?? [],
         playerVolatile: createVolatileState(),
@@ -764,7 +767,7 @@ export function gameReducer(state, action) {
         activeEffects = won ? tickBattleCounters(state.activeEffects) : state.activeEffects
       let defeatedGyms = state.defeatedGyms,
         defeatedEliteFour = state.defeatedEliteFour,
-        championDefeated = state.championDefeated,
+        defeatedChampions = state.defeatedChampions,
         victoryTokens = state.victoryTokens
       const notifications = []
       if (won && state.bossBattle) {
@@ -776,7 +779,12 @@ export function gameReducer(state, action) {
           : bossType === 'e4' && !defeatedEliteFour.includes(bossId)
             ? (defeatedEliteFour = [...defeatedEliteFour, bossId])
             : bossType === 'champion' &&
-              ((championDefeated = !0), (victoryTokens += 1), notifications.push('Earned a Victory Token!'))
+              ((defeatedChampions = [
+                ...defeatedChampions,
+                state.bossBattle.region ?? 'kanto',
+              ]),
+              (victoryTokens += 1),
+              notifications.push('Earned a Victory Token!'))
       }
       if (won && state.bossQueue.length > 0) {
         const [nextBoss, ...remainingQueue] = state.bossQueue,
@@ -789,7 +797,7 @@ export function gameReducer(state, action) {
             activeEffects,
             defeatedGyms,
             defeatedEliteFour,
-            championDefeated,
+            defeatedChampions,
             victoryTokens,
             phase: 'battling',
             enemyPokemon: firstPokemon,
@@ -821,6 +829,7 @@ export function gameReducer(state, action) {
               trainerTeam: nextBoss.trainerTeam,
               currentTrainerPokemonIndex: 0,
               spriteKey: nextBoss.spriteKey,
+              region: nextBoss.region,
             },
             bossQueue: remainingQueue,
           }
@@ -837,7 +846,7 @@ export function gameReducer(state, action) {
         activeEffects,
         defeatedGyms,
         defeatedEliteFour,
-        championDefeated,
+        defeatedChampions,
         victoryTokens,
         pendingEvents: [
           {
@@ -1145,22 +1154,24 @@ export function gameReducer(state, action) {
           currentHp: member.maxHp,
         })),
         playerPokemon = healedParty[0] || state.playerPokemon,
-        raidLevel = legendaryPool.find((legendary) => legendary.speciesKey === action.payload.legendary)?.level ?? 60
+        raidLevel = action.payload.level ?? 60,
+        raidLocation = action.payload.location ?? 'raidIsland'
       return {
         ...prepareNextBattle(state),
         raidCooldownEnd: Date.now() + RAID_COOLDOWN_MS,
         raidLegendary: action.payload.legendary,
+        raidRegion: action.payload.region ?? 'kanto',
         inRaid: !0,
         raidLevel,
         preRaidLocation: state.currentLocation,
-        currentLocation: 'raidIsland',
-        currentRoute: 'raidIsland',
+        currentLocation: raidLocation,
+        currentRoute: raidLocation,
         party: healedParty,
         playerPokemon,
         activePlayerPokemonIndex: 0,
         battleLog: [
           ...state.battleLog,
-          'Arrived at Raid Island! A legendary Pokemon awaits...',
+          `Arrived at ${mapData[raidLocation]?.name ?? 'Raid Island'}! A legendary Pokemon awaits...`,
         ].slice(-50),
       }
     }
@@ -1169,6 +1180,7 @@ export function gameReducer(state, action) {
         ...state,
         inRaid: !1,
         raidLegendary: null,
+        raidRegion: null,
         raidLevel: 0,
         preRaidLocation: null,
       }

@@ -1,114 +1,1046 @@
 [
-    {
-        "id": "lorelei",
-        "name": "Lorelei",
-        "title": "Elite Four",
-        "spriteKey": "lorelei-gen3",
-        "team": [
-            {
-                "speciesKey": "dewgong",
-                "level": 54
-            },
-            {
-                "speciesKey": "cloyster",
-                "level": 53
-            },
-            {
-                "speciesKey": "slowbro",
-                "level": 54
-            },
-            {
-                "speciesKey": "jynx",
-                "level": 56
-            },
-            {
-                "speciesKey": "lapras",
-                "level": 56
-            }
-        ]
-    },
-    {
-        "id": "bruno",
-        "name": "Bruno",
-        "title": "Elite Four",
-        "spriteKey": "bruno-gen3",
-        "team": [
-            {
-                "speciesKey": "onix",
-                "level": 53
-            },
-            {
-                "speciesKey": "hitmonchan",
-                "level": 55
-            },
-            {
-                "speciesKey": "hitmonlee",
-                "level": 55
-            },
-            {
-                "speciesKey": "onix",
-                "level": 56
-            },
-            {
-                "speciesKey": "machamp",
-                "level": 58
-            }
-        ]
-    },
-    {
-        "id": "agatha",
-        "name": "Agatha",
-        "title": "Elite Four",
-        "spriteKey": "agatha-gen3",
-        "team": [
-            {
-                "speciesKey": "gengar",
-                "level": 56
-            },
-            {
-                "speciesKey": "golbat",
-                "level": 56
-            },
-            {
-                "speciesKey": "haunter",
-                "level": 55
-            },
-            {
-                "speciesKey": "arbok",
-                "level": 58
-            },
-            {
-                "speciesKey": "gengar",
-                "level": 60
-            }
-        ]
-    },
-    {
-        "id": "lance",
-        "name": "Lance",
-        "title": "Elite Four",
-        "spriteKey": "lance-gen3",
-        "team": [
-            {
-                "speciesKey": "gyarados",
-                "level": 58
-            },
-            {
-                "speciesKey": "dragonair",
-                "level": 56
-            },
-            {
-                "speciesKey": "dragonair",
-                "level": 56
-            },
-            {
-                "speciesKey": "aerodactyl",
-                "level": 60
-            },
-            {
-                "speciesKey": "dragonite",
-                "level": 62
-            }
-        ]
-    }
+ {
+  "id": "lorelei",
+  "name": "Lorelei",
+  "title": "Elite Four",
+  "spriteKey": "lorelei-gen3",
+  "team": [
+   {
+    "speciesKey": "dewgong",
+    "level": 54
+   },
+   {
+    "speciesKey": "cloyster",
+    "level": 53
+   },
+   {
+    "speciesKey": "slowbro",
+    "level": 54
+   },
+   {
+    "speciesKey": "jynx",
+    "level": 56
+   },
+   {
+    "speciesKey": "lapras",
+    "level": 56
+   }
+  ],
+  "region": "kanto"
+ },
+ {
+  "id": "bruno",
+  "name": "Bruno",
+  "title": "Elite Four",
+  "spriteKey": "bruno-gen3",
+  "team": [
+   {
+    "speciesKey": "onix",
+    "level": 53
+   },
+   {
+    "speciesKey": "hitmonchan",
+    "level": 55
+   },
+   {
+    "speciesKey": "hitmonlee",
+    "level": 55
+   },
+   {
+    "speciesKey": "onix",
+    "level": 56
+   },
+   {
+    "speciesKey": "machamp",
+    "level": 58
+   }
+  ],
+  "region": "kanto"
+ },
+ {
+  "id": "agatha",
+  "name": "Agatha",
+  "title": "Elite Four",
+  "spriteKey": "agatha-gen3",
+  "team": [
+   {
+    "speciesKey": "gengar",
+    "level": 56
+   },
+   {
+    "speciesKey": "golbat",
+    "level": 56
+   },
+   {
+    "speciesKey": "haunter",
+    "level": 55
+   },
+   {
+    "speciesKey": "arbok",
+    "level": 58
+   },
+   {
+    "speciesKey": "gengar",
+    "level": 60
+   }
+  ],
+  "region": "kanto"
+ },
+ {
+  "id": "lance",
+  "name": "Lance",
+  "title": "Elite Four",
+  "spriteKey": "lance-gen3",
+  "team": [
+   {
+    "speciesKey": "gyarados",
+    "level": 58
+   },
+   {
+    "speciesKey": "dragonair",
+    "level": 56
+   },
+   {
+    "speciesKey": "dragonair",
+    "level": 56
+   },
+   {
+    "speciesKey": "aerodactyl",
+    "level": 60
+   },
+   {
+    "speciesKey": "dragonite",
+    "level": 62
+   }
+  ],
+  "region": "kanto"
+ },
+ {
+  "id": "johto-e4-1",
+  "name": "Will",
+  "title": "Johto Elite Four",
+  "region": "johto",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "mareep",
+    "level": 56
+   },
+   {
+    "speciesKey": "flaaffy",
+    "level": 57
+   },
+   {
+    "speciesKey": "ampharos",
+    "level": 58
+   },
+   {
+    "speciesKey": "bellossom",
+    "level": 59
+   },
+   {
+    "speciesKey": "marill",
+    "level": 60
+   }
+  ]
+ },
+ {
+  "id": "johto-e4-2",
+  "name": "Koga",
+  "title": "Johto Elite Four",
+  "region": "johto",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "marill",
+    "level": 58
+   },
+   {
+    "speciesKey": "azumarill",
+    "level": 59
+   },
+   {
+    "speciesKey": "sudowoodo",
+    "level": 60
+   },
+   {
+    "speciesKey": "politoed",
+    "level": 61
+   },
+   {
+    "speciesKey": "hoppip",
+    "level": 62
+   }
+  ]
+ },
+ {
+  "id": "johto-e4-3",
+  "name": "Bruno",
+  "title": "Johto Elite Four",
+  "region": "johto",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "hoppip",
+    "level": 60
+   },
+   {
+    "speciesKey": "skiploom",
+    "level": 61
+   },
+   {
+    "speciesKey": "jumpluff",
+    "level": 62
+   },
+   {
+    "speciesKey": "aipom",
+    "level": 63
+   },
+   {
+    "speciesKey": "sunkern",
+    "level": 64
+   }
+  ]
+ },
+ {
+  "id": "johto-e4-4",
+  "name": "Karen",
+  "title": "Johto Elite Four",
+  "region": "johto",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "sunkern",
+    "level": 62
+   },
+   {
+    "speciesKey": "sunflora",
+    "level": 63
+   },
+   {
+    "speciesKey": "yanma",
+    "level": 64
+   },
+   {
+    "speciesKey": "wooper",
+    "level": 65
+   },
+   {
+    "speciesKey": "quagsire",
+    "level": 66
+   }
+  ]
+ },
+ {
+  "id": "hoenn-e4-1",
+  "name": "Sidney",
+  "title": "Hoenn Elite Four",
+  "region": "hoenn",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "pelipper",
+    "level": 65
+   },
+   {
+    "speciesKey": "ralts",
+    "level": 66
+   },
+   {
+    "speciesKey": "kirlia",
+    "level": 67
+   },
+   {
+    "speciesKey": "gardevoir",
+    "level": 68
+   },
+   {
+    "speciesKey": "surskit",
+    "level": 69
+   }
+  ]
+ },
+ {
+  "id": "hoenn-e4-2",
+  "name": "Phoebe",
+  "title": "Hoenn Elite Four",
+  "region": "hoenn",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "surskit",
+    "level": 67
+   },
+   {
+    "speciesKey": "masquerain",
+    "level": 68
+   },
+   {
+    "speciesKey": "shroomish",
+    "level": 69
+   },
+   {
+    "speciesKey": "breloom",
+    "level": 70
+   },
+   {
+    "speciesKey": "slakoth",
+    "level": 71
+   }
+  ]
+ },
+ {
+  "id": "hoenn-e4-3",
+  "name": "Glacia",
+  "title": "Hoenn Elite Four",
+  "region": "hoenn",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "slakoth",
+    "level": 69
+   },
+   {
+    "speciesKey": "vigoroth",
+    "level": 70
+   },
+   {
+    "speciesKey": "slaking",
+    "level": 71
+   },
+   {
+    "speciesKey": "nincada",
+    "level": 72
+   },
+   {
+    "speciesKey": "ninjask",
+    "level": 73
+   }
+  ]
+ },
+ {
+  "id": "hoenn-e4-4",
+  "name": "Drake",
+  "title": "Hoenn Elite Four",
+  "region": "hoenn",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "ninjask",
+    "level": 71
+   },
+   {
+    "speciesKey": "shedinja",
+    "level": 72
+   },
+   {
+    "speciesKey": "whismur",
+    "level": 73
+   },
+   {
+    "speciesKey": "loudred",
+    "level": 74
+   },
+   {
+    "speciesKey": "exploud",
+    "level": 75
+   }
+  ]
+ },
+ {
+  "id": "sinnoh-e4-1",
+  "name": "Aaron",
+  "title": "Sinnoh Elite Four",
+  "region": "sinnoh",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "mothim",
+    "level": 74
+   },
+   {
+    "speciesKey": "combee",
+    "level": 75
+   },
+   {
+    "speciesKey": "vespiquen",
+    "level": 76
+   },
+   {
+    "speciesKey": "pachirisu",
+    "level": 77
+   },
+   {
+    "speciesKey": "buizel",
+    "level": 78
+   }
+  ]
+ },
+ {
+  "id": "sinnoh-e4-2",
+  "name": "Bertha",
+  "title": "Sinnoh Elite Four",
+  "region": "sinnoh",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "buizel",
+    "level": 76
+   },
+   {
+    "speciesKey": "floatzel",
+    "level": 77
+   },
+   {
+    "speciesKey": "cherubi",
+    "level": 78
+   },
+   {
+    "speciesKey": "cherrim",
+    "level": 79
+   },
+   {
+    "speciesKey": "shellos",
+    "level": 80
+   }
+  ]
+ },
+ {
+  "id": "sinnoh-e4-3",
+  "name": "Flint",
+  "title": "Sinnoh Elite Four",
+  "region": "sinnoh",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "shellos",
+    "level": 78
+   },
+   {
+    "speciesKey": "gastrodon",
+    "level": 79
+   },
+   {
+    "speciesKey": "ambipom",
+    "level": 80
+   },
+   {
+    "speciesKey": "drifloon",
+    "level": 81
+   },
+   {
+    "speciesKey": "drifblim",
+    "level": 82
+   }
+  ]
+ },
+ {
+  "id": "sinnoh-e4-4",
+  "name": "Lucian",
+  "title": "Sinnoh Elite Four",
+  "region": "sinnoh",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "drifblim",
+    "level": 80
+   },
+   {
+    "speciesKey": "buneary",
+    "level": 81
+   },
+   {
+    "speciesKey": "lopunny",
+    "level": 82
+   },
+   {
+    "speciesKey": "mismagius",
+    "level": 83
+   },
+   {
+    "speciesKey": "honchkrow",
+    "level": 84
+   }
+  ]
+ },
+ {
+  "id": "unova-e4-1",
+  "name": "Shauntal",
+  "title": "Unova Elite Four",
+  "region": "unova",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "blitzle",
+    "level": 83
+   },
+   {
+    "speciesKey": "zebstrika",
+    "level": 84
+   },
+   {
+    "speciesKey": "roggenrola",
+    "level": 85
+   },
+   {
+    "speciesKey": "boldore",
+    "level": 86
+   },
+   {
+    "speciesKey": "gigalith",
+    "level": 87
+   }
+  ]
+ },
+ {
+  "id": "unova-e4-2",
+  "name": "Grimsley",
+  "title": "Unova Elite Four",
+  "region": "unova",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "gigalith",
+    "level": 85
+   },
+   {
+    "speciesKey": "woobat",
+    "level": 86
+   },
+   {
+    "speciesKey": "swoobat",
+    "level": 87
+   },
+   {
+    "speciesKey": "drilbur",
+    "level": 88
+   },
+   {
+    "speciesKey": "excadrill",
+    "level": 89
+   }
+  ]
+ },
+ {
+  "id": "unova-e4-3",
+  "name": "Caitlin",
+  "title": "Unova Elite Four",
+  "region": "unova",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "excadrill",
+    "level": 87
+   },
+   {
+    "speciesKey": "audino",
+    "level": 88
+   },
+   {
+    "speciesKey": "timburr",
+    "level": 89
+   },
+   {
+    "speciesKey": "gurdurr",
+    "level": 90
+   },
+   {
+    "speciesKey": "conkeldurr",
+    "level": 91
+   }
+  ]
+ },
+ {
+  "id": "unova-e4-4",
+  "name": "Marshal",
+  "title": "Unova Elite Four",
+  "region": "unova",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "conkeldurr",
+    "level": 89
+   },
+   {
+    "speciesKey": "tympole",
+    "level": 90
+   },
+   {
+    "speciesKey": "palpitoad",
+    "level": 91
+   },
+   {
+    "speciesKey": "seismitoad",
+    "level": 92
+   },
+   {
+    "speciesKey": "throh",
+    "level": 93
+   }
+  ]
+ },
+ {
+  "id": "kalos-e4-1",
+  "name": "Malva",
+  "title": "Kalos Elite Four",
+  "region": "kalos",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "espurr",
+    "level": 92
+   },
+   {
+    "speciesKey": "meowstic",
+    "level": 93
+   },
+   {
+    "speciesKey": "honedge",
+    "level": 94
+   },
+   {
+    "speciesKey": "doublade",
+    "level": 95
+   },
+   {
+    "speciesKey": "aegislash",
+    "level": 96
+   }
+  ]
+ },
+ {
+  "id": "kalos-e4-2",
+  "name": "Siebold",
+  "title": "Kalos Elite Four",
+  "region": "kalos",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "aegislash",
+    "level": 94
+   },
+   {
+    "speciesKey": "spritzee",
+    "level": 95
+   },
+   {
+    "speciesKey": "aromatisse",
+    "level": 96
+   },
+   {
+    "speciesKey": "swirlix",
+    "level": 97
+   },
+   {
+    "speciesKey": "slurpuff",
+    "level": 98
+   }
+  ]
+ },
+ {
+  "id": "kalos-e4-3",
+  "name": "Wikstrom",
+  "title": "Kalos Elite Four",
+  "region": "kalos",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "slurpuff",
+    "level": 96
+   },
+   {
+    "speciesKey": "inkay",
+    "level": 97
+   },
+   {
+    "speciesKey": "malamar",
+    "level": 98
+   },
+   {
+    "speciesKey": "binacle",
+    "level": 99
+   },
+   {
+    "speciesKey": "barbaracle",
+    "level": 100
+   }
+  ]
+ },
+ {
+  "id": "kalos-e4-4",
+  "name": "Drasna",
+  "title": "Kalos Elite Four",
+  "region": "kalos",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "barbaracle",
+    "level": 98
+   },
+   {
+    "speciesKey": "skrelp",
+    "level": 99
+   },
+   {
+    "speciesKey": "dragalge",
+    "level": 100
+   },
+   {
+    "speciesKey": "clauncher",
+    "level": 100
+   },
+   {
+    "speciesKey": "clawitzer",
+    "level": 100
+   }
+  ]
+ },
+ {
+  "id": "alola-e4-1",
+  "name": "Hala",
+  "title": "Alola Elite Four",
+  "region": "alola",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "mudbray",
+    "level": 100
+   },
+   {
+    "speciesKey": "mudsdale",
+    "level": 100
+   },
+   {
+    "speciesKey": "dewpider",
+    "level": 100
+   },
+   {
+    "speciesKey": "araquanid",
+    "level": 100
+   },
+   {
+    "speciesKey": "fomantis",
+    "level": 100
+   }
+  ]
+ },
+ {
+  "id": "alola-e4-2",
+  "name": "Olivia",
+  "title": "Alola Elite Four",
+  "region": "alola",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "fomantis",
+    "level": 100
+   },
+   {
+    "speciesKey": "lurantis",
+    "level": 100
+   },
+   {
+    "speciesKey": "morelull",
+    "level": 100
+   },
+   {
+    "speciesKey": "shiinotic",
+    "level": 100
+   },
+   {
+    "speciesKey": "salandit",
+    "level": 100
+   }
+  ]
+ },
+ {
+  "id": "alola-e4-3",
+  "name": "Molayne",
+  "title": "Alola Elite Four",
+  "region": "alola",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "salandit",
+    "level": 100
+   },
+   {
+    "speciesKey": "salazzle",
+    "level": 100
+   },
+   {
+    "speciesKey": "stufful",
+    "level": 100
+   },
+   {
+    "speciesKey": "bewear",
+    "level": 100
+   },
+   {
+    "speciesKey": "bounsweet",
+    "level": 100
+   }
+  ]
+ },
+ {
+  "id": "alola-e4-4",
+  "name": "Kahili",
+  "title": "Alola Elite Four",
+  "region": "alola",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "bounsweet",
+    "level": 100
+   },
+   {
+    "speciesKey": "steenee",
+    "level": 100
+   },
+   {
+    "speciesKey": "tsareena",
+    "level": 100
+   },
+   {
+    "speciesKey": "comfey",
+    "level": 100
+   },
+   {
+    "speciesKey": "oranguru",
+    "level": 100
+   }
+  ]
+ },
+ {
+  "id": "galar-e4-1",
+  "name": "Marnie",
+  "title": "Galar Elite Four",
+  "region": "galar",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "rolycoly",
+    "level": 100
+   },
+   {
+    "speciesKey": "carkol",
+    "level": 100
+   },
+   {
+    "speciesKey": "coalossal",
+    "level": 100
+   },
+   {
+    "speciesKey": "applin",
+    "level": 100
+   },
+   {
+    "speciesKey": "flapple",
+    "level": 100
+   }
+  ]
+ },
+ {
+  "id": "galar-e4-2",
+  "name": "Hop",
+  "title": "Galar Elite Four",
+  "region": "galar",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "flapple",
+    "level": 100
+   },
+   {
+    "speciesKey": "appletun",
+    "level": 100
+   },
+   {
+    "speciesKey": "silicobra",
+    "level": 100
+   },
+   {
+    "speciesKey": "sandaconda",
+    "level": 100
+   },
+   {
+    "speciesKey": "cramorant",
+    "level": 100
+   }
+  ]
+ },
+ {
+  "id": "galar-e4-3",
+  "name": "Bede",
+  "title": "Galar Elite Four",
+  "region": "galar",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "cramorant",
+    "level": 100
+   },
+   {
+    "speciesKey": "arrokuda",
+    "level": 100
+   },
+   {
+    "speciesKey": "barraskewda",
+    "level": 100
+   },
+   {
+    "speciesKey": "toxel",
+    "level": 100
+   },
+   {
+    "speciesKey": "toxtricity",
+    "level": 100
+   }
+  ]
+ },
+ {
+  "id": "galar-e4-4",
+  "name": "Raihan",
+  "title": "Galar Elite Four",
+  "region": "galar",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "toxtricity",
+    "level": 100
+   },
+   {
+    "speciesKey": "sizzlipede",
+    "level": 100
+   },
+   {
+    "speciesKey": "centiskorch",
+    "level": 100
+   },
+   {
+    "speciesKey": "clobbopus",
+    "level": 100
+   },
+   {
+    "speciesKey": "grapploct",
+    "level": 100
+   }
+  ]
+ },
+ {
+  "id": "paldea-e4-1",
+  "name": "Rika",
+  "title": "Paldea Elite Four",
+  "region": "paldea",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "naclstack",
+    "level": 100
+   },
+   {
+    "speciesKey": "garganacl",
+    "level": 100
+   },
+   {
+    "speciesKey": "charcadet",
+    "level": 100
+   },
+   {
+    "speciesKey": "armarouge",
+    "level": 100
+   },
+   {
+    "speciesKey": "ceruledge",
+    "level": 100
+   }
+  ]
+ },
+ {
+  "id": "paldea-e4-2",
+  "name": "Poppy",
+  "title": "Paldea Elite Four",
+  "region": "paldea",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "ceruledge",
+    "level": 100
+   },
+   {
+    "speciesKey": "tadbulb",
+    "level": 100
+   },
+   {
+    "speciesKey": "bellibolt",
+    "level": 100
+   },
+   {
+    "speciesKey": "wattrel",
+    "level": 100
+   },
+   {
+    "speciesKey": "kilowattrel",
+    "level": 100
+   }
+  ]
+ },
+ {
+  "id": "paldea-e4-3",
+  "name": "Hassel",
+  "title": "Paldea Elite Four",
+  "region": "paldea",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "kilowattrel",
+    "level": 100
+   },
+   {
+    "speciesKey": "maschiff",
+    "level": 100
+   },
+   {
+    "speciesKey": "mabosstiff",
+    "level": 100
+   },
+   {
+    "speciesKey": "shroodle",
+    "level": 100
+   },
+   {
+    "speciesKey": "grafaiai",
+    "level": 100
+   }
+  ]
+ },
+ {
+  "id": "paldea-e4-4",
+  "name": "Clavell",
+  "title": "Paldea Elite Four",
+  "region": "paldea",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "grafaiai",
+    "level": 100
+   },
+   {
+    "speciesKey": "bramblin",
+    "level": 100
+   },
+   {
+    "speciesKey": "brambleghast",
+    "level": 100
+   },
+   {
+    "speciesKey": "toedscool",
+    "level": 100
+   },
+   {
+    "speciesKey": "toedscruel",
+    "level": 100
+   }
+  ]
+ }
 ]

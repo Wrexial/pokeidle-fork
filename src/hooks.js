@@ -1,7 +1,7 @@
 // Split from the former assets/index.js — see tools/decompile/split-modules.mjs
 
 import React from 'react'
-import { legendaryPool, trainerClassPayouts } from './data/config.js'
+import { trainerClassPayouts } from './data/config.js'
 import { ballOrder } from './data/items.js'
 import { MOBILE_BREAKPOINT } from './data/ui.js'
 import { catchableSpeciesCount, encounterData, mapData, pokemonSpecies, trainerData } from './data/gameData.js'
@@ -109,18 +109,15 @@ export function useGameLoop() {
             currentGameState.inRaid &&
             currentGameState.raidLegendary
           ) {
-            const legendary = legendaryPool.find(
-              (candidate) => candidate.speciesKey === currentGameState.raidLegendary
-            )
-            if (!legendary) return
-            const species = pokemonSpecies[legendary.speciesKey]
+            const raidSpeciesKey = currentGameState.raidLegendary,
+              species = pokemonSpecies[raidSpeciesKey]
             if (!species) return
             const raidLevel = currentGameState.raidLevel,
               ivs = generateIVs(),
               stats = calculatePokemonStats(species, raidLevel, ivs),
-              moves = resolvePokemonMoves(legendary.speciesKey, raidLevel),
+              moves = resolvePokemonMoves(raidSpeciesKey, raidLevel),
               enemyPokemon = {
-                speciesKey: legendary.speciesKey,
+                speciesKey: raidSpeciesKey,
                 name: species.name,
                 types: species.types,
                 level: raidLevel,
@@ -144,14 +141,14 @@ export function useGameLoop() {
               dispatch({
                 type: 'MARK_SEEN',
                 payload: {
-                  speciesKey: legendary.speciesKey,
+                  speciesKey: raidSpeciesKey,
                 },
               }),
               enemyPokemon.isShiny &&
                 (dispatch({
                   type: 'MARK_SHINY_SEEN',
                   payload: {
-                    speciesKey: legendary.speciesKey,
+                    speciesKey: raidSpeciesKey,
                   },
                 }),
                 dispatch({

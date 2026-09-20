@@ -1426,7 +1426,8 @@
   "region": "johto",
   "description": "A quiet town in the Johto region.",
   "connections": [
-   "johto-route-1"
+   "johto-route-1",
+   "johto-raid"
   ],
   "unlock": {
    "championDefeated": true
@@ -1523,6 +1524,26 @@
    "y": 38
   }
  },
+ "johto-raid": {
+  "id": "johto-raid",
+  "name": "Johto Raid Island",
+  "type": "raid",
+  "region": "johto",
+  "description": "A mysterious island where Johto's legendary Pokemon dwell.",
+  "connections": [
+   "johto-town"
+  ],
+  "unlock": {
+   "requires": [
+    "johto-route-3"
+   ]
+  },
+  "unlockOrder": 104,
+  "position": {
+   "x": 88,
+   "y": 14
+  }
+ },
  "hoenn-town": {
   "id": "hoenn-town",
   "name": "Littleroot Town",
@@ -1530,7 +1551,8 @@
   "region": "hoenn",
   "description": "A quiet town in the Hoenn region.",
   "connections": [
-   "hoenn-route-1"
+   "hoenn-route-1",
+   "hoenn-raid"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1540,7 +1562,7 @@
     }
    ]
   },
-  "unlockOrder": 104,
+  "unlockOrder": 105,
   "position": {
    "x": 15,
    "y": 55
@@ -1583,7 +1605,7 @@
     "hoenn-town"
    ]
   },
-  "unlockOrder": 105,
+  "unlockOrder": 106,
   "position": {
    "x": 38,
    "y": 35
@@ -1605,7 +1627,7 @@
     "hoenn-route-1"
    ]
   },
-  "unlockOrder": 106,
+  "unlockOrder": 107,
   "position": {
    "x": 60,
    "y": 60
@@ -1626,10 +1648,30 @@
     "hoenn-route-2"
    ]
   },
-  "unlockOrder": 107,
+  "unlockOrder": 108,
   "position": {
    "x": 82,
    "y": 38
+  }
+ },
+ "hoenn-raid": {
+  "id": "hoenn-raid",
+  "name": "Hoenn Raid Island",
+  "type": "raid",
+  "region": "hoenn",
+  "description": "A mysterious island where Hoenn's legendary Pokemon dwell.",
+  "connections": [
+   "hoenn-town"
+  ],
+  "unlock": {
+   "requires": [
+    "hoenn-route-3"
+   ]
+  },
+  "unlockOrder": 109,
+  "position": {
+   "x": 88,
+   "y": 14
   }
  },
  "sinnoh-town": {
@@ -1639,7 +1681,8 @@
   "region": "sinnoh",
   "description": "A quiet town in the Sinnoh region.",
   "connections": [
-   "sinnoh-route-1"
+   "sinnoh-route-1",
+   "sinnoh-raid"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1649,7 +1692,7 @@
     }
    ]
   },
-  "unlockOrder": 108,
+  "unlockOrder": 110,
   "position": {
    "x": 15,
    "y": 55
@@ -1692,7 +1735,7 @@
     "sinnoh-town"
    ]
   },
-  "unlockOrder": 109,
+  "unlockOrder": 111,
   "position": {
    "x": 38,
    "y": 35
@@ -1714,7 +1757,7 @@
     "sinnoh-route-1"
    ]
   },
-  "unlockOrder": 110,
+  "unlockOrder": 112,
   "position": {
    "x": 60,
    "y": 60
@@ -1735,10 +1778,30 @@
     "sinnoh-route-2"
    ]
   },
-  "unlockOrder": 111,
+  "unlockOrder": 113,
   "position": {
    "x": 82,
    "y": 38
+  }
+ },
+ "sinnoh-raid": {
+  "id": "sinnoh-raid",
+  "name": "Sinnoh Raid Island",
+  "type": "raid",
+  "region": "sinnoh",
+  "description": "A mysterious island where Sinnoh's legendary Pokemon dwell.",
+  "connections": [
+   "sinnoh-town"
+  ],
+  "unlock": {
+   "requires": [
+    "sinnoh-route-3"
+   ]
+  },
+  "unlockOrder": 114,
+  "position": {
+   "x": 88,
+   "y": 14
   }
  },
  "unova-town": {
@@ -1748,7 +1811,8 @@
   "region": "unova",
   "description": "A quiet town in the Unova region.",
   "connections": [
-   "unova-route-1"
+   "unova-route-1",
+   "unova-raid"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1758,7 +1822,7 @@
     }
    ]
   },
-  "unlockOrder": 112,
+  "unlockOrder": 115,
   "position": {
    "x": 15,
    "y": 55
@@ -1801,7 +1865,7 @@
     "unova-town"
    ]
   },
-  "unlockOrder": 113,
+  "unlockOrder": 116,
   "position": {
    "x": 38,
    "y": 35
@@ -1823,7 +1887,7 @@
     "unova-route-1"
    ]
   },
-  "unlockOrder": 114,
+  "unlockOrder": 117,
   "position": {
    "x": 60,
    "y": 60
@@ -1844,10 +1908,30 @@
     "unova-route-2"
    ]
   },
-  "unlockOrder": 115,
+  "unlockOrder": 118,
   "position": {
    "x": 82,
    "y": 38
+  }
+ },
+ "unova-raid": {
+  "id": "unova-raid",
+  "name": "Unova Raid Island",
+  "type": "raid",
+  "region": "unova",
+  "description": "A mysterious island where Unova's legendary Pokemon dwell.",
+  "connections": [
+   "unova-town"
+  ],
+  "unlock": {
+   "requires": [
+    "unova-route-3"
+   ]
+  },
+  "unlockOrder": 119,
+  "position": {
+   "x": 88,
+   "y": 14
   }
  },
  "kalos-town": {
@@ -1857,7 +1941,8 @@
   "region": "kalos",
   "description": "A quiet town in the Kalos region.",
   "connections": [
-   "kalos-route-1"
+   "kalos-route-1",
+   "kalos-raid"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1867,7 +1952,7 @@
     }
    ]
   },
-  "unlockOrder": 116,
+  "unlockOrder": 120,
   "position": {
    "x": 15,
    "y": 55
@@ -1910,7 +1995,7 @@
     "kalos-town"
    ]
   },
-  "unlockOrder": 117,
+  "unlockOrder": 121,
   "position": {
    "x": 38,
    "y": 35
@@ -1932,7 +2017,7 @@
     "kalos-route-1"
    ]
   },
-  "unlockOrder": 118,
+  "unlockOrder": 122,
   "position": {
    "x": 60,
    "y": 60
@@ -1953,10 +2038,30 @@
     "kalos-route-2"
    ]
   },
-  "unlockOrder": 119,
+  "unlockOrder": 123,
   "position": {
    "x": 82,
    "y": 38
+  }
+ },
+ "kalos-raid": {
+  "id": "kalos-raid",
+  "name": "Kalos Raid Island",
+  "type": "raid",
+  "region": "kalos",
+  "description": "A mysterious island where Kalos's legendary Pokemon dwell.",
+  "connections": [
+   "kalos-town"
+  ],
+  "unlock": {
+   "requires": [
+    "kalos-route-3"
+   ]
+  },
+  "unlockOrder": 124,
+  "position": {
+   "x": 88,
+   "y": 14
   }
  },
  "alola-town": {
@@ -1966,7 +2071,8 @@
   "region": "alola",
   "description": "A quiet town in the Alola region.",
   "connections": [
-   "alola-route-1"
+   "alola-route-1",
+   "alola-raid"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1976,7 +2082,7 @@
     }
    ]
   },
-  "unlockOrder": 120,
+  "unlockOrder": 125,
   "position": {
    "x": 15,
    "y": 55
@@ -2019,7 +2125,7 @@
     "alola-town"
    ]
   },
-  "unlockOrder": 121,
+  "unlockOrder": 126,
   "position": {
    "x": 38,
    "y": 35
@@ -2041,7 +2147,7 @@
     "alola-route-1"
    ]
   },
-  "unlockOrder": 122,
+  "unlockOrder": 127,
   "position": {
    "x": 60,
    "y": 60
@@ -2062,10 +2168,30 @@
     "alola-route-2"
    ]
   },
-  "unlockOrder": 123,
+  "unlockOrder": 128,
   "position": {
    "x": 82,
    "y": 38
+  }
+ },
+ "alola-raid": {
+  "id": "alola-raid",
+  "name": "Alola Raid Island",
+  "type": "raid",
+  "region": "alola",
+  "description": "A mysterious island where Alola's legendary Pokemon dwell.",
+  "connections": [
+   "alola-town"
+  ],
+  "unlock": {
+   "requires": [
+    "alola-route-3"
+   ]
+  },
+  "unlockOrder": 129,
+  "position": {
+   "x": 88,
+   "y": 14
   }
  },
  "galar-town": {
@@ -2075,7 +2201,8 @@
   "region": "galar",
   "description": "A quiet town in the Galar region.",
   "connections": [
-   "galar-route-1"
+   "galar-route-1",
+   "galar-raid"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -2085,7 +2212,7 @@
     }
    ]
   },
-  "unlockOrder": 124,
+  "unlockOrder": 130,
   "position": {
    "x": 15,
    "y": 55
@@ -2128,7 +2255,7 @@
     "galar-town"
    ]
   },
-  "unlockOrder": 125,
+  "unlockOrder": 131,
   "position": {
    "x": 38,
    "y": 35
@@ -2150,7 +2277,7 @@
     "galar-route-1"
    ]
   },
-  "unlockOrder": 126,
+  "unlockOrder": 132,
   "position": {
    "x": 60,
    "y": 60
@@ -2171,10 +2298,30 @@
     "galar-route-2"
    ]
   },
-  "unlockOrder": 127,
+  "unlockOrder": 133,
   "position": {
    "x": 82,
    "y": 38
+  }
+ },
+ "galar-raid": {
+  "id": "galar-raid",
+  "name": "Galar Raid Island",
+  "type": "raid",
+  "region": "galar",
+  "description": "A mysterious island where Galar's legendary Pokemon dwell.",
+  "connections": [
+   "galar-town"
+  ],
+  "unlock": {
+   "requires": [
+    "galar-route-3"
+   ]
+  },
+  "unlockOrder": 134,
+  "position": {
+   "x": 88,
+   "y": 14
   }
  },
  "paldea-town": {
@@ -2184,7 +2331,8 @@
   "region": "paldea",
   "description": "A quiet town in the Paldea region.",
   "connections": [
-   "paldea-route-1"
+   "paldea-route-1",
+   "paldea-raid"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -2194,7 +2342,7 @@
     }
    ]
   },
-  "unlockOrder": 128,
+  "unlockOrder": 135,
   "position": {
    "x": 15,
    "y": 55
@@ -2237,7 +2385,7 @@
     "paldea-town"
    ]
   },
-  "unlockOrder": 129,
+  "unlockOrder": 136,
   "position": {
    "x": 38,
    "y": 35
@@ -2259,7 +2407,7 @@
     "paldea-route-1"
    ]
   },
-  "unlockOrder": 130,
+  "unlockOrder": 137,
   "position": {
    "x": 60,
    "y": 60
@@ -2280,10 +2428,30 @@
     "paldea-route-2"
    ]
   },
-  "unlockOrder": 131,
+  "unlockOrder": 138,
   "position": {
    "x": 82,
    "y": 38
+  }
+ },
+ "paldea-raid": {
+  "id": "paldea-raid",
+  "name": "Paldea Raid Island",
+  "type": "raid",
+  "region": "paldea",
+  "description": "A mysterious island where Paldea's legendary Pokemon dwell.",
+  "connections": [
+   "paldea-town"
+  ],
+  "unlock": {
+   "requires": [
+    "paldea-route-3"
+   ]
+  },
+  "unlockOrder": 139,
+  "position": {
+   "x": 88,
+   "y": 14
   }
  }
 }

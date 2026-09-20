@@ -145,7 +145,7 @@ type GameState = {
   shinyCaught: string[]
   defeatedGyms: string[]
   defeatedEliteFour: string[]
-  championDefeated: boolean
+  defeatedChampions: string[]
   victoryTokens: number
   battlesWonByLocation: Record<string, number>
   wildBattlesWon: number
@@ -155,6 +155,7 @@ type GameState = {
   trainerBattle: TrainerBattle | null
   bossBattle: TrainerBattle | null
   bossQueue: any[]
+  raidRegion: string | null
   levelUpNotification: string | null
   [key: string]: any
 }
@@ -173,6 +174,7 @@ type Region = {
   name: string
   generation: number
   order: number
+  legendaries?: { speciesKey: string; level: number }[]
 }
 
 type Mart = {

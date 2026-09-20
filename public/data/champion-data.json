@@ -1,32 +1,299 @@
-{
-    "id": "blue",
-    "name": "Blue",
-    "title": "Pokemon League Champion",
-    "spriteKey": "blue-gen3",
-    "team": [
-        {
-            "speciesKey": "pidgeot",
-            "level": 61
-        },
-        {
-            "speciesKey": "alakazam",
-            "level": 59
-        },
-        {
-            "speciesKey": "rhydon",
-            "level": 61
-        },
-        {
-            "speciesKey": "gyarados",
-            "level": 63
-        },
-        {
-            "speciesKey": "arcanine",
-            "level": 63
-        },
-        {
-            "speciesKey": "venusaur",
-            "level": 65
-        }
-    ]
-}
+[
+ {
+  "id": "blue",
+  "name": "Blue",
+  "title": "Pokemon League Champion",
+  "spriteKey": "blue-gen3",
+  "team": [
+   {
+    "speciesKey": "pidgeot",
+    "level": 61
+   },
+   {
+    "speciesKey": "alakazam",
+    "level": 59
+   },
+   {
+    "speciesKey": "rhydon",
+    "level": 61
+   },
+   {
+    "speciesKey": "gyarados",
+    "level": 63
+   },
+   {
+    "speciesKey": "arcanine",
+    "level": 63
+   },
+   {
+    "speciesKey": "venusaur",
+    "level": 65
+   }
+  ],
+  "region": "kanto"
+ },
+ {
+  "id": "johto-champion",
+  "name": "Lance",
+  "title": "Johto Champion",
+  "region": "johto",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "slowking",
+    "level": 66
+   },
+   {
+    "speciesKey": "misdreavus",
+    "level": 67
+   },
+   {
+    "speciesKey": "unown",
+    "level": 68
+   },
+   {
+    "speciesKey": "wobbuffet",
+    "level": 69
+   },
+   {
+    "speciesKey": "girafarig",
+    "level": 70
+   },
+   {
+    "speciesKey": "pineco",
+    "level": 71
+   }
+  ]
+ },
+ {
+  "id": "hoenn-champion",
+  "name": "Steven",
+  "title": "Hoenn Champion",
+  "region": "hoenn",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "nosepass",
+    "level": 75
+   },
+   {
+    "speciesKey": "skitty",
+    "level": 76
+   },
+   {
+    "speciesKey": "delcatty",
+    "level": 77
+   },
+   {
+    "speciesKey": "sableye",
+    "level": 78
+   },
+   {
+    "speciesKey": "mawile",
+    "level": 79
+   },
+   {
+    "speciesKey": "aron",
+    "level": 80
+   }
+  ]
+ },
+ {
+  "id": "sinnoh-champion",
+  "name": "Cynthia",
+  "title": "Sinnoh Champion",
+  "region": "sinnoh",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "stunky",
+    "level": 84
+   },
+   {
+    "speciesKey": "skuntank",
+    "level": 85
+   },
+   {
+    "speciesKey": "bronzor",
+    "level": 86
+   },
+   {
+    "speciesKey": "bronzong",
+    "level": 87
+   },
+   {
+    "speciesKey": "bonsly",
+    "level": 88
+   },
+   {
+    "speciesKey": "mimeJR",
+    "level": 89
+   }
+  ]
+ },
+ {
+  "id": "unova-champion",
+  "name": "Alder",
+  "title": "Unova Champion",
+  "region": "unova",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "leavanny",
+    "level": 93
+   },
+   {
+    "speciesKey": "venipede",
+    "level": 94
+   },
+   {
+    "speciesKey": "whirlipede",
+    "level": 95
+   },
+   {
+    "speciesKey": "scolipede",
+    "level": 96
+   },
+   {
+    "speciesKey": "cottonee",
+    "level": 97
+   },
+   {
+    "speciesKey": "whimsicott",
+    "level": 98
+   }
+  ]
+ },
+ {
+  "id": "kalos-champion",
+  "name": "Diantha",
+  "title": "Kalos Champion",
+  "region": "kalos",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "tyrantrum",
+    "level": 100
+   },
+   {
+    "speciesKey": "amaura",
+    "level": 100
+   },
+   {
+    "speciesKey": "aurorus",
+    "level": 100
+   },
+   {
+    "speciesKey": "sylveon",
+    "level": 100
+   },
+   {
+    "speciesKey": "hawlucha",
+    "level": 100
+   },
+   {
+    "speciesKey": "dedenne",
+    "level": 100
+   }
+  ]
+ },
+ {
+  "id": "alola-champion",
+  "name": "Kukui",
+  "title": "Alola Champion",
+  "region": "alola",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "sandygast",
+    "level": 100
+   },
+   {
+    "speciesKey": "palossand",
+    "level": 100
+   },
+   {
+    "speciesKey": "pyukumuku",
+    "level": 100
+   },
+   {
+    "speciesKey": "minior",
+    "level": 100
+   },
+   {
+    "speciesKey": "komala",
+    "level": 100
+   },
+   {
+    "speciesKey": "turtonator",
+    "level": 100
+   }
+  ]
+ },
+ {
+  "id": "galar-champion",
+  "name": "Leon",
+  "title": "Galar Champion",
+  "region": "galar",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "hattrem",
+    "level": 100
+   },
+   {
+    "speciesKey": "hatterene",
+    "level": 100
+   },
+   {
+    "speciesKey": "impidimp",
+    "level": 100
+   },
+   {
+    "speciesKey": "morgrem",
+    "level": 100
+   },
+   {
+    "speciesKey": "grimmsnarl",
+    "level": 100
+   },
+   {
+    "speciesKey": "obstagoon",
+    "level": 100
+   }
+  ]
+ },
+ {
+  "id": "paldea-champion",
+  "name": "Geeta",
+  "title": "Paldea Champion",
+  "region": "paldea",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "rellor",
+    "level": 100
+   },
+   {
+    "speciesKey": "rabsca",
+    "level": 100
+   },
+   {
+    "speciesKey": "flittle",
+    "level": 100
+   },
+   {
+    "speciesKey": "espathra",
+    "level": 100
+   },
+   {
+    "speciesKey": "tinkatink",
+    "level": 100
+   },
+   {
+    "speciesKey": "tinkatuff",
+    "level": 100
+   }
+  ]
+ }
+]

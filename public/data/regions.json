@@ -3,54 +3,364 @@
   "id": "kanto",
   "name": "Kanto",
   "generation": 1,
-  "order": 1
+  "order": 1,
+  "legendaries": [
+   {
+    "speciesKey": "articuno",
+    "level": 70
+   },
+   {
+    "speciesKey": "zapdos",
+    "level": 70
+   },
+   {
+    "speciesKey": "moltres",
+    "level": 70
+   },
+   {
+    "speciesKey": "mewtwo",
+    "level": 80
+   },
+   {
+    "speciesKey": "mew",
+    "level": 60
+   }
+  ]
  },
  {
   "id": "johto",
   "name": "Johto",
   "generation": 2,
-  "order": 2
+  "order": 2,
+  "legendaries": [
+   {
+    "speciesKey": "raikou",
+    "level": 63
+   },
+   {
+    "speciesKey": "entei",
+    "level": 63
+   },
+   {
+    "speciesKey": "suicune",
+    "level": 63
+   },
+   {
+    "speciesKey": "lugia",
+    "level": 63
+   },
+   {
+    "speciesKey": "ho-oh",
+    "level": 63
+   }
+  ]
  },
  {
   "id": "hoenn",
   "name": "Hoenn",
   "generation": 3,
-  "order": 3
+  "order": 3,
+  "legendaries": [
+   {
+    "speciesKey": "beldum",
+    "level": 72
+   },
+   {
+    "speciesKey": "metang",
+    "level": 72
+   },
+   {
+    "speciesKey": "metagross",
+    "level": 72
+   },
+   {
+    "speciesKey": "regirock",
+    "level": 72
+   },
+   {
+    "speciesKey": "regice",
+    "level": 72
+   },
+   {
+    "speciesKey": "registeel",
+    "level": 72
+   },
+   {
+    "speciesKey": "latias",
+    "level": 72
+   },
+   {
+    "speciesKey": "latios",
+    "level": 72
+   },
+   {
+    "speciesKey": "kyogre",
+    "level": 72
+   },
+   {
+    "speciesKey": "groudon",
+    "level": 72
+   },
+   {
+    "speciesKey": "jirachi",
+    "level": 72
+   },
+   {
+    "speciesKey": "deoxys",
+    "level": 72
+   }
+  ]
  },
  {
   "id": "sinnoh",
   "name": "Sinnoh",
   "generation": 4,
-  "order": 4
+  "order": 4,
+  "legendaries": [
+   {
+    "speciesKey": "uxie",
+    "level": 81
+   },
+   {
+    "speciesKey": "mesprit",
+    "level": 81
+   },
+   {
+    "speciesKey": "azelf",
+    "level": 81
+   },
+   {
+    "speciesKey": "dialga",
+    "level": 81
+   },
+   {
+    "speciesKey": "palkia",
+    "level": 81
+   },
+   {
+    "speciesKey": "heatran",
+    "level": 81
+   },
+   {
+    "speciesKey": "regigigas",
+    "level": 81
+   },
+   {
+    "speciesKey": "giratina",
+    "level": 81
+   },
+   {
+    "speciesKey": "cresselia",
+    "level": 81
+   },
+   {
+    "speciesKey": "manaphy",
+    "level": 81
+   },
+   {
+    "speciesKey": "darkrai",
+    "level": 81
+   },
+   {
+    "speciesKey": "arceus",
+    "level": 81
+   }
+  ]
  },
  {
   "id": "unova",
   "name": "Unova",
   "generation": 5,
-  "order": 5
+  "order": 5,
+  "legendaries": [
+   {
+    "speciesKey": "victini",
+    "level": 90
+   },
+   {
+    "speciesKey": "cobalion",
+    "level": 90
+   },
+   {
+    "speciesKey": "terrakion",
+    "level": 90
+   },
+   {
+    "speciesKey": "virizion",
+    "level": 90
+   },
+   {
+    "speciesKey": "tornadus",
+    "level": 90
+   },
+   {
+    "speciesKey": "thundurus",
+    "level": 90
+   },
+   {
+    "speciesKey": "reshiram",
+    "level": 90
+   },
+   {
+    "speciesKey": "zekrom",
+    "level": 90
+   },
+   {
+    "speciesKey": "landorus",
+    "level": 90
+   },
+   {
+    "speciesKey": "kyurem",
+    "level": 90
+   },
+   {
+    "speciesKey": "keldeo",
+    "level": 90
+   },
+   {
+    "speciesKey": "meloetta",
+    "level": 90
+   },
+   {
+    "speciesKey": "genesect",
+    "level": 90
+   }
+  ]
  },
  {
   "id": "kalos",
   "name": "Kalos",
   "generation": 6,
-  "order": 6
+  "order": 6,
+  "legendaries": [
+   {
+    "speciesKey": "zygarde",
+    "level": 99
+   },
+   {
+    "speciesKey": "diancie",
+    "level": 99
+   },
+   {
+    "speciesKey": "hoopa",
+    "level": 99
+   },
+   {
+    "speciesKey": "volcanion",
+    "level": 99
+   }
+  ]
  },
  {
   "id": "alola",
   "name": "Alola",
   "generation": 7,
-  "order": 7
+  "order": 7,
+  "legendaries": [
+   {
+    "speciesKey": "type: null",
+    "level": 100
+   },
+   {
+    "speciesKey": "silvally",
+    "level": 100
+   },
+   {
+    "speciesKey": "tapu koko",
+    "level": 100
+   },
+   {
+    "speciesKey": "tapu lele",
+    "level": 100
+   },
+   {
+    "speciesKey": "tapu bulu",
+    "level": 100
+   },
+   {
+    "speciesKey": "tapu fini",
+    "level": 100
+   },
+   {
+    "speciesKey": "magearna",
+    "level": 100
+   },
+   {
+    "speciesKey": "marshadow",
+    "level": 100
+   },
+   {
+    "speciesKey": "zeraora",
+    "level": 100
+   },
+   {
+    "speciesKey": "meltan",
+    "level": 100
+   },
+   {
+    "speciesKey": "melmetal",
+    "level": 100
+   }
+  ]
  },
  {
   "id": "galar",
   "name": "Galar",
   "generation": 8,
-  "order": 8
+  "order": 8,
+  "legendaries": [
+   {
+    "speciesKey": "kubfu",
+    "level": 100
+   },
+   {
+    "speciesKey": "urshifu-sss",
+    "level": 100
+   },
+   {
+    "speciesKey": "zarude",
+    "level": 100
+   },
+   {
+    "speciesKey": "regieleki",
+    "level": 100
+   },
+   {
+    "speciesKey": "regidrago",
+    "level": 100
+   },
+   {
+    "speciesKey": "glastrier",
+    "level": 100
+   },
+   {
+    "speciesKey": "spectrier",
+    "level": 100
+   },
+   {
+    "speciesKey": "calyrex",
+    "level": 100
+   },
+   {
+    "speciesKey": "enamorus",
+    "level": 100
+   }
+  ]
  },
  {
   "id": "paldea",
   "name": "Paldea",
   "generation": 9,
-  "order": 9
+  "order": 9,
+  "legendaries": [
+   {
+    "speciesKey": "koraidon",
+    "level": 100
+   },
+   {
+    "speciesKey": "miraidon",
+    "level": 100
+   }
+  ]
  }
 ]

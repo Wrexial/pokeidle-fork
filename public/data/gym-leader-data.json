@@ -1,198 +1,1742 @@
 [
-    {
-        "id": "brock",
-        "name": "Brock",
-        "title": "Pewter City Gym Leader",
-        "locationKey": "pewterCity",
-        "badgeName": "Boulder Badge",
-        "badgeColor": "#a0a0a0",
-        "spriteKey": "brock-gen3",
-        "team": [
-            {
-                "speciesKey": "geodude",
-                "level": 12
-            },
-            {
-                "speciesKey": "onix",
-                "level": 14
-            }
-        ]
-    },
-    {
-        "id": "misty",
-        "name": "Misty",
-        "title": "Cerulean City Gym Leader",
-        "locationKey": "ceruleanCity",
-        "badgeName": "Cascade Badge",
-        "badgeColor": "#4a90d9",
-        "spriteKey": "misty-gen3",
-        "team": [
-            {
-                "speciesKey": "staryu",
-                "level": 18
-            },
-            {
-                "speciesKey": "starmie",
-                "level": 21
-            }
-        ]
-    },
-    {
-        "id": "surge",
-        "name": "Lt. Surge",
-        "title": "Vermilion City Gym Leader",
-        "locationKey": "vermilionCity",
-        "badgeName": "Thunder Badge",
-        "badgeColor": "#f0c030",
-        "spriteKey": "ltsurge-gen3",
-        "team": [
-            {
-                "speciesKey": "voltorb",
-                "level": 21
-            },
-            {
-                "speciesKey": "pikachu",
-                "level": 18
-            },
-            {
-                "speciesKey": "raichu",
-                "level": 24
-            }
-        ]
-    },
-    {
-        "id": "erika",
-        "name": "Erika",
-        "title": "Celadon City Gym Leader",
-        "locationKey": "celadonCity",
-        "badgeName": "Rainbow Badge",
-        "badgeColor": "#78c850",
-        "spriteKey": "erika-gen3",
-        "team": [
-            {
-                "speciesKey": "victreebel",
-                "level": 29
-            },
-            {
-                "speciesKey": "tangela",
-                "level": 24
-            },
-            {
-                "speciesKey": "vileplume",
-                "level": 29
-            }
-        ]
-    },
-    {
-        "id": "koga",
-        "name": "Koga",
-        "title": "Fuchsia City Gym Leader",
-        "locationKey": "fuchsiaCity",
-        "badgeName": "Soul Badge",
-        "badgeColor": "#a040a0",
-        "spriteKey": "koga-gen3",
-        "team": [
-            {
-                "speciesKey": "koffing",
-                "level": 37
-            },
-            {
-                "speciesKey": "muk",
-                "level": 39
-            },
-            {
-                "speciesKey": "koffing",
-                "level": 37
-            },
-            {
-                "speciesKey": "weezing",
-                "level": 43
-            }
-        ]
-    },
-    {
-        "id": "sabrina",
-        "name": "Sabrina",
-        "title": "Saffron City Gym Leader",
-        "locationKey": "saffronCity",
-        "badgeName": "Marsh Badge",
-        "badgeColor": "#e868a8",
-        "spriteKey": "sabrina-gen3",
-        "team": [
-            {
-                "speciesKey": "kadabra",
-                "level": 38
-            },
-            {
-                "speciesKey": "mrMime",
-                "level": 37
-            },
-            {
-                "speciesKey": "venomoth",
-                "level": 38
-            },
-            {
-                "speciesKey": "alakazam",
-                "level": 43
-            }
-        ]
-    },
-    {
-        "id": "blaine",
-        "name": "Blaine",
-        "title": "Cinnabar Island Gym Leader",
-        "locationKey": "cinnabarIsland",
-        "badgeName": "Volcano Badge",
-        "badgeColor": "#f08030",
-        "spriteKey": "blaine-gen3",
-        "team": [
-            {
-                "speciesKey": "growlithe",
-                "level": 42
-            },
-            {
-                "speciesKey": "ponyta",
-                "level": 40
-            },
-            {
-                "speciesKey": "rapidash",
-                "level": 42
-            },
-            {
-                "speciesKey": "arcanine",
-                "level": 47
-            }
-        ]
-    },
-    {
-        "id": "giovanni",
-        "name": "Giovanni",
-        "title": "Viridian City Gym Leader",
-        "locationKey": "viridianCity",
-        "badgeName": "Earth Badge",
-        "badgeColor": "#e0c068",
-        "spriteKey": "giovanni-gen3",
-        "team": [
-            {
-                "speciesKey": "rhyhorn",
-                "level": 45
-            },
-            {
-                "speciesKey": "dugtrio",
-                "level": 42
-            },
-            {
-                "speciesKey": "nidoqueen",
-                "level": 44
-            },
-            {
-                "speciesKey": "nidoking",
-                "level": 45
-            },
-            {
-                "speciesKey": "rhydon",
-                "level": 50
-            }
-        ]
-    }
+ {
+  "id": "brock",
+  "name": "Brock",
+  "title": "Pewter City Gym Leader",
+  "locationKey": "pewterCity",
+  "badgeName": "Boulder Badge",
+  "badgeColor": "#a0a0a0",
+  "spriteKey": "brock-gen3",
+  "team": [
+   {
+    "speciesKey": "geodude",
+    "level": 12
+   },
+   {
+    "speciesKey": "onix",
+    "level": 14
+   }
+  ],
+  "region": "kanto"
+ },
+ {
+  "id": "misty",
+  "name": "Misty",
+  "title": "Cerulean City Gym Leader",
+  "locationKey": "ceruleanCity",
+  "badgeName": "Cascade Badge",
+  "badgeColor": "#4a90d9",
+  "spriteKey": "misty-gen3",
+  "team": [
+   {
+    "speciesKey": "staryu",
+    "level": 18
+   },
+   {
+    "speciesKey": "starmie",
+    "level": 21
+   }
+  ],
+  "region": "kanto"
+ },
+ {
+  "id": "surge",
+  "name": "Lt. Surge",
+  "title": "Vermilion City Gym Leader",
+  "locationKey": "vermilionCity",
+  "badgeName": "Thunder Badge",
+  "badgeColor": "#f0c030",
+  "spriteKey": "ltsurge-gen3",
+  "team": [
+   {
+    "speciesKey": "voltorb",
+    "level": 21
+   },
+   {
+    "speciesKey": "pikachu",
+    "level": 18
+   },
+   {
+    "speciesKey": "raichu",
+    "level": 24
+   }
+  ],
+  "region": "kanto"
+ },
+ {
+  "id": "erika",
+  "name": "Erika",
+  "title": "Celadon City Gym Leader",
+  "locationKey": "celadonCity",
+  "badgeName": "Rainbow Badge",
+  "badgeColor": "#78c850",
+  "spriteKey": "erika-gen3",
+  "team": [
+   {
+    "speciesKey": "victreebel",
+    "level": 29
+   },
+   {
+    "speciesKey": "tangela",
+    "level": 24
+   },
+   {
+    "speciesKey": "vileplume",
+    "level": 29
+   }
+  ],
+  "region": "kanto"
+ },
+ {
+  "id": "koga",
+  "name": "Koga",
+  "title": "Fuchsia City Gym Leader",
+  "locationKey": "fuchsiaCity",
+  "badgeName": "Soul Badge",
+  "badgeColor": "#a040a0",
+  "spriteKey": "koga-gen3",
+  "team": [
+   {
+    "speciesKey": "koffing",
+    "level": 37
+   },
+   {
+    "speciesKey": "muk",
+    "level": 39
+   },
+   {
+    "speciesKey": "koffing",
+    "level": 37
+   },
+   {
+    "speciesKey": "weezing",
+    "level": 43
+   }
+  ],
+  "region": "kanto"
+ },
+ {
+  "id": "sabrina",
+  "name": "Sabrina",
+  "title": "Saffron City Gym Leader",
+  "locationKey": "saffronCity",
+  "badgeName": "Marsh Badge",
+  "badgeColor": "#e868a8",
+  "spriteKey": "sabrina-gen3",
+  "team": [
+   {
+    "speciesKey": "kadabra",
+    "level": 38
+   },
+   {
+    "speciesKey": "mrMime",
+    "level": 37
+   },
+   {
+    "speciesKey": "venomoth",
+    "level": 38
+   },
+   {
+    "speciesKey": "alakazam",
+    "level": 43
+   }
+  ],
+  "region": "kanto"
+ },
+ {
+  "id": "blaine",
+  "name": "Blaine",
+  "title": "Cinnabar Island Gym Leader",
+  "locationKey": "cinnabarIsland",
+  "badgeName": "Volcano Badge",
+  "badgeColor": "#f08030",
+  "spriteKey": "blaine-gen3",
+  "team": [
+   {
+    "speciesKey": "growlithe",
+    "level": 42
+   },
+   {
+    "speciesKey": "ponyta",
+    "level": 40
+   },
+   {
+    "speciesKey": "rapidash",
+    "level": 42
+   },
+   {
+    "speciesKey": "arcanine",
+    "level": 47
+   }
+  ],
+  "region": "kanto"
+ },
+ {
+  "id": "giovanni",
+  "name": "Giovanni",
+  "title": "Viridian City Gym Leader",
+  "locationKey": "viridianCity",
+  "badgeName": "Earth Badge",
+  "badgeColor": "#e0c068",
+  "spriteKey": "giovanni-gen3",
+  "team": [
+   {
+    "speciesKey": "rhyhorn",
+    "level": 45
+   },
+   {
+    "speciesKey": "dugtrio",
+    "level": 42
+   },
+   {
+    "speciesKey": "nidoqueen",
+    "level": 44
+   },
+   {
+    "speciesKey": "nidoking",
+    "level": 45
+   },
+   {
+    "speciesKey": "rhydon",
+    "level": 50
+   }
+  ],
+  "region": "kanto"
+ },
+ {
+  "id": "johto-gym-1",
+  "name": "Falkner",
+  "title": "Johto Gym Leader",
+  "region": "johto",
+  "locationKey": "johto-town",
+  "badgeName": "Johto Badge 1",
+  "badgeColor": "#a0a0a0",
+  "spriteKey": "beauty",
+  "team": [
+   {
+    "speciesKey": "bayleef",
+    "level": 28
+   },
+   {
+    "speciesKey": "meganium",
+    "level": 29
+   },
+   {
+    "speciesKey": "quilava",
+    "level": 30
+   }
+  ]
+ },
+ {
+  "id": "johto-gym-2",
+  "name": "Bugsy",
+  "title": "Johto Gym Leader",
+  "region": "johto",
+  "locationKey": "johto-town",
+  "badgeName": "Johto Badge 2",
+  "badgeColor": "#4878b0",
+  "spriteKey": "blackbelt",
+  "team": [
+   {
+    "speciesKey": "typhlosion",
+    "level": 31
+   },
+   {
+    "speciesKey": "croconaw",
+    "level": 32
+   },
+   {
+    "speciesKey": "feraligatr",
+    "level": 33
+   }
+  ]
+ },
+ {
+  "id": "johto-gym-3",
+  "name": "Whitney",
+  "title": "Johto Gym Leader",
+  "region": "johto",
+  "locationKey": "johto-town",
+  "badgeName": "Johto Badge 3",
+  "badgeColor": "#c8a030",
+  "spriteKey": "psychic",
+  "team": [
+   {
+    "speciesKey": "sentret",
+    "level": 34
+   },
+   {
+    "speciesKey": "furret",
+    "level": 35
+   },
+   {
+    "speciesKey": "hoothoot",
+    "level": 36
+   }
+  ]
+ },
+ {
+  "id": "johto-gym-4",
+  "name": "Morty",
+  "title": "Johto Gym Leader",
+  "region": "johto",
+  "locationKey": "johto-town",
+  "badgeName": "Johto Badge 4",
+  "badgeColor": "#48a048",
+  "spriteKey": "scientist",
+  "team": [
+   {
+    "speciesKey": "noctowl",
+    "level": 37
+   },
+   {
+    "speciesKey": "ledyba",
+    "level": 38
+   },
+   {
+    "speciesKey": "ledian",
+    "level": 39
+   }
+  ]
+ },
+ {
+  "id": "johto-gym-5",
+  "name": "Chuck",
+  "title": "Johto Gym Leader",
+  "region": "johto",
+  "locationKey": "johto-town",
+  "badgeName": "Johto Badge 5",
+  "badgeColor": "#b83028",
+  "spriteKey": "camper",
+  "team": [
+   {
+    "speciesKey": "spinarak",
+    "level": 40
+   },
+   {
+    "speciesKey": "ariados",
+    "level": 41
+   },
+   {
+    "speciesKey": "crobat",
+    "level": 42
+   }
+  ]
+ },
+ {
+  "id": "johto-gym-6",
+  "name": "Jasmine",
+  "title": "Johto Gym Leader",
+  "region": "johto",
+  "locationKey": "johto-town",
+  "badgeName": "Johto Badge 6",
+  "badgeColor": "#a060c0",
+  "spriteKey": "swimmer",
+  "team": [
+   {
+    "speciesKey": "chinchou",
+    "level": 43
+   },
+   {
+    "speciesKey": "lanturn",
+    "level": 44
+   },
+   {
+    "speciesKey": "pichu",
+    "level": 45
+   }
+  ]
+ },
+ {
+  "id": "johto-gym-7",
+  "name": "Pryce",
+  "title": "Johto Gym Leader",
+  "region": "johto",
+  "locationKey": "johto-town",
+  "badgeName": "Johto Badge 7",
+  "badgeColor": "#e08040",
+  "spriteKey": "gentleman",
+  "team": [
+   {
+    "speciesKey": "cleffa",
+    "level": 46
+   },
+   {
+    "speciesKey": "igglybuff",
+    "level": 47
+   },
+   {
+    "speciesKey": "togepi",
+    "level": 48
+   }
+  ]
+ },
+ {
+  "id": "johto-gym-8",
+  "name": "Clair",
+  "title": "Johto Gym Leader",
+  "region": "johto",
+  "locationKey": "johto-town",
+  "badgeName": "Johto Badge 8",
+  "badgeColor": "#40c0c0",
+  "spriteKey": "juggler",
+  "team": [
+   {
+    "speciesKey": "togetic",
+    "level": 49
+   },
+   {
+    "speciesKey": "natu",
+    "level": 50
+   },
+   {
+    "speciesKey": "xatu",
+    "level": 51
+   }
+  ]
+ },
+ {
+  "id": "hoenn-gym-1",
+  "name": "Roxanne",
+  "title": "Hoenn Gym Leader",
+  "region": "hoenn",
+  "locationKey": "hoenn-town",
+  "badgeName": "Hoenn Badge 1",
+  "badgeColor": "#a0a0a0",
+  "spriteKey": "blackbelt",
+  "team": [
+   {
+    "speciesKey": "grovyle",
+    "level": 37
+   },
+   {
+    "speciesKey": "sceptile",
+    "level": 38
+   },
+   {
+    "speciesKey": "combusken",
+    "level": 39
+   }
+  ]
+ },
+ {
+  "id": "hoenn-gym-2",
+  "name": "Brawly",
+  "title": "Hoenn Gym Leader",
+  "region": "hoenn",
+  "locationKey": "hoenn-town",
+  "badgeName": "Hoenn Badge 2",
+  "badgeColor": "#4878b0",
+  "spriteKey": "psychic",
+  "team": [
+   {
+    "speciesKey": "blaziken",
+    "level": 40
+   },
+   {
+    "speciesKey": "marshtomp",
+    "level": 41
+   },
+   {
+    "speciesKey": "swampert",
+    "level": 42
+   }
+  ]
+ },
+ {
+  "id": "hoenn-gym-3",
+  "name": "Wattson",
+  "title": "Hoenn Gym Leader",
+  "region": "hoenn",
+  "locationKey": "hoenn-town",
+  "badgeName": "Hoenn Badge 3",
+  "badgeColor": "#c8a030",
+  "spriteKey": "scientist",
+  "team": [
+   {
+    "speciesKey": "poochyena",
+    "level": 43
+   },
+   {
+    "speciesKey": "mightyena",
+    "level": 44
+   },
+   {
+    "speciesKey": "zigzagoon",
+    "level": 45
+   }
+  ]
+ },
+ {
+  "id": "hoenn-gym-4",
+  "name": "Flannery",
+  "title": "Hoenn Gym Leader",
+  "region": "hoenn",
+  "locationKey": "hoenn-town",
+  "badgeName": "Hoenn Badge 4",
+  "badgeColor": "#48a048",
+  "spriteKey": "camper",
+  "team": [
+   {
+    "speciesKey": "linoone",
+    "level": 46
+   },
+   {
+    "speciesKey": "wurmple",
+    "level": 47
+   },
+   {
+    "speciesKey": "silcoon",
+    "level": 48
+   }
+  ]
+ },
+ {
+  "id": "hoenn-gym-5",
+  "name": "Norman",
+  "title": "Hoenn Gym Leader",
+  "region": "hoenn",
+  "locationKey": "hoenn-town",
+  "badgeName": "Hoenn Badge 5",
+  "badgeColor": "#b83028",
+  "spriteKey": "swimmer",
+  "team": [
+   {
+    "speciesKey": "beautifly",
+    "level": 49
+   },
+   {
+    "speciesKey": "cascoon",
+    "level": 50
+   },
+   {
+    "speciesKey": "dustox",
+    "level": 51
+   }
+  ]
+ },
+ {
+  "id": "hoenn-gym-6",
+  "name": "Winona",
+  "title": "Hoenn Gym Leader",
+  "region": "hoenn",
+  "locationKey": "hoenn-town",
+  "badgeName": "Hoenn Badge 6",
+  "badgeColor": "#a060c0",
+  "spriteKey": "gentleman",
+  "team": [
+   {
+    "speciesKey": "lotad",
+    "level": 52
+   },
+   {
+    "speciesKey": "lombre",
+    "level": 53
+   },
+   {
+    "speciesKey": "ludicolo",
+    "level": 54
+   }
+  ]
+ },
+ {
+  "id": "hoenn-gym-7",
+  "name": "Tate",
+  "title": "Hoenn Gym Leader",
+  "region": "hoenn",
+  "locationKey": "hoenn-town",
+  "badgeName": "Hoenn Badge 7",
+  "badgeColor": "#e08040",
+  "spriteKey": "juggler",
+  "team": [
+   {
+    "speciesKey": "seedot",
+    "level": 55
+   },
+   {
+    "speciesKey": "nuzleaf",
+    "level": 56
+   },
+   {
+    "speciesKey": "shiftry",
+    "level": 57
+   }
+  ]
+ },
+ {
+  "id": "hoenn-gym-8",
+  "name": "Juan",
+  "title": "Hoenn Gym Leader",
+  "region": "hoenn",
+  "locationKey": "hoenn-town",
+  "badgeName": "Hoenn Badge 8",
+  "badgeColor": "#40c0c0",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "taillow",
+    "level": 58
+   },
+   {
+    "speciesKey": "swellow",
+    "level": 59
+   },
+   {
+    "speciesKey": "wingull",
+    "level": 60
+   }
+  ]
+ },
+ {
+  "id": "sinnoh-gym-1",
+  "name": "Roark",
+  "title": "Sinnoh Gym Leader",
+  "region": "sinnoh",
+  "locationKey": "sinnoh-town",
+  "badgeName": "Sinnoh Badge 1",
+  "badgeColor": "#a0a0a0",
+  "spriteKey": "psychic",
+  "team": [
+   {
+    "speciesKey": "grotle",
+    "level": 46
+   },
+   {
+    "speciesKey": "torterra",
+    "level": 47
+   },
+   {
+    "speciesKey": "monferno",
+    "level": 48
+   }
+  ]
+ },
+ {
+  "id": "sinnoh-gym-2",
+  "name": "Gardenia",
+  "title": "Sinnoh Gym Leader",
+  "region": "sinnoh",
+  "locationKey": "sinnoh-town",
+  "badgeName": "Sinnoh Badge 2",
+  "badgeColor": "#4878b0",
+  "spriteKey": "scientist",
+  "team": [
+   {
+    "speciesKey": "infernape",
+    "level": 49
+   },
+   {
+    "speciesKey": "prinplup",
+    "level": 50
+   },
+   {
+    "speciesKey": "empoleon",
+    "level": 51
+   }
+  ]
+ },
+ {
+  "id": "sinnoh-gym-3",
+  "name": "Maylene",
+  "title": "Sinnoh Gym Leader",
+  "region": "sinnoh",
+  "locationKey": "sinnoh-town",
+  "badgeName": "Sinnoh Badge 3",
+  "badgeColor": "#c8a030",
+  "spriteKey": "camper",
+  "team": [
+   {
+    "speciesKey": "starly",
+    "level": 52
+   },
+   {
+    "speciesKey": "staravia",
+    "level": 53
+   },
+   {
+    "speciesKey": "staraptor",
+    "level": 54
+   }
+  ]
+ },
+ {
+  "id": "sinnoh-gym-4",
+  "name": "Crasher Wake",
+  "title": "Sinnoh Gym Leader",
+  "region": "sinnoh",
+  "locationKey": "sinnoh-town",
+  "badgeName": "Sinnoh Badge 4",
+  "badgeColor": "#48a048",
+  "spriteKey": "swimmer",
+  "team": [
+   {
+    "speciesKey": "bidoof",
+    "level": 55
+   },
+   {
+    "speciesKey": "bibarel",
+    "level": 56
+   },
+   {
+    "speciesKey": "kricketot",
+    "level": 57
+   }
+  ]
+ },
+ {
+  "id": "sinnoh-gym-5",
+  "name": "Fantina",
+  "title": "Sinnoh Gym Leader",
+  "region": "sinnoh",
+  "locationKey": "sinnoh-town",
+  "badgeName": "Sinnoh Badge 5",
+  "badgeColor": "#b83028",
+  "spriteKey": "gentleman",
+  "team": [
+   {
+    "speciesKey": "kricketune",
+    "level": 58
+   },
+   {
+    "speciesKey": "shinx",
+    "level": 59
+   },
+   {
+    "speciesKey": "luxio",
+    "level": 60
+   }
+  ]
+ },
+ {
+  "id": "sinnoh-gym-6",
+  "name": "Byron",
+  "title": "Sinnoh Gym Leader",
+  "region": "sinnoh",
+  "locationKey": "sinnoh-town",
+  "badgeName": "Sinnoh Badge 6",
+  "badgeColor": "#a060c0",
+  "spriteKey": "juggler",
+  "team": [
+   {
+    "speciesKey": "luxray",
+    "level": 61
+   },
+   {
+    "speciesKey": "budew",
+    "level": 62
+   },
+   {
+    "speciesKey": "roserade",
+    "level": 63
+   }
+  ]
+ },
+ {
+  "id": "sinnoh-gym-7",
+  "name": "Candice",
+  "title": "Sinnoh Gym Leader",
+  "region": "sinnoh",
+  "locationKey": "sinnoh-town",
+  "badgeName": "Sinnoh Badge 7",
+  "badgeColor": "#e08040",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "cranidos",
+    "level": 64
+   },
+   {
+    "speciesKey": "rampardos",
+    "level": 65
+   },
+   {
+    "speciesKey": "shieldon",
+    "level": 66
+   }
+  ]
+ },
+ {
+  "id": "sinnoh-gym-8",
+  "name": "Volkner",
+  "title": "Sinnoh Gym Leader",
+  "region": "sinnoh",
+  "locationKey": "sinnoh-town",
+  "badgeName": "Sinnoh Badge 8",
+  "badgeColor": "#40c0c0",
+  "spriteKey": "hiker",
+  "team": [
+   {
+    "speciesKey": "bastiodon",
+    "level": 67
+   },
+   {
+    "speciesKey": "burmy",
+    "level": 68
+   },
+   {
+    "speciesKey": "wormadam",
+    "level": 69
+   }
+  ]
+ },
+ {
+  "id": "unova-gym-1",
+  "name": "Cilan",
+  "title": "Unova Gym Leader",
+  "region": "unova",
+  "locationKey": "unova-town",
+  "badgeName": "Unova Badge 1",
+  "badgeColor": "#a0a0a0",
+  "spriteKey": "scientist",
+  "team": [
+   {
+    "speciesKey": "servine",
+    "level": 55
+   },
+   {
+    "speciesKey": "serperior",
+    "level": 56
+   },
+   {
+    "speciesKey": "pignite",
+    "level": 57
+   }
+  ]
+ },
+ {
+  "id": "unova-gym-2",
+  "name": "Lenora",
+  "title": "Unova Gym Leader",
+  "region": "unova",
+  "locationKey": "unova-town",
+  "badgeName": "Unova Badge 2",
+  "badgeColor": "#4878b0",
+  "spriteKey": "camper",
+  "team": [
+   {
+    "speciesKey": "emboar",
+    "level": 58
+   },
+   {
+    "speciesKey": "dewott",
+    "level": 59
+   },
+   {
+    "speciesKey": "samurott",
+    "level": 60
+   }
+  ]
+ },
+ {
+  "id": "unova-gym-3",
+  "name": "Burgh",
+  "title": "Unova Gym Leader",
+  "region": "unova",
+  "locationKey": "unova-town",
+  "badgeName": "Unova Badge 3",
+  "badgeColor": "#c8a030",
+  "spriteKey": "swimmer",
+  "team": [
+   {
+    "speciesKey": "patrat",
+    "level": 61
+   },
+   {
+    "speciesKey": "watchog",
+    "level": 62
+   },
+   {
+    "speciesKey": "lillipup",
+    "level": 63
+   }
+  ]
+ },
+ {
+  "id": "unova-gym-4",
+  "name": "Elesa",
+  "title": "Unova Gym Leader",
+  "region": "unova",
+  "locationKey": "unova-town",
+  "badgeName": "Unova Badge 4",
+  "badgeColor": "#48a048",
+  "spriteKey": "gentleman",
+  "team": [
+   {
+    "speciesKey": "herdier",
+    "level": 64
+   },
+   {
+    "speciesKey": "stoutland",
+    "level": 65
+   },
+   {
+    "speciesKey": "purrloin",
+    "level": 66
+   }
+  ]
+ },
+ {
+  "id": "unova-gym-5",
+  "name": "Clay",
+  "title": "Unova Gym Leader",
+  "region": "unova",
+  "locationKey": "unova-town",
+  "badgeName": "Unova Badge 5",
+  "badgeColor": "#b83028",
+  "spriteKey": "juggler",
+  "team": [
+   {
+    "speciesKey": "liepard",
+    "level": 67
+   },
+   {
+    "speciesKey": "pansage",
+    "level": 68
+   },
+   {
+    "speciesKey": "simisage",
+    "level": 69
+   }
+  ]
+ },
+ {
+  "id": "unova-gym-6",
+  "name": "Skyla",
+  "title": "Unova Gym Leader",
+  "region": "unova",
+  "locationKey": "unova-town",
+  "badgeName": "Unova Badge 6",
+  "badgeColor": "#a060c0",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "pansear",
+    "level": 70
+   },
+   {
+    "speciesKey": "simisear",
+    "level": 71
+   },
+   {
+    "speciesKey": "panpour",
+    "level": 72
+   }
+  ]
+ },
+ {
+  "id": "unova-gym-7",
+  "name": "Brycen",
+  "title": "Unova Gym Leader",
+  "region": "unova",
+  "locationKey": "unova-town",
+  "badgeName": "Unova Badge 7",
+  "badgeColor": "#e08040",
+  "spriteKey": "hiker",
+  "team": [
+   {
+    "speciesKey": "simipour",
+    "level": 73
+   },
+   {
+    "speciesKey": "munna",
+    "level": 74
+   },
+   {
+    "speciesKey": "musharna",
+    "level": 75
+   }
+  ]
+ },
+ {
+  "id": "unova-gym-8",
+  "name": "Drayden",
+  "title": "Unova Gym Leader",
+  "region": "unova",
+  "locationKey": "unova-town",
+  "badgeName": "Unova Badge 8",
+  "badgeColor": "#40c0c0",
+  "spriteKey": "beauty",
+  "team": [
+   {
+    "speciesKey": "pidove",
+    "level": 76
+   },
+   {
+    "speciesKey": "tranquill",
+    "level": 77
+   },
+   {
+    "speciesKey": "unfezant",
+    "level": 78
+   }
+  ]
+ },
+ {
+  "id": "kalos-gym-1",
+  "name": "Viola",
+  "title": "Kalos Gym Leader",
+  "region": "kalos",
+  "locationKey": "kalos-town",
+  "badgeName": "Kalos Badge 1",
+  "badgeColor": "#a0a0a0",
+  "spriteKey": "camper",
+  "team": [
+   {
+    "speciesKey": "quilladin",
+    "level": 64
+   },
+   {
+    "speciesKey": "chesnaught",
+    "level": 65
+   },
+   {
+    "speciesKey": "braixen",
+    "level": 66
+   }
+  ]
+ },
+ {
+  "id": "kalos-gym-2",
+  "name": "Grant",
+  "title": "Kalos Gym Leader",
+  "region": "kalos",
+  "locationKey": "kalos-town",
+  "badgeName": "Kalos Badge 2",
+  "badgeColor": "#4878b0",
+  "spriteKey": "swimmer",
+  "team": [
+   {
+    "speciesKey": "delphox",
+    "level": 67
+   },
+   {
+    "speciesKey": "frogadier",
+    "level": 68
+   },
+   {
+    "speciesKey": "greninja",
+    "level": 69
+   }
+  ]
+ },
+ {
+  "id": "kalos-gym-3",
+  "name": "Korrina",
+  "title": "Kalos Gym Leader",
+  "region": "kalos",
+  "locationKey": "kalos-town",
+  "badgeName": "Kalos Badge 3",
+  "badgeColor": "#c8a030",
+  "spriteKey": "gentleman",
+  "team": [
+   {
+    "speciesKey": "bunnelby",
+    "level": 70
+   },
+   {
+    "speciesKey": "diggersby",
+    "level": 71
+   },
+   {
+    "speciesKey": "fletchling",
+    "level": 72
+   }
+  ]
+ },
+ {
+  "id": "kalos-gym-4",
+  "name": "Ramos",
+  "title": "Kalos Gym Leader",
+  "region": "kalos",
+  "locationKey": "kalos-town",
+  "badgeName": "Kalos Badge 4",
+  "badgeColor": "#48a048",
+  "spriteKey": "juggler",
+  "team": [
+   {
+    "speciesKey": "fletchinder",
+    "level": 73
+   },
+   {
+    "speciesKey": "talonflame",
+    "level": 74
+   },
+   {
+    "speciesKey": "scatterbug",
+    "level": 75
+   }
+  ]
+ },
+ {
+  "id": "kalos-gym-5",
+  "name": "Clemont",
+  "title": "Kalos Gym Leader",
+  "region": "kalos",
+  "locationKey": "kalos-town",
+  "badgeName": "Kalos Badge 5",
+  "badgeColor": "#b83028",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "spewpa",
+    "level": 76
+   },
+   {
+    "speciesKey": "vivillon",
+    "level": 77
+   },
+   {
+    "speciesKey": "litleo",
+    "level": 78
+   }
+  ]
+ },
+ {
+  "id": "kalos-gym-6",
+  "name": "Valerie",
+  "title": "Kalos Gym Leader",
+  "region": "kalos",
+  "locationKey": "kalos-town",
+  "badgeName": "Kalos Badge 6",
+  "badgeColor": "#a060c0",
+  "spriteKey": "hiker",
+  "team": [
+   {
+    "speciesKey": "pyroar",
+    "level": 79
+   },
+   {
+    "speciesKey": "flabebe",
+    "level": 80
+   },
+   {
+    "speciesKey": "floette",
+    "level": 81
+   }
+  ]
+ },
+ {
+  "id": "kalos-gym-7",
+  "name": "Olympia",
+  "title": "Kalos Gym Leader",
+  "region": "kalos",
+  "locationKey": "kalos-town",
+  "badgeName": "Kalos Badge 7",
+  "badgeColor": "#e08040",
+  "spriteKey": "beauty",
+  "team": [
+   {
+    "speciesKey": "florges",
+    "level": 82
+   },
+   {
+    "speciesKey": "skiddo",
+    "level": 83
+   },
+   {
+    "speciesKey": "gogoat",
+    "level": 84
+   }
+  ]
+ },
+ {
+  "id": "kalos-gym-8",
+  "name": "Wulfric",
+  "title": "Kalos Gym Leader",
+  "region": "kalos",
+  "locationKey": "kalos-town",
+  "badgeName": "Kalos Badge 8",
+  "badgeColor": "#40c0c0",
+  "spriteKey": "blackbelt",
+  "team": [
+   {
+    "speciesKey": "pancham",
+    "level": 85
+   },
+   {
+    "speciesKey": "pangoro",
+    "level": 86
+   },
+   {
+    "speciesKey": "furfrou",
+    "level": 87
+   }
+  ]
+ },
+ {
+  "id": "alola-gym-1",
+  "name": "Ilima",
+  "title": "Alola Gym Leader",
+  "region": "alola",
+  "locationKey": "alola-town",
+  "badgeName": "Alola Badge 1",
+  "badgeColor": "#a0a0a0",
+  "spriteKey": "swimmer",
+  "team": [
+   {
+    "speciesKey": "dartrix",
+    "level": 73
+   },
+   {
+    "speciesKey": "decidueye",
+    "level": 74
+   },
+   {
+    "speciesKey": "torracat",
+    "level": 75
+   }
+  ]
+ },
+ {
+  "id": "alola-gym-2",
+  "name": "Lana",
+  "title": "Alola Gym Leader",
+  "region": "alola",
+  "locationKey": "alola-town",
+  "badgeName": "Alola Badge 2",
+  "badgeColor": "#4878b0",
+  "spriteKey": "gentleman",
+  "team": [
+   {
+    "speciesKey": "incineroar",
+    "level": 76
+   },
+   {
+    "speciesKey": "brionne",
+    "level": 77
+   },
+   {
+    "speciesKey": "primarina",
+    "level": 78
+   }
+  ]
+ },
+ {
+  "id": "alola-gym-3",
+  "name": "Kiawe",
+  "title": "Alola Gym Leader",
+  "region": "alola",
+  "locationKey": "alola-town",
+  "badgeName": "Alola Badge 3",
+  "badgeColor": "#c8a030",
+  "spriteKey": "juggler",
+  "team": [
+   {
+    "speciesKey": "pikipek",
+    "level": 79
+   },
+   {
+    "speciesKey": "trumbeak",
+    "level": 80
+   },
+   {
+    "speciesKey": "toucannon",
+    "level": 81
+   }
+  ]
+ },
+ {
+  "id": "alola-gym-4",
+  "name": "Mallow",
+  "title": "Alola Gym Leader",
+  "region": "alola",
+  "locationKey": "alola-town",
+  "badgeName": "Alola Badge 4",
+  "badgeColor": "#48a048",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "yungoos",
+    "level": 82
+   },
+   {
+    "speciesKey": "gumshoos",
+    "level": 83
+   },
+   {
+    "speciesKey": "grubbin",
+    "level": 84
+   }
+  ]
+ },
+ {
+  "id": "alola-gym-5",
+  "name": "Sophocles",
+  "title": "Alola Gym Leader",
+  "region": "alola",
+  "locationKey": "alola-town",
+  "badgeName": "Alola Badge 5",
+  "badgeColor": "#b83028",
+  "spriteKey": "hiker",
+  "team": [
+   {
+    "speciesKey": "charjabug",
+    "level": 85
+   },
+   {
+    "speciesKey": "vikavolt",
+    "level": 86
+   },
+   {
+    "speciesKey": "crabrawler",
+    "level": 87
+   }
+  ]
+ },
+ {
+  "id": "alola-gym-6",
+  "name": "Acerola",
+  "title": "Alola Gym Leader",
+  "region": "alola",
+  "locationKey": "alola-town",
+  "badgeName": "Alola Badge 6",
+  "badgeColor": "#a060c0",
+  "spriteKey": "beauty",
+  "team": [
+   {
+    "speciesKey": "crabominable",
+    "level": 88
+   },
+   {
+    "speciesKey": "oricorio",
+    "level": 89
+   },
+   {
+    "speciesKey": "cutiefly",
+    "level": 90
+   }
+  ]
+ },
+ {
+  "id": "alola-gym-7",
+  "name": "Mina",
+  "title": "Alola Gym Leader",
+  "region": "alola",
+  "locationKey": "alola-town",
+  "badgeName": "Alola Badge 7",
+  "badgeColor": "#e08040",
+  "spriteKey": "blackbelt",
+  "team": [
+   {
+    "speciesKey": "ribombee",
+    "level": 91
+   },
+   {
+    "speciesKey": "rockruff",
+    "level": 92
+   },
+   {
+    "speciesKey": "lycanroc",
+    "level": 93
+   }
+  ]
+ },
+ {
+  "id": "alola-gym-8",
+  "name": "Hapu",
+  "title": "Alola Gym Leader",
+  "region": "alola",
+  "locationKey": "alola-town",
+  "badgeName": "Alola Badge 8",
+  "badgeColor": "#40c0c0",
+  "spriteKey": "psychic",
+  "team": [
+   {
+    "speciesKey": "wishiwashi",
+    "level": 94
+   },
+   {
+    "speciesKey": "mareanie",
+    "level": 95
+   },
+   {
+    "speciesKey": "toxapex",
+    "level": 96
+   }
+  ]
+ },
+ {
+  "id": "galar-gym-1",
+  "name": "Milo",
+  "title": "Galar Gym Leader",
+  "region": "galar",
+  "locationKey": "galar-town",
+  "badgeName": "Galar Badge 1",
+  "badgeColor": "#a0a0a0",
+  "spriteKey": "gentleman",
+  "team": [
+   {
+    "speciesKey": "thwackey",
+    "level": 82
+   },
+   {
+    "speciesKey": "rillaboom",
+    "level": 83
+   },
+   {
+    "speciesKey": "raboot",
+    "level": 84
+   }
+  ]
+ },
+ {
+  "id": "galar-gym-2",
+  "name": "Nessa",
+  "title": "Galar Gym Leader",
+  "region": "galar",
+  "locationKey": "galar-town",
+  "badgeName": "Galar Badge 2",
+  "badgeColor": "#4878b0",
+  "spriteKey": "juggler",
+  "team": [
+   {
+    "speciesKey": "cinderace",
+    "level": 85
+   },
+   {
+    "speciesKey": "drizzile",
+    "level": 86
+   },
+   {
+    "speciesKey": "inteleon",
+    "level": 87
+   }
+  ]
+ },
+ {
+  "id": "galar-gym-3",
+  "name": "Kabu",
+  "title": "Galar Gym Leader",
+  "region": "galar",
+  "locationKey": "galar-town",
+  "badgeName": "Galar Badge 3",
+  "badgeColor": "#c8a030",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "skwovet",
+    "level": 88
+   },
+   {
+    "speciesKey": "greedent",
+    "level": 89
+   },
+   {
+    "speciesKey": "rookidee",
+    "level": 90
+   }
+  ]
+ },
+ {
+  "id": "galar-gym-4",
+  "name": "Bea",
+  "title": "Galar Gym Leader",
+  "region": "galar",
+  "locationKey": "galar-town",
+  "badgeName": "Galar Badge 4",
+  "badgeColor": "#48a048",
+  "spriteKey": "hiker",
+  "team": [
+   {
+    "speciesKey": "corvisquire",
+    "level": 91
+   },
+   {
+    "speciesKey": "corviknight",
+    "level": 92
+   },
+   {
+    "speciesKey": "blipbug",
+    "level": 93
+   }
+  ]
+ },
+ {
+  "id": "galar-gym-5",
+  "name": "Opal",
+  "title": "Galar Gym Leader",
+  "region": "galar",
+  "locationKey": "galar-town",
+  "badgeName": "Galar Badge 5",
+  "badgeColor": "#b83028",
+  "spriteKey": "beauty",
+  "team": [
+   {
+    "speciesKey": "dottler",
+    "level": 94
+   },
+   {
+    "speciesKey": "orbeetle",
+    "level": 95
+   },
+   {
+    "speciesKey": "nickit",
+    "level": 96
+   }
+  ]
+ },
+ {
+  "id": "galar-gym-6",
+  "name": "Gordie",
+  "title": "Galar Gym Leader",
+  "region": "galar",
+  "locationKey": "galar-town",
+  "badgeName": "Galar Badge 6",
+  "badgeColor": "#a060c0",
+  "spriteKey": "blackbelt",
+  "team": [
+   {
+    "speciesKey": "thievul",
+    "level": 97
+   },
+   {
+    "speciesKey": "gossifleur",
+    "level": 98
+   },
+   {
+    "speciesKey": "eldegoss",
+    "level": 99
+   }
+  ]
+ },
+ {
+  "id": "galar-gym-7",
+  "name": "Piers",
+  "title": "Galar Gym Leader",
+  "region": "galar",
+  "locationKey": "galar-town",
+  "badgeName": "Galar Badge 7",
+  "badgeColor": "#e08040",
+  "spriteKey": "psychic",
+  "team": [
+   {
+    "speciesKey": "wooloo",
+    "level": 100
+   },
+   {
+    "speciesKey": "dubwool",
+    "level": 100
+   },
+   {
+    "speciesKey": "chewtle",
+    "level": 100
+   }
+  ]
+ },
+ {
+  "id": "galar-gym-8",
+  "name": "Raihan",
+  "title": "Galar Gym Leader",
+  "region": "galar",
+  "locationKey": "galar-town",
+  "badgeName": "Galar Badge 8",
+  "badgeColor": "#40c0c0",
+  "spriteKey": "scientist",
+  "team": [
+   {
+    "speciesKey": "drednaw",
+    "level": 100
+   },
+   {
+    "speciesKey": "yamper",
+    "level": 100
+   },
+   {
+    "speciesKey": "boltund",
+    "level": 100
+   }
+  ]
+ },
+ {
+  "id": "paldea-gym-1",
+  "name": "Katy",
+  "title": "Paldea Gym Leader",
+  "region": "paldea",
+  "locationKey": "paldea-town",
+  "badgeName": "Paldea Badge 1",
+  "badgeColor": "#a0a0a0",
+  "spriteKey": "juggler",
+  "team": [
+   {
+    "speciesKey": "floragato",
+    "level": 91
+   },
+   {
+    "speciesKey": "meowscarada",
+    "level": 92
+   },
+   {
+    "speciesKey": "crocalor",
+    "level": 93
+   }
+  ]
+ },
+ {
+  "id": "paldea-gym-2",
+  "name": "Brassius",
+  "title": "Paldea Gym Leader",
+  "region": "paldea",
+  "locationKey": "paldea-town",
+  "badgeName": "Paldea Badge 2",
+  "badgeColor": "#4878b0",
+  "spriteKey": "acetrainer",
+  "team": [
+   {
+    "speciesKey": "skeledirge",
+    "level": 94
+   },
+   {
+    "speciesKey": "quaxwell",
+    "level": 95
+   },
+   {
+    "speciesKey": "quaquaval",
+    "level": 96
+   }
+  ]
+ },
+ {
+  "id": "paldea-gym-3",
+  "name": "Iono",
+  "title": "Paldea Gym Leader",
+  "region": "paldea",
+  "locationKey": "paldea-town",
+  "badgeName": "Paldea Badge 3",
+  "badgeColor": "#c8a030",
+  "spriteKey": "hiker",
+  "team": [
+   {
+    "speciesKey": "lechonk",
+    "level": 97
+   },
+   {
+    "speciesKey": "oinkologne",
+    "level": 98
+   },
+   {
+    "speciesKey": "tarountula",
+    "level": 99
+   }
+  ]
+ },
+ {
+  "id": "paldea-gym-4",
+  "name": "Kofu",
+  "title": "Paldea Gym Leader",
+  "region": "paldea",
+  "locationKey": "paldea-town",
+  "badgeName": "Paldea Badge 4",
+  "badgeColor": "#48a048",
+  "spriteKey": "beauty",
+  "team": [
+   {
+    "speciesKey": "spidops",
+    "level": 100
+   },
+   {
+    "speciesKey": "nymble",
+    "level": 100
+   },
+   {
+    "speciesKey": "lokix",
+    "level": 100
+   }
+  ]
+ },
+ {
+  "id": "paldea-gym-5",
+  "name": "Larry",
+  "title": "Paldea Gym Leader",
+  "region": "paldea",
+  "locationKey": "paldea-town",
+  "badgeName": "Paldea Badge 5",
+  "badgeColor": "#b83028",
+  "spriteKey": "blackbelt",
+  "team": [
+   {
+    "speciesKey": "pawmi",
+    "level": 100
+   },
+   {
+    "speciesKey": "pawmo",
+    "level": 100
+   },
+   {
+    "speciesKey": "pawmot",
+    "level": 100
+   }
+  ]
+ },
+ {
+  "id": "paldea-gym-6",
+  "name": "Ryme",
+  "title": "Paldea Gym Leader",
+  "region": "paldea",
+  "locationKey": "paldea-town",
+  "badgeName": "Paldea Badge 6",
+  "badgeColor": "#a060c0",
+  "spriteKey": "psychic",
+  "team": [
+   {
+    "speciesKey": "tandemaus",
+    "level": 100
+   },
+   {
+    "speciesKey": "maushold",
+    "level": 100
+   },
+   {
+    "speciesKey": "fidough",
+    "level": 100
+   }
+  ]
+ },
+ {
+  "id": "paldea-gym-7",
+  "name": "Tulip",
+  "title": "Paldea Gym Leader",
+  "region": "paldea",
+  "locationKey": "paldea-town",
+  "badgeName": "Paldea Badge 7",
+  "badgeColor": "#e08040",
+  "spriteKey": "scientist",
+  "team": [
+   {
+    "speciesKey": "dachsbun",
+    "level": 100
+   },
+   {
+    "speciesKey": "smoliv",
+    "level": 100
+   },
+   {
+    "speciesKey": "dolliv",
+    "level": 100
+   }
+  ]
+ },
+ {
+  "id": "paldea-gym-8",
+  "name": "Grusha",
+  "title": "Paldea Gym Leader",
+  "region": "paldea",
+  "locationKey": "paldea-town",
+  "badgeName": "Paldea Badge 8",
+  "badgeColor": "#40c0c0",
+  "spriteKey": "camper",
+  "team": [
+   {
+    "speciesKey": "arboliva",
+    "level": 100
+   },
+   {
+    "speciesKey": "squawkabilly",
+    "level": 100
+   },
+   {
+    "speciesKey": "nacli",
+    "level": 100
+   }
+  ]
+ }
 ]

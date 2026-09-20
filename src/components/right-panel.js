@@ -2,9 +2,8 @@
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
-import { legendaryPool } from '../data/config.js'
 import { SIDE_PANEL_TABS } from '../data/ui.js'
-import { encounterData, mapData } from '../data/gameData.js'
+import { encounterData, legendaryPoolFor, mapData } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { GymPanel } from './gym-panel.js'
 import { LocationPanel } from './location-panel.js'
@@ -23,9 +22,9 @@ export function RightPanel() {
     closeRewardShop = React.useCallback(() => setShowRewardShop(!1), []),
     location = mapData[state.currentLocation],
     isRaid = location?.type === 'raid',
-    routeKey = isRaid ? 'raidIsland' : location?.routeKey,
+    routeKey = isRaid ? location?.id : location?.routeKey,
     raidEncounters = isRaid
-      ? legendaryPool.map((encounter) => ({
+      ? legendaryPoolFor(location?.region ?? 'kanto').map((encounter) => ({
           speciesKey: encounter.speciesKey,
           weight: 1,
           minLevel: encounter.level,

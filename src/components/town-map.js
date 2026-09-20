@@ -2,8 +2,7 @@
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
-import { legendaryPool } from '../data/config.js'
-import { mapAreas, mapData, regions } from '../data/gameData.js'
+import { legendaryPoolFor, mapAreas, mapData, regions } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { createRoads } from '../game/progression.js'
 import { MapNode } from './map-node.js'
@@ -22,13 +21,19 @@ export function TownMap() {
 
   /** @param {string} location */
   function travelTo(location) {
-    if (location === 'raidIsland') {
+    const locationData = mapData[location]
+    if (locationData?.type === 'raid') {
       if (state.raidCooldownEnd && Date.now() < state.raidCooldownEnd) return
-      const legendary = legendaryPool[Math.floor(Math.random() * legendaryPool.length)]
+      const pool = legendaryPoolFor(locationData.region ?? 'kanto')
+      if (pool.length === 0) return
+      const legendary = pool[Math.floor(Math.random() * pool.length)]
       dispatch({
         type: 'START_RAID',
         payload: {
           legendary: legendary.speciesKey,
+          level: legendary.level,
+          region: locationData.region ?? 'kanto',
+          location,
         },
       })
       return

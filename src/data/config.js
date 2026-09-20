@@ -2,29 +2,6 @@
 
 export const evValue = 0
 
-export let legendaryPool = [
-    {
-      speciesKey: 'articuno',
-      level: 70,
-    },
-    {
-      speciesKey: 'zapdos',
-      level: 70,
-    },
-    {
-      speciesKey: 'moltres',
-      level: 70,
-    },
-    {
-      speciesKey: 'mewtwo',
-      level: 80,
-    },
-    {
-      speciesKey: 'mew',
-      level: 60,
-    },
-  ]
-
 export let RAID_COOLDOWN_MS = 1 * 1e3
 
 export let defaultCatchSettings = {

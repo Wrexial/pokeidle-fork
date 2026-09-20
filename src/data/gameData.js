@@ -33,9 +33,18 @@ export let gymLeaderData = /** @type {any[]} */ (loadedGameData.gymLeaderData)
 
 export let elite4Data = /** @type {any[]} */ (loadedGameData.elite4Data)
 
-export let championData = /** @type {any} */ (loadedGameData.championData)
+export let championData = /** @type {any[]} */ (loadedGameData.championData)
 
 export let regions = /** @type {Region[]} */ (loadedGameData.regions || [])
+
+/**
+ * Legendary raid pool for a region (empty if the region is unknown).
+ * @param {string} regionId
+ * @returns {{ speciesKey: string, level: number }[]}
+ */
+export function legendaryPoolFor(regionId) {
+  return regions.find((region) => region.id === regionId)?.legendaries ?? []
+}
 
 /** @type {Record<string, string>} */
 export let preEvolutionMap = Object.fromEntries(

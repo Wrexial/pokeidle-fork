@@ -31,6 +31,15 @@ function App() {
   const [hash, setHash] = React.useState(window.location.hash)
   return (
     React.useEffect(() => {
+      // reached only if the app mounted successfully — cancels the boot guard
+      window.__piBooted = true
+      try {
+        sessionStorage.removeItem('pokemon-idle-recovery-attempts')
+      } catch {
+        /* ignore */
+      }
+    }, []),
+    React.useEffect(() => {
       const handleHashChange = () => setHash(window.location.hash)
       return (
         window.addEventListener('hashchange', handleHashChange),

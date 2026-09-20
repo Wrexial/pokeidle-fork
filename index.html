@@ -7,6 +7,73 @@
     <title>Pokémon Idle</title>
     <link rel="stylesheet" href="./assets/fonts.css">
     <link rel="stylesheet" href="./assets/style.css">
+    <script>
+      // Boot guard — runs before any module. If the game fails to start (an
+      // incompatible save, a module error, or a hang), clear the save and
+      // reload once so the player can never be permanently stuck. No console
+      // needed. A session flag prevents a reload loop.
+      ;(function () {
+        var SAVE_KEY = 'pokemon-idle-save'
+        var FLAG = 'pokemon-idle-recovery-attempts'
+        var recovering = false
+        window.__piBooted = false
+
+        function showMessage(text) {
+          var root = document.getElementById('root')
+          if (root) {
+            root.innerHTML =
+              '<div style="font-family:monospace;font-size:14px;color:#e8dcc0;background:#1a1208;' +
+              'padding:48px 24px;text-align:center;line-height:1.6">' +
+              text +
+              '</div>'
+          }
+        }
+
+        function recover(reason) {
+          if (recovering) return
+          recovering = true
+          var attempts = 0
+          try {
+            attempts = Number(sessionStorage.getItem(FLAG) || '0')
+          } catch (e) {}
+          try {
+            console.warn('[pokemon-idle] startup failed (' + reason + '), attempt ' + (attempts + 1))
+          } catch (e) {}
+          if (attempts >= 2) {
+            showMessage(
+              'Pokemon Idle could not start.<br>Please clear this site\\'s data in your browser settings, then reload.'
+            )
+            return
+          }
+          try {
+            sessionStorage.setItem(FLAG, String(attempts + 1))
+          } catch (e) {}
+          try {
+            localStorage.removeItem(SAVE_KEY)
+          } catch (e) {}
+          showMessage('Resetting save data and reloading&hellip;')
+          setTimeout(function () {
+            location.reload()
+          }, 800)
+        }
+
+        window.addEventListener('error', function () {
+          if (!window.__piBooted) recover('error')
+        })
+        window.addEventListener('unhandledrejection', function () {
+          if (!window.__piBooted) recover('rejection')
+        })
+        setTimeout(function () {
+          if (window.__piBooted) return
+          // only force a recovery on timeout if there's actually a save to clear
+          var hasSave = false
+          try {
+            hasSave = !!localStorage.getItem(SAVE_KEY)
+          } catch (e) {}
+          if (hasSave) recover('timeout')
+        }, 15000)
+      })()
+    </script>
     <script type="module" src="./assets/gameDataInjector.js"></script>
     <script type="module" src="./src/main.js"></script>
   </head>

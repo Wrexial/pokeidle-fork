@@ -213,6 +213,10 @@ type MapLocation = {
 type Evolution = { into: string; level?: number; item?: string; [key: string]: any }
 
 interface Window {
+  /** set by the boot guard in index.html; flipped once the app mounts */
+  __piBooted?: boolean
+  /** Console helper to wipe the save: `pokemonIdleResetSave()` */
+  pokemonIdleResetSave?: () => void
   /** Resolves once all game JSON has been fetched. */
   gameDataReady: Promise<unknown>
   gameDataInjector: {

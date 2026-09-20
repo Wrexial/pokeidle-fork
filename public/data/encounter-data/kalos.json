@@ -259,184 +259,6 @@
    }
   ]
  },
- "kalos-route-22": {
-  "name": "Route 22",
-  "encounters": [
-   {
-    "speciesKey": "psyduck",
-    "weight": 31,
-    "minLevel": 66,
-    "maxLevel": 68
-   },
-   {
-    "speciesKey": "magikarp",
-    "weight": 25,
-    "minLevel": 66,
-    "maxLevel": 68
-   },
-   {
-    "speciesKey": "goldeen",
-    "weight": 16,
-    "minLevel": 66,
-    "maxLevel": 68
-   },
-   {
-    "speciesKey": "gyarados",
-    "weight": 15,
-    "minLevel": 66,
-    "maxLevel": 68
-   },
-   {
-    "speciesKey": "seaking",
-    "weight": 9,
-    "minLevel": 66,
-    "maxLevel": 68
-   },
-   {
-    "speciesKey": "carvanha",
-    "weight": 9,
-    "minLevel": 66,
-    "maxLevel": 68
-   },
-   {
-    "speciesKey": "litleo",
-    "weight": 8,
-    "minLevel": 66,
-    "maxLevel": 68
-   },
-   {
-    "speciesKey": "azumarill",
-    "weight": 6,
-    "minLevel": 66,
-    "maxLevel": 68
-   },
-   {
-    "speciesKey": "farfetchd",
-    "weight": 5,
-    "minLevel": 66,
-    "maxLevel": 68
-   },
-   {
-    "speciesKey": "azurill",
-    "weight": 5,
-    "minLevel": 66,
-    "maxLevel": 68
-   },
-   {
-    "speciesKey": "bibarel",
-    "weight": 5,
-    "minLevel": 66,
-    "maxLevel": 68
-   },
-   {
-    "speciesKey": "bunnelby",
-    "weight": 5,
-    "minLevel": 66,
-    "maxLevel": 68
-   },
-   {
-    "speciesKey": "dunsparce",
-    "weight": 3,
-    "minLevel": 66,
-    "maxLevel": 68
-   },
-   {
-    "speciesKey": "bidoof",
-    "weight": 3,
-    "minLevel": 66,
-    "maxLevel": 68
-   },
-   {
-    "speciesKey": "riolu",
-    "weight": 3,
-    "minLevel": 66,
-    "maxLevel": 68
-   },
-   {
-    "speciesKey": "diggersby",
-    "weight": 3,
-    "minLevel": 66,
-    "maxLevel": 68
-   },
-   {
-    "speciesKey": "sharpedo",
-    "weight": 1,
-    "minLevel": 66,
-    "maxLevel": 68
-   }
-  ]
- },
- "kalos-route-21": {
-  "name": "Route 21",
-  "encounters": [
-   {
-    "speciesKey": "poliwag",
-    "weight": 25,
-    "minLevel": 70,
-    "maxLevel": 72
-   },
-   {
-    "speciesKey": "spinda",
-    "weight": 25,
-    "minLevel": 70,
-    "maxLevel": 72
-   },
-   {
-    "speciesKey": "poliwhirl",
-    "weight": 24,
-    "minLevel": 70,
-    "maxLevel": 72
-   },
-   {
-    "speciesKey": "floatzel",
-    "weight": 21,
-    "minLevel": 70,
-    "maxLevel": 72
-   },
-   {
-    "speciesKey": "lombre",
-    "weight": 17,
-    "minLevel": 70,
-    "maxLevel": 72
-   },
-   {
-    "speciesKey": "ursaring",
-    "weight": 13,
-    "minLevel": 70,
-    "maxLevel": 72
-   },
-   {
-    "speciesKey": "altaria",
-    "weight": 10,
-    "minLevel": 70,
-    "maxLevel": 72
-   },
-   {
-    "speciesKey": "swablu",
-    "weight": 9,
-    "minLevel": 70,
-    "maxLevel": 72
-   },
-   {
-    "speciesKey": "scyther",
-    "weight": 6,
-    "minLevel": 70,
-    "maxLevel": 72
-   },
-   {
-    "speciesKey": "dratini",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 72
-   },
-   {
-    "speciesKey": "dragonair",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 72
-   }
-  ]
- },
  "kalos-route-5": {
   "name": "Route 5",
   "encounters": [
@@ -499,6 +321,587 @@
     "weight": 1,
     "minLevel": 65,
     "maxLevel": 67
+   }
+  ]
+ },
+ "kalos-route-6": {
+  "name": "Route 6",
+  "encounters": [
+   {
+    "speciesKey": "venipede",
+    "weight": 20,
+    "minLevel": 65,
+    "maxLevel": 67
+   },
+   {
+    "speciesKey": "oddish",
+    "weight": 8,
+    "minLevel": 65,
+    "maxLevel": 67
+   },
+   {
+    "speciesKey": "sentret",
+    "weight": 5,
+    "minLevel": 65,
+    "maxLevel": 67
+   },
+   {
+    "speciesKey": "audino",
+    "weight": 5,
+    "minLevel": 65,
+    "maxLevel": 67
+   },
+   {
+    "speciesKey": "espurr",
+    "weight": 5,
+    "minLevel": 65,
+    "maxLevel": 67
+   },
+   {
+    "speciesKey": "honedge",
+    "weight": 4,
+    "minLevel": 65,
+    "maxLevel": 67
+   },
+   {
+    "speciesKey": "nincada",
+    "weight": 3,
+    "minLevel": 65,
+    "maxLevel": 67
+   },
+   {
+    "speciesKey": "kecleon",
+    "weight": 1,
+    "minLevel": 65,
+    "maxLevel": 67
+   }
+  ]
+ },
+ "kalos-route-7": {
+  "name": "Route 7",
+  "encounters": [
+   {
+    "speciesKey": "snorlax",
+    "weight": 25,
+    "minLevel": 66,
+    "maxLevel": 68
+   },
+   {
+    "speciesKey": "flabebe",
+    "weight": 19,
+    "minLevel": 66,
+    "maxLevel": 68
+   },
+   {
+    "speciesKey": "hoppip",
+    "weight": 15,
+    "minLevel": 66,
+    "maxLevel": 68
+   },
+   {
+    "speciesKey": "croagunk",
+    "weight": 11,
+    "minLevel": 66,
+    "maxLevel": 68
+   },
+   {
+    "speciesKey": "psyduck",
+    "weight": 9,
+    "minLevel": 66,
+    "maxLevel": 68
+   },
+   {
+    "speciesKey": "roselia",
+    "weight": 9,
+    "minLevel": 66,
+    "maxLevel": 68
+   },
+   {
+    "speciesKey": "smeargle",
+    "weight": 8,
+    "minLevel": 66,
+    "maxLevel": 68
+   },
+   {
+    "speciesKey": "volbeat",
+    "weight": 8,
+    "minLevel": 66,
+    "maxLevel": 68
+   },
+   {
+    "speciesKey": "illumise",
+    "weight": 8,
+    "minLevel": 66,
+    "maxLevel": 68
+   },
+   {
+    "speciesKey": "ducklett",
+    "weight": 8,
+    "minLevel": 66,
+    "maxLevel": 68
+   },
+   {
+    "speciesKey": "spritzee",
+    "weight": 8,
+    "minLevel": 66,
+    "maxLevel": 68
+   },
+   {
+    "speciesKey": "swirlix",
+    "weight": 8,
+    "minLevel": 66,
+    "maxLevel": 68
+   }
+  ]
+ },
+ "kalos-route-8": {
+  "name": "Route 8",
+  "encounters": [
+   {
+    "speciesKey": "luvdisc",
+    "weight": 25,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 17,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "dwebble",
+    "weight": 17,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "skrelp",
+    "weight": 16,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "clauncher",
+    "weight": 16,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "qwilfish",
+    "weight": 15,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 15,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "zangoose",
+    "weight": 14,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "drifloon",
+    "weight": 10,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "mienfoo",
+    "weight": 10,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "shellder",
+    "weight": 9,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "staryu",
+    "weight": 9,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "seviper",
+    "weight": 9,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "binacle",
+    "weight": 9,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "dragalge",
+    "weight": 9,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "clawitzer",
+    "weight": 9,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "wailmer",
+    "weight": 8,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "spoink",
+    "weight": 8,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "absol",
+    "weight": 8,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "inkay",
+    "weight": 8,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "bagon",
+    "weight": 3,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "cloyster",
+    "weight": 1,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "starmie",
+    "weight": 1,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "taillow",
+    "weight": 1,
+    "minLevel": 67,
+    "maxLevel": 69
+   }
+  ]
+ },
+ "kalos-route-9": {
+  "name": "Route 9",
+  "encounters": [
+   {
+    "speciesKey": "hippopotas",
+    "weight": 10,
+    "minLevel": 66,
+    "maxLevel": 68
+   },
+   {
+    "speciesKey": "sandile",
+    "weight": 10,
+    "minLevel": 66,
+    "maxLevel": 68
+   },
+   {
+    "speciesKey": "helioptile",
+    "weight": 5,
+    "minLevel": 66,
+    "maxLevel": 68
+   }
+  ]
+ },
+ "kalos-route-10": {
+  "name": "Route 10",
+  "encounters": [
+   {
+    "speciesKey": "nosepass",
+    "weight": 15,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "snubbull",
+    "weight": 10,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "golett",
+    "weight": 10,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "yanma",
+    "weight": 9,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "houndour",
+    "weight": 9,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "electrike",
+    "weight": 9,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "sigilyph",
+    "weight": 8,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "eevee",
+    "weight": 6,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "hawlucha",
+    "weight": 6,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "emolga",
+    "weight": 3,
+    "minLevel": 67,
+    "maxLevel": 69
+   }
+  ]
+ },
+ "kalos-route-11": {
+  "name": "Route 11",
+  "encounters": [
+   {
+    "speciesKey": "nidoranF",
+    "weight": 15,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "nidoranM",
+    "weight": 15,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "stunky",
+    "weight": 11,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "hariyama",
+    "weight": 5,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "staravia",
+    "weight": 5,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "throh",
+    "weight": 5,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "sawk",
+    "weight": 5,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "nidorino",
+    "weight": 3,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "chingling",
+    "weight": 3,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "nidorina",
+    "weight": 1,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "starly",
+    "weight": 1,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "dedenne",
+    "weight": 1,
+    "minLevel": 68,
+    "maxLevel": 70
+   }
+  ]
+ },
+ "kalos-route-12": {
+  "name": "Route 12",
+  "encounters": [
+   {
+    "speciesKey": "luvdisc",
+    "weight": 25,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 21,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "dwebble",
+    "weight": 17,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "remoraid",
+    "weight": 16,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "corsola",
+    "weight": 15,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 15,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "tauros",
+    "weight": 11,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "miltank",
+    "weight": 11,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "slowpoke",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "chatot",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "mareep",
+    "weight": 9,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "octillery",
+    "weight": 9,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "clamperl",
+    "weight": 9,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "binacle",
+    "weight": 9,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "exeggcute",
+    "weight": 5,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "mantyke",
+    "weight": 4,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "pinsir",
+    "weight": 3,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "heracross",
+    "weight": 3,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "pachirisu",
+    "weight": 3,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "lapras",
+    "weight": 1,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "huntail",
+    "weight": 1,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "gorebyss",
+    "weight": 1,
+    "minLevel": 68,
+    "maxLevel": 70
    }
   ]
  },
@@ -632,77 +1035,89 @@
    }
   ]
  },
- "kalos-route-16": {
-  "name": "Route 16",
-  "encounters": [
-   {
-    "speciesKey": "poliwag",
-    "weight": 25,
-    "minLevel": 69,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "poliwhirl",
-    "weight": 25,
-    "minLevel": 69,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "foongus",
-    "weight": 19,
-    "minLevel": 69,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "lombre",
-    "weight": 17,
-    "minLevel": 69,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "murkrow",
-    "weight": 15,
-    "minLevel": 69,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "floatzel",
-    "weight": 14,
-    "minLevel": 69,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "klefki",
-    "weight": 6,
-    "minLevel": 69,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "weepinbell",
-    "weight": 5,
-    "minLevel": 69,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "skorupi",
-    "weight": 5,
-    "minLevel": 69,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "phantump",
-    "weight": 5,
-    "minLevel": 69,
-    "maxLevel": 71
-   }
-  ]
- },
  "kalos-route-15": {
   "name": "Route 15",
   "encounters": [
    {
     "speciesKey": "poliwag",
     "weight": 25,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "poliwhirl",
+    "weight": 25,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "foongus",
+    "weight": 19,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "lombre",
+    "weight": 17,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "murkrow",
+    "weight": 15,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "mightyena",
+    "weight": 10,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "watchog",
+    "weight": 10,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "liepard",
+    "weight": 10,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "floatzel",
+    "weight": 9,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "skorupi",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "pawniard",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "klefki",
+    "weight": 6,
+    "minLevel": 69,
+    "maxLevel": 71
+   }
+  ]
+ },
+ "kalos-route-16": {
+  "name": "Route 16",
+  "encounters": [
+   {
+    "speciesKey": "poliwag",
+    "weight": 25,
     "minLevel": 70,
     "maxLevel": 72
    },
@@ -731,38 +1146,8 @@
     "maxLevel": 72
    },
    {
-    "speciesKey": "mightyena",
-    "weight": 10,
-    "minLevel": 70,
-    "maxLevel": 72
-   },
-   {
-    "speciesKey": "watchog",
-    "weight": 10,
-    "minLevel": 70,
-    "maxLevel": 72
-   },
-   {
-    "speciesKey": "liepard",
-    "weight": 10,
-    "minLevel": 70,
-    "maxLevel": 72
-   },
-   {
     "speciesKey": "floatzel",
-    "weight": 9,
-    "minLevel": 70,
-    "maxLevel": 72
-   },
-   {
-    "speciesKey": "skorupi",
-    "weight": 8,
-    "minLevel": 70,
-    "maxLevel": 72
-   },
-   {
-    "speciesKey": "pawniard",
-    "weight": 8,
+    "weight": 14,
     "minLevel": 70,
     "maxLevel": 72
    },
@@ -771,6 +1156,118 @@
     "weight": 6,
     "minLevel": 70,
     "maxLevel": 72
+   },
+   {
+    "speciesKey": "weepinbell",
+    "weight": 5,
+    "minLevel": 70,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "skorupi",
+    "weight": 5,
+    "minLevel": 70,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "phantump",
+    "weight": 5,
+    "minLevel": 70,
+    "maxLevel": 72
+   }
+  ]
+ },
+ "kalos-route-17": {
+  "name": "Route 17",
+  "encounters": [
+   {
+    "speciesKey": "delibird",
+    "weight": 10,
+    "minLevel": 70,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "snover",
+    "weight": 8,
+    "minLevel": 70,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "sneasel",
+    "weight": 7,
+    "minLevel": 70,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "abomasnow",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 72
+   }
+  ]
+ },
+ "kalos-route-18": {
+  "name": "Route 18",
+  "encounters": [
+   {
+    "speciesKey": "durant",
+    "weight": 38,
+    "minLevel": 71,
+    "maxLevel": 73
+   },
+   {
+    "speciesKey": "graveler",
+    "weight": 31,
+    "minLevel": 71,
+    "maxLevel": 73
+   },
+   {
+    "speciesKey": "geodude",
+    "weight": 15,
+    "minLevel": 71,
+    "maxLevel": 73
+   },
+   {
+    "speciesKey": "pupitar",
+    "weight": 10,
+    "minLevel": 71,
+    "maxLevel": 73
+   },
+   {
+    "speciesKey": "lairon",
+    "weight": 10,
+    "minLevel": 71,
+    "maxLevel": 73
+   },
+   {
+    "speciesKey": "gurdurr",
+    "weight": 10,
+    "minLevel": 71,
+    "maxLevel": 73
+   },
+   {
+    "speciesKey": "sandslash",
+    "weight": 8,
+    "minLevel": 71,
+    "maxLevel": 73
+   },
+   {
+    "speciesKey": "torkoal",
+    "weight": 8,
+    "minLevel": 71,
+    "maxLevel": 73
+   },
+   {
+    "speciesKey": "heatmor",
+    "weight": 6,
+    "minLevel": 71,
+    "maxLevel": 73
+   },
+   {
+    "speciesKey": "shuckle",
+    "weight": 1,
+    "minLevel": 71,
+    "maxLevel": 73
    }
   ]
  },
@@ -928,676 +1425,179 @@
    }
   ]
  },
- "kalos-route-7": {
-  "name": "Route 7",
+ "kalos-route-21": {
+  "name": "Route 21",
   "encounters": [
    {
-    "speciesKey": "snorlax",
+    "speciesKey": "poliwag",
     "weight": 25,
-    "minLevel": 66,
-    "maxLevel": 68
+    "minLevel": 70,
+    "maxLevel": 72
    },
    {
-    "speciesKey": "flabebe",
-    "weight": 19,
-    "minLevel": 66,
-    "maxLevel": 68
+    "speciesKey": "spinda",
+    "weight": 25,
+    "minLevel": 70,
+    "maxLevel": 72
    },
    {
-    "speciesKey": "hoppip",
-    "weight": 15,
-    "minLevel": 66,
-    "maxLevel": 68
+    "speciesKey": "poliwhirl",
+    "weight": 24,
+    "minLevel": 70,
+    "maxLevel": 72
    },
    {
-    "speciesKey": "croagunk",
-    "weight": 11,
-    "minLevel": 66,
-    "maxLevel": 68
+    "speciesKey": "floatzel",
+    "weight": 21,
+    "minLevel": 70,
+    "maxLevel": 72
    },
+   {
+    "speciesKey": "lombre",
+    "weight": 17,
+    "minLevel": 70,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "ursaring",
+    "weight": 13,
+    "minLevel": 70,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "altaria",
+    "weight": 10,
+    "minLevel": 70,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "swablu",
+    "weight": 9,
+    "minLevel": 70,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "scyther",
+    "weight": 6,
+    "minLevel": 70,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "dratini",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "dragonair",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 72
+   }
+  ]
+ },
+ "kalos-route-22": {
+  "name": "Route 22",
+  "encounters": [
    {
     "speciesKey": "psyduck",
-    "weight": 9,
-    "minLevel": 66,
-    "maxLevel": 68
-   },
-   {
-    "speciesKey": "roselia",
-    "weight": 9,
-    "minLevel": 66,
-    "maxLevel": 68
-   },
-   {
-    "speciesKey": "smeargle",
-    "weight": 8,
-    "minLevel": 66,
-    "maxLevel": 68
-   },
-   {
-    "speciesKey": "volbeat",
-    "weight": 8,
-    "minLevel": 66,
-    "maxLevel": 68
-   },
-   {
-    "speciesKey": "illumise",
-    "weight": 8,
-    "minLevel": 66,
-    "maxLevel": 68
-   },
-   {
-    "speciesKey": "ducklett",
-    "weight": 8,
-    "minLevel": 66,
-    "maxLevel": 68
-   },
-   {
-    "speciesKey": "spritzee",
-    "weight": 8,
-    "minLevel": 66,
-    "maxLevel": 68
-   },
-   {
-    "speciesKey": "swirlix",
-    "weight": 8,
-    "minLevel": 66,
-    "maxLevel": 68
-   }
-  ]
- },
- "kalos-route-12": {
-  "name": "Route 12",
-  "encounters": [
-   {
-    "speciesKey": "luvdisc",
-    "weight": 25,
-    "minLevel": 68,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "tentacool",
-    "weight": 21,
-    "minLevel": 68,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "dwebble",
-    "weight": 17,
-    "minLevel": 68,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "remoraid",
-    "weight": 16,
-    "minLevel": 68,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "corsola",
-    "weight": 15,
-    "minLevel": 68,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "wingull",
-    "weight": 15,
-    "minLevel": 68,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "tauros",
-    "weight": 11,
-    "minLevel": 68,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "miltank",
-    "weight": 11,
-    "minLevel": 68,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "slowpoke",
-    "weight": 10,
-    "minLevel": 68,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "chatot",
-    "weight": 10,
-    "minLevel": 68,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "mareep",
-    "weight": 9,
-    "minLevel": 68,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "octillery",
-    "weight": 9,
-    "minLevel": 68,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "clamperl",
-    "weight": 9,
-    "minLevel": 68,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "binacle",
-    "weight": 9,
-    "minLevel": 68,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "exeggcute",
-    "weight": 5,
-    "minLevel": 68,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "mantyke",
-    "weight": 4,
-    "minLevel": 68,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "pinsir",
-    "weight": 3,
-    "minLevel": 68,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "heracross",
-    "weight": 3,
-    "minLevel": 68,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "pachirisu",
-    "weight": 3,
-    "minLevel": 68,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "lapras",
-    "weight": 1,
-    "minLevel": 68,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "huntail",
-    "weight": 1,
-    "minLevel": 68,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "gorebyss",
-    "weight": 1,
-    "minLevel": 68,
-    "maxLevel": 70
-   }
-  ]
- },
- "kalos-route-6": {
-  "name": "Route 6",
-  "encounters": [
-   {
-    "speciesKey": "venipede",
-    "weight": 20,
-    "minLevel": 65,
-    "maxLevel": 67
-   },
-   {
-    "speciesKey": "oddish",
-    "weight": 8,
-    "minLevel": 65,
-    "maxLevel": 67
-   },
-   {
-    "speciesKey": "sentret",
-    "weight": 5,
-    "minLevel": 65,
-    "maxLevel": 67
-   },
-   {
-    "speciesKey": "audino",
-    "weight": 5,
-    "minLevel": 65,
-    "maxLevel": 67
-   },
-   {
-    "speciesKey": "espurr",
-    "weight": 5,
-    "minLevel": 65,
-    "maxLevel": 67
-   },
-   {
-    "speciesKey": "honedge",
-    "weight": 4,
-    "minLevel": 65,
-    "maxLevel": 67
-   },
-   {
-    "speciesKey": "nincada",
-    "weight": 3,
-    "minLevel": 65,
-    "maxLevel": 67
-   },
-   {
-    "speciesKey": "kecleon",
-    "weight": 1,
-    "minLevel": 65,
-    "maxLevel": 67
-   }
-  ]
- },
- "kalos-route-8": {
-  "name": "Route 8",
-  "encounters": [
-   {
-    "speciesKey": "luvdisc",
-    "weight": 25,
-    "minLevel": 67,
-    "maxLevel": 69
-   },
-   {
-    "speciesKey": "tentacool",
-    "weight": 17,
-    "minLevel": 67,
-    "maxLevel": 69
-   },
-   {
-    "speciesKey": "dwebble",
-    "weight": 17,
-    "minLevel": 67,
-    "maxLevel": 69
-   },
-   {
-    "speciesKey": "skrelp",
-    "weight": 16,
-    "minLevel": 67,
-    "maxLevel": 69
-   },
-   {
-    "speciesKey": "clauncher",
-    "weight": 16,
-    "minLevel": 67,
-    "maxLevel": 69
-   },
-   {
-    "speciesKey": "qwilfish",
-    "weight": 15,
-    "minLevel": 67,
-    "maxLevel": 69
-   },
-   {
-    "speciesKey": "wingull",
-    "weight": 15,
-    "minLevel": 67,
-    "maxLevel": 69
-   },
-   {
-    "speciesKey": "zangoose",
-    "weight": 14,
-    "minLevel": 67,
-    "maxLevel": 69
-   },
-   {
-    "speciesKey": "drifloon",
-    "weight": 10,
-    "minLevel": 67,
-    "maxLevel": 69
-   },
-   {
-    "speciesKey": "mienfoo",
-    "weight": 10,
-    "minLevel": 67,
-    "maxLevel": 69
-   },
-   {
-    "speciesKey": "shellder",
-    "weight": 9,
-    "minLevel": 67,
-    "maxLevel": 69
-   },
-   {
-    "speciesKey": "staryu",
-    "weight": 9,
-    "minLevel": 67,
-    "maxLevel": 69
-   },
-   {
-    "speciesKey": "seviper",
-    "weight": 9,
-    "minLevel": 67,
-    "maxLevel": 69
-   },
-   {
-    "speciesKey": "binacle",
-    "weight": 9,
-    "minLevel": 67,
-    "maxLevel": 69
-   },
-   {
-    "speciesKey": "dragalge",
-    "weight": 9,
-    "minLevel": 67,
-    "maxLevel": 69
-   },
-   {
-    "speciesKey": "clawitzer",
-    "weight": 9,
-    "minLevel": 67,
-    "maxLevel": 69
-   },
-   {
-    "speciesKey": "wailmer",
-    "weight": 8,
-    "minLevel": 67,
-    "maxLevel": 69
-   },
-   {
-    "speciesKey": "spoink",
-    "weight": 8,
-    "minLevel": 67,
-    "maxLevel": 69
-   },
-   {
-    "speciesKey": "absol",
-    "weight": 8,
-    "minLevel": 67,
-    "maxLevel": 69
-   },
-   {
-    "speciesKey": "inkay",
-    "weight": 8,
-    "minLevel": 67,
-    "maxLevel": 69
-   },
-   {
-    "speciesKey": "bagon",
-    "weight": 3,
-    "minLevel": 67,
-    "maxLevel": 69
-   },
-   {
-    "speciesKey": "cloyster",
-    "weight": 1,
-    "minLevel": 67,
-    "maxLevel": 69
-   },
-   {
-    "speciesKey": "starmie",
-    "weight": 1,
-    "minLevel": 67,
-    "maxLevel": 69
-   },
-   {
-    "speciesKey": "taillow",
-    "weight": 1,
-    "minLevel": 67,
-    "maxLevel": 69
-   }
-  ]
- },
- "kalos-route-17": {
-  "name": "Route 17",
-  "encounters": [
-   {
-    "speciesKey": "delibird",
-    "weight": 10,
-    "minLevel": 70,
-    "maxLevel": 72
-   },
-   {
-    "speciesKey": "snover",
-    "weight": 8,
-    "minLevel": 70,
-    "maxLevel": 72
-   },
-   {
-    "speciesKey": "sneasel",
-    "weight": 7,
-    "minLevel": 70,
-    "maxLevel": 72
-   },
-   {
-    "speciesKey": "abomasnow",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 72
-   }
-  ]
- },
- "kalos-route-18": {
-  "name": "Route 18",
-  "encounters": [
-   {
-    "speciesKey": "durant",
-    "weight": 38,
-    "minLevel": 71,
-    "maxLevel": 73
-   },
-   {
-    "speciesKey": "graveler",
     "weight": 31,
-    "minLevel": 71,
-    "maxLevel": 73
+    "minLevel": 67,
+    "maxLevel": 69
    },
    {
-    "speciesKey": "geodude",
-    "weight": 15,
-    "minLevel": 71,
-    "maxLevel": 73
+    "speciesKey": "magikarp",
+    "weight": 25,
+    "minLevel": 67,
+    "maxLevel": 69
    },
    {
-    "speciesKey": "pupitar",
-    "weight": 10,
-    "minLevel": 71,
-    "maxLevel": 73
+    "speciesKey": "goldeen",
+    "weight": 16,
+    "minLevel": 67,
+    "maxLevel": 69
    },
    {
-    "speciesKey": "lairon",
-    "weight": 10,
-    "minLevel": 71,
-    "maxLevel": 73
-   },
-   {
-    "speciesKey": "gurdurr",
-    "weight": 10,
-    "minLevel": 71,
-    "maxLevel": 73
-   },
-   {
-    "speciesKey": "sandslash",
-    "weight": 8,
-    "minLevel": 71,
-    "maxLevel": 73
-   },
-   {
-    "speciesKey": "torkoal",
-    "weight": 8,
-    "minLevel": 71,
-    "maxLevel": 73
-   },
-   {
-    "speciesKey": "heatmor",
-    "weight": 6,
-    "minLevel": 71,
-    "maxLevel": 73
-   },
-   {
-    "speciesKey": "shuckle",
-    "weight": 1,
-    "minLevel": 71,
-    "maxLevel": 73
-   }
-  ]
- },
- "kalos-route-10": {
-  "name": "Route 10",
-  "encounters": [
-   {
-    "speciesKey": "nosepass",
+    "speciesKey": "gyarados",
     "weight": 15,
     "minLevel": 67,
     "maxLevel": 69
    },
    {
-    "speciesKey": "snubbull",
-    "weight": 10,
-    "minLevel": 67,
-    "maxLevel": 69
-   },
-   {
-    "speciesKey": "golett",
-    "weight": 10,
-    "minLevel": 67,
-    "maxLevel": 69
-   },
-   {
-    "speciesKey": "yanma",
+    "speciesKey": "seaking",
     "weight": 9,
     "minLevel": 67,
     "maxLevel": 69
    },
    {
-    "speciesKey": "houndour",
+    "speciesKey": "carvanha",
     "weight": 9,
     "minLevel": 67,
     "maxLevel": 69
    },
    {
-    "speciesKey": "electrike",
-    "weight": 9,
-    "minLevel": 67,
-    "maxLevel": 69
-   },
-   {
-    "speciesKey": "sigilyph",
+    "speciesKey": "litleo",
     "weight": 8,
     "minLevel": 67,
     "maxLevel": 69
    },
    {
-    "speciesKey": "eevee",
+    "speciesKey": "azumarill",
     "weight": 6,
     "minLevel": 67,
     "maxLevel": 69
    },
    {
-    "speciesKey": "hawlucha",
-    "weight": 6,
+    "speciesKey": "farfetchd",
+    "weight": 5,
     "minLevel": 67,
     "maxLevel": 69
    },
    {
-    "speciesKey": "emolga",
+    "speciesKey": "azurill",
+    "weight": 5,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "bibarel",
+    "weight": 5,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "bunnelby",
+    "weight": 5,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "dunsparce",
     "weight": 3,
     "minLevel": 67,
     "maxLevel": 69
-   }
-  ]
- },
- "kalos-route-11": {
-  "name": "Route 11",
-  "encounters": [
-   {
-    "speciesKey": "nidoranF",
-    "weight": 15,
-    "minLevel": 68,
-    "maxLevel": 70
    },
    {
-    "speciesKey": "nidoranM",
-    "weight": 15,
-    "minLevel": 68,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "stunky",
-    "weight": 11,
-    "minLevel": 68,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "hariyama",
-    "weight": 5,
-    "minLevel": 68,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "staravia",
-    "weight": 5,
-    "minLevel": 68,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "throh",
-    "weight": 5,
-    "minLevel": 68,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "sawk",
-    "weight": 5,
-    "minLevel": 68,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "nidorino",
+    "speciesKey": "bidoof",
     "weight": 3,
-    "minLevel": 68,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "chingling",
-    "weight": 3,
-    "minLevel": 68,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "nidorina",
-    "weight": 1,
-    "minLevel": 68,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "starly",
-    "weight": 1,
-    "minLevel": 68,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "dedenne",
-    "weight": 1,
-    "minLevel": 68,
-    "maxLevel": 70
-   }
-  ]
- },
- "kalos-route-9": {
-  "name": "Route 9",
-  "encounters": [
-   {
-    "speciesKey": "hippopotas",
-    "weight": 10,
     "minLevel": 67,
     "maxLevel": 69
    },
    {
-    "speciesKey": "sandile",
-    "weight": 10,
+    "speciesKey": "riolu",
+    "weight": 3,
     "minLevel": 67,
     "maxLevel": 69
    },
    {
-    "speciesKey": "helioptile",
-    "weight": 5,
+    "speciesKey": "diggersby",
+    "weight": 3,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "sharpedo",
+    "weight": 1,
     "minLevel": 67,
     "maxLevel": 69
    }

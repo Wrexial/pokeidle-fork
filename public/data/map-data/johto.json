@@ -48,8 +48,7 @@
   "connections": [
    "johto-cherrygrove-city",
    "johto-new-bark-town",
-   "johto-route-46",
-   "johto-route-45"
+   "johto-route-46"
   ],
   "unlock": {
    "requires": [
@@ -58,7 +57,7 @@
   },
   "unlockOrder": 101,
   "position": {
-   "x": 77,
+   "x": 84,
    "y": 61
   }
  },
@@ -82,104 +81,8 @@
   },
   "unlockOrder": 102,
   "position": {
-   "x": 64,
-   "y": 66
-  },
-  "mart": {
-   "name": "Johto Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
-  }
- },
- "johto-route-45": {
-  "id": "johto-route-45",
-  "name": "Route 45",
-  "type": "route",
-  "region": "johto",
-  "description": "A route in the Johto region.",
-  "routeKey": "johto-route-45",
-  "connections": [
-   "johto-blackthorn-city",
-   "johto-route-46",
-   "johto-route-29"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "johto-route-29",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 103,
-  "position": {
-   "x": 86,
-   "y": 49
-  }
- },
- "johto-route-46": {
-  "id": "johto-route-46",
-  "name": "Route 46",
-  "type": "route",
-  "region": "johto",
-  "description": "A route in the Johto region.",
-  "routeKey": "johto-route-46",
-  "connections": [
-   "johto-route-29",
-   "johto-route-45",
-   "johto-route-31"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "johto-route-29",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 104,
-  "position": {
    "x": 75,
-   "y": 50
-  }
- },
- "johto-blackthorn-city": {
-  "id": "johto-blackthorn-city",
-  "name": "Blackthorn City",
-  "type": "town",
-  "region": "johto",
-  "description": "A town in the Johto region.",
-  "connections": [
-   "johto-route-45",
-   "johto-route-44"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "johto-route-45",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 105,
-  "position": {
-   "x": 85,
-   "y": 36
+   "y": 62
   },
   "mart": {
    "name": "Johto Mart",
@@ -221,9 +124,9 @@
     }
    ]
   },
-  "unlockOrder": 106,
+  "unlockOrder": 103,
   "position": {
-   "x": 67,
+   "x": 76,
    "y": 54
   }
  },
@@ -242,40 +145,15 @@
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "johto-route-46",
+     "locationId": "johto-route-30",
      "count": 15
     }
    ]
   },
-  "unlockOrder": 107,
+  "unlockOrder": 104,
   "position": {
-   "x": 69,
-   "y": 43
-  }
- },
- "johto-route-44": {
-  "id": "johto-route-44",
-  "name": "Route 44",
-  "type": "route",
-  "region": "johto",
-  "description": "A route in the Johto region.",
-  "routeKey": "johto-route-44",
-  "connections": [
-   "johto-mahogany-town",
-   "johto-blackthorn-city"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "johto-blackthorn-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 108,
-  "position": {
-   "x": 80,
-   "y": 22
+   "x": 77,
+   "y": 45
   }
  },
  "johto-violet-city": {
@@ -297,10 +175,10 @@
     }
    ]
   },
-  "unlockOrder": 109,
+  "unlockOrder": 105,
   "position": {
-   "x": 57,
-   "y": 42
+   "x": 66,
+   "y": 45
   },
   "mart": {
    "name": "Johto Mart",
@@ -342,81 +220,10 @@
     }
    ]
   },
-  "unlockOrder": 110,
+  "unlockOrder": 106,
   "position": {
-   "x": 58,
-   "y": 56
-  }
- },
- "johto-route-36": {
-  "id": "johto-route-36",
-  "name": "Route 36",
-  "type": "route",
-  "region": "johto",
-  "description": "A route in the Johto region.",
-  "routeKey": "johto-route-36",
-  "connections": [
-   "johto-route-37",
-   "johto-route-35",
-   "johto-violet-city"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "johto-violet-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 111,
-  "position": {
-   "x": 40,
-   "y": 44
-  }
- },
- "johto-mahogany-town": {
-  "id": "johto-mahogany-town",
-  "name": "Mahogany Town",
-  "type": "town",
-  "region": "johto",
-  "description": "A town in the Johto region.",
-  "connections": [
-   "johto-route-42",
-   "johto-route-43",
-   "johto-route-44"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "johto-route-44",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 112,
-  "position": {
-   "x": 65,
-   "y": 23
-  },
-  "mart": {
-   "name": "Johto Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
+   "x": 68,
+   "y": 54
   }
  },
  "johto-route-33": {
@@ -438,154 +245,10 @@
     }
    ]
   },
-  "unlockOrder": 113,
+  "unlockOrder": 107,
   "position": {
-   "x": 57,
-   "y": 90
-  }
- },
- "johto-route-35": {
-  "id": "johto-route-35",
-  "name": "Route 35",
-  "type": "route",
-  "region": "johto",
-  "description": "A route in the Johto region.",
-  "routeKey": "johto-route-35",
-  "connections": [
-   "johto-goldenrod-city",
-   "johto-route-36"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "johto-route-36",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 114,
-  "position": {
-   "x": 26,
-   "y": 54
-  }
- },
- "johto-route-37": {
-  "id": "johto-route-37",
-  "name": "Route 37",
-  "type": "route",
-  "region": "johto",
-  "description": "A route in the Johto region.",
-  "routeKey": "johto-route-37",
-  "connections": [
-   "johto-ecruteak-city",
-   "johto-route-36"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "johto-route-36",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 115,
-  "position": {
-   "x": 44,
-   "y": 33
-  }
- },
- "johto-route-42": {
-  "id": "johto-route-42",
-  "name": "Route 42",
-  "type": "route",
-  "region": "johto",
-  "description": "A route in the Johto region.",
-  "routeKey": "johto-route-42",
-  "connections": [
-   "johto-ecruteak-city",
-   "johto-mahogany-town"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "johto-mahogany-town",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 116,
-  "position": {
-   "x": 56,
-   "y": 26
-  }
- },
- "johto-route-43": {
-  "id": "johto-route-43",
-  "name": "Route 43",
-  "type": "route",
-  "region": "johto",
-  "description": "A route in the Johto region.",
-  "routeKey": "johto-route-43",
-  "connections": [
-   "johto-mahogany-town"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "johto-mahogany-town",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 117,
-  "position": {
-   "x": 69,
-   "y": 14
-  }
- },
- "johto-ecruteak-city": {
-  "id": "johto-ecruteak-city",
-  "name": "Ecruteak City",
-  "type": "town",
-  "region": "johto",
-  "description": "A town in the Johto region.",
-  "connections": [
-   "johto-route-37",
-   "johto-route-42",
-   "johto-route-38"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "johto-route-37",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 118,
-  "position": {
-   "x": 47,
-   "y": 23
-  },
-  "mart": {
-   "name": "Johto Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
+   "x": 70,
+   "y": 77
   }
  },
  "johto-azalea-town": {
@@ -606,54 +269,10 @@
     }
    ]
   },
-  "unlockOrder": 119,
+  "unlockOrder": 108,
   "position": {
-   "x": 40,
-   "y": 91
-  },
-  "mart": {
-   "name": "Johto Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
-  }
- },
- "johto-goldenrod-city": {
-  "id": "johto-goldenrod-city",
-  "name": "Goldenrod City",
-  "type": "town",
-  "region": "johto",
-  "description": "A town in the Johto region.",
-  "connections": [
-   "johto-route-34",
-   "johto-route-35"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "johto-route-35",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 120,
-  "position": {
-   "x": 28,
-   "y": 63
+   "x": 60,
+   "y": 78
   },
   "mart": {
    "name": "Johto Mart",
@@ -695,85 +314,34 @@
     }
    ]
   },
-  "unlockOrder": 121,
+  "unlockOrder": 109,
   "position": {
-   "x": 23,
-   "y": 77
+   "x": 52,
+   "y": 72
   }
  },
- "johto-route-38": {
-  "id": "johto-route-38",
-  "name": "Route 38",
-  "type": "route",
-  "region": "johto",
-  "description": "A route in the Johto region.",
-  "routeKey": "johto-route-38",
-  "connections": [
-   "johto-ecruteak-city",
-   "johto-route-39"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "johto-ecruteak-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 122,
-  "position": {
-   "x": 37,
-   "y": 27
-  }
- },
- "johto-route-39": {
-  "id": "johto-route-39",
-  "name": "Route 39",
-  "type": "route",
-  "region": "johto",
-  "description": "A route in the Johto region.",
-  "routeKey": "johto-route-39",
-  "connections": [
-   "johto-olivine-city",
-   "johto-route-38"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "johto-route-38",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 123,
-  "position": {
-   "x": 28,
-   "y": 34
-  }
- },
- "johto-olivine-city": {
-  "id": "johto-olivine-city",
-  "name": "Olivine City",
+ "johto-goldenrod-city": {
+  "id": "johto-goldenrod-city",
+  "name": "Goldenrod City",
   "type": "town",
   "region": "johto",
   "description": "A town in the Johto region.",
   "connections": [
-   "johto-route-39",
-   "johto-sea-route-40",
-   "johto-cianwood-city"
+   "johto-route-34",
+   "johto-route-35"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "johto-route-39",
+     "locationId": "johto-route-34",
      "count": 15
     }
    ]
   },
-  "unlockOrder": 124,
+  "unlockOrder": 110,
   "position": {
-   "x": 36,
-   "y": 54
+   "x": 52,
+   "y": 63
   },
   "mart": {
    "name": "Johto Mart",
@@ -796,30 +364,199 @@
    ]
   }
  },
- "johto-cianwood-city": {
-  "id": "johto-cianwood-city",
-  "name": "Cianwood City",
-  "type": "town",
+ "johto-route-35": {
+  "id": "johto-route-35",
+  "name": "Route 35",
+  "type": "route",
   "region": "johto",
-  "description": "A town in the Johto region.",
+  "description": "A route in the Johto region.",
+  "routeKey": "johto-route-35",
   "connections": [
-   "johto-sea-route-41",
-   "johto-olivine-city",
-   "johto-route-47",
-   "johto-route-48"
+   "johto-goldenrod-city",
+   "johto-route-36"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "johto-olivine-city",
+     "locationId": "johto-goldenrod-city",
      "count": 15
     }
    ]
   },
-  "unlockOrder": 125,
+  "unlockOrder": 111,
   "position": {
-   "x": 25,
-   "y": 70
+   "x": 52,
+   "y": 54
+  }
+ },
+ "johto-route-36": {
+  "id": "johto-route-36",
+  "name": "Route 36",
+  "type": "route",
+  "region": "johto",
+  "description": "A route in the Johto region.",
+  "routeKey": "johto-route-36",
+  "connections": [
+   "johto-route-37",
+   "johto-route-35",
+   "johto-violet-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-violet-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 112,
+  "position": {
+   "x": 56,
+   "y": 45
+  }
+ },
+ "johto-route-37": {
+  "id": "johto-route-37",
+  "name": "Route 37",
+  "type": "route",
+  "region": "johto",
+  "description": "A route in the Johto region.",
+  "routeKey": "johto-route-37",
+  "connections": [
+   "johto-ecruteak-city",
+   "johto-route-36"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-route-36",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 113,
+  "position": {
+   "x": 56,
+   "y": 36
+  }
+ },
+ "johto-ecruteak-city": {
+  "id": "johto-ecruteak-city",
+  "name": "Ecruteak City",
+  "type": "town",
+  "region": "johto",
+  "description": "A town in the Johto region.",
+  "connections": [
+   "johto-route-37",
+   "johto-route-42",
+   "johto-route-38"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-route-37",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 114,
+  "position": {
+   "x": 56,
+   "y": 27
+  },
+  "mart": {
+   "name": "Johto Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "johto-route-38": {
+  "id": "johto-route-38",
+  "name": "Route 38",
+  "type": "route",
+  "region": "johto",
+  "description": "A route in the Johto region.",
+  "routeKey": "johto-route-38",
+  "connections": [
+   "johto-ecruteak-city",
+   "johto-route-39"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-ecruteak-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 115,
+  "position": {
+   "x": 46,
+   "y": 27
+  }
+ },
+ "johto-route-39": {
+  "id": "johto-route-39",
+  "name": "Route 39",
+  "type": "route",
+  "region": "johto",
+  "description": "A route in the Johto region.",
+  "routeKey": "johto-route-39",
+  "connections": [
+   "johto-olivine-city",
+   "johto-route-38"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-route-38",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 116,
+  "position": {
+   "x": 36,
+   "y": 27
+  }
+ },
+ "johto-olivine-city": {
+  "id": "johto-olivine-city",
+  "name": "Olivine City",
+  "type": "town",
+  "region": "johto",
+  "description": "A town in the Johto region.",
+  "connections": [
+   "johto-route-39",
+   "johto-sea-route-40"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-route-39",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 117,
+  "position": {
+   "x": 37,
+   "y": 36
   },
   "mart": {
    "name": "Johto Mart",
@@ -861,10 +598,10 @@
     }
    ]
   },
-  "unlockOrder": 126,
+  "unlockOrder": 118,
   "position": {
-   "x": 36,
-   "y": 64
+   "x": 26,
+   "y": 36
   }
  },
  "johto-sea-route-41": {
@@ -886,10 +623,268 @@
     }
    ]
   },
+  "unlockOrder": 119,
+  "position": {
+   "x": 27,
+   "y": 46
+  }
+ },
+ "johto-cianwood-city": {
+  "id": "johto-cianwood-city",
+  "name": "Cianwood City",
+  "type": "town",
+  "region": "johto",
+  "description": "A town in the Johto region.",
+  "connections": [
+   "johto-sea-route-41",
+   "johto-route-47"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-sea-route-41",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 120,
+  "position": {
+   "x": 17,
+   "y": 46
+  },
+  "mart": {
+   "name": "Johto Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "johto-route-42": {
+  "id": "johto-route-42",
+  "name": "Route 42",
+  "type": "route",
+  "region": "johto",
+  "description": "A route in the Johto region.",
+  "routeKey": "johto-route-42",
+  "connections": [
+   "johto-ecruteak-city",
+   "johto-mahogany-town"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-ecruteak-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 121,
+  "position": {
+   "x": 66,
+   "y": 27
+  }
+ },
+ "johto-mahogany-town": {
+  "id": "johto-mahogany-town",
+  "name": "Mahogany Town",
+  "type": "town",
+  "region": "johto",
+  "description": "A town in the Johto region.",
+  "connections": [
+   "johto-route-42",
+   "johto-route-43",
+   "johto-route-44"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-route-42",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 122,
+  "position": {
+   "x": 75,
+   "y": 28
+  },
+  "mart": {
+   "name": "Johto Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "johto-route-43": {
+  "id": "johto-route-43",
+  "name": "Route 43",
+  "type": "route",
+  "region": "johto",
+  "description": "A route in the Johto region.",
+  "routeKey": "johto-route-43",
+  "connections": [
+   "johto-mahogany-town"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-mahogany-town",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 123,
+  "position": {
+   "x": 83,
+   "y": 27
+  }
+ },
+ "johto-route-44": {
+  "id": "johto-route-44",
+  "name": "Route 44",
+  "type": "route",
+  "region": "johto",
+  "description": "A route in the Johto region.",
+  "routeKey": "johto-route-44",
+  "connections": [
+   "johto-mahogany-town",
+   "johto-blackthorn-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-mahogany-town",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 124,
+  "position": {
+   "x": 91,
+   "y": 32
+  }
+ },
+ "johto-blackthorn-city": {
+  "id": "johto-blackthorn-city",
+  "name": "Blackthorn City",
+  "type": "town",
+  "region": "johto",
+  "description": "A town in the Johto region.",
+  "connections": [
+   "johto-route-45",
+   "johto-route-44"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-route-44",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 125,
+  "position": {
+   "x": 94,
+   "y": 39
+  },
+  "mart": {
+   "name": "Johto Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "johto-route-45": {
+  "id": "johto-route-45",
+  "name": "Route 45",
+  "type": "route",
+  "region": "johto",
+  "description": "A route in the Johto region.",
+  "routeKey": "johto-route-45",
+  "connections": [
+   "johto-blackthorn-city",
+   "johto-route-46"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-blackthorn-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 126,
+  "position": {
+   "x": 93,
+   "y": 50
+  }
+ },
+ "johto-route-46": {
+  "id": "johto-route-46",
+  "name": "Route 46",
+  "type": "route",
+  "region": "johto",
+  "description": "A route in the Johto region.",
+  "routeKey": "johto-route-46",
+  "connections": [
+   "johto-route-29",
+   "johto-route-45",
+   "johto-route-31"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-route-29",
+     "count": 15
+    }
+   ]
+  },
   "unlockOrder": 127,
   "position": {
-   "x": 31,
-   "y": 71
+   "x": 83,
+   "y": 50
   }
  },
  "johto-route-47": {
@@ -913,8 +908,8 @@
   },
   "unlockOrder": 128,
   "position": {
-   "x": 10,
-   "y": 72
+   "x": 6,
+   "y": 51
   }
  },
  "johto-route-48": {
@@ -926,14 +921,13 @@
   "routeKey": "johto-route-48",
   "connections": [
    "johto-route-47",
-   "johto-cianwood-city",
    "johto-raid",
    "johto-league"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "johto-cianwood-city",
+     "locationId": "johto-route-47",
      "count": 15
     }
    ]
@@ -941,7 +935,7 @@
   "unlockOrder": 129,
   "position": {
    "x": 6,
-   "y": 61
+   "y": 45
   }
  },
  "johto-raid": {
@@ -965,7 +959,7 @@
   "unlockOrder": 130,
   "position": {
    "x": 14,
-   "y": 51
+   "y": 35
   }
  },
  "johto-league": {
@@ -987,8 +981,8 @@
   },
   "unlockOrder": 131,
   "position": {
-   "x": 16,
-   "y": 57
+   "x": 31,
+   "y": 53
   }
  }
 }

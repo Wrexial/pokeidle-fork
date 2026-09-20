@@ -228,7 +228,72 @@ for (const region of REGIONS) {
     }
   }
 
-  const order = nodes.slice().sort((a, b) => depth[a] - depth[b])
+  // --- progression order ----------------------------------------------------
+  // BFS depth alone lets far areas open early (Route 46/45 reach Blackthorn
+  // before Violet City; Hoenn's eastern sea routes hang off Slateport). Order
+  // locations by their real route number instead, treat a town as sitting just
+  // after its lowest-numbered route, and unlock each location from the closest
+  // earlier-numbered neighbour. Progression then follows the actual route path.
+  const routeNumber = (node) => {
+    const match = String(display[node] ?? node).match(/route\s*(\d+)/i)
+    return match ? Number(match[1]) : null
+  }
+  const rank = {}
+  for (const node of nodes) {
+    if (!isRouteNode(node)) continue
+    const number = routeNumber(node)
+    if (number !== null) rank[node] = number
+  }
+  for (const node of nodes) {
+    if (rank[node] !== undefined) continue
+    // No route number (e.g. Paldea's province areas): sort just after the
+    // lowest-numbered route it touches, else fall back to BFS depth.
+    let lowest = null
+    for (const neighbour of adjacency[node]) {
+      const neighbourRank = rank[neighbour]
+      if (neighbourRank !== undefined && (lowest === null || neighbourRank < lowest))
+        lowest = neighbourRank
+    }
+    rank[node] = lowest !== null ? lowest + 0.5 : 10000 + depth[node]
+  }
+  rank[entryNode] = -1
+  const order = nodes
+    .slice()
+    .sort(
+      (a, b) =>
+        rank[a] - rank[b] || depth[a] - depth[b] || String(a).localeCompare(String(b))
+    )
+  // Build the unlock tree with Dijkstra from the entry: stepping to a
+  // higher-numbered location is cheap, going backwards is heavily penalised.
+  // The tree then follows the route order without dead-end detours (Route 6
+  // hangs off Route 7) or the BFS shortcuts that opened Blackthorn early.
+  const BACKWARD_PENALTY = 1e6
+  const dist = { [entryNode]: 0 }
+  const unlockParent = {}
+  const settled = new Set()
+  while (settled.size < nodes.length) {
+    let current = null
+    for (const node of nodes) {
+      if (settled.has(node) || dist[node] === undefined) continue
+      if (current === null || dist[node] < dist[current]) current = node
+    }
+    if (current === null) break
+    settled.add(current)
+    for (const neighbour of adjacency[current]) {
+      const forward = rank[neighbour] >= rank[current]
+      const next =
+        dist[current] +
+        Math.abs(rank[neighbour] - rank[current]) +
+        (forward ? 0 : BACKWARD_PENALTY)
+      if (dist[neighbour] === undefined || next < dist[neighbour]) {
+        dist[neighbour] = next
+        unlockParent[neighbour] = current
+      }
+    }
+  }
+  for (const node of nodes)
+    if (node !== entryNode && !unlockParent[node]) unlockParent[node] = parent[node] ?? null
+
   const routeNodes = order.filter(isRouteNode)
   const townNodes = order.filter(isTownNode)
   const usedPos = []
@@ -326,12 +391,12 @@ for (const region of REGIONS) {
     const unlock =
       node === entryNode
         ? { entry: true, previous: prevRegionId }
-        : depth[node] === 1
+        : unlockParent[node] === entryNode
           ? { requires: [locId(regionId, entryNode)] }
-          : parent[node]
+          : unlockParent[node]
             ? {
                 battlesAtLocation: [
-                  { locationId: locId(regionId, parent[node]), count: 15 },
+                  { locationId: locId(regionId, unlockParent[node]), count: 15 },
                 ],
               }
             : {}

@@ -8,8 +8,7 @@
   "connections": [
    "alola-route-1--hauoli-outskirts",
    "alola-route-1",
-   "alola-hauoli-city",
-   "alola-route-10"
+   "alola-route-5"
   ],
   "unlock": {
    "entry": true,
@@ -17,8 +16,8 @@
   },
   "unlockOrder": 315,
   "position": {
-   "x": 46,
-   "y": 56
+   "x": 45,
+   "y": 34
   },
   "mart": {
    "name": "Alola Mart",
@@ -41,30 +40,6 @@
    ]
   }
  },
- "alola-route-1--hauoli-outskirts": {
-  "id": "alola-route-1--hauoli-outskirts",
-  "name": "Route 1 (Hauoli Outskirts)",
-  "type": "route",
-  "region": "alola",
-  "description": "A route in the Alola region.",
-  "routeKey": "alola-route-1--hauoli-outskirts",
-  "connections": [
-   "alola-iki-town",
-   "alola-route-1",
-   "alola-hauoli-city",
-   "alola-route-4"
-  ],
-  "unlock": {
-   "requires": [
-    "alola-iki-town"
-   ]
-  },
-  "unlockOrder": 316,
-  "position": {
-   "x": 36,
-   "y": 61
-  }
- },
  "alola-route-1": {
   "id": "alola-route-1",
   "name": "Route 1",
@@ -75,8 +50,29 @@
   "connections": [
    "alola-iki-town",
    "alola-route-3",
-   "alola-route-1--hauoli-outskirts",
-   "alola-hauoli-city"
+   "alola-route-1--hauoli-outskirts"
+  ],
+  "unlock": {
+   "requires": [
+    "alola-iki-town"
+   ]
+  },
+  "unlockOrder": 316,
+  "position": {
+   "x": 38,
+   "y": 37
+  }
+ },
+ "alola-route-1--hauoli-outskirts": {
+  "id": "alola-route-1--hauoli-outskirts",
+  "name": "Route 1 (Hauoli Outskirts)",
+  "type": "route",
+  "region": "alola",
+  "description": "A route in the Alola region.",
+  "routeKey": "alola-route-1--hauoli-outskirts",
+  "connections": [
+   "alola-iki-town",
+   "alola-route-1"
   ],
   "unlock": {
    "requires": [
@@ -85,31 +81,34 @@
   },
   "unlockOrder": 317,
   "position": {
-   "x": 46,
-   "y": 67
+   "x": 31,
+   "y": 37
   }
  },
- "alola-route-10": {
-  "id": "alola-route-10",
-  "name": "Route 10",
+ "alola-route-2": {
+  "id": "alola-route-2",
+  "name": "Route 2",
   "type": "route",
   "region": "alola",
   "description": "A route in the Alola region.",
-  "routeKey": "alola-route-10",
+  "routeKey": "alola-route-2",
   "connections": [
-   "alola-malie-city",
-   "alola-iki-town",
-   "alola-route-15"
+   "alola-route-3",
+   "alola-hauoli-city",
+   "alola-po-town"
   ],
   "unlock": {
-   "requires": [
-    "alola-iki-town"
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-3",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 318,
   "position": {
-   "x": 53,
-   "y": 55
+   "x": 34,
+   "y": 30
   }
  },
  "alola-hauoli-city": {
@@ -120,20 +119,64 @@
   "description": "A town in the Alola region.",
   "connections": [
    "alola-route-2",
-   "alola-route-1",
-   "alola-route-1--hauoli-outskirts",
-   "alola-iki-town",
-   "alola-route-11"
+   "alola-route-9"
   ],
   "unlock": {
-   "requires": [
-    "alola-iki-town"
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-2",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 319,
   "position": {
-   "x": 52,
-   "y": 66
+   "x": 39,
+   "y": 60
+  },
+  "mart": {
+   "name": "Alola Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "alola-po-town": {
+  "id": "alola-po-town",
+  "name": "Po Town",
+  "type": "town",
+  "region": "alola",
+  "description": "A town in the Alola region.",
+  "connections": [
+   "alola-route-17",
+   "alola-route-2"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-2",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 320,
+  "position": {
+   "x": 41,
+   "y": 18
   },
   "mart": {
    "name": "Alola Mart",
@@ -166,7 +209,9 @@
   "connections": [
    "alola-route-1",
    "alola-route-2",
-   "alola-route-16"
+   "alola-route-4",
+   "alola-route-6",
+   "alola-paniola-town"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -176,37 +221,55 @@
     }
    ]
   },
-  "unlockOrder": 320,
+  "unlockOrder": 321,
   "position": {
-   "x": 50,
-   "y": 45
+   "x": 47,
+   "y": 41
   }
  },
- "alola-route-2": {
-  "id": "alola-route-2",
-  "name": "Route 2",
-  "type": "route",
+ "alola-paniola-town": {
+  "id": "alola-paniola-town",
+  "name": "Paniola Town",
+  "type": "town",
   "region": "alola",
-  "description": "A route in the Alola region.",
-  "routeKey": "alola-route-2",
+  "description": "A town in the Alola region.",
   "connections": [
-   "alola-route-3",
-   "alola-hauoli-city",
-   "alola-route-5",
-   "alola-route-6"
+   "alola-route-4",
+   "alola-route-6",
+   "alola-route-3"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "alola-hauoli-city",
+     "locationId": "alola-route-3",
      "count": 15
     }
    ]
   },
-  "unlockOrder": 321,
+  "unlockOrder": 322,
   "position": {
-   "x": 37,
-   "y": 51
+   "x": 56,
+   "y": 41
+  },
+  "mart": {
+   "name": "Alola Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
   }
  },
  "alola-route-4": {
@@ -219,75 +282,67 @@
   "connections": [
    "alola-paniola-town",
    "alola-heahea-city",
-   "alola-route-1--hauoli-outskirts",
-   "alola-route-9"
+   "alola-route-3",
+   "alola-route-16"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "alola-route-1--hauoli-outskirts",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 322,
-  "position": {
-   "x": 35,
-   "y": 68
-  }
- },
- "alola-route-11": {
-  "id": "alola-route-11",
-  "name": "Route 11",
-  "type": "route",
-  "region": "alola",
-  "description": "A route in the Alola region.",
-  "routeKey": "alola-route-11",
-  "connections": [
-   "alola-malie-city",
-   "alola-route-12",
-   "alola-hauoli-city",
-   "alola-route-13",
-   "alola-route-14"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "alola-hauoli-city",
+     "locationId": "alola-route-3",
      "count": 15
     }
    ]
   },
   "unlockOrder": 323,
   "position": {
-   "x": 59,
-   "y": 62
+   "x": 58,
+   "y": 54
   }
  },
- "alola-route-15": {
-  "id": "alola-route-15",
-  "name": "Route 15",
-  "type": "route",
+ "alola-heahea-city": {
+  "id": "alola-heahea-city",
+  "name": "Heahea City",
+  "type": "town",
   "region": "alola",
-  "description": "A route in the Alola region.",
-  "routeKey": "alola-route-15",
+  "description": "A town in the Alola region.",
   "connections": [
-   "alola-route-16",
-   "alola-route-13",
+   "alola-route-4",
+   "alola-route-6",
+   "alola-route-9",
    "alola-route-10"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "alola-route-10",
+     "locationId": "alola-route-4",
      "count": 15
     }
    ]
   },
   "unlockOrder": 324,
   "position": {
-   "x": 60,
-   "y": 56
+   "x": 50,
+   "y": 50
+  },
+  "mart": {
+   "name": "Alola Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
   }
  },
  "alola-route-5": {
@@ -300,21 +355,18 @@
   "connections": [
    "alola-route-8",
    "alola-route-6",
-   "alola-route-2",
+   "alola-iki-town",
    "alola-route-7"
   ],
   "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "alola-route-2",
-     "count": 15
-    }
+   "requires": [
+    "alola-iki-town"
    ]
   },
   "unlockOrder": 325,
   "position": {
-   "x": 34,
-   "y": 37
+   "x": 58,
+   "y": 16
   }
  },
  "alola-route-6": {
@@ -329,131 +381,6 @@
    "alola-paniola-town",
    "alola-route-5",
    "alola-route-7",
-   "alola-route-2"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "alola-route-2",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 326,
-  "position": {
-   "x": 58,
-   "y": 75
-  }
- },
- "alola-route-9": {
-  "id": "alola-route-9",
-  "name": "Route 9",
-  "type": "route",
-  "region": "alola",
-  "description": "A route in the Alola region.",
-  "routeKey": "alola-route-9",
-  "connections": [
-   "alola-konikoni-city",
-   "alola-heahea-city",
-   "alola-route-4"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "alola-route-4",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 327,
-  "position": {
-   "x": 30,
-   "y": 94
-  }
- },
- "alola-heahea-city": {
-  "id": "alola-heahea-city",
-  "name": "Heahea City",
-  "type": "town",
-  "region": "alola",
-  "description": "A town in the Alola region.",
-  "connections": [
-   "alola-route-4",
-   "alola-route-6",
-   "alola-route-9"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "alola-route-4",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 328,
-  "position": {
-   "x": 28,
-   "y": 70
-  },
-  "mart": {
-   "name": "Alola Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
-  }
- },
- "alola-route-13": {
-  "id": "alola-route-13",
-  "name": "Route 13",
-  "type": "route",
-  "region": "alola",
-  "description": "A route in the Alola region.",
-  "routeKey": "alola-route-13",
-  "connections": [
-   "alola-route-12",
-   "alola-route-15",
-   "alola-route-14",
-   "alola-route-11",
-   "alola-malie-city"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "alola-route-11",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 329,
-  "position": {
-   "x": 66,
-   "y": 63
-  }
- },
- "alola-route-16": {
-  "id": "alola-route-16",
-  "name": "Route 16",
-  "type": "route",
-  "region": "alola",
-  "description": "A route in the Alola region.",
-  "routeKey": "alola-route-16",
-  "connections": [
-   "alola-route-15",
-   "alola-route-17",
    "alola-route-3"
   ],
   "unlock": {
@@ -464,35 +391,10 @@
     }
    ]
   },
-  "unlockOrder": 330,
+  "unlockOrder": 326,
   "position": {
-   "x": 56,
-   "y": 45
-  }
- },
- "alola-route-14": {
-  "id": "alola-route-14",
-  "name": "Route 14",
-  "type": "route",
-  "region": "alola",
-  "description": "A route in the Alola region.",
-  "routeKey": "alola-route-14",
-  "connections": [
-   "alola-route-13",
-   "alola-route-11"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "alola-route-11",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 331,
-  "position": {
-   "x": 65,
-   "y": 84
+   "x": 62,
+   "y": 44
   }
  },
  "alola-route-7": {
@@ -505,31 +407,6 @@
   "connections": [
    "alola-route-8",
    "alola-route-6",
-   "alola-route-5"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "alola-route-5",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 332,
-  "position": {
-   "x": 41,
-   "y": 39
-  }
- },
- "alola-route-8": {
-  "id": "alola-route-8",
-  "name": "Route 8",
-  "type": "route",
-  "region": "alola",
-  "description": "A route in the Alola region.",
-  "routeKey": "alola-route-8",
-  "connections": [
-   "alola-route-7",
    "alola-route-5",
    "alola-route-17"
   ],
@@ -541,34 +418,88 @@
     }
    ]
   },
-  "unlockOrder": 333,
+  "unlockOrder": 327,
   "position": {
-   "x": 34,
-   "y": 29
+   "x": 64,
+   "y": 21
   }
  },
- "alola-paniola-town": {
-  "id": "alola-paniola-town",
-  "name": "Paniola Town",
-  "type": "town",
+ "alola-route-8": {
+  "id": "alola-route-8",
+  "name": "Route 8",
+  "type": "route",
   "region": "alola",
-  "description": "A town in the Alola region.",
+  "description": "A route in the Alola region.",
+  "routeKey": "alola-route-8",
   "connections": [
-   "alola-route-4",
-   "alola-route-6"
+   "alola-route-7",
+   "alola-route-5"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "alola-route-6",
+     "locationId": "alola-route-5",
      "count": 15
     }
    ]
   },
-  "unlockOrder": 334,
+  "unlockOrder": 328,
   "position": {
-   "x": 28,
-   "y": 58
+   "x": 58,
+   "y": 6
+  }
+ },
+ "alola-route-9": {
+  "id": "alola-route-9",
+  "name": "Route 9",
+  "type": "route",
+  "region": "alola",
+  "description": "A route in the Alola region.",
+  "routeKey": "alola-route-9",
+  "connections": [
+   "alola-konikoni-city",
+   "alola-heahea-city",
+   "alola-hauoli-city",
+   "alola-route-11",
+   "alola-route-13",
+   "alola-route-14"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-heahea-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 329,
+  "position": {
+   "x": 51,
+   "y": 79
+  }
+ },
+ "alola-konikoni-city": {
+  "id": "alola-konikoni-city",
+  "name": "Konikoni City",
+  "type": "town",
+  "region": "alola",
+  "description": "A town in the Alola region.",
+  "connections": [
+   "alola-route-9",
+   "alola-route-15"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-9",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 330,
+  "position": {
+   "x": 46,
+   "y": 75
   },
   "mart": {
    "name": "Alola Mart",
@@ -591,13 +522,85 @@
    ]
   }
  },
- "alola-konikoni-city": {
-  "id": "alola-konikoni-city",
-  "name": "Konikoni City",
+ "alola-route-10": {
+  "id": "alola-route-10",
+  "name": "Route 10",
+  "type": "route",
+  "region": "alola",
+  "description": "A route in the Alola region.",
+  "routeKey": "alola-route-10",
+  "connections": [
+   "alola-malie-city",
+   "alola-heahea-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-heahea-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 331,
+  "position": {
+   "x": 47,
+   "y": 56
+  }
+ },
+ "alola-malie-city": {
+  "id": "alola-malie-city",
+  "name": "Malie City",
   "type": "town",
   "region": "alola",
   "description": "A town in the Alola region.",
   "connections": [
+   "alola-route-10",
+   "alola-route-11"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-10",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 332,
+  "position": {
+   "x": 53,
+   "y": 72
+  },
+  "mart": {
+   "name": "Alola Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "alola-route-11": {
+  "id": "alola-route-11",
+  "name": "Route 11",
+  "type": "route",
+  "region": "alola",
+  "description": "A route in the Alola region.",
+  "routeKey": "alola-route-11",
+  "connections": [
+   "alola-malie-city",
+   "alola-route-12",
    "alola-route-9"
   ],
   "unlock": {
@@ -608,30 +611,10 @@
     }
    ]
   },
-  "unlockOrder": 335,
+  "unlockOrder": 333,
   "position": {
-   "x": 25,
-   "y": 89
-  },
-  "mart": {
-   "name": "Alola Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
+   "x": 60,
+   "y": 71
   }
  },
  "alola-route-12": {
@@ -648,60 +631,119 @@
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "alola-route-13",
+     "locationId": "alola-route-11",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 334,
+  "position": {
+   "x": 69,
+   "y": 86
+  }
+ },
+ "alola-route-13": {
+  "id": "alola-route-13",
+  "name": "Route 13",
+  "type": "route",
+  "region": "alola",
+  "description": "A route in the Alola region.",
+  "routeKey": "alola-route-13",
+  "connections": [
+   "alola-route-12",
+   "alola-route-15",
+   "alola-route-14",
+   "alola-route-9"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-9",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 335,
+  "position": {
+   "x": 58,
+   "y": 78
+  }
+ },
+ "alola-route-14": {
+  "id": "alola-route-14",
+  "name": "Route 14",
+  "type": "route",
+  "region": "alola",
+  "description": "A route in the Alola region.",
+  "routeKey": "alola-route-14",
+  "connections": [
+   "alola-route-13",
+   "alola-route-9"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-9",
      "count": 15
     }
    ]
   },
   "unlockOrder": 336,
   "position": {
-   "x": 75,
-   "y": 76
+   "x": 43,
+   "y": 94
   }
  },
- "alola-malie-city": {
-  "id": "alola-malie-city",
-  "name": "Malie City",
-  "type": "town",
+ "alola-route-15": {
+  "id": "alola-route-15",
+  "name": "Route 15",
+  "type": "route",
   "region": "alola",
-  "description": "A town in the Alola region.",
+  "description": "A route in the Alola region.",
+  "routeKey": "alola-route-15",
   "connections": [
-   "alola-route-10",
-   "alola-route-11",
-   "alola-route-13"
+   "alola-route-16",
+   "alola-route-13",
+   "alola-konikoni-city"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "alola-route-13",
+     "locationId": "alola-konikoni-city",
      "count": 15
     }
    ]
   },
   "unlockOrder": 337,
   "position": {
-   "x": 62,
-   "y": 68
-  },
-  "mart": {
-   "name": "Alola Mart",
-   "items": [
+   "x": 41,
+   "y": 69
+  }
+ },
+ "alola-route-16": {
+  "id": "alola-route-16",
+  "name": "Route 16",
+  "type": "route",
+  "region": "alola",
+  "description": "A route in the Alola region.",
+  "routeKey": "alola-route-16",
+  "connections": [
+   "alola-route-15",
+   "alola-route-17",
+   "alola-route-4"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
     {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
+     "locationId": "alola-route-4",
+     "count": 15
     }
    ]
+  },
+  "unlockOrder": 338,
+  "position": {
+   "x": 54,
+   "y": 59
   }
  },
  "alola-route-17": {
@@ -714,65 +756,22 @@
   "connections": [
    "alola-po-town",
    "alola-route-16",
-   "alola-route-8",
+   "alola-route-7",
    "alola-raid",
    "alola-league"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "alola-route-8",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 338,
-  "position": {
-   "x": 56,
-   "y": 21
-  }
- },
- "alola-po-town": {
-  "id": "alola-po-town",
-  "name": "Po Town",
-  "type": "town",
-  "region": "alola",
-  "description": "A town in the Alola region.",
-  "connections": [
-   "alola-route-17"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "alola-route-17",
+     "locationId": "alola-route-7",
      "count": 15
     }
    ]
   },
   "unlockOrder": 339,
   "position": {
-   "x": 56,
-   "y": 6
-  },
-  "mart": {
-   "name": "Alola Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
+   "x": 60,
+   "y": 29
   }
  },
  "alola-raid": {
@@ -795,8 +794,8 @@
   },
   "unlockOrder": 340,
   "position": {
-   "x": 64,
-   "y": 11
+   "x": 73,
+   "y": 23
   }
  },
  "alola-league": {
@@ -818,8 +817,8 @@
   },
   "unlockOrder": 341,
   "position": {
-   "x": 66,
-   "y": 17
+   "x": 75,
+   "y": 29
   }
  }
 }

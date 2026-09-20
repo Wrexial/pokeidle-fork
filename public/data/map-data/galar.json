@@ -199,6 +199,143 @@
    "y": 50
   }
  },
+ "galar-route-4": {
+  "id": "galar-route-4",
+  "name": "Route 4",
+  "type": "route",
+  "region": "galar",
+  "description": "A route in the Galar region.",
+  "routeKey": "galar-route-4",
+  "connections": [
+   "galar-turffield",
+   "galar-route-3"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-route-3",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 348,
+  "position": {
+   "x": 9,
+   "y": 21
+  }
+ },
+ "galar-turffield": {
+  "id": "galar-turffield",
+  "name": "Turffield",
+  "type": "town",
+  "region": "galar",
+  "description": "A town in the Galar region.",
+  "connections": [
+   "galar-route-4",
+   "galar-route-5"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-route-4",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 349,
+  "position": {
+   "x": 10,
+   "y": 6
+  },
+  "mart": {
+   "name": "Galar Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "galar-route-5": {
+  "id": "galar-route-5",
+  "name": "Route 5",
+  "type": "route",
+  "region": "galar",
+  "description": "A route in the Galar region.",
+  "routeKey": "galar-route-5",
+  "connections": [
+   "galar-hulbury",
+   "galar-turffield"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-turffield",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 350,
+  "position": {
+   "x": 24,
+   "y": 6
+  }
+ },
+ "galar-hulbury": {
+  "id": "galar-hulbury",
+  "name": "Hulbury",
+  "type": "town",
+  "region": "galar",
+  "description": "A town in the Galar region.",
+  "connections": [
+   "galar-route-5"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-route-5",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 351,
+  "position": {
+   "x": 39,
+   "y": 6
+  },
+  "mart": {
+   "name": "Galar Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
  "galar-route-6": {
   "id": "galar-route-6",
   "name": "Route 6",
@@ -219,35 +356,10 @@
     }
    ]
   },
-  "unlockOrder": 348,
+  "unlockOrder": 352,
   "position": {
    "x": 37,
    "y": 51
-  }
- },
- "galar-route-4": {
-  "id": "galar-route-4",
-  "name": "Route 4",
-  "type": "route",
-  "region": "galar",
-  "description": "A route in the Galar region.",
-  "routeKey": "galar-route-4",
-  "connections": [
-   "galar-turffield",
-   "galar-route-3"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "galar-route-3",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 349,
-  "position": {
-   "x": 9,
-   "y": 21
   }
  },
  "galar-hammerlocke": {
@@ -269,7 +381,7 @@
     }
    ]
   },
-  "unlockOrder": 350,
+  "unlockOrder": 353,
   "position": {
    "x": 52,
    "y": 53
@@ -313,7 +425,7 @@
     }
    ]
   },
-  "unlockOrder": 351,
+  "unlockOrder": 354,
   "position": {
    "x": 22,
    "y": 57
@@ -359,147 +471,10 @@
     }
    ]
   },
-  "unlockOrder": 352,
+  "unlockOrder": 355,
   "position": {
    "x": 66,
    "y": 52
-  }
- },
- "galar-route-10": {
-  "id": "galar-route-10",
-  "name": "Route 10",
-  "type": "route",
-  "region": "galar",
-  "description": "A route in the Galar region.",
-  "routeKey": "galar-route-10",
-  "connections": [
-   "galar-wyndon",
-   "galar-hammerlocke"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "galar-hammerlocke",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 353,
-  "position": {
-   "x": 51,
-   "y": 37
-  }
- },
- "galar-ballonlea": {
-  "id": "galar-ballonlea",
-  "name": "Ballonlea",
-  "type": "town",
-  "region": "galar",
-  "description": "A town in the Galar region.",
-  "connections": [
-   "galar-stow-on-side"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "galar-stow-on-side",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 354,
-  "position": {
-   "x": 22,
-   "y": 42
-  },
-  "mart": {
-   "name": "Galar Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
-  }
- },
- "galar-turffield": {
-  "id": "galar-turffield",
-  "name": "Turffield",
-  "type": "town",
-  "region": "galar",
-  "description": "A town in the Galar region.",
-  "connections": [
-   "galar-route-4",
-   "galar-route-5"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "galar-route-4",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 355,
-  "position": {
-   "x": 10,
-   "y": 6
-  },
-  "mart": {
-   "name": "Galar Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
-  }
- },
- "galar-route-5": {
-  "id": "galar-route-5",
-  "name": "Route 5",
-  "type": "route",
-  "region": "galar",
-  "description": "A route in the Galar region.",
-  "routeKey": "galar-route-5",
-  "connections": [
-   "galar-hulbury",
-   "galar-turffield"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "galar-turffield",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 356,
-  "position": {
-   "x": 24,
-   "y": 6
   }
  },
  "galar-route-8": {
@@ -521,81 +496,10 @@
     }
    ]
   },
-  "unlockOrder": 357,
+  "unlockOrder": 356,
   "position": {
    "x": 70,
    "y": 40
-  }
- },
- "galar-route-9": {
-  "id": "galar-route-9",
-  "name": "Route 9",
-  "type": "route",
-  "region": "galar",
-  "description": "A route in the Galar region.",
-  "routeKey": "galar-route-9",
-  "connections": [
-   "galar-circhester",
-   "galar-spikemuth",
-   "galar-route-7",
-   "galar-raid",
-   "galar-league"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "galar-route-7",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 358,
-  "position": {
-   "x": 81,
-   "y": 45
-  }
- },
- "galar-wyndon": {
-  "id": "galar-wyndon",
-  "name": "Wyndon",
-  "type": "town",
-  "region": "galar",
-  "description": "A town in the Galar region.",
-  "connections": [
-   "galar-route-10"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "galar-route-10",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 359,
-  "position": {
-   "x": 52,
-   "y": 24
-  },
-  "mart": {
-   "name": "Galar Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
   }
  },
  "galar-circhester": {
@@ -616,7 +520,7 @@
     }
    ]
   },
-  "unlockOrder": 360,
+  "unlockOrder": 357,
   "position": {
    "x": 73,
    "y": 26
@@ -642,27 +546,53 @@
    ]
   }
  },
- "galar-hulbury": {
-  "id": "galar-hulbury",
-  "name": "Hulbury",
-  "type": "town",
+ "galar-route-9": {
+  "id": "galar-route-9",
+  "name": "Route 9",
+  "type": "route",
   "region": "galar",
-  "description": "A town in the Galar region.",
+  "description": "A route in the Galar region.",
+  "routeKey": "galar-route-9",
   "connections": [
-   "galar-route-5"
+   "galar-circhester",
+   "galar-spikemuth",
+   "galar-route-7"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "galar-route-5",
+     "locationId": "galar-route-7",
      "count": 15
     }
    ]
   },
-  "unlockOrder": 361,
+  "unlockOrder": 358,
   "position": {
-   "x": 39,
-   "y": 6
+   "x": 81,
+   "y": 45
+  }
+ },
+ "galar-spikemuth": {
+  "id": "galar-spikemuth",
+  "name": "Spikemuth",
+  "type": "town",
+  "region": "galar",
+  "description": "A town in the Galar region.",
+  "connections": [
+   "galar-route-9"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-route-9",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 359,
+  "position": {
+   "x": 91,
+   "y": 40
   },
   "mart": {
    "name": "Galar Mart",
@@ -685,27 +615,97 @@
    ]
   }
  },
- "galar-spikemuth": {
-  "id": "galar-spikemuth",
-  "name": "Spikemuth",
-  "type": "town",
+ "galar-route-10": {
+  "id": "galar-route-10",
+  "name": "Route 10",
+  "type": "route",
   "region": "galar",
-  "description": "A town in the Galar region.",
+  "description": "A route in the Galar region.",
+  "routeKey": "galar-route-10",
   "connections": [
-   "galar-route-9"
+   "galar-wyndon",
+   "galar-hammerlocke",
+   "galar-raid",
+   "galar-league"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "galar-route-9",
+     "locationId": "galar-hammerlocke",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 360,
+  "position": {
+   "x": 51,
+   "y": 37
+  }
+ },
+ "galar-wyndon": {
+  "id": "galar-wyndon",
+  "name": "Wyndon",
+  "type": "town",
+  "region": "galar",
+  "description": "A town in the Galar region.",
+  "connections": [
+   "galar-route-10"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-route-10",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 361,
+  "position": {
+   "x": 52,
+   "y": 24
+  },
+  "mart": {
+   "name": "Galar Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "galar-ballonlea": {
+  "id": "galar-ballonlea",
+  "name": "Ballonlea",
+  "type": "town",
+  "region": "galar",
+  "description": "A town in the Galar region.",
+  "connections": [
+   "galar-stow-on-side"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-stow-on-side",
      "count": 15
     }
    ]
   },
   "unlockOrder": 362,
   "position": {
-   "x": 91,
-   "y": 40
+   "x": 22,
+   "y": 42
   },
   "mart": {
    "name": "Galar Mart",
@@ -736,20 +736,20 @@
   "description": "A mysterious island where Galar's rarest Pokemon dwell.",
   "routeKey": "galar-raid",
   "connections": [
-   "galar-route-9"
+   "galar-route-10"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "galar-route-9",
+     "locationId": "galar-route-10",
      "count": 20
     }
    ]
   },
   "unlockOrder": 363,
   "position": {
-   "x": 4,
-   "y": 43
+   "x": 59,
+   "y": 27
   }
  },
  "galar-league": {
@@ -759,20 +759,20 @@
   "region": "galar",
   "description": "The Galar Pokémon League.",
   "connections": [
-   "galar-route-9"
+   "galar-route-10"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "galar-route-9",
+     "locationId": "galar-route-10",
      "count": 20
     }
    ]
   },
   "unlockOrder": 364,
   "position": {
-   "x": 96,
-   "y": 45
+   "x": 61,
+   "y": 33
   }
  }
 }

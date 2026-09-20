@@ -301,6 +301,18 @@
     "level": 80
    },
    {
+    "speciesKey": "drilbur",
+    "level": 80
+   },
+   {
+    "speciesKey": "excadrill",
+    "level": 80
+   },
+   {
+    "speciesKey": "timburr",
+    "level": 80
+   },
+   {
     "speciesKey": "tympole",
     "level": 80
    },
@@ -334,22 +346,6 @@
    },
    {
     "speciesKey": "jellicent",
-    "level": 80
-   },
-   {
-    "speciesKey": "elgyem",
-    "level": 80
-   },
-   {
-    "speciesKey": "litwick",
-    "level": 80
-   },
-   {
-    "speciesKey": "lampent",
-    "level": 80
-   },
-   {
-    "speciesKey": "chandelure",
     "level": 80
    },
    {

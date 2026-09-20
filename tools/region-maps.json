@@ -332,13 +332,8 @@
     "dir": "west"
    },
    {
-    "from": "blackthorn-city",
-    "to": "johto-route-44",
-    "dir": "via"
-   },
-   {
-    "from": "olivine-city",
-    "to": "cianwood-city",
+    "from": "johto-route-44",
+    "to": "blackthorn-city",
     "dir": "via"
    },
    {
@@ -347,28 +342,8 @@
     "dir": "via"
    },
    {
-    "from": "blackthorn-city",
-    "to": "johto-route-45",
-    "dir": "via"
-   },
-   {
-    "from": "johto-route-45",
-    "to": "johto-route-29",
-    "dir": "via"
-   },
-   {
-    "from": "johto-route-29",
-    "to": "johto-route-46",
-    "dir": "via"
-   },
-   {
     "from": "johto-route-46",
     "to": "johto-route-31",
-    "dir": "via"
-   },
-   {
-    "from": "johto-route-31",
-    "to": "violet-city",
     "dir": "via"
    },
    {
@@ -397,162 +372,142 @@
     "dir": "via"
    },
    {
-    "from": "johto-route-35",
-    "to": "goldenrod-city",
-    "dir": "via"
-   },
-   {
-    "from": "olivine-city",
-    "to": "johto-sea-route-40",
-    "dir": "via"
-   },
-   {
-    "from": "mahogany-town",
-    "to": "johto-route-42",
-    "dir": "via"
-   },
-   {
-    "from": "johto-route-42",
-    "to": "ecruteak-city",
-    "dir": "via"
-   },
-   {
     "from": "johto-route-43",
     "to": "mahogany-town",
-    "dir": "via"
-   },
-   {
-    "from": "johto-route-48",
-    "to": "cianwood-city",
     "dir": "via"
    },
    {
     "from": "cianwood-city",
     "to": "johto-route-47",
     "dir": "via"
+   },
+   {
+    "from": "johto-route-47",
+    "to": "johto-route-48",
+    "dir": "via"
    }
   ],
   "parsed": 30,
   "positions": {
    "blackthorn-city": {
-    "x": 85,
-    "y": 36
+    "x": 94,
+    "y": 39
    },
    "cherrygrove-city": {
-    "x": 64,
-    "y": 66
+    "x": 75,
+    "y": 62
    },
    "cianwood-city": {
-    "x": 25,
-    "y": 70
+    "x": 17,
+    "y": 46
    },
    "ecruteak-city": {
-    "x": 47,
-    "y": 23
+    "x": 56,
+    "y": 27
    },
    "new-bark-town": {
     "x": 94,
     "y": 61
    },
    "olivine-city": {
-    "x": 36,
-    "y": 54
+    "x": 37,
+    "y": 36
    },
    "johto-route-29": {
-    "x": 77,
+    "x": 84,
     "y": 61
    },
    "johto-route-30": {
-    "x": 67,
+    "x": 76,
     "y": 54
    },
    "johto-route-31": {
-    "x": 69,
-    "y": 43
+    "x": 77,
+    "y": 45
    },
    "johto-route-32": {
-    "x": 58,
-    "y": 56
+    "x": 68,
+    "y": 54
    },
    "johto-route-33": {
-    "x": 57,
-    "y": 90
-   },
-   "johto-route-34": {
-    "x": 23,
+    "x": 70,
     "y": 77
    },
+   "johto-route-34": {
+    "x": 52,
+    "y": 72
+   },
    "johto-route-35": {
-    "x": 26,
+    "x": 52,
     "y": 54
    },
    "johto-route-36": {
-    "x": 40,
-    "y": 44
+    "x": 56,
+    "y": 45
    },
    "johto-route-37": {
-    "x": 44,
-    "y": 33
+    "x": 56,
+    "y": 36
    },
    "johto-route-38": {
-    "x": 37,
+    "x": 46,
     "y": 27
    },
    "johto-route-39": {
-    "x": 28,
-    "y": 34
+    "x": 36,
+    "y": 27
    },
    "johto-sea-route-40": {
-    "x": 31,
-    "y": 60
+    "x": 26,
+    "y": 36
    },
    "johto-sea-route-41": {
-    "x": 31,
-    "y": 71
+    "x": 27,
+    "y": 46
    },
    "johto-route-42": {
-    "x": 56,
-    "y": 26
+    "x": 66,
+    "y": 27
    },
    "johto-route-43": {
-    "x": 69,
-    "y": 14
+    "x": 78,
+    "y": 23
    },
    "johto-route-44": {
-    "x": 80,
-    "y": 22
+    "x": 86,
+    "y": 28
    },
    "johto-route-45": {
-    "x": 86,
-    "y": 49
+    "x": 93,
+    "y": 50
    },
    "johto-route-46": {
-    "x": 75,
+    "x": 83,
     "y": 50
    },
    "johto-route-47": {
-    "x": 10,
-    "y": 72
+    "x": 6,
+    "y": 51
    },
    "johto-route-48": {
     "x": 6,
-    "y": 61
+    "y": 45
    },
    "violet-city": {
-    "x": 57,
-    "y": 42
+    "x": 66,
+    "y": 45
    },
    "azalea-town": {
-    "x": 40,
-    "y": 91
+    "x": 60,
+    "y": 78
    },
    "goldenrod-city": {
-    "x": 23,
-    "y": 59
+    "x": 52,
+    "y": 63
    },
    "mahogany-town": {
-    "x": 65,
-    "y": 23
+    "x": 75,
+    "y": 28
    }
   }
  },
@@ -1189,57 +1144,37 @@
     "dir": "via"
    },
    {
-    "from": "hoenn-route-112",
-    "to": "lavaridge-town",
-    "dir": "via"
-   },
-   {
     "from": "hoenn-route-114",
-    "to": "fallarbor-town",
-    "dir": "via"
-   },
-   {
-    "from": "fallarbor-town",
     "to": "hoenn-route-115",
     "dir": "via"
    },
    {
     "from": "verdanturf-town",
-    "to": "rustboro-city",
-    "dir": "via"
-   },
-   {
-    "from": "rustboro-city",
     "to": "hoenn-route-116",
-    "dir": "via"
-   },
-   {
-    "from": "hoenn-route-125",
-    "to": "mossdeep-city",
     "dir": "via"
    }
   ],
   "parsed": 50,
   "positions": {
    "petalburg-city": {
-    "x": 17,
+    "x": 16,
     "y": 58
    },
    "slateport-city": {
     "x": 36,
-    "y": 64
+    "y": 63
    },
    "lilycove-city": {
-    "x": 66,
-    "y": 30
+    "x": 70,
+    "y": 32
    },
    "mossdeep-city": {
-    "x": 82,
-    "y": 30
+    "x": 87,
+    "y": 32
    },
    "sootopolis-city": {
-    "x": 77,
-    "y": 32
+    "x": 76,
+    "y": 31
    },
    "ever-grande-city": {
     "x": 94,
@@ -1247,7 +1182,7 @@
    },
    "hoenn-route-101": {
     "x": 31,
-    "y": 69
+    "y": 68
    },
    "hoenn-route-102": {
     "x": 24,
@@ -1258,103 +1193,103 @@
     "y": 54
    },
    "hoenn-route-104": {
-    "x": 10,
+    "x": 9,
     "y": 56
    },
    "hoenn-route-105": {
     "x": 10,
-    "y": 64
+    "y": 63
    },
    "hoenn-route-106": {
     "x": 11,
-    "y": 71
+    "y": 70
    },
    "hoenn-route-107": {
     "x": 18,
-    "y": 76
+    "y": 75
    },
    "hoenn-route-108": {
     "x": 27,
-    "y": 75
+    "y": 74
    },
    "hoenn-route-109": {
     "x": 36,
     "y": 73
    },
    "hoenn-route-110": {
-    "x": 37,
-    "y": 55
+    "x": 38,
+    "y": 54
    },
    "hoenn-route-111": {
-    "x": 36,
+    "x": 38,
     "y": 38
    },
    "hoenn-route-112": {
-    "x": 27,
-    "y": 40
+    "x": 29,
+    "y": 41
    },
    "hoenn-route-113": {
-    "x": 31,
-    "y": 34
+    "x": 32,
+    "y": 35
    },
    "hoenn-route-114": {
-    "x": 14,
-    "y": 31
+    "x": 16,
+    "y": 35
    },
    "hoenn-route-115": {
-    "x": 11,
-    "y": 39
+    "x": 8,
+    "y": 40
    },
    "hoenn-route-116": {
-    "x": 15,
+    "x": 16,
     "y": 46
    },
    "hoenn-route-117": {
-    "x": 28,
+    "x": 30,
     "y": 48
    },
    "hoenn-route-118": {
-    "x": 44,
+    "x": 46,
     "y": 46
    },
    "hoenn-route-119": {
-    "x": 42,
-    "y": 36
+    "x": 44,
+    "y": 37
    },
    "hoenn-route-120": {
-    "x": 53,
-    "y": 32
+    "x": 55,
+    "y": 34
    },
    "hoenn-route-121": {
-    "x": 59,
-    "y": 31
+    "x": 61,
+    "y": 32
    },
    "hoenn-route-122": {
-    "x": 56,
-    "y": 39
+    "x": 59,
+    "y": 40
    },
    "hoenn-route-123": {
-    "x": 55,
+    "x": 56,
     "y": 47
    },
    "hoenn-route-124": {
-    "x": 74,
-    "y": 27
+    "x": 81,
+    "y": 33
    },
    "hoenn-route-125": {
     "x": 86,
-    "y": 25
+    "y": 23
    },
    "hoenn-route-126": {
-    "x": 74,
-    "y": 38
+    "x": 78,
+    "y": 40
    },
    "hoenn-route-127": {
-    "x": 84,
-    "y": 39
+    "x": 86,
+    "y": 40
    },
    "hoenn-route-128": {
-    "x": 85,
+    "x": 86,
     "y": 49
    },
    "hoenn-route-129": {
@@ -1371,11 +1306,11 @@
    },
    "hoenn-route-132": {
     "x": 58,
-    "y": 62
+    "y": 61
    },
    "hoenn-route-133": {
-    "x": 50,
-    "y": 63
+    "x": 51,
+    "y": 62
    },
    "hoenn-route-134": {
     "x": 43,
@@ -1383,7 +1318,7 @@
    },
    "dewford-town": {
     "x": 10,
-    "y": 78
+    "y": 77
    },
    "pacifidlog-town": {
     "x": 65,
@@ -1391,35 +1326,35 @@
    },
    "littleroot-town": {
     "x": 32,
-    "y": 78
+    "y": 77
    },
    "oldale-town": {
     "x": 31,
     "y": 60
    },
    "lavaridge-town": {
-    "x": 21,
-    "y": 39
+    "x": 20,
+    "y": 40
    },
    "fallarbor-town": {
-    "x": 19,
-    "y": 33
+    "x": 24,
+    "y": 35
    },
    "verdanturf-town": {
-    "x": 19,
-    "y": 51
+    "x": 23,
+    "y": 50
    },
    "mauville-city": {
-    "x": 36,
-    "y": 46
+    "x": 38,
+    "y": 47
    },
    "rustboro-city": {
-    "x": 9,
+    "x": 8,
     "y": 48
    },
    "fortree-city": {
-    "x": 47,
-    "y": 34
+    "x": 50,
+    "y": 35
    }
   }
  },
@@ -1884,8 +1819,8 @@
     "dir": "west"
    },
    {
-    "from": "oreburgh-city",
-    "to": "sinnoh-route-203",
+    "from": "sinnoh-route-203",
+    "to": "oreburgh-city",
     "dir": "via"
    },
    {
@@ -1904,58 +1839,18 @@
     "dir": "via"
    },
    {
-    "from": "sinnoh-route-206",
-    "to": "eterna-city",
-    "dir": "via"
-   },
-   {
-    "from": "eterna-city",
-    "to": "snowpoint-city",
-    "dir": "via"
-   },
-   {
-    "from": "snowpoint-city",
-    "to": "celestic-town",
-    "dir": "via"
-   },
-   {
-    "from": "celestic-town",
+    "from": "sinnoh-route-216",
     "to": "sinnoh-route-211",
     "dir": "via"
    },
    {
     "from": "sinnoh-route-211",
-    "to": "hearthome-city",
-    "dir": "via"
-   },
-   {
-    "from": "hearthome-city",
     "to": "sinnoh-route-208",
     "dir": "via"
    },
    {
     "from": "sinnoh-route-208",
-    "to": "oreburgh-city",
-    "dir": "via"
-   },
-   {
-    "from": "oreburgh-city",
     "to": "sinnoh-route-207",
-    "dir": "via"
-   },
-   {
-    "from": "sinnoh-route-207",
-    "to": "sinnoh-route-216",
-    "dir": "via"
-   },
-   {
-    "from": "sinnoh-route-210",
-    "to": "veilstone-city",
-    "dir": "via"
-   },
-   {
-    "from": "veilstone-city",
-    "to": "sinnoh-route-214",
     "dir": "via"
    },
    {
@@ -1966,11 +1861,6 @@
    {
     "from": "sinnoh-route-222",
     "to": "sinnoh-route-213",
-    "dir": "via"
-   },
-   {
-    "from": "sinnoh-route-213",
-    "to": "pastoria-city",
     "dir": "via"
    },
    {
@@ -1998,179 +1888,179 @@
   "positions": {
    "canalave-city": {
     "x": 6,
-    "y": 47
+    "y": 49
    },
    "eterna-city": {
-    "x": 35,
-    "y": 30
+    "x": 38,
+    "y": 31
    },
    "pastoria-city": {
-    "x": 55,
-    "y": 48
+    "x": 67,
+    "y": 51
    },
    "sunyshore-city": {
-    "x": 72,
-    "y": 39
+    "x": 91,
+    "y": 42
    },
    "sinnoh-route-201": {
     "x": 14,
-    "y": 61
+    "y": 65
    },
    "sinnoh-route-202": {
-    "x": 21,
-    "y": 54
+    "x": 22,
+    "y": 57
    },
    "sinnoh-route-203": {
-    "x": 25,
+    "x": 28,
     "y": 49
    },
    "sinnoh-route-204": {
-    "x": 21,
-    "y": 40
+    "x": 23,
+    "y": 41
    },
    "sinnoh-route-205": {
-    "x": 24,
-    "y": 32
-   },
-   "sinnoh-route-206": {
-    "x": 32,
+    "x": 29,
     "y": 34
    },
+   "sinnoh-route-206": {
+    "x": 40,
+    "y": 37
+   },
    "sinnoh-route-207": {
-    "x": 33,
+    "x": 39,
     "y": 43
    },
    "sinnoh-route-208": {
-    "x": 40,
-    "y": 43
+    "x": 51,
+    "y": 40
    },
    "sinnoh-route-209": {
-    "x": 50,
-    "y": 44
+    "x": 65,
+    "y": 40
    },
    "sinnoh-route-210": {
-    "x": 52,
-    "y": 30
+    "x": 62,
+    "y": 28
    },
    "sinnoh-route-211": {
-    "x": 42,
-    "y": 36
+    "x": 45,
+    "y": 32
    },
    "sinnoh-route-212": {
-    "x": 45,
-    "y": 47
+    "x": 59,
+    "y": 50
    },
    "sinnoh-route-213": {
-    "x": 61,
-    "y": 46
+    "x": 75,
+    "y": 50
    },
    "sinnoh-route-214": {
-    "x": 60,
-    "y": 38
+    "x": 77,
+    "y": 33
    },
    "sinnoh-route-215": {
-    "x": 56,
-    "y": 34
+    "x": 70,
+    "y": 28
    },
    "sinnoh-route-216": {
-    "x": 27,
-    "y": 43
-   },
-   "sinnoh-route-217": {
-    "x": 27,
+    "x": 34,
     "y": 37
    },
+   "sinnoh-route-217": {
+    "x": 35,
+    "y": 26
+   },
    "sinnoh-route-218": {
-    "x": 13,
-    "y": 47
+    "x": 14,
+    "y": 49
    },
    "sinnoh-route-219": {
     "x": 22,
-    "y": 69
+    "y": 73
    },
    "sinnoh-route-221": {
     "x": 30,
-    "y": 76
+    "y": 81
    },
    "sinnoh-route-222": {
-    "x": 66,
-    "y": 40
+    "x": 85,
+    "y": 42
    },
    "sinnoh-route-224": {
-    "x": 75,
-    "y": 24
+    "x": 95,
+    "y": 26
    },
    "sinnoh-route-225": {
-    "x": 75,
-    "y": 44
+    "x": 64,
+    "y": 46
    },
    "sinnoh-route-227": {
-    "x": 87,
-    "y": 37
+    "x": 80,
+    "y": 39
    },
    "sinnoh-route-228": {
-    "x": 94,
-    "y": 44
+    "x": 85,
+    "y": 48
    },
    "sinnoh-route-229": {
-    "x": 93,
-    "y": 52
+    "x": 85,
+    "y": 54
    },
    "twinleaf-town": {
     "x": 14,
-    "y": 69
+    "y": 73
    },
    "celestic-town": {
-    "x": 47,
-    "y": 33
+    "x": 54,
+    "y": 30
    },
    "sinnoh-sea-route-220": {
     "x": 22,
-    "y": 76
+    "y": 81
    },
    "sinnoh-sea-route-223": {
-    "x": 73,
-    "y": 32
+    "x": 93,
+    "y": 34
    },
    "sinnoh-sea-route-226": {
-    "x": 87,
-    "y": 44
+    "x": 79,
+    "y": 46
    },
    "sinnoh-sea-route-230": {
-    "x": 85,
-    "y": 52
+    "x": 76,
+    "y": 56
    },
    "sandgem-town": {
     "x": 22,
-    "y": 61
+    "y": 65
    },
    "floaroma-town": {
-    "x": 19,
-    "y": 35
+    "x": 23,
+    "y": 34
    },
    "solaceon-town": {
-    "x": 51,
-    "y": 38
+    "x": 64,
+    "y": 35
    },
    "jubilife-city": {
-    "x": 19,
-    "y": 47
+    "x": 22,
+    "y": 49
    },
    "oreburgh-city": {
-    "x": 37,
-    "y": 48
+    "x": 40,
+    "y": 50
    },
    "hearthome-city": {
-    "x": 45,
-    "y": 40
+    "x": 58,
+    "y": 41
    },
    "veilstone-city": {
-    "x": 62,
-    "y": 32
+    "x": 77,
+    "y": 27
    },
    "snowpoint-city": {
-    "x": 41,
-    "y": 30
+    "x": 43,
+    "y": 19
    }
   }
  },
@@ -2568,18 +2458,13 @@
     "dir": "east"
    },
    {
-    "from": "nacrene-city",
-    "to": "unova-route-11",
+    "from": "castelia-city",
+    "to": "nacrene-city",
     "dir": "via"
    },
    {
-    "from": "unova-route-11",
-    "to": "castelia-city",
-    "dir": "via"
-   },
-   {
-    "from": "driftveil-city",
-    "to": "unova-route-5",
+    "from": "unova-route-5",
+    "to": "driftveil-city",
     "dir": "via"
    },
    {
@@ -2588,13 +2473,8 @@
     "dir": "via"
    },
    {
-    "from": "unova-route-7",
-    "to": "icirrus-city",
-    "dir": "via"
-   },
-   {
     "from": "icirrus-city",
-    "to": "driftveil-city",
+    "to": "unova-route-7",
     "dir": "via"
    },
    {
@@ -2603,8 +2483,8 @@
     "dir": "via"
    },
    {
-    "from": "unova-route-12",
-    "to": "unova-route-11",
+    "from": "unova-route-11",
+    "to": "unova-route-12",
     "dir": "via"
    },
    {
@@ -2651,176 +2531,176 @@
   "parsed": 39,
   "positions": {
    "nuvema-town": {
-    "x": 69,
-    "y": 61
+    "x": 65,
+    "y": 94
    },
    "accumula-town": {
-    "x": 73,
-    "y": 46
+    "x": 66,
+    "y": 79
    },
    "striaton-city": {
-    "x": 68,
-    "y": 43
+    "x": 58,
+    "y": 69
    },
    "nacrene-city": {
-    "x": 64,
-    "y": 38
+    "x": 51,
+    "y": 60
    },
    "castelia-city": {
-    "x": 51,
-    "y": 53
+    "x": 44,
+    "y": 58
    },
    "nimbasa-city": {
-    "x": 48,
-    "y": 42
+    "x": 44,
+    "y": 41
    },
    "driftveil-city": {
-    "x": 10,
-    "y": 44
+    "x": 21,
+    "y": 46
    },
    "mistralton-city": {
-    "x": 16,
-    "y": 44
+    "x": 18,
+    "y": 27
    },
    "icirrus-city": {
-    "x": 19,
-    "y": 37
+    "x": 28,
+    "y": 22
    },
    "opelucid-city": {
-    "x": 50,
-    "y": 36
+    "x": 66,
+    "y": 16
    },
    "unova-route-1": {
-    "x": 65,
-    "y": 66
+    "x": 64,
+    "y": 88
    },
    "unova-route-2": {
-    "x": 57,
-    "y": 59
+    "x": 56,
+    "y": 80
    },
    "unova-route-3": {
-    "x": 54,
-    "y": 43
+    "x": 56,
+    "y": 63
    },
    "unova-route-4": {
-    "x": 39,
-    "y": 49
+    "x": 41,
+    "y": 53
    },
    "unova-route-5": {
-    "x": 28,
-    "y": 42
+    "x": 34,
+    "y": 46
    },
    "unova-route-6": {
-    "x": 15,
-    "y": 50
-   },
-   "unova-route-7": {
-    "x": 9,
-    "y": 34
-   },
-   "unova-route-8": {
-    "x": 37,
+    "x": 16,
     "y": 43
    },
+   "unova-route-7": {
+    "x": 15,
+    "y": 22
+   },
+   "unova-route-8": {
+    "x": 36,
+    "y": 22
+   },
    "unova-route-9": {
-    "x": 50,
-    "y": 47
+    "x": 53,
+    "y": 24
    },
    "unova-route-10": {
-    "x": 57,
-    "y": 37
+    "x": 60,
+    "y": 15
    },
    "unova-route-11": {
-    "x": 56,
-    "y": 48
+    "x": 66,
+    "y": 27
    },
    "unova-route-12": {
-    "x": 61,
-    "y": 33
+    "x": 63,
+    "y": 21
    },
    "unova-route-13": {
-    "x": 67,
-    "y": 33
+    "x": 69,
+    "y": 22
    },
    "unova-route-14": {
-    "x": 72,
-    "y": 53
+    "x": 71,
+    "y": 33
    },
    "unova-route-15": {
     "x": 64,
-    "y": 57
+    "y": 42
    },
    "unova-route-16": {
-    "x": 45,
-    "y": 49
+    "x": 49,
+    "y": 45
    },
    "unova-route-17": {
-    "x": 59,
-    "y": 54
+    "x": 58,
+    "y": 86
    },
    "unova-route-18": {
-    "x": 49,
-    "y": 65
+    "x": 48,
+    "y": 88
    },
    "lacunosa-town": {
-    "x": 70,
-    "y": 28
+    "x": 73,
+    "y": 9
    },
    "undella-town": {
-    "x": 73,
-    "y": 32
+    "x": 78,
+    "y": 15
    },
    "anville-town": {
-    "x": 12,
+    "x": 14,
     "y": 68
    },
    "black-city": {
     "x": 77,
-    "y": 50
+    "y": 34
    },
    "route-gate": {
-    "x": 32,
-    "y": 67
+    "x": 37,
+    "y": 84
    },
    "aspertia-city": {
-    "x": 69,
-    "y": 76
+    "x": 62,
+    "y": 74
    },
    "virbank-city": {
-    "x": 94,
-    "y": 68
+    "x": 86,
+    "y": 67
    },
    "humilau-city": {
-    "x": 76,
-    "y": 27
+    "x": 79,
+    "y": 9
    },
    "floccesy-town": {
-    "x": 77,
-    "y": 68
+    "x": 70,
+    "y": 67
    },
    "lentimas-town": {
-    "x": 58,
-    "y": 27
+    "x": 55,
+    "y": 17
    },
    "unova-route-19": {
-    "x": 70,
-    "y": 69
+    "x": 63,
+    "y": 67
    },
    "unova-route-20": {
-    "x": 86,
+    "x": 79,
     "y": 68
    },
    "unova-route-21": {
-    "x": 71,
-    "y": 38
+    "x": 75,
+    "y": 20
    },
    "unova-route-22": {
-    "x": 64,
-    "y": 28
+    "x": 67,
+    "y": 10
    },
    "unova-route-23": {
-    "x": 52,
-    "y": 26
+    "x": 56,
+    "y": 11
    }
   }
  },
@@ -3647,33 +3527,13 @@
     "dir": "via"
    },
    {
-    "from": "alola-route-1",
-    "to": "hauoli-city",
-    "dir": "via"
-   },
-   {
-    "from": "alola-route-1",
-    "to": "alola-route-1--hauoli-outskirts",
-    "dir": "via"
-   },
-   {
-    "from": "alola-route-1--hauoli-outskirts",
-    "to": "hauoli-city",
-    "dir": "via"
-   },
-   {
     "from": "alola-route-1--hauoli-outskirts",
     "to": "alola-route-1",
     "dir": "via"
    },
    {
-    "from": "iki-town",
-    "to": "hauoli-city",
-    "dir": "via"
-   },
-   {
-    "from": "alola-route-5",
-    "to": "alola-route-8",
+    "from": "alola-route-1--hauoli-outskirts",
+    "to": "alola-route-1",
     "dir": "via"
    },
    {
@@ -3687,8 +3547,8 @@
     "dir": "via"
    },
    {
-    "from": "alola-route-6",
-    "to": "alola-route-7",
+    "from": "alola-route-7",
+    "to": "alola-route-6",
     "dir": "via"
    },
    {
@@ -3720,104 +3580,104 @@
   "parsed": 22,
   "positions": {
    "alola-route-1--hauoli-outskirts": {
-    "x": 36,
-    "y": 61
-   },
-   "alola-route-1": {
-    "x": 41,
-    "y": 63
-   },
-   "alola-route-3": {
-    "x": 50,
-    "y": 45
-   },
-   "alola-route-2": {
-    "x": 37,
-    "y": 51
-   },
-   "iki-town": {
-    "x": 46,
-    "y": 56
-   },
-   "alola-route-4": {
-    "x": 35,
-    "y": 68
-   },
-   "alola-route-5": {
-    "x": 34,
+    "x": 31,
     "y": 37
    },
+   "alola-route-1": {
+    "x": 38,
+    "y": 37
+   },
+   "alola-route-3": {
+    "x": 47,
+    "y": 41
+   },
+   "alola-route-2": {
+    "x": 34,
+    "y": 30
+   },
+   "iki-town": {
+    "x": 45,
+    "y": 34
+   },
+   "alola-route-4": {
+    "x": 58,
+    "y": 54
+   },
+   "alola-route-5": {
+    "x": 58,
+    "y": 16
+   },
    "alola-route-6": {
-    "x": 33,
-    "y": 55
+    "x": 57,
+    "y": 40
    },
    "alola-route-7": {
-    "x": 41,
-    "y": 39
-   },
-   "alola-route-8": {
-    "x": 34,
-    "y": 29
-   },
-   "alola-route-9": {
-    "x": 30,
-    "y": 94
-   },
-   "paniola-town": {
-    "x": 28,
-    "y": 58
-   },
-   "heahea-city": {
-    "x": 28,
-    "y": 70
-   },
-   "konikoni-city": {
-    "x": 25,
-    "y": 89
-   },
-   "alola-route-10": {
-    "x": 48,
-    "y": 51
-   },
-   "alola-route-11": {
-    "x": 59,
-    "y": 62
-   },
-   "alola-route-13": {
-    "x": 66,
-    "y": 63
-   },
-   "alola-route-15": {
-    "x": 55,
-    "y": 52
-   },
-   "alola-route-16": {
-    "x": 56,
-    "y": 45
-   },
-   "alola-route-17": {
-    "x": 56,
+    "x": 64,
     "y": 21
    },
-   "alola-route-12": {
-    "x": 75,
-    "y": 76
-   },
-   "alola-route-14": {
-    "x": 55,
-    "y": 76
-   },
-   "po-town": {
-    "x": 56,
+   "alola-route-8": {
+    "x": 58,
     "y": 6
    },
-   "hauoli-city": {
+   "alola-route-9": {
+    "x": 51,
+    "y": 79
+   },
+   "paniola-town": {
+    "x": 51,
+    "y": 37
+   },
+   "heahea-city": {
+    "x": 50,
+    "y": 50
+   },
+   "konikoni-city": {
+    "x": 46,
+    "y": 75
+   },
+   "alola-route-10": {
     "x": 47,
-    "y": 62
+    "y": 56
+   },
+   "alola-route-11": {
+    "x": 60,
+    "y": 71
+   },
+   "alola-route-13": {
+    "x": 58,
+    "y": 78
+   },
+   "alola-route-15": {
+    "x": 41,
+    "y": 69
+   },
+   "alola-route-16": {
+    "x": 54,
+    "y": 59
+   },
+   "alola-route-17": {
+    "x": 60,
+    "y": 29
+   },
+   "alola-route-12": {
+    "x": 69,
+    "y": 86
+   },
+   "alola-route-14": {
+    "x": 43,
+    "y": 94
+   },
+   "po-town": {
+    "x": 41,
+    "y": 18
+   },
+   "hauoli-city": {
+    "x": 39,
+    "y": 60
    },
    "malie-city": {
-    "x": 62,
-    "y": 68
+    "x": 53,
+    "y": 72
    }
   }
  },

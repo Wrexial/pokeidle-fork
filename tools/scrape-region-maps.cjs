@@ -200,13 +200,18 @@ async function regionGraph(regionName) {
   const connectorNodes = {}
   for (const name of new Set(unresolved.map((ref) => ref.name))) {
     const raw = await fetchRaw(titleCase(name))
-    const lead = raw.split(/\n==/)[0]
+    // Only the opening paragraph: it's where "X connects A and B" is stated.
+    // The rest of the lead also mentions places (and {{rt}} templates) that
+    // aren't neighbours and would over-connect the graph.
+    const boldIndex = raw.indexOf("'''")
+    const intro = boldIndex >= 0 ? raw.slice(boldIndex, boldIndex + 800) : raw.slice(0, 800)
+    const sentence = intro.split(/\n\s*\n/)[0]
     const found = new Set()
-    for (const match of lead.matchAll(/\{\{rt\|\s*(\d+)\s*\|[^}]*\}\}/gi)) {
+    for (const match of sentence.matchAll(/\{\{rt\|\s*(\d+)\s*\|[^}]*\}\}/gi)) {
       const route = lookup[norm(`Route ${match[1]}`)]
       if (route) found.add(route)
     }
-    for (const match of lead.matchAll(/\[\[([^\]|#]+)(?:\|[^\]]*)?\]\]/g)) {
+    for (const match of sentence.matchAll(/\[\[([^\]|#]+)(?:\|[^\]]*)?\]\]/g)) {
       const slug = lookup[norm(match[1])]
       if (slug) found.add(slug)
     }
@@ -337,7 +342,11 @@ function addConnectorHubs(graph) {
   const hubs = []
   for (const [key, group] of groups) {
     const refNodes = new Set(group.refs.map((ref) => ref.from))
-    const linked = graph.connectorNodes[key] ?? []
+    // Compass refs are authoritative: if the connector already joins two
+    // places, don't also pull in every location its article happens to
+    // mention (that over-connects the graph and lets progression skip ahead,
+    // e.g. Dark Cave linking Route 29, Violet City and Blackthorn City).
+    const linked = refNodes.size >= 2 ? [] : graph.connectorNodes[key] ?? []
     const neighbours = [...new Set([...refNodes, ...linked])]
     if (neighbours.length < 2) continue // a dead-end connector joins nothing
     const hub = `hub-${key}`

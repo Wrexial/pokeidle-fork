@@ -224,31 +224,6 @@
    "y": 33
   }
  },
- "kalos-route-22": {
-  "id": "kalos-route-22",
-  "name": "Route 22",
-  "type": "route",
-  "region": "kalos",
-  "description": "A route in the Kalos region.",
-  "routeKey": "kalos-route-22",
-  "connections": [
-   "kalos-santalune-city",
-   "kalos-route-21"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "kalos-santalune-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 282,
-  "position": {
-   "x": 57,
-   "y": 41
-  }
- },
  "kalos-lumiose-city": {
   "id": "kalos-lumiose-city",
   "name": "Lumiose City",
@@ -270,7 +245,7 @@
     }
    ]
   },
-  "unlockOrder": 283,
+  "unlockOrder": 282,
   "position": {
    "x": 50,
    "y": 25
@@ -296,31 +271,6 @@
    ]
   }
  },
- "kalos-route-21": {
-  "id": "kalos-route-21",
-  "name": "Route 21",
-  "type": "route",
-  "region": "kalos",
-  "description": "A route in the Kalos region.",
-  "routeKey": "kalos-route-21",
-  "connections": [
-   "kalos-snowbelle-city",
-   "kalos-route-22"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "kalos-route-22",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 284,
-  "position": {
-   "x": 72,
-   "y": 40
-  }
- },
  "kalos-route-5": {
   "id": "kalos-route-5",
   "name": "Route 5",
@@ -340,131 +290,10 @@
     }
    ]
   },
-  "unlockOrder": 285,
+  "unlockOrder": 283,
   "position": {
    "x": 43,
    "y": 27
-  }
- },
- "kalos-route-13": {
-  "id": "kalos-route-13",
-  "name": "Route 13",
-  "type": "route",
-  "region": "kalos",
-  "description": "A route in the Kalos region.",
-  "routeKey": "kalos-route-13",
-  "connections": [
-   "kalos-lumiose-city",
-   "kalos-coumarine-city"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "kalos-lumiose-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 286,
-  "position": {
-   "x": 45,
-   "y": 19
-  }
- },
- "kalos-route-14": {
-  "id": "kalos-route-14",
-  "name": "Route 14",
-  "type": "route",
-  "region": "kalos",
-  "description": "A route in the Kalos region.",
-  "routeKey": "kalos-route-14",
-  "connections": [
-   "kalos-lumiose-city",
-   "kalos-laverre-city"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "kalos-lumiose-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 287,
-  "position": {
-   "x": 60,
-   "y": 26
-  }
- },
- "kalos-route-16": {
-  "id": "kalos-route-16",
-  "name": "Route 16",
-  "type": "route",
-  "region": "kalos",
-  "description": "A route in the Kalos region.",
-  "routeKey": "kalos-route-16",
-  "connections": [
-   "kalos-lumiose-city",
-   "kalos-route-15"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "kalos-lumiose-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 288,
-  "position": {
-   "x": 69,
-   "y": 31
-  }
- },
- "kalos-snowbelle-city": {
-  "id": "kalos-snowbelle-city",
-  "name": "Snowbelle City",
-  "type": "town",
-  "region": "kalos",
-  "description": "A town in the Kalos region.",
-  "connections": [
-   "kalos-route-19",
-   "kalos-route-20",
-   "kalos-route-21",
-   "kalos-kiloude-city"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "kalos-route-21",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 289,
-  "position": {
-   "x": 81,
-   "y": 40
-  },
-  "mart": {
-   "name": "Kalos Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
   }
  },
  "kalos-camphrier-town": {
@@ -485,356 +314,10 @@
     }
    ]
   },
-  "unlockOrder": 290,
+  "unlockOrder": 284,
   "position": {
    "x": 35,
    "y": 29
-  },
-  "mart": {
-   "name": "Kalos Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
-  }
- },
- "kalos-coumarine-city": {
-  "id": "kalos-coumarine-city",
-  "name": "Coumarine City",
-  "type": "town",
-  "region": "kalos",
-  "description": "A town in the Kalos region.",
-  "connections": [
-   "kalos-route-12",
-   "kalos-route-13"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "kalos-route-13",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 291,
-  "position": {
-   "x": 44,
-   "y": 9
-  },
-  "mart": {
-   "name": "Kalos Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
-  }
- },
- "kalos-laverre-city": {
-  "id": "kalos-laverre-city",
-  "name": "Laverre City",
-  "type": "town",
-  "region": "kalos",
-  "description": "A town in the Kalos region.",
-  "connections": [
-   "kalos-route-14",
-   "kalos-route-15"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "kalos-route-14",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 292,
-  "position": {
-   "x": 50,
-   "y": 11
-  },
-  "mart": {
-   "name": "Kalos Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
-  }
- },
- "kalos-route-15": {
-  "id": "kalos-route-15",
-  "name": "Route 15",
-  "type": "route",
-  "region": "kalos",
-  "description": "A route in the Kalos region.",
-  "routeKey": "kalos-route-15",
-  "connections": [
-   "kalos-laverre-city",
-   "kalos-route-16",
-   "kalos-dendemille-town"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "kalos-route-16",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 293,
-  "position": {
-   "x": 59,
-   "y": 13
-  }
- },
- "kalos-route-19": {
-  "id": "kalos-route-19",
-  "name": "Route 19",
-  "type": "route",
-  "region": "kalos",
-  "description": "A route in the Kalos region.",
-  "routeKey": "kalos-route-19",
-  "connections": [
-   "kalos-couriway-town",
-   "kalos-snowbelle-city"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "kalos-snowbelle-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 294,
-  "position": {
-   "x": 89,
-   "y": 40
-  }
- },
- "kalos-route-20": {
-  "id": "kalos-route-20",
-  "name": "Route 20",
-  "type": "route",
-  "region": "kalos",
-  "description": "A route in the Kalos region.",
-  "routeKey": "kalos-route-20",
-  "connections": [
-   "kalos-snowbelle-city"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "kalos-snowbelle-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 295,
-  "position": {
-   "x": 76,
-   "y": 45
-  }
- },
- "kalos-kiloude-city": {
-  "id": "kalos-kiloude-city",
-  "name": "Kiloude City",
-  "type": "town",
-  "region": "kalos",
-  "description": "A town in the Kalos region.",
-  "connections": [
-   "kalos-snowbelle-city"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "kalos-snowbelle-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 296,
-  "position": {
-   "x": 93,
-   "y": 47
-  },
-  "mart": {
-   "name": "Kalos Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
-  }
- },
- "kalos-route-7": {
-  "id": "kalos-route-7",
-  "name": "Route 7",
-  "type": "route",
-  "region": "kalos",
-  "description": "A route in the Kalos region.",
-  "routeKey": "kalos-route-7",
-  "connections": [
-   "kalos-camphrier-town",
-   "kalos-route-6",
-   "kalos-cyllage-city",
-   "kalos-route-8"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "kalos-camphrier-town",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 297,
-  "position": {
-   "x": 27,
-   "y": 30
-  }
- },
- "kalos-route-12": {
-  "id": "kalos-route-12",
-  "name": "Route 12",
-  "type": "route",
-  "region": "kalos",
-  "description": "A route in the Kalos region.",
-  "routeKey": "kalos-route-12",
-  "connections": [
-   "kalos-shalour-city",
-   "kalos-coumarine-city"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "kalos-coumarine-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 298,
-  "position": {
-   "x": 35,
-   "y": 7
-  }
- },
- "kalos-dendemille-town": {
-  "id": "kalos-dendemille-town",
-  "name": "Dendemille Town",
-  "type": "town",
-  "region": "kalos",
-  "description": "A town in the Kalos region.",
-  "connections": [
-   "kalos-route-15",
-   "kalos-route-17"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "kalos-route-15",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 299,
-  "position": {
-   "x": 69,
-   "y": 13
-  },
-  "mart": {
-   "name": "Kalos Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
-  }
- },
- "kalos-couriway-town": {
-  "id": "kalos-couriway-town",
-  "name": "Couriway Town",
-  "type": "town",
-  "region": "kalos",
-  "description": "A town in the Kalos region.",
-  "connections": [
-   "kalos-route-18",
-   "kalos-route-19"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "kalos-route-19",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 300,
-  "position": {
-   "x": 88,
-   "y": 31
   },
   "mart": {
    "name": "Kalos Mart",
@@ -875,10 +358,37 @@
     }
    ]
   },
-  "unlockOrder": 301,
+  "unlockOrder": 285,
   "position": {
    "x": 27,
    "y": 22
+  }
+ },
+ "kalos-route-7": {
+  "id": "kalos-route-7",
+  "name": "Route 7",
+  "type": "route",
+  "region": "kalos",
+  "description": "A route in the Kalos region.",
+  "routeKey": "kalos-route-7",
+  "connections": [
+   "kalos-camphrier-town",
+   "kalos-route-6",
+   "kalos-cyllage-city",
+   "kalos-route-8"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-camphrier-town",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 286,
+  "position": {
+   "x": 27,
+   "y": 30
   }
  },
  "kalos-cyllage-city": {
@@ -900,7 +410,7 @@
     }
    ]
   },
-  "unlockOrder": 302,
+  "unlockOrder": 287,
   "position": {
    "x": 12,
    "y": 31
@@ -946,104 +456,10 @@
     }
    ]
   },
-  "unlockOrder": 303,
+  "unlockOrder": 288,
   "position": {
    "x": 11,
    "y": 38
-  }
- },
- "kalos-shalour-city": {
-  "id": "kalos-shalour-city",
-  "name": "Shalour City",
-  "type": "town",
-  "region": "kalos",
-  "description": "A town in the Kalos region.",
-  "connections": [
-   "kalos-route-12",
-   "kalos-route-11"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "kalos-route-12",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 304,
-  "position": {
-   "x": 25,
-   "y": 6
-  },
-  "mart": {
-   "name": "Kalos Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
-  }
- },
- "kalos-route-17": {
-  "id": "kalos-route-17",
-  "name": "Route 17",
-  "type": "route",
-  "region": "kalos",
-  "description": "A route in the Kalos region.",
-  "routeKey": "kalos-route-17",
-  "connections": [
-   "kalos-dendemille-town",
-   "kalos-anistar-city"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "kalos-dendemille-town",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 305,
-  "position": {
-   "x": 78,
-   "y": 13
-  }
- },
- "kalos-route-18": {
-  "id": "kalos-route-18",
-  "name": "Route 18",
-  "type": "route",
-  "region": "kalos",
-  "description": "A route in the Kalos region.",
-  "routeKey": "kalos-route-18",
-  "connections": [
-   "kalos-anistar-city",
-   "kalos-couriway-town"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "kalos-couriway-town",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 306,
-  "position": {
-   "x": 88,
-   "y": 22
   }
  },
  "kalos-ambrette-town": {
@@ -1064,104 +480,10 @@
     }
    ]
   },
-  "unlockOrder": 307,
+  "unlockOrder": 289,
   "position": {
    "x": 11,
    "y": 46
-  },
-  "mart": {
-   "name": "Kalos Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
-  }
- },
- "kalos-route-10": {
-  "id": "kalos-route-10",
-  "name": "Route 10",
-  "type": "route",
-  "region": "kalos",
-  "description": "A route in the Kalos region.",
-  "routeKey": "kalos-route-10",
-  "connections": [
-   "kalos-cyllage-city",
-   "kalos-geosenge-town"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "kalos-cyllage-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 308,
-  "position": {
-   "x": 12,
-   "y": 24
-  }
- },
- "kalos-route-11": {
-  "id": "kalos-route-11",
-  "name": "Route 11",
-  "type": "route",
-  "region": "kalos",
-  "description": "A route in the Kalos region.",
-  "routeKey": "kalos-route-11",
-  "connections": [
-   "kalos-geosenge-town",
-   "kalos-shalour-city"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "kalos-shalour-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 309,
-  "position": {
-   "x": 22,
-   "y": 18
-  }
- },
- "kalos-anistar-city": {
-  "id": "kalos-anistar-city",
-  "name": "Anistar City",
-  "type": "town",
-  "region": "kalos",
-  "description": "A town in the Kalos region.",
-  "connections": [
-   "kalos-route-17",
-   "kalos-route-18"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "kalos-route-17",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 310,
-  "position": {
-   "x": 87,
-   "y": 13
   },
   "mart": {
    "name": "Kalos Mart",
@@ -1192,9 +514,7 @@
   "description": "A route in the Kalos region.",
   "routeKey": "kalos-route-9",
   "connections": [
-   "kalos-ambrette-town",
-   "kalos-raid",
-   "kalos-league"
+   "kalos-ambrette-town"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1204,10 +524,35 @@
     }
    ]
   },
-  "unlockOrder": 311,
+  "unlockOrder": 290,
   "position": {
    "x": 20,
    "y": 46
+  }
+ },
+ "kalos-route-10": {
+  "id": "kalos-route-10",
+  "name": "Route 10",
+  "type": "route",
+  "region": "kalos",
+  "description": "A route in the Kalos region.",
+  "routeKey": "kalos-route-10",
+  "connections": [
+   "kalos-cyllage-city",
+   "kalos-geosenge-town"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-cyllage-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 291,
+  "position": {
+   "x": 12,
+   "y": 24
   }
  },
  "kalos-geosenge-town": {
@@ -1223,12 +568,12 @@
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "kalos-route-11",
+     "locationId": "kalos-route-10",
      "count": 15
     }
    ]
   },
-  "unlockOrder": 312,
+  "unlockOrder": 292,
   "position": {
    "x": 13,
    "y": 16
@@ -1254,6 +599,661 @@
    ]
   }
  },
+ "kalos-route-11": {
+  "id": "kalos-route-11",
+  "name": "Route 11",
+  "type": "route",
+  "region": "kalos",
+  "description": "A route in the Kalos region.",
+  "routeKey": "kalos-route-11",
+  "connections": [
+   "kalos-geosenge-town",
+   "kalos-shalour-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-geosenge-town",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 293,
+  "position": {
+   "x": 22,
+   "y": 18
+  }
+ },
+ "kalos-shalour-city": {
+  "id": "kalos-shalour-city",
+  "name": "Shalour City",
+  "type": "town",
+  "region": "kalos",
+  "description": "A town in the Kalos region.",
+  "connections": [
+   "kalos-route-12",
+   "kalos-route-11"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-11",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 294,
+  "position": {
+   "x": 25,
+   "y": 6
+  },
+  "mart": {
+   "name": "Kalos Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "kalos-route-12": {
+  "id": "kalos-route-12",
+  "name": "Route 12",
+  "type": "route",
+  "region": "kalos",
+  "description": "A route in the Kalos region.",
+  "routeKey": "kalos-route-12",
+  "connections": [
+   "kalos-shalour-city",
+   "kalos-coumarine-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-shalour-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 295,
+  "position": {
+   "x": 35,
+   "y": 7
+  }
+ },
+ "kalos-coumarine-city": {
+  "id": "kalos-coumarine-city",
+  "name": "Coumarine City",
+  "type": "town",
+  "region": "kalos",
+  "description": "A town in the Kalos region.",
+  "connections": [
+   "kalos-route-12",
+   "kalos-route-13"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-12",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 296,
+  "position": {
+   "x": 44,
+   "y": 9
+  },
+  "mart": {
+   "name": "Kalos Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "kalos-route-13": {
+  "id": "kalos-route-13",
+  "name": "Route 13",
+  "type": "route",
+  "region": "kalos",
+  "description": "A route in the Kalos region.",
+  "routeKey": "kalos-route-13",
+  "connections": [
+   "kalos-lumiose-city",
+   "kalos-coumarine-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-lumiose-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 297,
+  "position": {
+   "x": 45,
+   "y": 19
+  }
+ },
+ "kalos-route-14": {
+  "id": "kalos-route-14",
+  "name": "Route 14",
+  "type": "route",
+  "region": "kalos",
+  "description": "A route in the Kalos region.",
+  "routeKey": "kalos-route-14",
+  "connections": [
+   "kalos-lumiose-city",
+   "kalos-laverre-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-lumiose-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 298,
+  "position": {
+   "x": 60,
+   "y": 26
+  }
+ },
+ "kalos-laverre-city": {
+  "id": "kalos-laverre-city",
+  "name": "Laverre City",
+  "type": "town",
+  "region": "kalos",
+  "description": "A town in the Kalos region.",
+  "connections": [
+   "kalos-route-14",
+   "kalos-route-15"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-14",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 299,
+  "position": {
+   "x": 50,
+   "y": 11
+  },
+  "mart": {
+   "name": "Kalos Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "kalos-route-15": {
+  "id": "kalos-route-15",
+  "name": "Route 15",
+  "type": "route",
+  "region": "kalos",
+  "description": "A route in the Kalos region.",
+  "routeKey": "kalos-route-15",
+  "connections": [
+   "kalos-laverre-city",
+   "kalos-route-16",
+   "kalos-dendemille-town"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-laverre-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 300,
+  "position": {
+   "x": 59,
+   "y": 13
+  }
+ },
+ "kalos-dendemille-town": {
+  "id": "kalos-dendemille-town",
+  "name": "Dendemille Town",
+  "type": "town",
+  "region": "kalos",
+  "description": "A town in the Kalos region.",
+  "connections": [
+   "kalos-route-15",
+   "kalos-route-17"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-15",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 301,
+  "position": {
+   "x": 69,
+   "y": 13
+  },
+  "mart": {
+   "name": "Kalos Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "kalos-route-16": {
+  "id": "kalos-route-16",
+  "name": "Route 16",
+  "type": "route",
+  "region": "kalos",
+  "description": "A route in the Kalos region.",
+  "routeKey": "kalos-route-16",
+  "connections": [
+   "kalos-lumiose-city",
+   "kalos-route-15"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-lumiose-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 302,
+  "position": {
+   "x": 69,
+   "y": 31
+  }
+ },
+ "kalos-route-17": {
+  "id": "kalos-route-17",
+  "name": "Route 17",
+  "type": "route",
+  "region": "kalos",
+  "description": "A route in the Kalos region.",
+  "routeKey": "kalos-route-17",
+  "connections": [
+   "kalos-dendemille-town",
+   "kalos-anistar-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-dendemille-town",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 303,
+  "position": {
+   "x": 78,
+   "y": 13
+  }
+ },
+ "kalos-anistar-city": {
+  "id": "kalos-anistar-city",
+  "name": "Anistar City",
+  "type": "town",
+  "region": "kalos",
+  "description": "A town in the Kalos region.",
+  "connections": [
+   "kalos-route-17",
+   "kalos-route-18"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-17",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 304,
+  "position": {
+   "x": 87,
+   "y": 13
+  },
+  "mart": {
+   "name": "Kalos Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "kalos-route-18": {
+  "id": "kalos-route-18",
+  "name": "Route 18",
+  "type": "route",
+  "region": "kalos",
+  "description": "A route in the Kalos region.",
+  "routeKey": "kalos-route-18",
+  "connections": [
+   "kalos-anistar-city",
+   "kalos-couriway-town"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-anistar-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 305,
+  "position": {
+   "x": 88,
+   "y": 22
+  }
+ },
+ "kalos-couriway-town": {
+  "id": "kalos-couriway-town",
+  "name": "Couriway Town",
+  "type": "town",
+  "region": "kalos",
+  "description": "A town in the Kalos region.",
+  "connections": [
+   "kalos-route-18",
+   "kalos-route-19"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-18",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 306,
+  "position": {
+   "x": 88,
+   "y": 31
+  },
+  "mart": {
+   "name": "Kalos Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "kalos-route-19": {
+  "id": "kalos-route-19",
+  "name": "Route 19",
+  "type": "route",
+  "region": "kalos",
+  "description": "A route in the Kalos region.",
+  "routeKey": "kalos-route-19",
+  "connections": [
+   "kalos-couriway-town",
+   "kalos-snowbelle-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-couriway-town",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 307,
+  "position": {
+   "x": 89,
+   "y": 40
+  }
+ },
+ "kalos-snowbelle-city": {
+  "id": "kalos-snowbelle-city",
+  "name": "Snowbelle City",
+  "type": "town",
+  "region": "kalos",
+  "description": "A town in the Kalos region.",
+  "connections": [
+   "kalos-route-19",
+   "kalos-route-20",
+   "kalos-route-21",
+   "kalos-kiloude-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-19",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 308,
+  "position": {
+   "x": 81,
+   "y": 40
+  },
+  "mart": {
+   "name": "Kalos Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "kalos-route-20": {
+  "id": "kalos-route-20",
+  "name": "Route 20",
+  "type": "route",
+  "region": "kalos",
+  "description": "A route in the Kalos region.",
+  "routeKey": "kalos-route-20",
+  "connections": [
+   "kalos-snowbelle-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-snowbelle-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 309,
+  "position": {
+   "x": 76,
+   "y": 45
+  }
+ },
+ "kalos-kiloude-city": {
+  "id": "kalos-kiloude-city",
+  "name": "Kiloude City",
+  "type": "town",
+  "region": "kalos",
+  "description": "A town in the Kalos region.",
+  "connections": [
+   "kalos-snowbelle-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-snowbelle-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 310,
+  "position": {
+   "x": 93,
+   "y": 47
+  },
+  "mart": {
+   "name": "Kalos Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "kalos-route-21": {
+  "id": "kalos-route-21",
+  "name": "Route 21",
+  "type": "route",
+  "region": "kalos",
+  "description": "A route in the Kalos region.",
+  "routeKey": "kalos-route-21",
+  "connections": [
+   "kalos-snowbelle-city",
+   "kalos-route-22"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-snowbelle-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 311,
+  "position": {
+   "x": 72,
+   "y": 40
+  }
+ },
+ "kalos-route-22": {
+  "id": "kalos-route-22",
+  "name": "Route 22",
+  "type": "route",
+  "region": "kalos",
+  "description": "A route in the Kalos region.",
+  "routeKey": "kalos-route-22",
+  "connections": [
+   "kalos-santalune-city",
+   "kalos-route-21",
+   "kalos-raid",
+   "kalos-league"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-santalune-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 312,
+  "position": {
+   "x": 57,
+   "y": 41
+  }
+ },
  "kalos-raid": {
   "id": "kalos-raid",
   "name": "Kalos Raid Island",
@@ -1262,20 +1262,20 @@
   "description": "A mysterious island where Kalos's rarest Pokemon dwell.",
   "routeKey": "kalos-raid",
   "connections": [
-   "kalos-route-9"
+   "kalos-route-22"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "kalos-route-9",
+     "locationId": "kalos-route-22",
      "count": 20
     }
    ]
   },
   "unlockOrder": 313,
   "position": {
-   "x": 28,
-   "y": 36
+   "x": 85,
+   "y": 47
   }
  },
  "kalos-league": {
@@ -1285,20 +1285,20 @@
   "region": "kalos",
   "description": "The Kalos Pokémon League.",
   "connections": [
-   "kalos-route-9"
+   "kalos-route-22"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "kalos-route-9",
+     "locationId": "kalos-route-22",
      "count": 20
     }
    ]
   },
   "unlockOrder": 314,
   "position": {
-   "x": 30,
-   "y": 42
+   "x": 87,
+   "y": 53
   }
  }
 }

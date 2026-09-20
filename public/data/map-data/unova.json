@@ -6,8 +6,7 @@
   "region": "unova",
   "description": "A town in the Unova region.",
   "connections": [
-   "unova-route-1",
-   "unova-floccesy-town"
+   "unova-route-1"
   ],
   "unlock": {
    "entry": true,
@@ -15,8 +14,8 @@
   },
   "unlockOrder": 230,
   "position": {
-   "x": 69,
-   "y": 61
+   "x": 65,
+   "y": 94
   },
   "mart": {
    "name": "Unova Mart",
@@ -49,9 +48,7 @@
   "connections": [
    "unova-nuvema-town",
    "unova-accumula-town",
-   "unova-route-17",
-   "unova-aspertia-city",
-   "unova-route-19"
+   "unova-route-17"
   ],
   "unlock": {
    "requires": [
@@ -60,50 +57,8 @@
   },
   "unlockOrder": 231,
   "position": {
-   "x": 65,
-   "y": 66
-  }
- },
- "unova-floccesy-town": {
-  "id": "unova-floccesy-town",
-  "name": "Floccesy Town",
-  "type": "town",
-  "region": "unova",
-  "description": "A town in the Unova region.",
-  "connections": [
-   "unova-route-20",
-   "unova-route-19",
-   "unova-nuvema-town"
-  ],
-  "unlock": {
-   "requires": [
-    "unova-nuvema-town"
-   ]
-  },
-  "unlockOrder": 232,
-  "position": {
-   "x": 77,
-   "y": 68
-  },
-  "mart": {
-   "name": "Unova Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
+   "x": 64,
+   "y": 88
   }
  },
  "unova-accumula-town": {
@@ -114,7 +69,9 @@
   "description": "A town in the Unova region.",
   "connections": [
    "unova-route-1",
-   "unova-route-2"
+   "unova-route-2",
+   "unova-aspertia-city",
+   "unova-virbank-city"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -124,10 +81,10 @@
     }
    ]
   },
-  "unlockOrder": 233,
+  "unlockOrder": 232,
   "position": {
-   "x": 73,
-   "y": 46
+   "x": 66,
+   "y": 79
   },
   "mart": {
    "name": "Unova Mart",
@@ -148,31 +105,6 @@
      "itemId": "honey"
     }
    ]
-  }
- },
- "unova-route-17": {
-  "id": "unova-route-17",
-  "name": "Route 17",
-  "type": "route",
-  "region": "unova",
-  "description": "A route in the Unova region.",
-  "routeKey": "unova-route-17",
-  "connections": [
-   "unova-route-1",
-   "unova-route-18"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "unova-route-1",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 234,
-  "position": {
-   "x": 59,
-   "y": 54
   }
  },
  "unova-aspertia-city": {
@@ -183,20 +115,21 @@
   "description": "A town in the Unova region.",
   "connections": [
    "unova-route-19",
-   "unova-route-1"
+   "unova-accumula-town",
+   "unova-floccesy-town"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "unova-route-1",
+     "locationId": "unova-accumula-town",
      "count": 15
     }
    ]
   },
-  "unlockOrder": 235,
+  "unlockOrder": 233,
   "position": {
-   "x": 69,
-   "y": 76
+   "x": 62,
+   "y": 74
   },
   "mart": {
    "name": "Unova Mart",
@@ -217,32 +150,6 @@
      "itemId": "honey"
     }
    ]
-  }
- },
- "unova-route-19": {
-  "id": "unova-route-19",
-  "name": "Route 19",
-  "type": "route",
-  "region": "unova",
-  "description": "A route in the Unova region.",
-  "routeKey": "unova-route-19",
-  "connections": [
-   "unova-aspertia-city",
-   "unova-floccesy-town",
-   "unova-route-1"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "unova-route-1",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 236,
-  "position": {
-   "x": 80,
-   "y": 77
   }
  },
  "unova-route-2": {
@@ -264,59 +171,34 @@
     }
    ]
   },
-  "unlockOrder": 237,
+  "unlockOrder": 234,
   "position": {
-   "x": 87,
-   "y": 83
+   "x": 56,
+   "y": 80
   }
  },
- "unova-route-18": {
-  "id": "unova-route-18",
-  "name": "Route 18",
-  "type": "route",
-  "region": "unova",
-  "description": "A route in the Unova region.",
-  "routeKey": "unova-route-18",
-  "connections": [
-   "unova-route-17",
-   "unova-route-gate"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "unova-route-17",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 238,
-  "position": {
-   "x": 49,
-   "y": 65
-  }
- },
- "unova-striaton-city": {
-  "id": "unova-striaton-city",
-  "name": "Striaton City",
+ "unova-virbank-city": {
+  "id": "unova-virbank-city",
+  "name": "Virbank City",
   "type": "town",
   "region": "unova",
   "description": "A town in the Unova region.",
   "connections": [
-   "unova-route-3",
-   "unova-route-2"
+   "unova-route-20",
+   "unova-accumula-town"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "unova-route-2",
+     "locationId": "unova-accumula-town",
      "count": 15
     }
    ]
   },
-  "unlockOrder": 239,
+  "unlockOrder": 235,
   "position": {
-   "x": 78,
-   "y": 51
+   "x": 86,
+   "y": 67
   },
   "mart": {
    "name": "Unova Mart",
@@ -339,28 +221,94 @@
    ]
   }
  },
- "unova-route-gate": {
-  "id": "unova-route-gate",
-  "name": "Route Gate",
-  "type": "route",
+ "unova-floccesy-town": {
+  "id": "unova-floccesy-town",
+  "name": "Floccesy Town",
+  "type": "town",
   "region": "unova",
-  "description": "A route in the Unova region.",
-  "routeKey": "unova-route-gate",
+  "description": "A town in the Unova region.",
   "connections": [
-   "unova-route-18"
+   "unova-route-20",
+   "unova-route-19",
+   "unova-aspertia-city"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "unova-route-18",
+     "locationId": "unova-aspertia-city",
      "count": 15
     }
    ]
   },
-  "unlockOrder": 240,
+  "unlockOrder": 236,
   "position": {
-   "x": 32,
+   "x": 70,
    "y": 67
+  },
+  "mart": {
+   "name": "Unova Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "unova-striaton-city": {
+  "id": "unova-striaton-city",
+  "name": "Striaton City",
+  "type": "town",
+  "region": "unova",
+  "description": "A town in the Unova region.",
+  "connections": [
+   "unova-route-3",
+   "unova-route-2",
+   "unova-route-19"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-2",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 237,
+  "position": {
+   "x": 58,
+   "y": 69
+  },
+  "mart": {
+   "name": "Unova Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
   }
  },
  "unova-route-3": {
@@ -382,10 +330,10 @@
     }
    ]
   },
-  "unlockOrder": 241,
+  "unlockOrder": 238,
   "position": {
-   "x": 54,
-   "y": 43
+   "x": 56,
+   "y": 63
   }
  },
  "unova-nacrene-city": {
@@ -396,7 +344,7 @@
   "description": "A town in the Unova region.",
   "connections": [
    "unova-route-3",
-   "unova-route-11"
+   "unova-castelia-city"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -406,10 +354,10 @@
     }
    ]
   },
-  "unlockOrder": 242,
+  "unlockOrder": 239,
   "position": {
-   "x": 64,
-   "y": 38
+   "x": 76,
+   "y": 80
   },
   "mart": {
    "name": "Unova Mart",
@@ -430,33 +378,6 @@
      "itemId": "honey"
     }
    ]
-  }
- },
- "unova-route-11": {
-  "id": "unova-route-11",
-  "name": "Route 11",
-  "type": "route",
-  "region": "unova",
-  "description": "A route in the Unova region.",
-  "routeKey": "unova-route-11",
-  "connections": [
-   "unova-opelucid-city",
-   "unova-nacrene-city",
-   "unova-castelia-city",
-   "unova-route-12"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "unova-nacrene-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 243,
-  "position": {
-   "x": 86,
-   "y": 72
   }
  },
  "unova-castelia-city": {
@@ -467,20 +388,20 @@
   "description": "A town in the Unova region.",
   "connections": [
    "unova-route-4",
-   "unova-route-11"
+   "unova-nacrene-city"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "unova-route-11",
+     "locationId": "unova-nacrene-city",
      "count": 15
     }
    ]
   },
-  "unlockOrder": 244,
+  "unlockOrder": 240,
   "position": {
-   "x": 51,
-   "y": 53
+   "x": 44,
+   "y": 58
   },
   "mart": {
    "name": "Unova Mart",
@@ -501,77 +422,6 @@
      "itemId": "honey"
     }
    ]
-  }
- },
- "unova-opelucid-city": {
-  "id": "unova-opelucid-city",
-  "name": "Opelucid City",
-  "type": "town",
-  "region": "unova",
-  "description": "A town in the Unova region.",
-  "connections": [
-   "unova-route-10",
-   "unova-route-11",
-   "unova-route-9",
-   "unova-route-21"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "unova-route-11",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 245,
-  "position": {
-   "x": 50,
-   "y": 36
-  },
-  "mart": {
-   "name": "Unova Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
-  }
- },
- "unova-route-12": {
-  "id": "unova-route-12",
-  "name": "Route 12",
-  "type": "route",
-  "region": "unova",
-  "description": "A route in the Unova region.",
-  "routeKey": "unova-route-12",
-  "connections": [
-   "unova-lacunosa-town",
-   "unova-route-11"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "unova-route-11",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 246,
-  "position": {
-   "x": 86,
-   "y": 53
   }
  },
  "unova-route-4": {
@@ -593,129 +443,10 @@
     }
    ]
   },
-  "unlockOrder": 247,
+  "unlockOrder": 241,
   "position": {
-   "x": 39,
-   "y": 49
-  }
- },
- "unova-route-9": {
-  "id": "unova-route-9",
-  "name": "Route 9",
-  "type": "route",
-  "region": "unova",
-  "description": "A route in the Unova region.",
-  "routeKey": "unova-route-9",
-  "connections": [
-   "unova-opelucid-city",
-   "unova-route-8"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "unova-opelucid-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 248,
-  "position": {
-   "x": 95,
-   "y": 83
-  }
- },
- "unova-route-10": {
-  "id": "unova-route-10",
-  "name": "Route 10",
-  "type": "route",
-  "region": "unova",
-  "description": "A route in the Unova region.",
-  "routeKey": "unova-route-10",
-  "connections": [
-   "unova-opelucid-city"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "unova-opelucid-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 249,
-  "position": {
-   "x": 57,
-   "y": 37
-  }
- },
- "unova-lacunosa-town": {
-  "id": "unova-lacunosa-town",
-  "name": "Lacunosa Town",
-  "type": "town",
-  "region": "unova",
-  "description": "A town in the Unova region.",
-  "connections": [
-   "unova-route-12",
-   "unova-route-13"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "unova-route-12",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 250,
-  "position": {
-   "x": 70,
-   "y": 28
-  },
-  "mart": {
-   "name": "Unova Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
-  }
- },
- "unova-route-21": {
-  "id": "unova-route-21",
-  "name": "Route 21",
-  "type": "route",
-  "region": "unova",
-  "description": "A route in the Unova region.",
-  "routeKey": "unova-route-21",
-  "connections": [
-   "unova-humilau-city",
-   "unova-undella-town",
-   "unova-opelucid-city"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "unova-opelucid-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 251,
-  "position": {
-   "x": 71,
-   "y": 38
+   "x": 81,
+   "y": 85
   }
  },
  "unova-nimbasa-city": {
@@ -737,198 +468,10 @@
     }
    ]
   },
-  "unlockOrder": 252,
+  "unlockOrder": 242,
   "position": {
-   "x": 48,
-   "y": 42
-  },
-  "mart": {
-   "name": "Unova Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
-  }
- },
- "unova-route-8": {
-  "id": "unova-route-8",
-  "name": "Route 8",
-  "type": "route",
-  "region": "unova",
-  "description": "A route in the Unova region.",
-  "routeKey": "unova-route-8",
-  "connections": [
-   "unova-icirrus-city",
-   "unova-route-9"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "unova-route-9",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 253,
-  "position": {
-   "x": 37,
-   "y": 43
-  }
- },
- "unova-route-13": {
-  "id": "unova-route-13",
-  "name": "Route 13",
-  "type": "route",
-  "region": "unova",
-  "description": "A route in the Unova region.",
-  "routeKey": "unova-route-13",
-  "connections": [
-   "unova-undella-town",
-   "unova-lacunosa-town",
-   "unova-route-22"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "unova-lacunosa-town",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 254,
-  "position": {
-   "x": 77,
+   "x": 44,
    "y": 41
-  }
- },
- "unova-undella-town": {
-  "id": "unova-undella-town",
-  "name": "Undella Town",
-  "type": "town",
-  "region": "unova",
-  "description": "A town in the Unova region.",
-  "connections": [
-   "unova-route-13",
-   "unova-route-14",
-   "unova-route-21",
-   "unova-lentimas-town",
-   "unova-humilau-city"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "unova-route-21",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 255,
-  "position": {
-   "x": 83,
-   "y": 40
-  },
-  "mart": {
-   "name": "Unova Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
-  }
- },
- "unova-humilau-city": {
-  "id": "unova-humilau-city",
-  "name": "Humilau City",
-  "type": "town",
-  "region": "unova",
-  "description": "A town in the Unova region.",
-  "connections": [
-   "unova-route-21",
-   "unova-route-22",
-   "unova-undella-town"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "unova-route-21",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 256,
-  "position": {
-   "x": 76,
-   "y": 27
-  },
-  "mart": {
-   "name": "Unova Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
-  }
- },
- "unova-icirrus-city": {
-  "id": "unova-icirrus-city",
-  "name": "Icirrus City",
-  "type": "town",
-  "region": "unova",
-  "description": "A town in the Unova region.",
-  "connections": [
-   "unova-route-8",
-   "unova-route-7",
-   "unova-driftveil-city"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "unova-route-8",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 257,
-  "position": {
-   "x": 19,
-   "y": 37
   },
   "mart": {
    "name": "Unova Mart",
@@ -970,83 +513,35 @@
     }
    ]
   },
-  "unlockOrder": 258,
+  "unlockOrder": 243,
   "position": {
-   "x": 28,
-   "y": 42
+   "x": 34,
+   "y": 46
   }
  },
- "unova-route-14": {
-  "id": "unova-route-14",
-  "name": "Route 14",
-  "type": "route",
-  "region": "unova",
-  "description": "A route in the Unova region.",
-  "routeKey": "unova-route-14",
-  "connections": [
-   "unova-undella-town",
-   "unova-black-city"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "unova-undella-town",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 259,
-  "position": {
-   "x": 72,
-   "y": 53
-  }
- },
- "unova-route-16": {
-  "id": "unova-route-16",
-  "name": "Route 16",
-  "type": "route",
-  "region": "unova",
-  "description": "A route in the Unova region.",
-  "routeKey": "unova-route-16",
-  "connections": [
-   "unova-nimbasa-city",
-   "unova-route-15"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "unova-nimbasa-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 260,
-  "position": {
-   "x": 45,
-   "y": 49
-  }
- },
- "unova-lentimas-town": {
-  "id": "unova-lentimas-town",
-  "name": "Lentimas Town",
+ "unova-driftveil-city": {
+  "id": "unova-driftveil-city",
+  "name": "Driftveil City",
   "type": "town",
   "region": "unova",
   "description": "A town in the Unova region.",
   "connections": [
-   "unova-undella-town"
+   "unova-route-6",
+   "unova-route-5",
+   "unova-anville-town"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "unova-undella-town",
+     "locationId": "unova-route-5",
      "count": 15
     }
    ]
   },
-  "unlockOrder": 261,
+  "unlockOrder": 244,
   "position": {
-   "x": 58,
-   "y": 27
+   "x": 21,
+   "y": 46
   },
   "mart": {
    "name": "Unova Mart",
@@ -1069,55 +564,96 @@
    ]
   }
  },
- "unova-route-22": {
-  "id": "unova-route-22",
-  "name": "Route 22",
-  "type": "route",
-  "region": "unova",
-  "description": "A route in the Unova region.",
-  "routeKey": "unova-route-22",
-  "connections": [
-   "unova-humilau-city",
-   "unova-route-13",
-   "unova-route-23"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "unova-humilau-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 262,
-  "position": {
-   "x": 64,
-   "y": 28
-  }
- },
- "unova-driftveil-city": {
-  "id": "unova-driftveil-city",
-  "name": "Driftveil City",
+ "unova-anville-town": {
+  "id": "unova-anville-town",
+  "name": "Anville Town",
   "type": "town",
   "region": "unova",
   "description": "A town in the Unova region.",
   "connections": [
-   "unova-route-6",
-   "unova-route-5",
-   "unova-icirrus-city"
+   "unova-driftveil-city"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "unova-icirrus-city",
+     "locationId": "unova-driftveil-city",
      "count": 15
     }
    ]
   },
-  "unlockOrder": 263,
+  "unlockOrder": 245,
   "position": {
-   "x": 10,
-   "y": 44
+   "x": 14,
+   "y": 68
+  },
+  "mart": {
+   "name": "Unova Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "unova-route-6": {
+  "id": "unova-route-6",
+  "name": "Route 6",
+  "type": "route",
+  "region": "unova",
+  "description": "A route in the Unova region.",
+  "routeKey": "unova-route-6",
+  "connections": [
+   "unova-driftveil-city",
+   "unova-mistralton-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-driftveil-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 246,
+  "position": {
+   "x": 26,
+   "y": 51
+  }
+ },
+ "unova-mistralton-city": {
+  "id": "unova-mistralton-city",
+  "name": "Mistralton City",
+  "type": "town",
+  "region": "unova",
+  "description": "A town in the Unova region.",
+  "connections": [
+   "unova-route-7",
+   "unova-route-6"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-6",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 247,
+  "position": {
+   "x": 18,
+   "y": 27
   },
   "mart": {
    "name": "Unova Mart",
@@ -1154,15 +690,503 @@
   "unlock": {
    "battlesAtLocation": [
     {
+     "locationId": "unova-mistralton-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 248,
+  "position": {
+   "x": 25,
+   "y": 30
+  }
+ },
+ "unova-icirrus-city": {
+  "id": "unova-icirrus-city",
+  "name": "Icirrus City",
+  "type": "town",
+  "region": "unova",
+  "description": "A town in the Unova region.",
+  "connections": [
+   "unova-route-8",
+   "unova-route-7"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-7",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 249,
+  "position": {
+   "x": 28,
+   "y": 22
+  },
+  "mart": {
+   "name": "Unova Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "unova-route-8": {
+  "id": "unova-route-8",
+  "name": "Route 8",
+  "type": "route",
+  "region": "unova",
+  "description": "A route in the Unova region.",
+  "routeKey": "unova-route-8",
+  "connections": [
+   "unova-icirrus-city",
+   "unova-route-9"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
      "locationId": "unova-icirrus-city",
      "count": 15
     }
    ]
   },
-  "unlockOrder": 264,
+  "unlockOrder": 250,
   "position": {
-   "x": 9,
-   "y": 34
+   "x": 36,
+   "y": 22
+  }
+ },
+ "unova-route-9": {
+  "id": "unova-route-9",
+  "name": "Route 9",
+  "type": "route",
+  "region": "unova",
+  "description": "A route in the Unova region.",
+  "routeKey": "unova-route-9",
+  "connections": [
+   "unova-opelucid-city",
+   "unova-route-8"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-8",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 251,
+  "position": {
+   "x": 53,
+   "y": 24
+  }
+ },
+ "unova-opelucid-city": {
+  "id": "unova-opelucid-city",
+  "name": "Opelucid City",
+  "type": "town",
+  "region": "unova",
+  "description": "A town in the Unova region.",
+  "connections": [
+   "unova-route-10",
+   "unova-route-11",
+   "unova-route-9",
+   "unova-route-21"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-9",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 252,
+  "position": {
+   "x": 66,
+   "y": 16
+  },
+  "mart": {
+   "name": "Unova Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "unova-route-10": {
+  "id": "unova-route-10",
+  "name": "Route 10",
+  "type": "route",
+  "region": "unova",
+  "description": "A route in the Unova region.",
+  "routeKey": "unova-route-10",
+  "connections": [
+   "unova-opelucid-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-opelucid-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 253,
+  "position": {
+   "x": 60,
+   "y": 15
+  }
+ },
+ "unova-route-11": {
+  "id": "unova-route-11",
+  "name": "Route 11",
+  "type": "route",
+  "region": "unova",
+  "description": "A route in the Unova region.",
+  "routeKey": "unova-route-11",
+  "connections": [
+   "unova-opelucid-city",
+   "unova-route-12"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-opelucid-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 254,
+  "position": {
+   "x": 66,
+   "y": 27
+  }
+ },
+ "unova-route-12": {
+  "id": "unova-route-12",
+  "name": "Route 12",
+  "type": "route",
+  "region": "unova",
+  "description": "A route in the Unova region.",
+  "routeKey": "unova-route-12",
+  "connections": [
+   "unova-lacunosa-town",
+   "unova-route-11"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-11",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 255,
+  "position": {
+   "x": 73,
+   "y": 29
+  }
+ },
+ "unova-lacunosa-town": {
+  "id": "unova-lacunosa-town",
+  "name": "Lacunosa Town",
+  "type": "town",
+  "region": "unova",
+  "description": "A town in the Unova region.",
+  "connections": [
+   "unova-route-12",
+   "unova-route-13"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-12",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 256,
+  "position": {
+   "x": 73,
+   "y": 9
+  },
+  "mart": {
+   "name": "Unova Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "unova-route-13": {
+  "id": "unova-route-13",
+  "name": "Route 13",
+  "type": "route",
+  "region": "unova",
+  "description": "A route in the Unova region.",
+  "routeKey": "unova-route-13",
+  "connections": [
+   "unova-undella-town",
+   "unova-lacunosa-town",
+   "unova-route-22"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-lacunosa-town",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 257,
+  "position": {
+   "x": 79,
+   "y": 30
+  }
+ },
+ "unova-undella-town": {
+  "id": "unova-undella-town",
+  "name": "Undella Town",
+  "type": "town",
+  "region": "unova",
+  "description": "A town in the Unova region.",
+  "connections": [
+   "unova-route-13",
+   "unova-route-14",
+   "unova-route-21",
+   "unova-lentimas-town",
+   "unova-humilau-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-13",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 258,
+  "position": {
+   "x": 78,
+   "y": 15
+  },
+  "mart": {
+   "name": "Unova Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "unova-route-14": {
+  "id": "unova-route-14",
+  "name": "Route 14",
+  "type": "route",
+  "region": "unova",
+  "description": "A route in the Unova region.",
+  "routeKey": "unova-route-14",
+  "connections": [
+   "unova-undella-town",
+   "unova-black-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-undella-town",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 259,
+  "position": {
+   "x": 76,
+   "y": 37
+  }
+ },
+ "unova-humilau-city": {
+  "id": "unova-humilau-city",
+  "name": "Humilau City",
+  "type": "town",
+  "region": "unova",
+  "description": "A town in the Unova region.",
+  "connections": [
+   "unova-route-21",
+   "unova-route-22",
+   "unova-undella-town"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-undella-town",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 260,
+  "position": {
+   "x": 79,
+   "y": 9
+  },
+  "mart": {
+   "name": "Unova Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "unova-lentimas-town": {
+  "id": "unova-lentimas-town",
+  "name": "Lentimas Town",
+  "type": "town",
+  "region": "unova",
+  "description": "A town in the Unova region.",
+  "connections": [
+   "unova-undella-town"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-undella-town",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 261,
+  "position": {
+   "x": 60,
+   "y": 21
+  },
+  "mart": {
+   "name": "Unova Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "unova-black-city": {
+  "id": "unova-black-city",
+  "name": "Black City",
+  "type": "town",
+  "region": "unova",
+  "description": "A town in the Unova region.",
+  "connections": [
+   "unova-route-14",
+   "unova-route-15"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-14",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 262,
+  "position": {
+   "x": 82,
+   "y": 38
+  },
+  "mart": {
+   "name": "Unova Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
   }
  },
  "unova-route-15": {
@@ -1179,241 +1203,140 @@
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "unova-route-16",
+     "locationId": "unova-black-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 263,
+  "position": {
+   "x": 64,
+   "y": 42
+  }
+ },
+ "unova-route-16": {
+  "id": "unova-route-16",
+  "name": "Route 16",
+  "type": "route",
+  "region": "unova",
+  "description": "A route in the Unova region.",
+  "routeKey": "unova-route-16",
+  "connections": [
+   "unova-nimbasa-city",
+   "unova-route-15"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-nimbasa-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 264,
+  "position": {
+   "x": 49,
+   "y": 45
+  }
+ },
+ "unova-route-17": {
+  "id": "unova-route-17",
+  "name": "Route 17",
+  "type": "route",
+  "region": "unova",
+  "description": "A route in the Unova region.",
+  "routeKey": "unova-route-17",
+  "connections": [
+   "unova-route-1",
+   "unova-route-18"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-1",
      "count": 15
     }
    ]
   },
   "unlockOrder": 265,
   "position": {
-   "x": 4,
-   "y": 85
+   "x": 58,
+   "y": 86
   }
  },
- "unova-black-city": {
-  "id": "unova-black-city",
-  "name": "Black City",
-  "type": "town",
+ "unova-route-18": {
+  "id": "unova-route-18",
+  "name": "Route 18",
+  "type": "route",
   "region": "unova",
-  "description": "A town in the Unova region.",
+  "description": "A route in the Unova region.",
+  "routeKey": "unova-route-18",
   "connections": [
-   "unova-route-14",
-   "unova-route-15",
-   "unova-virbank-city"
+   "unova-route-17",
+   "unova-route-gate"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "unova-route-14",
+     "locationId": "unova-route-17",
      "count": 15
     }
    ]
   },
   "unlockOrder": 266,
   "position": {
-   "x": 92,
-   "y": 62
-  },
-  "mart": {
-   "name": "Unova Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
+   "x": 48,
+   "y": 88
   }
  },
- "unova-route-23": {
-  "id": "unova-route-23",
-  "name": "Route 23",
+ "unova-route-gate": {
+  "id": "unova-route-gate",
+  "name": "Route Gate",
   "type": "route",
   "region": "unova",
   "description": "A route in the Unova region.",
-  "routeKey": "unova-route-23",
+  "routeKey": "unova-route-gate",
   "connections": [
-   "unova-route-22"
+   "unova-route-18"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "unova-route-22",
+     "locationId": "unova-route-18",
      "count": 15
     }
    ]
   },
   "unlockOrder": 267,
   "position": {
-   "x": 52,
-   "y": 26
+   "x": 37,
+   "y": 84
   }
  },
- "unova-mistralton-city": {
-  "id": "unova-mistralton-city",
-  "name": "Mistralton City",
-  "type": "town",
+ "unova-route-19": {
+  "id": "unova-route-19",
+  "name": "Route 19",
+  "type": "route",
   "region": "unova",
-  "description": "A town in the Unova region.",
+  "description": "A route in the Unova region.",
+  "routeKey": "unova-route-19",
   "connections": [
-   "unova-route-7",
-   "unova-route-6"
+   "unova-aspertia-city",
+   "unova-floccesy-town",
+   "unova-striaton-city"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "unova-route-7",
+     "locationId": "unova-aspertia-city",
      "count": 15
     }
    ]
   },
   "unlockOrder": 268,
   "position": {
-   "x": 16,
-   "y": 44
-  },
-  "mart": {
-   "name": "Unova Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
-  }
- },
- "unova-route-6": {
-  "id": "unova-route-6",
-  "name": "Route 6",
-  "type": "route",
-  "region": "unova",
-  "description": "A route in the Unova region.",
-  "routeKey": "unova-route-6",
-  "connections": [
-   "unova-driftveil-city",
-   "unova-mistralton-city",
-   "unova-anville-town"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "unova-driftveil-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 269,
-  "position": {
-   "x": 15,
-   "y": 50
-  }
- },
- "unova-virbank-city": {
-  "id": "unova-virbank-city",
-  "name": "Virbank City",
-  "type": "town",
-  "region": "unova",
-  "description": "A town in the Unova region.",
-  "connections": [
-   "unova-route-20",
-   "unova-black-city"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "unova-black-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 270,
-  "position": {
-   "x": 94,
-   "y": 68
-  },
-  "mart": {
-   "name": "Unova Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
-  }
- },
- "unova-anville-town": {
-  "id": "unova-anville-town",
-  "name": "Anville Town",
-  "type": "town",
-  "region": "unova",
-  "description": "A town in the Unova region.",
-  "connections": [
-   "unova-route-6"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "unova-route-6",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 271,
-  "position": {
-   "x": 12,
-   "y": 68
-  },
-  "mart": {
-   "name": "Unova Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
+   "x": 88,
+   "y": 87
   }
  },
  "unova-route-20": {
@@ -1425,9 +1348,7 @@
   "routeKey": "unova-route-20",
   "connections": [
    "unova-virbank-city",
-   "unova-floccesy-town",
-   "unova-raid",
-   "unova-league"
+   "unova-floccesy-town"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1437,10 +1358,88 @@
     }
    ]
   },
+  "unlockOrder": 269,
+  "position": {
+   "x": 79,
+   "y": 68
+  }
+ },
+ "unova-route-21": {
+  "id": "unova-route-21",
+  "name": "Route 21",
+  "type": "route",
+  "region": "unova",
+  "description": "A route in the Unova region.",
+  "routeKey": "unova-route-21",
+  "connections": [
+   "unova-humilau-city",
+   "unova-undella-town",
+   "unova-opelucid-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-opelucid-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 270,
+  "position": {
+   "x": 80,
+   "y": 24
+  }
+ },
+ "unova-route-22": {
+  "id": "unova-route-22",
+  "name": "Route 22",
+  "type": "route",
+  "region": "unova",
+  "description": "A route in the Unova region.",
+  "routeKey": "unova-route-22",
+  "connections": [
+   "unova-humilau-city",
+   "unova-route-13",
+   "unova-route-23"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-13",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 271,
+  "position": {
+   "x": 67,
+   "y": 10
+  }
+ },
+ "unova-route-23": {
+  "id": "unova-route-23",
+  "name": "Route 23",
+  "type": "route",
+  "region": "unova",
+  "description": "A route in the Unova region.",
+  "routeKey": "unova-route-23",
+  "connections": [
+   "unova-route-22",
+   "unova-raid",
+   "unova-league"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-22",
+     "count": 15
+    }
+   ]
+  },
   "unlockOrder": 272,
   "position": {
-   "x": 96,
-   "y": 76
+   "x": 71,
+   "y": 23
   }
  },
  "unova-raid": {
@@ -1451,20 +1450,20 @@
   "description": "A mysterious island where Unova's rarest Pokemon dwell.",
   "routeKey": "unova-raid",
   "connections": [
-   "unova-route-20"
+   "unova-route-23"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "unova-route-20",
+     "locationId": "unova-route-23",
      "count": 20
     }
    ]
   },
   "unlockOrder": 273,
   "position": {
-   "x": 4,
-   "y": 62
+   "x": 89,
+   "y": 26
   }
  },
  "unova-league": {
@@ -1474,20 +1473,20 @@
   "region": "unova",
   "description": "The Unova Pokémon League.",
   "connections": [
-   "unova-route-20"
+   "unova-route-23"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "unova-route-20",
+     "locationId": "unova-route-23",
      "count": 20
     }
    ]
   },
   "unlockOrder": 274,
   "position": {
-   "x": 4,
-   "y": 68
+   "x": 96,
+   "y": 31
   }
  }
 }

@@ -299,7 +299,11 @@ One-off scripts used to build the data JSON (not run during dev/build):
   Galar's Wild Area). The scraper now records those unresolved compass targets,
   reads the connector's intro links back to real locations (`addConnectorHubs`),
   lays the graph out with a synthetic hub per shared connector, then contracts
-  the hubs back out by chaining their neighbours (`contractHubs`). A few gaps
+  the hubs back out by chaining their neighbours (`contractHubs`). Compass refs
+  win: prose links are only consulted when fewer than two nodes name the
+  connector, and only its opening paragraph is read, otherwise the whole lead
+  (plus `{{rt}}` templates) over-connects the graph (Dark Cave linking Route 29
+  and Blackthorn City; Pinwheel Forest linking Route 11). A few gaps
   Bulbapedia never records are filled from `MANUAL_BRIDGES` (currently only
   Galar's Wild Area links); keep that table tiny and verified. Anything still
   unreachable is a genuinely separate area (post-game zones, Alola's islands,
@@ -331,6 +335,14 @@ One-off scripts used to build the data JSON (not run during dev/build):
   up on **no** region's wild routes and can't be reached by evolving one that
   does; that scan runs after every route is generated, so the pools are
   genuinely route-exclusive.
+
+  Progression is ordered by **route number**, not BFS depth: a town is ranked
+  just after its lowest-numbered route, and the unlock tree is a Dijkstra run
+  from the entry where stepping to a higher-numbered location is cheap and
+  going backwards is penalised. That stops shortcuts opening late areas early
+  (Johto's Blackthorn via Route 46/45, Hoenn's sea routes off Slateport, Kalos
+  routes radiating from Lumiose) and keeps the path matching the real route
+  order. Paldea has no numbered routes, so it falls back to BFS depth order.
 - `RawMoveData`, `index-backup.js` — large reference/backup data; leave alone.
 - `kill-vite.cjs` — kills orphaned Vite dev servers on the port range (Windows
   `taskkill`, else `kill`). Run `npm run kill-vite`, or `--dry` to preview.

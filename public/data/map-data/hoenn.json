@@ -15,7 +15,7 @@
   "unlockOrder": 132,
   "position": {
    "x": 32,
-   "y": 78
+   "y": 77
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -57,7 +57,7 @@
   "unlockOrder": 133,
   "position": {
    "x": 31,
-   "y": 69
+   "y": 68
   }
  },
  "hoenn-oldale-town": {
@@ -130,6 +130,50 @@
    "y": 59
   }
  },
+ "hoenn-petalburg-city": {
+  "id": "hoenn-petalburg-city",
+  "name": "Petalburg City",
+  "type": "town",
+  "region": "hoenn",
+  "description": "A town in the Hoenn region.",
+  "connections": [
+   "hoenn-route-102",
+   "hoenn-route-104"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-102",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 136,
+  "position": {
+   "x": 16,
+   "y": 58
+  },
+  "mart": {
+   "name": "Hoenn Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
  "hoenn-route-103": {
   "id": "hoenn-route-103",
   "name": "Route 103",
@@ -149,34 +193,275 @@
     }
    ]
   },
-  "unlockOrder": 136,
+  "unlockOrder": 137,
   "position": {
    "x": 30,
    "y": 54
   }
  },
- "hoenn-petalburg-city": {
-  "id": "hoenn-petalburg-city",
-  "name": "Petalburg City",
-  "type": "town",
+ "hoenn-route-104": {
+  "id": "hoenn-route-104",
+  "name": "Route 104",
+  "type": "route",
   "region": "hoenn",
-  "description": "A town in the Hoenn region.",
+  "description": "A route in the Hoenn region.",
+  "routeKey": "hoenn-route-104",
   "connections": [
-   "hoenn-route-102",
-   "hoenn-route-104"
+   "hoenn-petalburg-city",
+   "hoenn-rustboro-city",
+   "hoenn-route-105"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "hoenn-route-102",
+     "locationId": "hoenn-petalburg-city",
      "count": 15
     }
    ]
   },
-  "unlockOrder": 137,
+  "unlockOrder": 138,
   "position": {
-   "x": 17,
-   "y": 58
+   "x": 9,
+   "y": 56
+  }
+ },
+ "hoenn-rustboro-city": {
+  "id": "hoenn-rustboro-city",
+  "name": "Rustboro City",
+  "type": "town",
+  "region": "hoenn",
+  "description": "A town in the Hoenn region.",
+  "connections": [
+   "hoenn-route-104",
+   "hoenn-route-115",
+   "hoenn-route-116"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-104",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 139,
+  "position": {
+   "x": 8,
+   "y": 48
+  },
+  "mart": {
+   "name": "Hoenn Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "hoenn-route-105": {
+  "id": "hoenn-route-105",
+  "name": "Route 105",
+  "type": "route",
+  "region": "hoenn",
+  "description": "A route in the Hoenn region.",
+  "routeKey": "hoenn-route-105",
+  "connections": [
+   "hoenn-route-104",
+   "hoenn-route-106"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-104",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 140,
+  "position": {
+   "x": 10,
+   "y": 63
+  }
+ },
+ "hoenn-route-106": {
+  "id": "hoenn-route-106",
+  "name": "Route 106",
+  "type": "route",
+  "region": "hoenn",
+  "description": "A route in the Hoenn region.",
+  "routeKey": "hoenn-route-106",
+  "connections": [
+   "hoenn-route-105",
+   "hoenn-dewford-town"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-105",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 141,
+  "position": {
+   "x": 11,
+   "y": 70
+  }
+ },
+ "hoenn-dewford-town": {
+  "id": "hoenn-dewford-town",
+  "name": "Dewford Town",
+  "type": "town",
+  "region": "hoenn",
+  "description": "A town in the Hoenn region.",
+  "connections": [
+   "hoenn-route-106",
+   "hoenn-route-107"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-106",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 142,
+  "position": {
+   "x": 10,
+   "y": 77
+  },
+  "mart": {
+   "name": "Hoenn Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "hoenn-route-107": {
+  "id": "hoenn-route-107",
+  "name": "Route 107",
+  "type": "route",
+  "region": "hoenn",
+  "description": "A route in the Hoenn region.",
+  "routeKey": "hoenn-route-107",
+  "connections": [
+   "hoenn-route-108",
+   "hoenn-dewford-town"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-dewford-town",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 143,
+  "position": {
+   "x": 18,
+   "y": 75
+  }
+ },
+ "hoenn-route-108": {
+  "id": "hoenn-route-108",
+  "name": "Route 108",
+  "type": "route",
+  "region": "hoenn",
+  "description": "A route in the Hoenn region.",
+  "routeKey": "hoenn-route-108",
+  "connections": [
+   "hoenn-route-107",
+   "hoenn-route-109"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-107",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 144,
+  "position": {
+   "x": 37,
+   "y": 82
+  }
+ },
+ "hoenn-route-109": {
+  "id": "hoenn-route-109",
+  "name": "Route 109",
+  "type": "route",
+  "region": "hoenn",
+  "description": "A route in the Hoenn region.",
+  "routeKey": "hoenn-route-109",
+  "connections": [
+   "hoenn-slateport-city",
+   "hoenn-route-108"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-108",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 145,
+  "position": {
+   "x": 41,
+   "y": 77
+  }
+ },
+ "hoenn-slateport-city": {
+  "id": "hoenn-slateport-city",
+  "name": "Slateport City",
+  "type": "town",
+  "region": "hoenn",
+  "description": "A town in the Hoenn region.",
+  "connections": [
+   "hoenn-route-110",
+   "hoenn-route-109",
+   "hoenn-route-134"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-109",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 146,
+  "position": {
+   "x": 41,
+   "y": 67
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -219,81 +504,10 @@
     }
    ]
   },
-  "unlockOrder": 138,
+  "unlockOrder": 147,
   "position": {
-   "x": 37,
-   "y": 55
-  }
- },
- "hoenn-slateport-city": {
-  "id": "hoenn-slateport-city",
-  "name": "Slateport City",
-  "type": "town",
-  "region": "hoenn",
-  "description": "A town in the Hoenn region.",
-  "connections": [
-   "hoenn-route-110",
-   "hoenn-route-109",
-   "hoenn-route-134"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "hoenn-route-110",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 139,
-  "position": {
-   "x": 36,
-   "y": 64
-  },
-  "mart": {
-   "name": "Hoenn Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
-  }
- },
- "hoenn-route-104": {
-  "id": "hoenn-route-104",
-  "name": "Route 104",
-  "type": "route",
-  "region": "hoenn",
-  "description": "A route in the Hoenn region.",
-  "routeKey": "hoenn-route-104",
-  "connections": [
-   "hoenn-petalburg-city",
-   "hoenn-rustboro-city",
-   "hoenn-route-105"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "hoenn-petalburg-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 140,
-  "position": {
-   "x": 10,
-   "y": 56
+   "x": 38,
+   "y": 54
   }
  },
  "hoenn-mauville-city": {
@@ -316,10 +530,10 @@
     }
    ]
   },
-  "unlockOrder": 141,
+  "unlockOrder": 148,
   "position": {
-   "x": 36,
-   "y": 46
+   "x": 38,
+   "y": 47
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -340,56 +554,6 @@
      "itemId": "honey"
     }
    ]
-  }
- },
- "hoenn-route-105": {
-  "id": "hoenn-route-105",
-  "name": "Route 105",
-  "type": "route",
-  "region": "hoenn",
-  "description": "A route in the Hoenn region.",
-  "routeKey": "hoenn-route-105",
-  "connections": [
-   "hoenn-route-104",
-   "hoenn-route-106"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "hoenn-route-104",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 142,
-  "position": {
-   "x": 10,
-   "y": 64
-  }
- },
- "hoenn-route-109": {
-  "id": "hoenn-route-109",
-  "name": "Route 109",
-  "type": "route",
-  "region": "hoenn",
-  "description": "A route in the Hoenn region.",
-  "routeKey": "hoenn-route-109",
-  "connections": [
-   "hoenn-slateport-city",
-   "hoenn-route-108"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "hoenn-slateport-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 143,
-  "position": {
-   "x": 36,
-   "y": 73
   }
  },
  "hoenn-route-111": {
@@ -412,182 +576,10 @@
     }
    ]
   },
-  "unlockOrder": 144,
-  "position": {
-   "x": 36,
-   "y": 38
-  }
- },
- "hoenn-route-117": {
-  "id": "hoenn-route-117",
-  "name": "Route 117",
-  "type": "route",
-  "region": "hoenn",
-  "description": "A route in the Hoenn region.",
-  "routeKey": "hoenn-route-117",
-  "connections": [
-   "hoenn-mauville-city",
-   "hoenn-verdanturf-town"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "hoenn-mauville-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 145,
-  "position": {
-   "x": 28,
-   "y": 48
-  }
- },
- "hoenn-route-118": {
-  "id": "hoenn-route-118",
-  "name": "Route 118",
-  "type": "route",
-  "region": "hoenn",
-  "description": "A route in the Hoenn region.",
-  "routeKey": "hoenn-route-118",
-  "connections": [
-   "hoenn-route-119",
-   "hoenn-route-123",
-   "hoenn-mauville-city"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "hoenn-mauville-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 146,
-  "position": {
-   "x": 44,
-   "y": 46
-  }
- },
- "hoenn-route-134": {
-  "id": "hoenn-route-134",
-  "name": "Route 134",
-  "type": "route",
-  "region": "hoenn",
-  "description": "A route in the Hoenn region.",
-  "routeKey": "hoenn-route-134",
-  "connections": [
-   "hoenn-slateport-city",
-   "hoenn-route-133"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "hoenn-slateport-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 147,
-  "position": {
-   "x": 43,
-   "y": 63
-  }
- },
- "hoenn-rustboro-city": {
-  "id": "hoenn-rustboro-city",
-  "name": "Rustboro City",
-  "type": "town",
-  "region": "hoenn",
-  "description": "A town in the Hoenn region.",
-  "connections": [
-   "hoenn-route-104",
-   "hoenn-route-115",
-   "hoenn-route-116",
-   "hoenn-verdanturf-town"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "hoenn-route-104",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 148,
-  "position": {
-   "x": 9,
-   "y": 48
-  },
-  "mart": {
-   "name": "Hoenn Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
-  }
- },
- "hoenn-route-106": {
-  "id": "hoenn-route-106",
-  "name": "Route 106",
-  "type": "route",
-  "region": "hoenn",
-  "description": "A route in the Hoenn region.",
-  "routeKey": "hoenn-route-106",
-  "connections": [
-   "hoenn-route-105",
-   "hoenn-dewford-town"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "hoenn-route-105",
-     "count": 15
-    }
-   ]
-  },
   "unlockOrder": 149,
   "position": {
-   "x": 11,
-   "y": 71
-  }
- },
- "hoenn-route-108": {
-  "id": "hoenn-route-108",
-  "name": "Route 108",
-  "type": "route",
-  "region": "hoenn",
-  "description": "A route in the Hoenn region.",
-  "routeKey": "hoenn-route-108",
-  "connections": [
-   "hoenn-route-107",
-   "hoenn-route-109"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "hoenn-route-109",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 150,
-  "position": {
-   "x": 37,
-   "y": 83
+   "x": 38,
+   "y": 38
   }
  },
  "hoenn-route-112": {
@@ -609,10 +601,53 @@
     }
    ]
   },
+  "unlockOrder": 150,
+  "position": {
+   "x": 29,
+   "y": 41
+  }
+ },
+ "hoenn-lavaridge-town": {
+  "id": "hoenn-lavaridge-town",
+  "name": "Lavaridge Town",
+  "type": "town",
+  "region": "hoenn",
+  "description": "A town in the Hoenn region.",
+  "connections": [
+   "hoenn-route-112"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-112",
+     "count": 15
+    }
+   ]
+  },
   "unlockOrder": 151,
   "position": {
-   "x": 27,
+   "x": 20,
    "y": 40
+  },
+  "mart": {
+   "name": "Hoenn Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
   }
  },
  "hoenn-route-113": {
@@ -636,338 +671,8 @@
   },
   "unlockOrder": 152,
   "position": {
-   "x": 31,
-   "y": 34
-  }
- },
- "hoenn-route-115": {
-  "id": "hoenn-route-115",
-  "name": "Route 115",
-  "type": "route",
-  "region": "hoenn",
-  "description": "A route in the Hoenn region.",
-  "routeKey": "hoenn-route-115",
-  "connections": [
-   "hoenn-rustboro-city",
-   "hoenn-fallarbor-town"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "hoenn-rustboro-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 153,
-  "position": {
-   "x": 11,
-   "y": 39
-  }
- },
- "hoenn-route-116": {
-  "id": "hoenn-route-116",
-  "name": "Route 116",
-  "type": "route",
-  "region": "hoenn",
-  "description": "A route in the Hoenn region.",
-  "routeKey": "hoenn-route-116",
-  "connections": [
-   "hoenn-rustboro-city"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "hoenn-rustboro-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 154,
-  "position": {
-   "x": 15,
-   "y": 46
-  }
- },
- "hoenn-route-119": {
-  "id": "hoenn-route-119",
-  "name": "Route 119",
-  "type": "route",
-  "region": "hoenn",
-  "description": "A route in the Hoenn region.",
-  "routeKey": "hoenn-route-119",
-  "connections": [
-   "hoenn-route-118",
-   "hoenn-fortree-city"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "hoenn-route-118",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 155,
-  "position": {
-   "x": 42,
-   "y": 36
-  }
- },
- "hoenn-route-123": {
-  "id": "hoenn-route-123",
-  "name": "Route 123",
-  "type": "route",
-  "region": "hoenn",
-  "description": "A route in the Hoenn region.",
-  "routeKey": "hoenn-route-123",
-  "connections": [
-   "hoenn-route-118",
-   "hoenn-route-122"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "hoenn-route-118",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 156,
-  "position": {
-   "x": 55,
-   "y": 47
-  }
- },
- "hoenn-route-133": {
-  "id": "hoenn-route-133",
-  "name": "Route 133",
-  "type": "route",
-  "region": "hoenn",
-  "description": "A route in the Hoenn region.",
-  "routeKey": "hoenn-route-133",
-  "connections": [
-   "hoenn-route-132",
-   "hoenn-route-134"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "hoenn-route-134",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 157,
-  "position": {
-   "x": 50,
-   "y": 63
-  }
- },
- "hoenn-verdanturf-town": {
-  "id": "hoenn-verdanturf-town",
-  "name": "Verdanturf Town",
-  "type": "town",
-  "region": "hoenn",
-  "description": "A town in the Hoenn region.",
-  "connections": [
-   "hoenn-route-117",
-   "hoenn-rustboro-city"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "hoenn-rustboro-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 158,
-  "position": {
-   "x": 19,
-   "y": 51
-  },
-  "mart": {
-   "name": "Hoenn Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
-  }
- },
- "hoenn-route-107": {
-  "id": "hoenn-route-107",
-  "name": "Route 107",
-  "type": "route",
-  "region": "hoenn",
-  "description": "A route in the Hoenn region.",
-  "routeKey": "hoenn-route-107",
-  "connections": [
-   "hoenn-route-108",
-   "hoenn-dewford-town"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "hoenn-route-108",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 159,
-  "position": {
-   "x": 18,
-   "y": 76
-  }
- },
- "hoenn-route-122": {
-  "id": "hoenn-route-122",
-  "name": "Route 122",
-  "type": "route",
-  "region": "hoenn",
-  "description": "A route in the Hoenn region.",
-  "routeKey": "hoenn-route-122",
-  "connections": [
-   "hoenn-route-121",
-   "hoenn-route-123"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "hoenn-route-123",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 160,
-  "position": {
-   "x": 56,
-   "y": 39
-  }
- },
- "hoenn-route-132": {
-  "id": "hoenn-route-132",
-  "name": "Route 132",
-  "type": "route",
-  "region": "hoenn",
-  "description": "A route in the Hoenn region.",
-  "routeKey": "hoenn-route-132",
-  "connections": [
-   "hoenn-pacifidlog-town",
-   "hoenn-route-133"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "hoenn-route-133",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 161,
-  "position": {
-   "x": 58,
-   "y": 62
-  }
- },
- "hoenn-dewford-town": {
-  "id": "hoenn-dewford-town",
-  "name": "Dewford Town",
-  "type": "town",
-  "region": "hoenn",
-  "description": "A town in the Hoenn region.",
-  "connections": [
-   "hoenn-route-106",
-   "hoenn-route-107"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "hoenn-route-106",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 162,
-  "position": {
-   "x": 10,
-   "y": 78
-  },
-  "mart": {
-   "name": "Hoenn Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
-  }
- },
- "hoenn-lavaridge-town": {
-  "id": "hoenn-lavaridge-town",
-  "name": "Lavaridge Town",
-  "type": "town",
-  "region": "hoenn",
-  "description": "A town in the Hoenn region.",
-  "connections": [
-   "hoenn-route-112"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "hoenn-route-112",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 163,
-  "position": {
-   "x": 21,
-   "y": 39
-  },
-  "mart": {
-   "name": "Hoenn Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
+   "x": 32,
+   "y": 35
   }
  },
  "hoenn-fallarbor-town": {
@@ -978,65 +683,20 @@
   "description": "A town in the Hoenn region.",
   "connections": [
    "hoenn-route-113",
-   "hoenn-route-114",
-   "hoenn-route-115"
+   "hoenn-route-114"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "hoenn-route-115",
+     "locationId": "hoenn-route-113",
      "count": 15
     }
    ]
   },
-  "unlockOrder": 164,
+  "unlockOrder": 153,
   "position": {
-   "x": 19,
-   "y": 33
-  },
-  "mart": {
-   "name": "Hoenn Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
-  }
- },
- "hoenn-fortree-city": {
-  "id": "hoenn-fortree-city",
-  "name": "Fortree City",
-  "type": "town",
-  "region": "hoenn",
-  "description": "A town in the Hoenn region.",
-  "connections": [
-   "hoenn-route-119",
-   "hoenn-route-120"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "hoenn-route-119",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 165,
-  "position": {
-   "x": 62,
-   "y": 46
+   "x": 24,
+   "y": 35
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -1067,7 +727,8 @@
   "description": "A route in the Hoenn region.",
   "routeKey": "hoenn-route-114",
   "connections": [
-   "hoenn-fallarbor-town"
+   "hoenn-fallarbor-town",
+   "hoenn-route-115"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1077,10 +738,224 @@
     }
    ]
   },
-  "unlockOrder": 166,
+  "unlockOrder": 154,
+  "position": {
+   "x": 16,
+   "y": 35
+  }
+ },
+ "hoenn-route-115": {
+  "id": "hoenn-route-115",
+  "name": "Route 115",
+  "type": "route",
+  "region": "hoenn",
+  "description": "A route in the Hoenn region.",
+  "routeKey": "hoenn-route-115",
+  "connections": [
+   "hoenn-rustboro-city",
+   "hoenn-route-114"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-rustboro-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 155,
+  "position": {
+   "x": 8,
+   "y": 40
+  }
+ },
+ "hoenn-route-116": {
+  "id": "hoenn-route-116",
+  "name": "Route 116",
+  "type": "route",
+  "region": "hoenn",
+  "description": "A route in the Hoenn region.",
+  "routeKey": "hoenn-route-116",
+  "connections": [
+   "hoenn-rustboro-city",
+   "hoenn-verdanturf-town"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-rustboro-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 156,
+  "position": {
+   "x": 16,
+   "y": 46
+  }
+ },
+ "hoenn-verdanturf-town": {
+  "id": "hoenn-verdanturf-town",
+  "name": "Verdanturf Town",
+  "type": "town",
+  "region": "hoenn",
+  "description": "A town in the Hoenn region.",
+  "connections": [
+   "hoenn-route-117",
+   "hoenn-route-116"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-116",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 157,
+  "position": {
+   "x": 23,
+   "y": 50
+  },
+  "mart": {
+   "name": "Hoenn Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "hoenn-route-117": {
+  "id": "hoenn-route-117",
+  "name": "Route 117",
+  "type": "route",
+  "region": "hoenn",
+  "description": "A route in the Hoenn region.",
+  "routeKey": "hoenn-route-117",
+  "connections": [
+   "hoenn-mauville-city",
+   "hoenn-verdanturf-town"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-mauville-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 158,
+  "position": {
+   "x": 30,
+   "y": 48
+  }
+ },
+ "hoenn-route-118": {
+  "id": "hoenn-route-118",
+  "name": "Route 118",
+  "type": "route",
+  "region": "hoenn",
+  "description": "A route in the Hoenn region.",
+  "routeKey": "hoenn-route-118",
+  "connections": [
+   "hoenn-route-119",
+   "hoenn-route-123",
+   "hoenn-mauville-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-mauville-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 159,
+  "position": {
+   "x": 46,
+   "y": 46
+  }
+ },
+ "hoenn-route-119": {
+  "id": "hoenn-route-119",
+  "name": "Route 119",
+  "type": "route",
+  "region": "hoenn",
+  "description": "A route in the Hoenn region.",
+  "routeKey": "hoenn-route-119",
+  "connections": [
+   "hoenn-route-118",
+   "hoenn-fortree-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-118",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 160,
   "position": {
    "x": 44,
-   "y": 55
+   "y": 37
+  }
+ },
+ "hoenn-fortree-city": {
+  "id": "hoenn-fortree-city",
+  "name": "Fortree City",
+  "type": "town",
+  "region": "hoenn",
+  "description": "A town in the Hoenn region.",
+  "connections": [
+   "hoenn-route-119",
+   "hoenn-route-120"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-119",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 161,
+  "position": {
+   "x": 50,
+   "y": 35
+  },
+  "mart": {
+   "name": "Hoenn Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
   }
  },
  "hoenn-route-120": {
@@ -1102,10 +977,10 @@
     }
    ]
   },
-  "unlockOrder": 167,
+  "unlockOrder": 162,
   "position": {
-   "x": 53,
-   "y": 32
+   "x": 60,
+   "y": 38
   }
  },
  "hoenn-route-121": {
@@ -1123,59 +998,15 @@
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "hoenn-route-122",
+     "locationId": "hoenn-route-120",
      "count": 15
     }
    ]
   },
-  "unlockOrder": 168,
+  "unlockOrder": 163,
   "position": {
-   "x": 59,
-   "y": 31
-  }
- },
- "hoenn-pacifidlog-town": {
-  "id": "hoenn-pacifidlog-town",
-  "name": "Pacifidlog Town",
-  "type": "town",
-  "region": "hoenn",
-  "description": "A town in the Hoenn region.",
-  "connections": [
-   "hoenn-route-131",
-   "hoenn-route-132"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "hoenn-route-132",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 169,
-  "position": {
-   "x": 65,
-   "y": 61
-  },
-  "mart": {
-   "name": "Hoenn Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
+   "x": 61,
+   "y": 32
   }
  },
  "hoenn-lilycove-city": {
@@ -1196,10 +1027,10 @@
     }
    ]
   },
-  "unlockOrder": 170,
+  "unlockOrder": 164,
   "position": {
-   "x": 66,
-   "y": 30
+   "x": 70,
+   "y": 32
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -1222,29 +1053,54 @@
    ]
   }
  },
- "hoenn-route-131": {
-  "id": "hoenn-route-131",
-  "name": "Route 131",
+ "hoenn-route-122": {
+  "id": "hoenn-route-122",
+  "name": "Route 122",
   "type": "route",
   "region": "hoenn",
   "description": "A route in the Hoenn region.",
-  "routeKey": "hoenn-route-131",
+  "routeKey": "hoenn-route-122",
   "connections": [
-   "hoenn-route-130",
-   "hoenn-pacifidlog-town"
+   "hoenn-route-121",
+   "hoenn-route-123"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "hoenn-pacifidlog-town",
+     "locationId": "hoenn-route-121",
      "count": 15
     }
    ]
   },
-  "unlockOrder": 171,
+  "unlockOrder": 165,
   "position": {
-   "x": 72,
-   "y": 60
+   "x": 64,
+   "y": 44
+  }
+ },
+ "hoenn-route-123": {
+  "id": "hoenn-route-123",
+  "name": "Route 123",
+  "type": "route",
+  "region": "hoenn",
+  "description": "A route in the Hoenn region.",
+  "routeKey": "hoenn-route-123",
+  "connections": [
+   "hoenn-route-118",
+   "hoenn-route-122"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-118",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 166,
+  "position": {
+   "x": 56,
+   "y": 47
   }
  },
  "hoenn-route-124": {
@@ -1267,35 +1123,10 @@
     }
    ]
   },
-  "unlockOrder": 172,
+  "unlockOrder": 167,
   "position": {
-   "x": 74,
-   "y": 27
-  }
- },
- "hoenn-route-130": {
-  "id": "hoenn-route-130",
-  "name": "Route 130",
-  "type": "route",
-  "region": "hoenn",
-  "description": "A route in the Hoenn region.",
-  "routeKey": "hoenn-route-130",
-  "connections": [
-   "hoenn-route-129",
-   "hoenn-route-131"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "hoenn-route-131",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 173,
-  "position": {
-   "x": 79,
-   "y": 59
+   "x": 81,
+   "y": 33
   }
  },
  "hoenn-mossdeep-city": {
@@ -1317,104 +1148,10 @@
     }
    ]
   },
-  "unlockOrder": 174,
-  "position": {
-   "x": 82,
-   "y": 30
-  },
-  "mart": {
-   "name": "Hoenn Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
-  }
- },
- "hoenn-route-126": {
-  "id": "hoenn-route-126",
-  "name": "Route 126",
-  "type": "route",
-  "region": "hoenn",
-  "description": "A route in the Hoenn region.",
-  "routeKey": "hoenn-route-126",
-  "connections": [
-   "hoenn-sootopolis-city",
-   "hoenn-route-124",
-   "hoenn-route-127"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "hoenn-route-124",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 175,
-  "position": {
-   "x": 74,
-   "y": 38
-  }
- },
- "hoenn-route-129": {
-  "id": "hoenn-route-129",
-  "name": "Route 129",
-  "type": "route",
-  "region": "hoenn",
-  "description": "A route in the Hoenn region.",
-  "routeKey": "hoenn-route-129",
-  "connections": [
-   "hoenn-route-128",
-   "hoenn-route-130"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "hoenn-route-130",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 176,
+  "unlockOrder": 168,
   "position": {
    "x": 87,
-   "y": 58
-  }
- },
- "hoenn-sootopolis-city": {
-  "id": "hoenn-sootopolis-city",
-  "name": "Sootopolis City",
-  "type": "town",
-  "region": "hoenn",
-  "description": "A town in the Hoenn region.",
-  "connections": [
-   "hoenn-route-126"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "hoenn-route-126",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 177,
-  "position": {
-   "x": 82,
-   "y": 36
+   "y": 32
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -1455,87 +1192,59 @@
     }
    ]
   },
-  "unlockOrder": 178,
+  "unlockOrder": 169,
   "position": {
    "x": 86,
-   "y": 25
+   "y": 23
   }
  },
- "hoenn-route-127": {
-  "id": "hoenn-route-127",
-  "name": "Route 127",
+ "hoenn-route-126": {
+  "id": "hoenn-route-126",
+  "name": "Route 126",
   "type": "route",
   "region": "hoenn",
   "description": "A route in the Hoenn region.",
-  "routeKey": "hoenn-route-127",
+  "routeKey": "hoenn-route-126",
   "connections": [
-   "hoenn-mossdeep-city",
-   "hoenn-route-126",
-   "hoenn-route-128"
+   "hoenn-sootopolis-city",
+   "hoenn-route-124",
+   "hoenn-route-127"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "hoenn-mossdeep-city",
+     "locationId": "hoenn-route-124",
      "count": 15
     }
    ]
   },
-  "unlockOrder": 179,
+  "unlockOrder": 170,
   "position": {
-   "x": 89,
-   "y": 43
+   "x": 78,
+   "y": 40
   }
  },
- "hoenn-route-128": {
-  "id": "hoenn-route-128",
-  "name": "Route 128",
-  "type": "route",
-  "region": "hoenn",
-  "description": "A route in the Hoenn region.",
-  "routeKey": "hoenn-route-128",
-  "connections": [
-   "hoenn-ever-grande-city",
-   "hoenn-route-127",
-   "hoenn-route-129",
-   "hoenn-raid",
-   "hoenn-league"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "hoenn-route-129",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 180,
-  "position": {
-   "x": 85,
-   "y": 49
-  }
- },
- "hoenn-ever-grande-city": {
-  "id": "hoenn-ever-grande-city",
-  "name": "Ever Grande City",
+ "hoenn-sootopolis-city": {
+  "id": "hoenn-sootopolis-city",
+  "name": "Sootopolis City",
   "type": "town",
   "region": "hoenn",
   "description": "A town in the Hoenn region.",
   "connections": [
-   "hoenn-route-128"
+   "hoenn-route-126"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "hoenn-route-128",
+     "locationId": "hoenn-route-126",
      "count": 15
     }
    ]
   },
-  "unlockOrder": 181,
+  "unlockOrder": 171,
   "position": {
-   "x": 94,
-   "y": 49
+   "x": 86,
+   "y": 39
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -1558,6 +1267,297 @@
    ]
   }
  },
+ "hoenn-route-127": {
+  "id": "hoenn-route-127",
+  "name": "Route 127",
+  "type": "route",
+  "region": "hoenn",
+  "description": "A route in the Hoenn region.",
+  "routeKey": "hoenn-route-127",
+  "connections": [
+   "hoenn-mossdeep-city",
+   "hoenn-route-126",
+   "hoenn-route-128"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-mossdeep-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 172,
+  "position": {
+   "x": 91,
+   "y": 44
+  }
+ },
+ "hoenn-route-128": {
+  "id": "hoenn-route-128",
+  "name": "Route 128",
+  "type": "route",
+  "region": "hoenn",
+  "description": "A route in the Hoenn region.",
+  "routeKey": "hoenn-route-128",
+  "connections": [
+   "hoenn-ever-grande-city",
+   "hoenn-route-127",
+   "hoenn-route-129"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-127",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 173,
+  "position": {
+   "x": 86,
+   "y": 49
+  }
+ },
+ "hoenn-ever-grande-city": {
+  "id": "hoenn-ever-grande-city",
+  "name": "Ever Grande City",
+  "type": "town",
+  "region": "hoenn",
+  "description": "A town in the Hoenn region.",
+  "connections": [
+   "hoenn-route-128"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-128",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 174,
+  "position": {
+   "x": 19,
+   "y": 65
+  },
+  "mart": {
+   "name": "Hoenn Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "hoenn-route-129": {
+  "id": "hoenn-route-129",
+  "name": "Route 129",
+  "type": "route",
+  "region": "hoenn",
+  "description": "A route in the Hoenn region.",
+  "routeKey": "hoenn-route-129",
+  "connections": [
+   "hoenn-route-128",
+   "hoenn-route-130"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-128",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 175,
+  "position": {
+   "x": 87,
+   "y": 58
+  }
+ },
+ "hoenn-route-130": {
+  "id": "hoenn-route-130",
+  "name": "Route 130",
+  "type": "route",
+  "region": "hoenn",
+  "description": "A route in the Hoenn region.",
+  "routeKey": "hoenn-route-130",
+  "connections": [
+   "hoenn-route-129",
+   "hoenn-route-131"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-129",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 176,
+  "position": {
+   "x": 79,
+   "y": 59
+  }
+ },
+ "hoenn-route-131": {
+  "id": "hoenn-route-131",
+  "name": "Route 131",
+  "type": "route",
+  "region": "hoenn",
+  "description": "A route in the Hoenn region.",
+  "routeKey": "hoenn-route-131",
+  "connections": [
+   "hoenn-route-130",
+   "hoenn-pacifidlog-town"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-130",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 177,
+  "position": {
+   "x": 72,
+   "y": 60
+  }
+ },
+ "hoenn-pacifidlog-town": {
+  "id": "hoenn-pacifidlog-town",
+  "name": "Pacifidlog Town",
+  "type": "town",
+  "region": "hoenn",
+  "description": "A town in the Hoenn region.",
+  "connections": [
+   "hoenn-route-131",
+   "hoenn-route-132"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-131",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 178,
+  "position": {
+   "x": 65,
+   "y": 61
+  },
+  "mart": {
+   "name": "Hoenn Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "hoenn-route-132": {
+  "id": "hoenn-route-132",
+  "name": "Route 132",
+  "type": "route",
+  "region": "hoenn",
+  "description": "A route in the Hoenn region.",
+  "routeKey": "hoenn-route-132",
+  "connections": [
+   "hoenn-pacifidlog-town",
+   "hoenn-route-133"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-pacifidlog-town",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 179,
+  "position": {
+   "x": 58,
+   "y": 61
+  }
+ },
+ "hoenn-route-133": {
+  "id": "hoenn-route-133",
+  "name": "Route 133",
+  "type": "route",
+  "region": "hoenn",
+  "description": "A route in the Hoenn region.",
+  "routeKey": "hoenn-route-133",
+  "connections": [
+   "hoenn-route-132",
+   "hoenn-route-134"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-132",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 180,
+  "position": {
+   "x": 51,
+   "y": 62
+  }
+ },
+ "hoenn-route-134": {
+  "id": "hoenn-route-134",
+  "name": "Route 134",
+  "type": "route",
+  "region": "hoenn",
+  "description": "A route in the Hoenn region.",
+  "routeKey": "hoenn-route-134",
+  "connections": [
+   "hoenn-slateport-city",
+   "hoenn-route-133",
+   "hoenn-raid",
+   "hoenn-league"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-slateport-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 181,
+  "position": {
+   "x": 53,
+   "y": 71
+  }
+ },
  "hoenn-raid": {
   "id": "hoenn-raid",
   "name": "Hoenn Raid Island",
@@ -1566,20 +1566,20 @@
   "description": "A mysterious island where Hoenn's rarest Pokemon dwell.",
   "routeKey": "hoenn-raid",
   "connections": [
-   "hoenn-route-128"
+   "hoenn-route-134"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "hoenn-route-128",
+     "locationId": "hoenn-route-134",
      "count": 20
     }
    ]
   },
   "unlockOrder": 182,
   "position": {
-   "x": 4,
-   "y": 43
+   "x": 51,
+   "y": 53
   }
  },
  "hoenn-league": {
@@ -1589,20 +1589,20 @@
   "region": "hoenn",
   "description": "The Hoenn Pokémon League.",
   "connections": [
-   "hoenn-route-128"
+   "hoenn-route-134"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "hoenn-route-128",
+     "locationId": "hoenn-route-134",
      "count": 20
     }
    ]
   },
   "unlockOrder": 183,
   "position": {
-   "x": 24,
-   "y": 65
+   "x": 63,
+   "y": 67
   }
  }
 }

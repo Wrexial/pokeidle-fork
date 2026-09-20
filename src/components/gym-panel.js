@@ -5,12 +5,13 @@ import { championData, elite4Data, gymLeaderData } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { buildTrainerTeam } from '../game/progression.js'
 
+/** @param {{ onOpenShop: () => void }} props */
 export function GymPanel({ onOpenShop }) {
   const { state, dispatch } = useGame(),
     canFight = state.party.some((member) => member.currentHp > 0),
     isBusy = state.phase === 'evolving' || state.phase === 'healing',
     fightable = canFight && !isBusy,
-    startGymBattle = (member, badgeId, index, badge) => {
+    startGymBattle = /** @param {string} member @param {string} badgeId @param {any[]} index @param {string} badge */ (member, badgeId, index, badge) => {
       fightable &&
         ((state.phase === 'battling' ||
           state.phase === 'victory' ||

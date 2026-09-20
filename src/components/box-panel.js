@@ -8,6 +8,7 @@ import { useGame } from '../game/context.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
 import { PokedexModal } from './pokedex-modal.js'
 
+/** @param {{ inspected: Inspected, setInspected: (value: Inspected) => void, setReleaseConfirm: (value: string | null) => void, dragSource?: 'party' | 'box' | null, boxDragOver?: boolean, boxDragFromIndex?: number | null, boxDropTargetIndex?: number | null, onBoxDragStart?: any, onBoxSlotDragOver?: any, onBoxDragOver?: any, onBoxDrop?: any, onBoxDragLeave?: any, onDrop?: any, onDragEnd?: any }} props */
 export function BoxPanel({
   inspected,
   setInspected,
@@ -29,7 +30,7 @@ export function BoxPanel({
     [showPokedex, setShowPokedex] = React.useState(!1),
     totalPages = Math.max(1, Math.ceil(state.box.length / BOX_PAGE_SIZE)),
     currentPage = Math.min(page, totalPages - 1),
-    toggleInspected = (index) => {
+    toggleInspected = /** @param {string} index */ (index) => {
       ;(setReleaseConfirm(null),
         setInspected(
           inspected && inspected.source === 'box' && inspected.id === index
@@ -108,13 +109,13 @@ export function BoxPanel({
                         onClick: () => toggleInspected(pokemon.id),
                         title: `${pokemon.name} Lv${pokemon.level}`,
                         draggable: isDraggable,
-                        onDragStart: onBoxDragStart ? (event) => onBoxDragStart(event, boxIndex, pokemon.id) : void 0,
-                        onDragOver: onBoxSlotDragOver ? (event) => onBoxSlotDragOver(event, boxIndex) : void 0,
+                        onDragStart: onBoxDragStart ? /** @param {React.DragEvent} event */ (event) => onBoxDragStart(event, boxIndex, pokemon.id) : void 0,
+                        onDragOver: onBoxSlotDragOver ? /** @param {React.DragEvent} event */ (event) => onBoxSlotDragOver(event, boxIndex) : void 0,
                         onDrop,
                         onDragEnd,
                         children: jsx('img', {
                           src: getPokemonSpriteUrl(species.id, !1, pokemon.isShiny),
-                          onError: (event) =>
+                          onError: /** @param {{ target: HTMLImageElement }} event */ (event) =>
                             (event.target.src = getPokemonSpriteFallbackUrl(species.id, !1, pokemon.isShiny)),
                           alt: pokemon.name,
                           style: {
@@ -130,7 +131,7 @@ export function BoxPanel({
                     {
                       className: `box-grid-slot${boxDropTargetIndex === boxIndex && dragSource !== null ? ' drop-target' : ''}`,
                       onDragOver: onBoxSlotDragOver
-                        ? (event) =>
+                        ? /** @param {React.DragEvent} event */ (event) =>
                             onBoxSlotDragOver(
                               event,
                               Math.min(

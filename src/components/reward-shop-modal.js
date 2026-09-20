@@ -5,6 +5,7 @@ import { tokenShopItems } from '../data/items.js'
 import { useGame } from '../game/context.js'
 import { getItemInfo } from '../game/progression.js'
 
+/** @param {{ onClose: () => void }} props */
 export function RewardShopModal({ onClose }) {
   const { state, dispatch } = useGame()
   return jsx('div', {
@@ -12,7 +13,7 @@ export function RewardShopModal({ onClose }) {
     onClick: onClose,
     children: jsxs('div', {
       className: 'battle-info-modal',
-      onClick: (event) => event.stopPropagation(),
+      onClick: /** @param {React.MouseEvent} event */ (event) => event.stopPropagation(),
       children: [
         jsxs('div', {
           className: 'battle-info-header',

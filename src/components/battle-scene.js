@@ -97,7 +97,7 @@ export function BattleScene() {
             onClick: () => setShowInfo(!1),
             children: jsxs('div', {
               className: 'battle-info-modal',
-              onClick: (event) => event.stopPropagation(),
+              onClick: /** @param {React.MouseEvent} event */ (event) => event.stopPropagation(),
               children: [
                 jsxs('div', {
                   className: 'battle-info-header',
@@ -238,7 +238,7 @@ export function BattleScene() {
                 !1,
                 enemyPokemon.isShiny
               ),
-              onError: (event) => (event.target.src = getPokemonSpriteFallbackUrl(
+              onError: /** @param {{ target: HTMLImageElement }} event */ (event) => (event.target.src = getPokemonSpriteFallbackUrl(
                 pokemonSpecies[enemyPokemon.speciesKey].id,
                 !1,
                 enemyPokemon.isShiny
@@ -255,7 +255,7 @@ export function BattleScene() {
           }),
           jsx('img', {
             src: getPokemonSpriteUrl(playerSpecies.id, !0, state.playerPokemon?.isShiny),
-            onError: (event) => (event.target.src = getPokemonSpriteFallbackUrl(playerSpecies.id, !0, state.playerPokemon?.isShiny)),
+            onError: /** @param {{ target: HTMLImageElement }} event */ (event) => (event.target.src = getPokemonSpriteFallbackUrl(playerSpecies.id, !0, state.playerPokemon?.isShiny)),
             alt: playerPokemon.name,
           }),
         ],

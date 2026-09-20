@@ -10,6 +10,7 @@ import { ExpBar } from './exp-bar.js'
 import { HpBar } from './hp-bar.js'
 import { StatsPanel } from './stats-panel.js'
 
+/** @param {{ inspected: Inspected, setInspected: (value: Inspected) => void, releaseConfirm: string | null, setReleaseConfirm: (value: string | null) => void, dragSource?: 'party' | 'box' | null, dragFromIndex?: number | null, dropTargetIndex?: number | null, dropPosition?: 'above' | 'below' | null, onDragStart?: any, onDragOver?: any, onDrop?: any, onDragEnd?: any }} props */
 export function PartyPanel({
   inspected,
   setInspected,
@@ -37,7 +38,7 @@ export function PartyPanel({
       : ((inspectedIndex = state.box.findIndex((memberId) => memberId.id === inspected.id)),
         inspectedIndex >= 0 && ((inspectedPokemon = state.box[inspectedIndex]), (inspectedSource = 'box'))))
   const handleSelect = React.useCallback(
-      (partyIndex) => {
+      /** @param {string} partyIndex */ (partyIndex) => {
         ;(setReleaseConfirm(null),
           setInspected(
             inspected && inspected.source === 'party' && inspected.id === partyIndex
@@ -120,7 +121,7 @@ export function PartyPanel({
         }
     }, [inspectedPokemon, state.phase, state.inventory]),
     handleEvolve = React.useCallback(
-      (evolutionEntry) => {
+      /** @param {number} evolutionEntry */ (evolutionEntry) => {
         if (!inspectedPokemon || !evolutionInfo) return
         const evolution = evolutionInfo.entries[evolutionEntry]
         evolution.canEvolve &&
@@ -208,15 +209,15 @@ export function PartyPanel({
                       className: `party-slot${isFirst ? ' active' : ''}${isInspected ? ' inspected' : ''}${isDraggingIndex ? ' dragging' : ''}${isBoxDropTarget ? ' drop-target' : ''}`,
                       onClick: () => handleSelect(member.id),
                       draggable: isDraggable,
-                      onDragStart: onDragStart ? (event) => onDragStart(event, index, member.id) : void 0,
-                      onDragOver: onDragOver ? (event) => onDragOver(event, index) : void 0,
+                      onDragStart: onDragStart ? /** @param {React.DragEvent} event */ (event) => onDragStart(event, index, member.id) : void 0,
+                      onDragOver: onDragOver ? /** @param {React.DragEvent} event */ (event) => onDragOver(event, index) : void 0,
                       onDrop,
                       onDragEnd,
                       children: [
                         jsx('img', {
                           className: 'party-sprite',
                           src: getPokemonSpriteUrl(species.id, !1, member.isShiny),
-                          onError: (event) =>
+                          onError: /** @param {{ target: HTMLImageElement }} event */ (event) =>
                             (event.target.src = getPokemonSpriteFallbackUrl(species.id, !1, member.isShiny)),
                           alt: member.name,
                         }),

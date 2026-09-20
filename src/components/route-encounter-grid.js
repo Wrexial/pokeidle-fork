@@ -8,6 +8,7 @@ import { PokeballIcon } from './pokeball-icon.js'
 import { EncounterDetailPanel } from './encounter-detail-panel.js'
 import { PokedexTile } from './pokedex-tile.js'
 
+/** @param {{ routeKey: string, encounters: EncounterEntry[], onOpenCatchSettings: () => void, forceRarity?: string }} props */
 export function RouteEncounterGrid({
   routeKey,
   encounters,
@@ -22,7 +23,7 @@ export function RouteEncounterGrid({
     totalWeight = React.useMemo(() => encounters.reduce((accumulator, encounter) => accumulator + encounter.weight, 0), [encounters]),
     sortedEncounters = React.useMemo(() => [...encounters].sort((left, right) => right.weight - left.weight), [encounters]),
     activeEffectMap = React.useMemo(() => {
-      const effectMap = {}
+      const effectMap = /** @type {Record<string, { repel: boolean, honey: boolean }>} */ ({})
       for (const effect of state.activeEffects)
         (effect.type === 'repel' || effect.type === 'honey') &&
           effect.routeKey === routeKey &&
@@ -36,7 +37,7 @@ export function RouteEncounterGrid({
       return effectMap
     }, [state.activeEffects, routeKey]),
     getStatus = React.useCallback(
-      (speciesKey) =>
+      /** @param {string} speciesKey */ (speciesKey) =>
         state.pokedexCaught.includes(speciesKey)
           ? 'caught'
           : state.pokedexSeen.includes(speciesKey)
@@ -45,7 +46,7 @@ export function RouteEncounterGrid({
       [state.pokedexSeen, state.pokedexCaught]
     ),
     handleTileClick = React.useCallback(
-      (encounter) => {
+      /** @param {string} encounter */ (encounter) => {
         if (applyingItem) {
           if (getStatus(encounter) === 'unseen') return
           const weightedRate = state.inventory[applyingItem] ?? 0

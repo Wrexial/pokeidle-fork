@@ -3,6 +3,7 @@
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 
+/** @param {{ itemId: string, name: string, description: string, price: number, owned: number, money: number, qtyMode: number | 'max', dispatch: (action: GameAction) => void }} props */
 export function ItemShopRow({
   itemId,
   name,

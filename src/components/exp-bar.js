@@ -4,6 +4,7 @@ import { jsx, jsxs } from 'react/jsx-runtime'
 import { pokemonSpecies } from '../data/gameData.js'
 import { calculateRequiredExperience } from '../game/pokemon.js'
 
+/** @param {{ speciesKey: string, level: number, totalExp: number }} props */
 export function ExpBar({ speciesKey, level, totalExp }) {
   const species = pokemonSpecies[speciesKey]
   if (!species) return null

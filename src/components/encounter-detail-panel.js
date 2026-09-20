@@ -103,7 +103,7 @@ export const EncounterDetailPanel = React.memo(
             jsx('img', {
               className: `stats-panel-sprite ${status}`,
               src: getPokemonSpriteUrl(species.id),
-              onError: (event) => (event.target.src = getPokemonSpriteFallbackUrl(species.id)),
+              onError: /** @param {{ target: HTMLImageElement }} event */ (event) => (event.target.src = getPokemonSpriteFallbackUrl(species.id)),
               alt: status === 'unseen' ? '???' : species.name,
             }),
             jsxs('div', {

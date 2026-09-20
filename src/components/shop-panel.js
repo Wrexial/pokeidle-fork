@@ -8,6 +8,7 @@ import { isActiveEffectItem } from '../game/progression.js'
 import { BallShopRow } from './ball-shop-row.js'
 import { ItemShopRow } from './item-shop-row.js'
 
+/** @param {{ shopDef: { name: string, items: { itemId: string, unlockWildBattlesWon?: number }[] } }} props */
 export function ShopPanel({ shopDef }) {
   const { state, dispatch } = useGame(),
     [qtyMode, setQtyMode] = React.useState(/** @type {number | 'max'} */ (1))

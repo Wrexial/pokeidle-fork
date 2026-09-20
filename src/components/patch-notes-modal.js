@@ -19,7 +19,7 @@ export function PatchNotesModal() {
     onClick: dismiss,
     children: jsxs('div', {
       className: 'patch-notes-modal',
-      onClick: (event) => event.stopPropagation(),
+      onClick: /** @param {React.MouseEvent} event */ (event) => event.stopPropagation(),
       children: [
         jsxs('div', {
           className: 'battle-info-header',

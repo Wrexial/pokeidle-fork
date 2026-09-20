@@ -4,7 +4,9 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { formatCooldown } from '../game/progression.js'
 
-export function MapNode({
+/** @param {{ location: MapLocation, isCurrent: boolean, isUnlocked: boolean, isClickable: boolean, onClick: () => void, cooldownEnd?: number }} props */
+export
+function MapNode({
   location,
   isCurrent,
   isUnlocked,

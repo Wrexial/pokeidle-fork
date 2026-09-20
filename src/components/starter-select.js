@@ -43,7 +43,7 @@ export function StarterSelect() {
               children: [
                 jsx('img', {
                   src: getPokemonSpriteUrl(species.id),
-                  onError: (event) => (event.target.src = getPokemonSpriteFallbackUrl(species.id)),
+                  onError: /** @param {React.SyntheticEvent} event */ (event) => ((/** @type {HTMLImageElement} */ (event.target)).src = getPokemonSpriteFallbackUrl(species.id)),
                   alt: species.name,
                   className: 'starter-sprite',
                 }),

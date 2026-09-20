@@ -1,5 +1,6 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
+/** @type {Record<string, string>} */
 export const moveCategoryIcons = {
   physical: '✴',
   special: '◎',

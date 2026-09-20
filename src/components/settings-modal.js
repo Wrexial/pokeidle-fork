@@ -4,6 +4,7 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { SAVE_KEY_ALT } from '../data/config.js'
 
+/** @param {{ onClose: () => void }} props */
 export function SettingsModal({ onClose }) {
   const [confirming, setConfirming] = React.useState(!1)
   function resetSave() {
@@ -14,7 +15,7 @@ export function SettingsModal({ onClose }) {
     onClick: onClose,
     children: jsxs('div', {
       className: 'battle-info-modal',
-      onClick: (event) => event.stopPropagation(),
+      onClick: /** @param {React.MouseEvent} event */ (event) => event.stopPropagation(),
       children: [
         jsxs('div', {
           className: 'battle-info-header',

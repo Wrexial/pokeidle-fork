@@ -2,6 +2,7 @@
 
 import { jsx, jsxs } from 'react/jsx-runtime'
 
+/** @param {{ current: number, max: number }} props */
 export function HpBar({ current, max }) {
   const percent = Math.max(0, Math.min(100, (current / max) * 100)),
     barColor = percent > 50 ? '#30c855' : percent > 20 ? '#e8c030' : '#e04038'

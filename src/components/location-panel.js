@@ -8,6 +8,7 @@ import { useGame } from '../game/context.js'
 import { RouteEncounterGrid } from './route-encounter-grid.js'
 import { ShopPanel } from './shop-panel.js'
 
+/** @param {{ onOpenCatchSettings: () => void }} props */
 export function LocationPanel({ onOpenCatchSettings }) {
   const { state, dispatch } = useGame(),
     location = mapData[state.currentLocation],

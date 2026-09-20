@@ -4,6 +4,7 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { pokeballColors } from '../data/ui.js'
 
+/** @param {{ ballId: string, size?: number, disabled?: boolean }} props */
 export function PokeballIcon({ ballId, size = 10, disabled }) {
   const clipId = React.useId(),
     colors = pokeballColors[ballId]

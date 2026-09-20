@@ -80,7 +80,7 @@ export function MobileTabs() {
         }
     }, [boxPokemon, state.phase, state.inventory]),
     handleEvolve = React.useCallback(
-      (evolutionEntry) => {
+      /** @param {any} evolutionEntry */ (evolutionEntry) => {
         if (!boxPokemon || !evolutionInfo) return
         const evolution = evolutionInfo.entries[evolutionEntry]
         evolution.canEvolve &&

@@ -3,6 +3,7 @@
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { HpBar } from './hp-bar.js'
 
+/** @param {{ pokemon: BattlePokemon }} props */
 export function EnemyInfoBox({ pokemon }) {
   return jsxs('div', {
     className: 'info-box',

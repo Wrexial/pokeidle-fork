@@ -199,13 +199,14 @@ the code references keys and ids directly, and cross-file references
   is `data → game/pokemon|combat → game/progression → game/catching → game/reducer
   → game/context → hooks → components/* → main`.
 - Each UI component is its own file under `src/components/` (kebab-case).
-- TypeScript runs in check-JS mode with **`strictNullChecks` on**: `npm run
-  typecheck` must stay at 0 errors. `noImplicitAny` is still off (would be ~340
-  issues); core shapes (`Pokemon`, `Move`, `GameState`, `GameAction`) live in
-  `src/types.d.ts`.
-- `React.memo(function ({...}))` needs a `@param` for its props (otherwise TS
-  infers `{}`); `useRef(null)`/`useState(null)` should be given a `@type` cast so
-  `.current` / setters are typed.
+- TypeScript runs in check-JS mode with **`strict: true`**: `npm run typecheck`
+  must stay at 0 errors. Core shapes (`Pokemon`, `BattlePokemon`, `Move`,
+  `Species`, `GameState`, `GameAction`, `MapLocation`, …) live in
+  `src/types.d.ts`; data tables are typed where they are declared.
+- JSDoc gotchas: `React.memo(function ({...}))` needs a `@param` for its props
+  (otherwise TS infers `{}`); `useRef(null)`/`useState(null)` need a `@type`
+  cast; image `onError` handlers are typed `@param {{ target: HTMLImageElement }}
+  event`; arrow params can be annotated inline (`/** @param {T} x */ (x) => …`).
 - All identifiers are descriptive (top-level, params, locals, and nested
   block/callback bindings). Short names only remain where they read naturally
   (`id`, `ms`, `item`, `rule`, `key`, `type`, …).

@@ -18,10 +18,10 @@ export function BagPanel() {
     nextTab = () => {
       ;(setTabIndex((tabIndex + 1) % bagCategories.length), setSelectedItem(null))
     },
-    toggleItem = (itemId) => {
+    toggleItem = /** @param {string} itemId */ (itemId) => {
       setSelectedItem((quantity) => (quantity === itemId ? null : itemId))
     },
-    useItem = (itemId) => {
+    useItem = /** @param {string} itemId */ (itemId) => {
       isActiveEffectItem(itemId) &&
         itemId === 'expShare' &&
         dispatch({

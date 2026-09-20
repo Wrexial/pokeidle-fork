@@ -11,6 +11,7 @@ export function TownMap() {
   const { state, dispatch } = useGame(),
     { currentLocation, unlockedLocations } = state,
     currentLocationData = mapData[currentLocation]
+  /** @param {string} location */
   function travelTo(location) {
     if (location === 'raidIsland') {
       if (state.raidCooldownEnd && Date.now() < state.raidCooldownEnd) return

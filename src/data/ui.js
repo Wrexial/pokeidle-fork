@@ -2,6 +2,7 @@
 
 export const SPEED_OPTIONS = [1, 2, 5, 25]
 
+/** @type {Record<string, string>} */
 export let locationImages = {
     route1: '/backgrounds/grassland.png',
     route2: '/backgrounds/grassland.png',
@@ -48,6 +49,7 @@ export const MOBILE_BREAKPOINT = 768
 
 export const DESIGN_WIDTH = 560
 
+/** @type {Record<string, string>} */
 export const statBarColors = {
     hp: '#60a040',
     attack: '#c86828',
@@ -72,6 +74,7 @@ export const initialDragState = {
   droppedOnBoxContainer: !1,
 }
 
+/** @type {Record<string, string>} */
 export const rarities = {
     common: 'Common',
     uncommon: 'Uncommon',
@@ -80,6 +83,7 @@ export const rarities = {
     ultra_rare: 'Ultra Rare',
   }
 
+/** @type {Record<string, { top: string, bottom: string, ring: string, dot: string }>} */
 export const pokeballColors = {
     pokeball: {
       top: '#c83030',

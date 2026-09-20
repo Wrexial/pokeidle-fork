@@ -8,10 +8,11 @@ import { useGame } from '../game/context.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
 import { PokedexTile } from './pokedex-tile.js'
 
+/** @param {{ onClose: () => void }} props */
 export function PokedexModal({ onClose }) {
   const { state } = useGame(),
     [selected, setSelected] = React.useState(/** @type {string | null} */ (null)),
-    getStatus = (speciesKey) =>
+    getStatus = /** @param {string} speciesKey */ (speciesKey) =>
       state.pokedexCaught.includes(speciesKey)
         ? 'caught'
         : state.pokedexSeen.includes(speciesKey)
@@ -61,7 +62,7 @@ export function PokedexModal({ onClose }) {
     onClick: onClose,
     children: jsxs('div', {
       className: 'pokedex-modal',
-      onClick: (event) => event.stopPropagation(),
+      onClick: /** @param {React.MouseEvent} event */ (event) => event.stopPropagation(),
       children: [
         jsxs('div', {
           className: 'pokedex-modal-header',
@@ -113,7 +114,7 @@ export function PokedexModal({ onClose }) {
                   jsx('img', {
                     className: `stats-panel-sprite ${selectedStatus}`,
                     src: getPokemonSpriteUrl(selectedSpecies.id),
-                    onError: (event) => (event.target.src = getPokemonSpriteFallbackUrl(selectedSpecies.id)),
+                    onError: /** @param {{ target: HTMLImageElement }} event */ (event) => (event.target.src = getPokemonSpriteFallbackUrl(selectedSpecies.id)),
                     alt: selectedStatus === 'unseen' ? '???' : selectedSpecies.name,
                   }),
                   jsxs('div', {

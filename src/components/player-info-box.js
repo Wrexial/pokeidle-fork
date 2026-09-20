@@ -4,6 +4,7 @@ import { jsx, jsxs } from 'react/jsx-runtime'
 import { ExpBar } from './exp-bar.js'
 import { HpBar } from './hp-bar.js'
 
+/** @param {{ pokemon: Pokemon }} props */
 export function PlayerInfoBox({ pokemon }) {
   return jsxs('div', {
     className: 'info-box',

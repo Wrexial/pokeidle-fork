@@ -3,6 +3,7 @@
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { useTypewriter } from '../hooks.js'
 
+/** @param {{ event: any, speed: number, isAtTown: boolean }} props */
 export function BattleTextBox({ event, speed, isAtTown }) {
   const charDelay = Math.max(5, 30 / speed),
     defaultMessage = isAtTown ? 'Looking for trainers...' : 'Searching for wild Pokémon...',

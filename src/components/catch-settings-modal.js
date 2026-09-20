@@ -19,7 +19,7 @@ export const CatchSettingsModal = React.memo(
       enabledBalls = baseRule.enabledBalls,
       levelThreshold = baseRule.levelThreshold,
       setMode = React.useCallback(
-        (newMode) => {
+        /** @param {string} newMode */ (newMode) => {
           for (const encounter of encounters) {
             const rule = getCatchRule(state, routeKey, encounter.speciesKey)
             dispatch({
@@ -38,7 +38,7 @@ export const CatchSettingsModal = React.memo(
         [state, routeKey, encounters, dispatch]
       ),
       setLevelThreshold = React.useCallback(
-        (event) => {
+        /** @param {React.ChangeEvent<HTMLInputElement>} event */ (event) => {
           const newLevelThreshold = Math.max(1, Math.min(100, Number(event.target.value) || 1))
           for (const encounter of encounters) {
             const rule = getCatchRule(state, routeKey, encounter.speciesKey)
@@ -58,7 +58,7 @@ export const CatchSettingsModal = React.memo(
         [state, routeKey, encounters, dispatch]
       ),
       toggleBall = React.useCallback(
-        (ballId) => {
+        /** @param {string} ballId */ (ballId) => {
           for (const encounter of encounters) {
             const rule = getCatchRule(state, routeKey, encounter.speciesKey),
               currentBalls = rule.enabledBalls
@@ -80,7 +80,7 @@ export const CatchSettingsModal = React.memo(
         [state, routeKey, encounters, dispatch]
       ),
       toggleSpecies = React.useCallback(
-        (speciesKey) => {
+        /** @param {string} speciesKey */ (speciesKey) => {
           const rule = getCatchRule(state, routeKey, speciesKey)
           dispatch({
             type: 'SET_CATCH_RULE',
@@ -119,7 +119,7 @@ export const CatchSettingsModal = React.memo(
       onClick: onClose,
       children: jsxs('div', {
         className: 'catch-modal',
-        onClick: (event) => event.stopPropagation(),
+        onClick: /** @param {React.MouseEvent} event */ (event) => event.stopPropagation(),
         children: [
           jsxs('div', {
             className: 'catch-modal-header',
@@ -177,7 +177,7 @@ export const CatchSettingsModal = React.memo(
                           onChange: setLevelThreshold,
                           min: 1,
                           max: 100,
-                          onClick: (event) => event.stopPropagation(),
+                          onClick: /** @param {React.MouseEvent} event */ (event) => event.stopPropagation(),
                         }),
                     ],
                   },
@@ -253,7 +253,7 @@ export const CatchSettingsModal = React.memo(
                     jsx('img', {
                       className: 'catch-modal-species-sprite',
                       src: getPokemonSpriteUrl(species.id),
-                      onError: (event) => (event.target.src = getPokemonSpriteFallbackUrl(species.id)),
+                      onError: /** @param {{ target: HTMLImageElement }} event */ (event) => (event.target.src = getPokemonSpriteFallbackUrl(species.id)),
                       alt: species.name,
                     }),
                     jsx('span', {

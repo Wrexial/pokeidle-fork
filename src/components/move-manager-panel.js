@@ -7,6 +7,7 @@ import { moveData, pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { getFamilyLearnset } from '../game/pokemon.js'
 
+/** @param {{ onClose: () => void }} props */
 export function MoveManagerPanel({ onClose }) {
   const { state, dispatch } = useGame(),
     pokemon = /** @type {Pokemon} */ (state.playerPokemon),
@@ -14,6 +15,7 @@ export function MoveManagerPanel({ onClose }) {
     [moves, setMoves] = React.useState([...pokemon.moves]),
     availableMoves = getFamilyLearnset(pokemon.speciesKey, pokemon.level),
     species = pokemonSpecies[pokemon.speciesKey]
+  /** @param {string} moveId */
   function toggleMove(moveId) {
     moves.includes(moveId)
       ? moves.length > 1 && setMoves(moves.filter((existingMoveId) => existingMoveId !== moveId))
@@ -37,7 +39,7 @@ export function MoveManagerPanel({ onClose }) {
     onClick: onClose,
     children: jsxs('div', {
       className: 'move-panel',
-      onClick: (event) => event.stopPropagation(),
+      onClick: /** @param {React.MouseEvent} event */ (event) => event.stopPropagation(),
       children: [
         jsxs('div', {
           className: 'move-panel-header',

@@ -33,7 +33,8 @@ export function PartyBoxPanel() {
         setBoxDragIndex(null),
         setBoxDropTargetIndex(null))
     }, []),
-    handlePartyDragStart = React.useCallback((event, fromIndex, pokemonId) => {
+    handlePartyDragStart = React.useCallback(
+      /** @param {React.DragEvent} event @param {number} fromIndex @param {string} pokemonId */ (event, fromIndex, pokemonId) => {
       ;((event.dataTransfer.effectAllowed = 'move'),
         event.dataTransfer.setData('text/plain', String(fromIndex)),
         setPartyDragIndex(fromIndex),
@@ -45,7 +46,8 @@ export function PartyBoxPanel() {
           pokemonId,
         }))
     }, []),
-    handleBoxDragStart = React.useCallback((event, fromIndex, pokemonId) => {
+    handleBoxDragStart = React.useCallback(
+      /** @param {React.DragEvent} event @param {number} fromIndex @param {string} pokemonId */ (event, fromIndex, pokemonId) => {
       ;((event.dataTransfer.effectAllowed = 'move'),
         event.dataTransfer.setData('text/plain', String(fromIndex)),
         setBoxDragIndex(fromIndex),
@@ -57,7 +59,8 @@ export function PartyBoxPanel() {
           pokemonId,
         }))
     }, []),
-    handlePartyDragOver = React.useCallback((event, targetIndex) => {
+    handlePartyDragOver = React.useCallback(
+      /** @param {React.DragEvent} event @param {number} targetIndex */ (event, targetIndex) => {
       ;(event.preventDefault(), (event.dataTransfer.dropEffect = 'move'))
       const rect = event.currentTarget.getBoundingClientRect(),
         midpoint = rect.top + rect.height / 2,
@@ -71,7 +74,8 @@ export function PartyBoxPanel() {
         (dragRef.current.position = position),
         (dragRef.current.droppedOnBoxContainer = !1))
     }, []),
-    handleBoxSlotDragOver = React.useCallback((event, targetIndex) => {
+    handleBoxSlotDragOver = React.useCallback(
+      /** @param {React.DragEvent} event @param {number} targetIndex */ (event, targetIndex) => {
       ;(event.preventDefault(),
         event.stopPropagation(),
         (event.dataTransfer.dropEffect = 'move'),
@@ -83,7 +87,8 @@ export function PartyBoxPanel() {
         (dragRef.current.targetIndex = targetIndex),
         (dragRef.current.droppedOnBoxContainer = !1))
     }, []),
-    preventDefault = React.useCallback((event) => {
+    preventDefault = React.useCallback(
+      /** @param {React.DragEvent} event */ (event) => {
       event.preventDefault()
     }, []),
     handleDrop = React.useCallback(() => {
@@ -155,7 +160,8 @@ export function PartyBoxPanel() {
       }
       resetDrag()
     }, [state.party.length, state.box, dispatch, resetDrag]),
-    handleBoxDragOver = React.useCallback((event) => {
+    handleBoxDragOver = React.useCallback(
+      /** @param {React.DragEvent} event */ (event) => {
       ;(event.preventDefault(),
         (event.dataTransfer.dropEffect = 'move'),
         dragRef.current.source === 'party' &&
@@ -164,7 +170,8 @@ export function PartyBoxPanel() {
           (dragRef.current.target = 'box'),
           (dragRef.current.targetIndex = null)))
     }, []),
-    handleBoxDrop = React.useCallback((event) => {
+    handleBoxDrop = React.useCallback(
+      /** @param {React.DragEvent} event */ (event) => {
       event.preventDefault()
     }, []),
     handleBoxDragLeave = React.useCallback(() => {

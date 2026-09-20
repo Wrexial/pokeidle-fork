@@ -4,6 +4,7 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { PokeballIcon } from './pokeball-icon.js'
 
+/** @param {{ itemId: string, ballId: string, name: string, description: string, price: number, owned: number, money: number, qtyMode: number | 'max', dispatch: (action: GameAction) => void }} props */
 export function BallShopRow({
   itemId,
   ballId,

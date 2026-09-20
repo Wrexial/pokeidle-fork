@@ -73,6 +73,7 @@ export const bagCategories = [
     },
   ]
 
+/** @type {Record<string, { id: string, name: string, description: string }>} */
 export const evolutionItems = {
     thunderStone: {
       id: 'thunderStone',
@@ -137,6 +138,7 @@ export const tokenShopItems = [
     },
   ]
 
+/** @type {Record<string, { name: string, items: { itemId: string, unlockWildBattlesWon?: number }[] }>} */
 export const martShopItems = {
     viridianCity: {
       name: 'Viridian Mart',

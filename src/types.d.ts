@@ -62,6 +62,8 @@ type Pokemon = BattlePokemon & {
   isShiny: boolean
 }
 
+type Inspected = { source: string; id: string } | null
+
 type ActiveItem = {
   id: string
   name: string

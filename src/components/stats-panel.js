@@ -6,6 +6,7 @@ import { statBarColors } from '../data/ui.js'
 import { moveData, pokemonSpecies } from '../data/gameData.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
 
+/** @param {{ pokemon: Pokemon, source: 'party' | 'box', partyLength: number, onAction: () => void, onClose: () => void, evolutionInfo?: { entries: { targetName: string, canEvolve: boolean, requirementLabel: string, targetKey: string, itemId?: string }[] } | null, onEvolve?: (index: number) => void, onRelease?: () => void, canRelease?: boolean }} props */
 export function StatsPanel({
   pokemon,
   source,
@@ -102,7 +103,7 @@ export function StatsPanel({
           jsx('img', {
             className: 'stats-panel-sprite',
             src: getPokemonSpriteUrl(species.id, !1, pokemon.isShiny),
-            onError: (event) => (event.target.src = getPokemonSpriteFallbackUrl(species.id, !1, pokemon.isShiny)),
+            onError: /** @param {{ target: HTMLImageElement }} event */ (event) => (event.target.src = getPokemonSpriteFallbackUrl(species.id, !1, pokemon.isShiny)),
             alt: pokemon.name,
           }),
           jsxs('div', {

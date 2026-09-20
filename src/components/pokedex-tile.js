@@ -41,7 +41,7 @@ export let PokedexTile = React.memo(
             jsx('img', {
               className: `pokedex-tile-sprite ${status}`,
               src: getPokemonSpriteUrl(species.id),
-              onError: (event) => (event.target.src = getPokemonSpriteFallbackUrl(species.id)),
+              onError: /** @param {{ target: HTMLImageElement }} event */ (event) => (event.target.src = getPokemonSpriteFallbackUrl(species.id)),
               alt: status === 'unseen' ? '???' : species.name,
               loading: 'lazy',
             }),

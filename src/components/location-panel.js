@@ -19,7 +19,8 @@ export function LocationPanel({ onOpenCatchSettings }) {
         return (
           unlockRule.battlesAtLocation !== void 0 ||
           unlockRule.badgesRequired !== void 0 ||
-          unlockRule.championDefeated
+          unlockRule.championDefeated ||
+          unlockRule.requires !== void 0
         )
       })
       .sort((left, right) => left.unlockOrder - right.unlockOrder)[0],
@@ -140,9 +141,9 @@ export function LocationPanel({ onOpenCatchSettings }) {
                   children: 'Trainer battles',
                 }),
               }),
-              martShopItems[state.currentLocation] &&
+              (martShopItems[state.currentLocation] || location.mart) &&
                 jsx(ShopPanel, {
-                  shopDef: martShopItems[state.currentLocation],
+                  shopDef: martShopItems[state.currentLocation] || location.mart,
                 }),
             ],
           }),
@@ -183,6 +184,15 @@ export function LocationPanel({ onOpenCatchSettings }) {
                   required: 1,
                   met: state.championDefeated,
                 }),
+              unlockRule.requires &&
+                unlockRule.requires.forEach((requiredId) =>
+                  requirements.push({
+                    label: `Reach ${mapData[requiredId]?.name ?? requiredId}`,
+                    current: state.unlockedLocations.includes(requiredId) ? 1 : 0,
+                    required: 1,
+                    met: state.unlockedLocations.includes(requiredId),
+                  })
+                ),
               jsxs('div', {
                 className: 'location-next-unlock',
                 children: [

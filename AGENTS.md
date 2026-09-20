@@ -165,6 +165,7 @@ These are loaded by `assets/gameDataInjector.js` (`key` → file):
 | `gymLeaderData` | `gym-leader-data.json` |
 | `elite4Data` | `elite-4-data.json` |
 | `championData` | `champion-data.json` |
+| `regions` | `regions.json` |
 
 **Watch out:** `move-data.json` and `move-learnsets.json` are *not* loaded by
 the injector — they are older/smaller files. The live move data is
@@ -185,7 +186,13 @@ Data conventions:
   ```
 - Learnsets map `species -> [[level, moveKey], ...]`.
 - Some special/placeholder forms use `"id": 0` intentionally (see commit
-  "All id's now 0 for special pokemon").
+  "All id's now 0 for special pokemon"). Region wild encounters only use species
+  with `id > 0` (forms with ids above 1025 are excluded).
+- `map-data.json` locations carry a `region` id; wild routes also reference an
+  `encounter-data.json` bucket via `routeKey`. Unlock rules support
+  `battlesAtLocation`, `badgesRequired`, `championDefeated`, and `requires`
+  (a list of locations that must already be unlocked — resolved to a fixpoint in
+  `computeUnlockedLocations`).
 - Sprites are referenced by that `id`; a missing `.gif` falls back to the
   static `.png` (see commit "Fallback to static img").
 
@@ -227,6 +234,11 @@ One-off scripts used to build the data JSON (not run during dev/build):
   (need `requests`, `beautifulsoup4` in `.venv`).
 - `scrape_pokemondb.cjs`, `download_pokemon_sprites.cjs`, `extract_data.cjs` —
   Node scripts.
+- `generate-regions.cjs` — generates the non-Kanto region content (towns, wild
+  routes, encounters, trainers, marts) for generations 2-9 from
+  `pokemon-species.json` and merges it into `map-data.json` /
+  `encounter-data.json` / `trainer-data.json`. Idempotent — safe to re-run,
+  and it tags Kanto locations with `region: "kanto"`.
 - `RawMoveData`, `index-backup.js` — large reference/backup data; leave alone.
 - `*.md` in `tools/` (`SUMMARY.md`, `DATA_INTEGRATION.md`,
   `REFACTORING_GUIDE.md`, `QUICKSTART_DATA_INTEGRATION.md`) — historical design

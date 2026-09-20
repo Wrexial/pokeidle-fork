@@ -5,7 +5,7 @@ import { createPortal } from 'react-dom'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { moveCategoryIcons } from '../data/moves.js'
 import { locationImages } from '../data/ui.js'
-import { mapData, moveData, pokemonSpecies } from '../data/gameData.js'
+import { catchableSpeciesCount, mapData, moveData, pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { getBossTrainerSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, getTrainerSpriteUrl } from '../game/pokemon.js'
 import { EnemyInfoBox } from './enemy-info-box.js'
@@ -23,7 +23,7 @@ export function BattleScene() {
     [showSettings, setShowSettings] = React.useState(!1),
     { state, dispatch } = useGame(),
     { playerPokemon, enemyPokemon, battleEvents } = state,
-    catchableCount = React.useMemo(() => 151, []), //Object.keys(pokemonSpecies).length
+    catchableCount = catchableSpeciesCount,
     isDexComplete = state.pokedexCaught.length >= catchableCount
   if (state.phase === 'evolving') return jsx(EvolutionScene, {})
   if (state.phase === 'healing') return jsx(HealingScene, {})

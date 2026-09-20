@@ -1,1086 +1,2289 @@
 {
-    "indigoPlat": {
-        "id": "indigoPlat",
-        "name": "Indigo Plateau",
-        "type": "town",
-        "description": "Home of the Pokemon League.",
-        "connections": ["victoryRoad"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "victoryRoad",
-                "count": 30
-            }, {
-                "locationId": "cinnabarIsland",
-                "count": 15
-            }],
-            "badgesRequired": 8
-        },
-        "unlockOrder": 44,
-        "position": {
-            "x": 12,
-            "y": 8
-        }
+ "indigoPlat": {
+  "id": "indigoPlat",
+  "name": "Indigo Plateau",
+  "type": "town",
+  "description": "Home of the Pokemon League.",
+  "connections": [
+   "victoryRoad"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "victoryRoad",
+     "count": 30
     },
-    "victoryRoad": {
-        "id": "victoryRoad",
-        "name": "Victory Road",
-        "type": "route",
-        "description": "The final challenge before the Elite Four.",
-        "routeKey": "victoryRoad",
-        "connections": ["route23", "indigoPlat"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "route23",
-                "count": 28
-            }, {
-                "locationId": "cinnabarIsland",
-                "count": 14
-            }],
-            "badgesRequired": 8
-        },
-        "unlockOrder": 43,
-        "position": {
-            "x": 12,
-            "y": 16
-        }
-    },
-    "route23": {
-        "id": "route23",
-        "name": "Route 23",
-        "type": "route",
-        "description": "Victory Road approach — badge checkpoints.",
-        "routeKey": "route23",
-        "connections": ["route22", "victoryRoad"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "route22",
-                "count": 25
-            }, {
-                "locationId": "fuchsiaCity",
-                "count": 13
-            }],
-            "badgesRequired": 6
-        },
-        "unlockOrder": 36,
-        "position": {
-            "x": 12,
-            "y": 28
-        }
-    },
-    "route22": {
-        "id": "route22",
-        "name": "Route 22",
-        "type": "route",
-        "description": "The road to the Pokemon League.",
-        "routeKey": "route22",
-        "connections": ["viridianCity", "route23"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "safariZone",
-                "count": 22
-            }, {
-                "locationId": "fuchsiaCity",
-                "count": 11
-            }],
-            "badgesRequired": 5
-        },
-        "unlockOrder": 35,
-        "position": {
-            "x": 12,
-            "y": 40
-        }
-    },
-    "pewterCity": {
-        "id": "pewterCity",
-        "name": "Pewter City",
-        "type": "town",
-        "description": "A city known for its museum and gym.",
-        "connections": ["viridianForest", "route3"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "viridianForest",
-                "count": 10
-            }, {
-                "locationId": "viridianCity",
-                "count": 5
-            }]
-        },
-        "unlockOrder": 4,
-        "position": {
-            "x": 22,
-            "y": 14
-        }
-    },
-    "viridianForest": {
-        "id": "viridianForest",
-        "name": "Viridian Forest",
-        "type": "route",
-        "description": "A dense forest full of bug Pokemon.",
-        "routeKey": "viridianForest",
-        "connections": ["route2", "pewterCity"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "route2",
-                "count": 8
-            }, {
-                "locationId": "viridianCity",
-                "count": 4
-            }]
-        },
-        "unlockOrder": 3,
-        "position": {
-            "x": 22,
-            "y": 22
-        }
-    },
-    "route2": {
-        "id": "route2",
-        "name": "Route 2",
-        "type": "route",
-        "description": "A winding path leading to the forest.",
-        "routeKey": "route2",
-        "connections": ["viridianCity", "viridianForest", "diglettsCave"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "route1",
-                "count": 5
-            }, {
-                "locationId": "viridianCity",
-                "count": 3
-            }]
-        },
-        "unlockOrder": 2,
-        "position": {
-            "x": 22,
-            "y": 30
-        }
-    },
-    "viridianCity": {
-        "id": "viridianCity",
-        "name": "Viridian City",
-        "type": "town",
-        "description": "A city with a Pokemon Gym.",
-        "connections": ["route1", "route2", "route22"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "route1",
-                "count": 3
-            }]
-        },
-        "unlockOrder": 1,
-        "position": {
-            "x": 22,
-            "y": 40
-        }
-    },
-    "route1": {
-        "id": "route1",
-        "name": "Route 1",
-        "type": "route",
-        "description": "A short path through tall grass.",
-        "routeKey": "route1",
-        "connections": ["palletTown", "viridianCity"],
-        "unlock": {},
-        "unlockOrder": 0,
-        "position": {
-            "x": 22,
-            "y": 52
-        }
-    },
-    "palletTown": {
-        "id": "palletTown",
-        "name": "Pallet Town",
-        "type": "town",
-        "description": "A quiet town where your journey begins.",
-        "connections": ["route1", "route21"],
-        "unlock": {},
-        "unlockOrder": 0,
-        "position": {
-            "x": 22,
-            "y": 64
-        }
-    },
-    "route21": {
-        "id": "route21",
-        "name": "Route 21",
-        "type": "route",
-        "description": "A sea route back to Pallet Town.",
-        "routeKey": "route21",
-        "connections": ["cinnabarIsland", "palletTown"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "pokemonMansion",
-                "count": 25
-            }, {
-                "locationId": "cinnabarIsland",
-                "count": 13
-            }],
-            "badgesRequired": 7
-        },
-        "unlockOrder": 42,
-        "position": {
-            "x": 22,
-            "y": 76
-        }
-    },
-    "cinnabarIsland": {
-        "id": "cinnabarIsland",
-        "name": "Cinnabar Island",
-        "type": "town",
-        "description": "A volcanic island with a research lab.",
-        "connections": ["seafoamIslands", "pokemonMansion", "route21"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "seafoamIslands",
-                "count": 22
-            }, {
-                "locationId": "fuchsiaCity",
-                "count": 11
-            }],
-            "badgesRequired": 6
-        },
-        "unlockOrder": 40,
-        "position": {
-            "x": 22,
-            "y": 88
-        }
-    },
-    "route3": {
-        "id": "route3",
-        "name": "Route 3",
-        "type": "route",
-        "description": "A rugged path through the mountains.",
-        "routeKey": "route3",
-        "connections": ["pewterCity", "mtMoon"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "viridianForest",
-                "count": 10
-            }, {
-                "locationId": "pewterCity",
-                "count": 5
-            }],
-            "badgesRequired": 1
-        },
-        "unlockOrder": 5,
-        "position": {
-            "x": 30,
-            "y": 14
-        }
-    },
-    "mtMoon": {
-        "id": "mtMoon",
-        "name": "Mt. Moon",
-        "type": "route",
-        "description": "A cavern filled with rare fossils.",
-        "routeKey": "mtMoon",
-        "connections": ["route3", "route4"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "route3",
-                "count": 10
-            }, {
-                "locationId": "pewterCity",
-                "count": 5
-            }],
-            "badgesRequired": 1
-        },
-        "unlockOrder": 6,
-        "position": {
-            "x": 38,
-            "y": 14
-        }
-    },
-    "route4": {
-        "id": "route4",
-        "name": "Route 4",
-        "type": "route",
-        "description": "A mountain trail leading to Cerulean.",
-        "routeKey": "route4",
-        "connections": ["mtMoon", "ceruleanCity"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "mtMoon",
-                "count": 10
-            }, {
-                "locationId": "pewterCity",
-                "count": 5
-            }],
-            "badgesRequired": 1
-        },
-        "unlockOrder": 7,
-        "position": {
-            "x": 46,
-            "y": 14
-        }
-    },
-    "ceruleanCity": {
-        "id": "ceruleanCity",
-        "name": "Cerulean City",
-        "type": "town",
-        "description": "A beautiful city with flowing water.",
-        "connections": ["route4", "route24", "route5", "route9"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "route4",
-                "count": 10
-            }, {
-                "locationId": "pewterCity",
-                "count": 5
-            }],
-            "badgesRequired": 1
-        },
-        "unlockOrder": 8,
-        "position": {
-            "x": 54,
-            "y": 14
-        }
-    },
-    "route9": {
-        "id": "route9",
-        "name": "Route 9",
-        "type": "route",
-        "description": "A rocky trail heading east.",
-        "routeKey": "route9",
-        "connections": ["ceruleanCity", "rockTunnel"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "route5",
-                "count": 12
-            }, {
-                "locationId": "ceruleanCity",
-                "count": 6
-            }],
-            "badgesRequired": 2
-        },
-        "unlockOrder": 12,
-        "position": {
-            "x": 64,
-            "y": 14
-        }
-    },
-    "rockTunnel": {
-        "id": "rockTunnel",
-        "name": "Rock Tunnel",
-        "type": "route",
-        "description": "A pitch-black cave you must navigate carefully.",
-        "routeKey": "rockTunnel",
-        "connections": ["route9", "route10"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "route9",
-                "count": 12
-            }, {
-                "locationId": "ceruleanCity",
-                "count": 6
-            }],
-            "badgesRequired": 2
-        },
-        "unlockOrder": 13,
-        "position": {
-            "x": 74,
-            "y": 14
-        }
-    },
-    "route24": {
-        "id": "route24",
-        "name": "Route 24",
-        "type": "route",
-        "description": "Nugget Bridge stretches to the north.",
-        "routeKey": "route24",
-        "connections": ["ceruleanCity", "route25"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "route4",
-                "count": 12
-            }, {
-                "locationId": "ceruleanCity",
-                "count": 5
-            }],
-            "badgesRequired": 2
-        },
-        "unlockOrder": 9,
-        "position": {
-            "x": 54,
-            "y": 8
-        }
-    },
-    "route25": {
-        "id": "route25",
-        "name": "Route 25",
-        "type": "route",
-        "description": "A cape where a famous collector lives.",
-        "routeKey": "route25",
-        "connections": ["route24"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "route24",
-                "count": 10
-            }, {
-                "locationId": "ceruleanCity",
-                "count": 5
-            }],
-            "badgesRequired": 2
-        },
-        "unlockOrder": 10,
-        "position": {
-            "x": 64,
-            "y": 8
-        }
-    },
-    "ceruleanCave": {
-        "id": "ceruleanCave",
-        "name": "Cerulean Cave",
-        "type": "route",
-        "description": "A mysterious cave with immensely powerful Pokemon.",
-        "routeKey": "ceruleanCave",
-        "connections": ["ceruleanCity"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "victoryRoad",
-                "count": 30
-            }, {
-                "locationId": "indigoPlat",
-                "count": 15
-            }],
-            "badgesRequired": 8,
-            "championDefeated": true
-        },
-        "unlockOrder": 45,
-        "position": {
-            "x": 46,
-            "y": 8
-        }
-    },
-    "route10": {
-        "id": "route10",
-        "name": "Route 10",
-        "type": "route",
-        "description": "A path near the Power Plant.",
-        "routeKey": "route10",
-        "connections": ["rockTunnel", "lavenderTown", "powerPlant"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "rockTunnel",
-                "count": 12
-            }, {
-                "locationId": "ceruleanCity",
-                "count": 6
-            }],
-            "badgesRequired": 2
-        },
-        "unlockOrder": 14,
-        "position": {
-            "x": 74,
-            "y": 27
-        }
-    },
-    "powerPlant": {
-        "id": "powerPlant",
-        "name": "Power Plant",
-        "type": "route",
-        "description": "An abandoned plant crackling with electricity.",
-        "routeKey": "powerPlant",
-        "connections": ["route10"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "route10",
-                "count": 12
-            }, {
-                "locationId": "ceruleanCity",
-                "count": 6
-            }],
-            "badgesRequired": 2
-        },
-        "unlockOrder": 15,
-        "position": {
-            "x": 84,
-            "y": 27
-        }
-    },
-    "route5": {
-        "id": "route5",
-        "name": "Route 5",
-        "type": "route",
-        "description": "A path south from Cerulean to Saffron.",
-        "routeKey": "route5",
-        "connections": ["ceruleanCity", "saffronCity"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "route4",
-                "count": 10
-            }, {
-                "locationId": "ceruleanCity",
-                "count": 5
-            }],
-            "badgesRequired": 2
-        },
-        "unlockOrder": 11,
-        "position": {
-            "x": 54,
-            "y": 27
-        }
-    },
-    "saffronCity": {
-        "id": "saffronCity",
-        "name": "Saffron City",
-        "type": "town",
-        "description": "The largest city in Kanto, home to Silph Co.",
-        "connections": ["route5", "route6", "route7", "route8"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "route5",
-                "count": 15
-            }, {
-                "locationId": "ceruleanCity",
-                "count": 8
-            }],
-            "badgesRequired": 2
-        },
-        "unlockOrder": 16,
-        "position": {
-            "x": 54,
-            "y": 40
-        }
-    },
-    "route6": {
-        "id": "route6",
-        "name": "Route 6",
-        "type": "route",
-        "description": "A path leading south to the harbor city.",
-        "routeKey": "route6",
-        "connections": ["saffronCity", "vermilionCity"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "route5",
-                "count": 15
-            }, {
-                "locationId": "saffronCity",
-                "count": 5
-            }],
-            "badgesRequired": 2
-        },
-        "unlockOrder": 17,
-        "position": {
-            "x": 54,
-            "y": 50
-        }
-    },
-    "vermilionCity": {
-        "id": "vermilionCity",
-        "name": "Vermilion City",
-        "type": "town",
-        "description": "A bustling port city with electric gym.",
-        "connections": ["route6", "route11"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "route6",
-                "count": 15
-            }, {
-                "locationId": "saffronCity",
-                "count": 8
-            }],
-            "badgesRequired": 2
-        },
-        "unlockOrder": 18,
-        "position": {
-            "x": 54,
-            "y": 58
-        }
-    },
-    "route7": {
-        "id": "route7",
-        "name": "Route 7",
-        "type": "route",
-        "description": "A short road to Celadon City.",
-        "routeKey": "route7",
-        "connections": ["saffronCity", "celadonCity"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "route5",
-                "count": 15
-            }, {
-                "locationId": "saffronCity",
-                "count": 5
-            }],
-            "badgesRequired": 3
-        },
-        "unlockOrder": 19,
-        "position": {
-            "x": 46,
-            "y": 40
-        }
-    },
-    "celadonCity": {
-        "id": "celadonCity",
-        "name": "Celadon City",
-        "type": "town",
-        "description": "A city of rainbow dreams and a large dept store.",
-        "connections": ["route7", "route16"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "route7",
-                "count": 12
-            }, {
-                "locationId": "saffronCity",
-                "count": 6
-            }],
-            "badgesRequired": 3
-        },
-        "unlockOrder": 20,
-        "position": {
-            "x": 38,
-            "y": 40
-        }
-    },
-    "route8": {
-        "id": "route8",
-        "name": "Route 8",
-        "type": "route",
-        "description": "A path connecting Saffron and Lavender.",
-        "routeKey": "route8",
-        "connections": ["saffronCity", "lavenderTown"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "route6",
-                "count": 15
-            }, {
-                "locationId": "vermilionCity",
-                "count": 5
-            }],
-            "badgesRequired": 4
-        },
-        "unlockOrder": 21,
-        "position": {
-            "x": 64,
-            "y": 40
-        }
-    },
-    "lavenderTown": {
-        "id": "lavenderTown",
-        "name": "Lavender Town",
-        "type": "town",
-        "description": "A small town known for Pokemon Tower.",
-        "connections": ["route8", "route10", "pokemonTower", "route12"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "route8",
-                "count": 15
-            }, {
-                "locationId": "vermilionCity",
-                "count": 8
-            }],
-            "badgesRequired": 4
-        },
-        "unlockOrder": 22,
-        "position": {
-            "x": 74,
-            "y": 40
-        }
-    },
-    "pokemonTower": {
-        "id": "pokemonTower",
-        "name": "Pokemon Tower",
-        "type": "route",
-        "description": "A memorial tower haunted by ghosts.",
-        "routeKey": "pokemonTower",
-        "connections": ["lavenderTown"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "route8",
-                "count": 15
-            }, {
-                "locationId": "lavenderTown",
-                "count": 5
-            }],
-            "badgesRequired": 4
-        },
-        "unlockOrder": 23,
-        "position": {
-            "x": 82,
-            "y": 40
-        }
-    },
-    "route11": {
-        "id": "route11",
-        "name": "Route 11",
-        "type": "route",
-        "description": "A road east of Vermilion City.",
-        "routeKey": "route11",
-        "connections": ["vermilionCity", "diglettsCave", "route12"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "pokemonTower",
-                "count": 15
-            }, {
-                "locationId": "lavenderTown",
-                "count": 8
-            }],
-            "badgesRequired": 4
-        },
-        "unlockOrder": 24,
-        "position": {
-            "x": 64,
-            "y": 58
-        }
-    },
-    "diglettsCave": {
-        "id": "diglettsCave",
-        "name": "Diglett's Cave",
-        "type": "route",
-        "description": "A tunnel dug by Diglett connecting two routes.",
-        "routeKey": "diglettsCave",
-        "connections": ["route2", "route11"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "route11",
-                "count": 15
-            }, {
-                "locationId": "lavenderTown",
-                "count": 8
-            }],
-            "badgesRequired": 4
-        },
-        "unlockOrder": 25,
-        "position": {
-            "x": 44,
-            "y": 46
-        }
-    },
-    "route16": {
-        "id": "route16",
-        "name": "Route 16",
-        "type": "route",
-        "description": "The start of Cycling Road heading south.",
-        "routeKey": "route16",
-        "connections": ["celadonCity", "route17"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "diglettsCave",
-                "count": 15
-            }, {
-                "locationId": "celadonCity",
-                "count": 8
-            }],
-            "badgesRequired": 4
-        },
-        "unlockOrder": 26,
-        "position": {
-            "x": 38,
-            "y": 48
-        }
-    },
-    "route17": {
-        "id": "route17",
-        "name": "Route 17",
-        "type": "route",
-        "description": "Cycling Road — a long downhill path.",
-        "routeKey": "route17",
-        "connections": ["route16", "route18"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "route16",
-                "count": 15
-            }, {
-                "locationId": "celadonCity",
-                "count": 8
-            }],
-            "badgesRequired": 4
-        },
-        "unlockOrder": 27,
-        "position": {
-            "x": 38,
-            "y": 60
-        }
-    },
-    "route18": {
-        "id": "route18",
-        "name": "Route 18",
-        "type": "route",
-        "description": "The end of Cycling Road near Fuchsia.",
-        "routeKey": "route18",
-        "connections": ["route17", "fuchsiaCity"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "route17",
-                "count": 18
-            }, {
-                "locationId": "celadonCity",
-                "count": 9
-            }],
-            "badgesRequired": 4
-        },
-        "unlockOrder": 28,
-        "position": {
-            "x": 38,
-            "y": 72
-        }
-    },
-    "route12": {
-        "id": "route12",
-        "name": "Route 12",
-        "type": "route",
-        "description": "Silence Bridge — a long fishing route.",
-        "routeKey": "route12",
-        "connections": ["lavenderTown", "route11", "route13"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "route18",
-                "count": 18
-            }, {
-                "locationId": "lavenderTown",
-                "count": 9
-            }],
-            "badgesRequired": 4
-        },
-        "unlockOrder": 29,
-        "position": {
-            "x": 74,
-            "y": 50
-        }
-    },
-    "route13": {
-        "id": "route13",
-        "name": "Route 13",
-        "type": "route",
-        "description": "A maze-like path heading west.",
-        "routeKey": "route13",
-        "connections": ["route12", "route14"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "route12",
-                "count": 18
-            }, {
-                "locationId": "lavenderTown",
-                "count": 9
-            }],
-            "badgesRequired": 4
-        },
-        "unlockOrder": 30,
-        "position": {
-            "x": 74,
-            "y": 60
-        }
-    },
-    "route14": {
-        "id": "route14",
-        "name": "Route 14",
-        "type": "route",
-        "description": "A path through tall grass heading south.",
-        "routeKey": "route14",
-        "connections": ["route13", "route15"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "route13",
-                "count": 18
-            }, {
-                "locationId": "lavenderTown",
-                "count": 9
-            }],
-            "badgesRequired": 4
-        },
-        "unlockOrder": 31,
-        "position": {
-            "x": 74,
-            "y": 72
-        }
-    },
-    "route15": {
-        "id": "route15",
-        "name": "Route 15",
-        "type": "route",
-        "description": "The final stretch to Fuchsia City.",
-        "routeKey": "route15",
-        "connections": ["route14", "fuchsiaCity"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "route14",
-                "count": 18
-            }, {
-                "locationId": "lavenderTown",
-                "count": 9
-            }],
-            "badgesRequired": 4
-        },
-        "unlockOrder": 32,
-        "position": {
-            "x": 54,
-            "y": 72
-        }
-    },
-    "fuchsiaCity": {
-        "id": "fuchsiaCity",
-        "name": "Fuchsia City",
-        "type": "town",
-        "description": "Home to the Safari Zone and a ninja gym.",
-        "connections": ["route15", "route18", "safariZone", "route19"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "route15",
-                "count": 20
-            }, {
-                "locationId": "lavenderTown",
-                "count": 10
-            }],
-            "badgesRequired": 4
-        },
-        "unlockOrder": 33,
-        "position": {
-            "x": 46,
-            "y": 72
-        }
-    },
-    "safariZone": {
-        "id": "safariZone",
-        "name": "Safari Zone",
-        "type": "route",
-        "description": "A nature reserve with rare Pokemon.",
-        "routeKey": "safariZone",
-        "connections": ["fuchsiaCity"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "route15",
-                "count": 20
-            }, {
-                "locationId": "fuchsiaCity",
-                "count": 5
-            }],
-            "badgesRequired": 5
-        },
-        "unlockOrder": 34,
-        "position": {
-            "x": 46,
-            "y": 66
-        }
-    },
-    "route19": {
-        "id": "route19",
-        "name": "Route 19",
-        "type": "route",
-        "description": "Ocean waves south of Fuchsia City.",
-        "routeKey": "route19",
-        "connections": ["fuchsiaCity", "route20"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "route23",
-                "count": 20
-            }, {
-                "locationId": "fuchsiaCity",
-                "count": 10
-            }],
-            "badgesRequired": 6
-        },
-        "unlockOrder": 37,
-        "position": {
-            "x": 46,
-            "y": 80
-        }
-    },
-    "route20": {
-        "id": "route20",
-        "name": "Route 20",
-        "type": "route",
-        "description": "A sea route leading to the Seafoam Islands.",
-        "routeKey": "route20",
-        "connections": ["route19", "seafoamIslands"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "route19",
-                "count": 22
-            }, {
-                "locationId": "fuchsiaCity",
-                "count": 11
-            }],
-            "badgesRequired": 6
-        },
-        "unlockOrder": 38,
-        "position": {
-            "x": 40,
-            "y": 88
-        }
-    },
-    "seafoamIslands": {
-        "id": "seafoamIslands",
-        "name": "Seafoam Islands",
-        "type": "route",
-        "description": "Icy caves home to legendary birds.",
-        "routeKey": "seafoamIslands",
-        "connections": ["route20", "cinnabarIsland"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "route20",
-                "count": 22
-            }, {
-                "locationId": "fuchsiaCity",
-                "count": 11
-            }],
-            "badgesRequired": 6
-        },
-        "unlockOrder": 39,
-        "position": {
-            "x": 28,
-            "y": 88
-        }
-    },
-    "pokemonMansion": {
-        "id": "pokemonMansion",
-        "name": "Pokemon Mansion",
-        "type": "route",
-        "description": "A burned-out mansion hiding dark secrets.",
-        "routeKey": "pokemonMansion",
-        "connections": ["cinnabarIsland"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "seafoamIslands",
-                "count": 22
-            }, {
-                "locationId": "cinnabarIsland",
-                "count": 5
-            }],
-            "badgesRequired": 7
-        },
-        "unlockOrder": 41,
-        "position": {
-            "x": 16,
-            "y": 84
-        }
-    },
-    "raidIsland": {
-        "id": "raidIsland",
-        "name": "Raid Island",
-        "type": "raid",
-        "description": "A mysterious floating island where legendary Pokemon dwell.",
-        "connections": [],
-        "unlock": {
-            "championDefeated": true
-        },
-        "unlockOrder": 99,
-        "position": {
-            "x": 90,
-            "y": 14
-        }
-    },
-    "trainingArea": {
-        "id": "trainingArea",
-        "name": "training area",
-        "type": "route",
-        "description": "WTF?!",
-        "routeKey": "trainingArea",
-        "connections": ["victoryRoad"],
-        "unlock": {
-            "battlesAtLocation": [{
-                "locationId": "victoryRoad",
-                "count": 30
-            }, {
-                "locationId": "cinnabarIsland",
-                "count": 15
-            }],
-            "badgesRequired": 8
-        },
-        "unlockOrder": 50,
-        "position": {
-            "x": 5,
-            "y": 16
-        }
+    {
+     "locationId": "cinnabarIsland",
+     "count": 15
     }
+   ],
+   "badgesRequired": 8
+  },
+  "unlockOrder": 44,
+  "position": {
+   "x": 12,
+   "y": 8
+  },
+  "region": "kanto"
+ },
+ "victoryRoad": {
+  "id": "victoryRoad",
+  "name": "Victory Road",
+  "type": "route",
+  "description": "The final challenge before the Elite Four.",
+  "routeKey": "victoryRoad",
+  "connections": [
+   "route23",
+   "indigoPlat"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "route23",
+     "count": 28
+    },
+    {
+     "locationId": "cinnabarIsland",
+     "count": 14
+    }
+   ],
+   "badgesRequired": 8
+  },
+  "unlockOrder": 43,
+  "position": {
+   "x": 12,
+   "y": 16
+  },
+  "region": "kanto"
+ },
+ "route23": {
+  "id": "route23",
+  "name": "Route 23",
+  "type": "route",
+  "description": "Victory Road approach — badge checkpoints.",
+  "routeKey": "route23",
+  "connections": [
+   "route22",
+   "victoryRoad"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "route22",
+     "count": 25
+    },
+    {
+     "locationId": "fuchsiaCity",
+     "count": 13
+    }
+   ],
+   "badgesRequired": 6
+  },
+  "unlockOrder": 36,
+  "position": {
+   "x": 12,
+   "y": 28
+  },
+  "region": "kanto"
+ },
+ "route22": {
+  "id": "route22",
+  "name": "Route 22",
+  "type": "route",
+  "description": "The road to the Pokemon League.",
+  "routeKey": "route22",
+  "connections": [
+   "viridianCity",
+   "route23"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "safariZone",
+     "count": 22
+    },
+    {
+     "locationId": "fuchsiaCity",
+     "count": 11
+    }
+   ],
+   "badgesRequired": 5
+  },
+  "unlockOrder": 35,
+  "position": {
+   "x": 12,
+   "y": 40
+  },
+  "region": "kanto"
+ },
+ "pewterCity": {
+  "id": "pewterCity",
+  "name": "Pewter City",
+  "type": "town",
+  "description": "A city known for its museum and gym.",
+  "connections": [
+   "viridianForest",
+   "route3"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "viridianForest",
+     "count": 10
+    },
+    {
+     "locationId": "viridianCity",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 4,
+  "position": {
+   "x": 22,
+   "y": 14
+  },
+  "region": "kanto"
+ },
+ "viridianForest": {
+  "id": "viridianForest",
+  "name": "Viridian Forest",
+  "type": "route",
+  "description": "A dense forest full of bug Pokemon.",
+  "routeKey": "viridianForest",
+  "connections": [
+   "route2",
+   "pewterCity"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "route2",
+     "count": 8
+    },
+    {
+     "locationId": "viridianCity",
+     "count": 4
+    }
+   ]
+  },
+  "unlockOrder": 3,
+  "position": {
+   "x": 22,
+   "y": 22
+  },
+  "region": "kanto"
+ },
+ "route2": {
+  "id": "route2",
+  "name": "Route 2",
+  "type": "route",
+  "description": "A winding path leading to the forest.",
+  "routeKey": "route2",
+  "connections": [
+   "viridianCity",
+   "viridianForest",
+   "diglettsCave"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "route1",
+     "count": 5
+    },
+    {
+     "locationId": "viridianCity",
+     "count": 3
+    }
+   ]
+  },
+  "unlockOrder": 2,
+  "position": {
+   "x": 22,
+   "y": 30
+  },
+  "region": "kanto"
+ },
+ "viridianCity": {
+  "id": "viridianCity",
+  "name": "Viridian City",
+  "type": "town",
+  "description": "A city with a Pokemon Gym.",
+  "connections": [
+   "route1",
+   "route2",
+   "route22"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "route1",
+     "count": 3
+    }
+   ]
+  },
+  "unlockOrder": 1,
+  "position": {
+   "x": 22,
+   "y": 40
+  },
+  "region": "kanto"
+ },
+ "route1": {
+  "id": "route1",
+  "name": "Route 1",
+  "type": "route",
+  "description": "A short path through tall grass.",
+  "routeKey": "route1",
+  "connections": [
+   "palletTown",
+   "viridianCity"
+  ],
+  "unlock": {},
+  "unlockOrder": 0,
+  "position": {
+   "x": 22,
+   "y": 52
+  },
+  "region": "kanto"
+ },
+ "palletTown": {
+  "id": "palletTown",
+  "name": "Pallet Town",
+  "type": "town",
+  "description": "A quiet town where your journey begins.",
+  "connections": [
+   "route1",
+   "route21"
+  ],
+  "unlock": {},
+  "unlockOrder": 0,
+  "position": {
+   "x": 22,
+   "y": 64
+  },
+  "region": "kanto"
+ },
+ "route21": {
+  "id": "route21",
+  "name": "Route 21",
+  "type": "route",
+  "description": "A sea route back to Pallet Town.",
+  "routeKey": "route21",
+  "connections": [
+   "cinnabarIsland",
+   "palletTown"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "pokemonMansion",
+     "count": 25
+    },
+    {
+     "locationId": "cinnabarIsland",
+     "count": 13
+    }
+   ],
+   "badgesRequired": 7
+  },
+  "unlockOrder": 42,
+  "position": {
+   "x": 22,
+   "y": 76
+  },
+  "region": "kanto"
+ },
+ "cinnabarIsland": {
+  "id": "cinnabarIsland",
+  "name": "Cinnabar Island",
+  "type": "town",
+  "description": "A volcanic island with a research lab.",
+  "connections": [
+   "seafoamIslands",
+   "pokemonMansion",
+   "route21"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "seafoamIslands",
+     "count": 22
+    },
+    {
+     "locationId": "fuchsiaCity",
+     "count": 11
+    }
+   ],
+   "badgesRequired": 6
+  },
+  "unlockOrder": 40,
+  "position": {
+   "x": 22,
+   "y": 88
+  },
+  "region": "kanto"
+ },
+ "route3": {
+  "id": "route3",
+  "name": "Route 3",
+  "type": "route",
+  "description": "A rugged path through the mountains.",
+  "routeKey": "route3",
+  "connections": [
+   "pewterCity",
+   "mtMoon"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "viridianForest",
+     "count": 10
+    },
+    {
+     "locationId": "pewterCity",
+     "count": 5
+    }
+   ],
+   "badgesRequired": 1
+  },
+  "unlockOrder": 5,
+  "position": {
+   "x": 30,
+   "y": 14
+  },
+  "region": "kanto"
+ },
+ "mtMoon": {
+  "id": "mtMoon",
+  "name": "Mt. Moon",
+  "type": "route",
+  "description": "A cavern filled with rare fossils.",
+  "routeKey": "mtMoon",
+  "connections": [
+   "route3",
+   "route4"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "route3",
+     "count": 10
+    },
+    {
+     "locationId": "pewterCity",
+     "count": 5
+    }
+   ],
+   "badgesRequired": 1
+  },
+  "unlockOrder": 6,
+  "position": {
+   "x": 38,
+   "y": 14
+  },
+  "region": "kanto"
+ },
+ "route4": {
+  "id": "route4",
+  "name": "Route 4",
+  "type": "route",
+  "description": "A mountain trail leading to Cerulean.",
+  "routeKey": "route4",
+  "connections": [
+   "mtMoon",
+   "ceruleanCity"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "mtMoon",
+     "count": 10
+    },
+    {
+     "locationId": "pewterCity",
+     "count": 5
+    }
+   ],
+   "badgesRequired": 1
+  },
+  "unlockOrder": 7,
+  "position": {
+   "x": 46,
+   "y": 14
+  },
+  "region": "kanto"
+ },
+ "ceruleanCity": {
+  "id": "ceruleanCity",
+  "name": "Cerulean City",
+  "type": "town",
+  "description": "A beautiful city with flowing water.",
+  "connections": [
+   "route4",
+   "route24",
+   "route5",
+   "route9"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "route4",
+     "count": 10
+    },
+    {
+     "locationId": "pewterCity",
+     "count": 5
+    }
+   ],
+   "badgesRequired": 1
+  },
+  "unlockOrder": 8,
+  "position": {
+   "x": 54,
+   "y": 14
+  },
+  "region": "kanto"
+ },
+ "route9": {
+  "id": "route9",
+  "name": "Route 9",
+  "type": "route",
+  "description": "A rocky trail heading east.",
+  "routeKey": "route9",
+  "connections": [
+   "ceruleanCity",
+   "rockTunnel"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "route5",
+     "count": 12
+    },
+    {
+     "locationId": "ceruleanCity",
+     "count": 6
+    }
+   ],
+   "badgesRequired": 2
+  },
+  "unlockOrder": 12,
+  "position": {
+   "x": 64,
+   "y": 14
+  },
+  "region": "kanto"
+ },
+ "rockTunnel": {
+  "id": "rockTunnel",
+  "name": "Rock Tunnel",
+  "type": "route",
+  "description": "A pitch-black cave you must navigate carefully.",
+  "routeKey": "rockTunnel",
+  "connections": [
+   "route9",
+   "route10"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "route9",
+     "count": 12
+    },
+    {
+     "locationId": "ceruleanCity",
+     "count": 6
+    }
+   ],
+   "badgesRequired": 2
+  },
+  "unlockOrder": 13,
+  "position": {
+   "x": 74,
+   "y": 14
+  },
+  "region": "kanto"
+ },
+ "route24": {
+  "id": "route24",
+  "name": "Route 24",
+  "type": "route",
+  "description": "Nugget Bridge stretches to the north.",
+  "routeKey": "route24",
+  "connections": [
+   "ceruleanCity",
+   "route25"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "route4",
+     "count": 12
+    },
+    {
+     "locationId": "ceruleanCity",
+     "count": 5
+    }
+   ],
+   "badgesRequired": 2
+  },
+  "unlockOrder": 9,
+  "position": {
+   "x": 54,
+   "y": 8
+  },
+  "region": "kanto"
+ },
+ "route25": {
+  "id": "route25",
+  "name": "Route 25",
+  "type": "route",
+  "description": "A cape where a famous collector lives.",
+  "routeKey": "route25",
+  "connections": [
+   "route24"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "route24",
+     "count": 10
+    },
+    {
+     "locationId": "ceruleanCity",
+     "count": 5
+    }
+   ],
+   "badgesRequired": 2
+  },
+  "unlockOrder": 10,
+  "position": {
+   "x": 64,
+   "y": 8
+  },
+  "region": "kanto"
+ },
+ "ceruleanCave": {
+  "id": "ceruleanCave",
+  "name": "Cerulean Cave",
+  "type": "route",
+  "description": "A mysterious cave with immensely powerful Pokemon.",
+  "routeKey": "ceruleanCave",
+  "connections": [
+   "ceruleanCity"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "victoryRoad",
+     "count": 30
+    },
+    {
+     "locationId": "indigoPlat",
+     "count": 15
+    }
+   ],
+   "badgesRequired": 8,
+   "championDefeated": true
+  },
+  "unlockOrder": 45,
+  "position": {
+   "x": 46,
+   "y": 8
+  },
+  "region": "kanto"
+ },
+ "route10": {
+  "id": "route10",
+  "name": "Route 10",
+  "type": "route",
+  "description": "A path near the Power Plant.",
+  "routeKey": "route10",
+  "connections": [
+   "rockTunnel",
+   "lavenderTown",
+   "powerPlant"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "rockTunnel",
+     "count": 12
+    },
+    {
+     "locationId": "ceruleanCity",
+     "count": 6
+    }
+   ],
+   "badgesRequired": 2
+  },
+  "unlockOrder": 14,
+  "position": {
+   "x": 74,
+   "y": 27
+  },
+  "region": "kanto"
+ },
+ "powerPlant": {
+  "id": "powerPlant",
+  "name": "Power Plant",
+  "type": "route",
+  "description": "An abandoned plant crackling with electricity.",
+  "routeKey": "powerPlant",
+  "connections": [
+   "route10"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "route10",
+     "count": 12
+    },
+    {
+     "locationId": "ceruleanCity",
+     "count": 6
+    }
+   ],
+   "badgesRequired": 2
+  },
+  "unlockOrder": 15,
+  "position": {
+   "x": 84,
+   "y": 27
+  },
+  "region": "kanto"
+ },
+ "route5": {
+  "id": "route5",
+  "name": "Route 5",
+  "type": "route",
+  "description": "A path south from Cerulean to Saffron.",
+  "routeKey": "route5",
+  "connections": [
+   "ceruleanCity",
+   "saffronCity"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "route4",
+     "count": 10
+    },
+    {
+     "locationId": "ceruleanCity",
+     "count": 5
+    }
+   ],
+   "badgesRequired": 2
+  },
+  "unlockOrder": 11,
+  "position": {
+   "x": 54,
+   "y": 27
+  },
+  "region": "kanto"
+ },
+ "saffronCity": {
+  "id": "saffronCity",
+  "name": "Saffron City",
+  "type": "town",
+  "description": "The largest city in Kanto, home to Silph Co.",
+  "connections": [
+   "route5",
+   "route6",
+   "route7",
+   "route8"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "route5",
+     "count": 15
+    },
+    {
+     "locationId": "ceruleanCity",
+     "count": 8
+    }
+   ],
+   "badgesRequired": 2
+  },
+  "unlockOrder": 16,
+  "position": {
+   "x": 54,
+   "y": 40
+  },
+  "region": "kanto"
+ },
+ "route6": {
+  "id": "route6",
+  "name": "Route 6",
+  "type": "route",
+  "description": "A path leading south to the harbor city.",
+  "routeKey": "route6",
+  "connections": [
+   "saffronCity",
+   "vermilionCity"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "route5",
+     "count": 15
+    },
+    {
+     "locationId": "saffronCity",
+     "count": 5
+    }
+   ],
+   "badgesRequired": 2
+  },
+  "unlockOrder": 17,
+  "position": {
+   "x": 54,
+   "y": 50
+  },
+  "region": "kanto"
+ },
+ "vermilionCity": {
+  "id": "vermilionCity",
+  "name": "Vermilion City",
+  "type": "town",
+  "description": "A bustling port city with electric gym.",
+  "connections": [
+   "route6",
+   "route11"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "route6",
+     "count": 15
+    },
+    {
+     "locationId": "saffronCity",
+     "count": 8
+    }
+   ],
+   "badgesRequired": 2
+  },
+  "unlockOrder": 18,
+  "position": {
+   "x": 54,
+   "y": 58
+  },
+  "region": "kanto"
+ },
+ "route7": {
+  "id": "route7",
+  "name": "Route 7",
+  "type": "route",
+  "description": "A short road to Celadon City.",
+  "routeKey": "route7",
+  "connections": [
+   "saffronCity",
+   "celadonCity"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "route5",
+     "count": 15
+    },
+    {
+     "locationId": "saffronCity",
+     "count": 5
+    }
+   ],
+   "badgesRequired": 3
+  },
+  "unlockOrder": 19,
+  "position": {
+   "x": 46,
+   "y": 40
+  },
+  "region": "kanto"
+ },
+ "celadonCity": {
+  "id": "celadonCity",
+  "name": "Celadon City",
+  "type": "town",
+  "description": "A city of rainbow dreams and a large dept store.",
+  "connections": [
+   "route7",
+   "route16"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "route7",
+     "count": 12
+    },
+    {
+     "locationId": "saffronCity",
+     "count": 6
+    }
+   ],
+   "badgesRequired": 3
+  },
+  "unlockOrder": 20,
+  "position": {
+   "x": 38,
+   "y": 40
+  },
+  "region": "kanto"
+ },
+ "route8": {
+  "id": "route8",
+  "name": "Route 8",
+  "type": "route",
+  "description": "A path connecting Saffron and Lavender.",
+  "routeKey": "route8",
+  "connections": [
+   "saffronCity",
+   "lavenderTown"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "route6",
+     "count": 15
+    },
+    {
+     "locationId": "vermilionCity",
+     "count": 5
+    }
+   ],
+   "badgesRequired": 4
+  },
+  "unlockOrder": 21,
+  "position": {
+   "x": 64,
+   "y": 40
+  },
+  "region": "kanto"
+ },
+ "lavenderTown": {
+  "id": "lavenderTown",
+  "name": "Lavender Town",
+  "type": "town",
+  "description": "A small town known for Pokemon Tower.",
+  "connections": [
+   "route8",
+   "route10",
+   "pokemonTower",
+   "route12"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "route8",
+     "count": 15
+    },
+    {
+     "locationId": "vermilionCity",
+     "count": 8
+    }
+   ],
+   "badgesRequired": 4
+  },
+  "unlockOrder": 22,
+  "position": {
+   "x": 74,
+   "y": 40
+  },
+  "region": "kanto"
+ },
+ "pokemonTower": {
+  "id": "pokemonTower",
+  "name": "Pokemon Tower",
+  "type": "route",
+  "description": "A memorial tower haunted by ghosts.",
+  "routeKey": "pokemonTower",
+  "connections": [
+   "lavenderTown"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "route8",
+     "count": 15
+    },
+    {
+     "locationId": "lavenderTown",
+     "count": 5
+    }
+   ],
+   "badgesRequired": 4
+  },
+  "unlockOrder": 23,
+  "position": {
+   "x": 82,
+   "y": 40
+  },
+  "region": "kanto"
+ },
+ "route11": {
+  "id": "route11",
+  "name": "Route 11",
+  "type": "route",
+  "description": "A road east of Vermilion City.",
+  "routeKey": "route11",
+  "connections": [
+   "vermilionCity",
+   "diglettsCave",
+   "route12"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "pokemonTower",
+     "count": 15
+    },
+    {
+     "locationId": "lavenderTown",
+     "count": 8
+    }
+   ],
+   "badgesRequired": 4
+  },
+  "unlockOrder": 24,
+  "position": {
+   "x": 64,
+   "y": 58
+  },
+  "region": "kanto"
+ },
+ "diglettsCave": {
+  "id": "diglettsCave",
+  "name": "Diglett's Cave",
+  "type": "route",
+  "description": "A tunnel dug by Diglett connecting two routes.",
+  "routeKey": "diglettsCave",
+  "connections": [
+   "route2",
+   "route11"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "route11",
+     "count": 15
+    },
+    {
+     "locationId": "lavenderTown",
+     "count": 8
+    }
+   ],
+   "badgesRequired": 4
+  },
+  "unlockOrder": 25,
+  "position": {
+   "x": 44,
+   "y": 46
+  },
+  "region": "kanto"
+ },
+ "route16": {
+  "id": "route16",
+  "name": "Route 16",
+  "type": "route",
+  "description": "The start of Cycling Road heading south.",
+  "routeKey": "route16",
+  "connections": [
+   "celadonCity",
+   "route17"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "diglettsCave",
+     "count": 15
+    },
+    {
+     "locationId": "celadonCity",
+     "count": 8
+    }
+   ],
+   "badgesRequired": 4
+  },
+  "unlockOrder": 26,
+  "position": {
+   "x": 38,
+   "y": 48
+  },
+  "region": "kanto"
+ },
+ "route17": {
+  "id": "route17",
+  "name": "Route 17",
+  "type": "route",
+  "description": "Cycling Road — a long downhill path.",
+  "routeKey": "route17",
+  "connections": [
+   "route16",
+   "route18"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "route16",
+     "count": 15
+    },
+    {
+     "locationId": "celadonCity",
+     "count": 8
+    }
+   ],
+   "badgesRequired": 4
+  },
+  "unlockOrder": 27,
+  "position": {
+   "x": 38,
+   "y": 60
+  },
+  "region": "kanto"
+ },
+ "route18": {
+  "id": "route18",
+  "name": "Route 18",
+  "type": "route",
+  "description": "The end of Cycling Road near Fuchsia.",
+  "routeKey": "route18",
+  "connections": [
+   "route17",
+   "fuchsiaCity"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "route17",
+     "count": 18
+    },
+    {
+     "locationId": "celadonCity",
+     "count": 9
+    }
+   ],
+   "badgesRequired": 4
+  },
+  "unlockOrder": 28,
+  "position": {
+   "x": 38,
+   "y": 72
+  },
+  "region": "kanto"
+ },
+ "route12": {
+  "id": "route12",
+  "name": "Route 12",
+  "type": "route",
+  "description": "Silence Bridge — a long fishing route.",
+  "routeKey": "route12",
+  "connections": [
+   "lavenderTown",
+   "route11",
+   "route13"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "route18",
+     "count": 18
+    },
+    {
+     "locationId": "lavenderTown",
+     "count": 9
+    }
+   ],
+   "badgesRequired": 4
+  },
+  "unlockOrder": 29,
+  "position": {
+   "x": 74,
+   "y": 50
+  },
+  "region": "kanto"
+ },
+ "route13": {
+  "id": "route13",
+  "name": "Route 13",
+  "type": "route",
+  "description": "A maze-like path heading west.",
+  "routeKey": "route13",
+  "connections": [
+   "route12",
+   "route14"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "route12",
+     "count": 18
+    },
+    {
+     "locationId": "lavenderTown",
+     "count": 9
+    }
+   ],
+   "badgesRequired": 4
+  },
+  "unlockOrder": 30,
+  "position": {
+   "x": 74,
+   "y": 60
+  },
+  "region": "kanto"
+ },
+ "route14": {
+  "id": "route14",
+  "name": "Route 14",
+  "type": "route",
+  "description": "A path through tall grass heading south.",
+  "routeKey": "route14",
+  "connections": [
+   "route13",
+   "route15"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "route13",
+     "count": 18
+    },
+    {
+     "locationId": "lavenderTown",
+     "count": 9
+    }
+   ],
+   "badgesRequired": 4
+  },
+  "unlockOrder": 31,
+  "position": {
+   "x": 74,
+   "y": 72
+  },
+  "region": "kanto"
+ },
+ "route15": {
+  "id": "route15",
+  "name": "Route 15",
+  "type": "route",
+  "description": "The final stretch to Fuchsia City.",
+  "routeKey": "route15",
+  "connections": [
+   "route14",
+   "fuchsiaCity"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "route14",
+     "count": 18
+    },
+    {
+     "locationId": "lavenderTown",
+     "count": 9
+    }
+   ],
+   "badgesRequired": 4
+  },
+  "unlockOrder": 32,
+  "position": {
+   "x": 54,
+   "y": 72
+  },
+  "region": "kanto"
+ },
+ "fuchsiaCity": {
+  "id": "fuchsiaCity",
+  "name": "Fuchsia City",
+  "type": "town",
+  "description": "Home to the Safari Zone and a ninja gym.",
+  "connections": [
+   "route15",
+   "route18",
+   "safariZone",
+   "route19"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "route15",
+     "count": 20
+    },
+    {
+     "locationId": "lavenderTown",
+     "count": 10
+    }
+   ],
+   "badgesRequired": 4
+  },
+  "unlockOrder": 33,
+  "position": {
+   "x": 46,
+   "y": 72
+  },
+  "region": "kanto"
+ },
+ "safariZone": {
+  "id": "safariZone",
+  "name": "Safari Zone",
+  "type": "route",
+  "description": "A nature reserve with rare Pokemon.",
+  "routeKey": "safariZone",
+  "connections": [
+   "fuchsiaCity"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "route15",
+     "count": 20
+    },
+    {
+     "locationId": "fuchsiaCity",
+     "count": 5
+    }
+   ],
+   "badgesRequired": 5
+  },
+  "unlockOrder": 34,
+  "position": {
+   "x": 46,
+   "y": 66
+  },
+  "region": "kanto"
+ },
+ "route19": {
+  "id": "route19",
+  "name": "Route 19",
+  "type": "route",
+  "description": "Ocean waves south of Fuchsia City.",
+  "routeKey": "route19",
+  "connections": [
+   "fuchsiaCity",
+   "route20"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "route23",
+     "count": 20
+    },
+    {
+     "locationId": "fuchsiaCity",
+     "count": 10
+    }
+   ],
+   "badgesRequired": 6
+  },
+  "unlockOrder": 37,
+  "position": {
+   "x": 46,
+   "y": 80
+  },
+  "region": "kanto"
+ },
+ "route20": {
+  "id": "route20",
+  "name": "Route 20",
+  "type": "route",
+  "description": "A sea route leading to the Seafoam Islands.",
+  "routeKey": "route20",
+  "connections": [
+   "route19",
+   "seafoamIslands"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "route19",
+     "count": 22
+    },
+    {
+     "locationId": "fuchsiaCity",
+     "count": 11
+    }
+   ],
+   "badgesRequired": 6
+  },
+  "unlockOrder": 38,
+  "position": {
+   "x": 40,
+   "y": 88
+  },
+  "region": "kanto"
+ },
+ "seafoamIslands": {
+  "id": "seafoamIslands",
+  "name": "Seafoam Islands",
+  "type": "route",
+  "description": "Icy caves home to legendary birds.",
+  "routeKey": "seafoamIslands",
+  "connections": [
+   "route20",
+   "cinnabarIsland"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "route20",
+     "count": 22
+    },
+    {
+     "locationId": "fuchsiaCity",
+     "count": 11
+    }
+   ],
+   "badgesRequired": 6
+  },
+  "unlockOrder": 39,
+  "position": {
+   "x": 28,
+   "y": 88
+  },
+  "region": "kanto"
+ },
+ "pokemonMansion": {
+  "id": "pokemonMansion",
+  "name": "Pokemon Mansion",
+  "type": "route",
+  "description": "A burned-out mansion hiding dark secrets.",
+  "routeKey": "pokemonMansion",
+  "connections": [
+   "cinnabarIsland"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "seafoamIslands",
+     "count": 22
+    },
+    {
+     "locationId": "cinnabarIsland",
+     "count": 5
+    }
+   ],
+   "badgesRequired": 7
+  },
+  "unlockOrder": 41,
+  "position": {
+   "x": 16,
+   "y": 84
+  },
+  "region": "kanto"
+ },
+ "raidIsland": {
+  "id": "raidIsland",
+  "name": "Raid Island",
+  "type": "raid",
+  "description": "A mysterious floating island where legendary Pokemon dwell.",
+  "connections": [],
+  "unlock": {
+   "championDefeated": true
+  },
+  "unlockOrder": 99,
+  "position": {
+   "x": 90,
+   "y": 14
+  },
+  "region": "kanto"
+ },
+ "trainingArea": {
+  "id": "trainingArea",
+  "name": "training area",
+  "type": "route",
+  "description": "WTF?!",
+  "routeKey": "trainingArea",
+  "connections": [
+   "victoryRoad"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "victoryRoad",
+     "count": 30
+    },
+    {
+     "locationId": "cinnabarIsland",
+     "count": 15
+    }
+   ],
+   "badgesRequired": 8
+  },
+  "unlockOrder": 50,
+  "position": {
+   "x": 5,
+   "y": 16
+  },
+  "region": "kanto"
+ },
+ "johto-town": {
+  "id": "johto-town",
+  "name": "New Bark Town",
+  "type": "town",
+  "region": "johto",
+  "description": "A quiet town in the Johto region.",
+  "connections": [
+   "johto-route-1"
+  ],
+  "unlock": {
+   "championDefeated": true
+  },
+  "unlockOrder": 100,
+  "position": {
+   "x": 15,
+   "y": 55
+  },
+  "mart": {
+   "name": "Johto Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  },
+  "trainerCount": 3
+ },
+ "johto-route-1": {
+  "id": "johto-route-1",
+  "name": "Johto Route 1",
+  "type": "route",
+  "region": "johto",
+  "description": "A wild path in the Johto region.",
+  "routeKey": "johto-route-1",
+  "connections": [
+   "johto-town",
+   "johto-route-2"
+  ],
+  "unlock": {
+   "requires": [
+    "johto-town"
+   ]
+  },
+  "unlockOrder": 101,
+  "position": {
+   "x": 38,
+   "y": 35
+  }
+ },
+ "johto-route-2": {
+  "id": "johto-route-2",
+  "name": "Johto Route 2",
+  "type": "route",
+  "region": "johto",
+  "description": "A wild path in the Johto region.",
+  "routeKey": "johto-route-2",
+  "connections": [
+   "johto-route-1",
+   "johto-route-3"
+  ],
+  "unlock": {
+   "requires": [
+    "johto-route-1"
+   ]
+  },
+  "unlockOrder": 102,
+  "position": {
+   "x": 60,
+   "y": 60
+  }
+ },
+ "johto-route-3": {
+  "id": "johto-route-3",
+  "name": "Johto Route 3",
+  "type": "route",
+  "region": "johto",
+  "description": "A wild path in the Johto region.",
+  "routeKey": "johto-route-3",
+  "connections": [
+   "johto-route-2"
+  ],
+  "unlock": {
+   "requires": [
+    "johto-route-2"
+   ]
+  },
+  "unlockOrder": 103,
+  "position": {
+   "x": 82,
+   "y": 38
+  }
+ },
+ "hoenn-town": {
+  "id": "hoenn-town",
+  "name": "Littleroot Town",
+  "type": "town",
+  "region": "hoenn",
+  "description": "A quiet town in the Hoenn region.",
+  "connections": [
+   "hoenn-route-1"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-route-3",
+     "count": 30
+    }
+   ]
+  },
+  "unlockOrder": 104,
+  "position": {
+   "x": 15,
+   "y": 55
+  },
+  "mart": {
+   "name": "Hoenn Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  },
+  "trainerCount": 3
+ },
+ "hoenn-route-1": {
+  "id": "hoenn-route-1",
+  "name": "Hoenn Route 1",
+  "type": "route",
+  "region": "hoenn",
+  "description": "A wild path in the Hoenn region.",
+  "routeKey": "hoenn-route-1",
+  "connections": [
+   "hoenn-town",
+   "hoenn-route-2"
+  ],
+  "unlock": {
+   "requires": [
+    "hoenn-town"
+   ]
+  },
+  "unlockOrder": 105,
+  "position": {
+   "x": 38,
+   "y": 35
+  }
+ },
+ "hoenn-route-2": {
+  "id": "hoenn-route-2",
+  "name": "Hoenn Route 2",
+  "type": "route",
+  "region": "hoenn",
+  "description": "A wild path in the Hoenn region.",
+  "routeKey": "hoenn-route-2",
+  "connections": [
+   "hoenn-route-1",
+   "hoenn-route-3"
+  ],
+  "unlock": {
+   "requires": [
+    "hoenn-route-1"
+   ]
+  },
+  "unlockOrder": 106,
+  "position": {
+   "x": 60,
+   "y": 60
+  }
+ },
+ "hoenn-route-3": {
+  "id": "hoenn-route-3",
+  "name": "Hoenn Route 3",
+  "type": "route",
+  "region": "hoenn",
+  "description": "A wild path in the Hoenn region.",
+  "routeKey": "hoenn-route-3",
+  "connections": [
+   "hoenn-route-2"
+  ],
+  "unlock": {
+   "requires": [
+    "hoenn-route-2"
+   ]
+  },
+  "unlockOrder": 107,
+  "position": {
+   "x": 82,
+   "y": 38
+  }
+ },
+ "sinnoh-town": {
+  "id": "sinnoh-town",
+  "name": "Twinleaf Town",
+  "type": "town",
+  "region": "sinnoh",
+  "description": "A quiet town in the Sinnoh region.",
+  "connections": [
+   "sinnoh-route-1"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-3",
+     "count": 30
+    }
+   ]
+  },
+  "unlockOrder": 108,
+  "position": {
+   "x": 15,
+   "y": 55
+  },
+  "mart": {
+   "name": "Sinnoh Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  },
+  "trainerCount": 3
+ },
+ "sinnoh-route-1": {
+  "id": "sinnoh-route-1",
+  "name": "Sinnoh Route 1",
+  "type": "route",
+  "region": "sinnoh",
+  "description": "A wild path in the Sinnoh region.",
+  "routeKey": "sinnoh-route-1",
+  "connections": [
+   "sinnoh-town",
+   "sinnoh-route-2"
+  ],
+  "unlock": {
+   "requires": [
+    "sinnoh-town"
+   ]
+  },
+  "unlockOrder": 109,
+  "position": {
+   "x": 38,
+   "y": 35
+  }
+ },
+ "sinnoh-route-2": {
+  "id": "sinnoh-route-2",
+  "name": "Sinnoh Route 2",
+  "type": "route",
+  "region": "sinnoh",
+  "description": "A wild path in the Sinnoh region.",
+  "routeKey": "sinnoh-route-2",
+  "connections": [
+   "sinnoh-route-1",
+   "sinnoh-route-3"
+  ],
+  "unlock": {
+   "requires": [
+    "sinnoh-route-1"
+   ]
+  },
+  "unlockOrder": 110,
+  "position": {
+   "x": 60,
+   "y": 60
+  }
+ },
+ "sinnoh-route-3": {
+  "id": "sinnoh-route-3",
+  "name": "Sinnoh Route 3",
+  "type": "route",
+  "region": "sinnoh",
+  "description": "A wild path in the Sinnoh region.",
+  "routeKey": "sinnoh-route-3",
+  "connections": [
+   "sinnoh-route-2"
+  ],
+  "unlock": {
+   "requires": [
+    "sinnoh-route-2"
+   ]
+  },
+  "unlockOrder": 111,
+  "position": {
+   "x": 82,
+   "y": 38
+  }
+ },
+ "unova-town": {
+  "id": "unova-town",
+  "name": "Nuvema Town",
+  "type": "town",
+  "region": "unova",
+  "description": "A quiet town in the Unova region.",
+  "connections": [
+   "unova-route-1"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-3",
+     "count": 30
+    }
+   ]
+  },
+  "unlockOrder": 112,
+  "position": {
+   "x": 15,
+   "y": 55
+  },
+  "mart": {
+   "name": "Unova Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  },
+  "trainerCount": 3
+ },
+ "unova-route-1": {
+  "id": "unova-route-1",
+  "name": "Unova Route 1",
+  "type": "route",
+  "region": "unova",
+  "description": "A wild path in the Unova region.",
+  "routeKey": "unova-route-1",
+  "connections": [
+   "unova-town",
+   "unova-route-2"
+  ],
+  "unlock": {
+   "requires": [
+    "unova-town"
+   ]
+  },
+  "unlockOrder": 113,
+  "position": {
+   "x": 38,
+   "y": 35
+  }
+ },
+ "unova-route-2": {
+  "id": "unova-route-2",
+  "name": "Unova Route 2",
+  "type": "route",
+  "region": "unova",
+  "description": "A wild path in the Unova region.",
+  "routeKey": "unova-route-2",
+  "connections": [
+   "unova-route-1",
+   "unova-route-3"
+  ],
+  "unlock": {
+   "requires": [
+    "unova-route-1"
+   ]
+  },
+  "unlockOrder": 114,
+  "position": {
+   "x": 60,
+   "y": 60
+  }
+ },
+ "unova-route-3": {
+  "id": "unova-route-3",
+  "name": "Unova Route 3",
+  "type": "route",
+  "region": "unova",
+  "description": "A wild path in the Unova region.",
+  "routeKey": "unova-route-3",
+  "connections": [
+   "unova-route-2"
+  ],
+  "unlock": {
+   "requires": [
+    "unova-route-2"
+   ]
+  },
+  "unlockOrder": 115,
+  "position": {
+   "x": 82,
+   "y": 38
+  }
+ },
+ "kalos-town": {
+  "id": "kalos-town",
+  "name": "Vaniville Town",
+  "type": "town",
+  "region": "kalos",
+  "description": "A quiet town in the Kalos region.",
+  "connections": [
+   "kalos-route-1"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-3",
+     "count": 30
+    }
+   ]
+  },
+  "unlockOrder": 116,
+  "position": {
+   "x": 15,
+   "y": 55
+  },
+  "mart": {
+   "name": "Kalos Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  },
+  "trainerCount": 3
+ },
+ "kalos-route-1": {
+  "id": "kalos-route-1",
+  "name": "Kalos Route 1",
+  "type": "route",
+  "region": "kalos",
+  "description": "A wild path in the Kalos region.",
+  "routeKey": "kalos-route-1",
+  "connections": [
+   "kalos-town",
+   "kalos-route-2"
+  ],
+  "unlock": {
+   "requires": [
+    "kalos-town"
+   ]
+  },
+  "unlockOrder": 117,
+  "position": {
+   "x": 38,
+   "y": 35
+  }
+ },
+ "kalos-route-2": {
+  "id": "kalos-route-2",
+  "name": "Kalos Route 2",
+  "type": "route",
+  "region": "kalos",
+  "description": "A wild path in the Kalos region.",
+  "routeKey": "kalos-route-2",
+  "connections": [
+   "kalos-route-1",
+   "kalos-route-3"
+  ],
+  "unlock": {
+   "requires": [
+    "kalos-route-1"
+   ]
+  },
+  "unlockOrder": 118,
+  "position": {
+   "x": 60,
+   "y": 60
+  }
+ },
+ "kalos-route-3": {
+  "id": "kalos-route-3",
+  "name": "Kalos Route 3",
+  "type": "route",
+  "region": "kalos",
+  "description": "A wild path in the Kalos region.",
+  "routeKey": "kalos-route-3",
+  "connections": [
+   "kalos-route-2"
+  ],
+  "unlock": {
+   "requires": [
+    "kalos-route-2"
+   ]
+  },
+  "unlockOrder": 119,
+  "position": {
+   "x": 82,
+   "y": 38
+  }
+ },
+ "alola-town": {
+  "id": "alola-town",
+  "name": "Iki Town",
+  "type": "town",
+  "region": "alola",
+  "description": "A quiet town in the Alola region.",
+  "connections": [
+   "alola-route-1"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-3",
+     "count": 30
+    }
+   ]
+  },
+  "unlockOrder": 120,
+  "position": {
+   "x": 15,
+   "y": 55
+  },
+  "mart": {
+   "name": "Alola Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  },
+  "trainerCount": 3
+ },
+ "alola-route-1": {
+  "id": "alola-route-1",
+  "name": "Alola Route 1",
+  "type": "route",
+  "region": "alola",
+  "description": "A wild path in the Alola region.",
+  "routeKey": "alola-route-1",
+  "connections": [
+   "alola-town",
+   "alola-route-2"
+  ],
+  "unlock": {
+   "requires": [
+    "alola-town"
+   ]
+  },
+  "unlockOrder": 121,
+  "position": {
+   "x": 38,
+   "y": 35
+  }
+ },
+ "alola-route-2": {
+  "id": "alola-route-2",
+  "name": "Alola Route 2",
+  "type": "route",
+  "region": "alola",
+  "description": "A wild path in the Alola region.",
+  "routeKey": "alola-route-2",
+  "connections": [
+   "alola-route-1",
+   "alola-route-3"
+  ],
+  "unlock": {
+   "requires": [
+    "alola-route-1"
+   ]
+  },
+  "unlockOrder": 122,
+  "position": {
+   "x": 60,
+   "y": 60
+  }
+ },
+ "alola-route-3": {
+  "id": "alola-route-3",
+  "name": "Alola Route 3",
+  "type": "route",
+  "region": "alola",
+  "description": "A wild path in the Alola region.",
+  "routeKey": "alola-route-3",
+  "connections": [
+   "alola-route-2"
+  ],
+  "unlock": {
+   "requires": [
+    "alola-route-2"
+   ]
+  },
+  "unlockOrder": 123,
+  "position": {
+   "x": 82,
+   "y": 38
+  }
+ },
+ "galar-town": {
+  "id": "galar-town",
+  "name": "Postwick",
+  "type": "town",
+  "region": "galar",
+  "description": "A quiet town in the Galar region.",
+  "connections": [
+   "galar-route-1"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-3",
+     "count": 30
+    }
+   ]
+  },
+  "unlockOrder": 124,
+  "position": {
+   "x": 15,
+   "y": 55
+  },
+  "mart": {
+   "name": "Galar Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  },
+  "trainerCount": 3
+ },
+ "galar-route-1": {
+  "id": "galar-route-1",
+  "name": "Galar Route 1",
+  "type": "route",
+  "region": "galar",
+  "description": "A wild path in the Galar region.",
+  "routeKey": "galar-route-1",
+  "connections": [
+   "galar-town",
+   "galar-route-2"
+  ],
+  "unlock": {
+   "requires": [
+    "galar-town"
+   ]
+  },
+  "unlockOrder": 125,
+  "position": {
+   "x": 38,
+   "y": 35
+  }
+ },
+ "galar-route-2": {
+  "id": "galar-route-2",
+  "name": "Galar Route 2",
+  "type": "route",
+  "region": "galar",
+  "description": "A wild path in the Galar region.",
+  "routeKey": "galar-route-2",
+  "connections": [
+   "galar-route-1",
+   "galar-route-3"
+  ],
+  "unlock": {
+   "requires": [
+    "galar-route-1"
+   ]
+  },
+  "unlockOrder": 126,
+  "position": {
+   "x": 60,
+   "y": 60
+  }
+ },
+ "galar-route-3": {
+  "id": "galar-route-3",
+  "name": "Galar Route 3",
+  "type": "route",
+  "region": "galar",
+  "description": "A wild path in the Galar region.",
+  "routeKey": "galar-route-3",
+  "connections": [
+   "galar-route-2"
+  ],
+  "unlock": {
+   "requires": [
+    "galar-route-2"
+   ]
+  },
+  "unlockOrder": 127,
+  "position": {
+   "x": 82,
+   "y": 38
+  }
+ },
+ "paldea-town": {
+  "id": "paldea-town",
+  "name": "Cabo Poco",
+  "type": "town",
+  "region": "paldea",
+  "description": "A quiet town in the Paldea region.",
+  "connections": [
+   "paldea-route-1"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-route-3",
+     "count": 30
+    }
+   ]
+  },
+  "unlockOrder": 128,
+  "position": {
+   "x": 15,
+   "y": 55
+  },
+  "mart": {
+   "name": "Paldea Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  },
+  "trainerCount": 3
+ },
+ "paldea-route-1": {
+  "id": "paldea-route-1",
+  "name": "Paldea Route 1",
+  "type": "route",
+  "region": "paldea",
+  "description": "A wild path in the Paldea region.",
+  "routeKey": "paldea-route-1",
+  "connections": [
+   "paldea-town",
+   "paldea-route-2"
+  ],
+  "unlock": {
+   "requires": [
+    "paldea-town"
+   ]
+  },
+  "unlockOrder": 129,
+  "position": {
+   "x": 38,
+   "y": 35
+  }
+ },
+ "paldea-route-2": {
+  "id": "paldea-route-2",
+  "name": "Paldea Route 2",
+  "type": "route",
+  "region": "paldea",
+  "description": "A wild path in the Paldea region.",
+  "routeKey": "paldea-route-2",
+  "connections": [
+   "paldea-route-1",
+   "paldea-route-3"
+  ],
+  "unlock": {
+   "requires": [
+    "paldea-route-1"
+   ]
+  },
+  "unlockOrder": 130,
+  "position": {
+   "x": 60,
+   "y": 60
+  }
+ },
+ "paldea-route-3": {
+  "id": "paldea-route-3",
+  "name": "Paldea Route 3",
+  "type": "route",
+  "region": "paldea",
+  "description": "A wild path in the Paldea region.",
+  "routeKey": "paldea-route-3",
+  "connections": [
+   "paldea-route-2"
+  ],
+  "unlock": {
+   "requires": [
+    "paldea-route-2"
+   ]
+  },
+  "unlockOrder": 131,
+  "position": {
+   "x": 82,
+   "y": 38
+  }
+ }
 }

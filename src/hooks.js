@@ -4,7 +4,7 @@ import React from 'react'
 import { legendaryPool, trainerClassPayouts } from './data/config.js'
 import { ballOrder } from './data/items.js'
 import { MOBILE_BREAKPOINT } from './data/ui.js'
-import { encounterData, mapData, pokemonSpecies, trainerData } from './data/gameData.js'
+import { catchableSpeciesCount, encounterData, mapData, pokemonSpecies, trainerData } from './data/gameData.js'
 import { useGame } from './game/context.js'
 import { attemptCatch, selectAutoCatchBall, selectBestBall, shouldAutoCatch } from './game/catching.js'
 import { createVolatileState, resolveBattleTurn } from './game/combat.js'
@@ -61,7 +61,7 @@ export function useGameLoop() {
         })
         return
       }
-      const totalCatchablePokedex = 151, //Object.keys(pokemonSpecies).length
+      const totalCatchablePokedex = catchableSpeciesCount,
         finishedDex =
           currentGameState.pokedexCaught.length >= totalCatchablePokedex
       switch (currentGameState.phase) {

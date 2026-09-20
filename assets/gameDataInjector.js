@@ -21,6 +21,7 @@ const dataFilesToLoad = [
     { key: 'gymLeaderData', path: '/data/gym-leader-data.json', label: 'gym leader data' },
     { key: 'elite4Data', path: '/data/elite-4-data.json', label: 'elite 4 data' },
     { key: 'championData', path: '/data/champion-data.json', label: 'champion data' },
+    { key: 'regions', path: '/data/regions.json', label: 'regions' },
 ];
 
 class GameDataInjector {

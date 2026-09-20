@@ -1,0 +1,56 @@
+[
+ {
+  "id": "kanto",
+  "name": "Kanto",
+  "generation": 1,
+  "order": 1
+ },
+ {
+  "id": "johto",
+  "name": "Johto",
+  "generation": 2,
+  "order": 2
+ },
+ {
+  "id": "hoenn",
+  "name": "Hoenn",
+  "generation": 3,
+  "order": 3
+ },
+ {
+  "id": "sinnoh",
+  "name": "Sinnoh",
+  "generation": 4,
+  "order": 4
+ },
+ {
+  "id": "unova",
+  "name": "Unova",
+  "generation": 5,
+  "order": 5
+ },
+ {
+  "id": "kalos",
+  "name": "Kalos",
+  "generation": 6,
+  "order": 6
+ },
+ {
+  "id": "alola",
+  "name": "Alola",
+  "generation": 7,
+  "order": 7
+ },
+ {
+  "id": "galar",
+  "name": "Galar",
+  "generation": 8,
+  "order": 8
+ },
+ {
+  "id": "paldea",
+  "name": "Paldea",
+  "generation": 9,
+  "order": 9
+ }
+]

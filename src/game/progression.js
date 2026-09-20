@@ -70,16 +70,25 @@ export function getItemInfo(itemId) {
 export function computeUnlockedLocations(state) {
   const unlocked = new Set(state.unlockedLocations),
     badgeCount = state.defeatedGyms.length
-  for (const [locationId, location] of Object.entries(mapData)) {
-    if (unlocked.has(locationId)) continue
-    const unlockRule = location.unlock
-    ;(unlockRule.battlesAtLocation &&
-      unlockRule.battlesAtLocation.some(
-        (requiredBattles) => (state.battlesWonByLocation[requiredBattles.locationId] ?? 0) < requiredBattles.count
-      )) ||
-      (unlockRule.badgesRequired && badgeCount < unlockRule.badgesRequired) ||
-      (unlockRule.championDefeated && !state.championDefeated) ||
-      unlocked.add(locationId)
+  let changed = true
+  while (changed) {
+    changed = false
+    for (const [locationId, location] of Object.entries(mapData)) {
+      if (unlocked.has(locationId)) continue
+      const unlockRule = location.unlock
+      const blocked =
+        (unlockRule.battlesAtLocation &&
+          unlockRule.battlesAtLocation.some(
+            (requiredBattles) => (state.battlesWonByLocation[requiredBattles.locationId] ?? 0) < requiredBattles.count
+          )) ||
+        (unlockRule.badgesRequired && badgeCount < unlockRule.badgesRequired) ||
+        (unlockRule.championDefeated && !state.championDefeated) ||
+        (unlockRule.requires && unlockRule.requires.some((id) => !unlocked.has(id)))
+      if (!blocked) {
+        unlocked.add(locationId)
+        changed = true
+      }
+    }
   }
   return Array.from(unlocked)
 }

@@ -35,6 +35,8 @@ export let elite4Data = /** @type {any[]} */ (loadedGameData.elite4Data)
 
 export let championData = /** @type {any} */ (loadedGameData.championData)
 
+export let regions = /** @type {Region[]} */ (loadedGameData.regions || [])
+
 /** @type {Record<string, string>} */
 export let preEvolutionMap = Object.fromEntries(
   Object.entries(evolutionData).flatMap(([speciesKey, evolutions]) =>
@@ -50,6 +52,18 @@ for (const location of Object.values(encounterData))
     (pokedexData[encounter.speciesKey] || (pokedexData[encounter.speciesKey] = []),
       pokedexData[encounter.speciesKey].includes(location.name) ||
         pokedexData[encounter.speciesKey].push(location.name))
+
+/** @type {string[]} */
+export const wildSpeciesKeys = [
+  ...new Set(
+    Object.values(encounterData).flatMap((route) =>
+      route.encounters.map((encounter) => encounter.speciesKey)
+    )
+  ),
+]
+
+/** Number of distinct species obtainable as wild encounters (Pokédex goal). */
+export const catchableSpeciesCount = wildSpeciesKeys.length
 
 /** @type {[string, Species][]} */
 export let pokedexIndexes = Object.entries(pokemonSpecies).sort(

@@ -168,17 +168,33 @@ type EncounterEntry = {
 
 type EncounterData = { name: string; encounters: EncounterEntry[]; [key: string]: any }
 
+type Region = {
+  id: string
+  name: string
+  generation: number
+  order: number
+}
+
+type Mart = {
+  name: string
+  items: { itemId: string; unlockWildBattlesWon?: number }[]
+}
+
 type MapLocation = {
   id: string
   name: string
   type: string
   description?: string
+  region?: string
   connections: string[]
   routeKey?: string
+  mart?: Mart
+  trainerCount?: number
   unlock: {
     battlesAtLocation?: { locationId: string; count: number }[]
     badgesRequired?: number
     championDefeated?: boolean
+    requires?: string[]
   }
   unlockOrder: number
   position: { x: number; y: number }

@@ -1,8 +1,9 @@
 // Split from a grouped component file — see tools/decompile/split-components.mjs
 
+import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { legendaryPool } from '../data/config.js'
-import { mapAreas, mapData } from '../data/gameData.js'
+import { mapAreas, mapData, regions } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { createRoads } from '../game/progression.js'
 import { MapNode } from './map-node.js'
@@ -10,7 +11,15 @@ import { MapNode } from './map-node.js'
 export function TownMap() {
   const { state, dispatch } = useGame(),
     { currentLocation, unlockedLocations } = state,
-    currentLocationData = mapData[currentLocation]
+    currentLocationData = mapData[currentLocation],
+    currentRegion = currentLocationData?.region ?? 'kanto',
+    [activeRegion, setActiveRegion] = React.useState(currentRegion)
+
+  // follow the player when they travel between regions
+  React.useEffect(() => {
+    setActiveRegion(currentRegion)
+  }, [currentRegion])
+
   /** @param {string} location */
   function travelTo(location) {
     if (location === 'raidIsland') {
@@ -31,10 +40,26 @@ export function TownMap() {
       },
     })
   }
+
+  const regionOrder = React.useMemo(() => [...regions].sort((a, b) => a.order - b.order), []),
+    locationsByRegion = React.useMemo(() => {
+      /** @type {Record<string, string[]>} */
+      const map = {}
+      for (const id of mapAreas) {
+        const region = mapData[id].region ?? 'kanto'
+        ;(map[region] || (map[region] = [])).push(id)
+      }
+      return map
+    }, []),
+    activeLocationIds = locationsByRegion[activeRegion] ?? [],
+    activeLocationSet = new Set(activeLocationIds)
+
   const roads = [],
     roadSet = new Set()
-  for (const location of Object.values(mapData))
+  for (const locationId of activeLocationIds) {
+    const location = mapData[locationId]
     for (const connectionId of location.connections) {
+      if (!activeLocationSet.has(connectionId)) continue
       const roadKey = [location.id, connectionId].sort().join('-')
       roadSet.has(roadKey) ||
         (roadSet.add(roadKey),
@@ -43,6 +68,8 @@ export function TownMap() {
           to: connectionId,
         }))
     }
+  }
+
   return jsxs('div', {
     className: 'town-map',
     children: [
@@ -62,6 +89,24 @@ export function TownMap() {
             children: [state.wildBattlesWon, 'W ', state.trainerBattlesWon, 'T'],
           }),
         ],
+      }),
+      jsx('div', {
+        className: 'map-region-tabs',
+        children: regionOrder.map((region) => {
+          const ids = locationsByRegion[region.id] ?? [],
+            available = ids.some((id) => unlockedLocations.includes(id))
+          return jsx(
+            'button',
+            {
+              className: `map-region-tab${activeRegion === region.id ? ' active' : ''}${available ? '' : ' locked'}`,
+              onClick: () => available && setActiveRegion(region.id),
+              disabled: !available,
+              title: available ? region.name : 'Locked',
+              children: region.name,
+            },
+            region.id
+          )
+        }),
       }),
       jsxs('div', {
         className: 'town-map-canvas',
@@ -103,7 +148,7 @@ export function TownMap() {
               }),
             ],
           }),
-          mapAreas.map((locationId) => {
+          activeLocationIds.map((locationId) => {
             const location = mapData[locationId],
               isUnlocked = unlockedLocations.includes(locationId)
             if (location.type === 'raid' && !isUnlocked) return null

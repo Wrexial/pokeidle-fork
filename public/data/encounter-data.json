@@ -1,1681 +1,6943 @@
 {
-    "route1": {
-        "name": "Route 1",
-        "encounters": [
-            {
-                "speciesKey": "pidgey",
-                "weight": 30,
-                "minLevel": 2,
-                "maxLevel": 5
-            },
-            {
-                "speciesKey": "rattata",
-                "weight": 30,
-                "minLevel": 2,
-                "maxLevel": 5
-            },
-            {
-                "speciesKey": "caterpie",
-                "weight": 15,
-                "minLevel": 2,
-                "maxLevel": 4
-            },
-            {
-                "speciesKey": "weedle",
-                "weight": 15,
-                "minLevel": 2,
-                "maxLevel": 4
-            },
-            {
-                "speciesKey": "pikachu",
-                "weight": 5,
-                "minLevel": 3,
-                "maxLevel": 5
-            }
-        ]
-    },
-    "route2": {
-        "name": "Route 2",
-        "encounters": [
-            {
-                "speciesKey": "pidgey",
-                "weight": 20,
-                "minLevel": 3,
-                "maxLevel": 6
-            },
-            {
-                "speciesKey": "rattata",
-                "weight": 20,
-                "minLevel": 3,
-                "maxLevel": 6
-            },
-            {
-                "speciesKey": "caterpie",
-                "weight": 15,
-                "minLevel": 3,
-                "maxLevel": 5
-            },
-            {
-                "speciesKey": "weedle",
-                "weight": 15,
-                "minLevel": 3,
-                "maxLevel": 5
-            },
-            {
-                "speciesKey": "nidoranM",
-                "weight": 15,
-                "minLevel": 4,
-                "maxLevel": 6
-            },
-            {
-                "speciesKey": "nidoranF",
-                "weight": 15,
-                "minLevel": 4,
-                "maxLevel": 6
-            }
-        ]
-    },
-    "viridianForest": {
-        "name": "Viridian Forest",
-        "encounters": [
-            {
-                "speciesKey": "caterpie",
-                "weight": 25,
-                "minLevel": 4,
-                "maxLevel": 7
-            },
-            {
-                "speciesKey": "metapod",
-                "weight": 10,
-                "minLevel": 5,
-                "maxLevel": 7
-            },
-            {
-                "speciesKey": "weedle",
-                "weight": 25,
-                "minLevel": 4,
-                "maxLevel": 7
-            },
-            {
-                "speciesKey": "kakuna",
-                "weight": 10,
-                "minLevel": 5,
-                "maxLevel": 7
-            },
-            {
-                "speciesKey": "pikachu",
-                "weight": 5,
-                "minLevel": 4,
-                "maxLevel": 7
-            },
-            {
-                "speciesKey": "pidgey",
-                "weight": 25,
-                "minLevel": 4,
-                "maxLevel": 7
-            }
-        ]
-    },
-    "route3": {
-        "name": "Route 3",
-        "encounters": [
-            {
-                "speciesKey": "spearow",
-                "weight": 25,
-                "minLevel": 6,
-                "maxLevel": 9
-            },
-            {
-                "speciesKey": "nidoranM",
-                "weight": 15,
-                "minLevel": 6,
-                "maxLevel": 9
-            },
-            {
-                "speciesKey": "nidoranF",
-                "weight": 15,
-                "minLevel": 6,
-                "maxLevel": 9
-            },
-            {
-                "speciesKey": "jigglypuff",
-                "weight": 15,
-                "minLevel": 6,
-                "maxLevel": 9
-            },
-            {
-                "speciesKey": "zubat",
-                "weight": 15,
-                "minLevel": 6,
-                "maxLevel": 9
-            },
-            {
-                "speciesKey": "pidgey",
-                "weight": 15,
-                "minLevel": 6,
-                "maxLevel": 9
-            }
-        ]
-    },
-    "mtMoon": {
-        "name": "Mt. Moon",
-        "encounters": [
-            {
-                "speciesKey": "zubat",
-                "weight": 40,
-                "minLevel": 7,
-                "maxLevel": 11
-            },
-            {
-                "speciesKey": "geodude",
-                "weight": 25,
-                "minLevel": 7,
-                "maxLevel": 10
-            },
-            {
-                "speciesKey": "paras",
-                "weight": 20,
-                "minLevel": 8,
-                "maxLevel": 12
-            },
-            {
-                "speciesKey": "clefairy",
-                "weight": 15,
-                "minLevel": 8,
-                "maxLevel": 12
-            }
-        ]
-    },
-    "route4": {
-        "name": "Route 4",
-        "encounters": [
-            {
-                "speciesKey": "rattata",
-                "weight": 25,
-                "minLevel": 8,
-                "maxLevel": 12
-            },
-            {
-                "speciesKey": "spearow",
-                "weight": 25,
-                "minLevel": 8,
-                "maxLevel": 12
-            },
-            {
-                "speciesKey": "ekans",
-                "weight": 20,
-                "minLevel": 8,
-                "maxLevel": 12
-            },
-            {
-                "speciesKey": "mankey",
-                "weight": 15,
-                "minLevel": 8,
-                "maxLevel": 12
-            },
-            {
-                "speciesKey": "sandshrew",
-                "weight": 15,
-                "minLevel": 8,
-                "maxLevel": 12
-            }
-        ]
-    },
-    "route24": {
-        "name": "Route 24",
-        "encounters": [
-            {
-                "speciesKey": "oddish",
-                "weight": 25,
-                "minLevel": 12,
-                "maxLevel": 14
-            },
-            {
-                "speciesKey": "pidgey",
-                "weight": 20,
-                "minLevel": 12,
-                "maxLevel": 14
-            },
-            {
-                "speciesKey": "abra",
-                "weight": 15,
-                "minLevel": 12,
-                "maxLevel": 14
-            },
-            {
-                "speciesKey": "caterpie",
-                "weight": 15,
-                "minLevel": 12,
-                "maxLevel": 14
-            },
-            {
-                "speciesKey": "bellsprout",
-                "weight": 15,
-                "minLevel": 12,
-                "maxLevel": 14
-            },
-            {
-                "speciesKey": "weedle",
-                "weight": 10,
-                "minLevel": 12,
-                "maxLevel": 14
-            }
-        ]
-    },
-    "route25": {
-        "name": "Route 25",
-        "encounters": [
-            {
-                "speciesKey": "oddish",
-                "weight": 25,
-                "minLevel": 12,
-                "maxLevel": 14
-            },
-            {
-                "speciesKey": "pidgey",
-                "weight": 20,
-                "minLevel": 12,
-                "maxLevel": 14
-            },
-            {
-                "speciesKey": "abra",
-                "weight": 15,
-                "minLevel": 12,
-                "maxLevel": 14
-            },
-            {
-                "speciesKey": "bellsprout",
-                "weight": 15,
-                "minLevel": 12,
-                "maxLevel": 14
-            },
-            {
-                "speciesKey": "caterpie",
-                "weight": 15,
-                "minLevel": 12,
-                "maxLevel": 14
-            },
-            {
-                "speciesKey": "weedle",
-                "weight": 10,
-                "minLevel": 12,
-                "maxLevel": 14
-            }
-        ]
-    },
-    "route5": {
-        "name": "Route 5",
-        "encounters": [
-            {
-                "speciesKey": "oddish",
-                "weight": 20,
-                "minLevel": 13,
-                "maxLevel": 16
-            },
-            {
-                "speciesKey": "pidgey",
-                "weight": 20,
-                "minLevel": 13,
-                "maxLevel": 16
-            },
-            {
-                "speciesKey": "mankey",
-                "weight": 15,
-                "minLevel": 13,
-                "maxLevel": 16
-            },
-            {
-                "speciesKey": "bellsprout",
-                "weight": 15,
-                "minLevel": 13,
-                "maxLevel": 16
-            },
-            {
-                "speciesKey": "abra",
-                "weight": 10,
-                "minLevel": 13,
-                "maxLevel": 16
-            },
-            {
-                "speciesKey": "meowth",
-                "weight": 15,
-                "minLevel": 13,
-                "maxLevel": 16
-            },
-            {
-                "speciesKey": "vulpix",
-                "weight": 5,
-                "minLevel": 13,
-                "maxLevel": 16
-            }
-        ]
-    },
-    "route6": {
-        "name": "Route 6",
-        "encounters": [
-            {
-                "speciesKey": "oddish",
-                "weight": 25,
-                "minLevel": 13,
-                "maxLevel": 16
-            },
-            {
-                "speciesKey": "pidgey",
-                "weight": 20,
-                "minLevel": 13,
-                "maxLevel": 16
-            },
-            {
-                "speciesKey": "mankey",
-                "weight": 15,
-                "minLevel": 13,
-                "maxLevel": 16
-            },
-            {
-                "speciesKey": "bellsprout",
-                "weight": 15,
-                "minLevel": 13,
-                "maxLevel": 16
-            },
-            {
-                "speciesKey": "abra",
-                "weight": 10,
-                "minLevel": 13,
-                "maxLevel": 16
-            },
-            {
-                "speciesKey": "meowth",
-                "weight": 15,
-                "minLevel": 13,
-                "maxLevel": 16
-            }
-        ]
-    },
-    "route9": {
-        "name": "Route 9",
-        "encounters": [
-            {
-                "speciesKey": "rattata",
-                "weight": 20,
-                "minLevel": 14,
-                "maxLevel": 17
-            },
-            {
-                "speciesKey": "spearow",
-                "weight": 25,
-                "minLevel": 14,
-                "maxLevel": 17
-            },
-            {
-                "speciesKey": "ekans",
-                "weight": 20,
-                "minLevel": 14,
-                "maxLevel": 17
-            },
-            {
-                "speciesKey": "nidoranM",
-                "weight": 15,
-                "minLevel": 14,
-                "maxLevel": 17
-            },
-            {
-                "speciesKey": "nidoranF",
-                "weight": 15,
-                "minLevel": 14,
-                "maxLevel": 17
-            },
-            {
-                "speciesKey": "oddish",
-                "weight": 5,
-                "minLevel": 14,
-                "maxLevel": 17
-            }
-        ]
-    },
-    "route10": {
-        "name": "Route 10",
-        "encounters": [
-            {
-                "speciesKey": "spearow",
-                "weight": 25,
-                "minLevel": 14,
-                "maxLevel": 17
-            },
-            {
-                "speciesKey": "ekans",
-                "weight": 20,
-                "minLevel": 14,
-                "maxLevel": 17
-            },
-            {
-                "speciesKey": "voltorb",
-                "weight": 20,
-                "minLevel": 14,
-                "maxLevel": 17
-            },
-            {
-                "speciesKey": "nidoranM",
-                "weight": 15,
-                "minLevel": 14,
-                "maxLevel": 17
-            },
-            {
-                "speciesKey": "nidoranF",
-                "weight": 15,
-                "minLevel": 14,
-                "maxLevel": 17
-            },
-            {
-                "speciesKey": "magnemite",
-                "weight": 5,
-                "minLevel": 14,
-                "maxLevel": 17
-            }
-        ]
-    },
-    "rockTunnel": {
-        "name": "Rock Tunnel",
-        "encounters": [
-            {
-                "speciesKey": "zubat",
-                "weight": 25,
-                "minLevel": 15,
-                "maxLevel": 18
-            },
-            {
-                "speciesKey": "geodude",
-                "weight": 20,
-                "minLevel": 15,
-                "maxLevel": 18
-            },
-            {
-                "speciesKey": "machop",
-                "weight": 20,
-                "minLevel": 15,
-                "maxLevel": 18
-            },
-            {
-                "speciesKey": "onix",
-                "weight": 15,
-                "minLevel": 15,
-                "maxLevel": 18
-            },
-            {
-                "speciesKey": "omanyte",
-                "weight": 5,
-                "minLevel": 15,
-                "maxLevel": 18
-            },
-            {
-                "speciesKey": "kabuto",
-                "weight": 5,
-                "minLevel": 15,
-                "maxLevel": 18
-            },
-            {
-                "speciesKey": "aerodactyl",
-                "weight": 3,
-                "minLevel": 18,
-                "maxLevel": 22
-            },
-            {
-                "speciesKey": "hitmonlee",
-                "weight": 3,
-                "minLevel": 18,
-                "maxLevel": 22
-            },
-            {
-                "speciesKey": "hitmonchan",
-                "weight": 4,
-                "minLevel": 18,
-                "maxLevel": 22
-            }
-        ]
-    },
-    "pokemonTower": {
-        "name": "Pokemon Tower",
-        "encounters": [
-            {
-                "speciesKey": "gastly",
-                "weight": 40,
-                "minLevel": 20,
-                "maxLevel": 25
-            },
-            {
-                "speciesKey": "haunter",
-                "weight": 15,
-                "minLevel": 23,
-                "maxLevel": 25
-            },
-            {
-                "speciesKey": "cubone",
-                "weight": 30,
-                "minLevel": 20,
-                "maxLevel": 24
-            },
-            {
-                "speciesKey": "mrMime",
-                "weight": 5,
-                "minLevel": 22,
-                "maxLevel": 26
-            },
-            {
-                "speciesKey": "jynx",
-                "weight": 5,
-                "minLevel": 24,
-                "maxLevel": 28
-            },
-            {
-                "speciesKey": "porygon",
-                "weight": 5,
-                "minLevel": 24,
-                "maxLevel": 28
-            }
-        ]
-    },
-    "route7": {
-        "name": "Route 7",
-        "encounters": [
-            {
-                "speciesKey": "pidgey",
-                "weight": 20,
-                "minLevel": 18,
-                "maxLevel": 22
-            },
-            {
-                "speciesKey": "oddish",
-                "weight": 20,
-                "minLevel": 18,
-                "maxLevel": 22
-            },
-            {
-                "speciesKey": "mankey",
-                "weight": 15,
-                "minLevel": 18,
-                "maxLevel": 22
-            },
-            {
-                "speciesKey": "growlithe",
-                "weight": 15,
-                "minLevel": 18,
-                "maxLevel": 22
-            },
-            {
-                "speciesKey": "bellsprout",
-                "weight": 10,
-                "minLevel": 18,
-                "maxLevel": 22
-            },
-            {
-                "speciesKey": "meowth",
-                "weight": 10,
-                "minLevel": 18,
-                "maxLevel": 22
-            },
-            {
-                "speciesKey": "vulpix",
-                "weight": 10,
-                "minLevel": 18,
-                "maxLevel": 22
-            }
-        ]
-    },
-    "route8": {
-        "name": "Route 8",
-        "encounters": [
-            {
-                "speciesKey": "pidgey",
-                "weight": 15,
-                "minLevel": 18,
-                "maxLevel": 22
-            },
-            {
-                "speciesKey": "ekans",
-                "weight": 15,
-                "minLevel": 18,
-                "maxLevel": 22
-            },
-            {
-                "speciesKey": "growlithe",
-                "weight": 15,
-                "minLevel": 18,
-                "maxLevel": 22
-            },
-            {
-                "speciesKey": "mankey",
-                "weight": 15,
-                "minLevel": 18,
-                "maxLevel": 22
-            },
-            {
-                "speciesKey": "oddish",
-                "weight": 15,
-                "minLevel": 18,
-                "maxLevel": 22
-            },
-            {
-                "speciesKey": "meowth",
-                "weight": 15,
-                "minLevel": 18,
-                "maxLevel": 22
-            },
-            {
-                "speciesKey": "vulpix",
-                "weight": 10,
-                "minLevel": 18,
-                "maxLevel": 22
-            }
-        ]
-    },
-    "route11": {
-        "name": "Route 11",
-        "encounters": [
-            {
-                "speciesKey": "ekans",
-                "weight": 25,
-                "minLevel": 14,
-                "maxLevel": 17
-            },
-            {
-                "speciesKey": "drowzee",
-                "weight": 25,
-                "minLevel": 14,
-                "maxLevel": 17
-            },
-            {
-                "speciesKey": "spearow",
-                "weight": 20,
-                "minLevel": 14,
-                "maxLevel": 17
-            },
-            {
-                "speciesKey": "rattata",
-                "weight": 15,
-                "minLevel": 14,
-                "maxLevel": 17
-            },
-            {
-                "speciesKey": "sandshrew",
-                "weight": 15,
-                "minLevel": 14,
-                "maxLevel": 17
-            }
-        ]
-    },
-    "route12": {
-        "name": "Route 12",
-        "encounters": [
-            {
-                "speciesKey": "oddish",
-                "weight": 25,
-                "minLevel": 22,
-                "maxLevel": 26
-            },
-            {
-                "speciesKey": "venonat",
-                "weight": 25,
-                "minLevel": 22,
-                "maxLevel": 26
-            },
-            {
-                "speciesKey": "pidgey",
-                "weight": 20,
-                "minLevel": 22,
-                "maxLevel": 26
-            },
-            {
-                "speciesKey": "bellsprout",
-                "weight": 15,
-                "minLevel": 22,
-                "maxLevel": 26
-            },
-            {
-                "speciesKey": "gloom",
-                "weight": 10,
-                "minLevel": 24,
-                "maxLevel": 26
-            },
-            {
-                "speciesKey": "farfetchd",
-                "weight": 5,
-                "minLevel": 24,
-                "maxLevel": 26
-            }
-        ]
-    },
-    "route13": {
-        "name": "Route 13",
-        "encounters": [
-            {
-                "speciesKey": "oddish",
-                "weight": 25,
-                "minLevel": 22,
-                "maxLevel": 26
-            },
-            {
-                "speciesKey": "venonat",
-                "weight": 25,
-                "minLevel": 22,
-                "maxLevel": 26
-            },
-            {
-                "speciesKey": "pidgey",
-                "weight": 20,
-                "minLevel": 22,
-                "maxLevel": 26
-            },
-            {
-                "speciesKey": "bellsprout",
-                "weight": 15,
-                "minLevel": 22,
-                "maxLevel": 26
-            },
-            {
-                "speciesKey": "gloom",
-                "weight": 10,
-                "minLevel": 24,
-                "maxLevel": 26
-            },
-            {
-                "speciesKey": "ditto",
-                "weight": 5,
-                "minLevel": 24,
-                "maxLevel": 26
-            }
-        ]
-    },
-    "route14": {
-        "name": "Route 14",
-        "encounters": [
-            {
-                "speciesKey": "oddish",
-                "weight": 25,
-                "minLevel": 23,
-                "maxLevel": 27
-            },
-            {
-                "speciesKey": "venonat",
-                "weight": 25,
-                "minLevel": 23,
-                "maxLevel": 27
-            },
-            {
-                "speciesKey": "pidgey",
-                "weight": 20,
-                "minLevel": 23,
-                "maxLevel": 27
-            },
-            {
-                "speciesKey": "gloom",
-                "weight": 15,
-                "minLevel": 25,
-                "maxLevel": 27
-            },
-            {
-                "speciesKey": "ditto",
-                "weight": 10,
-                "minLevel": 25,
-                "maxLevel": 27
-            },
-            {
-                "speciesKey": "bellsprout",
-                "weight": 5,
-                "minLevel": 23,
-                "maxLevel": 27
-            }
-        ]
-    },
-    "route15": {
-        "name": "Route 15",
-        "encounters": [
-            {
-                "speciesKey": "oddish",
-                "weight": 25,
-                "minLevel": 23,
-                "maxLevel": 27
-            },
-            {
-                "speciesKey": "venonat",
-                "weight": 25,
-                "minLevel": 23,
-                "maxLevel": 27
-            },
-            {
-                "speciesKey": "pidgey",
-                "weight": 20,
-                "minLevel": 23,
-                "maxLevel": 27
-            },
-            {
-                "speciesKey": "gloom",
-                "weight": 15,
-                "minLevel": 25,
-                "maxLevel": 27
-            },
-            {
-                "speciesKey": "ditto",
-                "weight": 10,
-                "minLevel": 25,
-                "maxLevel": 27
-            },
-            {
-                "speciesKey": "bellsprout",
-                "weight": 5,
-                "minLevel": 23,
-                "maxLevel": 27
-            }
-        ]
-    },
-    "route16": {
-        "name": "Route 16",
-        "encounters": [
-            {
-                "speciesKey": "rattata",
-                "weight": 25,
-                "minLevel": 18,
-                "maxLevel": 22
-            },
-            {
-                "speciesKey": "spearow",
-                "weight": 25,
-                "minLevel": 18,
-                "maxLevel": 22
-            },
-            {
-                "speciesKey": "doduo",
-                "weight": 25,
-                "minLevel": 18,
-                "maxLevel": 22
-            },
-            {
-                "speciesKey": "raticate",
-                "weight": 15,
-                "minLevel": 20,
-                "maxLevel": 22
-            },
-            {
-                "speciesKey": "fearow",
-                "weight": 10,
-                "minLevel": 20,
-                "maxLevel": 22
-            }
-        ]
-    },
-    "route17": {
-        "name": "Route 17",
-        "encounters": [
-            {
-                "speciesKey": "doduo",
-                "weight": 25,
-                "minLevel": 24,
-                "maxLevel": 28
-            },
-            {
-                "speciesKey": "rattata",
-                "weight": 20,
-                "minLevel": 24,
-                "maxLevel": 28
-            },
-            {
-                "speciesKey": "spearow",
-                "weight": 20,
-                "minLevel": 24,
-                "maxLevel": 28
-            },
-            {
-                "speciesKey": "raticate",
-                "weight": 15,
-                "minLevel": 26,
-                "maxLevel": 28
-            },
-            {
-                "speciesKey": "fearow",
-                "weight": 10,
-                "minLevel": 26,
-                "maxLevel": 28
-            },
-            {
-                "speciesKey": "dodrio",
-                "weight": 10,
-                "minLevel": 26,
-                "maxLevel": 28
-            }
-        ]
-    },
-    "route18": {
-        "name": "Route 18",
-        "encounters": [
-            {
-                "speciesKey": "doduo",
-                "weight": 25,
-                "minLevel": 24,
-                "maxLevel": 28
-            },
-            {
-                "speciesKey": "rattata",
-                "weight": 20,
-                "minLevel": 24,
-                "maxLevel": 28
-            },
-            {
-                "speciesKey": "spearow",
-                "weight": 20,
-                "minLevel": 24,
-                "maxLevel": 28
-            },
-            {
-                "speciesKey": "raticate",
-                "weight": 15,
-                "minLevel": 26,
-                "maxLevel": 28
-            },
-            {
-                "speciesKey": "fearow",
-                "weight": 10,
-                "minLevel": 26,
-                "maxLevel": 28
-            },
-            {
-                "speciesKey": "dodrio",
-                "weight": 10,
-                "minLevel": 26,
-                "maxLevel": 28
-            }
-        ]
-    },
-    "safariZone": {
-        "name": "Safari Zone",
-        "encounters": [
-            {
-                "speciesKey": "nidoranM",
-                "weight": 30,
-                "minLevel": 22,
-                "maxLevel": 28
-            },
-            {
-                "speciesKey": "nidoranF",
-                "weight": 30,
-                "minLevel": 22,
-                "maxLevel": 28
-            },
-            {
-                "speciesKey": "paras",
-                "weight": 24,
-                "minLevel": 22,
-                "maxLevel": 28
-            },
-            {
-                "speciesKey": "venonat",
-                "weight": 24,
-                "minLevel": 22,
-                "maxLevel": 28
-            },
-            {
-                "speciesKey": "exeggcute",
-                "weight": 24,
-                "minLevel": 24,
-                "maxLevel": 28
-            },
-            {
-                "speciesKey": "rhyhorn",
-                "weight": 24,
-                "minLevel": 25,
-                "maxLevel": 28
-            },
-            {
-                "speciesKey": "chansey",
-                "weight": 12,
-                "minLevel": 23,
-                "maxLevel": 28
-            },
-            {
-                "speciesKey": "scyther",
-                "weight": 12,
-                "minLevel": 23,
-                "maxLevel": 28
-            },
-            {
-                "speciesKey": "kangaskhan",
-                "weight": 12,
-                "minLevel": 25,
-                "maxLevel": 28
-            },
-            {
-                "speciesKey": "tauros",
-                "weight": 12,
-                "minLevel": 25,
-                "maxLevel": 28
-            },
-            {
-                "speciesKey": "dratini",
-                "weight": 12,
-                "minLevel": 15,
-                "maxLevel": 20
-            },
-            {
-                "speciesKey": "tangela",
-                "weight": 12,
-                "minLevel": 22,
-                "maxLevel": 28
-            },
-            {
-                "speciesKey": "pinsir",
-                "weight": 15,
-                "minLevel": 23,
-                "maxLevel": 28
-            },
-            {
-                "speciesKey": "goldeen",
-                "weight": 15,
-                "minLevel": 22,
-                "maxLevel": 28
-            },
-            {
-                "speciesKey": "poliwag",
-                "weight": 15,
-                "minLevel": 22,
-                "maxLevel": 28
-            },
-            {
-                "speciesKey": "eevee",
-                "weight": 9,
-                "minLevel": 25,
-                "maxLevel": 25
-            },
-            {
-                "speciesKey": "lickitung",
-                "weight": 9,
-                "minLevel": 25,
-                "maxLevel": 28
-            },
-            {
-                "speciesKey": "snorlax",
-                "weight": 9,
-                "minLevel": 30,
-                "maxLevel": 30
-            },
-            {
-                "speciesKey": "bulbasaur",
-                "weight": 1,
-                "minLevel": 25,
-                "maxLevel": 25
-            },
-            {
-                "speciesKey": "charmander",
-                "weight": 1,
-                "minLevel": 25,
-                "maxLevel": 25
-            },
-            {
-                "speciesKey": "squirtle",
-                "weight": 1,
-                "minLevel": 25,
-                "maxLevel": 25
-            }
-        ]
-    },
-    "diglettsCave": {
-        "name": "Diglett's Cave",
-        "encounters": [
-            {
-                "speciesKey": "diglett",
-                "weight": 70,
-                "minLevel": 15,
-                "maxLevel": 22
-            },
-            {
-                "speciesKey": "dugtrio",
-                "weight": 30,
-                "minLevel": 29,
-                "maxLevel": 31
-            }
-        ]
-    },
-    "route19": {
-        "name": "Route 19",
-        "encounters": [
-            {
-                "speciesKey": "tentacool",
-                "weight": 35,
-                "minLevel": 5,
-                "maxLevel": 40
-            },
-            {
-                "speciesKey": "shellder",
-                "weight": 15,
-                "minLevel": 25,
-                "maxLevel": 30
-            },
-            {
-                "speciesKey": "magikarp",
-                "weight": 15,
-                "minLevel": 5,
-                "maxLevel": 15
-            },
-            {
-                "speciesKey": "horsea",
-                "weight": 15,
-                "minLevel": 20,
-                "maxLevel": 30
-            },
-            {
-                "speciesKey": "goldeen",
-                "weight": 10,
-                "minLevel": 20,
-                "maxLevel": 30
-            },
-            {
-                "speciesKey": "krabby",
-                "weight": 10,
-                "minLevel": 20,
-                "maxLevel": 30
-            }
-        ]
-    },
-    "route20": {
-        "name": "Route 20",
-        "encounters": [
-            {
-                "speciesKey": "tentacool",
-                "weight": 35,
-                "minLevel": 5,
-                "maxLevel": 40
-            },
-            {
-                "speciesKey": "shellder",
-                "weight": 15,
-                "minLevel": 25,
-                "maxLevel": 30
-            },
-            {
-                "speciesKey": "magikarp",
-                "weight": 15,
-                "minLevel": 5,
-                "maxLevel": 15
-            },
-            {
-                "speciesKey": "horsea",
-                "weight": 15,
-                "minLevel": 20,
-                "maxLevel": 30
-            },
-            {
-                "speciesKey": "goldeen",
-                "weight": 10,
-                "minLevel": 20,
-                "maxLevel": 30
-            },
-            {
-                "speciesKey": "staryu",
-                "weight": 10,
-                "minLevel": 20,
-                "maxLevel": 30
-            }
-        ]
-    },
-    "seafoamIslands": {
-        "name": "Seafoam Islands",
-        "encounters": [
-            {
-                "speciesKey": "zubat",
-                "weight": 15,
-                "minLevel": 26,
-                "maxLevel": 30
-            },
-            {
-                "speciesKey": "golbat",
-                "weight": 10,
-                "minLevel": 28,
-                "maxLevel": 32
-            },
-            {
-                "speciesKey": "seel",
-                "weight": 20,
-                "minLevel": 26,
-                "maxLevel": 32
-            },
-            {
-                "speciesKey": "dewgong",
-                "weight": 10,
-                "minLevel": 30,
-                "maxLevel": 34
-            },
-            {
-                "speciesKey": "psyduck",
-                "weight": 10,
-                "minLevel": 26,
-                "maxLevel": 30
-            },
-            {
-                "speciesKey": "slowpoke",
-                "weight": 10,
-                "minLevel": 26,
-                "maxLevel": 30
-            },
-            {
-                "speciesKey": "shellder",
-                "weight": 10,
-                "minLevel": 26,
-                "maxLevel": 30
-            },
-            {
-                "speciesKey": "horsea",
-                "weight": 10,
-                "minLevel": 26,
-                "maxLevel": 30
-            }
-        ]
-    },
-    "pokemonMansion": {
-        "name": "Pokemon Mansion",
-        "encounters": [
-            {
-                "speciesKey": "koffing",
-                "weight": 20,
-                "minLevel": 26,
-                "maxLevel": 34
-            },
-            {
-                "speciesKey": "grimer",
-                "weight": 15,
-                "minLevel": 26,
-                "maxLevel": 34
-            },
-            {
-                "speciesKey": "growlithe",
-                "weight": 15,
-                "minLevel": 28,
-                "maxLevel": 34
-            },
-            {
-                "speciesKey": "ponyta",
-                "weight": 12,
-                "minLevel": 28,
-                "maxLevel": 34
-            },
-            {
-                "speciesKey": "rattata",
-                "weight": 8,
-                "minLevel": 26,
-                "maxLevel": 30
-            },
-            {
-                "speciesKey": "raticate",
-                "weight": 8,
-                "minLevel": 30,
-                "maxLevel": 34
-            },
-            {
-                "speciesKey": "vulpix",
-                "weight": 8,
-                "minLevel": 28,
-                "maxLevel": 34
-            },
-            {
-                "speciesKey": "magmar",
-                "weight": 7,
-                "minLevel": 32,
-                "maxLevel": 36
-            },
-            {
-                "speciesKey": "weezing",
-                "weight": 7,
-                "minLevel": 32,
-                "maxLevel": 36
-            }
-        ]
-    },
-    "route21": {
-        "name": "Route 21",
-        "encounters": [
-            {
-                "speciesKey": "tentacool",
-                "weight": 30,
-                "minLevel": 5,
-                "maxLevel": 40
-            },
-            {
-                "speciesKey": "rattata",
-                "weight": 15,
-                "minLevel": 21,
-                "maxLevel": 23
-            },
-            {
-                "speciesKey": "raticate",
-                "weight": 10,
-                "minLevel": 23,
-                "maxLevel": 25
-            },
-            {
-                "speciesKey": "tangela",
-                "weight": 10,
-                "minLevel": 22,
-                "maxLevel": 26
-            },
-            {
-                "speciesKey": "magikarp",
-                "weight": 10,
-                "minLevel": 5,
-                "maxLevel": 15
-            },
-            {
-                "speciesKey": "staryu",
-                "weight": 8,
-                "minLevel": 22,
-                "maxLevel": 28
-            },
-            {
-                "speciesKey": "krabby",
-                "weight": 7,
-                "minLevel": 22,
-                "maxLevel": 28
-            },
-            {
-                "speciesKey": "lapras",
-                "weight": 5,
-                "minLevel": 25,
-                "maxLevel": 30
-            },
-            {
-                "speciesKey": "seadra",
-                "weight": 5,
-                "minLevel": 28,
-                "maxLevel": 32
-            }
-        ]
-    },
-    "route22": {
-        "name": "Route 22",
-        "encounters": [
-            {
-                "speciesKey": "rattata",
-                "weight": 25,
-                "minLevel": 2,
-                "maxLevel": 5
-            },
-            {
-                "speciesKey": "nidoranM",
-                "weight": 25,
-                "minLevel": 2,
-                "maxLevel": 5
-            },
-            {
-                "speciesKey": "nidoranF",
-                "weight": 25,
-                "minLevel": 2,
-                "maxLevel": 5
-            },
-            {
-                "speciesKey": "spearow",
-                "weight": 20,
-                "minLevel": 3,
-                "maxLevel": 5
-            },
-            {
-                "speciesKey": "mankey",
-                "weight": 5,
-                "minLevel": 3,
-                "maxLevel": 5
-            }
-        ]
-    },
-    "route23": {
-        "name": "Route 23",
-        "encounters": [
-            {
-                "speciesKey": "spearow",
-                "weight": 20,
-                "minLevel": 26,
-                "maxLevel": 30
-            },
-            {
-                "speciesKey": "fearow",
-                "weight": 15,
-                "minLevel": 30,
-                "maxLevel": 34
-            },
-            {
-                "speciesKey": "ekans",
-                "weight": 20,
-                "minLevel": 26,
-                "maxLevel": 30
-            },
-            {
-                "speciesKey": "arbok",
-                "weight": 10,
-                "minLevel": 30,
-                "maxLevel": 34
-            },
-            {
-                "speciesKey": "sandshrew",
-                "weight": 20,
-                "minLevel": 26,
-                "maxLevel": 30
-            },
-            {
-                "speciesKey": "sandslash",
-                "weight": 10,
-                "minLevel": 30,
-                "maxLevel": 34
-            },
-            {
-                "speciesKey": "ditto",
-                "weight": 5,
-                "minLevel": 33,
-                "maxLevel": 36
-            }
-        ]
-    },
-    "powerPlant": {
-        "name": "Power Plant",
-        "encounters": [
-            {
-                "speciesKey": "voltorb",
-                "weight": 22,
-                "minLevel": 21,
-                "maxLevel": 24
-            },
-            {
-                "speciesKey": "magnemite",
-                "weight": 22,
-                "minLevel": 21,
-                "maxLevel": 24
-            },
-            {
-                "speciesKey": "pikachu",
-                "weight": 13,
-                "minLevel": 21,
-                "maxLevel": 24
-            },
-            {
-                "speciesKey": "magneton",
-                "weight": 10,
-                "minLevel": 29,
-                "maxLevel": 33
-            },
-            {
-                "speciesKey": "electrode",
-                "weight": 10,
-                "minLevel": 29,
-                "maxLevel": 33
-            },
-            {
-                "speciesKey": "electabuzz",
-                "weight": 13,
-                "minLevel": 33,
-                "maxLevel": 36
-            },
-            {
-                "speciesKey": "jolteon",
-                "weight": 5,
-                "minLevel": 30,
-                "maxLevel": 36
-            }
-        ]
-    },
-    "victoryRoad": {
-        "name": "Victory Road",
-        "encounters": [
-            {
-                "speciesKey": "zubat",
-                "weight": 10,
-                "minLevel": 32,
-                "maxLevel": 36
-            },
-            {
-                "speciesKey": "golbat",
-                "weight": 12,
-                "minLevel": 34,
-                "maxLevel": 38
-            },
-            {
-                "speciesKey": "geodude",
-                "weight": 15,
-                "minLevel": 32,
-                "maxLevel": 36
-            },
-            {
-                "speciesKey": "graveler",
-                "weight": 10,
-                "minLevel": 36,
-                "maxLevel": 40
-            },
-            {
-                "speciesKey": "onix",
-                "weight": 12,
-                "minLevel": 36,
-                "maxLevel": 42
-            },
-            {
-                "speciesKey": "machop",
-                "weight": 8,
-                "minLevel": 32,
-                "maxLevel": 36
-            },
-            {
-                "speciesKey": "machoke",
-                "weight": 10,
-                "minLevel": 38,
-                "maxLevel": 42
-            },
-            {
-                "speciesKey": "marowak",
-                "weight": 8,
-                "minLevel": 38,
-                "maxLevel": 42
-            },
-            {
-                "speciesKey": "primeape",
-                "weight": 5,
-                "minLevel": 38,
-                "maxLevel": 42
-            },
-            {
-                "speciesKey": "rhydon",
-                "weight": 5,
-                "minLevel": 40,
-                "maxLevel": 44
-            }
-        ]
-    },
-    "ceruleanCave": {
-        "name": "Cerulean Cave",
-        "encounters": [
-            {
-                "speciesKey": "golbat",
-                "weight": 12,
-                "minLevel": 46,
-                "maxLevel": 50
-            },
-            {
-                "speciesKey": "kadabra",
-                "weight": 10,
-                "minLevel": 46,
-                "maxLevel": 50
-            },
-            {
-                "speciesKey": "hypno",
-                "weight": 8,
-                "minLevel": 46,
-                "maxLevel": 50
-            },
-            {
-                "speciesKey": "magneton",
-                "weight": 8,
-                "minLevel": 46,
-                "maxLevel": 50
-            },
-            {
-                "speciesKey": "dodrio",
-                "weight": 8,
-                "minLevel": 46,
-                "maxLevel": 50
-            },
-            {
-                "speciesKey": "venomoth",
-                "weight": 8,
-                "minLevel": 46,
-                "maxLevel": 50
-            },
-            {
-                "speciesKey": "rhydon",
-                "weight": 8,
-                "minLevel": 48,
-                "maxLevel": 52
-            },
-            {
-                "speciesKey": "chansey",
-                "weight": 5,
-                "minLevel": 46,
-                "maxLevel": 50
-            },
-            {
-                "speciesKey": "ditto",
-                "weight": 10,
-                "minLevel": 46,
-                "maxLevel": 50
-            },
-            {
-                "speciesKey": "snorlax",
-                "weight": 5,
-                "minLevel": 48,
-                "maxLevel": 52
-            },
-            {
-                "speciesKey": "lapras",
-                "weight": 5,
-                "minLevel": 48,
-                "maxLevel": 52
-            },
-            {
-                "speciesKey": "dragonite",
-                "weight": 3,
-                "minLevel": 55,
-                "maxLevel": 60
-            },
-            {
-                "speciesKey": "alakazam",
-                "weight": 5,
-                "minLevel": 48,
-                "maxLevel": 52
-            }
-        ]
-    },
-    "trainingArea": {
-        "name": "Training Area",
-        "encounters": [
-            {
-                "speciesKey": "chansey",
-                "weight": 90,
-                "minLevel": 1,
-                "maxLevel": 100
-            },
-            {
-                "speciesKey": "blissey",
-                "weight": 10,
-                "minLevel": 1,
-                "maxLevel": 100
-            }
-        ]
-    }
+ "route1": {
+  "name": "Route 1",
+  "encounters": [
+   {
+    "speciesKey": "pidgey",
+    "weight": 30,
+    "minLevel": 2,
+    "maxLevel": 5
+   },
+   {
+    "speciesKey": "rattata",
+    "weight": 30,
+    "minLevel": 2,
+    "maxLevel": 5
+   },
+   {
+    "speciesKey": "caterpie",
+    "weight": 15,
+    "minLevel": 2,
+    "maxLevel": 4
+   },
+   {
+    "speciesKey": "weedle",
+    "weight": 15,
+    "minLevel": 2,
+    "maxLevel": 4
+   },
+   {
+    "speciesKey": "pikachu",
+    "weight": 5,
+    "minLevel": 3,
+    "maxLevel": 5
+   }
+  ]
+ },
+ "route2": {
+  "name": "Route 2",
+  "encounters": [
+   {
+    "speciesKey": "pidgey",
+    "weight": 20,
+    "minLevel": 3,
+    "maxLevel": 6
+   },
+   {
+    "speciesKey": "rattata",
+    "weight": 20,
+    "minLevel": 3,
+    "maxLevel": 6
+   },
+   {
+    "speciesKey": "caterpie",
+    "weight": 15,
+    "minLevel": 3,
+    "maxLevel": 5
+   },
+   {
+    "speciesKey": "weedle",
+    "weight": 15,
+    "minLevel": 3,
+    "maxLevel": 5
+   },
+   {
+    "speciesKey": "nidoranM",
+    "weight": 15,
+    "minLevel": 4,
+    "maxLevel": 6
+   },
+   {
+    "speciesKey": "nidoranF",
+    "weight": 15,
+    "minLevel": 4,
+    "maxLevel": 6
+   }
+  ]
+ },
+ "viridianForest": {
+  "name": "Viridian Forest",
+  "encounters": [
+   {
+    "speciesKey": "caterpie",
+    "weight": 25,
+    "minLevel": 4,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "metapod",
+    "weight": 10,
+    "minLevel": 5,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "weedle",
+    "weight": 25,
+    "minLevel": 4,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "kakuna",
+    "weight": 10,
+    "minLevel": 5,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "pikachu",
+    "weight": 5,
+    "minLevel": 4,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "pidgey",
+    "weight": 25,
+    "minLevel": 4,
+    "maxLevel": 7
+   }
+  ]
+ },
+ "route3": {
+  "name": "Route 3",
+  "encounters": [
+   {
+    "speciesKey": "spearow",
+    "weight": 25,
+    "minLevel": 6,
+    "maxLevel": 9
+   },
+   {
+    "speciesKey": "nidoranM",
+    "weight": 15,
+    "minLevel": 6,
+    "maxLevel": 9
+   },
+   {
+    "speciesKey": "nidoranF",
+    "weight": 15,
+    "minLevel": 6,
+    "maxLevel": 9
+   },
+   {
+    "speciesKey": "jigglypuff",
+    "weight": 15,
+    "minLevel": 6,
+    "maxLevel": 9
+   },
+   {
+    "speciesKey": "zubat",
+    "weight": 15,
+    "minLevel": 6,
+    "maxLevel": 9
+   },
+   {
+    "speciesKey": "pidgey",
+    "weight": 15,
+    "minLevel": 6,
+    "maxLevel": 9
+   }
+  ]
+ },
+ "mtMoon": {
+  "name": "Mt. Moon",
+  "encounters": [
+   {
+    "speciesKey": "zubat",
+    "weight": 40,
+    "minLevel": 7,
+    "maxLevel": 11
+   },
+   {
+    "speciesKey": "geodude",
+    "weight": 25,
+    "minLevel": 7,
+    "maxLevel": 10
+   },
+   {
+    "speciesKey": "paras",
+    "weight": 20,
+    "minLevel": 8,
+    "maxLevel": 12
+   },
+   {
+    "speciesKey": "clefairy",
+    "weight": 15,
+    "minLevel": 8,
+    "maxLevel": 12
+   }
+  ]
+ },
+ "route4": {
+  "name": "Route 4",
+  "encounters": [
+   {
+    "speciesKey": "rattata",
+    "weight": 25,
+    "minLevel": 8,
+    "maxLevel": 12
+   },
+   {
+    "speciesKey": "spearow",
+    "weight": 25,
+    "minLevel": 8,
+    "maxLevel": 12
+   },
+   {
+    "speciesKey": "ekans",
+    "weight": 20,
+    "minLevel": 8,
+    "maxLevel": 12
+   },
+   {
+    "speciesKey": "mankey",
+    "weight": 15,
+    "minLevel": 8,
+    "maxLevel": 12
+   },
+   {
+    "speciesKey": "sandshrew",
+    "weight": 15,
+    "minLevel": 8,
+    "maxLevel": 12
+   }
+  ]
+ },
+ "route24": {
+  "name": "Route 24",
+  "encounters": [
+   {
+    "speciesKey": "oddish",
+    "weight": 25,
+    "minLevel": 12,
+    "maxLevel": 14
+   },
+   {
+    "speciesKey": "pidgey",
+    "weight": 20,
+    "minLevel": 12,
+    "maxLevel": 14
+   },
+   {
+    "speciesKey": "abra",
+    "weight": 15,
+    "minLevel": 12,
+    "maxLevel": 14
+   },
+   {
+    "speciesKey": "caterpie",
+    "weight": 15,
+    "minLevel": 12,
+    "maxLevel": 14
+   },
+   {
+    "speciesKey": "bellsprout",
+    "weight": 15,
+    "minLevel": 12,
+    "maxLevel": 14
+   },
+   {
+    "speciesKey": "weedle",
+    "weight": 10,
+    "minLevel": 12,
+    "maxLevel": 14
+   }
+  ]
+ },
+ "route25": {
+  "name": "Route 25",
+  "encounters": [
+   {
+    "speciesKey": "oddish",
+    "weight": 25,
+    "minLevel": 12,
+    "maxLevel": 14
+   },
+   {
+    "speciesKey": "pidgey",
+    "weight": 20,
+    "minLevel": 12,
+    "maxLevel": 14
+   },
+   {
+    "speciesKey": "abra",
+    "weight": 15,
+    "minLevel": 12,
+    "maxLevel": 14
+   },
+   {
+    "speciesKey": "bellsprout",
+    "weight": 15,
+    "minLevel": 12,
+    "maxLevel": 14
+   },
+   {
+    "speciesKey": "caterpie",
+    "weight": 15,
+    "minLevel": 12,
+    "maxLevel": 14
+   },
+   {
+    "speciesKey": "weedle",
+    "weight": 10,
+    "minLevel": 12,
+    "maxLevel": 14
+   }
+  ]
+ },
+ "route5": {
+  "name": "Route 5",
+  "encounters": [
+   {
+    "speciesKey": "oddish",
+    "weight": 20,
+    "minLevel": 13,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "pidgey",
+    "weight": 20,
+    "minLevel": 13,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "mankey",
+    "weight": 15,
+    "minLevel": 13,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "bellsprout",
+    "weight": 15,
+    "minLevel": 13,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "abra",
+    "weight": 10,
+    "minLevel": 13,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "meowth",
+    "weight": 15,
+    "minLevel": 13,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "vulpix",
+    "weight": 5,
+    "minLevel": 13,
+    "maxLevel": 16
+   }
+  ]
+ },
+ "route6": {
+  "name": "Route 6",
+  "encounters": [
+   {
+    "speciesKey": "oddish",
+    "weight": 25,
+    "minLevel": 13,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "pidgey",
+    "weight": 20,
+    "minLevel": 13,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "mankey",
+    "weight": 15,
+    "minLevel": 13,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "bellsprout",
+    "weight": 15,
+    "minLevel": 13,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "abra",
+    "weight": 10,
+    "minLevel": 13,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "meowth",
+    "weight": 15,
+    "minLevel": 13,
+    "maxLevel": 16
+   }
+  ]
+ },
+ "route9": {
+  "name": "Route 9",
+  "encounters": [
+   {
+    "speciesKey": "rattata",
+    "weight": 20,
+    "minLevel": 14,
+    "maxLevel": 17
+   },
+   {
+    "speciesKey": "spearow",
+    "weight": 25,
+    "minLevel": 14,
+    "maxLevel": 17
+   },
+   {
+    "speciesKey": "ekans",
+    "weight": 20,
+    "minLevel": 14,
+    "maxLevel": 17
+   },
+   {
+    "speciesKey": "nidoranM",
+    "weight": 15,
+    "minLevel": 14,
+    "maxLevel": 17
+   },
+   {
+    "speciesKey": "nidoranF",
+    "weight": 15,
+    "minLevel": 14,
+    "maxLevel": 17
+   },
+   {
+    "speciesKey": "oddish",
+    "weight": 5,
+    "minLevel": 14,
+    "maxLevel": 17
+   }
+  ]
+ },
+ "route10": {
+  "name": "Route 10",
+  "encounters": [
+   {
+    "speciesKey": "spearow",
+    "weight": 25,
+    "minLevel": 14,
+    "maxLevel": 17
+   },
+   {
+    "speciesKey": "ekans",
+    "weight": 20,
+    "minLevel": 14,
+    "maxLevel": 17
+   },
+   {
+    "speciesKey": "voltorb",
+    "weight": 20,
+    "minLevel": 14,
+    "maxLevel": 17
+   },
+   {
+    "speciesKey": "nidoranM",
+    "weight": 15,
+    "minLevel": 14,
+    "maxLevel": 17
+   },
+   {
+    "speciesKey": "nidoranF",
+    "weight": 15,
+    "minLevel": 14,
+    "maxLevel": 17
+   },
+   {
+    "speciesKey": "magnemite",
+    "weight": 5,
+    "minLevel": 14,
+    "maxLevel": 17
+   }
+  ]
+ },
+ "rockTunnel": {
+  "name": "Rock Tunnel",
+  "encounters": [
+   {
+    "speciesKey": "zubat",
+    "weight": 25,
+    "minLevel": 15,
+    "maxLevel": 18
+   },
+   {
+    "speciesKey": "geodude",
+    "weight": 20,
+    "minLevel": 15,
+    "maxLevel": 18
+   },
+   {
+    "speciesKey": "machop",
+    "weight": 20,
+    "minLevel": 15,
+    "maxLevel": 18
+   },
+   {
+    "speciesKey": "onix",
+    "weight": 15,
+    "minLevel": 15,
+    "maxLevel": 18
+   },
+   {
+    "speciesKey": "omanyte",
+    "weight": 5,
+    "minLevel": 15,
+    "maxLevel": 18
+   },
+   {
+    "speciesKey": "kabuto",
+    "weight": 5,
+    "minLevel": 15,
+    "maxLevel": 18
+   },
+   {
+    "speciesKey": "aerodactyl",
+    "weight": 3,
+    "minLevel": 18,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "hitmonlee",
+    "weight": 3,
+    "minLevel": 18,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "hitmonchan",
+    "weight": 4,
+    "minLevel": 18,
+    "maxLevel": 22
+   }
+  ]
+ },
+ "pokemonTower": {
+  "name": "Pokemon Tower",
+  "encounters": [
+   {
+    "speciesKey": "gastly",
+    "weight": 40,
+    "minLevel": 20,
+    "maxLevel": 25
+   },
+   {
+    "speciesKey": "haunter",
+    "weight": 15,
+    "minLevel": 23,
+    "maxLevel": 25
+   },
+   {
+    "speciesKey": "cubone",
+    "weight": 30,
+    "minLevel": 20,
+    "maxLevel": 24
+   },
+   {
+    "speciesKey": "mrMime",
+    "weight": 5,
+    "minLevel": 22,
+    "maxLevel": 26
+   },
+   {
+    "speciesKey": "jynx",
+    "weight": 5,
+    "minLevel": 24,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "porygon",
+    "weight": 5,
+    "minLevel": 24,
+    "maxLevel": 28
+   }
+  ]
+ },
+ "route7": {
+  "name": "Route 7",
+  "encounters": [
+   {
+    "speciesKey": "pidgey",
+    "weight": 20,
+    "minLevel": 18,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "oddish",
+    "weight": 20,
+    "minLevel": 18,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "mankey",
+    "weight": 15,
+    "minLevel": 18,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "growlithe",
+    "weight": 15,
+    "minLevel": 18,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "bellsprout",
+    "weight": 10,
+    "minLevel": 18,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "meowth",
+    "weight": 10,
+    "minLevel": 18,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "vulpix",
+    "weight": 10,
+    "minLevel": 18,
+    "maxLevel": 22
+   }
+  ]
+ },
+ "route8": {
+  "name": "Route 8",
+  "encounters": [
+   {
+    "speciesKey": "pidgey",
+    "weight": 15,
+    "minLevel": 18,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "ekans",
+    "weight": 15,
+    "minLevel": 18,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "growlithe",
+    "weight": 15,
+    "minLevel": 18,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "mankey",
+    "weight": 15,
+    "minLevel": 18,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "oddish",
+    "weight": 15,
+    "minLevel": 18,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "meowth",
+    "weight": 15,
+    "minLevel": 18,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "vulpix",
+    "weight": 10,
+    "minLevel": 18,
+    "maxLevel": 22
+   }
+  ]
+ },
+ "route11": {
+  "name": "Route 11",
+  "encounters": [
+   {
+    "speciesKey": "ekans",
+    "weight": 25,
+    "minLevel": 14,
+    "maxLevel": 17
+   },
+   {
+    "speciesKey": "drowzee",
+    "weight": 25,
+    "minLevel": 14,
+    "maxLevel": 17
+   },
+   {
+    "speciesKey": "spearow",
+    "weight": 20,
+    "minLevel": 14,
+    "maxLevel": 17
+   },
+   {
+    "speciesKey": "rattata",
+    "weight": 15,
+    "minLevel": 14,
+    "maxLevel": 17
+   },
+   {
+    "speciesKey": "sandshrew",
+    "weight": 15,
+    "minLevel": 14,
+    "maxLevel": 17
+   }
+  ]
+ },
+ "route12": {
+  "name": "Route 12",
+  "encounters": [
+   {
+    "speciesKey": "oddish",
+    "weight": 25,
+    "minLevel": 22,
+    "maxLevel": 26
+   },
+   {
+    "speciesKey": "venonat",
+    "weight": 25,
+    "minLevel": 22,
+    "maxLevel": 26
+   },
+   {
+    "speciesKey": "pidgey",
+    "weight": 20,
+    "minLevel": 22,
+    "maxLevel": 26
+   },
+   {
+    "speciesKey": "bellsprout",
+    "weight": 15,
+    "minLevel": 22,
+    "maxLevel": 26
+   },
+   {
+    "speciesKey": "gloom",
+    "weight": 10,
+    "minLevel": 24,
+    "maxLevel": 26
+   },
+   {
+    "speciesKey": "farfetchd",
+    "weight": 5,
+    "minLevel": 24,
+    "maxLevel": 26
+   }
+  ]
+ },
+ "route13": {
+  "name": "Route 13",
+  "encounters": [
+   {
+    "speciesKey": "oddish",
+    "weight": 25,
+    "minLevel": 22,
+    "maxLevel": 26
+   },
+   {
+    "speciesKey": "venonat",
+    "weight": 25,
+    "minLevel": 22,
+    "maxLevel": 26
+   },
+   {
+    "speciesKey": "pidgey",
+    "weight": 20,
+    "minLevel": 22,
+    "maxLevel": 26
+   },
+   {
+    "speciesKey": "bellsprout",
+    "weight": 15,
+    "minLevel": 22,
+    "maxLevel": 26
+   },
+   {
+    "speciesKey": "gloom",
+    "weight": 10,
+    "minLevel": 24,
+    "maxLevel": 26
+   },
+   {
+    "speciesKey": "ditto",
+    "weight": 5,
+    "minLevel": 24,
+    "maxLevel": 26
+   }
+  ]
+ },
+ "route14": {
+  "name": "Route 14",
+  "encounters": [
+   {
+    "speciesKey": "oddish",
+    "weight": 25,
+    "minLevel": 23,
+    "maxLevel": 27
+   },
+   {
+    "speciesKey": "venonat",
+    "weight": 25,
+    "minLevel": 23,
+    "maxLevel": 27
+   },
+   {
+    "speciesKey": "pidgey",
+    "weight": 20,
+    "minLevel": 23,
+    "maxLevel": 27
+   },
+   {
+    "speciesKey": "gloom",
+    "weight": 15,
+    "minLevel": 25,
+    "maxLevel": 27
+   },
+   {
+    "speciesKey": "ditto",
+    "weight": 10,
+    "minLevel": 25,
+    "maxLevel": 27
+   },
+   {
+    "speciesKey": "bellsprout",
+    "weight": 5,
+    "minLevel": 23,
+    "maxLevel": 27
+   }
+  ]
+ },
+ "route15": {
+  "name": "Route 15",
+  "encounters": [
+   {
+    "speciesKey": "oddish",
+    "weight": 25,
+    "minLevel": 23,
+    "maxLevel": 27
+   },
+   {
+    "speciesKey": "venonat",
+    "weight": 25,
+    "minLevel": 23,
+    "maxLevel": 27
+   },
+   {
+    "speciesKey": "pidgey",
+    "weight": 20,
+    "minLevel": 23,
+    "maxLevel": 27
+   },
+   {
+    "speciesKey": "gloom",
+    "weight": 15,
+    "minLevel": 25,
+    "maxLevel": 27
+   },
+   {
+    "speciesKey": "ditto",
+    "weight": 10,
+    "minLevel": 25,
+    "maxLevel": 27
+   },
+   {
+    "speciesKey": "bellsprout",
+    "weight": 5,
+    "minLevel": 23,
+    "maxLevel": 27
+   }
+  ]
+ },
+ "route16": {
+  "name": "Route 16",
+  "encounters": [
+   {
+    "speciesKey": "rattata",
+    "weight": 25,
+    "minLevel": 18,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "spearow",
+    "weight": 25,
+    "minLevel": 18,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "doduo",
+    "weight": 25,
+    "minLevel": 18,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "raticate",
+    "weight": 15,
+    "minLevel": 20,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "fearow",
+    "weight": 10,
+    "minLevel": 20,
+    "maxLevel": 22
+   }
+  ]
+ },
+ "route17": {
+  "name": "Route 17",
+  "encounters": [
+   {
+    "speciesKey": "doduo",
+    "weight": 25,
+    "minLevel": 24,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "rattata",
+    "weight": 20,
+    "minLevel": 24,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "spearow",
+    "weight": 20,
+    "minLevel": 24,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "raticate",
+    "weight": 15,
+    "minLevel": 26,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "fearow",
+    "weight": 10,
+    "minLevel": 26,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "dodrio",
+    "weight": 10,
+    "minLevel": 26,
+    "maxLevel": 28
+   }
+  ]
+ },
+ "route18": {
+  "name": "Route 18",
+  "encounters": [
+   {
+    "speciesKey": "doduo",
+    "weight": 25,
+    "minLevel": 24,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "rattata",
+    "weight": 20,
+    "minLevel": 24,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "spearow",
+    "weight": 20,
+    "minLevel": 24,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "raticate",
+    "weight": 15,
+    "minLevel": 26,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "fearow",
+    "weight": 10,
+    "minLevel": 26,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "dodrio",
+    "weight": 10,
+    "minLevel": 26,
+    "maxLevel": 28
+   }
+  ]
+ },
+ "safariZone": {
+  "name": "Safari Zone",
+  "encounters": [
+   {
+    "speciesKey": "nidoranM",
+    "weight": 30,
+    "minLevel": 22,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "nidoranF",
+    "weight": 30,
+    "minLevel": 22,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "paras",
+    "weight": 24,
+    "minLevel": 22,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "venonat",
+    "weight": 24,
+    "minLevel": 22,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "exeggcute",
+    "weight": 24,
+    "minLevel": 24,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "rhyhorn",
+    "weight": 24,
+    "minLevel": 25,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "chansey",
+    "weight": 12,
+    "minLevel": 23,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "scyther",
+    "weight": 12,
+    "minLevel": 23,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "kangaskhan",
+    "weight": 12,
+    "minLevel": 25,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "tauros",
+    "weight": 12,
+    "minLevel": 25,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "dratini",
+    "weight": 12,
+    "minLevel": 15,
+    "maxLevel": 20
+   },
+   {
+    "speciesKey": "tangela",
+    "weight": 12,
+    "minLevel": 22,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "pinsir",
+    "weight": 15,
+    "minLevel": 23,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 15,
+    "minLevel": 22,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "poliwag",
+    "weight": 15,
+    "minLevel": 22,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "eevee",
+    "weight": 9,
+    "minLevel": 25,
+    "maxLevel": 25
+   },
+   {
+    "speciesKey": "lickitung",
+    "weight": 9,
+    "minLevel": 25,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "snorlax",
+    "weight": 9,
+    "minLevel": 30,
+    "maxLevel": 30
+   },
+   {
+    "speciesKey": "bulbasaur",
+    "weight": 1,
+    "minLevel": 25,
+    "maxLevel": 25
+   },
+   {
+    "speciesKey": "charmander",
+    "weight": 1,
+    "minLevel": 25,
+    "maxLevel": 25
+   },
+   {
+    "speciesKey": "squirtle",
+    "weight": 1,
+    "minLevel": 25,
+    "maxLevel": 25
+   }
+  ]
+ },
+ "diglettsCave": {
+  "name": "Diglett's Cave",
+  "encounters": [
+   {
+    "speciesKey": "diglett",
+    "weight": 70,
+    "minLevel": 15,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "dugtrio",
+    "weight": 30,
+    "minLevel": 29,
+    "maxLevel": 31
+   }
+  ]
+ },
+ "route19": {
+  "name": "Route 19",
+  "encounters": [
+   {
+    "speciesKey": "tentacool",
+    "weight": 35,
+    "minLevel": 5,
+    "maxLevel": 40
+   },
+   {
+    "speciesKey": "shellder",
+    "weight": 15,
+    "minLevel": 25,
+    "maxLevel": 30
+   },
+   {
+    "speciesKey": "magikarp",
+    "weight": 15,
+    "minLevel": 5,
+    "maxLevel": 15
+   },
+   {
+    "speciesKey": "horsea",
+    "weight": 15,
+    "minLevel": 20,
+    "maxLevel": 30
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 10,
+    "minLevel": 20,
+    "maxLevel": 30
+   },
+   {
+    "speciesKey": "krabby",
+    "weight": 10,
+    "minLevel": 20,
+    "maxLevel": 30
+   }
+  ]
+ },
+ "route20": {
+  "name": "Route 20",
+  "encounters": [
+   {
+    "speciesKey": "tentacool",
+    "weight": 35,
+    "minLevel": 5,
+    "maxLevel": 40
+   },
+   {
+    "speciesKey": "shellder",
+    "weight": 15,
+    "minLevel": 25,
+    "maxLevel": 30
+   },
+   {
+    "speciesKey": "magikarp",
+    "weight": 15,
+    "minLevel": 5,
+    "maxLevel": 15
+   },
+   {
+    "speciesKey": "horsea",
+    "weight": 15,
+    "minLevel": 20,
+    "maxLevel": 30
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 10,
+    "minLevel": 20,
+    "maxLevel": 30
+   },
+   {
+    "speciesKey": "staryu",
+    "weight": 10,
+    "minLevel": 20,
+    "maxLevel": 30
+   }
+  ]
+ },
+ "seafoamIslands": {
+  "name": "Seafoam Islands",
+  "encounters": [
+   {
+    "speciesKey": "zubat",
+    "weight": 15,
+    "minLevel": 26,
+    "maxLevel": 30
+   },
+   {
+    "speciesKey": "golbat",
+    "weight": 10,
+    "minLevel": 28,
+    "maxLevel": 32
+   },
+   {
+    "speciesKey": "seel",
+    "weight": 20,
+    "minLevel": 26,
+    "maxLevel": 32
+   },
+   {
+    "speciesKey": "dewgong",
+    "weight": 10,
+    "minLevel": 30,
+    "maxLevel": 34
+   },
+   {
+    "speciesKey": "psyduck",
+    "weight": 10,
+    "minLevel": 26,
+    "maxLevel": 30
+   },
+   {
+    "speciesKey": "slowpoke",
+    "weight": 10,
+    "minLevel": 26,
+    "maxLevel": 30
+   },
+   {
+    "speciesKey": "shellder",
+    "weight": 10,
+    "minLevel": 26,
+    "maxLevel": 30
+   },
+   {
+    "speciesKey": "horsea",
+    "weight": 10,
+    "minLevel": 26,
+    "maxLevel": 30
+   }
+  ]
+ },
+ "pokemonMansion": {
+  "name": "Pokemon Mansion",
+  "encounters": [
+   {
+    "speciesKey": "koffing",
+    "weight": 20,
+    "minLevel": 26,
+    "maxLevel": 34
+   },
+   {
+    "speciesKey": "grimer",
+    "weight": 15,
+    "minLevel": 26,
+    "maxLevel": 34
+   },
+   {
+    "speciesKey": "growlithe",
+    "weight": 15,
+    "minLevel": 28,
+    "maxLevel": 34
+   },
+   {
+    "speciesKey": "ponyta",
+    "weight": 12,
+    "minLevel": 28,
+    "maxLevel": 34
+   },
+   {
+    "speciesKey": "rattata",
+    "weight": 8,
+    "minLevel": 26,
+    "maxLevel": 30
+   },
+   {
+    "speciesKey": "raticate",
+    "weight": 8,
+    "minLevel": 30,
+    "maxLevel": 34
+   },
+   {
+    "speciesKey": "vulpix",
+    "weight": 8,
+    "minLevel": 28,
+    "maxLevel": 34
+   },
+   {
+    "speciesKey": "magmar",
+    "weight": 7,
+    "minLevel": 32,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "weezing",
+    "weight": 7,
+    "minLevel": 32,
+    "maxLevel": 36
+   }
+  ]
+ },
+ "route21": {
+  "name": "Route 21",
+  "encounters": [
+   {
+    "speciesKey": "tentacool",
+    "weight": 30,
+    "minLevel": 5,
+    "maxLevel": 40
+   },
+   {
+    "speciesKey": "rattata",
+    "weight": 15,
+    "minLevel": 21,
+    "maxLevel": 23
+   },
+   {
+    "speciesKey": "raticate",
+    "weight": 10,
+    "minLevel": 23,
+    "maxLevel": 25
+   },
+   {
+    "speciesKey": "tangela",
+    "weight": 10,
+    "minLevel": 22,
+    "maxLevel": 26
+   },
+   {
+    "speciesKey": "magikarp",
+    "weight": 10,
+    "minLevel": 5,
+    "maxLevel": 15
+   },
+   {
+    "speciesKey": "staryu",
+    "weight": 8,
+    "minLevel": 22,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "krabby",
+    "weight": 7,
+    "minLevel": 22,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "lapras",
+    "weight": 5,
+    "minLevel": 25,
+    "maxLevel": 30
+   },
+   {
+    "speciesKey": "seadra",
+    "weight": 5,
+    "minLevel": 28,
+    "maxLevel": 32
+   }
+  ]
+ },
+ "route22": {
+  "name": "Route 22",
+  "encounters": [
+   {
+    "speciesKey": "rattata",
+    "weight": 25,
+    "minLevel": 2,
+    "maxLevel": 5
+   },
+   {
+    "speciesKey": "nidoranM",
+    "weight": 25,
+    "minLevel": 2,
+    "maxLevel": 5
+   },
+   {
+    "speciesKey": "nidoranF",
+    "weight": 25,
+    "minLevel": 2,
+    "maxLevel": 5
+   },
+   {
+    "speciesKey": "spearow",
+    "weight": 20,
+    "minLevel": 3,
+    "maxLevel": 5
+   },
+   {
+    "speciesKey": "mankey",
+    "weight": 5,
+    "minLevel": 3,
+    "maxLevel": 5
+   }
+  ]
+ },
+ "route23": {
+  "name": "Route 23",
+  "encounters": [
+   {
+    "speciesKey": "spearow",
+    "weight": 20,
+    "minLevel": 26,
+    "maxLevel": 30
+   },
+   {
+    "speciesKey": "fearow",
+    "weight": 15,
+    "minLevel": 30,
+    "maxLevel": 34
+   },
+   {
+    "speciesKey": "ekans",
+    "weight": 20,
+    "minLevel": 26,
+    "maxLevel": 30
+   },
+   {
+    "speciesKey": "arbok",
+    "weight": 10,
+    "minLevel": 30,
+    "maxLevel": 34
+   },
+   {
+    "speciesKey": "sandshrew",
+    "weight": 20,
+    "minLevel": 26,
+    "maxLevel": 30
+   },
+   {
+    "speciesKey": "sandslash",
+    "weight": 10,
+    "minLevel": 30,
+    "maxLevel": 34
+   },
+   {
+    "speciesKey": "ditto",
+    "weight": 5,
+    "minLevel": 33,
+    "maxLevel": 36
+   }
+  ]
+ },
+ "powerPlant": {
+  "name": "Power Plant",
+  "encounters": [
+   {
+    "speciesKey": "voltorb",
+    "weight": 22,
+    "minLevel": 21,
+    "maxLevel": 24
+   },
+   {
+    "speciesKey": "magnemite",
+    "weight": 22,
+    "minLevel": 21,
+    "maxLevel": 24
+   },
+   {
+    "speciesKey": "pikachu",
+    "weight": 13,
+    "minLevel": 21,
+    "maxLevel": 24
+   },
+   {
+    "speciesKey": "magneton",
+    "weight": 10,
+    "minLevel": 29,
+    "maxLevel": 33
+   },
+   {
+    "speciesKey": "electrode",
+    "weight": 10,
+    "minLevel": 29,
+    "maxLevel": 33
+   },
+   {
+    "speciesKey": "electabuzz",
+    "weight": 13,
+    "minLevel": 33,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "jolteon",
+    "weight": 5,
+    "minLevel": 30,
+    "maxLevel": 36
+   }
+  ]
+ },
+ "victoryRoad": {
+  "name": "Victory Road",
+  "encounters": [
+   {
+    "speciesKey": "zubat",
+    "weight": 10,
+    "minLevel": 32,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "golbat",
+    "weight": 12,
+    "minLevel": 34,
+    "maxLevel": 38
+   },
+   {
+    "speciesKey": "geodude",
+    "weight": 15,
+    "minLevel": 32,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "graveler",
+    "weight": 10,
+    "minLevel": 36,
+    "maxLevel": 40
+   },
+   {
+    "speciesKey": "onix",
+    "weight": 12,
+    "minLevel": 36,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "machop",
+    "weight": 8,
+    "minLevel": 32,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "machoke",
+    "weight": 10,
+    "minLevel": 38,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "marowak",
+    "weight": 8,
+    "minLevel": 38,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "primeape",
+    "weight": 5,
+    "minLevel": 38,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "rhydon",
+    "weight": 5,
+    "minLevel": 40,
+    "maxLevel": 44
+   }
+  ]
+ },
+ "ceruleanCave": {
+  "name": "Cerulean Cave",
+  "encounters": [
+   {
+    "speciesKey": "golbat",
+    "weight": 12,
+    "minLevel": 46,
+    "maxLevel": 50
+   },
+   {
+    "speciesKey": "kadabra",
+    "weight": 10,
+    "minLevel": 46,
+    "maxLevel": 50
+   },
+   {
+    "speciesKey": "hypno",
+    "weight": 8,
+    "minLevel": 46,
+    "maxLevel": 50
+   },
+   {
+    "speciesKey": "magneton",
+    "weight": 8,
+    "minLevel": 46,
+    "maxLevel": 50
+   },
+   {
+    "speciesKey": "dodrio",
+    "weight": 8,
+    "minLevel": 46,
+    "maxLevel": 50
+   },
+   {
+    "speciesKey": "venomoth",
+    "weight": 8,
+    "minLevel": 46,
+    "maxLevel": 50
+   },
+   {
+    "speciesKey": "rhydon",
+    "weight": 8,
+    "minLevel": 48,
+    "maxLevel": 52
+   },
+   {
+    "speciesKey": "chansey",
+    "weight": 5,
+    "minLevel": 46,
+    "maxLevel": 50
+   },
+   {
+    "speciesKey": "ditto",
+    "weight": 10,
+    "minLevel": 46,
+    "maxLevel": 50
+   },
+   {
+    "speciesKey": "snorlax",
+    "weight": 5,
+    "minLevel": 48,
+    "maxLevel": 52
+   },
+   {
+    "speciesKey": "lapras",
+    "weight": 5,
+    "minLevel": 48,
+    "maxLevel": 52
+   },
+   {
+    "speciesKey": "dragonite",
+    "weight": 3,
+    "minLevel": 55,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "alakazam",
+    "weight": 5,
+    "minLevel": 48,
+    "maxLevel": 52
+   }
+  ]
+ },
+ "trainingArea": {
+  "name": "Training Area",
+  "encounters": [
+   {
+    "speciesKey": "chansey",
+    "weight": 90,
+    "minLevel": 1,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "blissey",
+    "weight": 10,
+    "minLevel": 1,
+    "maxLevel": 100
+   }
+  ]
+ },
+ "johto-route-1": {
+  "name": "Johto Route 1",
+  "encounters": [
+   {
+    "speciesKey": "chikorita",
+    "weight": 20,
+    "minLevel": 28,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "bayleef",
+    "weight": 20,
+    "minLevel": 28,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "meganium",
+    "weight": 20,
+    "minLevel": 28,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "cyndaquil",
+    "weight": 12,
+    "minLevel": 28,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "quilava",
+    "weight": 12,
+    "minLevel": 28,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "typhlosion",
+    "weight": 12,
+    "minLevel": 28,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "totodile",
+    "weight": 12,
+    "minLevel": 28,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "croconaw",
+    "weight": 12,
+    "minLevel": 28,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "feraligatr",
+    "weight": 6,
+    "minLevel": 28,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "sentret",
+    "weight": 6,
+    "minLevel": 28,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "furret",
+    "weight": 6,
+    "minLevel": 28,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "hoothoot",
+    "weight": 6,
+    "minLevel": 28,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "noctowl",
+    "weight": 6,
+    "minLevel": 28,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "ledyba",
+    "weight": 6,
+    "minLevel": 28,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "ledian",
+    "weight": 6,
+    "minLevel": 28,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "spinarak",
+    "weight": 6,
+    "minLevel": 28,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "ariados",
+    "weight": 6,
+    "minLevel": 28,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "crobat",
+    "weight": 6,
+    "minLevel": 28,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "chinchou",
+    "weight": 6,
+    "minLevel": 28,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "lanturn",
+    "weight": 6,
+    "minLevel": 28,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "pichu",
+    "weight": 6,
+    "minLevel": 28,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "cleffa",
+    "weight": 6,
+    "minLevel": 28,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "igglybuff",
+    "weight": 6,
+    "minLevel": 28,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "togepi",
+    "weight": 6,
+    "minLevel": 28,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "togetic",
+    "weight": 6,
+    "minLevel": 28,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "natu",
+    "weight": 6,
+    "minLevel": 28,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "xatu",
+    "weight": 6,
+    "minLevel": 28,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "mareep",
+    "weight": 6,
+    "minLevel": 28,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "flaaffy",
+    "weight": 6,
+    "minLevel": 28,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "ampharos",
+    "weight": 6,
+    "minLevel": 28,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "bellossom",
+    "weight": 6,
+    "minLevel": 28,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "marill",
+    "weight": 6,
+    "minLevel": 28,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "azumarill",
+    "weight": 6,
+    "minLevel": 28,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "sudowoodo",
+    "weight": 6,
+    "minLevel": 28,
+    "maxLevel": 36
+   }
+  ]
+ },
+ "johto-route-2": {
+  "name": "Johto Route 2",
+  "encounters": [
+   {
+    "speciesKey": "politoed",
+    "weight": 20,
+    "minLevel": 34,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "hoppip",
+    "weight": 20,
+    "minLevel": 34,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "skiploom",
+    "weight": 20,
+    "minLevel": 34,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "jumpluff",
+    "weight": 12,
+    "minLevel": 34,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "aipom",
+    "weight": 12,
+    "minLevel": 34,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "sunkern",
+    "weight": 12,
+    "minLevel": 34,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "sunflora",
+    "weight": 12,
+    "minLevel": 34,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "yanma",
+    "weight": 12,
+    "minLevel": 34,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "wooper",
+    "weight": 6,
+    "minLevel": 34,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "quagsire",
+    "weight": 6,
+    "minLevel": 34,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "espeon",
+    "weight": 6,
+    "minLevel": 34,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "umbreon",
+    "weight": 6,
+    "minLevel": 34,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "murkrow",
+    "weight": 6,
+    "minLevel": 34,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "slowking",
+    "weight": 6,
+    "minLevel": 34,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "misdreavus",
+    "weight": 6,
+    "minLevel": 34,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "unown",
+    "weight": 6,
+    "minLevel": 34,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "wobbuffet",
+    "weight": 6,
+    "minLevel": 34,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "girafarig",
+    "weight": 6,
+    "minLevel": 34,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "pineco",
+    "weight": 6,
+    "minLevel": 34,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "forretress",
+    "weight": 6,
+    "minLevel": 34,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "dunsparce",
+    "weight": 6,
+    "minLevel": 34,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "gligar",
+    "weight": 6,
+    "minLevel": 34,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "steelix",
+    "weight": 6,
+    "minLevel": 34,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "snubbull",
+    "weight": 6,
+    "minLevel": 34,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "granbull",
+    "weight": 6,
+    "minLevel": 34,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "qwilfish",
+    "weight": 6,
+    "minLevel": 34,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "scizor",
+    "weight": 6,
+    "minLevel": 34,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "shuckle",
+    "weight": 6,
+    "minLevel": 34,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "heracross",
+    "weight": 6,
+    "minLevel": 34,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "sneasel",
+    "weight": 6,
+    "minLevel": 34,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "teddiursa",
+    "weight": 6,
+    "minLevel": 34,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "ursaring",
+    "weight": 6,
+    "minLevel": 34,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "slugma",
+    "weight": 6,
+    "minLevel": 34,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "magcargo",
+    "weight": 6,
+    "minLevel": 34,
+    "maxLevel": 42
+   }
+  ]
+ },
+ "johto-route-3": {
+  "name": "Johto Route 3",
+  "encounters": [
+   {
+    "speciesKey": "swinub",
+    "weight": 20,
+    "minLevel": 40,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "piloswine",
+    "weight": 20,
+    "minLevel": 40,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "corsola",
+    "weight": 20,
+    "minLevel": 40,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "remoraid",
+    "weight": 12,
+    "minLevel": 40,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "octillery",
+    "weight": 12,
+    "minLevel": 40,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "delibird",
+    "weight": 12,
+    "minLevel": 40,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "mantine",
+    "weight": 12,
+    "minLevel": 40,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "skarmory",
+    "weight": 12,
+    "minLevel": 40,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "houndour",
+    "weight": 6,
+    "minLevel": 40,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "houndoom",
+    "weight": 6,
+    "minLevel": 40,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "kingdra",
+    "weight": 6,
+    "minLevel": 40,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "phanpy",
+    "weight": 6,
+    "minLevel": 40,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "donphan",
+    "weight": 6,
+    "minLevel": 40,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "porygon2",
+    "weight": 6,
+    "minLevel": 40,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "stantler",
+    "weight": 6,
+    "minLevel": 40,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "smeargle",
+    "weight": 6,
+    "minLevel": 40,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "tyrogue",
+    "weight": 6,
+    "minLevel": 40,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "hitmontop",
+    "weight": 6,
+    "minLevel": 40,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "smoochum",
+    "weight": 6,
+    "minLevel": 40,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "elekid",
+    "weight": 6,
+    "minLevel": 40,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "magby",
+    "weight": 6,
+    "minLevel": 40,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "miltank",
+    "weight": 6,
+    "minLevel": 40,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "blissey",
+    "weight": 6,
+    "minLevel": 40,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "raikou",
+    "weight": 1,
+    "minLevel": 40,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "entei",
+    "weight": 1,
+    "minLevel": 40,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "suicune",
+    "weight": 1,
+    "minLevel": 40,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "larvitar",
+    "weight": 6,
+    "minLevel": 40,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "pupitar",
+    "weight": 6,
+    "minLevel": 40,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "tyranitar",
+    "weight": 6,
+    "minLevel": 40,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "lugia",
+    "weight": 1,
+    "minLevel": 40,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "ho-oh",
+    "weight": 1,
+    "minLevel": 40,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "celebi",
+    "weight": 6,
+    "minLevel": 40,
+    "maxLevel": 48
+   }
+  ]
+ },
+ "hoenn-route-1": {
+  "name": "Hoenn Route 1",
+  "encounters": [
+   {
+    "speciesKey": "treecko",
+    "weight": 20,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "grovyle",
+    "weight": 20,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "sceptile",
+    "weight": 20,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "torchic",
+    "weight": 12,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "combusken",
+    "weight": 12,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "blaziken",
+    "weight": 12,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "mudkip",
+    "weight": 12,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "marshtomp",
+    "weight": 12,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "swampert",
+    "weight": 6,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "poochyena",
+    "weight": 6,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "mightyena",
+    "weight": 6,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "zigzagoon",
+    "weight": 6,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "linoone",
+    "weight": 6,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "wurmple",
+    "weight": 6,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "silcoon",
+    "weight": 6,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "beautifly",
+    "weight": 6,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "cascoon",
+    "weight": 6,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "dustox",
+    "weight": 6,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "lotad",
+    "weight": 6,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "lombre",
+    "weight": 6,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "ludicolo",
+    "weight": 6,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "seedot",
+    "weight": 6,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "nuzleaf",
+    "weight": 6,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "shiftry",
+    "weight": 6,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "taillow",
+    "weight": 6,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "swellow",
+    "weight": 6,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 6,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "pelipper",
+    "weight": 6,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "ralts",
+    "weight": 6,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "kirlia",
+    "weight": 6,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "gardevoir",
+    "weight": 6,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "surskit",
+    "weight": 6,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "masquerain",
+    "weight": 6,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "shroomish",
+    "weight": 6,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "breloom",
+    "weight": 6,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "slakoth",
+    "weight": 6,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "vigoroth",
+    "weight": 6,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "slaking",
+    "weight": 6,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "nincada",
+    "weight": 6,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "ninjask",
+    "weight": 6,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "shedinja",
+    "weight": 6,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "whismur",
+    "weight": 6,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "loudred",
+    "weight": 6,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "exploud",
+    "weight": 6,
+    "minLevel": 37,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "makuhita",
+    "weight": 6,
+    "minLevel": 37,
+    "maxLevel": 45
+   }
+  ]
+ },
+ "hoenn-route-2": {
+  "name": "Hoenn Route 2",
+  "encounters": [
+   {
+    "speciesKey": "hariyama",
+    "weight": 20,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "azurill",
+    "weight": 20,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "nosepass",
+    "weight": 20,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "skitty",
+    "weight": 12,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "delcatty",
+    "weight": 12,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "sableye",
+    "weight": 12,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "mawile",
+    "weight": 12,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "aron",
+    "weight": 12,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "lairon",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "aggron",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "meditite",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "medicham",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "electrike",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "manectric",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "plusle",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "minun",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "volbeat",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "illumise",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "roselia",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "gulpin",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "swalot",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "carvanha",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "sharpedo",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "wailmer",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "wailord",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "numel",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "camerupt",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "torkoal",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "spoink",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "grumpig",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "spinda",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "trapinch",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "vibrava",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "flygon",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "cacnea",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "cacturne",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "swablu",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "altaria",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "zangoose",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "seviper",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "lunatone",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "solrock",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "barboach",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "whiscash",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "corphish",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 51
+   }
+  ]
+ },
+ "hoenn-route-3": {
+  "name": "Hoenn Route 3",
+  "encounters": [
+   {
+    "speciesKey": "crawdaunt",
+    "weight": 20,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "baltoy",
+    "weight": 20,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "claydol",
+    "weight": 20,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "lileep",
+    "weight": 12,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "cradily",
+    "weight": 12,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "anorith",
+    "weight": 12,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "armaldo",
+    "weight": 12,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "feebas",
+    "weight": 12,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "milotic",
+    "weight": 6,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "castform",
+    "weight": 6,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "kecleon",
+    "weight": 6,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "shuppet",
+    "weight": 6,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "banette",
+    "weight": 6,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "duskull",
+    "weight": 6,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "dusclops",
+    "weight": 6,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "tropius",
+    "weight": 6,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "chimecho",
+    "weight": 6,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "absol",
+    "weight": 6,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "wynaut",
+    "weight": 6,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "snorunt",
+    "weight": 6,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "glalie",
+    "weight": 6,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "spheal",
+    "weight": 6,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "sealeo",
+    "weight": 6,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "walrein",
+    "weight": 6,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "clamperl",
+    "weight": 6,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "huntail",
+    "weight": 6,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "gorebyss",
+    "weight": 6,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "relicanth",
+    "weight": 6,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "luvdisc",
+    "weight": 6,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "bagon",
+    "weight": 6,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "shelgon",
+    "weight": 6,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "salamence",
+    "weight": 6,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "beldum",
+    "weight": 1,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "metang",
+    "weight": 1,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "metagross",
+    "weight": 1,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "regirock",
+    "weight": 1,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "regice",
+    "weight": 1,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "registeel",
+    "weight": 1,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "latias",
+    "weight": 1,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "latios",
+    "weight": 1,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "kyogre",
+    "weight": 1,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "groudon",
+    "weight": 1,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "rayquaza",
+    "weight": 6,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "jirachi",
+    "weight": 1,
+    "minLevel": 49,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "deoxys",
+    "weight": 1,
+    "minLevel": 49,
+    "maxLevel": 57
+   }
+  ]
+ },
+ "sinnoh-route-1": {
+  "name": "Sinnoh Route 1",
+  "encounters": [
+   {
+    "speciesKey": "turtwig",
+    "weight": 20,
+    "minLevel": 46,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "grotle",
+    "weight": 20,
+    "minLevel": 46,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "torterra",
+    "weight": 20,
+    "minLevel": 46,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "chimchar",
+    "weight": 12,
+    "minLevel": 46,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "monferno",
+    "weight": 12,
+    "minLevel": 46,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "infernape",
+    "weight": 12,
+    "minLevel": 46,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "piplup",
+    "weight": 12,
+    "minLevel": 46,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "prinplup",
+    "weight": 12,
+    "minLevel": 46,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "empoleon",
+    "weight": 6,
+    "minLevel": 46,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "starly",
+    "weight": 6,
+    "minLevel": 46,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "staravia",
+    "weight": 6,
+    "minLevel": 46,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "staraptor",
+    "weight": 6,
+    "minLevel": 46,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "bidoof",
+    "weight": 6,
+    "minLevel": 46,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "bibarel",
+    "weight": 6,
+    "minLevel": 46,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "kricketot",
+    "weight": 6,
+    "minLevel": 46,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "kricketune",
+    "weight": 6,
+    "minLevel": 46,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "shinx",
+    "weight": 6,
+    "minLevel": 46,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "luxio",
+    "weight": 6,
+    "minLevel": 46,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "luxray",
+    "weight": 6,
+    "minLevel": 46,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "budew",
+    "weight": 6,
+    "minLevel": 46,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "roserade",
+    "weight": 6,
+    "minLevel": 46,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "cranidos",
+    "weight": 6,
+    "minLevel": 46,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "rampardos",
+    "weight": 6,
+    "minLevel": 46,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "shieldon",
+    "weight": 6,
+    "minLevel": 46,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "bastiodon",
+    "weight": 6,
+    "minLevel": 46,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "burmy",
+    "weight": 6,
+    "minLevel": 46,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "wormadam",
+    "weight": 6,
+    "minLevel": 46,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "mothim",
+    "weight": 6,
+    "minLevel": 46,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "combee",
+    "weight": 6,
+    "minLevel": 46,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "vespiquen",
+    "weight": 6,
+    "minLevel": 46,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "pachirisu",
+    "weight": 6,
+    "minLevel": 46,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "buizel",
+    "weight": 6,
+    "minLevel": 46,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "floatzel",
+    "weight": 6,
+    "minLevel": 46,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "cherubi",
+    "weight": 6,
+    "minLevel": 46,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "cherrim",
+    "weight": 6,
+    "minLevel": 46,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "shellos",
+    "weight": 6,
+    "minLevel": 46,
+    "maxLevel": 54
+   }
+  ]
+ },
+ "sinnoh-route-2": {
+  "name": "Sinnoh Route 2",
+  "encounters": [
+   {
+    "speciesKey": "gastrodon",
+    "weight": 20,
+    "minLevel": 52,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "ambipom",
+    "weight": 20,
+    "minLevel": 52,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "drifloon",
+    "weight": 20,
+    "minLevel": 52,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "drifblim",
+    "weight": 12,
+    "minLevel": 52,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "buneary",
+    "weight": 12,
+    "minLevel": 52,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "lopunny",
+    "weight": 12,
+    "minLevel": 52,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "mismagius",
+    "weight": 12,
+    "minLevel": 52,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "honchkrow",
+    "weight": 12,
+    "minLevel": 52,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "glameow",
+    "weight": 6,
+    "minLevel": 52,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "purugly",
+    "weight": 6,
+    "minLevel": 52,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "chingling",
+    "weight": 6,
+    "minLevel": 52,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "stunky",
+    "weight": 6,
+    "minLevel": 52,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "skuntank",
+    "weight": 6,
+    "minLevel": 52,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "bronzor",
+    "weight": 6,
+    "minLevel": 52,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "bronzong",
+    "weight": 6,
+    "minLevel": 52,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "bonsly",
+    "weight": 6,
+    "minLevel": 52,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "mimeJR",
+    "weight": 6,
+    "minLevel": 52,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "happiny",
+    "weight": 6,
+    "minLevel": 52,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "chatot",
+    "weight": 6,
+    "minLevel": 52,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "spiritomb",
+    "weight": 6,
+    "minLevel": 52,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "gible",
+    "weight": 6,
+    "minLevel": 52,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "gabite",
+    "weight": 6,
+    "minLevel": 52,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "garchomp",
+    "weight": 6,
+    "minLevel": 52,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "munchlax",
+    "weight": 6,
+    "minLevel": 52,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "riolu",
+    "weight": 6,
+    "minLevel": 52,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "lucario",
+    "weight": 6,
+    "minLevel": 52,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "hippopotas",
+    "weight": 6,
+    "minLevel": 52,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "hippowdon",
+    "weight": 6,
+    "minLevel": 52,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "skorupi",
+    "weight": 6,
+    "minLevel": 52,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "drapion",
+    "weight": 6,
+    "minLevel": 52,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "croagunk",
+    "weight": 6,
+    "minLevel": 52,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "toxicroak",
+    "weight": 6,
+    "minLevel": 52,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "carnivine",
+    "weight": 6,
+    "minLevel": 52,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "finneon",
+    "weight": 6,
+    "minLevel": 52,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "lumineon",
+    "weight": 6,
+    "minLevel": 52,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "mantyke",
+    "weight": 6,
+    "minLevel": 52,
+    "maxLevel": 60
+   }
+  ]
+ },
+ "sinnoh-route-3": {
+  "name": "Sinnoh Route 3",
+  "encounters": [
+   {
+    "speciesKey": "snover",
+    "weight": 20,
+    "minLevel": 58,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "abomasnow",
+    "weight": 20,
+    "minLevel": 58,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "weavile",
+    "weight": 20,
+    "minLevel": 58,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "magnezone",
+    "weight": 12,
+    "minLevel": 58,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "lickilicky",
+    "weight": 12,
+    "minLevel": 58,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "rhyperior",
+    "weight": 12,
+    "minLevel": 58,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "tangrowth",
+    "weight": 12,
+    "minLevel": 58,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "electivire",
+    "weight": 12,
+    "minLevel": 58,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "magmortar",
+    "weight": 6,
+    "minLevel": 58,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "togekiss",
+    "weight": 6,
+    "minLevel": 58,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "yanmega",
+    "weight": 6,
+    "minLevel": 58,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "leafeon",
+    "weight": 6,
+    "minLevel": 58,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "glaceon",
+    "weight": 6,
+    "minLevel": 58,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "gliscor",
+    "weight": 6,
+    "minLevel": 58,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "mamoswine",
+    "weight": 6,
+    "minLevel": 58,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "porygon-z",
+    "weight": 6,
+    "minLevel": 58,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "gallade",
+    "weight": 6,
+    "minLevel": 58,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "probopass",
+    "weight": 6,
+    "minLevel": 58,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "dusknoir",
+    "weight": 6,
+    "minLevel": 58,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "froslass",
+    "weight": 6,
+    "minLevel": 58,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "rotom",
+    "weight": 6,
+    "minLevel": 58,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "uxie",
+    "weight": 1,
+    "minLevel": 58,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "mesprit",
+    "weight": 1,
+    "minLevel": 58,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "azelf",
+    "weight": 1,
+    "minLevel": 58,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "dialga",
+    "weight": 1,
+    "minLevel": 58,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "palkia",
+    "weight": 1,
+    "minLevel": 58,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "heatran",
+    "weight": 1,
+    "minLevel": 58,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "regigigas",
+    "weight": 1,
+    "minLevel": 58,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "giratina",
+    "weight": 1,
+    "minLevel": 58,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "cresselia",
+    "weight": 1,
+    "minLevel": 58,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "phione",
+    "weight": 6,
+    "minLevel": 58,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "manaphy",
+    "weight": 1,
+    "minLevel": 58,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "darkrai",
+    "weight": 1,
+    "minLevel": 58,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "shaymin",
+    "weight": 6,
+    "minLevel": 58,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "arceus",
+    "weight": 1,
+    "minLevel": 58,
+    "maxLevel": 66
+   }
+  ]
+ },
+ "unova-route-1": {
+  "name": "Unova Route 1",
+  "encounters": [
+   {
+    "speciesKey": "victini",
+    "weight": 1,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "snivy",
+    "weight": 20,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "servine",
+    "weight": 20,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "serperior",
+    "weight": 12,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "tepig",
+    "weight": 12,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "pignite",
+    "weight": 12,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "emboar",
+    "weight": 12,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "oshawott",
+    "weight": 12,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "dewott",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "samurott",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "patrat",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "watchog",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "lillipup",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "herdier",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "stoutland",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "purrloin",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "liepard",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "pansage",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "simisage",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "pansear",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "simisear",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "panpour",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "simipour",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "munna",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "musharna",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "pidove",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "tranquill",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "unfezant",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "blitzle",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "zebstrika",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "roggenrola",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "boldore",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "gigalith",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "woobat",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "swoobat",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "drilbur",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "excadrill",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "audino",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "timburr",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "gurdurr",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "conkeldurr",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "tympole",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "palpitoad",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "seismitoad",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "throh",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "sawk",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "sewaddle",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "swadloon",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "leavanny",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "venipede",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "whirlipede",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "scolipede",
+    "weight": 6,
+    "minLevel": 55,
+    "maxLevel": 63
+   }
+  ]
+ },
+ "unova-route-2": {
+  "name": "Unova Route 2",
+  "encounters": [
+   {
+    "speciesKey": "cottonee",
+    "weight": 20,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "whimsicott",
+    "weight": 20,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "petilil",
+    "weight": 20,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "lilligant",
+    "weight": 12,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "basculin",
+    "weight": 12,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "sandile",
+    "weight": 12,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "krokorok",
+    "weight": 12,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "krookodile",
+    "weight": 12,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "darumaka",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "darmanitan",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "maractus",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "dwebble",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "crustle",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "scraggy",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "scrafty",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "sigilyph",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "yamask",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "cofagrigus",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "tirtouga",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "carracosta",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "archen",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "archeops",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "trubbish",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "garbodor",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "zorua",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "zoroark",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "minccino",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "cinccino",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "gothita",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "gothorita",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "gothitelle",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "solosis",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "duosion",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "reuniclus",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "ducklett",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "swanna",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "vanillite",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "vanillish",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "vanilluxe",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "deerling",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "sawsbuck",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "emolga",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "karrablast",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "escavalier",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "foongus",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "amoonguss",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "frillish",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "jellicent",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "alomomola",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "joltik",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "galvantula",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "ferroseed",
+    "weight": 6,
+    "minLevel": 61,
+    "maxLevel": 69
+   }
+  ]
+ },
+ "unova-route-3": {
+  "name": "Unova Route 3",
+  "encounters": [
+   {
+    "speciesKey": "ferrothorn",
+    "weight": 20,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "klink",
+    "weight": 20,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "klang",
+    "weight": 20,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "klinklang",
+    "weight": 12,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "tynamo",
+    "weight": 12,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "eelektrik",
+    "weight": 12,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "eelektross",
+    "weight": 12,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "elgyem",
+    "weight": 12,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "beheeyem",
+    "weight": 6,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "litwick",
+    "weight": 6,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "lampent",
+    "weight": 6,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "chandelure",
+    "weight": 6,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "axew",
+    "weight": 6,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "fraxure",
+    "weight": 6,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "haxorus",
+    "weight": 6,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "cubchoo",
+    "weight": 6,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "beartic",
+    "weight": 6,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "cryogonal",
+    "weight": 6,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "shelmet",
+    "weight": 6,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "accelgor",
+    "weight": 6,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "stunfisk",
+    "weight": 6,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "mienfoo",
+    "weight": 6,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "mienshao",
+    "weight": 6,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "druddigon",
+    "weight": 6,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "golett",
+    "weight": 6,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "golurk",
+    "weight": 6,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "pawniard",
+    "weight": 6,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "bisharp",
+    "weight": 6,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "bouffalant",
+    "weight": 6,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "rufflet",
+    "weight": 6,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "braviary",
+    "weight": 6,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "vullaby",
+    "weight": 6,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "mandibuzz",
+    "weight": 6,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "heatmor",
+    "weight": 6,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "durant",
+    "weight": 6,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "deino",
+    "weight": 6,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "zweilous",
+    "weight": 6,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "hydreigon",
+    "weight": 6,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "larvesta",
+    "weight": 6,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "volcarona",
+    "weight": 6,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "cobalion",
+    "weight": 1,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "terrakion",
+    "weight": 1,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "virizion",
+    "weight": 1,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "tornadus",
+    "weight": 1,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "thundurus",
+    "weight": 1,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "reshiram",
+    "weight": 1,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "zekrom",
+    "weight": 1,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "landorus",
+    "weight": 1,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "kyurem",
+    "weight": 1,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "keldeo",
+    "weight": 1,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "meloetta",
+    "weight": 1,
+    "minLevel": 67,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "genesect",
+    "weight": 1,
+    "minLevel": 67,
+    "maxLevel": 75
+   }
+  ]
+ },
+ "kalos-route-1": {
+  "name": "Kalos Route 1",
+  "encounters": [
+   {
+    "speciesKey": "chespin",
+    "weight": 20,
+    "minLevel": 64,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "quilladin",
+    "weight": 20,
+    "minLevel": 64,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "chesnaught",
+    "weight": 20,
+    "minLevel": 64,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "fennekin",
+    "weight": 12,
+    "minLevel": 64,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "braixen",
+    "weight": 12,
+    "minLevel": 64,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "delphox",
+    "weight": 12,
+    "minLevel": 64,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "froakie",
+    "weight": 12,
+    "minLevel": 64,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "frogadier",
+    "weight": 12,
+    "minLevel": 64,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "greninja",
+    "weight": 6,
+    "minLevel": 64,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "bunnelby",
+    "weight": 6,
+    "minLevel": 64,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "diggersby",
+    "weight": 6,
+    "minLevel": 64,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "fletchling",
+    "weight": 6,
+    "minLevel": 64,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "fletchinder",
+    "weight": 6,
+    "minLevel": 64,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "talonflame",
+    "weight": 6,
+    "minLevel": 64,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "scatterbug",
+    "weight": 6,
+    "minLevel": 64,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "spewpa",
+    "weight": 6,
+    "minLevel": 64,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "vivillon",
+    "weight": 6,
+    "minLevel": 64,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "litleo",
+    "weight": 6,
+    "minLevel": 64,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "pyroar",
+    "weight": 6,
+    "minLevel": 64,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "flabebe",
+    "weight": 6,
+    "minLevel": 64,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "floette",
+    "weight": 6,
+    "minLevel": 64,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "florges",
+    "weight": 6,
+    "minLevel": 64,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "skiddo",
+    "weight": 6,
+    "minLevel": 64,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "gogoat",
+    "weight": 6,
+    "minLevel": 64,
+    "maxLevel": 72
+   }
+  ]
+ },
+ "kalos-route-2": {
+  "name": "Kalos Route 2",
+  "encounters": [
+   {
+    "speciesKey": "pancham",
+    "weight": 20,
+    "minLevel": 70,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "pangoro",
+    "weight": 20,
+    "minLevel": 70,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "furfrou",
+    "weight": 20,
+    "minLevel": 70,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "espurr",
+    "weight": 12,
+    "minLevel": 70,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "meowstic",
+    "weight": 12,
+    "minLevel": 70,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "honedge",
+    "weight": 12,
+    "minLevel": 70,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "doublade",
+    "weight": 12,
+    "minLevel": 70,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "aegislash",
+    "weight": 12,
+    "minLevel": 70,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "spritzee",
+    "weight": 6,
+    "minLevel": 70,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "aromatisse",
+    "weight": 6,
+    "minLevel": 70,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "swirlix",
+    "weight": 6,
+    "minLevel": 70,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "slurpuff",
+    "weight": 6,
+    "minLevel": 70,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "inkay",
+    "weight": 6,
+    "minLevel": 70,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "malamar",
+    "weight": 6,
+    "minLevel": 70,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "binacle",
+    "weight": 6,
+    "minLevel": 70,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "barbaracle",
+    "weight": 6,
+    "minLevel": 70,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "skrelp",
+    "weight": 6,
+    "minLevel": 70,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "dragalge",
+    "weight": 6,
+    "minLevel": 70,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "clauncher",
+    "weight": 6,
+    "minLevel": 70,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "clawitzer",
+    "weight": 6,
+    "minLevel": 70,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "helioptile",
+    "weight": 6,
+    "minLevel": 70,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "heliolisk",
+    "weight": 6,
+    "minLevel": 70,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "tyrunt",
+    "weight": 6,
+    "minLevel": 70,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "tyrantrum",
+    "weight": 6,
+    "minLevel": 70,
+    "maxLevel": 78
+   }
+  ]
+ },
+ "kalos-route-3": {
+  "name": "Kalos Route 3",
+  "encounters": [
+   {
+    "speciesKey": "amaura",
+    "weight": 20,
+    "minLevel": 76,
+    "maxLevel": 84
+   },
+   {
+    "speciesKey": "aurorus",
+    "weight": 20,
+    "minLevel": 76,
+    "maxLevel": 84
+   },
+   {
+    "speciesKey": "sylveon",
+    "weight": 20,
+    "minLevel": 76,
+    "maxLevel": 84
+   },
+   {
+    "speciesKey": "hawlucha",
+    "weight": 12,
+    "minLevel": 76,
+    "maxLevel": 84
+   },
+   {
+    "speciesKey": "dedenne",
+    "weight": 12,
+    "minLevel": 76,
+    "maxLevel": 84
+   },
+   {
+    "speciesKey": "carbink",
+    "weight": 12,
+    "minLevel": 76,
+    "maxLevel": 84
+   },
+   {
+    "speciesKey": "goomy",
+    "weight": 12,
+    "minLevel": 76,
+    "maxLevel": 84
+   },
+   {
+    "speciesKey": "sliggoo",
+    "weight": 12,
+    "minLevel": 76,
+    "maxLevel": 84
+   },
+   {
+    "speciesKey": "goodra",
+    "weight": 6,
+    "minLevel": 76,
+    "maxLevel": 84
+   },
+   {
+    "speciesKey": "klefki",
+    "weight": 6,
+    "minLevel": 76,
+    "maxLevel": 84
+   },
+   {
+    "speciesKey": "phantump",
+    "weight": 6,
+    "minLevel": 76,
+    "maxLevel": 84
+   },
+   {
+    "speciesKey": "trevenant",
+    "weight": 6,
+    "minLevel": 76,
+    "maxLevel": 84
+   },
+   {
+    "speciesKey": "pumpkaboo",
+    "weight": 6,
+    "minLevel": 76,
+    "maxLevel": 84
+   },
+   {
+    "speciesKey": "gourgeist",
+    "weight": 6,
+    "minLevel": 76,
+    "maxLevel": 84
+   },
+   {
+    "speciesKey": "bergmite",
+    "weight": 6,
+    "minLevel": 76,
+    "maxLevel": 84
+   },
+   {
+    "speciesKey": "avalugg",
+    "weight": 6,
+    "minLevel": 76,
+    "maxLevel": 84
+   },
+   {
+    "speciesKey": "noibat",
+    "weight": 6,
+    "minLevel": 76,
+    "maxLevel": 84
+   },
+   {
+    "speciesKey": "noivern",
+    "weight": 6,
+    "minLevel": 76,
+    "maxLevel": 84
+   },
+   {
+    "speciesKey": "xerneas",
+    "weight": 6,
+    "minLevel": 76,
+    "maxLevel": 84
+   },
+   {
+    "speciesKey": "yveltal",
+    "weight": 6,
+    "minLevel": 76,
+    "maxLevel": 84
+   },
+   {
+    "speciesKey": "zygarde",
+    "weight": 1,
+    "minLevel": 76,
+    "maxLevel": 84
+   },
+   {
+    "speciesKey": "diancie",
+    "weight": 1,
+    "minLevel": 76,
+    "maxLevel": 84
+   },
+   {
+    "speciesKey": "hoopa",
+    "weight": 1,
+    "minLevel": 76,
+    "maxLevel": 84
+   },
+   {
+    "speciesKey": "volcanion",
+    "weight": 1,
+    "minLevel": 76,
+    "maxLevel": 84
+   }
+  ]
+ },
+ "alola-route-1": {
+  "name": "Alola Route 1",
+  "encounters": [
+   {
+    "speciesKey": "rowlet",
+    "weight": 20,
+    "minLevel": 73,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "dartrix",
+    "weight": 20,
+    "minLevel": 73,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "decidueye",
+    "weight": 20,
+    "minLevel": 73,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "litten",
+    "weight": 12,
+    "minLevel": 73,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "torracat",
+    "weight": 12,
+    "minLevel": 73,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "incineroar",
+    "weight": 12,
+    "minLevel": 73,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "popplio",
+    "weight": 12,
+    "minLevel": 73,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "brionne",
+    "weight": 12,
+    "minLevel": 73,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "primarina",
+    "weight": 6,
+    "minLevel": 73,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "pikipek",
+    "weight": 6,
+    "minLevel": 73,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "trumbeak",
+    "weight": 6,
+    "minLevel": 73,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "toucannon",
+    "weight": 6,
+    "minLevel": 73,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "yungoos",
+    "weight": 6,
+    "minLevel": 73,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "gumshoos",
+    "weight": 6,
+    "minLevel": 73,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "grubbin",
+    "weight": 6,
+    "minLevel": 73,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "charjabug",
+    "weight": 6,
+    "minLevel": 73,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "vikavolt",
+    "weight": 6,
+    "minLevel": 73,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "crabrawler",
+    "weight": 6,
+    "minLevel": 73,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "crabominable",
+    "weight": 6,
+    "minLevel": 73,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "oricorio",
+    "weight": 6,
+    "minLevel": 73,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "cutiefly",
+    "weight": 6,
+    "minLevel": 73,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "ribombee",
+    "weight": 6,
+    "minLevel": 73,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "rockruff",
+    "weight": 6,
+    "minLevel": 73,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "lycanroc",
+    "weight": 6,
+    "minLevel": 73,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "wishiwashi",
+    "weight": 6,
+    "minLevel": 73,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "mareanie",
+    "weight": 6,
+    "minLevel": 73,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "toxapex",
+    "weight": 6,
+    "minLevel": 73,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "mudbray",
+    "weight": 6,
+    "minLevel": 73,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "mudsdale",
+    "weight": 6,
+    "minLevel": 73,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "dewpider",
+    "weight": 6,
+    "minLevel": 73,
+    "maxLevel": 81
+   }
+  ]
+ },
+ "alola-route-2": {
+  "name": "Alola Route 2",
+  "encounters": [
+   {
+    "speciesKey": "araquanid",
+    "weight": 20,
+    "minLevel": 79,
+    "maxLevel": 87
+   },
+   {
+    "speciesKey": "fomantis",
+    "weight": 20,
+    "minLevel": 79,
+    "maxLevel": 87
+   },
+   {
+    "speciesKey": "lurantis",
+    "weight": 20,
+    "minLevel": 79,
+    "maxLevel": 87
+   },
+   {
+    "speciesKey": "morelull",
+    "weight": 12,
+    "minLevel": 79,
+    "maxLevel": 87
+   },
+   {
+    "speciesKey": "shiinotic",
+    "weight": 12,
+    "minLevel": 79,
+    "maxLevel": 87
+   },
+   {
+    "speciesKey": "salandit",
+    "weight": 12,
+    "minLevel": 79,
+    "maxLevel": 87
+   },
+   {
+    "speciesKey": "salazzle",
+    "weight": 12,
+    "minLevel": 79,
+    "maxLevel": 87
+   },
+   {
+    "speciesKey": "stufful",
+    "weight": 12,
+    "minLevel": 79,
+    "maxLevel": 87
+   },
+   {
+    "speciesKey": "bewear",
+    "weight": 6,
+    "minLevel": 79,
+    "maxLevel": 87
+   },
+   {
+    "speciesKey": "bounsweet",
+    "weight": 6,
+    "minLevel": 79,
+    "maxLevel": 87
+   },
+   {
+    "speciesKey": "steenee",
+    "weight": 6,
+    "minLevel": 79,
+    "maxLevel": 87
+   },
+   {
+    "speciesKey": "tsareena",
+    "weight": 6,
+    "minLevel": 79,
+    "maxLevel": 87
+   },
+   {
+    "speciesKey": "comfey",
+    "weight": 6,
+    "minLevel": 79,
+    "maxLevel": 87
+   },
+   {
+    "speciesKey": "oranguru",
+    "weight": 6,
+    "minLevel": 79,
+    "maxLevel": 87
+   },
+   {
+    "speciesKey": "passimian",
+    "weight": 6,
+    "minLevel": 79,
+    "maxLevel": 87
+   },
+   {
+    "speciesKey": "wimpod",
+    "weight": 6,
+    "minLevel": 79,
+    "maxLevel": 87
+   },
+   {
+    "speciesKey": "golisopod",
+    "weight": 6,
+    "minLevel": 79,
+    "maxLevel": 87
+   },
+   {
+    "speciesKey": "sandygast",
+    "weight": 6,
+    "minLevel": 79,
+    "maxLevel": 87
+   },
+   {
+    "speciesKey": "palossand",
+    "weight": 6,
+    "minLevel": 79,
+    "maxLevel": 87
+   },
+   {
+    "speciesKey": "pyukumuku",
+    "weight": 6,
+    "minLevel": 79,
+    "maxLevel": 87
+   },
+   {
+    "speciesKey": "type: null",
+    "weight": 1,
+    "minLevel": 79,
+    "maxLevel": 87
+   },
+   {
+    "speciesKey": "silvally",
+    "weight": 1,
+    "minLevel": 79,
+    "maxLevel": 87
+   },
+   {
+    "speciesKey": "minior",
+    "weight": 6,
+    "minLevel": 79,
+    "maxLevel": 87
+   },
+   {
+    "speciesKey": "komala",
+    "weight": 6,
+    "minLevel": 79,
+    "maxLevel": 87
+   },
+   {
+    "speciesKey": "turtonator",
+    "weight": 6,
+    "minLevel": 79,
+    "maxLevel": 87
+   },
+   {
+    "speciesKey": "togedemaru",
+    "weight": 6,
+    "minLevel": 79,
+    "maxLevel": 87
+   },
+   {
+    "speciesKey": "mimikyu",
+    "weight": 6,
+    "minLevel": 79,
+    "maxLevel": 87
+   },
+   {
+    "speciesKey": "bruxish",
+    "weight": 6,
+    "minLevel": 79,
+    "maxLevel": 87
+   },
+   {
+    "speciesKey": "drampa",
+    "weight": 6,
+    "minLevel": 79,
+    "maxLevel": 87
+   },
+   {
+    "speciesKey": "dhelmise",
+    "weight": 6,
+    "minLevel": 79,
+    "maxLevel": 87
+   }
+  ]
+ },
+ "alola-route-3": {
+  "name": "Alola Route 3",
+  "encounters": [
+   {
+    "speciesKey": "jangmo-o",
+    "weight": 20,
+    "minLevel": 85,
+    "maxLevel": 93
+   },
+   {
+    "speciesKey": "hakamo-o",
+    "weight": 20,
+    "minLevel": 85,
+    "maxLevel": 93
+   },
+   {
+    "speciesKey": "kommo-o",
+    "weight": 20,
+    "minLevel": 85,
+    "maxLevel": 93
+   },
+   {
+    "speciesKey": "tapu koko",
+    "weight": 1,
+    "minLevel": 85,
+    "maxLevel": 93
+   },
+   {
+    "speciesKey": "tapu lele",
+    "weight": 1,
+    "minLevel": 85,
+    "maxLevel": 93
+   },
+   {
+    "speciesKey": "tapu bulu",
+    "weight": 1,
+    "minLevel": 85,
+    "maxLevel": 93
+   },
+   {
+    "speciesKey": "tapu fini",
+    "weight": 1,
+    "minLevel": 85,
+    "maxLevel": 93
+   },
+   {
+    "speciesKey": "cosmog",
+    "weight": 12,
+    "minLevel": 85,
+    "maxLevel": 93
+   },
+   {
+    "speciesKey": "cosmoem",
+    "weight": 6,
+    "minLevel": 85,
+    "maxLevel": 93
+   },
+   {
+    "speciesKey": "solgaleo",
+    "weight": 6,
+    "minLevel": 85,
+    "maxLevel": 93
+   },
+   {
+    "speciesKey": "lunala",
+    "weight": 6,
+    "minLevel": 85,
+    "maxLevel": 93
+   },
+   {
+    "speciesKey": "nihilego",
+    "weight": 6,
+    "minLevel": 85,
+    "maxLevel": 93
+   },
+   {
+    "speciesKey": "buzzwole",
+    "weight": 6,
+    "minLevel": 85,
+    "maxLevel": 93
+   },
+   {
+    "speciesKey": "pheromosa",
+    "weight": 6,
+    "minLevel": 85,
+    "maxLevel": 93
+   },
+   {
+    "speciesKey": "xurkitree",
+    "weight": 6,
+    "minLevel": 85,
+    "maxLevel": 93
+   },
+   {
+    "speciesKey": "celesteela",
+    "weight": 6,
+    "minLevel": 85,
+    "maxLevel": 93
+   },
+   {
+    "speciesKey": "kartana",
+    "weight": 6,
+    "minLevel": 85,
+    "maxLevel": 93
+   },
+   {
+    "speciesKey": "guzzlord",
+    "weight": 6,
+    "minLevel": 85,
+    "maxLevel": 93
+   },
+   {
+    "speciesKey": "necrozma",
+    "weight": 6,
+    "minLevel": 85,
+    "maxLevel": 93
+   },
+   {
+    "speciesKey": "magearna",
+    "weight": 1,
+    "minLevel": 85,
+    "maxLevel": 93
+   },
+   {
+    "speciesKey": "marshadow",
+    "weight": 1,
+    "minLevel": 85,
+    "maxLevel": 93
+   },
+   {
+    "speciesKey": "poipole",
+    "weight": 6,
+    "minLevel": 85,
+    "maxLevel": 93
+   },
+   {
+    "speciesKey": "naganadel",
+    "weight": 6,
+    "minLevel": 85,
+    "maxLevel": 93
+   },
+   {
+    "speciesKey": "stakataka",
+    "weight": 6,
+    "minLevel": 85,
+    "maxLevel": 93
+   },
+   {
+    "speciesKey": "blacephalon",
+    "weight": 6,
+    "minLevel": 85,
+    "maxLevel": 93
+   },
+   {
+    "speciesKey": "zeraora",
+    "weight": 1,
+    "minLevel": 85,
+    "maxLevel": 93
+   },
+   {
+    "speciesKey": "meltan",
+    "weight": 1,
+    "minLevel": 85,
+    "maxLevel": 93
+   },
+   {
+    "speciesKey": "melmetal",
+    "weight": 1,
+    "minLevel": 85,
+    "maxLevel": 93
+   }
+  ]
+ },
+ "galar-route-1": {
+  "name": "Galar Route 1",
+  "encounters": [
+   {
+    "speciesKey": "grookey",
+    "weight": 20,
+    "minLevel": 82,
+    "maxLevel": 90
+   },
+   {
+    "speciesKey": "thwackey",
+    "weight": 20,
+    "minLevel": 82,
+    "maxLevel": 90
+   },
+   {
+    "speciesKey": "rillaboom",
+    "weight": 20,
+    "minLevel": 82,
+    "maxLevel": 90
+   },
+   {
+    "speciesKey": "scorbunny",
+    "weight": 12,
+    "minLevel": 82,
+    "maxLevel": 90
+   },
+   {
+    "speciesKey": "raboot",
+    "weight": 12,
+    "minLevel": 82,
+    "maxLevel": 90
+   },
+   {
+    "speciesKey": "cinderace",
+    "weight": 12,
+    "minLevel": 82,
+    "maxLevel": 90
+   },
+   {
+    "speciesKey": "sobble",
+    "weight": 12,
+    "minLevel": 82,
+    "maxLevel": 90
+   },
+   {
+    "speciesKey": "drizzile",
+    "weight": 12,
+    "minLevel": 82,
+    "maxLevel": 90
+   },
+   {
+    "speciesKey": "inteleon",
+    "weight": 6,
+    "minLevel": 82,
+    "maxLevel": 90
+   },
+   {
+    "speciesKey": "skwovet",
+    "weight": 6,
+    "minLevel": 82,
+    "maxLevel": 90
+   },
+   {
+    "speciesKey": "greedent",
+    "weight": 6,
+    "minLevel": 82,
+    "maxLevel": 90
+   },
+   {
+    "speciesKey": "rookidee",
+    "weight": 6,
+    "minLevel": 82,
+    "maxLevel": 90
+   },
+   {
+    "speciesKey": "corvisquire",
+    "weight": 6,
+    "minLevel": 82,
+    "maxLevel": 90
+   },
+   {
+    "speciesKey": "corviknight",
+    "weight": 6,
+    "minLevel": 82,
+    "maxLevel": 90
+   },
+   {
+    "speciesKey": "blipbug",
+    "weight": 6,
+    "minLevel": 82,
+    "maxLevel": 90
+   },
+   {
+    "speciesKey": "dottler",
+    "weight": 6,
+    "minLevel": 82,
+    "maxLevel": 90
+   },
+   {
+    "speciesKey": "orbeetle",
+    "weight": 6,
+    "minLevel": 82,
+    "maxLevel": 90
+   },
+   {
+    "speciesKey": "nickit",
+    "weight": 6,
+    "minLevel": 82,
+    "maxLevel": 90
+   },
+   {
+    "speciesKey": "thievul",
+    "weight": 6,
+    "minLevel": 82,
+    "maxLevel": 90
+   },
+   {
+    "speciesKey": "gossifleur",
+    "weight": 6,
+    "minLevel": 82,
+    "maxLevel": 90
+   },
+   {
+    "speciesKey": "eldegoss",
+    "weight": 6,
+    "minLevel": 82,
+    "maxLevel": 90
+   },
+   {
+    "speciesKey": "wooloo",
+    "weight": 6,
+    "minLevel": 82,
+    "maxLevel": 90
+   },
+   {
+    "speciesKey": "dubwool",
+    "weight": 6,
+    "minLevel": 82,
+    "maxLevel": 90
+   },
+   {
+    "speciesKey": "chewtle",
+    "weight": 6,
+    "minLevel": 82,
+    "maxLevel": 90
+   },
+   {
+    "speciesKey": "drednaw",
+    "weight": 6,
+    "minLevel": 82,
+    "maxLevel": 90
+   },
+   {
+    "speciesKey": "yamper",
+    "weight": 6,
+    "minLevel": 82,
+    "maxLevel": 90
+   },
+   {
+    "speciesKey": "boltund",
+    "weight": 6,
+    "minLevel": 82,
+    "maxLevel": 90
+   },
+   {
+    "speciesKey": "rolycoly",
+    "weight": 6,
+    "minLevel": 82,
+    "maxLevel": 90
+   },
+   {
+    "speciesKey": "carkol",
+    "weight": 6,
+    "minLevel": 82,
+    "maxLevel": 90
+   },
+   {
+    "speciesKey": "coalossal",
+    "weight": 6,
+    "minLevel": 82,
+    "maxLevel": 90
+   },
+   {
+    "speciesKey": "applin",
+    "weight": 6,
+    "minLevel": 82,
+    "maxLevel": 90
+   },
+   {
+    "speciesKey": "flapple",
+    "weight": 6,
+    "minLevel": 82,
+    "maxLevel": 90
+   }
+  ]
+ },
+ "galar-route-2": {
+  "name": "Galar Route 2",
+  "encounters": [
+   {
+    "speciesKey": "appletun",
+    "weight": 20,
+    "minLevel": 88,
+    "maxLevel": 96
+   },
+   {
+    "speciesKey": "silicobra",
+    "weight": 20,
+    "minLevel": 88,
+    "maxLevel": 96
+   },
+   {
+    "speciesKey": "sandaconda",
+    "weight": 20,
+    "minLevel": 88,
+    "maxLevel": 96
+   },
+   {
+    "speciesKey": "cramorant",
+    "weight": 12,
+    "minLevel": 88,
+    "maxLevel": 96
+   },
+   {
+    "speciesKey": "arrokuda",
+    "weight": 12,
+    "minLevel": 88,
+    "maxLevel": 96
+   },
+   {
+    "speciesKey": "barraskewda",
+    "weight": 12,
+    "minLevel": 88,
+    "maxLevel": 96
+   },
+   {
+    "speciesKey": "toxel",
+    "weight": 12,
+    "minLevel": 88,
+    "maxLevel": 96
+   },
+   {
+    "speciesKey": "toxtricity",
+    "weight": 12,
+    "minLevel": 88,
+    "maxLevel": 96
+   },
+   {
+    "speciesKey": "sizzlipede",
+    "weight": 6,
+    "minLevel": 88,
+    "maxLevel": 96
+   },
+   {
+    "speciesKey": "centiskorch",
+    "weight": 6,
+    "minLevel": 88,
+    "maxLevel": 96
+   },
+   {
+    "speciesKey": "clobbopus",
+    "weight": 6,
+    "minLevel": 88,
+    "maxLevel": 96
+   },
+   {
+    "speciesKey": "grapploct",
+    "weight": 6,
+    "minLevel": 88,
+    "maxLevel": 96
+   },
+   {
+    "speciesKey": "sinistea",
+    "weight": 6,
+    "minLevel": 88,
+    "maxLevel": 96
+   },
+   {
+    "speciesKey": "polteageist",
+    "weight": 6,
+    "minLevel": 88,
+    "maxLevel": 96
+   },
+   {
+    "speciesKey": "hatenna",
+    "weight": 6,
+    "minLevel": 88,
+    "maxLevel": 96
+   },
+   {
+    "speciesKey": "hattrem",
+    "weight": 6,
+    "minLevel": 88,
+    "maxLevel": 96
+   },
+   {
+    "speciesKey": "hatterene",
+    "weight": 6,
+    "minLevel": 88,
+    "maxLevel": 96
+   },
+   {
+    "speciesKey": "impidimp",
+    "weight": 6,
+    "minLevel": 88,
+    "maxLevel": 96
+   },
+   {
+    "speciesKey": "morgrem",
+    "weight": 6,
+    "minLevel": 88,
+    "maxLevel": 96
+   },
+   {
+    "speciesKey": "grimmsnarl",
+    "weight": 6,
+    "minLevel": 88,
+    "maxLevel": 96
+   },
+   {
+    "speciesKey": "obstagoon",
+    "weight": 6,
+    "minLevel": 88,
+    "maxLevel": 96
+   },
+   {
+    "speciesKey": "perrserker",
+    "weight": 6,
+    "minLevel": 88,
+    "maxLevel": 96
+   },
+   {
+    "speciesKey": "cursola",
+    "weight": 6,
+    "minLevel": 88,
+    "maxLevel": 96
+   },
+   {
+    "speciesKey": "sirfetch'd",
+    "weight": 6,
+    "minLevel": 88,
+    "maxLevel": 96
+   },
+   {
+    "speciesKey": "mr. rime",
+    "weight": 6,
+    "minLevel": 88,
+    "maxLevel": 96
+   },
+   {
+    "speciesKey": "runerigus",
+    "weight": 6,
+    "minLevel": 88,
+    "maxLevel": 96
+   },
+   {
+    "speciesKey": "milcery",
+    "weight": 6,
+    "minLevel": 88,
+    "maxLevel": 96
+   },
+   {
+    "speciesKey": "alcremie",
+    "weight": 6,
+    "minLevel": 88,
+    "maxLevel": 96
+   },
+   {
+    "speciesKey": "falinks",
+    "weight": 6,
+    "minLevel": 88,
+    "maxLevel": 96
+   },
+   {
+    "speciesKey": "pincurchin",
+    "weight": 6,
+    "minLevel": 88,
+    "maxLevel": 96
+   },
+   {
+    "speciesKey": "snom",
+    "weight": 6,
+    "minLevel": 88,
+    "maxLevel": 96
+   },
+   {
+    "speciesKey": "frosmoth",
+    "weight": 6,
+    "minLevel": 88,
+    "maxLevel": 96
+   }
+  ]
+ },
+ "galar-route-3": {
+  "name": "Galar Route 3",
+  "encounters": [
+   {
+    "speciesKey": "stonjourner",
+    "weight": 20,
+    "minLevel": 94,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "eiscue",
+    "weight": 20,
+    "minLevel": 94,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "indeedee",
+    "weight": 20,
+    "minLevel": 94,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "morpeko",
+    "weight": 12,
+    "minLevel": 94,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "cufant",
+    "weight": 12,
+    "minLevel": 94,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "copperajah",
+    "weight": 12,
+    "minLevel": 94,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "dracozolt",
+    "weight": 12,
+    "minLevel": 94,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "arctozolt",
+    "weight": 12,
+    "minLevel": 94,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "dracovish",
+    "weight": 6,
+    "minLevel": 94,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "arctovish",
+    "weight": 6,
+    "minLevel": 94,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "duraludon",
+    "weight": 6,
+    "minLevel": 94,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "dreepy",
+    "weight": 6,
+    "minLevel": 94,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "drakloak",
+    "weight": 6,
+    "minLevel": 94,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "dragapult",
+    "weight": 6,
+    "minLevel": 94,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "zacian",
+    "weight": 6,
+    "minLevel": 94,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "zamazenta",
+    "weight": 6,
+    "minLevel": 94,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "eternatus",
+    "weight": 6,
+    "minLevel": 94,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "kubfu",
+    "weight": 1,
+    "minLevel": 94,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "urshifu-sss",
+    "weight": 1,
+    "minLevel": 94,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "zarude",
+    "weight": 1,
+    "minLevel": 94,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "regieleki",
+    "weight": 1,
+    "minLevel": 94,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "regidrago",
+    "weight": 1,
+    "minLevel": 94,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "glastrier",
+    "weight": 1,
+    "minLevel": 94,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "spectrier",
+    "weight": 1,
+    "minLevel": 94,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "calyrex",
+    "weight": 1,
+    "minLevel": 94,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "wyrdeer",
+    "weight": 6,
+    "minLevel": 94,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "kleavor",
+    "weight": 6,
+    "minLevel": 94,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "ursaluna",
+    "weight": 6,
+    "minLevel": 94,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "basculegion",
+    "weight": 6,
+    "minLevel": 94,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "sneasler",
+    "weight": 6,
+    "minLevel": 94,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "overqwil",
+    "weight": 6,
+    "minLevel": 94,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "enamorus",
+    "weight": 1,
+    "minLevel": 94,
+    "maxLevel": 100
+   }
+  ]
+ },
+ "paldea-route-1": {
+  "name": "Paldea Route 1",
+  "encounters": [
+   {
+    "speciesKey": "sprigatito",
+    "weight": 20,
+    "minLevel": 91,
+    "maxLevel": 99
+   },
+   {
+    "speciesKey": "floragato",
+    "weight": 20,
+    "minLevel": 91,
+    "maxLevel": 99
+   },
+   {
+    "speciesKey": "meowscarada",
+    "weight": 20,
+    "minLevel": 91,
+    "maxLevel": 99
+   },
+   {
+    "speciesKey": "fuecoco",
+    "weight": 12,
+    "minLevel": 91,
+    "maxLevel": 99
+   },
+   {
+    "speciesKey": "crocalor",
+    "weight": 12,
+    "minLevel": 91,
+    "maxLevel": 99
+   },
+   {
+    "speciesKey": "skeledirge",
+    "weight": 12,
+    "minLevel": 91,
+    "maxLevel": 99
+   },
+   {
+    "speciesKey": "quaxly",
+    "weight": 12,
+    "minLevel": 91,
+    "maxLevel": 99
+   },
+   {
+    "speciesKey": "quaxwell",
+    "weight": 12,
+    "minLevel": 91,
+    "maxLevel": 99
+   },
+   {
+    "speciesKey": "quaquaval",
+    "weight": 6,
+    "minLevel": 91,
+    "maxLevel": 99
+   },
+   {
+    "speciesKey": "lechonk",
+    "weight": 6,
+    "minLevel": 91,
+    "maxLevel": 99
+   },
+   {
+    "speciesKey": "oinkologne",
+    "weight": 6,
+    "minLevel": 91,
+    "maxLevel": 99
+   },
+   {
+    "speciesKey": "tarountula",
+    "weight": 6,
+    "minLevel": 91,
+    "maxLevel": 99
+   },
+   {
+    "speciesKey": "spidops",
+    "weight": 6,
+    "minLevel": 91,
+    "maxLevel": 99
+   },
+   {
+    "speciesKey": "nymble",
+    "weight": 6,
+    "minLevel": 91,
+    "maxLevel": 99
+   },
+   {
+    "speciesKey": "lokix",
+    "weight": 6,
+    "minLevel": 91,
+    "maxLevel": 99
+   },
+   {
+    "speciesKey": "pawmi",
+    "weight": 6,
+    "minLevel": 91,
+    "maxLevel": 99
+   },
+   {
+    "speciesKey": "pawmo",
+    "weight": 6,
+    "minLevel": 91,
+    "maxLevel": 99
+   },
+   {
+    "speciesKey": "pawmot",
+    "weight": 6,
+    "minLevel": 91,
+    "maxLevel": 99
+   },
+   {
+    "speciesKey": "tandemaus",
+    "weight": 6,
+    "minLevel": 91,
+    "maxLevel": 99
+   },
+   {
+    "speciesKey": "maushold",
+    "weight": 6,
+    "minLevel": 91,
+    "maxLevel": 99
+   },
+   {
+    "speciesKey": "fidough",
+    "weight": 6,
+    "minLevel": 91,
+    "maxLevel": 99
+   },
+   {
+    "speciesKey": "dachsbun",
+    "weight": 6,
+    "minLevel": 91,
+    "maxLevel": 99
+   },
+   {
+    "speciesKey": "smoliv",
+    "weight": 6,
+    "minLevel": 91,
+    "maxLevel": 99
+   },
+   {
+    "speciesKey": "dolliv",
+    "weight": 6,
+    "minLevel": 91,
+    "maxLevel": 99
+   },
+   {
+    "speciesKey": "arboliva",
+    "weight": 6,
+    "minLevel": 91,
+    "maxLevel": 99
+   },
+   {
+    "speciesKey": "squawkabilly",
+    "weight": 6,
+    "minLevel": 91,
+    "maxLevel": 99
+   },
+   {
+    "speciesKey": "nacli",
+    "weight": 6,
+    "minLevel": 91,
+    "maxLevel": 99
+   },
+   {
+    "speciesKey": "naclstack",
+    "weight": 6,
+    "minLevel": 91,
+    "maxLevel": 99
+   },
+   {
+    "speciesKey": "garganacl",
+    "weight": 6,
+    "minLevel": 91,
+    "maxLevel": 99
+   },
+   {
+    "speciesKey": "charcadet",
+    "weight": 6,
+    "minLevel": 91,
+    "maxLevel": 99
+   },
+   {
+    "speciesKey": "armarouge",
+    "weight": 6,
+    "minLevel": 91,
+    "maxLevel": 99
+   },
+   {
+    "speciesKey": "ceruledge",
+    "weight": 6,
+    "minLevel": 91,
+    "maxLevel": 99
+   },
+   {
+    "speciesKey": "tadbulb",
+    "weight": 6,
+    "minLevel": 91,
+    "maxLevel": 99
+   },
+   {
+    "speciesKey": "bellibolt",
+    "weight": 6,
+    "minLevel": 91,
+    "maxLevel": 99
+   },
+   {
+    "speciesKey": "wattrel",
+    "weight": 6,
+    "minLevel": 91,
+    "maxLevel": 99
+   }
+  ]
+ },
+ "paldea-route-2": {
+  "name": "Paldea Route 2",
+  "encounters": [
+   {
+    "speciesKey": "kilowattrel",
+    "weight": 20,
+    "minLevel": 97,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "maschiff",
+    "weight": 20,
+    "minLevel": 97,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "mabosstiff",
+    "weight": 20,
+    "minLevel": 97,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "shroodle",
+    "weight": 12,
+    "minLevel": 97,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "grafaiai",
+    "weight": 12,
+    "minLevel": 97,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "bramblin",
+    "weight": 12,
+    "minLevel": 97,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "brambleghast",
+    "weight": 12,
+    "minLevel": 97,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "toedscool",
+    "weight": 12,
+    "minLevel": 97,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "toedscruel",
+    "weight": 6,
+    "minLevel": 97,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "klawf",
+    "weight": 6,
+    "minLevel": 97,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "capsakid",
+    "weight": 6,
+    "minLevel": 97,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "scovillain",
+    "weight": 6,
+    "minLevel": 97,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "rellor",
+    "weight": 6,
+    "minLevel": 97,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "rabsca",
+    "weight": 6,
+    "minLevel": 97,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "flittle",
+    "weight": 6,
+    "minLevel": 97,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "espathra",
+    "weight": 6,
+    "minLevel": 97,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "tinkatink",
+    "weight": 6,
+    "minLevel": 97,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "tinkatuff",
+    "weight": 6,
+    "minLevel": 97,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "tinkaton",
+    "weight": 6,
+    "minLevel": 97,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "wiglett",
+    "weight": 6,
+    "minLevel": 97,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "wugtrio",
+    "weight": 6,
+    "minLevel": 97,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "bombirdier",
+    "weight": 6,
+    "minLevel": 97,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "finizen",
+    "weight": 6,
+    "minLevel": 97,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "palafin",
+    "weight": 6,
+    "minLevel": 97,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "varoom",
+    "weight": 6,
+    "minLevel": 97,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "revavroom",
+    "weight": 6,
+    "minLevel": 97,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "cyclizar",
+    "weight": 6,
+    "minLevel": 97,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "orthworm",
+    "weight": 6,
+    "minLevel": 97,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "glimmet",
+    "weight": 6,
+    "minLevel": 97,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "glimmora",
+    "weight": 6,
+    "minLevel": 97,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "greavard",
+    "weight": 6,
+    "minLevel": 97,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "houndstone",
+    "weight": 6,
+    "minLevel": 97,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "flamigo",
+    "weight": 6,
+    "minLevel": 97,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "cetoddle",
+    "weight": 6,
+    "minLevel": 97,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "cetitan",
+    "weight": 6,
+    "minLevel": 97,
+    "maxLevel": 100
+   }
+  ]
+ },
+ "paldea-route-3": {
+  "name": "Paldea Route 3",
+  "encounters": [
+   {
+    "speciesKey": "veluza",
+    "weight": 20,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "dondozo",
+    "weight": 20,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "tatsugiri",
+    "weight": 20,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "annihilape",
+    "weight": 12,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "clodsire",
+    "weight": 12,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "farigiraf",
+    "weight": 12,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "dudunsparce",
+    "weight": 12,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "kingambit",
+    "weight": 12,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "great tusk",
+    "weight": 6,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "scream tail",
+    "weight": 6,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "brute bonnet",
+    "weight": 6,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "flutter mane",
+    "weight": 6,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "slither wing",
+    "weight": 6,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "sandy shocks",
+    "weight": 6,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "iron treads",
+    "weight": 6,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "iron bundle",
+    "weight": 6,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "iron hands",
+    "weight": 6,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "iron jugulis",
+    "weight": 6,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "iron moth",
+    "weight": 6,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "iron thorns",
+    "weight": 6,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "frigibax",
+    "weight": 6,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "arctibax",
+    "weight": 6,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "baxcalibur",
+    "weight": 6,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "gimmighoul",
+    "weight": 6,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "gholdengo",
+    "weight": 6,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "wo-chien",
+    "weight": 6,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "chien-pao",
+    "weight": 6,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "ting-lu",
+    "weight": 6,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "chi-yu",
+    "weight": 6,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "roaring moon",
+    "weight": 6,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "iron valiant",
+    "weight": 6,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "koraidon",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "miraidon",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   }
+  ]
+ }
 }

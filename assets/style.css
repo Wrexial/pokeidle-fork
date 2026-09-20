@@ -1910,6 +1910,51 @@ img {
     color: #8a7a60
 }
 
+.map-region-tabs {
+    display: flex;
+    gap: 4px;
+    padding: 4px 8px;
+    overflow-x: auto;
+    background: #221910;
+    border-bottom: 2px solid #3a2810;
+    scrollbar-width: none
+}
+
+.map-region-tabs::-webkit-scrollbar {
+    display: none
+}
+
+.map-region-tab {
+    flex: 0 0 auto;
+    font-family: var(--font-pixel);
+    font-size: 7px;
+    padding: 4px 8px;
+    color: #c8b890;
+    background: linear-gradient(180deg,#3a2c1a,#2a1e10);
+    border: 2px solid #5a3e20;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    transition: .12s
+}
+
+.map-region-tab:hover:not(:disabled) {
+    color: var(--gold-bright);
+    border-color: #8a6820
+}
+
+.map-region-tab.active {
+    color: #1a1208;
+    background: linear-gradient(180deg,var(--gold-bright),var(--gold));
+    border-color: #f0d060
+}
+
+.map-region-tab.locked {
+    opacity: .4;
+    cursor: not-allowed;
+    color: #6a5a44
+}
+
 .town-map-canvas {
     flex: 1;
     position: relative;

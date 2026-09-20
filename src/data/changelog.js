@@ -1,10 +1,38 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.4.0'
+export const GAME_VERSION = '0.5.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.5.0',
+      subtitle: 'Regional Expansion — Generations 2-9',
+      sections: [
+        {
+          heading: 'New Regions',
+          items: [
+            'Eight new regions are now reachable: Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar and Paldea',
+            'Johto unlocks after defeating the Kanto Champion; each later region unlocks after enough battles in the previous region',
+            'Every region has a hub town (with a Poke Mart and trainers) and three wild routes with that generation\u2019s Pokemon',
+          ],
+        },
+        {
+          heading: 'Town Map',
+          items: [
+            'The Town Map now has region tabs — switch between regions to view their routes',
+            'Locked regions are greyed out until you reach them',
+          ],
+        },
+        {
+          heading: 'Expanded Pokedex & Encounters',
+          items: [
+            'Over 950 species are now obtainable as wild encounters across all nine generations',
+            'The Shiny Charm now unlocks once you complete the wild Pokedex (previously a fixed 151)',
+          ],
+        },
+      ],
+    },
     {
       version: '0.4.0',
       subtitle: 'Repel & Honey, Exp. Share, Mobile Layout & QoL',

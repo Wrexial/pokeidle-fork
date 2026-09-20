@@ -14,7 +14,7 @@ export const CHANGELOG = [
           items: [
             'Eight new regions are now reachable: Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar and Paldea',
             'Johto unlocks after defeating the Kanto Champion; each later region unlocks after enough battles in the previous region',
-            'Every region has a hub town (with a Poke Mart and trainers), three wild routes, a Raid Island and gyms',
+            'Every region reproduces its real map \u2014 actual towns and routes with their genuine connections \u2014 plus a Raid Island and gyms',
           ],
         },
         {

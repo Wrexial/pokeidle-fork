@@ -234,13 +234,18 @@ One-off scripts used to build the data JSON (not run during dev/build):
   (need `requests`, `beautifulsoup4` in `.venv`).
 - `scrape_pokemondb.cjs`, `download_pokemon_sprites.cjs`, `extract_data.cjs` —
   Node scripts.
-- `generate-regions.cjs` — generates the non-Kanto region content (towns, wild
-  routes, encounters, trainers, marts, Raid Islands, and gym/Elite Four/Champion
-  leagues) for generations 2-9 from `pokemon-species.json`, merging it into
+- `scrape-region-maps.cjs` — scrapes real region maps: location lists from
+  PokéAPI and route/town compass connections (`north/south/east/west`) from
+  Bulbapedia's raw infoboxes, then computes a directional layout. Caches HTTP
+  responses under `tools/cache/` (gitignored) and writes
+  `tools/region-maps.json` (committed).
+- `generate-regions.cjs` — turns `tools/region-maps.json` into game content
+  (locations, encounters, trainers, marts, Raid Islands, and gym/Elite
+  Four/Champion leagues) for generations 2-9, merging it into
   `map-data.json` / `encounter-data.json` / `trainer-data.json` /
   `gym-leader-data.json` / `elite-4-data.json` / `champion-data.json`, and
   writing `regions.json` (region metadata + per-region legendary pools).
-  Idempotent — safe to re-run, and it tags Kanto locations/leaders with
+  Idempotent — safe to re-run; tags Kanto locations/leaders with
   `region: "kanto"`.
 - `RawMoveData`, `index-backup.js` — large reference/backup data; leave alone.
 - `*.md` in `tools/` (`SUMMARY.md`, `DATA_INTEGRATION.md`,

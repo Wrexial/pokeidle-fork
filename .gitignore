@@ -38,3 +38,6 @@ __pycache__/
 # Misc
 *.swp
 *.swo
+
+# Region map scraper cache
+tools/cache/

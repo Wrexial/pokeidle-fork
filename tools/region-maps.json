@@ -3693,6 +3693,7 @@
    "porto-marinada",
    "zapapico",
    "los-platos",
+   "cabo-poco",
    "auto-naranjaacademy",
    "auto-southprovinceareaone",
    "auto-southprovinceareathree",
@@ -3708,7 +3709,9 @@
    "auto-southprovinceareasix",
    "auto-westprovinceareatwo",
    "auto-westpaldeansea",
-   "auto-eastprovinceareathree"
+   "auto-eastprovinceareathree",
+   "auto-pocopath",
+   "auto-southpaldeansea"
   ],
   "display": {
    "mesagoza": "Mesagoza",
@@ -3722,6 +3725,7 @@
    "porto-marinada": "Porto Marinada",
    "zapapico": "Zapapico",
    "los-platos": "Los Platos",
+   "cabo-poco": "Cabo Poco",
    "auto-naranjaacademy": "Naranja Academy",
    "auto-southprovinceareaone": "South Province (Area One)",
    "auto-southprovinceareathree": "South Province (Area Three)",
@@ -3737,7 +3741,9 @@
    "auto-southprovinceareasix": "South Province (Area Six)",
    "auto-westprovinceareatwo": "West Province (Area Two)",
    "auto-westpaldeansea": "West Paldean Sea",
-   "auto-eastprovinceareathree": "East Province (Area Three)"
+   "auto-eastprovinceareathree": "East Province (Area Three)",
+   "auto-pocopath": "Poco Path",
+   "auto-southpaldeansea": "South Paldean Sea"
   },
   "edges": [
    {
@@ -3944,53 +3950,77 @@
     "from": "los-platos",
     "to": "auto-southprovinceareaone",
     "dir": "west"
+   },
+   {
+    "from": "cabo-poco",
+    "to": "auto-pocopath",
+    "dir": "north"
+   },
+   {
+    "from": "cabo-poco",
+    "to": "auto-southprovinceareaone",
+    "dir": "south"
+   },
+   {
+    "from": "cabo-poco",
+    "to": "auto-southpaldeansea",
+    "dir": "east"
+   },
+   {
+    "from": "cabo-poco",
+    "to": "auto-southprovinceareaone",
+    "dir": "west"
    }
   ],
-  "parsed": 11,
+  "parsed": 12,
   "positions": {
    "mesagoza": {
     "x": 21,
-    "y": 43
+    "y": 44
    },
    "cortondo": {
     "x": 6,
-    "y": 43
+    "y": 44
    },
    "artazon": {
-    "x": 51,
-    "y": 43
+    "x": 52,
+    "y": 44
    },
    "levincia": {
-    "x": 64,
-    "y": 48
+    "x": 63,
+    "y": 46
    },
    "cascarrafa": {
-    "x": 93,
-    "y": 38
+    "x": 54,
+    "y": 46
    },
    "medali": {
-    "x": 50,
-    "y": 57
+    "x": 48,
+    "y": 56
    },
    "montenevera": {
-    "x": 55,
-    "y": 66
+    "x": 53,
+    "y": 65
    },
    "alfornada": {
     "x": 69,
-    "y": 66
+    "y": 65
    },
    "porto-marinada": {
-    "x": 87,
-    "y": 73
+    "x": 86,
+    "y": 72
    },
    "zapapico": {
-    "x": 72,
+    "x": 71,
     "y": 75
    },
    "los-platos": {
     "x": 21,
-    "y": 80
+    "y": 83
+   },
+   "cabo-poco": {
+    "x": 29,
+    "y": 64
    },
    "auto-naranjaacademy": {
     "x": 21,
@@ -3998,63 +4028,71 @@
    },
    "auto-southprovinceareaone": {
     "x": 21,
-    "y": 80
+    "y": 83
    },
    "auto-southprovinceareathree": {
-    "x": 36,
-    "y": 43
+    "x": 37,
+    "y": 44
    },
    "auto-southprovinceareatwo": {
     "x": 6,
-    "y": 43
+    "y": 44
    },
    "auto-eastprovinceareaone": {
-    "x": 56,
-    "y": 43
+    "x": 57,
+    "y": 44
    },
    "auto-eastprovinceareatwo": {
-    "x": 59,
-    "y": 48
+    "x": 58,
+    "y": 46
    },
    "auto-eastpaldeansea": {
     "x": 79,
-    "y": 48
+    "y": 46
    },
    "auto-westprovinceareaone": {
-    "x": 93,
-    "y": 76
+    "x": 54,
+    "y": 85
    },
    "auto-asadodesert": {
-    "x": 78,
-    "y": 38
+    "x": 38,
+    "y": 46
    },
    "auto-westprovinceareathree": {
-    "x": 45,
-    "y": 57
+    "x": 43,
+    "y": 56
    },
    "auto-dalizapapassage": {
-    "x": 65,
-    "y": 57
+    "x": 64,
+    "y": 56
    },
    "auto-glaseadomountain": {
-    "x": 55,
-    "y": 66
+    "x": 53,
+    "y": 65
    },
    "auto-southprovinceareasix": {
     "x": 69,
-    "y": 66
+    "y": 65
    },
    "auto-westprovinceareatwo": {
     "x": 94,
-    "y": 54
+    "y": 53
    },
    "auto-westpaldeansea": {
-    "x": 72,
-    "y": 73
+    "x": 71,
+    "y": 72
    },
    "auto-eastprovinceareathree": {
-    "x": 80,
+    "x": 79,
     "y": 94
+   },
+   "auto-pocopath": {
+    "x": 29,
+    "y": 25
+   },
+   "auto-southpaldeansea": {
+    "x": 44,
+    "y": 64
    }
   }
  }

@@ -9011,7 +9011,7 @@
   "unlockOrder": 358,
   "position": {
    "x": 21,
-   "y": 80
+   "y": 83
   },
   "mart": {
    "name": "Paldea Mart",
@@ -9043,7 +9043,8 @@
   "routeKey": "paldea-auto-southprovinceareaone",
   "connections": [
    "paldea-mesagoza",
-   "paldea-los-platos"
+   "paldea-los-platos",
+   "paldea-cabo-poco"
   ],
   "unlock": {
    "requires": [
@@ -9053,7 +9054,7 @@
   "unlockOrder": 359,
   "position": {
    "x": 26,
-   "y": 84
+   "y": 87
   }
  },
  "paldea-mesagoza": {
@@ -9076,7 +9077,49 @@
   "unlockOrder": 360,
   "position": {
    "x": 21,
-   "y": 43
+   "y": 44
+  },
+  "mart": {
+   "name": "Paldea Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "paldea-cabo-poco": {
+  "id": "paldea-cabo-poco",
+  "name": "Cabo Poco",
+  "type": "town",
+  "region": "paldea",
+  "description": "A town in the Paldea region.",
+  "connections": [
+   "paldea-auto-pocopath",
+   "paldea-auto-southprovinceareaone",
+   "paldea-auto-southpaldeansea"
+  ],
+  "unlock": {
+   "requires": [
+    "paldea-auto-southprovinceareaone"
+   ]
+  },
+  "unlockOrder": 361,
+  "position": {
+   "x": 29,
+   "y": 64
   },
   "mart": {
    "name": "Paldea Mart",
@@ -9114,7 +9157,7 @@
     "paldea-mesagoza"
    ]
   },
-  "unlockOrder": 361,
+  "unlockOrder": 362,
   "position": {
    "x": 21,
    "y": 6
@@ -9129,17 +9172,18 @@
   "routeKey": "paldea-auto-southprovinceareathree",
   "connections": [
    "paldea-mesagoza",
-   "paldea-artazon"
+   "paldea-artazon",
+   "paldea-auto-asadodesert"
   ],
   "unlock": {
    "requires": [
     "paldea-mesagoza"
    ]
   },
-  "unlockOrder": 362,
+  "unlockOrder": 363,
   "position": {
-   "x": 36,
-   "y": 43
+   "x": 37,
+   "y": 44
   }
  },
  "paldea-auto-southprovinceareatwo": {
@@ -9158,10 +9202,54 @@
     "paldea-mesagoza"
    ]
   },
-  "unlockOrder": 363,
+  "unlockOrder": 364,
   "position": {
    "x": 6,
-   "y": 43
+   "y": 44
+  }
+ },
+ "paldea-auto-pocopath": {
+  "id": "paldea-auto-pocopath",
+  "name": "Poco Path",
+  "type": "route",
+  "region": "paldea",
+  "description": "A route in the Paldea region.",
+  "routeKey": "paldea-auto-pocopath",
+  "connections": [
+   "paldea-cabo-poco"
+  ],
+  "unlock": {
+   "requires": [
+    "paldea-cabo-poco"
+   ]
+  },
+  "unlockOrder": 365,
+  "position": {
+   "x": 29,
+   "y": 25
+  }
+ },
+ "paldea-auto-southpaldeansea": {
+  "id": "paldea-auto-southpaldeansea",
+  "name": "South Paldean Sea",
+  "type": "route",
+  "region": "paldea",
+  "description": "A route in the Paldea region.",
+  "routeKey": "paldea-auto-southpaldeansea",
+  "connections": [
+   "paldea-cabo-poco",
+   "paldea-medali",
+   "paldea-montenevera"
+  ],
+  "unlock": {
+   "requires": [
+    "paldea-cabo-poco"
+   ]
+  },
+  "unlockOrder": 366,
+  "position": {
+   "x": 44,
+   "y": 64
   }
  },
  "paldea-cortondo": {
@@ -9178,10 +9266,10 @@
     "paldea-auto-southprovinceareatwo"
    ]
   },
-  "unlockOrder": 364,
+  "unlockOrder": 367,
   "position": {
    "x": 11,
-   "y": 47
+   "y": 48
   },
   "mart": {
    "name": "Paldea Mart",
@@ -9213,17 +9301,17 @@
   "connections": [
    "paldea-auto-eastprovinceareaone",
    "paldea-auto-southprovinceareathree",
-   "paldea-medali"
+   "paldea-cascarrafa"
   ],
   "unlock": {
    "requires": [
     "paldea-auto-southprovinceareathree"
    ]
   },
-  "unlockOrder": 365,
+  "unlockOrder": 368,
   "position": {
-   "x": 51,
-   "y": 43
+   "x": 52,
+   "y": 44
   },
   "mart": {
    "name": "Paldea Mart",
@@ -9255,84 +9343,17 @@
   "connections": [
    "paldea-auto-westprovinceareathree",
    "paldea-auto-dalizapapassage",
-   "paldea-artazon",
-   "paldea-montenevera"
+   "paldea-auto-southpaldeansea"
   ],
   "unlock": {
    "requires": [
-    "paldea-artazon"
+    "paldea-auto-southpaldeansea"
    ]
   },
-  "unlockOrder": 366,
+  "unlockOrder": 369,
   "position": {
-   "x": 50,
-   "y": 57
-  },
-  "mart": {
-   "name": "Paldea Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
-  }
- },
- "paldea-auto-eastprovinceareaone": {
-  "id": "paldea-auto-eastprovinceareaone",
-  "name": "East Province (Area One)",
-  "type": "route",
-  "region": "paldea",
-  "description": "A route in the Paldea region.",
-  "routeKey": "paldea-auto-eastprovinceareaone",
-  "connections": [
-   "paldea-artazon",
-   "paldea-levincia"
-  ],
-  "unlock": {
-   "requires": [
-    "paldea-artazon"
-   ]
-  },
-  "unlockOrder": 367,
-  "position": {
-   "x": 56,
-   "y": 43
-  }
- },
- "paldea-levincia": {
-  "id": "paldea-levincia",
-  "name": "Levincia",
-  "type": "town",
-  "region": "paldea",
-  "description": "A town in the Paldea region.",
-  "connections": [
-   "paldea-auto-eastprovinceareatwo",
-   "paldea-auto-eastpaldeansea",
-   "paldea-auto-eastprovinceareaone",
-   "paldea-cascarrafa",
-   "paldea-auto-dalizapapassage"
-  ],
-  "unlock": {
-   "requires": [
-    "paldea-auto-eastprovinceareaone"
-   ]
-  },
-  "unlockOrder": 368,
-  "position": {
-   "x": 64,
-   "y": 48
+   "x": 48,
+   "y": 56
   },
   "mart": {
    "name": "Paldea Mart",
@@ -9363,18 +9384,18 @@
   "description": "A town in the Paldea region.",
   "connections": [
    "paldea-auto-glaseadomountain",
-   "paldea-medali",
+   "paldea-auto-southpaldeansea",
    "paldea-alfornada"
   ],
   "unlock": {
    "requires": [
-    "paldea-medali"
+    "paldea-auto-southpaldeansea"
    ]
   },
-  "unlockOrder": 369,
+  "unlockOrder": 370,
   "position": {
-   "x": 55,
-   "y": 66
+   "x": 53,
+   "y": 65
   },
   "mart": {
    "name": "Paldea Mart",
@@ -9397,25 +9418,26 @@
    ]
   }
  },
- "paldea-auto-westprovinceareathree": {
-  "id": "paldea-auto-westprovinceareathree",
-  "name": "West Province (Area Three)",
+ "paldea-auto-asadodesert": {
+  "id": "paldea-auto-asadodesert",
+  "name": "Asado Desert",
   "type": "route",
   "region": "paldea",
   "description": "A route in the Paldea region.",
-  "routeKey": "paldea-auto-westprovinceareathree",
+  "routeKey": "paldea-auto-asadodesert",
   "connections": [
-   "paldea-medali"
+   "paldea-cascarrafa",
+   "paldea-auto-southprovinceareathree"
   ],
   "unlock": {
    "requires": [
-    "paldea-medali"
+    "paldea-auto-southprovinceareathree"
    ]
   },
-  "unlockOrder": 370,
+  "unlockOrder": 371,
   "position": {
-   "x": 45,
-   "y": 57
+   "x": 38,
+   "y": 46
   }
  },
  "paldea-cascarrafa": {
@@ -9427,18 +9449,17 @@
   "connections": [
    "paldea-auto-westprovinceareaone",
    "paldea-auto-asadodesert",
-   "paldea-levincia",
-   "paldea-auto-westprovinceareatwo"
+   "paldea-artazon"
   ],
   "unlock": {
    "requires": [
-    "paldea-levincia"
+    "paldea-artazon"
    ]
   },
-  "unlockOrder": 371,
+  "unlockOrder": 372,
   "position": {
-   "x": 93,
-   "y": 38
+   "x": 54,
+   "y": 46
   },
   "mart": {
    "name": "Paldea Mart",
@@ -9478,10 +9499,10 @@
     "paldea-montenevera"
    ]
   },
-  "unlockOrder": 372,
+  "unlockOrder": 373,
   "position": {
    "x": 69,
-   "y": 66
+   "y": 65
   },
   "mart": {
    "name": "Paldea Mart",
@@ -9504,70 +9525,48 @@
    ]
   }
  },
- "paldea-auto-eastprovinceareatwo": {
-  "id": "paldea-auto-eastprovinceareatwo",
-  "name": "East Province (Area Two)",
+ "paldea-auto-eastprovinceareaone": {
+  "id": "paldea-auto-eastprovinceareaone",
+  "name": "East Province (Area One)",
   "type": "route",
   "region": "paldea",
   "description": "A route in the Paldea region.",
-  "routeKey": "paldea-auto-eastprovinceareatwo",
+  "routeKey": "paldea-auto-eastprovinceareaone",
   "connections": [
-   "paldea-levincia"
-  ],
-  "unlock": {
-   "requires": [
-    "paldea-levincia"
-   ]
-  },
-  "unlockOrder": 373,
-  "position": {
-   "x": 59,
-   "y": 48
-  }
- },
- "paldea-auto-eastpaldeansea": {
-  "id": "paldea-auto-eastpaldeansea",
-  "name": "East Paldean Sea",
-  "type": "route",
-  "region": "paldea",
-  "description": "A route in the Paldea region.",
-  "routeKey": "paldea-auto-eastpaldeansea",
-  "connections": [
+   "paldea-artazon",
    "paldea-levincia",
-   "paldea-auto-asadodesert"
+   "paldea-auto-eastprovinceareatwo"
   ],
   "unlock": {
    "requires": [
-    "paldea-levincia"
+    "paldea-artazon"
    ]
   },
   "unlockOrder": 374,
   "position": {
-   "x": 79,
-   "y": 48
+   "x": 57,
+   "y": 44
   }
  },
- "paldea-auto-dalizapapassage": {
-  "id": "paldea-auto-dalizapapassage",
-  "name": "Dalizapa Passage",
+ "paldea-auto-westprovinceareathree": {
+  "id": "paldea-auto-westprovinceareathree",
+  "name": "West Province (Area Three)",
   "type": "route",
   "region": "paldea",
   "description": "A route in the Paldea region.",
-  "routeKey": "paldea-auto-dalizapapassage",
+  "routeKey": "paldea-auto-westprovinceareathree",
   "connections": [
-   "paldea-medali",
-   "paldea-zapapico",
-   "paldea-levincia"
+   "paldea-medali"
   ],
   "unlock": {
    "requires": [
-    "paldea-levincia"
+    "paldea-medali"
    ]
   },
   "unlockOrder": 375,
   "position": {
-   "x": 65,
-   "y": 57
+   "x": 43,
+   "y": 56
   }
  },
  "paldea-auto-glaseadomountain": {
@@ -9587,8 +9586,51 @@
   },
   "unlockOrder": 376,
   "position": {
-   "x": 60,
-   "y": 70
+   "x": 58,
+   "y": 69
+  }
+ },
+ "paldea-levincia": {
+  "id": "paldea-levincia",
+  "name": "Levincia",
+  "type": "town",
+  "region": "paldea",
+  "description": "A town in the Paldea region.",
+  "connections": [
+   "paldea-auto-eastprovinceareatwo",
+   "paldea-auto-eastpaldeansea",
+   "paldea-auto-eastprovinceareaone",
+   "paldea-auto-dalizapapassage"
+  ],
+  "unlock": {
+   "requires": [
+    "paldea-auto-eastprovinceareaone"
+   ]
+  },
+  "unlockOrder": 377,
+  "position": {
+   "x": 63,
+   "y": 46
+  },
+  "mart": {
+   "name": "Paldea Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
   }
  },
  "paldea-porto-marinada": {
@@ -9600,18 +9642,17 @@
   "connections": [
    "paldea-auto-westprovinceareatwo",
    "paldea-auto-westpaldeansea",
-   "paldea-alfornada",
-   "paldea-auto-westprovinceareaone"
+   "paldea-alfornada"
   ],
   "unlock": {
    "requires": [
     "paldea-alfornada"
    ]
   },
-  "unlockOrder": 377,
+  "unlockOrder": 378,
   "position": {
-   "x": 87,
-   "y": 73
+   "x": 86,
+   "y": 72
   },
   "mart": {
    "name": "Paldea Mart",
@@ -9644,6 +9685,7 @@
    "paldea-auto-dalizapapassage",
    "paldea-auto-eastprovinceareathree",
    "paldea-alfornada",
+   "paldea-auto-westprovinceareaone",
    "paldea-auto-westpaldeansea"
   ],
   "unlock": {
@@ -9651,9 +9693,9 @@
     "paldea-alfornada"
    ]
   },
-  "unlockOrder": 378,
+  "unlockOrder": 379,
   "position": {
-   "x": 72,
+   "x": 71,
    "y": 75
   },
   "mart": {
@@ -9677,26 +9719,26 @@
    ]
   }
  },
- "paldea-auto-asadodesert": {
-  "id": "paldea-auto-asadodesert",
-  "name": "Asado Desert",
+ "paldea-auto-eastprovinceareatwo": {
+  "id": "paldea-auto-eastprovinceareatwo",
+  "name": "East Province (Area Two)",
   "type": "route",
   "region": "paldea",
   "description": "A route in the Paldea region.",
-  "routeKey": "paldea-auto-asadodesert",
+  "routeKey": "paldea-auto-eastprovinceareatwo",
   "connections": [
-   "paldea-cascarrafa",
-   "paldea-auto-eastpaldeansea"
+   "paldea-levincia",
+   "paldea-auto-eastprovinceareaone"
   ],
   "unlock": {
    "requires": [
-    "paldea-auto-eastpaldeansea"
+    "paldea-auto-eastprovinceareaone"
    ]
   },
-  "unlockOrder": 379,
+  "unlockOrder": 380,
   "position": {
-   "x": 78,
-   "y": 38
+   "x": 58,
+   "y": 46
   }
  },
  "paldea-auto-southprovinceareasix": {
@@ -9714,32 +9756,32 @@
     "paldea-alfornada"
    ]
   },
-  "unlockOrder": 380,
+  "unlockOrder": 381,
   "position": {
    "x": 74,
-   "y": 70
+   "y": 69
   }
  },
- "paldea-auto-westprovinceareatwo": {
-  "id": "paldea-auto-westprovinceareatwo",
-  "name": "West Province (Area Two)",
+ "paldea-auto-eastpaldeansea": {
+  "id": "paldea-auto-eastpaldeansea",
+  "name": "East Paldean Sea",
   "type": "route",
   "region": "paldea",
   "description": "A route in the Paldea region.",
-  "routeKey": "paldea-auto-westprovinceareatwo",
+  "routeKey": "paldea-auto-eastpaldeansea",
   "connections": [
-   "paldea-porto-marinada",
-   "paldea-cascarrafa"
+   "paldea-levincia",
+   "paldea-auto-westprovinceareatwo"
   ],
   "unlock": {
    "requires": [
-    "paldea-cascarrafa"
+    "paldea-levincia"
    ]
   },
-  "unlockOrder": 381,
+  "unlockOrder": 382,
   "position": {
-   "x": 94,
-   "y": 54
+   "x": 79,
+   "y": 46
   }
  },
  "paldea-auto-westprovinceareaone": {
@@ -9751,17 +9793,40 @@
   "routeKey": "paldea-auto-westprovinceareaone",
   "connections": [
    "paldea-cascarrafa",
-   "paldea-porto-marinada"
+   "paldea-zapapico"
   ],
   "unlock": {
    "requires": [
-    "paldea-porto-marinada"
+    "paldea-zapapico"
    ]
   },
-  "unlockOrder": 382,
+  "unlockOrder": 383,
   "position": {
-   "x": 93,
-   "y": 76
+   "x": 54,
+   "y": 85
+  }
+ },
+ "paldea-auto-dalizapapassage": {
+  "id": "paldea-auto-dalizapapassage",
+  "name": "Dalizapa Passage",
+  "type": "route",
+  "region": "paldea",
+  "description": "A route in the Paldea region.",
+  "routeKey": "paldea-auto-dalizapapassage",
+  "connections": [
+   "paldea-medali",
+   "paldea-zapapico",
+   "paldea-levincia"
+  ],
+  "unlock": {
+   "requires": [
+    "paldea-levincia"
+   ]
+  },
+  "unlockOrder": 384,
+  "position": {
+   "x": 64,
+   "y": 56
   }
  },
  "paldea-auto-westpaldeansea": {
@@ -9780,10 +9845,10 @@
     "paldea-zapapico"
    ]
   },
-  "unlockOrder": 383,
+  "unlockOrder": 385,
   "position": {
-   "x": 72,
-   "y": 73
+   "x": 71,
+   "y": 72
   }
  },
  "paldea-auto-eastprovinceareathree": {
@@ -9801,10 +9866,32 @@
     "paldea-zapapico"
    ]
   },
-  "unlockOrder": 384,
+  "unlockOrder": 386,
   "position": {
-   "x": 80,
+   "x": 79,
    "y": 94
+  }
+ },
+ "paldea-auto-westprovinceareatwo": {
+  "id": "paldea-auto-westprovinceareatwo",
+  "name": "West Province (Area Two)",
+  "type": "route",
+  "region": "paldea",
+  "description": "A route in the Paldea region.",
+  "routeKey": "paldea-auto-westprovinceareatwo",
+  "connections": [
+   "paldea-porto-marinada",
+   "paldea-auto-eastpaldeansea"
+  ],
+  "unlock": {
+   "requires": [
+    "paldea-auto-eastpaldeansea"
+   ]
+  },
+  "unlockOrder": 387,
+  "position": {
+   "x": 94,
+   "y": 53
   }
  },
  "paldea-raid": {
@@ -9815,17 +9902,17 @@
   "description": "A mysterious island where Paldea's legendary Pokemon dwell.",
   "routeKey": "paldea-raid",
   "connections": [
-   "paldea-auto-eastprovinceareathree"
+   "paldea-auto-westprovinceareatwo"
   ],
   "unlock": {
    "requires": [
-    "paldea-auto-eastprovinceareathree"
+    "paldea-auto-westprovinceareatwo"
    ]
   },
-  "unlockOrder": 385,
+  "unlockOrder": 388,
   "position": {
-   "x": 93,
-   "y": 6
+   "x": 14,
+   "y": 47
   }
  }
 }

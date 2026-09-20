@@ -24,6 +24,7 @@ const ONLY = onlyArg ? onlyArg.split('=')[1] : null
 
 // region -> preferred game versions (first match wins per species)
 const PREFERRED = {
+  kanto: ['firered', 'leafgreen', 'red', 'blue', 'yellow'],
   johto: ['heartgold', 'soulsilver', 'gold', 'silver', 'crystal'],
   hoenn: ['omega-ruby', 'alpha-sapphire', 'emerald', 'ruby', 'sapphire'],
   sinnoh: ['platinum', 'diamond', 'pearl'],
@@ -70,45 +71,56 @@ async function routeEncounters(regionId, routeSlug) {
   }
   if (!location.areas || location.areas.length === 0) return null
 
-  /** @type {Map<string, {chance:number,min:number,max:number}>} */
-  const found = new Map()
+  const areas = []
   for (const areaRef of location.areas) {
-    let area
     try {
-      area = await cacheGet(
-        `https://pokeapi.co/api/v2/location-area/${areaRef.name}/`,
-        `pokeapi-area-${areaRef.name}.json`
+      areas.push(
+        await cacheGet(
+          `https://pokeapi.co/api/v2/location-area/${areaRef.name}/`,
+          `pokeapi-area-${areaRef.name}.json`
+        )
       )
     } catch {
-      continue
-    }
-    for (const enc of area.pokemon_encounters) {
-      const key = keyByNorm[norm(enc.pokemon.name)]
-      if (!key) continue
-      // pick the best preferred version available for this species
-      let detail = null
-      for (const version of PREFERRED[regionId] ?? []) {
-        detail = enc.version_details.find((d) => d.version.name === version)
-        if (detail) break
-      }
-      if (!detail) detail = enc.version_details[0]
-      if (!detail || !detail.encounter_details?.length) continue
-      const wild = detail.encounter_details.filter((d) => isWildMethod(d.method.name))
-      if (!wild.length) continue
-      const levels = wild.map((d) => [d.min_level, d.max_level])
-      const min = Math.min(...levels.map((l) => l[0]))
-      const max = Math.max(...levels.map((l) => l[1]))
-      const chance = wild.reduce((a, d) => a + d.chance, 0) || detail.max_chance
-      const existing = found.get(key)
-      if (existing) {
-        existing.chance = Math.max(existing.chance, chance)
-        existing.min = Math.min(existing.min, min)
-        existing.max = Math.max(existing.max, max)
-      } else {
-        found.set(key, { chance, min, max })
-      }
+      /* ignore */
     }
   }
+  const preferred = PREFERRED[regionId] ?? []
+  // Only species that appear in this region's preferred game versions are kept,
+  // so we don't pull in cross-generation oddities (e.g. Let's Go rares).
+  const collect = (allowFallback) => {
+    /** @type {Map<string, {chance:number,min:number,max:number}>} */
+    const found = new Map()
+    for (const area of areas) {
+      for (const enc of area.pokemon_encounters) {
+        const key = keyByNorm[norm(enc.pokemon.name)]
+        if (!key) continue
+        let detail = null
+        for (const version of preferred) {
+          detail = enc.version_details.find((d) => d.version.name === version)
+          if (detail) break
+        }
+        if (!detail && allowFallback) detail = enc.version_details[0]
+        if (!detail || !detail.encounter_details?.length) continue
+        const wild = detail.encounter_details.filter((d) => isWildMethod(d.method.name))
+        if (!wild.length) continue
+        const levels = wild.map((d) => [d.min_level, d.max_level])
+        const min = Math.min(...levels.map((l) => l[0]))
+        const max = Math.max(...levels.map((l) => l[1]))
+        const chance = wild.reduce((a, d) => a + d.chance, 0) || detail.max_chance
+        const existing = found.get(key)
+        if (existing) {
+          existing.chance = Math.max(existing.chance, chance)
+          existing.min = Math.min(existing.min, min)
+          existing.max = Math.max(existing.max, max)
+        } else {
+          found.set(key, { chance, min, max })
+        }
+      }
+    }
+    return found
+  }
+  let found = collect(false)
+  if (found.size === 0) found = collect(true)
   if (found.size === 0) return null
   return [...found.entries()]
     .map(([speciesKey, d]) => ({
@@ -137,6 +149,40 @@ async function routeEncounters(regionId, routeSlug) {
     }
     console.log(`${regionId.padEnd(7)} routes ${String(routes.length).padStart(3)} | with real encounters ${hit}`)
   }
+
+  // Kanto locations come from the game's own map-data (already accurate), so map
+  // each route/landmark id to its PokéAPI slug and refresh those buckets too.
+  if (!ONLY || ONLY === 'kanto') {
+    const mapData = JSON.parse(fs.readFileSync(path.join(DATA, 'map-data.json'), 'utf8'))
+    const kanto = await cacheGet('https://pokeapi.co/api/v2/region/1/', 'pokeapi-region-kanto.json')
+    const slugs = kanto.locations.map((l) => l.name)
+    const stripped = (s) => norm(s.replace(/^kanto-/, ''))
+    const findSlug = (name) => {
+      const n = norm(name)
+      for (const s of slugs) if (stripped(s) === n) return s
+      for (const s of slugs) if (stripped(s).startsWith(n)) return s
+      return null
+    }
+    out.kanto = {}
+    let hit = 0
+    for (const loc of Object.values(mapData)) {
+      if ((loc.region ?? 'kanto') !== 'kanto' || !loc.routeKey) continue
+      const num = /route/i.test(loc.name) ? loc.name.match(/\d+/)?.[0] : null
+      const slug = num
+        ? ['19', '20', '21'].includes(num)
+          ? `kanto-sea-route-${num}`
+          : `kanto-route-${num}`
+        : findSlug(loc.name)
+      if (!slug) continue
+      const enc = await routeEncounters('kanto', slug)
+      if (enc) {
+        out.kanto[loc.routeKey] = enc
+        hit++
+      }
+    }
+    console.log(`kanto   buckets ${Object.values(mapData).filter((l) => (l.region ?? 'kanto') === 'kanto' && l.routeKey).length} | with real encounters ${hit}`)
+  }
+
   fs.writeFileSync(OUT, JSON.stringify(out, null, 1))
   console.log('wrote', path.relative(path.join(__dirname, '..'), OUT))
 })().catch((e) => {

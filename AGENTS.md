@@ -238,11 +238,15 @@ One-off scripts used to build the data JSON (not run during dev/build):
   PokéAPI and route/town compass connections (`north/south/east/west`) from
   Bulbapedia's raw infoboxes, then computes a directional layout. Caches HTTP
   responses under `tools/cache/` (gitignored) and writes
-  `tools/region-maps.json` (committed).
+  `tools/region-maps.json` (committed). Note Paldea is PokéAPI region **10**
+  (region 9 is Hisui) and has no routes — its areas are the
+  "<Dir> Province (Area N)" locations.
 - `scrape-route-encounters.cjs` — pulls real per-route wild encounters from
   PokéAPI (`/location` → `/location-area`), keeps only wild methods (drops
-  gift/static), picks a preferred game version per region, and maps species to
-  the game's keys. Writes `tools/route-encounters.json` (committed).
+  gift/static), keeps only the region's preferred game versions (so no
+  cross-generation oddities), maps species to the game's keys, and also
+  refreshes Kanto from its own map-data. Writes `tools/route-encounters.json`
+  (committed).
 - `generate-regions.cjs` — turns `tools/region-maps.json` + `route-encounters.json` into game content
   (locations, encounters, trainers, marts, Raid Islands, and gym/Elite
   Four/Champion leagues) for generations 2-9, merging it into

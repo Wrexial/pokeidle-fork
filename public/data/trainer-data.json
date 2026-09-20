@@ -5359,6 +5359,53 @@
    ]
   }
  ],
+ "paldea-cabo-poco": [
+  {
+   "id": "paldea-cabo-poco_t1",
+   "name": "Paldea Trainer 1",
+   "trainerClass": "hiker",
+   "team": [
+    {
+     "speciesKey": "sprigatito",
+     "level": 91
+    },
+    {
+     "speciesKey": "floragato",
+     "level": 92
+    }
+   ]
+  },
+  {
+   "id": "paldea-cabo-poco_t2",
+   "name": "Paldea Trainer 2",
+   "trainerClass": "camper",
+   "team": [
+    {
+     "speciesKey": "meowscarada",
+     "level": 93
+    },
+    {
+     "speciesKey": "fuecoco",
+     "level": 94
+    }
+   ]
+  },
+  {
+   "id": "paldea-cabo-poco_t3",
+   "name": "Paldea Trainer 3",
+   "trainerClass": "beauty",
+   "team": [
+    {
+     "speciesKey": "crocalor",
+     "level": 95
+    },
+    {
+     "speciesKey": "skeledirge",
+     "level": 96
+    }
+   ]
+  }
+ ],
  "paldea-cortondo": [
   {
    "id": "paldea-cortondo_t1",
@@ -5500,53 +5547,6 @@
    ]
   }
  ],
- "paldea-levincia": [
-  {
-   "id": "paldea-levincia_t1",
-   "name": "Paldea Trainer 1",
-   "trainerClass": "hiker",
-   "team": [
-    {
-     "speciesKey": "sprigatito",
-     "level": 91
-    },
-    {
-     "speciesKey": "floragato",
-     "level": 92
-    }
-   ]
-  },
-  {
-   "id": "paldea-levincia_t2",
-   "name": "Paldea Trainer 2",
-   "trainerClass": "camper",
-   "team": [
-    {
-     "speciesKey": "meowscarada",
-     "level": 93
-    },
-    {
-     "speciesKey": "fuecoco",
-     "level": 94
-    }
-   ]
-  },
-  {
-   "id": "paldea-levincia_t3",
-   "name": "Paldea Trainer 3",
-   "trainerClass": "beauty",
-   "team": [
-    {
-     "speciesKey": "crocalor",
-     "level": 95
-    },
-    {
-     "speciesKey": "skeledirge",
-     "level": 96
-    }
-   ]
-  }
- ],
  "paldea-montenevera": [
   {
    "id": "paldea-montenevera_t1",
@@ -5674,6 +5674,53 @@
   },
   {
    "id": "paldea-alfornada_t3",
+   "name": "Paldea Trainer 3",
+   "trainerClass": "beauty",
+   "team": [
+    {
+     "speciesKey": "crocalor",
+     "level": 95
+    },
+    {
+     "speciesKey": "skeledirge",
+     "level": 96
+    }
+   ]
+  }
+ ],
+ "paldea-levincia": [
+  {
+   "id": "paldea-levincia_t1",
+   "name": "Paldea Trainer 1",
+   "trainerClass": "hiker",
+   "team": [
+    {
+     "speciesKey": "sprigatito",
+     "level": 91
+    },
+    {
+     "speciesKey": "floragato",
+     "level": 92
+    }
+   ]
+  },
+  {
+   "id": "paldea-levincia_t2",
+   "name": "Paldea Trainer 2",
+   "trainerClass": "camper",
+   "team": [
+    {
+     "speciesKey": "meowscarada",
+     "level": 93
+    },
+    {
+     "speciesKey": "fuecoco",
+     "level": 94
+    }
+   ]
+  },
+  {
+   "id": "paldea-levincia_t3",
    "name": "Paldea Trainer 3",
    "trainerClass": "beauty",
    "team": [

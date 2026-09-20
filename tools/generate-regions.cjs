@@ -352,6 +352,29 @@ for (const region of REGIONS) {
   })
 }
 
+// refresh Kanto wild encounters from the real data too (keeping the curated
+// location names, and re-adding the Kanto starters as rare Safari Zone finds)
+if (realEncounters.kanto) {
+  let refreshed = 0
+  for (const loc of Object.values(mapData)) {
+    if ((loc.region ?? 'kanto') !== 'kanto' || !loc.routeKey) continue
+    const real = realEncounters.kanto[loc.routeKey]
+    if (real && real.length && encounterData[loc.routeKey]) {
+      encounterData[loc.routeKey] = {
+        name: encounterData[loc.routeKey].name,
+        encounters: real.map((e) => ({ ...e })),
+      }
+      refreshed++
+    }
+  }
+  const safari = encounterData.safariZone
+  if (safari)
+    for (const key of ['bulbasaur', 'charmander', 'squirtle'])
+      if (species[key] && !safari.encounters.some((e) => e.speciesKey === key))
+        safari.encounters.push({ speciesKey: key, weight: 1, minLevel: 20, maxLevel: 25 })
+  console.log('kanto buckets refreshed:', refreshed)
+}
+
 write('regions.json', regions)
 write('map-data.json', mapData)
 write('encounter-data.json', encounterData)

@@ -17,7 +17,7 @@ const OUT = path.join(__dirname, 'region-maps.json')
 const UA = 'PokemonIdle-map-research/1.0'
 const REGION_IDS = {
   kanto: 1, johto: 2, hoenn: 3, sinnoh: 4, unova: 5,
-  kalos: 6, alola: 7, galar: 8, paldea: 9,
+  kalos: 6, alola: 7, galar: 8, paldea: 10,
 }
 const SLUG = Object.fromEntries(Object.entries(REGION_IDS).map(([n, i]) => [i, n]))
 const onlyArg = process.argv.find((a) => a.startsWith('--region='))
@@ -55,10 +55,19 @@ const titleCase = (slug) =>
 
 const isRoute = (slug) => /route/.test(slug)
 const isTown = (slug) => /-(city|town)$/.test(slug)
+// Paldea has no numbered routes; its wild areas are "<dir> Province (Area N)"
+const PROVINCE = /^paldea-(north|south|east|west)-province-area-(one|two|three|four|five|six)$/
+const PROVINCE_NUM = { one: 'One', two: 'Two', three: 'Three', four: 'Four', five: 'Five', six: 'Six' }
+const provinceName = (slug) => {
+  const m = slug.match(PROVINCE)
+  if (!m) return null
+  return `${m[1][0].toUpperCase()}${m[1].slice(1)} Province (Area ${PROVINCE_NUM[m[2]]})`
+}
+const isRouteSlug = (regionName, slug) => isRoute(slug) || (regionName === 'paldea' && PROVINCE.test(slug))
 // regions whose PokéAPI slugs don't use the -city/-town convention
 const EXTRA_TOWNS = {
   galar: ['postwick', 'wedgehurst', 'motostoke', 'turffield', 'hulbury', 'hammerlocke', 'ballonlea', 'circhester', 'spikemuth', 'stow-on-side', 'wyndon'],
-  paldea: ['mesagoza', 'cortondo', 'artazon', 'levincia', 'cascarrafa', 'medali', 'montenevera', 'alfornada', 'porto-marinada', 'zapapico', 'los-platos'],
+  paldea: ['mesagoza', 'cortondo', 'artazon', 'levincia', 'cascarrafa', 'medali', 'montenevera', 'alfornada', 'porto-marinada', 'zapapico', 'los-platos', 'cabo-poco'],
 }
 // regions where unmatched connection names should become nodes (e.g. Paldea provinces)
 const ALLOW_UNKNOWN = new Set(['paldea'])
@@ -120,25 +129,30 @@ async function regionGraph(regionName) {
   const regionId = REGION_IDS[regionName]
   const slugs = await regionLocations(regionId, regionName)
   const extra = EXTRA_TOWNS[regionName] ?? []
-  const nodes = slugs.filter((s) => isRoute(s) || isTown(s) || extra.includes(s))
+  const nodes = slugs.filter((s) => isRouteSlug(regionName, s) || isTown(s) || extra.includes(s))
   // some regions (e.g. Paldea) aren't in PokéAPI's location list at all
   for (const town of extra) if (!nodes.includes(town)) nodes.push(town)
 
   const display = {}
-  for (const slug of nodes) display[slug] = isRoute(slug) ? shortRouteName(slug) : titleCase(slug)
+  for (const slug of nodes) {
+    if (isTown(slug) || extra.includes(slug)) display[slug] = titleCase(slug)
+    else if (provinceName(slug)) display[slug] = provinceName(slug)
+    else display[slug] = shortRouteName(slug)
+  }
   // lookup by short name, slug, title-cased slug, and the region-prefixed page title
   const lookup = {}
   for (const slug of nodes) {
     lookup[norm(display[slug])] = slug
     lookup[norm(slug)] = slug
     lookup[norm(titleCase(slug))] = slug
-    if (isRoute(slug)) lookup[norm(pageTitle(regionName, slug))] = slug
+    if (isRouteSlug(regionName, slug)) lookup[norm(pageTitle(regionName, slug))] = slug
   }
 
   const edges = []
   let parsed = 0
   for (const slug of nodes) {
-    const raw = await fetchRaw(pageTitle(regionName, slug))
+    const title = provinceName(slug) || pageTitle(regionName, slug)
+    const raw = await fetchRaw(title)
     const compass = parseCompass(raw)
     let any = false
     for (const [dir, value] of Object.entries(compass)) {

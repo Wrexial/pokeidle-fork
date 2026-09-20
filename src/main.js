@@ -3,8 +3,10 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { jsx, jsxs } from 'react/jsx-runtime'
-import { GameLayout, StarterSelect } from './components/layout.js'
-import { PatchNotesModal, PatchNotesPage } from './components/settings.js'
+import { GameLayout } from './components/game-layout.js'
+import { StarterSelect } from './components/starter-select.js'
+import { PatchNotesModal } from './components/patch-notes-modal.js'
+import { PatchNotesPage } from './components/patch-notes-page.js'
 import { GameProvider, useGame } from './game/context.js'
 
 function AppContent() {
@@ -33,7 +35,7 @@ function App() {
   )
 }
 
-createRoot(document.getElementById('root')).render(
+createRoot(/** @type {HTMLElement} */ (document.getElementById('root'))).render(
   jsx(React.StrictMode, {
     children: jsx(App, {}),
   })

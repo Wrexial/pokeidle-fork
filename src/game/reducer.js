@@ -1,11 +1,13 @@
 // Split from the former assets/index.js — see tools/decompile/split-modules.mjs
 
-import { RAID_COOLDOWN_MS, activeItems, defaultCatchSettings, legendaryPool, pokeBalls } from '../data/constants.js'
+import { RAID_COOLDOWN_MS, defaultCatchSettings, legendaryPool } from '../data/config.js'
+import { activeItems, pokeBalls } from '../data/items.js'
 import { encounterData, mapData, moveLearnsets, pokemonSpecies } from '../data/gameData.js'
 import { createVolatileState } from './combat.js'
 import { calculatePokemonStats, createPokemon } from './pokemon.js'
 import { computeUnlockedLocations, isActiveEffectItem, loadActivePokemonFromParty, prepareNextBattle, syncActivePokemonIntoParty, tickBattleCounters } from './progression.js'
 
+/** @type {GameState} */
 export const initialGameState = {
   phase: 'starterSelect',
   playerPokemon: null,
@@ -59,6 +61,11 @@ export const initialGameState = {
   activeEffects: [],
 }
 
+/**
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
 export function gameReducer(state, action) {
   switch (action.type) {
     case 'SELECT_STARTER': {

@@ -1,7 +1,9 @@
 // Split from the former assets/index.js — see tools/decompile/split-modules.mjs
 
 import React from 'react'
-import { MOBILE_BREAKPOINT, ballOrder, legendaryPool, trainerClassPayouts } from './data/constants.js'
+import { legendaryPool, trainerClassPayouts } from './data/config.js'
+import { ballOrder } from './data/items.js'
+import { MOBILE_BREAKPOINT } from './data/ui.js'
 import { encounterData, mapData, pokemonSpecies, trainerData } from './data/gameData.js'
 import { useGame } from './game/context.js'
 import { attemptCatch, selectAutoCatchBall, selectBestBall, shouldAutoCatch } from './game/catching.js'
@@ -36,7 +38,7 @@ export function useTypewriter(text, speed = 30) {
 
 export function useGameLoop() {
   const { state, dispatch } = useGame(),
-    intervalRef = React.useRef(null),
+    intervalRef = React.useRef(/** @type {ReturnType<typeof setInterval> | null} */ (null)),
     phaseRef = React.useRef(state.phase),
     stateRef = React.useRef(state)
   React.useEffect(() => {
@@ -506,7 +508,7 @@ export function useGameLoop() {
     )
   }, [state.phase, state.speed, state.paused, state.pendingEvents.length, tick, getTickDelay])
   const unlockedRef = React.useRef(state.unlockedLocations),
-    pendingTravelRef = React.useRef(null)
+    pendingTravelRef = React.useRef(/** @type {string | null} */ (null))
   ;(React.useEffect(() => {
     if (!state.autoProceed) {
       unlockedRef.current = state.unlockedLocations

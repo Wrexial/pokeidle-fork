@@ -2,12 +2,15 @@
 
 import React from 'react'
 import { jsx } from 'react/jsx-runtime'
-import { SAVE_KEY } from '../data/constants.js'
+import { SAVE_KEY } from '../data/config.js'
 import { preEvolutionMap } from '../data/gameData.js'
 import { generateIVs } from './pokemon.js'
 import { gameReducer, initialGameState } from './reducer.js'
 
-const GameContext = React.createContext(null)
+/** @type {React.Context<{ state: GameState, dispatch: (action: GameAction) => void } | null>} */
+const GameContext = React.createContext(
+  /** @type {{ state: GameState, dispatch: (action: GameAction) => void } | null} */ (null)
+)
 
 export function GameProvider({ children }) {
   const [state, dispatch] = React.useReducer(gameReducer, initialGameState, (initialState) => {
@@ -233,6 +236,7 @@ export function GameProvider({ children }) {
   )
 }
 
+/** @returns {{ state: GameState, dispatch: (action: GameAction) => void }} */
 export function useGame() {
   const context = React.useContext(GameContext)
   if (!context) throw new Error('useGame must be used within GameProvider')

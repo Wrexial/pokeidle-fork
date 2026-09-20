@@ -1,6 +1,6 @@
 // Split from src/game/logic.js — see tools/decompile/split-logic.mjs
 
-import { typechart } from '../data/constants.js'
+import { typechart } from '../data/moves.js'
 import { moveData } from '../data/gameData.js'
 
 export function createVolatileState() {
@@ -56,6 +56,7 @@ export function calculateDamage(attackerLevel, attack, defense, move, attackerTy
     effectiveness = getTypeMultiplier(move.type, defenderTypes),
     randomFactor = (Math.floor(Math.random() * 16) + 85) / 100,
     damage = Math.max(1, Math.floor(baseDamage * critMultiplier * stabMultiplier * effectiveness * randomFactor))
+  /** @type {string | null} */
   let effectivenessLabel = null
   return (
     effectiveness === 0

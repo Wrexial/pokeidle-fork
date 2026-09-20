@@ -1,6 +1,7 @@
 // Split from src/game/logic.js — see tools/decompile/split-logic.mjs
 
-import { activeItems, evolutionItems, pokeBalls, shinyFullOddsChance, shinyWithCharmChance } from '../data/constants.js'
+import { shinyFullOddsChance, shinyWithCharmChance } from '../data/config.js'
+import { activeItems, evolutionItems, pokeBalls } from '../data/items.js'
 import { encounterData, mapData, moveData, pokemonSpecies } from '../data/gameData.js'
 import { calculateExpYield, calculatePokemonStats, getLevelUpResults, getPerfectIVs, resolvePokemonMoves } from './pokemon.js'
 

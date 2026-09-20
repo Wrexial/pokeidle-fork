@@ -16,12 +16,15 @@ runtime.
 ## Commands
 
 ```bash
-npm run dev      # Vite dev server (http://localhost:5173)
-npm run build    # production build -> dist/  (gitignored)
-npm run preview  # serve the production build
+npm run dev        # Vite dev server (http://localhost:5173)
+npm run build      # production build -> dist/  (gitignored)
+npm run preview    # serve the production build
+npm run typecheck  # tsc --noEmit over src/ (jsconfig.json, checkJs)
 ```
 
-There is **no test suite, no linter, and no type-checker**. Verify changes by
+There is **no test suite and no linter**. `npm run typecheck` runs the TypeScript
+compiler in JS-checking mode (`jsconfig.json` + `@types/react`) and should stay
+clean; fix it or add JSDoc rather than ignoring errors. Verify behaviour by
 running the dev server and exercising the game in the browser.
 
 Formatting: `.prettierrc.json` is the intended style (`semi: false`,
@@ -61,6 +64,12 @@ node tools/decompile/split-modules.mjs [--write]
 
 # split src/game/logic.js into game sub-modules (already applied)
 node tools/decompile/split-logic.mjs [--write]
+
+# generic module splitter (used for src/data/constants.js)
+node tools/decompile/split-module.mjs [--write]
+
+# split grouped component files into one file per component (already applied)
+node tools/decompile/split-components.mjs [--write]
 ```
 
 The whole codebase has now been de-minified and modularised with these tools:
@@ -113,7 +122,11 @@ window.gameDataDebug.lookupPokemon('pikachu')
 | `index.html` | Entry point; wires the two scripts above. |
 | `src/main.js` | App entry: mounts `App` (plus `AppContent`). Renders the root. |
 | `src/data/gameData.js` | Loads and re-exports all game JSON + derived maps. |
-| `src/data/constants.js` | Static tables/constants (items, moves chart, prices, UI constants…). |
+| `src/data/items.js` | Items/balls/evolution items, mart stock, bag categories. |
+| `src/data/config.js` | Tuning constants: shiny odds, cooldowns, starters/legendaries, save keys. |
+| `src/data/moves.js` | Type chart + move-category icons. |
+| `src/data/ui.js` | UI constants: speed options, stat-bar colors, rarity labels, drag defaults, backgrounds. |
+| `src/data/changelog.js` | `GAME_VERSION`, `LAST_SEEN_VERSION_KEY`, `CHANGELOG`. |
 | `src/game/pokemon.js` | Species/stat/exp/learnset math, sprite URLs, `createPokemon`. |
 | `src/game/combat.js` | Battle math: type chart, damage, stat stages, AI, `resolveBattleTurn`. |
 | `src/game/catching.js` | Catch rate/chance, ball selection, auto-catch rules, encounter rarity. |
@@ -121,7 +134,8 @@ window.gameDataDebug.lookupPokemon('pikachu')
 | `src/game/reducer.js` | `initialGameState` + `gameReducer` (the whole state machine). |
 | `src/game/context.js` | `GameContext`, `GameProvider`, `useGame`. |
 | `src/hooks.js` | `useTypewriter`, `useIsMobile`, `useGameLoop`. |
-| `src/components/*.js` | UI, grouped by area (`battle`, `party`, `pokedex`, `shop`, `location`, `settings`, `layout`, `common`). |
+| `src/components/*.js` | **One file per component** (39 files, kebab-case, e.g. `battle-scene.js`, `pokedex-tile.js`). |
+| `src/types.d.ts` | Ambient types for the injected `window.gameData*` globals. |
 | `assets/gameDataInjector.js` | Loads `public/data/*.json` into `window.gameDataInjector`. Add new data files here. |
 | `assets/style.css` | All game styling + CSS variables (theme colors). |
 | `assets/fonts.css` | Local "Press Start 2P" `@font-face` declarations. |
@@ -183,7 +197,15 @@ the code references keys and ids directly, and cross-file references
 
 - Split into modules by layer. Imports form a DAG (no cycles). The rough order
   is `data → game/pokemon|combat → game/progression → game/catching → game/reducer
-  → game/context → hooks → components → main`.
+  → game/context → hooks → components/* → main`.
+- Each UI component is its own file under `src/components/` (kebab-case).
+- TypeScript runs in check-JS mode with **`strictNullChecks` on**: `npm run
+  typecheck` must stay at 0 errors. `noImplicitAny` is still off (would be ~340
+  issues); core shapes (`Pokemon`, `Move`, `GameState`, `GameAction`) live in
+  `src/types.d.ts`.
+- `React.memo(function ({...}))` needs a `@param` for its props (otherwise TS
+  infers `{}`); `useRef(null)`/`useState(null)` should be given a `@type` cast so
+  `.current` / setters are typed.
 - All identifiers are descriptive (top-level, params, locals, and nested
   block/callback bindings). Short names only remain where they read naturally
   (`id`, `ms`, `item`, `rule`, `key`, `type`, …).

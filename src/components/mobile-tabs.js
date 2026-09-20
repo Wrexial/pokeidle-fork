@@ -1,188 +1,29 @@
-// Split from the former assets/index.js — see tools/decompile/split-modules.mjs
+// Split from a grouped component file — see tools/decompile/split-components.mjs
 
 import React from 'react'
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
-import { BattleScreen } from './battle.js'
-import { GymPanel, LocationPanel, TownMap } from './location.js'
-import { BoxPanel, PartyBoxPanel, PartyPanel, StatsPanel } from './party.js'
-import { CatchSettingsModal } from './settings.js'
-import { BagPanel, RewardShopModal } from './shop.js'
-import { MOBILE_TABS, SIDE_PANEL_TABS, evolutionItems, legendaryPool, starterSpecies } from '../data/constants.js'
+import { legendaryPool } from '../data/config.js'
+import { evolutionItems } from '../data/items.js'
+import { MOBILE_TABS } from '../data/ui.js'
 import { encounterData, evolutionData, mapData, pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
-import { calculatePokemonStats, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
-import { checkShinyOdds } from '../game/progression.js'
-import { useIsMobile } from '../hooks.js'
+import { GymPanel } from './gym-panel.js'
+import { LocationPanel } from './location-panel.js'
+import { TownMap } from './town-map.js'
+import { BoxPanel } from './box-panel.js'
+import { PartyPanel } from './party-panel.js'
+import { StatsPanel } from './stats-panel.js'
+import { CatchSettingsModal } from './catch-settings-modal.js'
+import { BagPanel } from './bag-panel.js'
+import { RewardShopModal } from './reward-shop-modal.js'
 
-export function StarterSelect() {
-  const { dispatch } = useGame()
-  return jsxs('div', {
-    className: 'starter-select',
-    children: [
-      jsx('h2', {
-        className: 'starter-title',
-        children: 'Choose Your Starter!',
-      }),
-      jsx('div', {
-        className: 'starter-cards',
-        children: starterSpecies.map((speciesKey) => {
-          const species = pokemonSpecies[speciesKey],
-            stats = calculatePokemonStats(species, 5, {
-              hp: 15,
-              attack: 15,
-              defense: 15,
-              spAttack: 15,
-              spDefense: 15,
-              speed: 15,
-            })
-          return jsxs(
-            'div',
-            {
-              className: 'starter-card',
-              onClick: () =>
-                dispatch({
-                  type: 'SELECT_STARTER',
-                  payload: {
-                    speciesKey,
-                    isShiny: checkShinyOdds(),
-                  },
-                }),
-              children: [
-                jsx('img', {
-                  src: getPokemonSpriteUrl(species.id),
-                  onError: (event) => (event.target.src = getPokemonSpriteFallbackUrl(species.id)),
-                  alt: species.name,
-                  className: 'starter-sprite',
-                }),
-                jsx('h3', {
-                  children: species.name,
-                }),
-                jsx('div', {
-                  className: 'starter-types',
-                  children: species.types.map((type) =>
-                    jsx(
-                      'span',
-                      {
-                        className: `type-badge type-${type.toLowerCase()}`,
-                        children: type,
-                      },
-                      type
-                    )
-                  ),
-                }),
-                jsxs('div', {
-                  className: 'starter-stats',
-                  children: [
-                    jsxs('div', {
-                      children: ['HP: ', stats.hp],
-                    }),
-                    jsxs('div', {
-                      children: ['ATK: ', stats.attack],
-                    }),
-                    jsxs('div', {
-                      children: ['DEF: ', stats.defense],
-                    }),
-                    jsxs('div', {
-                      children: ['SP.A: ', stats.spAttack],
-                    }),
-                    jsxs('div', {
-                      children: ['SP.D: ', stats.spDefense],
-                    }),
-                    jsxs('div', {
-                      children: ['SPD: ', stats.speed],
-                    }),
-                  ],
-                }),
-                jsx('button', {
-                  className: 'choose-btn',
-                  children: 'Choose!',
-                }),
-              ],
-            },
-            speciesKey
-          )
-        }),
-      }),
-    ],
-  })
-}
-
-function RightPanel() {
-  const { state } = useGame(),
-    [tab, setTab] = React.useState('location'),
-    [showCatchSettings, setShowCatchSettings] = React.useState(!1),
-    [showRewardShop, setShowRewardShop] = React.useState(!1),
-    openCatchSettings = React.useCallback(() => setShowCatchSettings(!0), []),
-    closeCatchSettings = React.useCallback(() => setShowCatchSettings(!1), []),
-    openRewardShop = React.useCallback(() => setShowRewardShop(!0), []),
-    closeRewardShop = React.useCallback(() => setShowRewardShop(!1), []),
-    location = mapData[state.currentLocation],
-    isRaid = location?.type === 'raid',
-    routeKey = isRaid ? 'raidIsland' : location?.routeKey,
-    raidEncounters = isRaid
-      ? legendaryPool.map((encounter) => ({
-          speciesKey: encounter.speciesKey,
-          weight: 1,
-          minLevel: encounter.level,
-          maxLevel: encounter.level,
-        }))
-      : null,
-    routeEncounters = routeKey && !isRaid ? encounterData[routeKey] : null,
-    encounters = isRaid ? raidEncounters : routeEncounters?.encounters
-  return jsxs('div', {
-    className: 'side-panel right-panel',
-    children: [
-      jsx('div', {
-        className: 'tab-bar',
-        children: SIDE_PANEL_TABS.map((tabDef) =>
-          jsx(
-            'button',
-            {
-              className: `tab-btn${tab === tabDef.id ? ' active' : ''}`,
-              onClick: () => setTab(tabDef.id),
-              children: tabDef.label,
-            },
-            tabDef.id
-          )
-        ),
-      }),
-      jsx('div', {
-        className: 'panel-content',
-        children:
-          tab === 'location'
-            ? jsx(LocationPanel, {
-                onOpenCatchSettings: openCatchSettings,
-              })
-            : tab === 'gym'
-              ? jsx(GymPanel, {
-                  onOpenShop: openRewardShop,
-                })
-              : null,
-      }),
-      jsx(BagPanel, {}),
-      showCatchSettings &&
-        encounters &&
-        routeKey &&
-        jsx(CatchSettingsModal, {
-          routeKey,
-          encounters,
-          onClose: closeCatchSettings,
-        }),
-      showRewardShop &&
-        jsx(RewardShopModal, {
-          onClose: closeRewardShop,
-        }),
-    ],
-  })
-}
-
-function MobileTabs() {
+export function MobileTabs() {
   const { state, dispatch } = useGame(),
     [tab, setTab] = React.useState('party'),
-    [inspected, setInspected] = React.useState(null),
-    [releaseConfirm, setReleaseConfirm] = React.useState(null),
-    [boxInspected, setBoxInspected] = React.useState(null),
-    [boxReleaseConfirm, setBoxReleaseConfirm] = React.useState(null),
+    [inspected, setInspected] = React.useState(/** @type {{ source: string, id: string } | null} */ (null)),
+    [releaseConfirm, setReleaseConfirm] = React.useState(/** @type {string | null} */ (null)),
+    [boxInspected, setBoxInspected] = React.useState(/** @type {{ source: string, id: string } | null} */ (null)),
+    [boxReleaseConfirm, setBoxReleaseConfirm] = React.useState(/** @type {string | null} */ (null)),
     [locationTab, setLocationTab] = React.useState('location'),
     [showCatchSettings, setShowCatchSettings] = React.useState(!1),
     [showRewardShop, setShowRewardShop] = React.useState(!1),
@@ -407,23 +248,4 @@ function MobileTabs() {
         }),
     ],
   })
-}
-
-export function GameLayout() {
-  return useIsMobile()
-    ? jsxs('div', {
-        className: 'game-layout mobile',
-        children: [jsx(BattleScreen, {}), jsx(MobileTabs, {})],
-      })
-    : jsxs('div', {
-        className: 'game-layout',
-        children: [
-          jsx(PartyBoxPanel, {}),
-          jsxs('div', {
-            className: 'center-column',
-            children: [jsx(BattleScreen, {}), jsx(TownMap, {})],
-          }),
-          jsx(RightPanel, {}),
-        ],
-      })
 }

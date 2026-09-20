@@ -1,6 +1,6 @@
 // Split from src/game/logic.js — see tools/decompile/split-logic.mjs
 
-import { evValue } from '../data/constants.js'
+import { evValue } from '../data/config.js'
 import { moveLearnsets, pokemonSpecies, preEvolutionMap, trainerClasses } from '../data/gameData.js'
 
 export function getPokemonSpriteUrl(spriteId, isBack = !1, isShiny = !1) {

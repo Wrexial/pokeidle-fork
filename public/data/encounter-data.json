@@ -5796,6 +5796,210 @@
   "name": "Johto Raid Island",
   "encounters": [
    {
+    "speciesKey": "pichu",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "cleffa",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "igglybuff",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "togepi",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "togetic",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "natu",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "xatu",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "sunkern",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "sunflora",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "espeon",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "umbreon",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "murkrow",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "slowking",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "unown",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "wobbuffet",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "dunsparce",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "scizor",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "sneasel",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "slugma",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "magcargo",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "swinub",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "piloswine",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "delibird",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "houndour",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "houndoom",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "kingdra",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "porygon2",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "smeargle",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "tyrogue",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "hitmontop",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "smoochum",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "elekid",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "magby",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "blissey",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
+   },
+   {
     "speciesKey": "raikou",
     "weight": 1,
     "minLevel": 63,
@@ -5814,6 +6018,24 @@
     "maxLevel": 63
    },
    {
+    "speciesKey": "larvitar",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "pupitar",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "tyranitar",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
+   },
+   {
     "speciesKey": "lugia",
     "weight": 1,
     "minLevel": 63,
@@ -5824,6 +6046,12 @@
     "weight": 1,
     "minLevel": 63,
     "maxLevel": 63
+   },
+   {
+    "speciesKey": "celebi",
+    "weight": 1,
+    "minLevel": 53,
+    "maxLevel": 53
    }
   ]
  },
@@ -7651,6 +7879,216 @@
   "name": "Hoenn Raid Island",
   "encounters": [
    {
+    "speciesKey": "shroomish",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "breloom",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "slakoth",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "vigoroth",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "slaking",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "makuhita",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "hariyama",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "azurill",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "nosepass",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "sableye",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "mawile",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "aron",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "lairon",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "aggron",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "meditite",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "medicham",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "torkoal",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "spoink",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "grumpig",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "lunatone",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "solrock",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "lileep",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "cradily",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "anorith",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "armaldo",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "castform",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "chimecho",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "snorunt",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "glalie",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "spheal",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "sealeo",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "walrein",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "bagon",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "shelgon",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "salamence",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
     "speciesKey": "beldum",
     "weight": 1,
     "minLevel": 72,
@@ -7709,6 +8147,12 @@
     "weight": 1,
     "minLevel": 72,
     "maxLevel": 72
+   },
+   {
+    "speciesKey": "rayquaza",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
    },
    {
     "speciesKey": "jirachi",
@@ -11874,6 +12318,162 @@
   "name": "Sinnoh Raid Island",
   "encounters": [
    {
+    "speciesKey": "cranidos",
+    "weight": 1,
+    "minLevel": 71,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "rampardos",
+    "weight": 1,
+    "minLevel": 71,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "shieldon",
+    "weight": 1,
+    "minLevel": 71,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "bastiodon",
+    "weight": 1,
+    "minLevel": 71,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "drifloon",
+    "weight": 1,
+    "minLevel": 71,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "drifblim",
+    "weight": 1,
+    "minLevel": 71,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "buneary",
+    "weight": 1,
+    "minLevel": 71,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "lopunny",
+    "weight": 1,
+    "minLevel": 71,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "mismagius",
+    "weight": 1,
+    "minLevel": 71,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "honchkrow",
+    "weight": 1,
+    "minLevel": 71,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "happiny",
+    "weight": 1,
+    "minLevel": 71,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "gible",
+    "weight": 1,
+    "minLevel": 71,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "gabite",
+    "weight": 1,
+    "minLevel": 71,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "garchomp",
+    "weight": 1,
+    "minLevel": 71,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "riolu",
+    "weight": 1,
+    "minLevel": 71,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "lucario",
+    "weight": 1,
+    "minLevel": 71,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "hippopotas",
+    "weight": 1,
+    "minLevel": 71,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "skorupi",
+    "weight": 1,
+    "minLevel": 71,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "drapion",
+    "weight": 1,
+    "minLevel": 71,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "carnivine",
+    "weight": 1,
+    "minLevel": 71,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "tangrowth",
+    "weight": 1,
+    "minLevel": 71,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "yanmega",
+    "weight": 1,
+    "minLevel": 71,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "leafeon",
+    "weight": 1,
+    "minLevel": 71,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "glaceon",
+    "weight": 1,
+    "minLevel": 71,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "porygon-z",
+    "weight": 1,
+    "minLevel": 71,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "rotom",
+    "weight": 1,
+    "minLevel": 71,
+    "maxLevel": 71
+   },
+   {
     "speciesKey": "uxie",
     "weight": 1,
     "minLevel": 81,
@@ -11928,6 +12528,12 @@
     "maxLevel": 81
    },
    {
+    "speciesKey": "phione",
+    "weight": 1,
+    "minLevel": 71,
+    "maxLevel": 71
+   },
+   {
     "speciesKey": "manaphy",
     "weight": 1,
     "minLevel": 81,
@@ -11938,6 +12544,12 @@
     "weight": 1,
     "minLevel": 81,
     "maxLevel": 81
+   },
+   {
+    "speciesKey": "shaymin",
+    "weight": 1,
+    "minLevel": 71,
+    "maxLevel": 71
    },
    {
     "speciesKey": "arceus",
@@ -14225,22 +14837,322 @@
     "maxLevel": 90
    },
    {
-    "speciesKey": "cobalion",
+    "speciesKey": "munna",
     "weight": 1,
-    "minLevel": 90,
-    "maxLevel": 90
+    "minLevel": 80,
+    "maxLevel": 80
    },
    {
-    "speciesKey": "terrakion",
+    "speciesKey": "musharna",
     "weight": 1,
-    "minLevel": 90,
-    "maxLevel": 90
+    "minLevel": 80,
+    "maxLevel": 80
    },
    {
-    "speciesKey": "virizion",
+    "speciesKey": "roggenrola",
     "weight": 1,
-    "minLevel": 90,
-    "maxLevel": 90
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "boldore",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "drilbur",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "excadrill",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "timburr",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "gurdurr",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "conkeldurr",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "tympole",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "basculin",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "maractus",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "sigilyph",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "yamask",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "cofagrigus",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "tirtouga",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "carracosta",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "archen",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "archeops",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "zorua",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "zoroark",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "ducklett",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "swanna",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "frillish",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "jellicent",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "joltik",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "galvantula",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "ferroseed",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "ferrothorn",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "klink",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "klang",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "klinklang",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "tynamo",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "eelektrik",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "eelektross",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "elgyem",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "litwick",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "lampent",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "chandelure",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "axew",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "fraxure",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "haxorus",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "cryogonal",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "druddigon",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "golett",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "golurk",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "heatmor",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "durant",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "deino",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "zweilous",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "hydreigon",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "larvesta",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "volcarona",
+    "weight": 1,
+    "minLevel": 80,
+    "maxLevel": 80
    },
    {
     "speciesKey": "tornadus",
@@ -15906,6 +16818,84 @@
   "name": "Kalos Raid Island",
   "encounters": [
    {
+    "speciesKey": "tyrunt",
+    "weight": 1,
+    "minLevel": 89,
+    "maxLevel": 89
+   },
+   {
+    "speciesKey": "tyrantrum",
+    "weight": 1,
+    "minLevel": 89,
+    "maxLevel": 89
+   },
+   {
+    "speciesKey": "amaura",
+    "weight": 1,
+    "minLevel": 89,
+    "maxLevel": 89
+   },
+   {
+    "speciesKey": "aurorus",
+    "weight": 1,
+    "minLevel": 89,
+    "maxLevel": 89
+   },
+   {
+    "speciesKey": "carbink",
+    "weight": 1,
+    "minLevel": 89,
+    "maxLevel": 89
+   },
+   {
+    "speciesKey": "pumpkaboo",
+    "weight": 1,
+    "minLevel": 89,
+    "maxLevel": 89
+   },
+   {
+    "speciesKey": "gourgeist",
+    "weight": 1,
+    "minLevel": 89,
+    "maxLevel": 89
+   },
+   {
+    "speciesKey": "bergmite",
+    "weight": 1,
+    "minLevel": 89,
+    "maxLevel": 89
+   },
+   {
+    "speciesKey": "avalugg",
+    "weight": 1,
+    "minLevel": 89,
+    "maxLevel": 89
+   },
+   {
+    "speciesKey": "noibat",
+    "weight": 1,
+    "minLevel": 89,
+    "maxLevel": 89
+   },
+   {
+    "speciesKey": "noivern",
+    "weight": 1,
+    "minLevel": 89,
+    "maxLevel": 89
+   },
+   {
+    "speciesKey": "xerneas",
+    "weight": 1,
+    "minLevel": 89,
+    "maxLevel": 89
+   },
+   {
+    "speciesKey": "yveltal",
+    "weight": 1,
+    "minLevel": 89,
+    "maxLevel": 89
+   },
+   {
     "speciesKey": "zygarde",
     "weight": 1,
     "minLevel": 99,
@@ -17357,6 +18347,48 @@
   "name": "Alola Raid Island",
   "encounters": [
    {
+    "speciesKey": "oricorio",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "wishiwashi",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "dewpider",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "araquanid",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "comfey",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "oranguru",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "passimian",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
     "speciesKey": "type: null",
     "weight": 1,
     "minLevel": 100,
@@ -17367,6 +18399,60 @@
     "weight": 1,
     "minLevel": 100,
     "maxLevel": 100
+   },
+   {
+    "speciesKey": "minior",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "turtonator",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "togedemaru",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "mimikyu",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "drampa",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "dhelmise",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "jangmo-o",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "hakamo-o",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "kommo-o",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
    },
    {
     "speciesKey": "tapu koko",
@@ -17393,6 +18479,72 @@
     "maxLevel": 100
    },
    {
+    "speciesKey": "cosmog",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "cosmoem",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "solgaleo",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "lunala",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "nihilego",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "buzzwole",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "pheromosa",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "xurkitree",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "celesteela",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "guzzlord",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "necrozma",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
     "speciesKey": "magearna",
     "weight": 1,
     "minLevel": 100,
@@ -17403,6 +18555,30 @@
     "weight": 1,
     "minLevel": 100,
     "maxLevel": 100
+   },
+   {
+    "speciesKey": "poipole",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "naganadel",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "stakataka",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "blacephalon",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
    },
    {
     "speciesKey": "zeraora",
@@ -18516,6 +19692,174 @@
   "name": "Galar Raid Island",
   "encounters": [
    {
+    "speciesKey": "appletun",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "sinistea",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "polteageist",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "hatenna",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "hattrem",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "hatterene",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "impidimp",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "morgrem",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "grimmsnarl",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "cursola",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "sirfetch'd",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "mr. rime",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "runerigus",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "eiscue",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "indeedee",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "morpeko",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "cufant",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "copperajah",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "dracozolt",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "arctozolt",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "dracovish",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "arctovish",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "dreepy",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "drakloak",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "dragapult",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "zacian",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "zamazenta",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "eternatus",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
     "speciesKey": "kubfu",
     "weight": 1,
     "minLevel": 100,
@@ -18559,6 +19903,42 @@
    },
    {
     "speciesKey": "calyrex",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "wyrdeer",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "kleavor",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "ursaluna",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "basculegion",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "sneasler",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "overqwil",
     "weight": 1,
     "minLevel": 100,
     "maxLevel": 100
@@ -24025,6 +25405,180 @@
  "paldea-raid": {
   "name": "Paldea Raid Island",
   "encounters": [
+   {
+    "speciesKey": "rellor",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "rabsca",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "cetoddle",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "veluza",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "dondozo",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "tatsugiri",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "great tusk",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "scream tail",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "brute bonnet",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "flutter mane",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "slither wing",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "sandy shocks",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "iron treads",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "iron bundle",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "iron hands",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "iron jugulis",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "iron moth",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "iron thorns",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "frigibax",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "arctibax",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "baxcalibur",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "gimmighoul",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "gholdengo",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "wo-chien",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "chien-pao",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "ting-lu",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "chi-yu",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "roaring moon",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "iron valiant",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
    {
     "speciesKey": "koraidon",
     "weight": 1,

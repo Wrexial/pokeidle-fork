@@ -4,7 +4,7 @@ import React from 'react'
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
 import { evolutionItems } from '../data/items.js'
 import { MOBILE_TABS } from '../data/ui.js'
-import { encounterData, evolutionData, legendaryPoolFor, mapData, pokemonSpecies } from '../data/gameData.js'
+import { encounterData, evolutionData, raidPoolFor, mapData, pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { GymPanel } from './gym-panel.js'
 import { LocationPanel } from './location-panel.js'
@@ -30,7 +30,7 @@ export function MobileTabs() {
     isRaid = location?.type === 'raid',
     routeKey = isRaid ? location?.id : location?.routeKey,
     raidEncounters = isRaid
-      ? legendaryPoolFor(location?.region ?? 'kanto').map((encounter) => ({
+      ? raidPoolFor(location?.region ?? 'kanto').map((encounter) => ({
           speciesKey: encounter.speciesKey,
           weight: 1,
           minLevel: encounter.level,

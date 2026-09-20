@@ -1429,7 +1429,7 @@
    "johto-route-29"
   ],
   "unlock": {
-   "championDefeated": true
+   "championDefeated": "kanto"
   },
   "unlockOrder": 100,
   "position": {
@@ -1491,8 +1491,11 @@
    "johto-route-29"
   ],
   "unlock": {
-   "requires": [
-    "johto-route-29"
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-route-29",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 102,
@@ -1533,8 +1536,11 @@
    "johto-route-45"
   ],
   "unlock": {
-   "requires": [
-    "johto-route-29"
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-route-29",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 103,
@@ -1555,8 +1561,11 @@
    "johto-route-31"
   ],
   "unlock": {
-   "requires": [
-    "johto-cherrygrove-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-cherrygrove-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 104,
@@ -1577,8 +1586,11 @@
    "johto-route-46"
   ],
   "unlock": {
-   "requires": [
-    "johto-route-46"
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-route-46",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 105,
@@ -1597,8 +1609,11 @@
    "johto-route-45"
   ],
   "unlock": {
-   "requires": [
-    "johto-route-45"
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-route-45",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 106,
@@ -1639,8 +1654,11 @@
    "johto-violet-city"
   ],
   "unlock": {
-   "requires": [
-    "johto-route-30"
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-route-30",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 107,
@@ -1661,8 +1679,11 @@
    "johto-route-36"
   ],
   "unlock": {
-   "requires": [
-    "johto-route-31"
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-route-31",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 108,
@@ -1702,8 +1723,11 @@
    "johto-violet-city"
   ],
   "unlock": {
-   "requires": [
-    "johto-violet-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-violet-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 109,
@@ -1726,8 +1750,11 @@
    "johto-route-33"
   ],
   "unlock": {
-   "requires": [
-    "johto-violet-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-violet-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 110,
@@ -1749,8 +1776,11 @@
    "johto-route-48"
   ],
   "unlock": {
-   "requires": [
-    "johto-route-36"
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-route-36",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 111,
@@ -1772,8 +1802,11 @@
    "johto-route-47"
   ],
   "unlock": {
-   "requires": [
-    "johto-route-36"
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-route-36",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 112,
@@ -1794,8 +1827,11 @@
    "johto-route-36"
   ],
   "unlock": {
-   "requires": [
-    "johto-route-36"
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-route-36",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 113,
@@ -1816,8 +1852,11 @@
    "johto-route-38"
   ],
   "unlock": {
-   "requires": [
-    "johto-route-37"
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-route-37",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 114,
@@ -1858,8 +1897,11 @@
    "johto-route-35"
   ],
   "unlock": {
-   "requires": [
-    "johto-route-35"
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-route-35",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 115,
@@ -1880,8 +1922,11 @@
    "johto-route-33"
   ],
   "unlock": {
-   "requires": [
-    "johto-route-33"
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-route-33",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 116,
@@ -1900,8 +1945,11 @@
    "johto-route-33"
   ],
   "unlock": {
-   "requires": [
-    "johto-route-33"
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-route-33",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 117,
@@ -1941,8 +1989,11 @@
    "johto-route-35"
   ],
   "unlock": {
-   "requires": [
-    "johto-route-35"
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-route-35",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 118,
@@ -1982,8 +2033,11 @@
    "johto-goldenrod-city"
   ],
   "unlock": {
-   "requires": [
-    "johto-goldenrod-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-goldenrod-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 119,
@@ -2004,8 +2058,11 @@
    "johto-route-39"
   ],
   "unlock": {
-   "requires": [
-    "johto-ecruteak-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-ecruteak-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 120,
@@ -2026,8 +2083,11 @@
    "johto-mahogany-town"
   ],
   "unlock": {
-   "requires": [
-    "johto-ecruteak-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-ecruteak-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 121,
@@ -2048,8 +2108,11 @@
    "johto-route-38"
   ],
   "unlock": {
-   "requires": [
-    "johto-route-38"
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-route-38",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 122,
@@ -2070,8 +2133,11 @@
    "johto-route-44"
   ],
   "unlock": {
-   "requires": [
-    "johto-route-42"
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-route-42",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 123,
@@ -2111,8 +2177,11 @@
    "johto-sea-route-40"
   ],
   "unlock": {
-   "requires": [
-    "johto-route-39"
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-route-39",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 124,
@@ -2152,8 +2221,11 @@
    "johto-mahogany-town"
   ],
   "unlock": {
-   "requires": [
-    "johto-mahogany-town"
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-mahogany-town",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 125,
@@ -2173,8 +2245,11 @@
    "johto-mahogany-town"
   ],
   "unlock": {
-   "requires": [
-    "johto-mahogany-town"
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-mahogany-town",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 126,
@@ -2195,8 +2270,11 @@
    "johto-sea-route-41"
   ],
   "unlock": {
-   "requires": [
-    "johto-olivine-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-olivine-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 127,
@@ -2217,8 +2295,11 @@
    "johto-sea-route-40"
   ],
   "unlock": {
-   "requires": [
-    "johto-sea-route-40"
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-sea-route-40",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 128,
@@ -2237,8 +2318,11 @@
    "johto-sea-route-41"
   ],
   "unlock": {
-   "requires": [
-    "johto-sea-route-41"
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-sea-route-41",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 129,
@@ -2272,14 +2356,17 @@
   "name": "Johto Raid Island",
   "type": "raid",
   "region": "johto",
-  "description": "A mysterious island where Johto's legendary Pokemon dwell.",
+  "description": "A mysterious island where Johto's rarest Pokemon dwell.",
   "routeKey": "johto-raid",
   "connections": [
    "johto-sea-route-41"
   ],
   "unlock": {
-   "requires": [
-    "johto-sea-route-41"
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-sea-route-41",
+     "count": 20
+    }
    ]
   },
   "unlockOrder": 130,
@@ -2298,12 +2385,7 @@
    "hoenn-route-101"
   ],
   "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "johto-sea-route-41",
-     "count": 30
-    }
-   ]
+   "championDefeated": "johto"
   },
   "unlockOrder": 131,
   "position": {
@@ -2365,8 +2447,11 @@
    "hoenn-route-103"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-route-101"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-101",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 133,
@@ -2407,8 +2492,11 @@
    "hoenn-oldale-town"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-oldale-town"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-oldale-town",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 134,
@@ -2429,8 +2517,11 @@
    "hoenn-route-110"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-oldale-town"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-oldale-town",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 135,
@@ -2450,8 +2541,11 @@
    "hoenn-route-104"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-route-102"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-102",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 136,
@@ -2493,8 +2587,11 @@
    "hoenn-mauville-city"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-route-103"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-103",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 137,
@@ -2515,8 +2612,11 @@
    "hoenn-route-134"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-route-110"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-110",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 138,
@@ -2558,8 +2658,11 @@
    "hoenn-route-105"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-petalburg-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-petalburg-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 139,
@@ -2581,8 +2684,11 @@
    "hoenn-route-118"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-route-110"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-110",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 140,
@@ -2623,8 +2729,11 @@
    "hoenn-route-106"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-route-104"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-104",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 141,
@@ -2645,8 +2754,11 @@
    "hoenn-route-108"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-slateport-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-slateport-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 142,
@@ -2668,8 +2780,11 @@
    "hoenn-route-112"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-mauville-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-mauville-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 143,
@@ -2690,8 +2805,11 @@
    "hoenn-verdanturf-town"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-mauville-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-mauville-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 144,
@@ -2713,8 +2831,11 @@
    "hoenn-mauville-city"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-mauville-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-mauville-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 145,
@@ -2735,8 +2856,11 @@
    "hoenn-route-133"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-slateport-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-slateport-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 146,
@@ -2757,8 +2881,11 @@
    "hoenn-route-116"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-route-104"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-104",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 147,
@@ -2799,8 +2926,11 @@
    "hoenn-dewford-town"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-route-105"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-105",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 148,
@@ -2821,8 +2951,11 @@
    "hoenn-route-109"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-route-109"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-109",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 149,
@@ -2843,8 +2976,11 @@
    "hoenn-lavaridge-town"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-route-111"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-111",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 150,
@@ -2865,8 +3001,11 @@
    "hoenn-fallarbor-town"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-route-111"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-111",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 151,
@@ -2886,8 +3025,11 @@
    "hoenn-rustboro-city"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-rustboro-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-rustboro-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 152,
@@ -2907,8 +3049,11 @@
    "hoenn-rustboro-city"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-rustboro-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-rustboro-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 153,
@@ -2929,8 +3074,11 @@
    "hoenn-fortree-city"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-route-118"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-118",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 154,
@@ -2951,8 +3099,11 @@
    "hoenn-route-122"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-route-118"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-118",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 155,
@@ -2973,8 +3124,11 @@
    "hoenn-route-134"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-route-134"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-134",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 156,
@@ -2993,8 +3147,11 @@
    "hoenn-route-117"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-route-117"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-117",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 157,
@@ -3035,8 +3192,11 @@
    "hoenn-dewford-town"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-route-108"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-108",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 158,
@@ -3057,8 +3217,11 @@
    "hoenn-route-123"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-route-123"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-123",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 159,
@@ -3079,8 +3242,11 @@
    "hoenn-route-133"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-route-133"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-133",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 160,
@@ -3100,8 +3266,11 @@
    "hoenn-route-107"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-route-106"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-106",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 161,
@@ -3140,8 +3309,11 @@
    "hoenn-route-112"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-route-112"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-112",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 162,
@@ -3181,8 +3353,11 @@
    "hoenn-route-114"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-route-113"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-113",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 163,
@@ -3222,8 +3397,11 @@
    "hoenn-route-120"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-route-119"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-119",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 164,
@@ -3263,8 +3441,11 @@
    "hoenn-fallarbor-town"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-fallarbor-town"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-fallarbor-town",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 165,
@@ -3285,8 +3466,11 @@
    "hoenn-fortree-city"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-fortree-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-fortree-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 166,
@@ -3308,8 +3492,11 @@
    "hoenn-route-122"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-route-122"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-122",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 167,
@@ -3329,8 +3516,11 @@
    "hoenn-route-132"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-route-132"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-132",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 168,
@@ -3370,8 +3560,11 @@
    "hoenn-route-121"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-route-121"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-121",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 169,
@@ -3412,8 +3605,11 @@
    "hoenn-pacifidlog-town"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-pacifidlog-town"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-pacifidlog-town",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 170,
@@ -3435,8 +3631,11 @@
    "hoenn-route-126"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-lilycove-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-lilycove-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 171,
@@ -3457,8 +3656,11 @@
    "hoenn-route-131"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-route-131"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-131",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 172,
@@ -3479,8 +3681,11 @@
    "hoenn-route-124"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-route-124"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-124",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 173,
@@ -3522,8 +3727,11 @@
    "hoenn-route-127"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-route-124"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-124",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 174,
@@ -3544,8 +3752,11 @@
    "hoenn-route-130"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-route-130"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-130",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 175,
@@ -3564,8 +3775,11 @@
    "hoenn-route-126"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-route-126"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-126",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 176,
@@ -3605,8 +3819,11 @@
    "hoenn-mossdeep-city"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-mossdeep-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-mossdeep-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 177,
@@ -3628,8 +3845,11 @@
    "hoenn-route-128"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-mossdeep-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-mossdeep-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 178,
@@ -3651,8 +3871,11 @@
    "hoenn-route-129"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-route-129"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-129",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 179,
@@ -3671,8 +3894,11 @@
    "hoenn-route-128"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-route-128"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-128",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 180,
@@ -3706,14 +3932,17 @@
   "name": "Hoenn Raid Island",
   "type": "raid",
   "region": "hoenn",
-  "description": "A mysterious island where Hoenn's legendary Pokemon dwell.",
+  "description": "A mysterious island where Hoenn's rarest Pokemon dwell.",
   "routeKey": "hoenn-raid",
   "connections": [
    "hoenn-route-128"
   ],
   "unlock": {
-   "requires": [
-    "hoenn-route-128"
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-128",
+     "count": 20
+    }
    ]
   },
   "unlockOrder": 181,
@@ -3732,12 +3961,7 @@
    "sinnoh-route-201"
   ],
   "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "hoenn-route-128",
-     "count": 30
-    }
-   ]
+   "championDefeated": "hoenn"
   },
   "unlockOrder": 182,
   "position": {
@@ -3800,8 +4024,11 @@
    "sinnoh-snowpoint-city"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-route-201"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-201",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 184,
@@ -3842,8 +4069,11 @@
    "sinnoh-sandgem-town"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-sandgem-town"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-sandgem-town",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 185,
@@ -3864,8 +4094,11 @@
    "sinnoh-sea-route-220"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-sandgem-town"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-sandgem-town",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 186,
@@ -3884,8 +4117,11 @@
    "sinnoh-sandgem-town"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-sandgem-town"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-sandgem-town",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 187,
@@ -3926,8 +4162,11 @@
    "sinnoh-route-221"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-route-219"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-219",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 188,
@@ -3949,8 +4188,11 @@
    "sinnoh-route-218"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-route-202"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-202",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 189,
@@ -3991,8 +4233,11 @@
    "sinnoh-route-222"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-jubilife-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-jubilife-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 190,
@@ -4013,8 +4258,11 @@
    "sinnoh-jubilife-city"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-jubilife-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-jubilife-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 191,
@@ -4035,8 +4283,11 @@
    "sinnoh-jubilife-city"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-jubilife-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-jubilife-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 192,
@@ -4056,8 +4307,11 @@
    "sinnoh-sea-route-220"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-sea-route-220"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-sea-route-220",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 193,
@@ -4076,8 +4330,11 @@
    "sinnoh-route-218"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-route-218"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-218",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 194,
@@ -4118,8 +4375,11 @@
    "sinnoh-route-203"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-route-203"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-203",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 195,
@@ -4139,8 +4399,11 @@
    "sinnoh-route-205"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-route-204"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-204",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 196,
@@ -4181,8 +4444,11 @@
    "sinnoh-floaroma-town"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-floaroma-town"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-floaroma-town",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 197,
@@ -4203,8 +4469,11 @@
    "sinnoh-route-205"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-route-205"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-205",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 198,
@@ -4247,8 +4516,11 @@
    "sinnoh-sea-route-223"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-eterna-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-eterna-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 199,
@@ -4269,8 +4541,11 @@
    "sinnoh-celestic-town"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-eterna-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-eterna-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 200,
@@ -4292,8 +4567,11 @@
    "sinnoh-sunyshore-city"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-route-206"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-206",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 201,
@@ -4314,8 +4592,11 @@
    "sinnoh-route-206"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-route-206"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-206",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 202,
@@ -4335,8 +4616,11 @@
    "sinnoh-route-211"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-route-211"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-211",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 203,
@@ -4377,8 +4661,11 @@
    "sinnoh-route-206"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-route-206"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-206",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 204,
@@ -4399,8 +4686,11 @@
    "sinnoh-route-207"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-route-207"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-207",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 205,
@@ -4442,8 +4732,11 @@
    "sinnoh-celestic-town"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-celestic-town"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-celestic-town",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 206,
@@ -4462,8 +4755,11 @@
    "sinnoh-route-207"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-route-207"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-207",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 207,
@@ -4504,8 +4800,11 @@
    "sinnoh-veilstone-city"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-route-210"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-210",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 208,
@@ -4526,8 +4825,11 @@
    "sinnoh-route-227"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-route-210"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-210",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 209,
@@ -4568,8 +4870,11 @@
    "sinnoh-hearthome-city"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-solaceon-town"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-solaceon-town",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 210,
@@ -4590,8 +4895,11 @@
    "sinnoh-solaceon-town"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-solaceon-town"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-solaceon-town",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 211,
@@ -4611,8 +4919,11 @@
    "sinnoh-route-215"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-route-215"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-215",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 212,
@@ -4652,8 +4963,11 @@
    "sinnoh-veilstone-city"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-veilstone-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-veilstone-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 213,
@@ -4675,8 +4989,11 @@
    "sinnoh-route-225"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-route-209"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-209",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 214,
@@ -4717,8 +5034,11 @@
    "sinnoh-route-216"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-hearthome-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-hearthome-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 215,
@@ -4739,8 +5059,11 @@
    "sinnoh-hearthome-city"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-hearthome-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-hearthome-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 216,
@@ -4761,8 +5084,11 @@
    "sinnoh-sea-route-226"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-hearthome-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-hearthome-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 217,
@@ -4783,8 +5109,11 @@
    "sinnoh-sea-route-230"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-route-212"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-212",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 218,
@@ -4826,8 +5155,11 @@
    "sinnoh-route-224"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-route-208"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-208",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 219,
@@ -4849,8 +5181,11 @@
    "sinnoh-route-225"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-route-225"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-225",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 220,
@@ -4872,8 +5207,11 @@
    "sinnoh-route-229"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-pastoria-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-pastoria-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 221,
@@ -4893,8 +5231,11 @@
    "sinnoh-route-216"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-route-216"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-216",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 222,
@@ -4915,8 +5256,11 @@
    "sinnoh-pastoria-city"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-pastoria-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-pastoria-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 223,
@@ -4938,8 +5282,11 @@
    "sinnoh-route-213"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-route-213"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-213",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 224,
@@ -4961,8 +5308,11 @@
    "sinnoh-route-213"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-route-213"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-213",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 225,
@@ -4976,14 +5326,17 @@
   "name": "Sinnoh Raid Island",
   "type": "raid",
   "region": "sinnoh",
-  "description": "A mysterious island where Sinnoh's legendary Pokemon dwell.",
+  "description": "A mysterious island where Sinnoh's rarest Pokemon dwell.",
   "routeKey": "sinnoh-raid",
   "connections": [
    "sinnoh-route-229"
   ],
   "unlock": {
-   "requires": [
-    "sinnoh-route-229"
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-229",
+     "count": 20
+    }
    ]
   },
   "unlockOrder": 226,
@@ -5005,12 +5358,7 @@
    "unova-humilau-city"
   ],
   "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "sinnoh-route-229",
-     "count": 30
-    }
-   ]
+   "championDefeated": "sinnoh"
   },
   "unlockOrder": 227,
   "position": {
@@ -5163,8 +5511,11 @@
    "unova-route-12"
   ],
   "unlock": {
-   "requires": [
-    "unova-route-1"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-1",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 232,
@@ -5206,8 +5557,11 @@
    "unova-undella-town"
   ],
   "unlock": {
-   "requires": [
-    "unova-route-1"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-1",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 233,
@@ -5248,8 +5602,11 @@
    "unova-route-18"
   ],
   "unlock": {
-   "requires": [
-    "unova-route-1"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-1",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 234,
@@ -5270,8 +5627,11 @@
    "unova-aspertia-city"
   ],
   "unlock": {
-   "requires": [
-    "unova-route-15"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-15",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 235,
@@ -5313,8 +5673,11 @@
    "unova-route-23"
   ],
   "unlock": {
-   "requires": [
-    "unova-route-15"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-15",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 236,
@@ -5335,8 +5698,11 @@
    "unova-route-gate"
   ],
   "unlock": {
-   "requires": [
-    "unova-route-gate"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-gate",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 237,
@@ -5360,8 +5726,11 @@
    "unova-route-6"
   ],
   "unlock": {
-   "requires": [
-    "unova-accumula-town"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-accumula-town",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 238,
@@ -5402,8 +5771,11 @@
    "unova-striaton-city"
   ],
   "unlock": {
-   "requires": [
-    "unova-accumula-town"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-accumula-town",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 239,
@@ -5427,8 +5799,11 @@
    "unova-lacunosa-town"
   ],
   "unlock": {
-   "requires": [
-    "unova-accumula-town"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-accumula-town",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 240,
@@ -5449,8 +5824,11 @@
    "unova-accumula-town"
   ],
   "unlock": {
-   "requires": [
-    "unova-accumula-town"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-accumula-town",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 241,
@@ -5473,8 +5851,11 @@
    "unova-route-19"
   ],
   "unlock": {
-   "requires": [
-    "unova-castelia-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-castelia-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 242,
@@ -5495,8 +5876,11 @@
    "unova-anville-town"
   ],
   "unlock": {
-   "requires": [
-    "unova-route-17"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-17",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 243,
@@ -5517,8 +5901,11 @@
    "unova-castelia-city"
   ],
   "unlock": {
-   "requires": [
-    "unova-castelia-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-castelia-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 244,
@@ -5559,8 +5946,11 @@
    "unova-floccesy-town"
   ],
   "unlock": {
-   "requires": [
-    "unova-black-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-black-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 245,
@@ -5600,8 +5990,11 @@
    "unova-route-21"
   ],
   "unlock": {
-   "requires": [
-    "unova-route-21"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-21",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 246,
@@ -5621,8 +6014,11 @@
    "unova-route-2"
   ],
   "unlock": {
-   "requires": [
-    "unova-route-2"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-2",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 247,
@@ -5663,8 +6059,11 @@
    "unova-mistralton-city"
   ],
   "unlock": {
-   "requires": [
-    "unova-nimbasa-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-nimbasa-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 248,
@@ -5704,8 +6103,11 @@
    "unova-nimbasa-city"
   ],
   "unlock": {
-   "requires": [
-    "unova-nimbasa-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-nimbasa-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 249,
@@ -5727,8 +6129,11 @@
    "unova-route-16"
   ],
   "unlock": {
-   "requires": [
-    "unova-nimbasa-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-nimbasa-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 250,
@@ -5750,8 +6155,11 @@
    "unova-route-4"
   ],
   "unlock": {
-   "requires": [
-    "unova-route-4"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-4",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 251,
@@ -5772,8 +6180,11 @@
    "unova-route-4"
   ],
   "unlock": {
-   "requires": [
-    "unova-route-4"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-4",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 252,
@@ -5812,8 +6223,11 @@
    "unova-route-18"
   ],
   "unlock": {
-   "requires": [
-    "unova-route-18"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-18",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 253,
@@ -5855,8 +6269,11 @@
    "unova-lentimas-town"
   ],
   "unlock": {
-   "requires": [
-    "unova-aspertia-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-aspertia-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 254,
@@ -5898,8 +6315,11 @@
    "unova-route-14"
   ],
   "unlock": {
-   "requires": [
-    "unova-route-14"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-14",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 255,
@@ -5921,8 +6341,11 @@
    "unova-route-9"
   ],
   "unlock": {
-   "requires": [
-    "unova-driftveil-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-driftveil-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 256,
@@ -5963,8 +6386,11 @@
    "unova-nacrene-city"
   ],
   "unlock": {
-   "requires": [
-    "unova-striaton-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-striaton-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 257,
@@ -5985,8 +6411,11 @@
    "unova-route-6"
   ],
   "unlock": {
-   "requires": [
-    "unova-route-6"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-6",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 258,
@@ -6006,8 +6435,11 @@
    "unova-route-20"
   ],
   "unlock": {
-   "requires": [
-    "unova-floccesy-town"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-floccesy-town",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 259,
@@ -6046,8 +6478,11 @@
    "unova-route-3"
   ],
   "unlock": {
-   "requires": [
-    "unova-route-3"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-3",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 260,
@@ -6089,8 +6524,11 @@
    "unova-route-7"
   ],
   "unlock": {
-   "requires": [
-    "unova-mistralton-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-mistralton-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 261,
@@ -6131,8 +6569,11 @@
    "unova-mistralton-city"
   ],
   "unlock": {
-   "requires": [
-    "unova-mistralton-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-mistralton-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 262,
@@ -6154,8 +6595,11 @@
    "unova-lentimas-town"
   ],
   "unlock": {
-   "requires": [
-    "unova-lentimas-town"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-lentimas-town",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 263,
@@ -6178,8 +6622,11 @@
    "unova-route-8"
   ],
   "unlock": {
-   "requires": [
-    "unova-icirrus-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-icirrus-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 264,
@@ -6221,8 +6668,11 @@
    "unova-route-10"
   ],
   "unlock": {
-   "requires": [
-    "unova-icirrus-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-icirrus-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 265,
@@ -6244,8 +6694,11 @@
    "unova-route-11"
   ],
   "unlock": {
-   "requires": [
-    "unova-opelucid-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-opelucid-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 266,
@@ -6266,8 +6719,11 @@
    "unova-route-7"
   ],
   "unlock": {
-   "requires": [
-    "unova-route-7"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-7",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 267,
@@ -6289,8 +6745,11 @@
    "unova-virbank-city"
   ],
   "unlock": {
-   "requires": [
-    "unova-route-8"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-8",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 268,
@@ -6310,8 +6769,11 @@
    "unova-route-11"
   ],
   "unlock": {
-   "requires": [
-    "unova-route-11"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-11",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 269,
@@ -6345,14 +6807,17 @@
   "name": "Unova Raid Island",
   "type": "raid",
   "region": "unova",
-  "description": "A mysterious island where Unova's legendary Pokemon dwell.",
+  "description": "A mysterious island where Unova's rarest Pokemon dwell.",
   "routeKey": "unova-raid",
   "connections": [
    "unova-route-11"
   ],
   "unlock": {
-   "requires": [
-    "unova-route-11"
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-11",
+     "count": 20
+    }
    ]
   },
   "unlockOrder": 270,
@@ -6374,12 +6839,7 @@
    "kalos-route-7"
   ],
   "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "unova-route-11",
-     "count": 30
-    }
-   ]
+   "championDefeated": "unova"
   },
   "unlockOrder": 271,
   "position": {
@@ -6530,8 +6990,11 @@
    "kalos-route-2"
   ],
   "unlock": {
-   "requires": [
-    "kalos-route-1"
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-1",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 276,
@@ -6572,8 +7035,11 @@
    "kalos-route-22"
   ],
   "unlock": {
-   "requires": [
-    "kalos-route-3"
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-3",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 277,
@@ -6614,8 +7080,11 @@
    "kalos-route-1"
   ],
   "unlock": {
-   "requires": [
-    "kalos-route-1"
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-1",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 278,
@@ -6635,8 +7104,11 @@
    "kalos-route-1"
   ],
   "unlock": {
-   "requires": [
-    "kalos-route-1"
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-1",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 279,
@@ -6678,8 +7150,11 @@
    "kalos-route-1"
   ],
   "unlock": {
-   "requires": [
-    "kalos-route-1"
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-1",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 280,
@@ -6699,8 +7174,11 @@
    "kalos-aquacorde-town"
   ],
   "unlock": {
-   "requires": [
-    "kalos-aquacorde-town"
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-aquacorde-town",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 281,
@@ -6722,8 +7200,11 @@
    "kalos-ambrette-town"
   ],
   "unlock": {
-   "requires": [
-    "kalos-santalune-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-santalune-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 282,
@@ -6744,8 +7225,11 @@
    "kalos-laverre-city"
   ],
   "unlock": {
-   "requires": [
-    "kalos-route-12"
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-12",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 283,
@@ -6790,8 +7274,11 @@
    "kalos-route-8"
   ],
   "unlock": {
-   "requires": [
-    "kalos-route-4"
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-4",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 284,
@@ -6833,8 +7320,11 @@
    "kalos-route-22"
   ],
   "unlock": {
-   "requires": [
-    "kalos-route-4"
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-4",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 285,
@@ -6875,8 +7365,11 @@
    "kalos-coumarine-city"
   ],
   "unlock": {
-   "requires": [
-    "kalos-coumarine-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-coumarine-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 286,
@@ -6918,8 +7411,11 @@
    "kalos-route-13"
   ],
   "unlock": {
-   "requires": [
-    "kalos-lumiose-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-lumiose-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 287,
@@ -6941,8 +7437,11 @@
    "kalos-route-16"
   ],
   "unlock": {
-   "requires": [
-    "kalos-lumiose-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-lumiose-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 288,
@@ -6984,8 +7483,11 @@
    "kalos-lumiose-city"
   ],
   "unlock": {
-   "requires": [
-    "kalos-lumiose-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-lumiose-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 289,
@@ -7006,8 +7508,11 @@
    "kalos-route-21"
   ],
   "unlock": {
-   "requires": [
-    "kalos-ambrette-town"
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-ambrette-town",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 290,
@@ -7028,8 +7533,11 @@
    "kalos-ambrette-town"
   ],
   "unlock": {
-   "requires": [
-    "kalos-ambrette-town"
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-ambrette-town",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 291,
@@ -7051,8 +7559,11 @@
    "kalos-route-15"
   ],
   "unlock": {
-   "requires": [
-    "kalos-cyllage-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-cyllage-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 292,
@@ -7075,8 +7586,11 @@
    "kalos-route-14"
   ],
   "unlock": {
-   "requires": [
-    "kalos-route-5"
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-5",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 293,
@@ -7098,8 +7612,11 @@
    "kalos-cyllage-city"
   ],
   "unlock": {
-   "requires": [
-    "kalos-cyllage-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-cyllage-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 294,
@@ -7120,8 +7637,11 @@
    "kalos-route-9"
   ],
   "unlock": {
-   "requires": [
-    "kalos-route-9"
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-9",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 295,
@@ -7141,8 +7661,11 @@
    "kalos-route-11"
   ],
   "unlock": {
-   "requires": [
-    "kalos-route-10"
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-10",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 296,
@@ -7184,8 +7707,11 @@
    "kalos-route-13"
   ],
   "unlock": {
-   "requires": [
-    "kalos-route-13"
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-13",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 297,
@@ -7208,8 +7734,11 @@
    "kalos-route-10"
   ],
   "unlock": {
-   "requires": [
-    "kalos-route-10"
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-10",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 298,
@@ -7229,8 +7758,11 @@
    "kalos-geosenge-town"
   ],
   "unlock": {
-   "requires": [
-    "kalos-geosenge-town"
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-geosenge-town",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 299,
@@ -7250,8 +7782,11 @@
    "kalos-route-17"
   ],
   "unlock": {
-   "requires": [
-    "kalos-route-15"
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-15",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 300,
@@ -7292,8 +7827,11 @@
    "kalos-anistar-city"
   ],
   "unlock": {
-   "requires": [
-    "kalos-dendemille-town"
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-dendemille-town",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 301,
@@ -7313,8 +7851,11 @@
    "kalos-route-18"
   ],
   "unlock": {
-   "requires": [
-    "kalos-route-17"
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-17",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 302,
@@ -7355,8 +7896,11 @@
    "kalos-couriway-town"
   ],
   "unlock": {
-   "requires": [
-    "kalos-anistar-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-anistar-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 303,
@@ -7376,8 +7920,11 @@
    "kalos-route-19"
   ],
   "unlock": {
-   "requires": [
-    "kalos-route-18"
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-18",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 304,
@@ -7418,8 +7965,11 @@
    "kalos-snowbelle-city"
   ],
   "unlock": {
-   "requires": [
-    "kalos-couriway-town"
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-couriway-town",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 305,
@@ -7441,8 +7991,11 @@
    "kalos-kiloude-city"
   ],
   "unlock": {
-   "requires": [
-    "kalos-route-19"
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-19",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 306,
@@ -7482,8 +8035,11 @@
    "kalos-snowbelle-city"
   ],
   "unlock": {
-   "requires": [
-    "kalos-snowbelle-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-snowbelle-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 307,
@@ -7502,8 +8058,11 @@
    "kalos-snowbelle-city"
   ],
   "unlock": {
-   "requires": [
-    "kalos-snowbelle-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-snowbelle-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 308,
@@ -7537,14 +8096,17 @@
   "name": "Kalos Raid Island",
   "type": "raid",
   "region": "kalos",
-  "description": "A mysterious island where Kalos's legendary Pokemon dwell.",
+  "description": "A mysterious island where Kalos's rarest Pokemon dwell.",
   "routeKey": "kalos-raid",
   "connections": [
    "kalos-route-20"
   ],
   "unlock": {
-   "requires": [
-    "kalos-route-20"
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-20",
+     "count": 20
+    }
    ]
   },
   "unlockOrder": 309,
@@ -7564,12 +8126,7 @@
    "alola-route-1"
   ],
   "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "kalos-route-20",
-     "count": 30
-    }
-   ]
+   "championDefeated": "kalos"
   },
   "unlockOrder": 310,
   "position": {
@@ -7656,8 +8213,11 @@
    "alola-route-6"
   ],
   "unlock": {
-   "requires": [
-    "alola-route-1"
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-1",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 313,
@@ -7681,8 +8241,11 @@
    "alola-po-town"
   ],
   "unlock": {
-   "requires": [
-    "alola-route-1--hauoli-outskirts"
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-1--hauoli-outskirts",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 314,
@@ -7702,8 +8265,11 @@
    "alola-route-1--hauoli-outskirts"
   ],
   "unlock": {
-   "requires": [
-    "alola-route-1--hauoli-outskirts"
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-1--hauoli-outskirts",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 315,
@@ -7744,8 +8310,11 @@
    "alola-route-1--hauoli-outskirts"
   ],
   "unlock": {
-   "requires": [
-    "alola-route-1--hauoli-outskirts"
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-1--hauoli-outskirts",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 316,
@@ -7766,8 +8335,11 @@
    "alola-hauoli-city"
   ],
   "unlock": {
-   "requires": [
-    "alola-route-3"
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-3",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 317,
@@ -7791,8 +8363,11 @@
    "alola-route-16"
   ],
   "unlock": {
-   "requires": [
-    "alola-route-4"
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-4",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 318,
@@ -7814,8 +8389,11 @@
    "alola-route-3"
   ],
   "unlock": {
-   "requires": [
-    "alola-route-3"
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-3",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 319,
@@ -7837,8 +8415,11 @@
    "alola-malie-city"
   ],
   "unlock": {
-   "requires": [
-    "alola-route-4"
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-4",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 320,
@@ -7878,8 +8459,11 @@
    "alola-route-4"
   ],
   "unlock": {
-   "requires": [
-    "alola-route-4"
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-4",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 321,
@@ -7920,8 +8504,11 @@
    "alola-route-5"
   ],
   "unlock": {
-   "requires": [
-    "alola-route-5"
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-5",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 322,
@@ -7942,8 +8529,11 @@
    "alola-route-5"
   ],
   "unlock": {
-   "requires": [
-    "alola-route-5"
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-5",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 323,
@@ -7963,8 +8553,11 @@
    "alola-route-6"
   ],
   "unlock": {
-   "requires": [
-    "alola-route-6"
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-6",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 324,
@@ -8008,8 +8601,11 @@
    "alola-route-17"
   ],
   "unlock": {
-   "requires": [
-    "alola-heahea-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-heahea-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 325,
@@ -8030,8 +8626,11 @@
    "alola-route-5"
   ],
   "unlock": {
-   "requires": [
-    "alola-route-5"
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-5",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 326,
@@ -8052,8 +8651,11 @@
    "alola-route-5"
   ],
   "unlock": {
-   "requires": [
-    "alola-route-5"
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-5",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 327,
@@ -8073,8 +8675,11 @@
    "alola-route-9"
   ],
   "unlock": {
-   "requires": [
-    "alola-route-2"
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-2",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 328,
@@ -8115,8 +8720,11 @@
    "alola-heahea-city"
   ],
   "unlock": {
-   "requires": [
-    "alola-heahea-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-heahea-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 329,
@@ -8158,8 +8766,11 @@
    "alola-route-14"
   ],
   "unlock": {
-   "requires": [
-    "alola-hauoli-city"
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-hauoli-city",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 330,
@@ -8180,8 +8791,11 @@
    "alola-route-11"
   ],
   "unlock": {
-   "requires": [
-    "alola-route-11"
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-11",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 331,
@@ -8202,8 +8816,11 @@
    "alola-route-11"
   ],
   "unlock": {
-   "requires": [
-    "alola-route-11"
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-11",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 332,
@@ -8224,8 +8841,11 @@
    "alola-route-13"
   ],
   "unlock": {
-   "requires": [
-    "alola-route-11"
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-11",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 333,
@@ -8245,8 +8865,11 @@
    "alola-route-9"
   ],
   "unlock": {
-   "requires": [
-    "alola-route-9"
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-9",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 334,
@@ -8260,14 +8883,17 @@
   "name": "Alola Raid Island",
   "type": "raid",
   "region": "alola",
-  "description": "A mysterious island where Alola's legendary Pokemon dwell.",
+  "description": "A mysterious island where Alola's rarest Pokemon dwell.",
   "routeKey": "alola-raid",
   "connections": [
    "alola-route-14"
   ],
   "unlock": {
-   "requires": [
-    "alola-route-14"
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-14",
+     "count": 20
+    }
    ]
   },
   "unlockOrder": 335,
@@ -8286,12 +8912,7 @@
    "galar-route-1"
   ],
   "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "alola-route-14",
-     "count": 30
-    }
-   ]
+   "championDefeated": "alola"
   },
   "unlockOrder": 336,
   "position": {
@@ -8358,8 +8979,11 @@
    "galar-ballonlea"
   ],
   "unlock": {
-   "requires": [
-    "galar-route-1"
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-route-1",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 338,
@@ -8383,8 +9007,11 @@
    "galar-hammerlocke"
   ],
   "unlock": {
-   "requires": [
-    "galar-route-1"
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-route-1",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 339,
@@ -8406,8 +9033,11 @@
    "galar-route-1"
   ],
   "unlock": {
-   "requires": [
-    "galar-route-1"
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-route-1",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 340,
@@ -8428,8 +9058,11 @@
    "galar-turffield"
   ],
   "unlock": {
-   "requires": [
-    "galar-route-1"
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-route-1",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 341,
@@ -8469,8 +9102,11 @@
    "galar-route-2"
   ],
   "unlock": {
-   "requires": [
-    "galar-route-1"
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-route-1",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 342,
@@ -8512,8 +9148,11 @@
    "galar-circhester"
   ],
   "unlock": {
-   "requires": [
-    "galar-wedgehurst"
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-wedgehurst",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 343,
@@ -8535,8 +9174,11 @@
    "galar-route-4"
   ],
   "unlock": {
-   "requires": [
-    "galar-route-4"
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-route-4",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 344,
@@ -8557,8 +9199,11 @@
    "galar-route-4"
   ],
   "unlock": {
-   "requires": [
-    "galar-route-4"
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-route-4",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 345,
@@ -8577,8 +9222,11 @@
    "galar-route-3"
   ],
   "unlock": {
-   "requires": [
-    "galar-route-3"
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-route-3",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 346,
@@ -8619,8 +9267,11 @@
    "galar-route-4"
   ],
   "unlock": {
-   "requires": [
-    "galar-route-4"
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-route-4",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 347,
@@ -8659,8 +9310,11 @@
    "galar-route-6"
   ],
   "unlock": {
-   "requires": [
-    "galar-route-6"
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-route-6",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 348,
@@ -8702,8 +9356,11 @@
    "galar-wyndon"
   ],
   "unlock": {
-   "requires": [
-    "galar-motostoke"
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-motostoke",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 349,
@@ -8746,8 +9403,11 @@
    "galar-route-8"
   ],
   "unlock": {
-   "requires": [
-    "galar-route-2"
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-route-2",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 350,
@@ -8768,8 +9428,11 @@
    "galar-route-2"
   ],
   "unlock": {
-   "requires": [
-    "galar-route-2"
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-route-2",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 351,
@@ -8809,8 +9472,11 @@
    "galar-turffield"
   ],
   "unlock": {
-   "requires": [
-    "galar-turffield"
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-turffield",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 352,
@@ -8855,8 +9521,11 @@
    "galar-spikemuth"
   ],
   "unlock": {
-   "requires": [
-    "galar-route-5"
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-route-5",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 353,
@@ -8878,8 +9547,11 @@
    "galar-route-8"
   ],
   "unlock": {
-   "requires": [
-    "galar-route-8"
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-route-8",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 354,
@@ -8899,8 +9571,11 @@
    "galar-route-8"
   ],
   "unlock": {
-   "requires": [
-    "galar-route-8"
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-route-8",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 355,
@@ -8940,8 +9615,11 @@
    "galar-route-8"
   ],
   "unlock": {
-   "requires": [
-    "galar-route-8"
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-route-8",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 356,
@@ -8975,14 +9653,17 @@
   "name": "Galar Raid Island",
   "type": "raid",
   "region": "galar",
-  "description": "A mysterious island where Galar's legendary Pokemon dwell.",
+  "description": "A mysterious island where Galar's rarest Pokemon dwell.",
   "routeKey": "galar-raid",
   "connections": [
    "galar-route-9"
   ],
   "unlock": {
-   "requires": [
-    "galar-route-9"
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-route-9",
+     "count": 20
+    }
    ]
   },
   "unlockOrder": 357,
@@ -9005,12 +9686,7 @@
    "paldea-east-province-area-three"
   ],
   "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "galar-route-9",
-     "count": 30
-    }
-   ]
+   "championDefeated": "galar"
   },
   "unlockOrder": 358,
   "position": {
@@ -9218,8 +9894,11 @@
    "paldea-zapapico"
   ],
   "unlock": {
-   "requires": [
-    "paldea-south-province-area-one"
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-south-province-area-one",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 364,
@@ -9260,8 +9939,11 @@
    "paldea-south-province-area-two"
   ],
   "unlock": {
-   "requires": [
-    "paldea-south-province-area-one"
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-south-province-area-one",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 365,
@@ -9302,8 +9984,11 @@
    "paldea-south-province-area-five"
   ],
   "unlock": {
-   "requires": [
-    "paldea-porto-marinada"
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-porto-marinada",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 366,
@@ -9325,8 +10010,11 @@
    "paldea-north-province-area-one"
   ],
   "unlock": {
-   "requires": [
-    "paldea-porto-marinada"
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-porto-marinada",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 367,
@@ -9346,8 +10034,11 @@
    "paldea-medali"
   ],
   "unlock": {
-   "requires": [
-    "paldea-medali"
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-medali",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 368,
@@ -9367,8 +10058,11 @@
    "paldea-cabo-poco"
   ],
   "unlock": {
-   "requires": [
-    "paldea-cabo-poco"
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-cabo-poco",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 369,
@@ -9409,8 +10103,11 @@
    "paldea-cortondo"
   ],
   "unlock": {
-   "requires": [
-    "paldea-mesagoza"
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-mesagoza",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 370,
@@ -9431,8 +10128,11 @@
    "paldea-artazon"
   ],
   "unlock": {
-   "requires": [
-    "paldea-mesagoza"
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-mesagoza",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 371,
@@ -9453,8 +10153,11 @@
    "paldea-west-province-area-two"
   ],
   "unlock": {
-   "requires": [
-    "paldea-south-province-area-four"
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-south-province-area-four",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 372,
@@ -9475,8 +10178,11 @@
    "paldea-north-province-area-two"
   ],
   "unlock": {
-   "requires": [
-    "paldea-west-province-area-one"
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-west-province-area-one",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 373,
@@ -9495,8 +10201,11 @@
    "paldea-south-province-area-two"
   ],
   "unlock": {
-   "requires": [
-    "paldea-south-province-area-two"
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-south-province-area-two",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 374,
@@ -9536,8 +10245,11 @@
    "paldea-south-province-area-three"
   ],
   "unlock": {
-   "requires": [
-    "paldea-south-province-area-three"
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-south-province-area-three",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 375,
@@ -9578,8 +10290,11 @@
    "paldea-south-province-area-five"
   ],
   "unlock": {
-   "requires": [
-    "paldea-south-province-area-five"
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-south-province-area-five",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 376,
@@ -9600,8 +10315,11 @@
    "paldea-north-province-area-three"
   ],
   "unlock": {
-   "requires": [
-    "paldea-north-province-area-one"
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-north-province-area-one",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 377,
@@ -9622,8 +10340,11 @@
    "paldea-alfornada"
   ],
   "unlock": {
-   "requires": [
-    "paldea-artazon"
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-artazon",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 378,
@@ -9644,8 +10365,11 @@
    "paldea-mossui-town"
   ],
   "unlock": {
-   "requires": [
-    "paldea-north-province-area-two"
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-north-province-area-two",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 379,
@@ -9667,8 +10391,11 @@
    "paldea-cascarrafa"
   ],
   "unlock": {
-   "requires": [
-    "paldea-east-province-area-one"
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-east-province-area-one",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 380,
@@ -9707,8 +10434,11 @@
    "paldea-north-province-area-three"
   ],
   "unlock": {
-   "requires": [
-    "paldea-north-province-area-three"
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-north-province-area-three",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 381,
@@ -9748,8 +10478,11 @@
    "paldea-alfornada"
   ],
   "unlock": {
-   "requires": [
-    "paldea-alfornada"
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-alfornada",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 382,
@@ -9789,8 +10522,11 @@
    "paldea-alfornada"
   ],
   "unlock": {
-   "requires": [
-    "paldea-alfornada"
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-alfornada",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 383,
@@ -9830,8 +10566,11 @@
    "paldea-alfornada"
   ],
   "unlock": {
-   "requires": [
-    "paldea-alfornada"
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-alfornada",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 384,
@@ -9851,8 +10590,11 @@
    "paldea-levincia"
   ],
   "unlock": {
-   "requires": [
-    "paldea-levincia"
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-levincia",
+     "count": 15
+    }
    ]
   },
   "unlockOrder": 385,
@@ -9866,14 +10608,17 @@
   "name": "Paldea Raid Island",
   "type": "raid",
   "region": "paldea",
-  "description": "A mysterious island where Paldea's legendary Pokemon dwell.",
+  "description": "A mysterious island where Paldea's rarest Pokemon dwell.",
   "routeKey": "paldea-raid",
   "connections": [
    "paldea-east-province-area-two"
   ],
   "unlock": {
-   "requires": [
-    "paldea-east-province-area-two"
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-east-province-area-two",
+     "count": 20
+    }
    ]
   },
   "unlockOrder": 386,

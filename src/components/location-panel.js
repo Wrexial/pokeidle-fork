@@ -2,7 +2,7 @@
 
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
 import { martShopItems } from '../data/items.js'
-import { encounterData, legendaryPoolFor, mapData, pokemonSpecies } from '../data/gameData.js'
+import { encounterData, raidPoolFor, mapData, pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { RouteEncounterGrid } from './route-encounter-grid.js'
 import { ShopPanel } from './shop-panel.js'
@@ -76,7 +76,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
             }),
           jsx(RouteEncounterGrid, {
             routeKey: location.id,
-            encounters: legendaryPoolFor(location.region ?? 'kanto').map((legendary) => ({
+            encounters: raidPoolFor(location.region ?? 'kanto').map((legendary) => ({
               speciesKey: legendary.speciesKey,
               weight: 1,
               minLevel: legendary.level,

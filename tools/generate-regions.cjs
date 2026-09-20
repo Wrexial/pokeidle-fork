@@ -7,7 +7,7 @@
  *  - wild encounters per route (that generation's species)
  *  - marts + trainers in towns
  *  - a per-region gym/Elite Four/Champion league
- *  - a per-region Raid Island with that generation's legendaries
+ *  - a per-region Raid Island with that generation's uncatchable Pokemon
  *
  * Idempotent: regenerates only the non-Kanto content. Run scrape-region-maps
  * first (or keep tools/region-maps.json committed).
@@ -72,6 +72,7 @@ const realEncounters = fs.existsSync(path.join(__dirname, 'route-encounters.json
   ? JSON.parse(fs.readFileSync(path.join(__dirname, 'route-encounters.json'), 'utf8'))
   : {}
 const species = read('pokemon-species.json')
+const evolutionData = read('evolution-data.json')
 const mapData = read('map-data.json')
 const encounterData = read('encounter-data.json')
 const trainerData = read('trainer-data.json')
@@ -114,9 +115,8 @@ const makeTeam = (list, offset, size, baseLevel, step = 1) =>
   }))
 
 // --- generate ----------------------------------------------------------------
-const regions = [{ id: 'kanto', name: 'Kanto', generation: 1, order: 1, entry: 'palletTown', startLevel: 5, legendaries: KANTO_LEGENDARIES }]
+const regions = [{ id: 'kanto', name: 'Kanto', generation: 1, order: 1, entry: 'palletTown', startLevel: 5, raidPool: KANTO_LEGENDARIES }]
 let unlockOrder = 100
-const deepRoutes = {} // regionId -> deepest route locId
 
 for (const region of REGIONS) {
   const { id: regionId, name, gen, entry } = region
@@ -190,18 +190,17 @@ for (const region of REGIONS) {
   const base = GEN_BASE_LEVEL[gen]
   const starters = GEN_STARTERS[gen]
   const all = speciesForGen(gen)
-  const legendaries = all.filter((s) => s.catchRate <= 3)
   const wild = all.filter((s) => s.catchRate > 3 && !starters.includes(s.key))
 
-  regions.push({
+  const regionObj = {
     id: regionId,
     name,
     generation: gen,
     order: gen,
     entry: locId(regionId, entryNode),
     startLevel: base,
-    legendaries: legendaries.map((s) => ({ speciesKey: s.key, level: clampLevel(base + 35) })),
-  })
+  }
+  regions.push(regionObj)
 
   // encounters: real per-route species when available, else a generation slice
   const perRoute = 8
@@ -242,17 +241,39 @@ for (const region of REGIONS) {
     routeEncounter[node] = { name: display[node] ?? node, encounters }
   })
 
+  // Raid pool = this generation's species that can't be obtained in the region
+  // (not found in the wild and not reachable by evolving a wild Pokemon).
+  const obtainable = new Set()
+  for (const bucket of Object.values(routeEncounter))
+    for (const enc of bucket.encounters) obtainable.add(enc.speciesKey)
+  let expanded = true
+  while (expanded) {
+    expanded = false
+    for (const key of [...obtainable])
+      for (const evo of evolutionData[key] || [])
+        if (!obtainable.has(evo.into)) (obtainable.add(evo.into), (expanded = true))
+  }
+  regionObj.raidPool = all
+    .filter((s) => !obtainable.has(s.key))
+    .map((s) => ({ speciesKey: s.key, level: clampLevel(base + (s.catchRate <= 3 ? 35 : 25)) }))
+
   // map/town/route locations
+  const prevRegionId = gen === 2 ? 'kanto' : REGIONS[gen - 3].id
   for (const node of order) {
     const id = locId(regionId, node)
     const isRoute = isRouteNode(node)
-    const unlock = node === entryNode
-      ? gen === 2
-        ? { championDefeated: true }
-        : { battlesAtLocation: [{ locationId: deepRoutes[REGIONS[gen - 3].id], count: 30 }] }
-      : parent[node]
-        ? { requires: [locId(regionId, parent[node])] }
-        : {}
+    const unlock =
+      node === entryNode
+        ? { championDefeated: prevRegionId }
+        : depth[node] === 1
+          ? { requires: [locId(regionId, entryNode)] }
+          : parent[node]
+            ? {
+                battlesAtLocation: [
+                  { locationId: locId(regionId, parent[node]), count: 15 },
+                ],
+              }
+            : {}
     if (isRoute) {
       encounterData[id] = routeEncounter[node]
       mapData[id] = {
@@ -304,24 +325,30 @@ for (const region of REGIONS) {
     const raidNodeName = `${name} Raid Island`
     encounterData[raidId] = {
       name: raidNodeName,
-      encounters: legendaries.map((s) => ({ speciesKey: s.key, weight: 1, minLevel: clampLevel(base + 35), maxLevel: clampLevel(base + 35) })),
+      encounters: regionObj.raidPool.map((entry) => ({
+        speciesKey: entry.speciesKey,
+        weight: 1,
+        minLevel: entry.level,
+        maxLevel: entry.level,
+      })),
     }
     mapData[raidId] = {
       id: raidId,
       name: raidNodeName,
       type: 'raid',
       region: regionId,
-      description: `A mysterious island where ${name}'s legendary Pokemon dwell.`,
+      description: `A mysterious island where ${name}'s rarest Pokemon dwell.`,
       routeKey: raidId,
       connections: [locId(regionId, lastRoute)],
-      unlock: { requires: [locId(regionId, lastRoute)] },
+      unlock: {
+        battlesAtLocation: [{ locationId: locId(regionId, lastRoute), count: 20 }],
+      },
       unlockOrder: unlockOrder++,
       position: (() => {
         const p = place(lastRoute)
         return { x: Math.min(94, p.x + 8), y: Math.max(6, p.y - 10) }
       })(),
     }
-    deepRoutes[regionId] = locId(regionId, lastRoute)
   }
 
   // league: gyms spread across towns, then Elite Four + Champion

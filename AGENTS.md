@@ -194,9 +194,14 @@ Data conventions:
   starters live in `regionalStarters` in `src/data/config.js`.
 - `map-data.json` locations carry a `region` id; wild routes also reference an
   `encounter-data.json` bucket via `routeKey`. Unlock rules support
-  `battlesAtLocation`, `badgesRequired`, `championDefeated`, and `requires`
-  (a list of locations that must already be unlocked — resolved to a fixpoint in
-  `computeUnlockedLocations`).
+  `battlesAtLocation`, `badgesRequired`, `championDefeated` (a region id, or
+  `true` meaning Kanto), and `requires` (locations that must already be
+  unlocked) — all resolved to a fixpoint in `computeUnlockedLocations`. Region
+  entry towns require the previous region's champion; other routes unlock after
+  winning battles at their parent location.
+- `regions.json` also carries `raidPool` — the generation's species that cannot
+  be obtained in that region (not in any wild table and not reachable by
+  evolution). Those are the Pokemon found on the region's Raid Island.
 - Sprites are referenced by that `id`; a missing `.gif` falls back to the
   static `.png` (see commit "Fallback to static img").
 

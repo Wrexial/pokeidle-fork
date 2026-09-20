@@ -38,12 +38,13 @@ export let championData = /** @type {any[]} */ (loadedGameData.championData)
 export let regions = /** @type {Region[]} */ (loadedGameData.regions || [])
 
 /**
- * Legendary raid pool for a region (empty if the region is unknown).
+ * Raid pool for a region — its generation's Pokemon that can't be caught in
+ * the region (empty if the region is unknown).
  * @param {string} regionId
  * @returns {{ speciesKey: string, level: number }[]}
  */
-export function legendaryPoolFor(regionId) {
-  return regions.find((region) => region.id === regionId)?.legendaries ?? []
+export function raidPoolFor(regionId) {
+  return regions.find((region) => region.id === regionId)?.raidPool ?? []
 }
 
 /** @type {Record<string, string>} */

@@ -176,7 +176,7 @@ type Region = {
   order: number
   entry?: string
   startLevel?: number
-  legendaries?: { speciesKey: string; level: number }[]
+  raidPool?: { speciesKey: string; level: number }[]
 }
 
 type Mart = {
@@ -197,7 +197,7 @@ type MapLocation = {
   unlock: {
     battlesAtLocation?: { locationId: string; count: number }[]
     badgesRequired?: number
-    championDefeated?: boolean
+    championDefeated?: boolean | string
     requires?: string[]
   }
   unlockOrder: number

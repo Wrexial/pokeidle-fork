@@ -82,7 +82,10 @@ export function computeUnlockedLocations(state) {
             (requiredBattles) => (state.battlesWonByLocation[requiredBattles.locationId] ?? 0) < requiredBattles.count
           )) ||
         (unlockRule.badgesRequired && badgeCount < unlockRule.badgesRequired) ||
-        (unlockRule.championDefeated && !state.defeatedChampions.includes('kanto')) ||
+        (unlockRule.championDefeated &&
+          !state.defeatedChampions.includes(
+            unlockRule.championDefeated === true ? 'kanto' : unlockRule.championDefeated
+          )) ||
         (unlockRule.requires && unlockRule.requires.some((id) => !unlocked.has(id)))
       if (!blocked) {
         unlocked.add(locationId)

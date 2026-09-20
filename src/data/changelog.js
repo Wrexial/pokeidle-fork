@@ -13,8 +13,9 @@ export const CHANGELOG = [
           heading: 'New Regions',
           items: [
             'Eight new regions are now reachable: Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar and Paldea',
-            'Johto unlocks after defeating the Kanto Champion; each later region unlocks after enough battles in the previous region',
-            'Every region reproduces its real map \u2014 actual towns and routes with their genuine connections \u2014 plus a Raid Island and gyms',
+            "Each region unlocks after you beat the previous region's Elite Four and Champion",
+            'Within a region, routes unlock as you win battles on the previous route',
+            'Every region reproduces its real map — actual towns and routes with their genuine connections — plus a Raid Island and gyms',
           ],
         },
         {
@@ -22,13 +23,13 @@ export const CHANGELOG = [
           items: [
             'Each region has its own 8 gym leaders, Elite Four and Champion',
             'Badges, gym order and the league challenge are all per-region',
-            'Champion progress is tracked per region',
+            "Beating a region's Champion is what opens up the next region",
           ],
         },
         {
           heading: 'Legendary Raids',
           items: [
-            "Each region has its own Raid Island featuring that generation's legendary Pokemon",
+            "Each region has a Raid Island holding that generation's Pokemon you can't catch anywhere in the region",
           ],
         },
         {

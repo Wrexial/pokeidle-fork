@@ -3,7 +3,7 @@
 import React from 'react'
 import { jsx } from 'react/jsx-runtime'
 import { SAVE_KEY } from '../data/config.js'
-import { preEvolutionMap } from '../data/gameData.js'
+import { mapData, preEvolutionMap } from '../data/gameData.js'
 import { generateIVs } from './pokemon.js'
 import { gameReducer, initialGameState } from './reducer.js'
 
@@ -104,7 +104,10 @@ export function GameProvider({ children }) {
             {
               ...initialState,
               phase: 'idle',
-              startRegion: saved.startRegion || 'kanto',
+              startRegion:
+                saved.startRegion ||
+                mapData[saved.currentLocation]?.region ||
+                'kanto',
               playerPokemon: party[0] || playerPokemon,
               currentRoute: saved.currentRoute || initialState.currentRoute,
               speed: saved.speed || initialState.speed,

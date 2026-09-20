@@ -4,16 +4,21 @@ import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
 import { martShopItems } from '../data/items.js'
 import { encounterData, mapData, pokemonSpecies, regions, raidPoolFor } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
+import { computeUnlockedLocations } from '../game/progression.js'
 import { RouteEncounterGrid } from './route-encounter-grid.js'
 import { ShopPanel } from './shop-panel.js'
 
 /** @param {{ onOpenCatchSettings: () => void }} props */
 export function LocationPanel({ onOpenCatchSettings }) {
   const { state, dispatch } = useGame(),
+    unlockedNow = computeUnlockedLocations(state),
     location = mapData[state.currentLocation],
-    nextLockedLocation = Object.values(mapData)
-      .filter((candidateLocation) => {
-        if (state.unlockedLocations.includes(candidateLocation.id)) return !1
+    // "Next Unlock" = the cheapest locked location on the player's frontier
+    // (i.e. adjacent to somewhere already unlocked), never a far-off region.
+    nextLockedLocation = (() => {
+      const unlockedSet = new Set(unlockedNow)
+      const candidates = Object.values(mapData).filter((candidateLocation) => {
+        if (unlockedSet.has(candidateLocation.id)) return false
         const unlockRule = candidateLocation.unlock
         return (
           unlockRule.battlesAtLocation !== void 0 ||
@@ -23,7 +28,13 @@ export function LocationPanel({ onOpenCatchSettings }) {
           unlockRule.entry !== void 0
         )
       })
-      .sort((left, right) => left.unlockOrder - right.unlockOrder)[0],
+      const frontier = candidates.filter((candidateLocation) =>
+        candidateLocation.connections.some((connectionId) => unlockedSet.has(connectionId))
+      )
+      return (frontier.length ? frontier : candidates).sort(
+        (left, right) => left.unlockOrder - right.unlockOrder
+      )[0]
+    })(),
     badgeCount = state.defeatedGyms.length,
     routeKey = location?.routeKey,
     routeEncounters = routeKey ? encounterData[routeKey] : null

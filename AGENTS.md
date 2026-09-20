@@ -37,6 +37,15 @@ compiler in JS-checking mode (`jsconfig.json` + `@types/react`) and should stay
 clean; fix it or add JSDoc rather than ignoring errors. Verify behaviour by
 running the dev server and exercising the game in the browser.
 
+**Save recovery:** an incompatible/stuck save self-heals without DevTools —
+`index.html` has an inline *boot guard* that clears the save and reloads once if
+the game fails to start (module error / rejected promise / >15s hang with a save
+present; a `sessionStorage` counter stops reload loops), and `ErrorBoundary`
+(`src/components/error-boundary.js`) auto-resets after a render error. A console
+helper `pokemonIdleResetSave()` also exists. The loader in `src/game/context.js`
+repairs stale saves (unknown locations/routes, removed species, missing
+`startRegion`) before fall back to a fresh start.
+
 Formatting: `.prettierrc.json` is the intended style (`semi: false`,
 `singleQuote: true`, `trailingComma: "es5"`), but Prettier is **not** installed
 as a dependency and there is no format script. Match the surrounding code

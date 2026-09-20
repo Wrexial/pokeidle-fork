@@ -3,7 +3,7 @@
 import React from 'react'
 import { jsx } from 'react/jsx-runtime'
 import { SAVE_KEY } from '../data/config.js'
-import { encounterData, mapData, preEvolutionMap, regions } from '../data/gameData.js'
+import { encounterData, mapData, pokemonSpecies, preEvolutionMap, regions } from '../data/gameData.js'
 import { generateIVs } from './pokemon.js'
 import { gameReducer, initialGameState } from './reducer.js'
 
@@ -77,6 +77,13 @@ export function GameProvider({ children }) {
                     ivs: generateIVs(),
                   }
             )))
+          // If the save's core Pokemon reference species that no longer exist,
+          // start fresh instead of crashing during render.
+          if (!playerPokemon?.speciesKey || !pokemonSpecies[playerPokemon.speciesKey])
+            return initialState
+          party = party.filter((pokemon) => pokemon?.speciesKey && pokemonSpecies[pokemon.speciesKey])
+          box = box.filter((pokemon) => pokemon?.speciesKey && pokemonSpecies[pokemon.speciesKey])
+          if (party.length === 0) party = [playerPokemon]
           const catchSettings = saved.catchSettings || {}
           for (const speciesKey of Object.keys(catchSettings))
             for (const ballId of Object.keys(catchSettings[speciesKey])) {
@@ -102,15 +109,28 @@ export function GameProvider({ children }) {
           // Repair save data that references content which no longer exists
           // (regions/routes have been rebuilt several times), so an old save
           // can't put the game loop into an unknown location and crash.
-          const savedLocation =
+          const regionPrefix = (/** @type {any} */ id) => {
+              const prefix = String(id ?? '').split('-')[0]
+              return regions.some((r) => r.id === prefix) ? prefix : null
+            },
+            savedLocation =
               saved.currentLocation && mapData[saved.currentLocation]
                 ? saved.currentLocation
                 : null,
+            // infer the region from any region-prefixed id the save still has
+            // ("johto-town" -> "johto") so an old regional save lands back in it
+            inferredRegion =
+              regionPrefix(saved.currentLocation) ||
+              (Array.isArray(saved.unlockedLocations)
+                ? saved.unlockedLocations.map(regionPrefix).find(Boolean)
+                : null) ||
+              regionPrefix(saved.currentRoute),
             fallbackRegion =
               (saved.startRegion && regions.some((r) => r.id === saved.startRegion)
                 ? saved.startRegion
                 : null) ??
               (savedLocation ? mapData[savedLocation].region : null) ??
+              inferredRegion ??
               'kanto',
             entryId = regions.find((r) => r.id === fallbackRegion)?.entry,
             safeLocation = savedLocation || entryId || 'palletTown',

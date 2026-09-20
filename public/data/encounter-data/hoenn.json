@@ -1,0 +1,2115 @@
+{
+ "hoenn-route-101": {
+  "name": "Route 101",
+  "encounters": [
+   {
+    "speciesKey": "zigzagoon",
+    "weight": 24,
+    "minLevel": 37,
+    "maxLevel": 39
+   },
+   {
+    "speciesKey": "wurmple",
+    "weight": 11,
+    "minLevel": 37,
+    "maxLevel": 39
+   },
+   {
+    "speciesKey": "poochyena",
+    "weight": 1,
+    "minLevel": 37,
+    "maxLevel": 39
+   },
+   {
+    "speciesKey": "treecko",
+    "weight": 1,
+    "minLevel": 37,
+    "maxLevel": 39
+   },
+   {
+    "speciesKey": "torchic",
+    "weight": 1,
+    "minLevel": 37,
+    "maxLevel": 39
+   },
+   {
+    "speciesKey": "mudkip",
+    "weight": 1,
+    "minLevel": 37,
+    "maxLevel": 39
+   }
+  ]
+ },
+ "hoenn-route-102": {
+  "name": "Route 102",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 33,
+    "minLevel": 37,
+    "maxLevel": 39
+   },
+   {
+    "speciesKey": "corphish",
+    "weight": 30,
+    "minLevel": 37,
+    "maxLevel": 39
+   },
+   {
+    "speciesKey": "marill",
+    "weight": 25,
+    "minLevel": 37,
+    "maxLevel": 39
+   },
+   {
+    "speciesKey": "zigzagoon",
+    "weight": 15,
+    "minLevel": 37,
+    "maxLevel": 39
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 13,
+    "minLevel": 37,
+    "maxLevel": 39
+   },
+   {
+    "speciesKey": "lotad",
+    "weight": 9,
+    "minLevel": 37,
+    "maxLevel": 39
+   },
+   {
+    "speciesKey": "seedot",
+    "weight": 9,
+    "minLevel": 37,
+    "maxLevel": 39
+   },
+   {
+    "speciesKey": "poochyena",
+    "weight": 8,
+    "minLevel": 37,
+    "maxLevel": 39
+   },
+   {
+    "speciesKey": "wurmple",
+    "weight": 8,
+    "minLevel": 37,
+    "maxLevel": 39
+   },
+   {
+    "speciesKey": "ralts",
+    "weight": 1,
+    "minLevel": 37,
+    "maxLevel": 39
+   },
+   {
+    "speciesKey": "surskit",
+    "weight": 1,
+    "minLevel": 37,
+    "maxLevel": 39
+   }
+  ]
+ },
+ "hoenn-route-103": {
+  "name": "Route 103",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 33,
+    "minLevel": 38,
+    "maxLevel": 40
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 28,
+    "minLevel": 38,
+    "maxLevel": 40
+   },
+   {
+    "speciesKey": "wailmer",
+    "weight": 20,
+    "minLevel": 38,
+    "maxLevel": 40
+   },
+   {
+    "speciesKey": "zigzagoon",
+    "weight": 15,
+    "minLevel": 38,
+    "maxLevel": 40
+   },
+   {
+    "speciesKey": "sharpedo",
+    "weight": 10,
+    "minLevel": 38,
+    "maxLevel": 40
+   },
+   {
+    "speciesKey": "poochyena",
+    "weight": 9,
+    "minLevel": 38,
+    "maxLevel": 40
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 1,
+    "minLevel": 38,
+    "maxLevel": 40
+   },
+   {
+    "speciesKey": "pelipper",
+    "weight": 1,
+    "minLevel": 38,
+    "maxLevel": 40
+   }
+  ]
+ },
+ "hoenn-route-110": {
+  "name": "Route 110",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 33,
+    "minLevel": 39,
+    "maxLevel": 41
+   },
+   {
+    "speciesKey": "wailmer",
+    "weight": 30,
+    "minLevel": 39,
+    "maxLevel": 41
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 28,
+    "minLevel": 39,
+    "maxLevel": 41
+   },
+   {
+    "speciesKey": "magnemite",
+    "weight": 15,
+    "minLevel": 39,
+    "maxLevel": 41
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 11,
+    "minLevel": 39,
+    "maxLevel": 41
+   },
+   {
+    "speciesKey": "minun",
+    "weight": 10,
+    "minLevel": 39,
+    "maxLevel": 41
+   },
+   {
+    "speciesKey": "electrike",
+    "weight": 8,
+    "minLevel": 39,
+    "maxLevel": 41
+   },
+   {
+    "speciesKey": "poochyena",
+    "weight": 5,
+    "minLevel": 39,
+    "maxLevel": 41
+   },
+   {
+    "speciesKey": "zigzagoon",
+    "weight": 5,
+    "minLevel": 39,
+    "maxLevel": 41
+   },
+   {
+    "speciesKey": "gulpin",
+    "weight": 4,
+    "minLevel": 39,
+    "maxLevel": 41
+   },
+   {
+    "speciesKey": "oddish",
+    "weight": 3,
+    "minLevel": 39,
+    "maxLevel": 41
+   },
+   {
+    "speciesKey": "pelipper",
+    "weight": 1,
+    "minLevel": 39,
+    "maxLevel": 41
+   },
+   {
+    "speciesKey": "plusle",
+    "weight": 1,
+    "minLevel": 39,
+    "maxLevel": 41
+   }
+  ]
+ },
+ "hoenn-route-104": {
+  "name": "Route 104",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 75,
+    "minLevel": 37,
+    "maxLevel": 39
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 26,
+    "minLevel": 37,
+    "maxLevel": 39
+   },
+   {
+    "speciesKey": "zigzagoon",
+    "weight": 24,
+    "minLevel": 37,
+    "maxLevel": 39
+   },
+   {
+    "speciesKey": "poochyena",
+    "weight": 10,
+    "minLevel": 37,
+    "maxLevel": 39
+   },
+   {
+    "speciesKey": "marill",
+    "weight": 5,
+    "minLevel": 37,
+    "maxLevel": 39
+   },
+   {
+    "speciesKey": "wurmple",
+    "weight": 5,
+    "minLevel": 37,
+    "maxLevel": 39
+   },
+   {
+    "speciesKey": "taillow",
+    "weight": 3,
+    "minLevel": 37,
+    "maxLevel": 39
+   },
+   {
+    "speciesKey": "pelipper",
+    "weight": 1,
+    "minLevel": 37,
+    "maxLevel": 39
+   }
+  ]
+ },
+ "hoenn-route-105": {
+  "name": "Route 105",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 33,
+    "minLevel": 39,
+    "maxLevel": 41
+   },
+   {
+    "speciesKey": "wailmer",
+    "weight": 30,
+    "minLevel": 39,
+    "maxLevel": 41
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 28,
+    "minLevel": 39,
+    "maxLevel": 41
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 9,
+    "minLevel": 39,
+    "maxLevel": 41
+   },
+   {
+    "speciesKey": "pelipper",
+    "weight": 1,
+    "minLevel": 39,
+    "maxLevel": 41
+   }
+  ]
+ },
+ "hoenn-route-109": {
+  "name": "Route 109",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 33,
+    "minLevel": 39,
+    "maxLevel": 41
+   },
+   {
+    "speciesKey": "wailmer",
+    "weight": 30,
+    "minLevel": 39,
+    "maxLevel": 41
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 28,
+    "minLevel": 39,
+    "maxLevel": 41
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 9,
+    "minLevel": 39,
+    "maxLevel": 41
+   },
+   {
+    "speciesKey": "pelipper",
+    "weight": 1,
+    "minLevel": 39,
+    "maxLevel": 41
+   }
+  ]
+ },
+ "hoenn-route-111": {
+  "name": "Route 111",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 33,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "barboach",
+    "weight": 30,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "sandshrew",
+    "weight": 25,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "geodude",
+    "weight": 25,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "marill",
+    "weight": 25,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 13,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "trapinch",
+    "weight": 9,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "baltoy",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "cacnea",
+    "weight": 2,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "surskit",
+    "weight": 1,
+    "minLevel": 43,
+    "maxLevel": 45
+   }
+  ]
+ },
+ "hoenn-route-117": {
+  "name": "Route 117",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 33,
+    "minLevel": 39,
+    "maxLevel": 41
+   },
+   {
+    "speciesKey": "corphish",
+    "weight": 30,
+    "minLevel": 39,
+    "maxLevel": 41
+   },
+   {
+    "speciesKey": "oddish",
+    "weight": 15,
+    "minLevel": 39,
+    "maxLevel": 41
+   },
+   {
+    "speciesKey": "zigzagoon",
+    "weight": 15,
+    "minLevel": 39,
+    "maxLevel": 41
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 13,
+    "minLevel": 39,
+    "maxLevel": 41
+   },
+   {
+    "speciesKey": "roselia",
+    "weight": 9,
+    "minLevel": 39,
+    "maxLevel": 41
+   },
+   {
+    "speciesKey": "poochyena",
+    "weight": 8,
+    "minLevel": 39,
+    "maxLevel": 41
+   },
+   {
+    "speciesKey": "illumise",
+    "weight": 5,
+    "minLevel": 39,
+    "maxLevel": 41
+   },
+   {
+    "speciesKey": "marill",
+    "weight": 1,
+    "minLevel": 39,
+    "maxLevel": 41
+   },
+   {
+    "speciesKey": "seedot",
+    "weight": 1,
+    "minLevel": 39,
+    "maxLevel": 41
+   },
+   {
+    "speciesKey": "surskit",
+    "weight": 1,
+    "minLevel": 39,
+    "maxLevel": 41
+   },
+   {
+    "speciesKey": "volbeat",
+    "weight": 1,
+    "minLevel": 39,
+    "maxLevel": 41
+   }
+  ]
+ },
+ "hoenn-route-118": {
+  "name": "Route 118",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 33,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 28,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "carvanha",
+    "weight": 20,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "electrike",
+    "weight": 15,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "sharpedo",
+    "weight": 10,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 9,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "zigzagoon",
+    "weight": 8,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "linoone",
+    "weight": 3,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "manectric",
+    "weight": 3,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "pelipper",
+    "weight": 1,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "kecleon",
+    "weight": 1,
+    "minLevel": 43,
+    "maxLevel": 45
+   }
+  ]
+ },
+ "hoenn-route-134": {
+  "name": "Route 134",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 33,
+    "minLevel": 40,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 28,
+    "minLevel": 40,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "wailmer",
+    "weight": 16,
+    "minLevel": 40,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "sharpedo",
+    "weight": 10,
+    "minLevel": 40,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 9,
+    "minLevel": 40,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "horsea",
+    "weight": 4,
+    "minLevel": 40,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "pelipper",
+    "weight": 1,
+    "minLevel": 40,
+    "maxLevel": 42
+   }
+  ]
+ },
+ "hoenn-route-106": {
+  "name": "Route 106",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 33,
+    "minLevel": 40,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "wailmer",
+    "weight": 30,
+    "minLevel": 40,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 28,
+    "minLevel": 40,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 9,
+    "minLevel": 40,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "pelipper",
+    "weight": 1,
+    "minLevel": 40,
+    "maxLevel": 42
+   }
+  ]
+ },
+ "hoenn-route-108": {
+  "name": "Route 108",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 33,
+    "minLevel": 40,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "wailmer",
+    "weight": 30,
+    "minLevel": 40,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 28,
+    "minLevel": 40,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 9,
+    "minLevel": 40,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "pelipper",
+    "weight": 1,
+    "minLevel": 40,
+    "maxLevel": 42
+   }
+  ]
+ },
+ "hoenn-route-112": {
+  "name": "Route 112",
+  "encounters": [
+   {
+    "speciesKey": "numel",
+    "weight": 16,
+    "minLevel": 38,
+    "maxLevel": 40
+   },
+   {
+    "speciesKey": "machop",
+    "weight": 9,
+    "minLevel": 38,
+    "maxLevel": 40
+   },
+   {
+    "speciesKey": "marill",
+    "weight": 6,
+    "minLevel": 38,
+    "maxLevel": 40
+   }
+  ]
+ },
+ "hoenn-route-113": {
+  "name": "Route 113",
+  "encounters": [
+   {
+    "speciesKey": "spinda",
+    "weight": 24,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "sandshrew",
+    "weight": 6,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "slugma",
+    "weight": 6,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "skarmory",
+    "weight": 1,
+    "minLevel": 44,
+    "maxLevel": 46
+   }
+  ]
+ },
+ "hoenn-route-115": {
+  "name": "Route 115",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 33,
+    "minLevel": 40,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "wailmer",
+    "weight": 30,
+    "minLevel": 40,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 28,
+    "minLevel": 40,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "swablu",
+    "weight": 25,
+    "minLevel": 40,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 11,
+    "minLevel": 40,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "taillow",
+    "weight": 10,
+    "minLevel": 40,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "jigglypuff",
+    "weight": 3,
+    "minLevel": 40,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "swellow",
+    "weight": 3,
+    "minLevel": 40,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "pelipper",
+    "weight": 1,
+    "minLevel": 40,
+    "maxLevel": 42
+   }
+  ]
+ },
+ "hoenn-route-116": {
+  "name": "Route 116",
+  "encounters": [
+   {
+    "speciesKey": "zigzagoon",
+    "weight": 15,
+    "minLevel": 38,
+    "maxLevel": 40
+   },
+   {
+    "speciesKey": "nincada",
+    "weight": 9,
+    "minLevel": 38,
+    "maxLevel": 40
+   },
+   {
+    "speciesKey": "poochyena",
+    "weight": 7,
+    "minLevel": 38,
+    "maxLevel": 40
+   },
+   {
+    "speciesKey": "taillow",
+    "weight": 5,
+    "minLevel": 38,
+    "maxLevel": 40
+   },
+   {
+    "speciesKey": "whismur",
+    "weight": 5,
+    "minLevel": 38,
+    "maxLevel": 40
+   },
+   {
+    "speciesKey": "abra",
+    "weight": 3,
+    "minLevel": 38,
+    "maxLevel": 40
+   },
+   {
+    "speciesKey": "skitty",
+    "weight": 1,
+    "minLevel": 38,
+    "maxLevel": 40
+   }
+  ]
+ },
+ "hoenn-route-119": {
+  "name": "Route 119",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 33,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "carvanha",
+    "weight": 30,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 28,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "oddish",
+    "weight": 25,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "feebas",
+    "weight": 13,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 9,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "zigzagoon",
+    "weight": 8,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "linoone",
+    "weight": 8,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "tropius",
+    "weight": 2,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "pelipper",
+    "weight": 1,
+    "minLevel": 44,
+    "maxLevel": 46
+   }
+  ]
+ },
+ "hoenn-route-123": {
+  "name": "Route 123",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 33,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "wailmer",
+    "weight": 30,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 28,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "shuppet",
+    "weight": 15,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 9,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "duskull",
+    "weight": 8,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "poochyena",
+    "weight": 5,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "mightyena",
+    "weight": 5,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "zigzagoon",
+    "weight": 5,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "linoone",
+    "weight": 5,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "oddish",
+    "weight": 4,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "gloom",
+    "weight": 1,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "pelipper",
+    "weight": 1,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "kecleon",
+    "weight": 1,
+    "minLevel": 45,
+    "maxLevel": 47
+   }
+  ]
+ },
+ "hoenn-route-133": {
+  "name": "Route 133",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 33,
+    "minLevel": 41,
+    "maxLevel": 43
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 28,
+    "minLevel": 41,
+    "maxLevel": 43
+   },
+   {
+    "speciesKey": "wailmer",
+    "weight": 16,
+    "minLevel": 41,
+    "maxLevel": 43
+   },
+   {
+    "speciesKey": "sharpedo",
+    "weight": 10,
+    "minLevel": 41,
+    "maxLevel": 43
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 9,
+    "minLevel": 41,
+    "maxLevel": 43
+   },
+   {
+    "speciesKey": "horsea",
+    "weight": 4,
+    "minLevel": 41,
+    "maxLevel": 43
+   },
+   {
+    "speciesKey": "pelipper",
+    "weight": 1,
+    "minLevel": 41,
+    "maxLevel": 43
+   }
+  ]
+ },
+ "hoenn-route-107": {
+  "name": "Route 107",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 33,
+    "minLevel": 41,
+    "maxLevel": 43
+   },
+   {
+    "speciesKey": "wailmer",
+    "weight": 30,
+    "minLevel": 41,
+    "maxLevel": 43
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 28,
+    "minLevel": 41,
+    "maxLevel": 43
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 9,
+    "minLevel": 41,
+    "maxLevel": 43
+   },
+   {
+    "speciesKey": "pelipper",
+    "weight": 1,
+    "minLevel": 41,
+    "maxLevel": 43
+   }
+  ]
+ },
+ "hoenn-route-122": {
+  "name": "Route 122",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 33,
+    "minLevel": 41,
+    "maxLevel": 43
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 28,
+    "minLevel": 41,
+    "maxLevel": 43
+   },
+   {
+    "speciesKey": "wailmer",
+    "weight": 20,
+    "minLevel": 41,
+    "maxLevel": 43
+   },
+   {
+    "speciesKey": "sharpedo",
+    "weight": 10,
+    "minLevel": 41,
+    "maxLevel": 43
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 9,
+    "minLevel": 41,
+    "maxLevel": 43
+   },
+   {
+    "speciesKey": "pelipper",
+    "weight": 1,
+    "minLevel": 41,
+    "maxLevel": 43
+   }
+  ]
+ },
+ "hoenn-route-132": {
+  "name": "Route 132",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 33,
+    "minLevel": 41,
+    "maxLevel": 43
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 28,
+    "minLevel": 41,
+    "maxLevel": 43
+   },
+   {
+    "speciesKey": "wailmer",
+    "weight": 16,
+    "minLevel": 41,
+    "maxLevel": 43
+   },
+   {
+    "speciesKey": "sharpedo",
+    "weight": 10,
+    "minLevel": 41,
+    "maxLevel": 43
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 9,
+    "minLevel": 41,
+    "maxLevel": 43
+   },
+   {
+    "speciesKey": "horsea",
+    "weight": 4,
+    "minLevel": 41,
+    "maxLevel": 43
+   },
+   {
+    "speciesKey": "pelipper",
+    "weight": 1,
+    "minLevel": 41,
+    "maxLevel": 43
+   }
+  ]
+ },
+ "hoenn-route-114": {
+  "name": "Route 114",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 33,
+    "minLevel": 38,
+    "maxLevel": 40
+   },
+   {
+    "speciesKey": "barboach",
+    "weight": 30,
+    "minLevel": 38,
+    "maxLevel": 40
+   },
+   {
+    "speciesKey": "geodude",
+    "weight": 25,
+    "minLevel": 38,
+    "maxLevel": 40
+   },
+   {
+    "speciesKey": "marill",
+    "weight": 25,
+    "minLevel": 38,
+    "maxLevel": 40
+   },
+   {
+    "speciesKey": "swablu",
+    "weight": 18,
+    "minLevel": 38,
+    "maxLevel": 40
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 13,
+    "minLevel": 38,
+    "maxLevel": 40
+   },
+   {
+    "speciesKey": "lotad",
+    "weight": 9,
+    "minLevel": 38,
+    "maxLevel": 40
+   },
+   {
+    "speciesKey": "seedot",
+    "weight": 9,
+    "minLevel": 38,
+    "maxLevel": 40
+   },
+   {
+    "speciesKey": "lombre",
+    "weight": 5,
+    "minLevel": 38,
+    "maxLevel": 40
+   },
+   {
+    "speciesKey": "zangoose",
+    "weight": 5,
+    "minLevel": 38,
+    "maxLevel": 40
+   },
+   {
+    "speciesKey": "seviper",
+    "weight": 2,
+    "minLevel": 38,
+    "maxLevel": 40
+   },
+   {
+    "speciesKey": "nuzleaf",
+    "weight": 1,
+    "minLevel": 38,
+    "maxLevel": 40
+   },
+   {
+    "speciesKey": "surskit",
+    "weight": 1,
+    "minLevel": 38,
+    "maxLevel": 40
+   }
+  ]
+ },
+ "hoenn-route-120": {
+  "name": "Route 120",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 33,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "barboach",
+    "weight": 30,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "oddish",
+    "weight": 15,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 13,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "marill",
+    "weight": 9,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "mightyena",
+    "weight": 8,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "linoone",
+    "weight": 8,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "poochyena",
+    "weight": 5,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "zigzagoon",
+    "weight": 5,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "absol",
+    "weight": 2,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "seedot",
+    "weight": 1,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "surskit",
+    "weight": 1,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "kecleon",
+    "weight": 1,
+    "minLevel": 44,
+    "maxLevel": 46
+   }
+  ]
+ },
+ "hoenn-route-121": {
+  "name": "Route 121",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 33,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "wailmer",
+    "weight": 30,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 28,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "shuppet",
+    "weight": 15,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 9,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "duskull",
+    "weight": 8,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "poochyena",
+    "weight": 5,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "mightyena",
+    "weight": 5,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "zigzagoon",
+    "weight": 5,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "linoone",
+    "weight": 5,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "oddish",
+    "weight": 4,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "gloom",
+    "weight": 1,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "pelipper",
+    "weight": 1,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "kecleon",
+    "weight": 1,
+    "minLevel": 45,
+    "maxLevel": 47
+   }
+  ]
+ },
+ "hoenn-route-131": {
+  "name": "Route 131",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 33,
+    "minLevel": 42,
+    "maxLevel": 44
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 28,
+    "minLevel": 42,
+    "maxLevel": 44
+   },
+   {
+    "speciesKey": "wailmer",
+    "weight": 20,
+    "minLevel": 42,
+    "maxLevel": 44
+   },
+   {
+    "speciesKey": "sharpedo",
+    "weight": 10,
+    "minLevel": 42,
+    "maxLevel": 44
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 9,
+    "minLevel": 42,
+    "maxLevel": 44
+   },
+   {
+    "speciesKey": "pelipper",
+    "weight": 1,
+    "minLevel": 42,
+    "maxLevel": 44
+   }
+  ]
+ },
+ "hoenn-route-124": {
+  "name": "Route 124",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 33,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 28,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "wailmer",
+    "weight": 20,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "clamperl",
+    "weight": 16,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "sharpedo",
+    "weight": 10,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 9,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "chinchou",
+    "weight": 8,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "pelipper",
+    "weight": 1,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "relicanth",
+    "weight": 1,
+    "minLevel": 44,
+    "maxLevel": 46
+   }
+  ]
+ },
+ "hoenn-route-130": {
+  "name": "Route 130",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 33,
+    "minLevel": 42,
+    "maxLevel": 44
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 28,
+    "minLevel": 42,
+    "maxLevel": 44
+   },
+   {
+    "speciesKey": "wynaut",
+    "weight": 25,
+    "minLevel": 42,
+    "maxLevel": 44
+   },
+   {
+    "speciesKey": "wailmer",
+    "weight": 20,
+    "minLevel": 42,
+    "maxLevel": 44
+   },
+   {
+    "speciesKey": "sharpedo",
+    "weight": 10,
+    "minLevel": 42,
+    "maxLevel": 44
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 9,
+    "minLevel": 42,
+    "maxLevel": 44
+   },
+   {
+    "speciesKey": "pelipper",
+    "weight": 1,
+    "minLevel": 42,
+    "maxLevel": 44
+   }
+  ]
+ },
+ "hoenn-route-126": {
+  "name": "Route 126",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 33,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 28,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "wailmer",
+    "weight": 20,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "clamperl",
+    "weight": 16,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "sharpedo",
+    "weight": 10,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 9,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "chinchou",
+    "weight": 8,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "pelipper",
+    "weight": 1,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "relicanth",
+    "weight": 1,
+    "minLevel": 45,
+    "maxLevel": 47
+   }
+  ]
+ },
+ "hoenn-route-129": {
+  "name": "Route 129",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 33,
+    "minLevel": 42,
+    "maxLevel": 44
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 28,
+    "minLevel": 42,
+    "maxLevel": 44
+   },
+   {
+    "speciesKey": "wailmer",
+    "weight": 20,
+    "minLevel": 42,
+    "maxLevel": 44
+   },
+   {
+    "speciesKey": "sharpedo",
+    "weight": 10,
+    "minLevel": 42,
+    "maxLevel": 44
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 9,
+    "minLevel": 42,
+    "maxLevel": 44
+   },
+   {
+    "speciesKey": "pelipper",
+    "weight": 1,
+    "minLevel": 42,
+    "maxLevel": 44
+   },
+   {
+    "speciesKey": "wailord",
+    "weight": 1,
+    "minLevel": 42,
+    "maxLevel": 44
+   }
+  ]
+ },
+ "hoenn-route-125": {
+  "name": "Route 125",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 33,
+    "minLevel": 42,
+    "maxLevel": 44
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 28,
+    "minLevel": 42,
+    "maxLevel": 44
+   },
+   {
+    "speciesKey": "wailmer",
+    "weight": 20,
+    "minLevel": 42,
+    "maxLevel": 44
+   },
+   {
+    "speciesKey": "sharpedo",
+    "weight": 10,
+    "minLevel": 42,
+    "maxLevel": 44
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 9,
+    "minLevel": 42,
+    "maxLevel": 44
+   },
+   {
+    "speciesKey": "pelipper",
+    "weight": 1,
+    "minLevel": 42,
+    "maxLevel": 44
+   }
+  ]
+ },
+ "hoenn-route-127": {
+  "name": "Route 127",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 33,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 28,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "wailmer",
+    "weight": 20,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "sharpedo",
+    "weight": 10,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 9,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "pelipper",
+    "weight": 1,
+    "minLevel": 43,
+    "maxLevel": 45
+   }
+  ]
+ },
+ "hoenn-route-128": {
+  "name": "Route 128",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 33,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 23,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "wailmer",
+    "weight": 16,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "luvdisc",
+    "weight": 15,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 9,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "corsola",
+    "weight": 4,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "pelipper",
+    "weight": 1,
+    "minLevel": 43,
+    "maxLevel": 45
+   }
+  ]
+ },
+ "hoenn-raid": {
+  "name": "Hoenn Raid Island",
+  "encounters": [
+   {
+    "speciesKey": "shroomish",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "breloom",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "slakoth",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "vigoroth",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "slaking",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "makuhita",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "hariyama",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "azurill",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "nosepass",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "sableye",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "mawile",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "aron",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "lairon",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "aggron",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "meditite",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "medicham",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "torkoal",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "spoink",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "grumpig",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "lunatone",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "solrock",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "lileep",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "cradily",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "anorith",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "armaldo",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "castform",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "chimecho",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "snorunt",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "glalie",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "spheal",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "sealeo",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "walrein",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "bagon",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "shelgon",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "salamence",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "beldum",
+    "weight": 1,
+    "minLevel": 72,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "metang",
+    "weight": 1,
+    "minLevel": 72,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "metagross",
+    "weight": 1,
+    "minLevel": 72,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "regirock",
+    "weight": 1,
+    "minLevel": 72,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "regice",
+    "weight": 1,
+    "minLevel": 72,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "registeel",
+    "weight": 1,
+    "minLevel": 72,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "latias",
+    "weight": 1,
+    "minLevel": 72,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "latios",
+    "weight": 1,
+    "minLevel": 72,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "kyogre",
+    "weight": 1,
+    "minLevel": 72,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "groudon",
+    "weight": 1,
+    "minLevel": 72,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "rayquaza",
+    "weight": 1,
+    "minLevel": 62,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "jirachi",
+    "weight": 1,
+    "minLevel": 72,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "deoxys",
+    "weight": 1,
+    "minLevel": 72,
+    "maxLevel": 72
+   }
+  ]
+ }
+}

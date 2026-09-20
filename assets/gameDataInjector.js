@@ -9,14 +9,31 @@
  * <script type="module" src="/assets/index.js"></script>
  */
 
+// The map and encounter databases are split one file per region. The `merge`
+// flag combines them back into the single `mapData` / `mapEncounterData`
+// objects the app consumes, preserving region order (kanto -> paldea).
+const regionFiles = [
+    ['kanto', 'Kanto'],
+    ['johto', 'Johto'],
+    ['hoenn', 'Hoenn'],
+    ['sinnoh', 'Sinnoh'],
+    ['unova', 'Unova'],
+    ['kalos', 'Kalos'],
+    ['alola', 'Alola'],
+    ['galar', 'Galar'],
+    ['paldea', 'Paldea'],
+].flatMap(([regionId, regionName]) => [
+    { key: 'mapData', path: `/data/map-data/${regionId}.json`, label: `${regionName} map`, merge: true },
+    { key: 'mapEncounterData', path: `/data/encounter-data/${regionId}.json`, label: `${regionName} encounters`, merge: true },
+]);
+
 const dataFilesToLoad = [
     { key: 'pokemonSpecies', path: '/data/pokemon-species.json', label: 'Pokémon species' },
     { key: 'evolutionData', path: '/data/evolution-data.json', label: 'evolution chains' },
     { key: 'moveLearnsets', path: '/data/possible-learnsets.json', label: 'move learnsets' },//move-learnsets
     { key: 'trainerClasses', path: '/data/trainer-classes.json', label: 'trainer classes' },
     { key: 'moveData', path: '/data/possible-moves.json', label: 'move data' }, //move-data
-    { key: 'mapData', path: '/data/map-data.json', label: 'map data' },
-    { key: 'mapEncounterData', path: '/data/encounter-data.json', label: 'encounter data' },
+    ...regionFiles,
     { key: 'trainerData', path: '/data/trainer-data.json', label: 'trainer data' },
     { key: 'gymLeaderData', path: '/data/gym-leader-data.json', label: 'gym leader data' },
     { key: 'elite4Data', path: '/data/elite-4-data.json', label: 'elite 4 data' },
@@ -64,15 +81,19 @@ class GameDataInjector {
       const loadedData = await Promise.all(dataPromises);
 
       this.data = dataFilesToLoad.reduce((acc, fileInfo, index) => {
-        acc[fileInfo.key] = loadedData[index];
+        if (fileInfo.merge) {
+          acc[fileInfo.key] = Object.assign(acc[fileInfo.key] || {}, loadedData[index]);
+        } else {
+          acc[fileInfo.key] = loadedData[index];
+        }
         return acc;
       }, {});
 
       window.gameDataInjector.data = this.data;
 
       console.log('✅ Game data loaded successfully');
-      dataFilesToLoad.forEach(fileInfo => {
-        const data = this.data[fileInfo.key];
+      dataFilesToLoad.forEach((fileInfo, index) => {
+        const data = loadedData[index];
         console.log(`   📦 Loaded ${Object.keys(data).length} ${fileInfo.label}`);
       });
 

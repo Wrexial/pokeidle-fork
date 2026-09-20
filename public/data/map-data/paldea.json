@@ -1,0 +1,977 @@
+{
+ "paldea-los-platos": {
+  "id": "paldea-los-platos",
+  "name": "Los Platos",
+  "type": "town",
+  "region": "paldea",
+  "description": "A town in the Paldea region.",
+  "connections": [
+   "paldea-south-province-area-one"
+  ],
+  "unlock": {
+   "entry": true,
+   "previous": "galar"
+  },
+  "unlockOrder": 358,
+  "position": {
+   "x": 15,
+   "y": 64
+  },
+  "mart": {
+   "name": "Paldea Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "paldea-south-province-area-one": {
+  "id": "paldea-south-province-area-one",
+  "name": "South Province (Area One)",
+  "type": "route",
+  "region": "paldea",
+  "description": "A route in the Paldea region.",
+  "routeKey": "paldea-south-province-area-one",
+  "connections": [
+   "paldea-cabo-poco",
+   "paldea-los-platos",
+   "paldea-mesagoza"
+  ],
+  "unlock": {
+   "requires": [
+    "paldea-los-platos"
+   ]
+  },
+  "unlockOrder": 359,
+  "position": {
+   "x": 19,
+   "y": 70
+  }
+ },
+ "paldea-cabo-poco": {
+  "id": "paldea-cabo-poco",
+  "name": "Cabo Poco",
+  "type": "town",
+  "region": "paldea",
+  "description": "A town in the Paldea region.",
+  "connections": [
+   "paldea-south-province-area-one",
+   "paldea-west-province-area-three"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-south-province-area-one",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 360,
+  "position": {
+   "x": 21,
+   "y": 64
+  },
+  "mart": {
+   "name": "Paldea Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "paldea-mesagoza": {
+  "id": "paldea-mesagoza",
+  "name": "Mesagoza",
+  "type": "town",
+  "region": "paldea",
+  "description": "A town in the Paldea region.",
+  "connections": [
+   "paldea-south-province-area-one",
+   "paldea-south-province-area-three",
+   "paldea-south-province-area-two",
+   "paldea-medali"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-south-province-area-one",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 361,
+  "position": {
+   "x": 17,
+   "y": 51
+  },
+  "mart": {
+   "name": "Paldea Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "paldea-medali": {
+  "id": "paldea-medali",
+  "name": "Medali",
+  "type": "town",
+  "region": "paldea",
+  "description": "A town in the Paldea region.",
+  "connections": [
+   "paldea-west-province-area-three",
+   "paldea-zapapico",
+   "paldea-mesagoza"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-mesagoza",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 362,
+  "position": {
+   "x": 11,
+   "y": 52
+  },
+  "mart": {
+   "name": "Paldea Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "paldea-south-province-area-two": {
+  "id": "paldea-south-province-area-two",
+  "name": "South Province (Area Two)",
+  "type": "route",
+  "region": "paldea",
+  "description": "A route in the Paldea region.",
+  "routeKey": "paldea-south-province-area-two",
+  "connections": [
+   "paldea-mesagoza",
+   "paldea-cortondo",
+   "paldea-montenevera"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-mesagoza",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 363,
+  "position": {
+   "x": 13,
+   "y": 58
+  }
+ },
+ "paldea-south-province-area-three": {
+  "id": "paldea-south-province-area-three",
+  "name": "South Province (Area Three)",
+  "type": "route",
+  "region": "paldea",
+  "description": "A route in the Paldea region.",
+  "routeKey": "paldea-south-province-area-three",
+  "connections": [
+   "paldea-mesagoza",
+   "paldea-artazon",
+   "paldea-alfornada",
+   "paldea-zapapico",
+   "paldea-west-province-area-one"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-mesagoza",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 364,
+  "position": {
+   "x": 33,
+   "y": 55
+  }
+ },
+ "paldea-west-province-area-three": {
+  "id": "paldea-west-province-area-three",
+  "name": "West Province (Area Three)",
+  "type": "route",
+  "region": "paldea",
+  "description": "A route in the Paldea region.",
+  "routeKey": "paldea-west-province-area-three",
+  "connections": [
+   "paldea-medali",
+   "paldea-cabo-poco"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-cabo-poco",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 365,
+  "position": {
+   "x": 30,
+   "y": 64
+  }
+ },
+ "paldea-cortondo": {
+  "id": "paldea-cortondo",
+  "name": "Cortondo",
+  "type": "town",
+  "region": "paldea",
+  "description": "A town in the Paldea region.",
+  "connections": [
+   "paldea-south-province-area-two"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-south-province-area-two",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 366,
+  "position": {
+   "x": 6,
+   "y": 48
+  },
+  "mart": {
+   "name": "Paldea Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "paldea-alfornada": {
+  "id": "paldea-alfornada",
+  "name": "Alfornada",
+  "type": "town",
+  "region": "paldea",
+  "description": "A town in the Paldea region.",
+  "connections": [
+   "paldea-south-province-area-six",
+   "paldea-south-province-area-three",
+   "paldea-north-province-area-one"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-south-province-area-three",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 367,
+  "position": {
+   "x": 39,
+   "y": 66
+  },
+  "mart": {
+   "name": "Paldea Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "paldea-artazon": {
+  "id": "paldea-artazon",
+  "name": "Artazon",
+  "type": "town",
+  "region": "paldea",
+  "description": "A town in the Paldea region.",
+  "connections": [
+   "paldea-east-province-area-one",
+   "paldea-south-province-area-three",
+   "paldea-cascarrafa",
+   "paldea-south-province-area-four"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-south-province-area-three",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 368,
+  "position": {
+   "x": 36,
+   "y": 49
+  },
+  "mart": {
+   "name": "Paldea Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "paldea-zapapico": {
+  "id": "paldea-zapapico",
+  "name": "Zapapico",
+  "type": "town",
+  "region": "paldea",
+  "description": "A town in the Paldea region.",
+  "connections": [
+   "paldea-east-province-area-three",
+   "paldea-medali",
+   "paldea-south-province-area-three"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-south-province-area-three",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 369,
+  "position": {
+   "x": 27,
+   "y": 54
+  },
+  "mart": {
+   "name": "Paldea Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "paldea-montenevera": {
+  "id": "paldea-montenevera",
+  "name": "Montenevera",
+  "type": "town",
+  "region": "paldea",
+  "description": "A town in the Paldea region.",
+  "connections": [
+   "paldea-south-province-area-two"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-south-province-area-two",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 370,
+  "position": {
+   "x": 7,
+   "y": 57
+  },
+  "mart": {
+   "name": "Paldea Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "paldea-west-province-area-one": {
+  "id": "paldea-west-province-area-one",
+  "name": "West Province (Area One)",
+  "type": "route",
+  "region": "paldea",
+  "description": "A route in the Paldea region.",
+  "routeKey": "paldea-west-province-area-one",
+  "connections": [
+   "paldea-cascarrafa",
+   "paldea-south-province-area-three"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-south-province-area-three",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 371,
+  "position": {
+   "x": 48,
+   "y": 73
+  }
+ },
+ "paldea-cascarrafa": {
+  "id": "paldea-cascarrafa",
+  "name": "Cascarrafa",
+  "type": "town",
+  "region": "paldea",
+  "description": "A town in the Paldea region.",
+  "connections": [
+   "paldea-west-province-area-one",
+   "paldea-artazon"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-artazon",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 372,
+  "position": {
+   "x": 42,
+   "y": 49
+  },
+  "mart": {
+   "name": "Paldea Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "paldea-south-province-area-four": {
+  "id": "paldea-south-province-area-four",
+  "name": "South Province (Area Four)",
+  "type": "route",
+  "region": "paldea",
+  "description": "A route in the Paldea region.",
+  "routeKey": "paldea-south-province-area-four",
+  "connections": [
+   "paldea-artazon"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-artazon",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 373,
+  "position": {
+   "x": 44,
+   "y": 58
+  }
+ },
+ "paldea-east-province-area-one": {
+  "id": "paldea-east-province-area-one",
+  "name": "East Province (Area One)",
+  "type": "route",
+  "region": "paldea",
+  "description": "A route in the Paldea region.",
+  "routeKey": "paldea-east-province-area-one",
+  "connections": [
+   "paldea-artazon",
+   "paldea-levincia",
+   "paldea-porto-marinada",
+   "paldea-south-province-area-five"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-artazon",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 374,
+  "position": {
+   "x": 52,
+   "y": 58
+  }
+ },
+ "paldea-north-province-area-one": {
+  "id": "paldea-north-province-area-one",
+  "name": "North Province (Area One)",
+  "type": "route",
+  "region": "paldea",
+  "description": "A route in the Paldea region.",
+  "routeKey": "paldea-north-province-area-one",
+  "connections": [
+   "paldea-alfornada"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-alfornada",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 375,
+  "position": {
+   "x": 53,
+   "y": 78
+  }
+ },
+ "paldea-levincia": {
+  "id": "paldea-levincia",
+  "name": "Levincia",
+  "type": "town",
+  "region": "paldea",
+  "description": "A town in the Paldea region.",
+  "connections": [
+   "paldea-east-province-area-two",
+   "paldea-east-province-area-one"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-east-province-area-one",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 376,
+  "position": {
+   "x": 94,
+   "y": 30
+  },
+  "mart": {
+   "name": "Paldea Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "paldea-porto-marinada": {
+  "id": "paldea-porto-marinada",
+  "name": "Porto Marinada",
+  "type": "town",
+  "region": "paldea",
+  "description": "A town in the Paldea region.",
+  "connections": [
+   "paldea-west-province-area-two",
+   "paldea-east-province-area-one",
+   "paldea-east-province-area-three"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-east-province-area-one",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 377,
+  "position": {
+   "x": 60,
+   "y": 67
+  },
+  "mart": {
+   "name": "Paldea Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "paldea-south-province-area-five": {
+  "id": "paldea-south-province-area-five",
+  "name": "South Province (Area Five)",
+  "type": "route",
+  "region": "paldea",
+  "description": "A route in the Paldea region.",
+  "routeKey": "paldea-south-province-area-five",
+  "connections": [
+   "paldea-east-province-area-one",
+   "paldea-south-province-area-six"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-east-province-area-one",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 378,
+  "position": {
+   "x": 66,
+   "y": 70
+  }
+ },
+ "paldea-south-province-area-six": {
+  "id": "paldea-south-province-area-six",
+  "name": "South Province (Area Six)",
+  "type": "route",
+  "region": "paldea",
+  "description": "A route in the Paldea region.",
+  "routeKey": "paldea-south-province-area-six",
+  "connections": [
+   "paldea-alfornada",
+   "paldea-south-province-area-five",
+   "paldea-west-province-area-two"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-south-province-area-five",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 379,
+  "position": {
+   "x": 61,
+   "y": 58
+  }
+ },
+ "paldea-east-province-area-two": {
+  "id": "paldea-east-province-area-two",
+  "name": "East Province (Area Two)",
+  "type": "route",
+  "region": "paldea",
+  "description": "A route in the Paldea region.",
+  "routeKey": "paldea-east-province-area-two",
+  "connections": [
+   "paldea-levincia"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-levincia",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 380,
+  "position": {
+   "x": 96,
+   "y": 39
+  }
+ },
+ "paldea-east-province-area-three": {
+  "id": "paldea-east-province-area-three",
+  "name": "East Province (Area Three)",
+  "type": "route",
+  "region": "paldea",
+  "description": "A route in the Paldea region.",
+  "routeKey": "paldea-east-province-area-three",
+  "connections": [
+   "paldea-zapapico",
+   "paldea-porto-marinada"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-porto-marinada",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 381,
+  "position": {
+   "x": 59,
+   "y": 77
+  }
+ },
+ "paldea-west-province-area-two": {
+  "id": "paldea-west-province-area-two",
+  "name": "West Province (Area Two)",
+  "type": "route",
+  "region": "paldea",
+  "description": "A route in the Paldea region.",
+  "routeKey": "paldea-west-province-area-two",
+  "connections": [
+   "paldea-porto-marinada",
+   "paldea-south-province-area-six",
+   "paldea-north-province-area-two"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-south-province-area-six",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 382,
+  "position": {
+   "x": 75,
+   "y": 70
+  }
+ },
+ "paldea-north-province-area-two": {
+  "id": "paldea-north-province-area-two",
+  "name": "North Province (Area Two)",
+  "type": "route",
+  "region": "paldea",
+  "description": "A route in the Paldea region.",
+  "routeKey": "paldea-north-province-area-two",
+  "connections": [
+   "paldea-west-province-area-two",
+   "paldea-north-province-area-three"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-west-province-area-two",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 383,
+  "position": {
+   "x": 70,
+   "y": 57
+  }
+ },
+ "paldea-north-province-area-three": {
+  "id": "paldea-north-province-area-three",
+  "name": "North Province (Area Three)",
+  "type": "route",
+  "region": "paldea",
+  "description": "A route in the Paldea region.",
+  "routeKey": "paldea-north-province-area-three",
+  "connections": [
+   "paldea-north-province-area-two",
+   "paldea-mossui-town",
+   "paldea-raid"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-north-province-area-two",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 384,
+  "position": {
+   "x": 79,
+   "y": 51
+  }
+ },
+ "paldea-mossui-town": {
+  "id": "paldea-mossui-town",
+  "name": "Mossui Town",
+  "type": "town",
+  "region": "paldea",
+  "description": "A town in the Paldea region.",
+  "connections": [
+   "paldea-north-province-area-three"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-north-province-area-three",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 385,
+  "position": {
+   "x": 88,
+   "y": 49
+  },
+  "mart": {
+   "name": "Paldea Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "paldea-raid": {
+  "id": "paldea-raid",
+  "name": "Paldea Raid Island",
+  "type": "raid",
+  "region": "paldea",
+  "description": "A mysterious island where Paldea's rarest Pokemon dwell.",
+  "routeKey": "paldea-raid",
+  "connections": [
+   "paldea-north-province-area-three"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-north-province-area-three",
+     "count": 20
+    }
+   ]
+  },
+  "unlockOrder": 386,
+  "position": {
+   "x": 87,
+   "y": 41
+  }
+ }
+}

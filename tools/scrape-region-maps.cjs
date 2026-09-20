@@ -71,6 +71,17 @@ const EXTRA_TOWNS = {
 }
 // regions where unmatched connection names should become nodes
 const ALLOW_UNKNOWN = new Set()
+
+// Links Bulbapedia's infoboxes omit because the connecting area isn't named on
+// either endpoint. Only used when the automatic scrape leaves a region's main
+// path fragmented (verified against the region's real geography).
+const MANUAL_BRIDGES = {
+  galar: [
+    ['galar-route-2', 'motostoke', 'north'], // Route 2 -> Wild Area -> Motostoke
+    ['motostoke', 'galar-route-6', 'east'], // Motostoke -> Route 6 -> Hammerlocke
+    ['hammerlocke', 'galar-route-10', 'north'], // Hammerlocke -> Wild Area -> Wyndon
+  ],
+}
 const shortRouteName = (slug) => {
   const m = slug.match(/route-(\d+)(?:-+([a-z0-9-]+))?$/)
   if (!m) return titleCase(slug)
@@ -149,6 +160,10 @@ async function regionGraph(regionName) {
   }
 
   const edges = []
+  // Compass targets that are real places but not in the node set (forests,
+  // lakes, gates, ...). Routes meeting at one of these are linked by a
+  // synthetic hub in addConnectorHubs so the graph doesn't fragment.
+  const unresolved = []
   let parsed = 0
   for (const slug of nodes) {
     const title = provinceName(slug) || pageTitle(regionName, slug)
@@ -157,8 +172,9 @@ async function regionGraph(regionName) {
     let any = false
     for (const [dir, value] of Object.entries(compass)) {
       const cleaned = cleanValue(value)
+      const genericRoute = /^route \d+$/i.test(cleaned)
       let target = lookup[norm(cleaned)]
-      if (!target && ALLOW_UNKNOWN.has(regionName) && cleaned && !/^route \d+$/i.test(cleaned)) {
+      if (!target && ALLOW_UNKNOWN.has(regionName) && cleaned && !genericRoute) {
         target = 'auto-' + norm(cleaned)
         if (!display[target]) {
           display[target] = cleaned
@@ -169,11 +185,34 @@ async function regionGraph(regionName) {
       if (target && target !== slug) {
         edges.push({ from: slug, to: target, dir })
         any = true
+      } else if (!target && cleaned && !genericRoute) {
+        unresolved.push({ from: slug, dir, name: cleaned })
       }
     }
     if (any) parsed++
   }
-  return { regionName, nodes, display, edges, parsed }
+  // Fill in the handful of links Bulbapedia doesn't record (see MANUAL_BRIDGES).
+  for (const [from, to, dir] of MANUAL_BRIDGES[regionName] ?? [])
+    if (nodes.includes(from) && nodes.includes(to)) edges.push({ from, to, dir })
+  // Intermediate areas (forests, gates, bridges, ...) have no compass infobox,
+  // but their intro text names the locations they sit between. Use those links
+  // to reconnect the components that meet at one of them.
+  const connectorNodes = {}
+  for (const name of new Set(unresolved.map((ref) => ref.name))) {
+    const raw = await fetchRaw(titleCase(name))
+    const lead = raw.split(/\n==/)[0]
+    const found = new Set()
+    for (const match of lead.matchAll(/\{\{rt\|\s*(\d+)\s*\|[^}]*\}\}/gi)) {
+      const route = lookup[norm(`Route ${match[1]}`)]
+      if (route) found.add(route)
+    }
+    for (const match of lead.matchAll(/\[\[([^\]|#]+)(?:\|[^\]]*)?\]\]/g)) {
+      const slug = lookup[norm(match[1])]
+      if (slug) found.add(slug)
+    }
+    if (found.size) connectorNodes[norm(name)] = [...found]
+  }
+  return { regionName, nodes, display, edges, unresolved, connectorNodes, parsed }
 }
 
 // --- layout ------------------------------------------------------------------
@@ -276,21 +315,103 @@ function layout(nodes, edges, iterations = 900) {
   return pos
 }
 
+// --- connector bridging ------------------------------------------------------
+// Routes in different games meet at map areas that aren't separate locations
+// ("Santalune Forest", "Acuity Lakefront", "Mount Coronet", gates, ...).
+// Bulbapedia records those as the route's compass neighbour, so the nodes that
+// reference one end up disconnected. Add a synthetic hub for each shared
+// connector, lay out with it, then contract it back out by chaining its
+// neighbours. Positions stay correct because the hub anchored them.
+
+/** @param {ReturnType<typeof regionGraph>} graph */
+function addConnectorHubs(graph) {
+  const groups = new Map()
+  for (const ref of graph.unresolved) {
+    const key = norm(ref.name)
+    if (!groups.has(key)) groups.set(key, { name: ref.name, refs: [] })
+    groups.get(key).refs.push(ref)
+  }
+  const nodes = [...graph.nodes]
+  const edges = [...graph.edges]
+  const display = { ...graph.display }
+  const hubs = []
+  for (const [key, group] of groups) {
+    const refNodes = new Set(group.refs.map((ref) => ref.from))
+    const linked = graph.connectorNodes[key] ?? []
+    const neighbours = [...new Set([...refNodes, ...linked])]
+    if (neighbours.length < 2) continue // a dead-end connector joins nothing
+    const hub = `hub-${key}`
+    if (nodes.includes(hub)) continue
+    nodes.push(hub)
+    display[hub] = group.name
+    for (const ref of group.refs) edges.push({ from: ref.from, to: hub, dir: ref.dir })
+    // The intro text gives adjacency but no compass direction, so these edges
+    // only pull the hub and its neighbours together.
+    for (const node of linked) if (!refNodes.has(node)) edges.push({ from: hub, to: node, dir: 'via' })
+    hubs.push({ id: hub, neighbours })
+  }
+  return { nodes, edges, display, hubs }
+}
+
+/** Remove the synthetic hubs, chaining their neighbours so they stay linked. */
+function contractHubs(nodes, edges, display, positions, hubs) {
+  const hubIds = new Set(hubs.map((hub) => hub.id))
+  const keptEdges = edges.filter((edge) => !hubIds.has(edge.from) && !hubIds.has(edge.to))
+  for (const hub of hubs) {
+    const centre = positions[hub.id]
+    // Walk the neighbours in angular order so the chain follows the ring the
+    // layout put them on instead of criss-crossing.
+    const ordered = [...hub.neighbours].sort(
+      (a, b) =>
+        Math.atan2(positions[a].y - centre.y, positions[a].x - centre.x) -
+        Math.atan2(positions[b].y - centre.y, positions[b].x - centre.x)
+    )
+    for (let i = 1; i < ordered.length; i++)
+      keptEdges.push({ from: ordered[i - 1], to: ordered[i], dir: 'via' })
+  }
+  const keptNodes = nodes.filter((node) => !hubIds.has(node))
+  const keptDisplay = { ...display }
+  for (const id of hubIds) delete keptDisplay[id]
+  const keptPositions = {}
+  for (const node of keptNodes) keptPositions[node] = positions[node]
+  return { nodes: keptNodes, edges: keptEdges, display: keptDisplay, positions: keptPositions }
+}
+
 // --- main --------------------------------------------------------------------
-;(async () => {
+async function main() {
   const regions = ONLY ? [ONLY] : Object.keys(REGION_IDS).slice(1)
   const out = fs.existsSync(OUT) ? JSON.parse(fs.readFileSync(OUT, 'utf8')) : {}
   for (const regionName of regions) {
     const graph = await regionGraph(regionName)
-    graph.positions = layout(graph.nodes, graph.edges)
+    const augmented = addConnectorHubs(graph)
+    const positions = layout(augmented.nodes, augmented.edges)
+    const contracted = contractHubs(
+      augmented.nodes,
+      augmented.edges,
+      augmented.display,
+      positions,
+      augmented.hubs
+    )
+    graph.nodes = contracted.nodes
+    graph.edges = contracted.edges
+    graph.display = contracted.display
+    graph.positions = contracted.positions
+    delete graph.unresolved
+    delete graph.connectorNodes
     out[regionName] = graph
     console.log(
-      `${regionName.padEnd(7)} nodes ${String(graph.nodes.length).padStart(3)} | edges ${String(graph.edges.length).padStart(3)} | with-connections ${graph.parsed}`
+      `${regionName.padEnd(7)} nodes ${String(graph.nodes.length).padStart(3)} | edges ${String(graph.edges.length).padStart(3)} | bridged ${String(augmented.hubs.length).padStart(2)} connectors | with-connections ${graph.parsed}`
     )
   }
   fs.writeFileSync(OUT, JSON.stringify(out, null, 1))
   console.log('wrote', path.relative(path.join(__dirname, '..'), OUT))
-})().catch((e) => {
-  console.error('ERR', e.stack || e.message)
-  process.exit(1)
-})
+}
+
+if (require.main === module) {
+  main().catch((e) => {
+    console.error('ERR', e.stack || e.message)
+    process.exit(1)
+  })
+}
+
+module.exports = { regionGraph, layout, addConnectorHubs, contractHubs }

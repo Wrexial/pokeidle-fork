@@ -41,3 +41,7 @@ __pycache__/
 
 # Region map scraper cache
 tools/cache/
+
+# Region map comparison output (downloaded refs + rendered composites)
+tools/map-compare/refs/
+tools/map-compare/out/

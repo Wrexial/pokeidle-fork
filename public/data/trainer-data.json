@@ -1082,9 +1082,9 @@
    ]
   }
  ],
- "johto-azalea-town": [
+ "johto-mahogany-town": [
   {
-   "id": "johto-azalea-town_t1",
+   "id": "johto-mahogany-town_t1",
    "name": "Johto Trainer 1",
    "trainerClass": "coolTrainer",
    "team": [
@@ -1099,7 +1099,7 @@
    ]
   },
   {
-   "id": "johto-azalea-town_t2",
+   "id": "johto-mahogany-town_t2",
    "name": "Johto Trainer 2",
    "trainerClass": "psychic",
    "team": [
@@ -1114,7 +1114,7 @@
    ]
   },
   {
-   "id": "johto-azalea-town_t3",
+   "id": "johto-mahogany-town_t3",
    "name": "Johto Trainer 3",
    "trainerClass": "scientist",
    "team": [
@@ -1176,6 +1176,53 @@
    ]
   }
  ],
+ "johto-azalea-town": [
+  {
+   "id": "johto-azalea-town_t1",
+   "name": "Johto Trainer 1",
+   "trainerClass": "coolTrainer",
+   "team": [
+    {
+     "speciesKey": "chikorita",
+     "level": 29
+    },
+    {
+     "speciesKey": "bayleef",
+     "level": 30
+    }
+   ]
+  },
+  {
+   "id": "johto-azalea-town_t2",
+   "name": "Johto Trainer 2",
+   "trainerClass": "psychic",
+   "team": [
+    {
+     "speciesKey": "meganium",
+     "level": 30
+    },
+    {
+     "speciesKey": "cyndaquil",
+     "level": 31
+    }
+   ]
+  },
+  {
+   "id": "johto-azalea-town_t3",
+   "name": "Johto Trainer 3",
+   "trainerClass": "scientist",
+   "team": [
+    {
+     "speciesKey": "quilava",
+     "level": 31
+    },
+    {
+     "speciesKey": "typhlosion",
+     "level": 32
+    }
+   ]
+  }
+ ],
  "johto-goldenrod-city": [
   {
    "id": "johto-goldenrod-city_t1",
@@ -1209,53 +1256,6 @@
   },
   {
    "id": "johto-goldenrod-city_t3",
-   "name": "Johto Trainer 3",
-   "trainerClass": "scientist",
-   "team": [
-    {
-     "speciesKey": "quilava",
-     "level": 31
-    },
-    {
-     "speciesKey": "typhlosion",
-     "level": 32
-    }
-   ]
-  }
- ],
- "johto-mahogany-town": [
-  {
-   "id": "johto-mahogany-town_t1",
-   "name": "Johto Trainer 1",
-   "trainerClass": "coolTrainer",
-   "team": [
-    {
-     "speciesKey": "chikorita",
-     "level": 29
-    },
-    {
-     "speciesKey": "bayleef",
-     "level": 30
-    }
-   ]
-  },
-  {
-   "id": "johto-mahogany-town_t2",
-   "name": "Johto Trainer 2",
-   "trainerClass": "psychic",
-   "team": [
-    {
-     "speciesKey": "meganium",
-     "level": 30
-    },
-    {
-     "speciesKey": "cyndaquil",
-     "level": 31
-    }
-   ]
-  },
-  {
-   "id": "johto-mahogany-town_t3",
    "name": "Johto Trainer 3",
    "trainerClass": "scientist",
    "team": [
@@ -2210,53 +2210,6 @@
    ]
   }
  ],
- "sinnoh-snowpoint-city": [
-  {
-   "id": "sinnoh-snowpoint-city_t1",
-   "name": "Sinnoh Trainer 1",
-   "trainerClass": "youngster",
-   "team": [
-    {
-     "speciesKey": "turtwig",
-     "level": 47
-    },
-    {
-     "speciesKey": "grotle",
-     "level": 48
-    }
-   ]
-  },
-  {
-   "id": "sinnoh-snowpoint-city_t2",
-   "name": "Sinnoh Trainer 2",
-   "trainerClass": "lass",
-   "team": [
-    {
-     "speciesKey": "torterra",
-     "level": 48
-    },
-    {
-     "speciesKey": "chimchar",
-     "level": 49
-    }
-   ]
-  },
-  {
-   "id": "sinnoh-snowpoint-city_t3",
-   "name": "Sinnoh Trainer 3",
-   "trainerClass": "bugCatcher",
-   "team": [
-    {
-     "speciesKey": "monferno",
-     "level": 49
-    },
-    {
-     "speciesKey": "infernape",
-     "level": 50
-    }
-   ]
-  }
- ],
  "sinnoh-jubilife-city": [
   {
    "id": "sinnoh-jubilife-city_t1",
@@ -2398,6 +2351,53 @@
    ]
   }
  ],
+ "sinnoh-oreburgh-city": [
+  {
+   "id": "sinnoh-oreburgh-city_t1",
+   "name": "Sinnoh Trainer 1",
+   "trainerClass": "youngster",
+   "team": [
+    {
+     "speciesKey": "turtwig",
+     "level": 47
+    },
+    {
+     "speciesKey": "grotle",
+     "level": 48
+    }
+   ]
+  },
+  {
+   "id": "sinnoh-oreburgh-city_t2",
+   "name": "Sinnoh Trainer 2",
+   "trainerClass": "lass",
+   "team": [
+    {
+     "speciesKey": "torterra",
+     "level": 48
+    },
+    {
+     "speciesKey": "chimchar",
+     "level": 49
+    }
+   ]
+  },
+  {
+   "id": "sinnoh-oreburgh-city_t3",
+   "name": "Sinnoh Trainer 3",
+   "trainerClass": "bugCatcher",
+   "team": [
+    {
+     "speciesKey": "monferno",
+     "level": 49
+    },
+    {
+     "speciesKey": "infernape",
+     "level": 50
+    }
+   ]
+  }
+ ],
  "sinnoh-eterna-city": [
   {
    "id": "sinnoh-eterna-city_t1",
@@ -2445,9 +2445,9 @@
    ]
   }
  ],
- "sinnoh-sunyshore-city": [
+ "sinnoh-hearthome-city": [
   {
-   "id": "sinnoh-sunyshore-city_t1",
+   "id": "sinnoh-hearthome-city_t1",
    "name": "Sinnoh Trainer 1",
    "trainerClass": "youngster",
    "team": [
@@ -2462,7 +2462,7 @@
    ]
   },
   {
-   "id": "sinnoh-sunyshore-city_t2",
+   "id": "sinnoh-hearthome-city_t2",
    "name": "Sinnoh Trainer 2",
    "trainerClass": "lass",
    "team": [
@@ -2477,7 +2477,101 @@
    ]
   },
   {
-   "id": "sinnoh-sunyshore-city_t3",
+   "id": "sinnoh-hearthome-city_t3",
+   "name": "Sinnoh Trainer 3",
+   "trainerClass": "bugCatcher",
+   "team": [
+    {
+     "speciesKey": "monferno",
+     "level": 49
+    },
+    {
+     "speciesKey": "infernape",
+     "level": 50
+    }
+   ]
+  }
+ ],
+ "sinnoh-snowpoint-city": [
+  {
+   "id": "sinnoh-snowpoint-city_t1",
+   "name": "Sinnoh Trainer 1",
+   "trainerClass": "youngster",
+   "team": [
+    {
+     "speciesKey": "turtwig",
+     "level": 47
+    },
+    {
+     "speciesKey": "grotle",
+     "level": 48
+    }
+   ]
+  },
+  {
+   "id": "sinnoh-snowpoint-city_t2",
+   "name": "Sinnoh Trainer 2",
+   "trainerClass": "lass",
+   "team": [
+    {
+     "speciesKey": "torterra",
+     "level": 48
+    },
+    {
+     "speciesKey": "chimchar",
+     "level": 49
+    }
+   ]
+  },
+  {
+   "id": "sinnoh-snowpoint-city_t3",
+   "name": "Sinnoh Trainer 3",
+   "trainerClass": "bugCatcher",
+   "team": [
+    {
+     "speciesKey": "monferno",
+     "level": 49
+    },
+    {
+     "speciesKey": "infernape",
+     "level": 50
+    }
+   ]
+  }
+ ],
+ "sinnoh-pastoria-city": [
+  {
+   "id": "sinnoh-pastoria-city_t1",
+   "name": "Sinnoh Trainer 1",
+   "trainerClass": "youngster",
+   "team": [
+    {
+     "speciesKey": "turtwig",
+     "level": 47
+    },
+    {
+     "speciesKey": "grotle",
+     "level": 48
+    }
+   ]
+  },
+  {
+   "id": "sinnoh-pastoria-city_t2",
+   "name": "Sinnoh Trainer 2",
+   "trainerClass": "lass",
+   "team": [
+    {
+     "speciesKey": "torterra",
+     "level": 48
+    },
+    {
+     "speciesKey": "chimchar",
+     "level": 49
+    }
+   ]
+  },
+  {
+   "id": "sinnoh-pastoria-city_t3",
    "name": "Sinnoh Trainer 3",
    "trainerClass": "bugCatcher",
    "team": [
@@ -2525,53 +2619,6 @@
   },
   {
    "id": "sinnoh-celestic-town_t3",
-   "name": "Sinnoh Trainer 3",
-   "trainerClass": "bugCatcher",
-   "team": [
-    {
-     "speciesKey": "monferno",
-     "level": 49
-    },
-    {
-     "speciesKey": "infernape",
-     "level": 50
-    }
-   ]
-  }
- ],
- "sinnoh-oreburgh-city": [
-  {
-   "id": "sinnoh-oreburgh-city_t1",
-   "name": "Sinnoh Trainer 1",
-   "trainerClass": "youngster",
-   "team": [
-    {
-     "speciesKey": "turtwig",
-     "level": 47
-    },
-    {
-     "speciesKey": "grotle",
-     "level": 48
-    }
-   ]
-  },
-  {
-   "id": "sinnoh-oreburgh-city_t2",
-   "name": "Sinnoh Trainer 2",
-   "trainerClass": "lass",
-   "team": [
-    {
-     "speciesKey": "torterra",
-     "level": 48
-    },
-    {
-     "speciesKey": "chimchar",
-     "level": 49
-    }
-   ]
-  },
-  {
-   "id": "sinnoh-oreburgh-city_t3",
    "name": "Sinnoh Trainer 3",
    "trainerClass": "bugCatcher",
    "team": [
@@ -2680,9 +2727,9 @@
    ]
   }
  ],
- "sinnoh-hearthome-city": [
+ "sinnoh-sunyshore-city": [
   {
-   "id": "sinnoh-hearthome-city_t1",
+   "id": "sinnoh-sunyshore-city_t1",
    "name": "Sinnoh Trainer 1",
    "trainerClass": "youngster",
    "team": [
@@ -2697,7 +2744,7 @@
    ]
   },
   {
-   "id": "sinnoh-hearthome-city_t2",
+   "id": "sinnoh-sunyshore-city_t2",
    "name": "Sinnoh Trainer 2",
    "trainerClass": "lass",
    "team": [
@@ -2712,54 +2759,7 @@
    ]
   },
   {
-   "id": "sinnoh-hearthome-city_t3",
-   "name": "Sinnoh Trainer 3",
-   "trainerClass": "bugCatcher",
-   "team": [
-    {
-     "speciesKey": "monferno",
-     "level": 49
-    },
-    {
-     "speciesKey": "infernape",
-     "level": 50
-    }
-   ]
-  }
- ],
- "sinnoh-pastoria-city": [
-  {
-   "id": "sinnoh-pastoria-city_t1",
-   "name": "Sinnoh Trainer 1",
-   "trainerClass": "youngster",
-   "team": [
-    {
-     "speciesKey": "turtwig",
-     "level": 47
-    },
-    {
-     "speciesKey": "grotle",
-     "level": 48
-    }
-   ]
-  },
-  {
-   "id": "sinnoh-pastoria-city_t2",
-   "name": "Sinnoh Trainer 2",
-   "trainerClass": "lass",
-   "team": [
-    {
-     "speciesKey": "torterra",
-     "level": 48
-    },
-    {
-     "speciesKey": "chimchar",
-     "level": 49
-    }
-   ]
-  },
-  {
-   "id": "sinnoh-pastoria-city_t3",
+   "id": "sinnoh-sunyshore-city_t3",
    "name": "Sinnoh Trainer 3",
    "trainerClass": "bugCatcher",
    "team": [
@@ -2821,6 +2821,53 @@
    ]
   }
  ],
+ "unova-floccesy-town": [
+  {
+   "id": "unova-floccesy-town_t1",
+   "name": "Unova Trainer 1",
+   "trainerClass": "hiker",
+   "team": [
+    {
+     "speciesKey": "victini",
+     "level": 56
+    },
+    {
+     "speciesKey": "snivy",
+     "level": 57
+    }
+   ]
+  },
+  {
+   "id": "unova-floccesy-town_t2",
+   "name": "Unova Trainer 2",
+   "trainerClass": "camper",
+   "team": [
+    {
+     "speciesKey": "servine",
+     "level": 57
+    },
+    {
+     "speciesKey": "serperior",
+     "level": 58
+    }
+   ]
+  },
+  {
+   "id": "unova-floccesy-town_t3",
+   "name": "Unova Trainer 3",
+   "trainerClass": "beauty",
+   "team": [
+    {
+     "speciesKey": "tepig",
+     "level": 58
+    },
+    {
+     "speciesKey": "pignite",
+     "level": 59
+    }
+   ]
+  }
+ ],
  "unova-accumula-town": [
   {
    "id": "unova-accumula-town_t1",
@@ -2854,241 +2901,6 @@
   },
   {
    "id": "unova-accumula-town_t3",
-   "name": "Unova Trainer 3",
-   "trainerClass": "beauty",
-   "team": [
-    {
-     "speciesKey": "tepig",
-     "level": 58
-    },
-    {
-     "speciesKey": "pignite",
-     "level": 59
-    }
-   ]
-  }
- ],
- "unova-castelia-city": [
-  {
-   "id": "unova-castelia-city_t1",
-   "name": "Unova Trainer 1",
-   "trainerClass": "hiker",
-   "team": [
-    {
-     "speciesKey": "victini",
-     "level": 56
-    },
-    {
-     "speciesKey": "snivy",
-     "level": 57
-    }
-   ]
-  },
-  {
-   "id": "unova-castelia-city_t2",
-   "name": "Unova Trainer 2",
-   "trainerClass": "camper",
-   "team": [
-    {
-     "speciesKey": "servine",
-     "level": 57
-    },
-    {
-     "speciesKey": "serperior",
-     "level": 58
-    }
-   ]
-  },
-  {
-   "id": "unova-castelia-city_t3",
-   "name": "Unova Trainer 3",
-   "trainerClass": "beauty",
-   "team": [
-    {
-     "speciesKey": "tepig",
-     "level": 58
-    },
-    {
-     "speciesKey": "pignite",
-     "level": 59
-    }
-   ]
-  }
- ],
- "unova-black-city": [
-  {
-   "id": "unova-black-city_t1",
-   "name": "Unova Trainer 1",
-   "trainerClass": "hiker",
-   "team": [
-    {
-     "speciesKey": "victini",
-     "level": 56
-    },
-    {
-     "speciesKey": "snivy",
-     "level": 57
-    }
-   ]
-  },
-  {
-   "id": "unova-black-city_t2",
-   "name": "Unova Trainer 2",
-   "trainerClass": "camper",
-   "team": [
-    {
-     "speciesKey": "servine",
-     "level": 57
-    },
-    {
-     "speciesKey": "serperior",
-     "level": 58
-    }
-   ]
-  },
-  {
-   "id": "unova-black-city_t3",
-   "name": "Unova Trainer 3",
-   "trainerClass": "beauty",
-   "team": [
-    {
-     "speciesKey": "tepig",
-     "level": 58
-    },
-    {
-     "speciesKey": "pignite",
-     "level": 59
-    }
-   ]
-  }
- ],
- "unova-nimbasa-city": [
-  {
-   "id": "unova-nimbasa-city_t1",
-   "name": "Unova Trainer 1",
-   "trainerClass": "hiker",
-   "team": [
-    {
-     "speciesKey": "victini",
-     "level": 56
-    },
-    {
-     "speciesKey": "snivy",
-     "level": 57
-    }
-   ]
-  },
-  {
-   "id": "unova-nimbasa-city_t2",
-   "name": "Unova Trainer 2",
-   "trainerClass": "camper",
-   "team": [
-    {
-     "speciesKey": "servine",
-     "level": 57
-    },
-    {
-     "speciesKey": "serperior",
-     "level": 58
-    }
-   ]
-  },
-  {
-   "id": "unova-nimbasa-city_t3",
-   "name": "Unova Trainer 3",
-   "trainerClass": "beauty",
-   "team": [
-    {
-     "speciesKey": "tepig",
-     "level": 58
-    },
-    {
-     "speciesKey": "pignite",
-     "level": 59
-    }
-   ]
-  }
- ],
- "unova-lacunosa-town": [
-  {
-   "id": "unova-lacunosa-town_t1",
-   "name": "Unova Trainer 1",
-   "trainerClass": "hiker",
-   "team": [
-    {
-     "speciesKey": "victini",
-     "level": 56
-    },
-    {
-     "speciesKey": "snivy",
-     "level": 57
-    }
-   ]
-  },
-  {
-   "id": "unova-lacunosa-town_t2",
-   "name": "Unova Trainer 2",
-   "trainerClass": "camper",
-   "team": [
-    {
-     "speciesKey": "servine",
-     "level": 57
-    },
-    {
-     "speciesKey": "serperior",
-     "level": 58
-    }
-   ]
-  },
-  {
-   "id": "unova-lacunosa-town_t3",
-   "name": "Unova Trainer 3",
-   "trainerClass": "beauty",
-   "team": [
-    {
-     "speciesKey": "tepig",
-     "level": 58
-    },
-    {
-     "speciesKey": "pignite",
-     "level": 59
-    }
-   ]
-  }
- ],
- "unova-undella-town": [
-  {
-   "id": "unova-undella-town_t1",
-   "name": "Unova Trainer 1",
-   "trainerClass": "hiker",
-   "team": [
-    {
-     "speciesKey": "victini",
-     "level": 56
-    },
-    {
-     "speciesKey": "snivy",
-     "level": 57
-    }
-   ]
-  },
-  {
-   "id": "unova-undella-town_t2",
-   "name": "Unova Trainer 2",
-   "trainerClass": "camper",
-   "team": [
-    {
-     "speciesKey": "servine",
-     "level": 57
-    },
-    {
-     "speciesKey": "serperior",
-     "level": 58
-    }
-   ]
-  },
-  {
-   "id": "unova-undella-town_t3",
    "name": "Unova Trainer 3",
    "trainerClass": "beauty",
    "team": [
@@ -3197,288 +3009,6 @@
    ]
   }
  ],
- "unova-driftveil-city": [
-  {
-   "id": "unova-driftveil-city_t1",
-   "name": "Unova Trainer 1",
-   "trainerClass": "hiker",
-   "team": [
-    {
-     "speciesKey": "victini",
-     "level": 56
-    },
-    {
-     "speciesKey": "snivy",
-     "level": 57
-    }
-   ]
-  },
-  {
-   "id": "unova-driftveil-city_t2",
-   "name": "Unova Trainer 2",
-   "trainerClass": "camper",
-   "team": [
-    {
-     "speciesKey": "servine",
-     "level": 57
-    },
-    {
-     "speciesKey": "serperior",
-     "level": 58
-    }
-   ]
-  },
-  {
-   "id": "unova-driftveil-city_t3",
-   "name": "Unova Trainer 3",
-   "trainerClass": "beauty",
-   "team": [
-    {
-     "speciesKey": "tepig",
-     "level": 58
-    },
-    {
-     "speciesKey": "pignite",
-     "level": 59
-    }
-   ]
-  }
- ],
- "unova-floccesy-town": [
-  {
-   "id": "unova-floccesy-town_t1",
-   "name": "Unova Trainer 1",
-   "trainerClass": "hiker",
-   "team": [
-    {
-     "speciesKey": "victini",
-     "level": 56
-    },
-    {
-     "speciesKey": "snivy",
-     "level": 57
-    }
-   ]
-  },
-  {
-   "id": "unova-floccesy-town_t2",
-   "name": "Unova Trainer 2",
-   "trainerClass": "camper",
-   "team": [
-    {
-     "speciesKey": "servine",
-     "level": 57
-    },
-    {
-     "speciesKey": "serperior",
-     "level": 58
-    }
-   ]
-  },
-  {
-   "id": "unova-floccesy-town_t3",
-   "name": "Unova Trainer 3",
-   "trainerClass": "beauty",
-   "team": [
-    {
-     "speciesKey": "tepig",
-     "level": 58
-    },
-    {
-     "speciesKey": "pignite",
-     "level": 59
-    }
-   ]
-  }
- ],
- "unova-lentimas-town": [
-  {
-   "id": "unova-lentimas-town_t1",
-   "name": "Unova Trainer 1",
-   "trainerClass": "hiker",
-   "team": [
-    {
-     "speciesKey": "victini",
-     "level": 56
-    },
-    {
-     "speciesKey": "snivy",
-     "level": 57
-    }
-   ]
-  },
-  {
-   "id": "unova-lentimas-town_t2",
-   "name": "Unova Trainer 2",
-   "trainerClass": "camper",
-   "team": [
-    {
-     "speciesKey": "servine",
-     "level": 57
-    },
-    {
-     "speciesKey": "serperior",
-     "level": 58
-    }
-   ]
-  },
-  {
-   "id": "unova-lentimas-town_t3",
-   "name": "Unova Trainer 3",
-   "trainerClass": "beauty",
-   "team": [
-    {
-     "speciesKey": "tepig",
-     "level": 58
-    },
-    {
-     "speciesKey": "pignite",
-     "level": 59
-    }
-   ]
-  }
- ],
- "unova-mistralton-city": [
-  {
-   "id": "unova-mistralton-city_t1",
-   "name": "Unova Trainer 1",
-   "trainerClass": "hiker",
-   "team": [
-    {
-     "speciesKey": "victini",
-     "level": 56
-    },
-    {
-     "speciesKey": "snivy",
-     "level": 57
-    }
-   ]
-  },
-  {
-   "id": "unova-mistralton-city_t2",
-   "name": "Unova Trainer 2",
-   "trainerClass": "camper",
-   "team": [
-    {
-     "speciesKey": "servine",
-     "level": 57
-    },
-    {
-     "speciesKey": "serperior",
-     "level": 58
-    }
-   ]
-  },
-  {
-   "id": "unova-mistralton-city_t3",
-   "name": "Unova Trainer 3",
-   "trainerClass": "beauty",
-   "team": [
-    {
-     "speciesKey": "tepig",
-     "level": 58
-    },
-    {
-     "speciesKey": "pignite",
-     "level": 59
-    }
-   ]
-  }
- ],
- "unova-anville-town": [
-  {
-   "id": "unova-anville-town_t1",
-   "name": "Unova Trainer 1",
-   "trainerClass": "hiker",
-   "team": [
-    {
-     "speciesKey": "victini",
-     "level": 56
-    },
-    {
-     "speciesKey": "snivy",
-     "level": 57
-    }
-   ]
-  },
-  {
-   "id": "unova-anville-town_t2",
-   "name": "Unova Trainer 2",
-   "trainerClass": "camper",
-   "team": [
-    {
-     "speciesKey": "servine",
-     "level": 57
-    },
-    {
-     "speciesKey": "serperior",
-     "level": 58
-    }
-   ]
-  },
-  {
-   "id": "unova-anville-town_t3",
-   "name": "Unova Trainer 3",
-   "trainerClass": "beauty",
-   "team": [
-    {
-     "speciesKey": "tepig",
-     "level": 58
-    },
-    {
-     "speciesKey": "pignite",
-     "level": 59
-    }
-   ]
-  }
- ],
- "unova-humilau-city": [
-  {
-   "id": "unova-humilau-city_t1",
-   "name": "Unova Trainer 1",
-   "trainerClass": "hiker",
-   "team": [
-    {
-     "speciesKey": "victini",
-     "level": 56
-    },
-    {
-     "speciesKey": "snivy",
-     "level": 57
-    }
-   ]
-  },
-  {
-   "id": "unova-humilau-city_t2",
-   "name": "Unova Trainer 2",
-   "trainerClass": "camper",
-   "team": [
-    {
-     "speciesKey": "servine",
-     "level": 57
-    },
-    {
-     "speciesKey": "serperior",
-     "level": 58
-    }
-   ]
-  },
-  {
-   "id": "unova-humilau-city_t3",
-   "name": "Unova Trainer 3",
-   "trainerClass": "beauty",
-   "team": [
-    {
-     "speciesKey": "tepig",
-     "level": 58
-    },
-    {
-     "speciesKey": "pignite",
-     "level": 59
-    }
-   ]
-  }
- ],
  "unova-nacrene-city": [
   {
    "id": "unova-nacrene-city_t1",
@@ -3526,9 +3056,9 @@
    ]
   }
  ],
- "unova-icirrus-city": [
+ "unova-castelia-city": [
   {
-   "id": "unova-icirrus-city_t1",
+   "id": "unova-castelia-city_t1",
    "name": "Unova Trainer 1",
    "trainerClass": "hiker",
    "team": [
@@ -3543,7 +3073,7 @@
    ]
   },
   {
-   "id": "unova-icirrus-city_t2",
+   "id": "unova-castelia-city_t2",
    "name": "Unova Trainer 2",
    "trainerClass": "camper",
    "team": [
@@ -3558,7 +3088,7 @@
    ]
   },
   {
-   "id": "unova-icirrus-city_t3",
+   "id": "unova-castelia-city_t3",
    "name": "Unova Trainer 3",
    "trainerClass": "beauty",
    "team": [
@@ -3620,6 +3150,429 @@
    ]
   }
  ],
+ "unova-lacunosa-town": [
+  {
+   "id": "unova-lacunosa-town_t1",
+   "name": "Unova Trainer 1",
+   "trainerClass": "hiker",
+   "team": [
+    {
+     "speciesKey": "victini",
+     "level": 56
+    },
+    {
+     "speciesKey": "snivy",
+     "level": 57
+    }
+   ]
+  },
+  {
+   "id": "unova-lacunosa-town_t2",
+   "name": "Unova Trainer 2",
+   "trainerClass": "camper",
+   "team": [
+    {
+     "speciesKey": "servine",
+     "level": 57
+    },
+    {
+     "speciesKey": "serperior",
+     "level": 58
+    }
+   ]
+  },
+  {
+   "id": "unova-lacunosa-town_t3",
+   "name": "Unova Trainer 3",
+   "trainerClass": "beauty",
+   "team": [
+    {
+     "speciesKey": "tepig",
+     "level": 58
+    },
+    {
+     "speciesKey": "pignite",
+     "level": 59
+    }
+   ]
+  }
+ ],
+ "unova-nimbasa-city": [
+  {
+   "id": "unova-nimbasa-city_t1",
+   "name": "Unova Trainer 1",
+   "trainerClass": "hiker",
+   "team": [
+    {
+     "speciesKey": "victini",
+     "level": 56
+    },
+    {
+     "speciesKey": "snivy",
+     "level": 57
+    }
+   ]
+  },
+  {
+   "id": "unova-nimbasa-city_t2",
+   "name": "Unova Trainer 2",
+   "trainerClass": "camper",
+   "team": [
+    {
+     "speciesKey": "servine",
+     "level": 57
+    },
+    {
+     "speciesKey": "serperior",
+     "level": 58
+    }
+   ]
+  },
+  {
+   "id": "unova-nimbasa-city_t3",
+   "name": "Unova Trainer 3",
+   "trainerClass": "beauty",
+   "team": [
+    {
+     "speciesKey": "tepig",
+     "level": 58
+    },
+    {
+     "speciesKey": "pignite",
+     "level": 59
+    }
+   ]
+  }
+ ],
+ "unova-undella-town": [
+  {
+   "id": "unova-undella-town_t1",
+   "name": "Unova Trainer 1",
+   "trainerClass": "hiker",
+   "team": [
+    {
+     "speciesKey": "victini",
+     "level": 56
+    },
+    {
+     "speciesKey": "snivy",
+     "level": 57
+    }
+   ]
+  },
+  {
+   "id": "unova-undella-town_t2",
+   "name": "Unova Trainer 2",
+   "trainerClass": "camper",
+   "team": [
+    {
+     "speciesKey": "servine",
+     "level": 57
+    },
+    {
+     "speciesKey": "serperior",
+     "level": 58
+    }
+   ]
+  },
+  {
+   "id": "unova-undella-town_t3",
+   "name": "Unova Trainer 3",
+   "trainerClass": "beauty",
+   "team": [
+    {
+     "speciesKey": "tepig",
+     "level": 58
+    },
+    {
+     "speciesKey": "pignite",
+     "level": 59
+    }
+   ]
+  }
+ ],
+ "unova-humilau-city": [
+  {
+   "id": "unova-humilau-city_t1",
+   "name": "Unova Trainer 1",
+   "trainerClass": "hiker",
+   "team": [
+    {
+     "speciesKey": "victini",
+     "level": 56
+    },
+    {
+     "speciesKey": "snivy",
+     "level": 57
+    }
+   ]
+  },
+  {
+   "id": "unova-humilau-city_t2",
+   "name": "Unova Trainer 2",
+   "trainerClass": "camper",
+   "team": [
+    {
+     "speciesKey": "servine",
+     "level": 57
+    },
+    {
+     "speciesKey": "serperior",
+     "level": 58
+    }
+   ]
+  },
+  {
+   "id": "unova-humilau-city_t3",
+   "name": "Unova Trainer 3",
+   "trainerClass": "beauty",
+   "team": [
+    {
+     "speciesKey": "tepig",
+     "level": 58
+    },
+    {
+     "speciesKey": "pignite",
+     "level": 59
+    }
+   ]
+  }
+ ],
+ "unova-icirrus-city": [
+  {
+   "id": "unova-icirrus-city_t1",
+   "name": "Unova Trainer 1",
+   "trainerClass": "hiker",
+   "team": [
+    {
+     "speciesKey": "victini",
+     "level": 56
+    },
+    {
+     "speciesKey": "snivy",
+     "level": 57
+    }
+   ]
+  },
+  {
+   "id": "unova-icirrus-city_t2",
+   "name": "Unova Trainer 2",
+   "trainerClass": "camper",
+   "team": [
+    {
+     "speciesKey": "servine",
+     "level": 57
+    },
+    {
+     "speciesKey": "serperior",
+     "level": 58
+    }
+   ]
+  },
+  {
+   "id": "unova-icirrus-city_t3",
+   "name": "Unova Trainer 3",
+   "trainerClass": "beauty",
+   "team": [
+    {
+     "speciesKey": "tepig",
+     "level": 58
+    },
+    {
+     "speciesKey": "pignite",
+     "level": 59
+    }
+   ]
+  }
+ ],
+ "unova-lentimas-town": [
+  {
+   "id": "unova-lentimas-town_t1",
+   "name": "Unova Trainer 1",
+   "trainerClass": "hiker",
+   "team": [
+    {
+     "speciesKey": "victini",
+     "level": 56
+    },
+    {
+     "speciesKey": "snivy",
+     "level": 57
+    }
+   ]
+  },
+  {
+   "id": "unova-lentimas-town_t2",
+   "name": "Unova Trainer 2",
+   "trainerClass": "camper",
+   "team": [
+    {
+     "speciesKey": "servine",
+     "level": 57
+    },
+    {
+     "speciesKey": "serperior",
+     "level": 58
+    }
+   ]
+  },
+  {
+   "id": "unova-lentimas-town_t3",
+   "name": "Unova Trainer 3",
+   "trainerClass": "beauty",
+   "team": [
+    {
+     "speciesKey": "tepig",
+     "level": 58
+    },
+    {
+     "speciesKey": "pignite",
+     "level": 59
+    }
+   ]
+  }
+ ],
+ "unova-driftveil-city": [
+  {
+   "id": "unova-driftveil-city_t1",
+   "name": "Unova Trainer 1",
+   "trainerClass": "hiker",
+   "team": [
+    {
+     "speciesKey": "victini",
+     "level": 56
+    },
+    {
+     "speciesKey": "snivy",
+     "level": 57
+    }
+   ]
+  },
+  {
+   "id": "unova-driftveil-city_t2",
+   "name": "Unova Trainer 2",
+   "trainerClass": "camper",
+   "team": [
+    {
+     "speciesKey": "servine",
+     "level": 57
+    },
+    {
+     "speciesKey": "serperior",
+     "level": 58
+    }
+   ]
+  },
+  {
+   "id": "unova-driftveil-city_t3",
+   "name": "Unova Trainer 3",
+   "trainerClass": "beauty",
+   "team": [
+    {
+     "speciesKey": "tepig",
+     "level": 58
+    },
+    {
+     "speciesKey": "pignite",
+     "level": 59
+    }
+   ]
+  }
+ ],
+ "unova-black-city": [
+  {
+   "id": "unova-black-city_t1",
+   "name": "Unova Trainer 1",
+   "trainerClass": "hiker",
+   "team": [
+    {
+     "speciesKey": "victini",
+     "level": 56
+    },
+    {
+     "speciesKey": "snivy",
+     "level": 57
+    }
+   ]
+  },
+  {
+   "id": "unova-black-city_t2",
+   "name": "Unova Trainer 2",
+   "trainerClass": "camper",
+   "team": [
+    {
+     "speciesKey": "servine",
+     "level": 57
+    },
+    {
+     "speciesKey": "serperior",
+     "level": 58
+    }
+   ]
+  },
+  {
+   "id": "unova-black-city_t3",
+   "name": "Unova Trainer 3",
+   "trainerClass": "beauty",
+   "team": [
+    {
+     "speciesKey": "tepig",
+     "level": 58
+    },
+    {
+     "speciesKey": "pignite",
+     "level": 59
+    }
+   ]
+  }
+ ],
+ "unova-mistralton-city": [
+  {
+   "id": "unova-mistralton-city_t1",
+   "name": "Unova Trainer 1",
+   "trainerClass": "hiker",
+   "team": [
+    {
+     "speciesKey": "victini",
+     "level": 56
+    },
+    {
+     "speciesKey": "snivy",
+     "level": 57
+    }
+   ]
+  },
+  {
+   "id": "unova-mistralton-city_t2",
+   "name": "Unova Trainer 2",
+   "trainerClass": "camper",
+   "team": [
+    {
+     "speciesKey": "servine",
+     "level": 57
+    },
+    {
+     "speciesKey": "serperior",
+     "level": 58
+    }
+   ]
+  },
+  {
+   "id": "unova-mistralton-city_t3",
+   "name": "Unova Trainer 3",
+   "trainerClass": "beauty",
+   "team": [
+    {
+     "speciesKey": "tepig",
+     "level": 58
+    },
+    {
+     "speciesKey": "pignite",
+     "level": 59
+    }
+   ]
+  }
+ ],
  "unova-virbank-city": [
   {
    "id": "unova-virbank-city_t1",
@@ -3667,6 +3620,53 @@
    ]
   }
  ],
+ "unova-anville-town": [
+  {
+   "id": "unova-anville-town_t1",
+   "name": "Unova Trainer 1",
+   "trainerClass": "hiker",
+   "team": [
+    {
+     "speciesKey": "victini",
+     "level": 56
+    },
+    {
+     "speciesKey": "snivy",
+     "level": 57
+    }
+   ]
+  },
+  {
+   "id": "unova-anville-town_t2",
+   "name": "Unova Trainer 2",
+   "trainerClass": "camper",
+   "team": [
+    {
+     "speciesKey": "servine",
+     "level": 57
+    },
+    {
+     "speciesKey": "serperior",
+     "level": 58
+    }
+   ]
+  },
+  {
+   "id": "unova-anville-town_t3",
+   "name": "Unova Trainer 3",
+   "trainerClass": "beauty",
+   "team": [
+    {
+     "speciesKey": "tepig",
+     "level": 58
+    },
+    {
+     "speciesKey": "pignite",
+     "level": 59
+    }
+   ]
+  }
+ ],
  "kalos-vaniville-town": [
   {
    "id": "kalos-vaniville-town_t1",
@@ -3700,53 +3700,6 @@
   },
   {
    "id": "kalos-vaniville-town_t3",
-   "name": "Kalos Trainer 3",
-   "trainerClass": "scientist",
-   "team": [
-    {
-     "speciesKey": "braixen",
-     "level": 67
-    },
-    {
-     "speciesKey": "delphox",
-     "level": 68
-    }
-   ]
-  }
- ],
- "kalos-shalour-city": [
-  {
-   "id": "kalos-shalour-city_t1",
-   "name": "Kalos Trainer 1",
-   "trainerClass": "coolTrainer",
-   "team": [
-    {
-     "speciesKey": "chespin",
-     "level": 65
-    },
-    {
-     "speciesKey": "quilladin",
-     "level": 66
-    }
-   ]
-  },
-  {
-   "id": "kalos-shalour-city_t2",
-   "name": "Kalos Trainer 2",
-   "trainerClass": "psychic",
-   "team": [
-    {
-     "speciesKey": "chesnaught",
-     "level": 66
-    },
-    {
-     "speciesKey": "fennekin",
-     "level": 67
-    }
-   ]
-  },
-  {
-   "id": "kalos-shalour-city_t3",
    "name": "Kalos Trainer 3",
    "trainerClass": "scientist",
    "team": [
@@ -3855,53 +3808,6 @@
    ]
   }
  ],
- "kalos-coumarine-city": [
-  {
-   "id": "kalos-coumarine-city_t1",
-   "name": "Kalos Trainer 1",
-   "trainerClass": "coolTrainer",
-   "team": [
-    {
-     "speciesKey": "chespin",
-     "level": 65
-    },
-    {
-     "speciesKey": "quilladin",
-     "level": 66
-    }
-   ]
-  },
-  {
-   "id": "kalos-coumarine-city_t2",
-   "name": "Kalos Trainer 2",
-   "trainerClass": "psychic",
-   "team": [
-    {
-     "speciesKey": "chesnaught",
-     "level": 66
-    },
-    {
-     "speciesKey": "fennekin",
-     "level": 67
-    }
-   ]
-  },
-  {
-   "id": "kalos-coumarine-city_t3",
-   "name": "Kalos Trainer 3",
-   "trainerClass": "scientist",
-   "team": [
-    {
-     "speciesKey": "braixen",
-     "level": 67
-    },
-    {
-     "speciesKey": "delphox",
-     "level": 68
-    }
-   ]
-  }
- ],
  "kalos-lumiose-city": [
   {
    "id": "kalos-lumiose-city_t1",
@@ -3935,382 +3841,6 @@
   },
   {
    "id": "kalos-lumiose-city_t3",
-   "name": "Kalos Trainer 3",
-   "trainerClass": "scientist",
-   "team": [
-    {
-     "speciesKey": "braixen",
-     "level": 67
-    },
-    {
-     "speciesKey": "delphox",
-     "level": 68
-    }
-   ]
-  }
- ],
- "kalos-ambrette-town": [
-  {
-   "id": "kalos-ambrette-town_t1",
-   "name": "Kalos Trainer 1",
-   "trainerClass": "coolTrainer",
-   "team": [
-    {
-     "speciesKey": "chespin",
-     "level": 65
-    },
-    {
-     "speciesKey": "quilladin",
-     "level": 66
-    }
-   ]
-  },
-  {
-   "id": "kalos-ambrette-town_t2",
-   "name": "Kalos Trainer 2",
-   "trainerClass": "psychic",
-   "team": [
-    {
-     "speciesKey": "chesnaught",
-     "level": 66
-    },
-    {
-     "speciesKey": "fennekin",
-     "level": 67
-    }
-   ]
-  },
-  {
-   "id": "kalos-ambrette-town_t3",
-   "name": "Kalos Trainer 3",
-   "trainerClass": "scientist",
-   "team": [
-    {
-     "speciesKey": "braixen",
-     "level": 67
-    },
-    {
-     "speciesKey": "delphox",
-     "level": 68
-    }
-   ]
-  }
- ],
- "kalos-laverre-city": [
-  {
-   "id": "kalos-laverre-city_t1",
-   "name": "Kalos Trainer 1",
-   "trainerClass": "coolTrainer",
-   "team": [
-    {
-     "speciesKey": "chespin",
-     "level": 65
-    },
-    {
-     "speciesKey": "quilladin",
-     "level": 66
-    }
-   ]
-  },
-  {
-   "id": "kalos-laverre-city_t2",
-   "name": "Kalos Trainer 2",
-   "trainerClass": "psychic",
-   "team": [
-    {
-     "speciesKey": "chesnaught",
-     "level": 66
-    },
-    {
-     "speciesKey": "fennekin",
-     "level": 67
-    }
-   ]
-  },
-  {
-   "id": "kalos-laverre-city_t3",
-   "name": "Kalos Trainer 3",
-   "trainerClass": "scientist",
-   "team": [
-    {
-     "speciesKey": "braixen",
-     "level": 67
-    },
-    {
-     "speciesKey": "delphox",
-     "level": 68
-    }
-   ]
-  }
- ],
- "kalos-cyllage-city": [
-  {
-   "id": "kalos-cyllage-city_t1",
-   "name": "Kalos Trainer 1",
-   "trainerClass": "coolTrainer",
-   "team": [
-    {
-     "speciesKey": "chespin",
-     "level": 65
-    },
-    {
-     "speciesKey": "quilladin",
-     "level": 66
-    }
-   ]
-  },
-  {
-   "id": "kalos-cyllage-city_t2",
-   "name": "Kalos Trainer 2",
-   "trainerClass": "psychic",
-   "team": [
-    {
-     "speciesKey": "chesnaught",
-     "level": 66
-    },
-    {
-     "speciesKey": "fennekin",
-     "level": 67
-    }
-   ]
-  },
-  {
-   "id": "kalos-cyllage-city_t3",
-   "name": "Kalos Trainer 3",
-   "trainerClass": "scientist",
-   "team": [
-    {
-     "speciesKey": "braixen",
-     "level": 67
-    },
-    {
-     "speciesKey": "delphox",
-     "level": 68
-    }
-   ]
-  }
- ],
- "kalos-camphrier-town": [
-  {
-   "id": "kalos-camphrier-town_t1",
-   "name": "Kalos Trainer 1",
-   "trainerClass": "coolTrainer",
-   "team": [
-    {
-     "speciesKey": "chespin",
-     "level": 65
-    },
-    {
-     "speciesKey": "quilladin",
-     "level": 66
-    }
-   ]
-  },
-  {
-   "id": "kalos-camphrier-town_t2",
-   "name": "Kalos Trainer 2",
-   "trainerClass": "psychic",
-   "team": [
-    {
-     "speciesKey": "chesnaught",
-     "level": 66
-    },
-    {
-     "speciesKey": "fennekin",
-     "level": 67
-    }
-   ]
-  },
-  {
-   "id": "kalos-camphrier-town_t3",
-   "name": "Kalos Trainer 3",
-   "trainerClass": "scientist",
-   "team": [
-    {
-     "speciesKey": "braixen",
-     "level": 67
-    },
-    {
-     "speciesKey": "delphox",
-     "level": 68
-    }
-   ]
-  }
- ],
- "kalos-geosenge-town": [
-  {
-   "id": "kalos-geosenge-town_t1",
-   "name": "Kalos Trainer 1",
-   "trainerClass": "coolTrainer",
-   "team": [
-    {
-     "speciesKey": "chespin",
-     "level": 65
-    },
-    {
-     "speciesKey": "quilladin",
-     "level": 66
-    }
-   ]
-  },
-  {
-   "id": "kalos-geosenge-town_t2",
-   "name": "Kalos Trainer 2",
-   "trainerClass": "psychic",
-   "team": [
-    {
-     "speciesKey": "chesnaught",
-     "level": 66
-    },
-    {
-     "speciesKey": "fennekin",
-     "level": 67
-    }
-   ]
-  },
-  {
-   "id": "kalos-geosenge-town_t3",
-   "name": "Kalos Trainer 3",
-   "trainerClass": "scientist",
-   "team": [
-    {
-     "speciesKey": "braixen",
-     "level": 67
-    },
-    {
-     "speciesKey": "delphox",
-     "level": 68
-    }
-   ]
-  }
- ],
- "kalos-dendemille-town": [
-  {
-   "id": "kalos-dendemille-town_t1",
-   "name": "Kalos Trainer 1",
-   "trainerClass": "coolTrainer",
-   "team": [
-    {
-     "speciesKey": "chespin",
-     "level": 65
-    },
-    {
-     "speciesKey": "quilladin",
-     "level": 66
-    }
-   ]
-  },
-  {
-   "id": "kalos-dendemille-town_t2",
-   "name": "Kalos Trainer 2",
-   "trainerClass": "psychic",
-   "team": [
-    {
-     "speciesKey": "chesnaught",
-     "level": 66
-    },
-    {
-     "speciesKey": "fennekin",
-     "level": 67
-    }
-   ]
-  },
-  {
-   "id": "kalos-dendemille-town_t3",
-   "name": "Kalos Trainer 3",
-   "trainerClass": "scientist",
-   "team": [
-    {
-     "speciesKey": "braixen",
-     "level": 67
-    },
-    {
-     "speciesKey": "delphox",
-     "level": 68
-    }
-   ]
-  }
- ],
- "kalos-anistar-city": [
-  {
-   "id": "kalos-anistar-city_t1",
-   "name": "Kalos Trainer 1",
-   "trainerClass": "coolTrainer",
-   "team": [
-    {
-     "speciesKey": "chespin",
-     "level": 65
-    },
-    {
-     "speciesKey": "quilladin",
-     "level": 66
-    }
-   ]
-  },
-  {
-   "id": "kalos-anistar-city_t2",
-   "name": "Kalos Trainer 2",
-   "trainerClass": "psychic",
-   "team": [
-    {
-     "speciesKey": "chesnaught",
-     "level": 66
-    },
-    {
-     "speciesKey": "fennekin",
-     "level": 67
-    }
-   ]
-  },
-  {
-   "id": "kalos-anistar-city_t3",
-   "name": "Kalos Trainer 3",
-   "trainerClass": "scientist",
-   "team": [
-    {
-     "speciesKey": "braixen",
-     "level": 67
-    },
-    {
-     "speciesKey": "delphox",
-     "level": 68
-    }
-   ]
-  }
- ],
- "kalos-couriway-town": [
-  {
-   "id": "kalos-couriway-town_t1",
-   "name": "Kalos Trainer 1",
-   "trainerClass": "coolTrainer",
-   "team": [
-    {
-     "speciesKey": "chespin",
-     "level": 65
-    },
-    {
-     "speciesKey": "quilladin",
-     "level": 66
-    }
-   ]
-  },
-  {
-   "id": "kalos-couriway-town_t2",
-   "name": "Kalos Trainer 2",
-   "trainerClass": "psychic",
-   "team": [
-    {
-     "speciesKey": "chesnaught",
-     "level": 66
-    },
-    {
-     "speciesKey": "fennekin",
-     "level": 67
-    }
-   ]
-  },
-  {
-   "id": "kalos-couriway-town_t3",
    "name": "Kalos Trainer 3",
    "trainerClass": "scientist",
    "team": [
@@ -4372,6 +3902,147 @@
    ]
   }
  ],
+ "kalos-camphrier-town": [
+  {
+   "id": "kalos-camphrier-town_t1",
+   "name": "Kalos Trainer 1",
+   "trainerClass": "coolTrainer",
+   "team": [
+    {
+     "speciesKey": "chespin",
+     "level": 65
+    },
+    {
+     "speciesKey": "quilladin",
+     "level": 66
+    }
+   ]
+  },
+  {
+   "id": "kalos-camphrier-town_t2",
+   "name": "Kalos Trainer 2",
+   "trainerClass": "psychic",
+   "team": [
+    {
+     "speciesKey": "chesnaught",
+     "level": 66
+    },
+    {
+     "speciesKey": "fennekin",
+     "level": 67
+    }
+   ]
+  },
+  {
+   "id": "kalos-camphrier-town_t3",
+   "name": "Kalos Trainer 3",
+   "trainerClass": "scientist",
+   "team": [
+    {
+     "speciesKey": "braixen",
+     "level": 67
+    },
+    {
+     "speciesKey": "delphox",
+     "level": 68
+    }
+   ]
+  }
+ ],
+ "kalos-coumarine-city": [
+  {
+   "id": "kalos-coumarine-city_t1",
+   "name": "Kalos Trainer 1",
+   "trainerClass": "coolTrainer",
+   "team": [
+    {
+     "speciesKey": "chespin",
+     "level": 65
+    },
+    {
+     "speciesKey": "quilladin",
+     "level": 66
+    }
+   ]
+  },
+  {
+   "id": "kalos-coumarine-city_t2",
+   "name": "Kalos Trainer 2",
+   "trainerClass": "psychic",
+   "team": [
+    {
+     "speciesKey": "chesnaught",
+     "level": 66
+    },
+    {
+     "speciesKey": "fennekin",
+     "level": 67
+    }
+   ]
+  },
+  {
+   "id": "kalos-coumarine-city_t3",
+   "name": "Kalos Trainer 3",
+   "trainerClass": "scientist",
+   "team": [
+    {
+     "speciesKey": "braixen",
+     "level": 67
+    },
+    {
+     "speciesKey": "delphox",
+     "level": 68
+    }
+   ]
+  }
+ ],
+ "kalos-laverre-city": [
+  {
+   "id": "kalos-laverre-city_t1",
+   "name": "Kalos Trainer 1",
+   "trainerClass": "coolTrainer",
+   "team": [
+    {
+     "speciesKey": "chespin",
+     "level": 65
+    },
+    {
+     "speciesKey": "quilladin",
+     "level": 66
+    }
+   ]
+  },
+  {
+   "id": "kalos-laverre-city_t2",
+   "name": "Kalos Trainer 2",
+   "trainerClass": "psychic",
+   "team": [
+    {
+     "speciesKey": "chesnaught",
+     "level": 66
+    },
+    {
+     "speciesKey": "fennekin",
+     "level": 67
+    }
+   ]
+  },
+  {
+   "id": "kalos-laverre-city_t3",
+   "name": "Kalos Trainer 3",
+   "trainerClass": "scientist",
+   "team": [
+    {
+     "speciesKey": "braixen",
+     "level": 67
+    },
+    {
+     "speciesKey": "delphox",
+     "level": 68
+    }
+   ]
+  }
+ ],
  "kalos-kiloude-city": [
   {
    "id": "kalos-kiloude-city_t1",
@@ -4419,6 +4090,335 @@
    ]
   }
  ],
+ "kalos-dendemille-town": [
+  {
+   "id": "kalos-dendemille-town_t1",
+   "name": "Kalos Trainer 1",
+   "trainerClass": "coolTrainer",
+   "team": [
+    {
+     "speciesKey": "chespin",
+     "level": 65
+    },
+    {
+     "speciesKey": "quilladin",
+     "level": 66
+    }
+   ]
+  },
+  {
+   "id": "kalos-dendemille-town_t2",
+   "name": "Kalos Trainer 2",
+   "trainerClass": "psychic",
+   "team": [
+    {
+     "speciesKey": "chesnaught",
+     "level": 66
+    },
+    {
+     "speciesKey": "fennekin",
+     "level": 67
+    }
+   ]
+  },
+  {
+   "id": "kalos-dendemille-town_t3",
+   "name": "Kalos Trainer 3",
+   "trainerClass": "scientist",
+   "team": [
+    {
+     "speciesKey": "braixen",
+     "level": 67
+    },
+    {
+     "speciesKey": "delphox",
+     "level": 68
+    }
+   ]
+  }
+ ],
+ "kalos-couriway-town": [
+  {
+   "id": "kalos-couriway-town_t1",
+   "name": "Kalos Trainer 1",
+   "trainerClass": "coolTrainer",
+   "team": [
+    {
+     "speciesKey": "chespin",
+     "level": 65
+    },
+    {
+     "speciesKey": "quilladin",
+     "level": 66
+    }
+   ]
+  },
+  {
+   "id": "kalos-couriway-town_t2",
+   "name": "Kalos Trainer 2",
+   "trainerClass": "psychic",
+   "team": [
+    {
+     "speciesKey": "chesnaught",
+     "level": 66
+    },
+    {
+     "speciesKey": "fennekin",
+     "level": 67
+    }
+   ]
+  },
+  {
+   "id": "kalos-couriway-town_t3",
+   "name": "Kalos Trainer 3",
+   "trainerClass": "scientist",
+   "team": [
+    {
+     "speciesKey": "braixen",
+     "level": 67
+    },
+    {
+     "speciesKey": "delphox",
+     "level": 68
+    }
+   ]
+  }
+ ],
+ "kalos-cyllage-city": [
+  {
+   "id": "kalos-cyllage-city_t1",
+   "name": "Kalos Trainer 1",
+   "trainerClass": "coolTrainer",
+   "team": [
+    {
+     "speciesKey": "chespin",
+     "level": 65
+    },
+    {
+     "speciesKey": "quilladin",
+     "level": 66
+    }
+   ]
+  },
+  {
+   "id": "kalos-cyllage-city_t2",
+   "name": "Kalos Trainer 2",
+   "trainerClass": "psychic",
+   "team": [
+    {
+     "speciesKey": "chesnaught",
+     "level": 66
+    },
+    {
+     "speciesKey": "fennekin",
+     "level": 67
+    }
+   ]
+  },
+  {
+   "id": "kalos-cyllage-city_t3",
+   "name": "Kalos Trainer 3",
+   "trainerClass": "scientist",
+   "team": [
+    {
+     "speciesKey": "braixen",
+     "level": 67
+    },
+    {
+     "speciesKey": "delphox",
+     "level": 68
+    }
+   ]
+  }
+ ],
+ "kalos-shalour-city": [
+  {
+   "id": "kalos-shalour-city_t1",
+   "name": "Kalos Trainer 1",
+   "trainerClass": "coolTrainer",
+   "team": [
+    {
+     "speciesKey": "chespin",
+     "level": 65
+    },
+    {
+     "speciesKey": "quilladin",
+     "level": 66
+    }
+   ]
+  },
+  {
+   "id": "kalos-shalour-city_t2",
+   "name": "Kalos Trainer 2",
+   "trainerClass": "psychic",
+   "team": [
+    {
+     "speciesKey": "chesnaught",
+     "level": 66
+    },
+    {
+     "speciesKey": "fennekin",
+     "level": 67
+    }
+   ]
+  },
+  {
+   "id": "kalos-shalour-city_t3",
+   "name": "Kalos Trainer 3",
+   "trainerClass": "scientist",
+   "team": [
+    {
+     "speciesKey": "braixen",
+     "level": 67
+    },
+    {
+     "speciesKey": "delphox",
+     "level": 68
+    }
+   ]
+  }
+ ],
+ "kalos-ambrette-town": [
+  {
+   "id": "kalos-ambrette-town_t1",
+   "name": "Kalos Trainer 1",
+   "trainerClass": "coolTrainer",
+   "team": [
+    {
+     "speciesKey": "chespin",
+     "level": 65
+    },
+    {
+     "speciesKey": "quilladin",
+     "level": 66
+    }
+   ]
+  },
+  {
+   "id": "kalos-ambrette-town_t2",
+   "name": "Kalos Trainer 2",
+   "trainerClass": "psychic",
+   "team": [
+    {
+     "speciesKey": "chesnaught",
+     "level": 66
+    },
+    {
+     "speciesKey": "fennekin",
+     "level": 67
+    }
+   ]
+  },
+  {
+   "id": "kalos-ambrette-town_t3",
+   "name": "Kalos Trainer 3",
+   "trainerClass": "scientist",
+   "team": [
+    {
+     "speciesKey": "braixen",
+     "level": 67
+    },
+    {
+     "speciesKey": "delphox",
+     "level": 68
+    }
+   ]
+  }
+ ],
+ "kalos-anistar-city": [
+  {
+   "id": "kalos-anistar-city_t1",
+   "name": "Kalos Trainer 1",
+   "trainerClass": "coolTrainer",
+   "team": [
+    {
+     "speciesKey": "chespin",
+     "level": 65
+    },
+    {
+     "speciesKey": "quilladin",
+     "level": 66
+    }
+   ]
+  },
+  {
+   "id": "kalos-anistar-city_t2",
+   "name": "Kalos Trainer 2",
+   "trainerClass": "psychic",
+   "team": [
+    {
+     "speciesKey": "chesnaught",
+     "level": 66
+    },
+    {
+     "speciesKey": "fennekin",
+     "level": 67
+    }
+   ]
+  },
+  {
+   "id": "kalos-anistar-city_t3",
+   "name": "Kalos Trainer 3",
+   "trainerClass": "scientist",
+   "team": [
+    {
+     "speciesKey": "braixen",
+     "level": 67
+    },
+    {
+     "speciesKey": "delphox",
+     "level": 68
+    }
+   ]
+  }
+ ],
+ "kalos-geosenge-town": [
+  {
+   "id": "kalos-geosenge-town_t1",
+   "name": "Kalos Trainer 1",
+   "trainerClass": "coolTrainer",
+   "team": [
+    {
+     "speciesKey": "chespin",
+     "level": 65
+    },
+    {
+     "speciesKey": "quilladin",
+     "level": 66
+    }
+   ]
+  },
+  {
+   "id": "kalos-geosenge-town_t2",
+   "name": "Kalos Trainer 2",
+   "trainerClass": "psychic",
+   "team": [
+    {
+     "speciesKey": "chesnaught",
+     "level": 66
+    },
+    {
+     "speciesKey": "fennekin",
+     "level": 67
+    }
+   ]
+  },
+  {
+   "id": "kalos-geosenge-town_t3",
+   "name": "Kalos Trainer 3",
+   "trainerClass": "scientist",
+   "team": [
+    {
+     "speciesKey": "braixen",
+     "level": 67
+    },
+    {
+     "speciesKey": "delphox",
+     "level": 68
+    }
+   ]
+  }
+ ],
  "alola-iki-town": [
   {
    "id": "alola-iki-town_t1",
@@ -4452,100 +4452,6 @@
   },
   {
    "id": "alola-iki-town_t3",
-   "name": "Alola Trainer 3",
-   "trainerClass": "swimmer",
-   "team": [
-    {
-     "speciesKey": "torracat",
-     "level": 76
-    },
-    {
-     "speciesKey": "incineroar",
-     "level": 77
-    }
-   ]
-  }
- ],
- "alola-po-town": [
-  {
-   "id": "alola-po-town_t1",
-   "name": "Alola Trainer 1",
-   "trainerClass": "ace",
-   "team": [
-    {
-     "speciesKey": "rowlet",
-     "level": 74
-    },
-    {
-     "speciesKey": "dartrix",
-     "level": 75
-    }
-   ]
-  },
-  {
-   "id": "alola-po-town_t2",
-   "name": "Alola Trainer 2",
-   "trainerClass": "blackbelt",
-   "team": [
-    {
-     "speciesKey": "decidueye",
-     "level": 75
-    },
-    {
-     "speciesKey": "litten",
-     "level": 76
-    }
-   ]
-  },
-  {
-   "id": "alola-po-town_t3",
-   "name": "Alola Trainer 3",
-   "trainerClass": "swimmer",
-   "team": [
-    {
-     "speciesKey": "torracat",
-     "level": 76
-    },
-    {
-     "speciesKey": "incineroar",
-     "level": 77
-    }
-   ]
-  }
- ],
- "alola-paniola-town": [
-  {
-   "id": "alola-paniola-town_t1",
-   "name": "Alola Trainer 1",
-   "trainerClass": "ace",
-   "team": [
-    {
-     "speciesKey": "rowlet",
-     "level": 74
-    },
-    {
-     "speciesKey": "dartrix",
-     "level": 75
-    }
-   ]
-  },
-  {
-   "id": "alola-paniola-town_t2",
-   "name": "Alola Trainer 2",
-   "trainerClass": "blackbelt",
-   "team": [
-    {
-     "speciesKey": "decidueye",
-     "level": 75
-    },
-    {
-     "speciesKey": "litten",
-     "level": 76
-    }
-   ]
-  },
-  {
-   "id": "alola-paniola-town_t3",
    "name": "Alola Trainer 3",
    "trainerClass": "swimmer",
    "team": [
@@ -4654,6 +4560,53 @@
    ]
   }
  ],
+ "alola-paniola-town": [
+  {
+   "id": "alola-paniola-town_t1",
+   "name": "Alola Trainer 1",
+   "trainerClass": "ace",
+   "team": [
+    {
+     "speciesKey": "rowlet",
+     "level": 74
+    },
+    {
+     "speciesKey": "dartrix",
+     "level": 75
+    }
+   ]
+  },
+  {
+   "id": "alola-paniola-town_t2",
+   "name": "Alola Trainer 2",
+   "trainerClass": "blackbelt",
+   "team": [
+    {
+     "speciesKey": "decidueye",
+     "level": 75
+    },
+    {
+     "speciesKey": "litten",
+     "level": 76
+    }
+   ]
+  },
+  {
+   "id": "alola-paniola-town_t3",
+   "name": "Alola Trainer 3",
+   "trainerClass": "swimmer",
+   "team": [
+    {
+     "speciesKey": "torracat",
+     "level": 76
+    },
+    {
+     "speciesKey": "incineroar",
+     "level": 77
+    }
+   ]
+  }
+ ],
  "alola-konikoni-city": [
   {
    "id": "alola-konikoni-city_t1",
@@ -4748,6 +4701,53 @@
    ]
   }
  ],
+ "alola-po-town": [
+  {
+   "id": "alola-po-town_t1",
+   "name": "Alola Trainer 1",
+   "trainerClass": "ace",
+   "team": [
+    {
+     "speciesKey": "rowlet",
+     "level": 74
+    },
+    {
+     "speciesKey": "dartrix",
+     "level": 75
+    }
+   ]
+  },
+  {
+   "id": "alola-po-town_t2",
+   "name": "Alola Trainer 2",
+   "trainerClass": "blackbelt",
+   "team": [
+    {
+     "speciesKey": "decidueye",
+     "level": 75
+    },
+    {
+     "speciesKey": "litten",
+     "level": 76
+    }
+   ]
+  },
+  {
+   "id": "alola-po-town_t3",
+   "name": "Alola Trainer 3",
+   "trainerClass": "swimmer",
+   "team": [
+    {
+     "speciesKey": "torracat",
+     "level": 76
+    },
+    {
+     "speciesKey": "incineroar",
+     "level": 77
+    }
+   ]
+  }
+ ],
  "galar-postwick": [
   {
    "id": "galar-postwick_t1",
@@ -4781,53 +4781,6 @@
   },
   {
    "id": "galar-postwick_t3",
-   "name": "Galar Trainer 3",
-   "trainerClass": "bugCatcher",
-   "team": [
-    {
-     "speciesKey": "raboot",
-     "level": 85
-    },
-    {
-     "speciesKey": "cinderace",
-     "level": 86
-    }
-   ]
-  }
- ],
- "galar-hammerlocke": [
-  {
-   "id": "galar-hammerlocke_t1",
-   "name": "Galar Trainer 1",
-   "trainerClass": "youngster",
-   "team": [
-    {
-     "speciesKey": "grookey",
-     "level": 83
-    },
-    {
-     "speciesKey": "thwackey",
-     "level": 84
-    }
-   ]
-  },
-  {
-   "id": "galar-hammerlocke_t2",
-   "name": "Galar Trainer 2",
-   "trainerClass": "lass",
-   "team": [
-    {
-     "speciesKey": "rillaboom",
-     "level": 84
-    },
-    {
-     "speciesKey": "scorbunny",
-     "level": 85
-    }
-   ]
-  },
-  {
-   "id": "galar-hammerlocke_t3",
    "name": "Galar Trainer 3",
    "trainerClass": "bugCatcher",
    "team": [
@@ -4889,53 +4842,6 @@
    ]
   }
  ],
- "galar-ballonlea": [
-  {
-   "id": "galar-ballonlea_t1",
-   "name": "Galar Trainer 1",
-   "trainerClass": "youngster",
-   "team": [
-    {
-     "speciesKey": "grookey",
-     "level": 83
-    },
-    {
-     "speciesKey": "thwackey",
-     "level": 84
-    }
-   ]
-  },
-  {
-   "id": "galar-ballonlea_t2",
-   "name": "Galar Trainer 2",
-   "trainerClass": "lass",
-   "team": [
-    {
-     "speciesKey": "rillaboom",
-     "level": 84
-    },
-    {
-     "speciesKey": "scorbunny",
-     "level": 85
-    }
-   ]
-  },
-  {
-   "id": "galar-ballonlea_t3",
-   "name": "Galar Trainer 3",
-   "trainerClass": "bugCatcher",
-   "team": [
-    {
-     "speciesKey": "raboot",
-     "level": 85
-    },
-    {
-     "speciesKey": "cinderace",
-     "level": 86
-    }
-   ]
-  }
- ],
  "galar-motostoke": [
   {
    "id": "galar-motostoke_t1",
@@ -4983,6 +4889,53 @@
    ]
   }
  ],
+ "galar-hammerlocke": [
+  {
+   "id": "galar-hammerlocke_t1",
+   "name": "Galar Trainer 1",
+   "trainerClass": "youngster",
+   "team": [
+    {
+     "speciesKey": "grookey",
+     "level": 83
+    },
+    {
+     "speciesKey": "thwackey",
+     "level": 84
+    }
+   ]
+  },
+  {
+   "id": "galar-hammerlocke_t2",
+   "name": "Galar Trainer 2",
+   "trainerClass": "lass",
+   "team": [
+    {
+     "speciesKey": "rillaboom",
+     "level": 84
+    },
+    {
+     "speciesKey": "scorbunny",
+     "level": 85
+    }
+   ]
+  },
+  {
+   "id": "galar-hammerlocke_t3",
+   "name": "Galar Trainer 3",
+   "trainerClass": "bugCatcher",
+   "team": [
+    {
+     "speciesKey": "raboot",
+     "level": 85
+    },
+    {
+     "speciesKey": "cinderace",
+     "level": 86
+    }
+   ]
+  }
+ ],
  "galar-stow-on-side": [
   {
    "id": "galar-stow-on-side_t1",
@@ -5016,6 +4969,53 @@
   },
   {
    "id": "galar-stow-on-side_t3",
+   "name": "Galar Trainer 3",
+   "trainerClass": "bugCatcher",
+   "team": [
+    {
+     "speciesKey": "raboot",
+     "level": 85
+    },
+    {
+     "speciesKey": "cinderace",
+     "level": 86
+    }
+   ]
+  }
+ ],
+ "galar-ballonlea": [
+  {
+   "id": "galar-ballonlea_t1",
+   "name": "Galar Trainer 1",
+   "trainerClass": "youngster",
+   "team": [
+    {
+     "speciesKey": "grookey",
+     "level": 83
+    },
+    {
+     "speciesKey": "thwackey",
+     "level": 84
+    }
+   ]
+  },
+  {
+   "id": "galar-ballonlea_t2",
+   "name": "Galar Trainer 2",
+   "trainerClass": "lass",
+   "team": [
+    {
+     "speciesKey": "rillaboom",
+     "level": 84
+    },
+    {
+     "speciesKey": "scorbunny",
+     "level": 85
+    }
+   ]
+  },
+  {
+   "id": "galar-ballonlea_t3",
    "name": "Galar Trainer 3",
    "trainerClass": "bugCatcher",
    "team": [
@@ -5406,100 +5406,6 @@
    ]
   }
  ],
- "paldea-cascarrafa": [
-  {
-   "id": "paldea-cascarrafa_t1",
-   "name": "Paldea Trainer 1",
-   "trainerClass": "hiker",
-   "team": [
-    {
-     "speciesKey": "sprigatito",
-     "level": 92
-    },
-    {
-     "speciesKey": "floragato",
-     "level": 93
-    }
-   ]
-  },
-  {
-   "id": "paldea-cascarrafa_t2",
-   "name": "Paldea Trainer 2",
-   "trainerClass": "camper",
-   "team": [
-    {
-     "speciesKey": "meowscarada",
-     "level": 93
-    },
-    {
-     "speciesKey": "fuecoco",
-     "level": 94
-    }
-   ]
-  },
-  {
-   "id": "paldea-cascarrafa_t3",
-   "name": "Paldea Trainer 3",
-   "trainerClass": "beauty",
-   "team": [
-    {
-     "speciesKey": "crocalor",
-     "level": 94
-    },
-    {
-     "speciesKey": "skeledirge",
-     "level": 95
-    }
-   ]
-  }
- ],
- "paldea-porto-marinada": [
-  {
-   "id": "paldea-porto-marinada_t1",
-   "name": "Paldea Trainer 1",
-   "trainerClass": "hiker",
-   "team": [
-    {
-     "speciesKey": "sprigatito",
-     "level": 92
-    },
-    {
-     "speciesKey": "floragato",
-     "level": 93
-    }
-   ]
-  },
-  {
-   "id": "paldea-porto-marinada_t2",
-   "name": "Paldea Trainer 2",
-   "trainerClass": "camper",
-   "team": [
-    {
-     "speciesKey": "meowscarada",
-     "level": 93
-    },
-    {
-     "speciesKey": "fuecoco",
-     "level": 94
-    }
-   ]
-  },
-  {
-   "id": "paldea-porto-marinada_t3",
-   "name": "Paldea Trainer 3",
-   "trainerClass": "beauty",
-   "team": [
-    {
-     "speciesKey": "crocalor",
-     "level": 94
-    },
-    {
-     "speciesKey": "skeledirge",
-     "level": 95
-    }
-   ]
-  }
- ],
  "paldea-medali": [
   {
    "id": "paldea-medali_t1",
@@ -5688,53 +5594,6 @@
    ]
   }
  ],
- "paldea-montenevera": [
-  {
-   "id": "paldea-montenevera_t1",
-   "name": "Paldea Trainer 1",
-   "trainerClass": "hiker",
-   "team": [
-    {
-     "speciesKey": "sprigatito",
-     "level": 92
-    },
-    {
-     "speciesKey": "floragato",
-     "level": 93
-    }
-   ]
-  },
-  {
-   "id": "paldea-montenevera_t2",
-   "name": "Paldea Trainer 2",
-   "trainerClass": "camper",
-   "team": [
-    {
-     "speciesKey": "meowscarada",
-     "level": 93
-    },
-    {
-     "speciesKey": "fuecoco",
-     "level": 94
-    }
-   ]
-  },
-  {
-   "id": "paldea-montenevera_t3",
-   "name": "Paldea Trainer 3",
-   "trainerClass": "beauty",
-   "team": [
-    {
-     "speciesKey": "crocalor",
-     "level": 94
-    },
-    {
-     "speciesKey": "skeledirge",
-     "level": 95
-    }
-   ]
-  }
- ],
  "paldea-zapapico": [
   {
    "id": "paldea-zapapico_t1",
@@ -5782,6 +5641,100 @@
    ]
   }
  ],
+ "paldea-montenevera": [
+  {
+   "id": "paldea-montenevera_t1",
+   "name": "Paldea Trainer 1",
+   "trainerClass": "hiker",
+   "team": [
+    {
+     "speciesKey": "sprigatito",
+     "level": 92
+    },
+    {
+     "speciesKey": "floragato",
+     "level": 93
+    }
+   ]
+  },
+  {
+   "id": "paldea-montenevera_t2",
+   "name": "Paldea Trainer 2",
+   "trainerClass": "camper",
+   "team": [
+    {
+     "speciesKey": "meowscarada",
+     "level": 93
+    },
+    {
+     "speciesKey": "fuecoco",
+     "level": 94
+    }
+   ]
+  },
+  {
+   "id": "paldea-montenevera_t3",
+   "name": "Paldea Trainer 3",
+   "trainerClass": "beauty",
+   "team": [
+    {
+     "speciesKey": "crocalor",
+     "level": 94
+    },
+    {
+     "speciesKey": "skeledirge",
+     "level": 95
+    }
+   ]
+  }
+ ],
+ "paldea-cascarrafa": [
+  {
+   "id": "paldea-cascarrafa_t1",
+   "name": "Paldea Trainer 1",
+   "trainerClass": "hiker",
+   "team": [
+    {
+     "speciesKey": "sprigatito",
+     "level": 92
+    },
+    {
+     "speciesKey": "floragato",
+     "level": 93
+    }
+   ]
+  },
+  {
+   "id": "paldea-cascarrafa_t2",
+   "name": "Paldea Trainer 2",
+   "trainerClass": "camper",
+   "team": [
+    {
+     "speciesKey": "meowscarada",
+     "level": 93
+    },
+    {
+     "speciesKey": "fuecoco",
+     "level": 94
+    }
+   ]
+  },
+  {
+   "id": "paldea-cascarrafa_t3",
+   "name": "Paldea Trainer 3",
+   "trainerClass": "beauty",
+   "team": [
+    {
+     "speciesKey": "crocalor",
+     "level": 94
+    },
+    {
+     "speciesKey": "skeledirge",
+     "level": 95
+    }
+   ]
+  }
+ ],
  "paldea-levincia": [
   {
    "id": "paldea-levincia_t1",
@@ -5815,6 +5768,53 @@
   },
   {
    "id": "paldea-levincia_t3",
+   "name": "Paldea Trainer 3",
+   "trainerClass": "beauty",
+   "team": [
+    {
+     "speciesKey": "crocalor",
+     "level": 94
+    },
+    {
+     "speciesKey": "skeledirge",
+     "level": 95
+    }
+   ]
+  }
+ ],
+ "paldea-porto-marinada": [
+  {
+   "id": "paldea-porto-marinada_t1",
+   "name": "Paldea Trainer 1",
+   "trainerClass": "hiker",
+   "team": [
+    {
+     "speciesKey": "sprigatito",
+     "level": 92
+    },
+    {
+     "speciesKey": "floragato",
+     "level": 93
+    }
+   ]
+  },
+  {
+   "id": "paldea-porto-marinada_t2",
+   "name": "Paldea Trainer 2",
+   "trainerClass": "camper",
+   "team": [
+    {
+     "speciesKey": "meowscarada",
+     "level": 93
+    },
+    {
+     "speciesKey": "fuecoco",
+     "level": 94
+    }
+   ]
+  },
+  {
+   "id": "paldea-porto-marinada_t3",
    "name": "Paldea Trainer 3",
    "trainerClass": "beauty",
    "team": [

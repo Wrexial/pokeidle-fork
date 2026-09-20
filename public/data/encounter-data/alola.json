@@ -1,0 +1,1681 @@
+{
+ "alola-route-1--hauoli-outskirts": {
+  "name": "Route 1 (Hauoli Outskirts)",
+  "encounters": [
+   {
+    "speciesKey": "dartrix",
+    "weight": 20,
+    "minLevel": 81,
+    "maxLevel": 83
+   },
+   {
+    "speciesKey": "decidueye",
+    "weight": 20,
+    "minLevel": 81,
+    "maxLevel": 83
+   },
+   {
+    "speciesKey": "torracat",
+    "weight": 20,
+    "minLevel": 81,
+    "maxLevel": 83
+   },
+   {
+    "speciesKey": "incineroar",
+    "weight": 12,
+    "minLevel": 81,
+    "maxLevel": 83
+   },
+   {
+    "speciesKey": "brionne",
+    "weight": 12,
+    "minLevel": 81,
+    "maxLevel": 83
+   },
+   {
+    "speciesKey": "primarina",
+    "weight": 12,
+    "minLevel": 81,
+    "maxLevel": 83
+   },
+   {
+    "speciesKey": "pikipek",
+    "weight": 12,
+    "minLevel": 81,
+    "maxLevel": 83
+   },
+   {
+    "speciesKey": "trumbeak",
+    "weight": 12,
+    "minLevel": 81,
+    "maxLevel": 83
+   },
+   {
+    "speciesKey": "rowlet",
+    "weight": 1,
+    "minLevel": 81,
+    "maxLevel": 83
+   },
+   {
+    "speciesKey": "litten",
+    "weight": 1,
+    "minLevel": 81,
+    "maxLevel": 83
+   },
+   {
+    "speciesKey": "popplio",
+    "weight": 1,
+    "minLevel": 81,
+    "maxLevel": 83
+   }
+  ]
+ },
+ "alola-route-1": {
+  "name": "Route 1",
+  "encounters": [
+   {
+    "speciesKey": "gastly",
+    "weight": 25,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "drifloon",
+    "weight": 25,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "magnemite",
+    "weight": 13,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 13,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 10,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "finneon",
+    "weight": 10,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "caterpie",
+    "weight": 9,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "yungoos",
+    "weight": 9,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "buneary",
+    "weight": 8,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "happiny",
+    "weight": 8,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "inkay",
+    "weight": 8,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "bonsly",
+    "weight": 8,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "zorua",
+    "weight": 8,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "ledyba",
+    "weight": 5,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "spinarak",
+    "weight": 5,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "pikipek",
+    "weight": 5,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "slowpoke",
+    "weight": 5,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "rattata",
+    "weight": 5,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "rockruff",
+    "weight": 5,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "pikachu",
+    "weight": 4,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "grubbin",
+    "weight": 4,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "snorlax",
+    "weight": 4,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "sudowoodo",
+    "weight": 4,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "metapod",
+    "weight": 3,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "munchlax",
+    "weight": 3,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "pichu",
+    "weight": 1,
+    "minLevel": 73,
+    "maxLevel": 75
+   }
+  ]
+ },
+ "alola-route-10": {
+  "name": "Route 10",
+  "encounters": [
+   {
+    "speciesKey": "pidgeot",
+    "weight": 25,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "staravia",
+    "weight": 25,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "crabrawler",
+    "weight": 25,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "fearow",
+    "weight": 20,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "pineco",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "skarmory",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "gumshoos",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "ledian",
+    "weight": 5,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "ariados",
+    "weight": 5,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "pangoro",
+    "weight": 4,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "pancham",
+    "weight": 3,
+    "minLevel": 78,
+    "maxLevel": 80
+   }
+  ]
+ },
+ "alola-route-3": {
+  "name": "Route 3",
+  "encounters": [
+   {
+    "speciesKey": "charmander",
+    "weight": 25,
+    "minLevel": 74,
+    "maxLevel": 76
+   },
+   {
+    "speciesKey": "cyndaquil",
+    "weight": 25,
+    "minLevel": 74,
+    "maxLevel": 76
+   },
+   {
+    "speciesKey": "spearow",
+    "weight": 25,
+    "minLevel": 74,
+    "maxLevel": 76
+   },
+   {
+    "speciesKey": "crabrawler",
+    "weight": 25,
+    "minLevel": 74,
+    "maxLevel": 76
+   },
+   {
+    "speciesKey": "mankey",
+    "weight": 8,
+    "minLevel": 74,
+    "maxLevel": 76
+   },
+   {
+    "speciesKey": "rufflet",
+    "weight": 8,
+    "minLevel": 74,
+    "maxLevel": 76
+   },
+   {
+    "speciesKey": "vullaby",
+    "weight": 8,
+    "minLevel": 74,
+    "maxLevel": 76
+   },
+   {
+    "speciesKey": "cutiefly",
+    "weight": 8,
+    "minLevel": 74,
+    "maxLevel": 76
+   },
+   {
+    "speciesKey": "salamence",
+    "weight": 4,
+    "minLevel": 74,
+    "maxLevel": 76
+   },
+   {
+    "speciesKey": "delibird",
+    "weight": 3,
+    "minLevel": 74,
+    "maxLevel": 76
+   },
+   {
+    "speciesKey": "hawlucha",
+    "weight": 3,
+    "minLevel": 74,
+    "maxLevel": 76
+   },
+   {
+    "speciesKey": "yungoos",
+    "weight": 3,
+    "minLevel": 74,
+    "maxLevel": 76
+   },
+   {
+    "speciesKey": "bagon",
+    "weight": 1,
+    "minLevel": 74,
+    "maxLevel": 76
+   }
+  ]
+ },
+ "alola-route-2": {
+  "name": "Route 2",
+  "encounters": [
+   {
+    "speciesKey": "bulbasaur",
+    "weight": 25,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "machop",
+    "weight": 25,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "chikorita",
+    "weight": 25,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "hawlucha",
+    "weight": 25,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "crabrawler",
+    "weight": 25,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "ekans",
+    "weight": 18,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "drowzee",
+    "weight": 16,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "makuhita",
+    "weight": 16,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "dunsparce",
+    "weight": 4,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "spearow",
+    "weight": 3,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "growlithe",
+    "weight": 3,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "smeargle",
+    "weight": 3,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "yungoos",
+    "weight": 3,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "cutiefly",
+    "weight": 3,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "abra",
+    "weight": 3,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "furfrou",
+    "weight": 3,
+    "minLevel": 73,
+    "maxLevel": 75
+   }
+  ]
+ },
+ "alola-route-4": {
+  "name": "Route 4",
+  "encounters": [
+   {
+    "speciesKey": "beedrill",
+    "weight": 25,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "venipede",
+    "weight": 25,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "crabrawler",
+    "weight": 25,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "lillipup",
+    "weight": 13,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "pikipek",
+    "weight": 10,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "igglybuff",
+    "weight": 5,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "mudbray",
+    "weight": 5,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "jigglypuff",
+    "weight": 4,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "espeon",
+    "weight": 4,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "umbreon",
+    "weight": 4,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "happiny",
+    "weight": 4,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "yungoos",
+    "weight": 3,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "grubbin",
+    "weight": 3,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "eevee",
+    "weight": 1,
+    "minLevel": 75,
+    "maxLevel": 77
+   }
+  ]
+ },
+ "alola-route-11": {
+  "name": "Route 11",
+  "encounters": [
+   {
+    "speciesKey": "vigoroth",
+    "weight": 25,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "monferno",
+    "weight": 25,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "komala",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "ledian",
+    "weight": 5,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "ariados",
+    "weight": 5,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "pancham",
+    "weight": 5,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "trumbeak",
+    "weight": 5,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "gumshoos",
+    "weight": 5,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "pangoro",
+    "weight": 4,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "toucannon",
+    "weight": 4,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "paras",
+    "weight": 3,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "parasect",
+    "weight": 3,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "morelull",
+    "weight": 3,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "shiinotic",
+    "weight": 3,
+    "minLevel": 78,
+    "maxLevel": 80
+   }
+  ]
+ },
+ "alola-route-15": {
+  "name": "Route 15",
+  "encounters": [
+   {
+    "speciesKey": "sandygast",
+    "weight": 29,
+    "minLevel": 79,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "crabrawler",
+    "weight": 25,
+    "minLevel": 79,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "magikarp",
+    "weight": 18,
+    "minLevel": 79,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "pelipper",
+    "weight": 18,
+    "minLevel": 79,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 10,
+    "minLevel": 79,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "tentacruel",
+    "weight": 10,
+    "minLevel": 79,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "clamperl",
+    "weight": 10,
+    "minLevel": 79,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "finneon",
+    "weight": 10,
+    "minLevel": 79,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "bruxish",
+    "weight": 10,
+    "minLevel": 79,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "gyarados",
+    "weight": 8,
+    "minLevel": 79,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "huntail",
+    "weight": 8,
+    "minLevel": 79,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "gorebyss",
+    "weight": 8,
+    "minLevel": 79,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "gumshoos",
+    "weight": 8,
+    "minLevel": 79,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "slowpoke",
+    "weight": 5,
+    "minLevel": 79,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "lumineon",
+    "weight": 4,
+    "minLevel": 79,
+    "maxLevel": 81
+   }
+  ]
+ },
+ "alola-route-5": {
+  "name": "Route 5",
+  "encounters": [
+   {
+    "speciesKey": "bellsprout",
+    "weight": 25,
+    "minLevel": 76,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "grovyle",
+    "weight": 25,
+    "minLevel": 76,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "noibat",
+    "weight": 25,
+    "minLevel": 76,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "crabrawler",
+    "weight": 25,
+    "minLevel": 76,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "bounsweet",
+    "weight": 25,
+    "minLevel": 76,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "butterfree",
+    "weight": 8,
+    "minLevel": 76,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "caterpie",
+    "weight": 6,
+    "minLevel": 76,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "lillipup",
+    "weight": 5,
+    "minLevel": 76,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "pikipek",
+    "weight": 5,
+    "minLevel": 76,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "grubbin",
+    "weight": 5,
+    "minLevel": 76,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "fomantis",
+    "weight": 5,
+    "minLevel": 76,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "metapod",
+    "weight": 2,
+    "minLevel": 76,
+    "maxLevel": 78
+   }
+  ]
+ },
+ "alola-route-6": {
+  "name": "Route 6",
+  "encounters": [
+   {
+    "speciesKey": "ralts",
+    "weight": 25,
+    "minLevel": 76,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "gothita",
+    "weight": 25,
+    "minLevel": 76,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "lillipup",
+    "weight": 13,
+    "minLevel": 76,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "pikipek",
+    "weight": 10,
+    "minLevel": 76,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "igglybuff",
+    "weight": 5,
+    "minLevel": 76,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "mudbray",
+    "weight": 5,
+    "minLevel": 76,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "jigglypuff",
+    "weight": 4,
+    "minLevel": 76,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "espeon",
+    "weight": 4,
+    "minLevel": 76,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "umbreon",
+    "weight": 4,
+    "minLevel": 76,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "happiny",
+    "weight": 4,
+    "minLevel": 76,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "yungoos",
+    "weight": 3,
+    "minLevel": 76,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "grubbin",
+    "weight": 3,
+    "minLevel": 76,
+    "maxLevel": 78
+   },
+   {
+    "speciesKey": "eevee",
+    "weight": 1,
+    "minLevel": 76,
+    "maxLevel": 78
+   }
+  ]
+ },
+ "alola-route-9": {
+  "name": "Route 9",
+  "encounters": [
+   {
+    "speciesKey": "ditto",
+    "weight": 25,
+    "minLevel": 74,
+    "maxLevel": 76
+   },
+   {
+    "speciesKey": "luvdisc",
+    "weight": 13,
+    "minLevel": 74,
+    "maxLevel": 76
+   },
+   {
+    "speciesKey": "magikarp",
+    "weight": 5,
+    "minLevel": 74,
+    "maxLevel": 76
+   },
+   {
+    "speciesKey": "gyarados",
+    "weight": 4,
+    "minLevel": 74,
+    "maxLevel": 76
+   },
+   {
+    "speciesKey": "corsola",
+    "weight": 4,
+    "minLevel": 74,
+    "maxLevel": 76
+   },
+   {
+    "speciesKey": "mareanie",
+    "weight": 4,
+    "minLevel": 74,
+    "maxLevel": 76
+   }
+  ]
+ },
+ "alola-route-13": {
+  "name": "Route 13",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 14,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "gyarados",
+    "weight": 4,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "bruxish",
+    "weight": 1,
+    "minLevel": 75,
+    "maxLevel": 77
+   }
+  ]
+ },
+ "alola-route-16": {
+  "name": "Route 16",
+  "encounters": [
+   {
+    "speciesKey": "prinplup",
+    "weight": 25,
+    "minLevel": 80,
+    "maxLevel": 82
+   },
+   {
+    "speciesKey": "duosion",
+    "weight": 25,
+    "minLevel": 80,
+    "maxLevel": 82
+   },
+   {
+    "speciesKey": "crabrawler",
+    "weight": 25,
+    "minLevel": 80,
+    "maxLevel": 82
+   },
+   {
+    "speciesKey": "pelipper",
+    "weight": 13,
+    "minLevel": 80,
+    "maxLevel": 82
+   },
+   {
+    "speciesKey": "gumshoos",
+    "weight": 8,
+    "minLevel": 80,
+    "maxLevel": 82
+   },
+   {
+    "speciesKey": "scraggy",
+    "weight": 8,
+    "minLevel": 80,
+    "maxLevel": 82
+   },
+   {
+    "speciesKey": "slowpoke",
+    "weight": 5,
+    "minLevel": 80,
+    "maxLevel": 82
+   }
+  ]
+ },
+ "alola-route-14": {
+  "name": "Route 14",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 24,
+    "minLevel": 80,
+    "maxLevel": 82
+   },
+   {
+    "speciesKey": "pelipper",
+    "weight": 13,
+    "minLevel": 80,
+    "maxLevel": 82
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 10,
+    "minLevel": 80,
+    "maxLevel": 82
+   },
+   {
+    "speciesKey": "bruxish",
+    "weight": 10,
+    "minLevel": 80,
+    "maxLevel": 82
+   },
+   {
+    "speciesKey": "tentacruel",
+    "weight": 8,
+    "minLevel": 80,
+    "maxLevel": 82
+   },
+   {
+    "speciesKey": "gyarados",
+    "weight": 8,
+    "minLevel": 80,
+    "maxLevel": 82
+   },
+   {
+    "speciesKey": "finneon",
+    "weight": 8,
+    "minLevel": 80,
+    "maxLevel": 82
+   },
+   {
+    "speciesKey": "gumshoos",
+    "weight": 8,
+    "minLevel": 80,
+    "maxLevel": 82
+   },
+   {
+    "speciesKey": "snorunt",
+    "weight": 5,
+    "minLevel": 80,
+    "maxLevel": 82
+   },
+   {
+    "speciesKey": "absol",
+    "weight": 3,
+    "minLevel": 80,
+    "maxLevel": 82
+   }
+  ]
+ },
+ "alola-route-7": {
+  "name": "Route 7",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 25,
+    "minLevel": 77,
+    "maxLevel": 79
+   },
+   {
+    "speciesKey": "spheal",
+    "weight": 25,
+    "minLevel": 77,
+    "maxLevel": 79
+   },
+   {
+    "speciesKey": "staryu",
+    "weight": 10,
+    "minLevel": 77,
+    "maxLevel": 79
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 8,
+    "minLevel": 77,
+    "maxLevel": 79
+   },
+   {
+    "speciesKey": "starmie",
+    "weight": 8,
+    "minLevel": 77,
+    "maxLevel": 79
+   },
+   {
+    "speciesKey": "gyarados",
+    "weight": 8,
+    "minLevel": 77,
+    "maxLevel": 79
+   },
+   {
+    "speciesKey": "finneon",
+    "weight": 8,
+    "minLevel": 77,
+    "maxLevel": 79
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 5,
+    "minLevel": 77,
+    "maxLevel": 79
+   },
+   {
+    "speciesKey": "pyukumuku",
+    "weight": 5,
+    "minLevel": 77,
+    "maxLevel": 79
+   }
+  ]
+ },
+ "alola-route-8": {
+  "name": "Route 8",
+  "encounters": [
+   {
+    "speciesKey": "arbok",
+    "weight": 25,
+    "minLevel": 77,
+    "maxLevel": 79
+   },
+   {
+    "speciesKey": "combusken",
+    "weight": 25,
+    "minLevel": 77,
+    "maxLevel": 79
+   },
+   {
+    "speciesKey": "luxio",
+    "weight": 25,
+    "minLevel": 77,
+    "maxLevel": 79
+   },
+   {
+    "speciesKey": "crabrawler",
+    "weight": 25,
+    "minLevel": 77,
+    "maxLevel": 79
+   },
+   {
+    "speciesKey": "wimpod",
+    "weight": 25,
+    "minLevel": 77,
+    "maxLevel": 79
+   },
+   {
+    "speciesKey": "magikarp",
+    "weight": 23,
+    "minLevel": 77,
+    "maxLevel": 79
+   },
+   {
+    "speciesKey": "chinchou",
+    "weight": 10,
+    "minLevel": 77,
+    "maxLevel": 79
+   },
+   {
+    "speciesKey": "gyarados",
+    "weight": 8,
+    "minLevel": 77,
+    "maxLevel": 79
+   },
+   {
+    "speciesKey": "lanturn",
+    "weight": 8,
+    "minLevel": 77,
+    "maxLevel": 79
+   },
+   {
+    "speciesKey": "octillery",
+    "weight": 8,
+    "minLevel": 77,
+    "maxLevel": 79
+   },
+   {
+    "speciesKey": "trumbeak",
+    "weight": 8,
+    "minLevel": 77,
+    "maxLevel": 79
+   },
+   {
+    "speciesKey": "yungoos",
+    "weight": 8,
+    "minLevel": 77,
+    "maxLevel": 79
+   },
+   {
+    "speciesKey": "remoraid",
+    "weight": 5,
+    "minLevel": 77,
+    "maxLevel": 79
+   },
+   {
+    "speciesKey": "fletchling",
+    "weight": 4,
+    "minLevel": 77,
+    "maxLevel": 79
+   },
+   {
+    "speciesKey": "fletchinder",
+    "weight": 4,
+    "minLevel": 77,
+    "maxLevel": 79
+   },
+   {
+    "speciesKey": "pikipek",
+    "weight": 4,
+    "minLevel": 77,
+    "maxLevel": 79
+   },
+   {
+    "speciesKey": "gumshoos",
+    "weight": 4,
+    "minLevel": 77,
+    "maxLevel": 79
+   },
+   {
+    "speciesKey": "salandit",
+    "weight": 4,
+    "minLevel": 77,
+    "maxLevel": 79
+   },
+   {
+    "speciesKey": "stufful",
+    "weight": 3,
+    "minLevel": 77,
+    "maxLevel": 79
+   }
+  ]
+ },
+ "alola-route-12": {
+  "name": "Route 12",
+  "encounters": [
+   {
+    "speciesKey": "crabrawler",
+    "weight": 25,
+    "minLevel": 79,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "mudbray",
+    "weight": 8,
+    "minLevel": 79,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "houndoom",
+    "weight": 5,
+    "minLevel": 79,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "manectric",
+    "weight": 5,
+    "minLevel": 79,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "torkoal",
+    "weight": 5,
+    "minLevel": 79,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "chansey",
+    "weight": 4,
+    "minLevel": 79,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "electabuzz",
+    "weight": 4,
+    "minLevel": 79,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "mudsdale",
+    "weight": 4,
+    "minLevel": 79,
+    "maxLevel": 81
+   },
+   {
+    "speciesKey": "elekid",
+    "weight": 3,
+    "minLevel": 79,
+    "maxLevel": 81
+   }
+  ]
+ },
+ "alola-route-17": {
+  "name": "Route 17",
+  "encounters": [
+   {
+    "speciesKey": "kartana",
+    "weight": 50,
+    "minLevel": 81,
+    "maxLevel": 83
+   },
+   {
+    "speciesKey": "castform",
+    "weight": 28,
+    "minLevel": 81,
+    "maxLevel": 83
+   },
+   {
+    "speciesKey": "crabrawler",
+    "weight": 25,
+    "minLevel": 81,
+    "maxLevel": 83
+   },
+   {
+    "speciesKey": "scraggy",
+    "weight": 10,
+    "minLevel": 81,
+    "maxLevel": 83
+   },
+   {
+    "speciesKey": "fearow",
+    "weight": 9,
+    "minLevel": 81,
+    "maxLevel": 83
+   },
+   {
+    "speciesKey": "ariados",
+    "weight": 9,
+    "minLevel": 81,
+    "maxLevel": 83
+   },
+   {
+    "speciesKey": "pancham",
+    "weight": 5,
+    "minLevel": 81,
+    "maxLevel": 83
+   },
+   {
+    "speciesKey": "gumshoos",
+    "weight": 5,
+    "minLevel": 81,
+    "maxLevel": 83
+   },
+   {
+    "speciesKey": "ledian",
+    "weight": 5,
+    "minLevel": 81,
+    "maxLevel": 83
+   },
+   {
+    "speciesKey": "skarmory",
+    "weight": 4,
+    "minLevel": 81,
+    "maxLevel": 83
+   },
+   {
+    "speciesKey": "pawniard",
+    "weight": 4,
+    "minLevel": 81,
+    "maxLevel": 83
+   },
+   {
+    "speciesKey": "pangoro",
+    "weight": 4,
+    "minLevel": 81,
+    "maxLevel": 83
+   },
+   {
+    "speciesKey": "goomy",
+    "weight": 3,
+    "minLevel": 81,
+    "maxLevel": 83
+   },
+   {
+    "speciesKey": "bisharp",
+    "weight": 1,
+    "minLevel": 81,
+    "maxLevel": 83
+   }
+  ]
+ },
+ "alola-raid": {
+  "name": "Alola Raid Island",
+  "encounters": [
+   {
+    "speciesKey": "oricorio",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "wishiwashi",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "dewpider",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "araquanid",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "comfey",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "oranguru",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "passimian",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "type: null",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "silvally",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "minior",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "turtonator",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "togedemaru",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "mimikyu",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "drampa",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "dhelmise",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "jangmo-o",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "hakamo-o",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "kommo-o",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "tapu koko",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "tapu lele",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "tapu bulu",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "tapu fini",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "cosmog",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "cosmoem",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "solgaleo",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "lunala",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "nihilego",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "buzzwole",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "pheromosa",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "xurkitree",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "celesteela",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "guzzlord",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "necrozma",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "magearna",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "marshadow",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "poipole",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "naganadel",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "stakataka",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "blacephalon",
+    "weight": 1,
+    "minLevel": 98,
+    "maxLevel": 98
+   },
+   {
+    "speciesKey": "zeraora",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "meltan",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   },
+   {
+    "speciesKey": "melmetal",
+    "weight": 1,
+    "minLevel": 100,
+    "maxLevel": 100
+   }
+  ]
+ }
+}

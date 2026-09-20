@@ -636,26 +636,6 @@
     "level": 80
    },
    {
-    "speciesKey": "drilbur",
-    "level": 80
-   },
-   {
-    "speciesKey": "excadrill",
-    "level": 80
-   },
-   {
-    "speciesKey": "timburr",
-    "level": 80
-   },
-   {
-    "speciesKey": "gurdurr",
-    "level": 80
-   },
-   {
-    "speciesKey": "conkeldurr",
-    "level": 80
-   },
-   {
     "speciesKey": "tympole",
     "level": 80
    },
@@ -701,6 +681,14 @@
    },
    {
     "speciesKey": "zoroark",
+    "level": 80
+   },
+   {
+    "speciesKey": "ducklett",
+    "level": 80
+   },
+   {
+    "speciesKey": "swanna",
     "level": 80
    },
    {

@@ -18,6 +18,7 @@ const CACHE = path.join(__dirname, 'cache')
 const OUT = path.join(__dirname, 'route-encounters.json')
 const MAPS = path.join(__dirname, 'region-maps.json')
 const DATA = path.join(__dirname, '../public/data')
+const { readRegionDir } = require('./lib/region-data.cjs')
 const UA = 'PokemonIdle-encounter-research/1.0'
 const onlyArg = process.argv.find((a) => a.startsWith('--region='))
 const ONLY = onlyArg ? onlyArg.split('=')[1] : null
@@ -228,7 +229,7 @@ async function routeEncounters(regionId, routeSlug) {
   // Kanto locations come from the game's own map-data (already accurate), so map
   // each route/landmark id to its PokéAPI slug and refresh those buckets too.
   if (!ONLY || ONLY === 'kanto') {
-    const mapData = JSON.parse(fs.readFileSync(path.join(DATA, 'map-data.json'), 'utf8'))
+    const mapData = readRegionDir(path.join(DATA, 'map-data'))
     const kanto = await cacheGet('https://pokeapi.co/api/v2/region/1/', 'pokeapi-region-kanto.json')
     const slugs = kanto.locations.map((l) => l.name)
     const stripped = (s) => norm(s.replace(/^kanto-/, ''))

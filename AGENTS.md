@@ -177,8 +177,8 @@ These are loaded by `assets/gameDataInjector.js` (`key` → file):
 | `evolutionData` | `evolution-data.json` |
 | `moveLearnsets` | **`possible-learnsets.json`** |
 | `moveData` | **`possible-moves.json`** |
-| `mapEncounterData` | `encounter-data.json` |
-| `mapData` | `map-data.json` |
+| `mapEncounterData` | `encounter-data/<region>.json` (merged) |
+| `mapData` | `map-data/<region>.json` (merged) |
 | `trainerClasses` | `trainer-classes.json` |
 | `trainerData` | `trainer-data.json` |
 | `gymLeaderData` | `gym-leader-data.json` |
@@ -189,6 +189,13 @@ These are loaded by `assets/gameDataInjector.js` (`key` → file):
 **Watch out:** `move-data.json` and `move-learnsets.json` are *not* loaded by
 the injector — they are older/smaller files. The live move data is
 `possible-moves.json` / `possible-learnsets.json`. Don't edit the wrong pair.
+
+The map and encounter databases are **split one file per region** under
+`public/data/map-data/` and `public/data/encounter-data/` (`kanto.json` …
+`paldea.json`). The injector loads each file with `merge: true` and combines
+them, in region order, into the single `mapData` / `mapEncounterData` objects
+the app sees (`tools/lib/region-data.cjs` does the same for the Node tools).
+Edit a region's own file; don't reintroduce the monolithic JSON.
 
 Data conventions:
 
@@ -211,8 +218,8 @@ Data conventions:
   `startLevel`; `SELECT_STARTER` uses these to place the player: choosing a
   region's starter starts the run on that region's first route. Regional
   starters live in `regionalStarters` in `src/data/config.js`.
-- `map-data.json` locations carry a `region` id; wild routes also reference an
-  `encounter-data.json` bucket via `routeKey`. Unlock rules support
+- `map-data/<region>.json` locations carry a `region` id; wild routes also
+  reference an `encounter-data/<region>.json` bucket via `routeKey`. Unlock rules support
   `battlesAtLocation`, `badgesRequired`, `championDefeated` (a region id, or
   `true` meaning Kanto), and `requires` (locations that must already be
   unlocked) — all resolved to a fixpoint in `computeUnlockedLocations`. Region
@@ -272,6 +279,18 @@ One-off scripts used to build the data JSON (not run during dev/build):
   `tools/region-maps.json` (committed). Note Paldea is PokéAPI region **10**
   (region 9 is Hisui) and has no routes — its areas are the
   "<Dir> Province (Area N)" locations.
+
+  Bulbapedia routes often meet at intermediate areas (forests, gates, bridges,
+  lakes) that aren't separate locations, which used to leave whole chunks of a
+  region disconnected (e.g. Sinnoh's Snowpoint City, Kalos's western half,
+  Galar's Wild Area). The scraper now records those unresolved compass targets,
+  reads the connector's intro links back to real locations (`addConnectorHubs`),
+  lays the graph out with a synthetic hub per shared connector, then contracts
+  the hubs back out by chaining their neighbours (`contractHubs`). A few gaps
+  Bulbapedia never records are filled from `MANUAL_BRIDGES` (currently only
+  Galar's Wild Area links); keep that table tiny and verified. Anything still
+  unreachable is a genuinely separate area (post-game zones, Alola's islands,
+  open-world Paldea) and `generate-regions.cjs` stitches it on by proximity.
 - `scrape-route-encounters.cjs` — pulls real per-route wild encounters from
   PokéAPI (`/location` → `/location-area`), keeps only wild methods (drops
   gift/static), keeps only the region's preferred game versions (so no
@@ -282,8 +301,9 @@ One-off scripts used to build the data JSON (not run during dev/build):
 - `generate-regions.cjs` — turns `tools/region-maps.json` + `route-encounters.json` into game content
   (locations, encounters, trainers, marts, Raid Islands, and gym/Elite
   Four/Champion leagues) for generations 2-9, merging it into
-  `map-data.json` / `encounter-data.json` / `trainer-data.json` /
-  `gym-leader-data.json` / `elite-4-data.json` / `champion-data.json`, and
+  `map-data/<region>.json` / `encounter-data/<region>.json` /
+  `trainer-data.json` / `gym-leader-data.json` / `elite-4-data.json` /
+  `champion-data.json`, and
   writing `regions.json` (region metadata + per-region legendary pools).
   Idempotent — safe to re-run; tags Kanto locations/leaders with
   `region: "kanto"`. Routes without scraped encounters (e.g. Paldea's province
@@ -294,6 +314,14 @@ One-off scripts used to build the data JSON (not run during dev/build):
 - `RawMoveData`, `index-backup.js` — large reference/backup data; leave alone.
 - `kill-vite.cjs` — kills orphaned Vite dev servers on the port range (Windows
   `taskkill`, else `kill`). Run `npm run kill-vite`, or `--dry` to preview.
+- `lib/region-data.cjs` — `readRegionDir`/`writeRegionDir` for the split
+  `map-data/` and `encounter-data/` directories (used by `generate-regions.cjs`
+  and `scrape-route-encounters.cjs`).
+- `map-compare/` — visual sanity-check of the generated region layouts against
+  real region maps. `fetch-refs.cjs` downloads Bulbapedia references (gitignored
+  `refs/`); `render-region-maps.py` (uses Pillow from `.venv`) draws each
+  region's locations/roads from `public/data/map-data/` and writes side-by-side
+  composites to gitignored `out/`. Not part of the build.
 - `*.md` in `tools/` (`SUMMARY.md`, `DATA_INTEGRATION.md`,
   `REFACTORING_GUIDE.md`, `QUICKSTART_DATA_INTEGRATION.md`) — historical design
   docs. Some counts/claims there are outdated (e.g. they still say "151
@@ -311,6 +339,31 @@ These scripts hit external sites (Serebii, PokémonDB) and may write large files
   `/sprites/...`), served out of `public/`.
 - Keep diffs scoped; avoid touching `tools/index-backup.js`, `dist/`, and the
   committed base64/PNG assets unless the task requires it.
+
+## Git
+
+- **Always commit your work when a task is done — but never `git push`.**
+  Pushing is the maintainer's call; leaving finished work uncommitted is the
+  thing to avoid. One focused commit per logical change is ideal, but never
+  leave the tree dirty at the end of a task.
+- Write a good commit message: an imperative, capitalised subject line (no
+  trailing period, ~72 chars max), then a blank line and a body explaining
+  *what* changed and *why* when it isn't obvious. Mention notable side effects,
+  regenerated files, or follow-up work. For example:
+
+  ```
+  Split region data per map and reconnect the region graphs
+
+  - map-data/ and encounter-data/ are now one file per region; the injector
+    merges them back into mapData/mapEncounterData.
+  - scrape-region-maps bridges route connectors (forests, gates, bridges) so
+    the directional layout no longer fragments; regenerated all region data.
+
+  Side effects: gym locationKey order and Unova's raid pool shifted.
+  ```
+
+- Don't commit generated/junk artifacts (`dist/`, `tools/cache/`,
+  `tools/map-compare/refs|out/`, `node_modules/`).
 
 ## Verifying changes
 

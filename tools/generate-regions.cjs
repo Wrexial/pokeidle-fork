@@ -20,6 +20,7 @@ const path = require('path')
 const DATA = path.join(__dirname, '../public/data')
 const read = (f) => JSON.parse(fs.readFileSync(path.join(DATA, f), 'utf8'))
 const write = (f, v) => fs.writeFileSync(path.join(DATA, f), JSON.stringify(v, null, 1) + '\n')
+const { readRegionDir, writeRegionDir } = require('./lib/region-data.cjs')
 
 const GEN_RANGES = [
   [1, 151], [152, 251], [252, 386], [387, 493], [494, 649],
@@ -85,8 +86,8 @@ const realEncounters = fs.existsSync(path.join(__dirname, 'route-encounters.json
   : {}
 const species = read('pokemon-species.json')
 const evolutionData = read('evolution-data.json')
-const mapData = read('map-data.json')
-const encounterData = read('encounter-data.json')
+const mapData = readRegionDir(path.join(DATA, 'map-data'))
+const encounterData = readRegionDir(path.join(DATA, 'encounter-data'))
 const trainerData = read('trainer-data.json')
 
 // --- clean previous generated content ---------------------------------------
@@ -516,8 +517,12 @@ if (mapData.palletTown) mapData.palletTown.unlock = { entry: true, previous: 'pa
 if (mapData.route1) mapData.route1.unlock = { requires: ['palletTown'] }
 
 write('regions.json', regions)
-write('map-data.json', mapData)
-write('encounter-data.json', encounterData)
+writeRegionDir(path.join(DATA, 'map-data'), mapData)
+writeRegionDir(
+  path.join(DATA, 'encounter-data'),
+  encounterData,
+  (key) => mapData[key]?.region ?? 'kanto'
+)
 write('trainer-data.json', trainerData)
 write('gym-leader-data.json', gymData)
 write('elite-4-data.json', e4Data)

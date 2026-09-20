@@ -35,7 +35,8 @@
   "routeKey": "victoryRoad",
   "connections": [
    "route23",
-   "indigoPlat"
+   "indigoPlat",
+   "trainingArea"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -423,7 +424,8 @@
    "route4",
    "route24",
    "route5",
-   "route9"
+   "route9",
+   "ceruleanCave"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -632,7 +634,8 @@
   "description": "An abandoned plant crackling with electricity.",
   "routeKey": "powerPlant",
   "connections": [
-   "route10"
+   "route10",
+   "raidIsland"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1379,7 +1382,9 @@
   "name": "Raid Island",
   "type": "raid",
   "description": "A mysterious floating island where legendary Pokemon dwell.",
-  "connections": [],
+  "connections": [
+   "powerPlant"
+  ],
   "unlock": {
    "championDefeated": true
   },
@@ -1434,7 +1439,7 @@
   "unlockOrder": 100,
   "position": {
    "x": 94,
-   "y": 79
+   "y": 72
   },
   "mart": {
    "name": "Johto Mart",
@@ -1477,7 +1482,7 @@
   "unlockOrder": 101,
   "position": {
    "x": 83,
-   "y": 79
+   "y": 72
   }
  },
  "johto-cherrygrove-city": {
@@ -1501,7 +1506,7 @@
   "unlockOrder": 102,
   "position": {
    "x": 72,
-   "y": 79
+   "y": 72
   },
   "mart": {
    "name": "Johto Mart",
@@ -1546,7 +1551,7 @@
   "unlockOrder": 103,
   "position": {
    "x": 83,
-   "y": 65
+   "y": 61
   }
  },
  "johto-route-30": {
@@ -1571,7 +1576,7 @@
   "unlockOrder": 104,
   "position": {
    "x": 72,
-   "y": 65
+   "y": 61
   }
  },
  "johto-route-45": {
@@ -1596,7 +1601,7 @@
   "unlockOrder": 105,
   "position": {
    "x": 94,
-   "y": 65
+   "y": 61
   }
  },
  "johto-blackthorn-city": {
@@ -1676,7 +1681,8 @@
   "connections": [
    "johto-route-31",
    "johto-route-32",
-   "johto-route-36"
+   "johto-route-36",
+   "johto-route-33"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1733,7 +1739,32 @@
   "unlockOrder": 109,
   "position": {
    "x": 61,
-   "y": 65
+   "y": 61
+  }
+ },
+ "johto-route-33": {
+  "id": "johto-route-33",
+  "name": "Route 33",
+  "type": "route",
+  "region": "johto",
+  "description": "A route in the Johto region.",
+  "routeKey": "johto-route-33",
+  "connections": [
+   "johto-azalea-town",
+   "johto-violet-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-violet-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 110,
+  "position": {
+   "x": 65,
+   "y": 55
   }
  },
  "johto-route-36": {
@@ -1747,7 +1778,7 @@
    "johto-route-37",
    "johto-route-35",
    "johto-violet-city",
-   "johto-route-33"
+   "johto-azalea-town"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1757,36 +1788,10 @@
     }
    ]
   },
-  "unlockOrder": 110,
+  "unlockOrder": 111,
   "position": {
    "x": 50,
    "y": 50
-  }
- },
- "johto-route-33": {
-  "id": "johto-route-33",
-  "name": "Route 33",
-  "type": "route",
-  "region": "johto",
-  "description": "A route in the Johto region.",
-  "routeKey": "johto-route-33",
-  "connections": [
-   "johto-azalea-town",
-   "johto-route-36",
-   "johto-route-48"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "johto-route-36",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 111,
-  "position": {
-   "x": 47,
-   "y": 56
   }
  },
  "johto-route-35": {
@@ -1798,8 +1803,7 @@
   "routeKey": "johto-route-35",
   "connections": [
    "johto-goldenrod-city",
-   "johto-route-36",
-   "johto-route-47"
+   "johto-route-36"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1812,7 +1816,7 @@
   "unlockOrder": 112,
   "position": {
    "x": 50,
-   "y": 65
+   "y": 61
   }
  },
  "johto-route-37": {
@@ -1837,32 +1841,31 @@
   "unlockOrder": 113,
   "position": {
    "x": 50,
-   "y": 35
+   "y": 39
   }
  },
- "johto-ecruteak-city": {
-  "id": "johto-ecruteak-city",
-  "name": "Ecruteak City",
+ "johto-azalea-town": {
+  "id": "johto-azalea-town",
+  "name": "Azalea Town",
   "type": "town",
   "region": "johto",
   "description": "A town in the Johto region.",
   "connections": [
-   "johto-route-37",
-   "johto-route-42",
-   "johto-route-38"
+   "johto-route-33",
+   "johto-route-36"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "johto-route-37",
+     "locationId": "johto-route-36",
      "count": 15
     }
    ]
   },
   "unlockOrder": 114,
   "position": {
-   "x": 50,
-   "y": 21
+   "x": 54,
+   "y": 55
   },
   "mart": {
    "name": "Johto Mart",
@@ -1885,77 +1888,29 @@
    ]
   }
  },
- "johto-route-47": {
-  "id": "johto-route-47",
-  "name": "Route 47",
-  "type": "route",
+ "johto-ecruteak-city": {
+  "id": "johto-ecruteak-city",
+  "name": "Ecruteak City",
+  "type": "town",
   "region": "johto",
-  "description": "A route in the Johto region.",
-  "routeKey": "johto-route-47",
+  "description": "A town in the Johto region.",
   "connections": [
-   "johto-route-48",
-   "johto-route-35"
+   "johto-route-37",
+   "johto-route-42",
+   "johto-route-38"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "johto-route-35",
+     "locationId": "johto-route-37",
      "count": 15
     }
    ]
   },
   "unlockOrder": 115,
   "position": {
-   "x": 52,
-   "y": 71
-  }
- },
- "johto-route-48": {
-  "id": "johto-route-48",
-  "name": "Route 48",
-  "type": "route",
-  "region": "johto",
-  "description": "A route in the Johto region.",
-  "routeKey": "johto-route-48",
-  "connections": [
-   "johto-route-47",
-   "johto-route-33"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "johto-route-33",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 116,
-  "position": {
-   "x": 52,
-   "y": 56
-  }
- },
- "johto-azalea-town": {
-  "id": "johto-azalea-town",
-  "name": "Azalea Town",
-  "type": "town",
-  "region": "johto",
-  "description": "A town in the Johto region.",
-  "connections": [
-   "johto-route-33"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "johto-route-33",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 117,
-  "position": {
-   "x": 36,
-   "y": 56
+   "x": 50,
+   "y": 28
   },
   "mart": {
    "name": "Johto Mart",
@@ -1986,7 +1941,8 @@
   "description": "A town in the Johto region.",
   "connections": [
    "johto-route-34",
-   "johto-route-35"
+   "johto-route-35",
+   "johto-route-48"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1996,10 +1952,10 @@
     }
    ]
   },
-  "unlockOrder": 118,
+  "unlockOrder": 116,
   "position": {
    "x": 50,
-   "y": 79
+   "y": 72
   },
   "mart": {
    "name": "Johto Mart",
@@ -2030,7 +1986,8 @@
   "description": "A route in the Johto region.",
   "routeKey": "johto-route-34",
   "connections": [
-   "johto-goldenrod-city"
+   "johto-goldenrod-city",
+   "johto-route-47"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -2040,10 +1997,10 @@
     }
    ]
   },
-  "unlockOrder": 119,
+  "unlockOrder": 117,
   "position": {
    "x": 50,
-   "y": 94
+   "y": 83
   }
  },
  "johto-route-38": {
@@ -2065,10 +2022,10 @@
     }
    ]
   },
-  "unlockOrder": 120,
+  "unlockOrder": 118,
   "position": {
    "x": 39,
-   "y": 21
+   "y": 28
   }
  },
  "johto-route-42": {
@@ -2090,10 +2047,35 @@
     }
    ]
   },
-  "unlockOrder": 121,
+  "unlockOrder": 119,
   "position": {
    "x": 61,
-   "y": 21
+   "y": 28
+  }
+ },
+ "johto-route-48": {
+  "id": "johto-route-48",
+  "name": "Route 48",
+  "type": "route",
+  "region": "johto",
+  "description": "A route in the Johto region.",
+  "routeKey": "johto-route-48",
+  "connections": [
+   "johto-route-47",
+   "johto-goldenrod-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-goldenrod-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 120,
+  "position": {
+   "x": 55,
+   "y": 67
   }
  },
  "johto-route-39": {
@@ -2115,10 +2097,35 @@
     }
    ]
   },
-  "unlockOrder": 122,
+  "unlockOrder": 121,
   "position": {
    "x": 28,
-   "y": 21
+   "y": 28
+  }
+ },
+ "johto-route-47": {
+  "id": "johto-route-47",
+  "name": "Route 47",
+  "type": "route",
+  "region": "johto",
+  "description": "A route in the Johto region.",
+  "routeKey": "johto-route-47",
+  "connections": [
+   "johto-route-48",
+   "johto-route-34"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-route-34",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 122,
+  "position": {
+   "x": 55,
+   "y": 78
   }
  },
  "johto-mahogany-town": {
@@ -2143,7 +2150,7 @@
   "unlockOrder": 123,
   "position": {
    "x": 72,
-   "y": 21
+   "y": 28
   },
   "mart": {
    "name": "Johto Mart",
@@ -2187,7 +2194,7 @@
   "unlockOrder": 124,
   "position": {
    "x": 28,
-   "y": 35
+   "y": 39
   },
   "mart": {
    "name": "Johto Mart",
@@ -2231,7 +2238,7 @@
   "unlockOrder": 125,
   "position": {
    "x": 72,
-   "y": 6
+   "y": 17
   }
  },
  "johto-route-44": {
@@ -2255,7 +2262,7 @@
   "unlockOrder": 126,
   "position": {
    "x": 83,
-   "y": 21
+   "y": 28
   }
  },
  "johto-sea-route-40": {
@@ -2280,7 +2287,7 @@
   "unlockOrder": 127,
   "position": {
    "x": 17,
-   "y": 35
+   "y": 39
   }
  },
  "johto-sea-route-41": {
@@ -2292,7 +2299,8 @@
   "routeKey": "johto-sea-route-41",
   "connections": [
    "johto-cianwood-city",
-   "johto-sea-route-40"
+   "johto-sea-route-40",
+   "johto-raid"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -2371,8 +2379,8 @@
   },
   "unlockOrder": 130,
   "position": {
-   "x": 30,
-   "y": 44
+   "x": 35,
+   "y": 48
   }
  },
  "hoenn-littleroot-town": {
@@ -2389,8 +2397,8 @@
   },
   "unlockOrder": 131,
   "position": {
-   "x": 28,
-   "y": 93
+   "x": 30,
+   "y": 78
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -2431,8 +2439,8 @@
   },
   "unlockOrder": 132,
   "position": {
-   "x": 28,
-   "y": 79
+   "x": 29,
+   "y": 69
   }
  },
  "hoenn-oldale-town": {
@@ -2456,8 +2464,8 @@
   },
   "unlockOrder": 133,
   "position": {
-   "x": 28,
-   "y": 64
+   "x": 29,
+   "y": 60
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -2501,8 +2509,8 @@
   },
   "unlockOrder": 134,
   "position": {
-   "x": 21,
-   "y": 62
+   "x": 22,
+   "y": 59
   }
  },
  "hoenn-route-103": {
@@ -2527,7 +2535,7 @@
   "unlockOrder": 135,
   "position": {
    "x": 28,
-   "y": 52
+   "y": 53
   }
  },
  "hoenn-petalburg-city": {
@@ -2550,8 +2558,8 @@
   },
   "unlockOrder": 136,
   "position": {
-   "x": 13,
-   "y": 59
+   "x": 14,
+   "y": 58
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -2596,7 +2604,7 @@
   },
   "unlockOrder": 137,
   "position": {
-   "x": 35,
+   "x": 36,
    "y": 54
   }
  },
@@ -2621,8 +2629,8 @@
   },
   "unlockOrder": 138,
   "position": {
-   "x": 34,
-   "y": 70
+   "x": 35,
+   "y": 63
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -2668,7 +2676,7 @@
   "unlockOrder": 139,
   "position": {
    "x": 6,
-   "y": 57
+   "y": 56
   }
  },
  "hoenn-mauville-city": {
@@ -2694,7 +2702,7 @@
   "unlockOrder": 140,
   "position": {
    "x": 36,
-   "y": 40
+   "y": 46
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -2739,7 +2747,7 @@
   "unlockOrder": 141,
   "position": {
    "x": 7,
-   "y": 69
+   "y": 63
   }
  },
  "hoenn-route-109": {
@@ -2763,8 +2771,8 @@
   },
   "unlockOrder": 142,
   "position": {
-   "x": 33,
-   "y": 87
+   "x": 34,
+   "y": 73
   }
  },
  "hoenn-route-111": {
@@ -2790,7 +2798,7 @@
   "unlockOrder": 143,
   "position": {
    "x": 36,
-   "y": 26
+   "y": 38
   }
  },
  "hoenn-route-117": {
@@ -2815,7 +2823,7 @@
   "unlockOrder": 144,
   "position": {
    "x": 28,
-   "y": 40
+   "y": 46
   }
  },
  "hoenn-route-118": {
@@ -2841,7 +2849,7 @@
   "unlockOrder": 145,
   "position": {
    "x": 44,
-   "y": 41
+   "y": 45
   }
  },
  "hoenn-route-134": {
@@ -2866,7 +2874,7 @@
   "unlockOrder": 146,
   "position": {
    "x": 42,
-   "y": 70
+   "y": 63
   }
  },
  "hoenn-rustboro-city": {
@@ -2891,7 +2899,7 @@
   "unlockOrder": 147,
   "position": {
    "x": 6,
-   "y": 43
+   "y": 48
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -2936,7 +2944,7 @@
   "unlockOrder": 148,
   "position": {
    "x": 7,
-   "y": 82
+   "y": 71
   }
  },
  "hoenn-route-108": {
@@ -2961,7 +2969,7 @@
   "unlockOrder": 149,
   "position": {
    "x": 25,
-   "y": 89
+   "y": 74
   }
  },
  "hoenn-route-112": {
@@ -2985,8 +2993,8 @@
   },
   "unlockOrder": 150,
   "position": {
-   "x": 28,
-   "y": 26
+   "x": 26,
+   "y": 35
   }
  },
  "hoenn-route-113": {
@@ -3010,8 +3018,8 @@
   },
   "unlockOrder": 151,
   "position": {
-   "x": 33,
-   "y": 30
+   "x": 30,
+   "y": 40
   }
  },
  "hoenn-route-115": {
@@ -3035,7 +3043,7 @@
   "unlockOrder": 152,
   "position": {
    "x": 6,
-   "y": 28
+   "y": 39
   }
  },
  "hoenn-route-116": {
@@ -3059,7 +3067,7 @@
   "unlockOrder": 153,
   "position": {
    "x": 14,
-   "y": 43
+   "y": 48
   }
  },
  "hoenn-route-119": {
@@ -3083,8 +3091,8 @@
   },
   "unlockOrder": 154,
   "position": {
-   "x": 42,
-   "y": 24
+   "x": 46,
+   "y": 39
   }
  },
  "hoenn-route-123": {
@@ -3109,7 +3117,7 @@
   "unlockOrder": 155,
   "position": {
    "x": 55,
-   "y": 43
+   "y": 46
   }
  },
  "hoenn-route-133": {
@@ -3133,8 +3141,8 @@
   },
   "unlockOrder": 156,
   "position": {
-   "x": 49,
-   "y": 69
+   "x": 50,
+   "y": 62
   }
  },
  "hoenn-verdanturf-town": {
@@ -3157,7 +3165,7 @@
   "unlockOrder": 157,
   "position": {
    "x": 20,
-   "y": 40
+   "y": 46
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -3202,7 +3210,7 @@
   "unlockOrder": 158,
   "position": {
    "x": 16,
-   "y": 92
+   "y": 76
   }
  },
  "hoenn-route-122": {
@@ -3227,7 +3235,7 @@
   "unlockOrder": 159,
   "position": {
    "x": 57,
-   "y": 31
+   "y": 39
   }
  },
  "hoenn-route-132": {
@@ -3252,7 +3260,7 @@
   "unlockOrder": 160,
   "position": {
    "x": 57,
-   "y": 68
+   "y": 62
   }
  },
  "hoenn-dewford-town": {
@@ -3275,8 +3283,8 @@
   },
   "unlockOrder": 161,
   "position": {
-   "x": 8,
-   "y": 94
+   "x": 7,
+   "y": 78
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -3318,8 +3326,8 @@
   },
   "unlockOrder": 162,
   "position": {
-   "x": 20,
-   "y": 26
+   "x": 18,
+   "y": 35
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -3362,8 +3370,8 @@
   },
   "unlockOrder": 163,
   "position": {
-   "x": 25,
-   "y": 30
+   "x": 22,
+   "y": 40
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -3406,8 +3414,8 @@
   },
   "unlockOrder": 164,
   "position": {
-   "x": 48,
-   "y": 23
+   "x": 62,
+   "y": 46
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -3450,8 +3458,8 @@
   },
   "unlockOrder": 165,
   "position": {
-   "x": 12,
-   "y": 26
+   "x": 13,
+   "y": 39
   }
  },
  "hoenn-route-120": {
@@ -3475,8 +3483,8 @@
   },
   "unlockOrder": 166,
   "position": {
-   "x": 54,
-   "y": 21
+   "x": 53,
+   "y": 33
   }
  },
  "hoenn-route-121": {
@@ -3501,8 +3509,8 @@
   },
   "unlockOrder": 167,
   "position": {
-   "x": 60,
-   "y": 19
+   "x": 59,
+   "y": 31
   }
  },
  "hoenn-pacifidlog-town": {
@@ -3525,8 +3533,8 @@
   },
   "unlockOrder": 168,
   "position": {
-   "x": 64,
-   "y": 68
+   "x": 65,
+   "y": 61
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -3569,8 +3577,8 @@
   },
   "unlockOrder": 169,
   "position": {
-   "x": 68,
-   "y": 20
+   "x": 66,
+   "y": 31
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -3615,7 +3623,7 @@
   "unlockOrder": 170,
   "position": {
    "x": 72,
-   "y": 67
+   "y": 60
   }
  },
  "hoenn-route-124": {
@@ -3640,8 +3648,8 @@
   },
   "unlockOrder": 171,
   "position": {
-   "x": 77,
-   "y": 20
+   "x": 72,
+   "y": 30
   }
  },
  "hoenn-route-130": {
@@ -3665,8 +3673,8 @@
   },
   "unlockOrder": 172,
   "position": {
-   "x": 79,
-   "y": 67
+   "x": 80,
+   "y": 59
   }
  },
  "hoenn-mossdeep-city": {
@@ -3690,8 +3698,8 @@
   },
   "unlockOrder": 173,
   "position": {
-   "x": 85,
-   "y": 21
+   "x": 83,
+   "y": 31
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -3736,8 +3744,8 @@
   },
   "unlockOrder": 174,
   "position": {
-   "x": 77,
-   "y": 35
+   "x": 74,
+   "y": 40
   }
  },
  "hoenn-route-129": {
@@ -3761,8 +3769,8 @@
   },
   "unlockOrder": 175,
   "position": {
-   "x": 86,
-   "y": 66
+   "x": 87,
+   "y": 59
   }
  },
  "hoenn-sootopolis-city": {
@@ -3784,8 +3792,8 @@
   },
   "unlockOrder": 176,
   "position": {
-   "x": 77,
-   "y": 21
+   "x": 87,
+   "y": 40
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -3828,8 +3836,8 @@
   },
   "unlockOrder": 177,
   "position": {
-   "x": 85,
-   "y": 6
+   "x": 83,
+   "y": 22
   }
  },
  "hoenn-route-127": {
@@ -3854,8 +3862,8 @@
   },
   "unlockOrder": 178,
   "position": {
-   "x": 85,
-   "y": 35
+   "x": 94,
+   "y": 48
   }
  },
  "hoenn-route-128": {
@@ -3868,7 +3876,8 @@
   "connections": [
    "hoenn-ever-grande-city",
    "hoenn-route-127",
-   "hoenn-route-129"
+   "hoenn-route-129",
+   "hoenn-raid"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -3880,8 +3889,8 @@
   },
   "unlockOrder": 179,
   "position": {
-   "x": 86,
-   "y": 51
+   "x": 85,
+   "y": 49
   }
  },
  "hoenn-ever-grande-city": {
@@ -3903,8 +3912,8 @@
   },
   "unlockOrder": 180,
   "position": {
-   "x": 94,
-   "y": 51
+   "x": 19,
+   "y": 65
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -3947,8 +3956,8 @@
   },
   "unlockOrder": 181,
   "position": {
-   "x": 94,
-   "y": 45
+   "x": 93,
+   "y": 39
   }
  },
  "sinnoh-twinleaf-town": {
@@ -3966,7 +3975,7 @@
   "unlockOrder": 182,
   "position": {
    "x": 16,
-   "y": 79
+   "y": 69
   },
   "mart": {
    "name": "Sinnoh Mart",
@@ -4008,7 +4017,7 @@
   "unlockOrder": 183,
   "position": {
    "x": 16,
-   "y": 65
+   "y": 60
   }
  },
  "sinnoh-sandgem-town": {
@@ -4033,8 +4042,8 @@
   },
   "unlockOrder": 184,
   "position": {
-   "x": 26,
-   "y": 65
+   "x": 25,
+   "y": 60
   },
   "mart": {
    "name": "Sinnoh Mart",
@@ -4104,7 +4113,7 @@
   "unlockOrder": 186,
   "position": {
    "x": 26,
-   "y": 79
+   "y": 70
   }
  },
  "sinnoh-snowpoint-city": {
@@ -4126,8 +4135,8 @@
   },
   "unlockOrder": 187,
   "position": {
-   "x": 37,
-   "y": 70
+   "x": 32,
+   "y": 73
   },
   "mart": {
    "name": "Sinnoh Mart",
@@ -4171,8 +4180,8 @@
   },
   "unlockOrder": 188,
   "position": {
-   "x": 26,
-   "y": 94
+   "x": 25,
+   "y": 79
   }
  },
  "sinnoh-jubilife-city": {
@@ -4197,8 +4206,8 @@
   },
   "unlockOrder": 189,
   "position": {
-   "x": 26,
-   "y": 35
+   "x": 25,
+   "y": 40
   },
   "mart": {
    "name": "Sinnoh Mart",
@@ -4229,8 +4238,7 @@
   "description": "A route in the Sinnoh region.",
   "routeKey": "sinnoh-route-203",
   "connections": [
-   "sinnoh-jubilife-city",
-   "sinnoh-route-222"
+   "sinnoh-jubilife-city"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -4242,8 +4250,8 @@
   },
   "unlockOrder": 190,
   "position": {
-   "x": 36,
-   "y": 35
+   "x": 35,
+   "y": 41
   }
  },
  "sinnoh-route-204": {
@@ -4268,7 +4276,7 @@
   "unlockOrder": 191,
   "position": {
    "x": 26,
-   "y": 21
+   "y": 31
   }
  },
  "sinnoh-route-218": {
@@ -4293,7 +4301,7 @@
   "unlockOrder": 192,
   "position": {
    "x": 16,
-   "y": 35
+   "y": 41
   }
  },
  "sinnoh-route-221": {
@@ -4317,7 +4325,7 @@
   "unlockOrder": 193,
   "position": {
    "x": 36,
-   "y": 94
+   "y": 79
   }
  },
  "sinnoh-canalave-city": {
@@ -4340,7 +4348,7 @@
   "unlockOrder": 194,
   "position": {
    "x": 6,
-   "y": 35
+   "y": 40
   },
   "mart": {
    "name": "Sinnoh Mart",
@@ -4363,31 +4371,6 @@
    ]
   }
  },
- "sinnoh-route-222": {
-  "id": "sinnoh-route-222",
-  "name": "Route 222",
-  "type": "route",
-  "region": "sinnoh",
-  "description": "A route in the Sinnoh region.",
-  "routeKey": "sinnoh-route-222",
-  "connections": [
-   "sinnoh-sunyshore-city",
-   "sinnoh-route-203"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "sinnoh-route-203",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 195,
-  "position": {
-   "x": 32,
-   "y": 34
-  }
- },
  "sinnoh-floaroma-town": {
   "id": "sinnoh-floaroma-town",
   "name": "Floaroma Town",
@@ -4406,10 +4389,10 @@
     }
    ]
   },
-  "unlockOrder": 196,
+  "unlockOrder": 195,
   "position": {
-   "x": 26,
-   "y": 6
+   "x": 25,
+   "y": 21
   },
   "mart": {
    "name": "Sinnoh Mart",
@@ -4451,10 +4434,10 @@
     }
    ]
   },
-  "unlockOrder": 197,
+  "unlockOrder": 196,
   "position": {
-   "x": 35,
-   "y": 6
+   "x": 36,
+   "y": 21
   }
  },
  "sinnoh-eterna-city": {
@@ -4466,7 +4449,8 @@
   "connections": [
    "sinnoh-route-206",
    "sinnoh-route-211",
-   "sinnoh-route-205"
+   "sinnoh-route-205",
+   "sinnoh-route-217"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -4476,10 +4460,10 @@
     }
    ]
   },
-  "unlockOrder": 198,
+  "unlockOrder": 197,
   "position": {
    "x": 45,
-   "y": 6
+   "y": 20
   },
   "mart": {
    "name": "Sinnoh Mart",
@@ -4512,8 +4496,8 @@
   "connections": [
    "sinnoh-eterna-city",
    "sinnoh-route-207",
-   "sinnoh-route-217",
-   "sinnoh-sea-route-223"
+   "sinnoh-sunyshore-city",
+   "sinnoh-route-224"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -4523,10 +4507,10 @@
     }
    ]
   },
-  "unlockOrder": 199,
+  "unlockOrder": 198,
   "position": {
-   "x": 45,
-   "y": 21
+   "x": 46,
+   "y": 31
   }
  },
  "sinnoh-route-211": {
@@ -4548,36 +4532,10 @@
     }
    ]
   },
-  "unlockOrder": 200,
+  "unlockOrder": 199,
   "position": {
-   "x": 55,
-   "y": 6
-  }
- },
- "sinnoh-route-207": {
-  "id": "sinnoh-route-207",
-  "name": "Route 207",
-  "type": "route",
-  "region": "sinnoh",
-  "description": "A route in the Sinnoh region.",
-  "routeKey": "sinnoh-route-207",
-  "connections": [
-   "sinnoh-route-206",
-   "sinnoh-oreburgh-city",
-   "sinnoh-sunyshore-city"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "sinnoh-route-206",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 201,
-  "position": {
-   "x": 45,
-   "y": 36
+   "x": 56,
+   "y": 21
   }
  },
  "sinnoh-route-217": {
@@ -4589,6 +4547,31 @@
   "routeKey": "sinnoh-route-217",
   "connections": [
    "sinnoh-route-216",
+   "sinnoh-eterna-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-eterna-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 200,
+  "position": {
+   "x": 53,
+   "y": 33
+  }
+ },
+ "sinnoh-sunyshore-city": {
+  "id": "sinnoh-sunyshore-city",
+  "name": "Sunyshore City",
+  "type": "town",
+  "region": "sinnoh",
+  "description": "A town in the Sinnoh region.",
+  "connections": [
+   "sinnoh-sea-route-223",
+   "sinnoh-route-222",
    "sinnoh-route-206"
   ],
   "unlock": {
@@ -4599,34 +4582,10 @@
     }
    ]
   },
-  "unlockOrder": 202,
+  "unlockOrder": 201,
   "position": {
-   "x": 52,
-   "y": 26
-  }
- },
- "sinnoh-celestic-town": {
-  "id": "sinnoh-celestic-town",
-  "name": "Celestic Town",
-  "type": "town",
-  "region": "sinnoh",
-  "description": "A town in the Sinnoh region.",
-  "connections": [
-   "sinnoh-route-210",
-   "sinnoh-route-211"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "sinnoh-route-211",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 203,
-  "position": {
-   "x": 64,
-   "y": 6
+   "x": 40,
+   "y": 31
   },
   "mart": {
    "name": "Sinnoh Mart",
@@ -4649,16 +4608,16 @@
    ]
   }
  },
- "sinnoh-sea-route-223": {
-  "id": "sinnoh-sea-route-223",
-  "name": "Route 223",
+ "sinnoh-route-207": {
+  "id": "sinnoh-route-207",
+  "name": "Route 207",
   "type": "route",
   "region": "sinnoh",
   "description": "A route in the Sinnoh region.",
-  "routeKey": "sinnoh-sea-route-223",
+  "routeKey": "sinnoh-route-207",
   "connections": [
-   "sinnoh-sunyshore-city",
-   "sinnoh-route-206"
+   "sinnoh-route-206",
+   "sinnoh-oreburgh-city"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -4668,35 +4627,59 @@
     }
    ]
   },
-  "unlockOrder": 204,
+  "unlockOrder": 202,
   "position": {
-   "x": 42,
-   "y": 19
+   "x": 45,
+   "y": 40
   }
  },
- "sinnoh-sunyshore-city": {
-  "id": "sinnoh-sunyshore-city",
-  "name": "Sunyshore City",
-  "type": "town",
+ "sinnoh-route-224": {
+  "id": "sinnoh-route-224",
+  "name": "Route 224",
+  "type": "route",
   "region": "sinnoh",
-  "description": "A town in the Sinnoh region.",
+  "description": "A route in the Sinnoh region.",
+  "routeKey": "sinnoh-route-224",
   "connections": [
-   "sinnoh-sea-route-223",
-   "sinnoh-route-222",
-   "sinnoh-route-207"
+   "sinnoh-route-206",
+   "sinnoh-sea-route-223"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "sinnoh-route-207",
+     "locationId": "sinnoh-route-206",
      "count": 15
     }
    ]
   },
-  "unlockOrder": 205,
+  "unlockOrder": 203,
   "position": {
-   "x": 42,
-   "y": 34
+   "x": 62,
+   "y": 38
+  }
+ },
+ "sinnoh-celestic-town": {
+  "id": "sinnoh-celestic-town",
+  "name": "Celestic Town",
+  "type": "town",
+  "region": "sinnoh",
+  "description": "A town in the Sinnoh region.",
+  "connections": [
+   "sinnoh-route-210",
+   "sinnoh-route-211"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-211",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 204,
+  "position": {
+   "x": 64,
+   "y": 21
   },
   "mart": {
    "name": "Sinnoh Mart",
@@ -4739,10 +4722,59 @@
     }
    ]
   },
+  "unlockOrder": 205,
+  "position": {
+   "x": 75,
+   "y": 21
+  }
+ },
+ "sinnoh-route-222": {
+  "id": "sinnoh-route-222",
+  "name": "Route 222",
+  "type": "route",
+  "region": "sinnoh",
+  "description": "A route in the Sinnoh region.",
+  "routeKey": "sinnoh-route-222",
+  "connections": [
+   "sinnoh-sunyshore-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-sunyshore-city",
+     "count": 15
+    }
+   ]
+  },
   "unlockOrder": 206,
   "position": {
-   "x": 74,
-   "y": 7
+   "x": 54,
+   "y": 48
+  }
+ },
+ "sinnoh-sea-route-223": {
+  "id": "sinnoh-sea-route-223",
+  "name": "Route 223",
+  "type": "route",
+  "region": "sinnoh",
+  "description": "A route in the Sinnoh region.",
+  "routeKey": "sinnoh-sea-route-223",
+  "connections": [
+   "sinnoh-sunyshore-city",
+   "sinnoh-route-224"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-224",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 207,
+  "position": {
+   "x": 49,
+   "y": 25
   }
  },
  "sinnoh-oreburgh-city": {
@@ -4762,9 +4794,9 @@
     }
    ]
   },
-  "unlockOrder": 207,
+  "unlockOrder": 208,
   "position": {
-   "x": 45,
+   "x": 46,
    "y": 50
   },
   "mart": {
@@ -4807,10 +4839,10 @@
     }
    ]
   },
-  "unlockOrder": 208,
+  "unlockOrder": 209,
   "position": {
    "x": 84,
-   "y": 7
+   "y": 21
   }
  },
  "sinnoh-solaceon-town": {
@@ -4821,8 +4853,7 @@
   "description": "A town in the Sinnoh region.",
   "connections": [
    "sinnoh-route-209",
-   "sinnoh-route-210",
-   "sinnoh-route-227"
+   "sinnoh-route-210"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -4832,10 +4863,10 @@
     }
    ]
   },
-  "unlockOrder": 209,
+  "unlockOrder": 210,
   "position": {
    "x": 74,
-   "y": 21
+   "y": 31
   },
   "mart": {
    "name": "Sinnoh Mart",
@@ -4867,32 +4898,9 @@
   "routeKey": "sinnoh-route-209",
   "connections": [
    "sinnoh-solaceon-town",
-   "sinnoh-hearthome-city"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "sinnoh-solaceon-town",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 210,
-  "position": {
-   "x": 74,
-   "y": 36
-  }
- },
- "sinnoh-route-227": {
-  "id": "sinnoh-route-227",
-  "name": "Route 227",
-  "type": "route",
-  "region": "sinnoh",
-  "description": "A route in the Sinnoh region.",
-  "routeKey": "sinnoh-route-227",
-  "connections": [
-   "sinnoh-sea-route-226",
-   "sinnoh-solaceon-town"
+   "sinnoh-hearthome-city",
+   "sinnoh-route-225",
+   "sinnoh-route-227"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -4904,8 +4912,8 @@
   },
   "unlockOrder": 211,
   "position": {
-   "x": 70,
-   "y": 28
+   "x": 74,
+   "y": 41
   }
  },
  "sinnoh-veilstone-city": {
@@ -4929,7 +4937,7 @@
   "unlockOrder": 212,
   "position": {
    "x": 94,
-   "y": 7
+   "y": 21
   },
   "mart": {
    "name": "Sinnoh Mart",
@@ -4972,21 +4980,19 @@
   },
   "unlockOrder": 213,
   "position": {
-   "x": 94,
-   "y": 21
+   "x": 93,
+   "y": 31
   }
  },
- "sinnoh-hearthome-city": {
-  "id": "sinnoh-hearthome-city",
-  "name": "Hearthome City",
-  "type": "town",
+ "sinnoh-route-225": {
+  "id": "sinnoh-route-225",
+  "name": "Route 225",
+  "type": "route",
   "region": "sinnoh",
-  "description": "A town in the Sinnoh region.",
+  "description": "A route in the Sinnoh region.",
+  "routeKey": "sinnoh-route-225",
   "connections": [
-   "sinnoh-route-208",
-   "sinnoh-route-209",
-   "sinnoh-route-212",
-   "sinnoh-route-225"
+   "sinnoh-route-209"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -4998,8 +5004,58 @@
   },
   "unlockOrder": 214,
   "position": {
-   "x": 64,
-   "y": 36
+   "x": 81,
+   "y": 41
+  }
+ },
+ "sinnoh-route-227": {
+  "id": "sinnoh-route-227",
+  "name": "Route 227",
+  "type": "route",
+  "region": "sinnoh",
+  "description": "A route in the Sinnoh region.",
+  "routeKey": "sinnoh-route-227",
+  "connections": [
+   "sinnoh-sea-route-226",
+   "sinnoh-route-209"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-209",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 215,
+  "position": {
+   "x": 87,
+   "y": 44
+  }
+ },
+ "sinnoh-hearthome-city": {
+  "id": "sinnoh-hearthome-city",
+  "name": "Hearthome City",
+  "type": "town",
+  "region": "sinnoh",
+  "description": "A town in the Sinnoh region.",
+  "connections": [
+   "sinnoh-route-208",
+   "sinnoh-route-209",
+   "sinnoh-route-212"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-209",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 216,
+  "position": {
+   "x": 69,
+   "y": 45
   },
   "mart": {
    "name": "Sinnoh Mart",
@@ -5041,10 +5097,10 @@
     }
    ]
   },
-  "unlockOrder": 215,
+  "unlockOrder": 217,
   "position": {
-   "x": 54,
-   "y": 36
+   "x": 56,
+   "y": 42
   }
  },
  "sinnoh-route-212": {
@@ -5066,35 +5122,10 @@
     }
    ]
   },
-  "unlockOrder": 216,
+  "unlockOrder": 218,
   "position": {
-   "x": 64,
+   "x": 65,
    "y": 51
-  }
- },
- "sinnoh-route-225": {
-  "id": "sinnoh-route-225",
-  "name": "Route 225",
-  "type": "route",
-  "region": "sinnoh",
-  "description": "A route in the Sinnoh region.",
-  "routeKey": "sinnoh-route-225",
-  "connections": [
-   "sinnoh-hearthome-city",
-   "sinnoh-sea-route-226"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "sinnoh-hearthome-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 217,
-  "position": {
-   "x": 67,
-   "y": 41
   }
  },
  "sinnoh-pastoria-city": {
@@ -5106,6 +5137,7 @@
   "connections": [
    "sinnoh-route-213",
    "sinnoh-route-212",
+   "sinnoh-sea-route-226",
    "sinnoh-sea-route-230"
   ],
   "unlock": {
@@ -5116,10 +5148,10 @@
     }
    ]
   },
-  "unlockOrder": 218,
+  "unlockOrder": 219,
   "position": {
    "x": 74,
-   "y": 51
+   "y": 50
   },
   "mart": {
    "name": "Sinnoh Mart",
@@ -5151,8 +5183,7 @@
   "routeKey": "sinnoh-route-216",
   "connections": [
    "sinnoh-route-217",
-   "sinnoh-route-208",
-   "sinnoh-route-224"
+   "sinnoh-route-208"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -5162,36 +5193,10 @@
     }
    ]
   },
-  "unlockOrder": 219,
-  "position": {
-   "x": 52,
-   "y": 41
-  }
- },
- "sinnoh-sea-route-226": {
-  "id": "sinnoh-sea-route-226",
-  "name": "Route 226",
-  "type": "route",
-  "region": "sinnoh",
-  "description": "A route in the Sinnoh region.",
-  "routeKey": "sinnoh-sea-route-226",
-  "connections": [
-   "sinnoh-route-227",
-   "sinnoh-route-228",
-   "sinnoh-route-225"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "sinnoh-route-225",
-     "count": 15
-    }
-   ]
-  },
   "unlockOrder": 220,
   "position": {
-   "x": 70,
-   "y": 43
+   "x": 63,
+   "y": 44
   }
  },
  "sinnoh-route-213": {
@@ -5220,28 +5225,30 @@
    "y": 51
   }
  },
- "sinnoh-route-224": {
-  "id": "sinnoh-route-224",
-  "name": "Route 224",
+ "sinnoh-sea-route-226": {
+  "id": "sinnoh-sea-route-226",
+  "name": "Route 226",
   "type": "route",
   "region": "sinnoh",
   "description": "A route in the Sinnoh region.",
-  "routeKey": "sinnoh-route-224",
+  "routeKey": "sinnoh-sea-route-226",
   "connections": [
-   "sinnoh-route-216"
+   "sinnoh-route-227",
+   "sinnoh-route-228",
+   "sinnoh-pastoria-city"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "sinnoh-route-216",
+     "locationId": "sinnoh-pastoria-city",
      "count": 15
     }
    ]
   },
   "unlockOrder": 222,
   "position": {
-   "x": 57,
-   "y": 41
+   "x": 93,
+   "y": 58
   }
  },
  "sinnoh-sea-route-230": {
@@ -5265,8 +5272,8 @@
   },
   "unlockOrder": 223,
   "position": {
-   "x": 70,
-   "y": 57
+   "x": 82,
+   "y": 59
   }
  },
  "sinnoh-route-228": {
@@ -5291,8 +5298,8 @@
   },
   "unlockOrder": 224,
   "position": {
-   "x": 80,
-   "y": 43
+   "x": 92,
+   "y": 49
   }
  },
  "sinnoh-route-229": {
@@ -5305,7 +5312,8 @@
   "connections": [
    "sinnoh-route-228",
    "sinnoh-sea-route-230",
-   "sinnoh-route-213"
+   "sinnoh-route-213",
+   "sinnoh-raid"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -5317,8 +5325,8 @@
   },
   "unlockOrder": 225,
   "position": {
-   "x": 80,
-   "y": 57
+   "x": 4,
+   "y": 64
   }
  },
  "sinnoh-raid": {
@@ -5341,8 +5349,8 @@
   },
   "unlockOrder": 226,
   "position": {
-   "x": 93,
-   "y": 51
+   "x": 4,
+   "y": 50
   }
  },
  "unova-nuvema-town": {
@@ -5353,17 +5361,15 @@
   "description": "A town in the Unova region.",
   "connections": [
    "unova-route-1",
-   "unova-route-15",
-   "unova-route-gate",
-   "unova-humilau-city"
+   "unova-route-14"
   ],
   "unlock": {
    "championDefeated": "sinnoh"
   },
   "unlockOrder": 227,
   "position": {
-   "x": 36,
-   "y": 71
+   "x": 38,
+   "y": 57
   },
   "mart": {
    "name": "Unova Mart",
@@ -5397,7 +5403,9 @@
    "unova-nuvema-town",
    "unova-accumula-town",
    "unova-route-17",
-   "unova-castelia-city"
+   "unova-castelia-city",
+   "unova-route-4",
+   "unova-route-13"
   ],
   "unlock": {
    "requires": [
@@ -5406,21 +5414,22 @@
   },
   "unlockOrder": 228,
   "position": {
-   "x": 36,
-   "y": 54
+   "x": 46,
+   "y": 56
   }
  },
- "unova-route-15": {
-  "id": "unova-route-15",
-  "name": "Route 15",
+ "unova-route-14": {
+  "id": "unova-route-14",
+  "name": "Route 14",
   "type": "route",
   "region": "unova",
   "description": "A route in the Unova region.",
-  "routeKey": "unova-route-15",
+  "routeKey": "unova-route-14",
   "connections": [
+   "unova-undella-town",
    "unova-black-city",
    "unova-nuvema-town",
-   "unova-route-21"
+   "unova-route-15"
   ],
   "unlock": {
    "requires": [
@@ -5429,72 +5438,8 @@
   },
   "unlockOrder": 229,
   "position": {
-   "x": 44,
-   "y": 88
-  }
- },
- "unova-route-gate": {
-  "id": "unova-route-gate",
-  "name": "Route Gate",
-  "type": "route",
-  "region": "unova",
-  "description": "A route in the Unova region.",
-  "routeKey": "unova-route-gate",
-  "connections": [
-   "unova-nuvema-town",
-   "unova-route-22"
-  ],
-  "unlock": {
-   "requires": [
-    "unova-nuvema-town"
-   ]
-  },
-  "unlockOrder": 230,
-  "position": {
-   "x": 27,
-   "y": 74
-  }
- },
- "unova-humilau-city": {
-  "id": "unova-humilau-city",
-  "name": "Humilau City",
-  "type": "town",
-  "region": "unova",
-  "description": "A town in the Unova region.",
-  "connections": [
-   "unova-route-21",
-   "unova-route-22",
-   "unova-nuvema-town"
-  ],
-  "unlock": {
-   "requires": [
-    "unova-nuvema-town"
-   ]
-  },
-  "unlockOrder": 231,
-  "position": {
    "x": 37,
-   "y": 78
-  },
-  "mart": {
-   "name": "Unova Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
+   "y": 67
   }
  },
  "unova-accumula-town": {
@@ -5507,8 +5452,7 @@
    "unova-route-1",
    "unova-route-2",
    "unova-nimbasa-city",
-   "unova-route-4",
-   "unova-route-12"
+   "unova-route-5"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -5518,10 +5462,10 @@
     }
    ]
   },
-  "unlockOrder": 232,
+  "unlockOrder": 230,
   "position": {
-   "x": 36,
-   "y": 38
+   "x": 38,
+   "y": 37
   },
   "mart": {
    "name": "Unova Mart",
@@ -5553,7 +5497,6 @@
   "connections": [
    "unova-route-4",
    "unova-route-1",
-   "unova-route-14",
    "unova-undella-town"
   ],
   "unlock": {
@@ -5564,10 +5507,10 @@
     }
    ]
   },
-  "unlockOrder": 233,
+  "unlockOrder": 231,
   "position": {
-   "x": 50,
-   "y": 60
+   "x": 54,
+   "y": 65
   },
   "mart": {
    "name": "Unova Mart",
@@ -5588,6 +5531,85 @@
      "itemId": "honey"
     }
    ]
+  }
+ },
+ "unova-route-4": {
+  "id": "unova-route-4",
+  "name": "Route 4",
+  "type": "route",
+  "region": "unova",
+  "description": "A route in the Unova region.",
+  "routeKey": "unova-route-4",
+  "connections": [
+   "unova-castelia-city",
+   "unova-nimbasa-city",
+   "unova-route-1"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-1",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 232,
+  "position": {
+   "x": 43,
+   "y": 46
+  }
+ },
+ "unova-route-13": {
+  "id": "unova-route-13",
+  "name": "Route 13",
+  "type": "route",
+  "region": "unova",
+  "description": "A route in the Unova region.",
+  "routeKey": "unova-route-13",
+  "connections": [
+   "unova-undella-town",
+   "unova-lacunosa-town",
+   "unova-route-1"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-1",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 233,
+  "position": {
+   "x": 36,
+   "y": 48
+  }
+ },
+ "unova-route-15": {
+  "id": "unova-route-15",
+  "name": "Route 15",
+  "type": "route",
+  "region": "unova",
+  "description": "A route in the Unova region.",
+  "routeKey": "unova-route-15",
+  "connections": [
+   "unova-black-city",
+   "unova-route-14",
+   "unova-route-21",
+   "unova-route-23"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-14",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 234,
+  "position": {
+   "x": 28,
+   "y": 76
   }
  },
  "unova-route-17": {
@@ -5609,10 +5631,10 @@
     }
    ]
   },
-  "unlockOrder": 234,
+  "unlockOrder": 235,
   "position": {
-   "x": 26,
-   "y": 54
+   "x": 29,
+   "y": 48
   }
  },
  "unova-black-city": {
@@ -5629,15 +5651,15 @@
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "unova-route-15",
+     "locationId": "unova-route-14",
      "count": 15
     }
    ]
   },
-  "unlockOrder": 235,
+  "unlockOrder": 236,
   "position": {
-   "x": 54,
-   "y": 88
+   "x": 47,
+   "y": 71
   },
   "mart": {
    "name": "Unova Mart",
@@ -5658,57 +5680,6 @@
      "itemId": "honey"
     }
    ]
-  }
- },
- "unova-route-21": {
-  "id": "unova-route-21",
-  "name": "Route 21",
-  "type": "route",
-  "region": "unova",
-  "description": "A route in the Unova region.",
-  "routeKey": "unova-route-21",
-  "connections": [
-   "unova-humilau-city",
-   "unova-route-15",
-   "unova-route-23"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "unova-route-15",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 236,
-  "position": {
-   "x": 37,
-   "y": 94
-  }
- },
- "unova-route-22": {
-  "id": "unova-route-22",
-  "name": "Route 22",
-  "type": "route",
-  "region": "unova",
-  "description": "A route in the Unova region.",
-  "routeKey": "unova-route-22",
-  "connections": [
-   "unova-humilau-city",
-   "unova-route-gate"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "unova-route-gate",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 237,
-  "position": {
-   "x": 26,
-   "y": 78
   }
  },
  "unova-nimbasa-city": {
@@ -5733,10 +5704,10 @@
     }
    ]
   },
-  "unlockOrder": 238,
+  "unlockOrder": 237,
   "position": {
-   "x": 50,
-   "y": 27
+   "x": 44,
+   "y": 36
   },
   "mart": {
    "name": "Unova Mart",
@@ -5778,49 +5749,21 @@
     }
    ]
   },
-  "unlockOrder": 239,
+  "unlockOrder": 238,
   "position": {
-   "x": 26,
-   "y": 38
+   "x": 31,
+   "y": 42
   }
  },
- "unova-route-4": {
-  "id": "unova-route-4",
-  "name": "Route 4",
+ "unova-route-5": {
+  "id": "unova-route-5",
+  "name": "Route 5",
   "type": "route",
   "region": "unova",
   "description": "A route in the Unova region.",
-  "routeKey": "unova-route-4",
+  "routeKey": "unova-route-5",
   "connections": [
-   "unova-castelia-city",
    "unova-nimbasa-city",
-   "unova-accumula-town",
-   "unova-route-13",
-   "unova-lacunosa-town"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "unova-accumula-town",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 240,
-  "position": {
-   "x": 50,
-   "y": 43
-  }
- },
- "unova-route-12": {
-  "id": "unova-route-12",
-  "name": "Route 12",
-  "type": "route",
-  "region": "unova",
-  "description": "A route in the Unova region.",
-  "routeKey": "unova-route-12",
-  "connections": [
-   "unova-lacunosa-town",
    "unova-accumula-town"
   ],
   "unlock": {
@@ -5831,37 +5774,10 @@
     }
    ]
   },
-  "unlockOrder": 241,
+  "unlockOrder": 239,
   "position": {
-   "x": 34,
-   "y": 40
-  }
- },
- "unova-route-14": {
-  "id": "unova-route-14",
-  "name": "Route 14",
-  "type": "route",
-  "region": "unova",
-  "description": "A route in the Unova region.",
-  "routeKey": "unova-route-14",
-  "connections": [
-   "unova-undella-town",
-   "unova-black-city",
-   "unova-castelia-city",
-   "unova-route-19"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "unova-castelia-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 242,
-  "position": {
-   "x": 54,
-   "y": 72
+   "x": 32,
+   "y": 36
   }
  },
  "unova-route-18": {
@@ -5873,7 +5789,8 @@
   "routeKey": "unova-route-18",
   "connections": [
    "unova-route-17",
-   "unova-anville-town"
+   "unova-route-12",
+   "unova-route-gate"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -5883,10 +5800,54 @@
     }
    ]
   },
-  "unlockOrder": 243,
+  "unlockOrder": 240,
   "position": {
-   "x": 15,
-   "y": 54
+   "x": 22,
+   "y": 52
+  }
+ },
+ "unova-lacunosa-town": {
+  "id": "unova-lacunosa-town",
+  "name": "Lacunosa Town",
+  "type": "town",
+  "region": "unova",
+  "description": "A town in the Unova region.",
+  "connections": [
+   "unova-route-12",
+   "unova-route-13"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-13",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 241,
+  "position": {
+   "x": 53,
+   "y": 55
+  },
+  "mart": {
+   "name": "Unova Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
   }
  },
  "unova-undella-town": {
@@ -5908,10 +5869,10 @@
     }
    ]
   },
-  "unlockOrder": 244,
+  "unlockOrder": 242,
   "position": {
-   "x": 54,
-   "y": 56
+   "x": 58,
+   "y": 60
   },
   "mart": {
    "name": "Unova Mart",
@@ -5943,7 +5904,8 @@
   "connections": [
    "unova-route-19",
    "unova-black-city",
-   "unova-floccesy-town"
+   "unova-floccesy-town",
+   "unova-lentimas-town"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -5953,10 +5915,10 @@
     }
    ]
   },
-  "unlockOrder": 245,
+  "unlockOrder": 243,
   "position": {
    "x": 63,
-   "y": 88
+   "y": 68
   },
   "mart": {
    "name": "Unova Mart",
@@ -5979,6 +5941,31 @@
    ]
   }
  },
+ "unova-route-21": {
+  "id": "unova-route-21",
+  "name": "Route 21",
+  "type": "route",
+  "region": "unova",
+  "description": "A route in the Unova region.",
+  "routeKey": "unova-route-21",
+  "connections": [
+   "unova-humilau-city",
+   "unova-route-15"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-15",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 244,
+  "position": {
+   "x": 33,
+   "y": 81
+  }
+ },
  "unova-route-23": {
   "id": "unova-route-23",
   "name": "Route 23",
@@ -5987,20 +5974,20 @@
   "description": "A route in the Unova region.",
   "routeKey": "unova-route-23",
   "connections": [
-   "unova-route-21"
+   "unova-route-15"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "unova-route-21",
+     "locationId": "unova-route-15",
      "count": 15
     }
    ]
   },
-  "unlockOrder": 246,
+  "unlockOrder": 245,
   "position": {
-   "x": 27,
-   "y": 90
+   "x": 35,
+   "y": 89
   }
  },
  "unova-striaton-city": {
@@ -6021,10 +6008,10 @@
     }
    ]
   },
-  "unlockOrder": 247,
+  "unlockOrder": 246,
   "position": {
-   "x": 26,
-   "y": 22
+   "x": 29,
+   "y": 28
   },
   "mart": {
    "name": "Unova Mart",
@@ -6066,10 +6053,10 @@
     }
    ]
   },
-  "unlockOrder": 248,
+  "unlockOrder": 247,
   "position": {
-   "x": 68,
-   "y": 33
+   "x": 58,
+   "y": 37
   },
   "mart": {
    "name": "Unova Mart",
@@ -6090,30 +6077,6 @@
      "itemId": "honey"
     }
    ]
-  }
- },
- "unova-route-5": {
-  "id": "unova-route-5",
-  "name": "Route 5",
-  "type": "route",
-  "region": "unova",
-  "description": "A route in the Unova region.",
-  "routeKey": "unova-route-5",
-  "connections": [
-   "unova-nimbasa-city"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "unova-nimbasa-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 249,
-  "position": {
-   "x": 40,
-   "y": 27
   }
  },
  "unova-route-6": {
@@ -6136,91 +6099,23 @@
     }
    ]
   },
-  "unlockOrder": 250,
+  "unlockOrder": 248,
   "position": {
-   "x": 58,
-   "y": 33
+   "x": 48,
+   "y": 41
   }
  },
- "unova-route-13": {
-  "id": "unova-route-13",
-  "name": "Route 13",
+ "unova-route-12": {
+  "id": "unova-route-12",
+  "name": "Route 12",
   "type": "route",
   "region": "unova",
   "description": "A route in the Unova region.",
-  "routeKey": "unova-route-13",
+  "routeKey": "unova-route-12",
   "connections": [
-   "unova-undella-town",
    "unova-lacunosa-town",
-   "unova-route-4"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "unova-route-4",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 251,
-  "position": {
-   "x": 54,
-   "y": 40
-  }
- },
- "unova-lacunosa-town": {
-  "id": "unova-lacunosa-town",
-  "name": "Lacunosa Town",
-  "type": "town",
-  "region": "unova",
-  "description": "A town in the Unova region.",
-  "connections": [
-   "unova-route-12",
-   "unova-route-13",
-   "unova-route-4"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "unova-route-4",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 252,
-  "position": {
-   "x": 44,
-   "y": 40
-  },
-  "mart": {
-   "name": "Unova Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
-  }
- },
- "unova-anville-town": {
-  "id": "unova-anville-town",
-  "name": "Anville Town",
-  "type": "town",
-  "region": "unova",
-  "description": "A town in the Unova region.",
-  "connections": [
-   "unova-route-18"
+   "unova-route-18",
+   "unova-anville-town"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -6230,30 +6125,35 @@
     }
    ]
   },
-  "unlockOrder": 253,
+  "unlockOrder": 249,
   "position": {
-   "x": 6,
-   "y": 74
-  },
-  "mart": {
-   "name": "Unova Mart",
-   "items": [
+   "x": 28,
+   "y": 56
+  }
+ },
+ "unova-route-gate": {
+  "id": "unova-route-gate",
+  "name": "Route Gate",
+  "type": "route",
+  "region": "unova",
+  "description": "A route in the Unova region.",
+  "routeKey": "unova-route-gate",
+  "connections": [
+   "unova-route-18",
+   "unova-humilau-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
     {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
+     "locationId": "unova-route-18",
+     "count": 15
     }
    ]
+  },
+  "unlockOrder": 250,
+  "position": {
+   "x": 29,
+   "y": 62
   }
  },
  "unova-floccesy-town": {
@@ -6265,8 +6165,7 @@
   "connections": [
    "unova-route-20",
    "unova-route-19",
-   "unova-aspertia-city",
-   "unova-lentimas-town"
+   "unova-aspertia-city"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -6276,10 +6175,10 @@
     }
    ]
   },
-  "unlockOrder": 254,
+  "unlockOrder": 251,
   "position": {
-   "x": 73,
-   "y": 72
+   "x": 72,
+   "y": 58
   },
   "mart": {
    "name": "Unova Mart",
@@ -6302,30 +6201,48 @@
    ]
   }
  },
- "unova-route-19": {
-  "id": "unova-route-19",
-  "name": "Route 19",
-  "type": "route",
+ "unova-lentimas-town": {
+  "id": "unova-lentimas-town",
+  "name": "Lentimas Town",
+  "type": "town",
   "region": "unova",
-  "description": "A route in the Unova region.",
-  "routeKey": "unova-route-19",
+  "description": "A town in the Unova region.",
   "connections": [
    "unova-aspertia-city",
-   "unova-floccesy-town",
-   "unova-route-14"
+   "unova-route-19"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "unova-route-14",
+     "locationId": "unova-aspertia-city",
      "count": 15
     }
    ]
   },
-  "unlockOrder": 255,
+  "unlockOrder": 252,
   "position": {
-   "x": 63,
-   "y": 72
+   "x": 72,
+   "y": 68
+  },
+  "mart": {
+   "name": "Unova Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
   }
  },
  "unova-mistralton-city": {
@@ -6338,7 +6255,7 @@
    "unova-route-7",
    "unova-driftveil-city",
    "unova-icirrus-city",
-   "unova-route-9"
+   "unova-opelucid-city"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -6348,10 +6265,10 @@
     }
    ]
   },
-  "unlockOrder": 256,
+  "unlockOrder": 253,
   "position": {
-   "x": 74,
-   "y": 41
+   "x": 80,
+   "y": 43
   },
   "mart": {
    "name": "Unova Mart",
@@ -6393,10 +6310,10 @@
     }
    ]
   },
-  "unlockOrder": 257,
+  "unlockOrder": 254,
   "position": {
-   "x": 26,
-   "y": 6
+   "x": 36,
+   "y": 27
   }
  },
  "unova-route-16": {
@@ -6418,34 +6335,34 @@
     }
    ]
   },
-  "unlockOrder": 258,
+  "unlockOrder": 255,
   "position": {
-   "x": 61,
-   "y": 27
+   "x": 62,
+   "y": 45
   }
  },
- "unova-lentimas-town": {
-  "id": "unova-lentimas-town",
-  "name": "Lentimas Town",
+ "unova-anville-town": {
+  "id": "unova-anville-town",
+  "name": "Anville Town",
   "type": "town",
   "region": "unova",
   "description": "A town in the Unova region.",
   "connections": [
-   "unova-floccesy-town",
-   "unova-route-20"
+   "unova-route-12",
+   "unova-route-22"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "unova-floccesy-town",
+     "locationId": "unova-route-12",
      "count": 15
     }
    ]
   },
-  "unlockOrder": 259,
+  "unlockOrder": 256,
   "position": {
-   "x": 79,
-   "y": 74
+   "x": 6,
+   "y": 63
   },
   "mart": {
    "name": "Unova Mart",
@@ -6468,6 +6385,102 @@
    ]
   }
  },
+ "unova-humilau-city": {
+  "id": "unova-humilau-city",
+  "name": "Humilau City",
+  "type": "town",
+  "region": "unova",
+  "description": "A town in the Unova region.",
+  "connections": [
+   "unova-route-21",
+   "unova-route-22",
+   "unova-route-gate"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-gate",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 257,
+  "position": {
+   "x": 29,
+   "y": 68
+  },
+  "mart": {
+   "name": "Unova Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "unova-route-19": {
+  "id": "unova-route-19",
+  "name": "Route 19",
+  "type": "route",
+  "region": "unova",
+  "description": "A route in the Unova region.",
+  "routeKey": "unova-route-19",
+  "connections": [
+   "unova-aspertia-city",
+   "unova-floccesy-town",
+   "unova-lentimas-town"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-lentimas-town",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 258,
+  "position": {
+   "x": 78,
+   "y": 70
+  }
+ },
+ "unova-route-20": {
+  "id": "unova-route-20",
+  "name": "Route 20",
+  "type": "route",
+  "region": "unova",
+  "description": "A route in the Unova region.",
+  "routeKey": "unova-route-20",
+  "connections": [
+   "unova-virbank-city",
+   "unova-floccesy-town"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-floccesy-town",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 259,
+  "position": {
+   "x": 81,
+   "y": 58
+  }
+ },
  "unova-nacrene-city": {
   "id": "unova-nacrene-city",
   "name": "Nacrene City",
@@ -6487,8 +6500,8 @@
   },
   "unlockOrder": 260,
   "position": {
-   "x": 15,
-   "y": 6
+   "x": 20,
+   "y": 19
   },
   "mart": {
    "name": "Unova Mart",
@@ -6520,8 +6533,8 @@
   "connections": [
    "unova-route-8",
    "unova-mistralton-city",
-   "unova-opelucid-city",
-   "unova-route-7"
+   "unova-route-7",
+   "unova-route-9"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -6533,8 +6546,8 @@
   },
   "unlockOrder": 261,
   "position": {
-   "x": 79,
-   "y": 33
+   "x": 78,
+   "y": 36
   },
   "mart": {
    "name": "Unova Mart",
@@ -6555,57 +6568,6 @@
      "itemId": "honey"
     }
    ]
-  }
- },
- "unova-route-9": {
-  "id": "unova-route-9",
-  "name": "Route 9",
-  "type": "route",
-  "region": "unova",
-  "description": "A route in the Unova region.",
-  "routeKey": "unova-route-9",
-  "connections": [
-   "unova-opelucid-city",
-   "unova-mistralton-city"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "unova-mistralton-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 262,
-  "position": {
-   "x": 71,
-   "y": 39
-  }
- },
- "unova-route-20": {
-  "id": "unova-route-20",
-  "name": "Route 20",
-  "type": "route",
-  "region": "unova",
-  "description": "A route in the Unova region.",
-  "routeKey": "unova-route-20",
-  "connections": [
-   "unova-virbank-city",
-   "unova-floccesy-town",
-   "unova-lentimas-town"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "unova-lentimas-town",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 263,
-  "position": {
-   "x": 84,
-   "y": 72
   }
  },
  "unova-opelucid-city": {
@@ -6618,21 +6580,21 @@
    "unova-route-10",
    "unova-route-11",
    "unova-route-9",
-   "unova-icirrus-city",
-   "unova-route-8"
+   "unova-mistralton-city",
+   "unova-virbank-city"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "unova-icirrus-city",
+     "locationId": "unova-mistralton-city",
      "count": 15
     }
    ]
   },
-  "unlockOrder": 264,
+  "unlockOrder": 262,
   "position": {
-   "x": 82,
-   "y": 39
+   "x": 89,
+   "y": 40
   },
   "mart": {
    "name": "Unova Mart",
@@ -6655,6 +6617,31 @@
    ]
   }
  },
+ "unova-route-22": {
+  "id": "unova-route-22",
+  "name": "Route 22",
+  "type": "route",
+  "region": "unova",
+  "description": "A route in the Unova region.",
+  "routeKey": "unova-route-22",
+  "connections": [
+   "unova-humilau-city",
+   "unova-anville-town"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-anville-town",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 263,
+  "position": {
+   "x": 14,
+   "y": 64
+  }
+ },
  "unova-route-7": {
   "id": "unova-route-7",
   "name": "Route 7",
@@ -6664,6 +6651,30 @@
   "routeKey": "unova-route-7",
   "connections": [
    "unova-mistralton-city",
+   "unova-icirrus-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-icirrus-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 264,
+  "position": {
+   "x": 73,
+   "y": 32
+  }
+ },
+ "unova-route-8": {
+  "id": "unova-route-8",
+  "name": "Route 8",
+  "type": "route",
+  "region": "unova",
+  "description": "A route in the Unova region.",
+  "routeKey": "unova-route-8",
+  "connections": [
    "unova-icirrus-city",
    "unova-route-10"
   ],
@@ -6677,59 +6688,33 @@
   },
   "unlockOrder": 265,
   "position": {
-   "x": 74,
-   "y": 25
+   "x": 84,
+   "y": 36
   }
  },
- "unova-route-8": {
-  "id": "unova-route-8",
-  "name": "Route 8",
+ "unova-route-9": {
+  "id": "unova-route-9",
+  "name": "Route 9",
   "type": "route",
   "region": "unova",
   "description": "A route in the Unova region.",
-  "routeKey": "unova-route-8",
+  "routeKey": "unova-route-9",
   "connections": [
-   "unova-icirrus-city",
    "unova-opelucid-city",
-   "unova-route-11"
+   "unova-icirrus-city"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "unova-opelucid-city",
+     "locationId": "unova-icirrus-city",
      "count": 15
     }
    ]
   },
   "unlockOrder": 266,
   "position": {
-   "x": 89,
-   "y": 33
-  }
- },
- "unova-route-10": {
-  "id": "unova-route-10",
-  "name": "Route 10",
-  "type": "route",
-  "region": "unova",
-  "description": "A route in the Unova region.",
-  "routeKey": "unova-route-10",
-  "connections": [
-   "unova-opelucid-city",
-   "unova-route-7"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "unova-route-7",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 267,
-  "position": {
-   "x": 82,
-   "y": 23
+   "x": 85,
+   "y": 48
   }
  },
  "unova-route-11": {
@@ -6740,22 +6725,20 @@
   "description": "A route in the Unova region.",
   "routeKey": "unova-route-11",
   "connections": [
-   "unova-opelucid-city",
-   "unova-route-8",
-   "unova-virbank-city"
+   "unova-opelucid-city"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "unova-route-8",
+     "locationId": "unova-opelucid-city",
      "count": 15
     }
    ]
   },
-  "unlockOrder": 268,
+  "unlockOrder": 267,
   "position": {
-   "x": 92,
-   "y": 39
+   "x": 95,
+   "y": 40
   }
  },
  "unova-virbank-city": {
@@ -6766,20 +6749,20 @@
   "description": "A town in the Unova region.",
   "connections": [
    "unova-route-20",
-   "unova-route-11"
+   "unova-opelucid-city"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "unova-route-11",
+     "locationId": "unova-opelucid-city",
      "count": 15
     }
    ]
   },
-  "unlockOrder": 269,
+  "unlockOrder": 268,
   "position": {
-   "x": 94,
-   "y": 72
+   "x": 91,
+   "y": 58
   },
   "mart": {
    "name": "Unova Mart",
@@ -6802,6 +6785,32 @@
    ]
   }
  },
+ "unova-route-10": {
+  "id": "unova-route-10",
+  "name": "Route 10",
+  "type": "route",
+  "region": "unova",
+  "description": "A route in the Unova region.",
+  "routeKey": "unova-route-10",
+  "connections": [
+   "unova-opelucid-city",
+   "unova-route-8",
+   "unova-raid"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-8",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 269,
+  "position": {
+   "x": 85,
+   "y": 30
+  }
+ },
  "unova-raid": {
   "id": "unova-raid",
   "name": "Unova Raid Island",
@@ -6810,20 +6819,20 @@
   "description": "A mysterious island where Unova's rarest Pokemon dwell.",
   "routeKey": "unova-raid",
   "connections": [
-   "unova-route-11"
+   "unova-route-10"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "unova-route-11",
+     "locationId": "unova-route-10",
      "count": 20
     }
    ]
   },
   "unlockOrder": 270,
   "position": {
-   "x": 14,
-   "y": 33
+   "x": 93,
+   "y": 20
   }
  },
  "kalos-vaniville-town": {
@@ -6835,16 +6844,16 @@
   "connections": [
    "kalos-route-1",
    "kalos-route-3",
-   "kalos-camphrier-town",
-   "kalos-route-7"
+   "kalos-route-6",
+   "kalos-shalour-city"
   ],
   "unlock": {
    "championDefeated": "unova"
   },
   "unlockOrder": 271,
   "position": {
-   "x": 16,
-   "y": 49
+   "x": 13,
+   "y": 41
   },
   "mart": {
    "name": "Kalos Mart",
@@ -6876,10 +6885,7 @@
   "routeKey": "kalos-route-1",
   "connections": [
    "kalos-vaniville-town",
-   "kalos-aquacorde-town",
-   "kalos-route-6",
-   "kalos-shalour-city",
-   "kalos-route-12"
+   "kalos-aquacorde-town"
   ],
   "unlock": {
    "requires": [
@@ -6888,8 +6894,8 @@
   },
   "unlockOrder": 272,
   "position": {
-   "x": 16,
-   "y": 35
+   "x": 6,
+   "y": 34
   }
  },
  "kalos-route-3": {
@@ -6911,17 +6917,17 @@
   "unlockOrder": 273,
   "position": {
    "x": 44,
-   "y": 94
+   "y": 90
   }
  },
- "kalos-camphrier-town": {
-  "id": "kalos-camphrier-town",
-  "name": "Camphrier Town",
-  "type": "town",
+ "kalos-route-6": {
+  "id": "kalos-route-6",
+  "name": "Route 6",
+  "type": "route",
   "region": "kalos",
-  "description": "A town in the Kalos region.",
+  "description": "A route in the Kalos region.",
+  "routeKey": "kalos-route-6",
   "connections": [
-   "kalos-route-5",
    "kalos-route-7",
    "kalos-vaniville-town"
   ],
@@ -6932,8 +6938,29 @@
   },
   "unlockOrder": 274,
   "position": {
-   "x": 19,
-   "y": 51
+   "x": 6,
+   "y": 42
+  }
+ },
+ "kalos-shalour-city": {
+  "id": "kalos-shalour-city",
+  "name": "Shalour City",
+  "type": "town",
+  "region": "kalos",
+  "description": "A town in the Kalos region.",
+  "connections": [
+   "kalos-route-12",
+   "kalos-vaniville-town"
+  ],
+  "unlock": {
+   "requires": [
+    "kalos-vaniville-town"
+   ]
+  },
+  "unlockOrder": 275,
+  "position": {
+   "x": 13,
+   "y": 34
   },
   "mart": {
    "name": "Kalos Mart",
@@ -6956,29 +6983,6 @@
    ]
   }
  },
- "kalos-route-7": {
-  "id": "kalos-route-7",
-  "name": "Route 7",
-  "type": "route",
-  "region": "kalos",
-  "description": "A route in the Kalos region.",
-  "routeKey": "kalos-route-7",
-  "connections": [
-   "kalos-camphrier-town",
-   "kalos-route-6",
-   "kalos-vaniville-town"
-  ],
-  "unlock": {
-   "requires": [
-    "kalos-vaniville-town"
-   ]
-  },
-  "unlockOrder": 275,
-  "position": {
-   "x": 6,
-   "y": 51
-  }
- },
  "kalos-aquacorde-town": {
   "id": "kalos-aquacorde-town",
   "name": "Aquacorde Town",
@@ -6999,8 +7003,8 @@
   },
   "unlockOrder": 276,
   "position": {
-   "x": 16,
-   "y": 20
+   "x": 13,
+   "y": 17
   },
   "mart": {
    "name": "Kalos Mart",
@@ -7045,7 +7049,7 @@
   "unlockOrder": 277,
   "position": {
    "x": 44,
-   "y": 80
+   "y": 78
   },
   "mart": {
    "name": "Kalos Mart",
@@ -7068,73 +7072,29 @@
    ]
   }
  },
- "kalos-route-6": {
-  "id": "kalos-route-6",
-  "name": "Route 6",
+ "kalos-route-7": {
+  "id": "kalos-route-7",
+  "name": "Route 7",
   "type": "route",
   "region": "kalos",
   "description": "A route in the Kalos region.",
-  "routeKey": "kalos-route-6",
+  "routeKey": "kalos-route-7",
   "connections": [
-   "kalos-route-7",
-   "kalos-route-1"
+   "kalos-camphrier-town",
+   "kalos-route-6"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "kalos-route-1",
+     "locationId": "kalos-route-6",
      "count": 15
     }
    ]
   },
   "unlockOrder": 278,
   "position": {
-   "x": 6,
-   "y": 37
-  }
- },
- "kalos-shalour-city": {
-  "id": "kalos-shalour-city",
-  "name": "Shalour City",
-  "type": "town",
-  "region": "kalos",
-  "description": "A town in the Kalos region.",
-  "connections": [
-   "kalos-route-12",
-   "kalos-route-1"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "kalos-route-1",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 279,
-  "position": {
-   "x": 12,
-   "y": 30
-  },
-  "mart": {
-   "name": "Kalos Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
+   "x": 7,
+   "y": 53
   }
  },
  "kalos-route-12": {
@@ -7146,21 +7106,20 @@
   "routeKey": "kalos-route-12",
   "connections": [
    "kalos-shalour-city",
-   "kalos-coumarine-city",
-   "kalos-route-1"
+   "kalos-coumarine-city"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "kalos-route-1",
+     "locationId": "kalos-shalour-city",
      "count": 15
     }
    ]
   },
-  "unlockOrder": 280,
+  "unlockOrder": 279,
   "position": {
-   "x": 25,
-   "y": 30
+   "x": 26,
+   "y": 36
   }
  },
  "kalos-route-2": {
@@ -7181,10 +7140,10 @@
     }
    ]
   },
-  "unlockOrder": 281,
+  "unlockOrder": 280,
   "position": {
-   "x": 16,
-   "y": 6
+   "x": 6,
+   "y": 10
   }
  },
  "kalos-route-4": {
@@ -7207,10 +7166,10 @@
     }
    ]
   },
-  "unlockOrder": 282,
+  "unlockOrder": 281,
   "position": {
    "x": 44,
-   "y": 65
+   "y": 66
   }
  },
  "kalos-coumarine-city": {
@@ -7232,10 +7191,10 @@
     }
    ]
   },
-  "unlockOrder": 283,
+  "unlockOrder": 282,
   "position": {
-   "x": 37,
-   "y": 30
+   "x": 38,
+   "y": 35
   },
   "mart": {
    "name": "Kalos Mart",
@@ -7281,10 +7240,10 @@
     }
    ]
   },
-  "unlockOrder": 284,
+  "unlockOrder": 283,
   "position": {
    "x": 44,
-   "y": 51
+   "y": 53
   },
   "mart": {
    "name": "Kalos Mart",
@@ -7327,10 +7286,10 @@
     }
    ]
   },
-  "unlockOrder": 285,
+  "unlockOrder": 284,
   "position": {
-   "x": 55,
-   "y": 70
+   "x": 52,
+   "y": 68
   },
   "mart": {
    "name": "Kalos Mart",
@@ -7372,10 +7331,10 @@
     }
    ]
   },
-  "unlockOrder": 286,
+  "unlockOrder": 285,
   "position": {
-   "x": 44,
-   "y": 28
+   "x": 45,
+   "y": 34
   },
   "mart": {
    "name": "Kalos Mart",
@@ -7407,8 +7366,7 @@
   "routeKey": "kalos-route-5",
   "connections": [
    "kalos-lumiose-city",
-   "kalos-camphrier-town",
-   "kalos-route-13"
+   "kalos-camphrier-town"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -7418,10 +7376,10 @@
     }
    ]
   },
-  "unlockOrder": 287,
+  "unlockOrder": 286,
   "position": {
-   "x": 31,
-   "y": 51
+   "x": 32,
+   "y": 53
   }
  },
  "kalos-cyllage-city": {
@@ -7434,7 +7392,7 @@
    "kalos-route-10",
    "kalos-route-8",
    "kalos-lumiose-city",
-   "kalos-route-16"
+   "kalos-route-14"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -7444,10 +7402,10 @@
     }
    ]
   },
-  "unlockOrder": 288,
+  "unlockOrder": 287,
   "position": {
-   "x": 55,
-   "y": 42
+   "x": 52,
+   "y": 44
   },
   "mart": {
    "name": "Kalos Mart",
@@ -7480,7 +7438,8 @@
   "connections": [
    "kalos-cyllage-city",
    "kalos-ambrette-town",
-   "kalos-lumiose-city"
+   "kalos-lumiose-city",
+   "kalos-route-16"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -7490,9 +7449,9 @@
     }
    ]
   },
-  "unlockOrder": 289,
+  "unlockOrder": 288,
   "position": {
-   "x": 55,
+   "x": 52,
    "y": 56
   }
  },
@@ -7515,10 +7474,35 @@
     }
    ]
   },
+  "unlockOrder": 289,
+  "position": {
+   "x": 64,
+   "y": 68
+  }
+ },
+ "kalos-route-13": {
+  "id": "kalos-route-13",
+  "name": "Route 13",
+  "type": "route",
+  "region": "kalos",
+  "description": "A route in the Kalos region.",
+  "routeKey": "kalos-route-13",
+  "connections": [
+   "kalos-lumiose-city",
+   "kalos-coumarine-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-lumiose-city",
+     "count": 15
+    }
+   ]
+  },
   "unlockOrder": 290,
   "position": {
-   "x": 67,
-   "y": 70
+   "x": 38,
+   "y": 48
   }
  },
  "kalos-route-22": {
@@ -7542,48 +7526,19 @@
   },
   "unlockOrder": 291,
   "position": {
-   "x": 56,
-   "y": 80
+   "x": 57,
+   "y": 78
   }
  },
- "kalos-route-10": {
-  "id": "kalos-route-10",
-  "name": "Route 10",
-  "type": "route",
+ "kalos-camphrier-town": {
+  "id": "kalos-camphrier-town",
+  "name": "Camphrier Town",
+  "type": "town",
   "region": "kalos",
-  "description": "A route in the Kalos region.",
-  "routeKey": "kalos-route-10",
+  "description": "A town in the Kalos region.",
   "connections": [
-   "kalos-cyllage-city",
-   "kalos-geosenge-town",
-   "kalos-route-15"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "kalos-cyllage-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 292,
-  "position": {
-   "x": 55,
-   "y": 27
-  }
- },
- "kalos-route-13": {
-  "id": "kalos-route-13",
-  "name": "Route 13",
-  "type": "route",
-  "region": "kalos",
-  "description": "A route in the Kalos region.",
-  "routeKey": "kalos-route-13",
-  "connections": [
-   "kalos-lumiose-city",
-   "kalos-coumarine-city",
    "kalos-route-5",
-   "kalos-route-14"
+   "kalos-route-7"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -7593,85 +7548,10 @@
     }
    ]
   },
-  "unlockOrder": 293,
+  "unlockOrder": 292,
   "position": {
-   "x": 37,
-   "y": 44
-  }
- },
- "kalos-route-16": {
-  "id": "kalos-route-16",
-  "name": "Route 16",
-  "type": "route",
-  "region": "kalos",
-  "description": "A route in the Kalos region.",
-  "routeKey": "kalos-route-16",
-  "connections": [
-   "kalos-lumiose-city",
-   "kalos-route-15",
-   "kalos-cyllage-city"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "kalos-cyllage-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 294,
-  "position": {
-   "x": 56,
-   "y": 48
-  }
- },
- "kalos-route-21": {
-  "id": "kalos-route-21",
-  "name": "Route 21",
-  "type": "route",
-  "region": "kalos",
-  "description": "A route in the Kalos region.",
-  "routeKey": "kalos-route-21",
-  "connections": [
-   "kalos-snowbelle-city",
-   "kalos-route-9"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "kalos-route-9",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 295,
-  "position": {
-   "x": 69,
-   "y": 74
-  }
- },
- "kalos-geosenge-town": {
-  "id": "kalos-geosenge-town",
-  "name": "Geosenge Town",
-  "type": "town",
-  "region": "kalos",
-  "description": "A town in the Kalos region.",
-  "connections": [
-   "kalos-route-10",
-   "kalos-route-11"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "kalos-route-10",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 296,
-  "position": {
-   "x": 55,
-   "y": 13
+   "x": 19,
+   "y": 54
   },
   "mart": {
    "name": "Kalos Mart",
@@ -7694,6 +7574,32 @@
    ]
   }
  },
+ "kalos-route-10": {
+  "id": "kalos-route-10",
+  "name": "Route 10",
+  "type": "route",
+  "region": "kalos",
+  "description": "A route in the Kalos region.",
+  "routeKey": "kalos-route-10",
+  "connections": [
+   "kalos-cyllage-city",
+   "kalos-geosenge-town",
+   "kalos-route-15"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-cyllage-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 293,
+  "position": {
+   "x": 52,
+   "y": 31
+  }
+ },
  "kalos-route-14": {
   "id": "kalos-route-14",
   "name": "Route 14",
@@ -7704,20 +7610,115 @@
   "connections": [
    "kalos-lumiose-city",
    "kalos-laverre-city",
-   "kalos-route-13"
+   "kalos-cyllage-city"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "kalos-route-13",
+     "locationId": "kalos-cyllage-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 294,
+  "position": {
+   "x": 45,
+   "y": 44
+  }
+ },
+ "kalos-route-16": {
+  "id": "kalos-route-16",
+  "name": "Route 16",
+  "type": "route",
+  "region": "kalos",
+  "description": "A route in the Kalos region.",
+  "routeKey": "kalos-route-16",
+  "connections": [
+   "kalos-lumiose-city",
+   "kalos-route-15",
+   "kalos-route-8"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-8",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 295,
+  "position": {
+   "x": 57,
+   "y": 51
+  }
+ },
+ "kalos-route-21": {
+  "id": "kalos-route-21",
+  "name": "Route 21",
+  "type": "route",
+  "region": "kalos",
+  "description": "A route in the Kalos region.",
+  "routeKey": "kalos-route-21",
+  "connections": [
+   "kalos-snowbelle-city",
+   "kalos-route-9"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-9",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 296,
+  "position": {
+   "x": 69,
+   "y": 73
+  }
+ },
+ "kalos-geosenge-town": {
+  "id": "kalos-geosenge-town",
+  "name": "Geosenge Town",
+  "type": "town",
+  "region": "kalos",
+  "description": "A town in the Kalos region.",
+  "connections": [
+   "kalos-route-10",
+   "kalos-route-11"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-10",
      "count": 15
     }
    ]
   },
   "unlockOrder": 297,
   "position": {
-   "x": 44,
-   "y": 40
+   "x": 52,
+   "y": 19
+  },
+  "mart": {
+   "name": "Kalos Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
   }
  },
  "kalos-route-15": {
@@ -7743,8 +7744,8 @@
   },
   "unlockOrder": 298,
   "position": {
-   "x": 56,
-   "y": 31
+   "x": 57,
+   "y": 36
   }
  },
  "kalos-route-11": {
@@ -7767,8 +7768,8 @@
   },
   "unlockOrder": 299,
   "position": {
-   "x": 67,
-   "y": 13
+   "x": 64,
+   "y": 19
   }
  },
  "kalos-dendemille-town": {
@@ -7792,7 +7793,7 @@
   "unlockOrder": 300,
   "position": {
    "x": 69,
-   "y": 31
+   "y": 36
   },
   "mart": {
    "name": "Kalos Mart",
@@ -7836,8 +7837,8 @@
   },
   "unlockOrder": 301,
   "position": {
-   "x": 81,
-   "y": 31
+   "x": 82,
+   "y": 36
   }
  },
  "kalos-anistar-city": {
@@ -7861,7 +7862,7 @@
   "unlockOrder": 302,
   "position": {
    "x": 94,
-   "y": 31
+   "y": 36
   },
   "mart": {
    "name": "Kalos Mart",
@@ -7906,7 +7907,7 @@
   "unlockOrder": 303,
   "position": {
    "x": 94,
-   "y": 45
+   "y": 49
   }
  },
  "kalos-couriway-town": {
@@ -7930,7 +7931,7 @@
   "unlockOrder": 304,
   "position": {
    "x": 94,
-   "y": 60
+   "y": 61
   },
   "mart": {
    "name": "Kalos Mart",
@@ -7962,7 +7963,8 @@
   "routeKey": "kalos-route-19",
   "connections": [
    "kalos-couriway-town",
-   "kalos-snowbelle-city"
+   "kalos-snowbelle-city",
+   "kalos-kiloude-city"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -7975,7 +7977,7 @@
   "unlockOrder": 305,
   "position": {
    "x": 94,
-   "y": 74
+   "y": 73
   }
  },
  "kalos-snowbelle-city": {
@@ -7987,8 +7989,7 @@
   "connections": [
    "kalos-route-19",
    "kalos-route-20",
-   "kalos-route-21",
-   "kalos-kiloude-city"
+   "kalos-route-21"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -8000,8 +8001,51 @@
   },
   "unlockOrder": 306,
   "position": {
-   "x": 81,
-   "y": 74
+   "x": 82,
+   "y": 73
+  },
+  "mart": {
+   "name": "Kalos Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "kalos-kiloude-city": {
+  "id": "kalos-kiloude-city",
+  "name": "Kiloude City",
+  "type": "town",
+  "region": "kalos",
+  "description": "A town in the Kalos region.",
+  "connections": [
+   "kalos-route-19"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-19",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 307,
+  "position": {
+   "x": 88,
+   "y": 69
   },
   "mart": {
    "name": "Kalos Mart",
@@ -8032,30 +8076,8 @@
   "description": "A route in the Kalos region.",
   "routeKey": "kalos-route-20",
   "connections": [
-   "kalos-snowbelle-city"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "kalos-snowbelle-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 307,
-  "position": {
-   "x": 75,
-   "y": 81
-  }
- },
- "kalos-kiloude-city": {
-  "id": "kalos-kiloude-city",
-  "name": "Kiloude City",
-  "type": "town",
-  "region": "kalos",
-  "description": "A town in the Kalos region.",
-  "connections": [
-   "kalos-snowbelle-city"
+   "kalos-snowbelle-city",
+   "kalos-raid"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -8067,28 +8089,8 @@
   },
   "unlockOrder": 308,
   "position": {
-   "x": 85,
-   "y": 70
-  },
-  "mart": {
-   "name": "Kalos Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
+   "x": 75,
+   "y": 79
   }
  },
  "kalos-raid": {
@@ -8111,8 +8113,8 @@
   },
   "unlockOrder": 309,
   "position": {
-   "x": 88,
-   "y": 75
+   "x": 4,
+   "y": 81
   }
  },
  "alola-iki-town": {
@@ -8130,8 +8132,8 @@
   },
   "unlockOrder": 310,
   "position": {
-   "x": 25,
-   "y": 12
+   "x": 36,
+   "y": 42
   },
   "mart": {
    "name": "Alola Mart",
@@ -8162,10 +8164,7 @@
   "description": "A route in the Alola region.",
   "routeKey": "alola-route-1--hauoli-outskirts",
   "connections": [
-   "alola-iki-town",
-   "alola-route-4",
-   "alola-konikoni-city",
-   "alola-route-10"
+   "alola-iki-town"
   ],
   "unlock": {
    "requires": [
@@ -8174,8 +8173,8 @@
   },
   "unlockOrder": 311,
   "position": {
-   "x": 25,
-   "y": 47
+   "x": 45,
+   "y": 50
   }
  },
  "alola-route-1": {
@@ -8187,7 +8186,9 @@
   "routeKey": "alola-route-1",
   "connections": [
    "alola-iki-town",
-   "alola-route-3"
+   "alola-route-3",
+   "alola-route-4",
+   "alola-route-6"
   ],
   "unlock": {
    "requires": [
@@ -8196,7 +8197,7 @@
   },
   "unlockOrder": 312,
   "position": {
-   "x": 30,
+   "x": 55,
    "y": 51
   }
  },
@@ -8210,7 +8211,7 @@
   "connections": [
    "alola-route-1",
    "alola-route-2",
-   "alola-route-6"
+   "alola-route-9"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -8223,7 +8224,7 @@
   "unlockOrder": 313,
   "position": {
    "x": 30,
-   "y": 16
+   "y": 44
   }
  },
  "alola-route-4": {
@@ -8236,91 +8237,49 @@
   "connections": [
    "alola-paniola-town",
    "alola-heahea-city",
-   "alola-route-1--hauoli-outskirts",
+   "alola-route-1",
    "alola-route-5",
+   "alola-route-17",
    "alola-po-town"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "alola-route-1--hauoli-outskirts",
+     "locationId": "alola-route-1",
      "count": 15
     }
    ]
   },
   "unlockOrder": 314,
   "position": {
-   "x": 44,
-   "y": 59
+   "x": 56,
+   "y": 58
   }
  },
- "alola-konikoni-city": {
-  "id": "alola-konikoni-city",
-  "name": "Konikoni City",
-  "type": "town",
+ "alola-route-6": {
+  "id": "alola-route-6",
+  "name": "Route 6",
+  "type": "route",
   "region": "alola",
-  "description": "A town in the Alola region.",
+  "description": "A route in the Alola region.",
+  "routeKey": "alola-route-6",
   "connections": [
-   "alola-route-9",
-   "alola-route-1--hauoli-outskirts"
+   "alola-heahea-city",
+   "alola-paniola-town",
+   "alola-route-1"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "alola-route-1--hauoli-outskirts",
+     "locationId": "alola-route-1",
      "count": 15
     }
    ]
   },
   "unlockOrder": 315,
   "position": {
-   "x": 9,
+   "x": 61,
    "y": 50
-  },
-  "mart": {
-   "name": "Alola Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
-  }
- },
- "alola-route-10": {
-  "id": "alola-route-10",
-  "name": "Route 10",
-  "type": "route",
-  "region": "alola",
-  "description": "A route in the Alola region.",
-  "routeKey": "alola-route-10",
-  "connections": [
-   "alola-malie-city",
-   "alola-route-1--hauoli-outskirts"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "alola-route-1--hauoli-outskirts",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 316,
-  "position": {
-   "x": 25,
-   "y": 56
   }
  },
  "alola-route-2": {
@@ -8342,10 +8301,10 @@
     }
    ]
   },
-  "unlockOrder": 317,
+  "unlockOrder": 316,
   "position": {
-   "x": 19,
-   "y": 29
+   "x": 46,
+   "y": 40
   }
  },
  "alola-route-5": {
@@ -8359,7 +8318,7 @@
    "alola-route-8",
    "alola-route-4",
    "alola-route-7",
-   "alola-route-15",
+   "alola-route-10",
    "alola-route-16"
   ],
   "unlock": {
@@ -8370,23 +8329,23 @@
     }
    ]
   },
-  "unlockOrder": 318,
+  "unlockOrder": 317,
   "position": {
-   "x": 94,
-   "y": 41
+   "x": 89,
+   "y": 42
   }
  },
- "alola-route-6": {
-  "id": "alola-route-6",
-  "name": "Route 6",
+ "alola-route-9": {
+  "id": "alola-route-9",
+  "name": "Route 9",
   "type": "route",
   "region": "alola",
   "description": "A route in the Alola region.",
-  "routeKey": "alola-route-6",
+  "routeKey": "alola-route-9",
   "connections": [
-   "alola-heahea-city",
-   "alola-paniola-town",
-   "alola-route-3"
+   "alola-konikoni-city",
+   "alola-route-3",
+   "alola-paniola-town"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -8396,23 +8355,22 @@
     }
    ]
   },
-  "unlockOrder": 319,
+  "unlockOrder": 318,
   "position": {
-   "x": 44,
-   "y": 24
+   "x": 18,
+   "y": 49
   }
  },
- "alola-heahea-city": {
-  "id": "alola-heahea-city",
-  "name": "Heahea City",
-  "type": "town",
+ "alola-route-17": {
+  "id": "alola-route-17",
+  "name": "Route 17",
+  "type": "route",
   "region": "alola",
-  "description": "A town in the Alola region.",
+  "description": "A route in the Alola region.",
+  "routeKey": "alola-route-17",
   "connections": [
-   "alola-route-4",
-   "alola-route-6",
-   "alola-route-11",
-   "alola-malie-city"
+   "alola-po-town",
+   "alola-route-4"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -8422,30 +8380,10 @@
     }
    ]
   },
-  "unlockOrder": 320,
+  "unlockOrder": 319,
   "position": {
-   "x": 38,
-   "y": 59
-  },
-  "mart": {
-   "name": "Alola Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
+   "x": 64,
+   "y": 68
   }
  },
  "alola-po-town": {
@@ -8466,10 +8404,10 @@
     }
    ]
   },
-  "unlockOrder": 321,
+  "unlockOrder": 320,
   "position": {
-   "x": 63,
-   "y": 59
+   "x": 64,
+   "y": 57
   },
   "mart": {
    "name": "Alola Mart",
@@ -8501,7 +8439,8 @@
   "routeKey": "alola-route-7",
   "connections": [
    "alola-route-8",
-   "alola-route-5"
+   "alola-route-5",
+   "alola-route-11"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -8511,10 +8450,10 @@
     }
    ]
   },
-  "unlockOrder": 322,
+  "unlockOrder": 321,
   "position": {
-   "x": 6,
-   "y": 45
+   "x": 4,
+   "y": 49
   }
  },
  "alola-route-8": {
@@ -8536,10 +8475,10 @@
     }
    ]
   },
-  "unlockOrder": 323,
+  "unlockOrder": 322,
   "position": {
-   "x": 94,
-   "y": 6
+   "x": 91,
+   "y": 32
   }
  },
  "alola-paniola-town": {
@@ -8550,20 +8489,208 @@
   "description": "A town in the Alola region.",
   "connections": [
    "alola-route-4",
-   "alola-route-6"
+   "alola-route-6",
+   "alola-route-9"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "alola-route-6",
+     "locationId": "alola-route-9",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 323,
+  "position": {
+   "x": 21,
+   "y": 43
+  },
+  "mart": {
+   "name": "Alola Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "alola-route-10": {
+  "id": "alola-route-10",
+  "name": "Route 10",
+  "type": "route",
+  "region": "alola",
+  "description": "A route in the Alola region.",
+  "routeKey": "alola-route-10",
+  "connections": [
+   "alola-malie-city",
+   "alola-route-5"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-5",
      "count": 15
     }
    ]
   },
   "unlockOrder": 324,
   "position": {
-   "x": 38,
-   "y": 24
+   "x": 80,
+   "y": 51
+  }
+ },
+ "alola-route-16": {
+  "id": "alola-route-16",
+  "name": "Route 16",
+  "type": "route",
+  "region": "alola",
+  "description": "A route in the Alola region.",
+  "routeKey": "alola-route-16",
+  "connections": [
+   "alola-route-15",
+   "alola-route-5"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-5",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 325,
+  "position": {
+   "x": 83,
+   "y": 45
+  }
+ },
+ "alola-hauoli-city": {
+  "id": "alola-hauoli-city",
+  "name": "Hauoli City",
+  "type": "town",
+  "region": "alola",
+  "description": "A town in the Alola region.",
+  "connections": [
+   "alola-route-2",
+   "alola-heahea-city",
+   "alola-konikoni-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-2",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 326,
+  "position": {
+   "x": 25,
+   "y": 61
+  },
+  "mart": {
+   "name": "Alola Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "alola-heahea-city": {
+  "id": "alola-heahea-city",
+  "name": "Heahea City",
+  "type": "town",
+  "region": "alola",
+  "description": "A town in the Alola region.",
+  "connections": [
+   "alola-route-4",
+   "alola-route-6",
+   "alola-hauoli-city",
+   "alola-route-14"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-hauoli-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 327,
+  "position": {
+   "x": 21,
+   "y": 56
+  },
+  "mart": {
+   "name": "Alola Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "alola-konikoni-city": {
+  "id": "alola-konikoni-city",
+  "name": "Konikoni City",
+  "type": "town",
+  "region": "alola",
+  "description": "A town in the Alola region.",
+  "connections": [
+   "alola-route-9",
+   "alola-hauoli-city",
+   "alola-route-12",
+   "alola-malie-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-hauoli-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 328,
+  "position": {
+   "x": 33,
+   "y": 60
   },
   "mart": {
    "name": "Alola Mart",
@@ -8596,187 +8723,21 @@
   "connections": [
    "alola-malie-city",
    "alola-route-12",
-   "alola-heahea-city",
-   "alola-route-13",
-   "alola-route-17"
+   "alola-route-7",
+   "alola-route-13"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "alola-heahea-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 325,
-  "position": {
-   "x": 38,
-   "y": 91
-  }
- },
- "alola-route-15": {
-  "id": "alola-route-15",
-  "name": "Route 15",
-  "type": "route",
-  "region": "alola",
-  "description": "A route in the Alola region.",
-  "routeKey": "alola-route-15",
-  "connections": [
-   "alola-route-16",
-   "alola-route-5"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "alola-route-5",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 326,
-  "position": {
-   "x": 88,
-   "y": 77
-  }
- },
- "alola-route-16": {
-  "id": "alola-route-16",
-  "name": "Route 16",
-  "type": "route",
-  "region": "alola",
-  "description": "A route in the Alola region.",
-  "routeKey": "alola-route-16",
-  "connections": [
-   "alola-route-15",
-   "alola-route-5"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "alola-route-5",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 327,
-  "position": {
-   "x": 88,
-   "y": 42
-  }
- },
- "alola-hauoli-city": {
-  "id": "alola-hauoli-city",
-  "name": "Hauoli City",
-  "type": "town",
-  "region": "alola",
-  "description": "A town in the Alola region.",
-  "connections": [
-   "alola-route-2",
-   "alola-route-9"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "alola-route-2",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 328,
-  "position": {
-   "x": 19,
-   "y": 64
-  },
-  "mart": {
-   "name": "Alola Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
-  }
- },
- "alola-malie-city": {
-  "id": "alola-malie-city",
-  "name": "Malie City",
-  "type": "town",
-  "region": "alola",
-  "description": "A town in the Alola region.",
-  "connections": [
-   "alola-route-10",
-   "alola-route-11",
-   "alola-heahea-city"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "alola-heahea-city",
+     "locationId": "alola-route-7",
      "count": 15
     }
    ]
   },
   "unlockOrder": 329,
   "position": {
-   "x": 38,
-   "y": 56
-  },
-  "mart": {
-   "name": "Alola Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
-  }
- },
- "alola-route-9": {
-  "id": "alola-route-9",
-  "name": "Route 9",
-  "type": "route",
-  "region": "alola",
-  "description": "A route in the Alola region.",
-  "routeKey": "alola-route-9",
-  "connections": [
-   "alola-konikoni-city",
-   "alola-hauoli-city",
-   "alola-route-14"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "alola-hauoli-city",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 330,
-  "position": {
-   "x": 15,
-   "y": 68
+   "x": 94,
+   "y": 63
   }
  },
  "alola-route-13": {
@@ -8788,7 +8749,8 @@
   "routeKey": "alola-route-13",
   "connections": [
    "alola-route-12",
-   "alola-route-11"
+   "alola-route-11",
+   "alola-route-15"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -8798,35 +8760,10 @@
     }
    ]
   },
-  "unlockOrder": 331,
+  "unlockOrder": 330,
   "position": {
-   "x": 43,
-   "y": 95
-  }
- },
- "alola-route-17": {
-  "id": "alola-route-17",
-  "name": "Route 17",
-  "type": "route",
-  "region": "alola",
-  "description": "A route in the Alola region.",
-  "routeKey": "alola-route-17",
-  "connections": [
-   "alola-po-town",
-   "alola-route-11"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "alola-route-11",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 332,
-  "position": {
-   "x": 63,
-   "y": 94
+   "x": 88,
+   "y": 63
   }
  },
  "alola-route-12": {
@@ -8838,20 +8775,21 @@
   "routeKey": "alola-route-12",
   "connections": [
    "alola-route-11",
-   "alola-route-13"
+   "alola-route-13",
+   "alola-konikoni-city"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "alola-route-11",
+     "locationId": "alola-konikoni-city",
      "count": 15
     }
    ]
   },
-  "unlockOrder": 333,
+  "unlockOrder": 331,
   "position": {
-   "x": 50,
-   "y": 91
+   "x": 43,
+   "y": 66
   }
  },
  "alola-route-14": {
@@ -8862,20 +8800,91 @@
   "description": "A route in the Alola region.",
   "routeKey": "alola-route-14",
   "connections": [
-   "alola-route-9"
+   "alola-heahea-city"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "alola-route-9",
+     "locationId": "alola-heahea-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 332,
+  "position": {
+   "x": 6,
+   "y": 65
+  }
+ },
+ "alola-malie-city": {
+  "id": "alola-malie-city",
+  "name": "Malie City",
+  "type": "town",
+  "region": "alola",
+  "description": "A town in the Alola region.",
+  "connections": [
+   "alola-route-10",
+   "alola-route-11",
+   "alola-konikoni-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-konikoni-city",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 333,
+  "position": {
+   "x": 25,
+   "y": 50
+  },
+  "mart": {
+   "name": "Alola Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "alola-route-15": {
+  "id": "alola-route-15",
+  "name": "Route 15",
+  "type": "route",
+  "region": "alola",
+  "description": "A route in the Alola region.",
+  "routeKey": "alola-route-15",
+  "connections": [
+   "alola-route-16",
+   "alola-route-13",
+   "alola-raid"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-13",
      "count": 15
     }
    ]
   },
   "unlockOrder": 334,
   "position": {
-   "x": 6,
-   "y": 94
+   "x": 83,
+   "y": 58
   }
  },
  "alola-raid": {
@@ -8886,20 +8895,20 @@
   "description": "A mysterious island where Alola's rarest Pokemon dwell.",
   "routeKey": "alola-raid",
   "connections": [
-   "alola-route-14"
+   "alola-route-15"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "alola-route-14",
+     "locationId": "alola-route-15",
      "count": 20
     }
    ]
   },
   "unlockOrder": 335,
   "position": {
-   "x": 19,
-   "y": 6
+   "x": 91,
+   "y": 48
   }
  },
  "galar-postwick": {
@@ -8916,8 +8925,8 @@
   },
   "unlockOrder": 336,
   "position": {
-   "x": 59,
-   "y": 94
+   "x": 68,
+   "y": 79
   },
   "mart": {
    "name": "Galar Mart",
@@ -8951,9 +8960,7 @@
    "galar-wedgehurst",
    "galar-postwick",
    "galar-route-3",
-   "galar-route-4",
-   "galar-route-6",
-   "galar-motostoke"
+   "galar-hammerlocke"
   ],
   "unlock": {
    "requires": [
@@ -8962,8 +8969,8 @@
   },
   "unlockOrder": 337,
   "position": {
-   "x": 59,
-   "y": 62
+   "x": 60,
+   "y": 61
   }
  },
  "galar-route-3": {
@@ -8976,7 +8983,9 @@
   "connections": [
    "galar-motostoke",
    "galar-route-1",
-   "galar-ballonlea"
+   "galar-route-6",
+   "galar-ballonlea",
+   "galar-stow-on-side"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -8989,22 +8998,20 @@
   "unlockOrder": 338,
   "position": {
    "x": 41,
-   "y": 51
+   "y": 53
   }
  },
- "galar-route-4": {
-  "id": "galar-route-4",
-  "name": "Route 4",
-  "type": "route",
+ "galar-hammerlocke": {
+  "id": "galar-hammerlocke",
+  "name": "Hammerlocke",
+  "type": "town",
   "region": "galar",
-  "description": "A route in the Galar region.",
-  "routeKey": "galar-route-4",
+  "description": "A town in the Galar region.",
   "connections": [
-   "galar-turffield",
-   "galar-route-1",
+   "galar-route-6",
    "galar-route-7",
-   "galar-route-10",
-   "galar-hammerlocke"
+   "galar-route-1",
+   "galar-motostoke"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -9016,59 +9023,8 @@
   },
   "unlockOrder": 339,
   "position": {
-   "x": 66,
-   "y": 78
-  }
- },
- "galar-route-6": {
-  "id": "galar-route-6",
-  "name": "Route 6",
-  "type": "route",
-  "region": "galar",
-  "description": "A route in the Galar region.",
-  "routeKey": "galar-route-6",
-  "connections": [
-   "galar-hammerlocke",
-   "galar-stow-on-side",
-   "galar-route-1"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "galar-route-1",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 340,
-  "position": {
-   "x": 57,
-   "y": 71
-  }
- },
- "galar-motostoke": {
-  "id": "galar-motostoke",
-  "name": "Motostoke",
-  "type": "town",
-  "region": "galar",
-  "description": "A town in the Galar region.",
-  "connections": [
-   "galar-route-3",
-   "galar-route-1",
-   "galar-turffield"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "galar-route-1",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 341,
-  "position": {
-   "x": 55,
-   "y": 51
+   "x": 60,
+   "y": 53
   },
   "mart": {
    "name": "Galar Mart",
@@ -9099,7 +9055,9 @@
   "description": "A town in the Galar region.",
   "connections": [
    "galar-route-1",
-   "galar-route-2"
+   "galar-route-2",
+   "galar-route-4",
+   "galar-route-7"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -9109,10 +9067,10 @@
     }
    ]
   },
-  "unlockOrder": 342,
+  "unlockOrder": 340,
   "position": {
-   "x": 59,
-   "y": 29
+   "x": 68,
+   "y": 53
   },
   "mart": {
    "name": "Galar Mart",
@@ -9144,8 +9102,7 @@
   "routeKey": "galar-route-2",
   "connections": [
    "galar-wedgehurst",
-   "galar-route-5",
-   "galar-circhester"
+   "galar-route-8"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -9155,10 +9112,62 @@
     }
    ]
   },
-  "unlockOrder": 343,
+  "unlockOrder": 341,
   "position": {
    "x": 73,
-   "y": 29
+   "y": 47
+  }
+ },
+ "galar-route-4": {
+  "id": "galar-route-4",
+  "name": "Route 4",
+  "type": "route",
+  "region": "galar",
+  "description": "A route in the Galar region.",
+  "routeKey": "galar-route-4",
+  "connections": [
+   "galar-turffield",
+   "galar-wedgehurst",
+   "galar-route-5"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-wedgehurst",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 342,
+  "position": {
+   "x": 57,
+   "y": 41
+  }
+ },
+ "galar-route-6": {
+  "id": "galar-route-6",
+  "name": "Route 6",
+  "type": "route",
+  "region": "galar",
+  "description": "A route in the Galar region.",
+  "routeKey": "galar-route-6",
+  "connections": [
+   "galar-hammerlocke",
+   "galar-stow-on-side",
+   "galar-route-3"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-route-3",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 343,
+  "position": {
+   "x": 48,
+   "y": 57
   }
  },
  "galar-route-7": {
@@ -9171,45 +9180,20 @@
   "connections": [
    "galar-route-8",
    "galar-hammerlocke",
-   "galar-route-4"
+   "galar-wedgehurst"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "galar-route-4",
+     "locationId": "galar-wedgehurst",
      "count": 15
     }
    ]
   },
   "unlockOrder": 344,
   "position": {
-   "x": 85,
-   "y": 71
-  }
- },
- "galar-route-10": {
-  "id": "galar-route-10",
-  "name": "Route 10",
-  "type": "route",
-  "region": "galar",
-  "description": "A route in the Galar region.",
-  "routeKey": "galar-route-10",
-  "connections": [
-   "galar-wyndon",
-   "galar-route-4"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "galar-route-4",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 345,
-  "position": {
-   "x": 69,
-   "y": 83
+   "x": 74,
+   "y": 57
   }
  },
  "galar-ballonlea": {
@@ -9229,10 +9213,10 @@
     }
    ]
   },
-  "unlockOrder": 346,
+  "unlockOrder": 345,
   "position": {
    "x": 6,
-   "y": 67
+   "y": 48
   },
   "mart": {
    "name": "Galar Mart",
@@ -9255,29 +9239,28 @@
    ]
   }
  },
- "galar-hammerlocke": {
-  "id": "galar-hammerlocke",
-  "name": "Hammerlocke",
+ "galar-motostoke": {
+  "id": "galar-motostoke",
+  "name": "Motostoke",
   "type": "town",
   "region": "galar",
   "description": "A town in the Galar region.",
   "connections": [
-   "galar-route-6",
-   "galar-route-7",
-   "galar-route-4"
+   "galar-route-3",
+   "galar-hammerlocke"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "galar-route-4",
+     "locationId": "galar-hammerlocke",
      "count": 15
     }
    ]
   },
-  "unlockOrder": 347,
+  "unlockOrder": 346,
   "position": {
-   "x": 71,
-   "y": 71
+   "x": 53,
+   "y": 51
   },
   "mart": {
    "name": "Galar Mart",
@@ -9307,66 +9290,21 @@
   "region": "galar",
   "description": "A town in the Galar region.",
   "connections": [
-   "galar-route-6"
+   "galar-route-6",
+   "galar-route-3"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "galar-route-6",
+     "locationId": "galar-route-3",
      "count": 15
     }
    ]
   },
-  "unlockOrder": 348,
+  "unlockOrder": 347,
   "position": {
-   "x": 43,
-   "y": 71
-  },
-  "mart": {
-   "name": "Galar Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
-  }
- },
- "galar-turffield": {
-  "id": "galar-turffield",
-  "name": "Turffield",
-  "type": "town",
-  "region": "galar",
-  "description": "A town in the Galar region.",
-  "connections": [
-   "galar-route-4",
-   "galar-route-5",
-   "galar-motostoke",
-   "galar-wyndon"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "galar-motostoke",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 349,
-  "position": {
-   "x": 66,
-   "y": 45
+   "x": 33,
+   "y": 53
   },
   "mart": {
    "name": "Galar Mart",
@@ -9399,13 +9337,67 @@
   "connections": [
    "galar-hulbury",
    "galar-turffield",
+   "galar-route-4",
+   "galar-wyndon"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-route-4",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 348,
+  "position": {
+   "x": 70,
+   "y": 28
+  }
+ },
+ "galar-route-8": {
+  "id": "galar-route-8",
+  "name": "Route 8",
+  "type": "route",
+  "region": "galar",
+  "description": "A route in the Galar region.",
+  "routeKey": "galar-route-8",
+  "connections": [
+   "galar-route-7",
+   "galar-circhester",
    "galar-route-2",
-   "galar-route-8"
+   "galar-route-9"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
      "locationId": "galar-route-2",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 349,
+  "position": {
+   "x": 74,
+   "y": 39
+  }
+ },
+ "galar-route-9": {
+  "id": "galar-route-9",
+  "name": "Route 9",
+  "type": "route",
+  "region": "galar",
+  "description": "A route in the Galar region.",
+  "routeKey": "galar-route-9",
+  "connections": [
+   "galar-circhester",
+   "galar-spikemuth",
+   "galar-route-8",
+   "galar-route-10"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-route-8",
      "count": 15
     }
    ]
@@ -9413,32 +9405,31 @@
   "unlockOrder": 350,
   "position": {
    "x": 80,
-   "y": 45
+   "y": 43
   }
  },
- "galar-circhester": {
-  "id": "galar-circhester",
-  "name": "Circhester",
+ "galar-turffield": {
+  "id": "galar-turffield",
+  "name": "Turffield",
   "type": "town",
   "region": "galar",
   "description": "A town in the Galar region.",
   "connections": [
-   "galar-route-8",
-   "galar-route-9",
-   "galar-route-2"
+   "galar-route-4",
+   "galar-route-5"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "galar-route-2",
+     "locationId": "galar-route-5",
      "count": 15
     }
    ]
   },
   "unlockOrder": 351,
   "position": {
-   "x": 85,
-   "y": 6
+   "x": 67,
+   "y": 35
   },
   "mart": {
    "name": "Galar Mart",
@@ -9469,20 +9460,20 @@
   "description": "A town in the Galar region.",
   "connections": [
    "galar-route-10",
-   "galar-turffield"
+   "galar-route-5"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "galar-turffield",
+     "locationId": "galar-route-5",
      "count": 15
     }
    ]
   },
   "unlockOrder": 352,
   "position": {
-   "x": 69,
-   "y": 51
+   "x": 73,
+   "y": 21
   },
   "mart": {
    "name": "Galar Mart",
@@ -9505,59 +9496,77 @@
    ]
   }
  },
- "galar-route-8": {
-  "id": "galar-route-8",
-  "name": "Route 8",
+ "galar-route-10": {
+  "id": "galar-route-10",
+  "name": "Route 10",
   "type": "route",
   "region": "galar",
   "description": "A route in the Galar region.",
-  "routeKey": "galar-route-8",
+  "routeKey": "galar-route-10",
   "connections": [
-   "galar-route-7",
-   "galar-circhester",
-   "galar-route-5",
+   "galar-wyndon",
    "galar-route-9",
+   "galar-circhester",
    "galar-hulbury",
-   "galar-spikemuth"
+   "galar-raid"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "galar-route-5",
+     "locationId": "galar-route-9",
      "count": 15
     }
    ]
   },
   "unlockOrder": 353,
   "position": {
-   "x": 85,
-   "y": 38
+   "x": 84,
+   "y": 33
   }
  },
- "galar-route-9": {
-  "id": "galar-route-9",
-  "name": "Route 9",
-  "type": "route",
+ "galar-circhester": {
+  "id": "galar-circhester",
+  "name": "Circhester",
+  "type": "town",
   "region": "galar",
-  "description": "A route in the Galar region.",
-  "routeKey": "galar-route-9",
+  "description": "A town in the Galar region.",
   "connections": [
-   "galar-circhester",
-   "galar-spikemuth",
-   "galar-route-8"
+   "galar-route-8",
+   "galar-route-9",
+   "galar-route-10"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "galar-route-8",
+     "locationId": "galar-route-10",
      "count": 15
     }
    ]
   },
   "unlockOrder": 354,
   "position": {
-   "x": 90,
-   "y": 42
+   "x": 77,
+   "y": 31
+  },
+  "mart": {
+   "name": "Galar Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
   }
  },
  "galar-hulbury": {
@@ -9568,12 +9577,13 @@
   "description": "A town in the Galar region.",
   "connections": [
    "galar-route-5",
-   "galar-route-8"
+   "galar-route-10",
+   "galar-spikemuth"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "galar-route-8",
+     "locationId": "galar-route-10",
      "count": 15
     }
    ]
@@ -9581,7 +9591,7 @@
   "unlockOrder": 355,
   "position": {
    "x": 94,
-   "y": 45
+   "y": 35
   },
   "mart": {
    "name": "Galar Mart",
@@ -9612,20 +9622,20 @@
   "description": "A town in the Galar region.",
   "connections": [
    "galar-route-9",
-   "galar-route-8"
+   "galar-hulbury"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "galar-route-8",
+     "locationId": "galar-hulbury",
      "count": 15
     }
    ]
   },
   "unlockOrder": 356,
   "position": {
-   "x": 94,
-   "y": 28
+   "x": 90,
+   "y": 41
   },
   "mart": {
    "name": "Galar Mart",
@@ -9656,20 +9666,20 @@
   "description": "A mysterious island where Galar's rarest Pokemon dwell.",
   "routeKey": "galar-raid",
   "connections": [
-   "galar-route-9"
+   "galar-route-10"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "galar-route-9",
+     "locationId": "galar-route-10",
      "count": 20
     }
    ]
   },
   "unlockOrder": 357,
   "position": {
-   "x": 94,
-   "y": 36
+   "x": 92,
+   "y": 23
   }
  },
  "paldea-los-platos": {
@@ -9679,143 +9689,15 @@
   "region": "paldea",
   "description": "A town in the Paldea region.",
   "connections": [
-   "paldea-south-province-area-one",
-   "paldea-porto-marinada",
-   "paldea-medali",
-   "paldea-montenevera",
-   "paldea-east-province-area-three"
+   "paldea-south-province-area-one"
   ],
   "unlock": {
    "championDefeated": "galar"
   },
   "unlockOrder": 358,
   "position": {
-   "x": 29,
-   "y": 54
-  },
-  "mart": {
-   "name": "Paldea Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
-  }
- },
- "paldea-porto-marinada": {
-  "id": "paldea-porto-marinada",
-  "name": "Porto Marinada",
-  "type": "town",
-  "region": "paldea",
-  "description": "A town in the Paldea region.",
-  "connections": [
-   "paldea-west-province-area-two",
-   "paldea-los-platos",
-   "paldea-south-province-area-four",
-   "paldea-west-province-area-one"
-  ],
-  "unlock": {
-   "requires": [
-    "paldea-los-platos"
-   ]
-  },
-  "unlockOrder": 359,
-  "position": {
-   "x": 62,
-   "y": 58
-  },
-  "mart": {
-   "name": "Paldea Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
-  }
- },
- "paldea-medali": {
-  "id": "paldea-medali",
-  "name": "Medali",
-  "type": "town",
-  "region": "paldea",
-  "description": "A town in the Paldea region.",
-  "connections": [
-   "paldea-west-province-area-three",
-   "paldea-los-platos"
-  ],
-  "unlock": {
-   "requires": [
-    "paldea-los-platos"
-   ]
-  },
-  "unlockOrder": 360,
-  "position": {
-   "x": 15,
-   "y": 70
-  },
-  "mart": {
-   "name": "Paldea Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
-  }
- },
- "paldea-montenevera": {
-  "id": "paldea-montenevera",
-  "name": "Montenevera",
-  "type": "town",
-  "region": "paldea",
-  "description": "A town in the Paldea region.",
-  "connections": [
-   "paldea-los-platos"
-  ],
-  "unlock": {
-   "requires": [
-    "paldea-los-platos"
-   ]
-  },
-  "unlockOrder": 361,
-  "position": {
-   "x": 6,
-   "y": 46
+   "x": 37,
+   "y": 34
   },
   "mart": {
    "name": "Paldea Mart",
@@ -9848,39 +9730,22 @@
   "connections": [
    "paldea-cabo-poco",
    "paldea-los-platos",
-   "paldea-mesagoza"
+   "paldea-mesagoza",
+   "paldea-cascarrafa",
+   "paldea-porto-marinada",
+   "paldea-south-province-area-five",
+   "paldea-east-province-area-three",
+   "paldea-west-province-area-one"
   ],
   "unlock": {
    "requires": [
     "paldea-los-platos"
    ]
   },
-  "unlockOrder": 362,
+  "unlockOrder": 359,
   "position": {
-   "x": 34,
-   "y": 58
-  }
- },
- "paldea-east-province-area-three": {
-  "id": "paldea-east-province-area-three",
-  "name": "East Province (Area Three)",
-  "type": "route",
-  "region": "paldea",
-  "description": "A route in the Paldea region.",
-  "routeKey": "paldea-east-province-area-three",
-  "connections": [
-   "paldea-zapapico",
-   "paldea-los-platos"
-  ],
-  "unlock": {
-   "requires": [
-    "paldea-los-platos"
-   ]
-  },
-  "unlockOrder": 363,
-  "position": {
-   "x": 42,
-   "y": 58
+   "x": 45,
+   "y": 46
   }
  },
  "paldea-cabo-poco": {
@@ -9890,8 +9755,7 @@
   "region": "paldea",
   "description": "A town in the Paldea region.",
   "connections": [
-   "paldea-south-province-area-one",
-   "paldea-zapapico"
+   "paldea-south-province-area-one"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -9901,10 +9765,10 @@
     }
    ]
   },
-  "unlockOrder": 364,
+  "unlockOrder": 360,
   "position": {
-   "x": 36,
-   "y": 30
+   "x": 44,
+   "y": 26
   },
   "mart": {
    "name": "Paldea Mart",
@@ -9946,10 +9810,10 @@
     }
    ]
   },
-  "unlockOrder": 365,
+  "unlockOrder": 361,
   "position": {
-   "x": 29,
-   "y": 6
+   "x": 38,
+   "y": 20
   },
   "mart": {
    "name": "Paldea Mart",
@@ -9972,29 +9836,144 @@
    ]
   }
  },
- "paldea-south-province-area-four": {
-  "id": "paldea-south-province-area-four",
-  "name": "South Province (Area Four)",
-  "type": "route",
+ "paldea-cascarrafa": {
+  "id": "paldea-cascarrafa",
+  "name": "Cascarrafa",
+  "type": "town",
   "region": "paldea",
-  "description": "A route in the Paldea region.",
-  "routeKey": "paldea-south-province-area-four",
+  "description": "A town in the Paldea region.",
   "connections": [
-   "paldea-porto-marinada",
-   "paldea-south-province-area-five"
+   "paldea-west-province-area-one",
+   "paldea-south-province-area-one"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "paldea-porto-marinada",
+     "locationId": "paldea-south-province-area-one",
      "count": 15
     }
    ]
   },
-  "unlockOrder": 366,
+  "unlockOrder": 362,
   "position": {
-   "x": 59,
-   "y": 46
+   "x": 49,
+   "y": 39
+  },
+  "mart": {
+   "name": "Paldea Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "paldea-porto-marinada": {
+  "id": "paldea-porto-marinada",
+  "name": "Porto Marinada",
+  "type": "town",
+  "region": "paldea",
+  "description": "A town in the Paldea region.",
+  "connections": [
+   "paldea-west-province-area-two",
+   "paldea-south-province-area-one",
+   "paldea-medali",
+   "paldea-south-province-area-four"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-south-province-area-one",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 363,
+  "position": {
+   "x": 51,
+   "y": 65
+  },
+  "mart": {
+   "name": "Paldea Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "paldea-south-province-area-five": {
+  "id": "paldea-south-province-area-five",
+  "name": "South Province (Area Five)",
+  "type": "route",
+  "region": "paldea",
+  "description": "A route in the Paldea region.",
+  "routeKey": "paldea-south-province-area-five",
+  "connections": [
+   "paldea-south-province-area-one",
+   "paldea-south-province-area-six"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-south-province-area-one",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 364,
+  "position": {
+   "x": 55,
+   "y": 48
+  }
+ },
+ "paldea-east-province-area-three": {
+  "id": "paldea-east-province-area-three",
+  "name": "East Province (Area Three)",
+  "type": "route",
+  "region": "paldea",
+  "description": "A route in the Paldea region.",
+  "routeKey": "paldea-east-province-area-three",
+  "connections": [
+   "paldea-zapapico",
+   "paldea-south-province-area-one"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-south-province-area-one",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 365,
+  "position": {
+   "x": 37,
+   "y": 43
   }
  },
  "paldea-west-province-area-one": {
@@ -10006,8 +9985,32 @@
   "routeKey": "paldea-west-province-area-one",
   "connections": [
    "paldea-cascarrafa",
+   "paldea-south-province-area-one"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-south-province-area-one",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 366,
+  "position": {
+   "x": 44,
+   "y": 54
+  }
+ },
+ "paldea-medali": {
+  "id": "paldea-medali",
+  "name": "Medali",
+  "type": "town",
+  "region": "paldea",
+  "description": "A town in the Paldea region.",
+  "connections": [
+   "paldea-west-province-area-three",
    "paldea-porto-marinada",
-   "paldea-north-province-area-one"
+   "paldea-montenevera"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -10019,56 +10022,8 @@
   },
   "unlockOrder": 367,
   "position": {
-   "x": 52,
-   "y": 70
-  }
- },
- "paldea-west-province-area-three": {
-  "id": "paldea-west-province-area-three",
-  "name": "West Province (Area Three)",
-  "type": "route",
-  "region": "paldea",
-  "description": "A route in the Paldea region.",
-  "routeKey": "paldea-west-province-area-three",
-  "connections": [
-   "paldea-medali"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "paldea-medali",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 368,
-  "position": {
-   "x": 10,
-   "y": 70
-  }
- },
- "paldea-zapapico": {
-  "id": "paldea-zapapico",
-  "name": "Zapapico",
-  "type": "town",
-  "region": "paldea",
-  "description": "A town in the Paldea region.",
-  "connections": [
-   "paldea-east-province-area-three",
-   "paldea-cabo-poco"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "paldea-cabo-poco",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 369,
-  "position": {
-   "x": 36,
-   "y": 35
+   "x": 22,
+   "y": 68
   },
   "mart": {
    "name": "Paldea Mart",
@@ -10110,10 +10065,10 @@
     }
    ]
   },
-  "unlockOrder": 370,
+  "unlockOrder": 368,
   "position": {
-   "x": 16,
-   "y": 6
+   "x": 29,
+   "y": 28
   }
  },
  "paldea-south-province-area-three": {
@@ -10125,7 +10080,8 @@
   "routeKey": "paldea-south-province-area-three",
   "connections": [
    "paldea-mesagoza",
-   "paldea-artazon"
+   "paldea-artazon",
+   "paldea-alfornada"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -10135,60 +10091,85 @@
     }
    ]
   },
-  "unlockOrder": 371,
+  "unlockOrder": 369,
   "position": {
-   "x": 42,
-   "y": 6
+   "x": 59,
+   "y": 28
   }
  },
- "paldea-south-province-area-five": {
-  "id": "paldea-south-province-area-five",
-  "name": "South Province (Area Five)",
+ "paldea-south-province-area-four": {
+  "id": "paldea-south-province-area-four",
+  "name": "South Province (Area Four)",
   "type": "route",
   "region": "paldea",
   "description": "A route in the Paldea region.",
-  "routeKey": "paldea-south-province-area-five",
+  "routeKey": "paldea-south-province-area-four",
   "connections": [
-   "paldea-south-province-area-four",
-   "paldea-west-province-area-two"
+   "paldea-porto-marinada",
+   "paldea-north-province-area-one",
+   "paldea-north-province-area-two"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "paldea-south-province-area-four",
+     "locationId": "paldea-porto-marinada",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 370,
+  "position": {
+   "x": 57,
+   "y": 73
+  }
+ },
+ "paldea-south-province-area-six": {
+  "id": "paldea-south-province-area-six",
+  "name": "South Province (Area Six)",
+  "type": "route",
+  "region": "paldea",
+  "description": "A route in the Paldea region.",
+  "routeKey": "paldea-south-province-area-six",
+  "connections": [
+   "paldea-alfornada",
+   "paldea-south-province-area-five"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-south-province-area-five",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 371,
+  "position": {
+   "x": 60,
+   "y": 40
+  }
+ },
+ "paldea-west-province-area-two": {
+  "id": "paldea-west-province-area-two",
+  "name": "West Province (Area Two)",
+  "type": "route",
+  "region": "paldea",
+  "description": "A route in the Paldea region.",
+  "routeKey": "paldea-west-province-area-two",
+  "connections": [
+   "paldea-porto-marinada"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-porto-marinada",
      "count": 15
     }
    ]
   },
   "unlockOrder": 372,
   "position": {
-   "x": 72,
-   "y": 46
-  }
- },
- "paldea-north-province-area-one": {
-  "id": "paldea-north-province-area-one",
-  "name": "North Province (Area One)",
-  "type": "route",
-  "region": "paldea",
-  "description": "A route in the Paldea region.",
-  "routeKey": "paldea-north-province-area-one",
-  "connections": [
-   "paldea-west-province-area-one",
-   "paldea-north-province-area-two"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "paldea-west-province-area-one",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 373,
-  "position": {
-   "x": 46,
-   "y": 94
+   "x": 58,
+   "y": 58
   }
  },
  "paldea-cortondo": {
@@ -10208,10 +10189,55 @@
     }
    ]
   },
+  "unlockOrder": 373,
+  "position": {
+   "x": 24,
+   "y": 20
+  },
+  "mart": {
+   "name": "Paldea Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "paldea-alfornada": {
+  "id": "paldea-alfornada",
+  "name": "Alfornada",
+  "type": "town",
+  "region": "paldea",
+  "description": "A town in the Paldea region.",
+  "connections": [
+   "paldea-south-province-area-six",
+   "paldea-south-province-area-three",
+   "paldea-zapapico"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-south-province-area-three",
+     "count": 15
+    }
+   ]
+  },
   "unlockOrder": 374,
   "position": {
-   "x": 21,
-   "y": 10
+   "x": 51,
+   "y": 31
   },
   "mart": {
    "name": "Paldea Mart",
@@ -10254,8 +10280,8 @@
   },
   "unlockOrder": 375,
   "position": {
-   "x": 56,
-   "y": 6
+   "x": 68,
+   "y": 20
   },
   "mart": {
    "name": "Paldea Mart",
@@ -10278,29 +10304,95 @@
    ]
   }
  },
- "paldea-west-province-area-two": {
-  "id": "paldea-west-province-area-two",
-  "name": "West Province (Area Two)",
-  "type": "route",
+ "paldea-montenevera": {
+  "id": "paldea-montenevera",
+  "name": "Montenevera",
+  "type": "town",
   "region": "paldea",
-  "description": "A route in the Paldea region.",
-  "routeKey": "paldea-west-province-area-two",
+  "description": "A town in the Paldea region.",
   "connections": [
-   "paldea-porto-marinada",
-   "paldea-south-province-area-five"
+   "paldea-medali"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "paldea-south-province-area-five",
+     "locationId": "paldea-medali",
      "count": 15
     }
    ]
   },
   "unlockOrder": 376,
   "position": {
-   "x": 69,
-   "y": 35
+   "x": 6,
+   "y": 55
+  },
+  "mart": {
+   "name": "Paldea Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
+  }
+ },
+ "paldea-west-province-area-three": {
+  "id": "paldea-west-province-area-three",
+  "name": "West Province (Area Three)",
+  "type": "route",
+  "region": "paldea",
+  "description": "A route in the Paldea region.",
+  "routeKey": "paldea-west-province-area-three",
+  "connections": [
+   "paldea-medali"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-medali",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 377,
+  "position": {
+   "x": 17,
+   "y": 75
+  }
+ },
+ "paldea-north-province-area-one": {
+  "id": "paldea-north-province-area-one",
+  "name": "North Province (Area One)",
+  "type": "route",
+  "region": "paldea",
+  "description": "A route in the Paldea region.",
+  "routeKey": "paldea-north-province-area-one",
+  "connections": [
+   "paldea-south-province-area-four"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-south-province-area-four",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 378,
+  "position": {
+   "x": 51,
+   "y": 79
   }
  },
  "paldea-north-province-area-two": {
@@ -10311,21 +10403,65 @@
   "description": "A route in the Paldea region.",
   "routeKey": "paldea-north-province-area-two",
   "connections": [
-   "paldea-north-province-area-one",
+   "paldea-south-province-area-four",
    "paldea-north-province-area-three"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "paldea-north-province-area-one",
+     "locationId": "paldea-south-province-area-four",
      "count": 15
     }
    ]
   },
-  "unlockOrder": 377,
+  "unlockOrder": 379,
   "position": {
-   "x": 59,
-   "y": 94
+   "x": 63,
+   "y": 80
+  }
+ },
+ "paldea-zapapico": {
+  "id": "paldea-zapapico",
+  "name": "Zapapico",
+  "type": "town",
+  "region": "paldea",
+  "description": "A town in the Paldea region.",
+  "connections": [
+   "paldea-east-province-area-three",
+   "paldea-alfornada"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-alfornada",
+     "count": 15
+    }
+   ]
+  },
+  "unlockOrder": 380,
+  "position": {
+   "x": 52,
+   "y": 23
+  },
+  "mart": {
+   "name": "Paldea Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
   }
  },
  "paldea-east-province-area-one": {
@@ -10337,7 +10473,7 @@
   "routeKey": "paldea-east-province-area-one",
   "connections": [
    "paldea-artazon",
-   "paldea-alfornada"
+   "paldea-levincia"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -10347,10 +10483,10 @@
     }
    ]
   },
-  "unlockOrder": 378,
+  "unlockOrder": 381,
   "position": {
-   "x": 60,
-   "y": 6
+   "x": 78,
+   "y": 29
   }
  },
  "paldea-north-province-area-three": {
@@ -10372,23 +10508,21 @@
     }
    ]
   },
-  "unlockOrder": 379,
+  "unlockOrder": 382,
   "position": {
-   "x": 72,
-   "y": 94
+   "x": 79,
+   "y": 75
   }
  },
- "paldea-alfornada": {
-  "id": "paldea-alfornada",
-  "name": "Alfornada",
+ "paldea-levincia": {
+  "id": "paldea-levincia",
+  "name": "Levincia",
   "type": "town",
   "region": "paldea",
   "description": "A town in the Paldea region.",
   "connections": [
-   "paldea-south-province-area-six",
-   "paldea-east-province-area-one",
-   "paldea-levincia",
-   "paldea-cascarrafa"
+   "paldea-east-province-area-two",
+   "paldea-east-province-area-one"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -10398,10 +10532,10 @@
     }
    ]
   },
-  "unlockOrder": 380,
+  "unlockOrder": 383,
   "position": {
-   "x": 65,
-   "y": 23
+   "x": 83,
+   "y": 47
   },
   "mart": {
    "name": "Paldea Mart",
@@ -10441,142 +10575,30 @@
     }
    ]
   },
-  "unlockOrder": 381,
-  "position": {
-   "x": 85,
-   "y": 94
-  },
-  "mart": {
-   "name": "Paldea Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
-  }
- },
- "paldea-levincia": {
-  "id": "paldea-levincia",
-  "name": "Levincia",
-  "type": "town",
-  "region": "paldea",
-  "description": "A town in the Paldea region.",
-  "connections": [
-   "paldea-east-province-area-two",
-   "paldea-alfornada"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "paldea-alfornada",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 382,
-  "position": {
-   "x": 94,
-   "y": 23
-  },
-  "mart": {
-   "name": "Paldea Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
-  }
- },
- "paldea-cascarrafa": {
-  "id": "paldea-cascarrafa",
-  "name": "Cascarrafa",
-  "type": "town",
-  "region": "paldea",
-  "description": "A town in the Paldea region.",
-  "connections": [
-   "paldea-west-province-area-one",
-   "paldea-alfornada"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "paldea-alfornada",
-     "count": 15
-    }
-   ]
-  },
-  "unlockOrder": 383,
-  "position": {
-   "x": 52,
-   "y": 23
-  },
-  "mart": {
-   "name": "Paldea Mart",
-   "items": [
-    {
-     "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
-    }
-   ]
-  }
- },
- "paldea-south-province-area-six": {
-  "id": "paldea-south-province-area-six",
-  "name": "South Province (Area Six)",
-  "type": "route",
-  "region": "paldea",
-  "description": "A route in the Paldea region.",
-  "routeKey": "paldea-south-province-area-six",
-  "connections": [
-   "paldea-alfornada"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "paldea-alfornada",
-     "count": 15
-    }
-   ]
-  },
   "unlockOrder": 384,
   "position": {
-   "x": 70,
-   "y": 27
+   "x": 94,
+   "y": 74
+  },
+  "mart": {
+   "name": "Paldea Mart",
+   "items": [
+    {
+     "itemId": "pokeball"
+    },
+    {
+     "itemId": "greatball"
+    },
+    {
+     "itemId": "ultraball"
+    },
+    {
+     "itemId": "repel"
+    },
+    {
+     "itemId": "honey"
+    }
+   ]
   }
  },
  "paldea-east-province-area-two": {
@@ -10587,7 +10609,8 @@
   "description": "A route in the Paldea region.",
   "routeKey": "paldea-east-province-area-two",
   "connections": [
-   "paldea-levincia"
+   "paldea-levincia",
+   "paldea-raid"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -10599,8 +10622,8 @@
   },
   "unlockOrder": 385,
   "position": {
-   "x": 90,
-   "y": 23
+   "x": 78,
+   "y": 54
   }
  },
  "paldea-raid": {
@@ -10623,8 +10646,8 @@
   },
   "unlockOrder": 386,
   "position": {
-   "x": 94,
-   "y": 17
+   "x": 91,
+   "y": 48
   }
  }
 }

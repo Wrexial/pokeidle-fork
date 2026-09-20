@@ -179,42 +179,99 @@ async function regionGraph(regionName) {
 // --- layout ------------------------------------------------------------------
 const OFFSET = { north: [0, -1], south: [0, 1], east: [1, 0], west: [-1, 0] }
 
-function layout(nodes, edges, iterations = 400) {
+function layout(nodes, edges, iterations = 900) {
   const pos = {}
-  nodes.forEach((n, i) => (pos[n] = { x: (i % 10) - 5, y: Math.floor(i / 10) - 5 }))
+  nodes.forEach((n, i) => (pos[n] = { x: (i % 10) * 12, y: Math.floor(i / 10) * 12 }))
+  const L = 12 // preferred edge length
+  const R = 7 // repulsion radius (< L so neighbours don't fight their spring)
   for (let it = 0; it < iterations; it++) {
     const acc = {}
     const cnt = {}
-    for (const n of nodes) acc[n] = { x: 0, y: 0 }, (cnt[n] = 0)
-    // node positions pull toward constraints, plus a weak centering force
+    for (const n of nodes) ((acc[n] = { x: 0, y: 0 }), (cnt[n] = 0))
+    // weak centering
     for (const n of nodes) {
-      acc[n].x += pos[n].x * 0.15
-      acc[n].y += pos[n].y * 0.15
-      cnt[n] += 0.15
+      acc[n].x += pos[n].x * 0.02
+      acc[n].y += pos[n].y * 0.02
+      cnt[n] += 0.02
     }
+    // directional springs
     for (const e of edges) {
       const [dx, dy] = OFFSET[e.dir] || [0, 0]
-      // e.to should be e.from + offset  =>  from = to - offset
-      acc[e.to].x += pos[e.from].x + dx
-      acc[e.to].y += pos[e.from].y + dy
+      acc[e.to].x += pos[e.from].x + dx * L
+      acc[e.to].y += pos[e.from].y + dy * L
       cnt[e.to] += 1
-      acc[e.from].x += pos[e.to].x - dx
-      acc[e.from].y += pos[e.to].y - dy
+      acc[e.from].x += pos[e.to].x - dx * L
+      acc[e.from].y += pos[e.to].y - dy * L
       cnt[e.from] += 1
     }
-    for (const n of nodes) {
-      if (!cnt[n]) continue
-      pos[n] = { x: acc[n].x / cnt[n], y: acc[n].y / cnt[n] }
-    }
+    const next = {}
+    for (const n of nodes)
+      next[n] = cnt[n] ? { x: acc[n].x / cnt[n], y: acc[n].y / cnt[n] } : pos[n]
+    // gentle repulsion for close pairs only
+    for (let i = 0; i < nodes.length; i++)
+      for (let j = i + 1; j < nodes.length; j++) {
+        const a = next[nodes[i]]
+        const b = next[nodes[j]]
+        let ddx = b.x - a.x
+        let ddy = b.y - a.y
+        let d = Math.hypot(ddx, ddy)
+        if (d >= R) continue
+        if (d < 0.01) ((ddx = 1), (ddy = 0), (d = 1))
+        const push = (R - d) * 0.4
+        const ux = ddx / d
+        const uy = ddy / d
+        ;(a.x -= ux * push), (a.y -= uy * push)
+        ;(b.x += ux * push), (b.y += uy * push)
+      }
+    for (const n of nodes) pos[n] = next[n]
   }
-  // normalise to 6..94
+  // uniform normalisation (keeps the aspect ratio, so directions are preserved)
   const xs = nodes.map((n) => pos[n].x), ys = nodes.map((n) => pos[n].y)
   const minX = Math.min(...xs), maxX = Math.max(...xs), minY = Math.min(...ys), maxY = Math.max(...ys)
-  for (const n of nodes) {
+  const w = maxX - minX || 1, h = maxY - minY || 1
+  const scale = 88 / Math.max(w, h)
+  for (const n of nodes)
     pos[n] = {
-      x: Math.round(6 + ((pos[n].x - minX) / (maxX - minX || 1)) * 88),
-      y: Math.round(6 + ((pos[n].y - minY) / (maxY - minY || 1)) * 88),
+      x: 6 + (pos[n].x - minX) * scale + (88 - w * scale) / 2,
+      y: 6 + (pos[n].y - minY) * scale + (88 - h * scale) / 2,
     }
+  // one more gentle canvas-space separation pass, then clamp + round
+  const TARGET = 6
+  for (let pass = 0; pass < 300; pass++) {
+    let moved = false
+    for (let i = 0; i < nodes.length; i++)
+      for (let j = i + 1; j < nodes.length; j++) {
+        const a = pos[nodes[i]]
+        const b = pos[nodes[j]]
+        let ddx = b.x - a.x
+        let ddy = b.y - a.y
+        let d = Math.hypot(ddx, ddy)
+        if (d >= TARGET) continue
+        if (d < 0.01) ((ddx = 1), (ddy = 0), (d = 1))
+        const push = (TARGET - d) * 0.3
+        const ux = ddx / d
+        const uy = ddy / d
+        ;(a.x -= ux * push), (a.y -= uy * push)
+        ;(b.x += ux * push), (b.y += uy * push)
+        moved = true
+      }
+    for (const n of nodes) {
+      pos[n].x = Math.max(4, Math.min(96, pos[n].x))
+      pos[n].y = Math.max(4, Math.min(96, pos[n].y))
+    }
+    if (!moved) break
+  }
+  const taken = new Set()
+  for (const n of nodes) {
+    let x = Math.round(pos[n].x)
+    let y = Math.round(pos[n].y)
+    let guard = 0
+    while (taken.has(x + ',' + y) && guard++ < 40) {
+      x = x + 3 > 96 ? 4 : x + 3
+      y = y + 2 > 96 ? 4 : y + 2
+    }
+    taken.add(x + ',' + y)
+    pos[n] = { x, y }
   }
   return pos
 }

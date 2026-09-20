@@ -596,6 +596,30 @@
     "level": 90
    },
    {
+    "speciesKey": "pansage",
+    "level": 80
+   },
+   {
+    "speciesKey": "simisage",
+    "level": 80
+   },
+   {
+    "speciesKey": "pansear",
+    "level": 80
+   },
+   {
+    "speciesKey": "simisear",
+    "level": 80
+   },
+   {
+    "speciesKey": "panpour",
+    "level": 80
+   },
+   {
+    "speciesKey": "simipour",
+    "level": 80
+   },
+   {
     "speciesKey": "munna",
     "level": 80
    },
@@ -677,14 +701,6 @@
    },
    {
     "speciesKey": "zoroark",
-    "level": 80
-   },
-   {
-    "speciesKey": "ducklett",
-    "level": 80
-   },
-   {
-    "speciesKey": "swanna",
     "level": 80
    },
    {

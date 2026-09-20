@@ -175,18 +175,26 @@ for (const region of REGIONS) {
   const order = nodes.slice().sort((a, b) => depth[a] - depth[b])
   const routeNodes = order.filter(isRouteNode)
   const townNodes = order.filter(isTownNode)
-  const usedPos = new Set()
-  const place = (node) => {
-    let x = positions[node]?.x ?? 50
-    let y = positions[node]?.y ?? 50
+  const usedPos = []
+  const placeAt = (x0, y0) => {
+    let x = x0
+    let y = y0
     let guard = 0
-    while (usedPos.has(x + ',' + y) && guard++ < 60) {
-      x = x + 5 > 96 ? 6 : x + 5
-      y = y + 4 > 96 ? 6 : y + 4
+    while (guard++ < 200) {
+      let ok = true
+      for (const p of usedPos)
+        if (Math.hypot(x - p.x, y - p.y) < 6) {
+          ok = false
+          break
+        }
+      if (ok) break
+      x = x + 5 > 96 ? 4 : x + 5
+      y = y + 4 > 96 ? 4 : y + 4
     }
-    usedPos.add(x + ',' + y)
+    usedPos.push({ x, y })
     return { x, y }
   }
+  const place = (node) => placeAt(positions[node]?.x ?? 50, positions[node]?.y ?? 50)
   const base = GEN_BASE_LEVEL[gen]
   const starters = GEN_STARTERS[gen]
   const all = speciesForGen(gen)
@@ -344,10 +352,10 @@ for (const region of REGIONS) {
         battlesAtLocation: [{ locationId: locId(regionId, lastRoute), count: 20 }],
       },
       unlockOrder: unlockOrder++,
-      position: (() => {
-        const p = place(lastRoute)
-        return { x: Math.min(94, p.x + 8), y: Math.max(6, p.y - 10) }
-      })(),
+      position: placeAt(
+        Math.min(94, (positions[lastRoute]?.x ?? 50) + 8),
+        Math.max(6, (positions[lastRoute]?.y ?? 50) - 10)
+      ),
     }
   }
 
@@ -408,6 +416,31 @@ if (realEncounters.kanto) {
       if (species[key] && !safari.encounters.some((e) => e.speciesKey === key))
         safari.encounters.push({ speciesKey: key, weight: 1, minLevel: 20, maxLevel: 25 })
   console.log('kanto buckets refreshed:', refreshed)
+}
+
+// tidy the graph: make every connection mutual, and hang any isolated location
+// (e.g. Kanto's Raid Island) off its nearest neighbour so it isn't floating
+// on the map with no road.
+for (const loc of Object.values(mapData)) {
+  for (const id of [...loc.connections]) {
+    const other = mapData[id]
+    if (other && !other.connections.includes(loc.id)) other.connections.push(loc.id)
+  }
+}
+for (const loc of Object.values(mapData)) {
+  if (loc.connections.length) continue
+  let best = null,
+    bestD = Infinity
+  for (const other of Object.values(mapData)) {
+    if (other.id === loc.id || (other.region ?? 'kanto') !== (loc.region ?? 'kanto')) continue
+    const dx = other.position.x - loc.position.x,
+      dy = other.position.y - loc.position.y
+    if (dx * dx + dy * dy < bestD) ((bestD = dx * dx + dy * dy), (best = other))
+  }
+  if (best) {
+    loc.connections.push(best.id)
+    best.connections.push(loc.id)
+  }
 }
 
 write('regions.json', regions)

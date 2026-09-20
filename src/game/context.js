@@ -3,7 +3,7 @@
 import React from 'react'
 import { jsx } from 'react/jsx-runtime'
 import { SAVE_KEY } from '../data/config.js'
-import { mapData, preEvolutionMap } from '../data/gameData.js'
+import { encounterData, mapData, preEvolutionMap, regions } from '../data/gameData.js'
 import { generateIVs } from './pokemon.js'
 import { gameReducer, initialGameState } from './reducer.js'
 
@@ -98,18 +98,50 @@ export function GameProvider({ children }) {
             for (; preEvolution; ) (caughtSet.add(preEvolution), (preEvolution = preEvolutionMap[preEvolution]))
           }
           const seenSet = new Set([...seen, ...caughtSet])
+
+          // Repair save data that references content which no longer exists
+          // (regions/routes have been rebuilt several times), so an old save
+          // can't put the game loop into an unknown location and crash.
+          const savedLocation =
+              saved.currentLocation && mapData[saved.currentLocation]
+                ? saved.currentLocation
+                : null,
+            fallbackRegion =
+              (saved.startRegion && regions.some((r) => r.id === saved.startRegion)
+                ? saved.startRegion
+                : null) ??
+              (savedLocation ? mapData[savedLocation].region : null) ??
+              'kanto',
+            entryId = regions.find((r) => r.id === fallbackRegion)?.entry,
+            safeLocation = savedLocation || entryId || 'palletTown',
+            entryRoute = entryId
+              ? mapData[entryId]?.connections.find((id) => mapData[id]?.type === 'route')
+              : null,
+            safeRoute =
+              (saved.currentRoute && encounterData[saved.currentRoute]
+                ? saved.currentRoute
+                : null) ??
+              mapData[safeLocation]?.routeKey ??
+              entryRoute ??
+              'route1'
+          let safeUnlocked = /** @type {string[]} */ (Array.isArray(saved.unlockedLocations)
+            ? saved.unlockedLocations
+            : []
+          ).filter((id) => mapData[id])
+          for (const id of [entryId, safeLocation]) if (id && mapData[id]) safeUnlocked.push(id)
+          if (entryRoute) safeUnlocked.push(entryRoute)
+          safeUnlocked = [...new Set(safeUnlocked)]
+          if (safeUnlocked.length === 0) safeUnlocked = ['palletTown', 'route1']
+
           return (
             (caught = Array.from(caughtSet)),
             (seen = Array.from(seenSet)),
             {
               ...initialState,
               phase: 'idle',
-              startRegion:
-                saved.startRegion ||
-                mapData[saved.currentLocation]?.region ||
-                'kanto',
+              startRegion: fallbackRegion,
               playerPokemon: party[0] || playerPokemon,
-              currentRoute: saved.currentRoute || initialState.currentRoute,
+              currentRoute: safeRoute,
               speed: saved.speed || initialState.speed,
               wildBattlesWon: saved.wildBattlesWon ?? saved.battlesWon ?? 0,
               trainerBattlesWon: saved.trainerBattlesWon ?? 0,
@@ -118,11 +150,8 @@ export function GameProvider({ children }) {
               box,
               autoCatch: saved.autoCatch ?? !0,
               nextPokemonId: nextId,
-              currentLocation: saved.currentLocation || 'palletTown',
-              unlockedLocations: saved.unlockedLocations || [
-                'palletTown',
-                'route1',
-              ],
+              currentLocation: safeLocation,
+              unlockedLocations: safeUnlocked,
               battleLog: ['Game loaded!'],
               evolutionState: null,
               catchSettings,

@@ -105,7 +105,7 @@ export function useGameLoop() {
             return
           }
           if (
-            currentLocationData.type === 'raid' &&
+            currentLocationData?.type === 'raid' &&
             currentGameState.inRaid &&
             currentGameState.raidLegendary
           ) {

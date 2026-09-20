@@ -3,6 +3,11 @@
 import { evValue } from '../data/config.js'
 import { moveLearnsets, pokemonSpecies, preEvolutionMap, trainerClasses } from '../data/gameData.js'
 
+/**
+ * @param {number | string} spriteId
+ * @param {boolean} [isBack]
+ * @param {boolean} [isShiny]
+ */
 export function getPokemonSpriteUrl(spriteId, isBack = !1, isShiny = !1) {
   const baseUrl = '/sprites/pokemon/versions/generation-v/black-white/animated'
   return isShiny && isBack
@@ -14,6 +19,11 @@ export function getPokemonSpriteUrl(spriteId, isBack = !1, isShiny = !1) {
         : `${baseUrl}/${spriteId}.gif`
 }
 
+/**
+ * @param {number | string} spriteId
+ * @param {boolean} [isBack]
+ * @param {boolean} [isShiny]
+ */
 export function getPokemonSpriteFallbackUrl(spriteId, isBack = !1, isShiny = !1){
   const baseUrl = '/sprites/pokemon'
   return isShiny && isBack
@@ -26,16 +36,32 @@ export function getPokemonSpriteFallbackUrl(spriteId, isBack = !1, isShiny = !1)
 
 }
 
+/**
+ * @param {number} baseStat
+ * @param {number} level
+ * @param {number} iv
+ */
 export function calculateHpStat(baseStat, level, iv) {
   return Math.floor(((2 * baseStat + iv + Math.floor(evValue / 4)) * level) / 100) + level + 10
 }
 
+/**
+ * @param {number} baseStat
+ * @param {number} level
+ * @param {number} iv
+ */
 export function calculateOtherStat(baseStat, level, iv) {
   return Math.floor(
     (Math.floor(((2 * baseStat + iv + Math.floor(evValue / 4)) * level) / 100) + 5) * 1
   )
 }
 
+/**
+ * @param {Species} species
+ * @param {number} level
+ * @param {Record<string, number>} ivs
+ * @returns {StatBlock}
+ */
 export function calculatePokemonStats(species, level, ivs) {
   return {
     hp: calculateHpStat(species.baseStats.hp, level, ivs.hp),
@@ -47,6 +73,7 @@ export function calculatePokemonStats(species, level, ivs) {
   }
 }
 
+/** @returns {StatBlock} */
 export function generateIVs() {
   return {
     hp: Math.floor(Math.random() * 32),
@@ -58,6 +85,7 @@ export function generateIVs() {
   }
 }
 
+/** @returns {StatBlock} */
 export function getPerfectIVs() {
   return {
     hp: 31,
@@ -69,6 +97,11 @@ export function getPerfectIVs() {
   }
 }
 
+/**
+ * @param {number} currentLevel
+ * @param {string} growthRate
+ * @returns {number}
+ */
 export function calculateRequiredExperience(currentLevel, growthRate) {
   if (currentLevel <= 1) return 0
   const level = currentLevel
@@ -91,10 +124,22 @@ export function calculateRequiredExperience(currentLevel, growthRate) {
   return Math.floor(value)
 }
 
+/**
+ * @param {Species} species
+ * @param {number} level
+ * @returns {number}
+ */
 export function calculateExpYield(species, level) {
   return Math.floor((species.baseExpYield * level) / 7)
 }
 
+/**
+ * @param {string} speciesKey
+ * @param {string} growthRate
+ * @param {number} currentLevel
+ * @param {number} totalExp
+ * @returns {{ newLevel: number, newMoves: string[] }[]}
+ */
 export function getLevelUpResults(speciesKey, growthRate, currentLevel, totalExp) {
   const levelUps = []
   let level = currentLevel
@@ -114,6 +159,10 @@ export function getLevelUpResults(speciesKey, growthRate, currentLevel, totalExp
   return levelUps
 }
 
+/**
+ * @param {string} speciesKey
+ * @returns {string[]}
+ */
 export function getPreEvolutionChain(speciesKey) {
   const chain = [speciesKey]
   let current = speciesKey
@@ -122,6 +171,11 @@ export function getPreEvolutionChain(speciesKey) {
   return chain
 }
 
+/**
+ * @param {string} speciesKey
+ * @param {number} level
+ * @returns {{ moveId: string, learnLevel: number, fromSpecies: string }[]}
+ */
 export function getFamilyLearnset(speciesKey, level) {
   const chain = getPreEvolutionChain(speciesKey),
     seen = new Set(),
@@ -141,6 +195,11 @@ export function getFamilyLearnset(speciesKey, level) {
   return moves
 }
 
+/**
+ * @param {string} speciesKey
+ * @param {number} level
+ * @returns {string[]}
+ */
 export function resolvePokemonMoves(speciesKey, level) {
   return (moveLearnsets[speciesKey] || [])
     .filter(([learnLevel]) => learnLevel <= level)
@@ -148,6 +207,13 @@ export function resolvePokemonMoves(speciesKey, level) {
     .slice(-4)
 }
 
+/**
+ * @param {string} speciesKey
+ * @param {number} level
+ * @param {number | string} id
+ * @param {boolean} [isShiny]
+ * @returns {Pokemon}
+ */
 export function createPokemon(speciesKey, level, id, isShiny = !1) {
   const species = pokemonSpecies[speciesKey],
     ivs = generateIVs(),
@@ -157,6 +223,7 @@ export function createPokemon(speciesKey, level, id, isShiny = !1) {
     id: String(id),
     speciesKey,
     name: species.name,
+    types: species.types,
     level,
     totalExp: calculateRequiredExperience(level, species.growthRate),
     moves,
@@ -172,10 +239,12 @@ export function createPokemon(speciesKey, level, id, isShiny = !1) {
   }
 }
 
+/** @param {string} trainerClass */
 export function getTrainerSpriteUrl(trainerClass) {
   return `/sprites/trainers/${trainerClasses[trainerClass]}.png`
 }
 
+/** @param {string} spriteKey */
 export function getBossTrainerSpriteUrl(spriteKey) {
   return spriteKey ? `/sprites/trainers/${spriteKey}.png` : '/sprites/trainers/acetrainer.png'
 }

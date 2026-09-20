@@ -9,34 +9,40 @@ async function startApp() {
 
 const loadedGameData = await startApp()
 
-export let pokemonSpecies = loadedGameData.pokemonSpecies
+export let pokemonSpecies = /** @type {Record<string, Species>} */ (loadedGameData.pokemonSpecies)
 
-export let evolutionData = loadedGameData.evolutionData
+export let evolutionData = /** @type {Record<string, Evolution[]>} */ (loadedGameData.evolutionData)
 
-export let moveLearnsets = loadedGameData.moveLearnsets
+export let moveLearnsets = /** @type {Record<string, [number, string][]>} */ (
+  loadedGameData.moveLearnsets
+)
 
-export let mapData = loadedGameData.mapData
+export let mapData = /** @type {Record<string, MapLocation>} */ (loadedGameData.mapData)
 
-export let encounterData = loadedGameData.mapEncounterData
+export let encounterData = /** @type {Record<string, EncounterData>} */ (
+  loadedGameData.mapEncounterData
+)
 
-export let moveData = loadedGameData.moveData
+export let moveData = /** @type {Record<string, Move>} */ (loadedGameData.moveData)
 
-export let trainerClasses = loadedGameData.trainerClasses
+export let trainerClasses = /** @type {Record<string, string>} */ (loadedGameData.trainerClasses)
 
-export let trainerData = loadedGameData.trainerData
+export let trainerData = /** @type {Record<string, any[]>} */ (loadedGameData.trainerData)
 
-export let gymLeaderData = loadedGameData.gymLeaderData
+export let gymLeaderData = /** @type {any[]} */ (loadedGameData.gymLeaderData)
 
-export let elite4Data = loadedGameData.elite4Data
+export let elite4Data = /** @type {any[]} */ (loadedGameData.elite4Data)
 
-export let championData = loadedGameData.championData
+export let championData = /** @type {any} */ (loadedGameData.championData)
 
+/** @type {Record<string, string>} */
 export let preEvolutionMap = Object.fromEntries(
   Object.entries(evolutionData).flatMap(([speciesKey, evolutions]) =>
     evolutions.map((evolution) => [evolution.into, speciesKey])
   )
 )
 
+/** @type {Record<string, string[]>} */
 export let pokedexData = {}
 
 for (const location of Object.values(encounterData))
@@ -45,8 +51,10 @@ for (const location of Object.values(encounterData))
       pokedexData[encounter.speciesKey].includes(location.name) ||
         pokedexData[encounter.speciesKey].push(location.name))
 
+/** @type {[string, Species][]} */
 export let pokedexIndexes = Object.entries(pokemonSpecies).sort(
   (left, right) => left[1].id - right[1].id
 )
 
+/** @type {string[]} */
 export const mapAreas = Object.keys(mapData)

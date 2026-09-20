@@ -1,6 +1,26 @@
 // Ambient types for the globals injected by assets/gameDataInjector.js,
 // plus the core game state shapes used across src/.
 
+type StatBlock = {
+  hp: number
+  attack: number
+  defense: number
+  spAttack: number
+  spDefense: number
+  speed: number
+}
+
+type Species = {
+  id: number
+  name: string
+  types: string[]
+  baseStats: StatBlock
+  baseExpYield: number
+  growthRate: string
+  catchRate?: number
+  [key: string]: any
+}
+
 /** A move id -> move definition lookup is data-driven; keep it loose. */
 type Move = {
   name: string
@@ -13,13 +33,11 @@ type Move = {
   [key: string]: any
 }
 
-type Pokemon = {
-  id: string
+type BattlePokemon = {
   speciesKey: string
   name: string
+  types: string[]
   level: number
-  totalExp: number
-  moves: string[]
   currentHp: number
   maxHp: number
   attack: number
@@ -27,15 +45,43 @@ type Pokemon = {
   spAttack: number
   spDefense: number
   speed: number
-  ivs: Record<string, number>
-  isShiny: boolean
-  types?: string[]
+  moves: string[]
+  isShiny?: boolean
   isPlayer?: boolean
   statStages?: Record<string, number>
   mustRecharge?: boolean
   lockedMove?: string | null
   lockTurnsRemaining?: number
   [key: string]: any
+}
+
+type Pokemon = BattlePokemon & {
+  id: string
+  totalExp: number
+  ivs: Record<string, number>
+  isShiny: boolean
+}
+
+type PokeBall = {
+  id: string
+  name: string
+  description: string
+  buyPrice: number | null
+  ballModifier: number
+}
+
+type CatchRule = {
+  enabled: boolean
+  mode: string
+  levelThreshold: number
+  enabledBalls: string[]
+}
+
+type VolatileState = {
+  statStages: Record<string, number>
+  mustRecharge: boolean
+  lockedMove: string | null
+  lockTurnsRemaining: number
 }
 
 type GameAction = { type: string; payload?: any; [key: string]: any }
@@ -59,6 +105,34 @@ type GameState = {
   pendingEvents: any[]
   [key: string]: any
 }
+
+type EncounterEntry = {
+  speciesKey: string
+  weight: number
+  minLevel: number
+  maxLevel: number
+}
+
+type EncounterData = { name: string; encounters: EncounterEntry[]; [key: string]: any }
+
+type MapLocation = {
+  id: string
+  name: string
+  type: string
+  description?: string
+  connections: string[]
+  routeKey?: string
+  unlock: {
+    battlesAtLocation?: { locationId: string; count: number }[]
+    badgesRequired?: number
+    championDefeated?: boolean
+  }
+  unlockOrder: number
+  position: { x: number; y: number }
+  [key: string]: any
+}
+
+type Evolution = { into: string; level?: number; item?: string; [key: string]: any }
 
 interface Window {
   /** Resolves once all game JSON has been fetched. */

@@ -6,6 +6,7 @@ export const moveCategoryIcons = {
   status: '☯',
 }
 
+/** @type {Record<string, Record<string, number>>} */
 export const typechart = {
   Normal: {
     Rock: 0.5,

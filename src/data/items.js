@@ -27,6 +27,7 @@ export const activeItems = {
     },
   }
 
+/** @type {Record<string, PokeBall>} */
 export const pokeBalls = {
     pokeball: {
       id: 'pokeball',

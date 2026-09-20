@@ -5,18 +5,36 @@ import { activeItems, evolutionItems, pokeBalls } from '../data/items.js'
 import { encounterData, mapData, moveData, pokemonSpecies } from '../data/gameData.js'
 import { calculateExpYield, calculatePokemonStats, getLevelUpResults, getPerfectIVs, resolvePokemonMoves } from './pokemon.js'
 
+/**
+ * @param {GameState} state
+ * @param {string} routeKey
+ * @param {string} speciesKey
+ * @returns {CatchRule}
+ */
 export function getCatchRule(state, routeKey, speciesKey) {
   return state.catchSettings[routeKey]?.[speciesKey] ?? state.globalCatchDefaults
 }
 
+/**
+ * @param {string} itemId
+ * @returns {string}
+ */
 export function getItemCategory(itemId) {
   return itemId in pokeBalls ? 'pokeballs' : 'items'
 }
 
+/**
+ * @param {string} itemId
+ * @returns {boolean}
+ */
 export function isActiveEffectItem(itemId) {
   return itemId in activeItems
 }
 
+/**
+ * @param {string} itemId
+ * @returns {{ name: string, description: string }}
+ */
 export function getItemInfo(itemId) {
   if (itemId in pokeBalls) {
     const item = pokeBalls[itemId]
@@ -45,6 +63,10 @@ export function getItemInfo(itemId) {
   }
 }
 
+/**
+ * @param {GameState} state
+ * @returns {string[]}
+ */
 export function computeUnlockedLocations(state) {
   const unlocked = new Set(state.unlockedLocations),
     badgeCount = state.defeatedGyms.length
@@ -62,25 +84,34 @@ export function computeUnlockedLocations(state) {
   return Array.from(unlocked)
 }
 
+/**
+ * @param {GameState} state
+ * @returns {number}
+ */
 export function getActivePartyIndex(state) {
   return state.activePlayerPokemonIndex
 }
 
+/**
+ * @param {GameState} state
+ * @returns {GameState}
+ */
 export function syncActivePokemonIntoParty(state) {
   if (!state.playerPokemon || state.party.length === 0) return state
   const activeIndex = getActivePartyIndex(state),
+    activePokemon = state.playerPokemon,
     party = [...state.party]
-  if (activeIndex >= 0 && activeIndex < party.length && party[activeIndex].id === state.playerPokemon.id)
+  if (activeIndex >= 0 && activeIndex < party.length && party[activeIndex].id === activePokemon.id)
     return (
-      (party[activeIndex] = state.playerPokemon),
+      (party[activeIndex] = activePokemon),
       {
         ...state,
         party,
       }
     )
-  const existingIndex = party.findIndex((member) => member.id === state.playerPokemon.id)
+  const existingIndex = party.findIndex((member) => member.id === activePokemon.id)
   return existingIndex >= 0
-    ? ((party[existingIndex] = state.playerPokemon),
+    ? ((party[existingIndex] = activePokemon),
       {
         ...state,
         party,
@@ -89,6 +120,10 @@ export function syncActivePokemonIntoParty(state) {
     : state
 }
 
+/**
+ * @param {GameState} state
+ * @returns {GameState}
+ */
 export function loadActivePokemonFromParty(state) {
   if (state.party.length === 0) return state
   const activeIndex = getActivePartyIndex(state)
@@ -104,6 +139,7 @@ export function loadActivePokemonFromParty(state) {
       }
 }
 
+/** @returns {Partial<GameState>} */
 export function createIdleBattleState() {
   return {
     phase: 'idle',
@@ -119,6 +155,10 @@ export function createIdleBattleState() {
   }
 }
 
+/**
+ * @param {GameState} state
+ * @returns {GameState}
+ */
 export function prepareNextBattle(state) {
   const synced = syncActivePokemonIntoParty(state),
     firstAliveIndex = synced.party.findIndex((member) => member.currentHp > 0),
@@ -131,6 +171,10 @@ export function prepareNextBattle(state) {
   }
 }
 
+/**
+ * @param {ActiveEffect[]} effects
+ * @returns {ActiveEffect[]}
+ */
 export function tickBattleCounters(effects) {
   return effects
     .map((effect) => ({
@@ -140,11 +184,20 @@ export function tickBattleCounters(effects) {
     .filter((effect) => effect.battlesRemaining > 0)
 }
 
+/**
+ * @param {boolean} [isDexComplete]
+ * @returns {boolean}
+ */
 export function checkShinyOdds(isDexComplete = !1) {
   const odds = isDexComplete ? shinyWithCharmChance : shinyFullOddsChance
   return Math.floor(Math.random() * odds) === 0
 }
 
+/**
+ * @param {ActiveEffect[]} activeEffects
+ * @param {string} routeKey
+ * @returns {{ speciesKey: string, multiplier: number }[]}
+ */
 export function resolveActiveModifiers(activeEffects, routeKey) {
   const modifiers = []
   for (const effect of activeEffects)
@@ -163,6 +216,12 @@ export function resolveActiveModifiers(activeEffects, routeKey) {
   return modifiers
 }
 
+/**
+ * @param {EncounterData} encounterData
+ * @param {{ speciesKey: string, multiplier: number }[]} [modifiers]
+ * @param {boolean} [isDexComplete]
+ * @returns {{ species: Species, speciesKey: string, level: number, isShiny: boolean }}
+ */
 export function resolvePokemonEncounter(encounterData, modifiers, isDexComplete = !1) {
   const weightedEncounters = encounterData.encounters.map((encounter) => {
       const modifier = modifiers?.find((candidate) => candidate.speciesKey === encounter.speciesKey)
@@ -195,6 +254,16 @@ export function resolvePokemonEncounter(encounterData, modifiers, isDexComplete 
   }
 }
 
+/**
+ * @param {(action: GameAction) => void} dispatch
+ * @param {Pokemon} playerPokemon
+ * @param {BattlePokemon} enemyPokemon
+ * @param {number} multiplier
+ * @param {boolean} [hasExpShare]
+ * @param {Pokemon[]} [party]
+ * @param {number} [activeIndex]
+ * @returns {void}
+ */
 export function awardExperience(dispatch, playerPokemon, enemyPokemon, multiplier, hasExpShare = !1, party = [], activeIndex = 0) {
   const enemySpecies = pokemonSpecies[enemyPokemon.speciesKey],
     baseExp = calculateExpYield(enemySpecies, enemyPokemon.level),
@@ -296,6 +365,10 @@ export function awardExperience(dispatch, playerPokemon, enemyPokemon, multiplie
   }
 }
 
+/**
+ * @param {any[]} team
+ * @returns {BattlePokemon[]}
+ */
 export function buildTrainerTeam(team) {
   return team.map((member) => {
     const species = pokemonSpecies[member.speciesKey],
@@ -320,6 +393,10 @@ export function buildTrainerTeam(team) {
   })
 }
 
+/**
+ * @param {number} ms
+ * @returns {string}
+ */
 export function formatCooldown(ms) {
   const totalSeconds = Math.max(0, Math.ceil(ms / 1e3)),
     minutes = Math.floor(totalSeconds / 60),
@@ -327,6 +404,11 @@ export function formatCooldown(ms) {
   return `${minutes}:${String(seconds).padStart(2, '0')}`
 }
 
+/**
+ * @param {string} fromId
+ * @param {string} toId
+ * @returns {{ x1: number, y1: number, x2: number, y2: number }[]}
+ */
 export function createRoads(fromId, toId) {
   const fromLocation = mapData[fromId],
     toLocation = mapData[toId],

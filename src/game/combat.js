@@ -3,6 +3,7 @@
 import { typechart } from '../data/moves.js'
 import { moveData } from '../data/gameData.js'
 
+/** @returns {VolatileState} */
 export function createVolatileState() {
   return {
     statStages: {
@@ -18,20 +19,45 @@ export function createVolatileState() {
   }
 }
 
+/**
+ * @param {string} attackType
+ * @param {string[]} defenderTypes
+ * @returns {number}
+ */
 export function getTypeEffectiveness(attackType, defenderTypes) {
   let multiplier = 1
   for (const defenderType of defenderTypes) multiplier *= typechart[attackType]?.[defenderType] ?? 1
   return multiplier
 }
 
+/**
+ * @param {string} attackType
+ * @param {string[]} defenderTypes
+ * @returns {number}
+ */
 export function getTypeMultiplier(attackType, defenderTypes) {
   return getTypeEffectiveness(attackType, defenderTypes)
 }
 
+/**
+ * @param {number} stage
+ * @returns {number}
+ */
 export function statStageMultiplier(stage) {
   return stage >= 0 ? (2 + stage) / 2 : 2 / (2 - stage)
 }
 
+/**
+ * @param {number} attackerLevel
+ * @param {number} attack
+ * @param {number} defense
+ * @param {Move} move
+ * @param {string[]} attackerTypes
+ * @param {string[]} defenderTypes
+ * @param {number} [attackerStage]
+ * @param {number} [defenderStage]
+ * @returns {{ damage: number, isCrit: boolean, effectiveness: number, effectivenessLabel: string | null }}
+ */
 export function calculateDamage(attackerLevel, attack, defense, move, attackerTypes, defenderTypes, attackerStage = 0, defenderStage = 0) {
   if (move.power === 0)
     return {
@@ -73,6 +99,17 @@ export function calculateDamage(attackerLevel, attack, defense, move, attackerTy
   )
 }
 
+/**
+ * @param {number} attackerLevel
+ * @param {number} attack
+ * @param {number} defense
+ * @param {Move} move
+ * @param {string[]} attackerTypes
+ * @param {string[]} defenderTypes
+ * @param {number} [attackerStage]
+ * @param {number} [defenderStage]
+ * @returns {number}
+ */
 export function estimateMoveDamage(attackerLevel, attack, defense, move, attackerTypes, defenderTypes, attackerStage = 0, defenderStage = 0) {
   if (move.power === 0) return 0
   const effectiveAttack = Math.floor(attack * statStageMultiplier(attackerStage)),
@@ -83,6 +120,19 @@ export function estimateMoveDamage(attackerLevel, attack, defense, move, attacke
   return Math.floor(baseDamage * stabMultiplier * effectiveness * 0.925)
 }
 
+/**
+ * @param {string[]} moves
+ * @param {number} attackerLevel
+ * @param {number} attack
+ * @param {number} spAttack
+ * @param {string[]} attackerTypes
+ * @param {string[]} defenderTypes
+ * @param {number} defenderDefense
+ * @param {number} defenderSpDefense
+ * @param {Record<string, number>} [attackerStages]
+ * @param {Record<string, number>} [defenderStages]
+ * @returns {{ moveId: string, move: Move }}
+ */
 export function chooseBestMove(moves, attackerLevel, attack, spAttack, attackerTypes, defenderTypes, defenderDefense, defenderSpDefense, attackerStages, defenderStages) {
   let bestMoveId = moves[0],
     bestDamage = -1
@@ -122,6 +172,10 @@ export function chooseBestMove(moves, attackerLevel, attack, spAttack, attackerT
   }
 }
 
+/**
+ * @param {string[]} moves
+ * @returns {{ moveId: string, move: Move }}
+ */
 export function chooseRandomMove(moves) {
   const damagingMoves = moves.filter((moveId) => {
       const moveDef = moveData[moveId]
@@ -135,14 +189,29 @@ export function chooseRandomMove(moves) {
   }
 }
 
+/**
+ * @param {{ statStages?: Record<string, number> }} volatile
+ * @param {string} statKey
+ * @returns {number}
+ */
 export function getStatStage(volatile, statKey) {
   return volatile.statStages?.[statKey] ?? 0
 }
 
+/**
+ * @param {number} stage
+ * @returns {number}
+ */
 export function clampStatStage(stage) {
   return Math.max(-6, Math.min(6, stage))
 }
 
+/**
+ * @param {BattlePokemon} player
+ * @param {BattlePokemon} enemy
+ * @param {boolean} [isTrainerBattle]
+ * @returns {any[]}
+ */
 export function resolveBattleTurn(player, enemy, isTrainerBattle = !1) {
   const events = []
   ;(player.statStages || (player.statStages = {}), enemy.statStages || (enemy.statStages = {}))
@@ -470,6 +539,10 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1) {
   return events
 }
 
+/**
+ * @param {string} statKey
+ * @returns {string | undefined}
+ */
 export function getStatLabel(statKey) {
   switch (statKey) {
     case 'attack':

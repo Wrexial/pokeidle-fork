@@ -12,7 +12,7 @@
    "entry": true,
    "previous": "unova"
   },
-  "unlockOrder": 271,
+  "unlockOrder": 275,
   "position": {
    "x": 49,
    "y": 94
@@ -54,7 +54,7 @@
     "kalos-vaniville-town"
    ]
   },
-  "unlockOrder": 272,
+  "unlockOrder": 276,
   "position": {
    "x": 49,
    "y": 85
@@ -78,7 +78,7 @@
     }
    ]
   },
-  "unlockOrder": 273,
+  "unlockOrder": 277,
   "position": {
    "x": 49,
    "y": 77
@@ -123,7 +123,7 @@
     }
    ]
   },
-  "unlockOrder": 274,
+  "unlockOrder": 278,
   "position": {
    "x": 49,
    "y": 68
@@ -148,7 +148,7 @@
     }
    ]
   },
-  "unlockOrder": 275,
+  "unlockOrder": 279,
   "position": {
    "x": 49,
    "y": 50
@@ -173,7 +173,7 @@
     }
    ]
   },
-  "unlockOrder": 276,
+  "unlockOrder": 280,
   "position": {
    "x": 49,
    "y": 42
@@ -218,7 +218,7 @@
     }
    ]
   },
-  "unlockOrder": 277,
+  "unlockOrder": 281,
   "position": {
    "x": 49,
    "y": 33
@@ -243,7 +243,7 @@
     }
    ]
   },
-  "unlockOrder": 278,
+  "unlockOrder": 282,
   "position": {
    "x": 57,
    "y": 41
@@ -270,7 +270,7 @@
     }
    ]
   },
-  "unlockOrder": 279,
+  "unlockOrder": 283,
   "position": {
    "x": 50,
    "y": 25
@@ -315,7 +315,7 @@
     }
    ]
   },
-  "unlockOrder": 280,
+  "unlockOrder": 284,
   "position": {
    "x": 72,
    "y": 40
@@ -340,7 +340,7 @@
     }
    ]
   },
-  "unlockOrder": 281,
+  "unlockOrder": 285,
   "position": {
    "x": 43,
    "y": 27
@@ -365,7 +365,7 @@
     }
    ]
   },
-  "unlockOrder": 282,
+  "unlockOrder": 286,
   "position": {
    "x": 45,
    "y": 19
@@ -390,7 +390,7 @@
     }
    ]
   },
-  "unlockOrder": 283,
+  "unlockOrder": 287,
   "position": {
    "x": 60,
    "y": 26
@@ -415,7 +415,7 @@
     }
    ]
   },
-  "unlockOrder": 284,
+  "unlockOrder": 288,
   "position": {
    "x": 69,
    "y": 31
@@ -441,7 +441,7 @@
     }
    ]
   },
-  "unlockOrder": 285,
+  "unlockOrder": 289,
   "position": {
    "x": 81,
    "y": 40
@@ -485,7 +485,7 @@
     }
    ]
   },
-  "unlockOrder": 286,
+  "unlockOrder": 290,
   "position": {
    "x": 35,
    "y": 29
@@ -529,7 +529,7 @@
     }
    ]
   },
-  "unlockOrder": 287,
+  "unlockOrder": 291,
   "position": {
    "x": 44,
    "y": 9
@@ -573,7 +573,7 @@
     }
    ]
   },
-  "unlockOrder": 288,
+  "unlockOrder": 292,
   "position": {
    "x": 50,
    "y": 11
@@ -619,7 +619,7 @@
     }
    ]
   },
-  "unlockOrder": 289,
+  "unlockOrder": 293,
   "position": {
    "x": 59,
    "y": 13
@@ -644,7 +644,7 @@
     }
    ]
   },
-  "unlockOrder": 290,
+  "unlockOrder": 294,
   "position": {
    "x": 89,
    "y": 40
@@ -668,7 +668,7 @@
     }
    ]
   },
-  "unlockOrder": 291,
+  "unlockOrder": 295,
   "position": {
    "x": 76,
    "y": 45
@@ -691,7 +691,7 @@
     }
    ]
   },
-  "unlockOrder": 292,
+  "unlockOrder": 296,
   "position": {
    "x": 93,
    "y": 47
@@ -738,7 +738,7 @@
     }
    ]
   },
-  "unlockOrder": 293,
+  "unlockOrder": 297,
   "position": {
    "x": 27,
    "y": 30
@@ -763,7 +763,7 @@
     }
    ]
   },
-  "unlockOrder": 294,
+  "unlockOrder": 298,
   "position": {
    "x": 35,
    "y": 7
@@ -787,7 +787,7 @@
     }
    ]
   },
-  "unlockOrder": 295,
+  "unlockOrder": 299,
   "position": {
    "x": 69,
    "y": 13
@@ -831,7 +831,7 @@
     }
    ]
   },
-  "unlockOrder": 296,
+  "unlockOrder": 300,
   "position": {
    "x": 88,
    "y": 31
@@ -875,7 +875,7 @@
     }
    ]
   },
-  "unlockOrder": 297,
+  "unlockOrder": 301,
   "position": {
    "x": 27,
    "y": 22
@@ -900,7 +900,7 @@
     }
    ]
   },
-  "unlockOrder": 298,
+  "unlockOrder": 302,
   "position": {
    "x": 12,
    "y": 31
@@ -946,7 +946,7 @@
     }
    ]
   },
-  "unlockOrder": 299,
+  "unlockOrder": 303,
   "position": {
    "x": 11,
    "y": 38
@@ -970,7 +970,7 @@
     }
    ]
   },
-  "unlockOrder": 300,
+  "unlockOrder": 304,
   "position": {
    "x": 25,
    "y": 6
@@ -1015,7 +1015,7 @@
     }
    ]
   },
-  "unlockOrder": 301,
+  "unlockOrder": 305,
   "position": {
    "x": 78,
    "y": 13
@@ -1040,7 +1040,7 @@
     }
    ]
   },
-  "unlockOrder": 302,
+  "unlockOrder": 306,
   "position": {
    "x": 88,
    "y": 22
@@ -1064,7 +1064,7 @@
     }
    ]
   },
-  "unlockOrder": 303,
+  "unlockOrder": 307,
   "position": {
    "x": 11,
    "y": 46
@@ -1109,7 +1109,7 @@
     }
    ]
   },
-  "unlockOrder": 304,
+  "unlockOrder": 308,
   "position": {
    "x": 12,
    "y": 24
@@ -1134,7 +1134,7 @@
     }
    ]
   },
-  "unlockOrder": 305,
+  "unlockOrder": 309,
   "position": {
    "x": 22,
    "y": 18
@@ -1158,7 +1158,7 @@
     }
    ]
   },
-  "unlockOrder": 306,
+  "unlockOrder": 310,
   "position": {
    "x": 87,
    "y": 13
@@ -1193,7 +1193,8 @@
   "routeKey": "kalos-route-9",
   "connections": [
    "kalos-ambrette-town",
-   "kalos-raid"
+   "kalos-raid",
+   "kalos-league"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1203,7 +1204,7 @@
     }
    ]
   },
-  "unlockOrder": 307,
+  "unlockOrder": 311,
   "position": {
    "x": 20,
    "y": 46
@@ -1227,7 +1228,7 @@
     }
    ]
   },
-  "unlockOrder": 308,
+  "unlockOrder": 312,
   "position": {
    "x": 13,
    "y": 16
@@ -1271,10 +1272,33 @@
     }
    ]
   },
-  "unlockOrder": 309,
+  "unlockOrder": 313,
   "position": {
    "x": 28,
    "y": 36
+  }
+ },
+ "kalos-league": {
+  "id": "kalos-league",
+  "name": "Kalos Pokémon League",
+  "type": "town",
+  "region": "kalos",
+  "description": "The Kalos Pokémon League.",
+  "connections": [
+   "kalos-route-9"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-9",
+     "count": 20
+    }
+   ]
+  },
+  "unlockOrder": 314,
+  "position": {
+   "x": 30,
+   "y": 42
   }
  }
 }

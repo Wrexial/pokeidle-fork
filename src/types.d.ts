@@ -178,6 +178,9 @@ type Region = {
   entry?: string
   startLevel?: number
   raidPool?: { speciesKey: string; level: number }[]
+  /** Location of the region's Pokémon League; the Elite Four can only be
+   * challenged while standing here. */
+  leagueLocationKey?: string
 }
 
 type Mart = {

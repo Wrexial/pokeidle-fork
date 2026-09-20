@@ -1274,7 +1274,7 @@ img {
 }
 
 .center-column .town-map {
-    flex: 0 0 340px
+    flex: 0 0 clamp(320px, 44vh, 540px)
 }
 
 .side-panel {
@@ -1975,9 +1975,26 @@ img {
     position: relative;
     min-height: 120px;
     margin: 6px 8px 8px;
+    overflow: hidden;
     background: radial-gradient(ellipse 85% 18% at 35% 88%,rgba(70,110,140,.4) 0%,transparent 70%),radial-gradient(ellipse 60% 10% at 30% 84%,rgba(60,100,130,.3) 0%,transparent 65%),radial-gradient(ellipse 30% 8% at 30% 82%,rgba(65,105,135,.2) 0%,transparent 60%),radial-gradient(ellipse 12% 10% at 22% 24%,rgba(80,110,65,.3) 0%,transparent 70%),radial-gradient(ellipse 8% 6% at 26% 20%,rgba(75,105,60,.2) 0%,transparent 60%),radial-gradient(ellipse 18% 8% at 36% 16%,rgba(140,120,90,.25) 0%,transparent 65%),radial-gradient(ellipse 10% 8% at 72% 24%,rgba(140,120,90,.2) 0%,transparent 60%),radial-gradient(ellipse 8% 6% at 82% 22%,rgba(130,115,85,.2) 0%,transparent 60%),radial-gradient(ellipse 10% 6% at 42% 70%,rgba(90,130,75,.2) 0%,transparent 65%),radial-gradient(ellipse 20% 15% at 65% 55%,rgba(160,130,80,.08) 0%,transparent 70%),radial-gradient(ellipse 15% 20% at 25% 60%,rgba(150,125,75,.06) 0%,transparent 70%),radial-gradient(ellipse 25% 18% at 50% 30%,rgba(155,128,78,.05) 0%,transparent 70%),radial-gradient(ellipse 110% 110% at 50% 50%,transparent 42%,rgba(120,95,55,.12) 52%,rgba(100,80,45,.2) 100%),linear-gradient(165deg,#d8c8a0,#d4c498 10%,#d0c090 25%,#ccbc88 50%,#c8b884 70%,#c4b480,#c0b07c);
     border: 4px solid #5a3e20;
-    box-shadow: inset 3px 3px #dcc8a026,inset -3px -3px #503c1e26,0 0 0 2px #3a2810,0 0 0 4px #6a4e30,0 0 0 6px #3a2810
+    box-shadow: inset 3px 3px #dcc8a026,inset -3px -3px #503c1e26,0 0 0 2px #3a2810,0 0 0 4px #6a4e30,0 0 0 6px #3a2810;
+    cursor: grab;
+    touch-action: none;
+    -webkit-user-select: none;
+    user-select: none
+}
+
+.town-map-canvas:active {
+    cursor: grabbing
+}
+
+.town-map-world {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: 0 0;
+    will-change: transform
 }
 
 .town-map-svg {
@@ -1987,6 +2004,51 @@ img {
     height: 100%;
     pointer-events: none;
     z-index: 1
+}
+
+.map-zoom-controls {
+    position: absolute;
+    right: 6px;
+    bottom: 6px;
+    z-index: 6;
+    display: flex;
+    flex-direction: column;
+    gap: 3px
+}
+
+.map-zoom-btn {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-pixel);
+    font-size: 9px;
+    line-height: 1;
+    padding: 0;
+    color: var(--gold-bright);
+    background: linear-gradient(180deg,#3a2c1a,#2a1e10);
+    border: 2px solid #5a3e20;
+    cursor: pointer;
+    transition: .12s
+}
+
+.map-zoom-btn:hover {
+    color: #1a1208;
+    background: linear-gradient(180deg,var(--gold-bright),var(--gold));
+    border-color: #f0d060
+}
+
+.map-pan-hint {
+    position: absolute;
+    left: 8px;
+    bottom: 7px;
+    z-index: 6;
+    font-size: 6px;
+    letter-spacing: .3px;
+    color: #6a5a44;
+    pointer-events: none;
+    text-shadow: 0 1px 0 rgba(220,205,170,.5)
 }
 
 .map-road-border.unlocked {
@@ -4464,6 +4526,23 @@ img {
     font-size: 7px;
     color: #685040;
     font-style: italic
+}
+
+.gym-locked-label.travel {
+    color: #9a6a20;
+    font-style: normal;
+    font-weight: 700
+}
+
+.gym-league-hint {
+    font-size: 7px;
+    font-style: italic;
+    color: #9a6a20;
+    padding: 4px 6px;
+    margin-bottom: 6px;
+    background: #2a1e10;
+    border: 1px dashed #5a3e20;
+    text-align: center
 }
 
 .victory-token-bar {

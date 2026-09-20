@@ -27,7 +27,8 @@
     "speciesKey": "mew",
     "level": 60
    }
-  ]
+  ],
+  "leagueLocationKey": "indigoPlat"
  },
  {
   "id": "johto",
@@ -209,7 +210,8 @@
     "speciesKey": "celebi",
     "level": 53
    }
-  ]
+  ],
+  "leagueLocationKey": "johto-league"
  },
  {
   "id": "hoenn",
@@ -411,7 +413,8 @@
     "speciesKey": "deoxys",
     "level": 72
    }
-  ]
+  ],
+  "leagueLocationKey": "hoenn-league"
  },
  {
   "id": "sinnoh",
@@ -581,7 +584,8 @@
     "speciesKey": "arceus",
     "level": 81
    }
-  ]
+  ],
+  "leagueLocationKey": "sinnoh-league"
  },
  {
   "id": "unova",
@@ -847,7 +851,8 @@
     "speciesKey": "genesect",
     "level": 90
    }
-  ]
+  ],
+  "leagueLocationKey": "unova-league"
  },
  {
   "id": "kalos",
@@ -925,7 +930,8 @@
     "speciesKey": "volcanion",
     "level": 99
    }
-  ]
+  ],
+  "leagueLocationKey": "kalos-league"
  },
  {
   "id": "alola",
@@ -1103,7 +1109,8 @@
     "speciesKey": "melmetal",
     "level": 100
    }
-  ]
+  ],
+  "leagueLocationKey": "alola-league"
  },
  {
   "id": "galar",
@@ -1285,7 +1292,8 @@
     "speciesKey": "enamorus",
     "level": 100
    }
-  ]
+  ],
+  "leagueLocationKey": "galar-league"
  },
  {
   "id": "paldea",
@@ -1419,6 +1427,7 @@
     "speciesKey": "miraidon",
     "level": 100
    }
-  ]
+  ],
+  "leagueLocationKey": "paldea-league"
  }
 ]

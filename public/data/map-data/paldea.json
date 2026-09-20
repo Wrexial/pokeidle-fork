@@ -12,7 +12,7 @@
    "entry": true,
    "previous": "galar"
   },
-  "unlockOrder": 358,
+  "unlockOrder": 365,
   "position": {
    "x": 15,
    "y": 64
@@ -55,7 +55,7 @@
     "paldea-los-platos"
    ]
   },
-  "unlockOrder": 359,
+  "unlockOrder": 366,
   "position": {
    "x": 19,
    "y": 70
@@ -79,7 +79,7 @@
     }
    ]
   },
-  "unlockOrder": 360,
+  "unlockOrder": 367,
   "position": {
    "x": 21,
    "y": 64
@@ -125,7 +125,7 @@
     }
    ]
   },
-  "unlockOrder": 361,
+  "unlockOrder": 368,
   "position": {
    "x": 17,
    "y": 51
@@ -170,7 +170,7 @@
     }
    ]
   },
-  "unlockOrder": 362,
+  "unlockOrder": 369,
   "position": {
    "x": 11,
    "y": 52
@@ -216,7 +216,7 @@
     }
    ]
   },
-  "unlockOrder": 363,
+  "unlockOrder": 370,
   "position": {
    "x": 13,
    "y": 58
@@ -244,7 +244,7 @@
     }
    ]
   },
-  "unlockOrder": 364,
+  "unlockOrder": 371,
   "position": {
    "x": 33,
    "y": 55
@@ -269,7 +269,7 @@
     }
    ]
   },
-  "unlockOrder": 365,
+  "unlockOrder": 372,
   "position": {
    "x": 30,
    "y": 64
@@ -292,7 +292,7 @@
     }
    ]
   },
-  "unlockOrder": 366,
+  "unlockOrder": 373,
   "position": {
    "x": 6,
    "y": 48
@@ -337,7 +337,7 @@
     }
    ]
   },
-  "unlockOrder": 367,
+  "unlockOrder": 374,
   "position": {
    "x": 39,
    "y": 66
@@ -383,7 +383,7 @@
     }
    ]
   },
-  "unlockOrder": 368,
+  "unlockOrder": 375,
   "position": {
    "x": 36,
    "y": 49
@@ -428,7 +428,7 @@
     }
    ]
   },
-  "unlockOrder": 369,
+  "unlockOrder": 376,
   "position": {
    "x": 27,
    "y": 54
@@ -471,7 +471,7 @@
     }
    ]
   },
-  "unlockOrder": 370,
+  "unlockOrder": 377,
   "position": {
    "x": 7,
    "y": 57
@@ -516,7 +516,7 @@
     }
    ]
   },
-  "unlockOrder": 371,
+  "unlockOrder": 378,
   "position": {
    "x": 48,
    "y": 73
@@ -540,7 +540,7 @@
     }
    ]
   },
-  "unlockOrder": 372,
+  "unlockOrder": 379,
   "position": {
    "x": 42,
    "y": 49
@@ -584,7 +584,7 @@
     }
    ]
   },
-  "unlockOrder": 373,
+  "unlockOrder": 380,
   "position": {
    "x": 44,
    "y": 58
@@ -611,7 +611,7 @@
     }
    ]
   },
-  "unlockOrder": 374,
+  "unlockOrder": 381,
   "position": {
    "x": 52,
    "y": 58
@@ -635,7 +635,7 @@
     }
    ]
   },
-  "unlockOrder": 375,
+  "unlockOrder": 382,
   "position": {
    "x": 53,
    "y": 78
@@ -659,7 +659,7 @@
     }
    ]
   },
-  "unlockOrder": 376,
+  "unlockOrder": 383,
   "position": {
    "x": 94,
    "y": 30
@@ -704,7 +704,7 @@
     }
    ]
   },
-  "unlockOrder": 377,
+  "unlockOrder": 384,
   "position": {
    "x": 60,
    "y": 67
@@ -749,7 +749,7 @@
     }
    ]
   },
-  "unlockOrder": 378,
+  "unlockOrder": 385,
   "position": {
    "x": 66,
    "y": 70
@@ -775,7 +775,7 @@
     }
    ]
   },
-  "unlockOrder": 379,
+  "unlockOrder": 386,
   "position": {
    "x": 61,
    "y": 58
@@ -799,7 +799,7 @@
     }
    ]
   },
-  "unlockOrder": 380,
+  "unlockOrder": 387,
   "position": {
    "x": 96,
    "y": 39
@@ -824,7 +824,7 @@
     }
    ]
   },
-  "unlockOrder": 381,
+  "unlockOrder": 388,
   "position": {
    "x": 59,
    "y": 77
@@ -850,7 +850,7 @@
     }
    ]
   },
-  "unlockOrder": 382,
+  "unlockOrder": 389,
   "position": {
    "x": 75,
    "y": 70
@@ -875,7 +875,7 @@
     }
    ]
   },
-  "unlockOrder": 383,
+  "unlockOrder": 390,
   "position": {
    "x": 70,
    "y": 57
@@ -891,7 +891,8 @@
   "connections": [
    "paldea-north-province-area-two",
    "paldea-mossui-town",
-   "paldea-raid"
+   "paldea-raid",
+   "paldea-league"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -901,7 +902,7 @@
     }
    ]
   },
-  "unlockOrder": 384,
+  "unlockOrder": 391,
   "position": {
    "x": 79,
    "y": 51
@@ -924,7 +925,7 @@
     }
    ]
   },
-  "unlockOrder": 385,
+  "unlockOrder": 392,
   "position": {
    "x": 88,
    "y": 49
@@ -968,10 +969,33 @@
     }
    ]
   },
-  "unlockOrder": 386,
+  "unlockOrder": 393,
   "position": {
    "x": 87,
    "y": 41
+  }
+ },
+ "paldea-league": {
+  "id": "paldea-league",
+  "name": "Paldea Pokémon League",
+  "type": "town",
+  "region": "paldea",
+  "description": "The Paldea Pokémon League.",
+  "connections": [
+   "paldea-north-province-area-three"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-north-province-area-three",
+     "count": 20
+    }
+   ]
+  },
+  "unlockOrder": 394,
+  "position": {
+   "x": 94,
+   "y": 51
   }
  }
 }

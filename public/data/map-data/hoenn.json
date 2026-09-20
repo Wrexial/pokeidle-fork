@@ -12,7 +12,7 @@
    "entry": true,
    "previous": "johto"
   },
-  "unlockOrder": 131,
+  "unlockOrder": 132,
   "position": {
    "x": 32,
    "y": 78
@@ -54,7 +54,7 @@
     "hoenn-littleroot-town"
    ]
   },
-  "unlockOrder": 132,
+  "unlockOrder": 133,
   "position": {
    "x": 31,
    "y": 69
@@ -79,7 +79,7 @@
     }
    ]
   },
-  "unlockOrder": 133,
+  "unlockOrder": 134,
   "position": {
    "x": 31,
    "y": 60
@@ -124,7 +124,7 @@
     }
    ]
   },
-  "unlockOrder": 134,
+  "unlockOrder": 135,
   "position": {
    "x": 24,
    "y": 59
@@ -149,7 +149,7 @@
     }
    ]
   },
-  "unlockOrder": 135,
+  "unlockOrder": 136,
   "position": {
    "x": 30,
    "y": 54
@@ -173,7 +173,7 @@
     }
    ]
   },
-  "unlockOrder": 136,
+  "unlockOrder": 137,
   "position": {
    "x": 17,
    "y": 58
@@ -219,7 +219,7 @@
     }
    ]
   },
-  "unlockOrder": 137,
+  "unlockOrder": 138,
   "position": {
    "x": 37,
    "y": 55
@@ -244,7 +244,7 @@
     }
    ]
   },
-  "unlockOrder": 138,
+  "unlockOrder": 139,
   "position": {
    "x": 36,
    "y": 64
@@ -290,7 +290,7 @@
     }
    ]
   },
-  "unlockOrder": 139,
+  "unlockOrder": 140,
   "position": {
    "x": 10,
    "y": 56
@@ -316,7 +316,7 @@
     }
    ]
   },
-  "unlockOrder": 140,
+  "unlockOrder": 141,
   "position": {
    "x": 36,
    "y": 46
@@ -361,7 +361,7 @@
     }
    ]
   },
-  "unlockOrder": 141,
+  "unlockOrder": 142,
   "position": {
    "x": 10,
    "y": 64
@@ -386,7 +386,7 @@
     }
    ]
   },
-  "unlockOrder": 142,
+  "unlockOrder": 143,
   "position": {
    "x": 36,
    "y": 73
@@ -412,7 +412,7 @@
     }
    ]
   },
-  "unlockOrder": 143,
+  "unlockOrder": 144,
   "position": {
    "x": 36,
    "y": 38
@@ -437,7 +437,7 @@
     }
    ]
   },
-  "unlockOrder": 144,
+  "unlockOrder": 145,
   "position": {
    "x": 28,
    "y": 48
@@ -463,7 +463,7 @@
     }
    ]
   },
-  "unlockOrder": 145,
+  "unlockOrder": 146,
   "position": {
    "x": 44,
    "y": 46
@@ -488,7 +488,7 @@
     }
    ]
   },
-  "unlockOrder": 146,
+  "unlockOrder": 147,
   "position": {
    "x": 43,
    "y": 63
@@ -514,7 +514,7 @@
     }
    ]
   },
-  "unlockOrder": 147,
+  "unlockOrder": 148,
   "position": {
    "x": 9,
    "y": 48
@@ -559,7 +559,7 @@
     }
    ]
   },
-  "unlockOrder": 148,
+  "unlockOrder": 149,
   "position": {
    "x": 11,
    "y": 71
@@ -584,7 +584,7 @@
     }
    ]
   },
-  "unlockOrder": 149,
+  "unlockOrder": 150,
   "position": {
    "x": 37,
    "y": 83
@@ -609,7 +609,7 @@
     }
    ]
   },
-  "unlockOrder": 150,
+  "unlockOrder": 151,
   "position": {
    "x": 27,
    "y": 40
@@ -634,7 +634,7 @@
     }
    ]
   },
-  "unlockOrder": 151,
+  "unlockOrder": 152,
   "position": {
    "x": 31,
    "y": 34
@@ -659,7 +659,7 @@
     }
    ]
   },
-  "unlockOrder": 152,
+  "unlockOrder": 153,
   "position": {
    "x": 11,
    "y": 39
@@ -683,7 +683,7 @@
     }
    ]
   },
-  "unlockOrder": 153,
+  "unlockOrder": 154,
   "position": {
    "x": 15,
    "y": 46
@@ -708,7 +708,7 @@
     }
    ]
   },
-  "unlockOrder": 154,
+  "unlockOrder": 155,
   "position": {
    "x": 42,
    "y": 36
@@ -733,7 +733,7 @@
     }
    ]
   },
-  "unlockOrder": 155,
+  "unlockOrder": 156,
   "position": {
    "x": 55,
    "y": 47
@@ -758,7 +758,7 @@
     }
    ]
   },
-  "unlockOrder": 156,
+  "unlockOrder": 157,
   "position": {
    "x": 50,
    "y": 63
@@ -782,7 +782,7 @@
     }
    ]
   },
-  "unlockOrder": 157,
+  "unlockOrder": 158,
   "position": {
    "x": 19,
    "y": 51
@@ -827,7 +827,7 @@
     }
    ]
   },
-  "unlockOrder": 158,
+  "unlockOrder": 159,
   "position": {
    "x": 18,
    "y": 76
@@ -852,7 +852,7 @@
     }
    ]
   },
-  "unlockOrder": 159,
+  "unlockOrder": 160,
   "position": {
    "x": 56,
    "y": 39
@@ -877,7 +877,7 @@
     }
    ]
   },
-  "unlockOrder": 160,
+  "unlockOrder": 161,
   "position": {
    "x": 58,
    "y": 62
@@ -901,7 +901,7 @@
     }
    ]
   },
-  "unlockOrder": 161,
+  "unlockOrder": 162,
   "position": {
    "x": 10,
    "y": 78
@@ -944,7 +944,7 @@
     }
    ]
   },
-  "unlockOrder": 162,
+  "unlockOrder": 163,
   "position": {
    "x": 21,
    "y": 39
@@ -989,7 +989,7 @@
     }
    ]
   },
-  "unlockOrder": 163,
+  "unlockOrder": 164,
   "position": {
    "x": 19,
    "y": 33
@@ -1033,7 +1033,7 @@
     }
    ]
   },
-  "unlockOrder": 164,
+  "unlockOrder": 165,
   "position": {
    "x": 62,
    "y": 46
@@ -1077,7 +1077,7 @@
     }
    ]
   },
-  "unlockOrder": 165,
+  "unlockOrder": 166,
   "position": {
    "x": 44,
    "y": 55
@@ -1102,7 +1102,7 @@
     }
    ]
   },
-  "unlockOrder": 166,
+  "unlockOrder": 167,
   "position": {
    "x": 53,
    "y": 32
@@ -1128,7 +1128,7 @@
     }
    ]
   },
-  "unlockOrder": 167,
+  "unlockOrder": 168,
   "position": {
    "x": 59,
    "y": 31
@@ -1152,7 +1152,7 @@
     }
    ]
   },
-  "unlockOrder": 168,
+  "unlockOrder": 169,
   "position": {
    "x": 65,
    "y": 61
@@ -1196,7 +1196,7 @@
     }
    ]
   },
-  "unlockOrder": 169,
+  "unlockOrder": 170,
   "position": {
    "x": 66,
    "y": 30
@@ -1241,7 +1241,7 @@
     }
    ]
   },
-  "unlockOrder": 170,
+  "unlockOrder": 171,
   "position": {
    "x": 72,
    "y": 60
@@ -1267,7 +1267,7 @@
     }
    ]
   },
-  "unlockOrder": 171,
+  "unlockOrder": 172,
   "position": {
    "x": 74,
    "y": 27
@@ -1292,7 +1292,7 @@
     }
    ]
   },
-  "unlockOrder": 172,
+  "unlockOrder": 173,
   "position": {
    "x": 79,
    "y": 59
@@ -1317,7 +1317,7 @@
     }
    ]
   },
-  "unlockOrder": 173,
+  "unlockOrder": 174,
   "position": {
    "x": 82,
    "y": 30
@@ -1363,7 +1363,7 @@
     }
    ]
   },
-  "unlockOrder": 174,
+  "unlockOrder": 175,
   "position": {
    "x": 74,
    "y": 38
@@ -1388,7 +1388,7 @@
     }
    ]
   },
-  "unlockOrder": 175,
+  "unlockOrder": 176,
   "position": {
    "x": 87,
    "y": 58
@@ -1411,7 +1411,7 @@
     }
    ]
   },
-  "unlockOrder": 176,
+  "unlockOrder": 177,
   "position": {
    "x": 82,
    "y": 36
@@ -1455,7 +1455,7 @@
     }
    ]
   },
-  "unlockOrder": 177,
+  "unlockOrder": 178,
   "position": {
    "x": 86,
    "y": 25
@@ -1481,7 +1481,7 @@
     }
    ]
   },
-  "unlockOrder": 178,
+  "unlockOrder": 179,
   "position": {
    "x": 89,
    "y": 43
@@ -1498,7 +1498,8 @@
    "hoenn-ever-grande-city",
    "hoenn-route-127",
    "hoenn-route-129",
-   "hoenn-raid"
+   "hoenn-raid",
+   "hoenn-league"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1508,7 +1509,7 @@
     }
    ]
   },
-  "unlockOrder": 179,
+  "unlockOrder": 180,
   "position": {
    "x": 85,
    "y": 49
@@ -1531,7 +1532,7 @@
     }
    ]
   },
-  "unlockOrder": 180,
+  "unlockOrder": 181,
   "position": {
    "x": 94,
    "y": 49
@@ -1575,10 +1576,33 @@
     }
    ]
   },
-  "unlockOrder": 181,
+  "unlockOrder": 182,
   "position": {
    "x": 4,
    "y": 43
+  }
+ },
+ "hoenn-league": {
+  "id": "hoenn-league",
+  "name": "Hoenn Pokémon League",
+  "type": "town",
+  "region": "hoenn",
+  "description": "The Hoenn Pokémon League.",
+  "connections": [
+   "hoenn-route-128"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-128",
+     "count": 20
+    }
+   ]
+  },
+  "unlockOrder": 183,
+  "position": {
+   "x": 24,
+   "y": 65
   }
  }
 }

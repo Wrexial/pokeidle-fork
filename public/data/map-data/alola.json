@@ -15,7 +15,7 @@
    "entry": true,
    "previous": "kalos"
   },
-  "unlockOrder": 310,
+  "unlockOrder": 315,
   "position": {
    "x": 46,
    "y": 56
@@ -59,7 +59,7 @@
     "alola-iki-town"
    ]
   },
-  "unlockOrder": 311,
+  "unlockOrder": 316,
   "position": {
    "x": 36,
    "y": 61
@@ -83,7 +83,7 @@
     "alola-iki-town"
    ]
   },
-  "unlockOrder": 312,
+  "unlockOrder": 317,
   "position": {
    "x": 46,
    "y": 67
@@ -106,7 +106,7 @@
     "alola-iki-town"
    ]
   },
-  "unlockOrder": 313,
+  "unlockOrder": 318,
   "position": {
    "x": 53,
    "y": 55
@@ -130,7 +130,7 @@
     "alola-iki-town"
    ]
   },
-  "unlockOrder": 314,
+  "unlockOrder": 319,
   "position": {
    "x": 52,
    "y": 66
@@ -176,7 +176,7 @@
     }
    ]
   },
-  "unlockOrder": 315,
+  "unlockOrder": 320,
   "position": {
    "x": 50,
    "y": 45
@@ -203,7 +203,7 @@
     }
    ]
   },
-  "unlockOrder": 316,
+  "unlockOrder": 321,
   "position": {
    "x": 37,
    "y": 51
@@ -230,7 +230,7 @@
     }
    ]
   },
-  "unlockOrder": 317,
+  "unlockOrder": 322,
   "position": {
    "x": 35,
    "y": 68
@@ -258,7 +258,7 @@
     }
    ]
   },
-  "unlockOrder": 318,
+  "unlockOrder": 323,
   "position": {
    "x": 59,
    "y": 62
@@ -284,7 +284,7 @@
     }
    ]
   },
-  "unlockOrder": 319,
+  "unlockOrder": 324,
   "position": {
    "x": 60,
    "y": 56
@@ -311,7 +311,7 @@
     }
    ]
   },
-  "unlockOrder": 320,
+  "unlockOrder": 325,
   "position": {
    "x": 34,
    "y": 37
@@ -339,7 +339,7 @@
     }
    ]
   },
-  "unlockOrder": 321,
+  "unlockOrder": 326,
   "position": {
    "x": 58,
    "y": 75
@@ -365,7 +365,7 @@
     }
    ]
   },
-  "unlockOrder": 322,
+  "unlockOrder": 327,
   "position": {
    "x": 30,
    "y": 94
@@ -390,7 +390,7 @@
     }
    ]
   },
-  "unlockOrder": 323,
+  "unlockOrder": 328,
   "position": {
    "x": 28,
    "y": 70
@@ -438,7 +438,7 @@
     }
    ]
   },
-  "unlockOrder": 324,
+  "unlockOrder": 329,
   "position": {
    "x": 66,
    "y": 63
@@ -464,7 +464,7 @@
     }
    ]
   },
-  "unlockOrder": 325,
+  "unlockOrder": 330,
   "position": {
    "x": 56,
    "y": 45
@@ -489,7 +489,7 @@
     }
    ]
   },
-  "unlockOrder": 326,
+  "unlockOrder": 331,
   "position": {
    "x": 65,
    "y": 84
@@ -515,7 +515,7 @@
     }
    ]
   },
-  "unlockOrder": 327,
+  "unlockOrder": 332,
   "position": {
    "x": 41,
    "y": 39
@@ -541,7 +541,7 @@
     }
    ]
   },
-  "unlockOrder": 328,
+  "unlockOrder": 333,
   "position": {
    "x": 34,
    "y": 29
@@ -565,7 +565,7 @@
     }
    ]
   },
-  "unlockOrder": 329,
+  "unlockOrder": 334,
   "position": {
    "x": 28,
    "y": 58
@@ -608,7 +608,7 @@
     }
    ]
   },
-  "unlockOrder": 330,
+  "unlockOrder": 335,
   "position": {
    "x": 25,
    "y": 89
@@ -653,7 +653,7 @@
     }
    ]
   },
-  "unlockOrder": 331,
+  "unlockOrder": 336,
   "position": {
    "x": 75,
    "y": 76
@@ -678,7 +678,7 @@
     }
    ]
   },
-  "unlockOrder": 332,
+  "unlockOrder": 337,
   "position": {
    "x": 62,
    "y": 68
@@ -715,7 +715,8 @@
    "alola-po-town",
    "alola-route-16",
    "alola-route-8",
-   "alola-raid"
+   "alola-raid",
+   "alola-league"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -725,7 +726,7 @@
     }
    ]
   },
-  "unlockOrder": 333,
+  "unlockOrder": 338,
   "position": {
    "x": 56,
    "y": 21
@@ -748,7 +749,7 @@
     }
    ]
   },
-  "unlockOrder": 334,
+  "unlockOrder": 339,
   "position": {
    "x": 56,
    "y": 6
@@ -792,10 +793,33 @@
     }
    ]
   },
-  "unlockOrder": 335,
+  "unlockOrder": 340,
   "position": {
    "x": 64,
    "y": 11
+  }
+ },
+ "alola-league": {
+  "id": "alola-league",
+  "name": "Alola Pokémon League",
+  "type": "town",
+  "region": "alola",
+  "description": "The Alola Pokémon League.",
+  "connections": [
+   "alola-route-17"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-17",
+     "count": 20
+    }
+   ]
+  },
+  "unlockOrder": 341,
+  "position": {
+   "x": 66,
+   "y": 17
   }
  }
 }

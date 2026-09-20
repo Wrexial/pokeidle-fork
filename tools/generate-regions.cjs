@@ -156,7 +156,7 @@ function levelRoutes(regionId, entriesByKey) {
 }
 
 // --- generate ----------------------------------------------------------------
-const regions = [{ id: 'kanto', name: 'Kanto', generation: 1, order: 1, entry: 'palletTown', startLevel: 5, raidPool: KANTO_LEGENDARIES }]
+const regions = [{ id: 'kanto', name: 'Kanto', generation: 1, order: 1, entry: 'palletTown', startLevel: 5, raidPool: KANTO_LEGENDARIES, leagueLocationKey: 'indigoPlat' }]
 let unlockOrder = 100
 
 for (const region of REGIONS) {
@@ -410,6 +410,29 @@ for (const region of REGIONS) {
       ),
     }
   }
+
+  // Pokémon League: the Elite Four's zone. It hangs off the region's last
+  // route so the league challenge is gated behind reaching (and battling in)
+  // the region's final area instead of being startable from anywhere.
+  const leagueNode = lastRoute ?? entryNode
+  const leagueId = `${regionId}-league`
+  mapData[leagueId] = {
+    id: leagueId,
+    name: `${name} Pokémon League`,
+    type: 'town',
+    region: regionId,
+    description: `The ${name} Pokémon League.`,
+    connections: [locId(regionId, leagueNode)],
+    unlock: {
+      battlesAtLocation: [{ locationId: locId(regionId, leagueNode), count: 20 }],
+    },
+    unlockOrder: unlockOrder++,
+    position: placeAt(
+      Math.min(94, (positions[leagueNode]?.x ?? 50) + 10),
+      Math.max(6, (positions[leagueNode]?.y ?? 50) - 4)
+    ),
+  }
+  regionObj.leagueLocationKey = leagueId
 
   // league: gyms spread across towns, then Elite Four + Champion
   const gymTowns = townNodes.length ? townNodes : [entryNode]

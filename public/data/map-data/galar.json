@@ -12,7 +12,7 @@
    "entry": true,
    "previous": "alola"
   },
-  "unlockOrder": 336,
+  "unlockOrder": 342,
   "position": {
    "x": 11,
    "y": 94
@@ -54,7 +54,7 @@
     "galar-postwick"
    ]
   },
-  "unlockOrder": 337,
+  "unlockOrder": 343,
   "position": {
    "x": 11,
    "y": 79
@@ -78,7 +78,7 @@
     }
    ]
   },
-  "unlockOrder": 338,
+  "unlockOrder": 344,
   "position": {
    "x": 11,
    "y": 64
@@ -123,7 +123,7 @@
     }
    ]
   },
-  "unlockOrder": 339,
+  "unlockOrder": 345,
   "position": {
    "x": 26,
    "y": 65
@@ -148,7 +148,7 @@
     }
    ]
   },
-  "unlockOrder": 340,
+  "unlockOrder": 346,
   "position": {
    "x": 26,
    "y": 49
@@ -193,7 +193,7 @@
     }
    ]
   },
-  "unlockOrder": 341,
+  "unlockOrder": 347,
   "position": {
    "x": 10,
    "y": 50
@@ -219,7 +219,7 @@
     }
    ]
   },
-  "unlockOrder": 342,
+  "unlockOrder": 348,
   "position": {
    "x": 37,
    "y": 51
@@ -244,7 +244,7 @@
     }
    ]
   },
-  "unlockOrder": 343,
+  "unlockOrder": 349,
   "position": {
    "x": 9,
    "y": 21
@@ -269,7 +269,7 @@
     }
    ]
   },
-  "unlockOrder": 344,
+  "unlockOrder": 350,
   "position": {
    "x": 52,
    "y": 53
@@ -313,7 +313,7 @@
     }
    ]
   },
-  "unlockOrder": 345,
+  "unlockOrder": 351,
   "position": {
    "x": 22,
    "y": 57
@@ -359,7 +359,7 @@
     }
    ]
   },
-  "unlockOrder": 346,
+  "unlockOrder": 352,
   "position": {
    "x": 66,
    "y": 52
@@ -384,7 +384,7 @@
     }
    ]
   },
-  "unlockOrder": 347,
+  "unlockOrder": 353,
   "position": {
    "x": 51,
    "y": 37
@@ -407,7 +407,7 @@
     }
    ]
   },
-  "unlockOrder": 348,
+  "unlockOrder": 354,
   "position": {
    "x": 22,
    "y": 42
@@ -451,7 +451,7 @@
     }
    ]
   },
-  "unlockOrder": 349,
+  "unlockOrder": 355,
   "position": {
    "x": 10,
    "y": 6
@@ -496,7 +496,7 @@
     }
    ]
   },
-  "unlockOrder": 350,
+  "unlockOrder": 356,
   "position": {
    "x": 24,
    "y": 6
@@ -521,7 +521,7 @@
     }
    ]
   },
-  "unlockOrder": 351,
+  "unlockOrder": 357,
   "position": {
    "x": 70,
    "y": 40
@@ -538,7 +538,8 @@
    "galar-circhester",
    "galar-spikemuth",
    "galar-route-7",
-   "galar-raid"
+   "galar-raid",
+   "galar-league"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -548,7 +549,7 @@
     }
    ]
   },
-  "unlockOrder": 352,
+  "unlockOrder": 358,
   "position": {
    "x": 81,
    "y": 45
@@ -571,7 +572,7 @@
     }
    ]
   },
-  "unlockOrder": 353,
+  "unlockOrder": 359,
   "position": {
    "x": 52,
    "y": 24
@@ -615,7 +616,7 @@
     }
    ]
   },
-  "unlockOrder": 354,
+  "unlockOrder": 360,
   "position": {
    "x": 73,
    "y": 26
@@ -658,7 +659,7 @@
     }
    ]
   },
-  "unlockOrder": 355,
+  "unlockOrder": 361,
   "position": {
    "x": 39,
    "y": 6
@@ -701,7 +702,7 @@
     }
    ]
   },
-  "unlockOrder": 356,
+  "unlockOrder": 362,
   "position": {
    "x": 91,
    "y": 40
@@ -745,10 +746,33 @@
     }
    ]
   },
-  "unlockOrder": 357,
+  "unlockOrder": 363,
   "position": {
    "x": 4,
    "y": 43
+  }
+ },
+ "galar-league": {
+  "id": "galar-league",
+  "name": "Galar Pokémon League",
+  "type": "town",
+  "region": "galar",
+  "description": "The Galar Pokémon League.",
+  "connections": [
+   "galar-route-9"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-route-9",
+     "count": 20
+    }
+   ]
+  },
+  "unlockOrder": 364,
+  "position": {
+   "x": 96,
+   "y": 45
   }
  }
 }

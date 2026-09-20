@@ -927,7 +927,8 @@
   "connections": [
    "johto-route-47",
    "johto-cianwood-city",
-   "johto-raid"
+   "johto-raid",
+   "johto-league"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -965,6 +966,29 @@
   "position": {
    "x": 14,
    "y": 51
+  }
+ },
+ "johto-league": {
+  "id": "johto-league",
+  "name": "Johto Pokémon League",
+  "type": "town",
+  "region": "johto",
+  "description": "The Johto Pokémon League.",
+  "connections": [
+   "johto-route-48"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-route-48",
+     "count": 20
+    }
+   ]
+  },
+  "unlockOrder": 131,
+  "position": {
+   "x": 16,
+   "y": 57
   }
  }
 }

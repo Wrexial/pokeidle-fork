@@ -215,8 +215,12 @@ Data conventions:
 - Some special/placeholder forms use `"id": 0` intentionally (see commit
   "All id's now 0 for special pokemon"). Region wild encounters only use species
   with `id > 0` (forms with ids above 1025 are excluded).
-- `regions.json` entries carry `entry` (the starting town's location id) and
-  `startLevel`; `SELECT_STARTER` uses these to place the player: choosing a
+- `regions.json` entries carry `entry` (the starting town's location id),
+  `startLevel` and `leagueLocationKey` (the region's Pokémon League, e.g.
+  `indigoPlat` for Kanto; generated as `<region>-league`). The Elite Four can
+  only be challenged while the player is standing at that location, and gym
+  leaders only while at their `locationKey`, so both are gated by their zone.
+  `SELECT_STARTER` uses `entry` to place the player: choosing a
   region's starter starts the run on that region's first route. Regional
   starters live in `regionalStarters` in `src/data/config.js`.
 - `map-data/<region>.json` locations carry a `region` id; wild routes also

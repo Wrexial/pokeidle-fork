@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
-import { SAVE_KEY } from '../data/config.js'
+import { clearSave } from '../data/config.js'
 
 /**
  * Catches render errors anywhere below it (e.g. an old save that references
@@ -35,11 +35,7 @@ export class ErrorBoundary extends React.Component {
   }
 
   reset() {
-    try {
-      localStorage.removeItem(SAVE_KEY)
-    } catch {
-      /* ignore */
-    }
+    clearSave()
     window.location.reload()
   }
 

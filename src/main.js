@@ -9,16 +9,12 @@ import { StarterSelect } from './components/starter-select.js'
 import { PatchNotesModal } from './components/patch-notes-modal.js'
 import { PatchNotesPage } from './components/patch-notes-page.js'
 import { GameProvider, useGame } from './game/context.js'
-import { SAVE_KEY } from './data/config.js'
+import { clearSave } from './data/config.js'
 
 // Console helper for stuck saves: `pokemonIdleResetSave()`
 // @ts-ignore
 window.pokemonIdleResetSave = () => {
-  try {
-    localStorage.removeItem(SAVE_KEY)
-  } catch {
-    /* ignore */
-  }
+  clearSave()
   window.location.reload()
 }
 

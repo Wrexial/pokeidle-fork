@@ -37,14 +37,22 @@ compiler in JS-checking mode (`jsconfig.json` + `@types/react`) and should stay
 clean; fix it or add JSDoc rather than ignoring errors. Verify behaviour by
 running the dev server and exercising the game in the browser.
 
-**Save recovery:** an incompatible/stuck save self-heals without DevTools —
-`index.html` has an inline *boot guard* that clears the save and reloads once if
-the game fails to start (module error / rejected promise / >15s hang with a save
-present; a `sessionStorage` counter stops reload loops), and `ErrorBoundary`
+**Save recovery:** an incompatible/stuck save self-heals without DevTools.
+The save key is **versioned** (`pokemon-idle-save-v<n>`, see `SAVE_VERSION` in
+`src/data/config.js`); the loader in `src/game/context.js` reads the versioned
+key, and only falls back to a legacy key (`pokemon-idle-save`) for a one-time
+migration. A save is loaded only if the version matches (or it's a legacy save)
+*and* it repairs cleanly — the repair drops unknown locations/routes/species,
+moves, gyms and catch rules, and rebuilds a safe location. Anything that still
+fails is copied to `pi-save-backup` and ignored, so it can never crash the boot
+again. `index.html` has an inline *boot guard* that clears every
+`pokemon-idle-save*` key and reloads once if the game fails to start (module
+error / rejected promise / >15s hang with a save present; a `sessionStorage`
+counter stops reload loops), and `ErrorBoundary`
 (`src/components/error-boundary.js`) auto-resets after a render error. A console
-helper `pokemonIdleResetSave()` also exists. The loader in `src/game/context.js`
-repairs stale saves (unknown locations/routes, removed species, missing
-`startRegion`) before fall back to a fresh start.
+helper `pokemonIdleResetSave()` also exists. Bump `SAVE_VERSION` and add the old
+key to `LEGACY_SAVE_KEYS` when the save shape changes incompatibly; `clearSave()`
+removes the live keys (the quarantine backup is kept).
 
 Formatting: `.prettierrc.json` is the intended style (`semi: false`,
 `singleQuote: true`, `trailingComma: "es5"`), but Prettier is **not** installed

@@ -13,10 +13,32 @@
       // reload once so the player can never be permanently stuck. No console
       // needed. A session flag prevents a reload loop.
       ;(function () {
-        var SAVE_KEY = 'pokemon-idle-save'
+        // Keep in sync with SAVE_KEYS in src/data/config.js. The key includes a
+        // schema version, so scan by prefix instead of hard-coding one.
+        var SAVE_KEY_PREFIX = 'pokemon-idle-save'
         var FLAG = 'pokemon-idle-recovery-attempts'
         var recovering = false
         window.__piBooted = false
+
+        function liveSaveKeys() {
+          var keys = []
+          try {
+            for (var i = 0; i < localStorage.length; i++) {
+              var key = localStorage.key(i)
+              if (key && key.indexOf(SAVE_KEY_PREFIX) === 0) keys.push(key)
+            }
+          } catch (e) {}
+          return keys
+        }
+
+        function clearSaves() {
+          var keys = liveSaveKeys()
+          for (var i = 0; i < keys.length; i++) {
+            try {
+              localStorage.removeItem(keys[i])
+            } catch (e) {}
+          }
+        }
 
         function showMessage(text) {
           var root = document.getElementById('root')
@@ -48,9 +70,7 @@
           try {
             sessionStorage.setItem(FLAG, String(attempts + 1))
           } catch (e) {}
-          try {
-            localStorage.removeItem(SAVE_KEY)
-          } catch (e) {}
+          clearSaves()
           showMessage('Resetting save data and reloading&hellip;')
           setTimeout(function () {
             location.reload()
@@ -66,11 +86,7 @@
         setTimeout(function () {
           if (window.__piBooted) return
           // only force a recovery on timeout if there's actually a save to clear
-          var hasSave = false
-          try {
-            hasSave = !!localStorage.getItem(SAVE_KEY)
-          } catch (e) {}
-          if (hasSave) recover('timeout')
+          if (liveSaveKeys().length > 0) recover('timeout')
         }, 15000)
       })()
     </script>

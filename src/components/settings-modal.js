@@ -2,13 +2,13 @@
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
-import { SAVE_KEY_ALT } from '../data/config.js'
+import { clearSave } from '../data/config.js'
 
 /** @param {{ onClose: () => void }} props */
 export function SettingsModal({ onClose }) {
   const [confirming, setConfirming] = React.useState(!1)
   function resetSave() {
-    ;(localStorage.removeItem(SAVE_KEY_ALT), window.location.reload())
+    ;(clearSave(), window.location.reload())
   }
   return jsx('div', {
     className: 'battle-info-overlay',

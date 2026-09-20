@@ -239,14 +239,19 @@ One-off scripts used to build the data JSON (not run during dev/build):
   Bulbapedia's raw infoboxes, then computes a directional layout. Caches HTTP
   responses under `tools/cache/` (gitignored) and writes
   `tools/region-maps.json` (committed).
-- `generate-regions.cjs` — turns `tools/region-maps.json` into game content
+- `scrape-route-encounters.cjs` — pulls real per-route wild encounters from
+  PokéAPI (`/location` → `/location-area`), keeps only wild methods (drops
+  gift/static), picks a preferred game version per region, and maps species to
+  the game's keys. Writes `tools/route-encounters.json` (committed).
+- `generate-regions.cjs` — turns `tools/region-maps.json` + `route-encounters.json` into game content
   (locations, encounters, trainers, marts, Raid Islands, and gym/Elite
   Four/Champion leagues) for generations 2-9, merging it into
   `map-data.json` / `encounter-data.json` / `trainer-data.json` /
   `gym-leader-data.json` / `elite-4-data.json` / `champion-data.json`, and
   writing `regions.json` (region metadata + per-region legendary pools).
   Idempotent — safe to re-run; tags Kanto locations/leaders with
-  `region: "kanto"`.
+  `region: "kanto"`. Routes without scraped encounters (e.g. Paldea's province
+  areas) fall back to a generation-based species slice.
 - `RawMoveData`, `index-backup.js` — large reference/backup data; leave alone.
 - `*.md` in `tools/` (`SUMMARY.md`, `DATA_INTEGRATION.md`,
   `REFACTORING_GUIDE.md`, `QUICKSTART_DATA_INTEGRATION.md`) — historical design

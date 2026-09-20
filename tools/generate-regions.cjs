@@ -68,6 +68,9 @@ const KANTO_LEGENDARIES = [
 ]
 
 const regionMaps = JSON.parse(fs.readFileSync(path.join(__dirname, 'region-maps.json'), 'utf8'))
+const realEncounters = fs.existsSync(path.join(__dirname, 'route-encounters.json'))
+  ? JSON.parse(fs.readFileSync(path.join(__dirname, 'route-encounters.json'), 'utf8'))
+  : {}
 const species = read('pokemon-species.json')
 const mapData = read('map-data.json')
 const encounterData = read('encounter-data.json')
@@ -198,26 +201,36 @@ for (const region of REGIONS) {
     legendaries: legendaries.map((s) => ({ speciesKey: s.key, level: clampLevel(base + 35) })),
   })
 
-  // precompute per-route encounter windows
+  // encounters: real per-route species when available, else a generation slice
   const perRoute = 8
   const routeEncounter = {}
   routeNodes.forEach((node, i) => {
-    if (wild.length === 0) return
-    const start = routeNodes.length <= 1
-      ? 0
-      : Math.round((i * Math.max(0, wild.length - perRoute)) / (routeNodes.length - 1))
-    const slice = wild.slice(start, start + perRoute)
-    const minLevel = clampLevel(base + Math.max(0, depth[node] - 1) * 2)
-    const maxLevel = clampLevel(minLevel + 8)
-    const encounters = slice.map((s, idx) => ({
-      speciesKey: s.key,
-      weight: encounterWeight(s, idx),
-      minLevel,
-      maxLevel,
-    }))
+    const minLevel = clampLevel(base + Math.max(0, depth[node] - 1) * 2),
+      maxLevel = clampLevel(minLevel + 8),
+      real = realEncounters[regionId]?.[node]
+    let encounters
+    if (real && real.length) {
+      encounters = real.map((e) => ({ ...e }))
+    } else if (wild.length) {
+      const start =
+        routeNodes.length <= 1
+          ? 0
+          : Math.round((i * Math.max(0, wild.length - perRoute)) / (routeNodes.length - 1))
+      encounters = wild
+        .slice(start, start + perRoute)
+        .map((s, idx) => ({
+          speciesKey: s.key,
+          weight: encounterWeight(s, idx),
+          minLevel,
+          maxLevel,
+        }))
+    } else {
+      encounters = []
+    }
     if (i === 0)
       for (const key of starters)
-        if (species[key]) encounters.push({ speciesKey: key, weight: 1, minLevel, maxLevel })
+        if (species[key] && !encounters.some((e) => e.speciesKey === key))
+          encounters.push({ speciesKey: key, weight: 1, minLevel, maxLevel })
     routeEncounter[node] = { name: display[node] ?? node, encounters }
   })
 

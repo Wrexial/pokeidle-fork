@@ -47,7 +47,8 @@ export const CHANGELOG = [
         {
           heading: 'Expanded Pokedex & Encounters',
           items: [
-            'Over 950 species are now obtainable as wild encounters across all nine generations',
+            'Over 700 species are obtainable as wild encounters across all nine generations',
+            'Routes now spawn their real wild Pokemon (authentic per-route encounter tables), not arbitrary picks',
             'The Shiny Charm now unlocks once you complete the wild Pokedex (previously a fixed 151)',
           ],
         },

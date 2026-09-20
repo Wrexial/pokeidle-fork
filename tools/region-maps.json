@@ -2009,7 +2009,7 @@
    "undella-town": "Undella Town",
    "anville-town": "Anville Town",
    "black-city": "Black City",
-   "route-gate": "Route",
+   "route-gate": "Route Gate",
    "aspertia-city": "Aspertia City",
    "virbank-city": "Virbank City",
    "humilau-city": "Humilau City",
@@ -3114,7 +3114,7 @@
    "malie-city"
   ],
   "display": {
-   "alola-route-1--hauoli-outskirts": "Route 1",
+   "alola-route-1--hauoli-outskirts": "Route 1 (Hauoli Outskirts)",
    "alola-route-1": "Route 1",
    "alola-route-3": "Route 3",
    "alola-route-2": "Route 2",

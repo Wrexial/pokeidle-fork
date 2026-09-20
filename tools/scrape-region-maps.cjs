@@ -63,8 +63,9 @@ const EXTRA_TOWNS = {
 // regions where unmatched connection names should become nodes (e.g. Paldea provinces)
 const ALLOW_UNKNOWN = new Set(['paldea'])
 const shortRouteName = (slug) => {
-  const num = slug.match(/(\d+)/)
-  return `Route ${num ? num[1] : ''}`.trim()
+  const m = slug.match(/route-(\d+)(?:-+([a-z0-9-]+))?$/)
+  if (!m) return titleCase(slug)
+  return `Route ${m[1]}${m[2] ? ` (${titleCase(m[2])})` : ''}`
 }
 
 /** Resolve a PokéAPI location slug to its Bulbapedia article title. */

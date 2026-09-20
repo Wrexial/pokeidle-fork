@@ -6498,7 +6498,7 @@
   ]
  },
  "unova-route-gate": {
-  "name": "Route",
+  "name": "Route Gate",
   "encounters": [
    {
     "speciesKey": "purrloin",
@@ -8960,7 +8960,7 @@
   ]
  },
  "alola-route-1--hauoli-outskirts": {
-  "name": "Route 1",
+  "name": "Route 1 (Hauoli Outskirts)",
   "encounters": [
    {
     "speciesKey": "dartrix",

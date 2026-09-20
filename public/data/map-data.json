@@ -5087,7 +5087,7 @@
  },
  "unova-route-gate": {
   "id": "unova-route-gate",
-  "name": "Route",
+  "name": "Route Gate",
   "type": "route",
   "region": "unova",
   "description": "A route in the Unova region.",
@@ -7599,7 +7599,7 @@
  },
  "alola-route-1--hauoli-outskirts": {
   "id": "alola-route-1--hauoli-outskirts",
-  "name": "Route 1",
+  "name": "Route 1 (Hauoli Outskirts)",
   "type": "route",
   "region": "alola",
   "description": "A route in the Alola region.",

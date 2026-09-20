@@ -12,6 +12,7 @@ const GameContext = React.createContext(
   /** @type {{ state: GameState, dispatch: (action: GameAction) => void } | null} */ (null)
 )
 
+/** @param {{ children: any }} props */
 export function GameProvider({ children }) {
   const [state, dispatch] = React.useReducer(gameReducer, initialGameState, (initialState) => {
     try {
@@ -25,7 +26,7 @@ export function GameProvider({ children }) {
           }
           ;(playerPokemon.isShiny === void 0 && (playerPokemon.isShiny = !1),
             playerPokemon.id || (playerPokemon.id = String(nextId++)))
-          let party = saved.party || []
+          let party = /** @type {any[]} */ (saved.party || [])
           party.length === 0
             ? (party = [playerPokemon])
             : (party = party.map((pokemon) => {
@@ -43,7 +44,7 @@ export function GameProvider({ children }) {
                       id: String(nextId++),
                     }
               }))
-          let box = saved.box || []
+          let box = /** @type {any[]} */ (saved.box || [])
           ;((box = box.map((pokemon) => {
             const normalized =
               pokemon.isShiny === void 0

@@ -62,6 +62,14 @@ type Pokemon = BattlePokemon & {
   isShiny: boolean
 }
 
+type ActiveItem = {
+  id: string
+  name: string
+  description: string
+  duration: number
+  buyPrice: number | null
+}
+
 type PokeBall = {
   id: string
   name: string
@@ -94,15 +102,58 @@ type ActiveEffect = {
   [key: string]: any
 }
 
+type TrainerBattle = {
+  trainerId?: string
+  trainerName: string
+  trainerClass: string
+  trainerTeam: any[]
+  currentTrainerPokemonIndex: number
+  bossId?: string
+  bossType?: string
+  spriteKey?: string
+  bossQueue?: any[]
+  [key: string]: any
+}
+
 type GameState = {
   phase: string
   playerPokemon: Pokemon | null
-  enemyPokemon: Pokemon | null
+  enemyPokemon: any
   party: Pokemon[]
   box: Pokemon[]
   battleLog: string[]
   battleEvents: any[]
   pendingEvents: any[]
+  currentRoute: string
+  currentLocation: string
+  unlockedLocations: string[]
+  speed: number
+  paused: boolean
+  autoCatch: boolean
+  autoProceed: boolean
+  nextPokemonId: number
+  money: number
+  inventory: Record<string, number>
+  catchSettings: Record<string, Record<string, CatchRule>>
+  globalCatchDefaults: CatchRule
+  activeEffects: ActiveEffect[]
+  pokedexSeen: string[]
+  pokedexCaught: string[]
+  shinySeen: string[]
+  shinyCaught: string[]
+  defeatedGyms: string[]
+  defeatedEliteFour: string[]
+  championDefeated: boolean
+  victoryTokens: number
+  battlesWonByLocation: Record<string, number>
+  wildBattlesWon: number
+  trainerBattlesWon: number
+  activePlayerPokemonIndex: number
+  alwaysCatchShinies: boolean
+  trainerBattle: TrainerBattle | null
+  bossBattle: TrainerBattle | null
+  bossQueue: any[]
+  levelUpNotification: string | null
   [key: string]: any
 }
 

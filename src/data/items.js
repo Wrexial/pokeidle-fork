@@ -1,5 +1,6 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
+/** @type {Record<string, ActiveItem>} */
 export const activeItems = {
     expShare: {
       id: 'expShare',

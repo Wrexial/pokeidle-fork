@@ -483,7 +483,7 @@ export function gameReducer(state, action) {
         } = state.evolutionState,
         toSpecies = pokemonSpecies[toSpeciesKey],
         fromSpecies = pokemonSpecies[fromSpeciesKey],
-        evolveMember = (member) => {
+        evolveMember = /** @param {Pokemon} member */ (member) => {
           if (member.id !== pokemonId) return member
           const newStats = calculatePokemonStats(toSpecies, member.level, member.ivs),
             hpGain = newStats.hp - member.maxHp,
@@ -768,7 +768,9 @@ export function gameReducer(state, action) {
         victoryTokens = state.victoryTokens
       const notifications = []
       if (won && state.bossBattle) {
-        const { bossType, bossId } = state.bossBattle
+        const { bossType, bossId } = /** @type {{ bossType: string, bossId: string }} */ (
+          state.bossBattle
+        )
         bossType === 'gym' && !defeatedGyms.includes(bossId)
           ? ((defeatedGyms = [...defeatedGyms, bossId]), (victoryTokens += 1), notifications.push('Earned a Victory Token!'))
           : bossType === 'e4' && !defeatedEliteFour.includes(bossId)
@@ -1195,7 +1197,7 @@ export function gameReducer(state, action) {
       if (owned <= 0) return state
       const item = activeItems[itemId]
       if (!item) return state
-      const existingIndex = state.activeEffects.findIndex(
+      const existingIndex = /** @type {ActiveEffect[]} */ (state.activeEffects).findIndex(
         (existingEffect) => existingEffect.type === itemId && existingEffect.routeKey === routeKey && existingEffect.speciesKey === speciesKey
       )
       let activeEffects

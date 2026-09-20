@@ -44,6 +44,7 @@ export const starterSpecies = ['bulbasaur', 'charmander', 'squirtle']
 
 export const SAVE_KEY_ALT = 'pokemon-idle-save'
 
+/** @type {Record<string, number>} */
 export let trainerClassPayouts = {
   youngster: 16,
   lass: 16,

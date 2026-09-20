@@ -11,6 +11,11 @@ import { createVolatileState, resolveBattleTurn } from './game/combat.js'
 import { calculatePokemonStats, generateIVs, getPerfectIVs, resolvePokemonMoves } from './game/pokemon.js'
 import { awardExperience, checkShinyOdds, resolveActiveModifiers, resolvePokemonEncounter } from './game/progression.js'
 
+/**
+ * @param {string} text
+ * @param {number} [speed]
+ * @returns {{ displayed: string, isComplete: boolean }}
+ */
 export function useTypewriter(text, speed = 30) {
   const [displayed, setDisplayed] = React.useState(''),
     [isComplete, setIsComplete] = React.useState(!1),
@@ -67,7 +72,7 @@ export function useGameLoop() {
             const trainerList = trainerData[currentGameState.currentLocation]
             if (!trainerList?.length) return
             const trainer = trainerList[Math.floor(Math.random() * trainerList.length)],
-              trainerTeam = trainer.team.map((teamMember) => {
+              trainerTeam = /** @type {any[]} */ (trainer.team).map((teamMember) => {
                 const species = pokemonSpecies[teamMember.speciesKey],
                   stats = calculatePokemonStats(species, teamMember.level, getPerfectIVs()),
                   moves = resolvePokemonMoves(teamMember.speciesKey, teamMember.level)
@@ -545,7 +550,7 @@ export function useIsMobile() {
   return (
     React.useEffect(() => {
       const mediaQuery = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`),
-        handleChange = (event) => setIsMobile(event.matches)
+        handleChange = /** @param {MediaQueryListEvent} event */ (event) => setIsMobile(event.matches)
       return (
         mediaQuery.addEventListener('change', handleChange),
         () => mediaQuery.removeEventListener('change', handleChange)

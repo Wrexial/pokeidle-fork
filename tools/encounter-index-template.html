@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokémon Idle — Wild Encounter Index</title>
+    <style>
+      :root {
+        --paper: #f4ecd8;
+        --paper-2: #fffaf0;
+        --ink: #2a2118;
+        --muted: #6f5f49;
+        --line: #dccbaa;
+        --accent: #8a1c1c;
+        --gold: #c9a227;
+        --shadow: rgba(60, 40, 15, 0.18);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        font: 14px/1.45 "Segoe UI", Roboto, system-ui, sans-serif;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 20% 0%, #fdf6e4 0%, transparent 55%),
+          var(--paper);
+      }
+      a {
+        color: var(--accent);
+      }
+      .hidden {
+        display: none !important;
+      }
+
+      /* ---- header ---- */
+      .top {
+        position: sticky;
+        top: 0;
+        z-index: 30;
+        background: linear-gradient(#241a10, #3c2b17);
+        color: #f7efdc;
+        border-bottom: 3px solid var(--gold);
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.35);
+        padding: 12px 18px 10px;
+      }
+      .top h1 {
+        margin: 0;
+        font-size: 20px;
+        letter-spacing: 0.5px;
+      }
+      .top h1 small {
+        font-weight: 400;
+        color: #e6d3a3;
+        font-size: 13px;
+        margin-left: 8px;
+      }
+      .totals {
+        margin-top: 4px;
+        font-size: 12.5px;
+        color: #e2d3ad;
+      }
+      .totals b {
+        color: #fff;
+      }
+
+      /* ---- controls ---- */
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        margin-top: 10px;
+      }
+      .search {
+        position: relative;
+        flex: 1 1 260px;
+        max-width: 420px;
+      }
+      .search input {
+        width: 100%;
+        padding: 9px 34px 9px 12px;
+        border-radius: 8px;
+        border: 2px solid #5a442a;
+        background: #fffaf0;
+        color: var(--ink);
+        font-size: 14px;
+        outline: none;
+      }
+      .search input:focus {
+        border-color: var(--gold);
+        box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.35);
+      }
+      .search .clear {
+        position: absolute;
+        right: 6px;
+        top: 50%;
+        transform: translateY(-50%);
+        border: 0;
+        background: transparent;
+        color: var(--muted);
+        font-size: 18px;
+        line-height: 1;
+        cursor: pointer;
+        padding: 4px 6px;
+      }
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .chip {
+        border: 1px solid #6a5233;
+        background: #2f2213;
+        color: #f0e2bd;
+        padding: 6px 11px;
+        border-radius: 999px;
+        font-size: 12.5px;
+        cursor: pointer;
+        transition: background 0.15s, color 0.15s;
+      }
+      .chip:hover {
+        background: #4a3620;
+      }
+      .chip.active {
+        background: var(--gold);
+        border-color: var(--gold);
+        color: #2a2118;
+        font-weight: 700;
+      }
+      .result-count {
+        margin-left: auto;
+        font-size: 12.5px;
+        color: #e2d3ad;
+        white-space: nowrap;
+      }
+
+      /* ---- layout ---- */
+      main {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 22px 18px 60px;
+      }
+      .region {
+        margin-bottom: 34px;
+      }
+      .region-head {
+        display: flex;
+        align-items: baseline;
+        gap: 12px;
+        border-bottom: 3px solid var(--line);
+        padding-bottom: 6px;
+        margin-bottom: 14px;
+      }
+      .region-head h2 {
+        margin: 0;
+        font-size: 22px;
+      }
+      .region-head .gen {
+        font-size: 12px;
+        color: var(--muted);
+        background: #eadfc4;
+        border: 1px solid var(--line);
+        padding: 2px 8px;
+        border-radius: 999px;
+      }
+      .region-head .stat {
+        margin-left: auto;
+        color: var(--muted);
+        font-size: 12.5px;
+      }
+
+      .locations {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+        gap: 14px;
+      }
+      .location {
+        background: var(--paper-2);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        box-shadow: 0 2px 6px var(--shadow);
+        overflow: hidden;
+      }
+      .location.raid {
+        border-color: #8b5bb5;
+        box-shadow: 0 0 0 1px rgba(139, 91, 181, 0.35), 0 2px 6px var(--shadow);
+      }
+      .location-head {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 12px;
+        background: linear-gradient(#efe4c9, #e6d8b6);
+        border-bottom: 1px solid var(--line);
+      }
+      .location-head .name {
+        font-weight: 700;
+        font-size: 14.5px;
+      }
+      .badge {
+        font-size: 10.5px;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+        padding: 2px 7px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: #fff;
+        color: var(--muted);
+      }
+      .badge.raid {
+        background: #efe0fb;
+        border-color: #c8a8e6;
+        color: #6f3ea3;
+      }
+      .location-head .count {
+        margin-left: auto;
+        font-size: 11.5px;
+        color: var(--muted);
+      }
+
+      .mon-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2px;
+        padding: 6px;
+      }
+      .mon {
+        display: grid;
+        grid-template-columns: 54px 1fr auto;
+        grid-template-areas:
+          "sprite info lv"
+          "sprite rate rate";
+        gap: 4px 10px;
+        align-items: center;
+        padding: 5px 8px;
+        border-radius: 7px;
+      }
+      .mon:nth-child(odd) {
+        background: rgba(220, 203, 170, 0.28);
+      }
+      .mon img.sprite {
+        grid-area: sprite;
+        width: 54px;
+        height: 54px;
+        object-fit: contain;
+        image-rendering: pixelated;
+      }
+      .mon .info {
+        grid-area: info;
+        min-width: 0;
+      }
+      .mon .mon-name {
+        font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .mon .types {
+        display: flex;
+        gap: 4px;
+        margin-top: 2px;
+      }
+      .type {
+        font-size: 10px;
+        font-weight: 700;
+        color: #fff;
+        padding: 1px 7px;
+        border-radius: 999px;
+        background: var(--c, #888);
+        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+      }
+      .mon .lv {
+        grid-area: lv;
+        font-size: 12px;
+        color: var(--muted);
+        white-space: nowrap;
+        font-variant-numeric: tabular-nums;
+      }
+      .mon .rate {
+        grid-area: rate;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .mon .bar-track {
+        position: relative;
+        flex: 1;
+        height: 6px;
+        border-radius: 999px;
+        background: #e4d7ba;
+        overflow: hidden;
+      }
+      .mon .bar {
+        height: 100%;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #b8892a, #e0b93f);
+      }
+      .mon .rate span {
+        width: 44px;
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .empty {
+        text-align: center;
+        padding: 60px 20px;
+        color: var(--muted);
+        font-size: 16px;
+      }
+      footer {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 18px 40px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      code {
+        background: #eadfc4;
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        padding: 0 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="top">
+      <h1>Pokémon Idle — Wild Encounter Index <small>what spawns where</small></h1>
+      <div class="totals" id="totals"></div>
+      <div class="controls">
+        <label class="search">
+          <input id="search" type="search" placeholder="Search a Pokémon or location…" autocomplete="off" />
+          <button class="clear hidden" id="clear" type="button" aria-label="Clear search">×</button>
+        </label>
+        <div class="chips" id="chips"></div>
+        <span class="result-count" id="resultCount"></span>
+      </div>
+    </header>
+
+    <main id="app"></main>
+    <div class="empty hidden" id="empty">No Pokémon or location matches that search.</div>
+
+    <footer>
+      Generated from <code>public/data/map-data/*</code> and
+      <code>public/data/encounter-data/*</code> on <span id="generatedAt"></span>.
+      Levels are the game's tuned encounter band; rate is each species' share of
+      the location's encounter rolls. Raid Islands list their region's legendary
+      pool. Regenerate with <code>node tools/generate-encounter-index.cjs</code>.
+    </footer>
+
+    <script>
+      window.__ENCOUNTER_INDEX__ = __ENCOUNTER_DATA__
+    </script>
+    <script>
+      ;(function () {
+        var DATA = window.__ENCOUNTER_INDEX__
+        var TYPE_COLORS = {
+          Normal: '#A8A77A', Fire: '#EE8130', Water: '#6390F0', Electric: '#F7D02C',
+          Grass: '#7AC74C', Ice: '#96D9D6', Fighting: '#C22E28', Poison: '#A33EA1',
+          Ground: '#E2BF65', Flying: '#A98FF3', Psychic: '#F95587', Bug: '#A6B91A',
+          Rock: '#B6A136', Ghost: '#735797', Dragon: '#6F35FC', Dark: '#705746',
+          Steel: '#B7B7CE', Fairy: '#D685AD',
+        }
+        var state = { query: '', region: 'all' }
+
+        function esc(text) {
+          return String(text).replace(/[&<>"']/g, function (ch) {
+            return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]
+          })
+        }
+        function spriteUrl(id) {
+          return 'sprites/pokemon/versions/generation-v/black-white/animated/' + id + '.gif'
+        }
+        function fallbackUrl(id) {
+          return 'sprites/pokemon/' + id + '.png'
+        }
+        function typeBadge(type) {
+          var color = TYPE_COLORS[type] || '#888'
+          return '<span class="type" style="--c:' + color + '">' + esc(type) + '</span>'
+        }
+
+        function renderMon(entry, total) {
+          var info = DATA.species[entry.key] || { id: 0, name: entry.key, types: [] }
+          var rate = total > 0 ? entry.weight / total : 0
+          var percent = (Math.round(rate * 1000) / 10).toFixed(1)
+          var lv =
+            entry.minLevel === entry.maxLevel
+              ? 'Lv ' + entry.minLevel
+              : 'Lv ' + entry.minLevel + '–' + entry.maxLevel
+          var types = info.types.map(typeBadge).join('')
+          return (
+            '<div class="mon">' +
+            '<img class="sprite" loading="lazy" src="' + spriteUrl(info.id) + '" alt="' + esc(info.name) + '" ' +
+            "onerror=\"this.onerror=null;this.src='" + fallbackUrl(info.id) + "'\">" +
+            '<div class="info"><div class="mon-name">' + esc(info.name) + '</div>' +
+            '<div class="types">' + types + '</div></div>' +
+            '<div class="lv">' + lv + '</div>' +
+            '<div class="rate"><div class="bar-track"><div class="bar" style="width:' +
+            Math.min(100, rate * 100).toFixed(1) + '%"></div></div><span>' + percent + '%</span></div>' +
+            '</div>'
+          )
+        }
+
+        function renderLocation(location) {
+          var total = location.encounters.reduce(function (sum, e) { return sum + (e.weight || 0) }, 0)
+          var mons = location.encounters
+            .slice()
+            .sort(function (a, b) { return b.weight - a.weight })
+          var monNames = mons
+            .map(function (e) { return (DATA.species[e.key] || {}).name || e.key })
+            .join(' ')
+            .toLowerCase()
+          var classes = 'location' + (location.type === 'raid' ? ' raid' : '')
+          var badge = location.type === 'raid' ? 'Raid Island' : location.type
+          return (
+            '<article class="' + classes + '" data-name="' + esc(location.name.toLowerCase()) +
+            '" data-mons="' + esc(monNames) + '">' +
+            '<div class="location-head"><span class="name">' + esc(location.name) + '</span>' +
+            '<span class="badge ' + (location.type === 'raid' ? 'raid' : '') + '">' + esc(badge) + '</span>' +
+            '<span class="count">' + mons.length + ' species</span></div>' +
+            '<div class="mon-grid">' + mons.map(function (e) { return renderMon(e, total) }).join('') +
+            '</div></article>'
+          )
+        }
+
+        function renderRegion(region) {
+          var speciesCount = {}
+          region.locations.forEach(function (location) {
+            location.encounters.forEach(function (e) { speciesCount[e.key] = 1 })
+          })
+          var mons = Object.keys(speciesCount).length
+          return (
+            '<section class="region" id="region-' + region.id + '" data-region="' + region.id + '">' +
+            '<div class="region-head"><h2>' + esc(region.name) + '</h2>' +
+            '<span class="gen">Gen ' + region.generation + '</span>' +
+            '<span class="stat">' + region.locations.length + ' locations · ' + mons + ' species</span></div>' +
+            '<div class="locations">' + region.locations.map(renderLocation).join('') + '</div>' +
+            '</section>'
+          )
+        }
+
+        function renderChips() {
+          var chips = ['<button class="chip active" data-region="all">All</button>']
+          DATA.regions.forEach(function (region) {
+            chips.push(
+              '<button class="chip" data-region="' + region.id + '">' + esc(region.name) + '</button>'
+            )
+          })
+          document.getElementById('chips').innerHTML = chips.join('')
+        }
+
+        function applyFilters() {
+          var query = state.query.trim().toLowerCase()
+          var visible = 0
+          Array.prototype.forEach.call(document.querySelectorAll('.region'), function (section) {
+            if (state.region !== 'all' && section.dataset.region !== state.region) {
+              section.classList.add('hidden')
+              return
+            }
+            var cards = section.querySelectorAll('.location')
+            var shown = 0
+            Array.prototype.forEach.call(cards, function (card) {
+              var match =
+                !query ||
+                card.dataset.name.indexOf(query) !== -1 ||
+                card.dataset.mons.indexOf(query) !== -1
+              card.classList.toggle('hidden', !match)
+              if (match) shown++
+            })
+            section.classList.toggle('hidden', shown === 0)
+            visible += shown
+          })
+          document.getElementById('empty').classList.toggle('hidden', visible > 0)
+          document.getElementById('resultCount').textContent =
+            visible + (visible === 1 ? ' location' : ' locations')
+        }
+
+        function init() {
+          document.getElementById('totals').innerHTML =
+            '<b>' + DATA.totals.regions + '</b> regions · <b>' + DATA.totals.locations +
+            '</b> wild locations · <b>' + DATA.totals.species + '</b> Pokémon'
+          document.getElementById('generatedAt').textContent = new Date(DATA.generatedAt).toLocaleString()
+
+          document.getElementById('app').innerHTML = DATA.regions.map(renderRegion).join('')
+          renderChips()
+
+          var search = document.getElementById('search')
+          var clear = document.getElementById('clear')
+          search.addEventListener('input', function () {
+            state.query = search.value
+            clear.classList.toggle('hidden', !search.value)
+            applyFilters()
+          })
+          clear.addEventListener('click', function () {
+            search.value = ''
+            state.query = ''
+            clear.classList.add('hidden')
+            applyFilters()
+            search.focus()
+          })
+
+          document.getElementById('chips').addEventListener('click', function (event) {
+            var chip = event.target.closest('.chip')
+            if (!chip) return
+            state.region = chip.dataset.region
+            Array.prototype.forEach.call(document.querySelectorAll('.chip'), function (el) {
+              el.classList.toggle('active', el === chip)
+            })
+            applyFilters()
+          })
+
+          applyFilters()
+        }
+
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init)
+        else init()
+      })()
+    </script>
+  </body>
+</html>

@@ -159,6 +159,7 @@ window.gameDataDebug.lookupPokemon('pikachu')
 | `assets/style.css` | All game styling + CSS variables (theme colors). |
 | `assets/fonts.css` | Local "Press Start 2P" `@font-face` declarations. |
 | `public/data/*.json` | **The game database** (see below). Served at `/data/...`. |
+| `public/encounter-index.html` | Generated offline "what spawns where" overview (see `tools/generate-encounter-index.cjs`). |
 | `public/sprites/pokemon/` | Pokémon sprites, named by numeric species/form id (`25.png`, `25.gif`, `back/25.png`, …). |
 | `public/sprites/trainers/` | Trainer images. |
 | `public/backgrounds/` | Battle/location backgrounds. |
@@ -322,6 +323,13 @@ One-off scripts used to build the data JSON (not run during dev/build):
   `refs/`); `render-region-maps.py` (uses Pillow from `.venv`) draws each
   region's locations/roads from `public/data/map-data/` and writes side-by-side
   composites to gitignored `out/`. Not part of the build.
+- `generate-encounter-index.cjs` + `encounter-index-template.html` — build
+  `public/encounter-index.html`, a self-contained, offline "what spawns where"
+  page (region → location → species with types, level range and encounter
+  rate, plus search and region filters). It inlines the split region data into
+  the template, so re-run it after map/encounter changes. Served at
+  `/encounter-index.html`; sprites use relative `sprites/pokemon/...` paths so
+  the file also works when opened directly.
 - `*.md` in `tools/` (`SUMMARY.md`, `DATA_INTEGRATION.md`,
   `REFACTORING_GUIDE.md`, `QUICKSTART_DATA_INTEGRATION.md`) — historical design
   docs. Some counts/claims there are outdated (e.g. they still say "151

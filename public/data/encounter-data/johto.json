@@ -2629,79 +2629,7 @@
   "name": "Johto Raid Island",
   "encounters": [
    {
-    "speciesKey": "pichu",
-    "weight": 1,
-    "minLevel": 53,
-    "maxLevel": 53
-   },
-   {
     "speciesKey": "cleffa",
-    "weight": 1,
-    "minLevel": 53,
-    "maxLevel": 53
-   },
-   {
-    "speciesKey": "igglybuff",
-    "weight": 1,
-    "minLevel": 53,
-    "maxLevel": 53
-   },
-   {
-    "speciesKey": "togepi",
-    "weight": 1,
-    "minLevel": 53,
-    "maxLevel": 53
-   },
-   {
-    "speciesKey": "togetic",
-    "weight": 1,
-    "minLevel": 53,
-    "maxLevel": 53
-   },
-   {
-    "speciesKey": "natu",
-    "weight": 1,
-    "minLevel": 53,
-    "maxLevel": 53
-   },
-   {
-    "speciesKey": "xatu",
-    "weight": 1,
-    "minLevel": 53,
-    "maxLevel": 53
-   },
-   {
-    "speciesKey": "sunkern",
-    "weight": 1,
-    "minLevel": 53,
-    "maxLevel": 53
-   },
-   {
-    "speciesKey": "sunflora",
-    "weight": 1,
-    "minLevel": 53,
-    "maxLevel": 53
-   },
-   {
-    "speciesKey": "espeon",
-    "weight": 1,
-    "minLevel": 53,
-    "maxLevel": 53
-   },
-   {
-    "speciesKey": "umbreon",
-    "weight": 1,
-    "minLevel": 53,
-    "maxLevel": 53
-   },
-   {
-    "speciesKey": "murkrow",
-    "weight": 1,
-    "minLevel": 53,
-    "maxLevel": 53
-   },
-   {
-    "speciesKey": "slowking",
     "weight": 1,
     "minLevel": 53,
     "maxLevel": 53
@@ -2713,121 +2641,13 @@
     "maxLevel": 53
    },
    {
-    "speciesKey": "wobbuffet",
-    "weight": 1,
-    "minLevel": 53,
-    "maxLevel": 53
-   },
-   {
-    "speciesKey": "dunsparce",
-    "weight": 1,
-    "minLevel": 53,
-    "maxLevel": 53
-   },
-   {
-    "speciesKey": "scizor",
-    "weight": 1,
-    "minLevel": 53,
-    "maxLevel": 53
-   },
-   {
-    "speciesKey": "sneasel",
-    "weight": 1,
-    "minLevel": 53,
-    "maxLevel": 53
-   },
-   {
-    "speciesKey": "slugma",
-    "weight": 1,
-    "minLevel": 53,
-    "maxLevel": 53
-   },
-   {
-    "speciesKey": "magcargo",
-    "weight": 1,
-    "minLevel": 53,
-    "maxLevel": 53
-   },
-   {
-    "speciesKey": "swinub",
-    "weight": 1,
-    "minLevel": 53,
-    "maxLevel": 53
-   },
-   {
-    "speciesKey": "piloswine",
-    "weight": 1,
-    "minLevel": 53,
-    "maxLevel": 53
-   },
-   {
-    "speciesKey": "delibird",
-    "weight": 1,
-    "minLevel": 53,
-    "maxLevel": 53
-   },
-   {
-    "speciesKey": "houndour",
-    "weight": 1,
-    "minLevel": 53,
-    "maxLevel": 53
-   },
-   {
-    "speciesKey": "houndoom",
-    "weight": 1,
-    "minLevel": 53,
-    "maxLevel": 53
-   },
-   {
-    "speciesKey": "kingdra",
-    "weight": 1,
-    "minLevel": 53,
-    "maxLevel": 53
-   },
-   {
     "speciesKey": "porygon2",
     "weight": 1,
     "minLevel": 53,
     "maxLevel": 53
    },
    {
-    "speciesKey": "smeargle",
-    "weight": 1,
-    "minLevel": 53,
-    "maxLevel": 53
-   },
-   {
-    "speciesKey": "tyrogue",
-    "weight": 1,
-    "minLevel": 53,
-    "maxLevel": 53
-   },
-   {
-    "speciesKey": "hitmontop",
-    "weight": 1,
-    "minLevel": 53,
-    "maxLevel": 53
-   },
-   {
     "speciesKey": "smoochum",
-    "weight": 1,
-    "minLevel": 53,
-    "maxLevel": 53
-   },
-   {
-    "speciesKey": "elekid",
-    "weight": 1,
-    "minLevel": 53,
-    "maxLevel": 53
-   },
-   {
-    "speciesKey": "magby",
-    "weight": 1,
-    "minLevel": 53,
-    "maxLevel": 53
-   },
-   {
-    "speciesKey": "blissey",
     "weight": 1,
     "minLevel": 53,
     "maxLevel": 53
@@ -2849,24 +2669,6 @@
     "weight": 1,
     "minLevel": 63,
     "maxLevel": 63
-   },
-   {
-    "speciesKey": "larvitar",
-    "weight": 1,
-    "minLevel": 53,
-    "maxLevel": 53
-   },
-   {
-    "speciesKey": "pupitar",
-    "weight": 1,
-    "minLevel": 53,
-    "maxLevel": 53
-   },
-   {
-    "speciesKey": "tyranitar",
-    "weight": 1,
-    "minLevel": 53,
-    "maxLevel": 53
    },
    {
     "speciesKey": "lugia",

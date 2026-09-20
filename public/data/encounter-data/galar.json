@@ -1097,36 +1097,6 @@
     "maxLevel": 100
    },
    {
-    "speciesKey": "sinistea",
-    "weight": 1,
-    "minLevel": 100,
-    "maxLevel": 100
-   },
-   {
-    "speciesKey": "polteageist",
-    "weight": 1,
-    "minLevel": 100,
-    "maxLevel": 100
-   },
-   {
-    "speciesKey": "hatenna",
-    "weight": 1,
-    "minLevel": 100,
-    "maxLevel": 100
-   },
-   {
-    "speciesKey": "hattrem",
-    "weight": 1,
-    "minLevel": 100,
-    "maxLevel": 100
-   },
-   {
-    "speciesKey": "hatterene",
-    "weight": 1,
-    "minLevel": 100,
-    "maxLevel": 100
-   },
-   {
     "speciesKey": "impidimp",
     "weight": 1,
     "minLevel": 100,
@@ -1169,31 +1139,7 @@
     "maxLevel": 100
    },
    {
-    "speciesKey": "eiscue",
-    "weight": 1,
-    "minLevel": 100,
-    "maxLevel": 100
-   },
-   {
-    "speciesKey": "indeedee",
-    "weight": 1,
-    "minLevel": 100,
-    "maxLevel": 100
-   },
-   {
     "speciesKey": "morpeko",
-    "weight": 1,
-    "minLevel": 100,
-    "maxLevel": 100
-   },
-   {
-    "speciesKey": "cufant",
-    "weight": 1,
-    "minLevel": 100,
-    "maxLevel": 100
-   },
-   {
-    "speciesKey": "copperajah",
     "weight": 1,
     "minLevel": 100,
     "maxLevel": 100
@@ -1218,24 +1164,6 @@
    },
    {
     "speciesKey": "arctovish",
-    "weight": 1,
-    "minLevel": 100,
-    "maxLevel": 100
-   },
-   {
-    "speciesKey": "dreepy",
-    "weight": 1,
-    "minLevel": 100,
-    "maxLevel": 100
-   },
-   {
-    "speciesKey": "drakloak",
-    "weight": 1,
-    "minLevel": 100,
-    "maxLevel": 100
-   },
-   {
-    "speciesKey": "dragapult",
     "weight": 1,
     "minLevel": 100,
     "maxLevel": 100
@@ -1302,24 +1230,6 @@
    },
    {
     "speciesKey": "calyrex",
-    "weight": 1,
-    "minLevel": 100,
-    "maxLevel": 100
-   },
-   {
-    "speciesKey": "wyrdeer",
-    "weight": 1,
-    "minLevel": 100,
-    "maxLevel": 100
-   },
-   {
-    "speciesKey": "kleavor",
-    "weight": 1,
-    "minLevel": 100,
-    "maxLevel": 100
-   },
-   {
-    "speciesKey": "ursaluna",
     "weight": 1,
     "minLevel": 100,
     "maxLevel": 100

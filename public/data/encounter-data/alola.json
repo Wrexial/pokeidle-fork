@@ -1425,43 +1425,13 @@
   "name": "Alola Raid Island",
   "encounters": [
    {
-    "speciesKey": "oricorio",
-    "weight": 1,
-    "minLevel": 98,
-    "maxLevel": 98
-   },
-   {
     "speciesKey": "wishiwashi",
     "weight": 1,
     "minLevel": 98,
     "maxLevel": 98
    },
    {
-    "speciesKey": "dewpider",
-    "weight": 1,
-    "minLevel": 98,
-    "maxLevel": 98
-   },
-   {
-    "speciesKey": "araquanid",
-    "weight": 1,
-    "minLevel": 98,
-    "maxLevel": 98
-   },
-   {
     "speciesKey": "comfey",
-    "weight": 1,
-    "minLevel": 98,
-    "maxLevel": 98
-   },
-   {
-    "speciesKey": "oranguru",
-    "weight": 1,
-    "minLevel": 98,
-    "maxLevel": 98
-   },
-   {
-    "speciesKey": "passimian",
     "weight": 1,
     "minLevel": 98,
     "maxLevel": 98
@@ -1491,25 +1461,7 @@
     "maxLevel": 98
    },
    {
-    "speciesKey": "togedemaru",
-    "weight": 1,
-    "minLevel": 98,
-    "maxLevel": 98
-   },
-   {
-    "speciesKey": "mimikyu",
-    "weight": 1,
-    "minLevel": 98,
-    "maxLevel": 98
-   },
-   {
     "speciesKey": "drampa",
-    "weight": 1,
-    "minLevel": 98,
-    "maxLevel": 98
-   },
-   {
-    "speciesKey": "dhelmise",
     "weight": 1,
     "minLevel": 98,
     "maxLevel": 98

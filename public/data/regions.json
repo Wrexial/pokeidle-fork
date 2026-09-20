@@ -8,24 +8,36 @@
   "startLevel": 5,
   "raidPool": [
    {
-    "speciesKey": "articuno",
+    "speciesKey": "jynx",
     "level": 70
    },
    {
-    "speciesKey": "zapdos",
+    "speciesKey": "porygon",
     "level": 70
    },
    {
-    "speciesKey": "moltres",
+    "speciesKey": "omanyte",
     "level": 70
    },
    {
-    "speciesKey": "mewtwo",
-    "level": 80
+    "speciesKey": "omastar",
+    "level": 70
+   },
+   {
+    "speciesKey": "kabuto",
+    "level": 70
+   },
+   {
+    "speciesKey": "kabutops",
+    "level": 70
+   },
+   {
+    "speciesKey": "aerodactyl",
+    "level": 70
    },
    {
     "speciesKey": "mew",
-    "level": 60
+    "level": 70
    }
   ],
   "leagueLocationKey": "indigoPlat"
@@ -37,57 +49,10 @@
   "order": 2,
   "entry": "johto-new-bark-town",
   "startLevel": 28,
+  "leagueLocationKey": "johto-league",
   "raidPool": [
    {
-    "speciesKey": "pichu",
-    "level": 53
-   },
-   {
     "speciesKey": "cleffa",
-    "level": 53
-   },
-   {
-    "speciesKey": "igglybuff",
-    "level": 53
-   },
-   {
-    "speciesKey": "togepi",
-    "level": 53
-   },
-   {
-    "speciesKey": "togetic",
-    "level": 53
-   },
-   {
-    "speciesKey": "natu",
-    "level": 53
-   },
-   {
-    "speciesKey": "xatu",
-    "level": 53
-   },
-   {
-    "speciesKey": "sunkern",
-    "level": 53
-   },
-   {
-    "speciesKey": "sunflora",
-    "level": 53
-   },
-   {
-    "speciesKey": "espeon",
-    "level": 53
-   },
-   {
-    "speciesKey": "umbreon",
-    "level": 53
-   },
-   {
-    "speciesKey": "murkrow",
-    "level": 53
-   },
-   {
-    "speciesKey": "slowking",
     "level": 53
    },
    {
@@ -95,83 +60,11 @@
     "level": 53
    },
    {
-    "speciesKey": "wobbuffet",
-    "level": 53
-   },
-   {
-    "speciesKey": "dunsparce",
-    "level": 53
-   },
-   {
-    "speciesKey": "scizor",
-    "level": 53
-   },
-   {
-    "speciesKey": "sneasel",
-    "level": 53
-   },
-   {
-    "speciesKey": "slugma",
-    "level": 53
-   },
-   {
-    "speciesKey": "magcargo",
-    "level": 53
-   },
-   {
-    "speciesKey": "swinub",
-    "level": 53
-   },
-   {
-    "speciesKey": "piloswine",
-    "level": 53
-   },
-   {
-    "speciesKey": "delibird",
-    "level": 53
-   },
-   {
-    "speciesKey": "houndour",
-    "level": 53
-   },
-   {
-    "speciesKey": "houndoom",
-    "level": 53
-   },
-   {
-    "speciesKey": "kingdra",
-    "level": 53
-   },
-   {
     "speciesKey": "porygon2",
     "level": 53
    },
    {
-    "speciesKey": "smeargle",
-    "level": 53
-   },
-   {
-    "speciesKey": "tyrogue",
-    "level": 53
-   },
-   {
-    "speciesKey": "hitmontop",
-    "level": 53
-   },
-   {
     "speciesKey": "smoochum",
-    "level": 53
-   },
-   {
-    "speciesKey": "elekid",
-    "level": 53
-   },
-   {
-    "speciesKey": "magby",
-    "level": 53
-   },
-   {
-    "speciesKey": "blissey",
     "level": 53
    },
    {
@@ -187,18 +80,6 @@
     "level": 63
    },
    {
-    "speciesKey": "larvitar",
-    "level": 53
-   },
-   {
-    "speciesKey": "pupitar",
-    "level": 53
-   },
-   {
-    "speciesKey": "tyranitar",
-    "level": 53
-   },
-   {
     "speciesKey": "lugia",
     "level": 63
    },
@@ -210,8 +91,7 @@
     "speciesKey": "celebi",
     "level": 53
    }
-  ],
-  "leagueLocationKey": "johto-league"
+  ]
  },
  {
   "id": "hoenn",
@@ -220,89 +100,14 @@
   "order": 3,
   "entry": "hoenn-littleroot-town",
   "startLevel": 37,
+  "leagueLocationKey": "hoenn-league",
   "raidPool": [
-   {
-    "speciesKey": "shroomish",
-    "level": 62
-   },
-   {
-    "speciesKey": "breloom",
-    "level": 62
-   },
-   {
-    "speciesKey": "slakoth",
-    "level": 62
-   },
-   {
-    "speciesKey": "vigoroth",
-    "level": 62
-   },
-   {
-    "speciesKey": "slaking",
-    "level": 62
-   },
-   {
-    "speciesKey": "makuhita",
-    "level": 62
-   },
-   {
-    "speciesKey": "hariyama",
-    "level": 62
-   },
-   {
-    "speciesKey": "azurill",
-    "level": 62
-   },
-   {
-    "speciesKey": "nosepass",
-    "level": 62
-   },
-   {
-    "speciesKey": "sableye",
-    "level": 62
-   },
    {
     "speciesKey": "mawile",
     "level": 62
    },
    {
     "speciesKey": "aron",
-    "level": 62
-   },
-   {
-    "speciesKey": "lairon",
-    "level": 62
-   },
-   {
-    "speciesKey": "aggron",
-    "level": 62
-   },
-   {
-    "speciesKey": "meditite",
-    "level": 62
-   },
-   {
-    "speciesKey": "medicham",
-    "level": 62
-   },
-   {
-    "speciesKey": "torkoal",
-    "level": 62
-   },
-   {
-    "speciesKey": "spoink",
-    "level": 62
-   },
-   {
-    "speciesKey": "grumpig",
-    "level": 62
-   },
-   {
-    "speciesKey": "lunatone",
-    "level": 62
-   },
-   {
-    "speciesKey": "solrock",
     "level": 62
    },
    {
@@ -320,58 +125,6 @@
    {
     "speciesKey": "armaldo",
     "level": 62
-   },
-   {
-    "speciesKey": "castform",
-    "level": 62
-   },
-   {
-    "speciesKey": "chimecho",
-    "level": 62
-   },
-   {
-    "speciesKey": "snorunt",
-    "level": 62
-   },
-   {
-    "speciesKey": "glalie",
-    "level": 62
-   },
-   {
-    "speciesKey": "spheal",
-    "level": 62
-   },
-   {
-    "speciesKey": "sealeo",
-    "level": 62
-   },
-   {
-    "speciesKey": "walrein",
-    "level": 62
-   },
-   {
-    "speciesKey": "bagon",
-    "level": 62
-   },
-   {
-    "speciesKey": "shelgon",
-    "level": 62
-   },
-   {
-    "speciesKey": "salamence",
-    "level": 62
-   },
-   {
-    "speciesKey": "beldum",
-    "level": 72
-   },
-   {
-    "speciesKey": "metang",
-    "level": 72
-   },
-   {
-    "speciesKey": "metagross",
-    "level": 72
    },
    {
     "speciesKey": "regirock",
@@ -413,8 +166,7 @@
     "speciesKey": "deoxys",
     "level": 72
    }
-  ],
-  "leagueLocationKey": "hoenn-league"
+  ]
  },
  {
   "id": "sinnoh",
@@ -423,6 +175,7 @@
   "order": 4,
   "entry": "sinnoh-twinleaf-town",
   "startLevel": 46,
+  "leagueLocationKey": "sinnoh-league",
   "raidPool": [
    {
     "speciesKey": "cranidos",
@@ -441,91 +194,7 @@
     "level": 71
    },
    {
-    "speciesKey": "drifloon",
-    "level": 71
-   },
-   {
-    "speciesKey": "drifblim",
-    "level": 71
-   },
-   {
-    "speciesKey": "buneary",
-    "level": 71
-   },
-   {
-    "speciesKey": "lopunny",
-    "level": 71
-   },
-   {
-    "speciesKey": "mismagius",
-    "level": 71
-   },
-   {
-    "speciesKey": "honchkrow",
-    "level": 71
-   },
-   {
-    "speciesKey": "happiny",
-    "level": 71
-   },
-   {
-    "speciesKey": "gible",
-    "level": 71
-   },
-   {
-    "speciesKey": "gabite",
-    "level": 71
-   },
-   {
-    "speciesKey": "garchomp",
-    "level": 71
-   },
-   {
-    "speciesKey": "riolu",
-    "level": 71
-   },
-   {
-    "speciesKey": "lucario",
-    "level": 71
-   },
-   {
-    "speciesKey": "hippopotas",
-    "level": 71
-   },
-   {
-    "speciesKey": "skorupi",
-    "level": 71
-   },
-   {
-    "speciesKey": "drapion",
-    "level": 71
-   },
-   {
-    "speciesKey": "carnivine",
-    "level": 71
-   },
-   {
-    "speciesKey": "tangrowth",
-    "level": 71
-   },
-   {
-    "speciesKey": "yanmega",
-    "level": 71
-   },
-   {
-    "speciesKey": "leafeon",
-    "level": 71
-   },
-   {
-    "speciesKey": "glaceon",
-    "level": 71
-   },
-   {
     "speciesKey": "porygon-z",
-    "level": 71
-   },
-   {
-    "speciesKey": "rotom",
     "level": 71
    },
    {
@@ -534,10 +203,6 @@
    },
    {
     "speciesKey": "mesprit",
-    "level": 81
-   },
-   {
-    "speciesKey": "azelf",
     "level": 81
    },
    {
@@ -584,8 +249,7 @@
     "speciesKey": "arceus",
     "level": 81
    }
-  ],
-  "leagueLocationKey": "sinnoh-league"
+  ]
  },
  {
   "id": "unova",
@@ -594,6 +258,7 @@
   "order": 5,
   "entry": "unova-nuvema-town",
   "startLevel": 55,
+  "leagueLocationKey": "unova-league",
   "raidPool": [
    {
     "speciesKey": "victini",
@@ -636,23 +301,7 @@
     "level": 80
    },
    {
-    "speciesKey": "boldore",
-    "level": 80
-   },
-   {
     "speciesKey": "tympole",
-    "level": 80
-   },
-   {
-    "speciesKey": "basculin",
-    "level": 80
-   },
-   {
-    "speciesKey": "maractus",
-    "level": 80
-   },
-   {
-    "speciesKey": "sigilyph",
     "level": 80
    },
    {
@@ -680,67 +329,11 @@
     "level": 80
    },
    {
-    "speciesKey": "zorua",
-    "level": 80
-   },
-   {
-    "speciesKey": "zoroark",
-    "level": 80
-   },
-   {
-    "speciesKey": "ducklett",
-    "level": 80
-   },
-   {
-    "speciesKey": "swanna",
-    "level": 80
-   },
-   {
     "speciesKey": "frillish",
     "level": 80
    },
    {
     "speciesKey": "jellicent",
-    "level": 80
-   },
-   {
-    "speciesKey": "joltik",
-    "level": 80
-   },
-   {
-    "speciesKey": "galvantula",
-    "level": 80
-   },
-   {
-    "speciesKey": "ferroseed",
-    "level": 80
-   },
-   {
-    "speciesKey": "ferrothorn",
-    "level": 80
-   },
-   {
-    "speciesKey": "klink",
-    "level": 80
-   },
-   {
-    "speciesKey": "klang",
-    "level": 80
-   },
-   {
-    "speciesKey": "klinklang",
-    "level": 80
-   },
-   {
-    "speciesKey": "tynamo",
-    "level": 80
-   },
-   {
-    "speciesKey": "eelektrik",
-    "level": 80
-   },
-   {
-    "speciesKey": "eelektross",
     "level": 80
    },
    {
@@ -760,51 +353,11 @@
     "level": 80
    },
    {
-    "speciesKey": "axew",
-    "level": 80
-   },
-   {
-    "speciesKey": "fraxure",
-    "level": 80
-   },
-   {
-    "speciesKey": "haxorus",
-    "level": 80
-   },
-   {
     "speciesKey": "cryogonal",
     "level": 80
    },
    {
     "speciesKey": "druddigon",
-    "level": 80
-   },
-   {
-    "speciesKey": "golett",
-    "level": 80
-   },
-   {
-    "speciesKey": "golurk",
-    "level": 80
-   },
-   {
-    "speciesKey": "heatmor",
-    "level": 80
-   },
-   {
-    "speciesKey": "durant",
-    "level": 80
-   },
-   {
-    "speciesKey": "deino",
-    "level": 80
-   },
-   {
-    "speciesKey": "zweilous",
-    "level": 80
-   },
-   {
-    "speciesKey": "hydreigon",
     "level": 80
    },
    {
@@ -851,8 +404,7 @@
     "speciesKey": "genesect",
     "level": 90
    }
-  ],
-  "leagueLocationKey": "unova-league"
+  ]
  },
  {
   "id": "kalos",
@@ -861,6 +413,7 @@
   "order": 6,
   "entry": "kalos-vaniville-town",
   "startLevel": 64,
+  "leagueLocationKey": "kalos-league",
   "raidPool": [
    {
     "speciesKey": "tyrunt",
@@ -891,22 +444,6 @@
     "level": 89
    },
    {
-    "speciesKey": "bergmite",
-    "level": 89
-   },
-   {
-    "speciesKey": "avalugg",
-    "level": 89
-   },
-   {
-    "speciesKey": "noibat",
-    "level": 89
-   },
-   {
-    "speciesKey": "noivern",
-    "level": 89
-   },
-   {
     "speciesKey": "xerneas",
     "level": 89
    },
@@ -930,8 +467,7 @@
     "speciesKey": "volcanion",
     "level": 99
    }
-  ],
-  "leagueLocationKey": "kalos-league"
+  ]
  },
  {
   "id": "alola",
@@ -940,33 +476,14 @@
   "order": 7,
   "entry": "alola-iki-town",
   "startLevel": 73,
+  "leagueLocationKey": "alola-league",
   "raidPool": [
-   {
-    "speciesKey": "oricorio",
-    "level": 98
-   },
    {
     "speciesKey": "wishiwashi",
     "level": 98
    },
    {
-    "speciesKey": "dewpider",
-    "level": 98
-   },
-   {
-    "speciesKey": "araquanid",
-    "level": 98
-   },
-   {
     "speciesKey": "comfey",
-    "level": 98
-   },
-   {
-    "speciesKey": "oranguru",
-    "level": 98
-   },
-   {
-    "speciesKey": "passimian",
     "level": 98
    },
    {
@@ -986,19 +503,7 @@
     "level": 98
    },
    {
-    "speciesKey": "togedemaru",
-    "level": 98
-   },
-   {
-    "speciesKey": "mimikyu",
-    "level": 98
-   },
-   {
     "speciesKey": "drampa",
-    "level": 98
-   },
-   {
-    "speciesKey": "dhelmise",
     "level": 98
    },
    {
@@ -1109,8 +614,7 @@
     "speciesKey": "melmetal",
     "level": 100
    }
-  ],
-  "leagueLocationKey": "alola-league"
+  ]
  },
  {
   "id": "galar",
@@ -1119,29 +623,10 @@
   "order": 8,
   "entry": "galar-postwick",
   "startLevel": 82,
+  "leagueLocationKey": "galar-league",
   "raidPool": [
    {
     "speciesKey": "appletun",
-    "level": 100
-   },
-   {
-    "speciesKey": "sinistea",
-    "level": 100
-   },
-   {
-    "speciesKey": "polteageist",
-    "level": 100
-   },
-   {
-    "speciesKey": "hatenna",
-    "level": 100
-   },
-   {
-    "speciesKey": "hattrem",
-    "level": 100
-   },
-   {
-    "speciesKey": "hatterene",
     "level": 100
    },
    {
@@ -1173,23 +658,7 @@
     "level": 100
    },
    {
-    "speciesKey": "eiscue",
-    "level": 100
-   },
-   {
-    "speciesKey": "indeedee",
-    "level": 100
-   },
-   {
     "speciesKey": "morpeko",
-    "level": 100
-   },
-   {
-    "speciesKey": "cufant",
-    "level": 100
-   },
-   {
-    "speciesKey": "copperajah",
     "level": 100
    },
    {
@@ -1206,18 +675,6 @@
    },
    {
     "speciesKey": "arctovish",
-    "level": 100
-   },
-   {
-    "speciesKey": "dreepy",
-    "level": 100
-   },
-   {
-    "speciesKey": "drakloak",
-    "level": 100
-   },
-   {
-    "speciesKey": "dragapult",
     "level": 100
    },
    {
@@ -1265,18 +722,6 @@
     "level": 100
    },
    {
-    "speciesKey": "wyrdeer",
-    "level": 100
-   },
-   {
-    "speciesKey": "kleavor",
-    "level": 100
-   },
-   {
-    "speciesKey": "ursaluna",
-    "level": 100
-   },
-   {
     "speciesKey": "basculegion",
     "level": 100
    },
@@ -1292,8 +737,7 @@
     "speciesKey": "enamorus",
     "level": 100
    }
-  ],
-  "leagueLocationKey": "galar-league"
+  ]
  },
  {
   "id": "paldea",
@@ -1302,6 +746,7 @@
   "order": 9,
   "entry": "paldea-los-platos",
   "startLevel": 91,
+  "leagueLocationKey": "paldea-league",
   "raidPool": [
    {
     "speciesKey": "rellor",
@@ -1427,7 +872,6 @@
     "speciesKey": "miraidon",
     "level": 100
    }
-  ],
-  "leagueLocationKey": "paldea-league"
+  ]
  }
 ]

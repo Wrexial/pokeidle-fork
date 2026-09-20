@@ -90,10 +90,6 @@ const ELITE_FOUR = {
   galar: ['Marnie', 'Hop', 'Bede', 'Raihan'], paldea: ['Rika', 'Poppy', 'Hassel', 'Clavell'],
 }
 const CHAMPIONS = { johto: 'Lance', hoenn: 'Steven', sinnoh: 'Cynthia', unova: 'Alder', kalos: 'Diantha', alola: 'Kukui', galar: 'Leon', paldea: 'Geeta' }
-const KANTO_LEGENDARIES = [
-  { speciesKey: 'articuno', level: 70 }, { speciesKey: 'zapdos', level: 70 },
-  { speciesKey: 'moltres', level: 70 }, { speciesKey: 'mewtwo', level: 80 }, { speciesKey: 'mew', level: 60 },
-]
 
 const regionMaps = JSON.parse(fs.readFileSync(path.join(__dirname, 'region-maps.json'), 'utf8'))
 const realEncounters = fs.existsSync(path.join(__dirname, 'route-encounters.json'))
@@ -171,8 +167,12 @@ function levelRoutes(regionId, entriesByKey) {
 }
 
 // --- generate ----------------------------------------------------------------
-const regions = [{ id: 'kanto', name: 'Kanto', generation: 1, order: 1, entry: 'palletTown', startLevel: 5, raidPool: KANTO_LEGENDARIES, leagueLocationKey: 'indigoPlat' }]
+const regions = [{ id: 'kanto', name: 'Kanto', generation: 1, order: 1, entry: 'palletTown', startLevel: 5, raidPool: [], leagueLocationKey: 'indigoPlat' }]
 let unlockOrder = 100
+// Raid pools can only be worked out once every region's routes exist (a raid
+// species must be absent from *all* routes), so regions queue up here and are
+// filled in by the raid scan lower down.
+const pendingRaids = [{ regionObj: regions[0], all: speciesForGen(1), base: 45 }]
 
 for (const region of REGIONS) {
   const { id: regionId, name, gen, entry } = region
@@ -316,21 +316,7 @@ for (const region of REGIONS) {
         })
   }
 
-  // Raid pool = this generation's species that can't be obtained in the region
-  // (not found in the wild and not reachable by evolving a wild Pokemon).
-  const obtainable = new Set()
-  for (const bucket of Object.values(routeEncounter))
-    for (const enc of bucket.encounters) obtainable.add(enc.speciesKey)
-  let expanded = true
-  while (expanded) {
-    expanded = false
-    for (const key of [...obtainable])
-      for (const evo of evolutionData[key] || [])
-        if (!obtainable.has(evo.into)) (obtainable.add(evo.into), (expanded = true))
-  }
-  regionObj.raidPool = all
-    .filter((s) => !obtainable.has(s.key))
-    .map((s) => ({ speciesKey: s.key, level: clampLevel(base + (s.catchRate <= 3 ? 35 : 25)) }))
+  // The raid pool is filled in after the region loop (see the raid scan).
 
   // map/town/route locations
   const prevRegionId = gen === 2 ? 'kanto' : REGIONS[gen - 3].id
@@ -398,15 +384,8 @@ for (const region of REGIONS) {
   if (lastRoute) {
     const raidId = `${regionId}-raid`
     const raidNodeName = `${name} Raid Island`
-    encounterData[raidId] = {
-      name: raidNodeName,
-      encounters: regionObj.raidPool.map((entry) => ({
-        speciesKey: entry.speciesKey,
-        weight: 1,
-        minLevel: entry.level,
-        maxLevel: entry.level,
-      })),
-    }
+    // Bucket + pool are created by the raid scan once all routes are known.
+    pendingRaids.push({ regionObj, all, base, raidId, raidNodeName })
     mapData[raidId] = {
       id: raidId,
       name: raidNodeName,
@@ -526,6 +505,41 @@ if (realEncounters.kanto) {
         })
   }
   console.log('kanto buckets refreshed:', refreshed)
+}
+
+// --- raid pools --------------------------------------------------------------
+// A species belongs on a Raid Island only if it turns up on no region's wild
+// routes and can't be reached by evolving something that does. Scan every
+// route once, then give each region its own generation's leftovers.
+const routable = new Set()
+for (const [bucketKey, bucket] of Object.entries(encounterData)) {
+  if (/-raid$/.test(bucketKey)) continue
+  for (const encounter of bucket.encounters) routable.add(encounter.speciesKey)
+}
+let routableExpanded = true
+while (routableExpanded) {
+  routableExpanded = false
+  for (const key of [...routable])
+    for (const evolution of evolutionData[key] || [])
+      if (!routable.has(evolution.into))
+        (routable.add(evolution.into), (routableExpanded = true))
+}
+const raidLevel = (base, entry) => clampLevel(base + (entry.catchRate <= 3 ? 35 : 25))
+for (const pending of pendingRaids) {
+  const { regionObj, all: regionSpecies, base, raidId, raidNodeName } = pending
+  regionObj.raidPool = regionSpecies
+    .filter((entry) => !routable.has(entry.key))
+    .map((entry) => ({ speciesKey: entry.key, level: raidLevel(base, entry) }))
+  if (raidId)
+    encounterData[raidId] = {
+      name: raidNodeName,
+      encounters: regionObj.raidPool.map((entry) => ({
+        speciesKey: entry.speciesKey,
+        weight: 1,
+        minLevel: entry.level,
+        maxLevel: entry.level,
+      })),
+    }
 }
 
 // tidy the graph: make every connection mutual, and hang any isolated location

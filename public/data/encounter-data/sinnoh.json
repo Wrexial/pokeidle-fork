@@ -4173,133 +4173,7 @@
     "maxLevel": 71
    },
    {
-    "speciesKey": "drifloon",
-    "weight": 1,
-    "minLevel": 71,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "drifblim",
-    "weight": 1,
-    "minLevel": 71,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "buneary",
-    "weight": 1,
-    "minLevel": 71,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "lopunny",
-    "weight": 1,
-    "minLevel": 71,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "mismagius",
-    "weight": 1,
-    "minLevel": 71,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "honchkrow",
-    "weight": 1,
-    "minLevel": 71,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "happiny",
-    "weight": 1,
-    "minLevel": 71,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "gible",
-    "weight": 1,
-    "minLevel": 71,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "gabite",
-    "weight": 1,
-    "minLevel": 71,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "garchomp",
-    "weight": 1,
-    "minLevel": 71,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "riolu",
-    "weight": 1,
-    "minLevel": 71,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "lucario",
-    "weight": 1,
-    "minLevel": 71,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "hippopotas",
-    "weight": 1,
-    "minLevel": 71,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "skorupi",
-    "weight": 1,
-    "minLevel": 71,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "drapion",
-    "weight": 1,
-    "minLevel": 71,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "carnivine",
-    "weight": 1,
-    "minLevel": 71,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "tangrowth",
-    "weight": 1,
-    "minLevel": 71,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "yanmega",
-    "weight": 1,
-    "minLevel": 71,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "leafeon",
-    "weight": 1,
-    "minLevel": 71,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "glaceon",
-    "weight": 1,
-    "minLevel": 71,
-    "maxLevel": 71
-   },
-   {
     "speciesKey": "porygon-z",
-    "weight": 1,
-    "minLevel": 71,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "rotom",
     "weight": 1,
     "minLevel": 71,
     "maxLevel": 71
@@ -4312,12 +4186,6 @@
    },
    {
     "speciesKey": "mesprit",
-    "weight": 1,
-    "minLevel": 81,
-    "maxLevel": 81
-   },
-   {
-    "speciesKey": "azelf",
     "weight": 1,
     "minLevel": 81,
     "maxLevel": 81

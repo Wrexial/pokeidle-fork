@@ -2331,31 +2331,7 @@
     "maxLevel": 80
    },
    {
-    "speciesKey": "boldore",
-    "weight": 1,
-    "minLevel": 80,
-    "maxLevel": 80
-   },
-   {
     "speciesKey": "tympole",
-    "weight": 1,
-    "minLevel": 80,
-    "maxLevel": 80
-   },
-   {
-    "speciesKey": "basculin",
-    "weight": 1,
-    "minLevel": 80,
-    "maxLevel": 80
-   },
-   {
-    "speciesKey": "maractus",
-    "weight": 1,
-    "minLevel": 80,
-    "maxLevel": 80
-   },
-   {
-    "speciesKey": "sigilyph",
     "weight": 1,
     "minLevel": 80,
     "maxLevel": 80
@@ -2397,30 +2373,6 @@
     "maxLevel": 80
    },
    {
-    "speciesKey": "zorua",
-    "weight": 1,
-    "minLevel": 80,
-    "maxLevel": 80
-   },
-   {
-    "speciesKey": "zoroark",
-    "weight": 1,
-    "minLevel": 80,
-    "maxLevel": 80
-   },
-   {
-    "speciesKey": "ducklett",
-    "weight": 1,
-    "minLevel": 80,
-    "maxLevel": 80
-   },
-   {
-    "speciesKey": "swanna",
-    "weight": 1,
-    "minLevel": 80,
-    "maxLevel": 80
-   },
-   {
     "speciesKey": "frillish",
     "weight": 1,
     "minLevel": 80,
@@ -2428,66 +2380,6 @@
    },
    {
     "speciesKey": "jellicent",
-    "weight": 1,
-    "minLevel": 80,
-    "maxLevel": 80
-   },
-   {
-    "speciesKey": "joltik",
-    "weight": 1,
-    "minLevel": 80,
-    "maxLevel": 80
-   },
-   {
-    "speciesKey": "galvantula",
-    "weight": 1,
-    "minLevel": 80,
-    "maxLevel": 80
-   },
-   {
-    "speciesKey": "ferroseed",
-    "weight": 1,
-    "minLevel": 80,
-    "maxLevel": 80
-   },
-   {
-    "speciesKey": "ferrothorn",
-    "weight": 1,
-    "minLevel": 80,
-    "maxLevel": 80
-   },
-   {
-    "speciesKey": "klink",
-    "weight": 1,
-    "minLevel": 80,
-    "maxLevel": 80
-   },
-   {
-    "speciesKey": "klang",
-    "weight": 1,
-    "minLevel": 80,
-    "maxLevel": 80
-   },
-   {
-    "speciesKey": "klinklang",
-    "weight": 1,
-    "minLevel": 80,
-    "maxLevel": 80
-   },
-   {
-    "speciesKey": "tynamo",
-    "weight": 1,
-    "minLevel": 80,
-    "maxLevel": 80
-   },
-   {
-    "speciesKey": "eelektrik",
-    "weight": 1,
-    "minLevel": 80,
-    "maxLevel": 80
-   },
-   {
-    "speciesKey": "eelektross",
     "weight": 1,
     "minLevel": 80,
     "maxLevel": 80
@@ -2517,24 +2409,6 @@
     "maxLevel": 80
    },
    {
-    "speciesKey": "axew",
-    "weight": 1,
-    "minLevel": 80,
-    "maxLevel": 80
-   },
-   {
-    "speciesKey": "fraxure",
-    "weight": 1,
-    "minLevel": 80,
-    "maxLevel": 80
-   },
-   {
-    "speciesKey": "haxorus",
-    "weight": 1,
-    "minLevel": 80,
-    "maxLevel": 80
-   },
-   {
     "speciesKey": "cryogonal",
     "weight": 1,
     "minLevel": 80,
@@ -2542,48 +2416,6 @@
    },
    {
     "speciesKey": "druddigon",
-    "weight": 1,
-    "minLevel": 80,
-    "maxLevel": 80
-   },
-   {
-    "speciesKey": "golett",
-    "weight": 1,
-    "minLevel": 80,
-    "maxLevel": 80
-   },
-   {
-    "speciesKey": "golurk",
-    "weight": 1,
-    "minLevel": 80,
-    "maxLevel": 80
-   },
-   {
-    "speciesKey": "heatmor",
-    "weight": 1,
-    "minLevel": 80,
-    "maxLevel": 80
-   },
-   {
-    "speciesKey": "durant",
-    "weight": 1,
-    "minLevel": 80,
-    "maxLevel": 80
-   },
-   {
-    "speciesKey": "deino",
-    "weight": 1,
-    "minLevel": 80,
-    "maxLevel": 80
-   },
-   {
-    "speciesKey": "zweilous",
-    "weight": 1,
-    "minLevel": 80,
-    "maxLevel": 80
-   },
-   {
-    "speciesKey": "hydreigon",
     "weight": 1,
     "minLevel": 80,
     "maxLevel": 80

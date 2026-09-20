@@ -69,8 +69,8 @@ const EXTRA_TOWNS = {
   galar: ['postwick', 'wedgehurst', 'motostoke', 'turffield', 'hulbury', 'hammerlocke', 'ballonlea', 'circhester', 'spikemuth', 'stow-on-side', 'wyndon'],
   paldea: ['mesagoza', 'cortondo', 'artazon', 'levincia', 'cascarrafa', 'medali', 'montenevera', 'alfornada', 'porto-marinada', 'zapapico', 'los-platos', 'cabo-poco'],
 }
-// regions where unmatched connection names should become nodes (e.g. Paldea provinces)
-const ALLOW_UNKNOWN = new Set(['paldea'])
+// regions where unmatched connection names should become nodes
+const ALLOW_UNKNOWN = new Set()
 const shortRouteName = (slug) => {
   const m = slug.match(/route-(\d+)(?:-+([a-z0-9-]+))?$/)
   if (!m) return titleCase(slug)

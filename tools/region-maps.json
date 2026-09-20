@@ -3682,417 +3682,340 @@
  "paldea": {
   "regionName": "paldea",
   "nodes": [
+   "cabo-poco",
+   "los-platos",
    "mesagoza",
    "cortondo",
+   "alfornada",
    "artazon",
    "levincia",
+   "zapapico",
    "cascarrafa",
+   "porto-marinada",
    "medali",
    "montenevera",
-   "alfornada",
-   "porto-marinada",
-   "zapapico",
-   "los-platos",
-   "cabo-poco",
-   "auto-naranjaacademy",
-   "auto-southprovinceareaone",
-   "auto-southprovinceareathree",
-   "auto-southprovinceareatwo",
-   "auto-eastprovinceareaone",
-   "auto-eastprovinceareatwo",
-   "auto-eastpaldeansea",
-   "auto-westprovinceareaone",
-   "auto-asadodesert",
-   "auto-westprovinceareathree",
-   "auto-dalizapapassage",
-   "auto-glaseadomountain",
-   "auto-southprovinceareasix",
-   "auto-westprovinceareatwo",
-   "auto-westpaldeansea",
-   "auto-eastprovinceareathree",
-   "auto-pocopath",
-   "auto-southpaldeansea"
+   "paldea-south-province-area-one",
+   "paldea-south-province-area-two",
+   "paldea-south-province-area-three",
+   "paldea-south-province-area-four",
+   "paldea-south-province-area-five",
+   "paldea-south-province-area-six",
+   "paldea-east-province-area-one",
+   "paldea-east-province-area-two",
+   "paldea-east-province-area-three",
+   "paldea-west-province-area-one",
+   "paldea-west-province-area-two",
+   "paldea-west-province-area-three",
+   "paldea-north-province-area-one",
+   "paldea-north-province-area-two",
+   "paldea-north-province-area-three",
+   "mossui-town"
   ],
   "display": {
+   "cabo-poco": "Cabo Poco",
+   "los-platos": "Los Platos",
    "mesagoza": "Mesagoza",
    "cortondo": "Cortondo",
+   "alfornada": "Alfornada",
    "artazon": "Artazon",
    "levincia": "Levincia",
+   "zapapico": "Zapapico",
    "cascarrafa": "Cascarrafa",
+   "porto-marinada": "Porto Marinada",
    "medali": "Medali",
    "montenevera": "Montenevera",
-   "alfornada": "Alfornada",
-   "porto-marinada": "Porto Marinada",
-   "zapapico": "Zapapico",
-   "los-platos": "Los Platos",
-   "cabo-poco": "Cabo Poco",
-   "auto-naranjaacademy": "Naranja Academy",
-   "auto-southprovinceareaone": "South Province (Area One)",
-   "auto-southprovinceareathree": "South Province (Area Three)",
-   "auto-southprovinceareatwo": "South Province (Area Two)",
-   "auto-eastprovinceareaone": "East Province (Area One)",
-   "auto-eastprovinceareatwo": "East Province (Area Two)",
-   "auto-eastpaldeansea": "East Paldean Sea",
-   "auto-westprovinceareaone": "West Province (Area One)",
-   "auto-asadodesert": "Asado Desert",
-   "auto-westprovinceareathree": "West Province (Area Three)",
-   "auto-dalizapapassage": "Dalizapa Passage",
-   "auto-glaseadomountain": "Glaseado Mountain",
-   "auto-southprovinceareasix": "South Province (Area Six)",
-   "auto-westprovinceareatwo": "West Province (Area Two)",
-   "auto-westpaldeansea": "West Paldean Sea",
-   "auto-eastprovinceareathree": "East Province (Area Three)",
-   "auto-pocopath": "Poco Path",
-   "auto-southpaldeansea": "South Paldean Sea"
+   "paldea-south-province-area-one": "South Province (Area One)",
+   "paldea-south-province-area-two": "South Province (Area Two)",
+   "paldea-south-province-area-three": "South Province (Area Three)",
+   "paldea-south-province-area-four": "South Province (Area Four)",
+   "paldea-south-province-area-five": "South Province (Area Five)",
+   "paldea-south-province-area-six": "South Province (Area Six)",
+   "paldea-east-province-area-one": "East Province (Area One)",
+   "paldea-east-province-area-two": "East Province (Area Two)",
+   "paldea-east-province-area-three": "East Province (Area Three)",
+   "paldea-west-province-area-one": "West Province (Area One)",
+   "paldea-west-province-area-two": "West Province (Area Two)",
+   "paldea-west-province-area-three": "West Province (Area Three)",
+   "paldea-north-province-area-one": "North Province (Area One)",
+   "paldea-north-province-area-two": "North Province (Area Two)",
+   "paldea-north-province-area-three": "North Province (Area Three)",
+   "mossui-town": "Mossui Town"
   },
   "edges": [
    {
-    "from": "mesagoza",
-    "to": "auto-naranjaacademy",
+    "from": "cabo-poco",
+    "to": "paldea-south-province-area-one",
+    "dir": "south"
+   },
+   {
+    "from": "cabo-poco",
+    "to": "paldea-south-province-area-one",
+    "dir": "west"
+   },
+   {
+    "from": "los-platos",
+    "to": "paldea-south-province-area-one",
     "dir": "north"
    },
    {
+    "from": "los-platos",
+    "to": "paldea-south-province-area-one",
+    "dir": "south"
+   },
+   {
+    "from": "los-platos",
+    "to": "paldea-south-province-area-one",
+    "dir": "east"
+   },
+   {
+    "from": "los-platos",
+    "to": "paldea-south-province-area-one",
+    "dir": "west"
+   },
+   {
     "from": "mesagoza",
-    "to": "auto-southprovinceareaone",
+    "to": "paldea-south-province-area-one",
     "dir": "south"
    },
    {
     "from": "mesagoza",
-    "to": "auto-southprovinceareathree",
+    "to": "paldea-south-province-area-three",
     "dir": "east"
    },
    {
     "from": "mesagoza",
-    "to": "auto-southprovinceareatwo",
+    "to": "paldea-south-province-area-two",
     "dir": "west"
    },
    {
     "from": "cortondo",
-    "to": "auto-southprovinceareatwo",
+    "to": "paldea-south-province-area-two",
     "dir": "north"
    },
    {
     "from": "cortondo",
-    "to": "auto-southprovinceareatwo",
+    "to": "paldea-south-province-area-two",
     "dir": "south"
    },
    {
     "from": "cortondo",
-    "to": "auto-southprovinceareatwo",
+    "to": "paldea-south-province-area-two",
     "dir": "east"
    },
    {
     "from": "cortondo",
-    "to": "auto-southprovinceareatwo",
+    "to": "paldea-south-province-area-two",
+    "dir": "west"
+   },
+   {
+    "from": "alfornada",
+    "to": "paldea-south-province-area-six",
+    "dir": "north"
+   },
+   {
+    "from": "alfornada",
+    "to": "paldea-south-province-area-six",
+    "dir": "south"
+   },
+   {
+    "from": "alfornada",
+    "to": "paldea-south-province-area-six",
+    "dir": "east"
+   },
+   {
+    "from": "alfornada",
+    "to": "paldea-south-province-area-six",
     "dir": "west"
    },
    {
     "from": "artazon",
-    "to": "auto-eastprovinceareaone",
+    "to": "paldea-east-province-area-one",
     "dir": "north"
    },
    {
     "from": "artazon",
-    "to": "auto-eastprovinceareaone",
+    "to": "paldea-east-province-area-one",
     "dir": "south"
    },
    {
     "from": "artazon",
-    "to": "auto-eastprovinceareaone",
+    "to": "paldea-east-province-area-one",
     "dir": "east"
    },
    {
     "from": "artazon",
-    "to": "auto-southprovinceareathree",
+    "to": "paldea-south-province-area-three",
     "dir": "west"
    },
    {
     "from": "levincia",
-    "to": "auto-eastprovinceareatwo",
+    "to": "paldea-east-province-area-two",
     "dir": "north"
    },
    {
     "from": "levincia",
-    "to": "auto-eastprovinceareatwo",
+    "to": "paldea-east-province-area-two",
     "dir": "south"
    },
    {
     "from": "levincia",
-    "to": "auto-eastpaldeansea",
-    "dir": "east"
+    "to": "paldea-east-province-area-two",
+    "dir": "west"
    },
    {
-    "from": "levincia",
-    "to": "auto-eastprovinceareatwo",
-    "dir": "west"
+    "from": "zapapico",
+    "to": "paldea-east-province-area-three",
+    "dir": "south"
+   },
+   {
+    "from": "zapapico",
+    "to": "paldea-east-province-area-three",
+    "dir": "east"
    },
    {
     "from": "cascarrafa",
-    "to": "auto-westprovinceareaone",
+    "to": "paldea-west-province-area-one",
     "dir": "south"
-   },
-   {
-    "from": "cascarrafa",
-    "to": "auto-asadodesert",
-    "dir": "west"
-   },
-   {
-    "from": "medali",
-    "to": "auto-westprovinceareathree",
-    "dir": "north"
-   },
-   {
-    "from": "medali",
-    "to": "auto-westprovinceareathree",
-    "dir": "south"
-   },
-   {
-    "from": "medali",
-    "to": "auto-dalizapapassage",
-    "dir": "east"
-   },
-   {
-    "from": "medali",
-    "to": "auto-westprovinceareathree",
-    "dir": "west"
-   },
-   {
-    "from": "montenevera",
-    "to": "auto-glaseadomountain",
-    "dir": "north"
-   },
-   {
-    "from": "montenevera",
-    "to": "auto-glaseadomountain",
-    "dir": "south"
-   },
-   {
-    "from": "montenevera",
-    "to": "auto-glaseadomountain",
-    "dir": "east"
-   },
-   {
-    "from": "montenevera",
-    "to": "auto-glaseadomountain",
-    "dir": "west"
-   },
-   {
-    "from": "alfornada",
-    "to": "auto-southprovinceareasix",
-    "dir": "north"
-   },
-   {
-    "from": "alfornada",
-    "to": "auto-southprovinceareasix",
-    "dir": "south"
-   },
-   {
-    "from": "alfornada",
-    "to": "auto-southprovinceareasix",
-    "dir": "east"
-   },
-   {
-    "from": "alfornada",
-    "to": "auto-southprovinceareasix",
-    "dir": "west"
    },
    {
     "from": "porto-marinada",
-    "to": "auto-westprovinceareatwo",
+    "to": "paldea-west-province-area-two",
     "dir": "north"
    },
    {
     "from": "porto-marinada",
-    "to": "auto-westprovinceareatwo",
+    "to": "paldea-west-province-area-two",
     "dir": "east"
    },
    {
-    "from": "porto-marinada",
-    "to": "auto-westpaldeansea",
-    "dir": "west"
-   },
-   {
-    "from": "zapapico",
-    "to": "auto-dalizapapassage",
+    "from": "medali",
+    "to": "paldea-west-province-area-three",
     "dir": "north"
    },
    {
-    "from": "zapapico",
-    "to": "auto-eastprovinceareathree",
+    "from": "medali",
+    "to": "paldea-west-province-area-three",
     "dir": "south"
    },
    {
-    "from": "zapapico",
-    "to": "auto-eastprovinceareathree",
-    "dir": "east"
-   },
-   {
-    "from": "zapapico",
-    "to": "auto-dalizapapassage",
-    "dir": "west"
-   },
-   {
-    "from": "los-platos",
-    "to": "auto-southprovinceareaone",
-    "dir": "north"
-   },
-   {
-    "from": "los-platos",
-    "to": "auto-southprovinceareaone",
-    "dir": "south"
-   },
-   {
-    "from": "los-platos",
-    "to": "auto-southprovinceareaone",
-    "dir": "east"
-   },
-   {
-    "from": "los-platos",
-    "to": "auto-southprovinceareaone",
-    "dir": "west"
-   },
-   {
-    "from": "cabo-poco",
-    "to": "auto-pocopath",
-    "dir": "north"
-   },
-   {
-    "from": "cabo-poco",
-    "to": "auto-southprovinceareaone",
-    "dir": "south"
-   },
-   {
-    "from": "cabo-poco",
-    "to": "auto-southpaldeansea",
-    "dir": "east"
-   },
-   {
-    "from": "cabo-poco",
-    "to": "auto-southprovinceareaone",
+    "from": "medali",
+    "to": "paldea-west-province-area-three",
     "dir": "west"
    }
   ],
-  "parsed": 12,
+  "parsed": 11,
   "positions": {
-   "mesagoza": {
-    "x": 21,
-    "y": 44
-   },
-   "cortondo": {
-    "x": 6,
-    "y": 44
-   },
-   "artazon": {
-    "x": 52,
-    "y": 44
-   },
-   "levincia": {
-    "x": 63,
-    "y": 46
-   },
-   "cascarrafa": {
-    "x": 54,
-    "y": 46
-   },
-   "medali": {
-    "x": 48,
-    "y": 56
-   },
-   "montenevera": {
-    "x": 53,
-    "y": 65
-   },
-   "alfornada": {
-    "x": 69,
-    "y": 65
-   },
-   "porto-marinada": {
-    "x": 86,
-    "y": 72
-   },
-   "zapapico": {
-    "x": 71,
-    "y": 75
+   "cabo-poco": {
+    "x": 36,
+    "y": 30
    },
    "los-platos": {
-    "x": 21,
-    "y": 83
-   },
-   "cabo-poco": {
     "x": 29,
-    "y": 64
+    "y": 54
    },
-   "auto-naranjaacademy": {
-    "x": 21,
+   "mesagoza": {
+    "x": 29,
     "y": 6
    },
-   "auto-southprovinceareaone": {
-    "x": 21,
-    "y": 83
+   "cortondo": {
+    "x": 16,
+    "y": 6
    },
-   "auto-southprovinceareathree": {
-    "x": 37,
-    "y": 44
+   "alfornada": {
+    "x": 65,
+    "y": 23
    },
-   "auto-southprovinceareatwo": {
-    "x": 6,
-    "y": 44
+   "artazon": {
+    "x": 56,
+    "y": 6
    },
-   "auto-eastprovinceareaone": {
-    "x": 57,
-    "y": 44
-   },
-   "auto-eastprovinceareatwo": {
-    "x": 58,
-    "y": 46
-   },
-   "auto-eastpaldeansea": {
-    "x": 79,
-    "y": 46
-   },
-   "auto-westprovinceareaone": {
-    "x": 54,
-    "y": 85
-   },
-   "auto-asadodesert": {
-    "x": 38,
-    "y": 46
-   },
-   "auto-westprovinceareathree": {
-    "x": 43,
-    "y": 56
-   },
-   "auto-dalizapapassage": {
-    "x": 64,
-    "y": 56
-   },
-   "auto-glaseadomountain": {
-    "x": 53,
-    "y": 65
-   },
-   "auto-southprovinceareasix": {
-    "x": 69,
-    "y": 65
-   },
-   "auto-westprovinceareatwo": {
+   "levincia": {
     "x": 94,
-    "y": 53
+    "y": 23
    },
-   "auto-westpaldeansea": {
-    "x": 71,
-    "y": 72
+   "zapapico": {
+    "x": 36,
+    "y": 35
    },
-   "auto-eastprovinceareathree": {
-    "x": 79,
+   "cascarrafa": {
+    "x": 52,
+    "y": 23
+   },
+   "porto-marinada": {
+    "x": 62,
+    "y": 58
+   },
+   "medali": {
+    "x": 15,
+    "y": 70
+   },
+   "montenevera": {
+    "x": 6,
+    "y": 46
+   },
+   "paldea-south-province-area-one": {
+    "x": 29,
+    "y": 54
+   },
+   "paldea-south-province-area-two": {
+    "x": 16,
+    "y": 6
+   },
+   "paldea-south-province-area-three": {
+    "x": 42,
+    "y": 6
+   },
+   "paldea-south-province-area-four": {
+    "x": 59,
+    "y": 46
+   },
+   "paldea-south-province-area-five": {
+    "x": 72,
+    "y": 46
+   },
+   "paldea-south-province-area-six": {
+    "x": 65,
+    "y": 23
+   },
+   "paldea-east-province-area-one": {
+    "x": 60,
+    "y": 6
+   },
+   "paldea-east-province-area-two": {
+    "x": 90,
+    "y": 23
+   },
+   "paldea-east-province-area-three": {
+    "x": 42,
+    "y": 58
+   },
+   "paldea-west-province-area-one": {
+    "x": 52,
+    "y": 70
+   },
+   "paldea-west-province-area-two": {
+    "x": 69,
+    "y": 35
+   },
+   "paldea-west-province-area-three": {
+    "x": 10,
+    "y": 70
+   },
+   "paldea-north-province-area-one": {
+    "x": 46,
     "y": 94
    },
-   "auto-pocopath": {
-    "x": 29,
-    "y": 25
+   "paldea-north-province-area-two": {
+    "x": 59,
+    "y": 94
    },
-   "auto-southpaldeansea": {
-    "x": 44,
-    "y": 64
+   "paldea-north-province-area-three": {
+    "x": 72,
+    "y": 94
+   },
+   "mossui-town": {
+    "x": 85,
+    "y": 94
    }
   }
  }

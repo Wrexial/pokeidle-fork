@@ -96,7 +96,7 @@ for (const c of champData) c.region ||= 'kanto'
 const clampLevel = (n) => Math.max(2, Math.min(100, n))
 const norm = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, '')
 const locId = (regionId, node) => (node.startsWith(regionId + '-') ? node : `${regionId}-${node}`)
-const isRouteNode = (node) => /route/.test(node) || node.startsWith('auto-')
+const isRouteNode = (node) => /route/.test(node) || node.startsWith('auto-') || /province-area/.test(node)
 const isTownNode = (node) => !isRouteNode(node)
 
 const byId = Object.entries(species)

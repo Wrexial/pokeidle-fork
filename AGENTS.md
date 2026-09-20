@@ -245,8 +245,9 @@ One-off scripts used to build the data JSON (not run during dev/build):
   PokéAPI (`/location` → `/location-area`), keeps only wild methods (drops
   gift/static), keeps only the region's preferred game versions (so no
   cross-generation oddities), maps species to the game's keys, and also
-  refreshes Kanto from its own map-data. Writes `tools/route-encounters.json`
-  (committed).
+  refreshes Kanto from its own map-data. **Paldea isn't in PokéAPI's encounter
+  data**, so its province areas are parsed from Bulbapedia's `{{Catch/entry9}}`
+  tables instead. Writes `tools/route-encounters.json` (committed).
 - `generate-regions.cjs` — turns `tools/region-maps.json` + `route-encounters.json` into game content
   (locations, encounters, trainers, marts, Raid Islands, and gym/Elite
   Four/Champion leagues) for generations 2-9, merging it into

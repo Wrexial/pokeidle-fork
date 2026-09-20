@@ -5312,9 +5312,9 @@
    ]
   }
  ],
- "paldea-mesagoza": [
+ "paldea-porto-marinada": [
   {
-   "id": "paldea-mesagoza_t1",
+   "id": "paldea-porto-marinada_t1",
    "name": "Paldea Trainer 1",
    "trainerClass": "hiker",
    "team": [
@@ -5329,7 +5329,7 @@
    ]
   },
   {
-   "id": "paldea-mesagoza_t2",
+   "id": "paldea-porto-marinada_t2",
    "name": "Paldea Trainer 2",
    "trainerClass": "camper",
    "team": [
@@ -5344,148 +5344,7 @@
    ]
   },
   {
-   "id": "paldea-mesagoza_t3",
-   "name": "Paldea Trainer 3",
-   "trainerClass": "beauty",
-   "team": [
-    {
-     "speciesKey": "crocalor",
-     "level": 95
-    },
-    {
-     "speciesKey": "skeledirge",
-     "level": 96
-    }
-   ]
-  }
- ],
- "paldea-cabo-poco": [
-  {
-   "id": "paldea-cabo-poco_t1",
-   "name": "Paldea Trainer 1",
-   "trainerClass": "hiker",
-   "team": [
-    {
-     "speciesKey": "sprigatito",
-     "level": 91
-    },
-    {
-     "speciesKey": "floragato",
-     "level": 92
-    }
-   ]
-  },
-  {
-   "id": "paldea-cabo-poco_t2",
-   "name": "Paldea Trainer 2",
-   "trainerClass": "camper",
-   "team": [
-    {
-     "speciesKey": "meowscarada",
-     "level": 93
-    },
-    {
-     "speciesKey": "fuecoco",
-     "level": 94
-    }
-   ]
-  },
-  {
-   "id": "paldea-cabo-poco_t3",
-   "name": "Paldea Trainer 3",
-   "trainerClass": "beauty",
-   "team": [
-    {
-     "speciesKey": "crocalor",
-     "level": 95
-    },
-    {
-     "speciesKey": "skeledirge",
-     "level": 96
-    }
-   ]
-  }
- ],
- "paldea-cortondo": [
-  {
-   "id": "paldea-cortondo_t1",
-   "name": "Paldea Trainer 1",
-   "trainerClass": "hiker",
-   "team": [
-    {
-     "speciesKey": "sprigatito",
-     "level": 91
-    },
-    {
-     "speciesKey": "floragato",
-     "level": 92
-    }
-   ]
-  },
-  {
-   "id": "paldea-cortondo_t2",
-   "name": "Paldea Trainer 2",
-   "trainerClass": "camper",
-   "team": [
-    {
-     "speciesKey": "meowscarada",
-     "level": 93
-    },
-    {
-     "speciesKey": "fuecoco",
-     "level": 94
-    }
-   ]
-  },
-  {
-   "id": "paldea-cortondo_t3",
-   "name": "Paldea Trainer 3",
-   "trainerClass": "beauty",
-   "team": [
-    {
-     "speciesKey": "crocalor",
-     "level": 95
-    },
-    {
-     "speciesKey": "skeledirge",
-     "level": 96
-    }
-   ]
-  }
- ],
- "paldea-artazon": [
-  {
-   "id": "paldea-artazon_t1",
-   "name": "Paldea Trainer 1",
-   "trainerClass": "hiker",
-   "team": [
-    {
-     "speciesKey": "sprigatito",
-     "level": 91
-    },
-    {
-     "speciesKey": "floragato",
-     "level": 92
-    }
-   ]
-  },
-  {
-   "id": "paldea-artazon_t2",
-   "name": "Paldea Trainer 2",
-   "trainerClass": "camper",
-   "team": [
-    {
-     "speciesKey": "meowscarada",
-     "level": 93
-    },
-    {
-     "speciesKey": "fuecoco",
-     "level": 94
-    }
-   ]
-  },
-  {
-   "id": "paldea-artazon_t3",
+   "id": "paldea-porto-marinada_t3",
    "name": "Paldea Trainer 3",
    "trainerClass": "beauty",
    "team": [
@@ -5594,9 +5453,9 @@
    ]
   }
  ],
- "paldea-cascarrafa": [
+ "paldea-cabo-poco": [
   {
-   "id": "paldea-cascarrafa_t1",
+   "id": "paldea-cabo-poco_t1",
    "name": "Paldea Trainer 1",
    "trainerClass": "hiker",
    "team": [
@@ -5611,7 +5470,7 @@
    ]
   },
   {
-   "id": "paldea-cascarrafa_t2",
+   "id": "paldea-cabo-poco_t2",
    "name": "Paldea Trainer 2",
    "trainerClass": "camper",
    "team": [
@@ -5626,7 +5485,195 @@
    ]
   },
   {
-   "id": "paldea-cascarrafa_t3",
+   "id": "paldea-cabo-poco_t3",
+   "name": "Paldea Trainer 3",
+   "trainerClass": "beauty",
+   "team": [
+    {
+     "speciesKey": "crocalor",
+     "level": 95
+    },
+    {
+     "speciesKey": "skeledirge",
+     "level": 96
+    }
+   ]
+  }
+ ],
+ "paldea-mesagoza": [
+  {
+   "id": "paldea-mesagoza_t1",
+   "name": "Paldea Trainer 1",
+   "trainerClass": "hiker",
+   "team": [
+    {
+     "speciesKey": "sprigatito",
+     "level": 91
+    },
+    {
+     "speciesKey": "floragato",
+     "level": 92
+    }
+   ]
+  },
+  {
+   "id": "paldea-mesagoza_t2",
+   "name": "Paldea Trainer 2",
+   "trainerClass": "camper",
+   "team": [
+    {
+     "speciesKey": "meowscarada",
+     "level": 93
+    },
+    {
+     "speciesKey": "fuecoco",
+     "level": 94
+    }
+   ]
+  },
+  {
+   "id": "paldea-mesagoza_t3",
+   "name": "Paldea Trainer 3",
+   "trainerClass": "beauty",
+   "team": [
+    {
+     "speciesKey": "crocalor",
+     "level": 95
+    },
+    {
+     "speciesKey": "skeledirge",
+     "level": 96
+    }
+   ]
+  }
+ ],
+ "paldea-zapapico": [
+  {
+   "id": "paldea-zapapico_t1",
+   "name": "Paldea Trainer 1",
+   "trainerClass": "hiker",
+   "team": [
+    {
+     "speciesKey": "sprigatito",
+     "level": 91
+    },
+    {
+     "speciesKey": "floragato",
+     "level": 92
+    }
+   ]
+  },
+  {
+   "id": "paldea-zapapico_t2",
+   "name": "Paldea Trainer 2",
+   "trainerClass": "camper",
+   "team": [
+    {
+     "speciesKey": "meowscarada",
+     "level": 93
+    },
+    {
+     "speciesKey": "fuecoco",
+     "level": 94
+    }
+   ]
+  },
+  {
+   "id": "paldea-zapapico_t3",
+   "name": "Paldea Trainer 3",
+   "trainerClass": "beauty",
+   "team": [
+    {
+     "speciesKey": "crocalor",
+     "level": 95
+    },
+    {
+     "speciesKey": "skeledirge",
+     "level": 96
+    }
+   ]
+  }
+ ],
+ "paldea-cortondo": [
+  {
+   "id": "paldea-cortondo_t1",
+   "name": "Paldea Trainer 1",
+   "trainerClass": "hiker",
+   "team": [
+    {
+     "speciesKey": "sprigatito",
+     "level": 91
+    },
+    {
+     "speciesKey": "floragato",
+     "level": 92
+    }
+   ]
+  },
+  {
+   "id": "paldea-cortondo_t2",
+   "name": "Paldea Trainer 2",
+   "trainerClass": "camper",
+   "team": [
+    {
+     "speciesKey": "meowscarada",
+     "level": 93
+    },
+    {
+     "speciesKey": "fuecoco",
+     "level": 94
+    }
+   ]
+  },
+  {
+   "id": "paldea-cortondo_t3",
+   "name": "Paldea Trainer 3",
+   "trainerClass": "beauty",
+   "team": [
+    {
+     "speciesKey": "crocalor",
+     "level": 95
+    },
+    {
+     "speciesKey": "skeledirge",
+     "level": 96
+    }
+   ]
+  }
+ ],
+ "paldea-artazon": [
+  {
+   "id": "paldea-artazon_t1",
+   "name": "Paldea Trainer 1",
+   "trainerClass": "hiker",
+   "team": [
+    {
+     "speciesKey": "sprigatito",
+     "level": 91
+    },
+    {
+     "speciesKey": "floragato",
+     "level": 92
+    }
+   ]
+  },
+  {
+   "id": "paldea-artazon_t2",
+   "name": "Paldea Trainer 2",
+   "trainerClass": "camper",
+   "team": [
+    {
+     "speciesKey": "meowscarada",
+     "level": 93
+    },
+    {
+     "speciesKey": "fuecoco",
+     "level": 94
+    }
+   ]
+  },
+  {
+   "id": "paldea-artazon_t3",
    "name": "Paldea Trainer 3",
    "trainerClass": "beauty",
    "team": [
@@ -5688,6 +5735,53 @@
    ]
   }
  ],
+ "paldea-mossui-town": [
+  {
+   "id": "paldea-mossui-town_t1",
+   "name": "Paldea Trainer 1",
+   "trainerClass": "hiker",
+   "team": [
+    {
+     "speciesKey": "sprigatito",
+     "level": 91
+    },
+    {
+     "speciesKey": "floragato",
+     "level": 92
+    }
+   ]
+  },
+  {
+   "id": "paldea-mossui-town_t2",
+   "name": "Paldea Trainer 2",
+   "trainerClass": "camper",
+   "team": [
+    {
+     "speciesKey": "meowscarada",
+     "level": 93
+    },
+    {
+     "speciesKey": "fuecoco",
+     "level": 94
+    }
+   ]
+  },
+  {
+   "id": "paldea-mossui-town_t3",
+   "name": "Paldea Trainer 3",
+   "trainerClass": "beauty",
+   "team": [
+    {
+     "speciesKey": "crocalor",
+     "level": 95
+    },
+    {
+     "speciesKey": "skeledirge",
+     "level": 96
+    }
+   ]
+  }
+ ],
  "paldea-levincia": [
   {
    "id": "paldea-levincia_t1",
@@ -5735,9 +5829,9 @@
    ]
   }
  ],
- "paldea-porto-marinada": [
+ "paldea-cascarrafa": [
   {
-   "id": "paldea-porto-marinada_t1",
+   "id": "paldea-cascarrafa_t1",
    "name": "Paldea Trainer 1",
    "trainerClass": "hiker",
    "team": [
@@ -5752,7 +5846,7 @@
    ]
   },
   {
-   "id": "paldea-porto-marinada_t2",
+   "id": "paldea-cascarrafa_t2",
    "name": "Paldea Trainer 2",
    "trainerClass": "camper",
    "team": [
@@ -5767,54 +5861,7 @@
    ]
   },
   {
-   "id": "paldea-porto-marinada_t3",
-   "name": "Paldea Trainer 3",
-   "trainerClass": "beauty",
-   "team": [
-    {
-     "speciesKey": "crocalor",
-     "level": 95
-    },
-    {
-     "speciesKey": "skeledirge",
-     "level": 96
-    }
-   ]
-  }
- ],
- "paldea-zapapico": [
-  {
-   "id": "paldea-zapapico_t1",
-   "name": "Paldea Trainer 1",
-   "trainerClass": "hiker",
-   "team": [
-    {
-     "speciesKey": "sprigatito",
-     "level": 91
-    },
-    {
-     "speciesKey": "floragato",
-     "level": 92
-    }
-   ]
-  },
-  {
-   "id": "paldea-zapapico_t2",
-   "name": "Paldea Trainer 2",
-   "trainerClass": "camper",
-   "team": [
-    {
-     "speciesKey": "meowscarada",
-     "level": 93
-    },
-    {
-     "speciesKey": "fuecoco",
-     "level": 94
-    }
-   ]
-  },
-  {
-   "id": "paldea-zapapico_t3",
+   "id": "paldea-cascarrafa_t3",
    "name": "Paldea Trainer 3",
    "trainerClass": "beauty",
    "team": [

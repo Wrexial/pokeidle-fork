@@ -56,6 +56,80 @@ for (const key of Object.keys(species)) keyByNorm[norm(key)] = key
 for (const [key, s] of Object.entries(species)) if (s.name) keyByNorm[norm(s.name)] = key
 
 const isRouteNode = (node) => /route/.test(node) || node.startsWith('auto-')
+
+// Paldea is not in PokéAPI's encounter data, so its province areas are parsed
+// from Bulbapedia's {{Catch/entry9}} tables instead.
+const PROVINCE = /^paldea-(north|south|east|west)-province-area-(one|two|three|four|five|six)$/
+const PROVINCE_NUM = { one: 'One', two: 'Two', three: 'Three', four: 'Four', five: 'Five', six: 'Six' }
+const provincePageTitle = (slug) => {
+  const m = slug.match(PROVINCE)
+  return m ? `${m[1][0].toUpperCase()}${m[1].slice(1)} Province (Area ${PROVINCE_NUM[m[2]]})` : null
+}
+
+async function fetchBulbaRaw(title) {
+  const file = 'bp-' + title.replace(/[^A-Za-z0-9]+/g, '_') + '.txt'
+  const p = path.join(CACHE, file)
+  if (fs.existsSync(p)) return fs.readFileSync(p, 'utf8')
+  const res = await fetch(
+    `https://bulbapedia.bulbagarden.net/w/index.php?title=${encodeURIComponent(title)}&action=raw`,
+    { headers: { 'User-Agent': UA } }
+  )
+  const text = await res.text()
+  fs.writeFileSync(p, text)
+  await sleep(300)
+  return text
+}
+
+/** Parse {{Catch/entry9|...}} templates from a Bulbapedia area page. */
+async function paldeaAreaEncounters(slug) {
+  const title = provincePageTitle(slug)
+  if (!title) return null
+  let raw
+  try {
+    raw = await fetchBulbaRaw(title)
+  } catch {
+    return null
+  }
+  /** @type {Map<string, {chance:number,min:number,max:number}>} */
+  const found = new Map()
+  for (const m of raw.matchAll(/\{\{Catch\/entry9\|([^\n}]*)\}\}/g)) {
+    const parts = m[1].split('|')
+    const name = parts[1]
+    const key = keyByNorm[norm(name)]
+    if (!key) continue
+    const kv = {}
+    const positional = []
+    for (const token of parts.slice(2)) {
+      const eq = token.match(/^([a-z0-9]+)=(.*)$/i)
+      if (eq) kv[eq[1]] = eq[2]
+      else positional.push(token)
+    }
+    const nums = positional.filter((x) => /^\d+(-\d+)?$/.test(x))
+    if (!nums.length) continue
+    const levelToken = nums[0]
+    const [minL, maxL] = levelToken.split('-').map(Number)
+    const chance = Number(kv.all ?? nums[1] ?? 0)
+    const min = Math.max(2, Math.min(100, minL))
+    const max = Math.max(min, Math.min(100, maxL || minL))
+    const existing = found.get(key)
+    if (existing) {
+      existing.chance = Math.max(existing.chance, chance)
+      existing.min = Math.min(existing.min, min)
+      existing.max = Math.max(existing.max, max)
+    } else {
+      found.set(key, { chance, min, max })
+    }
+  }
+  if (found.size === 0) return null
+  return [...found.entries()]
+    .map(([speciesKey, d]) => ({
+      speciesKey,
+      weight: Math.max(1, Math.round(d.chance / 2)),
+      minLevel: d.min,
+      maxLevel: d.max,
+    }))
+    .sort((a, b) => b.weight - a.weight)
+}
 // gift/static interactions are not wild encounters
 const isWildMethod = (name) => !/gift|only-one|interact|ranger|roaming|wailmer|devon-scope/i.test(name)
 
@@ -138,10 +212,11 @@ async function routeEncounters(regionId, routeSlug) {
   for (const [regionId, map] of Object.entries(maps)) {
     if (ONLY && regionId !== ONLY) continue
     out[regionId] = {}
-    const routes = map.nodes.filter(isRouteNode)
+    const routes = map.nodes.filter((n) => isRouteNode(n) || PROVINCE.test(n))
     let hit = 0
     for (const slug of routes) {
-      const enc = await routeEncounters(regionId, slug)
+      const enc =
+        regionId === 'paldea' ? await paldeaAreaEncounters(slug) : await routeEncounters(regionId, slug)
       if (enc) {
         out[regionId][slug] = enc
         hit++

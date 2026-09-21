@@ -53,6 +53,10 @@ export const initialGameState = {
   defeatedEliteFour: [],
   defeatedChampions: [],
   regionPrestige: {},
+  /** Next Battle Tower floor to attempt (0 = not in a run). */
+  towerFloor: 0,
+  /** Best Tower floor cleared per region. */
+  towerBest: {},
   victoryTokens: 0,
   autoProceed: !1,
   raidCooldownEnd: null,
@@ -838,6 +842,31 @@ export function gameReducer(state, action) {
       }
     }
     case 'BOSS_BATTLE_END': {
+      // Battle Tower: keep clearing floors until a loss ends the run.
+      if (state.bossBattle?.bossType === 'tower') {
+        const { won: towerWon, moneyDelta: towerMoneyDelta } = action.payload,
+          regionId = state.bossBattle.region ?? mapData[state.currentLocation]?.region ?? 'kanto',
+          floor = state.towerFloor,
+          best = state.towerBest[regionId] ?? 0,
+          reward = Math.max(1, Math.floor(floor / 5))
+        return {
+          ...prepareNextBattle(state),
+          money: Math.max(0, state.money + towerMoneyDelta),
+          trainerBattlesWon: towerWon ? state.trainerBattlesWon + 1 : state.trainerBattlesWon,
+          victoryTokens: towerWon ? state.victoryTokens + reward : state.victoryTokens,
+          towerFloor: towerWon ? floor + 1 : 0,
+          towerBest: {
+            ...state.towerBest,
+            [regionId]: Math.max(best, towerWon ? floor : floor - 1),
+          },
+          battleLog: [
+            ...state.battleLog,
+            towerWon
+              ? `Tower floor ${floor} cleared! Earned ${reward} Victory Token${reward > 1 ? 's' : ''}.`
+              : `Tower run ended on floor ${floor}.`,
+          ].slice(-50),
+        }
+      }
       const { won, moneyDelta } = action.payload,
         newMoney = Math.max(0, state.money + moneyDelta),
         eventType = won ? 'moneyGain' : 'moneyLoss',
@@ -1060,6 +1089,11 @@ export function gameReducer(state, action) {
           step: 'place',
         },
         pendingBossBattle: action.payload?.pendingBossBattle ?? null,
+      }
+    case 'START_TOWER':
+      return {
+        ...state,
+        towerFloor: action.payload?.floor ?? 1,
       }
     case 'HEALING_STEP':
       return state.phase !== 'healing' || !state.healingState

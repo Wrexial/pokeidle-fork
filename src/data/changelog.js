@@ -60,6 +60,13 @@ export const CHANGELOG = [
           ],
         },
         {
+          heading: 'Battle Tower',
+          items: [
+            'Once a region\u2019s Champion is beaten, its Gyms tab offers an endless Battle Tower: steadily stronger trainers, your team healed between floors, for Victory Tokens that scale with depth',
+            'A loss ends the run; your best floor per region is tracked and shown in the Records panel',
+          ],
+        },
+        {
           heading: 'Records',
           items: [
             'A Records panel in the Box summarises your journey: battles won, Pokedex and shiny progress, badges, Victory Tokens, and per-region completion and prestige levels',

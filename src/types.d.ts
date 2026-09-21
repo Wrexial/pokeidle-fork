@@ -160,6 +160,10 @@ type GameState = {
   defeatedChampions: string[]
   /** Times each region has been prestiged (map progress reset). */
   regionPrestige: Record<string, number>
+  /** Next Battle Tower floor to attempt (0 = not in a run). */
+  towerFloor: number
+  /** Best Battle Tower floor cleared per region. */
+  towerBest: Record<string, number>
   victoryTokens: number
   battlesWonByLocation: Record<string, number>
   wildBattlesWon: number

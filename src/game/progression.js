@@ -472,6 +472,35 @@ export function buildTrainerTeam(team) {
   })
 }
 
+/** Battle Tower floors start at this level and climb two per floor. */
+const TOWER_BASE_LEVEL = 50
+
+/**
+ * Build a Battle Tower trainer's roster for a floor. Deeper floors field more
+ * and stronger non-legendary Pokemon from the national dex.
+ * @param {number} floor
+ * @returns {{ speciesKey: string, level: number }[]}
+ */
+export function buildTowerTeam(floor) {
+  const level = Math.min(100, TOWER_BASE_LEVEL + floor * 2),
+    size = Math.min(6, 2 + Math.floor(floor / 2)),
+    pool = Object.keys(pokemonSpecies).filter((key) => {
+      const species = pokemonSpecies[key]
+      return species.id > 0 && species.id <= 1025 && !species.legendary && (species.catchRate ?? 0) > 3
+    })
+  if (pool.length === 0) return []
+  const team = [],
+    used = new Set()
+  for (let i = 0; i < size; i++) {
+    let key = pool[Math.floor(Math.random() * pool.length)],
+      guard = 0
+    while (used.has(key) && guard++ < 100) key = pool[Math.floor(Math.random() * pool.length)]
+    used.add(key)
+    team.push({ speciesKey: key, level: Math.min(100, level + i) })
+  }
+  return team
+}
+
 /**
  * @param {number} ms
  * @returns {string}

@@ -125,7 +125,8 @@ export function RecordsModal({ onClose }) {
                           (gym.region ?? 'kanto') === region.id && state.defeatedGyms.includes(gym.id)
                       ).length,
                       beaten = state.defeatedChampions.includes(region.id),
-                      prestige = state.regionPrestige[region.id] ?? 0
+                      prestige = state.regionPrestige[region.id] ?? 0,
+                      towerBest = state.towerBest[region.id] ?? 0
                     return jsxs(
                       'div',
                       {
@@ -139,7 +140,9 @@ export function RecordsModal({ onClose }) {
                             className: 'records-value',
                             children: `${badges}/${gymLeaderData.filter((gym) => (gym.region ?? 'kanto') === region.id).length} badges${
                               beaten ? ' · Champion ★' : ''
-                            }${prestige ? ` · Prestige ${prestige}` : ''}`,
+                            }${prestige ? ` · Prestige ${prestige}` : ''}${
+                              towerBest ? ` · Tower ${towerBest}` : ''
+                            }`,
                           }),
                         ],
                       },

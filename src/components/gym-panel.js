@@ -4,7 +4,7 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { championData, elite4Data, gymLeaderData, mapData, regions } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
-import { buildTrainerTeam } from '../game/progression.js'
+import { buildTrainerTeam, buildTowerTeam } from '../game/progression.js'
 
 /** @param {{ onOpenShop: () => void }} props */
 export function GymPanel({ onOpenShop }) {
@@ -24,6 +24,7 @@ export function GymPanel({ onOpenShop }) {
       regionEliteFour.length > 0 &&
       regionEliteFour.every((member) => state.defeatedEliteFour.includes(member.id)),
     prestigeLevel = state.regionPrestige[regionId] ?? 0,
+    towerBest = state.towerBest[regionId] ?? 0,
     canFight = state.party.some((member) => member.currentHp > 0),
     isBusy = state.phase === 'evolving' || state.phase === 'healing',
     fightable = canFight && !isBusy
@@ -47,6 +48,35 @@ export function GymPanel({ onOpenShop }) {
             allBadgesEarned && leader.rematchTeam?.length ? leader.rematchTeam : leader.team
           ),
           spriteKey: leader.spriteKey,
+          region: regionId,
+        },
+      },
+    })
+  }
+
+  /** @param {number} floor */
+  function startTowerFloor(floor) {
+    if (!fightable) return
+    if (state.phase === 'battling' || state.phase === 'victory' || state.phase === 'defeat')
+      dispatch({
+        type: 'PHASE_IDLE',
+      })
+    dispatch({
+      type: 'START_TOWER',
+      payload: {
+        floor,
+      },
+    })
+    dispatch({
+      type: 'START_HEALING',
+      payload: {
+        pendingBossBattle: {
+          bossId: 'tower',
+          bossType: 'tower',
+          trainerName: `Tower Trainer (Floor ${floor})`,
+          trainerClass: 'ace',
+          trainerTeam: buildTrainerTeam(buildTowerTeam(floor)),
+          spriteKey: 'acetrainer',
           region: regionId,
         },
       },
@@ -305,6 +335,35 @@ export function GymPanel({ onOpenShop }) {
                     }),
                 }),
               ],
+            }),
+          ],
+        }),
+      isLeagueRematch &&
+        jsxs('div', {
+          className: 'gym-section tower-section',
+          children: [
+            jsxs('div', {
+              className: 'gym-section-title',
+              children: ['Battle Tower', towerBest > 0 ? ` · Best Floor ${towerBest}` : ''],
+            }),
+            jsx('div', {
+              className: 'tower-hint',
+              children:
+                state.towerFloor > 0
+                  ? `Currently on floor ${state.towerFloor}. Win to climb; lose and the run ends.`
+                  : 'Fight endless, stronger trainers for Victory Tokens. Your Pokemon are healed between floors.',
+            }),
+            jsx('button', {
+              className: 'gym-fight-btn champion',
+              style: {
+                width: '100%',
+              },
+              disabled: !fightable,
+              onClick: () => startTowerFloor(state.towerFloor > 0 ? state.towerFloor : 1),
+              children:
+                state.towerFloor > 0
+                  ? `CONTINUE — FLOOR ${state.towerFloor}`
+                  : 'ENTER THE BATTLE TOWER',
             }),
           ],
         }),

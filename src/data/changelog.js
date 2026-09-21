@@ -1,10 +1,56 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.5.0'
+export const GAME_VERSION = '0.6.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.6.0',
+      subtitle: 'Balance Pass — Encounters, Forms & Trainers',
+      sections: [
+        {
+          heading: 'Catch Goals',
+          items: [
+            'Some routes now ask you to catch Pokemon that spawn only there, a harder, route-specific cousin of the old "catch X Pokemon" goal',
+            'Legendaries, starters and ultra-rare finds are left out so the goal stays fair',
+          ],
+        },
+        {
+          heading: 'Cleaner Encounters',
+          items: [
+            'Route tables no longer include radio/Poke Radar/dual-slot crossovers, in-game trades, fossil items, swarms or headbutt/honey-tree species',
+            'Static legendaries moved off regular routes and onto the Raid Islands',
+            'The Kanto Raid Island now works like every other region\u2019s',
+            'Paldea\u2019s open-world areas were trimmed to their most common species, with the rest moved to its Raid Island',
+          ],
+        },
+        {
+          heading: 'Complete Pokedex',
+          items: [
+            'Every species can now be obtained \u2014 including Mega, Gigantamax, regional and paradox forms',
+            'Mega and Gigantamax forms are level-100 evolutions; regional forms live on their region\u2019s Raid Island',
+            'Every Pokemon now has a move set (forms and a few species used to enter battle with no moves)',
+            'The Pokedex "All" tab counts only the national dex, so completion is now reachable',
+          ],
+        },
+        {
+          heading: 'Trainers, Gyms & Items',
+          items: [
+            'Route trainers and gym leaders no longer field unevolved Pokemon far past their evolution level',
+            'Generated trainers now have names like "Bug Catcher Joey" instead of "Route 2 Trainer 1"',
+            'Poke Marts open up gradually \u2014 Ultra Balls and Repel are no longer sold in the first town',
+          ],
+        },
+        {
+          heading: 'Presentation',
+          items: [
+            'Routes use biome battle backgrounds (caves, seas, mountains) instead of grassland everywhere',
+            'Routes and towns have descriptive text, gym towns name their leader, and hand-measured maps no longer overlap',
+          ],
+        },
+      ],
+    },
     {
       version: '0.5.0',
       subtitle: 'Regional Expansion — Generations 2-9',

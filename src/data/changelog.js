@@ -54,6 +54,7 @@ export const CHANGELOG = [
           items: [
             'Once you finish a region, the Gyms tab offers a Prestige button that replays its routes and badges without losing your Pokemon, items, money or Pokedex',
             'Prestige level is tracked per region and each reset awards Victory Tokens',
+            'Prestiging re-locks the region\u2019s badge gates (badge requirements count only that region\u2019s badges)',
             'A region\u2019s Elite Four reset on each prestige, so you must beat them again before prestiging that region once more',
           ],
         },

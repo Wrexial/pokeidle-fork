@@ -44,7 +44,6 @@ export function LocationPanel({ onOpenCatchSettings }) {
         .sort((left, right) => left.unlockOrder - right.unlockOrder)
         .slice(0, NEXT_UNLOCK_LIMIT)
     })(),
-    badgeCount = state.defeatedGyms.length,
     routeKey = location?.routeKey,
     routeEncounters = routeKey ? encounterData[routeKey] : null
   if (!location) return null
@@ -110,14 +109,20 @@ export function LocationPanel({ onOpenCatchSettings }) {
           locationId: requirement.locationId,
         })
       }
-    if (unlockRule.badgesRequired)
+    if (unlockRule.badgesRequired) {
+      const regionId = target.region ?? 'kanto',
+        // Count only this region's badges, matching computeUnlockedLocations.
+        regionBadgeCount = gymLeaderData.filter(
+          (gym) => (gym.region ?? 'kanto') === regionId && state.defeatedGyms.includes(gym.id)
+        ).length
       requirements.push({
         label: 'Badges',
-        current: badgeCount,
+        current: regionBadgeCount,
         required: unlockRule.badgesRequired,
-        met: badgeCount >= unlockRule.badgesRequired,
-        locationId: nextGymLocationId(target.region ?? 'kanto'),
+        met: regionBadgeCount >= unlockRule.badgesRequired,
+        locationId: nextGymLocationId(regionId),
       })
+    }
     if (unlockRule.caughtCount)
       requirements.push({
         label: 'Pokemon caught',

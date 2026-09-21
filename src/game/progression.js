@@ -2,8 +2,16 @@
 
 import { shinyCharmMinOddsChance, shinyFullOddsChance, shinyWithCharmChance } from '../data/config.js'
 import { activeItems, evolutionItems, pokeBalls } from '../data/items.js'
-import { GENERATION_DEX_RANGES, encounterData, isSpeciesCharmed, mapData, moveData, pokemonSpecies } from '../data/gameData.js'
+import { GENERATION_DEX_RANGES, encounterData, gymLeaderData, isSpeciesCharmed, mapData, moveData, pokemonSpecies } from '../data/gameData.js'
 import { calculateExpYield, calculatePokemonStats, getLevelUpResults, getPerfectIVs, resolvePokemonMoves } from './pokemon.js'
+
+/** Gym ids grouped by region, so `badgesRequired` gates count that region only. */
+/** @type {Record<string, string[]>} */
+const gymIdsByRegion = {}
+for (const gym of gymLeaderData) {
+  const regionId = gym.region ?? 'kanto'
+  ;(gymIdsByRegion[regionId] ??= []).push(gym.id)
+}
 
 /**
  * @param {GameState} state
@@ -69,7 +77,7 @@ export function getItemInfo(itemId) {
  */
 export function computeUnlockedLocations(state) {
   const unlocked = new Set(state.unlockedLocations),
-    badgeCount = state.defeatedGyms.length,
+    defeatedGyms = new Set(state.defeatedGyms),
     caughtSpecies = new Set(state.pokedexCaught),
     caughtCount = state.pokedexCaught.length,
     highestPartyLevel = state.party.reduce((max, member) => Math.max(max, member.level), 0)
@@ -78,7 +86,13 @@ export function computeUnlockedLocations(state) {
     changed = false
     for (const [locationId, location] of Object.entries(mapData)) {
       if (unlocked.has(locationId)) continue
-      const unlockRule = location.unlock
+      const unlockRule = location.unlock,
+        locationRegion = location.region ?? 'kanto',
+        // `badgesRequired` counts only this region's badges, so prestiging a
+        // region re-locks its badge gates even when other regions are complete.
+        badgeCount = (gymIdsByRegion[locationRegion] ?? []).filter(
+          /** @param {string} gymId */ (gymId) => defeatedGyms.has(gymId)
+        ).length
       const blocked =
         (unlockRule.battlesAtLocation &&
           unlockRule.battlesAtLocation.some(
@@ -91,7 +105,7 @@ export function computeUnlockedLocations(state) {
         (unlockRule.partyLevel && highestPartyLevel < unlockRule.partyLevel) ||
         (unlockRule.badgesRequired && badgeCount < unlockRule.badgesRequired) ||
         (unlockRule.gymsRequired &&
-          unlockRule.gymsRequired.some((gymId) => !state.defeatedGyms.includes(gymId))) ||
+          unlockRule.gymsRequired.some((gymId) => !defeatedGyms.has(gymId))) ||
         (unlockRule.championDefeated &&
           !state.defeatedChampions.includes(
             unlockRule.championDefeated === true ? 'kanto' : unlockRule.championDefeated

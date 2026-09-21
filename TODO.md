@@ -356,6 +356,24 @@ and `victoryTokens`.
 
 Effort: **small**.
 
+## 22. Multiple box sort modes (incl. level)
+
+`SORT_BOX` has a single fixed order — dex id, then level descending, then shiny
+— and the Box header's "Sort" button always applies it. There's no way to sort
+by level alone.
+
+- [ ] Add a **level** sort (highest / lowest first) — the most-wanted one.
+- [ ] Other modes: dex number, name, level, shiny-first, newest, type, and
+      favourite / IV total once #8 (management + IV checker) lands.
+- [ ] Ascending / descending toggle.
+- [ ] Remember the chosen mode (in the save or settings, #18), and replace the
+      single "Sort" button with a mode picker / cycle.
+
+Relevant code: `SORT_BOX` (`src/game/reducer.js`) and the Box header
+(`src/components/box-panel.js`).
+
+Effort: **small**.
+
 ---
 
 ## Useful references when picking these up

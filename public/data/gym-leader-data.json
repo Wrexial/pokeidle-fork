@@ -211,18 +211,18 @@
   "locationKey": "johto-violet-city",
   "badgeName": "Johto Badge 1",
   "badgeColor": "#a0a0a0",
-  "spriteKey": "beauty",
+  "spriteKey": "falkner",
   "team": [
    {
-    "speciesKey": "bayleef",
+    "speciesKey": "butterfree",
     "level": 12
    },
    {
-    "speciesKey": "meganium",
+    "speciesKey": "pidgey",
     "level": 13
    },
    {
-    "speciesKey": "quilava",
+    "speciesKey": "pidgeotto",
     "level": 14
    }
   ]
@@ -235,18 +235,18 @@
   "locationKey": "johto-azalea-town",
   "badgeName": "Johto Badge 2",
   "badgeColor": "#4878b0",
-  "spriteKey": "blackbelt",
+  "spriteKey": "bugsy",
   "team": [
    {
-    "speciesKey": "typhlosion",
+    "speciesKey": "weedle",
     "level": 19
    },
    {
-    "speciesKey": "croconaw",
+    "speciesKey": "kakuna",
     "level": 20
    },
    {
-    "speciesKey": "feraligatr",
+    "speciesKey": "beedrill",
     "level": 21
    }
   ]
@@ -259,18 +259,18 @@
   "locationKey": "johto-goldenrod-city",
   "badgeName": "Johto Badge 3",
   "badgeColor": "#c8a030",
-  "spriteKey": "psychic",
+  "spriteKey": "whitney",
   "team": [
    {
-    "speciesKey": "sentret",
+    "speciesKey": "fearow",
     "level": 27
    },
    {
-    "speciesKey": "furret",
+    "speciesKey": "jigglypuff",
     "level": 28
    },
    {
-    "speciesKey": "hoothoot",
+    "speciesKey": "wigglytuff",
     "level": 29
    }
   ]
@@ -283,18 +283,18 @@
   "locationKey": "johto-ecruteak-city",
   "badgeName": "Johto Badge 4",
   "badgeColor": "#48a048",
-  "spriteKey": "scientist",
+  "spriteKey": "morty",
   "team": [
    {
-    "speciesKey": "noctowl",
+    "speciesKey": "haunter",
     "level": 34
    },
    {
-    "speciesKey": "ledyba",
+    "speciesKey": "gengar",
     "level": 35
    },
    {
-    "speciesKey": "ledian",
+    "speciesKey": "misdreavus",
     "level": 36
    }
   ]
@@ -307,18 +307,18 @@
   "locationKey": "johto-cianwood-city",
   "badgeName": "Johto Badge 5",
   "badgeColor": "#b83028",
-  "spriteKey": "camper",
+  "spriteKey": "chuck",
   "team": [
    {
-    "speciesKey": "spinarak",
+    "speciesKey": "primeape",
     "level": 42
    },
    {
-    "speciesKey": "ariados",
+    "speciesKey": "poliwrath",
     "level": 43
    },
    {
-    "speciesKey": "crobat",
+    "speciesKey": "machop",
     "level": 44
    }
   ]
@@ -331,18 +331,18 @@
   "locationKey": "johto-olivine-city",
   "badgeName": "Johto Badge 6",
   "badgeColor": "#a060c0",
-  "spriteKey": "swimmer",
+  "spriteKey": "jasmine",
   "team": [
    {
-    "speciesKey": "chinchou",
+    "speciesKey": "steelix",
     "level": 49
    },
    {
-    "speciesKey": "lanturn",
+    "speciesKey": "scizor",
     "level": 50
    },
    {
-    "speciesKey": "pichu",
+    "speciesKey": "skarmory",
     "level": 51
    }
   ]
@@ -355,18 +355,18 @@
   "locationKey": "johto-mahogany-town",
   "badgeName": "Johto Badge 7",
   "badgeColor": "#e08040",
-  "spriteKey": "gentleman",
+  "spriteKey": "pryce",
   "team": [
    {
-    "speciesKey": "cleffa",
+    "speciesKey": "dewgong",
     "level": 57
    },
    {
-    "speciesKey": "igglybuff",
+    "speciesKey": "cloyster",
     "level": 58
    },
    {
-    "speciesKey": "togepi",
+    "speciesKey": "jynx",
     "level": 59
    }
   ]
@@ -379,18 +379,18 @@
   "locationKey": "johto-blackthorn-city",
   "badgeName": "Johto Badge 8",
   "badgeColor": "#40c0c0",
-  "spriteKey": "juggler",
+  "spriteKey": "clair",
   "team": [
    {
-    "speciesKey": "togetic",
+    "speciesKey": "dragonair",
     "level": 64
    },
    {
-    "speciesKey": "natu",
+    "speciesKey": "dragonite",
     "level": 65
    },
    {
-    "speciesKey": "xatu",
+    "speciesKey": "kingdra",
     "level": 66
    }
   ]
@@ -403,18 +403,18 @@
   "locationKey": "hoenn-rustboro-city",
   "badgeName": "Hoenn Badge 1",
   "badgeColor": "#a0a0a0",
-  "spriteKey": "blackbelt",
+  "spriteKey": "roxanne",
   "team": [
    {
-    "speciesKey": "grovyle",
+    "speciesKey": "geodude",
     "level": 12
    },
    {
-    "speciesKey": "sceptile",
+    "speciesKey": "graveler",
     "level": 13
    },
    {
-    "speciesKey": "combusken",
+    "speciesKey": "golem",
     "level": 14
    }
   ]
@@ -427,18 +427,18 @@
   "locationKey": "hoenn-dewford-town",
   "badgeName": "Hoenn Badge 2",
   "badgeColor": "#4878b0",
-  "spriteKey": "psychic",
+  "spriteKey": "brawly",
   "team": [
    {
-    "speciesKey": "blaziken",
+    "speciesKey": "machop",
     "level": 19
    },
    {
-    "speciesKey": "marshtomp",
+    "speciesKey": "machoke",
     "level": 20
    },
    {
-    "speciesKey": "swampert",
+    "speciesKey": "machamp",
     "level": 21
    }
   ]
@@ -451,18 +451,18 @@
   "locationKey": "hoenn-mauville-city",
   "badgeName": "Hoenn Badge 3",
   "badgeColor": "#c8a030",
-  "spriteKey": "scientist",
+  "spriteKey": "wattson",
   "team": [
    {
-    "speciesKey": "poochyena",
+    "speciesKey": "electabuzz",
     "level": 27
    },
    {
-    "speciesKey": "mightyena",
+    "speciesKey": "jolteon",
     "level": 28
    },
    {
-    "speciesKey": "zigzagoon",
+    "speciesKey": "chinchou",
     "level": 29
    }
   ]
@@ -475,18 +475,18 @@
   "locationKey": "hoenn-lavaridge-town",
   "badgeName": "Hoenn Badge 4",
   "badgeColor": "#48a048",
-  "spriteKey": "camper",
+  "spriteKey": "flannery",
   "team": [
    {
-    "speciesKey": "linoone",
+    "speciesKey": "magcargo",
     "level": 34
    },
    {
-    "speciesKey": "wurmple",
+    "speciesKey": "houndour",
     "level": 35
    },
    {
-    "speciesKey": "silcoon",
+    "speciesKey": "houndoom",
     "level": 36
    }
   ]
@@ -499,18 +499,18 @@
   "locationKey": "hoenn-petalburg-city",
   "badgeName": "Hoenn Badge 5",
   "badgeColor": "#b83028",
-  "spriteKey": "swimmer",
+  "spriteKey": "norman",
   "team": [
    {
-    "speciesKey": "beautifly",
+    "speciesKey": "doduo",
     "level": 42
    },
    {
-    "speciesKey": "cascoon",
+    "speciesKey": "dodrio",
     "level": 43
    },
    {
-    "speciesKey": "dustox",
+    "speciesKey": "lickitung",
     "level": 44
    }
   ]
@@ -523,18 +523,18 @@
   "locationKey": "hoenn-fortree-city",
   "badgeName": "Hoenn Badge 6",
   "badgeColor": "#a060c0",
-  "spriteKey": "gentleman",
+  "spriteKey": "winona",
   "team": [
    {
-    "speciesKey": "lotad",
+    "speciesKey": "hoothoot",
     "level": 49
    },
    {
-    "speciesKey": "lombre",
+    "speciesKey": "noctowl",
     "level": 50
    },
    {
-    "speciesKey": "ludicolo",
+    "speciesKey": "ledyba",
     "level": 51
    }
   ]
@@ -547,18 +547,18 @@
   "locationKey": "hoenn-mossdeep-city",
   "badgeName": "Hoenn Badge 7",
   "badgeColor": "#e08040",
-  "spriteKey": "juggler",
+  "spriteKey": "tate",
   "team": [
    {
-    "speciesKey": "seedot",
+    "speciesKey": "wobbuffet",
     "level": 57
    },
    {
-    "speciesKey": "nuzleaf",
+    "speciesKey": "girafarig",
     "level": 58
    },
    {
-    "speciesKey": "shiftry",
+    "speciesKey": "smoochum",
     "level": 59
    }
   ]
@@ -571,18 +571,18 @@
   "locationKey": "hoenn-sootopolis-city",
   "badgeName": "Hoenn Badge 8",
   "badgeColor": "#40c0c0",
-  "spriteKey": "acetrainer",
+  "spriteKey": "juan",
   "team": [
    {
-    "speciesKey": "taillow",
+    "speciesKey": "magikarp",
     "level": 64
    },
    {
-    "speciesKey": "swellow",
+    "speciesKey": "gyarados",
     "level": 65
    },
    {
-    "speciesKey": "wingull",
+    "speciesKey": "lapras",
     "level": 66
    }
   ]
@@ -595,18 +595,18 @@
   "locationKey": "sinnoh-oreburgh-city",
   "badgeName": "Sinnoh Badge 1",
   "badgeColor": "#a0a0a0",
-  "spriteKey": "psychic",
+  "spriteKey": "roark",
   "team": [
    {
-    "speciesKey": "grotle",
+    "speciesKey": "geodude",
     "level": 12
    },
    {
-    "speciesKey": "torterra",
+    "speciesKey": "graveler",
     "level": 13
    },
    {
-    "speciesKey": "monferno",
+    "speciesKey": "golem",
     "level": 14
    }
   ]
@@ -619,18 +619,18 @@
   "locationKey": "sinnoh-eterna-city",
   "badgeName": "Sinnoh Badge 2",
   "badgeColor": "#4878b0",
-  "spriteKey": "scientist",
+  "spriteKey": "gardenia",
   "team": [
    {
-    "speciesKey": "infernape",
+    "speciesKey": "paras",
     "level": 19
    },
    {
-    "speciesKey": "prinplup",
+    "speciesKey": "parasect",
     "level": 20
    },
    {
-    "speciesKey": "empoleon",
+    "speciesKey": "bellsprout",
     "level": 21
    }
   ]
@@ -643,18 +643,18 @@
   "locationKey": "sinnoh-veilstone-city",
   "badgeName": "Sinnoh Badge 3",
   "badgeColor": "#c8a030",
-  "spriteKey": "camper",
+  "spriteKey": "maylene",
   "team": [
    {
-    "speciesKey": "starly",
+    "speciesKey": "hitmonlee",
     "level": 27
    },
    {
-    "speciesKey": "staravia",
+    "speciesKey": "hitmonchan",
     "level": 28
    },
    {
-    "speciesKey": "staraptor",
+    "speciesKey": "heracross",
     "level": 29
    }
   ]
@@ -667,18 +667,18 @@
   "locationKey": "sinnoh-pastoria-city",
   "badgeName": "Sinnoh Badge 4",
   "badgeColor": "#48a048",
-  "spriteKey": "swimmer",
+  "spriteKey": "crasherwake",
   "team": [
    {
-    "speciesKey": "bidoof",
+    "speciesKey": "seel",
     "level": 34
    },
    {
-    "speciesKey": "bibarel",
+    "speciesKey": "dewgong",
     "level": 35
    },
    {
-    "speciesKey": "kricketot",
+    "speciesKey": "shellder",
     "level": 36
    }
   ]
@@ -691,18 +691,18 @@
   "locationKey": "sinnoh-hearthome-city",
   "badgeName": "Sinnoh Badge 5",
   "badgeColor": "#b83028",
-  "spriteKey": "gentleman",
+  "spriteKey": "fantina",
   "team": [
    {
-    "speciesKey": "kricketune",
+    "speciesKey": "mismagius",
     "level": 42
    },
    {
-    "speciesKey": "shinx",
+    "speciesKey": "spiritomb",
     "level": 43
    },
    {
-    "speciesKey": "luxio",
+    "speciesKey": "dusknoir",
     "level": 44
    }
   ]
@@ -715,18 +715,18 @@
   "locationKey": "sinnoh-canalave-city",
   "badgeName": "Sinnoh Badge 6",
   "badgeColor": "#a060c0",
-  "spriteKey": "juggler",
+  "spriteKey": "byron",
   "team": [
    {
-    "speciesKey": "luxray",
+    "speciesKey": "magnezone",
     "level": 49
    },
    {
-    "speciesKey": "budew",
+    "speciesKey": "probopass",
     "level": 50
    },
    {
-    "speciesKey": "roserade",
+    "speciesKey": "magnemite",
     "level": 51
    }
   ]
@@ -739,18 +739,18 @@
   "locationKey": "sinnoh-snowpoint-city",
   "badgeName": "Sinnoh Badge 7",
   "badgeColor": "#e08040",
-  "spriteKey": "acetrainer",
+  "spriteKey": "candice",
   "team": [
    {
-    "speciesKey": "cranidos",
+    "speciesKey": "mamoswine",
     "level": 57
    },
    {
-    "speciesKey": "rampardos",
+    "speciesKey": "froslass",
     "level": 58
    },
    {
-    "speciesKey": "shieldon",
+    "speciesKey": "dewgong",
     "level": 59
    }
   ]
@@ -763,18 +763,18 @@
   "locationKey": "sinnoh-sunyshore-city",
   "badgeName": "Sinnoh Badge 8",
   "badgeColor": "#40c0c0",
-  "spriteKey": "hiker",
+  "spriteKey": "volkner",
   "team": [
    {
-    "speciesKey": "bastiodon",
+    "speciesKey": "luxray",
     "level": 64
    },
    {
-    "speciesKey": "burmy",
+    "speciesKey": "pachirisu",
     "level": 65
    },
    {
-    "speciesKey": "wormadam",
+    "speciesKey": "magnezone",
     "level": 66
    }
   ]
@@ -787,18 +787,18 @@
   "locationKey": "unova-striaton-city",
   "badgeName": "Unova Badge 1",
   "badgeColor": "#a0a0a0",
-  "spriteKey": "scientist",
+  "spriteKey": "cilan",
   "team": [
    {
-    "speciesKey": "servine",
+    "speciesKey": "oddish",
     "level": 12
    },
    {
-    "speciesKey": "serperior",
+    "speciesKey": "gloom",
     "level": 13
    },
    {
-    "speciesKey": "pignite",
+    "speciesKey": "vileplume",
     "level": 14
    }
   ]
@@ -811,18 +811,18 @@
   "locationKey": "unova-nacrene-city",
   "badgeName": "Unova Badge 2",
   "badgeColor": "#4878b0",
-  "spriteKey": "camper",
+  "spriteKey": "lenora",
   "team": [
    {
-    "speciesKey": "emboar",
+    "speciesKey": "rattata",
     "level": 19
    },
    {
-    "speciesKey": "dewott",
+    "speciesKey": "raticate",
     "level": 20
    },
    {
-    "speciesKey": "samurott",
+    "speciesKey": "spearow",
     "level": 21
    }
   ]
@@ -835,18 +835,18 @@
   "locationKey": "unova-castelia-city",
   "badgeName": "Unova Badge 3",
   "badgeColor": "#c8a030",
-  "spriteKey": "swimmer",
+  "spriteKey": "burgh",
   "team": [
    {
-    "speciesKey": "patrat",
+    "speciesKey": "paras",
     "level": 27
    },
    {
-    "speciesKey": "watchog",
+    "speciesKey": "parasect",
     "level": 28
    },
    {
-    "speciesKey": "lillipup",
+    "speciesKey": "venonat",
     "level": 29
    }
   ]
@@ -859,18 +859,18 @@
   "locationKey": "unova-nimbasa-city",
   "badgeName": "Unova Badge 4",
   "badgeColor": "#48a048",
-  "spriteKey": "gentleman",
+  "spriteKey": "elesa",
   "team": [
    {
-    "speciesKey": "herdier",
+    "speciesKey": "lanturn",
     "level": 34
    },
    {
-    "speciesKey": "stoutland",
+    "speciesKey": "pichu",
     "level": 35
    },
    {
-    "speciesKey": "purrloin",
+    "speciesKey": "mareep",
     "level": 36
    }
   ]
@@ -883,18 +883,18 @@
   "locationKey": "unova-driftveil-city",
   "badgeName": "Unova Badge 5",
   "badgeColor": "#b83028",
-  "spriteKey": "juggler",
+  "spriteKey": "clay",
   "team": [
    {
-    "speciesKey": "liepard",
+    "speciesKey": "rhyhorn",
     "level": 42
    },
    {
-    "speciesKey": "pansage",
+    "speciesKey": "rhydon",
     "level": 43
    },
    {
-    "speciesKey": "simisage",
+    "speciesKey": "wooper",
     "level": 44
    }
   ]
@@ -907,18 +907,18 @@
   "locationKey": "unova-mistralton-city",
   "badgeName": "Unova Badge 6",
   "badgeColor": "#a060c0",
-  "spriteKey": "acetrainer",
+  "spriteKey": "skyla",
   "team": [
    {
-    "speciesKey": "pansear",
+    "speciesKey": "hoothoot",
     "level": 49
    },
    {
-    "speciesKey": "simisear",
+    "speciesKey": "noctowl",
     "level": 50
    },
    {
-    "speciesKey": "panpour",
+    "speciesKey": "ledyba",
     "level": 51
    }
   ]
@@ -931,18 +931,18 @@
   "locationKey": "unova-icirrus-city",
   "badgeName": "Unova Badge 7",
   "badgeColor": "#e08040",
-  "spriteKey": "hiker",
+  "spriteKey": "brycen",
   "team": [
    {
-    "speciesKey": "simipour",
+    "speciesKey": "mamoswine",
     "level": 57
    },
    {
-    "speciesKey": "munna",
+    "speciesKey": "froslass",
     "level": 58
    },
    {
-    "speciesKey": "musharna",
+    "speciesKey": "vanillite",
     "level": 59
    }
   ]
@@ -955,18 +955,18 @@
   "locationKey": "unova-opelucid-city",
   "badgeName": "Unova Badge 8",
   "badgeColor": "#40c0c0",
-  "spriteKey": "beauty",
+  "spriteKey": "drayden",
   "team": [
    {
-    "speciesKey": "pidove",
+    "speciesKey": "dratini",
     "level": 64
    },
    {
-    "speciesKey": "tranquill",
+    "speciesKey": "dragonair",
     "level": 65
    },
    {
-    "speciesKey": "unfezant",
+    "speciesKey": "dragonite",
     "level": 66
    }
   ]
@@ -979,18 +979,18 @@
   "locationKey": "kalos-santalune-city",
   "badgeName": "Kalos Badge 1",
   "badgeColor": "#a0a0a0",
-  "spriteKey": "camper",
+  "spriteKey": "viola",
   "team": [
    {
-    "speciesKey": "quilladin",
+    "speciesKey": "caterpie",
     "level": 12
    },
    {
-    "speciesKey": "chesnaught",
+    "speciesKey": "metapod",
     "level": 13
    },
    {
-    "speciesKey": "braixen",
+    "speciesKey": "butterfree",
     "level": 14
    }
   ]
@@ -1003,18 +1003,18 @@
   "locationKey": "kalos-cyllage-city",
   "badgeName": "Kalos Badge 2",
   "badgeColor": "#4878b0",
-  "spriteKey": "swimmer",
+  "spriteKey": "grant",
   "team": [
    {
-    "speciesKey": "delphox",
+    "speciesKey": "onix",
     "level": 19
    },
    {
-    "speciesKey": "frogadier",
+    "speciesKey": "rhyhorn",
     "level": 20
    },
    {
-    "speciesKey": "greninja",
+    "speciesKey": "rhydon",
     "level": 21
    }
   ]
@@ -1027,18 +1027,18 @@
   "locationKey": "kalos-shalour-city",
   "badgeName": "Kalos Badge 3",
   "badgeColor": "#c8a030",
-  "spriteKey": "gentleman",
+  "spriteKey": "korrina",
   "team": [
    {
-    "speciesKey": "bunnelby",
+    "speciesKey": "hitmonlee",
     "level": 27
    },
    {
-    "speciesKey": "diggersby",
+    "speciesKey": "hitmonchan",
     "level": 28
    },
    {
-    "speciesKey": "fletchling",
+    "speciesKey": "heracross",
     "level": 29
    }
   ]
@@ -1051,18 +1051,18 @@
   "locationKey": "kalos-coumarine-city",
   "badgeName": "Kalos Badge 4",
   "badgeColor": "#48a048",
-  "spriteKey": "juggler",
+  "spriteKey": "ramos",
   "team": [
    {
-    "speciesKey": "fletchinder",
+    "speciesKey": "exeggutor",
     "level": 34
    },
    {
-    "speciesKey": "talonflame",
+    "speciesKey": "tangela",
     "level": 35
    },
    {
-    "speciesKey": "scatterbug",
+    "speciesKey": "bellossom",
     "level": 36
    }
   ]
@@ -1075,18 +1075,18 @@
   "locationKey": "kalos-lumiose-city",
   "badgeName": "Kalos Badge 5",
   "badgeColor": "#b83028",
-  "spriteKey": "acetrainer",
+  "spriteKey": "clemont",
   "team": [
    {
-    "speciesKey": "spewpa",
+    "speciesKey": "flaaffy",
     "level": 42
    },
    {
-    "speciesKey": "vivillon",
+    "speciesKey": "ampharos",
     "level": 43
    },
    {
-    "speciesKey": "litleo",
+    "speciesKey": "elekid",
     "level": 44
    }
   ]
@@ -1099,18 +1099,18 @@
   "locationKey": "kalos-laverre-city",
   "badgeName": "Kalos Badge 6",
   "badgeColor": "#a060c0",
-  "spriteKey": "hiker",
+  "spriteKey": "valerie",
   "team": [
    {
-    "speciesKey": "pyroar",
+    "speciesKey": "gardevoir",
     "level": 49
    },
    {
-    "speciesKey": "flabebe",
+    "speciesKey": "azurill",
     "level": 50
    },
    {
-    "speciesKey": "floette",
+    "speciesKey": "mawile",
     "level": 51
    }
   ]
@@ -1123,18 +1123,18 @@
   "locationKey": "kalos-anistar-city",
   "badgeName": "Kalos Badge 7",
   "badgeColor": "#e08040",
-  "spriteKey": "beauty",
+  "spriteKey": "olympia",
   "team": [
    {
-    "speciesKey": "florges",
+    "speciesKey": "wobbuffet",
     "level": 57
    },
    {
-    "speciesKey": "skiddo",
+    "speciesKey": "girafarig",
     "level": 58
    },
    {
-    "speciesKey": "gogoat",
+    "speciesKey": "smoochum",
     "level": 59
    }
   ]
@@ -1147,18 +1147,18 @@
   "locationKey": "kalos-snowbelle-city",
   "badgeName": "Kalos Badge 8",
   "badgeColor": "#40c0c0",
-  "spriteKey": "blackbelt",
+  "spriteKey": "wulfric",
   "team": [
    {
-    "speciesKey": "pancham",
+    "speciesKey": "vanillish",
     "level": 64
    },
    {
-    "speciesKey": "pangoro",
+    "speciesKey": "vanilluxe",
     "level": 65
    },
    {
-    "speciesKey": "furfrou",
+    "speciesKey": "cubchoo",
     "level": 66
    }
   ]
@@ -1171,18 +1171,18 @@
   "locationKey": "alola-iki-town",
   "badgeName": "Alola Badge 1",
   "badgeColor": "#a0a0a0",
-  "spriteKey": "swimmer",
+  "spriteKey": "ilima",
   "team": [
    {
-    "speciesKey": "dartrix",
+    "speciesKey": "pidgey",
     "level": 12
    },
    {
-    "speciesKey": "decidueye",
+    "speciesKey": "pidgeotto",
     "level": 13
    },
    {
-    "speciesKey": "torracat",
+    "speciesKey": "pidgeot",
     "level": 14
    }
   ]
@@ -1195,18 +1195,18 @@
   "locationKey": "alola-hauoli-city",
   "badgeName": "Alola Badge 2",
   "badgeColor": "#4878b0",
-  "spriteKey": "gentleman",
+  "spriteKey": "lana",
   "team": [
    {
-    "speciesKey": "incineroar",
+    "speciesKey": "poliwhirl",
     "level": 19
    },
    {
-    "speciesKey": "brionne",
+    "speciesKey": "poliwrath",
     "level": 20
    },
    {
-    "speciesKey": "primarina",
+    "speciesKey": "tentacool",
     "level": 21
    }
   ]
@@ -1219,18 +1219,18 @@
   "locationKey": "alola-po-town",
   "badgeName": "Alola Badge 3",
   "badgeColor": "#c8a030",
-  "spriteKey": "juggler",
+  "spriteKey": "kiawe",
   "team": [
    {
-    "speciesKey": "pikipek",
+    "speciesKey": "magmar",
     "level": 27
    },
    {
-    "speciesKey": "trumbeak",
+    "speciesKey": "flareon",
     "level": 28
    },
    {
-    "speciesKey": "toucannon",
+    "speciesKey": "slugma",
     "level": 29
    }
   ]
@@ -1243,18 +1243,18 @@
   "locationKey": "alola-paniola-town",
   "badgeName": "Alola Badge 4",
   "badgeColor": "#48a048",
-  "spriteKey": "acetrainer",
+  "spriteKey": "mallow",
   "team": [
    {
-    "speciesKey": "yungoos",
+    "speciesKey": "exeggutor",
     "level": 34
    },
    {
-    "speciesKey": "gumshoos",
+    "speciesKey": "tangela",
     "level": 35
    },
    {
-    "speciesKey": "grubbin",
+    "speciesKey": "bellossom",
     "level": 36
    }
   ]
@@ -1267,18 +1267,18 @@
   "locationKey": "alola-heahea-city",
   "badgeName": "Alola Badge 5",
   "badgeColor": "#b83028",
-  "spriteKey": "hiker",
+  "spriteKey": "sophocles",
   "team": [
    {
-    "speciesKey": "charjabug",
+    "speciesKey": "flaaffy",
     "level": 42
    },
    {
-    "speciesKey": "vikavolt",
+    "speciesKey": "ampharos",
     "level": 43
    },
    {
-    "speciesKey": "crabrawler",
+    "speciesKey": "elekid",
     "level": 44
    }
   ]
@@ -1291,18 +1291,18 @@
   "locationKey": "alola-konikoni-city",
   "badgeName": "Alola Badge 6",
   "badgeColor": "#a060c0",
-  "spriteKey": "beauty",
+  "spriteKey": "acerola",
   "team": [
    {
-    "speciesKey": "crabominable",
+    "speciesKey": "froslass",
     "level": 49
    },
    {
-    "speciesKey": "oricorio",
+    "speciesKey": "rotom",
     "level": 50
    },
    {
-    "speciesKey": "cutiefly",
+    "speciesKey": "yamask",
     "level": 51
    }
   ]
@@ -1315,18 +1315,18 @@
   "locationKey": "alola-malie-city",
   "badgeName": "Alola Badge 7",
   "badgeColor": "#e08040",
-  "spriteKey": "blackbelt",
+  "spriteKey": "mina",
   "team": [
    {
-    "speciesKey": "ribombee",
+    "speciesKey": "mimeJR",
     "level": 57
    },
    {
-    "speciesKey": "rockruff",
+    "speciesKey": "togekiss",
     "level": 58
    },
    {
-    "speciesKey": "lycanroc",
+    "speciesKey": "cottonee",
     "level": 59
    }
   ]
@@ -1339,18 +1339,18 @@
   "locationKey": "alola-iki-town",
   "badgeName": "Alola Badge 8",
   "badgeColor": "#40c0c0",
-  "spriteKey": "psychic",
+  "spriteKey": "hapu",
   "team": [
    {
-    "speciesKey": "wishiwashi",
+    "speciesKey": "donphan",
     "level": 64
    },
    {
-    "speciesKey": "mareanie",
+    "speciesKey": "larvitar",
     "level": 65
    },
    {
-    "speciesKey": "toxapex",
+    "speciesKey": "pupitar",
     "level": 66
    }
   ]
@@ -1363,18 +1363,18 @@
   "locationKey": "galar-turffield",
   "badgeName": "Galar Badge 1",
   "badgeColor": "#a0a0a0",
-  "spriteKey": "gentleman",
+  "spriteKey": "milo",
   "team": [
    {
-    "speciesKey": "thwackey",
+    "speciesKey": "oddish",
     "level": 12
    },
    {
-    "speciesKey": "rillaboom",
+    "speciesKey": "gloom",
     "level": 13
    },
    {
-    "speciesKey": "raboot",
+    "speciesKey": "vileplume",
     "level": 14
    }
   ]
@@ -1387,18 +1387,18 @@
   "locationKey": "galar-hulbury",
   "badgeName": "Galar Badge 2",
   "badgeColor": "#4878b0",
-  "spriteKey": "juggler",
+  "spriteKey": "nessa",
   "team": [
    {
-    "speciesKey": "cinderace",
+    "speciesKey": "poliwhirl",
     "level": 19
    },
    {
-    "speciesKey": "drizzile",
+    "speciesKey": "poliwrath",
     "level": 20
    },
    {
-    "speciesKey": "inteleon",
+    "speciesKey": "tentacool",
     "level": 21
    }
   ]
@@ -1411,18 +1411,18 @@
   "locationKey": "galar-motostoke",
   "badgeName": "Galar Badge 3",
   "badgeColor": "#c8a030",
-  "spriteKey": "acetrainer",
+  "spriteKey": "kabu",
   "team": [
    {
-    "speciesKey": "skwovet",
+    "speciesKey": "magmar",
     "level": 27
    },
    {
-    "speciesKey": "greedent",
+    "speciesKey": "flareon",
     "level": 28
    },
    {
-    "speciesKey": "rookidee",
+    "speciesKey": "slugma",
     "level": 29
    }
   ]
@@ -1435,18 +1435,18 @@
   "locationKey": "galar-stow-on-side",
   "badgeName": "Galar Badge 4",
   "badgeColor": "#48a048",
-  "spriteKey": "hiker",
+  "spriteKey": "bea",
   "team": [
    {
-    "speciesKey": "corvisquire",
+    "speciesKey": "tyrogue",
     "level": 34
    },
    {
-    "speciesKey": "corviknight",
+    "speciesKey": "hitmontop",
     "level": 35
    },
    {
-    "speciesKey": "blipbug",
+    "speciesKey": "breloom",
     "level": 36
    }
   ]
@@ -1459,18 +1459,18 @@
   "locationKey": "galar-ballonlea",
   "badgeName": "Galar Badge 5",
   "badgeColor": "#b83028",
-  "spriteKey": "beauty",
+  "spriteKey": "opal",
   "team": [
    {
-    "speciesKey": "dottler",
+    "speciesKey": "granbull",
     "level": 42
    },
    {
-    "speciesKey": "orbeetle",
+    "speciesKey": "ralts",
     "level": 43
    },
    {
-    "speciesKey": "nickit",
+    "speciesKey": "kirlia",
     "level": 44
    }
   ]
@@ -1483,18 +1483,18 @@
   "locationKey": "galar-circhester",
   "badgeName": "Galar Badge 6",
   "badgeColor": "#a060c0",
-  "spriteKey": "blackbelt",
+  "spriteKey": "gordie",
   "team": [
    {
-    "speciesKey": "thievul",
+    "speciesKey": "larvitar",
     "level": 49
    },
    {
-    "speciesKey": "gossifleur",
+    "speciesKey": "pupitar",
     "level": 50
    },
    {
-    "speciesKey": "eldegoss",
+    "speciesKey": "tyranitar",
     "level": 51
    }
   ]
@@ -1507,18 +1507,18 @@
   "locationKey": "galar-spikemuth",
   "badgeName": "Galar Badge 7",
   "badgeColor": "#e08040",
-  "spriteKey": "psychic",
+  "spriteKey": "piers",
   "team": [
    {
-    "speciesKey": "wooloo",
+    "speciesKey": "skuntank",
     "level": 57
    },
    {
-    "speciesKey": "dubwool",
+    "speciesKey": "spiritomb",
     "level": 58
    },
    {
-    "speciesKey": "chewtle",
+    "speciesKey": "drapion",
     "level": 59
    }
   ]
@@ -1531,18 +1531,18 @@
   "locationKey": "galar-hammerlocke",
   "badgeName": "Galar Badge 8",
   "badgeColor": "#40c0c0",
-  "spriteKey": "scientist",
+  "spriteKey": "raihan",
   "team": [
    {
-    "speciesKey": "drednaw",
+    "speciesKey": "dragalge",
     "level": 64
    },
    {
-    "speciesKey": "yamper",
+    "speciesKey": "tyrunt",
     "level": 65
    },
    {
-    "speciesKey": "boltund",
+    "speciesKey": "tyrantrum",
     "level": 66
    }
   ]
@@ -1555,18 +1555,18 @@
   "locationKey": "paldea-cortondo",
   "badgeName": "Paldea Badge 1",
   "badgeColor": "#a0a0a0",
-  "spriteKey": "juggler",
+  "spriteKey": "katy",
   "team": [
    {
-    "speciesKey": "floragato",
+    "speciesKey": "caterpie",
     "level": 12
    },
    {
-    "speciesKey": "meowscarada",
+    "speciesKey": "metapod",
     "level": 13
    },
    {
-    "speciesKey": "crocalor",
+    "speciesKey": "butterfree",
     "level": 14
    }
   ]
@@ -1579,18 +1579,18 @@
   "locationKey": "paldea-artazon",
   "badgeName": "Paldea Badge 2",
   "badgeColor": "#4878b0",
-  "spriteKey": "acetrainer",
+  "spriteKey": "brassius",
   "team": [
    {
-    "speciesKey": "skeledirge",
+    "speciesKey": "paras",
     "level": 19
    },
    {
-    "speciesKey": "quaxwell",
+    "speciesKey": "parasect",
     "level": 20
    },
    {
-    "speciesKey": "quaquaval",
+    "speciesKey": "bellsprout",
     "level": 21
    }
   ]
@@ -1603,18 +1603,18 @@
   "locationKey": "paldea-levincia",
   "badgeName": "Paldea Badge 3",
   "badgeColor": "#c8a030",
-  "spriteKey": "hiker",
+  "spriteKey": "iono",
   "team": [
    {
-    "speciesKey": "lechonk",
+    "speciesKey": "electabuzz",
     "level": 27
    },
    {
-    "speciesKey": "oinkologne",
+    "speciesKey": "jolteon",
     "level": 28
    },
    {
-    "speciesKey": "tarountula",
+    "speciesKey": "chinchou",
     "level": 29
    }
   ]
@@ -1627,18 +1627,18 @@
   "locationKey": "paldea-cascarrafa",
   "badgeName": "Paldea Badge 4",
   "badgeColor": "#48a048",
-  "spriteKey": "beauty",
+  "spriteKey": "kofu",
   "team": [
    {
-    "speciesKey": "spidops",
+    "speciesKey": "seel",
     "level": 34
    },
    {
-    "speciesKey": "nymble",
+    "speciesKey": "dewgong",
     "level": 35
    },
    {
-    "speciesKey": "lokix",
+    "speciesKey": "shellder",
     "level": 36
    }
   ]
@@ -1651,18 +1651,18 @@
   "locationKey": "paldea-medali",
   "badgeName": "Paldea Badge 5",
   "badgeColor": "#b83028",
-  "spriteKey": "blackbelt",
+  "spriteKey": "larry",
   "team": [
    {
-    "speciesKey": "pawmi",
+    "speciesKey": "doduo",
     "level": 42
    },
    {
-    "speciesKey": "pawmo",
+    "speciesKey": "dodrio",
     "level": 43
    },
    {
-    "speciesKey": "pawmot",
+    "speciesKey": "lickitung",
     "level": 44
    }
   ]
@@ -1675,18 +1675,18 @@
   "locationKey": "paldea-montenevera",
   "badgeName": "Paldea Badge 6",
   "badgeColor": "#a060c0",
-  "spriteKey": "psychic",
+  "spriteKey": "ryme",
   "team": [
    {
-    "speciesKey": "tandemaus",
+    "speciesKey": "froslass",
     "level": 49
    },
    {
-    "speciesKey": "maushold",
+    "speciesKey": "rotom",
     "level": 50
    },
    {
-    "speciesKey": "fidough",
+    "speciesKey": "yamask",
     "level": 51
    }
   ]
@@ -1699,18 +1699,18 @@
   "locationKey": "paldea-alfornada",
   "badgeName": "Paldea Badge 7",
   "badgeColor": "#e08040",
-  "spriteKey": "scientist",
+  "spriteKey": "tulip",
   "team": [
    {
-    "speciesKey": "dachsbun",
+    "speciesKey": "wobbuffet",
     "level": 57
    },
    {
-    "speciesKey": "smoliv",
+    "speciesKey": "girafarig",
     "level": 58
    },
    {
-    "speciesKey": "dolliv",
+    "speciesKey": "smoochum",
     "level": 59
    }
   ]
@@ -1723,18 +1723,18 @@
   "locationKey": "paldea-zapapico",
   "badgeName": "Paldea Badge 8",
   "badgeColor": "#40c0c0",
-  "spriteKey": "camper",
+  "spriteKey": "grusha",
   "team": [
    {
-    "speciesKey": "arboliva",
+    "speciesKey": "vanillish",
     "level": 64
    },
    {
-    "speciesKey": "squawkabilly",
+    "speciesKey": "vanilluxe",
     "level": 65
    },
    {
-    "speciesKey": "nacli",
+    "speciesKey": "cubchoo",
     "level": 66
    }
   ]

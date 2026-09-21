@@ -37,30 +37,30 @@
   "name": "Lance",
   "title": "Johto Champion",
   "region": "johto",
-  "spriteKey": "acetrainer",
+  "spriteKey": "lance",
   "team": [
    {
-    "speciesKey": "slowking",
+    "speciesKey": "dratini",
     "level": 70
    },
    {
-    "speciesKey": "misdreavus",
+    "speciesKey": "dragonair",
     "level": 71
    },
    {
-    "speciesKey": "unown",
+    "speciesKey": "dragonite",
     "level": 72
    },
    {
-    "speciesKey": "wobbuffet",
+    "speciesKey": "kingdra",
     "level": 73
    },
    {
-    "speciesKey": "girafarig",
+    "speciesKey": "dratini",
     "level": 74
    },
    {
-    "speciesKey": "pineco",
+    "speciesKey": "dragonair",
     "level": 75
    }
   ]
@@ -70,30 +70,30 @@
   "name": "Steven",
   "title": "Hoenn Champion",
   "region": "hoenn",
-  "spriteKey": "acetrainer",
+  "spriteKey": "steven",
   "team": [
    {
-    "speciesKey": "nosepass",
+    "speciesKey": "magnemite",
     "level": 70
    },
    {
-    "speciesKey": "skitty",
+    "speciesKey": "magneton",
     "level": 71
    },
    {
-    "speciesKey": "delcatty",
+    "speciesKey": "forretress",
     "level": 72
    },
    {
-    "speciesKey": "sableye",
+    "speciesKey": "steelix",
     "level": 73
    },
    {
-    "speciesKey": "mawile",
+    "speciesKey": "scizor",
     "level": 74
    },
    {
-    "speciesKey": "aron",
+    "speciesKey": "skarmory",
     "level": 75
    }
   ]
@@ -103,30 +103,30 @@
   "name": "Cynthia",
   "title": "Sinnoh Champion",
   "region": "sinnoh",
-  "spriteKey": "acetrainer",
+  "spriteKey": "cynthia",
   "team": [
    {
-    "speciesKey": "stunky",
+    "speciesKey": "dratini",
     "level": 70
    },
    {
-    "speciesKey": "skuntank",
+    "speciesKey": "dragonair",
     "level": 71
    },
    {
-    "speciesKey": "bronzor",
+    "speciesKey": "dragonite",
     "level": 72
    },
    {
-    "speciesKey": "bronzong",
+    "speciesKey": "kingdra",
     "level": 73
    },
    {
-    "speciesKey": "bonsly",
+    "speciesKey": "vibrava",
     "level": 74
    },
    {
-    "speciesKey": "mimeJR",
+    "speciesKey": "flygon",
     "level": 75
    }
   ]
@@ -136,30 +136,30 @@
   "name": "Alder",
   "title": "Unova Champion",
   "region": "unova",
-  "spriteKey": "acetrainer",
+  "spriteKey": "alder",
   "team": [
    {
-    "speciesKey": "leavanny",
+    "speciesKey": "caterpie",
     "level": 70
    },
    {
-    "speciesKey": "venipede",
+    "speciesKey": "metapod",
     "level": 71
    },
    {
-    "speciesKey": "whirlipede",
+    "speciesKey": "butterfree",
     "level": 72
    },
    {
-    "speciesKey": "scolipede",
+    "speciesKey": "weedle",
     "level": 73
    },
    {
-    "speciesKey": "cottonee",
+    "speciesKey": "kakuna",
     "level": 74
    },
    {
-    "speciesKey": "whimsicott",
+    "speciesKey": "beedrill",
     "level": 75
    }
   ]
@@ -169,30 +169,30 @@
   "name": "Diantha",
   "title": "Kalos Champion",
   "region": "kalos",
-  "spriteKey": "acetrainer",
+  "spriteKey": "diantha",
   "team": [
    {
-    "speciesKey": "tyrantrum",
+    "speciesKey": "clefairy",
     "level": 70
    },
    {
-    "speciesKey": "amaura",
+    "speciesKey": "clefable",
     "level": 71
    },
    {
-    "speciesKey": "aurorus",
+    "speciesKey": "jigglypuff",
     "level": 72
    },
    {
-    "speciesKey": "sylveon",
+    "speciesKey": "wigglytuff",
     "level": 73
    },
    {
-    "speciesKey": "hawlucha",
+    "speciesKey": "mrMime",
     "level": 74
    },
    {
-    "speciesKey": "dedenne",
+    "speciesKey": "cleffa",
     "level": 75
    }
   ]
@@ -202,30 +202,30 @@
   "name": "Kukui",
   "title": "Alola Champion",
   "region": "alola",
-  "spriteKey": "acetrainer",
+  "spriteKey": "kukui",
   "team": [
    {
-    "speciesKey": "sandygast",
+    "speciesKey": "caterpie",
     "level": 70
    },
    {
-    "speciesKey": "palossand",
+    "speciesKey": "pidgey",
     "level": 71
    },
    {
-    "speciesKey": "pyukumuku",
+    "speciesKey": "ekans",
     "level": 72
    },
    {
-    "speciesKey": "minior",
+    "speciesKey": "pikachu",
     "level": 73
    },
    {
-    "speciesKey": "komala",
+    "speciesKey": "sandshrew",
     "level": 74
    },
    {
-    "speciesKey": "turtonator",
+    "speciesKey": "clefairy",
     "level": 75
    }
   ]
@@ -235,30 +235,30 @@
   "name": "Leon",
   "title": "Galar Champion",
   "region": "galar",
-  "spriteKey": "acetrainer",
+  "spriteKey": "leon",
   "team": [
    {
-    "speciesKey": "hattrem",
+    "speciesKey": "caterpie",
     "level": 70
    },
    {
-    "speciesKey": "hatterene",
+    "speciesKey": "pidgey",
     "level": 71
    },
    {
-    "speciesKey": "impidimp",
+    "speciesKey": "ekans",
     "level": 72
    },
    {
-    "speciesKey": "morgrem",
+    "speciesKey": "pikachu",
     "level": 73
    },
    {
-    "speciesKey": "grimmsnarl",
+    "speciesKey": "sandshrew",
     "level": 74
    },
    {
-    "speciesKey": "obstagoon",
+    "speciesKey": "clefairy",
     "level": 75
    }
   ]
@@ -268,30 +268,30 @@
   "name": "Geeta",
   "title": "Paldea Champion",
   "region": "paldea",
-  "spriteKey": "acetrainer",
+  "spriteKey": "geeta",
   "team": [
    {
-    "speciesKey": "rellor",
+    "speciesKey": "abra",
     "level": 70
    },
    {
-    "speciesKey": "rabsca",
+    "speciesKey": "kadabra",
     "level": 71
    },
    {
-    "speciesKey": "flittle",
+    "speciesKey": "alakazam",
     "level": 72
    },
    {
-    "speciesKey": "espathra",
+    "speciesKey": "slowpoke",
     "level": 73
    },
    {
-    "speciesKey": "tinkatink",
+    "speciesKey": "slowbro",
     "level": 74
    },
    {
-    "speciesKey": "tinkatuff",
+    "speciesKey": "drowzee",
     "level": 75
    }
   ]

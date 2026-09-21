@@ -406,7 +406,13 @@ const LEAGUE_ANCHOR = { hoenn: 'hoenn-route-128' }
 const spread = (i, count, min, max) =>
   Math.round(min + (count <= 1 ? 0 : (i * (max - min)) / (count - 1)))
 const TRAINER_CLASSES = ['youngster', 'lass', 'bugCatcher', 'hiker', 'camper', 'beauty', 'coolTrainer', 'psychic', 'scientist', 'ace', 'blackbelt', 'swimmer']
-const LEADER_SPRITES = ['acetrainer', 'hiker', 'beauty', 'blackbelt', 'psychic', 'scientist', 'camper', 'swimmer', 'gentleman', 'juggler']
+// Showdown trainer sprite keys are the leader's name slugified ("Crasher Wake"
+// -> "crasherwake"). A few characters only have a generation-suffixed or
+// alternate sprite. Kanto is hand-curated and keeps its own gen3 keys.
+const TRAINER_SPRITE_OVERRIDES = { Clavell: 'clavell-s', Phoebe: 'phoebe-gen3', Drake: 'drake-gen3' }
+const trainerSpriteKey = (name) =>
+  TRAINER_SPRITE_OVERRIDES[name] ??
+  name.toLowerCase().replace(/['.]/g, '').replace(/\s+/g, '').replace(/[^a-z0-9-]/g, '')
 const BADGE_COLORS = ['#a0a0a0', '#4878b0', '#c8a030', '#48a048', '#b83028', '#a060c0', '#e08040', '#40c0c0']
 const GEN_STARTERS = {
   2: ['chikorita', 'cyndaquil', 'totodile'], 3: ['treecko', 'torchic', 'mudkip'],
@@ -446,6 +452,56 @@ const ELITE_FOUR = {
   galar: ['Marnie', 'Hop', 'Bede', 'Raihan'], paldea: ['Rika', 'Poppy', 'Hassel', 'Clavell'],
 }
 const CHAMPIONS = { johto: 'Lance', hoenn: 'Steven', sinnoh: 'Cynthia', unova: 'Alder', kalos: 'Diantha', alola: 'Kukui', galar: 'Leon', paldea: 'Geeta' }
+
+// Primary type(s) per leader, in the same order as GYM_LEADERS, so a generated
+// gym team actually matches its gym instead of being an arbitrary slice of the
+// region's species list.
+const GYM_TYPES = {
+  johto: [['Flying'], ['Bug'], ['Normal'], ['Ghost'], ['Fighting'], ['Steel'], ['Ice'], ['Dragon']],
+  hoenn: [['Rock'], ['Fighting'], ['Electric'], ['Fire'], ['Normal'], ['Flying'], ['Psychic'], ['Water']],
+  sinnoh: [['Rock'], ['Grass'], ['Fighting'], ['Water'], ['Ghost'], ['Steel'], ['Ice'], ['Electric']],
+  unova: [['Grass'], ['Normal'], ['Bug'], ['Electric'], ['Ground'], ['Flying'], ['Ice'], ['Dragon']],
+  kalos: [['Bug'], ['Rock'], ['Fighting'], ['Grass'], ['Electric'], ['Fairy'], ['Psychic'], ['Ice']],
+  alola: [['Normal'], ['Water'], ['Fire'], ['Grass'], ['Electric'], ['Ghost'], ['Fairy'], ['Ground']],
+  galar: [['Grass'], ['Water'], ['Fire'], ['Fighting'], ['Fairy'], ['Rock'], ['Dark'], ['Dragon']],
+  paldea: [['Bug'], ['Grass'], ['Electric'], ['Water'], ['Normal'], ['Ghost'], ['Psychic'], ['Ice']],
+}
+const E4_TYPES = {
+  johto: [['Psychic'], ['Poison'], ['Fighting'], ['Dark']],
+  hoenn: [['Dark'], ['Ghost'], ['Ice'], ['Dragon']],
+  sinnoh: [['Bug'], ['Ground'], ['Fire'], ['Psychic']],
+  unova: [['Ghost'], ['Dark'], ['Psychic'], ['Fighting']],
+  kalos: [['Fire'], ['Water'], ['Steel'], ['Dragon']],
+  alola: [['Fighting'], ['Rock'], ['Steel'], ['Flying']],
+  galar: [['Dark'], ['Fighting'], ['Fairy'], ['Dragon']],
+  paldea: [['Ground'], ['Steel'], ['Dragon'], ['Normal']],
+}
+// Champions are mixed teams, except where the ace type is clear.
+const CHAMPION_TYPES = {
+  johto: ['Dragon'],
+  hoenn: ['Steel'],
+  sinnoh: ['Dragon'],
+  unova: ['Bug'],
+  kalos: ['Fairy'],
+  alola: [],
+  galar: [],
+  paldea: ['Psychic'],
+}
+// Route trainers are themed by class so a Bug Catcher isn't fielding starters.
+const TRAINER_CLASS_TYPES = {
+  youngster: ['Normal'],
+  lass: ['Normal', 'Fairy'],
+  bugCatcher: ['Bug'],
+  hiker: ['Rock', 'Ground'],
+  camper: ['Normal', 'Grass'],
+  beauty: ['Normal', 'Fairy'],
+  coolTrainer: [],
+  psychic: ['Psychic'],
+  scientist: ['Electric'],
+  ace: [],
+  blackbelt: ['Fighting'],
+  swimmer: ['Water'],
+}
 
 const regionMaps = JSON.parse(fs.readFileSync(path.join(__dirname, 'region-maps.json'), 'utf8'))
 const realEncounters = fs.existsSync(path.join(__dirname, 'route-encounters.json'))
@@ -536,12 +592,66 @@ const speciesForGen = (gen) => {
   const [a, b] = GEN_RANGES[gen - 1]
   return byId.filter((s) => s.id >= a && s.id <= b).sort((x, y) => x.id - y.id)
 }
+// Trainer teams are drawn from every generation up to the region's own (a
+// regional dex, not just its new species) so themed teams have enough members:
+// Johto's Morty can field the Gastly line and Clair the Dratini line. Starter
+// lines and legendaries/mythicals are left out.
+const ALL_STARTERS = (() => {
+  const lines = new Set()
+  const addLine = (key) => {
+    if (lines.has(key)) return
+    lines.add(key)
+    for (const evolution of evolutionData[key] ?? []) addLine(evolution.into)
+  }
+  for (const key of [
+    ...Object.values(GEN_STARTERS).flat(),
+    'bulbasaur',
+    'charmander',
+    'squirtle',
+  ])
+    addLine(key)
+  return lines
+})()
+const teamPoolForGen = (gen) => {
+  const maxId = GEN_RANGES[gen - 1][1]
+  return byId.filter((s) => s.id <= maxId && s.catchRate > 3 && !ALL_STARTERS.has(s.key))
+}
 const encounterWeight = (s, idx) => (idx < 3 ? 20 : idx < 8 ? 12 : 6)
-const makeTeam = (list, offset, size, baseLevel, step = 1) =>
-  Array.from({ length: size }, (_, i) => ({
-    speciesKey: list[(offset + i) % list.length].key,
-    level: clampLevel(baseLevel + i * step),
-  }))
+/**
+ * Pick a themed team from a species pool. `types` biases the pool to matching
+ * Pokemon when there are enough of them (so a Flying gym fields birds and a
+ * Bug Catcher fields bugs); otherwise it falls back to the whole pool. Repeats
+ * are avoided until the pool is exhausted.
+ */
+const buildTeam = (list, types, size, baseLevel, step = 1, offset = 0) => {
+  if (list.length === 0) return []
+  let pool = list
+  if (types?.length) {
+    const typed = list.filter((species) => species.types?.some((type) => types.includes(type)))
+    if (typed.length >= Math.min(size, 3)) pool = typed
+  } else {
+    // Mixed trainers: one Pokemon of each primary type so the team is varied.
+    const distinct = [],
+      seenTypes = new Set()
+    for (const species of list) {
+      const primaryType = species.types?.[0]
+      if (primaryType && !seenTypes.has(primaryType)) {
+        seenTypes.add(primaryType)
+        distinct.push(species)
+      }
+    }
+    if (distinct.length >= size) pool = distinct
+  }
+  const team = [],
+    used = new Set()
+  for (let i = 0; i < size; i++) {
+    let entry = pool[(offset + i) % pool.length]
+    if (used.has(entry.key)) entry = pool.find((candidate) => !used.has(candidate.key)) ?? entry
+    used.add(entry.key)
+    team.push({ speciesKey: entry.key, level: clampLevel(baseLevel + i * step) })
+  }
+  return team
+}
 
 /**
  * Dynamic per-zone levelling: walk the region's routes in the order they
@@ -747,6 +857,7 @@ for (const region of REGIONS) {
   const starters = GEN_STARTERS[gen]
   const all = speciesForGen(gen)
   const wild = all.filter((s) => s.catchRate > 3 && !starters.includes(s.key))
+  const teamPool = teamPoolForGen(gen)
 
   // Resolve each gym to its town up-front so gate placement, the badge/team
   // data below and the league requirement all agree.
@@ -991,18 +1102,28 @@ for (const region of REGIONS) {
           ],
         },
       }
-      const pool = all.length ? all : wild
+      const pool = teamPool.length ? teamPool : wild
       // Town trainers follow the same 5-75 curve as the nearby routes.
       const townIndex = order.indexOf(node),
         townT = order.length <= 1 ? 0 : townIndex / (order.length - 1),
         townLevel = clampLevel(Math.round(LEVEL_MIN + townT * (WILD_LEVEL_MAX - LEVEL_MIN)))
       if (pool.length)
-        trainerData[id] = [0, 1, 2].map((i) => ({
-          id: `${id}_t${i + 1}`,
-          name: `${name} Trainer ${i + 1}`,
-          trainerClass: TRAINER_CLASSES[(gen * 3 + i) % TRAINER_CLASSES.length],
-          team: makeTeam(pool, i * 2, 2, Math.min(townLevel + i, LEVEL_MAX - 1), 1),
-        }))
+        trainerData[id] = [0, 1, 2].map((i) => {
+          const trainerClass = TRAINER_CLASSES[(gen * 3 + i) % TRAINER_CLASSES.length]
+          return {
+            id: `${id}_t${i + 1}`,
+            name: `${name} Trainer ${i + 1}`,
+            trainerClass,
+            team: buildTeam(
+              pool,
+              TRAINER_CLASS_TYPES[trainerClass],
+              2,
+              Math.min(townLevel + i, LEVEL_MAX - 1),
+              1,
+              i * 2
+            ),
+          }
+        })
     }
   }
 
@@ -1064,7 +1185,7 @@ for (const region of REGIONS) {
   regionObj.leagueLocationKey = leagueId
 
   // league: gyms spread across towns, then Elite Four + Champion
-  const roster = wild.length ? wild : all
+  const roster = teamPool.length ? teamPool : wild
   gymPlacements.forEach(({ id: gymId, leaderName, townNode, index }) => {
     gymData.push({
       id: gymId,
@@ -1074,13 +1195,14 @@ for (const region of REGIONS) {
       locationKey: locId(regionId, townNode),
       badgeName: `${name} Badge ${index + 1}`,
       badgeColor: BADGE_COLORS[index % BADGE_COLORS.length],
-      spriteKey: LEADER_SPRITES[(gen + index) % LEADER_SPRITES.length],
-      team: makeTeam(
+      spriteKey: trainerSpriteKey(leaderName),
+      team: buildTeam(
         roster,
-        index * 3,
+        GYM_TYPES[regionId]?.[index],
         3,
         clampLevel(spread(index, gymPlacements.length, GYM_LEVEL_MIN, GYM_LEVEL_MAX)),
-        1
+        1,
+        index * 3
       ),
     })
   })
@@ -1091,8 +1213,8 @@ for (const region of REGIONS) {
       name: memberName,
       title: `${name} Elite Four`,
       region: regionId,
-      spriteKey: 'acetrainer',
-      team: makeTeam(roster, 24 + i * 4, 5, clampLevel(E4_LEVEL_MIN + i), 1),
+      spriteKey: trainerSpriteKey(memberName),
+      team: buildTeam(roster, E4_TYPES[regionId]?.[i], 5, clampLevel(E4_LEVEL_MIN + i), 1, i * 2),
     })
   })
   champData.push({
@@ -1100,8 +1222,8 @@ for (const region of REGIONS) {
     name: CHAMPIONS[regionId],
     title: `${name} Champion`,
     region: regionId,
-    spriteKey: 'acetrainer',
-    team: makeTeam(roster, 44, 6, clampLevel(CHAMPION_LEVEL), 1),
+    spriteKey: trainerSpriteKey(CHAMPIONS[regionId]),
+    team: buildTeam(roster, CHAMPION_TYPES[regionId], 6, clampLevel(CHAMPION_LEVEL), 1, 0),
   })
 }
 

@@ -391,7 +391,13 @@ One-off scripts used to build the data JSON (not run during dev/build):
   The generated gates also rotate their flavour instead of repeating "15 battles
   at the parent": battle counts vary, and some routes ask for a Pokedex count
   (`caughtCount`) or a party level (`partyLevel`). Generated regions reveal any gym whose town is
-  unlocked; Kanto keeps its badge-order reveal. Raid Islands offer the region's generation of Pokémon that turn
+  unlocked; Kanto keeps its badge-order reveal. Gym, Elite Four and Champion
+  teams are type-themed from `GYM_TYPES` / `E4_TYPES` / `CHAMPION_TYPES` (drawn
+  from every generation up to the region's own, minus starter lines and
+  legendaries), and each leader gets a unique Showdown sprite key derived from
+  their name by `trainerSpriteKey`. Route trainers are themed by class via
+  `TRAINER_CLASS_TYPES`. Kanto's hand-curated trainer/leader data and its gen3
+  sprites are left alone. Raid Islands offer the region's generation of Pokémon that turn
   up on **no** region's wild routes and can't be reached by evolving one that
   does; that scan runs after every route is generated, so the pools are
   genuinely route-exclusive.

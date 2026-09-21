@@ -3056,25 +3056,7 @@
     "maxLevel": 70
    },
    {
-    "speciesKey": "porygon",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "omanyte",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "omastar",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "kabuto",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70

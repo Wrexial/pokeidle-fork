@@ -1,6 +1,6 @@
 // Split from the former assets/index.js — see tools/decompile/split-modules.mjs
 
-import { RAID_COOLDOWN_MS, breedShinyOdds, breedShinyParentOdds, daycareEggBattles, defaultCatchSettings, prestigeTokenReward, swarmBattleCount, swarmSpawnChance, wildMasterBallChance, wonderTradeShinyOdds } from '../data/config.js'
+import { RAID_COOLDOWN_MS, RAID_LEVEL_MAX, breedShinyOdds, breedShinyParentOdds, daycareEggBattles, defaultCatchSettings, prestigeTokenReward, swarmBattleCount, swarmSpawnChance, wildMasterBallChance, wonderTradeShinyOdds } from '../data/config.js'
 import { activeItems, pokeBalls } from '../data/items.js'
 import { elite4Data, encounterData, gymLeaderData, mapData, moveLearnsets, pokemonSpecies, regions } from '../data/gameData.js'
 import { createVolatileState } from './combat.js'
@@ -424,7 +424,7 @@ export function gameReducer(state, action) {
       return state.inRaid
         ? {
             ...nextState,
-            raidLevel: Math.min(state.raidLevel + 1, 100),
+            raidLevel: Math.min(state.raidLevel + 1, RAID_LEVEL_MAX),
           }
         : nextState
     }
@@ -1225,8 +1225,9 @@ export function gameReducer(state, action) {
           battleLog: [...state.battleLog, 'Your Pokemon were healed!'].slice(-50),
         }
       }
-      if (state.currentLocation === 'raidIsland') {
-        const returnLocation = state.preRaidLocation || 'palletTown',
+      if (state.inRaid || mapData[state.currentLocation]?.type === 'raid') {
+        const raidRegionEntry = regions.find((region) => region.id === state.raidRegion)?.entry,
+          returnLocation = state.preRaidLocation || raidRegionEntry || 'palletTown',
           routeKey = mapData[returnLocation]?.routeKey || 'route1',
           locationName = mapData[returnLocation]?.name || 'Pallet Town'
         return {
@@ -1241,6 +1242,7 @@ export function gameReducer(state, action) {
           currentRoute: routeKey,
           inRaid: !1,
           raidLegendary: null,
+          raidRegion: null,
           raidLevel: 0,
           preRaidLocation: null,
           battleLog: [

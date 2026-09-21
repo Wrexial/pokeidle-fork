@@ -19,6 +19,7 @@ const species = read('pokemon-species.json')
 const learnsets = read('possible-learnsets.json')
 const moveData = read('possible-moves.json')
 const evolutionData = read('evolution-data.json')
+const breedingData = read('breeding-data.json')
 const mapData = readRegionDir(path.join(DATA, 'map-data'))
 const encounterData = readRegionDir(path.join(DATA, 'encounter-data'))
 const regions = read('regions.json')
@@ -55,7 +56,23 @@ for (const [from, evolutions] of Object.entries(evolutionData)) {
 
 // --- obtainability -----------------------------------------------------------
 // The generator seeds every region's first route with its starters, so the
-// encounter tables already contain them.
+// encounter tables already contain them. Breeding a breedable species yields the
+// root of its evolution chain, so a species can also be obtained by breeding an
+// obtainable final form (this is why Raid Islands only hand out final stages).
+const preEvolutionMap = Object.fromEntries(
+  Object.entries(evolutionData).flatMap(([from, evolutions]) =>
+    evolutions.map((evolution) => [evolution.into, from])
+  )
+)
+const chainRoot = (speciesKey) => {
+  const seen = new Set([speciesKey])
+  let current = speciesKey
+  for (let next = preEvolutionMap[current]; next && !seen.has(next); next = preEvolutionMap[current]) {
+    current = next
+    seen.add(current)
+  }
+  return current
+}
 const obtainable = new Set()
 for (const bucket of Object.values(encounterData))
   for (const encounter of bucket.encounters ?? []) {
@@ -65,9 +82,15 @@ for (const bucket of Object.values(encounterData))
 let expanded = true
 while (expanded) {
   expanded = false
-  for (const key of [...obtainable])
+  for (const key of [...obtainable]) {
+    const breedData = breedingData[key]
+    if (breedData && !breedData.undiscovered) {
+      const root = chainRoot(key)
+      if (!obtainable.has(root)) (obtainable.add(root), (expanded = true))
+    }
     for (const evolution of evolutionData[key] ?? [])
       if (!obtainable.has(evolution.into)) (obtainable.add(evolution.into), (expanded = true))
+  }
 }
 for (const key of realSpecies) if (!obtainable.has(key)) fail(`species ${key} cannot be obtained`)
 

@@ -1829,25 +1829,7 @@
     "maxLevel": 70
    },
    {
-    "speciesKey": "aron",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "lileep",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "cradily",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "anorith",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70
@@ -1857,18 +1839,6 @@
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70
-   },
-   {
-    "speciesKey": "beldum",
-    "weight": 1,
-    "minLevel": 75,
-    "maxLevel": 75
-   },
-   {
-    "speciesKey": "metang",
-    "weight": 1,
-    "minLevel": 75,
-    "maxLevel": 75
    },
    {
     "speciesKey": "metagross",

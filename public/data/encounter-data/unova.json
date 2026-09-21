@@ -2085,19 +2085,7 @@
     "maxLevel": 75
    },
    {
-    "speciesKey": "pansage",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "simisage",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "pansear",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70
@@ -2109,19 +2097,7 @@
     "maxLevel": 70
    },
    {
-    "speciesKey": "panpour",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "simipour",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "munna",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70
@@ -2133,25 +2109,7 @@
     "maxLevel": 70
    },
    {
-    "speciesKey": "roggenrola",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "woobat",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "swoobat",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "drilbur",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70
@@ -2163,31 +2121,7 @@
     "maxLevel": 70
    },
    {
-    "speciesKey": "timburr",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "tympole",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "cottonee",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "whimsicott",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "yamask",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70
@@ -2199,31 +2133,13 @@
     "maxLevel": 70
    },
    {
-    "speciesKey": "tirtouga",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "carracosta",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70
    },
    {
-    "speciesKey": "archen",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "archeops",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "frillish",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70
@@ -2242,12 +2158,6 @@
    },
    {
     "speciesKey": "druddigon",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "larvesta",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70

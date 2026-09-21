@@ -2739,31 +2739,13 @@
   "name": "Sinnoh Raid Island",
   "encounters": [
    {
-    "speciesKey": "cranidos",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "rampardos",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70
    },
    {
-    "speciesKey": "shieldon",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "bastiodon",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "cherubi",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70

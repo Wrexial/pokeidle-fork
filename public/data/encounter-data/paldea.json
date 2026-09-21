@@ -1482,12 +1482,6 @@
     "maxLevel": 70
    },
    {
-    "speciesKey": "rellor",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "rabsca",
     "weight": 1,
     "minLevel": 70,
@@ -1507,12 +1501,6 @@
    },
    {
     "speciesKey": "glimmora",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "cetoddle",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70
@@ -1608,18 +1596,6 @@
     "maxLevel": 70
    },
    {
-    "speciesKey": "frigibax",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "arctibax",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "baxcalibur",
     "weight": 1,
     "minLevel": 70,
@@ -1710,49 +1686,7 @@
     "maxLevel": 70
    },
    {
-    "speciesKey": "fidough",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "shroodle",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "pawmi",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "tinkatink",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "tandemaus",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "charcadet",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "hatenna",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "greavard",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70
@@ -1764,37 +1698,7 @@
     "maxLevel": 70
    },
    {
-    "speciesKey": "vigoroth",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "dreepy",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "tinkatuff",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "flamigo",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "pawmo",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "toedscool",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70
@@ -1812,43 +1716,13 @@
     "maxLevel": 70
    },
    {
-    "speciesKey": "wiglett",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "petilil",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "capsakid",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "finizen",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70
    },
    {
-    "speciesKey": "crabrawler",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "sableye",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "sandygast",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70
@@ -1896,31 +1770,7 @@
     "maxLevel": 70
    },
    {
-    "speciesKey": "glimmet",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "cufant",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "bramblin",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "orthworm",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "varoom",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70
@@ -1945,12 +1795,6 @@
    },
    {
     "speciesKey": "passimian",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "slakoth",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70

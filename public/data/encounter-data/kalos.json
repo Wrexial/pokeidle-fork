@@ -1589,19 +1589,7 @@
   "name": "Kalos Raid Island",
   "encounters": [
    {
-    "speciesKey": "tyrunt",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "tyrantrum",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "amaura",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70
@@ -1614,12 +1602,6 @@
    },
    {
     "speciesKey": "carbink",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "pumpkaboo",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70

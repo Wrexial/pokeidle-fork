@@ -1203,12 +1203,6 @@
     "maxLevel": 70
    },
    {
-    "speciesKey": "wimpod",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "golisopod",
     "weight": 1,
     "minLevel": 70,
@@ -1246,18 +1240,6 @@
    },
    {
     "speciesKey": "drampa",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "jangmo-o",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "hakamo-o",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70

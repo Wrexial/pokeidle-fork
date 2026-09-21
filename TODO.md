@@ -27,72 +27,66 @@ working order, and the numbered sections as the details.
    just a scrolling log line.
 4. **#26 README + GitHub "About"** — S · ★★★★ — the project's front door is
    missing; high value for how complete the game is.
-5. **#33 Caught / event QOL indicators** — S–M · ★★★★ — a caught badge plus a
+5. **#30 Caught / event QOL indicators** — S–M · ★★★★ — a caught badge plus a
    reusable toast system that unblocks a dozen other notifications.
 6. **#15 Save management & sharing** — S–M · ★★★★ — export/import protects
    the one save players care about; slots are a bonus.
-7. **#34 Living-dex capture mode** — S · ★★★½ — small catch-mode addition
+7. **#31 Living-dex capture mode** — S · ★★★½ — small catch-mode addition
    that makes living-dex runs possible.
-8. **#27 Raid wipe should eject you** — S · ★★★½ — consistency fix across the
-   non-Kanto raids.
-9. **#2b Natures** (slice of #2) — S–M · ★★★½ — cheap battle depth that also
+8. **#2b Natures** (slice of #2) — S–M · ★★★½ — cheap battle depth that also
    feeds daycare (#3).
-10. **#14 Lightweight test suite** — S–M · ★★★½ (dev value) — pays off every
-    future change.
-11. **#1 Healing items / Potions** — S · ★★★ — a money sink and tactical
+9. **#14 Lightweight test suite** — S–M · ★★★½ (dev value) — pays off every
+   future change.
+10. **#1 Healing items / Potions** — S · ★★★ — a money sink and tactical
     option; no new data files.
-12. **#12 Dex-completion rewards** — S · ★★★ — gives the Shiny Charm grind a
+11. **#12 Dex-completion rewards** — S · ★★★ — gives the Shiny Charm grind a
     payoff.
-13. **#21 Unlock Tokens endgame** — S · ★★★ — removes a dead banner once all
+12. **#21 Unlock Tokens endgame** — S · ★★★ — removes a dead banner once all
     regions are open.
-14. **#35 Bias raids toward unseen** — S · ★★★ — makes the legendary dex
-    completable.
-15. **#5 Daily / periodic events** — S–M · ★★★ — cheap engagement loop.
-16. **#16 More ideas (grab bag)** — mostly S · ★★★ — mine the quick ones
+13. **#5 Daily / periodic events** — S–M · ★★★ — cheap engagement loop.
+14. **#16 More ideas (grab bag)** — mostly S · ★★★ — mine the quick ones
     (achievement rewards, release/selling, map QoL, notifications).
 
 ### Tier 2 — High impact, worth the effort (medium–large)
 
-17. **#7 Offline / idle progress** — M–L · ★★★★★ — the biggest missing *idle*
+15. **#7 Offline / idle progress** — M–L · ★★★★★ — the biggest missing *idle*
     feature; a returning player currently gets nothing.
-18. **#8 Pokémon management / IV checker** — M · ★★★★½ — IVs are generated
+16. **#8 Pokémon management / IV checker** — M · ★★★★½ — IVs are generated
     but invisible; box search, nicknames and lock are all high-use.
-19. **#20 Honey/Repel DexNav hunting** — M · ★★★★½ — turns the existing
+17. **#20 Honey/Repel DexNav hunting** — M · ★★★★½ — turns the existing
     shiny chain into a usable system.
-20. **#24 Move data pass** — M–L · ★★★★½ — ~290 moves currently do nothing;
+18. **#24 Move data pass** — M–L · ★★★★½ — ~290 moves currently do nothing;
     do it in slices (healing/screens/setup first).
-21. **#25 Battle engine pass** — M–L · ★★★★½ — pairs with #24; AI + healing +
+19. **#25 Battle engine pass** — M–L · ★★★★½ — pairs with #24; AI + healing +
     multi-hit first.
-22. **#2a Abilities** (with **#2c Held items**) — L · ★★★★★ / ★★★★ — the
+20. **#2a Abilities** (with **#2c Held items**) — L · ★★★★★ / ★★★★ — the
     biggest remaining battle-depth feature; natures (#2b) are already in
     Tier 1.
-23. **#30 More region areas (DLC, caves, POIs)** — L · ★★★★½ — real content
+21. **#28 More region areas (DLC, caves, POIs)** — L · ★★★★½ — real content
     (Crown Tundra, Kitakami, landmark caves); data-heavy.
-24. **#18 Better settings** — M · ★★★★ — centralises QOL toggles and the
+22. **#18 Better settings** — M · ★★★★ — centralises QOL toggles and the
     export/import from #15.
 
 ### Tier 3 — Medium effort, medium gain
 
-25. **#3 Daycare inheritance** — M · ★★★
-26. **#6 Friendship / happiness** — M · ★★★
-27. **#9 Move tutor / TMs** — M · ★★★
-28. **#11 NPC gifts & static encounters** — M · ★★★
-29. **#17 Pokéball variants** — M · ★★★
-30. **#29 Gender-specific sprites** — M · ★★★ (assets are half-there)
-31. **#31 Minigames** — M–L · ★★★ (small per minigame once one exists)
-32. **#4 In-battle Mega evolution** — M–L · ★★★
+23. **#3 Daycare inheritance** — M · ★★★
+24. **#6 Friendship / happiness** — M · ★★★
+25. **#9 Move tutor / TMs** — M · ★★★
+26. **#11 NPC gifts & static encounters** — M · ★★★
+27. **#17 Pokéball variants** — M · ★★★
+28. **#27 Gender-specific sprites** — M · ★★★ (assets are half-there)
+29. **#29 Minigames** — M–L · ★★★ (small per minigame once one exists)
+30. **#4 In-battle Mega evolution** — M–L · ★★★
 
 ### Tier 4 — Cheap but minor
 
-33. **#28 Raid pools fully evolved** — S · ★★½
-34. **#32 Cap raid scaling at 80** — S · ★★½
-35. **#36 Deoxys forms interchangeable** — S · ★★½ — form-completeness fix;
+31. **#32 Deoxys forms interchangeable** — S · ★★½ — form-completeness fix;
     other form-changers already do this.
 
 ### Tier 5 — Big and low-return, defer
 
-36. **#10 Weather & terrain** — M · ★★½ (nice depth, no urgency)
-37. **#19 Online sync** — L · ★★★ — the project's first backend; needs a
+32. **#10 Weather & terrain** — M · ★★½ (nice depth, no urgency)
+33. **#19 Online sync** — L · ★★★ — the project's first backend; needs a
     design doc and real ops for modest player value today.
 
 ---
@@ -582,64 +576,7 @@ long/technical to double as one.
 
 Effort: **small**.
 
-## 27. Wiping out of a raid should eject you from the raid zone
-
-`COMPLETE_HEALING` only sends the player back to `preRaidLocation` when
-`currentLocation === 'raidIsland'` — Kanto's hand-curated raid. Every other
-region's raid is a separate location (`johto-raid`, `hoenn-raid`, `sinnoh-raid`,
-…), so a full party wipe there heals the party but leaves the player standing on
-the raid island: the raid keeps going and the legendary can be re-fought
-immediately.
-
-- [ ] Treat any `type: 'raid'` location (or `state.inRaid`) as "in a raid" in
-      `COMPLETE_HEALING`, returning to `preRaidLocation` and clearing the raid
-      state (`inRaid` / `raidLegendary` / `raidLevel`) for every region, not
-      just Kanto.
-- [ ] Confirm the raid cooldown / `raidCooldownEnd` still prevents an instant
-      re-entry after the loss (see `RAID_COOLDOWN_MS` in
-      `src/data/config.js`).
-- [ ] Make sure the last-party-member faint goes through the same path
-      (`START_HEALING` from the game loop), so a wipe — not just a single faint
-      — is what triggers the ejection.
-
-Relevant code: `COMPLETE_HEALING` / `START_RAID` / `END_RAID`
-(`src/game/reducer.js`), the `START_HEALING` trigger in `src/hooks.js`, and the
-`type: 'raid'` locations in `public/data/map-data/*.json`.
-
-Effort: **small**.
-
-## 28. Raid encounters should only offer fully evolved Pokemon
-
-A region's `raidPool` is built from "species that turn up on no wild route and
-can't be reached by evolving something that does"
-(`tools/generate-regions.cjs`), but that can include a base or middle stage
-(e.g. a starter line whose only route appearance is its final form). Now that
-breeding exists a player can catch the final form and breed down for the
-"smaller" stages, so a raid handing out the unevolved form is a worse reward —
-and can leave the player with the baby before they have the parent.
-
-- [ ] Filter each region's `raidPool` through the existing `isFinalEvolution`
-      helper (already used by team generation in `generate-regions.cjs`) so
-      raids only list final stages.
-- [ ] Keep raid-only alternate forms and legendaries regardless (they have no
-      evolution line), and be careful with species that **can't breed**
-      (genderless / legendary) — don't drop their base form if that would
-      orphan the dex entry.
-- [ ] Re-run `tools/generate-regions.cjs` and `npm run validate`, then refresh
-      `public/encounter-index.html` (`tools/generate-encounter-index.cjs`), so
-      `regions.json`, the map/encounter data and the index all agree.
-- [ ] Confirm consumers still get a non-empty pool: `raidPoolFor`
-      (`src/components/town-map.js`), the roaming-legendary roll
-      (`src/game/progression.js`) and the Raid Island panel
-      (`src/components/location-panel.js`).
-
-Relevant code: the raid-pool block in `tools/generate-regions.cjs`
-(`routable` / `routableExpanded` / `isFinalEvolution`), `regions.json`
-`raidPool`, and `src/game/reducer.js` (`START_RAID`).
-
-Effort: **small** (data regeneration; no engine change).
-
-## 29. Gender-specific sprites
+## 27. Gender-specific sprites
 
 Gender now exists (`genderForPokemon` in `src/game/breeding.js`, shown in the
 stats panel) but sprites still ignore it: `getPokemonSpriteUrl(spriteId, isBack,
@@ -683,14 +620,14 @@ manifest loader (`src/data/gameData.js`), and
 
 Effort: **medium** (mostly asset plumbing; assets are partly there already).
 
-## 30. More region areas (DLC, caves, POIs)
+## 28. More region areas (DLC, caves, POIs)
 
 The maps are built from PokéAPI/Bulbapedia **towns + numbered routes** only
 (`tools/scrape-region-maps.cjs`), then `tools/generate-regions.cjs` turns them
 into 21-52 locations per region (Kanto 49, Hoenn 52, Unova 45, …). That leaves
 three gaps:
 
-### 30a. DLC / expansion areas
+### 28a. DLC / expansion areas
 
 Later generations' DLC regions are simply missing, so those Pokemon have no
 native route and fall into a Raid Island pool instead:
@@ -712,7 +649,7 @@ native route and fall into a Raid Island pool instead:
 - [ ] Re-check each region's `raidPool` after adding them — species that now
       have a native route must drop out of the raid pool.
 
-### 30b. More ordinary areas
+### 28b. More ordinary areas
 
 The scraper only keeps towns and routes, so caves, forests, tunnels, ruins,
 towers, lakes/seas and safari zones are absent unless hand-added. `EXTRA_MAP_AREAS`
@@ -725,7 +662,7 @@ currently carries only Johto's Bell Tower / Whirl Islands / Mt. Silver.
       everything non-town as "Route 🌿", and the battle background comes from
       the `ROUTE_BACKGROUND_RULES` / dominant-type heuristic.
 
-### 30c. Points of interest (POIs)
+### 28c. Points of interest (POIs)
 
 Non-route nodes that offer a service or flavour: a Daycare stop, a Move
 Tutor / TM vendor, a fishing spot, a berry patch, a raid den, a static
@@ -747,9 +684,9 @@ Relevant code: `tools/scrape-region-maps.cjs` (`MANUAL_BRIDGES`),
 `ROUTE_BACKGROUND_RULES`, raid pools), `public/data/map-data/*.json`, and the map
 UI (`src/components/map-node.js`, `town-map.js`, `location-panel.js`).
 
-Effort: **large** (data-heavy; 30a/30b mostly data, 30c a small feature).
+Effort: **large** (data-heavy; 28a/28b mostly data, 28c a small feature).
 
-## 31. Minigames (fishing, companion care, and more)
+## 29. Minigames (fishing, companion care, and more)
 
 Every activity is currently automatic: battles resolve on a timer, catches roll
 from `autoCatch`/catch rules, breeding and swarms advance on battle counts. A
@@ -757,7 +694,7 @@ few optional minigames would give the player something hands-on without
 disturbing the idle loop. They'd all sit alongside it — the player opts in, and
 the idle game keeps running if they don't.
 
-### 31a. Fishing minigame
+### 29a. Fishing minigame
 
 Encounter data already keeps water/fishing methods in the scrape but the game
 discards the method, so "fishing" is only flavour. Build a real one on water
@@ -774,7 +711,7 @@ routes:
 - [ ] Persist water-only encounter pools (or re-derive them from the scraper
       `method`) so casting targets the right species.
 
-### 31b. Companion / tamagotchi care
+### 29b. Companion / tamagotchi care
 
 The Daycare is already a passive version of this (two parents → egg). A
 hands-on companion that you feed/play with/rest would be the active counterpart
@@ -792,7 +729,7 @@ and would give the friendship idea (#6) a purpose:
 - [ ] Keep it optional and non-punishing (the game is idle) — neglect should
       pause bonuses, not damage the Pokémon.
 
-### 31c. More minigame ideas (pick from these)
+### 29c. More minigame ideas (pick from these)
 
 Minigames can share one modal + reducer pattern (`type: 'minigame'` phase or a
 small self-contained state slice), so adding a second is much cheaper than the
@@ -819,33 +756,7 @@ precedent. New state goes in `initialGameState`, `context.js` and
 Effort: **small per minigame, medium–large as a feature** (each is a
 self-contained modal + state slice; fishing and care are the two biggest).
 
-## 32. Cap raid scaling at level 80
-
-Raid encounters start at the legendary's pool level (`regions.json` `raidPool`
-levels are 70 or 75, set by `raidLevel(entry)` in
-`tools/generate-regions.cjs`), but the level then climbs by one for every
-cleared raid battle and is only capped at 100: see the `PHASE_IDLE` case in
-`src/game/reducer.js` (`raidLevel: Math.min(state.raidLevel + 1, 100)`). A long
-raid session can therefore outlevel the whole 5-75 curve.
-
-- [ ] Lower the cap to **80** in `PHASE_IDLE` (or a named `RAID_LEVEL_MAX`
-      constant in `src/data/config.js` rather than the magic `100`).
-- [ ] Keep the starting levels (70/75) as they are, so there is still a ramp.
-- [ ] Decide whether raid catches should track the current `raidLevel` —
-      `CATCH_POKEMON` currently forces `catchLevel = 60` for any raid, so a
-      capped-at-80 raid still hands out a Lv.60 Pokemon. Left alone or made to
-      follow `raidLevel`.
-- [ ] Check the level shows correctly on the Raid Island panel
-      (`src/components/location-panel.js`) and that Battle Tower / endless
-      scaling is unaffected (it is a separate system).
-
-Relevant code: `PHASE_IDLE` / `START_RAID` / `CATCH_POKEMON`
-(`src/game/reducer.js`), the raid enemy build in `src/hooks.js`, and
-`raidLevel()` in `tools/generate-regions.cjs`.
-
-Effort: **small**.
-
-## 33. Caught / event QOL indicators
+## 30. Caught / event QOL indicators
 
 The save already tracks `pokedexSeen`, `pokedexCaught` and `shinyCaught`, and
 the Pokédex + `route-encounter-grid` mark what you own — but the live battle
@@ -854,7 +765,7 @@ screen doesn't, and the only transient on-screen message is the hard-coded
 else scrolls past in the battle log. Two small QOL wins, plus a reusable hook
 for custom events.
 
-### 33a. "Already caught" indicator
+### 30a. "Already caught" indicator
 
 - [ ] Add a ball / ✓ badge to the enemy's name row in `enemy-info-box.js` when
       `pokedexCaught.includes(pokemon.speciesKey)`, so you can tell at a glance
@@ -864,7 +775,7 @@ for custom events.
 - [ ] Maybe flag the battle sprite too (a small marker), and keep it off for
       trainer teams / raids where the species isn't the reward.
 
-### 33b. Event toasts ("You found X!", "You caught Y!")
+### 30b. Event toasts ("You found X!", "You caught Y!")
 
 Generalise `LevelUpNotification` into a small notification queue so events can
 surface without staring at the log:
@@ -897,7 +808,7 @@ screen.
 
 Effort: **small–medium**.
 
-## 34. Living-dex capture mode
+## 31. Living-dex capture mode
 
 Auto-catch modes are `always` / `shiny_only` / `level_threshold` /
 `pokedex_new` (`shouldAutoCatch` in `src/game/catching.js`, options in
@@ -931,44 +842,7 @@ Relevant code: `shouldAutoCatch` / `getCatchRule` (`src/game/catching.js`,
 
 Effort: **small**.
 
-## 35. Bias raids toward Pokemon you haven't seen
-
-Entering a Raid Island picks the legendary **uniformly** from the region's
-`raidPool`:
-
-```js
-const legendary = pool[Math.floor(Math.random() * pool.length)]
-```
-
-in `town-map.js` (`travelTo` / `START_RAID`). `resolveRoamer`
-(`src/game/progression.js`) filters to uncaught legendaries but still picks
-uniformly, so with the big pools (Paldea has 80+, Unova 42) the same few
-species keep showing up and completing the legendary dex is a lottery.
-
-- [ ] Bias the pick toward **unseen** species first (`!pokedexSeen.includes`),
-      then uncaught (`!pokedexCaught.includes`), falling back to the whole pool
-      so a seen/caught one is never impossible (for shiny hunting / re-catches).
-- [ ] Implement it as one helper (e.g. `pickRaidLegendary(pool, pokedexSeen,
-      pokedexCaught)` in `src/game/progression.js`) and use it for both the Raid
-      Island (`town-map.js`) and the roaming legendary (`resolveRoamer`), so the
-      two stay consistent.
-- [ ] Prefer weighting over hard filtering if the pool should keep a chance to
-      repeat (e.g. seen ×1, unseen ×5), but a strict "unseen until exhausted"
-      pass is simplest and matches the request — decide which.
-- [ ] Surface it in the UI: sort the Raid Island encounter grid
-      (`location-panel.js`) unseen-first and mark new ones (ties into #33's
-      caught/new indicator).
-- [ ] Keep shiny odds untouched — this only changes which species appears, not
-      the shiny roll.
-
-Relevant code: `travelTo` / `START_RAID` (`src/components/town-map.js`,
-`src/game/reducer.js`), `raidPoolFor` (`src/data/gameData.js`),
-`resolveRoamer` (`src/game/progression.js`), and `state.pokedexSeen` /
-`state.pokedexCaught`.
-
-Effort: **small**.
-
-## 36. Deoxys forms should be freely interchangeable
+## 32. Deoxys forms should be freely interchangeable
 
 Deoxys is four species (`deoxys`, `deoxys-a`, `deoxys-d`, `deoxys-s`), but
 `evolution-data.json` only has **one-way** Lv.30 evolutions from the base form
@@ -1022,9 +896,12 @@ Effort: **small** (data). Larger if the shared form-change UI is built.
 
 ## Recently done (context)
 
-Status conditions + drain moves; Battle Tower + endless scaling; roaming
-legendaries; route swarms; Wonder Trade (with the hidden shiny-for-shiny perk);
-Records panel; Daycare (gender/egg groups/shiny odds); Achievements; DexNav
-shiny chain; region Unlock Tokens; region Prestige; working evolution items +
-Link Cable; Mew / MissingNo / Master Ball secrets; and the bulk of the earlier
-data/audit fixes (encounters, forms, learnsets, trainers, marts, maps, sprites).
+Raid QOL (a wipe ejects you from the raid zone, pools only offer final stages,
+level scaling caps at 80, and the legendary pick favours species you haven't
+seen); Cosmoem evolves; status conditions + drain moves; Battle Tower + endless
+scaling; roaming legendaries; route swarms; Wonder Trade (with the hidden
+shiny-for-shiny perk); Records panel; Daycare (gender/egg groups/shiny odds);
+Achievements; DexNav shiny chain; region Unlock Tokens; region Prestige; working
+evolution items + Link Cable; Mew / MissingNo / Master Ball secrets; and the
+bulk of the earlier data/audit fixes (encounters, forms, learnsets, trainers,
+marts, maps, sprites).

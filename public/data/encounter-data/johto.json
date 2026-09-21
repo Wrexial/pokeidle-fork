@@ -1666,37 +1666,13 @@
     "maxLevel": 70
    },
    {
-    "speciesKey": "togetic",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "natu",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "xatu",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70
    },
    {
-    "speciesKey": "aipom",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "unown",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "porygon2",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70

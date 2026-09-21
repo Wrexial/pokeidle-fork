@@ -278,7 +278,12 @@ export function useGameLoop() {
               currentGameState.currentRoute
             ),
             spawningPokemonData =
-              resolveRoamer(regionId, currentGameState.pokedexCaught, completedGenerationSet) ??
+              resolveRoamer(
+                regionId,
+                currentGameState.pokedexSeen,
+                currentGameState.pokedexCaught,
+                completedGenerationSet
+              ) ??
               resolvePokemonEncounter(
                 routeEncounterData,
                 activeModifierMultipliers,

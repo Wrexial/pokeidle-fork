@@ -598,6 +598,7 @@ const realEncounters = fs.existsSync(path.join(__dirname, 'route-encounters.json
   : {}
 const species = read('pokemon-species.json')
 const evolutionData = read('evolution-data.json')
+const breedingData = read('breeding-data.json')
 const mapData = readRegionDir(path.join(DATA, 'map-data'))
 const encounterData = readRegionDir(path.join(DATA, 'encounter-data'))
 const trainerData = read('trainer-data.json')
@@ -719,6 +720,62 @@ const totalBaseStats = (species) =>
 // generation doesn't shift.
 const isFinalEvolution = (speciesKey) =>
   !(evolutionData[speciesKey] || []).some((evolution) => !evolution.form)
+// Raids only want genuinely final stages: base/middle stages are now obtainable
+// by breeding a caught final form, so handing them out is a worse reward. This
+// is stricter than `isFinalEvolution`, which counts Megas (unflagged battle
+// forms) as real evolutions and would drop Mega-only finals such as Aerodactyl
+// or Metagross — the sole source of their line. Ignore evolutions into
+// alternate/battle forms (id > 1025, or `form`), and treat a small evolution
+// cycle (e.g. the Armorouge <-> Ceruledge version-counterpart entries) as final
+// so the line always keeps at least one raid member.
+const realEvolutions = (speciesKey) =>
+  (evolutionData[speciesKey] || []).filter(
+    (evolution) =>
+      !evolution.form &&
+      species[evolution.into] &&
+      species[evolution.into].id <= 1025
+  )
+const canReachByEvolution = (from, target, seen = new Set()) => {
+  if (from === target) return true
+  if (seen.has(from)) return false
+  seen.add(from)
+  return realEvolutions(from).some((evolution) =>
+    canReachByEvolution(evolution.into, target, seen)
+  )
+}
+const isRaidFinalEvolution = (speciesKey) =>
+  !realEvolutions(speciesKey).some(
+    (evolution) => !canReachByEvolution(evolution.into, speciesKey)
+  )
+const preEvolutionMap = Object.fromEntries(
+  Object.entries(evolutionData).flatMap(([from, evolutions]) =>
+    evolutions.map((evolution) => [evolution.into, from])
+  )
+)
+// Mirrors `getPreEvolutionChain` (`src/game/pokemon.js`) so we know exactly what
+// the game's Daycare would hatch from a given Pokemon.
+const breedChainRoot = (speciesKey) => {
+  const seen = new Set([speciesKey])
+  let current = speciesKey
+  for (let next = preEvolutionMap[current]; next && !seen.has(next); next = preEvolutionMap[current]) {
+    current = next
+    seen.add(current)
+  }
+  return current
+}
+// Legendary/undiscovered lines can't breed down, and alternate/battle forms are
+// kept whole, so only breedable base/middle stages are candidates for removal.
+const staysInRaidPool = (entry) =>
+  entry.legendary ||
+  entry.id > 1025 ||
+  breedingData[entry.key]?.undiscovered ||
+  isRaidFinalEvolution(entry.key)
+// A Raid Island only hands out the stages left after breeding a caught final
+// form: breeding yields the chain root, which can then evolve forward, so drop
+// any stage reachable that way. If a chain is cyclic (Palafin-H <-> Palafin)
+// breeding gives the wrong root, so keep the stage rather than orphan it.
+const raidPoolSpecies = (entries, breedReachable) =>
+  entries.filter((entry) => staysInRaidPool(entry) || !breedReachable.has(entry.key))
 /**
  * Pick a battle background for a route from its name, falling back to its
  * dominant wild type. Generated regions have no hand-authored mapping, so
@@ -1647,9 +1704,9 @@ const paldeaExtrasFor = (regionId) =>
         .filter((key) => !routable.has(key) && species[key])
         .map((key) => ({ key, ...species[key] }))
     : []
-for (const pending of pendingRaids) {
-  const { regionObj, all: regionSpecies, raidId, raidNodeName } = pending
-  const poolByKey = new Map()
+const raidCandidates = (pending) => {
+  const { regionObj, all: regionSpecies } = pending,
+    poolByKey = new Map()
   for (const entry of [
     ...regionSpecies.filter(
       (entry) => !routable.has(entry.key) && !paldeaDroppedSpecies.has(entry.key)
@@ -1658,7 +1715,32 @@ for (const pending of pendingRaids) {
     ...paldeaExtrasFor(regionObj.id),
   ])
     if (!poolByKey.has(entry.key)) poolByKey.set(entry.key, entry)
-  regionObj.raidPool = [...poolByKey.values()].map((entry) => ({
+  return [...poolByKey.values()]
+}
+// Species the player can end up breeding: everything route-caught plus every
+// final kept on any Raid Island. Breeding one yields its chain root, so any
+// stage produced that way is safe to leave off the Raid Islands.
+const globalBreedRoots = new Set()
+const addBreedRoot = (key) => {
+  const data = breedingData[key]
+  if (data && !data.undiscovered) globalBreedRoots.add(breedChainRoot(key))
+}
+for (const key of routable) addBreedRoot(key)
+for (const pending of pendingRaids)
+  for (const entry of raidCandidates(pending)) if (staysInRaidPool(entry)) addBreedRoot(entry.key)
+const breedReachable = new Set(globalBreedRoots)
+let breedGrew = true
+while (breedGrew) {
+  breedGrew = false
+  for (const key of [...breedReachable])
+    for (const evolution of evolutionData[key] ?? [])
+      if (!breedReachable.has(evolution.into))
+        (breedReachable.add(evolution.into), (breedGrew = true))
+}
+
+for (const pending of pendingRaids) {
+  const { regionObj, raidId, raidNodeName } = pending
+  regionObj.raidPool = raidPoolSpecies(raidCandidates(pending), breedReachable).map((entry) => ({
     speciesKey: entry.key,
     level: raidLevel(entry),
   }))

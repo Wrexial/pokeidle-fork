@@ -311,20 +311,41 @@ export function shinyChainMultiplier(speciesKey, chain) {
 }
 
 /**
+ * Pick a raid legendary from a region's pool, preferring species the player has
+ * not seen yet, then ones they have not caught, and finally the whole pool — so
+ * a seen/caught species is never impossible to raid again (shiny hunting).
+ * @param {{ speciesKey: string, level: number }[]} pool
+ * @param {string[]} pokedexSeen
+ * @param {string[]} pokedexCaught
+ * @returns {{ speciesKey: string, level: number } | null}
+ */
+export function pickRaidLegendary(pool, pokedexSeen, pokedexCaught) {
+  if (pool.length === 0) return null
+  const seen = new Set(pokedexSeen),
+    caught = new Set(pokedexCaught),
+    unseen = pool.filter((entry) => !seen.has(entry.speciesKey)),
+    uncaught = pool.filter((entry) => !caught.has(entry.speciesKey)),
+    candidates = unseen.length > 0 ? unseen : uncaught.length > 0 ? uncaught : pool
+  return candidates[Math.floor(Math.random() * candidates.length)]
+}
+
+/**
  * Roll a region's roaming legendary: one of its uncaught Raid Island
  * legendaries. Returns null most of the time (or when they are all caught).
  * @param {string} regionId
+ * @param {string[]} pokedexSeen
  * @param {string[]} pokedexCaught
  * @param {Set<number>} completedGenerationSet
  * @returns {{ species: Species, speciesKey: string, level: number, isShiny: boolean, isRoamer: boolean } | null}
  */
-export function resolveRoamer(regionId, pokedexCaught, completedGenerationSet) {
+export function resolveRoamer(regionId, pokedexSeen, pokedexCaught, completedGenerationSet) {
   const region = regions.find((candidate) => candidate.id === regionId),
     candidates = (region?.raidPool ?? []).filter(
       (entry) => pokemonSpecies[entry.speciesKey]?.legendary && !pokedexCaught.includes(entry.speciesKey)
     )
   if (candidates.length === 0 || Math.random() >= roamerEncounterChance) return null
-  const entry = candidates[Math.floor(Math.random() * candidates.length)]
+  const entry = pickRaidLegendary(candidates, pokedexSeen, pokedexCaught)
+  if (!entry) return null
   return {
     species: pokemonSpecies[entry.speciesKey],
     speciesKey: entry.speciesKey,

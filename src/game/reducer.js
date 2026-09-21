@@ -1,6 +1,6 @@
 // Split from the former assets/index.js — see tools/decompile/split-modules.mjs
 
-import { RAID_COOLDOWN_MS, breedShinyOdds, breedShinyParentOdds, daycareEggBattles, defaultCatchSettings, prestigeTokenReward, swarmBattleCount, swarmSpawnChance, wonderTradeShinyOdds } from '../data/config.js'
+import { RAID_COOLDOWN_MS, breedShinyOdds, breedShinyParentOdds, daycareEggBattles, defaultCatchSettings, prestigeTokenReward, swarmBattleCount, swarmSpawnChance, wildMasterBallChance, wonderTradeShinyOdds } from '../data/config.js'
 import { activeItems, pokeBalls } from '../data/items.js'
 import { elite4Data, encounterData, gymLeaderData, mapData, moveLearnsets, pokemonSpecies, regions } from '../data/gameData.js'
 import { createVolatileState } from './combat.js'
@@ -230,6 +230,8 @@ export function gameReducer(state, action) {
       let activeEffects = state.activeEffects,
         swarm = state.swarm,
         daycare = state.daycare,
+        inventory = state.inventory,
+        secretNotice = null,
         swarmNotice = null
       if (
         event.type === 'faint' &&
@@ -264,13 +266,24 @@ export function gameReducer(state, action) {
           daycare.progress < daycareEggBattles
         )
           daycare = { ...daycare, progress: daycare.progress + 1 }
+        // A very rare Master Ball find.
+        if (Math.random() < wildMasterBallChance) {
+          inventory = {
+            ...inventory,
+            masterball: (inventory.masterball ?? 0) + 1,
+          }
+          secretNotice = 'You found a Master Ball!'
+        }
       }
       const syncedState = syncActivePokemonIntoParty({
         ...state,
         phase: newPhase,
         pendingEvents: remainingEvents,
         battleEvents: [...state.battleEvents, event],
-        battleLog: swarmNotice ? [...battleLog, swarmNotice].slice(-50) : battleLog,
+        battleLog:
+          swarmNotice || secretNotice
+            ? [...battleLog, ...[swarmNotice, secretNotice].filter(Boolean)].slice(-50)
+            : battleLog,
         playerPokemon,
         enemyPokemon,
         wildBattlesWon,
@@ -278,6 +291,7 @@ export function gameReducer(state, action) {
         activeEffects,
         swarm,
         daycare,
+        inventory,
       })
       if (
         event.type === 'victory' ||

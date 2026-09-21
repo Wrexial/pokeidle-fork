@@ -1,7 +1,7 @@
 // Split from the former assets/index.js — see tools/decompile/split-modules.mjs
 
 import React from 'react'
-import { trainerClassPayouts, missingnoEncounterChance } from './data/config.js'
+import { trainerClassPayouts, missingnoEncounterChance, mewUnderTruckChance } from './data/config.js'
 import { ballOrder } from './data/items.js'
 import { MOBILE_BREAKPOINT } from './data/ui.js'
 import { completedGenerations, encounterData, mapData, pokemonSpecies, trainerData } from './data/gameData.js'
@@ -113,6 +113,49 @@ export function useGameLoop() {
                   type: 'ADD_LOG',
                   payload: {
                     message: '?! A glitchy shape flickers before you... MissingNo.!',
+                  },
+                }))
+              return
+            }
+            // The truck by the S.S. Anne: a hidden Mew.
+            if (
+              currentGameState.currentLocation === 'vermilionCity' &&
+              pokemonSpecies.mew &&
+              Math.random() < mewUnderTruckChance
+            ) {
+              const mewLevel = Math.max(5, currentGameState.playerPokemon.level),
+                mewStats = calculatePokemonStats(pokemonSpecies.mew, mewLevel, generateIVs())
+              ;(dispatch({
+                type: 'START_ENCOUNTER',
+                payload: {
+                  enemy: {
+                    speciesKey: 'mew',
+                    name: pokemonSpecies.mew.name,
+                    types: pokemonSpecies.mew.types,
+                    level: mewLevel,
+                    currentHp: mewStats.hp,
+                    maxHp: mewStats.hp,
+                    attack: mewStats.attack,
+                    defense: mewStats.defense,
+                    spAttack: mewStats.spAttack,
+                    spDefense: mewStats.spDefense,
+                    speed: mewStats.speed,
+                    moves: resolvePokemonMoves('mew', mewLevel),
+                    isPlayer: !1,
+                    isShiny: !1,
+                  },
+                },
+              }),
+                dispatch({
+                  type: 'MARK_SEEN',
+                  payload: {
+                    speciesKey: 'mew',
+                  },
+                }),
+                dispatch({
+                  type: 'ADD_LOG',
+                  payload: {
+                    message: 'Something stirs under the truck... Mew!',
                   },
                 }))
               return

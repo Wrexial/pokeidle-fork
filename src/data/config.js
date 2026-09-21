@@ -21,6 +21,11 @@ export const roamerEncounterChance = 1 / 1500
 /** Chance per turn that a fighting roamer flees. */
 export const roamerFleeChance = 0.2
 
+/** Spell chance that a Vermilion City battle is the "Mew under the truck". */
+export const mewUnderTruckChance = 1 / 10000
+/** Hidden chance a wild win turns up a Master Ball. */
+export const wildMasterBallChance = 1 / 50000
+
 /** Battles two daycare parents need to produce an egg. */
 export const daycareEggBattles = 50
 /** Shiny odds for a bred egg (1 in 4096), improved if a parent is shiny. */

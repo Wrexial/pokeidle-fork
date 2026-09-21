@@ -929,7 +929,7 @@ Pokemon data pass (form transformations are reversible/all-to-all — Deoxys,
 Rotom, Therian formes, Kyurem, Necrozma, Calyrex, Zygarde, Basculegion/Indeedee
 gender forms — plus corrected stats and the missing Alolan Ninetales Fairy
 type); Cosmoem evolves; raid QOL (a wipe ejects you from the raid zone, pools
-only offer final stages, level scaling caps at 80, and the legendary pick
+only offer final stages, level scaling caps at 100, and the legendary pick
 favours species you haven't seen); status conditions + drain moves; Battle
 Tower + endless scaling; roaming legendaries; route swarms; Wonder Trade (with
 the hidden shiny-for-shiny perk); Records panel; Daycare (gender/egg

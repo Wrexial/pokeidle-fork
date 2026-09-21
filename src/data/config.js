@@ -34,7 +34,7 @@ export const breedShinyParentOdds = 512
 
 export let RAID_COOLDOWN_MS = 1 * 1e3
 /** Raid legendary levels ramp from the pool level (70/75) up to this cap. */
-export const RAID_LEVEL_MAX = 80
+export const RAID_LEVEL_MAX = 100
 
 export let defaultCatchSettings = {
     enabled: !0,

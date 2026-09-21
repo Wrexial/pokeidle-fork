@@ -7,6 +7,7 @@ import { moveCategoryIcons } from '../data/moves.js'
 import { locationImages } from '../data/ui.js'
 import { completedGenerations, mapData, moveData, pokemonSpecies, speciesKeysByGeneration } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
+import { shinyOddsForCompletedGenerations } from '../game/progression.js'
 import { getBossTrainerSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, getTrainerSpriteUrl } from '../game/pokemon.js'
 import { EnemyInfoBox } from './enemy-info-box.js'
 import { PlayerInfoBox } from './player-info-box.js'
@@ -24,7 +25,11 @@ export function BattleScene() {
     { state, dispatch } = useGame(),
     { playerPokemon, enemyPokemon, battleEvents } = state,
     completedGenerationSet = completedGenerations(state.pokedexCaught),
-    caughtSpeciesSet = new Set(state.pokedexCaught)
+    caughtSpeciesSet = new Set(state.pokedexCaught),
+    shinyCharmOdds = shinyOddsForCompletedGenerations(
+      completedGenerationSet.size,
+      speciesKeysByGeneration.length
+    )
   if (state.phase === 'evolving') return jsx(EvolutionScene, {})
   if (state.phase === 'healing') return jsx(HealingScene, {})
   if (!playerPokemon) return null
@@ -143,7 +148,9 @@ export function BattleScene() {
                         }),
                         jsx('span', {
                           children:
-                            'Shiny odds: 1/8192, or 1/4096 for a generation whose Pokedex is complete',
+                            completedGenerationSet.size > 0
+                              ? `Shiny odds: 1/8192, or 1/${shinyCharmOdds} for a completed generation (${completedGenerationSet.size}/${speciesKeysByGeneration.length} charms)`
+                              : 'Shiny odds: 1/8192 - complete a generation to unlock its Shiny Charm',
                         }),
                         jsx('div', {
                           className: 'info-shiny-generations',

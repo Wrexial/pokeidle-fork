@@ -1,8 +1,8 @@
 // Split from src/game/logic.js — see tools/decompile/split-logic.mjs
 
-import { shinyFullOddsChance, shinyWithCharmChance } from '../data/config.js'
+import { shinyCharmMinOddsChance, shinyFullOddsChance, shinyWithCharmChance } from '../data/config.js'
 import { activeItems, evolutionItems, pokeBalls } from '../data/items.js'
-import { encounterData, isSpeciesCharmed, mapData, moveData, pokemonSpecies } from '../data/gameData.js'
+import { GENERATION_DEX_RANGES, encounterData, isSpeciesCharmed, mapData, moveData, pokemonSpecies } from '../data/gameData.js'
 import { calculateExpYield, calculatePokemonStats, getLevelUpResults, getPerfectIVs, resolvePokemonMoves } from './pokemon.js'
 
 /**
@@ -204,12 +204,39 @@ export function tickBattleCounters(effects) {
 }
 
 /**
- * @param {boolean} [isDexComplete]
+ * @param {number} [odds]
  * @returns {boolean}
  */
-export function checkShinyOdds(isDexComplete = !1) {
-  const odds = isDexComplete ? shinyWithCharmChance : shinyFullOddsChance
+export function checkShinyOdds(odds = shinyFullOddsChance) {
   return Math.floor(Math.random() * odds) === 0
+}
+
+/**
+ * Shiny odds once `completedGenerationCount` generations are complete. The
+ * first completed generation gives the 2x charm rate, and each further one
+ * keeps improving it until every generation is done.
+ * @param {number} completedGenerationCount
+ * @param {number} totalGenerations
+ * @returns {number}
+ */
+export function shinyOddsForCompletedGenerations(completedGenerationCount, totalGenerations) {
+  if (completedGenerationCount <= 0) return shinyFullOddsChance
+  const progress = totalGenerations > 1 ? (completedGenerationCount - 1) / (totalGenerations - 1) : 1,
+    ratio = Math.pow(shinyCharmMinOddsChance / shinyWithCharmChance, progress)
+  return Math.max(shinyCharmMinOddsChance, Math.round(shinyWithCharmChance * ratio))
+}
+
+/**
+ * Shiny odds for `speciesKey`: full odds unless its own generation's dex is
+ * complete, otherwise the rate scaled by how many generations are done.
+ * @param {string} speciesKey
+ * @param {Set<number>} completedGenerationSet
+ * @returns {number}
+ */
+export function shinyOddsForSpecies(speciesKey, completedGenerationSet) {
+  return isSpeciesCharmed(speciesKey, completedGenerationSet)
+    ? shinyOddsForCompletedGenerations(completedGenerationSet.size, GENERATION_DEX_RANGES.length)
+    : shinyFullOddsChance
 }
 
 /**
@@ -261,7 +288,7 @@ export function resolvePokemonEncounter(encounterData, modifiers, completedGener
         species: pokemonSpecies[encounter.speciesKey],
         speciesKey: encounter.speciesKey,
         level,
-        isShiny: checkShinyOdds(isSpeciesCharmed(encounter.speciesKey, completedGenerationSet)),
+        isShiny: checkShinyOdds(shinyOddsForSpecies(encounter.speciesKey, completedGenerationSet)),
       }
     }
   const fallback = weightedEncounters[weightedEncounters.length - 1]
@@ -269,7 +296,7 @@ export function resolvePokemonEncounter(encounterData, modifiers, completedGener
     species: pokemonSpecies[fallback.speciesKey],
     speciesKey: fallback.speciesKey,
     level: fallback.minLevel,
-    isShiny: checkShinyOdds(isSpeciesCharmed(fallback.speciesKey, completedGenerationSet)),
+    isShiny: checkShinyOdds(shinyOddsForSpecies(fallback.speciesKey, completedGenerationSet)),
   }
 }
 

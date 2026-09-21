@@ -4,12 +4,12 @@ import React from 'react'
 import { trainerClassPayouts } from './data/config.js'
 import { ballOrder } from './data/items.js'
 import { MOBILE_BREAKPOINT } from './data/ui.js'
-import { completedGenerations, encounterData, isSpeciesCharmed, mapData, pokemonSpecies, trainerData } from './data/gameData.js'
+import { completedGenerations, encounterData, mapData, pokemonSpecies, trainerData } from './data/gameData.js'
 import { useGame } from './game/context.js'
 import { attemptCatch, selectAutoCatchBall, selectBestBall, shouldAutoCatch } from './game/catching.js'
 import { createVolatileState, resolveBattleTurn } from './game/combat.js'
 import { calculatePokemonStats, generateIVs, getPerfectIVs, resolvePokemonMoves } from './game/pokemon.js'
-import { awardExperience, checkShinyOdds, resolveActiveModifiers, resolvePokemonEncounter } from './game/progression.js'
+import { awardExperience, checkShinyOdds, resolveActiveModifiers, resolvePokemonEncounter, shinyOddsForSpecies } from './game/progression.js'
 
 /**
  * @param {string} text
@@ -90,7 +90,7 @@ export function useGameLoop() {
                   speed: stats.speed,
                   moves,
                   isPlayer: !1,
-                  isShiny: checkShinyOdds(isSpeciesCharmed(teamMember.speciesKey, completedGenerationSet)),
+                  isShiny: checkShinyOdds(shinyOddsForSpecies(teamMember.speciesKey, completedGenerationSet)),
                 }
               })
             dispatch({
@@ -130,7 +130,7 @@ export function useGameLoop() {
                 speed: stats.speed,
                 moves,
                 isPlayer: !1,
-                isShiny: checkShinyOdds(isSpeciesCharmed(raidSpeciesKey, completedGenerationSet)),
+                isShiny: checkShinyOdds(shinyOddsForSpecies(raidSpeciesKey, completedGenerationSet)),
               }
             ;(dispatch({
               type: 'START_ENCOUNTER',

@@ -72,8 +72,49 @@ export const wildSpeciesKeys = [
   ),
 ]
 
-/** Number of distinct species obtainable as wild encounters (Pokédex goal). */
+/** Number of distinct species obtainable as wild encounters (global Pokédex goal). */
 export const catchableSpeciesCount = wildSpeciesKeys.length
+
+/**
+ * Wild species per region — the regional Pokédex goal. Each region's routes and
+ * Raid Island are its `mapData` locations, whose `routeKey` points at the
+ * matching `encounterData` bucket, so this partitions `wildSpeciesKeys` by
+ * region.
+ * @type {Record<string, string[]>}
+ */
+export const wildSpeciesKeysByRegion = (() => {
+  /** @type {Record<string, Set<string>>} */
+  const byRegion = {}
+  for (const location of Object.values(mapData)) {
+    const bucket = location.routeKey ? encounterData[location.routeKey] : null
+    if (!bucket) continue
+    const region = location.region ?? 'kanto'
+    ;(byRegion[region] || (byRegion[region] = new Set()))
+    for (const encounter of bucket.encounters) byRegion[region].add(encounter.speciesKey)
+  }
+  return Object.fromEntries(
+    Object.entries(byRegion).map(([region, speciesSet]) => [region, [...speciesSet]])
+  )
+})()
+
+/** Distinct wild species count per region (regional Shiny Charm goal). */
+export const catchableSpeciesCountByRegion = Object.fromEntries(
+  Object.entries(wildSpeciesKeysByRegion).map(([region, speciesKeys]) => [region, speciesKeys.length])
+)
+
+/**
+ * Whether every wild species of `regionId` has been caught — the regional
+ * Shiny Charm condition.
+ * @param {string} regionId
+ * @param {string[]} pokedexCaught
+ * @returns {boolean}
+ */
+export function isRegionalDexComplete(regionId, pokedexCaught) {
+  const requiredSpecies = wildSpeciesKeysByRegion[regionId]
+  if (!requiredSpecies || requiredSpecies.length === 0) return false
+  const caught = new Set(pokedexCaught)
+  return requiredSpecies.every((speciesKey) => caught.has(speciesKey))
+}
 
 /** @type {[string, Species][]} */
 export let pokedexIndexes = Object.entries(pokemonSpecies).sort(

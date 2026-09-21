@@ -152,7 +152,7 @@ in `GameLayout`) dispatches `DEBUG_MAX_LEVEL` when the Konami code
 | --- | --- |
 | `index.html` | Entry point; wires the two scripts above. |
 | `src/main.js` | App entry: mounts `App` (plus `AppContent`). Renders the root. |
-| `src/data/gameData.js` | Loads and re-exports all game JSON + derived maps. |
+| `src/data/gameData.js` | Loads and re-exports all game JSON + derived maps (including the per-region wild-species sets behind the regional Shiny Charm). |
 | `src/data/items.js` | Items/balls/evolution items, mart stock, bag categories. |
 | `src/data/config.js` | Tuning constants: shiny odds, cooldowns, starters/legendaries, save keys. |
 | `src/data/moves.js` | Type chart + move-category icons. |

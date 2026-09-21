@@ -5,7 +5,7 @@ import { createPortal } from 'react-dom'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { moveCategoryIcons } from '../data/moves.js'
 import { locationImages } from '../data/ui.js'
-import { catchableSpeciesCount, mapData, moveData, pokemonSpecies } from '../data/gameData.js'
+import { catchableSpeciesCountByRegion, isRegionalDexComplete, mapData, moveData, pokemonSpecies, regions } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { getBossTrainerSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, getTrainerSpriteUrl } from '../game/pokemon.js'
 import { EnemyInfoBox } from './enemy-info-box.js'
@@ -23,8 +23,10 @@ export function BattleScene() {
     [showSettings, setShowSettings] = React.useState(!1),
     { state, dispatch } = useGame(),
     { playerPokemon, enemyPokemon, battleEvents } = state,
-    catchableCount = catchableSpeciesCount,
-    isDexComplete = state.pokedexCaught.length >= catchableCount
+    currentRegion = mapData[state.currentLocation]?.region ?? state.startRegion,
+    catchableCount = catchableSpeciesCountByRegion[currentRegion] ?? 0,
+    isDexComplete = isRegionalDexComplete(currentRegion, state.pokedexCaught),
+    regionName = regions.find((region) => region.id === currentRegion)?.name ?? currentRegion
   if (state.phase === 'evolving') return jsx(EvolutionScene, {})
   if (state.phase === 'healing') return jsx(HealingScene, {})
   if (!playerPokemon) return null
@@ -154,7 +156,7 @@ export function BattleScene() {
                             children: [
                               'Catch all ',
                               catchableCount,
-                              ' Pokemon to unlock the Shiny Charm (2x shiny rate)',
+                              ` ${regionName} Pokemon to unlock the Shiny Charm (2x shiny rate)`,
                             ],
                           }),
                       ],

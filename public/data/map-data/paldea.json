@@ -22,18 +22,6 @@
    "items": [
     {
      "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
     }
    ]
   }
@@ -90,18 +78,6 @@
    "items": [
     {
      "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
     }
    ]
   }
@@ -137,18 +113,6 @@
    "items": [
     {
      "itemId": "pokeball"
-    },
-    {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
     }
    ]
   }
@@ -184,16 +148,8 @@
      "itemId": "pokeball"
     },
     {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
+     "itemId": "greatball",
+     "unlockWildBattlesWon": 50
     }
    ]
   }
@@ -349,16 +305,8 @@
      "itemId": "pokeball"
     },
     {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
+     "itemId": "greatball",
+     "unlockWildBattlesWon": 50
     }
    ]
   }
@@ -402,16 +350,8 @@
      "itemId": "pokeball"
     },
     {
-     "itemId": "greatball"
-    },
-    {
-     "itemId": "ultraball"
-    },
-    {
-     "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
+     "itemId": "greatball",
+     "unlockWildBattlesWon": 50
     }
    ]
   }
@@ -449,13 +389,11 @@
      "itemId": "greatball"
     },
     {
-     "itemId": "ultraball"
+     "itemId": "ultraball",
+     "unlockWildBattlesWon": 150
     },
     {
      "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
     }
    ]
   }
@@ -502,13 +440,11 @@
      "itemId": "greatball"
     },
     {
-     "itemId": "ultraball"
+     "itemId": "ultraball",
+     "unlockWildBattlesWon": 150
     },
     {
      "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
     }
    ]
   }
@@ -551,13 +487,11 @@
      "itemId": "greatball"
     },
     {
-     "itemId": "ultraball"
+     "itemId": "ultraball",
+     "unlockWildBattlesWon": 150
     },
     {
      "itemId": "repel"
-    },
-    {
-     "itemId": "honey"
     }
    ]
   }

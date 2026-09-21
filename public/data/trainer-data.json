@@ -898,44 +898,36 @@
   {
    "id": "johto-new-bark-town_t1",
    "name": "Johto Trainer 1",
-   "trainerClass": "coolTrainer",
+   "trainerClass": "bugCatcher",
    "team": [
     {
-     "speciesKey": "dragonite",
+     "speciesKey": "caterpie",
      "level": 5
-    },
-    {
-     "speciesKey": "tyranitar",
-     "level": 6
     }
    ]
   },
   {
    "id": "johto-new-bark-town_t2",
    "name": "Johto Trainer 2",
-   "trainerClass": "psychic",
+   "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "alakazam",
+     "speciesKey": "arcanine",
      "level": 6
-    },
-    {
-     "speciesKey": "slowpoke",
-     "level": 7
     }
    ]
   },
   {
    "id": "johto-new-bark-town_t3",
    "name": "Johto Trainer 3",
-   "trainerClass": "scientist",
+   "trainerClass": "blackbelt",
    "team": [
     {
-     "speciesKey": "voltorb",
+     "speciesKey": "machoke",
      "level": 7
     },
     {
-     "speciesKey": "electrode",
+     "speciesKey": "machamp",
      "level": 8
     }
    ]
@@ -945,44 +937,36 @@
   {
    "id": "johto-cherrygrove-city_t1",
    "name": "Johto Trainer 1",
-   "trainerClass": "coolTrainer",
+   "trainerClass": "camper",
    "team": [
     {
-     "speciesKey": "dragonite",
+     "speciesKey": "pidgey",
      "level": 9
-    },
-    {
-     "speciesKey": "tyranitar",
-     "level": 10
     }
    ]
   },
   {
    "id": "johto-cherrygrove-city_t2",
    "name": "Johto Trainer 2",
-   "trainerClass": "psychic",
+   "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "alakazam",
+     "speciesKey": "magnemite",
      "level": 10
-    },
-    {
-     "speciesKey": "slowpoke",
-     "level": 11
     }
    ]
   },
   {
    "id": "johto-cherrygrove-city_t3",
    "name": "Johto Trainer 3",
-   "trainerClass": "scientist",
+   "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "voltorb",
+     "speciesKey": "raticate",
      "level": 11
     },
     {
-     "speciesKey": "electrode",
+     "speciesKey": "spearow",
      "level": 12
     }
    ]
@@ -992,44 +976,36 @@
   {
    "id": "johto-violet-city_t1",
    "name": "Johto Trainer 1",
-   "trainerClass": "coolTrainer",
+   "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "dragonite",
+     "speciesKey": "abra",
      "level": 16
-    },
-    {
-     "speciesKey": "tyranitar",
-     "level": 17
     }
    ]
   },
   {
    "id": "johto-violet-city_t2",
    "name": "Johto Trainer 2",
-   "trainerClass": "psychic",
+   "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "alakazam",
+     "speciesKey": "poliwag",
      "level": 17
-    },
-    {
-     "speciesKey": "slowpoke",
-     "level": 18
     }
    ]
   },
   {
    "id": "johto-violet-city_t3",
    "name": "Johto Trainer 3",
-   "trainerClass": "scientist",
+   "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "voltorb",
+     "speciesKey": "diglett",
      "level": 18
     },
     {
-     "speciesKey": "electrode",
+     "speciesKey": "dugtrio",
      "level": 19
     }
    ]
@@ -1039,44 +1015,36 @@
   {
    "id": "johto-azalea-town_t1",
    "name": "Johto Trainer 1",
-   "trainerClass": "coolTrainer",
+   "trainerClass": "blackbelt",
    "team": [
     {
-     "speciesKey": "dragonite",
+     "speciesKey": "mankey",
      "level": 22
-    },
-    {
-     "speciesKey": "tyranitar",
-     "level": 23
     }
    ]
   },
   {
    "id": "johto-azalea-town_t2",
    "name": "Johto Trainer 2",
-   "trainerClass": "psychic",
+   "trainerClass": "bugCatcher",
    "team": [
     {
-     "speciesKey": "alakazam",
+     "speciesKey": "butterfree",
      "level": 23
-    },
-    {
-     "speciesKey": "slowpoke",
-     "level": 24
     }
    ]
   },
   {
    "id": "johto-azalea-town_t3",
    "name": "Johto Trainer 3",
-   "trainerClass": "scientist",
+   "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "voltorb",
+     "speciesKey": "snorlax",
      "level": 24
     },
     {
-     "speciesKey": "electrode",
+     "speciesKey": "crobat",
      "level": 25
     }
    ]
@@ -1086,30 +1054,22 @@
   {
    "id": "johto-goldenrod-city_t1",
    "name": "Johto Trainer 1",
-   "trainerClass": "coolTrainer",
+   "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "dragonite",
+     "speciesKey": "pidgey",
      "level": 26
-    },
-    {
-     "speciesKey": "tyranitar",
-     "level": 27
     }
    ]
   },
   {
    "id": "johto-goldenrod-city_t2",
    "name": "Johto Trainer 2",
-   "trainerClass": "psychic",
+   "trainerClass": "camper",
    "team": [
     {
-     "speciesKey": "alakazam",
+     "speciesKey": "pidgeot",
      "level": 27
-    },
-    {
-     "speciesKey": "slowpoke",
-     "level": 28
     }
    ]
   },
@@ -1133,14 +1093,14 @@
   {
    "id": "johto-ecruteak-city_t1",
    "name": "Johto Trainer 1",
-   "trainerClass": "coolTrainer",
+   "trainerClass": "camper",
    "team": [
     {
-     "speciesKey": "dragonite",
+     "speciesKey": "pidgey",
      "level": 35
     },
     {
-     "speciesKey": "tyranitar",
+     "speciesKey": "pidgeotto",
      "level": 36
     }
    ]
@@ -1148,14 +1108,14 @@
   {
    "id": "johto-ecruteak-city_t2",
    "name": "Johto Trainer 2",
-   "trainerClass": "psychic",
+   "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "alakazam",
+     "speciesKey": "magnemite",
      "level": 36
     },
     {
-     "speciesKey": "slowpoke",
+     "speciesKey": "magneton",
      "level": 37
     }
    ]
@@ -1163,15 +1123,19 @@
   {
    "id": "johto-ecruteak-city_t3",
    "name": "Johto Trainer 3",
-   "trainerClass": "scientist",
+   "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "voltorb",
+     "speciesKey": "raticate",
      "level": 37
     },
     {
-     "speciesKey": "electrode",
+     "speciesKey": "spearow",
      "level": 38
+    },
+    {
+     "speciesKey": "fearow",
+     "level": 39
     }
    ]
   }
@@ -1180,14 +1144,14 @@
   {
    "id": "johto-olivine-city_t1",
    "name": "Johto Trainer 1",
-   "trainerClass": "coolTrainer",
+   "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "dragonite",
+     "speciesKey": "pikachu",
      "level": 43
     },
     {
-     "speciesKey": "tyranitar",
+     "speciesKey": "raichu",
      "level": 44
     }
    ]
@@ -1195,14 +1159,14 @@
   {
    "id": "johto-olivine-city_t2",
    "name": "Johto Trainer 2",
-   "trainerClass": "psychic",
+   "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "alakazam",
+     "speciesKey": "pidgeot",
      "level": 44
     },
     {
-     "speciesKey": "slowpoke",
+     "speciesKey": "rattata",
      "level": 45
     }
    ]
@@ -1210,15 +1174,19 @@
   {
    "id": "johto-olivine-city_t3",
    "name": "Johto Trainer 3",
-   "trainerClass": "scientist",
+   "trainerClass": "camper",
    "team": [
     {
-     "speciesKey": "voltorb",
+     "speciesKey": "raticate",
      "level": 45
     },
     {
-     "speciesKey": "electrode",
+     "speciesKey": "spearow",
      "level": 46
+    },
+    {
+     "speciesKey": "fearow",
+     "level": 47
     }
    ]
   }
@@ -1227,14 +1195,14 @@
   {
    "id": "johto-cianwood-city_t1",
    "name": "Johto Trainer 1",
-   "trainerClass": "coolTrainer",
+   "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "dragonite",
+     "speciesKey": "psyduck",
      "level": 50
     },
     {
-     "speciesKey": "tyranitar",
+     "speciesKey": "golduck",
      "level": 51
     }
    ]
@@ -1242,14 +1210,14 @@
   {
    "id": "johto-cianwood-city_t2",
    "name": "Johto Trainer 2",
-   "trainerClass": "psychic",
+   "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "alakazam",
+     "speciesKey": "nidoqueen",
      "level": 51
     },
     {
-     "speciesKey": "slowpoke",
+     "speciesKey": "nidoking",
      "level": 52
     }
    ]
@@ -1257,15 +1225,19 @@
   {
    "id": "johto-cianwood-city_t3",
    "name": "Johto Trainer 3",
-   "trainerClass": "scientist",
+   "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "voltorb",
+     "speciesKey": "slowbro",
      "level": 52
     },
     {
-     "speciesKey": "electrode",
+     "speciesKey": "drowzee",
      "level": 53
+    },
+    {
+     "speciesKey": "hypno",
+     "level": 54
     }
    ]
   }
@@ -1274,45 +1246,61 @@
   {
    "id": "johto-mahogany-town_t1",
    "name": "Johto Trainer 1",
-   "trainerClass": "coolTrainer",
+   "trainerClass": "bugCatcher",
    "team": [
     {
-     "speciesKey": "dragonite",
+     "speciesKey": "caterpie",
      "level": 56
     },
     {
-     "speciesKey": "tyranitar",
+     "speciesKey": "metapod",
      "level": 57
+    },
+    {
+     "speciesKey": "butterfree",
+     "level": 58
     }
    ]
   },
   {
    "id": "johto-mahogany-town_t2",
    "name": "Johto Trainer 2",
-   "trainerClass": "psychic",
+   "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "alakazam",
+     "speciesKey": "arcanine",
      "level": 57
     },
     {
-     "speciesKey": "slowpoke",
+     "speciesKey": "gyarados",
      "level": 58
+    },
+    {
+     "speciesKey": "snorlax",
+     "level": 59
     }
    ]
   },
   {
    "id": "johto-mahogany-town_t3",
    "name": "Johto Trainer 3",
-   "trainerClass": "scientist",
+   "trainerClass": "blackbelt",
    "team": [
     {
-     "speciesKey": "voltorb",
+     "speciesKey": "machoke",
      "level": 58
     },
     {
-     "speciesKey": "electrode",
+     "speciesKey": "machamp",
      "level": 59
+    },
+    {
+     "speciesKey": "hitmonlee",
+     "level": 60
+    },
+    {
+     "speciesKey": "hitmonchan",
+     "level": 61
     }
    ]
   }
@@ -1321,45 +1309,61 @@
   {
    "id": "johto-blackthorn-city_t1",
    "name": "Johto Trainer 1",
-   "trainerClass": "coolTrainer",
+   "trainerClass": "beauty",
    "team": [
     {
-     "speciesKey": "dragonite",
+     "speciesKey": "pidgey",
      "level": 62
     },
     {
-     "speciesKey": "tyranitar",
+     "speciesKey": "pidgeotto",
      "level": 63
+    },
+    {
+     "speciesKey": "pidgeot",
+     "level": 64
     }
    ]
   },
   {
    "id": "johto-blackthorn-city_t2",
    "name": "Johto Trainer 2",
-   "trainerClass": "psychic",
+   "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "alakazam",
+     "speciesKey": "arcanine",
      "level": 63
     },
     {
-     "speciesKey": "slowpoke",
+     "speciesKey": "gyarados",
      "level": 64
+    },
+    {
+     "speciesKey": "snorlax",
+     "level": 65
     }
    ]
   },
   {
    "id": "johto-blackthorn-city_t3",
    "name": "Johto Trainer 3",
-   "trainerClass": "scientist",
+   "trainerClass": "lass",
    "team": [
     {
-     "speciesKey": "voltorb",
+     "speciesKey": "raticate",
      "level": 64
     },
     {
-     "speciesKey": "electrode",
+     "speciesKey": "spearow",
      "level": 65
+    },
+    {
+     "speciesKey": "fearow",
+     "level": 66
+    },
+    {
+     "speciesKey": "clefairy",
+     "level": 67
     }
    ]
   }
@@ -1368,30 +1372,22 @@
   {
    "id": "hoenn-littleroot-town_t1",
    "name": "Hoenn Trainer 1",
-   "trainerClass": "ace",
+   "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "sandshrew",
      "level": 5
-    },
-    {
-     "speciesKey": "dragonite",
-     "level": 6
     }
    ]
   },
   {
    "id": "hoenn-littleroot-town_t2",
    "name": "Hoenn Trainer 2",
-   "trainerClass": "blackbelt",
+   "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "alakazam",
      "level": 6
-    },
-    {
-     "speciesKey": "machop",
-     "level": 7
     }
    ]
   },
@@ -1415,44 +1411,36 @@
   {
    "id": "hoenn-oldale-town_t1",
    "name": "Hoenn Trainer 1",
-   "trainerClass": "ace",
+   "trainerClass": "beauty",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "pidgey",
      "level": 8
-    },
-    {
-     "speciesKey": "dragonite",
-     "level": 9
     }
    ]
   },
   {
    "id": "hoenn-oldale-town_t2",
    "name": "Hoenn Trainer 2",
-   "trainerClass": "blackbelt",
+   "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "tyranitar",
      "level": 9
-    },
-    {
-     "speciesKey": "machop",
-     "level": 10
     }
    ]
   },
   {
    "id": "hoenn-oldale-town_t3",
    "name": "Hoenn Trainer 3",
-   "trainerClass": "swimmer",
+   "trainerClass": "lass",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "raticate",
      "level": 10
     },
     {
-     "speciesKey": "tentacool",
+     "speciesKey": "spearow",
      "level": 11
     }
    ]
@@ -1462,44 +1450,36 @@
   {
    "id": "hoenn-petalburg-city_t1",
    "name": "Hoenn Trainer 1",
-   "trainerClass": "ace",
+   "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "abra",
      "level": 11
-    },
-    {
-     "speciesKey": "dragonite",
-     "level": 12
     }
    ]
   },
   {
    "id": "hoenn-petalburg-city_t2",
    "name": "Hoenn Trainer 2",
-   "trainerClass": "blackbelt",
+   "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "poliwag",
      "level": 12
-    },
-    {
-     "speciesKey": "machop",
-     "level": 13
     }
    ]
   },
   {
    "id": "hoenn-petalburg-city_t3",
    "name": "Hoenn Trainer 3",
-   "trainerClass": "swimmer",
+   "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "diglett",
      "level": 13
     },
     {
-     "speciesKey": "tentacool",
+     "speciesKey": "dugtrio",
      "level": 14
     }
    ]
@@ -1509,44 +1489,36 @@
   {
    "id": "hoenn-rustboro-city_t1",
    "name": "Hoenn Trainer 1",
-   "trainerClass": "ace",
+   "trainerClass": "blackbelt",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "mankey",
      "level": 15
-    },
-    {
-     "speciesKey": "dragonite",
-     "level": 16
     }
    ]
   },
   {
    "id": "hoenn-rustboro-city_t2",
    "name": "Hoenn Trainer 2",
-   "trainerClass": "blackbelt",
+   "trainerClass": "bugCatcher",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "butterfree",
      "level": 16
-    },
-    {
-     "speciesKey": "machop",
-     "level": 17
     }
    ]
   },
   {
    "id": "hoenn-rustboro-city_t3",
    "name": "Hoenn Trainer 3",
-   "trainerClass": "swimmer",
+   "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "gyarados",
      "level": 17
     },
     {
-     "speciesKey": "tentacool",
+     "speciesKey": "crobat",
      "level": 18
     }
    ]
@@ -1556,44 +1528,36 @@
   {
    "id": "hoenn-dewford-town_t1",
    "name": "Hoenn Trainer 1",
-   "trainerClass": "ace",
+   "trainerClass": "lass",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "pidgey",
      "level": 19
-    },
-    {
-     "speciesKey": "dragonite",
-     "level": 20
     }
    ]
   },
   {
    "id": "hoenn-dewford-town_t2",
    "name": "Hoenn Trainer 2",
-   "trainerClass": "blackbelt",
+   "trainerClass": "beauty",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "pidgeot",
      "level": 20
-    },
-    {
-     "speciesKey": "machop",
-     "level": 21
     }
    ]
   },
   {
    "id": "hoenn-dewford-town_t3",
    "name": "Hoenn Trainer 3",
-   "trainerClass": "swimmer",
+   "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "gyarados",
      "level": 21
     },
     {
-     "speciesKey": "tentacool",
+     "speciesKey": "crobat",
      "level": 22
     }
    ]
@@ -1603,44 +1567,36 @@
   {
    "id": "hoenn-slateport-city_t1",
    "name": "Hoenn Trainer 1",
-   "trainerClass": "ace",
+   "trainerClass": "beauty",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "pidgey",
      "level": 24
-    },
-    {
-     "speciesKey": "dragonite",
-     "level": 25
     }
    ]
   },
   {
    "id": "hoenn-slateport-city_t2",
    "name": "Hoenn Trainer 2",
-   "trainerClass": "blackbelt",
+   "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "tyranitar",
      "level": 25
-    },
-    {
-     "speciesKey": "machop",
-     "level": 26
     }
    ]
   },
   {
    "id": "hoenn-slateport-city_t3",
    "name": "Hoenn Trainer 3",
-   "trainerClass": "swimmer",
+   "trainerClass": "lass",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "raticate",
      "level": 26
     },
     {
-     "speciesKey": "tentacool",
+     "speciesKey": "spearow",
      "level": 27
     }
    ]
@@ -1650,44 +1606,36 @@
   {
    "id": "hoenn-mauville-city_t1",
    "name": "Hoenn Trainer 1",
-   "trainerClass": "ace",
+   "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "abra",
      "level": 27
-    },
-    {
-     "speciesKey": "dragonite",
-     "level": 28
     }
    ]
   },
   {
    "id": "hoenn-mauville-city_t2",
    "name": "Hoenn Trainer 2",
-   "trainerClass": "blackbelt",
+   "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "poliwag",
      "level": 28
-    },
-    {
-     "speciesKey": "machop",
-     "level": 29
     }
    ]
   },
   {
    "id": "hoenn-mauville-city_t3",
    "name": "Hoenn Trainer 3",
-   "trainerClass": "swimmer",
+   "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "diglett",
      "level": 29
     },
     {
-     "speciesKey": "tentacool",
+     "speciesKey": "dugtrio",
      "level": 30
     }
    ]
@@ -1697,14 +1645,14 @@
   {
    "id": "hoenn-lavaridge-town_t1",
    "name": "Hoenn Trainer 1",
-   "trainerClass": "ace",
+   "trainerClass": "blackbelt",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "mankey",
      "level": 31
     },
     {
-     "speciesKey": "dragonite",
+     "speciesKey": "primeape",
      "level": 32
     }
    ]
@@ -1712,14 +1660,14 @@
   {
    "id": "hoenn-lavaridge-town_t2",
    "name": "Hoenn Trainer 2",
-   "trainerClass": "blackbelt",
+   "trainerClass": "bugCatcher",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "butterfree",
      "level": 32
     },
     {
-     "speciesKey": "machop",
+     "speciesKey": "weedle",
      "level": 33
     }
    ]
@@ -1727,15 +1675,19 @@
   {
    "id": "hoenn-lavaridge-town_t3",
    "name": "Hoenn Trainer 3",
-   "trainerClass": "swimmer",
+   "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "gyarados",
      "level": 33
     },
     {
-     "speciesKey": "tentacool",
+     "speciesKey": "crobat",
      "level": 34
+    },
+    {
+     "speciesKey": "aggron",
+     "level": 35
     }
    ]
   }
@@ -1744,14 +1696,14 @@
   {
    "id": "hoenn-fallarbor-town_t1",
    "name": "Hoenn Trainer 1",
-   "trainerClass": "ace",
+   "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "pidgey",
      "level": 34
     },
     {
-     "speciesKey": "dragonite",
+     "speciesKey": "pidgeotto",
      "level": 35
     }
    ]
@@ -1759,14 +1711,14 @@
   {
    "id": "hoenn-fallarbor-town_t2",
    "name": "Hoenn Trainer 2",
-   "trainerClass": "blackbelt",
+   "trainerClass": "camper",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "pidgeot",
      "level": 35
     },
     {
-     "speciesKey": "machop",
+     "speciesKey": "rattata",
      "level": 36
     }
    ]
@@ -1774,15 +1726,19 @@
   {
    "id": "hoenn-fallarbor-town_t3",
    "name": "Hoenn Trainer 3",
-   "trainerClass": "swimmer",
+   "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "voltorb",
      "level": 36
     },
     {
-     "speciesKey": "tentacool",
+     "speciesKey": "electrode",
      "level": 37
+    },
+    {
+     "speciesKey": "electabuzz",
+     "level": 38
     }
    ]
   }
@@ -1791,14 +1747,14 @@
   {
    "id": "hoenn-verdanturf-town_t1",
    "name": "Hoenn Trainer 1",
-   "trainerClass": "ace",
+   "trainerClass": "camper",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "pidgey",
      "level": 40
     },
     {
-     "speciesKey": "dragonite",
+     "speciesKey": "pidgeotto",
      "level": 41
     }
    ]
@@ -1806,14 +1762,14 @@
   {
    "id": "hoenn-verdanturf-town_t2",
    "name": "Hoenn Trainer 2",
-   "trainerClass": "blackbelt",
+   "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "magnemite",
      "level": 41
     },
     {
-     "speciesKey": "machop",
+     "speciesKey": "magneton",
      "level": 42
     }
    ]
@@ -1821,15 +1777,19 @@
   {
    "id": "hoenn-verdanturf-town_t3",
    "name": "Hoenn Trainer 3",
-   "trainerClass": "swimmer",
+   "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "raticate",
      "level": 42
     },
     {
-     "speciesKey": "tentacool",
+     "speciesKey": "spearow",
      "level": 43
+    },
+    {
+     "speciesKey": "fearow",
+     "level": 44
     }
    ]
   }
@@ -1838,14 +1798,14 @@
   {
    "id": "hoenn-fortree-city_t1",
    "name": "Hoenn Trainer 1",
-   "trainerClass": "ace",
+   "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "pikachu",
      "level": 45
     },
     {
-     "speciesKey": "dragonite",
+     "speciesKey": "raichu",
      "level": 46
     }
    ]
@@ -1853,14 +1813,14 @@
   {
    "id": "hoenn-fortree-city_t2",
    "name": "Hoenn Trainer 2",
-   "trainerClass": "blackbelt",
+   "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "pidgeot",
      "level": 46
     },
     {
-     "speciesKey": "machop",
+     "speciesKey": "rattata",
      "level": 47
     }
    ]
@@ -1868,15 +1828,19 @@
   {
    "id": "hoenn-fortree-city_t3",
    "name": "Hoenn Trainer 3",
-   "trainerClass": "swimmer",
+   "trainerClass": "camper",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "raticate",
      "level": 47
     },
     {
-     "speciesKey": "tentacool",
+     "speciesKey": "spearow",
      "level": 48
+    },
+    {
+     "speciesKey": "fearow",
+     "level": 49
     }
    ]
   }
@@ -1885,14 +1849,14 @@
   {
    "id": "hoenn-lilycove-city_t1",
    "name": "Hoenn Trainer 1",
-   "trainerClass": "ace",
+   "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "psyduck",
      "level": 49
     },
     {
-     "speciesKey": "dragonite",
+     "speciesKey": "golduck",
      "level": 50
     }
    ]
@@ -1900,14 +1864,14 @@
   {
    "id": "hoenn-lilycove-city_t2",
    "name": "Hoenn Trainer 2",
-   "trainerClass": "blackbelt",
+   "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "nidoqueen",
      "level": 50
     },
     {
-     "speciesKey": "machop",
+     "speciesKey": "nidoking",
      "level": 51
     }
    ]
@@ -1915,15 +1879,19 @@
   {
    "id": "hoenn-lilycove-city_t3",
    "name": "Hoenn Trainer 3",
-   "trainerClass": "swimmer",
+   "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "slowbro",
      "level": 51
     },
     {
-     "speciesKey": "tentacool",
+     "speciesKey": "drowzee",
      "level": 52
+    },
+    {
+     "speciesKey": "hypno",
+     "level": 53
     }
    ]
   }
@@ -1932,30 +1900,38 @@
   {
    "id": "hoenn-mossdeep-city_t1",
    "name": "Hoenn Trainer 1",
-   "trainerClass": "ace",
+   "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "sandshrew",
      "level": 55
     },
     {
-     "speciesKey": "dragonite",
+     "speciesKey": "sandslash",
      "level": 56
+    },
+    {
+     "speciesKey": "nidoqueen",
+     "level": 57
     }
    ]
   },
   {
    "id": "hoenn-mossdeep-city_t2",
    "name": "Hoenn Trainer 2",
-   "trainerClass": "blackbelt",
+   "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "alakazam",
      "level": 56
     },
     {
-     "speciesKey": "machop",
+     "speciesKey": "slowpoke",
      "level": 57
+    },
+    {
+     "speciesKey": "slowbro",
+     "level": 58
     }
    ]
   },
@@ -1971,6 +1947,14 @@
     {
      "speciesKey": "tentacool",
      "level": 58
+    },
+    {
+     "speciesKey": "tentacruel",
+     "level": 59
+    },
+    {
+     "speciesKey": "slowpoke",
+     "level": 60
     }
    ]
   }
@@ -1979,7 +1963,7 @@
   {
    "id": "hoenn-sootopolis-city_t1",
    "name": "Hoenn Trainer 1",
-   "trainerClass": "ace",
+   "trainerClass": "coolTrainer",
    "team": [
     {
      "speciesKey": "slaking",
@@ -1988,6 +1972,10 @@
     {
      "speciesKey": "dragonite",
      "level": 60
+    },
+    {
+     "speciesKey": "tyranitar",
+     "level": 61
     }
    ]
   },
@@ -2003,21 +1991,33 @@
     {
      "speciesKey": "machop",
      "level": 61
+    },
+    {
+     "speciesKey": "machoke",
+     "level": 62
     }
    ]
   },
   {
    "id": "hoenn-sootopolis-city_t3",
    "name": "Hoenn Trainer 3",
-   "trainerClass": "swimmer",
+   "trainerClass": "bugCatcher",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "kakuna",
      "level": 61
     },
     {
-     "speciesKey": "tentacool",
+     "speciesKey": "beedrill",
      "level": 62
+    },
+    {
+     "speciesKey": "paras",
+     "level": 63
+    },
+    {
+     "speciesKey": "parasect",
+     "level": 64
     }
    ]
   }
@@ -2035,36 +2035,52 @@
     {
      "speciesKey": "dragonite",
      "level": 64
+    },
+    {
+     "speciesKey": "tyranitar",
+     "level": 65
     }
    ]
   },
   {
    "id": "hoenn-ever-grande-city_t2",
    "name": "Hoenn Trainer 2",
-   "trainerClass": "blackbelt",
+   "trainerClass": "lass",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "pidgeot",
      "level": 64
     },
     {
-     "speciesKey": "machop",
+     "speciesKey": "rattata",
      "level": 65
+    },
+    {
+     "speciesKey": "raticate",
+     "level": 66
     }
    ]
   },
   {
    "id": "hoenn-ever-grande-city_t3",
    "name": "Hoenn Trainer 3",
-   "trainerClass": "swimmer",
+   "trainerClass": "beauty",
    "team": [
     {
-     "speciesKey": "cloyster",
+     "speciesKey": "persian",
      "level": 65
     },
     {
-     "speciesKey": "kingler",
+     "speciesKey": "farfetchd",
      "level": 66
+    },
+    {
+     "speciesKey": "dodrio",
+     "level": 67
+    },
+    {
+     "speciesKey": "mrMime",
+     "level": 68
     }
    ]
   }
@@ -2073,45 +2089,61 @@
   {
    "id": "hoenn-pacifidlog-town_t1",
    "name": "Hoenn Trainer 1",
-   "trainerClass": "ace",
+   "trainerClass": "lass",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "raticate",
      "level": 69
     },
     {
-     "speciesKey": "arcanine",
+     "speciesKey": "fearow",
      "level": 70
+    },
+    {
+     "speciesKey": "clefable",
+     "level": 71
     }
    ]
   },
   {
    "id": "hoenn-pacifidlog-town_t2",
    "name": "Hoenn Trainer 2",
-   "trainerClass": "blackbelt",
+   "trainerClass": "beauty",
    "team": [
     {
-     "speciesKey": "hitmonlee",
+     "speciesKey": "clefable",
      "level": 70
     },
     {
-     "speciesKey": "hitmonchan",
+     "speciesKey": "wigglytuff",
      "level": 71
+    },
+    {
+     "speciesKey": "persian",
+     "level": 72
     }
    ]
   },
   {
    "id": "hoenn-pacifidlog-town_t3",
    "name": "Hoenn Trainer 3",
-   "trainerClass": "swimmer",
+   "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "cloyster",
+     "speciesKey": "walrein",
      "level": 71
     },
     {
-     "speciesKey": "kingler",
+     "speciesKey": "jolteon",
      "level": 72
+    },
+    {
+     "speciesKey": "espeon",
+     "level": 73
+    },
+    {
+     "speciesKey": "umbreon",
+     "level": 74
     }
    ]
   }
@@ -2120,44 +2152,36 @@
   {
    "id": "sinnoh-twinleaf-town_t1",
    "name": "Sinnoh Trainer 1",
-   "trainerClass": "youngster",
+   "trainerClass": "camper",
    "team": [
     {
      "speciesKey": "pidgey",
      "level": 5
-    },
-    {
-     "speciesKey": "pidgeotto",
-     "level": 6
     }
    ]
   },
   {
    "id": "sinnoh-twinleaf-town_t2",
    "name": "Sinnoh Trainer 2",
-   "trainerClass": "lass",
+   "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "magnemite",
      "level": 6
-    },
-    {
-     "speciesKey": "rattata",
-     "level": 7
     }
    ]
   },
   {
    "id": "sinnoh-twinleaf-town_t3",
    "name": "Sinnoh Trainer 3",
-   "trainerClass": "bugCatcher",
+   "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "kakuna",
+     "speciesKey": "raticate",
      "level": 7
     },
     {
-     "speciesKey": "beedrill",
+     "speciesKey": "spearow",
      "level": 8
     }
    ]
@@ -2167,30 +2191,22 @@
   {
    "id": "sinnoh-sandgem-town_t1",
    "name": "Sinnoh Trainer 1",
-   "trainerClass": "youngster",
+   "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "slaking",
      "level": 8
-    },
-    {
-     "speciesKey": "pidgeotto",
-     "level": 9
     }
    ]
   },
   {
    "id": "sinnoh-sandgem-town_t2",
    "name": "Sinnoh Trainer 2",
-   "trainerClass": "lass",
+   "trainerClass": "blackbelt",
    "team": [
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "poliwrath",
      "level": 9
-    },
-    {
-     "speciesKey": "rattata",
-     "level": 10
     }
    ]
   },
@@ -2214,44 +2230,36 @@
   {
    "id": "sinnoh-jubilife-city_t1",
    "name": "Sinnoh Trainer 1",
-   "trainerClass": "youngster",
+   "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "pikachu",
      "level": 11
-    },
-    {
-     "speciesKey": "pidgeotto",
-     "level": 12
     }
    ]
   },
   {
    "id": "sinnoh-jubilife-city_t2",
    "name": "Sinnoh Trainer 2",
-   "trainerClass": "lass",
+   "trainerClass": "youngster",
    "team": [
     {
      "speciesKey": "pidgeot",
      "level": 12
-    },
-    {
-     "speciesKey": "rattata",
-     "level": 13
     }
    ]
   },
   {
    "id": "sinnoh-jubilife-city_t3",
    "name": "Sinnoh Trainer 3",
-   "trainerClass": "bugCatcher",
+   "trainerClass": "camper",
    "team": [
     {
-     "speciesKey": "kakuna",
+     "speciesKey": "raticate",
      "level": 13
     },
     {
-     "speciesKey": "beedrill",
+     "speciesKey": "spearow",
      "level": 14
     }
    ]
@@ -2261,44 +2269,36 @@
   {
    "id": "sinnoh-oreburgh-city_t1",
    "name": "Sinnoh Trainer 1",
-   "trainerClass": "youngster",
+   "trainerClass": "blackbelt",
    "team": [
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "mankey",
      "level": 14
-    },
-    {
-     "speciesKey": "pidgeotto",
-     "level": 15
     }
    ]
   },
   {
    "id": "sinnoh-oreburgh-city_t2",
    "name": "Sinnoh Trainer 2",
-   "trainerClass": "lass",
+   "trainerClass": "bugCatcher",
    "team": [
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "butterfree",
      "level": 15
-    },
-    {
-     "speciesKey": "rattata",
-     "level": 16
     }
    ]
   },
   {
    "id": "sinnoh-oreburgh-city_t3",
    "name": "Sinnoh Trainer 3",
-   "trainerClass": "bugCatcher",
+   "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "kakuna",
+     "speciesKey": "togekiss",
      "level": 16
     },
     {
-     "speciesKey": "beedrill",
+     "speciesKey": "gyarados",
      "level": 17
     }
    ]
@@ -2313,39 +2313,31 @@
     {
      "speciesKey": "pidgey",
      "level": 18
-    },
-    {
-     "speciesKey": "pidgeotto",
-     "level": 19
     }
    ]
   },
   {
    "id": "sinnoh-floaroma-town_t2",
    "name": "Sinnoh Trainer 2",
-   "trainerClass": "lass",
+   "trainerClass": "camper",
    "team": [
     {
      "speciesKey": "pidgeot",
      "level": 19
-    },
-    {
-     "speciesKey": "rattata",
-     "level": 20
     }
    ]
   },
   {
    "id": "sinnoh-floaroma-town_t3",
    "name": "Sinnoh Trainer 3",
-   "trainerClass": "bugCatcher",
+   "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "kakuna",
+     "speciesKey": "voltorb",
      "level": 20
     },
     {
-     "speciesKey": "beedrill",
+     "speciesKey": "electrode",
      "level": 21
     }
    ]
@@ -2355,44 +2347,36 @@
   {
    "id": "sinnoh-eterna-city_t1",
    "name": "Sinnoh Trainer 1",
-   "trainerClass": "youngster",
+   "trainerClass": "bugCatcher",
    "team": [
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "caterpie",
      "level": 21
-    },
-    {
-     "speciesKey": "pidgeotto",
-     "level": 22
     }
    ]
   },
   {
    "id": "sinnoh-eterna-city_t2",
    "name": "Sinnoh Trainer 2",
-   "trainerClass": "lass",
+   "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "tyranitar",
      "level": 22
-    },
-    {
-     "speciesKey": "rattata",
-     "level": 23
     }
    ]
   },
   {
    "id": "sinnoh-eterna-city_t3",
    "name": "Sinnoh Trainer 3",
-   "trainerClass": "bugCatcher",
+   "trainerClass": "blackbelt",
    "team": [
     {
-     "speciesKey": "kakuna",
+     "speciesKey": "machoke",
      "level": 23
     },
     {
-     "speciesKey": "beedrill",
+     "speciesKey": "machamp",
      "level": 24
     }
    ]
@@ -2402,30 +2386,22 @@
   {
    "id": "sinnoh-hearthome-city_t1",
    "name": "Sinnoh Trainer 1",
-   "trainerClass": "youngster",
+   "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "slaking",
      "level": 27
-    },
-    {
-     "speciesKey": "pidgeotto",
-     "level": 28
     }
    ]
   },
   {
    "id": "sinnoh-hearthome-city_t2",
    "name": "Sinnoh Trainer 2",
-   "trainerClass": "lass",
+   "trainerClass": "blackbelt",
    "team": [
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "poliwrath",
      "level": 28
-    },
-    {
-     "speciesKey": "rattata",
-     "level": 29
     }
    ]
   },
@@ -2449,14 +2425,14 @@
   {
    "id": "sinnoh-solaceon-town_t1",
    "name": "Sinnoh Trainer 1",
-   "trainerClass": "youngster",
+   "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "pikachu",
      "level": 30
     },
     {
-     "speciesKey": "pidgeotto",
+     "speciesKey": "raichu",
      "level": 31
     }
    ]
@@ -2464,7 +2440,7 @@
   {
    "id": "sinnoh-solaceon-town_t2",
    "name": "Sinnoh Trainer 2",
-   "trainerClass": "lass",
+   "trainerClass": "youngster",
    "team": [
     {
      "speciesKey": "pidgeot",
@@ -2479,15 +2455,19 @@
   {
    "id": "sinnoh-solaceon-town_t3",
    "name": "Sinnoh Trainer 3",
-   "trainerClass": "bugCatcher",
+   "trainerClass": "camper",
    "team": [
     {
-     "speciesKey": "kakuna",
+     "speciesKey": "raticate",
      "level": 32
     },
     {
-     "speciesKey": "beedrill",
+     "speciesKey": "spearow",
      "level": 33
+    },
+    {
+     "speciesKey": "fearow",
+     "level": 34
     }
    ]
   }
@@ -2496,14 +2476,14 @@
   {
    "id": "sinnoh-celestic-town_t1",
    "name": "Sinnoh Trainer 1",
-   "trainerClass": "youngster",
+   "trainerClass": "blackbelt",
    "team": [
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "mankey",
      "level": 33
     },
     {
-     "speciesKey": "pidgeotto",
+     "speciesKey": "primeape",
      "level": 34
     }
    ]
@@ -2511,14 +2491,14 @@
   {
    "id": "sinnoh-celestic-town_t2",
    "name": "Sinnoh Trainer 2",
-   "trainerClass": "lass",
+   "trainerClass": "bugCatcher",
    "team": [
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "butterfree",
      "level": 34
     },
     {
-     "speciesKey": "rattata",
+     "speciesKey": "weedle",
      "level": 35
     }
    ]
@@ -2526,15 +2506,19 @@
   {
    "id": "sinnoh-celestic-town_t3",
    "name": "Sinnoh Trainer 3",
-   "trainerClass": "bugCatcher",
+   "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "kakuna",
+     "speciesKey": "togekiss",
      "level": 35
     },
     {
-     "speciesKey": "beedrill",
+     "speciesKey": "gyarados",
      "level": 36
+    },
+    {
+     "speciesKey": "electivire",
+     "level": 37
     }
    ]
   }
@@ -2543,7 +2527,7 @@
   {
    "id": "sinnoh-pastoria-city_t1",
    "name": "Sinnoh Trainer 1",
-   "trainerClass": "youngster",
+   "trainerClass": "lass",
    "team": [
     {
      "speciesKey": "pidgey",
@@ -2558,7 +2542,7 @@
   {
    "id": "sinnoh-pastoria-city_t2",
    "name": "Sinnoh Trainer 2",
-   "trainerClass": "lass",
+   "trainerClass": "beauty",
    "team": [
     {
      "speciesKey": "pidgeot",
@@ -2573,15 +2557,19 @@
   {
    "id": "sinnoh-pastoria-city_t3",
    "name": "Sinnoh Trainer 3",
-   "trainerClass": "bugCatcher",
+   "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "kakuna",
+     "speciesKey": "togekiss",
      "level": 40
     },
     {
-     "speciesKey": "beedrill",
+     "speciesKey": "gyarados",
      "level": 41
+    },
+    {
+     "speciesKey": "electivire",
+     "level": 42
     }
    ]
   }
@@ -2590,7 +2578,7 @@
   {
    "id": "sinnoh-veilstone-city_t1",
    "name": "Sinnoh Trainer 1",
-   "trainerClass": "youngster",
+   "trainerClass": "camper",
    "team": [
     {
      "speciesKey": "pidgey",
@@ -2605,14 +2593,14 @@
   {
    "id": "sinnoh-veilstone-city_t2",
    "name": "Sinnoh Trainer 2",
-   "trainerClass": "lass",
+   "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "magnemite",
      "level": 44
     },
     {
-     "speciesKey": "rattata",
+     "speciesKey": "magneton",
      "level": 45
     }
    ]
@@ -2620,15 +2608,19 @@
   {
    "id": "sinnoh-veilstone-city_t3",
    "name": "Sinnoh Trainer 3",
-   "trainerClass": "bugCatcher",
+   "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "kakuna",
+     "speciesKey": "raticate",
      "level": 45
     },
     {
-     "speciesKey": "beedrill",
+     "speciesKey": "spearow",
      "level": 46
+    },
+    {
+     "speciesKey": "fearow",
+     "level": 47
     }
    ]
   }
@@ -2637,14 +2629,14 @@
   {
    "id": "sinnoh-snowpoint-city_t1",
    "name": "Sinnoh Trainer 1",
-   "trainerClass": "youngster",
+   "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "pikachu",
      "level": 49
     },
     {
-     "speciesKey": "pidgeotto",
+     "speciesKey": "raichu",
      "level": 50
     }
    ]
@@ -2652,7 +2644,7 @@
   {
    "id": "sinnoh-snowpoint-city_t2",
    "name": "Sinnoh Trainer 2",
-   "trainerClass": "lass",
+   "trainerClass": "youngster",
    "team": [
     {
      "speciesKey": "pidgeot",
@@ -2667,15 +2659,19 @@
   {
    "id": "sinnoh-snowpoint-city_t3",
    "name": "Sinnoh Trainer 3",
-   "trainerClass": "bugCatcher",
+   "trainerClass": "camper",
    "team": [
     {
-     "speciesKey": "kakuna",
+     "speciesKey": "raticate",
      "level": 51
     },
     {
-     "speciesKey": "beedrill",
+     "speciesKey": "spearow",
      "level": 52
+    },
+    {
+     "speciesKey": "fearow",
+     "level": 53
     }
    ]
   }
@@ -2684,45 +2680,61 @@
   {
    "id": "sinnoh-canalave-city_t1",
    "name": "Sinnoh Trainer 1",
-   "trainerClass": "youngster",
+   "trainerClass": "blackbelt",
    "team": [
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "mankey",
      "level": 52
     },
     {
-     "speciesKey": "pidgeotto",
+     "speciesKey": "primeape",
      "level": 53
+    },
+    {
+     "speciesKey": "poliwrath",
+     "level": 54
     }
    ]
   },
   {
    "id": "sinnoh-canalave-city_t2",
    "name": "Sinnoh Trainer 2",
-   "trainerClass": "lass",
+   "trainerClass": "bugCatcher",
    "team": [
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "butterfree",
      "level": 53
     },
     {
-     "speciesKey": "rattata",
+     "speciesKey": "weedle",
      "level": 54
+    },
+    {
+     "speciesKey": "kakuna",
+     "level": 55
     }
    ]
   },
   {
    "id": "sinnoh-canalave-city_t3",
    "name": "Sinnoh Trainer 3",
-   "trainerClass": "bugCatcher",
+   "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "kakuna",
+     "speciesKey": "togekiss",
      "level": 54
     },
     {
-     "speciesKey": "beedrill",
+     "speciesKey": "gyarados",
      "level": 55
+    },
+    {
+     "speciesKey": "electivire",
+     "level": 56
+    },
+    {
+     "speciesKey": "crobat",
+     "level": 57
     }
    ]
   }
@@ -2731,45 +2743,61 @@
   {
    "id": "sinnoh-sunyshore-city_t1",
    "name": "Sinnoh Trainer 1",
-   "trainerClass": "youngster",
+   "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "sandshrew",
      "level": 60
     },
     {
-     "speciesKey": "pidgeotto",
+     "speciesKey": "sandslash",
      "level": 61
+    },
+    {
+     "speciesKey": "nidoqueen",
+     "level": 62
     }
    ]
   },
   {
    "id": "sinnoh-sunyshore-city_t2",
    "name": "Sinnoh Trainer 2",
-   "trainerClass": "lass",
+   "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "alakazam",
      "level": 61
     },
     {
-     "speciesKey": "rattata",
+     "speciesKey": "slowpoke",
      "level": 62
+    },
+    {
+     "speciesKey": "slowbro",
+     "level": 63
     }
    ]
   },
   {
    "id": "sinnoh-sunyshore-city_t3",
    "name": "Sinnoh Trainer 3",
-   "trainerClass": "bugCatcher",
+   "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "kakuna",
+     "speciesKey": "poliwrath",
      "level": 62
     },
     {
-     "speciesKey": "beedrill",
+     "speciesKey": "tentacool",
      "level": 63
+    },
+    {
+     "speciesKey": "tentacruel",
+     "level": 64
+    },
+    {
+     "speciesKey": "slowpoke",
+     "level": 65
     }
    ]
   }
@@ -2778,37 +2806,29 @@
   {
    "id": "unova-nuvema-town_t1",
    "name": "Unova Trainer 1",
-   "trainerClass": "hiker",
+   "trainerClass": "beauty",
    "team": [
     {
-     "speciesKey": "sandshrew",
+     "speciesKey": "pidgey",
      "level": 5
-    },
-    {
-     "speciesKey": "sandslash",
-     "level": 6
     }
    ]
   },
   {
    "id": "unova-nuvema-town_t2",
    "name": "Unova Trainer 2",
-   "trainerClass": "camper",
+   "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "tyranitar",
      "level": 6
-    },
-    {
-     "speciesKey": "rattata",
-     "level": 7
     }
    ]
   },
   {
    "id": "unova-nuvema-town_t3",
    "name": "Unova Trainer 3",
-   "trainerClass": "beauty",
+   "trainerClass": "lass",
    "team": [
     {
      "speciesKey": "raticate",
@@ -2825,44 +2845,36 @@
   {
    "id": "unova-accumula-town_t1",
    "name": "Unova Trainer 1",
-   "trainerClass": "hiker",
+   "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "sandshrew",
+     "speciesKey": "abra",
      "level": 8
-    },
-    {
-     "speciesKey": "sandslash",
-     "level": 9
     }
    ]
   },
   {
    "id": "unova-accumula-town_t2",
    "name": "Unova Trainer 2",
-   "trainerClass": "camper",
+   "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "poliwag",
      "level": 9
-    },
-    {
-     "speciesKey": "rattata",
-     "level": 10
     }
    ]
   },
   {
    "id": "unova-accumula-town_t3",
    "name": "Unova Trainer 3",
-   "trainerClass": "beauty",
+   "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "raticate",
+     "speciesKey": "diglett",
      "level": 10
     },
     {
-     "speciesKey": "spearow",
+     "speciesKey": "dugtrio",
      "level": 11
     }
    ]
@@ -2872,37 +2884,29 @@
   {
    "id": "unova-aspertia-city_t1",
    "name": "Unova Trainer 1",
-   "trainerClass": "hiker",
+   "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "sandshrew",
+     "speciesKey": "pikachu",
      "level": 10
-    },
-    {
-     "speciesKey": "sandslash",
-     "level": 11
     }
    ]
   },
   {
    "id": "unova-aspertia-city_t2",
    "name": "Unova Trainer 2",
-   "trainerClass": "camper",
+   "trainerClass": "youngster",
    "team": [
     {
      "speciesKey": "pidgeot",
      "level": 11
-    },
-    {
-     "speciesKey": "rattata",
-     "level": 12
     }
    ]
   },
   {
    "id": "unova-aspertia-city_t3",
    "name": "Unova Trainer 3",
-   "trainerClass": "beauty",
+   "trainerClass": "camper",
    "team": [
     {
      "speciesKey": "raticate",
@@ -2919,44 +2923,36 @@
   {
    "id": "unova-virbank-city_t1",
    "name": "Unova Trainer 1",
-   "trainerClass": "hiker",
+   "trainerClass": "blackbelt",
    "team": [
     {
-     "speciesKey": "sandshrew",
+     "speciesKey": "mankey",
      "level": 13
-    },
-    {
-     "speciesKey": "sandslash",
-     "level": 14
     }
    ]
   },
   {
    "id": "unova-virbank-city_t2",
    "name": "Unova Trainer 2",
-   "trainerClass": "camper",
+   "trainerClass": "bugCatcher",
    "team": [
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "butterfree",
      "level": 14
-    },
-    {
-     "speciesKey": "rattata",
-     "level": 15
     }
    ]
   },
   {
    "id": "unova-virbank-city_t3",
    "name": "Unova Trainer 3",
-   "trainerClass": "beauty",
+   "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "raticate",
+     "speciesKey": "arcanine",
      "level": 15
     },
     {
-     "speciesKey": "spearow",
+     "speciesKey": "volcarona",
      "level": 16
     }
    ]
@@ -2966,44 +2962,36 @@
   {
    "id": "unova-floccesy-town_t1",
    "name": "Unova Trainer 1",
-   "trainerClass": "hiker",
+   "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "sandshrew",
+     "speciesKey": "psyduck",
      "level": 15
-    },
-    {
-     "speciesKey": "sandslash",
-     "level": 16
     }
    ]
   },
   {
    "id": "unova-floccesy-town_t2",
    "name": "Unova Trainer 2",
-   "trainerClass": "camper",
+   "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "nidoqueen",
      "level": 16
-    },
-    {
-     "speciesKey": "rattata",
-     "level": 17
     }
    ]
   },
   {
    "id": "unova-floccesy-town_t3",
    "name": "Unova Trainer 3",
-   "trainerClass": "beauty",
+   "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "raticate",
+     "speciesKey": "slowbro",
      "level": 17
     },
     {
-     "speciesKey": "spearow",
+     "speciesKey": "drowzee",
      "level": 18
     }
    ]
@@ -3013,15 +3001,11 @@
   {
    "id": "unova-striaton-city_t1",
    "name": "Unova Trainer 1",
-   "trainerClass": "hiker",
+   "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "sandshrew",
+     "speciesKey": "pidgey",
      "level": 16
-    },
-    {
-     "speciesKey": "sandslash",
-     "level": 17
     }
    ]
   },
@@ -3033,24 +3017,20 @@
     {
      "speciesKey": "pidgeot",
      "level": 17
-    },
-    {
-     "speciesKey": "rattata",
-     "level": 18
     }
    ]
   },
   {
    "id": "unova-striaton-city_t3",
    "name": "Unova Trainer 3",
-   "trainerClass": "beauty",
+   "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "raticate",
+     "speciesKey": "voltorb",
      "level": 18
     },
     {
-     "speciesKey": "spearow",
+     "speciesKey": "electrode",
      "level": 19
     }
    ]
@@ -3060,44 +3040,36 @@
   {
    "id": "unova-nacrene-city_t1",
    "name": "Unova Trainer 1",
-   "trainerClass": "hiker",
+   "trainerClass": "bugCatcher",
    "team": [
     {
-     "speciesKey": "sandshrew",
+     "speciesKey": "caterpie",
      "level": 20
-    },
-    {
-     "speciesKey": "sandslash",
-     "level": 21
     }
    ]
   },
   {
    "id": "unova-nacrene-city_t2",
    "name": "Unova Trainer 2",
-   "trainerClass": "camper",
+   "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "tyranitar",
      "level": 21
-    },
-    {
-     "speciesKey": "rattata",
-     "level": 22
     }
    ]
   },
   {
    "id": "unova-nacrene-city_t3",
    "name": "Unova Trainer 3",
-   "trainerClass": "beauty",
+   "trainerClass": "blackbelt",
    "team": [
     {
-     "speciesKey": "raticate",
+     "speciesKey": "machoke",
      "level": 22
     },
     {
-     "speciesKey": "spearow",
+     "speciesKey": "machamp",
      "level": 23
     }
    ]
@@ -3112,39 +3084,31 @@
     {
      "speciesKey": "sandshrew",
      "level": 21
-    },
-    {
-     "speciesKey": "sandslash",
-     "level": 22
     }
    ]
   },
   {
    "id": "unova-castelia-city_t2",
    "name": "Unova Trainer 2",
-   "trainerClass": "camper",
+   "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "alakazam",
      "level": 22
-    },
-    {
-     "speciesKey": "rattata",
-     "level": 23
     }
    ]
   },
   {
    "id": "unova-castelia-city_t3",
    "name": "Unova Trainer 3",
-   "trainerClass": "beauty",
+   "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "raticate",
+     "speciesKey": "poliwrath",
      "level": 23
     },
     {
-     "speciesKey": "spearow",
+     "speciesKey": "tentacool",
      "level": 24
     }
    ]
@@ -3154,37 +3118,29 @@
   {
    "id": "unova-nimbasa-city_t1",
    "name": "Unova Trainer 1",
-   "trainerClass": "hiker",
+   "trainerClass": "beauty",
    "team": [
     {
-     "speciesKey": "sandshrew",
+     "speciesKey": "pidgey",
      "level": 24
-    },
-    {
-     "speciesKey": "sandslash",
-     "level": 25
     }
    ]
   },
   {
    "id": "unova-nimbasa-city_t2",
    "name": "Unova Trainer 2",
-   "trainerClass": "camper",
+   "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "tyranitar",
      "level": 25
-    },
-    {
-     "speciesKey": "rattata",
-     "level": 26
     }
    ]
   },
   {
    "id": "unova-nimbasa-city_t3",
    "name": "Unova Trainer 3",
-   "trainerClass": "beauty",
+   "trainerClass": "lass",
    "team": [
     {
      "speciesKey": "raticate",
@@ -3201,14 +3157,14 @@
   {
    "id": "unova-driftveil-city_t1",
    "name": "Unova Trainer 1",
-   "trainerClass": "hiker",
+   "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "sandshrew",
+     "speciesKey": "abra",
      "level": 28
     },
     {
-     "speciesKey": "sandslash",
+     "speciesKey": "kadabra",
      "level": 29
     }
    ]
@@ -3216,14 +3172,14 @@
   {
    "id": "unova-driftveil-city_t2",
    "name": "Unova Trainer 2",
-   "trainerClass": "camper",
+   "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "poliwag",
      "level": 29
     },
     {
-     "speciesKey": "rattata",
+     "speciesKey": "poliwhirl",
      "level": 30
     }
    ]
@@ -3231,15 +3187,19 @@
   {
    "id": "unova-driftveil-city_t3",
    "name": "Unova Trainer 3",
-   "trainerClass": "beauty",
+   "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "raticate",
+     "speciesKey": "diglett",
      "level": 30
     },
     {
-     "speciesKey": "spearow",
+     "speciesKey": "dugtrio",
      "level": 31
+    },
+    {
+     "speciesKey": "geodude",
+     "level": 32
     }
    ]
   }
@@ -3248,14 +3208,14 @@
   {
    "id": "unova-anville-town_t1",
    "name": "Unova Trainer 1",
-   "trainerClass": "hiker",
+   "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "sandshrew",
+     "speciesKey": "pikachu",
      "level": 29
     },
     {
-     "speciesKey": "sandslash",
+     "speciesKey": "raichu",
      "level": 30
     }
    ]
@@ -3263,7 +3223,7 @@
   {
    "id": "unova-anville-town_t2",
    "name": "Unova Trainer 2",
-   "trainerClass": "camper",
+   "trainerClass": "youngster",
    "team": [
     {
      "speciesKey": "pidgeot",
@@ -3278,7 +3238,7 @@
   {
    "id": "unova-anville-town_t3",
    "name": "Unova Trainer 3",
-   "trainerClass": "beauty",
+   "trainerClass": "camper",
    "team": [
     {
      "speciesKey": "raticate",
@@ -3287,6 +3247,10 @@
     {
      "speciesKey": "spearow",
      "level": 32
+    },
+    {
+     "speciesKey": "fearow",
+     "level": 33
     }
    ]
   }
@@ -3295,14 +3259,14 @@
   {
    "id": "unova-mistralton-city_t1",
    "name": "Unova Trainer 1",
-   "trainerClass": "hiker",
+   "trainerClass": "blackbelt",
    "team": [
     {
-     "speciesKey": "sandshrew",
+     "speciesKey": "mankey",
      "level": 33
     },
     {
-     "speciesKey": "sandslash",
+     "speciesKey": "primeape",
      "level": 34
     }
    ]
@@ -3310,14 +3274,14 @@
   {
    "id": "unova-mistralton-city_t2",
    "name": "Unova Trainer 2",
-   "trainerClass": "camper",
+   "trainerClass": "bugCatcher",
    "team": [
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "butterfree",
      "level": 34
     },
     {
-     "speciesKey": "rattata",
+     "speciesKey": "weedle",
      "level": 35
     }
    ]
@@ -3325,15 +3289,19 @@
   {
    "id": "unova-mistralton-city_t3",
    "name": "Unova Trainer 3",
-   "trainerClass": "beauty",
+   "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "raticate",
+     "speciesKey": "arcanine",
      "level": 35
     },
     {
-     "speciesKey": "spearow",
+     "speciesKey": "volcarona",
      "level": 36
+    },
+    {
+     "speciesKey": "togekiss",
+     "level": 37
     }
    ]
   }
@@ -3342,14 +3310,14 @@
   {
    "id": "unova-icirrus-city_t1",
    "name": "Unova Trainer 1",
-   "trainerClass": "hiker",
+   "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "sandshrew",
+     "speciesKey": "pidgey",
      "level": 36
     },
     {
-     "speciesKey": "sandslash",
+     "speciesKey": "pidgeotto",
      "level": 37
     }
    ]
@@ -3372,15 +3340,19 @@
   {
    "id": "unova-icirrus-city_t3",
    "name": "Unova Trainer 3",
-   "trainerClass": "beauty",
+   "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "raticate",
+     "speciesKey": "voltorb",
      "level": 38
     },
     {
-     "speciesKey": "spearow",
+     "speciesKey": "electrode",
      "level": 39
+    },
+    {
+     "speciesKey": "electabuzz",
+     "level": 40
     }
    ]
   }
@@ -3404,14 +3376,14 @@
   {
    "id": "unova-opelucid-city_t2",
    "name": "Unova Trainer 2",
-   "trainerClass": "camper",
+   "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "alakazam",
      "level": 42
     },
     {
-     "speciesKey": "rattata",
+     "speciesKey": "slowpoke",
      "level": 43
     }
    ]
@@ -3419,15 +3391,19 @@
   {
    "id": "unova-opelucid-city_t3",
    "name": "Unova Trainer 3",
-   "trainerClass": "beauty",
+   "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "raticate",
+     "speciesKey": "poliwrath",
      "level": 43
     },
     {
-     "speciesKey": "spearow",
+     "speciesKey": "tentacool",
      "level": 44
+    },
+    {
+     "speciesKey": "tentacruel",
+     "level": 45
     }
    ]
   }
@@ -3436,14 +3412,14 @@
   {
    "id": "unova-lacunosa-town_t1",
    "name": "Unova Trainer 1",
-   "trainerClass": "hiker",
+   "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "sandshrew",
+     "speciesKey": "abra",
      "level": 47
     },
     {
-     "speciesKey": "sandslash",
+     "speciesKey": "kadabra",
      "level": 48
     }
    ]
@@ -3451,14 +3427,14 @@
   {
    "id": "unova-lacunosa-town_t2",
    "name": "Unova Trainer 2",
-   "trainerClass": "camper",
+   "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "poliwag",
      "level": 48
     },
     {
-     "speciesKey": "rattata",
+     "speciesKey": "poliwhirl",
      "level": 49
     }
    ]
@@ -3466,15 +3442,19 @@
   {
    "id": "unova-lacunosa-town_t3",
    "name": "Unova Trainer 3",
-   "trainerClass": "beauty",
+   "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "raticate",
+     "speciesKey": "diglett",
      "level": 49
     },
     {
-     "speciesKey": "spearow",
+     "speciesKey": "dugtrio",
      "level": 50
+    },
+    {
+     "speciesKey": "geodude",
+     "level": 51
     }
    ]
   }
@@ -3483,22 +3463,26 @@
   {
    "id": "unova-undella-town_t1",
    "name": "Unova Trainer 1",
-   "trainerClass": "hiker",
+   "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "sandshrew",
+     "speciesKey": "slaking",
      "level": 50
     },
     {
-     "speciesKey": "sandslash",
+     "speciesKey": "dragonite",
      "level": 51
+    },
+    {
+     "speciesKey": "tyranitar",
+     "level": 52
     }
    ]
   },
   {
    "id": "unova-undella-town_t2",
    "name": "Unova Trainer 2",
-   "trainerClass": "camper",
+   "trainerClass": "lass",
    "team": [
     {
      "speciesKey": "pidgeot",
@@ -3507,6 +3491,10 @@
     {
      "speciesKey": "rattata",
      "level": 52
+    },
+    {
+     "speciesKey": "raticate",
+     "level": 53
     }
    ]
   },
@@ -3522,6 +3510,14 @@
     {
      "speciesKey": "spearow",
      "level": 53
+    },
+    {
+     "speciesKey": "fearow",
+     "level": 54
+    },
+    {
+     "speciesKey": "clefairy",
+     "level": 55
     }
    ]
   }
@@ -3530,45 +3526,61 @@
   {
    "id": "unova-humilau-city_t1",
    "name": "Unova Trainer 1",
-   "trainerClass": "hiker",
+   "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "sandshrew",
+     "speciesKey": "psyduck",
      "level": 54
     },
     {
-     "speciesKey": "sandslash",
+     "speciesKey": "golduck",
      "level": 55
+    },
+    {
+     "speciesKey": "poliwag",
+     "level": 56
     }
    ]
   },
   {
    "id": "unova-humilau-city_t2",
    "name": "Unova Trainer 2",
-   "trainerClass": "camper",
+   "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "nidoqueen",
      "level": 55
     },
     {
-     "speciesKey": "rattata",
+     "speciesKey": "nidoking",
      "level": 56
+    },
+    {
+     "speciesKey": "diglett",
+     "level": 57
     }
    ]
   },
   {
    "id": "unova-humilau-city_t3",
    "name": "Unova Trainer 3",
-   "trainerClass": "beauty",
+   "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "raticate",
+     "speciesKey": "slowbro",
      "level": 56
     },
     {
-     "speciesKey": "spearow",
+     "speciesKey": "drowzee",
      "level": 57
+    },
+    {
+     "speciesKey": "hypno",
+     "level": 58
+    },
+    {
+     "speciesKey": "exeggcute",
+     "level": 59
     }
    ]
   }
@@ -3577,15 +3589,19 @@
   {
    "id": "unova-lentimas-town_t1",
    "name": "Unova Trainer 1",
-   "trainerClass": "hiker",
+   "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "sandshrew",
+     "speciesKey": "pidgey",
      "level": 55
     },
     {
-     "speciesKey": "sandslash",
+     "speciesKey": "pidgeotto",
      "level": 56
+    },
+    {
+     "speciesKey": "pidgeot",
+     "level": 57
     }
    ]
   },
@@ -3601,21 +3617,33 @@
     {
      "speciesKey": "rattata",
      "level": 57
+    },
+    {
+     "speciesKey": "raticate",
+     "level": 58
     }
    ]
   },
   {
    "id": "unova-lentimas-town_t3",
    "name": "Unova Trainer 3",
-   "trainerClass": "beauty",
+   "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "raticate",
+     "speciesKey": "voltorb",
      "level": 57
     },
     {
-     "speciesKey": "spearow",
+     "speciesKey": "electrode",
      "level": 58
+    },
+    {
+     "speciesKey": "electabuzz",
+     "level": 59
+    },
+    {
+     "speciesKey": "jolteon",
+     "level": 60
     }
    ]
   }
@@ -3624,22 +3652,26 @@
   {
    "id": "unova-black-city_t1",
    "name": "Unova Trainer 1",
-   "trainerClass": "hiker",
+   "trainerClass": "lass",
    "team": [
     {
-     "speciesKey": "sandshrew",
+     "speciesKey": "pidgey",
      "level": 57
     },
     {
-     "speciesKey": "sandslash",
+     "speciesKey": "pidgeotto",
      "level": 58
+    },
+    {
+     "speciesKey": "pidgeot",
+     "level": 59
     }
    ]
   },
   {
    "id": "unova-black-city_t2",
    "name": "Unova Trainer 2",
-   "trainerClass": "camper",
+   "trainerClass": "beauty",
    "team": [
     {
      "speciesKey": "pidgeot",
@@ -3648,21 +3680,33 @@
     {
      "speciesKey": "rattata",
      "level": 59
+    },
+    {
+     "speciesKey": "raticate",
+     "level": 60
     }
    ]
   },
   {
    "id": "unova-black-city_t3",
    "name": "Unova Trainer 3",
-   "trainerClass": "beauty",
+   "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "raticate",
+     "speciesKey": "arcanine",
      "level": 59
     },
     {
-     "speciesKey": "spearow",
+     "speciesKey": "volcarona",
      "level": 60
+    },
+    {
+     "speciesKey": "togekiss",
+     "level": 61
+    },
+    {
+     "speciesKey": "gyarados",
+     "level": 62
     }
    ]
   }
@@ -3676,39 +3720,31 @@
     {
      "speciesKey": "slaking",
      "level": 5
-    },
-    {
-     "speciesKey": "dragonite",
-     "level": 6
     }
    ]
   },
   {
    "id": "kalos-vaniville-town_t2",
    "name": "Kalos Trainer 2",
-   "trainerClass": "psychic",
+   "trainerClass": "blackbelt",
    "team": [
     {
-     "speciesKey": "alakazam",
+     "speciesKey": "poliwrath",
      "level": 6
-    },
-    {
-     "speciesKey": "slowpoke",
-     "level": 7
     }
    ]
   },
   {
    "id": "kalos-vaniville-town_t3",
    "name": "Kalos Trainer 3",
-   "trainerClass": "scientist",
+   "trainerClass": "bugCatcher",
    "team": [
     {
-     "speciesKey": "voltorb",
+     "speciesKey": "kakuna",
      "level": 7
     },
     {
-     "speciesKey": "electrode",
+     "speciesKey": "beedrill",
      "level": 8
     }
    ]
@@ -3718,44 +3754,36 @@
   {
    "id": "kalos-aquacorde-town_t1",
    "name": "Kalos Trainer 1",
-   "trainerClass": "coolTrainer",
+   "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "pikachu",
      "level": 9
-    },
-    {
-     "speciesKey": "dragonite",
-     "level": 10
     }
    ]
   },
   {
    "id": "kalos-aquacorde-town_t2",
    "name": "Kalos Trainer 2",
-   "trainerClass": "psychic",
+   "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "alakazam",
+     "speciesKey": "pidgeot",
      "level": 10
-    },
-    {
-     "speciesKey": "slowpoke",
-     "level": 11
     }
    ]
   },
   {
    "id": "kalos-aquacorde-town_t3",
    "name": "Kalos Trainer 3",
-   "trainerClass": "scientist",
+   "trainerClass": "camper",
    "team": [
     {
-     "speciesKey": "voltorb",
+     "speciesKey": "raticate",
      "level": 11
     },
     {
-     "speciesKey": "electrode",
+     "speciesKey": "spearow",
      "level": 12
     }
    ]
@@ -3765,44 +3793,36 @@
   {
    "id": "kalos-santalune-city_t1",
    "name": "Kalos Trainer 1",
-   "trainerClass": "coolTrainer",
+   "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "psyduck",
      "level": 14
-    },
-    {
-     "speciesKey": "dragonite",
-     "level": 15
     }
    ]
   },
   {
    "id": "kalos-santalune-city_t2",
    "name": "Kalos Trainer 2",
-   "trainerClass": "psychic",
+   "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "alakazam",
+     "speciesKey": "nidoqueen",
      "level": 15
-    },
-    {
-     "speciesKey": "slowpoke",
-     "level": 16
     }
    ]
   },
   {
    "id": "kalos-santalune-city_t3",
    "name": "Kalos Trainer 3",
-   "trainerClass": "scientist",
+   "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "voltorb",
+     "speciesKey": "slowbro",
      "level": 16
     },
     {
-     "speciesKey": "electrode",
+     "speciesKey": "drowzee",
      "level": 17
     }
    ]
@@ -3812,44 +3832,36 @@
   {
    "id": "kalos-lumiose-city_t1",
    "name": "Kalos Trainer 1",
-   "trainerClass": "coolTrainer",
+   "trainerClass": "lass",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "pidgey",
      "level": 18
-    },
-    {
-     "speciesKey": "dragonite",
-     "level": 19
     }
    ]
   },
   {
    "id": "kalos-lumiose-city_t2",
    "name": "Kalos Trainer 2",
-   "trainerClass": "psychic",
+   "trainerClass": "beauty",
    "team": [
     {
-     "speciesKey": "alakazam",
+     "speciesKey": "pidgeot",
      "level": 19
-    },
-    {
-     "speciesKey": "slowpoke",
-     "level": 20
     }
    ]
   },
   {
    "id": "kalos-lumiose-city_t3",
    "name": "Kalos Trainer 3",
-   "trainerClass": "scientist",
+   "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "voltorb",
+     "speciesKey": "arcanine",
      "level": 20
     },
     {
-     "speciesKey": "electrode",
+     "speciesKey": "florges",
      "level": 21
     }
    ]
@@ -3859,15 +3871,11 @@
   {
    "id": "kalos-camphrier-town_t1",
    "name": "Kalos Trainer 1",
-   "trainerClass": "coolTrainer",
+   "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "sandshrew",
      "level": 22
-    },
-    {
-     "speciesKey": "dragonite",
-     "level": 23
     }
    ]
   },
@@ -3879,24 +3887,20 @@
     {
      "speciesKey": "alakazam",
      "level": 23
-    },
-    {
-     "speciesKey": "slowpoke",
-     "level": 24
     }
    ]
   },
   {
    "id": "kalos-camphrier-town_t3",
    "name": "Kalos Trainer 3",
-   "trainerClass": "scientist",
+   "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "voltorb",
+     "speciesKey": "poliwrath",
      "level": 24
     },
     {
-     "speciesKey": "electrode",
+     "speciesKey": "tentacool",
      "level": 25
     }
    ]
@@ -3911,39 +3915,31 @@
     {
      "speciesKey": "slaking",
      "level": 27
-    },
-    {
-     "speciesKey": "dragonite",
-     "level": 28
     }
    ]
   },
   {
    "id": "kalos-cyllage-city_t2",
    "name": "Kalos Trainer 2",
-   "trainerClass": "psychic",
+   "trainerClass": "blackbelt",
    "team": [
     {
-     "speciesKey": "alakazam",
+     "speciesKey": "poliwrath",
      "level": 28
-    },
-    {
-     "speciesKey": "slowpoke",
-     "level": 29
     }
    ]
   },
   {
    "id": "kalos-cyllage-city_t3",
    "name": "Kalos Trainer 3",
-   "trainerClass": "scientist",
+   "trainerClass": "bugCatcher",
    "team": [
     {
-     "speciesKey": "voltorb",
+     "speciesKey": "kakuna",
      "level": 29
     },
     {
-     "speciesKey": "electrode",
+     "speciesKey": "beedrill",
      "level": 30
     }
    ]
@@ -3953,14 +3949,14 @@
   {
    "id": "kalos-ambrette-town_t1",
    "name": "Kalos Trainer 1",
-   "trainerClass": "coolTrainer",
+   "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "pikachu",
      "level": 31
     },
     {
-     "speciesKey": "dragonite",
+     "speciesKey": "raichu",
      "level": 32
     }
    ]
@@ -3968,14 +3964,14 @@
   {
    "id": "kalos-ambrette-town_t2",
    "name": "Kalos Trainer 2",
-   "trainerClass": "psychic",
+   "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "alakazam",
+     "speciesKey": "pidgeot",
      "level": 32
     },
     {
-     "speciesKey": "slowpoke",
+     "speciesKey": "rattata",
      "level": 33
     }
    ]
@@ -3983,15 +3979,19 @@
   {
    "id": "kalos-ambrette-town_t3",
    "name": "Kalos Trainer 3",
-   "trainerClass": "scientist",
+   "trainerClass": "camper",
    "team": [
     {
-     "speciesKey": "voltorb",
+     "speciesKey": "raticate",
      "level": 33
     },
     {
-     "speciesKey": "electrode",
+     "speciesKey": "spearow",
      "level": 34
+    },
+    {
+     "speciesKey": "fearow",
+     "level": 35
     }
    ]
   }
@@ -4000,14 +4000,14 @@
   {
    "id": "kalos-geosenge-town_t1",
    "name": "Kalos Trainer 1",
-   "trainerClass": "coolTrainer",
+   "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "psyduck",
      "level": 36
     },
     {
-     "speciesKey": "dragonite",
+     "speciesKey": "golduck",
      "level": 37
     }
    ]
@@ -4015,14 +4015,14 @@
   {
    "id": "kalos-geosenge-town_t2",
    "name": "Kalos Trainer 2",
-   "trainerClass": "psychic",
+   "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "alakazam",
+     "speciesKey": "nidoqueen",
      "level": 37
     },
     {
-     "speciesKey": "slowpoke",
+     "speciesKey": "nidoking",
      "level": 38
     }
    ]
@@ -4030,15 +4030,19 @@
   {
    "id": "kalos-geosenge-town_t3",
    "name": "Kalos Trainer 3",
-   "trainerClass": "scientist",
+   "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "voltorb",
+     "speciesKey": "slowbro",
      "level": 38
     },
     {
-     "speciesKey": "electrode",
+     "speciesKey": "drowzee",
      "level": 39
+    },
+    {
+     "speciesKey": "hypno",
+     "level": 40
     }
    ]
   }
@@ -4047,14 +4051,14 @@
   {
    "id": "kalos-shalour-city_t1",
    "name": "Kalos Trainer 1",
-   "trainerClass": "coolTrainer",
+   "trainerClass": "lass",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "pidgey",
      "level": 40
     },
     {
-     "speciesKey": "dragonite",
+     "speciesKey": "pidgeotto",
      "level": 41
     }
    ]
@@ -4062,14 +4066,14 @@
   {
    "id": "kalos-shalour-city_t2",
    "name": "Kalos Trainer 2",
-   "trainerClass": "psychic",
+   "trainerClass": "beauty",
    "team": [
     {
-     "speciesKey": "alakazam",
+     "speciesKey": "pidgeot",
      "level": 41
     },
     {
-     "speciesKey": "slowpoke",
+     "speciesKey": "rattata",
      "level": 42
     }
    ]
@@ -4077,15 +4081,19 @@
   {
    "id": "kalos-shalour-city_t3",
    "name": "Kalos Trainer 3",
-   "trainerClass": "scientist",
+   "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "voltorb",
+     "speciesKey": "arcanine",
      "level": 42
     },
     {
-     "speciesKey": "electrode",
+     "speciesKey": "florges",
      "level": 43
+    },
+    {
+     "speciesKey": "volcarona",
+     "level": 44
     }
    ]
   }
@@ -4094,14 +4102,14 @@
   {
    "id": "kalos-coumarine-city_t1",
    "name": "Kalos Trainer 1",
-   "trainerClass": "coolTrainer",
+   "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "sandshrew",
      "level": 44
     },
     {
-     "speciesKey": "dragonite",
+     "speciesKey": "sandslash",
      "level": 45
     }
    ]
@@ -4124,15 +4132,19 @@
   {
    "id": "kalos-coumarine-city_t3",
    "name": "Kalos Trainer 3",
-   "trainerClass": "scientist",
+   "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "voltorb",
+     "speciesKey": "poliwrath",
      "level": 46
     },
     {
-     "speciesKey": "electrode",
+     "speciesKey": "tentacool",
      "level": 47
+    },
+    {
+     "speciesKey": "tentacruel",
+     "level": 48
     }
    ]
   }
@@ -4156,14 +4168,14 @@
   {
    "id": "kalos-laverre-city_t2",
    "name": "Kalos Trainer 2",
-   "trainerClass": "psychic",
+   "trainerClass": "blackbelt",
    "team": [
     {
-     "speciesKey": "alakazam",
+     "speciesKey": "poliwrath",
      "level": 50
     },
     {
-     "speciesKey": "slowpoke",
+     "speciesKey": "machop",
      "level": 51
     }
    ]
@@ -4171,15 +4183,19 @@
   {
    "id": "kalos-laverre-city_t3",
    "name": "Kalos Trainer 3",
-   "trainerClass": "scientist",
+   "trainerClass": "bugCatcher",
    "team": [
     {
-     "speciesKey": "voltorb",
+     "speciesKey": "kakuna",
      "level": 51
     },
     {
-     "speciesKey": "electrode",
+     "speciesKey": "beedrill",
      "level": 52
+    },
+    {
+     "speciesKey": "paras",
+     "level": 53
     }
    ]
   }
@@ -4188,45 +4204,61 @@
   {
    "id": "kalos-dendemille-town_t1",
    "name": "Kalos Trainer 1",
-   "trainerClass": "coolTrainer",
+   "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "pikachu",
      "level": 53
     },
     {
-     "speciesKey": "dragonite",
+     "speciesKey": "raichu",
      "level": 54
+    },
+    {
+     "speciesKey": "magnemite",
+     "level": 55
     }
    ]
   },
   {
    "id": "kalos-dendemille-town_t2",
    "name": "Kalos Trainer 2",
-   "trainerClass": "psychic",
+   "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "alakazam",
+     "speciesKey": "pidgeot",
      "level": 54
     },
     {
-     "speciesKey": "slowpoke",
+     "speciesKey": "rattata",
      "level": 55
+    },
+    {
+     "speciesKey": "raticate",
+     "level": 56
     }
    ]
   },
   {
    "id": "kalos-dendemille-town_t3",
    "name": "Kalos Trainer 3",
-   "trainerClass": "scientist",
+   "trainerClass": "camper",
    "team": [
     {
-     "speciesKey": "voltorb",
+     "speciesKey": "raticate",
      "level": 55
     },
     {
-     "speciesKey": "electrode",
+     "speciesKey": "spearow",
      "level": 56
+    },
+    {
+     "speciesKey": "fearow",
+     "level": 57
+    },
+    {
+     "speciesKey": "jigglypuff",
+     "level": 58
     }
    ]
   }
@@ -4235,45 +4267,61 @@
   {
    "id": "kalos-anistar-city_t1",
    "name": "Kalos Trainer 1",
-   "trainerClass": "coolTrainer",
+   "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "psyduck",
      "level": 58
     },
     {
-     "speciesKey": "dragonite",
+     "speciesKey": "golduck",
      "level": 59
+    },
+    {
+     "speciesKey": "poliwag",
+     "level": 60
     }
    ]
   },
   {
    "id": "kalos-anistar-city_t2",
    "name": "Kalos Trainer 2",
-   "trainerClass": "psychic",
+   "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "alakazam",
+     "speciesKey": "nidoqueen",
      "level": 59
     },
     {
-     "speciesKey": "slowpoke",
+     "speciesKey": "nidoking",
      "level": 60
+    },
+    {
+     "speciesKey": "diglett",
+     "level": 61
     }
    ]
   },
   {
    "id": "kalos-anistar-city_t3",
    "name": "Kalos Trainer 3",
-   "trainerClass": "scientist",
+   "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "voltorb",
+     "speciesKey": "slowbro",
      "level": 60
     },
     {
-     "speciesKey": "electrode",
+     "speciesKey": "drowzee",
      "level": 61
+    },
+    {
+     "speciesKey": "hypno",
+     "level": 62
+    },
+    {
+     "speciesKey": "exeggcute",
+     "level": 63
     }
    ]
   }
@@ -4282,45 +4330,61 @@
   {
    "id": "kalos-couriway-town_t1",
    "name": "Kalos Trainer 1",
-   "trainerClass": "coolTrainer",
+   "trainerClass": "lass",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "pidgey",
      "level": 62
     },
     {
-     "speciesKey": "dragonite",
+     "speciesKey": "pidgeotto",
      "level": 63
+    },
+    {
+     "speciesKey": "pidgeot",
+     "level": 64
     }
    ]
   },
   {
    "id": "kalos-couriway-town_t2",
    "name": "Kalos Trainer 2",
-   "trainerClass": "psychic",
+   "trainerClass": "beauty",
    "team": [
     {
-     "speciesKey": "alakazam",
+     "speciesKey": "pidgeot",
      "level": 63
     },
     {
-     "speciesKey": "slowpoke",
+     "speciesKey": "rattata",
      "level": 64
+    },
+    {
+     "speciesKey": "raticate",
+     "level": 65
     }
    ]
   },
   {
    "id": "kalos-couriway-town_t3",
    "name": "Kalos Trainer 3",
-   "trainerClass": "scientist",
+   "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "voltorb",
+     "speciesKey": "arcanine",
      "level": 64
     },
     {
-     "speciesKey": "electrode",
+     "speciesKey": "florges",
      "level": 65
+    },
+    {
+     "speciesKey": "volcarona",
+     "level": 66
+    },
+    {
+     "speciesKey": "gyarados",
+     "level": 67
     }
    ]
   }
@@ -4329,15 +4393,19 @@
   {
    "id": "kalos-snowbelle-city_t1",
    "name": "Kalos Trainer 1",
-   "trainerClass": "coolTrainer",
+   "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "sandslash",
      "level": 66
     },
     {
-     "speciesKey": "hydreigon",
+     "speciesKey": "nidoqueen",
      "level": 67
+    },
+    {
+     "speciesKey": "nidoking",
+     "level": 68
     }
    ]
   },
@@ -4353,21 +4421,33 @@
     {
      "speciesKey": "mrMime",
      "level": 68
+    },
+    {
+     "speciesKey": "jynx",
+     "level": 69
     }
    ]
   },
   {
    "id": "kalos-snowbelle-city_t3",
    "name": "Kalos Trainer 3",
-   "trainerClass": "scientist",
+   "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "plusle",
+     "speciesKey": "cloyster",
      "level": 68
     },
     {
-     "speciesKey": "minun",
+     "speciesKey": "kingler",
      "level": 69
+    },
+    {
+     "speciesKey": "seaking",
+     "level": 70
+    },
+    {
+     "speciesKey": "starmie",
+     "level": 71
     }
    ]
   }
@@ -4376,45 +4456,61 @@
   {
    "id": "kalos-kiloude-city_t1",
    "name": "Kalos Trainer 1",
-   "trainerClass": "coolTrainer",
+   "trainerClass": "beauty",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "raticate",
      "level": 69
     },
     {
-     "speciesKey": "hydreigon",
+     "speciesKey": "fearow",
      "level": 70
+    },
+    {
+     "speciesKey": "clefable",
+     "level": 71
     }
    ]
   },
   {
    "id": "kalos-kiloude-city_t2",
    "name": "Kalos Trainer 2",
-   "trainerClass": "psychic",
+   "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "starmie",
+     "speciesKey": "goodra",
      "level": 70
     },
     {
-     "speciesKey": "mrMime",
+     "speciesKey": "archeops",
      "level": 71
+    },
+    {
+     "speciesKey": "arcanine",
+     "level": 72
     }
    ]
   },
   {
    "id": "kalos-kiloude-city_t3",
    "name": "Kalos Trainer 3",
-   "trainerClass": "scientist",
+   "trainerClass": "lass",
    "team": [
     {
-     "speciesKey": "plusle",
+     "speciesKey": "persian",
      "level": 71
     },
     {
-     "speciesKey": "minun",
+     "speciesKey": "farfetchd",
      "level": 72
+    },
+    {
+     "speciesKey": "dodrio",
+     "level": 73
+    },
+    {
+     "speciesKey": "mrMime",
+     "level": 74
     }
    ]
   }
@@ -4423,44 +4519,36 @@
   {
    "id": "alola-iki-town_t1",
    "name": "Alola Trainer 1",
-   "trainerClass": "ace",
+   "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "abra",
      "level": 5
-    },
-    {
-     "speciesKey": "dragonite",
-     "level": 6
     }
    ]
   },
   {
    "id": "alola-iki-town_t2",
    "name": "Alola Trainer 2",
-   "trainerClass": "blackbelt",
+   "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "poliwag",
      "level": 6
-    },
-    {
-     "speciesKey": "machop",
-     "level": 7
     }
    ]
   },
   {
    "id": "alola-iki-town_t3",
    "name": "Alola Trainer 3",
-   "trainerClass": "swimmer",
+   "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "diglett",
      "level": 7
     },
     {
-     "speciesKey": "tentacool",
+     "speciesKey": "dugtrio",
      "level": 8
     }
    ]
@@ -4470,44 +4558,36 @@
   {
    "id": "alola-hauoli-city_t1",
    "name": "Alola Trainer 1",
-   "trainerClass": "ace",
+   "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "psyduck",
      "level": 16
-    },
-    {
-     "speciesKey": "dragonite",
-     "level": 17
     }
    ]
   },
   {
    "id": "alola-hauoli-city_t2",
    "name": "Alola Trainer 2",
-   "trainerClass": "blackbelt",
+   "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "nidoqueen",
      "level": 17
-    },
-    {
-     "speciesKey": "machop",
-     "level": 18
     }
    ]
   },
   {
    "id": "alola-hauoli-city_t3",
    "name": "Alola Trainer 3",
-   "trainerClass": "swimmer",
+   "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "slowbro",
      "level": 18
     },
     {
-     "speciesKey": "tentacool",
+     "speciesKey": "drowzee",
      "level": 19
     }
    ]
@@ -4517,44 +4597,36 @@
   {
    "id": "alola-po-town_t1",
    "name": "Alola Trainer 1",
-   "trainerClass": "ace",
+   "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "pidgey",
      "level": 19
-    },
-    {
-     "speciesKey": "dragonite",
-     "level": 20
     }
    ]
   },
   {
    "id": "alola-po-town_t2",
    "name": "Alola Trainer 2",
-   "trainerClass": "blackbelt",
+   "trainerClass": "camper",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "pidgeot",
      "level": 20
-    },
-    {
-     "speciesKey": "machop",
-     "level": 21
     }
    ]
   },
   {
    "id": "alola-po-town_t3",
    "name": "Alola Trainer 3",
-   "trainerClass": "swimmer",
+   "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "voltorb",
      "level": 21
     },
     {
-     "speciesKey": "tentacool",
+     "speciesKey": "electrode",
      "level": 22
     }
    ]
@@ -4564,44 +4636,36 @@
   {
    "id": "alola-paniola-town_t1",
    "name": "Alola Trainer 1",
-   "trainerClass": "ace",
+   "trainerClass": "bugCatcher",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "caterpie",
      "level": 25
-    },
-    {
-     "speciesKey": "dragonite",
-     "level": 26
     }
    ]
   },
   {
    "id": "alola-paniola-town_t2",
    "name": "Alola Trainer 2",
-   "trainerClass": "blackbelt",
+   "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "tyranitar",
      "level": 26
-    },
-    {
-     "speciesKey": "machop",
-     "level": 27
     }
    ]
   },
   {
    "id": "alola-paniola-town_t3",
    "name": "Alola Trainer 3",
-   "trainerClass": "swimmer",
+   "trainerClass": "blackbelt",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "machoke",
      "level": 27
     },
     {
-     "speciesKey": "tentacool",
+     "speciesKey": "machamp",
      "level": 28
     }
    ]
@@ -4611,14 +4675,14 @@
   {
    "id": "alola-heahea-city_t1",
    "name": "Alola Trainer 1",
-   "trainerClass": "ace",
+   "trainerClass": "camper",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "pidgey",
      "level": 31
     },
     {
-     "speciesKey": "dragonite",
+     "speciesKey": "pidgeotto",
      "level": 32
     }
    ]
@@ -4626,14 +4690,14 @@
   {
    "id": "alola-heahea-city_t2",
    "name": "Alola Trainer 2",
-   "trainerClass": "blackbelt",
+   "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "magnemite",
      "level": 32
     },
     {
-     "speciesKey": "machop",
+     "speciesKey": "magneton",
      "level": 33
     }
    ]
@@ -4641,15 +4705,19 @@
   {
    "id": "alola-heahea-city_t3",
    "name": "Alola Trainer 3",
-   "trainerClass": "swimmer",
+   "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "raticate",
      "level": 33
     },
     {
-     "speciesKey": "tentacool",
+     "speciesKey": "spearow",
      "level": 34
+    },
+    {
+     "speciesKey": "fearow",
+     "level": 35
     }
    ]
   }
@@ -4658,14 +4726,14 @@
   {
    "id": "alola-konikoni-city_t1",
    "name": "Alola Trainer 1",
-   "trainerClass": "ace",
+   "trainerClass": "blackbelt",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "mankey",
      "level": 48
     },
     {
-     "speciesKey": "dragonite",
+     "speciesKey": "primeape",
      "level": 49
     }
    ]
@@ -4673,14 +4741,14 @@
   {
    "id": "alola-konikoni-city_t2",
    "name": "Alola Trainer 2",
-   "trainerClass": "blackbelt",
+   "trainerClass": "bugCatcher",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "butterfree",
      "level": 49
     },
     {
-     "speciesKey": "machop",
+     "speciesKey": "weedle",
      "level": 50
     }
    ]
@@ -4688,15 +4756,19 @@
   {
    "id": "alola-konikoni-city_t3",
    "name": "Alola Trainer 3",
-   "trainerClass": "swimmer",
+   "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "arcanine",
      "level": 50
     },
     {
-     "speciesKey": "tentacool",
+     "speciesKey": "florges",
      "level": 51
+    },
+    {
+     "speciesKey": "volcarona",
+     "level": 52
     }
    ]
   }
@@ -4705,45 +4777,61 @@
   {
    "id": "alola-malie-city_t1",
    "name": "Alola Trainer 1",
-   "trainerClass": "ace",
+   "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "pidgey",
      "level": 53
     },
     {
-     "speciesKey": "dragonite",
+     "speciesKey": "pidgeotto",
      "level": 54
+    },
+    {
+     "speciesKey": "pidgeot",
+     "level": 55
     }
    ]
   },
   {
    "id": "alola-malie-city_t2",
    "name": "Alola Trainer 2",
-   "trainerClass": "blackbelt",
+   "trainerClass": "camper",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "pidgeot",
      "level": 54
     },
     {
-     "speciesKey": "machop",
+     "speciesKey": "rattata",
      "level": 55
+    },
+    {
+     "speciesKey": "raticate",
+     "level": 56
     }
    ]
   },
   {
    "id": "alola-malie-city_t3",
    "name": "Alola Trainer 3",
-   "trainerClass": "swimmer",
+   "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "voltorb",
      "level": 55
     },
     {
-     "speciesKey": "tentacool",
+     "speciesKey": "electrode",
      "level": 56
+    },
+    {
+     "speciesKey": "electabuzz",
+     "level": 57
+    },
+    {
+     "speciesKey": "jolteon",
+     "level": 58
     }
    ]
   }
@@ -4752,44 +4840,36 @@
   {
    "id": "galar-postwick_t1",
    "name": "Galar Trainer 1",
-   "trainerClass": "youngster",
+   "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "pikachu",
      "level": 5
-    },
-    {
-     "speciesKey": "pidgeotto",
-     "level": 6
     }
    ]
   },
   {
    "id": "galar-postwick_t2",
    "name": "Galar Trainer 2",
-   "trainerClass": "lass",
+   "trainerClass": "youngster",
    "team": [
     {
      "speciesKey": "pidgeot",
      "level": 6
-    },
-    {
-     "speciesKey": "rattata",
-     "level": 7
     }
    ]
   },
   {
    "id": "galar-postwick_t3",
    "name": "Galar Trainer 3",
-   "trainerClass": "bugCatcher",
+   "trainerClass": "camper",
    "team": [
     {
-     "speciesKey": "kakuna",
+     "speciesKey": "raticate",
      "level": 7
     },
     {
-     "speciesKey": "beedrill",
+     "speciesKey": "spearow",
      "level": 8
     }
    ]
@@ -4799,44 +4879,36 @@
   {
    "id": "galar-wedgehurst_t1",
    "name": "Galar Trainer 1",
-   "trainerClass": "youngster",
+   "trainerClass": "blackbelt",
    "team": [
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "mankey",
      "level": 12
-    },
-    {
-     "speciesKey": "pidgeotto",
-     "level": 13
     }
    ]
   },
   {
    "id": "galar-wedgehurst_t2",
    "name": "Galar Trainer 2",
-   "trainerClass": "lass",
+   "trainerClass": "bugCatcher",
    "team": [
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "butterfree",
      "level": 13
-    },
-    {
-     "speciesKey": "rattata",
-     "level": 14
     }
    ]
   },
   {
    "id": "galar-wedgehurst_t3",
    "name": "Galar Trainer 3",
-   "trainerClass": "bugCatcher",
+   "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "kakuna",
+     "speciesKey": "arcanine",
      "level": 14
     },
     {
-     "speciesKey": "beedrill",
+     "speciesKey": "florges",
      "level": 15
     }
    ]
@@ -4851,39 +4923,31 @@
     {
      "speciesKey": "pidgey",
      "level": 19
-    },
-    {
-     "speciesKey": "pidgeotto",
-     "level": 20
     }
    ]
   },
   {
    "id": "galar-motostoke_t2",
    "name": "Galar Trainer 2",
-   "trainerClass": "lass",
+   "trainerClass": "camper",
    "team": [
     {
      "speciesKey": "pidgeot",
      "level": 20
-    },
-    {
-     "speciesKey": "rattata",
-     "level": 21
     }
    ]
   },
   {
    "id": "galar-motostoke_t3",
    "name": "Galar Trainer 3",
-   "trainerClass": "bugCatcher",
+   "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "kakuna",
+     "speciesKey": "voltorb",
      "level": 21
     },
     {
-     "speciesKey": "beedrill",
+     "speciesKey": "electrode",
      "level": 22
     }
    ]
@@ -4893,14 +4957,14 @@
   {
    "id": "galar-turffield_t1",
    "name": "Galar Trainer 1",
-   "trainerClass": "youngster",
+   "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "sandshrew",
      "level": 29
     },
     {
-     "speciesKey": "pidgeotto",
+     "speciesKey": "sandslash",
      "level": 30
     }
    ]
@@ -4908,14 +4972,14 @@
   {
    "id": "galar-turffield_t2",
    "name": "Galar Trainer 2",
-   "trainerClass": "lass",
+   "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "alakazam",
      "level": 30
     },
     {
-     "speciesKey": "rattata",
+     "speciesKey": "slowpoke",
      "level": 31
     }
    ]
@@ -4923,15 +4987,19 @@
   {
    "id": "galar-turffield_t3",
    "name": "Galar Trainer 3",
-   "trainerClass": "bugCatcher",
+   "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "kakuna",
+     "speciesKey": "poliwrath",
      "level": 31
     },
     {
-     "speciesKey": "beedrill",
+     "speciesKey": "tentacool",
      "level": 32
+    },
+    {
+     "speciesKey": "tentacruel",
+     "level": 33
     }
    ]
   }
@@ -4940,7 +5008,7 @@
   {
    "id": "galar-hulbury_t1",
    "name": "Galar Trainer 1",
-   "trainerClass": "youngster",
+   "trainerClass": "beauty",
    "team": [
     {
      "speciesKey": "pidgey",
@@ -4955,14 +5023,14 @@
   {
    "id": "galar-hulbury_t2",
    "name": "Galar Trainer 2",
-   "trainerClass": "lass",
+   "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "tyranitar",
      "level": 37
     },
     {
-     "speciesKey": "rattata",
+     "speciesKey": "hydreigon",
      "level": 38
     }
    ]
@@ -4970,15 +5038,19 @@
   {
    "id": "galar-hulbury_t3",
    "name": "Galar Trainer 3",
-   "trainerClass": "bugCatcher",
+   "trainerClass": "lass",
    "team": [
     {
-     "speciesKey": "kakuna",
+     "speciesKey": "raticate",
      "level": 38
     },
     {
-     "speciesKey": "beedrill",
+     "speciesKey": "spearow",
      "level": 39
+    },
+    {
+     "speciesKey": "fearow",
+     "level": 40
     }
    ]
   }
@@ -4987,14 +5059,14 @@
   {
    "id": "galar-hammerlocke_t1",
    "name": "Galar Trainer 1",
-   "trainerClass": "youngster",
+   "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "abra",
      "level": 42
     },
     {
-     "speciesKey": "pidgeotto",
+     "speciesKey": "kadabra",
      "level": 43
     }
    ]
@@ -5002,14 +5074,14 @@
   {
    "id": "galar-hammerlocke_t2",
    "name": "Galar Trainer 2",
-   "trainerClass": "lass",
+   "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "poliwag",
      "level": 43
     },
     {
-     "speciesKey": "rattata",
+     "speciesKey": "poliwhirl",
      "level": 44
     }
    ]
@@ -5017,15 +5089,19 @@
   {
    "id": "galar-hammerlocke_t3",
    "name": "Galar Trainer 3",
-   "trainerClass": "bugCatcher",
+   "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "kakuna",
+     "speciesKey": "diglett",
      "level": 44
     },
     {
-     "speciesKey": "beedrill",
+     "speciesKey": "dugtrio",
      "level": 45
+    },
+    {
+     "speciesKey": "geodude",
+     "level": 46
     }
    ]
   }
@@ -5034,14 +5110,14 @@
   {
    "id": "galar-stow-on-side_t1",
    "name": "Galar Trainer 1",
-   "trainerClass": "youngster",
+   "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "pikachu",
      "level": 46
     },
     {
-     "speciesKey": "pidgeotto",
+     "speciesKey": "raichu",
      "level": 47
     }
    ]
@@ -5049,7 +5125,7 @@
   {
    "id": "galar-stow-on-side_t2",
    "name": "Galar Trainer 2",
-   "trainerClass": "lass",
+   "trainerClass": "youngster",
    "team": [
     {
      "speciesKey": "pidgeot",
@@ -5064,15 +5140,19 @@
   {
    "id": "galar-stow-on-side_t3",
    "name": "Galar Trainer 3",
-   "trainerClass": "bugCatcher",
+   "trainerClass": "camper",
    "team": [
     {
-     "speciesKey": "kakuna",
+     "speciesKey": "raticate",
      "level": 48
     },
     {
-     "speciesKey": "beedrill",
+     "speciesKey": "spearow",
      "level": 49
+    },
+    {
+     "speciesKey": "fearow",
+     "level": 50
     }
    ]
   }
@@ -5081,45 +5161,61 @@
   {
    "id": "galar-circhester_t1",
    "name": "Galar Trainer 1",
-   "trainerClass": "youngster",
+   "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "psyduck",
      "level": 56
     },
     {
-     "speciesKey": "pidgeotto",
+     "speciesKey": "golduck",
      "level": 57
+    },
+    {
+     "speciesKey": "poliwag",
+     "level": 58
     }
    ]
   },
   {
    "id": "galar-circhester_t2",
    "name": "Galar Trainer 2",
-   "trainerClass": "lass",
+   "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "nidoqueen",
      "level": 57
     },
     {
-     "speciesKey": "rattata",
+     "speciesKey": "nidoking",
      "level": 58
+    },
+    {
+     "speciesKey": "diglett",
+     "level": 59
     }
    ]
   },
   {
    "id": "galar-circhester_t3",
    "name": "Galar Trainer 3",
-   "trainerClass": "bugCatcher",
+   "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "kakuna",
+     "speciesKey": "slowbro",
      "level": 58
     },
     {
-     "speciesKey": "beedrill",
+     "speciesKey": "drowzee",
      "level": 59
+    },
+    {
+     "speciesKey": "hypno",
+     "level": 60
+    },
+    {
+     "speciesKey": "exeggcute",
+     "level": 61
     }
    ]
   }
@@ -5128,7 +5224,7 @@
   {
    "id": "galar-spikemuth_t1",
    "name": "Galar Trainer 1",
-   "trainerClass": "youngster",
+   "trainerClass": "lass",
    "team": [
     {
      "speciesKey": "pidgey",
@@ -5137,13 +5233,17 @@
     {
      "speciesKey": "pidgeotto",
      "level": 64
+    },
+    {
+     "speciesKey": "pidgeot",
+     "level": 65
     }
    ]
   },
   {
    "id": "galar-spikemuth_t2",
    "name": "Galar Trainer 2",
-   "trainerClass": "lass",
+   "trainerClass": "beauty",
    "team": [
     {
      "speciesKey": "pidgeot",
@@ -5152,21 +5252,33 @@
     {
      "speciesKey": "rattata",
      "level": 65
+    },
+    {
+     "speciesKey": "raticate",
+     "level": 66
     }
    ]
   },
   {
    "id": "galar-spikemuth_t3",
    "name": "Galar Trainer 3",
-   "trainerClass": "bugCatcher",
+   "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "ariados",
+     "speciesKey": "arcanine",
      "level": 65
     },
     {
-     "speciesKey": "forretress",
+     "speciesKey": "florges",
      "level": 66
+    },
+    {
+     "speciesKey": "volcarona",
+     "level": 67
+    },
+    {
+     "speciesKey": "ursaluna",
+     "level": 68
     }
    ]
   }
@@ -5175,45 +5287,61 @@
   {
    "id": "galar-wyndon_t1",
    "name": "Galar Trainer 1",
-   "trainerClass": "youngster",
+   "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "raticate",
+     "speciesKey": "sandslash",
      "level": 70
     },
     {
-     "speciesKey": "fearow",
+     "speciesKey": "nidoqueen",
      "level": 71
+    },
+    {
+     "speciesKey": "nidoking",
+     "level": 72
     }
    ]
   },
   {
    "id": "galar-wyndon_t2",
    "name": "Galar Trainer 2",
-   "trainerClass": "lass",
+   "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "clefable",
+     "speciesKey": "starmie",
      "level": 71
     },
     {
-     "speciesKey": "wigglytuff",
+     "speciesKey": "mrMime",
      "level": 72
+    },
+    {
+     "speciesKey": "jynx",
+     "level": 73
     }
    ]
   },
   {
    "id": "galar-wyndon_t3",
    "name": "Galar Trainer 3",
-   "trainerClass": "bugCatcher",
+   "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "ariados",
+     "speciesKey": "cloyster",
      "level": 72
     },
     {
-     "speciesKey": "forretress",
+     "speciesKey": "kingler",
      "level": 73
+    },
+    {
+     "speciesKey": "seaking",
+     "level": 74
+    },
+    {
+     "speciesKey": "starmie",
+     "level": 75
     }
    ]
   }
@@ -5222,29 +5350,45 @@
   {
    "id": "galar-ballonlea_t1",
    "name": "Galar Trainer 1",
-   "trainerClass": "youngster",
+   "trainerClass": "camper",
    "team": [
     {
      "speciesKey": "raticate",
-     "level": 73
+     "level": 72
     },
     {
      "speciesKey": "fearow",
+     "level": 73
+    },
+    {
+     "speciesKey": "wigglytuff",
      "level": 74
+    },
+    {
+     "speciesKey": "vileplume",
+     "level": 75
     }
    ]
   },
   {
    "id": "galar-ballonlea_t2",
    "name": "Galar Trainer 2",
-   "trainerClass": "lass",
+   "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "clefable",
+     "speciesKey": "jolteon",
+     "level": 72
+    },
+    {
+     "speciesKey": "lanturn",
+     "level": 73
+    },
+    {
+     "speciesKey": "plusle",
      "level": 74
     },
     {
-     "speciesKey": "wigglytuff",
+     "speciesKey": "minun",
      "level": 75
     }
    ]
@@ -5252,14 +5396,22 @@
   {
    "id": "galar-ballonlea_t3",
    "name": "Galar Trainer 3",
-   "trainerClass": "bugCatcher",
+   "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "ariados",
+     "speciesKey": "farfetchd",
+     "level": 72
+    },
+    {
+     "speciesKey": "dodrio",
+     "level": 73
+    },
+    {
+     "speciesKey": "tauros",
      "level": 74
     },
     {
-     "speciesKey": "forretress",
+     "speciesKey": "ditto",
      "level": 75
     }
    ]
@@ -5269,30 +5421,22 @@
   {
    "id": "paldea-los-platos_t1",
    "name": "Paldea Trainer 1",
-   "trainerClass": "hiker",
+   "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "sandshrew",
+     "speciesKey": "slaking",
      "level": 5
-    },
-    {
-     "speciesKey": "sandslash",
-     "level": 6
     }
    ]
   },
   {
    "id": "paldea-los-platos_t2",
    "name": "Paldea Trainer 2",
-   "trainerClass": "camper",
+   "trainerClass": "lass",
    "team": [
     {
      "speciesKey": "pidgeot",
      "level": 6
-    },
-    {
-     "speciesKey": "rattata",
-     "level": 7
     }
    ]
   },
@@ -5316,44 +5460,36 @@
   {
    "id": "paldea-cabo-poco_t1",
    "name": "Paldea Trainer 1",
-   "trainerClass": "hiker",
+   "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "sandshrew",
+     "speciesKey": "psyduck",
      "level": 10
-    },
-    {
-     "speciesKey": "sandslash",
-     "level": 11
     }
    ]
   },
   {
    "id": "paldea-cabo-poco_t2",
    "name": "Paldea Trainer 2",
-   "trainerClass": "camper",
+   "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "nidoqueen",
      "level": 11
-    },
-    {
-     "speciesKey": "rattata",
-     "level": 12
     }
    ]
   },
   {
    "id": "paldea-cabo-poco_t3",
    "name": "Paldea Trainer 3",
-   "trainerClass": "beauty",
+   "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "raticate",
+     "speciesKey": "slowbro",
      "level": 12
     },
     {
-     "speciesKey": "spearow",
+     "speciesKey": "drowzee",
      "level": 13
     }
    ]
@@ -5363,15 +5499,11 @@
   {
    "id": "paldea-mesagoza_t1",
    "name": "Paldea Trainer 1",
-   "trainerClass": "hiker",
+   "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "sandshrew",
+     "speciesKey": "pidgey",
      "level": 13
-    },
-    {
-     "speciesKey": "sandslash",
-     "level": 14
     }
    ]
   },
@@ -5383,24 +5515,20 @@
     {
      "speciesKey": "pidgeot",
      "level": 14
-    },
-    {
-     "speciesKey": "rattata",
-     "level": 15
     }
    ]
   },
   {
    "id": "paldea-mesagoza_t3",
    "name": "Paldea Trainer 3",
-   "trainerClass": "beauty",
+   "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "raticate",
+     "speciesKey": "voltorb",
      "level": 15
     },
     {
-     "speciesKey": "spearow",
+     "speciesKey": "electrode",
      "level": 16
     }
    ]
@@ -5410,44 +5538,36 @@
   {
    "id": "paldea-medali_t1",
    "name": "Paldea Trainer 1",
-   "trainerClass": "hiker",
+   "trainerClass": "lass",
    "team": [
     {
-     "speciesKey": "sandshrew",
+     "speciesKey": "pidgey",
      "level": 15
-    },
-    {
-     "speciesKey": "sandslash",
-     "level": 16
     }
    ]
   },
   {
    "id": "paldea-medali_t2",
    "name": "Paldea Trainer 2",
-   "trainerClass": "camper",
+   "trainerClass": "beauty",
    "team": [
     {
      "speciesKey": "pidgeot",
      "level": 16
-    },
-    {
-     "speciesKey": "rattata",
-     "level": 17
     }
    ]
   },
   {
    "id": "paldea-medali_t3",
    "name": "Paldea Trainer 3",
-   "trainerClass": "beauty",
+   "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "raticate",
+     "speciesKey": "iron valiant",
      "level": 17
     },
     {
-     "speciesKey": "spearow",
+     "speciesKey": "great tusk",
      "level": 18
     }
    ]
@@ -5457,14 +5577,14 @@
   {
    "id": "paldea-alfornada_t1",
    "name": "Paldea Trainer 1",
-   "trainerClass": "hiker",
+   "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "sandshrew",
+     "speciesKey": "slaking",
      "level": 28
     },
     {
-     "speciesKey": "sandslash",
+     "speciesKey": "dragonite",
      "level": 29
     }
    ]
@@ -5472,14 +5592,14 @@
   {
    "id": "paldea-alfornada_t2",
    "name": "Paldea Trainer 2",
-   "trainerClass": "camper",
+   "trainerClass": "blackbelt",
    "team": [
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "poliwrath",
      "level": 29
     },
     {
-     "speciesKey": "rattata",
+     "speciesKey": "machop",
      "level": 30
     }
    ]
@@ -5487,15 +5607,19 @@
   {
    "id": "paldea-alfornada_t3",
    "name": "Paldea Trainer 3",
-   "trainerClass": "beauty",
+   "trainerClass": "bugCatcher",
    "team": [
     {
-     "speciesKey": "raticate",
+     "speciesKey": "kakuna",
      "level": 30
     },
     {
-     "speciesKey": "spearow",
+     "speciesKey": "beedrill",
      "level": 31
+    },
+    {
+     "speciesKey": "paras",
+     "level": 32
     }
    ]
   }
@@ -5504,14 +5628,14 @@
   {
    "id": "paldea-artazon_t1",
    "name": "Paldea Trainer 1",
-   "trainerClass": "hiker",
+   "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "sandshrew",
+     "speciesKey": "abra",
      "level": 30
     },
     {
-     "speciesKey": "sandslash",
+     "speciesKey": "kadabra",
      "level": 31
     }
    ]
@@ -5519,14 +5643,14 @@
   {
    "id": "paldea-artazon_t2",
    "name": "Paldea Trainer 2",
-   "trainerClass": "camper",
+   "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "poliwag",
      "level": 31
     },
     {
-     "speciesKey": "rattata",
+     "speciesKey": "poliwhirl",
      "level": 32
     }
    ]
@@ -5534,15 +5658,19 @@
   {
    "id": "paldea-artazon_t3",
    "name": "Paldea Trainer 3",
-   "trainerClass": "beauty",
+   "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "raticate",
+     "speciesKey": "diglett",
      "level": 32
     },
     {
-     "speciesKey": "spearow",
+     "speciesKey": "dugtrio",
      "level": 33
+    },
+    {
+     "speciesKey": "geodude",
+     "level": 34
     }
    ]
   }
@@ -5551,14 +5679,14 @@
   {
    "id": "paldea-cortondo_t1",
    "name": "Paldea Trainer 1",
-   "trainerClass": "hiker",
+   "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "sandshrew",
+     "speciesKey": "pikachu",
      "level": 33
     },
     {
-     "speciesKey": "sandslash",
+     "speciesKey": "raichu",
      "level": 34
     }
    ]
@@ -5566,7 +5694,7 @@
   {
    "id": "paldea-cortondo_t2",
    "name": "Paldea Trainer 2",
-   "trainerClass": "camper",
+   "trainerClass": "youngster",
    "team": [
     {
      "speciesKey": "pidgeot",
@@ -5581,7 +5709,7 @@
   {
    "id": "paldea-cortondo_t3",
    "name": "Paldea Trainer 3",
-   "trainerClass": "beauty",
+   "trainerClass": "camper",
    "team": [
     {
      "speciesKey": "raticate",
@@ -5590,6 +5718,10 @@
     {
      "speciesKey": "spearow",
      "level": 36
+    },
+    {
+     "speciesKey": "fearow",
+     "level": 37
     }
    ]
   }
@@ -5598,14 +5730,14 @@
   {
    "id": "paldea-montenevera_t1",
    "name": "Paldea Trainer 1",
-   "trainerClass": "hiker",
+   "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "sandshrew",
+     "speciesKey": "slaking",
      "level": 35
     },
     {
-     "speciesKey": "sandslash",
+     "speciesKey": "dragonite",
      "level": 36
     }
    ]
@@ -5613,7 +5745,7 @@
   {
    "id": "paldea-montenevera_t2",
    "name": "Paldea Trainer 2",
-   "trainerClass": "camper",
+   "trainerClass": "lass",
    "team": [
     {
      "speciesKey": "pidgeot",
@@ -5637,6 +5769,10 @@
     {
      "speciesKey": "spearow",
      "level": 38
+    },
+    {
+     "speciesKey": "fearow",
+     "level": 39
     }
    ]
   }
@@ -5645,14 +5781,14 @@
   {
    "id": "paldea-zapapico_t1",
    "name": "Paldea Trainer 1",
-   "trainerClass": "hiker",
+   "trainerClass": "blackbelt",
    "team": [
     {
-     "speciesKey": "sandshrew",
+     "speciesKey": "mankey",
      "level": 38
     },
     {
-     "speciesKey": "sandslash",
+     "speciesKey": "primeape",
      "level": 39
     }
    ]
@@ -5660,14 +5796,14 @@
   {
    "id": "paldea-zapapico_t2",
    "name": "Paldea Trainer 2",
-   "trainerClass": "camper",
+   "trainerClass": "bugCatcher",
    "team": [
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "butterfree",
      "level": 39
     },
     {
-     "speciesKey": "rattata",
+     "speciesKey": "weedle",
      "level": 40
     }
    ]
@@ -5675,15 +5811,19 @@
   {
    "id": "paldea-zapapico_t3",
    "name": "Paldea Trainer 3",
-   "trainerClass": "beauty",
+   "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "raticate",
+     "speciesKey": "iron valiant",
      "level": 40
     },
     {
-     "speciesKey": "spearow",
+     "speciesKey": "great tusk",
      "level": 41
+    },
+    {
+     "speciesKey": "brute bonnet",
+     "level": 42
     }
    ]
   }
@@ -5692,14 +5832,14 @@
   {
    "id": "paldea-cascarrafa_t1",
    "name": "Paldea Trainer 1",
-   "trainerClass": "hiker",
+   "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "sandshrew",
+     "speciesKey": "psyduck",
      "level": 40
     },
     {
-     "speciesKey": "sandslash",
+     "speciesKey": "golduck",
      "level": 41
     }
    ]
@@ -5707,14 +5847,14 @@
   {
    "id": "paldea-cascarrafa_t2",
    "name": "Paldea Trainer 2",
-   "trainerClass": "camper",
+   "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "nidoqueen",
      "level": 41
     },
     {
-     "speciesKey": "rattata",
+     "speciesKey": "nidoking",
      "level": 42
     }
    ]
@@ -5722,15 +5862,19 @@
   {
    "id": "paldea-cascarrafa_t3",
    "name": "Paldea Trainer 3",
-   "trainerClass": "beauty",
+   "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "raticate",
+     "speciesKey": "slowbro",
      "level": 42
     },
     {
-     "speciesKey": "spearow",
+     "speciesKey": "drowzee",
      "level": 43
+    },
+    {
+     "speciesKey": "hypno",
+     "level": 44
     }
    ]
   }
@@ -5739,45 +5883,61 @@
   {
    "id": "paldea-levincia_t1",
    "name": "Paldea Trainer 1",
-   "trainerClass": "hiker",
+   "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "sandshrew",
+     "speciesKey": "abra",
      "level": 60
     },
     {
-     "speciesKey": "sandslash",
+     "speciesKey": "kadabra",
      "level": 61
+    },
+    {
+     "speciesKey": "alakazam",
+     "level": 62
     }
    ]
   },
   {
    "id": "paldea-levincia_t2",
    "name": "Paldea Trainer 2",
-   "trainerClass": "camper",
+   "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "poliwag",
      "level": 61
     },
     {
-     "speciesKey": "rattata",
+     "speciesKey": "poliwhirl",
      "level": 62
+    },
+    {
+     "speciesKey": "poliwrath",
+     "level": 63
     }
    ]
   },
   {
    "id": "paldea-levincia_t3",
    "name": "Paldea Trainer 3",
-   "trainerClass": "beauty",
+   "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "raticate",
+     "speciesKey": "diglett",
      "level": 62
     },
     {
-     "speciesKey": "spearow",
+     "speciesKey": "dugtrio",
      "level": 63
+    },
+    {
+     "speciesKey": "geodude",
+     "level": 64
+    },
+    {
+     "speciesKey": "graveler",
+     "level": 65
     }
    ]
   }
@@ -5786,30 +5946,38 @@
   {
    "id": "paldea-porto-marinada_t1",
    "name": "Paldea Trainer 1",
-   "trainerClass": "hiker",
+   "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "sandslash",
+     "speciesKey": "slaking",
      "level": 65
     },
     {
-     "speciesKey": "nidoqueen",
+     "speciesKey": "hydreigon",
      "level": 66
+    },
+    {
+     "speciesKey": "goodra",
+     "level": 67
     }
    ]
   },
   {
    "id": "paldea-porto-marinada_t2",
    "name": "Paldea Trainer 2",
-   "trainerClass": "camper",
+   "trainerClass": "lass",
    "team": [
     {
-     "speciesKey": "wigglytuff",
+     "speciesKey": "clefable",
      "level": 66
     },
     {
-     "speciesKey": "vileplume",
+     "speciesKey": "wigglytuff",
      "level": 67
+    },
+    {
+     "speciesKey": "persian",
+     "level": 68
     }
    ]
   },
@@ -5825,6 +5993,14 @@
     {
      "speciesKey": "farfetchd",
      "level": 68
+    },
+    {
+     "speciesKey": "dodrio",
+     "level": 69
+    },
+    {
+     "speciesKey": "mrMime",
+     "level": 70
     }
    ]
   }
@@ -5833,15 +6009,23 @@
   {
    "id": "paldea-mossui-town_t1",
    "name": "Paldea Trainer 1",
-   "trainerClass": "hiker",
+   "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "sandslash",
+     "speciesKey": "raticate",
+     "level": 72
+    },
+    {
+     "speciesKey": "fearow",
      "level": 73
     },
     {
-     "speciesKey": "nidoqueen",
+     "speciesKey": "wigglytuff",
      "level": 74
+    },
+    {
+     "speciesKey": "persian",
+     "level": 75
     }
    ]
   },
@@ -5852,10 +6036,18 @@
    "team": [
     {
      "speciesKey": "wigglytuff",
-     "level": 74
+     "level": 72
     },
     {
      "speciesKey": "vileplume",
+     "level": 73
+    },
+    {
+     "speciesKey": "parasect",
+     "level": 74
+    },
+    {
+     "speciesKey": "persian",
      "level": 75
     }
    ]
@@ -5863,14 +6055,22 @@
   {
    "id": "paldea-mossui-town_t3",
    "name": "Paldea Trainer 3",
-   "trainerClass": "beauty",
+   "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "persian",
+     "speciesKey": "plusle",
+     "level": 72
+    },
+    {
+     "speciesKey": "minun",
+     "level": 73
+    },
+    {
+     "speciesKey": "luxray",
      "level": 74
     },
     {
-     "speciesKey": "farfetchd",
+     "speciesKey": "pachirisu",
      "level": 75
     }
    ]

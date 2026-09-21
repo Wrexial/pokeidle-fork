@@ -968,6 +968,11 @@ for (const region of REGIONS) {
   // Veilstone). Gating such a node would lock the town that holds the gym, so
   // skip ancestors while scanning forward.
   const nodePosition = new Map(order.map((node, position) => [node, position]))
+  // Town progression (used for mart stock) is measured across towns only, so
+  // the first town doesn't sit at 10% of the region just because routes
+  // outnumber it.
+  const townOrder = order.filter((node) => !isRouteNode(node))
+  const townPosition = new Map(townOrder.map((node, position) => [node, position]))
   const isAncestorOf = (ancestor, node) => {
     let current = node
     while (current) {
@@ -1169,6 +1174,12 @@ for (const region of REGIONS) {
         position: place(node),
       }
     } else {
+      const townIndex = nodePosition.get(node) ?? 0,
+        townT = order.length <= 1 ? 0 : townIndex / (order.length - 1),
+        townLevel = clampLevel(Math.round(LEVEL_MIN + townT * (WILD_LEVEL_MAX - LEVEL_MIN))),
+        // Mart progression is spread across the region's towns, not all nodes.
+        martIndex = townPosition.get(node) ?? 0,
+        martT = townOrder.length <= 1 ? 0 : martIndex / (townOrder.length - 1)
       mapData[id] = {
         id,
         name: display[node] ?? node,
@@ -1179,22 +1190,47 @@ for (const region of REGIONS) {
         unlock,
         unlockOrder: progressKey(node),
         position: place(node),
+        // Marts open up gradually like Kanto's hand-curated ones: the first
+        // towns sell only Poke Balls, then Great Balls, then Ultra Balls and
+        // Repel, then Honey. The wild-battle gates are global, so a region
+        // reached later already has them unlocked.
         mart: {
           name: `${name} Mart`,
-          items: [
-            { itemId: 'pokeball' }, { itemId: 'greatball' }, { itemId: 'ultraball' },
-            { itemId: 'repel' }, { itemId: 'honey' },
-          ],
+          items:
+            martT < 0.25
+              ? [{ itemId: 'pokeball' }]
+              : martT < 0.5
+                ? [
+                    { itemId: 'pokeball' },
+                    { itemId: 'greatball', unlockWildBattlesWon: 50 },
+                  ]
+                : martT < 0.75
+                  ? [
+                      { itemId: 'pokeball' },
+                      { itemId: 'greatball' },
+                      { itemId: 'ultraball', unlockWildBattlesWon: 150 },
+                      { itemId: 'repel' },
+                    ]
+                  : [
+                      { itemId: 'pokeball' },
+                      { itemId: 'greatball' },
+                      { itemId: 'ultraball' },
+                      { itemId: 'repel' },
+                      { itemId: 'honey' },
+                    ],
         },
       }
       const pool = teamPool.length ? teamPool : wild
-      // Town trainers follow the same 5-75 curve as the nearby routes.
-      const townIndex = order.indexOf(node),
-        townT = order.length <= 1 ? 0 : townIndex / (order.length - 1),
-        townLevel = clampLevel(Math.round(LEVEL_MIN + townT * (WILD_LEVEL_MAX - LEVEL_MIN)))
       if (pool.length)
         trainerData[id] = [0, 1, 2].map((i) => {
-          const trainerClass = TRAINER_CLASSES[(gen * 3 + i) % TRAINER_CLASSES.length]
+          // Vary the class by town (not just by region) so every town in a
+          // region isn't fielding the same three trainers.
+          const trainerClass =
+              TRAINER_CLASSES[(townIndex + i * 4 + gen) % TRAINER_CLASSES.length],
+            // Teams grow along the region's curve: one or two early, three or
+            // four later, with the last trainer as the town's ace.
+            baseSize = 1 + Math.floor(townT * 3),
+            teamSize = Math.min(4, baseSize + (i === 2 ? 1 : 0))
           return {
             id: `${id}_t${i + 1}`,
             name: `${name} Trainer ${i + 1}`,
@@ -1202,8 +1238,10 @@ for (const region of REGIONS) {
             team: buildTeam(
               pool,
               TRAINER_CLASS_TYPES[trainerClass],
-              2,
-              Math.min(townLevel + i, LEVEL_MAX - 1),
+              teamSize,
+              // The last team member sits at baseLevel + teamSize - 1, so leave
+              // room below LEVEL_MAX instead of overflowing to 77.
+              Math.min(townLevel + i, LEVEL_MAX - (teamSize - 1)),
               1,
               i * 2
             ),

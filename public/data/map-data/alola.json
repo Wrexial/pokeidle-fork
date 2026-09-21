@@ -16,8 +16,8 @@
   },
   "unlockOrder": 699999,
   "position": {
-   "x": 45,
-   "y": 34
+   "x": 14.29,
+   "y": 29.04
   },
   "mart": {
    "name": "Alola Mart",
@@ -62,8 +62,8 @@
   },
   "unlockOrder": 700001,
   "position": {
-   "x": 38,
-   "y": 37
+   "x": 16.07,
+   "y": 31.75
   }
  },
  "alola-route-1--hauoli-outskirts": {
@@ -84,8 +84,8 @@
   },
   "unlockOrder": 700001,
   "position": {
-   "x": 31,
-   "y": 37
+   "x": 14.29,
+   "y": 23.11
   }
  },
  "alola-route-2": {
@@ -110,8 +110,8 @@
   },
   "unlockOrder": 700002,
   "position": {
-   "x": 34,
-   "y": 30
+   "x": 11.43,
+   "y": 30.96
   }
  },
  "alola-hauoli-city": {
@@ -134,8 +134,8 @@
   },
   "unlockOrder": 700002.5,
   "position": {
-   "x": 39,
-   "y": 60
+   "x": 12.5,
+   "y": 34.39
   },
   "mart": {
    "name": "Alola Mart",
@@ -181,8 +181,8 @@
   },
   "unlockOrder": 700002.5,
   "position": {
-   "x": 41,
-   "y": 18
+   "x": 68.57,
+   "y": 48.32
   },
   "mart": {
    "name": "Alola Mart",
@@ -229,8 +229,8 @@
   },
   "unlockOrder": 700003,
   "position": {
-   "x": 47,
-   "y": 41
+   "x": 14.43,
+   "y": 27.61
   }
  },
  "alola-paniola-town": {
@@ -257,8 +257,8 @@
   },
   "unlockOrder": 700003.5,
   "position": {
-   "x": 56,
-   "y": 41
+   "x": 47.5,
+   "y": 35.46
   },
   "mart": {
    "name": "Alola Mart",
@@ -307,8 +307,8 @@
   },
   "unlockOrder": 700004,
   "position": {
-   "x": 58,
-   "y": 54
+   "x": 36.21,
+   "y": 38.46
   }
  },
  "alola-heahea-city": {
@@ -333,8 +333,8 @@
   },
   "unlockOrder": 700004.5,
   "position": {
-   "x": 50,
-   "y": 50
+   "x": 42.86,
+   "y": 41.39
   },
   "mart": {
    "name": "Alola Mart",
@@ -380,8 +380,8 @@
   },
   "unlockOrder": 700005,
   "position": {
-   "x": 58,
-   "y": 16
+   "x": 54.21,
+   "y": 38.46
   }
  },
  "alola-route-6": {
@@ -408,8 +408,8 @@
   },
   "unlockOrder": 700006,
   "position": {
-   "x": 62,
-   "y": 44
+   "x": 40.71,
+   "y": 38.46
   }
  },
  "alola-route-7": {
@@ -435,8 +435,8 @@
   },
   "unlockOrder": 700007,
   "position": {
-   "x": 64,
-   "y": 21
+   "x": 49.71,
+   "y": 38.46
   }
  },
  "alola-route-8": {
@@ -460,8 +460,8 @@
   },
   "unlockOrder": 700008,
   "position": {
-   "x": 58,
-   "y": 6
+   "x": 45.21,
+   "y": 38.46
   }
  },
  "alola-route-9": {
@@ -489,8 +489,8 @@
   },
   "unlockOrder": 700009,
   "position": {
-   "x": 51,
-   "y": 79
+   "x": 41.79,
+   "y": 44.32
   }
  },
  "alola-konikoni-city": {
@@ -513,8 +513,8 @@
   },
   "unlockOrder": 700009.5,
   "position": {
-   "x": 46,
-   "y": 75
+   "x": 40.71,
+   "y": 47.25
   },
   "mart": {
    "name": "Alola Mart",
@@ -561,8 +561,8 @@
   },
   "unlockOrder": 700010,
   "position": {
-   "x": 47,
-   "y": 56
+   "x": 82.5,
+   "y": 48.04
   }
  },
  "alola-malie-city": {
@@ -585,8 +585,8 @@
   },
   "unlockOrder": 700010.5,
   "position": {
-   "x": 53,
-   "y": 72
+   "x": 82.5,
+   "y": 54.39
   },
   "mart": {
    "name": "Alola Mart",
@@ -634,8 +634,8 @@
   },
   "unlockOrder": 700011,
   "position": {
-   "x": 60,
-   "y": 71
+   "x": 82.5,
+   "y": 52.54
   }
  },
  "alola-route-12": {
@@ -662,8 +662,8 @@
   },
   "unlockOrder": 700012,
   "position": {
-   "x": 69,
-   "y": 86
+   "x": 82.5,
+   "y": 57.04
   }
  },
  "alola-route-13": {
@@ -689,8 +689,8 @@
   },
   "unlockOrder": 700013,
   "position": {
-   "x": 58,
-   "y": 78
+   "x": 82.5,
+   "y": 65.96
   }
  },
  "alola-route-14": {
@@ -714,8 +714,8 @@
   },
   "unlockOrder": 700014,
   "position": {
-   "x": 43,
-   "y": 94
+   "x": 82.5,
+   "y": 61.54
   }
  },
  "alola-route-15": {
@@ -740,8 +740,8 @@
   },
   "unlockOrder": 700015,
   "position": {
-   "x": 41,
-   "y": 69
+   "x": 82.5,
+   "y": 70.46
   }
  },
  "alola-route-16": {
@@ -766,8 +766,8 @@
   },
   "unlockOrder": 700016,
   "position": {
-   "x": 54,
-   "y": 59
+   "x": 75.57,
+   "y": 55.04
   }
  },
  "alola-route-17": {
@@ -794,8 +794,8 @@
   },
   "unlockOrder": 700017,
   "position": {
-   "x": 60,
-   "y": 29
+   "x": 68.57,
+   "y": 45.89
   }
  },
  "alola-raid": {
@@ -818,8 +818,8 @@
   },
   "unlockOrder": 700018,
   "position": {
-   "x": 73,
-   "y": 23
+   "x": 68,
+   "y": 19
   }
  },
  "alola-league": {
@@ -851,8 +851,8 @@
   },
   "unlockOrder": 700019,
   "position": {
-   "x": 75,
-   "y": 29
+   "x": 70,
+   "y": 25
   }
  }
 }

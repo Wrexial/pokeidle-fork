@@ -14,8 +14,8 @@
   },
   "unlockOrder": 799999,
   "position": {
-   "x": 11,
-   "y": 94
+   "x": 51.31,
+   "y": 97.17
   },
   "mart": {
    "name": "Galar Mart",
@@ -56,8 +56,8 @@
   },
   "unlockOrder": 800001,
   "position": {
-   "x": 11,
-   "y": 79
+   "x": 51.73,
+   "y": 93.92
   }
  },
  "galar-wedgehurst": {
@@ -80,8 +80,8 @@
   },
   "unlockOrder": 800001.5,
   "position": {
-   "x": 11,
-   "y": 64
+   "x": 52.1,
+   "y": 90.62
   },
   "mart": {
    "name": "Galar Mart",
@@ -125,8 +125,8 @@
   },
   "unlockOrder": 800002,
   "position": {
-   "x": 26,
-   "y": 65
+   "x": 48.59,
+   "y": 78.73
   }
  },
  "galar-motostoke": {
@@ -150,8 +150,8 @@
   },
   "unlockOrder": 800002.5,
   "position": {
-   "x": 26,
-   "y": 49
+   "x": 45.02,
+   "y": 66.79
   },
   "mart": {
    "name": "Galar Mart",
@@ -195,8 +195,8 @@
   },
   "unlockOrder": 800003,
   "position": {
-   "x": 10,
-   "y": 50
+   "x": 44.92,
+   "y": 65.53
   }
  },
  "galar-route-4": {
@@ -220,8 +220,8 @@
   },
   "unlockOrder": 800004,
   "position": {
-   "x": 9,
-   "y": 21
+   "x": 42.04,
+   "y": 62.07
   }
  },
  "galar-turffield": {
@@ -244,8 +244,8 @@
   },
   "unlockOrder": 800004.5,
   "position": {
-   "x": 10,
-   "y": 6
+   "x": 40.31,
+   "y": 59.98
   },
   "mart": {
    "name": "Galar Mart",
@@ -292,8 +292,8 @@
   },
   "unlockOrder": 800005,
   "position": {
-   "x": 24,
-   "y": 6
+   "x": 47.64,
+   "y": 59.35
   }
  },
  "galar-hulbury": {
@@ -315,8 +315,8 @@
   },
   "unlockOrder": 800005.5,
   "position": {
-   "x": 39,
-   "y": 6
+   "x": 54.98,
+   "y": 58.67
   },
   "mart": {
    "name": "Galar Mart",
@@ -364,8 +364,8 @@
   },
   "unlockOrder": 800006,
   "position": {
-   "x": 37,
-   "y": 51
+   "x": 45.29,
+   "y": 53.33
   }
  },
  "galar-hammerlocke": {
@@ -392,8 +392,8 @@
   },
   "unlockOrder": 800006.5,
   "position": {
-   "x": 52,
-   "y": 53
+   "x": 49.74,
+   "y": 47.15
   },
   "mart": {
    "name": "Galar Mart",
@@ -436,8 +436,8 @@
   },
   "unlockOrder": 800006.5,
   "position": {
-   "x": 22,
-   "y": 57
+   "x": 41.09,
+   "y": 46.1
   },
   "mart": {
    "name": "Galar Mart",
@@ -485,8 +485,8 @@
   },
   "unlockOrder": 800007,
   "position": {
-   "x": 66,
-   "y": 52
+   "x": 50.79,
+   "y": 45.68
   }
  },
  "galar-route-8": {
@@ -510,8 +510,8 @@
   },
   "unlockOrder": 800008,
   "position": {
-   "x": 70,
-   "y": 40
+   "x": 57.81,
+   "y": 41.8
   }
  },
  "galar-circhester": {
@@ -534,8 +534,8 @@
   },
   "unlockOrder": 800008.5,
   "position": {
-   "x": 73,
-   "y": 26
+   "x": 65.19,
+   "y": 38.24
   },
   "mart": {
    "name": "Galar Mart",
@@ -583,7 +583,7 @@
   },
   "unlockOrder": 800009,
   "position": {
-   "x": 81,
+   "x": 60.9,
    "y": 45
   }
  },
@@ -606,8 +606,8 @@
   },
   "unlockOrder": 800009.5,
   "position": {
-   "x": 91,
-   "y": 40
+   "x": 66.24,
+   "y": 50.55
   },
   "mart": {
    "name": "Galar Mart",
@@ -656,8 +656,8 @@
   },
   "unlockOrder": 800010,
   "position": {
-   "x": 51,
-   "y": 37
+   "x": 50.16,
+   "y": 32.37
   }
  },
  "galar-wyndon": {
@@ -682,8 +682,8 @@
   },
   "unlockOrder": 800010.5,
   "position": {
-   "x": 52,
-   "y": 24
+   "x": 50.52,
+   "y": 17.55
   },
   "mart": {
    "name": "Galar Mart",
@@ -725,8 +725,8 @@
   },
   "unlockOrder": 810007,
   "position": {
-   "x": 22,
-   "y": 42
+   "x": 39.26,
+   "y": 35.62
   },
   "mart": {
    "name": "Galar Mart",

@@ -16,7 +16,7 @@
   "unlockOrder": 199999,
   "position": {
    "x": 76.03,
-   "y": 57.09
+   "y": 54.56
   },
   "mart": {
    "name": "Johto Mart",
@@ -59,7 +59,7 @@
   "unlockOrder": 200029,
   "position": {
    "x": 71.17,
-   "y": 61.44
+   "y": 57.36
   }
  },
  "johto-cherrygrove-city": {
@@ -83,7 +83,7 @@
   "unlockOrder": 200029.5,
   "position": {
    "x": 62.04,
-   "y": 59.55
+   "y": 56.14
   },
   "mart": {
    "name": "Johto Mart",
@@ -128,7 +128,7 @@
   "unlockOrder": 200030,
   "position": {
    "x": 60.22,
-   "y": 46.31
+   "y": 47.63
   }
  },
  "johto-route-31": {
@@ -154,7 +154,7 @@
   "unlockOrder": 200031,
   "position": {
    "x": 51.7,
-   "y": 44.05
+   "y": 46.17
   }
  },
  "johto-violet-city": {
@@ -179,7 +179,7 @@
   "unlockOrder": 200031.5,
   "position": {
    "x": 52.31,
-   "y": 35.54
+   "y": 40.69
   },
   "mart": {
    "name": "Johto Mart",
@@ -227,7 +227,7 @@
   "unlockOrder": 200032,
   "position": {
    "x": 51.09,
-   "y": 69
+   "y": 62.23
   }
  },
  "johto-route-33": {
@@ -252,7 +252,7 @@
   "unlockOrder": 200033,
   "position": {
    "x": 41.36,
-   "y": 84.69
+   "y": 72.32
   }
  },
  "johto-azalea-town": {
@@ -276,7 +276,7 @@
   "unlockOrder": 200033.5,
   "position": {
    "x": 32.24,
-   "y": 86.96
+   "y": 73.78
   },
   "mart": {
    "name": "Johto Mart",
@@ -324,7 +324,7 @@
   "unlockOrder": 200034,
   "position": {
    "x": 31.63,
-   "y": 65.22
+   "y": 59.79
   }
  },
  "johto-goldenrod-city": {
@@ -348,7 +348,7 @@
   "unlockOrder": 200034.5,
   "position": {
    "x": 38.32,
-   "y": 46.31
+   "y": 47.63
   },
   "mart": {
    "name": "Johto Mart",
@@ -396,7 +396,7 @@
   "unlockOrder": 200035,
   "position": {
    "x": 31.39,
-   "y": 36.29
+   "y": 41.18
   }
  },
  "johto-route-36": {
@@ -422,7 +422,7 @@
   "unlockOrder": 200036,
   "position": {
    "x": 40.75,
-   "y": 29.68
+   "y": 36.92
   }
  },
  "johto-route-37": {
@@ -447,7 +447,7 @@
   "unlockOrder": 200037,
   "position": {
    "x": 40.15,
-   "y": 24.2
+   "y": 33.39
   }
  },
  "johto-ecruteak-city": {
@@ -473,7 +473,7 @@
   "unlockOrder": 200037.5,
   "position": {
    "x": 41.36,
-   "y": 18.53
+   "y": 29.74
   },
   "mart": {
    "name": "Johto Mart",
@@ -520,7 +520,7 @@
   "unlockOrder": 200038,
   "position": {
    "x": 40.75,
-   "y": 10.96
+   "y": 24.88
   }
  },
  "johto-route-38": {
@@ -545,7 +545,7 @@
   "unlockOrder": 200038,
   "position": {
    "x": 30.41,
-   "y": 17.39
+   "y": 29.01
   }
  },
  "johto-route-39": {
@@ -570,7 +570,7 @@
   "unlockOrder": 200039,
   "position": {
    "x": 21.29,
-   "y": 21.74
+   "y": 31.81
   }
  },
  "johto-olivine-city": {
@@ -594,7 +594,7 @@
   "unlockOrder": 200039.5,
   "position": {
    "x": 18.49,
-   "y": 34.97
+   "y": 40.33
   },
   "mart": {
    "name": "Johto Mart",
@@ -639,7 +639,7 @@
   "unlockOrder": 200040,
   "position": {
    "x": 4.87,
-   "y": 36.86
+   "y": 41.55
   }
  },
  "johto-sea-route-41": {
@@ -665,7 +665,7 @@
   "unlockOrder": 200041,
   "position": {
    "x": 15.82,
-   "y": 62.38
+   "y": 57.97
   }
  },
  "johto-cianwood-city": {
@@ -689,7 +689,7 @@
   "unlockOrder": 200041.5,
   "position": {
    "x": 6.08,
-   "y": 71.83
+   "y": 64.05
   },
   "mart": {
    "name": "Johto Mart",
@@ -736,7 +736,7 @@
   "unlockOrder": 200041.5,
   "position": {
    "x": 8.52,
-   "y": 49.53
+   "y": 49.7
   }
  },
  "johto-route-42": {
@@ -764,7 +764,7 @@
   "unlockOrder": 200042,
   "position": {
    "x": 48.05,
-   "y": 17.96
+   "y": 29.38
   }
  },
  "johto-mahogany-town": {
@@ -789,7 +789,7 @@
   "unlockOrder": 200042.5,
   "position": {
    "x": 65.45,
-   "y": 26.47
+   "y": 34.85
   },
   "mart": {
    "name": "Johto Mart",
@@ -836,7 +836,7 @@
   "unlockOrder": 200043,
   "position": {
    "x": 60.83,
-   "y": 12.67
+   "y": 25.97
   }
  },
  "johto-route-44": {
@@ -861,7 +861,7 @@
   "unlockOrder": 200044,
   "position": {
    "x": 69.95,
-   "y": 15.5
+   "y": 27.8
   }
  },
  "johto-blackthorn-city": {
@@ -885,7 +885,7 @@
   "unlockOrder": 200044.5,
   "position": {
    "x": 77.86,
-   "y": 14.74
+   "y": 27.31
   },
   "mart": {
    "name": "Johto Mart",
@@ -933,7 +933,7 @@
   "unlockOrder": 200045,
   "position": {
    "x": 69.95,
-   "y": 31.19
+   "y": 37.9
   }
  },
  "johto-route-46": {
@@ -959,7 +959,7 @@
   "unlockOrder": 200046,
   "position": {
    "x": 68.13,
-   "y": 48.2
+   "y": 48.84
   }
  },
  "johto-route-47": {
@@ -984,7 +984,7 @@
   "unlockOrder": 200047,
   "position": {
    "x": 3.04,
-   "y": 75.61
+   "y": 66.48
   }
  },
  "johto-route-48": {
@@ -1008,7 +1008,7 @@
   "unlockOrder": 200048,
   "position": {
    "x": 1.82,
-   "y": 67.11
+   "y": 61.01
   }
  },
  "johto-mt-silver": {
@@ -1031,7 +1031,7 @@
   "unlockOrder": 200090,
   "position": {
    "x": 85.16,
-   "y": 47.26
+   "y": 48.24
   }
  },
  "johto-raid": {
@@ -1055,7 +1055,7 @@
   "unlockOrder": 200091,
   "position": {
    "x": 75.43,
-   "y": 90.74
+   "y": 76.22
   }
  },
  "johto-league": {
@@ -1088,7 +1088,7 @@
   "unlockOrder": 200092,
   "position": {
    "x": 93.67,
-   "y": 19.85
+   "y": 30.6
   }
  }
 }

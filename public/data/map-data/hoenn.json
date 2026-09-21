@@ -15,7 +15,7 @@
   "unlockOrder": 299999,
   "position": {
    "x": 16.88,
-   "y": 75.71
+   "y": 66.88
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -57,7 +57,7 @@
   "unlockOrder": 300101,
   "position": {
    "x": 16.56,
-   "y": 69.24
+   "y": 62.63
   }
  },
  "hoenn-oldale-town": {
@@ -82,7 +82,7 @@
   "unlockOrder": 300101.5,
   "position": {
    "x": 16.88,
-   "y": 64.76
+   "y": 59.69
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -127,7 +127,7 @@
   "unlockOrder": 300102,
   "position": {
    "x": 11.38,
-   "y": 64
+   "y": 59.19
   }
  },
  "hoenn-petalburg-city": {
@@ -151,7 +151,7 @@
   "unlockOrder": 300102.5,
   "position": {
    "x": 6.56,
-   "y": 64.76
+   "y": 59.69
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -196,7 +196,7 @@
   "unlockOrder": 300103,
   "position": {
    "x": 21.69,
-   "y": 58.29
+   "y": 55.44
   }
  },
  "hoenn-route-104": {
@@ -222,7 +222,7 @@
   "unlockOrder": 300104,
   "position": {
    "x": 3.13,
-   "y": 56.67
+   "y": 54.38
   }
  },
  "hoenn-rustboro-city": {
@@ -247,7 +247,7 @@
   "unlockOrder": 300104.5,
   "position": {
    "x": 3,
-   "y": 40.48
+   "y": 43.75
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -295,7 +295,7 @@
   "unlockOrder": 300105,
   "position": {
    "x": 2.63,
-   "y": 75.43
+   "y": 66.69
   }
  },
  "hoenn-route-106": {
@@ -320,7 +320,7 @@
   "unlockOrder": 300106,
   "position": {
    "x": 5.63,
-   "y": 84.76
+   "y": 72.81
   }
  },
  "hoenn-dewford-town": {
@@ -344,7 +344,7 @@
   "unlockOrder": 300106.5,
   "position": {
    "x": 10,
-   "y": 91.24
+   "y": 77.06
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -392,7 +392,7 @@
   "unlockOrder": 300107,
   "position": {
    "x": 16.56,
-   "y": 90.67
+   "y": 76.69
   }
  },
  "hoenn-route-108": {
@@ -416,8 +416,8 @@
   },
   "unlockOrder": 300108,
   "position": {
-   "x": 25.12,
-   "y": 90.67
+   "x": 25.13,
+   "y": 76.69
   }
  },
  "hoenn-route-109": {
@@ -442,7 +442,7 @@
   "unlockOrder": 300109,
   "position": {
    "x": 30.44,
-   "y": 85.43
+   "y": 73.25
   }
  },
  "hoenn-slateport-city": {
@@ -467,7 +467,7 @@
   "unlockOrder": 300109.5,
   "position": {
    "x": 30.63,
-   "y": 72.38
+   "y": 64.69
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -513,7 +513,7 @@
   "unlockOrder": 300110,
   "position": {
    "x": 30.13,
-   "y": 55.71
+   "y": 53.75
   }
  },
  "hoenn-mauville-city": {
@@ -539,7 +539,7 @@
   "unlockOrder": 300110.5,
   "position": {
    "x": 31.06,
-   "y": 43.05
+   "y": 45.44
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -588,7 +588,7 @@
   "unlockOrder": 300111,
   "position": {
    "x": 29.88,
-   "y": 24.95
+   "y": 33.56
   }
  },
  "hoenn-route-112": {
@@ -613,7 +613,7 @@
   "unlockOrder": 300112,
   "position": {
    "x": 25.31,
-   "y": 32.38
+   "y": 38.44
   }
  },
  "hoenn-lavaridge-town": {
@@ -636,7 +636,7 @@
   "unlockOrder": 300112.5,
   "position": {
    "x": 20.94,
-   "y": 33.05
+   "y": 38.88
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -684,7 +684,7 @@
   "unlockOrder": 300113,
   "position": {
    "x": 21.25,
-   "y": 11.24
+   "y": 24.56
   }
  },
  "hoenn-fallarbor-town": {
@@ -711,7 +711,7 @@
   "unlockOrder": 300113.5,
   "position": {
    "x": 12.94,
-   "y": 11.24
+   "y": 24.56
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -756,7 +756,7 @@
   "unlockOrder": 300114,
   "position": {
    "x": 8.56,
-   "y": 16.95
+   "y": 28.31
   }
  },
  "hoenn-route-115": {
@@ -781,7 +781,7 @@
   "unlockOrder": 300115,
   "position": {
    "x": 2.31,
-   "y": 28.38
+   "y": 35.81
   }
  },
  "hoenn-route-116": {
@@ -806,7 +806,7 @@
   "unlockOrder": 300116,
   "position": {
    "x": 10,
-   "y": 37.14
+   "y": 41.56
   }
  },
  "hoenn-verdanturf-town": {
@@ -830,7 +830,7 @@
   "unlockOrder": 300116.5,
   "position": {
    "x": 15.44,
-   "y": 43.05
+   "y": 45.44
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -875,7 +875,7 @@
   "unlockOrder": 300117,
   "position": {
    "x": 23.13,
-   "y": 43.05
+   "y": 45.44
   }
  },
  "hoenn-route-118": {
@@ -901,7 +901,7 @@
   "unlockOrder": 300118,
   "position": {
    "x": 38.75,
-   "y": 42.86
+   "y": 45.31
   }
  },
  "hoenn-route-119": {
@@ -926,7 +926,7 @@
   "unlockOrder": 300119,
   "position": {
    "x": 40.31,
-   "y": 24.95
+   "y": 33.56
   }
  },
  "hoenn-fortree-city": {
@@ -950,7 +950,7 @@
   "unlockOrder": 300119.5,
   "position": {
    "x": 44.5,
-   "y": 11.24
+   "y": 24.56
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -998,7 +998,7 @@
   "unlockOrder": 300120,
   "position": {
    "x": 47.38,
-   "y": 19.05
+   "y": 29.69
   }
  },
  "hoenn-route-121": {
@@ -1024,7 +1024,7 @@
   "unlockOrder": 300121,
   "position": {
    "x": 58.44,
-   "y": 27.14
+   "y": 35
   }
  },
  "hoenn-lilycove-city": {
@@ -1048,7 +1048,7 @@
   "unlockOrder": 300121.5,
   "position": {
    "x": 70.13,
-   "y": 26.67
+   "y": 34.69
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -1093,7 +1093,7 @@
   "unlockOrder": 300122,
   "position": {
    "x": 56.88,
-   "y": 35.71
+   "y": 40.63
   }
  },
  "hoenn-route-123": {
@@ -1118,7 +1118,7 @@
   "unlockOrder": 300123,
   "position": {
    "x": 50.63,
-   "y": 44.29
+   "y": 46.25
   }
  },
  "hoenn-route-124": {
@@ -1144,7 +1144,7 @@
   "unlockOrder": 300124,
   "position": {
    "x": 78.44,
-   "y": 30
+   "y": 36.88
   }
  },
  "hoenn-mossdeep-city": {
@@ -1169,7 +1169,7 @@
   "unlockOrder": 300124.5,
   "position": {
    "x": 88.44,
-   "y": 35.71
+   "y": 40.63
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -1216,7 +1216,7 @@
   "unlockOrder": 300125,
   "position": {
    "x": 89.5,
-   "y": 30
+   "y": 36.88
   }
  },
  "hoenn-route-126": {
@@ -1242,7 +1242,7 @@
   "unlockOrder": 300126,
   "position": {
    "x": 79.06,
-   "y": 46.67
+   "y": 47.81
   }
  },
  "hoenn-sootopolis-city": {
@@ -1265,7 +1265,7 @@
   "unlockOrder": 300126.5,
   "position": {
    "x": 77.5,
-   "y": 56.19
+   "y": 54.06
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -1314,7 +1314,7 @@
   "unlockOrder": 300127,
   "position": {
    "x": 89.5,
-   "y": 46.67
+   "y": 47.81
   }
  },
  "hoenn-route-128": {
@@ -1342,7 +1342,7 @@
   "unlockOrder": 300128,
   "position": {
    "x": 89.5,
-   "y": 63.62
+   "y": 58.94
   }
  },
  "hoenn-ever-grande-city": {
@@ -1365,7 +1365,7 @@
   "unlockOrder": 300128.5,
   "position": {
    "x": 95.75,
-   "y": 63.62
+   "y": 58.94
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -1410,7 +1410,7 @@
   "unlockOrder": 300129,
   "position": {
    "x": 90.31,
-   "y": 69.05
+   "y": 62.5
   }
  },
  "hoenn-route-130": {
@@ -1435,7 +1435,7 @@
   "unlockOrder": 300130,
   "position": {
    "x": 81.56,
-   "y": 69.05
+   "y": 62.5
   }
  },
  "hoenn-route-131": {
@@ -1460,7 +1460,7 @@
   "unlockOrder": 300131,
   "position": {
    "x": 71.56,
-   "y": 69.05
+   "y": 62.5
   }
  },
  "hoenn-pacifidlog-town": {
@@ -1484,7 +1484,7 @@
   "unlockOrder": 300131.5,
   "position": {
    "x": 64.81,
-   "y": 69.24
+   "y": 62.63
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -1529,7 +1529,7 @@
   "unlockOrder": 300132,
   "position": {
    "x": 58.13,
-   "y": 69.05
+   "y": 62.5
   }
  },
  "hoenn-route-133": {
@@ -1554,7 +1554,7 @@
   "unlockOrder": 300133,
   "position": {
    "x": 47.5,
-   "y": 68.76
+   "y": 62.31
   }
  },
  "hoenn-route-134": {
@@ -1579,7 +1579,7 @@
   "unlockOrder": 300134,
   "position": {
    "x": 37.19,
-   "y": 68.76
+   "y": 62.31
   }
  },
  "hoenn-raid": {
@@ -1603,7 +1603,7 @@
   "unlockOrder": 300135,
   "position": {
    "x": 81.25,
-   "y": 87.62
+   "y": 74.69
   }
  },
  "hoenn-league": {
@@ -1636,7 +1636,7 @@
   "unlockOrder": 300136,
   "position": {
    "x": 96.25,
-   "y": 52.19
+   "y": 51.44
   }
  }
 }

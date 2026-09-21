@@ -14,8 +14,8 @@
   },
   "unlockOrder": 499999,
   "position": {
-   "x": 65,
-   "y": 94
+   "x": 91.15,
+   "y": 77.96
   },
   "mart": {
    "name": "Unova Mart",
@@ -57,8 +57,8 @@
   },
   "unlockOrder": 500001,
   "position": {
-   "x": 64,
-   "y": 88
+   "x": 86.69,
+   "y": 74.5
   }
  },
  "unova-accumula-town": {
@@ -83,8 +83,8 @@
   },
   "unlockOrder": 500001.5,
   "position": {
-   "x": 66,
-   "y": 79
+   "x": 91.15,
+   "y": 71.04
   },
   "mart": {
    "name": "Unova Mart",
@@ -128,8 +128,8 @@
   },
   "unlockOrder": 500002,
   "position": {
-   "x": 62,
-   "y": 74
+   "x": 5,
+   "y": 76.81
   },
   "mart": {
    "name": "Unova Mart",
@@ -173,8 +173,8 @@
   },
   "unlockOrder": 500002,
   "position": {
-   "x": 56,
-   "y": 80
+   "x": 90,
+   "y": 66.81
   }
  },
  "unova-virbank-city": {
@@ -197,8 +197,8 @@
   },
   "unlockOrder": 500002,
   "position": {
-   "x": 86,
-   "y": 67
+   "x": 25.77,
+   "y": 66.42
   },
   "mart": {
    "name": "Unova Mart",
@@ -242,8 +242,8 @@
   },
   "unlockOrder": 500002.5,
   "position": {
-   "x": 70,
-   "y": 67
+   "x": 12.69,
+   "y": 66.42
   },
   "mart": {
    "name": "Unova Mart",
@@ -287,8 +287,8 @@
   },
   "unlockOrder": 500002.5,
   "position": {
-   "x": 58,
-   "y": 69
+   "x": 88.85,
+   "y": 62.58
   },
   "mart": {
    "name": "Unova Mart",
@@ -335,8 +335,8 @@
   },
   "unlockOrder": 500003,
   "position": {
-   "x": 56,
-   "y": 63
+   "x": 83.85,
+   "y": 62.96
   }
  },
  "unova-nacrene-city": {
@@ -359,8 +359,8 @@
   },
   "unlockOrder": 500003.5,
   "position": {
-   "x": 76,
-   "y": 80
+   "x": 78.85,
+   "y": 63.35
   },
   "mart": {
    "name": "Unova Mart",
@@ -406,8 +406,8 @@
   },
   "unlockOrder": 500004,
   "position": {
-   "x": 44,
-   "y": 58
+   "x": 51.15,
+   "y": 71.04
   },
   "mart": {
    "name": "Unova Mart",
@@ -454,8 +454,8 @@
   },
   "unlockOrder": 500004,
   "position": {
-   "x": 81,
-   "y": 85
+   "x": 51.15,
+   "y": 61.81
   }
  },
  "unova-nimbasa-city": {
@@ -479,8 +479,8 @@
   },
   "unlockOrder": 500004.5,
   "position": {
-   "x": 44,
-   "y": 41
+   "x": 51.15,
+   "y": 52.58
   },
   "mart": {
    "name": "Unova Mart",
@@ -527,8 +527,8 @@
   },
   "unlockOrder": 500005,
   "position": {
-   "x": 34,
-   "y": 46
+   "x": 39.85,
+   "y": 52.58
   }
  },
  "unova-driftveil-city": {
@@ -552,8 +552,8 @@
   },
   "unlockOrder": 500005.5,
   "position": {
-   "x": 21,
-   "y": 46
+   "x": 28.46,
+   "y": 52.58
   },
   "mart": {
    "name": "Unova Mart",
@@ -598,8 +598,8 @@
   },
   "unlockOrder": 500006,
   "position": {
-   "x": 14,
-   "y": 68
+   "x": 3.08,
+   "y": 28.73
   },
   "mart": {
    "name": "Unova Mart",
@@ -643,8 +643,8 @@
   },
   "unlockOrder": 500006,
   "position": {
-   "x": 26,
-   "y": 51
+   "x": 22.15,
+   "y": 47.88
   }
  },
  "unova-mistralton-city": {
@@ -667,8 +667,8 @@
   },
   "unlockOrder": 500006.5,
   "position": {
-   "x": 18,
-   "y": 27
+   "x": 15.77,
+   "y": 43.19
   },
   "mart": {
    "name": "Unova Mart",
@@ -715,8 +715,8 @@
   },
   "unlockOrder": 500007,
   "position": {
-   "x": 25,
-   "y": 30
+   "x": 22.15,
+   "y": 38.5
   }
  },
  "unova-icirrus-city": {
@@ -739,8 +739,8 @@
   },
   "unlockOrder": 500007.5,
   "position": {
-   "x": 28,
-   "y": 22
+   "x": 28.46,
+   "y": 33.73
   },
   "mart": {
    "name": "Unova Mart",
@@ -787,8 +787,8 @@
   },
   "unlockOrder": 500008,
   "position": {
-   "x": 36,
-   "y": 22
+   "x": 30.54,
+   "y": 32.19
   }
  },
  "unova-route-9": {
@@ -812,8 +812,8 @@
   },
   "unlockOrder": 500009,
   "position": {
-   "x": 53,
-   "y": 24
+   "x": 40.85,
+   "y": 32.96
   }
  },
  "unova-opelucid-city": {
@@ -838,8 +838,8 @@
   },
   "unlockOrder": 500009.5,
   "position": {
-   "x": 66,
-   "y": 16
+   "x": 51.15,
+   "y": 33.73
   },
   "mart": {
    "name": "Unova Mart",
@@ -885,8 +885,8 @@
   },
   "unlockOrder": 500010,
   "position": {
-   "x": 60,
-   "y": 15
+   "x": 51.54,
+   "y": 33.96
   }
  },
  "unova-route-11": {
@@ -910,8 +910,8 @@
   },
   "unlockOrder": 500011,
   "position": {
-   "x": 66,
-   "y": 27
+   "x": 56,
+   "y": 33.96
   }
  },
  "unova-route-12": {
@@ -935,8 +935,8 @@
   },
   "unlockOrder": 500012,
   "position": {
-   "x": 73,
-   "y": 29
+   "x": 63.77,
+   "y": 33.81
   }
  },
  "unova-lacunosa-town": {
@@ -959,8 +959,8 @@
   },
   "unlockOrder": 500012.5,
   "position": {
-   "x": 73,
-   "y": 9
+   "x": 73.85,
+   "y": 33.73
   },
   "mart": {
    "name": "Unova Mart",
@@ -1005,8 +1005,8 @@
   },
   "unlockOrder": 500013,
   "position": {
-   "x": 79,
-   "y": 30
+   "x": 80.62,
+   "y": 38.5
   }
  },
  "unova-undella-town": {
@@ -1032,8 +1032,8 @@
   },
   "unlockOrder": 500013.5,
   "position": {
-   "x": 78,
-   "y": 15
+   "x": 87.31,
+   "y": 43.19
   },
   "mart": {
    "name": "Unova Mart",
@@ -1077,8 +1077,8 @@
   },
   "unlockOrder": 500014,
   "position": {
-   "x": 76,
-   "y": 37
+   "x": 80.62,
+   "y": 47.88
   }
  },
  "unova-humilau-city": {
@@ -1102,8 +1102,8 @@
   },
   "unlockOrder": 500014,
   "position": {
-   "x": 79,
-   "y": 9
+   "x": 91.54,
+   "y": 31.04
   },
   "mart": {
    "name": "Unova Mart",
@@ -1145,8 +1145,8 @@
   },
   "unlockOrder": 500014,
   "position": {
-   "x": 60,
-   "y": 21
+   "x": 73.46,
+   "y": 43.19
   },
   "mart": {
    "name": "Unova Mart",
@@ -1189,8 +1189,8 @@
   },
   "unlockOrder": 500014.5,
   "position": {
-   "x": 82,
-   "y": 38
+   "x": 73.85,
+   "y": 52.58
   },
   "mart": {
    "name": "Unova Mart",
@@ -1234,8 +1234,8 @@
   },
   "unlockOrder": 500015,
   "position": {
-   "x": 64,
-   "y": 42
+   "x": 71.69,
+   "y": 54.04
   }
  },
  "unova-route-16": {
@@ -1259,8 +1259,8 @@
   },
   "unlockOrder": 500016,
   "position": {
-   "x": 49,
-   "y": 45
+   "x": 61.46,
+   "y": 53.35
   }
  },
  "unova-route-17": {
@@ -1284,8 +1284,8 @@
   },
   "unlockOrder": 500017,
   "position": {
-   "x": 58,
-   "y": 86
+   "x": 95.69,
+   "y": 74.5
   }
  },
  "unova-route-18": {
@@ -1309,8 +1309,8 @@
   },
   "unlockOrder": 500018,
   "position": {
-   "x": 48,
-   "y": 88
+   "x": 91.15,
+   "y": 74.5
   }
  },
  "unova-route-gate": {
@@ -1333,8 +1333,8 @@
   },
   "unlockOrder": 500018.5,
   "position": {
-   "x": 37,
-   "y": 84
+   "x": 51.15,
+   "y": 63.35
   }
  },
  "unova-route-19": {
@@ -1359,8 +1359,8 @@
   },
   "unlockOrder": 500019,
   "position": {
-   "x": 88,
-   "y": 87
+   "x": 8.85,
+   "y": 71.65
   }
  },
  "unova-route-20": {
@@ -1384,8 +1384,8 @@
   },
   "unlockOrder": 500020,
   "position": {
-   "x": 79,
-   "y": 68
+   "x": 19.23,
+   "y": 66.42
   }
  },
  "unova-route-21": {
@@ -1410,8 +1410,8 @@
   },
   "unlockOrder": 500021,
   "position": {
-   "x": 80,
-   "y": 24
+   "x": 76.69,
+   "y": 35.96
   }
  },
  "unova-route-22": {
@@ -1436,8 +1436,8 @@
   },
   "unlockOrder": 500022,
   "position": {
-   "x": 67,
-   "y": 10
+   "x": 83.85,
+   "y": 34.73
   }
  },
  "unova-route-23": {
@@ -1462,8 +1462,8 @@
   },
   "unlockOrder": 500023,
   "position": {
-   "x": 71,
-   "y": 23
+   "x": 88.31,
+   "y": 34.73
   }
  },
  "unova-raid": {
@@ -1486,8 +1486,8 @@
   },
   "unlockOrder": 500024,
   "position": {
-   "x": 89,
-   "y": 26
+   "x": 64,
+   "y": 6
   }
  },
  "unova-league": {
@@ -1519,8 +1519,8 @@
   },
   "unlockOrder": 500025,
   "position": {
-   "x": 96,
-   "y": 31
+   "x": 71,
+   "y": 11
   }
  }
 }

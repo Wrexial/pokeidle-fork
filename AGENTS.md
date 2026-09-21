@@ -248,10 +248,15 @@ Data conventions:
   neighbours — or, importantly, any other region.
 - Some regions' scraped force-directed layout doesn't match the real map, so
   `REGION_MAP_LAYOUTS` in `generate-regions.cjs` overrides it with
-  hand-measured coordinates (pixels on a reference map, converted to
-  percentages, no collision shifting). Hoenn uses the ORAS world map. The
-  league can also be pinned to a specific pre-league route via `LEAGUE_ANCHOR`
-  (Hoenn's Route 128 at Ever Grande, not the highest-numbered Route 134).
+  hand-measured coordinates from a labelled reference map. Every region except
+  Kanto (hand-curated) now has one: Hoenn (ORAS map), Johto (GSC map), Sinnoh,
+  Unova, Kalos, Alola, Galar and Paldea. The reference is scaled to fit the
+  square world canvas *without distortion* (letterboxed), and its position
+  values bypass the collision-avoidance shifting. Town positions are measured
+  from the reference labels; route nodes are interpolated from the connection
+  graph (so individual route paths are approximate). The league can also be
+  pinned to a specific pre-league route via `LEAGUE_ANCHOR` (Hoenn's Route 128
+  at Ever Grande, not the highest-numbered Route 134).
 - `regions.json` also carries `raidPool` — the generation's species that cannot
   be obtained in that region (not in any wild table and not reachable by
   evolution). Those are the Pokemon found on the region's Raid Island.

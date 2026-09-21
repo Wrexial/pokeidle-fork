@@ -747,11 +747,36 @@ const isRaidFinalEvolution = (speciesKey) =>
   !realEvolutions(speciesKey).some(
     (evolution) => !canReachByEvolution(evolution.into, speciesKey)
   )
+const isFormRevert = (from, into) =>
+  species[from] && species[from].id > 1025 &&
+  (evolutionData[into] ?? []).some((evolution) => evolution.into === from)
 const preEvolutionMap = Object.fromEntries(
   Object.entries(evolutionData).flatMap(([from, evolutions]) =>
-    evolutions.map((evolution) => [evolution.into, from])
+    evolutions
+      .filter((evolution) => !isFormRevert(from, evolution.into))
+      .map((evolution) => [evolution.into, from])
   )
 )
+// Reattach form <-> form transforms (Galarian Darmanitan <-> its Zen form) whose
+// both directions were dropped above, so breed chains still reach the base.
+const linkFormChains = (map) => {
+  let changed = true
+  while (changed) {
+    changed = false
+    for (const [from, evolutions] of Object.entries(evolutionData)) {
+      if (!species[from] || species[from].id <= 1025) continue
+      for (const evolution of evolutions) {
+        const into = evolution.into
+        if (!species[into] || species[into].id <= 1025) continue
+        if (!(evolutionData[into] ?? []).some((back) => back.into === from)) continue
+        if (map[from] === undefined && map[into] !== undefined) (map[from] = into), (changed = true)
+        else if (map[into] === undefined && map[from] !== undefined) (map[into] = from), (changed = true)
+      }
+    }
+  }
+  return map
+}
+linkFormChains(preEvolutionMap)
 // Mirrors `getPreEvolutionChain` (`src/game/pokemon.js`) so we know exactly what
 // the game's Daycare would hatch from a given Pokemon.
 const breedChainRoot = (speciesKey) => {

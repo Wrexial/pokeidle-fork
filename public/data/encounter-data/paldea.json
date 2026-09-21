@@ -1686,12 +1686,6 @@
     "maxLevel": 70
    },
    {
-    "speciesKey": "charcadet",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "dachsbun",
     "weight": 1,
     "minLevel": 70,
@@ -1711,12 +1705,6 @@
    },
    {
     "speciesKey": "lilligant",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "finizen",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70

@@ -3032,18 +3032,8 @@
       "item": "maliciousArmor"
     }
   ],
-  "armarouge": [
-    {
-      "into": "ceruledge",
-      "level": 35
-    }
-  ],
-  "ceruledge": [
-    {
-      "into": "armarouge",
-      "level": 35
-    }
-  ],
+  "armarouge": [],
+  "ceruledge": [],
   "tadbulb": [
     {
       "into": "bellibolt",
@@ -3412,18 +3402,30 @@
     {
       "into": "zygarde-10",
       "level": 10
+    },
+    {
+      "into": "zygarde-c",
+      "level": 10
     }
   ],
   "zygarde-10": [
     {
+      "into": "zygarde",
+      "level": 10
+    },
+    {
       "into": "zygarde-c",
-      "level": 100
+      "level": 10
     }
   ],
   "zygarde-c": [
     {
       "into": "zygarde",
-      "level": 100
+      "level": 10
+    },
+    {
+      "into": "zygarde-10",
+      "level": 10
     }
   ],
   "hoopa": [
@@ -3452,15 +3454,35 @@
     {
       "into": "necrozma-l",
       "level": 100
+    },
+    {
+      "into": "u-necrozma",
+      "level": 100
     }
   ],
   "necrozma-s": [
+    {
+      "into": "necrozma",
+      "level": 100
+    },
+    {
+      "into": "necrozma-l",
+      "level": 100
+    },
     {
       "into": "u-necrozma",
       "level": 100
     }
   ],
   "necrozma-l": [
+    {
+      "into": "necrozma",
+      "level": 100
+    },
+    {
+      "into": "necrozma-s",
+      "level": 100
+    },
     {
       "into": "u-necrozma",
       "level": 100
@@ -3544,15 +3566,27 @@
     {
       "into": "calyrex-ir",
       "level": 100
+    },
+    {
+      "into": "calyrex-sr",
+      "level": 100
     }
   ],
   "calyrex-ir": [
+    {
+      "into": "calyrex",
+      "level": 100
+    },
     {
       "into": "calyrex-sr",
       "level": 100
     }
   ],
   "calyrex-sr": [
+    {
+      "into": "calyrex",
+      "level": 100
+    },
     {
       "into": "calyrex-ir",
       "level": 100
@@ -3597,10 +3631,6 @@
   "basculin-w": [
     {
       "into": "basculegion",
-      "level": 50
-    },
-    {
-      "into": "basculegion-f",
       "level": 50
     }
   ],
@@ -3855,6 +3885,158 @@
       "into": "gx-eternatus",
       "level": 100,
       "form": true
+    }
+  ],
+  "deoxys-a": [
+    {
+      "into": "deoxys",
+      "level": 30
+    },
+    {
+      "into": "deoxys-d",
+      "level": 30
+    },
+    {
+      "into": "deoxys-s",
+      "level": 30
+    }
+  ],
+  "deoxys-d": [
+    {
+      "into": "deoxys",
+      "level": 30
+    },
+    {
+      "into": "deoxys-a",
+      "level": 30
+    },
+    {
+      "into": "deoxys-s",
+      "level": 30
+    }
+  ],
+  "deoxys-s": [
+    {
+      "into": "deoxys",
+      "level": 30
+    },
+    {
+      "into": "deoxys-a",
+      "level": 30
+    },
+    {
+      "into": "deoxys-d",
+      "level": 30
+    }
+  ],
+  "h-rotom": [
+    {
+      "into": "rotom",
+      "level": 5
+    }
+  ],
+  "w-rotom": [
+    {
+      "into": "rotom",
+      "level": 5
+    }
+  ],
+  "f-rotom": [
+    {
+      "into": "rotom",
+      "level": 5
+    }
+  ],
+  "fan-rotom": [
+    {
+      "into": "rotom",
+      "level": 5
+    }
+  ],
+  "m-rotom": [
+    {
+      "into": "rotom",
+      "level": 5
+    }
+  ],
+  "tornadus-t": [
+    {
+      "into": "tornadus",
+      "level": 50
+    }
+  ],
+  "thundurus-t": [
+    {
+      "into": "thundurus",
+      "level": 50
+    }
+  ],
+  "landorus-t": [
+    {
+      "into": "landorus",
+      "level": 50
+    }
+  ],
+  "b-kyurem": [
+    {
+      "into": "kyurem",
+      "level": 100
+    }
+  ],
+  "w-kyurem": [
+    {
+      "into": "kyurem",
+      "level": 100
+    }
+  ],
+  "keldeo-r": [
+    {
+      "into": "keldeo",
+      "level": 15
+    }
+  ],
+  "ash-greninja": [
+    {
+      "into": "greninja",
+      "level": 100
+    }
+  ],
+  "u-necrozma": [
+    {
+      "into": "necrozma",
+      "level": 100
+    },
+    {
+      "into": "necrozma-s",
+      "level": 100
+    },
+    {
+      "into": "necrozma-l",
+      "level": 100
+    }
+  ],
+  "basculegion": [
+    {
+      "into": "basculegion-f",
+      "level": 5
+    }
+  ],
+  "basculegion-f": [
+    {
+      "into": "basculegion",
+      "level": 5
+    }
+  ],
+  "indeedee": [
+    {
+      "into": "indeedee-f",
+      "level": 5
+    }
+  ],
+  "indeedee-f": [
+    {
+      "into": "indeedee",
+      "level": 5
     }
   ]
 }

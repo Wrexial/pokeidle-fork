@@ -362,6 +362,21 @@ One-off scripts used to build the data JSON (not run during dev/build):
   (`tokenShopItems` in `src/data/items.js`). Idempotent; re-run after any
   re-extraction of `evolution-data.json`. Because item evolutions carry no
   `level`, `generate-regions.cjs` gives them a nominal one for team-maturity.
+- `fix-form-transforms.cjs` — makes temporary form transformations reversible.
+  Deoxys, the Rotom appliances, the Therian formes, Kyurem, Necrozma, Calyrex
+  and Zygarde are linked base↔form (Deoxys/Zygarde/Necrozma/Calyrex fully
+  all-to-all); Basculegion/Indeedee gain their gender-form toggles; and the bad
+  `armarouge <-> ceruledge` and `basculin-w -> basculegion-f` edges are removed.
+  Idempotent; re-run after any re-extraction of `evolution-data.json`.
+  `preEvolutionMap` (`src/data/gameData.js`, mirrored in the Node tools) skips
+  a form's reverse edge so breeding/learnset chains still start from the real
+  base (e.g. Palafin → Finizen).
+- `fix-pokemon-stats.cjs` — reconciles every `pokemon-species.json` `baseStats`
+  block and type set with the modern games (base species against Pokemon
+  Showdown's dex, alternate forms against cached PokeAPI). The extracted data
+  predated the Gen 6/7 buffs and Gen 9 nerfs (Arbok, Shedinja, Lycanroc's
+  forms, ...). Idempotent (`--dry` to preview); re-run after re-extracting
+  species data.
 - `fetch-breeding-data.cjs` — fetches each species' gender rate and egg groups
   from PokeAPI (form ids resolved to their base species) and writes
   `public/data/breeding-data.json`, which the Daycare's breeding rules use.

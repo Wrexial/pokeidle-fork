@@ -59,11 +59,32 @@ for (const [from, evolutions] of Object.entries(evolutionData)) {
 // encounter tables already contain them. Breeding a breedable species yields the
 // root of its evolution chain, so a species can also be obtained by breeding an
 // obtainable final form (this is why Raid Islands only hand out final stages).
+const isFormRevert = (from, into) =>
+  Number(species[from]?.id) > 1025 &&
+  (evolutionData[into] ?? []).some((evolution) => evolution.into === from)
 const preEvolutionMap = Object.fromEntries(
   Object.entries(evolutionData).flatMap(([from, evolutions]) =>
-    evolutions.map((evolution) => [evolution.into, from])
+    evolutions
+      .filter((evolution) => !isFormRevert(from, evolution.into))
+      .map((evolution) => [evolution.into, from])
   )
 )
+// Reattach form <-> form transforms whose both directions were dropped above.
+for (let changed = true; changed; ) {
+  changed = false
+  for (const [from, evolutions] of Object.entries(evolutionData)) {
+    if (!species[from] || species[from].id <= 1025) continue
+    for (const evolution of evolutions) {
+      const into = evolution.into
+      if (!species[into] || species[into].id <= 1025) continue
+      if (!(evolutionData[into] ?? []).some((back) => back.into === from)) continue
+      if (preEvolutionMap[from] === undefined && preEvolutionMap[into] !== undefined)
+        (preEvolutionMap[from] = into), (changed = true)
+      else if (preEvolutionMap[into] === undefined && preEvolutionMap[from] !== undefined)
+        (preEvolutionMap[into] = from), (changed = true)
+    }
+  }
+}
 const chainRoot = (speciesKey) => {
   const seen = new Set([speciesKey])
   let current = speciesKey

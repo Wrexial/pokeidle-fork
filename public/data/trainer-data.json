@@ -1686,7 +1686,7 @@
      "level": 34
     },
     {
-     "speciesKey": "aggron",
+     "speciesKey": "exeggutor",
      "level": 35
     }
    ]
@@ -2130,19 +2130,19 @@
    "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "walrein",
+     "speciesKey": "exeggutor",
      "level": 71
     },
     {
-     "speciesKey": "jolteon",
+     "speciesKey": "walrein",
      "level": 72
     },
     {
-     "speciesKey": "espeon",
+     "speciesKey": "jolteon",
      "level": 73
     },
     {
-     "speciesKey": "umbreon",
+     "speciesKey": "espeon",
      "level": 74
     }
    ]

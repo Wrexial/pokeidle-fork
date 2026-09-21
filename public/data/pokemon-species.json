@@ -434,7 +434,7 @@
     ],
     "baseStats": {
       "hp": 60,
-      "attack": 85,
+      "attack": 95,
       "defense": 69,
       "spAttack": 65,
       "spDefense": 79,
@@ -933,7 +933,7 @@
     ],
     "baseStats": {
       "hp": 35,
-      "attack": 80,
+      "attack": 100,
       "defense": 50,
       "spAttack": 50,
       "spDefense": 70,
@@ -1392,7 +1392,7 @@
     ],
     "baseStats": {
       "hp": 80,
-      "attack": 110,
+      "attack": 120,
       "defense": 130,
       "spAttack": 55,
       "spDefense": 65,
@@ -1523,7 +1523,7 @@
     ],
     "baseStats": {
       "hp": 52,
-      "attack": 65,
+      "attack": 90,
       "defense": 55,
       "spAttack": 58,
       "spDefense": 62,
@@ -1565,7 +1565,7 @@
       "defense": 70,
       "spAttack": 60,
       "spDefense": 60,
-      "speed": 100
+      "speed": 110
     },
     "baseExpYield": 161,
     "growthRate": "mediumFast",
@@ -1896,7 +1896,7 @@
       "attack": 95,
       "defense": 85,
       "spAttack": 125,
-      "spDefense": 65,
+      "spDefense": 75,
       "speed": 55
     },
     "baseExpYield": 182,
@@ -3017,7 +3017,7 @@
       "hp": 100,
       "attack": 50,
       "defense": 50,
-      "spAttack": 76,
+      "spAttack": 86,
       "spDefense": 96,
       "speed": 70
     },
@@ -3094,7 +3094,7 @@
       "attack": 90,
       "defense": 70,
       "spAttack": 60,
-      "spDefense": 60,
+      "spDefense": 70,
       "speed": 40
     },
     "baseExpYield": 137,
@@ -3888,7 +3888,7 @@
     "baseStats": {
       "hp": 65,
       "attack": 95,
-      "defense": 75,
+      "defense": 85,
       "spAttack": 55,
       "spDefense": 55,
       "speed": 85
@@ -4035,10 +4035,10 @@
       "Rock"
     ],
     "baseStats": {
-      "hp": 50,
+      "hp": 60,
       "attack": 50,
       "defense": 120,
-      "spAttack": 80,
+      "spAttack": 90,
       "spDefense": 80,
       "speed": 30
     },
@@ -4092,11 +4092,11 @@
       "Rock"
     ],
     "baseStats": {
-      "hp": 55,
+      "hp": 65,
       "attack": 55,
-      "defense": 85,
+      "defense": 95,
       "spAttack": 65,
-      "spDefense": 85,
+      "spDefense": 95,
       "speed": 35
     },
     "baseExpYield": 133,
@@ -4166,7 +4166,7 @@
       "Flying"
     ],
     "baseStats": {
-      "hp": 65,
+      "hp": 85,
       "attack": 40,
       "defense": 70,
       "spAttack": 80,
@@ -5117,7 +5117,7 @@
       "hp": 60,
       "attack": 85,
       "defense": 60,
-      "spAttack": 50,
+      "spAttack": 75,
       "spDefense": 50,
       "speed": 125
     },
@@ -5155,7 +5155,7 @@
       "hp": 60,
       "attack": 50,
       "defense": 100,
-      "spAttack": 85,
+      "spAttack": 95,
       "spDefense": 70,
       "speed": 65
     },
@@ -5250,9 +5250,9 @@
       "hp": 70,
       "attack": 60,
       "defense": 62,
-      "spAttack": 80,
+      "spAttack": 100,
       "spDefense": 82,
-      "speed": 60
+      "speed": 80
     },
     "baseExpYield": 145,
     "growthRate": "mediumFast",
@@ -5395,7 +5395,7 @@
       "Ghost"
     ],
     "baseStats": {
-      "hp": 70,
+      "hp": 1,
       "attack": 90,
       "defense": 45,
       "spAttack": 30,
@@ -5563,7 +5563,7 @@
       "defense": 65,
       "spAttack": 55,
       "spDefense": 55,
-      "speed": 70
+      "speed": 90
     },
     "baseExpYield": 133,
     "growthRate": "fast",
@@ -5783,9 +5783,9 @@
     "baseStats": {
       "hp": 65,
       "attack": 73,
-      "defense": 55,
+      "defense": 75,
       "spAttack": 47,
-      "spDefense": 75,
+      "spDefense": 85,
       "speed": 85
     },
     "baseExpYield": 140,
@@ -5801,9 +5801,9 @@
     "baseStats": {
       "hp": 65,
       "attack": 47,
-      "defense": 55,
+      "defense": 75,
       "spAttack": 73,
-      "spDefense": 75,
+      "spDefense": 85,
       "speed": 85
     },
     "baseExpYield": 140,
@@ -6224,7 +6224,7 @@
       "Psychic"
     ],
     "baseStats": {
-      "hp": 70,
+      "hp": 90,
       "attack": 55,
       "defense": 65,
       "spAttack": 95,
@@ -6243,7 +6243,7 @@
       "Psychic"
     ],
     "baseStats": {
-      "hp": 70,
+      "hp": 90,
       "attack": 95,
       "defense": 85,
       "spAttack": 55,
@@ -6613,11 +6613,11 @@
       "Psychic"
     ],
     "baseStats": {
-      "hp": 65,
+      "hp": 75,
       "attack": 50,
-      "defense": 70,
+      "defense": 80,
       "spAttack": 95,
-      "spDefense": 80,
+      "spDefense": 90,
       "speed": 65
     },
     "baseExpYield": 149,
@@ -9038,9 +9038,9 @@
     "baseStats": {
       "hp": 120,
       "attack": 70,
-      "defense": 120,
+      "defense": 110,
       "spAttack": 75,
-      "spDefense": 130,
+      "spDefense": 120,
       "speed": 85
     },
     "baseExpYield": 270,
@@ -9752,7 +9752,7 @@
       "Flying"
     ],
     "baseStats": {
-      "hp": 55,
+      "hp": 65,
       "attack": 45,
       "defense": 43,
       "spAttack": 55,
@@ -10328,7 +10328,7 @@
     ],
     "baseStats": {
       "hp": 70,
-      "attack": 95,
+      "attack": 105,
       "defense": 125,
       "spAttack": 65,
       "spDefense": 75,
@@ -11360,7 +11360,7 @@
     ],
     "baseStats": {
       "hp": 95,
-      "attack": 110,
+      "attack": 130,
       "defense": 80,
       "spAttack": 70,
       "spDefense": 80,
@@ -11377,9 +11377,9 @@
       "Ice"
     ],
     "baseStats": {
-      "hp": 70,
+      "hp": 80,
       "attack": 50,
-      "defense": 30,
+      "defense": 50,
       "spAttack": 95,
       "spDefense": 135,
       "speed": 105
@@ -12619,9 +12619,9 @@
     "baseStats": {
       "hp": 60,
       "attack": 50,
-      "defense": 150,
+      "defense": 140,
       "spAttack": 50,
-      "spDefense": 150,
+      "spDefense": 140,
       "speed": 60
     },
     "baseExpYield": 234,
@@ -13522,7 +13522,7 @@
       "attack": 69,
       "defense": 69,
       "spAttack": 91,
-      "spDefense": 91,
+      "spDefense": 81,
       "speed": 50
     },
     "baseExpYield": 147,
@@ -13816,12 +13816,12 @@
       "Rock"
     ],
     "baseStats": {
-      "hp": 85,
+      "hp": 75,
       "attack": 115,
-      "defense": 75,
+      "defense": 65,
       "spAttack": 55,
-      "spDefense": 75,
-      "speed": 82
+      "spDefense": 65,
+      "speed": 112
     },
     "baseExpYield": 170,
     "growthRate": "mediumFast",
@@ -15181,10 +15181,10 @@
     ],
     "baseStats": {
       "hp": 65,
-      "attack": 50,
+      "attack": 60,
       "defense": 55,
       "spAttack": 95,
-      "spDefense": 50,
+      "spDefense": 55,
       "speed": 90
     },
     "baseExpYield": 147,
@@ -16492,7 +16492,7 @@
     ],
     "baseStats": {
       "hp": 92,
-      "attack": 130,
+      "attack": 120,
       "defense": 115,
       "spAttack": 80,
       "spDefense": 115,
@@ -16511,7 +16511,7 @@
     ],
     "baseStats": {
       "hp": 92,
-      "attack": 130,
+      "attack": 120,
       "defense": 115,
       "spAttack": 80,
       "spDefense": 115,
@@ -16574,7 +16574,7 @@
       "defense": 100,
       "spAttack": 63,
       "spDefense": 60,
-      "speed": 92
+      "speed": 97
     },
     "baseExpYield": 200,
     "growthRate": "slow",
@@ -17246,7 +17246,7 @@
       "defense": 45,
       "spAttack": 58,
       "spDefense": 51,
-      "speed": 20
+      "speed": 30
     },
     "baseExpYield": 52,
     "growthRate": "mediumSlow",
@@ -17928,7 +17928,7 @@
     ],
     "baseStats": {
       "hp": 45,
-      "attack": 40,
+      "attack": 70,
       "defense": 63,
       "spAttack": 30,
       "spDefense": 45,
@@ -18983,7 +18983,8 @@
     "id": 10104,
     "name": "A-Ninetales",
     "types": [
-      "Ice"
+      "Ice",
+      "Fairy"
     ],
     "baseStats": {
       "hp": 73,
@@ -19025,7 +19026,7 @@
     ],
     "baseStats": {
       "hp": 35,
-      "attack": 80,
+      "attack": 100,
       "defense": 60,
       "spAttack": 50,
       "spDefense": 70,
@@ -19138,7 +19139,7 @@
       "attack": 50,
       "defense": 65,
       "spAttack": 175,
-      "spDefense": 95,
+      "spDefense": 105,
       "speed": 150
     },
     "baseExpYield": 266,
@@ -19266,7 +19267,7 @@
     "baseStats": {
       "hp": 90,
       "attack": 65,
-      "defense": 55,
+      "defense": 65,
       "spAttack": 40,
       "spDefense": 40,
       "speed": 15
@@ -19420,7 +19421,7 @@
       "attack": 105,
       "defense": 85,
       "spAttack": 125,
-      "spDefense": 65,
+      "spDefense": 75,
       "speed": 45
     },
     "baseExpYield": 182,
@@ -21148,9 +21149,9 @@
     ],
     "baseStats": {
       "hp": 60,
-      "attack": 150,
+      "attack": 140,
       "defense": 50,
-      "spAttack": 150,
+      "spAttack": 140,
       "spDefense": 50,
       "speed": 60
     },
@@ -21317,12 +21318,12 @@
       "Rock"
     ],
     "baseStats": {
-      "hp": 75,
+      "hp": 85,
       "attack": 115,
-      "defense": 65,
+      "defense": 75,
       "spAttack": 55,
-      "spDefense": 65,
-      "speed": 112
+      "spDefense": 75,
+      "speed": 82
     },
     "baseExpYield": 170,
     "growthRate": "mediumFast",
@@ -21449,7 +21450,7 @@
     ],
     "baseStats": {
       "hp": 92,
-      "attack": 170,
+      "attack": 150,
       "defense": 115,
       "spAttack": 80,
       "spDefense": 115,
@@ -21468,10 +21469,10 @@
     ],
     "baseStats": {
       "hp": 92,
-      "attack": 130,
-      "defense": 145,
+      "attack": 120,
+      "defense": 140,
       "spAttack": 80,
-      "spDefense": 145,
+      "spDefense": 140,
       "speed": 128
     },
     "baseExpYield": 335,
@@ -21491,7 +21492,7 @@
       "defense": 100,
       "spAttack": 63,
       "spDefense": 60,
-      "speed": 92
+      "speed": 97
     },
     "baseExpYield": 200,
     "growthRate": "slow",
@@ -22141,7 +22142,7 @@
       "defense": 100,
       "spAttack": 63,
       "spDefense": 60,
-      "speed": 92
+      "speed": 97
     },
     "baseExpYield": 200,
     "growthRate": "slow",
@@ -22160,7 +22161,7 @@
       "defense": 100,
       "spAttack": 63,
       "spDefense": 60,
-      "speed": 92
+      "speed": 97
     },
     "baseExpYield": 200,
     "growthRate": "slow",

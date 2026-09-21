@@ -57,12 +57,44 @@ export function raidPoolFor(regionId) {
   return regions.find((region) => region.id === regionId)?.raidPool ?? []
 }
 
+/**
+ * A form reversing to its base (e.g. Palafin-H -> Palafin) must not be recorded
+ * as that base's pre-evolution, or breeding/learnset chains start from a form
+ * instead of the real root. Regional-form evolutions (id > 1025 on both sides,
+ * like a-rattata -> a-raticate) are real and kept.
+ * @param {string} from
+ * @param {string} into
+ */
+const isFormRevert = (from, into) =>
+  Number(pokemonSpecies[from]?.id) > 1025 &&
+  (evolutionData[into] ?? []).some((evolution) => evolution.into === from)
+
 /** @type {Record<string, string>} */
 export let preEvolutionMap = Object.fromEntries(
   Object.entries(evolutionData).flatMap(([speciesKey, evolutions]) =>
-    evolutions.map((evolution) => [evolution.into, speciesKey])
+    evolutions
+      .filter((evolution) => !isFormRevert(speciesKey, evolution.into))
+      .map((evolution) => [evolution.into, speciesKey])
   )
 )
+// A transform between two forms (Galarian Darmanitan <-> Galarian Darmanitan-Z)
+// drops both directions above, leaving one form with no predecessor; reattach it
+// to its partner so breeding/learnset chains still reach the real base.
+let formChainChanged = true
+while (formChainChanged) {
+  formChainChanged = false
+  for (const [from, evolutions] of Object.entries(evolutionData)) {
+    if (Number(pokemonSpecies[from]?.id) <= 1025) continue
+    for (const evolution of evolutions) {
+      if (Number(pokemonSpecies[evolution.into]?.id) <= 1025) continue
+      if (!(evolutionData[evolution.into] ?? []).some((back) => back.into === from)) continue
+      if (preEvolutionMap[from] === undefined && preEvolutionMap[evolution.into] !== undefined)
+        (preEvolutionMap[from] = evolution.into), (formChainChanged = true)
+      else if (preEvolutionMap[evolution.into] === undefined && preEvolutionMap[from] !== undefined)
+        (preEvolutionMap[evolution.into] = from), (formChainChanged = true)
+    }
+  }
+}
 
 /** @type {Record<string, string[]>} */
 export let pokedexData = {}

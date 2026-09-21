@@ -331,6 +331,11 @@ One-off scripts used to build the data JSON (not run during dev/build):
   Megas already do. The added entries carry `form: true`, which
   `generate-regions.cjs`'s `isFinalEvolution` ignores so team generation is
   unchanged. Re-run after any re-extraction of `evolution-data.json`.
+- `fix-missing-learnsets.cjs` — fills the ~195 species (every alternate form
+  plus a few base species) absent from `possible-learnsets.json` by borrowing
+  the learnset of their base form, pre-evolution or evolution (falling back to
+  the original bundle's table). Without this those Pokemon fight with no moves.
+  Idempotent; re-run if `possible-learnsets.json` is regenerated.
 - `download_pokemon_sprites.cjs` — fills the local sprite tree for every id in
   `pokemon-species.json`: static front/back/shiny from PokeAPI, and animated
   front/back/shiny from Gen V for dex ids 1-649 falling back to Pokémon

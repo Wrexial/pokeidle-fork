@@ -4,7 +4,7 @@ import React from 'react'
 import { trainerClassPayouts } from './data/config.js'
 import { ballOrder } from './data/items.js'
 import { MOBILE_BREAKPOINT } from './data/ui.js'
-import { encounterData, isRegionalDexComplete, mapData, pokemonSpecies, trainerData } from './data/gameData.js'
+import { completedGenerations, encounterData, isSpeciesCharmed, mapData, pokemonSpecies, trainerData } from './data/gameData.js'
 import { useGame } from './game/context.js'
 import { attemptCatch, selectAutoCatchBall, selectBestBall, shouldAutoCatch } from './game/catching.js'
 import { createVolatileState, resolveBattleTurn } from './game/combat.js'
@@ -61,11 +61,9 @@ export function useGameLoop() {
         })
         return
       }
-      // The Shiny Charm is per generation: it is active while the player is in
-      // a region whose wild Pokedex is complete.
-      const currentRegion =
-          mapData[currentGameState.currentLocation]?.region ?? currentGameState.startRegion,
-        finishedDex = isRegionalDexComplete(currentRegion, currentGameState.pokedexCaught)
+      // The Shiny Charm is per generation: a species gets the boosted odds once
+      // its own generation's national dex is complete.
+      const completedGenerationSet = completedGenerations(currentGameState.pokedexCaught)
       switch (currentGameState.phase) {
         case 'idle': {
           if (!currentGameState.playerPokemon) return
@@ -92,7 +90,7 @@ export function useGameLoop() {
                   speed: stats.speed,
                   moves,
                   isPlayer: !1,
-                  isShiny: checkShinyOdds(finishedDex),
+                  isShiny: checkShinyOdds(isSpeciesCharmed(teamMember.speciesKey, completedGenerationSet)),
                 }
               })
             dispatch({
@@ -132,7 +130,7 @@ export function useGameLoop() {
                 speed: stats.speed,
                 moves,
                 isPlayer: !1,
-                isShiny: checkShinyOdds(finishedDex),
+                isShiny: checkShinyOdds(isSpeciesCharmed(raidSpeciesKey, completedGenerationSet)),
               }
             ;(dispatch({
               type: 'START_ENCOUNTER',
@@ -171,7 +169,7 @@ export function useGameLoop() {
             spawningPokemonData = resolvePokemonEncounter(
               currentEncounterData,
               activeModifierMultipliers,
-              finishedDex
+              completedGenerationSet
             ),
             pokemonBaseStats = calculatePokemonStats(
               spawningPokemonData.species,

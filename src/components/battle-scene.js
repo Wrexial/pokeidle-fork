@@ -5,7 +5,7 @@ import { createPortal } from 'react-dom'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { moveCategoryIcons } from '../data/moves.js'
 import { locationImages } from '../data/ui.js'
-import { catchableSpeciesCountByRegion, isRegionalDexComplete, mapData, moveData, pokemonSpecies, regions } from '../data/gameData.js'
+import { completedGenerations, mapData, moveData, pokemonSpecies, speciesKeysByGeneration } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { getBossTrainerSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, getTrainerSpriteUrl } from '../game/pokemon.js'
 import { EnemyInfoBox } from './enemy-info-box.js'
@@ -23,10 +23,8 @@ export function BattleScene() {
     [showSettings, setShowSettings] = React.useState(!1),
     { state, dispatch } = useGame(),
     { playerPokemon, enemyPokemon, battleEvents } = state,
-    currentRegion = mapData[state.currentLocation]?.region ?? state.startRegion,
-    catchableCount = catchableSpeciesCountByRegion[currentRegion] ?? 0,
-    isDexComplete = isRegionalDexComplete(currentRegion, state.pokedexCaught),
-    regionName = regions.find((region) => region.id === currentRegion)?.name ?? currentRegion
+    completedGenerationSet = completedGenerations(state.pokedexCaught),
+    caughtSpeciesSet = new Set(state.pokedexCaught)
   if (state.phase === 'evolving') return jsx(EvolutionScene, {})
   if (state.phase === 'healing') return jsx(HealingScene, {})
   if (!playerPokemon) return null
@@ -143,22 +141,35 @@ export function BattleScene() {
                         jsxs('span', {
                           children: ['Shinies caught: ', state.shinyCaught.length],
                         }),
-                        jsxs('span', {
-                          children: [
-                            'Shiny odds: 1/',
-                            isDexComplete ? '4096' : '8192',
-                            isDexComplete ? ' (Shiny Charm active!)' : '',
-                          ],
+                        jsx('span', {
+                          children:
+                            'Shiny odds: 1/8192, or 1/4096 for a generation whose Pokedex is complete',
                         }),
-                        !isDexComplete &&
-                          jsxs('span', {
-                            className: 'info-shiny-hint',
-                            children: [
-                              'Catch all ',
-                              catchableCount,
-                              ` ${regionName} Pokemon to unlock the Shiny Charm (2x shiny rate)`,
-                            ],
+                        jsx('div', {
+                          className: 'info-shiny-generations',
+                          children: speciesKeysByGeneration.map((requiredSpecies, generationIndex) => {
+                            const isComplete = completedGenerationSet.has(generationIndex),
+                              caughtCount = requiredSpecies.filter((speciesKey) =>
+                                caughtSpeciesSet.has(speciesKey)
+                              ).length
+                            return jsxs(
+                              'span',
+                              {
+                                className: `info-shiny-gen${isComplete ? ' complete' : ''}`,
+                                children: [
+                                  `Gen ${generationIndex + 1} `,
+                                  isComplete ? '✓ Shiny Charm' : `${caughtCount}/${requiredSpecies.length}`,
+                                ],
+                              },
+                              generationIndex
+                            )
                           }),
+                        }),
+                        jsx('span', {
+                          className: 'info-shiny-hint',
+                          children:
+                            'Catch every Pokemon in a generation to unlock its Shiny Charm (2x shiny rate)',
+                        }),
                       ],
                     }),
                     jsx('button', {

@@ -2,7 +2,7 @@
 
 import { shinyFullOddsChance, shinyWithCharmChance } from '../data/config.js'
 import { activeItems, evolutionItems, pokeBalls } from '../data/items.js'
-import { encounterData, mapData, moveData, pokemonSpecies } from '../data/gameData.js'
+import { encounterData, isSpeciesCharmed, mapData, moveData, pokemonSpecies } from '../data/gameData.js'
 import { calculateExpYield, calculatePokemonStats, getLevelUpResults, getPerfectIVs, resolvePokemonMoves } from './pokemon.js'
 
 /**
@@ -237,11 +237,11 @@ export function resolveActiveModifiers(activeEffects, routeKey) {
 
 /**
  * @param {EncounterData} encounterData
- * @param {{ speciesKey: string, multiplier: number }[]} [modifiers]
- * @param {boolean} [isDexComplete]
+ * @param {{ speciesKey: string, multiplier: number }[]} modifiers
+ * @param {Set<number>} completedGenerationSet
  * @returns {{ species: Species, speciesKey: string, level: number, isShiny: boolean }}
  */
-export function resolvePokemonEncounter(encounterData, modifiers, isDexComplete = !1) {
+export function resolvePokemonEncounter(encounterData, modifiers, completedGenerationSet) {
   const weightedEncounters = encounterData.encounters.map((encounter) => {
       const modifier = modifiers?.find((candidate) => candidate.speciesKey === encounter.speciesKey)
       return modifier
@@ -261,7 +261,7 @@ export function resolvePokemonEncounter(encounterData, modifiers, isDexComplete 
         species: pokemonSpecies[encounter.speciesKey],
         speciesKey: encounter.speciesKey,
         level,
-        isShiny: checkShinyOdds(isDexComplete),
+        isShiny: checkShinyOdds(isSpeciesCharmed(encounter.speciesKey, completedGenerationSet)),
       }
     }
   const fallback = weightedEncounters[weightedEncounters.length - 1]
@@ -269,7 +269,7 @@ export function resolvePokemonEncounter(encounterData, modifiers, isDexComplete 
     species: pokemonSpecies[fallback.speciesKey],
     speciesKey: fallback.speciesKey,
     level: fallback.minLevel,
-    isShiny: checkShinyOdds(isDexComplete),
+    isShiny: checkShinyOdds(isSpeciesCharmed(fallback.speciesKey, completedGenerationSet)),
   }
 }
 

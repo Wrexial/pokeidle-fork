@@ -76,44 +76,75 @@ export const wildSpeciesKeys = [
 export const catchableSpeciesCount = wildSpeciesKeys.length
 
 /**
- * Wild species per region — the regional Pokédex goal. Each region's routes and
- * Raid Island are its `mapData` locations, whose `routeKey` points at the
- * matching `encounterData` bucket, so this partitions `wildSpeciesKeys` by
- * region.
- * @type {Record<string, string[]>}
+ * National-dex range for each generation (Gen 1-9), in order. Shared by the
+ * Pokedex tabs and the per-generation Shiny Charm.
  */
-export const wildSpeciesKeysByRegion = (() => {
-  /** @type {Record<string, Set<string>>} */
-  const byRegion = {}
-  for (const location of Object.values(mapData)) {
-    const bucket = location.routeKey ? encounterData[location.routeKey] : null
-    if (!bucket) continue
-    const region = location.region ?? 'kanto'
-    ;(byRegion[region] || (byRegion[region] = new Set()))
-    for (const encounter of bucket.encounters) byRegion[region].add(encounter.speciesKey)
-  }
-  return Object.fromEntries(
-    Object.entries(byRegion).map(([region, speciesSet]) => [region, [...speciesSet]])
-  )
-})()
+export const GENERATION_DEX_RANGES = [
+  [1, 151],
+  [152, 251],
+  [252, 386],
+  [387, 493],
+  [494, 649],
+  [650, 721],
+  [722, 809],
+  [810, 905],
+  [906, 1025],
+]
 
-/** Distinct wild species count per region (regional Shiny Charm goal). */
-export const catchableSpeciesCountByRegion = Object.fromEntries(
-  Object.entries(wildSpeciesKeysByRegion).map(([region, speciesKeys]) => [region, speciesKeys.length])
+/** Species keys per generation, in national-dex order. */
+export const speciesKeysByGeneration = GENERATION_DEX_RANGES.map(([lowId, highId]) =>
+  Object.keys(pokemonSpecies).filter(
+    (speciesKey) => pokemonSpecies[speciesKey].id >= lowId && pokemonSpecies[speciesKey].id <= highId
+  )
 )
 
 /**
- * Whether every wild species of `regionId` has been caught — the regional
- * Shiny Charm condition.
- * @param {string} regionId
+ * 0-based generation index for a national-dex id, or -1 for alternate forms
+ * (ids above 1025) and placeholders.
+ * @param {number} dexId
+ * @returns {number}
+ */
+export function generationIndexForDexId(dexId) {
+  return GENERATION_DEX_RANGES.findIndex(([lowId, highId]) => dexId >= lowId && dexId <= highId)
+}
+
+/**
+ * @param {string} speciesKey
+ * @returns {number}
+ */
+export function generationIndexForSpecies(speciesKey) {
+  const species = pokemonSpecies[speciesKey]
+  return species ? generationIndexForDexId(species.id) : -1
+}
+
+/**
+ * Generation indices whose entire national dex has been caught. The Shiny Charm
+ * works per generation, so each collected generation boosts the odds for its
+ * own species.
  * @param {string[]} pokedexCaught
+ * @returns {Set<number>}
+ */
+export function completedGenerations(pokedexCaught) {
+  const caught = new Set(pokedexCaught)
+  /** @type {Set<number>} */
+  const completed = new Set()
+  speciesKeysByGeneration.forEach((speciesKeys, generationIndex) => {
+    if (speciesKeys.length > 0 && speciesKeys.every((speciesKey) => caught.has(speciesKey)))
+      completed.add(generationIndex)
+  })
+  return completed
+}
+
+/**
+ * Whether the Shiny Charm is active for `speciesKey` (its generation's dex is
+ * complete).
+ * @param {string} speciesKey
+ * @param {Set<number>} completedGenerationSet
  * @returns {boolean}
  */
-export function isRegionalDexComplete(regionId, pokedexCaught) {
-  const requiredSpecies = wildSpeciesKeysByRegion[regionId]
-  if (!requiredSpecies || requiredSpecies.length === 0) return false
-  const caught = new Set(pokedexCaught)
-  return requiredSpecies.every((speciesKey) => caught.has(speciesKey))
+export function isSpeciesCharmed(speciesKey, completedGenerationSet) {
+  const generationIndex = generationIndexForSpecies(speciesKey)
+  return generationIndex >= 0 && completedGenerationSet.has(generationIndex)
 }
 
 /** @type {[string, Species][]} */

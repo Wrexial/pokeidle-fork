@@ -3,15 +3,10 @@
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { STAT_DISPLAY_MAX, statBarColors } from '../data/ui.js'
-import { pokedexData, pokedexIndexes, pokemonSpecies } from '../data/gameData.js'
+import { GENERATION_DEX_RANGES, pokedexData, pokedexIndexes, pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
 import { PokedexTile } from './pokedex-tile.js'
-
-const GEN_RANGES = [
-  [1, 151], [152, 251], [252, 386], [387, 493], [494, 649],
-  [650, 721], [722, 809], [810, 905], [906, 1025],
-]
 
 /** @param {{ onClose: () => void }} props */
 export function PokedexModal({ onClose }) {
@@ -32,7 +27,8 @@ export function PokedexModal({ onClose }) {
           ? pokedexIndexes
           : pokedexIndexes.filter(
               (entry) =>
-                entry[1].id >= GEN_RANGES[gen - 1][0] && entry[1].id <= GEN_RANGES[gen - 1][1]
+                entry[1].id >= GENERATION_DEX_RANGES[gen - 1][0] &&
+                entry[1].id <= GENERATION_DEX_RANGES[gen - 1][1]
             ),
       [gen]
     ),

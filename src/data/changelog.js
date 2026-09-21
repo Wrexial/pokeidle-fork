@@ -1,49 +1,14 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.7.0'
+export const GAME_VERSION = '0.8.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
     {
-      version: '0.7.0',
-      subtitle: 'Region Unlocks, Prestige & Evolution Items',
+      version: '0.8.0',
+      subtitle: 'Battles, Breeding & Beyond',
       sections: [
-        {
-          heading: 'Region Unlocks',
-          items: [
-            'Beating a region\u2019s Champion now earns an Unlock Token \u2014 spend it from the Town Map to open any region you like, instead of following a fixed order',
-            'Locked region tabs glow while you have a token; click one to open it',
-          ],
-        },
-        {
-          heading: 'Region Prestige',
-          items: [
-            'Once you finish a region, the Gyms tab offers a Prestige button that replays its routes and badges without losing your Pokemon, items, money or Pokedex',
-            'Prestige level is tracked per region and each reset awards Victory Tokens',
-            'Prestige requires the region\u2019s Elite Four to be beaten again, and re-locks its badge gates',
-          ],
-        },
-        {
-          heading: 'Evolution Items',
-          items: [
-            'The Reward Shop now stocks working evolution items: Sun, Dusk, Shiny, Dawn, Ice and Oval Stones, plus Link Cable, King\u2019s Rock, Metal Coat, Protector, Electirizer, Magmarizer, Razor Claw, Razor Fang, Reaper Cloth, Deep Sea Tooth/Scale, Upgrade, Dubious Disc, Sachet, Whipped Dream, Sweet/Tart Apple, Cracked Pot and the Galar/armor items',
-            'Pokemon that normally evolve by trade \u2014 Kadabra, Machoke, Graveler, Haunter, Boldore, Gurdurr, Phantump, Pumpkaboo and more \u2014 now evolve with a Link Cable',
-            'Stone evolutions (Pikachu, Eevee, Vulpix, Growlithe, Gloom, Clefairy, Kirlia and many others) use their stone instead of levelling up',
-          ],
-        },
-        {
-          heading: 'Catch Goals',
-          items: [
-            'Route-exclusive catch goals now name the species they want, and the Wild Pokemon grid flags which tiles are exclusive to that route',
-          ],
-        },
-        {
-          heading: 'Secrets',
-          items: [
-            'Cinnabar Island has a 1 in 1,000 chance of a MissingNo. encounter instead of a trainer battle',
-          ],
-        },
         {
           heading: 'Wonder Trade',
           items: [
@@ -105,6 +70,47 @@ export const CHANGELOG = [
           heading: 'Records',
           items: [
             'A Records panel in the Box summarises your journey: battles won, Pokedex and shiny progress, badges, Victory Tokens, and per-region completion and prestige levels',
+          ],
+        },
+      ],
+    },
+    {
+      version: '0.7.0',
+      subtitle: 'Region Unlocks, Prestige & Evolution Items',
+      sections: [
+        {
+          heading: 'Region Unlocks',
+          items: [
+            'Beating a region\u2019s Champion now earns an Unlock Token \u2014 spend it from the Town Map to open any region you like, instead of following a fixed order',
+            'Locked region tabs glow while you have a token; click one to open it',
+          ],
+        },
+        {
+          heading: 'Region Prestige',
+          items: [
+            'Once you finish a region, the Gyms tab offers a Prestige button that replays its routes and badges without losing your Pokemon, items, money or Pokedex',
+            'Prestige level is tracked per region and each reset awards Victory Tokens',
+            'Prestige requires the region\u2019s Elite Four to be beaten again, and re-locks its badge gates',
+          ],
+        },
+        {
+          heading: 'Evolution Items',
+          items: [
+            'The Reward Shop now stocks working evolution items: Sun, Dusk, Shiny, Dawn, Ice and Oval Stones, plus Link Cable, King\u2019s Rock, Metal Coat, Protector, Electirizer, Magmarizer, Razor Claw, Razor Fang, Reaper Cloth, Deep Sea Tooth/Scale, Upgrade, Dubious Disc, Sachet, Whipped Dream, Sweet/Tart Apple, Cracked Pot and the Galar/armor items',
+            'Pokemon that normally evolve by trade \u2014 Kadabra, Machoke, Graveler, Haunter, Boldore, Gurdurr, Phantump, Pumpkaboo and more \u2014 now evolve with a Link Cable',
+            'Stone evolutions (Pikachu, Eevee, Vulpix, Growlithe, Gloom, Clefairy, Kirlia and many others) use their stone instead of levelling up',
+          ],
+        },
+        {
+          heading: 'Catch Goals',
+          items: [
+            'Route-exclusive catch goals now name the species they want, and the Wild Pokemon grid flags which tiles are exclusive to that route',
+          ],
+        },
+        {
+          heading: 'Secrets',
+          items: [
+            'Cinnabar Island has a 1 in 1,000 chance of a MissingNo. encounter instead of a trainer battle',
           ],
         },
         {

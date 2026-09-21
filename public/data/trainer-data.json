@@ -949,11 +949,11 @@
    "team": [
     {
      "speciesKey": "chikorita",
-     "level": 10
+     "level": 9
     },
     {
      "speciesKey": "bayleef",
-     "level": 11
+     "level": 10
     }
    ]
   },
@@ -964,11 +964,11 @@
    "team": [
     {
      "speciesKey": "meganium",
-     "level": 11
+     "level": 10
     },
     {
      "speciesKey": "cyndaquil",
-     "level": 12
+     "level": 11
     }
    ]
   },
@@ -979,11 +979,11 @@
    "team": [
     {
      "speciesKey": "quilava",
-     "level": 12
+     "level": 11
     },
     {
      "speciesKey": "typhlosion",
-     "level": 13
+     "level": 12
     }
    ]
   }
@@ -996,11 +996,11 @@
    "team": [
     {
      "speciesKey": "chikorita",
-     "level": 17
+     "level": 16
     },
     {
      "speciesKey": "bayleef",
-     "level": 18
+     "level": 17
     }
    ]
   },
@@ -1011,11 +1011,11 @@
    "team": [
     {
      "speciesKey": "meganium",
-     "level": 18
+     "level": 17
     },
     {
      "speciesKey": "cyndaquil",
-     "level": 19
+     "level": 18
     }
    ]
   },
@@ -1026,11 +1026,11 @@
    "team": [
     {
      "speciesKey": "quilava",
-     "level": 19
+     "level": 18
     },
     {
      "speciesKey": "typhlosion",
-     "level": 20
+     "level": 19
     }
    ]
   }
@@ -1043,11 +1043,11 @@
    "team": [
     {
      "speciesKey": "chikorita",
-     "level": 24
+     "level": 22
     },
     {
      "speciesKey": "bayleef",
-     "level": 25
+     "level": 23
     }
    ]
   },
@@ -1058,11 +1058,11 @@
    "team": [
     {
      "speciesKey": "meganium",
-     "level": 25
+     "level": 23
     },
     {
      "speciesKey": "cyndaquil",
-     "level": 26
+     "level": 24
     }
    ]
   },
@@ -1073,11 +1073,11 @@
    "team": [
     {
      "speciesKey": "quilava",
-     "level": 26
+     "level": 24
     },
     {
      "speciesKey": "typhlosion",
-     "level": 27
+     "level": 25
     }
    ]
   }
@@ -1090,11 +1090,11 @@
    "team": [
     {
      "speciesKey": "chikorita",
-     "level": 28
+     "level": 26
     },
     {
      "speciesKey": "bayleef",
-     "level": 29
+     "level": 27
     }
    ]
   },
@@ -1105,11 +1105,11 @@
    "team": [
     {
      "speciesKey": "meganium",
-     "level": 29
+     "level": 27
     },
     {
      "speciesKey": "cyndaquil",
-     "level": 30
+     "level": 28
     }
    ]
   },
@@ -1120,11 +1120,11 @@
    "team": [
     {
      "speciesKey": "quilava",
-     "level": 30
+     "level": 28
     },
     {
      "speciesKey": "typhlosion",
-     "level": 31
+     "level": 29
     }
    ]
   }
@@ -1137,11 +1137,11 @@
    "team": [
     {
      "speciesKey": "chikorita",
-     "level": 38
+     "level": 35
     },
     {
      "speciesKey": "bayleef",
-     "level": 39
+     "level": 36
     }
    ]
   },
@@ -1152,11 +1152,11 @@
    "team": [
     {
      "speciesKey": "meganium",
-     "level": 39
+     "level": 36
     },
     {
      "speciesKey": "cyndaquil",
-     "level": 40
+     "level": 37
     }
    ]
   },
@@ -1167,11 +1167,11 @@
    "team": [
     {
      "speciesKey": "quilava",
-     "level": 40
+     "level": 37
     },
     {
      "speciesKey": "typhlosion",
-     "level": 41
+     "level": 38
     }
    ]
   }
@@ -1184,11 +1184,11 @@
    "team": [
     {
      "speciesKey": "chikorita",
-     "level": 45
+     "level": 43
     },
     {
      "speciesKey": "bayleef",
-     "level": 46
+     "level": 44
     }
    ]
   },
@@ -1199,11 +1199,11 @@
    "team": [
     {
      "speciesKey": "meganium",
-     "level": 46
+     "level": 44
     },
     {
      "speciesKey": "cyndaquil",
-     "level": 47
+     "level": 45
     }
    ]
   },
@@ -1214,11 +1214,11 @@
    "team": [
     {
      "speciesKey": "quilava",
-     "level": 47
+     "level": 45
     },
     {
      "speciesKey": "typhlosion",
-     "level": 48
+     "level": 46
     }
    ]
   }
@@ -1231,11 +1231,11 @@
    "team": [
     {
      "speciesKey": "chikorita",
-     "level": 52
+     "level": 50
     },
     {
      "speciesKey": "bayleef",
-     "level": 53
+     "level": 51
     }
    ]
   },
@@ -1246,11 +1246,11 @@
    "team": [
     {
      "speciesKey": "meganium",
-     "level": 53
+     "level": 51
     },
     {
      "speciesKey": "cyndaquil",
-     "level": 54
+     "level": 52
     }
    ]
   },
@@ -1261,11 +1261,11 @@
    "team": [
     {
      "speciesKey": "quilava",
-     "level": 54
+     "level": 52
     },
     {
      "speciesKey": "typhlosion",
-     "level": 55
+     "level": 53
     }
    ]
   }
@@ -1278,11 +1278,11 @@
    "team": [
     {
      "speciesKey": "chikorita",
-     "level": 57
+     "level": 56
     },
     {
      "speciesKey": "bayleef",
-     "level": 58
+     "level": 57
     }
    ]
   },
@@ -1293,11 +1293,11 @@
    "team": [
     {
      "speciesKey": "meganium",
-     "level": 58
+     "level": 57
     },
     {
      "speciesKey": "cyndaquil",
-     "level": 59
+     "level": 58
     }
    ]
   },
@@ -1308,11 +1308,11 @@
    "team": [
     {
      "speciesKey": "quilava",
-     "level": 59
+     "level": 58
     },
     {
      "speciesKey": "typhlosion",
-     "level": 60
+     "level": 59
     }
    ]
   }
@@ -1325,11 +1325,11 @@
    "team": [
     {
      "speciesKey": "chikorita",
-     "level": 64
+     "level": 62
     },
     {
      "speciesKey": "bayleef",
-     "level": 65
+     "level": 63
     }
    ]
   },
@@ -1340,11 +1340,11 @@
    "team": [
     {
      "speciesKey": "meganium",
-     "level": 65
+     "level": 63
     },
     {
      "speciesKey": "cyndaquil",
-     "level": 66
+     "level": 64
     }
    ]
   },
@@ -1355,11 +1355,11 @@
    "team": [
     {
      "speciesKey": "quilava",
-     "level": 66
+     "level": 64
     },
     {
      "speciesKey": "typhlosion",
-     "level": 67
+     "level": 65
     }
    ]
   }

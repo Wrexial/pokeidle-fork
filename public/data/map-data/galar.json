@@ -12,7 +12,7 @@
    "entry": true,
    "previous": "alola"
   },
-  "unlockOrder": 342,
+  "unlockOrder": 345,
   "position": {
    "x": 11,
    "y": 94
@@ -54,7 +54,7 @@
     "galar-postwick"
    ]
   },
-  "unlockOrder": 343,
+  "unlockOrder": 346,
   "position": {
    "x": 11,
    "y": 79
@@ -78,7 +78,7 @@
     }
    ]
   },
-  "unlockOrder": 344,
+  "unlockOrder": 347,
   "position": {
    "x": 11,
    "y": 64
@@ -123,7 +123,7 @@
     }
    ]
   },
-  "unlockOrder": 345,
+  "unlockOrder": 348,
   "position": {
    "x": 26,
    "y": 65
@@ -148,7 +148,7 @@
     }
    ]
   },
-  "unlockOrder": 346,
+  "unlockOrder": 349,
   "position": {
    "x": 26,
    "y": 49
@@ -193,7 +193,7 @@
     }
    ]
   },
-  "unlockOrder": 347,
+  "unlockOrder": 350,
   "position": {
    "x": 10,
    "y": 50
@@ -218,7 +218,7 @@
     }
    ]
   },
-  "unlockOrder": 348,
+  "unlockOrder": 351,
   "position": {
    "x": 9,
    "y": 21
@@ -242,7 +242,7 @@
     }
    ]
   },
-  "unlockOrder": 349,
+  "unlockOrder": 352,
   "position": {
    "x": 10,
    "y": 6
@@ -290,7 +290,7 @@
     "galar-gym-1"
    ]
   },
-  "unlockOrder": 350,
+  "unlockOrder": 353,
   "position": {
    "x": 24,
    "y": 6
@@ -313,7 +313,7 @@
     }
    ]
   },
-  "unlockOrder": 351,
+  "unlockOrder": 354,
   "position": {
    "x": 39,
    "y": 6
@@ -362,7 +362,7 @@
     "galar-gym-2"
    ]
   },
-  "unlockOrder": 352,
+  "unlockOrder": 355,
   "position": {
    "x": 37,
    "y": 51
@@ -390,7 +390,7 @@
     "galar-gym-3"
    ]
   },
-  "unlockOrder": 353,
+  "unlockOrder": 356,
   "position": {
    "x": 52,
    "y": 53
@@ -434,7 +434,7 @@
     }
    ]
   },
-  "unlockOrder": 354,
+  "unlockOrder": 357,
   "position": {
    "x": 22,
    "y": 57
@@ -483,7 +483,7 @@
     "galar-gym-4"
    ]
   },
-  "unlockOrder": 355,
+  "unlockOrder": 358,
   "position": {
    "x": 66,
    "y": 52
@@ -508,7 +508,7 @@
     }
    ]
   },
-  "unlockOrder": 356,
+  "unlockOrder": 359,
   "position": {
    "x": 70,
    "y": 40
@@ -532,7 +532,7 @@
     }
    ]
   },
-  "unlockOrder": 357,
+  "unlockOrder": 360,
   "position": {
    "x": 73,
    "y": 26
@@ -581,7 +581,7 @@
     "galar-gym-6"
    ]
   },
-  "unlockOrder": 358,
+  "unlockOrder": 361,
   "position": {
    "x": 81,
    "y": 45
@@ -604,7 +604,7 @@
     }
    ]
   },
-  "unlockOrder": 359,
+  "unlockOrder": 362,
   "position": {
    "x": 91,
    "y": 40
@@ -654,7 +654,7 @@
     "galar-gym-7"
    ]
   },
-  "unlockOrder": 360,
+  "unlockOrder": 363,
   "position": {
    "x": 51,
    "y": 37
@@ -680,7 +680,7 @@
     "galar-gym-8"
    ]
   },
-  "unlockOrder": 361,
+  "unlockOrder": 364,
   "position": {
    "x": 52,
    "y": 24
@@ -723,7 +723,7 @@
     }
    ]
   },
-  "unlockOrder": 362,
+  "unlockOrder": 365,
   "position": {
    "x": 22,
    "y": 42
@@ -767,7 +767,7 @@
     }
    ]
   },
-  "unlockOrder": 363,
+  "unlockOrder": 366,
   "position": {
    "x": 59,
    "y": 27
@@ -800,7 +800,7 @@
     "galar-gym-8"
    ]
   },
-  "unlockOrder": 364,
+  "unlockOrder": 367,
   "position": {
    "x": 61,
    "y": 33

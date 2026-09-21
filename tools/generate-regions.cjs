@@ -124,7 +124,56 @@ for (const c of champData) c.region ||= 'kanto'
 const clampLevel = (n) => Math.max(2, Math.min(100, n))
 const norm = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, '')
 const locId = (regionId, node) => (node.startsWith(regionId + '-') ? node : `${regionId}-${node}`)
-const isRouteNode = (node) => /route/.test(node) || node.startsWith('auto-') || /province-area/.test(node)
+// Real wild areas the scrape drops: PokéAPI files them outside the region's
+// town/route set and the compass infobox gives no direction for them. Added
+// here so the generated map is complete. `rank` forces their place in the
+// route order when adjacency alone would sort them too early (Mt. Silver sits
+// off the entry town but is Johto's endgame).
+const EXTRA_MAP_AREAS = {
+  johto: [
+    {
+      node: 'bell-tower',
+      name: 'Bell Tower',
+      x: 56,
+      y: 16,
+      connect: [['ecruteak-city', 'north']],
+      species: ['gastly', 'haunter', 'gengar', 'misdreavus', 'rattata', 'raticate', 'zubat', 'golbat'],
+    },
+    {
+      node: 'whirl-islands',
+      name: 'Whirl Islands',
+      x: 27,
+      y: 58,
+      connect: [['johto-sea-route-41', 'south']],
+      species: ['krabby', 'kingler', 'horsea', 'seadra', 'tentacool', 'tentacruel', 'seel', 'dewgong'],
+    },
+    {
+      node: 'mt-silver',
+      name: 'Mt. Silver',
+      x: 84,
+      y: 80,
+      connect: [['new-bark-town', 'east']],
+      rank: 90,
+      species: ['larvitar', 'pupitar', 'onix', 'golbat', 'golduck', 'sneasel', 'misdreavus', 'donphan'],
+    },
+  ],
+}
+const EXTRA_AREA_NODES = new Set(
+  Object.values(EXTRA_MAP_AREAS).flat().map((area) => area.node)
+)
+// Extra areas carry their own encounter list (the generation slice would drag
+// mythicals like Celebi in and change the region's raid pool).
+const EXTRA_AREA_SPECIES = Object.fromEntries(
+  Object.entries(EXTRA_MAP_AREAS).map(([regionName, areas]) => [
+    regionName,
+    Object.fromEntries(areas.map((area) => [area.node, area.species])),
+  ])
+)
+const isRouteNode = (node) =>
+  /route/.test(node) ||
+  node.startsWith('auto-') ||
+  /province-area/.test(node) ||
+  EXTRA_AREA_NODES.has(node)
 const isTownNode = (node) => !isRouteNode(node)
 
 const byId = Object.entries(species)
@@ -182,6 +231,13 @@ for (const region of REGIONS) {
   const nodes = [...map.nodes]
   const display = map.display
   const positions = map.positions
+  for (const area of EXTRA_MAP_AREAS[regionId] ?? []) {
+    if (nodes.includes(area.node)) continue
+    nodes.push(area.node)
+    display[area.node] = area.name
+    positions[area.node] = { x: area.x, y: area.y }
+    for (const [target, dir] of area.connect) map.edges.push({ from: area.node, to: target, dir })
+  }
   const adjacency = {}
   for (const n of nodes) adjacency[n] = new Set()
   for (const e of map.edges) {
@@ -254,6 +310,8 @@ for (const region of REGIONS) {
     }
     rank[node] = lowest !== null ? lowest + 0.5 : 10000 + depth[node]
   }
+  for (const area of EXTRA_MAP_AREAS[regionId] ?? [])
+    if (area.rank != null) rank[area.node] = area.rank
   rank[entryNode] = -1
   const order = nodes
     .slice()
@@ -392,9 +450,19 @@ for (const region of REGIONS) {
   const routeEncounter = {}
   routeNodes.forEach((node, i) => {
     const placeholder = clampLevel(base + Math.max(0, depth[node] - 1) * 2),
+      extraSpecies = EXTRA_AREA_SPECIES[regionId]?.[node],
       real = realEncounters[regionId]?.[node]
     let encounters
-    if (real && real.length) {
+    if (extraSpecies) {
+      encounters = extraSpecies
+        .filter((key) => species[key])
+        .map((key, idx) => ({
+          speciesKey: key,
+          weight: encounterWeight(null, idx),
+          minLevel: placeholder,
+          maxLevel: placeholder,
+        }))
+    } else if (real && real.length) {
       encounters = real.map((e) => ({ ...e }))
     } else if (wild.length) {
       const start =

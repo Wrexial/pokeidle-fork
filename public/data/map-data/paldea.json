@@ -12,7 +12,7 @@
    "entry": true,
    "previous": "galar"
   },
-  "unlockOrder": 365,
+  "unlockOrder": 368,
   "position": {
    "x": 15,
    "y": 64
@@ -55,7 +55,7 @@
     "paldea-los-platos"
    ]
   },
-  "unlockOrder": 366,
+  "unlockOrder": 369,
   "position": {
    "x": 19,
    "y": 70
@@ -79,7 +79,7 @@
     }
    ]
   },
-  "unlockOrder": 367,
+  "unlockOrder": 370,
   "position": {
    "x": 21,
    "y": 64
@@ -125,7 +125,7 @@
     }
    ]
   },
-  "unlockOrder": 368,
+  "unlockOrder": 371,
   "position": {
    "x": 17,
    "y": 51
@@ -170,7 +170,7 @@
     }
    ]
   },
-  "unlockOrder": 369,
+  "unlockOrder": 372,
   "position": {
    "x": 11,
    "y": 52
@@ -218,7 +218,7 @@
     }
    ]
   },
-  "unlockOrder": 370,
+  "unlockOrder": 373,
   "position": {
    "x": 33,
    "y": 55
@@ -244,7 +244,7 @@
     }
    ]
   },
-  "unlockOrder": 371,
+  "unlockOrder": 374,
   "position": {
    "x": 13,
    "y": 58
@@ -269,7 +269,7 @@
     }
    ]
   },
-  "unlockOrder": 372,
+  "unlockOrder": 375,
   "position": {
    "x": 30,
    "y": 64
@@ -294,7 +294,7 @@
     }
    ]
   },
-  "unlockOrder": 373,
+  "unlockOrder": 376,
   "position": {
    "x": 38,
    "y": 65
@@ -319,7 +319,7 @@
     }
    ]
   },
-  "unlockOrder": 374,
+  "unlockOrder": 377,
   "position": {
    "x": 44,
    "y": 70
@@ -365,7 +365,7 @@
     }
    ]
   },
-  "unlockOrder": 375,
+  "unlockOrder": 378,
   "position": {
    "x": 36,
    "y": 49
@@ -408,7 +408,7 @@
     }
    ]
   },
-  "unlockOrder": 376,
+  "unlockOrder": 379,
   "position": {
    "x": 6,
    "y": 48
@@ -454,7 +454,7 @@
     "paldea-gym-1"
    ]
   },
-  "unlockOrder": 377,
+  "unlockOrder": 380,
   "position": {
    "x": 7,
    "y": 57
@@ -502,7 +502,7 @@
     "paldea-gym-2"
    ]
   },
-  "unlockOrder": 378,
+  "unlockOrder": 381,
   "position": {
    "x": 27,
    "y": 54
@@ -546,7 +546,7 @@
     }
    ]
   },
-  "unlockOrder": 379,
+  "unlockOrder": 382,
   "position": {
    "x": 42,
    "y": 49
@@ -593,7 +593,7 @@
     }
    ]
   },
-  "unlockOrder": 380,
+  "unlockOrder": 383,
   "position": {
    "x": 47,
    "y": 54
@@ -617,7 +617,7 @@
     }
    ]
   },
-  "unlockOrder": 381,
+  "unlockOrder": 384,
   "position": {
    "x": 53,
    "y": 78
@@ -641,7 +641,7 @@
     }
    ]
   },
-  "unlockOrder": 382,
+  "unlockOrder": 385,
   "position": {
    "x": 49,
    "y": 62
@@ -666,7 +666,7 @@
     }
    ]
   },
-  "unlockOrder": 383,
+  "unlockOrder": 386,
   "position": {
    "x": 59,
    "y": 77
@@ -692,7 +692,7 @@
     }
    ]
   },
-  "unlockOrder": 384,
+  "unlockOrder": 387,
   "position": {
    "x": 56,
    "y": 54
@@ -718,7 +718,7 @@
     }
    ]
   },
-  "unlockOrder": 385,
+  "unlockOrder": 388,
   "position": {
    "x": 65,
    "y": 62
@@ -743,7 +743,7 @@
     }
    ]
   },
-  "unlockOrder": 386,
+  "unlockOrder": 389,
   "position": {
    "x": 70,
    "y": 57
@@ -767,7 +767,7 @@
     }
    ]
   },
-  "unlockOrder": 387,
+  "unlockOrder": 390,
   "position": {
    "x": 94,
    "y": 30
@@ -815,7 +815,7 @@
     "paldea-gym-3"
    ]
   },
-  "unlockOrder": 388,
+  "unlockOrder": 391,
   "position": {
    "x": 56,
    "y": 62
@@ -843,7 +843,7 @@
     "paldea-gym-4"
    ]
   },
-  "unlockOrder": 389,
+  "unlockOrder": 392,
   "position": {
    "x": 60,
    "y": 67
@@ -891,7 +891,7 @@
     "paldea-gym-5"
    ]
   },
-  "unlockOrder": 390,
+  "unlockOrder": 393,
   "position": {
    "x": 79,
    "y": 51
@@ -920,7 +920,7 @@
     "paldea-gym-6"
    ]
   },
-  "unlockOrder": 391,
+  "unlockOrder": 394,
   "position": {
    "x": 96,
    "y": 39
@@ -946,7 +946,7 @@
     "paldea-gym-7"
    ]
   },
-  "unlockOrder": 392,
+  "unlockOrder": 395,
   "position": {
    "x": 88,
    "y": 49
@@ -990,7 +990,7 @@
     }
    ]
   },
-  "unlockOrder": 393,
+  "unlockOrder": 396,
   "position": {
    "x": 4,
    "y": 29
@@ -1023,7 +1023,7 @@
     "paldea-gym-8"
    ]
   },
-  "unlockOrder": 394,
+  "unlockOrder": 397,
   "position": {
    "x": 4,
    "y": 35

@@ -326,7 +326,13 @@ One-off scripts used to build the data JSON (not run during dev/build):
   writing `regions.json` (region metadata + per-region legendary pools).
   Idempotent — safe to re-run; tags Kanto locations/leaders with
   `region: "kanto"`. Routes without scraped encounters (e.g. Paldea's province
-  areas) fall back to a generation-based species slice. Encounter levels are
+  areas) fall back to a generation-based species slice. A few real wild areas
+  are missing from `region-maps.json` because PokéAPI files them outside the
+  town/route set, so `EXTRA_MAP_AREAS` injects them into the graph with an
+  explicit position/connection — currently Johto's Bell Tower, Whirl Islands and
+  Mt. Silver. Mt. Silver carries a forced `rank` so it is Johto's last route,
+  and the league/Raid Island hang off it (which is what puts Johto's ending on
+  the map's right side). Encounter levels are
   reassigned by `levelRoutes()`: every region runs its own 5-75 curve
   (`LEVEL_MIN`/`LEVEL_MAX`), and its routes are spread across it in the order
   they unlock (route number / BFS depth), so the curve ramps smoothly for the

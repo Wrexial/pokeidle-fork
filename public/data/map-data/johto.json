@@ -483,7 +483,7 @@
     "johto-gym-4"
    ]
   },
-  "unlockOrder": 200038,
+  "unlockOrder": 200038.0001,
   "position": {
    "x": 40.75,
    "y": 24.88
@@ -512,7 +512,7 @@
     "johto-gym-4"
    ]
   },
-  "unlockOrder": 200038,
+  "unlockOrder": 200038.0002,
   "position": {
    "x": 30.41,
    "y": 29.01
@@ -660,7 +660,7 @@
    ],
    "caughtCount": 20
   },
-  "unlockOrder": 200041.5,
+  "unlockOrder": 200041.5001,
   "position": {
    "x": 6.08,
    "y": 64.05
@@ -708,7 +708,7 @@
     "johto-gym-5"
    ]
   },
-  "unlockOrder": 200041.5,
+  "unlockOrder": 200041.5002,
   "position": {
    "x": 8.52,
    "y": 49.7

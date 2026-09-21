@@ -104,7 +104,7 @@
    ],
    "partyLevel": 59
   },
-  "unlockOrder": 500002,
+  "unlockOrder": 500002.0001,
   "position": {
    "x": 5,
    "y": 76.81
@@ -138,7 +138,7 @@
     }
    ]
   },
-  "unlockOrder": 500002,
+  "unlockOrder": 500002.0002,
   "position": {
    "x": 90,
    "y": 66.81
@@ -163,7 +163,7 @@
    ],
    "caughtCount": 4
   },
-  "unlockOrder": 500002,
+  "unlockOrder": 500002.0003,
   "position": {
    "x": 25.77,
    "y": 66.42
@@ -196,7 +196,7 @@
     }
    ]
   },
-  "unlockOrder": 500002.5,
+  "unlockOrder": 500002.5001,
   "position": {
    "x": 12.69,
    "y": 66.42
@@ -230,7 +230,7 @@
    ],
    "partyLevel": 9
   },
-  "unlockOrder": 500002.5,
+  "unlockOrder": 500002.5002,
   "position": {
    "x": 88.85,
    "y": 62.58
@@ -341,7 +341,7 @@
     "unova-gym-2"
    ]
   },
-  "unlockOrder": 500004,
+  "unlockOrder": 500004.0001,
   "position": {
    "x": 51.15,
    "y": 71.04
@@ -383,7 +383,7 @@
     "unova-gym-3"
    ]
   },
-  "unlockOrder": 500004,
+  "unlockOrder": 500004.0002,
   "position": {
    "x": 51.15,
    "y": 61.07
@@ -527,7 +527,7 @@
     "unova-gym-5"
    ]
   },
-  "unlockOrder": 500006,
+  "unlockOrder": 500006.0001,
   "position": {
    "x": 3.08,
    "y": 28.73
@@ -574,7 +574,7 @@
     "unova-gym-5"
    ]
   },
-  "unlockOrder": 500006,
+  "unlockOrder": 500006.0002,
   "position": {
    "x": 22.15,
    "y": 47.88
@@ -1056,7 +1056,7 @@
    ],
    "caughtCount": 21
   },
-  "unlockOrder": 500014,
+  "unlockOrder": 500014.0003,
   "position": {
    "x": 80.62,
    "y": 47.88
@@ -1081,7 +1081,7 @@
     }
    ]
   },
-  "unlockOrder": 500014,
+  "unlockOrder": 500014.0001,
   "position": {
    "x": 91.54,
    "y": 31.04
@@ -1125,7 +1125,7 @@
    ],
    "partyLevel": 53
   },
-  "unlockOrder": 500014,
+  "unlockOrder": 500014.0002,
   "position": {
    "x": 73.46,
    "y": 43.19

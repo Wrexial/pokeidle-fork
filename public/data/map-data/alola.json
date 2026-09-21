@@ -49,7 +49,7 @@
     "alola-gym-1"
    ]
   },
-  "unlockOrder": 700001,
+  "unlockOrder": 700001.0001,
   "position": {
    "x": 16.20901128510399,
    "y": 31.893688369002064
@@ -76,7 +76,7 @@
     "alola-gym-1"
    ]
   },
-  "unlockOrder": 700001,
+  "unlockOrder": 700001.0002,
   "position": {
    "x": 14.29,
    "y": 23.11
@@ -128,7 +128,7 @@
     }
    ]
   },
-  "unlockOrder": 700002.5,
+  "unlockOrder": 700002.5001,
   "position": {
    "x": 12.5,
    "y": 34.39
@@ -164,7 +164,7 @@
     "alola-gym-2"
    ]
   },
-  "unlockOrder": 700002.5,
+  "unlockOrder": 700002.5002,
   "position": {
    "x": 68.57,
    "y": 48.615

@@ -1707,6 +1707,28 @@ for (const region of regions) {
   }
 }
 
+// Make `unlockOrder` a genuine ordering key: two locations can share a rank
+// (two towns whose lowest-numbered route is the same), so nudge the collisions
+// apart by a tiny, deterministic fraction.
+for (const region of regions) {
+  const groups = new Map()
+  for (const location of Object.values(mapData))
+    if ((location.region ?? 'kanto') === region.id) {
+      const group = groups.get(location.unlockOrder) ?? []
+      group.push(location)
+      groups.set(location.unlockOrder, group)
+    }
+  for (const [order, group] of groups) {
+    if (group.length < 2) continue
+    group
+      .slice()
+      .sort((left, right) => left.id.localeCompare(right.id))
+      .forEach((location, index) => {
+        location.unlockOrder = Number((order + (index + 1) * 1e-4).toFixed(6))
+      })
+  }
+}
+
 // tidy the graph: make every connection mutual, and hang any isolated location
 // (e.g. Kanto's Raid Island) off its nearest neighbour so it isn't floating
 // on the map with no road.

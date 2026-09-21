@@ -245,7 +245,7 @@
     "palletTown"
    ]
   },
-  "unlockOrder": 0,
+  "unlockOrder": 0.0002,
   "position": {
    "x": 22,
    "y": 52
@@ -264,7 +264,7 @@
   "unlock": {
    "entry": true
   },
-  "unlockOrder": 0,
+  "unlockOrder": 0.0001,
   "position": {
    "x": 22,
    "y": 64

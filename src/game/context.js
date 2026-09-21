@@ -270,6 +270,11 @@ function repairSave(saved) {
     defeatedGyms,
     defeatedEliteFour,
     defeatedChampions,
+    regionPrestige: Object.fromEntries(
+      Object.entries(saved.regionPrestige ?? {}).filter(
+        ([regionId, level]) => regionIds.has(regionId) && typeof level === 'number' && level > 0
+      )
+    ),
     victoryTokens: saved.victoryTokens ?? 0,
     autoProceed: saved.autoProceed ?? false,
     raidCooldownEnd: saved.raidCooldownEnd ?? null,
@@ -363,6 +368,7 @@ export function GameProvider({ children }) {
           defeatedGyms: state.defeatedGyms,
           defeatedEliteFour: state.defeatedEliteFour,
           defeatedChampions: state.defeatedChampions,
+          regionPrestige: state.regionPrestige,
           victoryTokens: state.victoryTokens,
           autoProceed: state.autoProceed,
           raidCooldownEnd: state.raidCooldownEnd,
@@ -398,6 +404,7 @@ export function GameProvider({ children }) {
       state.defeatedGyms.length,
       state.defeatedEliteFour.length,
       state.defeatedChampions.length,
+      state.regionPrestige,
       state.victoryTokens,
       state.autoProceed,
       state.raidCooldownEnd,

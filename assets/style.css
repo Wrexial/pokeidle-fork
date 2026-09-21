@@ -4653,6 +4653,46 @@ img {
     border-color: var(--gold-dark)
 }
 
+.prestige-section {
+    border-top: 1px solid #ffffff1a;
+    padding-top: 8px
+}
+
+.prestige-hint {
+    font-size: 8px;
+    color: var(--parchment);
+    opacity: .75;
+    line-height: 1.4;
+    margin-bottom: 6px
+}
+
+.prestige-actions {
+    display: flex;
+    gap: 6px
+}
+
+.prestige-actions .gym-fight-btn {
+    flex: 1;
+    font-size: 9px;
+    padding: 4px 8px
+}
+
+.prestige-cancel-btn {
+    font-size: 9px;
+    padding: 4px 10px;
+    background: var(--stone-dark);
+    color: var(--parchment);
+    border: 2px solid #483828;
+    cursor: pointer;
+    font-weight: 700;
+    letter-spacing: .5px
+}
+
+.prestige-cancel-btn:hover {
+    background: #55412c;
+    color: var(--parchment)
+}
+
 .reward-shop-token-display {
     text-align: center;
     padding: 6px 0 10px;

@@ -147,6 +147,8 @@ type GameState = {
   defeatedGyms: string[]
   defeatedEliteFour: string[]
   defeatedChampions: string[]
+  /** Times each region has been prestiged (map progress reset). */
+  regionPrestige: Record<string, number>
   victoryTokens: number
   battlesWonByLocation: Record<string, number>
   wildBattlesWon: number

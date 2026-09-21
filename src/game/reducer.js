@@ -1,8 +1,8 @@
 // Split from the former assets/index.js — see tools/decompile/split-modules.mjs
 
-import { RAID_COOLDOWN_MS, defaultCatchSettings } from '../data/config.js'
+import { RAID_COOLDOWN_MS, defaultCatchSettings, prestigeTokenReward } from '../data/config.js'
 import { activeItems, pokeBalls } from '../data/items.js'
-import { encounterData, mapData, moveLearnsets, pokemonSpecies, regions } from '../data/gameData.js'
+import { elite4Data, encounterData, gymLeaderData, mapData, moveLearnsets, pokemonSpecies, regions } from '../data/gameData.js'
 import { createVolatileState } from './combat.js'
 import { calculatePokemonStats, calculateRequiredExperience, createPokemon, resolvePokemonMoves } from './pokemon.js'
 import { computeUnlockedLocations, isActiveEffectItem, loadActivePokemonFromParty, prepareNextBattle, syncActivePokemonIntoParty, tickBattleCounters } from './progression.js'
@@ -51,6 +51,7 @@ export const initialGameState = {
   defeatedGyms: [],
   defeatedEliteFour: [],
   defeatedChampions: [],
+  regionPrestige: {},
   victoryTokens: 0,
   autoProceed: !1,
   raidCooldownEnd: null,
@@ -1184,6 +1185,89 @@ export function gameReducer(state, action) {
         ...state,
         defeatedEliteFour: [],
       }
+    case 'PRESTIGE_REGION': {
+      // Replay a finished region: re-lock its routes, clear its battle counts and
+      // badges, and drop the player back at its first route. Party, box, items,
+      // money and the Pokedex are untouched. Only the region's Champion defeat is
+      // kept, so the next region doesn't lock and the region can be prestiged
+      // again later.
+      const regionId = action.payload.regionId,
+        region = regions.find((candidate) => candidate.id === regionId)
+      if (!region || !state.defeatedChampions.includes(regionId)) return state
+      const regionLocationIds = new Set(
+          Object.values(mapData)
+            .filter((location) => (location.region ?? 'kanto') === regionId)
+            .map((location) => location.id)
+        ),
+        entryId = region.entry,
+        firstRoute =
+          entryId && mapData[entryId]
+            ? mapData[entryId].connections.find(
+                /** @param {string} id */ (id) => mapData[id]?.type === 'route'
+              ) ?? null
+            : null,
+        // Keep the entry and first route unlocked; computeUnlockedLocations
+        // rebuilds the rest from the region's (now cleared) gates.
+        keepUnlocked = /** @param {string} id */ (id) =>
+          !regionLocationIds.has(id) || id === entryId || id === firstRoute,
+        regionGymIds = new Set(
+          gymLeaderData
+            .filter((gym) => (gym.region ?? 'kanto') === regionId)
+            .map((gym) => gym.id)
+        ),
+        regionEliteFourIds = new Set(
+          elite4Data
+            .filter((member) => (member.region ?? 'kanto') === regionId)
+            .map((member) => member.id)
+        ),
+        prestigeLevel = (state.regionPrestige[regionId] ?? 0) + 1,
+        prestigedState = {
+          ...state,
+          unlockedLocations: state.unlockedLocations.filter(keepUnlocked),
+          battlesWonByLocation: Object.fromEntries(
+            Object.entries(state.battlesWonByLocation).filter(
+              ([locationId]) => !regionLocationIds.has(locationId)
+            )
+          ),
+          defeatedGyms: state.defeatedGyms.filter((id) => !regionGymIds.has(id)),
+          defeatedEliteFour: state.defeatedEliteFour.filter((id) => !regionEliteFourIds.has(id)),
+          regionPrestige: {
+            ...state.regionPrestige,
+            [regionId]: prestigeLevel,
+          },
+          victoryTokens: state.victoryTokens + prestigeTokenReward,
+          currentLocation: firstRoute ?? entryId ?? state.currentLocation,
+          currentRoute: firstRoute ?? state.currentRoute,
+          phase: 'idle',
+          battleEvents: [],
+          pendingEvents: [],
+          currentEventIndex: 0,
+          enemyPokemon: null,
+          playerPokemon: state.party.find((member) => member.currentHp > 0) ?? state.party[0] ?? state.playerPokemon,
+          activePlayerPokemonIndex: 0,
+          trainerBattle: null,
+          bossBattle: null,
+          bossQueue: [],
+          pendingBossBattle: null,
+          healingState: null,
+          evolutionState: null,
+          inRaid: !1,
+          raidLegendary: null,
+          raidRegion: null,
+          raidLevel: 0,
+          preRaidLocation: null,
+          raidCooldownEnd: null,
+          battleLog: [
+            ...state.battleLog,
+            `${region.name} prestiged to level ${prestigeLevel}! Its map progress has been reset.`,
+            `Earned ${prestigeTokenReward} Victory Tokens!`,
+          ].slice(-50),
+        }
+      return {
+        ...prestigedState,
+        unlockedLocations: computeUnlockedLocations(prestigedState),
+      }
+    }
     case 'TOGGLE_AUTO_PROCEED':
       return {
         ...state,

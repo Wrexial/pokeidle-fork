@@ -2,6 +2,9 @@
 
 export const evValue = 0
 
+/** Victory Tokens awarded each time a region is prestiged (map progress reset). */
+export const prestigeTokenReward = 3
+
 export let RAID_COOLDOWN_MS = 1 * 1e3
 
 export let defaultCatchSettings = {

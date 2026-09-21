@@ -1,5 +1,6 @@
 // Split from a grouped component file — see tools/decompile/split-components.mjs
 
+import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { championData, elite4Data, gymLeaderData, mapData, regions } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
@@ -8,6 +9,7 @@ import { buildTrainerTeam } from '../game/progression.js'
 /** @param {{ onOpenShop: () => void }} props */
 export function GymPanel({ onOpenShop }) {
   const { state, dispatch } = useGame(),
+    [confirmingPrestige, setConfirmingPrestige] = React.useState(false),
     regionId = mapData[state.currentLocation]?.region ?? 'kanto',
     region = regions.find((candidate) => candidate.id === regionId),
     regionGyms = gymLeaderData.filter((gym) => (gym.region ?? 'kanto') === regionId),
@@ -16,6 +18,7 @@ export function GymPanel({ onOpenShop }) {
     defeatedRegionGyms = regionGyms.filter((gym) => state.defeatedGyms.includes(gym.id)).length,
     allBadgesEarned = regionGyms.length > 0 && defeatedRegionGyms >= regionGyms.length,
     isLeagueRematch = state.defeatedChampions.includes(regionId),
+    prestigeLevel = state.regionPrestige[regionId] ?? 0,
     canFight = state.party.some((member) => member.currentHp > 0),
     isBusy = state.phase === 'evolving' || state.phase === 'healing',
     fightable = canFight && !isBusy
@@ -322,6 +325,54 @@ export function GymPanel({ onOpenShop }) {
                 }),
               ],
             }),
+          ],
+        }),
+      isLeagueRematch &&
+        jsxs('div', {
+          className: 'gym-section prestige-section',
+          children: [
+            jsxs('div', {
+              className: 'gym-section-title',
+              children: ['Prestige', prestigeLevel > 0 ? ` · Level ${prestigeLevel}` : ''],
+            }),
+            jsx('div', {
+              className: 'prestige-hint',
+              children: confirmingPrestige
+                ? `Reset ${region?.name ?? 'this region'}\u2019s routes and badges? Your Pokemon, items, money and Pokedex are kept.`
+                : 'Replay this region from the start without losing your Pokemon. Each prestige earns Victory Tokens.',
+            }),
+            confirmingPrestige
+              ? jsxs('div', {
+                  className: 'prestige-actions',
+                  children: [
+                    jsx('button', {
+                      className: 'gym-fight-btn champion',
+                      onClick: () => {
+                        dispatch({
+                          type: 'PRESTIGE_REGION',
+                          payload: {
+                            regionId,
+                          },
+                        })
+                        setConfirmingPrestige(false)
+                      },
+                      children: 'CONFIRM PRESTIGE',
+                    }),
+                    jsx('button', {
+                      className: 'prestige-cancel-btn',
+                      onClick: () => setConfirmingPrestige(false),
+                      children: 'Cancel',
+                    }),
+                  ],
+                })
+              : jsx('button', {
+                  className: 'gym-fight-btn champion',
+                  style: {
+                    width: '100%',
+                  },
+                  onClick: () => setConfirmingPrestige(true),
+                  children: `PRESTIGE ${region?.name?.toUpperCase() ?? 'REGION'}`,
+                }),
           ],
         }),
     ],

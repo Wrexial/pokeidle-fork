@@ -43,6 +43,13 @@ export const CHANGELOG = [
           ],
         },
         {
+          heading: 'Region Prestige',
+          items: [
+            'Once you finish a region, the Gyms tab offers a Prestige button that replays its routes and badges without losing your Pokemon, items, money or Pokedex',
+            'Prestige level is tracked per region and each reset awards Victory Tokens',
+          ],
+        },
+        {
           heading: 'Presentation',
           items: [
             'Routes use biome battle backgrounds (caves, seas, mountains) instead of grassland everywhere',

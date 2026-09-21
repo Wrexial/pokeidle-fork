@@ -32,9 +32,14 @@ export function PokedexModal({ onClose }) {
             ),
       [gen]
     ),
-    caughtCount = filteredIndexes.filter(([speciesKey]) => caughtSet.has(speciesKey)).length,
-    seenCount = filteredIndexes.filter(([speciesKey]) => seenSet.has(speciesKey)).length,
-    totalEntries = filteredIndexes.length,
+    // The "All" tab also lists alternate forms (ids above 1025), many of which
+    // have no acquisition path at all. They still render, but the completion
+    // count only covers the national dex so it can actually reach 100%.
+    countedIndexes =
+      gen === 0 ? filteredIndexes.filter((entry) => entry[1].id <= 1025) : filteredIndexes,
+    caughtCount = countedIndexes.filter(([speciesKey]) => caughtSet.has(speciesKey)).length,
+    seenCount = countedIndexes.filter(([speciesKey]) => seenSet.has(speciesKey)).length,
+    totalEntries = countedIndexes.length,
     selectedSpecies = selected ? pokemonSpecies[selected] : null,
     selectedStatus = selected ? getStatus(selected) : 'unseen',
     statRows = selectedSpecies

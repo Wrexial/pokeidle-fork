@@ -33,6 +33,15 @@ const ANIMATED_DIR = path.join(STATIC_DIR, 'versions', 'generation-v', 'black-wh
 
 const POKEAPI = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon'
 const SHOWDOWN = `${POKEAPI}/other/showdown`
+// A few Gen 9 forms exist only in Showdown's own gen5ani folder (not in
+// PokeAPI's mirror), so try them by name as a last resort.
+const SHOWDOWN_GEN5ANI = {
+  992: 'ironhands',
+  994: 'ironmoth',
+  995: 'ironthorns',
+  1006: 'ironvaliant',
+  1008: 'miraidon',
+}
 
 const onlyArg = process.argv.find((arg) => arg.startsWith('--only='))
 const ONLY = onlyArg ? onlyArg.split('=')[1] : null
@@ -99,7 +108,17 @@ const ANIMATED_VARIANTS = [
   sources: (id) => {
     const showdown = `${SHOWDOWN}/${variant.sdSub ? variant.sdSub + '/' : ''}${id}.gif`
     // Gen V animated only exists for the national dex ids 1-649.
-    if (id > 649) return [showdown]
+    if (id > 649) {
+      const sources = [showdown]
+      const name = SHOWDOWN_GEN5ANI[id]
+      if (name && (variant.sdSub === '' || variant.sdSub === 'shiny'))
+        sources.push(
+          `https://play.pokemonshowdown.com/sprites/gen5ani${
+            variant.sdSub === 'shiny' ? '-shiny' : ''
+          }/${name}.gif`
+        )
+      return sources
+    }
     return [
       `${POKEAPI}/versions/generation-v/black-white/animated/${variant.sub ? variant.sub + '/' : ''}${id}.gif`,
       showdown,
@@ -165,6 +184,20 @@ async function main() {
     console.log('Animated sprites (Gen V official, Showdown fallback)...')
     await runPool(ANIMATED_VARIANTS, ids)
   }
+
+  // Record which animated variants are still missing so the game can use the
+  // static png straight away instead of requesting a 404 gif first.
+  const missingAnimated = { front: [], back: [], shiny: [], backShiny: [] }
+  const animatedSubdirs = { front: '', back: 'back', shiny: 'shiny', backShiny: 'back/shiny' }
+  for (const [category, sub] of Object.entries(animatedSubdirs))
+    missingAnimated[category] = ids.filter(
+      (id) => !fs.existsSync(path.join(ANIMATED_DIR, sub, `${id}.gif`))
+    )
+  fs.writeFileSync(
+    path.join(ROOT, 'public', 'data', 'animated-sprites.json'),
+    JSON.stringify(missingAnimated, null, 1) + '\n'
+  )
+  console.log('Wrote animated-sprites.json (missing animated variants).')
 
   console.log('\nSummary:')
   console.log(`  downloaded: ${stats.downloaded}`)

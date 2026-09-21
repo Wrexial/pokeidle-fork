@@ -1,18 +1,29 @@
 // Split from src/game/logic.js — see tools/decompile/split-logic.mjs
 
 import { evValue } from '../data/config.js'
-import { moveLearnsets, pokemonSpecies, preEvolutionMap, trainerClasses } from '../data/gameData.js'
+import { animatedSprites, moveLearnsets, pokemonSpecies, preEvolutionMap, trainerClasses } from '../data/gameData.js'
 
 /**
  * Animated sprite directory. It is a merged set: the official Gen V
  * Black/White gifs for national dex ids 1-649, and Pokemon Showdown's
  * animated sprites for every later species/form (PokeAPI has no Gen 6+
- * animation). Anything missing here falls back to the static png.
+ * animation). Anything missing here falls back to the static png — the
+ * manifest from download_pokemon_sprites.cjs lets us skip the 404 request.
  * @param {number | string} spriteId
  * @param {boolean} [isBack]
  * @param {boolean} [isShiny]
  */
 export function getPokemonSpriteUrl(spriteId, isBack = !1, isShiny = !1) {
+  const key = Number(spriteId),
+    missing = isShiny
+      ? isBack
+        ? animatedSprites.backShiny
+        : animatedSprites.shiny
+      : isBack
+        ? animatedSprites.back
+        : animatedSprites.front
+  if (!Number.isFinite(key) || key === 0 || missing.includes(key))
+    return getPokemonSpriteFallbackUrl(spriteId, isBack, isShiny)
   const baseUrl = '/sprites/pokemon/versions/generation-v/black-white/animated'
   return isShiny && isBack
     ? `${baseUrl}/back/shiny/${spriteId}.gif`

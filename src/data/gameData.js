@@ -16,6 +16,11 @@ export let breedingData = /** @type {Record<string, BreedingData>} */ (
   loadedGameData.breedingData ?? {}
 )
 
+/** Animated sprite ids with no gif, per variant (see download_pokemon_sprites.cjs). */
+export let animatedSprites = /** @type {{ front: number[], back: number[], shiny: number[], backShiny: number[] }} */ (
+  loadedGameData.animatedSprites ?? { front: [], back: [], shiny: [], backShiny: [] }
+)
+
 export let evolutionData = /** @type {Record<string, Evolution[]>} */ (loadedGameData.evolutionData)
 
 export let moveLearnsets = /** @type {Record<string, [number, string][]>} */ (

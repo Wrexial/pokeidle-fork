@@ -192,6 +192,7 @@ These are loaded by `assets/gameDataInjector.js` (`key` → file):
 | --- | --- |
 | `pokemonSpecies` | `pokemon-species.json` |
 | `breedingData` | `breeding-data.json` (gender rate + egg groups, see below) |
+| `animatedSprites` | `animated-sprites.json` (ids missing each animated variant) |
 | `evolutionData` | `evolution-data.json` |
 | `moveLearnsets` | **`possible-learnsets.json`** |
 | `moveData` | **`possible-moves.json`** |
@@ -296,8 +297,11 @@ Data conventions:
 - Sprites are referenced by that `id`. The animated directory is a merged set:
   the official Gen V Black/White animated gifs for national dex ids 1-649, plus
   Pokémon Showdown's animated sprites for everything else (PokeAPI has no
-  animation past Gen V). A missing `.gif` falls back to the static `.png`
-  (only `missingno` and a few Gen 9 paradox/Gigantamax forms lack animation).
+  animation past Gen V; a few Gen 9 forms only exist in Showdown's `gen5ani`
+  by name). A missing `.gif` falls back to the static `.png`; the tool writes
+  `animated-sprites.json`, the list of ids still missing each variant, so
+  `getPokemonSpriteUrl` can use the static png without a 404 round-trip (only
+  `missingno` and a handful of Gen 9 paradox/Gigantamax forms lack animation).
   `tools/download_pokemon_sprites.cjs` fills in every front/back/shiny/back-shiny
   variant from those sources; re-run it after adding species or form ids.
 
@@ -365,7 +369,9 @@ One-off scripts used to build the data JSON (not run during dev/build):
 - `download_pokemon_sprites.cjs` — fills the local sprite tree for every id in
   `pokemon-species.json`: static front/back/shiny from PokeAPI, and animated
   front/back/shiny from Gen V for dex ids 1-649 falling back to Pokémon
-  Showdown for the rest. Idempotent (`--only=static|animated`, `--force`).
+  Showdown for the rest (plus Showdown's `gen5ani` by name for a few Gen 9
+  forms). Also writes `public/data/animated-sprites.json`, the ids with no gif
+  per variant. Idempotent (`--only=static|animated`, `--force`).
 - `scrape-region-maps.cjs` — scrapes real region maps: location lists from
   PokéAPI and route/town compass connections (`north/south/east/west`) from
   Bulbapedia's raw infoboxes, then computes a directional layout. Caches HTTP

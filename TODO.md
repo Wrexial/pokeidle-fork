@@ -661,6 +661,76 @@ UI (`src/components/map-node.js`, `town-map.js`, `location-panel.js`).
 
 Effort: **large** (data-heavy; 30a/30b mostly data, 30c a small feature).
 
+## 31. Minigames (fishing, companion care, and more)
+
+Every activity is currently automatic: battles resolve on a timer, catches roll
+from `autoCatch`/catch rules, breeding and swarms advance on battle counts. A
+few optional minigames would give the player something hands-on without
+disturbing the idle loop. They'd all sit alongside it — the player opts in, and
+the idle game keeps running if they don't.
+
+### 31a. Fishing minigame
+
+Encounter data already keeps water/fishing methods in the scrape but the game
+discards the method, so "fishing" is only flavour. Build a real one on water
+routes:
+
+- [ ] Rod tiers (Old / Good / Super) as items, each unlocking deeper water —
+      then let the player cast from a water route for that route's water
+      species only.
+- [ ] A short timing minigame (a moving bar / reel-in window, Pokémon-style)
+      where a good result improves the catch chance or the level/shiny odds,
+      and a perfect one guarantees the encounter.
+- [ ] Tie the result into the battle/catch flow (start a normal encounter on
+      success) rather than a separate reward table, so it stays consistent.
+- [ ] Persist water-only encounter pools (or re-derive them from the scraper
+      `method`) so casting targets the right species.
+
+### 31b. Companion / tamagotchi care
+
+The Daycare is already a passive version of this (two parents → egg). A
+hands-on companion that you feed/play with/rest would be the active counterpart
+and would give the friendship idea (#6) a purpose:
+
+- [ ] Pick (or pin) one party Pokémon as the companion; add `care` state
+      (hunger / happiness / energy) that decays on a real-time timer or battle
+      count.
+- [ ] Feed / play / rest actions with small cooldowns, costing money or berries;
+      raising friendship and a temporary bonus (EXP, catch rate, shiny odds).
+- [ ] Visual feedback — an animated buddy panel / petting scene using the
+      existing sprite helpers.
+- [ ] Decide whether care is purely a bonus or feeds evolution/breeding (it
+      pairs with friendship evolutions, #6).
+- [ ] Keep it optional and non-punishing (the game is idle) — neglect should
+      pause bonuses, not damage the Pokémon.
+
+### 31c. More minigame ideas (pick from these)
+
+Minigames can share one modal + reducer pattern (`type: 'minigame'` phase or a
+small self-contained state slice), so adding a second is much cheaper than the
+first:
+
+- [ ] **Casino / slots / Voltorb Flip** — a money sink with tokens or items as
+      prizes (ties into the Reward Shop economy).
+- [ ] **Bug Catching Contest / Safari Zone** — timed, bait/ball limited, judged
+      on the catch (Johto's National Park, Kanto's Safari Zone).
+- [ ] **Berry growing + blending** — plant/pick berries on a timer, blend into
+      Poffins/items (ties into care and held items, #2c).
+- [ ] **Sinnoh Underground / mining** — tap-to-dig for fossils, stones and
+      evolution items (a clean source for the item evolutions).
+- [ ] **Battle Tower already exists** — extend it with its own rewards rather
+      than a new mode.
+
+Relevant code: the real-time loop and battle-count ticks (`src/hooks.js`
+`useGameLoop`, `tickBattleCounters` in `src/game/progression.js`), the reducer's
+`daycare` / `activeEffects` slices (`src/game/reducer.js`), the Daycare UI
+(`src/components/daycare-modal.js`) and Battle Tower as a side-activity
+precedent. New state goes in `initialGameState`, `context.js` and
+`src/types.d.ts`.
+
+Effort: **small per minigame, medium–large as a feature** (each is a
+self-contained modal + state slice; fishing and care are the two biggest).
+
 ---
 
 ## Useful references when picking these up

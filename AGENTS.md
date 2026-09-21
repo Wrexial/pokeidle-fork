@@ -381,7 +381,11 @@ One-off scripts used to build the data JSON (not run during dev/build):
   writing `regions.json` (region metadata + per-region legendary pools).
   Idempotent — safe to re-run; tags Kanto locations/leaders with
   `region: "kanto"`. Routes without scraped encounters (e.g. Paldea's province
-  areas) fall back to a generation-based species slice. A few real wild areas
+  areas) fall back to a generation-based species slice. Paldea's open-world
+  province areas list 50-84 species each, so they are trimmed to the 15 most
+  common (`PALDEA_ENCOUNTER_CAP`); the dropped species are handed to Paldea's
+  Raid Island so nothing is orphaned (and to keep them out of their native
+  regions' raid pools). A few real wild areas
   are missing from `region-maps.json` because PokéAPI files them outside the
   town/route set, so `EXTRA_MAP_AREAS` injects them into the graph with an
   explicit position/connection — currently Johto's Bell Tower, Whirl Islands and

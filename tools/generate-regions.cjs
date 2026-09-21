@@ -45,6 +45,10 @@ const LEVEL_MIN = 5
 const LEVEL_MAX = 75
 // The last wild zone sits two levels below the cap so its +2 window ends at 75.
 const WILD_LEVEL_MAX = LEVEL_MAX - 2
+// Open-world Paldea areas list 50-84 species each, which dilutes every spawn to
+// a few percent and makes adjacent areas feel identical. Keep the most common
+// species and move the rest to Paldea's Raid Island.
+const PALDEA_ENCOUNTER_CAP = 15
 const GYM_LEVEL_MIN = 12
 const GYM_LEVEL_MAX = 64
 const E4_LEVEL_MIN = 68
@@ -765,6 +769,9 @@ const regions = [{ id: 'kanto', name: 'Kanto', generation: 1, order: 1, entry: '
 const pendingRaids = [
   { regionObj: regions[0], all: speciesForGen(1), raidId: 'raidIsland', raidNodeName: 'Raid Island' },
 ]
+// Species trimmed off Paldea's oversized province areas; the raid scan gives
+// them back to Paldea's Raid Island so they stay obtainable.
+const paldeaDroppedSpecies = new Set()
 
 for (const region of REGIONS) {
   const { id: regionId, name, gen, entry } = region
@@ -1069,6 +1076,12 @@ for (const region of REGIONS) {
         }))
     } else {
       encounters = []
+    }
+    if (regionId === 'paldea' && encounters.length > PALDEA_ENCOUNTER_CAP) {
+      encounters = encounters.slice().sort((a, b) => b.weight - a.weight)
+      for (const encounter of encounters.slice(PALDEA_ENCOUNTER_CAP))
+        paldeaDroppedSpecies.add(encounter.speciesKey)
+      encounters = encounters.slice(0, PALDEA_ENCOUNTER_CAP)
     }
     routeEncounter[node] = { name: display[node] ?? node, encounters }
   })
@@ -1515,12 +1528,29 @@ const leftoverFormsFor = (regionId) =>
         entry.id > 1025 && !routable.has(key) && FORM_RAID_REGION(key) === regionId
     )
     .map(([key, entry]) => ({ key, ...entry }))
+// Paldea's trimmed area species only turn up there, so its Raid Island takes
+// any that no longer appear on a route (deduped below against the Gen 9 pool).
+const paldeaExtrasFor = (regionId) =>
+  regionId === 'paldea'
+    ? [...paldeaDroppedSpecies]
+        .filter((key) => !routable.has(key) && species[key])
+        .map((key) => ({ key, ...species[key] }))
+    : []
 for (const pending of pendingRaids) {
   const { regionObj, all: regionSpecies, raidId, raidNodeName } = pending
-  regionObj.raidPool = [
-    ...regionSpecies.filter((entry) => !routable.has(entry.key)),
+  const poolByKey = new Map()
+  for (const entry of [
+    ...regionSpecies.filter(
+      (entry) => !routable.has(entry.key) && !paldeaDroppedSpecies.has(entry.key)
+    ),
     ...leftoverFormsFor(regionObj.id),
-  ].map((entry) => ({ speciesKey: entry.key, level: raidLevel(entry) }))
+    ...paldeaExtrasFor(regionObj.id),
+  ])
+    if (!poolByKey.has(entry.key)) poolByKey.set(entry.key, entry)
+  regionObj.raidPool = [...poolByKey.values()].map((entry) => ({
+    speciesKey: entry.key,
+    level: raidLevel(entry),
+  }))
   if (raidId)
     encounterData[raidId] = {
       name: raidNodeName,

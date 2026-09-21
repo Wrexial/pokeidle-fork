@@ -1817,6 +1817,12 @@
   "name": "Hoenn Raid Island",
   "encounters": [
    {
+    "speciesKey": "slaking",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
     "speciesKey": "mawile",
     "weight": 1,
     "minLevel": 70,

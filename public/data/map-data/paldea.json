@@ -256,9 +256,11 @@
    "caughtOnRoute": {
     "routeKey": "paldea-south-province-area-three",
     "species": [
+     "nymble",
+     "oricorio",
      "klawf"
     ],
-    "count": 1
+    "count": 3
    }
   },
   "unlockOrder": 910003,
@@ -288,9 +290,11 @@
    "caughtOnRoute": {
     "routeKey": "paldea-south-province-area-three",
     "species": [
+     "nymble",
+     "oricorio",
      "klawf"
     ],
-    "count": 1
+    "count": 3
    }
   },
   "unlockOrder": 910004,
@@ -333,9 +337,11 @@
    "caughtOnRoute": {
     "routeKey": "paldea-south-province-area-three",
     "species": [
+     "nymble",
+     "oricorio",
      "klawf"
     ],
-    "count": 1
+    "count": 3
    }
   },
   "unlockOrder": 910004,
@@ -420,9 +426,10 @@
    "caughtOnRoute": {
     "routeKey": "paldea-south-province-area-two",
     "species": [
-     "smoliv"
+     "smoliv",
+     "maschiff"
     ],
-    "count": 1
+    "count": 2
    }
   },
   "unlockOrder": 910004,
@@ -515,14 +522,7 @@
    ],
    "gymsRequired": [
     "paldea-gym-2"
-   ],
-   "caughtOnRoute": {
-    "routeKey": "paldea-west-province-area-one",
-    "species": [
-     "capsakid"
-    ],
-    "count": 1
-   }
+   ]
   },
   "unlockOrder": 910004.5,
   "position": {
@@ -713,11 +713,9 @@
    "caughtOnRoute": {
     "routeKey": "paldea-south-province-area-six",
     "species": [
-     "toxtricity",
-     "shelgon",
-     "dolliv"
+     "sinistea"
     ],
-    "count": 3
+    "count": 1
    }
   },
   "unlockOrder": 910005,
@@ -768,14 +766,7 @@
      "locationId": "paldea-east-province-area-one",
      "count": 10
     }
-   ],
-   "caughtOnRoute": {
-    "routeKey": "paldea-east-province-area-one",
-    "species": [
-     "steenee"
-    ],
-    "count": 1
-   }
+   ]
   },
   "unlockOrder": 910006,
   "position": {
@@ -852,14 +843,7 @@
    ],
    "gymsRequired": [
     "paldea-gym-4"
-   ],
-   "caughtOnRoute": {
-    "routeKey": "paldea-east-province-area-one",
-    "species": [
-     "steenee"
-    ],
-    "count": 1
-   }
+   ]
   },
   "unlockOrder": 910006,
   "position": {
@@ -912,8 +896,8 @@
     "routeKey": "paldea-north-province-area-two",
     "species": [
      "luxray",
-     "oranguru",
-     "passimian"
+     "noivern",
+     "drakloak"
     ],
     "count": 3
    }

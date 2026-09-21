@@ -143,6 +143,10 @@
   "leagueLocationKey": "hoenn-league",
   "raidPool": [
    {
+    "speciesKey": "slaking",
+    "level": 70
+   },
+   {
     "speciesKey": "mawile",
     "level": 70
    },
@@ -575,6 +579,10 @@
   "leagueLocationKey": "alola-league",
   "raidPool": [
    {
+    "speciesKey": "crabominable",
+    "level": 70
+   },
+   {
     "speciesKey": "wishiwashi",
     "level": 70
    },
@@ -588,6 +596,10 @@
    },
    {
     "speciesKey": "golisopod",
+    "level": 70
+   },
+   {
+    "speciesKey": "palossand",
     "level": 70
    },
    {
@@ -798,6 +810,14 @@
     "level": 70
    },
    {
+    "speciesKey": "hattrem",
+    "level": 70
+   },
+   {
+    "speciesKey": "hatterene",
+    "level": 70
+   },
+   {
     "speciesKey": "impidimp",
     "level": 70
    },
@@ -990,6 +1010,14 @@
     "level": 70
    },
    {
+    "speciesKey": "h-rotom",
+    "level": 70
+   },
+   {
+    "speciesKey": "h-lilligant",
+    "level": 70
+   },
+   {
     "speciesKey": "basculin-w",
     "level": 70
    },
@@ -1041,11 +1069,47 @@
   "leagueLocationKey": "paldea-league",
   "raidPool": [
    {
+    "speciesKey": "pawmot",
+    "level": 70
+   },
+   {
+    "speciesKey": "maushold",
+    "level": 70
+   },
+   {
+    "speciesKey": "armarouge",
+    "level": 70
+   },
+   {
+    "speciesKey": "ceruledge",
+    "level": 70
+   },
+   {
+    "speciesKey": "grafaiai",
+    "level": 70
+   },
+   {
+    "speciesKey": "toedscruel",
+    "level": 70
+   },
+   {
     "speciesKey": "rellor",
     "level": 70
    },
    {
     "speciesKey": "rabsca",
+    "level": 70
+   },
+   {
+    "speciesKey": "tinkaton",
+    "level": 70
+   },
+   {
+    "speciesKey": "palafin",
+    "level": 70
+   },
+   {
+    "speciesKey": "glimmora",
     "level": 70
    },
    {
@@ -1178,6 +1242,174 @@
    },
    {
     "speciesKey": "p-wooper",
+    "level": 70
+   },
+   {
+    "speciesKey": "fidough",
+    "level": 70
+   },
+   {
+    "speciesKey": "shroodle",
+    "level": 70
+   },
+   {
+    "speciesKey": "pawmi",
+    "level": 70
+   },
+   {
+    "speciesKey": "tinkatink",
+    "level": 70
+   },
+   {
+    "speciesKey": "tandemaus",
+    "level": 70
+   },
+   {
+    "speciesKey": "charcadet",
+    "level": 70
+   },
+   {
+    "speciesKey": "hatenna",
+    "level": 70
+   },
+   {
+    "speciesKey": "greavard",
+    "level": 70
+   },
+   {
+    "speciesKey": "dachsbun",
+    "level": 70
+   },
+   {
+    "speciesKey": "vigoroth",
+    "level": 70
+   },
+   {
+    "speciesKey": "dreepy",
+    "level": 70
+   },
+   {
+    "speciesKey": "tinkatuff",
+    "level": 70
+   },
+   {
+    "speciesKey": "flamigo",
+    "level": 70
+   },
+   {
+    "speciesKey": "pawmo",
+    "level": 70
+   },
+   {
+    "speciesKey": "toedscool",
+    "level": 70
+   },
+   {
+    "speciesKey": "bombirdier",
+    "level": 70
+   },
+   {
+    "speciesKey": "lilligant",
+    "level": 70
+   },
+   {
+    "speciesKey": "wiglett",
+    "level": 70
+   },
+   {
+    "speciesKey": "petilil",
+    "level": 70
+   },
+   {
+    "speciesKey": "capsakid",
+    "level": 70
+   },
+   {
+    "speciesKey": "finizen",
+    "level": 70
+   },
+   {
+    "speciesKey": "crabrawler",
+    "level": 70
+   },
+   {
+    "speciesKey": "sableye",
+    "level": 70
+   },
+   {
+    "speciesKey": "sandygast",
+    "level": 70
+   },
+   {
+    "speciesKey": "copperajah",
+    "level": 70
+   },
+   {
+    "speciesKey": "revavroom",
+    "level": 70
+   },
+   {
+    "speciesKey": "wugtrio",
+    "level": 70
+   },
+   {
+    "speciesKey": "houndstone",
+    "level": 70
+   },
+   {
+    "speciesKey": "scovillain",
+    "level": 70
+   },
+   {
+    "speciesKey": "cetitan",
+    "level": 70
+   },
+   {
+    "speciesKey": "brambleghast",
+    "level": 70
+   },
+   {
+    "speciesKey": "glimmet",
+    "level": 70
+   },
+   {
+    "speciesKey": "cufant",
+    "level": 70
+   },
+   {
+    "speciesKey": "bramblin",
+    "level": 70
+   },
+   {
+    "speciesKey": "orthworm",
+    "level": 70
+   },
+   {
+    "speciesKey": "varoom",
+    "level": 70
+   },
+   {
+    "speciesKey": "cyclizar",
+    "level": 70
+   },
+   {
+    "speciesKey": "rotom",
+    "level": 70
+   },
+   {
+    "speciesKey": "oranguru",
+    "level": 70
+   },
+   {
+    "speciesKey": "passimian",
+    "level": 70
+   },
+   {
+    "speciesKey": "slakoth",
+    "level": 70
+   },
+   {
+    "speciesKey": "mimikyu",
     "level": 70
    }
   ]

@@ -205,8 +205,8 @@
     "routeKey": "alola-route-1",
     "species": [
      "buneary",
-     "snorlax",
-     "munchlax"
+     "zorua",
+     "rockruff"
     ],
     "count": 3
    }
@@ -425,7 +425,14 @@
      "locationId": "alola-route-5",
      "count": 17
     }
-   ]
+   ],
+   "caughtOnRoute": {
+    "routeKey": "alola-route-5",
+    "species": [
+     "fomantis"
+    ],
+    "count": 1
+   }
   },
   "unlockOrder": 700007,
   "position": {
@@ -451,7 +458,13 @@
      "count": 5
     }
    ],
-   "caughtCount": 16
+   "caughtOnRoute": {
+    "routeKey": "alola-route-5",
+    "species": [
+     "fomantis"
+    ],
+    "count": 1
+   }
   },
   "unlockOrder": 700008,
   "position": {

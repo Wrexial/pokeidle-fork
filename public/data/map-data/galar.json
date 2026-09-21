@@ -124,7 +124,14 @@
      "locationId": "galar-route-2",
      "count": 16
     }
-   ]
+   ],
+   "caughtOnRoute": {
+    "routeKey": "galar-route-2",
+    "species": [
+     "barraskewda"
+    ],
+    "count": 1
+   }
   },
   "unlockOrder": 800002.5,
   "position": {
@@ -183,7 +190,14 @@
      "locationId": "galar-route-3",
      "count": 19
     }
-   ]
+   ],
+   "caughtOnRoute": {
+    "routeKey": "galar-route-3",
+    "species": [
+     "rolycoly"
+    ],
+    "count": 1
+   }
   },
   "unlockOrder": 800004,
   "position": {
@@ -275,9 +289,10 @@
    "caughtOnRoute": {
     "routeKey": "galar-route-5",
     "species": [
-     "dottler"
+     "dottler",
+     "applin"
     ],
-    "count": 1
+    "count": 2
    }
   },
   "unlockOrder": 800005.5,
@@ -397,9 +412,11 @@
    "caughtOnRoute": {
     "routeKey": "galar-route-6",
     "species": [
+     "silicobra",
+     "drednaw",
      "maractus"
     ],
-    "count": 1
+    "count": 3
    }
   },
   "unlockOrder": 800006.5,

@@ -1001,6 +1001,18 @@
     "maxLevel": 70
    },
    {
+    "speciesKey": "hattrem",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "hatterene",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
     "speciesKey": "impidimp",
     "weight": 1,
     "minLevel": 70,
@@ -1284,6 +1296,18 @@
    },
    {
     "speciesKey": "g-linoone",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "h-rotom",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "h-lilligant",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70

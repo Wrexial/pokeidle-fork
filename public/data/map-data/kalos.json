@@ -453,7 +453,16 @@
      "locationId": "kalos-route-8",
      "count": 20
     }
-   ]
+   ],
+   "caughtOnRoute": {
+    "routeKey": "kalos-route-8",
+    "species": [
+     "dragalge",
+     "clawitzer",
+     "spoink"
+    ],
+    "count": 3
+   }
   },
   "unlockOrder": 600008.5,
   "position": {

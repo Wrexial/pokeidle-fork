@@ -669,7 +669,13 @@
      "count": 5
     }
    ],
-   "caughtCount": 15
+   "caughtOnRoute": {
+    "routeKey": "sinnoh-route-212",
+    "species": [
+     "kirlia"
+    ],
+    "count": 1
+   }
   },
   "unlockOrder": 400212.5,
   "position": {
@@ -897,9 +903,10 @@
    "caughtOnRoute": {
     "routeKey": "sinnoh-route-217",
     "species": [
-     "swinub"
+     "swinub",
+     "medicham"
     ],
-    "count": 1
+    "count": 2
    }
   },
   "unlockOrder": 400217.5,
@@ -1291,7 +1298,14 @@
    ],
    "gymsRequired": [
     "sinnoh-gym-8"
-   ]
+   ],
+   "caughtOnRoute": {
+    "routeKey": "sinnoh-route-222",
+    "species": [
+     "luxio"
+    ],
+    "count": 1
+   }
   },
   "unlockOrder": 400227,
   "position": {
@@ -1318,10 +1332,16 @@
      "count": 5
     }
    ],
-   "caughtCount": 29,
    "gymsRequired": [
     "sinnoh-gym-8"
-   ]
+   ],
+   "caughtOnRoute": {
+    "routeKey": "sinnoh-route-222",
+    "species": [
+     "luxio"
+    ],
+    "count": 1
+   }
   },
   "unlockOrder": 400228,
   "position": {

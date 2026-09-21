@@ -66,27 +66,27 @@
   "spriteKey": "lance",
   "team": [
    {
-    "speciesKey": "dragonite",
+    "speciesKey": "pidgeot",
     "level": 70
    },
    {
-    "speciesKey": "kingdra",
+    "speciesKey": "raticate",
     "level": 71
    },
    {
-    "speciesKey": "dratini",
+    "speciesKey": "fearow",
     "level": 72
    },
    {
-    "speciesKey": "dragonair",
+    "speciesKey": "arbok",
     "level": 73
    },
    {
-    "speciesKey": "dragonite",
+    "speciesKey": "raichu",
     "level": 74
    },
    {
-    "speciesKey": "kingdra",
+    "speciesKey": "sandslash",
     "level": 75
    }
   ],
@@ -125,27 +125,27 @@
   "spriteKey": "steven",
   "team": [
    {
-    "speciesKey": "steelix",
+    "speciesKey": "skarmory",
     "level": 70
    },
    {
-    "speciesKey": "scizor",
+    "speciesKey": "mawile",
     "level": 71
    },
    {
-    "speciesKey": "skarmory",
+    "speciesKey": "aggron",
     "level": 72
    },
    {
-    "speciesKey": "mawile",
+    "speciesKey": "forretress",
     "level": 73
    },
    {
-    "speciesKey": "aron",
+    "speciesKey": "steelix",
     "level": 74
    },
    {
-    "speciesKey": "lairon",
+    "speciesKey": "scizor",
     "level": 75
    }
   ],
@@ -184,27 +184,27 @@
   "spriteKey": "cynthia",
   "team": [
    {
-    "speciesKey": "vibrava",
+    "speciesKey": "salamence",
     "level": 70
    },
    {
-    "speciesKey": "flygon",
+    "speciesKey": "garchomp",
     "level": 71
    },
    {
-    "speciesKey": "altaria",
+    "speciesKey": "dragonite",
     "level": 72
    },
    {
-    "speciesKey": "bagon",
+    "speciesKey": "kingdra",
     "level": 73
    },
    {
-    "speciesKey": "shelgon",
+    "speciesKey": "flygon",
     "level": 74
    },
    {
-    "speciesKey": "salamence",
+    "speciesKey": "altaria",
     "level": 75
    }
   ],

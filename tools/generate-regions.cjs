@@ -696,15 +696,27 @@ const isFinalEvolution = (speciesKey) =>
 /**
  * Pick a themed team from a species pool. `types` biases the pool to matching
  * Pokemon when there are enough of them (so a Flying gym fields birds and a Bug
- * Catcher fields bugs); otherwise it falls back to the whole pool. High-level
- * (rematch) teams prefer final evolutions, and mixed teams get one strong
- * Pokemon per type. Repeats are avoided until the pool is exhausted.
+ * Catcher fields bugs); otherwise it falls back to the whole pool. Species that
+ * would long since have evolved are dropped (a Lv.55 trainer shouldn't field a
+ * Pidgey), high-level (rematch) teams prefer final evolutions, and mixed teams
+ * get one strong Pokemon per type. Repeats are avoided until the pool is
+ * exhausted.
  */
 const buildTeam = (list, types, size, baseLevel, step = 1, offset = 0) => {
   if (list.length === 0) return []
+  const minimum = Math.min(size, 3)
+  // Keep only species that can't evolve yet at this level (item-only and
+  // form-only evolutions always stay). Fall back to the raw pool when that
+  // leaves too few candidates for the requested team.
+  const mature = list.filter((species) => {
+    const levels = (evolutionData[species.key] || [])
+      .map((evolution) => evolution.level)
+      .filter(Boolean)
+    return levels.length === 0 || Math.min(...levels) > baseLevel
+  })
+  if (mature.length >= minimum) list = mature
   const preferFinal = baseLevel >= 65,
-    finalsOf = (pool) => (preferFinal ? pool.filter((species) => isFinalEvolution(species.key)) : pool),
-    minimum = Math.min(size, 3)
+    finalsOf = (pool) => (preferFinal ? pool.filter((species) => isFinalEvolution(species.key)) : pool)
   let pool = list
   if (types?.length) {
     const typed = list.filter((species) => species.types?.some((type) => types.includes(type)))

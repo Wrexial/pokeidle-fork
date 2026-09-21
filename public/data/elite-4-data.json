@@ -396,15 +396,15 @@
     "level": 71
    },
    {
-    "speciesKey": "murkrow",
+    "speciesKey": "houndoom",
     "level": 72
    },
    {
-    "speciesKey": "sneasel",
+    "speciesKey": "tyranitar",
     "level": 73
    },
    {
-    "speciesKey": "houndour",
+    "speciesKey": "umbreon",
     "level": 74
    },
    {
@@ -502,23 +502,23 @@
   "spriteKey": "phoebe-gen3",
   "team": [
    {
-    "speciesKey": "gengar",
+    "speciesKey": "sableye",
     "level": 69
    },
    {
-    "speciesKey": "misdreavus",
+    "speciesKey": "banette",
     "level": 70
    },
    {
-    "speciesKey": "shedinja",
+    "speciesKey": "gengar",
     "level": 71
    },
    {
-    "speciesKey": "sableye",
+    "speciesKey": "shedinja",
     "level": 72
    },
    {
-    "speciesKey": "shuppet",
+    "speciesKey": "sableye",
     "level": 73
    }
   ],
@@ -612,15 +612,15 @@
   "spriteKey": "drake-gen3",
   "team": [
    {
-    "speciesKey": "altaria",
+    "speciesKey": "kingdra",
     "level": 71
    },
    {
-    "speciesKey": "bagon",
+    "speciesKey": "flygon",
     "level": 72
    },
    {
-    "speciesKey": "shelgon",
+    "speciesKey": "altaria",
     "level": 73
    },
    {
@@ -628,7 +628,7 @@
     "level": 74
    },
    {
-    "speciesKey": "dratini",
+    "speciesKey": "dragonite",
     "level": 75
    }
   ],

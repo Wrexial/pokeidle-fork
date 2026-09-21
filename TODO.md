@@ -9,6 +9,92 @@ menu; the rest of this file is things raised in passing that were never scoped.
 
 ---
 
+## Priority order (effort vs. gain)
+
+A ranked work order, best return first. **Effort**: S (small) < S–M < M < M–L
+< L. **Gain** is the player-facing value of shipping it (★ = nice to have,
+★★★★★ = core missing feature). The numbered sections below are **unchanged**
+so cross-references (`#2c`, `#23`, …) keep working — treat this list as the
+working order, and the numbered sections as the details.
+
+### Tier 1 — Quick wins (small effort, high gain)
+
+1. **#22 Multiple box sort modes** — S · ★★★★ — a level sort is the most
+   requested QOL and `SORT_BOX` already exists.
+2. **#13 Auto-travel / idle QoL** — S · ★★★★ — the game is idle; walking to
+   the next route is a constant papercut.
+3. **#23 Egg-hatch reveal popup** — S · ★★★★ — a shiny hatch is currently
+   just a scrolling log line.
+4. **#26 README + GitHub "About"** — S · ★★★★ — the project's front door is
+   missing; high value for how complete the game is.
+5. **#33 Caught / event QOL indicators** — S–M · ★★★★ — a caught badge plus a
+   reusable toast system that unblocks a dozen other notifications.
+6. **#15 Save management & sharing** — S–M · ★★★★ — export/import protects
+   the one save players care about; slots are a bonus.
+7. **#34 Living-dex capture mode** — S · ★★★½ — small catch-mode addition
+   that makes living-dex runs possible.
+8. **#27 Raid wipe should eject you** — S · ★★★½ — consistency fix across the
+   non-Kanto raids.
+9. **#2b Natures** (slice of #2) — S–M · ★★★½ — cheap battle depth that also
+   feeds daycare (#3).
+10. **#14 Lightweight test suite** — S–M · ★★★½ (dev value) — pays off every
+    future change.
+11. **#1 Healing items / Potions** — S · ★★★ — a money sink and tactical
+    option; no new data files.
+12. **#12 Dex-completion rewards** — S · ★★★ — gives the Shiny Charm grind a
+    payoff.
+13. **#21 Unlock Tokens endgame** — S · ★★★ — removes a dead banner once all
+    regions are open.
+14. **#35 Bias raids toward unseen** — S · ★★★ — makes the legendary dex
+    completable.
+15. **#5 Daily / periodic events** — S–M · ★★★ — cheap engagement loop.
+16. **#16 More ideas (grab bag)** — mostly S · ★★★ — mine the quick ones
+    (achievement rewards, release/selling, map QoL, notifications).
+
+### Tier 2 — High impact, worth the effort (medium–large)
+
+17. **#7 Offline / idle progress** — M–L · ★★★★★ — the biggest missing *idle*
+    feature; a returning player currently gets nothing.
+18. **#8 Pokémon management / IV checker** — M · ★★★★½ — IVs are generated
+    but invisible; box search, nicknames and lock are all high-use.
+19. **#20 Honey/Repel DexNav hunting** — M · ★★★★½ — turns the existing
+    shiny chain into a usable system.
+20. **#24 Move data pass** — M–L · ★★★★½ — ~290 moves currently do nothing;
+    do it in slices (healing/screens/setup first).
+21. **#25 Battle engine pass** — M–L · ★★★★½ — pairs with #24; AI + healing +
+    multi-hit first.
+22. **#2a Abilities** (with **#2c Held items**) — L · ★★★★★ / ★★★★ — the
+    biggest remaining battle-depth feature; natures (#2b) are already in
+    Tier 1.
+23. **#30 More region areas (DLC, caves, POIs)** — L · ★★★★½ — real content
+    (Crown Tundra, Kitakami, landmark caves); data-heavy.
+24. **#18 Better settings** — M · ★★★★ — centralises QOL toggles and the
+    export/import from #15.
+
+### Tier 3 — Medium effort, medium gain
+
+25. **#3 Daycare inheritance** — M · ★★★
+26. **#6 Friendship / happiness** — M · ★★★
+27. **#9 Move tutor / TMs** — M · ★★★
+28. **#11 NPC gifts & static encounters** — M · ★★★
+29. **#17 Pokéball variants** — M · ★★★
+30. **#29 Gender-specific sprites** — M · ★★★ (assets are half-there)
+31. **#31 Minigames** — M–L · ★★★ (small per minigame once one exists)
+32. **#4 In-battle Mega evolution** — M–L · ★★★
+
+### Tier 4 — Cheap but minor
+
+33. **#28 Raid pools fully evolved** — S · ★★½
+34. **#32 Cap raid scaling at 80** — S · ★★½
+
+### Tier 5 — Big and low-return, defer
+
+35. **#10 Weather & terrain** — M · ★★½ (nice depth, no urgency)
+36. **#19 Online sync** — L · ★★★ — the project's first backend; needs a
+    design doc and real ops for modest player value today.
+
+---
+
 ## 1. Healing items / Potions (#9)
 
 The bag has **no consumables at all** — the only healing is the full-party heal

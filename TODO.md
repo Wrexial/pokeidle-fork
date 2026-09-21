@@ -757,6 +757,58 @@ Relevant code: `PHASE_IDLE` / `START_RAID` / `CATCH_POKEMON`
 
 Effort: **small**.
 
+## 33. Caught / event QOL indicators
+
+The save already tracks `pokedexSeen`, `pokedexCaught` and `shinyCaught`, and
+the Pokédex + `route-encounter-grid` mark what you own — but the live battle
+screen doesn't, and the only transient on-screen message is the hard-coded
+`LevelUpNotification` (`levelUpNotification` + `CLEAR_LEVEL_UP`). Everything
+else scrolls past in the battle log. Two small QOL wins, plus a reusable hook
+for custom events.
+
+### 33a. "Already caught" indicator
+
+- [ ] Add a ball / ✓ badge to the enemy's name row in `enemy-info-box.js` when
+      `pokedexCaught.includes(pokemon.speciesKey)`, so you can tell at a glance
+      whether the wild Pokemon is new.
+- [ ] Mirror it on the encounter list / Pokedex tile (already shows caught) and
+      distinguish *seen* vs *caught* vs *shiny caught* (`shinyCaught`).
+- [ ] Maybe flag the battle sprite too (a small marker), and keep it off for
+      trainer teams / raids where the species isn't the reward.
+
+### 33b. Event toasts ("You found X!", "You caught Y!")
+
+Generalise `LevelUpNotification` into a small notification queue so events can
+surface without staring at the log:
+
+- [ ] State `notifications: []` (`{ id, message, tone, icon?, speciesKey?,
+      createdAt }`) with `PUSH_NOTIFICATION` / `DISMISS_NOTIFICATION`, rendered
+      by a `<NotificationStack>` (auto-dismiss + queue cap + dedupe/cooldown so
+      it never spams).
+- [ ] Fire on meaningful events: first-time seen ("You found a wild X!"),
+      first-time caught ("X was registered in the Pokédex!"), a duplicate
+      catch, shiny found/caught, egg hatch (see #23), evolution, level-up
+      (existing), badge / league win, region or route unlock, achievement, rare
+      item, raid start. New-catch detection is just
+      `!state.pokedexCaught.includes(speciesKey)` at the dispatch site in
+      `src/hooks.js`.
+- [ ] Keep the message at the dispatch site or centralise a `notify(...)`
+      helper (`src/game/progression.js` / a small util) so the tone and copy
+      stay consistent.
+- [ ] **Custom events**: because `PUSH_NOTIFICATION` is generic, data-driven
+      events (patch-note promos, anniversaries, seasonal/holiday bonuses, secret
+      codes, the Konami cheat) can push their own toast without new state —
+      optionally behind a tiny event registry mapping an event id → message /
+      icon / duration.
+
+Relevant code: `level-up-notification.js` and the `levelUpNotification` /
+`CLEAR_LEVEL_UP` case (`src/game/reducer.js`), `enemy-info-box.js`,
+`route-encounter-grid.js`, and the `MARK_SEEN` / `MARK_CAUGHT` flow
+(`src/hooks.js`). Render the stack from `game-layout.js` so it works on every
+screen.
+
+Effort: **small–medium**.
+
 ---
 
 ## Useful references when picking these up

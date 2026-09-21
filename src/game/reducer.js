@@ -4,7 +4,7 @@ import { RAID_COOLDOWN_MS, defaultCatchSettings } from '../data/config.js'
 import { activeItems, pokeBalls } from '../data/items.js'
 import { encounterData, mapData, moveLearnsets, pokemonSpecies, regions } from '../data/gameData.js'
 import { createVolatileState } from './combat.js'
-import { calculatePokemonStats, createPokemon } from './pokemon.js'
+import { calculatePokemonStats, calculateRequiredExperience, createPokemon, resolvePokemonMoves } from './pokemon.js'
 import { computeUnlockedLocations, isActiveEffectItem, loadActivePokemonFromParty, prepareNextBattle, syncActivePokemonIntoParty, tickBattleCounters } from './progression.js'
 
 /** @type {GameState} */
@@ -254,6 +254,38 @@ export function gameReducer(state, action) {
         levelUpNotification: action.payload.newLevel
           ? `Level ${action.payload.newLevel}!`
           : null,
+      })
+    }
+    // Hidden debug cheat (Konami code): jump the active Pokemon straight to
+    // level 100 with recalculated stats, a full heal and its level-100 moves.
+    case 'DEBUG_MAX_LEVEL': {
+      const pokemon = state.playerPokemon,
+        species = pokemon ? pokemonSpecies[pokemon.speciesKey] : null
+      if (!pokemon || !species) return state
+      const maxLevel = 100,
+        stats = calculatePokemonStats(species, maxLevel, pokemon.ivs),
+        maxedMoves = resolvePokemonMoves(pokemon.speciesKey, maxLevel),
+        maxedPokemon = {
+          ...pokemon,
+          level: maxLevel,
+          totalExp: calculateRequiredExperience(maxLevel, species.growthRate),
+          currentHp: stats.hp,
+          maxHp: stats.hp,
+          attack: stats.attack,
+          defense: stats.defense,
+          spAttack: stats.spAttack,
+          spDefense: stats.spDefense,
+          speed: stats.speed,
+          moves: maxedMoves.length > 0 ? maxedMoves : pokemon.moves,
+        }
+      return syncActivePokemonIntoParty({
+        ...state,
+        playerPokemon: maxedPokemon,
+        levelUpNotification: `Level ${maxLevel}!`,
+        battleLog: [
+          ...state.battleLog,
+          `${maxedPokemon.name} was maxed to level ${maxLevel}!`,
+        ].slice(-50),
       })
     }
     case 'HEAL':

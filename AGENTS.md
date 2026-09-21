@@ -142,6 +142,10 @@ window.gameDataDebug.findByType('Water')
 window.gameDataDebug.lookupPokemon('pikachu')
 ```
 
+There is also a hidden keyboard cheat: `useKonamiCode` (`src/hooks.js`, wired up
+in `GameLayout`) dispatches `DEBUG_MAX_LEVEL` when the Konami code
+(↑ ↑ ↓ ↓ ← → ← → B A) is typed, maxing the active Pokemon to level 100.
+
 ## Repository layout
 
 | Path | Purpose |

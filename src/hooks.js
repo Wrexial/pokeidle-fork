@@ -556,3 +556,59 @@ export function useIsMobile() {
     isMobile
   )
 }
+
+// Classic Konami code: ↑ ↑ ↓ ↓ ← → ← → B A
+const KONAMI_CODE = [
+  'ArrowUp',
+  'ArrowUp',
+  'ArrowDown',
+  'ArrowDown',
+  'ArrowLeft',
+  'ArrowRight',
+  'ArrowLeft',
+  'ArrowRight',
+  'b',
+  'a',
+]
+
+/**
+ * Debug cheat: calls `onUnlock` when the Konami code is typed. Keys are matched
+ * case-insensitively and any wrong key restarts the sequence (a stray repeat of
+ * the first key just keeps the attempt alive).
+ * @param {() => void} onUnlock
+ */
+export function useKonamiCode(onUnlock) {
+  const progressRef = React.useRef(0),
+    onUnlockRef = React.useRef(onUnlock)
+  React.useEffect(() => {
+    onUnlockRef.current = onUnlock
+  })
+  return React.useEffect(() => {
+    const handleKeyDown = /** @param {KeyboardEvent} event */ (event) => {
+      const target = /** @type {HTMLElement | null} */ (event.target)
+      if (
+        event.repeat ||
+        (target &&
+          (target.tagName === 'INPUT' ||
+            target.tagName === 'TEXTAREA' ||
+            target.tagName === 'SELECT' ||
+            target.isContentEditable))
+      )
+        return
+      const key = event.key.length === 1 ? event.key.toLowerCase() : event.key
+      if (key === KONAMI_CODE[progressRef.current]) {
+        progressRef.current += 1
+        if (progressRef.current === KONAMI_CODE.length) {
+          progressRef.current = 0
+          onUnlockRef.current()
+        }
+        return
+      }
+      progressRef.current = key === KONAMI_CODE[0] ? 1 : 0
+    }
+    return (
+      window.addEventListener('keydown', handleKeyDown),
+      () => window.removeEventListener('keydown', handleKeyDown)
+    )
+  }, [])
+}

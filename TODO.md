@@ -843,6 +843,43 @@ Relevant code: `shouldAutoCatch` / `getCatchRule` (`src/game/catching.js`,
 
 Effort: **small**.
 
+## 35. Bias raids toward Pokemon you haven't seen
+
+Entering a Raid Island picks the legendary **uniformly** from the region's
+`raidPool`:
+
+```js
+const legendary = pool[Math.floor(Math.random() * pool.length)]
+```
+
+in `town-map.js` (`travelTo` / `START_RAID`). `resolveRoamer`
+(`src/game/progression.js`) filters to uncaught legendaries but still picks
+uniformly, so with the big pools (Paldea has 80+, Unova 42) the same few
+species keep showing up and completing the legendary dex is a lottery.
+
+- [ ] Bias the pick toward **unseen** species first (`!pokedexSeen.includes`),
+      then uncaught (`!pokedexCaught.includes`), falling back to the whole pool
+      so a seen/caught one is never impossible (for shiny hunting / re-catches).
+- [ ] Implement it as one helper (e.g. `pickRaidLegendary(pool, pokedexSeen,
+      pokedexCaught)` in `src/game/progression.js`) and use it for both the Raid
+      Island (`town-map.js`) and the roaming legendary (`resolveRoamer`), so the
+      two stay consistent.
+- [ ] Prefer weighting over hard filtering if the pool should keep a chance to
+      repeat (e.g. seen ×1, unseen ×5), but a strict "unseen until exhausted"
+      pass is simplest and matches the request — decide which.
+- [ ] Surface it in the UI: sort the Raid Island encounter grid
+      (`location-panel.js`) unseen-first and mark new ones (ties into #33's
+      caught/new indicator).
+- [ ] Keep shiny odds untouched — this only changes which species appears, not
+      the shiny roll.
+
+Relevant code: `travelTo` / `START_RAID` (`src/components/town-map.js`,
+`src/game/reducer.js`), `raidPoolFor` (`src/data/gameData.js`),
+`resolveRoamer` (`src/game/progression.js`), and `state.pokedexSeen` /
+`state.pokedexCaught`.
+
+Effort: **small**.
+
 ---
 
 ## Useful references when picking these up

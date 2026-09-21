@@ -508,19 +508,22 @@ export function buildTrainerTeam(team) {
   return team.map((member) => {
     const species = pokemonSpecies[member.speciesKey],
       stats = calculatePokemonStats(species, member.level, getPerfectIVs()),
-      moves = resolvePokemonMoves(member.speciesKey, member.level)
+      moves = resolvePokemonMoves(member.speciesKey, member.level),
+      // Battle Tower uses this to keep scaling past the level 100 cap.
+      multiplier = member.statMultiplier ?? 1,
+      scale = (/** @type {number} */ value) => Math.max(1, Math.floor(value * multiplier))
     return {
       speciesKey: member.speciesKey,
       name: species.name,
       types: species.types,
       level: member.level,
-      currentHp: stats.hp,
-      maxHp: stats.hp,
-      attack: stats.attack,
-      defense: stats.defense,
-      spAttack: stats.spAttack,
-      spDefense: stats.spDefense,
-      speed: stats.speed,
+      currentHp: scale(stats.hp),
+      maxHp: scale(stats.hp),
+      attack: scale(stats.attack),
+      defense: scale(stats.defense),
+      spAttack: scale(stats.spAttack),
+      spDefense: scale(stats.spDefense),
+      speed: scale(stats.speed),
       moves,
       isPlayer: !1,
       isShiny: checkShinyOdds(),
@@ -533,13 +536,16 @@ const TOWER_BASE_LEVEL = 50
 
 /**
  * Build a Battle Tower trainer's roster for a floor. Deeper floors field more
- * and stronger non-legendary Pokemon from the national dex.
+ * and stronger non-legendary Pokemon from the national dex. Teams level out at
+ * Lv.100 around floor 25, so beyond that their stats are multiplied instead to
+ * keep the tower genuinely endless.
  * @param {number} floor
- * @returns {{ speciesKey: string, level: number }[]}
+ * @returns {{ speciesKey: string, level: number, statMultiplier: number }[]}
  */
 export function buildTowerTeam(floor) {
   const level = Math.min(100, TOWER_BASE_LEVEL + floor * 2),
     size = Math.min(6, 2 + Math.floor(floor / 2)),
+    statMultiplier = 1 + Math.max(0, floor - 25) * 0.03,
     pool = Object.keys(pokemonSpecies).filter((key) => {
       const species = pokemonSpecies[key]
       return species.id > 0 && species.id <= 1025 && !species.legendary && (species.catchRate ?? 0) > 3
@@ -552,7 +558,7 @@ export function buildTowerTeam(floor) {
       guard = 0
     while (used.has(key) && guard++ < 100) key = pool[Math.floor(Math.random() * pool.length)]
     used.add(key)
-    team.push({ speciesKey: key, level: Math.min(100, level + i) })
+    team.push({ speciesKey: key, level: Math.min(100, level + i), statMultiplier })
   }
   return team
 }

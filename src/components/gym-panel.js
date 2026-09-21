@@ -351,7 +351,7 @@ export function GymPanel({ onOpenShop }) {
               children:
                 state.towerFloor > 0
                   ? `Currently on floor ${state.towerFloor}. Win to climb; lose and the run ends.`
-                  : 'Fight endless, stronger trainers for Victory Tokens. Your Pokemon are healed between floors.',
+                  : 'Fight endless, stronger trainers for Victory Tokens. Your Pokemon are healed between floors; past floor 25 their stats keep climbing.',
             }),
             jsx('button', {
               className: 'gym-fight-btn champion',

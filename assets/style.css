@@ -2381,10 +2381,24 @@ img {
 
 .location-unlock-check {
     display: flex;
-    align-items: center;
-    gap: 4px;
+    flex-direction: column;
+    gap: 1px;
     font-size: 7px;
     color: var(--gold)
+}
+
+.location-unlock-check-row {
+    display: flex;
+    align-items: center;
+    gap: 4px
+}
+
+.location-unlock-check-detail {
+    margin-left: 14px;
+    font-size: 6px;
+    color: var(--parchment);
+    opacity: .75;
+    line-height: 1.3
 }
 
 .location-unlock-check.met {

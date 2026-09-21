@@ -93,7 +93,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
 
   /**
    * @param {MapLocation} target
-   * @returns {{ label: string, current: number, required: number, met: boolean, locationId?: string | null }[]}
+   * @returns {{ label: string, detail?: string, current: number, required: number, met: boolean, locationId?: string | null }[]}
    */
   function unlockRequirements(target) {
     const unlockRule = target.unlock || {},
@@ -128,11 +128,21 @@ export function LocationPanel({ onOpenCatchSettings }) {
     if (unlockRule.caughtOnRoute) {
       const requiredSpecies = unlockRule.caughtOnRoute.species,
         routeName = mapData[unlockRule.caughtOnRoute.routeKey]?.name ?? 'this route',
-        caughtHere = requiredSpecies.filter((speciesKey) =>
-          state.pokedexCaught.includes(speciesKey)
-        ).length
+        caughtSet = new Set(
+          requiredSpecies.filter((speciesKey) => state.pokedexCaught.includes(speciesKey))
+        ),
+        caughtHere = caughtSet.size,
+        // Name the species so the player knows exactly what to hunt; the ✓
+        // marks the ones already caught.
+        detail = requiredSpecies
+          .map(
+            (speciesKey) =>
+              `${caughtSet.has(speciesKey) ? '✓ ' : ''}${pokemonSpecies[speciesKey]?.name ?? speciesKey}`
+          )
+          .join(', ')
       requirements.push({
         label: `${routeName} ${unlockRule.caughtOnRoute.count === 1 ? 'exclusive' : 'exclusives'} caught`,
+        detail,
         current: caughtHere,
         required: unlockRule.caughtOnRoute.count,
         met: caughtHere >= unlockRule.caughtOnRoute.count,
@@ -376,18 +386,28 @@ export function LocationPanel({ onOpenCatchSettings }) {
                                 ? `Travel to ${mapData[targetLocationId]?.name ?? targetLocationId}`
                                 : void 0,
                               children: [
-                                jsx('span', {
-                                  className: 'location-unlock-check-icon',
-                                  children: requirement.met ? '✓' : targetLocationId ? '→' : '○',
+                                jsxs('div', {
+                                  className: 'location-unlock-check-row',
+                                  children: [
+                                    jsx('span', {
+                                      className: 'location-unlock-check-icon',
+                                      children: requirement.met ? '✓' : targetLocationId ? '→' : '○',
+                                    }),
+                                    jsx('span', {
+                                      className: 'location-unlock-check-label',
+                                      children: requirement.met
+                                        ? requirement.label
+                                        : requirement.required > 1
+                                          ? `${requirement.current}/${requirement.required} ${requirement.label.toLowerCase()}`
+                                          : requirement.label,
+                                    }),
+                                  ],
                                 }),
-                                jsx('span', {
-                                  className: 'location-unlock-check-label',
-                                  children: requirement.met
-                                    ? requirement.label
-                                    : requirement.required > 1
-                                      ? `${requirement.current}/${requirement.required} ${requirement.label.toLowerCase()}`
-                                      : requirement.label,
-                                }),
+                                requirement.detail &&
+                                  jsx('div', {
+                                    className: 'location-unlock-check-detail',
+                                    children: requirement.detail,
+                                  }),
                               ],
                             },
                             index

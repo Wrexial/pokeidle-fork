@@ -453,18 +453,44 @@ The repo root has no `README.md` and no `LICENSE`, and the GitHub repo has no
 About blurb — the front door is missing. `AGENTS.md` is developer-facing and too
 long/technical to double as one.
 
-- [ ] `README.md`: a one-line pitch; what it is (a client-only browser
-      incremental Pokémon game, React 19 + Vite); a screenshot/GIF; feature
-      highlights (link `public/guide.html`); how to run it locally
-      (`npm install`, `npm run dev` → localhost:5173, `npm run build`,
-      `npm run typecheck` / `npm run validate`); a short project-layout table
-      (link `AGENTS.md` for depth); links to the player guide and encounter
-      index; credits/disclaimer (unofficial fan project, Pokémon © Nintendo).
+- [ ] **Header**: the playable link (demo/deploy) up top, short **badges**
+      (CI/build, license, current game version) and a one-line pitch.
+- [ ] **What it is**: a client-only browser incremental Pokémon game (React 19 +
+      Vite, no backend, no account); progress saves to `localStorage`.
+- [ ] **Screenshots / GIF** of the battle scene, town map and Pokédex.
+- [ ] **Features**: a highlight list linking the full player guide
+      (`public/guide.html`) — 9 regions, gyms/Elite Four/Champion, raids,
+      evolution items, breeding, Wonder Trade, shiny hunting, Battle Tower,
+      prestige, region unlock tokens.
+- [ ] **Current version** (`GAME_VERSION` in `src/data/changelog.js`) and a link
+      to the changelog / patch notes.
+- [ ] **Run locally**: `npm install`; `npm run dev` → http://localhost:5173;
+      `npm run build` (static `dist/`); `npm run preview`; dev checks
+      `npm run typecheck` and `npm run validate`.
+- [ ] **Deploy**: it's a static bundle, so GitHub Pages / Netlify / any static
+      host works (point them at `dist/`).
+- [ ] **Project layout**: the short table, plus "read `AGENTS.md` before
+      contributing" (the `src/` tree was decompiled/de-minified and follows
+      specific conventions, e.g. no semicolons, `jsx()` runtime calls).
+- [ ] **Data & credits**: content is scraped/derived from **PokéAPI** (species,
+      encounters, learnsets, breeding data), **Bulbapedia** (region maps,
+      Paldea areas) and **Pokémon Showdown / PokéAPI sprites** — thank them and
+      state the unofficial, non-commercial fan-project status (Pokémon ©
+      Nintendo / Creatures / GAME FREAK).
+- [ ] **FAQ / troubleshooting**: "is this official?" (no), "where is my save?"
+      (`localStorage`; reset it from Settings), "why did encounter data change?"
+      (data is regenerated from real games), stale-dev-server note on Windows.
+- [ ] **Community**: link the subreddit the patch notes already point to
+      (`r/PkmnIdle`).
+- [ ] **Roadmap**: link `TODO.md` and/or the changelog.
 - [ ] Decide a license (currently none) and add a `LICENSE` file.
-- [ ] GitHub **About**: a short (~120 char) description, the playable URL if
-      hosted (GitHub Pages / Netlify), topics/tags (`pokemon`, `idle-game`,
-      `incremental`, `react`, `vite`), and a social-preview image.
-- [ ] Optional: `CONTRIBUTING.md` and issue/PR templates.
+- [ ] **CI** (optional): a GitHub Action running `typecheck` + `validate` on
+      PRs — doubles as the build badge.
+- [ ] GitHub **About**: a short description, the playable URL, topics/tags
+      (`pokemon`, `idle-game`, `incremental`, `react`, `vite`) and a
+      social-preview image.
+- [ ] Optional: `CONTRIBUTING.md`, issue/PR templates and a
+      `CODE_OF_CONDUCT.md`.
 
 Effort: **small**.
 

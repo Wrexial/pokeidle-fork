@@ -32,7 +32,7 @@
   "name": "Route 29",
   "type": "route",
   "region": "johto",
-  "description": "A route in the Johto region.",
+  "description": "A route in the Johto region where Normal and Flying Pokemon roam around Lv. 5-7.",
   "routeKey": "johto-route-29",
   "connections": [
    "johto-cherrygrove-city",
@@ -88,7 +88,7 @@
   "name": "Route 30",
   "type": "route",
   "region": "johto",
-  "description": "A route in the Johto region.",
+  "description": "A route in the Johto region where Water and Bug Pokemon roam around Lv. 8-10.",
   "routeKey": "johto-route-30",
   "connections": [
    "johto-cherrygrove-city",
@@ -114,7 +114,7 @@
   "name": "Route 31",
   "type": "route",
   "region": "johto",
-  "description": "A route in the Johto region.",
+  "description": "A route in the Johto region where Water and Bug Pokemon roam around Lv. 11-13.",
   "routeKey": "johto-route-31",
   "connections": [
    "johto-route-30",
@@ -140,7 +140,7 @@
   "name": "Violet City",
   "type": "town",
   "region": "johto",
-  "description": "A town in the Johto region.",
+  "description": "A town in the Johto region, home to Falkner's Flying Gym.",
   "connections": [
    "johto-route-31",
    "johto-route-32",
@@ -174,7 +174,7 @@
   "name": "Route 32",
   "type": "route",
   "region": "johto",
-  "description": "A route in the Johto region.",
+  "description": "A route in the Johto region where Water and Poison Pokemon roam around Lv. 14-16.",
   "routeKey": "johto-route-32",
   "connections": [
    "johto-violet-city",
@@ -202,7 +202,7 @@
   "name": "Route 33",
   "type": "route",
   "region": "johto",
-  "description": "A route in the Johto region.",
+  "description": "A route in the Johto region where Flying and Normal Pokemon roam around Lv. 17-19.",
   "routeKey": "johto-route-33",
   "connections": [
    "johto-azalea-town",
@@ -228,7 +228,7 @@
   "name": "Azalea Town",
   "type": "town",
   "region": "johto",
-  "description": "A town in the Johto region.",
+  "description": "A town in the Johto region, home to Bugsy's Bug Gym.",
   "connections": [
    "johto-route-33",
    "johto-route-34"
@@ -264,7 +264,7 @@
   "name": "Route 34",
   "type": "route",
   "region": "johto",
-  "description": "A route in the Johto region.",
+  "description": "A route in the Johto region where Water and Poison Pokemon roam around Lv. 20-22.",
   "routeKey": "johto-route-34",
   "connections": [
    "johto-goldenrod-city",
@@ -293,7 +293,7 @@
   "name": "Goldenrod City",
   "type": "town",
   "region": "johto",
-  "description": "A town in the Johto region.",
+  "description": "A town in the Johto region, home to Whitney's Normal Gym.",
   "connections": [
    "johto-route-34",
    "johto-route-35"
@@ -329,7 +329,7 @@
   "name": "Route 35",
   "type": "route",
   "region": "johto",
-  "description": "A route in the Johto region.",
+  "description": "A route in the Johto region where Water and Fairy Pokemon roam around Lv. 24-26.",
   "routeKey": "johto-route-35",
   "connections": [
    "johto-goldenrod-city",
@@ -358,7 +358,7 @@
   "name": "Route 36",
   "type": "route",
   "region": "johto",
-  "description": "A route in the Johto region.",
+  "description": "A route in the Johto region where Poison and Normal Pokemon roam around Lv. 27-29.",
   "routeKey": "johto-route-36",
   "connections": [
    "johto-route-37",
@@ -387,7 +387,7 @@
   "name": "Route 37",
   "type": "route",
   "region": "johto",
-  "description": "A route in the Johto region.",
+  "description": "A route in the Johto region where Flying and Normal Pokemon roam around Lv. 30-32.",
   "routeKey": "johto-route-37",
   "connections": [
    "johto-ecruteak-city",
@@ -413,7 +413,7 @@
   "name": "Ecruteak City",
   "type": "town",
   "region": "johto",
-  "description": "A town in the Johto region.",
+  "description": "A town in the Johto region, home to Morty's Ghost Gym.",
   "connections": [
    "johto-route-37",
    "johto-route-42",
@@ -457,7 +457,7 @@
   "name": "Bell Tower",
   "type": "route",
   "region": "johto",
-  "description": "A route in the Johto region.",
+  "description": "A route in the Johto region where Poison and Ghost Pokemon roam around Lv. 33-35.",
   "routeKey": "johto-bell-tower",
   "connections": [
    "johto-ecruteak-city"
@@ -485,7 +485,7 @@
   "name": "Route 38",
   "type": "route",
   "region": "johto",
-  "description": "A route in the Johto region.",
+  "description": "A route in the Johto region where Normal and Flying Pokemon roam around Lv. 36-38.",
   "routeKey": "johto-route-38",
   "connections": [
    "johto-ecruteak-city",
@@ -513,7 +513,7 @@
   "name": "Route 39",
   "type": "route",
   "region": "johto",
-  "description": "A route in the Johto region.",
+  "description": "A route in the Johto region where Normal and Flying Pokemon roam around Lv. 39-41.",
   "routeKey": "johto-route-39",
   "connections": [
    "johto-olivine-city",
@@ -539,7 +539,7 @@
   "name": "Olivine City",
   "type": "town",
   "region": "johto",
-  "description": "A town in the Johto region.",
+  "description": "A town in the Johto region, home to Jasmine's Steel Gym.",
   "connections": [
    "johto-route-39",
    "johto-sea-route-40"
@@ -581,7 +581,7 @@
   "name": "Route 40",
   "type": "route",
   "region": "johto",
-  "description": "A route in the Johto region.",
+  "description": "A route in the Johto region where Water and Poison Pokemon roam around Lv. 42-44.",
   "routeKey": "johto-sea-route-40",
   "connections": [
    "johto-olivine-city",
@@ -607,7 +607,7 @@
   "name": "Route 41",
   "type": "route",
   "region": "johto",
-  "description": "A route in the Johto region.",
+  "description": "A route in the Johto region where Water and Poison Pokemon roam around Lv. 45-47.",
   "routeKey": "johto-sea-route-41",
   "connections": [
    "johto-cianwood-city",
@@ -633,7 +633,7 @@
   "name": "Cianwood City",
   "type": "town",
   "region": "johto",
-  "description": "A town in the Johto region.",
+  "description": "A town in the Johto region, home to Chuck's Fighting Gym.",
   "connections": [
    "johto-sea-route-41",
    "johto-route-47"
@@ -678,7 +678,7 @@
   "name": "Whirl Islands",
   "type": "route",
   "region": "johto",
-  "description": "A route in the Johto region.",
+  "description": "A route in the Johto region where Water and Poison Pokemon roam around Lv. 48-50.",
   "routeKey": "johto-whirl-islands",
   "connections": [
    "johto-sea-route-41"
@@ -705,7 +705,7 @@
   "name": "Route 42",
   "type": "route",
   "region": "johto",
-  "description": "A route in the Johto region.",
+  "description": "A route in the Johto region where Water and Normal Pokemon roam around Lv. 51-53.",
   "routeKey": "johto-route-42",
   "connections": [
    "johto-ecruteak-city",
@@ -734,7 +734,7 @@
   "name": "Mahogany Town",
   "type": "town",
   "region": "johto",
-  "description": "A town in the Johto region.",
+  "description": "A town in the Johto region, home to Pryce's Ice Gym.",
   "connections": [
    "johto-route-42",
    "johto-route-43",
@@ -779,7 +779,7 @@
   "name": "Route 43",
   "type": "route",
   "region": "johto",
-  "description": "A route in the Johto region.",
+  "description": "A route in the Johto region where Water and Normal Pokemon roam around Lv. 54-56.",
   "routeKey": "johto-route-43",
   "connections": [
    "johto-mahogany-town"
@@ -807,7 +807,7 @@
   "name": "Route 44",
   "type": "route",
   "region": "johto",
-  "description": "A route in the Johto region.",
+  "description": "A route in the Johto region where Water and Grass Pokemon roam around Lv. 58-60.",
   "routeKey": "johto-route-44",
   "connections": [
    "johto-mahogany-town",
@@ -835,7 +835,7 @@
   "name": "Blackthorn City",
   "type": "town",
   "region": "johto",
-  "description": "A town in the Johto region.",
+  "description": "A town in the Johto region, home to Clair's Dragon Gym.",
   "connections": [
    "johto-route-45",
    "johto-route-44"
@@ -880,7 +880,7 @@
   "name": "Route 45",
   "type": "route",
   "region": "johto",
-  "description": "A route in the Johto region.",
+  "description": "A route in the Johto region where Water and Ground Pokemon roam around Lv. 61-63.",
   "routeKey": "johto-route-45",
   "connections": [
    "johto-blackthorn-city",
@@ -908,7 +908,7 @@
   "name": "Route 46",
   "type": "route",
   "region": "johto",
-  "description": "A route in the Johto region.",
+  "description": "A route in the Johto region where Normal and Flying Pokemon roam around Lv. 64-66.",
   "routeKey": "johto-route-46",
   "connections": [
    "johto-route-29",
@@ -938,7 +938,7 @@
   "name": "Route 47",
   "type": "route",
   "region": "johto",
-  "description": "A route in the Johto region.",
+  "description": "A route in the Johto region where Water and Poison Pokemon roam around Lv. 67-69.",
   "routeKey": "johto-route-47",
   "connections": [
    "johto-route-48",
@@ -966,7 +966,7 @@
   "name": "Route 48",
   "type": "route",
   "region": "johto",
-  "description": "A route in the Johto region.",
+  "description": "A route in the Johto region where Normal and Flying Pokemon roam around Lv. 70-72.",
   "routeKey": "johto-route-48",
   "connections": [
    "johto-route-47"
@@ -991,7 +991,7 @@
   "name": "Mt. Silver",
   "type": "route",
   "region": "johto",
-  "description": "A route in the Johto region.",
+  "description": "A route in the Johto region where Ground and Rock Pokemon roam around Lv. 73-75.",
   "routeKey": "johto-mt-silver",
   "connections": [
    "johto-new-bark-town",

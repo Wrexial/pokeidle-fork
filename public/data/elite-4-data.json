@@ -45,11 +45,11 @@
     "level": 93
    },
    {
-    "speciesKey": "delibird",
+    "speciesKey": "walrein",
     "level": 94
    },
    {
-    "speciesKey": "walrein",
+    "speciesKey": "weavile",
     "level": 95
    }
   ]
@@ -139,27 +139,27 @@
   "region": "kanto",
   "rematchTeam": [
    {
-    "speciesKey": "shedinja",
+    "speciesKey": "drifblim",
     "level": 90
    },
    {
-    "speciesKey": "drifblim",
+    "speciesKey": "mismagius",
     "level": 91
    },
    {
-    "speciesKey": "mismagius",
+    "speciesKey": "spiritomb",
     "level": 92
    },
    {
-    "speciesKey": "spiritomb",
+    "speciesKey": "dusknoir",
     "level": 93
    },
    {
-    "speciesKey": "dusknoir",
+    "speciesKey": "froslass",
     "level": 94
    },
    {
-    "speciesKey": "froslass",
+    "speciesKey": "cofagrigus",
     "level": 95
    }
   ]
@@ -502,49 +502,49 @@
   "spriteKey": "phoebe-gen3",
   "team": [
    {
-    "speciesKey": "sableye",
+    "speciesKey": "banette",
     "level": 69
    },
    {
-    "speciesKey": "banette",
+    "speciesKey": "gengar",
     "level": 70
    },
    {
-    "speciesKey": "gengar",
+    "speciesKey": "sableye",
     "level": 71
    },
    {
-    "speciesKey": "shedinja",
+    "speciesKey": "banette",
     "level": 72
    },
    {
-    "speciesKey": "sableye",
+    "speciesKey": "gengar",
     "level": 73
    }
   ],
   "rematchTeam": [
    {
-    "speciesKey": "drifblim",
+    "speciesKey": "mismagius",
     "level": 90
    },
    {
-    "speciesKey": "mismagius",
+    "speciesKey": "spiritomb",
     "level": 91
    },
    {
-    "speciesKey": "spiritomb",
+    "speciesKey": "dusknoir",
     "level": 92
    },
    {
-    "speciesKey": "dusknoir",
+    "speciesKey": "froslass",
     "level": 93
    },
    {
-    "speciesKey": "froslass",
+    "speciesKey": "cofagrigus",
     "level": 94
    },
    {
-    "speciesKey": "cofagrigus",
+    "speciesKey": "jellicent",
     "level": 95
    }
   ]
@@ -557,23 +557,23 @@
   "spriteKey": "glacia",
   "team": [
    {
-    "speciesKey": "delibird",
+    "speciesKey": "walrein",
     "level": 70
    },
    {
-    "speciesKey": "walrein",
+    "speciesKey": "dewgong",
     "level": 71
    },
    {
-    "speciesKey": "dewgong",
+    "speciesKey": "cloyster",
     "level": 72
    },
    {
-    "speciesKey": "cloyster",
+    "speciesKey": "jynx",
     "level": 73
    },
    {
-    "speciesKey": "jynx",
+    "speciesKey": "lapras",
     "level": 74
    }
   ],
@@ -587,19 +587,19 @@
     "level": 91
    },
    {
-    "speciesKey": "delibird",
+    "speciesKey": "walrein",
     "level": 92
    },
    {
-    "speciesKey": "walrein",
+    "speciesKey": "weavile",
     "level": 93
    },
    {
-    "speciesKey": "weavile",
+    "speciesKey": "glaceon",
     "level": 94
    },
    {
-    "speciesKey": "glaceon",
+    "speciesKey": "mamoswine",
     "level": 95
    }
   ]
@@ -840,15 +840,15 @@
     "level": 72
    },
    {
-    "speciesKey": "unown",
+    "speciesKey": "wobbuffet",
     "level": 73
    },
    {
-    "speciesKey": "wobbuffet",
+    "speciesKey": "grumpig",
     "level": 74
    },
    {
-    "speciesKey": "grumpig",
+    "speciesKey": "lunatone",
     "level": 75
    }
   ],
@@ -874,7 +874,7 @@
     "level": 94
    },
    {
-    "speciesKey": "unown",
+    "speciesKey": "wobbuffet",
     "level": 95
    }
   ]
@@ -887,49 +887,49 @@
   "spriteKey": "shauntal",
   "team": [
    {
-    "speciesKey": "shedinja",
+    "speciesKey": "drifblim",
     "level": 68
    },
    {
-    "speciesKey": "drifblim",
+    "speciesKey": "mismagius",
     "level": 69
    },
    {
-    "speciesKey": "mismagius",
+    "speciesKey": "spiritomb",
     "level": 70
    },
    {
-    "speciesKey": "spiritomb",
+    "speciesKey": "dusknoir",
     "level": 71
    },
    {
-    "speciesKey": "dusknoir",
+    "speciesKey": "froslass",
     "level": 72
    }
   ],
   "rematchTeam": [
    {
-    "speciesKey": "shedinja",
+    "speciesKey": "drifblim",
     "level": 90
    },
    {
-    "speciesKey": "drifblim",
+    "speciesKey": "mismagius",
     "level": 91
    },
    {
-    "speciesKey": "mismagius",
+    "speciesKey": "spiritomb",
     "level": 92
    },
    {
-    "speciesKey": "spiritomb",
+    "speciesKey": "dusknoir",
     "level": 93
    },
    {
-    "speciesKey": "dusknoir",
+    "speciesKey": "froslass",
     "level": 94
    },
    {
-    "speciesKey": "froslass",
+    "speciesKey": "cofagrigus",
     "level": 95
    }
   ]
@@ -1013,7 +1013,7 @@
     "level": 73
    },
    {
-    "speciesKey": "unown",
+    "speciesKey": "wobbuffet",
     "level": 74
    }
   ],
@@ -1492,49 +1492,49 @@
   "spriteKey": "kahili",
   "team": [
    {
-    "speciesKey": "crobat",
+    "speciesKey": "xatu",
     "level": 71
    },
    {
-    "speciesKey": "xatu",
+    "speciesKey": "jumpluff",
     "level": 72
    },
    {
-    "speciesKey": "jumpluff",
+    "speciesKey": "mantine",
     "level": 73
    },
    {
-    "speciesKey": "delibird",
+    "speciesKey": "skarmory",
     "level": 74
    },
    {
-    "speciesKey": "mantine",
+    "speciesKey": "beautifly",
     "level": 75
    }
   ],
   "rematchTeam": [
    {
-    "speciesKey": "dodrio",
+    "speciesKey": "noctowl",
     "level": 90
    },
    {
-    "speciesKey": "noctowl",
+    "speciesKey": "ledian",
     "level": 91
    },
    {
-    "speciesKey": "ledian",
+    "speciesKey": "crobat",
     "level": 92
    },
    {
-    "speciesKey": "crobat",
+    "speciesKey": "xatu",
     "level": 93
    },
    {
-    "speciesKey": "xatu",
+    "speciesKey": "jumpluff",
     "level": 94
    },
    {
-    "speciesKey": "jumpluff",
+    "speciesKey": "mantine",
     "level": 95
    }
   ]
@@ -1932,23 +1932,23 @@
   "spriteKey": "clavell-s",
   "team": [
    {
-    "speciesKey": "tauros",
+    "speciesKey": "snorlax",
     "level": 71
    },
    {
-    "speciesKey": "ditto",
+    "speciesKey": "furret",
     "level": 72
    },
    {
-    "speciesKey": "snorlax",
+    "speciesKey": "noctowl",
     "level": 73
    },
    {
-    "speciesKey": "furret",
+    "speciesKey": "miltank",
     "level": 74
    },
    {
-    "speciesKey": "noctowl",
+    "speciesKey": "blissey",
     "level": 75
    }
   ],
@@ -1958,23 +1958,23 @@
     "level": 90
    },
    {
-    "speciesKey": "farfetchd",
+    "speciesKey": "dodrio",
     "level": 91
    },
    {
-    "speciesKey": "dodrio",
+    "speciesKey": "tauros",
     "level": 92
    },
    {
-    "speciesKey": "tauros",
+    "speciesKey": "snorlax",
     "level": 93
    },
    {
-    "speciesKey": "ditto",
+    "speciesKey": "furret",
     "level": 94
    },
    {
-    "speciesKey": "snorlax",
+    "speciesKey": "noctowl",
     "level": 95
    }
   ]

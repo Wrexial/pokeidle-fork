@@ -14,8 +14,8 @@
   },
   "unlockOrder": 899999,
   "position": {
-   "x": 49.27,
-   "y": 82.97
+   "x": 49.54075628588747,
+   "y": 83.64000708033167
   },
   "mart": {
    "name": "Paldea Mart",
@@ -31,7 +31,7 @@
   "name": "South Province (Area One)",
   "type": "route",
   "region": "paldea",
-  "description": "A route in the Paldea region.",
+  "description": "A route in the Paldea region where Water and Normal Pokemon roam around Lv. 5-7.",
   "routeKey": "paldea-south-province-area-one",
   "connections": [
    "paldea-cabo-poco",
@@ -46,8 +46,8 @@
   },
   "unlockOrder": 910000.5,
   "position": {
-   "x": 48.68,
-   "y": 81.51
+   "x": 48.409243714112534,
+   "y": 80.83999291966833
   }
  },
  "paldea-cabo-poco": {
@@ -122,7 +122,7 @@
   "name": "Medali",
   "type": "town",
   "region": "paldea",
-  "description": "A town in the Paldea region.",
+  "description": "A town in the Paldea region, home to Larry's Normal Gym.",
   "connections": [
    "paldea-west-province-area-three",
    "paldea-zapapico",
@@ -138,8 +138,8 @@
   },
   "unlockOrder": 910002.5,
   "position": {
-   "x": 39.4,
-   "y": 41.3
+   "x": 39.680445930557475,
+   "y": 41.35120174665779
   },
   "mart": {
    "name": "Paldea Mart",
@@ -159,7 +159,7 @@
   "name": "South Province (Area Three)",
   "type": "route",
   "region": "paldea",
-  "description": "A route in the Paldea region.",
+  "description": "A route in the Paldea region where Flying and Ghost Pokemon roam around Lv. 10-12.",
   "routeKey": "paldea-south-province-area-three",
   "connections": [
    "paldea-mesagoza",
@@ -188,7 +188,7 @@
   "name": "South Province (Area Two)",
   "type": "route",
   "region": "paldea",
-  "description": "A route in the Paldea region.",
+  "description": "A route in the Paldea region where Normal and Grass Pokemon roam around Lv. 15-17.",
   "routeKey": "paldea-south-province-area-two",
   "connections": [
    "paldea-mesagoza",
@@ -214,7 +214,7 @@
   "name": "West Province (Area Three)",
   "type": "route",
   "region": "paldea",
-  "description": "A route in the Paldea region.",
+  "description": "A route in the Paldea region where Water and Normal Pokemon roam around Lv. 20-22.",
   "routeKey": "paldea-west-province-area-three",
   "connections": [
    "paldea-medali",
@@ -231,8 +231,8 @@
   },
   "unlockOrder": 910002.5,
   "position": {
-   "x": 36.99,
-   "y": 40.86
+   "x": 36.709554069442525,
+   "y": 40.808798253342204
   }
  },
  "paldea-west-province-area-one": {
@@ -240,7 +240,7 @@
   "name": "West Province (Area One)",
   "type": "route",
   "region": "paldea",
-  "description": "A route in the Paldea region.",
+  "description": "A route in the Paldea region where Water and Flying Pokemon roam around Lv. 24-26.",
   "routeKey": "paldea-west-province-area-one",
   "connections": [
    "paldea-cascarrafa",
@@ -266,7 +266,7 @@
   "unlockOrder": 910003,
   "position": {
    "x": 30.99,
-   "y": 43.2
+   "y": 42.935
   }
  },
  "paldea-alfornada": {
@@ -274,7 +274,7 @@
   "name": "Alfornada",
   "type": "town",
   "region": "paldea",
-  "description": "A town in the Paldea region.",
+  "description": "A town in the Paldea region, home to Tulip's Psychic Gym.",
   "connections": [
    "paldea-south-province-area-six",
    "paldea-south-province-area-three",
@@ -300,7 +300,7 @@
   "unlockOrder": 910004,
   "position": {
    "x": 15.28,
-   "y": 85.53
+   "y": 85.795
   },
   "mart": {
    "name": "Paldea Mart",
@@ -320,7 +320,7 @@
   "name": "Artazon",
   "type": "town",
   "region": "paldea",
-  "description": "A town in the Paldea region.",
+  "description": "A town in the Paldea region, home to Brassius's Grass Gym.",
   "connections": [
    "paldea-east-province-area-one",
    "paldea-south-province-area-three",
@@ -346,8 +346,8 @@
   },
   "unlockOrder": 910004,
   "position": {
-   "x": 77.05,
-   "y": 67.62
+   "x": 76.7859065640899,
+   "y": 67.64342764350816
   },
   "mart": {
    "name": "Paldea Mart",
@@ -367,7 +367,7 @@
   "name": "Cortondo",
   "type": "town",
   "region": "paldea",
-  "description": "A town in the Paldea region.",
+  "description": "A town in the Paldea region, home to Katy's Bug Gym.",
   "connections": [
    "paldea-south-province-area-two"
   ],
@@ -409,7 +409,7 @@
   "name": "Montenevera",
   "type": "town",
   "region": "paldea",
-  "description": "A town in the Paldea region.",
+  "description": "A town in the Paldea region, home to Ryme's Ghost Gym.",
   "connections": [
    "paldea-south-province-area-two"
   ],
@@ -461,7 +461,7 @@
   "name": "Zapapico",
   "type": "town",
   "region": "paldea",
-  "description": "A town in the Paldea region.",
+  "description": "A town in the Paldea region, home to Grusha's Ice Gym.",
   "connections": [
    "paldea-east-province-area-three",
    "paldea-medali",
@@ -481,8 +481,8 @@
   },
   "unlockOrder": 910004,
   "position": {
-   "x": 64.99,
-   "y": 46.05
+   "x": 64.70955406944253,
+   "y": 45.9987982533422
   },
   "mart": {
    "name": "Paldea Mart",
@@ -508,7 +508,7 @@
   "name": "Cascarrafa",
   "type": "town",
   "region": "paldea",
-  "description": "A town in the Paldea region.",
+  "description": "A town in the Paldea region, home to Kofu's Water Gym.",
   "connections": [
    "paldea-west-province-area-one",
    "paldea-artazon"
@@ -527,7 +527,7 @@
   "unlockOrder": 910004.5,
   "position": {
    "x": 30.99,
-   "y": 45.69
+   "y": 45.955
   },
   "mart": {
    "name": "Paldea Mart",
@@ -555,7 +555,7 @@
   "name": "East Province (Area One)",
   "type": "route",
   "region": "paldea",
-  "description": "A route in the Paldea region.",
+  "description": "A route in the Paldea region where Normal and Water Pokemon roam around Lv. 29-31.",
   "routeKey": "paldea-east-province-area-one",
   "connections": [
    "paldea-artazon",
@@ -577,8 +577,8 @@
   },
   "unlockOrder": 910004.5,
   "position": {
-   "x": 79.53,
-   "y": 67.4
+   "x": 79.7940934359101,
+   "y": 67.37657235649185
   }
  },
  "paldea-north-province-area-one": {
@@ -586,7 +586,7 @@
   "name": "North Province (Area One)",
   "type": "route",
   "region": "paldea",
-  "description": "A route in the Paldea region.",
+  "description": "A route in the Paldea region where Flying and Poison Pokemon roam around Lv. 34-36.",
   "routeKey": "paldea-north-province-area-one",
   "connections": [
    "paldea-alfornada"
@@ -613,7 +613,7 @@
   "name": "South Province (Area Four)",
   "type": "route",
   "region": "paldea",
-  "description": "A route in the Paldea region.",
+  "description": "A route in the Paldea region where Water and Ground Pokemon roam around Lv. 39-41.",
   "routeKey": "paldea-south-province-area-four",
   "connections": [
    "paldea-artazon"
@@ -641,7 +641,7 @@
   "name": "East Province (Area Three)",
   "type": "route",
   "region": "paldea",
-  "description": "A route in the Paldea region.",
+  "description": "A route in the Paldea region where Water and Ghost Pokemon roam around Lv. 44-46.",
   "routeKey": "paldea-east-province-area-three",
   "connections": [
    "paldea-zapapico",
@@ -657,8 +657,8 @@
   },
   "unlockOrder": 910004.5,
   "position": {
-   "x": 67.4,
-   "y": 46.49
+   "x": 67.68044593055747,
+   "y": 46.5412017466578
   }
  },
  "paldea-south-province-area-six": {
@@ -666,7 +666,7 @@
   "name": "South Province (Area Six)",
   "type": "route",
   "region": "paldea",
-  "description": "A route in the Paldea region.",
+  "description": "A route in the Paldea region where Water and Ghost Pokemon roam around Lv. 49-51.",
   "routeKey": "paldea-south-province-area-six",
   "connections": [
    "paldea-alfornada",
@@ -688,7 +688,7 @@
   "unlockOrder": 910004.5,
   "position": {
    "x": 15.28,
-   "y": 83.04
+   "y": 82.775
   }
  },
  "paldea-west-province-area-two": {
@@ -696,7 +696,7 @@
   "name": "West Province (Area Two)",
   "type": "route",
   "region": "paldea",
-  "description": "A route in the Paldea region.",
+  "description": "A route in the Paldea region where Water and Flying Pokemon roam around Lv. 54-56.",
   "routeKey": "paldea-west-province-area-two",
   "connections": [
    "paldea-porto-marinada",
@@ -721,7 +721,7 @@
   "unlockOrder": 910005,
   "position": {
    "x": 11.99,
-   "y": 39.18
+   "y": 38.915
   }
  },
  "paldea-north-province-area-two": {
@@ -729,7 +729,7 @@
   "name": "North Province (Area Two)",
   "type": "route",
   "region": "paldea",
-  "description": "A route in the Paldea region.",
+  "description": "A route in the Paldea region where Flying and Bug Pokemon roam around Lv. 58-60.",
   "routeKey": "paldea-north-province-area-two",
   "connections": [
    "paldea-west-province-area-two",
@@ -755,7 +755,7 @@
   "name": "Levincia",
   "type": "town",
   "region": "paldea",
-  "description": "A town in the Paldea region.",
+  "description": "A town in the Paldea region, home to Iono's Electric Gym.",
   "connections": [
    "paldea-east-province-area-two",
    "paldea-east-province-area-one"
@@ -771,7 +771,7 @@
   "unlockOrder": 910006,
   "position": {
    "x": 85.09,
-   "y": 50.07
+   "y": 50.34
   },
   "mart": {
    "name": "Paldea Mart",
@@ -799,7 +799,7 @@
   "name": "South Province (Area Five)",
   "type": "route",
   "region": "paldea",
-  "description": "A route in the Paldea region.",
+  "description": "A route in the Paldea region where Normal and Water Pokemon roam around Lv. 63-65.",
   "routeKey": "paldea-south-province-area-five",
   "connections": [
    "paldea-east-province-area-one",
@@ -848,7 +848,7 @@
   "unlockOrder": 910006,
   "position": {
    "x": 11.99,
-   "y": 41.67
+   "y": 41.935
   },
   "mart": {
    "name": "Paldea Mart",
@@ -876,7 +876,7 @@
   "name": "North Province (Area Three)",
   "type": "route",
   "region": "paldea",
-  "description": "A route in the Paldea region.",
+  "description": "A route in the Paldea region where Flying and Grass Pokemon roam around Lv. 68-70.",
   "routeKey": "paldea-north-province-area-three",
   "connections": [
    "paldea-north-province-area-two",
@@ -913,7 +913,7 @@
   "name": "East Province (Area Two)",
   "type": "route",
   "region": "paldea",
-  "description": "A route in the Paldea region.",
+  "description": "A route in the Paldea region where Water and Flying Pokemon roam around Lv. 73-75.",
   "routeKey": "paldea-east-province-area-two",
   "connections": [
    "paldea-levincia",
@@ -934,7 +934,7 @@
   "unlockOrder": 910006.5,
   "position": {
    "x": 85.09,
-   "y": 47.59
+   "y": 47.32
   }
  },
  "paldea-mossui-town": {

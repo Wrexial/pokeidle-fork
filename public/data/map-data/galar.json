@@ -31,7 +31,7 @@
   "name": "Route 1",
   "type": "route",
   "region": "galar",
-  "description": "A route in the Galar region.",
+  "description": "A route in the Galar region where Normal and Bug Pokemon roam around Lv. 5-7.",
   "routeKey": "galar-route-1",
   "connections": [
    "galar-wedgehurst",
@@ -86,7 +86,7 @@
   "name": "Route 2",
   "type": "route",
   "region": "galar",
-  "description": "A route in the Galar region.",
+  "description": "A route in the Galar region where Water and Grass Pokemon roam around Lv. 13-15.",
   "routeKey": "galar-route-2",
   "connections": [
    "galar-wedgehurst",
@@ -112,7 +112,7 @@
   "name": "Motostoke",
   "type": "town",
   "region": "galar",
-  "description": "A town in the Galar region.",
+  "description": "A town in the Galar region, home to Kabu's Fire Gym.",
   "connections": [
    "galar-route-3",
    "galar-route-2",
@@ -135,8 +135,8 @@
   },
   "unlockOrder": 800002.5,
   "position": {
-   "x": 45.02,
-   "y": 66.79
+   "x": 45.08946561450717,
+   "y": 67.66526674279027
   },
   "mart": {
    "name": "Galar Mart",
@@ -152,7 +152,7 @@
   "name": "Route 3",
   "type": "route",
   "region": "galar",
-  "description": "A route in the Galar region.",
+  "description": "A route in the Galar region where Rock and Fighting Pokemon roam around Lv. 20-22.",
   "routeKey": "galar-route-3",
   "connections": [
    "galar-motostoke",
@@ -169,8 +169,8 @@
   },
   "unlockOrder": 800003,
   "position": {
-   "x": 44.92,
-   "y": 65.53
+   "x": 44.850534385492836,
+   "y": 64.65473325720973
   }
  },
  "galar-route-4": {
@@ -178,7 +178,7 @@
   "name": "Route 4",
   "type": "route",
   "region": "galar",
-  "description": "A route in the Galar region.",
+  "description": "A route in the Galar region where Water and Electric Pokemon roam around Lv. 28-30.",
   "routeKey": "galar-route-4",
   "connections": [
    "galar-turffield",
@@ -201,8 +201,8 @@
   },
   "unlockOrder": 800004,
   "position": {
-   "x": 42.04,
-   "y": 62.07
+   "x": 42.13784114697626,
+   "y": 62.188201154439525
   }
  },
  "galar-turffield": {
@@ -210,7 +210,7 @@
   "name": "Turffield",
   "type": "town",
   "region": "galar",
-  "description": "A town in the Galar region.",
+  "description": "A town in the Galar region, home to Milo's Grass Gym.",
   "connections": [
    "galar-route-4",
    "galar-route-5"
@@ -226,8 +226,8 @@
   },
   "unlockOrder": 800004.5,
   "position": {
-   "x": 40.31,
-   "y": 59.98
+   "x": 40.212158853023745,
+   "y": 59.86179884556047
   },
   "mart": {
    "name": "Galar Mart",
@@ -247,7 +247,7 @@
   "name": "Route 5",
   "type": "route",
   "region": "galar",
-  "description": "A route in the Galar region.",
+  "description": "A route in the Galar region where Water and Fairy Pokemon roam around Lv. 35-37.",
   "routeKey": "galar-route-5",
   "connections": [
    "galar-hulbury",
@@ -275,7 +275,7 @@
   "name": "Hulbury",
   "type": "town",
   "region": "galar",
-  "description": "A town in the Galar region.",
+  "description": "A town in the Galar region, home to Nessa's Water Gym.",
   "connections": [
    "galar-route-5"
   ],
@@ -318,7 +318,7 @@
   "name": "Route 6",
   "type": "route",
   "region": "galar",
-  "description": "A route in the Galar region.",
+  "description": "A route in the Galar region where Water and Ground Pokemon roam around Lv. 43-45.",
   "routeKey": "galar-route-6",
   "connections": [
    "galar-hammerlocke",
@@ -347,7 +347,7 @@
   "name": "Hammerlocke",
   "type": "town",
   "region": "galar",
-  "description": "A town in the Galar region.",
+  "description": "A town in the Galar region, home to Raihan's Dragon Gym.",
   "connections": [
    "galar-route-6",
    "galar-route-7",
@@ -367,8 +367,8 @@
   },
   "unlockOrder": 800006.5,
   "position": {
-   "x": 49.74,
-   "y": 47.15
+   "x": 49.387330327484165,
+   "y": 47.64373754152217
   },
   "mart": {
    "name": "Galar Mart",
@@ -394,7 +394,7 @@
   "name": "Stow On Side",
   "type": "town",
   "region": "galar",
-  "description": "A town in the Galar region.",
+  "description": "A town in the Galar region, home to Bea's Fighting Gym.",
   "connections": [
    "galar-route-6",
    "galar-ballonlea"
@@ -448,7 +448,7 @@
   "name": "Route 7",
   "type": "route",
   "region": "galar",
-  "description": "A route in the Galar region.",
+  "description": "A route in the Galar region where Dark and Steel Pokemon roam around Lv. 50-52.",
   "routeKey": "galar-route-7",
   "connections": [
    "galar-route-8",
@@ -469,8 +469,8 @@
   },
   "unlockOrder": 800007,
   "position": {
-   "x": 50.79,
-   "y": 45.68
+   "x": 51.14266967251584,
+   "y": 45.18626245847783
   }
  },
  "galar-route-8": {
@@ -478,7 +478,7 @@
   "name": "Route 8",
   "type": "route",
   "region": "galar",
-  "description": "A route in the Galar region.",
+  "description": "A route in the Galar region where Ice and Ground Pokemon roam around Lv. 58-60.",
   "routeKey": "galar-route-8",
   "connections": [
    "galar-route-7",
@@ -511,7 +511,7 @@
   "name": "Circhester",
   "type": "town",
   "region": "galar",
-  "description": "A town in the Galar region.",
+  "description": "A town in the Galar region, home to Gordie's Rock Gym.",
   "connections": [
    "galar-route-8",
    "galar-route-9"
@@ -554,7 +554,7 @@
   "name": "Route 9",
   "type": "route",
   "region": "galar",
-  "description": "A route in the Galar region.",
+  "description": "A route in the Galar region where Water and Ice Pokemon roam around Lv. 65-67.",
   "routeKey": "galar-route-9",
   "connections": [
    "galar-circhester",
@@ -591,7 +591,7 @@
   "name": "Spikemuth",
   "type": "town",
   "region": "galar",
-  "description": "A town in the Galar region.",
+  "description": "A town in the Galar region, home to Piers's Dark Gym.",
   "connections": [
    "galar-route-9"
   ],
@@ -643,7 +643,7 @@
   "name": "Route 10",
   "type": "route",
   "region": "galar",
-  "description": "A route in the Galar region.",
+  "description": "A route in the Galar region where Ice and Grass Pokemon roam around Lv. 73-75.",
   "routeKey": "galar-route-10",
   "connections": [
    "galar-wyndon",
@@ -720,7 +720,7 @@
   "name": "Ballonlea",
   "type": "town",
   "region": "galar",
-  "description": "A town in the Galar region.",
+  "description": "A town in the Galar region, home to Opal's Fairy Gym.",
   "connections": [
    "galar-stow-on-side"
   ],

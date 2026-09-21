@@ -31,7 +31,7 @@
   "name": "Route 101",
   "type": "route",
   "region": "hoenn",
-  "description": "A route in the Hoenn region.",
+  "description": "A route in the Hoenn region where Normal and Bug Pokemon roam around Lv. 5-7.",
   "routeKey": "hoenn-route-101",
   "connections": [
    "hoenn-oldale-town",
@@ -45,8 +45,8 @@
   },
   "unlockOrder": 300101,
   "position": {
-   "x": 16.56,
-   "y": 62.63
+   "x": 16.556611235373637,
+   "y": 62.6611342750047
   }
  },
  "hoenn-oldale-town": {
@@ -70,8 +70,8 @@
   },
   "unlockOrder": 300101.5,
   "position": {
-   "x": 16.88,
-   "y": 59.69
+   "x": 16.88338876462636,
+   "y": 59.6588657249953
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -87,7 +87,7 @@
   "name": "Route 102",
   "type": "route",
   "region": "hoenn",
-  "description": "A route in the Hoenn region.",
+  "description": "A route in the Hoenn region where Water and Fairy Pokemon roam around Lv. 7-9.",
   "routeKey": "hoenn-route-102",
   "connections": [
    "hoenn-petalburg-city",
@@ -113,7 +113,7 @@
   "name": "Petalburg City",
   "type": "town",
   "region": "hoenn",
-  "description": "A town in the Hoenn region.",
+  "description": "A town in the Hoenn region, home to Norman's Normal Gym.",
   "connections": [
    "hoenn-route-102",
    "hoenn-route-104"
@@ -145,7 +145,7 @@
   "name": "Route 103",
   "type": "route",
   "region": "hoenn",
-  "description": "A route in the Hoenn region.",
+  "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 9-11.",
   "routeKey": "hoenn-route-103",
   "connections": [
    "hoenn-oldale-town",
@@ -171,7 +171,7 @@
   "name": "Route 104",
   "type": "route",
   "region": "hoenn",
-  "description": "A route in the Hoenn region.",
+  "description": "A route in the Hoenn region where Water and Flying Pokemon roam around Lv. 11-13.",
   "routeKey": "hoenn-route-104",
   "connections": [
    "hoenn-petalburg-city",
@@ -197,7 +197,7 @@
   "name": "Rustboro City",
   "type": "town",
   "region": "hoenn",
-  "description": "A town in the Hoenn region.",
+  "description": "A town in the Hoenn region, home to Roxanne's Rock Gym.",
   "connections": [
    "hoenn-route-104",
    "hoenn-route-115",
@@ -231,7 +231,7 @@
   "name": "Route 105",
   "type": "route",
   "region": "hoenn",
-  "description": "A route in the Hoenn region.",
+  "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 13-15.",
   "routeKey": "hoenn-route-105",
   "connections": [
    "hoenn-route-104",
@@ -259,7 +259,7 @@
   "name": "Route 106",
   "type": "route",
   "region": "hoenn",
-  "description": "A route in the Hoenn region.",
+  "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 15-17.",
   "routeKey": "hoenn-route-106",
   "connections": [
    "hoenn-route-105",
@@ -285,7 +285,7 @@
   "name": "Dewford Town",
   "type": "town",
   "region": "hoenn",
-  "description": "A town in the Hoenn region.",
+  "description": "A town in the Hoenn region, home to Brawly's Fighting Gym.",
   "connections": [
    "hoenn-route-106",
    "hoenn-route-107"
@@ -321,7 +321,7 @@
   "name": "Route 107",
   "type": "route",
   "region": "hoenn",
-  "description": "A route in the Hoenn region.",
+  "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 17-19.",
   "routeKey": "hoenn-route-107",
   "connections": [
    "hoenn-route-108",
@@ -350,7 +350,7 @@
   "name": "Route 108",
   "type": "route",
   "region": "hoenn",
-  "description": "A route in the Hoenn region.",
+  "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 19-21.",
   "routeKey": "hoenn-route-108",
   "connections": [
    "hoenn-route-107",
@@ -375,7 +375,7 @@
   "name": "Route 109",
   "type": "route",
   "region": "hoenn",
-  "description": "A route in the Hoenn region.",
+  "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 21-23.",
   "routeKey": "hoenn-route-109",
   "connections": [
    "hoenn-slateport-city",
@@ -438,7 +438,7 @@
   "name": "Route 110",
   "type": "route",
   "region": "hoenn",
-  "description": "A route in the Hoenn region.",
+  "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 24-26.",
   "routeKey": "hoenn-route-110",
   "connections": [
    "hoenn-slateport-city",
@@ -468,7 +468,7 @@
   "name": "Mauville City",
   "type": "town",
   "region": "hoenn",
-  "description": "A town in the Hoenn region.",
+  "description": "A town in the Hoenn region, home to Wattson's Electric Gym.",
   "connections": [
    "hoenn-route-110",
    "hoenn-route-111",
@@ -506,7 +506,7 @@
   "name": "Route 111",
   "type": "route",
   "region": "hoenn",
-  "description": "A route in the Hoenn region.",
+  "description": "A route in the Hoenn region where Water and Ground Pokemon roam around Lv. 26-28.",
   "routeKey": "hoenn-route-111",
   "connections": [
    "hoenn-mauville-city",
@@ -536,7 +536,7 @@
   "name": "Route 112",
   "type": "route",
   "region": "hoenn",
-  "description": "A route in the Hoenn region.",
+  "description": "A route in the Hoenn region where Fire and Ground Pokemon roam around Lv. 28-30.",
   "routeKey": "hoenn-route-112",
   "connections": [
    "hoenn-route-111",
@@ -568,7 +568,7 @@
   "name": "Lavaridge Town",
   "type": "town",
   "region": "hoenn",
-  "description": "A town in the Hoenn region.",
+  "description": "A town in the Hoenn region, home to Flannery's Fire Gym.",
   "connections": [
    "hoenn-route-112"
   ],
@@ -604,7 +604,7 @@
   "name": "Route 113",
   "type": "route",
   "region": "hoenn",
-  "description": "A route in the Hoenn region.",
+  "description": "A route in the Hoenn region where Normal and Ground Pokemon roam around Lv. 30-32.",
   "routeKey": "hoenn-route-113",
   "connections": [
    "hoenn-route-111",
@@ -685,7 +685,7 @@
   "name": "Route 114",
   "type": "route",
   "region": "hoenn",
-  "description": "A route in the Hoenn region.",
+  "description": "A route in the Hoenn region where Water and Ground Pokemon roam around Lv. 32-34.",
   "routeKey": "hoenn-route-114",
   "connections": [
    "hoenn-fallarbor-town",
@@ -710,7 +710,7 @@
   "name": "Route 115",
   "type": "route",
   "region": "hoenn",
-  "description": "A route in the Hoenn region.",
+  "description": "A route in the Hoenn region where Water and Flying Pokemon roam around Lv. 34-36.",
   "routeKey": "hoenn-route-115",
   "connections": [
    "hoenn-rustboro-city",
@@ -739,7 +739,7 @@
   "name": "Route 116",
   "type": "route",
   "region": "hoenn",
-  "description": "A route in the Hoenn region.",
+  "description": "A route in the Hoenn region where Normal and Bug Pokemon roam around Lv. 36-38.",
   "routeKey": "hoenn-route-116",
   "connections": [
    "hoenn-rustboro-city",
@@ -816,7 +816,7 @@
   "name": "Route 117",
   "type": "route",
   "region": "hoenn",
-  "description": "A route in the Hoenn region.",
+  "description": "A route in the Hoenn region where Water and Grass Pokemon roam around Lv. 38-40.",
   "routeKey": "hoenn-route-117",
   "connections": [
    "hoenn-mauville-city",
@@ -844,7 +844,7 @@
   "name": "Route 118",
   "type": "route",
   "region": "hoenn",
-  "description": "A route in the Hoenn region.",
+  "description": "A route in the Hoenn region where Water and Dark Pokemon roam around Lv. 40-42.",
   "routeKey": "hoenn-route-118",
   "connections": [
    "hoenn-route-119",
@@ -874,7 +874,7 @@
   "name": "Route 119",
   "type": "route",
   "region": "hoenn",
-  "description": "A route in the Hoenn region.",
+  "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 42-44.",
   "routeKey": "hoenn-route-119",
   "connections": [
    "hoenn-route-118",
@@ -899,7 +899,7 @@
   "name": "Fortree City",
   "type": "town",
   "region": "hoenn",
-  "description": "A town in the Hoenn region.",
+  "description": "A town in the Hoenn region, home to Winona's Flying Gym.",
   "connections": [
    "hoenn-route-119",
    "hoenn-route-120"
@@ -942,7 +942,7 @@
   "name": "Route 120",
   "type": "route",
   "region": "hoenn",
-  "description": "A route in the Hoenn region.",
+  "description": "A route in the Hoenn region where Water and Ground Pokemon roam around Lv. 44-46.",
   "routeKey": "hoenn-route-120",
   "connections": [
    "hoenn-route-121",
@@ -970,7 +970,7 @@
   "name": "Route 121",
   "type": "route",
   "region": "hoenn",
-  "description": "A route in the Hoenn region.",
+  "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 46-48.",
   "routeKey": "hoenn-route-121",
   "connections": [
    "hoenn-lilycove-city",
@@ -1039,7 +1039,7 @@
   "name": "Route 122",
   "type": "route",
   "region": "hoenn",
-  "description": "A route in the Hoenn region.",
+  "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 48-50.",
   "routeKey": "hoenn-route-122",
   "connections": [
    "hoenn-route-121",
@@ -1065,7 +1065,7 @@
   "name": "Route 123",
   "type": "route",
   "region": "hoenn",
-  "description": "A route in the Hoenn region.",
+  "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 50-52.",
   "routeKey": "hoenn-route-123",
   "connections": [
    "hoenn-route-118",
@@ -1093,7 +1093,7 @@
   "name": "Route 124",
   "type": "route",
   "region": "hoenn",
-  "description": "A route in the Hoenn region.",
+  "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 52-54.",
   "routeKey": "hoenn-route-124",
   "connections": [
    "hoenn-lilycove-city",
@@ -1120,7 +1120,7 @@
   "name": "Mossdeep City",
   "type": "town",
   "region": "hoenn",
-  "description": "A town in the Hoenn region.",
+  "description": "A town in the Hoenn region, home to Tate's Psychic Gym.",
   "connections": [
    "hoenn-route-125",
    "hoenn-route-127",
@@ -1165,7 +1165,7 @@
   "name": "Route 125",
   "type": "route",
   "region": "hoenn",
-  "description": "A route in the Hoenn region.",
+  "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 54-56.",
   "routeKey": "hoenn-route-125",
   "connections": [
    "hoenn-mossdeep-city"
@@ -1193,7 +1193,7 @@
   "name": "Route 126",
   "type": "route",
   "region": "hoenn",
-  "description": "A route in the Hoenn region.",
+  "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 57-59.",
   "routeKey": "hoenn-route-126",
   "connections": [
    "hoenn-sootopolis-city",
@@ -1222,7 +1222,7 @@
   "name": "Sootopolis City",
   "type": "town",
   "region": "hoenn",
-  "description": "A town in the Hoenn region.",
+  "description": "A town in the Hoenn region, home to Juan's Water Gym.",
   "connections": [
    "hoenn-route-126"
   ],
@@ -1266,7 +1266,7 @@
   "name": "Route 127",
   "type": "route",
   "region": "hoenn",
-  "description": "A route in the Hoenn region.",
+  "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 59-61.",
   "routeKey": "hoenn-route-127",
   "connections": [
    "hoenn-mossdeep-city",
@@ -1295,7 +1295,7 @@
   "name": "Route 128",
   "type": "route",
   "region": "hoenn",
-  "description": "A route in the Hoenn region.",
+  "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 61-63.",
   "routeKey": "hoenn-route-128",
   "connections": [
    "hoenn-ever-grande-city",
@@ -1367,7 +1367,7 @@
   "name": "Route 129",
   "type": "route",
   "region": "hoenn",
-  "description": "A route in the Hoenn region.",
+  "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 63-65.",
   "routeKey": "hoenn-route-129",
   "connections": [
    "hoenn-route-128",
@@ -1393,7 +1393,7 @@
   "name": "Route 130",
   "type": "route",
   "region": "hoenn",
-  "description": "A route in the Hoenn region.",
+  "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 65-67.",
   "routeKey": "hoenn-route-130",
   "connections": [
    "hoenn-route-129",
@@ -1418,7 +1418,7 @@
   "name": "Route 131",
   "type": "route",
   "region": "hoenn",
-  "description": "A route in the Hoenn region.",
+  "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 67-69.",
   "routeKey": "hoenn-route-131",
   "connections": [
    "hoenn-route-130",
@@ -1494,7 +1494,7 @@
   "name": "Route 132",
   "type": "route",
   "region": "hoenn",
-  "description": "A route in the Hoenn region.",
+  "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 69-71.",
   "routeKey": "hoenn-route-132",
   "connections": [
    "hoenn-pacifidlog-town",
@@ -1520,7 +1520,7 @@
   "name": "Route 133",
   "type": "route",
   "region": "hoenn",
-  "description": "A route in the Hoenn region.",
+  "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 71-73.",
   "routeKey": "hoenn-route-133",
   "connections": [
    "hoenn-route-132",
@@ -1545,7 +1545,7 @@
   "name": "Route 134",
   "type": "route",
   "region": "hoenn",
-  "description": "A route in the Hoenn region.",
+  "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 73-75.",
   "routeKey": "hoenn-route-134",
   "connections": [
    "hoenn-slateport-city",

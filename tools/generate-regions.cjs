@@ -696,38 +696,49 @@ const isFinalEvolution = (speciesKey) =>
 /**
  * Pick a themed team from a species pool. `types` biases the pool to matching
  * Pokemon when there are enough of them (so a Flying gym fields birds and a Bug
- * Catcher fields bugs); otherwise it falls back to the whole pool. Species that
- * would long since have evolved are dropped (a Lv.55 trainer shouldn't field a
- * Pidgey), high-level (rematch) teams prefer final evolutions, and mixed teams
- * get one strong Pokemon per type. Repeats are avoided until the pool is
- * exhausted.
+ * Catcher fields bugs); otherwise it falls back to the whole pool. Within that
+ * theme, species that would long since have evolved are dropped (a Lv.55
+ * trainer shouldn't field a Pidgey) and very weak final forms (Ditto) are
+ * avoided at high levels — but never at the cost of the theme, so a Dragon gym
+ * still fields dragons. High-level (rematch) teams prefer final evolutions, and
+ * mixed teams get one strong Pokemon per type. Repeats are avoided until the
+ * pool is exhausted.
  */
 const buildTeam = (list, types, size, baseLevel, step = 1, offset = 0) => {
   if (list.length === 0) return []
   const minimum = Math.min(size, 3)
-  // Keep only species that can't evolve yet at this level (item-only and
-  // form-only evolutions always stay). Fall back to the raw pool when that
-  // leaves too few candidates for the requested team.
-  const mature = list.filter((species) => {
-    const levels = (evolutionData[species.key] || [])
-      .map((evolution) => evolution.level)
-      .filter(Boolean)
-    return levels.length === 0 || Math.min(...levels) > baseLevel
-  })
-  if (mature.length >= minimum) list = mature
+  // Prefer levelled-appropriate, non-weak species, but never shrink a pool
+  // below `minimum` (so a sparse type keeps its members).
+  const refined = (pool) => {
+    const mature = pool.filter((species) => {
+      const levels = (evolutionData[species.key] || [])
+        .map((evolution) => evolution.level)
+        .filter(Boolean)
+      return levels.length === 0 || Math.min(...levels) > baseLevel
+    })
+    let result = mature.length >= minimum ? mature : pool
+    if (baseLevel >= 55) {
+      const strong = result.filter((species) => totalBaseStats(species) >= 380)
+      if (strong.length >= minimum) result = strong
+    }
+    return result
+  }
   const preferFinal = baseLevel >= 65,
     finalsOf = (pool) => (preferFinal ? pool.filter((species) => isFinalEvolution(species.key)) : pool)
-  let pool = list
+  let pool
   if (types?.length) {
     const typed = list.filter((species) => species.types?.some((type) => types.includes(type)))
     if (typed.length >= minimum) {
       const typedFinals = finalsOf(typed)
-      pool = typedFinals.length >= minimum ? typedFinals : typed
-    }
+      pool = refined(typedFinals.length >= minimum ? typedFinals : typed)
+    } else pool = refined(list)
   } else {
     // Mixed trainers: the strongest Pokemon of each primary type, so an Ace
     // Trainer or Champion fields a varied, fully-evolved team.
-    const strong = finalsOf(list).slice().sort((a, b) => totalBaseStats(b) - totalBaseStats(a)),
+    const candidates = refined(list),
+      strong = finalsOf(candidates)
+        .slice()
+        .sort((a, b) => totalBaseStats(b) - totalBaseStats(a)),
       distinct = [],
       seenTypes = new Set()
     for (const species of strong) {
@@ -737,7 +748,7 @@ const buildTeam = (list, types, size, baseLevel, step = 1, offset = 0) => {
         distinct.push(species)
       }
     }
-    pool = distinct.length >= size ? distinct : strong.length >= minimum ? strong : list
+    pool = distinct.length >= size ? distinct : strong.length >= minimum ? strong : candidates
   }
   const team = [],
     used = new Set()
@@ -1191,12 +1202,25 @@ for (const region of REGIONS) {
     if (gate) unlock.gymsRequired = [gate]
     if (isRoute) {
       encounterData[id] = routeEncounter[node]
+      const encounters = routeEncounter[node].encounters ?? [],
+        typeWeights = {}
+      for (const encounter of encounters)
+        for (const type of species[encounter.speciesKey]?.types ?? [])
+          typeWeights[type] = (typeWeights[type] ?? 0) + encounter.weight
+      const topTypes = Object.entries(typeWeights)
+        .sort((left, right) => right[1] - left[1])
+        .slice(0, 2)
+        .map(([type]) => type)
       mapData[id] = {
         id,
         name: routeEncounter[node]?.name ?? node,
         type: 'route',
         region: regionId,
-        description: `A route in the ${name} region.`,
+        description: encounters.length
+          ? `A route in the ${name} region where ${topTypes.join(' and ')} Pokemon roam around Lv. ${Math.min(
+              ...encounters.map((encounter) => encounter.minLevel)
+            )}-${Math.max(...encounters.map((encounter) => encounter.maxLevel))}.`
+          : `A route in the ${name} region.`,
         routeKey: id,
         connections: [...adjacency[node]].map((n) => locId(regionId, n)),
         unlock,
@@ -1210,12 +1234,18 @@ for (const region of REGIONS) {
         // Mart progression is spread across the region's towns, not all nodes.
         martIndex = townPosition.get(node) ?? 0,
         martT = townOrder.length <= 1 ? 0 : martIndex / (townOrder.length - 1)
+      const gymHere = gymPlacements.find((gym) => gym.townNode === node),
+        gymType = gymHere ? (GYM_TYPES[regionId]?.[gymHere.index] ?? [])[0] : null
       mapData[id] = {
         id,
         name: display[node] ?? node,
         type: 'town',
         region: regionId,
-        description: `A town in the ${name} region.`,
+        description: gymHere
+          ? `A town in the ${name} region, home to ${gymHere.leaderName}'s ${
+              gymType ? `${gymType} ` : ''
+            }Gym.`
+          : `A town in the ${name} region.`,
         connections: [...adjacency[node]].map((n) => locId(regionId, n)),
         unlock,
         unlockOrder: progressKey(node),
@@ -1573,6 +1603,39 @@ for (const pending of pendingRaids) {
         maxLevel: entry.level,
       })),
     }
+}
+
+// De-overlap hand-measured layouts: reference maps put adjacent towns and
+// routes (Route 10 beside Opelucid City) very close, and those fixed positions
+// bypass the collision pass. Relax any pair closer than MAP_MIN_DIST apart,
+// nudging both symmetrically and keeping them on-canvas.
+const MAP_MIN_DIST = 3
+for (const region of regions) {
+  const locations = Object.values(mapData).filter(
+    (location) => (location.region ?? 'kanto') === region.id
+  )
+  for (let pass = 0; pass < 500; pass++) {
+    let moved = false
+    for (let i = 0; i < locations.length; i++)
+      for (let j = i + 1; j < locations.length; j++) {
+        const a = locations[i].position,
+          b = locations[j].position
+        let dx = b.x - a.x,
+          dy = b.y - a.y,
+          distance = Math.hypot(dx, dy)
+        if (distance >= MAP_MIN_DIST) continue
+        if (distance < 1e-6) ((dx = 0.1), (dy = 0.1), (distance = Math.hypot(dx, dy)))
+        const push = (MAP_MIN_DIST - distance) / 2 + 0.01,
+          ux = (dx / distance) * push,
+          uy = (dy / distance) * push
+        a.x = Math.max(2, Math.min(98, a.x - ux))
+        a.y = Math.max(2, Math.min(98, a.y - uy))
+        b.x = Math.max(2, Math.min(98, b.x + ux))
+        b.y = Math.max(2, Math.min(98, b.y + uy))
+        moved = true
+      }
+    if (!moved) break
+  }
 }
 
 // tidy the graph: make every connection mutual, and hang any isolated location

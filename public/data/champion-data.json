@@ -66,27 +66,27 @@
   "spriteKey": "lance",
   "team": [
    {
-    "speciesKey": "pidgeot",
+    "speciesKey": "kingdra",
     "level": 70
    },
    {
-    "speciesKey": "raticate",
+    "speciesKey": "dragonair",
     "level": 71
    },
    {
-    "speciesKey": "fearow",
+    "speciesKey": "dragonite",
     "level": 72
    },
    {
-    "speciesKey": "arbok",
+    "speciesKey": "kingdra",
     "level": 73
    },
    {
-    "speciesKey": "raichu",
+    "speciesKey": "dragonair",
     "level": 74
    },
    {
-    "speciesKey": "sandslash",
+    "speciesKey": "dragonite",
     "level": 75
    }
   ],

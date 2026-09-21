@@ -31,7 +31,7 @@
   "name": "Route 201",
   "type": "route",
   "region": "sinnoh",
-  "description": "A route in the Sinnoh region.",
+  "description": "A route in the Sinnoh region where Normal and Flying Pokemon roam around Lv. 5-7.",
   "routeKey": "sinnoh-route-201",
   "connections": [
    "sinnoh-twinleaf-town",
@@ -87,7 +87,7 @@
   "name": "Route 202",
   "type": "route",
   "region": "sinnoh",
-  "description": "A route in the Sinnoh region.",
+  "description": "A route in the Sinnoh region where Normal and Electric Pokemon roam around Lv. 7-9.",
   "routeKey": "sinnoh-route-202",
   "connections": [
    "sinnoh-jubilife-city",
@@ -147,7 +147,7 @@
   "name": "Route 203",
   "type": "route",
   "region": "sinnoh",
-  "description": "A route in the Sinnoh region.",
+  "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 10-12.",
   "routeKey": "sinnoh-route-203",
   "connections": [
    "sinnoh-jubilife-city",
@@ -173,7 +173,7 @@
   "name": "Oreburgh City",
   "type": "town",
   "region": "sinnoh",
-  "description": "A town in the Sinnoh region.",
+  "description": "A town in the Sinnoh region, home to Roark's Rock Gym.",
   "connections": [
    "sinnoh-route-207",
    "sinnoh-route-203"
@@ -205,7 +205,7 @@
   "name": "Route 204",
   "type": "route",
   "region": "sinnoh",
-  "description": "A route in the Sinnoh region.",
+  "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 12-14.",
   "routeKey": "sinnoh-route-204",
   "connections": [
    "sinnoh-floaroma-town",
@@ -270,7 +270,7 @@
   "name": "Route 205",
   "type": "route",
   "region": "sinnoh",
-  "description": "A route in the Sinnoh region.",
+  "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 14-16.",
   "routeKey": "sinnoh-route-205",
   "connections": [
    "sinnoh-eterna-city",
@@ -296,7 +296,7 @@
   "name": "Eterna City",
   "type": "town",
   "region": "sinnoh",
-  "description": "A town in the Sinnoh region.",
+  "description": "A town in the Sinnoh region, home to Gardenia's Grass Gym.",
   "connections": [
    "sinnoh-route-206",
    "sinnoh-route-211",
@@ -341,7 +341,7 @@
   "name": "Route 206",
   "type": "route",
   "region": "sinnoh",
-  "description": "A route in the Sinnoh region.",
+  "description": "A route in the Sinnoh region where Ground and Flying Pokemon roam around Lv. 17-19.",
   "routeKey": "sinnoh-route-206",
   "connections": [
    "sinnoh-eterna-city",
@@ -370,7 +370,7 @@
   "name": "Route 207",
   "type": "route",
   "region": "sinnoh",
-  "description": "A route in the Sinnoh region.",
+  "description": "A route in the Sinnoh region where Fighting and Fire Pokemon roam around Lv. 19-21.",
   "routeKey": "sinnoh-route-207",
   "connections": [
    "sinnoh-route-206",
@@ -399,7 +399,7 @@
   "name": "Route 208",
   "type": "route",
   "region": "sinnoh",
-  "description": "A route in the Sinnoh region.",
+  "description": "A route in the Sinnoh region where Water and Ground Pokemon roam around Lv. 21-23.",
   "routeKey": "sinnoh-route-208",
   "connections": [
    "sinnoh-hearthome-city",
@@ -426,7 +426,7 @@
   "name": "Hearthome City",
   "type": "town",
   "region": "sinnoh",
-  "description": "A town in the Sinnoh region.",
+  "description": "A town in the Sinnoh region, home to Fantina's Ghost Gym.",
   "connections": [
    "sinnoh-route-208",
    "sinnoh-route-209",
@@ -463,7 +463,7 @@
   "name": "Route 209",
   "type": "route",
   "region": "sinnoh",
-  "description": "A route in the Sinnoh region.",
+  "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 24-26.",
   "routeKey": "sinnoh-route-209",
   "connections": [
    "sinnoh-solaceon-town",
@@ -531,7 +531,7 @@
   "name": "Route 210",
   "type": "route",
   "region": "sinnoh",
-  "description": "A route in the Sinnoh region.",
+  "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 26-28.",
   "routeKey": "sinnoh-route-210",
   "connections": [
    "sinnoh-solaceon-town",
@@ -600,7 +600,7 @@
   "name": "Route 211",
   "type": "route",
   "region": "sinnoh",
-  "description": "A route in the Sinnoh region.",
+  "description": "A route in the Sinnoh region where Fighting and Psychic Pokemon roam around Lv. 28-30.",
   "routeKey": "sinnoh-route-211",
   "connections": [
    "sinnoh-eterna-city",
@@ -631,7 +631,7 @@
   "name": "Route 212",
   "type": "route",
   "region": "sinnoh",
-  "description": "A route in the Sinnoh region.",
+  "description": "A route in the Sinnoh region where Water and Ground Pokemon roam around Lv. 31-33.",
   "routeKey": "sinnoh-route-212",
   "connections": [
    "sinnoh-pastoria-city",
@@ -656,7 +656,7 @@
   "name": "Pastoria City",
   "type": "town",
   "region": "sinnoh",
-  "description": "A town in the Sinnoh region.",
+  "description": "A town in the Sinnoh region, home to Crasher Wake's Water Gym.",
   "connections": [
    "sinnoh-route-213",
    "sinnoh-route-212",
@@ -706,7 +706,7 @@
   "name": "Route 213",
   "type": "route",
   "region": "sinnoh",
-  "description": "A route in the Sinnoh region.",
+  "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 33-35.",
   "routeKey": "sinnoh-route-213",
   "connections": [
    "sinnoh-pastoria-city",
@@ -733,7 +733,7 @@
   "name": "Route 214",
   "type": "route",
   "region": "sinnoh",
-  "description": "A route in the Sinnoh region.",
+  "description": "A route in the Sinnoh region where Water and Rock Pokemon roam around Lv. 35-37.",
   "routeKey": "sinnoh-route-214",
   "connections": [
    "sinnoh-veilstone-city",
@@ -759,7 +759,7 @@
   "name": "Veilstone City",
   "type": "town",
   "region": "sinnoh",
-  "description": "A town in the Sinnoh region.",
+  "description": "A town in the Sinnoh region, home to Maylene's Fighting Gym.",
   "connections": [
    "sinnoh-route-214",
    "sinnoh-route-215"
@@ -803,7 +803,7 @@
   "name": "Route 215",
   "type": "route",
   "region": "sinnoh",
-  "description": "A route in the Sinnoh region.",
+  "description": "A route in the Sinnoh region where Flying and Normal Pokemon roam around Lv. 38-40.",
   "routeKey": "sinnoh-route-215",
   "connections": [
    "sinnoh-route-210",
@@ -829,7 +829,7 @@
   "name": "Route 216",
   "type": "route",
   "region": "sinnoh",
-  "description": "A route in the Sinnoh region.",
+  "description": "A route in the Sinnoh region where Ice and Fighting Pokemon roam around Lv. 40-42.",
   "routeKey": "sinnoh-route-216",
   "connections": [
    "sinnoh-route-217",
@@ -857,7 +857,7 @@
   "name": "Route 217",
   "type": "route",
   "region": "sinnoh",
-  "description": "A route in the Sinnoh region.",
+  "description": "A route in the Sinnoh region where Ice and Fighting Pokemon roam around Lv. 43-45.",
   "routeKey": "sinnoh-route-217",
   "connections": [
    "sinnoh-route-216",
@@ -886,7 +886,7 @@
   "name": "Snowpoint City",
   "type": "town",
   "region": "sinnoh",
-  "description": "A town in the Sinnoh region.",
+  "description": "A town in the Sinnoh region, home to Candice's Ice Gym.",
   "connections": [
    "sinnoh-route-217"
   ],
@@ -940,7 +940,7 @@
   "name": "Route 218",
   "type": "route",
   "region": "sinnoh",
-  "description": "A route in the Sinnoh region.",
+  "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 45-47.",
   "routeKey": "sinnoh-route-218",
   "connections": [
    "sinnoh-canalave-city",
@@ -969,7 +969,7 @@
   "name": "Canalave City",
   "type": "town",
   "region": "sinnoh",
-  "description": "A town in the Sinnoh region.",
+  "description": "A town in the Sinnoh region, home to Byron's Steel Gym.",
   "connections": [
    "sinnoh-route-218"
   ],
@@ -1012,7 +1012,7 @@
   "name": "Route 219",
   "type": "route",
   "region": "sinnoh",
-  "description": "A route in the Sinnoh region.",
+  "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 47-49.",
   "routeKey": "sinnoh-route-219",
   "connections": [
    "sinnoh-sandgem-town",
@@ -1041,7 +1041,7 @@
   "name": "Route 220",
   "type": "route",
   "region": "sinnoh",
-  "description": "A route in the Sinnoh region.",
+  "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 50-52.",
   "routeKey": "sinnoh-sea-route-220",
   "connections": [
    "sinnoh-route-219",
@@ -1069,7 +1069,7 @@
   "name": "Route 221",
   "type": "route",
   "region": "sinnoh",
-  "description": "A route in the Sinnoh region.",
+  "description": "A route in the Sinnoh region where Water and Poison Pokemon roam around Lv. 52-54.",
   "routeKey": "sinnoh-route-221",
   "connections": [
    "sinnoh-sea-route-220"
@@ -1094,7 +1094,7 @@
   "name": "Route 222",
   "type": "route",
   "region": "sinnoh",
-  "description": "A route in the Sinnoh region.",
+  "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 54-56.",
   "routeKey": "sinnoh-route-222",
   "connections": [
    "sinnoh-sunyshore-city",
@@ -1125,7 +1125,7 @@
   "name": "Sunyshore City",
   "type": "town",
   "region": "sinnoh",
-  "description": "A town in the Sinnoh region.",
+  "description": "A town in the Sinnoh region, home to Volkner's Electric Gym.",
   "connections": [
    "sinnoh-sea-route-223",
    "sinnoh-route-222"
@@ -1170,7 +1170,7 @@
   "name": "Route 223",
   "type": "route",
   "region": "sinnoh",
-  "description": "A route in the Sinnoh region.",
+  "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 57-59.",
   "routeKey": "sinnoh-sea-route-223",
   "connections": [
    "sinnoh-sunyshore-city",
@@ -1198,7 +1198,7 @@
   "name": "Route 224",
   "type": "route",
   "region": "sinnoh",
-  "description": "A route in the Sinnoh region.",
+  "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 59-61.",
   "routeKey": "sinnoh-route-224",
   "connections": [
    "sinnoh-sea-route-223"
@@ -1223,7 +1223,7 @@
   "name": "Route 225",
   "type": "route",
   "region": "sinnoh",
-  "description": "A route in the Sinnoh region.",
+  "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 61-63.",
   "routeKey": "sinnoh-route-225",
   "connections": [
    "sinnoh-sea-route-230",
@@ -1252,7 +1252,7 @@
   "name": "Route 226",
   "type": "route",
   "region": "sinnoh",
-  "description": "A route in the Sinnoh region.",
+  "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 64-66.",
   "routeKey": "sinnoh-sea-route-226",
   "connections": [
    "sinnoh-route-227",
@@ -1283,7 +1283,7 @@
   "name": "Route 227",
   "type": "route",
   "region": "sinnoh",
-  "description": "A route in the Sinnoh region.",
+  "description": "A route in the Sinnoh region where Water and Ground Pokemon roam around Lv. 66-68.",
   "routeKey": "sinnoh-route-227",
   "connections": [
    "sinnoh-sea-route-226",
@@ -1318,7 +1318,7 @@
   "name": "Route 228",
   "type": "route",
   "region": "sinnoh",
-  "description": "A route in the Sinnoh region.",
+  "description": "A route in the Sinnoh region where Water and Ground Pokemon roam around Lv. 68-70.",
   "routeKey": "sinnoh-route-228",
   "connections": [
    "sinnoh-route-229",
@@ -1354,7 +1354,7 @@
   "name": "Route 229",
   "type": "route",
   "region": "sinnoh",
-  "description": "A route in the Sinnoh region.",
+  "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 71-73.",
   "routeKey": "sinnoh-route-229",
   "connections": [
    "sinnoh-route-228",
@@ -1386,7 +1386,7 @@
   "name": "Route 230",
   "type": "route",
   "region": "sinnoh",
-  "description": "A route in the Sinnoh region.",
+  "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 73-75.",
   "routeKey": "sinnoh-sea-route-230",
   "connections": [
    "sinnoh-route-229",

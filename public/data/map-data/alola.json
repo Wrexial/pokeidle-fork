@@ -4,7 +4,7 @@
   "name": "Iki Town",
   "type": "town",
   "region": "alola",
-  "description": "A town in the Alola region.",
+  "description": "A town in the Alola region, home to Ilima's Normal Gym.",
   "connections": [
    "alola-route-1--hauoli-outskirts",
    "alola-route-1",
@@ -16,8 +16,8 @@
   },
   "unlockOrder": 699999,
   "position": {
-   "x": 14.29,
-   "y": 29.04
+   "x": 14.117629166773412,
+   "y": 29.73718345283658
   },
   "mart": {
    "name": "Alola Mart",
@@ -33,7 +33,7 @@
   "name": "Route 1",
   "type": "route",
   "region": "alola",
-  "description": "A route in the Alola region.",
+  "description": "A route in the Alola region where Normal and Water Pokemon roam around Lv. 5-7.",
   "routeKey": "alola-route-1",
   "connections": [
    "alola-iki-town",
@@ -51,8 +51,8 @@
   },
   "unlockOrder": 700001,
   "position": {
-   "x": 16.07,
-   "y": 31.75
+   "x": 16.20901128510399,
+   "y": 31.893688369002064
   }
  },
  "alola-route-1--hauoli-outskirts": {
@@ -60,7 +60,7 @@
   "name": "Route 1 (Hauoli Outskirts)",
   "type": "route",
   "region": "alola",
-  "description": "A route in the Alola region.",
+  "description": "A route in the Alola region where Normal and Flying Pokemon roam around Lv. 9-11.",
   "routeKey": "alola-route-1--hauoli-outskirts",
   "connections": [
    "alola-iki-town",
@@ -86,7 +86,7 @@
   "name": "Route 2",
   "type": "route",
   "region": "alola",
-  "description": "A route in the Alola region.",
+  "description": "A route in the Alola region where Psychic and Poison Pokemon roam around Lv. 13-15.",
   "routeKey": "alola-route-2",
   "connections": [
    "alola-route-3",
@@ -104,8 +104,8 @@
   },
   "unlockOrder": 700002,
   "position": {
-   "x": 11.43,
-   "y": 30.96
+   "x": 11.375804161937078,
+   "y": 30.98534730750893
   }
  },
  "alola-hauoli-city": {
@@ -113,7 +113,7 @@
   "name": "Hauoli City",
   "type": "town",
   "region": "alola",
-  "description": "A town in the Alola region.",
+  "description": "A town in the Alola region, home to Lana's Water Gym.",
   "connections": [
    "alola-route-2",
    "alola-route-9"
@@ -145,7 +145,7 @@
   "name": "Po Town",
   "type": "town",
   "region": "alola",
-  "description": "A town in the Alola region.",
+  "description": "A town in the Alola region, home to Kiawe's Fire Gym.",
   "connections": [
    "alola-route-17",
    "alola-route-2"
@@ -165,7 +165,7 @@
   "unlockOrder": 700002.5,
   "position": {
    "x": 68.57,
-   "y": 48.32
+   "y": 48.615
   },
   "mart": {
    "name": "Alola Mart",
@@ -185,7 +185,7 @@
   "name": "Route 3",
   "type": "route",
   "region": "alola",
-  "description": "A route in the Alola region.",
+  "description": "A route in the Alola region where Flying and Normal Pokemon roam around Lv. 17-19.",
   "routeKey": "alola-route-3",
   "connections": [
    "alola-route-1",
@@ -213,8 +213,8 @@
   },
   "unlockOrder": 700003,
   "position": {
-   "x": 14.43,
-   "y": 27.61
+   "x": 14.517555386185519,
+   "y": 26.743780870652426
   }
  },
  "alola-paniola-town": {
@@ -222,7 +222,7 @@
   "name": "Paniola Town",
   "type": "town",
   "region": "alola",
-  "description": "A town in the Alola region.",
+  "description": "A town in the Alola region, home to Mallow's Grass Gym.",
   "connections": [
    "alola-route-4",
    "alola-route-6",
@@ -269,7 +269,7 @@
   "name": "Route 4",
   "type": "route",
   "region": "alola",
-  "description": "A route in the Alola region.",
+  "description": "A route in the Alola region where Normal and Flying Pokemon roam around Lv. 21-23.",
   "routeKey": "alola-route-4",
   "connections": [
    "alola-paniola-town",
@@ -306,7 +306,7 @@
   "name": "Heahea City",
   "type": "town",
   "region": "alola",
-  "description": "A town in the Alola region.",
+  "description": "A town in the Alola region, home to Sophocles's Electric Gym.",
   "connections": [
    "alola-route-4",
    "alola-route-6",
@@ -351,7 +351,7 @@
   "name": "Route 5",
   "type": "route",
   "region": "alola",
-  "description": "A route in the Alola region.",
+  "description": "A route in the Alola region where Bug and Flying Pokemon roam around Lv. 25-27.",
   "routeKey": "alola-route-5",
   "connections": [
    "alola-route-8",
@@ -379,7 +379,7 @@
   "name": "Route 6",
   "type": "route",
   "region": "alola",
-  "description": "A route in the Alola region.",
+  "description": "A route in the Alola region where Normal and Flying Pokemon roam around Lv. 29-31.",
   "routeKey": "alola-route-6",
   "connections": [
    "alola-heahea-city",
@@ -411,7 +411,7 @@
   "name": "Route 7",
   "type": "route",
   "region": "alola",
-  "description": "A route in the Alola region.",
+  "description": "A route in the Alola region where Water and Flying Pokemon roam around Lv. 33-35.",
   "routeKey": "alola-route-7",
   "connections": [
    "alola-route-8",
@@ -445,7 +445,7 @@
   "name": "Route 8",
   "type": "route",
   "region": "alola",
-  "description": "A route in the Alola region.",
+  "description": "A route in the Alola region where Water and Normal Pokemon roam around Lv. 37-39.",
   "routeKey": "alola-route-8",
   "connections": [
    "alola-route-7",
@@ -477,7 +477,7 @@
   "name": "Route 9",
   "type": "route",
   "region": "alola",
-  "description": "A route in the Alola region.",
+  "description": "A route in the Alola region where Water and Flying Pokemon roam around Lv. 41-43.",
   "routeKey": "alola-route-9",
   "connections": [
    "alola-konikoni-city",
@@ -509,7 +509,7 @@
   "name": "Konikoni City",
   "type": "town",
   "region": "alola",
-  "description": "A town in the Alola region.",
+  "description": "A town in the Alola region, home to Acerola's Ghost Gym.",
   "connections": [
    "alola-route-9",
    "alola-route-15"
@@ -554,7 +554,7 @@
   "name": "Route 10",
   "type": "route",
   "region": "alola",
-  "description": "A route in the Alola region.",
+  "description": "A route in the Alola region where Flying and Normal Pokemon roam around Lv. 45-47.",
   "routeKey": "alola-route-10",
   "connections": [
    "alola-malie-city",
@@ -582,7 +582,7 @@
   "name": "Malie City",
   "type": "town",
   "region": "alola",
-  "description": "A town in the Alola region.",
+  "description": "A town in the Alola region, home to Mina's Fairy Gym.",
   "connections": [
    "alola-route-10",
    "alola-route-11"
@@ -599,7 +599,7 @@
   "unlockOrder": 700010.5,
   "position": {
    "x": 82.5,
-   "y": 54.39
+   "y": 54.661640625
   },
   "mart": {
    "name": "Alola Mart",
@@ -627,7 +627,7 @@
   "name": "Route 11",
   "type": "route",
   "region": "alola",
-  "description": "A route in the Alola region.",
+  "description": "A route in the Alola region where Normal and Bug Pokemon roam around Lv. 49-51.",
   "routeKey": "alola-route-11",
   "connections": [
    "alola-malie-city",
@@ -648,7 +648,7 @@
   "unlockOrder": 700011,
   "position": {
    "x": 82.5,
-   "y": 52.54
+   "y": 51.641640625
   }
  },
  "alola-route-12": {
@@ -656,7 +656,7 @@
   "name": "Route 12",
   "type": "route",
   "region": "alola",
-  "description": "A route in the Alola region.",
+  "description": "A route in the Alola region where Ground and Electric Pokemon roam around Lv. 53-55.",
   "routeKey": "alola-route-12",
   "connections": [
    "alola-route-11",
@@ -677,7 +677,7 @@
   "unlockOrder": 700012,
   "position": {
    "x": 82.5,
-   "y": 57.04
+   "y": 57.66671875
   }
  },
  "alola-route-13": {
@@ -685,7 +685,7 @@
   "name": "Route 13",
   "type": "route",
   "region": "alola",
-  "description": "A route in the Alola region.",
+  "description": "A route in the Alola region where Water and Flying Pokemon roam around Lv. 57-59.",
   "routeKey": "alola-route-13",
   "connections": [
    "alola-route-12",
@@ -715,7 +715,7 @@
   "name": "Route 14",
   "type": "route",
   "region": "alola",
-  "description": "A route in the Alola region.",
+  "description": "A route in the Alola region where Water and Flying Pokemon roam around Lv. 61-63.",
   "routeKey": "alola-route-14",
   "connections": [
    "alola-route-13",
@@ -744,7 +744,7 @@
   "name": "Route 15",
   "type": "route",
   "region": "alola",
-  "description": "A route in the Alola region.",
+  "description": "A route in the Alola region where Water and Flying Pokemon roam around Lv. 65-67.",
   "routeKey": "alola-route-15",
   "connections": [
    "alola-route-16",
@@ -773,7 +773,7 @@
   "name": "Route 16",
   "type": "route",
   "region": "alola",
-  "description": "A route in the Alola region.",
+  "description": "A route in the Alola region where Water and Flying Pokemon roam around Lv. 69-71.",
   "routeKey": "alola-route-16",
   "connections": [
    "alola-route-15",
@@ -803,7 +803,7 @@
   "name": "Route 17",
   "type": "route",
   "region": "alola",
-  "description": "A route in the Alola region.",
+  "description": "A route in the Alola region where Normal and Dark Pokemon roam around Lv. 73-75.",
   "routeKey": "alola-route-17",
   "connections": [
    "alola-po-town",
@@ -826,7 +826,7 @@
   "unlockOrder": 700017,
   "position": {
    "x": 68.57,
-   "y": 45.89
+   "y": 45.595
   }
  },
  "alola-raid": {

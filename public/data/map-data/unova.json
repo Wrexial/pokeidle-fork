@@ -31,7 +31,7 @@
   "name": "Route 1",
   "type": "route",
   "region": "unova",
-  "description": "A route in the Unova region.",
+  "description": "A route in the Unova region where Normal and Water Pokemon roam around Lv. 5-7.",
   "routeKey": "unova-route-1",
   "connections": [
    "unova-nuvema-town",
@@ -123,7 +123,7 @@
   "name": "Route 2",
   "type": "route",
   "region": "unova",
-  "description": "A route in the Unova region.",
+  "description": "A route in the Unova region where Normal and Dark Pokemon roam around Lv. 8-10.",
   "routeKey": "unova-route-2",
   "connections": [
    "unova-accumula-town",
@@ -214,7 +214,7 @@
   "name": "Striaton City",
   "type": "town",
   "region": "unova",
-  "description": "A town in the Unova region.",
+  "description": "A town in the Unova region, home to Cilan's Grass Gym.",
   "connections": [
    "unova-route-3",
    "unova-route-2",
@@ -252,7 +252,7 @@
   "name": "Route 3",
   "type": "route",
   "region": "unova",
-  "description": "A route in the Unova region.",
+  "description": "A route in the Unova region where Normal and Water Pokemon roam around Lv. 11-13.",
   "routeKey": "unova-route-3",
   "connections": [
    "unova-striaton-city",
@@ -280,7 +280,7 @@
   "name": "Nacrene City",
   "type": "town",
   "region": "unova",
-  "description": "A town in the Unova region.",
+  "description": "A town in the Unova region, home to Lenora's Normal Gym.",
   "connections": [
    "unova-route-3",
    "unova-castelia-city"
@@ -323,7 +323,7 @@
   "name": "Castelia City",
   "type": "town",
   "region": "unova",
-  "description": "A town in the Unova region.",
+  "description": "A town in the Unova region, home to Burgh's Bug Gym.",
   "connections": [
    "unova-route-4",
    "unova-nacrene-city"
@@ -362,7 +362,7 @@
   "name": "Route 4",
   "type": "route",
   "region": "unova",
-  "description": "A route in the Unova region.",
+  "description": "A route in the Unova region where Water and Poison Pokemon roam around Lv. 14-16.",
   "routeKey": "unova-route-4",
   "connections": [
    "unova-castelia-city",
@@ -383,7 +383,7 @@
   "unlockOrder": 500004,
   "position": {
    "x": 51.15,
-   "y": 61.81
+   "y": 61.07
   }
  },
  "unova-nimbasa-city": {
@@ -391,7 +391,7 @@
   "name": "Nimbasa City",
   "type": "town",
   "region": "unova",
-  "description": "A town in the Unova region.",
+  "description": "A town in the Unova region, home to Elesa's Electric Gym.",
   "connections": [
    "unova-route-4",
    "unova-route-16",
@@ -435,7 +435,7 @@
   "name": "Route 5",
   "type": "route",
   "region": "unova",
-  "description": "A route in the Unova region.",
+  "description": "A route in the Unova region where Normal and Psychic Pokemon roam around Lv. 17-19.",
   "routeKey": "unova-route-5",
   "connections": [
    "unova-nimbasa-city",
@@ -464,7 +464,7 @@
   "name": "Driftveil City",
   "type": "town",
   "region": "unova",
-  "description": "A town in the Unova region.",
+  "description": "A town in the Unova region, home to Clay's Ground Gym.",
   "connections": [
    "unova-route-6",
    "unova-route-5",
@@ -552,7 +552,7 @@
   "name": "Route 6",
   "type": "route",
   "region": "unova",
-  "description": "A route in the Unova region.",
+  "description": "A route in the Unova region where Water and Normal Pokemon roam around Lv. 20-22.",
   "routeKey": "unova-route-6",
   "connections": [
    "unova-driftveil-city",
@@ -580,7 +580,7 @@
   "name": "Mistralton City",
   "type": "town",
   "region": "unova",
-  "description": "A town in the Unova region.",
+  "description": "A town in the Unova region, home to Skyla's Flying Gym.",
   "connections": [
    "unova-route-7",
    "unova-route-6"
@@ -630,7 +630,7 @@
   "name": "Route 7",
   "type": "route",
   "region": "unova",
-  "description": "A route in the Unova region.",
+  "description": "A route in the Unova region where Normal and Flying Pokemon roam around Lv. 23-25.",
   "routeKey": "unova-route-7",
   "connections": [
    "unova-mistralton-city",
@@ -658,7 +658,7 @@
   "name": "Icirrus City",
   "type": "town",
   "region": "unova",
-  "description": "A town in the Unova region.",
+  "description": "A town in the Unova region, home to Brycen's Ice Gym.",
   "connections": [
    "unova-route-8",
    "unova-route-7"
@@ -674,8 +674,8 @@
   },
   "unlockOrder": 500007.5,
   "position": {
-   "x": 28.46,
-   "y": 33.73
+   "x": 28.286421955886244,
+   "y": 33.85851451343038
   },
   "mart": {
    "name": "Unova Mart",
@@ -701,7 +701,7 @@
   "name": "Route 8",
   "type": "route",
   "region": "unova",
-  "description": "A route in the Unova region.",
+  "description": "A route in the Unova region where Ground and Water Pokemon roam around Lv. 26-28.",
   "routeKey": "unova-route-8",
   "connections": [
    "unova-icirrus-city",
@@ -720,8 +720,8 @@
   },
   "unlockOrder": 500008,
   "position": {
-   "x": 30.54,
-   "y": 32.19
+   "x": 30.713578044113756,
+   "y": 32.061485486569616
   }
  },
  "unova-route-9": {
@@ -729,7 +729,7 @@
   "name": "Route 9",
   "type": "route",
   "region": "unova",
-  "description": "A route in the Unova region.",
+  "description": "A route in the Unova region where Normal and Psychic Pokemon roam around Lv. 29-31.",
   "routeKey": "unova-route-9",
   "connections": [
    "unova-opelucid-city",
@@ -761,7 +761,7 @@
   "name": "Opelucid City",
   "type": "town",
   "region": "unova",
-  "description": "A town in the Unova region.",
+  "description": "A town in the Unova region, home to Drayden's Dragon Gym.",
   "connections": [
    "unova-route-10",
    "unova-route-11",
@@ -786,8 +786,8 @@
   },
   "unlockOrder": 500009.5,
   "position": {
-   "x": 51.15,
-   "y": 33.73
+   "x": 50.04433748589046,
+   "y": 33.077942619884105
   },
   "mart": {
    "name": "Unova Mart",
@@ -813,7 +813,7 @@
   "name": "Route 10",
   "type": "route",
   "region": "unova",
-  "description": "A route in the Unova region.",
+  "description": "A route in the Unova region where Normal and Flying Pokemon roam around Lv. 32-34.",
   "routeKey": "unova-route-10",
   "connections": [
    "unova-opelucid-city"
@@ -832,8 +832,8 @@
   },
   "unlockOrder": 500010,
   "position": {
-   "x": 51.54,
-   "y": 33.96
+   "x": 52.64566251410954,
+   "y": 34.61205738011589
   }
  },
  "unova-route-11": {
@@ -841,7 +841,7 @@
   "name": "Route 11",
   "type": "route",
   "region": "unova",
-  "description": "A route in the Unova region.",
+  "description": "A route in the Unova region where Water and Normal Pokemon roam around Lv. 35-37.",
   "routeKey": "unova-route-11",
   "connections": [
    "unova-opelucid-city",
@@ -869,7 +869,7 @@
   "name": "Route 12",
   "type": "route",
   "region": "unova",
-  "description": "A route in the Unova region.",
+  "description": "A route in the Unova region where Bug and Grass Pokemon roam around Lv. 38-40.",
   "routeKey": "unova-route-12",
   "connections": [
    "unova-lacunosa-town",
@@ -954,7 +954,7 @@
   "name": "Route 13",
   "type": "route",
   "region": "unova",
-  "description": "A route in the Unova region.",
+  "description": "A route in the Unova region where Water and Flying Pokemon roam around Lv. 40-42.",
   "routeKey": "unova-route-13",
   "connections": [
    "unova-undella-town",
@@ -1028,7 +1028,7 @@
   "name": "Route 14",
   "type": "route",
   "region": "unova",
-  "description": "A route in the Unova region.",
+  "description": "A route in the Unova region where Water and Normal Pokemon roam around Lv. 43-45.",
   "routeKey": "unova-route-14",
   "connections": [
    "unova-undella-town",
@@ -1158,8 +1158,8 @@
   },
   "unlockOrder": 500014.5,
   "position": {
-   "x": 73.85,
-   "y": 52.58
+   "x": 74.02102409411575,
+   "y": 52.46440038082916
   },
   "mart": {
    "name": "Unova Mart",
@@ -1187,7 +1187,7 @@
   "name": "Route 15",
   "type": "route",
   "region": "unova",
-  "description": "A route in the Unova region.",
+  "description": "A route in the Unova region where Ground and Normal Pokemon roam around Lv. 46-48.",
   "routeKey": "unova-route-15",
   "connections": [
    "unova-black-city",
@@ -1204,8 +1204,8 @@
   },
   "unlockOrder": 500015,
   "position": {
-   "x": 71.69,
-   "y": 54.04
+   "x": 71.51897590588425,
+   "y": 54.155599619170836
   }
  },
  "unova-route-16": {
@@ -1213,7 +1213,7 @@
   "name": "Route 16",
   "type": "route",
   "region": "unova",
-  "description": "A route in the Unova region.",
+  "description": "A route in the Unova region where Normal and Psychic Pokemon roam around Lv. 49-51.",
   "routeKey": "unova-route-16",
   "connections": [
    "unova-nimbasa-city",
@@ -1241,7 +1241,7 @@
   "name": "Route 17",
   "type": "route",
   "region": "unova",
-  "description": "A route in the Unova region.",
+  "description": "A route in the Unova region where Water and Poison Pokemon roam around Lv. 52-54.",
   "routeKey": "unova-route-17",
   "connections": [
    "unova-route-1",
@@ -1270,7 +1270,7 @@
   "name": "Route 18",
   "type": "route",
   "region": "unova",
-  "description": "A route in the Unova region.",
+  "description": "A route in the Unova region where Water and Fighting Pokemon roam around Lv. 55-57.",
   "routeKey": "unova-route-18",
   "connections": [
    "unova-route-17",
@@ -1295,7 +1295,7 @@
   "name": "Route Gate",
   "type": "route",
   "region": "unova",
-  "description": "A route in the Unova region.",
+  "description": "A route in the Unova region where Electric and Psychic Pokemon roam around Lv. 58-60.",
   "routeKey": "unova-route-gate",
   "connections": [
    "unova-route-18"
@@ -1318,7 +1318,7 @@
   "unlockOrder": 500018.5,
   "position": {
    "x": 51.15,
-   "y": 63.35
+   "y": 64.09
   }
  },
  "unova-route-19": {
@@ -1326,7 +1326,7 @@
   "name": "Route 19",
   "type": "route",
   "region": "unova",
-  "description": "A route in the Unova region.",
+  "description": "A route in the Unova region where Normal and Water Pokemon roam around Lv. 61-63.",
   "routeKey": "unova-route-19",
   "connections": [
    "unova-aspertia-city",
@@ -1355,7 +1355,7 @@
   "name": "Route 20",
   "type": "route",
   "region": "unova",
-  "description": "A route in the Unova region.",
+  "description": "A route in the Unova region where Normal and Water Pokemon roam around Lv. 64-66.",
   "routeKey": "unova-route-20",
   "connections": [
    "unova-virbank-city",
@@ -1384,7 +1384,7 @@
   "name": "Route 21",
   "type": "route",
   "region": "unova",
-  "description": "A route in the Unova region.",
+  "description": "A route in the Unova region where Water and Flying Pokemon roam around Lv. 67-69.",
   "routeKey": "unova-route-21",
   "connections": [
    "unova-humilau-city",
@@ -1413,7 +1413,7 @@
   "name": "Route 22",
   "type": "route",
   "region": "unova",
-  "description": "A route in the Unova region.",
+  "description": "A route in the Unova region where Water and Fairy Pokemon roam around Lv. 70-72.",
   "routeKey": "unova-route-22",
   "connections": [
    "unova-humilau-city",
@@ -1440,7 +1440,7 @@
   "name": "Route 23",
   "type": "route",
   "region": "unova",
-  "description": "A route in the Unova region.",
+  "description": "A route in the Unova region where Water and Normal Pokemon roam around Lv. 73-75.",
   "routeKey": "unova-route-23",
   "connections": [
    "unova-route-22",

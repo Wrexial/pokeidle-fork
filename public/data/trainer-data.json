@@ -1358,11 +1358,11 @@
      "level": 65
     },
     {
-     "speciesKey": "farfetchd",
+     "speciesKey": "dodrio",
      "level": 66
     },
     {
-     "speciesKey": "dodrio",
+     "speciesKey": "kangaskhan",
      "level": 67
     }
    ]
@@ -2071,15 +2071,15 @@
      "level": 65
     },
     {
-     "speciesKey": "farfetchd",
+     "speciesKey": "dodrio",
      "level": 66
     },
     {
-     "speciesKey": "dodrio",
+     "speciesKey": "mrMime",
      "level": 67
     },
     {
-     "speciesKey": "mrMime",
+     "speciesKey": "tauros",
      "level": 68
     }
    ]
@@ -4501,15 +4501,15 @@
      "level": 71
     },
     {
-     "speciesKey": "farfetchd",
+     "speciesKey": "dodrio",
      "level": 72
     },
     {
-     "speciesKey": "dodrio",
+     "speciesKey": "mrMime",
      "level": 73
     },
     {
-     "speciesKey": "mrMime",
+     "speciesKey": "tauros",
      "level": 74
     }
    ]
@@ -5399,19 +5399,19 @@
    "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "farfetchd",
+     "speciesKey": "dodrio",
      "level": 72
     },
     {
-     "speciesKey": "dodrio",
+     "speciesKey": "tauros",
      "level": 73
     },
     {
-     "speciesKey": "tauros",
+     "speciesKey": "snorlax",
      "level": 74
     },
     {
-     "speciesKey": "ditto",
+     "speciesKey": "furret",
      "level": 75
     }
    ]
@@ -5991,15 +5991,15 @@
      "level": 67
     },
     {
-     "speciesKey": "farfetchd",
+     "speciesKey": "dodrio",
      "level": 68
     },
     {
-     "speciesKey": "dodrio",
+     "speciesKey": "mrMime",
      "level": 69
     },
     {
-     "speciesKey": "mrMime",
+     "speciesKey": "tauros",
      "level": 70
     }
    ]

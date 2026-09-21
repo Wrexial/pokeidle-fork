@@ -444,19 +444,19 @@
     "level": 81
    },
    {
-    "speciesKey": "farfetchd",
+    "speciesKey": "dodrio",
     "level": 82
    },
    {
-    "speciesKey": "dodrio",
+    "speciesKey": "noctowl",
     "level": 83
    },
    {
-    "speciesKey": "noctowl",
+    "speciesKey": "ledian",
     "level": 84
    },
    {
-    "speciesKey": "ledian",
+    "speciesKey": "crobat",
     "level": 85
    }
   ]
@@ -536,27 +536,27 @@
   ],
   "rematchTeam": [
    {
-    "speciesKey": "farfetchd",
+    "speciesKey": "dodrio",
     "level": 80
    },
    {
-    "speciesKey": "dodrio",
+    "speciesKey": "tauros",
     "level": 81
    },
    {
-    "speciesKey": "tauros",
+    "speciesKey": "snorlax",
     "level": 82
    },
    {
-    "speciesKey": "ditto",
+    "speciesKey": "furret",
     "level": 83
    },
    {
-    "speciesKey": "snorlax",
+    "speciesKey": "noctowl",
     "level": 84
    },
    {
-    "speciesKey": "furret",
+    "speciesKey": "miltank",
     "level": 85
    }
   ]
@@ -586,27 +586,27 @@
   ],
   "rematchTeam": [
    {
-    "speciesKey": "cofagrigus",
+    "speciesKey": "jellicent",
     "level": 80
    },
    {
-    "speciesKey": "jellicent",
+    "speciesKey": "chandelure",
     "level": 81
    },
    {
-    "speciesKey": "chandelure",
+    "speciesKey": "golurk",
     "level": 82
    },
    {
-    "speciesKey": "golurk",
+    "speciesKey": "trevenant",
     "level": 83
    },
    {
-    "speciesKey": "trevenant",
+    "speciesKey": "gourgeist",
     "level": 84
    },
    {
-    "speciesKey": "gourgeist",
+    "speciesKey": "palossand",
     "level": 85
    }
   ]
@@ -722,11 +722,11 @@
   "spriteKey": "pryce",
   "team": [
    {
-    "speciesKey": "lapras",
+    "speciesKey": "jynx",
     "level": 57
    },
    {
-    "speciesKey": "delibird",
+    "speciesKey": "lapras",
     "level": 58
    },
    {
@@ -736,27 +736,27 @@
   ],
   "rematchTeam": [
    {
-    "speciesKey": "cryogonal",
+    "speciesKey": "aurorus",
     "level": 80
    },
    {
-    "speciesKey": "aurorus",
+    "speciesKey": "avalugg",
     "level": 81
    },
    {
-    "speciesKey": "avalugg",
+    "speciesKey": "crabominable",
     "level": 82
    },
    {
-    "speciesKey": "crabominable",
+    "speciesKey": "mr. rime",
     "level": 83
    },
    {
-    "speciesKey": "mr. rime",
+    "speciesKey": "frosmoth",
     "level": 84
    },
    {
-    "speciesKey": "frosmoth",
+    "speciesKey": "eiscue",
     "level": 85
    }
   ]
@@ -772,15 +772,15 @@
   "spriteKey": "clair",
   "team": [
    {
-    "speciesKey": "alakazam",
+    "speciesKey": "dragonair",
     "level": 64
    },
    {
-    "speciesKey": "machamp",
+    "speciesKey": "dragonite",
     "level": 65
    },
    {
-    "speciesKey": "victreebel",
+    "speciesKey": "kingdra",
     "level": 66
    }
   ],
@@ -1036,27 +1036,27 @@
   ],
   "rematchTeam": [
    {
-    "speciesKey": "snorlax",
+    "speciesKey": "noctowl",
     "level": 80
    },
    {
-    "speciesKey": "furret",
+    "speciesKey": "miltank",
     "level": 81
    },
    {
-    "speciesKey": "noctowl",
+    "speciesKey": "blissey",
     "level": 82
    },
    {
-    "speciesKey": "smeargle",
+    "speciesKey": "linoone",
     "level": 83
    },
    {
-    "speciesKey": "miltank",
+    "speciesKey": "swellow",
     "level": 84
    },
    {
-    "speciesKey": "blissey",
+    "speciesKey": "slaking",
     "level": 85
    }
   ]
@@ -1086,27 +1086,27 @@
   ],
   "rematchTeam": [
    {
-    "speciesKey": "mantine",
+    "speciesKey": "beautifly",
     "level": 80
    },
    {
-    "speciesKey": "skarmory",
+    "speciesKey": "swellow",
     "level": 81
    },
    {
-    "speciesKey": "beautifly",
+    "speciesKey": "pelipper",
     "level": 82
    },
    {
-    "speciesKey": "swellow",
+    "speciesKey": "masquerain",
     "level": 83
    },
    {
-    "speciesKey": "pelipper",
+    "speciesKey": "ninjask",
     "level": 84
    },
    {
-    "speciesKey": "masquerain",
+    "speciesKey": "tropius",
     "level": 85
    }
   ]
@@ -1122,41 +1122,41 @@
   "spriteKey": "tate",
   "team": [
    {
-    "speciesKey": "chimecho",
+    "speciesKey": "alakazam",
     "level": 57
    },
    {
-    "speciesKey": "alakazam",
+    "speciesKey": "slowbro",
     "level": 58
    },
    {
-    "speciesKey": "slowbro",
+    "speciesKey": "hypno",
     "level": 59
    }
   ],
   "rematchTeam": [
    {
-    "speciesKey": "solrock",
+    "speciesKey": "claydol",
     "level": 80
    },
    {
-    "speciesKey": "claydol",
+    "speciesKey": "chimecho",
     "level": 81
    },
    {
-    "speciesKey": "chimecho",
+    "speciesKey": "bronzong",
     "level": 82
    },
    {
-    "speciesKey": "bronzong",
+    "speciesKey": "musharna",
     "level": 83
    },
    {
-    "speciesKey": "musharna",
+    "speciesKey": "swoobat",
     "level": 84
    },
    {
-    "speciesKey": "swoobat",
+    "speciesKey": "sigilyph",
     "level": 85
    }
   ]
@@ -1436,27 +1436,27 @@
   ],
   "rematchTeam": [
    {
-    "speciesKey": "chandelure",
+    "speciesKey": "golurk",
     "level": 80
    },
    {
-    "speciesKey": "golurk",
+    "speciesKey": "trevenant",
     "level": 81
    },
    {
-    "speciesKey": "trevenant",
+    "speciesKey": "gourgeist",
     "level": 82
    },
    {
-    "speciesKey": "gourgeist",
+    "speciesKey": "palossand",
     "level": 83
    },
    {
-    "speciesKey": "palossand",
+    "speciesKey": "mimikyu",
     "level": 84
    },
    {
-    "speciesKey": "mimikyu",
+    "speciesKey": "dhelmise",
     "level": 85
    }
   ]
@@ -1522,41 +1522,41 @@
   "spriteKey": "candice",
   "team": [
    {
-    "speciesKey": "walrein",
+    "speciesKey": "weavile",
     "level": 57
    },
    {
-    "speciesKey": "abomasnow",
+    "speciesKey": "glaceon",
     "level": 58
    },
    {
-    "speciesKey": "weavile",
+    "speciesKey": "mamoswine",
     "level": 59
    }
   ],
   "rematchTeam": [
    {
-    "speciesKey": "cryogonal",
+    "speciesKey": "aurorus",
     "level": 80
    },
    {
-    "speciesKey": "aurorus",
+    "speciesKey": "avalugg",
     "level": 81
    },
    {
-    "speciesKey": "avalugg",
+    "speciesKey": "crabominable",
     "level": 82
    },
    {
-    "speciesKey": "crabominable",
+    "speciesKey": "mr. rime",
     "level": 83
    },
    {
-    "speciesKey": "mr. rime",
+    "speciesKey": "frosmoth",
     "level": 84
    },
    {
-    "speciesKey": "frosmoth",
+    "speciesKey": "eiscue",
     "level": 85
    }
   ]
@@ -1694,19 +1694,19 @@
     "level": 81
    },
    {
-    "speciesKey": "farfetchd",
+    "speciesKey": "dodrio",
     "level": 82
    },
    {
-    "speciesKey": "dodrio",
+    "speciesKey": "tauros",
     "level": 83
    },
    {
-    "speciesKey": "tauros",
+    "speciesKey": "snorlax",
     "level": 84
    },
    {
-    "speciesKey": "ditto",
+    "speciesKey": "furret",
     "level": 85
    }
   ]
@@ -1886,27 +1886,27 @@
   ],
   "rematchTeam": [
    {
-    "speciesKey": "mantine",
+    "speciesKey": "beautifly",
     "level": 80
    },
    {
-    "speciesKey": "skarmory",
+    "speciesKey": "swellow",
     "level": 81
    },
    {
-    "speciesKey": "beautifly",
+    "speciesKey": "pelipper",
     "level": 82
    },
    {
-    "speciesKey": "swellow",
+    "speciesKey": "masquerain",
     "level": 83
    },
    {
-    "speciesKey": "pelipper",
+    "speciesKey": "ninjask",
     "level": 84
    },
    {
-    "speciesKey": "masquerain",
+    "speciesKey": "tropius",
     "level": 85
    }
   ]
@@ -1922,41 +1922,41 @@
   "spriteKey": "brycen",
   "team": [
    {
-    "speciesKey": "lapras",
+    "speciesKey": "glalie",
     "level": 57
    },
    {
-    "speciesKey": "delibird",
+    "speciesKey": "walrein",
     "level": 58
    },
    {
-    "speciesKey": "glalie",
+    "speciesKey": "abomasnow",
     "level": 59
    }
   ],
   "rematchTeam": [
    {
-    "speciesKey": "cryogonal",
+    "speciesKey": "aurorus",
     "level": 80
    },
    {
-    "speciesKey": "aurorus",
+    "speciesKey": "avalugg",
     "level": 81
    },
    {
-    "speciesKey": "avalugg",
+    "speciesKey": "crabominable",
     "level": 82
    },
    {
-    "speciesKey": "crabominable",
+    "speciesKey": "mr. rime",
     "level": 83
    },
    {
-    "speciesKey": "mr. rime",
+    "speciesKey": "frosmoth",
     "level": 84
    },
    {
-    "speciesKey": "frosmoth",
+    "speciesKey": "eiscue",
     "level": 85
    }
   ]
@@ -2322,41 +2322,41 @@
   "spriteKey": "olympia",
   "team": [
    {
-    "speciesKey": "chimecho",
+    "speciesKey": "bronzong",
     "level": 57
    },
    {
-    "speciesKey": "bronzong",
+    "speciesKey": "gallade",
     "level": 58
    },
    {
-    "speciesKey": "gallade",
+    "speciesKey": "musharna",
     "level": 59
    }
   ],
   "rematchTeam": [
    {
-    "speciesKey": "solrock",
+    "speciesKey": "claydol",
     "level": 80
    },
    {
-    "speciesKey": "claydol",
+    "speciesKey": "chimecho",
     "level": 81
    },
    {
-    "speciesKey": "chimecho",
+    "speciesKey": "bronzong",
     "level": 82
    },
    {
-    "speciesKey": "bronzong",
+    "speciesKey": "musharna",
     "level": 83
    },
    {
-    "speciesKey": "musharna",
+    "speciesKey": "swoobat",
     "level": 84
    },
    {
-    "speciesKey": "swoobat",
+    "speciesKey": "sigilyph",
     "level": 85
    }
   ]
@@ -2372,41 +2372,41 @@
   "spriteKey": "wulfric",
   "team": [
    {
-    "speciesKey": "delibird",
+    "speciesKey": "walrein",
     "level": 64
    },
    {
-    "speciesKey": "glalie",
+    "speciesKey": "abomasnow",
     "level": 65
    },
    {
-    "speciesKey": "walrein",
+    "speciesKey": "weavile",
     "level": 66
    }
   ],
   "rematchTeam": [
    {
-    "speciesKey": "avalugg",
+    "speciesKey": "crabominable",
     "level": 80
    },
    {
-    "speciesKey": "crabominable",
+    "speciesKey": "mr. rime",
     "level": 81
    },
    {
-    "speciesKey": "mr. rime",
+    "speciesKey": "frosmoth",
     "level": 82
    },
    {
-    "speciesKey": "frosmoth",
+    "speciesKey": "eiscue",
     "level": 83
    },
    {
-    "speciesKey": "eiscue",
+    "speciesKey": "arctozolt",
     "level": 84
    },
    {
-    "speciesKey": "arctozolt",
+    "speciesKey": "arctovish",
     "level": 85
    }
   ]
@@ -2452,11 +2452,11 @@
     "level": 83
    },
    {
-    "speciesKey": "farfetchd",
+    "speciesKey": "dodrio",
     "level": 84
    },
    {
-    "speciesKey": "dodrio",
+    "speciesKey": "tauros",
     "level": 85
    }
   ]
@@ -2686,27 +2686,27 @@
   ],
   "rematchTeam": [
    {
-    "speciesKey": "trevenant",
+    "speciesKey": "gourgeist",
     "level": 80
    },
    {
-    "speciesKey": "gourgeist",
+    "speciesKey": "palossand",
     "level": 81
    },
    {
-    "speciesKey": "palossand",
+    "speciesKey": "mimikyu",
     "level": 82
    },
    {
-    "speciesKey": "mimikyu",
+    "speciesKey": "dhelmise",
     "level": 83
    },
    {
-    "speciesKey": "dhelmise",
+    "speciesKey": "polteageist",
     "level": 84
    },
    {
-    "speciesKey": "polteageist",
+    "speciesKey": "cursola",
     "level": 85
    }
   ]
@@ -3436,27 +3436,27 @@
   ],
   "rematchTeam": [
    {
-    "speciesKey": "snorlax",
+    "speciesKey": "noctowl",
     "level": 80
    },
    {
-    "speciesKey": "furret",
+    "speciesKey": "miltank",
     "level": 81
    },
    {
-    "speciesKey": "noctowl",
+    "speciesKey": "blissey",
     "level": 82
    },
    {
-    "speciesKey": "smeargle",
+    "speciesKey": "linoone",
     "level": 83
    },
    {
-    "speciesKey": "miltank",
+    "speciesKey": "swellow",
     "level": 84
    },
    {
-    "speciesKey": "blissey",
+    "speciesKey": "slaking",
     "level": 85
    }
   ]
@@ -3486,27 +3486,27 @@
   ],
   "rematchTeam": [
    {
-    "speciesKey": "trevenant",
+    "speciesKey": "gourgeist",
     "level": 80
    },
    {
-    "speciesKey": "gourgeist",
+    "speciesKey": "palossand",
     "level": 81
    },
    {
-    "speciesKey": "palossand",
+    "speciesKey": "mimikyu",
     "level": 82
    },
    {
-    "speciesKey": "mimikyu",
+    "speciesKey": "dhelmise",
     "level": 83
    },
    {
-    "speciesKey": "dhelmise",
+    "speciesKey": "polteageist",
     "level": 84
    },
    {
-    "speciesKey": "polteageist",
+    "speciesKey": "cursola",
     "level": 85
    }
   ]
@@ -3522,41 +3522,41 @@
   "spriteKey": "tulip",
   "team": [
    {
-    "speciesKey": "chimecho",
+    "speciesKey": "bronzong",
     "level": 57
    },
    {
-    "speciesKey": "bronzong",
+    "speciesKey": "gallade",
     "level": 58
    },
    {
-    "speciesKey": "gallade",
+    "speciesKey": "musharna",
     "level": 59
    }
   ],
   "rematchTeam": [
    {
-    "speciesKey": "solrock",
+    "speciesKey": "claydol",
     "level": 80
    },
    {
-    "speciesKey": "claydol",
+    "speciesKey": "chimecho",
     "level": 81
    },
    {
-    "speciesKey": "chimecho",
+    "speciesKey": "bronzong",
     "level": 82
    },
    {
-    "speciesKey": "bronzong",
+    "speciesKey": "musharna",
     "level": 83
    },
    {
-    "speciesKey": "musharna",
+    "speciesKey": "swoobat",
     "level": 84
    },
    {
-    "speciesKey": "swoobat",
+    "speciesKey": "sigilyph",
     "level": 85
    }
   ]
@@ -3572,41 +3572,41 @@
   "spriteKey": "grusha",
   "team": [
    {
-    "speciesKey": "arctozolt",
+    "speciesKey": "arctovish",
     "level": 64
    },
    {
-    "speciesKey": "arctovish",
+    "speciesKey": "cetitan",
     "level": 65
    },
    {
-    "speciesKey": "cetitan",
+    "speciesKey": "iron bundle",
     "level": 66
    }
   ],
   "rematchTeam": [
    {
-    "speciesKey": "avalugg",
+    "speciesKey": "crabominable",
     "level": 80
    },
    {
-    "speciesKey": "crabominable",
+    "speciesKey": "mr. rime",
     "level": 81
    },
    {
-    "speciesKey": "mr. rime",
+    "speciesKey": "frosmoth",
     "level": 82
    },
    {
-    "speciesKey": "frosmoth",
+    "speciesKey": "eiscue",
     "level": 83
    },
    {
-    "speciesKey": "eiscue",
+    "speciesKey": "arctozolt",
     "level": 84
    },
    {
-    "speciesKey": "arctozolt",
+    "speciesKey": "arctovish",
     "level": 85
    }
   ]

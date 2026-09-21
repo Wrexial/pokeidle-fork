@@ -269,7 +269,10 @@ Data conventions:
   square world canvas *without distortion* (letterboxed), and its position
   values bypass the collision-avoidance shifting. Town positions are measured
   from the reference labels; route nodes are interpolated from the connection
-  graph (so individual route paths are approximate). The league can also be
+  graph (so individual route paths are approximate). Because adjacent
+  towns/routes sit almost on top of each other on the reference (Route 10
+  beside Opelucid City), a final relaxation pass nudges any pair closer than
+  3 units apart. The league can also be
   pinned to a specific pre-league route via `LEAGUE_ANCHOR` (Hoenn's Route 128
   at Ever Grande, not the highest-numbered Route 134).
 - `regions.json` also carries `raidPool` — the generation's species that cannot
@@ -438,7 +441,10 @@ One-off scripts used to build the data JSON (not run during dev/build):
   from every generation up to the region's own, minus starter lines and
   legendaries), and each leader gets a unique Showdown sprite key derived from
   their name by `trainerSpriteKey`. Route trainers are themed by class via
-  `TRAINER_CLASS_TYPES`. Kanto's hand-curated trainer/leader data and its gen3
+  `TRAINER_CLASS_TYPES`. `buildTeam` prefers levelled-appropriate Pokemon:
+  it drops species that should already have evolved and, at Lv.55+, very weak
+  final forms (Ditto), while keeping the type theme when a sparse type (Dragon)
+  would otherwise run out. Kanto's hand-curated trainer/leader data and its gen3
   sprites are left alone. `pokemon-species.json` carries a `legendary` flag
   (set for legendaries, mythicals and Ultra Beasts) that keeps them out of
   every trainer team.

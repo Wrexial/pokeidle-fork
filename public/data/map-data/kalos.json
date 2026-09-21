@@ -14,8 +14,8 @@
   },
   "unlockOrder": 599999,
   "position": {
-   "x": 66.43,
-   "y": 67.96
+   "x": 66.65489336169038,
+   "y": 68.28715827128848
   },
   "mart": {
    "name": "Kalos Mart",
@@ -31,7 +31,7 @@
   "name": "Route 1",
   "type": "route",
   "region": "kalos",
-  "description": "A route in the Kalos region.",
+  "description": "A route in the Kalos region where Grass and Fire Pokemon roam around Lv. 5-7.",
   "routeKey": "kalos-route-1",
   "connections": [
    "kalos-vaniville-town",
@@ -45,8 +45,8 @@
   },
   "unlockOrder": 600001,
   "position": {
-   "x": 64.86,
-   "y": 65.68
+   "x": 64.95503063282239,
+   "y": 65.80748314609264
   }
  },
  "kalos-aquacorde-town": {
@@ -69,8 +69,8 @@
   },
   "unlockOrder": 600001.5,
   "position": {
-   "x": 63.21,
-   "y": 63.32
+   "x": 63.21072308918645,
+   "y": 63.34216548031105
   },
   "mart": {
    "name": "Kalos Mart",
@@ -86,7 +86,7 @@
   "name": "Route 2",
   "type": "route",
   "region": "kalos",
-  "description": "A route in the Kalos region.",
+  "description": "A route in the Kalos region where Normal and Bug Pokemon roam around Lv. 8-10.",
   "routeKey": "kalos-route-2",
   "connections": [
    "kalos-aquacorde-town",
@@ -103,8 +103,8 @@
   },
   "unlockOrder": 600002,
   "position": {
-   "x": 61.86,
-   "y": 61.32
+   "x": 61.53935291630079,
+   "y": 60.84319310230784
   }
  },
  "kalos-route-3": {
@@ -112,7 +112,7 @@
   "name": "Route 3",
   "type": "route",
   "region": "kalos",
-  "description": "A route in the Kalos region.",
+  "description": "A route in the Kalos region where Water and Flying Pokemon roam around Lv. 11-13.",
   "routeKey": "kalos-route-3",
   "connections": [
    "kalos-santalune-city",
@@ -137,7 +137,7 @@
   "name": "Santalune City",
   "type": "town",
   "region": "kalos",
-  "description": "A town in the Kalos region.",
+  "description": "A town in the Kalos region, home to Viola's Bug Gym.",
   "connections": [
    "kalos-route-3",
    "kalos-route-4",
@@ -177,7 +177,7 @@
   "name": "Route 4",
   "type": "route",
   "region": "kalos",
-  "description": "A route in the Kalos region.",
+  "description": "A route in the Kalos region where Fairy and Bug Pokemon roam around Lv. 15-17.",
   "routeKey": "kalos-route-4",
   "connections": [
    "kalos-santalune-city",
@@ -205,7 +205,7 @@
   "name": "Lumiose City",
   "type": "town",
   "region": "kalos",
-  "description": "A town in the Kalos region.",
+  "description": "A town in the Kalos region, home to Clemont's Electric Gym.",
   "connections": [
    "kalos-route-4",
    "kalos-route-14",
@@ -241,7 +241,7 @@
   "name": "Route 5",
   "type": "route",
   "region": "kalos",
-  "description": "A route in the Kalos region.",
+  "description": "A route in the Kalos region where Normal and Poison Pokemon roam around Lv. 18-20.",
   "routeKey": "kalos-route-5",
   "connections": [
    "kalos-lumiose-city",
@@ -303,7 +303,7 @@
   "name": "Route 6",
   "type": "route",
   "region": "kalos",
-  "description": "A route in the Kalos region.",
+  "description": "A route in the Kalos region where Grass and Poison Pokemon roam around Lv. 21-23.",
   "routeKey": "kalos-route-6",
   "connections": [
    "kalos-route-7"
@@ -334,7 +334,7 @@
   "name": "Route 7",
   "type": "route",
   "region": "kalos",
-  "description": "A route in the Kalos region.",
+  "description": "A route in the Kalos region where Fairy and Grass Pokemon roam around Lv. 24-26.",
   "routeKey": "kalos-route-7",
   "connections": [
    "kalos-camphrier-town",
@@ -362,7 +362,7 @@
   "name": "Cyllage City",
   "type": "town",
   "region": "kalos",
-  "description": "A town in the Kalos region.",
+  "description": "A town in the Kalos region, home to Grant's Rock Gym.",
   "connections": [
    "kalos-route-10",
    "kalos-route-8",
@@ -406,7 +406,7 @@
   "name": "Route 8",
   "type": "route",
   "region": "kalos",
-  "description": "A route in the Kalos region.",
+  "description": "A route in the Kalos region where Water and Poison Pokemon roam around Lv. 28-30.",
   "routeKey": "kalos-route-8",
   "connections": [
    "kalos-cyllage-city",
@@ -466,8 +466,8 @@
   },
   "unlockOrder": 600008.5,
   "position": {
-   "x": 20.71,
-   "y": 64.39
+   "x": 20.779509858536844,
+   "y": 64.10220479623342
   },
   "mart": {
    "name": "Kalos Mart",
@@ -487,7 +487,7 @@
   "name": "Route 9",
   "type": "route",
   "region": "kalos",
-  "description": "A route in the Kalos region.",
+  "description": "A route in the Kalos region where Ground and Dark Pokemon roam around Lv. 31-33.",
   "routeKey": "kalos-route-9",
   "connections": [
    "kalos-ambrette-town"
@@ -503,8 +503,8 @@
   },
   "unlockOrder": 600009,
   "position": {
-   "x": 20.14,
-   "y": 66.75
+   "x": 20.070490141463157,
+   "y": 67.03779520376658
   }
  },
  "kalos-route-10": {
@@ -512,7 +512,7 @@
   "name": "Route 10",
   "type": "route",
   "region": "kalos",
-  "description": "A route in the Kalos region.",
+  "description": "A route in the Kalos region where Flying and Rock Pokemon roam around Lv. 34-36.",
   "routeKey": "kalos-route-10",
   "connections": [
    "kalos-cyllage-city",
@@ -584,7 +584,7 @@
   "name": "Route 11",
   "type": "route",
   "region": "kalos",
-  "description": "A route in the Kalos region.",
+  "description": "A route in the Kalos region where Poison and Fighting Pokemon roam around Lv. 37-39.",
   "routeKey": "kalos-route-11",
   "connections": [
    "kalos-geosenge-town",
@@ -609,7 +609,7 @@
   "name": "Shalour City",
   "type": "town",
   "region": "kalos",
-  "description": "A town in the Kalos region.",
+  "description": "A town in the Kalos region, home to Korrina's Fighting Gym.",
   "connections": [
    "kalos-route-12",
    "kalos-route-11"
@@ -652,7 +652,7 @@
   "name": "Route 12",
   "type": "route",
   "region": "kalos",
-  "description": "A route in the Kalos region.",
+  "description": "A route in the Kalos region where Water and Rock Pokemon roam around Lv. 41-43.",
   "routeKey": "kalos-route-12",
   "connections": [
    "kalos-shalour-city",
@@ -680,7 +680,7 @@
   "name": "Coumarine City",
   "type": "town",
   "region": "kalos",
-  "description": "A town in the Kalos region.",
+  "description": "A town in the Kalos region, home to Ramos's Grass Gym.",
   "connections": [
    "kalos-route-12",
    "kalos-route-13"
@@ -723,7 +723,7 @@
   "name": "Route 13",
   "type": "route",
   "region": "kalos",
-  "description": "A route in the Kalos region.",
+  "description": "A route in the Kalos region where Ground and Rock Pokemon roam around Lv. 44-46.",
   "routeKey": "kalos-route-13",
   "connections": [
    "kalos-lumiose-city",
@@ -751,7 +751,7 @@
   "name": "Route 14",
   "type": "route",
   "region": "kalos",
-  "description": "A route in the Kalos region.",
+  "description": "A route in the Kalos region where Water and Ground Pokemon roam around Lv. 47-49.",
   "routeKey": "kalos-route-14",
   "connections": [
    "kalos-lumiose-city",
@@ -780,7 +780,7 @@
   "name": "Laverre City",
   "type": "town",
   "region": "kalos",
-  "description": "A town in the Kalos region.",
+  "description": "A town in the Kalos region, home to Valerie's Fairy Gym.",
   "connections": [
    "kalos-route-14",
    "kalos-route-15"
@@ -822,7 +822,7 @@
   "name": "Route 15",
   "type": "route",
   "region": "kalos",
-  "description": "A route in the Kalos region.",
+  "description": "A route in the Kalos region where Water and Dark Pokemon roam around Lv. 50-52.",
   "routeKey": "kalos-route-15",
   "connections": [
    "kalos-laverre-city",
@@ -894,7 +894,7 @@
   "name": "Route 16",
   "type": "route",
   "region": "kalos",
-  "description": "A route in the Kalos region.",
+  "description": "A route in the Kalos region where Water and Grass Pokemon roam around Lv. 54-56.",
   "routeKey": "kalos-route-16",
   "connections": [
    "kalos-lumiose-city",
@@ -923,7 +923,7 @@
   "name": "Route 17",
   "type": "route",
   "region": "kalos",
-  "description": "A route in the Kalos region.",
+  "description": "A route in the Kalos region where Ice and Flying Pokemon roam around Lv. 57-59.",
   "routeKey": "kalos-route-17",
   "connections": [
    "kalos-dendemille-town",
@@ -948,7 +948,7 @@
   "name": "Anistar City",
   "type": "town",
   "region": "kalos",
-  "description": "A town in the Kalos region.",
+  "description": "A town in the Kalos region, home to Olympia's Psychic Gym.",
   "connections": [
    "kalos-route-17",
    "kalos-route-18"
@@ -993,7 +993,7 @@
   "name": "Route 18",
   "type": "route",
   "region": "kalos",
-  "description": "A route in the Kalos region.",
+  "description": "A route in the Kalos region where Rock and Ground Pokemon roam around Lv. 60-62.",
   "routeKey": "kalos-route-18",
   "connections": [
    "kalos-anistar-city",
@@ -1066,7 +1066,7 @@
   "name": "Route 19",
   "type": "route",
   "region": "kalos",
-  "description": "A route in the Kalos region.",
+  "description": "A route in the Kalos region where Water and Ground Pokemon roam around Lv. 63-65.",
   "routeKey": "kalos-route-19",
   "connections": [
    "kalos-couriway-town",
@@ -1091,7 +1091,7 @@
   "name": "Snowbelle City",
   "type": "town",
   "region": "kalos",
-  "description": "A town in the Kalos region.",
+  "description": "A town in the Kalos region, home to Wulfric's Ice Gym.",
   "connections": [
    "kalos-route-19",
    "kalos-route-20",
@@ -1115,8 +1115,8 @@
   },
   "unlockOrder": 600019.5,
   "position": {
-   "x": 85.71,
-   "y": 53.68
+   "x": 85.64429504496408,
+   "y": 52.74370439073837
   },
   "mart": {
    "name": "Kalos Mart",
@@ -1144,7 +1144,7 @@
   "name": "Route 20",
   "type": "route",
   "region": "kalos",
-  "description": "A route in the Kalos region.",
+  "description": "A route in the Kalos region where Grass and Poison Pokemon roam around Lv. 67-69.",
   "routeKey": "kalos-route-20",
   "connections": [
    "kalos-snowbelle-city"
@@ -1218,7 +1218,7 @@
   "name": "Route 21",
   "type": "route",
   "region": "kalos",
-  "description": "A route in the Kalos region.",
+  "description": "A route in the Kalos region where Water and Normal Pokemon roam around Lv. 70-72.",
   "routeKey": "kalos-route-21",
   "connections": [
    "kalos-snowbelle-city",
@@ -1237,8 +1237,8 @@
   },
   "unlockOrder": 600021,
   "position": {
-   "x": 85.79,
-   "y": 54.82
+   "x": 85.85570495503592,
+   "y": 55.75629560926163
   }
  },
  "kalos-route-22": {
@@ -1246,7 +1246,7 @@
   "name": "Route 22",
   "type": "route",
   "region": "kalos",
-  "description": "A route in the Kalos region.",
+  "description": "A route in the Kalos region where Water and Normal Pokemon roam around Lv. 73-75.",
   "routeKey": "kalos-route-22",
   "connections": [
    "kalos-santalune-city",

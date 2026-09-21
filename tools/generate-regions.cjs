@@ -757,7 +757,9 @@ const regions = [{ id: 'kanto', name: 'Kanto', generation: 1, order: 1, entry: '
 // Raid pools can only be worked out once every region's routes exist (a raid
 // species must be absent from *all* routes), so regions queue up here and are
 // filled in by the raid scan lower down.
-const pendingRaids = [{ regionObj: regions[0], all: speciesForGen(1) }]
+const pendingRaids = [
+  { regionObj: regions[0], all: speciesForGen(1), raidId: 'raidIsland', raidNodeName: 'Raid Island' },
+]
 
 for (const region of REGIONS) {
   const { id: regionId, name, gen, entry } = region
@@ -1327,7 +1329,7 @@ for (const region of REGIONS) {
 if (realEncounters.kanto) {
   let refreshed = 0
   for (const loc of Object.values(mapData)) {
-    if ((loc.region ?? 'kanto') !== 'kanto' || !loc.routeKey) continue
+    if ((loc.region ?? 'kanto') !== 'kanto' || !loc.routeKey || loc.type === 'raid') continue
     const real = realEncounters.kanto[loc.routeKey]
     if (real && real.length && encounterData[loc.routeKey]) {
       encounterData[loc.routeKey] = {
@@ -1340,12 +1342,12 @@ if (realEncounters.kanto) {
   // Kanto gets the same dynamic per-zone levelling as the other regions
   const kantoEntries = {}
   for (const loc of Object.values(mapData)) {
-    if ((loc.region ?? 'kanto') !== 'kanto' || !loc.routeKey) continue
+    if ((loc.region ?? 'kanto') !== 'kanto' || !loc.routeKey || loc.type === 'raid') continue
     if (encounterData[loc.routeKey]) kantoEntries[loc.routeKey] = encounterData[loc.routeKey].encounters
   }
   levelRoutes(
     Object.values(mapData)
-      .filter((loc) => (loc.region ?? 'kanto') === 'kanto' && loc.routeKey)
+      .filter((loc) => (loc.region ?? 'kanto') === 'kanto' && loc.routeKey && loc.type !== 'raid')
       .sort((a, b) => (a.unlockOrder ?? 0) - (b.unlockOrder ?? 0))
       .map((loc) => loc.routeKey),
     kantoEntries
@@ -1383,7 +1385,7 @@ const ROUTE_CATCH_MIN_WEIGHT = 3
 /** @type {Record<string, Set<string>>} */
 const routesBySpecies = {}
 for (const [bucketKey, bucket] of Object.entries(encounterData)) {
-  if (/-raid$/.test(bucketKey)) continue
+  if (mapData[bucketKey]?.type === 'raid') continue
   for (const encounter of bucket.encounters) {
     const routes =
       routesBySpecies[encounter.speciesKey] ?? (routesBySpecies[encounter.speciesKey] = new Set())
@@ -1438,7 +1440,7 @@ for (const champion of champData) {
 // route once, then give each region its own generation's leftovers.
 const routable = new Set()
 for (const [bucketKey, bucket] of Object.entries(encounterData)) {
-  if (/-raid$/.test(bucketKey)) continue
+  if (mapData[bucketKey]?.type === 'raid') continue
   for (const encounter of bucket.encounters) routable.add(encounter.speciesKey)
 }
 let routableExpanded = true
@@ -1498,6 +1500,10 @@ for (const loc of Object.values(mapData)) {
 // region's Champion (cycling Kanto <- Paldea so nothing is unreachable).
 if (mapData.palletTown) mapData.palletTown.unlock = { entry: true, previous: 'paldea' }
 if (mapData.route1) mapData.route1.unlock = { requires: ['palletTown'] }
+// Kanto's hand-curated Raid Island predates the generated ones and had no
+// routeKey (nor an encounter bucket), unlike every other region. Wire it up so
+// `encounterData[state.currentRoute]` resolves while raiding.
+if (mapData.raidIsland) mapData.raidIsland.routeKey = 'raidIsland'
 
 write('regions.json', regions)
 writeRegionDir(path.join(DATA, 'map-data'), mapData)

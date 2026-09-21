@@ -4,43 +4,19 @@
   "encounters": [
    {
     "speciesKey": "starly",
-    "weight": 19,
+    "weight": 14,
     "minLevel": 5,
     "maxLevel": 7
    },
    {
     "speciesKey": "bidoof",
-    "weight": 19,
-    "minLevel": 5,
-    "maxLevel": 7
-   },
-   {
-    "speciesKey": "doduo",
-    "weight": 10,
+    "weight": 14,
     "minLevel": 5,
     "maxLevel": 7
    },
    {
     "speciesKey": "kricketot",
     "weight": 5,
-    "minLevel": 5,
-    "maxLevel": 7
-   },
-   {
-    "speciesKey": "nidoranF",
-    "weight": 3,
-    "minLevel": 5,
-    "maxLevel": 7
-   },
-   {
-    "speciesKey": "nidoranM",
-    "weight": 3,
-    "minLevel": 5,
-    "maxLevel": 7
-   },
-   {
-    "speciesKey": "growlithe",
-    "weight": 2,
     "minLevel": 5,
     "maxLevel": 7
    },
@@ -69,19 +45,7 @@
   "encounters": [
    {
     "speciesKey": "bidoof",
-    "weight": 19,
-    "minLevel": 7,
-    "maxLevel": 9
-   },
-   {
-    "speciesKey": "starly",
-    "weight": 12,
-    "minLevel": 7,
-    "maxLevel": 9
-   },
-   {
-    "speciesKey": "zigzagoon",
-    "weight": 10,
+    "weight": 14,
     "minLevel": 7,
     "maxLevel": 9
    },
@@ -92,20 +56,14 @@
     "maxLevel": 9
    },
    {
-    "speciesKey": "sentret",
-    "weight": 6,
+    "speciesKey": "starly",
+    "weight": 7,
     "minLevel": 7,
     "maxLevel": 9
    },
    {
     "speciesKey": "kricketot",
     "weight": 5,
-    "minLevel": 7,
-    "maxLevel": 9
-   },
-   {
-    "speciesKey": "growlithe",
-    "weight": 2,
     "minLevel": 7,
     "maxLevel": 9
    }
@@ -133,12 +91,6 @@
     "maxLevel": 12
    },
    {
-    "speciesKey": "starly",
-    "weight": 13,
-    "minLevel": 10,
-    "maxLevel": 12
-   },
-   {
     "speciesKey": "goldeen",
     "weight": 11,
     "minLevel": 10,
@@ -151,14 +103,8 @@
     "maxLevel": 12
    },
    {
-    "speciesKey": "cubone",
+    "speciesKey": "starly",
     "weight": 10,
-    "minLevel": 10,
-    "maxLevel": 12
-   },
-   {
-    "speciesKey": "bidoof",
-    "weight": 8,
     "minLevel": 10,
     "maxLevel": 12
    },
@@ -169,7 +115,7 @@
     "maxLevel": 12
    },
    {
-    "speciesKey": "ralts",
+    "speciesKey": "bidoof",
     "weight": 5,
     "minLevel": 10,
     "maxLevel": 12
@@ -195,30 +141,6 @@
    {
     "speciesKey": "golduck",
     "weight": 3,
-    "minLevel": 10,
-    "maxLevel": 12
-   },
-   {
-    "speciesKey": "pineco",
-    "weight": 2,
-    "minLevel": 10,
-    "maxLevel": 12
-   },
-   {
-    "speciesKey": "lotad",
-    "weight": 2,
-    "minLevel": 10,
-    "maxLevel": 12
-   },
-   {
-    "speciesKey": "seedot",
-    "weight": 2,
-    "minLevel": 10,
-    "maxLevel": 12
-   },
-   {
-    "speciesKey": "kirlia",
-    "weight": 1,
     "minLevel": 10,
     "maxLevel": 12
    }
@@ -258,25 +180,7 @@
     "maxLevel": 14
    },
    {
-    "speciesKey": "starly",
-    "weight": 6,
-    "minLevel": 12,
-    "maxLevel": 14
-   },
-   {
-    "speciesKey": "bidoof",
-    "weight": 6,
-    "minLevel": 12,
-    "maxLevel": 14
-   },
-   {
     "speciesKey": "budew",
-    "weight": 6,
-    "minLevel": 12,
-    "maxLevel": 14
-   },
-   {
-    "speciesKey": "sunkern",
     "weight": 6,
     "minLevel": 12,
     "maxLevel": 14
@@ -288,7 +192,13 @@
     "maxLevel": 14
    },
    {
-    "speciesKey": "ralts",
+    "speciesKey": "starly",
+    "weight": 5,
+    "minLevel": 12,
+    "maxLevel": 14
+   },
+   {
+    "speciesKey": "bidoof",
     "weight": 5,
     "minLevel": 12,
     "maxLevel": 14
@@ -316,42 +226,6 @@
     "weight": 3,
     "minLevel": 12,
     "maxLevel": 14
-   },
-   {
-    "speciesKey": "caterpie",
-    "weight": 2,
-    "minLevel": 12,
-    "maxLevel": 14
-   },
-   {
-    "speciesKey": "weedle",
-    "weight": 2,
-    "minLevel": 12,
-    "maxLevel": 14
-   },
-   {
-    "speciesKey": "pineco",
-    "weight": 2,
-    "minLevel": 12,
-    "maxLevel": 14
-   },
-   {
-    "speciesKey": "lotad",
-    "weight": 2,
-    "minLevel": 12,
-    "maxLevel": 14
-   },
-   {
-    "speciesKey": "seedot",
-    "weight": 2,
-    "minLevel": 12,
-    "maxLevel": 14
-   },
-   {
-    "speciesKey": "kirlia",
-    "weight": 1,
-    "minLevel": 12,
-    "maxLevel": 14
    }
   ]
  },
@@ -371,44 +245,14 @@
     "maxLevel": 16
    },
    {
-    "speciesKey": "munchlax",
-    "weight": 25,
-    "minLevel": 14,
-    "maxLevel": 16
-   },
-   {
     "speciesKey": "psyduck",
     "weight": 23,
     "minLevel": 14,
     "maxLevel": 16
    },
    {
-    "speciesKey": "budew",
-    "weight": 18,
-    "minLevel": 14,
-    "maxLevel": 16
-   },
-   {
-    "speciesKey": "burmy",
-    "weight": 15,
-    "minLevel": 14,
-    "maxLevel": 16
-   },
-   {
-    "speciesKey": "combee",
-    "weight": 15,
-    "minLevel": 14,
-    "maxLevel": 16
-   },
-   {
     "speciesKey": "gyarados",
     "weight": 14,
-    "minLevel": 14,
-    "maxLevel": 16
-   },
-   {
-    "speciesKey": "buizel",
-    "weight": 13,
     "minLevel": 14,
     "maxLevel": 16
    },
@@ -437,12 +281,6 @@
     "maxLevel": 16
    },
    {
-    "speciesKey": "wurmple",
-    "weight": 10,
-    "minLevel": 14,
-    "maxLevel": 16
-   },
-   {
     "speciesKey": "tentacool",
     "weight": 8,
     "minLevel": 14,
@@ -461,37 +299,19 @@
     "maxLevel": 16
    },
    {
-    "speciesKey": "cherubi",
+    "speciesKey": "buizel",
     "weight": 8,
     "minLevel": 14,
     "maxLevel": 16
    },
    {
-    "speciesKey": "hoppip",
-    "weight": 6,
+    "speciesKey": "budew",
+    "weight": 8,
     "minLevel": 14,
     "maxLevel": 16
    },
    {
-    "speciesKey": "aipom",
-    "weight": 6,
-    "minLevel": 14,
-    "maxLevel": 16
-   },
-   {
-    "speciesKey": "slowpoke",
-    "weight": 6,
-    "minLevel": 14,
-    "maxLevel": 16
-   },
-   {
-    "speciesKey": "silcoon",
-    "weight": 5,
-    "minLevel": 14,
-    "maxLevel": 16
-   },
-   {
-    "speciesKey": "cascoon",
+    "speciesKey": "wurmple",
     "weight": 5,
     "minLevel": 14,
     "maxLevel": 16
@@ -527,19 +347,19 @@
     "maxLevel": 16
    },
    {
-    "speciesKey": "elekid",
-    "weight": 2,
+    "speciesKey": "silcoon",
+    "weight": 3,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "cascoon",
+    "weight": 3,
     "minLevel": 14,
     "maxLevel": 16
    },
    {
     "speciesKey": "gastrodon",
-    "weight": 2,
-    "minLevel": 14,
-    "maxLevel": 16
-   },
-   {
-    "speciesKey": "lotad",
     "weight": 2,
     "minLevel": 14,
     "maxLevel": 16
@@ -551,19 +371,7 @@
     "maxLevel": 16
    },
    {
-    "speciesKey": "heracross",
-    "weight": 1,
-    "minLevel": 14,
-    "maxLevel": 16
-   },
-   {
     "speciesKey": "pelipper",
-    "weight": 1,
-    "minLevel": 14,
-    "maxLevel": 16
-   },
-   {
-    "speciesKey": "skiploom",
     "weight": 1,
     "minLevel": 14,
     "maxLevel": 16
@@ -586,42 +394,6 @@
   "name": "Route 206",
   "encounters": [
    {
-    "speciesKey": "munchlax",
-    "weight": 25,
-    "minLevel": 17,
-    "maxLevel": 19
-   },
-   {
-    "speciesKey": "burmy",
-    "weight": 15,
-    "minLevel": 17,
-    "maxLevel": 19
-   },
-   {
-    "speciesKey": "combee",
-    "weight": 15,
-    "minLevel": 17,
-    "maxLevel": 19
-   },
-   {
-    "speciesKey": "larvitar",
-    "weight": 10,
-    "minLevel": 17,
-    "maxLevel": 19
-   },
-   {
-    "speciesKey": "nosepass",
-    "weight": 10,
-    "minLevel": 17,
-    "maxLevel": 19
-   },
-   {
-    "speciesKey": "stunky",
-    "weight": 10,
-    "minLevel": 17,
-    "maxLevel": 19
-   },
-   {
     "speciesKey": "geodude",
     "weight": 8,
     "minLevel": 17,
@@ -640,49 +412,19 @@
     "maxLevel": 19
    },
    {
-    "speciesKey": "cherubi",
-    "weight": 8,
-    "minLevel": 17,
-    "maxLevel": 19
-   },
-   {
-    "speciesKey": "aipom",
-    "weight": 6,
-    "minLevel": 17,
-    "maxLevel": 19
-   },
-   {
-    "speciesKey": "baltoy",
-    "weight": 6,
-    "minLevel": 17,
-    "maxLevel": 19
-   },
-   {
     "speciesKey": "machop",
     "weight": 5,
     "minLevel": 17,
     "maxLevel": 19
    },
    {
-    "speciesKey": "wurmple",
-    "weight": 5,
-    "minLevel": 17,
-    "maxLevel": 19
-   },
-   {
-    "speciesKey": "silcoon",
-    "weight": 5,
-    "minLevel": 17,
-    "maxLevel": 19
-   },
-   {
-    "speciesKey": "cascoon",
-    "weight": 5,
-    "minLevel": 17,
-    "maxLevel": 19
-   },
-   {
     "speciesKey": "kricketune",
+    "weight": 5,
+    "minLevel": 17,
+    "maxLevel": 19
+   },
+   {
+    "speciesKey": "stunky",
     "weight": 5,
     "minLevel": 17,
     "maxLevel": 19
@@ -704,12 +446,6 @@
     "weight": 3,
     "minLevel": 17,
     "maxLevel": 19
-   },
-   {
-    "speciesKey": "heracross",
-    "weight": 1,
-    "minLevel": 17,
-    "maxLevel": 19
    }
   ]
  },
@@ -717,32 +453,8 @@
   "name": "Route 207",
   "encounters": [
    {
-    "speciesKey": "munchlax",
-    "weight": 25,
-    "minLevel": 19,
-    "maxLevel": 21
-   },
-   {
-    "speciesKey": "burmy",
-    "weight": 15,
-    "minLevel": 19,
-    "maxLevel": 21
-   },
-   {
-    "speciesKey": "combee",
-    "weight": 15,
-    "minLevel": 19,
-    "maxLevel": 21
-   },
-   {
     "speciesKey": "machop",
     "weight": 11,
-    "minLevel": 19,
-    "maxLevel": 21
-   },
-   {
-    "speciesKey": "phanpy",
-    "weight": 10,
     "minLevel": 19,
     "maxLevel": 21
    },
@@ -759,48 +471,6 @@
     "maxLevel": 21
    },
    {
-    "speciesKey": "cherubi",
-    "weight": 8,
-    "minLevel": 19,
-    "maxLevel": 21
-   },
-   {
-    "speciesKey": "aipom",
-    "weight": 6,
-    "minLevel": 19,
-    "maxLevel": 21
-   },
-   {
-    "speciesKey": "stantler",
-    "weight": 6,
-    "minLevel": 19,
-    "maxLevel": 21
-   },
-   {
-    "speciesKey": "larvitar",
-    "weight": 6,
-    "minLevel": 19,
-    "maxLevel": 21
-   },
-   {
-    "speciesKey": "wurmple",
-    "weight": 5,
-    "minLevel": 19,
-    "maxLevel": 21
-   },
-   {
-    "speciesKey": "silcoon",
-    "weight": 5,
-    "minLevel": 19,
-    "maxLevel": 21
-   },
-   {
-    "speciesKey": "cascoon",
-    "weight": 5,
-    "minLevel": 19,
-    "maxLevel": 21
-   },
-   {
     "speciesKey": "kricketot",
     "weight": 5,
     "minLevel": 19,
@@ -809,18 +479,6 @@
    {
     "speciesKey": "zubat",
     "weight": 3,
-    "minLevel": 19,
-    "maxLevel": 21
-   },
-   {
-    "speciesKey": "gligar",
-    "weight": 2,
-    "minLevel": 19,
-    "maxLevel": 21
-   },
-   {
-    "speciesKey": "heracross",
-    "weight": 1,
     "minLevel": 19,
     "maxLevel": 21
    }
@@ -836,26 +494,8 @@
     "maxLevel": 23
    },
    {
-    "speciesKey": "munchlax",
-    "weight": 25,
-    "minLevel": 21,
-    "maxLevel": 23
-   },
-   {
     "speciesKey": "psyduck",
     "weight": 23,
-    "minLevel": 21,
-    "maxLevel": 23
-   },
-   {
-    "speciesKey": "burmy",
-    "weight": 15,
-    "minLevel": 21,
-    "maxLevel": 23
-   },
-   {
-    "speciesKey": "combee",
-    "weight": 15,
     "minLevel": 21,
     "maxLevel": 23
    },
@@ -890,12 +530,6 @@
     "maxLevel": 23
    },
    {
-    "speciesKey": "dunsparce",
-    "weight": 10,
-    "minLevel": 21,
-    "maxLevel": 23
-   },
-   {
     "speciesKey": "budew",
     "weight": 10,
     "minLevel": 21,
@@ -914,60 +548,6 @@
     "maxLevel": 23
    },
    {
-    "speciesKey": "bibarel",
-    "weight": 8,
-    "minLevel": 21,
-    "maxLevel": 23
-   },
-   {
-    "speciesKey": "cherubi",
-    "weight": 8,
-    "minLevel": 21,
-    "maxLevel": 23
-   },
-   {
-    "speciesKey": "roselia",
-    "weight": 7,
-    "minLevel": 21,
-    "maxLevel": 23
-   },
-   {
-    "speciesKey": "aipom",
-    "weight": 6,
-    "minLevel": 21,
-    "maxLevel": 23
-   },
-   {
-    "speciesKey": "smeargle",
-    "weight": 6,
-    "minLevel": 21,
-    "maxLevel": 23
-   },
-   {
-    "speciesKey": "tyrogue",
-    "weight": 6,
-    "minLevel": 21,
-    "maxLevel": 23
-   },
-   {
-    "speciesKey": "wurmple",
-    "weight": 5,
-    "minLevel": 21,
-    "maxLevel": 23
-   },
-   {
-    "speciesKey": "silcoon",
-    "weight": 5,
-    "minLevel": 21,
-    "maxLevel": 23
-   },
-   {
-    "speciesKey": "cascoon",
-    "weight": 5,
-    "minLevel": 21,
-    "maxLevel": 23
-   },
-   {
     "speciesKey": "bidoof",
     "weight": 5,
     "minLevel": 21,
@@ -975,6 +555,12 @@
    },
    {
     "speciesKey": "ralts",
+    "weight": 4,
+    "minLevel": 21,
+    "maxLevel": 23
+   },
+   {
+    "speciesKey": "bibarel",
     "weight": 4,
     "minLevel": 21,
     "maxLevel": 23
@@ -992,20 +578,8 @@
     "maxLevel": 23
    },
    {
-    "speciesKey": "zangoose",
-    "weight": 2,
-    "minLevel": 21,
-    "maxLevel": 23
-   },
-   {
-    "speciesKey": "seviper",
-    "weight": 2,
-    "minLevel": 21,
-    "maxLevel": 23
-   },
-   {
-    "speciesKey": "heracross",
-    "weight": 1,
+    "speciesKey": "roselia",
+    "weight": 3,
     "minLevel": 21,
     "maxLevel": 23
    }
@@ -1021,44 +595,14 @@
     "maxLevel": 26
    },
    {
-    "speciesKey": "spiritomb",
-    "weight": 25,
-    "minLevel": 24,
-    "maxLevel": 26
-   },
-   {
-    "speciesKey": "munchlax",
-    "weight": 25,
-    "minLevel": 24,
-    "maxLevel": 26
-   },
-   {
     "speciesKey": "psyduck",
     "weight": 23,
     "minLevel": 24,
     "maxLevel": 26
    },
    {
-    "speciesKey": "burmy",
-    "weight": 15,
-    "minLevel": 24,
-    "maxLevel": 26
-   },
-   {
-    "speciesKey": "combee",
-    "weight": 15,
-    "minLevel": 24,
-    "maxLevel": 26
-   },
-   {
     "speciesKey": "gyarados",
     "weight": 14,
-    "minLevel": 24,
-    "maxLevel": 26
-   },
-   {
-    "speciesKey": "ralts",
-    "weight": 12,
     "minLevel": 24,
     "maxLevel": 26
    },
@@ -1075,24 +619,6 @@
     "maxLevel": 26
    },
    {
-    "speciesKey": "snubbull",
-    "weight": 10,
-    "minLevel": 24,
-    "maxLevel": 26
-   },
-   {
-    "speciesKey": "bonsly",
-    "weight": 10,
-    "minLevel": 24,
-    "maxLevel": 26
-   },
-   {
-    "speciesKey": "mimeJR",
-    "weight": 10,
-    "minLevel": 24,
-    "maxLevel": 26
-   },
-   {
     "speciesKey": "staravia",
     "weight": 8,
     "minLevel": 24,
@@ -1105,20 +631,8 @@
     "maxLevel": 26
    },
    {
-    "speciesKey": "cherubi",
-    "weight": 8,
-    "minLevel": 24,
-    "maxLevel": 26
-   },
-   {
-    "speciesKey": "aipom",
-    "weight": 6,
-    "minLevel": 24,
-    "maxLevel": 26
-   },
-   {
-    "speciesKey": "kirlia",
-    "weight": 6,
+    "speciesKey": "ralts",
+    "weight": 7,
     "minLevel": 24,
     "maxLevel": 26
    },
@@ -1129,37 +643,19 @@
     "maxLevel": 26
    },
    {
-    "speciesKey": "chansey",
-    "weight": 5,
-    "minLevel": 24,
-    "maxLevel": 26
-   },
-   {
-    "speciesKey": "tauros",
-    "weight": 5,
-    "minLevel": 24,
-    "maxLevel": 26
-   },
-   {
-    "speciesKey": "wurmple",
-    "weight": 5,
-    "minLevel": 24,
-    "maxLevel": 26
-   },
-   {
-    "speciesKey": "silcoon",
-    "weight": 5,
-    "minLevel": 24,
-    "maxLevel": 26
-   },
-   {
-    "speciesKey": "cascoon",
-    "weight": 5,
-    "minLevel": 24,
-    "maxLevel": 26
-   },
-   {
     "speciesKey": "starly",
+    "weight": 5,
+    "minLevel": 24,
+    "maxLevel": 26
+   },
+   {
+    "speciesKey": "bonsly",
+    "weight": 5,
+    "minLevel": 24,
+    "maxLevel": 26
+   },
+   {
+    "speciesKey": "mimeJR",
     "weight": 5,
     "minLevel": 24,
     "maxLevel": 26
@@ -1189,19 +685,7 @@
     "maxLevel": 26
    },
    {
-    "speciesKey": "vulpix",
-    "weight": 2,
-    "minLevel": 24,
-    "maxLevel": 26
-   },
-   {
-    "speciesKey": "heracross",
-    "weight": 1,
-    "minLevel": 24,
-    "maxLevel": 26
-   },
-   {
-    "speciesKey": "miltank",
+    "speciesKey": "chansey",
     "weight": 1,
     "minLevel": 24,
     "maxLevel": 26
@@ -1218,32 +702,8 @@
     "maxLevel": 28
    },
    {
-    "speciesKey": "munchlax",
-    "weight": 25,
-    "minLevel": 26,
-    "maxLevel": 28
-   },
-   {
     "speciesKey": "psyduck",
     "weight": 23,
-    "minLevel": 26,
-    "maxLevel": 28
-   },
-   {
-    "speciesKey": "burmy",
-    "weight": 15,
-    "minLevel": 26,
-    "maxLevel": 28
-   },
-   {
-    "speciesKey": "combee",
-    "weight": 15,
-    "minLevel": 26,
-    "maxLevel": 28
-   },
-   {
-    "speciesKey": "ponyta",
-    "weight": 14,
     "minLevel": 26,
     "maxLevel": 28
    },
@@ -1260,31 +720,19 @@
     "maxLevel": 28
    },
    {
+    "speciesKey": "ponyta",
+    "weight": 10,
+    "minLevel": 26,
+    "maxLevel": 28
+   },
+   {
     "speciesKey": "barboach",
     "weight": 10,
     "minLevel": 26,
     "maxLevel": 28
    },
    {
-    "speciesKey": "bonsly",
-    "weight": 9,
-    "minLevel": 26,
-    "maxLevel": 28
-   },
-   {
-    "speciesKey": "mimeJR",
-    "weight": 9,
-    "minLevel": 26,
-    "maxLevel": 28
-   },
-   {
     "speciesKey": "kricketune",
-    "weight": 8,
-    "minLevel": 26,
-    "maxLevel": 28
-   },
-   {
-    "speciesKey": "cherubi",
     "weight": 8,
     "minLevel": 26,
     "maxLevel": 28
@@ -1302,55 +750,7 @@
     "maxLevel": 28
    },
    {
-    "speciesKey": "machop",
-    "weight": 7,
-    "minLevel": 26,
-    "maxLevel": 28
-   },
-   {
-    "speciesKey": "aipom",
-    "weight": 6,
-    "minLevel": 26,
-    "maxLevel": 28
-   },
-   {
-    "speciesKey": "machoke",
-    "weight": 6,
-    "minLevel": 26,
-    "maxLevel": 28
-   },
-   {
-    "speciesKey": "kecleon",
-    "weight": 6,
-    "minLevel": 26,
-    "maxLevel": 28
-   },
-   {
-    "speciesKey": "bagon",
-    "weight": 6,
-    "minLevel": 26,
-    "maxLevel": 28
-   },
-   {
     "speciesKey": "geodude",
-    "weight": 5,
-    "minLevel": 26,
-    "maxLevel": 28
-   },
-   {
-    "speciesKey": "wurmple",
-    "weight": 5,
-    "minLevel": 26,
-    "maxLevel": 28
-   },
-   {
-    "speciesKey": "silcoon",
-    "weight": 5,
-    "minLevel": 26,
-    "maxLevel": 28
-   },
-   {
-    "speciesKey": "cascoon",
     "weight": 5,
     "minLevel": 26,
     "maxLevel": 28
@@ -1362,14 +762,20 @@
     "maxLevel": 28
    },
    {
-    "speciesKey": "bibarel",
+    "speciesKey": "bonsly",
     "weight": 5,
     "minLevel": 26,
     "maxLevel": 28
    },
    {
-    "speciesKey": "chansey",
-    "weight": 4,
+    "speciesKey": "mimeJR",
+    "weight": 5,
+    "minLevel": 26,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "bibarel",
+    "weight": 5,
     "minLevel": 26,
     "maxLevel": 28
    },
@@ -1386,12 +792,6 @@
     "maxLevel": 28
    },
    {
-    "speciesKey": "tauros",
-    "weight": 3,
-    "minLevel": 26,
-    "maxLevel": 28
-   },
-   {
     "speciesKey": "hoothoot",
     "weight": 3,
     "minLevel": 26,
@@ -1404,49 +804,25 @@
     "maxLevel": 28
    },
    {
-    "speciesKey": "miltank",
-    "weight": 3,
-    "minLevel": 26,
-    "maxLevel": 28
-   },
-   {
     "speciesKey": "golduck",
     "weight": 3,
     "minLevel": 26,
     "maxLevel": 28
    },
    {
-    "speciesKey": "pineco",
+    "speciesKey": "machop",
+    "weight": 3,
+    "minLevel": 26,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "machoke",
     "weight": 2,
     "minLevel": 26,
     "maxLevel": 28
    },
    {
-    "speciesKey": "zangoose",
-    "weight": 2,
-    "minLevel": 26,
-    "maxLevel": 28
-   },
-   {
-    "speciesKey": "seviper",
-    "weight": 2,
-    "minLevel": 26,
-    "maxLevel": 28
-   },
-   {
-    "speciesKey": "heracross",
-    "weight": 1,
-    "minLevel": 26,
-    "maxLevel": 28
-   },
-   {
-    "speciesKey": "seedot",
-    "weight": 1,
-    "minLevel": 26,
-    "maxLevel": 28
-   },
-   {
-    "speciesKey": "nuzleaf",
+    "speciesKey": "chansey",
     "weight": 1,
     "minLevel": 26,
     "maxLevel": 28
@@ -1457,68 +833,14 @@
   "name": "Route 211",
   "encounters": [
    {
-    "speciesKey": "munchlax",
-    "weight": 25,
-    "minLevel": 28,
-    "maxLevel": 30
-   },
-   {
     "speciesKey": "meditite",
     "weight": 15,
     "minLevel": 28,
     "maxLevel": 30
    },
    {
-    "speciesKey": "burmy",
-    "weight": 15,
-    "minLevel": 28,
-    "maxLevel": 30
-   },
-   {
-    "speciesKey": "combee",
-    "weight": 15,
-    "minLevel": 28,
-    "maxLevel": 30
-   },
-   {
     "speciesKey": "ponyta",
-    "weight": 10,
-    "minLevel": 28,
-    "maxLevel": 30
-   },
-   {
-    "speciesKey": "machop",
-    "weight": 8,
-    "minLevel": 28,
-    "maxLevel": 30
-   },
-   {
-    "speciesKey": "cherubi",
-    "weight": 8,
-    "minLevel": 28,
-    "maxLevel": 30
-   },
-   {
-    "speciesKey": "bronzor",
-    "weight": 7,
-    "minLevel": 28,
-    "maxLevel": 30
-   },
-   {
-    "speciesKey": "tyrogue",
-    "weight": 6,
-    "minLevel": 28,
-    "maxLevel": 30
-   },
-   {
-    "speciesKey": "aipom",
-    "weight": 6,
-    "minLevel": 28,
-    "maxLevel": 30
-   },
-   {
-    "speciesKey": "swablu",
-    "weight": 6,
+    "weight": 5,
     "minLevel": 28,
     "maxLevel": 30
    },
@@ -1530,24 +852,6 @@
    },
    {
     "speciesKey": "graveler",
-    "weight": 5,
-    "minLevel": 28,
-    "maxLevel": 30
-   },
-   {
-    "speciesKey": "wurmple",
-    "weight": 5,
-    "minLevel": 28,
-    "maxLevel": 30
-   },
-   {
-    "speciesKey": "silcoon",
-    "weight": 5,
-    "minLevel": 28,
-    "maxLevel": 30
-   },
-   {
-    "speciesKey": "cascoon",
     "weight": 5,
     "minLevel": 28,
     "maxLevel": 30
@@ -1571,6 +875,12 @@
     "maxLevel": 30
    },
    {
+    "speciesKey": "machop",
+    "weight": 3,
+    "minLevel": 28,
+    "maxLevel": 30
+   },
+   {
     "speciesKey": "geodude",
     "weight": 3,
     "minLevel": 28,
@@ -1583,20 +893,14 @@
     "maxLevel": 30
    },
    {
-    "speciesKey": "noctowl",
+    "speciesKey": "bronzor",
     "weight": 3,
     "minLevel": 28,
     "maxLevel": 30
    },
    {
-    "speciesKey": "teddiursa",
-    "weight": 2,
-    "minLevel": 28,
-    "maxLevel": 30
-   },
-   {
-    "speciesKey": "heracross",
-    "weight": 1,
+    "speciesKey": "noctowl",
+    "weight": 3,
     "minLevel": 28,
     "maxLevel": 30
    }
@@ -1613,18 +917,12 @@
    },
    {
     "speciesKey": "wooper",
-    "weight": 33,
-    "minLevel": 31,
-    "maxLevel": 33
-   },
-   {
-    "speciesKey": "shellos",
     "weight": 29,
     "minLevel": 31,
     "maxLevel": 33
    },
    {
-    "speciesKey": "munchlax",
+    "speciesKey": "shellos",
     "weight": 25,
     "minLevel": 31,
     "maxLevel": 33
@@ -1636,25 +934,7 @@
     "maxLevel": 33
    },
    {
-    "speciesKey": "burmy",
-    "weight": 15,
-    "minLevel": 31,
-    "maxLevel": 33
-   },
-   {
-    "speciesKey": "combee",
-    "weight": 15,
-    "minLevel": 31,
-    "maxLevel": 33
-   },
-   {
     "speciesKey": "gyarados",
-    "weight": 14,
-    "minLevel": 31,
-    "maxLevel": 33
-   },
-   {
-    "speciesKey": "bibarel",
     "weight": 14,
     "minLevel": 31,
     "maxLevel": 33
@@ -1708,6 +988,12 @@
     "maxLevel": 33
    },
    {
+    "speciesKey": "bibarel",
+    "weight": 10,
+    "minLevel": 31,
+    "maxLevel": 33
+   },
+   {
     "speciesKey": "roselia",
     "weight": 9,
     "minLevel": 31,
@@ -1726,12 +1012,6 @@
     "maxLevel": 33
    },
    {
-    "speciesKey": "cherubi",
-    "weight": 8,
-    "minLevel": 31,
-    "maxLevel": 33
-   },
-   {
     "speciesKey": "tentacool",
     "weight": 8,
     "minLevel": 31,
@@ -1740,48 +1020,6 @@
    {
     "speciesKey": "quagsire",
     "weight": 8,
-    "minLevel": 31,
-    "maxLevel": 33
-   },
-   {
-    "speciesKey": "buizel",
-    "weight": 7,
-    "minLevel": 31,
-    "maxLevel": 33
-   },
-   {
-    "speciesKey": "aipom",
-    "weight": 6,
-    "minLevel": 31,
-    "maxLevel": 33
-   },
-   {
-    "speciesKey": "smeargle",
-    "weight": 6,
-    "minLevel": 31,
-    "maxLevel": 33
-   },
-   {
-    "speciesKey": "grimer",
-    "weight": 6,
-    "minLevel": 31,
-    "maxLevel": 33
-   },
-   {
-    "speciesKey": "wurmple",
-    "weight": 5,
-    "minLevel": 31,
-    "maxLevel": 33
-   },
-   {
-    "speciesKey": "silcoon",
-    "weight": 5,
-    "minLevel": 31,
-    "maxLevel": 33
-   },
-   {
-    "speciesKey": "cascoon",
-    "weight": 5,
     "minLevel": 31,
     "maxLevel": 33
    },
@@ -1810,14 +1048,14 @@
     "maxLevel": 33
    },
    {
-    "speciesKey": "croagunk",
+    "speciesKey": "buizel",
     "weight": 3,
     "minLevel": 31,
     "maxLevel": 33
    },
    {
-    "speciesKey": "ekans",
-    "weight": 2,
+    "speciesKey": "croagunk",
+    "weight": 3,
     "minLevel": 31,
     "maxLevel": 33
    },
@@ -1828,25 +1066,7 @@
     "maxLevel": 33
    },
    {
-    "speciesKey": "heracross",
-    "weight": 1,
-    "minLevel": 31,
-    "maxLevel": 33
-   },
-   {
     "speciesKey": "tentacruel",
-    "weight": 1,
-    "minLevel": 31,
-    "maxLevel": 33
-   },
-   {
-    "speciesKey": "lotad",
-    "weight": 1,
-    "minLevel": 31,
-    "maxLevel": 33
-   },
-   {
-    "speciesKey": "lombre",
     "weight": 1,
     "minLevel": 31,
     "maxLevel": 33
@@ -1863,25 +1083,7 @@
     "maxLevel": 35
    },
    {
-    "speciesKey": "munchlax",
-    "weight": 25,
-    "minLevel": 33,
-    "maxLevel": 35
-   },
-   {
     "speciesKey": "tentacool",
-    "weight": 15,
-    "minLevel": 33,
-    "maxLevel": 35
-   },
-   {
-    "speciesKey": "burmy",
-    "weight": 15,
-    "minLevel": 33,
-    "maxLevel": 35
-   },
-   {
-    "speciesKey": "combee",
     "weight": 15,
     "minLevel": 33,
     "maxLevel": 35
@@ -1917,12 +1119,6 @@
     "maxLevel": 35
    },
    {
-    "speciesKey": "absol",
-    "weight": 10,
-    "minLevel": 33,
-    "maxLevel": 35
-   },
-   {
     "speciesKey": "chatot",
     "weight": 10,
     "minLevel": 33,
@@ -1931,42 +1127,6 @@
    {
     "speciesKey": "buizel",
     "weight": 9,
-    "minLevel": 33,
-    "maxLevel": 35
-   },
-   {
-    "speciesKey": "cherubi",
-    "weight": 8,
-    "minLevel": 33,
-    "maxLevel": 35
-   },
-   {
-    "speciesKey": "aipom",
-    "weight": 6,
-    "minLevel": 33,
-    "maxLevel": 35
-   },
-   {
-    "speciesKey": "swellow",
-    "weight": 6,
-    "minLevel": 33,
-    "maxLevel": 35
-   },
-   {
-    "speciesKey": "wurmple",
-    "weight": 5,
-    "minLevel": 33,
-    "maxLevel": 35
-   },
-   {
-    "speciesKey": "silcoon",
-    "weight": 5,
-    "minLevel": 33,
-    "maxLevel": 35
-   },
-   {
-    "speciesKey": "cascoon",
-    "weight": 5,
     "minLevel": 33,
     "maxLevel": 35
    },
@@ -1984,12 +1144,6 @@
    },
    {
     "speciesKey": "tentacruel",
-    "weight": 1,
-    "minLevel": 33,
-    "maxLevel": 35
-   },
-   {
-    "speciesKey": "heracross",
     "weight": 1,
     "minLevel": 33,
     "maxLevel": 35
@@ -2018,32 +1172,8 @@
     "maxLevel": 37
    },
    {
-    "speciesKey": "munchlax",
-    "weight": 25,
-    "minLevel": 35,
-    "maxLevel": 37
-   },
-   {
     "speciesKey": "psyduck",
     "weight": 23,
-    "minLevel": 35,
-    "maxLevel": 37
-   },
-   {
-    "speciesKey": "burmy",
-    "weight": 15,
-    "minLevel": 35,
-    "maxLevel": 37
-   },
-   {
-    "speciesKey": "combee",
-    "weight": 15,
-    "minLevel": 35,
-    "maxLevel": 37
-   },
-   {
-    "speciesKey": "rhyhorn",
-    "weight": 14,
     "minLevel": 35,
     "maxLevel": 37
    },
@@ -2078,56 +1208,8 @@
     "maxLevel": 37
    },
    {
-    "speciesKey": "houndour",
-    "weight": 10,
-    "minLevel": 35,
-    "maxLevel": 37
-   },
-   {
-    "speciesKey": "spoink",
-    "weight": 10,
-    "minLevel": 35,
-    "maxLevel": 37
-   },
-   {
-    "speciesKey": "cherubi",
-    "weight": 8,
-    "minLevel": 35,
-    "maxLevel": 37
-   },
-   {
-    "speciesKey": "sudowoodo",
-    "weight": 7,
-    "minLevel": 35,
-    "maxLevel": 37
-   },
-   {
-    "speciesKey": "stunky",
-    "weight": 7,
-    "minLevel": 35,
-    "maxLevel": 37
-   },
-   {
-    "speciesKey": "aipom",
-    "weight": 6,
-    "minLevel": 35,
-    "maxLevel": 37
-   },
-   {
-    "speciesKey": "houndoom",
-    "weight": 6,
-    "minLevel": 35,
-    "maxLevel": 37
-   },
-   {
-    "speciesKey": "poochyena",
-    "weight": 6,
-    "minLevel": 35,
-    "maxLevel": 37
-   },
-   {
-    "speciesKey": "mightyena",
-    "weight": 6,
+    "speciesKey": "rhyhorn",
+    "weight": 9,
     "minLevel": 35,
     "maxLevel": 37
    },
@@ -2144,19 +1226,7 @@
     "maxLevel": 37
    },
    {
-    "speciesKey": "wurmple",
-    "weight": 5,
-    "minLevel": 35,
-    "maxLevel": 37
-   },
-   {
-    "speciesKey": "silcoon",
-    "weight": 5,
-    "minLevel": 35,
-    "maxLevel": 37
-   },
-   {
-    "speciesKey": "cascoon",
+    "speciesKey": "houndour",
     "weight": 5,
     "minLevel": 35,
     "maxLevel": 37
@@ -2174,26 +1244,20 @@
     "maxLevel": 37
    },
    {
+    "speciesKey": "sudowoodo",
+    "weight": 3,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
     "speciesKey": "girafarig",
     "weight": 3,
     "minLevel": 35,
     "maxLevel": 37
    },
    {
-    "speciesKey": "vulpix",
-    "weight": 2,
-    "minLevel": 35,
-    "maxLevel": 37
-   },
-   {
-    "speciesKey": "gligar",
-    "weight": 2,
-    "minLevel": 35,
-    "maxLevel": 37
-   },
-   {
-    "speciesKey": "heracross",
-    "weight": 1,
+    "speciesKey": "stunky",
+    "weight": 3,
     "minLevel": 35,
     "maxLevel": 37
    }
@@ -2202,30 +1266,6 @@
  "sinnoh-route-215": {
   "name": "Route 215",
   "encounters": [
-   {
-    "speciesKey": "munchlax",
-    "weight": 25,
-    "minLevel": 38,
-    "maxLevel": 40
-   },
-   {
-    "speciesKey": "burmy",
-    "weight": 15,
-    "minLevel": 38,
-    "maxLevel": 40
-   },
-   {
-    "speciesKey": "combee",
-    "weight": 15,
-    "minLevel": 38,
-    "maxLevel": 40
-   },
-   {
-    "speciesKey": "geodude",
-    "weight": 13,
-    "minLevel": 38,
-    "maxLevel": 40
-   },
    {
     "speciesKey": "ponyta",
     "weight": 13,
@@ -2245,56 +1285,14 @@
     "maxLevel": 40
    },
    {
-    "speciesKey": "drowzee",
-    "weight": 10,
+    "speciesKey": "geodude",
+    "weight": 8,
     "minLevel": 38,
     "maxLevel": 40
    },
    {
     "speciesKey": "kricketune",
     "weight": 8,
-    "minLevel": 38,
-    "maxLevel": 40
-   },
-   {
-    "speciesKey": "cherubi",
-    "weight": 8,
-    "minLevel": 38,
-    "maxLevel": 40
-   },
-   {
-    "speciesKey": "aipom",
-    "weight": 6,
-    "minLevel": 38,
-    "maxLevel": 40
-   },
-   {
-    "speciesKey": "houndoom",
-    "weight": 6,
-    "minLevel": 38,
-    "maxLevel": 40
-   },
-   {
-    "speciesKey": "mightyena",
-    "weight": 6,
-    "minLevel": 38,
-    "maxLevel": 40
-   },
-   {
-    "speciesKey": "wurmple",
-    "weight": 5,
-    "minLevel": 38,
-    "maxLevel": 40
-   },
-   {
-    "speciesKey": "silcoon",
-    "weight": 5,
-    "minLevel": 38,
-    "maxLevel": 40
-   },
-   {
-    "speciesKey": "cascoon",
-    "weight": 5,
     "minLevel": 38,
     "maxLevel": 40
    },
@@ -2321,18 +1319,6 @@
     "weight": 3,
     "minLevel": 38,
     "maxLevel": 40
-   },
-   {
-    "speciesKey": "gligar",
-    "weight": 2,
-    "minLevel": 38,
-    "maxLevel": 40
-   },
-   {
-    "speciesKey": "heracross",
-    "weight": 1,
-    "minLevel": 38,
-    "maxLevel": 40
    }
   ]
  },
@@ -2341,13 +1327,7 @@
   "encounters": [
    {
     "speciesKey": "snover",
-    "weight": 17,
-    "minLevel": 40,
-    "maxLevel": 42
-   },
-   {
-    "speciesKey": "delibird",
-    "weight": 10,
+    "weight": 12,
     "minLevel": 40,
     "maxLevel": 42
    },
@@ -2370,12 +1350,6 @@
     "maxLevel": 42
    },
    {
-    "speciesKey": "graveler",
-    "weight": 5,
-    "minLevel": 40,
-    "maxLevel": 42
-   },
-   {
     "speciesKey": "zubat",
     "weight": 3,
     "minLevel": 40,
@@ -2394,8 +1368,8 @@
     "maxLevel": 42
    },
    {
-    "speciesKey": "ursaring",
-    "weight": 2,
+    "speciesKey": "graveler",
+    "weight": 1,
     "minLevel": 40,
     "maxLevel": 42
    }
@@ -2406,25 +1380,7 @@
   "encounters": [
    {
     "speciesKey": "snover",
-    "weight": 17,
-    "minLevel": 43,
-    "maxLevel": 45
-   },
-   {
-    "speciesKey": "sneasel",
-    "weight": 13,
-    "minLevel": 43,
-    "maxLevel": 45
-   },
-   {
-    "speciesKey": "medicham",
-    "weight": 13,
-    "minLevel": 43,
-    "maxLevel": 45
-   },
-   {
-    "speciesKey": "delibird",
-    "weight": 10,
+    "weight": 12,
     "minLevel": 43,
     "maxLevel": 45
    },
@@ -2441,8 +1397,8 @@
     "maxLevel": 45
    },
    {
-    "speciesKey": "piloswine",
-    "weight": 6,
+    "speciesKey": "sneasel",
+    "weight": 8,
     "minLevel": 43,
     "maxLevel": 45
    },
@@ -2471,8 +1427,8 @@
     "maxLevel": 45
    },
    {
-    "speciesKey": "ursaring",
-    "weight": 2,
+    "speciesKey": "medicham",
+    "weight": 3,
     "minLevel": 43,
     "maxLevel": 45
    }
@@ -2488,25 +1444,7 @@
     "maxLevel": 47
    },
    {
-    "speciesKey": "munchlax",
-    "weight": 25,
-    "minLevel": 45,
-    "maxLevel": 47
-   },
-   {
     "speciesKey": "tentacool",
-    "weight": 15,
-    "minLevel": 45,
-    "maxLevel": 47
-   },
-   {
-    "speciesKey": "burmy",
-    "weight": 15,
-    "minLevel": 45,
-    "maxLevel": 47
-   },
-   {
-    "speciesKey": "combee",
     "weight": 15,
     "minLevel": 45,
     "maxLevel": 47
@@ -2526,12 +1464,6 @@
    {
     "speciesKey": "lumineon",
     "weight": 11,
-    "minLevel": 45,
-    "maxLevel": 47
-   },
-   {
-    "speciesKey": "voltorb",
-    "weight": 10,
     "minLevel": 45,
     "maxLevel": 47
    },
@@ -2560,12 +1492,6 @@
     "maxLevel": 47
    },
    {
-    "speciesKey": "cherubi",
-    "weight": 8,
-    "minLevel": 45,
-    "maxLevel": 47
-   },
-   {
     "speciesKey": "shellos",
     "weight": 8,
     "minLevel": 45,
@@ -2578,36 +1504,6 @@
     "maxLevel": 47
    },
    {
-    "speciesKey": "ditto",
-    "weight": 6,
-    "minLevel": 45,
-    "maxLevel": 47
-   },
-   {
-    "speciesKey": "aipom",
-    "weight": 6,
-    "minLevel": 45,
-    "maxLevel": 47
-   },
-   {
-    "speciesKey": "wurmple",
-    "weight": 5,
-    "minLevel": 45,
-    "maxLevel": 47
-   },
-   {
-    "speciesKey": "silcoon",
-    "weight": 5,
-    "minLevel": 45,
-    "maxLevel": 47
-   },
-   {
-    "speciesKey": "cascoon",
-    "weight": 5,
-    "minLevel": 45,
-    "maxLevel": 47
-   },
-   {
     "speciesKey": "glameow",
     "weight": 4,
     "minLevel": 45,
@@ -2616,12 +1512,6 @@
    {
     "speciesKey": "tentacruel",
     "weight": 2,
-    "minLevel": 45,
-    "maxLevel": 47
-   },
-   {
-    "speciesKey": "heracross",
-    "weight": 1,
     "minLevel": 45,
     "maxLevel": 47
    },
@@ -2767,25 +1657,7 @@
     "maxLevel": 54
    },
    {
-    "speciesKey": "munchlax",
-    "weight": 25,
-    "minLevel": 52,
-    "maxLevel": 54
-   },
-   {
     "speciesKey": "tentacool",
-    "weight": 15,
-    "minLevel": 52,
-    "maxLevel": 54
-   },
-   {
-    "speciesKey": "burmy",
-    "weight": 15,
-    "minLevel": 52,
-    "maxLevel": 54
-   },
-   {
-    "speciesKey": "combee",
     "weight": 15,
     "minLevel": 52,
     "maxLevel": 54
@@ -2799,12 +1671,6 @@
    {
     "speciesKey": "lumineon",
     "weight": 13,
-    "minLevel": 52,
-    "maxLevel": 54
-   },
-   {
-    "speciesKey": "farfetchd",
-    "weight": 10,
     "minLevel": 52,
     "maxLevel": 54
    },
@@ -2833,19 +1699,7 @@
     "maxLevel": 54
    },
    {
-    "speciesKey": "cherubi",
-    "weight": 8,
-    "minLevel": 52,
-    "maxLevel": 54
-   },
-   {
     "speciesKey": "sudowoodo",
-    "weight": 6,
-    "minLevel": 52,
-    "maxLevel": 54
-   },
-   {
-    "speciesKey": "aipom",
     "weight": 6,
     "minLevel": 52,
     "maxLevel": 54
@@ -2853,24 +1707,6 @@
    {
     "speciesKey": "girafarig",
     "weight": 6,
-    "minLevel": 52,
-    "maxLevel": 54
-   },
-   {
-    "speciesKey": "wurmple",
-    "weight": 5,
-    "minLevel": 52,
-    "maxLevel": 54
-   },
-   {
-    "speciesKey": "silcoon",
-    "weight": 5,
-    "minLevel": 52,
-    "maxLevel": 54
-   },
-   {
-    "speciesKey": "cascoon",
-    "weight": 5,
     "minLevel": 52,
     "maxLevel": 54
    },
@@ -2893,18 +1729,6 @@
     "maxLevel": 54
    },
    {
-    "speciesKey": "nidorina",
-    "weight": 3,
-    "minLevel": 52,
-    "maxLevel": 54
-   },
-   {
-    "speciesKey": "nidorino",
-    "weight": 3,
-    "minLevel": 52,
-    "maxLevel": 54
-   },
-   {
     "speciesKey": "shellos",
     "weight": 3,
     "minLevel": 52,
@@ -2919,12 +1743,6 @@
    {
     "speciesKey": "tentacruel",
     "weight": 2,
-    "minLevel": 52,
-    "maxLevel": 54
-   },
-   {
-    "speciesKey": "heracross",
-    "weight": 1,
     "minLevel": 52,
     "maxLevel": 54
    },
@@ -2946,25 +1764,7 @@
     "maxLevel": 56
    },
    {
-    "speciesKey": "munchlax",
-    "weight": 25,
-    "minLevel": 54,
-    "maxLevel": 56
-   },
-   {
     "speciesKey": "tentacool",
-    "weight": 15,
-    "minLevel": 54,
-    "maxLevel": 56
-   },
-   {
-    "speciesKey": "burmy",
-    "weight": 15,
-    "minLevel": 54,
-    "maxLevel": 56
-   },
-   {
-    "speciesKey": "combee",
     "weight": 15,
     "minLevel": 54,
     "maxLevel": 56
@@ -3000,12 +1800,6 @@
     "maxLevel": 56
    },
    {
-    "speciesKey": "skitty",
-    "weight": 10,
-    "minLevel": 54,
-    "maxLevel": 56
-   },
-   {
     "speciesKey": "floatzel",
     "weight": 10,
     "minLevel": 54,
@@ -3014,42 +1808,6 @@
    {
     "speciesKey": "gastrodon",
     "weight": 10,
-    "minLevel": 54,
-    "maxLevel": 56
-   },
-   {
-    "speciesKey": "cherubi",
-    "weight": 8,
-    "minLevel": 54,
-    "maxLevel": 56
-   },
-   {
-    "speciesKey": "flaaffy",
-    "weight": 6,
-    "minLevel": 54,
-    "maxLevel": 56
-   },
-   {
-    "speciesKey": "aipom",
-    "weight": 6,
-    "minLevel": 54,
-    "maxLevel": 56
-   },
-   {
-    "speciesKey": "wurmple",
-    "weight": 5,
-    "minLevel": 54,
-    "maxLevel": 56
-   },
-   {
-    "speciesKey": "silcoon",
-    "weight": 5,
-    "minLevel": 54,
-    "maxLevel": 56
-   },
-   {
-    "speciesKey": "cascoon",
-    "weight": 5,
     "minLevel": 54,
     "maxLevel": 56
    },
@@ -3109,12 +1867,6 @@
    },
    {
     "speciesKey": "magneton",
-    "weight": 1,
-    "minLevel": 54,
-    "maxLevel": 56
-   },
-   {
-    "speciesKey": "heracross",
     "weight": 1,
     "minLevel": 54,
     "maxLevel": 56
@@ -3220,12 +1972,6 @@
     "maxLevel": 61
    },
    {
-    "speciesKey": "natu",
-    "weight": 10,
-    "minLevel": 59,
-    "maxLevel": 61
-   },
-   {
     "speciesKey": "chatot",
     "weight": 10,
     "minLevel": 59,
@@ -3244,31 +1990,7 @@
     "maxLevel": 61
    },
    {
-    "speciesKey": "beautifly",
-    "weight": 5,
-    "minLevel": 59,
-    "maxLevel": 61
-   },
-   {
-    "speciesKey": "dustox",
-    "weight": 5,
-    "minLevel": 59,
-    "maxLevel": 61
-   },
-   {
     "speciesKey": "roselia",
-    "weight": 5,
-    "minLevel": 59,
-    "maxLevel": 61
-   },
-   {
-    "speciesKey": "dusclops",
-    "weight": 5,
-    "minLevel": 59,
-    "maxLevel": 61
-   },
-   {
-    "speciesKey": "buizel",
     "weight": 5,
     "minLevel": 59,
     "maxLevel": 61
@@ -3292,12 +2014,6 @@
     "maxLevel": 61
    },
    {
-    "speciesKey": "shuckle",
-    "weight": 2,
-    "minLevel": 59,
-    "maxLevel": 61
-   },
-   {
     "speciesKey": "gloom",
     "weight": 1,
     "minLevel": 59,
@@ -3310,7 +2026,13 @@
     "maxLevel": 61
    },
    {
-    "speciesKey": "duskull",
+    "speciesKey": "beautifly",
+    "weight": 1,
+    "minLevel": 59,
+    "maxLevel": 61
+   },
+   {
+    "speciesKey": "dustox",
     "weight": 1,
     "minLevel": 59,
     "maxLevel": 61
@@ -3375,20 +2097,8 @@
     "maxLevel": 63
    },
    {
-    "speciesKey": "makuhita",
-    "weight": 10,
-    "minLevel": 61,
-    "maxLevel": 63
-   },
-   {
     "speciesKey": "machoke",
     "weight": 6,
-    "minLevel": 61,
-    "maxLevel": 63
-   },
-   {
-    "speciesKey": "primeape",
-    "weight": 5,
     "minLevel": 61,
     "maxLevel": 63
    },
@@ -3435,12 +2145,6 @@
     "maxLevel": 63
    },
    {
-    "speciesKey": "mankey",
-    "weight": 1,
-    "minLevel": 61,
-    "maxLevel": 63
-   },
-   {
     "speciesKey": "roselia",
     "weight": 1,
     "minLevel": 61,
@@ -3482,12 +2186,6 @@
     "maxLevel": 66
    },
    {
-    "speciesKey": "krabby",
-    "weight": 10,
-    "minLevel": 64,
-    "maxLevel": 66
-   },
-   {
     "speciesKey": "gyarados",
     "weight": 10,
     "minLevel": 64,
@@ -3514,12 +2212,6 @@
    {
     "speciesKey": "machoke",
     "weight": 6,
-    "minLevel": 64,
-    "maxLevel": 66
-   },
-   {
-    "speciesKey": "primeape",
-    "weight": 5,
     "minLevel": 64,
     "maxLevel": 66
    },
@@ -3572,12 +2264,6 @@
     "maxLevel": 66
    },
    {
-    "speciesKey": "mankey",
-    "weight": 1,
-    "minLevel": 64,
-    "maxLevel": 66
-   },
-   {
     "speciesKey": "dewgong",
     "weight": 1,
     "minLevel": 64,
@@ -3625,12 +2311,6 @@
     "maxLevel": 68
    },
    {
-    "speciesKey": "spinda",
-    "weight": 10,
-    "minLevel": 66,
-    "maxLevel": 68
-   },
-   {
     "speciesKey": "fearow",
     "weight": 8,
     "minLevel": 66,
@@ -3639,12 +2319,6 @@
    {
     "speciesKey": "poliwag",
     "weight": 8,
-    "minLevel": 66,
-    "maxLevel": 68
-   },
-   {
-    "speciesKey": "torkoal",
-    "weight": 6,
     "minLevel": 66,
     "maxLevel": 68
    },
@@ -3681,18 +2355,6 @@
    {
     "speciesKey": "banette",
     "weight": 3,
-    "minLevel": 66,
-    "maxLevel": 68
-   },
-   {
-    "speciesKey": "gligar",
-    "weight": 2,
-    "minLevel": 66,
-    "maxLevel": 68
-   },
-   {
-    "speciesKey": "magby",
-    "weight": 2,
     "minLevel": 66,
     "maxLevel": 68
    },
@@ -3756,12 +2418,6 @@
     "maxLevel": 70
    },
    {
-    "speciesKey": "beldum",
-    "weight": 10,
-    "minLevel": 68,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "dugtrio",
     "weight": 8,
     "minLevel": 68,
@@ -3787,30 +2443,12 @@
    },
    {
     "speciesKey": "diglett",
-    "weight": 5,
-    "minLevel": 68,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "vibrava",
-    "weight": 5,
+    "weight": 1,
     "minLevel": 68,
     "maxLevel": 70
    },
    {
     "speciesKey": "cacnea",
-    "weight": 5,
-    "minLevel": 68,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "sandslash",
-    "weight": 2,
-    "minLevel": 68,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "trapinch",
     "weight": 1,
     "minLevel": 68,
     "maxLevel": 70
@@ -3863,12 +2501,6 @@
     "maxLevel": 73
    },
    {
-    "speciesKey": "pinsir",
-    "weight": 10,
-    "minLevel": 71,
-    "maxLevel": 73
-   },
-   {
     "speciesKey": "gloom",
     "weight": 8,
     "minLevel": 71,
@@ -3893,12 +2525,6 @@
     "maxLevel": 73
    },
    {
-    "speciesKey": "venomoth",
-    "weight": 5,
-    "minLevel": 71,
-    "maxLevel": 73
-   },
-   {
     "speciesKey": "ledian",
     "weight": 5,
     "minLevel": 71,
@@ -3907,30 +2533,6 @@
    {
     "speciesKey": "ariados",
     "weight": 5,
-    "minLevel": 71,
-    "maxLevel": 73
-   },
-   {
-    "speciesKey": "oddish",
-    "weight": 3,
-    "minLevel": 71,
-    "maxLevel": 73
-   },
-   {
-    "speciesKey": "bellsprout",
-    "weight": 3,
-    "minLevel": 71,
-    "maxLevel": 73
-   },
-   {
-    "speciesKey": "beautifly",
-    "weight": 3,
-    "minLevel": 71,
-    "maxLevel": 73
-   },
-   {
-    "speciesKey": "dustox",
-    "weight": 3,
     "minLevel": 71,
     "maxLevel": 73
    },
@@ -3953,31 +2555,31 @@
     "maxLevel": 73
    },
    {
-    "speciesKey": "pineco",
-    "weight": 2,
+    "speciesKey": "oddish",
+    "weight": 1,
     "minLevel": 71,
     "maxLevel": 73
    },
    {
-    "speciesKey": "lombre",
-    "weight": 2,
-    "minLevel": 71,
-    "maxLevel": 73
-   },
-   {
-    "speciesKey": "nuzleaf",
-    "weight": 2,
-    "minLevel": 71,
-    "maxLevel": 73
-   },
-   {
-    "speciesKey": "venonat",
+    "speciesKey": "bellsprout",
     "weight": 1,
     "minLevel": 71,
     "maxLevel": 73
    },
    {
     "speciesKey": "scyther",
+    "weight": 1,
+    "minLevel": 71,
+    "maxLevel": 73
+   },
+   {
+    "speciesKey": "beautifly",
+    "weight": 1,
+    "minLevel": 71,
+    "maxLevel": 73
+   },
+   {
+    "speciesKey": "dustox",
     "weight": 1,
     "minLevel": 71,
     "maxLevel": 73
@@ -4001,7 +2603,7 @@
    },
    {
     "speciesKey": "pelipper",
-    "weight": 20,
+    "weight": 15,
     "minLevel": 73,
     "maxLevel": 75
    },
@@ -4030,12 +2632,6 @@
     "maxLevel": 75
    },
    {
-    "speciesKey": "corsola",
-    "weight": 10,
-    "minLevel": 73,
-    "maxLevel": 75
-   },
-   {
     "speciesKey": "wailmer",
     "weight": 10,
     "minLevel": 73,
@@ -4050,12 +2646,6 @@
    {
     "speciesKey": "spheal",
     "weight": 8,
-    "minLevel": 73,
-    "maxLevel": 75
-   },
-   {
-    "speciesKey": "togepi",
-    "weight": 6,
     "minLevel": 73,
     "maxLevel": 75
    },
@@ -4173,6 +2763,30 @@
     "maxLevel": 70
    },
    {
+    "speciesKey": "cherubi",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "ambipom",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "spiritomb",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "togekiss",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
     "speciesKey": "porygon-z",
     "weight": 1,
     "minLevel": 70,
@@ -4186,6 +2800,12 @@
    },
    {
     "speciesKey": "mesprit",
+    "weight": 1,
+    "minLevel": 75,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "azelf",
     "weight": 1,
     "minLevel": 75,
     "maxLevel": 75

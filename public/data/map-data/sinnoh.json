@@ -364,7 +364,15 @@
      "locationId": "sinnoh-route-205",
      "count": 14
     }
-   ]
+   ],
+   "caughtOnRoute": {
+    "routeKey": "sinnoh-route-205",
+    "species": [
+     "silcoon",
+     "cascoon"
+    ],
+    "count": 2
+   }
   },
   "unlockOrder": 400205.5,
   "position": {
@@ -564,14 +572,7 @@
      "locationId": "sinnoh-route-209",
      "count": 12
     }
-   ],
-   "caughtOnRoute": {
-    "routeKey": "sinnoh-route-209",
-    "species": [
-     "spiritomb"
-    ],
-    "count": 1
-   }
+   ]
   },
   "unlockOrder": 400209.5,
   "position": {
@@ -974,10 +975,9 @@
    "caughtOnRoute": {
     "routeKey": "sinnoh-route-217",
     "species": [
-     "swinub",
-     "piloswine"
+     "swinub"
     ],
-    "count": 2
+    "count": 1
    }
   },
   "unlockOrder": 400217.5,
@@ -1428,10 +1428,9 @@
    "caughtOnRoute": {
     "routeKey": "sinnoh-route-228",
     "species": [
-     "cacturne",
-     "vibrava"
+     "cacturne"
     ],
-    "count": 2
+    "count": 1
    }
   },
   "unlockOrder": 400229,

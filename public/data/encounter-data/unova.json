@@ -104,12 +104,6 @@
   "name": "Route 2",
   "encounters": [
    {
-    "speciesKey": "watchog",
-    "weight": 19,
-    "minLevel": 8,
-    "maxLevel": 10
-   },
-   {
     "speciesKey": "audino",
     "weight": 19,
     "minLevel": 8,
@@ -124,6 +118,12 @@
    {
     "speciesKey": "lillipup",
     "weight": 10,
+    "minLevel": 8,
+    "maxLevel": 10
+   },
+   {
+    "speciesKey": "watchog",
+    "weight": 8,
     "minLevel": 8,
     "maxLevel": 10
    },
@@ -164,18 +164,6 @@
     "maxLevel": 10
    },
    {
-    "speciesKey": "nidoranF",
-    "weight": 3,
-    "minLevel": 8,
-    "maxLevel": 10
-   },
-   {
-    "speciesKey": "nidoranM",
-    "weight": 3,
-    "minLevel": 8,
-    "maxLevel": 10
-   },
-   {
     "speciesKey": "wigglytuff",
     "weight": 1,
     "minLevel": 8,
@@ -189,12 +177,6 @@
    },
    {
     "speciesKey": "stoutland",
-    "weight": 1,
-    "minLevel": 8,
-    "maxLevel": 10
-   },
-   {
-    "speciesKey": "granbull",
     "weight": 1,
     "minLevel": 8,
     "maxLevel": 10
@@ -225,18 +207,6 @@
    {
     "speciesKey": "pidove",
     "weight": 20,
-    "minLevel": 11,
-    "maxLevel": 13
-   },
-   {
-    "speciesKey": "pachirisu",
-    "weight": 19,
-    "minLevel": 11,
-    "maxLevel": 13
-   },
-   {
-    "speciesKey": "bibarel",
-    "weight": 19,
     "minLevel": 11,
     "maxLevel": 13
    },
@@ -301,18 +271,6 @@
     "maxLevel": 13
    },
    {
-    "speciesKey": "manectric",
-    "weight": 5,
-    "minLevel": 11,
-    "maxLevel": 13
-   },
-   {
-    "speciesKey": "venonat",
-    "weight": 5,
-    "minLevel": 11,
-    "maxLevel": 13
-   },
-   {
     "speciesKey": "crawdaunt",
     "weight": 3,
     "minLevel": 11,
@@ -335,42 +293,12 @@
     "weight": 1,
     "minLevel": 11,
     "maxLevel": 13
-   },
-   {
-    "speciesKey": "lombre",
-    "weight": 1,
-    "minLevel": 11,
-    "maxLevel": 13
    }
   ]
  },
  "unova-route-4": {
   "name": "Route 4",
   "encounters": [
-   {
-    "speciesKey": "cottonee",
-    "weight": 25,
-    "minLevel": 14,
-    "maxLevel": 16
-   },
-   {
-    "speciesKey": "petilil",
-    "weight": 25,
-    "minLevel": 14,
-    "maxLevel": 16
-   },
-   {
-    "speciesKey": "braviary",
-    "weight": 25,
-    "minLevel": 14,
-    "maxLevel": 16
-   },
-   {
-    "speciesKey": "mandibuzz",
-    "weight": 25,
-    "minLevel": 14,
-    "maxLevel": 16
-   },
    {
     "speciesKey": "alomomola",
     "weight": 24,
@@ -479,12 +407,6 @@
     "maxLevel": 19
    },
    {
-    "speciesKey": "foongus",
-    "weight": 19,
-    "minLevel": 17,
-    "maxLevel": 19
-   },
-   {
     "speciesKey": "minccino",
     "weight": 15,
     "minLevel": 17,
@@ -531,12 +453,6 @@
  "unova-route-6": {
   "name": "Route 6",
   "encounters": [
-   {
-    "speciesKey": "foongus",
-    "weight": 80,
-    "minLevel": 20,
-    "maxLevel": 22
-   },
    {
     "speciesKey": "marill",
     "weight": 25,
@@ -598,7 +514,7 @@
     "maxLevel": 22
    },
    {
-    "speciesKey": "woobat",
+    "speciesKey": "foongus",
     "weight": 5,
     "minLevel": 20,
     "maxLevel": 22
@@ -644,12 +560,6 @@
     "weight": 1,
     "minLevel": 20,
     "maxLevel": 22
-   },
-   {
-    "speciesKey": "nosepass",
-    "weight": 1,
-    "minLevel": 20,
-    "maxLevel": 22
    }
   ]
  },
@@ -657,20 +567,8 @@
   "name": "Route 7",
   "encounters": [
    {
-    "speciesKey": "foongus",
-    "weight": 53,
-    "minLevel": 23,
-    "maxLevel": 25
-   },
-   {
     "speciesKey": "tranquill",
     "weight": 50,
-    "minLevel": 23,
-    "maxLevel": 25
-   },
-   {
-    "speciesKey": "gigalith",
-    "weight": 25,
     "minLevel": 23,
     "maxLevel": 25
    },
@@ -693,18 +591,6 @@
     "maxLevel": 25
    },
    {
-    "speciesKey": "zangoose",
-    "weight": 10,
-    "minLevel": 23,
-    "maxLevel": 25
-   },
-   {
-    "speciesKey": "seviper",
-    "weight": 10,
-    "minLevel": 23,
-    "maxLevel": 25
-   },
-   {
     "speciesKey": "zebstrika",
     "weight": 10,
     "minLevel": 23,
@@ -717,7 +603,25 @@
     "maxLevel": 25
    },
    {
+    "speciesKey": "zangoose",
+    "weight": 3,
+    "minLevel": 23,
+    "maxLevel": 25
+   },
+   {
+    "speciesKey": "seviper",
+    "weight": 3,
+    "minLevel": 23,
+    "maxLevel": 25
+   },
+   {
     "speciesKey": "emolga",
+    "weight": 3,
+    "minLevel": 23,
+    "maxLevel": 25
+   },
+   {
+    "speciesKey": "foongus",
     "weight": 3,
     "minLevel": 23,
     "maxLevel": 25
@@ -793,12 +697,6 @@
     "maxLevel": 31
    },
    {
-    "speciesKey": "liepard",
-    "weight": 19,
-    "minLevel": 29,
-    "maxLevel": 31
-   },
-   {
     "speciesKey": "minccino",
     "weight": 15,
     "minLevel": 29,
@@ -825,6 +723,12 @@
    {
     "speciesKey": "pawniard",
     "weight": 8,
+    "minLevel": 29,
+    "maxLevel": 31
+   },
+   {
+    "speciesKey": "liepard",
+    "weight": 5,
     "minLevel": 29,
     "maxLevel": 31
    },
@@ -857,30 +761,12 @@
     "weight": 1,
     "minLevel": 29,
     "maxLevel": 31
-   },
-   {
-    "speciesKey": "bouffalant",
-    "weight": 1,
-    "minLevel": 29,
-    "maxLevel": 31
    }
   ]
  },
  "unova-route-10": {
   "name": "Route 10",
   "encounters": [
-   {
-    "speciesKey": "foongus",
-    "weight": 53,
-    "minLevel": 32,
-    "maxLevel": 34
-   },
-   {
-    "speciesKey": "amoonguss",
-    "weight": 53,
-    "minLevel": 32,
-    "maxLevel": 34
-   },
    {
     "speciesKey": "audino",
     "weight": 20,
@@ -924,6 +810,18 @@
     "maxLevel": 34
    },
    {
+    "speciesKey": "foongus",
+    "weight": 3,
+    "minLevel": 32,
+    "maxLevel": 34
+   },
+   {
+    "speciesKey": "amoonguss",
+    "weight": 3,
+    "minLevel": 32,
+    "maxLevel": 34
+   },
+   {
     "speciesKey": "stoutland",
     "weight": 1,
     "minLevel": 32,
@@ -940,18 +838,6 @@
  "unova-route-11": {
   "name": "Route 11",
   "encounters": [
-   {
-    "speciesKey": "amoonguss",
-    "weight": 53,
-    "minLevel": 35,
-    "maxLevel": 37
-   },
-   {
-    "speciesKey": "virizion",
-    "weight": 50,
-    "minLevel": 35,
-    "maxLevel": 37
-   },
    {
     "speciesKey": "goldeen",
     "weight": 25,
@@ -1050,6 +936,12 @@
    },
    {
     "speciesKey": "karrablast",
+    "weight": 3,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "amoonguss",
     "weight": 3,
     "minLevel": 35,
     "maxLevel": 37
@@ -1215,12 +1107,6 @@
   "name": "Route 13",
   "encounters": [
    {
-    "speciesKey": "cobalion",
-    "weight": 50,
-    "minLevel": 40,
-    "maxLevel": 42
-   },
-   {
     "speciesKey": "luvdisc",
     "weight": 25,
     "minLevel": 40,
@@ -1241,12 +1127,6 @@
    {
     "speciesKey": "audino",
     "weight": 21,
-    "minLevel": 40,
-    "maxLevel": 42
-   },
-   {
-    "speciesKey": "foongus",
-    "weight": 19,
     "minLevel": 40,
     "maxLevel": 42
    },
@@ -1317,12 +1197,6 @@
     "maxLevel": 42
    },
    {
-    "speciesKey": "drifloon",
-    "weight": 5,
-    "minLevel": 40,
-    "maxLevel": 42
-   },
-   {
     "speciesKey": "kingler",
     "weight": 4,
     "minLevel": 40,
@@ -1354,18 +1228,6 @@
    },
    {
     "speciesKey": "tangrowth",
-    "weight": 1,
-    "minLevel": 40,
-    "maxLevel": 42
-   },
-   {
-    "speciesKey": "skorupi",
-    "weight": 1,
-    "minLevel": 40,
-    "maxLevel": 42
-   },
-   {
-    "speciesKey": "spheal",
     "weight": 1,
     "minLevel": 40,
     "maxLevel": 42
@@ -1488,12 +1350,6 @@
  "unova-route-15": {
   "name": "Route 15",
   "encounters": [
-   {
-    "speciesKey": "rotom",
-    "weight": 25,
-    "minLevel": 46,
-    "maxLevel": 48
-   },
    {
     "speciesKey": "audino",
     "weight": 19,
@@ -1726,12 +1582,6 @@
     "maxLevel": 57
    },
    {
-    "speciesKey": "corsola",
-    "weight": 10,
-    "minLevel": 55,
-    "maxLevel": 57
-   },
-   {
     "speciesKey": "lumineon",
     "weight": 10,
     "minLevel": 55,
@@ -1745,12 +1595,6 @@
    },
    {
     "speciesKey": "crustle",
-    "weight": 10,
-    "minLevel": 55,
-    "maxLevel": 57
-   },
-   {
-    "speciesKey": "kingler",
     "weight": 10,
     "minLevel": 55,
     "maxLevel": 57
@@ -1780,12 +1624,6 @@
     "maxLevel": 57
    },
    {
-    "speciesKey": "chatot",
-    "weight": 5,
-    "minLevel": 55,
-    "maxLevel": 57
-   },
-   {
     "speciesKey": "seadra",
     "weight": 4,
     "minLevel": 55,
@@ -1804,6 +1642,12 @@
     "maxLevel": 57
    },
    {
+    "speciesKey": "corsola",
+    "weight": 1,
+    "minLevel": 55,
+    "maxLevel": 57
+   },
+   {
     "speciesKey": "kingdra",
     "weight": 1,
     "minLevel": 55,
@@ -1811,12 +1655,6 @@
    },
    {
     "speciesKey": "throh",
-    "weight": 1,
-    "minLevel": 55,
-    "maxLevel": 57
-   },
-   {
-    "speciesKey": "dragonite",
     "weight": 1,
     "minLevel": 55,
     "maxLevel": 57
@@ -2045,18 +1883,6 @@
   "name": "Route 22",
   "encounters": [
    {
-    "speciesKey": "amoonguss",
-    "weight": 60,
-    "minLevel": 70,
-    "maxLevel": 72
-   },
-   {
-    "speciesKey": "terrakion",
-    "weight": 50,
-    "minLevel": 70,
-    "maxLevel": 72
-   },
-   {
     "speciesKey": "marill",
     "weight": 28,
     "minLevel": 70,
@@ -2077,6 +1903,12 @@
    {
     "speciesKey": "mienfoo",
     "weight": 13,
+    "minLevel": 70,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "amoonguss",
+    "weight": 10,
     "minLevel": 70,
     "maxLevel": 72
    },
@@ -2134,18 +1966,6 @@
   "name": "Route 23",
   "encounters": [
    {
-    "speciesKey": "amoonguss",
-    "weight": 80,
-    "minLevel": 73,
-    "maxLevel": 75
-   },
-   {
-    "speciesKey": "azelf",
-    "weight": 25,
-    "minLevel": 73,
-    "maxLevel": 75
-   },
-   {
     "speciesKey": "buizel",
     "weight": 23,
     "minLevel": 73,
@@ -2182,18 +2002,6 @@
     "maxLevel": 75
    },
    {
-    "speciesKey": "zangoose",
-    "weight": 10,
-    "minLevel": 73,
-    "maxLevel": 75
-   },
-   {
-    "speciesKey": "seviper",
-    "weight": 10,
-    "minLevel": 73,
-    "maxLevel": 75
-   },
-   {
     "speciesKey": "golduck",
     "weight": 5,
     "minLevel": 73,
@@ -2201,6 +2009,12 @@
    },
    {
     "speciesKey": "gligar",
+    "weight": 5,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "amoonguss",
     "weight": 5,
     "minLevel": 73,
     "maxLevel": 75
@@ -2237,12 +2051,6 @@
    },
    {
     "speciesKey": "vullaby",
-    "weight": 3,
-    "minLevel": 73,
-    "maxLevel": 75
-   },
-   {
-    "speciesKey": "absol",
     "weight": 3,
     "minLevel": 73,
     "maxLevel": 75
@@ -2331,6 +2139,18 @@
     "maxLevel": 70
    },
    {
+    "speciesKey": "woobat",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "swoobat",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
     "speciesKey": "drilbur",
     "weight": 1,
     "minLevel": 70,
@@ -2350,6 +2170,18 @@
    },
    {
     "speciesKey": "tympole",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "cottonee",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "whimsicott",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70
@@ -2425,6 +2257,24 @@
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70
+   },
+   {
+    "speciesKey": "cobalion",
+    "weight": 1,
+    "minLevel": 75,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "terrakion",
+    "weight": 1,
+    "minLevel": 75,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "virizion",
+    "weight": 1,
+    "minLevel": 75,
+    "maxLevel": 75
    },
    {
     "speciesKey": "tornadus",

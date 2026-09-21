@@ -35,6 +35,25 @@ const PREFERRED = {
   galar: ['sword', 'shield'],
   paldea: ['scarlet', 'violet'],
 }
+const REGION_GENERATION = {
+  kanto: 1, johto: 2, hoenn: 3, sinnoh: 4, unova: 5,
+  kalos: 6, alola: 7, galar: 8, paldea: 9,
+}
+// version -> generation, so the fallback (used when a route has no encounter in
+// any preferred version) can stay inside the region's own generation instead of
+// grabbing whatever version PokéAPI lists first (which leaked Gold/SoulSilver
+// species onto Kanto Victory Road).
+const VERSION_GENERATION = {
+  red: 1, blue: 1, yellow: 1, firered: 1, leafgreen: 1, 'lets-go-pikachu': 1, 'lets-go-eevee': 1,
+  gold: 2, silver: 2, crystal: 2, heartgold: 2, soulsilver: 2,
+  ruby: 3, sapphire: 3, emerald: 3, 'omega-ruby': 3, 'alpha-sapphire': 3,
+  diamond: 4, pearl: 4, platinum: 4, 'brilliant-diamond': 4, 'shining-pearl': 4,
+  black: 5, white: 5, 'black-2': 5, 'white-2': 5,
+  x: 6, y: 6,
+  sun: 7, moon: 7, 'ultra-sun': 7, 'ultra-moon': 7,
+  sword: 8, shield: 8,
+  scarlet: 9, violet: 9,
+}
 
 fs.mkdirSync(CACHE, { recursive: true })
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
@@ -131,8 +150,25 @@ async function paldeaAreaEncounters(slug) {
     }))
     .sort((a, b) => b.weight - a.weight)
 }
-// gift/static interactions are not wild encounters
-const isWildMethod = (name) => !/gift|only-one|interact|ranger|roaming|wailmer|devon-scope/i.test(name)
+// gift/static interactions and other non-repeatable acquisition methods are not
+// ordinary wild encounters: tree shaking, Rock Smash, hidden grottos, berry
+// trees, ambushes, in-game trades, Island Scan and (crucially) static
+// legendaries. Time/weather/season-gated walking, fishing and surfing stay.
+const isWildMethod = (name) =>
+  !/gift|only-one|interact|ranger|roaming|wailmer|devon-scope|^static$|npc-trade|headbutt|honey-tree|hidden-grotto|berry-trees|island-scan|pokeflute|rustling-bush-ambush|ground-ambush|wanderer|squirt-bottle|feebas-tile-fishing/.test(
+    name
+  )
+// Encounter conditions that aren't ordinary walking: radio/GBA dual-slot
+// crossovers, Poké Radar chaining, in-game trades, fossil revival, story
+// flags and swarms. Left in, these leak non-native or non-repeatable species
+// into route tables (HGSS radio brought Shinx/Plusle/Minun onto Johto Route 29).
+// Time, weather, seasons and the "off" variants are ordinary variation and stay.
+const isConditionalEncounter = (conditions) =>
+  (conditions ?? []).some((condition) =>
+    /^(radio-hoenn|radio-sinnoh|radar-on|slot2-|trade-|item-|other-|special-encounter|swarm-yes|story-)/.test(
+      condition.name
+    )
+  )
 
 async function routeEncounters(regionId, routeSlug) {
   let location
@@ -168,15 +204,23 @@ async function routeEncounters(regionId, routeSlug) {
     for (const area of areas) {
       for (const enc of area.pokemon_encounters) {
         const key = keyByNorm[norm(enc.pokemon.name)]
-        if (!key) continue
+        // Legendaries (and mythicals/Ultra Beasts) belong on Raid Islands, not
+        // ordinary routes; a few have a spurious `walk` entry in PokéAPI (e.g.
+        // Alola's Kartana).
+        if (!key || species[key]?.legendary) continue
         let detail = null
         for (const version of preferred) {
           detail = enc.version_details.find((d) => d.version.name === version)
           if (detail) break
         }
-        if (!detail && allowFallback) detail = enc.version_details[0]
+        if (!detail && allowFallback)
+          detail = enc.version_details.find(
+            (d) => VERSION_GENERATION[d.version.name] === REGION_GENERATION[regionId]
+          )
         if (!detail || !detail.encounter_details?.length) continue
-        const wild = detail.encounter_details.filter((d) => isWildMethod(d.method.name))
+        const wild = detail.encounter_details.filter(
+          (d) => isWildMethod(d.method.name) && !isConditionalEncounter(d.condition_values)
+        )
         if (!wild.length) continue
         const levels = wild.map((d) => [d.min_level, d.max_level])
         const min = Math.min(...levels.map((l) => l[0]))

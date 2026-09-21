@@ -148,14 +148,7 @@
      "locationId": "galar-route-2",
      "count": 16
     }
-   ],
-   "caughtOnRoute": {
-    "routeKey": "galar-route-2",
-    "species": [
-     "obstagoon"
-    ],
-    "count": 1
-   }
+   ]
   },
   "unlockOrder": 800002.5,
   "position": {
@@ -326,10 +319,9 @@
    "caughtOnRoute": {
     "routeKey": "galar-route-5",
     "species": [
-     "eldegoss",
      "dottler"
     ],
-    "count": 2
+    "count": 1
    }
   },
   "unlockOrder": 800005.5,
@@ -656,7 +648,7 @@
     "species": [
      "bergmite",
      "clobbopus",
-     "grapploct"
+     "cramorant"
     ],
     "count": 3
    }

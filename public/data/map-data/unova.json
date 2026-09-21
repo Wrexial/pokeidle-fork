@@ -491,10 +491,9 @@
    "caughtOnRoute": {
     "routeKey": "unova-route-4",
     "species": [
-     "cottonee",
      "darumaka"
     ],
-    "count": 2
+    "count": 1
    }
   },
   "unlockOrder": 500004.5,
@@ -693,10 +692,9 @@
     "routeKey": "unova-route-6",
     "species": [
      "vanillite",
-     "swadloon",
-     "woobat"
+     "swadloon"
     ],
-    "count": 3
+    "count": 2
    }
   },
   "unlockOrder": 500006.5,
@@ -880,9 +878,10 @@
    "caughtOnRoute": {
     "routeKey": "unova-route-9",
     "species": [
+     "duosion",
      "garbodor"
     ],
-    "count": 1
+    "count": 2
    }
   },
   "unlockOrder": 500009.5,
@@ -985,7 +984,14 @@
      "count": 5
     }
    ],
-   "caughtCount": 18
+   "caughtOnRoute": {
+    "routeKey": "unova-route-11",
+    "species": [
+     "braviary",
+     "mandibuzz"
+    ],
+    "count": 2
+   }
   },
   "unlockOrder": 500012,
   "position": {
@@ -1403,7 +1409,13 @@
      "count": 5
     }
    ],
-   "caughtCount": 26
+   "caughtOnRoute": {
+    "routeKey": "unova-route-18",
+    "species": [
+     "crustle"
+    ],
+    "count": 1
+   }
   },
   "unlockOrder": 500018.5,
   "position": {

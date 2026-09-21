@@ -1400,7 +1400,8 @@
    "x": 90,
    "y": 14
   },
-  "region": "kanto"
+  "region": "kanto",
+  "routeKey": "raidIsland"
  },
  "trainingArea": {
   "id": "trainingArea",

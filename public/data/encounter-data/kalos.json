@@ -328,12 +328,6 @@
   "name": "Route 6",
   "encounters": [
    {
-    "speciesKey": "venipede",
-    "weight": 20,
-    "minLevel": 21,
-    "maxLevel": 23
-   },
-   {
     "speciesKey": "oddish",
     "weight": 8,
     "minLevel": 21,
@@ -341,12 +335,6 @@
    },
    {
     "speciesKey": "sentret",
-    "weight": 5,
-    "minLevel": 21,
-    "maxLevel": 23
-   },
-   {
-    "speciesKey": "audino",
     "weight": 5,
     "minLevel": 21,
     "maxLevel": 23
@@ -380,12 +368,6 @@
  "kalos-route-7": {
   "name": "Route 7",
   "encounters": [
-   {
-    "speciesKey": "snorlax",
-    "weight": 25,
-    "minLevel": 24,
-    "maxLevel": 26
-   },
    {
     "speciesKey": "flabebe",
     "weight": 19,
@@ -909,25 +891,19 @@
   "name": "Route 13",
   "encounters": [
    {
-    "speciesKey": "dugtrio",
-    "weight": 20,
-    "minLevel": 44,
-    "maxLevel": 46
-   },
-   {
-    "speciesKey": "trapinch",
-    "weight": 20,
-    "minLevel": 44,
-    "maxLevel": 46
-   },
-   {
     "speciesKey": "graveler",
     "weight": 17,
     "minLevel": 44,
     "maxLevel": 46
    },
    {
-    "speciesKey": "gible",
+    "speciesKey": "dugtrio",
+    "weight": 10,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "trapinch",
     "weight": 10,
     "minLevel": 44,
     "maxLevel": 46
@@ -935,6 +911,12 @@
    {
     "speciesKey": "slugma",
     "weight": 9,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "gible",
+    "weight": 5,
     "minLevel": 44,
     "maxLevel": 46
    }
@@ -1210,12 +1192,6 @@
   "name": "Route 18",
   "encounters": [
    {
-    "speciesKey": "durant",
-    "weight": 38,
-    "minLevel": 60,
-    "maxLevel": 62
-   },
-   {
     "speciesKey": "graveler",
     "weight": 31,
     "minLevel": 60,
@@ -1223,6 +1199,12 @@
    },
    {
     "speciesKey": "geodude",
+    "weight": 15,
+    "minLevel": 60,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "durant",
     "weight": 15,
     "minLevel": 60,
     "maxLevel": 62
@@ -1259,7 +1241,7 @@
    },
    {
     "speciesKey": "heatmor",
-    "weight": 6,
+    "weight": 4,
     "minLevel": 60,
     "maxLevel": 62
    },

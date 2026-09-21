@@ -36,6 +36,22 @@
     "level": 70
    },
    {
+    "speciesKey": "articuno",
+    "level": 75
+   },
+   {
+    "speciesKey": "zapdos",
+    "level": 75
+   },
+   {
+    "speciesKey": "moltres",
+    "level": 75
+   },
+   {
+    "speciesKey": "mewtwo",
+    "level": 75
+   },
+   {
     "speciesKey": "mew",
     "level": 70
    }
@@ -56,6 +72,26 @@
     "level": 70
    },
    {
+    "speciesKey": "togepi",
+    "level": 70
+   },
+   {
+    "speciesKey": "togetic",
+    "level": 70
+   },
+   {
+    "speciesKey": "natu",
+    "level": 70
+   },
+   {
+    "speciesKey": "xatu",
+    "level": 70
+   },
+   {
+    "speciesKey": "aipom",
+    "level": 70
+   },
+   {
     "speciesKey": "unown",
     "level": 70
    },
@@ -65,6 +101,10 @@
    },
    {
     "speciesKey": "smoochum",
+    "level": 70
+   },
+   {
+    "speciesKey": "magby",
     "level": 70
    },
    {
@@ -125,6 +165,18 @@
    {
     "speciesKey": "armaldo",
     "level": 70
+   },
+   {
+    "speciesKey": "beldum",
+    "level": 75
+   },
+   {
+    "speciesKey": "metang",
+    "level": 75
+   },
+   {
+    "speciesKey": "metagross",
+    "level": 75
    },
    {
     "speciesKey": "regirock",
@@ -194,6 +246,22 @@
     "level": 70
    },
    {
+    "speciesKey": "cherubi",
+    "level": 70
+   },
+   {
+    "speciesKey": "ambipom",
+    "level": 70
+   },
+   {
+    "speciesKey": "spiritomb",
+    "level": 70
+   },
+   {
+    "speciesKey": "togekiss",
+    "level": 70
+   },
+   {
     "speciesKey": "porygon-z",
     "level": 70
    },
@@ -203,6 +271,10 @@
    },
    {
     "speciesKey": "mesprit",
+    "level": 75
+   },
+   {
+    "speciesKey": "azelf",
     "level": 75
    },
    {
@@ -301,6 +373,14 @@
     "level": 70
    },
    {
+    "speciesKey": "woobat",
+    "level": 70
+   },
+   {
+    "speciesKey": "swoobat",
+    "level": 70
+   },
+   {
     "speciesKey": "drilbur",
     "level": 70
    },
@@ -314,6 +394,14 @@
    },
    {
     "speciesKey": "tympole",
+    "level": 70
+   },
+   {
+    "speciesKey": "cottonee",
+    "level": 70
+   },
+   {
+    "speciesKey": "whimsicott",
     "level": 70
    },
    {
@@ -363,6 +451,18 @@
    {
     "speciesKey": "volcarona",
     "level": 70
+   },
+   {
+    "speciesKey": "cobalion",
+    "level": 75
+   },
+   {
+    "speciesKey": "terrakion",
+    "level": 75
+   },
+   {
+    "speciesKey": "virizion",
+    "level": 75
    },
    {
     "speciesKey": "tornadus",
@@ -483,6 +583,14 @@
     "level": 70
    },
    {
+    "speciesKey": "wimpod",
+    "level": 70
+   },
+   {
+    "speciesKey": "golisopod",
+    "level": 70
+   },
+   {
     "speciesKey": "type: null",
     "level": 75
    },
@@ -567,6 +675,10 @@
     "level": 70
    },
    {
+    "speciesKey": "kartana",
+    "level": 70
+   },
+   {
     "speciesKey": "guzzlord",
     "level": 70
    },
@@ -635,6 +747,10 @@
    },
    {
     "speciesKey": "grimmsnarl",
+    "level": 70
+   },
+   {
+    "speciesKey": "obstagoon",
     "level": 70
    },
    {

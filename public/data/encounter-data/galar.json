@@ -74,36 +74,6 @@
   "name": "Route 2",
   "encounters": [
    {
-    "speciesKey": "chewtle",
-    "weight": 31,
-    "minLevel": 13,
-    "maxLevel": 15
-   },
-   {
-    "speciesKey": "yamper",
-    "weight": 26,
-    "minLevel": 13,
-    "maxLevel": 15
-   },
-   {
-    "speciesKey": "lapras",
-    "weight": 25,
-    "minLevel": 13,
-    "maxLevel": 15
-   },
-   {
-    "speciesKey": "drednaw",
-    "weight": 25,
-    "minLevel": 13,
-    "maxLevel": 15
-   },
-   {
-    "speciesKey": "obstagoon",
-    "weight": 25,
-    "minLevel": 13,
-    "maxLevel": 15
-   },
-   {
     "speciesKey": "magikarp",
     "weight": 20,
     "minLevel": 13,
@@ -118,6 +88,12 @@
    {
     "speciesKey": "rookidee",
     "weight": 14,
+    "minLevel": 13,
+    "maxLevel": 15
+   },
+   {
+    "speciesKey": "chewtle",
+    "weight": 11,
     "minLevel": 13,
     "maxLevel": 15
    },
@@ -176,6 +152,12 @@
     "maxLevel": 15
    },
    {
+    "speciesKey": "yamper",
+    "weight": 1,
+    "minLevel": 13,
+    "maxLevel": 15
+   },
+   {
     "speciesKey": "gyarados",
     "weight": 1,
     "minLevel": 13,
@@ -193,20 +175,8 @@
   "name": "Route 3",
   "encounters": [
    {
-    "speciesKey": "corvisquire",
-    "weight": 25,
-    "minLevel": 20,
-    "maxLevel": 22
-   },
-   {
     "speciesKey": "rolycoly",
     "weight": 25,
-    "minLevel": 20,
-    "maxLevel": 22
-   },
-   {
-    "speciesKey": "skwovet",
-    "weight": 20,
     "minLevel": 20,
     "maxLevel": 22
    },
@@ -224,12 +194,6 @@
    },
    {
     "speciesKey": "machop",
-    "weight": 5,
-    "minLevel": 20,
-    "maxLevel": 22
-   },
-   {
-    "speciesKey": "cherubi",
     "weight": 5,
     "minLevel": 20,
     "maxLevel": 22
@@ -293,18 +257,6 @@
  "galar-route-4": {
   "name": "Route 4",
   "encounters": [
-   {
-    "speciesKey": "diglett",
-    "weight": 25,
-    "minLevel": 28,
-    "maxLevel": 30
-   },
-   {
-    "speciesKey": "skwovet",
-    "weight": 25,
-    "minLevel": 28,
-    "maxLevel": 30
-   },
    {
     "speciesKey": "magikarp",
     "weight": 18,
@@ -388,18 +340,6 @@
  "galar-route-5": {
   "name": "Route 5",
   "encounters": [
-   {
-    "speciesKey": "skwovet",
-    "weight": 25,
-    "minLevel": 35,
-    "maxLevel": 37
-   },
-   {
-    "speciesKey": "eldegoss",
-    "weight": 25,
-    "minLevel": 35,
-    "maxLevel": 37
-   },
    {
     "speciesKey": "magikarp",
     "weight": 18,
@@ -502,12 +442,6 @@
   "name": "Route 6",
   "encounters": [
    {
-    "speciesKey": "greedent",
-    "weight": 25,
-    "minLevel": 43,
-    "maxLevel": 45
-   },
-   {
     "speciesKey": "magikarp",
     "weight": 18,
     "minLevel": 43,
@@ -609,12 +543,6 @@
   "name": "Route 7",
   "encounters": [
    {
-    "speciesKey": "greedent",
-    "weight": 25,
-    "minLevel": 50,
-    "maxLevel": 52
-   },
-   {
     "speciesKey": "perrserker",
     "weight": 8,
     "minLevel": 50,
@@ -679,18 +607,6 @@
  "galar-route-8": {
   "name": "Route 8",
   "encounters": [
-   {
-    "speciesKey": "falinks",
-    "weight": 26,
-    "minLevel": 58,
-    "maxLevel": 60
-   },
-   {
-    "speciesKey": "crustle",
-    "weight": 25,
-    "minLevel": 58,
-    "maxLevel": 60
-   },
    {
     "speciesKey": "snom",
     "weight": 20,
@@ -824,6 +740,12 @@
     "maxLevel": 60
    },
    {
+    "speciesKey": "falinks",
+    "weight": 1,
+    "minLevel": 58,
+    "maxLevel": 60
+   },
+   {
     "speciesKey": "throh",
     "weight": 1,
     "minLevel": 58,
@@ -855,24 +777,6 @@
    {
     "speciesKey": "mareanie",
     "weight": 54,
-    "minLevel": 65,
-    "maxLevel": 67
-   },
-   {
-    "speciesKey": "glalie",
-    "weight": 25,
-    "minLevel": 65,
-    "maxLevel": 67
-   },
-   {
-    "speciesKey": "greedent",
-    "weight": 25,
-    "minLevel": 65,
-    "maxLevel": 67
-   },
-   {
-    "speciesKey": "grapploct",
-    "weight": 25,
     "minLevel": 65,
     "maxLevel": 67
    },
@@ -1008,18 +912,6 @@
   "name": "Route 10",
   "encounters": [
    {
-    "speciesKey": "abomasnow",
-    "weight": 32,
-    "minLevel": 73,
-    "maxLevel": 75
-   },
-   {
-    "speciesKey": "beartic",
-    "weight": 31,
-    "minLevel": 73,
-    "maxLevel": 75
-   },
-   {
     "speciesKey": "snover",
     "weight": 8,
     "minLevel": 73,
@@ -1040,6 +932,18 @@
    {
     "speciesKey": "klang",
     "weight": 8,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "abomasnow",
+    "weight": 7,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "beartic",
+    "weight": 6,
     "minLevel": 73,
     "maxLevel": 75
    },
@@ -1110,6 +1014,12 @@
    },
    {
     "speciesKey": "grimmsnarl",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "obstagoon",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70

@@ -20,12 +20,6 @@
   "name": "Route 2",
   "encounters": [
    {
-    "speciesKey": "mrMime",
-    "weight": 25,
-    "minLevel": 7,
-    "maxLevel": 9
-   },
-   {
     "speciesKey": "pidgey",
     "weight": 11,
     "minLevel": 7,
@@ -1121,24 +1115,6 @@
     "maxLevel": 39
    },
    {
-    "speciesKey": "nidorina",
-    "weight": 25,
-    "minLevel": 37,
-    "maxLevel": 39
-   },
-   {
-    "speciesKey": "nidorino",
-    "weight": 25,
-    "minLevel": 37,
-    "maxLevel": 39
-   },
-   {
-    "speciesKey": "dugtrio",
-    "weight": 25,
-    "minLevel": 37,
-    "maxLevel": 39
-   },
-   {
     "speciesKey": "tentacool",
     "weight": 25,
     "minLevel": 37,
@@ -1253,12 +1229,6 @@
    },
    {
     "speciesKey": "tentacool",
-    "weight": 25,
-    "minLevel": 47,
-    "maxLevel": 49
-   },
-   {
-    "speciesKey": "snorlax",
     "weight": 25,
     "minLevel": 47,
     "maxLevel": 49
@@ -1608,12 +1578,6 @@
   "name": "Route 16",
   "encounters": [
    {
-    "speciesKey": "snorlax",
-    "weight": 25,
-    "minLevel": 41,
-    "maxLevel": 43
-   },
-   {
     "speciesKey": "doduo",
     "weight": 9,
     "minLevel": 41,
@@ -1734,18 +1698,6 @@
    {
     "speciesKey": "magikarp",
     "weight": 31,
-    "minLevel": 45,
-    "maxLevel": 47
-   },
-   {
-    "speciesKey": "parasect",
-    "weight": 25,
-    "minLevel": 45,
-    "maxLevel": 47
-   },
-   {
-    "speciesKey": "lickitung",
-    "weight": 25,
     "minLevel": 45,
     "maxLevel": 47
    },
@@ -2215,12 +2167,6 @@
    {
     "speciesKey": "seel",
     "weight": 28,
-    "minLevel": 64,
-    "maxLevel": 66
-   },
-   {
-    "speciesKey": "articuno",
-    "weight": 25,
     "minLevel": 64,
     "maxLevel": 66
    },
@@ -2730,18 +2676,6 @@
   "name": "Power Plant",
   "encounters": [
    {
-    "speciesKey": "electrode",
-    "weight": 50,
-    "minLevel": 28,
-    "maxLevel": 30
-   },
-   {
-    "speciesKey": "zapdos",
-    "weight": 25,
-    "minLevel": 28,
-    "maxLevel": 30
-   },
-   {
     "speciesKey": "magnemite",
     "weight": 8,
     "minLevel": 28,
@@ -2801,6 +2735,12 @@
     "maxLevel": 71
    },
    {
+    "speciesKey": "golbat",
+    "weight": 25,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
     "speciesKey": "machop",
     "weight": 25,
     "minLevel": 69,
@@ -2819,6 +2759,30 @@
     "maxLevel": 71
    },
    {
+    "speciesKey": "graveler",
+    "weight": 25,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "onix",
+    "weight": 25,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "rhyhorn",
+    "weight": 25,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "rhydon",
+    "weight": 25,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
     "speciesKey": "chansey",
     "weight": 25,
     "minLevel": 69,
@@ -2831,86 +2795,8 @@
     "maxLevel": 71
    },
    {
-    "speciesKey": "moltres",
-    "weight": 25,
-    "minLevel": 69,
-    "maxLevel": 71
-   },
-   {
     "speciesKey": "hitmonchan",
     "weight": 25,
-    "minLevel": 69,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "golbat",
-    "weight": 8,
-    "minLevel": 69,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "graveler",
-    "weight": 8,
-    "minLevel": 69,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "ursaring",
-    "weight": 5,
-    "minLevel": 69,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "donphan",
-    "weight": 5,
-    "minLevel": 69,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "makuhita",
-    "weight": 5,
-    "minLevel": 69,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "absol",
-    "weight": 5,
-    "minLevel": 69,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "chingling",
-    "weight": 5,
-    "minLevel": 69,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "bronzor",
-    "weight": 5,
-    "minLevel": 69,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "onix",
-    "weight": 4,
-    "minLevel": 69,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "sandslash",
-    "weight": 3,
-    "minLevel": 69,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "rhydon",
-    "weight": 3,
-    "minLevel": 69,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "rhyhorn",
-    "weight": 1,
     "minLevel": 69,
     "maxLevel": 71
    }
@@ -2927,12 +2813,6 @@
    },
    {
     "speciesKey": "poliwag",
-    "weight": 25,
-    "minLevel": 71,
-    "maxLevel": 73
-   },
-   {
-    "speciesKey": "mewtwo",
     "weight": 25,
     "minLevel": 71,
     "maxLevel": 73
@@ -3163,6 +3043,83 @@
     "weight": 10,
     "minLevel": 73,
     "maxLevel": 75
+   }
+  ]
+ },
+ "raidIsland": {
+  "name": "Raid Island",
+  "encounters": [
+   {
+    "speciesKey": "jynx",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "porygon",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "omanyte",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "omastar",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "kabuto",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "kabutops",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "aerodactyl",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "articuno",
+    "weight": 1,
+    "minLevel": 75,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "zapdos",
+    "weight": 1,
+    "minLevel": 75,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "moltres",
+    "weight": 1,
+    "minLevel": 75,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "mewtwo",
+    "weight": 1,
+    "minLevel": 75,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "mew",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
    }
   ]
  }

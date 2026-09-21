@@ -620,7 +620,14 @@
      "locationId": "hoenn-route-111",
      "count": 15
     }
-   ]
+   ],
+   "caughtOnRoute": {
+    "routeKey": "hoenn-route-111",
+    "species": [
+     "baltoy"
+    ],
+    "count": 1
+   }
   },
   "unlockOrder": 300112,
   "position": {
@@ -692,7 +699,14 @@
    ],
    "gymsRequired": [
     "hoenn-gym-4"
-   ]
+   ],
+   "caughtOnRoute": {
+    "routeKey": "hoenn-route-111",
+    "species": [
+     "baltoy"
+    ],
+    "count": 1
+   }
   },
   "unlockOrder": 300113,
   "position": {
@@ -847,7 +861,13 @@
      "count": 5
     }
    ],
-   "caughtCount": 15
+   "caughtOnRoute": {
+    "routeKey": "hoenn-route-116",
+    "species": [
+     "whismur"
+    ],
+    "count": 1
+   }
   },
   "unlockOrder": 300116.5,
   "position": {

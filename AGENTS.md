@@ -270,7 +270,10 @@ Data conventions:
   at Ever Grande, not the highest-numbered Route 134).
 - `regions.json` also carries `raidPool` — the generation's species that cannot
   be obtained in that region (not in any wild table and not reachable by
-  evolution). Those are the Pokemon found on the region's Raid Island.
+  evolution). Those are the Pokemon found on the region's Raid Island. Kanto's
+  hand-curated `raidIsland` is wired up by `generate-regions.cjs` too (it used
+  to be the only raid without a `routeKey`/encounter bucket), so
+  `encounterData['raidIsland']` resolves.
 - Sprites are referenced by that `id`. The animated directory is a merged set:
   the official Gen V Black/White animated gifs for national dex ids 1-649, plus
   Pokémon Showdown's animated sprites for everything else (PokeAPI has no
@@ -344,12 +347,19 @@ One-off scripts used to build the data JSON (not run during dev/build):
   unreachable is a genuinely separate area (post-game zones, Alola's islands,
   open-world Paldea) and `generate-regions.cjs` stitches it on by proximity.
 - `scrape-route-encounters.cjs` — pulls real per-route wild encounters from
-  PokéAPI (`/location` → `/location-area`), keeps only wild methods (drops
-  gift/static), keeps only the region's preferred game versions (so no
-  cross-generation oddities), maps species to the game's keys, and also
-  refreshes Kanto from its own map-data. **Paldea isn't in PokéAPI's encounter
-  data**, so its province areas are parsed from Bulbapedia's `{{Catch/entry9}}`
-  tables instead. Writes `tools/route-encounters.json` (committed).
+  PokéAPI (`/location` → `/location-area`), keeps only ordinary wild methods
+  (drops gift/static/headbutt/honey-tree/Rock Smash/grottos/trades/Island Scan…)
+  and only encounters without special `condition_values` (drops radio/GBA
+  dual-slot/Poké Radar/fossil item/story/swarm), so non-native or one-off
+  species don't leak onto routes (HGSS radio used to put Shinx/Plusle/Minun on
+  Johto Route 29). Legendaries are skipped entirely so they stay Raid Island
+  content. Keeps only the region's preferred game versions, and when none
+  match, falls back only to a version from that region's own generation (which
+  is why Kanto Victory Road no longer carries Gold/SoulSilver species). Maps
+  species to the game's keys, and also refreshes Kanto from its own map-data.
+  **Paldea isn't in PokéAPI's encounter data**, so its province areas are parsed
+  from Bulbapedia's `{{Catch/entry9}}` tables instead. Writes
+  `tools/route-encounters.json` (committed).
 - `generate-regions.cjs` — turns `tools/region-maps.json` + `route-encounters.json` into game content
   (locations, encounters, trainers, marts, Raid Islands, and gym/Elite
   Four/Champion leagues) for generations 2-9, merging it into

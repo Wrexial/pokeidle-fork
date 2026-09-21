@@ -3,18 +3,6 @@
   "name": "Route 1",
   "encounters": [
    {
-    "speciesKey": "gastly",
-    "weight": 25,
-    "minLevel": 5,
-    "maxLevel": 7
-   },
-   {
-    "speciesKey": "drifloon",
-    "weight": 25,
-    "minLevel": 5,
-    "maxLevel": 7
-   },
-   {
     "speciesKey": "magnemite",
     "weight": 13,
     "minLevel": 5,
@@ -235,36 +223,6 @@
   "name": "Route 2",
   "encounters": [
    {
-    "speciesKey": "bulbasaur",
-    "weight": 25,
-    "minLevel": 13,
-    "maxLevel": 15
-   },
-   {
-    "speciesKey": "machop",
-    "weight": 25,
-    "minLevel": 13,
-    "maxLevel": 15
-   },
-   {
-    "speciesKey": "chikorita",
-    "weight": 25,
-    "minLevel": 13,
-    "maxLevel": 15
-   },
-   {
-    "speciesKey": "hawlucha",
-    "weight": 25,
-    "minLevel": 13,
-    "maxLevel": 15
-   },
-   {
-    "speciesKey": "crabrawler",
-    "weight": 25,
-    "minLevel": 13,
-    "maxLevel": 15
-   },
-   {
     "speciesKey": "ekans",
     "weight": 18,
     "minLevel": 13,
@@ -336,25 +294,7 @@
   "name": "Route 3",
   "encounters": [
    {
-    "speciesKey": "charmander",
-    "weight": 25,
-    "minLevel": 17,
-    "maxLevel": 19
-   },
-   {
-    "speciesKey": "cyndaquil",
-    "weight": 25,
-    "minLevel": 17,
-    "maxLevel": 19
-   },
-   {
     "speciesKey": "spearow",
-    "weight": 25,
-    "minLevel": 17,
-    "maxLevel": 19
-   },
-   {
-    "speciesKey": "crabrawler",
     "weight": 25,
     "minLevel": 17,
     "maxLevel": 19
@@ -418,24 +358,6 @@
  "alola-route-4": {
   "name": "Route 4",
   "encounters": [
-   {
-    "speciesKey": "beedrill",
-    "weight": 25,
-    "minLevel": 21,
-    "maxLevel": 23
-   },
-   {
-    "speciesKey": "venipede",
-    "weight": 25,
-    "minLevel": 21,
-    "maxLevel": 23
-   },
-   {
-    "speciesKey": "crabrawler",
-    "weight": 25,
-    "minLevel": 21,
-    "maxLevel": 23
-   },
    {
     "speciesKey": "lillipup",
     "weight": 13,
@@ -508,36 +430,6 @@
   "name": "Route 5",
   "encounters": [
    {
-    "speciesKey": "bellsprout",
-    "weight": 25,
-    "minLevel": 25,
-    "maxLevel": 27
-   },
-   {
-    "speciesKey": "grovyle",
-    "weight": 25,
-    "minLevel": 25,
-    "maxLevel": 27
-   },
-   {
-    "speciesKey": "noibat",
-    "weight": 25,
-    "minLevel": 25,
-    "maxLevel": 27
-   },
-   {
-    "speciesKey": "crabrawler",
-    "weight": 25,
-    "minLevel": 25,
-    "maxLevel": 27
-   },
-   {
-    "speciesKey": "bounsweet",
-    "weight": 25,
-    "minLevel": 25,
-    "maxLevel": 27
-   },
-   {
     "speciesKey": "butterfree",
     "weight": 8,
     "minLevel": 25,
@@ -584,18 +476,6 @@
  "alola-route-6": {
   "name": "Route 6",
   "encounters": [
-   {
-    "speciesKey": "ralts",
-    "weight": 25,
-    "minLevel": 29,
-    "maxLevel": 31
-   },
-   {
-    "speciesKey": "gothita",
-    "weight": 25,
-    "minLevel": 29,
-    "maxLevel": 31
-   },
    {
     "speciesKey": "lillipup",
     "weight": 13,
@@ -674,12 +554,6 @@
     "maxLevel": 35
    },
    {
-    "speciesKey": "spheal",
-    "weight": 25,
-    "minLevel": 33,
-    "maxLevel": 35
-   },
-   {
     "speciesKey": "staryu",
     "weight": 10,
     "minLevel": 33,
@@ -726,36 +600,6 @@
  "alola-route-8": {
   "name": "Route 8",
   "encounters": [
-   {
-    "speciesKey": "arbok",
-    "weight": 25,
-    "minLevel": 37,
-    "maxLevel": 39
-   },
-   {
-    "speciesKey": "combusken",
-    "weight": 25,
-    "minLevel": 37,
-    "maxLevel": 39
-   },
-   {
-    "speciesKey": "luxio",
-    "weight": 25,
-    "minLevel": 37,
-    "maxLevel": 39
-   },
-   {
-    "speciesKey": "crabrawler",
-    "weight": 25,
-    "minLevel": 37,
-    "maxLevel": 39
-   },
-   {
-    "speciesKey": "wimpod",
-    "weight": 25,
-    "minLevel": 37,
-    "maxLevel": 39
-   },
    {
     "speciesKey": "magikarp",
     "weight": 23,
@@ -846,12 +690,6 @@
   "name": "Route 9",
   "encounters": [
    {
-    "speciesKey": "ditto",
-    "weight": 25,
-    "minLevel": 41,
-    "maxLevel": 43
-   },
-   {
     "speciesKey": "luvdisc",
     "weight": 13,
     "minLevel": 41,
@@ -886,24 +724,6 @@
  "alola-route-10": {
   "name": "Route 10",
   "encounters": [
-   {
-    "speciesKey": "pidgeot",
-    "weight": 25,
-    "minLevel": 45,
-    "maxLevel": 47
-   },
-   {
-    "speciesKey": "staravia",
-    "weight": 25,
-    "minLevel": 45,
-    "maxLevel": 47
-   },
-   {
-    "speciesKey": "crabrawler",
-    "weight": 25,
-    "minLevel": 45,
-    "maxLevel": 47
-   },
    {
     "speciesKey": "fearow",
     "weight": 20,
@@ -957,18 +777,6 @@
  "alola-route-11": {
   "name": "Route 11",
   "encounters": [
-   {
-    "speciesKey": "vigoroth",
-    "weight": 25,
-    "minLevel": 49,
-    "maxLevel": 51
-   },
-   {
-    "speciesKey": "monferno",
-    "weight": 25,
-    "minLevel": 49,
-    "maxLevel": 51
-   },
    {
     "speciesKey": "komala",
     "weight": 8,
@@ -1046,12 +854,6 @@
  "alola-route-12": {
   "name": "Route 12",
   "encounters": [
-   {
-    "speciesKey": "crabrawler",
-    "weight": 25,
-    "minLevel": 53,
-    "maxLevel": 55
-   },
    {
     "speciesKey": "mudbray",
     "weight": 8,
@@ -1194,18 +996,6 @@
   "name": "Route 15",
   "encounters": [
    {
-    "speciesKey": "sandygast",
-    "weight": 29,
-    "minLevel": 65,
-    "maxLevel": 67
-   },
-   {
-    "speciesKey": "crabrawler",
-    "weight": 25,
-    "minLevel": 65,
-    "maxLevel": 67
-   },
-   {
     "speciesKey": "magikarp",
     "weight": 18,
     "minLevel": 65,
@@ -1289,24 +1079,6 @@
   "name": "Route 16",
   "encounters": [
    {
-    "speciesKey": "prinplup",
-    "weight": 25,
-    "minLevel": 69,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "duosion",
-    "weight": 25,
-    "minLevel": 69,
-    "maxLevel": 71
-   },
-   {
-    "speciesKey": "crabrawler",
-    "weight": 25,
-    "minLevel": 69,
-    "maxLevel": 71
-   },
-   {
     "speciesKey": "pelipper",
     "weight": 13,
     "minLevel": 69,
@@ -1336,20 +1108,8 @@
   "name": "Route 17",
   "encounters": [
    {
-    "speciesKey": "kartana",
-    "weight": 50,
-    "minLevel": 73,
-    "maxLevel": 75
-   },
-   {
     "speciesKey": "castform",
     "weight": 28,
-    "minLevel": 73,
-    "maxLevel": 75
-   },
-   {
-    "speciesKey": "crabrawler",
-    "weight": 25,
     "minLevel": 73,
     "maxLevel": 75
    },
@@ -1432,6 +1192,18 @@
    },
    {
     "speciesKey": "comfey",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "wimpod",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "golisopod",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70
@@ -1558,6 +1330,12 @@
    },
    {
     "speciesKey": "celesteela",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "kartana",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70

@@ -236,9 +236,11 @@
    "caughtOnRoute": {
     "routeKey": "alola-route-1",
     "species": [
-     "buneary"
+     "buneary",
+     "snorlax",
+     "munchlax"
     ],
-    "count": 1
+    "count": 3
    }
   },
   "unlockOrder": 700003,
@@ -615,13 +617,7 @@
      "count": 5
     }
    ],
-   "caughtOnRoute": {
-    "routeKey": "alola-route-10",
-    "species": [
-     "pidgeot"
-    ],
-    "count": 1
-   }
+   "caughtCount": 21
   },
   "unlockOrder": 700010.5,
   "position": {

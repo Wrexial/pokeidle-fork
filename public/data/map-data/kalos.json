@@ -174,7 +174,13 @@
      "count": 5
     }
    ],
-   "caughtCount": 4
+   "caughtOnRoute": {
+    "routeKey": "kalos-route-3",
+    "species": [
+     "burmy"
+    ],
+    "count": 1
+   }
   },
   "unlockOrder": 600003.5,
   "position": {
@@ -612,9 +618,10 @@
    "caughtOnRoute": {
     "routeKey": "kalos-route-10",
     "species": [
+     "nosepass",
      "sigilyph"
     ],
-    "count": 1
+    "count": 2
    }
   },
   "unlockOrder": 600010.5,

@@ -156,8 +156,11 @@ function repairSave(saved) {
     caught.filter(/** @param {string} speciesKey */ (speciesKey) => pokemonSpecies[speciesKey])
   )
   for (const speciesKey of [...caughtSet]) {
-    let preEvolution = preEvolutionMap[speciesKey]
-    for (; preEvolution; ) (caughtSet.add(preEvolution), (preEvolution = preEvolutionMap[preEvolution]))
+    // `preEvolutionMap` can be cyclic (special forms evolve into each other),
+    // so stop when we reach a species already in the set.
+    for (let preEvolution = preEvolutionMap[speciesKey]; preEvolution && !caughtSet.has(preEvolution); preEvolution = preEvolutionMap[preEvolution]) {
+      caughtSet.add(preEvolution)
+    }
   }
   const seenSet = new Set(
     [...seen, ...caughtSet].filter(

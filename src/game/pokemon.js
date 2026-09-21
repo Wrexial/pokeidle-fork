@@ -164,10 +164,16 @@ export function getLevelUpResults(speciesKey, growthRate, currentLevel, totalExp
  * @returns {string[]}
  */
 export function getPreEvolutionChain(speciesKey) {
-  const chain = [speciesKey]
+  const chain = [speciesKey],
+    seen = new Set([speciesKey])
   let current = speciesKey
-  for (; preEvolutionMap[current]; )
-    (chain.unshift(preEvolutionMap[current]), (current = preEvolutionMap[current]))
+  // Special forms (e.g. darmanitan <-> darmanitan-z) make `preEvolutionMap`
+  // cyclic, so stop once we revisit a species instead of looping forever.
+  for (let next = preEvolutionMap[current]; next && !seen.has(next); next = preEvolutionMap[current]) {
+    current = next
+    seen.add(current)
+    chain.unshift(current)
+  }
   return chain
 }
 

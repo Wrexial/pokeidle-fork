@@ -73,13 +73,20 @@ export function StatsPanel({
   return jsxs('div', {
     className: 'stats-panel',
     children: [
-      jsx('div', {
+      jsxs('div', {
         className: 'stats-panel-header',
-        children: jsx('button', {
-          className: 'stats-panel-close',
-          onClick: onClose,
-          children: 'X',
-        }),
+        children: [
+          jsx('button', {
+            className: 'stats-panel-manage',
+            onClick: () => setShowMoveManager(!0),
+            children: 'Manage',
+          }),
+          jsx('button', {
+            className: 'stats-panel-close',
+            onClick: onClose,
+            children: 'X',
+          }),
+        ],
       }),
       evolutionInfo &&
         jsx('div', {
@@ -201,19 +208,9 @@ export function StatsPanel({
       jsxs('div', {
         className: 'stats-panel-moves',
         children: [
-          jsxs('div', {
-            className: 'stats-panel-moves-header',
-            children: [
-              jsx('span', {
-                className: 'stats-panel-moves-title',
-                children: 'Moves',
-              }),
-              jsx('button', {
-                className: 'stats-panel-moves-edit',
-                onClick: () => setShowMoveManager(!0),
-                children: 'Manage',
-              }),
-            ],
+          jsx('span', {
+            className: 'stats-panel-moves-title',
+            children: 'Moves',
           }),
           pokemon.moves.map((moveId) => {
             const moveDef = moveData[moveId]

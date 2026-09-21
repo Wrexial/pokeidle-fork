@@ -1687,7 +1687,9 @@ img {
 
 .stats-panel-header {
     display: flex;
+    align-items: center;
     justify-content: flex-end;
+    gap: 4px;
     margin-bottom: -4px
 }
 
@@ -1807,24 +1809,19 @@ img {
     gap: 3px
 }
 
-.stats-panel-moves-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between
-}
-
-.stats-panel-moves-edit {
+.stats-panel-manage {
     font-size: 6px;
-    padding: 2px 7px;
+    padding: 1px 8px;
     background: #685040;
     color: var(--parchment);
     border: 2px solid #483828;
     border-radius: 0;
     cursor: pointer;
-    font-weight: 700
+    font-weight: 700;
+    box-shadow: 1px 1px #0000004d
 }
 
-.stats-panel-moves-edit:hover {
+.stats-panel-manage:hover {
     background: #786050;
     border-color: var(--gold-dark)
 }

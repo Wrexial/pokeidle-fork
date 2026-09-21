@@ -1,11 +1,11 @@
 // Split from the former assets/index.js — see tools/decompile/split-modules.mjs
 
-import { RAID_COOLDOWN_MS, defaultCatchSettings, prestigeTokenReward } from '../data/config.js'
+import { RAID_COOLDOWN_MS, defaultCatchSettings, prestigeTokenReward, wonderTradeShinyOdds } from '../data/config.js'
 import { activeItems, pokeBalls } from '../data/items.js'
 import { elite4Data, encounterData, gymLeaderData, mapData, moveLearnsets, pokemonSpecies, regions } from '../data/gameData.js'
 import { createVolatileState } from './combat.js'
 import { calculatePokemonStats, calculateRequiredExperience, createPokemon, resolvePokemonMoves } from './pokemon.js'
-import { computeUnlockedLocations, getRegionUnlockTokens, isActiveEffectItem, loadActivePokemonFromParty, prepareNextBattle, syncActivePokemonIntoParty, tickBattleCounters } from './progression.js'
+import { checkShinyOdds, computeUnlockedLocations, getRegionUnlockTokens, isActiveEffectItem, loadActivePokemonFromParty, prepareNextBattle, syncActivePokemonIntoParty, tickBattleCounters } from './progression.js'
 
 /** @type {GameState} */
 export const initialGameState = {
@@ -1205,6 +1205,77 @@ export function gameReducer(state, action) {
           activePlayerPokemonIndex: newActiveIndex,
         })
       )
+    }
+    case 'WONDER_TRADE': {
+      // Spend a Link Cable to swap a Pokemon for a random one of the same level.
+      const { pokemonId } = action.payload,
+        linkCables = state.inventory.linkCable ?? 0
+      if (linkCables <= 0) return state
+      const inBox = state.box.some((member) => member.id === pokemonId),
+        inParty = state.party.some((member) => member.id === pokemonId)
+      if (!inBox && !inParty) return state
+      if (inParty && state.party.length <= 1) return state
+      const tradedPokemon = inBox
+        ? state.box.find((member) => member.id === pokemonId)
+        : state.party.find((member) => member.id === pokemonId)
+      if (!tradedPokemon) return state
+      const candidates = Object.keys(pokemonSpecies).filter((key) => pokemonSpecies[key].id > 0),
+        receivedSpeciesKey = candidates[Math.floor(Math.random() * candidates.length)],
+        receivedIsShiny = checkShinyOdds(wonderTradeShinyOdds),
+        receivedPokemon = createPokemon(
+          receivedSpeciesKey,
+          tradedPokemon.level,
+          state.nextPokemonId,
+          receivedIsShiny
+        )
+      // Remove the traded Pokemon (mirroring RELEASE_POKEMON).
+      let baseState
+      if (inBox)
+        baseState = {
+          ...state,
+          box: state.box.filter((member) => member.id !== pokemonId),
+        }
+      else {
+        const releasedState = state.phase === 'battling' ? prepareNextBattle(state) : state,
+          newParty = releasedState.party.filter((member) => member.id !== pokemonId),
+          activeId = releasedState.playerPokemon?.id
+        let newActiveIndex = activeId ? newParty.findIndex((member) => member.id === activeId) : 0
+        if (newActiveIndex < 0) newActiveIndex = 0
+        baseState = loadActivePokemonFromParty({
+          ...releasedState,
+          party: newParty,
+          activePlayerPokemonIndex: newActiveIndex,
+        })
+      }
+      return {
+        ...baseState,
+        box: [...baseState.box, receivedPokemon],
+        nextPokemonId: state.nextPokemonId + 1,
+        inventory: {
+          ...state.inventory,
+          linkCable: linkCables - 1,
+        },
+        pokedexSeen: state.pokedexSeen.includes(receivedSpeciesKey)
+          ? state.pokedexSeen
+          : [...state.pokedexSeen, receivedSpeciesKey],
+        pokedexCaught: state.pokedexCaught.includes(receivedSpeciesKey)
+          ? state.pokedexCaught
+          : [...state.pokedexCaught, receivedSpeciesKey],
+        shinySeen:
+          receivedIsShiny && !state.shinySeen.includes(receivedSpeciesKey)
+            ? [...state.shinySeen, receivedSpeciesKey]
+            : state.shinySeen,
+        shinyCaught:
+          receivedIsShiny && !state.shinyCaught.includes(receivedSpeciesKey)
+            ? [...state.shinyCaught, receivedSpeciesKey]
+            : state.shinyCaught,
+        battleLog: [
+          ...state.battleLog,
+          `Wonder Trade: ${tradedPokemon.name} was traded for ${receivedPokemon.name}${
+            receivedIsShiny ? ' \u2726 shiny!' : ''
+          }!`,
+        ].slice(-50),
+      }
     }
     case 'SET_ALWAYS_CATCH_SHINIES':
       return {

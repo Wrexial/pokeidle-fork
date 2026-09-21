@@ -8,6 +8,9 @@ export const prestigeTokenReward = 3
 /** Odds that a Cinnabar Island battle is a MissingNo. encounter (1 in 1000). */
 export const missingnoEncounterChance = 1 / 1000
 
+/** Shiny odds for a Pokemon received through Wonder Trade (1 in 512). */
+export const wonderTradeShinyOdds = 512
+
 export let RAID_COOLDOWN_MS = 1 * 1e3
 
 export let defaultCatchSettings = {

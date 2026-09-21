@@ -45,6 +45,13 @@ export const CHANGELOG = [
           ],
         },
         {
+          heading: 'Wonder Trade',
+          items: [
+            'Spend a Link Cable from a Pokemon\u2019s stats panel to trade it for a random Pokemon of the same level',
+            'Wonder Trade Pokemon have a boosted 1 in 512 chance of being shiny',
+          ],
+        },
+        {
           heading: 'Battle Status',
           items: [
             'Moves can now poison, burn, freeze, sleep and flinch their target \u2014 poison and burn deal damage every turn, burn halves physical attack, and sleep/freeze stop the Pokemon acting',

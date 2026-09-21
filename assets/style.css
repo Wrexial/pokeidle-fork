@@ -1870,6 +1870,35 @@ img {
     background: #a52828
 }
 
+.stats-panel-trade {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 4px
+}
+
+.stats-panel-trade-btn {
+    font-size: 8px;
+    padding: 4px 10px;
+    background: #285a8b;
+    color: #ddf;
+    border: 2px solid #10385a;
+    border-radius: 0;
+    cursor: pointer;
+    font-weight: 700;
+    text-align: center;
+    box-shadow: 1px 1px #0000004d,inset 1px 1px #ffffff26
+}
+
+.stats-panel-trade-btn:hover:not(:disabled) {
+    background: #3070a8
+}
+
+.stats-panel-trade-btn:disabled {
+    opacity: .45;
+    cursor: not-allowed
+}
+
 .release-confirm {
     background: #3a1010;
     border: 2px solid #8b2020;

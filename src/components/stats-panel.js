@@ -1,9 +1,11 @@
 // Split from a grouped component file — see tools/decompile/split-components.mjs
 
+import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { moveCategoryIcons } from '../data/moves.js'
 import { statBarColors } from '../data/ui.js'
 import { moveData, pokemonSpecies } from '../data/gameData.js'
+import { useGame } from '../game/context.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
 
 /** @param {{ pokemon: Pokemon, source: 'party' | 'box', partyLength: number, onAction: () => void, onClose: () => void, evolutionInfo?: { entries: { targetName: string, canEvolve: boolean, requirementLabel: string, targetKey: string, itemId?: string }[] } | null, onEvolve?: (index: number) => void, onRelease?: () => void, canRelease?: boolean }} props */
@@ -19,6 +21,9 @@ export function StatsPanel({
   canRelease,
 }) {
   const species = pokemonSpecies[pokemon.speciesKey]
+  const { state, dispatch } = useGame(),
+    [tradeConfirm, setTradeConfirm] = React.useState(!1),
+    linkCables = state.inventory.linkCable ?? 0
   if (!species) return null
   const statRows = [
       {
@@ -235,6 +240,51 @@ export function StatsPanel({
           onClick: onRelease,
           children: 'Release',
         }),
+      jsxs('div', {
+        className: 'stats-panel-trade',
+        children: [
+          jsx('button', {
+            className: `stats-panel-trade-btn${linkCables <= 0 ? ' disabled' : ''}`,
+            disabled: linkCables <= 0 || tradeConfirm,
+            title: linkCables <= 0 ? 'Buy a Link Cable in the Reward Shop' : 'Trade for a random Pokemon',
+            onClick: () => setTradeConfirm(!0),
+            children: `Wonder Trade (${linkCables})`,
+          }),
+          tradeConfirm &&
+            jsxs('div', {
+              className: 'release-confirm',
+              children: [
+                jsxs('span', {
+                  children: ['Trade ', pokemon.name, ' for a random Pokemon?'],
+                }),
+                jsxs('div', {
+                  className: 'release-confirm-buttons',
+                  children: [
+                    jsx('button', {
+                      className: 'release-confirm-yes',
+                      onClick: () => {
+                        dispatch({
+                          type: 'WONDER_TRADE',
+                          payload: {
+                            pokemonId: pokemon.id,
+                          },
+                        })
+                        setTradeConfirm(!1)
+                        onClose()
+                      },
+                      children: 'Yes',
+                    }),
+                    jsx('button', {
+                      className: 'release-confirm-no',
+                      onClick: () => setTradeConfirm(!1),
+                      children: 'No',
+                    }),
+                  ],
+                }),
+              ],
+            }),
+        ],
+      }),
     ],
   })
 }

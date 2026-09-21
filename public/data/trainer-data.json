@@ -1111,11 +1111,11 @@
    "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "electrode",
+     "speciesKey": "magneton",
      "level": 36
     },
     {
-     "speciesKey": "electabuzz",
+     "speciesKey": "electrode",
      "level": 37
     }
    ]
@@ -1126,15 +1126,15 @@
    "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "persian",
+     "speciesKey": "wigglytuff",
      "level": 37
     },
     {
-     "speciesKey": "farfetchd",
+     "speciesKey": "persian",
      "level": 38
     },
     {
-     "speciesKey": "dodrio",
+     "speciesKey": "farfetchd",
      "level": 39
     }
    ]
@@ -1147,11 +1147,11 @@
    "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "raichu",
+     "speciesKey": "pikachu",
      "level": 43
     },
     {
-     "speciesKey": "magneton",
+     "speciesKey": "raichu",
      "level": 44
     }
    ]
@@ -1166,7 +1166,7 @@
      "level": 44
     },
     {
-     "speciesKey": "wigglytuff",
+     "speciesKey": "jigglypuff",
      "level": 45
     }
    ]
@@ -1729,15 +1729,15 @@
    "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "jolteon",
+     "speciesKey": "electabuzz",
      "level": 36
     },
     {
-     "speciesKey": "lanturn",
+     "speciesKey": "jolteon",
      "level": 37
     },
     {
-     "speciesKey": "ampharos",
+     "speciesKey": "lanturn",
      "level": 38
     }
    ]
@@ -1765,11 +1765,11 @@
    "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "electrode",
+     "speciesKey": "magneton",
      "level": 41
     },
     {
-     "speciesKey": "electabuzz",
+     "speciesKey": "electrode",
      "level": 42
     }
    ]
@@ -1780,15 +1780,15 @@
    "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "persian",
+     "speciesKey": "wigglytuff",
      "level": 42
     },
     {
-     "speciesKey": "farfetchd",
+     "speciesKey": "persian",
      "level": 43
     },
     {
-     "speciesKey": "dodrio",
+     "speciesKey": "farfetchd",
      "level": 44
     }
    ]
@@ -1856,7 +1856,7 @@
      "level": 49
     },
     {
-     "speciesKey": "poliwhirl",
+     "speciesKey": "poliwrath",
      "level": 50
     }
    ]
@@ -2549,7 +2549,7 @@
      "level": 39
     },
     {
-     "speciesKey": "clefable",
+     "speciesKey": "clefairy",
      "level": 40
     }
    ]
@@ -2596,11 +2596,11 @@
    "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "electrode",
+     "speciesKey": "magneton",
      "level": 44
     },
     {
-     "speciesKey": "electabuzz",
+     "speciesKey": "electrode",
      "level": 45
     }
    ]
@@ -3332,7 +3332,7 @@
      "level": 37
     },
     {
-     "speciesKey": "wigglytuff",
+     "speciesKey": "jigglypuff",
      "level": 38
     }
    ]
@@ -3343,15 +3343,15 @@
    "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "jolteon",
+     "speciesKey": "electabuzz",
      "level": 38
     },
     {
-     "speciesKey": "lanturn",
+     "speciesKey": "jolteon",
      "level": 39
     },
     {
-     "speciesKey": "ampharos",
+     "speciesKey": "lanturn",
      "level": 40
     }
    ]
@@ -3379,11 +3379,11 @@
    "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "hypno",
+     "speciesKey": "slowbro",
      "level": 42
     },
     {
-     "speciesKey": "exeggutor",
+     "speciesKey": "hypno",
      "level": 43
     }
    ]
@@ -3402,7 +3402,7 @@
      "level": 44
     },
     {
-     "speciesKey": "cloyster",
+     "speciesKey": "shellder",
      "level": 45
     }
    ]
@@ -3430,11 +3430,11 @@
    "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "tentacruel",
      "level": 48
     },
     {
-     "speciesKey": "tentacruel",
+     "speciesKey": "slowbro",
      "level": 49
     }
    ]
@@ -3453,7 +3453,7 @@
      "level": 50
     },
     {
-     "speciesKey": "rhydon",
+     "speciesKey": "omastar",
      "level": 51
     }
    ]
@@ -4033,15 +4033,15 @@
    "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "exeggutor",
+     "speciesKey": "exeggcute",
      "level": 38
     },
     {
-     "speciesKey": "starmie",
+     "speciesKey": "exeggutor",
      "level": 39
     },
     {
-     "speciesKey": "mrMime",
+     "speciesKey": "starmie",
      "level": 40
     }
    ]
@@ -4073,7 +4073,7 @@
      "level": 41
     },
     {
-     "speciesKey": "clefable",
+     "speciesKey": "clefairy",
      "level": 42
     }
    ]
@@ -4135,15 +4135,15 @@
    "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "slowbro",
+     "speciesKey": "dewgong",
      "level": 46
     },
     {
-     "speciesKey": "dewgong",
+     "speciesKey": "cloyster",
      "level": 47
     },
     {
-     "speciesKey": "cloyster",
+     "speciesKey": "kingler",
      "level": 48
     }
    ]
@@ -5041,15 +5041,15 @@
    "trainerClass": "lass",
    "team": [
     {
-     "speciesKey": "wigglytuff",
+     "speciesKey": "clefable",
      "level": 38
     },
     {
-     "speciesKey": "persian",
+     "speciesKey": "jigglypuff",
      "level": 39
     },
     {
-     "speciesKey": "farfetchd",
+     "speciesKey": "wigglytuff",
      "level": 40
     }
    ]
@@ -5062,11 +5062,11 @@
    "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "alakazam",
+     "speciesKey": "kadabra",
      "level": 42
     },
     {
-     "speciesKey": "slowbro",
+     "speciesKey": "alakazam",
      "level": 43
     }
    ]
@@ -5092,15 +5092,15 @@
    "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "golem",
+     "speciesKey": "graveler",
      "level": 44
     },
     {
-     "speciesKey": "onix",
+     "speciesKey": "golem",
      "level": 45
     },
     {
-     "speciesKey": "marowak",
+     "speciesKey": "onix",
      "level": 46
     }
    ]
@@ -5712,15 +5712,15 @@
    "trainerClass": "camper",
    "team": [
     {
-     "speciesKey": "wigglytuff",
+     "speciesKey": "jigglypuff",
      "level": 35
     },
     {
-     "speciesKey": "vileplume",
+     "speciesKey": "wigglytuff",
      "level": 36
     },
     {
-     "speciesKey": "parasect",
+     "speciesKey": "gloom",
      "level": 37
     }
    ]
@@ -5752,7 +5752,7 @@
      "level": 36
     },
     {
-     "speciesKey": "clefable",
+     "speciesKey": "clefairy",
      "level": 37
     }
    ]
@@ -5763,15 +5763,15 @@
    "trainerClass": "beauty",
    "team": [
     {
-     "speciesKey": "wigglytuff",
+     "speciesKey": "clefable",
      "level": 37
     },
     {
-     "speciesKey": "persian",
+     "speciesKey": "jigglypuff",
      "level": 38
     },
     {
-     "speciesKey": "farfetchd",
+     "speciesKey": "wigglytuff",
      "level": 39
     }
    ]
@@ -5865,15 +5865,15 @@
    "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "starmie",
+     "speciesKey": "exeggcute",
      "level": 42
     },
     {
-     "speciesKey": "mrMime",
+     "speciesKey": "exeggutor",
      "level": 43
     },
     {
-     "speciesKey": "jynx",
+     "speciesKey": "starmie",
      "level": 44
     }
    ]

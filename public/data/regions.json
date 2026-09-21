@@ -806,10 +806,6 @@
   "leagueLocationKey": "galar-league",
   "raidPool": [
    {
-    "speciesKey": "appletun",
-    "level": 70
-   },
-   {
     "speciesKey": "hattrem",
     "level": 70
    },

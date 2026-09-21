@@ -45,6 +45,9 @@ const LEVEL_MIN = 5
 const LEVEL_MAX = 75
 // The last wild zone sits two levels below the cap so its +2 window ends at 75.
 const WILD_LEVEL_MAX = LEVEL_MAX - 2
+// Item evolutions have no level requirement; treat them as evolving around here
+// when judging whether a trainer should already have evolved a Pokemon.
+const ITEM_EVOLUTION_LEVEL = 45
 // Open-world Paldea areas list 50-84 species each, which dilutes every spawn to
 // a few percent and makes adjacent areas feel identical. Keep the most common
 // species and move the rest to Paldea's Raid Island.
@@ -770,8 +773,10 @@ const buildTeam = (list, types, size, baseLevel, step = 1, offset = 0) => {
   // below `minimum` (so a sparse type keeps its members).
   const refined = (pool) => {
     const mature = pool.filter((species) => {
+      // Item evolutions have no level gate, so give them a nominal one for team
+      // building (a Lv.60 trainer shouldn't still field a Vulpix).
       const levels = (evolutionData[species.key] || [])
-        .map((evolution) => evolution.level)
+        .map((evolution) => evolution.level ?? (evolution.item ? ITEM_EVOLUTION_LEVEL : null))
         .filter(Boolean)
       return levels.length === 0 || Math.min(...levels) > baseLevel
     })

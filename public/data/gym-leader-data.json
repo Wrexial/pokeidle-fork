@@ -622,15 +622,15 @@
   "spriteKey": "chuck",
   "team": [
    {
-    "speciesKey": "poliwrath",
+    "speciesKey": "heracross",
     "level": 42
    },
    {
-    "speciesKey": "machamp",
+    "speciesKey": "hitmontop",
     "level": 43
    },
    {
-    "speciesKey": "hitmonlee",
+    "speciesKey": "poliwrath",
     "level": 44
    }
   ],
@@ -1022,15 +1022,15 @@
   "spriteKey": "norman",
   "team": [
    {
-    "speciesKey": "noctowl",
+    "speciesKey": "snorlax",
     "level": 42
    },
    {
-    "speciesKey": "ursaring",
+    "speciesKey": "furret",
     "level": 43
    },
    {
-    "speciesKey": "smeargle",
+    "speciesKey": "noctowl",
     "level": 44
    }
   ],
@@ -1422,15 +1422,15 @@
   "spriteKey": "fantina",
   "team": [
    {
-    "speciesKey": "sableye",
+    "speciesKey": "haunter",
     "level": 42
    },
    {
-    "speciesKey": "banette",
+    "speciesKey": "gengar",
     "level": 43
    },
    {
-    "speciesKey": "dusclops",
+    "speciesKey": "misdreavus",
     "level": 44
    }
   ],
@@ -1822,15 +1822,15 @@
   "spriteKey": "clay",
   "team": [
    {
-    "speciesKey": "pupitar",
+    "speciesKey": "piloswine",
     "level": 42
    },
    {
-    "speciesKey": "camerupt",
+    "speciesKey": "donphan",
     "level": 43
    },
    {
-    "speciesKey": "vibrava",
+    "speciesKey": "pupitar",
     "level": 44
    }
   ],
@@ -2176,11 +2176,11 @@
     "level": 34
    },
    {
-    "speciesKey": "sunflora",
+    "speciesKey": "sunkern",
     "level": 35
    },
    {
-    "speciesKey": "ludicolo",
+    "speciesKey": "sunflora",
     "level": 36
    }
   ],
@@ -2222,15 +2222,15 @@
   "spriteKey": "clemont",
   "team": [
    {
-    "speciesKey": "magnezone",
+    "speciesKey": "pachirisu",
     "level": 42
    },
    {
-    "speciesKey": "electivire",
+    "speciesKey": "magnezone",
     "level": 43
    },
    {
-    "speciesKey": "zebstrika",
+    "speciesKey": "electivire",
     "level": 44
    }
   ],
@@ -2576,11 +2576,11 @@
     "level": 34
    },
    {
-    "speciesKey": "sunflora",
+    "speciesKey": "sunkern",
     "level": 35
    },
    {
-    "speciesKey": "ludicolo",
+    "speciesKey": "sunflora",
     "level": 36
    }
   ],
@@ -2622,15 +2622,15 @@
   "spriteKey": "sophocles",
   "team": [
    {
-    "speciesKey": "magnezone",
+    "speciesKey": "pachirisu",
     "level": 42
    },
    {
-    "speciesKey": "electivire",
+    "speciesKey": "magnezone",
     "level": 43
    },
    {
-    "speciesKey": "zebstrika",
+    "speciesKey": "electivire",
     "level": 44
    }
   ],
@@ -2672,15 +2672,15 @@
   "spriteKey": "acerola",
   "team": [
    {
-    "speciesKey": "doublade",
+    "speciesKey": "gourgeist",
     "level": 49
    },
    {
-    "speciesKey": "aegislash",
+    "speciesKey": "palossand",
     "level": 50
    },
    {
-    "speciesKey": "trevenant",
+    "speciesKey": "mimikyu",
     "level": 51
    }
   ],
@@ -3022,15 +3022,15 @@
   "spriteKey": "opal",
   "team": [
    {
-    "speciesKey": "sylveon",
+    "speciesKey": "whimsicott",
     "level": 42
    },
    {
-    "speciesKey": "dedenne",
+    "speciesKey": "floette",
     "level": 43
    },
    {
-    "speciesKey": "carbink",
+    "speciesKey": "florges",
     "level": 44
    }
   ],
@@ -3072,15 +3072,15 @@
   "spriteKey": "gordie",
   "team": [
    {
-    "speciesKey": "armaldo",
+    "speciesKey": "relicanth",
     "level": 49
    },
    {
-    "speciesKey": "relicanth",
+    "speciesKey": "rampardos",
     "level": 50
    },
    {
-    "speciesKey": "rampardos",
+    "speciesKey": "bastiodon",
     "level": 51
    }
   ],
@@ -3422,15 +3422,15 @@
   "spriteKey": "larry",
   "team": [
    {
-    "speciesKey": "noctowl",
+    "speciesKey": "snorlax",
     "level": 42
    },
    {
-    "speciesKey": "ursaring",
+    "speciesKey": "furret",
     "level": 43
    },
    {
-    "speciesKey": "smeargle",
+    "speciesKey": "noctowl",
     "level": 44
    }
   ],
@@ -3472,15 +3472,15 @@
   "spriteKey": "ryme",
   "team": [
    {
-    "speciesKey": "doublade",
+    "speciesKey": "gourgeist",
     "level": 49
    },
    {
-    "speciesKey": "aegislash",
+    "speciesKey": "palossand",
     "level": 50
    },
    {
-    "speciesKey": "trevenant",
+    "speciesKey": "mimikyu",
     "level": 51
    }
   ],

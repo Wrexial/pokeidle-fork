@@ -346,6 +346,13 @@ One-off scripts used to build the data JSON (not run during dev/build):
   the learnset of their base form, pre-evolution or evolution (falling back to
   the original bundle's table). Without this those Pokemon fight with no moves.
   Idempotent; re-run if `possible-learnsets.json` is regenerated.
+- `add-evolution-items.cjs` — rewrites the level-up evolutions that canonically
+  use an item into `{ into, item }` entries: the elemental stones, the trade
+  evolutions (Link Cable) and the held-item trade evolutions (King's Rock,
+  Metal Coat, Protector, ...). The matching items are sold in the Reward Shop
+  (`tokenShopItems` in `src/data/items.js`). Idempotent; re-run after any
+  re-extraction of `evolution-data.json`. Because item evolutions carry no
+  `level`, `generate-regions.cjs` gives them a nominal one for team-maturity.
 - `download_pokemon_sprites.cjs` — fills the local sprite tree for every id in
   `pokemon-species.json`: static front/back/shiny from PokeAPI, and animated
   front/back/shiny from Gen V for dex ids 1-649 falling back to Pokémon

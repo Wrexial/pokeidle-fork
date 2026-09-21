@@ -147,11 +147,11 @@
   "pikachu": [
     {
       "into": "raichu",
-      "level": 35
+      "item": "thunderStone"
     },
     {
       "into": "a-raichu",
-      "level": 35
+      "item": "thunderStone"
     },
     {
       "into": "gx-pikachu",
@@ -174,7 +174,7 @@
   "nidorina": [
     {
       "into": "nidoqueen",
-      "level": 35
+      "item": "moonStone"
     }
   ],
   "nidoranM": [
@@ -186,7 +186,7 @@
   "nidorino": [
     {
       "into": "nidoking",
-      "level": 35
+      "item": "moonStone"
     }
   ],
   "cleffa": [
@@ -198,13 +198,13 @@
   "clefairy": [
     {
       "into": "clefable",
-      "level": 35
+      "item": "moonStone"
     }
   ],
   "vulpix": [
     {
       "into": "ninetales",
-      "level": 35
+      "item": "fireStone"
     }
   ],
   "igglybuff": [
@@ -216,7 +216,7 @@
   "jigglypuff": [
     {
       "into": "wigglytuff",
-      "level": 35
+      "item": "moonStone"
     }
   ],
   "zubat": [
@@ -240,11 +240,11 @@
   "gloom": [
     {
       "into": "vileplume",
-      "level": 35
+      "item": "leafStone"
     },
     {
       "into": "bellossom",
-      "level": 35
+      "item": "sunStone"
     }
   ],
   "paras": [
@@ -291,7 +291,7 @@
   "growlithe": [
     {
       "into": "arcanine",
-      "level": 35
+      "item": "fireStone"
     }
   ],
   "poliwag": [
@@ -303,11 +303,11 @@
   "poliwhirl": [
     {
       "into": "poliwrath",
-      "level": 50
+      "item": "waterStone"
     },
     {
       "into": "politoed",
-      "level": 50
+      "item": "kingsRock"
     }
   ],
   "abra": [
@@ -319,7 +319,7 @@
   "kadabra": [
     {
       "into": "alakazam",
-      "level": 40
+      "item": "linkCable"
     }
   ],
   "alakazam": [
@@ -337,7 +337,7 @@
   "machoke": [
     {
       "into": "machamp",
-      "level": 40
+      "item": "linkCable"
     }
   ],
   "bellsprout": [
@@ -349,7 +349,7 @@
   "weepinbell": [
     {
       "into": "victreebel",
-      "level": 35
+      "item": "leafStone"
     }
   ],
   "tentacool": [
@@ -367,7 +367,7 @@
   "graveler": [
     {
       "into": "golem",
-      "level": 40
+      "item": "linkCable"
     }
   ],
   "ponyta": [
@@ -383,7 +383,7 @@
     },
     {
       "into": "slowking",
-      "level": 37
+      "item": "kingsRock"
     }
   ],
   "slowbro": [
@@ -425,7 +425,7 @@
   "shellder": [
     {
       "into": "cloyster",
-      "level": 35
+      "item": "waterStone"
     }
   ],
   "gastly": [
@@ -437,7 +437,7 @@
   "haunter": [
     {
       "into": "gengar",
-      "level": 40
+      "item": "linkCable"
     }
   ],
   "gengar": [
@@ -454,7 +454,7 @@
   "onix": [
     {
       "into": "steelix",
-      "level": 45
+      "item": "metalCoat"
     }
   ],
   "steelix": [
@@ -484,11 +484,11 @@
   "exeggcute": [
     {
       "into": "exeggutor",
-      "level": 35
+      "item": "leafStone"
     },
     {
       "into": "a-exeggutor",
-      "level": 35
+      "item": "leafStone"
     }
   ],
   "cubone": [
@@ -540,13 +540,13 @@
   "rhydon": [
     {
       "into": "rhyperior",
-      "level": 50
+      "item": "protector"
     }
   ],
   "happiny": [
     {
       "into": "chansey",
-      "level": 17
+      "item": "ovalStone"
     }
   ],
   "chansey": [
@@ -576,7 +576,7 @@
   "seadra": [
     {
       "into": "kingdra",
-      "level": 50
+      "item": "dragonScale"
     }
   ],
   "goldeen": [
@@ -588,7 +588,7 @@
   "staryu": [
     {
       "into": "starmie",
-      "level": 35
+      "item": "waterStone"
     }
   ],
   "mimeJR": [
@@ -600,7 +600,7 @@
   "scyther": [
     {
       "into": "scizor",
-      "level": 45
+      "item": "metalCoat"
     },
     {
       "into": "kleavor",
@@ -628,7 +628,7 @@
   "electabuzz": [
     {
       "into": "electivire",
-      "level": 50
+      "item": "electirizer"
     }
   ],
   "magby": [
@@ -640,7 +640,7 @@
   "magmar": [
     {
       "into": "magmortar",
-      "level": 50
+      "item": "magmarizer"
     }
   ],
   "pinsir": [
@@ -664,15 +664,15 @@
   "eevee": [
     {
       "into": "vaporeon",
-      "level": 25
+      "item": "waterStone"
     },
     {
       "into": "flareon",
-      "level": 25
+      "item": "fireStone"
     },
     {
       "into": "jolteon",
-      "level": 25
+      "item": "thunderStone"
     },
     {
       "into": "espeon",
@@ -684,11 +684,11 @@
     },
     {
       "into": "glaceon",
-      "level": 25
+      "item": "iceStone"
     },
     {
       "into": "leafeon",
-      "level": 25
+      "item": "leafStone"
     },
     {
       "into": "sylveon",
@@ -703,13 +703,13 @@
   "porygon": [
     {
       "into": "porygon2",
-      "level": 25
+      "item": "upgrade"
     }
   ],
   "porygon2": [
     {
       "into": "porygon-z",
-      "level": 37
+      "item": "dubiousDisc"
     }
   ],
   "omanyte": [
@@ -849,7 +849,7 @@
   "togetic": [
     {
       "into": "togekiss",
-      "level": 35
+      "item": "shinyStone"
     }
   ],
   "natu": [
@@ -915,7 +915,7 @@
   "sunkern": [
     {
       "into": "sunflora",
-      "level": 25
+      "item": "sunStone"
     }
   ],
   "yanma": [
@@ -933,13 +933,13 @@
   "murkrow": [
     {
       "into": "honchkrow",
-      "level": 35
+      "item": "duskStone"
     }
   ],
   "misdreavus": [
     {
       "into": "mismagius",
-      "level": 35
+      "item": "duskStone"
     }
   ],
   "wynaut": [
@@ -957,7 +957,7 @@
   "gligar": [
     {
       "into": "gliscor",
-      "level": 37
+      "item": "razorFang"
     }
   ],
   "snubbull": [
@@ -975,7 +975,7 @@
   "sneasel": [
     {
       "into": "weavile",
-      "level": 40
+      "item": "razorClaw"
     }
   ],
   "teddiursa": [
@@ -1147,7 +1147,7 @@
   "lombre": [
     {
       "into": "ludicolo",
-      "level": 30
+      "item": "waterStone"
     }
   ],
   "seedot": [
@@ -1159,7 +1159,7 @@
   "nuzleaf": [
     {
       "into": "shiftry",
-      "level": 30
+      "item": "leafStone"
     }
   ],
   "taillow": [
@@ -1187,7 +1187,7 @@
     },
     {
       "into": "gallade",
-      "level": 30
+      "item": "dawnStone"
     }
   ],
   "gardevoir": [
@@ -1263,7 +1263,7 @@
   "skitty": [
     {
       "into": "delcatty",
-      "level": 25
+      "item": "moonStone"
     }
   ],
   "sableye": [
@@ -1329,7 +1329,7 @@
   "roselia": [
     {
       "into": "roserade",
-      "level": 27
+      "item": "shinyStone"
     }
   ],
   "gulpin": [
@@ -1461,7 +1461,7 @@
   "dusclops": [
     {
       "into": "dusknoir",
-      "level": 50
+      "item": "reaperCloth"
     }
   ],
   "chingling": [
@@ -1483,7 +1483,7 @@
     },
     {
       "into": "froslass",
-      "level": 42
+      "item": "dawnStone"
     }
   ],
   "glalie": [
@@ -1507,11 +1507,11 @@
   "clamperl": [
     {
       "into": "gorebyss",
-      "level": 30
+      "item": "deepSeaScale"
     },
     {
       "into": "huntail",
-      "level": 30
+      "item": "deepSeaTooth"
     }
   ],
   "bagon": [
@@ -1867,25 +1867,25 @@
   "pansage": [
     {
       "into": "simisage",
-      "level": 22
+      "item": "leafStone"
     }
   ],
   "pansear": [
     {
       "into": "simisear",
-      "level": 22
+      "item": "fireStone"
     }
   ],
   "panpour": [
     {
       "into": "simipour",
-      "level": 22
+      "item": "waterStone"
     }
   ],
   "munna": [
     {
       "into": "musharna",
-      "level": 25
+      "item": "moonStone"
     }
   ],
   "pidove": [
@@ -1915,7 +1915,7 @@
   "boldore": [
     {
       "into": "gigalith",
-      "level": 40
+      "item": "linkCable"
     }
   ],
   "woobat": [
@@ -1945,7 +1945,7 @@
   "gurdurr": [
     {
       "into": "conkeldurr",
-      "level": 40
+      "item": "linkCable"
     }
   ],
   "tympole": [
@@ -1987,17 +1987,17 @@
   "cottonee": [
     {
       "into": "whimsicott",
-      "level": 27
+      "item": "sunStone"
     }
   ],
   "petilil": [
     {
       "into": "lilligant",
-      "level": 27
+      "item": "sunStone"
     },
     {
       "into": "h-lilligant",
-      "level": 27
+      "item": "sunStone"
     }
   ],
   "sandile": [
@@ -2063,7 +2063,7 @@
   "minccino": [
     {
       "into": "cinccino",
-      "level": 27
+      "item": "shinyStone"
     }
   ],
   "gothita": [
@@ -2117,7 +2117,7 @@
   "karrablast": [
     {
       "into": "escavalier",
-      "level": 30
+      "item": "linkCable"
     }
   ],
   "foongus": [
@@ -2165,7 +2165,7 @@
   "eelektrik": [
     {
       "into": "eelektross",
-      "level": 50
+      "item": "thunderStone"
     }
   ],
   "elgyem": [
@@ -2183,7 +2183,7 @@
   "lampent": [
     {
       "into": "chandelure",
-      "level": 55
+      "item": "duskStone"
     }
   ],
   "axew": [
@@ -2207,7 +2207,7 @@
   "shelmet": [
     {
       "into": "accelgor",
-      "level": 30
+      "item": "linkCable"
     }
   ],
   "mienfoo": [
@@ -2349,7 +2349,7 @@
   "floette": [
     {
       "into": "florges",
-      "level": 32
+      "item": "shinyStone"
     }
   ],
   "skiddo": [
@@ -2379,19 +2379,19 @@
   "doublade": [
     {
       "into": "aegislash",
-      "level": 50
+      "item": "duskStone"
     }
   ],
   "spritzee": [
     {
       "into": "aromatisse",
-      "level": 28
+      "item": "sachet"
     }
   ],
   "swirlix": [
     {
       "into": "slurpuff",
-      "level": 28
+      "item": "whippedDream"
     }
   ],
   "inkay": [
@@ -2421,7 +2421,7 @@
   "helioptile": [
     {
       "into": "heliolisk",
-      "level": 35
+      "item": "sunStone"
     }
   ],
   "tyrunt": [
@@ -2455,13 +2455,13 @@
   "phantump": [
     {
       "into": "trevenant",
-      "level": 40
+      "item": "linkCable"
     }
   ],
   "pumpkaboo": [
     {
       "into": "gourgeist",
-      "level": 40
+      "item": "linkCable"
     }
   ],
   "bergmite": [
@@ -2553,13 +2553,13 @@
   "charjabug": [
     {
       "into": "vikavolt",
-      "level": 33
+      "item": "thunderStone"
     }
   ],
   "crabrawler": [
     {
       "into": "crabominable",
-      "level": 38
+      "item": "iceStone"
     }
   ],
   "cutiefly": [
@@ -2801,11 +2801,11 @@
   "applin": [
     {
       "into": "flapple",
-      "level": 35
+      "item": "tartApple"
     },
     {
-      "into": "flapple",
-      "level": 35
+      "into": "appletun",
+      "item": "sweetApple"
     }
   ],
   "silicobra": [
@@ -2841,7 +2841,7 @@
   "sinistea": [
     {
       "into": "polteageist",
-      "level": 30
+      "item": "crackedPot"
     }
   ],
   "hatenna": [
@@ -2871,7 +2871,7 @@
   "milcery": [
     {
       "into": "alcremie",
-      "level": 30
+      "item": "strawberrySweet"
     }
   ],
   "snom": [
@@ -3015,7 +3015,11 @@
   "charcadet": [
     {
       "into": "armarouge",
-      "level": 35
+      "item": "auspiciousArmor"
+    },
+    {
+      "into": "ceruledge",
+      "item": "maliciousArmor"
     }
   ],
   "armarouge": [
@@ -3171,13 +3175,13 @@
   "a-sandshrew": [
     {
       "into": "a-sandslash",
-      "level": 22
+      "item": "iceStone"
     }
   ],
   "a-vulpix": [
     {
       "into": "a-ninetales",
-      "level": 35
+      "item": "iceStone"
     }
   ],
   "a-diglett": [
@@ -3207,7 +3211,7 @@
   "a-graveler": [
     {
       "into": "a-golem",
-      "level": 40
+      "item": "linkCable"
     }
   ],
   "a-grimer": [
@@ -3491,11 +3495,11 @@
   "g-slowpoke": [
     {
       "into": "g-slowbro",
-      "level": 37
+      "item": "galaricaCuff"
     },
     {
       "into": "g-slowking",
-      "level": 37
+      "item": "galaricaWreath"
     }
   ],
   "kubfu": [
@@ -3553,7 +3557,7 @@
   "h-growlithe": [
     {
       "into": "h-arcanine",
-      "level": 35
+      "item": "fireStone"
     }
   ],
   "h-zorua": [
@@ -3593,7 +3597,7 @@
   "h-sneasel": [
     {
       "into": "sneasler",
-      "level": 40
+      "item": "razorClaw"
     }
   ],
   "h-qwilfish": [

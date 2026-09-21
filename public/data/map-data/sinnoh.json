@@ -401,6 +401,9 @@
      "locationId": "sinnoh-eterna-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "sinnoh-gym-2"
    ]
   },
   "unlockOrder": 195,
@@ -427,6 +430,9 @@
      "locationId": "sinnoh-oreburgh-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "sinnoh-gym-1"
    ]
   },
   "unlockOrder": 196,
@@ -523,6 +529,9 @@
      "locationId": "sinnoh-hearthome-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "sinnoh-gym-5"
    ]
   },
   "unlockOrder": 199,
@@ -664,6 +673,9 @@
      "locationId": "sinnoh-eterna-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "sinnoh-gym-2"
    ]
   },
   "unlockOrder": 203,
@@ -689,6 +701,9 @@
      "locationId": "sinnoh-hearthome-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "sinnoh-gym-5"
    ]
   },
   "unlockOrder": 204,
@@ -761,6 +776,9 @@
      "locationId": "sinnoh-pastoria-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "sinnoh-gym-4"
    ]
   },
   "unlockOrder": 206,
@@ -1187,6 +1205,9 @@
      "locationId": "sinnoh-sunyshore-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "sinnoh-gym-8"
    ]
   },
   "unlockOrder": 220,
@@ -1237,6 +1258,9 @@
      "locationId": "sinnoh-pastoria-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "sinnoh-gym-4"
    ]
   },
   "unlockOrder": 222,
@@ -1415,6 +1439,16 @@
      "locationId": "sinnoh-sea-route-230",
      "count": 20
     }
+   ],
+   "gymsRequired": [
+    "sinnoh-gym-1",
+    "sinnoh-gym-2",
+    "sinnoh-gym-3",
+    "sinnoh-gym-4",
+    "sinnoh-gym-5",
+    "sinnoh-gym-6",
+    "sinnoh-gym-7",
+    "sinnoh-gym-8"
    ]
   },
   "unlockOrder": 229,

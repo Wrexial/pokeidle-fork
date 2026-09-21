@@ -22,6 +22,7 @@ export const CHANGELOG = [
           heading: 'Regional Leagues',
           items: [
             'Each region has its own 8 gym leaders, Elite Four and Champion',
+            'Gym towns gate the road onward \u2014 you must beat the local leader to leave, and the league demands all eight badges',
             'Badges, gym order and the league challenge are all per-region',
             "Beating a region's Champion is what opens up the next region",
           ],

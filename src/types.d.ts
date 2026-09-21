@@ -201,6 +201,8 @@ type MapLocation = {
   unlock: {
     battlesAtLocation?: { locationId: string; count: number }[]
     badgesRequired?: number
+    /** specific gym ids that must be beaten to unlock this location */
+    gymsRequired?: string[]
     championDefeated?: boolean | string
     requires?: string[]
     /** region-entry gate: unlocked if it's the player's start region, or if

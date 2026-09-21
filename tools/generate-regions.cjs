@@ -49,9 +49,6 @@ const GYM_LEVEL_MIN = 12
 const GYM_LEVEL_MAX = 64
 const E4_LEVEL_MIN = 68
 const CHAMPION_LEVEL = LEVEL_MAX - 5
-// Spread index i of `count` evenly across [min, max] (inclusive).
-const spread = (i, count, min, max) =>
-  Math.round(min + (count <= 1 ? 0 : (i * (max - min)) / (count - 1)))
 const TRAINER_CLASSES = ['youngster', 'lass', 'bugCatcher', 'hiker', 'camper', 'beauty', 'coolTrainer', 'psychic', 'scientist', 'ace', 'blackbelt', 'swimmer']
 const LEADER_SPRITES = ['acetrainer', 'hiker', 'beauty', 'blackbelt', 'psychic', 'scientist', 'camper', 'swimmer', 'gentleman', 'juggler']
 const BADGE_COLORS = ['#a0a0a0', '#4878b0', '#c8a030', '#48a048', '#b83028', '#a060c0', '#e08040', '#40c0c0']
@@ -319,6 +316,47 @@ for (const region of REGIONS) {
   const all = speciesForGen(gen)
   const wild = all.filter((s) => s.catchRate > 3 && !starters.includes(s.key))
 
+  // Resolve each gym to its town up-front: the roads leaving a gym town must
+  // require that gym's badge, and the league data below reuses the same map so
+  // the two never drift apart.
+  const gymTowns = townNodes.length ? townNodes : [entryNode]
+  const gymPlacements = (GYM_LEADERS[regionId] ?? []).map((leaderName, i) => {
+    const preferredTown = (GYM_TOWNS[regionId] ?? [])[i],
+      preferredNode = preferredTown
+        ? townNodes.find((node) => (display[node] ?? node) === preferredTown)
+        : null
+    return {
+      id: `${regionId}-gym-${i + 1}`,
+      index: i,
+      leaderName,
+      townNode: preferredNode ?? gymTowns[i % gymTowns.length],
+    }
+  })
+  // Gyms sit in their real cities, but those cities are visited in an order
+  // that doesn't always match the canonical gym order (Hoenn's Petalburg holds
+  // the 5th gym yet is reached before Rustboro's 1st). So the roads leaving a
+  // gym town require the gym physically there, and that gym's level follows the
+  // same route curve as the wilds around it — a canonical level here would wall
+  // off the early game with an impossibly strong leader.
+  const gymGateAtTown = {}
+  for (const gym of gymPlacements)
+    if (!gymGateAtTown[gym.townNode]) gymGateAtTown[gym.townNode] = gym.id
+  const gymLevelById = {}
+  let routesBefore = 0
+  for (const node of order) {
+    const gymsHere = gymPlacements.filter((gym) => gym.townNode === node)
+    if (gymsHere.length) {
+      const t =
+        routeNodes.length <= 1 ? 0 : Math.min(1, routesBefore / (routeNodes.length - 1))
+      const level = Math.max(
+        GYM_LEVEL_MIN,
+        Math.min(GYM_LEVEL_MAX, Math.round(LEVEL_MIN + t * (WILD_LEVEL_MAX - LEVEL_MIN)) + 2)
+      )
+      for (const gym of gymsHere) gymLevelById[gym.id] = level
+    }
+    if (isRouteNode(node)) routesBefore++
+  }
+
   const regionObj = {
     id: regionId,
     name,
@@ -388,18 +426,24 @@ for (const region of REGIONS) {
   for (const node of order) {
     const id = locId(regionId, node)
     const isRoute = isRouteNode(node)
-    const unlock =
-      node === entryNode
-        ? { entry: true, previous: prevRegionId }
-        : unlockParent[node] === entryNode
+    const parent = node === entryNode ? null : (unlockParent[node] ?? null)
+    let unlock
+    if (node === entryNode) {
+      unlock = { entry: true, previous: prevRegionId }
+    } else if (!parent) {
+      unlock = {}
+    } else {
+      unlock =
+        parent === entryNode
           ? { requires: [locId(regionId, entryNode)] }
-          : unlockParent[node]
-            ? {
-                battlesAtLocation: [
-                  { locationId: locId(regionId, unlockParent[node]), count: 15 },
-                ],
-              }
-            : {}
+          : { battlesAtLocation: [{ locationId: locId(regionId, parent), count: 15 }] }
+      // You can't leave a gym town without beating its leader. The starting
+      // town is exempt: it may hold a gym (Alola's fallback does), but gating
+      // the first route behind it would leave a fresh player with no wild
+      // encounters to train on.
+      if (parent !== entryNode && gymGateAtTown[parent])
+        unlock.gymsRequired = [gymGateAtTown[parent]]
+    }
     if (isRoute) {
       encounterData[id] = routeEncounter[node]
       mapData[id] = {
@@ -488,6 +532,9 @@ for (const region of REGIONS) {
     connections: [locId(regionId, leagueNode)],
     unlock: {
       battlesAtLocation: [{ locationId: locId(regionId, leagueNode), count: 20 }],
+      // Every badge is required for the league, including any gym the player
+      // passed before its canonical turn (see gymGateAtTown above).
+      gymsRequired: gymPlacements.map((gym) => gym.id),
     },
     unlockOrder: unlockOrder++,
     position: placeAt(
@@ -498,31 +545,18 @@ for (const region of REGIONS) {
   regionObj.leagueLocationKey = leagueId
 
   // league: gyms spread across towns, then Elite Four + Champion
-  const gymTowns = townNodes.length ? townNodes : [entryNode]
   const roster = wild.length ? wild : all
-  const leaders = GYM_LEADERS[regionId] ?? []
-  leaders.forEach((leaderName, i) => {
-    const preferredTown = (GYM_TOWNS[regionId] ?? [])[i],
-      preferredNode = preferredTown
-        ? townNodes.find((node) => (display[node] ?? node) === preferredTown)
-        : null,
-      townNode = preferredNode ?? gymTowns[i % gymTowns.length]
+  gymPlacements.forEach(({ id: gymId, leaderName, townNode, index }) => {
     gymData.push({
-      id: `${regionId}-gym-${i + 1}`,
+      id: gymId,
       name: leaderName,
       title: `${name} Gym Leader`,
       region: regionId,
       locationKey: locId(regionId, townNode),
-      badgeName: `${name} Badge ${i + 1}`,
-      badgeColor: BADGE_COLORS[i % BADGE_COLORS.length],
-      spriteKey: LEADER_SPRITES[(gen + i) % LEADER_SPRITES.length],
-      team: makeTeam(
-        roster,
-        i * 3,
-        3,
-        clampLevel(spread(i, leaders.length, GYM_LEVEL_MIN, GYM_LEVEL_MAX)),
-        1
-      ),
+      badgeName: `${name} Badge ${index + 1}`,
+      badgeColor: BADGE_COLORS[index % BADGE_COLORS.length],
+      spriteKey: LEADER_SPRITES[(gen + index) % LEADER_SPRITES.length],
+      team: makeTeam(roster, index * 3, 3, clampLevel(gymLevelById[gymId] ?? GYM_LEVEL_MIN), 1),
     })
   })
   const eliteFour = ELITE_FOUR[regionId] ?? []

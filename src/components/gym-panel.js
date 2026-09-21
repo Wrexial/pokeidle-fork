@@ -130,8 +130,11 @@ export function GymPanel({ onOpenShop }) {
           regionGyms.map((leader, leaderIndex) => {
             const unlocked = state.unlockedLocations.includes(leader.locationKey),
               defeated = state.defeatedGyms.includes(leader.id),
-              unlockedByOrder = defeatedRegionGyms >= leaderIndex,
-              revealed = unlocked && unlockedByOrder,
+              // Kanto's gyms sit in cities reached long before their canonical
+              // turn (Giovanni's Viridian City is next to Pallet Town), so it
+              // still reveals them in badge order. Generated regions level each
+              // gym to its town, so any unlocked gym is fair game there.
+              revealed = unlocked && (regionId !== 'kanto' || defeatedRegionGyms >= leaderIndex),
               atGym = state.currentLocation === leader.locationKey,
               canStart = revealed && atGym,
               mustTravel = revealed && !atGym

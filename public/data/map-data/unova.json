@@ -328,6 +328,9 @@
      "locationId": "unova-striaton-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "unova-gym-1"
    ]
   },
   "unlockOrder": 238,
@@ -396,6 +399,9 @@
      "locationId": "unova-nacrene-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "unova-gym-2"
    ]
   },
   "unlockOrder": 240,
@@ -441,6 +447,9 @@
      "locationId": "unova-castelia-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "unova-gym-3"
    ]
   },
   "unlockOrder": 241,
@@ -511,6 +520,9 @@
      "locationId": "unova-nimbasa-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "unova-gym-4"
    ]
   },
   "unlockOrder": 243,
@@ -579,6 +591,9 @@
      "locationId": "unova-driftveil-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "unova-gym-5"
    ]
   },
   "unlockOrder": 245,
@@ -624,6 +639,9 @@
      "locationId": "unova-driftveil-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "unova-gym-5"
    ]
   },
   "unlockOrder": 246,
@@ -693,6 +711,9 @@
      "locationId": "unova-mistralton-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "unova-gym-6"
    ]
   },
   "unlockOrder": 248,
@@ -762,6 +783,9 @@
      "locationId": "unova-icirrus-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "unova-gym-7"
    ]
   },
   "unlockOrder": 250,
@@ -857,6 +881,9 @@
      "locationId": "unova-opelucid-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "unova-gym-8"
    ]
   },
   "unlockOrder": 253,
@@ -882,6 +909,9 @@
      "locationId": "unova-opelucid-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "unova-gym-8"
    ]
   },
   "unlockOrder": 254,
@@ -1231,6 +1261,9 @@
      "locationId": "unova-nimbasa-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "unova-gym-4"
    ]
   },
   "unlockOrder": 264,
@@ -1382,6 +1415,9 @@
      "locationId": "unova-opelucid-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "unova-gym-8"
    ]
   },
   "unlockOrder": 270,
@@ -1481,6 +1517,16 @@
      "locationId": "unova-route-23",
      "count": 20
     }
+   ],
+   "gymsRequired": [
+    "unova-gym-1",
+    "unova-gym-2",
+    "unova-gym-3",
+    "unova-gym-4",
+    "unova-gym-5",
+    "unova-gym-6",
+    "unova-gym-7",
+    "unova-gym-8"
    ]
   },
   "unlockOrder": 274,

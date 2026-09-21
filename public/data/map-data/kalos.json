@@ -216,6 +216,9 @@
      "locationId": "kalos-santalune-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "kalos-gym-1"
    ]
   },
   "unlockOrder": 281,
@@ -288,6 +291,9 @@
      "locationId": "kalos-lumiose-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "kalos-gym-5"
    ]
   },
   "unlockOrder": 283,
@@ -547,6 +553,9 @@
      "locationId": "kalos-cyllage-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "kalos-gym-2"
    ]
   },
   "unlockOrder": 291,
@@ -685,6 +694,9 @@
      "locationId": "kalos-shalour-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "kalos-gym-3"
    ]
   },
   "unlockOrder": 295,
@@ -754,6 +766,9 @@
      "locationId": "kalos-lumiose-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "kalos-gym-5"
    ]
   },
   "unlockOrder": 297,
@@ -779,6 +794,9 @@
      "locationId": "kalos-lumiose-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "kalos-gym-5"
    ]
   },
   "unlockOrder": 298,
@@ -849,6 +867,9 @@
      "locationId": "kalos-laverre-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "kalos-gym-6"
    ]
   },
   "unlockOrder": 300,
@@ -918,6 +939,9 @@
      "locationId": "kalos-lumiose-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "kalos-gym-5"
    ]
   },
   "unlockOrder": 302,
@@ -1012,6 +1036,9 @@
      "locationId": "kalos-anistar-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "kalos-gym-7"
    ]
   },
   "unlockOrder": 305,
@@ -1151,6 +1178,9 @@
      "locationId": "kalos-snowbelle-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "kalos-gym-8"
    ]
   },
   "unlockOrder": 309,
@@ -1174,6 +1204,9 @@
      "locationId": "kalos-snowbelle-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "kalos-gym-8"
    ]
   },
   "unlockOrder": 310,
@@ -1219,6 +1252,9 @@
      "locationId": "kalos-snowbelle-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "kalos-gym-8"
    ]
   },
   "unlockOrder": 311,
@@ -1246,6 +1282,9 @@
      "locationId": "kalos-santalune-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "kalos-gym-1"
    ]
   },
   "unlockOrder": 312,
@@ -1293,6 +1332,16 @@
      "locationId": "kalos-route-22",
      "count": 20
     }
+   ],
+   "gymsRequired": [
+    "kalos-gym-1",
+    "kalos-gym-2",
+    "kalos-gym-3",
+    "kalos-gym-4",
+    "kalos-gym-5",
+    "kalos-gym-6",
+    "kalos-gym-7",
+    "kalos-gym-8"
    ]
   },
   "unlockOrder": 314,

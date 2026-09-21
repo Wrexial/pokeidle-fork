@@ -470,6 +470,9 @@
      "locationId": "alola-heahea-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "alola-gym-5"
    ]
   },
   "unlockOrder": 329,
@@ -539,6 +542,9 @@
      "locationId": "alola-heahea-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "alola-gym-5"
    ]
   },
   "unlockOrder": 331,
@@ -712,6 +718,9 @@
      "locationId": "alola-konikoni-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "alola-gym-6"
    ]
   },
   "unlockOrder": 337,
@@ -813,6 +822,16 @@
      "locationId": "alola-route-17",
      "count": 20
     }
+   ],
+   "gymsRequired": [
+    "alola-gym-1",
+    "alola-gym-2",
+    "alola-gym-3",
+    "alola-gym-4",
+    "alola-gym-5",
+    "alola-gym-6",
+    "alola-gym-7",
+    "alola-gym-8"
    ]
   },
   "unlockOrder": 341,

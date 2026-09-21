@@ -217,6 +217,9 @@
      "locationId": "hoenn-petalburg-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "hoenn-gym-5"
    ]
   },
   "unlockOrder": 138,
@@ -381,6 +384,9 @@
      "locationId": "hoenn-dewford-town",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "hoenn-gym-2"
    ]
   },
   "unlockOrder": 143,
@@ -574,6 +580,9 @@
      "locationId": "hoenn-mauville-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "hoenn-gym-3"
    ]
   },
   "unlockOrder": 149,
@@ -761,6 +770,9 @@
      "locationId": "hoenn-rustboro-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "hoenn-gym-1"
    ]
   },
   "unlockOrder": 155,
@@ -786,6 +798,9 @@
      "locationId": "hoenn-rustboro-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "hoenn-gym-1"
    ]
   },
   "unlockOrder": 156,
@@ -855,6 +870,9 @@
      "locationId": "hoenn-mauville-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "hoenn-gym-3"
    ]
   },
   "unlockOrder": 158,
@@ -881,6 +899,9 @@
      "locationId": "hoenn-mauville-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "hoenn-gym-3"
    ]
   },
   "unlockOrder": 159,
@@ -975,6 +996,9 @@
      "locationId": "hoenn-fortree-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "hoenn-gym-6"
    ]
   },
   "unlockOrder": 162,
@@ -1190,6 +1214,9 @@
      "locationId": "hoenn-mossdeep-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "hoenn-gym-7"
    ]
   },
   "unlockOrder": 169,
@@ -1285,6 +1312,9 @@
      "locationId": "hoenn-mossdeep-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "hoenn-gym-7"
    ]
   },
   "unlockOrder": 172,
@@ -1597,6 +1627,16 @@
      "locationId": "hoenn-route-134",
      "count": 20
     }
+   ],
+   "gymsRequired": [
+    "hoenn-gym-1",
+    "hoenn-gym-2",
+    "hoenn-gym-3",
+    "hoenn-gym-4",
+    "hoenn-gym-5",
+    "hoenn-gym-6",
+    "hoenn-gym-7",
+    "hoenn-gym-8"
    ]
   },
   "unlockOrder": 183,

@@ -82,6 +82,8 @@ export function computeUnlockedLocations(state) {
             (requiredBattles) => (state.battlesWonByLocation[requiredBattles.locationId] ?? 0) < requiredBattles.count
           )) ||
         (unlockRule.badgesRequired && badgeCount < unlockRule.badgesRequired) ||
+        (unlockRule.gymsRequired &&
+          unlockRule.gymsRequired.some((gymId) => !state.defeatedGyms.includes(gymId))) ||
         (unlockRule.championDefeated &&
           !state.defeatedChampions.includes(
             unlockRule.championDefeated === true ? 'kanto' : unlockRule.championDefeated

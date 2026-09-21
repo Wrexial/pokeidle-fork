@@ -218,6 +218,9 @@
      "locationId": "johto-violet-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "johto-gym-1"
    ]
   },
   "unlockOrder": 106,
@@ -312,6 +315,9 @@
      "locationId": "johto-azalea-town",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "johto-gym-2"
    ]
   },
   "unlockOrder": 109,
@@ -381,6 +387,9 @@
      "locationId": "johto-goldenrod-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "johto-gym-3"
    ]
   },
   "unlockOrder": 111,
@@ -407,6 +416,9 @@
      "locationId": "johto-violet-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "johto-gym-1"
    ]
   },
   "unlockOrder": 112,
@@ -502,6 +514,9 @@
      "locationId": "johto-ecruteak-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "johto-gym-4"
    ]
   },
   "unlockOrder": 115,
@@ -596,6 +611,9 @@
      "locationId": "johto-olivine-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "johto-gym-6"
    ]
   },
   "unlockOrder": 118,
@@ -690,6 +708,9 @@
      "locationId": "johto-ecruteak-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "johto-gym-4"
    ]
   },
   "unlockOrder": 121,
@@ -759,6 +780,9 @@
      "locationId": "johto-mahogany-town",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "johto-gym-7"
    ]
   },
   "unlockOrder": 123,
@@ -784,6 +808,9 @@
      "locationId": "johto-mahogany-town",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "johto-gym-7"
    ]
   },
   "unlockOrder": 124,
@@ -853,6 +880,9 @@
      "locationId": "johto-blackthorn-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "johto-gym-8"
    ]
   },
   "unlockOrder": 126,
@@ -904,6 +934,9 @@
      "locationId": "johto-cianwood-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "johto-gym-5"
    ]
   },
   "unlockOrder": 128,
@@ -977,6 +1010,16 @@
      "locationId": "johto-route-48",
      "count": 20
     }
+   ],
+   "gymsRequired": [
+    "johto-gym-1",
+    "johto-gym-2",
+    "johto-gym-3",
+    "johto-gym-4",
+    "johto-gym-5",
+    "johto-gym-6",
+    "johto-gym-7",
+    "johto-gym-8"
    ]
   },
   "unlockOrder": 131,

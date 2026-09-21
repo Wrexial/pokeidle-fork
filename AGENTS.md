@@ -234,7 +234,8 @@ Data conventions:
   starters live in `regionalStarters` in `src/data/config.js`.
 - `map-data/<region>.json` locations carry a `region` id; wild routes also
   reference an `encounter-data/<region>.json` bucket via `routeKey`. Unlock rules support
-  `battlesAtLocation`, `badgesRequired`, `championDefeated` (a region id, or
+  `battlesAtLocation`, `badgesRequired`, `gymsRequired` (specific gym ids),
+  `championDefeated` (a region id, or
   `true` meaning Kanto), and `requires` (locations that must already be
   unlocked) — all resolved to a fixpoint in `computeUnlockedLocations`. Region
   **entry towns** use `{ entry: true, previous: '<regionId>' }`: they open if the
@@ -330,13 +331,21 @@ One-off scripts used to build the data JSON (not run during dev/build):
   (`LEVEL_MIN`/`LEVEL_MAX`), and its routes are spread across it in the order
   they unlock (route number / BFS depth), so the curve ramps smoothly for the
   player and doesn't trust the scraped real levels (which vary wildly between
-  routes and game versions, e.g. Unova Route 1). Gyms occupy 12-64, the Elite
-  Four 68-75 and the Champion 70-75; Kanto's hand-curated league/trainer levels
-  are kept in the committed JSON and normalised onto the same curve.
+  routes and game versions, e.g. Unova Route 1). The Elite Four occupy 68-75
+  and the Champion 70-75; Kanto's hand-curated league/trainer levels are kept
+  in the committed JSON and normalised onto the same curve.
   Gym leaders are placed in their real city via `GYM_TOWNS` (matched against
   the region's town nodes by display name), falling back to spreading them
   across towns in BFS order — Alola has island trials, not gyms, so it always
-  falls back. Raid Islands offer the region's generation of Pokémon that turn
+  falls back. Those real cities are visited in an order that can differ from
+  the canonical gym order (Hoenn's Petalburg holds gym 5 but is reached before
+  Rustboro's gym 1), so each gym is levelled from its town's position on the
+  route curve and listed in reach order, and the roads leaving a gym town
+  carry a `gymsRequired` rule for that gym — progression is gated by the local
+  badge without an impossible wall (the starting town is exempt, so Alola's
+  entry-town gym can't lock a fresh player out of wild encounters). The league
+  requires every badge (`gymsRequired`; Kanto uses its existing
+  `badgesRequired`). Raid Islands offer the region's generation of Pokémon that turn
   up on **no** region's wild routes and can't be reached by evolving one that
   does; that scan runs after every route is generated, so the pools are
   genuinely route-exclusive.

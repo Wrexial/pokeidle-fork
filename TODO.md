@@ -809,6 +809,40 @@ screen.
 
 Effort: **small–medium**.
 
+## 34. Living-dex capture mode
+
+Auto-catch modes are `always` / `shiny_only` / `level_threshold` /
+`pokedex_new` (`shouldAutoCatch` in `src/game/catching.js`, options in
+`CATCH_MODE_OPTIONS`, `src/data/ui.js`). `pokedex_new` stops catching a species
+forever once it's registered, so a player building a **living dex** (one of each
+Pokemon actually held in the party/box) can't re-catch one they've released or
+that evolved away.
+
+- [ ] Add a `living_dex` mode (labelled something like "Not owned (living)")
+      that catches when the species is **not currently in `state.party` or
+      `state.box`**, regardless of `pokedexCaught`.
+- [ ] Implement the check in the `shouldAutoCatch` switch
+      (`state.party.some(...) || state.box.some(...)`, by `speciesKey`). For
+      efficiency, compute the owned-species `Set` once per encounter/tick rather
+      than scanning the whole box on every call.
+- [ ] Decide whether holding an **evolution** of the species counts as owned
+      (true living-dex behaviour: no), and whether forms/shiny count separately.
+- [ ] Wire the new value into `CATCH_MODE_OPTIONS` and the radio list in
+      `catch-settings-modal.js` (plus a short hint explaining the difference
+      from "Not caught yet").
+- [ ] Check interactions: `selectAutoCatchBall` / `selectBestBall` are
+      unchanged, but the box-full and any future auto-release rule (#8) should
+      not immediately dump the extra living-dex catch.
+
+No save-shape change — a catch mode is just a string, and old saves keep
+defaulting to `pokedex_new`.
+
+Relevant code: `shouldAutoCatch` / `getCatchRule` (`src/game/catching.js`,
+`src/game/progression.js`), `CATCH_MODE_OPTIONS` (`src/data/ui.js`),
+`defaultCatchSettings` (`src/data/config.js`) and `catch-settings-modal.js`.
+
+Effort: **small**.
+
 ---
 
 ## Useful references when picking these up

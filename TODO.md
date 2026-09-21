@@ -494,6 +494,32 @@ long/technical to double as one.
 
 Effort: **small**.
 
+## 27. Wiping out of a raid should eject you from the raid zone
+
+`COMPLETE_HEALING` only sends the player back to `preRaidLocation` when
+`currentLocation === 'raidIsland'` — Kanto's hand-curated raid. Every other
+region's raid is a separate location (`johto-raid`, `hoenn-raid`, `sinnoh-raid`,
+…), so a full party wipe there heals the party but leaves the player standing on
+the raid island: the raid keeps going and the legendary can be re-fought
+immediately.
+
+- [ ] Treat any `type: 'raid'` location (or `state.inRaid`) as "in a raid" in
+      `COMPLETE_HEALING`, returning to `preRaidLocation` and clearing the raid
+      state (`inRaid` / `raidLegendary` / `raidLevel`) for every region, not
+      just Kanto.
+- [ ] Confirm the raid cooldown / `raidCooldownEnd` still prevents an instant
+      re-entry after the loss (see `RAID_COOLDOWN_MS` in
+      `src/data/config.js`).
+- [ ] Make sure the last-party-member faint goes through the same path
+      (`START_HEALING` from the game loop), so a wipe — not just a single faint
+      — is what triggers the ejection.
+
+Relevant code: `COMPLETE_HEALING` / `START_RAID` / `END_RAID`
+(`src/game/reducer.js`), the `START_HEALING` trigger in `src/hooks.js`, and the
+`type: 'raid'` locations in `public/data/map-data/*.json`.
+
+Effort: **small**.
+
 ---
 
 ## Useful references when picking these up

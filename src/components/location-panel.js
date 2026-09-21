@@ -8,6 +8,11 @@ import { computeUnlockedLocations } from '../game/progression.js'
 import { RouteEncounterGrid } from './route-encounter-grid.js'
 import { ShopPanel } from './shop-panel.js'
 
+/** How many upcoming unlocks the panel lists at once. When the current
+ * region is fully unlocked the "frontier" is empty, and falling back to every
+ * locked location on the map (hundreds) would lock up the main thread. */
+const NEXT_UNLOCK_LIMIT = 5
+
 /** @param {{ onOpenCatchSettings: () => void }} props */
 export function LocationPanel({ onOpenCatchSettings }) {
   const { state, dispatch } = useGame(),
@@ -34,9 +39,10 @@ export function LocationPanel({ onOpenCatchSettings }) {
       const frontier = candidates.filter((candidateLocation) =>
         candidateLocation.connections.some((connectionId) => unlockedSet.has(connectionId))
       )
-      return (frontier.length ? frontier : candidates).sort(
-        (left, right) => left.unlockOrder - right.unlockOrder
-      )
+      const upcoming = frontier.length ? frontier : candidates
+      return upcoming
+        .sort((left, right) => left.unlockOrder - right.unlockOrder)
+        .slice(0, NEXT_UNLOCK_LIMIT)
     })(),
     badgeCount = state.defeatedGyms.length,
     routeKey = location?.routeKey,

@@ -2402,6 +2402,21 @@ img {
     font-size: 7px
 }
 
+.location-unlock-entry.clickable,
+.location-unlock-check.clickable {
+    cursor: pointer
+}
+
+.location-unlock-entry.clickable:hover {
+    background: #ffffff14
+}
+
+.location-unlock-entry.clickable:hover .location-unlock-name,
+.location-unlock-check.clickable:hover .location-unlock-check-label {
+    color: var(--parchment);
+    text-decoration: underline
+}
+
 .location-panel-scroll {
     width: 100%;
     align-self: flex-start;

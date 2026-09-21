@@ -50,8 +50,50 @@ export function LocationPanel({ onOpenCatchSettings }) {
   if (!location) return null
 
   /**
+   * Whether a location is somewhere the player can travel to right now.
+   * @param {string | null | undefined} locationId
+   * @returns {boolean}
+   */
+  function isTravelable(locationId) {
+    return Boolean(
+      locationId &&
+        locationId !== state.currentLocation &&
+        state.unlockedLocations.includes(locationId) &&
+        mapData[locationId]?.type !== 'raid'
+    )
+  }
+
+  /** @param {string} locationId */
+  function travelToTarget(locationId) {
+    if (isTravelable(locationId))
+      dispatch({
+        type: 'TRAVEL',
+        payload: {
+          locationId,
+        },
+      })
+  }
+
+  /**
+   * The next gym of a region the player still has to beat — where a
+   * `badgesRequired` unlock sends them.
+   * @param {string} regionId
+   * @returns {string | null}
+   */
+  function nextGymLocationId(regionId) {
+    const nextGym = gymLeaderData.find(
+      (gym) =>
+        (gym.region ?? 'kanto') === regionId &&
+        !state.defeatedGyms.includes(gym.id) &&
+        gym.locationKey &&
+        mapData[gym.locationKey]
+    )
+    return nextGym?.locationKey ?? null
+  }
+
+  /**
    * @param {MapLocation} target
-   * @returns {{ label: string, current: number, required: number, met: boolean }[]}
+   * @returns {{ label: string, current: number, required: number, met: boolean, locationId?: string | null }[]}
    */
   function unlockRequirements(target) {
     const unlockRule = target.unlock || {},
@@ -65,6 +107,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
           current: wonCount,
           required: requirement.count,
           met: wonCount >= requirement.count,
+          locationId: requirement.locationId,
         })
       }
     if (unlockRule.badgesRequired)
@@ -73,6 +116,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
         current: badgeCount,
         required: unlockRule.badgesRequired,
         met: badgeCount >= unlockRule.badgesRequired,
+        locationId: nextGymLocationId(target.region ?? 'kanto'),
       })
     if (unlockRule.gymsRequired)
       for (const gymId of unlockRule.gymsRequired) {
@@ -83,6 +127,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
           current: beaten ? 1 : 0,
           required: 1,
           met: beaten,
+          locationId: gym?.locationKey ?? null,
         })
       }
     if (unlockRule.championDefeated) {
@@ -95,6 +140,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
         current: state.defeatedChampions.includes(requiredRegion) ? 1 : 0,
         required: 1,
         met: state.defeatedChampions.includes(requiredRegion),
+        locationId: regions.find((region) => region.id === requiredRegion)?.leagueLocationKey ?? null,
       })
     }
     if (unlockRule.requires)
@@ -104,6 +150,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
           current: state.unlockedLocations.includes(requiredId) ? 1 : 0,
           required: 1,
           met: state.unlockedLocations.includes(requiredId),
+          locationId: requiredId,
         })
       )
     if (unlockRule.entry)
@@ -118,6 +165,9 @@ export function LocationPanel({ onOpenCatchSettings }) {
           unlockRule.previous && state.defeatedChampions.includes(unlockRule.previous) ? 1 : 0,
         required: 1,
         met: !unlockRule.previous || state.defeatedChampions.includes(unlockRule.previous),
+        locationId: unlockRule.previous
+          ? (regions.find((region) => region.id === unlockRule.previous)?.leagueLocationKey ?? null)
+          : null,
       })
     return requirements
   }
@@ -256,11 +306,20 @@ export function LocationPanel({ onOpenCatchSettings }) {
                 children:
                   frontierLockedLocations.length > 1 ? 'Next Unlocks' : 'Next Unlock',
               }),
-              frontierLockedLocations.map((nextLockedLocation) =>
-                jsxs(
+              frontierLockedLocations.map((nextLockedLocation) => {
+                const requirements = unlockRequirements(nextLockedLocation),
+                  primaryRequirement = requirements.find(
+                    (requirement) => !requirement.met && isTravelable(requirement.locationId)
+                  ),
+                  primaryTarget = primaryRequirement?.locationId ?? null
+                return jsxs(
                   'div',
                   {
-                    className: 'location-unlock-entry',
+                    className: `location-unlock-entry${primaryTarget ? ' clickable' : ''}`,
+                    onClick: primaryTarget ? () => travelToTarget(primaryTarget) : void 0,
+                    title: primaryTarget
+                      ? `Travel to ${mapData[primaryTarget]?.name ?? primaryTarget}`
+                      : void 0,
                     children: [
                       jsx('div', {
                         className: 'location-unlock-name',
@@ -268,36 +327,48 @@ export function LocationPanel({ onOpenCatchSettings }) {
                       }),
                       jsx('div', {
                         className: 'location-unlock-checklist',
-                        children: unlockRequirements(nextLockedLocation).map(
-                          (requirement, index) =>
-                            jsxs(
-                              'div',
-                              {
-                                className: `location-unlock-check${requirement.met ? ' met' : ''}`,
-                                children: [
-                                  jsx('span', {
-                                    className: 'location-unlock-check-icon',
-                                    children: requirement.met ? '✓' : '○',
-                                  }),
-                                  jsx('span', {
-                                    className: 'location-unlock-check-label',
-                                    children: requirement.met
-                                      ? requirement.label
-                                      : requirement.required > 1
-                                        ? `${requirement.current}/${requirement.required} ${requirement.label.toLowerCase()}`
-                                        : requirement.label,
-                                  }),
-                                ],
-                              },
-                              index
-                            )
-                        ),
+                        children: requirements.map((requirement, index) => {
+                          const targetLocationId =
+                            !requirement.met && isTravelable(requirement.locationId)
+                              ? /** @type {string} */ (requirement.locationId)
+                              : null
+                          return jsxs(
+                            'div',
+                            {
+                              className: `location-unlock-check${requirement.met ? ' met' : ''}${targetLocationId ? ' clickable' : ''}`,
+                              onClick: targetLocationId
+                                ? /** @param {{ stopPropagation: () => void }} event */ (event) => {
+                                    event.stopPropagation()
+                                    travelToTarget(targetLocationId)
+                                  }
+                                : void 0,
+                              title: targetLocationId
+                                ? `Travel to ${mapData[targetLocationId]?.name ?? targetLocationId}`
+                                : void 0,
+                              children: [
+                                jsx('span', {
+                                  className: 'location-unlock-check-icon',
+                                  children: requirement.met ? '✓' : targetLocationId ? '→' : '○',
+                                }),
+                                jsx('span', {
+                                  className: 'location-unlock-check-label',
+                                  children: requirement.met
+                                    ? requirement.label
+                                    : requirement.required > 1
+                                      ? `${requirement.current}/${requirement.required} ${requirement.label.toLowerCase()}`
+                                      : requirement.label,
+                                }),
+                              ],
+                            },
+                            index
+                          )
+                        }),
                       }),
                     ],
                   },
                   nextLockedLocation.id
                 )
-              ),
+              }),
             ],
           }),
       ],

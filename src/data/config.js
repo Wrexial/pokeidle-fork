@@ -11,6 +11,11 @@ export const missingnoEncounterChance = 1 / 1000
 /** Shiny odds for a Pokemon received through Wonder Trade (1 in 512). */
 export const wonderTradeShinyOdds = 512
 
+/** Chance per wild win that a new swarm appears on a random unlocked route. */
+export const swarmSpawnChance = 0.01
+/** How many wild battles an active swarm lasts. */
+export const swarmBattleCount = 50
+
 export let RAID_COOLDOWN_MS = 1 * 1e3
 
 export let defaultCatchSettings = {

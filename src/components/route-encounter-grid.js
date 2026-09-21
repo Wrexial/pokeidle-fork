@@ -3,7 +3,7 @@
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { getRarityFromRate } from '../game/catching.js'
-import { routeExclusiveSpecies } from '../data/gameData.js'
+import { pokemonSpecies, routeExclusiveSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { PokeballIcon } from './pokeball-icon.js'
 import { EncounterDetailPanel } from './encounter-detail-panel.js'
@@ -18,6 +18,7 @@ export function RouteEncounterGrid({
 }) {
   const { state, dispatch } = useGame(),
     exclusiveSpecies = routeExclusiveSpecies[routeKey],
+    swarmHere = state.swarm?.routeKey === routeKey ? state.swarm : null,
     [selected, setSelected] = React.useState(/** @type {string | null} */ (null)),
     [applyingItem, setApplyingItem] = React.useState(/** @type {'repel' | 'honey' | null} */ (null)),
     repelCount = state.inventory.repel ?? 0,
@@ -89,6 +90,15 @@ export function RouteEncounterGrid({
                 className: 'pokedex-exclusive-legend',
                 title: 'Species found only on this route',
                 children: '◆ only found here',
+              })
+            : null,
+          swarmHere
+            ? jsx('span', {
+                className: 'swarm-legend',
+                title: 'A swarm is boosting this species right now',
+                children: `Swarm! ${
+                  pokemonSpecies[swarmHere.speciesKey]?.name ?? swarmHere.speciesKey
+                } (${swarmHere.battlesRemaining})`,
               })
             : null,
           jsxs('div', {

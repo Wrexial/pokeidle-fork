@@ -210,12 +210,31 @@ export function useGameLoop() {
           const currentEncounterData =
             encounterData[currentGameState.currentRoute]
           if (!currentEncounterData) return
-          const activeModifierMultipliers = resolveActiveModifiers(
+          const activeSwarm =
+              currentGameState.swarm?.routeKey === currentGameState.currentRoute
+                ? currentGameState.swarm
+                : null,
+            swarmLevel = currentEncounterData.encounters[0]?.minLevel ?? 5,
+            routeEncounterData = activeSwarm
+              ? {
+                  ...currentEncounterData,
+                  encounters: [
+                    ...currentEncounterData.encounters,
+                    {
+                      speciesKey: activeSwarm.speciesKey,
+                      weight: 80,
+                      minLevel: swarmLevel,
+                      maxLevel: swarmLevel + 2,
+                    },
+                  ],
+                }
+              : currentEncounterData,
+            activeModifierMultipliers = resolveActiveModifiers(
               currentGameState.activeEffects,
               currentGameState.currentRoute
             ),
             spawningPokemonData = resolvePokemonEncounter(
-              currentEncounterData,
+              routeEncounterData,
               activeModifierMultipliers,
               completedGenerationSet,
               currentGameState.shinyChain

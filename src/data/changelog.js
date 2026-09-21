@@ -60,6 +60,13 @@ export const CHANGELOG = [
           ],
         },
         {
+          heading: 'Swarms',
+          items: [
+            'Occasionally a swarm breaks out on a random unlocked route, making one of its rarer species very common for 50 battles',
+            'The route\u2019s Wild Pokemon header shows the active swarm and its remaining battles',
+          ],
+        },
+        {
           heading: 'Achievements',
           items: [
             'A set of 21 medals now tracks your milestones \u2014 battles, Pokedex, shinies, badges, Champions, prestige and the Battle Tower',

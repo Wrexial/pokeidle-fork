@@ -181,6 +181,22 @@ function repairSave(saved) {
     pokemonSpecies[saved.shinyChain.speciesKey]
       ? { speciesKey: saved.shinyChain.speciesKey, count: saved.shinyChain.count }
       : initialGameState.shinyChain
+  const swarm =
+    saved.swarm &&
+    typeof saved.swarm === 'object' &&
+    mapData[saved.swarm.routeKey] &&
+    encounterData[saved.swarm.routeKey]?.encounters?.some(
+      /** @param {{ speciesKey: string }} encounter */ (encounter) =>
+        encounter.speciesKey === saved.swarm.speciesKey
+    ) &&
+    typeof saved.swarm.battlesRemaining === 'number' &&
+    saved.swarm.battlesRemaining > 0
+      ? {
+          routeKey: saved.swarm.routeKey,
+          speciesKey: saved.swarm.speciesKey,
+          battlesRemaining: saved.swarm.battlesRemaining,
+        }
+      : null
 
   // Repair save data that references content which no longer exists (regions,
   // routes and locations have been rebuilt several times), so an old save can't
@@ -285,6 +301,7 @@ function repairSave(saved) {
     pokedexCaught: [...caughtSet],
     shinyCaught,
     shinyChain,
+    swarm,
     shinySeen,
     alwaysCatchShinies: saved.alwaysCatchShinies ?? true,
     defeatedGyms,
@@ -392,6 +409,7 @@ export function GameProvider({ children }) {
           pokedexCaught: state.pokedexCaught,
           shinyCaught: state.shinyCaught,
           shinyChain: state.shinyChain,
+          swarm: state.swarm,
           shinySeen: state.shinySeen,
           defeatedGyms: state.defeatedGyms,
           defeatedEliteFour: state.defeatedEliteFour,

@@ -156,6 +156,8 @@ type GameState = {
   shinySeen: string[]
   shinyCaught: string[]
   shinyChain: { speciesKey: string | null; count: number }
+  /** A route temporarily overrun by one species. */
+  swarm: { routeKey: string; speciesKey: string; battlesRemaining: number } | null
   defeatedGyms: string[]
   defeatedEliteFour: string[]
   defeatedChampions: string[]

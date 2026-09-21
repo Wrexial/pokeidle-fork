@@ -1,6 +1,6 @@
 // Split from the former assets/index.js — see tools/decompile/split-modules.mjs
 
-import { RAID_COOLDOWN_MS, defaultCatchSettings, prestigeTokenReward, wonderTradeShinyOdds } from '../data/config.js'
+import { RAID_COOLDOWN_MS, defaultCatchSettings, prestigeTokenReward, swarmBattleCount, swarmSpawnChance, wonderTradeShinyOdds } from '../data/config.js'
 import { activeItems, pokeBalls } from '../data/items.js'
 import { elite4Data, encounterData, gymLeaderData, mapData, moveLearnsets, pokemonSpecies, regions } from '../data/gameData.js'
 import { createVolatileState } from './combat.js'
@@ -48,6 +48,8 @@ export const initialGameState = {
   pokedexSeen: [],
   pokedexCaught: [],
   shinyCaught: [],
+  /** Active swarm: a route temporarily overrun by one species. */
+  swarm: null,
   /** Consecutive encounters of one species, boosting shiny odds (DexNav). */
   shinyChain: { speciesKey: null, count: 0 },
   shinySeen: [],
@@ -69,6 +71,24 @@ export const initialGameState = {
   preRaidLocation: null,
   playerVolatile: null,
   activeEffects: [],
+}
+
+/**
+ * Pick a random unlocked route and one of its rarer species for a new swarm.
+ * @param {GameState} state
+ * @returns {{ routeKey: string, speciesKey: string, battlesRemaining: number } | null}
+ */
+function rollSwarm(state) {
+  const routes = state.unlockedLocations.filter(
+    (id) => mapData[id]?.type === 'route' && encounterData[id]?.encounters?.length
+  )
+  if (routes.length === 0) return null
+  const routeKey = routes[Math.floor(Math.random() * routes.length)],
+    encounters = encounterData[routeKey].encounters,
+    rarest = [...encounters].sort((left, right) => left.weight - right.weight)[0]
+  return rarest
+    ? { routeKey, speciesKey: rarest.speciesKey, battlesRemaining: swarmBattleCount }
+    : null
 }
 
 /**
@@ -202,7 +222,9 @@ export function gameReducer(state, action) {
               ...enemyPokemon,
               currentHp: event.data.hpAfter ?? enemyPokemon.currentHp,
             }))
-      let activeEffects = state.activeEffects
+      let activeEffects = state.activeEffects,
+        swarm = state.swarm,
+        swarmNotice = null
       if (
         event.type === 'faint' &&
         event.data?.target === 'enemy' &&
@@ -216,18 +238,32 @@ export function gameReducer(state, action) {
           [state.currentLocation]: locationWins + 1,
         }),
           (activeEffects = tickBattleCounters(activeEffects)))
+        // Advance an active swarm, or occasionally start a new one.
+        if (swarm)
+          swarm =
+            swarm.battlesRemaining <= 1
+              ? null
+              : { ...swarm, battlesRemaining: swarm.battlesRemaining - 1 }
+        else if (Math.random() < swarmSpawnChance) {
+          swarm = rollSwarm(state)
+          if (swarm)
+            swarmNotice = `A swarm of ${
+              pokemonSpecies[swarm.speciesKey]?.name ?? swarm.speciesKey
+            } appeared on ${mapData[swarm.routeKey]?.name ?? swarm.routeKey}!`
+        }
       }
       const syncedState = syncActivePokemonIntoParty({
         ...state,
         phase: newPhase,
         pendingEvents: remainingEvents,
         battleEvents: [...state.battleEvents, event],
-        battleLog,
+        battleLog: swarmNotice ? [...battleLog, swarmNotice].slice(-50) : battleLog,
         playerPokemon,
         enemyPokemon,
         wildBattlesWon,
         battlesWonByLocation,
         activeEffects,
+        swarm,
       })
       if (
         event.type === 'victory' ||

@@ -4110,6 +4110,12 @@ img {
     z-index: 6
 }
 
+.swarm-legend {
+    font-size: 6px;
+    color: #e07030;
+    white-space: nowrap
+}
+
 .pokedex-header-actions {
     display: flex;
     align-items: center;

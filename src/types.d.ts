@@ -160,6 +160,8 @@ type GameState = {
   shinyChain: { speciesKey: string | null; count: number }
   /** A route temporarily overrun by one species. */
   swarm: { routeKey: string; speciesKey: string; battlesRemaining: number } | null
+  /** Daycare parents (up to 2) and battles toward the next egg. */
+  daycare: { parents: Pokemon[]; progress: number }
   defeatedGyms: string[]
   defeatedEliteFour: string[]
   defeatedChampions: string[]

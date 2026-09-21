@@ -21,6 +21,12 @@ export const roamerEncounterChance = 1 / 1500
 /** Chance per turn that a fighting roamer flees. */
 export const roamerFleeChance = 0.2
 
+/** Battles two daycare parents need to produce an egg. */
+export const daycareEggBattles = 50
+/** Shiny odds for a bred egg (1 in 4096), improved if a parent is shiny. */
+export const breedShinyOdds = 4096
+export const breedShinyParentOdds = 512
+
 export let RAID_COOLDOWN_MS = 1 * 1e3
 
 export let defaultCatchSettings = {

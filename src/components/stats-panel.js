@@ -240,6 +240,21 @@ export function StatsPanel({
           onClick: onRelease,
           children: 'Release',
         }),
+      source === 'box' &&
+        state.daycare.parents.length < 2 &&
+        jsx('button', {
+          className: 'stats-panel-btn',
+          onClick: () => {
+            dispatch({
+              type: 'DEPOSIT_DAYCARE',
+              payload: {
+                pokemonId: pokemon.id,
+              },
+            })
+            onClose()
+          },
+          children: 'Deposit to Daycare',
+        }),
       jsxs('div', {
         className: 'stats-panel-trade',
         children: [

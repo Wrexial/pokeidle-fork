@@ -4567,6 +4567,101 @@ img {
     opacity: .75
 }
 
+.daycare-slots {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px
+}
+
+.daycare-slot-button {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px
+}
+
+.daycare-slot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: 6px;
+    border: 2px dashed #a89870;
+    border-radius: 4px;
+    min-height: 80px;
+    font-size: 9px;
+    color: #8a7a60
+}
+
+.daycare-slot.filled {
+    border-style: solid;
+    background: #00000010
+}
+
+.daycare-slot-sprite {
+    width: 48px;
+    height: 48px;
+    image-rendering: pixelated
+}
+
+.daycare-slot-name {
+    font-weight: 700;
+    color: #3a2818
+}
+
+.daycare-slot-level {
+    font-size: 8px;
+    color: #5a4838
+}
+
+.daycare-withdraw-btn {
+    font-size: 8px;
+    padding: 2px 6px;
+    background: #8b2020;
+    color: #fdd;
+    border: 2px solid #5a1010;
+    cursor: pointer;
+    font-weight: 700
+}
+
+.daycare-withdraw-btn:hover {
+    background: #a52828
+}
+
+.daycare-hint {
+    font-size: 9px;
+    color: #5a4838;
+    margin: 0 0 8px
+}
+
+.daycare-progress {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-bottom: 8px
+}
+
+.daycare-progress-bar {
+    height: 10px;
+    background: #00000022;
+    border: 1px solid #a89870;
+    border-radius: 3px;
+    overflow: hidden
+}
+
+.daycare-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg,#60a040,#c8a828);
+    transition: width .2s
+}
+
+.daycare-progress-label {
+    font-size: 8px;
+    text-align: center;
+    color: #3a2818
+}
+
 .battle-info-content p {
     margin: 0 0 8px
 }

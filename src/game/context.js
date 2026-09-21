@@ -197,6 +197,13 @@ function repairSave(saved) {
           battlesRemaining: saved.swarm.battlesRemaining,
         }
       : null
+  const daycareParents = /** @type {Pokemon[]} */ (
+      Array.isArray(saved.daycare?.parents) ? saved.daycare.parents : []
+    ).filter(/** @param {any} parent */ (parent) => parent && pokemonSpecies[parent.speciesKey]),
+    daycare = {
+      parents: daycareParents.slice(0, 2),
+      progress: typeof saved.daycare?.progress === 'number' ? saved.daycare.progress : 0,
+    }
 
   // Repair save data that references content which no longer exists (regions,
   // routes and locations have been rebuilt several times), so an old save can't
@@ -302,6 +309,7 @@ function repairSave(saved) {
     shinyCaught,
     shinyChain,
     swarm,
+    daycare,
     shinySeen,
     alwaysCatchShinies: saved.alwaysCatchShinies ?? true,
     defeatedGyms,
@@ -410,6 +418,7 @@ export function GameProvider({ children }) {
           shinyCaught: state.shinyCaught,
           shinyChain: state.shinyChain,
           swarm: state.swarm,
+          daycare: state.daycare,
           shinySeen: state.shinySeen,
           defeatedGyms: state.defeatedGyms,
           defeatedEliteFour: state.defeatedEliteFour,

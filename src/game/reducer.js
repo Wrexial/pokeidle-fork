@@ -1,10 +1,10 @@
 // Split from the former assets/index.js — see tools/decompile/split-modules.mjs
 
-import { RAID_COOLDOWN_MS, defaultCatchSettings, prestigeTokenReward, swarmBattleCount, swarmSpawnChance, wonderTradeShinyOdds } from '../data/config.js'
+import { RAID_COOLDOWN_MS, breedShinyOdds, breedShinyParentOdds, daycareEggBattles, defaultCatchSettings, prestigeTokenReward, swarmBattleCount, swarmSpawnChance, wonderTradeShinyOdds } from '../data/config.js'
 import { activeItems, pokeBalls } from '../data/items.js'
 import { elite4Data, encounterData, gymLeaderData, mapData, moveLearnsets, pokemonSpecies, regions } from '../data/gameData.js'
 import { createVolatileState } from './combat.js'
-import { calculatePokemonStats, calculateRequiredExperience, createPokemon, resolvePokemonMoves } from './pokemon.js'
+import { calculatePokemonStats, calculateRequiredExperience, createPokemon, getPreEvolutionChain, resolvePokemonMoves } from './pokemon.js'
 import { checkShinyOdds, computeUnlockedLocations, getRegionUnlockTokens, isActiveEffectItem, loadActivePokemonFromParty, prepareNextBattle, syncActivePokemonIntoParty, tickBattleCounters } from './progression.js'
 
 /** @type {GameState} */
@@ -50,6 +50,8 @@ export const initialGameState = {
   shinyCaught: [],
   /** Active swarm: a route temporarily overrun by one species. */
   swarm: null,
+  /** Daycare: up to two deposited parents breeding eggs. */
+  daycare: { parents: [], progress: 0 },
   /** Consecutive encounters of one species, boosting shiny odds (DexNav). */
   shinyChain: { speciesKey: null, count: 0 },
   shinySeen: [],
@@ -226,6 +228,7 @@ export function gameReducer(state, action) {
             }))
       let activeEffects = state.activeEffects,
         swarm = state.swarm,
+        daycare = state.daycare,
         swarmNotice = null
       if (
         event.type === 'faint' &&
@@ -253,6 +256,13 @@ export function gameReducer(state, action) {
               pokemonSpecies[swarm.speciesKey]?.name ?? swarm.speciesKey
             } appeared on ${mapData[swarm.routeKey]?.name ?? swarm.routeKey}!`
         }
+        // Daycare parents make progress toward an egg.
+        if (
+          daycare.parents.length === 2 &&
+          !daycare.parents.some((parent) => pokemonSpecies[parent.speciesKey]?.legendary) &&
+          daycare.progress < daycareEggBattles
+        )
+          daycare = { ...daycare, progress: daycare.progress + 1 }
       }
       const syncedState = syncActivePokemonIntoParty({
         ...state,
@@ -266,6 +276,7 @@ export function gameReducer(state, action) {
         battlesWonByLocation,
         activeEffects,
         swarm,
+        daycare,
       })
       if (
         event.type === 'victory' ||
@@ -1358,6 +1369,75 @@ export function gameReducer(state, action) {
           `Wonder Trade: ${tradedPokemon.name} was traded for ${receivedPokemon.name}${
             receivedIsShiny ? ' \u2726 shiny!' : ''
           }!`,
+        ].slice(-50),
+      }
+    }
+    case 'DEPOSIT_DAYCARE': {
+      const { pokemonId } = action.payload
+      if (state.daycare.parents.length >= 2) return state
+      const deposited = state.box.find((member) => member.id === pokemonId)
+      if (!deposited || state.daycare.parents.some((parent) => parent.id === pokemonId)) return state
+      return {
+        ...state,
+        box: state.box.filter((member) => member.id !== pokemonId),
+        daycare: {
+          ...state.daycare,
+          parents: [...state.daycare.parents, deposited],
+        },
+      }
+    }
+    case 'WITHDRAW_DAYCARE': {
+      const { pokemonId } = action.payload,
+        parent = state.daycare.parents.find((member) => member.id === pokemonId)
+      if (!parent) return state
+      return {
+        ...state,
+        box: [...state.box, parent],
+        daycare: {
+          ...state.daycare,
+          parents: state.daycare.parents.filter((member) => member.id !== pokemonId),
+        },
+      }
+    }
+    case 'HATCH_DAYCARE_EGG': {
+      const { parents, progress } = state.daycare
+      if (parents.length < 2 || progress < daycareEggBattles) return state
+      if (parents.some((parent) => pokemonSpecies[parent.speciesKey]?.legendary)) return state
+      const baseSpeciesKey =
+        getPreEvolutionChain(parents[0].speciesKey)[0] ?? parents[0].speciesKey
+      if (!pokemonSpecies[baseSpeciesKey]) return state
+      const shinyParent = parents.some((parent) => parent.isShiny),
+        egg = createPokemon(
+          baseSpeciesKey,
+          1,
+          state.nextPokemonId,
+          checkShinyOdds(shinyParent ? breedShinyParentOdds : breedShinyOdds)
+        )
+      return {
+        ...state,
+        box: [...state.box, egg],
+        nextPokemonId: state.nextPokemonId + 1,
+        daycare: {
+          ...state.daycare,
+          progress: 0,
+        },
+        pokedexSeen: state.pokedexSeen.includes(baseSpeciesKey)
+          ? state.pokedexSeen
+          : [...state.pokedexSeen, baseSpeciesKey],
+        pokedexCaught: state.pokedexCaught.includes(baseSpeciesKey)
+          ? state.pokedexCaught
+          : [...state.pokedexCaught, baseSpeciesKey],
+        shinySeen:
+          egg.isShiny && !state.shinySeen.includes(baseSpeciesKey)
+            ? [...state.shinySeen, baseSpeciesKey]
+            : state.shinySeen,
+        shinyCaught:
+          egg.isShiny && !state.shinyCaught.includes(baseSpeciesKey)
+            ? [...state.shinyCaught, baseSpeciesKey]
+            : state.shinyCaught,
+        battleLog: [
+          ...state.battleLog,
+          `The Egg hatched into ${egg.name}${egg.isShiny ? ' \u2726 shiny!' : ''}!`,
         ].slice(-50),
       }
     }

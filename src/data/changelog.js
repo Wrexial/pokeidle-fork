@@ -60,6 +60,13 @@ export const CHANGELOG = [
           ],
         },
         {
+          heading: 'Daycare',
+          items: [
+            'Deposit two Pokemon from their stats panel into the Daycare; they produce an Egg after 50 battles',
+            'Eggs hatch into the base form at level 1 with 1 in 4,096 shiny odds \u2014 improved to 1 in 512 if a parent is shiny',
+          ],
+        },
+        {
           heading: 'Roaming Legendaries',
           items: [
             'A region\u2019s uncaught legends can now show up as a rare roamer on any of its routes',

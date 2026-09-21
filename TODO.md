@@ -520,6 +520,37 @@ Relevant code: `COMPLETE_HEALING` / `START_RAID` / `END_RAID`
 
 Effort: **small**.
 
+## 28. Raid encounters should only offer fully evolved Pokemon
+
+A region's `raidPool` is built from "species that turn up on no wild route and
+can't be reached by evolving something that does"
+(`tools/generate-regions.cjs`), but that can include a base or middle stage
+(e.g. a starter line whose only route appearance is its final form). Now that
+breeding exists a player can catch the final form and breed down for the
+"smaller" stages, so a raid handing out the unevolved form is a worse reward —
+and can leave the player with the baby before they have the parent.
+
+- [ ] Filter each region's `raidPool` through the existing `isFinalEvolution`
+      helper (already used by team generation in `generate-regions.cjs`) so
+      raids only list final stages.
+- [ ] Keep raid-only alternate forms and legendaries regardless (they have no
+      evolution line), and be careful with species that **can't breed**
+      (genderless / legendary) — don't drop their base form if that would
+      orphan the dex entry.
+- [ ] Re-run `tools/generate-regions.cjs` and `npm run validate`, then refresh
+      `public/encounter-index.html` (`tools/generate-encounter-index.cjs`), so
+      `regions.json`, the map/encounter data and the index all agree.
+- [ ] Confirm consumers still get a non-empty pool: `raidPoolFor`
+      (`src/components/town-map.js`), the roaming-legendary roll
+      (`src/game/progression.js`) and the Raid Island panel
+      (`src/components/location-panel.js`).
+
+Relevant code: the raid-pool block in `tools/generate-regions.cjs`
+(`routable` / `routableExpanded` / `isFinalEvolution`), `regions.json`
+`raidPool`, and `src/game/reducer.js` (`START_RAID`).
+
+Effort: **small** (data regeneration; no engine change).
+
 ---
 
 ## Useful references when picking these up

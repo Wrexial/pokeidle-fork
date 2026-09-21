@@ -23,65 +23,69 @@ working order, and the numbered sections as the details.
    requested QOL and `SORT_BOX` already exists.
 2. **#13 Auto-travel / idle QoL** — S · ★★★★ — the game is idle; walking to
    the next route is a constant papercut.
-3. **#23 Egg-hatch reveal popup** — S · ★★★★ — a shiny hatch is currently
+3. **#33 Edit moves out of combat** — S–M · ★★★★ — fixes the wrong-Pokemon
+   move bug and lets you re-teach moves without a battle.
+4. **#23 Egg-hatch reveal popup** — S · ★★★★ — a shiny hatch is currently
    just a scrolling log line.
-4. **#26 README + GitHub "About"** — S · ★★★★ — the project's front door is
+5. **#26 README + GitHub "About"** — S · ★★★★ — the project's front door is
    missing; high value for how complete the game is.
-5. **#30 Caught / event QOL indicators** — S–M · ★★★★ — a caught badge plus a
+6. **#30 Caught / event QOL indicators** — S–M · ★★★★ — a caught badge plus a
    reusable toast system that unblocks a dozen other notifications.
-6. **#15 Save management & sharing** — S–M · ★★★★ — export/import protects
+7. **#15 Save management & sharing** — S–M · ★★★★ — export/import protects
    the one save players care about; slots are a bonus.
-7. **#31 Living-dex capture mode** — S · ★★★½ — small catch-mode addition
+8. **#31 Living-dex capture mode** — S · ★★★½ — small catch-mode addition
    that makes living-dex runs possible.
-8. **#2b Natures** (slice of #2) — S–M · ★★★½ — cheap battle depth that also
+9. **#2b Natures** (slice of #2) — S–M · ★★★½ — cheap battle depth that also
    feeds daycare (#3).
-9. **#14 Lightweight test suite** — S–M · ★★★½ (dev value) — pays off every
-   future change.
-10. **#1 Healing items / Potions** — S · ★★★ — a money sink and tactical
+10. **#14 Lightweight test suite** — S–M · ★★★½ (dev value) — pays off every
+    future change.
+11. **#1 Healing items / Potions** — S · ★★★ — a money sink and tactical
     option; no new data files.
-11. **#12 Dex-completion rewards** — S · ★★★ — gives the Shiny Charm grind a
+12. **#12 Dex-completion rewards** — S · ★★★ — gives the Shiny Charm grind a
     payoff.
-12. **#21 Unlock Tokens endgame** — S · ★★★ — removes a dead banner once all
+13. **#21 Unlock Tokens endgame** — S · ★★★ — removes a dead banner once all
     regions are open.
-13. **#5 Daily / periodic events** — S–M · ★★★ — cheap engagement loop.
-14. **#16 More ideas (grab bag)** — mostly S · ★★★ — mine the quick ones
+14. **#5 Daily / periodic events** — S–M · ★★★ — cheap engagement loop.
+15. **#16 More ideas (grab bag)** — mostly S · ★★★ — mine the quick ones
     (achievement rewards, release/selling, map QoL, notifications).
 
 ### Tier 2 — High impact, worth the effort (medium–large)
 
-15. **#7 Offline / idle progress** — M–L · ★★★★★ — the biggest missing *idle*
+16. **#7 Offline / idle progress** — M–L · ★★★★★ — the biggest missing *idle*
     feature; a returning player currently gets nothing.
-16. **#8 Pokémon management / IV checker** — M · ★★★★½ — IVs are generated
+17. **#8 Pokémon management / IV checker** — M · ★★★★½ — IVs are generated
     but invisible; box search, nicknames and lock are all high-use.
-17. **#20 Honey/Repel DexNav hunting** — M · ★★★★½ — turns the existing
+18. **#20 Honey/Repel DexNav hunting** — M · ★★★★½ — turns the existing
     shiny chain into a usable system.
-18. **#24 Move data pass** — M–L · ★★★★½ — ~290 moves currently do nothing;
+19. **#24 Move data pass** — M–L · ★★★★½ — ~290 moves currently do nothing;
     do it in slices (healing/screens/setup first).
-19. **#25 Battle engine pass** — M–L · ★★★★½ — pairs with #24; AI + healing +
+20. **#25 Battle engine pass** — M–L · ★★★★½ — pairs with #24; AI + healing +
     multi-hit first.
-20. **#2a Abilities** (with **#2c Held items**) — L · ★★★★★ / ★★★★ — the
+21. **#2a Abilities** (with **#2c Held items**) — L · ★★★★★ / ★★★★ — the
     biggest remaining battle-depth feature; natures (#2b) are already in
     Tier 1.
-21. **#28 More region areas (DLC, caves, POIs)** — L · ★★★★½ — real content
+22. **#28 More region areas (DLC, caves, POIs)** — L · ★★★★½ — real content
     (Crown Tundra, Kitakami, landmark caves); data-heavy.
-22. **#18 Better settings** — M · ★★★★ — centralises QOL toggles and the
+23. **#18 Better settings** — M · ★★★★ — centralises QOL toggles and the
     export/import from #15.
 
 ### Tier 3 — Medium effort, medium gain
 
-23. **#3 Daycare inheritance** — M · ★★★
-24. **#6 Friendship / happiness** — M · ★★★
-25. **#9 Move tutor / TMs** — M · ★★★
-26. **#11 NPC gifts & static encounters** — M · ★★★
-27. **#17 Pokéball variants** — M · ★★★
-28. **#27 Gender-specific sprites** — M · ★★★ (assets are half-there)
-29. **#29 Minigames** — M–L · ★★★ (small per minigame once one exists)
-30. **#4 In-battle Mega evolution** — M–L · ★★★
+24. **#3 Daycare inheritance** — M · ★★★
+25. **#6 Friendship / happiness** — M · ★★★
+26. **#9 Move tutor / TMs** — M · ★★★
+27. **#11 NPC gifts & static encounters** — M · ★★★
+28. **#17 Pokéball variants** — M · ★★★
+29. **#27 Gender-specific sprites** — M · ★★★ (assets are half-there)
+30. **#29 Minigames** — M–L · ★★★ (small per minigame once one exists)
+31. **#4 In-battle Mega evolution** — M–L · ★★★
+32. **#32 Battle Tower tuning** — M · ★★★½ — auto-climb, sane Victory Token
+    payout, and harder/faster teams (6 fully evolved, late legendaries).
 
 ### Tier 4 — Big and low-return, defer
 
-31. **#10 Weather & terrain** — M · ★★½ (nice depth, no urgency)
-32. **#19 Online sync** — L · ★★★ — the project's first backend; needs a
+33. **#10 Weather & terrain** — M · ★★½ (nice depth, no urgency)
+34. **#19 Online sync** — L · ★★★ — the project's first backend; needs a
     design doc and real ops for modest player value today.
 
 ---
@@ -836,6 +840,66 @@ Relevant code: `shouldAutoCatch` / `getCatchRule` (`src/game/catching.js`,
 `defaultCatchSettings` (`src/data/config.js`) and `catch-settings-modal.js`.
 
 Effort: **small**.
+
+## 32. Battle Tower should auto-climb, pay less, and hit harder
+
+`buildTowerTeam(floor)` (`src/game/progression.js`) starts at
+`TOWER_BASE_LEVEL` 50 + 2 per floor, grows from 2 to 6 Pokemon, and only starts
+raising a `statMultiplier` at floor 25; its pool is every non-legendary, non-form
+species. Each floor is a separate `START_TOWER` + `START_HEALING` triggered by
+the Gym panel's Continue button (`src/components/gym-panel.js`), and a win bumps
+`towerFloor` but returns to idle — so it never auto-climbs. The payout is
+`Math.max(1, Math.floor(floor / 5))` Victory Tokens per floor, which is far too
+generous.
+
+- [ ] **Auto-climb**: on a tower win, immediately build + start the next floor
+      (heal, `START_TOWER`, new team) instead of returning to the Continue
+      button, so a run keeps going until you lose.
+- [ ] **Payout**: 1 Victory Token per 10 floors (`Math.floor(floor / 10)`, no
+      per-floor minimum) instead of `floor / 5`.
+- [ ] **Difficulty**: start higher and scale faster — raise `TOWER_BASE_LEVEL`,
+      steepen the per-floor level gain, and bring the stat multiplier in
+      earlier so it feels like a climb rather than a walk.
+- [ ] **Teams**: always 6 Pokemon, all fully evolved (`isFinalEvolution`), with
+      at least one genuinely strong member (high `totalBaseStats`).
+- [ ] **Late floors**: allow legendaries into the pool and cap every tower
+      Pokemon at Lv.100 (the cap already exists; keep it).
+
+Relevant code: `buildTowerTeam` (`src/game/progression.js`), `BOSS_BATTLE_END`
+/ `START_TOWER` (`src/game/reducer.js`), `startTowerFloor`
+(`src/components/gym-panel.js`), `TOWER_BASE_LEVEL`.
+
+Effort: **medium**.
+
+## 33. Edit a Pokemon's moves out of combat (and fix the wrong-Pokemon bug)
+
+`MoveManagerPanel` (`src/components/move-manager-panel.js`) is only opened from
+the battle scene and always edits `state.playerPokemon`; `SET_MOVES`
+(`src/game/reducer.js`) likewise only writes to `state.playerPokemon`. The stats
+panel shows a Pokemon's moves but has no edit action.
+
+Bug: the panel reads `pokemonId = state.playerPokemon.id` on every render but
+initialises its `moves` state once. If the active Pokemon changes while the
+panel is open (the current one faints and the game auto-switches to the next
+party member), `pokemonId` re-derives to the *new* active, the guard
+`state.playerPokemon?.id !== pokemonId` passes, and the old Pokemon's moves get
+dispatched onto the new active Pokemon.
+
+- [ ] Capture the target id once at mount (ref/state), include it in the
+      `SET_MOVES` payload, and have the reducer update that id's entry in
+      `party`/`box` instead of always `state.playerPokemon` (a small id-keyed
+      sibling of `syncActivePokemonIntoParty`).
+- [ ] Add a "Manage Moves" action to the stats panel (party and box) so moves
+      can be changed out of combat.
+- [ ] Close without writing if the target was released / is a stale id.
+- [ ] Keep `getFamilyLearnset` on the target's own species + level.
+
+Relevant code: `SET_MOVES` (`src/game/reducer.js`), `MoveManagerPanel`
+(`src/components/move-manager-panel.js`), `stats-panel.js`,
+`party-panel.js` / `mobile-tabs.js`, `syncActivePokemonIntoParty`
+(`src/game/progression.js`).
+
+Effort: **small–medium**.
 
 ---
 

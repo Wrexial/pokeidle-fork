@@ -551,6 +551,50 @@ Relevant code: the raid-pool block in `tools/generate-regions.cjs`
 
 Effort: **small** (data regeneration; no engine change).
 
+## 29. Gender-specific sprites
+
+Gender now exists (`genderForPokemon` in `src/game/breeding.js`, shown in the
+stats panel) but sprites still ignore it: `getPokemonSpriteUrl(spriteId, isBack,
+isShiny)` (`src/game/pokemon.js`) keys only by numeric id, so a female Pokemon
+always renders the male artwork. Several species are visually different by
+gender (Pikachu line, Hippopotas/Hippowdon, Unfezant, Frillish/Jellicent,
+Meowstic, Pyroar, Indeedee, …), which is exactly the set the sprite tree already
+carries `female/` folders for.
+
+What already exists:
+
+- Animated: `.../animated/female/`, `.../animated/shiny/female/`,
+  `.../animated/back/female/`, `.../animated/back/shiny/female/` are committed
+  for the ~96 ids that have a difference.
+- Static: `public/sprites/pokemon/back/female/` and `back/shiny/female/` are
+  committed (93/94 files), but the **front** and **front-shiny** female
+  folders are missing, and `tools/download_pokemon_sprites.cjs` never fetches
+  any female variant (see `STATIC_VARIANTS` / `ANIMATED_VARIANTS`).
+
+- [ ] Thread gender into `getPokemonSpriteUrl` (a `gender`/`isFemale` argument,
+      or look it up from the Pokemon) and build the `female/` path for each of
+      the four variants; update `getPokemonSpriteFallbackUrl` too.
+- [ ] Update the call sites that render a specific Pokemon (battle scene, box,
+      party, daycare, dex?, bag) to pass the gender — a Pokemon's gender is
+      derived from its id, so it must come from the object, not the species.
+- [ ] Extend `tools/download_pokemon_sprites.cjs` with the four female
+      variants (PokeAPI `female/{id}.png`, `back/female/...`,
+      `shiny/female/...`, `back/shiny/...`) and download the missing front
+      static files.
+- [ ] Only use the female sprite for species that actually have one; fall back
+      to the base sprite otherwise. Extend `animated-sprites.json` (or add a
+      `gendered-sprites.json` list) so the fallback is a manifest lookup, not a
+      404.
+- [ ] Check genderless/undiscovered Pokemon (gender `genderless`) never request
+      a female path.
+
+Relevant code: `getPokemonSpriteUrl` / `getPokemonSpriteFallbackUrl`
+(`src/game/pokemon.js`), `genderForPokemon` (`src/game/breeding.js`), the sprite
+manifest loader (`src/data/gameData.js`), and
+`tools/download_pokemon_sprites.cjs`.
+
+Effort: **medium** (mostly asset plumbing; assets are partly there already).
+
 ---
 
 ## Useful references when picking these up

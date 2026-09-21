@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokémon Idle — Player Guide</title>
+    <style>
+      :root {
+        --paper: #f4ecd8;
+        --paper-2: #fffaf0;
+        --ink: #2a2118;
+        --muted: #6f5f49;
+        --line: #dccbaa;
+        --accent: #8a1c1c;
+        --gold: #c9a227;
+        --shadow: rgba(60, 40, 15, 0.18);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        font: 15px/1.55 "Segoe UI", Roboto, system-ui, sans-serif;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 20% 0%, #fdf6e4 0%, transparent 55%),
+          var(--paper);
+      }
+      a {
+        color: var(--accent);
+      }
+      .top {
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 6px 16px;
+        padding: 14px 20px;
+        background: linear-gradient(180deg, #3a2c1a, #2a1e10);
+        color: #f4ecd8;
+        border-bottom: 3px solid var(--gold);
+      }
+      .top h1 {
+        margin: 0;
+        font-size: 18px;
+        letter-spacing: 0.5px;
+      }
+      .top .sub {
+        color: #cbbf9c;
+        font-size: 13px;
+      }
+      .top nav {
+        margin-left: auto;
+      }
+      .top nav a {
+        color: #f0d060;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 13px;
+      }
+      .top nav a:hover {
+        text-decoration: underline;
+      }
+      main {
+        max-width: 820px;
+        margin: 0 auto;
+        padding: 20px 20px 80px;
+      }
+      .toc {
+        background: var(--paper-2);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        box-shadow: 0 1px 0 var(--shadow);
+        padding: 14px 18px;
+        margin-bottom: 26px;
+      }
+      .toc h2 {
+        margin: 0 0 8px;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--muted);
+      }
+      .toc ol {
+        margin: 0;
+        padding-left: 20px;
+        columns: 2;
+        column-gap: 24px;
+      }
+      .toc li {
+        break-inside: avoid;
+        margin: 2px 0;
+      }
+      @media (max-width: 560px) {
+        .toc ol {
+          columns: 1;
+        }
+      }
+      section {
+        background: var(--paper-2);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        box-shadow: 0 1px 0 var(--shadow);
+        padding: 16px 20px;
+        margin-bottom: 18px;
+        scroll-margin-top: 70px;
+      }
+      section h2 {
+        margin: 0 0 8px;
+        font-size: 17px;
+      }
+      section h2 .icon {
+        margin-right: 6px;
+      }
+      section p {
+        margin: 8px 0;
+      }
+      ul {
+        margin: 8px 0;
+        padding-left: 20px;
+      }
+      li {
+        margin: 4px 0;
+      }
+      code {
+        background: #efe3c8;
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        padding: 0 4px;
+        font-size: 13px;
+      }
+      .tag {
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 700;
+        padding: 1px 7px;
+        border-radius: 999px;
+        background: var(--gold);
+        color: #2a1e10;
+        vertical-align: middle;
+        margin-left: 6px;
+      }
+      .note {
+        border-left: 3px solid var(--gold);
+        background: #fff6dc;
+        padding: 8px 12px;
+        border-radius: 0 6px 6px 0;
+        margin: 10px 0;
+        font-size: 14px;
+      }
+      footer {
+        text-align: center;
+        color: var(--muted);
+        font-size: 13px;
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="top">
+      <h1>Pokémon Idle — Player Guide</h1>
+      <span class="sub">A browser-based incremental Pokémon game</span>
+      <nav><a href="/encounter-index.html">Wild Encounter Index →</a></nav>
+    </header>
+
+    <main>
+      <div class="toc">
+        <h2>Contents</h2>
+        <ol>
+          <li><a href="#start">Getting started</a></li>
+          <li><a href="#loop">The core loop</a></li>
+          <li><a href="#regions">Regions &amp; Unlock Tokens</a></li>
+          <li><a href="#prestige">Prestige</a></li>
+          <li><a href="#wild">Wild encounters &amp; catching</a></li>
+          <li><a href="#battle">Battles</a></li>
+          <li><a href="#league">Gyms, Elite Four &amp; Champion</a></li>
+          <li><a href="#items">Items &amp; shops</a></li>
+          <li><a href="#evolve">Evolution</a></li>
+          <li><a href="#raids">Raid Islands</a></li>
+          <li><a href="#daycare">Daycare &amp; breeding</a></li>
+          <li><a href="#wonder">Wonder Trade</a></li>
+          <li><a href="#tower">Battle Tower</a></li>
+          <li><a href="#shiny">Shiny hunting</a></li>
+          <li><a href="#events">Swarms &amp; roamers</a></li>
+          <li><a href="#records">Records &amp; achievements</a></li>
+          <li><a href="#dex">Pokédex &amp; Shiny Charm</a></li>
+          <li><a href="#index">Encounter index</a></li>
+          <li><a href="#saves">Saves</a></li>
+          <li><a href="#secrets">Secrets</a></li>
+        </ol>
+      </div>
+
+      <section id="start">
+        <h2><span class="icon">🎮</span>Getting started</h2>
+        <p>
+          Pokémon Idle is an idle/incremental game: battles run automatically and your
+          team keeps fighting while you watch. Pick a region and one of its three
+          starters; every region has its own level 5–75 curve, so a fresh region is a
+          fresh climb.
+        </p>
+        <p>
+          Your progress saves automatically to this browser — there's nothing to install
+          and no account to make.
+        </p>
+      </section>
+
+      <section id="loop">
+        <h2><span class="icon">🔁</span>The core loop</h2>
+        <ul>
+          <li>Battle the wild Pokémon on your current route; every win earns EXP and money.</li>
+          <li>Wins on a route unlock the next one — some stairs also want badges, a big enough Pokédex, a team level, or a specific catch.</li>
+          <li>Catch Pokémon to grow your Pokédex (which powers the Shiny Charm).</li>
+          <li>Level your team, beat the region's gyms and league, then open another region.</li>
+        </ul>
+      </section>
+
+      <section id="regions">
+        <h2><span class="icon">🗺️</span>Regions &amp; Unlock Tokens</h2>
+        <p>
+          There are nine regions, each reproducing its real map of towns and routes. You
+          start in the region you picked; the rest are opened with
+          <strong>Region Unlock Tokens</strong>.
+        </p>
+        <ul>
+          <li>Beating any region's Champion earns a token.</li>
+          <li>Open the <strong>Town Map</strong> and click a locked region tab (it glows while you hold a token) to unlock it.</li>
+        </ul>
+      </section>
+
+      <section id="prestige">
+        <h2><span class="icon">🔄</span>Prestige</h2>
+        <p>
+          Once you've finished a region (Champion beaten), the
+          <strong>Gyms</strong> tab offers <strong>Prestige</strong>: replay the region
+          from the start — routes and badges reset — <em>without losing your Pokémon,
+          items, money or Pokédex</em>. Each prestige raises the region's level and awards
+          Victory Tokens. Its Elite Four reset too, so you must beat them again before the
+          next prestige.
+        </p>
+      </section>
+
+      <section id="wild">
+        <h2><span class="icon">🌿</span>Wild encounters &amp; catching</h2>
+        <ul>
+          <li>Every route uses its real wild table; the <strong>Wild Pokémon</strong> grid shows each species, its type, level range and rarity.</li>
+          <li>The <strong>◆</strong> badge marks species that spawn <em>only</em> on that route.</li>
+          <li><strong>Catch settings</strong> decide what gets auto-caught: always, only shinies, above a level, or only species new to the Pokédex — set globally or per route.</li>
+          <li>Balls: Poké Ball, Great Ball, Ultra Ball and the never-failing Master Ball.</li>
+        </ul>
+      </section>
+
+      <section id="battle">
+        <h2><span class="icon">⚔️</span>Battles</h2>
+        <ul>
+          <li>The familiar type chart, STAB, critical hits and stat stages all apply.</li>
+          <li><strong>Status conditions</strong>: poison and burn deal damage each turn (burn halves physical attack), freeze and sleep stop a Pokémon acting, and flinching skips a turn. Drain moves heal the user.</li>
+          <li>Moves are learned by levelling; open a Pokémon's stats and use the move manager to teach it anything from its family's learnset.</li>
+          <li>Use the speed controls to fast-forward, and the catch selector to batch-apply Repel/Honey.</li>
+        </ul>
+      </section>
+
+      <section id="league">
+        <h2><span class="icon">🏅</span>Gyms, Elite Four &amp; Champion</h2>
+        <p>
+          Each region has eight gyms, an Elite Four and a Champion. Badges gate the roads
+          onward, and the league asks for all eight before it will let you challenge it.
+          Beating a Champion is what opens the next region.
+        </p>
+        <p>
+          Leaders field much stronger rematch teams once you have every badge in their
+          region, and the league does the same once the Champion is beaten.
+        </p>
+      </section>
+
+      <section id="items">
+        <h2><span class="icon">🛒</span>Items &amp; shops</h2>
+        <ul>
+          <li><strong>Poké Marts</strong> (in towns) sell balls and repels; their stock opens up as you progress, so Ultra Balls aren't available in the first town.</li>
+          <li><strong>Victory Tokens</strong> — earned from gyms, Champions, Prestige and the Battle Tower — are spent in the <strong>Reward Shop</strong>.</li>
+          <li>The Reward Shop stocks <strong>evolution items</strong>: elemental stones, King's Rock, Metal Coat, Protector, Upgrade, the <strong>Link Cable</strong> (trade evolutions) and more.</li>
+          <li><strong>Repel</strong> halves a chosen species' encounter rate; <strong>Honey</strong> doubles it. <strong>Exp. Share</strong> levels the whole party.</li>
+        </ul>
+      </section>
+
+      <section id="evolve">
+        <h2><span class="icon">✨</span>Evolution</h2>
+        <p>
+          Most Pokémon evolve by level, but many need an item: stone evolutions (Pikachu,
+          Eevee, Vulpix, Growlithe, Gloom…), and Pokémon that normally evolve by trading
+          (Kadabra, Machoke, Graveler, Haunter and friends) use a <strong>Link Cable</strong>.
+        </p>
+        <p>Open a Pokémon's stats panel to see every evolution it can make and what it needs.</p>
+      </section>
+
+      <section id="raids">
+        <h2><span class="icon">🌊</span>Raid Islands</h2>
+        <p>
+          Every region has a floating Raid Island holding the Pokémon you
+          <em>can't</em> find on any of its routes — including its legendaries. One raid
+          at a time, with a short cooldown between attempts.
+        </p>
+      </section>
+
+      <section id="daycare">
+        <h2><span class="icon">🥚</span>Daycare &amp; breeding</h2>
+        <ul>
+          <li>Deposit two Pokémon from their stats panel into the Daycare; they produce an Egg after 50 battles.</li>
+          <li>Breeding respects <strong>gender</strong> and <strong>egg groups</strong>: the parents must be opposite genders and share an egg group. <strong>Ditto</strong> can breed with almost anything, genderless Pokémon need a Ditto, and Undiscovered species (legendaries, babies) won't breed at all.</li>
+          <li>Eggs hatch into the mother's base form at level 1, with 1-in-4,096 shiny odds — improved to 1-in-512 if a parent is shiny.</li>
+        </ul>
+      </section>
+
+      <section id="wonder">
+        <h2><span class="icon">🔗</span>Wonder Trade</h2>
+        <p>
+          Spend a <strong>Link Cable</strong> on any party or box Pokémon to trade it for
+          a random Pokémon at the same level — with a boosted chance of a shiny. Avoid it
+          for your last party member (the trade is refused).
+        </p>
+        <div class="note">Rumour has it the trade gives back something special if you trade away a shiny.</div>
+      </section>
+
+      <section id="tower">
+        <h2><span class="icon">🏰</span>Battle Tower</h2>
+        <p>
+          Once a region's Champion is beaten, its Gyms tab opens the
+          <strong>Battle Tower</strong>: endless, increasingly strong trainers for Victory
+          Tokens, with your team healed between floors. The first floors cap out at level
+          100 around floor 25, after which the trainers' stats keep climbing instead, so
+          it never truly plateaus. A loss ends the run and records your best floor.
+        </p>
+      </section>
+
+      <section id="shiny">
+        <h2><span class="icon">🌟</span>Shiny hunting</h2>
+        <ul>
+          <li>Base shiny odds are 1 in 8,192; the <strong>Shiny Charm</strong> roughly doubles them.</li>
+          <li>The <strong>shiny chain</strong> improves the odds of a species you encounter repeatedly (up to 4×), and resets when a different species appears — the chained species shows a <strong>✦</strong> badge.</li>
+          <li><strong>Honey</strong> doubles a species' encounter rate and <strong>Repel</strong> halves one, so you can steer a route toward the Pokémon you're hunting.</li>
+        </ul>
+      </section>
+
+      <section id="events">
+        <h2><span class="icon">🐝</span>Swarms &amp; roamers</h2>
+        <ul>
+          <li><strong>Swarms</strong>: occasionally one of a route's rarer species becomes very common there for 50 battles. The Wild Pokémon header shows an active swarm.</li>
+          <li><strong>Roaming legendaries</strong>: a region's uncaught legends can appear on any of its routes and may flee mid-battle — catch them fast, and once caught they leave the roaming pool.</li>
+        </ul>
+      </section>
+
+      <section id="records">
+        <h2><span class="icon">📊</span>Records &amp; achievements</h2>
+        <p>
+          The <strong>Records</strong> panel (in the Box) summarises your journey: battles
+          won, Pokédex and shiny progress, badges, Victory Tokens, per-region completion
+          and prestige, and your best Tower floor. It also tracks
+          <strong>21 achievements</strong>.
+        </p>
+      </section>
+
+      <section id="dex">
+        <h2><span class="icon">📖</span>Pokédex &amp; Shiny Charm</h2>
+        <p>
+          The Pokédex has tabs per generation. Completing a generation's national dex
+          unlocks the <strong>Shiny Charm</strong> for that generation's species — so the
+          more you catch, the better everyone's shiny odds get.
+        </p>
+      </section>
+
+      <section id="index">
+        <h2><span class="icon">🔎</span>Encounter index</h2>
+        <p>
+          Looking for a specific Pokémon? The
+          <a href="/encounter-index.html">Wild Encounter Index</a> is a searchable,
+          offline page listing every species, level range and rate for every location
+          across all nine regions.
+        </p>
+      </section>
+
+      <section id="saves">
+        <h2><span class="icon">💾</span>Saves</h2>
+        <p>
+          Your game saves automatically to this browser. Settings (the gear / ? menu) has a
+          reset option if you ever want to start over. Back up or sync options are planned.
+        </p>
+      </section>
+
+      <section id="secrets">
+        <h2><span class="icon">❓</span>Secrets</h2>
+        <p>
+          There are a few hidden things in the world that this guide won't spoil. Explore
+          everywhere, and keep an eye on the battle log…
+        </p>
+      </section>
+
+      <footer>
+        Pokémon Idle — an unofficial fan project. Pokémon and Pokémon character names are
+        trademarks of Nintendo.
+      </footer>
+    </main>
+  </body>
+</html>

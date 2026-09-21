@@ -1,7 +1,7 @@
 // Split from a grouped component file — see tools/decompile/split-components.mjs
 
 import React from 'react'
-import { jsx, jsxs } from 'react/jsx-runtime'
+import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
 import { clearSave } from '../data/config.js'
 
 /** @param {{ onClose: () => void }} props */
@@ -58,10 +58,33 @@ export function SettingsModal({ onClose }) {
                   }),
                 ],
               })
-            : jsx('button', {
-                className: 'settings-reset-btn',
-                onClick: () => setConfirming(!0),
-                children: 'Reset Save Data',
+            : jsxs(Fragment, {
+                children: [
+                  jsx('p', {
+                    className: 'settings-hint',
+                    children:
+                      'New here? The player guide explains every feature — regions, catching, breeding, shiny hunting and more.',
+                  }),
+                  jsx('a', {
+                    className: 'settings-guide-btn',
+                    href: '/guide.html',
+                    target: '_blank',
+                    rel: 'noopener noreferrer',
+                    children: '📖 Player Guide',
+                  }),
+                  jsx('a', {
+                    className: 'settings-link',
+                    href: '/encounter-index.html',
+                    target: '_blank',
+                    rel: 'noopener noreferrer',
+                    children: 'Wild Encounter Index',
+                  }),
+                  jsx('button', {
+                    className: 'settings-reset-btn',
+                    onClick: () => setConfirming(!0),
+                    children: 'Reset Save Data',
+                  }),
+                ],
               }),
         }),
       ],

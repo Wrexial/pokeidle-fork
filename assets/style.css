@@ -4757,6 +4757,43 @@ img {
     font-weight: 700
 }
 
+.settings-hint {
+    font-size: 10px;
+    color: #3a2818;
+    line-height: 1.45;
+    margin: 0 0 10px
+}
+
+.settings-guide-btn {
+    display: block;
+    text-align: center;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 7px 12px;
+    margin-bottom: 8px;
+    background: var(--gold-dark);
+    color: var(--parchment);
+    border: 2px solid var(--gold);
+    text-decoration: none
+}
+
+.settings-guide-btn:hover {
+    background: var(--gold);
+    color: #1a1008
+}
+
+.settings-link {
+    display: block;
+    text-align: center;
+    font-size: 9px;
+    color: #5a4838;
+    margin-bottom: 14px
+}
+
+.settings-link:hover {
+    color: #3a2818
+}
+
 .settings-reset-btn {
     font-size: 9px;
     padding: 6px 12px;

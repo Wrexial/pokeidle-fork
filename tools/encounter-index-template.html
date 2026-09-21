@@ -58,6 +58,16 @@
         font-size: 13px;
         margin-left: 8px;
       }
+      .top h1 .guide-link {
+        float: right;
+        font-size: 13px;
+        font-weight: 700;
+        color: #f0d060;
+        text-decoration: none;
+      }
+      .top h1 .guide-link:hover {
+        text-decoration: underline;
+      }
       .totals {
         margin-top: 4px;
         font-size: 12.5px;
@@ -330,7 +340,10 @@
   </head>
   <body>
     <header class="top">
-      <h1>Pokémon Idle — Wild Encounter Index <small>what spawns where</small></h1>
+      <h1>
+        Pokémon Idle — Wild Encounter Index <small>what spawns where</small>
+        <a class="guide-link" href="/guide.html">Player Guide →</a>
+      </h1>
       <div class="totals" id="totals"></div>
       <div class="controls">
         <label class="search">

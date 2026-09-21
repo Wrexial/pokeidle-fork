@@ -176,6 +176,7 @@ in `GameLayout`) dispatches `DEBUG_MAX_LEVEL` when the Konami code
 | `assets/fonts.css` | Local "Press Start 2P" `@font-face` declarations. |
 | `public/data/*.json` | **The game database** (see below). Served at `/data/...`. |
 | `public/encounter-index.html` | Generated offline "what spawns where" overview (see `tools/generate-encounter-index.cjs`). |
+| `public/guide.html` | Hand-written player guide (features explained); linked from Settings and the encounter index. |
 | `public/sprites/pokemon/` | Pokémon sprites, named by numeric species/form id (`25.png`, `shiny/25.png`, `back/25.png`, `back/shiny/25.png`, animated gifs under `versions/generation-v/black-white/animated/`). |
 | `public/sprites/trainers/` | Trainer images. |
 | `public/backgrounds/` | Battle/location backgrounds. |
@@ -510,7 +511,8 @@ One-off scripts used to build the data JSON (not run during dev/build):
   rate, plus search and region filters). It inlines the split region data into
   the template, so re-run it after map/encounter changes. Served at
   `/encounter-index.html`; sprites use relative `sprites/pokemon/...` paths so
-  the file also works when opened directly.
+  the file also works when opened directly. Its header links to
+  `public/guide.html`, the hand-written player-facing feature guide.
 - `*.md` in `tools/` (`SUMMARY.md`, `DATA_INTEGRATION.md`,
   `REFACTORING_GUIDE.md`, `QUICKSTART_DATA_INTEGRATION.md`) — historical design
   docs. Some counts/claims there are outdated (e.g. they still say "151

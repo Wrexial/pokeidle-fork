@@ -297,6 +297,9 @@ export function useGameLoop() {
               mustRecharge: playerVolatile.mustRecharge,
               lockedMove: playerVolatile.lockedMove,
               lockTurnsRemaining: playerVolatile.lockTurnsRemaining,
+              status: playerVolatile.status ?? null,
+              statusTurns: playerVolatile.statusTurns ?? 0,
+              flinch: playerVolatile.flinch ?? !1,
             },
             enemyBattlePokemon = {
               ...currentGameState.enemyPokemon,
@@ -316,12 +319,18 @@ export function useGameLoop() {
               mustRecharge: playerBattlePokemon.mustRecharge ?? !1,
               lockedMove: playerBattlePokemon.lockedMove ?? null,
               lockTurnsRemaining: playerBattlePokemon.lockTurnsRemaining ?? 0,
+              status: playerBattlePokemon.status ?? null,
+              statusTurns: playerBattlePokemon.statusTurns ?? 0,
+              flinch: playerBattlePokemon.flinch ?? !1,
             },
             enemyVolatileUpdate = {
               statStages: enemyBattlePokemon.statStages,
               mustRecharge: enemyBattlePokemon.mustRecharge ?? !1,
               lockedMove: enemyBattlePokemon.lockedMove ?? null,
               lockTurnsRemaining: enemyBattlePokemon.lockTurnsRemaining ?? 0,
+              status: enemyBattlePokemon.status ?? null,
+              statusTurns: enemyBattlePokemon.statusTurns ?? 0,
+              flinch: enemyBattlePokemon.flinch ?? !1,
             }
           dispatch({
             type: 'UPDATE_VOLATILE',

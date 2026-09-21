@@ -209,6 +209,7 @@ export function BattleScene() {
           className: 'enemy-info-anchor',
           children: jsx(EnemyInfoBox, {
             pokemon: enemyPokemon,
+            status: enemyPokemon.status ?? null,
           }),
         }),
       activeTrainerBattle &&
@@ -289,6 +290,7 @@ export function BattleScene() {
         className: 'player-info-anchor',
         children: jsx(PlayerInfoBox, {
           pokemon: playerPokemon,
+          status: state.playerVolatile?.status ?? null,
         }),
       }),
       jsx('div', {

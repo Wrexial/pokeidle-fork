@@ -183,7 +183,7 @@ export function gameReducer(state, action) {
         enemyPokemon = state.enemyPokemon,
         wildBattlesWon = state.wildBattlesWon,
         battlesWonByLocation = state.battlesWonByLocation
-      ;(event.type === 'damage' || event.type === 'recoil') &&
+      ;(event.type === 'damage' || event.type === 'recoil' || event.type === 'heal') &&
         event.data &&
         (event.data.target === 'player' && playerPokemon
           ? (playerPokemon = {
@@ -1369,6 +1369,9 @@ export function gameReducer(state, action) {
             mustRecharge: enemyVolatile.mustRecharge,
             lockedMove: enemyVolatile.lockedMove,
             lockTurnsRemaining: enemyVolatile.lockTurnsRemaining,
+            status: enemyVolatile.status,
+            statusTurns: enemyVolatile.statusTurns,
+            flinch: enemyVolatile.flinch,
           }),
         {
           ...state,

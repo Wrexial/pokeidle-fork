@@ -52,6 +52,9 @@ type BattlePokemon = {
   mustRecharge?: boolean
   lockedMove?: string | null
   lockTurnsRemaining?: number
+  status?: string | null
+  statusTurns?: number
+  flinch?: boolean
   [key: string]: any
 }
 
@@ -92,6 +95,12 @@ type VolatileState = {
   mustRecharge: boolean
   lockedMove: string | null
   lockTurnsRemaining: number
+  /** Major status condition (poison/burn/freeze/sleep) or null. */
+  status: string | null
+  /** Remaining sleep turns. */
+  statusTurns: number
+  /** One-turn flinch flag. */
+  flinch: boolean
 }
 
 type GameAction = { type: string; payload?: any; [key: string]: any }

@@ -16,7 +16,116 @@ export function createVolatileState() {
     mustRecharge: !1,
     lockedMove: null,
     lockTurnsRemaining: 0,
+    status: null,
+    statusTurns: 0,
+    flinch: !1,
   }
+}
+
+/** Major status conditions that persist until cured and tick each turn. */
+const MAJOR_STATUSES = new Set(['poison', 'burn', 'freeze', 'sleep'])
+
+/** Types that can't be afflicted by a given status. */
+/** @type {Record<string, string[]>} */
+const STATUS_IMMUNE_TYPES = {
+  burn: ['Fire'],
+  freeze: ['Ice'],
+  poison: ['Poison', 'Steel'],
+}
+
+/**
+ * Inflict a status condition on a Pokemon. Fails if the target already has a
+ * major status or is immune to this one; `flinching` just sets the one-turn
+ * flinch flag.
+ * @param {BattlePokemon} target
+ * @param {string} status
+ * @param {any[]} events
+ * @param {boolean} targetIsPlayer whether `target` is the player's Pokemon
+ */
+function applyStatus(target, status, events, targetIsPlayer) {
+  if (!target || target.currentHp <= 0) return
+  const side = targetIsPlayer ? 'player' : 'enemy'
+  if (status === 'flinching') {
+    target.flinch = !0
+    return
+  }
+  if (!MAJOR_STATUSES.has(status) || target.status) return
+  if ((STATUS_IMMUNE_TYPES[status] ?? []).some((type) => target.types.includes(type))) return
+  target.status = status
+  target.statusTurns = status === 'sleep' ? 1 + Math.floor(Math.random() * 3) : 0
+  events.push({
+    type: 'status',
+    message: `${target.name} was ${
+      { poison: 'poisoned', burn: 'burned', freeze: 'frozen', sleep: 'put to sleep' }[status]
+    }!`,
+    data: {
+      target: side,
+    },
+  })
+}
+
+/**
+ * A status condition that stops a Pokemon acting this turn. Returns true when
+ * the attacker's turn is skipped (pushin an explanatory event).
+ * @param {BattlePokemon} attacker
+ * @param {any[]} events
+ * @param {boolean} isPlayer
+ * @returns {boolean}
+ */
+function statusPreventsAction(attacker, events, isPlayer) {
+  const side = isPlayer ? 'player' : 'enemy'
+  if (attacker.status === 'sleep') {
+    if ((attacker.statusTurns ?? 0) > 0) {
+      attacker.statusTurns = (attacker.statusTurns ?? 0) - 1
+      events.push({
+        type: 'status',
+        message: `${attacker.name} is fast asleep.`,
+        data: {
+          target: side,
+        },
+      })
+      return !0
+    }
+    attacker.status = null
+    events.push({
+      type: 'status',
+      message: `${attacker.name} woke up!`,
+      data: {
+        target: side,
+      },
+    })
+  } else if (attacker.status === 'freeze') {
+    if (Math.random() >= 0.2) {
+      events.push({
+        type: 'status',
+        message: `${attacker.name} is frozen solid!`,
+        data: {
+          target: side,
+        },
+      })
+      return !0
+    }
+    attacker.status = null
+    events.push({
+      type: 'status',
+      message: `${attacker.name} thawed out!`,
+      data: {
+        target: side,
+      },
+    })
+  }
+  if (attacker.flinch) {
+    attacker.flinch = !1
+    events.push({
+      type: 'status',
+      message: `${attacker.name} flinched and couldn't move!`,
+      data: {
+        target: side,
+      },
+    })
+    return !0
+  }
+  return !1
 }
 
 /**
@@ -215,6 +324,8 @@ export function clampStatStage(stage) {
 export function resolveBattleTurn(player, enemy, isTrainerBattle = !1) {
   const events = []
   ;(player.statStages || (player.statStages = {}), enemy.statStages || (enemy.statStages = {}))
+  // Flinches only last the turn they were inflicted; clear any left over.
+  ;(player.flinch = !1, enemy.flinch = !1)
   const playerMustRecharge = player.mustRecharge,
     enemyMustRecharge = enemy.mustRecharge
   ;(playerMustRecharge && (player.mustRecharge = !1), enemyMustRecharge && (enemy.mustRecharge = !1))
@@ -327,6 +438,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1) {
       })
       continue
     }
+    if (statusPreventsAction(attack.attacker, events, attack.isPlayer)) continue
     const moveDef = moveData[attack.moveId]
     if (!moveDef) continue
     if (
@@ -362,11 +474,19 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1) {
             },
           })
         }
-      }
+      } else if (
+        moveDef.effect?.type === 'status' &&
+        (moveDef.effect.chance === void 0 || Math.random() * 100 < moveDef.effect.chance)
+      )
+        applyStatus(attack.defender, moveDef.effect.status, events, !attack.isPlayer)
       continue
     }
     const attackStat =
-        moveDef.category === 'physical' ? attack.attacker.attack : attack.attacker.spAttack,
+        moveDef.category === 'physical'
+          ? attack.attacker.status === 'burn'
+            ? Math.max(1, Math.floor(attack.attacker.attack / 2))
+            : attack.attacker.attack
+          : attack.attacker.spAttack,
       defenseStat = moveDef.category === 'physical' ? attack.defender.defense : attack.defender.spDefense,
       attackStatKey = moveDef.category === 'physical' ? 'attack' : 'spAttack',
       defenseStatKey = moveDef.category === 'physical' ? 'defense' : 'spDefense',
@@ -469,6 +589,33 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1) {
           attack.attacker.mustRecharge = !0
           break
         }
+        case 'drain': {
+          const attackerHpBefore = attack.attacker.currentHp,
+            healAmount = Math.max(
+              1,
+              Math.floor((damageResult.damage * (moveDef.effect.percentage ?? 50)) / 100)
+            ),
+            healed = Math.min(attack.attacker.maxHp, attackerHpBefore + healAmount)
+          attack.attacker.currentHp = healed
+          events.push({
+            type: 'heal',
+            message: `${attack.attacker.name} drained health! (+${healed - attackerHpBefore} HP)`,
+            data: {
+              target: attack.isPlayer ? 'player' : 'enemy',
+              hpAfter: healed,
+              hpMax: attack.attacker.maxHp,
+            },
+          })
+          break
+        }
+        case 'status': {
+          if (
+            moveDef.effect.chance === void 0 ||
+            Math.random() * 100 < moveDef.effect.chance
+          )
+            applyStatus(attack.defender, moveDef.effect.status, events, !attack.isPlayer)
+          break
+        }
         case 'selfDestruct': {
           ;((attack.attacker.currentHp = 0),
             events.push({
@@ -535,6 +682,37 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1) {
       break
     }
     if (attack.attacker.currentHp <= 0) break
+  }
+  // End-of-turn residual damage from poison / burn.
+  /** @type {[BattlePokemon, boolean][]} */
+  const residualTargets = [
+    [player, !0],
+    [enemy, !1],
+  ]
+  for (const [pokemon, isPlayerSide] of residualTargets) {
+    if (pokemon.currentHp <= 0) continue
+    const divisor = pokemon.status === 'poison' ? 8 : pokemon.status === 'burn' ? 16 : 0
+    if (!divisor) continue
+    const residual = Math.max(1, Math.floor(pokemon.maxHp / divisor))
+    pokemon.currentHp = Math.max(0, pokemon.currentHp - residual)
+    events.push({
+      type: 'damage',
+      message: `${pokemon.name} was hurt by its ${pokemon.status}! (${residual} damage)`,
+      data: {
+        target: isPlayerSide ? 'player' : 'enemy',
+        damage: residual,
+        hpAfter: pokemon.currentHp,
+        hpMax: pokemon.maxHp,
+      },
+    })
+    pokemon.currentHp <= 0 &&
+      events.push({
+        type: 'faint',
+        message: `${pokemon.name} fainted!`,
+        data: {
+          target: isPlayerSide ? 'player' : 'enemy',
+        },
+      })
   }
   return events
 }

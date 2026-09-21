@@ -473,6 +473,37 @@ img {
     color: var(--gold-dark)
 }
 
+.status-badge {
+    font-size: 8px;
+    font-weight: 700;
+    padding: 1px 4px;
+    border-radius: 3px;
+    letter-spacing: .5px;
+    color: #fff
+}
+
+.status-poison {
+    background: #a040a0
+}
+
+.status-burn {
+    background: #e07030
+}
+
+.status-freeze {
+    background: #70c8e8;
+    color: #103040
+}
+
+.status-sleep {
+    background: #8888b0
+}
+
+.status-flinching {
+    background: #b0a060;
+    color: #302810
+}
+
 .info-hp-numbers {
     font-size: 9px;
     color: #4a3828;

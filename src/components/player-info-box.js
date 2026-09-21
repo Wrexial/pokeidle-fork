@@ -4,8 +4,18 @@ import { jsx, jsxs } from 'react/jsx-runtime'
 import { ExpBar } from './exp-bar.js'
 import { HpBar } from './hp-bar.js'
 
-/** @param {{ pokemon: Pokemon }} props */
-export function PlayerInfoBox({ pokemon }) {
+/** Short labels for the battle status badge. */
+/** @type {Record<string, string>} */
+const STATUS_LABELS = {
+  poison: 'PSN',
+  burn: 'BRN',
+  freeze: 'FRZ',
+  sleep: 'SLP',
+  flinching: 'FLN',
+}
+
+/** @param {{ pokemon: Pokemon, status?: string | null }} props */
+export function PlayerInfoBox({ pokemon, status }) {
   return jsxs('div', {
     className: 'info-box',
     children: [
@@ -21,6 +31,11 @@ export function PlayerInfoBox({ pokemon }) {
             className: 'info-pokemon-name',
             children: pokemon.name.toUpperCase(),
           }),
+          status &&
+            jsx('span', {
+              className: `status-badge status-${status}`,
+              children: STATUS_LABELS[status] ?? status,
+            }),
           jsxs('span', {
             className: 'info-pokemon-level',
             children: ['Lv.', pokemon.level],

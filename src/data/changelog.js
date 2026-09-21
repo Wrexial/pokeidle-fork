@@ -45,6 +45,14 @@ export const CHANGELOG = [
           ],
         },
         {
+          heading: 'Battle Status',
+          items: [
+            'Moves can now poison, burn, freeze, sleep and flinch their target \u2014 poison and burn deal damage every turn, burn halves physical attack, and sleep/freeze stop the Pokemon acting',
+            'Drain moves (Absorb, Giga Drain, ...) heal the user for part of the damage dealt',
+            'Status conditions show as a badge beside each Pokemon\u2019s HP bar in battle',
+          ],
+        },
+        {
           heading: 'Fixes',
           items: [
             'Badge requirements count only their own region\u2019s badges, so prestiging a region properly re-locks its gates',

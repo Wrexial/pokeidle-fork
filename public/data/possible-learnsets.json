@@ -69998,5 +69998,19 @@
       50,
       "hydroPump"
     ]
+  ],
+  "missingno": [
+    [
+      1,
+      "waterGun"
+    ],
+    [
+      1,
+      "skyAttack"
+    ],
+    [
+      1,
+      "tackle"
+    ]
   ]
 }

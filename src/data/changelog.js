@@ -65,6 +65,12 @@ export const CHANGELOG = [
           ],
         },
         {
+          heading: 'Secrets',
+          items: [
+            'Cinnabar Island has a 1 in 1,000 chance of a MissingNo. encounter instead of a trainer battle',
+          ],
+        },
+        {
           heading: 'Presentation',
           items: [
             'Routes use biome battle backgrounds (caves, seas, mountains) instead of grassland everywhere',

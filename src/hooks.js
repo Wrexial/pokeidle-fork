@@ -1,7 +1,7 @@
 // Split from the former assets/index.js — see tools/decompile/split-modules.mjs
 
 import React from 'react'
-import { trainerClassPayouts } from './data/config.js'
+import { trainerClassPayouts, missingnoEncounterChance } from './data/config.js'
 import { ballOrder } from './data/items.js'
 import { MOBILE_BREAKPOINT } from './data/ui.js'
 import { completedGenerations, encounterData, mapData, pokemonSpecies, trainerData } from './data/gameData.js'
@@ -69,6 +69,54 @@ export function useGameLoop() {
           if (!currentGameState.playerPokemon) return
           const currentLocationData = mapData[currentGameState.currentLocation]
           if (currentLocationData && currentLocationData.type === 'town') {
+            // Cinnabar Island's famous glitch: a very rare MissingNo. encounter
+            // in place of a trainer battle.
+            if (
+              currentGameState.currentLocation === 'cinnabarIsland' &&
+              pokemonSpecies.missingno &&
+              Math.random() < missingnoEncounterChance
+            ) {
+              const missingnoLevel = Math.max(5, currentGameState.playerPokemon.level),
+                missingnoStats = calculatePokemonStats(
+                  pokemonSpecies.missingno,
+                  missingnoLevel,
+                  generateIVs()
+                )
+              ;(dispatch({
+                type: 'START_ENCOUNTER',
+                payload: {
+                  enemy: {
+                    speciesKey: 'missingno',
+                    name: pokemonSpecies.missingno.name,
+                    types: pokemonSpecies.missingno.types,
+                    level: missingnoLevel,
+                    currentHp: missingnoStats.hp,
+                    maxHp: missingnoStats.hp,
+                    attack: missingnoStats.attack,
+                    defense: missingnoStats.defense,
+                    spAttack: missingnoStats.spAttack,
+                    spDefense: missingnoStats.spDefense,
+                    speed: missingnoStats.speed,
+                    moves: resolvePokemonMoves('missingno', missingnoLevel),
+                    isPlayer: !1,
+                    isShiny: !1,
+                  },
+                },
+              }),
+                dispatch({
+                  type: 'MARK_SEEN',
+                  payload: {
+                    speciesKey: 'missingno',
+                  },
+                }),
+                dispatch({
+                  type: 'ADD_LOG',
+                  payload: {
+                    message: '?! A glitchy shape flickers before you... MissingNo.!',
+                  },
+                }))
+              return
+            }
             const trainerList = trainerData[currentGameState.currentLocation]
             if (!trainerList?.length) return
             const trainer = trainerList[Math.floor(Math.random() * trainerList.length)],

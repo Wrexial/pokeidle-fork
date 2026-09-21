@@ -86,13 +86,25 @@ function findDonor(key, visited) {
   return null
 }
 
+// Species with no relatives to borrow from get a hand-written learnset.
+const SPECIAL_LEARNSETS = {
+  missingno: [
+    [1, 'waterGun'],
+    [1, 'skyAttack'],
+    [1, 'tackle'],
+  ],
+}
 let filled = 0
 const unresolved = []
 for (const key of Object.keys(species)) {
-  if (!species[key].id || learnsets[key]) continue
+  if (learnsets[key]) continue
+  if (!species[key].id && !SPECIAL_LEARNSETS[key]) continue
   const donor = findDonor(key, new Set())
   if (donor) {
     learnsets[key] = sources[donor]
+    filled++
+  } else if (SPECIAL_LEARNSETS[key]) {
+    learnsets[key] = SPECIAL_LEARNSETS[key]
     filled++
   } else unresolved.push(key)
 }

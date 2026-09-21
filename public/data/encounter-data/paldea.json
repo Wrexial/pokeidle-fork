@@ -5638,6 +5638,30 @@
     "weight": 1,
     "minLevel": 75,
     "maxLevel": 75
+   },
+   {
+    "speciesKey": "p-tauros",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "p-tauros-b",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "p-tauros-a",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "p-wooper",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
    }
   ]
  }

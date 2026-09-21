@@ -273,7 +273,12 @@ Data conventions:
   evolution). Those are the Pokemon found on the region's Raid Island. Kanto's
   hand-curated `raidIsland` is wired up by `generate-regions.cjs` too (it used
   to be the only raid without a `routeKey`/encounter bucket), so
-  `encounterData['raidIsland']` resolves.
+  `encounterData['raidIsland']` resolves. Alternate forms with no route/evolution
+  path are also placed here by `generate-regions.cjs` (`FORM_RAID_REGION`):
+  Alolan forms to Alola, Galarian/Hisuian forms to Galar, Paldean forms to
+  Paldea. Gigantamax forms instead become level-100 evolutions (see below),
+  matching how the original data models Megas. Every species in
+  `pokemon-species.json` is now obtainable.
 - Sprites are referenced by that `id`. The animated directory is a merged set:
   the official Gen V Black/White animated gifs for national dex ids 1-649, plus
   Pokémon Showdown's animated sprites for everything else (PokeAPI has no
@@ -318,7 +323,14 @@ One-off scripts used to build the data JSON (not run during dev/build):
 
 - `scrape_serebii.py`, `convert_moves.py`, `fix_pokemon_ids.py` — Python
   (need `requests`, `beautifulsoup4` in `.venv`).
-- `scrape_pokemondb.cjs`, `extract_data.cjs` — Node scripts.
+- `scrape_pokemondb.cjs`, `extract_data.cjs` — Node scripts. `extract_data.cjs`
+  is legacy (it extracts from `tools/index-backup.js` into a stale `data/`
+  directory), so live edits belong in `public/data/`.
+- `add-gmax-evolutions.cjs` — adds `base -> gx-base` level-100 evolutions for
+  every Gigantamax form (idempotent) so they have an acquisition path, like
+  Megas already do. The added entries carry `form: true`, which
+  `generate-regions.cjs`'s `isFinalEvolution` ignores so team generation is
+  unchanged. Re-run after any re-extraction of `evolution-data.json`.
 - `download_pokemon_sprites.cjs` — fills the local sprite tree for every id in
   `pokemon-species.json`: static front/back/shiny from PokeAPI, and animated
   front/back/shiny from Gen V for dex ids 1-649 falling back to Pokémon

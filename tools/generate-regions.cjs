@@ -683,7 +683,12 @@ const encounterWeight = (s, idx) => (idx < 3 ? 20 : idx < 8 ? 12 : 6)
 const REMATCH_TEAM_POOL = teamPoolForGen(9)
 const totalBaseStats = (species) =>
   Object.values(species.baseStats ?? {}).reduce((sum, stat) => sum + stat, 0)
-const isFinalEvolution = (speciesKey) => !evolutionData[speciesKey]?.length
+// Battle-only forms (Gigantamax, marked `form`) are stored as level-100
+// evolutions but a species that only "evolves" into one of those is still a
+// final evolution. Megas predate this flag and are left as-is so league/team
+// generation doesn't shift.
+const isFinalEvolution = (speciesKey) =>
+  !(evolutionData[speciesKey] || []).some((evolution) => !evolution.form)
 /**
  * Pick a themed team from a species pool. `types` biases the pool to matching
  * Pokemon when there are enough of them (so a Flying gym fields birds and a Bug
@@ -1491,11 +1496,31 @@ while (routableExpanded) {
 }
 // Raids are the region's endgame, so they sit at the top of the 5-75 curve.
 const raidLevel = (entry) => clampLevel(entry.catchRate <= 3 ? LEVEL_MAX : LEVEL_MAX - 5)
+// Alternate forms that no route offers and no evolution reaches still belong to
+// a region: regional/paradox forms to the region they debuted in, and Hisuian
+// forms to Galar (which already hosts the other Hisui leftovers — Sneasler,
+// Overqwil — because its generation introduced them). Megas/Gigantamax are
+// level-100 evolutions, so they are already routable and not listed here.
+const FORM_RAID_REGION = (key) => {
+  if (key.startsWith('a-')) return 'alola'
+  if (key.startsWith('g-') || key.startsWith('h-')) return 'galar'
+  if (key === 'basculin-w' || key === 'basculegion-f' || key === 'indeedee-f') return 'galar'
+  if (key.startsWith('p-tauros') || key === 'p-wooper') return 'paldea'
+  return null
+}
+const leftoverFormsFor = (regionId) =>
+  Object.entries(species)
+    .filter(
+      ([key, entry]) =>
+        entry.id > 1025 && !routable.has(key) && FORM_RAID_REGION(key) === regionId
+    )
+    .map(([key, entry]) => ({ key, ...entry }))
 for (const pending of pendingRaids) {
   const { regionObj, all: regionSpecies, raidId, raidNodeName } = pending
-  regionObj.raidPool = regionSpecies
-    .filter((entry) => !routable.has(entry.key))
-    .map((entry) => ({ speciesKey: entry.key, level: raidLevel(entry) }))
+  regionObj.raidPool = [
+    ...regionSpecies.filter((entry) => !routable.has(entry.key)),
+    ...leftoverFormsFor(regionObj.id),
+  ].map((entry) => ({ speciesKey: entry.key, level: raidLevel(entry) }))
   if (raidId)
     encounterData[raidId] = {
       name: raidNodeName,

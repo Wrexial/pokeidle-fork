@@ -721,6 +721,66 @@
    {
     "speciesKey": "melmetal",
     "level": 75
+   },
+   {
+    "speciesKey": "a-rattata",
+    "level": 70
+   },
+   {
+    "speciesKey": "a-raticate",
+    "level": 70
+   },
+   {
+    "speciesKey": "a-sandshrew",
+    "level": 70
+   },
+   {
+    "speciesKey": "a-sandslash",
+    "level": 70
+   },
+   {
+    "speciesKey": "a-vulpix",
+    "level": 70
+   },
+   {
+    "speciesKey": "a-ninetales",
+    "level": 70
+   },
+   {
+    "speciesKey": "a-diglett",
+    "level": 70
+   },
+   {
+    "speciesKey": "a-dugtrio",
+    "level": 70
+   },
+   {
+    "speciesKey": "a-meowth",
+    "level": 70
+   },
+   {
+    "speciesKey": "a-persian",
+    "level": 70
+   },
+   {
+    "speciesKey": "a-geodude",
+    "level": 70
+   },
+   {
+    "speciesKey": "a-graveler",
+    "level": 70
+   },
+   {
+    "speciesKey": "a-golem",
+    "level": 70
+   },
+   {
+    "speciesKey": "a-grimer",
+    "level": 70
+   },
+   {
+    "speciesKey": "a-muk",
+    "level": 70
    }
   ]
  },
@@ -848,6 +908,126 @@
    {
     "speciesKey": "enamorus",
     "level": 75
+   },
+   {
+    "speciesKey": "g-meowth",
+    "level": 70
+   },
+   {
+    "speciesKey": "h-growlithe",
+    "level": 70
+   },
+   {
+    "speciesKey": "h-arcanine",
+    "level": 70
+   },
+   {
+    "speciesKey": "g-ponyta",
+    "level": 70
+   },
+   {
+    "speciesKey": "g-rapidash",
+    "level": 70
+   },
+   {
+    "speciesKey": "g-farfetch'd",
+    "level": 70
+   },
+   {
+    "speciesKey": "g-slowpoke",
+    "level": 70
+   },
+   {
+    "speciesKey": "g-slowbro",
+    "level": 70
+   },
+   {
+    "speciesKey": "h-voltorb",
+    "level": 70
+   },
+   {
+    "speciesKey": "h-electrode",
+    "level": 70
+   },
+   {
+    "speciesKey": "g-mr. mime",
+    "level": 70
+   },
+   {
+    "speciesKey": "g-articuno",
+    "level": 75
+   },
+   {
+    "speciesKey": "g-zapdos",
+    "level": 75
+   },
+   {
+    "speciesKey": "g-moltres",
+    "level": 75
+   },
+   {
+    "speciesKey": "g-slowking",
+    "level": 70
+   },
+   {
+    "speciesKey": "h-qwilfish",
+    "level": 70
+   },
+   {
+    "speciesKey": "h-sneasel",
+    "level": 70
+   },
+   {
+    "speciesKey": "g-corsola",
+    "level": 70
+   },
+   {
+    "speciesKey": "g-zigzagoon",
+    "level": 70
+   },
+   {
+    "speciesKey": "g-linoone",
+    "level": 70
+   },
+   {
+    "speciesKey": "basculin-w",
+    "level": 70
+   },
+   {
+    "speciesKey": "g-darumaka",
+    "level": 70
+   },
+   {
+    "speciesKey": "g-darmanitan",
+    "level": 70
+   },
+   {
+    "speciesKey": "g-darmanitan-z",
+    "level": 70
+   },
+   {
+    "speciesKey": "g-yamask",
+    "level": 70
+   },
+   {
+    "speciesKey": "h-zorua",
+    "level": 70
+   },
+   {
+    "speciesKey": "h-zoroark",
+    "level": 70
+   },
+   {
+    "speciesKey": "g-stunfisk",
+    "level": 70
+   },
+   {
+    "speciesKey": "indeedee-f",
+    "level": 70
+   },
+   {
+    "speciesKey": "basculegion-f",
+    "level": 70
    }
   ]
  },
@@ -983,6 +1163,22 @@
    {
     "speciesKey": "miraidon",
     "level": 75
+   },
+   {
+    "speciesKey": "p-tauros",
+    "level": 70
+   },
+   {
+    "speciesKey": "p-tauros-b",
+    "level": 70
+   },
+   {
+    "speciesKey": "p-tauros-a",
+    "level": 70
+   },
+   {
+    "speciesKey": "p-wooper",
+    "level": 70
    }
   ]
  }

@@ -15,6 +15,11 @@
     {
       "into": "m-venusaur",
       "level": 100
+    },
+    {
+      "into": "gx-venusaur",
+      "level": 100,
+      "form": true
     }
   ],
   "charmander": [
@@ -37,6 +42,11 @@
     {
       "into": "m-charizard y",
       "level": 100
+    },
+    {
+      "into": "gx-charizard",
+      "level": 100,
+      "form": true
     }
   ],
   "squirtle": [
@@ -55,6 +65,11 @@
     {
       "into": "m-blastoise",
       "level": 100
+    },
+    {
+      "into": "gx-blastoise",
+      "level": 100,
+      "form": true
     }
   ],
   "caterpie": [
@@ -137,6 +152,11 @@
     {
       "into": "a-raichu",
       "level": 35
+    },
+    {
+      "into": "gx-pikachu",
+      "level": 100,
+      "form": true
     }
   ],
   "sandshrew": [
@@ -249,6 +269,11 @@
     {
       "into": "persian",
       "level": 28
+    },
+    {
+      "into": "gx-meowth",
+      "level": 100,
+      "form": true
     }
   ],
   "psyduck": [
@@ -419,6 +444,11 @@
     {
       "into": "m-gengar",
       "level": 100
+    },
+    {
+      "into": "gx-gengar",
+      "level": 100,
+      "form": true
     }
   ],
   "onix": [
@@ -663,6 +693,11 @@
     {
       "into": "sylveon",
       "level": 25
+    },
+    {
+      "into": "gx-eevee",
+      "level": 100,
+      "form": true
     }
   ],
   "porygon": [
@@ -3473,12 +3508,22 @@
     {
       "into": "urshifu-rss",
       "level": 75
+    },
+    {
+      "into": "gx-urshifu-sss",
+      "level": 100,
+      "form": true
     }
   ],
   "urshifu-rss": [
     {
       "into": "urshifu-sss",
       "level": 75
+    },
+    {
+      "into": "gx-urshifu-rss",
+      "level": 100,
+      "form": true
     }
   ],
   "calyrex": [
@@ -3621,6 +3666,181 @@
     {
       "into": "kingambit",
       "level": 65
+    }
+  ],
+  "butterfree": [
+    {
+      "into": "gx-butterfree",
+      "level": 100,
+      "form": true
+    }
+  ],
+  "machamp": [
+    {
+      "into": "gx-machamp",
+      "level": 100,
+      "form": true
+    }
+  ],
+  "kingler": [
+    {
+      "into": "gx-kingler",
+      "level": 100,
+      "form": true
+    }
+  ],
+  "lapras": [
+    {
+      "into": "gx-lapras",
+      "level": 100,
+      "form": true
+    }
+  ],
+  "snorlax": [
+    {
+      "into": "gx-snorlax",
+      "level": 100,
+      "form": true
+    }
+  ],
+  "garbodor": [
+    {
+      "into": "gx-garbodor",
+      "level": 100,
+      "form": true
+    }
+  ],
+  "melmetal": [
+    {
+      "into": "gx-melmetal",
+      "level": 100,
+      "form": true
+    }
+  ],
+  "rillaboom": [
+    {
+      "into": "gx-rillaboom",
+      "level": 100,
+      "form": true
+    }
+  ],
+  "cinderace": [
+    {
+      "into": "gx-cinderace",
+      "level": 100,
+      "form": true
+    }
+  ],
+  "inteleon": [
+    {
+      "into": "gx-inteleon",
+      "level": 100,
+      "form": true
+    }
+  ],
+  "corviknight": [
+    {
+      "into": "gx-corviknight",
+      "level": 100,
+      "form": true
+    }
+  ],
+  "orbeetle": [
+    {
+      "into": "gx-orbeetle",
+      "level": 100,
+      "form": true
+    }
+  ],
+  "drednaw": [
+    {
+      "into": "gx-drednaw",
+      "level": 100,
+      "form": true
+    }
+  ],
+  "coalossal": [
+    {
+      "into": "gx-coalossal",
+      "level": 100,
+      "form": true
+    }
+  ],
+  "flapple": [
+    {
+      "into": "gx-flapple",
+      "level": 100,
+      "form": true
+    }
+  ],
+  "appletun": [
+    {
+      "into": "gx-appletun",
+      "level": 100,
+      "form": true
+    }
+  ],
+  "sandaconda": [
+    {
+      "into": "gx-sandaconda",
+      "level": 100,
+      "form": true
+    }
+  ],
+  "toxtricity": [
+    {
+      "into": "gx-toxtricity",
+      "level": 100,
+      "form": true
+    }
+  ],
+  "centiskorch": [
+    {
+      "into": "gx-centiskorch",
+      "level": 100,
+      "form": true
+    }
+  ],
+  "hatterene": [
+    {
+      "into": "gx-hatterene",
+      "level": 100,
+      "form": true
+    }
+  ],
+  "grimmsnarl": [
+    {
+      "into": "gx-grimmsnarl",
+      "level": 100,
+      "form": true
+    }
+  ],
+  "alcremie": [
+    {
+      "into": "gx-alcremie",
+      "level": 100,
+      "form": true
+    }
+  ],
+  "copperajah": [
+    {
+      "into": "gx-copperajah",
+      "level": 100,
+      "form": true
+    }
+  ],
+  "duraludon": [
+    {
+      "into": "gx-duraludon",
+      "level": 100,
+      "form": true
+    }
+  ],
+  "eternatus": [
+    {
+      "into": "gx-eternatus",
+      "level": 100,
+      "form": true
     }
   ]
 }

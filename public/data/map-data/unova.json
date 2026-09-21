@@ -33,6 +33,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Normal and Water Pokemon roam around Lv. 5-7.",
   "routeKey": "unova-route-1",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "unova-nuvema-town",
    "unova-accumula-town",
@@ -125,6 +126,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Normal and Dark Pokemon roam around Lv. 8-10.",
   "routeKey": "unova-route-2",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "unova-accumula-town",
    "unova-striaton-city"
@@ -254,6 +256,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Normal and Water Pokemon roam around Lv. 11-13.",
   "routeKey": "unova-route-3",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "unova-striaton-city",
    "unova-nacrene-city"
@@ -364,6 +367,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Water and Poison Pokemon roam around Lv. 14-16.",
   "routeKey": "unova-route-4",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "unova-castelia-city",
    "unova-nimbasa-city"
@@ -437,6 +441,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Normal and Psychic Pokemon roam around Lv. 17-19.",
   "routeKey": "unova-route-5",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "unova-nimbasa-city",
    "unova-driftveil-city"
@@ -554,6 +559,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Water and Normal Pokemon roam around Lv. 20-22.",
   "routeKey": "unova-route-6",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "unova-driftveil-city",
    "unova-mistralton-city"
@@ -632,6 +638,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Normal and Flying Pokemon roam around Lv. 23-25.",
   "routeKey": "unova-route-7",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "unova-mistralton-city",
    "unova-icirrus-city"
@@ -703,6 +710,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Ground and Water Pokemon roam around Lv. 26-28.",
   "routeKey": "unova-route-8",
+  "background": "/backgrounds/mountain.png",
   "connections": [
    "unova-icirrus-city",
    "unova-route-9"
@@ -731,6 +739,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Normal and Psychic Pokemon roam around Lv. 29-31.",
   "routeKey": "unova-route-9",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "unova-opelucid-city",
    "unova-route-8"
@@ -815,6 +824,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Normal and Flying Pokemon roam around Lv. 32-34.",
   "routeKey": "unova-route-10",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "unova-opelucid-city"
   ],
@@ -843,6 +853,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Water and Normal Pokemon roam around Lv. 35-37.",
   "routeKey": "unova-route-11",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "unova-opelucid-city",
    "unova-route-12"
@@ -871,6 +882,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Bug and Grass Pokemon roam around Lv. 38-40.",
   "routeKey": "unova-route-12",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "unova-lacunosa-town",
    "unova-route-11"
@@ -956,6 +968,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Water and Flying Pokemon roam around Lv. 40-42.",
   "routeKey": "unova-route-13",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "unova-undella-town",
    "unova-lacunosa-town",
@@ -1030,6 +1043,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Water and Normal Pokemon roam around Lv. 43-45.",
   "routeKey": "unova-route-14",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "unova-undella-town",
    "unova-black-city"
@@ -1189,6 +1203,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Ground and Normal Pokemon roam around Lv. 46-48.",
   "routeKey": "unova-route-15",
+  "background": "/backgrounds/mountain.png",
   "connections": [
    "unova-black-city",
    "unova-route-16"
@@ -1215,6 +1230,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Normal and Psychic Pokemon roam around Lv. 49-51.",
   "routeKey": "unova-route-16",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "unova-nimbasa-city",
    "unova-route-15"
@@ -1243,6 +1259,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Water and Poison Pokemon roam around Lv. 52-54.",
   "routeKey": "unova-route-17",
+  "background": "/backgrounds/beach.png",
   "connections": [
    "unova-route-1",
    "unova-route-18"
@@ -1272,6 +1289,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Water and Fighting Pokemon roam around Lv. 55-57.",
   "routeKey": "unova-route-18",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "unova-route-17",
    "unova-route-gate"
@@ -1297,6 +1315,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Electric and Psychic Pokemon roam around Lv. 58-60.",
   "routeKey": "unova-route-gate",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "unova-route-18"
   ],
@@ -1328,6 +1347,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Normal and Water Pokemon roam around Lv. 61-63.",
   "routeKey": "unova-route-19",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "unova-aspertia-city",
    "unova-floccesy-town",
@@ -1357,6 +1377,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Normal and Water Pokemon roam around Lv. 64-66.",
   "routeKey": "unova-route-20",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "unova-virbank-city",
    "unova-floccesy-town"
@@ -1386,6 +1407,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Water and Flying Pokemon roam around Lv. 67-69.",
   "routeKey": "unova-route-21",
+  "background": "/backgrounds/beach.png",
   "connections": [
    "unova-humilau-city",
    "unova-undella-town",
@@ -1415,6 +1437,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Water and Fairy Pokemon roam around Lv. 70-72.",
   "routeKey": "unova-route-22",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "unova-humilau-city",
    "unova-route-13",
@@ -1442,6 +1465,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Water and Normal Pokemon roam around Lv. 73-75.",
   "routeKey": "unova-route-23",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "unova-route-22",
    "unova-raid",
@@ -1468,6 +1492,7 @@
   "region": "unova",
   "description": "A mysterious island where Unova's rarest Pokemon dwell.",
   "routeKey": "unova-raid",
+  "background": "/backgrounds/cave.png",
   "connections": [
    "unova-route-23"
   ],

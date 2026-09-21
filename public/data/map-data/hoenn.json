@@ -33,6 +33,7 @@
   "region": "hoenn",
   "description": "A route in the Hoenn region where Normal and Bug Pokemon roam around Lv. 5-7.",
   "routeKey": "hoenn-route-101",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "hoenn-oldale-town",
    "hoenn-littleroot-town"
@@ -89,6 +90,7 @@
   "region": "hoenn",
   "description": "A route in the Hoenn region where Water and Fairy Pokemon roam around Lv. 7-9.",
   "routeKey": "hoenn-route-102",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "hoenn-petalburg-city",
    "hoenn-oldale-town"
@@ -147,6 +149,7 @@
   "region": "hoenn",
   "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 9-11.",
   "routeKey": "hoenn-route-103",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "hoenn-oldale-town",
    "hoenn-route-110"
@@ -173,6 +176,7 @@
   "region": "hoenn",
   "description": "A route in the Hoenn region where Water and Flying Pokemon roam around Lv. 11-13.",
   "routeKey": "hoenn-route-104",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "hoenn-petalburg-city",
    "hoenn-rustboro-city",
@@ -233,6 +237,7 @@
   "region": "hoenn",
   "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 13-15.",
   "routeKey": "hoenn-route-105",
+  "background": "/backgrounds/beach.png",
   "connections": [
    "hoenn-route-104",
    "hoenn-route-106"
@@ -261,6 +266,7 @@
   "region": "hoenn",
   "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 15-17.",
   "routeKey": "hoenn-route-106",
+  "background": "/backgrounds/beach.png",
   "connections": [
    "hoenn-route-105",
    "hoenn-dewford-town"
@@ -323,6 +329,7 @@
   "region": "hoenn",
   "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 17-19.",
   "routeKey": "hoenn-route-107",
+  "background": "/backgrounds/beach.png",
   "connections": [
    "hoenn-route-108",
    "hoenn-dewford-town"
@@ -352,6 +359,7 @@
   "region": "hoenn",
   "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 19-21.",
   "routeKey": "hoenn-route-108",
+  "background": "/backgrounds/beach.png",
   "connections": [
    "hoenn-route-107",
    "hoenn-route-109"
@@ -377,6 +385,7 @@
   "region": "hoenn",
   "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 21-23.",
   "routeKey": "hoenn-route-109",
+  "background": "/backgrounds/beach.png",
   "connections": [
    "hoenn-slateport-city",
    "hoenn-route-108"
@@ -440,6 +449,7 @@
   "region": "hoenn",
   "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 24-26.",
   "routeKey": "hoenn-route-110",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "hoenn-slateport-city",
    "hoenn-route-103",
@@ -508,6 +518,7 @@
   "region": "hoenn",
   "description": "A route in the Hoenn region where Water and Ground Pokemon roam around Lv. 26-28.",
   "routeKey": "hoenn-route-111",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "hoenn-mauville-city",
    "hoenn-route-113",
@@ -538,6 +549,7 @@
   "region": "hoenn",
   "description": "A route in the Hoenn region where Fire and Ground Pokemon roam around Lv. 28-30.",
   "routeKey": "hoenn-route-112",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "hoenn-route-111",
    "hoenn-lavaridge-town"
@@ -606,6 +618,7 @@
   "region": "hoenn",
   "description": "A route in the Hoenn region where Normal and Ground Pokemon roam around Lv. 30-32.",
   "routeKey": "hoenn-route-113",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "hoenn-route-111",
    "hoenn-fallarbor-town"
@@ -687,6 +700,7 @@
   "region": "hoenn",
   "description": "A route in the Hoenn region where Water and Ground Pokemon roam around Lv. 32-34.",
   "routeKey": "hoenn-route-114",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "hoenn-fallarbor-town",
    "hoenn-route-115"
@@ -712,6 +726,7 @@
   "region": "hoenn",
   "description": "A route in the Hoenn region where Water and Flying Pokemon roam around Lv. 34-36.",
   "routeKey": "hoenn-route-115",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "hoenn-rustboro-city",
    "hoenn-route-114"
@@ -741,6 +756,7 @@
   "region": "hoenn",
   "description": "A route in the Hoenn region where Normal and Bug Pokemon roam around Lv. 36-38.",
   "routeKey": "hoenn-route-116",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "hoenn-rustboro-city",
    "hoenn-verdanturf-town"
@@ -818,6 +834,7 @@
   "region": "hoenn",
   "description": "A route in the Hoenn region where Water and Grass Pokemon roam around Lv. 38-40.",
   "routeKey": "hoenn-route-117",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "hoenn-mauville-city",
    "hoenn-verdanturf-town"
@@ -846,6 +863,7 @@
   "region": "hoenn",
   "description": "A route in the Hoenn region where Water and Dark Pokemon roam around Lv. 40-42.",
   "routeKey": "hoenn-route-118",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "hoenn-route-119",
    "hoenn-route-123",
@@ -876,6 +894,7 @@
   "region": "hoenn",
   "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 42-44.",
   "routeKey": "hoenn-route-119",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "hoenn-route-118",
    "hoenn-fortree-city"
@@ -944,6 +963,7 @@
   "region": "hoenn",
   "description": "A route in the Hoenn region where Water and Ground Pokemon roam around Lv. 44-46.",
   "routeKey": "hoenn-route-120",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "hoenn-route-121",
    "hoenn-fortree-city"
@@ -972,6 +992,7 @@
   "region": "hoenn",
   "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 46-48.",
   "routeKey": "hoenn-route-121",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "hoenn-lilycove-city",
    "hoenn-route-120",
@@ -1041,6 +1062,7 @@
   "region": "hoenn",
   "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 48-50.",
   "routeKey": "hoenn-route-122",
+  "background": "/backgrounds/beach.png",
   "connections": [
    "hoenn-route-121",
    "hoenn-route-123"
@@ -1067,6 +1089,7 @@
   "region": "hoenn",
   "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 50-52.",
   "routeKey": "hoenn-route-123",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "hoenn-route-118",
    "hoenn-route-122"
@@ -1095,6 +1118,7 @@
   "region": "hoenn",
   "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 52-54.",
   "routeKey": "hoenn-route-124",
+  "background": "/backgrounds/beach.png",
   "connections": [
    "hoenn-lilycove-city",
    "hoenn-mossdeep-city",
@@ -1167,6 +1191,7 @@
   "region": "hoenn",
   "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 54-56.",
   "routeKey": "hoenn-route-125",
+  "background": "/backgrounds/beach.png",
   "connections": [
    "hoenn-mossdeep-city"
   ],
@@ -1195,6 +1220,7 @@
   "region": "hoenn",
   "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 57-59.",
   "routeKey": "hoenn-route-126",
+  "background": "/backgrounds/beach.png",
   "connections": [
    "hoenn-sootopolis-city",
    "hoenn-route-124",
@@ -1268,6 +1294,7 @@
   "region": "hoenn",
   "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 59-61.",
   "routeKey": "hoenn-route-127",
+  "background": "/backgrounds/beach.png",
   "connections": [
    "hoenn-mossdeep-city",
    "hoenn-route-126",
@@ -1297,6 +1324,7 @@
   "region": "hoenn",
   "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 61-63.",
   "routeKey": "hoenn-route-128",
+  "background": "/backgrounds/beach.png",
   "connections": [
    "hoenn-ever-grande-city",
    "hoenn-route-127",
@@ -1369,6 +1397,7 @@
   "region": "hoenn",
   "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 63-65.",
   "routeKey": "hoenn-route-129",
+  "background": "/backgrounds/beach.png",
   "connections": [
    "hoenn-route-128",
    "hoenn-route-130"
@@ -1395,6 +1424,7 @@
   "region": "hoenn",
   "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 65-67.",
   "routeKey": "hoenn-route-130",
+  "background": "/backgrounds/beach.png",
   "connections": [
    "hoenn-route-129",
    "hoenn-route-131"
@@ -1420,6 +1450,7 @@
   "region": "hoenn",
   "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 67-69.",
   "routeKey": "hoenn-route-131",
+  "background": "/backgrounds/beach.png",
   "connections": [
    "hoenn-route-130",
    "hoenn-pacifidlog-town"
@@ -1496,6 +1527,7 @@
   "region": "hoenn",
   "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 69-71.",
   "routeKey": "hoenn-route-132",
+  "background": "/backgrounds/beach.png",
   "connections": [
    "hoenn-pacifidlog-town",
    "hoenn-route-133"
@@ -1522,6 +1554,7 @@
   "region": "hoenn",
   "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 71-73.",
   "routeKey": "hoenn-route-133",
+  "background": "/backgrounds/beach.png",
   "connections": [
    "hoenn-route-132",
    "hoenn-route-134"
@@ -1547,6 +1580,7 @@
   "region": "hoenn",
   "description": "A route in the Hoenn region where Water and Poison Pokemon roam around Lv. 73-75.",
   "routeKey": "hoenn-route-134",
+  "background": "/backgrounds/beach.png",
   "connections": [
    "hoenn-slateport-city",
    "hoenn-route-133"
@@ -1576,6 +1610,7 @@
   "region": "hoenn",
   "description": "A mysterious island where Hoenn's rarest Pokemon dwell.",
   "routeKey": "hoenn-raid",
+  "background": "/backgrounds/cave.png",
   "connections": [
    "hoenn-route-128"
   ],

@@ -33,6 +33,7 @@
   "region": "paldea",
   "description": "A route in the Paldea region where Water and Normal Pokemon roam around Lv. 5-7.",
   "routeKey": "paldea-south-province-area-one",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "paldea-cabo-poco",
    "paldea-los-platos",
@@ -161,6 +162,7 @@
   "region": "paldea",
   "description": "A route in the Paldea region where Flying and Ghost Pokemon roam around Lv. 10-12.",
   "routeKey": "paldea-south-province-area-three",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "paldea-mesagoza",
    "paldea-artazon",
@@ -190,6 +192,7 @@
   "region": "paldea",
   "description": "A route in the Paldea region where Normal and Grass Pokemon roam around Lv. 15-17.",
   "routeKey": "paldea-south-province-area-two",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "paldea-mesagoza",
    "paldea-cortondo",
@@ -216,6 +219,7 @@
   "region": "paldea",
   "description": "A route in the Paldea region where Water and Normal Pokemon roam around Lv. 20-22.",
   "routeKey": "paldea-west-province-area-three",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "paldea-medali",
    "paldea-cabo-poco"
@@ -242,6 +246,7 @@
   "region": "paldea",
   "description": "A route in the Paldea region where Water and Flying Pokemon roam around Lv. 24-26.",
   "routeKey": "paldea-west-province-area-one",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "paldea-cascarrafa",
    "paldea-south-province-area-three"
@@ -557,6 +562,7 @@
   "region": "paldea",
   "description": "A route in the Paldea region where Normal and Water Pokemon roam around Lv. 29-31.",
   "routeKey": "paldea-east-province-area-one",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "paldea-artazon",
    "paldea-levincia",
@@ -588,6 +594,7 @@
   "region": "paldea",
   "description": "A route in the Paldea region where Flying and Poison Pokemon roam around Lv. 34-36.",
   "routeKey": "paldea-north-province-area-one",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "paldea-alfornada"
   ],
@@ -615,6 +622,7 @@
   "region": "paldea",
   "description": "A route in the Paldea region where Water and Ground Pokemon roam around Lv. 39-41.",
   "routeKey": "paldea-south-province-area-four",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "paldea-artazon"
   ],
@@ -643,6 +651,7 @@
   "region": "paldea",
   "description": "A route in the Paldea region where Water and Ghost Pokemon roam around Lv. 44-46.",
   "routeKey": "paldea-east-province-area-three",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "paldea-zapapico",
    "paldea-porto-marinada"
@@ -668,6 +677,7 @@
   "region": "paldea",
   "description": "A route in the Paldea region where Water and Ghost Pokemon roam around Lv. 49-51.",
   "routeKey": "paldea-south-province-area-six",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "paldea-alfornada",
    "paldea-south-province-area-five",
@@ -698,6 +708,7 @@
   "region": "paldea",
   "description": "A route in the Paldea region where Water and Flying Pokemon roam around Lv. 54-56.",
   "routeKey": "paldea-west-province-area-two",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "paldea-porto-marinada",
    "paldea-south-province-area-six",
@@ -731,6 +742,7 @@
   "region": "paldea",
   "description": "A route in the Paldea region where Flying and Bug Pokemon roam around Lv. 58-60.",
   "routeKey": "paldea-north-province-area-two",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "paldea-west-province-area-two",
    "paldea-north-province-area-three"
@@ -801,6 +813,7 @@
   "region": "paldea",
   "description": "A route in the Paldea region where Normal and Water Pokemon roam around Lv. 63-65.",
   "routeKey": "paldea-south-province-area-five",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "paldea-east-province-area-one",
    "paldea-south-province-area-six"
@@ -878,6 +891,7 @@
   "region": "paldea",
   "description": "A route in the Paldea region where Flying and Grass Pokemon roam around Lv. 68-70.",
   "routeKey": "paldea-north-province-area-three",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "paldea-north-province-area-two",
    "paldea-mossui-town"
@@ -915,6 +929,7 @@
   "region": "paldea",
   "description": "A route in the Paldea region where Water and Flying Pokemon roam around Lv. 73-75.",
   "routeKey": "paldea-east-province-area-two",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "paldea-levincia",
    "paldea-raid",
@@ -991,6 +1006,7 @@
   "region": "paldea",
   "description": "A mysterious island where Paldea's rarest Pokemon dwell.",
   "routeKey": "paldea-raid",
+  "background": "/backgrounds/cave.png",
   "connections": [
    "paldea-east-province-area-two"
   ],

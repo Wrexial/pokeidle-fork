@@ -33,6 +33,7 @@
   "region": "galar",
   "description": "A route in the Galar region where Normal and Bug Pokemon roam around Lv. 5-7.",
   "routeKey": "galar-route-1",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "galar-wedgehurst",
    "galar-postwick"
@@ -88,6 +89,7 @@
   "region": "galar",
   "description": "A route in the Galar region where Water and Grass Pokemon roam around Lv. 13-15.",
   "routeKey": "galar-route-2",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "galar-wedgehurst",
    "galar-motostoke"
@@ -154,6 +156,7 @@
   "region": "galar",
   "description": "A route in the Galar region where Rock and Fighting Pokemon roam around Lv. 20-22.",
   "routeKey": "galar-route-3",
+  "background": "/backgrounds/mountain.png",
   "connections": [
    "galar-motostoke",
    "galar-route-4"
@@ -180,6 +183,7 @@
   "region": "galar",
   "description": "A route in the Galar region where Water and Electric Pokemon roam around Lv. 28-30.",
   "routeKey": "galar-route-4",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "galar-turffield",
    "galar-route-3"
@@ -249,6 +253,7 @@
   "region": "galar",
   "description": "A route in the Galar region where Water and Fairy Pokemon roam around Lv. 35-37.",
   "routeKey": "galar-route-5",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "galar-hulbury",
    "galar-turffield"
@@ -320,6 +325,7 @@
   "region": "galar",
   "description": "A route in the Galar region where Water and Ground Pokemon roam around Lv. 43-45.",
   "routeKey": "galar-route-6",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "galar-hammerlocke",
    "galar-stow-on-side",
@@ -450,6 +456,7 @@
   "region": "galar",
   "description": "A route in the Galar region where Dark and Steel Pokemon roam around Lv. 50-52.",
   "routeKey": "galar-route-7",
+  "background": "/backgrounds/cave.png",
   "connections": [
    "galar-route-8",
    "galar-hammerlocke",
@@ -480,6 +487,7 @@
   "region": "galar",
   "description": "A route in the Galar region where Ice and Ground Pokemon roam around Lv. 58-60.",
   "routeKey": "galar-route-8",
+  "background": "/backgrounds/mountain.png",
   "connections": [
    "galar-route-7",
    "galar-circhester"
@@ -556,6 +564,7 @@
   "region": "galar",
   "description": "A route in the Galar region where Water and Ice Pokemon roam around Lv. 65-67.",
   "routeKey": "galar-route-9",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "galar-circhester",
    "galar-spikemuth",
@@ -645,6 +654,7 @@
   "region": "galar",
   "description": "A route in the Galar region where Ice and Grass Pokemon roam around Lv. 73-75.",
   "routeKey": "galar-route-10",
+  "background": "/backgrounds/mountain.png",
   "connections": [
    "galar-wyndon",
    "galar-hammerlocke",
@@ -768,6 +778,7 @@
   "region": "galar",
   "description": "A mysterious island where Galar's rarest Pokemon dwell.",
   "routeKey": "galar-raid",
+  "background": "/backgrounds/cave.png",
   "connections": [
    "galar-route-10"
   ],

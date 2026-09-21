@@ -35,6 +35,7 @@
   "region": "alola",
   "description": "A route in the Alola region where Normal and Water Pokemon roam around Lv. 5-7.",
   "routeKey": "alola-route-1",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "alola-iki-town",
    "alola-route-3",
@@ -62,6 +63,7 @@
   "region": "alola",
   "description": "A route in the Alola region where Normal and Flying Pokemon roam around Lv. 9-11.",
   "routeKey": "alola-route-1--hauoli-outskirts",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "alola-iki-town",
    "alola-route-1"
@@ -88,6 +90,7 @@
   "region": "alola",
   "description": "A route in the Alola region where Psychic and Poison Pokemon roam around Lv. 13-15.",
   "routeKey": "alola-route-2",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "alola-route-3",
    "alola-hauoli-city",
@@ -187,6 +190,7 @@
   "region": "alola",
   "description": "A route in the Alola region where Flying and Normal Pokemon roam around Lv. 17-19.",
   "routeKey": "alola-route-3",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "alola-route-1",
    "alola-route-2",
@@ -271,6 +275,7 @@
   "region": "alola",
   "description": "A route in the Alola region where Normal and Flying Pokemon roam around Lv. 21-23.",
   "routeKey": "alola-route-4",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "alola-paniola-town",
    "alola-heahea-city",
@@ -353,6 +358,7 @@
   "region": "alola",
   "description": "A route in the Alola region where Bug and Flying Pokemon roam around Lv. 25-27.",
   "routeKey": "alola-route-5",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "alola-route-8",
    "alola-route-6",
@@ -381,6 +387,7 @@
   "region": "alola",
   "description": "A route in the Alola region where Normal and Flying Pokemon roam around Lv. 29-31.",
   "routeKey": "alola-route-6",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "alola-heahea-city",
    "alola-paniola-town",
@@ -413,6 +420,7 @@
   "region": "alola",
   "description": "A route in the Alola region where Water and Flying Pokemon roam around Lv. 33-35.",
   "routeKey": "alola-route-7",
+  "background": "/backgrounds/beach.png",
   "connections": [
    "alola-route-8",
    "alola-route-6",
@@ -447,6 +455,7 @@
   "region": "alola",
   "description": "A route in the Alola region where Water and Normal Pokemon roam around Lv. 37-39.",
   "routeKey": "alola-route-8",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "alola-route-7",
    "alola-route-5"
@@ -479,6 +488,7 @@
   "region": "alola",
   "description": "A route in the Alola region where Water and Flying Pokemon roam around Lv. 41-43.",
   "routeKey": "alola-route-9",
+  "background": "/backgrounds/beach.png",
   "connections": [
    "alola-konikoni-city",
    "alola-heahea-city",
@@ -556,6 +566,7 @@
   "region": "alola",
   "description": "A route in the Alola region where Flying and Normal Pokemon roam around Lv. 45-47.",
   "routeKey": "alola-route-10",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "alola-malie-city",
    "alola-heahea-city"
@@ -629,6 +640,7 @@
   "region": "alola",
   "description": "A route in the Alola region where Normal and Bug Pokemon roam around Lv. 49-51.",
   "routeKey": "alola-route-11",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "alola-malie-city",
    "alola-route-12",
@@ -658,6 +670,7 @@
   "region": "alola",
   "description": "A route in the Alola region where Ground and Electric Pokemon roam around Lv. 53-55.",
   "routeKey": "alola-route-12",
+  "background": "/backgrounds/mountain.png",
   "connections": [
    "alola-route-11",
    "alola-route-13"
@@ -687,6 +700,7 @@
   "region": "alola",
   "description": "A route in the Alola region where Water and Flying Pokemon roam around Lv. 57-59.",
   "routeKey": "alola-route-13",
+  "background": "/backgrounds/beach.png",
   "connections": [
    "alola-route-12",
    "alola-route-15",
@@ -717,6 +731,7 @@
   "region": "alola",
   "description": "A route in the Alola region where Water and Flying Pokemon roam around Lv. 61-63.",
   "routeKey": "alola-route-14",
+  "background": "/backgrounds/beach.png",
   "connections": [
    "alola-route-13",
    "alola-route-9"
@@ -746,6 +761,7 @@
   "region": "alola",
   "description": "A route in the Alola region where Water and Flying Pokemon roam around Lv. 65-67.",
   "routeKey": "alola-route-15",
+  "background": "/backgrounds/beach.png",
   "connections": [
    "alola-route-16",
    "alola-route-13",
@@ -775,6 +791,7 @@
   "region": "alola",
   "description": "A route in the Alola region where Water and Flying Pokemon roam around Lv. 69-71.",
   "routeKey": "alola-route-16",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "alola-route-15",
    "alola-route-17",
@@ -805,6 +822,7 @@
   "region": "alola",
   "description": "A route in the Alola region where Normal and Dark Pokemon roam around Lv. 73-75.",
   "routeKey": "alola-route-17",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "alola-po-town",
    "alola-route-16",
@@ -836,6 +854,7 @@
   "region": "alola",
   "description": "A mysterious island where Alola's rarest Pokemon dwell.",
   "routeKey": "alola-raid",
+  "background": "/backgrounds/cave.png",
   "connections": [
    "alola-route-17"
   ],

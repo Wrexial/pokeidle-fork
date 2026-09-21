@@ -196,6 +196,8 @@ type MapLocation = {
   region?: string
   connections: string[]
   routeKey?: string
+  /** battle background for wild encounters here (defaults handled in the UI) */
+  background?: string
   mart?: Mart
   trainerCount?: number
   unlock: {

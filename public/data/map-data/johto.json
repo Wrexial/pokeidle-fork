@@ -34,6 +34,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Normal and Flying Pokemon roam around Lv. 5-7.",
   "routeKey": "johto-route-29",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "johto-cherrygrove-city",
    "johto-new-bark-town",
@@ -90,6 +91,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Water and Bug Pokemon roam around Lv. 8-10.",
   "routeKey": "johto-route-30",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "johto-cherrygrove-city",
    "johto-route-31"
@@ -116,6 +118,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Water and Bug Pokemon roam around Lv. 11-13.",
   "routeKey": "johto-route-31",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "johto-route-30",
    "johto-violet-city",
@@ -176,6 +179,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Water and Poison Pokemon roam around Lv. 14-16.",
   "routeKey": "johto-route-32",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "johto-violet-city",
    "johto-route-33"
@@ -204,6 +208,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Flying and Normal Pokemon roam around Lv. 17-19.",
   "routeKey": "johto-route-33",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "johto-azalea-town",
    "johto-route-32"
@@ -266,6 +271,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Water and Poison Pokemon roam around Lv. 20-22.",
   "routeKey": "johto-route-34",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "johto-goldenrod-city",
    "johto-azalea-town"
@@ -331,6 +337,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Water and Fairy Pokemon roam around Lv. 24-26.",
   "routeKey": "johto-route-35",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "johto-goldenrod-city",
    "johto-route-36"
@@ -360,6 +367,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Poison and Normal Pokemon roam around Lv. 27-29.",
   "routeKey": "johto-route-36",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "johto-route-37",
    "johto-route-35",
@@ -389,6 +397,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Flying and Normal Pokemon roam around Lv. 30-32.",
   "routeKey": "johto-route-37",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "johto-ecruteak-city",
    "johto-route-36"
@@ -459,6 +468,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Poison and Ghost Pokemon roam around Lv. 33-35.",
   "routeKey": "johto-bell-tower",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "johto-ecruteak-city"
   ],
@@ -487,6 +497,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Normal and Flying Pokemon roam around Lv. 36-38.",
   "routeKey": "johto-route-38",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "johto-ecruteak-city",
    "johto-route-39"
@@ -515,6 +526,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Normal and Flying Pokemon roam around Lv. 39-41.",
   "routeKey": "johto-route-39",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "johto-olivine-city",
    "johto-route-38"
@@ -583,6 +595,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Water and Poison Pokemon roam around Lv. 42-44.",
   "routeKey": "johto-sea-route-40",
+  "background": "/backgrounds/beach.png",
   "connections": [
    "johto-olivine-city",
    "johto-sea-route-41"
@@ -609,6 +622,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Water and Poison Pokemon roam around Lv. 45-47.",
   "routeKey": "johto-sea-route-41",
+  "background": "/backgrounds/beach.png",
   "connections": [
    "johto-cianwood-city",
    "johto-sea-route-40",
@@ -680,6 +694,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Water and Poison Pokemon roam around Lv. 48-50.",
   "routeKey": "johto-whirl-islands",
+  "background": "/backgrounds/beach.png",
   "connections": [
    "johto-sea-route-41"
   ],
@@ -707,6 +722,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Water and Normal Pokemon roam around Lv. 51-53.",
   "routeKey": "johto-route-42",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "johto-ecruteak-city",
    "johto-mahogany-town"
@@ -781,6 +797,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Water and Normal Pokemon roam around Lv. 54-56.",
   "routeKey": "johto-route-43",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "johto-mahogany-town"
   ],
@@ -809,6 +826,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Water and Grass Pokemon roam around Lv. 58-60.",
   "routeKey": "johto-route-44",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "johto-mahogany-town",
    "johto-blackthorn-city"
@@ -882,6 +900,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Water and Ground Pokemon roam around Lv. 61-63.",
   "routeKey": "johto-route-45",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "johto-blackthorn-city",
    "johto-route-46"
@@ -910,6 +929,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Normal and Flying Pokemon roam around Lv. 64-66.",
   "routeKey": "johto-route-46",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "johto-route-29",
    "johto-route-45",
@@ -940,6 +960,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Water and Poison Pokemon roam around Lv. 67-69.",
   "routeKey": "johto-route-47",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "johto-route-48",
    "johto-cianwood-city"
@@ -968,6 +989,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Normal and Flying Pokemon roam around Lv. 70-72.",
   "routeKey": "johto-route-48",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "johto-route-47"
   ],
@@ -993,6 +1015,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Ground and Rock Pokemon roam around Lv. 73-75.",
   "routeKey": "johto-mt-silver",
+  "background": "/backgrounds/mountain.png",
   "connections": [
    "johto-new-bark-town",
    "johto-raid",
@@ -1020,6 +1043,7 @@
   "region": "johto",
   "description": "A mysterious island where Johto's rarest Pokemon dwell.",
   "routeKey": "johto-raid",
+  "background": "/backgrounds/cave.png",
   "connections": [
    "johto-mt-silver"
   ],

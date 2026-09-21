@@ -33,6 +33,7 @@
   "region": "kalos",
   "description": "A route in the Kalos region where Grass and Fire Pokemon roam around Lv. 5-7.",
   "routeKey": "kalos-route-1",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "kalos-vaniville-town",
    "kalos-aquacorde-town"
@@ -88,6 +89,7 @@
   "region": "kalos",
   "description": "A route in the Kalos region where Normal and Bug Pokemon roam around Lv. 8-10.",
   "routeKey": "kalos-route-2",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "kalos-aquacorde-town",
    "kalos-route-3"
@@ -114,6 +116,7 @@
   "region": "kalos",
   "description": "A route in the Kalos region where Water and Flying Pokemon roam around Lv. 11-13.",
   "routeKey": "kalos-route-3",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "kalos-santalune-city",
    "kalos-route-2"
@@ -179,6 +182,7 @@
   "region": "kalos",
   "description": "A route in the Kalos region where Fairy and Bug Pokemon roam around Lv. 15-17.",
   "routeKey": "kalos-route-4",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "kalos-santalune-city",
    "kalos-lumiose-city"
@@ -243,6 +247,7 @@
   "region": "kalos",
   "description": "A route in the Kalos region where Normal and Poison Pokemon roam around Lv. 18-20.",
   "routeKey": "kalos-route-5",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "kalos-lumiose-city",
    "kalos-camphrier-town"
@@ -305,6 +310,7 @@
   "region": "kalos",
   "description": "A route in the Kalos region where Grass and Poison Pokemon roam around Lv. 21-23.",
   "routeKey": "kalos-route-6",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "kalos-route-7"
   ],
@@ -336,6 +342,7 @@
   "region": "kalos",
   "description": "A route in the Kalos region where Fairy and Grass Pokemon roam around Lv. 24-26.",
   "routeKey": "kalos-route-7",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "kalos-camphrier-town",
    "kalos-route-6",
@@ -408,6 +415,7 @@
   "region": "kalos",
   "description": "A route in the Kalos region where Water and Poison Pokemon roam around Lv. 28-30.",
   "routeKey": "kalos-route-8",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "kalos-cyllage-city",
    "kalos-ambrette-town",
@@ -489,6 +497,7 @@
   "region": "kalos",
   "description": "A route in the Kalos region where Ground and Dark Pokemon roam around Lv. 31-33.",
   "routeKey": "kalos-route-9",
+  "background": "/backgrounds/mountain.png",
   "connections": [
    "kalos-ambrette-town"
   ],
@@ -514,6 +523,7 @@
   "region": "kalos",
   "description": "A route in the Kalos region where Flying and Rock Pokemon roam around Lv. 34-36.",
   "routeKey": "kalos-route-10",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "kalos-cyllage-city",
    "kalos-geosenge-town"
@@ -586,6 +596,7 @@
   "region": "kalos",
   "description": "A route in the Kalos region where Poison and Fighting Pokemon roam around Lv. 37-39.",
   "routeKey": "kalos-route-11",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "kalos-geosenge-town",
    "kalos-shalour-city"
@@ -654,6 +665,7 @@
   "region": "kalos",
   "description": "A route in the Kalos region where Water and Rock Pokemon roam around Lv. 41-43.",
   "routeKey": "kalos-route-12",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "kalos-shalour-city",
    "kalos-coumarine-city"
@@ -725,6 +737,7 @@
   "region": "kalos",
   "description": "A route in the Kalos region where Ground and Rock Pokemon roam around Lv. 44-46.",
   "routeKey": "kalos-route-13",
+  "background": "/backgrounds/mountain.png",
   "connections": [
    "kalos-lumiose-city",
    "kalos-coumarine-city"
@@ -753,6 +766,7 @@
   "region": "kalos",
   "description": "A route in the Kalos region where Water and Ground Pokemon roam around Lv. 47-49.",
   "routeKey": "kalos-route-14",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "kalos-lumiose-city",
    "kalos-laverre-city"
@@ -824,6 +838,7 @@
   "region": "kalos",
   "description": "A route in the Kalos region where Water and Dark Pokemon roam around Lv. 50-52.",
   "routeKey": "kalos-route-15",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "kalos-laverre-city",
    "kalos-route-16",
@@ -896,6 +911,7 @@
   "region": "kalos",
   "description": "A route in the Kalos region where Water and Grass Pokemon roam around Lv. 54-56.",
   "routeKey": "kalos-route-16",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "kalos-lumiose-city",
    "kalos-route-15"
@@ -925,6 +941,7 @@
   "region": "kalos",
   "description": "A route in the Kalos region where Ice and Flying Pokemon roam around Lv. 57-59.",
   "routeKey": "kalos-route-17",
+  "background": "/backgrounds/mountain.png",
   "connections": [
    "kalos-dendemille-town",
    "kalos-anistar-city"
@@ -995,6 +1012,7 @@
   "region": "kalos",
   "description": "A route in the Kalos region where Rock and Ground Pokemon roam around Lv. 60-62.",
   "routeKey": "kalos-route-18",
+  "background": "/backgrounds/mountain.png",
   "connections": [
    "kalos-anistar-city",
    "kalos-couriway-town"
@@ -1068,6 +1086,7 @@
   "region": "kalos",
   "description": "A route in the Kalos region where Water and Ground Pokemon roam around Lv. 63-65.",
   "routeKey": "kalos-route-19",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "kalos-couriway-town",
    "kalos-snowbelle-city"
@@ -1146,6 +1165,7 @@
   "region": "kalos",
   "description": "A route in the Kalos region where Grass and Poison Pokemon roam around Lv. 67-69.",
   "routeKey": "kalos-route-20",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "kalos-snowbelle-city"
   ],
@@ -1220,6 +1240,7 @@
   "region": "kalos",
   "description": "A route in the Kalos region where Water and Normal Pokemon roam around Lv. 70-72.",
   "routeKey": "kalos-route-21",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "kalos-snowbelle-city",
    "kalos-route-22"
@@ -1248,6 +1269,7 @@
   "region": "kalos",
   "description": "A route in the Kalos region where Water and Normal Pokemon roam around Lv. 73-75.",
   "routeKey": "kalos-route-22",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "kalos-santalune-city",
    "kalos-route-21",
@@ -1279,6 +1301,7 @@
   "region": "kalos",
   "description": "A mysterious island where Kalos's rarest Pokemon dwell.",
   "routeKey": "kalos-raid",
+  "background": "/backgrounds/cave.png",
   "connections": [
    "kalos-route-22"
   ],

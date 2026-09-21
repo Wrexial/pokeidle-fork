@@ -61,7 +61,12 @@ export function BattleScene() {
         cinnabarIsland: '/backgrounds/town_port.png',
         fuchsiaCity: '/backgrounds/town_port.png',
       }[state.currentLocation] || '/backgrounds/town.png',
-    battleBackground = activeTrainerBattle || isTown ? townBackground : locationImages[state.currentRoute] || locationImages.route1
+    battleBackground =
+      activeTrainerBattle || isTown
+        ? townBackground
+        : mapData[state.currentLocation]?.background ||
+          locationImages[state.currentRoute] ||
+          locationImages.route1
   return jsxs('div', {
     className: 'battle-scene',
     style: {

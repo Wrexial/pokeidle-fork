@@ -694,6 +694,42 @@ const totalBaseStats = (species) =>
 const isFinalEvolution = (speciesKey) =>
   !(evolutionData[speciesKey] || []).some((evolution) => !evolution.form)
 /**
+ * Pick a battle background for a route from its name, falling back to its
+ * dominant wild type. Generated regions have no hand-authored mapping, so
+ * without this every non-Kanto route fought on grassland.
+ */
+const ROUTE_BACKGROUND_RULES = [
+  [/cave|cavern|tunnel|mine|ruins|catacomb|grotto|depths|underground|well|sewer/i, 'cave'],
+  [
+    /\bmt\b|mt\.|mount|peak|summit|highland|volcano|crater|ridge|cliff|gorge|canyon|desert|wasteland|quarry|spire/i,
+    'mountain',
+  ],
+  [
+    /sea|ocean|water|beach|shore|bay|harbor|harbour|port|island|marine|coast|river|lake|pond|fall|rapid|strait|channel|dock|marsh|swamp|fen|wetland/i,
+    'beach',
+  ],
+]
+const routeBackground = (routeName, encounters) => {
+  for (const [pattern, background] of ROUTE_BACKGROUND_RULES)
+    if (pattern.test(routeName)) return `/backgrounds/${background}.png`
+  const typeWeights = {}
+  let totalWeight = 0
+  for (const encounter of encounters) {
+    totalWeight += encounter.weight
+    for (const type of species[encounter.speciesKey]?.types ?? [])
+      typeWeights[type] = (typeWeights[type] ?? 0) + encounter.weight
+  }
+  const dominant = Object.entries(typeWeights).sort((left, right) => right[1] - left[1])[0]?.[0]
+  // Only an overwhelmingly aquatic table counts as a beach/sea route; most
+  // routes have some fishing and would otherwise all look like beaches.
+  if (totalWeight > 0 && (typeWeights.Water ?? 0) / totalWeight >= 0.8)
+    return '/backgrounds/beach.png'
+  if (dominant === 'Ice' || dominant === 'Rock' || dominant === 'Ground' || dominant === 'Steel')
+    return '/backgrounds/mountain.png'
+  if (dominant === 'Ghost' || dominant === 'Dark') return '/backgrounds/cave.png'
+  return '/backgrounds/grassland.png'
+}
+/**
  * Pick a themed team from a species pool. `types` biases the pool to matching
  * Pokemon when there are enough of them (so a Flying gym fields birds and a Bug
  * Catcher fields bugs); otherwise it falls back to the whole pool. Within that
@@ -1222,6 +1258,7 @@ for (const region of REGIONS) {
             )}-${Math.max(...encounters.map((encounter) => encounter.maxLevel))}.`
           : `A route in the ${name} region.`,
         routeKey: id,
+        background: routeBackground(routeEncounter[node]?.name ?? node, encounters),
         connections: [...adjacency[node]].map((n) => locId(regionId, n)),
         unlock,
         unlockOrder: progressKey(node),
@@ -1325,6 +1362,7 @@ for (const region of REGIONS) {
       region: regionId,
       description: `A mysterious island where ${name}'s rarest Pokemon dwell.`,
       routeKey: raidId,
+      background: '/backgrounds/cave.png',
       connections: [locId(regionId, finaleRoute)],
       unlock: {
         battlesAtLocation: [{ locationId: locId(regionId, finaleRoute), count: 20 }],

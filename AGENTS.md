@@ -245,7 +245,10 @@ Data conventions:
   region's starter starts the run on that region's first route. Regional
   starters live in `regionalStarters` in `src/data/config.js`.
 - `map-data/<region>.json` locations carry a `region` id; wild routes also
-  reference an `encounter-data/<region>.json` bucket via `routeKey`. Unlock rules support
+  reference an `encounter-data/<region>.json` bucket via `routeKey`. Generated
+  routes carry a `background` (biome, from the route name and its dominant
+  wild type) that `battle-scene.js` uses for the wild battle scene; Kanto's
+  routes fall back to the hand-curated `locationImages` map in `ui.js`. Unlock rules support
   `battlesAtLocation`, `caughtCount` (minimum Pokedex size), `caughtOnRoute`
   (catch some of the `species` that spawn only on `routeKey`, a route-specific,
   harder variant of `caughtCount`), `partyLevel`

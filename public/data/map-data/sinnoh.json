@@ -33,6 +33,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Normal and Flying Pokemon roam around Lv. 5-7.",
   "routeKey": "sinnoh-route-201",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "sinnoh-twinleaf-town",
    "sinnoh-sandgem-town"
@@ -89,6 +90,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Normal and Electric Pokemon roam around Lv. 7-9.",
   "routeKey": "sinnoh-route-202",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "sinnoh-jubilife-city",
    "sinnoh-sandgem-town"
@@ -149,6 +151,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 10-12.",
   "routeKey": "sinnoh-route-203",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "sinnoh-jubilife-city",
    "sinnoh-oreburgh-city"
@@ -207,6 +210,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 12-14.",
   "routeKey": "sinnoh-route-204",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "sinnoh-floaroma-town",
    "sinnoh-jubilife-city"
@@ -272,6 +276,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 14-16.",
   "routeKey": "sinnoh-route-205",
+  "background": "/backgrounds/beach.png",
   "connections": [
    "sinnoh-eterna-city",
    "sinnoh-floaroma-town"
@@ -343,6 +348,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Ground and Flying Pokemon roam around Lv. 17-19.",
   "routeKey": "sinnoh-route-206",
+  "background": "/backgrounds/mountain.png",
   "connections": [
    "sinnoh-eterna-city",
    "sinnoh-route-207"
@@ -372,6 +378,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Fighting and Fire Pokemon roam around Lv. 19-21.",
   "routeKey": "sinnoh-route-207",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "sinnoh-route-206",
    "sinnoh-oreburgh-city",
@@ -401,6 +408,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Ground Pokemon roam around Lv. 21-23.",
   "routeKey": "sinnoh-route-208",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "sinnoh-hearthome-city",
    "sinnoh-route-211",
@@ -465,6 +473,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 24-26.",
   "routeKey": "sinnoh-route-209",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "sinnoh-solaceon-town",
    "sinnoh-hearthome-city"
@@ -533,6 +542,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 26-28.",
   "routeKey": "sinnoh-route-210",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "sinnoh-solaceon-town",
    "sinnoh-route-215",
@@ -602,6 +612,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Fighting and Psychic Pokemon roam around Lv. 28-30.",
   "routeKey": "sinnoh-route-211",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "sinnoh-eterna-city",
    "sinnoh-celestic-town",
@@ -633,6 +644,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Ground Pokemon roam around Lv. 31-33.",
   "routeKey": "sinnoh-route-212",
+  "background": "/backgrounds/beach.png",
   "connections": [
    "sinnoh-pastoria-city",
    "sinnoh-hearthome-city"
@@ -708,6 +720,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 33-35.",
   "routeKey": "sinnoh-route-213",
+  "background": "/backgrounds/beach.png",
   "connections": [
    "sinnoh-pastoria-city",
    "sinnoh-route-222",
@@ -735,6 +748,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Rock Pokemon roam around Lv. 35-37.",
   "routeKey": "sinnoh-route-214",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "sinnoh-veilstone-city",
    "sinnoh-route-222"
@@ -805,6 +819,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Flying and Normal Pokemon roam around Lv. 38-40.",
   "routeKey": "sinnoh-route-215",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "sinnoh-route-210",
    "sinnoh-veilstone-city"
@@ -831,6 +846,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Ice and Fighting Pokemon roam around Lv. 40-42.",
   "routeKey": "sinnoh-route-216",
+  "background": "/backgrounds/mountain.png",
   "connections": [
    "sinnoh-route-217",
    "sinnoh-route-211"
@@ -859,6 +875,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Ice and Fighting Pokemon roam around Lv. 43-45.",
   "routeKey": "sinnoh-route-217",
+  "background": "/backgrounds/mountain.png",
   "connections": [
    "sinnoh-route-216",
    "sinnoh-snowpoint-city"
@@ -942,6 +959,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 45-47.",
   "routeKey": "sinnoh-route-218",
+  "background": "/backgrounds/beach.png",
   "connections": [
    "sinnoh-canalave-city",
    "sinnoh-jubilife-city"
@@ -1014,6 +1032,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 47-49.",
   "routeKey": "sinnoh-route-219",
+  "background": "/backgrounds/beach.png",
   "connections": [
    "sinnoh-sandgem-town",
    "sinnoh-sea-route-220"
@@ -1043,6 +1062,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 50-52.",
   "routeKey": "sinnoh-sea-route-220",
+  "background": "/backgrounds/beach.png",
   "connections": [
    "sinnoh-route-219",
    "sinnoh-route-221"
@@ -1071,6 +1091,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Poison Pokemon roam around Lv. 52-54.",
   "routeKey": "sinnoh-route-221",
+  "background": "/backgrounds/beach.png",
   "connections": [
    "sinnoh-sea-route-220"
   ],
@@ -1096,6 +1117,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 54-56.",
   "routeKey": "sinnoh-route-222",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "sinnoh-sunyshore-city",
    "sinnoh-route-214",
@@ -1172,6 +1194,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 57-59.",
   "routeKey": "sinnoh-sea-route-223",
+  "background": "/backgrounds/beach.png",
   "connections": [
    "sinnoh-sunyshore-city",
    "sinnoh-route-224"
@@ -1200,6 +1223,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 59-61.",
   "routeKey": "sinnoh-route-224",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "sinnoh-sea-route-223"
   ],
@@ -1225,6 +1249,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 61-63.",
   "routeKey": "sinnoh-route-225",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "sinnoh-sea-route-230",
    "sinnoh-sea-route-226",
@@ -1254,6 +1279,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 64-66.",
   "routeKey": "sinnoh-sea-route-226",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "sinnoh-route-227",
    "sinnoh-route-228",
@@ -1285,6 +1311,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Ground Pokemon roam around Lv. 66-68.",
   "routeKey": "sinnoh-route-227",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "sinnoh-sea-route-226",
    "sinnoh-route-222"
@@ -1320,6 +1347,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Ground Pokemon roam around Lv. 68-70.",
   "routeKey": "sinnoh-route-228",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "sinnoh-route-229",
    "sinnoh-sea-route-226",
@@ -1356,6 +1384,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 71-73.",
   "routeKey": "sinnoh-route-229",
+  "background": "/backgrounds/grassland.png",
   "connections": [
    "sinnoh-route-228",
    "sinnoh-sea-route-230"
@@ -1388,6 +1417,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 73-75.",
   "routeKey": "sinnoh-sea-route-230",
+  "background": "/backgrounds/beach.png",
   "connections": [
    "sinnoh-route-229",
    "sinnoh-route-225",
@@ -1420,6 +1450,7 @@
   "region": "sinnoh",
   "description": "A mysterious island where Sinnoh's rarest Pokemon dwell.",
   "routeKey": "sinnoh-raid",
+  "background": "/backgrounds/cave.png",
   "connections": [
    "sinnoh-sea-route-230"
   ],

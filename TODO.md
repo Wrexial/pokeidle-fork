@@ -595,6 +595,72 @@ manifest loader (`src/data/gameData.js`), and
 
 Effort: **medium** (mostly asset plumbing; assets are partly there already).
 
+## 30. More region areas (DLC, caves, POIs)
+
+The maps are built from PokéAPI/Bulbapedia **towns + numbered routes** only
+(`tools/scrape-region-maps.cjs`), then `tools/generate-regions.cjs` turns them
+into 21-52 locations per region (Kanto 49, Hoenn 52, Unova 45, …). That leaves
+three gaps:
+
+### 30a. DLC / expansion areas
+
+Later generations' DLC regions are simply missing, so those Pokemon have no
+native route and fall into a Raid Island pool instead:
+
+- Galar — **Isle of Armor** and **Crown Tundra** (Sword/Shield Expansion Pass).
+- Paldea — **Kitakami** (Teal Mask) and **Blueberry Academy / Terarium**
+  (Indigo Disk). `paldea-mossui-town` is already scraped into `paldea.json` but
+  as a bare town with **no encounter bucket**, so it's a dead end.
+- (Optionally earlier post-game islands: Kanto's Sevii Islands, Unova's
+  Black/White 2 areas.)
+
+- [ ] Add the DLC areas to `tools/region-maps.json` (scraper or a committed
+      override) and give them encounter tables, or inject them with the
+      existing `EXTRA_MAP_AREAS` mechanism, which already supports an explicit
+      `node` / `species` / `connect` / `rank`.
+- [ ] Slot them into the level curve and unlock order so they read as post-game
+      (`levelRoutes()` ranks by route number / BFS depth today — DLC areas need
+      a forced `rank` or `unlockOrder`).
+- [ ] Re-check each region's `raidPool` after adding them — species that now
+      have a native route must drop out of the raid pool.
+
+### 30b. More ordinary areas
+
+The scraper only keeps towns and routes, so caves, forests, tunnels, ruins,
+towers, lakes/seas and safari zones are absent unless hand-added. `EXTRA_MAP_AREAS`
+currently carries only Johto's Bell Tower / Whirl Islands / Mt. Silver.
+
+- [ ] Grow `EXTRA_MAP_AREAS` (or scrape the remaining landmark locations) with
+      their own species lists so they don't drag a whole generation slice in.
+- [ ] Consider a real `type` / `areaType` field (cave, forest, sea, ruins, …)
+      instead of the current binary town-vs-route; `location-panel.js` labels
+      everything non-town as "Route 🌿", and the battle background comes from
+      the `ROUTE_BACKGROUND_RULES` / dominant-type heuristic.
+
+### 30c. Points of interest (POIs)
+
+Non-route nodes that offer a service or flavour: a Daycare stop, a Move
+Tutor / TM vendor, a fishing spot, a berry patch, a raid den, a static
+encounter, a legendary shrine, a mart/café — whichever fits. Today services are
+mostly global (Daycare) or attached to towns, so there's no map-level way to
+surface them.
+
+- [ ] Decide the model: a new `type: 'poi'` location that is selectable but
+      doesn't spawn wild battles, vs. lightweight markers overlaid on existing
+      locations.
+- [ ] Handle rendering/copy in `map-node.js`, `town-map.js` and
+      `location-panel.js` (icon, label, no battle loop), reusing the existing
+      travel/unlock plumbing.
+- [ ] Choose a first POI that reuses existing systems (an on-map Daycare or
+      Move Tutor is the smallest win) so it isn't just decoration.
+
+Relevant code: `tools/scrape-region-maps.cjs` (`MANUAL_BRIDGES`),
+`tools/generate-regions.cjs` (`EXTRA_MAP_AREAS`, `levelRoutes`,
+`ROUTE_BACKGROUND_RULES`, raid pools), `public/data/map-data/*.json`, and the map
+UI (`src/components/map-node.js`, `town-map.js`, `location-panel.js`).
+
+Effort: **large** (data-heavy; 30a/30b mostly data, 30c a small feature).
+
 ---
 
 ## Useful references when picking these up

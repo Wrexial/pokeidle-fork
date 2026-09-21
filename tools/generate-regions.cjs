@@ -36,19 +36,22 @@ const REGIONS = [
   { id: 'galar', name: 'Galar', gen: 8, entry: 'postwick' },
   { id: 'paldea', name: 'Paldea', gen: 9, entry: 'los-platos' },
 ]
-const GEN_BASE_LEVEL = { 2: 28, 3: 37, 4: 46, 5: 55, 6: 64, 7: 73, 8: 82, 9: 91 }
-// The regions form a linear level ramp: each region's band runs from its start
-// level up to just below the next region's start, so wild Pokemon scale with
-// your progress and regions don't overlap.
-const REGION_ORDER = ['kanto', 'johto', 'hoenn', 'sinnoh', 'unova', 'kalos', 'alola', 'galar', 'paldea']
-const REGION_START_LEVEL = { kanto: 5, johto: 28, hoenn: 37, sinnoh: 46, unova: 55, kalos: 64, alola: 73, galar: 82, paldea: 91 }
-const regionBand = (regionId) => {
-  const index = REGION_ORDER.indexOf(regionId)
-  const start = REGION_START_LEVEL[regionId] ?? 5
-  const end =
-    index + 1 < REGION_ORDER.length ? REGION_START_LEVEL[REGION_ORDER[index + 1]] - 1 : 100
-  return { start, end }
-}
+// Every region now runs its own 5-75 curve instead of sharing one linear
+// 5-100 ramp: a region's starter begins at 5 and its routes, trainers, gyms and
+// league climb to 75. Regions deliberately overlap afterwards, so progress
+// within a region comes from route order; reusing a levelled team from an
+// earlier region is a known, separate balance issue.
+const LEVEL_MIN = 5
+const LEVEL_MAX = 75
+// The last wild zone sits two levels below the cap so its +2 window ends at 75.
+const WILD_LEVEL_MAX = LEVEL_MAX - 2
+const GYM_LEVEL_MIN = 12
+const GYM_LEVEL_MAX = 64
+const E4_LEVEL_MIN = 68
+const CHAMPION_LEVEL = LEVEL_MAX - 5
+// Spread index i of `count` evenly across [min, max] (inclusive).
+const spread = (i, count, min, max) =>
+  Math.round(min + (count <= 1 ? 0 : (i * (max - min)) / (count - 1)))
 const TRAINER_CLASSES = ['youngster', 'lass', 'bugCatcher', 'hiker', 'camper', 'beauty', 'coolTrainer', 'psychic', 'scientist', 'ace', 'blackbelt', 'swimmer']
 const LEADER_SPRITES = ['acetrainer', 'hiker', 'beauty', 'blackbelt', 'psychic', 'scientist', 'camper', 'swimmer', 'gentleman', 'juggler']
 const BADGE_COLORS = ['#a0a0a0', '#4878b0', '#c8a030', '#48a048', '#b83028', '#a060c0', '#e08040', '#40c0c0']
@@ -139,31 +142,26 @@ const makeTeam = (list, offset, size, baseLevel, step = 1) =>
   }))
 
 /**
- * Dynamic per-zone levelling: spread a region's routes across its level band,
- * following the order of the routes' real difficulty (median level). Each zone
- * gets a tight level window instead of one huge aggregate range.
+ * Dynamic per-zone levelling: walk the region's routes in the order they
+ * unlock and spread them evenly across the region's 5-75 band. Each zone gets a
+ * tight window instead of one huge aggregate range, and because the order is
+ * the player's progress order the curve always ramps smoothly (the scraped real
+ * levels are too inconsistent between routes/versions to rank by).
  *
- * @param {string} regionId
+ * @param {string[]} orderedKeys route keys in progression order
  * @param {Record<string, { minLevel: number, maxLevel: number }[]>} entriesByKey
  */
-function levelRoutes(regionId, entriesByKey) {
-  const { start, end } = regionBand(regionId)
-  const span = end - start
-  const keys = Object.keys(entriesByKey).filter((key) => entriesByKey[key]?.length)
-  const centerOf = (key) => {
-    const mins = entriesByKey[key].map((entry) => entry.minLevel).sort((a, b) => a - b)
-    return mins[Math.floor(mins.length / 2)] ?? start
-  }
-  const ranked = [...keys].sort((a, b) => centerOf(a) - centerOf(b))
-  const rank = new Map(ranked.map((key, i) => [key, i]))
-  for (const key of keys) {
-    const t = keys.length <= 1 ? 0 : rank.get(key) / (keys.length - 1)
-    const zoneLevel = Math.max(2, Math.min(100, Math.round(start + t * span)))
+function levelRoutes(orderedKeys, entriesByKey) {
+  const keys = orderedKeys.filter((key) => entriesByKey[key]?.length)
+  const span = WILD_LEVEL_MAX - LEVEL_MIN
+  keys.forEach((key, i) => {
+    const t = keys.length <= 1 ? 0 : i / (keys.length - 1)
+    const zoneLevel = Math.max(2, Math.min(WILD_LEVEL_MAX, Math.round(LEVEL_MIN + t * span)))
     for (const entry of entriesByKey[key]) {
       entry.minLevel = zoneLevel
-      entry.maxLevel = Math.max(zoneLevel, Math.min(100, zoneLevel + 2))
+      entry.maxLevel = Math.max(zoneLevel, Math.min(LEVEL_MAX, zoneLevel + 2))
     }
-  }
+  })
 }
 
 // --- generate ----------------------------------------------------------------
@@ -172,7 +170,7 @@ let unlockOrder = 100
 // Raid pools can only be worked out once every region's routes exist (a raid
 // species must be absent from *all* routes), so regions queue up here and are
 // filled in by the raid scan lower down.
-const pendingRaids = [{ regionObj: regions[0], all: speciesForGen(1), base: 45 }]
+const pendingRaids = [{ regionObj: regions[0], all: speciesForGen(1) }]
 
 for (const region of REGIONS) {
   const { id: regionId, name, gen, entry } = region
@@ -316,8 +314,7 @@ for (const region of REGIONS) {
     return { x, y }
   }
   const place = (node) => placeAt(positions[node]?.x ?? 50, positions[node]?.y ?? 50)
-  const base = GEN_BASE_LEVEL[gen]
-  const band = regionBand(regionId)
+  const base = LEVEL_MIN
   const starters = GEN_STARTERS[gen]
   const all = speciesForGen(gen)
   const wild = all.filter((s) => s.catchRate > 3 && !starters.includes(s.key))
@@ -361,13 +358,16 @@ for (const region of REGIONS) {
     routeEncounter[node] = { name: display[node] ?? node, encounters }
   })
 
-  // dynamic per-zone levelling across this region's routes
+  // dynamic per-zone levelling across this region's routes, in unlock order
   const routeEntries = {}
   for (const node of routeNodes) routeEntries[locId(regionId, node)] = routeEncounter[node].encounters
-  levelRoutes(regionId, routeEntries)
+  levelRoutes(
+    routeNodes.map((node) => locId(regionId, node)),
+    routeEntries
+  )
 
   // starters are a rare find on the first route (added after levelling so they
-  // don't skew the difficulty ranking)
+  // don't skew the curve)
   const firstBucket = routeNodes.length ? routeEncounter[routeNodes[0]].encounters : null
   if (firstBucket) {
     const zoneLevel = firstBucket[0]?.minLevel ?? base
@@ -434,12 +434,16 @@ for (const region of REGIONS) {
         },
       }
       const pool = all.length ? all : wild
+      // Town trainers follow the same 5-75 curve as the nearby routes.
+      const townIndex = order.indexOf(node),
+        townT = order.length <= 1 ? 0 : townIndex / (order.length - 1),
+        townLevel = clampLevel(Math.round(LEVEL_MIN + townT * (WILD_LEVEL_MAX - LEVEL_MIN)))
       if (pool.length)
         trainerData[id] = [0, 1, 2].map((i) => ({
           id: `${id}_t${i + 1}`,
           name: `${name} Trainer ${i + 1}`,
           trainerClass: TRAINER_CLASSES[(gen * 3 + i) % TRAINER_CLASSES.length],
-          team: makeTeam(pool, i * 2, 2, clampLevel(band.start + 1 + i), 1),
+          team: makeTeam(pool, i * 2, 2, Math.min(townLevel + i, LEVEL_MAX - 1), 1),
         }))
     }
   }
@@ -450,7 +454,7 @@ for (const region of REGIONS) {
     const raidId = `${regionId}-raid`
     const raidNodeName = `${name} Raid Island`
     // Bucket + pool are created by the raid scan once all routes are known.
-    pendingRaids.push({ regionObj, all, base, raidId, raidNodeName })
+    pendingRaids.push({ regionObj, all, raidId, raidNodeName })
     mapData[raidId] = {
       id: raidId,
       name: raidNodeName,
@@ -496,7 +500,8 @@ for (const region of REGIONS) {
   // league: gyms spread across towns, then Elite Four + Champion
   const gymTowns = townNodes.length ? townNodes : [entryNode]
   const roster = wild.length ? wild : all
-  ;(GYM_LEADERS[regionId] ?? []).forEach((leaderName, i) => {
+  const leaders = GYM_LEADERS[regionId] ?? []
+  leaders.forEach((leaderName, i) => {
     const preferredTown = (GYM_TOWNS[regionId] ?? [])[i],
       preferredNode = preferredTown
         ? townNodes.find((node) => (display[node] ?? node) === preferredTown)
@@ -511,17 +516,24 @@ for (const region of REGIONS) {
       badgeName: `${name} Badge ${i + 1}`,
       badgeColor: BADGE_COLORS[i % BADGE_COLORS.length],
       spriteKey: LEADER_SPRITES[(gen + i) % LEADER_SPRITES.length],
-      team: makeTeam(roster, i * 3, 3, clampLevel(band.start + 1 + i), 1),
+      team: makeTeam(
+        roster,
+        i * 3,
+        3,
+        clampLevel(spread(i, leaders.length, GYM_LEVEL_MIN, GYM_LEVEL_MAX)),
+        1
+      ),
     })
   })
-  ;(ELITE_FOUR[regionId] ?? []).forEach((memberName, i) => {
+  const eliteFour = ELITE_FOUR[regionId] ?? []
+  eliteFour.forEach((memberName, i) => {
     e4Data.push({
       id: `${regionId}-e4-${i + 1}`,
       name: memberName,
       title: `${name} Elite Four`,
       region: regionId,
       spriteKey: 'acetrainer',
-      team: makeTeam(roster, 24 + i * 4, 5, clampLevel(band.end - 3 + i), 1),
+      team: makeTeam(roster, 24 + i * 4, 5, clampLevel(E4_LEVEL_MIN + i), 1),
     })
   })
   champData.push({
@@ -530,7 +542,7 @@ for (const region of REGIONS) {
     title: `${name} Champion`,
     region: regionId,
     spriteKey: 'acetrainer',
-    team: makeTeam(roster, 44, 6, clampLevel(band.end), 1),
+    team: makeTeam(roster, 44, 6, clampLevel(CHAMPION_LEVEL), 1),
   })
 }
 
@@ -555,7 +567,13 @@ if (realEncounters.kanto) {
     if ((loc.region ?? 'kanto') !== 'kanto' || !loc.routeKey) continue
     if (encounterData[loc.routeKey]) kantoEntries[loc.routeKey] = encounterData[loc.routeKey].encounters
   }
-  levelRoutes('kanto', kantoEntries)
+  levelRoutes(
+    Object.values(mapData)
+      .filter((loc) => (loc.region ?? 'kanto') === 'kanto' && loc.routeKey)
+      .sort((a, b) => (a.unlockOrder ?? 0) - (b.unlockOrder ?? 0))
+      .map((loc) => loc.routeKey),
+    kantoEntries
+  )
   // re-add the Kanto starters as rare Safari Zone finds, at that zone's level
   const safariAfter = encounterData.safariZone
   if (safariAfter) {
@@ -589,12 +607,13 @@ while (routableExpanded) {
       if (!routable.has(evolution.into))
         (routable.add(evolution.into), (routableExpanded = true))
 }
-const raidLevel = (base, entry) => clampLevel(base + (entry.catchRate <= 3 ? 35 : 25))
+// Raids are the region's endgame, so they sit at the top of the 5-75 curve.
+const raidLevel = (entry) => clampLevel(entry.catchRate <= 3 ? LEVEL_MAX : LEVEL_MAX - 5)
 for (const pending of pendingRaids) {
-  const { regionObj, all: regionSpecies, base, raidId, raidNodeName } = pending
+  const { regionObj, all: regionSpecies, raidId, raidNodeName } = pending
   regionObj.raidPool = regionSpecies
     .filter((entry) => !routable.has(entry.key))
-    .map((entry) => ({ speciesKey: entry.key, level: raidLevel(base, entry) }))
+    .map((entry) => ({ speciesKey: entry.key, level: raidLevel(entry) }))
   if (raidId)
     encounterData[raidId] = {
       name: raidNodeName,

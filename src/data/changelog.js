@@ -50,7 +50,7 @@ export const CHANGELOG = [
           heading: 'Route Pacing',
           items: [
             'Wild Pokemon now scale dynamically per zone \u2014 each route sits in a tight level band based on how far into the region it is',
-            'Every region spans a fixed level range, so wilds, trainers, gyms, the Elite Four and the Champion all ramp together',
+            'Every region runs its own 5-75 curve, so wilds, trainers, gyms, the Elite Four and the Champion all ramp together within each region',
           ],
         },
         {

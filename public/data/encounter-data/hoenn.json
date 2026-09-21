@@ -5,38 +5,38 @@
    {
     "speciesKey": "zigzagoon",
     "weight": 24,
-    "minLevel": 37,
-    "maxLevel": 39
+    "minLevel": 5,
+    "maxLevel": 7
    },
    {
     "speciesKey": "wurmple",
     "weight": 11,
-    "minLevel": 37,
-    "maxLevel": 39
+    "minLevel": 5,
+    "maxLevel": 7
    },
    {
     "speciesKey": "poochyena",
     "weight": 1,
-    "minLevel": 37,
-    "maxLevel": 39
+    "minLevel": 5,
+    "maxLevel": 7
    },
    {
     "speciesKey": "treecko",
     "weight": 1,
-    "minLevel": 37,
-    "maxLevel": 39
+    "minLevel": 5,
+    "maxLevel": 7
    },
    {
     "speciesKey": "torchic",
     "weight": 1,
-    "minLevel": 37,
-    "maxLevel": 39
+    "minLevel": 5,
+    "maxLevel": 7
    },
    {
     "speciesKey": "mudkip",
     "weight": 1,
-    "minLevel": 37,
-    "maxLevel": 39
+    "minLevel": 5,
+    "maxLevel": 7
    }
   ]
  },
@@ -46,68 +46,68 @@
    {
     "speciesKey": "magikarp",
     "weight": 33,
-    "minLevel": 37,
-    "maxLevel": 39
+    "minLevel": 7,
+    "maxLevel": 9
    },
    {
     "speciesKey": "corphish",
     "weight": 30,
-    "minLevel": 37,
-    "maxLevel": 39
+    "minLevel": 7,
+    "maxLevel": 9
    },
    {
     "speciesKey": "marill",
     "weight": 25,
-    "minLevel": 37,
-    "maxLevel": 39
+    "minLevel": 7,
+    "maxLevel": 9
    },
    {
     "speciesKey": "zigzagoon",
     "weight": 15,
-    "minLevel": 37,
-    "maxLevel": 39
+    "minLevel": 7,
+    "maxLevel": 9
    },
    {
     "speciesKey": "goldeen",
     "weight": 13,
-    "minLevel": 37,
-    "maxLevel": 39
+    "minLevel": 7,
+    "maxLevel": 9
    },
    {
     "speciesKey": "lotad",
     "weight": 9,
-    "minLevel": 37,
-    "maxLevel": 39
+    "minLevel": 7,
+    "maxLevel": 9
    },
    {
     "speciesKey": "seedot",
     "weight": 9,
-    "minLevel": 37,
-    "maxLevel": 39
+    "minLevel": 7,
+    "maxLevel": 9
    },
    {
     "speciesKey": "poochyena",
     "weight": 8,
-    "minLevel": 37,
-    "maxLevel": 39
+    "minLevel": 7,
+    "maxLevel": 9
    },
    {
     "speciesKey": "wurmple",
     "weight": 8,
-    "minLevel": 37,
-    "maxLevel": 39
+    "minLevel": 7,
+    "maxLevel": 9
    },
    {
     "speciesKey": "ralts",
     "weight": 1,
-    "minLevel": 37,
-    "maxLevel": 39
+    "minLevel": 7,
+    "maxLevel": 9
    },
    {
     "speciesKey": "surskit",
     "weight": 1,
-    "minLevel": 37,
-    "maxLevel": 39
+    "minLevel": 7,
+    "maxLevel": 9
    }
   ]
  },
@@ -117,50 +117,50 @@
    {
     "speciesKey": "magikarp",
     "weight": 33,
-    "minLevel": 38,
-    "maxLevel": 40
+    "minLevel": 9,
+    "maxLevel": 11
    },
    {
     "speciesKey": "tentacool",
     "weight": 28,
-    "minLevel": 38,
-    "maxLevel": 40
+    "minLevel": 9,
+    "maxLevel": 11
    },
    {
     "speciesKey": "wailmer",
     "weight": 20,
-    "minLevel": 38,
-    "maxLevel": 40
+    "minLevel": 9,
+    "maxLevel": 11
    },
    {
     "speciesKey": "zigzagoon",
     "weight": 15,
-    "minLevel": 38,
-    "maxLevel": 40
+    "minLevel": 9,
+    "maxLevel": 11
    },
    {
     "speciesKey": "sharpedo",
     "weight": 10,
-    "minLevel": 38,
-    "maxLevel": 40
+    "minLevel": 9,
+    "maxLevel": 11
    },
    {
     "speciesKey": "poochyena",
     "weight": 9,
-    "minLevel": 38,
-    "maxLevel": 40
+    "minLevel": 9,
+    "maxLevel": 11
    },
    {
     "speciesKey": "wingull",
     "weight": 1,
-    "minLevel": 38,
-    "maxLevel": 40
+    "minLevel": 9,
+    "maxLevel": 11
    },
    {
     "speciesKey": "pelipper",
     "weight": 1,
-    "minLevel": 38,
-    "maxLevel": 40
+    "minLevel": 9,
+    "maxLevel": 11
    }
   ]
  },
@@ -170,50 +170,50 @@
    {
     "speciesKey": "magikarp",
     "weight": 75,
-    "minLevel": 37,
-    "maxLevel": 39
+    "minLevel": 11,
+    "maxLevel": 13
    },
    {
     "speciesKey": "wingull",
     "weight": 26,
-    "minLevel": 37,
-    "maxLevel": 39
+    "minLevel": 11,
+    "maxLevel": 13
    },
    {
     "speciesKey": "zigzagoon",
     "weight": 24,
-    "minLevel": 37,
-    "maxLevel": 39
+    "minLevel": 11,
+    "maxLevel": 13
    },
    {
     "speciesKey": "poochyena",
     "weight": 10,
-    "minLevel": 37,
-    "maxLevel": 39
+    "minLevel": 11,
+    "maxLevel": 13
    },
    {
     "speciesKey": "marill",
     "weight": 5,
-    "minLevel": 37,
-    "maxLevel": 39
+    "minLevel": 11,
+    "maxLevel": 13
    },
    {
     "speciesKey": "wurmple",
     "weight": 5,
-    "minLevel": 37,
-    "maxLevel": 39
+    "minLevel": 11,
+    "maxLevel": 13
    },
    {
     "speciesKey": "taillow",
     "weight": 3,
-    "minLevel": 37,
-    "maxLevel": 39
+    "minLevel": 11,
+    "maxLevel": 13
    },
    {
     "speciesKey": "pelipper",
     "weight": 1,
-    "minLevel": 37,
-    "maxLevel": 39
+    "minLevel": 11,
+    "maxLevel": 13
    }
   ]
  },
@@ -223,32 +223,32 @@
    {
     "speciesKey": "magikarp",
     "weight": 33,
-    "minLevel": 39,
-    "maxLevel": 41
+    "minLevel": 13,
+    "maxLevel": 15
    },
    {
     "speciesKey": "wailmer",
     "weight": 30,
-    "minLevel": 39,
-    "maxLevel": 41
+    "minLevel": 13,
+    "maxLevel": 15
    },
    {
     "speciesKey": "tentacool",
     "weight": 28,
-    "minLevel": 39,
-    "maxLevel": 41
+    "minLevel": 13,
+    "maxLevel": 15
    },
    {
     "speciesKey": "wingull",
     "weight": 9,
-    "minLevel": 39,
-    "maxLevel": 41
+    "minLevel": 13,
+    "maxLevel": 15
    },
    {
     "speciesKey": "pelipper",
     "weight": 1,
-    "minLevel": 39,
-    "maxLevel": 41
+    "minLevel": 13,
+    "maxLevel": 15
    }
   ]
  },
@@ -258,32 +258,32 @@
    {
     "speciesKey": "magikarp",
     "weight": 33,
-    "minLevel": 39,
-    "maxLevel": 41
+    "minLevel": 15,
+    "maxLevel": 17
    },
    {
     "speciesKey": "wailmer",
     "weight": 30,
-    "minLevel": 39,
-    "maxLevel": 41
+    "minLevel": 15,
+    "maxLevel": 17
    },
    {
     "speciesKey": "tentacool",
     "weight": 28,
-    "minLevel": 39,
-    "maxLevel": 41
+    "minLevel": 15,
+    "maxLevel": 17
    },
    {
     "speciesKey": "wingull",
     "weight": 9,
-    "minLevel": 39,
-    "maxLevel": 41
+    "minLevel": 15,
+    "maxLevel": 17
    },
    {
     "speciesKey": "pelipper",
     "weight": 1,
-    "minLevel": 39,
-    "maxLevel": 41
+    "minLevel": 15,
+    "maxLevel": 17
    }
   ]
  },
@@ -293,32 +293,32 @@
    {
     "speciesKey": "magikarp",
     "weight": 33,
-    "minLevel": 39,
-    "maxLevel": 41
+    "minLevel": 17,
+    "maxLevel": 19
    },
    {
     "speciesKey": "wailmer",
     "weight": 30,
-    "minLevel": 39,
-    "maxLevel": 41
+    "minLevel": 17,
+    "maxLevel": 19
    },
    {
     "speciesKey": "tentacool",
     "weight": 28,
-    "minLevel": 39,
-    "maxLevel": 41
+    "minLevel": 17,
+    "maxLevel": 19
    },
    {
     "speciesKey": "wingull",
     "weight": 9,
-    "minLevel": 39,
-    "maxLevel": 41
+    "minLevel": 17,
+    "maxLevel": 19
    },
    {
     "speciesKey": "pelipper",
     "weight": 1,
-    "minLevel": 39,
-    "maxLevel": 41
+    "minLevel": 17,
+    "maxLevel": 19
    }
   ]
  },
@@ -328,32 +328,32 @@
    {
     "speciesKey": "magikarp",
     "weight": 33,
-    "minLevel": 39,
-    "maxLevel": 41
+    "minLevel": 19,
+    "maxLevel": 21
    },
    {
     "speciesKey": "wailmer",
     "weight": 30,
-    "minLevel": 39,
-    "maxLevel": 41
+    "minLevel": 19,
+    "maxLevel": 21
    },
    {
     "speciesKey": "tentacool",
     "weight": 28,
-    "minLevel": 39,
-    "maxLevel": 41
+    "minLevel": 19,
+    "maxLevel": 21
    },
    {
     "speciesKey": "wingull",
     "weight": 9,
-    "minLevel": 39,
-    "maxLevel": 41
+    "minLevel": 19,
+    "maxLevel": 21
    },
    {
     "speciesKey": "pelipper",
     "weight": 1,
-    "minLevel": 39,
-    "maxLevel": 41
+    "minLevel": 19,
+    "maxLevel": 21
    }
   ]
  },
@@ -363,32 +363,32 @@
    {
     "speciesKey": "magikarp",
     "weight": 33,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 21,
+    "maxLevel": 23
    },
    {
     "speciesKey": "wailmer",
     "weight": 30,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 21,
+    "maxLevel": 23
    },
    {
     "speciesKey": "tentacool",
     "weight": 28,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 21,
+    "maxLevel": 23
    },
    {
     "speciesKey": "wingull",
     "weight": 9,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 21,
+    "maxLevel": 23
    },
    {
     "speciesKey": "pelipper",
     "weight": 1,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 21,
+    "maxLevel": 23
    }
   ]
  },
@@ -398,80 +398,80 @@
    {
     "speciesKey": "magikarp",
     "weight": 33,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 24,
+    "maxLevel": 26
    },
    {
     "speciesKey": "wailmer",
     "weight": 30,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 24,
+    "maxLevel": 26
    },
    {
     "speciesKey": "tentacool",
     "weight": 28,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 24,
+    "maxLevel": 26
    },
    {
     "speciesKey": "magnemite",
     "weight": 15,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 24,
+    "maxLevel": 26
    },
    {
     "speciesKey": "wingull",
     "weight": 11,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 24,
+    "maxLevel": 26
    },
    {
     "speciesKey": "minun",
     "weight": 10,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 24,
+    "maxLevel": 26
    },
    {
     "speciesKey": "electrike",
     "weight": 8,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 24,
+    "maxLevel": 26
    },
    {
     "speciesKey": "poochyena",
     "weight": 5,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 24,
+    "maxLevel": 26
    },
    {
     "speciesKey": "zigzagoon",
     "weight": 5,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 24,
+    "maxLevel": 26
    },
    {
     "speciesKey": "gulpin",
     "weight": 4,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 24,
+    "maxLevel": 26
    },
    {
     "speciesKey": "oddish",
     "weight": 3,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 24,
+    "maxLevel": 26
    },
    {
     "speciesKey": "pelipper",
     "weight": 1,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 24,
+    "maxLevel": 26
    },
    {
     "speciesKey": "plusle",
     "weight": 1,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 24,
+    "maxLevel": 26
    }
   ]
  },
@@ -481,62 +481,62 @@
    {
     "speciesKey": "magikarp",
     "weight": 33,
-    "minLevel": 43,
-    "maxLevel": 45
+    "minLevel": 26,
+    "maxLevel": 28
    },
    {
     "speciesKey": "barboach",
     "weight": 30,
-    "minLevel": 43,
-    "maxLevel": 45
+    "minLevel": 26,
+    "maxLevel": 28
    },
    {
     "speciesKey": "sandshrew",
     "weight": 25,
-    "minLevel": 43,
-    "maxLevel": 45
+    "minLevel": 26,
+    "maxLevel": 28
    },
    {
     "speciesKey": "geodude",
     "weight": 25,
-    "minLevel": 43,
-    "maxLevel": 45
+    "minLevel": 26,
+    "maxLevel": 28
    },
    {
     "speciesKey": "marill",
     "weight": 25,
-    "minLevel": 43,
-    "maxLevel": 45
+    "minLevel": 26,
+    "maxLevel": 28
    },
    {
     "speciesKey": "goldeen",
     "weight": 13,
-    "minLevel": 43,
-    "maxLevel": 45
+    "minLevel": 26,
+    "maxLevel": 28
    },
    {
     "speciesKey": "trapinch",
     "weight": 9,
-    "minLevel": 43,
-    "maxLevel": 45
+    "minLevel": 26,
+    "maxLevel": 28
    },
    {
     "speciesKey": "baltoy",
     "weight": 6,
-    "minLevel": 43,
-    "maxLevel": 45
+    "minLevel": 26,
+    "maxLevel": 28
    },
    {
     "speciesKey": "cacnea",
     "weight": 2,
-    "minLevel": 43,
-    "maxLevel": 45
+    "minLevel": 26,
+    "maxLevel": 28
    },
    {
     "speciesKey": "surskit",
     "weight": 1,
-    "minLevel": 43,
-    "maxLevel": 45
+    "minLevel": 26,
+    "maxLevel": 28
    }
   ]
  },
@@ -546,20 +546,20 @@
    {
     "speciesKey": "numel",
     "weight": 16,
-    "minLevel": 38,
-    "maxLevel": 40
+    "minLevel": 28,
+    "maxLevel": 30
    },
    {
     "speciesKey": "machop",
     "weight": 9,
-    "minLevel": 38,
-    "maxLevel": 40
+    "minLevel": 28,
+    "maxLevel": 30
    },
    {
     "speciesKey": "marill",
     "weight": 6,
-    "minLevel": 38,
-    "maxLevel": 40
+    "minLevel": 28,
+    "maxLevel": 30
    }
   ]
  },
@@ -569,26 +569,26 @@
    {
     "speciesKey": "spinda",
     "weight": 24,
-    "minLevel": 44,
-    "maxLevel": 46
+    "minLevel": 30,
+    "maxLevel": 32
    },
    {
     "speciesKey": "sandshrew",
     "weight": 6,
-    "minLevel": 44,
-    "maxLevel": 46
+    "minLevel": 30,
+    "maxLevel": 32
    },
    {
     "speciesKey": "slugma",
     "weight": 6,
-    "minLevel": 44,
-    "maxLevel": 46
+    "minLevel": 30,
+    "maxLevel": 32
    },
    {
     "speciesKey": "skarmory",
     "weight": 1,
-    "minLevel": 44,
-    "maxLevel": 46
+    "minLevel": 30,
+    "maxLevel": 32
    }
   ]
  },
@@ -598,80 +598,80 @@
    {
     "speciesKey": "magikarp",
     "weight": 33,
-    "minLevel": 38,
-    "maxLevel": 40
+    "minLevel": 32,
+    "maxLevel": 34
    },
    {
     "speciesKey": "barboach",
     "weight": 30,
-    "minLevel": 38,
-    "maxLevel": 40
+    "minLevel": 32,
+    "maxLevel": 34
    },
    {
     "speciesKey": "geodude",
     "weight": 25,
-    "minLevel": 38,
-    "maxLevel": 40
+    "minLevel": 32,
+    "maxLevel": 34
    },
    {
     "speciesKey": "marill",
     "weight": 25,
-    "minLevel": 38,
-    "maxLevel": 40
+    "minLevel": 32,
+    "maxLevel": 34
    },
    {
     "speciesKey": "swablu",
     "weight": 18,
-    "minLevel": 38,
-    "maxLevel": 40
+    "minLevel": 32,
+    "maxLevel": 34
    },
    {
     "speciesKey": "goldeen",
     "weight": 13,
-    "minLevel": 38,
-    "maxLevel": 40
+    "minLevel": 32,
+    "maxLevel": 34
    },
    {
     "speciesKey": "lotad",
     "weight": 9,
-    "minLevel": 38,
-    "maxLevel": 40
+    "minLevel": 32,
+    "maxLevel": 34
    },
    {
     "speciesKey": "seedot",
     "weight": 9,
-    "minLevel": 38,
-    "maxLevel": 40
+    "minLevel": 32,
+    "maxLevel": 34
    },
    {
     "speciesKey": "lombre",
     "weight": 5,
-    "minLevel": 38,
-    "maxLevel": 40
+    "minLevel": 32,
+    "maxLevel": 34
    },
    {
     "speciesKey": "zangoose",
     "weight": 5,
-    "minLevel": 38,
-    "maxLevel": 40
+    "minLevel": 32,
+    "maxLevel": 34
    },
    {
     "speciesKey": "seviper",
     "weight": 2,
-    "minLevel": 38,
-    "maxLevel": 40
+    "minLevel": 32,
+    "maxLevel": 34
    },
    {
     "speciesKey": "nuzleaf",
     "weight": 1,
-    "minLevel": 38,
-    "maxLevel": 40
+    "minLevel": 32,
+    "maxLevel": 34
    },
    {
     "speciesKey": "surskit",
     "weight": 1,
-    "minLevel": 38,
-    "maxLevel": 40
+    "minLevel": 32,
+    "maxLevel": 34
    }
   ]
  },
@@ -681,56 +681,56 @@
    {
     "speciesKey": "magikarp",
     "weight": 33,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 34,
+    "maxLevel": 36
    },
    {
     "speciesKey": "wailmer",
     "weight": 30,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 34,
+    "maxLevel": 36
    },
    {
     "speciesKey": "tentacool",
     "weight": 28,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 34,
+    "maxLevel": 36
    },
    {
     "speciesKey": "swablu",
     "weight": 25,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 34,
+    "maxLevel": 36
    },
    {
     "speciesKey": "wingull",
     "weight": 11,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 34,
+    "maxLevel": 36
    },
    {
     "speciesKey": "taillow",
     "weight": 10,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 34,
+    "maxLevel": 36
    },
    {
     "speciesKey": "jigglypuff",
     "weight": 3,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 34,
+    "maxLevel": 36
    },
    {
     "speciesKey": "swellow",
     "weight": 3,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 34,
+    "maxLevel": 36
    },
    {
     "speciesKey": "pelipper",
     "weight": 1,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 34,
+    "maxLevel": 36
    }
   ]
  },
@@ -740,44 +740,44 @@
    {
     "speciesKey": "zigzagoon",
     "weight": 15,
-    "minLevel": 38,
-    "maxLevel": 40
+    "minLevel": 36,
+    "maxLevel": 38
    },
    {
     "speciesKey": "nincada",
     "weight": 9,
-    "minLevel": 38,
-    "maxLevel": 40
+    "minLevel": 36,
+    "maxLevel": 38
    },
    {
     "speciesKey": "poochyena",
     "weight": 7,
-    "minLevel": 38,
-    "maxLevel": 40
+    "minLevel": 36,
+    "maxLevel": 38
    },
    {
     "speciesKey": "taillow",
     "weight": 5,
-    "minLevel": 38,
-    "maxLevel": 40
+    "minLevel": 36,
+    "maxLevel": 38
    },
    {
     "speciesKey": "whismur",
     "weight": 5,
-    "minLevel": 38,
-    "maxLevel": 40
+    "minLevel": 36,
+    "maxLevel": 38
    },
    {
     "speciesKey": "abra",
     "weight": 3,
-    "minLevel": 38,
-    "maxLevel": 40
+    "minLevel": 36,
+    "maxLevel": 38
    },
    {
     "speciesKey": "skitty",
     "weight": 1,
-    "minLevel": 38,
-    "maxLevel": 40
+    "minLevel": 36,
+    "maxLevel": 38
    }
   ]
  },
@@ -787,74 +787,74 @@
    {
     "speciesKey": "magikarp",
     "weight": 33,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 38,
+    "maxLevel": 40
    },
    {
     "speciesKey": "corphish",
     "weight": 30,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 38,
+    "maxLevel": 40
    },
    {
     "speciesKey": "oddish",
     "weight": 15,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 38,
+    "maxLevel": 40
    },
    {
     "speciesKey": "zigzagoon",
     "weight": 15,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 38,
+    "maxLevel": 40
    },
    {
     "speciesKey": "goldeen",
     "weight": 13,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 38,
+    "maxLevel": 40
    },
    {
     "speciesKey": "roselia",
     "weight": 9,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 38,
+    "maxLevel": 40
    },
    {
     "speciesKey": "poochyena",
     "weight": 8,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 38,
+    "maxLevel": 40
    },
    {
     "speciesKey": "illumise",
     "weight": 5,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 38,
+    "maxLevel": 40
    },
    {
     "speciesKey": "marill",
     "weight": 1,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 38,
+    "maxLevel": 40
    },
    {
     "speciesKey": "seedot",
     "weight": 1,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 38,
+    "maxLevel": 40
    },
    {
     "speciesKey": "surskit",
     "weight": 1,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 38,
+    "maxLevel": 40
    },
    {
     "speciesKey": "volbeat",
     "weight": 1,
-    "minLevel": 40,
-    "maxLevel": 42
+    "minLevel": 38,
+    "maxLevel": 40
    }
   ]
  },
@@ -864,68 +864,68 @@
    {
     "speciesKey": "magikarp",
     "weight": 33,
-    "minLevel": 43,
-    "maxLevel": 45
+    "minLevel": 40,
+    "maxLevel": 42
    },
    {
     "speciesKey": "tentacool",
     "weight": 28,
-    "minLevel": 43,
-    "maxLevel": 45
+    "minLevel": 40,
+    "maxLevel": 42
    },
    {
     "speciesKey": "carvanha",
     "weight": 20,
-    "minLevel": 43,
-    "maxLevel": 45
+    "minLevel": 40,
+    "maxLevel": 42
    },
    {
     "speciesKey": "electrike",
     "weight": 15,
-    "minLevel": 43,
-    "maxLevel": 45
+    "minLevel": 40,
+    "maxLevel": 42
    },
    {
     "speciesKey": "sharpedo",
     "weight": 10,
-    "minLevel": 43,
-    "maxLevel": 45
+    "minLevel": 40,
+    "maxLevel": 42
    },
    {
     "speciesKey": "wingull",
     "weight": 9,
-    "minLevel": 43,
-    "maxLevel": 45
+    "minLevel": 40,
+    "maxLevel": 42
    },
    {
     "speciesKey": "zigzagoon",
     "weight": 8,
-    "minLevel": 43,
-    "maxLevel": 45
+    "minLevel": 40,
+    "maxLevel": 42
    },
    {
     "speciesKey": "linoone",
     "weight": 3,
-    "minLevel": 43,
-    "maxLevel": 45
+    "minLevel": 40,
+    "maxLevel": 42
    },
    {
     "speciesKey": "manectric",
     "weight": 3,
-    "minLevel": 43,
-    "maxLevel": 45
+    "minLevel": 40,
+    "maxLevel": 42
    },
    {
     "speciesKey": "pelipper",
     "weight": 1,
-    "minLevel": 43,
-    "maxLevel": 45
+    "minLevel": 40,
+    "maxLevel": 42
    },
    {
     "speciesKey": "kecleon",
     "weight": 1,
-    "minLevel": 43,
-    "maxLevel": 45
+    "minLevel": 40,
+    "maxLevel": 42
    }
   ]
  },
@@ -935,62 +935,62 @@
    {
     "speciesKey": "magikarp",
     "weight": 33,
-    "minLevel": 44,
-    "maxLevel": 46
+    "minLevel": 42,
+    "maxLevel": 44
    },
    {
     "speciesKey": "carvanha",
     "weight": 30,
-    "minLevel": 44,
-    "maxLevel": 46
+    "minLevel": 42,
+    "maxLevel": 44
    },
    {
     "speciesKey": "tentacool",
     "weight": 28,
-    "minLevel": 44,
-    "maxLevel": 46
+    "minLevel": 42,
+    "maxLevel": 44
    },
    {
     "speciesKey": "oddish",
     "weight": 25,
-    "minLevel": 44,
-    "maxLevel": 46
+    "minLevel": 42,
+    "maxLevel": 44
    },
    {
     "speciesKey": "feebas",
     "weight": 13,
-    "minLevel": 44,
-    "maxLevel": 46
+    "minLevel": 42,
+    "maxLevel": 44
    },
    {
     "speciesKey": "wingull",
     "weight": 9,
-    "minLevel": 44,
-    "maxLevel": 46
+    "minLevel": 42,
+    "maxLevel": 44
    },
    {
     "speciesKey": "zigzagoon",
     "weight": 8,
-    "minLevel": 44,
-    "maxLevel": 46
+    "minLevel": 42,
+    "maxLevel": 44
    },
    {
     "speciesKey": "linoone",
     "weight": 8,
-    "minLevel": 44,
-    "maxLevel": 46
+    "minLevel": 42,
+    "maxLevel": 44
    },
    {
     "speciesKey": "tropius",
     "weight": 2,
-    "minLevel": 44,
-    "maxLevel": 46
+    "minLevel": 42,
+    "maxLevel": 44
    },
    {
     "speciesKey": "pelipper",
     "weight": 1,
-    "minLevel": 44,
-    "maxLevel": 46
+    "minLevel": 42,
+    "maxLevel": 44
    }
   ]
  },
@@ -1083,86 +1083,86 @@
    {
     "speciesKey": "magikarp",
     "weight": 33,
-    "minLevel": 45,
-    "maxLevel": 47
+    "minLevel": 46,
+    "maxLevel": 48
    },
    {
     "speciesKey": "wailmer",
     "weight": 30,
-    "minLevel": 45,
-    "maxLevel": 47
+    "minLevel": 46,
+    "maxLevel": 48
    },
    {
     "speciesKey": "tentacool",
     "weight": 28,
-    "minLevel": 45,
-    "maxLevel": 47
+    "minLevel": 46,
+    "maxLevel": 48
    },
    {
     "speciesKey": "shuppet",
     "weight": 15,
-    "minLevel": 45,
-    "maxLevel": 47
+    "minLevel": 46,
+    "maxLevel": 48
    },
    {
     "speciesKey": "wingull",
     "weight": 9,
-    "minLevel": 45,
-    "maxLevel": 47
+    "minLevel": 46,
+    "maxLevel": 48
    },
    {
     "speciesKey": "duskull",
     "weight": 8,
-    "minLevel": 45,
-    "maxLevel": 47
+    "minLevel": 46,
+    "maxLevel": 48
    },
    {
     "speciesKey": "poochyena",
     "weight": 5,
-    "minLevel": 45,
-    "maxLevel": 47
+    "minLevel": 46,
+    "maxLevel": 48
    },
    {
     "speciesKey": "mightyena",
     "weight": 5,
-    "minLevel": 45,
-    "maxLevel": 47
+    "minLevel": 46,
+    "maxLevel": 48
    },
    {
     "speciesKey": "zigzagoon",
     "weight": 5,
-    "minLevel": 45,
-    "maxLevel": 47
+    "minLevel": 46,
+    "maxLevel": 48
    },
    {
     "speciesKey": "linoone",
     "weight": 5,
-    "minLevel": 45,
-    "maxLevel": 47
+    "minLevel": 46,
+    "maxLevel": 48
    },
    {
     "speciesKey": "oddish",
     "weight": 4,
-    "minLevel": 45,
-    "maxLevel": 47
+    "minLevel": 46,
+    "maxLevel": 48
    },
    {
     "speciesKey": "gloom",
     "weight": 1,
-    "minLevel": 45,
-    "maxLevel": 47
+    "minLevel": 46,
+    "maxLevel": 48
    },
    {
     "speciesKey": "pelipper",
     "weight": 1,
-    "minLevel": 45,
-    "maxLevel": 47
+    "minLevel": 46,
+    "maxLevel": 48
    },
    {
     "speciesKey": "kecleon",
     "weight": 1,
-    "minLevel": 45,
-    "maxLevel": 47
+    "minLevel": 46,
+    "maxLevel": 48
    }
   ]
  },
@@ -1172,38 +1172,38 @@
    {
     "speciesKey": "magikarp",
     "weight": 33,
-    "minLevel": 41,
-    "maxLevel": 43
+    "minLevel": 48,
+    "maxLevel": 50
    },
    {
     "speciesKey": "tentacool",
     "weight": 28,
-    "minLevel": 41,
-    "maxLevel": 43
+    "minLevel": 48,
+    "maxLevel": 50
    },
    {
     "speciesKey": "wailmer",
     "weight": 20,
-    "minLevel": 41,
-    "maxLevel": 43
+    "minLevel": 48,
+    "maxLevel": 50
    },
    {
     "speciesKey": "sharpedo",
     "weight": 10,
-    "minLevel": 41,
-    "maxLevel": 43
+    "minLevel": 48,
+    "maxLevel": 50
    },
    {
     "speciesKey": "wingull",
     "weight": 9,
-    "minLevel": 41,
-    "maxLevel": 43
+    "minLevel": 48,
+    "maxLevel": 50
    },
    {
     "speciesKey": "pelipper",
     "weight": 1,
-    "minLevel": 41,
-    "maxLevel": 43
+    "minLevel": 48,
+    "maxLevel": 50
    }
   ]
  },
@@ -1213,86 +1213,86 @@
    {
     "speciesKey": "magikarp",
     "weight": 33,
-    "minLevel": 45,
-    "maxLevel": 47
+    "minLevel": 50,
+    "maxLevel": 52
    },
    {
     "speciesKey": "wailmer",
     "weight": 30,
-    "minLevel": 45,
-    "maxLevel": 47
+    "minLevel": 50,
+    "maxLevel": 52
    },
    {
     "speciesKey": "tentacool",
     "weight": 28,
-    "minLevel": 45,
-    "maxLevel": 47
+    "minLevel": 50,
+    "maxLevel": 52
    },
    {
     "speciesKey": "shuppet",
     "weight": 15,
-    "minLevel": 45,
-    "maxLevel": 47
+    "minLevel": 50,
+    "maxLevel": 52
    },
    {
     "speciesKey": "wingull",
     "weight": 9,
-    "minLevel": 45,
-    "maxLevel": 47
+    "minLevel": 50,
+    "maxLevel": 52
    },
    {
     "speciesKey": "duskull",
     "weight": 8,
-    "minLevel": 45,
-    "maxLevel": 47
+    "minLevel": 50,
+    "maxLevel": 52
    },
    {
     "speciesKey": "poochyena",
     "weight": 5,
-    "minLevel": 45,
-    "maxLevel": 47
+    "minLevel": 50,
+    "maxLevel": 52
    },
    {
     "speciesKey": "mightyena",
     "weight": 5,
-    "minLevel": 45,
-    "maxLevel": 47
+    "minLevel": 50,
+    "maxLevel": 52
    },
    {
     "speciesKey": "zigzagoon",
     "weight": 5,
-    "minLevel": 45,
-    "maxLevel": 47
+    "minLevel": 50,
+    "maxLevel": 52
    },
    {
     "speciesKey": "linoone",
     "weight": 5,
-    "minLevel": 45,
-    "maxLevel": 47
+    "minLevel": 50,
+    "maxLevel": 52
    },
    {
     "speciesKey": "oddish",
     "weight": 4,
-    "minLevel": 45,
-    "maxLevel": 47
+    "minLevel": 50,
+    "maxLevel": 52
    },
    {
     "speciesKey": "gloom",
     "weight": 1,
-    "minLevel": 45,
-    "maxLevel": 47
+    "minLevel": 50,
+    "maxLevel": 52
    },
    {
     "speciesKey": "pelipper",
     "weight": 1,
-    "minLevel": 45,
-    "maxLevel": 47
+    "minLevel": 50,
+    "maxLevel": 52
    },
    {
     "speciesKey": "kecleon",
     "weight": 1,
-    "minLevel": 45,
-    "maxLevel": 47
+    "minLevel": 50,
+    "maxLevel": 52
    }
   ]
  },
@@ -1302,56 +1302,56 @@
    {
     "speciesKey": "magikarp",
     "weight": 33,
-    "minLevel": 44,
-    "maxLevel": 46
+    "minLevel": 52,
+    "maxLevel": 54
    },
    {
     "speciesKey": "tentacool",
     "weight": 28,
-    "minLevel": 44,
-    "maxLevel": 46
+    "minLevel": 52,
+    "maxLevel": 54
    },
    {
     "speciesKey": "wailmer",
     "weight": 20,
-    "minLevel": 44,
-    "maxLevel": 46
+    "minLevel": 52,
+    "maxLevel": 54
    },
    {
     "speciesKey": "clamperl",
     "weight": 16,
-    "minLevel": 44,
-    "maxLevel": 46
+    "minLevel": 52,
+    "maxLevel": 54
    },
    {
     "speciesKey": "sharpedo",
     "weight": 10,
-    "minLevel": 44,
-    "maxLevel": 46
+    "minLevel": 52,
+    "maxLevel": 54
    },
    {
     "speciesKey": "wingull",
     "weight": 9,
-    "minLevel": 44,
-    "maxLevel": 46
+    "minLevel": 52,
+    "maxLevel": 54
    },
    {
     "speciesKey": "chinchou",
     "weight": 8,
-    "minLevel": 44,
-    "maxLevel": 46
+    "minLevel": 52,
+    "maxLevel": 54
    },
    {
     "speciesKey": "pelipper",
     "weight": 1,
-    "minLevel": 44,
-    "maxLevel": 46
+    "minLevel": 52,
+    "maxLevel": 54
    },
    {
     "speciesKey": "relicanth",
     "weight": 1,
-    "minLevel": 44,
-    "maxLevel": 46
+    "minLevel": 52,
+    "maxLevel": 54
    }
   ]
  },
@@ -1361,38 +1361,38 @@
    {
     "speciesKey": "magikarp",
     "weight": 33,
-    "minLevel": 41,
-    "maxLevel": 43
+    "minLevel": 54,
+    "maxLevel": 56
    },
    {
     "speciesKey": "tentacool",
     "weight": 28,
-    "minLevel": 41,
-    "maxLevel": 43
+    "minLevel": 54,
+    "maxLevel": 56
    },
    {
     "speciesKey": "wailmer",
     "weight": 20,
-    "minLevel": 41,
-    "maxLevel": 43
+    "minLevel": 54,
+    "maxLevel": 56
    },
    {
     "speciesKey": "sharpedo",
     "weight": 10,
-    "minLevel": 41,
-    "maxLevel": 43
+    "minLevel": 54,
+    "maxLevel": 56
    },
    {
     "speciesKey": "wingull",
     "weight": 9,
-    "minLevel": 41,
-    "maxLevel": 43
+    "minLevel": 54,
+    "maxLevel": 56
    },
    {
     "speciesKey": "pelipper",
     "weight": 1,
-    "minLevel": 41,
-    "maxLevel": 43
+    "minLevel": 54,
+    "maxLevel": 56
    }
   ]
  },
@@ -1402,56 +1402,56 @@
    {
     "speciesKey": "magikarp",
     "weight": 33,
-    "minLevel": 45,
-    "maxLevel": 47
+    "minLevel": 57,
+    "maxLevel": 59
    },
    {
     "speciesKey": "tentacool",
     "weight": 28,
-    "minLevel": 45,
-    "maxLevel": 47
+    "minLevel": 57,
+    "maxLevel": 59
    },
    {
     "speciesKey": "wailmer",
     "weight": 20,
-    "minLevel": 45,
-    "maxLevel": 47
+    "minLevel": 57,
+    "maxLevel": 59
    },
    {
     "speciesKey": "clamperl",
     "weight": 16,
-    "minLevel": 45,
-    "maxLevel": 47
+    "minLevel": 57,
+    "maxLevel": 59
    },
    {
     "speciesKey": "sharpedo",
     "weight": 10,
-    "minLevel": 45,
-    "maxLevel": 47
+    "minLevel": 57,
+    "maxLevel": 59
    },
    {
     "speciesKey": "wingull",
     "weight": 9,
-    "minLevel": 45,
-    "maxLevel": 47
+    "minLevel": 57,
+    "maxLevel": 59
    },
    {
     "speciesKey": "chinchou",
     "weight": 8,
-    "minLevel": 45,
-    "maxLevel": 47
+    "minLevel": 57,
+    "maxLevel": 59
    },
    {
     "speciesKey": "pelipper",
     "weight": 1,
-    "minLevel": 45,
-    "maxLevel": 47
+    "minLevel": 57,
+    "maxLevel": 59
    },
    {
     "speciesKey": "relicanth",
     "weight": 1,
-    "minLevel": 45,
-    "maxLevel": 47
+    "minLevel": 57,
+    "maxLevel": 59
    }
   ]
  },
@@ -1461,38 +1461,38 @@
    {
     "speciesKey": "magikarp",
     "weight": 33,
-    "minLevel": 41,
-    "maxLevel": 43
+    "minLevel": 59,
+    "maxLevel": 61
    },
    {
     "speciesKey": "tentacool",
     "weight": 28,
-    "minLevel": 41,
-    "maxLevel": 43
+    "minLevel": 59,
+    "maxLevel": 61
    },
    {
     "speciesKey": "wailmer",
     "weight": 20,
-    "minLevel": 41,
-    "maxLevel": 43
+    "minLevel": 59,
+    "maxLevel": 61
    },
    {
     "speciesKey": "sharpedo",
     "weight": 10,
-    "minLevel": 41,
-    "maxLevel": 43
+    "minLevel": 59,
+    "maxLevel": 61
    },
    {
     "speciesKey": "wingull",
     "weight": 9,
-    "minLevel": 41,
-    "maxLevel": 43
+    "minLevel": 59,
+    "maxLevel": 61
    },
    {
     "speciesKey": "pelipper",
     "weight": 1,
-    "minLevel": 41,
-    "maxLevel": 43
+    "minLevel": 59,
+    "maxLevel": 61
    }
   ]
  },
@@ -1502,44 +1502,44 @@
    {
     "speciesKey": "magikarp",
     "weight": 33,
-    "minLevel": 41,
-    "maxLevel": 43
+    "minLevel": 61,
+    "maxLevel": 63
    },
    {
     "speciesKey": "tentacool",
     "weight": 23,
-    "minLevel": 41,
-    "maxLevel": 43
+    "minLevel": 61,
+    "maxLevel": 63
    },
    {
     "speciesKey": "wailmer",
     "weight": 16,
-    "minLevel": 41,
-    "maxLevel": 43
+    "minLevel": 61,
+    "maxLevel": 63
    },
    {
     "speciesKey": "luvdisc",
     "weight": 15,
-    "minLevel": 41,
-    "maxLevel": 43
+    "minLevel": 61,
+    "maxLevel": 63
    },
    {
     "speciesKey": "wingull",
     "weight": 9,
-    "minLevel": 41,
-    "maxLevel": 43
+    "minLevel": 61,
+    "maxLevel": 63
    },
    {
     "speciesKey": "corsola",
     "weight": 4,
-    "minLevel": 41,
-    "maxLevel": 43
+    "minLevel": 61,
+    "maxLevel": 63
    },
    {
     "speciesKey": "pelipper",
     "weight": 1,
-    "minLevel": 41,
-    "maxLevel": 43
+    "minLevel": 61,
+    "maxLevel": 63
    }
   ]
  },
@@ -1549,44 +1549,44 @@
    {
     "speciesKey": "magikarp",
     "weight": 33,
-    "minLevel": 42,
-    "maxLevel": 44
+    "minLevel": 63,
+    "maxLevel": 65
    },
    {
     "speciesKey": "tentacool",
     "weight": 28,
-    "minLevel": 42,
-    "maxLevel": 44
+    "minLevel": 63,
+    "maxLevel": 65
    },
    {
     "speciesKey": "wailmer",
     "weight": 20,
-    "minLevel": 42,
-    "maxLevel": 44
+    "minLevel": 63,
+    "maxLevel": 65
    },
    {
     "speciesKey": "sharpedo",
     "weight": 10,
-    "minLevel": 42,
-    "maxLevel": 44
+    "minLevel": 63,
+    "maxLevel": 65
    },
    {
     "speciesKey": "wingull",
     "weight": 9,
-    "minLevel": 42,
-    "maxLevel": 44
+    "minLevel": 63,
+    "maxLevel": 65
    },
    {
     "speciesKey": "pelipper",
     "weight": 1,
-    "minLevel": 42,
-    "maxLevel": 44
+    "minLevel": 63,
+    "maxLevel": 65
    },
    {
     "speciesKey": "wailord",
     "weight": 1,
-    "minLevel": 42,
-    "maxLevel": 44
+    "minLevel": 63,
+    "maxLevel": 65
    }
   ]
  },
@@ -1596,44 +1596,44 @@
    {
     "speciesKey": "magikarp",
     "weight": 33,
-    "minLevel": 42,
-    "maxLevel": 44
+    "minLevel": 65,
+    "maxLevel": 67
    },
    {
     "speciesKey": "tentacool",
     "weight": 28,
-    "minLevel": 42,
-    "maxLevel": 44
+    "minLevel": 65,
+    "maxLevel": 67
    },
    {
     "speciesKey": "wynaut",
     "weight": 25,
-    "minLevel": 42,
-    "maxLevel": 44
+    "minLevel": 65,
+    "maxLevel": 67
    },
    {
     "speciesKey": "wailmer",
     "weight": 20,
-    "minLevel": 42,
-    "maxLevel": 44
+    "minLevel": 65,
+    "maxLevel": 67
    },
    {
     "speciesKey": "sharpedo",
     "weight": 10,
-    "minLevel": 42,
-    "maxLevel": 44
+    "minLevel": 65,
+    "maxLevel": 67
    },
    {
     "speciesKey": "wingull",
     "weight": 9,
-    "minLevel": 42,
-    "maxLevel": 44
+    "minLevel": 65,
+    "maxLevel": 67
    },
    {
     "speciesKey": "pelipper",
     "weight": 1,
-    "minLevel": 42,
-    "maxLevel": 44
+    "minLevel": 65,
+    "maxLevel": 67
    }
   ]
  },
@@ -1643,38 +1643,38 @@
    {
     "speciesKey": "magikarp",
     "weight": 33,
-    "minLevel": 42,
-    "maxLevel": 44
+    "minLevel": 67,
+    "maxLevel": 69
    },
    {
     "speciesKey": "tentacool",
     "weight": 28,
-    "minLevel": 42,
-    "maxLevel": 44
+    "minLevel": 67,
+    "maxLevel": 69
    },
    {
     "speciesKey": "wailmer",
     "weight": 20,
-    "minLevel": 42,
-    "maxLevel": 44
+    "minLevel": 67,
+    "maxLevel": 69
    },
    {
     "speciesKey": "sharpedo",
     "weight": 10,
-    "minLevel": 42,
-    "maxLevel": 44
+    "minLevel": 67,
+    "maxLevel": 69
    },
    {
     "speciesKey": "wingull",
     "weight": 9,
-    "minLevel": 42,
-    "maxLevel": 44
+    "minLevel": 67,
+    "maxLevel": 69
    },
    {
     "speciesKey": "pelipper",
     "weight": 1,
-    "minLevel": 42,
-    "maxLevel": 44
+    "minLevel": 67,
+    "maxLevel": 69
    }
   ]
  },
@@ -1684,44 +1684,44 @@
    {
     "speciesKey": "magikarp",
     "weight": 33,
-    "minLevel": 42,
-    "maxLevel": 44
+    "minLevel": 69,
+    "maxLevel": 71
    },
    {
     "speciesKey": "tentacool",
     "weight": 28,
-    "minLevel": 42,
-    "maxLevel": 44
+    "minLevel": 69,
+    "maxLevel": 71
    },
    {
     "speciesKey": "wailmer",
     "weight": 16,
-    "minLevel": 42,
-    "maxLevel": 44
+    "minLevel": 69,
+    "maxLevel": 71
    },
    {
     "speciesKey": "sharpedo",
     "weight": 10,
-    "minLevel": 42,
-    "maxLevel": 44
+    "minLevel": 69,
+    "maxLevel": 71
    },
    {
     "speciesKey": "wingull",
     "weight": 9,
-    "minLevel": 42,
-    "maxLevel": 44
+    "minLevel": 69,
+    "maxLevel": 71
    },
    {
     "speciesKey": "horsea",
     "weight": 4,
-    "minLevel": 42,
-    "maxLevel": 44
+    "minLevel": 69,
+    "maxLevel": 71
    },
    {
     "speciesKey": "pelipper",
     "weight": 1,
-    "minLevel": 42,
-    "maxLevel": 44
+    "minLevel": 69,
+    "maxLevel": 71
    }
   ]
  },
@@ -1731,44 +1731,44 @@
    {
     "speciesKey": "magikarp",
     "weight": 33,
-    "minLevel": 43,
-    "maxLevel": 45
+    "minLevel": 71,
+    "maxLevel": 73
    },
    {
     "speciesKey": "tentacool",
     "weight": 28,
-    "minLevel": 43,
-    "maxLevel": 45
+    "minLevel": 71,
+    "maxLevel": 73
    },
    {
     "speciesKey": "wailmer",
     "weight": 16,
-    "minLevel": 43,
-    "maxLevel": 45
+    "minLevel": 71,
+    "maxLevel": 73
    },
    {
     "speciesKey": "sharpedo",
     "weight": 10,
-    "minLevel": 43,
-    "maxLevel": 45
+    "minLevel": 71,
+    "maxLevel": 73
    },
    {
     "speciesKey": "wingull",
     "weight": 9,
-    "minLevel": 43,
-    "maxLevel": 45
+    "minLevel": 71,
+    "maxLevel": 73
    },
    {
     "speciesKey": "horsea",
     "weight": 4,
-    "minLevel": 43,
-    "maxLevel": 45
+    "minLevel": 71,
+    "maxLevel": 73
    },
    {
     "speciesKey": "pelipper",
     "weight": 1,
-    "minLevel": 43,
-    "maxLevel": 45
+    "minLevel": 71,
+    "maxLevel": 73
    }
   ]
  },
@@ -1778,44 +1778,44 @@
    {
     "speciesKey": "magikarp",
     "weight": 33,
-    "minLevel": 43,
-    "maxLevel": 45
+    "minLevel": 73,
+    "maxLevel": 75
    },
    {
     "speciesKey": "tentacool",
     "weight": 28,
-    "minLevel": 43,
-    "maxLevel": 45
+    "minLevel": 73,
+    "maxLevel": 75
    },
    {
     "speciesKey": "wailmer",
     "weight": 16,
-    "minLevel": 43,
-    "maxLevel": 45
+    "minLevel": 73,
+    "maxLevel": 75
    },
    {
     "speciesKey": "sharpedo",
     "weight": 10,
-    "minLevel": 43,
-    "maxLevel": 45
+    "minLevel": 73,
+    "maxLevel": 75
    },
    {
     "speciesKey": "wingull",
     "weight": 9,
-    "minLevel": 43,
-    "maxLevel": 45
+    "minLevel": 73,
+    "maxLevel": 75
    },
    {
     "speciesKey": "horsea",
     "weight": 4,
-    "minLevel": 43,
-    "maxLevel": 45
+    "minLevel": 73,
+    "maxLevel": 75
    },
    {
     "speciesKey": "pelipper",
     "weight": 1,
-    "minLevel": 43,
-    "maxLevel": 45
+    "minLevel": 73,
+    "maxLevel": 75
    }
   ]
  },
@@ -1825,98 +1825,98 @@
    {
     "speciesKey": "mawile",
     "weight": 1,
-    "minLevel": 62,
-    "maxLevel": 62
+    "minLevel": 70,
+    "maxLevel": 70
    },
    {
     "speciesKey": "aron",
     "weight": 1,
-    "minLevel": 62,
-    "maxLevel": 62
+    "minLevel": 70,
+    "maxLevel": 70
    },
    {
     "speciesKey": "lileep",
     "weight": 1,
-    "minLevel": 62,
-    "maxLevel": 62
+    "minLevel": 70,
+    "maxLevel": 70
    },
    {
     "speciesKey": "cradily",
     "weight": 1,
-    "minLevel": 62,
-    "maxLevel": 62
+    "minLevel": 70,
+    "maxLevel": 70
    },
    {
     "speciesKey": "anorith",
     "weight": 1,
-    "minLevel": 62,
-    "maxLevel": 62
+    "minLevel": 70,
+    "maxLevel": 70
    },
    {
     "speciesKey": "armaldo",
     "weight": 1,
-    "minLevel": 62,
-    "maxLevel": 62
+    "minLevel": 70,
+    "maxLevel": 70
    },
    {
     "speciesKey": "regirock",
     "weight": 1,
-    "minLevel": 72,
-    "maxLevel": 72
+    "minLevel": 75,
+    "maxLevel": 75
    },
    {
     "speciesKey": "regice",
     "weight": 1,
-    "minLevel": 72,
-    "maxLevel": 72
+    "minLevel": 75,
+    "maxLevel": 75
    },
    {
     "speciesKey": "registeel",
     "weight": 1,
-    "minLevel": 72,
-    "maxLevel": 72
+    "minLevel": 75,
+    "maxLevel": 75
    },
    {
     "speciesKey": "latias",
     "weight": 1,
-    "minLevel": 72,
-    "maxLevel": 72
+    "minLevel": 75,
+    "maxLevel": 75
    },
    {
     "speciesKey": "latios",
     "weight": 1,
-    "minLevel": 72,
-    "maxLevel": 72
+    "minLevel": 75,
+    "maxLevel": 75
    },
    {
     "speciesKey": "kyogre",
     "weight": 1,
-    "minLevel": 72,
-    "maxLevel": 72
+    "minLevel": 75,
+    "maxLevel": 75
    },
    {
     "speciesKey": "groudon",
     "weight": 1,
-    "minLevel": 72,
-    "maxLevel": 72
+    "minLevel": 75,
+    "maxLevel": 75
    },
    {
     "speciesKey": "rayquaza",
     "weight": 1,
-    "minLevel": 62,
-    "maxLevel": 62
+    "minLevel": 70,
+    "maxLevel": 70
    },
    {
     "speciesKey": "jirachi",
     "weight": 1,
-    "minLevel": 72,
-    "maxLevel": 72
+    "minLevel": 75,
+    "maxLevel": 75
    },
    {
     "speciesKey": "deoxys",
     "weight": 1,
-    "minLevel": 72,
-    "maxLevel": 72
+    "minLevel": 75,
+    "maxLevel": 75
    }
   ]
  }

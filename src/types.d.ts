@@ -55,6 +55,8 @@ type BattlePokemon = {
   status?: string | null
   statusTurns?: number
   flinch?: boolean
+  /** A roaming legendary, which may flee the battle. */
+  isRoamer?: boolean
   [key: string]: any
 }
 

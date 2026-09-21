@@ -1,8 +1,8 @@
 // Split from src/game/logic.js — see tools/decompile/split-logic.mjs
 
-import { shinyCharmMinOddsChance, shinyFullOddsChance, shinyWithCharmChance } from '../data/config.js'
+import { shinyCharmMinOddsChance, shinyFullOddsChance, shinyWithCharmChance, roamerEncounterChance } from '../data/config.js'
 import { activeItems, evolutionItems, pokeBalls } from '../data/items.js'
-import { GENERATION_DEX_RANGES, encounterData, gymLeaderData, isSpeciesCharmed, mapData, moveData, pokemonSpecies } from '../data/gameData.js'
+import { GENERATION_DEX_RANGES, encounterData, gymLeaderData, isSpeciesCharmed, mapData, moveData, pokemonSpecies, regions } from '../data/gameData.js'
 import { calculateExpYield, calculatePokemonStats, getLevelUpResults, getPerfectIVs, resolvePokemonMoves } from './pokemon.js'
 
 /** Gym ids grouped by region, so `badgesRequired` gates count that region only. */
@@ -311,11 +311,35 @@ export function shinyChainMultiplier(speciesKey, chain) {
 }
 
 /**
+ * Roll a region's roaming legendary: one of its uncaught Raid Island
+ * legendaries. Returns null most of the time (or when they are all caught).
+ * @param {string} regionId
+ * @param {string[]} pokedexCaught
+ * @param {Set<number>} completedGenerationSet
+ * @returns {{ species: Species, speciesKey: string, level: number, isShiny: boolean, isRoamer: boolean } | null}
+ */
+export function resolveRoamer(regionId, pokedexCaught, completedGenerationSet) {
+  const region = regions.find((candidate) => candidate.id === regionId),
+    candidates = (region?.raidPool ?? []).filter(
+      (entry) => pokemonSpecies[entry.speciesKey]?.legendary && !pokedexCaught.includes(entry.speciesKey)
+    )
+  if (candidates.length === 0 || Math.random() >= roamerEncounterChance) return null
+  const entry = candidates[Math.floor(Math.random() * candidates.length)]
+  return {
+    species: pokemonSpecies[entry.speciesKey],
+    speciesKey: entry.speciesKey,
+    level: entry.level,
+    isShiny: checkShinyOdds(shinyOddsForSpecies(entry.speciesKey, completedGenerationSet)),
+    isRoamer: !0,
+  }
+}
+
+/**
  * @param {EncounterData} encounterData
  * @param {{ speciesKey: string, multiplier: number }[]} modifiers
  * @param {Set<number>} completedGenerationSet
  * @param {{ speciesKey: string | null, count: number } | undefined} [shinyChain]
- * @returns {{ species: Species, speciesKey: string, level: number, isShiny: boolean }}
+ * @returns {{ species: Species, speciesKey: string, level: number, isShiny: boolean, isRoamer?: boolean }}
  */
 export function resolvePokemonEncounter(encounterData, modifiers, completedGenerationSet, shinyChain) {
   const weightedEncounters = encounterData.encounters.map((encounter) => {

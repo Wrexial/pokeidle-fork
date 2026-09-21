@@ -60,6 +60,13 @@ export const CHANGELOG = [
           ],
         },
         {
+          heading: 'Roaming Legendaries',
+          items: [
+            'A region\u2019s uncaught legends can now show up as a rare roamer on any of its routes',
+            'A roamer may flee each turn \u2014 catch it fast, and once caught it leaves the roaming pool',
+          ],
+        },
+        {
           heading: 'Swarms',
           items: [
             'Occasionally a swarm breaks out on a random unlocked route, making one of its rarer species very common for 50 battles',

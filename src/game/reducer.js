@@ -201,6 +201,7 @@ export function gameReducer(state, action) {
       let newPhase = state.phase
       ;(event.type === 'victory' && (newPhase = 'victory'),
         event.type === 'defeat' && (newPhase = 'defeat'),
+        event.type === 'flee' && (newPhase = 'idle'),
         event.type === 'faint' &&
           (event.data?.target === 'enemy'
             ? (newPhase = 'victory')
@@ -209,6 +210,7 @@ export function gameReducer(state, action) {
         enemyPokemon = state.enemyPokemon,
         wildBattlesWon = state.wildBattlesWon,
         battlesWonByLocation = state.battlesWonByLocation
+      event.type === 'flee' && (enemyPokemon = null)
       ;(event.type === 'damage' || event.type === 'recoil' || event.type === 'heal') &&
         event.data &&
         (event.data.target === 'player' && playerPokemon

@@ -9,7 +9,7 @@ import { useGame } from './game/context.js'
 import { attemptCatch, selectAutoCatchBall, selectBestBall, shouldAutoCatch } from './game/catching.js'
 import { createVolatileState, resolveBattleTurn } from './game/combat.js'
 import { calculatePokemonStats, generateIVs, getPerfectIVs, resolvePokemonMoves } from './game/pokemon.js'
-import { awardExperience, checkShinyOdds, resolveActiveModifiers, resolvePokemonEncounter, shinyOddsForSpecies } from './game/progression.js'
+import { awardExperience, checkShinyOdds, resolveActiveModifiers, resolvePokemonEncounter, resolveRoamer, shinyOddsForSpecies } from './game/progression.js'
 
 /**
  * @param {string} text
@@ -210,7 +210,8 @@ export function useGameLoop() {
           const currentEncounterData =
             encounterData[currentGameState.currentRoute]
           if (!currentEncounterData) return
-          const activeSwarm =
+          const regionId = mapData[currentGameState.currentLocation]?.region ?? 'kanto',
+            activeSwarm =
               currentGameState.swarm?.routeKey === currentGameState.currentRoute
                 ? currentGameState.swarm
                 : null,
@@ -233,12 +234,14 @@ export function useGameLoop() {
               currentGameState.activeEffects,
               currentGameState.currentRoute
             ),
-            spawningPokemonData = resolvePokemonEncounter(
-              routeEncounterData,
-              activeModifierMultipliers,
-              completedGenerationSet,
-              currentGameState.shinyChain
-            ),
+            spawningPokemonData =
+              resolveRoamer(regionId, currentGameState.pokedexCaught, completedGenerationSet) ??
+              resolvePokemonEncounter(
+                routeEncounterData,
+                activeModifierMultipliers,
+                completedGenerationSet,
+                currentGameState.shinyChain
+              ),
             pokemonBaseStats = calculatePokemonStats(
               spawningPokemonData.species,
               spawningPokemonData.level,
@@ -262,6 +265,7 @@ export function useGameLoop() {
               speed: pokemonBaseStats.speed,
               moves: pokemonMoves,
               isPlayer: !1,
+              isRoamer: spawningPokemonData.isRoamer ?? !1,
               isShiny: spawningPokemonData.isShiny,
             }
           ;(dispatch({

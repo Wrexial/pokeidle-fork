@@ -1,6 +1,7 @@
 // Split from src/game/logic.js — see tools/decompile/split-logic.mjs
 
 import { typechart } from '../data/moves.js'
+import { roamerFleeChance } from '../data/config.js'
 import { moveData } from '../data/gameData.js'
 
 /** @returns {VolatileState} */
@@ -714,6 +715,13 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1) {
         },
       })
   }
+  // A roaming legendary may flee at the end of the turn.
+  if (enemy.isRoamer && enemy.currentHp > 0 && Math.random() < roamerFleeChance)
+    events.push({
+      type: 'flee',
+      message: `${enemy.name} fled!`,
+      data: {},
+    })
   return events
 }
 

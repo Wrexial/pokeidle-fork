@@ -16,6 +16,11 @@ export const swarmSpawnChance = 0.01
 /** How many wild battles an active swarm lasts. */
 export const swarmBattleCount = 50
 
+/** Chance per wild encounter that a region's roaming legendary appears. */
+export const roamerEncounterChance = 1 / 1500
+/** Chance per turn that a fighting roamer flees. */
+export const roamerFleeChance = 0.2
+
 export let RAID_COOLDOWN_MS = 1 * 1e3
 
 export let defaultCatchSettings = {

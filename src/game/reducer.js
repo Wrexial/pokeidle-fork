@@ -1316,7 +1316,8 @@ export function gameReducer(state, action) {
       if (!tradedPokemon) return state
       const candidates = Object.keys(pokemonSpecies).filter((key) => pokemonSpecies[key].id > 0),
         receivedSpeciesKey = candidates[Math.floor(Math.random() * candidates.length)],
-        receivedIsShiny = checkShinyOdds(wonderTradeShinyOdds),
+        // Undocumented perk: trading a shiny guarantees a shiny back.
+        receivedIsShiny = tradedPokemon.isShiny || checkShinyOdds(wonderTradeShinyOdds),
         receivedPokemon = createPokemon(
           receivedSpeciesKey,
           tradedPokemon.level,

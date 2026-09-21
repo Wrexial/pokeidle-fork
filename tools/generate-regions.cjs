@@ -56,9 +56,9 @@ const CHAMPION_LEVEL = LEVEL_MAX - 5
 const REGION_PROGRESS_BASE = 100000
 // Hand-measured layouts for regions where the scraped force-directed layout
 // doesn't match the real geography. Coordinates are pixels on a reference map
-// (the ORAS Hoenn world map, 1600x1050); the generator converts them to
-// percentages and skips its collision-avoidance shifting so the nodes land
-// exactly where the reference puts them.
+// (Hoenn: the ORAS world map, 1600x1050; Johto: the GSC map, 822x529); the
+// generator converts them to percentages and skips its collision-avoidance
+// shifting so the nodes land exactly where the reference puts them.
 const REGION_MAP_LAYOUTS = {
   hoenn: {
     width: 1600,
@@ -116,6 +116,49 @@ const REGION_MAP_LAYOUTS = {
       'hoenn-route-134': [595, 722],
       league: [1540, 548],
       raid: [1300, 920],
+    },
+  },
+  johto: {
+    width: 822,
+    height: 529,
+    positions: {
+      'new-bark-town': [625, 302],
+      'cherrygrove-city': [510, 315],
+      'violet-city': [430, 188],
+      'azalea-town': [265, 460],
+      'goldenrod-city': [315, 245],
+      'ecruteak-city': [340, 98],
+      'olivine-city': [152, 185],
+      'cianwood-city': [50, 380],
+      'mahogany-town': [538, 140],
+      'blackthorn-city': [640, 78],
+      'johto-route-29': [585, 325],
+      'johto-route-30': [495, 245],
+      'johto-route-31': [425, 233],
+      'johto-route-32': [420, 365],
+      'johto-route-33': [340, 448],
+      'johto-route-34': [260, 345],
+      'johto-route-35': [258, 192],
+      'johto-route-36': [335, 157],
+      'johto-route-37': [330, 128],
+      'johto-route-38': [250, 92],
+      'johto-route-39': [175, 115],
+      'johto-sea-route-40': [40, 195],
+      'johto-sea-route-41': [130, 330],
+      'johto-route-42': [395, 95],
+      'johto-route-43': [500, 67],
+      'johto-route-44': [575, 82],
+      'johto-route-45': [575, 165],
+      'johto-route-46': [560, 255],
+      // Route 47/48 are HGSS-only and off this GSC map; hang them west of
+      // Cianwood, where they sit in HGSS.
+      'johto-route-47': [25, 400],
+      'johto-route-48': [15, 355],
+      'bell-tower': [335, 58],
+      'whirl-islands': [70, 262],
+      'mt-silver': [700, 250],
+      league: [770, 105],
+      raid: [620, 480],
     },
   },
 }

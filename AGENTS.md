@@ -191,6 +191,7 @@ These are loaded by `assets/gameDataInjector.js` (`key` → file):
 | Injector key | File |
 | --- | --- |
 | `pokemonSpecies` | `pokemon-species.json` |
+| `breedingData` | `breeding-data.json` (gender rate + egg groups, see below) |
 | `evolutionData` | `evolution-data.json` |
 | `moveLearnsets` | **`possible-learnsets.json`** |
 | `moveData` | **`possible-moves.json`** |
@@ -356,6 +357,11 @@ One-off scripts used to build the data JSON (not run during dev/build):
   (`tokenShopItems` in `src/data/items.js`). Idempotent; re-run after any
   re-extraction of `evolution-data.json`. Because item evolutions carry no
   `level`, `generate-regions.cjs` gives them a nominal one for team-maturity.
+- `fetch-breeding-data.cjs` — fetches each species' gender rate and egg groups
+  from PokeAPI (form ids resolved to their base species) and writes
+  `public/data/breeding-data.json`, which the Daycare's breeding rules use.
+  Responses are cached under `tools/cache/`, so it's resumable and only hits
+  the network once per id.
 - `download_pokemon_sprites.cjs` — fills the local sprite tree for every id in
   `pokemon-species.json`: static front/back/shiny from PokeAPI, and animated
   front/back/shiny from Gen V for dex ids 1-649 falling back to Pokémon

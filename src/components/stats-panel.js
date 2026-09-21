@@ -6,6 +6,7 @@ import { moveCategoryIcons } from '../data/moves.js'
 import { statBarColors } from '../data/ui.js'
 import { moveData, pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
+import { genderForPokemon, genderSymbol } from '../game/breeding.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
 
 /** @param {{ pokemon: Pokemon, source: 'party' | 'box', partyLength: number, onAction: () => void, onClose: () => void, evolutionInfo?: { entries: { targetName: string, canEvolve: boolean, requirementLabel: string, targetKey: string, itemId?: string }[] } | null, onEvolve?: (index: number) => void, onRelease?: () => void, canRelease?: boolean }} props */
@@ -23,7 +24,8 @@ export function StatsPanel({
   const species = pokemonSpecies[pokemon.speciesKey]
   const { state, dispatch } = useGame(),
     [tradeConfirm, setTradeConfirm] = React.useState(!1),
-    linkCables = state.inventory.linkCable ?? 0
+    linkCables = state.inventory.linkCable ?? 0,
+    gender = genderForPokemon(pokemon)
   if (!species) return null
   const statRows = [
       {
@@ -123,6 +125,16 @@ export function StatsPanel({
                       children: '★',
                     }),
                   pokemon.name,
+                  jsx('span', {
+                    className: `pokemon-gender ${
+                      gender === 'male'
+                        ? 'gender-male'
+                        : gender === 'female'
+                          ? 'gender-female'
+                          : 'gender-none'
+                    }`,
+                    children: genderSymbol(gender),
+                  }),
                 ],
               }),
               jsxs('span', {

@@ -21,6 +21,13 @@ type Species = {
   [key: string]: any
 }
 
+/** Gender rate (-1 genderless, 0 male-only, 8 female-only, else eighths female) + egg groups. */
+type BreedingData = {
+  genderRate: number
+  eggGroups: string[]
+  undiscovered: boolean
+}
+
 /** A move id -> move definition lookup is data-driven; keep it loose. */
 type Move = {
   name: string

@@ -4,7 +4,8 @@ import { RAID_COOLDOWN_MS, breedShinyOdds, breedShinyParentOdds, daycareEggBattl
 import { activeItems, pokeBalls } from '../data/items.js'
 import { elite4Data, encounterData, gymLeaderData, mapData, moveLearnsets, pokemonSpecies, regions } from '../data/gameData.js'
 import { createVolatileState } from './combat.js'
-import { calculatePokemonStats, calculateRequiredExperience, createPokemon, getPreEvolutionChain, resolvePokemonMoves } from './pokemon.js'
+import { calculatePokemonStats, calculateRequiredExperience, createPokemon, resolvePokemonMoves } from './pokemon.js'
+import { canBreed, eggSpeciesKey } from './breeding.js'
 import { checkShinyOdds, computeUnlockedLocations, getRegionUnlockTokens, isActiveEffectItem, loadActivePokemonFromParty, prepareNextBattle, syncActivePokemonIntoParty, tickBattleCounters } from './progression.js'
 
 /** @type {GameState} */
@@ -259,7 +260,7 @@ export function gameReducer(state, action) {
         // Daycare parents make progress toward an egg.
         if (
           daycare.parents.length === 2 &&
-          !daycare.parents.some((parent) => pokemonSpecies[parent.speciesKey]?.legendary) &&
+          canBreed(daycare.parents) &&
           daycare.progress < daycareEggBattles
         )
           daycare = { ...daycare, progress: daycare.progress + 1 }
@@ -1403,10 +1404,9 @@ export function gameReducer(state, action) {
     case 'HATCH_DAYCARE_EGG': {
       const { parents, progress } = state.daycare
       if (parents.length < 2 || progress < daycareEggBattles) return state
-      if (parents.some((parent) => pokemonSpecies[parent.speciesKey]?.legendary)) return state
-      const baseSpeciesKey =
-        getPreEvolutionChain(parents[0].speciesKey)[0] ?? parents[0].speciesKey
-      if (!pokemonSpecies[baseSpeciesKey]) return state
+      if (!canBreed(parents)) return state
+      const baseSpeciesKey = eggSpeciesKey(parents)
+      if (!baseSpeciesKey) return state
       const shinyParent = parents.some((parent) => parent.isShiny),
         egg = createPokemon(
           baseSpeciesKey,

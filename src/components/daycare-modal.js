@@ -4,11 +4,16 @@ import { jsx, jsxs } from 'react/jsx-runtime'
 import { breedShinyOdds, breedShinyParentOdds, daycareEggBattles } from '../data/config.js'
 import { pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
+import { breedingCompatibility, eggSpeciesKey, genderForPokemon, genderSymbol } from '../game/breeding.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
+
+const genderClass = (/** @type {'male' | 'female' | 'genderless'} */ gender) =>
+  gender === 'male' ? 'gender-male' : gender === 'female' ? 'gender-female' : 'gender-none'
 
 /** @param {{ pokemon: Pokemon }} props */
 function ParentSlot({ pokemon }) {
-  const species = pokemonSpecies[pokemon.speciesKey]
+  const species = pokemonSpecies[pokemon.speciesKey],
+    gender = genderForPokemon(pokemon)
   return jsxs('div', {
     className: 'daycare-slot filled',
     children: [
@@ -24,6 +29,10 @@ function ParentSlot({ pokemon }) {
         children: [
           pokemon.isShiny && jsx('span', { className: 'shiny-star', children: '★' }),
           pokemon.name,
+          jsx('span', {
+            className: `pokemon-gender ${genderClass(gender)}`,
+            children: genderSymbol(gender),
+          }),
         ],
       }),
       jsx('span', {
@@ -38,12 +47,13 @@ function ParentSlot({ pokemon }) {
 export function DaycareModal({ onClose }) {
   const { state, dispatch } = useGame(),
     { parents, progress } = state.daycare,
-    breedable =
-      parents.length === 2 &&
-      !parents.some((parent) => pokemonSpecies[parent.speciesKey]?.legendary),
+    compatibility = breedingCompatibility(parents),
+    breedable = compatibility.ok,
     ready = breedable && progress >= daycareEggBattles,
     hasShinyParent = parents.some((parent) => parent.isShiny),
-    shinyOdds = hasShinyParent ? breedShinyParentOdds : breedShinyOdds
+    shinyOdds = hasShinyParent ? breedShinyParentOdds : breedShinyOdds,
+    eggKey = breedable ? eggSpeciesKey(parents) : null,
+    eggSpecies = eggKey ? pokemonSpecies[eggKey] : null
   return jsx('div', {
     className: 'battle-info-overlay',
     onClick: onClose,
@@ -112,10 +122,12 @@ export function DaycareModal({ onClose }) {
                 parents.length < 2
                   ? 'Deposit two Pokemon from their stats panel (open a boxed Pokemon and press Daycare).'
                   : !breedable
-                    ? 'Legendary Pokemon will not breed.'
-                    : `The parents produce an egg after ${daycareEggBattles} battles. Eggs are level 1 base forms with 1 in ${shinyOdds} shiny odds${
-                    hasShinyParent ? ' (boosted by a shiny parent)' : ''
-                  }.`,
+                    ? compatibility.reason
+                    : `${
+                        compatibility.reason
+                      } Eggs hatch into ${eggSpecies?.name ?? 'a base form'} after ${daycareEggBattles} battles, with 1 in ${shinyOdds} shiny odds${
+                        hasShinyParent ? ' (boosted by a shiny parent)' : ''
+                      }.`,
             }),
             breedable &&
               jsxs('div', {

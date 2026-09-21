@@ -11,6 +11,11 @@ const loadedGameData = await startApp()
 
 export let pokemonSpecies = /** @type {Record<string, Species>} */ (loadedGameData.pokemonSpecies)
 
+/** Gender rate + egg groups per species (see tools/fetch-breeding-data.cjs). */
+export let breedingData = /** @type {Record<string, BreedingData>} */ (
+  loadedGameData.breedingData ?? {}
+)
+
 export let evolutionData = /** @type {Record<string, Evolution[]>} */ (loadedGameData.evolutionData)
 
 export let moveLearnsets = /** @type {Record<string, [number, string][]>} */ (

@@ -28,7 +28,8 @@ export const CHANGELOG = [
           heading: 'Daycare',
           items: [
             'Deposit two Pokemon from their stats panel into the Daycare; they produce an Egg after 50 battles',
-            'Eggs hatch into the base form at level 1 with 1 in 4,096 shiny odds \u2014 improved to 1 in 512 if a parent is shiny',
+            'Breeding respects gender and egg groups \u2014 the parents must be opposite genders and share an egg group; Ditto can breed with anything, while genderless and Undiscovered Pokemon need a Ditto (or cannot breed at all)',
+            'Eggs hatch into the mother\u2019s base form at level 1 with 1 in 4,096 shiny odds \u2014 improved to 1 in 512 if a parent is shiny',
           ],
         },
         {

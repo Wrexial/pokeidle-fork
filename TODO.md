@@ -334,6 +334,28 @@ Implementation notes:
 
 Effort: **medium**, high player value (makes the shiny chain a real system).
 
+## 21. Region Unlock Tokens once every region is unlocked
+
+`getRegionUnlockTokens(state) = championsBeaten − (unlockedRegions − 1)`: each
+Champion beat effectively grants one token and a token opens one region. With 9
+regions, unlocking them all takes 8 tokens, so after that the mechanic is dead —
+a leftover token has nothing to open, yet the Town Map still shows the
+token banner / unlock prompt.
+
+- [ ] Stop showing and granting tokens once `unlockedRegions.length ===
+      regions.length` (hide the banner and the unlockable tab styling).
+- [ ] Give leftover tokens a use: convert them to Victory Tokens (the Reward
+      Shop currency), or a one-off bonus (money / a Master Ball / a raid
+      re-roll), so beating the last Champions isn't wasted.
+- [ ] Decide automatic vs manual conversion (e.g. auto-convert on unlocking the
+      last region, or keep them and show a "convert" button).
+
+Relevant code: `getRegionUnlockTokens` (`src/game/progression.js`), the token
+banner + `UNLOCK_REGION` (`src/components/town-map.js`, `src/game/reducer.js`),
+and `victoryTokens`.
+
+Effort: **small**.
+
 ---
 
 ## Useful references when picking these up

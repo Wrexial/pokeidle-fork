@@ -4177,6 +4177,16 @@ img {
     cursor: crosshair
 }
 
+.box-header-actions {
+    position: absolute;
+    left: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 4px;
+    z-index: 2
+}
+
 .box-pokedex-btn {
     font-size: 9px;
     padding: 1px 8px;
@@ -4187,14 +4197,27 @@ img {
     cursor: pointer;
     font-weight: 700;
     line-height: 1;
-    position: absolute;
-    left: 6px;
     box-shadow: 1px 1px #0000004d,inset 1px 1px #ffffff1a
 }
 
 .box-pokedex-btn:hover {
     background: #786050;
     border-color: var(--gold-dark)
+}
+
+@media (max-width: 640px) {
+    .box-header {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 4px
+    }
+
+    .box-header-actions {
+        position: static;
+        transform: none;
+        flex-basis: 100%;
+        justify-content: center
+    }
 }
 
 .pokedex-modal-overlay {

@@ -58,20 +58,25 @@ export function BoxPanel({
           jsxs('div', {
             className: 'box-header',
             children: [
-              jsx('button', {
-                className: 'box-pokedex-btn',
-                onClick: () => setShowPokedex(!0),
-                children: 'Pokedex',
-              }),
-              jsx('button', {
-                className: 'box-pokedex-btn',
-                onClick: () => setShowRecords(!0),
-                children: 'Records',
-              }),
-              jsx('button', {
-                className: 'box-pokedex-btn',
-                onClick: () => setShowDaycare(!0),
-                children: 'Daycare',
+              jsxs('div', {
+                className: 'box-header-actions',
+                children: [
+                  jsx('button', {
+                    className: 'box-pokedex-btn',
+                    onClick: () => setShowPokedex(!0),
+                    children: 'Pokedex',
+                  }),
+                  jsx('button', {
+                    className: 'box-pokedex-btn',
+                    onClick: () => setShowRecords(!0),
+                    children: 'Records',
+                  }),
+                  jsx('button', {
+                    className: 'box-pokedex-btn',
+                    onClick: () => setShowDaycare(!0),
+                    children: 'Daycare',
+                  }),
+                ],
               }),
               jsx('button', {
                 className: 'box-header-arrow',

@@ -49,6 +49,11 @@ const GYM_LEVEL_MIN = 12
 const GYM_LEVEL_MAX = 64
 const E4_LEVEL_MIN = 68
 const CHAMPION_LEVEL = LEVEL_MAX - 5
+// Post-game rematch rosters, used once the player has every badge in the region
+// (gyms) or has beaten the region's Champion (Elite Four / Champion).
+const GYM_REMATCH_LEVEL = 80
+const E4_REMATCH_LEVEL = 90
+const CHAMPION_REMATCH_LEVEL = 92
 // `unlockOrder` is a stable sort key, not a sequence: it is each location's
 // position in its region's route progression (its `rank`), offset by region so
 // later regions sort later. Deriving it instead of counting means adding a zone
@@ -484,8 +489,8 @@ const CHAMPION_TYPES = {
   unova: ['Bug'],
   kalos: ['Fairy'],
   alola: [],
-  galar: [],
-  paldea: ['Psychic'],
+  galar: ['Fire'],
+  paldea: ['Rock'],
 }
 // Route trainers are themed by class so a Bug Catcher isn't fielding starters.
 const TRAINER_CLASS_TYPES = {
@@ -501,6 +506,24 @@ const TRAINER_CLASS_TYPES = {
   ace: [],
   blackbelt: ['Fighting'],
   swimmer: ['Water'],
+}
+// Kanto keeps its hand-curated initial teams; these types only drive the
+// post-game rematch rosters (see the Kanto rematch block near the end).
+const KANTO_GYM_TYPES = {
+  Brock: ['Rock'],
+  Misty: ['Water'],
+  'Lt. Surge': ['Electric'],
+  Erika: ['Grass'],
+  Koga: ['Poison'],
+  Sabrina: ['Psychic'],
+  Blaine: ['Fire'],
+  Giovanni: ['Ground'],
+}
+const KANTO_E4_TYPES = {
+  Lorelei: ['Ice'],
+  Bruno: ['Fighting'],
+  Agatha: ['Ghost'],
+  Lance: ['Dragon'],
 }
 
 const regionMaps = JSON.parse(fs.readFileSync(path.join(__dirname, 'region-maps.json'), 'utf8'))
@@ -614,33 +637,50 @@ const ALL_STARTERS = (() => {
 })()
 const teamPoolForGen = (gen) => {
   const maxId = GEN_RANGES[gen - 1][1]
-  return byId.filter((s) => s.id <= maxId && s.catchRate > 3 && !ALL_STARTERS.has(s.key))
+  return byId.filter(
+    (s) => s.id <= maxId && s.catchRate > 3 && !s.legendary && !ALL_STARTERS.has(s.key)
+  )
 }
 const encounterWeight = (s, idx) => (idx < 3 ? 20 : idx < 8 ? 12 : 6)
+// Post-game rematches pull from the whole national dex so a sparse type (Ghost,
+// Dragon, Ice) still has six strong, on-theme members to choose from.
+const REMATCH_TEAM_POOL = teamPoolForGen(9)
+const totalBaseStats = (species) =>
+  Object.values(species.baseStats ?? {}).reduce((sum, stat) => sum + stat, 0)
+const isFinalEvolution = (speciesKey) => !evolutionData[speciesKey]?.length
 /**
  * Pick a themed team from a species pool. `types` biases the pool to matching
- * Pokemon when there are enough of them (so a Flying gym fields birds and a
- * Bug Catcher fields bugs); otherwise it falls back to the whole pool. Repeats
- * are avoided until the pool is exhausted.
+ * Pokemon when there are enough of them (so a Flying gym fields birds and a Bug
+ * Catcher fields bugs); otherwise it falls back to the whole pool. High-level
+ * (rematch) teams prefer final evolutions, and mixed teams get one strong
+ * Pokemon per type. Repeats are avoided until the pool is exhausted.
  */
 const buildTeam = (list, types, size, baseLevel, step = 1, offset = 0) => {
   if (list.length === 0) return []
+  const preferFinal = baseLevel >= 65,
+    finalsOf = (pool) => (preferFinal ? pool.filter((species) => isFinalEvolution(species.key)) : pool),
+    minimum = Math.min(size, 3)
   let pool = list
   if (types?.length) {
     const typed = list.filter((species) => species.types?.some((type) => types.includes(type)))
-    if (typed.length >= Math.min(size, 3)) pool = typed
+    if (typed.length >= minimum) {
+      const typedFinals = finalsOf(typed)
+      pool = typedFinals.length >= minimum ? typedFinals : typed
+    }
   } else {
-    // Mixed trainers: one Pokemon of each primary type so the team is varied.
-    const distinct = [],
+    // Mixed trainers: the strongest Pokemon of each primary type, so an Ace
+    // Trainer or Champion fields a varied, fully-evolved team.
+    const strong = finalsOf(list).slice().sort((a, b) => totalBaseStats(b) - totalBaseStats(a)),
+      distinct = [],
       seenTypes = new Set()
-    for (const species of list) {
+    for (const species of strong) {
       const primaryType = species.types?.[0]
       if (primaryType && !seenTypes.has(primaryType)) {
         seenTypes.add(primaryType)
         distinct.push(species)
       }
     }
-    if (distinct.length >= size) pool = distinct
+    pool = distinct.length >= size ? distinct : strong.length >= minimum ? strong : list
   }
   const team = [],
     used = new Set()
@@ -1204,6 +1244,14 @@ for (const region of REGIONS) {
         1,
         index * 3
       ),
+      rematchTeam: buildTeam(
+        REMATCH_TEAM_POOL,
+        GYM_TYPES[regionId]?.[index],
+        6,
+        GYM_REMATCH_LEVEL,
+        1,
+        index * 2
+      ),
     })
   })
   const eliteFour = ELITE_FOUR[regionId] ?? []
@@ -1215,15 +1263,18 @@ for (const region of REGIONS) {
       region: regionId,
       spriteKey: trainerSpriteKey(memberName),
       team: buildTeam(roster, E4_TYPES[regionId]?.[i], 5, clampLevel(E4_LEVEL_MIN + i), 1, i * 2),
+      rematchTeam: buildTeam(REMATCH_TEAM_POOL, E4_TYPES[regionId]?.[i], 6, E4_REMATCH_LEVEL, 1, i),
     })
   })
+  const championPool = CHAMPION_TYPES[regionId]?.length ? REMATCH_TEAM_POOL : roster
   champData.push({
     id: `${regionId}-champion`,
     name: CHAMPIONS[regionId],
     title: `${name} Champion`,
     region: regionId,
     spriteKey: trainerSpriteKey(CHAMPIONS[regionId]),
-    team: buildTeam(roster, CHAMPION_TYPES[regionId], 6, clampLevel(CHAMPION_LEVEL), 1, 0),
+    team: buildTeam(roster, CHAMPION_TYPES[regionId], 6, clampLevel(CHAMPION_LEVEL), 1, gen),
+    rematchTeam: buildTeam(championPool, CHAMPION_TYPES[regionId], 6, CHAMPION_REMATCH_LEVEL, 1, gen),
   })
 }
 
@@ -1269,6 +1320,25 @@ if (realEncounters.kanto) {
         })
   }
   console.log('kanto buckets refreshed:', refreshed)
+}
+
+// --- Kanto rematch rosters ---------------------------------------------------
+// Kanto's initial teams and gen3 sprites are hand-curated and kept as-is; only
+// bolt on the post-game rematch rosters so a fully-badged player can re-fight
+// them at the same levels as the generated regions.
+for (const gym of gymData) {
+  if ((gym.region ?? 'kanto') !== 'kanto') continue
+  const types = KANTO_GYM_TYPES[gym.name]
+  if (types) gym.rematchTeam = buildTeam(REMATCH_TEAM_POOL, types, 6, GYM_REMATCH_LEVEL, 1)
+}
+for (const member of e4Data) {
+  if ((member.region ?? 'kanto') !== 'kanto') continue
+  const types = KANTO_E4_TYPES[member.name]
+  if (types) member.rematchTeam = buildTeam(REMATCH_TEAM_POOL, types, 6, E4_REMATCH_LEVEL, 1)
+}
+for (const champion of champData) {
+  if ((champion.region ?? 'kanto') !== 'kanto') continue
+  champion.rematchTeam = buildTeam(teamPoolForGen(1), [], 6, CHAMPION_REMATCH_LEVEL, 1)
 }
 
 // --- raid pools --------------------------------------------------------------

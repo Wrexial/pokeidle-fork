@@ -30,7 +30,33 @@
     "level": 75
    }
   ],
-  "region": "kanto"
+  "region": "kanto",
+  "rematchTeam": [
+   {
+    "speciesKey": "arcanine",
+    "level": 92
+   },
+   {
+    "speciesKey": "snorlax",
+    "level": 93
+   },
+   {
+    "speciesKey": "lapras",
+    "level": 94
+   },
+   {
+    "speciesKey": "jolteon",
+    "level": 95
+   },
+   {
+    "speciesKey": "exeggutor",
+    "level": 96
+   },
+   {
+    "speciesKey": "nidoqueen",
+    "level": 97
+   }
+  ]
  },
  {
   "id": "johto-champion",
@@ -40,28 +66,54 @@
   "spriteKey": "lance",
   "team": [
    {
-    "speciesKey": "dratini",
+    "speciesKey": "dragonite",
     "level": 70
    },
    {
-    "speciesKey": "dragonair",
+    "speciesKey": "kingdra",
     "level": 71
    },
    {
-    "speciesKey": "dragonite",
+    "speciesKey": "dratini",
     "level": 72
    },
    {
-    "speciesKey": "kingdra",
+    "speciesKey": "dragonair",
     "level": 73
    },
    {
-    "speciesKey": "dratini",
+    "speciesKey": "dragonite",
     "level": 74
    },
    {
-    "speciesKey": "dragonair",
+    "speciesKey": "kingdra",
     "level": 75
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "haxorus",
+    "level": 92
+   },
+   {
+    "speciesKey": "druddigon",
+    "level": 93
+   },
+   {
+    "speciesKey": "hydreigon",
+    "level": 94
+   },
+   {
+    "speciesKey": "dragalge",
+    "level": 95
+   },
+   {
+    "speciesKey": "tyrantrum",
+    "level": 96
+   },
+   {
+    "speciesKey": "goodra",
+    "level": 97
    }
   ]
  },
@@ -73,28 +125,54 @@
   "spriteKey": "steven",
   "team": [
    {
-    "speciesKey": "magnemite",
+    "speciesKey": "steelix",
     "level": 70
    },
    {
-    "speciesKey": "magneton",
+    "speciesKey": "scizor",
     "level": 71
    },
    {
-    "speciesKey": "forretress",
+    "speciesKey": "skarmory",
     "level": 72
    },
    {
-    "speciesKey": "steelix",
+    "speciesKey": "mawile",
     "level": 73
    },
    {
-    "speciesKey": "scizor",
+    "speciesKey": "aron",
     "level": 74
    },
    {
-    "speciesKey": "skarmory",
+    "speciesKey": "lairon",
     "level": 75
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "bronzong",
+    "level": 92
+   },
+   {
+    "speciesKey": "magnezone",
+    "level": 93
+   },
+   {
+    "speciesKey": "probopass",
+    "level": 94
+   },
+   {
+    "speciesKey": "excadrill",
+    "level": 95
+   },
+   {
+    "speciesKey": "escavalier",
+    "level": 96
+   },
+   {
+    "speciesKey": "ferrothorn",
+    "level": 97
    }
   ]
  },
@@ -106,28 +184,54 @@
   "spriteKey": "cynthia",
   "team": [
    {
-    "speciesKey": "dratini",
+    "speciesKey": "vibrava",
     "level": 70
    },
    {
-    "speciesKey": "dragonair",
+    "speciesKey": "flygon",
     "level": 71
    },
    {
-    "speciesKey": "dragonite",
+    "speciesKey": "altaria",
     "level": 72
    },
    {
-    "speciesKey": "kingdra",
+    "speciesKey": "bagon",
     "level": 73
    },
    {
-    "speciesKey": "vibrava",
+    "speciesKey": "shelgon",
     "level": 74
    },
    {
-    "speciesKey": "flygon",
+    "speciesKey": "salamence",
     "level": 75
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "hydreigon",
+    "level": 92
+   },
+   {
+    "speciesKey": "dragalge",
+    "level": 93
+   },
+   {
+    "speciesKey": "tyrantrum",
+    "level": 94
+   },
+   {
+    "speciesKey": "goodra",
+    "level": 95
+   },
+   {
+    "speciesKey": "noivern",
+    "level": 96
+   },
+   {
+    "speciesKey": "turtonator",
+    "level": 97
    }
   ]
  },
@@ -139,28 +243,54 @@
   "spriteKey": "alder",
   "team": [
    {
-    "speciesKey": "caterpie",
+    "speciesKey": "forretress",
     "level": 70
    },
    {
-    "speciesKey": "metapod",
+    "speciesKey": "shuckle",
     "level": 71
    },
    {
-    "speciesKey": "butterfree",
+    "speciesKey": "beautifly",
     "level": 72
    },
    {
-    "speciesKey": "weedle",
+    "speciesKey": "dustox",
     "level": 73
    },
    {
-    "speciesKey": "kakuna",
+    "speciesKey": "masquerain",
     "level": 74
    },
    {
-    "speciesKey": "beedrill",
+    "speciesKey": "ninjask",
     "level": 75
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "forretress",
+    "level": 92
+   },
+   {
+    "speciesKey": "shuckle",
+    "level": 93
+   },
+   {
+    "speciesKey": "beautifly",
+    "level": 94
+   },
+   {
+    "speciesKey": "dustox",
+    "level": 95
+   },
+   {
+    "speciesKey": "masquerain",
+    "level": 96
+   },
+   {
+    "speciesKey": "ninjask",
+    "level": 97
    }
   ]
  },
@@ -172,28 +302,54 @@
   "spriteKey": "diantha",
   "team": [
    {
-    "speciesKey": "clefairy",
+    "speciesKey": "whimsicott",
     "level": 70
    },
    {
-    "speciesKey": "clefable",
+    "speciesKey": "florges",
     "level": 71
    },
    {
-    "speciesKey": "jigglypuff",
+    "speciesKey": "aromatisse",
     "level": 72
    },
    {
-    "speciesKey": "wigglytuff",
+    "speciesKey": "slurpuff",
     "level": 73
    },
    {
-    "speciesKey": "mrMime",
+    "speciesKey": "sylveon",
     "level": 74
    },
    {
-    "speciesKey": "cleffa",
+    "speciesKey": "dedenne",
     "level": 75
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "whimsicott",
+    "level": 92
+   },
+   {
+    "speciesKey": "florges",
+    "level": 93
+   },
+   {
+    "speciesKey": "aromatisse",
+    "level": 94
+   },
+   {
+    "speciesKey": "slurpuff",
+    "level": 95
+   },
+   {
+    "speciesKey": "sylveon",
+    "level": 96
+   },
+   {
+    "speciesKey": "dedenne",
+    "level": 97
    }
   ]
  },
@@ -205,28 +361,54 @@
   "spriteKey": "kukui",
   "team": [
    {
-    "speciesKey": "caterpie",
+    "speciesKey": "kingdra",
     "level": 70
    },
    {
-    "speciesKey": "pidgey",
+    "speciesKey": "electivire",
     "level": 71
    },
    {
-    "speciesKey": "ekans",
+    "speciesKey": "crobat",
     "level": 72
    },
    {
-    "speciesKey": "pikachu",
+    "speciesKey": "rhyperior",
     "level": 73
    },
    {
-    "speciesKey": "sandshrew",
+    "speciesKey": "tangrowth",
     "level": 74
    },
    {
-    "speciesKey": "clefairy",
+    "speciesKey": "vanilluxe",
     "level": 75
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "kingdra",
+    "level": 92
+   },
+   {
+    "speciesKey": "electivire",
+    "level": 93
+   },
+   {
+    "speciesKey": "crobat",
+    "level": 94
+   },
+   {
+    "speciesKey": "rhyperior",
+    "level": 95
+   },
+   {
+    "speciesKey": "tangrowth",
+    "level": 96
+   },
+   {
+    "speciesKey": "vanilluxe",
+    "level": 97
    }
   ]
  },
@@ -238,28 +420,54 @@
   "spriteKey": "leon",
   "team": [
    {
-    "speciesKey": "caterpie",
+    "speciesKey": "chandelure",
     "level": 70
    },
    {
-    "speciesKey": "pidgey",
+    "speciesKey": "heatmor",
     "level": 71
    },
    {
-    "speciesKey": "ekans",
+    "speciesKey": "volcarona",
     "level": 72
    },
    {
-    "speciesKey": "pikachu",
+    "speciesKey": "talonflame",
     "level": 73
    },
    {
-    "speciesKey": "sandshrew",
+    "speciesKey": "pyroar",
     "level": 74
    },
    {
-    "speciesKey": "clefairy",
+    "speciesKey": "oricorio",
     "level": 75
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "chandelure",
+    "level": 92
+   },
+   {
+    "speciesKey": "heatmor",
+    "level": 93
+   },
+   {
+    "speciesKey": "volcarona",
+    "level": 94
+   },
+   {
+    "speciesKey": "talonflame",
+    "level": 95
+   },
+   {
+    "speciesKey": "pyroar",
+    "level": 96
+   },
+   {
+    "speciesKey": "oricorio",
+    "level": 97
    }
   ]
  },
@@ -271,28 +479,54 @@
   "spriteKey": "geeta",
   "team": [
    {
-    "speciesKey": "abra",
+    "speciesKey": "cradily",
     "level": 70
    },
    {
-    "speciesKey": "kadabra",
+    "speciesKey": "armaldo",
     "level": 71
    },
    {
-    "speciesKey": "alakazam",
+    "speciesKey": "relicanth",
     "level": 72
    },
    {
-    "speciesKey": "slowpoke",
+    "speciesKey": "rampardos",
     "level": 73
    },
    {
-    "speciesKey": "slowbro",
+    "speciesKey": "bastiodon",
     "level": 74
    },
    {
-    "speciesKey": "drowzee",
+    "speciesKey": "rhyperior",
     "level": 75
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "cradily",
+    "level": 92
+   },
+   {
+    "speciesKey": "armaldo",
+    "level": 93
+   },
+   {
+    "speciesKey": "relicanth",
+    "level": 94
+   },
+   {
+    "speciesKey": "rampardos",
+    "level": 95
+   },
+   {
+    "speciesKey": "bastiodon",
+    "level": 96
+   },
+   {
+    "speciesKey": "rhyperior",
+    "level": 97
    }
   ]
  }

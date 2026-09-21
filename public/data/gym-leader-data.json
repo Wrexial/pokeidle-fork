@@ -17,7 +17,33 @@
     "level": 16
    }
   ],
-  "region": "kanto"
+  "region": "kanto",
+  "rematchTeam": [
+   {
+    "speciesKey": "golem",
+    "level": 80
+   },
+   {
+    "speciesKey": "omastar",
+    "level": 81
+   },
+   {
+    "speciesKey": "kabutops",
+    "level": 82
+   },
+   {
+    "speciesKey": "sudowoodo",
+    "level": 83
+   },
+   {
+    "speciesKey": "shuckle",
+    "level": 84
+   },
+   {
+    "speciesKey": "magcargo",
+    "level": 85
+   }
+  ]
  },
  {
   "id": "misty",
@@ -37,7 +63,33 @@
     "level": 23
    }
   ],
-  "region": "kanto"
+  "region": "kanto",
+  "rematchTeam": [
+   {
+    "speciesKey": "golduck",
+    "level": 80
+   },
+   {
+    "speciesKey": "poliwrath",
+    "level": 81
+   },
+   {
+    "speciesKey": "tentacruel",
+    "level": 82
+   },
+   {
+    "speciesKey": "dewgong",
+    "level": 83
+   },
+   {
+    "speciesKey": "cloyster",
+    "level": 84
+   },
+   {
+    "speciesKey": "kingler",
+    "level": 85
+   }
+  ]
  },
  {
   "id": "surge",
@@ -61,7 +113,33 @@
     "level": 31
    }
   ],
-  "region": "kanto"
+  "region": "kanto",
+  "rematchTeam": [
+   {
+    "speciesKey": "raichu",
+    "level": 80
+   },
+   {
+    "speciesKey": "electrode",
+    "level": 81
+   },
+   {
+    "speciesKey": "jolteon",
+    "level": 82
+   },
+   {
+    "speciesKey": "lanturn",
+    "level": 83
+   },
+   {
+    "speciesKey": "plusle",
+    "level": 84
+   },
+   {
+    "speciesKey": "minun",
+    "level": 85
+   }
+  ]
  },
  {
   "id": "erika",
@@ -85,7 +163,33 @@
     "level": 38
    }
   ],
-  "region": "kanto"
+  "region": "kanto",
+  "rematchTeam": [
+   {
+    "speciesKey": "vileplume",
+    "level": 80
+   },
+   {
+    "speciesKey": "parasect",
+    "level": 81
+   },
+   {
+    "speciesKey": "victreebel",
+    "level": 82
+   },
+   {
+    "speciesKey": "exeggutor",
+    "level": 83
+   },
+   {
+    "speciesKey": "bellossom",
+    "level": 84
+   },
+   {
+    "speciesKey": "jumpluff",
+    "level": 85
+   }
+  ]
  },
  {
   "id": "koga",
@@ -113,7 +217,33 @@
     "level": 46
    }
   ],
-  "region": "kanto"
+  "region": "kanto",
+  "rematchTeam": [
+   {
+    "speciesKey": "arbok",
+    "level": 80
+   },
+   {
+    "speciesKey": "nidoqueen",
+    "level": 81
+   },
+   {
+    "speciesKey": "nidoking",
+    "level": 82
+   },
+   {
+    "speciesKey": "vileplume",
+    "level": 83
+   },
+   {
+    "speciesKey": "venomoth",
+    "level": 84
+   },
+   {
+    "speciesKey": "victreebel",
+    "level": 85
+   }
+  ]
  },
  {
   "id": "sabrina",
@@ -141,7 +271,33 @@
     "level": 53
    }
   ],
-  "region": "kanto"
+  "region": "kanto",
+  "rematchTeam": [
+   {
+    "speciesKey": "hypno",
+    "level": 80
+   },
+   {
+    "speciesKey": "exeggutor",
+    "level": 81
+   },
+   {
+    "speciesKey": "starmie",
+    "level": 82
+   },
+   {
+    "speciesKey": "mrMime",
+    "level": 83
+   },
+   {
+    "speciesKey": "jynx",
+    "level": 84
+   },
+   {
+    "speciesKey": "xatu",
+    "level": 85
+   }
+  ]
  },
  {
   "id": "blaine",
@@ -169,7 +325,33 @@
     "level": 61
    }
   ],
-  "region": "kanto"
+  "region": "kanto",
+  "rematchTeam": [
+   {
+    "speciesKey": "ninetales",
+    "level": 80
+   },
+   {
+    "speciesKey": "arcanine",
+    "level": 81
+   },
+   {
+    "speciesKey": "rapidash",
+    "level": 82
+   },
+   {
+    "speciesKey": "flareon",
+    "level": 83
+   },
+   {
+    "speciesKey": "magcargo",
+    "level": 84
+   },
+   {
+    "speciesKey": "torkoal",
+    "level": 85
+   }
+  ]
  },
  {
   "id": "giovanni",
@@ -201,7 +383,33 @@
     "level": 68
    }
   ],
-  "region": "kanto"
+  "region": "kanto",
+  "rematchTeam": [
+   {
+    "speciesKey": "sandslash",
+    "level": 80
+   },
+   {
+    "speciesKey": "nidoqueen",
+    "level": 81
+   },
+   {
+    "speciesKey": "nidoking",
+    "level": 82
+   },
+   {
+    "speciesKey": "dugtrio",
+    "level": 83
+   },
+   {
+    "speciesKey": "golem",
+    "level": 84
+   },
+   {
+    "speciesKey": "marowak",
+    "level": 85
+   }
+  ]
  },
  {
   "id": "johto-gym-1",
@@ -224,6 +432,32 @@
    {
     "speciesKey": "pidgeotto",
     "level": 14
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "butterfree",
+    "level": 80
+   },
+   {
+    "speciesKey": "fearow",
+    "level": 81
+   },
+   {
+    "speciesKey": "farfetchd",
+    "level": 82
+   },
+   {
+    "speciesKey": "dodrio",
+    "level": 83
+   },
+   {
+    "speciesKey": "noctowl",
+    "level": 84
+   },
+   {
+    "speciesKey": "ledian",
+    "level": 85
    }
   ]
  },
@@ -249,6 +483,32 @@
     "speciesKey": "beedrill",
     "level": 21
    }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "venomoth",
+    "level": 80
+   },
+   {
+    "speciesKey": "ledian",
+    "level": 81
+   },
+   {
+    "speciesKey": "ariados",
+    "level": 82
+   },
+   {
+    "speciesKey": "forretress",
+    "level": 83
+   },
+   {
+    "speciesKey": "shuckle",
+    "level": 84
+   },
+   {
+    "speciesKey": "beautifly",
+    "level": 85
+   }
   ]
  },
  {
@@ -272,6 +532,32 @@
    {
     "speciesKey": "wigglytuff",
     "level": 29
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "farfetchd",
+    "level": 80
+   },
+   {
+    "speciesKey": "dodrio",
+    "level": 81
+   },
+   {
+    "speciesKey": "tauros",
+    "level": 82
+   },
+   {
+    "speciesKey": "ditto",
+    "level": 83
+   },
+   {
+    "speciesKey": "snorlax",
+    "level": 84
+   },
+   {
+    "speciesKey": "furret",
+    "level": 85
    }
   ]
  },
@@ -297,6 +583,32 @@
     "speciesKey": "misdreavus",
     "level": 36
    }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "cofagrigus",
+    "level": 80
+   },
+   {
+    "speciesKey": "jellicent",
+    "level": 81
+   },
+   {
+    "speciesKey": "chandelure",
+    "level": 82
+   },
+   {
+    "speciesKey": "golurk",
+    "level": 83
+   },
+   {
+    "speciesKey": "trevenant",
+    "level": 84
+   },
+   {
+    "speciesKey": "gourgeist",
+    "level": 85
+   }
   ]
  },
  {
@@ -320,6 +632,32 @@
    {
     "speciesKey": "machop",
     "level": 44
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "conkeldurr",
+    "level": 80
+   },
+   {
+    "speciesKey": "throh",
+    "level": 81
+   },
+   {
+    "speciesKey": "sawk",
+    "level": 82
+   },
+   {
+    "speciesKey": "scrafty",
+    "level": 83
+   },
+   {
+    "speciesKey": "mienshao",
+    "level": 84
+   },
+   {
+    "speciesKey": "pangoro",
+    "level": 85
    }
   ]
  },
@@ -345,6 +683,32 @@
     "speciesKey": "skarmory",
     "level": 51
    }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "durant",
+    "level": 80
+   },
+   {
+    "speciesKey": "klefki",
+    "level": 81
+   },
+   {
+    "speciesKey": "togedemaru",
+    "level": 82
+   },
+   {
+    "speciesKey": "corviknight",
+    "level": 83
+   },
+   {
+    "speciesKey": "perrserker",
+    "level": 84
+   },
+   {
+    "speciesKey": "copperajah",
+    "level": 85
+   }
   ]
  },
  {
@@ -368,6 +732,32 @@
    {
     "speciesKey": "jynx",
     "level": 59
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "cryogonal",
+    "level": 80
+   },
+   {
+    "speciesKey": "aurorus",
+    "level": 81
+   },
+   {
+    "speciesKey": "avalugg",
+    "level": 82
+   },
+   {
+    "speciesKey": "crabominable",
+    "level": 83
+   },
+   {
+    "speciesKey": "mr. rime",
+    "level": 84
+   },
+   {
+    "speciesKey": "frosmoth",
+    "level": 85
    }
   ]
  },
@@ -393,6 +783,32 @@
     "speciesKey": "kingdra",
     "level": 66
    }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "dracozolt",
+    "level": 80
+   },
+   {
+    "speciesKey": "dracovish",
+    "level": 81
+   },
+   {
+    "speciesKey": "duraludon",
+    "level": 82
+   },
+   {
+    "speciesKey": "dragapult",
+    "level": 83
+   },
+   {
+    "speciesKey": "cyclizar",
+    "level": 84
+   },
+   {
+    "speciesKey": "tatsugiri",
+    "level": 85
+   }
   ]
  },
  {
@@ -416,6 +832,32 @@
    {
     "speciesKey": "golem",
     "level": 14
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "golem",
+    "level": 80
+   },
+   {
+    "speciesKey": "omastar",
+    "level": 81
+   },
+   {
+    "speciesKey": "kabutops",
+    "level": 82
+   },
+   {
+    "speciesKey": "sudowoodo",
+    "level": 83
+   },
+   {
+    "speciesKey": "shuckle",
+    "level": 84
+   },
+   {
+    "speciesKey": "magcargo",
+    "level": 85
    }
   ]
  },
@@ -441,6 +883,32 @@
     "speciesKey": "machamp",
     "level": 21
    }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "hitmonlee",
+    "level": 80
+   },
+   {
+    "speciesKey": "hitmonchan",
+    "level": 81
+   },
+   {
+    "speciesKey": "hitmontop",
+    "level": 82
+   },
+   {
+    "speciesKey": "breloom",
+    "level": 83
+   },
+   {
+    "speciesKey": "hariyama",
+    "level": 84
+   },
+   {
+    "speciesKey": "toxicroak",
+    "level": 85
+   }
   ]
  },
  {
@@ -464,6 +932,32 @@
    {
     "speciesKey": "chinchou",
     "level": 29
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "plusle",
+    "level": 80
+   },
+   {
+    "speciesKey": "minun",
+    "level": 81
+   },
+   {
+    "speciesKey": "luxray",
+    "level": 82
+   },
+   {
+    "speciesKey": "pachirisu",
+    "level": 83
+   },
+   {
+    "speciesKey": "magnezone",
+    "level": 84
+   },
+   {
+    "speciesKey": "electivire",
+    "level": 85
    }
   ]
  },
@@ -489,6 +983,32 @@
     "speciesKey": "houndoom",
     "level": 36
    }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "magmortar",
+    "level": 80
+   },
+   {
+    "speciesKey": "simisear",
+    "level": 81
+   },
+   {
+    "speciesKey": "chandelure",
+    "level": 82
+   },
+   {
+    "speciesKey": "heatmor",
+    "level": 83
+   },
+   {
+    "speciesKey": "volcarona",
+    "level": 84
+   },
+   {
+    "speciesKey": "talonflame",
+    "level": 85
+   }
   ]
  },
  {
@@ -512,6 +1032,32 @@
    {
     "speciesKey": "lickitung",
     "level": 44
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "snorlax",
+    "level": 80
+   },
+   {
+    "speciesKey": "furret",
+    "level": 81
+   },
+   {
+    "speciesKey": "noctowl",
+    "level": 82
+   },
+   {
+    "speciesKey": "smeargle",
+    "level": 83
+   },
+   {
+    "speciesKey": "miltank",
+    "level": 84
+   },
+   {
+    "speciesKey": "blissey",
+    "level": 85
    }
   ]
  },
@@ -537,6 +1083,32 @@
     "speciesKey": "ledyba",
     "level": 51
    }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "mantine",
+    "level": 80
+   },
+   {
+    "speciesKey": "skarmory",
+    "level": 81
+   },
+   {
+    "speciesKey": "beautifly",
+    "level": 82
+   },
+   {
+    "speciesKey": "swellow",
+    "level": 83
+   },
+   {
+    "speciesKey": "pelipper",
+    "level": 84
+   },
+   {
+    "speciesKey": "masquerain",
+    "level": 85
+   }
   ]
  },
  {
@@ -550,16 +1122,42 @@
   "spriteKey": "tate",
   "team": [
    {
-    "speciesKey": "wobbuffet",
+    "speciesKey": "girafarig",
     "level": 57
    },
    {
-    "speciesKey": "girafarig",
+    "speciesKey": "smoochum",
     "level": 58
    },
    {
-    "speciesKey": "smoochum",
+    "speciesKey": "ralts",
     "level": 59
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "solrock",
+    "level": 80
+   },
+   {
+    "speciesKey": "claydol",
+    "level": 81
+   },
+   {
+    "speciesKey": "chimecho",
+    "level": 82
+   },
+   {
+    "speciesKey": "bronzong",
+    "level": 83
+   },
+   {
+    "speciesKey": "musharna",
+    "level": 84
+   },
+   {
+    "speciesKey": "swoobat",
+    "level": 85
    }
   ]
  },
@@ -585,6 +1183,32 @@
     "speciesKey": "lapras",
     "level": 66
    }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "politoed",
+    "level": 80
+   },
+   {
+    "speciesKey": "quagsire",
+    "level": 81
+   },
+   {
+    "speciesKey": "slowking",
+    "level": 82
+   },
+   {
+    "speciesKey": "qwilfish",
+    "level": 83
+   },
+   {
+    "speciesKey": "corsola",
+    "level": 84
+   },
+   {
+    "speciesKey": "octillery",
+    "level": 85
+   }
   ]
  },
  {
@@ -608,6 +1232,32 @@
    {
     "speciesKey": "golem",
     "level": 14
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "golem",
+    "level": 80
+   },
+   {
+    "speciesKey": "omastar",
+    "level": 81
+   },
+   {
+    "speciesKey": "kabutops",
+    "level": 82
+   },
+   {
+    "speciesKey": "sudowoodo",
+    "level": 83
+   },
+   {
+    "speciesKey": "shuckle",
+    "level": 84
+   },
+   {
+    "speciesKey": "magcargo",
+    "level": 85
    }
   ]
  },
@@ -633,6 +1283,32 @@
     "speciesKey": "bellsprout",
     "level": 21
    }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "victreebel",
+    "level": 80
+   },
+   {
+    "speciesKey": "exeggutor",
+    "level": 81
+   },
+   {
+    "speciesKey": "bellossom",
+    "level": 82
+   },
+   {
+    "speciesKey": "jumpluff",
+    "level": 83
+   },
+   {
+    "speciesKey": "sunflora",
+    "level": 84
+   },
+   {
+    "speciesKey": "ludicolo",
+    "level": 85
+   }
   ]
  },
  {
@@ -656,6 +1332,32 @@
    {
     "speciesKey": "heracross",
     "level": 29
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "hitmontop",
+    "level": 80
+   },
+   {
+    "speciesKey": "breloom",
+    "level": 81
+   },
+   {
+    "speciesKey": "hariyama",
+    "level": 82
+   },
+   {
+    "speciesKey": "toxicroak",
+    "level": 83
+   },
+   {
+    "speciesKey": "conkeldurr",
+    "level": 84
+   },
+   {
+    "speciesKey": "throh",
+    "level": 85
    }
   ]
  },
@@ -681,6 +1383,32 @@
     "speciesKey": "shellder",
     "level": 36
    }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "seaking",
+    "level": 80
+   },
+   {
+    "speciesKey": "starmie",
+    "level": 81
+   },
+   {
+    "speciesKey": "lapras",
+    "level": 82
+   },
+   {
+    "speciesKey": "vaporeon",
+    "level": 83
+   },
+   {
+    "speciesKey": "omastar",
+    "level": 84
+   },
+   {
+    "speciesKey": "kabutops",
+    "level": 85
+   }
   ]
  },
  {
@@ -704,6 +1432,32 @@
    {
     "speciesKey": "dusknoir",
     "level": 44
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "chandelure",
+    "level": 80
+   },
+   {
+    "speciesKey": "golurk",
+    "level": 81
+   },
+   {
+    "speciesKey": "trevenant",
+    "level": 82
+   },
+   {
+    "speciesKey": "gourgeist",
+    "level": 83
+   },
+   {
+    "speciesKey": "palossand",
+    "level": 84
+   },
+   {
+    "speciesKey": "mimikyu",
+    "level": 85
    }
   ]
  },
@@ -729,6 +1483,32 @@
     "speciesKey": "magnemite",
     "level": 51
    }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "durant",
+    "level": 80
+   },
+   {
+    "speciesKey": "klefki",
+    "level": 81
+   },
+   {
+    "speciesKey": "togedemaru",
+    "level": 82
+   },
+   {
+    "speciesKey": "corviknight",
+    "level": 83
+   },
+   {
+    "speciesKey": "perrserker",
+    "level": 84
+   },
+   {
+    "speciesKey": "copperajah",
+    "level": 85
+   }
   ]
  },
  {
@@ -752,6 +1532,32 @@
    {
     "speciesKey": "dewgong",
     "level": 59
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "cryogonal",
+    "level": 80
+   },
+   {
+    "speciesKey": "aurorus",
+    "level": 81
+   },
+   {
+    "speciesKey": "avalugg",
+    "level": 82
+   },
+   {
+    "speciesKey": "crabominable",
+    "level": 83
+   },
+   {
+    "speciesKey": "mr. rime",
+    "level": 84
+   },
+   {
+    "speciesKey": "frosmoth",
+    "level": 85
    }
   ]
  },
@@ -777,6 +1583,32 @@
     "speciesKey": "magnezone",
     "level": 66
    }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "stunfisk",
+    "level": 80
+   },
+   {
+    "speciesKey": "heliolisk",
+    "level": 81
+   },
+   {
+    "speciesKey": "dedenne",
+    "level": 82
+   },
+   {
+    "speciesKey": "vikavolt",
+    "level": 83
+   },
+   {
+    "speciesKey": "togedemaru",
+    "level": 84
+   },
+   {
+    "speciesKey": "boltund",
+    "level": 85
+   }
   ]
  },
  {
@@ -800,6 +1632,32 @@
    {
     "speciesKey": "vileplume",
     "level": 14
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "vileplume",
+    "level": 80
+   },
+   {
+    "speciesKey": "parasect",
+    "level": 81
+   },
+   {
+    "speciesKey": "victreebel",
+    "level": 82
+   },
+   {
+    "speciesKey": "exeggutor",
+    "level": 83
+   },
+   {
+    "speciesKey": "bellossom",
+    "level": 84
+   },
+   {
+    "speciesKey": "jumpluff",
+    "level": 85
    }
   ]
  },
@@ -825,6 +1683,32 @@
     "speciesKey": "spearow",
     "level": 21
    }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "wigglytuff",
+    "level": 80
+   },
+   {
+    "speciesKey": "persian",
+    "level": 81
+   },
+   {
+    "speciesKey": "farfetchd",
+    "level": 82
+   },
+   {
+    "speciesKey": "dodrio",
+    "level": 83
+   },
+   {
+    "speciesKey": "tauros",
+    "level": 84
+   },
+   {
+    "speciesKey": "ditto",
+    "level": 85
+   }
   ]
  },
  {
@@ -848,6 +1732,32 @@
    {
     "speciesKey": "venonat",
     "level": 29
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "ariados",
+    "level": 80
+   },
+   {
+    "speciesKey": "forretress",
+    "level": 81
+   },
+   {
+    "speciesKey": "shuckle",
+    "level": 82
+   },
+   {
+    "speciesKey": "beautifly",
+    "level": 83
+   },
+   {
+    "speciesKey": "dustox",
+    "level": 84
+   },
+   {
+    "speciesKey": "masquerain",
+    "level": 85
    }
   ]
  },
@@ -873,6 +1783,32 @@
     "speciesKey": "mareep",
     "level": 36
    }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "luxray",
+    "level": 80
+   },
+   {
+    "speciesKey": "pachirisu",
+    "level": 81
+   },
+   {
+    "speciesKey": "magnezone",
+    "level": 82
+   },
+   {
+    "speciesKey": "electivire",
+    "level": 83
+   },
+   {
+    "speciesKey": "zebstrika",
+    "level": 84
+   },
+   {
+    "speciesKey": "emolga",
+    "level": 85
+   }
   ]
  },
  {
@@ -896,6 +1832,32 @@
    {
     "speciesKey": "wooper",
     "level": 44
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "flygon",
+    "level": 80
+   },
+   {
+    "speciesKey": "whiscash",
+    "level": 81
+   },
+   {
+    "speciesKey": "claydol",
+    "level": 82
+   },
+   {
+    "speciesKey": "gastrodon",
+    "level": 83
+   },
+   {
+    "speciesKey": "hippowdon",
+    "level": 84
+   },
+   {
+    "speciesKey": "rhyperior",
+    "level": 85
    }
   ]
  },
@@ -921,6 +1883,32 @@
     "speciesKey": "ledyba",
     "level": 51
    }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "mantine",
+    "level": 80
+   },
+   {
+    "speciesKey": "skarmory",
+    "level": 81
+   },
+   {
+    "speciesKey": "beautifly",
+    "level": 82
+   },
+   {
+    "speciesKey": "swellow",
+    "level": 83
+   },
+   {
+    "speciesKey": "pelipper",
+    "level": 84
+   },
+   {
+    "speciesKey": "masquerain",
+    "level": 85
+   }
   ]
  },
  {
@@ -945,6 +1933,32 @@
     "speciesKey": "vanillite",
     "level": 59
    }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "cryogonal",
+    "level": 80
+   },
+   {
+    "speciesKey": "aurorus",
+    "level": 81
+   },
+   {
+    "speciesKey": "avalugg",
+    "level": 82
+   },
+   {
+    "speciesKey": "crabominable",
+    "level": 83
+   },
+   {
+    "speciesKey": "mr. rime",
+    "level": 84
+   },
+   {
+    "speciesKey": "frosmoth",
+    "level": 85
+   }
   ]
  },
  {
@@ -958,16 +1972,42 @@
   "spriteKey": "drayden",
   "team": [
    {
-    "speciesKey": "dratini",
+    "speciesKey": "dragonair",
     "level": 64
    },
    {
-    "speciesKey": "dragonair",
+    "speciesKey": "dragonite",
     "level": 65
    },
    {
-    "speciesKey": "dragonite",
+    "speciesKey": "kingdra",
     "level": 66
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "dracozolt",
+    "level": 80
+   },
+   {
+    "speciesKey": "dracovish",
+    "level": 81
+   },
+   {
+    "speciesKey": "duraludon",
+    "level": 82
+   },
+   {
+    "speciesKey": "dragapult",
+    "level": 83
+   },
+   {
+    "speciesKey": "cyclizar",
+    "level": 84
+   },
+   {
+    "speciesKey": "tatsugiri",
+    "level": 85
    }
   ]
  },
@@ -993,6 +2033,32 @@
     "speciesKey": "butterfree",
     "level": 14
    }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "butterfree",
+    "level": 80
+   },
+   {
+    "speciesKey": "parasect",
+    "level": 81
+   },
+   {
+    "speciesKey": "venomoth",
+    "level": 82
+   },
+   {
+    "speciesKey": "ledian",
+    "level": 83
+   },
+   {
+    "speciesKey": "ariados",
+    "level": 84
+   },
+   {
+    "speciesKey": "forretress",
+    "level": 85
+   }
   ]
  },
  {
@@ -1016,6 +2082,32 @@
    {
     "speciesKey": "rhydon",
     "level": 21
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "kabutops",
+    "level": 80
+   },
+   {
+    "speciesKey": "sudowoodo",
+    "level": 81
+   },
+   {
+    "speciesKey": "shuckle",
+    "level": 82
+   },
+   {
+    "speciesKey": "magcargo",
+    "level": 83
+   },
+   {
+    "speciesKey": "corsola",
+    "level": 84
+   },
+   {
+    "speciesKey": "lunatone",
+    "level": 85
    }
   ]
  },
@@ -1041,6 +2133,32 @@
     "speciesKey": "heracross",
     "level": 29
    }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "hitmontop",
+    "level": 80
+   },
+   {
+    "speciesKey": "breloom",
+    "level": 81
+   },
+   {
+    "speciesKey": "hariyama",
+    "level": 82
+   },
+   {
+    "speciesKey": "toxicroak",
+    "level": 83
+   },
+   {
+    "speciesKey": "conkeldurr",
+    "level": 84
+   },
+   {
+    "speciesKey": "throh",
+    "level": 85
+   }
   ]
  },
  {
@@ -1064,6 +2182,32 @@
    {
     "speciesKey": "bellossom",
     "level": 36
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "sunflora",
+    "level": 80
+   },
+   {
+    "speciesKey": "ludicolo",
+    "level": 81
+   },
+   {
+    "speciesKey": "shiftry",
+    "level": 82
+   },
+   {
+    "speciesKey": "breloom",
+    "level": 83
+   },
+   {
+    "speciesKey": "cacturne",
+    "level": 84
+   },
+   {
+    "speciesKey": "cradily",
+    "level": 85
    }
   ]
  },
@@ -1089,6 +2233,32 @@
     "speciesKey": "elekid",
     "level": 44
    }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "magnezone",
+    "level": 80
+   },
+   {
+    "speciesKey": "electivire",
+    "level": 81
+   },
+   {
+    "speciesKey": "zebstrika",
+    "level": 82
+   },
+   {
+    "speciesKey": "emolga",
+    "level": 83
+   },
+   {
+    "speciesKey": "galvantula",
+    "level": 84
+   },
+   {
+    "speciesKey": "eelektross",
+    "level": 85
+   }
   ]
  },
  {
@@ -1113,6 +2283,32 @@
     "speciesKey": "mawile",
     "level": 51
    }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "sylveon",
+    "level": 80
+   },
+   {
+    "speciesKey": "dedenne",
+    "level": 81
+   },
+   {
+    "speciesKey": "carbink",
+    "level": 82
+   },
+   {
+    "speciesKey": "klefki",
+    "level": 83
+   },
+   {
+    "speciesKey": "ribombee",
+    "level": 84
+   },
+   {
+    "speciesKey": "shiinotic",
+    "level": 85
+   }
   ]
  },
  {
@@ -1126,16 +2322,42 @@
   "spriteKey": "olympia",
   "team": [
    {
-    "speciesKey": "wobbuffet",
+    "speciesKey": "girafarig",
     "level": 57
    },
    {
-    "speciesKey": "girafarig",
+    "speciesKey": "smoochum",
     "level": 58
    },
    {
-    "speciesKey": "smoochum",
+    "speciesKey": "ralts",
     "level": 59
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "solrock",
+    "level": 80
+   },
+   {
+    "speciesKey": "claydol",
+    "level": 81
+   },
+   {
+    "speciesKey": "chimecho",
+    "level": 82
+   },
+   {
+    "speciesKey": "bronzong",
+    "level": 83
+   },
+   {
+    "speciesKey": "musharna",
+    "level": 84
+   },
+   {
+    "speciesKey": "swoobat",
+    "level": 85
    }
   ]
  },
@@ -1161,6 +2383,32 @@
     "speciesKey": "cubchoo",
     "level": 66
    }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "avalugg",
+    "level": 80
+   },
+   {
+    "speciesKey": "crabominable",
+    "level": 81
+   },
+   {
+    "speciesKey": "mr. rime",
+    "level": 82
+   },
+   {
+    "speciesKey": "frosmoth",
+    "level": 83
+   },
+   {
+    "speciesKey": "eiscue",
+    "level": 84
+   },
+   {
+    "speciesKey": "arctozolt",
+    "level": 85
+   }
   ]
  },
  {
@@ -1184,6 +2432,32 @@
    {
     "speciesKey": "pidgeot",
     "level": 14
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "raticate",
+    "level": 80
+   },
+   {
+    "speciesKey": "fearow",
+    "level": 81
+   },
+   {
+    "speciesKey": "wigglytuff",
+    "level": 82
+   },
+   {
+    "speciesKey": "persian",
+    "level": 83
+   },
+   {
+    "speciesKey": "farfetchd",
+    "level": 84
+   },
+   {
+    "speciesKey": "dodrio",
+    "level": 85
    }
   ]
  },
@@ -1209,6 +2483,32 @@
     "speciesKey": "tentacool",
     "level": 21
    }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "tentacruel",
+    "level": 80
+   },
+   {
+    "speciesKey": "dewgong",
+    "level": 81
+   },
+   {
+    "speciesKey": "cloyster",
+    "level": 82
+   },
+   {
+    "speciesKey": "kingler",
+    "level": 83
+   },
+   {
+    "speciesKey": "seaking",
+    "level": 84
+   },
+   {
+    "speciesKey": "starmie",
+    "level": 85
+   }
   ]
  },
  {
@@ -1232,6 +2532,32 @@
    {
     "speciesKey": "slugma",
     "level": 29
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "magcargo",
+    "level": 80
+   },
+   {
+    "speciesKey": "torkoal",
+    "level": 81
+   },
+   {
+    "speciesKey": "magmortar",
+    "level": 82
+   },
+   {
+    "speciesKey": "simisear",
+    "level": 83
+   },
+   {
+    "speciesKey": "chandelure",
+    "level": 84
+   },
+   {
+    "speciesKey": "heatmor",
+    "level": 85
    }
   ]
  },
@@ -1257,6 +2583,32 @@
     "speciesKey": "bellossom",
     "level": 36
    }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "sunflora",
+    "level": 80
+   },
+   {
+    "speciesKey": "ludicolo",
+    "level": 81
+   },
+   {
+    "speciesKey": "shiftry",
+    "level": 82
+   },
+   {
+    "speciesKey": "breloom",
+    "level": 83
+   },
+   {
+    "speciesKey": "cacturne",
+    "level": 84
+   },
+   {
+    "speciesKey": "cradily",
+    "level": 85
+   }
   ]
  },
  {
@@ -1280,6 +2632,32 @@
    {
     "speciesKey": "elekid",
     "level": 44
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "magnezone",
+    "level": 80
+   },
+   {
+    "speciesKey": "electivire",
+    "level": 81
+   },
+   {
+    "speciesKey": "zebstrika",
+    "level": 82
+   },
+   {
+    "speciesKey": "emolga",
+    "level": 83
+   },
+   {
+    "speciesKey": "galvantula",
+    "level": 84
+   },
+   {
+    "speciesKey": "eelektross",
+    "level": 85
    }
   ]
  },
@@ -1305,6 +2683,32 @@
     "speciesKey": "yamask",
     "level": 51
    }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "trevenant",
+    "level": 80
+   },
+   {
+    "speciesKey": "gourgeist",
+    "level": 81
+   },
+   {
+    "speciesKey": "palossand",
+    "level": 82
+   },
+   {
+    "speciesKey": "mimikyu",
+    "level": 83
+   },
+   {
+    "speciesKey": "dhelmise",
+    "level": 84
+   },
+   {
+    "speciesKey": "polteageist",
+    "level": 85
+   }
   ]
  },
  {
@@ -1328,6 +2732,32 @@
    {
     "speciesKey": "cottonee",
     "level": 59
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "carbink",
+    "level": 80
+   },
+   {
+    "speciesKey": "klefki",
+    "level": 81
+   },
+   {
+    "speciesKey": "ribombee",
+    "level": 82
+   },
+   {
+    "speciesKey": "shiinotic",
+    "level": 83
+   },
+   {
+    "speciesKey": "comfey",
+    "level": 84
+   },
+   {
+    "speciesKey": "mimikyu",
+    "level": 85
    }
   ]
  },
@@ -1353,6 +2783,32 @@
     "speciesKey": "pupitar",
     "level": 66
    }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "gliscor",
+    "level": 80
+   },
+   {
+    "speciesKey": "mamoswine",
+    "level": 81
+   },
+   {
+    "speciesKey": "excadrill",
+    "level": 82
+   },
+   {
+    "speciesKey": "seismitoad",
+    "level": 83
+   },
+   {
+    "speciesKey": "krookodile",
+    "level": 84
+   },
+   {
+    "speciesKey": "stunfisk",
+    "level": 85
+   }
   ]
  },
  {
@@ -1376,6 +2832,32 @@
    {
     "speciesKey": "vileplume",
     "level": 14
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "vileplume",
+    "level": 80
+   },
+   {
+    "speciesKey": "parasect",
+    "level": 81
+   },
+   {
+    "speciesKey": "victreebel",
+    "level": 82
+   },
+   {
+    "speciesKey": "exeggutor",
+    "level": 83
+   },
+   {
+    "speciesKey": "bellossom",
+    "level": 84
+   },
+   {
+    "speciesKey": "jumpluff",
+    "level": 85
    }
   ]
  },
@@ -1401,6 +2883,32 @@
     "speciesKey": "tentacool",
     "level": 21
    }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "tentacruel",
+    "level": 80
+   },
+   {
+    "speciesKey": "dewgong",
+    "level": 81
+   },
+   {
+    "speciesKey": "cloyster",
+    "level": 82
+   },
+   {
+    "speciesKey": "kingler",
+    "level": 83
+   },
+   {
+    "speciesKey": "seaking",
+    "level": 84
+   },
+   {
+    "speciesKey": "starmie",
+    "level": 85
+   }
   ]
  },
  {
@@ -1424,6 +2932,32 @@
    {
     "speciesKey": "slugma",
     "level": 29
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "magcargo",
+    "level": 80
+   },
+   {
+    "speciesKey": "torkoal",
+    "level": 81
+   },
+   {
+    "speciesKey": "magmortar",
+    "level": 82
+   },
+   {
+    "speciesKey": "simisear",
+    "level": 83
+   },
+   {
+    "speciesKey": "chandelure",
+    "level": 84
+   },
+   {
+    "speciesKey": "heatmor",
+    "level": 85
    }
   ]
  },
@@ -1449,6 +2983,32 @@
     "speciesKey": "breloom",
     "level": 36
    }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "hariyama",
+    "level": 80
+   },
+   {
+    "speciesKey": "toxicroak",
+    "level": 81
+   },
+   {
+    "speciesKey": "conkeldurr",
+    "level": 82
+   },
+   {
+    "speciesKey": "throh",
+    "level": 83
+   },
+   {
+    "speciesKey": "sawk",
+    "level": 84
+   },
+   {
+    "speciesKey": "scrafty",
+    "level": 85
+   }
   ]
  },
  {
@@ -1472,6 +3032,32 @@
    {
     "speciesKey": "kirlia",
     "level": 44
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "aromatisse",
+    "level": 80
+   },
+   {
+    "speciesKey": "slurpuff",
+    "level": 81
+   },
+   {
+    "speciesKey": "sylveon",
+    "level": 82
+   },
+   {
+    "speciesKey": "dedenne",
+    "level": 83
+   },
+   {
+    "speciesKey": "carbink",
+    "level": 84
+   },
+   {
+    "speciesKey": "klefki",
+    "level": 85
    }
   ]
  },
@@ -1497,6 +3083,32 @@
     "speciesKey": "tyranitar",
     "level": 51
    }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "armaldo",
+    "level": 80
+   },
+   {
+    "speciesKey": "relicanth",
+    "level": 81
+   },
+   {
+    "speciesKey": "rampardos",
+    "level": 82
+   },
+   {
+    "speciesKey": "bastiodon",
+    "level": 83
+   },
+   {
+    "speciesKey": "rhyperior",
+    "level": 84
+   },
+   {
+    "speciesKey": "probopass",
+    "level": 85
+   }
   ]
  },
  {
@@ -1521,6 +3133,32 @@
     "speciesKey": "drapion",
     "level": 59
    }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "scrafty",
+    "level": 80
+   },
+   {
+    "speciesKey": "zoroark",
+    "level": 81
+   },
+   {
+    "speciesKey": "mandibuzz",
+    "level": 82
+   },
+   {
+    "speciesKey": "hydreigon",
+    "level": 83
+   },
+   {
+    "speciesKey": "pangoro",
+    "level": 84
+   },
+   {
+    "speciesKey": "malamar",
+    "level": 85
+   }
   ]
  },
  {
@@ -1534,16 +3172,42 @@
   "spriteKey": "raihan",
   "team": [
    {
-    "speciesKey": "dragalge",
+    "speciesKey": "tyrunt",
     "level": 64
    },
    {
-    "speciesKey": "tyrunt",
+    "speciesKey": "tyrantrum",
     "level": 65
    },
    {
-    "speciesKey": "tyrantrum",
+    "speciesKey": "goomy",
     "level": 66
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "dracozolt",
+    "level": 80
+   },
+   {
+    "speciesKey": "dracovish",
+    "level": 81
+   },
+   {
+    "speciesKey": "duraludon",
+    "level": 82
+   },
+   {
+    "speciesKey": "dragapult",
+    "level": 83
+   },
+   {
+    "speciesKey": "cyclizar",
+    "level": 84
+   },
+   {
+    "speciesKey": "tatsugiri",
+    "level": 85
    }
   ]
  },
@@ -1569,6 +3233,32 @@
     "speciesKey": "butterfree",
     "level": 14
    }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "butterfree",
+    "level": 80
+   },
+   {
+    "speciesKey": "parasect",
+    "level": 81
+   },
+   {
+    "speciesKey": "venomoth",
+    "level": 82
+   },
+   {
+    "speciesKey": "ledian",
+    "level": 83
+   },
+   {
+    "speciesKey": "ariados",
+    "level": 84
+   },
+   {
+    "speciesKey": "forretress",
+    "level": 85
+   }
   ]
  },
  {
@@ -1592,6 +3282,32 @@
    {
     "speciesKey": "bellsprout",
     "level": 21
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "victreebel",
+    "level": 80
+   },
+   {
+    "speciesKey": "exeggutor",
+    "level": 81
+   },
+   {
+    "speciesKey": "bellossom",
+    "level": 82
+   },
+   {
+    "speciesKey": "jumpluff",
+    "level": 83
+   },
+   {
+    "speciesKey": "sunflora",
+    "level": 84
+   },
+   {
+    "speciesKey": "ludicolo",
+    "level": 85
    }
   ]
  },
@@ -1617,6 +3333,32 @@
     "speciesKey": "chinchou",
     "level": 29
    }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "plusle",
+    "level": 80
+   },
+   {
+    "speciesKey": "minun",
+    "level": 81
+   },
+   {
+    "speciesKey": "luxray",
+    "level": 82
+   },
+   {
+    "speciesKey": "pachirisu",
+    "level": 83
+   },
+   {
+    "speciesKey": "magnezone",
+    "level": 84
+   },
+   {
+    "speciesKey": "electivire",
+    "level": 85
+   }
   ]
  },
  {
@@ -1640,6 +3382,32 @@
    {
     "speciesKey": "shellder",
     "level": 36
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "seaking",
+    "level": 80
+   },
+   {
+    "speciesKey": "starmie",
+    "level": 81
+   },
+   {
+    "speciesKey": "lapras",
+    "level": 82
+   },
+   {
+    "speciesKey": "vaporeon",
+    "level": 83
+   },
+   {
+    "speciesKey": "omastar",
+    "level": 84
+   },
+   {
+    "speciesKey": "kabutops",
+    "level": 85
    }
   ]
  },
@@ -1665,6 +3433,32 @@
     "speciesKey": "lickitung",
     "level": 44
    }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "snorlax",
+    "level": 80
+   },
+   {
+    "speciesKey": "furret",
+    "level": 81
+   },
+   {
+    "speciesKey": "noctowl",
+    "level": 82
+   },
+   {
+    "speciesKey": "smeargle",
+    "level": 83
+   },
+   {
+    "speciesKey": "miltank",
+    "level": 84
+   },
+   {
+    "speciesKey": "blissey",
+    "level": 85
+   }
   ]
  },
  {
@@ -1689,6 +3483,32 @@
     "speciesKey": "yamask",
     "level": 51
    }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "trevenant",
+    "level": 80
+   },
+   {
+    "speciesKey": "gourgeist",
+    "level": 81
+   },
+   {
+    "speciesKey": "palossand",
+    "level": 82
+   },
+   {
+    "speciesKey": "mimikyu",
+    "level": 83
+   },
+   {
+    "speciesKey": "dhelmise",
+    "level": 84
+   },
+   {
+    "speciesKey": "polteageist",
+    "level": 85
+   }
   ]
  },
  {
@@ -1702,16 +3522,42 @@
   "spriteKey": "tulip",
   "team": [
    {
-    "speciesKey": "wobbuffet",
+    "speciesKey": "girafarig",
     "level": 57
    },
    {
-    "speciesKey": "girafarig",
+    "speciesKey": "smoochum",
     "level": 58
    },
    {
-    "speciesKey": "smoochum",
+    "speciesKey": "ralts",
     "level": 59
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "solrock",
+    "level": 80
+   },
+   {
+    "speciesKey": "claydol",
+    "level": 81
+   },
+   {
+    "speciesKey": "chimecho",
+    "level": 82
+   },
+   {
+    "speciesKey": "bronzong",
+    "level": 83
+   },
+   {
+    "speciesKey": "musharna",
+    "level": 84
+   },
+   {
+    "speciesKey": "swoobat",
+    "level": 85
    }
   ]
  },
@@ -1736,6 +3582,32 @@
    {
     "speciesKey": "cubchoo",
     "level": 66
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "avalugg",
+    "level": 80
+   },
+   {
+    "speciesKey": "crabominable",
+    "level": 81
+   },
+   {
+    "speciesKey": "mr. rime",
+    "level": 82
+   },
+   {
+    "speciesKey": "frosmoth",
+    "level": 83
+   },
+   {
+    "speciesKey": "eiscue",
+    "level": 84
+   },
+   {
+    "speciesKey": "arctozolt",
+    "level": 85
    }
   ]
  }

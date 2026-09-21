@@ -397,7 +397,15 @@ One-off scripts used to build the data JSON (not run during dev/build):
   legendaries), and each leader gets a unique Showdown sprite key derived from
   their name by `trainerSpriteKey`. Route trainers are themed by class via
   `TRAINER_CLASS_TYPES`. Kanto's hand-curated trainer/leader data and its gen3
-  sprites are left alone. Raid Islands offer the region's generation of Pokémon that turn
+  sprites are left alone. `pokemon-species.json` carries a `legendary` flag
+  (set for legendaries, mythicals and Ultra Beasts) that keeps them out of
+  every trainer team.
+  Every leader also gets a `rematchTeam`: a gym fields six Lv.80 final
+  evolutions once the player has every badge in that region, and the Elite Four
+  / Champion field Lv.90/92 teams once the region's Champion has been beaten.
+  Rematches draw from the whole national dex so sparse types still have six
+  members; the gym panel shows a `REMATCH` tag / "Rematch Lv.90" when active.
+  Raid Islands offer the region's generation of Pokémon that turn
   up on **no** region's wild routes and can't be reached by evolving one that
   does; that scan runs after every route is generated, so the pools are
   genuinely route-exclusive.

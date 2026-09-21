@@ -14,6 +14,8 @@ export function GymPanel({ onOpenShop }) {
     regionEliteFour = elite4Data.filter((member) => (member.region ?? 'kanto') === regionId),
     regionChampion = championData.find((champion) => (champion.region ?? 'kanto') === regionId),
     defeatedRegionGyms = regionGyms.filter((gym) => state.defeatedGyms.includes(gym.id)).length,
+    allBadgesEarned = regionGyms.length > 0 && defeatedRegionGyms >= regionGyms.length,
+    isLeagueRematch = state.defeatedChampions.includes(regionId),
     canFight = state.party.some((member) => member.currentHp > 0),
     isBusy = state.phase === 'evolving' || state.phase === 'healing',
     fightable = canFight && !isBusy
@@ -33,7 +35,9 @@ export function GymPanel({ onOpenShop }) {
           bossType: 'gym',
           trainerName: leader.name,
           trainerClass: 'ace',
-          trainerTeam: buildTrainerTeam(leader.team),
+          trainerTeam: buildTrainerTeam(
+            allBadgesEarned && leader.rematchTeam?.length ? leader.rematchTeam : leader.team
+          ),
           spriteKey: leader.spriteKey,
           region: regionId,
         },
@@ -56,7 +60,9 @@ export function GymPanel({ onOpenShop }) {
           bossType: 'e4',
           trainerName: member.name,
           trainerClass: 'ace',
-          trainerTeam: buildTrainerTeam(member.team),
+          trainerTeam: buildTrainerTeam(
+            isLeagueRematch && member.rematchTeam?.length ? member.rematchTeam : member.team
+          ),
           spriteKey: member.spriteKey,
           region: regionId,
         })),
@@ -65,7 +71,11 @@ export function GymPanel({ onOpenShop }) {
           bossType: 'champion',
           trainerName: regionChampion.name,
           trainerClass: 'ace',
-          trainerTeam: buildTrainerTeam(regionChampion.team),
+          trainerTeam: buildTrainerTeam(
+            isLeagueRematch && regionChampion.rematchTeam?.length
+              ? regionChampion.rematchTeam
+              : regionChampion.team
+          ),
           spriteKey: regionChampion.spriteKey,
           region: regionId,
         },
@@ -82,13 +92,12 @@ export function GymPanel({ onOpenShop }) {
     })
   }
 
-  const gymsDefeated = regionGyms.length > 0 && defeatedRegionGyms >= regionGyms.length,
-    leagueLocation = region?.leagueLocationKey ? mapData[region.leagueLocationKey] : null,
+  const leagueLocation = region?.leagueLocationKey ? mapData[region.leagueLocationKey] : null,
     leagueLocationName = leagueLocation?.name ?? 'the Pokémon League',
     leagueOpen =
       !!region?.leagueLocationKey && state.unlockedLocations.includes(region.leagueLocationKey),
     atLeague = !!region?.leagueLocationKey && state.currentLocation === region.leagueLocationKey,
-    leagueUnlocked = gymsDefeated && atLeague,
+    leagueUnlocked = allBadgesEarned && atLeague,
     inGauntlet =
       state.bossBattle &&
       (state.bossBattle.bossType === 'e4' || state.bossBattle.bossType === 'champion')
@@ -154,6 +163,13 @@ export function GymPanel({ onOpenShop }) {
                         className: 'gym-badge-label',
                         children: revealed ? leader.badgeName : 'Locked',
                       }),
+                      revealed && allBadgesEarned && leader.rematchTeam?.length
+                        ? jsx('span', {
+                            className: 'gym-rematch-tag',
+                            title: 'All badges earned — this leader fields a level 80 rematch team',
+                            children: 'REMATCH',
+                          })
+                        : null,
                     ],
                   }),
                   jsxs('div', {
@@ -190,14 +206,17 @@ export function GymPanel({ onOpenShop }) {
           }),
         ],
       }),
-      gymsDefeated &&
+      allBadgesEarned &&
         regionChampion &&
         jsxs('div', {
           className: 'gym-section',
           children: [
-            jsx('div', {
+            jsxs('div', {
               className: 'gym-section-title',
-              children: 'Elite Four & Champion',
+              children: [
+                'Elite Four & Champion',
+                isLeagueRematch ? ' · Rematch Lv.90' : '',
+              ],
             }),
             leagueUnlocked
               ? jsx('button', {

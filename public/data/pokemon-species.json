@@ -2653,7 +2653,8 @@
     },
     "baseExpYield": 261,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "zapdos": {
     "id": 145,
@@ -2672,7 +2673,8 @@
     },
     "baseExpYield": 261,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "moltres": {
     "id": 146,
@@ -2691,7 +2693,8 @@
     },
     "baseExpYield": 261,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "dratini": {
     "id": 147,
@@ -2764,7 +2767,8 @@
     },
     "baseExpYield": 306,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "mew": {
     "id": 151,
@@ -2782,7 +2786,8 @@
     },
     "baseExpYield": 270,
     "growthRate": "mediumSlow",
-    "catchRate": 45
+    "catchRate": 45,
+    "legendary": true
   },
   "chikorita": {
     "id": 152,
@@ -4481,7 +4486,8 @@
     },
     "baseExpYield": 261,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "entei": {
     "id": 244,
@@ -4499,7 +4505,8 @@
     },
     "baseExpYield": 261,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "suicune": {
     "id": 245,
@@ -4517,7 +4524,8 @@
     },
     "baseExpYield": 261,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "larvitar": {
     "id": 246,
@@ -4593,7 +4601,8 @@
     },
     "baseExpYield": 306,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "ho-oh": {
     "id": 250,
@@ -4612,7 +4621,8 @@
     },
     "baseExpYield": 306,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "celebi": {
     "id": 251,
@@ -4631,7 +4641,8 @@
     },
     "baseExpYield": 270,
     "growthRate": "mediumSlow",
-    "catchRate": 45
+    "catchRate": 45,
+    "legendary": true
   },
   "treecko": {
     "id": 252,
@@ -6961,7 +6972,8 @@
     },
     "baseExpYield": 261,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "regice": {
     "id": 378,
@@ -6979,7 +6991,8 @@
     },
     "baseExpYield": 261,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "registeel": {
     "id": 379,
@@ -6997,7 +7010,8 @@
     },
     "baseExpYield": 261,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "latias": {
     "id": 380,
@@ -7016,7 +7030,8 @@
     },
     "baseExpYield": 270,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "latios": {
     "id": 381,
@@ -7035,7 +7050,8 @@
     },
     "baseExpYield": 270,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "kyogre": {
     "id": 382,
@@ -7053,7 +7069,8 @@
     },
     "baseExpYield": 302,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "groudon": {
     "id": 383,
@@ -7071,7 +7088,8 @@
     },
     "baseExpYield": 302,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "rayquaza": {
     "id": 384,
@@ -7090,7 +7108,8 @@
     },
     "baseExpYield": 306,
     "growthRate": "slow",
-    "catchRate": 45
+    "catchRate": 45,
+    "legendary": true
   },
   "jirachi": {
     "id": 385,
@@ -7109,7 +7128,8 @@
     },
     "baseExpYield": 270,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "deoxys": {
     "id": 386,
@@ -7127,7 +7147,8 @@
     },
     "baseExpYield": 270,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "turtwig": {
     "id": 387,
@@ -8868,7 +8889,8 @@
     },
     "baseExpYield": 261,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "mesprit": {
     "id": 481,
@@ -8886,7 +8908,8 @@
     },
     "baseExpYield": 261,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "azelf": {
     "id": 482,
@@ -8904,7 +8927,8 @@
     },
     "baseExpYield": 261,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "dialga": {
     "id": 483,
@@ -8923,7 +8947,8 @@
     },
     "baseExpYield": 306,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "palkia": {
     "id": 484,
@@ -8942,7 +8967,8 @@
     },
     "baseExpYield": 306,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "heatran": {
     "id": 485,
@@ -8961,7 +8987,8 @@
     },
     "baseExpYield": 270,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "regigigas": {
     "id": 486,
@@ -8979,7 +9006,8 @@
     },
     "baseExpYield": 302,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "giratina": {
     "id": 487,
@@ -8998,7 +9026,8 @@
     },
     "baseExpYield": 306,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "cresselia": {
     "id": 488,
@@ -9016,7 +9045,8 @@
     },
     "baseExpYield": 270,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "phione": {
     "id": 489,
@@ -9034,7 +9064,8 @@
     },
     "baseExpYield": 216,
     "growthRate": "slow",
-    "catchRate": 30
+    "catchRate": 30,
+    "legendary": true
   },
   "manaphy": {
     "id": 490,
@@ -9052,7 +9083,8 @@
     },
     "baseExpYield": 270,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "darkrai": {
     "id": 491,
@@ -9070,7 +9102,8 @@
     },
     "baseExpYield": 270,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "shaymin": {
     "id": 492,
@@ -9088,7 +9121,8 @@
     },
     "baseExpYield": 270,
     "growthRate": "mediumSlow",
-    "catchRate": 45
+    "catchRate": 45,
+    "legendary": true
   },
   "arceus": {
     "id": 493,
@@ -9106,7 +9140,8 @@
     },
     "baseExpYield": 324,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "victini": {
     "id": 494,
@@ -9125,7 +9160,8 @@
     },
     "baseExpYield": 270,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "snivy": {
     "id": 495,
@@ -11780,7 +11816,8 @@
     },
     "baseExpYield": 261,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "terrakion": {
     "id": 639,
@@ -11799,7 +11836,8 @@
     },
     "baseExpYield": 261,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "virizion": {
     "id": 640,
@@ -11818,7 +11856,8 @@
     },
     "baseExpYield": 261,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "tornadus": {
     "id": 641,
@@ -11836,7 +11875,8 @@
     },
     "baseExpYield": 261,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "thundurus": {
     "id": 642,
@@ -11855,7 +11895,8 @@
     },
     "baseExpYield": 261,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "reshiram": {
     "id": 643,
@@ -11874,7 +11915,8 @@
     },
     "baseExpYield": 306,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "zekrom": {
     "id": 644,
@@ -11893,7 +11935,8 @@
     },
     "baseExpYield": 306,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "landorus": {
     "id": 645,
@@ -11912,7 +11955,8 @@
     },
     "baseExpYield": 270,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "kyurem": {
     "id": 646,
@@ -11931,7 +11975,8 @@
     },
     "baseExpYield": 297,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "keldeo": {
     "id": 647,
@@ -11950,7 +11995,8 @@
     },
     "baseExpYield": 261,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "meloetta": {
     "id": 648,
@@ -11969,7 +12015,8 @@
     },
     "baseExpYield": 270,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "genesect": {
     "id": 649,
@@ -11988,7 +12035,8 @@
     },
     "baseExpYield": 270,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "chespin": {
     "id": 650,
@@ -13230,7 +13278,8 @@
     },
     "baseExpYield": 306,
     "growthRate": "slow",
-    "catchRate": 45
+    "catchRate": 45,
+    "legendary": true
   },
   "yveltal": {
     "id": 717,
@@ -13249,7 +13298,8 @@
     },
     "baseExpYield": 306,
     "growthRate": "slow",
-    "catchRate": 45
+    "catchRate": 45,
+    "legendary": true
   },
   "zygarde": {
     "id": 718,
@@ -13268,7 +13318,8 @@
     },
     "baseExpYield": 270,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "diancie": {
     "id": 719,
@@ -13287,7 +13338,8 @@
     },
     "baseExpYield": 270,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "hoopa": {
     "id": 720,
@@ -13306,7 +13358,8 @@
     },
     "baseExpYield": 270,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "volcanion": {
     "id": 721,
@@ -13325,7 +13378,8 @@
     },
     "baseExpYield": 270,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "rowlet": {
     "id": 722,
@@ -14272,7 +14326,8 @@
     },
     "baseExpYield": 107,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "silvally": {
     "id": 773,
@@ -14290,7 +14345,8 @@
     },
     "baseExpYield": 114,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "minior": {
     "id": 774,
@@ -14516,7 +14572,8 @@
     },
     "baseExpYield": 114,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "tapu lele": {
     "id": 786,
@@ -14535,7 +14592,8 @@
     },
     "baseExpYield": 114,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "tapu bulu": {
     "id": 787,
@@ -14554,7 +14612,8 @@
     },
     "baseExpYield": 114,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "tapu fini": {
     "id": 788,
@@ -14573,7 +14632,8 @@
     },
     "baseExpYield": 114,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "cosmog": {
     "id": 789,
@@ -14591,7 +14651,8 @@
     },
     "baseExpYield": 40,
     "growthRate": "slow",
-    "catchRate": 45
+    "catchRate": 45,
+    "legendary": true
   },
   "cosmoem": {
     "id": 790,
@@ -14609,7 +14670,8 @@
     },
     "baseExpYield": 80,
     "growthRate": "slow",
-    "catchRate": 45
+    "catchRate": 45,
+    "legendary": true
   },
   "solgaleo": {
     "id": 791,
@@ -14628,7 +14690,8 @@
     },
     "baseExpYield": 136,
     "growthRate": "slow",
-    "catchRate": 45
+    "catchRate": 45,
+    "legendary": true
   },
   "lunala": {
     "id": 792,
@@ -14647,7 +14710,8 @@
     },
     "baseExpYield": 136,
     "growthRate": "slow",
-    "catchRate": 45
+    "catchRate": 45,
+    "legendary": true
   },
   "nihilego": {
     "id": 793,
@@ -14666,7 +14730,8 @@
     },
     "baseExpYield": 114,
     "growthRate": "slow",
-    "catchRate": 45
+    "catchRate": 45,
+    "legendary": true
   },
   "buzzwole": {
     "id": 794,
@@ -14685,7 +14750,8 @@
     },
     "baseExpYield": 114,
     "growthRate": "slow",
-    "catchRate": 45
+    "catchRate": 45,
+    "legendary": true
   },
   "pheromosa": {
     "id": 795,
@@ -14704,7 +14770,8 @@
     },
     "baseExpYield": 114,
     "growthRate": "slow",
-    "catchRate": 45
+    "catchRate": 45,
+    "legendary": true
   },
   "xurkitree": {
     "id": 796,
@@ -14722,7 +14789,8 @@
     },
     "baseExpYield": 114,
     "growthRate": "slow",
-    "catchRate": 45
+    "catchRate": 45,
+    "legendary": true
   },
   "celesteela": {
     "id": 797,
@@ -14741,7 +14809,8 @@
     },
     "baseExpYield": 114,
     "growthRate": "slow",
-    "catchRate": 45
+    "catchRate": 45,
+    "legendary": true
   },
   "kartana": {
     "id": 798,
@@ -14760,7 +14829,8 @@
     },
     "baseExpYield": 114,
     "growthRate": "slow",
-    "catchRate": 45
+    "catchRate": 45,
+    "legendary": true
   },
   "guzzlord": {
     "id": 799,
@@ -14779,7 +14849,8 @@
     },
     "baseExpYield": 114,
     "growthRate": "slow",
-    "catchRate": 45
+    "catchRate": 45,
+    "legendary": true
   },
   "necrozma": {
     "id": 800,
@@ -14797,7 +14868,8 @@
     },
     "baseExpYield": 120,
     "growthRate": "slow",
-    "catchRate": 255
+    "catchRate": 255,
+    "legendary": true
   },
   "magearna": {
     "id": 801,
@@ -14816,7 +14888,8 @@
     },
     "baseExpYield": 120,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "marshadow": {
     "id": 802,
@@ -14835,7 +14908,8 @@
     },
     "baseExpYield": 120,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "poipole": {
     "id": 803,
@@ -14853,7 +14927,8 @@
     },
     "baseExpYield": 114,
     "growthRate": "slow",
-    "catchRate": 45
+    "catchRate": 45,
+    "legendary": true
   },
   "naganadel": {
     "id": 804,
@@ -14872,7 +14947,8 @@
     },
     "baseExpYield": 114,
     "growthRate": "slow",
-    "catchRate": 45
+    "catchRate": 45,
+    "legendary": true
   },
   "stakataka": {
     "id": 805,
@@ -14891,7 +14967,8 @@
     },
     "baseExpYield": 114,
     "growthRate": "slow",
-    "catchRate": 30
+    "catchRate": 30,
+    "legendary": true
   },
   "blacephalon": {
     "id": 806,
@@ -14910,7 +14987,8 @@
     },
     "baseExpYield": 114,
     "growthRate": "slow",
-    "catchRate": 30
+    "catchRate": 30,
+    "legendary": true
   },
   "zeraora": {
     "id": 807,
@@ -14928,7 +15006,8 @@
     },
     "baseExpYield": 270,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "meltan": {
     "id": 808,
@@ -14946,7 +15025,8 @@
     },
     "baseExpYield": 135,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "melmetal": {
     "id": 809,
@@ -14964,7 +15044,8 @@
     },
     "baseExpYield": 270,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "grookey": {
     "id": 810,
@@ -16419,7 +16500,8 @@
     },
     "baseExpYield": 335,
     "growthRate": "slow",
-    "catchRate": 10
+    "catchRate": 10,
+    "legendary": true
   },
   "zamazenta": {
     "id": 889,
@@ -16437,7 +16519,8 @@
     },
     "baseExpYield": 335,
     "growthRate": "slow",
-    "catchRate": 10
+    "catchRate": 10,
+    "legendary": true
   },
   "eternatus": {
     "id": 890,
@@ -16456,7 +16539,8 @@
     },
     "baseExpYield": 345,
     "growthRate": "slow",
-    "catchRate": 255
+    "catchRate": 255,
+    "legendary": true
   },
   "kubfu": {
     "id": 891,
@@ -16474,7 +16558,8 @@
     },
     "baseExpYield": 100,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "urshifu-sss": {
     "id": 892,
@@ -16493,7 +16578,8 @@
     },
     "baseExpYield": 200,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "zarude": {
     "id": 893,
@@ -16512,7 +16598,8 @@
     },
     "baseExpYield": 100,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "regieleki": {
     "id": 894,
@@ -16530,7 +16617,8 @@
     },
     "baseExpYield": 261,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "regidrago": {
     "id": 895,
@@ -16548,7 +16636,8 @@
     },
     "baseExpYield": 261,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "glastrier": {
     "id": 896,
@@ -16566,7 +16655,8 @@
     },
     "baseExpYield": 200,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "spectrier": {
     "id": 897,
@@ -16584,7 +16674,8 @@
     },
     "baseExpYield": 200,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "calyrex": {
     "id": 898,
@@ -16603,7 +16694,8 @@
     },
     "baseExpYield": 100,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "wyrdeer": {
     "id": 899,
@@ -16736,7 +16828,8 @@
     },
     "baseExpYield": 116,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "sprigatito": {
     "id": 906,
@@ -18519,7 +18612,8 @@
     },
     "baseExpYield": 285,
     "growthRate": "slow",
-    "catchRate": 6
+    "catchRate": 6,
+    "legendary": true
   },
   "chien-pao": {
     "id": 1002,
@@ -18538,7 +18632,8 @@
     },
     "baseExpYield": 285,
     "growthRate": "slow",
-    "catchRate": 6
+    "catchRate": 6,
+    "legendary": true
   },
   "ting-lu": {
     "id": 1003,
@@ -18557,7 +18652,8 @@
     },
     "baseExpYield": 285,
     "growthRate": "slow",
-    "catchRate": 6
+    "catchRate": 6,
+    "legendary": true
   },
   "chi-yu": {
     "id": 1004,
@@ -18576,7 +18672,8 @@
     },
     "baseExpYield": 285,
     "growthRate": "slow",
-    "catchRate": 6
+    "catchRate": 6,
+    "legendary": true
   },
   "roaring moon": {
     "id": 1005,
@@ -18633,7 +18730,8 @@
     },
     "baseExpYield": 335,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "miraidon": {
     "id": 1008,
@@ -18652,7 +18750,8 @@
     },
     "baseExpYield": 335,
     "growthRate": "slow",
-    "catchRate": 3
+    "catchRate": 3,
+    "legendary": true
   },
   "m-venusaur": {
     "id": 10033,

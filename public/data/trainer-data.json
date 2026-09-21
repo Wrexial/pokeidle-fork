@@ -901,11 +901,11 @@
    "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "dragonite",
      "level": 5
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "tyranitar",
      "level": 6
     }
    ]
@@ -948,11 +948,11 @@
    "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "dragonite",
      "level": 9
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "tyranitar",
      "level": 10
     }
    ]
@@ -995,11 +995,11 @@
    "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "dragonite",
      "level": 16
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "tyranitar",
      "level": 17
     }
    ]
@@ -1042,11 +1042,11 @@
    "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "dragonite",
      "level": 22
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "tyranitar",
      "level": 23
     }
    ]
@@ -1089,11 +1089,11 @@
    "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "dragonite",
      "level": 26
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "tyranitar",
      "level": 27
     }
    ]
@@ -1136,11 +1136,11 @@
    "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "dragonite",
      "level": 35
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "tyranitar",
      "level": 36
     }
    ]
@@ -1183,11 +1183,11 @@
    "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "dragonite",
      "level": 43
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "tyranitar",
      "level": 44
     }
    ]
@@ -1230,11 +1230,11 @@
    "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "dragonite",
      "level": 50
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "tyranitar",
      "level": 51
     }
    ]
@@ -1277,11 +1277,11 @@
    "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "dragonite",
      "level": 56
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "tyranitar",
      "level": 57
     }
    ]
@@ -1324,11 +1324,11 @@
    "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "dragonite",
      "level": 62
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "tyranitar",
      "level": 63
     }
    ]
@@ -1371,11 +1371,11 @@
    "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 5
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "dragonite",
      "level": 6
     }
    ]
@@ -1418,11 +1418,11 @@
    "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 8
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "dragonite",
      "level": 9
     }
    ]
@@ -1465,11 +1465,11 @@
    "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 11
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "dragonite",
      "level": 12
     }
    ]
@@ -1512,11 +1512,11 @@
    "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 15
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "dragonite",
      "level": 16
     }
    ]
@@ -1559,11 +1559,11 @@
    "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 19
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "dragonite",
      "level": 20
     }
    ]
@@ -1606,11 +1606,11 @@
    "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 24
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "dragonite",
      "level": 25
     }
    ]
@@ -1653,11 +1653,11 @@
    "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 27
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "dragonite",
      "level": 28
     }
    ]
@@ -1700,11 +1700,11 @@
    "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 31
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "dragonite",
      "level": 32
     }
    ]
@@ -1747,11 +1747,11 @@
    "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 34
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "dragonite",
      "level": 35
     }
    ]
@@ -1794,11 +1794,11 @@
    "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 40
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "dragonite",
      "level": 41
     }
    ]
@@ -1841,11 +1841,11 @@
    "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 45
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "dragonite",
      "level": 46
     }
    ]
@@ -1888,11 +1888,11 @@
    "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 49
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "dragonite",
      "level": 50
     }
    ]
@@ -1935,11 +1935,11 @@
    "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 55
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "dragonite",
      "level": 56
     }
    ]
@@ -1982,11 +1982,11 @@
    "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 59
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "dragonite",
      "level": 60
     }
    ]
@@ -2029,11 +2029,11 @@
    "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 63
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "dragonite",
      "level": 64
     }
    ]
@@ -2059,11 +2059,11 @@
    "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "cloyster",
      "level": 65
     },
     {
-     "speciesKey": "tentacool",
+     "speciesKey": "kingler",
      "level": 66
     }
    ]
@@ -2076,11 +2076,11 @@
    "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 69
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "arcanine",
      "level": 70
     }
    ]
@@ -2091,11 +2091,11 @@
    "trainerClass": "blackbelt",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "hitmonlee",
      "level": 70
     },
     {
-     "speciesKey": "machop",
+     "speciesKey": "hitmonchan",
      "level": 71
     }
    ]
@@ -2106,11 +2106,11 @@
    "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "cloyster",
      "level": 71
     },
     {
-     "speciesKey": "tentacool",
+     "speciesKey": "kingler",
      "level": 72
     }
    ]
@@ -3674,11 +3674,11 @@
    "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 5
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "dragonite",
      "level": 6
     }
    ]
@@ -3721,11 +3721,11 @@
    "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 9
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "dragonite",
      "level": 10
     }
    ]
@@ -3768,11 +3768,11 @@
    "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 14
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "dragonite",
      "level": 15
     }
    ]
@@ -3815,11 +3815,11 @@
    "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 18
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "dragonite",
      "level": 19
     }
    ]
@@ -3862,11 +3862,11 @@
    "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 22
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "dragonite",
      "level": 23
     }
    ]
@@ -3909,11 +3909,11 @@
    "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 27
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "dragonite",
      "level": 28
     }
    ]
@@ -3956,11 +3956,11 @@
    "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 31
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "dragonite",
      "level": 32
     }
    ]
@@ -4003,11 +4003,11 @@
    "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 36
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "dragonite",
      "level": 37
     }
    ]
@@ -4050,11 +4050,11 @@
    "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 40
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "dragonite",
      "level": 41
     }
    ]
@@ -4097,11 +4097,11 @@
    "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 44
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "dragonite",
      "level": 45
     }
    ]
@@ -4144,11 +4144,11 @@
    "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 49
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "dragonite",
      "level": 50
     }
    ]
@@ -4191,11 +4191,11 @@
    "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 53
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "dragonite",
      "level": 54
     }
    ]
@@ -4238,11 +4238,11 @@
    "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 58
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "dragonite",
      "level": 59
     }
    ]
@@ -4285,11 +4285,11 @@
    "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 62
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "dragonite",
      "level": 63
     }
    ]
@@ -4332,11 +4332,11 @@
    "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 66
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "hydreigon",
      "level": 67
     }
    ]
@@ -4347,11 +4347,11 @@
    "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "alakazam",
+     "speciesKey": "starmie",
      "level": 67
     },
     {
-     "speciesKey": "slowpoke",
+     "speciesKey": "mrMime",
      "level": 68
     }
    ]
@@ -4362,11 +4362,11 @@
    "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "voltorb",
+     "speciesKey": "plusle",
      "level": 68
     },
     {
-     "speciesKey": "electrode",
+     "speciesKey": "minun",
      "level": 69
     }
    ]
@@ -4379,11 +4379,11 @@
    "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 69
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "hydreigon",
      "level": 70
     }
    ]
@@ -4394,11 +4394,11 @@
    "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "alakazam",
+     "speciesKey": "starmie",
      "level": 70
     },
     {
-     "speciesKey": "slowpoke",
+     "speciesKey": "mrMime",
      "level": 71
     }
    ]
@@ -4409,11 +4409,11 @@
    "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "voltorb",
+     "speciesKey": "plusle",
      "level": 71
     },
     {
-     "speciesKey": "electrode",
+     "speciesKey": "minun",
      "level": 72
     }
    ]
@@ -4426,11 +4426,11 @@
    "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 5
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "dragonite",
      "level": 6
     }
    ]
@@ -4473,11 +4473,11 @@
    "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 16
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "dragonite",
      "level": 17
     }
    ]
@@ -4520,11 +4520,11 @@
    "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 19
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "dragonite",
      "level": 20
     }
    ]
@@ -4567,11 +4567,11 @@
    "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 25
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "dragonite",
      "level": 26
     }
    ]
@@ -4614,11 +4614,11 @@
    "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 31
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "dragonite",
      "level": 32
     }
    ]
@@ -4661,11 +4661,11 @@
    "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 48
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "dragonite",
      "level": 49
     }
    ]
@@ -4708,11 +4708,11 @@
    "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "caterpie",
+     "speciesKey": "slaking",
      "level": 53
     },
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "dragonite",
      "level": 54
     }
    ]
@@ -5161,11 +5161,11 @@
    "trainerClass": "bugCatcher",
    "team": [
     {
-     "speciesKey": "kakuna",
+     "speciesKey": "ariados",
      "level": 65
     },
     {
-     "speciesKey": "beedrill",
+     "speciesKey": "forretress",
      "level": 66
     }
    ]
@@ -5178,11 +5178,11 @@
    "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "raticate",
      "level": 70
     },
     {
-     "speciesKey": "pidgeotto",
+     "speciesKey": "fearow",
      "level": 71
     }
    ]
@@ -5193,11 +5193,11 @@
    "trainerClass": "lass",
    "team": [
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "clefable",
      "level": 71
     },
     {
-     "speciesKey": "rattata",
+     "speciesKey": "wigglytuff",
      "level": 72
     }
    ]
@@ -5208,11 +5208,11 @@
    "trainerClass": "bugCatcher",
    "team": [
     {
-     "speciesKey": "kakuna",
+     "speciesKey": "ariados",
      "level": 72
     },
     {
-     "speciesKey": "beedrill",
+     "speciesKey": "forretress",
      "level": 73
     }
    ]
@@ -5225,11 +5225,11 @@
    "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "pidgey",
+     "speciesKey": "raticate",
      "level": 73
     },
     {
-     "speciesKey": "pidgeotto",
+     "speciesKey": "fearow",
      "level": 74
     }
    ]
@@ -5240,11 +5240,11 @@
    "trainerClass": "lass",
    "team": [
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "clefable",
      "level": 74
     },
     {
-     "speciesKey": "rattata",
+     "speciesKey": "wigglytuff",
      "level": 75
     }
    ]
@@ -5255,11 +5255,11 @@
    "trainerClass": "bugCatcher",
    "team": [
     {
-     "speciesKey": "kakuna",
+     "speciesKey": "ariados",
      "level": 74
     },
     {
-     "speciesKey": "beedrill",
+     "speciesKey": "forretress",
      "level": 75
     }
    ]
@@ -5789,11 +5789,11 @@
    "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "sandshrew",
+     "speciesKey": "sandslash",
      "level": 65
     },
     {
-     "speciesKey": "sandslash",
+     "speciesKey": "nidoqueen",
      "level": 66
     }
    ]
@@ -5804,11 +5804,11 @@
    "trainerClass": "camper",
    "team": [
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "wigglytuff",
      "level": 66
     },
     {
-     "speciesKey": "rattata",
+     "speciesKey": "vileplume",
      "level": 67
     }
    ]
@@ -5819,11 +5819,11 @@
    "trainerClass": "beauty",
    "team": [
     {
-     "speciesKey": "raticate",
+     "speciesKey": "persian",
      "level": 67
     },
     {
-     "speciesKey": "spearow",
+     "speciesKey": "farfetchd",
      "level": 68
     }
    ]
@@ -5836,11 +5836,11 @@
    "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "sandshrew",
+     "speciesKey": "sandslash",
      "level": 73
     },
     {
-     "speciesKey": "sandslash",
+     "speciesKey": "nidoqueen",
      "level": 74
     }
    ]
@@ -5851,11 +5851,11 @@
    "trainerClass": "camper",
    "team": [
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "wigglytuff",
      "level": 74
     },
     {
-     "speciesKey": "rattata",
+     "speciesKey": "vileplume",
      "level": 75
     }
    ]
@@ -5866,11 +5866,11 @@
    "trainerClass": "beauty",
    "team": [
     {
-     "speciesKey": "raticate",
+     "speciesKey": "persian",
      "level": 74
     },
     {
-     "speciesKey": "spearow",
+     "speciesKey": "farfetchd",
      "level": 75
     }
    ]

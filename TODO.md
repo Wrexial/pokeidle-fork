@@ -299,6 +299,41 @@ client-only today with one `localStorage` save. Worth a short design doc first.
 
 Effort: **large** (auth + conflict handling + a new server to run).
 
+## 20. Make Honey/Repel actually enable DexNav shiny hunting
+
+The shiny chain already exists (`state.shinyChain`, up to 4× odds at 120 in a
+row) but it **resets whenever a different species appears**, and Honey only
+doubles the chained species' weight while Repel only halves one species — so on
+any route with a decent number of species the chain breaks before it builds.
+Targeted shiny hunting for one Pokémon isn't really viable today.
+
+What we want:
+
+- [ ] Honey should be *much* stronger once a chain is going. E.g. at a 4+ chain,
+      a Honey'd species should keep appearing ("shouldn't drop easily") instead
+      of just getting a ×2 weight bump.
+- [ ] Repel should suppress the *other* species during a chain, not just one, so
+      the chain is protected from random breakers.
+- [ ] Together, a player should be able to pick a target species on a route and
+      chain-hunt it reliably with Honey (boost the target) + Repel (suppress the
+      rest).
+
+Implementation notes:
+
+- Relevant code: `resolveActiveModifiers` + `resolvePokemonEncounter` +
+      `shinyChainMultiplier` (`src/game/progression.js`), `USE_EFFECT_ITEM` /
+      `activeEffects` / `UPDATE_SHINY_CHAIN` (`src/game/reducer.js`), config in
+      `src/data/config.js`, R/H badges in `route-encounter-grid.js`.
+- Consider scaling Honey's multiplier with the current chain length (or making
+      it apply to the *chained* species regardless of which species it was
+      applied to), and letting Repel suppress every non-target species.
+- A "hunt target" concept (pick a species, Honey boosts it / Repel suppresses
+      everything else) would make the intent explicit and could drive the UI.
+- Keep it balanced: viable but not trivial — e.g. the guarantee only kicks in
+      above a chain threshold, or the boost is capped.
+
+Effort: **medium**, high player value (makes the shiny chain a real system).
+
 ---
 
 ## Useful references when picking these up

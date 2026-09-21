@@ -2,7 +2,7 @@
 
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
 import { martShopItems } from '../data/items.js'
-import { encounterData, mapData, pokemonSpecies, regions, raidPoolFor } from '../data/gameData.js'
+import { encounterData, gymLeaderData, mapData, pokemonSpecies, regions, raidPoolFor } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { computeUnlockedLocations } from '../game/progression.js'
 import { RouteEncounterGrid } from './route-encounter-grid.js'
@@ -13,9 +13,11 @@ export function LocationPanel({ onOpenCatchSettings }) {
   const { state, dispatch } = useGame(),
     unlockedNow = computeUnlockedLocations(state),
     location = mapData[state.currentLocation],
-    // "Next Unlock" = the cheapest locked location on the player's frontier
-    // (i.e. adjacent to somewhere already unlocked), never a far-off region.
-    nextLockedLocation = (() => {
+    // Every locked location on the player's frontier (adjacent to somewhere
+    // already unlocked). Several can become available at once — a town with two
+    // routes, a badge gate plus its neighbour — so list them all instead of one
+    // "next" the game can leap past.
+    frontierLockedLocations = (() => {
       const unlockedSet = new Set(unlockedNow)
       const candidates = Object.values(mapData).filter((candidateLocation) => {
         if (unlockedSet.has(candidateLocation.id)) return false
@@ -23,6 +25,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
         return (
           unlockRule.battlesAtLocation !== void 0 ||
           unlockRule.badgesRequired !== void 0 ||
+          unlockRule.gymsRequired !== void 0 ||
           unlockRule.championDefeated ||
           unlockRule.requires !== void 0 ||
           unlockRule.entry !== void 0
@@ -33,12 +36,85 @@ export function LocationPanel({ onOpenCatchSettings }) {
       )
       return (frontier.length ? frontier : candidates).sort(
         (left, right) => left.unlockOrder - right.unlockOrder
-      )[0]
+      )
     })(),
     badgeCount = state.defeatedGyms.length,
     routeKey = location?.routeKey,
     routeEncounters = routeKey ? encounterData[routeKey] : null
   if (!location) return null
+
+  /**
+   * @param {MapLocation} target
+   * @returns {{ label: string, current: number, required: number, met: boolean }[]}
+   */
+  function unlockRequirements(target) {
+    const unlockRule = target.unlock || {},
+      requirements = []
+    if (unlockRule.battlesAtLocation)
+      for (const requirement of unlockRule.battlesAtLocation) {
+        const locationName = mapData[requirement.locationId]?.name ?? requirement.locationId,
+          wonCount = state.battlesWonByLocation[requirement.locationId] ?? 0
+        requirements.push({
+          label: `Battles at ${locationName}`,
+          current: wonCount,
+          required: requirement.count,
+          met: wonCount >= requirement.count,
+        })
+      }
+    if (unlockRule.badgesRequired)
+      requirements.push({
+        label: 'Badges',
+        current: badgeCount,
+        required: unlockRule.badgesRequired,
+        met: badgeCount >= unlockRule.badgesRequired,
+      })
+    if (unlockRule.gymsRequired)
+      for (const gymId of unlockRule.gymsRequired) {
+        const gym = gymLeaderData.find((candidate) => candidate.id === gymId),
+          beaten = state.defeatedGyms.includes(gymId)
+        requirements.push({
+          label: `Beat ${gym?.name ?? gymId}`,
+          current: beaten ? 1 : 0,
+          required: 1,
+          met: beaten,
+        })
+      }
+    if (unlockRule.championDefeated) {
+      const requiredRegion =
+        unlockRule.championDefeated === true ? 'kanto' : unlockRule.championDefeated
+      requirements.push({
+        label: `Beat the ${
+          regions.find((region) => region.id === requiredRegion)?.name ?? requiredRegion
+        } Champion`,
+        current: state.defeatedChampions.includes(requiredRegion) ? 1 : 0,
+        required: 1,
+        met: state.defeatedChampions.includes(requiredRegion),
+      })
+    }
+    if (unlockRule.requires)
+      unlockRule.requires.forEach((requiredId) =>
+        requirements.push({
+          label: `Reach ${mapData[requiredId]?.name ?? requiredId}`,
+          current: state.unlockedLocations.includes(requiredId) ? 1 : 0,
+          required: 1,
+          met: state.unlockedLocations.includes(requiredId),
+        })
+      )
+    if (unlockRule.entry)
+      requirements.push({
+        label: unlockRule.previous
+          ? `Beat the ${
+              regions.find((region) => region.id === unlockRule.previous)?.name ??
+              unlockRule.previous
+            } Champion`
+          : 'Start in this region',
+        current:
+          unlockRule.previous && state.defeatedChampions.includes(unlockRule.previous) ? 1 : 0,
+        required: 1,
+        met: !unlockRule.previous || state.defeatedChampions.includes(unlockRule.previous),
+      })
+    return requirements
+  }
   if (location.type === 'raid') {
     const locationId = state.raidLegendary ? pokemonSpecies[state.raidLegendary] : null
     return jsx('div', {
@@ -165,97 +241,59 @@ export function LocationPanel({ onOpenCatchSettings }) {
             encounters: routeEncounters.encounters,
             onOpenCatchSettings: onOpenCatchSettings ?? (() => {}),
           }),
-        nextLockedLocation &&
-          (() => {
-            const unlockRule = nextLockedLocation.unlock,
-              requirements = []
-            if (unlockRule.battlesAtLocation)
-              for (const requirement of unlockRule.battlesAtLocation) {
-                const locationName = mapData[requirement.locationId]?.name ?? requirement.locationId,
-                  wonCount = state.battlesWonByLocation[requirement.locationId] ?? 0
-                requirements.push({
-                  label: `Battles at ${locationName}`,
-                  current: wonCount,
-                  required: requirement.count,
-                  met: wonCount >= requirement.count,
-                })
-              }
-            return (
-              unlockRule.badgesRequired &&
-                requirements.push({
-                  label: 'Badges',
-                  current: badgeCount,
-                  required: unlockRule.badgesRequired,
-                  met: badgeCount >= unlockRule.badgesRequired,
-                }),
-              unlockRule.championDefeated &&
-                requirements.push({
-                  label: 'Beat Kanto Champion',
-                  current: state.defeatedChampions.includes('kanto') ? 1 : 0,
-                  required: 1,
-                  met: state.defeatedChampions.includes('kanto'),
-                }),
-              unlockRule.requires &&
-                unlockRule.requires.forEach((requiredId) =>
-                  requirements.push({
-                    label: `Reach ${mapData[requiredId]?.name ?? requiredId}`,
-                    current: state.unlockedLocations.includes(requiredId) ? 1 : 0,
-                    required: 1,
-                    met: state.unlockedLocations.includes(requiredId),
-                  })
-                ),
-              unlockRule.entry &&
-                requirements.push({
-                  label: unlockRule.previous
-                    ? `Beat the ${
-                        regions.find((region) => region.id === unlockRule.previous)?.name ??
-                        unlockRule.previous
-                      } Champion`
-                    : 'Start in this region',
-                  current: unlockRule.previous && state.defeatedChampions.includes(unlockRule.previous) ? 1 : 0,
-                  required: 1,
-                  met: !unlockRule.previous || state.defeatedChampions.includes(unlockRule.previous),
-                }),
-              jsxs('div', {
-                className: 'location-next-unlock',
-                children: [
-                  jsx('div', {
-                    className: 'location-section-title',
-                    children: 'Next Unlock',
-                  }),
-                  jsx('div', {
-                    className: 'location-unlock-name',
-                    children: nextLockedLocation.name,
-                  }),
-                  jsx('div', {
-                    className: 'location-unlock-checklist',
-                    children: requirements.map((requirement, index) =>
-                      jsxs(
-                        'div',
-                        {
-                          className: `location-unlock-check${requirement.met ? ' met' : ''}`,
-                          children: [
-                            jsx('span', {
-                              className: 'location-unlock-check-icon',
-                              children: requirement.met ? '✓' : '○',
-                            }),
-                            jsx('span', {
-                              className: 'location-unlock-check-label',
-                              children:
-                                requirement.met || requirement.label === 'Beat Champion'
-                                  ? requirement.label
-                                  : `${requirement.current}/${requirement.required} ${requirement.label.toLowerCase()}`,
-                            }),
-                          ],
-                        },
-                        index
-                      )
-                    ),
-                  }),
-                ],
-              })
-            )
-          })(),
+        frontierLockedLocations.length > 0 &&
+          jsxs('div', {
+            className: 'location-next-unlock',
+            children: [
+              jsx('div', {
+                className: 'location-section-title',
+                children:
+                  frontierLockedLocations.length > 1 ? 'Next Unlocks' : 'Next Unlock',
+              }),
+              frontierLockedLocations.map((nextLockedLocation) =>
+                jsxs(
+                  'div',
+                  {
+                    className: 'location-unlock-entry',
+                    children: [
+                      jsx('div', {
+                        className: 'location-unlock-name',
+                        children: nextLockedLocation.name,
+                      }),
+                      jsx('div', {
+                        className: 'location-unlock-checklist',
+                        children: unlockRequirements(nextLockedLocation).map(
+                          (requirement, index) =>
+                            jsxs(
+                              'div',
+                              {
+                                className: `location-unlock-check${requirement.met ? ' met' : ''}`,
+                                children: [
+                                  jsx('span', {
+                                    className: 'location-unlock-check-icon',
+                                    children: requirement.met ? '✓' : '○',
+                                  }),
+                                  jsx('span', {
+                                    className: 'location-unlock-check-label',
+                                    children: requirement.met
+                                      ? requirement.label
+                                      : requirement.required > 1
+                                        ? `${requirement.current}/${requirement.required} ${requirement.label.toLowerCase()}`
+                                        : requirement.label,
+                                  }),
+                                ],
+                              },
+                              index
+                            )
+                        ),
+                      }),
+                    ],
+                  },
+                  nextLockedLocation.id
+                )
+              ),
+            ],
+          }),
       ],
     }),
   })

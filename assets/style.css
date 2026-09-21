@@ -2360,6 +2360,12 @@ img {
     border: 2px solid #483828
 }
 
+.location-unlock-entry + .location-unlock-entry {
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px solid #48382866
+}
+
 .location-unlock-name {
     font-size: 8px;
     color: var(--parchment);

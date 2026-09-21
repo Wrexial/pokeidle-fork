@@ -1223,8 +1223,18 @@ export function gameReducer(state, action) {
       // kept, so the next region doesn't lock and the region can be prestiged
       // again later.
       const regionId = action.payload.regionId,
-        region = regions.find((candidate) => candidate.id === regionId)
+        region = regions.find((candidate) => candidate.id === regionId),
+        regionEliteFourIds = new Set(
+          elite4Data
+            .filter((member) => (member.region ?? 'kanto') === regionId)
+            .map((member) => member.id)
+        )
       if (!region || !state.defeatedChampions.includes(regionId)) return state
+      // Prestige only once the region's Elite Four are currently beaten. They
+      // reset on each prestige, so you have to clear them again before the next
+      // one (the Champion stays defeated so the region is never re-locked).
+      if (![...regionEliteFourIds].every((id) => state.defeatedEliteFour.includes(id)))
+        return state
       const regionLocationIds = new Set(
           Object.values(mapData)
             .filter((location) => (location.region ?? 'kanto') === regionId)
@@ -1245,11 +1255,6 @@ export function gameReducer(state, action) {
           gymLeaderData
             .filter((gym) => (gym.region ?? 'kanto') === regionId)
             .map((gym) => gym.id)
-        ),
-        regionEliteFourIds = new Set(
-          elite4Data
-            .filter((member) => (member.region ?? 'kanto') === regionId)
-            .map((member) => member.id)
         ),
         prestigeLevel = (state.regionPrestige[regionId] ?? 0) + 1,
         prestigedState = {

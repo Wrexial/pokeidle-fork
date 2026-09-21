@@ -18,6 +18,11 @@ export function GymPanel({ onOpenShop }) {
     defeatedRegionGyms = regionGyms.filter((gym) => state.defeatedGyms.includes(gym.id)).length,
     allBadgesEarned = regionGyms.length > 0 && defeatedRegionGyms >= regionGyms.length,
     isLeagueRematch = state.defeatedChampions.includes(regionId),
+    // The Elite Four reset on each prestige, so they must be beaten again
+    // before the region can be prestiged once more.
+    allEliteFourBeaten =
+      regionEliteFour.length > 0 &&
+      regionEliteFour.every((member) => state.defeatedEliteFour.includes(member.id)),
     prestigeLevel = state.regionPrestige[regionId] ?? 0,
     canFight = state.party.some((member) => member.currentHp > 0),
     isBusy = state.phase === 'evolving' || state.phase === 'healing',
@@ -337,9 +342,11 @@ export function GymPanel({ onOpenShop }) {
             }),
             jsx('div', {
               className: 'prestige-hint',
-              children: confirmingPrestige
-                ? `Reset ${region?.name ?? 'this region'}\u2019s routes and badges? Your Pokemon, items, money and Pokedex are kept.`
-                : 'Replay this region from the start without losing your Pokemon. Each prestige earns Victory Tokens.',
+              children: !allEliteFourBeaten
+                ? `Beat ${region?.name ?? 'the region'}\u2019s Elite Four again before its next prestige.`
+                : confirmingPrestige
+                  ? `Reset ${region?.name ?? 'this region'}\u2019s routes and badges? Your Pokemon, items, money and Pokedex are kept.`
+                  : 'Replay this region from the start without losing your Pokemon. Each prestige earns Victory Tokens.',
             }),
             confirmingPrestige
               ? jsxs('div', {
@@ -370,8 +377,11 @@ export function GymPanel({ onOpenShop }) {
                   style: {
                     width: '100%',
                   },
+                  disabled: !allEliteFourBeaten,
                   onClick: () => setConfirmingPrestige(true),
-                  children: `PRESTIGE ${region?.name?.toUpperCase() ?? 'REGION'}`,
+                  children: allEliteFourBeaten
+                    ? `PRESTIGE ${region?.name?.toUpperCase() ?? 'REGION'}`
+                    : 'BEAT THE ELITE FOUR FIRST',
                 }),
           ],
         }),

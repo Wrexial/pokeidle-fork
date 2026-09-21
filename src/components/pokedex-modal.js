@@ -32,11 +32,13 @@ export function PokedexModal({ onClose }) {
             ),
       [gen]
     ),
-    // The "All" tab also lists alternate forms (ids above 1025), many of which
-    // have no acquisition path at all. They still render, but the completion
-    // count only covers the national dex so it can actually reach 100%.
+    // The "All" tab also lists alternate forms (ids above 1025), and
+    // MissingNo. (id 0) as a pure easter egg. They still render, but the
+    // completion count only covers the national dex so it can reach 100%.
     countedIndexes =
-      gen === 0 ? filteredIndexes.filter((entry) => entry[1].id <= 1025) : filteredIndexes,
+      gen === 0
+        ? filteredIndexes.filter((entry) => entry[1].id > 0 && entry[1].id <= 1025)
+        : filteredIndexes,
     caughtCount = countedIndexes.filter(([speciesKey]) => caughtSet.has(speciesKey)).length,
     seenCount = countedIndexes.filter(([speciesKey]) => seenSet.has(speciesKey)).length,
     totalEntries = countedIndexes.length,

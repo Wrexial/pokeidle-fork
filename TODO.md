@@ -14,78 +14,70 @@ menu; the rest of this file is things raised in passing that were never scoped.
 A ranked work order, best return first. **Effort**: S (small) < S–M < M < M–L
 < L. **Gain** is the player-facing value of shipping it (★ = nice to have,
 ★★★★★ = core missing feature). The numbered sections below are **unchanged**
-so cross-references (`#2c`, `#23`, …) keep working — treat this list as the
+so cross-references (`#2c`, `#24`, …) keep working — treat this list as the
 working order, and the numbered sections as the details.
 
 ### Tier 1 — Quick wins (small effort, high gain)
 
-1. **#22 Multiple box sort modes** — S · ★★★★ — a level sort is the most
-   requested QOL and `SORT_BOX` already exists.
-2. **#13 Auto-travel / idle QoL** — S · ★★★★ — the game is idle; walking to
+1. **#13 Auto-travel / idle QoL** — S · ★★★★ — the game is idle; walking to
    the next route is a constant papercut.
-3. **#33 Edit moves out of combat** — S–M · ★★★★ — fixes the wrong-Pokemon
-   move bug and lets you re-teach moves without a battle.
-4. **#23 Egg-hatch reveal popup** — S · ★★★★ — a shiny hatch is currently
-   just a scrolling log line.
-5. **#26 README + GitHub "About"** — S · ★★★★ — the project's front door is
+2. **#26 README + GitHub "About"** — S · ★★★★ — the project's front door is
    missing; high value for how complete the game is.
-6. **#30 Caught / event QOL indicators** — S–M · ★★★★ — a caught badge plus a
+3. **#30 Caught / event QOL indicators** — S–M · ★★★★ — a caught badge plus a
    reusable toast system that unblocks a dozen other notifications.
-7. **#15 Save management & sharing** — S–M · ★★★★ — export/import protects
+4. **#15 Save management & sharing** — S–M · ★★★★ — export/import protects
    the one save players care about; slots are a bonus.
-8. **#31 Living-dex capture mode** — S · ★★★½ — small catch-mode addition
-   that makes living-dex runs possible.
-9. **#2b Natures** (slice of #2) — S–M · ★★★½ — cheap battle depth that also
+5. **#2b Natures** (slice of #2) — S–M · ★★★½ — cheap battle depth that also
    feeds daycare (#3).
-10. **#14 Lightweight test suite** — S–M · ★★★½ (dev value) — pays off every
-    future change.
-11. **#1 Healing items / Potions** — S · ★★★ — a money sink and tactical
-    option; no new data files.
-12. **#12 Dex-completion rewards** — S · ★★★ — gives the Shiny Charm grind a
-    payoff.
-13. **#21 Unlock Tokens endgame** — S · ★★★ — removes a dead banner once all
-    regions are open.
-14. **#5 Daily / periodic events** — S–M · ★★★ — cheap engagement loop.
-15. **#16 More ideas (grab bag)** — mostly S · ★★★ — mine the quick ones
+6. **#14 Lightweight test suite** — S–M · ★★★½ (dev value) — pays off every
+   future change.
+7. **#1 Healing items / Potions** — S · ★★★ — a money sink and tactical
+   option; no new data files.
+8. **#12 Dex-completion rewards** — S · ★★★ — gives the Shiny Charm grind a
+   payoff.
+9. **#21 Unlock Tokens endgame** — S · ★★★ — removes a dead banner once all
+   regions are open.
+10. **#5 Daily / periodic events** — S–M · ★★★ — cheap engagement loop.
+11. **#16 More ideas (grab bag)** — mostly S · ★★★ — mine the quick ones
     (achievement rewards, release/selling, map QoL, notifications).
 
 ### Tier 2 — High impact, worth the effort (medium–large)
 
-16. **#7 Offline / idle progress** — M–L · ★★★★★ — the biggest missing *idle*
+12. **#7 Offline / idle progress** — M–L · ★★★★★ — the biggest missing *idle*
     feature; a returning player currently gets nothing.
-17. **#8 Pokémon management / IV checker** — M · ★★★★½ — IVs are generated
+13. **#8 Pokémon management / IV checker** — M · ★★★★½ — IVs are generated
     but invisible; box search, nicknames and lock are all high-use.
-18. **#20 Honey/Repel DexNav hunting** — M · ★★★★½ — turns the existing
+14. **#20 Honey/Repel DexNav hunting** — M · ★★★★½ — turns the existing
     shiny chain into a usable system.
-19. **#24 Move data pass** — M–L · ★★★★½ — ~290 moves currently do nothing;
+15. **#24 Move data pass** — M–L · ★★★★½ — ~290 moves currently do nothing;
     do it in slices (healing/screens/setup first).
-20. **#25 Battle engine pass** — M–L · ★★★★½ — pairs with #24; AI + healing +
+16. **#25 Battle engine pass** — M–L · ★★★★½ — pairs with #24; AI + healing +
     multi-hit first.
-21. **#2a Abilities** (with **#2c Held items**) — L · ★★★★★ / ★★★★ — the
+17. **#2a Abilities** (with **#2c Held items**) — L · ★★★★★ / ★★★★ — the
     biggest remaining battle-depth feature; natures (#2b) are already in
     Tier 1.
-22. **#28 More region areas (DLC, caves, POIs)** — L · ★★★★½ — real content
+18. **#28 More region areas (DLC, caves, POIs)** — L · ★★★★½ — real content
     (Crown Tundra, Kitakami, landmark caves); data-heavy.
-23. **#18 Better settings** — M · ★★★★ — centralises QOL toggles and the
+19. **#18 Better settings** — M · ★★★★ — centralises QOL toggles and the
     export/import from #15.
 
 ### Tier 3 — Medium effort, medium gain
 
-24. **#3 Daycare inheritance** — M · ★★★
-25. **#6 Friendship / happiness** — M · ★★★
-26. **#9 Move tutor / TMs** — M · ★★★
-27. **#11 NPC gifts & static encounters** — M · ★★★
-28. **#17 Pokéball variants** — M · ★★★
-29. **#27 Gender-specific sprites** — M · ★★★ (assets are half-there)
-30. **#29 Minigames** — M–L · ★★★ (small per minigame once one exists)
-31. **#4 In-battle Mega evolution** — M–L · ★★★
-32. **#32 Battle Tower tuning** — M · ★★★½ — auto-climb, sane Victory Token
+20. **#3 Daycare inheritance** — M · ★★★
+21. **#6 Friendship / happiness** — M · ★★★
+22. **#9 Move tutor / TMs** — M · ★★★
+23. **#11 NPC gifts & static encounters** — M · ★★★
+24. **#17 Pokéball variants** — M · ★★★
+25. **#27 Gender-specific sprites** — M · ★★★ (assets are half-there)
+26. **#29 Minigames** — M–L · ★★★ (small per minigame once one exists)
+27. **#4 In-battle Mega evolution** — M–L · ★★★
+28. **#32 Battle Tower tuning** — M · ★★★½ — auto-climb, sane Victory Token
     payout, and harder/faster teams (6 fully evolved, late legendaries).
 
 ### Tier 4 — Big and low-return, defer
 
-33. **#10 Weather & terrain** — M · ★★½ (nice depth, no urgency)
-34. **#19 Online sync** — L · ★★★ — the project's first backend; needs a
+29. **#10 Weather & terrain** — M · ★★½ (nice depth, no urgency)
+30. **#19 Online sync** — L · ★★★ — the project's first backend; needs a
     design doc and real ops for modest player value today.
 
 ---
@@ -437,44 +429,6 @@ and `victoryTokens`.
 
 Effort: **small**.
 
-## 22. Multiple box sort modes (incl. level)
-
-`SORT_BOX` has a single fixed order — dex id, then level descending, then shiny
-— and the Box header's "Sort" button always applies it. There's no way to sort
-by level alone.
-
-- [ ] Add a **level** sort (highest / lowest first) — the most-wanted one.
-- [ ] Other modes: dex number, name, level, shiny-first, newest, type, and
-      favourite / IV total once #8 (management + IV checker) lands.
-- [ ] Ascending / descending toggle.
-- [ ] Remember the chosen mode (in the save or settings, #18), and replace the
-      single "Sort" button with a mode picker / cycle.
-
-Relevant code: `SORT_BOX` (`src/game/reducer.js`) and the Box header
-(`src/components/box-panel.js`).
-
-Effort: **small**.
-
-## 23. Egg-hatch reveal popup (with quick release)
-
-`HATCH_DAYCARE_EGG` currently drops the hatched Pokémon straight into the box
-with only a battle-log line ("The Egg hatched into X!"), so a hatch is easy to
-miss — especially a shiny.
-
-- [ ] Show a popup on hatch with the result: sprite, name, level, shiny marker,
-      gender, and IVs once #8 lands.
-- [ ] Give it **Keep** / **Quick release** actions (release without opening the
-      box), and optionally "release all non-shiny hatches".
-- [ ] Consider an auto-release setting for hatches that don't meet a filter
-      (e.g. not shiny), tying into #18 (settings) and #8 (management).
-- [ ] Reuse the existing modal pattern (`battle-info-overlay`) or the
-      evolution/scene style.
-
-Relevant code: `HATCH_DAYCARE_EGG` (`src/game/reducer.js`),
-`src/components/daycare-modal.js` (or a small new modal).
-
-Effort: **small**.
-
 ## 24. Move data pass
 
 `possible-moves.json` only carries `name / type / category / power / accuracy /
@@ -785,7 +739,7 @@ surface without staring at the log:
       it never spams).
 - [ ] Fire on meaningful events: first-time seen ("You found a wild X!"),
       first-time caught ("X was registered in the Pokédex!"), a duplicate
-      catch, shiny found/caught, egg hatch (see #23), evolution, level-up
+      catch, shiny found/caught, egg hatch, evolution, level-up
       (existing), badge / league win, region or route unlock, achievement, rare
       item, raid start. New-catch detection is just
       `!state.pokedexCaught.includes(speciesKey)` at the dispatch site in
@@ -806,40 +760,6 @@ Relevant code: `level-up-notification.js` and the `levelUpNotification` /
 screen.
 
 Effort: **small–medium**.
-
-## 31. Living-dex capture mode
-
-Auto-catch modes are `always` / `shiny_only` / `level_threshold` /
-`pokedex_new` (`shouldAutoCatch` in `src/game/catching.js`, options in
-`CATCH_MODE_OPTIONS`, `src/data/ui.js`). `pokedex_new` stops catching a species
-forever once it's registered, so a player building a **living dex** (one of each
-Pokemon actually held in the party/box) can't re-catch one they've released or
-that evolved away.
-
-- [ ] Add a `living_dex` mode (labelled something like "Not owned (living)")
-      that catches when the species is **not currently in `state.party` or
-      `state.box`**, regardless of `pokedexCaught`.
-- [ ] Implement the check in the `shouldAutoCatch` switch
-      (`state.party.some(...) || state.box.some(...)`, by `speciesKey`). For
-      efficiency, compute the owned-species `Set` once per encounter/tick rather
-      than scanning the whole box on every call.
-- [ ] Decide whether holding an **evolution** of the species counts as owned
-      (true living-dex behaviour: no), and whether forms/shiny count separately.
-- [ ] Wire the new value into `CATCH_MODE_OPTIONS` and the radio list in
-      `catch-settings-modal.js` (plus a short hint explaining the difference
-      from "Not caught yet").
-- [ ] Check interactions: `selectAutoCatchBall` / `selectBestBall` are
-      unchanged, but the box-full and any future auto-release rule (#8) should
-      not immediately dump the extra living-dex catch.
-
-No save-shape change — a catch mode is just a string, and old saves keep
-defaulting to `pokedex_new`.
-
-Relevant code: `shouldAutoCatch` / `getCatchRule` (`src/game/catching.js`,
-`src/game/progression.js`), `CATCH_MODE_OPTIONS` (`src/data/ui.js`),
-`defaultCatchSettings` (`src/data/config.js`) and `catch-settings-modal.js`.
-
-Effort: **small**.
 
 ## 32. Battle Tower should auto-climb, pay less, and hit harder
 
@@ -871,36 +791,6 @@ Relevant code: `buildTowerTeam` (`src/game/progression.js`), `BOSS_BATTLE_END`
 
 Effort: **medium**.
 
-## 33. Edit a Pokemon's moves out of combat (and fix the wrong-Pokemon bug)
-
-`MoveManagerPanel` (`src/components/move-manager-panel.js`) is only opened from
-the battle scene and always edits `state.playerPokemon`; `SET_MOVES`
-(`src/game/reducer.js`) likewise only writes to `state.playerPokemon`. The stats
-panel shows a Pokemon's moves but has no edit action.
-
-Bug: the panel reads `pokemonId = state.playerPokemon.id` on every render but
-initialises its `moves` state once. If the active Pokemon changes while the
-panel is open (the current one faints and the game auto-switches to the next
-party member), `pokemonId` re-derives to the *new* active, the guard
-`state.playerPokemon?.id !== pokemonId` passes, and the old Pokemon's moves get
-dispatched onto the new active Pokemon.
-
-- [ ] Capture the target id once at mount (ref/state), include it in the
-      `SET_MOVES` payload, and have the reducer update that id's entry in
-      `party`/`box` instead of always `state.playerPokemon` (a small id-keyed
-      sibling of `syncActivePokemonIntoParty`).
-- [ ] Add a "Manage Moves" action to the stats panel (party and box) so moves
-      can be changed out of combat.
-- [ ] Close without writing if the target was released / is a stale id.
-- [ ] Keep `getFamilyLearnset` on the target's own species + level.
-
-Relevant code: `SET_MOVES` (`src/game/reducer.js`), `MoveManagerPanel`
-(`src/components/move-manager-panel.js`), `stats-panel.js`,
-`party-panel.js` / `mobile-tabs.js`, `syncActivePokemonIntoParty`
-(`src/game/progression.js`).
-
-Effort: **small–medium**.
-
 ---
 
 ## Useful references when picking these up
@@ -925,15 +815,17 @@ Effort: **small–medium**.
 
 ## Recently done (context)
 
-Pokemon data pass (form transformations are reversible/all-to-all — Deoxys,
-Rotom, Therian formes, Kyurem, Necrozma, Calyrex, Zygarde, Basculegion/Indeedee
-gender forms — plus corrected stats and the missing Alolan Ninetales Fairy
-type); Cosmoem evolves; raid QOL (a wipe ejects you from the raid zone, pools
-only offer final stages, level scaling caps at 100, and the legendary pick
-favours species you haven't seen); status conditions + drain moves; Battle
-Tower + endless scaling; roaming legendaries; route swarms; Wonder Trade (with
-the hidden shiny-for-shiny perk); Records panel; Daycare (gender/egg
-groups/shiny odds); Achievements; DexNav shiny chain; region Unlock Tokens;
-region Prestige; working evolution items + Link Cable; Mew / MissingNo / Master
-Ball secrets; and the bulk of the earlier data/audit fixes (encounters, forms,
-learnsets, trainers, marts, maps, sprites).
+QOL batch (box sort modes with a remembered choice, egg-hatch popup with quick
+release, living-dex capture mode, and out-of-combat move editing with the
+wrong-Pokemon move bug fixed); Pokemon data pass (form transformations are
+reversible/all-to-all — Deoxys, Rotom, Therian formes, Kyurem, Necrozma,
+Calyrex, Zygarde, Basculegion/Indeedee gender forms — plus corrected stats and
+the missing Alolan Ninetales Fairy type); Cosmoem evolves; raid QOL (a wipe
+ejects you from the raid zone, pools only offer final stages, level scaling caps
+at 100, and the legendary pick favours species you haven't seen); status
+conditions + drain moves; Battle Tower + endless scaling; roaming legendaries;
+route swarms; Wonder Trade (with the hidden shiny-for-shiny perk); Records
+panel; Daycare (gender/egg groups/shiny odds); Achievements; DexNav shiny chain;
+region Unlock Tokens; region Prestige; working evolution items + Link Cable;
+Mew / MissingNo / Master Ball secrets; and the bulk of the earlier data/audit
+fixes (encounters, forms, learnsets, trainers, marts, maps, sprites).

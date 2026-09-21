@@ -936,7 +936,7 @@ img {
 }
 
 .move-panel-overlay {
-    position: absolute;
+    position: fixed;
     inset: 0;
     background: #0009;
     z-index: 100;
@@ -1250,6 +1250,82 @@ img {
         transform: translate(-50%,-50%) scale(1);
         opacity: 1
     }
+}
+
+.hatch-popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: #000000a6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 210
+}
+
+.hatch-popup {
+    background: linear-gradient(180deg,#e8dcc0 0% 50%,#d8c8a0 50% 100%);
+    color: #2a1808;
+    padding: 18px 26px;
+    text-align: center;
+    box-shadow: inset 2px 2px #ffffff40,inset -2px -2px #0000001f,-4px 0 0 0 var(--gold),4px 0 0 0 var(--gold),0 -4px 0 0 var(--gold),0 4px 0 0 var(--gold),-4px -4px 0 0 var(--gold),4px -4px 0 0 var(--gold),-4px 4px 0 0 var(--gold),4px 4px 0 0 var(--gold),4px 4px 0 8px #00000080
+}
+
+.hatch-popup.shiny {
+    box-shadow: inset 2px 2px #ffffff40,inset -2px -2px #0000001f,-4px 0 0 0 var(--gold-bright),4px 0 0 0 var(--gold-bright),0 -4px 0 0 var(--gold-bright),0 4px 0 0 var(--gold-bright),-4px -4px 0 0 var(--gold-bright),4px -4px 0 0 var(--gold-bright),-4px 4px 0 0 var(--gold-bright),4px 4px 0 0 var(--gold-bright),4px 4px 0 8px #00000080
+}
+
+.hatch-popup-title {
+    font-size: 9px;
+    margin-bottom: 8px
+}
+
+.hatch-popup-sprite {
+    width: 96px;
+    height: 96px;
+    image-rendering: pixelated;
+    display: block;
+    margin: 0 auto
+}
+
+.hatch-popup-name {
+    font-size: 12px;
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px
+}
+
+.hatch-popup-meta {
+    font-size: 8px;
+    margin-top: 4px;
+    opacity: .85
+}
+
+.hatch-popup-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 14px
+}
+
+.hatch-popup-btn {
+    font-size: 8px;
+    padding: 5px 12px;
+    border: 2px solid #483828;
+    border-radius: 0;
+    cursor: pointer;
+    font-weight: 700;
+    color: var(--parchment);
+    background: #685040
+}
+
+.hatch-popup-btn:hover {
+    border-color: var(--gold-dark)
+}
+
+.hatch-popup-btn.release {
+    background: #7a3a30
 }
 
 .game-layout {
@@ -1729,6 +1805,28 @@ img {
     display: flex;
     flex-direction: column;
     gap: 3px
+}
+
+.stats-panel-moves-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+}
+
+.stats-panel-moves-edit {
+    font-size: 6px;
+    padding: 2px 7px;
+    background: #685040;
+    color: var(--parchment);
+    border: 2px solid #483828;
+    border-radius: 0;
+    cursor: pointer;
+    font-weight: 700
+}
+
+.stats-panel-moves-edit:hover {
+    background: #786050;
+    border-color: var(--gold-dark)
 }
 
 .stats-panel-moves-title {
@@ -2784,11 +2882,21 @@ img {
 .catch-mode-option {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: 4px;
     font-size: 6px;
     color: var(--parchment);
     cursor: pointer;
     padding: 1px 0
+}
+
+.catch-mode-hint {
+    width: 100%;
+    padding-left: 12px;
+    font-size: 5px;
+    line-height: 1.4;
+    color: var(--gold);
+    opacity: .8
 }
 
 .catch-mode-option input[type=radio] {
@@ -3816,6 +3924,10 @@ img {
 
 .catch-modal-route-settings .catch-mode-option {
     color: #3a2818
+}
+
+.catch-modal-route-settings .catch-mode-hint {
+    color: #6a4a20
 }
 
 .catch-modal-route-settings .catch-ball-label {

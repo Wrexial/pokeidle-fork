@@ -8,6 +8,7 @@ import { TownMap } from './town-map.js'
 import { PartyBoxPanel } from './party-box-panel.js'
 import { MobileTabs } from './mobile-tabs.js'
 import { RightPanel } from './right-panel.js'
+import { HatchPopup } from './hatch-popup.js'
 
 export function GameLayout() {
   const { dispatch } = useGame()
@@ -16,7 +17,7 @@ export function GameLayout() {
   return useIsMobile()
     ? jsxs('div', {
         className: 'game-layout mobile',
-        children: [jsx(BattleScreen, {}), jsx(MobileTabs, {})],
+        children: [jsx(BattleScreen, {}), jsx(MobileTabs, {}), jsx(HatchPopup, {})],
       })
     : jsxs('div', {
         className: 'game-layout',
@@ -27,6 +28,7 @@ export function GameLayout() {
             children: [jsx(BattleScreen, {}), jsx(TownMap, {})],
           }),
           jsx(RightPanel, {}),
+          jsx(HatchPopup, {}),
         ],
       })
 }

@@ -2,6 +2,7 @@
 
 import { evValue } from '../data/config.js'
 import { animatedSprites, moveLearnsets, pokemonSpecies, preEvolutionMap, trainerClasses } from '../data/gameData.js'
+import { BOX_SORT_OPTIONS } from '../data/ui.js'
 
 /**
  * Animated sprite directory. It is a merged set: the official Gen V
@@ -258,6 +259,53 @@ export function createPokemon(speciesKey, level, id, isShiny = !1) {
     ivs,
     isShiny,
   }
+}
+
+/**
+ * Sort a box by the chosen mode. Dex keeps the original order (dex number,
+ * then highest level, then shiny first); the others lead with their own key.
+ * @param {Pokemon[]} box
+ * @param {string} [mode]
+ * @returns {Pokemon[]}
+ */
+export function sortBoxMembers(box, mode = 'dex') {
+  /** @type {(pokemon: Pokemon) => number} */
+  const dexId = (pokemon) => pokemonSpecies[pokemon.speciesKey]?.id ?? 0
+  /** @type {(pokemon: Pokemon) => string} */
+  const speciesName = (pokemon) => pokemonSpecies[pokemon.speciesKey]?.name ?? pokemon.name
+  /** @type {(left: Pokemon, right: Pokemon) => number} */
+  const byDex = (left, right) => dexId(left) - dexId(right)
+  /** @type {(left: Pokemon, right: Pokemon) => number} */
+  const byLevelDesc = (left, right) => right.level - left.level
+  /** @type {(left: Pokemon, right: Pokemon) => number} */
+  const byLevelAsc = (left, right) => left.level - right.level
+  /** @type {(left: Pokemon, right: Pokemon) => number} */
+  const byName = (left, right) => speciesName(left).localeCompare(speciesName(right))
+  /** @type {(left: Pokemon, right: Pokemon) => number} */
+  const byShiny = (left, right) => (left.isShiny === right.isShiny ? 0 : left.isShiny ? -1 : 1)
+  /** @type {(left: Pokemon, right: Pokemon) => number} */
+  const byNewest = (left, right) => Number(right.id) - Number(left.id)
+  /** @type {Record<string, (left: Pokemon, right: Pokemon) => number>} */
+  const comparators = {
+    dex: (left, right) => byDex(left, right) || byLevelDesc(left, right) || byShiny(left, right),
+    level_desc: (left, right) => byLevelDesc(left, right) || byDex(left, right),
+    level_asc: (left, right) => byLevelAsc(left, right) || byDex(left, right),
+    name: (left, right) => byName(left, right) || byDex(left, right),
+    shiny: (left, right) => byShiny(left, right) || byDex(left, right),
+    newest: (left, right) => byNewest(left, right) || byDex(left, right),
+  }
+  return [...box].sort(comparators[mode] ?? comparators.dex)
+}
+
+/**
+ * The next box sort mode in the cycle. `BOX_SORT_OPTIONS` is the source of
+ * truth for the order; keep this tolerant of unknown values.
+ * @param {string} [mode]
+ * @returns {string}
+ */
+export function nextBoxSortMode(mode = 'dex') {
+  const index = BOX_SORT_OPTIONS.findIndex((option) => option.value === mode)
+  return BOX_SORT_OPTIONS[(index + 1) % BOX_SORT_OPTIONS.length].value
 }
 
 /** @param {string} trainerClass */

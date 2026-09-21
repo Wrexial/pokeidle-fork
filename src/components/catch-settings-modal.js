@@ -153,7 +153,7 @@ export const CatchSettingsModal = React.memo(
                 className: 'catch-modal-section-title',
                 children: 'Catch Mode',
               }),
-              CATCH_MODE_OPTIONS.map(({ value: encounter, label: species }) =>
+              CATCH_MODE_OPTIONS.map(({ value: encounter, label: species, hint }) =>
                 jsxs(
                   'label',
                   {
@@ -178,6 +178,12 @@ export const CatchSettingsModal = React.memo(
                           min: 1,
                           max: 100,
                           onClick: /** @param {React.MouseEvent} event */ (event) => event.stopPropagation(),
+                        }),
+                      hint &&
+                        mode === encounter &&
+                        jsx('span', {
+                          className: 'catch-mode-hint',
+                          children: hint,
                         }),
                     ],
                   },

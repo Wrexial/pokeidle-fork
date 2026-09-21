@@ -67,6 +67,13 @@ export function shouldAutoCatch(state, routeKey, speciesKey, level, isShiny) {
       return level >= rule.levelThreshold
     case 'pokedex_new':
       return !state.pokedexCaught.includes(speciesKey)
+    case 'living_dex':
+      // Keep catching until one actually lives in the party or box (not just the
+      // Pokedex). Held evolutions don't count; forms are separate species keys.
+      return (
+        !state.party.some((member) => member.speciesKey === speciesKey) &&
+        !state.box.some((member) => member.speciesKey === speciesKey)
+      )
     default:
       return !0
   }

@@ -8,6 +8,7 @@ import { moveData, pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { genderForPokemon, genderSymbol } from '../game/breeding.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
+import { MoveManagerPanel } from './move-manager-panel.js'
 
 /** @param {{ pokemon: Pokemon, source: 'party' | 'box', partyLength: number, onAction: () => void, onClose: () => void, evolutionInfo?: { entries: { targetName: string, canEvolve: boolean, requirementLabel: string, targetKey: string, itemId?: string }[] } | null, onEvolve?: (index: number) => void, onRelease?: () => void, canRelease?: boolean }} props */
 export function StatsPanel({
@@ -24,6 +25,7 @@ export function StatsPanel({
   const species = pokemonSpecies[pokemon.speciesKey]
   const { state, dispatch } = useGame(),
     [tradeConfirm, setTradeConfirm] = React.useState(!1),
+    [showMoveManager, setShowMoveManager] = React.useState(!1),
     linkCables = state.inventory.linkCable ?? 0,
     gender = genderForPokemon(pokemon)
   if (!species) return null
@@ -199,9 +201,19 @@ export function StatsPanel({
       jsxs('div', {
         className: 'stats-panel-moves',
         children: [
-          jsx('span', {
-            className: 'stats-panel-moves-title',
-            children: 'Moves',
+          jsxs('div', {
+            className: 'stats-panel-moves-header',
+            children: [
+              jsx('span', {
+                className: 'stats-panel-moves-title',
+                children: 'Moves',
+              }),
+              jsx('button', {
+                className: 'stats-panel-moves-edit',
+                onClick: () => setShowMoveManager(!0),
+                children: 'Manage',
+              }),
+            ],
           }),
           pokemon.moves.map((moveId) => {
             const moveDef = moveData[moveId]
@@ -312,6 +324,11 @@ export function StatsPanel({
             }),
         ],
       }),
+      showMoveManager &&
+        jsx(MoveManagerPanel, {
+          pokemon,
+          onClose: () => setShowMoveManager(!1),
+        }),
     ],
   })
 }

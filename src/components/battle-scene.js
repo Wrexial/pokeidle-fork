@@ -381,7 +381,9 @@ export function BattleScene() {
         ],
       }),
       showMoveManager &&
+        state.playerPokemon &&
         jsx(MoveManagerPanel, {
+          pokemon: state.playerPokemon,
           onClose: () => setShowMoveManager(!1),
         }),
       showSettings &&

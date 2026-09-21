@@ -142,6 +142,10 @@ type GameState = {
   enemyPokemon: any
   party: Pokemon[]
   box: Pokemon[]
+  /** Chosen box sort mode (see BOX_SORT_OPTIONS). */
+  boxSort: string
+  /** The most recently hatched egg, shown in the hatch popup until dismissed. */
+  hatchResult: Pokemon | null
   battleLog: string[]
   battleEvents: any[]
   pendingEvents: any[]

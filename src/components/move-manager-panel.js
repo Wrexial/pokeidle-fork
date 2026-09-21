@@ -7,14 +7,17 @@ import { moveData, pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { getFamilyLearnset } from '../game/pokemon.js'
 
-/** @param {{ onClose: () => void }} props */
-export function MoveManagerPanel({ onClose }) {
-  const { state, dispatch } = useGame(),
-    pokemon = /** @type {Pokemon} */ (state.playerPokemon),
-    pokemonId = pokemon.id,
-    [moves, setMoves] = React.useState([...pokemon.moves]),
-    availableMoves = getFamilyLearnset(pokemon.speciesKey, pokemon.level),
-    species = pokemonSpecies[pokemon.speciesKey]
+/** @param {{ pokemon: Pokemon, onClose: () => void }} props */
+export function MoveManagerPanel({ pokemon, onClose }) {
+  const { dispatch } = useGame(),
+    // Freeze the target at mount: the active Pokemon can change (faint and
+    // auto-switch) while the panel is open, and the moves must never land on a
+    // different Pokemon.
+    [target] = React.useState(() => pokemon),
+    targetId = target.id,
+    [moves, setMoves] = React.useState(() => [...target.moves]),
+    availableMoves = getFamilyLearnset(target.speciesKey, target.level),
+    species = pokemonSpecies[target.speciesKey]
   /** @param {string} moveId */
   function toggleMove(moveId) {
     moves.includes(moveId)
@@ -22,13 +25,10 @@ export function MoveManagerPanel({ onClose }) {
       : moves.length < 4 && setMoves([...moves, moveId])
   }
   function confirmMoves() {
-    if (state.playerPokemon?.id !== pokemonId) {
-      onClose()
-      return
-    }
     ;(dispatch({
       type: 'SET_MOVES',
       payload: {
+        pokemonId: targetId,
         moves,
       },
     }),
@@ -50,7 +50,7 @@ export function MoveManagerPanel({ onClose }) {
             }),
             jsxs('span', {
               className: 'move-panel-species',
-              children: [species.name, ' Lv.', pokemon.level],
+              children: [species.name, ' Lv.', target.level],
             }),
           ],
         }),

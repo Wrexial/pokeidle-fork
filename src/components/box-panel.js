@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
-import { BOX_PAGE_SIZE } from '../data/ui.js'
+import { BOX_PAGE_SIZE, BOX_SORT_OPTIONS } from '../data/ui.js'
 import { pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
@@ -94,13 +94,17 @@ export function BoxPanel({
               }),
               jsx('button', {
                 className: 'box-sort-btn',
+                title: 'Cycle box sort mode',
                 onClick: () => {
                   ;(dispatch({
-                    type: 'SORT_BOX',
+                    type: 'SET_BOX_SORT',
                   }),
                     setPage(0))
                 },
-                children: 'Sort',
+                children: [
+                  'Sort: ',
+                  BOX_SORT_OPTIONS.find((option) => option.value === state.boxSort)?.label ?? 'Dex',
+                ],
               }),
             ],
           }),

@@ -127,7 +127,23 @@ export const CATCH_MODE_OPTIONS = [
     {
       value: 'pokedex_new',
       label: 'Not caught yet',
+      hint: 'Stops once the species is registered in the Pokedex.',
     },
+    {
+      value: 'living_dex',
+      label: 'Not owned (living)',
+      hint: 'Keeps catching until one is in the party or box — for a living dex.',
+    },
+  ]
+
+/** Box sort modes, in cycle order. */
+export const BOX_SORT_OPTIONS = [
+    { value: 'dex', label: 'Dex' },
+    { value: 'level_desc', label: 'Lv \u2193' },
+    { value: 'level_asc', label: 'Lv \u2191' },
+    { value: 'name', label: 'A-Z' },
+    { value: 'shiny', label: '\u2605' },
+    { value: 'newest', label: 'New' },
   ]
 
 export const SIDE_PANEL_TABS = [

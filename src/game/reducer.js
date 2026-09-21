@@ -4,7 +4,7 @@ import { RAID_COOLDOWN_MS, RAID_LEVEL_MAX, breedShinyOdds, breedShinyParentOdds,
 import { activeItems, pokeBalls } from '../data/items.js'
 import { elite4Data, encounterData, gymLeaderData, mapData, moveLearnsets, pokemonSpecies, regions } from '../data/gameData.js'
 import { createVolatileState } from './combat.js'
-import { calculatePokemonStats, calculateRequiredExperience, createPokemon, resolvePokemonMoves } from './pokemon.js'
+import { calculatePokemonStats, calculateRequiredExperience, createPokemon, nextBoxSortMode, resolvePokemonMoves, sortBoxMembers } from './pokemon.js'
 import { canBreed, eggSpeciesKey } from './breeding.js'
 import { checkShinyOdds, computeUnlockedLocations, getRegionUnlockTokens, isActiveEffectItem, loadActivePokemonFromParty, prepareNextBattle, syncActivePokemonIntoParty, tickBattleCounters } from './progression.js'
 
@@ -27,6 +27,10 @@ export const initialGameState = {
   battlesWonByLocation: {},
   party: [],
   box: [],
+  /** Chosen box sort mode (see BOX_SORT_OPTIONS). */
+  boxSort: 'dex',
+  /** Newly hatched Pokemon shown in the hatch popup (null when dismissed). */
+  hatchResult: null,
   autoCatch: !0,
   nextPokemonId: 1,
   currentLocation: 'palletTown',
@@ -419,6 +423,20 @@ export function gameReducer(state, action) {
         ...state,
         levelUpNotification: null,
       }
+    case 'CLEAR_HATCH_RESULT':
+      return {
+        ...state,
+        hatchResult: null,
+      }
+    case 'RELEASE_HATCHLING': {
+      const { pokemonId } = action.payload
+      return {
+        ...state,
+        box: state.box.filter((member) => member.id !== pokemonId),
+        hatchResult: state.hatchResult?.id === pokemonId ? null : state.hatchResult,
+        battleLog: [...state.battleLog, 'The newly hatched Pokemon was released.'].slice(-50),
+      }
+    }
     case 'PHASE_IDLE': {
       const nextState = prepareNextBattle(state)
       return state.inRaid
@@ -434,17 +452,33 @@ export function gameReducer(state, action) {
         battleLog: [...state.battleLog, action.payload.message].slice(-50),
       }
     case 'SET_MOVES': {
-      if (!state.playerPokemon) return state
-      const moves = action.payload.moves
-      return moves.length < 1 || moves.length > 4 || new Set(moves).size !== moves.length
-        ? state
-        : syncActivePokemonIntoParty({
-            ...state,
-            playerPokemon: {
-              ...state.playerPokemon,
-              moves,
-            },
-          })
+      const { pokemonId, moves } = action.payload
+      if (
+        !Array.isArray(moves) ||
+        moves.length < 1 ||
+        moves.length > 4 ||
+        new Set(moves).size !== moves.length
+      )
+        return state
+      // `pokemonId` targets a specific party/box member (the panel can be open
+      // while the active Pokemon changes). Fall back to the active one for any
+      // legacy callers that don't pass an id.
+      const targetId = pokemonId ?? state.playerPokemon?.id
+      if (!targetId) return state
+      const updateMoves = /** @param {Pokemon} member */ (member) =>
+        member.id === targetId ? { ...member, moves } : member
+      if (!state.party.some((member) => member.id === targetId) && !state.box.some((member) => member.id === targetId))
+        return state
+      const playerPokemon =
+        state.playerPokemon && state.playerPokemon.id === targetId
+          ? { ...state.playerPokemon, moves }
+          : state.playerPokemon
+      return {
+        ...state,
+        party: state.party.map(updateMoves),
+        box: state.box.map(updateMoves),
+        playerPokemon,
+      }
     }
     case 'CATCH_POKEMON': {
       const {
@@ -1278,23 +1312,12 @@ export function gameReducer(state, action) {
         }
       )
     }
-    case 'SORT_BOX': {
-      const sortedBox = [...state.box].sort((left, right) => {
-        const leftId = pokemonSpecies[left.speciesKey]?.id ?? 0,
-          rightId = pokemonSpecies[right.speciesKey]?.id ?? 0
-        return leftId !== rightId
-          ? leftId - rightId
-          : left.level !== right.level
-            ? right.level - left.level
-            : left.isShiny !== right.isShiny
-              ? left.isShiny
-                ? -1
-                : 1
-              : 0
-      })
+    case 'SET_BOX_SORT': {
+      const boxSort = action.payload?.boxSort ?? nextBoxSortMode(state.boxSort)
       return {
         ...state,
-        box: sortedBox,
+        boxSort,
+        box: sortBoxMembers(state.box, boxSort),
       }
     }
     case 'RELEASE_POKEMON': {
@@ -1434,6 +1457,7 @@ export function gameReducer(state, action) {
         ...state,
         box: [...state.box, egg],
         nextPokemonId: state.nextPokemonId + 1,
+        hatchResult: egg,
         daycare: {
           ...state.daycare,
           progress: 0,

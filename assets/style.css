@@ -4521,6 +4521,46 @@ img {
     text-align: right
 }
 
+.achievement-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2px
+}
+
+.achievement {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+    font-size: 9px;
+    color: #8a7a60;
+    opacity: .8
+}
+
+.achievement.achieved {
+    color: #3a2818;
+    opacity: 1
+}
+
+.achievement-icon {
+    width: 12px;
+    text-align: center;
+    flex: 0 0 auto
+}
+
+.achievement-text {
+    display: flex;
+    flex-direction: column
+}
+
+.achievement-name {
+    font-weight: 700
+}
+
+.achievement-desc {
+    font-size: 8px;
+    opacity: .75
+}
+
 .battle-info-content p {
     margin: 0 0 8px
 }

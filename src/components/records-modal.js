@@ -1,12 +1,14 @@
 // Records modal — a read-only summary of the player's journey, opened from the Box.
 
 import { jsx, jsxs } from 'react/jsx-runtime'
+import { ACHIEVEMENTS } from '../data/achievements.js'
 import { gymLeaderData, pokedexIndexes, regions } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 
 /** @param {{ onClose: () => void }} props */
 export function RecordsModal({ onClose }) {
   const { state } = useGame(),
+    achieved = ACHIEVEMENTS.filter((achievement) => achievement.check(state)),
     nationalDex = pokedexIndexes.filter((entry) => entry[1].id > 0 && entry[1].id <= 1025),
     caughtCount = nationalDex.filter(([speciesKey]) => state.pokedexCaught.includes(speciesKey)).length,
     seenCount = nationalDex.filter(([speciesKey]) => state.pokedexSeen.includes(speciesKey)).length,
@@ -75,6 +77,47 @@ export function RecordsModal({ onClose }) {
         jsxs('div', {
           className: 'battle-info-content',
           children: [
+            jsxs('div', {
+              className: 'records-section',
+              children: [
+                jsxs('div', {
+                  className: 'records-section-title',
+                  children: ['Achievements', ` · ${achieved.length}/${ACHIEVEMENTS.length}`],
+                }),
+                jsx('div', {
+                  className: 'achievement-grid',
+                  children: ACHIEVEMENTS.map((achievement) => {
+                    const isMet = achievement.check(state)
+                    return jsxs(
+                      'div',
+                      {
+                        className: `achievement${isMet ? ' achieved' : ''}`,
+                        children: [
+                          jsx('span', {
+                            className: 'achievement-icon',
+                            children: isMet ? '\u{1f3c5}' : '\u00b7',
+                          }),
+                          jsxs('span', {
+                            className: 'achievement-text',
+                            children: [
+                              jsx('span', {
+                                className: 'achievement-name',
+                                children: achievement.name,
+                              }),
+                              jsx('span', {
+                                className: 'achievement-desc',
+                                children: achievement.description,
+                              }),
+                            ],
+                          }),
+                        ],
+                      },
+                      achievement.id
+                    )
+                  }),
+                }),
+              ],
+            }),
             sections.map((section) =>
               jsxs(
                 'div',

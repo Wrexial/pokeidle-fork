@@ -60,6 +60,13 @@ export const CHANGELOG = [
           ],
         },
         {
+          heading: 'Achievements',
+          items: [
+            'A set of 21 medals now tracks your milestones \u2014 battles, Pokedex, shinies, badges, Champions, prestige and the Battle Tower',
+            'They appear at the top of the Records panel with your earned/unearned count',
+          ],
+        },
+        {
           heading: 'Shiny Chain',
           items: [
             'Consecutive encounters of the same species build a shiny chain that improves its shiny odds \u2014 up to 4x at 120 in a row',

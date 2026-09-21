@@ -1,10 +1,35 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.8.0'
+export const GAME_VERSION = '0.8.1'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.8.1',
+      subtitle: 'Battle Tower Scaling & Sprite Polish',
+      sections: [
+        {
+          heading: 'Battle Tower',
+          items: [
+            'Deeper Tower floors now keep getting harder: past floor 25 the trainers\u2019 stats rise by 3% per floor instead of plateauing at level 100',
+          ],
+        },
+        {
+          heading: 'Polish',
+          items: [
+            'Added animated sprites for several Gen 9 Paradox and legendary forms (Iron Hands, Iron Moth, Iron Thorns, Iron Valiant, Miraidon)',
+            'Sprites with no animation now use their static image directly instead of requesting a missing file first',
+          ],
+        },
+        {
+          heading: 'Fixes',
+          items: [
+            'Route unlock order keys are now unique per region',
+          ],
+        },
+      ],
+    },
     {
       version: '0.8.0',
       subtitle: 'Battles, Breeding & Beyond',

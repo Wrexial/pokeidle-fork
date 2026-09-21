@@ -731,6 +731,32 @@ precedent. New state goes in `initialGameState`, `context.js` and
 Effort: **small per minigame, medium–large as a feature** (each is a
 self-contained modal + state slice; fishing and care are the two biggest).
 
+## 32. Cap raid scaling at level 80
+
+Raid encounters start at the legendary's pool level (`regions.json` `raidPool`
+levels are 70 or 75, set by `raidLevel(entry)` in
+`tools/generate-regions.cjs`), but the level then climbs by one for every
+cleared raid battle and is only capped at 100: see the `PHASE_IDLE` case in
+`src/game/reducer.js` (`raidLevel: Math.min(state.raidLevel + 1, 100)`). A long
+raid session can therefore outlevel the whole 5-75 curve.
+
+- [ ] Lower the cap to **80** in `PHASE_IDLE` (or a named `RAID_LEVEL_MAX`
+      constant in `src/data/config.js` rather than the magic `100`).
+- [ ] Keep the starting levels (70/75) as they are, so there is still a ramp.
+- [ ] Decide whether raid catches should track the current `raidLevel` —
+      `CATCH_POKEMON` currently forces `catchLevel = 60` for any raid, so a
+      capped-at-80 raid still hands out a Lv.60 Pokemon. Left alone or made to
+      follow `raidLevel`.
+- [ ] Check the level shows correctly on the Raid Island panel
+      (`src/components/location-panel.js`) and that Battle Tower / endless
+      scaling is unaffected (it is a separate system).
+
+Relevant code: `PHASE_IDLE` / `START_RAID` / `CATCH_POKEMON`
+(`src/game/reducer.js`), the raid enemy build in `src/hooks.js`, and
+`raidLevel()` in `tools/generate-regions.cjs`.
+
+Effort: **small**.
+
 ---
 
 ## Useful references when picking these up

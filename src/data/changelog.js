@@ -43,6 +43,13 @@ export const CHANGELOG = [
           ],
         },
         {
+          heading: 'Region Unlocks',
+          items: [
+            'Beating a region\u2019s Champion now earns an Unlock Token \u2014 spend it from the Town Map to open any region you like, instead of following a fixed order',
+            'Locked region tabs glow while you have a token; click one to open it',
+          ],
+        },
+        {
           heading: 'Region Prestige',
           items: [
             'Once you finish a region, the Gyms tab offers a Prestige button that replays its routes and badges without losing your Pokemon, items, money or Pokedex',

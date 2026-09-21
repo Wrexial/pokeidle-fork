@@ -1970,6 +1970,88 @@ img {
     color: #6a5a44
 }
 
+.map-region-tab.locked.unlockable {
+    opacity: 1;
+    cursor: pointer;
+    color: #e0c060;
+    border-color: #8a6820;
+    animation: unlock-pulse 1.6s ease-in-out infinite
+}
+
+@keyframes unlock-pulse {
+    0%,to {
+        box-shadow: 0 0 0 0 #f0d06000
+    }
+
+    50% {
+        box-shadow: 0 0 6px 1px #f0d06066
+    }
+}
+
+.map-region-tab.unlocking {
+    opacity: 1;
+    color: #1a1208;
+    background: linear-gradient(180deg,var(--gold-bright),var(--gold));
+    border-color: #f0d060
+}
+
+.map-unlock-tokens {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    font-size: 7px;
+    color: var(--gold-bright);
+    background: #2a2010;
+    border-bottom: 1px solid #3a2810
+}
+
+.map-unlock-token-icon {
+    font-size: 10px
+}
+
+.map-unlock-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 5px 8px;
+    background: #3a2c10;
+    border-bottom: 2px solid #5a3e20
+}
+
+.map-unlock-text {
+    font-size: 8px;
+    color: var(--parchment)
+}
+
+.map-unlock-actions {
+    display: flex;
+    gap: 6px
+}
+
+.map-unlock-btn,
+.map-unlock-cancel {
+    font-family: var(--font-pixel);
+    font-size: 7px;
+    padding: 3px 8px;
+    border: 2px solid #5a3e20;
+    background: linear-gradient(180deg,#3a2c1a,#2a1e10);
+    color: #c8b890;
+    cursor: pointer;
+    text-transform: uppercase
+}
+
+.map-unlock-btn {
+    color: #1a1208;
+    background: linear-gradient(180deg,var(--gold-bright),var(--gold));
+    border-color: #f0d060
+}
+
+.map-unlock-cancel:hover {
+    color: var(--gold-bright)
+}
+
 .town-map-canvas {
     flex: 1;
     position: relative;

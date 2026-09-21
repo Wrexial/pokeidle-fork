@@ -9,8 +9,7 @@
    "paldea-south-province-area-one"
   ],
   "unlock": {
-   "entry": true,
-   "previous": "galar"
+   "entry": true
   },
   "unlockOrder": 899999,
   "position": {

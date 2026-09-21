@@ -100,7 +100,7 @@ export function computeUnlockedLocations(state) {
         (unlockRule.entry &&
           !(
             state.startRegion === (location.region ?? 'kanto') ||
-            (unlockRule.previous && state.defeatedChampions.includes(unlockRule.previous))
+            state.unlockedRegions.includes(location.region ?? 'kanto')
           ))
       if (!blocked) {
         unlocked.add(locationId)
@@ -109,6 +109,17 @@ export function computeUnlockedLocations(state) {
     }
   }
   return Array.from(unlocked)
+}
+
+/**
+ * Region Unlock Tokens available to spend: one per region Champion beaten,
+ * minus the regions already opened beyond the starting one.
+ * @param {GameState} state
+ * @returns {number}
+ */
+export function getRegionUnlockTokens(state) {
+  const openedRegions = Math.max(0, (state.unlockedRegions ?? []).length - 1)
+  return Math.max(0, state.defeatedChampions.length - openedRegions)
 }
 
 /**

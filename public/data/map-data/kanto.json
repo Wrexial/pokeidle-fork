@@ -262,8 +262,7 @@
    "route21"
   ],
   "unlock": {
-   "entry": true,
-   "previous": "paldea"
+   "entry": true
   },
   "unlockOrder": 0,
   "position": {

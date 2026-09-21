@@ -9,8 +9,7 @@
    "unova-route-1"
   ],
   "unlock": {
-   "entry": true,
-   "previous": "sinnoh"
+   "entry": true
   },
   "unlockOrder": 499999,
   "position": {

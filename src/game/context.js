@@ -214,6 +214,16 @@ function repairSave(saved) {
   if (entryRoute) safeUnlocked.push(entryRoute)
   safeUnlocked = [...new Set(safeUnlocked)]
   if (safeUnlocked.length === 0) safeUnlocked = ['palletTown', 'route1']
+  // Rebuild the set of open regions from whichever entry towns are reachable,
+  // so saves from the old fixed-chain era keep their access.
+  const unlockedRegions = [
+    ...new Set([
+      fallbackRegion,
+      ...regions
+        .filter((region) => region.entry && safeUnlocked.includes(region.entry))
+        .map((region) => region.id),
+    ]),
+  ]
 
   const gymIds = new Set(gymLeaderData.map((gym) => gym.id)),
     eliteIds = new Set(elite4Data.map((member) => member.id)),
@@ -250,6 +260,7 @@ function repairSave(saved) {
     nextPokemonId: nextId,
     currentLocation: safeLocation,
     unlockedLocations: safeUnlocked,
+    unlockedRegions,
     battleLog: ['Game loaded!'],
     evolutionState: null,
     catchSettings,
@@ -356,6 +367,7 @@ export function GameProvider({ children }) {
           nextPokemonId: state.nextPokemonId,
           currentLocation: state.currentLocation,
           unlockedLocations: state.unlockedLocations,
+          unlockedRegions: state.unlockedRegions,
           catchSettings: state.catchSettings,
           globalCatchDefaults: state.globalCatchDefaults,
           alwaysCatchShinies: state.alwaysCatchShinies,
@@ -404,6 +416,7 @@ export function GameProvider({ children }) {
       state.defeatedGyms.length,
       state.defeatedEliteFour.length,
       state.defeatedChampions.length,
+      state.unlockedRegions.length,
       state.regionPrestige,
       state.victoryTokens,
       state.autoProceed,

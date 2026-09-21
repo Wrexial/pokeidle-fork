@@ -11,8 +11,7 @@
    "alola-route-5"
   ],
   "unlock": {
-   "entry": true,
-   "previous": "kalos"
+   "entry": true
   },
   "unlockOrder": 699999,
   "position": {

@@ -4,7 +4,7 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { raidPoolFor, mapAreas, mapData, regions } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
-import { createRoads } from '../game/progression.js'
+import { createRoads, getRegionUnlockTokens } from '../game/progression.js'
 import { MapNode } from './map-node.js'
 
 // Nodes are positioned as percentages, so the layout doesn't change here — this
@@ -25,6 +25,8 @@ export function TownMap() {
     currentLocationData = mapData[currentLocation],
     currentRegion = currentLocationData?.region ?? 'kanto',
     [activeRegion, setActiveRegion] = React.useState(currentRegion),
+    [pendingUnlock, setPendingUnlock] = React.useState(/** @type {string | null} */ (null)),
+    unlockTokens = getRegionUnlockTokens(state),
     canvasRef = React.useRef(/** @type {HTMLDivElement | null} */ (null)),
     [view, setView] = React.useState(
       /** @type {MapView} */ ({ x: 0, y: 0, scale: 1 })
@@ -267,24 +269,83 @@ export function TownMap() {
           }),
         ],
       }),
+      unlockTokens > 0 &&
+        jsxs('div', {
+          className: 'map-unlock-tokens',
+          children: [
+            jsx('span', {
+              className: 'map-unlock-token-icon',
+              children: '🗝️',
+            }),
+            `${unlockTokens} Region Unlock Token${unlockTokens > 1 ? 's' : ''} — pick a locked region to open it`,
+          ],
+        }),
       jsx('div', {
         className: 'map-region-tabs',
         children: regionOrder.map((region) => {
           const ids = locationsByRegion[region.id] ?? [],
-            available = ids.some((id) => unlockedLocations.includes(id))
+            available = ids.some((id) => unlockedLocations.includes(id)),
+            unlockable = !available && unlockTokens > 0,
+            pending = pendingUnlock === region.id
           return jsx(
             'button',
             {
-              className: `map-region-tab${activeRegion === region.id ? ' active' : ''}${available ? '' : ' locked'}`,
-              onClick: () => available && setActiveRegion(region.id),
-              disabled: !available,
-              title: available ? region.name : 'Locked',
-              children: region.name,
+              className: `map-region-tab${activeRegion === region.id ? ' active' : ''}${available ? '' : ' locked'}${pending ? ' unlocking' : ''}${unlockable ? ' unlockable' : ''}`,
+              onClick: available
+                ? () => {
+                    setActiveRegion(region.id)
+                    setPendingUnlock(null)
+                  }
+                : unlockable
+                  ? () => setPendingUnlock(pending ? null : region.id)
+                  : void 0,
+              disabled: !available && !unlockable,
+              title: available
+                ? region.name
+                : unlockable
+                  ? `Spend an Unlock Token to open ${region.name}`
+                  : 'Locked — beat a region Champion to earn an Unlock Token',
+              children: available ? region.name : unlockable ? `${region.name} 🔓` : region.name,
             },
             region.id
           )
         }),
       }),
+      pendingUnlock &&
+        jsxs('div', {
+          className: 'map-unlock-bar',
+          children: [
+            jsx('span', {
+              className: 'map-unlock-text',
+              children: `Open ${
+                regions.find((candidate) => candidate.id === pendingUnlock)?.name ?? pendingUnlock
+              } for 1 Unlock Token?`,
+            }),
+            jsxs('div', {
+              className: 'map-unlock-actions',
+              children: [
+                jsx('button', {
+                  className: 'map-unlock-btn',
+                  onClick: () => {
+                    dispatch({
+                      type: 'UNLOCK_REGION',
+                      payload: {
+                        regionId: pendingUnlock,
+                      },
+                    })
+                    setPendingUnlock(null)
+                  },
+                  children: 'Unlock',
+                }),
+                jsx('button', {
+                  className: 'map-unlock-cancel',
+                  onClick: () => setPendingUnlock(null),
+                  children: 'Cancel',
+                }),
+              ],
+            }),
+          ],
+        }),
       jsxs('div', {
         className: 'town-map-canvas',
         ref: canvasRef,

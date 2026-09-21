@@ -130,6 +130,8 @@ type GameState = {
   currentRoute: string
   currentLocation: string
   unlockedLocations: string[]
+  /** Regions the player can enter (starting region + ones opened with a token). */
+  unlockedRegions: string[]
   speed: number
   paused: boolean
   autoCatch: boolean
@@ -216,10 +218,9 @@ type MapLocation = {
     caughtOnRoute?: { routeKey: string; species: string[]; count: number }
     /** minimum level any party Pokemon must reach */
     partyLevel?: number
-    /** region-entry gate: unlocked if it's the player's start region, or if
-     * the `previous` region's champion has been beaten */
+    /** region-entry gate: unlocked if it's the player's start region, or the
+     * region has been opened with an Unlock Token (`state.unlockedRegions`) */
     entry?: boolean
-    previous?: string
   }
   /** Stable per-region progress key (region-offset route rank). Used only for
    * ordering; it is derived, not counted, so adding a location never renumbers

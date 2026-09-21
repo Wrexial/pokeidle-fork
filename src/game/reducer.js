@@ -5,7 +5,7 @@ import { activeItems, pokeBalls } from '../data/items.js'
 import { elite4Data, encounterData, gymLeaderData, mapData, moveLearnsets, pokemonSpecies, regions } from '../data/gameData.js'
 import { createVolatileState } from './combat.js'
 import { calculatePokemonStats, calculateRequiredExperience, createPokemon, resolvePokemonMoves } from './pokemon.js'
-import { computeUnlockedLocations, isActiveEffectItem, loadActivePokemonFromParty, prepareNextBattle, syncActivePokemonIntoParty, tickBattleCounters } from './progression.js'
+import { computeUnlockedLocations, getRegionUnlockTokens, isActiveEffectItem, loadActivePokemonFromParty, prepareNextBattle, syncActivePokemonIntoParty, tickBattleCounters } from './progression.js'
 
 /** @type {GameState} */
 export const initialGameState = {
@@ -30,6 +30,7 @@ export const initialGameState = {
   nextPokemonId: 1,
   currentLocation: 'palletTown',
   unlockedLocations: ['palletTown', 'route1'],
+  unlockedRegions: [],
   evolutionState: null,
   catchSettings: {},
   globalCatchDefaults: defaultCatchSettings,
@@ -96,6 +97,7 @@ export function gameReducer(state, action) {
         nextPokemonId: state.nextPokemonId + 1,
         currentLocation: firstRoute ?? entryTown ?? state.currentLocation,
         currentRoute: firstRoute ?? state.currentRoute,
+        unlockedRegions: [regionId],
         unlockedLocations: entryTown
           ? [...new Set([entryTown, ...(firstRoute ? [firstRoute] : [])])]
           : state.unlockedLocations,
@@ -108,6 +110,35 @@ export function gameReducer(state, action) {
         pokedexCaught: state.pokedexCaught.includes(speciesKey)
           ? state.pokedexCaught
           : [...state.pokedexCaught, speciesKey],
+      }
+    }
+    case 'UNLOCK_REGION': {
+      const regionId = action.payload.regionId,
+        region = regions.find((candidate) => candidate.id === regionId)
+      if (!region || state.unlockedRegions.includes(regionId)) return state
+      if (getRegionUnlockTokens(state) <= 0) return state
+      const entryId = region.entry,
+        firstRoute =
+          entryId && mapData[entryId]
+            ? mapData[entryId].connections.find(
+                /** @param {string} id */ (id) => mapData[id]?.type === 'route'
+              ) ?? null
+            : null,
+        unlockedState = {
+          ...state,
+          unlockedRegions: [...state.unlockedRegions, regionId],
+          unlockedLocations: [
+            ...new Set([
+              ...state.unlockedLocations,
+              ...(entryId ? [entryId] : []),
+              ...(firstRoute ? [firstRoute] : []),
+            ]),
+          ],
+        }
+      return {
+        ...unlockedState,
+        unlockedLocations: computeUnlockedLocations(unlockedState),
+        battleLog: [...state.battleLog, `${region.name} unlocked!`].slice(-50),
       }
     }
     case 'START_ENCOUNTER': {

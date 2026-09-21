@@ -9,8 +9,7 @@
    "sinnoh-route-201"
   ],
   "unlock": {
-   "entry": true,
-   "previous": "hoenn"
+   "entry": true
   },
   "unlockOrder": 399999,
   "position": {

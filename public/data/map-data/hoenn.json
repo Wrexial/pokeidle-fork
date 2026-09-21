@@ -9,8 +9,7 @@
    "hoenn-route-101"
   ],
   "unlock": {
-   "entry": true,
-   "previous": "johto"
+   "entry": true
   },
   "unlockOrder": 299999,
   "position": {

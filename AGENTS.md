@@ -256,10 +256,13 @@ Data conventions:
   (specific gym ids), `championDefeated` (a region id, or `true` meaning Kanto),
   and `requires` (locations that must already be unlocked) — all resolved to a
   fixpoint in `computeUnlockedLocations`. Region
-  **entry towns** use `{ entry: true, previous: '<regionId>' }`: they open if the
-  region is the player's `startRegion`, otherwise only once the `previous`
-  region's Champion is beaten (Kanto's previous is Paldea, so the chain cycles
-  and nothing is unreachable). Other routes unlock after winning battles at their
+  **entry towns** use `{ entry: true }`: they open if the region is the player's
+  `startRegion` or is listed in the player's `unlockedRegions`. Regions are no
+  longer a fixed chain — beating any region's Champion earns an
+  **Unlock Token** (`getRegionUnlockTokens` = Champions beaten minus regions
+  already opened beyond the starting one), and the player spends it from the
+  Town Map (`UNLOCK_REGION`) to open any still-locked region. Other routes
+  unlock after winning battles at their
   parent location. Each location also carries `unlockOrder`, a **stable derived
   progress key** (`region generation * 100000 + route rank`), used only for
   ordering. It is computed, not counted, so adding a zone never renumbers its

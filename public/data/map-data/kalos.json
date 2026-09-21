@@ -9,8 +9,7 @@
    "kalos-route-1"
   ],
   "unlock": {
-   "entry": true,
-   "previous": "unova"
+   "entry": true
   },
   "unlockOrder": 599999,
   "position": {

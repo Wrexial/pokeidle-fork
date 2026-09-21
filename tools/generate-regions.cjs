@@ -1213,14 +1213,15 @@ for (const region of REGIONS) {
   }
 
   // map/town/route locations
-  const prevRegionId = gen === 2 ? 'kanto' : REGIONS[gen - 3].id
   for (const node of order) {
     const id = locId(regionId, node)
     const isRoute = isRouteNode(node)
     const parent = node === entryNode ? null : (unlockParent[node] ?? null)
     let unlock
     if (node === entryNode) {
-      unlock = { entry: true, previous: prevRegionId }
+      // Region entry towns open when the player spends an Unlock Token on the
+      // region (or starts there); there is no fixed region chain.
+      unlock = { entry: true }
     } else if (!parent) {
       unlock = {}
     } else if (parent === entryNode) {
@@ -1731,10 +1732,10 @@ for (const loc of Object.values(mapData)) {
   }
 }
 
-// Region entry points are gated on the player's starting region: a start region
-// is open immediately, and every other region opens by beating the previous
-// region's Champion (cycling Kanto <- Paldea so nothing is unreachable).
-if (mapData.palletTown) mapData.palletTown.unlock = { entry: true, previous: 'paldea' }
+// Region entry points unlock when the player spends an Unlock Token earned by
+// beating a region's Champion (see the Pokedex/Town Map). A starting region is
+// open immediately.
+if (mapData.palletTown) mapData.palletTown.unlock = { entry: true }
 if (mapData.route1) mapData.route1.unlock = { requires: ['palletTown'] }
 // Kanto's hand-curated Raid Island predates the generated ones and had no
 // routeKey (nor an encounter bucket), unlike every other region. Wire it up so

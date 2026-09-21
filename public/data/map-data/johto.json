@@ -10,8 +10,7 @@
    "johto-mt-silver"
   ],
   "unlock": {
-   "entry": true,
-   "previous": "kanto"
+   "entry": true
   },
   "unlockOrder": 199999,
   "position": {

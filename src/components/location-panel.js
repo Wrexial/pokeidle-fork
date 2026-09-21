@@ -193,22 +193,22 @@ export function LocationPanel({ onOpenCatchSettings }) {
           locationId: requiredId,
         })
       )
-    if (unlockRule.entry)
+    if (unlockRule.entry) {
+      const entryRegionId = target.region ?? 'kanto',
+        isStartRegion = state.startRegion === entryRegionId,
+        regionOpen = state.unlockedRegions.includes(entryRegionId)
       requirements.push({
-        label: unlockRule.previous
-          ? `Beat the ${
-              regions.find((region) => region.id === unlockRule.previous)?.name ??
-              unlockRule.previous
-            } Champion`
-          : 'Start in this region',
-        current:
-          unlockRule.previous && state.defeatedChampions.includes(unlockRule.previous) ? 1 : 0,
+        label: isStartRegion
+          ? 'Start in this region'
+          : `Open ${
+              regions.find((region) => region.id === entryRegionId)?.name ?? entryRegionId
+            } with an Unlock Token`,
+        current: regionOpen ? 1 : 0,
         required: 1,
-        met: !unlockRule.previous || state.defeatedChampions.includes(unlockRule.previous),
-        locationId: unlockRule.previous
-          ? (regions.find((region) => region.id === unlockRule.previous)?.leagueLocationKey ?? null)
-          : null,
+        met: isStartRegion || regionOpen,
+        locationId: null,
       })
+    }
     return requirements
   }
   if (location.type === 'raid') {

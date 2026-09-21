@@ -9,8 +9,7 @@
    "galar-route-1"
   ],
   "unlock": {
-   "entry": true,
-   "previous": "alola"
+   "entry": true
   },
   "unlockOrder": 799999,
   "position": {

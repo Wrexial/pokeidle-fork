@@ -12,7 +12,7 @@
    "entry": true,
    "previous": "johto"
   },
-  "unlockOrder": 135,
+  "unlockOrder": 299999,
   "position": {
    "x": 32,
    "y": 77
@@ -54,7 +54,7 @@
     "hoenn-littleroot-town"
    ]
   },
-  "unlockOrder": 136,
+  "unlockOrder": 300101,
   "position": {
    "x": 31,
    "y": 68
@@ -79,7 +79,7 @@
     }
    ]
   },
-  "unlockOrder": 137,
+  "unlockOrder": 300101.5,
   "position": {
    "x": 31,
    "y": 60
@@ -124,7 +124,7 @@
     }
    ]
   },
-  "unlockOrder": 138,
+  "unlockOrder": 300102,
   "position": {
    "x": 24,
    "y": 59
@@ -148,7 +148,7 @@
     }
    ]
   },
-  "unlockOrder": 139,
+  "unlockOrder": 300102.5,
   "position": {
    "x": 16,
    "y": 58
@@ -193,7 +193,7 @@
     }
    ]
   },
-  "unlockOrder": 140,
+  "unlockOrder": 300103,
   "position": {
    "x": 30,
    "y": 54
@@ -219,7 +219,7 @@
     }
    ]
   },
-  "unlockOrder": 141,
+  "unlockOrder": 300104,
   "position": {
    "x": 9,
    "y": 56
@@ -244,7 +244,7 @@
     }
    ]
   },
-  "unlockOrder": 142,
+  "unlockOrder": 300104.5,
   "position": {
    "x": 8,
    "y": 48
@@ -292,7 +292,7 @@
     "hoenn-gym-1"
    ]
   },
-  "unlockOrder": 143,
+  "unlockOrder": 300105,
   "position": {
    "x": 10,
    "y": 63
@@ -317,7 +317,7 @@
     }
    ]
   },
-  "unlockOrder": 144,
+  "unlockOrder": 300106,
   "position": {
    "x": 11,
    "y": 70
@@ -341,7 +341,7 @@
     }
    ]
   },
-  "unlockOrder": 145,
+  "unlockOrder": 300106.5,
   "position": {
    "x": 10,
    "y": 77
@@ -389,7 +389,7 @@
     "hoenn-gym-2"
    ]
   },
-  "unlockOrder": 146,
+  "unlockOrder": 300107,
   "position": {
    "x": 18,
    "y": 75
@@ -414,7 +414,7 @@
     }
    ]
   },
-  "unlockOrder": 147,
+  "unlockOrder": 300108,
   "position": {
    "x": 37,
    "y": 82
@@ -439,7 +439,7 @@
     }
    ]
   },
-  "unlockOrder": 148,
+  "unlockOrder": 300109,
   "position": {
    "x": 41,
    "y": 77
@@ -464,7 +464,7 @@
     }
    ]
   },
-  "unlockOrder": 149,
+  "unlockOrder": 300109.5,
   "position": {
    "x": 41,
    "y": 67
@@ -510,7 +510,7 @@
     }
    ]
   },
-  "unlockOrder": 150,
+  "unlockOrder": 300110,
   "position": {
    "x": 38,
    "y": 54
@@ -536,7 +536,7 @@
     }
    ]
   },
-  "unlockOrder": 151,
+  "unlockOrder": 300110.5,
   "position": {
    "x": 38,
    "y": 47
@@ -585,7 +585,7 @@
     "hoenn-gym-3"
    ]
   },
-  "unlockOrder": 152,
+  "unlockOrder": 300111,
   "position": {
    "x": 38,
    "y": 38
@@ -610,7 +610,7 @@
     }
    ]
   },
-  "unlockOrder": 153,
+  "unlockOrder": 300112,
   "position": {
    "x": 29,
    "y": 41
@@ -633,7 +633,7 @@
     }
    ]
   },
-  "unlockOrder": 154,
+  "unlockOrder": 300112.5,
   "position": {
    "x": 20,
    "y": 40
@@ -681,7 +681,7 @@
     "hoenn-gym-4"
    ]
   },
-  "unlockOrder": 155,
+  "unlockOrder": 300113,
   "position": {
    "x": 32,
    "y": 35
@@ -708,7 +708,7 @@
     "hoenn-gym-5"
    ]
   },
-  "unlockOrder": 156,
+  "unlockOrder": 300113.5,
   "position": {
    "x": 24,
    "y": 35
@@ -753,7 +753,7 @@
     }
    ]
   },
-  "unlockOrder": 157,
+  "unlockOrder": 300114,
   "position": {
    "x": 16,
    "y": 35
@@ -778,7 +778,7 @@
     }
    ]
   },
-  "unlockOrder": 158,
+  "unlockOrder": 300115,
   "position": {
    "x": 8,
    "y": 40
@@ -803,7 +803,7 @@
     }
    ]
   },
-  "unlockOrder": 159,
+  "unlockOrder": 300116,
   "position": {
    "x": 16,
    "y": 46
@@ -827,7 +827,7 @@
     }
    ]
   },
-  "unlockOrder": 160,
+  "unlockOrder": 300116.5,
   "position": {
    "x": 23,
    "y": 50
@@ -872,7 +872,7 @@
     }
    ]
   },
-  "unlockOrder": 161,
+  "unlockOrder": 300117,
   "position": {
    "x": 30,
    "y": 48
@@ -898,7 +898,7 @@
     }
    ]
   },
-  "unlockOrder": 162,
+  "unlockOrder": 300118,
   "position": {
    "x": 46,
    "y": 46
@@ -923,7 +923,7 @@
     }
    ]
   },
-  "unlockOrder": 163,
+  "unlockOrder": 300119,
   "position": {
    "x": 44,
    "y": 37
@@ -947,7 +947,7 @@
     }
    ]
   },
-  "unlockOrder": 164,
+  "unlockOrder": 300119.5,
   "position": {
    "x": 50,
    "y": 35
@@ -995,7 +995,7 @@
     "hoenn-gym-6"
    ]
   },
-  "unlockOrder": 165,
+  "unlockOrder": 300120,
   "position": {
    "x": 60,
    "y": 38
@@ -1021,7 +1021,7 @@
     }
    ]
   },
-  "unlockOrder": 166,
+  "unlockOrder": 300121,
   "position": {
    "x": 61,
    "y": 32
@@ -1045,7 +1045,7 @@
     }
    ]
   },
-  "unlockOrder": 167,
+  "unlockOrder": 300121.5,
   "position": {
    "x": 70,
    "y": 32
@@ -1090,7 +1090,7 @@
     }
    ]
   },
-  "unlockOrder": 168,
+  "unlockOrder": 300122,
   "position": {
    "x": 64,
    "y": 44
@@ -1115,7 +1115,7 @@
     }
    ]
   },
-  "unlockOrder": 169,
+  "unlockOrder": 300123,
   "position": {
    "x": 56,
    "y": 47
@@ -1141,7 +1141,7 @@
     }
    ]
   },
-  "unlockOrder": 170,
+  "unlockOrder": 300124,
   "position": {
    "x": 81,
    "y": 33
@@ -1166,7 +1166,7 @@
     }
    ]
   },
-  "unlockOrder": 171,
+  "unlockOrder": 300124.5,
   "position": {
    "x": 87,
    "y": 32
@@ -1213,7 +1213,7 @@
     "hoenn-gym-7"
    ]
   },
-  "unlockOrder": 172,
+  "unlockOrder": 300125,
   "position": {
    "x": 86,
    "y": 23
@@ -1239,7 +1239,7 @@
     }
    ]
   },
-  "unlockOrder": 173,
+  "unlockOrder": 300126,
   "position": {
    "x": 78,
    "y": 40
@@ -1262,7 +1262,7 @@
     }
    ]
   },
-  "unlockOrder": 174,
+  "unlockOrder": 300126.5,
   "position": {
    "x": 86,
    "y": 39
@@ -1311,7 +1311,7 @@
     "hoenn-gym-8"
    ]
   },
-  "unlockOrder": 175,
+  "unlockOrder": 300127,
   "position": {
    "x": 91,
    "y": 44
@@ -1337,7 +1337,7 @@
     }
    ]
   },
-  "unlockOrder": 176,
+  "unlockOrder": 300128,
   "position": {
    "x": 86,
    "y": 49
@@ -1360,7 +1360,7 @@
     }
    ]
   },
-  "unlockOrder": 177,
+  "unlockOrder": 300128.5,
   "position": {
    "x": 19,
    "y": 65
@@ -1405,7 +1405,7 @@
     }
    ]
   },
-  "unlockOrder": 178,
+  "unlockOrder": 300129,
   "position": {
    "x": 87,
    "y": 58
@@ -1430,7 +1430,7 @@
     }
    ]
   },
-  "unlockOrder": 179,
+  "unlockOrder": 300130,
   "position": {
    "x": 79,
    "y": 59
@@ -1455,7 +1455,7 @@
     }
    ]
   },
-  "unlockOrder": 180,
+  "unlockOrder": 300131,
   "position": {
    "x": 72,
    "y": 60
@@ -1479,7 +1479,7 @@
     }
    ]
   },
-  "unlockOrder": 181,
+  "unlockOrder": 300131.5,
   "position": {
    "x": 65,
    "y": 61
@@ -1524,7 +1524,7 @@
     }
    ]
   },
-  "unlockOrder": 182,
+  "unlockOrder": 300132,
   "position": {
    "x": 58,
    "y": 61
@@ -1549,7 +1549,7 @@
     }
    ]
   },
-  "unlockOrder": 183,
+  "unlockOrder": 300133,
   "position": {
    "x": 51,
    "y": 62
@@ -1576,7 +1576,7 @@
     }
    ]
   },
-  "unlockOrder": 184,
+  "unlockOrder": 300134,
   "position": {
    "x": 53,
    "y": 71
@@ -1600,7 +1600,7 @@
     }
    ]
   },
-  "unlockOrder": 185,
+  "unlockOrder": 300135,
   "position": {
    "x": 51,
    "y": 53
@@ -1633,7 +1633,7 @@
     "hoenn-gym-8"
    ]
   },
-  "unlockOrder": 186,
+  "unlockOrder": 300136,
   "position": {
    "x": 63,
    "y": 67

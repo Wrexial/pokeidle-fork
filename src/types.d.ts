@@ -210,6 +210,9 @@ type MapLocation = {
     entry?: boolean
     previous?: string
   }
+  /** Stable per-region progress key (region-offset route rank). Used only for
+   * ordering; it is derived, not counted, so adding a location never renumbers
+   * its neighbours. */
   unlockOrder: number
   position: { x: number; y: number }
   [key: string]: any

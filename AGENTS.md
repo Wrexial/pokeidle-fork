@@ -242,7 +242,10 @@ Data conventions:
   region is the player's `startRegion`, otherwise only once the `previous`
   region's Champion is beaten (Kanto's previous is Paldea, so the chain cycles
   and nothing is unreachable). Other routes unlock after winning battles at their
-  parent location.
+  parent location. Each location also carries `unlockOrder`, a **stable derived
+  progress key** (`region generation * 100000 + route rank`), used only for
+  ordering. It is computed, not counted, so adding a zone never renumbers its
+  neighbours — or, importantly, any other region.
 - `regions.json` also carries `raidPool` — the generation's species that cannot
   be obtained in that region (not in any wild table and not reachable by
   evolution). Those are the Pokemon found on the region's Raid Island.

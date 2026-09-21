@@ -12,7 +12,7 @@
    "entry": true,
    "previous": "unova"
   },
-  "unlockOrder": 278,
+  "unlockOrder": 599999,
   "position": {
    "x": 49,
    "y": 94
@@ -54,7 +54,7 @@
     "kalos-vaniville-town"
    ]
   },
-  "unlockOrder": 279,
+  "unlockOrder": 600001,
   "position": {
    "x": 49,
    "y": 85
@@ -78,7 +78,7 @@
     }
    ]
   },
-  "unlockOrder": 280,
+  "unlockOrder": 600001.5,
   "position": {
    "x": 49,
    "y": 77
@@ -123,7 +123,7 @@
     }
    ]
   },
-  "unlockOrder": 281,
+  "unlockOrder": 600002,
   "position": {
    "x": 49,
    "y": 68
@@ -148,7 +148,7 @@
     }
    ]
   },
-  "unlockOrder": 282,
+  "unlockOrder": 600003,
   "position": {
    "x": 49,
    "y": 50
@@ -173,7 +173,7 @@
     }
    ]
   },
-  "unlockOrder": 283,
+  "unlockOrder": 600003.5,
   "position": {
    "x": 49,
    "y": 42
@@ -221,7 +221,7 @@
     "kalos-gym-1"
    ]
   },
-  "unlockOrder": 284,
+  "unlockOrder": 600004,
   "position": {
    "x": 49,
    "y": 33
@@ -248,7 +248,7 @@
     }
    ]
   },
-  "unlockOrder": 285,
+  "unlockOrder": 600004.5,
   "position": {
    "x": 50,
    "y": 25
@@ -293,7 +293,7 @@
     }
    ]
   },
-  "unlockOrder": 286,
+  "unlockOrder": 600005,
   "position": {
    "x": 43,
    "y": 27
@@ -317,7 +317,7 @@
     }
    ]
   },
-  "unlockOrder": 287,
+  "unlockOrder": 600005.5,
   "position": {
    "x": 35,
    "y": 29
@@ -361,7 +361,7 @@
     }
    ]
   },
-  "unlockOrder": 288,
+  "unlockOrder": 600006,
   "position": {
    "x": 27,
    "y": 22
@@ -388,7 +388,7 @@
     }
    ]
   },
-  "unlockOrder": 289,
+  "unlockOrder": 600007,
   "position": {
    "x": 27,
    "y": 30
@@ -413,7 +413,7 @@
     }
    ]
   },
-  "unlockOrder": 290,
+  "unlockOrder": 600007.5,
   "position": {
    "x": 12,
    "y": 31
@@ -462,7 +462,7 @@
     "kalos-gym-2"
    ]
   },
-  "unlockOrder": 291,
+  "unlockOrder": 600008,
   "position": {
    "x": 11,
    "y": 38
@@ -486,7 +486,7 @@
     }
    ]
   },
-  "unlockOrder": 292,
+  "unlockOrder": 600008.5,
   "position": {
    "x": 11,
    "y": 46
@@ -530,7 +530,7 @@
     }
    ]
   },
-  "unlockOrder": 293,
+  "unlockOrder": 600009,
   "position": {
    "x": 20,
    "y": 46
@@ -555,7 +555,7 @@
     }
    ]
   },
-  "unlockOrder": 294,
+  "unlockOrder": 600010,
   "position": {
    "x": 12,
    "y": 24
@@ -579,7 +579,7 @@
     }
    ]
   },
-  "unlockOrder": 295,
+  "unlockOrder": 600010.5,
   "position": {
    "x": 13,
    "y": 16
@@ -624,7 +624,7 @@
     }
    ]
   },
-  "unlockOrder": 296,
+  "unlockOrder": 600011,
   "position": {
    "x": 22,
    "y": 18
@@ -648,7 +648,7 @@
     }
    ]
   },
-  "unlockOrder": 297,
+  "unlockOrder": 600011.5,
   "position": {
    "x": 25,
    "y": 6
@@ -696,7 +696,7 @@
     "kalos-gym-3"
    ]
   },
-  "unlockOrder": 298,
+  "unlockOrder": 600012,
   "position": {
    "x": 35,
    "y": 7
@@ -720,7 +720,7 @@
     }
    ]
   },
-  "unlockOrder": 299,
+  "unlockOrder": 600012.5,
   "position": {
    "x": 44,
    "y": 9
@@ -768,7 +768,7 @@
     "kalos-gym-4"
    ]
   },
-  "unlockOrder": 300,
+  "unlockOrder": 600013,
   "position": {
    "x": 45,
    "y": 19
@@ -796,7 +796,7 @@
     "kalos-gym-5"
    ]
   },
-  "unlockOrder": 301,
+  "unlockOrder": 600014,
   "position": {
    "x": 60,
    "y": 26
@@ -820,7 +820,7 @@
     }
    ]
   },
-  "unlockOrder": 302,
+  "unlockOrder": 600014.5,
   "position": {
    "x": 50,
    "y": 11
@@ -869,7 +869,7 @@
     "kalos-gym-6"
    ]
   },
-  "unlockOrder": 303,
+  "unlockOrder": 600015,
   "position": {
    "x": 59,
    "y": 13
@@ -893,7 +893,7 @@
     }
    ]
   },
-  "unlockOrder": 304,
+  "unlockOrder": 600015.5,
   "position": {
    "x": 69,
    "y": 13
@@ -938,7 +938,7 @@
     }
    ]
   },
-  "unlockOrder": 305,
+  "unlockOrder": 600016,
   "position": {
    "x": 69,
    "y": 31
@@ -963,7 +963,7 @@
     }
    ]
   },
-  "unlockOrder": 306,
+  "unlockOrder": 600017,
   "position": {
    "x": 78,
    "y": 13
@@ -987,7 +987,7 @@
     }
    ]
   },
-  "unlockOrder": 307,
+  "unlockOrder": 600017.5,
   "position": {
    "x": 87,
    "y": 13
@@ -1035,7 +1035,7 @@
     "kalos-gym-7"
    ]
   },
-  "unlockOrder": 308,
+  "unlockOrder": 600018,
   "position": {
    "x": 88,
    "y": 22
@@ -1059,7 +1059,7 @@
     }
    ]
   },
-  "unlockOrder": 309,
+  "unlockOrder": 600018.5,
   "position": {
    "x": 88,
    "y": 31
@@ -1104,7 +1104,7 @@
     }
    ]
   },
-  "unlockOrder": 310,
+  "unlockOrder": 600019,
   "position": {
    "x": 89,
    "y": 40
@@ -1130,7 +1130,7 @@
     }
    ]
   },
-  "unlockOrder": 311,
+  "unlockOrder": 600019.5,
   "position": {
    "x": 81,
    "y": 40
@@ -1177,7 +1177,7 @@
     "kalos-gym-8"
    ]
   },
-  "unlockOrder": 312,
+  "unlockOrder": 600020,
   "position": {
    "x": 76,
    "y": 45
@@ -1200,7 +1200,7 @@
     }
    ]
   },
-  "unlockOrder": 313,
+  "unlockOrder": 600020,
   "position": {
    "x": 93,
    "y": 47
@@ -1245,7 +1245,7 @@
     }
    ]
   },
-  "unlockOrder": 314,
+  "unlockOrder": 600021,
   "position": {
    "x": 72,
    "y": 40
@@ -1272,7 +1272,7 @@
     }
    ]
   },
-  "unlockOrder": 315,
+  "unlockOrder": 600022,
   "position": {
    "x": 57,
    "y": 41
@@ -1296,7 +1296,7 @@
     }
    ]
   },
-  "unlockOrder": 316,
+  "unlockOrder": 600023,
   "position": {
    "x": 85,
    "y": 47
@@ -1329,7 +1329,7 @@
     "kalos-gym-8"
    ]
   },
-  "unlockOrder": 317,
+  "unlockOrder": 600024,
   "position": {
    "x": 87,
    "y": 53

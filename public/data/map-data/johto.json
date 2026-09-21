@@ -13,7 +13,7 @@
    "entry": true,
    "previous": "kanto"
   },
-  "unlockOrder": 100,
+  "unlockOrder": 199999,
   "position": {
    "x": 94,
    "y": 61
@@ -56,7 +56,7 @@
     "johto-new-bark-town"
    ]
   },
-  "unlockOrder": 101,
+  "unlockOrder": 200029,
   "position": {
    "x": 84,
    "y": 61
@@ -80,7 +80,7 @@
     }
    ]
   },
-  "unlockOrder": 102,
+  "unlockOrder": 200029.5,
   "position": {
    "x": 75,
    "y": 62
@@ -125,7 +125,7 @@
     }
    ]
   },
-  "unlockOrder": 103,
+  "unlockOrder": 200030,
   "position": {
    "x": 76,
    "y": 54
@@ -151,7 +151,7 @@
     }
    ]
   },
-  "unlockOrder": 104,
+  "unlockOrder": 200031,
   "position": {
    "x": 77,
    "y": 45
@@ -176,7 +176,7 @@
     }
    ]
   },
-  "unlockOrder": 105,
+  "unlockOrder": 200031.5,
   "position": {
    "x": 66,
    "y": 45
@@ -224,7 +224,7 @@
     "johto-gym-1"
    ]
   },
-  "unlockOrder": 106,
+  "unlockOrder": 200032,
   "position": {
    "x": 68,
    "y": 54
@@ -249,7 +249,7 @@
     }
    ]
   },
-  "unlockOrder": 107,
+  "unlockOrder": 200033,
   "position": {
    "x": 70,
    "y": 77
@@ -273,7 +273,7 @@
     }
    ]
   },
-  "unlockOrder": 108,
+  "unlockOrder": 200033.5,
   "position": {
    "x": 60,
    "y": 78
@@ -321,7 +321,7 @@
     "johto-gym-2"
    ]
   },
-  "unlockOrder": 109,
+  "unlockOrder": 200034,
   "position": {
    "x": 52,
    "y": 72
@@ -345,7 +345,7 @@
     }
    ]
   },
-  "unlockOrder": 110,
+  "unlockOrder": 200034.5,
   "position": {
    "x": 52,
    "y": 63
@@ -393,7 +393,7 @@
     "johto-gym-3"
    ]
   },
-  "unlockOrder": 111,
+  "unlockOrder": 200035,
   "position": {
    "x": 52,
    "y": 54
@@ -419,7 +419,7 @@
     }
    ]
   },
-  "unlockOrder": 112,
+  "unlockOrder": 200036,
   "position": {
    "x": 56,
    "y": 45
@@ -444,7 +444,7 @@
     }
    ]
   },
-  "unlockOrder": 113,
+  "unlockOrder": 200037,
   "position": {
    "x": 56,
    "y": 36
@@ -470,7 +470,7 @@
     }
    ]
   },
-  "unlockOrder": 114,
+  "unlockOrder": 200037.5,
   "position": {
    "x": 56,
    "y": 27
@@ -517,7 +517,7 @@
     "johto-gym-4"
    ]
   },
-  "unlockOrder": 115,
+  "unlockOrder": 200038,
   "position": {
    "x": 56,
    "y": 16
@@ -542,7 +542,7 @@
     }
    ]
   },
-  "unlockOrder": 116,
+  "unlockOrder": 200038,
   "position": {
    "x": 46,
    "y": 27
@@ -567,7 +567,7 @@
     }
    ]
   },
-  "unlockOrder": 117,
+  "unlockOrder": 200039,
   "position": {
    "x": 36,
    "y": 27
@@ -591,7 +591,7 @@
     }
    ]
   },
-  "unlockOrder": 118,
+  "unlockOrder": 200039.5,
   "position": {
    "x": 37,
    "y": 36
@@ -636,7 +636,7 @@
     }
    ]
   },
-  "unlockOrder": 119,
+  "unlockOrder": 200040,
   "position": {
    "x": 26,
    "y": 36
@@ -662,7 +662,7 @@
     }
    ]
   },
-  "unlockOrder": 120,
+  "unlockOrder": 200041,
   "position": {
    "x": 27,
    "y": 46
@@ -686,7 +686,7 @@
     }
    ]
   },
-  "unlockOrder": 121,
+  "unlockOrder": 200041.5,
   "position": {
    "x": 17,
    "y": 46
@@ -733,7 +733,7 @@
     "johto-gym-5"
    ]
   },
-  "unlockOrder": 122,
+  "unlockOrder": 200041.5,
   "position": {
    "x": 27,
    "y": 58
@@ -761,7 +761,7 @@
     "johto-gym-6"
    ]
   },
-  "unlockOrder": 123,
+  "unlockOrder": 200042,
   "position": {
    "x": 66,
    "y": 27
@@ -786,7 +786,7 @@
     }
    ]
   },
-  "unlockOrder": 124,
+  "unlockOrder": 200042.5,
   "position": {
    "x": 75,
    "y": 28
@@ -833,7 +833,7 @@
     "johto-gym-7"
    ]
   },
-  "unlockOrder": 125,
+  "unlockOrder": 200043,
   "position": {
    "x": 83,
    "y": 27
@@ -858,7 +858,7 @@
     }
    ]
   },
-  "unlockOrder": 126,
+  "unlockOrder": 200044,
   "position": {
    "x": 91,
    "y": 32
@@ -882,7 +882,7 @@
     }
    ]
   },
-  "unlockOrder": 127,
+  "unlockOrder": 200044.5,
   "position": {
    "x": 94,
    "y": 39
@@ -930,7 +930,7 @@
     "johto-gym-8"
    ]
   },
-  "unlockOrder": 128,
+  "unlockOrder": 200045,
   "position": {
    "x": 93,
    "y": 50
@@ -956,7 +956,7 @@
     }
    ]
   },
-  "unlockOrder": 129,
+  "unlockOrder": 200046,
   "position": {
    "x": 83,
    "y": 50
@@ -981,7 +981,7 @@
     }
    ]
   },
-  "unlockOrder": 130,
+  "unlockOrder": 200047,
   "position": {
    "x": 6,
    "y": 51
@@ -1005,7 +1005,7 @@
     }
    ]
   },
-  "unlockOrder": 131,
+  "unlockOrder": 200048,
   "position": {
    "x": 6,
    "y": 45
@@ -1028,7 +1028,7 @@
     "johto-new-bark-town"
    ]
   },
-  "unlockOrder": 132,
+  "unlockOrder": 200090,
   "position": {
    "x": 84,
    "y": 80
@@ -1052,7 +1052,7 @@
     }
    ]
   },
-  "unlockOrder": 133,
+  "unlockOrder": 200091,
   "position": {
    "x": 92,
    "y": 70
@@ -1085,7 +1085,7 @@
     "johto-gym-8"
    ]
   },
-  "unlockOrder": 134,
+  "unlockOrder": 200092,
   "position": {
    "x": 94,
    "y": 76

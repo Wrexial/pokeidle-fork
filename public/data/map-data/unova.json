@@ -12,7 +12,7 @@
    "entry": true,
    "previous": "sinnoh"
   },
-  "unlockOrder": 233,
+  "unlockOrder": 499999,
   "position": {
    "x": 65,
    "y": 94
@@ -55,7 +55,7 @@
     "unova-nuvema-town"
    ]
   },
-  "unlockOrder": 234,
+  "unlockOrder": 500001,
   "position": {
    "x": 64,
    "y": 88
@@ -81,7 +81,7 @@
     }
    ]
   },
-  "unlockOrder": 235,
+  "unlockOrder": 500001.5,
   "position": {
    "x": 66,
    "y": 79
@@ -126,7 +126,7 @@
     }
    ]
   },
-  "unlockOrder": 236,
+  "unlockOrder": 500002,
   "position": {
    "x": 62,
    "y": 74
@@ -171,7 +171,7 @@
     }
    ]
   },
-  "unlockOrder": 237,
+  "unlockOrder": 500002,
   "position": {
    "x": 56,
    "y": 80
@@ -195,7 +195,7 @@
     }
    ]
   },
-  "unlockOrder": 238,
+  "unlockOrder": 500002,
   "position": {
    "x": 86,
    "y": 67
@@ -240,7 +240,7 @@
     }
    ]
   },
-  "unlockOrder": 239,
+  "unlockOrder": 500002.5,
   "position": {
    "x": 70,
    "y": 67
@@ -285,7 +285,7 @@
     }
    ]
   },
-  "unlockOrder": 240,
+  "unlockOrder": 500002.5,
   "position": {
    "x": 58,
    "y": 69
@@ -333,7 +333,7 @@
     "unova-gym-1"
    ]
   },
-  "unlockOrder": 241,
+  "unlockOrder": 500003,
   "position": {
    "x": 56,
    "y": 63
@@ -357,7 +357,7 @@
     }
    ]
   },
-  "unlockOrder": 242,
+  "unlockOrder": 500003.5,
   "position": {
    "x": 76,
    "y": 80
@@ -404,7 +404,7 @@
     "unova-gym-2"
    ]
   },
-  "unlockOrder": 243,
+  "unlockOrder": 500004,
   "position": {
    "x": 44,
    "y": 58
@@ -452,7 +452,7 @@
     "unova-gym-3"
    ]
   },
-  "unlockOrder": 244,
+  "unlockOrder": 500004,
   "position": {
    "x": 81,
    "y": 85
@@ -477,7 +477,7 @@
     }
    ]
   },
-  "unlockOrder": 245,
+  "unlockOrder": 500004.5,
   "position": {
    "x": 44,
    "y": 41
@@ -525,7 +525,7 @@
     "unova-gym-4"
    ]
   },
-  "unlockOrder": 246,
+  "unlockOrder": 500005,
   "position": {
    "x": 34,
    "y": 46
@@ -550,7 +550,7 @@
     }
    ]
   },
-  "unlockOrder": 247,
+  "unlockOrder": 500005.5,
   "position": {
    "x": 21,
    "y": 46
@@ -596,7 +596,7 @@
     "unova-gym-5"
    ]
   },
-  "unlockOrder": 248,
+  "unlockOrder": 500006,
   "position": {
    "x": 14,
    "y": 68
@@ -641,7 +641,7 @@
     }
    ]
   },
-  "unlockOrder": 249,
+  "unlockOrder": 500006,
   "position": {
    "x": 26,
    "y": 51
@@ -665,7 +665,7 @@
     }
    ]
   },
-  "unlockOrder": 250,
+  "unlockOrder": 500006.5,
   "position": {
    "x": 18,
    "y": 27
@@ -713,7 +713,7 @@
     "unova-gym-6"
    ]
   },
-  "unlockOrder": 251,
+  "unlockOrder": 500007,
   "position": {
    "x": 25,
    "y": 30
@@ -737,7 +737,7 @@
     }
    ]
   },
-  "unlockOrder": 252,
+  "unlockOrder": 500007.5,
   "position": {
    "x": 28,
    "y": 22
@@ -785,7 +785,7 @@
     "unova-gym-7"
    ]
   },
-  "unlockOrder": 253,
+  "unlockOrder": 500008,
   "position": {
    "x": 36,
    "y": 22
@@ -810,7 +810,7 @@
     }
    ]
   },
-  "unlockOrder": 254,
+  "unlockOrder": 500009,
   "position": {
    "x": 53,
    "y": 24
@@ -836,7 +836,7 @@
     }
    ]
   },
-  "unlockOrder": 255,
+  "unlockOrder": 500009.5,
   "position": {
    "x": 66,
    "y": 16
@@ -883,7 +883,7 @@
     "unova-gym-8"
    ]
   },
-  "unlockOrder": 256,
+  "unlockOrder": 500010,
   "position": {
    "x": 60,
    "y": 15
@@ -908,7 +908,7 @@
     }
    ]
   },
-  "unlockOrder": 257,
+  "unlockOrder": 500011,
   "position": {
    "x": 66,
    "y": 27
@@ -933,7 +933,7 @@
     }
    ]
   },
-  "unlockOrder": 258,
+  "unlockOrder": 500012,
   "position": {
    "x": 73,
    "y": 29
@@ -957,7 +957,7 @@
     }
    ]
   },
-  "unlockOrder": 259,
+  "unlockOrder": 500012.5,
   "position": {
    "x": 73,
    "y": 9
@@ -1003,7 +1003,7 @@
     }
    ]
   },
-  "unlockOrder": 260,
+  "unlockOrder": 500013,
   "position": {
    "x": 79,
    "y": 30
@@ -1030,7 +1030,7 @@
     }
    ]
   },
-  "unlockOrder": 261,
+  "unlockOrder": 500013.5,
   "position": {
    "x": 78,
    "y": 15
@@ -1075,7 +1075,7 @@
     }
    ]
   },
-  "unlockOrder": 262,
+  "unlockOrder": 500014,
   "position": {
    "x": 76,
    "y": 37
@@ -1100,7 +1100,7 @@
     }
    ]
   },
-  "unlockOrder": 263,
+  "unlockOrder": 500014,
   "position": {
    "x": 79,
    "y": 9
@@ -1143,7 +1143,7 @@
     }
    ]
   },
-  "unlockOrder": 264,
+  "unlockOrder": 500014,
   "position": {
    "x": 60,
    "y": 21
@@ -1187,7 +1187,7 @@
     }
    ]
   },
-  "unlockOrder": 265,
+  "unlockOrder": 500014.5,
   "position": {
    "x": 82,
    "y": 38
@@ -1232,7 +1232,7 @@
     }
    ]
   },
-  "unlockOrder": 266,
+  "unlockOrder": 500015,
   "position": {
    "x": 64,
    "y": 42
@@ -1257,7 +1257,7 @@
     }
    ]
   },
-  "unlockOrder": 267,
+  "unlockOrder": 500016,
   "position": {
    "x": 49,
    "y": 45
@@ -1282,7 +1282,7 @@
     }
    ]
   },
-  "unlockOrder": 268,
+  "unlockOrder": 500017,
   "position": {
    "x": 58,
    "y": 86
@@ -1307,7 +1307,7 @@
     }
    ]
   },
-  "unlockOrder": 269,
+  "unlockOrder": 500018,
   "position": {
    "x": 48,
    "y": 88
@@ -1331,7 +1331,7 @@
     }
    ]
   },
-  "unlockOrder": 270,
+  "unlockOrder": 500018.5,
   "position": {
    "x": 37,
    "y": 84
@@ -1357,7 +1357,7 @@
     }
    ]
   },
-  "unlockOrder": 271,
+  "unlockOrder": 500019,
   "position": {
    "x": 88,
    "y": 87
@@ -1382,7 +1382,7 @@
     }
    ]
   },
-  "unlockOrder": 272,
+  "unlockOrder": 500020,
   "position": {
    "x": 79,
    "y": 68
@@ -1408,7 +1408,7 @@
     }
    ]
   },
-  "unlockOrder": 273,
+  "unlockOrder": 500021,
   "position": {
    "x": 80,
    "y": 24
@@ -1434,7 +1434,7 @@
     }
    ]
   },
-  "unlockOrder": 274,
+  "unlockOrder": 500022,
   "position": {
    "x": 67,
    "y": 10
@@ -1460,7 +1460,7 @@
     }
    ]
   },
-  "unlockOrder": 275,
+  "unlockOrder": 500023,
   "position": {
    "x": 71,
    "y": 23
@@ -1484,7 +1484,7 @@
     }
    ]
   },
-  "unlockOrder": 276,
+  "unlockOrder": 500024,
   "position": {
    "x": 89,
    "y": 26
@@ -1517,7 +1517,7 @@
     "unova-gym-8"
    ]
   },
-  "unlockOrder": 277,
+  "unlockOrder": 500025,
   "position": {
    "x": 96,
    "y": 31

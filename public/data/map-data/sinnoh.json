@@ -12,7 +12,7 @@
    "entry": true,
    "previous": "hoenn"
   },
-  "unlockOrder": 187,
+  "unlockOrder": 399999,
   "position": {
    "x": 14,
    "y": 73
@@ -54,7 +54,7 @@
     "sinnoh-twinleaf-town"
    ]
   },
-  "unlockOrder": 188,
+  "unlockOrder": 400201,
   "position": {
    "x": 14,
    "y": 65
@@ -79,7 +79,7 @@
     }
    ]
   },
-  "unlockOrder": 189,
+  "unlockOrder": 400201.5,
   "position": {
    "x": 22,
    "y": 65
@@ -124,7 +124,7 @@
     }
    ]
   },
-  "unlockOrder": 190,
+  "unlockOrder": 400202,
   "position": {
    "x": 22,
    "y": 57
@@ -150,7 +150,7 @@
     }
    ]
   },
-  "unlockOrder": 191,
+  "unlockOrder": 400202.5,
   "position": {
    "x": 22,
    "y": 49
@@ -195,7 +195,7 @@
     }
    ]
   },
-  "unlockOrder": 192,
+  "unlockOrder": 400203,
   "position": {
    "x": 28,
    "y": 49
@@ -219,7 +219,7 @@
     }
    ]
   },
-  "unlockOrder": 193,
+  "unlockOrder": 400203.5,
   "position": {
    "x": 40,
    "y": 50
@@ -267,7 +267,7 @@
     "sinnoh-gym-1"
    ]
   },
-  "unlockOrder": 194,
+  "unlockOrder": 400204,
   "position": {
    "x": 23,
    "y": 41
@@ -291,7 +291,7 @@
     }
    ]
   },
-  "unlockOrder": 195,
+  "unlockOrder": 400204.5,
   "position": {
    "x": 23,
    "y": 34
@@ -336,7 +336,7 @@
     }
    ]
   },
-  "unlockOrder": 196,
+  "unlockOrder": 400205,
   "position": {
    "x": 29,
    "y": 34
@@ -361,7 +361,7 @@
     }
    ]
   },
-  "unlockOrder": 197,
+  "unlockOrder": 400205.5,
   "position": {
    "x": 38,
    "y": 31
@@ -409,7 +409,7 @@
     "sinnoh-gym-2"
    ]
   },
-  "unlockOrder": 198,
+  "unlockOrder": 400206,
   "position": {
    "x": 40,
    "y": 37
@@ -435,7 +435,7 @@
     }
    ]
   },
-  "unlockOrder": 199,
+  "unlockOrder": 400207,
   "position": {
    "x": 39,
    "y": 43
@@ -461,7 +461,7 @@
     }
    ]
   },
-  "unlockOrder": 200,
+  "unlockOrder": 400208,
   "position": {
    "x": 51,
    "y": 40
@@ -486,7 +486,7 @@
     }
    ]
   },
-  "unlockOrder": 201,
+  "unlockOrder": 400208.5,
   "position": {
    "x": 58,
    "y": 41
@@ -531,7 +531,7 @@
     }
    ]
   },
-  "unlockOrder": 202,
+  "unlockOrder": 400209,
   "position": {
    "x": 65,
    "y": 40
@@ -555,7 +555,7 @@
     }
    ]
   },
-  "unlockOrder": 203,
+  "unlockOrder": 400209.5,
   "position": {
    "x": 74,
    "y": 43
@@ -601,7 +601,7 @@
     }
    ]
   },
-  "unlockOrder": 204,
+  "unlockOrder": 400210,
   "position": {
    "x": 62,
    "y": 28
@@ -625,7 +625,7 @@
     }
    ]
   },
-  "unlockOrder": 205,
+  "unlockOrder": 400210.5,
   "position": {
    "x": 54,
    "y": 30
@@ -672,7 +672,7 @@
     }
    ]
   },
-  "unlockOrder": 206,
+  "unlockOrder": 400211,
   "position": {
    "x": 45,
    "y": 32
@@ -697,7 +697,7 @@
     }
    ]
   },
-  "unlockOrder": 207,
+  "unlockOrder": 400212,
   "position": {
    "x": 59,
    "y": 50
@@ -722,7 +722,7 @@
     }
    ]
   },
-  "unlockOrder": 208,
+  "unlockOrder": 400212.5,
   "position": {
    "x": 67,
    "y": 51
@@ -769,7 +769,7 @@
     }
    ]
   },
-  "unlockOrder": 209,
+  "unlockOrder": 400213,
   "position": {
    "x": 75,
    "y": 50
@@ -794,7 +794,7 @@
     }
    ]
   },
-  "unlockOrder": 210,
+  "unlockOrder": 400214,
   "position": {
    "x": 77,
    "y": 33
@@ -818,7 +818,7 @@
     }
    ]
   },
-  "unlockOrder": 211,
+  "unlockOrder": 400214.5,
   "position": {
    "x": 77,
    "y": 27
@@ -863,7 +863,7 @@
     }
    ]
   },
-  "unlockOrder": 212,
+  "unlockOrder": 400215,
   "position": {
    "x": 70,
    "y": 28
@@ -891,7 +891,7 @@
     "sinnoh-gym-3"
    ]
   },
-  "unlockOrder": 213,
+  "unlockOrder": 400216,
   "position": {
    "x": 49,
    "y": 49
@@ -919,7 +919,7 @@
     "sinnoh-gym-4"
    ]
   },
-  "unlockOrder": 214,
+  "unlockOrder": 400217,
   "position": {
    "x": 75,
    "y": 58
@@ -945,7 +945,7 @@
     "sinnoh-gym-5"
    ]
   },
-  "unlockOrder": 215,
+  "unlockOrder": 400217.5,
   "position": {
    "x": 43,
    "y": 19
@@ -990,7 +990,7 @@
     }
    ]
   },
-  "unlockOrder": 216,
+  "unlockOrder": 400218,
   "position": {
    "x": 14,
    "y": 49
@@ -1013,7 +1013,7 @@
     }
    ]
   },
-  "unlockOrder": 217,
+  "unlockOrder": 400218.5,
   "position": {
    "x": 6,
    "y": 49
@@ -1061,7 +1061,7 @@
     "sinnoh-gym-6"
    ]
   },
-  "unlockOrder": 218,
+  "unlockOrder": 400219,
   "position": {
    "x": 22,
    "y": 73
@@ -1089,7 +1089,7 @@
     "sinnoh-gym-7"
    ]
   },
-  "unlockOrder": 219,
+  "unlockOrder": 400220,
   "position": {
    "x": 22,
    "y": 81
@@ -1113,7 +1113,7 @@
     }
    ]
   },
-  "unlockOrder": 220,
+  "unlockOrder": 400221,
   "position": {
    "x": 30,
    "y": 81
@@ -1141,7 +1141,7 @@
     }
    ]
   },
-  "unlockOrder": 221,
+  "unlockOrder": 400222,
   "position": {
    "x": 85,
    "y": 42
@@ -1165,7 +1165,7 @@
     }
    ]
   },
-  "unlockOrder": 222,
+  "unlockOrder": 400222.5,
   "position": {
    "x": 91,
    "y": 42
@@ -1213,7 +1213,7 @@
     "sinnoh-gym-8"
    ]
   },
-  "unlockOrder": 223,
+  "unlockOrder": 400223,
   "position": {
    "x": 93,
    "y": 34
@@ -1237,7 +1237,7 @@
     }
    ]
   },
-  "unlockOrder": 224,
+  "unlockOrder": 400224,
   "position": {
    "x": 95,
    "y": 26
@@ -1263,7 +1263,7 @@
     }
    ]
   },
-  "unlockOrder": 225,
+  "unlockOrder": 400225,
   "position": {
    "x": 84,
    "y": 62
@@ -1290,7 +1290,7 @@
     }
    ]
   },
-  "unlockOrder": 226,
+  "unlockOrder": 400226,
   "position": {
    "x": 84,
    "y": 50
@@ -1315,7 +1315,7 @@
     }
    ]
   },
-  "unlockOrder": 227,
+  "unlockOrder": 400227,
   "position": {
    "x": 95,
    "y": 51
@@ -1341,7 +1341,7 @@
     }
    ]
   },
-  "unlockOrder": 228,
+  "unlockOrder": 400228,
   "position": {
    "x": 4,
    "y": 60
@@ -1366,7 +1366,7 @@
     }
    ]
   },
-  "unlockOrder": 229,
+  "unlockOrder": 400229,
   "position": {
    "x": 90,
    "y": 58
@@ -1394,7 +1394,7 @@
     }
    ]
   },
-  "unlockOrder": 230,
+  "unlockOrder": 400230,
   "position": {
    "x": 91,
    "y": 68
@@ -1418,7 +1418,7 @@
     }
    ]
   },
-  "unlockOrder": 231,
+  "unlockOrder": 400231,
   "position": {
    "x": 39,
    "y": 86
@@ -1451,7 +1451,7 @@
     "sinnoh-gym-8"
    ]
   },
-  "unlockOrder": 232,
+  "unlockOrder": 400232,
   "position": {
    "x": 96,
    "y": 60

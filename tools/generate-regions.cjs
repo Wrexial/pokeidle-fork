@@ -49,6 +49,11 @@ const GYM_LEVEL_MIN = 12
 const GYM_LEVEL_MAX = 64
 const E4_LEVEL_MIN = 68
 const CHAMPION_LEVEL = LEVEL_MAX - 5
+// `unlockOrder` is a stable sort key, not a sequence: it is each location's
+// position in its region's route progression (its `rank`), offset by region so
+// later regions sort later. Deriving it instead of counting means adding a zone
+// never renumbers existing ones (and never touches other regions).
+const REGION_PROGRESS_BASE = 100000
 // Spread index i of `count` evenly across [min, max] (inclusive).
 const spread = (i, count, min, max) =>
   Math.round(min + (count <= 1 ? 0 : (i * (max - min)) / (count - 1)))
@@ -215,7 +220,6 @@ function levelRoutes(orderedKeys, entriesByKey) {
 
 // --- generate ----------------------------------------------------------------
 const regions = [{ id: 'kanto', name: 'Kanto', generation: 1, order: 1, entry: 'palletTown', startLevel: 5, raidPool: [], leagueLocationKey: 'indigoPlat' }]
-let unlockOrder = 100
 // Raid pools can only be worked out once every region's routes exist (a raid
 // species must be absent from *all* routes), so regions queue up here and are
 // filled in by the raid scan lower down.
@@ -313,6 +317,9 @@ for (const region of REGIONS) {
   for (const area of EXTRA_MAP_AREAS[regionId] ?? [])
     if (area.rank != null) rank[area.node] = area.rank
   rank[entryNode] = -1
+  // Stable per-region progress key (see REGION_PROGRESS_BASE).
+  const progressKey = (node) => gen * REGION_PROGRESS_BASE + rank[node]
+  const maxProgressKey = gen * REGION_PROGRESS_BASE + Math.max(...nodes.map((node) => rank[node]))
   const order = nodes
     .slice()
     .sort(
@@ -538,7 +545,7 @@ for (const region of REGIONS) {
         routeKey: id,
         connections: [...adjacency[node]].map((n) => locId(regionId, n)),
         unlock,
-        unlockOrder: unlockOrder++,
+        unlockOrder: progressKey(node),
         position: place(node),
       }
     } else {
@@ -550,7 +557,7 @@ for (const region of REGIONS) {
         description: `A town in the ${name} region.`,
         connections: [...adjacency[node]].map((n) => locId(regionId, n)),
         unlock,
-        unlockOrder: unlockOrder++,
+        unlockOrder: progressKey(node),
         position: place(node),
         mart: {
           name: `${name} Mart`,
@@ -593,7 +600,7 @@ for (const region of REGIONS) {
       unlock: {
         battlesAtLocation: [{ locationId: locId(regionId, lastRoute), count: 20 }],
       },
-      unlockOrder: unlockOrder++,
+      unlockOrder: maxProgressKey + 1,
       position: placeAt(
         Math.min(94, (positions[lastRoute]?.x ?? 50) + 8),
         Math.max(6, (positions[lastRoute]?.y ?? 50) - 10)
@@ -619,7 +626,7 @@ for (const region of REGIONS) {
       // road gate (see gateGymByNode above).
       gymsRequired: gymPlacements.map((gym) => gym.id),
     },
-    unlockOrder: unlockOrder++,
+    unlockOrder: maxProgressKey + 2,
     position: placeAt(
       Math.min(94, (positions[leagueNode]?.x ?? 50) + 10),
       Math.max(6, (positions[leagueNode]?.y ?? 50) - 4)

@@ -14,7 +14,7 @@
    "entry": true,
    "previous": "kalos"
   },
-  "unlockOrder": 318,
+  "unlockOrder": 699999,
   "position": {
    "x": 45,
    "y": 34
@@ -60,7 +60,7 @@
     "alola-gym-1"
    ]
   },
-  "unlockOrder": 319,
+  "unlockOrder": 700001,
   "position": {
    "x": 38,
    "y": 37
@@ -82,7 +82,7 @@
     "alola-iki-town"
    ]
   },
-  "unlockOrder": 320,
+  "unlockOrder": 700001,
   "position": {
    "x": 31,
    "y": 37
@@ -108,7 +108,7 @@
     }
    ]
   },
-  "unlockOrder": 321,
+  "unlockOrder": 700002,
   "position": {
    "x": 34,
    "y": 30
@@ -132,7 +132,7 @@
     }
    ]
   },
-  "unlockOrder": 322,
+  "unlockOrder": 700002.5,
   "position": {
    "x": 39,
    "y": 60
@@ -179,7 +179,7 @@
     "alola-gym-2"
    ]
   },
-  "unlockOrder": 323,
+  "unlockOrder": 700002.5,
   "position": {
    "x": 41,
    "y": 18
@@ -227,7 +227,7 @@
     }
    ]
   },
-  "unlockOrder": 324,
+  "unlockOrder": 700003,
   "position": {
    "x": 47,
    "y": 41
@@ -255,7 +255,7 @@
     "alola-gym-3"
    ]
   },
-  "unlockOrder": 325,
+  "unlockOrder": 700003.5,
   "position": {
    "x": 56,
    "y": 41
@@ -305,7 +305,7 @@
     "alola-gym-4"
    ]
   },
-  "unlockOrder": 326,
+  "unlockOrder": 700004,
   "position": {
    "x": 58,
    "y": 54
@@ -331,7 +331,7 @@
     }
    ]
   },
-  "unlockOrder": 327,
+  "unlockOrder": 700004.5,
   "position": {
    "x": 50,
    "y": 50
@@ -378,7 +378,7 @@
     "alola-gym-5"
    ]
   },
-  "unlockOrder": 328,
+  "unlockOrder": 700005,
   "position": {
    "x": 58,
    "y": 16
@@ -406,7 +406,7 @@
     }
    ]
   },
-  "unlockOrder": 329,
+  "unlockOrder": 700006,
   "position": {
    "x": 62,
    "y": 44
@@ -433,7 +433,7 @@
     }
    ]
   },
-  "unlockOrder": 330,
+  "unlockOrder": 700007,
   "position": {
    "x": 64,
    "y": 21
@@ -458,7 +458,7 @@
     }
    ]
   },
-  "unlockOrder": 331,
+  "unlockOrder": 700008,
   "position": {
    "x": 58,
    "y": 6
@@ -487,7 +487,7 @@
     }
    ]
   },
-  "unlockOrder": 332,
+  "unlockOrder": 700009,
   "position": {
    "x": 51,
    "y": 79
@@ -511,7 +511,7 @@
     }
    ]
   },
-  "unlockOrder": 333,
+  "unlockOrder": 700009.5,
   "position": {
    "x": 46,
    "y": 75
@@ -559,7 +559,7 @@
     "alola-gym-6"
    ]
   },
-  "unlockOrder": 334,
+  "unlockOrder": 700010,
   "position": {
    "x": 47,
    "y": 56
@@ -583,7 +583,7 @@
     }
    ]
   },
-  "unlockOrder": 335,
+  "unlockOrder": 700010.5,
   "position": {
    "x": 53,
    "y": 72
@@ -632,7 +632,7 @@
     "alola-gym-7"
    ]
   },
-  "unlockOrder": 336,
+  "unlockOrder": 700011,
   "position": {
    "x": 60,
    "y": 71
@@ -660,7 +660,7 @@
     "alola-gym-8"
    ]
   },
-  "unlockOrder": 337,
+  "unlockOrder": 700012,
   "position": {
    "x": 69,
    "y": 86
@@ -687,7 +687,7 @@
     }
    ]
   },
-  "unlockOrder": 338,
+  "unlockOrder": 700013,
   "position": {
    "x": 58,
    "y": 78
@@ -712,7 +712,7 @@
     }
    ]
   },
-  "unlockOrder": 339,
+  "unlockOrder": 700014,
   "position": {
    "x": 43,
    "y": 94
@@ -738,7 +738,7 @@
     }
    ]
   },
-  "unlockOrder": 340,
+  "unlockOrder": 700015,
   "position": {
    "x": 41,
    "y": 69
@@ -764,7 +764,7 @@
     }
    ]
   },
-  "unlockOrder": 341,
+  "unlockOrder": 700016,
   "position": {
    "x": 54,
    "y": 59
@@ -792,7 +792,7 @@
     }
    ]
   },
-  "unlockOrder": 342,
+  "unlockOrder": 700017,
   "position": {
    "x": 60,
    "y": 29
@@ -816,7 +816,7 @@
     }
    ]
   },
-  "unlockOrder": 343,
+  "unlockOrder": 700018,
   "position": {
    "x": 73,
    "y": 23
@@ -849,7 +849,7 @@
     "alola-gym-8"
    ]
   },
-  "unlockOrder": 344,
+  "unlockOrder": 700019,
   "position": {
    "x": 75,
    "y": 29

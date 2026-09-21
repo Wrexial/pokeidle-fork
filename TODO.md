@@ -202,6 +202,45 @@ pattern would lock them in.
 
 Effort: **small–medium**, pays off every future change.
 
+## 15. Save management & sharing
+
+A save lives in one versioned `localStorage` key with no user-facing control.
+
+- [ ] Export the save to a JSON file / import one back (reuse the repair path).
+- [ ] Multiple save slots (pick a slot at boot).
+- [ ] A shareable code (base64 of the save) for trading collections.
+
+Effort: **small–medium**.
+
+## 16. More ideas (unsorted)
+
+Smaller or more speculative, roughly highest-value first:
+
+- [ ] **Achievement rewards** — medals currently grant nothing; give tokens /
+      items / a Master Ball per milestone.
+- [ ] **Quests / missions** — active objectives with rewards, distinct from
+      passive achievements (e.g. "catch 3 Water types at Route 12").
+- [ ] **Ball variety** — Quick / Dusk / Timer / Net / Heal Balls with
+      situational modifiers (catching is currently one flat ball multiplier).
+- [ ] **Pokérus** — a very rare virus that boosts EXP (and later EV) gain for a
+      while; a nice idle-flavoured surprise.
+- [ ] **Map QoL** — mark the active swarm / roamer location and add a searchable
+      "jump to location" list.
+- [ ] **Notifications** — browser notifications and an "away" alert (pairs
+      with offline progress, #7).
+- [ ] **Challenge modes** — Nuzlocke, monotype, randomizer, or a level-scaling
+      toggle; big replay value from flags on the existing state.
+- [ ] **Form-changing items** — Rotom / Deoxys / Shaymin / site-based forms —
+      cosmetic but fills in the Pokedex.
+- [ ] **Release rewards / item selling** — release a Pokémon for tokens or candy,
+      and sell items back, to close the economy loop.
+- [ ] **Accessibility** — reduced-motion toggle, colourblind-safe type badges,
+      larger text option.
+- [ ] **Audio** — region music and catch/level-up SFX (currently silent).
+- [ ] **Combat feedback** — floating damage numbers and hit shake for feel.
+- [ ] **Performance pass** — the idle loop dispatches a lot per tick; look at
+      memoisation / batching if it ever gets heavy.
+
 ---
 
 ## Useful references when picking these up

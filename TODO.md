@@ -220,8 +220,7 @@ Smaller or more speculative, roughly highest-value first:
       items / a Master Ball per milestone.
 - [ ] **Quests / missions** — active objectives with rewards, distinct from
       passive achievements (e.g. "catch 3 Water types at Route 12").
-- [ ] **Ball variety** — Quick / Dusk / Timer / Net / Heal Balls with
-      situational modifiers (catching is currently one flat ball multiplier).
+- [ ] **Ball variety** — see #17.
 - [ ] **Pokérus** — a very rare virus that boosts EXP (and later EV) gain for a
       while; a nice idle-flavoured surprise.
 - [ ] **Map QoL** — mark the active swarm / roamer location and add a searchable
@@ -240,6 +239,65 @@ Smaller or more speculative, roughly highest-value first:
 - [ ] **Combat feedback** — floating damage numbers and hit shake for feel.
 - [ ] **Performance pass** — the idle loop dispatches a lot per tick; look at
       memoisation / batching if it ever gets heavy.
+
+## 17. Pokéball variants
+
+There are only four balls (`src/data/items.js`) with a flat `ballModifier`, and
+`selectAutoCatchBall` just picks the strongest affordable one. In the real games
+most balls are *situational*, which is where the fun is.
+
+- [ ] Give `attemptCatch` / `selectBestBall` / `selectAutoCatchBall` the context
+      they need: turn number, target level + types, whether it's already
+      registered, encounter method (surfing/fishing/cave), weather/time.
+- [ ] Add the conditional balls, e.g. Quick (×5 first turn), Timer (scales with
+      turns), Repeat (×3.5 if already caught), Net (×3.5 Water/Bug), Dive
+      (×3.5 on water), Dusk (×3 in caves / at night), Nest (scales with the
+      target's level), Heal (heals on catch), Luxury/Friend/Premier (flavour /
+      friendship).
+- [ ] Let catch settings pick balls by situation (the auto-catch chooser).
+- [ ] Colours/sprites: `pokeballColors` already exists — extend it.
+
+Effort: **medium**.
+
+## 18. Better settings
+
+`settings-modal.js` currently only offers a save reset. A real settings panel:
+
+- [ ] Gameplay: default catch rule, auto-catch / auto-heal / auto-switch /
+      auto-proceed toggles, battle speed, "auto-travel to next unlock" (#13).
+- [ ] Notifications: browser notifications and which events (shiny, rare, egg
+      ready, box full) — pairs with #7 and #16.
+- [ ] Display: reduced motion, damage numbers, larger text, colourblind-safe
+      type badges, sprite style.
+- [ ] Data: export/import the save (#15) and a confirmed reset.
+- [ ] Account: sign in / sync controls (#19).
+- [ ] Store settings separately from the save (a `localStorage` settings key) so
+      they survive a save reset and sync independently.
+
+Effort: **medium** (mostly UI plus a small settings slice).
+
+## 19. Online sync (cloud saves via a database)
+
+This would be the project's **first backend** — the app is deliberately
+client-only today with one `localStorage` save. Worth a short design doc first.
+
+- [ ] Pick a backend: a managed BaaS (Supabase / Firebase — auth + Postgres /
+      Firestore) vs a small custom API.
+- [ ] Auth: an anonymous device id that can later be linked to an account
+      (email / OAuth) so a save can follow the player across devices.
+- [ ] Sync model: the save is a single JSON blob, so at minimum keep a
+      server-side revision + `savedAt` and never blindly overwrite a newer
+      remote (last-write-wins is easy to lose a save with).
+- [ ] Offline-first: the game must keep working with no network; sync in the
+      background and reconcile on reconnect.
+- [ ] Conflict handling: pick a winner / offer a choice; keep a small server
+      history so a bad sync is recoverable.
+- [ ] Privacy & security: ownership rules (RLS), rate limits, and what is
+      stored.
+- [ ] Migration: reuse `repairSave` on download and bump `SAVE_VERSION` if the
+      save shape changes.
+
+Effort: **large** (auth + conflict handling + a new server to run).
 
 ---
 

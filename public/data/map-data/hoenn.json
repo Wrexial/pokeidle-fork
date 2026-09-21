@@ -1327,7 +1327,9 @@
   "connections": [
    "hoenn-ever-grande-city",
    "hoenn-route-127",
-   "hoenn-route-129"
+   "hoenn-route-129",
+   "hoenn-raid",
+   "hoenn-league"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1564,9 +1566,7 @@
   "routeKey": "hoenn-route-134",
   "connections": [
    "hoenn-slateport-city",
-   "hoenn-route-133",
-   "hoenn-raid",
-   "hoenn-league"
+   "hoenn-route-133"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1590,20 +1590,20 @@
   "description": "A mysterious island where Hoenn's rarest Pokemon dwell.",
   "routeKey": "hoenn-raid",
   "connections": [
-   "hoenn-route-134"
+   "hoenn-route-128"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "hoenn-route-134",
+     "locationId": "hoenn-route-128",
      "count": 20
     }
    ]
   },
   "unlockOrder": 300135,
   "position": {
-   "x": 58.13,
-   "y": 83.81
+   "x": 81.25,
+   "y": 87.62
   }
  },
  "hoenn-league": {
@@ -1613,12 +1613,12 @@
   "region": "hoenn",
   "description": "The Hoenn Pokémon League.",
   "connections": [
-   "hoenn-route-134"
+   "hoenn-route-128"
   ],
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "hoenn-route-134",
+     "locationId": "hoenn-route-128",
      "count": 20
     }
    ],

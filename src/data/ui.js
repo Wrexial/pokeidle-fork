@@ -43,17 +43,6 @@ export let locationImages = {
     trainingArea: '/backgrounds/cave.png',
   }
 
-/**
- * Regions whose Town Map is a real illustrated map instead of the generated
- * node layout. The world canvas matches the image's pixel size, and the
- * location positions in `map-data` are stored as percentages of it.
- * (Hoenn art: "Hoenn Region Map" by MKaykitkats, 2015.)
- * @type {Record<string, { src: string, width: number, height: number }>}
- */
-export const regionMapImages = {
-  hoenn: { src: '/backgrounds/hoenn-map.png', width: 1600, height: 1050 },
-}
-
 export const BATTLE_LOG_MIN_HEIGHT = 30
 
 export const MOBILE_BREAKPOINT = 768

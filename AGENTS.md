@@ -246,11 +246,12 @@ Data conventions:
   progress key** (`region generation * 100000 + route rank`), used only for
   ordering. It is computed, not counted, so adding a zone never renumbers its
   neighbours — or, importantly, any other region.
-- Hoenn's Town Map is a real illustrated map rather than the generated node
-  layout: `regionMapImages` in `src/data/ui.js` points at
-  `public/backgrounds/hoenn-map.png` and sizes the world canvas to the image,
-  while `REGION_MAP_LAYOUTS` in `generate-regions.cjs` gives each location its
-  pixel position on that art (converted to percentages, no collision shifting).
+- Some regions' scraped force-directed layout doesn't match the real map, so
+  `REGION_MAP_LAYOUTS` in `generate-regions.cjs` overrides it with
+  hand-measured coordinates (pixels on a reference map, converted to
+  percentages, no collision shifting). Hoenn uses the ORAS world map. The
+  league can also be pinned to a specific pre-league route via `LEAGUE_ANCHOR`
+  (Hoenn's Route 128 at Ever Grande, not the highest-numbered Route 134).
 - `regions.json` also carries `raidPool` — the generation's species that cannot
   be obtained in that region (not in any wild table and not reachable by
   evolution). Those are the Pokemon found on the region's Raid Island.

@@ -54,10 +54,11 @@ const CHAMPION_LEVEL = LEVEL_MAX - 5
 // later regions sort later. Deriving it instead of counting means adding a zone
 // never renumbers existing ones (and never touches other regions).
 const REGION_PROGRESS_BASE = 100000
-// Regions whose Town Map is a real illustrated map instead of the generated
-// node layout. Coordinates are pixels on that image (the UI sizes its world to
-// match); the generator converts them to percentages and skips its
-// collision-avoidance shifting so the dots land exactly where they're drawn.
+// Hand-measured layouts for regions where the scraped force-directed layout
+// doesn't match the real geography. Coordinates are pixels on a reference map
+// (the ORAS Hoenn world map, 1600x1050); the generator converts them to
+// percentages and skips its collision-avoidance shifting so the nodes land
+// exactly where the reference puts them.
 const REGION_MAP_LAYOUTS = {
   hoenn: {
     width: 1600,
@@ -114,10 +115,15 @@ const REGION_MAP_LAYOUTS = {
       'hoenn-route-133': [760, 722],
       'hoenn-route-134': [595, 722],
       league: [1540, 548],
-      raid: [930, 880],
+      raid: [1300, 920],
     },
   },
 }
+// The route the league (and Raid Island) hang off. Defaults to the region's
+// highest-numbered route, but that isn't always the pre-league one: Hoenn's
+// Route 134 is a southern sea route west of Slateport, while the league sits at
+// Ever Grande off Route 128.
+const LEAGUE_ANCHOR = { hoenn: 'hoenn-route-128' }
 // Spread index i of `count` evenly across [min, max] (inclusive).
 const spread = (i, count, min, max) =>
   Math.round(min + (count <= 1 ? 0 : (i * (max - min)) / (count - 1)))
@@ -658,8 +664,9 @@ for (const region of REGIONS) {
   }
 
   // raid island
-  const lastRoute = routeNodes[routeNodes.length - 1]
-  if (lastRoute) {
+  const lastRoute = routeNodes[routeNodes.length - 1],
+    finaleRoute = LEAGUE_ANCHOR[regionId] ?? lastRoute
+  if (finaleRoute) {
     const raidId = `${regionId}-raid`
     const raidNodeName = `${name} Raid Island`
     // Bucket + pool are created by the raid scan once all routes are known.
@@ -671,24 +678,24 @@ for (const region of REGIONS) {
       region: regionId,
       description: `A mysterious island where ${name}'s rarest Pokemon dwell.`,
       routeKey: raidId,
-      connections: [locId(regionId, lastRoute)],
+      connections: [locId(regionId, finaleRoute)],
       unlock: {
-        battlesAtLocation: [{ locationId: locId(regionId, lastRoute), count: 20 }],
+        battlesAtLocation: [{ locationId: locId(regionId, finaleRoute), count: 20 }],
       },
       unlockOrder: maxProgressKey + 1,
       position:
         fixedPosition('raid') ??
         placeAt(
-          Math.min(94, (positions[lastRoute]?.x ?? 50) + 8),
-          Math.max(6, (positions[lastRoute]?.y ?? 50) - 10)
+          Math.min(94, (positions[finaleRoute]?.x ?? 50) + 8),
+          Math.max(6, (positions[finaleRoute]?.y ?? 50) - 10)
         ),
     }
   }
 
-  // Pokémon League: the Elite Four's zone. It hangs off the region's last
+  // Pokémon League: the Elite Four's zone. It hangs off the region's finale
   // route so the league challenge is gated behind reaching (and battling in)
   // the region's final area instead of being startable from anywhere.
-  const leagueNode = lastRoute ?? entryNode
+  const leagueNode = finaleRoute ?? entryNode
   const leagueId = `${regionId}-league`
   mapData[leagueId] = {
     id: leagueId,

@@ -405,6 +405,8 @@ One-off scripts used to build the data JSON (not run during dev/build):
   / Champion field Lv.90/92 teams once the region's Champion has been beaten.
   Rematches draw from the whole national dex so sparse types still have six
   members; the gym panel shows a `REMATCH` tag / "Rematch Lv.90" when active.
+  Badges use their real in-game names (`BADGE_NAMES`) — Alola's trials award
+  Z-Crystals and Galar/Paldea use type badges — coloured by the leader's type.
   Raid Islands offer the region's generation of Pokémon that turn
   up on **no** region's wild routes and can't be reached by evolving one that
   does; that scan runs after every route is generated, so the pools are

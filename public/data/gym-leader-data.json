@@ -417,8 +417,8 @@
   "title": "Johto Gym Leader",
   "region": "johto",
   "locationKey": "johto-violet-city",
-  "badgeName": "Johto Badge 1",
-  "badgeColor": "#a0a0a0",
+  "badgeName": "Zephyr Badge",
+  "badgeColor": "#a890f0",
   "spriteKey": "falkner",
   "team": [
    {
@@ -467,8 +467,8 @@
   "title": "Johto Gym Leader",
   "region": "johto",
   "locationKey": "johto-azalea-town",
-  "badgeName": "Johto Badge 2",
-  "badgeColor": "#4878b0",
+  "badgeName": "Hive Badge",
+  "badgeColor": "#a8b820",
   "spriteKey": "bugsy",
   "team": [
    {
@@ -517,8 +517,8 @@
   "title": "Johto Gym Leader",
   "region": "johto",
   "locationKey": "johto-goldenrod-city",
-  "badgeName": "Johto Badge 3",
-  "badgeColor": "#c8a030",
+  "badgeName": "Plain Badge",
+  "badgeColor": "#a8a878",
   "spriteKey": "whitney",
   "team": [
    {
@@ -567,8 +567,8 @@
   "title": "Johto Gym Leader",
   "region": "johto",
   "locationKey": "johto-ecruteak-city",
-  "badgeName": "Johto Badge 4",
-  "badgeColor": "#48a048",
+  "badgeName": "Fog Badge",
+  "badgeColor": "#705898",
   "spriteKey": "morty",
   "team": [
    {
@@ -617,8 +617,8 @@
   "title": "Johto Gym Leader",
   "region": "johto",
   "locationKey": "johto-cianwood-city",
-  "badgeName": "Johto Badge 5",
-  "badgeColor": "#b83028",
+  "badgeName": "Storm Badge",
+  "badgeColor": "#c03028",
   "spriteKey": "chuck",
   "team": [
    {
@@ -667,8 +667,8 @@
   "title": "Johto Gym Leader",
   "region": "johto",
   "locationKey": "johto-olivine-city",
-  "badgeName": "Johto Badge 6",
-  "badgeColor": "#a060c0",
+  "badgeName": "Mineral Badge",
+  "badgeColor": "#b8b8d0",
   "spriteKey": "jasmine",
   "team": [
    {
@@ -717,8 +717,8 @@
   "title": "Johto Gym Leader",
   "region": "johto",
   "locationKey": "johto-mahogany-town",
-  "badgeName": "Johto Badge 7",
-  "badgeColor": "#e08040",
+  "badgeName": "Glacier Badge",
+  "badgeColor": "#98d8d8",
   "spriteKey": "pryce",
   "team": [
    {
@@ -767,8 +767,8 @@
   "title": "Johto Gym Leader",
   "region": "johto",
   "locationKey": "johto-blackthorn-city",
-  "badgeName": "Johto Badge 8",
-  "badgeColor": "#40c0c0",
+  "badgeName": "Rising Badge",
+  "badgeColor": "#7038f8",
   "spriteKey": "clair",
   "team": [
    {
@@ -817,8 +817,8 @@
   "title": "Hoenn Gym Leader",
   "region": "hoenn",
   "locationKey": "hoenn-rustboro-city",
-  "badgeName": "Hoenn Badge 1",
-  "badgeColor": "#a0a0a0",
+  "badgeName": "Stone Badge",
+  "badgeColor": "#b8a038",
   "spriteKey": "roxanne",
   "team": [
    {
@@ -867,8 +867,8 @@
   "title": "Hoenn Gym Leader",
   "region": "hoenn",
   "locationKey": "hoenn-dewford-town",
-  "badgeName": "Hoenn Badge 2",
-  "badgeColor": "#4878b0",
+  "badgeName": "Knuckle Badge",
+  "badgeColor": "#c03028",
   "spriteKey": "brawly",
   "team": [
    {
@@ -917,8 +917,8 @@
   "title": "Hoenn Gym Leader",
   "region": "hoenn",
   "locationKey": "hoenn-mauville-city",
-  "badgeName": "Hoenn Badge 3",
-  "badgeColor": "#c8a030",
+  "badgeName": "Dynamo Badge",
+  "badgeColor": "#f8d030",
   "spriteKey": "wattson",
   "team": [
    {
@@ -967,8 +967,8 @@
   "title": "Hoenn Gym Leader",
   "region": "hoenn",
   "locationKey": "hoenn-lavaridge-town",
-  "badgeName": "Hoenn Badge 4",
-  "badgeColor": "#48a048",
+  "badgeName": "Heat Badge",
+  "badgeColor": "#f08030",
   "spriteKey": "flannery",
   "team": [
    {
@@ -1017,8 +1017,8 @@
   "title": "Hoenn Gym Leader",
   "region": "hoenn",
   "locationKey": "hoenn-petalburg-city",
-  "badgeName": "Hoenn Badge 5",
-  "badgeColor": "#b83028",
+  "badgeName": "Balance Badge",
+  "badgeColor": "#a8a878",
   "spriteKey": "norman",
   "team": [
    {
@@ -1067,8 +1067,8 @@
   "title": "Hoenn Gym Leader",
   "region": "hoenn",
   "locationKey": "hoenn-fortree-city",
-  "badgeName": "Hoenn Badge 6",
-  "badgeColor": "#a060c0",
+  "badgeName": "Feather Badge",
+  "badgeColor": "#a890f0",
   "spriteKey": "winona",
   "team": [
    {
@@ -1117,8 +1117,8 @@
   "title": "Hoenn Gym Leader",
   "region": "hoenn",
   "locationKey": "hoenn-mossdeep-city",
-  "badgeName": "Hoenn Badge 7",
-  "badgeColor": "#e08040",
+  "badgeName": "Mind Badge",
+  "badgeColor": "#f85888",
   "spriteKey": "tate",
   "team": [
    {
@@ -1167,8 +1167,8 @@
   "title": "Hoenn Gym Leader",
   "region": "hoenn",
   "locationKey": "hoenn-sootopolis-city",
-  "badgeName": "Hoenn Badge 8",
-  "badgeColor": "#40c0c0",
+  "badgeName": "Rain Badge",
+  "badgeColor": "#6890f0",
   "spriteKey": "juan",
   "team": [
    {
@@ -1217,8 +1217,8 @@
   "title": "Sinnoh Gym Leader",
   "region": "sinnoh",
   "locationKey": "sinnoh-oreburgh-city",
-  "badgeName": "Sinnoh Badge 1",
-  "badgeColor": "#a0a0a0",
+  "badgeName": "Coal Badge",
+  "badgeColor": "#b8a038",
   "spriteKey": "roark",
   "team": [
    {
@@ -1267,8 +1267,8 @@
   "title": "Sinnoh Gym Leader",
   "region": "sinnoh",
   "locationKey": "sinnoh-eterna-city",
-  "badgeName": "Sinnoh Badge 2",
-  "badgeColor": "#4878b0",
+  "badgeName": "Forest Badge",
+  "badgeColor": "#78c850",
   "spriteKey": "gardenia",
   "team": [
    {
@@ -1317,8 +1317,8 @@
   "title": "Sinnoh Gym Leader",
   "region": "sinnoh",
   "locationKey": "sinnoh-veilstone-city",
-  "badgeName": "Sinnoh Badge 3",
-  "badgeColor": "#c8a030",
+  "badgeName": "Cobble Badge",
+  "badgeColor": "#c03028",
   "spriteKey": "maylene",
   "team": [
    {
@@ -1367,8 +1367,8 @@
   "title": "Sinnoh Gym Leader",
   "region": "sinnoh",
   "locationKey": "sinnoh-pastoria-city",
-  "badgeName": "Sinnoh Badge 4",
-  "badgeColor": "#48a048",
+  "badgeName": "Fen Badge",
+  "badgeColor": "#6890f0",
   "spriteKey": "crasherwake",
   "team": [
    {
@@ -1417,8 +1417,8 @@
   "title": "Sinnoh Gym Leader",
   "region": "sinnoh",
   "locationKey": "sinnoh-hearthome-city",
-  "badgeName": "Sinnoh Badge 5",
-  "badgeColor": "#b83028",
+  "badgeName": "Relic Badge",
+  "badgeColor": "#705898",
   "spriteKey": "fantina",
   "team": [
    {
@@ -1467,8 +1467,8 @@
   "title": "Sinnoh Gym Leader",
   "region": "sinnoh",
   "locationKey": "sinnoh-canalave-city",
-  "badgeName": "Sinnoh Badge 6",
-  "badgeColor": "#a060c0",
+  "badgeName": "Mine Badge",
+  "badgeColor": "#b8b8d0",
   "spriteKey": "byron",
   "team": [
    {
@@ -1517,8 +1517,8 @@
   "title": "Sinnoh Gym Leader",
   "region": "sinnoh",
   "locationKey": "sinnoh-snowpoint-city",
-  "badgeName": "Sinnoh Badge 7",
-  "badgeColor": "#e08040",
+  "badgeName": "Icicle Badge",
+  "badgeColor": "#98d8d8",
   "spriteKey": "candice",
   "team": [
    {
@@ -1567,8 +1567,8 @@
   "title": "Sinnoh Gym Leader",
   "region": "sinnoh",
   "locationKey": "sinnoh-sunyshore-city",
-  "badgeName": "Sinnoh Badge 8",
-  "badgeColor": "#40c0c0",
+  "badgeName": "Beacon Badge",
+  "badgeColor": "#f8d030",
   "spriteKey": "volkner",
   "team": [
    {
@@ -1617,8 +1617,8 @@
   "title": "Unova Gym Leader",
   "region": "unova",
   "locationKey": "unova-striaton-city",
-  "badgeName": "Unova Badge 1",
-  "badgeColor": "#a0a0a0",
+  "badgeName": "Trio Badge",
+  "badgeColor": "#78c850",
   "spriteKey": "cilan",
   "team": [
    {
@@ -1667,8 +1667,8 @@
   "title": "Unova Gym Leader",
   "region": "unova",
   "locationKey": "unova-nacrene-city",
-  "badgeName": "Unova Badge 2",
-  "badgeColor": "#4878b0",
+  "badgeName": "Basic Badge",
+  "badgeColor": "#a8a878",
   "spriteKey": "lenora",
   "team": [
    {
@@ -1717,8 +1717,8 @@
   "title": "Unova Gym Leader",
   "region": "unova",
   "locationKey": "unova-castelia-city",
-  "badgeName": "Unova Badge 3",
-  "badgeColor": "#c8a030",
+  "badgeName": "Insect Badge",
+  "badgeColor": "#a8b820",
   "spriteKey": "burgh",
   "team": [
    {
@@ -1767,8 +1767,8 @@
   "title": "Unova Gym Leader",
   "region": "unova",
   "locationKey": "unova-nimbasa-city",
-  "badgeName": "Unova Badge 4",
-  "badgeColor": "#48a048",
+  "badgeName": "Bolt Badge",
+  "badgeColor": "#f8d030",
   "spriteKey": "elesa",
   "team": [
    {
@@ -1817,8 +1817,8 @@
   "title": "Unova Gym Leader",
   "region": "unova",
   "locationKey": "unova-driftveil-city",
-  "badgeName": "Unova Badge 5",
-  "badgeColor": "#b83028",
+  "badgeName": "Quake Badge",
+  "badgeColor": "#e0c068",
   "spriteKey": "clay",
   "team": [
    {
@@ -1867,8 +1867,8 @@
   "title": "Unova Gym Leader",
   "region": "unova",
   "locationKey": "unova-mistralton-city",
-  "badgeName": "Unova Badge 6",
-  "badgeColor": "#a060c0",
+  "badgeName": "Jet Badge",
+  "badgeColor": "#a890f0",
   "spriteKey": "skyla",
   "team": [
    {
@@ -1917,8 +1917,8 @@
   "title": "Unova Gym Leader",
   "region": "unova",
   "locationKey": "unova-icirrus-city",
-  "badgeName": "Unova Badge 7",
-  "badgeColor": "#e08040",
+  "badgeName": "Freeze Badge",
+  "badgeColor": "#98d8d8",
   "spriteKey": "brycen",
   "team": [
    {
@@ -1967,8 +1967,8 @@
   "title": "Unova Gym Leader",
   "region": "unova",
   "locationKey": "unova-opelucid-city",
-  "badgeName": "Unova Badge 8",
-  "badgeColor": "#40c0c0",
+  "badgeName": "Legend Badge",
+  "badgeColor": "#7038f8",
   "spriteKey": "drayden",
   "team": [
    {
@@ -2017,8 +2017,8 @@
   "title": "Kalos Gym Leader",
   "region": "kalos",
   "locationKey": "kalos-santalune-city",
-  "badgeName": "Kalos Badge 1",
-  "badgeColor": "#a0a0a0",
+  "badgeName": "Bug Badge",
+  "badgeColor": "#a8b820",
   "spriteKey": "viola",
   "team": [
    {
@@ -2067,8 +2067,8 @@
   "title": "Kalos Gym Leader",
   "region": "kalos",
   "locationKey": "kalos-cyllage-city",
-  "badgeName": "Kalos Badge 2",
-  "badgeColor": "#4878b0",
+  "badgeName": "Cliff Badge",
+  "badgeColor": "#b8a038",
   "spriteKey": "grant",
   "team": [
    {
@@ -2117,8 +2117,8 @@
   "title": "Kalos Gym Leader",
   "region": "kalos",
   "locationKey": "kalos-shalour-city",
-  "badgeName": "Kalos Badge 3",
-  "badgeColor": "#c8a030",
+  "badgeName": "Rumble Badge",
+  "badgeColor": "#c03028",
   "spriteKey": "korrina",
   "team": [
    {
@@ -2167,8 +2167,8 @@
   "title": "Kalos Gym Leader",
   "region": "kalos",
   "locationKey": "kalos-coumarine-city",
-  "badgeName": "Kalos Badge 4",
-  "badgeColor": "#48a048",
+  "badgeName": "Plant Badge",
+  "badgeColor": "#78c850",
   "spriteKey": "ramos",
   "team": [
    {
@@ -2217,8 +2217,8 @@
   "title": "Kalos Gym Leader",
   "region": "kalos",
   "locationKey": "kalos-lumiose-city",
-  "badgeName": "Kalos Badge 5",
-  "badgeColor": "#b83028",
+  "badgeName": "Voltage Badge",
+  "badgeColor": "#f8d030",
   "spriteKey": "clemont",
   "team": [
    {
@@ -2267,8 +2267,8 @@
   "title": "Kalos Gym Leader",
   "region": "kalos",
   "locationKey": "kalos-laverre-city",
-  "badgeName": "Kalos Badge 6",
-  "badgeColor": "#a060c0",
+  "badgeName": "Fairy Badge",
+  "badgeColor": "#ee99ac",
   "spriteKey": "valerie",
   "team": [
    {
@@ -2317,8 +2317,8 @@
   "title": "Kalos Gym Leader",
   "region": "kalos",
   "locationKey": "kalos-anistar-city",
-  "badgeName": "Kalos Badge 7",
-  "badgeColor": "#e08040",
+  "badgeName": "Psychic Badge",
+  "badgeColor": "#f85888",
   "spriteKey": "olympia",
   "team": [
    {
@@ -2367,8 +2367,8 @@
   "title": "Kalos Gym Leader",
   "region": "kalos",
   "locationKey": "kalos-snowbelle-city",
-  "badgeName": "Kalos Badge 8",
-  "badgeColor": "#40c0c0",
+  "badgeName": "Iceberg Badge",
+  "badgeColor": "#98d8d8",
   "spriteKey": "wulfric",
   "team": [
    {
@@ -2417,8 +2417,8 @@
   "title": "Alola Gym Leader",
   "region": "alola",
   "locationKey": "alola-iki-town",
-  "badgeName": "Alola Badge 1",
-  "badgeColor": "#a0a0a0",
+  "badgeName": "Normalium Z",
+  "badgeColor": "#a8a878",
   "spriteKey": "ilima",
   "team": [
    {
@@ -2467,8 +2467,8 @@
   "title": "Alola Gym Leader",
   "region": "alola",
   "locationKey": "alola-hauoli-city",
-  "badgeName": "Alola Badge 2",
-  "badgeColor": "#4878b0",
+  "badgeName": "Waterium Z",
+  "badgeColor": "#6890f0",
   "spriteKey": "lana",
   "team": [
    {
@@ -2517,8 +2517,8 @@
   "title": "Alola Gym Leader",
   "region": "alola",
   "locationKey": "alola-po-town",
-  "badgeName": "Alola Badge 3",
-  "badgeColor": "#c8a030",
+  "badgeName": "Firium Z",
+  "badgeColor": "#f08030",
   "spriteKey": "kiawe",
   "team": [
    {
@@ -2567,8 +2567,8 @@
   "title": "Alola Gym Leader",
   "region": "alola",
   "locationKey": "alola-paniola-town",
-  "badgeName": "Alola Badge 4",
-  "badgeColor": "#48a048",
+  "badgeName": "Grassium Z",
+  "badgeColor": "#78c850",
   "spriteKey": "mallow",
   "team": [
    {
@@ -2617,8 +2617,8 @@
   "title": "Alola Gym Leader",
   "region": "alola",
   "locationKey": "alola-heahea-city",
-  "badgeName": "Alola Badge 5",
-  "badgeColor": "#b83028",
+  "badgeName": "Electrium Z",
+  "badgeColor": "#f8d030",
   "spriteKey": "sophocles",
   "team": [
    {
@@ -2667,8 +2667,8 @@
   "title": "Alola Gym Leader",
   "region": "alola",
   "locationKey": "alola-konikoni-city",
-  "badgeName": "Alola Badge 6",
-  "badgeColor": "#a060c0",
+  "badgeName": "Ghostium Z",
+  "badgeColor": "#705898",
   "spriteKey": "acerola",
   "team": [
    {
@@ -2717,8 +2717,8 @@
   "title": "Alola Gym Leader",
   "region": "alola",
   "locationKey": "alola-malie-city",
-  "badgeName": "Alola Badge 7",
-  "badgeColor": "#e08040",
+  "badgeName": "Fairium Z",
+  "badgeColor": "#ee99ac",
   "spriteKey": "mina",
   "team": [
    {
@@ -2767,8 +2767,8 @@
   "title": "Alola Gym Leader",
   "region": "alola",
   "locationKey": "alola-iki-town",
-  "badgeName": "Alola Badge 8",
-  "badgeColor": "#40c0c0",
+  "badgeName": "Groundium Z",
+  "badgeColor": "#e0c068",
   "spriteKey": "hapu",
   "team": [
    {
@@ -2817,8 +2817,8 @@
   "title": "Galar Gym Leader",
   "region": "galar",
   "locationKey": "galar-turffield",
-  "badgeName": "Galar Badge 1",
-  "badgeColor": "#a0a0a0",
+  "badgeName": "Grass Badge",
+  "badgeColor": "#78c850",
   "spriteKey": "milo",
   "team": [
    {
@@ -2867,8 +2867,8 @@
   "title": "Galar Gym Leader",
   "region": "galar",
   "locationKey": "galar-hulbury",
-  "badgeName": "Galar Badge 2",
-  "badgeColor": "#4878b0",
+  "badgeName": "Water Badge",
+  "badgeColor": "#6890f0",
   "spriteKey": "nessa",
   "team": [
    {
@@ -2917,8 +2917,8 @@
   "title": "Galar Gym Leader",
   "region": "galar",
   "locationKey": "galar-motostoke",
-  "badgeName": "Galar Badge 3",
-  "badgeColor": "#c8a030",
+  "badgeName": "Fire Badge",
+  "badgeColor": "#f08030",
   "spriteKey": "kabu",
   "team": [
    {
@@ -2967,8 +2967,8 @@
   "title": "Galar Gym Leader",
   "region": "galar",
   "locationKey": "galar-stow-on-side",
-  "badgeName": "Galar Badge 4",
-  "badgeColor": "#48a048",
+  "badgeName": "Fighting Badge",
+  "badgeColor": "#c03028",
   "spriteKey": "bea",
   "team": [
    {
@@ -3017,8 +3017,8 @@
   "title": "Galar Gym Leader",
   "region": "galar",
   "locationKey": "galar-ballonlea",
-  "badgeName": "Galar Badge 5",
-  "badgeColor": "#b83028",
+  "badgeName": "Fairy Badge",
+  "badgeColor": "#ee99ac",
   "spriteKey": "opal",
   "team": [
    {
@@ -3067,8 +3067,8 @@
   "title": "Galar Gym Leader",
   "region": "galar",
   "locationKey": "galar-circhester",
-  "badgeName": "Galar Badge 6",
-  "badgeColor": "#a060c0",
+  "badgeName": "Rock Badge",
+  "badgeColor": "#b8a038",
   "spriteKey": "gordie",
   "team": [
    {
@@ -3117,8 +3117,8 @@
   "title": "Galar Gym Leader",
   "region": "galar",
   "locationKey": "galar-spikemuth",
-  "badgeName": "Galar Badge 7",
-  "badgeColor": "#e08040",
+  "badgeName": "Dark Badge",
+  "badgeColor": "#705848",
   "spriteKey": "piers",
   "team": [
    {
@@ -3167,8 +3167,8 @@
   "title": "Galar Gym Leader",
   "region": "galar",
   "locationKey": "galar-hammerlocke",
-  "badgeName": "Galar Badge 8",
-  "badgeColor": "#40c0c0",
+  "badgeName": "Dragon Badge",
+  "badgeColor": "#7038f8",
   "spriteKey": "raihan",
   "team": [
    {
@@ -3217,8 +3217,8 @@
   "title": "Paldea Gym Leader",
   "region": "paldea",
   "locationKey": "paldea-cortondo",
-  "badgeName": "Paldea Badge 1",
-  "badgeColor": "#a0a0a0",
+  "badgeName": "Bug Badge",
+  "badgeColor": "#a8b820",
   "spriteKey": "katy",
   "team": [
    {
@@ -3267,8 +3267,8 @@
   "title": "Paldea Gym Leader",
   "region": "paldea",
   "locationKey": "paldea-artazon",
-  "badgeName": "Paldea Badge 2",
-  "badgeColor": "#4878b0",
+  "badgeName": "Grass Badge",
+  "badgeColor": "#78c850",
   "spriteKey": "brassius",
   "team": [
    {
@@ -3317,8 +3317,8 @@
   "title": "Paldea Gym Leader",
   "region": "paldea",
   "locationKey": "paldea-levincia",
-  "badgeName": "Paldea Badge 3",
-  "badgeColor": "#c8a030",
+  "badgeName": "Electric Badge",
+  "badgeColor": "#f8d030",
   "spriteKey": "iono",
   "team": [
    {
@@ -3367,8 +3367,8 @@
   "title": "Paldea Gym Leader",
   "region": "paldea",
   "locationKey": "paldea-cascarrafa",
-  "badgeName": "Paldea Badge 4",
-  "badgeColor": "#48a048",
+  "badgeName": "Water Badge",
+  "badgeColor": "#6890f0",
   "spriteKey": "kofu",
   "team": [
    {
@@ -3417,8 +3417,8 @@
   "title": "Paldea Gym Leader",
   "region": "paldea",
   "locationKey": "paldea-medali",
-  "badgeName": "Paldea Badge 5",
-  "badgeColor": "#b83028",
+  "badgeName": "Normal Badge",
+  "badgeColor": "#a8a878",
   "spriteKey": "larry",
   "team": [
    {
@@ -3467,8 +3467,8 @@
   "title": "Paldea Gym Leader",
   "region": "paldea",
   "locationKey": "paldea-montenevera",
-  "badgeName": "Paldea Badge 6",
-  "badgeColor": "#a060c0",
+  "badgeName": "Ghost Badge",
+  "badgeColor": "#705898",
   "spriteKey": "ryme",
   "team": [
    {
@@ -3517,8 +3517,8 @@
   "title": "Paldea Gym Leader",
   "region": "paldea",
   "locationKey": "paldea-alfornada",
-  "badgeName": "Paldea Badge 7",
-  "badgeColor": "#e08040",
+  "badgeName": "Psychic Badge",
+  "badgeColor": "#f85888",
   "spriteKey": "tulip",
   "team": [
    {
@@ -3567,8 +3567,8 @@
   "title": "Paldea Gym Leader",
   "region": "paldea",
   "locationKey": "paldea-zapapico",
-  "badgeName": "Paldea Badge 8",
-  "badgeColor": "#40c0c0",
+  "badgeName": "Ice Badge",
+  "badgeColor": "#98d8d8",
   "spriteKey": "grusha",
   "team": [
    {

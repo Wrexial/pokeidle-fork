@@ -419,6 +419,42 @@ const trainerSpriteKey = (name) =>
   TRAINER_SPRITE_OVERRIDES[name] ??
   name.toLowerCase().replace(/['.]/g, '').replace(/\s+/g, '').replace(/[^a-z0-9-]/g, '')
 const BADGE_COLORS = ['#a0a0a0', '#4878b0', '#c8a030', '#48a048', '#b83028', '#a060c0', '#e08040', '#40c0c0']
+// Real badge names for the generated regions. Galar badges are named after
+// their type, Paldea's aren't individually named in-game so they follow the
+// same convention, and Alola's island trials award Z-Crystals rather than
+// badges. Kanto's badges are hand-curated in gym-leader-data.json.
+const BADGE_NAMES = {
+  johto: ['Zephyr Badge', 'Hive Badge', 'Plain Badge', 'Fog Badge', 'Storm Badge', 'Mineral Badge', 'Glacier Badge', 'Rising Badge'],
+  hoenn: ['Stone Badge', 'Knuckle Badge', 'Dynamo Badge', 'Heat Badge', 'Balance Badge', 'Feather Badge', 'Mind Badge', 'Rain Badge'],
+  sinnoh: ['Coal Badge', 'Forest Badge', 'Cobble Badge', 'Fen Badge', 'Relic Badge', 'Mine Badge', 'Icicle Badge', 'Beacon Badge'],
+  unova: ['Trio Badge', 'Basic Badge', 'Insect Badge', 'Bolt Badge', 'Quake Badge', 'Jet Badge', 'Freeze Badge', 'Legend Badge'],
+  kalos: ['Bug Badge', 'Cliff Badge', 'Rumble Badge', 'Plant Badge', 'Voltage Badge', 'Fairy Badge', 'Psychic Badge', 'Iceberg Badge'],
+  alola: ['Normalium Z', 'Waterium Z', 'Firium Z', 'Grassium Z', 'Electrium Z', 'Ghostium Z', 'Fairium Z', 'Groundium Z'],
+  galar: ['Grass Badge', 'Water Badge', 'Fire Badge', 'Fighting Badge', 'Fairy Badge', 'Rock Badge', 'Dark Badge', 'Dragon Badge'],
+  paldea: ['Bug Badge', 'Grass Badge', 'Electric Badge', 'Water Badge', 'Normal Badge', 'Ghost Badge', 'Psychic Badge', 'Ice Badge'],
+}
+// Badge colours follow the leader's type (Kanto's hand-curated badges already
+// do: Boulder = Rock grey, Cascade = Water blue, ...).
+const TYPE_COLORS = {
+  Normal: '#a8a878',
+  Fire: '#f08030',
+  Water: '#6890f0',
+  Electric: '#f8d030',
+  Grass: '#78c850',
+  Ice: '#98d8d8',
+  Fighting: '#c03028',
+  Poison: '#a040a0',
+  Ground: '#e0c068',
+  Flying: '#a890f0',
+  Psychic: '#f85888',
+  Bug: '#a8b820',
+  Rock: '#b8a038',
+  Ghost: '#705898',
+  Dragon: '#7038f8',
+  Dark: '#705848',
+  Steel: '#b8b8d0',
+  Fairy: '#ee99ac',
+}
 const GEN_STARTERS = {
   2: ['chikorita', 'cyndaquil', 'totodile'], 3: ['treecko', 'torchic', 'mudkip'],
   4: ['turtwig', 'chimchar', 'piplup'], 5: ['snivy', 'tepig', 'oshawott'],
@@ -1233,8 +1269,9 @@ for (const region of REGIONS) {
       title: `${name} Gym Leader`,
       region: regionId,
       locationKey: locId(regionId, townNode),
-      badgeName: `${name} Badge ${index + 1}`,
-      badgeColor: BADGE_COLORS[index % BADGE_COLORS.length],
+      badgeName: BADGE_NAMES[regionId]?.[index] ?? `${name} Badge ${index + 1}`,
+      badgeColor:
+        TYPE_COLORS[GYM_TYPES[regionId]?.[index]?.[0]] ?? BADGE_COLORS[index % BADGE_COLORS.length],
       spriteKey: trainerSpriteKey(leaderName),
       team: buildTeam(
         roster,

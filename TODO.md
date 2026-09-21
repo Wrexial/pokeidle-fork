@@ -86,11 +86,13 @@ working order, and the numbered sections as the details.
 
 33. **#28 Raid pools fully evolved** — S · ★★½
 34. **#32 Cap raid scaling at 80** — S · ★★½
+35. **#36 Deoxys forms interchangeable** — S · ★★½ — form-completeness fix;
+    other form-changers already do this.
 
 ### Tier 5 — Big and low-return, defer
 
-35. **#10 Weather & terrain** — M · ★★½ (nice depth, no urgency)
-36. **#19 Online sync** — L · ★★★ — the project's first backend; needs a
+36. **#10 Weather & terrain** — M · ★★½ (nice depth, no urgency)
+37. **#19 Online sync** — L · ★★★ — the project's first backend; needs a
     design doc and real ops for modest player value today.
 
 ---
@@ -965,6 +967,36 @@ Relevant code: `travelTo` / `START_RAID` (`src/components/town-map.js`,
 `state.pokedexCaught`.
 
 Effort: **small**.
+
+## 36. Deoxys forms should be freely interchangeable
+
+Deoxys is four species (`deoxys`, `deoxys-a`, `deoxys-d`, `deoxys-s`), but
+`evolution-data.json` only has **one-way** Lv.30 evolutions from the base form
+into each of the others. Once you evolve into Attack/Defense/Speed there is no
+way back or across, so you're stuck with that form (currently unavoidable, since
+a raid catch is level 60). Other form-change Pokemon are modelled as
+**bidirectional** level evolutions — `darmanitan` ↔ `darmanitan-z`, `meloetta`
+↔ `meloetta-p`, `shaymin` ↔ `shaymin-s`, `hoopa` ↔ `hoopa-u` — and Deoxys
+should match.
+
+- [ ] Add the missing reverse/cross evolutions so every Deoxys form can change
+      into every other (base → a/d/s exists; add a/d/s → base and a/d/s ↔ each
+      other). Keep the level gate low so a caught Deoxys can switch at once.
+- [ ] Confirm a form swap doesn't hand out "level up" gains or scramble
+      stats/moves — check `START_EVOLUTION` / the `COMPLETE_EVOLUTION` path in
+      `src/game/reducer.js`; `getPreEvolutionChain` already tolerates the
+      cycles (`src/game/pokemon.js`).
+- [ ] Consider a dedicated **Change Form** action/UI instead of overloading the
+      evolve list (nine Deoxys options is a lot). Darmanitan / Meloetta /
+      Shaymin / Hoopa have the same clutter, so a shared form-change panel would
+      help all of them.
+- [ ] Re-run `npm run validate` after the data edit.
+
+Relevant code: `public/data/evolution-data.json`, the bidirectional form
+precedent above, and the evolve UI (`src/components/party-panel.js`,
+`mobile-tabs.js`, `stats-panel.js`).
+
+Effort: **small** (data). Larger if the shared form-change UI is built.
 
 ---
 

@@ -76,6 +76,29 @@ export const wildSpeciesKeys = [
 export const catchableSpeciesCount = wildSpeciesKeys.length
 
 /**
+ * Species that spawn on exactly one (non-raid) route, keyed by that route.
+ * Used to badge the route-exclusive Pokemon in the Wild Pokemon grid.
+ * @type {Record<string, Set<string>>}
+ */
+export const routeExclusiveSpecies = (() => {
+  /** @type {Record<string, Set<string>>} */
+  const routesBySpecies = {}
+  for (const [routeKey, bucket] of Object.entries(encounterData)) {
+    if (mapData[routeKey]?.type === 'raid') continue
+    for (const encounter of bucket.encounters)
+      (routesBySpecies[encounter.speciesKey] ??= new Set()).add(routeKey)
+  }
+  /** @type {Record<string, Set<string>>} */
+  const exclusive = {}
+  for (const [speciesKey, routes] of Object.entries(routesBySpecies)) {
+    if (routes.size !== 1) continue
+    const [routeKey] = routes
+    ;(exclusive[routeKey] ??= new Set()).add(speciesKey)
+  }
+  return exclusive
+})()
+
+/**
  * National-dex range for each generation (Gen 1-9), in order. Shared by the
  * Pokedex tabs and the per-generation Shiny Charm.
  */

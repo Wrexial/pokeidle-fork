@@ -6,7 +6,7 @@ import { pokemonSpecies } from '../data/gameData.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
 
 export let PokedexTile = React.memo(
-  /** @param {{ speciesKey: string, status: string, rarity: string, isSelected: boolean, onClick: () => void, isShinyCaught: boolean, activeEffect: any, selectorMode: any }} props */
+  /** @param {{ speciesKey: string, status: string, rarity: string, isSelected: boolean, onClick: () => void, isShinyCaught: boolean, isExclusive?: boolean, activeEffect: any, selectorMode: any }} props */
   function ({
     speciesKey,
     status,
@@ -14,6 +14,7 @@ export let PokedexTile = React.memo(
     isSelected,
     onClick,
     isShinyCaught,
+    isExclusive,
     activeEffect,
     selectorMode,
   }) {
@@ -27,6 +28,12 @@ export let PokedexTile = React.memo(
               jsx('span', {
                 className: 'pokedex-shiny-star',
                 children: '★',
+              }),
+            isExclusive &&
+              jsx('span', {
+                className: 'pokedex-exclusive-badge',
+                title: 'Only found on this route',
+                children: '◆',
               }),
             activeEffect?.repel &&
               jsx('span', {

@@ -3,6 +3,7 @@
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { getRarityFromRate } from '../game/catching.js'
+import { routeExclusiveSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { PokeballIcon } from './pokeball-icon.js'
 import { EncounterDetailPanel } from './encounter-detail-panel.js'
@@ -16,6 +17,7 @@ export function RouteEncounterGrid({
   forceRarity,
 }) {
   const { state, dispatch } = useGame(),
+    exclusiveSpecies = routeExclusiveSpecies[routeKey],
     [selected, setSelected] = React.useState(/** @type {string | null} */ (null)),
     [applyingItem, setApplyingItem] = React.useState(/** @type {'repel' | 'honey' | null} */ (null)),
     repelCount = state.inventory.repel ?? 0,
@@ -82,6 +84,13 @@ export function RouteEncounterGrid({
             className: 'location-section-title',
             children: 'Wild Pokemon',
           }),
+          exclusiveSpecies?.size
+            ? jsx('span', {
+                className: 'pokedex-exclusive-legend',
+                title: 'Species found only on this route',
+                children: '◆ only found here',
+              })
+            : null,
           jsxs('div', {
             className: 'pokedex-header-actions',
             children: [
@@ -135,6 +144,7 @@ export function RouteEncounterGrid({
               isSelected: selected === encounter.speciesKey,
               onClick: () => handleTileClick(encounter.speciesKey),
               isShinyCaught: state.shinyCaught.includes(encounter.speciesKey),
+              isExclusive: exclusiveSpecies?.has(encounter.speciesKey) ?? false,
               activeEffect: activeEffectMap[encounter.speciesKey] ?? null,
               selectorMode: applyingItem,
             },

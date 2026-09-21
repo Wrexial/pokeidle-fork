@@ -3941,6 +3941,22 @@ img {
     z-index: 5
 }
 
+.pokedex-exclusive-badge {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    font-size: 8px;
+    color: #54c8c8;
+    text-shadow: 0 0 2px #000;
+    z-index: 5
+}
+
+.pokedex-exclusive-legend {
+    font-size: 6px;
+    color: #54c8c8;
+    white-space: nowrap
+}
+
 .pokedex-header-actions {
     display: flex;
     align-items: center;

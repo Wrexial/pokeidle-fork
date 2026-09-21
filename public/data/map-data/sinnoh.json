@@ -262,6 +262,9 @@
      "locationId": "sinnoh-jubilife-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "sinnoh-gym-1"
    ]
   },
   "unlockOrder": 191,
@@ -430,9 +433,6 @@
      "locationId": "sinnoh-oreburgh-city",
      "count": 15
     }
-   ],
-   "gymsRequired": [
-    "sinnoh-gym-1"
    ]
   },
   "unlockOrder": 196,
@@ -529,9 +529,6 @@
      "locationId": "sinnoh-hearthome-city",
      "count": 15
     }
-   ],
-   "gymsRequired": [
-    "sinnoh-gym-5"
    ]
   },
   "unlockOrder": 199,
@@ -673,9 +670,6 @@
      "locationId": "sinnoh-eterna-city",
      "count": 15
     }
-   ],
-   "gymsRequired": [
-    "sinnoh-gym-2"
    ]
   },
   "unlockOrder": 203,
@@ -701,9 +695,6 @@
      "locationId": "sinnoh-hearthome-city",
      "count": 15
     }
-   ],
-   "gymsRequired": [
-    "sinnoh-gym-5"
    ]
   },
   "unlockOrder": 204,
@@ -776,9 +767,6 @@
      "locationId": "sinnoh-pastoria-city",
      "count": 15
     }
-   ],
-   "gymsRequired": [
-    "sinnoh-gym-4"
    ]
   },
   "unlockOrder": 206,
@@ -898,6 +886,9 @@
      "locationId": "sinnoh-route-211",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "sinnoh-gym-3"
    ]
   },
   "unlockOrder": 210,
@@ -923,6 +914,9 @@
      "locationId": "sinnoh-route-216",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "sinnoh-gym-4"
    ]
   },
   "unlockOrder": 211,
@@ -946,6 +940,9 @@
      "locationId": "sinnoh-route-217",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "sinnoh-gym-5"
    ]
   },
   "unlockOrder": 212,
@@ -1059,6 +1056,9 @@
      "locationId": "sinnoh-sandgem-town",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "sinnoh-gym-6"
    ]
   },
   "unlockOrder": 215,
@@ -1084,6 +1084,9 @@
      "locationId": "sinnoh-route-219",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "sinnoh-gym-7"
    ]
   },
   "unlockOrder": 216,
@@ -1258,9 +1261,6 @@
      "locationId": "sinnoh-pastoria-city",
      "count": 15
     }
-   ],
-   "gymsRequired": [
-    "sinnoh-gym-4"
    ]
   },
   "unlockOrder": 222,

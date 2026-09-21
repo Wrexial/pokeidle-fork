@@ -55,6 +55,9 @@
   "unlock": {
    "requires": [
     "alola-iki-town"
+   ],
+   "gymsRequired": [
+    "alola-gym-1"
    ]
   },
   "unlockOrder": 316,
@@ -171,6 +174,9 @@
      "locationId": "alola-route-2",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "alola-gym-2"
    ]
   },
   "unlockOrder": 320,
@@ -244,6 +250,9 @@
      "locationId": "alola-route-3",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "alola-gym-3"
    ]
   },
   "unlockOrder": 322,
@@ -291,6 +300,9 @@
      "locationId": "alola-route-3",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "alola-gym-4"
    ]
   },
   "unlockOrder": 323,
@@ -361,6 +373,9 @@
   "unlock": {
    "requires": [
     "alola-iki-town"
+   ],
+   "gymsRequired": [
+    "alola-gym-5"
    ]
   },
   "unlockOrder": 325,
@@ -470,9 +485,6 @@
      "locationId": "alola-heahea-city",
      "count": 15
     }
-   ],
-   "gymsRequired": [
-    "alola-gym-5"
    ]
   },
   "unlockOrder": 329,
@@ -544,7 +556,7 @@
     }
    ],
    "gymsRequired": [
-    "alola-gym-5"
+    "alola-gym-6"
    ]
   },
   "unlockOrder": 331,
@@ -615,6 +627,9 @@
      "locationId": "alola-route-9",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "alola-gym-7"
    ]
   },
   "unlockOrder": 333,
@@ -640,6 +655,9 @@
      "locationId": "alola-route-11",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "alola-gym-8"
    ]
   },
   "unlockOrder": 334,
@@ -718,9 +736,6 @@
      "locationId": "alola-konikoni-city",
      "count": 15
     }
-   ],
-   "gymsRequired": [
-    "alola-gym-6"
    ]
   },
   "unlockOrder": 337,

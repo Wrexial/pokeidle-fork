@@ -416,9 +416,6 @@
      "locationId": "johto-violet-city",
      "count": 15
     }
-   ],
-   "gymsRequired": [
-    "johto-gym-1"
    ]
   },
   "unlockOrder": 112,
@@ -611,9 +608,6 @@
      "locationId": "johto-olivine-city",
      "count": 15
     }
-   ],
-   "gymsRequired": [
-    "johto-gym-6"
    ]
   },
   "unlockOrder": 118,
@@ -710,7 +704,7 @@
     }
    ],
    "gymsRequired": [
-    "johto-gym-4"
+    "johto-gym-5"
    ]
   },
   "unlockOrder": 121,
@@ -736,6 +730,9 @@
      "locationId": "johto-route-42",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "johto-gym-6"
    ]
   },
   "unlockOrder": 122,
@@ -808,9 +805,6 @@
      "locationId": "johto-mahogany-town",
      "count": 15
     }
-   ],
-   "gymsRequired": [
-    "johto-gym-7"
    ]
   },
   "unlockOrder": 124,
@@ -934,9 +928,6 @@
      "locationId": "johto-cianwood-city",
      "count": 15
     }
-   ],
-   "gymsRequired": [
-    "johto-gym-5"
    ]
   },
   "unlockOrder": 128,

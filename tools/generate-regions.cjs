@@ -49,6 +49,9 @@ const GYM_LEVEL_MIN = 12
 const GYM_LEVEL_MAX = 64
 const E4_LEVEL_MIN = 68
 const CHAMPION_LEVEL = LEVEL_MAX - 5
+// Spread index i of `count` evenly across [min, max] (inclusive).
+const spread = (i, count, min, max) =>
+  Math.round(min + (count <= 1 ? 0 : (i * (max - min)) / (count - 1)))
 const TRAINER_CLASSES = ['youngster', 'lass', 'bugCatcher', 'hiker', 'camper', 'beauty', 'coolTrainer', 'psychic', 'scientist', 'ace', 'blackbelt', 'swimmer']
 const LEADER_SPRITES = ['acetrainer', 'hiker', 'beauty', 'blackbelt', 'psychic', 'scientist', 'camper', 'swimmer', 'gentleman', 'juggler']
 const BADGE_COLORS = ['#a0a0a0', '#4878b0', '#c8a030', '#48a048', '#b83028', '#a060c0', '#e08040', '#40c0c0']
@@ -316,9 +319,8 @@ for (const region of REGIONS) {
   const all = speciesForGen(gen)
   const wild = all.filter((s) => s.catchRate > 3 && !starters.includes(s.key))
 
-  // Resolve each gym to its town up-front: the roads leaving a gym town must
-  // require that gym's badge, and the league data below reuses the same map so
-  // the two never drift apart.
+  // Resolve each gym to its town up-front so gate placement, the badge/team
+  // data below and the league requirement all agree.
   const gymTowns = townNodes.length ? townNodes : [entryNode]
   const gymPlacements = (GYM_LEADERS[regionId] ?? []).map((leaderName, i) => {
     const preferredTown = (GYM_TOWNS[regionId] ?? [])[i],
@@ -332,29 +334,46 @@ for (const region of REGIONS) {
       townNode: preferredNode ?? gymTowns[i % gymTowns.length],
     }
   })
-  // Gyms sit in their real cities, but those cities are visited in an order
-  // that doesn't always match the canonical gym order (Hoenn's Petalburg holds
-  // the 5th gym yet is reached before Rustboro's 1st). So the roads leaving a
-  // gym town require the gym physically there, and that gym's level follows the
-  // same route curve as the wilds around it — a canonical level here would wall
-  // off the early game with an impossibly strong leader.
-  const gymGateAtTown = {}
-  for (const gym of gymPlacements)
-    if (!gymGateAtTown[gym.townNode]) gymGateAtTown[gym.townNode] = gym.id
-  const gymLevelById = {}
-  let routesBefore = 0
-  for (const node of order) {
-    const gymsHere = gymPlacements.filter((gym) => gym.townNode === node)
-    if (gymsHere.length) {
-      const t =
-        routeNodes.length <= 1 ? 0 : Math.min(1, routesBefore / (routeNodes.length - 1))
-      const level = Math.max(
-        GYM_LEVEL_MIN,
-        Math.min(GYM_LEVEL_MAX, Math.round(LEVEL_MIN + t * (WILD_LEVEL_MAX - LEVEL_MIN)) + 2)
-      )
-      for (const gym of gymsHere) gymLevelById[gym.id] = level
+  // Attach each gym's badge gate to the point in the route order where the
+  // badge is actually needed. Gyms sit in their real cities, which are visited
+  // in an order that can differ from the canonical gym order (Hoenn's Petalburg
+  // holds gym 5 but is reached before Rustboro's gym 1), so a gate on the town
+  // itself would arrive far too early and wall off the early game. Instead,
+  // walk the gyms in badge order and place each gate after both its own town
+  // and the previous gate: gym 5 ends up on the road past Lavaridge and the
+  // player backtracks to Petalburg for it, while its canonical level (and the
+  // jump that comes with it) is kept. A gym whose town sits too late in the
+  // route order gets no gate and is only required at the league.
+  //
+  // The route order is by route number, not tree order, so a node listed after
+  // a town can still be one of its ancestors (Sinnoh's Route 215 gates
+  // Veilstone). Gating such a node would lock the town that holds the gym, so
+  // skip ancestors while scanning forward.
+  const nodePosition = new Map(order.map((node, position) => [node, position]))
+  const isAncestorOf = (ancestor, node) => {
+    let current = node
+    while (current) {
+      if (current === ancestor) return true
+      if (current === entryNode) return false
+      current = unlockParent[current] ?? parent[current] ?? null
     }
-    if (isRouteNode(node)) routesBefore++
+    return false
+  }
+  const gateGymByNode = {}
+  let previousGate = -1
+  for (const gym of gymPlacements) {
+    const start = Math.max(
+      previousGate + 1,
+      (nodePosition.get(gym.townNode) ?? 0) + 1,
+      1
+    )
+    for (let position = start; position < order.length; position++) {
+      const candidate = order[position]
+      if (candidate === gym.townNode || isAncestorOf(candidate, gym.townNode)) continue
+      gateGymByNode[candidate] = gym.id
+      previousGate = position
+      break
+    }
   }
 
   const regionObj = {
@@ -437,13 +456,9 @@ for (const region of REGIONS) {
         parent === entryNode
           ? { requires: [locId(regionId, entryNode)] }
           : { battlesAtLocation: [{ locationId: locId(regionId, parent), count: 15 }] }
-      // You can't leave a gym town without beating its leader. The starting
-      // town is exempt: it may hold a gym (Alola's fallback does), but gating
-      // the first route behind it would leave a fresh player with no wild
-      // encounters to train on.
-      if (parent !== entryNode && gymGateAtTown[parent])
-        unlock.gymsRequired = [gymGateAtTown[parent]]
     }
+    // The badge that gates the road onward, placed where it is needed.
+    if (gateGymByNode[node]) unlock.gymsRequired = [gateGymByNode[node]]
     if (isRoute) {
       encounterData[id] = routeEncounter[node]
       mapData[id] = {
@@ -532,8 +547,8 @@ for (const region of REGIONS) {
     connections: [locId(regionId, leagueNode)],
     unlock: {
       battlesAtLocation: [{ locationId: locId(regionId, leagueNode), count: 20 }],
-      // Every badge is required for the league, including any gym the player
-      // passed before its canonical turn (see gymGateAtTown above).
+      // Every badge is required for the league, including any gym that got no
+      // road gate (see gateGymByNode above).
       gymsRequired: gymPlacements.map((gym) => gym.id),
     },
     unlockOrder: unlockOrder++,
@@ -556,7 +571,13 @@ for (const region of REGIONS) {
       badgeName: `${name} Badge ${index + 1}`,
       badgeColor: BADGE_COLORS[index % BADGE_COLORS.length],
       spriteKey: LEADER_SPRITES[(gen + index) % LEADER_SPRITES.length],
-      team: makeTeam(roster, index * 3, 3, clampLevel(gymLevelById[gymId] ?? GYM_LEVEL_MIN), 1),
+      team: makeTeam(
+        roster,
+        index * 3,
+        3,
+        clampLevel(spread(index, gymPlacements.length, GYM_LEVEL_MIN, GYM_LEVEL_MAX)),
+        1
+      ),
     })
   })
   const eliteFour = ELITE_FOUR[regionId] ?? []

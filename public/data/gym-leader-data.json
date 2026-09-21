@@ -215,15 +215,15 @@
   "team": [
    {
     "speciesKey": "bayleef",
-    "level": 18
+    "level": 12
    },
    {
     "speciesKey": "meganium",
-    "level": 19
+    "level": 13
    },
    {
     "speciesKey": "quilava",
-    "level": 20
+    "level": 14
    }
   ]
  },
@@ -239,15 +239,15 @@
   "team": [
    {
     "speciesKey": "typhlosion",
-    "level": 25
+    "level": 19
    },
    {
     "speciesKey": "croconaw",
-    "level": 26
+    "level": 20
    },
    {
     "speciesKey": "feraligatr",
-    "level": 27
+    "level": 21
    }
   ]
  },
@@ -263,15 +263,15 @@
   "team": [
    {
     "speciesKey": "sentret",
-    "level": 28
+    "level": 27
    },
    {
     "speciesKey": "furret",
-    "level": 29
+    "level": 28
    },
    {
     "speciesKey": "hoothoot",
-    "level": 30
+    "level": 29
    }
   ]
  },
@@ -287,15 +287,15 @@
   "team": [
    {
     "speciesKey": "noctowl",
-    "level": 39
+    "level": 34
    },
    {
     "speciesKey": "ledyba",
-    "level": 40
+    "level": 35
    },
    {
     "speciesKey": "ledian",
-    "level": 41
+    "level": 36
    }
   ]
  },
@@ -311,15 +311,15 @@
   "team": [
    {
     "speciesKey": "spinarak",
-    "level": 54
+    "level": 42
    },
    {
     "speciesKey": "ariados",
-    "level": 55
+    "level": 43
    },
    {
     "speciesKey": "crobat",
-    "level": 56
+    "level": 44
    }
   ]
  },
@@ -335,15 +335,15 @@
   "team": [
    {
     "speciesKey": "chinchou",
-    "level": 46
+    "level": 49
    },
    {
     "speciesKey": "lanturn",
-    "level": 47
+    "level": 50
    },
    {
     "speciesKey": "pichu",
-    "level": 48
+    "level": 51
    }
   ]
  },
@@ -407,15 +407,15 @@
   "team": [
    {
     "speciesKey": "grovyle",
-    "level": 15
+    "level": 12
    },
    {
     "speciesKey": "sceptile",
-    "level": 16
+    "level": 13
    },
    {
     "speciesKey": "combusken",
-    "level": 17
+    "level": 14
    }
   ]
  },
@@ -455,15 +455,15 @@
   "team": [
    {
     "speciesKey": "poochyena",
-    "level": 28
+    "level": 27
    },
    {
     "speciesKey": "mightyena",
-    "level": 29
+    "level": 28
    },
    {
     "speciesKey": "zigzagoon",
-    "level": 30
+    "level": 29
    }
   ]
  },
@@ -479,15 +479,15 @@
   "team": [
    {
     "speciesKey": "linoone",
-    "level": 32
+    "level": 34
    },
    {
     "speciesKey": "wurmple",
-    "level": 33
+    "level": 35
    },
    {
     "speciesKey": "silcoon",
-    "level": 34
+    "level": 36
    }
   ]
  },
@@ -503,15 +503,15 @@
   "team": [
    {
     "speciesKey": "beautifly",
-    "level": 12
+    "level": 42
    },
    {
     "speciesKey": "cascoon",
-    "level": 13
+    "level": 43
    },
    {
     "speciesKey": "dustox",
-    "level": 14
+    "level": 44
    }
   ]
  },
@@ -527,15 +527,15 @@
   "team": [
    {
     "speciesKey": "lotad",
-    "level": 46
+    "level": 49
    },
    {
     "speciesKey": "lombre",
-    "level": 47
+    "level": 50
    },
    {
     "speciesKey": "ludicolo",
-    "level": 48
+    "level": 51
    }
   ]
  },
@@ -551,15 +551,15 @@
   "team": [
    {
     "speciesKey": "seedot",
-    "level": 56
-   },
-   {
-    "speciesKey": "nuzleaf",
     "level": 57
    },
    {
-    "speciesKey": "shiftry",
+    "speciesKey": "nuzleaf",
     "level": 58
+   },
+   {
+    "speciesKey": "shiftry",
+    "level": 59
    }
   ]
  },
@@ -575,15 +575,15 @@
   "team": [
    {
     "speciesKey": "taillow",
-    "level": 61
+    "level": 64
    },
    {
     "speciesKey": "swellow",
-    "level": 62
+    "level": 65
    },
    {
     "speciesKey": "wingull",
-    "level": 63
+    "level": 66
    }
   ]
  },
@@ -599,15 +599,15 @@
   "team": [
    {
     "speciesKey": "grotle",
-    "level": 14
+    "level": 12
    },
    {
     "speciesKey": "torterra",
-    "level": 15
+    "level": 13
    },
    {
     "speciesKey": "monferno",
-    "level": 16
+    "level": 14
    }
   ]
  },
@@ -647,15 +647,15 @@
   "team": [
    {
     "speciesKey": "starly",
-    "level": 40
+    "level": 27
    },
    {
     "speciesKey": "staravia",
-    "level": 41
+    "level": 28
    },
    {
     "speciesKey": "staraptor",
-    "level": 42
+    "level": 29
    }
   ]
  },
@@ -671,15 +671,15 @@
   "team": [
    {
     "speciesKey": "bidoof",
-    "level": 35
+    "level": 34
    },
    {
     "speciesKey": "bibarel",
-    "level": 36
+    "level": 35
    },
    {
     "speciesKey": "kricketot",
-    "level": 37
+    "level": 36
    }
   ]
  },
@@ -695,15 +695,15 @@
   "team": [
    {
     "speciesKey": "kricketune",
-    "level": 26
+    "level": 42
    },
    {
     "speciesKey": "shinx",
-    "level": 27
+    "level": 43
    },
    {
     "speciesKey": "luxio",
-    "level": 28
+    "level": 44
    }
   ]
  },
@@ -743,15 +743,15 @@
   "team": [
    {
     "speciesKey": "cranidos",
-    "level": 47
+    "level": 57
    },
    {
     "speciesKey": "rampardos",
-    "level": 48
+    "level": 58
    },
    {
     "speciesKey": "shieldon",
-    "level": 49
+    "level": 59
    }
   ]
  },
@@ -767,15 +767,15 @@
   "team": [
    {
     "speciesKey": "bastiodon",
-    "level": 59
+    "level": 64
    },
    {
     "speciesKey": "burmy",
-    "level": 60
+    "level": 65
    },
    {
     "speciesKey": "wormadam",
-    "level": 61
+    "level": 66
    }
   ]
  },
@@ -791,15 +791,15 @@
   "team": [
    {
     "speciesKey": "servine",
-    "level": 13
+    "level": 12
    },
    {
     "speciesKey": "serperior",
-    "level": 14
+    "level": 13
    },
    {
     "speciesKey": "pignite",
-    "level": 15
+    "level": 14
    }
   ]
  },
@@ -815,15 +815,15 @@
   "team": [
    {
     "speciesKey": "emboar",
-    "level": 16
+    "level": 19
    },
    {
     "speciesKey": "dewott",
-    "level": 17
+    "level": 20
    },
    {
     "speciesKey": "samurott",
-    "level": 18
+    "level": 21
    }
   ]
  },
@@ -839,15 +839,15 @@
   "team": [
    {
     "speciesKey": "patrat",
-    "level": 16
+    "level": 27
    },
    {
     "speciesKey": "watchog",
-    "level": 17
+    "level": 28
    },
    {
     "speciesKey": "lillipup",
-    "level": 18
+    "level": 29
    }
   ]
  },
@@ -863,15 +863,15 @@
   "team": [
    {
     "speciesKey": "herdier",
-    "level": 19
+    "level": 34
    },
    {
     "speciesKey": "stoutland",
-    "level": 20
+    "level": 35
    },
    {
     "speciesKey": "purrloin",
-    "level": 21
+    "level": 36
    }
   ]
  },
@@ -887,15 +887,15 @@
   "team": [
    {
     "speciesKey": "liepard",
-    "level": 22
+    "level": 42
    },
    {
     "speciesKey": "pansage",
-    "level": 23
+    "level": 43
    },
    {
     "speciesKey": "simisage",
-    "level": 24
+    "level": 44
    }
   ]
  },
@@ -911,15 +911,15 @@
   "team": [
    {
     "speciesKey": "pansear",
-    "level": 25
+    "level": 49
    },
    {
     "speciesKey": "simisear",
-    "level": 26
+    "level": 50
    },
    {
     "speciesKey": "panpour",
-    "level": 27
+    "level": 51
    }
   ]
  },
@@ -935,15 +935,15 @@
   "team": [
    {
     "speciesKey": "simipour",
-    "level": 28
+    "level": 57
    },
    {
     "speciesKey": "munna",
-    "level": 29
+    "level": 58
    },
    {
     "speciesKey": "musharna",
-    "level": 30
+    "level": 59
    }
   ]
  },
@@ -959,15 +959,15 @@
   "team": [
    {
     "speciesKey": "pidove",
-    "level": 34
+    "level": 64
    },
    {
     "speciesKey": "tranquill",
-    "level": 35
+    "level": 65
    },
    {
     "speciesKey": "unfezant",
-    "level": 36
+    "level": 66
    }
   ]
  },
@@ -983,15 +983,15 @@
   "team": [
    {
     "speciesKey": "quilladin",
-    "level": 17
+    "level": 12
    },
    {
     "speciesKey": "chesnaught",
-    "level": 18
+    "level": 13
    },
    {
     "speciesKey": "braixen",
-    "level": 19
+    "level": 14
    }
   ]
  },
@@ -1007,15 +1007,15 @@
   "team": [
    {
     "speciesKey": "delphox",
-    "level": 30
+    "level": 19
    },
    {
     "speciesKey": "frogadier",
-    "level": 31
+    "level": 20
    },
    {
     "speciesKey": "greninja",
-    "level": 32
+    "level": 21
    }
   ]
  },
@@ -1031,15 +1031,15 @@
   "team": [
    {
     "speciesKey": "bunnelby",
-    "level": 43
+    "level": 27
    },
    {
     "speciesKey": "diggersby",
-    "level": 44
+    "level": 28
    },
    {
     "speciesKey": "fletchling",
-    "level": 45
+    "level": 29
    }
   ]
  },
@@ -1055,15 +1055,15 @@
   "team": [
    {
     "speciesKey": "fletchinder",
-    "level": 46
+    "level": 34
    },
    {
     "speciesKey": "talonflame",
-    "level": 47
+    "level": 35
    },
    {
     "speciesKey": "scatterbug",
-    "level": 48
+    "level": 36
    }
   ]
  },
@@ -1079,15 +1079,15 @@
   "team": [
    {
     "speciesKey": "spewpa",
-    "level": 20
+    "level": 42
    },
    {
     "speciesKey": "vivillon",
-    "level": 21
+    "level": 43
    },
    {
     "speciesKey": "litleo",
-    "level": 22
+    "level": 44
    }
   ]
  },
@@ -1103,15 +1103,15 @@
   "team": [
    {
     "speciesKey": "pyroar",
-    "level": 52
+    "level": 49
    },
    {
     "speciesKey": "flabebe",
-    "level": 53
+    "level": 50
    },
    {
     "speciesKey": "floette",
-    "level": 54
+    "level": 51
    }
   ]
  },
@@ -1127,15 +1127,15 @@
   "team": [
    {
     "speciesKey": "florges",
-    "level": 62
+    "level": 57
    },
    {
     "speciesKey": "skiddo",
-    "level": 63
+    "level": 58
    },
    {
     "speciesKey": "gogoat",
-    "level": 64
+    "level": 59
    }
   ]
  },
@@ -1223,15 +1223,15 @@
   "team": [
    {
     "speciesKey": "pikipek",
-    "level": 19
+    "level": 27
    },
    {
     "speciesKey": "trumbeak",
-    "level": 20
+    "level": 28
    },
    {
     "speciesKey": "toucannon",
-    "level": 21
+    "level": 29
    }
   ]
  },
@@ -1247,15 +1247,15 @@
   "team": [
    {
     "speciesKey": "yungoos",
-    "level": 23
+    "level": 34
    },
    {
     "speciesKey": "gumshoos",
-    "level": 24
+    "level": 35
    },
    {
     "speciesKey": "grubbin",
-    "level": 25
+    "level": 36
    }
   ]
  },
@@ -1271,15 +1271,15 @@
   "team": [
    {
     "speciesKey": "charjabug",
-    "level": 27
+    "level": 42
    },
    {
     "speciesKey": "vikavolt",
-    "level": 28
+    "level": 43
    },
    {
     "speciesKey": "crabrawler",
-    "level": 29
+    "level": 44
    }
   ]
  },
@@ -1295,15 +1295,15 @@
   "team": [
    {
     "speciesKey": "crabominable",
-    "level": 47
+    "level": 49
    },
    {
     "speciesKey": "oricorio",
-    "level": 48
+    "level": 50
    },
    {
     "speciesKey": "cutiefly",
-    "level": 49
+    "level": 51
    }
   ]
  },
@@ -1319,15 +1319,15 @@
   "team": [
    {
     "speciesKey": "ribombee",
-    "level": 51
+    "level": 57
    },
    {
     "speciesKey": "rockruff",
-    "level": 52
+    "level": 58
    },
    {
     "speciesKey": "lycanroc",
-    "level": 53
+    "level": 59
    }
   ]
  },
@@ -1343,15 +1343,15 @@
   "team": [
    {
     "speciesKey": "wishiwashi",
-    "level": 12
+    "level": 64
    },
    {
     "speciesKey": "mareanie",
-    "level": 13
+    "level": 65
    },
    {
     "speciesKey": "toxapex",
-    "level": 14
+    "level": 66
    }
   ]
  },
@@ -1367,15 +1367,15 @@
   "team": [
    {
     "speciesKey": "thwackey",
-    "level": 37
+    "level": 12
    },
    {
     "speciesKey": "rillaboom",
-    "level": 38
+    "level": 13
    },
    {
     "speciesKey": "raboot",
-    "level": 39
+    "level": 14
    }
   ]
  },
@@ -1391,15 +1391,15 @@
   "team": [
    {
     "speciesKey": "cinderace",
-    "level": 45
+    "level": 19
    },
    {
     "speciesKey": "drizzile",
-    "level": 46
+    "level": 20
    },
    {
     "speciesKey": "inteleon",
-    "level": 47
+    "level": 21
    }
   ]
  },
@@ -1415,15 +1415,15 @@
   "team": [
    {
     "speciesKey": "skwovet",
-    "level": 22
+    "level": 27
    },
    {
     "speciesKey": "greedent",
-    "level": 23
+    "level": 28
    },
    {
     "speciesKey": "rookidee",
-    "level": 24
+    "level": 29
    }
   ]
  },
@@ -1439,15 +1439,15 @@
   "team": [
    {
     "speciesKey": "corvisquire",
-    "level": 52
+    "level": 34
    },
    {
     "speciesKey": "corviknight",
-    "level": 53
+    "level": 35
    },
    {
     "speciesKey": "blipbug",
-    "level": 54
+    "level": 36
    }
   ]
  },
@@ -1463,15 +1463,15 @@
   "team": [
    {
     "speciesKey": "dottler",
-    "level": 64
+    "level": 42
    },
    {
     "speciesKey": "orbeetle",
-    "level": 65
+    "level": 43
    },
    {
     "speciesKey": "nickit",
-    "level": 66
+    "level": 44
    }
   ]
  },
@@ -1487,15 +1487,15 @@
   "team": [
    {
     "speciesKey": "thievul",
-    "level": 64
+    "level": 49
    },
    {
     "speciesKey": "gossifleur",
-    "level": 65
+    "level": 50
    },
    {
     "speciesKey": "eldegoss",
-    "level": 66
+    "level": 51
    }
   ]
  },
@@ -1511,15 +1511,15 @@
   "team": [
    {
     "speciesKey": "wooloo",
-    "level": 64
+    "level": 57
    },
    {
     "speciesKey": "dubwool",
-    "level": 65
+    "level": 58
    },
    {
     "speciesKey": "chewtle",
-    "level": 66
+    "level": 59
    }
   ]
  },
@@ -1535,15 +1535,15 @@
   "team": [
    {
     "speciesKey": "drednaw",
-    "level": 52
+    "level": 64
    },
    {
     "speciesKey": "yamper",
-    "level": 53
+    "level": 65
    },
    {
     "speciesKey": "boltund",
-    "level": 54
+    "level": 66
    }
   ]
  },
@@ -1559,15 +1559,15 @@
   "team": [
    {
     "speciesKey": "floragato",
-    "level": 31
+    "level": 12
    },
    {
     "speciesKey": "meowscarada",
-    "level": 32
+    "level": 13
    },
    {
     "speciesKey": "crocalor",
-    "level": 33
+    "level": 14
    }
   ]
  },
@@ -1583,15 +1583,15 @@
   "team": [
    {
     "speciesKey": "skeledirge",
-    "level": 31
+    "level": 19
    },
    {
     "speciesKey": "quaxwell",
-    "level": 32
+    "level": 20
    },
    {
     "speciesKey": "quaquaval",
-    "level": 33
+    "level": 21
    }
   ]
  },
@@ -1607,15 +1607,15 @@
   "team": [
    {
     "speciesKey": "lechonk",
-    "level": 64
+    "level": 27
    },
    {
     "speciesKey": "oinkologne",
-    "level": 65
+    "level": 28
    },
    {
     "speciesKey": "tarountula",
-    "level": 66
+    "level": 29
    }
   ]
  },
@@ -1631,15 +1631,15 @@
   "team": [
    {
     "speciesKey": "spidops",
-    "level": 31
+    "level": 34
    },
    {
     "speciesKey": "nymble",
-    "level": 32
+    "level": 35
    },
    {
     "speciesKey": "lokix",
-    "level": 33
+    "level": 36
    }
   ]
  },
@@ -1655,15 +1655,15 @@
   "team": [
    {
     "speciesKey": "pawmi",
-    "level": 12
+    "level": 42
    },
    {
     "speciesKey": "pawmo",
-    "level": 13
+    "level": 43
    },
    {
     "speciesKey": "pawmot",
-    "level": 14
+    "level": 44
    }
   ]
  },
@@ -1679,15 +1679,15 @@
   "team": [
    {
     "speciesKey": "tandemaus",
-    "level": 31
+    "level": 49
    },
    {
     "speciesKey": "maushold",
-    "level": 32
+    "level": 50
    },
    {
     "speciesKey": "fidough",
-    "level": 33
+    "level": 51
    }
   ]
  },
@@ -1703,15 +1703,15 @@
   "team": [
    {
     "speciesKey": "dachsbun",
-    "level": 31
+    "level": 57
    },
    {
     "speciesKey": "smoliv",
-    "level": 32
+    "level": 58
    },
    {
     "speciesKey": "dolliv",
-    "level": 33
+    "level": 59
    }
   ]
  },
@@ -1727,15 +1727,15 @@
   "team": [
    {
     "speciesKey": "arboliva",
-    "level": 31
+    "level": 64
    },
    {
     "speciesKey": "squawkabilly",
-    "level": 32
+    "level": 65
    },
    {
     "speciesKey": "nacli",
-    "level": 33
+    "level": 66
    }
   ]
  }

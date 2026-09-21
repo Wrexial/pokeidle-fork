@@ -339,13 +339,16 @@ One-off scripts used to build the data JSON (not run during dev/build):
   across towns in BFS order — Alola has island trials, not gyms, so it always
   falls back. Those real cities are visited in an order that can differ from
   the canonical gym order (Hoenn's Petalburg holds gym 5 but is reached before
-  Rustboro's gym 1), so each gym is levelled from its town's position on the
-  route curve and listed in reach order, and the roads leaving a gym town
-  carry a `gymsRequired` rule for that gym — progression is gated by the local
-  badge without an impossible wall (the starting town is exempt, so Alola's
-  entry-town gym can't lock a fresh player out of wild encounters). The league
-  requires every badge (`gymsRequired`; Kanto uses its existing
-  `badgesRequired`). Raid Islands offer the region's generation of Pokémon that turn
+  Rustboro's gym 1), so gym levels stay canonical but each badge is not
+  demanded at its own town. Instead the gates are laid in badge order: gym k's
+  `gymsRequired` rule goes on the first route after both its town and gym
+  k-1's gate, skipping any node that is an ancestor of the gym's own town
+  (route order is not tree order — Sinnoh's Route 215 gates Veilstone). Gym 5
+  then gates the road past Lavaridge and the player backtracks to Petalburg for
+  it. A gym whose town sits too late gets no gate and is only required at the
+  league; the league always requires every badge (`gymsRequired`; Kanto uses
+  its existing `badgesRequired`). Generated regions reveal any gym whose town is
+  unlocked; Kanto keeps its badge-order reveal. Raid Islands offer the region's generation of Pokémon that turn
   up on **no** region's wild routes and can't be reached by evolving one that
   does; that scan runs after every route is generated, so the pools are
   genuinely route-exclusive.

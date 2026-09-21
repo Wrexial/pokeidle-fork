@@ -191,9 +191,6 @@
      "locationId": "galar-motostoke",
      "count": 15
     }
-   ],
-   "gymsRequired": [
-    "galar-gym-3"
    ]
   },
   "unlockOrder": 347,
@@ -362,7 +359,7 @@
     }
    ],
    "gymsRequired": [
-    "galar-gym-3"
+    "galar-gym-2"
    ]
   },
   "unlockOrder": 352,
@@ -388,6 +385,9 @@
      "locationId": "galar-route-6",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "galar-gym-3"
    ]
   },
   "unlockOrder": 353,
@@ -480,7 +480,7 @@
     }
    ],
    "gymsRequired": [
-    "galar-gym-8"
+    "galar-gym-4"
    ]
   },
   "unlockOrder": 355,
@@ -576,6 +576,9 @@
      "locationId": "galar-route-7",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "galar-gym-6"
    ]
   },
   "unlockOrder": 358,
@@ -648,7 +651,7 @@
     }
    ],
    "gymsRequired": [
-    "galar-gym-8"
+    "galar-gym-7"
    ]
   },
   "unlockOrder": 360,
@@ -672,6 +675,9 @@
      "locationId": "galar-route-10",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "galar-gym-8"
    ]
   },
   "unlockOrder": 361,
@@ -715,9 +721,6 @@
      "locationId": "galar-stow-on-side",
      "count": 15
     }
-   ],
-   "gymsRequired": [
-    "galar-gym-4"
    ]
   },
   "unlockOrder": 362,

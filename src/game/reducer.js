@@ -48,6 +48,8 @@ export const initialGameState = {
   pokedexSeen: [],
   pokedexCaught: [],
   shinyCaught: [],
+  /** Consecutive encounters of one species, boosting shiny odds (DexNav). */
+  shinyChain: { speciesKey: null, count: 0 },
   shinySeen: [],
   defeatedGyms: [],
   defeatedEliteFour: [],
@@ -1071,6 +1073,16 @@ export function gameReducer(state, action) {
             ...state,
             shinyCaught: [...state.shinyCaught, speciesKey],
           }
+    }
+    case 'UPDATE_SHINY_CHAIN': {
+      const { speciesKey } = action.payload
+      return {
+        ...state,
+        shinyChain:
+          state.shinyChain.speciesKey === speciesKey
+            ? { speciesKey, count: state.shinyChain.count + 1 }
+            : { speciesKey, count: 1 },
+      }
     }
     case 'MARK_SHINY_SEEN': {
       const { speciesKey } = action.payload

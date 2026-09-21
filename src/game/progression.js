@@ -295,13 +295,29 @@ export function resolveActiveModifiers(activeEffects, routeKey) {
   return modifiers
 }
 
+/** How many same-species encounters double the shiny odds. */
+const SHINY_CHAIN_STEP = 40
+
+/**
+ * Shiny-odds divisor from a DexNav-style chain: 1x at no chain, up to 4x at
+ * 120+ consecutive encounters of the same species.
+ * @param {string} speciesKey
+ * @param {{ speciesKey: string | null, count: number } | undefined | null} chain
+ * @returns {number}
+ */
+export function shinyChainMultiplier(speciesKey, chain) {
+  if (!chain || chain.speciesKey !== speciesKey) return 1
+  return Math.min(4, 1 + chain.count / SHINY_CHAIN_STEP)
+}
+
 /**
  * @param {EncounterData} encounterData
  * @param {{ speciesKey: string, multiplier: number }[]} modifiers
  * @param {Set<number>} completedGenerationSet
+ * @param {{ speciesKey: string | null, count: number } | undefined} [shinyChain]
  * @returns {{ species: Species, speciesKey: string, level: number, isShiny: boolean }}
  */
-export function resolvePokemonEncounter(encounterData, modifiers, completedGenerationSet) {
+export function resolvePokemonEncounter(encounterData, modifiers, completedGenerationSet, shinyChain) {
   const weightedEncounters = encounterData.encounters.map((encounter) => {
       const modifier = modifiers?.find((candidate) => candidate.speciesKey === encounter.speciesKey)
       return modifier
@@ -317,11 +333,19 @@ export function resolvePokemonEncounter(encounterData, modifiers, completedGener
     if (((roll -= encounter.weight), roll <= 0)) {
       const level =
         encounter.minLevel + Math.floor(Math.random() * (encounter.maxLevel - encounter.minLevel + 1))
+      const chainMultiplier = shinyChainMultiplier(encounter.speciesKey, shinyChain)
       return {
         species: pokemonSpecies[encounter.speciesKey],
         speciesKey: encounter.speciesKey,
         level,
-        isShiny: checkShinyOdds(shinyOddsForSpecies(encounter.speciesKey, completedGenerationSet)),
+        isShiny: checkShinyOdds(
+          Math.max(
+            1,
+            Math.round(
+              shinyOddsForSpecies(encounter.speciesKey, completedGenerationSet) / chainMultiplier
+            )
+          )
+        ),
       }
     }
   const fallback = weightedEncounters[weightedEncounters.length - 1]
@@ -329,7 +353,15 @@ export function resolvePokemonEncounter(encounterData, modifiers, completedGener
     species: pokemonSpecies[fallback.speciesKey],
     speciesKey: fallback.speciesKey,
     level: fallback.minLevel,
-    isShiny: checkShinyOdds(shinyOddsForSpecies(fallback.speciesKey, completedGenerationSet)),
+    isShiny: checkShinyOdds(
+      Math.max(
+        1,
+        Math.round(
+          shinyOddsForSpecies(fallback.speciesKey, completedGenerationSet) /
+            shinyChainMultiplier(fallback.speciesKey, shinyChain)
+        )
+      )
+    ),
   }
 }
 

@@ -217,7 +217,8 @@ export function useGameLoop() {
             spawningPokemonData = resolvePokemonEncounter(
               currentEncounterData,
               activeModifierMultipliers,
-              completedGenerationSet
+              completedGenerationSet,
+              currentGameState.shinyChain
             ),
             pokemonBaseStats = calculatePokemonStats(
               spawningPokemonData.species,
@@ -252,6 +253,12 @@ export function useGameLoop() {
           }),
             dispatch({
               type: 'MARK_SEEN',
+              payload: {
+                speciesKey: spawningPokemonData.speciesKey,
+              },
+            }),
+            dispatch({
+              type: 'UPDATE_SHINY_CHAIN',
               payload: {
                 speciesKey: spawningPokemonData.speciesKey,
               },

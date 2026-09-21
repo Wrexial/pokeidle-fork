@@ -60,6 +60,13 @@ export const CHANGELOG = [
           ],
         },
         {
+          heading: 'Shiny Chain',
+          items: [
+            'Consecutive encounters of the same species build a shiny chain that improves its shiny odds \u2014 up to 4x at 120 in a row',
+            'The chained species shows a \u2726 badge on its encounter tile',
+          ],
+        },
+        {
           heading: 'Battle Tower',
           items: [
             'Once a region\u2019s Champion is beaten, its Gyms tab offers an endless Battle Tower: steadily stronger trainers, your team healed between floors, for Victory Tokens that scale with depth',

@@ -155,6 +155,7 @@ type GameState = {
   pokedexCaught: string[]
   shinySeen: string[]
   shinyCaught: string[]
+  shinyChain: { speciesKey: string | null; count: number }
   defeatedGyms: string[]
   defeatedEliteFour: string[]
   defeatedChampions: string[]

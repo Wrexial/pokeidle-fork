@@ -4099,6 +4099,17 @@ img {
     white-space: nowrap
 }
 
+.shiny-chain-badge {
+    position: absolute;
+    bottom: 1px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 7px;
+    color: #ffe860;
+    text-shadow: 0 0 2px #000,0 0 3px #000;
+    z-index: 6
+}
+
 .pokedex-header-actions {
     display: flex;
     align-items: center;

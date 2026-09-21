@@ -145,6 +145,10 @@ export function RouteEncounterGrid({
               onClick: () => handleTileClick(encounter.speciesKey),
               isShinyCaught: state.shinyCaught.includes(encounter.speciesKey),
               isExclusive: exclusiveSpecies?.has(encounter.speciesKey) ?? false,
+              chainCount:
+                state.shinyChain.speciesKey === encounter.speciesKey
+                  ? state.shinyChain.count
+                  : 0,
               activeEffect: activeEffectMap[encounter.speciesKey] ?? null,
               selectorMode: applyingItem,
             },

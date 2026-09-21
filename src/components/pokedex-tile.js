@@ -6,7 +6,7 @@ import { pokemonSpecies } from '../data/gameData.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
 
 export let PokedexTile = React.memo(
-  /** @param {{ speciesKey: string, status: string, rarity: string, isSelected: boolean, onClick: () => void, isShinyCaught: boolean, isExclusive?: boolean, activeEffect: any, selectorMode: any }} props */
+  /** @param {{ speciesKey: string, status: string, rarity: string, isSelected: boolean, onClick: () => void, isShinyCaught: boolean, isExclusive?: boolean, chainCount?: number, activeEffect: any, selectorMode: any }} props */
   function ({
     speciesKey,
     status,
@@ -15,6 +15,7 @@ export let PokedexTile = React.memo(
     onClick,
     isShinyCaught,
     isExclusive,
+    chainCount,
     activeEffect,
     selectorMode,
   }) {
@@ -34,6 +35,12 @@ export let PokedexTile = React.memo(
                 className: 'pokedex-exclusive-badge',
                 title: 'Only found on this route',
                 children: '◆',
+              }),
+            (chainCount ?? 0) > 0 &&
+              jsx('span', {
+                className: 'shiny-chain-badge',
+                title: `${chainCount} in a row — better shiny odds`,
+                children: `✦${chainCount}`,
               }),
             activeEffect?.repel &&
               jsx('span', {

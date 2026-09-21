@@ -374,6 +374,26 @@ Relevant code: `SORT_BOX` (`src/game/reducer.js`) and the Box header
 
 Effort: **small**.
 
+## 23. Egg-hatch reveal popup (with quick release)
+
+`HATCH_DAYCARE_EGG` currently drops the hatched Pokémon straight into the box
+with only a battle-log line ("The Egg hatched into X!"), so a hatch is easy to
+miss — especially a shiny.
+
+- [ ] Show a popup on hatch with the result: sprite, name, level, shiny marker,
+      gender, and IVs once #8 lands.
+- [ ] Give it **Keep** / **Quick release** actions (release without opening the
+      box), and optionally "release all non-shiny hatches".
+- [ ] Consider an auto-release setting for hatches that don't meet a filter
+      (e.g. not shiny), tying into #18 (settings) and #8 (management).
+- [ ] Reuse the existing modal pattern (`battle-info-overlay`) or the
+      evolution/scene style.
+
+Relevant code: `HATCH_DAYCARE_EGG` (`src/game/reducer.js`),
+`src/components/daycare-modal.js` (or a small new modal).
+
+Effort: **small**.
+
 ---
 
 ## Useful references when picking these up

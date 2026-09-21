@@ -897,7 +897,7 @@
  "johto-new-bark-town": [
   {
    "id": "johto-new-bark-town_t1",
-   "name": "Johto Trainer 1",
+   "name": "Bug Catcher Joey",
    "trainerClass": "bugCatcher",
    "team": [
     {
@@ -908,7 +908,7 @@
   },
   {
    "id": "johto-new-bark-town_t2",
-   "name": "Johto Trainer 2",
+   "name": "Cooltrainer Mikey",
    "trainerClass": "coolTrainer",
    "team": [
     {
@@ -919,7 +919,7 @@
   },
   {
    "id": "johto-new-bark-town_t3",
-   "name": "Johto Trainer 3",
+   "name": "Blackbelt Sarah",
    "trainerClass": "blackbelt",
    "team": [
     {
@@ -936,7 +936,7 @@
  "johto-cherrygrove-city": [
   {
    "id": "johto-cherrygrove-city_t1",
-   "name": "Johto Trainer 1",
+   "name": "Camper Kira",
    "trainerClass": "camper",
    "team": [
     {
@@ -947,7 +947,7 @@
   },
   {
    "id": "johto-cherrygrove-city_t2",
-   "name": "Johto Trainer 2",
+   "name": "Scientist Leo",
    "trainerClass": "scientist",
    "team": [
     {
@@ -958,7 +958,7 @@
   },
   {
    "id": "johto-cherrygrove-city_t3",
-   "name": "Johto Trainer 3",
+   "name": "Youngster Maya",
    "trainerClass": "youngster",
    "team": [
     {
@@ -975,7 +975,7 @@
  "johto-violet-city": [
   {
    "id": "johto-violet-city_t1",
-   "name": "Johto Trainer 1",
+   "name": "Psychic Victor",
    "trainerClass": "psychic",
    "team": [
     {
@@ -986,7 +986,7 @@
   },
   {
    "id": "johto-violet-city_t2",
-   "name": "Johto Trainer 2",
+   "name": "Swimmer Wendy",
    "trainerClass": "swimmer",
    "team": [
     {
@@ -997,7 +997,7 @@
   },
   {
    "id": "johto-violet-city_t3",
-   "name": "Johto Trainer 3",
+   "name": "Hiker Xander",
    "trainerClass": "hiker",
    "team": [
     {
@@ -1014,7 +1014,7 @@
  "johto-azalea-town": [
   {
    "id": "johto-azalea-town_t1",
-   "name": "Johto Trainer 1",
+   "name": "Blackbelt Eli",
    "trainerClass": "blackbelt",
    "team": [
     {
@@ -1025,7 +1025,7 @@
   },
   {
    "id": "johto-azalea-town_t2",
-   "name": "Johto Trainer 2",
+   "name": "Bug Catcher Fiona",
    "trainerClass": "bugCatcher",
    "team": [
     {
@@ -1036,7 +1036,7 @@
   },
   {
    "id": "johto-azalea-town_t3",
-   "name": "Johto Trainer 3",
+   "name": "Cooltrainer Gavin",
    "trainerClass": "coolTrainer",
    "team": [
     {
@@ -1053,7 +1053,7 @@
  "johto-goldenrod-city": [
   {
    "id": "johto-goldenrod-city_t1",
-   "name": "Johto Trainer 1",
+   "name": "Youngster Kai",
    "trainerClass": "youngster",
    "team": [
     {
@@ -1064,7 +1064,7 @@
   },
   {
    "id": "johto-goldenrod-city_t2",
-   "name": "Johto Trainer 2",
+   "name": "Camper Lena",
    "trainerClass": "camper",
    "team": [
     {
@@ -1075,7 +1075,7 @@
   },
   {
    "id": "johto-goldenrod-city_t3",
-   "name": "Johto Trainer 3",
+   "name": "Scientist Marco",
    "trainerClass": "scientist",
    "team": [
     {
@@ -1092,7 +1092,7 @@
  "johto-ecruteak-city": [
   {
    "id": "johto-ecruteak-city_t1",
-   "name": "Johto Trainer 1",
+   "name": "Camper Wade",
    "trainerClass": "camper",
    "team": [
     {
@@ -1107,7 +1107,7 @@
   },
   {
    "id": "johto-ecruteak-city_t2",
-   "name": "Johto Trainer 2",
+   "name": "Scientist Xena",
    "trainerClass": "scientist",
    "team": [
     {
@@ -1122,7 +1122,7 @@
   },
   {
    "id": "johto-ecruteak-city_t3",
-   "name": "Johto Trainer 3",
+   "name": "Youngster Yara",
    "trainerClass": "youngster",
    "team": [
     {
@@ -1143,7 +1143,7 @@
  "johto-olivine-city": [
   {
    "id": "johto-olivine-city_t1",
-   "name": "Johto Trainer 1",
+   "name": "Scientist Tara",
    "trainerClass": "scientist",
    "team": [
     {
@@ -1158,7 +1158,7 @@
   },
   {
    "id": "johto-olivine-city_t2",
-   "name": "Johto Trainer 2",
+   "name": "Youngster Ben",
    "trainerClass": "youngster",
    "team": [
     {
@@ -1173,7 +1173,7 @@
   },
   {
    "id": "johto-olivine-city_t3",
-   "name": "Johto Trainer 3",
+   "name": "Camper Kira",
    "trainerClass": "camper",
    "team": [
     {
@@ -1194,7 +1194,7 @@
  "johto-cianwood-city": [
   {
    "id": "johto-cianwood-city_t1",
-   "name": "Johto Trainer 1",
+   "name": "Swimmer Sam",
    "trainerClass": "swimmer",
    "team": [
     {
@@ -1209,7 +1209,7 @@
   },
   {
    "id": "johto-cianwood-city_t2",
-   "name": "Johto Trainer 2",
+   "name": "Hiker Tina",
    "trainerClass": "hiker",
    "team": [
     {
@@ -1224,7 +1224,7 @@
   },
   {
    "id": "johto-cianwood-city_t3",
-   "name": "Johto Trainer 3",
+   "name": "Psychic Victor",
    "trainerClass": "psychic",
    "team": [
     {
@@ -1245,7 +1245,7 @@
  "johto-mahogany-town": [
   {
    "id": "johto-mahogany-town_t1",
-   "name": "Johto Trainer 1",
+   "name": "Bug Catcher Caleb",
    "trainerClass": "bugCatcher",
    "team": [
     {
@@ -1264,7 +1264,7 @@
   },
   {
    "id": "johto-mahogany-town_t2",
-   "name": "Johto Trainer 2",
+   "name": "Cooltrainer Dana",
    "trainerClass": "coolTrainer",
    "team": [
     {
@@ -1283,7 +1283,7 @@
   },
   {
    "id": "johto-mahogany-town_t3",
-   "name": "Johto Trainer 3",
+   "name": "Blackbelt Eli",
    "trainerClass": "blackbelt",
    "team": [
     {
@@ -1308,7 +1308,7 @@
  "johto-blackthorn-city": [
   {
    "id": "johto-blackthorn-city_t1",
-   "name": "Johto Trainer 1",
+   "name": "Beauty Lena",
    "trainerClass": "beauty",
    "team": [
     {
@@ -1327,7 +1327,7 @@
   },
   {
    "id": "johto-blackthorn-city_t2",
-   "name": "Johto Trainer 2",
+   "name": "Ace Trainer Marco",
    "trainerClass": "ace",
    "team": [
     {
@@ -1346,7 +1346,7 @@
   },
   {
    "id": "johto-blackthorn-city_t3",
-   "name": "Johto Trainer 3",
+   "name": "Lass Nina",
    "trainerClass": "lass",
    "team": [
     {
@@ -1371,7 +1371,7 @@
  "hoenn-littleroot-town": [
   {
    "id": "hoenn-littleroot-town_t1",
-   "name": "Hoenn Trainer 1",
+   "name": "Hiker Joey",
    "trainerClass": "hiker",
    "team": [
     {
@@ -1382,7 +1382,7 @@
   },
   {
    "id": "hoenn-littleroot-town_t2",
-   "name": "Hoenn Trainer 2",
+   "name": "Psychic Mikey",
    "trainerClass": "psychic",
    "team": [
     {
@@ -1393,7 +1393,7 @@
   },
   {
    "id": "hoenn-littleroot-town_t3",
-   "name": "Hoenn Trainer 3",
+   "name": "Swimmer Sarah",
    "trainerClass": "swimmer",
    "team": [
     {
@@ -1410,7 +1410,7 @@
  "hoenn-oldale-town": [
   {
    "id": "hoenn-oldale-town_t1",
-   "name": "Hoenn Trainer 1",
+   "name": "Beauty Kira",
    "trainerClass": "beauty",
    "team": [
     {
@@ -1421,7 +1421,7 @@
   },
   {
    "id": "hoenn-oldale-town_t2",
-   "name": "Hoenn Trainer 2",
+   "name": "Ace Trainer Leo",
    "trainerClass": "ace",
    "team": [
     {
@@ -1432,7 +1432,7 @@
   },
   {
    "id": "hoenn-oldale-town_t3",
-   "name": "Hoenn Trainer 3",
+   "name": "Lass Maya",
    "trainerClass": "lass",
    "team": [
     {
@@ -1449,7 +1449,7 @@
  "hoenn-petalburg-city": [
   {
    "id": "hoenn-petalburg-city_t1",
-   "name": "Hoenn Trainer 1",
+   "name": "Psychic Rosa",
    "trainerClass": "psychic",
    "team": [
     {
@@ -1460,7 +1460,7 @@
   },
   {
    "id": "hoenn-petalburg-city_t2",
-   "name": "Hoenn Trainer 2",
+   "name": "Swimmer Sam",
    "trainerClass": "swimmer",
    "team": [
     {
@@ -1471,7 +1471,7 @@
   },
   {
    "id": "hoenn-petalburg-city_t3",
-   "name": "Hoenn Trainer 3",
+   "name": "Hiker Tina",
    "trainerClass": "hiker",
    "team": [
     {
@@ -1488,7 +1488,7 @@
  "hoenn-rustboro-city": [
   {
    "id": "hoenn-rustboro-city_t1",
-   "name": "Hoenn Trainer 1",
+   "name": "Blackbelt Bianca",
    "trainerClass": "blackbelt",
    "team": [
     {
@@ -1499,7 +1499,7 @@
   },
   {
    "id": "hoenn-rustboro-city_t2",
-   "name": "Hoenn Trainer 2",
+   "name": "Bug Catcher Caleb",
    "trainerClass": "bugCatcher",
    "team": [
     {
@@ -1510,7 +1510,7 @@
   },
   {
    "id": "hoenn-rustboro-city_t3",
-   "name": "Hoenn Trainer 3",
+   "name": "Cooltrainer Dana",
    "trainerClass": "coolTrainer",
    "team": [
     {
@@ -1527,7 +1527,7 @@
  "hoenn-dewford-town": [
   {
    "id": "hoenn-dewford-town_t1",
-   "name": "Hoenn Trainer 1",
+   "name": "Lass Kai",
    "trainerClass": "lass",
    "team": [
     {
@@ -1538,7 +1538,7 @@
   },
   {
    "id": "hoenn-dewford-town_t2",
-   "name": "Hoenn Trainer 2",
+   "name": "Beauty Lena",
    "trainerClass": "beauty",
    "team": [
     {
@@ -1549,7 +1549,7 @@
   },
   {
    "id": "hoenn-dewford-town_t3",
-   "name": "Hoenn Trainer 3",
+   "name": "Ace Trainer Marco",
    "trainerClass": "ace",
    "team": [
     {
@@ -1566,7 +1566,7 @@
  "hoenn-slateport-city": [
   {
    "id": "hoenn-slateport-city_t1",
-   "name": "Hoenn Trainer 1",
+   "name": "Beauty Wade",
    "trainerClass": "beauty",
    "team": [
     {
@@ -1577,7 +1577,7 @@
   },
   {
    "id": "hoenn-slateport-city_t2",
-   "name": "Hoenn Trainer 2",
+   "name": "Ace Trainer Xena",
    "trainerClass": "ace",
    "team": [
     {
@@ -1588,7 +1588,7 @@
   },
   {
    "id": "hoenn-slateport-city_t3",
-   "name": "Hoenn Trainer 3",
+   "name": "Lass Yara",
    "trainerClass": "lass",
    "team": [
     {
@@ -1605,7 +1605,7 @@
  "hoenn-mauville-city": [
   {
    "id": "hoenn-mauville-city_t1",
-   "name": "Hoenn Trainer 1",
+   "name": "Psychic Cleo",
    "trainerClass": "psychic",
    "team": [
     {
@@ -1616,7 +1616,7 @@
   },
   {
    "id": "hoenn-mauville-city_t2",
-   "name": "Hoenn Trainer 2",
+   "name": "Swimmer Dev",
    "trainerClass": "swimmer",
    "team": [
     {
@@ -1627,7 +1627,7 @@
   },
   {
    "id": "hoenn-mauville-city_t3",
-   "name": "Hoenn Trainer 3",
+   "name": "Hiker Joey",
    "trainerClass": "hiker",
    "team": [
     {
@@ -1644,7 +1644,7 @@
  "hoenn-lavaridge-town": [
   {
    "id": "hoenn-lavaridge-town_t1",
-   "name": "Hoenn Trainer 1",
+   "name": "Blackbelt Leo",
    "trainerClass": "blackbelt",
    "team": [
     {
@@ -1659,7 +1659,7 @@
   },
   {
    "id": "hoenn-lavaridge-town_t2",
-   "name": "Hoenn Trainer 2",
+   "name": "Bug Catcher Maya",
    "trainerClass": "bugCatcher",
    "team": [
     {
@@ -1674,7 +1674,7 @@
   },
   {
    "id": "hoenn-lavaridge-town_t3",
-   "name": "Hoenn Trainer 3",
+   "name": "Cooltrainer Nate",
    "trainerClass": "coolTrainer",
    "team": [
     {
@@ -1695,7 +1695,7 @@
  "hoenn-fallarbor-town": [
   {
    "id": "hoenn-fallarbor-town_t1",
-   "name": "Hoenn Trainer 1",
+   "name": "Youngster Sam",
    "trainerClass": "youngster",
    "team": [
     {
@@ -1710,7 +1710,7 @@
   },
   {
    "id": "hoenn-fallarbor-town_t2",
-   "name": "Hoenn Trainer 2",
+   "name": "Camper Tina",
    "trainerClass": "camper",
    "team": [
     {
@@ -1725,7 +1725,7 @@
   },
   {
    "id": "hoenn-fallarbor-town_t3",
-   "name": "Hoenn Trainer 3",
+   "name": "Scientist Victor",
    "trainerClass": "scientist",
    "team": [
     {
@@ -1746,7 +1746,7 @@
  "hoenn-verdanturf-town": [
   {
    "id": "hoenn-verdanturf-town_t1",
-   "name": "Hoenn Trainer 1",
+   "name": "Camper Fiona",
    "trainerClass": "camper",
    "team": [
     {
@@ -1761,7 +1761,7 @@
   },
   {
    "id": "hoenn-verdanturf-town_t2",
-   "name": "Hoenn Trainer 2",
+   "name": "Scientist Gavin",
    "trainerClass": "scientist",
    "team": [
     {
@@ -1776,7 +1776,7 @@
   },
   {
    "id": "hoenn-verdanturf-town_t3",
-   "name": "Hoenn Trainer 3",
+   "name": "Youngster Hana",
    "trainerClass": "youngster",
    "team": [
     {
@@ -1797,7 +1797,7 @@
  "hoenn-fortree-city": [
   {
    "id": "hoenn-fortree-city_t1",
-   "name": "Hoenn Trainer 1",
+   "name": "Scientist Rex",
    "trainerClass": "scientist",
    "team": [
     {
@@ -1812,7 +1812,7 @@
   },
   {
    "id": "hoenn-fortree-city_t2",
-   "name": "Hoenn Trainer 2",
+   "name": "Youngster Sofia",
    "trainerClass": "youngster",
    "team": [
     {
@@ -1827,7 +1827,7 @@
   },
   {
    "id": "hoenn-fortree-city_t3",
-   "name": "Hoenn Trainer 3",
+   "name": "Camper Theo",
    "trainerClass": "camper",
    "team": [
     {
@@ -1848,7 +1848,7 @@
  "hoenn-lilycove-city": [
   {
    "id": "hoenn-lilycove-city_t1",
-   "name": "Hoenn Trainer 1",
+   "name": "Swimmer Aya",
    "trainerClass": "swimmer",
    "team": [
     {
@@ -1863,7 +1863,7 @@
   },
   {
    "id": "hoenn-lilycove-city_t2",
-   "name": "Hoenn Trainer 2",
+   "name": "Hiker Bruno",
    "trainerClass": "hiker",
    "team": [
     {
@@ -1878,7 +1878,7 @@
   },
   {
    "id": "hoenn-lilycove-city_t3",
-   "name": "Hoenn Trainer 3",
+   "name": "Psychic Cleo",
    "trainerClass": "psychic",
    "team": [
     {
@@ -1899,7 +1899,7 @@
  "hoenn-mossdeep-city": [
   {
    "id": "hoenn-mossdeep-city_t1",
-   "name": "Hoenn Trainer 1",
+   "name": "Hiker Maya",
    "trainerClass": "hiker",
    "team": [
     {
@@ -1918,7 +1918,7 @@
   },
   {
    "id": "hoenn-mossdeep-city_t2",
-   "name": "Hoenn Trainer 2",
+   "name": "Psychic Nate",
    "trainerClass": "psychic",
    "team": [
     {
@@ -1937,7 +1937,7 @@
   },
   {
    "id": "hoenn-mossdeep-city_t3",
-   "name": "Hoenn Trainer 3",
+   "name": "Swimmer Olivia",
    "trainerClass": "swimmer",
    "team": [
     {
@@ -1962,7 +1962,7 @@
  "hoenn-sootopolis-city": [
   {
    "id": "hoenn-sootopolis-city_t1",
-   "name": "Hoenn Trainer 1",
+   "name": "Cooltrainer Xander",
    "trainerClass": "coolTrainer",
    "team": [
     {
@@ -1981,7 +1981,7 @@
   },
   {
    "id": "hoenn-sootopolis-city_t2",
-   "name": "Hoenn Trainer 2",
+   "name": "Blackbelt Yuki",
    "trainerClass": "blackbelt",
    "team": [
     {
@@ -2000,7 +2000,7 @@
   },
   {
    "id": "hoenn-sootopolis-city_t3",
-   "name": "Hoenn Trainer 3",
+   "name": "Bug Catcher Zoe",
    "trainerClass": "bugCatcher",
    "team": [
     {
@@ -2025,7 +2025,7 @@
  "hoenn-ever-grande-city": [
   {
    "id": "hoenn-ever-grande-city_t1",
-   "name": "Hoenn Trainer 1",
+   "name": "Ace Trainer Gavin",
    "trainerClass": "ace",
    "team": [
     {
@@ -2044,7 +2044,7 @@
   },
   {
    "id": "hoenn-ever-grande-city_t2",
-   "name": "Hoenn Trainer 2",
+   "name": "Lass Hana",
    "trainerClass": "lass",
    "team": [
     {
@@ -2063,7 +2063,7 @@
   },
   {
    "id": "hoenn-ever-grande-city_t3",
-   "name": "Hoenn Trainer 3",
+   "name": "Beauty Ivan",
    "trainerClass": "beauty",
    "team": [
     {
@@ -2088,7 +2088,7 @@
  "hoenn-pacifidlog-town": [
   {
    "id": "hoenn-pacifidlog-town_t1",
-   "name": "Hoenn Trainer 1",
+   "name": "Lass Sofia",
    "trainerClass": "lass",
    "team": [
     {
@@ -2107,7 +2107,7 @@
   },
   {
    "id": "hoenn-pacifidlog-town_t2",
-   "name": "Hoenn Trainer 2",
+   "name": "Beauty Theo",
    "trainerClass": "beauty",
    "team": [
     {
@@ -2126,7 +2126,7 @@
   },
   {
    "id": "hoenn-pacifidlog-town_t3",
-   "name": "Hoenn Trainer 3",
+   "name": "Ace Trainer Uma",
    "trainerClass": "ace",
    "team": [
     {
@@ -2151,7 +2151,7 @@
  "sinnoh-twinleaf-town": [
   {
    "id": "sinnoh-twinleaf-town_t1",
-   "name": "Sinnoh Trainer 1",
+   "name": "Camper Joey",
    "trainerClass": "camper",
    "team": [
     {
@@ -2162,7 +2162,7 @@
   },
   {
    "id": "sinnoh-twinleaf-town_t2",
-   "name": "Sinnoh Trainer 2",
+   "name": "Scientist Mikey",
    "trainerClass": "scientist",
    "team": [
     {
@@ -2173,7 +2173,7 @@
   },
   {
    "id": "sinnoh-twinleaf-town_t3",
-   "name": "Sinnoh Trainer 3",
+   "name": "Youngster Sarah",
    "trainerClass": "youngster",
    "team": [
     {
@@ -2190,7 +2190,7 @@
  "sinnoh-sandgem-town": [
   {
    "id": "sinnoh-sandgem-town_t1",
-   "name": "Sinnoh Trainer 1",
+   "name": "Cooltrainer Kira",
    "trainerClass": "coolTrainer",
    "team": [
     {
@@ -2201,7 +2201,7 @@
   },
   {
    "id": "sinnoh-sandgem-town_t2",
-   "name": "Sinnoh Trainer 2",
+   "name": "Blackbelt Leo",
    "trainerClass": "blackbelt",
    "team": [
     {
@@ -2212,7 +2212,7 @@
   },
   {
    "id": "sinnoh-sandgem-town_t3",
-   "name": "Sinnoh Trainer 3",
+   "name": "Bug Catcher Maya",
    "trainerClass": "bugCatcher",
    "team": [
     {
@@ -2229,7 +2229,7 @@
  "sinnoh-jubilife-city": [
   {
    "id": "sinnoh-jubilife-city_t1",
-   "name": "Sinnoh Trainer 1",
+   "name": "Scientist Rosa",
    "trainerClass": "scientist",
    "team": [
     {
@@ -2240,7 +2240,7 @@
   },
   {
    "id": "sinnoh-jubilife-city_t2",
-   "name": "Sinnoh Trainer 2",
+   "name": "Youngster Sam",
    "trainerClass": "youngster",
    "team": [
     {
@@ -2251,7 +2251,7 @@
   },
   {
    "id": "sinnoh-jubilife-city_t3",
-   "name": "Sinnoh Trainer 3",
+   "name": "Camper Tina",
    "trainerClass": "camper",
    "team": [
     {
@@ -2268,7 +2268,7 @@
  "sinnoh-oreburgh-city": [
   {
    "id": "sinnoh-oreburgh-city_t1",
-   "name": "Sinnoh Trainer 1",
+   "name": "Blackbelt Yuki",
    "trainerClass": "blackbelt",
    "team": [
     {
@@ -2279,7 +2279,7 @@
   },
   {
    "id": "sinnoh-oreburgh-city_t2",
-   "name": "Sinnoh Trainer 2",
+   "name": "Bug Catcher Zoe",
    "trainerClass": "bugCatcher",
    "team": [
     {
@@ -2290,7 +2290,7 @@
   },
   {
    "id": "sinnoh-oreburgh-city_t3",
-   "name": "Sinnoh Trainer 3",
+   "name": "Cooltrainer Aaron",
    "trainerClass": "coolTrainer",
    "team": [
     {
@@ -2307,7 +2307,7 @@
  "sinnoh-floaroma-town": [
   {
    "id": "sinnoh-floaroma-town_t1",
-   "name": "Sinnoh Trainer 1",
+   "name": "Youngster Eli",
    "trainerClass": "youngster",
    "team": [
     {
@@ -2318,7 +2318,7 @@
   },
   {
    "id": "sinnoh-floaroma-town_t2",
-   "name": "Sinnoh Trainer 2",
+   "name": "Camper Fiona",
    "trainerClass": "camper",
    "team": [
     {
@@ -2329,7 +2329,7 @@
   },
   {
    "id": "sinnoh-floaroma-town_t3",
-   "name": "Sinnoh Trainer 3",
+   "name": "Scientist Gavin",
    "trainerClass": "scientist",
    "team": [
     {
@@ -2346,7 +2346,7 @@
  "sinnoh-eterna-city": [
   {
    "id": "sinnoh-eterna-city_t1",
-   "name": "Sinnoh Trainer 1",
+   "name": "Bug Catcher Kai",
    "trainerClass": "bugCatcher",
    "team": [
     {
@@ -2357,7 +2357,7 @@
   },
   {
    "id": "sinnoh-eterna-city_t2",
-   "name": "Sinnoh Trainer 2",
+   "name": "Cooltrainer Lena",
    "trainerClass": "coolTrainer",
    "team": [
     {
@@ -2368,7 +2368,7 @@
   },
   {
    "id": "sinnoh-eterna-city_t3",
-   "name": "Sinnoh Trainer 3",
+   "name": "Blackbelt Marco",
    "trainerClass": "blackbelt",
    "team": [
     {
@@ -2385,7 +2385,7 @@
  "sinnoh-hearthome-city": [
   {
    "id": "sinnoh-hearthome-city_t1",
-   "name": "Sinnoh Trainer 1",
+   "name": "Cooltrainer Wade",
    "trainerClass": "coolTrainer",
    "team": [
     {
@@ -2396,7 +2396,7 @@
   },
   {
    "id": "sinnoh-hearthome-city_t2",
-   "name": "Sinnoh Trainer 2",
+   "name": "Blackbelt Xena",
    "trainerClass": "blackbelt",
    "team": [
     {
@@ -2407,7 +2407,7 @@
   },
   {
    "id": "sinnoh-hearthome-city_t3",
-   "name": "Sinnoh Trainer 3",
+   "name": "Bug Catcher Yara",
    "trainerClass": "bugCatcher",
    "team": [
     {
@@ -2424,7 +2424,7 @@
  "sinnoh-solaceon-town": [
   {
    "id": "sinnoh-solaceon-town_t1",
-   "name": "Sinnoh Trainer 1",
+   "name": "Scientist Cleo",
    "trainerClass": "scientist",
    "team": [
     {
@@ -2439,7 +2439,7 @@
   },
   {
    "id": "sinnoh-solaceon-town_t2",
-   "name": "Sinnoh Trainer 2",
+   "name": "Youngster Dev",
    "trainerClass": "youngster",
    "team": [
     {
@@ -2454,7 +2454,7 @@
   },
   {
    "id": "sinnoh-solaceon-town_t3",
-   "name": "Sinnoh Trainer 3",
+   "name": "Camper Joey",
    "trainerClass": "camper",
    "team": [
     {
@@ -2475,7 +2475,7 @@
  "sinnoh-celestic-town": [
   {
    "id": "sinnoh-celestic-town_t1",
-   "name": "Sinnoh Trainer 1",
+   "name": "Blackbelt Tara",
    "trainerClass": "blackbelt",
    "team": [
     {
@@ -2490,7 +2490,7 @@
   },
   {
    "id": "sinnoh-celestic-town_t2",
-   "name": "Sinnoh Trainer 2",
+   "name": "Bug Catcher Ben",
    "trainerClass": "bugCatcher",
    "team": [
     {
@@ -2505,7 +2505,7 @@
   },
   {
    "id": "sinnoh-celestic-town_t3",
-   "name": "Sinnoh Trainer 3",
+   "name": "Cooltrainer Kira",
    "trainerClass": "coolTrainer",
    "team": [
     {
@@ -2526,7 +2526,7 @@
  "sinnoh-pastoria-city": [
   {
    "id": "sinnoh-pastoria-city_t1",
-   "name": "Sinnoh Trainer 1",
+   "name": "Lass Sam",
    "trainerClass": "lass",
    "team": [
     {
@@ -2541,7 +2541,7 @@
   },
   {
    "id": "sinnoh-pastoria-city_t2",
-   "name": "Sinnoh Trainer 2",
+   "name": "Beauty Tina",
    "trainerClass": "beauty",
    "team": [
     {
@@ -2556,7 +2556,7 @@
   },
   {
    "id": "sinnoh-pastoria-city_t3",
-   "name": "Sinnoh Trainer 3",
+   "name": "Ace Trainer Victor",
    "trainerClass": "ace",
    "team": [
     {
@@ -2577,7 +2577,7 @@
  "sinnoh-veilstone-city": [
   {
    "id": "sinnoh-veilstone-city_t1",
-   "name": "Sinnoh Trainer 1",
+   "name": "Camper Caleb",
    "trainerClass": "camper",
    "team": [
     {
@@ -2592,7 +2592,7 @@
   },
   {
    "id": "sinnoh-veilstone-city_t2",
-   "name": "Sinnoh Trainer 2",
+   "name": "Scientist Dana",
    "trainerClass": "scientist",
    "team": [
     {
@@ -2607,7 +2607,7 @@
   },
   {
    "id": "sinnoh-veilstone-city_t3",
-   "name": "Sinnoh Trainer 3",
+   "name": "Youngster Eli",
    "trainerClass": "youngster",
    "team": [
     {
@@ -2628,7 +2628,7 @@
  "sinnoh-snowpoint-city": [
   {
    "id": "sinnoh-snowpoint-city_t1",
-   "name": "Sinnoh Trainer 1",
+   "name": "Scientist Owen",
    "trainerClass": "scientist",
    "team": [
     {
@@ -2643,7 +2643,7 @@
   },
   {
    "id": "sinnoh-snowpoint-city_t2",
-   "name": "Sinnoh Trainer 2",
+   "name": "Youngster Pia",
    "trainerClass": "youngster",
    "team": [
     {
@@ -2658,7 +2658,7 @@
   },
   {
    "id": "sinnoh-snowpoint-city_t3",
-   "name": "Sinnoh Trainer 3",
+   "name": "Camper Quinn",
    "trainerClass": "camper",
    "team": [
     {
@@ -2679,7 +2679,7 @@
  "sinnoh-canalave-city": [
   {
    "id": "sinnoh-canalave-city_t1",
-   "name": "Sinnoh Trainer 1",
+   "name": "Blackbelt Uma",
    "trainerClass": "blackbelt",
    "team": [
     {
@@ -2698,7 +2698,7 @@
   },
   {
    "id": "sinnoh-canalave-city_t2",
-   "name": "Sinnoh Trainer 2",
+   "name": "Bug Catcher Vera",
    "trainerClass": "bugCatcher",
    "team": [
     {
@@ -2717,7 +2717,7 @@
   },
   {
    "id": "sinnoh-canalave-city_t3",
-   "name": "Sinnoh Trainer 3",
+   "name": "Cooltrainer Wade",
    "trainerClass": "coolTrainer",
    "team": [
     {
@@ -2742,7 +2742,7 @@
  "sinnoh-sunyshore-city": [
   {
    "id": "sinnoh-sunyshore-city_t1",
-   "name": "Sinnoh Trainer 1",
+   "name": "Hiker Ben",
    "trainerClass": "hiker",
    "team": [
     {
@@ -2761,7 +2761,7 @@
   },
   {
    "id": "sinnoh-sunyshore-city_t2",
-   "name": "Sinnoh Trainer 2",
+   "name": "Psychic Kira",
    "trainerClass": "psychic",
    "team": [
     {
@@ -2780,7 +2780,7 @@
   },
   {
    "id": "sinnoh-sunyshore-city_t3",
-   "name": "Sinnoh Trainer 3",
+   "name": "Swimmer Leo",
    "trainerClass": "swimmer",
    "team": [
     {
@@ -2805,7 +2805,7 @@
  "unova-nuvema-town": [
   {
    "id": "unova-nuvema-town_t1",
-   "name": "Unova Trainer 1",
+   "name": "Beauty Joey",
    "trainerClass": "beauty",
    "team": [
     {
@@ -2816,7 +2816,7 @@
   },
   {
    "id": "unova-nuvema-town_t2",
-   "name": "Unova Trainer 2",
+   "name": "Ace Trainer Mikey",
    "trainerClass": "ace",
    "team": [
     {
@@ -2827,7 +2827,7 @@
   },
   {
    "id": "unova-nuvema-town_t3",
-   "name": "Unova Trainer 3",
+   "name": "Lass Sarah",
    "trainerClass": "lass",
    "team": [
     {
@@ -2844,7 +2844,7 @@
  "unova-accumula-town": [
   {
    "id": "unova-accumula-town_t1",
-   "name": "Unova Trainer 1",
+   "name": "Psychic Kira",
    "trainerClass": "psychic",
    "team": [
     {
@@ -2855,7 +2855,7 @@
   },
   {
    "id": "unova-accumula-town_t2",
-   "name": "Unova Trainer 2",
+   "name": "Swimmer Leo",
    "trainerClass": "swimmer",
    "team": [
     {
@@ -2866,7 +2866,7 @@
   },
   {
    "id": "unova-accumula-town_t3",
-   "name": "Unova Trainer 3",
+   "name": "Hiker Maya",
    "trainerClass": "hiker",
    "team": [
     {
@@ -2883,7 +2883,7 @@
  "unova-aspertia-city": [
   {
    "id": "unova-aspertia-city_t1",
-   "name": "Unova Trainer 1",
+   "name": "Scientist Nate",
    "trainerClass": "scientist",
    "team": [
     {
@@ -2894,7 +2894,7 @@
   },
   {
    "id": "unova-aspertia-city_t2",
-   "name": "Unova Trainer 2",
+   "name": "Youngster Olivia",
    "trainerClass": "youngster",
    "team": [
     {
@@ -2905,7 +2905,7 @@
   },
   {
    "id": "unova-aspertia-city_t3",
-   "name": "Unova Trainer 3",
+   "name": "Camper Paul",
    "trainerClass": "camper",
    "team": [
     {
@@ -2922,7 +2922,7 @@
  "unova-virbank-city": [
   {
    "id": "unova-virbank-city_t1",
-   "name": "Unova Trainer 1",
+   "name": "Blackbelt Victor",
    "trainerClass": "blackbelt",
    "team": [
     {
@@ -2933,7 +2933,7 @@
   },
   {
    "id": "unova-virbank-city_t2",
-   "name": "Unova Trainer 2",
+   "name": "Bug Catcher Wendy",
    "trainerClass": "bugCatcher",
    "team": [
     {
@@ -2944,7 +2944,7 @@
   },
   {
    "id": "unova-virbank-city_t3",
-   "name": "Unova Trainer 3",
+   "name": "Cooltrainer Xander",
    "trainerClass": "coolTrainer",
    "team": [
     {
@@ -2961,7 +2961,7 @@
  "unova-floccesy-town": [
   {
    "id": "unova-floccesy-town_t1",
-   "name": "Unova Trainer 1",
+   "name": "Swimmer Yuki",
    "trainerClass": "swimmer",
    "team": [
     {
@@ -2972,7 +2972,7 @@
   },
   {
    "id": "unova-floccesy-town_t2",
-   "name": "Unova Trainer 2",
+   "name": "Hiker Zoe",
    "trainerClass": "hiker",
    "team": [
     {
@@ -2983,7 +2983,7 @@
   },
   {
    "id": "unova-floccesy-town_t3",
-   "name": "Unova Trainer 3",
+   "name": "Psychic Aaron",
    "trainerClass": "psychic",
    "team": [
     {
@@ -3000,7 +3000,7 @@
  "unova-striaton-city": [
   {
    "id": "unova-striaton-city_t1",
-   "name": "Unova Trainer 1",
+   "name": "Youngster Bianca",
    "trainerClass": "youngster",
    "team": [
     {
@@ -3011,7 +3011,7 @@
   },
   {
    "id": "unova-striaton-city_t2",
-   "name": "Unova Trainer 2",
+   "name": "Camper Caleb",
    "trainerClass": "camper",
    "team": [
     {
@@ -3022,7 +3022,7 @@
   },
   {
    "id": "unova-striaton-city_t3",
-   "name": "Unova Trainer 3",
+   "name": "Scientist Dana",
    "trainerClass": "scientist",
    "team": [
     {
@@ -3039,7 +3039,7 @@
  "unova-nacrene-city": [
   {
    "id": "unova-nacrene-city_t1",
-   "name": "Unova Trainer 1",
+   "name": "Bug Catcher Hana",
    "trainerClass": "bugCatcher",
    "team": [
     {
@@ -3050,7 +3050,7 @@
   },
   {
    "id": "unova-nacrene-city_t2",
-   "name": "Unova Trainer 2",
+   "name": "Cooltrainer Ivan",
    "trainerClass": "coolTrainer",
    "team": [
     {
@@ -3061,7 +3061,7 @@
   },
   {
    "id": "unova-nacrene-city_t3",
-   "name": "Unova Trainer 3",
+   "name": "Blackbelt Jade",
    "trainerClass": "blackbelt",
    "team": [
     {
@@ -3078,7 +3078,7 @@
  "unova-castelia-city": [
   {
    "id": "unova-castelia-city_t1",
-   "name": "Unova Trainer 1",
+   "name": "Hiker Kai",
    "trainerClass": "hiker",
    "team": [
     {
@@ -3089,7 +3089,7 @@
   },
   {
    "id": "unova-castelia-city_t2",
-   "name": "Unova Trainer 2",
+   "name": "Psychic Lena",
    "trainerClass": "psychic",
    "team": [
     {
@@ -3100,7 +3100,7 @@
   },
   {
    "id": "unova-castelia-city_t3",
-   "name": "Unova Trainer 3",
+   "name": "Swimmer Marco",
    "trainerClass": "swimmer",
    "team": [
     {
@@ -3117,7 +3117,7 @@
  "unova-nimbasa-city": [
   {
    "id": "unova-nimbasa-city_t1",
-   "name": "Unova Trainer 1",
+   "name": "Beauty Quinn",
    "trainerClass": "beauty",
    "team": [
     {
@@ -3128,7 +3128,7 @@
   },
   {
    "id": "unova-nimbasa-city_t2",
-   "name": "Unova Trainer 2",
+   "name": "Ace Trainer Rex",
    "trainerClass": "ace",
    "team": [
     {
@@ -3139,7 +3139,7 @@
   },
   {
    "id": "unova-nimbasa-city_t3",
-   "name": "Unova Trainer 3",
+   "name": "Lass Sofia",
    "trainerClass": "lass",
    "team": [
     {
@@ -3156,7 +3156,7 @@
  "unova-driftveil-city": [
   {
    "id": "unova-driftveil-city_t1",
-   "name": "Unova Trainer 1",
+   "name": "Psychic Wade",
    "trainerClass": "psychic",
    "team": [
     {
@@ -3171,7 +3171,7 @@
   },
   {
    "id": "unova-driftveil-city_t2",
-   "name": "Unova Trainer 2",
+   "name": "Swimmer Xena",
    "trainerClass": "swimmer",
    "team": [
     {
@@ -3186,7 +3186,7 @@
   },
   {
    "id": "unova-driftveil-city_t3",
-   "name": "Unova Trainer 3",
+   "name": "Hiker Yara",
    "trainerClass": "hiker",
    "team": [
     {
@@ -3207,7 +3207,7 @@
  "unova-anville-town": [
   {
    "id": "unova-anville-town_t1",
-   "name": "Unova Trainer 1",
+   "name": "Scientist Zane",
    "trainerClass": "scientist",
    "team": [
     {
@@ -3222,7 +3222,7 @@
   },
   {
    "id": "unova-anville-town_t2",
-   "name": "Unova Trainer 2",
+   "name": "Youngster Aya",
    "trainerClass": "youngster",
    "team": [
     {
@@ -3237,7 +3237,7 @@
   },
   {
    "id": "unova-anville-town_t3",
-   "name": "Unova Trainer 3",
+   "name": "Camper Bruno",
    "trainerClass": "camper",
    "team": [
     {
@@ -3258,7 +3258,7 @@
  "unova-mistralton-city": [
   {
    "id": "unova-mistralton-city_t1",
-   "name": "Unova Trainer 1",
+   "name": "Blackbelt Mikey",
    "trainerClass": "blackbelt",
    "team": [
     {
@@ -3273,7 +3273,7 @@
   },
   {
    "id": "unova-mistralton-city_t2",
-   "name": "Unova Trainer 2",
+   "name": "Bug Catcher Sarah",
    "trainerClass": "bugCatcher",
    "team": [
     {
@@ -3288,7 +3288,7 @@
   },
   {
    "id": "unova-mistralton-city_t3",
-   "name": "Unova Trainer 3",
+   "name": "Cooltrainer Alex",
    "trainerClass": "coolTrainer",
    "team": [
     {
@@ -3309,7 +3309,7 @@
  "unova-icirrus-city": [
   {
    "id": "unova-icirrus-city_t1",
-   "name": "Unova Trainer 1",
+   "name": "Youngster Leo",
    "trainerClass": "youngster",
    "team": [
     {
@@ -3324,7 +3324,7 @@
   },
   {
    "id": "unova-icirrus-city_t2",
-   "name": "Unova Trainer 2",
+   "name": "Camper Maya",
    "trainerClass": "camper",
    "team": [
     {
@@ -3339,7 +3339,7 @@
   },
   {
    "id": "unova-icirrus-city_t3",
-   "name": "Unova Trainer 3",
+   "name": "Scientist Nate",
    "trainerClass": "scientist",
    "team": [
     {
@@ -3360,7 +3360,7 @@
  "unova-opelucid-city": [
   {
    "id": "unova-opelucid-city_t1",
-   "name": "Unova Trainer 1",
+   "name": "Hiker Wendy",
    "trainerClass": "hiker",
    "team": [
     {
@@ -3375,7 +3375,7 @@
   },
   {
    "id": "unova-opelucid-city_t2",
-   "name": "Unova Trainer 2",
+   "name": "Psychic Xander",
    "trainerClass": "psychic",
    "team": [
     {
@@ -3390,7 +3390,7 @@
   },
   {
    "id": "unova-opelucid-city_t3",
-   "name": "Unova Trainer 3",
+   "name": "Swimmer Yuki",
    "trainerClass": "swimmer",
    "team": [
     {
@@ -3411,7 +3411,7 @@
  "unova-lacunosa-town": [
   {
    "id": "unova-lacunosa-town_t1",
-   "name": "Unova Trainer 1",
+   "name": "Psychic Ivan",
    "trainerClass": "psychic",
    "team": [
     {
@@ -3426,7 +3426,7 @@
   },
   {
    "id": "unova-lacunosa-town_t2",
-   "name": "Unova Trainer 2",
+   "name": "Swimmer Jade",
    "trainerClass": "swimmer",
    "team": [
     {
@@ -3441,7 +3441,7 @@
   },
   {
    "id": "unova-lacunosa-town_t3",
-   "name": "Unova Trainer 3",
+   "name": "Hiker Kai",
    "trainerClass": "hiker",
    "team": [
     {
@@ -3462,7 +3462,7 @@
  "unova-undella-town": [
   {
    "id": "unova-undella-town_t1",
-   "name": "Unova Trainer 1",
+   "name": "Ace Trainer Owen",
    "trainerClass": "ace",
    "team": [
     {
@@ -3481,7 +3481,7 @@
   },
   {
    "id": "unova-undella-town_t2",
-   "name": "Unova Trainer 2",
+   "name": "Lass Pia",
    "trainerClass": "lass",
    "team": [
     {
@@ -3500,7 +3500,7 @@
   },
   {
    "id": "unova-undella-town_t3",
-   "name": "Unova Trainer 3",
+   "name": "Beauty Quinn",
    "trainerClass": "beauty",
    "team": [
     {
@@ -3525,7 +3525,7 @@
  "unova-humilau-city": [
   {
    "id": "unova-humilau-city_t1",
-   "name": "Unova Trainer 1",
+   "name": "Swimmer Uma",
    "trainerClass": "swimmer",
    "team": [
     {
@@ -3544,7 +3544,7 @@
   },
   {
    "id": "unova-humilau-city_t2",
-   "name": "Unova Trainer 2",
+   "name": "Hiker Vera",
    "trainerClass": "hiker",
    "team": [
     {
@@ -3563,7 +3563,7 @@
   },
   {
    "id": "unova-humilau-city_t3",
-   "name": "Unova Trainer 3",
+   "name": "Psychic Wade",
    "trainerClass": "psychic",
    "team": [
     {
@@ -3588,7 +3588,7 @@
  "unova-lentimas-town": [
   {
    "id": "unova-lentimas-town_t1",
-   "name": "Unova Trainer 1",
+   "name": "Youngster Xena",
    "trainerClass": "youngster",
    "team": [
     {
@@ -3607,7 +3607,7 @@
   },
   {
    "id": "unova-lentimas-town_t2",
-   "name": "Unova Trainer 2",
+   "name": "Camper Yara",
    "trainerClass": "camper",
    "team": [
     {
@@ -3626,7 +3626,7 @@
   },
   {
    "id": "unova-lentimas-town_t3",
-   "name": "Unova Trainer 3",
+   "name": "Scientist Zane",
    "trainerClass": "scientist",
    "team": [
     {
@@ -3651,7 +3651,7 @@
  "unova-black-city": [
   {
    "id": "unova-black-city_t1",
-   "name": "Unova Trainer 1",
+   "name": "Lass Aya",
    "trainerClass": "lass",
    "team": [
     {
@@ -3670,7 +3670,7 @@
   },
   {
    "id": "unova-black-city_t2",
-   "name": "Unova Trainer 2",
+   "name": "Beauty Bruno",
    "trainerClass": "beauty",
    "team": [
     {
@@ -3689,7 +3689,7 @@
   },
   {
    "id": "unova-black-city_t3",
-   "name": "Unova Trainer 3",
+   "name": "Ace Trainer Cleo",
    "trainerClass": "ace",
    "team": [
     {
@@ -3714,7 +3714,7 @@
  "kalos-vaniville-town": [
   {
    "id": "kalos-vaniville-town_t1",
-   "name": "Kalos Trainer 1",
+   "name": "Cooltrainer Joey",
    "trainerClass": "coolTrainer",
    "team": [
     {
@@ -3725,7 +3725,7 @@
   },
   {
    "id": "kalos-vaniville-town_t2",
-   "name": "Kalos Trainer 2",
+   "name": "Blackbelt Mikey",
    "trainerClass": "blackbelt",
    "team": [
     {
@@ -3736,7 +3736,7 @@
   },
   {
    "id": "kalos-vaniville-town_t3",
-   "name": "Kalos Trainer 3",
+   "name": "Bug Catcher Sarah",
    "trainerClass": "bugCatcher",
    "team": [
     {
@@ -3753,7 +3753,7 @@
  "kalos-aquacorde-town": [
   {
    "id": "kalos-aquacorde-town_t1",
-   "name": "Kalos Trainer 1",
+   "name": "Scientist Kira",
    "trainerClass": "scientist",
    "team": [
     {
@@ -3764,7 +3764,7 @@
   },
   {
    "id": "kalos-aquacorde-town_t2",
-   "name": "Kalos Trainer 2",
+   "name": "Youngster Leo",
    "trainerClass": "youngster",
    "team": [
     {
@@ -3775,7 +3775,7 @@
   },
   {
    "id": "kalos-aquacorde-town_t3",
-   "name": "Kalos Trainer 3",
+   "name": "Camper Maya",
    "trainerClass": "camper",
    "team": [
     {
@@ -3792,7 +3792,7 @@
  "kalos-santalune-city": [
   {
    "id": "kalos-santalune-city_t1",
-   "name": "Kalos Trainer 1",
+   "name": "Swimmer Victor",
    "trainerClass": "swimmer",
    "team": [
     {
@@ -3803,7 +3803,7 @@
   },
   {
    "id": "kalos-santalune-city_t2",
-   "name": "Kalos Trainer 2",
+   "name": "Hiker Wendy",
    "trainerClass": "hiker",
    "team": [
     {
@@ -3814,7 +3814,7 @@
   },
   {
    "id": "kalos-santalune-city_t3",
-   "name": "Kalos Trainer 3",
+   "name": "Psychic Xander",
    "trainerClass": "psychic",
    "team": [
     {
@@ -3831,7 +3831,7 @@
  "kalos-lumiose-city": [
   {
    "id": "kalos-lumiose-city_t1",
-   "name": "Kalos Trainer 1",
+   "name": "Lass Bianca",
    "trainerClass": "lass",
    "team": [
     {
@@ -3842,7 +3842,7 @@
   },
   {
    "id": "kalos-lumiose-city_t2",
-   "name": "Kalos Trainer 2",
+   "name": "Beauty Caleb",
    "trainerClass": "beauty",
    "team": [
     {
@@ -3853,7 +3853,7 @@
   },
   {
    "id": "kalos-lumiose-city_t3",
-   "name": "Kalos Trainer 3",
+   "name": "Ace Trainer Dana",
    "trainerClass": "ace",
    "team": [
     {
@@ -3870,7 +3870,7 @@
  "kalos-camphrier-town": [
   {
    "id": "kalos-camphrier-town_t1",
-   "name": "Kalos Trainer 1",
+   "name": "Hiker Hana",
    "trainerClass": "hiker",
    "team": [
     {
@@ -3881,7 +3881,7 @@
   },
   {
    "id": "kalos-camphrier-town_t2",
-   "name": "Kalos Trainer 2",
+   "name": "Psychic Ivan",
    "trainerClass": "psychic",
    "team": [
     {
@@ -3892,7 +3892,7 @@
   },
   {
    "id": "kalos-camphrier-town_t3",
-   "name": "Kalos Trainer 3",
+   "name": "Swimmer Jade",
    "trainerClass": "swimmer",
    "team": [
     {
@@ -3909,7 +3909,7 @@
  "kalos-cyllage-city": [
   {
    "id": "kalos-cyllage-city_t1",
-   "name": "Kalos Trainer 1",
+   "name": "Cooltrainer Quinn",
    "trainerClass": "coolTrainer",
    "team": [
     {
@@ -3920,7 +3920,7 @@
   },
   {
    "id": "kalos-cyllage-city_t2",
-   "name": "Kalos Trainer 2",
+   "name": "Blackbelt Rex",
    "trainerClass": "blackbelt",
    "team": [
     {
@@ -3931,7 +3931,7 @@
   },
   {
    "id": "kalos-cyllage-city_t3",
-   "name": "Kalos Trainer 3",
+   "name": "Bug Catcher Sofia",
    "trainerClass": "bugCatcher",
    "team": [
     {
@@ -3948,7 +3948,7 @@
  "kalos-ambrette-town": [
   {
    "id": "kalos-ambrette-town_t1",
-   "name": "Kalos Trainer 1",
+   "name": "Scientist Wade",
    "trainerClass": "scientist",
    "team": [
     {
@@ -3963,7 +3963,7 @@
   },
   {
    "id": "kalos-ambrette-town_t2",
-   "name": "Kalos Trainer 2",
+   "name": "Youngster Xena",
    "trainerClass": "youngster",
    "team": [
     {
@@ -3978,7 +3978,7 @@
   },
   {
    "id": "kalos-ambrette-town_t3",
-   "name": "Kalos Trainer 3",
+   "name": "Camper Yara",
    "trainerClass": "camper",
    "team": [
     {
@@ -3999,7 +3999,7 @@
  "kalos-geosenge-town": [
   {
    "id": "kalos-geosenge-town_t1",
-   "name": "Kalos Trainer 1",
+   "name": "Swimmer Mikey",
    "trainerClass": "swimmer",
    "team": [
     {
@@ -4014,7 +4014,7 @@
   },
   {
    "id": "kalos-geosenge-town_t2",
-   "name": "Kalos Trainer 2",
+   "name": "Hiker Sarah",
    "trainerClass": "hiker",
    "team": [
     {
@@ -4029,7 +4029,7 @@
   },
   {
    "id": "kalos-geosenge-town_t3",
-   "name": "Kalos Trainer 3",
+   "name": "Psychic Alex",
    "trainerClass": "psychic",
    "team": [
     {
@@ -4050,7 +4050,7 @@
  "kalos-shalour-city": [
   {
    "id": "kalos-shalour-city_t1",
-   "name": "Kalos Trainer 1",
+   "name": "Lass Leo",
    "trainerClass": "lass",
    "team": [
     {
@@ -4065,7 +4065,7 @@
   },
   {
    "id": "kalos-shalour-city_t2",
-   "name": "Kalos Trainer 2",
+   "name": "Beauty Maya",
    "trainerClass": "beauty",
    "team": [
     {
@@ -4080,7 +4080,7 @@
   },
   {
    "id": "kalos-shalour-city_t3",
-   "name": "Kalos Trainer 3",
+   "name": "Ace Trainer Nate",
    "trainerClass": "ace",
    "team": [
     {
@@ -4101,7 +4101,7 @@
  "kalos-coumarine-city": [
   {
    "id": "kalos-coumarine-city_t1",
-   "name": "Kalos Trainer 1",
+   "name": "Hiker Sam",
    "trainerClass": "hiker",
    "team": [
     {
@@ -4116,7 +4116,7 @@
   },
   {
    "id": "kalos-coumarine-city_t2",
-   "name": "Kalos Trainer 2",
+   "name": "Psychic Tina",
    "trainerClass": "psychic",
    "team": [
     {
@@ -4131,7 +4131,7 @@
   },
   {
    "id": "kalos-coumarine-city_t3",
-   "name": "Kalos Trainer 3",
+   "name": "Swimmer Victor",
    "trainerClass": "swimmer",
    "team": [
     {
@@ -4152,7 +4152,7 @@
  "kalos-laverre-city": [
   {
    "id": "kalos-laverre-city_t1",
-   "name": "Kalos Trainer 1",
+   "name": "Cooltrainer Caleb",
    "trainerClass": "coolTrainer",
    "team": [
     {
@@ -4167,7 +4167,7 @@
   },
   {
    "id": "kalos-laverre-city_t2",
-   "name": "Kalos Trainer 2",
+   "name": "Blackbelt Dana",
    "trainerClass": "blackbelt",
    "team": [
     {
@@ -4182,7 +4182,7 @@
   },
   {
    "id": "kalos-laverre-city_t3",
-   "name": "Kalos Trainer 3",
+   "name": "Bug Catcher Eli",
    "trainerClass": "bugCatcher",
    "team": [
     {
@@ -4203,7 +4203,7 @@
  "kalos-dendemille-town": [
   {
    "id": "kalos-dendemille-town_t1",
-   "name": "Kalos Trainer 1",
+   "name": "Scientist Ivan",
    "trainerClass": "scientist",
    "team": [
     {
@@ -4222,7 +4222,7 @@
   },
   {
    "id": "kalos-dendemille-town_t2",
-   "name": "Kalos Trainer 2",
+   "name": "Youngster Jade",
    "trainerClass": "youngster",
    "team": [
     {
@@ -4241,7 +4241,7 @@
   },
   {
    "id": "kalos-dendemille-town_t3",
-   "name": "Kalos Trainer 3",
+   "name": "Camper Kai",
    "trainerClass": "camper",
    "team": [
     {
@@ -4266,7 +4266,7 @@
  "kalos-anistar-city": [
   {
    "id": "kalos-anistar-city_t1",
-   "name": "Kalos Trainer 1",
+   "name": "Swimmer Rex",
    "trainerClass": "swimmer",
    "team": [
     {
@@ -4285,7 +4285,7 @@
   },
   {
    "id": "kalos-anistar-city_t2",
-   "name": "Kalos Trainer 2",
+   "name": "Hiker Sofia",
    "trainerClass": "hiker",
    "team": [
     {
@@ -4304,7 +4304,7 @@
   },
   {
    "id": "kalos-anistar-city_t3",
-   "name": "Kalos Trainer 3",
+   "name": "Psychic Theo",
    "trainerClass": "psychic",
    "team": [
     {
@@ -4329,7 +4329,7 @@
  "kalos-couriway-town": [
   {
    "id": "kalos-couriway-town_t1",
-   "name": "Kalos Trainer 1",
+   "name": "Lass Xena",
    "trainerClass": "lass",
    "team": [
     {
@@ -4348,7 +4348,7 @@
   },
   {
    "id": "kalos-couriway-town_t2",
-   "name": "Kalos Trainer 2",
+   "name": "Beauty Yara",
    "trainerClass": "beauty",
    "team": [
     {
@@ -4367,7 +4367,7 @@
   },
   {
    "id": "kalos-couriway-town_t3",
-   "name": "Kalos Trainer 3",
+   "name": "Ace Trainer Zane",
    "trainerClass": "ace",
    "team": [
     {
@@ -4392,7 +4392,7 @@
  "kalos-snowbelle-city": [
   {
    "id": "kalos-snowbelle-city_t1",
-   "name": "Kalos Trainer 1",
+   "name": "Hiker Dev",
    "trainerClass": "hiker",
    "team": [
     {
@@ -4411,7 +4411,7 @@
   },
   {
    "id": "kalos-snowbelle-city_t2",
-   "name": "Kalos Trainer 2",
+   "name": "Psychic Joey",
    "trainerClass": "psychic",
    "team": [
     {
@@ -4430,7 +4430,7 @@
   },
   {
    "id": "kalos-snowbelle-city_t3",
-   "name": "Kalos Trainer 3",
+   "name": "Swimmer Mikey",
    "trainerClass": "swimmer",
    "team": [
     {
@@ -4455,7 +4455,7 @@
  "kalos-kiloude-city": [
   {
    "id": "kalos-kiloude-city_t1",
-   "name": "Kalos Trainer 1",
+   "name": "Beauty Ben",
    "trainerClass": "beauty",
    "team": [
     {
@@ -4474,7 +4474,7 @@
   },
   {
    "id": "kalos-kiloude-city_t2",
-   "name": "Kalos Trainer 2",
+   "name": "Ace Trainer Kira",
    "trainerClass": "ace",
    "team": [
     {
@@ -4493,7 +4493,7 @@
   },
   {
    "id": "kalos-kiloude-city_t3",
-   "name": "Kalos Trainer 3",
+   "name": "Lass Leo",
    "trainerClass": "lass",
    "team": [
     {
@@ -4518,7 +4518,7 @@
  "alola-iki-town": [
   {
    "id": "alola-iki-town_t1",
-   "name": "Alola Trainer 1",
+   "name": "Psychic Joey",
    "trainerClass": "psychic",
    "team": [
     {
@@ -4529,7 +4529,7 @@
   },
   {
    "id": "alola-iki-town_t2",
-   "name": "Alola Trainer 2",
+   "name": "Swimmer Mikey",
    "trainerClass": "swimmer",
    "team": [
     {
@@ -4540,7 +4540,7 @@
   },
   {
    "id": "alola-iki-town_t3",
-   "name": "Alola Trainer 3",
+   "name": "Hiker Sarah",
    "trainerClass": "hiker",
    "team": [
     {
@@ -4557,7 +4557,7 @@
  "alola-hauoli-city": [
   {
    "id": "alola-hauoli-city_t1",
-   "name": "Alola Trainer 1",
+   "name": "Swimmer Rosa",
    "trainerClass": "swimmer",
    "team": [
     {
@@ -4568,7 +4568,7 @@
   },
   {
    "id": "alola-hauoli-city_t2",
-   "name": "Alola Trainer 2",
+   "name": "Hiker Sam",
    "trainerClass": "hiker",
    "team": [
     {
@@ -4579,7 +4579,7 @@
   },
   {
    "id": "alola-hauoli-city_t3",
-   "name": "Alola Trainer 3",
+   "name": "Psychic Tina",
    "trainerClass": "psychic",
    "team": [
     {
@@ -4596,7 +4596,7 @@
  "alola-po-town": [
   {
    "id": "alola-po-town_t1",
-   "name": "Alola Trainer 1",
+   "name": "Youngster Victor",
    "trainerClass": "youngster",
    "team": [
     {
@@ -4607,7 +4607,7 @@
   },
   {
    "id": "alola-po-town_t2",
-   "name": "Alola Trainer 2",
+   "name": "Camper Wendy",
    "trainerClass": "camper",
    "team": [
     {
@@ -4618,7 +4618,7 @@
   },
   {
    "id": "alola-po-town_t3",
-   "name": "Alola Trainer 3",
+   "name": "Scientist Xander",
    "trainerClass": "scientist",
    "team": [
     {
@@ -4635,7 +4635,7 @@
  "alola-paniola-town": [
   {
    "id": "alola-paniola-town_t1",
-   "name": "Alola Trainer 1",
+   "name": "Bug Catcher Bianca",
    "trainerClass": "bugCatcher",
    "team": [
     {
@@ -4646,7 +4646,7 @@
   },
   {
    "id": "alola-paniola-town_t2",
-   "name": "Alola Trainer 2",
+   "name": "Cooltrainer Caleb",
    "trainerClass": "coolTrainer",
    "team": [
     {
@@ -4657,7 +4657,7 @@
   },
   {
    "id": "alola-paniola-town_t3",
-   "name": "Alola Trainer 3",
+   "name": "Blackbelt Dana",
    "trainerClass": "blackbelt",
    "team": [
     {
@@ -4674,7 +4674,7 @@
  "alola-heahea-city": [
   {
    "id": "alola-heahea-city_t1",
-   "name": "Alola Trainer 1",
+   "name": "Camper Hana",
    "trainerClass": "camper",
    "team": [
     {
@@ -4689,7 +4689,7 @@
   },
   {
    "id": "alola-heahea-city_t2",
-   "name": "Alola Trainer 2",
+   "name": "Scientist Ivan",
    "trainerClass": "scientist",
    "team": [
     {
@@ -4704,7 +4704,7 @@
   },
   {
    "id": "alola-heahea-city_t3",
-   "name": "Alola Trainer 3",
+   "name": "Youngster Jade",
    "trainerClass": "youngster",
    "team": [
     {
@@ -4725,7 +4725,7 @@
  "alola-konikoni-city": [
   {
    "id": "alola-konikoni-city_t1",
-   "name": "Alola Trainer 1",
+   "name": "Blackbelt Zane",
    "trainerClass": "blackbelt",
    "team": [
     {
@@ -4740,7 +4740,7 @@
   },
   {
    "id": "alola-konikoni-city_t2",
-   "name": "Alola Trainer 2",
+   "name": "Bug Catcher Aya",
    "trainerClass": "bugCatcher",
    "team": [
     {
@@ -4755,7 +4755,7 @@
   },
   {
    "id": "alola-konikoni-city_t3",
-   "name": "Alola Trainer 3",
+   "name": "Cooltrainer Bruno",
    "trainerClass": "coolTrainer",
    "team": [
     {
@@ -4776,7 +4776,7 @@
  "alola-malie-city": [
   {
    "id": "alola-malie-city_t1",
-   "name": "Alola Trainer 1",
+   "name": "Youngster Mikey",
    "trainerClass": "youngster",
    "team": [
     {
@@ -4795,7 +4795,7 @@
   },
   {
    "id": "alola-malie-city_t2",
-   "name": "Alola Trainer 2",
+   "name": "Camper Sarah",
    "trainerClass": "camper",
    "team": [
     {
@@ -4814,7 +4814,7 @@
   },
   {
    "id": "alola-malie-city_t3",
-   "name": "Alola Trainer 3",
+   "name": "Scientist Alex",
    "trainerClass": "scientist",
    "team": [
     {
@@ -4839,7 +4839,7 @@
  "galar-postwick": [
   {
    "id": "galar-postwick_t1",
-   "name": "Galar Trainer 1",
+   "name": "Scientist Joey",
    "trainerClass": "scientist",
    "team": [
     {
@@ -4850,7 +4850,7 @@
   },
   {
    "id": "galar-postwick_t2",
-   "name": "Galar Trainer 2",
+   "name": "Youngster Mikey",
    "trainerClass": "youngster",
    "team": [
     {
@@ -4861,7 +4861,7 @@
   },
   {
    "id": "galar-postwick_t3",
-   "name": "Galar Trainer 3",
+   "name": "Camper Sarah",
    "trainerClass": "camper",
    "team": [
     {
@@ -4878,7 +4878,7 @@
  "galar-wedgehurst": [
   {
    "id": "galar-wedgehurst_t1",
-   "name": "Galar Trainer 1",
+   "name": "Blackbelt Kira",
    "trainerClass": "blackbelt",
    "team": [
     {
@@ -4889,7 +4889,7 @@
   },
   {
    "id": "galar-wedgehurst_t2",
-   "name": "Galar Trainer 2",
+   "name": "Bug Catcher Leo",
    "trainerClass": "bugCatcher",
    "team": [
     {
@@ -4900,7 +4900,7 @@
   },
   {
    "id": "galar-wedgehurst_t3",
-   "name": "Galar Trainer 3",
+   "name": "Cooltrainer Maya",
    "trainerClass": "coolTrainer",
    "team": [
     {
@@ -4917,7 +4917,7 @@
  "galar-motostoke": [
   {
    "id": "galar-motostoke_t1",
-   "name": "Galar Trainer 1",
+   "name": "Youngster Rosa",
    "trainerClass": "youngster",
    "team": [
     {
@@ -4928,7 +4928,7 @@
   },
   {
    "id": "galar-motostoke_t2",
-   "name": "Galar Trainer 2",
+   "name": "Camper Sam",
    "trainerClass": "camper",
    "team": [
     {
@@ -4939,7 +4939,7 @@
   },
   {
    "id": "galar-motostoke_t3",
-   "name": "Galar Trainer 3",
+   "name": "Scientist Tina",
    "trainerClass": "scientist",
    "team": [
     {
@@ -4956,7 +4956,7 @@
  "galar-turffield": [
   {
    "id": "galar-turffield_t1",
-   "name": "Galar Trainer 1",
+   "name": "Hiker Bianca",
    "trainerClass": "hiker",
    "team": [
     {
@@ -4971,7 +4971,7 @@
   },
   {
    "id": "galar-turffield_t2",
-   "name": "Galar Trainer 2",
+   "name": "Psychic Caleb",
    "trainerClass": "psychic",
    "team": [
     {
@@ -4986,7 +4986,7 @@
   },
   {
    "id": "galar-turffield_t3",
-   "name": "Galar Trainer 3",
+   "name": "Swimmer Dana",
    "trainerClass": "swimmer",
    "team": [
     {
@@ -5007,7 +5007,7 @@
  "galar-hulbury": [
   {
    "id": "galar-hulbury_t1",
-   "name": "Galar Trainer 1",
+   "name": "Beauty Hana",
    "trainerClass": "beauty",
    "team": [
     {
@@ -5022,7 +5022,7 @@
   },
   {
    "id": "galar-hulbury_t2",
-   "name": "Galar Trainer 2",
+   "name": "Ace Trainer Ivan",
    "trainerClass": "ace",
    "team": [
     {
@@ -5037,7 +5037,7 @@
   },
   {
    "id": "galar-hulbury_t3",
-   "name": "Galar Trainer 3",
+   "name": "Lass Jade",
    "trainerClass": "lass",
    "team": [
     {
@@ -5058,7 +5058,7 @@
  "galar-hammerlocke": [
   {
    "id": "galar-hammerlocke_t1",
-   "name": "Galar Trainer 1",
+   "name": "Psychic Nina",
    "trainerClass": "psychic",
    "team": [
     {
@@ -5073,7 +5073,7 @@
   },
   {
    "id": "galar-hammerlocke_t2",
-   "name": "Galar Trainer 2",
+   "name": "Swimmer Owen",
    "trainerClass": "swimmer",
    "team": [
     {
@@ -5088,7 +5088,7 @@
   },
   {
    "id": "galar-hammerlocke_t3",
-   "name": "Galar Trainer 3",
+   "name": "Hiker Pia",
    "trainerClass": "hiker",
    "team": [
     {
@@ -5109,7 +5109,7 @@
  "galar-stow-on-side": [
   {
    "id": "galar-stow-on-side_t1",
-   "name": "Galar Trainer 1",
+   "name": "Scientist Quinn",
    "trainerClass": "scientist",
    "team": [
     {
@@ -5124,7 +5124,7 @@
   },
   {
    "id": "galar-stow-on-side_t2",
-   "name": "Galar Trainer 2",
+   "name": "Youngster Rex",
    "trainerClass": "youngster",
    "team": [
     {
@@ -5139,7 +5139,7 @@
   },
   {
    "id": "galar-stow-on-side_t3",
-   "name": "Galar Trainer 3",
+   "name": "Camper Sofia",
    "trainerClass": "camper",
    "team": [
     {
@@ -5160,7 +5160,7 @@
  "galar-circhester": [
   {
    "id": "galar-circhester_t1",
-   "name": "Galar Trainer 1",
+   "name": "Swimmer Zane",
    "trainerClass": "swimmer",
    "team": [
     {
@@ -5179,7 +5179,7 @@
   },
   {
    "id": "galar-circhester_t2",
-   "name": "Galar Trainer 2",
+   "name": "Hiker Aya",
    "trainerClass": "hiker",
    "team": [
     {
@@ -5198,7 +5198,7 @@
   },
   {
    "id": "galar-circhester_t3",
-   "name": "Galar Trainer 3",
+   "name": "Psychic Bruno",
    "trainerClass": "psychic",
    "team": [
     {
@@ -5223,7 +5223,7 @@
  "galar-spikemuth": [
   {
    "id": "galar-spikemuth_t1",
-   "name": "Galar Trainer 1",
+   "name": "Lass Mikey",
    "trainerClass": "lass",
    "team": [
     {
@@ -5242,7 +5242,7 @@
   },
   {
    "id": "galar-spikemuth_t2",
-   "name": "Galar Trainer 2",
+   "name": "Beauty Sarah",
    "trainerClass": "beauty",
    "team": [
     {
@@ -5261,7 +5261,7 @@
   },
   {
    "id": "galar-spikemuth_t3",
-   "name": "Galar Trainer 3",
+   "name": "Ace Trainer Alex",
    "trainerClass": "ace",
    "team": [
     {
@@ -5286,7 +5286,7 @@
  "galar-wyndon": [
   {
    "id": "galar-wyndon_t1",
-   "name": "Galar Trainer 1",
+   "name": "Hiker Leo",
    "trainerClass": "hiker",
    "team": [
     {
@@ -5305,7 +5305,7 @@
   },
   {
    "id": "galar-wyndon_t2",
-   "name": "Galar Trainer 2",
+   "name": "Psychic Maya",
    "trainerClass": "psychic",
    "team": [
     {
@@ -5324,7 +5324,7 @@
   },
   {
    "id": "galar-wyndon_t3",
-   "name": "Galar Trainer 3",
+   "name": "Swimmer Nate",
    "trainerClass": "swimmer",
    "team": [
     {
@@ -5349,7 +5349,7 @@
  "galar-ballonlea": [
   {
    "id": "galar-ballonlea_t1",
-   "name": "Galar Trainer 1",
+   "name": "Camper Olivia",
    "trainerClass": "camper",
    "team": [
     {
@@ -5372,7 +5372,7 @@
   },
   {
    "id": "galar-ballonlea_t2",
-   "name": "Galar Trainer 2",
+   "name": "Scientist Paul",
    "trainerClass": "scientist",
    "team": [
     {
@@ -5395,7 +5395,7 @@
   },
   {
    "id": "galar-ballonlea_t3",
-   "name": "Galar Trainer 3",
+   "name": "Youngster Rosa",
    "trainerClass": "youngster",
    "team": [
     {
@@ -5420,7 +5420,7 @@
  "paldea-los-platos": [
   {
    "id": "paldea-los-platos_t1",
-   "name": "Paldea Trainer 1",
+   "name": "Ace Trainer Joey",
    "trainerClass": "ace",
    "team": [
     {
@@ -5431,7 +5431,7 @@
   },
   {
    "id": "paldea-los-platos_t2",
-   "name": "Paldea Trainer 2",
+   "name": "Lass Mikey",
    "trainerClass": "lass",
    "team": [
     {
@@ -5442,7 +5442,7 @@
   },
   {
    "id": "paldea-los-platos_t3",
-   "name": "Paldea Trainer 3",
+   "name": "Beauty Sarah",
    "trainerClass": "beauty",
    "team": [
     {
@@ -5459,7 +5459,7 @@
  "paldea-cabo-poco": [
   {
    "id": "paldea-cabo-poco_t1",
-   "name": "Paldea Trainer 1",
+   "name": "Swimmer Kira",
    "trainerClass": "swimmer",
    "team": [
     {
@@ -5470,7 +5470,7 @@
   },
   {
    "id": "paldea-cabo-poco_t2",
-   "name": "Paldea Trainer 2",
+   "name": "Hiker Leo",
    "trainerClass": "hiker",
    "team": [
     {
@@ -5481,7 +5481,7 @@
   },
   {
    "id": "paldea-cabo-poco_t3",
-   "name": "Paldea Trainer 3",
+   "name": "Psychic Maya",
    "trainerClass": "psychic",
    "team": [
     {
@@ -5498,7 +5498,7 @@
  "paldea-mesagoza": [
   {
    "id": "paldea-mesagoza_t1",
-   "name": "Paldea Trainer 1",
+   "name": "Youngster Nate",
    "trainerClass": "youngster",
    "team": [
     {
@@ -5509,7 +5509,7 @@
   },
   {
    "id": "paldea-mesagoza_t2",
-   "name": "Paldea Trainer 2",
+   "name": "Camper Olivia",
    "trainerClass": "camper",
    "team": [
     {
@@ -5520,7 +5520,7 @@
   },
   {
    "id": "paldea-mesagoza_t3",
-   "name": "Paldea Trainer 3",
+   "name": "Scientist Paul",
    "trainerClass": "scientist",
    "team": [
     {
@@ -5537,7 +5537,7 @@
  "paldea-medali": [
   {
    "id": "paldea-medali_t1",
-   "name": "Paldea Trainer 1",
+   "name": "Lass Rosa",
    "trainerClass": "lass",
    "team": [
     {
@@ -5548,7 +5548,7 @@
   },
   {
    "id": "paldea-medali_t2",
-   "name": "Paldea Trainer 2",
+   "name": "Beauty Sam",
    "trainerClass": "beauty",
    "team": [
     {
@@ -5559,7 +5559,7 @@
   },
   {
    "id": "paldea-medali_t3",
-   "name": "Paldea Trainer 3",
+   "name": "Ace Trainer Tina",
    "trainerClass": "ace",
    "team": [
     {
@@ -5576,7 +5576,7 @@
  "paldea-alfornada": [
   {
    "id": "paldea-alfornada_t1",
-   "name": "Paldea Trainer 1",
+   "name": "Cooltrainer Hana",
    "trainerClass": "coolTrainer",
    "team": [
     {
@@ -5591,7 +5591,7 @@
   },
   {
    "id": "paldea-alfornada_t2",
-   "name": "Paldea Trainer 2",
+   "name": "Blackbelt Ivan",
    "trainerClass": "blackbelt",
    "team": [
     {
@@ -5606,7 +5606,7 @@
   },
   {
    "id": "paldea-alfornada_t3",
-   "name": "Paldea Trainer 3",
+   "name": "Bug Catcher Jade",
    "trainerClass": "bugCatcher",
    "team": [
     {
@@ -5627,7 +5627,7 @@
  "paldea-artazon": [
   {
    "id": "paldea-artazon_t1",
-   "name": "Paldea Trainer 1",
+   "name": "Psychic Kai",
    "trainerClass": "psychic",
    "team": [
     {
@@ -5642,7 +5642,7 @@
   },
   {
    "id": "paldea-artazon_t2",
-   "name": "Paldea Trainer 2",
+   "name": "Swimmer Lena",
    "trainerClass": "swimmer",
    "team": [
     {
@@ -5657,7 +5657,7 @@
   },
   {
    "id": "paldea-artazon_t3",
-   "name": "Paldea Trainer 3",
+   "name": "Hiker Marco",
    "trainerClass": "hiker",
    "team": [
     {
@@ -5678,7 +5678,7 @@
  "paldea-cortondo": [
   {
    "id": "paldea-cortondo_t1",
-   "name": "Paldea Trainer 1",
+   "name": "Scientist Nina",
    "trainerClass": "scientist",
    "team": [
     {
@@ -5693,7 +5693,7 @@
   },
   {
    "id": "paldea-cortondo_t2",
-   "name": "Paldea Trainer 2",
+   "name": "Youngster Owen",
    "trainerClass": "youngster",
    "team": [
     {
@@ -5708,7 +5708,7 @@
   },
   {
    "id": "paldea-cortondo_t3",
-   "name": "Paldea Trainer 3",
+   "name": "Camper Pia",
    "trainerClass": "camper",
    "team": [
     {
@@ -5729,7 +5729,7 @@
  "paldea-montenevera": [
   {
    "id": "paldea-montenevera_t1",
-   "name": "Paldea Trainer 1",
+   "name": "Ace Trainer Quinn",
    "trainerClass": "ace",
    "team": [
     {
@@ -5744,7 +5744,7 @@
   },
   {
    "id": "paldea-montenevera_t2",
-   "name": "Paldea Trainer 2",
+   "name": "Lass Rex",
    "trainerClass": "lass",
    "team": [
     {
@@ -5759,7 +5759,7 @@
   },
   {
    "id": "paldea-montenevera_t3",
-   "name": "Paldea Trainer 3",
+   "name": "Beauty Sofia",
    "trainerClass": "beauty",
    "team": [
     {
@@ -5780,7 +5780,7 @@
  "paldea-zapapico": [
   {
    "id": "paldea-zapapico_t1",
-   "name": "Paldea Trainer 1",
+   "name": "Blackbelt Theo",
    "trainerClass": "blackbelt",
    "team": [
     {
@@ -5795,7 +5795,7 @@
   },
   {
    "id": "paldea-zapapico_t2",
-   "name": "Paldea Trainer 2",
+   "name": "Bug Catcher Uma",
    "trainerClass": "bugCatcher",
    "team": [
     {
@@ -5810,7 +5810,7 @@
   },
   {
    "id": "paldea-zapapico_t3",
-   "name": "Paldea Trainer 3",
+   "name": "Cooltrainer Vera",
    "trainerClass": "coolTrainer",
    "team": [
     {
@@ -5831,7 +5831,7 @@
  "paldea-cascarrafa": [
   {
    "id": "paldea-cascarrafa_t1",
-   "name": "Paldea Trainer 1",
+   "name": "Swimmer Wade",
    "trainerClass": "swimmer",
    "team": [
     {
@@ -5846,7 +5846,7 @@
   },
   {
    "id": "paldea-cascarrafa_t2",
-   "name": "Paldea Trainer 2",
+   "name": "Hiker Xena",
    "trainerClass": "hiker",
    "team": [
     {
@@ -5861,7 +5861,7 @@
   },
   {
    "id": "paldea-cascarrafa_t3",
-   "name": "Paldea Trainer 3",
+   "name": "Psychic Yara",
    "trainerClass": "psychic",
    "team": [
     {
@@ -5882,7 +5882,7 @@
  "paldea-levincia": [
   {
    "id": "paldea-levincia_t1",
-   "name": "Paldea Trainer 1",
+   "name": "Psychic Wendy",
    "trainerClass": "psychic",
    "team": [
     {
@@ -5901,7 +5901,7 @@
   },
   {
    "id": "paldea-levincia_t2",
-   "name": "Paldea Trainer 2",
+   "name": "Swimmer Xander",
    "trainerClass": "swimmer",
    "team": [
     {
@@ -5920,7 +5920,7 @@
   },
   {
    "id": "paldea-levincia_t3",
-   "name": "Paldea Trainer 3",
+   "name": "Hiker Yuki",
    "trainerClass": "hiker",
    "team": [
     {
@@ -5945,7 +5945,7 @@
  "paldea-porto-marinada": [
   {
    "id": "paldea-porto-marinada_t1",
-   "name": "Paldea Trainer 1",
+   "name": "Ace Trainer Caleb",
    "trainerClass": "ace",
    "team": [
     {
@@ -5964,7 +5964,7 @@
   },
   {
    "id": "paldea-porto-marinada_t2",
-   "name": "Paldea Trainer 2",
+   "name": "Lass Dana",
    "trainerClass": "lass",
    "team": [
     {
@@ -5983,7 +5983,7 @@
   },
   {
    "id": "paldea-porto-marinada_t3",
-   "name": "Paldea Trainer 3",
+   "name": "Beauty Eli",
    "trainerClass": "beauty",
    "team": [
     {
@@ -6008,7 +6008,7 @@
  "paldea-mossui-town": [
   {
    "id": "paldea-mossui-town_t1",
-   "name": "Paldea Trainer 1",
+   "name": "Youngster Lena",
    "trainerClass": "youngster",
    "team": [
     {
@@ -6031,7 +6031,7 @@
   },
   {
    "id": "paldea-mossui-town_t2",
-   "name": "Paldea Trainer 2",
+   "name": "Camper Marco",
    "trainerClass": "camper",
    "team": [
     {
@@ -6054,7 +6054,7 @@
   },
   {
    "id": "paldea-mossui-town_t3",
-   "name": "Paldea Trainer 3",
+   "name": "Scientist Nina",
    "trainerClass": "scientist",
    "team": [
     {

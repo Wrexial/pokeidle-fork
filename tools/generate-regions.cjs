@@ -415,6 +415,29 @@ const LEAGUE_ANCHOR = { hoenn: 'hoenn-route-128' }
 const spread = (i, count, min, max) =>
   Math.round(min + (count <= 1 ? 0 : (i * (max - min)) / (count - 1)))
 const TRAINER_CLASSES = ['youngster', 'lass', 'bugCatcher', 'hiker', 'camper', 'beauty', 'coolTrainer', 'psychic', 'scientist', 'ace', 'blackbelt', 'swimmer']
+// Display names for the generated route trainers, so battles read
+// "Youngster Joey" instead of "Route 2 Trainer 1".
+const TRAINER_CLASS_LABELS = {
+  youngster: 'Youngster',
+  lass: 'Lass',
+  bugCatcher: 'Bug Catcher',
+  hiker: 'Hiker',
+  camper: 'Camper',
+  beauty: 'Beauty',
+  coolTrainer: 'Cooltrainer',
+  psychic: 'Psychic',
+  scientist: 'Scientist',
+  ace: 'Ace Trainer',
+  blackbelt: 'Blackbelt',
+  swimmer: 'Swimmer',
+}
+const TRAINER_NAMES = [
+  'Joey', 'Mikey', 'Sarah', 'Alex', 'Tara', 'Ben', 'Kira', 'Leo', 'Maya', 'Nate',
+  'Olivia', 'Paul', 'Rosa', 'Sam', 'Tina', 'Victor', 'Wendy', 'Xander', 'Yuki', 'Zoe',
+  'Aaron', 'Bianca', 'Caleb', 'Dana', 'Eli', 'Fiona', 'Gavin', 'Hana', 'Ivan', 'Jade',
+  'Kai', 'Lena', 'Marco', 'Nina', 'Owen', 'Pia', 'Quinn', 'Rex', 'Sofia', 'Theo',
+  'Uma', 'Vera', 'Wade', 'Xena', 'Yara', 'Zane', 'Aya', 'Bruno', 'Cleo', 'Dev',
+]
 // Showdown trainer sprite keys are the leader's name slugified ("Crasher Wake"
 // -> "crasherwake"). A few characters only have a generation-suffixed or
 // alternate sprite. Kanto is hand-curated and keeps its own gen3 keys.
@@ -1330,7 +1353,9 @@ for (const region of REGIONS) {
             teamSize = Math.min(4, baseSize + (i === 2 ? 1 : 0))
           return {
             id: `${id}_t${i + 1}`,
-            name: `${name} Trainer ${i + 1}`,
+            name: `${TRAINER_CLASS_LABELS[trainerClass] ?? trainerClass} ${
+              TRAINER_NAMES[(townIndex * 3 + i) % TRAINER_NAMES.length]
+            }`,
             trainerClass,
             team: buildTeam(
               pool,

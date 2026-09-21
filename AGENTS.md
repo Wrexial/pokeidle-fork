@@ -246,6 +246,11 @@ Data conventions:
   progress key** (`region generation * 100000 + route rank`), used only for
   ordering. It is computed, not counted, so adding a zone never renumbers its
   neighbours — or, importantly, any other region.
+- Hoenn's Town Map is a real illustrated map rather than the generated node
+  layout: `regionMapImages` in `src/data/ui.js` points at
+  `public/backgrounds/hoenn-map.png` and sizes the world canvas to the image,
+  while `REGION_MAP_LAYOUTS` in `generate-regions.cjs` gives each location its
+  pixel position on that art (converted to percentages, no collision shifting).
 - `regions.json` also carries `raidPool` — the generation's species that cannot
   be obtained in that region (not in any wild table and not reachable by
   evolution). Those are the Pokemon found on the region's Raid Island.

@@ -54,6 +54,70 @@ const CHAMPION_LEVEL = LEVEL_MAX - 5
 // later regions sort later. Deriving it instead of counting means adding a zone
 // never renumbers existing ones (and never touches other regions).
 const REGION_PROGRESS_BASE = 100000
+// Regions whose Town Map is a real illustrated map instead of the generated
+// node layout. Coordinates are pixels on that image (the UI sizes its world to
+// match); the generator converts them to percentages and skips its
+// collision-avoidance shifting so the dots land exactly where they're drawn.
+const REGION_MAP_LAYOUTS = {
+  hoenn: {
+    width: 1600,
+    height: 1050,
+    positions: {
+      'fallarbor-town': [207, 118],
+      'fortree-city': [712, 118],
+      'lilycove-city': [1122, 280],
+      'mossdeep-city': [1415, 375],
+      'sootopolis-city': [1240, 590],
+      'ever-grande-city': [1532, 668],
+      'rustboro-city': [48, 425],
+      'verdanturf-town': [247, 452],
+      'mauville-city': [497, 452],
+      'lavaridge-town': [335, 347],
+      'petalburg-city': [105, 680],
+      'oldale-town': [270, 680],
+      'slateport-city': [490, 760],
+      'littleroot-town': [270, 795],
+      'dewford-town': [160, 958],
+      'pacifidlog-town': [1037, 727],
+      'hoenn-route-101': [265, 727],
+      'hoenn-route-102': [182, 672],
+      'hoenn-route-103': [347, 612],
+      'hoenn-route-104': [50, 595],
+      'hoenn-route-105': [42, 792],
+      'hoenn-route-106': [90, 890],
+      'hoenn-route-107': [265, 952],
+      'hoenn-route-108': [402, 952],
+      'hoenn-route-109': [487, 897],
+      'hoenn-route-110': [482, 585],
+      'hoenn-route-111': [478, 262],
+      'hoenn-route-112': [405, 340],
+      'hoenn-route-113': [340, 118],
+      'hoenn-route-114': [137, 178],
+      'hoenn-route-115': [37, 298],
+      'hoenn-route-116': [160, 390],
+      'hoenn-route-117': [370, 452],
+      'hoenn-route-118': [620, 450],
+      'hoenn-route-119': [645, 262],
+      'hoenn-route-120': [758, 200],
+      'hoenn-route-121': [935, 285],
+      'hoenn-route-122': [910, 375],
+      'hoenn-route-123': [810, 465],
+      'hoenn-route-124': [1255, 315],
+      'hoenn-route-125': [1432, 315],
+      'hoenn-route-126': [1265, 490],
+      'hoenn-route-127': [1432, 490],
+      'hoenn-route-128': [1432, 668],
+      'hoenn-route-129': [1445, 725],
+      'hoenn-route-130': [1305, 725],
+      'hoenn-route-131': [1145, 725],
+      'hoenn-route-132': [930, 725],
+      'hoenn-route-133': [760, 722],
+      'hoenn-route-134': [595, 722],
+      league: [1540, 548],
+      raid: [930, 880],
+    },
+  },
+}
 // Spread index i of `count` evenly across [min, max] (inclusive).
 const spread = (i, count, min, max) =>
   Math.round(min + (count <= 1 ? 0 : (i * (max - min)) / (count - 1)))
@@ -378,7 +442,18 @@ for (const region of REGIONS) {
     usedPos.push({ x, y })
     return { x, y }
   }
-  const place = (node) => placeAt(positions[node]?.x ?? 50, positions[node]?.y ?? 50)
+  const fixedLayout = REGION_MAP_LAYOUTS[regionId],
+    fixedPosition = (node) => {
+      const [px, py] = fixedLayout?.positions?.[node] ?? []
+      return px == null
+        ? null
+        : {
+            x: +((px / fixedLayout.width) * 100).toFixed(2),
+            y: +((py / fixedLayout.height) * 100).toFixed(2),
+          }
+    }
+  const place = (node) =>
+    fixedPosition(node) ?? placeAt(positions[node]?.x ?? 50, positions[node]?.y ?? 50)
   const base = LEVEL_MIN
   const starters = GEN_STARTERS[gen]
   const all = speciesForGen(gen)
@@ -601,10 +676,12 @@ for (const region of REGIONS) {
         battlesAtLocation: [{ locationId: locId(regionId, lastRoute), count: 20 }],
       },
       unlockOrder: maxProgressKey + 1,
-      position: placeAt(
-        Math.min(94, (positions[lastRoute]?.x ?? 50) + 8),
-        Math.max(6, (positions[lastRoute]?.y ?? 50) - 10)
-      ),
+      position:
+        fixedPosition('raid') ??
+        placeAt(
+          Math.min(94, (positions[lastRoute]?.x ?? 50) + 8),
+          Math.max(6, (positions[lastRoute]?.y ?? 50) - 10)
+        ),
     }
   }
 
@@ -627,10 +704,12 @@ for (const region of REGIONS) {
       gymsRequired: gymPlacements.map((gym) => gym.id),
     },
     unlockOrder: maxProgressKey + 2,
-    position: placeAt(
-      Math.min(94, (positions[leagueNode]?.x ?? 50) + 10),
-      Math.max(6, (positions[leagueNode]?.y ?? 50) - 4)
-    ),
+    position:
+      fixedPosition('league') ??
+      placeAt(
+        Math.min(94, (positions[leagueNode]?.x ?? 50) + 10),
+        Math.max(6, (positions[leagueNode]?.y ?? 50) - 4)
+      ),
   }
   regionObj.leagueLocationKey = leagueId
 

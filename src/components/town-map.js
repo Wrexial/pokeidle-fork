@@ -3,6 +3,7 @@
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { raidPoolFor, mapAreas, mapData, regions } from '../data/gameData.js'
+import { regionMapImages } from '../data/ui.js'
 import { useGame } from '../game/context.js'
 import { createRoads } from '../game/progression.js'
 import { MapNode } from './map-node.js'
@@ -82,7 +83,12 @@ export function TownMap() {
       return map
     }, []),
     activeLocationIds = locationsByRegion[activeRegion] ?? [],
-    activeLocationSet = new Set(activeLocationIds)
+    activeLocationSet = new Set(activeLocationIds),
+    // A region with an illustrated map uses its pixel dimensions as the world,
+    // so the location percentages line up with the image.
+    activeMapImage = regionMapImages[activeRegion],
+    worldWidth = activeMapImage?.width ?? WORLD_SIZE,
+    worldHeight = activeMapImage?.height ?? WORLD_SIZE
 
   const roads = [],
     roadSet = new Set()
@@ -102,7 +108,7 @@ export function TownMap() {
 
   // Centre of the active region (used when the player isn't in it).
   const regionCentre = React.useMemo(() => {
-    if (activeLocationIds.length === 0) return { x: WORLD_SIZE / 2, y: WORLD_SIZE / 2 }
+    if (activeLocationIds.length === 0) return { x: worldWidth / 2, y: worldHeight / 2 }
     let x = 0,
       y = 0
     for (const id of activeLocationIds) {
@@ -110,10 +116,10 @@ export function TownMap() {
       y += mapData[id].position.y
     }
     return {
-      x: (x / activeLocationIds.length / 100) * WORLD_SIZE,
-      y: (y / activeLocationIds.length / 100) * WORLD_SIZE,
+      x: (x / activeLocationIds.length / 100) * worldWidth,
+      y: (y / activeLocationIds.length / 100) * worldHeight,
     }
-  }, [activeLocationIds])
+  }, [activeLocationIds, worldWidth, worldHeight])
 
   const canvasRect = React.useCallback(() => canvasRef.current?.getBoundingClientRect(), [])
 
@@ -134,29 +140,29 @@ export function TownMap() {
   const fitView = React.useCallback(() => {
     const rect = canvasRect()
     if (!rect) return
-    const fitScale = Math.min(rect.width, rect.height) / WORLD_SIZE
+    const fitScale = Math.min(rect.width / worldWidth, rect.height / worldHeight)
     centreOn(regionCentre.x, regionCentre.y, Math.min(MAX_SCALE, Math.max(MIN_SCALE, fitScale)))
-  }, [canvasRect, centreOn, regionCentre])
+  }, [canvasRect, centreOn, regionCentre, worldWidth, worldHeight])
 
   const centreOnCurrent = React.useCallback(() => {
     const target = mapData[currentLocation]?.position
     if (!target || !activeLocationSet.has(currentLocation)) return fitView()
     const scale = Math.max(view.scale, MIN_SCALE)
-    centreOn((target.x / 100) * WORLD_SIZE, (target.y / 100) * WORLD_SIZE, scale)
-  }, [activeLocationSet, centreOn, currentLocation, fitView, view.scale])
+    centreOn((target.x / 100) * worldWidth, (target.y / 100) * worldHeight, scale)
+  }, [activeLocationSet, centreOn, currentLocation, fitView, view.scale, worldWidth, worldHeight])
 
   // Focus the map on the player's location when the region changes (or on first
   // paint). Kept out of the resize path so panning isn't reset by a resize.
   React.useEffect(() => {
     const rect = canvasRect()
     if (!rect) return
-    const fitScale = Math.min(rect.width, rect.height) / WORLD_SIZE
+    const fitScale = Math.min(rect.width / worldWidth, rect.height / worldHeight)
     const scale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, Math.max(1, fitScale)))
     const focusId = activeLocationSet.has(currentLocation) ? currentLocation : null
     const focus = focusId
       ? mapData[focusId].position
-      : { x: regionCentre.x / WORLD_SIZE * 100, y: regionCentre.y / WORLD_SIZE * 100 }
-    centreOn((focus.x / 100) * WORLD_SIZE, (focus.y / 100) * WORLD_SIZE, scale)
+      : { x: regionCentre.x / worldWidth * 100, y: regionCentre.y / worldHeight * 100 }
+    centreOn((focus.x / 100) * worldWidth, (focus.y / 100) * worldHeight, scale)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeRegion])
 
@@ -294,14 +300,24 @@ export function TownMap() {
           jsxs('div', {
             className: 'town-map-world',
             style: {
-              width: `${WORLD_SIZE}px`,
-              height: `${WORLD_SIZE}px`,
+              width: `${worldWidth}px`,
+              height: `${worldHeight}px`,
               transform: `translate(${view.x}px, ${view.y}px) scale(${view.scale})`,
             },
             children: [
-              jsxs('svg', {
-                className: 'town-map-svg',
-                children: [
+              activeMapImage &&
+                jsx('img', {
+                  className: 'town-map-background',
+                  src: activeMapImage.src,
+                  alt: '',
+                  draggable: false,
+                }),
+              // An illustrated map already draws its own routes, so the generated
+              // roads would only clutter it.
+              !activeMapImage &&
+                jsxs('svg', {
+                  className: 'town-map-svg',
+                  children: [
                   roads.map(({ from: fromId, to: toId }) => {
                     const roadClass = `map-road-border${unlockedLocations.includes(fromId) && unlockedLocations.includes(toId) ? ' unlocked' : ' locked'}`
                     return createRoads(fromId, toId).map((segment, segmentIndex) =>
@@ -334,8 +350,8 @@ export function TownMap() {
                       )
                     )
                   }),
-                ],
-              }),
+                  ],
+                }),
               activeLocationIds.map((locationId) => {
                 const location = mapData[locationId],
                   isUnlocked = unlockedLocations.includes(locationId)

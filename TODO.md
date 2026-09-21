@@ -447,6 +447,27 @@ status + stat changes, but move selection and several mechanics are missing.
 
 Effort: **medium–large** (do it in slices; AI + healing + multi-hit first).
 
+## 26. README + GitHub "About"
+
+The repo root has no `README.md` and no `LICENSE`, and the GitHub repo has no
+About blurb — the front door is missing. `AGENTS.md` is developer-facing and too
+long/technical to double as one.
+
+- [ ] `README.md`: a one-line pitch; what it is (a client-only browser
+      incremental Pokémon game, React 19 + Vite); a screenshot/GIF; feature
+      highlights (link `public/guide.html`); how to run it locally
+      (`npm install`, `npm run dev` → localhost:5173, `npm run build`,
+      `npm run typecheck` / `npm run validate`); a short project-layout table
+      (link `AGENTS.md` for depth); links to the player guide and encounter
+      index; credits/disclaimer (unofficial fan project, Pokémon © Nintendo).
+- [ ] Decide a license (currently none) and add a `LICENSE` file.
+- [ ] GitHub **About**: a short (~120 char) description, the playable URL if
+      hosted (GitHub Pages / Netlify), topics/tags (`pokemon`, `idle-game`,
+      `incremental`, `react`, `vite`), and a social-preview image.
+- [ ] Optional: `CONTRIBUTING.md` and issue/PR templates.
+
+Effort: **small**.
+
 ---
 
 ## Useful references when picking these up

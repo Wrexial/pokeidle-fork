@@ -84,6 +84,8 @@ for (const region of regions) {
   raidPools.set(region.id, seen)
 }
 for (const [locationId, location] of Object.entries(mapData)) {
+  if (location.background && !fs.existsSync(path.join(__dirname, '../public', location.background)))
+    fail(`location ${locationId} uses missing background ${location.background}`)
   for (const connection of location.connections)
     if (!mapData[connection]) fail(`location ${locationId} connects to unknown ${connection}`)
     else if (!mapData[connection].connections.includes(locationId))

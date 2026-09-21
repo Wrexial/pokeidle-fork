@@ -394,6 +394,59 @@ Relevant code: `HATCH_DAYCARE_EGG` (`src/game/reducer.js`),
 
 Effort: **small**.
 
+## 24. Move data pass
+
+`possible-moves.json` only carries `name / type / category / power / accuracy /
+pp / priority / effect`, and the engine understands just three effect types
+(`statChange`, `drain`, `status`). That leaves a lot of dead data and wrong
+behaviour.
+
+- [ ] ~290 power-0 moves have **no effect** and do literally nothing (Recover,
+      Roost, Rest, Protect, Reflect/Light Screen, Spikes/Stealth Rock, Swords
+      Dance, Taunt, …). Add effects for the important ones — healing, screens,
+      hazards, protect, setup, etc. Either fetch effect data (PokéAPI /
+      Showdown) or map move names to effects.
+- [ ] Multi-hit moves (Bullet Seed, Icicle Spear, Rock Blast, Double Kick, …)
+      are encoded as a single hit; add a hit-count range.
+- [ ] High critical-hit-ratio moves (Slash, Razor Leaf, Night Slash, …) aren't
+      flagged; add a crit stage.
+- [ ] Audit `priority` — e.g. Water Shuriken is stored as 0 but is +1, and
+      other priority moves (Quick Attack, Mach Punch, Extreme Speed) may be
+      wrong.
+- [ ] Data errors: the 3 G-Max moves (`gMaxDrumSolo`/`gMaxFireball`/
+      `gMaxHydrosnipe`) have `category: 'status'` with power 160.
+- [ ] PP is stored but unused; decide whether to implement it or drop it.
+- [ ] Z-moves / G-Max moves are otherwise dead data — decide keep/drop.
+
+Effort: **medium–large** (the effect set is the bulk of it).
+
+## 25. Battle engine pass
+
+`resolveBattleTurn` (`src/game/combat.js`) is fairly complete for damage +
+status + stat changes, but move selection and several mechanics are missing.
+
+- [ ] **AI**: `chooseBestMove` only ever considers damaging moves, so trainers
+      never heal, set hazards, or use status/setup moves (and `chooseRandomMove`
+      for wilds prefers a damaging move). Add a real chooser: heal when low,
+      use useful utility moves, consider type effectiveness, maybe switch.
+- [ ] **Healing moves** (Recover / Roost / Rest / Synthesis / …) need a `heal`
+      effect and HP restore (see #24).
+- [ ] **Multi-hit** execution (roll 2-5 hits) — see #24.
+- [ ] **Critical-hit stages** and the high-crit moves / Scope Lens.
+- [ ] **Protect / Detect / Substitute** and move blocking.
+- [ ] **Entry hazards & screens** (Stealth Rock, Spikes, Reflect, Light Screen,
+      Aurora Veil).
+- [ ] **Accuracy / evasion stat stages** (currently only accuracy from the move
+      itself, no stages).
+- [ ] Additional statuses if added to the data — paralysis, confusion, badly
+      poisoned (data currently only has poison/burn/freeze/sleep/flinch).
+- [ ] Weather / terrain — see #10.
+- [ ] Ability / held-item hooks — see #2.
+- [ ] A damage / crit-rate **balance pass** (crit is a flat 1/16 today).
+- [ ] Battle polish: move animations / damage numbers / hit feedback — see #16.
+
+Effort: **medium–large** (do it in slices; AI + healing + multi-hit first).
+
 ---
 
 ## Useful references when picking these up

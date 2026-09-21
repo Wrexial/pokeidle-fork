@@ -168,7 +168,7 @@ window.gameDataDebug.lookupPokemon('pikachu')
 | `assets/fonts.css` | Local "Press Start 2P" `@font-face` declarations. |
 | `public/data/*.json` | **The game database** (see below). Served at `/data/...`. |
 | `public/encounter-index.html` | Generated offline "what spawns where" overview (see `tools/generate-encounter-index.cjs`). |
-| `public/sprites/pokemon/` | Pokémon sprites, named by numeric species/form id (`25.png`, `25.gif`, `back/25.png`, …). |
+| `public/sprites/pokemon/` | Pokémon sprites, named by numeric species/form id (`25.png`, `shiny/25.png`, `back/25.png`, `back/shiny/25.png`, animated gifs under `versions/generation-v/black-white/animated/`). |
 | `public/sprites/trainers/` | Trainer images. |
 | `public/backgrounds/` | Battle/location backgrounds. |
 | `public/heal-animation-web.mp4` | Healing animation. |
@@ -220,9 +220,13 @@ Data conventions:
   }
   ```
 - Learnsets map `species -> [[level, moveKey], ...]`.
-- Some special/placeholder forms use `"id": 0` intentionally (see commit
-  "All id's now 0 for special pokemon"). Region wild encounters only use species
-  with `id > 0` (forms with ids above 1025 are excluded).
+- Every entry's `id` is the PokeAPI *pokemon* id: the national dex number for
+  base species and the 10000+ form id for alternate forms (megas, regional
+  forms, Gigantamax, ...). Only `missingno` keeps `id: 0`, which renders the
+  `?` placeholder sprite. `tools/fix_pokemon_ids.py` reconciles every id with
+  PokeAPI (it derives each key's PokeAPI name, so re-run it after adding a
+  form). Region wild encounters only use species with `id > 0` (forms with ids
+  above 1025 are excluded).
 - `regions.json` entries carry `entry` (the starting town's location id),
   `startLevel` (5 for every region now that each runs its own 5-75 curve) and
   `leagueLocationKey` (the region's Pokémon League, e.g.
@@ -260,8 +264,13 @@ Data conventions:
 - `regions.json` also carries `raidPool` — the generation's species that cannot
   be obtained in that region (not in any wild table and not reachable by
   evolution). Those are the Pokemon found on the region's Raid Island.
-- Sprites are referenced by that `id`; a missing `.gif` falls back to the
-  static `.png` (see commit "Fallback to static img").
+- Sprites are referenced by that `id`. The animated directory is a merged set:
+  the official Gen V Black/White animated gifs for national dex ids 1-649, plus
+  Pokémon Showdown's animated sprites for everything else (PokeAPI has no
+  animation past Gen V). A missing `.gif` falls back to the static `.png`
+  (only `missingno` and a few Gen 9 paradox/Gigantamax forms lack animation).
+  `tools/download_pokemon_sprites.cjs` fills in every front/back/shiny/back-shiny
+  variant from those sources; re-run it after adding species or form ids.
 
 When adding/renaming species or keys, grep `src/` for the key —
 the code references keys and ids directly, and cross-file references
@@ -299,8 +308,11 @@ One-off scripts used to build the data JSON (not run during dev/build):
 
 - `scrape_serebii.py`, `convert_moves.py`, `fix_pokemon_ids.py` — Python
   (need `requests`, `beautifulsoup4` in `.venv`).
-- `scrape_pokemondb.cjs`, `download_pokemon_sprites.cjs`, `extract_data.cjs` —
-  Node scripts.
+- `scrape_pokemondb.cjs`, `extract_data.cjs` — Node scripts.
+- `download_pokemon_sprites.cjs` — fills the local sprite tree for every id in
+  `pokemon-species.json`: static front/back/shiny from PokeAPI, and animated
+  front/back/shiny from Gen V for dex ids 1-649 falling back to Pokémon
+  Showdown for the rest. Idempotent (`--only=static|animated`, `--force`).
 - `scrape-region-maps.cjs` — scrapes real region maps: location lists from
   PokéAPI and route/town compass connections (`north/south/east/west`) from
   Bulbapedia's raw infoboxes, then computes a directional layout. Caches HTTP

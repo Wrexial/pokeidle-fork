@@ -1,140 +1,183 @@
-const https = require('https');
-const fs = require('fs');
-const path = require('path');
+/**
+ * Download every Pokemon sprite the game references.
+ *
+ * The save/game code looks up sprites purely by numeric id (see
+ * getPokemonSpriteUrl in src/game/pokemon.js), so this walks the ids in
+ * public/data/pokemon-species.json and fills in whatever is missing.
+ *
+ * Animated sprites: PokeAPI only has the official Generation V Black/White
+ * animated gifs for Gen 1-5 (ids 1-649). For everything else we fall back to
+ * Pokemon Showdown's animated set (sprites/pokemon/other/showdown), which is
+ * fanned out across all generations in the same pixel style. Both end up in
+ * the game's animated directory so the runtime URL stays a single path; the
+ * handful of ids Showdown has no animation for stay static (the existing
+ * onError fallback in the components).
+ *
+ * Static PNGs: front/back normal + shiny, used as the fallback and as the
+ * permanent sprite for the ids with no animation at all.
+ *
+ * Idempotent: existing files are skipped, so it is safe to re-run.
+ *
+ * Usage:
+ *   node tools/download_pokemon_sprites.cjs [--only=static|animated] [--force]
+ */
 
-const BASE_URL = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated';
+const https = require('https')
+const fs = require('fs')
+const path = require('path')
 
-// Ensure directories exist
+const ROOT = path.join(__dirname, '..')
+const SPECIES_PATH = path.join(ROOT, 'public', 'data', 'pokemon-species.json')
+const STATIC_DIR = path.join(ROOT, 'public', 'sprites', 'pokemon')
+const ANIMATED_DIR = path.join(STATIC_DIR, 'versions', 'generation-v', 'black-white', 'animated')
+
+const POKEAPI = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon'
+const SHOWDOWN = `${POKEAPI}/other/showdown`
+
+const onlyArg = process.argv.find((arg) => arg.startsWith('--only='))
+const ONLY = onlyArg ? onlyArg.split('=')[1] : null
+const FORCE = process.argv.includes('--force')
+
 function ensureDir(dir) {
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
-  }
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
 }
 
-// Download file from URL (follows redirects)
-async function downloadFile(url, filepath, redirectsLeft = 5) {
+/** Follows redirects; resolves true on 200, false on 404. */
+function downloadFile(url, filepath, redirectsLeft = 5) {
   return new Promise((resolve, reject) => {
-    https.get(url, (response) => {
-      // Follow redirects (301/302/307/308)
-      if (response.statusCode >= 300 && response.statusCode < 400 && response.headers.location) {
-        if (redirectsLeft <= 0) {
-          reject(new Error(`Too many redirects for ${url}`));
-          return;
+    https
+      .get(url, { headers: { 'User-Agent': 'pokemon-idle-sprite-fetcher' } }, (response) => {
+        if (response.statusCode >= 300 && response.statusCode < 400 && response.headers.location) {
+          response.resume()
+          if (redirectsLeft <= 0) return reject(new Error(`Too many redirects for ${url}`))
+          const next = new URL(response.headers.location, url).toString()
+          return resolve(downloadFile(next, filepath, redirectsLeft - 1))
+        }
+        if (response.statusCode === 404) {
+          response.resume()
+          return resolve(false)
+        }
+        if (response.statusCode !== 200) {
+          response.resume()
+          return reject(new Error(`Status ${response.statusCode} for ${url}`))
         }
 
-        const nextUrl = response.headers.location.startsWith('http')
-          ? response.headers.location
-          : new URL(response.headers.location, url).toString();
-
-        resolve(downloadFile(nextUrl, filepath, redirectsLeft - 1));
-        return;
-      }
-
-      if (response.statusCode === 404) {
-        console.log(`  ⚠️  Not found: ${url}`);
-        resolve(false);
-        return;
-      }
-
-      if (response.statusCode !== 200) {
-        reject(new Error(`Status ${response.statusCode} for ${url}`));
-        return;
-      }
-
-      const fileStream = fs.createWriteStream(filepath);
-      response.pipe(fileStream);
-
-      fileStream.on('finish', () => {
-        fileStream.close();
-        resolve(true);
-      });
-
-      fileStream.on('error', reject);
-    }).on('error', reject);
-  });
+        ensureDir(path.dirname(filepath))
+        const fileStream = fs.createWriteStream(filepath)
+        response.pipe(fileStream)
+        fileStream.on('finish', () => fileStream.close(() => resolve(true)))
+        fileStream.on('error', reject)
+      })
+      .on('error', reject)
+  })
 }
 
-async function downloadAllSprites() {
-  console.log('🎮 Downloading Pokémon sprites from PokéAPI...\n');
+/** Static variants: destination path builder + PokeAPI source. */
+const STATIC_VARIANTS = [
+  { name: 'front', dest: (id) => path.join(STATIC_DIR, `${id}.png`), url: (id) => `${POKEAPI}/${id}.png` },
+  { name: 'back', dest: (id) => path.join(STATIC_DIR, 'back', `${id}.png`), url: (id) => `${POKEAPI}/back/${id}.png` },
+  { name: 'shiny', dest: (id) => path.join(STATIC_DIR, 'shiny', `${id}.png`), url: (id) => `${POKEAPI}/shiny/${id}.png` },
+  {
+    name: 'back-shiny',
+    dest: (id) => path.join(STATIC_DIR, 'back', 'shiny', `${id}.png`),
+    url: (id) => `${POKEAPI}/back/shiny/${id}.png`,
+  },
+]
 
-  const animatedBaseDir = path.join(__dirname, 'assets', 'sprites', 'pokemon', 'versions', 'generation-v', 'black-white', 'animated');
-  const staticBaseDir = path.join(__dirname, 'assets', 'sprites', 'pokemon');
+/**
+ * Animated variants: saved into the game's animated directory, but sourced
+ * from the official Gen V set first and Showdown second.
+ */
+const ANIMATED_VARIANTS = [
+  { name: 'front', sub: '', sdSub: '' },
+  { name: 'back', sub: 'back', sdSub: 'back' },
+  { name: 'shiny', sub: 'shiny', sdSub: 'shiny' },
+  { name: 'back-shiny', sub: 'back/shiny', sdSub: 'back/shiny' },
+].map((variant) => ({
+  name: `animated-${variant.name}`,
+  dest: (id) => path.join(ANIMATED_DIR, variant.sub, `${id}.gif`),
+  sources: (id) => {
+    const showdown = `${SHOWDOWN}/${variant.sdSub ? variant.sdSub + '/' : ''}${id}.gif`
+    // Gen V animated only exists for the national dex ids 1-649.
+    if (id > 649) return [showdown]
+    return [
+      `${POKEAPI}/versions/generation-v/black-white/animated/${variant.sub ? variant.sub + '/' : ''}${id}.gif`,
+      showdown,
+    ]
+  },
+}))
 
-  // Ensure directories exist for all sprite variants
-  ensureDir(animatedBaseDir);
-  ensureDir(path.join(animatedBaseDir, 'back'));
-  ensureDir(path.join(animatedBaseDir, 'shiny'));
-  ensureDir(path.join(animatedBaseDir, 'back', 'shiny'));
-  ensureDir(staticBaseDir);
+const stats = { downloaded: 0, skipped: 0, missing: 0, failed: 0 }
+const missingLog = []
 
-  // Helper: skip files that already exist
-  function alreadyDownloaded(filepath) {
-    return fs.existsSync(filepath);
+async function fetchVariant(task, id) {
+  const dest = task.dest(id)
+  if (!FORCE && fs.existsSync(dest) && fs.statSync(dest).size > 0) {
+    stats.skipped++
+    return
   }
 
-  const animatedVariants = [
-    { urlPath: '', dir: animatedBaseDir },
-    { urlPath: 'back', dir: path.join(animatedBaseDir, 'back') },
-    { urlPath: 'shiny', dir: path.join(animatedBaseDir, 'shiny') },
-    { urlPath: 'back/shiny', dir: path.join(animatedBaseDir, 'back', 'shiny') },
-  ];
-
-  const STATIC_BASE_URL = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon';
-
-  let successCount = 0;
-  let failCount = 0;
-  let skippedCount = 0;
-
-  // Download for Pokémon IDs 1..649 (Gen 1-5)
-  for (let id = 1; id <= 649; id++) {
-    process.stdout.write(`\rDownloading Pokémon #${id.toString().padStart(3, '0')}...`);
-
-    // Static PNG (normal)
-    const staticUrl = `${STATIC_BASE_URL}/${id}.png`;
-    const staticPath = path.join(staticBaseDir, `${id}.png`);
-    if (!alreadyDownloaded(staticPath)) {
-      try {
-        const success = await downloadFile(staticUrl, staticPath);
-        if (success) successCount++;
-        else failCount++;
-      } catch (error) {
-        console.error(`\n❌ Error downloading static ID ${id}: ${error.message}`);
-        failCount++;
+  const sources = task.sources ? task.sources(id) : [task.url(id)]
+  for (const url of sources) {
+    try {
+      if (await downloadFile(url, dest)) {
+        stats.downloaded++
+        return
       }
-    } else {
-      skippedCount++;
-    }
-
-    // Animated GIFs (front/back normal + shiny)
-    for (const variant of animatedVariants) {
-      const url = variant.urlPath
-        ? `${BASE_URL}/${variant.urlPath}/${id}.gif`
-        : `${BASE_URL}/${id}.gif`;
-      const filepath = path.join(variant.dir, `${id}.gif`);
-
-      if (alreadyDownloaded(filepath)) {
-        skippedCount++;
-        continue;
-      }
-
-      try {
-        const success = await downloadFile(url, filepath);
-        if (success) successCount++;
-        else failCount++;
-      } catch (error) {
-        console.error(`\n❌ Error downloading ID ${id} (${variant.urlPath}): ${error.message}`);
-        failCount++;
-      }
+    } catch (error) {
+      stats.failed++
+      console.error(`\n  Error ${task.name} #${id}: ${error.message}`)
+      return
     }
   }
 
-  console.log(`\n\n✅ Download complete!`);
-  console.log(`📊 Summary:`);
-  console.log(`   ✓ Successful downloads: ${successCount}`);
-  console.log(`   ✗ Failed downloads: ${failCount}`);
-  console.log(`   ↪ Skipped (already existed): ${skippedCount}`);
-  console.log(`   📁 Animated location: ${animatedBaseDir}`);
-  console.log(`   📁 Static location: ${staticBaseDir}`);
+  stats.missing++
+  missingLog.push(`${task.name} #${id}`)
 }
 
-downloadAllSprites().catch(console.error);
+/** Runs the tasks with a small concurrency pool so GitHub isn't hammered. */
+async function runPool(tasks, ids, concurrency = 8) {
+  let next = 0
+  let lastLog = 0
+  async function worker() {
+    while (next < ids.length) {
+      const index = next++
+      for (const task of tasks) await fetchVariant(task, ids[index])
+      if (index - lastLog >= 100) {
+        lastLog = index
+        console.log(`  ...${index}/${ids.length} ids`)
+      }
+    }
+  }
+  await Promise.all(Array.from({ length: Math.min(concurrency, ids.length) }, worker))
+}
+
+async function main() {
+  const species = JSON.parse(fs.readFileSync(SPECIES_PATH, 'utf8'))
+  const ids = [...new Set(Object.values(species).map((entry) => entry.id))].filter((id) => id > 0).sort((a, b) => a - b)
+  console.log(`Filling sprites for ${ids.length} species ids (ids > 0).\n`)
+
+  if (!ONLY || ONLY === 'static') {
+    console.log('Static sprites (front / back / shiny / back-shiny)...')
+    await runPool(STATIC_VARIANTS, ids)
+  }
+  if (!ONLY || ONLY === 'animated') {
+    console.log('Animated sprites (Gen V official, Showdown fallback)...')
+    await runPool(ANIMATED_VARIANTS, ids)
+  }
+
+  console.log('\nSummary:')
+  console.log(`  downloaded: ${stats.downloaded}`)
+  console.log(`  skipped:    ${stats.skipped}`)
+  console.log(`  missing:    ${stats.missing}`)
+  console.log(`  failed:     ${stats.failed}`)
+  if (missingLog.length) {
+    console.log('\nNo source found for:')
+    for (const entry of missingLog) console.log(`  ${entry}`)
+  }
+}
+
+main().catch((error) => {
+  console.error(error)
+  process.exitCode = 1
+})

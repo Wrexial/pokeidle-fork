@@ -4,6 +4,10 @@ import { evValue } from '../data/config.js'
 import { moveLearnsets, pokemonSpecies, preEvolutionMap, trainerClasses } from '../data/gameData.js'
 
 /**
+ * Animated sprite directory. It is a merged set: the official Gen V
+ * Black/White gifs for national dex ids 1-649, and Pokemon Showdown's
+ * animated sprites for every later species/form (PokeAPI has no Gen 6+
+ * animation). Anything missing here falls back to the static png.
  * @param {number | string} spriteId
  * @param {boolean} [isBack]
  * @param {boolean} [isShiny]

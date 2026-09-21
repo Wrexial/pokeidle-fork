@@ -106,6 +106,102 @@ bonus, or flavour.
 
 Effort: **medium**.
 
+## 7. Offline / idle progress
+
+The game is called *Pokémon Idle* but only advances while the tab is open. This
+is arguably the biggest missing idle feature: a returning player gets nothing
+for the time away.
+
+- [ ] Decide the model: bank "offline battles" and resolve them on return, or a
+      simpler overnight bonus (money / EXP / encounters).
+- [ ] Cap it (e.g. 8-24 hours) so it doesn't dwarf active play.
+- [ ] Show a "while you were away" summary (battles, catches, shinies, money).
+- [ ] Persist the timestamp in the save (`context.js`).
+
+Effort: **medium–large** (a real design decision, but high impact).
+
+## 8. Pokémon management / IV checker
+
+IVs are generated in `createPokemon` but never shown, and the box has no search
+or protection against releasing something valuable.
+
+- [ ] IV display / judge (sum IVs stars, like the in-game judge).
+- [ ] Nicknames.
+- [ ] Favourite / lock a Pokémon so Release and Wonder Trade skip it.
+- [ ] Box search + filter (name / type / level / shiny / favourite).
+- [ ] "Release all duplicates" bulk tool.
+
+Effort: **medium**.
+
+## 9. Move tutor / TMs
+
+`move-manager-panel.js` already lets a Pokémon (re)learn from its family's
+learnset (`getFamilyLearnset`). TMs/tutors would add *cross-family* moves.
+
+- [ ] A TM item list (one per move) bought/found, consumed on use.
+- [ ] Compatibility rules (which species can learn which move).
+- [ ] UI in the move manager to teach a TM move.
+
+Effort: **medium**. Needs a compatibility data set.
+
+## 10. Weather & terrain
+
+A natural follow-on to status conditions; data-light and adds battle depth.
+
+- [ ] A weather state threaded like the volatile state (rain / sun / sandstorm /
+      snow), set by moves and/or per route.
+- [ ] Damage modifiers, weather-damage ticks, and interactions with abilities
+      (#2a) once those exist.
+- [ ] Small battle indicator + log lines.
+
+Effort: **medium**.
+
+## 11. NPC gifts & static encounters
+
+Towns are currently marts + gyms; a few one-off NPCs would add flavour and
+content (and give fossils/starters a clean source outside the raid pool).
+
+- [ ] A gift NPC per region (fossil, starter, an item) gated on a flag.
+- [ ] Static overworld encounters (a fixed species/level you catch once).
+- [ ] Reuse the boss-battle / wild-encounter plumbing.
+
+Effort: **medium**. Needs small new state flags.
+
+## 12. Dex-completion rewards
+
+Completing a generation currently only unlocks that generation's Shiny Charm.
+
+- [ ] Per-generation reward on completion (an item, tokens, a Master Ball, a
+      rare encounter unlock).
+- [ ] A "Dex rewards" section in the Records panel.
+
+Effort: **small**.
+
+## 13. Auto-travel / idle QoL
+
+When a gate is satisfied the player still has to travel manually.
+
+- [ ] Optionally advance to the next unlocked location automatically once the
+      current route's gate is met.
+- [ ] Optional auto-heal / auto-switch already partly exists (party switch on
+      faint) — expose it as a setting.
+
+Effort: **small**.
+
+## 14. A lightweight test suite
+
+There's no test runner (`AGENTS.md` calls `npm run validate` the closest thing),
+so reducer/combat/breeding invariants are only checked by ad-hoc headless
+scripts. `node --test` plus the existing `window.gameDataInjector.data` mock
+pattern would lock them in.
+
+- [ ] `npm test` running `node --test tools/../tests/*.test.mjs` (or similar).
+- [ ] Cover: `computeUnlockedLocations` (prestige re-lock, unlock tokens),
+      `resolveBattleTurn` (status/drain/flee), breeding compatibility, the
+      reducer's key actions, `checkShinyOdds`.
+
+Effort: **small–medium**, pays off every future change.
+
 ---
 
 ## Useful references when picking these up

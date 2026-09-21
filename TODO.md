@@ -37,47 +37,51 @@ working order, and the numbered sections as the details.
    payoff.
 9. **#21 Unlock Tokens endgame** — S · ★★★ — removes a dead banner once all
    regions are open.
-10. **#5 Daily / periodic events** — S–M · ★★★ — cheap engagement loop.
-11. **#16 More ideas (grab bag)** — mostly S · ★★★ — mine the quick ones
+10. **#33 Rare Candy / EXP Candy drops** — S–M · ★★★ — a levelling shortcut
+    that gives rare wild finds more value.
+11. **#34 Valuables you can sell** — S–M · ★★★ — treasure drops plus a Sell
+    action extend the shops and give the economy an outlet.
+12. **#5 Daily / periodic events** — S–M · ★★★ — cheap engagement loop.
+13. **#16 More ideas (grab bag)** — mostly S · ★★★ — mine the quick ones
     (achievement rewards, release/selling, map QoL, notifications).
 
 ### Tier 2 — High impact, worth the effort (medium–large)
 
-12. **#7 Offline / idle progress** — M–L · ★★★★★ — the biggest missing *idle*
+14. **#7 Offline / idle progress** — M–L · ★★★★★ — the biggest missing *idle*
     feature; a returning player currently gets nothing.
-13. **#8 Pokémon management / IV checker** — M · ★★★★½ — IVs are generated
+15. **#8 Pokémon management / IV checker** — M · ★★★★½ — IVs are generated
     but invisible; box search, nicknames and lock are all high-use.
-14. **#20 Honey/Repel DexNav hunting** — M · ★★★★½ — turns the existing
+16. **#20 Honey/Repel DexNav hunting** — M · ★★★★½ — turns the existing
     shiny chain into a usable system.
-15. **#24 Move data pass** — M–L · ★★★★½ — ~290 moves currently do nothing;
+17. **#24 Move data pass** — M–L · ★★★★½ — ~290 moves currently do nothing;
     do it in slices (healing/screens/setup first).
-16. **#25 Battle engine pass** — M–L · ★★★★½ — pairs with #24; AI + healing +
+18. **#25 Battle engine pass** — M–L · ★★★★½ — pairs with #24; AI + healing +
     multi-hit first.
-17. **#2a Abilities** (with **#2c Held items**) — L · ★★★★★ / ★★★★ — the
+19. **#2a Abilities** (with **#2c Held items**) — L · ★★★★★ / ★★★★ — the
     biggest remaining battle-depth feature; natures (#2b) are already in
     Tier 1.
-18. **#28 More region areas (DLC, caves, POIs)** — L · ★★★★½ — real content
+20. **#28 More region areas (DLC, caves, POIs)** — L · ★★★★½ — real content
     (Crown Tundra, Kitakami, landmark caves); data-heavy.
-19. **#18 Better settings** — M · ★★★★ — centralises QOL toggles and the
+21. **#18 Better settings** — M · ★★★★ — centralises QOL toggles and the
     export/import from #15.
 
 ### Tier 3 — Medium effort, medium gain
 
-20. **#3 Daycare inheritance** — M · ★★★
-21. **#6 Friendship / happiness** — M · ★★★
-22. **#9 Move tutor / TMs** — M · ★★★
-23. **#11 NPC gifts & static encounters** — M · ★★★
-24. **#17 Pokéball variants** — M · ★★★
-25. **#27 Gender-specific sprites** — M · ★★★ (assets are half-there)
-26. **#29 Minigames** — M–L · ★★★ (small per minigame once one exists)
-27. **#4 In-battle Mega evolution** — M–L · ★★★
-28. **#32 Battle Tower tuning** — M · ★★★½ — auto-climb, sane Victory Token
+22. **#3 Daycare inheritance** — M · ★★★
+23. **#6 Friendship / happiness** — M · ★★★
+24. **#9 Move tutor / TMs** — M · ★★★
+25. **#11 NPC gifts & static encounters** — M · ★★★
+26. **#17 Pokéball variants** — M · ★★★
+27. **#27 Gender-specific sprites** — M · ★★★ (assets are half-there)
+28. **#29 Minigames** — M–L · ★★★ (small per minigame once one exists)
+29. **#4 In-battle Mega evolution** — M–L · ★★★
+30. **#32 Battle Tower tuning** — M · ★★★½ — auto-climb, sane Victory Token
     payout, and harder/faster teams (6 fully evolved, late legendaries).
 
 ### Tier 4 — Big and low-return, defer
 
-29. **#10 Weather & terrain** — M · ★★½ (nice depth, no urgency)
-30. **#19 Online sync** — L · ★★★ — the project's first backend; needs a
+31. **#10 Weather & terrain** — M · ★★½ (nice depth, no urgency)
+32. **#19 Online sync** — L · ★★★ — the project's first backend; needs a
     design doc and real ops for modest player value today.
 
 ---
@@ -790,6 +794,70 @@ Relevant code: `buildTowerTeam` (`src/game/progression.js`), `BOSS_BATTLE_END`
 (`src/components/gym-panel.js`), `TOWER_BASE_LEVEL`.
 
 Effort: **medium**.
+
+## 33. Rare Candy and EXP Candy as rare drops
+
+Levelling only comes from battle EXP (`awardExperience`), and the only item
+drops are balls plus the very rare wild **Master Ball**
+(`wildMasterBallChance` in `src/data/config.js`, granted in the wild win path of
+`src/game/reducer.js`). Add the Gen 6+ candies as rare finds so a lucky drop can
+push a Pokemon forward:
+
+- **Rare Candy** — +1 level instantly, capped at Lv.100.
+- **EXP Candy S / M / L / XL** — a flat chunk of EXP (Sword/Shield style),
+  tiered so bigger candies are rarer.
+
+- [ ] Add the candies to `src/data/items.js` with a description and
+      `buyPrice: null` (drops only, or a token-shop entry later).
+- [ ] Add a `USE_CANDY` action that applies the level/EXP to a chosen party
+      Pokemon, using `calculateRequiredExperience` and respecting the Lv.100
+      cap and growth rate; needs a target picker (bag or stats panel).
+- [ ] Hook a rare roll into the wild win path next to the Master Ball find
+      (and optionally raids / the Tower as guaranteed or higher-tier drops):
+      EXP Candy reasonably rare, Rare Candy much rarer.
+- [ ] Decide tiers/amounts and whether any candy is region- or
+      generation-gated.
+- [ ] Add a **Candies** (or Consumables) category to `bagCategories` so they
+      don't mix with balls/Key items.
+
+Relevant code: `src/data/items.js`, the wild win path / inventory
+(`src/game/reducer.js`), `awardExperience` (`src/game/progression.js`),
+`calculateRequiredExperience` (`src/game/pokemon.js`), `wildMasterBallChance`
+(`src/data/config.js`).
+
+Effort: **small–medium**.
+
+## 34. Valuable items you can sell (extend the shops)
+
+Money only comes from winning battles and nothing can be sold: `BUY_ITEM`
+(`src/game/reducer.js`) only handles `pokeBalls` and `activeItems`, no item has a
+`sellPrice`, and the Bag has just `pokeballs` + `items` categories
+(`bagCategories`). Add the classic treasures — Nugget, Big Nugget, Stardust,
+Star Piece, Pearl, Big Pearl, Comet Shard, … — as rare drops that sell at marts.
+
+- [ ] Add the valuables to `src/data/items.js` with a `sellPrice` (and
+      `buyPrice: null`); they are found items, not stock.
+- [ ] Add a `SELL_ITEM` action that removes from `inventory` and credits
+      `sellPrice * quantity`, guarded by ownership.
+- [ ] Extend the shops: a **Sell** tab/section in `ShopPanel`, or a sell action
+      from the Bag. `ShopPanel` currently renders `shopDef.items` as buy rows
+      and assumes every entry is a ball or active item.
+- [ ] Add a **Valuables** bag category so treasures are listed separately.
+- [ ] Roll the drops on the wild/trainer/raid win paths (like the Master Ball
+      find), scaling the tier with the battle so late-game battles pay better.
+- [ ] Balance selling against battle payouts (a bonus money source, not the
+      dominant one), and decide whether the Reward Shop also takes treasures.
+- [ ] Consider one item registry (`{ category, buyPrice, sellPrice, effect }`)
+      instead of the separate `pokeBalls` / `activeItems` / `evolutionItems`
+      shapes, since `BUY_ITEM` hardcodes the first two.
+
+Relevant code: `src/data/items.js` (`bagCategories`, `martShopItems`,
+`tokenShopItems`), `BUY_ITEM` / inventory (`src/game/reducer.js`), `ShopPanel`
+(`src/components/shop-panel.js`), the generated `mart` blocks in
+`public/data/map-data/*.json`, and the wild win path in `src/game/reducer.js`.
+
+Effort: **small–medium** (items + sell action + a shop Sell section); larger if
+the item registry is unified.
 
 ---
 

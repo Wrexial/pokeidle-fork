@@ -4478,6 +4478,38 @@ img {
     line-height: 1.4
 }
 
+.records-section {
+    margin-bottom: 10px
+}
+
+.records-section-title {
+    font-size: 10px;
+    font-weight: 700;
+    color: #8a6820;
+    letter-spacing: .5px;
+    border-bottom: 1px solid #0000001a;
+    padding-bottom: 3px;
+    margin-bottom: 3px
+}
+
+.records-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 9.5px;
+    padding: 2px 0
+}
+
+.records-label {
+    color: #5a4838
+}
+
+.records-value {
+    font-weight: 700;
+    color: #3a2818;
+    text-align: right
+}
+
 .battle-info-content p {
     margin: 0 0 8px
 }

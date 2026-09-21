@@ -60,6 +60,12 @@ export const CHANGELOG = [
           ],
         },
         {
+          heading: 'Records',
+          items: [
+            'A Records panel in the Box summarises your journey: battles won, Pokedex and shiny progress, badges, Victory Tokens, and per-region completion and prestige levels',
+          ],
+        },
+        {
           heading: 'Fixes',
           items: [
             'Badge requirements count only their own region\u2019s badges, so prestiging a region properly re-locks its gates',

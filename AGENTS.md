@@ -20,6 +20,7 @@ npm run dev        # Vite dev server (http://localhost:5173)
 npm run build      # production build -> dist/  (gitignored)
 npm run preview    # serve the production build
 npm run typecheck  # tsc --noEmit over src/ (jsconfig.json, checkJs)
+npm run validate   # integrity-check the generated public/data JSON
 npm run kill-vite  # kill orphaned dev servers (see note below)
 ```
 
@@ -34,8 +35,11 @@ trust HMR — stop the server (Ctrl-C) and run `npm run kill-vite` (dry run with
 
 There is **no test suite and no linter**. `npm run typecheck` runs the TypeScript
 compiler in JS-checking mode (`jsconfig.json` + `@types/react`) and should stay
-clean; fix it or add JSDoc rather than ignoring errors. Verify behaviour by
-running the dev server and exercising the game in the browser.
+clean; fix it or add JSDoc rather than ignoring errors. `npm run validate`
+integrity-checks the generated JSON (every species has moves and is obtainable,
+teams/encounters reference real species, the map graph is sound, etc.) and
+should stay clean after any data regeneration. Verify behaviour by running the
+dev server and exercising the game in the browser.
 
 **Save recovery:** an incompatible/stuck save self-heals without DevTools.
 The save key is **versioned** (`pokemon-idle-save-v<n>`, see `SAVE_VERSION` in

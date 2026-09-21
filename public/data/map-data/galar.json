@@ -52,7 +52,8 @@
   "unlock": {
    "requires": [
     "galar-postwick"
-   ]
+   ],
+   "caughtCount": 2
   },
   "unlockOrder": 800001,
   "position": {
@@ -74,7 +75,7 @@
    "battlesAtLocation": [
     {
      "locationId": "galar-route-1",
-     "count": 15
+     "count": 13
     }
    ]
   },
@@ -119,9 +120,10 @@
    "battlesAtLocation": [
     {
      "locationId": "galar-wedgehurst",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "partyLevel": 11
   },
   "unlockOrder": 800002,
   "position": {
@@ -144,7 +146,7 @@
    "battlesAtLocation": [
     {
      "locationId": "galar-route-2",
-     "count": 15
+     "count": 16
     }
    ]
   },
@@ -189,9 +191,10 @@
    "battlesAtLocation": [
     {
      "locationId": "galar-motostoke",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "caughtCount": 8
   },
   "unlockOrder": 800003,
   "position": {
@@ -214,7 +217,7 @@
    "battlesAtLocation": [
     {
      "locationId": "galar-route-3",
-     "count": 15
+     "count": 19
     }
    ]
   },
@@ -238,9 +241,10 @@
    "battlesAtLocation": [
     {
      "locationId": "galar-route-4",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "partyLevel": 26
   },
   "unlockOrder": 800004.5,
   "position": {
@@ -283,7 +287,7 @@
    "battlesAtLocation": [
     {
      "locationId": "galar-turffield",
-     "count": 15
+     "count": 11
     }
    ],
    "gymsRequired": [
@@ -309,9 +313,10 @@
    "battlesAtLocation": [
     {
      "locationId": "galar-route-5",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "caughtCount": 14
   },
   "unlockOrder": 800005.5,
   "position": {
@@ -355,7 +360,7 @@
    "battlesAtLocation": [
     {
      "locationId": "galar-motostoke",
-     "count": 15
+     "count": 14
     }
    ],
    "gymsRequired": [
@@ -383,9 +388,10 @@
    "battlesAtLocation": [
     {
      "locationId": "galar-route-6",
-     "count": 15
+     "count": 5
     }
    ],
+   "partyLevel": 41,
    "gymsRequired": [
     "galar-gym-3"
    ]
@@ -430,8 +436,11 @@
    "battlesAtLocation": [
     {
      "locationId": "galar-route-6",
-     "count": 15
+     "count": 17
     }
+   ],
+   "gymsRequired": [
+    "galar-gym-3"
    ]
   },
   "unlockOrder": 800006.5,
@@ -476,9 +485,10 @@
    "battlesAtLocation": [
     {
      "locationId": "galar-hammerlocke",
-     "count": 15
+     "count": 5
     }
    ],
+   "caughtCount": 20,
    "gymsRequired": [
     "galar-gym-4"
    ]
@@ -504,7 +514,7 @@
    "battlesAtLocation": [
     {
      "locationId": "galar-route-7",
-     "count": 15
+     "count": 20
     }
    ]
   },
@@ -528,9 +538,10 @@
    "battlesAtLocation": [
     {
      "locationId": "galar-route-8",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "partyLevel": 56
   },
   "unlockOrder": 800008.5,
   "position": {
@@ -574,7 +585,7 @@
    "battlesAtLocation": [
     {
      "locationId": "galar-route-7",
-     "count": 15
+     "count": 12
     }
    ],
    "gymsRequired": [
@@ -600,9 +611,10 @@
    "battlesAtLocation": [
     {
      "locationId": "galar-route-9",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "caughtCount": 26
   },
   "unlockOrder": 800009.5,
   "position": {
@@ -673,9 +685,10 @@
    "battlesAtLocation": [
     {
      "locationId": "galar-route-10",
-     "count": 15
+     "count": 5
     }
    ],
+   "partyLevel": 71,
    "gymsRequired": [
     "galar-gym-8"
    ]
@@ -719,8 +732,11 @@
    "battlesAtLocation": [
     {
      "locationId": "galar-stow-on-side",
-     "count": 15
+     "count": 18
     }
+   ],
+   "gymsRequired": [
+    "galar-gym-8"
    ]
   },
   "unlockOrder": 810007,

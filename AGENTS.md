@@ -242,10 +242,11 @@ Data conventions:
   starters live in `regionalStarters` in `src/data/config.js`.
 - `map-data/<region>.json` locations carry a `region` id; wild routes also
   reference an `encounter-data/<region>.json` bucket via `routeKey`. Unlock rules support
-  `battlesAtLocation`, `badgesRequired`, `gymsRequired` (specific gym ids),
-  `championDefeated` (a region id, or
-  `true` meaning Kanto), and `requires` (locations that must already be
-  unlocked) — all resolved to a fixpoint in `computeUnlockedLocations`. Region
+  `battlesAtLocation`, `caughtCount` (minimum Pokedex size), `partyLevel`
+  (minimum level any party Pokemon must reach), `badgesRequired`, `gymsRequired`
+  (specific gym ids), `championDefeated` (a region id, or `true` meaning Kanto),
+  and `requires` (locations that must already be unlocked) — all resolved to a
+  fixpoint in `computeUnlockedLocations`. Region
   **entry towns** use `{ entry: true, previous: '<regionId>' }`: they open if the
   region is the player's `startRegion`, otherwise only once the `previous`
   region's Champion is beaten (Kanto's previous is Paldea, so the chain cycles
@@ -383,7 +384,13 @@ One-off scripts used to build the data JSON (not run during dev/build):
   then gates the road past Lavaridge and the player backtracks to Petalburg for
   it. A gym whose town sits too late gets no gate and is only required at the
   league; the league always requires every badge (`gymsRequired`; Kanto uses
-  its existing `badgesRequired`). Generated regions reveal any gym whose town is
+  its existing `badgesRequired`). Every location whose unlock parent sits before
+  a badge gate inherits that gate too, unless it is needed to reach the gym
+  town, so a branch hanging off an early town can't slip past the badges (Johto's
+  Route 36 off Violet City now waits for Whitney; Mt. Silver waits for Clair).
+  The generated gates also rotate their flavour instead of repeating "15 battles
+  at the parent": battle counts vary, and some routes ask for a Pokedex count
+  (`caughtCount`) or a party level (`partyLevel`). Generated regions reveal any gym whose town is
   unlocked; Kanto keeps its badge-order reveal. Raid Islands offer the region's generation of Pokémon that turn
   up on **no** region's wild routes and can't be reached by evolving one that
   does; that scan runs after every route is generated, so the pools are

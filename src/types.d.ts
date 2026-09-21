@@ -205,6 +205,10 @@ type MapLocation = {
     gymsRequired?: string[]
     championDefeated?: boolean | string
     requires?: string[]
+    /** minimum number of species the player must have caught */
+    caughtCount?: number
+    /** minimum level any party Pokemon must reach */
+    partyLevel?: number
     /** region-entry gate: unlocked if it's the player's start region, or if
      * the `previous` region's champion has been beaten */
     entry?: boolean

@@ -804,6 +804,26 @@ for (const region of REGIONS) {
       break
     }
   }
+  // A location that unlocks from a neighbour sitting before a badge gate can
+  // slip past that badge (Johto's Route 36 opens from Violet City, skipping the
+  // badges earned down the southern path). Make those locations require the gate
+  // they bypass too, unless they are needed to reach that gate's own gym town.
+  const gymTownById = Object.fromEntries(gymPlacements.map((gym) => [gym.id, gym.townNode]))
+  const gatePositionByGym = {}
+  for (const [node, gymId] of Object.entries(gateGymByNode))
+    if (gatePositionByGym[gymId] === undefined) gatePositionByGym[gymId] = nodePosition.get(node)
+  const propagatedGateByNode = {}
+  let activeGate = null
+  for (const node of order) {
+    if (gateGymByNode[node]) activeGate = gateGymByNode[node]
+    if (!activeGate || gateGymByNode[node]) continue
+    const parentNode = unlockParent[node] ?? parent[node]
+    if (!parentNode || parentNode === node) continue
+    const parentPosition = nodePosition.get(parentNode)
+    if (parentPosition === undefined || parentPosition >= gatePositionByGym[activeGate]) continue
+    if (isAncestorOf(node, gymTownById[activeGate])) continue
+    propagatedGateByNode[node] = activeGate
+  }
 
   const regionObj = {
     id: regionId,
@@ -879,6 +899,20 @@ for (const region of REGIONS) {
 
   // The raid pool is filled in after the region loop (see the raid scan).
 
+  // A route's wild level (or the nearest route's), so flavour gates can ask the
+  // player to train up to roughly where the game already expects them.
+  const regionSpan = WILD_LEVEL_MAX - LEVEL_MIN
+  const zoneLevelFor = (node) => {
+    const ownLevel = routeEncounter[node]?.encounters?.[0]?.minLevel
+    if (ownLevel != null) return ownLevel
+    for (const neighbour of adjacency[node]) {
+      const neighbourLevel = routeEncounter[neighbour]?.encounters?.[0]?.minLevel
+      if (neighbourLevel != null) return neighbourLevel
+    }
+    const progress = (nodePosition.get(node) ?? 0) / Math.max(1, order.length - 1)
+    return clampLevel(Math.round(LEVEL_MIN + progress * regionSpan))
+  }
+
   // map/town/route locations
   const prevRegionId = gen === 2 ? 'kanto' : REGIONS[gen - 3].id
   for (const node of order) {
@@ -890,14 +924,40 @@ for (const region of REGIONS) {
       unlock = { entry: true, previous: prevRegionId }
     } else if (!parent) {
       unlock = {}
+    } else if (parent === entryNode) {
+      // The first step out of the entry: a light catch goal gets the player
+      // hunting rather than grinding the starting route.
+      unlock = { requires: [locId(regionId, entryNode)], caughtCount: 2 }
     } else {
-      unlock =
-        parent === entryNode
-          ? { requires: [locId(regionId, entryNode)] }
-          : { battlesAtLocation: [{ locationId: locId(regionId, parent), count: 15 }] }
+      const parentId = locId(regionId, parent),
+        position = nodePosition.get(node) ?? 0,
+        progress = position / Math.max(1, order.length - 1)
+      // Rotate the gate flavour so progression isn't one repeated "win 15
+      // battles" check: most gates stay battle-based with a varied count, while
+      // some ask for Pokedex progress or a bit of training.
+      switch (position % 4) {
+        case 1:
+          unlock = {
+            battlesAtLocation: [{ locationId: parentId, count: 5 }],
+            caughtCount: Math.max(3, Math.round(progress * 30)),
+          }
+          break
+        case 3:
+          unlock = {
+            battlesAtLocation: [{ locationId: parentId, count: 5 }],
+            partyLevel: Math.max(LEVEL_MIN, zoneLevelFor(node) - 2),
+          }
+          break
+        default:
+          unlock = {
+            battlesAtLocation: [{ locationId: parentId, count: 10 + ((position * 7) % 11) }],
+          }
+      }
     }
-    // The badge that gates the road onward, placed where it is needed.
-    if (gateGymByNode[node]) unlock.gymsRequired = [gateGymByNode[node]]
+    // The badge that gates the road onward, placed where it is needed (or the
+    // badge this location would otherwise slip past).
+    const gate = gateGymByNode[node] ?? propagatedGateByNode[node]
+    if (gate) unlock.gymsRequired = [gate]
     if (isRoute) {
       encounterData[id] = routeEncounter[node]
       mapData[id] = {

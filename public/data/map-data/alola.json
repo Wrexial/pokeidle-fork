@@ -56,6 +56,7 @@
    "requires": [
     "alola-iki-town"
    ],
+   "caughtCount": 2,
    "gymsRequired": [
     "alola-gym-1"
    ]
@@ -80,6 +81,10 @@
   "unlock": {
    "requires": [
     "alola-iki-town"
+   ],
+   "caughtCount": 2,
+   "gymsRequired": [
+    "alola-gym-1"
    ]
   },
   "unlockOrder": 700001,
@@ -104,9 +109,10 @@
    "battlesAtLocation": [
     {
      "locationId": "alola-route-3",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "partyLevel": 11
   },
   "unlockOrder": 700002,
   "position": {
@@ -128,7 +134,7 @@
    "battlesAtLocation": [
     {
      "locationId": "alola-route-2",
-     "count": 15
+     "count": 16
     }
    ]
   },
@@ -172,9 +178,10 @@
    "battlesAtLocation": [
     {
      "locationId": "alola-route-2",
-     "count": 15
+     "count": 5
     }
    ],
+   "caughtCount": 6,
    "gymsRequired": [
     "alola-gym-2"
    ]
@@ -223,7 +230,7 @@
    "battlesAtLocation": [
     {
      "locationId": "alola-route-1",
-     "count": 15
+     "count": 19
     }
    ]
   },
@@ -248,9 +255,10 @@
    "battlesAtLocation": [
     {
      "locationId": "alola-route-3",
-     "count": 15
+     "count": 5
     }
    ],
+   "partyLevel": 19,
    "gymsRequired": [
     "alola-gym-3"
    ]
@@ -298,7 +306,7 @@
    "battlesAtLocation": [
     {
      "locationId": "alola-route-3",
-     "count": 15
+     "count": 11
     }
    ],
    "gymsRequired": [
@@ -327,9 +335,10 @@
    "battlesAtLocation": [
     {
      "locationId": "alola-route-4",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "caughtCount": 11
   },
   "unlockOrder": 700004.5,
   "position": {
@@ -374,6 +383,7 @@
    "requires": [
     "alola-iki-town"
    ],
+   "caughtCount": 2,
    "gymsRequired": [
     "alola-gym-5"
    ]
@@ -402,8 +412,12 @@
    "battlesAtLocation": [
     {
      "locationId": "alola-route-3",
-     "count": 15
+     "count": 5
     }
+   ],
+   "partyLevel": 27,
+   "gymsRequired": [
+    "alola-gym-5"
    ]
   },
   "unlockOrder": 700006,
@@ -429,7 +443,7 @@
    "battlesAtLocation": [
     {
      "locationId": "alola-route-5",
-     "count": 15
+     "count": 17
     }
    ]
   },
@@ -454,9 +468,10 @@
    "battlesAtLocation": [
     {
      "locationId": "alola-route-5",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "caughtCount": 16
   },
   "unlockOrder": 700008,
   "position": {
@@ -483,8 +498,11 @@
    "battlesAtLocation": [
     {
      "locationId": "alola-heahea-city",
-     "count": 15
+     "count": 20
     }
+   ],
+   "gymsRequired": [
+    "alola-gym-5"
    ]
   },
   "unlockOrder": 700009,
@@ -507,9 +525,10 @@
    "battlesAtLocation": [
     {
      "locationId": "alola-route-9",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "partyLevel": 39
   },
   "unlockOrder": 700009.5,
   "position": {
@@ -552,7 +571,7 @@
    "battlesAtLocation": [
     {
      "locationId": "alola-heahea-city",
-     "count": 15
+     "count": 12
     }
    ],
    "gymsRequired": [
@@ -579,9 +598,10 @@
    "battlesAtLocation": [
     {
      "locationId": "alola-route-10",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "caughtCount": 21
   },
   "unlockOrder": 700010.5,
   "position": {
@@ -653,9 +673,10 @@
    "battlesAtLocation": [
     {
      "locationId": "alola-route-11",
-     "count": 15
+     "count": 5
     }
    ],
+   "partyLevel": 51,
    "gymsRequired": [
     "alola-gym-8"
    ]
@@ -683,8 +704,11 @@
    "battlesAtLocation": [
     {
      "locationId": "alola-route-9",
-     "count": 15
+     "count": 18
     }
+   ],
+   "gymsRequired": [
+    "alola-gym-8"
    ]
   },
   "unlockOrder": 700013,
@@ -708,8 +732,12 @@
    "battlesAtLocation": [
     {
      "locationId": "alola-route-9",
-     "count": 15
+     "count": 5
     }
+   ],
+   "caughtCount": 26,
+   "gymsRequired": [
+    "alola-gym-8"
    ]
   },
   "unlockOrder": 700014,
@@ -734,8 +762,11 @@
    "battlesAtLocation": [
     {
      "locationId": "alola-konikoni-city",
-     "count": 15
+     "count": 10
     }
+   ],
+   "gymsRequired": [
+    "alola-gym-8"
    ]
   },
   "unlockOrder": 700015,
@@ -760,8 +791,12 @@
    "battlesAtLocation": [
     {
      "locationId": "alola-route-4",
-     "count": 15
+     "count": 5
     }
+   ],
+   "partyLevel": 67,
+   "gymsRequired": [
+    "alola-gym-8"
    ]
   },
   "unlockOrder": 700016,
@@ -788,8 +823,11 @@
    "battlesAtLocation": [
     {
      "locationId": "alola-route-7",
-     "count": 15
+     "count": 13
     }
+   ],
+   "gymsRequired": [
+    "alola-gym-8"
    ]
   },
   "unlockOrder": 700017,

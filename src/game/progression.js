@@ -69,7 +69,9 @@ export function getItemInfo(itemId) {
  */
 export function computeUnlockedLocations(state) {
   const unlocked = new Set(state.unlockedLocations),
-    badgeCount = state.defeatedGyms.length
+    badgeCount = state.defeatedGyms.length,
+    caughtCount = state.pokedexCaught.length,
+    highestPartyLevel = state.party.reduce((max, member) => Math.max(max, member.level), 0)
   let changed = true
   while (changed) {
     changed = false
@@ -81,6 +83,8 @@ export function computeUnlockedLocations(state) {
           unlockRule.battlesAtLocation.some(
             (requiredBattles) => (state.battlesWonByLocation[requiredBattles.locationId] ?? 0) < requiredBattles.count
           )) ||
+        (unlockRule.caughtCount && caughtCount < unlockRule.caughtCount) ||
+        (unlockRule.partyLevel && highestPartyLevel < unlockRule.partyLevel) ||
         (unlockRule.badgesRequired && badgeCount < unlockRule.badgesRequired) ||
         (unlockRule.gymsRequired &&
           unlockRule.gymsRequired.some((gymId) => !state.defeatedGyms.includes(gymId))) ||

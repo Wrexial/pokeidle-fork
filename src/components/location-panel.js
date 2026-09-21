@@ -118,6 +118,22 @@ export function LocationPanel({ onOpenCatchSettings }) {
         met: badgeCount >= unlockRule.badgesRequired,
         locationId: nextGymLocationId(target.region ?? 'kanto'),
       })
+    if (unlockRule.caughtCount)
+      requirements.push({
+        label: 'Pokemon caught',
+        current: state.pokedexCaught.length,
+        required: unlockRule.caughtCount,
+        met: state.pokedexCaught.length >= unlockRule.caughtCount,
+      })
+    if (unlockRule.partyLevel) {
+      const highestLevel = state.party.reduce((max, member) => Math.max(max, member.level), 0)
+      requirements.push({
+        label: 'Team level',
+        current: highestLevel,
+        required: unlockRule.partyLevel,
+        met: highestLevel >= unlockRule.partyLevel,
+      })
+    }
     if (unlockRule.gymsRequired)
       for (const gymId of unlockRule.gymsRequired) {
         const gym = gymLeaderData.find((candidate) => candidate.id === gymId),

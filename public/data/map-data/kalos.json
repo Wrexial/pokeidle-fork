@@ -52,7 +52,8 @@
   "unlock": {
    "requires": [
     "kalos-vaniville-town"
-   ]
+   ],
+   "caughtCount": 2
   },
   "unlockOrder": 600001,
   "position": {
@@ -74,7 +75,7 @@
    "battlesAtLocation": [
     {
      "locationId": "kalos-route-1",
-     "count": 15
+     "count": 13
     }
    ]
   },
@@ -119,9 +120,10 @@
    "battlesAtLocation": [
     {
      "locationId": "kalos-aquacorde-town",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "partyLevel": 6
   },
   "unlockOrder": 600002,
   "position": {
@@ -144,7 +146,7 @@
    "battlesAtLocation": [
     {
      "locationId": "kalos-route-2",
-     "count": 15
+     "count": 16
     }
    ]
   },
@@ -169,9 +171,10 @@
    "battlesAtLocation": [
     {
      "locationId": "kalos-route-3",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "caughtCount": 4
   },
   "unlockOrder": 600003.5,
   "position": {
@@ -214,7 +217,7 @@
    "battlesAtLocation": [
     {
      "locationId": "kalos-santalune-city",
-     "count": 15
+     "count": 19
     }
    ],
    "gymsRequired": [
@@ -244,9 +247,10 @@
    "battlesAtLocation": [
     {
      "locationId": "kalos-route-4",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "partyLevel": 13
   },
   "unlockOrder": 600004.5,
   "position": {
@@ -289,7 +293,7 @@
    "battlesAtLocation": [
     {
      "locationId": "kalos-lumiose-city",
-     "count": 15
+     "count": 11
     }
    ]
   },
@@ -313,9 +317,10 @@
    "battlesAtLocation": [
     {
      "locationId": "kalos-route-5",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "caughtCount": 7
   },
   "unlockOrder": 600005.5,
   "position": {
@@ -357,7 +362,7 @@
    "battlesAtLocation": [
     {
      "locationId": "kalos-route-7",
-     "count": 15
+     "count": 14
     }
    ]
   },
@@ -384,9 +389,10 @@
    "battlesAtLocation": [
     {
      "locationId": "kalos-camphrier-town",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "partyLevel": 22
   },
   "unlockOrder": 600007,
   "position": {
@@ -409,7 +415,7 @@
    "battlesAtLocation": [
     {
      "locationId": "kalos-route-7",
-     "count": 15
+     "count": 17
     }
    ]
   },
@@ -455,9 +461,10 @@
    "battlesAtLocation": [
     {
      "locationId": "kalos-route-7",
-     "count": 15
+     "count": 5
     }
    ],
+   "caughtCount": 11,
    "gymsRequired": [
     "kalos-gym-2"
    ]
@@ -482,7 +489,7 @@
    "battlesAtLocation": [
     {
      "locationId": "kalos-route-8",
-     "count": 15
+     "count": 20
     }
    ]
   },
@@ -526,9 +533,10 @@
    "battlesAtLocation": [
     {
      "locationId": "kalos-ambrette-town",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "partyLevel": 29
   },
   "unlockOrder": 600009,
   "position": {
@@ -551,8 +559,11 @@
    "battlesAtLocation": [
     {
      "locationId": "kalos-cyllage-city",
-     "count": 15
+     "count": 12
     }
+   ],
+   "gymsRequired": [
+    "kalos-gym-2"
    ]
   },
   "unlockOrder": 600010,
@@ -575,9 +586,10 @@
    "battlesAtLocation": [
     {
      "locationId": "kalos-route-10",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "caughtCount": 14
   },
   "unlockOrder": 600010.5,
   "position": {
@@ -644,9 +656,10 @@
    "battlesAtLocation": [
     {
      "locationId": "kalos-route-11",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "partyLevel": 39
   },
   "unlockOrder": 600011.5,
   "position": {
@@ -689,7 +702,7 @@
    "battlesAtLocation": [
     {
      "locationId": "kalos-shalour-city",
-     "count": 15
+     "count": 18
     }
    ],
    "gymsRequired": [
@@ -716,9 +729,10 @@
    "battlesAtLocation": [
     {
      "locationId": "kalos-route-12",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "caughtCount": 17
   },
   "unlockOrder": 600012.5,
   "position": {
@@ -761,7 +775,7 @@
    "battlesAtLocation": [
     {
      "locationId": "kalos-lumiose-city",
-     "count": 15
+     "count": 10
     }
    ],
    "gymsRequired": [
@@ -789,9 +803,10 @@
    "battlesAtLocation": [
     {
      "locationId": "kalos-lumiose-city",
-     "count": 15
+     "count": 5
     }
    ],
+   "partyLevel": 45,
    "gymsRequired": [
     "kalos-gym-5"
    ]
@@ -816,7 +831,7 @@
    "battlesAtLocation": [
     {
      "locationId": "kalos-route-14",
-     "count": 15
+     "count": 13
     }
    ]
   },
@@ -862,9 +877,10 @@
    "battlesAtLocation": [
     {
      "locationId": "kalos-laverre-city",
-     "count": 15
+     "count": 5
     }
    ],
+   "caughtCount": 20,
    "gymsRequired": [
     "kalos-gym-6"
    ]
@@ -889,7 +905,7 @@
    "battlesAtLocation": [
     {
      "locationId": "kalos-route-15",
-     "count": 15
+     "count": 16
     }
    ]
   },
@@ -934,8 +950,12 @@
    "battlesAtLocation": [
     {
      "locationId": "kalos-lumiose-city",
-     "count": 15
+     "count": 5
     }
+   ],
+   "partyLevel": 52,
+   "gymsRequired": [
+    "kalos-gym-6"
    ]
   },
   "unlockOrder": 600016,
@@ -959,7 +979,7 @@
    "battlesAtLocation": [
     {
      "locationId": "kalos-dendemille-town",
-     "count": 15
+     "count": 19
     }
    ]
   },
@@ -983,9 +1003,10 @@
    "battlesAtLocation": [
     {
      "locationId": "kalos-route-17",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "caughtCount": 24
   },
   "unlockOrder": 600017.5,
   "position": {
@@ -1028,7 +1049,7 @@
    "battlesAtLocation": [
     {
      "locationId": "kalos-anistar-city",
-     "count": 15
+     "count": 11
     }
    ],
    "gymsRequired": [
@@ -1055,9 +1076,10 @@
    "battlesAtLocation": [
     {
      "locationId": "kalos-route-18",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "partyLevel": 58
   },
   "unlockOrder": 600018.5,
   "position": {
@@ -1100,7 +1122,7 @@
    "battlesAtLocation": [
     {
      "locationId": "kalos-couriway-town",
-     "count": 15
+     "count": 14
     }
    ]
   },
@@ -1126,9 +1148,10 @@
    "battlesAtLocation": [
     {
      "locationId": "kalos-route-19",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "caughtCount": 27
   },
   "unlockOrder": 600019.5,
   "position": {
@@ -1170,7 +1193,7 @@
    "battlesAtLocation": [
     {
      "locationId": "kalos-snowbelle-city",
-     "count": 15
+     "count": 17
     }
    ],
    "gymsRequired": [
@@ -1196,8 +1219,12 @@
    "battlesAtLocation": [
     {
      "locationId": "kalos-snowbelle-city",
-     "count": 15
+     "count": 5
     }
+   ],
+   "partyLevel": 67,
+   "gymsRequired": [
+    "kalos-gym-8"
    ]
   },
   "unlockOrder": 600020,
@@ -1241,8 +1268,11 @@
    "battlesAtLocation": [
     {
      "locationId": "kalos-snowbelle-city",
-     "count": 15
+     "count": 20
     }
+   ],
+   "gymsRequired": [
+    "kalos-gym-8"
    ]
   },
   "unlockOrder": 600021,
@@ -1268,8 +1298,12 @@
    "battlesAtLocation": [
     {
      "locationId": "kalos-santalune-city",
-     "count": 15
+     "count": 5
     }
+   ],
+   "caughtCount": 30,
+   "gymsRequired": [
+    "kalos-gym-8"
    ]
   },
   "unlockOrder": 600022,

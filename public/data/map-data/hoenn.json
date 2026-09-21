@@ -52,7 +52,8 @@
   "unlock": {
    "requires": [
     "hoenn-littleroot-town"
-   ]
+   ],
+   "caughtCount": 2
   },
   "unlockOrder": 300101,
   "position": {
@@ -75,7 +76,7 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-route-101",
-     "count": 15
+     "count": 13
     }
    ]
   },
@@ -120,9 +121,10 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-oldale-town",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "partyLevel": 5
   },
   "unlockOrder": 300102,
   "position": {
@@ -144,7 +146,7 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-route-102",
-     "count": 15
+     "count": 16
     }
    ]
   },
@@ -189,9 +191,10 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-oldale-town",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "caughtCount": 3
   },
   "unlockOrder": 300103,
   "position": {
@@ -215,7 +218,7 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-petalburg-city",
-     "count": 15
+     "count": 19
     }
    ]
   },
@@ -240,9 +243,10 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-route-104",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "partyLevel": 9
   },
   "unlockOrder": 300104.5,
   "position": {
@@ -285,7 +289,7 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-route-104",
-     "count": 15
+     "count": 11
     }
    ],
    "gymsRequired": [
@@ -313,9 +317,10 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-route-105",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "caughtCount": 6
   },
   "unlockOrder": 300106,
   "position": {
@@ -337,7 +342,7 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-route-106",
-     "count": 15
+     "count": 14
     }
    ]
   },
@@ -382,9 +387,10 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-dewford-town",
-     "count": 15
+     "count": 5
     }
    ],
+   "partyLevel": 15,
    "gymsRequired": [
     "hoenn-gym-2"
    ]
@@ -410,7 +416,7 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-route-107",
-     "count": 15
+     "count": 17
     }
    ]
   },
@@ -435,9 +441,10 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-route-108",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "caughtCount": 8
   },
   "unlockOrder": 300109,
   "position": {
@@ -460,7 +467,7 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-route-109",
-     "count": 15
+     "count": 20
     }
    ]
   },
@@ -506,8 +513,12 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-route-103",
-     "count": 15
+     "count": 5
     }
+   ],
+   "partyLevel": 22,
+   "gymsRequired": [
+    "hoenn-gym-2"
    ]
   },
   "unlockOrder": 300110,
@@ -532,7 +543,7 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-route-110",
-     "count": 15
+     "count": 12
     }
    ]
   },
@@ -578,9 +589,10 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-mauville-city",
-     "count": 15
+     "count": 5
     }
    ],
+   "caughtCount": 10,
    "gymsRequired": [
     "hoenn-gym-3"
    ]
@@ -629,9 +641,10 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-route-112",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "partyLevel": 26
   },
   "unlockOrder": 300112.5,
   "position": {
@@ -674,7 +687,7 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-route-111",
-     "count": 15
+     "count": 18
     }
    ],
    "gymsRequired": [
@@ -701,9 +714,10 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-route-113",
-     "count": 15
+     "count": 5
     }
    ],
+   "caughtCount": 13,
    "gymsRequired": [
     "hoenn-gym-5"
    ]
@@ -749,7 +763,7 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-fallarbor-town",
-     "count": 15
+     "count": 10
     }
    ]
   },
@@ -774,8 +788,12 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-rustboro-city",
-     "count": 15
+     "count": 5
     }
+   ],
+   "partyLevel": 32,
+   "gymsRequired": [
+    "hoenn-gym-5"
    ]
   },
   "unlockOrder": 300115,
@@ -799,8 +817,11 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-rustboro-city",
-     "count": 15
+     "count": 13
     }
+   ],
+   "gymsRequired": [
+    "hoenn-gym-5"
    ]
   },
   "unlockOrder": 300116,
@@ -823,9 +844,10 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-route-116",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "caughtCount": 15
   },
   "unlockOrder": 300116.5,
   "position": {
@@ -868,8 +890,11 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-mauville-city",
-     "count": 15
+     "count": 16
     }
+   ],
+   "gymsRequired": [
+    "hoenn-gym-5"
    ]
   },
   "unlockOrder": 300117,
@@ -894,8 +919,12 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-mauville-city",
-     "count": 15
+     "count": 5
     }
+   ],
+   "partyLevel": 38,
+   "gymsRequired": [
+    "hoenn-gym-5"
    ]
   },
   "unlockOrder": 300118,
@@ -919,7 +948,7 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-route-118",
-     "count": 15
+     "count": 19
     }
    ]
   },
@@ -943,9 +972,10 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-route-119",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "caughtCount": 18
   },
   "unlockOrder": 300119.5,
   "position": {
@@ -988,7 +1018,7 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-fortree-city",
-     "count": 15
+     "count": 11
     }
    ],
    "gymsRequired": [
@@ -1017,9 +1047,10 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-route-120",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "partyLevel": 44
   },
   "unlockOrder": 300121,
   "position": {
@@ -1041,7 +1072,7 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-route-121",
-     "count": 15
+     "count": 14
     }
    ]
   },
@@ -1086,9 +1117,10 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-route-121",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "caughtCount": 20
   },
   "unlockOrder": 300122,
   "position": {
@@ -1111,8 +1143,11 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-route-118",
-     "count": 15
+     "count": 17
     }
+   ],
+   "gymsRequired": [
+    "hoenn-gym-6"
    ]
   },
   "unlockOrder": 300123,
@@ -1137,9 +1172,10 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-lilycove-city",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "partyLevel": 50
   },
   "unlockOrder": 300124,
   "position": {
@@ -1162,7 +1198,7 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-route-124",
-     "count": 15
+     "count": 20
     }
    ]
   },
@@ -1206,9 +1242,10 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-mossdeep-city",
-     "count": 15
+     "count": 5
     }
    ],
+   "caughtCount": 23,
    "gymsRequired": [
     "hoenn-gym-7"
    ]
@@ -1235,8 +1272,11 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-route-124",
-     "count": 15
+     "count": 12
     }
+   ],
+   "gymsRequired": [
+    "hoenn-gym-7"
    ]
   },
   "unlockOrder": 300126,
@@ -1258,9 +1298,10 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-route-126",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "partyLevel": 55
   },
   "unlockOrder": 300126.5,
   "position": {
@@ -1335,9 +1376,10 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-route-127",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "caughtCount": 25
   },
   "unlockOrder": 300128,
   "position": {
@@ -1358,7 +1400,7 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-route-128",
-     "count": 15
+     "count": 18
     }
    ]
   },
@@ -1403,9 +1445,10 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-route-128",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "partyLevel": 61
   },
   "unlockOrder": 300129,
   "position": {
@@ -1428,7 +1471,7 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-route-129",
-     "count": 15
+     "count": 10
     }
    ]
   },
@@ -1453,9 +1496,10 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-route-130",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "caughtCount": 28
   },
   "unlockOrder": 300131,
   "position": {
@@ -1477,7 +1521,7 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-route-131",
-     "count": 15
+     "count": 13
     }
    ]
   },
@@ -1522,9 +1566,10 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-pacifidlog-town",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "partyLevel": 67
   },
   "unlockOrder": 300132,
   "position": {
@@ -1547,7 +1592,7 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-route-132",
-     "count": 15
+     "count": 16
     }
    ]
   },
@@ -1572,8 +1617,12 @@
    "battlesAtLocation": [
     {
      "locationId": "hoenn-slateport-city",
-     "count": 15
+     "count": 5
     }
+   ],
+   "caughtCount": 30,
+   "gymsRequired": [
+    "hoenn-gym-8"
    ]
   },
   "unlockOrder": 300134,

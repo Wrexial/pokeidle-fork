@@ -54,7 +54,8 @@
   "unlock": {
    "requires": [
     "johto-new-bark-town"
-   ]
+   ],
+   "caughtCount": 2
   },
   "unlockOrder": 200029,
   "position": {
@@ -76,7 +77,7 @@
    "battlesAtLocation": [
     {
      "locationId": "johto-route-29",
-     "count": 15
+     "count": 13
     }
    ]
   },
@@ -121,9 +122,10 @@
    "battlesAtLocation": [
     {
      "locationId": "johto-cherrygrove-city",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "partyLevel": 6
   },
   "unlockOrder": 200030,
   "position": {
@@ -147,7 +149,7 @@
    "battlesAtLocation": [
     {
      "locationId": "johto-route-30",
-     "count": 15
+     "count": 16
     }
    ]
   },
@@ -172,9 +174,10 @@
    "battlesAtLocation": [
     {
      "locationId": "johto-route-31",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "caughtCount": 5
   },
   "unlockOrder": 200031.5,
   "position": {
@@ -217,7 +220,7 @@
    "battlesAtLocation": [
     {
      "locationId": "johto-violet-city",
-     "count": 15
+     "count": 19
     }
    ],
    "gymsRequired": [
@@ -245,9 +248,10 @@
    "battlesAtLocation": [
     {
      "locationId": "johto-route-32",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "partyLevel": 15
   },
   "unlockOrder": 200033,
   "position": {
@@ -269,7 +273,7 @@
    "battlesAtLocation": [
     {
      "locationId": "johto-route-33",
-     "count": 15
+     "count": 11
     }
    ]
   },
@@ -314,9 +318,10 @@
    "battlesAtLocation": [
     {
      "locationId": "johto-azalea-town",
-     "count": 15
+     "count": 5
     }
    ],
+   "caughtCount": 8,
    "gymsRequired": [
     "johto-gym-2"
    ]
@@ -341,7 +346,7 @@
    "battlesAtLocation": [
     {
      "locationId": "johto-route-34",
-     "count": 15
+     "count": 14
     }
    ]
   },
@@ -386,9 +391,10 @@
    "battlesAtLocation": [
     {
      "locationId": "johto-goldenrod-city",
-     "count": 15
+     "count": 5
     }
    ],
+   "partyLevel": 22,
    "gymsRequired": [
     "johto-gym-3"
    ]
@@ -415,8 +421,11 @@
    "battlesAtLocation": [
     {
      "locationId": "johto-violet-city",
-     "count": 15
+     "count": 17
     }
+   ],
+   "gymsRequired": [
+    "johto-gym-3"
    ]
   },
   "unlockOrder": 200036,
@@ -440,9 +449,10 @@
    "battlesAtLocation": [
     {
      "locationId": "johto-route-36",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "caughtCount": 12
   },
   "unlockOrder": 200037,
   "position": {
@@ -466,7 +476,7 @@
    "battlesAtLocation": [
     {
      "locationId": "johto-route-37",
-     "count": 15
+     "count": 20
     }
    ]
   },
@@ -510,9 +520,10 @@
    "battlesAtLocation": [
     {
      "locationId": "johto-ecruteak-city",
-     "count": 15
+     "count": 5
     }
    ],
+   "partyLevel": 31,
    "gymsRequired": [
     "johto-gym-4"
    ]
@@ -538,8 +549,11 @@
    "battlesAtLocation": [
     {
      "locationId": "johto-ecruteak-city",
-     "count": 15
+     "count": 12
     }
+   ],
+   "gymsRequired": [
+    "johto-gym-4"
    ]
   },
   "unlockOrder": 200038,
@@ -563,9 +577,10 @@
    "battlesAtLocation": [
     {
      "locationId": "johto-route-38",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "caughtCount": 16
   },
   "unlockOrder": 200039,
   "position": {
@@ -632,9 +647,10 @@
    "battlesAtLocation": [
     {
      "locationId": "johto-olivine-city",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "partyLevel": 40
   },
   "unlockOrder": 200040,
   "position": {
@@ -658,7 +674,7 @@
    "battlesAtLocation": [
     {
      "locationId": "johto-sea-route-40",
-     "count": 15
+     "count": 18
     }
    ]
   },
@@ -682,9 +698,10 @@
    "battlesAtLocation": [
     {
      "locationId": "johto-sea-route-41",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "caughtCount": 20
   },
   "unlockOrder": 200041.5,
   "position": {
@@ -726,7 +743,7 @@
    "battlesAtLocation": [
     {
      "locationId": "johto-sea-route-41",
-     "count": 15
+     "count": 10
     }
    ],
    "gymsRequired": [
@@ -754,9 +771,10 @@
    "battlesAtLocation": [
     {
      "locationId": "johto-ecruteak-city",
-     "count": 15
+     "count": 5
     }
    ],
+   "partyLevel": 49,
    "gymsRequired": [
     "johto-gym-6"
    ]
@@ -782,7 +800,7 @@
    "battlesAtLocation": [
     {
      "locationId": "johto-route-42",
-     "count": 15
+     "count": 13
     }
    ]
   },
@@ -826,9 +844,10 @@
    "battlesAtLocation": [
     {
      "locationId": "johto-mahogany-town",
-     "count": 15
+     "count": 5
     }
    ],
+   "caughtCount": 23,
    "gymsRequired": [
     "johto-gym-7"
    ]
@@ -854,8 +873,11 @@
    "battlesAtLocation": [
     {
      "locationId": "johto-mahogany-town",
-     "count": 15
+     "count": 16
     }
+   ],
+   "gymsRequired": [
+    "johto-gym-7"
    ]
   },
   "unlockOrder": 200044,
@@ -878,9 +900,10 @@
    "battlesAtLocation": [
     {
      "locationId": "johto-route-44",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "partyLevel": 59
   },
   "unlockOrder": 200044.5,
   "position": {
@@ -923,7 +946,7 @@
    "battlesAtLocation": [
     {
      "locationId": "johto-blackthorn-city",
-     "count": 15
+     "count": 19
     }
    ],
    "gymsRequired": [
@@ -952,8 +975,12 @@
    "battlesAtLocation": [
     {
      "locationId": "johto-route-29",
-     "count": 15
+     "count": 5
     }
+   ],
+   "caughtCount": 27,
+   "gymsRequired": [
+    "johto-gym-8"
    ]
   },
   "unlockOrder": 200046,
@@ -977,8 +1004,11 @@
    "battlesAtLocation": [
     {
      "locationId": "johto-cianwood-city",
-     "count": 15
+     "count": 11
     }
+   ],
+   "gymsRequired": [
+    "johto-gym-8"
    ]
   },
   "unlockOrder": 200047,
@@ -1001,9 +1031,10 @@
    "battlesAtLocation": [
     {
      "locationId": "johto-route-47",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "partyLevel": 68
   },
   "unlockOrder": 200048,
   "position": {
@@ -1026,6 +1057,10 @@
   "unlock": {
    "requires": [
     "johto-new-bark-town"
+   ],
+   "caughtCount": 2,
+   "gymsRequired": [
+    "johto-gym-8"
    ]
   },
   "unlockOrder": 200090,

@@ -53,7 +53,8 @@
   "unlock": {
    "requires": [
     "unova-nuvema-town"
-   ]
+   ],
+   "caughtCount": 2
   },
   "unlockOrder": 500001,
   "position": {
@@ -77,7 +78,7 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-route-1",
-     "count": 15
+     "count": 13
     }
    ]
   },
@@ -122,9 +123,10 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-accumula-town",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "partyLevel": 59
   },
   "unlockOrder": 500002,
   "position": {
@@ -167,7 +169,7 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-accumula-town",
-     "count": 15
+     "count": 16
     }
    ]
   },
@@ -191,9 +193,10 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-accumula-town",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "caughtCount": 4
   },
   "unlockOrder": 500002,
   "position": {
@@ -236,7 +239,7 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-aspertia-city",
-     "count": 15
+     "count": 19
     }
    ]
   },
@@ -281,9 +284,10 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-route-2",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "partyLevel": 9
   },
   "unlockOrder": 500002.5,
   "position": {
@@ -326,7 +330,7 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-striaton-city",
-     "count": 15
+     "count": 11
     }
    ],
    "gymsRequired": [
@@ -353,9 +357,10 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-route-3",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "caughtCount": 6
   },
   "unlockOrder": 500003.5,
   "position": {
@@ -397,7 +402,7 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-nacrene-city",
-     "count": 15
+     "count": 14
     }
    ],
    "gymsRequired": [
@@ -445,9 +450,10 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-castelia-city",
-     "count": 15
+     "count": 5
     }
    ],
+   "partyLevel": 12,
    "gymsRequired": [
     "unova-gym-3"
    ]
@@ -473,7 +479,7 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-route-4",
-     "count": 15
+     "count": 17
     }
    ]
   },
@@ -518,9 +524,10 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-nimbasa-city",
-     "count": 15
+     "count": 5
     }
    ],
+   "caughtCount": 9,
    "gymsRequired": [
     "unova-gym-4"
    ]
@@ -546,7 +553,7 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-route-5",
-     "count": 15
+     "count": 20
     }
    ]
   },
@@ -589,9 +596,10 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-driftveil-city",
-     "count": 15
+     "count": 5
     }
    ],
+   "partyLevel": 27,
    "gymsRequired": [
     "unova-gym-5"
    ]
@@ -637,8 +645,11 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-driftveil-city",
-     "count": 15
+     "count": 12
     }
+   ],
+   "gymsRequired": [
+    "unova-gym-5"
    ]
   },
   "unlockOrder": 500006,
@@ -661,9 +672,10 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-route-6",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "caughtCount": 12
   },
   "unlockOrder": 500006.5,
   "position": {
@@ -733,9 +745,10 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-route-7",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "partyLevel": 24
   },
   "unlockOrder": 500007.5,
   "position": {
@@ -778,7 +791,7 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-icirrus-city",
-     "count": 15
+     "count": 18
     }
    ],
    "gymsRequired": [
@@ -806,9 +819,10 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-route-8",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "caughtCount": 15
   },
   "unlockOrder": 500009,
   "position": {
@@ -832,7 +846,7 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-route-9",
-     "count": 15
+     "count": 10
     }
    ]
   },
@@ -876,9 +890,10 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-opelucid-city",
-     "count": 15
+     "count": 5
     }
    ],
+   "partyLevel": 30,
    "gymsRequired": [
     "unova-gym-8"
    ]
@@ -904,8 +919,11 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-opelucid-city",
-     "count": 15
+     "count": 13
     }
+   ],
+   "gymsRequired": [
+    "unova-gym-8"
    ]
   },
   "unlockOrder": 500011,
@@ -929,9 +947,10 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-route-11",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "caughtCount": 18
   },
   "unlockOrder": 500012,
   "position": {
@@ -953,7 +972,7 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-route-12",
-     "count": 15
+     "count": 16
     }
    ]
   },
@@ -999,9 +1018,10 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-lacunosa-town",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "partyLevel": 38
   },
   "unlockOrder": 500013,
   "position": {
@@ -1026,7 +1046,7 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-route-13",
-     "count": 15
+     "count": 19
     }
    ]
   },
@@ -1071,9 +1091,10 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-undella-town",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "caughtCount": 21
   },
   "unlockOrder": 500014,
   "position": {
@@ -1096,7 +1117,7 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-undella-town",
-     "count": 15
+     "count": 11
     }
    ]
   },
@@ -1139,9 +1160,10 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-undella-town",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "partyLevel": 53
   },
   "unlockOrder": 500014,
   "position": {
@@ -1183,7 +1205,7 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-route-14",
-     "count": 15
+     "count": 14
     }
    ]
   },
@@ -1228,9 +1250,10 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-black-city",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "caughtCount": 24
   },
   "unlockOrder": 500015,
   "position": {
@@ -1253,8 +1276,11 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-nimbasa-city",
-     "count": 15
+     "count": 17
     }
+   ],
+   "gymsRequired": [
+    "unova-gym-8"
    ]
   },
   "unlockOrder": 500016,
@@ -1278,8 +1304,12 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-route-1",
-     "count": 15
+     "count": 5
     }
+   ],
+   "partyLevel": 50,
+   "gymsRequired": [
+    "unova-gym-8"
    ]
   },
   "unlockOrder": 500017,
@@ -1303,7 +1333,7 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-route-17",
-     "count": 15
+     "count": 20
     }
    ]
   },
@@ -1327,9 +1357,10 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-route-18",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "caughtCount": 26
   },
   "unlockOrder": 500018.5,
   "position": {
@@ -1353,8 +1384,11 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-aspertia-city",
-     "count": 15
+     "count": 12
     }
+   ],
+   "gymsRequired": [
+    "unova-gym-8"
    ]
   },
   "unlockOrder": 500019,
@@ -1378,8 +1412,12 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-virbank-city",
-     "count": 15
+     "count": 5
     }
+   ],
+   "partyLevel": 62,
+   "gymsRequired": [
+    "unova-gym-8"
    ]
   },
   "unlockOrder": 500020,
@@ -1406,6 +1444,9 @@
      "locationId": "unova-opelucid-city",
      "count": 15
     }
+   ],
+   "gymsRequired": [
+    "unova-gym-8"
    ]
   },
   "unlockOrder": 500021,
@@ -1430,9 +1471,10 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-route-13",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "caughtCount": 29
   },
   "unlockOrder": 500022,
   "position": {
@@ -1456,7 +1498,7 @@
    "battlesAtLocation": [
     {
      "locationId": "unova-route-22",
-     "count": 15
+     "count": 18
     }
    ]
   },

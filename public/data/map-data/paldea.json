@@ -53,7 +53,8 @@
   "unlock": {
    "requires": [
     "paldea-los-platos"
-   ]
+   ],
+   "caughtCount": 2
   },
   "unlockOrder": 910000.5,
   "position": {
@@ -75,7 +76,7 @@
    "battlesAtLocation": [
     {
      "locationId": "paldea-south-province-area-one",
-     "count": 15
+     "count": 13
     }
    ]
   },
@@ -121,9 +122,10 @@
    "battlesAtLocation": [
     {
      "locationId": "paldea-south-province-area-one",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "partyLevel": 5
   },
   "unlockOrder": 910002,
   "position": {
@@ -166,7 +168,7 @@
    "battlesAtLocation": [
     {
      "locationId": "paldea-mesagoza",
-     "count": 15
+     "count": 16
     }
    ]
   },
@@ -214,9 +216,10 @@
    "battlesAtLocation": [
     {
      "locationId": "paldea-mesagoza",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "caughtCount": 6
   },
   "unlockOrder": 910002.5,
   "position": {
@@ -240,7 +243,7 @@
    "battlesAtLocation": [
     {
      "locationId": "paldea-mesagoza",
-     "count": 15
+     "count": 19
     }
    ]
   },
@@ -265,9 +268,10 @@
    "battlesAtLocation": [
     {
      "locationId": "paldea-cabo-poco",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "partyLevel": 18
   },
   "unlockOrder": 910002.5,
   "position": {
@@ -290,7 +294,7 @@
    "battlesAtLocation": [
     {
      "locationId": "paldea-south-province-area-three",
-     "count": 15
+     "count": 11
     }
    ]
   },
@@ -315,9 +319,10 @@
    "battlesAtLocation": [
     {
      "locationId": "paldea-south-province-area-three",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "caughtCount": 10
   },
   "unlockOrder": 910004,
   "position": {
@@ -361,7 +366,7 @@
    "battlesAtLocation": [
     {
      "locationId": "paldea-south-province-area-three",
-     "count": 15
+     "count": 14
     }
    ]
   },
@@ -404,9 +409,10 @@
    "battlesAtLocation": [
     {
      "locationId": "paldea-south-province-area-two",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "partyLevel": 13
   },
   "unlockOrder": 910004,
   "position": {
@@ -447,7 +453,7 @@
    "battlesAtLocation": [
     {
      "locationId": "paldea-south-province-area-two",
-     "count": 15
+     "count": 17
     }
    ],
    "gymsRequired": [
@@ -495,9 +501,10 @@
    "battlesAtLocation": [
     {
      "locationId": "paldea-medali",
-     "count": 15
+     "count": 5
     }
    ],
+   "caughtCount": 14,
    "gymsRequired": [
     "paldea-gym-2"
    ]
@@ -542,8 +549,11 @@
    "battlesAtLocation": [
     {
      "locationId": "paldea-west-province-area-one",
-     "count": 15
+     "count": 20
     }
+   ],
+   "gymsRequired": [
+    "paldea-gym-2"
    ]
   },
   "unlockOrder": 910004.5,
@@ -589,8 +599,12 @@
    "battlesAtLocation": [
     {
      "locationId": "paldea-artazon",
-     "count": 15
+     "count": 5
     }
+   ],
+   "partyLevel": 27,
+   "gymsRequired": [
+    "paldea-gym-2"
    ]
   },
   "unlockOrder": 910004.5,
@@ -613,8 +627,11 @@
    "battlesAtLocation": [
     {
      "locationId": "paldea-alfornada",
-     "count": 15
+     "count": 12
     }
+   ],
+   "gymsRequired": [
+    "paldea-gym-2"
    ]
   },
   "unlockOrder": 910004.5,
@@ -637,8 +654,12 @@
    "battlesAtLocation": [
     {
      "locationId": "paldea-artazon",
-     "count": 15
+     "count": 5
     }
+   ],
+   "caughtCount": 19,
+   "gymsRequired": [
+    "paldea-gym-2"
    ]
   },
   "unlockOrder": 910004.5,
@@ -688,8 +709,12 @@
    "battlesAtLocation": [
     {
      "locationId": "paldea-alfornada",
-     "count": 15
+     "count": 5
     }
+   ],
+   "partyLevel": 47,
+   "gymsRequired": [
+    "paldea-gym-2"
    ]
   },
   "unlockOrder": 910004.5,
@@ -714,7 +739,7 @@
    "battlesAtLocation": [
     {
      "locationId": "paldea-south-province-area-six",
-     "count": 15
+     "count": 18
     }
    ]
   },
@@ -739,9 +764,10 @@
    "battlesAtLocation": [
     {
      "locationId": "paldea-west-province-area-two",
-     "count": 15
+     "count": 5
     }
-   ]
+   ],
+   "caughtCount": 23
   },
   "unlockOrder": 910005.5,
   "position": {
@@ -763,7 +789,7 @@
    "battlesAtLocation": [
     {
      "locationId": "paldea-east-province-area-one",
-     "count": 15
+     "count": 10
     }
    ]
   },
@@ -808,9 +834,10 @@
    "battlesAtLocation": [
     {
      "locationId": "paldea-south-province-area-six",
-     "count": 15
+     "count": 5
     }
    ],
+   "partyLevel": 61,
    "gymsRequired": [
     "paldea-gym-3"
    ]
@@ -836,7 +863,7 @@
    "battlesAtLocation": [
     {
      "locationId": "paldea-east-province-area-one",
-     "count": 15
+     "count": 13
     }
    ],
    "gymsRequired": [
@@ -884,9 +911,10 @@
    "battlesAtLocation": [
     {
      "locationId": "paldea-north-province-area-two",
-     "count": 15
+     "count": 5
     }
    ],
+   "caughtCount": 28,
    "gymsRequired": [
     "paldea-gym-5"
    ]
@@ -913,7 +941,7 @@
    "battlesAtLocation": [
     {
      "locationId": "paldea-levincia",
-     "count": 15
+     "count": 16
     }
    ],
    "gymsRequired": [
@@ -939,9 +967,10 @@
    "battlesAtLocation": [
     {
      "locationId": "paldea-north-province-area-three",
-     "count": 15
+     "count": 5
     }
    ],
+   "partyLevel": 66,
    "gymsRequired": [
     "paldea-gym-7"
    ]

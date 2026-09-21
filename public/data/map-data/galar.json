@@ -148,7 +148,14 @@
      "locationId": "galar-route-2",
      "count": 16
     }
-   ]
+   ],
+   "caughtOnRoute": {
+    "routeKey": "galar-route-2",
+    "species": [
+     "obstagoon"
+    ],
+    "count": 1
+   }
   },
   "unlockOrder": 800002.5,
   "position": {
@@ -316,7 +323,14 @@
      "count": 5
     }
    ],
-   "caughtCount": 14
+   "caughtOnRoute": {
+    "routeKey": "galar-route-5",
+    "species": [
+     "eldegoss",
+     "dottler"
+    ],
+    "count": 2
+   }
   },
   "unlockOrder": 800005.5,
   "position": {
@@ -441,7 +455,14 @@
    ],
    "gymsRequired": [
     "galar-gym-3"
-   ]
+   ],
+   "caughtOnRoute": {
+    "routeKey": "galar-route-6",
+    "species": [
+     "maractus"
+    ],
+    "count": 1
+   }
   },
   "unlockOrder": 800006.5,
   "position": {
@@ -516,7 +537,15 @@
      "locationId": "galar-route-7",
      "count": 20
     }
-   ]
+   ],
+   "caughtOnRoute": {
+    "routeKey": "galar-route-7",
+    "species": [
+     "galvantula",
+     "corviknight"
+    ],
+    "count": 2
+   }
   },
   "unlockOrder": 800008,
   "position": {
@@ -590,7 +619,15 @@
    ],
    "gymsRequired": [
     "galar-gym-6"
-   ]
+   ],
+   "caughtOnRoute": {
+    "routeKey": "galar-route-7",
+    "species": [
+     "galvantula",
+     "corviknight"
+    ],
+    "count": 2
+   }
   },
   "unlockOrder": 800009,
   "position": {
@@ -614,7 +651,15 @@
      "count": 5
     }
    ],
-   "caughtCount": 26
+   "caughtOnRoute": {
+    "routeKey": "galar-route-9",
+    "species": [
+     "bergmite",
+     "clobbopus",
+     "grapploct"
+    ],
+    "count": 3
+   }
   },
   "unlockOrder": 800009.5,
   "position": {

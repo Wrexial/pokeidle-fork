@@ -564,7 +564,14 @@
      "locationId": "sinnoh-route-209",
      "count": 12
     }
-   ]
+   ],
+   "caughtOnRoute": {
+    "routeKey": "sinnoh-route-209",
+    "species": [
+     "spiritomb"
+    ],
+    "count": 1
+   }
   },
   "unlockOrder": 400209.5,
   "position": {
@@ -963,7 +970,15 @@
    ],
    "gymsRequired": [
     "sinnoh-gym-5"
-   ]
+   ],
+   "caughtOnRoute": {
+    "routeKey": "sinnoh-route-217",
+    "species": [
+     "swinub",
+     "piloswine"
+    ],
+    "count": 2
+   }
   },
   "unlockOrder": 400217.5,
   "position": {
@@ -1409,7 +1424,15 @@
      "locationId": "sinnoh-route-228",
      "count": 18
     }
-   ]
+   ],
+   "caughtOnRoute": {
+    "routeKey": "sinnoh-route-228",
+    "species": [
+     "cacturne",
+     "vibrava"
+    ],
+    "count": 2
+   }
   },
   "unlockOrder": 400229,
   "position": {

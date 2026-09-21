@@ -232,7 +232,14 @@
      "locationId": "alola-route-1",
      "count": 19
     }
-   ]
+   ],
+   "caughtOnRoute": {
+    "routeKey": "alola-route-1",
+    "species": [
+     "buneary"
+    ],
+    "count": 1
+   }
   },
   "unlockOrder": 700003,
   "position": {
@@ -311,7 +318,14 @@
    ],
    "gymsRequired": [
     "alola-gym-4"
-   ]
+   ],
+   "caughtOnRoute": {
+    "routeKey": "alola-route-3",
+    "species": [
+     "salamence"
+    ],
+    "count": 1
+   }
   },
   "unlockOrder": 700004,
   "position": {
@@ -601,7 +615,13 @@
      "count": 5
     }
    ],
-   "caughtCount": 21
+   "caughtOnRoute": {
+    "routeKey": "alola-route-10",
+    "species": [
+     "pidgeot"
+    ],
+    "count": 1
+   }
   },
   "unlockOrder": 700010.5,
   "position": {

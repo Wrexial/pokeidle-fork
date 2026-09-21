@@ -125,6 +125,20 @@ export function LocationPanel({ onOpenCatchSettings }) {
         required: unlockRule.caughtCount,
         met: state.pokedexCaught.length >= unlockRule.caughtCount,
       })
+    if (unlockRule.caughtOnRoute) {
+      const requiredSpecies = unlockRule.caughtOnRoute.species,
+        routeName = mapData[unlockRule.caughtOnRoute.routeKey]?.name ?? 'this route',
+        caughtHere = requiredSpecies.filter((speciesKey) =>
+          state.pokedexCaught.includes(speciesKey)
+        ).length
+      requirements.push({
+        label: `${routeName} ${unlockRule.caughtOnRoute.count === 1 ? 'exclusive' : 'exclusives'} caught`,
+        current: caughtHere,
+        required: unlockRule.caughtOnRoute.count,
+        met: caughtHere >= unlockRule.caughtOnRoute.count,
+        locationId: unlockRule.caughtOnRoute.routeKey,
+      })
+    }
     if (unlockRule.partyLevel) {
       const highestLevel = state.party.reduce((max, member) => Math.max(max, member.level), 0)
       requirements.push({

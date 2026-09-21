@@ -242,7 +242,9 @@ Data conventions:
   starters live in `regionalStarters` in `src/data/config.js`.
 - `map-data/<region>.json` locations carry a `region` id; wild routes also
   reference an `encounter-data/<region>.json` bucket via `routeKey`. Unlock rules support
-  `battlesAtLocation`, `caughtCount` (minimum Pokedex size), `partyLevel`
+  `battlesAtLocation`, `caughtCount` (minimum Pokedex size), `caughtOnRoute`
+  (catch some of the `species` that spawn only on `routeKey`, a route-specific,
+  harder variant of `caughtCount`), `partyLevel`
   (minimum level any party Pokemon must reach), `badgesRequired`, `gymsRequired`
   (specific gym ids), `championDefeated` (a region id, or `true` meaning Kanto),
   and `requires` (locations that must already be unlocked) — all resolved to a
@@ -390,7 +392,12 @@ One-off scripts used to build the data JSON (not run during dev/build):
   Route 36 off Violet City now waits for Whitney; Mt. Silver waits for Clair).
   The generated gates also rotate their flavour instead of repeating "15 battles
   at the parent": battle counts vary, and some routes ask for a Pokedex count
-  (`caughtCount`) or a party level (`partyLevel`). Generated regions reveal any gym whose town is
+  (`caughtCount`) or a party level (`partyLevel`). Where the parent route has
+  species that spawn nowhere else in the game, the Pokedex-count gate is
+  replaced by `caughtOnRoute` (catch a few of those route-exclusive species),
+  and battle-only gates may gain the same check; legendaries, starters and
+  ultra-rare (weight 1-2) finds are left out so the goal stays reasonable.
+  Generated regions reveal any gym whose town is
   unlocked; Kanto keeps its badge-order reveal. Gym, Elite Four and Champion
   teams are type-themed from `GYM_TYPES` / `E4_TYPES` / `CHAMPION_TYPES` (drawn
   from every generation up to the region's own, minus starter lines and

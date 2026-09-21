@@ -364,7 +364,14 @@
      "locationId": "kalos-route-7",
      "count": 14
     }
-   ]
+   ],
+   "caughtOnRoute": {
+    "routeKey": "kalos-route-7",
+    "species": [
+     "ducklett"
+    ],
+    "count": 1
+   }
   },
   "unlockOrder": 600006,
   "position": {
@@ -417,7 +424,14 @@
      "locationId": "kalos-route-7",
      "count": 17
     }
-   ]
+   ],
+   "caughtOnRoute": {
+    "routeKey": "kalos-route-7",
+    "species": [
+     "ducklett"
+    ],
+    "count": 1
+   }
   },
   "unlockOrder": 600007.5,
   "position": {
@@ -464,10 +478,16 @@
      "count": 5
     }
    ],
-   "caughtCount": 11,
    "gymsRequired": [
     "kalos-gym-2"
-   ]
+   ],
+   "caughtOnRoute": {
+    "routeKey": "kalos-route-7",
+    "species": [
+     "ducklett"
+    ],
+    "count": 1
+   }
   },
   "unlockOrder": 600008,
   "position": {
@@ -589,7 +609,13 @@
      "count": 5
     }
    ],
-   "caughtCount": 14
+   "caughtOnRoute": {
+    "routeKey": "kalos-route-10",
+    "species": [
+     "sigilyph"
+    ],
+    "count": 1
+   }
   },
   "unlockOrder": 600010.5,
   "position": {
@@ -1151,7 +1177,13 @@
      "count": 5
     }
    ],
-   "caughtCount": 27
+   "caughtOnRoute": {
+    "routeKey": "kalos-route-19",
+    "species": [
+     "sliggoo"
+    ],
+    "count": 1
+   }
   },
   "unlockOrder": 600019.5,
   "position": {

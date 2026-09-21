@@ -1128,6 +1128,10 @@ for (const region of REGIONS) {
             battlesAtLocation: [{ locationId: parentId, count: 5 }],
             caughtCount: Math.max(3, Math.round(progress * 30)),
           }
+          // The route-exclusive catch pass (below) may swap the easy global
+          // `caughtCount` for a harder, route-specific `caughtOnRoute` when the
+          // parent route has species found nowhere else.
+          if (isRouteNode(parent)) unlock.routeCatchParent = parentId
           break
         case 3:
           unlock = {
@@ -1139,6 +1143,9 @@ for (const region of REGIONS) {
           unlock = {
             battlesAtLocation: [{ locationId: parentId, count: 10 + ((position * 7) % 11) }],
           }
+          // A battle-only gate can also grow a route-exclusive catch check (see
+          // the route-exclusive catch pass below).
+          if (isRouteNode(parent)) unlock.routeCatchParent = parentId
       }
     }
     // The badge that gates the road onward, placed where it is needed (or the
@@ -1357,6 +1364,53 @@ if (realEncounters.kanto) {
         })
   }
   console.log('kanto buckets refreshed:', refreshed)
+}
+
+// --- route-exclusive catch gates ---------------------------------------------
+// A share of the generated progress gates ask the player to catch Pokemon that
+// spawn only on the route they just cleared — a route-specific, harder variant
+// of the easy global `caughtCount`. "Exclusive" means the species turns up on
+// no other wild route in any region (Raid Islands don't count); legendaries,
+// starters and other nearly uncatchable finds are skipped. The pass marks the
+// `caughtCount` and battle-only gates whose parent is a route and, once
+// exclusivity is known, drops the global count in favour of `caughtOnRoute` (or
+// simply adds it to a battle gate). Routes without exclusives keep their gate.
+const ROUTE_CATCH_LIMIT = 3
+// Ultra-rare finds (weight 1-2) stay out of the gate: asking for a ~1% spawn
+// turns a flavour check into a chore. Route-exclusive species are the point, so
+// a route whose only exclusives are that rare simply keeps its `caughtCount`.
+const ROUTE_CATCH_MIN_WEIGHT = 3
+/** @type {Record<string, Set<string>>} */
+const routesBySpecies = {}
+for (const [bucketKey, bucket] of Object.entries(encounterData)) {
+  if (/-raid$/.test(bucketKey)) continue
+  for (const encounter of bucket.encounters) {
+    const routes =
+      routesBySpecies[encounter.speciesKey] ?? (routesBySpecies[encounter.speciesKey] = new Set())
+    routes.add(bucketKey)
+  }
+}
+/** @type {Record<string, string[]>} */
+const exclusiveSpeciesByRoute = {}
+for (const [speciesKey, routes] of Object.entries(routesBySpecies)) {
+  if (routes.size !== 1) continue
+  const entry = species[speciesKey]
+  if (!entry || entry.catchRate <= 3 || entry.legendary || ALL_STARTERS.has(speciesKey)) continue
+  const [routeKey] = routes
+  const wild = encounterData[routeKey]?.encounters?.find((e) => e.speciesKey === speciesKey)
+  if (!wild || wild.weight < ROUTE_CATCH_MIN_WEIGHT) continue
+  ;(exclusiveSpeciesByRoute[routeKey] ??= []).push(speciesKey)
+}
+for (const location of Object.values(mapData)) {
+  const unlockRule = location.unlock
+  if (!unlockRule?.routeCatchParent) continue
+  const exclusives = exclusiveSpeciesByRoute[unlockRule.routeCatchParent]
+  if (exclusives && exclusives.length > 0) {
+    const speciesKeys = exclusives.slice(0, ROUTE_CATCH_LIMIT)
+    delete unlockRule.caughtCount
+    unlockRule.caughtOnRoute = { routeKey: unlockRule.routeCatchParent, species: speciesKeys, count: speciesKeys.length }
+  }
+  delete unlockRule.routeCatchParent
 }
 
 // --- Kanto rematch rosters ---------------------------------------------------

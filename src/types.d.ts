@@ -207,6 +207,9 @@ type MapLocation = {
     requires?: string[]
     /** minimum number of species the player must have caught */
     caughtCount?: number
+    /** catch some of the species that spawn only on `routeKey` — a
+     * route-specific alternative to `caughtCount` */
+    caughtOnRoute?: { routeKey: string; species: string[]; count: number }
     /** minimum level any party Pokemon must reach */
     partyLevel?: number
     /** region-entry gate: unlocked if it's the player's start region, or if

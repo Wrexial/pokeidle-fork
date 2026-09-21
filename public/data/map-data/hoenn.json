@@ -1499,7 +1499,13 @@
      "count": 5
     }
    ],
-   "caughtCount": 28
+   "caughtOnRoute": {
+    "routeKey": "hoenn-route-130",
+    "species": [
+     "wynaut"
+    ],
+    "count": 1
+   }
   },
   "unlockOrder": 300131,
   "position": {

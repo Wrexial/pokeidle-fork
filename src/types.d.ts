@@ -261,7 +261,7 @@ type MapLocation = {
   [key: string]: any
 }
 
-type Evolution = { into: string; level?: number; item?: string; [key: string]: any }
+type Evolution = { into: string; level?: number; item?: string; gender?: 'male' | 'female'; [key: string]: any }
 
 interface Window {
   /** set by the boot guard in index.html; flipped once the app mounts */

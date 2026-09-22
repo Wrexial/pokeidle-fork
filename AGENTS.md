@@ -362,11 +362,14 @@ One-off scripts used to build the data JSON (not run during dev/build):
   (`tokenShopItems` in `src/data/items.js`). Idempotent; re-run after any
   re-extraction of `evolution-data.json`. Because item evolutions carry no
   `level`, `generate-regions.cjs` gives them a nominal one for team-maturity.
-- `fix-form-transforms.cjs` — makes temporary form transformations reversible.
-  Deoxys, the Rotom appliances, the Therian formes, Kyurem, Necrozma, Calyrex
-  and Zygarde are linked base↔form (Deoxys/Zygarde/Necrozma/Calyrex fully
-  all-to-all); Basculegion/Indeedee gain their gender-form toggles; and the bad
-  `armarouge <-> ceruledge` and `basculin-w -> basculegion-f` edges are removed.
+- `fix-form-transforms.cjs` — makes temporary form transformations reversible
+  (Deoxys, the Rotom appliances, the Therian formes, Kyurem, Necrozma, Calyrex,
+  Zygarde — Deoxys/Zygarde/Necrozma/Calyrex fully all-to-all) and drops the bad
+  `armarouge <-> ceruledge` edges. It also handles **gender forms**: the manual
+  `basculegion`/`indeedee`/`oinkologne` male↔female edges are removed, and
+  Basculegion/Oinkologne carry a `gender` tag on their evolution so only the
+  variant matching the Pokemon's gender is offered (filtered in the party/box
+  UI via `genderForPokemon`; Indeedee's two variants are fixed-gender species).
   Idempotent; re-run after any re-extraction of `evolution-data.json`.
   `preEvolutionMap` (`src/data/gameData.js`, mirrored in the Node tools) skips
   a form's reverse edge so breeding/learnset chains still start from the real

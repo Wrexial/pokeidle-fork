@@ -1337,6 +1337,12 @@
     "maxLevel": 70
    },
    {
+    "speciesKey": "indeedee-f",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
     "speciesKey": "basculegion-f",
     "weight": 1,
     "minLevel": 70,

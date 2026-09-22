@@ -6,12 +6,31 @@ import { getPreEvolutionChain } from './pokemon.js'
 const isDitto = (/** @type {string} */ speciesKey) => speciesKey === 'ditto'
 
 /**
- * A Pokemon's gender, derived deterministically from its id (so it's stable
- * across reloads without being saved) using its species' gender rate.
+ * Species whose form *is* their gender — the male/female variants are fixed,
+ * not transformable. Basculegion/Oinkologne pick theirs on evolution (see the
+ * `gender` tag in `evolution-data.json`); Indeedee has no evolution, so each
+ * variant is simply its own fixed-gender species.
+ * @type {Record<string, 'male' | 'female'>}
+ */
+const GENDER_FORM_SPECIES = {
+  basculegion: 'male',
+  'basculegion-f': 'female',
+  indeedee: 'male',
+  'indeedee-f': 'female',
+  oinkologne: 'male',
+  'oinkologne-f': 'female',
+}
+
+/**
+ * A Pokemon's gender: fixed for a gender-form species, otherwise derived
+ * deterministically from its id (so it's stable across reloads without being
+ * saved) using its species' gender rate.
  * @param {Pokemon} pokemon
  * @returns {'male' | 'female' | 'genderless'}
  */
 export function genderForPokemon(pokemon) {
+  const fixedGender = GENDER_FORM_SPECIES[pokemon.speciesKey]
+  if (fixedGender) return fixedGender
   const data = breedingData[pokemon.speciesKey]
   if (!data || data.genderRate === -1) return 'genderless'
   if (data.genderRate === 0) return 'male'

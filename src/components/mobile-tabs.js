@@ -6,6 +6,7 @@ import { evolutionItems } from '../data/items.js'
 import { MOBILE_TABS } from '../data/ui.js'
 import { encounterData, evolutionData, raidPoolFor, mapData, pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
+import { genderForPokemon } from '../game/breeding.js'
 import { GymPanel } from './gym-panel.js'
 import { LocationPanel } from './location-panel.js'
 import { TownMap } from './town-map.js'
@@ -58,7 +59,12 @@ export function MobileTabs() {
       const evolutionChain = evolutionData[boxPokemon.speciesKey]
       if (evolutionChain)
         return {
-          entries: evolutionChain.map((evolution) => {
+          entries: evolutionChain
+            .filter(
+              (evolution) =>
+                !evolution.gender || evolution.gender === genderForPokemon(boxPokemon)
+            )
+            .map((evolution) => {
             const targetSpecies = pokemonSpecies[evolution.into],
               levelMet = !evolution.level || boxPokemon.level >= evolution.level,
               itemOwned = !evolution.item || (state.inventory[evolution.item] ?? 0) > 0,

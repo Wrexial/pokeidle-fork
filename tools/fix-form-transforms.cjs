@@ -40,21 +40,39 @@ const FORM_GROUPS = [
   { base: 'zygarde', forms: ['zygarde-10', 'zygarde-c'], level: 10, allToAll: true },
   { base: 'necrozma', forms: ['necrozma-s', 'necrozma-l', 'u-necrozma'], level: 100, allToAll: true },
   { base: 'calyrex', forms: ['calyrex-ir', 'calyrex-sr'], level: 100, allToAll: true },
-  { base: 'basculegion', forms: ['basculegion-f'], level: 5 },
-  { base: 'indeedee', forms: ['indeedee-f'], level: 5 },
 ]
 
 /**
  * Edges that are simply wrong and should be dropped. Armarouge and Ceruledge
  * were recorded as evolving into each other (they are version counterparts, not
- * a line — Charcadet evolves into them); Basculegion's female form is a gender
- * form of Basculegion, not a direct evolution of White-Striped Basculin.
+ * a line — Charcadet evolves into them).
  * @type {[string, string][]}
  */
 const REMOVE_EDGES = [
   ['armarouge', 'ceruledge'],
   ['ceruledge', 'armarouge'],
-  ['basculin-w', 'basculegion-f'],
+]
+
+/**
+ * Gender variants are not transformable forms: the variant follows the
+ * Pokemon's gender. Basculegion and Oinkologne pick male/female when they
+ * evolve, so tag the evolution with the required `gender` (the UI only offers
+ * the matching one).
+ * @type {{ from: string, level: number, male: string, female: string }[]}
+ */
+const GENDER_FORM_EVOLUTIONS = [
+  { from: 'basculin-w', level: 50, male: 'basculegion', female: 'basculegion-f' },
+  { from: 'lechonk', level: 18, male: 'oinkologne', female: 'oinkologne-f' },
+]
+
+/** Manual male<->female transform edges to drop (they are gender variants). */
+const GENDER_FORM_PAIRS = [
+  ['basculegion', 'basculegion-f'],
+  ['basculegion-f', 'basculegion'],
+  ['indeedee', 'indeedee-f'],
+  ['indeedee-f', 'indeedee'],
+  ['oinkologne', 'oinkologne-f'],
+  ['oinkologne-f', 'oinkologne'],
 ]
 
 const isFormKey = (key) => Number(species[key]?.id) > 1025
@@ -70,16 +88,20 @@ const removeEdge = (from, into) => {
 }
 
 /** Ensure exactly one `from -> into` edge at `level` (no duplicate, no item). */
-const setEdge = (from, into, level) => {
+const setEdge = (from, into, level, gender) => {
   const list = evolutionData[from] ?? []
   const existing = list.find((evolution) => evolution.into === into)
   if (existing) {
     existing.level = level
     delete existing.item
     delete existing.form
+    if (gender) existing.gender = gender
+    else delete existing.gender
     return
   }
-  list.push({ into, level })
+  const entry = { into, level }
+  if (gender) entry.gender = gender
+  list.push(entry)
   evolutionData[from] = list
 }
 
@@ -106,10 +128,24 @@ for (const { base, forms, level, allToAll } of FORM_GROUPS) {
   }
 }
 
+for (const [from, into] of GENDER_FORM_PAIRS)
+  if (removeEdge(from, into)) console.log(`removed gender-form edge ${from} -> ${into}`)
+
+for (const { from, level, male, female } of GENDER_FORM_EVOLUTIONS) {
+  // Drop any old/untagged edges to the two variants, then set the tagged pair.
+  evolutionData[from] = (evolutionData[from] ?? []).filter(
+    (evolution) => evolution.into !== male && evolution.into !== female
+  )
+  setEdge(from, male, level, 'male')
+  setEdge(from, female, level, 'female')
+}
+
 if (JSON.stringify(evolutionData) === before) {
   console.log('evolution-data.json already normalized; no changes.')
 } else {
   fs.writeFileSync(EVOLUTION_PATH, JSON.stringify(evolutionData, null, 2) + '\n')
   console.log(`Wrote ${path.relative(process.cwd(), EVOLUTION_PATH)}.`)
-  console.log(`Form groups: ${FORM_GROUPS.length}; removed edges: ${REMOVE_EDGES.length}.`)
+  console.log(
+    `Form groups: ${FORM_GROUPS.length}; removed edges: ${REMOVE_EDGES.length}; gender evolutions: ${GENDER_FORM_EVOLUTIONS.length}.`
+  )
 }

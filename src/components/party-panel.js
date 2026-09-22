@@ -6,6 +6,7 @@ import { evolutionItems } from '../data/items.js'
 import { evolutionData, pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
+import { genderForPokemon } from '../game/breeding.js'
 import { ExpBar } from './exp-bar.js'
 import { HpBar } from './hp-bar.js'
 import { StatsPanel } from './stats-panel.js'
@@ -100,7 +101,14 @@ export function PartyPanel({
       const evolutionChain = evolutionData[inspectedPokemon.speciesKey]
       if (evolutionChain)
         return {
-          entries: evolutionChain.map((evolution) => {
+          entries: evolutionChain
+            // Gender variants (Basculegion/Oinkologne) only offer the form that
+            // matches this Pokemon's gender.
+            .filter(
+              (evolution) =>
+                !evolution.gender || evolution.gender === genderForPokemon(inspectedPokemon)
+            )
+            .map((evolution) => {
             const targetSpecies = pokemonSpecies[evolution.into],
               levelMet = !evolution.level || inspectedPokemon.level >= evolution.level,
               itemOwned = !evolution.item || (state.inventory[evolution.item] ?? 0) > 0,

@@ -54,10 +54,10 @@ export function shinyOddsForSpecies(speciesKey, completedGenerationSet) {
 export const HONEY_CHAIN_THRESHOLD = 4
 
 /** Weight multiplier Honey applies once a hunt is locked in. */
-export const HONEY_LOCK_MULTIPLIER = 25
+const HONEY_LOCK_MULTIPLIER = 25
 
 /** Weight kept for every other species while a chain is protected by Repel. */
-export const SUPPRESSED_WEIGHT = 0.02
+const SUPPRESSED_WEIGHT = 0.02
 
 /**
  * Apply Honey/Repel modifiers to a route's encounter table. While a Repel is
@@ -119,7 +119,7 @@ export function resolveActiveModifiers(activeEffects, routeKey, shinyChain) {
 }
 
 /** How many same-species encounters double the shiny odds. */
-export const SHINY_CHAIN_STEP = 40
+const SHINY_CHAIN_STEP = 40
 
 /**
  * Shiny-odds divisor from a DexNav-style chain: 1x at no chain, up to 4x at
@@ -185,7 +185,7 @@ export function resolveRoamer(regionId, pokedexSeen, pokedexCaught, completedGen
 }
 
 /** Species eligible for Randomizer encounters (national dex, no legendaries). */
-export const RANDOMIZER_SPECIES = Object.keys(pokemonSpecies).filter((key) => {
+const RANDOMIZER_SPECIES = Object.keys(pokemonSpecies).filter((key) => {
   const species = pokemonSpecies[key]
   return species.id > 0 && species.id <= 1025 && !species.legendary
 })
@@ -197,7 +197,7 @@ export const RANDOMIZER_SPECIES = Object.keys(pokemonSpecies).filter((key) => {
  * @param {number} shinyBonus
  * @param {number} levelOverride
  */
-export function resolveRandomEncounter(encounterData, completedGenerationSet, shinyBonus, levelOverride) {
+function resolveRandomEncounter(encounterData, completedGenerationSet, shinyBonus, levelOverride) {
   const speciesKey =
       RANDOMIZER_SPECIES[Math.floor(Math.random() * RANDOMIZER_SPECIES.length)] ??
       encounterData.encounters[0].speciesKey,

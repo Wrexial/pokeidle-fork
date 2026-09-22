@@ -162,7 +162,7 @@ export function selectAutoCatchBall(state, routeKey, speciesKey, context) {
 /**
  * A catch rate at or below this is "really hard" for a non-legendary.
  */
-export const HARD_CATCH_RATE = 25
+const HARD_CATCH_RATE = 25
 
 /**
  * Whether the Master Ball throw button should be offered for this encounter.

@@ -5,7 +5,7 @@
 // load (see src/data/gameData.js), so the engine and UI read one enriched table.
 
 /** @type {Record<string, Partial<Move>>} */
-export const MOVE_OVERRIDES = {
+const MOVE_OVERRIDES = {
   // --- Healing (percentage of max HP) ---
   recover: { effect: { type: 'heal', percentage: 50 } },
   roost: { effect: { type: 'heal', percentage: 50 } },

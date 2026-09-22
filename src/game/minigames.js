@@ -41,7 +41,7 @@ export const MINING_DIGS = 10
  * Weighted reward table. `min`/`max` bound the quantity per find.
  * @type {{ itemId: string, weight: number, min: number, max: number }[]}
  */
-export const MINING_REWARD_TABLE = [
+const MINING_REWARD_TABLE = [
   { itemId: 'stardust', weight: 22, min: 1, max: 2 },
   { itemId: 'pearl', weight: 14, min: 1, max: 1 },
   { itemId: 'nugget', weight: 9, min: 1, max: 1 },
@@ -158,7 +158,7 @@ export function bugFleeChance(speciesKey) {
  * @param {string} speciesKey
  * @returns {'male' | 'female' | 'genderless'}
  */
-export function rollContestGender(speciesKey) {
+function rollContestGender(speciesKey) {
   const data = breedingData[speciesKey]
   if (!data || data.genderRate === -1) return 'genderless'
   if (data.genderRate === 0) return 'male'
@@ -240,7 +240,7 @@ const BUG_CONTEST_RIVALS = [
  * @param {number} [count]
  * @returns {{ name: string, bugs: ReturnType<typeof rollContestBug>[] }[]}
  */
-export function rollContestRivals(baseLevel = 20, count = 3) {
+function rollContestRivals(baseLevel = 20, count = 3) {
   const names = [...BUG_CONTEST_RIVALS].sort(() => Math.random() - 0.5).slice(0, count)
   return names.map((name) => ({
     name,

@@ -41,13 +41,13 @@ export function buildTrainerTeam(team, rng = Math.random) {
 }
 
 /** Battle Tower floors start at this level and climb three per floor. */
-export const TOWER_BASE_LEVEL = 55
+const TOWER_BASE_LEVEL = 55
 
 /** Every floor past this one multiplies the team's stats, so scaling is endless. */
-export const TOWER_MULTIPLIER_FLOOR = 15
+const TOWER_MULTIPLIER_FLOOR = 15
 
 /** Floors at or past this one may field legendary Pokemon. */
-export const TOWER_LEGENDARY_FLOOR = 40
+const TOWER_LEGENDARY_FLOOR = 40
 
 /** @param {Species} species */
 export function totalBaseStats(species) {

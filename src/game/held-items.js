@@ -15,12 +15,12 @@ export function rollHeldItem(chance = 0.25, rng = Math.random) {
 }
 
 /** @param {BattlePokemon} pokemon */
-export function heldItemOf(pokemon) {
+function heldItemOf(pokemon) {
   return pokemon?.heldItem ?? null
 }
 
 /** @param {BattlePokemon} pokemon */
-export function heldItemEffect(pokemon) {
+function heldItemEffect(pokemon) {
   const heldItem = heldItemOf(pokemon)
   return heldItem ? (heldItems[heldItem]?.effect ?? null) : null
 }

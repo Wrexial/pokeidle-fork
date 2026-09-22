@@ -3,7 +3,7 @@
 import { gymLeaderData, mapData } from '../../data/gameData.js'
 
 /** @type {Record<string, string[]>} */
-export const gymIdsByRegion = {}
+const gymIdsByRegion = {}
 for (const gym of gymLeaderData) {
   const regionId = gym.region ?? 'kanto'
   ;(gymIdsByRegion[regionId] ??= []).push(gym.id)

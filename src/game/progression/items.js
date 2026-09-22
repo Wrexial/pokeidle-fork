@@ -141,7 +141,7 @@ export function formatReward(reward) {
 }
 
 /** Exp. Candy granted when releasing a Pokemon, by its level tier. */
-export const RELEASE_CANDY_TIERS = [
+const RELEASE_CANDY_TIERS = [
   { minLevel: 75, itemId: 'expCandyXL' },
   { minLevel: 50, itemId: 'expCandyL' },
   { minLevel: 25, itemId: 'expCandyM' },

@@ -6,16 +6,6 @@
 /** How many turns a weather effect lasts when set by a move. */
 export const WEATHER_TURNS = 5
 
-/** Move ids that set weather. @type {Record<string, string>} */
-export const WEATHER_MOVES = {
-  rainDance: 'rain',
-  sunnyDay: 'sun',
-  sandstorm: 'sandstorm',
-  snowscape: 'snow',
-  hail: 'hail',
-  chillyReception: 'snow',
-}
-
 /** Abilities that set weather on entry. @type {Record<string, string>} */
 export const WEATHER_ABILITIES = {
   drizzle: 'rain',

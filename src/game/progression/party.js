@@ -85,7 +85,7 @@ export function createIdleBattleState() {
  * @param {GameState} state
  * @returns {GameState}
  */
-export function applyNuzlockeRelease(state) {
+function applyNuzlockeRelease(state) {
   if (!state.challengeNuzlocke) return state
   const fainted = state.party.filter(
       (member) => !member.isEgg && (member.currentHp ?? 0) <= 0

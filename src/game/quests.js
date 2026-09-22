@@ -7,7 +7,7 @@
 
 import { encounterData, mapData, pokemonSpecies } from '../data/gameData.js'
 
-export const QUESTS_PER_DAY = 3
+const QUESTS_PER_DAY = 3
 
 /**
  * @typedef {Object} Quest

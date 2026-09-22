@@ -35,7 +35,7 @@ export function statStageMultiplier(stage) {
  * +2 = 1/2, +3 = always. `superLuck` adds a stage; Battle Armor / Shell Armor
  * and Sniper are handled at the call site.
  */
-export const CRIT_CHANCES = [1 / 24, 1 / 8, 1 / 2, 1]
+const CRIT_CHANCES = [1 / 24, 1 / 8, 1 / 2, 1]
 
 /**
  * The game's stat keys are camelCase (`spAttack`); extracted move data sometimes

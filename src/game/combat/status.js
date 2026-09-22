@@ -8,7 +8,7 @@ import { heldCuresStatus } from '../held-items.js'
 import { terrainPreventsStatus } from '../terrain.js'
 
 /** Major status conditions that persist until cured and tick each turn. */
-export const MAJOR_STATUSES = new Set(['poison', 'toxic', 'burn', 'freeze', 'sleep', 'paralysis'])
+const MAJOR_STATUSES = new Set(['poison', 'toxic', 'burn', 'freeze', 'sleep', 'paralysis'])
 
 /** Types that can't be afflicted by a given status. */
 

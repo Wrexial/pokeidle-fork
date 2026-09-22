@@ -7,14 +7,6 @@ import { isGrounded } from './hazards.js'
 /** How many turns a terrain lasts. */
 export const TERRAIN_TURNS = 5
 
-/** Move ids that set terrain. @type {Record<string, string>} */
-export const TERRAIN_MOVES = {
-  electricTerrain: 'electric',
-  grassyTerrain: 'grassy',
-  mistyTerrain: 'misty',
-  psychicTerrain: 'psychic',
-}
-
 /** Abilities that set terrain on entry. @type {Record<string, string>} */
 export const TERRAIN_ABILITIES = {
   electricSurge: 'electric',

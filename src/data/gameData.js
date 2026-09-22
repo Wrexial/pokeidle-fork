@@ -135,18 +135,6 @@ for (const location of Object.values(encounterData))
       pokedexData[encounter.speciesKey].includes(location.name) ||
         pokedexData[encounter.speciesKey].push(location.name))
 
-/** @type {string[]} */
-export const wildSpeciesKeys = [
-  ...new Set(
-    Object.values(encounterData).flatMap((route) =>
-      route.encounters.map((encounter) => encounter.speciesKey)
-    )
-  ),
-]
-
-/** Number of distinct species obtainable as wild encounters (global Pokédex goal). */
-export const catchableSpeciesCount = wildSpeciesKeys.length
-
 /**
  * Species that spawn on exactly one (non-raid) route, keyed by that route.
  * Used to badge the route-exclusive Pokemon in the Wild Pokemon grid.
@@ -199,7 +187,7 @@ export const speciesKeysByGeneration = GENERATION_DEX_RANGES.map(([lowId, highId
  * @param {number} dexId
  * @returns {number}
  */
-export function generationIndexForDexId(dexId) {
+function generationIndexForDexId(dexId) {
   return GENERATION_DEX_RANGES.findIndex(([lowId, highId]) => dexId >= lowId && dexId <= highId)
 }
 
@@ -207,7 +195,7 @@ export function generationIndexForDexId(dexId) {
  * @param {string} speciesKey
  * @returns {number}
  */
-export function generationIndexForSpecies(speciesKey) {
+function generationIndexForSpecies(speciesKey) {
   const species = pokemonSpecies[speciesKey]
   return species ? generationIndexForDexId(species.id) : -1
 }

@@ -73,7 +73,7 @@ export const LEGACY_SAVE_KEYS = ['pokemon-idle-save']
 /** Where a save that fails to load is parked (never retried, never auto-deleted). */
 export const SAVE_BACKUP_KEY = 'pi-save-backup'
 /** All keys the game treats as a live save (the quarantine backup is kept). */
-export const SAVE_KEYS = [SAVE_KEY, ...LEGACY_SAVE_KEYS]
+const SAVE_KEYS = [SAVE_KEY, ...LEGACY_SAVE_KEYS]
 
 /** Remove every live save; the quarantine backup is intentionally preserved. */
 export function clearSave() {

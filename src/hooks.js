@@ -704,12 +704,22 @@ export function useGameLoop() {
           return
         case 'bugCatching':
           return
+        case 'mining':
+          return
+        case 'gameCorner':
+          return
         case 'dexComplete':
           return
       }
     }, [dispatch])
   React.useEffect(() => {
-    if (state.phase === 'starterSelect' || state.phase === 'bugCatching' || state.paused) {
+    if (
+      state.phase === 'starterSelect' ||
+      state.phase === 'bugCatching' ||
+      state.phase === 'mining' ||
+      state.phase === 'gameCorner' ||
+      state.paused
+    ) {
       ;(intervalRef.current && clearInterval(intervalRef.current), (intervalRef.current = null))
       return
     }

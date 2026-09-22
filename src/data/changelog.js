@@ -1,10 +1,22 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.30.0'
+export const GAME_VERSION = '0.31.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.31.0',
+      subtitle: 'Minigame Screens',
+      sections: [
+        {
+          heading: 'Minigames',
+          items: [
+            'The Sinnoh Underground and the Kanto Game Corner now play out on the main stage and pause the rest of the game, just like the Bug Catching Contest',
+          ],
+        },
+      ],
+    },
     {
       version: '0.30.0',
       subtitle: 'Contest Showcase',

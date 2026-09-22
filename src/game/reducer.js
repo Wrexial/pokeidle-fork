@@ -11,7 +11,7 @@ import { calculatePokemonStats, calculateRequiredExperience, createEgg, createPo
 import { canBreed, eggHatchSteps, eggSpeciesKey, inheritBreedingTraits } from './breeding.js'
 import { advanceQuests, questLabel, rollQuests } from './quests.js'
 import { buildTrainerTeam, checkShinyOdds, computeUnlockedLocations, createIdleBattleState, formatReward, getRegionUnlockTokens, isActiveEffectItem, loadActivePokemonFromParty, prepareNextBattle, releaseReward, rollCandyDrop, rollValuableDrop, syncActivePokemonIntoParty, tickBattleCounters, tickPartyEggs, tickPokerus } from './progression.js'
-import { BUG_CONTEST_COST } from './minigames.js'
+import { BUG_CONTEST_COST, MINING_COST } from './minigames.js'
 import { applyEntryHazards, emptyBattleHazards } from './hazards.js'
 
 /** @type {GameState} */
@@ -2724,6 +2724,30 @@ export function gameReducer(state, action) {
     }
     case 'END_BUG_CONTEST':
       return state.phase === 'bugCatching' ? { ...state, ...createIdleBattleState() } : state
+    case 'START_MINING': {
+      if (state.phase !== 'idle' && state.phase !== 'victory') return state
+      if (state.money < MINING_COST) return state
+      return {
+        ...state,
+        ...createIdleBattleState(),
+        phase: 'mining',
+        money: state.money - MINING_COST,
+        battleLog: [...state.battleLog, 'You headed down into the Underground.'].slice(-50),
+      }
+    }
+    case 'START_GAME_CORNER': {
+      if (state.phase !== 'idle' && state.phase !== 'victory') return state
+      return {
+        ...state,
+        ...createIdleBattleState(),
+        phase: 'gameCorner',
+        battleLog: [...state.battleLog, 'You stepped up to the Game Corner slots.'].slice(-50),
+      }
+    }
+    case 'END_MINIGAME':
+      return state.phase === 'mining' || state.phase === 'gameCorner'
+        ? { ...state, ...createIdleBattleState() }
+        : state
     case 'PAY_MINIGAME_FEE': {
       const amount = action.payload?.amount ?? 0
       if (amount <= 0 || state.money < amount) return state

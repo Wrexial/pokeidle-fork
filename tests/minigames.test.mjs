@@ -183,6 +183,41 @@ test('END_BUG_CONTEST returns to idle', () => {
   assert.equal(next.phase, 'idle')
 })
 
+test('START_MINING charges entry and enters the scene', () => {
+  const started = gameReducer(
+      { ...initialGameState, phase: 'idle', money: MINING_COST + 25 },
+      { type: 'START_MINING' }
+    ),
+    broke = gameReducer(
+      { ...initialGameState, phase: 'idle', money: MINING_COST - 1 },
+      { type: 'START_MINING' }
+    )
+  assert.equal(started.phase, 'mining')
+  assert.equal(started.money, 25)
+  assert.equal(broke.phase, 'idle')
+  assert.equal(broke.money, MINING_COST - 1)
+})
+
+test('START_GAME_CORNER enters the scene without an entry fee', () => {
+  const next = gameReducer(
+    { ...initialGameState, phase: 'idle', money: 1234 },
+    { type: 'START_GAME_CORNER' }
+  )
+  assert.equal(next.phase, 'gameCorner')
+  assert.equal(next.money, 1234)
+})
+
+test('END_MINIGAME returns mining and the game corner to idle', () => {
+  assert.equal(
+    gameReducer({ ...initialGameState, phase: 'mining' }, { type: 'END_MINIGAME' }).phase,
+    'idle'
+  )
+  assert.equal(
+    gameReducer({ ...initialGameState, phase: 'gameCorner' }, { type: 'END_MINIGAME' }).phase,
+    'idle'
+  )
+})
+
 test('CATCH_POKEMON keeps a rolled gender', () => {
   const next = gameReducer(
     { ...initialGameState, party: [], nextPokemonId: 7 },

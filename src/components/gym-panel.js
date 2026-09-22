@@ -5,8 +5,6 @@ import { jsx, jsxs } from 'react/jsx-runtime'
 import { championData, elite4Data, gymLeaderData, mapData, regions } from '../data/gameData.js'
 import { BATTLE_TOWER_REGION } from '../data/config.js'
 import { MINIGAME_BY_REGION, MINIGAME_INFO } from '../game/minigames.js'
-import { MiningModal } from './mining-modal.js'
-import { GameCornerModal } from './game-corner-modal.js'
 import { useGame } from '../game/context.js'
 import { buildTrainerTeam, buildTowerFloor } from '../game/progression.js'
 
@@ -14,7 +12,6 @@ import { buildTrainerTeam, buildTowerFloor } from '../game/progression.js'
 export function GymPanel({ onOpenShop }) {
   const { state, dispatch } = useGame(),
     [confirmingPrestige, setConfirmingPrestige] = React.useState(false),
-    [showMining, setShowMining] = React.useState(!1),
     regionId = mapData[state.currentLocation]?.region ?? 'kanto',
     region = regions.find((candidate) => candidate.id === regionId),
     regionGyms = gymLeaderData.filter((gym) => (gym.region ?? 'kanto') === regionId),
@@ -43,7 +40,9 @@ export function GymPanel({ onOpenShop }) {
     isBusy =
       state.phase === 'evolving' ||
       state.phase === 'healing' ||
-      state.phase === 'bugCatching',
+      state.phase === 'bugCatching' ||
+      state.phase === 'mining' ||
+      state.phase === 'gameCorner',
     fightable = canFight && !isBusy
 
   /** @param {any} leader */
@@ -436,24 +435,15 @@ export function GymPanel({ onOpenShop }) {
               style: {
                 width: '100%',
               },
-              disabled:
-                state.money < MINIGAME_INFO[regionMinigame].cost ||
-                (regionMinigame === 'bugContest' && isBusy),
+              disabled: state.money < MINIGAME_INFO[regionMinigame].cost || isBusy,
               onClick: () => {
                 if (state.money < MINIGAME_INFO[regionMinigame].cost) return
-                // The Bug Catching Contest is a full-stage scene, so it hands
-                // the phase over to the reducer rather than opening a modal.
-                if (regionMinigame === 'bugContest') {
-                  dispatch({ type: 'START_BUG_CONTEST' })
-                  return
-                }
-                dispatch({
-                  type: 'PAY_MINIGAME_FEE',
-                  payload: {
-                    amount: MINIGAME_INFO[regionMinigame].cost,
-                  },
-                })
-                setShowMining(!0)
+                // Every minigame is a full-stage scene now: hand the phase to
+                // the reducer rather than opening a modal.
+                if (regionMinigame === 'bugContest') dispatch({ type: 'START_BUG_CONTEST' })
+                else if (regionMinigame === 'mining') dispatch({ type: 'START_MINING' })
+                else if (regionMinigame === 'gameCorner')
+                  dispatch({ type: 'START_GAME_CORNER' })
               },
               children:
                 state.money < MINIGAME_INFO[regionMinigame].cost
@@ -462,12 +452,6 @@ export function GymPanel({ onOpenShop }) {
             }),
           ],
         }),
-      showMining &&
-        regionMinigame === 'gameCorner' &&
-        jsx(GameCornerModal, { onClose: () => setShowMining(!1) }),
-      showMining &&
-        regionMinigame === 'mining' &&
-        jsx(MiningModal, { onClose: () => setShowMining(!1) }),
       state.defeatedGyms.length > 0 &&
         jsxs('div', {
           className: 'gym-section',

@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.9.10'
+export const GAME_VERSION = '0.9.11'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.9.11',
+      subtitle: 'Combat Feedback',
+      sections: [
+        {
+          heading: 'Battles',
+          items: [
+            'Damage now pops as a floating number above the hit Pokemon, and the sprite shakes on impact',
+            'Both effects respect the browser\u2019s reduced-motion setting',
+          ],
+        },
+      ],
+    },
     {
       version: '0.9.10',
       subtitle: 'Pokerus',

@@ -42,7 +42,9 @@ export function BattleScene() {
   const currentEvent = battleEvents.length > 0 ? battleEvents[battleEvents.length - 1] : null,
     playerSpecies = pokemonSpecies[playerPokemon.speciesKey],
     activeTrainerBattle = state.bossBattle ?? state.trainerBattle,
-    lastDamageEvent = battleEvents.filter((event) => event.type === 'damage').pop(),
+    lastDamageEvent = battleEvents
+      .filter((event) => event.type === 'damage' || event.type === 'recoil')
+      .pop(),
     lastFaintEvent = battleEvents.filter((event) => event.type === 'faint').pop(),
     pendingTrainerAppear =
       activeTrainerBattle &&
@@ -58,6 +60,14 @@ export function BattleScene() {
     isLatestDamage = lastDamageEvent ? battleEvents.indexOf(lastDamageEvent) === battleEvents.length - 1 : !1,
     playerWasHit = lastDamageEvent?.data?.target === 'player' && isLatestDamage,
     enemyWasHit = lastDamageEvent?.data?.target === 'enemy' && isLatestDamage,
+    damageFloat =
+      isLatestDamage && lastDamageEvent?.data?.damage != null
+        ? {
+            target: lastDamageEvent.data.target,
+            amount: lastDamageEvent.data.damage,
+            key: battleEvents.length,
+          }
+        : null,
     enemyFainted = lastFaintEvent?.data?.target === 'enemy',
     playerFainted = lastFaintEvent?.data?.target === 'player',
     isTown = mapData[state.currentLocation]?.type === 'town',
@@ -288,11 +298,17 @@ export function BattleScene() {
       enemyPokemon &&
         !hideEnemySprite &&
         jsxs('div', {
-          className: `sprite-container enemy-sprite ${enemyWasHit ? 'hit-flash' : ''} ${enemyFainted ? 'faint-anim' : ''} ${isTrainerSendOut ? 'pokemon-appear' : ''}${enemyPokemon.isShiny ? ' shiny-sparkle' : ''}`,
+          className: `sprite-container enemy-sprite ${enemyWasHit ? 'hit-flash hit-shake' : ''} ${enemyFainted ? 'faint-anim' : ''} ${isTrainerSendOut ? 'pokemon-appear' : ''}${enemyPokemon.isShiny ? ' shiny-sparkle' : ''}`,
           children: [
             jsx('div', {
               className: 'sprite-shadow',
             }),
+            damageFloat?.target === 'enemy' &&
+              jsx('span', {
+                className: 'damage-float',
+                key: `enemy-float-${damageFloat.key}`,
+                children: `-${damageFloat.amount}`,
+              }),
             jsx('img', {
               src: getPokemonSpriteUrl(
                 pokemonSpecies[enemyPokemon.speciesKey].id,
@@ -309,11 +325,17 @@ export function BattleScene() {
           ],
         }),
       jsxs('div', {
-        className: `sprite-container player-sprite ${playerWasHit ? 'hit-flash' : ''} ${playerFainted ? 'faint-anim' : ''} ${isPlayerSwitch ? 'pokemon-appear' : ''}${state.playerPokemon?.isShiny ? ' shiny-sparkle' : ''}`,
+        className: `sprite-container player-sprite ${playerWasHit ? 'hit-flash hit-shake' : ''} ${playerFainted ? 'faint-anim' : ''} ${isPlayerSwitch ? 'pokemon-appear' : ''}${state.playerPokemon?.isShiny ? ' shiny-sparkle' : ''}`,
         children: [
           jsx('div', {
             className: 'sprite-shadow',
           }),
+          damageFloat?.target === 'player' &&
+            jsx('span', {
+              className: 'damage-float',
+              key: `player-float-${damageFloat.key}`,
+              children: `-${damageFloat.amount}`,
+            }),
           jsx('img', {
             src: getPokemonSpriteUrl(playerSpecies.id, !0, state.playerPokemon?.isShiny),
             onError: /** @param {{ target: HTMLImageElement }} event */ (event) => (event.target.src = getPokemonSpriteFallbackUrl(playerSpecies.id, !0, state.playerPokemon?.isShiny)),

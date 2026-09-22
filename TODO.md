@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.10**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.11**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -29,7 +29,7 @@ items, best return first:
 
 1. **#16 More ideas (grab bag)** — mostly S · ★★★ — still open: quests,
    challenge modes (Nuzlocke / monotype / randomizer), form-changing items,
-   accessibility, audio, combat feedback and a performance pass.
+   accessibility, audio and a performance pass.
 
 ### Tier 2 — High impact, worth the effort (medium–large)
 
@@ -322,7 +322,8 @@ Smaller or more speculative, roughly highest-value first:
 - [ ] **Accessibility** — reduced-motion toggle, colourblind-safe type badges,
       larger text option.
 - [ ] **Audio** — region music and catch/level-up SFX (currently silent).
-- [ ] **Combat feedback** — floating damage numbers and hit shake for feel.
+- [x] **Combat feedback** — damage now floats above the hit Pokemon and the
+      sprite shakes on impact (both honour reduced-motion). Shipped in 0.9.11.
 - [ ] **Performance pass** — the idle loop dispatches a lot per tick; look at
       memoisation / batching if it ever gets heavy.
 
@@ -1184,6 +1185,9 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.9.11 (combat feedback): damage pops as a floating number above the struck
+Pokemon and the sprite shakes on impact; both respect reduced-motion.
 
 0.9.10 (Pokérus): a very rare party-wide virus caught on a wild win doubles
 EXP for 150 battles, shown as a PKRS badge on party slots and the stats panel.

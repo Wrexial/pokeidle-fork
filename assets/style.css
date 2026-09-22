@@ -736,6 +736,85 @@ img {
     }
 }
 
+.hit-shake {
+    animation: hitShake .3s ease-in-out
+}
+
+.hit-flash.hit-shake {
+    animation: hitFlash .3s steps(4),hitShake .3s ease-in-out
+}
+
+@keyframes hitShake {
+    0%,to {
+        transform: translateX(0)
+    }
+
+    25% {
+        transform: translateX(-5px)
+    }
+
+    50% {
+        transform: translateX(5px)
+    }
+
+    75% {
+        transform: translateX(-3px)
+    }
+}
+
+.damage-float {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    z-index: 30;
+    font-family: var(--font-pixel);
+    font-size: 15px;
+    font-weight: 700;
+    color: #ff5252;
+    text-shadow: 1px 1px 0 #000,-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000;
+    pointer-events: none;
+    animation: damageFloat .7s ease-out forwards
+}
+
+@keyframes damageFloat {
+    0% {
+        opacity: 0;
+        transform: translate(-50%,8px) scale(.7)
+    }
+
+    30% {
+        opacity: 1;
+        transform: translate(-50%,-8px) scale(1.15)
+    }
+
+    to {
+        opacity: 0;
+        transform: translate(-50%,-34px) scale(1)
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hit-flash.hit-shake {
+        animation: hitFlash .3s steps(4)
+    }
+
+    .damage-float {
+        animation: damageFloatReduced .7s ease-out forwards
+    }
+}
+
+@keyframes damageFloatReduced {
+    0%,80% {
+        opacity: 1;
+        transform: translate(-50%,-6px)
+    }
+
+    to {
+        opacity: 0;
+        transform: translate(-50%,-6px)
+    }
+}
+
 .faint-anim {
     animation: faint .8s steps(8) forwards
 }

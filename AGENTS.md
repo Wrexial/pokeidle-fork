@@ -174,7 +174,7 @@ in `GameLayout`) dispatches `DEBUG_MAX_LEVEL` when the Konami code
 | `src/data/moves.js` | Type chart + move-category icons. |
 | `src/data/ui.js` | UI constants: speed options, stat-bar colors, rarity labels, drag defaults, backgrounds. |
 | `src/data/changelog.js` | `GAME_VERSION`, `LAST_SEEN_VERSION_KEY`, `CHANGELOG`. |
-| `src/game/pokemon.js` | Species/stat/exp/learnset math, sprite URLs, `createPokemon`. |
+| `src/game/pokemon.js` | Barrel re-exporting `src/game/pokemon/`: `sprites`, `stats` (stat/IV maths), `evolution` (chains/learnsets), `friendship`, `exp` (curves/yields) and `creation` (`createPokemon`, box helpers). |
 | `src/game/combat.js` | Battle math barrel re-exporting `src/game/combat/`: `damage` (type chart, stat stages, damage), `status` (status/volatile effects), `volatile` (volatile state, speed, screens), `ai` (move choice), `turn` (`resolveBattleTurn`) and `end-of-turn` (residual/field decay). |
 | `src/game/catching.js` | Catch rate/chance, ball selection, auto-catch rules, encounter rarity. |
 | `src/game/progression.js` | Barrel re-exporting `src/game/progression/`: `items` (economy/effects), `offline`, `party` (sync/transitions), `unlocks`, `encounters`, `teams` (trainer/tower), `exp` and `roads`. |

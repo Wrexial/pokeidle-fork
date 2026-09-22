@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.9.28'
+export const GAME_VERSION = '0.9.29'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.9.29',
+      subtitle: 'Egg Ticking & Secrecy',
+      sections: [
+        {
+          heading: 'Fixes',
+          items: [
+            'All Eggs in the party now count down together (previously only one progressed at a time)',
+            'Egg sprites never reveal what is inside: every egg uses the same generic sprite, and the box search/filters can no longer surface a hidden shiny or species',
+          ],
+        },
+      ],
+    },
     {
       version: '0.9.28',
       subtitle: 'Eggs You Carry',

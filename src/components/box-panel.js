@@ -5,7 +5,7 @@ import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
 import { BOX_PAGE_SIZE, BOX_SORT_OPTIONS } from '../data/ui.js'
 import { pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
-import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, pokemonDisplayName } from '../game/pokemon.js'
+import { getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, pokemonDisplayName } from '../game/pokemon.js'
 import { PokedexModal } from './pokedex-modal.js'
 import { RecordsModal } from './records-modal.js'
 import { DaycareModal } from './daycare-modal.js'
@@ -41,9 +41,11 @@ export function BoxPanel({
       if (!searchActive) return state.box
       const needle = query.trim().toLowerCase()
       return state.box.filter((pokemon) => {
-        if (filterMode === 'shiny' && !pokemon.isShiny) return false
+        if (filterMode === 'shiny' && (!pokemon.isShiny || pokemon.isEgg)) return false
         if (filterMode === 'favourite' && !pokemon.favourite) return false
         if (!needle) return true
+        // Never let a search reveal a hidden egg's species.
+        if (pokemon.isEgg) return 'egg'.includes(needle)
         const speciesName = pokemonSpecies[pokemon.speciesKey]?.name ?? pokemon.name
         return (
           (pokemon.nickname ?? '').toLowerCase().includes(needle) ||
@@ -258,7 +260,7 @@ export function BoxPanel({
                         onDragEnd,
                         children: jsx('img', {
                           src: pokemon.isEgg
-                            ? '/sprites/pokemon/egg.png'
+                            ? getEggSpriteUrl()
                             : getPokemonSpriteUrl(species.id, !1, pokemon.isShiny),
                           onError: pokemon.isEgg
                             ? void 0

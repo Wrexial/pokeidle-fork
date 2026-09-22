@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.28**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.29**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -1198,6 +1198,9 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.9.29 (egg ticking & secrecy): all party Eggs tick together, and eggs never
+reveal shiny/species via sprite, search or filters.
 
 0.9.28 (eggs you carry): breeding gives an Egg to collect; carry it in the party
 and win battles to hatch it (steps depend on the species). Eggs can't battle.

@@ -31,13 +31,21 @@ test('createEgg makes a non-battle-ready egg', () => {
 test('tickPartyEggs counts down and hatches', () => {
   const egg = createEgg('pidgey', 1, false, 2),
     first = tickPartyEggs([egg])
-  assert.equal(first.hatched, null)
+  assert.equal(first.hatched.length, 0)
   assert.equal(first.party[0].eggStepsRemaining, 1)
 
   const second = tickPartyEggs(first.party)
-  assert.ok(second.hatched, 'the egg should hatch')
+  assert.equal(second.hatched.length, 1, 'the egg should hatch')
   assert.equal(second.party[0].isEgg, false)
   assert.ok(second.party[0].moves.length >= 1, 'the hatchling should know a move')
+})
+
+test('all party eggs tick together', () => {
+  const eggs = [createEgg('pidgey', 'a', false, 2), createEgg('rattata', 'b', false, 3)],
+    result = tickPartyEggs(eggs)
+  assert.equal(result.party[0].eggStepsRemaining, 1)
+  assert.equal(result.party[1].eggStepsRemaining, 2)
+  assert.equal(result.hatched.length, 0)
 })
 
 test('HATCH_DAYCARE_EGG gives an egg, not a hatched Pokemon', () => {

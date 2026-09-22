@@ -262,21 +262,28 @@ export function formatAwayDuration(ms) {
  * @param {Pokemon[]} party
  * @returns {{ party: Pokemon[], hatched: Pokemon | null }}
  */
+/**
+ * Advance every egg in a party by one won wild battle. Only eggs carried in the
+ * party progress; all of them tick together and any that reach zero hatch.
+ * @param {Pokemon[]} party
+ * @returns {{ party: Pokemon[], hatched: Pokemon[] }}
+ */
 export function tickPartyEggs(party) {
-  let hatched = /** @type {Pokemon | null} */ (null),
+  let /** @type {Pokemon[]} */ hatched = [],
     changed = false
   const nextParty = party.map((member) => {
-    if (!member.isEgg || hatched) return member
+    if (!member.isEgg) return member
     changed = true
     const remaining = (member.eggStepsRemaining ?? 1) - 1
     if (remaining > 0) return { ...member, eggStepsRemaining: remaining }
-    hatched = {
+    const hatchedMember = {
       ...member,
       isEgg: false,
       eggStepsRemaining: 0,
       moves: resolvePokemonMoves(member.speciesKey, member.level || 1),
     }
-    return hatched
+    hatched.push(hatchedMember)
+    return hatchedMember
   })
   return { party: changed ? nextParty : party, hatched }
 }

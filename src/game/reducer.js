@@ -347,7 +347,7 @@ export function gameReducer(state, action) {
         quests = state.quests,
         daycare = state.daycare,
         party = state.party,
-        hatchedEgg = null,
+        hatchedEgg = /** @type {Pokemon[]} */ ([]),
         inventory = state.inventory,
         secretNotices = [],
         dropNotifications = [],
@@ -465,38 +465,40 @@ export function gameReducer(state, action) {
       })
       for (const dropNotification of dropNotifications)
         syncedState = withNotification(syncedState, dropNotification)
-      if (hatchedEgg) {
-        const hatchKey = hatchedEgg.speciesKey
-        syncedState = withNotification(
-          {
-            ...syncedState,
-            hatchResult: hatchedEgg,
-            pokedexSeen: syncedState.pokedexSeen.includes(hatchKey)
-              ? syncedState.pokedexSeen
-              : [...syncedState.pokedexSeen, hatchKey],
-            pokedexCaught: syncedState.pokedexCaught.includes(hatchKey)
-              ? syncedState.pokedexCaught
-              : [...syncedState.pokedexCaught, hatchKey],
-            shinySeen:
-              hatchedEgg.isShiny && !syncedState.shinySeen.includes(hatchKey)
-                ? [...syncedState.shinySeen, hatchKey]
-                : syncedState.shinySeen,
-            shinyCaught:
-              hatchedEgg.isShiny && !syncedState.shinyCaught.includes(hatchKey)
-                ? [...syncedState.shinyCaught, hatchKey]
-                : syncedState.shinyCaught,
-            battleLog: [
-              ...syncedState.battleLog,
-              `Your Egg hatched into ${hatchedEgg.name}${hatchedEgg.isShiny ? ' \u2726 shiny!' : ''}!`,
-            ].slice(-50),
-          },
-          {
-            message: `Your Egg hatched into ${hatchedEgg.name}!`,
-            tone: hatchedEgg.isShiny ? 'shiny' : 'success',
-            icon: '\ud83d\udc23',
-            dedupeKey: `hatch:${hatchedEgg.id}`,
-          }
-        )
+      if (hatchedEgg.length > 0) {
+        for (const hatched of hatchedEgg) {
+          const hatchKey = hatched.speciesKey
+          syncedState = withNotification(
+            {
+              ...syncedState,
+              pokedexSeen: syncedState.pokedexSeen.includes(hatchKey)
+                ? syncedState.pokedexSeen
+                : [...syncedState.pokedexSeen, hatchKey],
+              pokedexCaught: syncedState.pokedexCaught.includes(hatchKey)
+                ? syncedState.pokedexCaught
+                : [...syncedState.pokedexCaught, hatchKey],
+              shinySeen:
+                hatched.isShiny && !syncedState.shinySeen.includes(hatchKey)
+                  ? [...syncedState.shinySeen, hatchKey]
+                  : syncedState.shinySeen,
+              shinyCaught:
+                hatched.isShiny && !syncedState.shinyCaught.includes(hatchKey)
+                  ? [...syncedState.shinyCaught, hatchKey]
+                  : syncedState.shinyCaught,
+              battleLog: [
+                ...syncedState.battleLog,
+                `Your Egg hatched into ${hatched.name}${hatched.isShiny ? ' \u2726 shiny!' : ''}!`,
+              ].slice(-50),
+            },
+            {
+              message: `Your Egg hatched into ${hatched.name}!`,
+              tone: hatched.isShiny ? 'shiny' : 'success',
+              icon: '\ud83d\udc23',
+              dedupeKey: `hatch:${hatched.id}`,
+            }
+          )
+        }
+        syncedState = { ...syncedState, hatchResult: hatchedEgg[hatchedEgg.length - 1] }
       }
       if (
         event.type === 'victory' ||

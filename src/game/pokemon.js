@@ -187,6 +187,15 @@ export function pokemonDisplayName(pokemon) {
 }
 
 /**
+ * The generic egg sprite. Every egg (any species, shiny or not) uses the same
+ * image so the sprite never reveals what is inside.
+ * @returns {string}
+ */
+export function getEggSpriteUrl() {
+  return '/sprites/pokemon/egg.png'
+}
+
+/**
  * Whether a Pokemon can fight: eggs cannot, and neither can fainted Pokemon.
  * @param {{ isEgg?: boolean, currentHp?: number }} pokemon
  * @returns {boolean}

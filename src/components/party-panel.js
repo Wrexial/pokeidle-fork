@@ -5,7 +5,7 @@ import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
 import { evolutionItems } from '../data/items.js'
 import { evolutionData, pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
-import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, pokemonDisplayName } from '../game/pokemon.js'
+import { getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, pokemonDisplayName } from '../game/pokemon.js'
 import { genderForPokemon } from '../game/breeding.js'
 import { formatReward, releaseReward } from '../game/progression.js'
 import { ExpBar } from './exp-bar.js'
@@ -231,7 +231,7 @@ export function PartyPanel({
                         jsx('img', {
                           className: 'party-sprite',
                           src: member.isEgg
-                            ? '/sprites/pokemon/egg.png'
+                            ? getEggSpriteUrl()
                             : getPokemonSpriteUrl(species.id, !1, member.isShiny),
                           onError: member.isEgg
                             ? void 0

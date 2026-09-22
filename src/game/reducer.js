@@ -1,13 +1,13 @@
 // Split from the former assets/index.js — see tools/decompile/split-modules.mjs
 
-import { BATTLE_TOWER_REGION, RAID_COOLDOWN_MS, RAID_LEVEL_MAX, breedShinyOdds, breedShinyParentOdds, daycareEggBattles, defaultCatchSettings, dexRewardVictoryTokens, expCandyDropChance, prestigeTokenReward, rareCandyDropChance, swarmBattleCount, swarmSpawnChance, valuableDropChance, wildMasterBallChance, wonderTradeShinyOdds } from '../data/config.js'
+import { BATTLE_TOWER_REGION, RAID_COOLDOWN_MS, RAID_LEVEL_MAX, breedShinyOdds, breedShinyParentOdds, daycareEggBattles, defaultCatchSettings, dexRewardVictoryTokens, expCandyDropChance, prestigeTokenReward, rareCandyDropChance, swarmBattleCount, swarmSpawnChance, tutorMoveCost, valuableDropChance, wildMasterBallChance, wonderTradeShinyOdds } from '../data/config.js'
 import { ACHIEVEMENTS } from '../data/achievements.js'
 import { activeItems, consumableItems, evolutionItems, heldItems, pokeBalls } from '../data/items.js'
 import { dailyDropMultiplier, dailyEventByKey, rollDailyEvent, todayKey } from '../data/daily-events.js'
 import { natureName, randomNature } from '../data/natures.js'
 import { elite4Data, encounterData, gymLeaderData, mapData, moveLearnsets, pokemonSpecies, regions } from '../data/gameData.js'
 import { createVolatileState } from './combat.js'
-import { calculatePokemonStats, calculateRequiredExperience, createEgg, createPokemon, gainFriendship, getLevelUpResults, insertIntoBox, isBattleReady, judgeIVs, nextBoxSortMode, resolvePokemonMoves, sortBoxMembers } from './pokemon.js'
+import { calculatePokemonStats, calculateRequiredExperience, createEgg, createPokemon, gainFriendship, getLevelUpResults, insertIntoBox, isBattleReady, isTutorMove, judgeIVs, nextBoxSortMode, resolvePokemonMoves, sortBoxMembers } from './pokemon.js'
 import { canBreed, eggHatchSteps, eggSpeciesKey, inheritBreedingTraits } from './breeding.js'
 import { advanceQuests, questLabel, rollQuests } from './quests.js'
 import { buildTrainerTeam, buildTowerFloor, checkShinyOdds, computeUnlockedLocations, formatReward, getRegionUnlockTokens, isActiveEffectItem, loadActivePokemonFromParty, prepareNextBattle, releaseReward, rollCandyDrop, rollValuableDrop, syncActivePokemonIntoParty, tickBattleCounters, tickPartyEggs, tickPokerus } from './progression.js'
@@ -818,15 +818,31 @@ export function gameReducer(state, action) {
       const targetId = pokemonId ?? state.playerPokemon?.id
       if (!targetId) return state
       const updateMoves = /** @param {Pokemon} member */ (member) =>
-        member.id === targetId ? { ...member, moves } : member
-      if (!state.party.some((member) => member.id === targetId) && !state.box.some((member) => member.id === targetId))
-        return state
+        member.id === targetId ? { ...member, moves } : member,
+        target =
+          state.party.find((member) => member.id === targetId) ??
+          state.box.find((member) => member.id === targetId)
+      if (!target) return state
+      // Move Tutor TM moves cost money when they're newly taught.
+      const knownMoves = new Set(target.moves ?? []),
+        tutorMoves = moves.filter(
+          (moveId) => !knownMoves.has(moveId) && isTutorMove(target.speciesKey, moveId)
+        ),
+        tutorCost = tutorMoves.length * tutorMoveCost
+      if (tutorCost > state.money) return state
       const playerPokemon =
         state.playerPokemon && state.playerPokemon.id === targetId
           ? { ...state.playerPokemon, moves }
           : state.playerPokemon
       return {
         ...state,
+        money: state.money - tutorCost,
+        battleLog: tutorCost
+          ? [
+              ...state.battleLog,
+              `Taught ${tutorMoves.length} move${tutorMoves.length > 1 ? 's' : ''} for $${tutorCost.toLocaleString()}.`,
+            ].slice(-50)
+          : state.battleLog,
         party: state.party.map(updateMoves),
         box: state.box.map(updateMoves),
         playerPokemon,

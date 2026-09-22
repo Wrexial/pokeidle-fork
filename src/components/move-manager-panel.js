@@ -4,12 +4,13 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { moveCategoryIcons } from '../data/moves.js'
 import { moveData, pokemonSpecies } from '../data/gameData.js'
+import { tutorMoveCost } from '../data/config.js'
 import { useGame } from '../game/context.js'
-import { getFamilyLearnset, pokemonDisplayName } from '../game/pokemon.js'
+import { getFamilyLearnset, getTutorMoves, pokemonDisplayName } from '../game/pokemon.js'
 
 /** @param {{ pokemon: Pokemon, onClose: () => void }} props */
 export function MoveManagerPanel({ pokemon, onClose }) {
-  const { dispatch } = useGame(),
+  const { state, dispatch } = useGame(),
     // Freeze the target at mount: the active Pokemon can change (faint and
     // auto-switch) while the panel is open, and the moves must never land on a
     // different Pokemon.
@@ -17,6 +18,15 @@ export function MoveManagerPanel({ pokemon, onClose }) {
     targetId = target.id,
     [moves, setMoves] = React.useState(() => [...target.moves]),
     availableMoves = getFamilyLearnset(target.speciesKey, target.level),
+    tutorMoves = getTutorMoves(target.speciesKey),
+    tutorSet = new Set(tutorMoves),
+    allMoves = [
+      ...availableMoves.map(({ moveId, learnLevel }) => ({ moveId, learnLevel })),
+      ...tutorMoves.map((moveId) => ({ moveId, learnLevel: -1 })),
+    ],
+    pendingTutorCost =
+      moves.filter((moveId) => tutorSet.has(moveId) && !target.moves.includes(moveId)).length *
+      tutorMoveCost,
     species = pokemonSpecies[target.speciesKey]
   /** @param {string} moveId */
   function toggleMove(moveId) {
@@ -94,11 +104,11 @@ export function MoveManagerPanel({ pokemon, onClose }) {
         }),
         jsx('div', {
           className: 'move-panel-section-label',
-          children: 'Available Moves',
+          children: `Available Moves${tutorMoves.length ? ` \u00b7 Tutor $${tutorMoveCost.toLocaleString()}` : ''}`,
         }),
         jsx('div', {
           className: 'move-panel-list',
-          children: availableMoves.map(({ moveId, learnLevel }) => {
+          children: allMoves.map(({ moveId, learnLevel }) => {
             const moveDef = moveData[moveId]
             if (!moveDef) return null
             const isSelected = moves.includes(moveId)
@@ -126,7 +136,10 @@ export function MoveManagerPanel({ pokemon, onClose }) {
                   }),
                   jsxs('span', {
                     className: 'move-panel-item-level',
-                    children: ['Lv.', learnLevel],
+                    children:
+                      learnLevel < 0
+                        ? `TM $${tutorMoveCost.toLocaleString()}`
+                        : `Lv.${learnLevel}`,
                   }),
                 ],
               },
@@ -134,6 +147,11 @@ export function MoveManagerPanel({ pokemon, onClose }) {
             )
           }),
         }),
+        pendingTutorCost > 0 &&
+          jsx('div', {
+            className: 'move-panel-tutor-cost',
+            children: `Tutor cost: $${pendingTutorCost.toLocaleString()} \u00b7 you have $${state.money.toLocaleString()}`,
+          }),
         jsxs('div', {
           className: 'move-panel-buttons',
           children: [

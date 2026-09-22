@@ -210,6 +210,7 @@ These are loaded by `assets/gameDataInjector.js` (`key` → file):
 | `animatedSprites` | `animated-sprites.json` (ids missing each animated variant) |
 | `evolutionData` | `evolution-data.json` |
 | `moveLearnsets` | **`possible-learnsets.json`** |
+| `tmLearnsets` | `tm-learnsets.json` (machine/TM moves per species) |
 | `moveData` | **`possible-moves.json`** |
 | `mapEncounterData` | `encounter-data/<region>.json` (merged) |
 | `mapData` | `map-data/<region>.json` (merged) |
@@ -418,6 +419,11 @@ One-off scripts used to build the data JSON (not run during dev/build):
   ability keys). Cached alongside the breeding data; `rollAbility`
   (`src/game/pokemon.js`) assigns one when a Pokemon is created. Re-run after
   adding species/form ids.
+- `fetch-tm-learnsets.cjs` — reads each species' cached `/pokemon/{id}` response
+  and writes `public/data/tm-learnsets.json`, the machine (TM) moves it can learn
+  in its newest game. Feeds the Move Tutor (`getTutorMoves` in
+  `src/game/pokemon.js`); normally needs no network (the responses are cached by
+  fetch-abilities.cjs). Re-run after adding species/form ids.
 - `download_pokemon_sprites.cjs` — fills the local sprite tree for every id in
   `pokemon-species.json`: static front/back/shiny from PokeAPI, and animated
   front/back/shiny from Gen V for dex ids 1-649 falling back to Pokémon

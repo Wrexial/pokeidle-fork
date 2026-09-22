@@ -1,10 +1,22 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.23.0'
+export const GAME_VERSION = '0.24.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.24.0',
+      subtitle: 'Move Tutor',
+      sections: [
+        {
+          heading: 'Pokemon',
+          items: [
+            'The Manage Moves panel now has a Move Tutor: it lists the TMs each Pokemon can learn (its real machine move set from the newest game), taught for $4,000 each. Level-up moves remain free',
+          ],
+        },
+      ],
+    },
     {
       version: '0.23.0',
       subtitle: 'Nuzlocke Mode',

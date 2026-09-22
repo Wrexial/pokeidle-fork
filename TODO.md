@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.22.0**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.24.0**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -69,7 +69,8 @@ items, best return first:
     inherited nature, and inherited moves).
 30. ✅ **#6 Friendship / happiness** — shipped 0.12.0 (friendship rises with
     levels and wins; gates 17 friendship evolutions).
-31. **#9 Move tutor / TMs** — M · ★★★
+31. ✅ **#9 Move tutor / TMs** — shipped 0.24.0 (per-species machine moves,
+    taught for $4,000 in the Manage Moves panel).
 32. **#11 NPC gifts & static encounters** — M · ★★★
 33. ✅ **#17 Pokéball variants** — shipped 0.13.0 (Quick/Timer/Repeat/Net/Dive/
     Dusk/Nest/Premier with situational rates; auto-catch picks the best).
@@ -229,16 +230,16 @@ or protection against releasing something valuable.
 
 Effort: **medium**.
 
-## 9. Move tutor / TMs
+## 9. ✅ Move tutor / TMs — shipped in 0.24.0
 
-`move-manager-panel.js` already lets a Pokémon (re)learn from its family's
-learnset (`getFamilyLearnset`). TMs/tutors would add *cross-family* moves.
-
-- [ ] A TM item list (one per move) bought/found, consumed on use.
-- [ ] Compatibility rules (which species can learn which move).
-- [ ] UI in the move manager to teach a TM move.
-
-Effort: **medium**. Needs a compatibility data set.
+Done. `tools/fetch-tm-learnsets.cjs` writes `public/data/tm-learnsets.json`, the
+machine (TM) moves each species can learn in its newest game (from the cached
+PokeAPI `/pokemon/{id}` responses). `getTutorMoves` / `isTutorMove`
+(`src/game/pokemon.js`) expose the cross-family moves, and the Manage Moves panel
+lists them with a price; `SET_MOVES` charges `tutorMoveCost` ($4,000) per newly
+taught TM (level-up moves stay free) and refuses if you can't afford it.
+Covered by `tests/move-tutor.test.mjs`. A one-TM-per-move item list is still
+possible later.
 
 ## 10. ✅ Weather & terrain — shipped in 0.17.0 / 0.20.0
 
@@ -1190,6 +1191,9 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.24.0 (Move Tutor): the Manage Moves panel lists each Pokemon's real TM moves
+and teaches them for $4,000 (level-up moves stay free). #9 done.
 
 0.23.0 (Nuzlocke): a Settings challenge toggle releases fainted party Pokemon
 permanently (the last one is always spared). #16's Nuzlocke is done.

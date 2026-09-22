@@ -1,7 +1,7 @@
 // Split from src/game/logic.js — see tools/decompile/split-logic.mjs
 
 import { evValue } from '../data/config.js'
-import { animatedSprites, abilityData, evolutionData, moveLearnsets, pokemonSpecies, preEvolutionMap, trainerClasses } from '../data/gameData.js'
+import { animatedSprites, abilityData, evolutionData, moveLearnsets, pokemonSpecies, preEvolutionMap, tmLearnsets, trainerClasses } from '../data/gameData.js'
 import { natureStatModifiers, randomNature } from '../data/natures.js'
 import { BOX_SORT_OPTIONS } from '../data/ui.js'
 
@@ -337,6 +337,31 @@ export function resolvePokemonMoves(speciesKey, level) {
     .filter(([learnLevel]) => learnLevel <= level)
     .map(([, moveId]) => moveId)
     .slice(-4)
+}
+
+/**
+ * TM moves a Pokemon can be tutored that aren't already in its family's
+ * level-up learnset, in stable order.
+ * @param {string} speciesKey
+ * @returns {string[]}
+ */
+export function getTutorMoves(speciesKey) {
+  const tmMoves = tmLearnsets[speciesKey]
+  if (!tmMoves) return []
+  const familyMoves = new Set(
+    getFamilyLearnset(speciesKey, 1000).map((entry) => entry.moveId)
+  )
+  return tmMoves.filter((moveId) => !familyMoves.has(moveId))
+}
+
+/**
+ * Whether a move is a Move Tutor (TM) move for this species.
+ * @param {string} speciesKey
+ * @param {string} moveId
+ * @returns {boolean}
+ */
+export function isTutorMove(speciesKey, moveId) {
+  return getTutorMoves(speciesKey).includes(moveId)
 }
 
 /** Birthday friendship every newly obtained Pokemon starts with. */

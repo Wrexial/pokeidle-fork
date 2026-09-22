@@ -34,6 +34,11 @@ export let moveLearnsets = /** @type {Record<string, [number, string][]>} */ (
   loadedGameData.moveLearnsets
 )
 
+/** Machine (TM) learnable moves per species (see tools/fetch-tm-learnsets.cjs). */
+export let tmLearnsets = /** @type {Record<string, string[]>} */ (
+  loadedGameData.tmLearnsets ?? {}
+)
+
 export let mapData = /** @type {Record<string, MapLocation>} */ (loadedGameData.mapData)
 
 export let encounterData = /** @type {Record<string, EncounterData>} */ (

@@ -22,6 +22,8 @@ export const initialGameState = {
   battleEvents: [],
   pendingEvents: [],
   currentEventIndex: 0,
+  /** Turns the current battle has lasted (see CatchContext). */
+  battleTurn: 0,
   speed: 1,
   paused: !1,
   battleLog: [],
@@ -303,12 +305,14 @@ export function gameReducer(state, action) {
           },
         ],
         currentEventIndex: 0,
+        battleTurn: 0,
         playerVolatile: createVolatileState(),
       }
     }
     case 'EXECUTE_TURN':
       return {
         ...state,
+        battleTurn: (state.battleTurn ?? 0) + 1,
         pendingEvents: [...state.pendingEvents, ...action.payload.events],
       }
     case 'CONSUME_EVENT': {
@@ -1251,6 +1255,7 @@ export function gameReducer(state, action) {
           },
         ],
         currentEventIndex: 0,
+        battleTurn: 0,
         activePlayerPokemonIndex: 0,
         trainerBattle: {
           trainerId,
@@ -1290,6 +1295,7 @@ export function gameReducer(state, action) {
           },
         ],
         currentEventIndex: 0,
+        battleTurn: 0,
         activePlayerPokemonIndex: 0,
         bossBattle: {
           bossId,
@@ -1456,6 +1462,7 @@ export function gameReducer(state, action) {
           enemyPokemon: firstPokemon,
           battleEvents: [],
           currentEventIndex: 0,
+          battleTurn: 0,
           pendingEvents: [
             { type: 'trainerAppear', message: `${trainerName} wants to battle!` },
             { type: 'trainerSendOut', message: `${trainerName} sent out ${firstPokemon.name}!` },
@@ -1567,6 +1574,7 @@ export function gameReducer(state, action) {
               },
             ],
             currentEventIndex: 0,
+            battleTurn: 0,
             bossBattle: {
               bossId: nextBoss.bossId,
               bossType: nextBoss.bossType,
@@ -2148,6 +2156,7 @@ export function gameReducer(state, action) {
             },
           ],
           currentEventIndex: 0,
+          battleTurn: 0,
           bossBattle: {
             bossId: bossBattle.bossId,
             bossType: bossBattle.bossType,
@@ -2496,6 +2505,7 @@ export function gameReducer(state, action) {
           battleEvents: [],
           pendingEvents: [],
           currentEventIndex: 0,
+          battleTurn: 0,
           enemyPokemon: null,
           playerPokemon: state.party.find((member) => isBattleReady(member)) ?? state.party[0] ?? state.playerPokemon,
           activePlayerPokemonIndex: 0,

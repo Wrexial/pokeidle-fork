@@ -13,23 +13,58 @@ export function getCatchRate(speciesKey) {
 }
 
 /**
- * @param {string} speciesKey
+ * Situational multiplier for a ball. Balls without a situation fall back to
+ * their flat `ballModifier`. `context.turn` is how many turns the battle
+ * lasted, which is when the ball is actually thrown in this idle game.
  * @param {string} ballId
+ * @param {CatchContext} [context]
  * @returns {number}
  */
-export function calculateCatchChance(speciesKey, ballId) {
-  const catchRate = getCatchRate(speciesKey),
-    ball = pokeBalls[ballId]
-  return ball ? Math.min(1, (catchRate * ball.ballModifier) / 255) : 0
+export function getBallModifier(ballId, context = {}) {
+  const ball = pokeBalls[ballId]
+  if (!ball) return 0
+  switch (ballId) {
+    case 'quickball':
+      return (context.turn ?? 1) <= 1 ? 5 : 1
+    case 'timerball': {
+      const turns = Math.max(1, context.turn ?? 1)
+      return Math.min(4, 1 + (turns - 1) * 0.3)
+    }
+    case 'repeatball':
+      return context.alreadyCaught ? 3.5 : 1
+    case 'netball':
+      return (context.types ?? []).some((type) => type === 'Water' || type === 'Bug') ? 3.5 : 1
+    case 'diveball':
+      return context.isWater ? 3.5 : 1
+    case 'duskball':
+      return context.isCave || context.isNight ? 3 : 1
+    case 'nestball':
+      return Math.max(1, Math.min(4, (41 - (context.level ?? 50)) / 10))
+    default:
+      return ball.ballModifier
+  }
 }
 
 /**
  * @param {string} speciesKey
  * @param {string} ballId
+ * @param {CatchContext} [context]
+ * @returns {number}
+ */
+export function calculateCatchChance(speciesKey, ballId, context) {
+  const catchRate = getCatchRate(speciesKey),
+    modifier = getBallModifier(ballId, context)
+  return modifier > 0 ? Math.min(1, (catchRate * modifier) / 255) : 0
+}
+
+/**
+ * @param {string} speciesKey
+ * @param {string} ballId
+ * @param {CatchContext} [context]
  * @returns {boolean}
  */
-export function attemptCatch(speciesKey, ballId) {
-  const chance = calculateCatchChance(speciesKey, ballId)
+export function attemptCatch(speciesKey, ballId, context) {
+  const chance = calculateCatchChance(speciesKey, ballId, context)
   return Math.random() < chance
 }
 
@@ -37,9 +72,10 @@ export function attemptCatch(speciesKey, ballId) {
  * @param {string} speciesKey
  * @param {string[]} enabledBalls
  * @param {Record<string, number>} inventory
+ * @param {CatchContext} [context]
  * @returns {string | null}
  */
-export function selectBestBall(speciesKey, enabledBalls, inventory) {
+export function selectBestBall(speciesKey, enabledBalls, inventory, context) {
   // The Master Ball is never picked automatically: it is a deliberate, one-off
   // throw from the battle button so a routine auto-catch can't silently spend
   // the rarest ball in the game. See THROW_MASTER_BALL in the reducer.
@@ -49,8 +85,34 @@ export function selectBestBall(speciesKey, enabledBalls, inventory) {
   )
   if (usableBalls.length === 0) return null
   const catchRate = getCatchRate(speciesKey)
-  for (const ballId of usableBalls) if ((catchRate * pokeBalls[ballId].ballModifier) / 255 >= 1) return ballId
-  return usableBalls[usableBalls.length - 1]
+  for (const ballId of usableBalls)
+    if ((catchRate * getBallModifier(ballId, context)) / 255 >= 1) return ballId
+  return usableBalls.reduce((best, ballId) =>
+    getBallModifier(ballId, context) > getBallModifier(best, context) ? ballId : best
+  )
+}
+
+/** Whether a route's location reads as water (for the Dive Ball). @param {MapLocation | undefined} location */
+export function isWaterLocation(location) {
+  if (!location) return !1
+  const text = `${location.name ?? ''} ${location.description ?? ''}`.toLowerCase()
+  return (
+    location.background === '/backgrounds/beach.png' ||
+    /sea|ocean|lake|bay|river|water|cove|harbou?r|coast|beach|island|surf|whirl/.test(text)
+  )
+}
+
+/** Whether a route's location reads as a cave (for the Dusk Ball). @param {MapLocation | undefined} location */
+export function isCaveLocation(location) {
+  if (!location) return !1
+  const text = `${location.name ?? ''} ${location.description ?? ''}`.toLowerCase()
+  return location.background === '/backgrounds/cave.png' || /cave|tunnel|mine|cavern|grotto/.test(text)
+}
+
+/** Whether the local time is night (20:00-03:59). @param {Date} [date] */
+export function isNightTime(date = new Date()) {
+  const hour = date.getHours()
+  return hour >= 20 || hour < 4
 }
 
 /**
@@ -89,11 +151,12 @@ export function shouldAutoCatch(state, routeKey, speciesKey, level, isShiny) {
  * @param {GameState} state
  * @param {string} routeKey
  * @param {string} speciesKey
+ * @param {CatchContext} [context]
  * @returns {string | null}
  */
-export function selectAutoCatchBall(state, routeKey, speciesKey) {
+export function selectAutoCatchBall(state, routeKey, speciesKey, context) {
   const rule = getCatchRule(state, routeKey, speciesKey)
-  return selectBestBall(speciesKey, rule.enabledBalls, state.inventory)
+  return selectBestBall(speciesKey, rule.enabledBalls, state.inventory, context)
 }
 
 /**

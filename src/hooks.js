@@ -9,7 +9,7 @@ import { ACHIEVEMENTS } from './data/achievements.js'
 import { dailyExpMultiplier, dailyPrizeMultiplier, dailyShinyMultiplier } from './data/daily-events.js'
 import { useGame } from './game/context.js'
 import { playSfx, startMusic, stopMusic, unlockAudio } from './game/audio.js'
-import { attemptCatch, selectAutoCatchBall, selectBestBall, shouldAutoCatch } from './game/catching.js'
+import { attemptCatch, isCaveLocation, isNightTime, isWaterLocation, selectAutoCatchBall, selectBestBall, shouldAutoCatch } from './game/catching.js'
 import { createVolatileState, resolveBattleTurn } from './game/combat.js'
 import { calculatePokemonStats, generateIVs, getPerfectIVs, isBattleReady, resolvePokemonMoves } from './game/pokemon.js'
 import { awaySummary, awardExperience, checkShinyOdds, pokerusExpMultiplier, resolveActiveModifiers, resolvePokemonEncounter, resolveRoamer, shinyOddsForSpecies } from './game/progression.js'
@@ -527,6 +527,15 @@ export function useGameLoop() {
             return
           }
           const enemyPokemon = currentGameState.enemyPokemon
+          const catchContext = {
+            level: enemyPokemon.level,
+            types: pokemonSpecies[enemyPokemon.speciesKey]?.types ?? [],
+            alreadyCaught: currentGameState.pokedexCaught.includes(enemyPokemon.speciesKey),
+            turn: currentGameState.battleTurn ?? 1,
+            isWater: isWaterLocation(mapData[currentGameState.currentLocation]),
+            isCave: isCaveLocation(mapData[currentGameState.currentLocation]),
+            isNight: isNightTime(),
+          }
           awardExperience(
             dispatch,
             currentGameState.playerPokemon,
@@ -549,14 +558,20 @@ export function useGameLoop() {
             )
           ) {
             const ballId = forceCatch
-              ? selectBestBall(enemyPokemon.speciesKey, ballOrder, currentGameState.inventory)
+              ? selectBestBall(
+                  enemyPokemon.speciesKey,
+                  ballOrder,
+                  currentGameState.inventory,
+                  catchContext
+                )
               : selectAutoCatchBall(
                   currentGameState,
                   currentGameState.currentRoute,
-                  enemyPokemon.speciesKey
+                  enemyPokemon.speciesKey,
+                  catchContext
                 )
             ballId
-              ? attemptCatch(enemyPokemon.speciesKey, ballId)
+              ? attemptCatch(enemyPokemon.speciesKey, ballId, catchContext)
                 ? (dispatch({
                     type: 'CATCH_POKEMON',
                     payload: {

@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.12.0**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.13.0**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -71,7 +71,8 @@ items, best return first:
     levels and wins; gates 17 friendship evolutions).
 31. **#9 Move tutor / TMs** — M · ★★★
 32. **#11 NPC gifts & static encounters** — M · ★★★
-33. **#17 Pokéball variants** — M · ★★★
+33. ✅ **#17 Pokéball variants** — shipped 0.13.0 (Quick/Timer/Repeat/Net/Dive/
+    Dusk/Nest/Premier with situational rates; auto-catch picks the best).
 34. **#27 Gender-specific sprites** — M · ★★★ (assets are half-there)
 35. **#29 Minigames** — M–L · ★★★ (small per minigame once one exists)
 36. **#4 In-battle Mega evolution** — M–L · ★★★
@@ -345,24 +346,19 @@ Smaller or more speculative, roughly highest-value first:
 - [ ] **Performance pass** — the idle loop dispatches a lot per tick; look at
       memoisation / batching if it ever gets heavy.
 
-## 17. Pokéball variants
+## 17. ✅ Pokéball variants — shipped in 0.13.0
 
-There are only four balls (`src/data/items.js`) with a flat `ballModifier`, and
-`selectAutoCatchBall` just picks the strongest affordable one. In the real games
-most balls are *situational*, which is where the fun is.
-
-- [ ] Give `attemptCatch` / `selectBestBall` / `selectAutoCatchBall` the context
-      they need: turn number, target level + types, whether it's already
-      registered, encounter method (surfing/fishing/cave), weather/time.
-- [ ] Add the conditional balls, e.g. Quick (×5 first turn), Timer (scales with
-      turns), Repeat (×3.5 if already caught), Net (×3.5 Water/Bug), Dive
-      (×3.5 on water), Dusk (×3 in caves / at night), Nest (scales with the
-      target's level), Heal (heals on catch), Luxury/Friend/Premier (flavour /
-      friendship).
-- [ ] Let catch settings pick balls by situation (the auto-catch chooser).
-- [ ] Colours/sprites: `pokeballColors` already exists — extend it.
-
-Effort: **medium**.
+Done. Added Quick, Timer, Repeat, Net, Dive, Dusk, Nest and Premier balls to
+`pokeBalls`/`ballOrder` (`src/data/items.js`) and a `getBallModifier`
+(`src/game/catching.js`) that scales them by context: battle length (Quick /
+Timer), Pokedex registration (Repeat), types (Net), water routes (Dive),
+caves/night (Dusk) and target level (Nest). `attemptCatch` /
+`selectBestBall` / `selectAutoCatchBall` all take a `CatchContext`, built in
+`hooks.js` from the enemy, the Pokedex and the current location/time; auto-catch
+picks the highest effective rate. The balls are sold in marts via
+`standardMartItems` (gated on wild wins) with `pokeballColors` entries and rack
+icons. Covered by `tests/catching.test.mjs`. Heal/Luxury/Friend balls still
+possible (they'd need items/friendship effects).
 
 ## 18. Better settings
 
@@ -1158,6 +1154,9 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.13.0 (situational balls): Quick/Timer/Repeat/Net/Dive/Dusk/Nest/Premier balls
+with context-aware rates; auto-catch picks the best for the situation. #17 done.
 
 0.12.0 (friendship): Pokemon have a friendship value that rises with levels and
 wild wins and gates 17 friendship evolutions; the stats panel shows it. #6 done.

@@ -142,6 +142,24 @@ type CatchRule = {
   enabledBalls: string[]
 }
 
+/** Extra information a situational ball needs at catch time. */
+type CatchContext = {
+  /** Target's level (Nest Ball). */
+  level?: number
+  /** Target's types (Net Ball). */
+  types?: string[]
+  /** Whether the species is already registered in the Pokedex (Repeat Ball). */
+  alreadyCaught?: boolean
+  /** How many turns the battle lasted (Quick / Timer Ball). */
+  turn?: number
+  /** Whether the current route is water (Dive Ball). */
+  isWater?: boolean
+  /** Whether the current route is a cave (Dusk Ball). */
+  isCave?: boolean
+  /** Whether it is night locally (Dusk Ball). */
+  isNight?: boolean
+}
+
 type VolatileState = {
   statStages: Record<string, number>
   mustRecharge: boolean
@@ -208,6 +226,8 @@ type GameState = {
   battleLog: string[]
   battleEvents: any[]
   pendingEvents: any[]
+  /** Turns the current battle has lasted (reset when a new one starts). */
+  battleTurn: number
   currentRoute: string
   currentLocation: string
   unlockedLocations: string[]

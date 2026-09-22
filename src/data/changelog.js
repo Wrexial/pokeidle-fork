@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.12.0'
+export const GAME_VERSION = '0.13.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.13.0',
+      subtitle: 'Situational Poke Balls',
+      sections: [
+        {
+          heading: 'Catching',
+          items: [
+            'Added eight situational balls: Quick (x5 on a one-turn battle), Timer (up to x4 the longer the fight), Repeat (x3.5 on species already in your Pokedex), Net (x3.5 on Water/Bug types), Dive (x3.5 on water routes), Dusk (x3 in caves or at night), Nest (better on low-level targets) and Premier (standard)',
+            'Auto-catch now picks the ball with the best catch rate for the situation, and the catch-settings ball picker and marts include the new balls (unlocked as you win more wild battles)',
+          ],
+        },
+      ],
+    },
     {
       version: '0.12.0',
       subtitle: 'Friendship',

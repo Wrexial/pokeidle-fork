@@ -419,6 +419,7 @@ export function createIdleBattleState() {
     battleEvents: [],
     pendingEvents: [],
     currentEventIndex: 0,
+    battleTurn: 0,
     trainerBattle: null,
     bossBattle: null,
     bossQueue: [],

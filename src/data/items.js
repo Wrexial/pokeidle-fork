@@ -51,6 +51,64 @@ export const pokeBalls = {
       buyPrice: 1200,
       ballModifier: 2,
     },
+    // Situational balls: `ballModifier` is the fallback, `getBallModifier`
+    // (src/game/catching.js) bumps it when the situation matches.
+    quickball: {
+      id: 'quickball',
+      name: 'Quick Ball',
+      description: 'A x5 catch rate if thrown on the first turn of a battle.',
+      buyPrice: 1000,
+      ballModifier: 1,
+    },
+    timerball: {
+      id: 'timerball',
+      name: 'Timer Ball',
+      description: 'Gets better the longer the battle has lasted (up to x4).',
+      buyPrice: 1000,
+      ballModifier: 1,
+    },
+    repeatball: {
+      id: 'repeatball',
+      name: 'Repeat Ball',
+      description: 'A x3.5 catch rate on a species already in your Pokedex.',
+      buyPrice: 1000,
+      ballModifier: 1,
+    },
+    netball: {
+      id: 'netball',
+      name: 'Net Ball',
+      description: 'A x3.5 catch rate on Water- and Bug-type Pokemon.',
+      buyPrice: 1000,
+      ballModifier: 1,
+    },
+    diveball: {
+      id: 'diveball',
+      name: 'Dive Ball',
+      description: 'A x3.5 catch rate on water routes.',
+      buyPrice: 1000,
+      ballModifier: 1,
+    },
+    duskball: {
+      id: 'duskball',
+      name: 'Dusk Ball',
+      description: 'A x3 catch rate in caves or at night.',
+      buyPrice: 1000,
+      ballModifier: 1,
+    },
+    nestball: {
+      id: 'nestball',
+      name: 'Nest Ball',
+      description: 'Catches lower-level Pokemon more easily.',
+      buyPrice: 1000,
+      ballModifier: 1,
+    },
+    premierball: {
+      id: 'premierball',
+      name: 'Premier Ball',
+      description: 'A commemorative ball with a standard catch rate.',
+      buyPrice: 200,
+      ballModifier: 1,
+    },
     masterball: {
       id: 'masterball',
       name: 'Master Ball',
@@ -60,7 +118,20 @@ export const pokeBalls = {
     },
   }
 
-export const ballOrder = ['pokeball', 'greatball', 'ultraball', 'masterball']
+export const ballOrder = [
+  'pokeball',
+  'premierball',
+  'greatball',
+  'quickball',
+  'timerball',
+  'repeatball',
+  'netball',
+  'diveball',
+  'nestball',
+  'duskball',
+  'ultraball',
+  'masterball',
+]
 
 /**
  * Medicine, candy and treasure. `category` doubles as the bag tab id;
@@ -252,6 +323,14 @@ export const valuableDropTable = [
 
 /** Medicine every mart stocks, revealed as the player wins wild battles. */
 export const standardMartItems = [
+    { itemId: 'premierball' },
+    { itemId: 'quickball', unlockWildBattlesWon: 75 },
+    { itemId: 'repeatball', unlockWildBattlesWon: 75 },
+    { itemId: 'netball', unlockWildBattlesWon: 100 },
+    { itemId: 'nestball', unlockWildBattlesWon: 100 },
+    { itemId: 'diveball', unlockWildBattlesWon: 150 },
+    { itemId: 'timerball', unlockWildBattlesWon: 150 },
+    { itemId: 'duskball', unlockWildBattlesWon: 200 },
     { itemId: 'potion' },
     { itemId: 'superPotion', unlockWildBattlesWon: 40 },
     { itemId: 'hyperPotion', unlockWildBattlesWon: 120 },

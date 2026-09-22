@@ -4,6 +4,8 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { championData, elite4Data, gymLeaderData, mapData, regions } from '../data/gameData.js'
 import { BATTLE_TOWER_REGION } from '../data/config.js'
+import { MINING_COST, MINING_DIGS, MINIGAME_BY_REGION } from '../game/minigames.js'
+import { MiningModal } from './mining-modal.js'
 import { useGame } from '../game/context.js'
 import { buildTrainerTeam, buildTowerFloor } from '../game/progression.js'
 
@@ -11,6 +13,7 @@ import { buildTrainerTeam, buildTowerFloor } from '../game/progression.js'
 export function GymPanel({ onOpenShop }) {
   const { state, dispatch } = useGame(),
     [confirmingPrestige, setConfirmingPrestige] = React.useState(false),
+    [showMining, setShowMining] = React.useState(!1),
     regionId = mapData[state.currentLocation]?.region ?? 'kanto',
     region = regions.find((candidate) => candidate.id === regionId),
     regionGyms = gymLeaderData.filter((gym) => (gym.region ?? 'kanto') === regionId),
@@ -22,6 +25,7 @@ export function GymPanel({ onOpenShop }) {
     // The Battle Tower lives in Hoenn only; other regions will get their own
     // minigames instead.
     showTower = isLeagueRematch && regionId === BATTLE_TOWER_REGION,
+    regionMinigame = MINIGAME_BY_REGION[regionId],
     // The Elite Four reset on each prestige, so they must be beaten again
     // before the region can be prestiged once more.
     allEliteFourBeaten =
@@ -406,6 +410,38 @@ export function GymPanel({ onOpenShop }) {
             }),
           ],
         }),
+      regionMinigame === 'mining' &&
+        isLeagueRematch &&
+        jsxs('div', {
+          className: 'gym-section tower-section',
+          children: [
+            jsx('div', {
+              className: 'gym-section-title',
+              children: 'Sinnoh Underground',
+            }),
+            jsx('div', {
+              className: 'tower-hint',
+              children: `Dig for evolution stones, treasures and candies. Each run costs $${MINING_COST.toLocaleString()} and gives ${MINING_DIGS} digs.`,
+            }),
+            jsx('button', {
+              className: 'gym-fight-btn champion',
+              style: {
+                width: '100%',
+              },
+              disabled: state.money < MINING_COST,
+              onClick: () => {
+                if (state.money < MINING_COST) return
+                dispatch({ type: 'START_MINING' })
+                setShowMining(!0)
+              },
+              children:
+                state.money < MINING_COST
+                  ? 'NOT ENOUGH MONEY'
+                  : `GO MINING ($${MINING_COST.toLocaleString()})`,
+            }),
+          ],
+        }),
+      showMining && jsx(MiningModal, { onClose: () => setShowMining(!1) }),
       state.defeatedGyms.length > 0 &&
         jsxs('div', {
           className: 'gym-section',

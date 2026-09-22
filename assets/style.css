@@ -6716,6 +6716,64 @@ img {
     opacity: .7
 }
 
+.mining-hint {
+    font-size: 8px;
+    color: var(--parchment);
+    opacity: .85;
+    margin: 0 0 6px
+}
+
+.mining-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 3px;
+    margin-bottom: 8px
+}
+
+.mining-tile {
+    aspect-ratio: 1;
+    font-size: 7px;
+    font-weight: 700;
+    line-height: 1.1;
+    color: #f0e0b0;
+    background: linear-gradient(#5a4a2a,#3a2e18);
+    border: 1px solid #8a7040;
+    border-radius: 3px;
+    padding: 1px;
+    cursor: pointer;
+    overflow: hidden
+}
+
+.mining-tile:hover:not(:disabled) {
+    border-color: #f0d060
+}
+
+.mining-tile.dug {
+    color: #9a8a68;
+    background: #2a2318;
+    border-color: #4a4030;
+    cursor: default
+}
+
+.mining-tile.reward {
+    color: #2a1808;
+    background: linear-gradient(#f0d060,#c9a227);
+    border-color: #fff0b0
+}
+
+.mining-found {
+    display: flex;
+    gap: 6px;
+    font-size: 8px;
+    color: var(--parchment);
+    margin-bottom: 8px
+}
+
+.mining-found-title {
+    font-weight: 700;
+    color: var(--gold)
+}
+
 .reward-shop-token-display {
     text-align: center;
     padding: 6px 0 10px;

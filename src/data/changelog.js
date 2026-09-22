@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.24.0'
+export const GAME_VERSION = '0.25.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.25.0',
+      subtitle: 'Sinnoh Underground',
+      sections: [
+        {
+          heading: 'Minigames',
+          items: [
+            'The first region minigame is in: once Sinnoh\u2019s Champion is beaten, its Gyms tab offers the Underground. Pay $1,500 for a run, then dig a wall for evolution stones, treasures and candies \u2014 you get ten digs to find as much as you can',
+            'Other regions will get their own minigames instead of a Battle Tower',
+          ],
+        },
+      ],
+    },
     {
       version: '0.24.0',
       subtitle: 'Move Tutor',

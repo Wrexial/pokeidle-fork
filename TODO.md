@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.24.0**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.25.0**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -75,7 +75,8 @@ items, best return first:
 33. ✅ **#17 Pokéball variants** — shipped 0.13.0 (Quick/Timer/Repeat/Net/Dive/
     Dusk/Nest/Premier with situational rates; auto-catch picks the best).
 34. **#27 Gender-specific sprites** — M · ★★★ (assets are half-there)
-35. **#29 Minigames** — M–L · ★★★ (small per minigame once one exists)
+35. **#29 Minigames** — M–L · ★★★ (small per minigame once one exists) —
+    **first minigame shipped 0.25.0**: Sinnoh's Underground mining.
 36. **#4 In-battle Mega evolution** — M–L · ★★★
 37. ✅ **#32 Battle Tower tuning** — shipped 0.10.0 (auto-climb, rarer
     tokens, six fully evolved teams plus legendaries late).
@@ -673,6 +674,14 @@ few optional minigames would give the player something hands-on without
 disturbing the idle loop. They'd all sit alongside it — the player opts in, and
 the idle game keeps running if they don't.
 
+**Shipped in 0.25.0: Sinnoh's Underground mining.** `src/game/minigames.js`
+holds `MINIGAME_BY_REGION` (region -> minigame id) and the mining config/reward
+table; `MiningModal` keeps the grid/dug state locally and dispatches a single
+`COLLECT_MINING` (with `START_MINING` charging the entry fee). The Gyms tab shows
+the section for the region's minigame once its Champion is beaten, so the next
+region minigame is mostly a new modal + a reward table. Covered by
+`tests/minigames.test.mjs`.
+
 ### 29a. Fishing minigame
 
 Encounter data already keeps water/fishing methods in the scrape but the game
@@ -1191,6 +1200,10 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.25.0 (Sinnoh Underground): the first region minigame — pay $1,500 to dig a wall
+for stones, treasures and candies (ten digs). Sets the pattern for the other
+regions. First slice of #29.
 
 0.24.0 (Move Tutor): the Manage Moves panel lists each Pokemon's real TM moves
 and teaches them for $4,000 (level-up moves stay free). #9 done.

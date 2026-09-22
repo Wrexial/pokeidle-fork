@@ -4,6 +4,7 @@ import { BATTLE_TOWER_REGION, RAID_COOLDOWN_MS, RAID_LEVEL_MAX, breedShinyOdds, 
 import { ACHIEVEMENTS } from '../data/achievements.js'
 import { activeItems, consumableItems, evolutionItems, heldItems, pokeBalls } from '../data/items.js'
 import { dailyDropMultiplier, dailyEventByKey, rollDailyEvent, todayKey } from '../data/daily-events.js'
+import { MINING_COST } from './minigames.js'
 import { natureName, randomNature } from '../data/natures.js'
 import { elite4Data, encounterData, gymLeaderData, mapData, moveLearnsets, pokemonSpecies, regions } from '../data/gameData.js'
 import { createVolatileState } from './combat.js'
@@ -2747,6 +2748,25 @@ export function gameReducer(state, action) {
         ...state,
         challengeNuzlocke: !state.challengeNuzlocke,
       }
+    case 'START_MINING':
+      if (state.money < MINING_COST) return state
+      return {
+        ...state,
+        money: state.money - MINING_COST,
+      }
+    case 'COLLECT_MINING': {
+      const rewards = Array.isArray(action.payload?.rewards) ? action.payload.rewards : []
+      if (rewards.length === 0) return state
+      const inventory = { ...state.inventory }
+      for (const reward of rewards)
+        if (reward?.itemId && reward.quantity > 0)
+          inventory[reward.itemId] = (inventory[reward.itemId] ?? 0) + reward.quantity
+      return {
+        ...state,
+        inventory,
+        battleLog: [...state.battleLog, 'Collected the Underground finds.'].slice(-50),
+      }
+    }
     case 'BUY_REWARD_ITEM': {
       const { itemId, cost } = action.payload
       if (state.victoryTokens < cost) return state

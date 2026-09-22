@@ -2,9 +2,10 @@
 
 import React from 'react'
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
-import { SAVE_KEY, SAVE_VERSION, clearSave } from '../data/config.js'
+import { clearSave } from '../data/config.js'
 import { unlockAudio } from '../game/audio.js'
-import { repairSave, serializeSave, useGame } from '../game/context.js'
+import { useGame } from '../game/context.js'
+import { repairSave, serializeSave, writeImportedSave } from '../game/save.js'
 
 /** @param {{ onClose: () => void }} props */
 export function SettingsModal({ onClose }) {
@@ -51,14 +52,14 @@ export function SettingsModal({ onClose }) {
       // Stop the idle loop so an autosave cannot overwrite the import before
       // the reload finishes.
       if (!state.paused) dispatch({ type: 'TOGGLE_PAUSE' })
-      // Stamp the current version: repairSave above already validated the
-      // shape, so a save from another build is upgraded rather than rejected.
-      try {
-        localStorage.setItem(SAVE_KEY, JSON.stringify({ ...parsed, version: SAVE_VERSION }))
-        window.location.reload()
-      } catch {
+      // repairSave above already validated the shape, and writeImportedSave
+      // stamps the current version, so a save from another build is upgraded
+      // rather than rejected.
+      if (!writeImportedSave(parsed)) {
         setImportError('Could not write the save to browser storage.')
+        return
       }
+      window.location.reload()
     }
     reader.readAsText(file)
   }

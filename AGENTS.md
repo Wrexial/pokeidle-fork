@@ -55,7 +55,7 @@ reducer/combat/breeding/unlock invariants and keep them deterministic (stub
 
 **Save recovery:** an incompatible/stuck save self-heals without DevTools.
 The save key is **versioned** (`pokemon-idle-save-v<n>`, see `SAVE_VERSION` in
-`src/data/config.js`); the loader in `src/game/context.js` reads the versioned
+`src/data/config.js`); the loader in `src/game/save.js` reads the versioned
 key, and only falls back to a legacy key (`pokemon-idle-save`) for a one-time
 migration. A save is loaded only if the version matches (or it's a legacy save)
 *and* it repairs cleanly — the repair drops unknown locations/routes/species,
@@ -179,8 +179,10 @@ in `GameLayout`) dispatches `DEBUG_MAX_LEVEL` when the Konami code
 | `src/game/catching.js` | Catch rate/chance, ball selection, auto-catch rules, encounter rarity. |
 | `src/game/progression.js` | Encounters, EXP awards, unlocks, party sync, effects/items, roads. |
 | `src/game/reducer.js` | `initialGameState` + `gameReducer` (the whole state machine). |
-| `src/game/context.js` | `GameContext`, `GameProvider`, `useGame`. |
-| `src/hooks.js` | `useTypewriter`, `useIsMobile`, `useGameLoop`. |
+| `src/game/context.js` | `GameProvider` + `useGame` (React wiring); re-exports the save helpers. |
+| `src/game/save.js` | `repairSave`, `loadSavedState`, `serializeSave`, `persistSave` and `SAVED_STATE_KEYS` — the versioned localStorage save. |
+| `src/hooks.js` | Cross-cutting UI hooks: `useTypewriter`, `useIsMobile`, `useKonamiCode`, daily/notification/audio/quest hooks. |
+| `src/game/use-game-loop.js` | `useGameLoop` — the idle tick state machine. |
 | `src/components/*.js` | **One file per component** (39 files, kebab-case, e.g. `battle-scene.js`, `pokedex-tile.js`). |
 | `src/types.d.ts` | Ambient types for the injected `window.gameData*` globals. |
 | `assets/gameDataInjector.js` | Loads `public/data/*.json` into `window.gameDataInjector`. Add new data files here. |

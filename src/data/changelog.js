@@ -1,10 +1,22 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.36.0'
+export const GAME_VERSION = '0.36.1'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.36.1',
+      subtitle: 'Save Reliability',
+      sections: [
+        {
+          heading: 'Fixes',
+          items: [
+            'Progress now autosaves reliably after changing the game speed, travelling to an already-visited area, or toggling a standalone option such as Auto-Catch. Those changes could previously be lost if nothing else happened to trigger a save',
+          ],
+        },
+      ],
+    },
     {
       version: '0.36.0',
       subtitle: 'Gender Sprites',

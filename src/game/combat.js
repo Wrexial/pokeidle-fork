@@ -39,6 +39,32 @@ export function createVolatileState() {
   }
 }
 
+/**
+ * Read the volatile battle fields back off a BattlePokemon after a turn, in the
+ * shape the reducer persists (matches `createVolatileState`).
+ * @param {BattlePokemon} pokemon
+ * @returns {ReturnType<typeof createVolatileState>}
+ */
+export function volatileStateFromBattle(pokemon) {
+  return {
+    statStages: pokemon.statStages ?? { attack: 0, defense: 0, spAttack: 0, spDefense: 0, speed: 0 },
+    mustRecharge: pokemon.mustRecharge ?? !1,
+    lockedMove: pokemon.lockedMove ?? null,
+    lockTurnsRemaining: pokemon.lockTurnsRemaining ?? 0,
+    status: pokemon.status ?? null,
+    statusTurns: pokemon.statusTurns ?? 0,
+    flinch: pokemon.flinch ?? !1,
+    confusionTurns: pokemon.confusionTurns ?? 0,
+    leechSeeded: pokemon.leechSeeded ?? !1,
+    heldItemUsed: pokemon.heldItemUsed ?? !1,
+    tauntTurns: pokemon.tauntTurns ?? 0,
+    substituteHp: pokemon.substituteHp ?? 0,
+    infatuated: pokemon.infatuated ?? !1,
+    cursed: pokemon.cursed ?? !1,
+    screens: pokemon.screens ?? { reflect: 0, lightScreen: 0 },
+  }
+}
+
 /** Major status conditions that persist until cured and tick each turn. */
 const MAJOR_STATUSES = new Set(['poison', 'toxic', 'burn', 'freeze', 'sleep', 'paralysis'])
 

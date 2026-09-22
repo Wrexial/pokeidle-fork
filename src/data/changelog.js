@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.9.5'
+export const GAME_VERSION = '0.9.6'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.9.6',
+      subtitle: 'Town Map QoL',
+      sections: [
+        {
+          heading: 'Town Map',
+          items: [
+            'A search box finds any unlocked location by name and jumps the map to it \u2014 ordinary locations are travelled to as well',
+            'The route with an active swarm now shows a pulsing bee badge; hovering it names the species and the battles remaining',
+          ],
+        },
+      ],
+    },
     {
       version: '0.9.5',
       subtitle: 'Achievement Rewards',

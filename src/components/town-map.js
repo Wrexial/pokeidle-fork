@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
-import { raidPoolFor, mapAreas, mapData, regions } from '../data/gameData.js'
+import { raidPoolFor, mapAreas, mapData, pokemonSpecies, regions } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { createRoads, getRegionUnlockTokens, pickRaidLegendary } from '../game/progression.js'
 import { MapNode } from './map-node.js'
@@ -26,6 +26,9 @@ export function TownMap() {
     currentRegion = currentLocationData?.region ?? 'kanto',
     [activeRegion, setActiveRegion] = React.useState(currentRegion),
     [pendingUnlock, setPendingUnlock] = React.useState(/** @type {string | null} */ (null)),
+    [searchQuery, setSearchQuery] = React.useState(''),
+    [focusNonce, setFocusNonce] = React.useState(0),
+    focusRef = React.useRef(/** @type {string | null} */ (null)),
     unlockTokens = getRegionUnlockTokens(state),
     allRegionsUnlocked =
       regions.length > 0 && (state.unlockedRegions ?? []).length >= regions.length,
@@ -150,19 +153,27 @@ export function TownMap() {
   }, [activeLocationSet, centreOn, currentLocation, fitView, view.scale])
 
   // Focus the map on the player's location when the region changes (or on first
-  // paint). Kept out of the resize path so panning isn't reset by a resize.
+  // paint), or on a location chosen from the search box. Kept out of the resize
+  // path so panning isn't reset by a resize.
   React.useEffect(() => {
     const rect = canvasRect()
     if (!rect) return
     const fitScale = Math.min(rect.width, rect.height) / WORLD_SIZE
     const scale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, Math.max(1, fitScale)))
-    const focusId = activeLocationSet.has(currentLocation) ? currentLocation : null
+    const requested = focusRef.current
+    focusRef.current = null
+    const focusId =
+      requested && mapData[requested]?.region === activeRegion
+        ? requested
+        : activeLocationSet.has(currentLocation)
+          ? currentLocation
+          : null
     const focus = focusId
       ? mapData[focusId].position
-      : { x: regionCentre.x / WORLD_SIZE * 100, y: regionCentre.y / WORLD_SIZE * 100 }
+      : { x: (regionCentre.x / WORLD_SIZE) * 100, y: (regionCentre.y / WORLD_SIZE) * 100 }
     centreOn((focus.x / 100) * WORLD_SIZE, (focus.y / 100) * WORLD_SIZE, scale)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeRegion])
+  }, [activeRegion, focusNonce])
 
   const zoomAt = React.useCallback(
     /** @param {number} clientX @param {number} clientY @param {number} factor */
@@ -251,6 +262,40 @@ export function TownMap() {
     event.stopPropagation()
   }
 
+  /**
+   * Find a location's region name for the search list.
+   * @param {string} locationId
+   */
+  function regionNameFor(locationId) {
+    const regionId = mapData[locationId]?.region ?? 'kanto'
+    return regions.find((candidate) => candidate.id === regionId)?.name ?? 'Kanto'
+  }
+
+  /**
+   * Jump to a location from the search box: switch to its region, centre the
+   * map on it, and travel there when it is an ordinary (non-raid) location.
+   * @param {string} locationId
+   */
+  function jumpTo(locationId) {
+    const location = mapData[locationId]
+    if (!location) return
+    setSearchQuery('')
+    focusRef.current = locationId
+    setActiveRegion(location.region ?? 'kanto')
+    setFocusNonce((nonce) => nonce + 1)
+    if (location.type !== 'raid' && locationId !== currentLocation)
+      dispatch({ type: 'TRAVEL', payload: { locationId } })
+  }
+
+  const searchResults = React.useMemo(() => {
+    const query = searchQuery.trim().toLowerCase()
+    if (!query) return []
+    return unlockedLocations
+      .filter((locationId) => mapData[locationId]?.name.toLowerCase().includes(query))
+      .sort((left, right) => mapData[left].name.localeCompare(mapData[right].name))
+      .slice(0, 8)
+  }, [searchQuery, unlockedLocations])
+
   return jsxs('div', {
     className: 'town-map',
     children: [
@@ -269,6 +314,51 @@ export function TownMap() {
             className: 'town-map-battles',
             children: [state.wildBattlesWon, 'W ', state.trainerBattlesWon, 'T'],
           }),
+        ],
+      }),
+      jsxs('div', {
+        className: 'map-search',
+        onPointerDown: stopDrag,
+        children: [
+          jsx('input', {
+            className: 'map-search-input',
+            type: 'text',
+            placeholder: 'Search locations\u2026',
+            value: searchQuery,
+            onChange: /** @param {React.ChangeEvent<HTMLInputElement>} event */ (event) =>
+              setSearchQuery(event.target.value),
+          }),
+          searchQuery.trim()
+            ? jsx('div', {
+                className: 'map-search-results',
+                children:
+                  searchResults.length > 0
+                    ? searchResults.map((locationId) =>
+                        jsxs(
+                          'button',
+                          {
+                            className: `map-search-result${locationId === currentLocation ? ' current' : ''}`,
+                            onClick: () => jumpTo(locationId),
+                            children: [
+                              jsx('span', {
+                                className: 'map-search-name',
+                                children: mapData[locationId].name,
+                              }),
+                              jsx('span', {
+                                className: 'map-search-region',
+                                children: regionNameFor(locationId),
+                              }),
+                            ],
+                          },
+                          locationId
+                        )
+                      )
+                    : jsx('div', {
+                        className: 'map-search-empty',
+                        children: 'No matching locations.',
+                      }),
+              })
+            : null,
         ],
       }),
       unlockTokens > 0 &&
@@ -419,6 +509,10 @@ export function TownMap() {
                     isClickable,
                     onClick: () => travelTo(locationId),
                     cooldownEnd: location.type === 'raid' ? state.raidCooldownEnd : void 0,
+                    swarmLabel:
+                      state.swarm?.routeKey === locationId
+                        ? `${pokemonSpecies[state.swarm.speciesKey]?.name ?? state.swarm.speciesKey} \u00b7 ${state.swarm.battlesRemaining} battle${state.swarm.battlesRemaining === 1 ? '' : 's'} left`
+                        : null,
                   },
                   locationId
                 )

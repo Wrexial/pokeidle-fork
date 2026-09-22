@@ -2207,6 +2207,84 @@ img {
     color: #8a7a60
 }
 
+.map-search {
+    position: relative;
+    padding: 4px 8px;
+    background: #221910;
+    border-bottom: 2px solid #3a2810
+}
+
+.map-search-input {
+    width: 100%;
+    box-sizing: border-box;
+    font-family: var(--font-pixel);
+    font-size: 8px;
+    padding: 5px 8px;
+    color: #2a1808;
+    background: #e8dcc0;
+    border: 2px solid #5a3e20;
+    border-radius: 0;
+    outline: none
+}
+
+.map-search-input::placeholder {
+    color: #8a7a60
+}
+
+.map-search-results {
+    position: absolute;
+    left: 8px;
+    right: 8px;
+    top: 100%;
+    z-index: 30;
+    max-height: 140px;
+    overflow-y: auto;
+    background: #e8dcc0;
+    border: 2px solid #5a3e20;
+    box-shadow: 2px 2px #0000004d
+}
+
+.map-search-result {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    font-family: var(--font-pixel);
+    font-size: 8px;
+    padding: 6px 8px;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #c8b890;
+    color: #2a1808;
+    cursor: pointer;
+    text-align: left
+}
+
+.map-search-result:last-child {
+    border-bottom: none
+}
+
+.map-search-result:hover {
+    background: #d8c8a0
+}
+
+.map-search-result.current {
+    background: #c8b088
+}
+
+.map-search-region {
+    flex: 0 0 auto;
+    font-size: 7px;
+    color: #6a5a40
+}
+
+.map-search-empty {
+    font-size: 8px;
+    color: #6a5a40;
+    padding: 6px 8px
+}
+
 .map-region-tabs {
     display: flex;
     gap: 4px;
@@ -2504,6 +2582,31 @@ img {
 
     50% {
         opacity: 0
+    }
+}
+
+.map-node.swarm .map-node-dot {
+    box-shadow: 0 0 0 2px #f0c850,0 0 8px 3px #f0c85088
+}
+
+.map-node-swarm {
+    position: absolute;
+    top: -13px;
+    right: -13px;
+    font-size: 13px;
+    line-height: 1;
+    filter: drop-shadow(0 0 3px #f0c850) drop-shadow(0 0 6px #f0c85088);
+    animation: swarmBob 1.2s ease-in-out infinite;
+    pointer-events: none
+}
+
+@keyframes swarmBob {
+    0%,to {
+        transform: translateY(0)
+    }
+
+    50% {
+        transform: translateY(-2px)
     }
 }
 

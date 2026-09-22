@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.5**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.6**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -24,10 +24,10 @@ toast queue, #1 healing items, #12 dex rewards, #21 unlock tokens, #33
 Rare/Exp. Candies, #34 sellable valuables, #15 save export/import (slots and
 share codes still open), #41 box "New" sort prepend, #37 the Master Ball
 button, #2b natures, #14 the `node --test` suite, #5 daily events, and #16's
-achievement rewards. The remaining items, best return first:
+achievement rewards and map QoL. The remaining items, best return first:
 
 1. **#16 More ideas (grab bag)** — mostly S · ★★★ — the rest of the list:
-   release-for-candy/selling, map QoL, notifications, quests, challenge modes.
+   release-for-candy/selling, notifications, quests, challenge modes.
 
 ### Tier 2 — High impact, worth the effort (medium–large)
 
@@ -301,8 +301,9 @@ Smaller or more speculative, roughly highest-value first:
 - [ ] **Ball variety** — see #17.
 - [ ] **Pokérus** — a very rare virus that boosts EXP (and later EV) gain for a
       while; a nice idle-flavoured surprise.
-- [ ] **Map QoL** — mark the active swarm / roamer location and add a searchable
-      "jump to location" list.
+- [x] **Map QoL** — the active swarm's route now carries a pulsing bee badge
+      (hover for species + battles left), and the map has a search box that jumps
+      to (and travels to) any unlocked location. Shipped in 0.9.6.
 - [ ] **Notifications** — browser notifications and an "away" alert (pairs
       with offline progress, #7).
 - [ ] **Challenge modes** — Nuzlocke, monotype, randomizer, or a level-scaling
@@ -1176,6 +1177,10 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.9.6 (map QoL): the Town Map search box finds and jumps to any unlocked
+location (travelling to ordinary ones), and the active swarm's route shows a
+pulsing badge with the species and battles remaining.
 
 0.9.5 (achievement rewards): every achievement pays a one-off reward (money /
 Victory Tokens / items, including Master Balls) the moment it unlocks, tracked

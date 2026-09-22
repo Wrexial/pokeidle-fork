@@ -4,7 +4,7 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { formatCooldown } from '../game/progression.js'
 
-/** @param {{ location: MapLocation, isCurrent: boolean, isUnlocked: boolean, isClickable: boolean, onClick: () => void, cooldownEnd?: number }} props */
+/** @param {{ location: MapLocation, isCurrent: boolean, isUnlocked: boolean, isClickable: boolean, onClick: () => void, cooldownEnd?: number, swarmLabel?: string | null }} props */
 export
 function MapNode({
   location,
@@ -13,6 +13,7 @@ function MapNode({
   isClickable,
   onClick,
   cooldownEnd,
+  swarmLabel,
 }) {
   const [hovering, setHovering] = React.useState(!1),
     [, tick] = React.useState(0),
@@ -31,6 +32,7 @@ function MapNode({
   return (
     isRaid ? (className += ' raid') : isTown ? (className += ' town') : (className += ' route'),
     raidOnCooldown && (className += ' cooldown'),
+    swarmLabel && (className += ' swarm'),
     isCurrent
       ? (className += ' current')
       : isClickable
@@ -43,7 +45,11 @@ function MapNode({
         top: `${location.position.y}%`,
       },
       onClick: isClickable ? onClick : void 0,
-      title: isUnlocked ? location.description : 'Unknown location',
+      title: isUnlocked
+        ? swarmLabel
+          ? `${location.description} \u2014 Swarm: ${swarmLabel}`
+          : location.description
+        : 'Unknown location',
       onMouseEnter: () => setHovering(!0),
       onMouseLeave: () => setHovering(!1),
       children: [
@@ -55,6 +61,11 @@ function MapNode({
               className: 'map-node-blink',
             }),
         }),
+        swarmLabel &&
+          jsx('span', {
+            className: 'map-node-swarm',
+            children: '\u{1f41d}',
+          }),
         showLabel &&
           jsx('span', {
             className: 'map-node-label',

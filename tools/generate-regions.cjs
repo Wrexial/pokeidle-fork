@@ -444,7 +444,7 @@ const TRAINER_NAMES = [
 // Showdown trainer sprite keys are the leader's name slugified ("Crasher Wake"
 // -> "crasherwake"). A few characters only have a generation-suffixed or
 // alternate sprite. Kanto is hand-curated and keeps its own gen3 keys.
-const TRAINER_SPRITE_OVERRIDES = { Clavell: 'clavell-s', Phoebe: 'phoebe-gen3', Drake: 'drake-gen3' }
+const TRAINER_SPRITE_OVERRIDES = { Phoebe: 'phoebe-gen3', Drake: 'drake-gen3' }
 const trainerSpriteKey = (name) =>
   TRAINER_SPRITE_OVERRIDES[name] ??
   name.toLowerCase().replace(/['.]/g, '').replace(/\s+/g, '').replace(/[^a-z0-9-]/g, '')
@@ -520,7 +520,7 @@ const ELITE_FOUR = {
   johto: ['Will', 'Koga', 'Bruno', 'Karen'], hoenn: ['Sidney', 'Phoebe', 'Glacia', 'Drake'],
   sinnoh: ['Aaron', 'Bertha', 'Flint', 'Lucian'], unova: ['Shauntal', 'Grimsley', 'Caitlin', 'Marshal'],
   kalos: ['Malva', 'Siebold', 'Wikstrom', 'Drasna'], alola: ['Hala', 'Olivia', 'Molayne', 'Kahili'],
-  galar: ['Marnie', 'Hop', 'Bede', 'Raihan'], paldea: ['Rika', 'Poppy', 'Hassel', 'Clavell'],
+  galar: ['Marnie', 'Hop', 'Bede', 'Raihan'], paldea: ['Rika', 'Poppy', 'Larry', 'Hassel'],
 }
 const CHAMPIONS = { johto: 'Lance', hoenn: 'Steven', sinnoh: 'Cynthia', unova: 'Alder', kalos: 'Diantha', alola: 'Kukui', galar: 'Leon', paldea: 'Geeta' }
 
@@ -545,7 +545,7 @@ const E4_TYPES = {
   kalos: [['Fire'], ['Water'], ['Steel'], ['Dragon']],
   alola: [['Fighting'], ['Rock'], ['Steel'], ['Flying']],
   galar: [['Dark'], ['Fighting'], ['Fairy'], ['Dragon']],
-  paldea: [['Ground'], ['Steel'], ['Dragon'], ['Normal']],
+  paldea: [['Ground'], ['Steel'], ['Flying'], ['Dragon']],
 }
 // Champions are mixed teams, except where the ace type is clear.
 const CHAMPION_TYPES = {

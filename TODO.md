@@ -507,6 +507,12 @@ Gens 1–6, but it misrepresents three regions:
   Victory Road is also only one of three storylines, so a badge-count gate is a
   poor fit.
 
+**Partial fix (0.36.1):** Paldea's Elite Four now uses its real roster and
+types (Rika, Poppy, Larry, Hassel) — the third/fourth slots were previously
+Hassel and Academy director Clavell. Still open: Alola's fabricated 8 "gyms"
+(Ilima and Hapu both sit on Iki Town, since the scraped map has no Poni town),
+Galar's E4 label and Paldea's canonical badge order.
+
 Make the league structure **data-driven per region**:
 
 - [ ] Decide the model: a per-region `league` block, e.g.

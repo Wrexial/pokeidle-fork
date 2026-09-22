@@ -1871,110 +1871,110 @@
  },
  {
   "id": "paldea-e4-3",
-  "name": "Hassel",
+  "name": "Larry",
   "title": "Paldea Elite Four",
   "region": "paldea",
-  "spriteKey": "hassel",
+  "spriteKey": "larry",
   "team": [
    {
-    "speciesKey": "hydreigon",
+    "speciesKey": "ledian",
     "level": 70
    },
    {
-    "speciesKey": "dragalge",
+    "speciesKey": "crobat",
     "level": 71
    },
    {
-    "speciesKey": "tyrantrum",
+    "speciesKey": "xatu",
     "level": 72
    },
    {
-    "speciesKey": "goodra",
+    "speciesKey": "jumpluff",
     "level": 73
    },
    {
-    "speciesKey": "noivern",
+    "speciesKey": "mantine",
     "level": 74
    }
   ],
   "rematchTeam": [
    {
-    "speciesKey": "haxorus",
+    "speciesKey": "dodrio",
     "level": 90
    },
    {
-    "speciesKey": "druddigon",
+    "speciesKey": "noctowl",
     "level": 91
    },
    {
-    "speciesKey": "hydreigon",
+    "speciesKey": "ledian",
     "level": 92
    },
    {
-    "speciesKey": "dragalge",
+    "speciesKey": "crobat",
     "level": 93
    },
    {
-    "speciesKey": "tyrantrum",
+    "speciesKey": "xatu",
     "level": 94
    },
    {
-    "speciesKey": "goodra",
+    "speciesKey": "jumpluff",
     "level": 95
    }
   ]
  },
  {
   "id": "paldea-e4-4",
-  "name": "Clavell",
+  "name": "Hassel",
   "title": "Paldea Elite Four",
   "region": "paldea",
-  "spriteKey": "clavell-s",
+  "spriteKey": "hassel",
   "team": [
    {
-    "speciesKey": "snorlax",
+    "speciesKey": "tyrantrum",
     "level": 71
    },
    {
-    "speciesKey": "furret",
+    "speciesKey": "goodra",
     "level": 72
    },
    {
-    "speciesKey": "noctowl",
+    "speciesKey": "noivern",
     "level": 73
    },
    {
-    "speciesKey": "miltank",
+    "speciesKey": "turtonator",
     "level": 74
    },
    {
-    "speciesKey": "blissey",
+    "speciesKey": "drampa",
     "level": 75
    }
   ],
   "rematchTeam": [
    {
-    "speciesKey": "persian",
+    "speciesKey": "druddigon",
     "level": 90
    },
    {
-    "speciesKey": "dodrio",
+    "speciesKey": "hydreigon",
     "level": 91
    },
    {
-    "speciesKey": "tauros",
+    "speciesKey": "dragalge",
     "level": 92
    },
    {
-    "speciesKey": "snorlax",
+    "speciesKey": "tyrantrum",
     "level": 93
    },
    {
-    "speciesKey": "furret",
+    "speciesKey": "goodra",
     "level": 94
    },
    {
-    "speciesKey": "noctowl",
+    "speciesKey": "noivern",
     "level": 95
    }
   ]

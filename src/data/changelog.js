@@ -13,6 +13,7 @@ export const CHANGELOG = [
           heading: 'Fixes',
           items: [
             'Progress now autosaves reliably after changing the game speed, travelling to an already-visited area, or toggling a standalone option such as Auto-Catch. Those changes could previously be lost if nothing else happened to trigger a save',
+            "Paldea's Elite Four now fields its real roster and types: Larry (Flying) joins in the third slot and Hassel (Dragon) moves to fourth, instead of the wrong order that ended on Academy director Clavell",
           ],
         },
       ],

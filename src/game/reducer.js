@@ -9,6 +9,7 @@ import { elite4Data, encounterData, gymLeaderData, mapData, moveLearnsets, pokem
 import { createVolatileState } from './combat.js'
 import { calculatePokemonStats, calculateRequiredExperience, createPokemon, getLevelUpResults, insertIntoBox, nextBoxSortMode, resolvePokemonMoves, sortBoxMembers } from './pokemon.js'
 import { canBreed, eggSpeciesKey } from './breeding.js'
+import { advanceQuests, questLabel, rollQuests } from './quests.js'
 import { checkShinyOdds, computeUnlockedLocations, formatReward, getRegionUnlockTokens, isActiveEffectItem, loadActivePokemonFromParty, prepareNextBattle, releaseReward, rollCandyDrop, rollValuableDrop, syncActivePokemonIntoParty, tickBattleCounters, tickPokerus } from './progression.js'
 
 /** @type {GameState} */
@@ -64,6 +65,8 @@ export const initialGameState = {
   swarm: null,
   /** Pokerus: a rare, party-wide 2x EXP boost with a battle countdown. */
   pokerus: null,
+  /** Today's daily quests, or null before they are rolled. */
+  quests: null,
   /** Today's rotating event + whether its gift was claimed (see src/data/daily-events.js). */
   dailyEvent: null,
   /** Daycare: up to two deposited parents breeding eggs. */
@@ -331,6 +334,7 @@ export function gameReducer(state, action) {
       let activeEffects = state.activeEffects,
         swarm = state.swarm,
         pokerus = state.pokerus,
+        quests = state.quests,
         daycare = state.daycare,
         inventory = state.inventory,
         secretNotices = [],
@@ -376,6 +380,8 @@ export function gameReducer(state, action) {
         pokerusResult.infected &&
           secretNotices.push('Your Pokemon caught Pokerus! EXP gain is doubled for a while.')
         pokerusResult.cured && secretNotices.push('Your Pokemon recovered from Pokerus.')
+        // Daily quests track wild wins (and route-specific ones).
+        quests = advanceQuests(quests, { kind: 'wild', locationId: state.currentLocation })
         // Daily "Harvest Day" doubles the chance of every wild item drop.
         const dropBonus = dailyDropMultiplier(state.dailyEvent),
           dropChance = /** @param {number} chance */ (chance) => Math.min(1, chance * dropBonus)
@@ -436,6 +442,7 @@ export function gameReducer(state, action) {
         activeEffects,
         swarm,
         pokerus,
+        quests,
         daycare,
         inventory,
       })
@@ -687,6 +694,7 @@ export function gameReducer(state, action) {
             party: [...state.party, newPokemon],
             nextPokemonId: state.nextPokemonId + 1,
             inventory,
+            quests: advanceQuests(state.quests, { kind: 'catch', speciesKey, isShiny }),
             battleLog: [
               ...state.battleLog,
               `Caught ${species.name}! Added to party.`,
@@ -697,6 +705,7 @@ export function gameReducer(state, action) {
             box: insertIntoBox(state.box, newPokemon, state.boxSort),
             nextPokemonId: state.nextPokemonId + 1,
             inventory,
+            quests: advanceQuests(state.quests, { kind: 'catch', speciesKey, isShiny }),
             battleLog: [...state.battleLog, `Caught ${species.name}! Sent to box.`].slice(
               -50
             ),
@@ -1727,6 +1736,52 @@ export function gameReducer(state, action) {
         })
       }
       return claimedState
+    }
+    case 'REFRESH_QUESTS': {
+      const today = action.payload?.today ?? todayKey()
+      if (state.quests?.date === today) return state
+      return withNotification(
+        { ...state, quests: rollQuests(state, today) },
+        {
+          message: 'New daily quests are available!',
+          tone: 'info',
+          icon: '📜',
+          dedupeKey: `quests:${today}`,
+        }
+      )
+    }
+    case 'CLAIM_QUEST': {
+      const { questId } = action.payload,
+        quest = state.quests?.list?.find(
+          /** @param {any} candidate */ (candidate) => candidate.id === questId
+        )
+      if (!quest || quest.claimed || quest.progress < quest.goal) return state
+      const reward = quest.reward ?? {},
+        inventory = { ...state.inventory }
+      for (const [itemId, quantity] of Object.entries(reward.items ?? {}))
+        inventory[itemId] = (inventory[itemId] ?? 0) + quantity
+      return withNotification(
+        {
+          ...state,
+          money: state.money + (reward.money ?? 0),
+          victoryTokens: state.victoryTokens + (reward.victoryTokens ?? 0),
+          inventory,
+          quests: {
+            ...state.quests,
+            list: state.quests.list.map(
+              /** @param {any} candidate */ (candidate) =>
+                candidate.id === questId ? { ...candidate, claimed: true } : candidate
+            ),
+          },
+          battleLog: [...state.battleLog, `Quest complete: ${questLabel(quest)}!`].slice(-50),
+        },
+        {
+          message: `Quest reward: ${formatReward(reward)}`,
+          tone: 'success',
+          icon: '📜',
+          dedupeKey: `quest:${questId}`,
+        }
+      )
     }
     case 'REFRESH_DAILY_EVENT': {
       const today = action.payload?.today ?? todayKey()

@@ -954,3 +954,17 @@ export function useGameAudio() {
     }, [state.levelUpNotification, state.sfxEnabled])
   )
 }
+
+/**
+ * Roll today's daily quests on mount and refresh them at local midnight (the
+ * reducer only re-rolls when the calendar day changes).
+ */
+export function useQuests() {
+  const { dispatch } = useGame()
+  return React.useEffect(() => {
+    const refresh = () => dispatch({ type: 'REFRESH_QUESTS' })
+    refresh()
+    const intervalId = setInterval(refresh, 60_000)
+    return () => clearInterval(intervalId)
+  }, [dispatch])
+}

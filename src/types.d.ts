@@ -221,6 +221,8 @@ type GameState = {
   swarm: { routeKey: string; speciesKey: string; battlesRemaining: number } | null
   /** Rare party-wide 2x EXP boost with a wild-battle countdown. */
   pokerus?: { battlesRemaining: number } | null
+  /** Today's daily quests (see src/game/quests.js). */
+  quests?: any
   /** Daycare parents (up to 2) and battles toward the next egg. */
   daycare: { parents: Pokemon[]; progress: number }
   defeatedGyms: string[]

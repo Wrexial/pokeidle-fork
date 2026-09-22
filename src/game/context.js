@@ -232,6 +232,38 @@ function repairSave(saved) {
     saved.pokerus.battlesRemaining > 0
       ? { battlesRemaining: saved.pokerus.battlesRemaining }
       : null
+  const quests =
+    saved.quests &&
+    typeof saved.quests === 'object' &&
+    typeof saved.quests.date === 'string' &&
+    Array.isArray(saved.quests.list)
+      ? {
+          date: saved.quests.date,
+          list: saved.quests.list
+            .filter(
+              /** @param {any} quest */ (quest) =>
+                quest &&
+                typeof quest === 'object' &&
+                typeof quest.id === 'string' &&
+                typeof quest.kind === 'string' &&
+                typeof quest.goal === 'number' &&
+                typeof quest.progress === 'number' &&
+                (!quest.params?.locationId || mapData[quest.params.locationId]) &&
+                (!quest.params?.speciesKey || pokemonSpecies[quest.params.speciesKey])
+            )
+            .map(
+              /** @param {any} quest */ (quest) => ({
+                id: quest.id,
+                kind: quest.kind,
+                params: quest.params ?? {},
+                goal: quest.goal,
+                progress: Math.max(0, Math.min(quest.progress, quest.goal)),
+                reward: quest.reward ?? {},
+                claimed: !!quest.claimed,
+              })
+            ),
+        }
+      : null
   const daycareParents = /** @type {Pokemon[]} */ (
       Array.isArray(saved.daycare?.parents) ? saved.daycare.parents : []
     )
@@ -371,6 +403,7 @@ function repairSave(saved) {
     shinyChain,
     swarm,
     pokerus,
+    quests,
     daycare,
     shinySeen,
     alwaysCatchShinies: saved.alwaysCatchShinies ?? true,
@@ -487,6 +520,7 @@ export function serializeSave(state) {
     shinyChain: state.shinyChain,
     swarm: state.swarm,
     pokerus: state.pokerus,
+    quests: state.quests,
     daycare: state.daycare,
     shinySeen: state.shinySeen,
     defeatedGyms: state.defeatedGyms,
@@ -566,6 +600,7 @@ export function GameProvider({ children }) {
       state.sfxEnabled,
       state.raidCooldownEnd,
       state.activeEffects,
+      state.quests,
     ]),
     jsx(GameContext.Provider, {
       value: {

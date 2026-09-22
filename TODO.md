@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.13**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.14**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -27,9 +27,9 @@ button, #2b natures, #14 the `node --test` suite, #5 daily events, and #16's
 achievement rewards, map QoL, release rewards and notifications. The remaining
 items, best return first:
 
-1. **#16 More ideas (grab bag)** — mostly S · ★★★ — still open: quests,
-   challenge modes (Nuzlocke / monotype / randomizer), form-changing items,
-   a larger-text option and a performance pass.
+1. **#16 More ideas (grab bag)** — mostly S · ★★★ — still open: challenge
+   modes (Nuzlocke / monotype / randomizer), canonical form-change items, a
+   larger-text option and a performance pass.
 
 ### Tier 2 — High impact, worth the effort (medium–large)
 
@@ -298,8 +298,9 @@ Smaller or more speculative, roughly highest-value first:
       Victory Tokens / items, including Master Balls); claimed in
       `CLAIM_ACHIEVEMENT_REWARDS`, surfaced in the Records panel. Shipped in
       0.9.5.
-- [ ] **Quests / missions** — active objectives with rewards, distinct from
-      passive achievements (e.g. "catch 3 Water types at Route 12").
+- [x] **Quests / missions** — three daily quests with progress bars and
+      claimable money/token/item rewards, rolled from reachable routes/species
+      (`src/game/quests.js`). Shipped in 0.9.14.
 - [ ] **Ball variety** — see #17.
 - [x] **Pokérus** — a very rare party-wide virus caught on a wild win that
       doubles EXP for 150 battles, shown as a PKRS badge on party slots and the
@@ -313,8 +314,11 @@ Smaller or more speculative, roughly highest-value first:
       progress).
 - [ ] **Challenge modes** — Nuzlocke, monotype, randomizer, or a level-scaling
       toggle; big replay value from flags on the existing state.
-- [ ] **Form-changing items** — Rotom / Deoxys / Shaymin / site-based forms —
-      cosmetic but fills in the Pokedex.
+- [ ] **Form-changing items** — the reversible form transforms already work as
+      free level-up evolutions (`fix-form-transforms.cjs`: Rotom, Deoxys,
+      Shaymin, Therian formes, Kyurem, Necrozma, Calyrex, Zygarde, …), so the
+      dex is already fillable. Left open only to switch them to their canonical
+      items (Rotom Catalog, Gracidea, Meteorite, …) for flavour.
 - [x] **Release rewards / item selling** — releasing now pays money + an Exp.
       Candy by level tier (double for shinies) via `releaseReward`, previewed in
       the release confirmation; selling items already shipped with #34. Shipped
@@ -1190,6 +1194,9 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.9.14 (daily quests): three per-day objectives rolled from reachable routes
+and species, with progress bars and claimable rewards, from a top-bar button.
 
 0.9.13 (audio): optional synthesized region themes and event sound effects,
 with separate off-by-default Music and Sound Effects toggles.

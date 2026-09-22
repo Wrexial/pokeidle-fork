@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.9.13'
+export const GAME_VERSION = '0.9.14'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.9.14',
+      subtitle: 'Daily Quests',
+      sections: [
+        {
+          heading: 'Quests',
+          items: [
+            'Three daily quests now appear each day from the \ud83d\udcdc button in the battle top bar, drawn from the routes and species you can reach \u2014 win wild battles, battle on a specific route, catch a type or species, or catch a shiny',
+            'Each pays money, Victory Tokens or items when claimed; progress bars track them and the button pulses when a reward is ready',
+          ],
+        },
+      ],
+    },
     {
       version: '0.9.13',
       subtitle: 'Optional Audio',

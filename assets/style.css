@@ -5355,6 +5355,98 @@ img {
     margin: 0
 }
 
+.quests-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+}
+
+.quest {
+    background: #00000010;
+    border: 2px solid #a89870;
+    padding: 8px 10px
+}
+
+.quest.complete {
+    border-color: var(--gold)
+}
+
+.quest.claimed {
+    opacity: .6
+}
+
+.quest-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    align-items: baseline
+}
+
+.quest-label {
+    font-size: 9px;
+    font-weight: 700;
+    color: #3a2818
+}
+
+.quest-reward {
+    flex: 0 0 auto;
+    font-size: 8px;
+    color: var(--gold-dark)
+}
+
+.quest-bar {
+    height: 8px;
+    margin: 8px 0 6px;
+    background: #1a1208;
+    border: 2px solid #483828;
+    overflow: hidden
+}
+
+.quest-fill {
+    height: 100%;
+    background: linear-gradient(90deg,#48a048,#6dd06d);
+    transition: width .3s linear
+}
+
+.quest-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+}
+
+.quest-progress {
+    font-size: 8px;
+    color: #5a4838
+}
+
+.quest-claimed {
+    font-size: 8px;
+    font-weight: 700;
+    color: #2e7d32
+}
+
+.quest-claim-btn {
+    font-size: 8px;
+    font-weight: 700;
+    padding: 3px 12px;
+    background: var(--gold);
+    color: #2a1808;
+    border: 2px solid var(--gold-dark);
+    border-radius: 0;
+    cursor: pointer;
+    box-shadow: 1px 1px #0000004d
+}
+
+.quest-claim-btn:hover {
+    background: var(--gold-bright)
+}
+
+.quests-empty {
+    font-size: 9px;
+    color: #5a4838;
+    margin: 0
+}
+
 .battle-info-overlay {
     position: fixed;
     inset: 0;

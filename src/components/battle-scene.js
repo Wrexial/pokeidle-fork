@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { moveCategoryIcons } from '../data/moves.js'
 import { dailyEventByKey } from '../data/daily-events.js'
+import { hasClaimableQuests } from '../game/quests.js'
 import { locationImages } from '../data/ui.js'
 import { completedGenerations, mapData, moveData, pokemonSpecies, speciesKeysByGeneration } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
@@ -16,6 +17,7 @@ import { SettingsModal } from './settings-modal.js'
 import { BattleTextBox } from './battle-text-box.js'
 import { EvolutionScene } from './evolution-scene.js'
 import { DailyEventModal } from './daily-event-modal.js'
+import { QuestsModal } from './quests-modal.js'
 import { HealingScene } from './healing-scene.js'
 import { MasterBallScene } from './master-ball-scene.js'
 import { PokeballIcon } from './pokeball-icon.js'
@@ -27,6 +29,7 @@ export function BattleScene() {
     [showInfo, setShowInfo] = React.useState(!1),
     [showSettings, setShowSettings] = React.useState(!1),
     [showDaily, setShowDaily] = React.useState(!1),
+    [showQuests, setShowQuests] = React.useState(!1),
     { state, dispatch } = useGame(),
     { playerPokemon, enemyPokemon, battleEvents } = state,
     completedGenerationSet = completedGenerations(state.pokedexCaught),
@@ -117,6 +120,14 @@ export function BattleScene() {
             children: state.dailyEvent
               ? dailyEventByKey[state.dailyEvent.kind]?.icon ?? '🎁'
               : '🎁',
+          }),
+          jsx('button', {
+            className: `battle-info-btn daily-event-btn${
+              hasClaimableQuests(state.quests) ? ' claimable' : ''
+            }`,
+            onClick: () => setShowQuests(!0),
+            title: 'Daily Quests',
+            children: '📜',
           }),
           jsx('button', {
             className: 'battle-info-btn',
@@ -450,6 +461,10 @@ export function BattleScene() {
       showDaily &&
         jsx(DailyEventModal, {
           onClose: () => setShowDaily(!1),
+        }),
+      showQuests &&
+        jsx(QuestsModal, {
+          onClose: () => setShowQuests(!1),
         }),
     ],
   })

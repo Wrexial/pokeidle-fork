@@ -10,6 +10,7 @@ const { BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL
 )
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 const { consumableItems, evolutionItems } = await import('../src/data/items.js')
+const { createPokemon } = await import('../src/game/pokemon.js')
 
 test('Sinnoh hosts the mining minigame and Johto the bug contest', () => {
   assert.equal(MINIGAME_BY_REGION.sinnoh, 'mining')
@@ -214,6 +215,27 @@ test('START_GAME_CORNER enters the scene without an entry fee', () => {
   )
   assert.equal(next.phase, 'gameCorner')
   assert.equal(next.money, 1234)
+})
+
+test('entering a minigame stops an in-progress battle', () => {
+  const active = createPokemon('bulbasaur', 20, 'a'),
+    battling = {
+      ...initialGameState,
+      phase: 'battling',
+      party: [active],
+      playerPokemon: active,
+      money: MINING_COST + 10,
+      enemyPokemon: { speciesKey: 'pidgey', level: 5 },
+    },
+    started = gameReducer(battling, { type: 'START_MINING' }),
+    stillBattling = gameReducer(
+      { ...battling, phase: 'evolving' },
+      { type: 'START_GAME_CORNER' }
+    )
+  assert.equal(started.phase, 'mining', 'the battle is dropped and the scene starts')
+  assert.equal(started.enemyPokemon, null)
+  assert.equal(started.money, 10)
+  assert.equal(stillBattling.phase, 'evolving', 'an animation in progress is never interrupted')
 })
 
 test('END_MINIGAME returns mining and the game corner to idle', () => {

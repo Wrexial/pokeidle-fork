@@ -1,10 +1,22 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.33.0'
+export const GAME_VERSION = '0.34.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.34.0',
+      subtitle: 'Minigame Entry',
+      sections: [
+        {
+          heading: 'Minigames',
+          items: [
+            'Entering a minigame now stops the battle in progress instead of ignoring the click, so you no longer have to spam the button while an idle battle is resolving',
+          ],
+        },
+      ],
+    },
     {
       version: '0.33.0',
       subtitle: 'Wonder Trade',

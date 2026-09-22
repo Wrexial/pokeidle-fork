@@ -44,9 +44,11 @@ export function GymPanel({ onOpenShop }) {
     isBusy =
       state.phase === 'evolving' ||
       state.phase === 'healing' ||
+      state.phase === 'catching' ||
       state.phase === 'bugCatching' ||
       state.phase === 'mining' ||
-      state.phase === 'gameCorner',
+      state.phase === 'gameCorner' ||
+      state.phase === 'wonderTrade',
     fightable = canFight && !isBusy
 
   /** @param {any} leader */

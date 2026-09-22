@@ -154,6 +154,40 @@ function settleUnlockTokens(state) {
   }
 }
 
+/**
+ * Abandon whatever battle is in progress and hand the phase to a minigame
+ * scene. The start actions used to refuse unless the state happened to be
+ * `idle`/`victory`, so the entry buttons had to be spammed while the idle loop
+ * was mid-battle. Stopping the battle first makes one click enough.
+ * @param {GameState} state
+ * @param {string} phase
+ * @param {number} [cost]
+ * @param {string} [log]
+ * @returns {GameState}
+ */
+function enterMinigame(state, phase, cost = 0, log) {
+  // Never interrupt a transition that is already mid-animation or already in a
+  // minigame scene.
+  if (
+    state.phase === 'evolving' ||
+    state.phase === 'healing' ||
+    state.phase === 'catching' ||
+    state.phase === 'bugCatching' ||
+    state.phase === 'mining' ||
+    state.phase === 'gameCorner' ||
+    state.phase === 'wonderTrade'
+  )
+    return state
+  if (cost > 0 && state.money < cost) return state
+  const base = prepareNextBattle(state)
+  return {
+    ...base,
+    phase,
+    money: state.money - cost,
+    ...(log ? { battleLog: [...state.battleLog, log].slice(-50) } : {}),
+  }
+}
+
 /** Most toasts shown at once; older ones drop off the top. */
 const NOTIFICATION_CAP = 4
 /** Repeat events with the same dedupe key are dropped inside this window. */
@@ -2731,39 +2765,24 @@ export function gameReducer(state, action) {
         ...state,
         challengeNuzlocke: !state.challengeNuzlocke,
       }
-    case 'START_BUG_CONTEST': {
-      if (state.phase !== 'idle' && state.phase !== 'victory') return state
-      if (state.money < BUG_CONTEST_COST) return state
-      return {
-        ...state,
-        ...createIdleBattleState(),
-        phase: 'bugCatching',
-        money: state.money - BUG_CONTEST_COST,
-        battleLog: [...state.battleLog, 'You entered the Bug Catching Contest!'].slice(-50),
-      }
-    }
+    case 'START_BUG_CONTEST':
+      return enterMinigame(
+        state,
+        'bugCatching',
+        BUG_CONTEST_COST,
+        'You entered the Bug Catching Contest!'
+      )
     case 'END_BUG_CONTEST':
       return state.phase === 'bugCatching' ? { ...state, ...createIdleBattleState() } : state
-    case 'START_MINING': {
-      if (state.phase !== 'idle' && state.phase !== 'victory') return state
-      if (state.money < MINING_COST) return state
-      return {
-        ...state,
-        ...createIdleBattleState(),
-        phase: 'mining',
-        money: state.money - MINING_COST,
-        battleLog: [...state.battleLog, 'You headed down into the Underground.'].slice(-50),
-      }
-    }
-    case 'START_GAME_CORNER': {
-      if (state.phase !== 'idle' && state.phase !== 'victory') return state
-      return {
-        ...state,
-        ...createIdleBattleState(),
-        phase: 'gameCorner',
-        battleLog: [...state.battleLog, 'You stepped up to the Game Corner slots.'].slice(-50),
-      }
-    }
+    case 'START_MINING':
+      return enterMinigame(
+        state,
+        'mining',
+        MINING_COST,
+        'You headed down into the Underground.'
+      )
+    case 'START_GAME_CORNER':
+      return enterMinigame(state, 'gameCorner', 0, 'You stepped up to the Game Corner slots.')
     case 'END_MINIGAME':
       return state.phase === 'mining' || state.phase === 'gameCorner'
         ? { ...state, ...createIdleBattleState() }

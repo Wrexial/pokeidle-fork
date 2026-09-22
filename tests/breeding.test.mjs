@@ -73,6 +73,21 @@ test('genderless species report genderless', () => {
   assert.equal(genderForPokemon(parent('mewtwo')), 'genderless')
 })
 
+test('a stored gender wins over the id-derived one', () => {
+  assert.equal(
+    genderForPokemon({
+      speciesKey: 'bulbasaur',
+      id: findId('bulbasaur', 'male'),
+      gender: 'female',
+    }),
+    'female'
+  )
+})
+
+test('a fixed gender-form species ignores a stored gender', () => {
+  assert.equal(genderForPokemon({ speciesKey: 'basculegion-f', gender: 'male' }), 'female')
+})
+
 test('inheritIVs passes down exactly 3 of the parents\' best stats', () => {
   // Out-of-range sentinel values (40/60) can't come from generateIVs (0-31),
   // so the count of injected values tells us how many stats were inherited.

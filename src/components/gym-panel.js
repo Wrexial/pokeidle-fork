@@ -6,7 +6,6 @@ import { championData, elite4Data, gymLeaderData, mapData, regions } from '../da
 import { BATTLE_TOWER_REGION } from '../data/config.js'
 import { MINIGAME_BY_REGION, MINIGAME_INFO } from '../game/minigames.js'
 import { MiningModal } from './mining-modal.js'
-import { BugContestModal } from './bug-contest-modal.js'
 import { GameCornerModal } from './game-corner-modal.js'
 import { useGame } from '../game/context.js'
 import { buildTrainerTeam, buildTowerFloor } from '../game/progression.js'
@@ -38,7 +37,10 @@ export function GymPanel({ onOpenShop }) {
     nextTowerFloor = state.towerFloor > 0 ? state.towerFloor : 1,
     towerPreview = showTower ? buildTowerFloor(nextTowerFloor) : [],
     canFight = state.party.some((member) => member.currentHp > 0),
-    isBusy = state.phase === 'evolving' || state.phase === 'healing',
+    isBusy =
+      state.phase === 'evolving' ||
+      state.phase === 'healing' ||
+      state.phase === 'bugCatching',
     fightable = canFight && !isBusy
 
   /** @param {any} leader */
@@ -431,9 +433,17 @@ export function GymPanel({ onOpenShop }) {
               style: {
                 width: '100%',
               },
-              disabled: state.money < MINIGAME_INFO[regionMinigame].cost,
+              disabled:
+                state.money < MINIGAME_INFO[regionMinigame].cost ||
+                (regionMinigame === 'bugContest' && isBusy),
               onClick: () => {
                 if (state.money < MINIGAME_INFO[regionMinigame].cost) return
+                // The Bug Catching Contest is a full-stage scene, so it hands
+                // the phase over to the reducer rather than opening a modal.
+                if (regionMinigame === 'bugContest') {
+                  dispatch({ type: 'START_BUG_CONTEST' })
+                  return
+                }
                 dispatch({
                   type: 'PAY_MINIGAME_FEE',
                   payload: {
@@ -449,9 +459,6 @@ export function GymPanel({ onOpenShop }) {
             }),
           ],
         }),
-      showMining &&
-        regionMinigame === 'bugContest' &&
-        jsx(BugContestModal, { onClose: () => setShowMining(!1) }),
       showMining &&
         regionMinigame === 'gameCorner' &&
         jsx(GameCornerModal, { onClose: () => setShowMining(!1) }),

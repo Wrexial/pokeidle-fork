@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.27.0'
+export const GAME_VERSION = '0.28.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.28.0',
+      subtitle: 'Bug Catching Rework',
+      sections: [
+        {
+          heading: 'Minigames',
+          items: [
+            'The Johto Bug Catching Contest now plays out on the main stage and pauses the rest of the game while it runs',
+            'Rustle one of three bushes to scare out a bug, then throw a free (unlimited) Net Ball or let it go. You get 5 rustles per run; each bug shows its level and gender, and the rarer bugs may flee after a missed throw',
+          ],
+        },
+      ],
+    },
     {
       version: '0.27.0',
       subtitle: 'Game Corner',

@@ -10,7 +10,8 @@ import { createVolatileState } from './combat.js'
 import { calculatePokemonStats, calculateRequiredExperience, createEgg, createPokemon, gainFriendship, getLevelUpResults, insertIntoBox, isBattleReady, isTutorMove, judgeIVs, nextBoxSortMode, resolvePokemonMoves, sortBoxMembers } from './pokemon.js'
 import { canBreed, eggHatchSteps, eggSpeciesKey, inheritBreedingTraits } from './breeding.js'
 import { advanceQuests, questLabel, rollQuests } from './quests.js'
-import { buildTrainerTeam, buildTowerFloor, checkShinyOdds, computeUnlockedLocations, formatReward, getRegionUnlockTokens, isActiveEffectItem, loadActivePokemonFromParty, prepareNextBattle, releaseReward, rollCandyDrop, rollValuableDrop, syncActivePokemonIntoParty, tickBattleCounters, tickPartyEggs, tickPokerus } from './progression.js'
+import { buildTrainerTeam, buildTowerFloor, checkShinyOdds, computeUnlockedLocations, createIdleBattleState, formatReward, getRegionUnlockTokens, isActiveEffectItem, loadActivePokemonFromParty, prepareNextBattle, releaseReward, rollCandyDrop, rollValuableDrop, syncActivePokemonIntoParty, tickBattleCounters, tickPartyEggs, tickPokerus } from './progression.js'
+import { BUG_CONTEST_COST } from './minigames.js'
 import { applyEntryHazards, emptyBattleHazards } from './hazards.js'
 
 /** @type {GameState} */
@@ -895,9 +896,11 @@ export function gameReducer(state, action) {
           level,
           pokeballUsed,
           isShiny,
+          gender,
         } = action.payload,
         catchLevel = state.inRaid ? 60 : level,
-        newPokemon = createPokemon(speciesKey, catchLevel, state.nextPokemonId, isShiny),
+        rolledPokemon = createPokemon(speciesKey, catchLevel, state.nextPokemonId, isShiny),
+        newPokemon = gender ? { ...rolledPokemon, gender } : rolledPokemon,
         species = pokemonSpecies[speciesKey]
       let inventory = state.inventory
       if (pokeballUsed) {
@@ -2747,6 +2750,19 @@ export function gameReducer(state, action) {
         ...state,
         challengeNuzlocke: !state.challengeNuzlocke,
       }
+    case 'START_BUG_CONTEST': {
+      if (state.phase !== 'idle' && state.phase !== 'victory') return state
+      if (state.money < BUG_CONTEST_COST) return state
+      return {
+        ...state,
+        ...createIdleBattleState(),
+        phase: 'bugCatching',
+        money: state.money - BUG_CONTEST_COST,
+        battleLog: [...state.battleLog, 'You entered the Bug Catching Contest!'].slice(-50),
+      }
+    }
+    case 'END_BUG_CONTEST':
+      return state.phase === 'bugCatching' ? { ...state, ...createIdleBattleState() } : state
     case 'PAY_MINIGAME_FEE': {
       const amount = action.payload?.amount ?? 0
       if (amount <= 0 || state.money < amount) return state

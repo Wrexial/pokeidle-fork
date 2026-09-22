@@ -67,15 +67,17 @@ const GENDER_FORM_SPECIES = {
 }
 
 /**
- * A Pokemon's gender: fixed for a gender-form species, otherwise derived
+ * A Pokemon's gender: fixed for a gender-form species, then any gender stored
+ * on the Pokemon (e.g. rolled by the Bug Catching Contest), otherwise derived
  * deterministically from its id (so it's stable across reloads without being
  * saved) using its species' gender rate.
- * @param {{ speciesKey: string, id?: string | number }} pokemon
+ * @param {{ speciesKey: string, id?: string | number, gender?: 'male' | 'female' | 'genderless' }} pokemon
  * @returns {'male' | 'female' | 'genderless'}
  */
 export function genderForPokemon(pokemon) {
   const fixedGender = GENDER_FORM_SPECIES[pokemon.speciesKey]
   if (fixedGender) return fixedGender
+  if (pokemon.gender) return pokemon.gender
   const data = breedingData[pokemon.speciesKey]
   if (!data || data.genderRate === -1) return 'genderless'
   if (data.genderRate === 0) return 'male'

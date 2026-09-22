@@ -83,6 +83,8 @@ type Pokemon = BattlePokemon & {
   favourite?: boolean
   /** Optional player-given nickname (max 12 characters). */
   nickname?: string
+  /** Stored gender, e.g. rolled by the Bug Catching Contest. Falls back to a species-derived value. */
+  gender?: 'male' | 'female' | 'genderless'
   /** An unhatched egg: it cannot battle and hatches after `eggStepsRemaining` wild wins while in the party. */
   isEgg?: boolean
   eggStepsRemaining?: number

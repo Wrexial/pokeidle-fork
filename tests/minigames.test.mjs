@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 installGameData()
 
-const { BUG_CONTEST_COST, MINIGAME_BY_REGION, MINING_COST, SLOT_SPIN_COST, SLOT_SYMBOLS, bugContestPrize, rewardItemName, rollContestBug, rollMiningReward, spinSlots } = await import(
+const { BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_RUSTLES, MINIGAME_BY_REGION, MINING_COST, SLOT_SPIN_COST, SLOT_SYMBOLS, bugCatchChance, bugFleeChance, bugStays, rewardItemName, rollContestBug, rollMiningReward, spinSlots, throwNetBall } = await import(
   '../src/game/minigames.js'
 )
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
@@ -72,17 +72,75 @@ test('slot spins pay a real multiplier and stay near break-even', () => {
       total ** 3
   assert.ok(expected > 0.7 && expected < 1.05, `return rate ${expected}`)
 })
-test('bug contest bugs and prizes are consistent', () => {
-  const bug = rollContestBug()
-  assert.ok(bug.speciesKey)
-  assert.ok(bug.score > 0)
-  const prize = bugContestPrize(bug.score)
-  assert.ok(prize.money > 0)
-  assert.ok(prize.items.length > 0)
-  assert.ok(
-    bugContestPrize(500).money >= BUG_CONTEST_COST,
-    'the top prize at least pays back the entry fee'
+test('contest bugs roll a level, gender and flee chance', () => {
+  assert.equal(BUG_CONTEST_BUSHES, 3)
+  assert.ok(BUG_CONTEST_RUSTLES > 0)
+  for (let roll = 0; roll < 50; roll++) {
+    const bug = rollContestBug(40)
+    assert.ok(bug.speciesKey)
+    assert.ok(bug.level >= 5 && bug.level <= 75)
+    assert.ok(['male', 'female', 'genderless'].includes(bug.gender))
+    assert.ok(bug.fleeChance >= 0 && bug.fleeChance <= 1)
+  }
+})
+
+test('rarer contest bugs are more skittish', () => {
+  assert.ok(bugFleeChance('scyther') > bugFleeChance('caterpie'))
+})
+
+test('the contest supplies free Net Balls with a real catch chance', () => {
+  assert.equal(BUG_CONTEST_BALL, 'netball')
+  const chance = bugCatchChance('scyther')
+  assert.ok(chance > 0 && chance < 1)
+  assert.equal(typeof throwNetBall('caterpie'), 'boolean')
+})
+
+test('a failed throw may spook a bug into fleeing', () => {
+  const original = Math.random
+  try {
+    Math.random = () => 0.99 // above every flee chance: the bug stays
+    assert.equal(bugStays('caterpie'), true)
+    assert.equal(bugStays('scyther'), true)
+    Math.random = () => 0 // below every flee chance: the bug flees
+    assert.equal(bugStays('caterpie'), false)
+    assert.equal(bugStays('scyther'), false)
+  } finally {
+    Math.random = original
+  }
+})
+
+test('START_BUG_CONTEST charges entry and enters the scene', () => {
+  const started = gameReducer(
+      { ...initialGameState, phase: 'idle', money: BUG_CONTEST_COST + 50 },
+      { type: 'START_BUG_CONTEST' }
+    ),
+    broke = gameReducer(
+      { ...initialGameState, phase: 'idle', money: BUG_CONTEST_COST - 1 },
+      { type: 'START_BUG_CONTEST' }
+    )
+  assert.equal(started.phase, 'bugCatching')
+  assert.equal(started.money, 50)
+  assert.equal(broke.phase, 'idle')
+  assert.equal(broke.money, BUG_CONTEST_COST - 1)
+})
+
+test('END_BUG_CONTEST returns to idle', () => {
+  const next = gameReducer(
+    { ...initialGameState, phase: 'bugCatching' },
+    { type: 'END_BUG_CONTEST' }
   )
+  assert.equal(next.phase, 'idle')
+})
+
+test('CATCH_POKEMON keeps a rolled gender', () => {
+  const next = gameReducer(
+    { ...initialGameState, party: [], nextPokemonId: 7 },
+    {
+      type: 'CATCH_POKEMON',
+      payload: { speciesKey: 'scyther', level: 40, gender: 'female' },
+    }
+  )
+  assert.equal(next.party[0].gender, 'female')
 })
 
 test('COLLECT_MINING adds the found rewards to the bag', () => {

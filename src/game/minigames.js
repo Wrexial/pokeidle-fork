@@ -2,7 +2,8 @@
 // own, starting with Sinnoh's Underground mining. Each minigame keeps its
 // interactive state in its modal and dispatches a single collect action.
 import { consumableItems, evolutionItems } from '../data/items.js'
-import { pokemonSpecies } from '../data/gameData.js'
+import { breedingData, pokemonSpecies } from '../data/gameData.js'
+import { calculateCatchChance } from './catching.js'
 
 /** Region -> minigame id. Hoenn's tower is handled separately. */
 /** @type {Record<string, string>} */
@@ -88,12 +89,21 @@ export function rewardItemName(itemId) {
 /** Money spent to enter the contest. */
 export const BUG_CONTEST_COST = 800
 
-/** How many times you may pass on a bug before you must keep one. */
-export const BUG_CONTEST_SEARCHES = 5
+/** Bushes offered each rustle; the player picks one to scare out a bug. */
+export const BUG_CONTEST_BUSHES = 3
+
+/** How many rustles (bush reveals) the player gets per run. */
+export const BUG_CONTEST_RUSTLES = 5
+
+/** The ball supplied for free, in unlimited quantity, during the contest. */
+export const BUG_CONTEST_BALL = 'netball'
+
+/** How far a bug's level may stray from the player's active Pokemon. */
+const CONTEST_LEVEL_SPREAD = 3
 
 /**
- * Contest bugs, with a weight (how often it turns up) and a score (how good it
- * is). Weaker bugs are common, the big ones are rare.
+ * Contest bugs, with a weight (how often one turns up). Weaker bugs are
+ * common, the headline catches are rare.
  * @type {{ speciesKey: string, weight: number }[]}
  */
 export const BUG_CONTEST_POOL = [
@@ -114,40 +124,86 @@ export const BUG_CONTEST_POOL = [
 
 const BUG_TOTAL_WEIGHT = BUG_CONTEST_POOL.reduce((sum, entry) => sum + entry.weight, 0)
 
-/** Total base stats for a species (its contest score). @param {string} speciesKey */
-export function contestScore(speciesKey) {
-  const species = pokemonSpecies[speciesKey]
-  return species
-    ? Object.values(species.baseStats).reduce((sum, value) => sum + value, 0)
-    : 0
+/**
+ * How likely a bug is to flee after a failed throw. Rarer bugs (lower catch
+ * rate) are more skittish; the common ones almost always stay put.
+ * @param {string} speciesKey
+ * @returns {number} A 0-1 chance.
+ */
+export function bugFleeChance(speciesKey) {
+  const catchRate = pokemonSpecies[speciesKey]?.catchRate ?? 255
+  return Math.max(0.03, Math.min(0.5, ((255 - catchRate) / 255) * 0.55))
 }
 
 /**
- * Roll the next bug to appear.
- * @returns {{ speciesKey: string, score: number }}
+ * Roll a bug's gender from its species' gender rate. Species with no breeding
+ * data (or a -1 rate) are genderless.
+ * @param {string} speciesKey
+ * @returns {'male' | 'female' | 'genderless'}
  */
-export function rollContestBug() {
-  let roll = Math.random() * BUG_TOTAL_WEIGHT
+export function rollContestGender(speciesKey) {
+  const data = breedingData[speciesKey]
+  if (!data || data.genderRate === -1) return 'genderless'
+  if (data.genderRate === 0) return 'male'
+  if (data.genderRate === 8) return 'female'
+  return Math.random() < data.genderRate / 8 ? 'female' : 'male'
+}
+
+/**
+ * Roll the bug hiding in a rustled bush.
+ * @param {number} [baseLevel] The player's active Pokemon level; the bug stays
+ *   within {@link CONTEST_LEVEL_SPREAD} levels of it.
+ * @returns {{ speciesKey: string, level: number, gender: 'male' | 'female' | 'genderless', fleeChance: number }}
+ */
+export function rollContestBug(baseLevel = 20) {
+  let roll = Math.random() * BUG_TOTAL_WEIGHT,
+    chosen = BUG_CONTEST_POOL[BUG_CONTEST_POOL.length - 1]
   for (const entry of BUG_CONTEST_POOL) {
     roll -= entry.weight
-    if (roll <= 0) return { speciesKey: entry.speciesKey, score: contestScore(entry.speciesKey) }
+    if (roll <= 0) {
+      chosen = entry
+      break
+    }
   }
-  const fallback = BUG_CONTEST_POOL[0]
-  return { speciesKey: fallback.speciesKey, score: contestScore(fallback.speciesKey) }
+  const level = Math.max(
+    5,
+    Math.min(75, Math.round(baseLevel + (Math.random() * 2 - 1) * CONTEST_LEVEL_SPREAD))
+  )
+  return {
+    speciesKey: chosen.speciesKey,
+    level,
+    gender: rollContestGender(chosen.speciesKey),
+    fleeChance: bugFleeChance(chosen.speciesKey),
+  }
 }
 
 /**
- * Prize for a caught bug's score.
- * @param {number} score
- * @returns {{ money: number, items: { itemId: string, quantity: number }[], label: string }}
+ * Chance a free contest Net Ball catches a bug.
+ * @param {string} speciesKey
+ * @returns {number}
  */
-export function bugContestPrize(score) {
-  if (score >= 480) return { money: 4000, items: [{ itemId: 'rareCandy', quantity: 1 }], label: 'First place' }
-  if (score >= 400)
-    return { money: 2000, items: [{ itemId: 'expCandyL', quantity: 1 }], label: 'Second place' }
-  if (score >= 300)
-    return { money: 1000, items: [{ itemId: 'expCandyM', quantity: 1 }], label: 'Third place' }
-  return { money: 400, items: [{ itemId: 'expCandyS', quantity: 1 }], label: 'Participant' }
+export function bugCatchChance(speciesKey) {
+  return calculateCatchChance(speciesKey, BUG_CONTEST_BALL, {
+    types: pokemonSpecies[speciesKey]?.types ?? [],
+  })
+}
+
+/**
+ * Throw a Net Ball at a contest bug.
+ * @param {string} speciesKey
+ * @returns {boolean} Whether the bug was caught.
+ */
+export function throwNetBall(speciesKey) {
+  return Math.random() < bugCatchChance(speciesKey)
+}
+
+/**
+ * Whether a bug stays put after a failed throw (otherwise it flees).
+ * @param {string} speciesKey
+ * @returns {boolean}
+ */
+export function bugStays(speciesKey) {
+  return Math.random() >= bugFleeChance(speciesKey)
 }
 
 /** Region -> minigame section metadata for the Gyms panel. */
@@ -163,7 +219,7 @@ export const MINIGAME_INFO = {
     title: 'Bug Catching Contest',
     cost: BUG_CONTEST_COST,
     action: 'ENTER CONTEST',
-    hint: `Search the park for bugs \u2014 rarer ones score higher. Entry is $${BUG_CONTEST_COST.toLocaleString()}, and you get ${BUG_CONTEST_SEARCHES} chances to look before you must keep one.`,
+    hint: `Rustle the park bushes to scare out a bug, then throw a free Net Ball or let it go. You get ${BUG_CONTEST_RUSTLES} rustles \u2014 keep whatever you catch, but the rarer bugs may flee. Entry is $${BUG_CONTEST_COST.toLocaleString()}.`,
   },
   gameCorner: {
     title: 'Game Corner',

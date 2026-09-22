@@ -60,28 +60,32 @@ working order, and the numbered sections as the details.
 19. **#2a Abilities** (with **#2c Held items**) — L · ★★★★★ / ★★★★ — the
     biggest remaining battle-depth feature; natures (#2b) are already in
     Tier 1.
-20. **#28 More region areas (DLC, caves, POIs)** — L · ★★★★½ — real content
-    (Crown Tundra, Kitakami, landmark caves); data-heavy.
-21. **#18 Better settings** — M · ★★★★ — centralises QOL toggles and the
+20. **#36 Zones (route chunks)** — M–L · ★★★★ — lets Alola/Galar/Paldea map
+    as chunks of areas instead of a single-route-wide graph.
+21. **#35 More Galar areas** — M · ★★★½ — Galar is the thinnest region map;
+    add Wild Area sub-areas and DLC land, mostly data.
+22. **#28 More region areas (DLC, caves, POIs)** — L · ★★★★½ — real content
+    (Crown Tundra, Kitakami, landmark caves); data-heavy. Pairs with #35/#36.
+23. **#18 Better settings** — M · ★★★★ — centralises QOL toggles and the
     export/import from #15.
 
 ### Tier 3 — Medium effort, medium gain
 
-22. **#3 Daycare inheritance** — M · ★★★
-23. **#6 Friendship / happiness** — M · ★★★
-24. **#9 Move tutor / TMs** — M · ★★★
-25. **#11 NPC gifts & static encounters** — M · ★★★
-26. **#17 Pokéball variants** — M · ★★★
-27. **#27 Gender-specific sprites** — M · ★★★ (assets are half-there)
-28. **#29 Minigames** — M–L · ★★★ (small per minigame once one exists)
-29. **#4 In-battle Mega evolution** — M–L · ★★★
-30. **#32 Battle Tower tuning** — M · ★★★½ — auto-climb, sane Victory Token
+24. **#3 Daycare inheritance** — M · ★★★
+25. **#6 Friendship / happiness** — M · ★★★
+26. **#9 Move tutor / TMs** — M · ★★★
+27. **#11 NPC gifts & static encounters** — M · ★★★
+28. **#17 Pokéball variants** — M · ★★★
+29. **#27 Gender-specific sprites** — M · ★★★ (assets are half-there)
+30. **#29 Minigames** — M–L · ★★★ (small per minigame once one exists)
+31. **#4 In-battle Mega evolution** — M–L · ★★★
+32. **#32 Battle Tower tuning** — M · ★★★½ — auto-climb, sane Victory Token
     payout, and harder/faster teams (6 fully evolved, late legendaries).
 
 ### Tier 4 — Big and low-return, defer
 
-31. **#10 Weather & terrain** — M · ★★½ (nice depth, no urgency)
-32. **#19 Online sync** — L · ★★★ — the project's first backend; needs a
+33. **#10 Weather & terrain** — M · ★★½ (nice depth, no urgency)
+34. **#19 Online sync** — L · ★★★ — the project's first backend; needs a
     design doc and real ops for modest player value today.
 
 ---
@@ -858,6 +862,97 @@ Relevant code: `src/data/items.js` (`bagCategories`, `martShopItems`,
 
 Effort: **small–medium** (items + sell action + a shop Sell section); larger if
 the item registry is unified.
+
+---
+
+## 35. Go through the Galar map and add the missing areas
+
+Galar is currently the thinnest region map. The generator only keeps PokéAPI
+**towns + numbered routes**, so most of Galar is absent: the Wild Area is a
+single node, and **Isle of Armor** / **Crown Tundra** (Expansion Pass) don't
+exist at all. As a result a large slice of the Galar dex has no native route and
+gets pushed into Galar's Raid Island pool. This is the focused Galar pass;
+#28a/#28b cover the same gaps generally and #36 proposes the zone model the
+Wild Area needs.
+
+- [ ] Audit `public/data/map-data/galar.json` and
+      `public/data/encounter-data/galar.json` against a real Galar map and
+      write down what's missing — the Wild Area sub-areas (Rolling Fields,
+      Dappled Grove, Giant's Mirror, Lake of Outrage, …), Slumbering Weald,
+      Galar Mine, Glimwood Tangle, and any towns/routes the scraper skipped.
+- [ ] Add what the scrapers can (`tools/scrape-region-maps.cjs` + cached
+      Bulbapedia connections, then `tools/scrape-route-encounters.cjs` for the
+      encounter tables); inject the rest with
+      `EXTRA_MAP_AREAS` in `tools/generate-regions.cjs`, which already supports
+      an explicit `node` / `species` / `connect` / `rank`.
+- [ ] Model the Wild Area as a **zone** (#36) rather than one giant route, with
+      each named sub-area holding its own encounter table/background.
+- [ ] Re-run `tools/generate-regions.cjs` and re-check Galar's `raidPool` —
+      species that now spawn natively must drop out of it.
+- [ ] Keep the progression sensible: mainland Galar stays on the 5–75 curve,
+      and the DLC is post-game (after the Champion) via a forced `rank` /
+      `unlockOrder`.
+
+Relevant code: `tools/scrape-region-maps.cjs` (`MANUAL_BRIDGES`, which already
+carries the Wild Area links), `tools/scrape-route-encounters.cjs`,
+`tools/generate-regions.cjs` (`EXTRA_MAP_AREAS`, `levelRoutes`, raid pools),
+`public/data/map-data/galar.json` and `public/data/encounter-data/galar.json`,
+and `raidPoolFor` in `src/data/gameData.js`.
+
+Effort: **medium** (mostly data; the Wild Area zone work depends on #36).
+
+## 36. Zones — route-like chunks of areas
+
+The map is a graph of single nodes joined pair-wise: a town or one route per
+node. That fits Kanto–Unova, but the later regions aren't a linear route chain,
+and they map badly today:
+
+- **Alola** is four islands of trial areas — the generator has no way to show an
+  island as a unit, so areas are stitched on by proximity and several islands
+  read as separate disconnected clusters.
+- **Galar**'s Wild Area is dozens of named sub-areas wrapped around the map; it
+  currently collapses to one node.
+- **Paldea** is open-world provinces of "<Dir> Province (Area N)" with no
+  numbered routes at all, so it falls back to BFS-depth ordering and trims each
+  province to 15 species.
+
+Introduce a **zone**: a map node that is a *chunk of areas* (like a route, but
+grouping several sub-areas) instead of a single encounter table.
+
+Design questions to settle first:
+
+- [ ] **Data shape**: a `type: 'zone'` location carrying
+      `subAreas: [{ id, name, routeKey/encounters, background, unlock? }]`, vs.
+      first-class locations tagged with a `zone`/`parentZone` id. The first keeps
+      the map graph small (one node per zone) and makes zones obvious; the
+      second reuses all the existing route plumbing.
+- [ ] **Travel & UI**: does a zone appear as one node that opens a sub-area
+      picker, or as a cluster of sub-area nodes shown/hidden together? Decide
+      how the active sub-area is chosen (player pick vs. rotation).
+- [ ] **Encounters**: resolve against the active/selected sub-area —
+      `resolvePokemonEncounter` and `encounterData[routeKey]` are keyed by a
+      single `routeKey` today, so the zone needs to feed the right one (or hold
+      its own bucket).
+- [ ] **Progress**: do zones unlock as a unit, or do sub-areas gate
+      individually? `computeUnlockedLocations` + each location's `unlock` seed
+      the fixpoint, and `unlockOrder` must stay stable when a zone is added
+      (currently `region generation * 100000 + route rank`).
+- [ ] **Level curve**: `levelRoutes()` spreads routes across the 5–75 curve by
+      route number / BFS depth — decide how a zone's sub-areas rank and how the
+      DLC/post-game zones slot in.
+
+Likely touch points: `src/components/map-node.js` (zone glyph / cluster),
+`town-map.js` (roads + tab), `location-panel.js` (the Wild Pokémon header),
+`route-encounter-grid.js` (sub-area tabs), `tools/generate-regions.cjs`
+(`EXTRA_MAP_AREAS`, `levelRoutes`, ordering), `tools/scrape-region-maps.cjs`,
+and the `map-data/` / `encounter-data/` region files.
+
+Good first candidate: **Galar's Wild Area** (one zone, many sub-areas) together
+with #35, then **Alola** (islands as zones) and **Paldea** (provinces as zones)
+to replace the proximity stitching / 15-species trim.
+
+Effort: **medium–large** (a small data-model change plus map/encounter UI, but
+it unblocks the three regions that don't fit the route graph today).
 
 ---
 

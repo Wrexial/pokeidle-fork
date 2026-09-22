@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.9.21'
+export const GAME_VERSION = '0.9.22'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.9.22',
+      subtitle: 'Collapsible Box Search',
+      sections: [
+        {
+          heading: 'Box',
+          items: [
+            'The box search field and filters now hide behind a Search button (which stays highlighted while a search is active)',
+            'Fixed dragging a Pokemon from a filtered box into the party',
+          ],
+        },
+      ],
+    },
     {
       version: '0.9.21',
       subtitle: 'Rarer Pokerus & Heart Polish',

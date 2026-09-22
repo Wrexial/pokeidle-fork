@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.21**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.22**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -1198,6 +1198,9 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.9.22 (collapsible box search): the box search/filters now sit behind a Search
+button, and dragging a filtered Pokemon into the party works again.
 
 0.9.21 (rarer Pokerus & heart polish): Pokerus dropped to 1 in 10,000 wild
 wins, and the stats-panel favourite heart now matches the Manage/Close buttons.

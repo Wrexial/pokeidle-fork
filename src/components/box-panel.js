@@ -35,6 +35,7 @@ export function BoxPanel({
     [query, setQuery] = React.useState(''),
     [filterMode, setFilterMode] = React.useState('all'),
     [confirmDupes, setConfirmDupes] = React.useState(!1),
+    [searchOpen, setSearchOpen] = React.useState(!1),
     searchActive = query.trim() !== '' || filterMode !== 'all',
     visibleBox = React.useMemo(() => {
       if (!searchActive) return state.box
@@ -100,6 +101,11 @@ export function BoxPanel({
                     onClick: () => setConfirmDupes(!0),
                     children: 'Release Dupes',
                   }),
+                  jsx('button', {
+                    className: `box-pokedex-btn${searchActive ? ' active' : ''}`,
+                    onClick: () => setSearchOpen((open) => !open),
+                    children: 'Search',
+                  }),
                 ],
               }),
               jsx('button', {
@@ -132,6 +138,7 @@ export function BoxPanel({
               }),
             ],
           }),
+          searchOpen &&
           jsxs('div', {
             className: 'box-search',
             children: [
@@ -214,17 +221,19 @@ export function BoxPanel({
                   length: BOX_PAGE_SIZE,
                 },
                 (index, slotIndex) => {
-                  const visibleIndex = currentPage * BOX_PAGE_SIZE + slotIndex,
-                    boxIndex = searchActive ? -1 : visibleIndex,
-                    pokemon = visibleBox[visibleIndex]
+                  const slotIndexAbsolute = currentPage * BOX_PAGE_SIZE + slotIndex,
+                    pokemon = visibleBox[slotIndexAbsolute],
+                    // The real box index (not the filtered position), so drag
+                    // to the party / reordering still works while searching.
+                    boxIndex = pokemon
+                      ? state.box.findIndex((member) => member.id === pokemon.id)
+                      : slotIndexAbsolute
                   if (pokemon) {
                     const species = pokemonSpecies[pokemon.speciesKey],
                       isInspected = inspected?.source === 'box' && inspected.id === pokemon.id,
-                      isDraggingIndex =
-                        !searchActive && dragSource === 'box' && boxDragFromIndex === boxIndex,
-                      isDropTarget =
-                        !searchActive && boxDropTargetIndex === boxIndex && dragSource !== null,
-                      isDraggable = !!onBoxDragStart && !searchActive
+                      isDraggingIndex = dragSource === 'box' && boxDragFromIndex === boxIndex,
+                      isDropTarget = boxDropTargetIndex === boxIndex && dragSource !== null,
+                      isDraggable = !!onBoxDragStart
                     return jsx(
                       'div',
                       {

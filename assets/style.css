@@ -5297,6 +5297,12 @@ img {
     border-color: var(--gold-dark)
 }
 
+.box-pokedex-btn.active {
+    background: var(--gold);
+    color: #1a1208;
+    border-color: var(--gold-dark)
+}
+
 @media (max-width: 640px) {
     .box-header {
         flex-wrap: wrap;

@@ -1,10 +1,22 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.31.0'
+export const GAME_VERSION = '0.32.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.32.0',
+      subtitle: 'Minigame Unlocks',
+      sections: [
+        {
+          heading: 'Minigames',
+          items: [
+            'Region minigames now unlock by reaching a place instead of beating the region Champion: Celadon City opens the Game Corner, Johto Route 35 the Bug Catching Contest, Eterna City the Underground, and Hoenn Route 111 the Battle Tower',
+          ],
+        },
+      ],
+    },
     {
       version: '0.31.0',
       subtitle: 'Minigame Screens',

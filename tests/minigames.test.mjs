@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 const gameData = installGameData()
 
-const { BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL, BUG_CONTEST_RUSTLES, MINIGAME_BY_REGION, MINING_COST, SLOT_SPIN_COST, SLOT_SYMBOLS, bugCatchChance, bugContestPrize, bugFleeChance, bugStays, buildContestResults, contestPlayerRank, contestScore, rewardItemName, rollContestBug, rollMiningReward, spinSlots, throwNetBall } = await import(
+const { BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL, BUG_CONTEST_RUSTLES, MINIGAME_BY_REGION, MINIGAME_UNLOCK_LOCATION, MINING_COST, SLOT_SPIN_COST, SLOT_SYMBOLS, bugCatchChance, bugContestPrize, bugFleeChance, bugStays, buildContestResults, contestPlayerRank, contestScore, rewardItemName, rollContestBug, rollMiningReward, spinSlots, throwNetBall } = await import(
   '../src/game/minigames.js'
 )
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
@@ -15,6 +15,15 @@ test('Sinnoh hosts the mining minigame and Johto the bug contest', () => {
   assert.equal(MINIGAME_BY_REGION.sinnoh, 'mining')
   assert.equal(MINIGAME_BY_REGION.johto, 'bugContest')
   assert.equal(MINIGAME_BY_REGION.kanto, 'gameCorner')
+})
+
+test('minigames unlock at their in-game locations', () => {
+  assert.equal(MINIGAME_UNLOCK_LOCATION.kanto, 'celadonCity')
+  assert.equal(MINIGAME_UNLOCK_LOCATION.johto, 'johto-route-35')
+  assert.equal(MINIGAME_UNLOCK_LOCATION.hoenn, 'hoenn-route-111')
+  assert.equal(MINIGAME_UNLOCK_LOCATION.sinnoh, 'sinnoh-eterna-city')
+  for (const locationId of Object.values(MINIGAME_UNLOCK_LOCATION))
+    assert.ok(gameData.mapData[locationId], `${locationId} should be a real location`)
 })
 
 test('mining rewards are real items with a positive quantity', () => {

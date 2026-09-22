@@ -1,6 +1,6 @@
 // Region minigames. Hoenn's Battle Tower is one; the other regions get their
 // own, starting with Sinnoh's Underground mining. Each minigame keeps its
-// interactive state in its modal and dispatches a single collect action.
+// interactive state in its scene and returns to idle when it finishes.
 import { consumableItems, evolutionItems } from '../data/items.js'
 import { breedingData, pokemonSpecies } from '../data/gameData.js'
 import { calculateCatchChance } from './catching.js'
@@ -11,6 +11,18 @@ export const MINIGAME_BY_REGION = {
   kanto: 'gameCorner',
   johto: 'bugContest',
   sinnoh: 'mining',
+}
+
+/**
+ * Region -> the location that must be unlocked before that region's minigame
+ * becomes available (Hoenn's Battle Tower included).
+ * @type {Record<string, string>}
+ */
+export const MINIGAME_UNLOCK_LOCATION = {
+  kanto: 'celadonCity',
+  johto: 'johto-route-35',
+  hoenn: 'hoenn-route-111',
+  sinnoh: 'sinnoh-eterna-city',
 }
 
 /** Money spent to start a mining run. */

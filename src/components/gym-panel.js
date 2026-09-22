@@ -4,7 +4,7 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { championData, elite4Data, gymLeaderData, mapData, regions } from '../data/gameData.js'
 import { BATTLE_TOWER_REGION } from '../data/config.js'
-import { MINIGAME_BY_REGION, MINIGAME_INFO } from '../game/minigames.js'
+import { MINIGAME_BY_REGION, MINIGAME_INFO, MINIGAME_UNLOCK_LOCATION } from '../game/minigames.js'
 import { useGame } from '../game/context.js'
 import { buildTrainerTeam, buildTowerFloor } from '../game/progression.js'
 
@@ -20,9 +20,13 @@ export function GymPanel({ onOpenShop }) {
     defeatedRegionGyms = regionGyms.filter((gym) => state.defeatedGyms.includes(gym.id)).length,
     allBadgesEarned = regionGyms.length > 0 && defeatedRegionGyms >= regionGyms.length,
     isLeagueRematch = state.defeatedChampions.includes(regionId),
-    // The Battle Tower lives in Hoenn only; other regions will get their own
-    // minigames instead.
-    showTower = isLeagueRematch && regionId === BATTLE_TOWER_REGION,
+    // Minigames unlock with a real location rather than the region's Champion:
+    // the panel's current region must have reached its minigame's town/route.
+    // Hoenn's Battle Tower is that region's minigame too.
+    minigameUnlocked = state.unlockedLocations.includes(
+      MINIGAME_UNLOCK_LOCATION[regionId] ?? ''
+    ),
+    showTower = regionId === BATTLE_TOWER_REGION && minigameUnlocked,
     regionMinigame = MINIGAME_BY_REGION[regionId],
     // The Elite Four reset on each prestige, so they must be beaten again
     // before the region can be prestiged once more.
@@ -418,7 +422,7 @@ export function GymPanel({ onOpenShop }) {
         }),
       regionMinigame &&
         MINIGAME_INFO[regionMinigame] &&
-        isLeagueRematch &&
+        minigameUnlocked &&
         jsxs('div', {
           className: 'gym-section tower-section',
           children: [

@@ -26,6 +26,11 @@ export const mewUnderTruckChance = 1 / 10000
 /** Hidden chance a wild win turns up a Master Ball. */
 export const wildMasterBallChance = 1 / 50000
 
+/** Very rare chance a wild win infects the party with Pokerus (1 in 1000). */
+export const pokerusChance = 1 / 1000
+/** How many wild battles Pokerus lasts before it cures. */
+export const pokerusDurationBattles = 150
+
 /** Battles two daycare parents need to produce an egg. */
 export const daycareEggBattles = 50
 /** Shiny odds for a bred egg (1 in 4096), improved if a parent is shiny. */

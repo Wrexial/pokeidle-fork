@@ -244,6 +244,12 @@ export function PartyPanel({
                                         children: '★',
                                       }),
                                     member.name,
+                                    state.pokerus &&
+                                      jsx('span', {
+                                        className: 'party-pokerus-badge',
+                                        title: 'Pokerus: double EXP',
+                                        children: 'PKRS',
+                                      }),
                                   ],
                                 }),
                                 jsxs('span', {

@@ -225,6 +225,13 @@ function repairSave(saved) {
           battlesRemaining: saved.swarm.battlesRemaining,
         }
       : null
+  const pokerus =
+    saved.pokerus &&
+    typeof saved.pokerus === 'object' &&
+    typeof saved.pokerus.battlesRemaining === 'number' &&
+    saved.pokerus.battlesRemaining > 0
+      ? { battlesRemaining: saved.pokerus.battlesRemaining }
+      : null
   const daycareParents = /** @type {Pokemon[]} */ (
       Array.isArray(saved.daycare?.parents) ? saved.daycare.parents : []
     )
@@ -363,6 +370,7 @@ function repairSave(saved) {
     shinyCaught,
     shinyChain,
     swarm,
+    pokerus,
     daycare,
     shinySeen,
     alwaysCatchShinies: saved.alwaysCatchShinies ?? true,
@@ -474,6 +482,7 @@ export function serializeSave(state) {
     shinyCaught: state.shinyCaught,
     shinyChain: state.shinyChain,
     swarm: state.swarm,
+    pokerus: state.pokerus,
     daycare: state.daycare,
     shinySeen: state.shinySeen,
     defeatedGyms: state.defeatedGyms,

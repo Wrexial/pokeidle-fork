@@ -11,7 +11,7 @@ import { useGame } from './game/context.js'
 import { attemptCatch, selectAutoCatchBall, selectBestBall, shouldAutoCatch } from './game/catching.js'
 import { createVolatileState, resolveBattleTurn } from './game/combat.js'
 import { calculatePokemonStats, generateIVs, getPerfectIVs, resolvePokemonMoves } from './game/pokemon.js'
-import { awaySummary, awardExperience, checkShinyOdds, resolveActiveModifiers, resolvePokemonEncounter, resolveRoamer, shinyOddsForSpecies } from './game/progression.js'
+import { awaySummary, awardExperience, checkShinyOdds, pokerusExpMultiplier, resolveActiveModifiers, resolvePokemonEncounter, resolveRoamer, shinyOddsForSpecies } from './game/progression.js'
 
 /**
  * @param {string} text
@@ -67,6 +67,7 @@ export function useGameLoop() {
       // its own generation's national dex is complete.
       const completedGenerationSet = completedGenerations(currentGameState.pokedexCaught),
         dailyExpBonus = dailyExpMultiplier(currentGameState.dailyEvent),
+        expBonus = dailyExpBonus * pokerusExpMultiplier(currentGameState.pokerus),
         dailyPrizeBonus = dailyPrizeMultiplier(currentGameState.dailyEvent),
         dailyShinyBonus = dailyShinyMultiplier(currentGameState.dailyEvent)
       switch (currentGameState.phase) {
@@ -467,7 +468,7 @@ export function useGameLoop() {
                 hasExpShare,
                 currentGameState.party,
                 currentGameState.activePlayerPokemonIndex,
-                dailyExpBonus
+                expBonus
               ))
             return
           }
@@ -482,7 +483,7 @@ export function useGameLoop() {
               hasExpShare,
               currentGameState.party,
               currentGameState.activePlayerPokemonIndex,
-              dailyExpBonus
+              expBonus
             )
             const nextIndex = trainerBattle.currentTrainerPokemonIndex + 1
             if (nextIndex < trainerBattle.trainerTeam.length)
@@ -522,7 +523,7 @@ export function useGameLoop() {
             hasExpShare,
             currentGameState.party,
             currentGameState.activePlayerPokemonIndex,
-            dailyExpBonus
+            expBonus
           )
           const forceCatch = enemyPokemon.isShiny && currentGameState.alwaysCatchShinies
           if (

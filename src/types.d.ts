@@ -211,6 +211,8 @@ type GameState = {
   shinyChain: { speciesKey: string | null; count: number }
   /** A route temporarily overrun by one species. */
   swarm: { routeKey: string; speciesKey: string; battlesRemaining: number } | null
+  /** Rare party-wide 2x EXP boost with a wild-battle countdown. */
+  pokerus?: { battlesRemaining: number } | null
   /** Daycare parents (up to 2) and battles toward the next egg. */
   daycare: { parents: Pokemon[]; progress: number }
   defeatedGyms: string[]

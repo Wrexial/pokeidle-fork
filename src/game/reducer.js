@@ -9,7 +9,7 @@ import { elite4Data, encounterData, gymLeaderData, mapData, moveLearnsets, pokem
 import { createVolatileState } from './combat.js'
 import { calculatePokemonStats, calculateRequiredExperience, createPokemon, getLevelUpResults, insertIntoBox, nextBoxSortMode, resolvePokemonMoves, sortBoxMembers } from './pokemon.js'
 import { canBreed, eggSpeciesKey } from './breeding.js'
-import { checkShinyOdds, computeUnlockedLocations, formatReward, getRegionUnlockTokens, isActiveEffectItem, loadActivePokemonFromParty, prepareNextBattle, releaseReward, rollCandyDrop, rollValuableDrop, syncActivePokemonIntoParty, tickBattleCounters } from './progression.js'
+import { checkShinyOdds, computeUnlockedLocations, formatReward, getRegionUnlockTokens, isActiveEffectItem, loadActivePokemonFromParty, prepareNextBattle, releaseReward, rollCandyDrop, rollValuableDrop, syncActivePokemonIntoParty, tickBattleCounters, tickPokerus } from './progression.js'
 
 /** @type {GameState} */
 export const initialGameState = {
@@ -62,6 +62,8 @@ export const initialGameState = {
   shinyCaught: [],
   /** Active swarm: a route temporarily overrun by one species. */
   swarm: null,
+  /** Pokerus: a rare, party-wide 2x EXP boost with a battle countdown. */
+  pokerus: null,
   /** Today's rotating event + whether its gift was claimed (see src/data/daily-events.js). */
   dailyEvent: null,
   /** Daycare: up to two deposited parents breeding eggs. */
@@ -320,6 +322,7 @@ export function gameReducer(state, action) {
             }))
       let activeEffects = state.activeEffects,
         swarm = state.swarm,
+        pokerus = state.pokerus,
         daycare = state.daycare,
         inventory = state.inventory,
         secretNotices = [],
@@ -358,6 +361,13 @@ export function gameReducer(state, action) {
           daycare.progress < daycareEggBattles
         )
           daycare = { ...daycare, progress: daycare.progress + 1 }
+        // Pokerus is caught very rarely on a wild win, and doubles EXP for a
+        // while before it cures.
+        const pokerusResult = tickPokerus(pokerus)
+        pokerus = pokerusResult.pokerus
+        pokerusResult.infected &&
+          secretNotices.push('Your Pokemon caught Pokerus! EXP gain is doubled for a while.')
+        pokerusResult.cured && secretNotices.push('Your Pokemon recovered from Pokerus.')
         // Daily "Harvest Day" doubles the chance of every wild item drop.
         const dropBonus = dailyDropMultiplier(state.dailyEvent),
           dropChance = /** @param {number} chance */ (chance) => Math.min(1, chance * dropBonus)
@@ -417,6 +427,7 @@ export function gameReducer(state, action) {
         battlesWonByLocation,
         activeEffects,
         swarm,
+        pokerus,
         daycare,
         inventory,
       })

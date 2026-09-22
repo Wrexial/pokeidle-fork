@@ -218,6 +218,12 @@ export function StatsPanel({
                         }),
                   ],
                 }),
+              state.pokerus &&
+                jsx('span', {
+                  className: 'stats-panel-pokerus',
+                  title: `Pokerus: double EXP for ${state.pokerus.battlesRemaining} more battles`,
+                  children: ['PKRS \u00b7 ', state.pokerus.battlesRemaining, ' battles'],
+                }),
             ],
           }),
         ],

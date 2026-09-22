@@ -1,6 +1,6 @@
 // Split from src/game/logic.js — see tools/decompile/split-logic.mjs
 
-import { shinyCharmMinOddsChance, shinyFullOddsChance, shinyWithCharmChance, roamerEncounterChance } from '../data/config.js'
+import { shinyCharmMinOddsChance, shinyFullOddsChance, shinyWithCharmChance, roamerEncounterChance, pokerusChance, pokerusDurationBattles } from '../data/config.js'
 import { activeItems, consumableItems, evolutionItems, pokeBalls, valuableDropTable } from '../data/items.js'
 import { GENERATION_DEX_RANGES, encounterData, gymLeaderData, isSpeciesCharmed, mapData, moveData, pokemonSpecies, regions } from '../data/gameData.js'
 import { calculateExpYield, calculatePokemonStats, getLevelUpResults, getPerfectIVs, resolvePokemonMoves } from './pokemon.js'
@@ -192,6 +192,31 @@ export function awaySummary(before, after) {
   if (shinies > 0) parts.push(`${shinies} shin${shinies === 1 ? 'y' : 'ies'}`)
   if (money !== 0) parts.push(`${money > 0 ? '+' : '-'}$${Math.abs(money).toLocaleString()}`)
   return parts.length > 0 ? `While you were away: ${parts.join(', ')}.` : null
+}
+
+/**
+ * Advance the Pokerus over one won wild battle: infect very rarely when
+ * healthy, count down while infected, and cure at zero. Kept pure (apart from
+ * the rarity roll) so the reducer and the tests can share it.
+ * @param {{ battlesRemaining: number } | null | undefined} pokerus
+ * @returns {{ pokerus: { battlesRemaining: number } | null, infected: boolean, cured: boolean }}
+ */
+export function tickPokerus(pokerus) {
+  if (pokerus) {
+    const battlesRemaining = pokerus.battlesRemaining - 1
+    return battlesRemaining > 0
+      ? { pokerus: { battlesRemaining }, infected: false, cured: false }
+      : { pokerus: null, infected: false, cured: true }
+  }
+  return Math.random() < pokerusChance
+    ? { pokerus: { battlesRemaining: pokerusDurationBattles }, infected: true, cured: false }
+    : { pokerus: null, infected: false, cured: false }
+}
+
+/** EXP multiplier while the party has Pokerus (2x), otherwise 1x. */
+/** @param {{ battlesRemaining: number } | null | undefined} pokerus */
+export function pokerusExpMultiplier(pokerus) {
+  return pokerus ? 2 : 1
 }
 
 /**

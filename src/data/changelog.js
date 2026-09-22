@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.9.9'
+export const GAME_VERSION = '0.9.10'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.9.10',
+      subtitle: 'Pokerus',
+      sections: [
+        {
+          heading: 'Pokemon',
+          items: [
+            'A very rare Pokerus can infect your party after a wild win \u2014 it doubles EXP gain for 150 battles before it cures',
+            'An infected party shows a PKRS badge on each party slot and on the stats panel, with the battles remaining on hover',
+          ],
+        },
+      ],
+    },
     {
       version: '0.9.9',
       subtitle: 'Nature Clarity & Panel Polish',

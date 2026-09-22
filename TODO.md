@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.9**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.10**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -28,8 +28,8 @@ achievement rewards, map QoL, release rewards and notifications. The remaining
 items, best return first:
 
 1. **#16 More ideas (grab bag)** — mostly S · ★★★ — still open: quests,
-   Pokérus, challenge modes (Nuzlocke / monotype / randomizer), form-changing
-   items, accessibility, audio, combat feedback and a performance pass.
+   challenge modes (Nuzlocke / monotype / randomizer), form-changing items,
+   accessibility, audio, combat feedback and a performance pass.
 
 ### Tier 2 — High impact, worth the effort (medium–large)
 
@@ -301,8 +301,9 @@ Smaller or more speculative, roughly highest-value first:
 - [ ] **Quests / missions** — active objectives with rewards, distinct from
       passive achievements (e.g. "catch 3 Water types at Route 12").
 - [ ] **Ball variety** — see #17.
-- [ ] **Pokérus** — a very rare virus that boosts EXP (and later EV) gain for a
-      while; a nice idle-flavoured surprise.
+- [x] **Pokérus** — a very rare party-wide virus caught on a wild win that
+      doubles EXP for 150 battles, shown as a PKRS badge on party slots and the
+      stats panel. Shipped in 0.9.10 (`tickPokerus` / `pokerusExpMultiplier`).
 - [x] **Map QoL** — the active swarm's route now carries a pulsing bee badge
       (hover for species + battles left), and the map has a search box that jumps
       to (and travels to) any unlocked location. Shipped in 0.9.6.
@@ -1183,6 +1184,9 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.9.10 (Pokérus): a very rare party-wide virus caught on a wild win doubles
+EXP for 150 battles, shown as a PKRS badge on party slots and the stats panel.
 
 0.9.9 (nature clarity): natures now show which stat they raise (green ▲) and
 lower (red ▼) on a badge, with the affected rows arrowed and coloured in the

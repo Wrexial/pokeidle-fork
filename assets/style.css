@@ -1659,6 +1659,17 @@ img {
     margin-bottom: 2px
 }
 
+.party-pokerus-badge {
+    margin-left: 4px;
+    font-size: 6px;
+    font-weight: 700;
+    color: #f0d060;
+    background: #7030a0;
+    border: 1px solid #f0d060;
+    padding: 0 3px;
+    letter-spacing: .3px
+}
+
 .party-action-btn {
     font-size: 8px;
     padding: 4px 10px;
@@ -1909,6 +1920,17 @@ img {
 .nature-neutral {
     color: #6a5a40;
     font-weight: 400
+}
+
+.stats-panel-pokerus {
+    margin-top: 3px;
+    align-self: flex-start;
+    font-size: 8px;
+    font-weight: 700;
+    color: #f0e6ff;
+    background: linear-gradient(#5a2a8a,#3a1a5a);
+    border: 1px solid #a060ff;
+    padding: 1px 6px
 }
 
 .stats-panel-grid {

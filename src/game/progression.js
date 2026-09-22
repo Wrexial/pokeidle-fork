@@ -2,7 +2,7 @@
 
 import { shinyCharmMinOddsChance, shinyFullOddsChance, shinyWithCharmChance, roamerEncounterChance, pokerusChance, pokerusDurationBattles, offlineCapMs, offlineMinMs, offlineMoneyPerHourPerLevel } from '../data/config.js'
 import { activeItems, consumableItems, evolutionItems, heldItems, pokeBalls, valuableDropTable } from '../data/items.js'
-import { GENERATION_DEX_RANGES, encounterData, evolutionData, gymLeaderData, isSpeciesCharmed, mapData, moveData, pokemonSpecies, regions } from '../data/gameData.js'
+import { GENERATION_DEX_RANGES, evolutionData, gymLeaderData, isSpeciesCharmed, mapData, moveData, pokemonSpecies, regions } from '../data/gameData.js'
 import { rollHeldItem } from './held-items.js'
 import { emptyBattleHazards } from './hazards.js'
 import { hashString, mulberry32 } from './rng.js'

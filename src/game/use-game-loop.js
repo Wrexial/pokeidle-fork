@@ -402,40 +402,8 @@ export function useGameLoop() {
               events: turnEvents,
             },
           })
-          const playerVolatileUpdate = {
-              statStages: playerBattlePokemon.statStages,
-              mustRecharge: playerBattlePokemon.mustRecharge ?? !1,
-              lockedMove: playerBattlePokemon.lockedMove ?? null,
-              lockTurnsRemaining: playerBattlePokemon.lockTurnsRemaining ?? 0,
-              status: playerBattlePokemon.status ?? null,
-              statusTurns: playerBattlePokemon.statusTurns ?? 0,
-              flinch: playerBattlePokemon.flinch ?? !1,
-              confusionTurns: playerBattlePokemon.confusionTurns ?? 0,
-              leechSeeded: playerBattlePokemon.leechSeeded ?? !1,
-              heldItemUsed: playerBattlePokemon.heldItemUsed ?? !1,
-              tauntTurns: playerBattlePokemon.tauntTurns ?? 0,
-              substituteHp: playerBattlePokemon.substituteHp ?? 0,
-              infatuated: playerBattlePokemon.infatuated ?? !1,
-              cursed: playerBattlePokemon.cursed ?? !1,
-              screens: playerBattlePokemon.screens ?? { reflect: 0, lightScreen: 0 },
-            },
-            enemyVolatileUpdate = {
-              statStages: enemyBattlePokemon.statStages,
-              mustRecharge: enemyBattlePokemon.mustRecharge ?? !1,
-              lockedMove: enemyBattlePokemon.lockedMove ?? null,
-              lockTurnsRemaining: enemyBattlePokemon.lockTurnsRemaining ?? 0,
-              status: enemyBattlePokemon.status ?? null,
-              statusTurns: enemyBattlePokemon.statusTurns ?? 0,
-              flinch: enemyBattlePokemon.flinch ?? !1,
-              confusionTurns: enemyBattlePokemon.confusionTurns ?? 0,
-              leechSeeded: enemyBattlePokemon.leechSeeded ?? !1,
-              heldItemUsed: enemyBattlePokemon.heldItemUsed ?? !1,
-              tauntTurns: enemyBattlePokemon.tauntTurns ?? 0,
-              substituteHp: enemyBattlePokemon.substituteHp ?? 0,
-              infatuated: enemyBattlePokemon.infatuated ?? !1,
-              cursed: enemyBattlePokemon.cursed ?? !1,
-              screens: enemyBattlePokemon.screens ?? { reflect: 0, lightScreen: 0 },
-            }
+          const playerVolatileUpdate = volatileStateFromBattle(playerBattlePokemon),
+            enemyVolatileUpdate = volatileStateFromBattle(enemyBattlePokemon)
           dispatch({
             type: 'UPDATE_VOLATILE',
             payload: {

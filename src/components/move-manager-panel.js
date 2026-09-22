@@ -3,7 +3,7 @@
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { moveCategoryIcons } from '../data/moves.js'
-import { moveData, pokemonSpecies } from '../data/gameData.js'
+import { moveData } from '../data/gameData.js'
 import { tutorMoveCost } from '../data/config.js'
 import { useGame } from '../game/context.js'
 import { getFamilyLearnset, getTutorMoves, pokemonDisplayName } from '../game/pokemon.js'
@@ -26,8 +26,7 @@ export function MoveManagerPanel({ pokemon, onClose }) {
     ],
     pendingTutorCost =
       moves.filter((moveId) => tutorSet.has(moveId) && !target.moves.includes(moveId)).length *
-      tutorMoveCost,
-    species = pokemonSpecies[target.speciesKey]
+      tutorMoveCost
   /** @param {string} moveId */
   function toggleMove(moveId) {
     moves.includes(moveId)

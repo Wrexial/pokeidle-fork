@@ -3,7 +3,7 @@
 import React from 'react'
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
 import { MOBILE_TABS } from '../data/ui.js'
-import { encounterData, raidPoolFor, mapData, pokemonSpecies } from '../data/gameData.js'
+import { encounterData, raidPoolFor, mapData } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { getEvolutionOptions } from '../game/breeding.js'
 import { GymPanel } from './gym-panel.js'

@@ -7,10 +7,10 @@ import { moveData } from '../data/gameData.js'
 import { canEvolveFurther } from './pokemon.js'
 import { genderForPokemon } from './breeding.js'
 import { heldBerryHeal, heldCuresStatus, heldDamageMultiplier, heldLeftoversHeal, heldLifeOrbRecoil, heldStatMultiplier, heldSurvivesAtFullHp } from './held-items.js'
-import { WEATHER_ABILITIES, WEATHER_MOVES, WEATHER_NAMES, WEATHER_TURNS, weatherAbilityHeal, weatherDamageMultiplier, weatherResidualDamage, weatherSpeedMultiplier } from './weather.js'
+import { WEATHER_ABILITIES, WEATHER_NAMES, WEATHER_TURNS, weatherAbilityHeal, weatherDamageMultiplier, weatherResidualDamage, weatherSpeedMultiplier } from './weather.js'
 import { abilityAbsorbsType, abilityAttackMultiplier, abilityBlocksNonSuperEffective, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityHalvesSuperEffective, abilityHealsFromType, abilityIgnoresIndirectDamage, abilityOf, abilityPreventsStatDrop, abilityPreventsStatus, abilitySurvivesAtFullHp } from './abilities.js'
 import { emptyBattleHazards } from './hazards.js'
-import { TERRAIN_ABILITIES, TERRAIN_MOVES, TERRAIN_NAMES, TERRAIN_TURNS, terrainDamageMultiplier, terrainHeal, terrainPreventsPriority, terrainPreventsStatus } from './terrain.js'
+import { TERRAIN_ABILITIES, TERRAIN_NAMES, TERRAIN_TURNS, terrainDamageMultiplier, terrainHeal, terrainPreventsPriority, terrainPreventsStatus } from './terrain.js'
 
 /** @returns {VolatileState} */
 export function createVolatileState() {

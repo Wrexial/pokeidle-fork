@@ -1,0 +1,362 @@
+// Status conditions and volatile effects (confusion, infatuation, Leech Seed, contact abilities). Split from game/combat.js.
+
+import { moveMakesContact } from '../../data/move-effects.js'
+import { abilityOf, abilityPreventsStatus } from '../abilities.js'
+import { genderForPokemon } from '../breeding.js'
+import { chance } from './damage.js'
+import { heldCuresStatus } from '../held-items.js'
+import { terrainPreventsStatus } from '../terrain.js'
+
+/** Major status conditions that persist until cured and tick each turn. */
+export const MAJOR_STATUSES = new Set(['poison', 'toxic', 'burn', 'freeze', 'sleep', 'paralysis'])
+
+/** Types that can't be afflicted by a given status. */
+
+/** @type {Record<string, string[]>} */
+export const STATUS_IMMUNE_TYPES = {
+  burn: ['Fire'],
+  freeze: ['Ice'],
+  poison: ['Poison', 'Steel'],
+  toxic: ['Poison', 'Steel'],
+  paralysis: ['Electric'],
+}
+
+/**
+ * Inflict a status condition on a Pokemon. Fails if the target already has a
+ * major status or is immune to this one; `flinching` just sets the one-turn
+ * flinch flag.
+ * @param {BattlePokemon} target
+ * @param {string} status
+ * @param {any[]} events
+ * @param {boolean} targetIsPlayer whether `target` is the player's Pokemon
+ * @param {boolean} [deterministic]
+ * @param {{ type: string } | null} [terrain]
+ */
+export function applyStatus(target, status, events, targetIsPlayer, deterministic = !1, terrain = null) {
+  if (!target || target.currentHp <= 0) return
+  const side = targetIsPlayer ? 'player' : 'enemy'
+  if (status === 'flinching') {
+    target.flinch = !0
+    return
+  }
+  if (!MAJOR_STATUSES.has(status) || target.status) return
+  if (abilityPreventsStatus(target, status)) return
+  if (terrainPreventsStatus(terrain, target, status)) return
+  if ((STATUS_IMMUNE_TYPES[status] ?? []).some((type) => target.types.includes(type))) return
+  target.status = status
+  target.statusTurns =
+    status === 'sleep'
+      ? deterministic
+        ? 2
+        : 1 + Math.floor(Math.random() * 3)
+      : status === 'toxic'
+        ? 1
+        : 0
+  events.push({
+    type: 'status',
+    message: `${target.name} was ${
+      {
+        poison: 'poisoned',
+        toxic: 'badly poisoned',
+        burn: 'burned',
+        freeze: 'frozen',
+        sleep: 'put to sleep',
+        paralysis: 'paralyzed',
+      }[status]
+    }!`,
+    data: {
+      target: side,
+    },
+  })
+  // A held Lum Berry cures the status immediately.
+  if (heldCuresStatus(target)) {
+    target.heldItemUsed = !0
+    target.status = null
+    target.statusTurns = 0
+    events.push({
+      type: 'status',
+      message: `${target.name}'s Lum Berry cured it!`,
+      data: {
+        target: side,
+      },
+    })
+  }
+}
+
+/**
+ * Plant a Leech Seed on a target; it drains 1/8 max HP into the other side
+ * each turn. Grass types are immune, and it doesn't stack.
+ * @param {BattlePokemon} target
+ * @param {any[]} events
+ * @param {boolean} targetIsPlayer
+ */
+export function applyLeechSeed(target, events, targetIsPlayer) {
+  if (!target || target.currentHp <= 0 || target.leechSeeded) return
+  if (target.types.includes('Grass')) return
+  target.leechSeeded = !0
+  events.push({
+    type: 'status',
+    message: `${target.name} was seeded!`,
+    data: {
+      target: targetIsPlayer ? 'player' : 'enemy',
+    },
+  })
+}
+
+/**
+ * Confuse a Pokemon for 2-5 turns. Confusion is volatile, so it doesn't use
+ * the major-status slot; an already-confused target is left alone.
+ * @param {BattlePokemon} target
+ * @param {any[]} events
+ * @param {boolean} targetIsPlayer
+ * @param {boolean} [deterministic]
+ */
+export function applyConfusion(target, events, targetIsPlayer, deterministic = !1) {
+  if (!target || target.currentHp <= 0 || (target.confusionTurns ?? 0) > 0) return
+  target.confusionTurns = deterministic ? 3 : 2 + Math.floor(Math.random() * 4)
+  events.push({
+    type: 'status',
+    message: `${target.name} became confused!`,
+    data: {
+      target: targetIsPlayer ? 'player' : 'enemy',
+    },
+  })
+}
+
+/**
+ * A confused attacker may hurt itself instead of using its move. Returns true
+ * when the turn is skipped (and pushes the event), and clears confusion when
+ * it wears off.
+ * @param {BattlePokemon} attacker
+ * @param {any[]} events
+ * @param {boolean} isPlayer
+ * @param {boolean} [deterministic]
+ * @returns {boolean}
+ */
+export function handleConfusion(attacker, events, isPlayer, deterministic = !1) {
+  if ((attacker.confusionTurns ?? 0) <= 0) return !1
+  const side = isPlayer ? 'player' : 'enemy'
+  attacker.confusionTurns = (attacker.confusionTurns ?? 0) - 1
+  if (attacker.confusionTurns <= 0) {
+    attacker.confusionTurns = 0
+    events.push({
+      type: 'status',
+      message: `${attacker.name} snapped out of its confusion!`,
+      data: {
+        target: side,
+      },
+    })
+    return !1
+  }
+  if (chance(0.33, deterministic)) {
+    const selfDamage = Math.max(1, Math.floor(attacker.maxHp / 8))
+    attacker.currentHp = Math.max(0, attacker.currentHp - selfDamage)
+    events.push({
+      type: 'recoil',
+      message: `${attacker.name} is confused and hurt itself! (${selfDamage} damage)`,
+      data: {
+        target: side,
+        damage: selfDamage,
+        hpAfter: attacker.currentHp,
+        hpMax: attacker.maxHp,
+      },
+    })
+    attacker.currentHp <= 0 &&
+      events.push({
+        type: 'faint',
+        message: `${attacker.name} fainted!`,
+        data: {
+          target: side,
+        },
+      })
+    return !0
+  }
+  return !1
+}
+
+/**
+ * Apply the defender's contact ability to an attacker that just hit it with a
+ * contact move (Static, Flame Body, Poison Point, Effect Spore, Cute Charm,
+ * Rough Skin, Iron Barbs).
+ * @param {BattlePokemon} defender
+ * @param {BattlePokemon} attacker
+ * @param {Move} moveDef
+ * @param {any[]} events
+ * @param {boolean} attackerIsPlayer
+ * @param {boolean} deterministic
+ * @param {{ type: string } | null} terrain
+ */
+export function applyContactAbility(defender, attacker, moveDef, events, attackerIsPlayer, deterministic, terrain) {
+  if (!moveMakesContact(moveDef)) return
+  const ability = abilityOf(defender),
+    roll = () => chance(0.3, deterministic)
+  switch (ability) {
+    case 'static':
+      if (roll()) applyStatus(attacker, 'paralysis', events, attackerIsPlayer, deterministic, terrain)
+      break
+    case 'flameBody':
+      if (roll()) applyStatus(attacker, 'burn', events, attackerIsPlayer, deterministic, terrain)
+      break
+    case 'poisonPoint':
+      if (roll()) applyStatus(attacker, 'poison', events, attackerIsPlayer, deterministic, terrain)
+      break
+    case 'effectSpore':
+      if (roll()) {
+        const pick = Math.random(),
+          status = pick < 0.34 ? 'poison' : pick < 0.67 ? 'paralysis' : 'sleep'
+        applyStatus(attacker, status, events, attackerIsPlayer, deterministic, terrain)
+      }
+      break
+    case 'cuteCharm':
+      if (roll()) applyInfatuation(defender, attacker, events, attackerIsPlayer)
+      break
+    case 'roughSkin':
+    case 'ironBarbs': {
+      const contactDamage = Math.max(1, Math.floor(attacker.maxHp / 8))
+      attacker.currentHp = Math.max(0, attacker.currentHp - contactDamage)
+      events.push({
+        type: 'recoil',
+        message: `${attacker.name} was hurt by ${defender.name}'s ${
+          ability === 'roughSkin' ? 'Rough Skin' : 'Iron Barbs'
+        }! (${contactDamage} damage)`,
+        data: {
+          target: attackerIsPlayer ? 'player' : 'enemy',
+          damage: contactDamage,
+          hpAfter: attacker.currentHp,
+          hpMax: attacker.maxHp,
+        },
+      })
+      attacker.currentHp <= 0 &&
+        events.push({
+          type: 'faint',
+          message: `${attacker.name} fainted!`,
+          data: {
+            target: attackerIsPlayer ? 'player' : 'enemy',
+          },
+        })
+      break
+    }
+  }
+}
+
+/**
+ * Infatuate a target (Attract): only works between opposite, gendered Pokemon.
+ * @param {BattlePokemon} source
+ * @param {BattlePokemon} target
+ * @param {any[]} events
+ * @param {boolean} targetIsPlayer
+ */
+export function applyInfatuation(source, target, events, targetIsPlayer) {
+  if (!target || target.currentHp <= 0 || target.infatuated) return
+  const sourceGender = genderForPokemon(source),
+    targetGender = genderForPokemon(target)
+  if (
+    sourceGender === 'genderless' ||
+    targetGender === 'genderless' ||
+    sourceGender === targetGender
+  )
+    return
+  target.infatuated = !0
+  events.push({
+    type: 'status',
+    message: `${target.name} fell in love!`,
+    data: {
+      target: targetIsPlayer ? 'player' : 'enemy',
+    },
+  })
+}
+
+/**
+ * An infatuated attacker may be too lovestruck to move.
+ * @param {BattlePokemon} attacker
+ * @param {any[]} events
+ * @param {boolean} isPlayer
+ * @param {boolean} [deterministic]
+ * @returns {boolean}
+ */
+export function handleInfatuation(attacker, events, isPlayer, deterministic = !1) {
+  if (!attacker.infatuated) return !1
+  if (!chance(0.5, deterministic)) return !1
+  events.push({
+    type: 'status',
+    message: `${attacker.name} is in love with the foe and can't move!`,
+    data: {
+      target: isPlayer ? 'player' : 'enemy',
+    },
+  })
+  return !0
+}
+
+/**
+ * A status condition that stops a Pokemon acting this turn. Returns true when
+ * the attacker's turn is skipped (pushin an explanatory event).
+ * @param {BattlePokemon} attacker
+ * @param {any[]} events
+ * @param {boolean} isPlayer
+ * @param {boolean} [deterministic]
+ * @returns {boolean}
+ */
+export function statusPreventsAction(attacker, events, isPlayer, deterministic = !1) {
+  const side = isPlayer ? 'player' : 'enemy'
+  if (attacker.status === 'sleep') {
+    if ((attacker.statusTurns ?? 0) > 0) {
+      attacker.statusTurns = (attacker.statusTurns ?? 0) - 1
+      events.push({
+        type: 'status',
+        message: `${attacker.name} is fast asleep.`,
+        data: {
+          target: side,
+        },
+      })
+      return !0
+    }
+    attacker.status = null
+    events.push({
+      type: 'status',
+      message: `${attacker.name} woke up!`,
+      data: {
+        target: side,
+      },
+    })
+  } else if (attacker.status === 'freeze') {
+    if (!deterministic && Math.random() >= 0.2) {
+      events.push({
+        type: 'status',
+        message: `${attacker.name} is frozen solid!`,
+        data: {
+          target: side,
+        },
+      })
+      return !0
+    }
+    attacker.status = null
+    events.push({
+      type: 'status',
+      message: `${attacker.name} thawed out!`,
+      data: {
+        target: side,
+      },
+    })
+  } else if (attacker.status === 'paralysis' && chance(0.25, deterministic)) {
+    events.push({
+      type: 'status',
+      message: `${attacker.name} is paralyzed! It can't move!`,
+      data: {
+        target: side,
+      },
+    })
+    return !0
+  }
+  if (attacker.flinch) {
+    attacker.flinch = !1
+    events.push({
+      type: 'status',
+      message: `${attacker.name} flinched and couldn't move!`,
+      data: {
+        target: side,
+      },
+    })
+    return !0
+  }
+  return !1
+}

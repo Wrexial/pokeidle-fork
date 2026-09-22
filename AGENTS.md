@@ -175,7 +175,7 @@ in `GameLayout`) dispatches `DEBUG_MAX_LEVEL` when the Konami code
 | `src/data/ui.js` | UI constants: speed options, stat-bar colors, rarity labels, drag defaults, backgrounds. |
 | `src/data/changelog.js` | `GAME_VERSION`, `LAST_SEEN_VERSION_KEY`, `CHANGELOG`. |
 | `src/game/pokemon.js` | Species/stat/exp/learnset math, sprite URLs, `createPokemon`. |
-| `src/game/combat.js` | Battle math: type chart, damage, stat stages, AI, `resolveBattleTurn`. |
+| `src/game/combat.js` | Battle math barrel re-exporting `src/game/combat/`: `damage` (type chart, stat stages, damage), `status` (status/volatile effects), `volatile` (volatile state, speed, screens), `ai` (move choice), `turn` (`resolveBattleTurn`) and `end-of-turn` (residual/field decay). |
 | `src/game/catching.js` | Catch rate/chance, ball selection, auto-catch rules, encounter rarity. |
 | `src/game/progression.js` | Encounters, EXP awards, unlocks, party sync, effects/items, roads. |
 | `src/game/reducer.js` | `initialGameState` + a thin `gameReducer` dispatcher; the per-action handlers live in `src/game/reducer/*.js` (`world`, `battle`, `recovery`, `pokemon`, `collection`, `items`, `minigames`, `settings`) with shared helpers in `src/game/reducer-helpers.js`. |

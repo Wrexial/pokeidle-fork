@@ -7,6 +7,7 @@ import { pokemonSpecies } from '../data/gameData.js'
 /** Region -> minigame id. Hoenn's tower is handled separately. */
 /** @type {Record<string, string>} */
 export const MINIGAME_BY_REGION = {
+  kanto: 'gameCorner',
   johto: 'bugContest',
   sinnoh: 'mining',
 }
@@ -164,5 +165,60 @@ export const MINIGAME_INFO = {
     action: 'ENTER CONTEST',
     hint: `Search the park for bugs \u2014 rarer ones score higher. Entry is $${BUG_CONTEST_COST.toLocaleString()}, and you get ${BUG_CONTEST_SEARCHES} chances to look before you must keep one.`,
   },
+  gameCorner: {
+    title: 'Game Corner',
+    cost: 0,
+    action: 'ENTER GAME CORNER',
+    hint: 'Try the slots \u2014 $200 a spin. Match all three reels for a payout (the Star top prize is 1,500x).',
+  },
+}
+
+// --- Kanto Game Corner slots ----------------------------------------------
+
+/** Money spent per slot spin. */
+export const SLOT_SPIN_COST = 200
+
+/**
+ * Slot symbols, their relative weight and the multiplier they pay on three of
+ * a kind. The payouts are tuned to a ~92% return.
+ * @type {{ id: string, name: string, icon: string, weight: number, payout: number }[]}
+ */
+export const SLOT_SYMBOLS = [
+  { id: 'cherry', name: 'Cherry', icon: '\ud83c\udf52', weight: 40, payout: 6 },
+  { id: 'bell', name: 'Bell', icon: '\ud83d\udd14', weight: 24, payout: 12 },
+  { id: 'bar', name: 'Bar', icon: '\ud83c\uddff', weight: 18, payout: 30 },
+  { id: 'seven', name: 'Seven', icon: '7', weight: 10, payout: 100 },
+  { id: 'diamond', name: 'Diamond', icon: '\ud83d\udc8e', weight: 6, payout: 400 },
+  { id: 'star', name: 'Star', icon: '\u2b50', weight: 2, payout: 1500 },
+]
+
+const SLOT_TOTAL_WEIGHT = SLOT_SYMBOLS.reduce((sum, symbol) => sum + symbol.weight, 0)
+
+/** The top slot multiplier. */
+export const SLOT_JACKPOT = Math.max(...SLOT_SYMBOLS.map((symbol) => symbol.payout))
+
+/** @returns {typeof SLOT_SYMBOLS[number]} */
+function rollSymbol() {
+  let roll = Math.random() * SLOT_TOTAL_WEIGHT
+  for (const symbol of SLOT_SYMBOLS) {
+    roll -= symbol.weight
+    if (roll <= 0) return symbol
+  }
+  return SLOT_SYMBOLS[0]
+}
+
+/**
+ * Spin the reels.
+ * @returns {{ reels: typeof SLOT_SYMBOLS, payout: number, jackpot: boolean }}
+ */
+export function spinSlots() {
+  const reels = [rollSymbol(), rollSymbol(), rollSymbol()],
+    match = reels.every((symbol) => symbol.id === reels[0].id),
+    jackpot = match && reels[0].id === 'star'
+  return {
+    reels,
+    payout: match ? reels[0].payout * SLOT_SPIN_COST : 0,
+    jackpot,
+  }
 }
 

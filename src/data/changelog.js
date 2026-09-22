@@ -1,10 +1,22 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.26.0'
+export const GAME_VERSION = '0.27.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.27.0',
+      subtitle: 'Game Corner',
+      sections: [
+        {
+          heading: 'Minigames',
+          items: [
+            'Kanto now has the Game Corner: once its Champion is beaten, the Gyms tab opens the slots. Spin for $200 a go and match all three reels \u2014 the Star jackpot pays 1,500x',
+          ],
+        },
+      ],
+    },
     {
       version: '0.26.0',
       subtitle: 'Bug Catching Contest',

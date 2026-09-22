@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 installGameData()
 
-const { BUG_CONTEST_COST, MINIGAME_BY_REGION, MINING_COST, bugContestPrize, rewardItemName, rollContestBug, rollMiningReward } = await import(
+const { BUG_CONTEST_COST, MINIGAME_BY_REGION, MINING_COST, SLOT_SPIN_COST, SLOT_SYMBOLS, bugContestPrize, rewardItemName, rollContestBug, rollMiningReward, spinSlots } = await import(
   '../src/game/minigames.js'
 )
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
@@ -14,6 +14,7 @@ const { consumableItems, evolutionItems } = await import('../src/data/items.js')
 test('Sinnoh hosts the mining minigame and Johto the bug contest', () => {
   assert.equal(MINIGAME_BY_REGION.sinnoh, 'mining')
   assert.equal(MINIGAME_BY_REGION.johto, 'bugContest')
+  assert.equal(MINIGAME_BY_REGION.kanto, 'gameCorner')
 })
 
 test('mining rewards are real items with a positive quantity', () => {
@@ -53,6 +54,24 @@ test('CLAIM_MINIGAME_REWARD pays money and items', () => {
   assert.equal(next.inventory.rareCandy, 1)
 })
 
+test('slot spins pay a real multiplier and stay near break-even', () => {
+  for (let roll = 0; roll < 200; roll++) {
+    const result = spinSlots()
+    assert.equal(result.reels.length, 3)
+    const match = result.reels.every((symbol) => symbol.id === result.reels[0].id)
+    if (match) assert.equal(result.payout, result.reels[0].payout * SLOT_SPIN_COST)
+    else assert.equal(result.payout, 0)
+  }
+  // Theoretical return: sum(weight^3 * payout) / totalWeight^3.
+  const total = SLOT_SYMBOLS.reduce((sum, symbol) => sum + symbol.weight, 0),
+    expected =
+      SLOT_SYMBOLS.reduce(
+        (sum, symbol) => sum + symbol.weight ** 3 * symbol.payout,
+        0
+      ) /
+      total ** 3
+  assert.ok(expected > 0.7 && expected < 1.05, `return rate ${expected}`)
+})
 test('bug contest bugs and prizes are consistent', () => {
   const bug = rollContestBug()
   assert.ok(bug.speciesKey)

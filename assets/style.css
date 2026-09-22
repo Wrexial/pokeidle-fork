@@ -6829,6 +6829,61 @@ img {
     color: var(--parchment)
 }
 
+.game-corner-reels {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 8px
+}
+
+.game-corner-reel {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    background: #1a1a2a;
+    border: 2px solid #8a7040;
+    border-radius: 6px
+}
+
+.game-corner-reels.win .game-corner-reel {
+    border-color: #f0d060;
+    box-shadow: 0 0 8px #f0d060;
+    animation: game-corner-pop .4s ease
+}
+
+@keyframes game-corner-pop {
+    from { transform: scale(1.15) }
+    to { transform: scale(1) }
+}
+
+.game-corner-result {
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--parchment);
+    text-align: center;
+    margin-bottom: 8px;
+    min-height: 12px
+}
+
+.game-corner-table {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 8px;
+    justify-content: center
+}
+
+.game-corner-payout {
+    font-size: 7px;
+    color: #cbbf9c;
+    background: rgba(0,0,0,.35);
+    border-radius: 3px;
+    padding: 2px 4px
+}
+
 .reward-shop-token-display {
     text-align: center;
     padding: 6px 0 10px;

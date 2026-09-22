@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.26.0**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.27.0**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -76,8 +76,8 @@ items, best return first:
     Dusk/Nest/Premier with situational rates; auto-catch picks the best).
 34. **#27 Gender-specific sprites** — M · ★★★ (assets are half-there)
 35. **#29 Minigames** — M–L · ★★★ (small per minigame once one exists) —
-    **shipped**: Sinnoh's Underground mining (0.25.0) and Johto's Bug Catching
-    Contest (0.26.0).
+    **shipped**: Kanto's Game Corner (0.27.0), Johto's Bug Catching Contest
+    (0.26.0) and Sinnoh's Underground mining (0.25.0).
 36. **#4 In-battle Mega evolution** — M–L · ★★★
 37. ✅ **#32 Battle Tower tuning** — shipped 0.10.0 (auto-climb, rarer
     tokens, six fully evolved teams plus legendaries late).
@@ -675,15 +675,15 @@ few optional minigames would give the player something hands-on without
 disturbing the idle loop. They'd all sit alongside it — the player opts in, and
 the idle game keeps running if they don't.
 
-**Shipped: Sinnoh's Underground mining (0.25.0) and Johto's Bug Catching
-Contest (0.26.0).** `src/game/minigames.js` holds `MINIGAME_BY_REGION` (region
--> minigame id) and `MINIGAME_INFO` (title/cost/action/hint) plus each game's
-config/reward table. The Gyms tab renders the region's minigame once its
-Champion is beaten and pays the fee with `PAY_MINIGAME_FEE`; the modal keeps its
-own interactive state and banks the result with `COLLECT_MINING` /
-`CLAIM_MINIGAME_REWARD`. Adding the next region is a new modal + reward table +
-one `MINIGAME_BY_REGION`/`MINIGAME_INFO` entry. Covered by
-`tests/minigames.test.mjs`.
+**Shipped: Sinnoh's Underground mining (0.25.0), Johto's Bug Catching Contest
+(0.26.0) and Kanto's Game Corner slots (0.27.0).** `src/game/minigames.js` holds
+`MINIGAME_BY_REGION` (region -> minigame id) and `MINIGAME_INFO`
+(title/cost/action/hint) plus each game's config/reward table. The Gyms tab
+renders the region's minigame once its Champion is beaten and pays the fee with
+`PAY_MINIGAME_FEE`; the modal keeps its own interactive state and banks the
+result with `COLLECT_MINING` / `CLAIM_MINIGAME_REWARD`. Adding the next region is
+a new modal + reward table + one `MINIGAME_BY_REGION`/`MINIGAME_INFO` entry.
+Covered by `tests/minigames.test.mjs`.
 
 ### 29a. Fishing minigame
 
@@ -1203,6 +1203,9 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.27.0 (Game Corner): Kanto's region minigame — the slots ($200 a spin, Star
+jackpot 1,500x). Third slice of #29.
 
 0.26.0 (Bug Catching Contest): Johto's region minigame — pay $800, search the
 park and keep a bug before your searches run out; rarer bugs pay more. Second

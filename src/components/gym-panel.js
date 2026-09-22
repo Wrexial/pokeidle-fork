@@ -7,6 +7,7 @@ import { BATTLE_TOWER_REGION } from '../data/config.js'
 import { MINIGAME_BY_REGION, MINIGAME_INFO } from '../game/minigames.js'
 import { MiningModal } from './mining-modal.js'
 import { BugContestModal } from './bug-contest-modal.js'
+import { GameCornerModal } from './game-corner-modal.js'
 import { useGame } from '../game/context.js'
 import { buildTrainerTeam, buildTowerFloor } from '../game/progression.js'
 
@@ -451,6 +452,9 @@ export function GymPanel({ onOpenShop }) {
       showMining &&
         regionMinigame === 'bugContest' &&
         jsx(BugContestModal, { onClose: () => setShowMining(!1) }),
+      showMining &&
+        regionMinigame === 'gameCorner' &&
+        jsx(GameCornerModal, { onClose: () => setShowMining(!1) }),
       showMining &&
         regionMinigame === 'mining' &&
         jsx(MiningModal, { onClose: () => setShowMining(!1) }),

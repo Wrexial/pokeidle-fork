@@ -3,7 +3,7 @@
 import { shinyCharmMinOddsChance, shinyFullOddsChance, shinyWithCharmChance, roamerEncounterChance, pokerusChance, pokerusDurationBattles, offlineCapMs, offlineMinMs, offlineMoneyPerHourPerLevel } from '../data/config.js'
 import { activeItems, consumableItems, evolutionItems, pokeBalls, valuableDropTable } from '../data/items.js'
 import { GENERATION_DEX_RANGES, encounterData, gymLeaderData, isSpeciesCharmed, mapData, moveData, pokemonSpecies, regions } from '../data/gameData.js'
-import { calculateExpYield, calculatePokemonStats, getLevelUpResults, getPerfectIVs, resolvePokemonMoves } from './pokemon.js'
+import { calculateExpYield, calculatePokemonStats, getLevelUpResults, getPerfectIVs, isBattleReady, resolvePokemonMoves } from './pokemon.js'
 
 /** Gym ids grouped by region, so `badgesRequired` gates count that region only. */
 /** @type {Record<string, string[]>} */
@@ -257,6 +257,31 @@ export function formatAwayDuration(ms) {
 }
 
 /**
+ * Advance the eggs in a party by one won wild battle. Only eggs carried in the
+ * party progress, and at most one hatches per battle.
+ * @param {Pokemon[]} party
+ * @returns {{ party: Pokemon[], hatched: Pokemon | null }}
+ */
+export function tickPartyEggs(party) {
+  let hatched = /** @type {Pokemon | null} */ (null),
+    changed = false
+  const nextParty = party.map((member) => {
+    if (!member.isEgg || hatched) return member
+    changed = true
+    const remaining = (member.eggStepsRemaining ?? 1) - 1
+    if (remaining > 0) return { ...member, eggStepsRemaining: remaining }
+    hatched = {
+      ...member,
+      isEgg: false,
+      eggStepsRemaining: 0,
+      moves: resolvePokemonMoves(member.speciesKey, member.level || 1),
+    }
+    return hatched
+  })
+  return { party: changed ? nextParty : party, hatched }
+}
+
+/**
  * @param {GameState} state
  * @returns {string[]}
  */
@@ -401,7 +426,7 @@ export function createIdleBattleState() {
  */
 export function prepareNextBattle(state) {
   const synced = syncActivePokemonIntoParty(state),
-    firstAliveIndex = synced.party.findIndex((member) => member.currentHp > 0),
+    firstAliveIndex = synced.party.findIndex((member) => isBattleReady(member)),
     nextIndex = firstAliveIndex >= 0 ? firstAliveIndex : 0
   return {
     ...synced,
@@ -704,7 +729,7 @@ export function awardExperience(dispatch, playerPokemon, enemyPokemon, multiplie
       for (let memberIndex = 0; memberIndex < party.length; memberIndex++) {
         if (memberIndex === activeIndex) continue
         const member = party[memberIndex]
-        if (member.currentHp <= 0) continue
+        if (!isBattleReady(member)) continue
         const memberSpecies = pokemonSpecies[member.speciesKey],
           memberTotalExp = member.totalExp + sharedExp,
           memberLevelUps = getLevelUpResults(member.speciesKey, memberSpecies.growthRate, member.level, memberTotalExp)

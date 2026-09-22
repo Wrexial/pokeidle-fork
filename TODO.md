@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.27**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.28**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -1198,6 +1198,9 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.9.28 (eggs you carry): breeding gives an Egg to collect; carry it in the party
+and win battles to hatch it (steps depend on the species). Eggs can't battle.
 
 0.9.27 (hatch details): the egg-hatch popup shows the hatchling's stats, IVs
 (with judge) and nature before you keep or release it.

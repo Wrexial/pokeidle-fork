@@ -125,9 +125,9 @@ export function DaycareModal({ onClose }) {
                     ? compatibility.reason
                     : `${
                         compatibility.reason
-                      } Eggs hatch into ${eggSpecies?.name ?? 'a base form'} after ${daycareEggBattles} battles, with 1 in ${shinyOdds} shiny odds${
+                      } An Egg of ${eggSpecies?.name ?? 'a base form'} is ready every ${daycareEggBattles} battles, with 1 in ${shinyOdds} shiny odds${
                         hasShinyParent ? ' (boosted by a shiny parent)' : ''
-                      }.`,
+                      }. Collect it, then carry it in your party to hatch it.`,
             }),
             breedable &&
               jsxs('div', {
@@ -144,7 +144,7 @@ export function DaycareModal({ onClose }) {
                   }),
                   jsx('span', {
                     className: 'daycare-progress-label',
-                    children: ready ? 'Egg ready!' : `${progress} / ${daycareEggBattles} battles`,
+                    children: ready ? 'Egg ready to collect!' : `${progress} / ${daycareEggBattles} battles`,
                   }),
                 ],
               }),
@@ -155,7 +155,7 @@ export function DaycareModal({ onClose }) {
                 dispatch({
                   type: 'HATCH_DAYCARE_EGG',
                 }),
-              children: ready ? 'HATCH EGG' : 'Not ready yet',
+              children: ready ? 'COLLECT EGG' : 'Not ready yet',
             }),
           ],
         }),

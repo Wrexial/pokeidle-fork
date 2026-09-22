@@ -246,19 +246,29 @@ export function BoxPanel({
                     return jsx(
                       'div',
                       {
-                        className: `box-grid-slot filled${isInspected ? ' inspected' : ''}${pokemon.isShiny ? ' shiny-slot' : ''}${isDraggingIndex ? ' dragging' : ''}${isDropTarget ? ' drop-target' : ''}`,
+                        className: `box-grid-slot filled${isInspected ? ' inspected' : ''}${pokemon.isShiny && !pokemon.isEgg ? ' shiny-slot' : ''}${isDraggingIndex ? ' dragging' : ''}${isDropTarget ? ' drop-target' : ''}`,
                         onClick: () => toggleInspected(pokemon.id),
-                        title: `${pokemonDisplayName(pokemon)} Lv${pokemon.level}`,
+                        title: pokemon.isEgg
+                          ? `Egg \u00b7 hatches in ${pokemon.eggStepsRemaining ?? 0}`
+                          : `${pokemonDisplayName(pokemon)} Lv${pokemon.level}`,
                         draggable: isDraggable,
                         onDragStart: isDraggable ? /** @param {React.DragEvent} event */ (event) => onBoxDragStart(event, boxIndex, pokemon.id) : void 0,
                         onDragOver: onBoxSlotDragOver ? /** @param {React.DragEvent} event */ (event) => onBoxSlotDragOver(event, boxIndex) : void 0,
                         onDrop,
                         onDragEnd,
                         children: jsx('img', {
-                          src: getPokemonSpriteUrl(species.id, !1, pokemon.isShiny),
-                          onError: /** @param {{ target: HTMLImageElement }} event */ (event) =>
-                            (event.target.src = getPokemonSpriteFallbackUrl(species.id, !1, pokemon.isShiny)),
-                          alt: pokemon.name,
+                          src: pokemon.isEgg
+                            ? '/sprites/pokemon/egg.png'
+                            : getPokemonSpriteUrl(species.id, !1, pokemon.isShiny),
+                          onError: pokemon.isEgg
+                            ? void 0
+                            : /** @param {{ target: HTMLImageElement }} event */ (event) =>
+                                (event.target.src = getPokemonSpriteFallbackUrl(
+                                  species.id,
+                                  !1,
+                                  pokemon.isShiny
+                                )),
+                          alt: pokemon.isEgg ? 'Egg' : pokemon.name,
                           style: {
                             imageRendering: 'pixelated',
                           },

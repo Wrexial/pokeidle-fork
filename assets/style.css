@@ -1870,6 +1870,19 @@ img {
     text-shadow: 0 0 4px #ff5a7888
 }
 
+.party-egg-hint {
+    font-size: 7px;
+    color: var(--text-muted);
+    margin-top: 3px
+}
+
+.stats-panel-egg-hint {
+    font-size: 9px;
+    color: #5a4838;
+    line-height: 1.45;
+    margin: 4px 0 0
+}
+
 .party-action-btn {
     font-size: 8px;
     padding: 4px 10px;

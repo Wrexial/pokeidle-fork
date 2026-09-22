@@ -77,6 +77,9 @@ type Pokemon = BattlePokemon & {
   favourite?: boolean
   /** Optional player-given nickname (max 12 characters). */
   nickname?: string
+  /** An unhatched egg: it cannot battle and hatches after `eggStepsRemaining` wild wins while in the party. */
+  isEgg?: boolean
+  eggStepsRemaining?: number
   isShiny: boolean
 }
 

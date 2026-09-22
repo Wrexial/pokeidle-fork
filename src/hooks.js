@@ -11,7 +11,7 @@ import { useGame } from './game/context.js'
 import { playSfx, startMusic, stopMusic, unlockAudio } from './game/audio.js'
 import { attemptCatch, selectAutoCatchBall, selectBestBall, shouldAutoCatch } from './game/catching.js'
 import { createVolatileState, resolveBattleTurn } from './game/combat.js'
-import { calculatePokemonStats, generateIVs, getPerfectIVs, resolvePokemonMoves } from './game/pokemon.js'
+import { calculatePokemonStats, generateIVs, getPerfectIVs, isBattleReady, resolvePokemonMoves } from './game/pokemon.js'
 import { awaySummary, awardExperience, checkShinyOdds, pokerusExpMultiplier, resolveActiveModifiers, resolvePokemonEncounter, resolveRoamer, shinyOddsForSpecies } from './game/progression.js'
 
 /**
@@ -449,7 +449,7 @@ export function useGameLoop() {
             const switchIndex = currentGameState.party.findIndex(
               (member, index) =>
                 index !== currentGameState.activePlayerPokemonIndex &&
-                member.currentHp > 0
+                isBattleReady(member)
             )
             ;(dispatch(
               switchIndex !== -1
@@ -599,7 +599,7 @@ export function useGameLoop() {
         case 'defeat': {
           const activeIndex = currentGameState.activePlayerPokemonIndex,
             switchIndex = currentGameState.party.findIndex(
-              (member, index) => index > activeIndex && member.currentHp > 0
+              (member, index) => index > activeIndex && isBattleReady(member)
             )
           if (switchIndex !== -1)
             dispatch({

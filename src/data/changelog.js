@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.9.27'
+export const GAME_VERSION = '0.9.28'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.9.28',
+      subtitle: 'Eggs You Carry',
+      sections: [
+        {
+          heading: 'Daycare',
+          items: [
+            'Breeding now gives you an Egg to collect rather than hatching it instantly. Carry it in your party and win wild battles to hatch it \u2014 the number needed depends on the species (8\u201340)',
+            'Eggs occupy a party slot, cannot battle, and show their remaining steps in the party and box; hatching then shows the hatchling\u2019s stats, IVs and nature',
+          ],
+        },
+      ],
+    },
     {
       version: '0.9.27',
       subtitle: 'Hatch Details',

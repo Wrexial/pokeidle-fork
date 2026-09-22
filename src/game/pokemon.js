@@ -187,6 +187,32 @@ export function pokemonDisplayName(pokemon) {
 }
 
 /**
+ * Whether a Pokemon can fight: eggs cannot, and neither can fainted Pokemon.
+ * @param {{ isEgg?: boolean, currentHp?: number }} pokemon
+ * @returns {boolean}
+ */
+export function isBattleReady(pokemon) {
+  return !pokemon.isEgg && (pokemon.currentHp ?? 0) > 0
+}
+
+/**
+ * A Daycare egg: a level-1 Pokemon that needs `steps` wild wins in the party
+ * before it hatches. Its species/nature/IVs are fixed at creation.
+ * @param {string} speciesKey
+ * @param {number | string} id
+ * @param {boolean} isShiny
+ * @param {number} steps
+ * @returns {Pokemon}
+ */
+export function createEgg(speciesKey, id, isShiny, steps) {
+  return {
+    ...createPokemon(speciesKey, 1, id, isShiny),
+    isEgg: true,
+    eggStepsRemaining: steps,
+  }
+}
+
+/**
  * @param {number} currentLevel
  * @param {string} growthRate
  * @returns {number}

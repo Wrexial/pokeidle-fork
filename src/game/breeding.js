@@ -110,3 +110,17 @@ export function eggSpeciesKey(parents) {
     base = getPreEvolutionChain(mother.speciesKey)[0] ?? mother.speciesKey
   return pokemonSpecies[base] ? base : null
 }
+
+/**
+ * How many wild battles an egg of this species needs to hatch. Stronger and
+ * rarer species take longer (base-stat total scaled into 8-40).
+ * @param {string} speciesKey
+ * @returns {number}
+ */
+export function eggHatchSteps(speciesKey) {
+  const species = pokemonSpecies[speciesKey],
+    total = species
+      ? Object.values(species.baseStats).reduce((sum, value) => sum + value, 0)
+      : 300
+  return Math.max(8, Math.min(40, Math.round(total / 12)))
+}

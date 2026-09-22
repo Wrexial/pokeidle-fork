@@ -230,54 +230,80 @@ export function PartyPanel({
                       children: [
                         jsx('img', {
                           className: 'party-sprite',
-                          src: getPokemonSpriteUrl(species.id, !1, member.isShiny),
-                          onError: /** @param {{ target: HTMLImageElement }} event */ (event) =>
-                            (event.target.src = getPokemonSpriteFallbackUrl(species.id, !1, member.isShiny)),
-                          alt: member.name,
+                          src: member.isEgg
+                            ? '/sprites/pokemon/egg.png'
+                            : getPokemonSpriteUrl(species.id, !1, member.isShiny),
+                          onError: member.isEgg
+                            ? void 0
+                            : /** @param {{ target: HTMLImageElement }} event */ (event) =>
+                                (event.target.src = getPokemonSpriteFallbackUrl(
+                                  species.id,
+                                  !1,
+                                  member.isShiny
+                                )),
+                          alt: member.isEgg ? 'Egg' : member.name,
                         }),
                         jsxs('div', {
                           className: 'party-info',
-                          children: [
-                            jsxs('div', {
-                              className: 'party-name-row',
-                              children: [
-                                jsxs('span', {
+                          children: member.isEgg
+                            ? [
+                                jsxs('div', {
+                                  className: 'party-name-row',
                                   children: [
-                                    member.isShiny &&
-                                      jsx('span', {
-                                        className: 'shiny-star',
-                                        children: '★',
-                                      }),
-                                    pokemonDisplayName(member),
-                                    member.favourite &&
-                                      jsx('span', {
-                                        className: 'party-favourite-badge',
-                                        title: 'Favourite',
-                                        children: '\u2665',
-                                      }),
-                                    state.pokerus &&
-                                      jsx('span', {
-                                        className: 'party-pokerus-badge',
-                                        title: 'Pokerus: double EXP',
-                                        children: 'PKRS',
-                                      }),
+                                    jsx('span', {
+                                      children: 'Egg',
+                                    }),
+                                    jsxs('span', {
+                                      children: ['Hatch ', member.eggStepsRemaining ?? 0],
+                                    }),
                                   ],
                                 }),
-                                jsxs('span', {
-                                  children: ['Lv', member.level],
+                                jsx('div', {
+                                  className: 'party-egg-hint',
+                                  children: 'Carry it in the party to hatch it',
+                                }),
+                              ]
+                            : [
+                                jsxs('div', {
+                                  className: 'party-name-row',
+                                  children: [
+                                    jsxs('span', {
+                                      children: [
+                                        member.isShiny &&
+                                          jsx('span', {
+                                            className: 'shiny-star',
+                                            children: '★',
+                                          }),
+                                        pokemonDisplayName(member),
+                                        member.favourite &&
+                                          jsx('span', {
+                                            className: 'party-favourite-badge',
+                                            title: 'Favourite',
+                                            children: '\u2665',
+                                          }),
+                                        state.pokerus &&
+                                          jsx('span', {
+                                            className: 'party-pokerus-badge',
+                                            title: 'Pokerus: double EXP',
+                                            children: 'PKRS',
+                                          }),
+                                      ],
+                                    }),
+                                    jsxs('span', {
+                                      children: ['Lv', member.level],
+                                    }),
+                                  ],
+                                }),
+                                jsx(HpBar, {
+                                  current: member.currentHp,
+                                  max: member.maxHp,
+                                }),
+                                jsx(ExpBar, {
+                                  speciesKey: member.speciesKey,
+                                  level: member.level,
+                                  totalExp: member.totalExp,
                                 }),
                               ],
-                            }),
-                            jsx(HpBar, {
-                              current: member.currentHp,
-                              max: member.maxHp,
-                            }),
-                            jsx(ExpBar, {
-                              speciesKey: member.speciesKey,
-                              level: member.level,
-                              totalExp: member.totalExp,
-                            }),
-                          ],
                         }),
                       ],
                     }),

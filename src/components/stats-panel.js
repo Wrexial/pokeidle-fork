@@ -99,6 +99,63 @@ export function StatsPanel({
     statMax = 200,
     canMove = (source === 'party' && partyLength > 1) || (source === 'box' && partyLength < 6),
     actionLabel = source === 'party' ? 'Send to Box' : 'Move to Party'
+  if (pokemon.isEgg)
+    return jsxs('div', {
+      className: 'stats-panel',
+      children: [
+        jsxs('div', {
+          className: 'stats-panel-header',
+          children: [
+            jsx('button', {
+              className: 'stats-panel-close',
+              onClick: onClose,
+              children: 'X',
+            }),
+          ],
+        }),
+        jsxs('div', {
+          className: 'stats-panel-identity',
+          children: [
+            jsx('img', {
+              className: 'stats-panel-sprite',
+              src: '/sprites/pokemon/egg.png',
+              alt: 'Egg',
+            }),
+            jsxs('div', {
+              className: 'stats-panel-name-block',
+              children: [
+                jsx('span', {
+                  className: 'stats-panel-name',
+                  children: 'Egg',
+                }),
+                jsx('span', {
+                  className: 'stats-panel-level',
+                  children: `Hatches in ${pokemon.eggStepsRemaining ?? 0} battles`,
+                }),
+              ],
+            }),
+          ],
+        }),
+        jsx('p', {
+          className: 'stats-panel-egg-hint',
+          children:
+            'Carry this Egg in your party and win wild battles to hatch it. Eggs cannot battle.',
+        }),
+        canMove
+          ? jsx('button', {
+              className: 'stats-panel-btn',
+              onClick: onAction,
+              children: actionLabel,
+            })
+          : null,
+        canRelease &&
+          jsx('button', {
+            className: 'stats-panel-release-btn',
+            onClick: onRelease,
+            children: 'Release',
+          }),
+      ],
+    })
   return jsxs('div', {
     className: 'stats-panel',
     children: [

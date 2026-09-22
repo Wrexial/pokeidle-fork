@@ -7,10 +7,10 @@ import { dailyDropMultiplier, dailyEventByKey, rollDailyEvent, todayKey } from '
 import { natureName, randomNature } from '../data/natures.js'
 import { elite4Data, encounterData, gymLeaderData, mapData, moveLearnsets, pokemonSpecies, regions } from '../data/gameData.js'
 import { createVolatileState } from './combat.js'
-import { calculatePokemonStats, calculateRequiredExperience, createPokemon, getLevelUpResults, insertIntoBox, judgeIVs, nextBoxSortMode, resolvePokemonMoves, sortBoxMembers } from './pokemon.js'
-import { canBreed, eggSpeciesKey } from './breeding.js'
+import { calculatePokemonStats, calculateRequiredExperience, createEgg, createPokemon, getLevelUpResults, insertIntoBox, isBattleReady, judgeIVs, nextBoxSortMode, resolvePokemonMoves, sortBoxMembers } from './pokemon.js'
+import { canBreed, eggHatchSteps, eggSpeciesKey } from './breeding.js'
 import { advanceQuests, questLabel, rollQuests } from './quests.js'
-import { checkShinyOdds, computeUnlockedLocations, formatReward, getRegionUnlockTokens, isActiveEffectItem, loadActivePokemonFromParty, prepareNextBattle, releaseReward, rollCandyDrop, rollValuableDrop, syncActivePokemonIntoParty, tickBattleCounters, tickPokerus } from './progression.js'
+import { checkShinyOdds, computeUnlockedLocations, formatReward, getRegionUnlockTokens, isActiveEffectItem, loadActivePokemonFromParty, prepareNextBattle, releaseReward, rollCandyDrop, rollValuableDrop, syncActivePokemonIntoParty, tickBattleCounters, tickPartyEggs, tickPokerus } from './progression.js'
 
 /** @type {GameState} */
 export const initialGameState = {
@@ -285,7 +285,7 @@ export function gameReducer(state, action) {
       )
     }
     case 'START_ENCOUNTER': {
-      const firstAliveIndex = state.party.findIndex((member) => member.currentHp > 0),
+      const firstAliveIndex = state.party.findIndex((member) => isBattleReady(member)),
         activeIndex = firstAliveIndex >= 0 ? firstAliveIndex : 0
       return {
         ...state,
@@ -346,6 +346,8 @@ export function gameReducer(state, action) {
         pokerus = state.pokerus,
         quests = state.quests,
         daycare = state.daycare,
+        party = state.party,
+        hatchedEgg = null,
         inventory = state.inventory,
         secretNotices = [],
         dropNotifications = [],
@@ -383,6 +385,10 @@ export function gameReducer(state, action) {
           daycare.progress < daycareEggBattles
         )
           daycare = { ...daycare, progress: daycare.progress + 1 }
+        // Eggs carried in the party hatch after enough wild wins.
+        const eggTick = tickPartyEggs(party)
+        party = eggTick.party
+        hatchedEgg = eggTick.hatched
         // Pokerus is caught very rarely on a wild win, and doubles EXP for a
         // while before it cures.
         const pokerusResult = tickPokerus(pokerus)
@@ -453,11 +459,45 @@ export function gameReducer(state, action) {
         swarm,
         pokerus,
         quests,
+        party,
         daycare,
         inventory,
       })
       for (const dropNotification of dropNotifications)
         syncedState = withNotification(syncedState, dropNotification)
+      if (hatchedEgg) {
+        const hatchKey = hatchedEgg.speciesKey
+        syncedState = withNotification(
+          {
+            ...syncedState,
+            hatchResult: hatchedEgg,
+            pokedexSeen: syncedState.pokedexSeen.includes(hatchKey)
+              ? syncedState.pokedexSeen
+              : [...syncedState.pokedexSeen, hatchKey],
+            pokedexCaught: syncedState.pokedexCaught.includes(hatchKey)
+              ? syncedState.pokedexCaught
+              : [...syncedState.pokedexCaught, hatchKey],
+            shinySeen:
+              hatchedEgg.isShiny && !syncedState.shinySeen.includes(hatchKey)
+                ? [...syncedState.shinySeen, hatchKey]
+                : syncedState.shinySeen,
+            shinyCaught:
+              hatchedEgg.isShiny && !syncedState.shinyCaught.includes(hatchKey)
+                ? [...syncedState.shinyCaught, hatchKey]
+                : syncedState.shinyCaught,
+            battleLog: [
+              ...syncedState.battleLog,
+              `Your Egg hatched into ${hatchedEgg.name}${hatchedEgg.isShiny ? ' \u2726 shiny!' : ''}!`,
+            ].slice(-50),
+          },
+          {
+            message: `Your Egg hatched into ${hatchedEgg.name}!`,
+            tone: hatchedEgg.isShiny ? 'shiny' : 'success',
+            icon: '\ud83d\udc23',
+            dedupeKey: `hatch:${hatchedEgg.id}`,
+          }
+        )
+      }
       if (
         event.type === 'victory' ||
         (event.type === 'faint' && event.data?.target === 'enemy')
@@ -671,22 +711,31 @@ export function gameReducer(state, action) {
     }
     case 'RELEASE_HATCHLING': {
       const { pokemonId } = action.payload,
+        inParty = state.party.some((member) => member.id === pokemonId),
         hatchling =
           state.hatchResult?.id === pokemonId
             ? state.hatchResult
-            : state.box.find((member) => member.id === pokemonId),
+            : state.party.find((member) => member.id === pokemonId) ??
+              state.box.find((member) => member.id === pokemonId),
         reward = hatchling ? releaseReward(hatchling) : { money: 0, items: {} },
         inventory = { ...state.inventory }
       for (const [itemId, quantity] of Object.entries(reward.items))
         inventory[itemId] = (inventory[itemId] ?? 0) + quantity
-      const releasedState = {
+      const newParty = inParty
+          ? state.party.filter((member) => member.id !== pokemonId)
+          : state.party,
+        activeId = state.playerPokemon?.id,
+        activeIndex = activeId ? newParty.findIndex((member) => member.id === activeId) : 0
+      const releasedState = loadActivePokemonFromParty({
         ...state,
+        party: newParty,
         box: state.box.filter((member) => member.id !== pokemonId),
         hatchResult: state.hatchResult?.id === pokemonId ? null : state.hatchResult,
         money: state.money + reward.money,
         inventory,
+        activePlayerPokemonIndex: Math.max(0, activeIndex),
         battleLog: [...state.battleLog, 'The newly hatched Pokemon was released.'].slice(-50),
-      }
+      })
       return hatchling
         ? withNotification(releasedState, {
             message: `Released the hatchling: +${formatReward(reward)}`,
@@ -953,6 +1002,8 @@ export function gameReducer(state, action) {
       if (state.party.length <= 1) return state
       const { partyIndex } = action.payload
       if (partyIndex < 0 || partyIndex >= state.party.length) return state
+      if (!state.party.some((member, index) => index !== partyIndex && !member.isEgg))
+        return state
       const baseState = state.phase === 'battling' ? prepareNextBattle(state) : state,
         removed = baseState.party[partyIndex],
         newParty = baseState.party.filter((member, index) => index !== partyIndex),
@@ -2124,6 +2175,12 @@ export function gameReducer(state, action) {
       if (source === 'box' && !state.box.some((member) => member.id === pokemonId)) return state
       if (source !== 'box' && (state.party.length <= 1 || !state.party.some((member) => member.id === pokemonId)))
         return state
+      // Never leave the party with no Pokemon that can actually fight (e.g. all eggs).
+      if (
+        source !== 'box' &&
+        !state.party.some((member) => member.id !== pokemonId && !member.isEgg)
+      )
+        return state
       const released =
         source === 'box'
           ? state.box.find((member) => member.id === pokemonId)
@@ -2179,6 +2236,11 @@ export function gameReducer(state, action) {
         inParty = state.party.some((member) => member.id === pokemonId)
       if (!inBox && !inParty) return state
       if (inParty && state.party.length <= 1) return state
+      if (
+        inParty &&
+        !state.party.some((member) => member.id !== pokemonId && !member.isEgg)
+      )
+        return state
       const tradedPokemon = inBox
         ? state.box.find((member) => member.id === pokemonId)
         : state.party.find((member) => member.id === pokemonId)
@@ -2277,40 +2339,37 @@ export function gameReducer(state, action) {
       const baseSpeciesKey = eggSpeciesKey(parents)
       if (!baseSpeciesKey) return state
       const shinyParent = parents.some((parent) => parent.isShiny),
-        egg = createPokemon(
+        egg = createEgg(
           baseSpeciesKey,
-          1,
           state.nextPokemonId,
-          checkShinyOdds(shinyParent ? breedShinyParentOdds : breedShinyOdds)
-        )
-      return {
-        ...state,
-        box: insertIntoBox(state.box, egg, state.boxSort),
-        nextPokemonId: state.nextPokemonId + 1,
-        hatchResult: egg,
-        daycare: {
-          ...state.daycare,
-          progress: 0,
+          checkShinyOdds(shinyParent ? breedShinyParentOdds : breedShinyOdds),
+          eggHatchSteps(baseSpeciesKey)
+        ),
+        toParty = state.party.length < 6
+      return withNotification(
+        {
+          ...state,
+          ...(toParty
+            ? { party: [...state.party, egg] }
+            : { box: insertIntoBox(state.box, egg, state.boxSort) }),
+          nextPokemonId: state.nextPokemonId + 1,
+          daycare: { ...state.daycare, progress: 0 },
+          battleLog: [
+            ...state.battleLog,
+            toParty
+              ? 'The Daycare found an Egg! It joined your party \u2014 battle to hatch it.'
+              : 'The Daycare found an Egg! It was sent to your box.',
+          ].slice(-50),
         },
-        pokedexSeen: state.pokedexSeen.includes(baseSpeciesKey)
-          ? state.pokedexSeen
-          : [...state.pokedexSeen, baseSpeciesKey],
-        pokedexCaught: state.pokedexCaught.includes(baseSpeciesKey)
-          ? state.pokedexCaught
-          : [...state.pokedexCaught, baseSpeciesKey],
-        shinySeen:
-          egg.isShiny && !state.shinySeen.includes(baseSpeciesKey)
-            ? [...state.shinySeen, baseSpeciesKey]
-            : state.shinySeen,
-        shinyCaught:
-          egg.isShiny && !state.shinyCaught.includes(baseSpeciesKey)
-            ? [...state.shinyCaught, baseSpeciesKey]
-            : state.shinyCaught,
-        battleLog: [
-          ...state.battleLog,
-          `The Egg hatched into ${egg.name}${egg.isShiny ? ' \u2726 shiny!' : ''}!`,
-        ].slice(-50),
-      }
+        {
+          message: toParty
+            ? 'The Daycare found an Egg! Carry it in your party to hatch it.'
+            : 'The Daycare found an Egg! It was sent to your box.',
+          tone: 'success',
+          icon: '\ud83e\udd5a',
+          dedupeKey: `egg:${state.nextPokemonId}`,
+        }
+      )
     }
     case 'SET_ALWAYS_CATCH_SHINIES':
       return {
@@ -2385,7 +2444,7 @@ export function gameReducer(state, action) {
           pendingEvents: [],
           currentEventIndex: 0,
           enemyPokemon: null,
-          playerPokemon: state.party.find((member) => member.currentHp > 0) ?? state.party[0] ?? state.playerPokemon,
+          playerPokemon: state.party.find((member) => isBattleReady(member)) ?? state.party[0] ?? state.playerPokemon,
           activePlayerPokemonIndex: 0,
           trainerBattle: null,
           bossBattle: null,

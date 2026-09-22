@@ -208,6 +208,10 @@ type GameState = {
   musicEnabled: boolean
   /** Sound effects for notable events (off by default). */
   sfxEnabled: boolean
+  /** Challenge: wild encounters roll a random species. */
+  challengeRandomizer: boolean
+  /** Challenge: wild encounter levels match your active Pokemon. */
+  challengeLevelScale: boolean
   nextPokemonId: number
   money: number
   inventory: Record<string, number>

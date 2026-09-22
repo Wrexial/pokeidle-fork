@@ -203,6 +203,34 @@ export function SettingsModal({ onClose }) {
                     children: [
                       jsx('div', {
                         className: 'settings-section-title',
+                        children: 'Challenge Modes',
+                      }),
+                      jsx('p', {
+                        className: 'settings-hint',
+                        children:
+                          'Optional hard-mode rules. Randomizer rolls a random species on every wild encounter; Level Scaling makes wild Pokemon match your active Pokemon\u2019s level so you cannot out-level content.',
+                      }),
+                      jsx('button', {
+                        className: `settings-toggle-btn${state.challengeRandomizer ? ' active' : ''}`,
+                        onClick: () => dispatch({ type: 'TOGGLE_CHALLENGE_RANDOMIZER' }),
+                        children: state.challengeRandomizer
+                          ? 'Randomizer: ON'
+                          : 'Randomizer: OFF',
+                      }),
+                      jsx('button', {
+                        className: `settings-toggle-btn${state.challengeLevelScale ? ' active' : ''}`,
+                        onClick: () => dispatch({ type: 'TOGGLE_CHALLENGE_LEVEL_SCALE' }),
+                        children: state.challengeLevelScale
+                          ? 'Level Scaling: ON'
+                          : 'Level Scaling: OFF',
+                      }),
+                    ],
+                  }),
+                  jsxs('div', {
+                    className: 'settings-section',
+                    children: [
+                      jsx('div', {
+                        className: 'settings-section-title',
                         children: 'Audio',
                       }),
                       jsx('p', {

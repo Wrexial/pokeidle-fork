@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.22**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.23**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -27,9 +27,8 @@ button, #2b natures, #14 the `node --test` suite, #5 daily events, and #16's
 achievement rewards, map QoL, release rewards and notifications. The remaining
 items, best return first:
 
-1. **#16 More ideas (grab bag)** — mostly S · ★★★ — still open: challenge
-   modes (Nuzlocke / monotype / randomizer), a larger-text option and a
-   performance pass.
+1. **#16 More ideas (grab bag)** — mostly S · ★★★ — still open: Nuzlocke /
+   monotype challenge modes, a larger-text option and a performance pass.
 
 ### Tier 2 — High impact, worth the effort (medium–large)
 
@@ -317,8 +316,11 @@ Smaller or more speculative, roughly highest-value first:
       the tab is hidden, plus a "while you were away" summary on return. Shipped
       in 0.9.8 (browser alerts are foreground-only until #7 adds offline
       progress).
-- [ ] **Challenge modes** — Nuzlocke, monotype, randomizer, or a level-scaling
-      toggle; big replay value from flags on the existing state.
+- [x] **Challenge modes: Randomizer & Level Scaling** — toggles in Settings that
+      roll random wild species / match wild levels to your active Pokemon.
+      Shipped 0.9.23.
+- [ ] **Challenge modes: Nuzlocke / monotype** — permanent-faint and single-type
+      runs still open.
 - [x] **Form-changing items** — reversible transforms now use their canonical,
       **reusable** items (Rotom Catalog, Gracidea, Meteorite, DNA Splicers, …)
       sold in the Reward Shop instead of a level gate; `START_EVOLUTION` leaves
@@ -1198,6 +1200,9 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.9.23 (challenge modes): Settings gained Randomizer (random wild species) and
+Level Scaling (wild levels match your active Pokemon) hard-mode toggles.
 
 0.9.22 (collapsible box search): the box search/filters now sit behind a Search
 button, and dragging a filtered Pokemon into the party works again.

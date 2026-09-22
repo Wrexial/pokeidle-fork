@@ -1,10 +1,22 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.9.22'
+export const GAME_VERSION = '0.9.23'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.9.23',
+      subtitle: 'Challenge Modes',
+      sections: [
+        {
+          heading: 'Challenge Modes',
+          items: [
+            'New optional hard-mode toggles in Settings: Randomizer rolls a random species on every wild encounter, and Level Scaling makes wild Pokemon match your active Pokemon\u2019s level so you cannot out-level content',
+          ],
+        },
+      ],
+    },
     {
       version: '0.9.22',
       subtitle: 'Collapsible Box Search',

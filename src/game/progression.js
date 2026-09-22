@@ -512,15 +512,49 @@ export function resolveRoamer(regionId, pokedexSeen, pokedexCaught, completedGen
   }
 }
 
+/** Species eligible for Randomizer encounters (national dex, no legendaries). */
+const RANDOMIZER_SPECIES = Object.keys(pokemonSpecies).filter((key) => {
+  const species = pokemonSpecies[key]
+  return species.id > 0 && species.id <= 1025 && !species.legendary
+})
+
+/**
+ * A Randomizer wild encounter: any eligible species at the route's level band.
+ * @param {EncounterData} encounterData
+ * @param {Set<number>} completedGenerationSet
+ * @param {number} shinyBonus
+ * @param {number} levelOverride
+ */
+function resolveRandomEncounter(encounterData, completedGenerationSet, shinyBonus, levelOverride) {
+  const speciesKey =
+      RANDOMIZER_SPECIES[Math.floor(Math.random() * RANDOMIZER_SPECIES.length)] ??
+      encounterData.encounters[0].speciesKey,
+    minLevel = Math.min(...encounterData.encounters.map((encounter) => encounter.minLevel)),
+    maxLevel = Math.max(...encounterData.encounters.map((encounter) => encounter.maxLevel)),
+    level = levelOverride || minLevel + Math.floor(Math.random() * (maxLevel - minLevel + 1))
+  return {
+    species: pokemonSpecies[speciesKey],
+    speciesKey,
+    level,
+    isShiny: checkShinyOdds(
+      Math.max(1, Math.round(shinyOddsForSpecies(speciesKey, completedGenerationSet) / shinyBonus))
+    ),
+  }
+}
+
 /**
  * @param {EncounterData} encounterData
  * @param {{ speciesKey: string, multiplier: number }[]} modifiers
  * @param {Set<number>} completedGenerationSet
  * @param {{ speciesKey: string | null, count: number } | undefined} [shinyChain]
  * @param {number} [shinyBonus] Multiplier on shiny odds from a daily event.
+ * @param {boolean} [randomize] Randomizer challenge: pick any species.
+ * @param {number} [levelOverride] Level-scaling challenge: force this level.
  * @returns {{ species: Species, speciesKey: string, level: number, isShiny: boolean, isRoamer?: boolean }}
  */
-export function resolvePokemonEncounter(encounterData, modifiers, completedGenerationSet, shinyChain, shinyBonus = 1) {
+export function resolvePokemonEncounter(encounterData, modifiers, completedGenerationSet, shinyChain, shinyBonus = 1, randomize = !1, levelOverride = 0) {
+  if (randomize)
+    return resolveRandomEncounter(encounterData, completedGenerationSet, shinyBonus, levelOverride)
   const weightedEncounters = encounterData.encounters.map((encounter) => {
       const modifier = modifiers?.find((candidate) => candidate.speciesKey === encounter.speciesKey)
       return modifier
@@ -535,6 +569,7 @@ export function resolvePokemonEncounter(encounterData, modifiers, completedGener
   for (const encounter of weightedEncounters)
     if (((roll -= encounter.weight), roll <= 0)) {
       const level =
+        levelOverride ||
         encounter.minLevel + Math.floor(Math.random() * (encounter.maxLevel - encounter.minLevel + 1))
       const chainMultiplier = shinyChainMultiplier(encounter.speciesKey, shinyChain)
       return {
@@ -556,7 +591,7 @@ export function resolvePokemonEncounter(encounterData, modifiers, completedGener
   return {
     species: pokemonSpecies[fallback.speciesKey],
     speciesKey: fallback.speciesKey,
-    level: fallback.minLevel,
+    level: levelOverride || fallback.minLevel,
     isShiny: checkShinyOdds(
       Math.max(
         1,

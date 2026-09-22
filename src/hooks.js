@@ -297,7 +297,11 @@ export function useGameLoop() {
                 activeModifierMultipliers,
                 completedGenerationSet,
                 currentGameState.shinyChain,
-                dailyShinyBonus
+                dailyShinyBonus,
+                currentGameState.challengeRandomizer,
+                currentGameState.challengeLevelScale
+                  ? currentGameState.playerPokemon?.level ?? 0
+                  : 0
               ),
             pokemonBaseStats = calculatePokemonStats(
               spawningPokemonData.species,

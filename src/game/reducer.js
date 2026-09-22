@@ -100,6 +100,10 @@ export const initialGameState = {
   musicEnabled: !1,
   /** Sound effects for notable events (on by default). */
   sfxEnabled: !0,
+  /** Challenge: wild encounters roll a random species. */
+  challengeRandomizer: !1,
+  /** Challenge: wild encounter levels match your active Pokemon. */
+  challengeLevelScale: !1,
   raidCooldownEnd: null,
   raidLegendary: null,
   raidRegion: null,
@@ -2426,6 +2430,16 @@ export function gameReducer(state, action) {
       return {
         ...state,
         sfxEnabled: !state.sfxEnabled,
+      }
+    case 'TOGGLE_CHALLENGE_RANDOMIZER':
+      return {
+        ...state,
+        challengeRandomizer: !state.challengeRandomizer,
+      }
+    case 'TOGGLE_CHALLENGE_LEVEL_SCALE':
+      return {
+        ...state,
+        challengeLevelScale: !state.challengeLevelScale,
       }
     case 'BUY_REWARD_ITEM': {
       const { itemId, cost } = action.payload

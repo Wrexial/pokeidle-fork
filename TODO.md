@@ -46,54 +46,56 @@ working order, and the numbered sections as the details.
 13. **#5 Daily / periodic events** — S–M · ★★★ — cheap engagement loop.
 14. **#16 More ideas (grab bag)** — mostly S · ★★★ — mine the quick ones
     (achievement rewards, release/selling, map QoL, notifications).
+15. **#41 New additions in the box** — S · ★★ — in "New" sort, a caught or
+    hatched Pokemon should join the front of the box, not the end.
 
 ### Tier 2 — High impact, worth the effort (medium–large)
 
-15. **#7 Offline / idle progress** — M–L · ★★★★★ — the biggest missing *idle*
+16. **#7 Offline / idle progress** — M–L · ★★★★★ — the biggest missing *idle*
     feature; a returning player currently gets nothing.
-16. **#8 Pokémon management / IV checker** — M · ★★★★½ — IVs are generated
+17. **#8 Pokémon management / IV checker** — M · ★★★★½ — IVs are generated
     but invisible; box search, nicknames and lock are all high-use.
-17. **#20 Honey/Repel DexNav hunting** — M · ★★★★½ — turns the existing
+18. **#20 Honey/Repel DexNav hunting** — M · ★★★★½ — turns the existing
     shiny chain into a usable system.
-18. **#24 Move data pass** — M–L · ★★★★½ — ~290 moves currently do nothing;
+19. **#24 Move data pass** — M–L · ★★★★½ — ~290 moves currently do nothing;
     do it in slices (healing/screens/setup first).
-19. **#25 Battle engine pass** — M–L · ★★★★½ — pairs with #24; AI + healing +
+20. **#25 Battle engine pass** — M–L · ★★★★½ — pairs with #24; AI + healing +
     multi-hit first.
-20. **#2a Abilities** (with **#2c Held items**) — L · ★★★★★ / ★★★★ — the
+21. **#2a Abilities** (with **#2c Held items**) — L · ★★★★★ / ★★★★ — the
     biggest remaining battle-depth feature; natures (#2b) are already in
     Tier 1.
-21. **#36 Zones (route chunks)** — M–L · ★★★★ — lets Alola/Galar/Paldea map
+22. **#36 Zones (route chunks)** — M–L · ★★★★ — lets Alola/Galar/Paldea map
     as chunks of areas instead of a single-route-wide graph.
-22. **#35 More Galar areas** — M · ★★★½ — Galar is the thinnest region map;
+23. **#35 More Galar areas** — M · ★★★½ — Galar is the thinnest region map;
     add Wild Area sub-areas and DLC land, mostly data.
-23. **#28 More region areas (DLC, caves, POIs)** — L · ★★★★½ — real content
+24. **#28 More region areas (DLC, caves, POIs)** — L · ★★★★½ — real content
     (Crown Tundra, Kitakami, landmark caves); data-heavy. Pairs with #35/#36.
-24. **#38 Clean up the Raid Islands** — M · ★★★½ — later generations leave
+25. **#38 Clean up the Raid Islands** — M · ★★★½ — later generations leave
     50–60 species on one raid pool, turning raids into a shapeless grab bag.
-25. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of
+26. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of
     Armor, Crown Tundra, Kitakami and the Terarium to first-class regions.
-26. **#40 Alola / Galar / Paldea league structures** — M · ★★★½ — trials, the
+27. **#40 Alola / Galar / Paldea league structures** — M · ★★★½ — trials, the
     Champion Cup and any-order gyms don't fit the 8-gyms + E4 model.
-27. **#18 Better settings** — M · ★★★★ — centralises QOL toggles and the
+28. **#18 Better settings** — M · ★★★★ — centralises QOL toggles and the
     export/import from #15.
 
 ### Tier 3 — Medium effort, medium gain
 
-28. **#3 Daycare inheritance** — M · ★★★
-29. **#6 Friendship / happiness** — M · ★★★
-30. **#9 Move tutor / TMs** — M · ★★★
-31. **#11 NPC gifts & static encounters** — M · ★★★
-32. **#17 Pokéball variants** — M · ★★★
-33. **#27 Gender-specific sprites** — M · ★★★ (assets are half-there)
-34. **#29 Minigames** — M–L · ★★★ (small per minigame once one exists)
-35. **#4 In-battle Mega evolution** — M–L · ★★★
-36. **#32 Battle Tower tuning** — M · ★★★½ — auto-climb, sane Victory Token
+29. **#3 Daycare inheritance** — M · ★★★
+30. **#6 Friendship / happiness** — M · ★★★
+31. **#9 Move tutor / TMs** — M · ★★★
+32. **#11 NPC gifts & static encounters** — M · ★★★
+33. **#17 Pokéball variants** — M · ★★★
+34. **#27 Gender-specific sprites** — M · ★★★ (assets are half-there)
+35. **#29 Minigames** — M–L · ★★★ (small per minigame once one exists)
+36. **#4 In-battle Mega evolution** — M–L · ★★★
+37. **#32 Battle Tower tuning** — M · ★★★½ — auto-climb, sane Victory Token
     payout, and harder/faster teams (6 fully evolved, late legendaries).
 
 ### Tier 4 — Big and low-return, defer
 
-37. **#10 Weather & terrain** — M · ★★½ (nice depth, no urgency)
-38. **#19 Online sync** — L · ★★★ — the project's first backend; needs a
+38. **#10 Weather & terrain** — M · ★★½ (nice depth, no urgency)
+39. **#19 Online sync** — L · ★★★ — the project's first backend; needs a
     design doc and real ops for modest player value today.
 
 ---
@@ -1168,6 +1170,32 @@ gates, league construction, `BADGE_NAMES` / `GYM_TOWNS`), `public/data/regions.j
 
 Effort: **medium** (mostly data + panel copy; the Paldea any-order gate is the
 only real progression change).
+
+## 41. Box "New" sort should add new Pokemon at the front
+
+New Pokemon are always **appended** to `state.box` (`[...state.box, newPokemon]`
+in `CATCH_POKEMON`, `WITHDRAW_DAYCARE` and `HATCH_DAYCARE_EGG`). The box is only
+re-sorted when `SET_BOX_SORT` cycles the mode, so with the **New** (`newest`)
+sort selected a fresh catch/hatch shows up at the *end* of the list — the
+opposite of the sort's intent, and easy to miss once the box is large.
+
+- [ ] Add a small helper (e.g. `insertIntoBox(box, pokemon, boxSort)`) that
+      **prepends** when `boxSort === 'newest'` and appends otherwise, and use it
+      at the three append sites: `CATCH_POKEMON`, `WITHDRAW_DAYCARE`,
+      `HATCH_DAYCARE_EGG`.
+- [ ] Prefer the targeted prepend over re-running `sortBoxMembers` on every add —
+      that would also wipe the player's manual `REORDER_BOX` drag order in the
+      other sort modes.
+- [ ] Keep manual reordering intact: only "New" mode auto-prepends; other modes
+      keep appending so a deliberate drag order survives new catches.
+
+Relevant code: the catch handler (`CATCH_POKEMON`), `WITHDRAW_DAYCARE`,
+`HATCH_DAYCARE_EGG`, `SET_BOX_SORT` / `REORDER_BOX` (`src/game/reducer.js`),
+`sortBoxMembers` / `nextBoxSortMode` (`src/game/pokemon.js`), `BOX_SORT_OPTIONS`
+(`src/data/ui.js`) and `box-panel.js`.
+
+Effort: **small** (one helper + three call sites, or a one-line conditional at
+each).
 
 ---
 

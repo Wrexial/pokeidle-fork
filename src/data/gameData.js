@@ -1,5 +1,7 @@
 // Split from the former assets/index.js — see tools/decompile/split-modules.mjs
 
+import { applyMoveOverrides } from './move-effects.js'
+
 async function startApp() {
   await window.gameDataReady
 
@@ -34,6 +36,10 @@ export let encounterData = /** @type {Record<string, EncounterData>} */ (
 )
 
 export let moveData = /** @type {Record<string, Move>} */ (loadedGameData.moveData)
+
+// Enrich the extracted move table with healing/multi-hit/crit/priority data the
+// JSON doesn't carry (see src/data/move-effects.js).
+applyMoveOverrides(moveData)
 
 export let trainerClasses = /** @type {Record<string, string>} */ (loadedGameData.trainerClasses)
 

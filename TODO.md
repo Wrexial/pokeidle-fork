@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.10.1**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.11.0**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -39,9 +39,12 @@ items, best return first:
 18. ✅ **#20 Honey/Repel DexNav hunting** — shipped 0.10.0 (Honey/Repel lock
     and protect a 4+ chain).
 19. **#24 Move data pass** — M–L · ★★★★½ — ~290 moves currently do nothing;
-    do it in slices (healing/screens/setup first).
+    do it in slices (healing/screens/setup first). **First slice shipped in
+    0.11.0**: healing, multi-hit, high-crit, Protect, priority/data fixes;
+    screens, hazards and the rest of the utility set are still open.
 20. **#25 Battle engine pass** — M–L · ★★★★½ — pairs with #24; AI + healing +
-    multi-hit first.
+    multi-hit first. **First slice shipped in 0.11.0**: the auto-battler and
+    trainer AI now heal and set up; hazards/screens/accuracy stages still open.
 21. **#2a Abilities** (with **#2c Held items**) — L · ★★★★★ / ★★★★ — the
     biggest remaining battle-depth feature; natures (#2b) are already in
     Tier 1.
@@ -429,58 +432,55 @@ and `victoryTokens`.
 
 Effort: **small**.
 
-## 24. Move data pass
+## 24. Move data pass (first slice shipped in 0.11.0)
 
 `possible-moves.json` only carries `name / type / category / power / accuracy /
 pp / priority / effect`, and the engine understands just three effect types
-(`statChange`, `drain`, `status`). That leaves a lot of dead data and wrong
+(`statChange`, `drain`, `status`). That left a lot of dead data and wrong
 behaviour.
 
-- [ ] ~290 power-0 moves have **no effect** and do literally nothing (Recover,
-      Roost, Rest, Protect, Reflect/Light Screen, Spikes/Stealth Rock, Swords
-      Dance, Taunt, …). Add effects for the important ones — healing, screens,
-      hazards, protect, setup, etc. Either fetch effect data (PokéAPI /
-      Showdown) or map move names to effects.
-- [ ] Multi-hit moves (Bullet Seed, Icicle Spear, Rock Blast, Double Kick, …)
-      are encoded as a single hit; add a hit-count range.
-- [ ] High critical-hit-ratio moves (Slash, Razor Leaf, Night Slash, …) aren't
-      flagged; add a crit stage.
-- [ ] Audit `priority` — e.g. Water Shuriken is stored as 0 but is +1, and
-      other priority moves (Quick Attack, Mach Punch, Extreme Speed) may be
-      wrong.
-- [ ] Data errors: the 3 G-Max moves (`gMaxDrumSolo`/`gMaxFireball`/
-      `gMaxHydrosnipe`) have `category: 'status'` with power 160.
+**Shipped in 0.11.0** via `src/data/move-effects.js` (merged onto `moveData` in
+`gameData.js`): a `heal` effect (Recover/Roost/Synthesis/Rest/…), `multiHit`
+counts, `critStage` for high-crit moves, `protect`, plus corrections for Calm
+Mind's stat keys, the G-Max categories and several priority values.
+
+Still open:
+
+- [ ] The remaining no-op status moves: screens (Reflect/Light Screen/Aurora
+      Veil), hazards (Stealth Rock/Spikes/Toxic Spikes/Sticky Web), Taunt,
+      Substitute, wish/protect variants, weather setters, etc.
+- [ ] Re-check the rest of the priority table (the doubles-only moves).
 - [ ] PP is stored but unused; decide whether to implement it or drop it.
 - [ ] Z-moves / G-Max moves are otherwise dead data — decide keep/drop.
 
 Effort: **medium–large** (the effect set is the bulk of it).
 
-## 25. Battle engine pass
+## 25. Battle engine pass (first slice shipped in 0.11.0)
 
 `resolveBattleTurn` (`src/game/combat.js`) is fairly complete for damage +
-status + stat changes, but move selection and several mechanics are missing.
+status + stat changes, but move selection and several mechanics were missing.
 
-- [ ] **AI**: `chooseBestMove` only ever considers damaging moves, so trainers
-      never heal, set hazards, or use status/setup moves (and `chooseRandomMove`
-      for wilds prefers a damaging move). Add a real chooser: heal when low,
-      use useful utility moves, consider type effectiveness, maybe switch.
-- [ ] **Healing moves** (Recover / Roost / Rest / Synthesis / …) need a `heal`
-      effect and HP restore (see #24).
-- [ ] **Multi-hit** execution (roll 2-5 hits) — see #24.
-- [ ] **Critical-hit stages** and the high-crit moves / Scope Lens.
-- [ ] **Protect / Detect / Substitute** and move blocking.
+**Shipped in 0.11.0**: healing (`heal` effect, including Rest's self-sleep),
+multi-hit execution, critical-hit stages, Protect/Detect blocking, hyphenated
+stat-key normalisation, and a `chooseMoveForBattle` chooser so the auto-battler
+and trainers heal when low and set up early.
+
+Still open:
+
 - [ ] **Entry hazards & screens** (Stealth Rock, Spikes, Reflect, Light Screen,
-      Aurora Veil).
+      Aurora Veil) and the remaining utility moves (Taunt, Substitute, weather).
 - [ ] **Accuracy / evasion stat stages** (currently only accuracy from the move
       itself, no stages).
 - [ ] Additional statuses if added to the data — paralysis, confusion, badly
       poisoned (data currently only has poison/burn/freeze/sleep/flinch).
 - [ ] Weather / terrain — see #10.
 - [ ] Ability / held-item hooks — see #2.
-- [ ] A damage / crit-rate **balance pass** (crit is a flat 1/16 today).
+- [ ] A damage / crit-rate **balance pass**.
+- [ ] AI polish: switch on a bad matchup, and don't spam setup when already
+      boosted.
 - [ ] Battle polish: move animations / damage numbers / hit feedback — see #16.
 
-Effort: **medium–large** (do it in slices; AI + healing + multi-hit first).
+Effort: **medium–large** (do it in slices).
 
 ## 26. README + GitHub "About"
 
@@ -1152,6 +1152,11 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.11.0 (battle depth): healing moves work, multi-hit and high-crit moves are
+modelled, Protect blocks with +4 priority, Calm Mind/G-Max/priority data bugs
+are fixed, and the auto-battler and trainer AI now heal and set up. First slice
+of #24/#25.
 
 0.10.1 (Master Ball discipline): the throw button only appears for legendaries
 or a hard-to-catch species you have never registered.

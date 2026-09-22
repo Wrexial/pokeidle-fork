@@ -1,10 +1,31 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.10.1'
+export const GAME_VERSION = '0.11.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.11.0',
+      subtitle: 'Battle Depth',
+      sections: [
+        {
+          heading: 'Moves',
+          items: [
+            'Healing moves (Recover, Roost, Synthesis, Rest, \u2026) now actually restore HP',
+            'Multi-hit moves (Bullet Seed, Icicle Spear, Rock Blast, \u2026) strike 2\u20135 times, and high-crit moves (Slash, Stone Edge, Night Slash, \u2026) now have their raised critical-hit rate',
+            'Protect, Detect, King\u2019s Shield and friends now block attacks, with +4 priority',
+            'Calm Mind now raises Sp. Atk / Sp. Def (it was raising Attack / Defense), the G-Max moves deal physical/special damage as intended, and priority was corrected for Extreme Speed, Fake Out, Feint and Water Shuriken',
+          ],
+        },
+        {
+          heading: 'Battle AI',
+          items: [
+            'Your auto-battler and trainers now heal when low and set up stat boosts early instead of only ever choosing the strongest attack',
+          ],
+        },
+      ],
+    },
     {
       version: '0.10.1',
       subtitle: 'Master Ball Discipline',

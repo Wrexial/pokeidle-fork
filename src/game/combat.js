@@ -158,6 +158,38 @@ export function statStageMultiplier(stage) {
 }
 
 /**
+ * Critical-hit chance by crit stage: 0 = 1/16, +1 = 1/8, +2 = 1/2, +3 = always.
+ */
+const CRIT_CHANCES = [1 / 16, 1 / 8, 1 / 2, 1]
+
+/**
+ * The game's stat keys are camelCase (`spAttack`); extracted move data sometimes
+ * uses Showdown's hyphenated names. Normalise before applying a stat change.
+ * @param {string} statKey
+ * @returns {string}
+ */
+function normalizeStatKey(statKey) {
+  return (
+    /** @type {Record<string, string>} */ ({
+      'special-attack': 'spAttack',
+      'special-defense': 'spDefense',
+      'sp-atk': 'spAttack',
+      'sp-def': 'spDefense',
+    })[statKey] ?? statKey
+  )
+}
+
+/**
+ * Whether a move targets its own user (heals, self-buffs, Protect), so a
+ * defender's Protect should not block it.
+ * @param {Move} moveDef
+ * @returns {boolean}
+ */
+function isSelfTargetedMove(moveDef) {
+  return moveDef.effect?.target === 'self' || moveDef.effect?.type === 'heal' || !!moveDef.protect
+}
+
+/**
  * @param {number} attackerLevel
  * @param {number} attack
  * @param {number} defense
@@ -166,9 +198,11 @@ export function statStageMultiplier(stage) {
  * @param {string[]} defenderTypes
  * @param {number} [attackerStage]
  * @param {number} [defenderStage]
+ * @param {number} [critStage]
+ * @param {boolean} [skipAccuracy]
  * @returns {{ damage: number, isCrit: boolean, effectiveness: number, effectivenessLabel: string | null }}
  */
-export function calculateDamage(attackerLevel, attack, defense, move, attackerTypes, defenderTypes, attackerStage = 0, defenderStage = 0) {
+export function calculateDamage(attackerLevel, attack, defense, move, attackerTypes, defenderTypes, attackerStage = 0, defenderStage = 0, critStage = 0, skipAccuracy = !1) {
   if (move.power === 0)
     return {
       damage: 0,
@@ -176,7 +210,7 @@ export function calculateDamage(attackerLevel, attack, defense, move, attackerTy
       effectiveness: 1,
       effectivenessLabel: null,
     }
-  if (Math.random() * 100 >= move.accuracy)
+  if (!skipAccuracy && Math.random() * 100 >= move.accuracy)
     return {
       damage: 0,
       isCrit: !1,
@@ -186,7 +220,8 @@ export function calculateDamage(attackerLevel, attack, defense, move, attackerTy
   const effectiveAttack = Math.floor(attack * statStageMultiplier(attackerStage)),
     effectiveDefense = Math.max(1, Math.floor(defense * statStageMultiplier(defenderStage))),
     baseDamage = Math.floor((Math.floor((2 * attackerLevel) / 5 + 2) * move.power * effectiveAttack) / effectiveDefense / 50 + 2),
-    isCrit = Math.random() < 1 / 16,
+    critChance = CRIT_CHANCES[Math.min(3, Math.max(0, critStage))] ?? CRIT_CHANCES[0],
+    isCrit = Math.random() < critChance,
     critMultiplier = isCrit ? 2 : 1,
     stabMultiplier = attackerTypes.includes(move.type) ? 1.5 : 1,
     effectiveness = getTypeMultiplier(move.type, defenderTypes),
@@ -283,6 +318,45 @@ export function chooseBestMove(moves, attackerLevel, attack, spAttack, attackerT
 }
 
 /**
+ * Pick a move for a battler that isn't a wild random picker: heal when low,
+ * set up early, otherwise deal the most damage. Powers both the auto-battler
+ * and the trainer AI.
+ * @param {BattlePokemon} attacker
+ * @param {BattlePokemon} defender
+ * @returns {{ moveId: string, move: Move }}
+ */
+export function chooseMoveForBattle(attacker, defender) {
+  const usableMoves = attacker.moves.filter((moveId) => moveData[moveId]),
+    hpFraction = attacker.maxHp > 0 ? attacker.currentHp / attacker.maxHp : 1,
+    healMove = usableMoves.find((moveId) => moveData[moveId].effect?.type === 'heal')
+  if (hpFraction < 0.45 && healMove) return { moveId: healMove, move: moveData[healMove] }
+  if (hpFraction > 0.6 && Math.random() < 0.5) {
+    const setupMove = usableMoves.find((moveId) => {
+      const effect = moveData[moveId].effect
+      if (effect?.type !== 'statChange' || effect.target !== 'self') return false
+      const stages = attacker.statStages ?? {}
+      return Object.entries(effect.changes).some(([statKey, delta]) => {
+        const key = normalizeStatKey(statKey)
+        return delta > 0 && (stages[key] ?? 0) < 6
+      })
+    })
+    if (setupMove) return { moveId: setupMove, move: moveData[setupMove] }
+  }
+  return chooseBestMove(
+    attacker.moves,
+    attacker.level,
+    attacker.attack,
+    attacker.spAttack,
+    attacker.types,
+    defender.types,
+    defender.defense,
+    defender.spDefense,
+    attacker.statStages,
+    defender.statStages
+  )
+}
+
+/**
  * @param {string[]} moves
  * @returns {{ moveId: string, move: Move }}
  */
@@ -327,6 +401,8 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1) {
   ;(player.statStages || (player.statStages = {}), enemy.statStages || (enemy.statStages = {}))
   // Flinches only last the turn they were inflicted; clear any left over.
   ;(player.flinch = !1, enemy.flinch = !1)
+  // Protect only lasts the turn it is used; clear any left over.
+  ;(player.protecting = !1, enemy.protecting = !1)
   const playerMustRecharge = player.mustRecharge,
     enemyMustRecharge = enemy.mustRecharge
   ;(playerMustRecharge && (player.mustRecharge = !1), enemyMustRecharge && (enemy.mustRecharge = !1))
@@ -334,18 +410,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1) {
   if (playerMustRecharge) ((playerMoveId = player.moves[0]), (playerMove = moveData[playerMoveId]))
   else if (player.lockedMove) ((playerMoveId = player.lockedMove), (playerMove = moveData[playerMoveId]))
   else {
-    const bestMove = chooseBestMove(
-      player.moves,
-      player.level,
-      player.attack,
-      player.spAttack,
-      player.types,
-      enemy.types,
-      enemy.defense,
-      enemy.spDefense,
-      player.statStages,
-      enemy.statStages
-    )
+    const bestMove = chooseMoveForBattle(player, enemy)
     ;((playerMoveId = bestMove.moveId), (playerMove = bestMove.move))
   }
   let enemyMoveId, enemyMove
@@ -353,18 +418,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1) {
   else if (enemy.lockedMove) ((enemyMoveId = enemy.lockedMove), (enemyMove = moveData[enemyMoveId]))
   else {
     const bestMove = isTrainerBattle
-      ? chooseBestMove(
-          enemy.moves,
-          enemy.level,
-          enemy.attack,
-          enemy.spAttack,
-          enemy.types,
-          player.types,
-          player.defense,
-          player.spDefense,
-          enemy.statStages,
-          player.statStages
-        )
+      ? chooseMoveForBattle(enemy, player)
       : chooseRandomMove(enemy.moves)
     ;((enemyMoveId = bestMove.moveId), (enemyMove = bestMove.move))
   }
@@ -443,25 +497,40 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1) {
     const moveDef = moveData[attack.moveId]
     if (!moveDef) continue
     if (
-      (attack.attacker.lockedMove &&
-        attack.attacker.lockTurnsRemaining !== void 0 &&
-        attack.attacker.lockTurnsRemaining > 0 &&
-        attack.attacker.lockTurnsRemaining--,
+      attack.attacker.lockedMove &&
+      attack.attacker.lockTurnsRemaining !== void 0 &&
+      attack.attacker.lockTurnsRemaining > 0 &&
+      attack.attacker.lockTurnsRemaining--
+    ) {}
+    events.push({
+      type: 'attack',
+      message: `${attack.attacker.name} used ${moveDef.name}!`,
+      data: {
+        target: attack.isPlayer ? 'enemy' : 'player',
+      },
+    })
+    // Protect blocks anything aimed at the protected Pokemon this turn.
+    if (attack.defender.protecting && !isSelfTargetedMove(moveDef)) {
       events.push({
-        type: 'attack',
-        message: `${attack.attacker.name} used ${moveDef.name}!`,
-        data: {
-          target: attack.isPlayer ? 'enemy' : 'player',
-        },
-      }),
-      moveDef.power === 0)
-    ) {
+        type: 'protect',
+        message: `${attack.defender.name} protected itself!`,
+      })
+      continue
+    }
+    if (moveDef.power === 0) {
+      if (moveDef.protect) {
+        attack.attacker.protecting = !0
+        events.push({
+          type: 'protect',
+          message: `${attack.attacker.name} protected itself!`,
+        })
+      }
       if (moveDef.effect?.type === 'statChange') {
         const statTarget = moveDef.effect.target === 'self' ? attack.attacker : attack.defender,
           side = statTarget === player ? 'player' : 'enemy'
         statTarget.statStages || (statTarget.statStages = {})
         for (const [statKey, delta] of Object.entries(moveDef.effect.changes)) {
-          const key = statKey,
+          const key = normalizeStatKey(statKey),
             currentStage = statTarget.statStages[key] ?? 0,
             newStage = clampStatStage(currentStage + delta)
           statTarget.statStages[key] = newStage
@@ -480,6 +549,29 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1) {
         (moveDef.effect.chance === void 0 || Math.random() * 100 < moveDef.effect.chance)
       )
         applyStatus(attack.defender, moveDef.effect.status, events, !attack.isPlayer)
+      else if (moveDef.effect?.type === 'heal') {
+        const healPercent = moveDef.effect.percentage ?? 50,
+          healed = Math.min(
+            attack.attacker.maxHp,
+            attack.attacker.currentHp +
+              Math.max(1, Math.floor((attack.attacker.maxHp * healPercent) / 100))
+          ),
+          gained = healed - attack.attacker.currentHp
+        attack.attacker.currentHp = healed
+        events.push({
+          type: 'heal',
+          message:
+            gained > 0
+              ? `${attack.attacker.name} recovered ${gained} HP!`
+              : `${attack.attacker.name} had no HP to recover!`,
+          data: {
+            target: attack.isPlayer ? 'player' : 'enemy',
+            hpAfter: healed,
+            hpMax: attack.attacker.maxHp,
+          },
+        })
+        moveDef.effect.status && applyStatus(attack.attacker, moveDef.effect.status, events, attack.isPlayer)
+      }
       continue
     }
     const attackStat =
@@ -501,7 +593,8 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1) {
         attack.attacker.types,
         attack.defender.types,
         attackerStage,
-        defenderStage
+        defenderStage,
+        moveDef.critStage ?? 0
       )
     if (damageResult.effectivenessLabel === 'miss') {
       if (
@@ -538,19 +631,47 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1) {
       }
       continue
     }
+    // Multi-hit moves strike 2-5 (or a fixed 2) times; accuracy is checked
+    // once, then each extra hit rolls its own damage and crit.
+    let hitCount = 1,
+      totalDamage = damageResult.damage,
+      anyCrit = damageResult.isCrit
+    if (moveDef.multiHit) {
+      hitCount =
+        moveDef.multiHit[0] +
+        Math.floor(Math.random() * (moveDef.multiHit[1] - moveDef.multiHit[0] + 1))
+      for (let hit = 1; hit < hitCount; hit++) {
+        const hitResult = calculateDamage(
+          attack.attacker.level,
+          attackStat,
+          defenseStat,
+          moveDef,
+          attack.attacker.types,
+          attack.defender.types,
+          attackerStage,
+          defenderStage,
+          moveDef.critStage ?? 0,
+          !0
+        )
+        totalDamage += hitResult.damage
+        anyCrit = anyCrit || hitResult.isCrit
+      }
+    }
     if (
-      ((attack.defender.currentHp = Math.max(0, attack.defender.currentHp - damageResult.damage)),
+      ((attack.defender.currentHp = Math.max(0, attack.defender.currentHp - totalDamage)),
       events.push({
         type: 'damage',
-        message: `${attack.defender.name} took ${damageResult.damage} damage!`,
+        message: `${attack.defender.name} took ${totalDamage} damage!${
+          hitCount > 1 ? ` (${hitCount} hits)` : ''
+        }`,
         data: {
           target: attack.isPlayer ? 'enemy' : 'player',
-          damage: damageResult.damage,
+          damage: totalDamage,
           hpAfter: attack.defender.currentHp,
           hpMax: attack.defender.maxHp,
         },
       }),
-      damageResult.isCrit &&
+      anyCrit &&
         events.push({
           type: 'critical',
           message: 'A critical hit!',
@@ -564,7 +685,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1) {
     )
       switch (moveDef.effect.type) {
         case 'recoil': {
-          const recoilDamage = Math.max(1, Math.floor(damageResult.damage * moveDef.effect.fraction))
+          const recoilDamage = Math.max(1, Math.floor(totalDamage * moveDef.effect.fraction))
           ;((attack.attacker.currentHp = Math.max(0, attack.attacker.currentHp - recoilDamage)),
             events.push({
               type: 'recoil',
@@ -594,7 +715,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1) {
           const attackerHpBefore = attack.attacker.currentHp,
             healAmount = Math.max(
               1,
-              Math.floor((damageResult.damage * (moveDef.effect.percentage ?? 50)) / 100)
+              Math.floor((totalDamage * (moveDef.effect.percentage ?? 50)) / 100)
             ),
             healed = Math.min(attack.attacker.maxHp, attackerHpBefore + healAmount)
           attack.attacker.currentHp = healed

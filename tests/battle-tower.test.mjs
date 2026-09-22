@@ -8,6 +8,7 @@ const data = installGameData()
 const { buildTowerTeam } = await import('../src/game/progression.js')
 const { createPokemon } = await import('../src/game/pokemon.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
+const { repairSave } = await import('../src/game/context.js')
 
 test('a tower team is always six distinct Pokemon', () => {
   for (const floor of [1, 5, 15, 30, 60]) {
@@ -109,5 +110,83 @@ test('losing a tower run ends it and returns to idle', () => {
     next = gameReducer(state, { type: 'BOSS_BATTLE_END', payload: { won: false, moneyDelta: 0 } })
   assert.equal(next.towerFloor, 0)
   assert.equal(next.phase, 'idle')
-  assert.equal(next.towerBest.kanto, 6)
+  assert.equal(next.towerBest.hoenn, 6)
+})
+
+test('a tower run is only offered in Hoenn', () => {
+  const inKanto = gameReducer(
+      { ...initialGameState, currentLocation: 'palletTown' },
+      { type: 'START_TOWER', payload: { floor: 1 } }
+    ),
+    inHoenn = gameReducer(
+      { ...initialGameState, currentLocation: 'hoenn-littleroot-town' },
+      { type: 'START_TOWER', payload: { floor: 1 } }
+    )
+  assert.equal(inKanto.towerFloor, 0)
+  assert.equal(inHoenn.towerFloor, 1)
+})
+
+test('a tower win always credits Hoenn, never the current region', () => {
+  const active = createPokemon('blaziken', 80, 'a'),
+    state = {
+      ...initialGameState,
+      party: [active],
+      playerPokemon: active,
+      activePlayerPokemonIndex: 0,
+      phase: 'victory',
+      currentLocation: 'palletTown',
+      towerFloor: 9,
+      bossBattle: {
+        bossId: 'tower',
+        bossType: 'tower',
+        trainerName: 'Tower Trainer (Floor 9)',
+        trainerClass: 'ace',
+        trainerTeam: [],
+        currentTrainerPokemonIndex: 0,
+        spriteKey: 'acetrainer',
+        region: 'kanto',
+      },
+    },
+    next = gameReducer(state, { type: 'BOSS_BATTLE_END', payload: { won: true, moneyDelta: 0 } })
+  assert.equal(next.towerBest.hoenn, 9)
+  assert.equal(next.towerBest.kanto, undefined)
+})
+
+/** A minimal but valid Hoenn save for repairSave. */
+function hoennSave() {
+  const mon = createPokemon('treecko', 10, 'a')
+  return {
+    version: 2,
+    playerPokemon: mon,
+    party: [mon],
+    box: [],
+    nextPokemonId: 2,
+    inventory: { pokeball: 5 },
+    startRegion: 'hoenn',
+    currentLocation: 'hoenn-littleroot-town',
+    currentRoute: 'hoenn-route-101',
+  }
+}
+
+test('repairSave consolidates legacy per-region tower records into Hoenn', () => {
+  const repaired = repairSave({
+    ...hoennSave(),
+    towerBest: { kanto: 12, hoenn: 7, johto: 3 },
+    towerFloor: 5,
+  })
+  assert.deepEqual(repaired.towerBest, { hoenn: 12 }, 'the best record moves to Hoenn')
+  assert.equal(repaired.towerFloor, 5, 'a Hoenn run is kept')
+})
+
+test('repairSave drops a tower run started in another region', () => {
+  const repaired = repairSave({
+    ...hoennSave(),
+    startRegion: 'kanto',
+    currentLocation: 'palletTown',
+    currentRoute: 'route1',
+    towerBest: { kanto: 9 },
+    towerFloor: 4,
+  })
+  assert.deepEqual(repaired.towerBest, { hoenn: 9 })
+  assert.equal(repaired.towerFloor, 0, 'a non-Hoenn run is discarded')
 })

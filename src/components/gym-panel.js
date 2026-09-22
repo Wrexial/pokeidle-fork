@@ -3,6 +3,7 @@
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { championData, elite4Data, gymLeaderData, mapData, regions } from '../data/gameData.js'
+import { BATTLE_TOWER_REGION } from '../data/config.js'
 import { useGame } from '../game/context.js'
 import { buildTrainerTeam, buildTowerTeam } from '../game/progression.js'
 
@@ -18,13 +19,16 @@ export function GymPanel({ onOpenShop }) {
     defeatedRegionGyms = regionGyms.filter((gym) => state.defeatedGyms.includes(gym.id)).length,
     allBadgesEarned = regionGyms.length > 0 && defeatedRegionGyms >= regionGyms.length,
     isLeagueRematch = state.defeatedChampions.includes(regionId),
+    // The Battle Tower lives in Hoenn only; other regions will get their own
+    // minigames instead.
+    showTower = isLeagueRematch && regionId === BATTLE_TOWER_REGION,
     // The Elite Four reset on each prestige, so they must be beaten again
     // before the region can be prestiged once more.
     allEliteFourBeaten =
       regionEliteFour.length > 0 &&
       regionEliteFour.every((member) => state.defeatedEliteFour.includes(member.id)),
     prestigeLevel = state.regionPrestige[regionId] ?? 0,
-    towerBest = state.towerBest[regionId] ?? 0,
+    towerBest = state.towerBest[BATTLE_TOWER_REGION] ?? 0,
     canFight = state.party.some((member) => member.currentHp > 0),
     isBusy = state.phase === 'evolving' || state.phase === 'healing',
     fightable = canFight && !isBusy
@@ -338,7 +342,7 @@ export function GymPanel({ onOpenShop }) {
             }),
           ],
         }),
-      isLeagueRematch &&
+      showTower &&
         jsxs('div', {
           className: 'gym-section tower-section',
           children: [

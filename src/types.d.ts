@@ -304,9 +304,9 @@ type GameState = {
   rewardedAchievements: string[]
   /** Times each region has been prestiged (map progress reset). */
   regionPrestige: Record<string, number>
-  /** Next Battle Tower floor to attempt (0 = not in a run). */
+  /** Next Battle Tower floor to attempt (0 = not in a run). Hoenn only. */
   towerFloor: number
-  /** Best Battle Tower floor cleared per region. */
+  /** Best Battle Tower floor cleared, keyed by region (Hoenn only). */
   towerBest: Record<string, number>
   victoryTokens: number
   battlesWonByLocation: Record<string, number>

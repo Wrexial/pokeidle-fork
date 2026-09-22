@@ -117,6 +117,13 @@ export const regionalStarters = {
 }
 
 export const starterSpecies = regionalStarters.kanto
+
+/**
+ * The region whose Battle Tower is the game's only one. Other regions are
+ * planned to get their own minigames instead, so `towerFloor`/`towerBest` are
+ * Hoenn-only and save repair consolidates any legacy per-region records here.
+ */
+export const BATTLE_TOWER_REGION = 'hoenn'
 /** @type {Record<string, number>} */
 export let trainerClassPayouts = {
   youngster: 16,

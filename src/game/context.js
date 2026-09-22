@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { jsx } from 'react/jsx-runtime'
-import { LEGACY_SAVE_KEYS, SAVE_BACKUP_KEY, SAVE_KEY, SAVE_VERSION } from '../data/config.js'
+import { BATTLE_TOWER_REGION, LEGACY_SAVE_KEYS, SAVE_BACKUP_KEY, SAVE_KEY, SAVE_VERSION } from '../data/config.js'
 import { dailyEventByKey, todayKey } from '../data/daily-events.js'
 import { activeItems, pokeBalls } from '../data/items.js'
 import {
@@ -382,7 +382,25 @@ function repairSave(saved) {
     ),
     rewardedAchievements = (
       Array.isArray(saved.rewardedAchievements) ? saved.rewardedAchievements : []
-    ).filter(/** @param {any} id */ (id) => achievementIds.has(id))
+    ).filter(/** @param {any} id */ (id) => achievementIds.has(id)),
+    // The Battle Tower is Hoenn-only now. Consolidate any legacy per-region
+    // record into Hoenn's, and drop a run that was started elsewhere.
+    saveTowerRegion = mapData[safeLocation]?.region ?? fallbackRegion,
+    consolidatedTowerBest = Math.max(
+      0,
+      ...Object.values(saved.towerBest ?? {}).filter(
+        (/** @type {any} */ floor) => typeof floor === 'number'
+      )
+    ),
+    repairedTowerBest = /** @type {Record<string, number>} */ (
+      consolidatedTowerBest > 0 ? { [BATTLE_TOWER_REGION]: consolidatedTowerBest } : {}
+    ),
+    repairedTowerFloor =
+      typeof saved.towerFloor === 'number' &&
+      saved.towerFloor > 0 &&
+      saveTowerRegion === BATTLE_TOWER_REGION
+        ? saved.towerFloor
+        : 0
 
   return {
     ...initialGameState,
@@ -434,12 +452,8 @@ function repairSave(saved) {
         ([regionId, level]) => regionIds.has(regionId) && typeof level === 'number' && level > 0
       )
     ),
-    towerFloor: typeof saved.towerFloor === 'number' && saved.towerFloor > 0 ? saved.towerFloor : 0,
-    towerBest: Object.fromEntries(
-      Object.entries(saved.towerBest ?? {}).filter(
-        ([regionId, floor]) => regionIds.has(regionId) && typeof floor === 'number' && floor > 0
-      )
-    ),
+    towerFloor: repairedTowerFloor,
+    towerBest: repairedTowerBest,
     victoryTokens: saved.victoryTokens ?? 0,
     autoProceed: saved.autoProceed ?? false,
     browserNotifications: !!saved.browserNotifications,

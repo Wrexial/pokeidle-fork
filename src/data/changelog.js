@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.16.0'
+export const GAME_VERSION = '0.16.1'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.16.1',
+      subtitle: 'Hoenn Battle Tower',
+      sections: [
+        {
+          heading: 'Fixes',
+          items: [
+            'The Battle Tower is now Hoenn-only. A run in progress no longer follows you to another region, and floors cleared elsewhere no longer credit that region\u2019s record',
+            'Saves are repaired on load: legacy per-region tower records are consolidated into Hoenn\u2019s best, and a run started outside Hoenn is discarded. Other regions will get their own minigames later',
+          ],
+        },
+      ],
+    },
     {
       version: '0.16.0',
       subtitle: 'Held Items',

@@ -1,6 +1,6 @@
 // Split from the former assets/index.js — see tools/decompile/split-modules.mjs
 
-import { RAID_COOLDOWN_MS, RAID_LEVEL_MAX, breedShinyOdds, breedShinyParentOdds, daycareEggBattles, defaultCatchSettings, dexRewardVictoryTokens, expCandyDropChance, prestigeTokenReward, rareCandyDropChance, swarmBattleCount, swarmSpawnChance, valuableDropChance, wildMasterBallChance, wonderTradeShinyOdds } from '../data/config.js'
+import { BATTLE_TOWER_REGION, RAID_COOLDOWN_MS, RAID_LEVEL_MAX, breedShinyOdds, breedShinyParentOdds, daycareEggBattles, defaultCatchSettings, dexRewardVictoryTokens, expCandyDropChance, prestigeTokenReward, rareCandyDropChance, swarmBattleCount, swarmSpawnChance, valuableDropChance, wildMasterBallChance, wonderTradeShinyOdds } from '../data/config.js'
 import { ACHIEVEMENTS } from '../data/achievements.js'
 import { activeItems, consumableItems, evolutionItems, heldItems, pokeBalls } from '../data/items.js'
 import { dailyDropMultiplier, dailyEventByKey, rollDailyEvent, todayKey } from '../data/daily-events.js'
@@ -88,9 +88,9 @@ export const initialGameState = {
   /** Achievement ids whose one-off reward has been paid. */
   rewardedAchievements: [],
   regionPrestige: {},
-  /** Next Battle Tower floor to attempt (0 = not in a run). */
+  /** Next Battle Tower floor to attempt (0 = not in a run). Hoenn only. */
   towerFloor: 0,
-  /** Best Tower floor cleared per region. */
+  /** Best Tower floor cleared per region (only Hoenn is used). */
   towerBest: {},
   victoryTokens: 0,
   autoProceed: !1,
@@ -1412,10 +1412,11 @@ export function gameReducer(state, action) {
       }
     }
     case 'BOSS_BATTLE_END': {
-      // Battle Tower: keep clearing floors until a loss ends the run.
+      // Battle Tower: keep clearing floors until a loss ends the run. It lives
+      // in Hoenn only, so its record is always credited there.
       if (state.bossBattle?.bossType === 'tower') {
         const { won: towerWon, moneyDelta: towerMoneyDelta } = action.payload,
-          regionId = state.bossBattle.region ?? mapData[state.currentLocation]?.region ?? 'kanto',
+          regionId = BATTLE_TOWER_REGION,
           floor = state.towerFloor,
           best = state.towerBest[regionId] ?? 0,
           reward = Math.floor(floor / 10),
@@ -2166,6 +2167,8 @@ export function gameReducer(state, action) {
         pendingBossBattle: action.payload?.pendingBossBattle ?? null,
       }
     case 'START_TOWER':
+      // Only Hoenn runs a Battle Tower.
+      if (mapData[state.currentLocation]?.region !== BATTLE_TOWER_REGION) return state
       return {
         ...state,
         towerFloor: action.payload?.floor ?? 1,

@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.16.0**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.16.1**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -783,6 +783,12 @@ strong), starts at Lv.55 + 3/floor, scales stats from floor 15 and allows
 legendaries from floor 40 (all capped at Lv.100). Payout is 1 Victory Token
 per 10 floors. Covered by `tests/battle-tower.test.mjs`.
 
+**0.16.1:** the tower is now **Hoenn-only** (`BATTLE_TOWER_REGION` in
+`src/data/config.js`). It no longer leaks a run's floor between regions or
+credits another region's record, and `repairSave` consolidates legacy
+per-region records into Hoenn (see `tests/battle-tower.test.mjs`). Other regions
+are meant to get their own minigames instead — see #29.
+
 ## 33. Rare Candy and EXP Candy as rare drops
 
 Levelling only comes from battle EXP (`awardExperience`), and the only item
@@ -1161,6 +1167,10 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.16.1 (Hoenn Battle Tower): the tower is Hoenn-only, no longer leaks a run's
+floor between regions, and save repair consolidates legacy per-region records
+into Hoenn.
 
 0.16.0 (held items): Pokemon can hold items (Bag Held Items tab, stats-panel
 Take button), 28 items with real effects are live, and wild/trainer Pokemon

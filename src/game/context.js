@@ -271,7 +271,9 @@ function repairSave(saved) {
       : saved.championDefeated
         ? ['kanto']
         : [],
-    defeatedChampions = savedChampions.filter(/** @param {string} id */ (id) => regionIds.has(id)),
+    defeatedChampions = [
+      ...new Set(savedChampions.filter(/** @param {string} id */ (id) => regionIds.has(id))),
+    ],
     activeEffects = (Array.isArray(saved.activeEffects) ? saved.activeEffects : []).filter(
       /** @param {any} effect */ (effect) => effect && typeof effect === 'object' && effect.type in activeItems
     ),

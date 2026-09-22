@@ -27,6 +27,8 @@ export function TownMap() {
     [activeRegion, setActiveRegion] = React.useState(currentRegion),
     [pendingUnlock, setPendingUnlock] = React.useState(/** @type {string | null} */ (null)),
     unlockTokens = getRegionUnlockTokens(state),
+    allRegionsUnlocked =
+      regions.length > 0 && (state.unlockedRegions ?? []).length >= regions.length,
     canvasRef = React.useRef(/** @type {HTMLDivElement | null} */ (null)),
     [view, setView] = React.useState(
       /** @type {MapView} */ ({ x: 0, y: 0, scale: 1 })
@@ -270,6 +272,7 @@ export function TownMap() {
         ],
       }),
       unlockTokens > 0 &&
+        !allRegionsUnlocked &&
         jsxs('div', {
           className: 'map-unlock-tokens',
           children: [

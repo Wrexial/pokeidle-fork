@@ -26,6 +26,13 @@ export const CHANGELOG = [
           heading: 'Town Map',
           items: [
             'The Region Unlock Token banner no longer appears once every region is open',
+            'Any leftover Region Unlock Tokens are converted to Victory Tokens once all regions are open',
+          ],
+        },
+        {
+          heading: 'Fixes',
+          items: [
+            'Beating a region Champion again no longer counts as a new region, so it cannot grant duplicate Unlock Tokens or credit the World Tour achievement twice',
           ],
         },
       ],

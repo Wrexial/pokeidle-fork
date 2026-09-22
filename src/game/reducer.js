@@ -83,6 +83,28 @@ export const initialGameState = {
 }
 
 /**
+ * Once every region is open, leftover Region Unlock Tokens have nothing left
+ * to spend on, so convert them to Victory Tokens. Only called when a new
+ * Champion is beaten or the last region is opened, so a given surplus is
+ * settled exactly once.
+ * @param {GameState} state
+ * @returns {GameState}
+ */
+function settleUnlockTokens(state) {
+  if ((state.unlockedRegions ?? []).length < regions.length) return state
+  const leftover = getRegionUnlockTokens(state)
+  if (leftover <= 0) return state
+  return {
+    ...state,
+    victoryTokens: state.victoryTokens + leftover,
+    battleLog: [
+      ...state.battleLog,
+      `${leftover} leftover Region Unlock Token${leftover > 1 ? 's' : ''} converted to Victory Token${leftover > 1 ? 's' : ''}.`,
+    ].slice(-50),
+  }
+}
+
+/**
  * Pick a random unlocked route and one of its rarer species for a new swarm.
  * @param {GameState} state
  * @returns {{ routeKey: string, speciesKey: string, battlesRemaining: number } | null}
@@ -170,11 +192,11 @@ export function gameReducer(state, action) {
             ]),
           ],
         }
-      return {
+      return settleUnlockTokens({
         ...unlockedState,
         unlockedLocations: computeUnlockedLocations(unlockedState),
         battleLog: [...state.battleLog, `${region.name} unlocked!`].slice(-50),
-      }
+      })
     }
     case 'START_ENCOUNTER': {
       const firstAliveIndex = state.party.findIndex((member) => member.currentHp > 0),
@@ -985,7 +1007,8 @@ export function gameReducer(state, action) {
       let defeatedGyms = state.defeatedGyms,
         defeatedEliteFour = state.defeatedEliteFour,
         defeatedChampions = state.defeatedChampions,
-        victoryTokens = state.victoryTokens
+        victoryTokens = state.victoryTokens,
+        championJustDefeated = false
       const notifications = []
       if (won && state.bossBattle) {
         const { bossType, bossId } = /** @type {{ bossType: string, bossId: string }} */ (
@@ -996,12 +1019,15 @@ export function gameReducer(state, action) {
           : bossType === 'e4' && !defeatedEliteFour.includes(bossId)
             ? (defeatedEliteFour = [...defeatedEliteFour, bossId])
             : bossType === 'champion' &&
-              ((defeatedChampions = [
-                ...defeatedChampions,
-                state.bossBattle.region ?? 'kanto',
-              ]),
-              (victoryTokens += 1),
-              notifications.push('Earned a Victory Token!'))
+              (() => {
+                const championRegion = state.bossBattle.region ?? 'kanto'
+                // A rematch replays the Champion for its teams, but only the
+                // first win credits the region (and thus an Unlock Token).
+                defeatedChampions.includes(championRegion) ||
+                  ((defeatedChampions = [...defeatedChampions, championRegion]),
+                  (championJustDefeated = true))
+                ;((victoryTokens += 1), notifications.push('Earned a Victory Token!'))
+              })()
       }
       if (won && state.bossQueue.length > 0) {
         const [nextBoss, ...remainingQueue] = state.bossQueue,
@@ -1050,10 +1076,11 @@ export function gameReducer(state, action) {
             },
             bossQueue: remainingQueue,
           }
-        return {
+        const result = {
           ...stateWithNextBoss,
           unlockedLocations: computeUnlockedLocations(stateWithNextBoss),
         }
+        return championJustDefeated ? settleUnlockTokens(result) : result
       }
       const finalState = {
         ...prepareNextBattle(state),
@@ -1076,10 +1103,11 @@ export function gameReducer(state, action) {
           })),
         ],
       }
-      return {
+      const finalResult = {
         ...finalState,
         unlockedLocations: computeUnlockedLocations(finalState),
       }
+      return championJustDefeated ? settleUnlockTokens(finalResult) : finalResult
     }
     case 'HEAL_PARTY': {
       const healedParty = state.party.map((member) => ({

@@ -6,7 +6,7 @@
 // re-rolled with a Nature Mint (see `USE_ITEM_ON_POKEMON`).
 
 /**
- * @type {{ key: string, name: string, increased: string | null, decreased: string | null }[]}
+ * @type {{ key: string, name: string, increased: string, decreased: string }[]}
  */
 export const NATURES = [
   { key: 'hardy', name: 'Hardy', increased: 'attack', decreased: 'attack' },
@@ -36,7 +36,7 @@ export const NATURES = [
   { key: 'quirky', name: 'Quirky', increased: 'spDefense', decreased: 'spDefense' },
 ]
 
-/** @type {Record<string, { key: string, name: string, increased: string | null, decreased: string | null }>} */
+/** @type {Record<string, { key: string, name: string, increased: string, decreased: string }>} */
 export const natureByKey = Object.fromEntries(NATURES.map((nature) => [nature.key, nature]))
 
 /** @returns {string} A random nature key. */

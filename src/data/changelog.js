@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.9.8'
+export const GAME_VERSION = '0.9.9'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.9.9',
+      subtitle: 'Nature Clarity & Panel Polish',
+      sections: [
+        {
+          heading: 'Pokemon',
+          items: [
+            'Natures now show exactly what they do: the stats panel names the nature and marks the stat it raises (green \u25b2) and the one it lowers (red \u25bc), both on a badge and beside the affected stats',
+            'The stats panel scrolls instead of clipping when a Pokemon\u2019s details are taller than the panel',
+          ],
+        },
+      ],
+    },
     {
       version: '0.9.8',
       subtitle: 'Notifications & Away Alert',

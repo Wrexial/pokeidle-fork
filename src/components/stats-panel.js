@@ -4,7 +4,16 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { moveCategoryIcons } from '../data/moves.js'
 import { statBarColors } from '../data/ui.js'
-import { natureName } from '../data/natures.js'
+import { natureByKey, natureName } from '../data/natures.js'
+
+/** Short stat labels for the nature badge (matches the stat grid). @type {Record<string, string>} */
+const NATURE_STAT_LABELS = {
+  attack: 'Atk',
+  defense: 'Def',
+  spAttack: 'SpA',
+  spDefense: 'SpD',
+  speed: 'Spd',
+}
 import { moveData, pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { genderForPokemon, genderSymbol } from '../game/breeding.js'
@@ -28,7 +37,16 @@ export function StatsPanel({
     [tradeConfirm, setTradeConfirm] = React.useState(!1),
     [showMoveManager, setShowMoveManager] = React.useState(!1),
     linkCables = state.inventory.linkCable ?? 0,
-    gender = genderForPokemon(pokemon)
+    gender = genderForPokemon(pokemon),
+    nature = pokemon.nature ? natureByKey[pokemon.nature] : null,
+    natureEffect = /** @param {string} statKey @returns {1 | -1 | 0} */ (statKey) =>
+      nature && nature.increased !== nature.decreased
+        ? nature.increased === statKey
+          ? 1
+          : nature.decreased === statKey
+            ? -1
+            : 0
+        : 0
   if (!species) return null
   const statRows = [
       {
@@ -164,10 +182,41 @@ export function StatsPanel({
                   )
                 ),
               }),
-              pokemon.nature &&
-                jsx('span', {
+              nature &&
+                jsxs('span', {
                   className: 'stats-panel-nature',
-                  children: `${natureName(pokemon.nature)} nature`,
+                  children: [
+                    jsx('span', {
+                      className: 'stats-panel-nature-name',
+                      children: natureName(pokemon.nature),
+                    }),
+                    nature.increased !== nature.decreased
+                      ? jsxs('span', {
+                          className: 'stats-panel-nature-effects',
+                          children: [
+                            jsxs('span', {
+                              className: 'nature-stat nature-up',
+                              title: `Raised 10% by ${natureName(pokemon.nature)}`,
+                              children: [
+                                '\u25b2',
+                                NATURE_STAT_LABELS[nature.increased] ?? nature.increased,
+                              ],
+                            }),
+                            jsxs('span', {
+                              className: 'nature-stat nature-down',
+                              title: `Lowered 10% by ${natureName(pokemon.nature)}`,
+                              children: [
+                                '\u25bc',
+                                NATURE_STAT_LABELS[nature.decreased] ?? nature.decreased,
+                              ],
+                            }),
+                          ],
+                        })
+                      : jsx('span', {
+                          className: 'nature-stat nature-neutral',
+                          children: 'Neutral',
+                        }),
+                  ],
                 }),
             ],
           }),
@@ -177,11 +226,12 @@ export function StatsPanel({
         className: 'stats-panel-grid',
         children: statRows.map((statRow) => {
           const statIndex =
-            statRow.key === 'hp'
-              ? statRow.max > 0
-                ? (statRow.value / statRow.max) * 100
-                : 0
-              : Math.min((statRow.value / statMax) * 100, 100)
+              statRow.key === 'hp'
+                ? statRow.max > 0
+                  ? (statRow.value / statRow.max) * 100
+                  : 0
+                : Math.min((statRow.value / statMax) * 100, 100),
+            statNature = natureEffect(statRow.key)
           return jsxs(
             'div',
             {
@@ -201,9 +251,14 @@ export function StatsPanel({
                     },
                   }),
                 }),
-                jsx('span', {
-                  className: 'stats-panel-stat-value',
-                  children: statRow.key === 'hp' ? `${statRow.value}/${statRow.max}` : statRow.value,
+                jsxs('span', {
+                  className: `stats-panel-stat-value${
+                    statNature === 1 ? ' nature-up' : statNature === -1 ? ' nature-down' : ''
+                  }`,
+                  children: [
+                    statRow.key === 'hp' ? `${statRow.value}/${statRow.max}` : statRow.value,
+                    statNature === 1 ? ' \u25b2' : statNature === -1 ? ' \u25bc' : '',
+                  ],
                 }),
               ],
             },

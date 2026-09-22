@@ -7,6 +7,7 @@ const data = installGameData()
 
 const { getPokemonSpriteUrl, getPokemonSpriteFallbackUrl } = await import('../src/game/pokemon.js')
 const { isFemalePokemon, rollGender } = await import('../src/game/breeding.js')
+const { genderedSprites } = await import('../src/data/gameData.js')
 
 // Pikachu has a female variant (heart-shaped tail); Charmander does not.
 const PIKACHU = data.pokemonSpecies.pikachu.id
@@ -47,11 +48,16 @@ test('static fallbacks build the female path too', () => {
   )
 })
 
+test('a later-generation female species uses its female animation when one exists', () => {
+  const PYROAR = data.pokemonSpecies.pyroar.id // 668, a Gen 6 species with a female animation
+  assert.equal(getPokemonSpriteUrl(PYROAR, false, false, true), `${ANIMATED}/female/${PYROAR}.gif`)
+})
+
 test('a female species with no female animation falls back to its static female sprite', () => {
-  const PYROAR = data.pokemonSpecies.pyroar.id // 668, a Gen 6 species with no Gen V animation
+  const EEVEE = data.pokemonSpecies.eevee.id // 133, has a static female tail but no female gif
   assert.equal(
-    getPokemonSpriteUrl(PYROAR, false, false, true),
-    `/sprites/pokemon/female/${PYROAR}.png`,
+    getPokemonSpriteUrl(EEVEE, false, false, true),
+    `/sprites/pokemon/female/${EEVEE}.png`,
     'the right gender beats the (male) animation'
   )
 })
@@ -62,6 +68,12 @@ test('a species without a female variant keeps the shared artwork', () => {
     getPokemonSpriteFallbackUrl(CHARMANDER, false, false, true),
     `/sprites/pokemon/${CHARMANDER}.png`
   )
+})
+
+test('the female manifest has the later animations and no false positives', () => {
+  assert.ok(genderedSprites.animatedFront.includes(668), 'Pyroar has a female animation')
+  assert.ok(genderedSprites.animatedFront.includes(876), 'Indeedee has one too')
+  assert.ok(!genderedSprites.animatedFront.includes(810), 'Grookey has no gender difference')
 })
 
 test('isFemalePokemon reads the stored gender and never returns true for genderless', () => {

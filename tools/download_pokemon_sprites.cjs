@@ -124,8 +124,9 @@ const ANIMATED_VARIANTS = [
   { name: 'back', sub: 'back', sdSub: 'back' },
   { name: 'shiny', sub: 'shiny', sdSub: 'shiny' },
   { name: 'back-shiny', sub: 'back/shiny', sdSub: 'back/shiny' },
-  // Female animated sprites only exist in PokeAPI's Gen V set (ids 1-649);
-  // Showdown has no clean female-animated set, so those simply stay static.
+  // Female animated sprites live in PokeAPI's Gen V animated tree; it has them
+  // for most gender-differing species across generations (the rest 404 and are
+  // left out of the manifest below).
   { name: 'female-front', sub: 'female', female: true },
   { name: 'female-back', sub: 'back/female', female: true },
   { name: 'female-shiny', sub: 'shiny/female', female: true },
@@ -135,9 +136,7 @@ const ANIMATED_VARIANTS = [
   dest: (id) => path.join(ANIMATED_DIR, variant.sub, `${id}.gif`),
   sources: (id) => {
     if (variant.female)
-      return id <= 649
-        ? [`${POKEAPI}/versions/generation-v/black-white/animated/${variant.sub}/${id}.gif`]
-        : []
+      return [`${POKEAPI}/versions/generation-v/black-white/animated/${variant.sub}/${id}.gif`]
     const showdown = `${SHOWDOWN}/${variant.sdSub ? variant.sdSub + '/' : ''}${id}.gif`
     // Gen V animated only exists for the national dex ids 1-649.
     if (id > 649) {
@@ -253,15 +252,35 @@ async function main() {
     genderedSprites[category] = ids.filter((id) =>
       fs.existsSync(path.join(STATIC_DIR, sub, `${id}.png`))
     )
+  // The animated female folder carries a few ids that have no real gender
+  // difference (some Gen 8 starters), so only keep animated entries for ids
+  // that also have a static female sprite.
+  const staticFemaleIds = new Set([
+    ...genderedSprites.front,
+    ...genderedSprites.back,
+    ...genderedSprites.shiny,
+    ...genderedSprites.backShiny,
+  ])
   const animatedFemaleDirs = {
     animatedFront: 'female',
     animatedBack: path.join('back', 'female'),
     animatedShiny: path.join('shiny', 'female'),
     animatedBackShiny: path.join('back', 'shiny', 'female'),
   }
+  // Remove female animations for ids that aren't real gender differences, so
+  // the committed sprite tree matches the manifest.
+  for (const sub of Object.values(animatedFemaleDirs)) {
+    const dir = path.join(ANIMATED_DIR, sub)
+    if (!fs.existsSync(dir)) continue
+    for (const file of fs.readdirSync(dir)) {
+      const id = Number(file.replace(/\.gif$/, ''))
+      if (Number.isFinite(id) && !staticFemaleIds.has(id)) fs.rmSync(path.join(dir, file))
+    }
+  }
   for (const [category, sub] of Object.entries(animatedFemaleDirs))
-    genderedSprites[category] = ids.filter((id) =>
-      fs.existsSync(path.join(ANIMATED_DIR, sub, `${id}.gif`))
+    genderedSprites[category] = ids.filter(
+      (id) =>
+        staticFemaleIds.has(id) && fs.existsSync(path.join(ANIMATED_DIR, sub, `${id}.gif`))
     )
   fs.writeFileSync(
     path.join(ROOT, 'public', 'data', 'gendered-sprites.json'),

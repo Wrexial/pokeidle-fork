@@ -58,7 +58,7 @@ test('early tower floors never field pre-evolutions or legendaries', () => {
     }
 })
 
-test('a tower win auto-climbs, heals and stays in battle', () => {
+test('a tower win advances the floor and returns to the panel', () => {
   const active = createPokemon('charizard', 80, 'a'),
     state = {
       ...initialGameState,
@@ -80,14 +80,14 @@ test('a tower win auto-climbs, heals and stays in battle', () => {
     },
     next = gameReducer(state, { type: 'BOSS_BATTLE_END', payload: { won: true, moneyDelta: 100 } })
   assert.equal(next.towerFloor, 4)
-  assert.equal(next.phase, 'battling')
-  assert.ok(next.enemyPokemon, 'the next floor starts immediately')
-  assert.equal(next.bossBattle.bossType, 'tower')
-  assert.ok(next.party.every((member) => member.currentHp === member.maxHp), 'the party is healed')
+  assert.equal(next.phase, 'idle', 'the next floor is not started automatically')
+  assert.equal(next.enemyPokemon, null)
+  assert.equal(next.bossBattle, null)
+  assert.equal(next.towerBest.hoenn, 3)
   assert.equal(next.victoryTokens, state.victoryTokens, 'floor 3 pays no tokens')
 })
 
-test('losing a tower run ends it and returns to idle', () => {
+test('losing a tower floor keeps it available to retry', () => {
   const active = createPokemon('charizard', 80, 'a'),
     state = {
       ...initialGameState,
@@ -108,7 +108,7 @@ test('losing a tower run ends it and returns to idle', () => {
       },
     },
     next = gameReducer(state, { type: 'BOSS_BATTLE_END', payload: { won: false, moneyDelta: 0 } })
-  assert.equal(next.towerFloor, 0)
+  assert.equal(next.towerFloor, 7, 'the lost floor is kept so it can be retried')
   assert.equal(next.phase, 'idle')
   assert.equal(next.towerBest.hoenn, 6)
 })

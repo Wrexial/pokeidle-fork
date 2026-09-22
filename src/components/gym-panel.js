@@ -34,7 +34,10 @@ export function GymPanel({ onOpenShop }) {
       regionEliteFour.every((member) => state.defeatedEliteFour.includes(member.id)),
     prestigeLevel = state.regionPrestige[regionId] ?? 0,
     towerBest = state.towerBest[BATTLE_TOWER_REGION] ?? 0,
-    nextTowerFloor = state.towerFloor > 0 ? state.towerFloor : 1,
+    // Floors are discrete puzzles: you always resume at the next uncleared
+    // floor, so a loss can be retried without replaying the climb. The max
+    // also repairs legacy saves whose stored floor lagged behind their best.
+    nextTowerFloor = Math.max(state.towerFloor, towerBest + 1),
     towerPreview = showTower ? buildTowerFloor(nextTowerFloor) : [],
     canFight = state.party.some((member) => member.currentHp > 0),
     isBusy =
@@ -363,9 +366,9 @@ export function GymPanel({ onOpenShop }) {
             jsx('div', {
               className: 'tower-hint',
               children:
-                state.towerFloor > 0
-                  ? `Currently on floor ${state.towerFloor}. Win to climb; lose and the run ends.`
-                  : 'Fight endless, stronger trainers for Victory Tokens. Every floor fields six fully evolved Pokemon, your team is healed between floors, stats start scaling at floor 15 and legendaries appear from floor 40. A run only ends when you lose \u2014 floors now pay 1 token every 10 floors.',
+                nextTowerFloor > 1
+                  ? `Next up: floor ${nextTowerFloor}. Win to advance; losing just means retrying this floor \u2014 the climb never resets.`
+                  : 'Fight stronger trainers for Victory Tokens, one puzzle floor at a time. Every floor fields six fully evolved Pokemon and your team is healed before each one \u2014 stats start scaling at floor 15 and legendaries appear from floor 40. Floors pay 1 token every 10 cleared.',
             }),
             jsx('div', {
               className: 'tower-hint tower-deterministic',
@@ -406,10 +409,10 @@ export function GymPanel({ onOpenShop }) {
                 width: '100%',
               },
               disabled: !fightable,
-              onClick: () => startTowerFloor(state.towerFloor > 0 ? state.towerFloor : 1),
+              onClick: () => startTowerFloor(nextTowerFloor),
               children:
-                state.towerFloor > 0
-                  ? `CONTINUE — FLOOR ${state.towerFloor}`
+                nextTowerFloor > 1
+                  ? `FIGHT FLOOR ${nextTowerFloor}`
                   : 'ENTER THE BATTLE TOWER',
             }),
           ],

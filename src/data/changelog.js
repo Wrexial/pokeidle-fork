@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.28.0'
+export const GAME_VERSION = '0.29.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.29.0',
+      subtitle: 'Tower Puzzles',
+      sections: [
+        {
+          heading: 'Battle Tower',
+          items: [
+            'The Battle Tower no longer auto-climbs: clearing a floor returns you to the panel, so each puzzle floor can be tackled deliberately',
+            'Losing a floor keeps you on it \u2014 build a new team and retry instead of replaying the whole climb',
+          ],
+        },
+      ],
+    },
     {
       version: '0.28.0',
       subtitle: 'Bug Catching Rework',

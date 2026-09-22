@@ -10,7 +10,7 @@ import { createVolatileState } from './combat.js'
 import { calculatePokemonStats, calculateRequiredExperience, createEgg, createPokemon, gainFriendship, getLevelUpResults, insertIntoBox, isBattleReady, isTutorMove, judgeIVs, nextBoxSortMode, resolvePokemonMoves, sortBoxMembers } from './pokemon.js'
 import { canBreed, eggHatchSteps, eggSpeciesKey, inheritBreedingTraits } from './breeding.js'
 import { advanceQuests, questLabel, rollQuests } from './quests.js'
-import { buildTrainerTeam, buildTowerFloor, checkShinyOdds, computeUnlockedLocations, createIdleBattleState, formatReward, getRegionUnlockTokens, isActiveEffectItem, loadActivePokemonFromParty, prepareNextBattle, releaseReward, rollCandyDrop, rollValuableDrop, syncActivePokemonIntoParty, tickBattleCounters, tickPartyEggs, tickPokerus } from './progression.js'
+import { buildTrainerTeam, checkShinyOdds, computeUnlockedLocations, createIdleBattleState, formatReward, getRegionUnlockTokens, isActiveEffectItem, loadActivePokemonFromParty, prepareNextBattle, releaseReward, rollCandyDrop, rollValuableDrop, syncActivePokemonIntoParty, tickBattleCounters, tickPartyEggs, tickPokerus } from './progression.js'
 import { BUG_CONTEST_COST } from './minigames.js'
 import { applyEntryHazards, emptyBattleHazards } from './hazards.js'
 
@@ -1510,76 +1510,37 @@ export function gameReducer(state, action) {
       }
     }
     case 'BOSS_BATTLE_END': {
-      // Battle Tower: keep clearing floors until a loss ends the run. It lives
-      // in Hoenn only, so its record is always credited there.
+      // Battle Tower floors are a puzzle, not an endless auto-climb: clearing
+      // one returns to the panel so the next floor can be chosen deliberately,
+      // and a loss keeps you on that floor instead of sending you back to
+      // floor 1. It lives in Hoenn only, so its record is always credited
+      // there.
       if (state.bossBattle?.bossType === 'tower') {
         const { won: towerWon, moneyDelta: towerMoneyDelta } = action.payload,
           regionId = BATTLE_TOWER_REGION,
           floor = state.towerFloor,
           best = state.towerBest[regionId] ?? 0,
-          reward = Math.floor(floor / 10),
-          clearedState = {
-            ...prepareNextBattle(state),
-            money: Math.max(0, state.money + towerMoneyDelta),
-            trainerBattlesWon: towerWon ? state.trainerBattlesWon + 1 : state.trainerBattlesWon,
-            victoryTokens: towerWon ? state.victoryTokens + reward : state.victoryTokens,
-            towerFloor: towerWon ? floor + 1 : 0,
-            towerBest: {
-              ...state.towerBest,
-              [regionId]: Math.max(best, towerWon ? floor : floor - 1),
-            },
-            battleLog: [
-              ...state.battleLog,
-              towerWon
-                ? `Tower floor ${floor} cleared!${
-                    reward > 0
-                      ? ` Earned ${reward} Victory Token${reward > 1 ? 's' : ''}.`
-                      : ''
-                  }`
-                : `Tower run ended on floor ${floor}.`,
-            ].slice(-50),
-          }
-        if (!towerWon) return clearedState
-        // Auto-climb: heal the party and immediately start the next floor so a
-        // run only ends when you lose.
-        const nextFloor = floor + 1,
-          nextTeam = buildTowerFloor(nextFloor),
-          firstPokemon = nextTeam[0]
-        if (!firstPokemon) return clearedState
-        const healedParty = clearedState.party.map((member) => ({
-            ...member,
-            currentHp: member.maxHp,
-          })),
-          playerPokemon = healedParty[0] || clearedState.playerPokemon,
-          trainerName = `Tower Trainer (Floor ${nextFloor})`
+          reward = Math.floor(floor / 10)
         return {
-          ...clearedState,
-          party: healedParty,
-          playerPokemon,
-          activePlayerPokemonIndex: 0,
-          phase: 'battling',
-          enemyPokemon: firstPokemon,
-          battleEvents: [],
-          currentEventIndex: 0,
-          battleTurn: 0,
-          weather: null,
-          battleHazards: emptyBattleHazards(),
-          terrain: null,
-          pendingEvents: [
-            { type: 'trainerAppear', message: `${trainerName} wants to battle!` },
-            { type: 'trainerSendOut', message: `${trainerName} sent out ${firstPokemon.name}!` },
-          ],
-          bossBattle: {
-            bossId: 'tower',
-            bossType: 'tower',
-            trainerName,
-            trainerClass: 'ace',
-            trainerTeam: nextTeam,
-            currentTrainerPokemonIndex: 0,
-            spriteKey: 'acetrainer',
-            region: regionId,
+          ...prepareNextBattle(state),
+          money: Math.max(0, state.money + towerMoneyDelta),
+          trainerBattlesWon: towerWon ? state.trainerBattlesWon + 1 : state.trainerBattlesWon,
+          victoryTokens: towerWon ? state.victoryTokens + reward : state.victoryTokens,
+          towerFloor: towerWon ? floor + 1 : Math.max(1, floor),
+          towerBest: {
+            ...state.towerBest,
+            [regionId]: Math.max(best, towerWon ? floor : floor - 1),
           },
-          bossQueue: [],
+          battleLog: [
+            ...state.battleLog,
+            towerWon
+              ? `Tower floor ${floor} cleared!${
+                  reward > 0
+                    ? ` Earned ${reward} Victory Token${reward > 1 ? 's' : ''}.`
+                    : ''
+                }`
+              : `Tower floor ${floor} failed \u2014 your team can try again.`,
+          ].slice(-50),
         }
       }
       const { won, moneyDelta } = action.payload,

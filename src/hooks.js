@@ -400,6 +400,8 @@ export function useGameLoop() {
               confusionTurns: playerVolatile.confusionTurns ?? 0,
               leechSeeded: playerVolatile.leechSeeded ?? !1,
               heldItemUsed: playerVolatile.heldItemUsed ?? !1,
+              tauntTurns: playerVolatile.tauntTurns ?? 0,
+              substituteHp: playerVolatile.substituteHp ?? 0,
               screens: playerVolatile.screens ?? { reflect: 0, lightScreen: 0 },
             },
             enemyBattlePokemon = {
@@ -432,6 +434,8 @@ export function useGameLoop() {
               confusionTurns: playerBattlePokemon.confusionTurns ?? 0,
               leechSeeded: playerBattlePokemon.leechSeeded ?? !1,
               heldItemUsed: playerBattlePokemon.heldItemUsed ?? !1,
+              tauntTurns: playerBattlePokemon.tauntTurns ?? 0,
+              substituteHp: playerBattlePokemon.substituteHp ?? 0,
               screens: playerBattlePokemon.screens ?? { reflect: 0, lightScreen: 0 },
             },
             enemyVolatileUpdate = {
@@ -445,6 +449,8 @@ export function useGameLoop() {
               confusionTurns: enemyBattlePokemon.confusionTurns ?? 0,
               leechSeeded: enemyBattlePokemon.leechSeeded ?? !1,
               heldItemUsed: enemyBattlePokemon.heldItemUsed ?? !1,
+              tauntTurns: enemyBattlePokemon.tauntTurns ?? 0,
+              substituteHp: enemyBattlePokemon.substituteHp ?? 0,
               screens: enemyBattlePokemon.screens ?? { reflect: 0, lightScreen: 0 },
             }
           dispatch({

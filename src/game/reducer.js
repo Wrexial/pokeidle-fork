@@ -2725,6 +2725,8 @@ export function gameReducer(state, action) {
             confusionTurns: enemyVolatile.confusionTurns ?? 0,
             leechSeeded: enemyVolatile.leechSeeded ?? !1,
             heldItemUsed: enemyVolatile.heldItemUsed ?? !1,
+            tauntTurns: enemyVolatile.tauntTurns ?? 0,
+            substituteHp: enemyVolatile.substituteHp ?? 0,
             screens: enemyVolatile.screens ?? { reflect: 0, lightScreen: 0 },
           }),
         {

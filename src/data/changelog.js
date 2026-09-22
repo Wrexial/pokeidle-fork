@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.17.0'
+export const GAME_VERSION = '0.17.1'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.17.1',
+      subtitle: 'Taunt & Substitute',
+      sections: [
+        {
+          heading: 'Battles',
+          items: [
+            'Taunt now stops the target using status moves for three turns',
+            'Substitute costs 25% max HP and then soaks up damage and blocks status moves until it breaks',
+          ],
+        },
+      ],
+    },
     {
       version: '0.17.0',
       subtitle: 'Weather',

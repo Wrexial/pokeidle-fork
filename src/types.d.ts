@@ -193,6 +193,10 @@ type VolatileState = {
   leechSeeded?: boolean
   /** Focus Sash / berry consumed for this battle. */
   heldItemUsed?: boolean
+  /** Turns of Taunt left (0 when not taunted). */
+  tauntTurns?: number
+  /** Remaining hit points of a Substitute (0 when none). */
+  substituteHp?: number
   /** Remaining turns of Reflect / Light Screen (0 when down). */
   screens?: { reflect: number, lightScreen: number }
 }

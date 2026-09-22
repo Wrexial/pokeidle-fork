@@ -82,6 +82,8 @@ export const MOVE_OVERRIDES = {
 
   // --- Utility ---
   leechSeed: { effect: { type: 'leechSeed' } },
+  taunt: { effect: { type: 'taunt' } },
+  substitute: { effect: { type: 'substitute' } },
   // --- Weather ---
   rainDance: { effect: { type: 'weather', weather: 'rain' } },
   sunnyDay: { effect: { type: 'weather', weather: 'sun' } },

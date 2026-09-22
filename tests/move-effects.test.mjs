@@ -385,6 +385,69 @@ test('the utility overrides are applied', () => {
   assert.equal(moveData.snowscape.effect.type, 'weather')
   assert.equal(moveData.snowscape.effect.weather, 'snow')
   assert.equal(moveData.rainDance.effect.weather, 'rain')
+  assert.equal(moveData.taunt.effect.type, 'taunt')
+  assert.equal(moveData.substitute.effect.type, 'substitute')
+})
+
+test('Taunt blocks status moves', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['splash'],
+        speed: 200,
+      }),
+      enemy = battler({
+        name: 'Foe',
+        moves: ['recover'],
+        currentHp: 100,
+        maxHp: 400,
+        tauntTurns: 2,
+      }),
+      events = resolveBattleTurn(player, enemy, false)
+    assert.ok(
+      events.some((/** @type {any} */ event) => event.message?.includes('after the Taunt'))
+    )
+    assert.equal(enemy.currentHp, 100, 'the healing move was blocked')
+  })
+})
+
+test('Taunt is set for three turns', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({ name: 'Player', isPlayer: true, moves: ['taunt'], speed: 200 }),
+      enemy = battler({ name: 'Foe', moves: ['splash'] })
+    resolveBattleTurn(player, enemy, false)
+    assert.equal(enemy.tauntTurns, 2, 'set for 3, then ticked down')
+  })
+})
+
+test('Substitute costs HP and then absorbs hits', () => {
+  withFixedRandom(0.5, () => {
+    const maker = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['substitute'],
+        currentHp: 400,
+        maxHp: 400,
+        speed: 200,
+      }),
+      idleFoe = battler({ name: 'Foe', moves: ['splash'] })
+    resolveBattleTurn(maker, idleFoe, false)
+    assert.equal(maker.substituteHp, 100, 'a quarter of max HP')
+    assert.equal(maker.currentHp, 300, 'the substitute cost a quarter of max HP')
+
+    const attacker = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['tackle'],
+        attack: 200,
+        speed: 200,
+      }),
+      shielded = battler({ name: 'Foe', moves: ['splash'], currentHp: 400, maxHp: 400, substituteHp: 100 })
+    resolveBattleTurn(attacker, shielded, false)
+    assert.equal(shielded.currentHp, 400, 'the substitute took the damage')
+    assert.ok(shielded.substituteHp < 100)
+  })
 })
 
 test('Aurora Veil raises both screens', () => {

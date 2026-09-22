@@ -27,6 +27,8 @@ export function createVolatileState() {
     confusionTurns: 0,
     leechSeeded: !1,
     heldItemUsed: !1,
+    tauntTurns: 0,
+    substituteHp: 0,
     screens: { reflect: 0, lightScreen: 0 },
   }
 }
@@ -321,7 +323,12 @@ function normalizeStatKey(statKey) {
  * @returns {boolean}
  */
 function isSelfTargetedMove(moveDef) {
-  return moveDef.effect?.target === 'self' || moveDef.effect?.type === 'heal' || !!moveDef.protect
+  return (
+    moveDef.effect?.target === 'self' ||
+    moveDef.effect?.type === 'heal' ||
+    moveDef.effect?.type === 'substitute' ||
+    !!moveDef.protect
+  )
 }
 
 /**
@@ -725,6 +732,17 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     if (handleConfusion(attack.attacker, events, attack.isPlayer)) continue
     const moveDef = moveData[attack.moveId]
     if (!moveDef) continue
+    // Taunt prevents status moves while it lasts.
+    if ((attack.attacker.tauntTurns ?? 0) > 0 && moveDef.category === 'status') {
+      events.push({
+        type: 'status',
+        message: `${attack.attacker.name} can't use ${moveDef.name} after the Taunt!`,
+        data: {
+          target: attack.isPlayer ? 'player' : 'enemy',
+        },
+      })
+      continue
+    }
     if (
       attack.attacker.lockedMove &&
       attack.attacker.lockTurnsRemaining !== void 0 &&
@@ -747,6 +765,14 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       continue
     }
     if (moveDef.power === 0) {
+      // A substitute blocks status moves aimed at its owner.
+      if ((attack.defender.substituteHp ?? 0) > 0 && !isSelfTargetedMove(moveDef)) {
+        events.push({
+          type: 'status',
+          message: `${attack.defender.name}'s substitute blocked the move!`,
+        })
+        continue
+      }
       if (moveDef.protect) {
         attack.attacker.protecting = !0
         events.push({
@@ -820,6 +846,34 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       } else if (moveDef.effect?.type === 'confusion') applyConfusion(attack.defender, events, !attack.isPlayer)
       else if (moveDef.effect?.type === 'leechSeed')
         applyLeechSeed(attack.defender, events, !attack.isPlayer)
+      else if (moveDef.effect?.type === 'taunt') {
+        if ((attack.defender.tauntTurns ?? 0) <= 0) {
+          attack.defender.tauntTurns = 3
+          events.push({
+            type: 'status',
+            message: `${attack.defender.name} fell for the Taunt!`,
+            data: {
+              target: attack.isPlayer ? 'enemy' : 'player',
+            },
+          })
+        }
+      } else if (moveDef.effect?.type === 'substitute') {
+        const cost = Math.max(1, Math.floor(attack.attacker.maxHp / 4))
+        if (attack.attacker.currentHp > cost && (attack.attacker.substituteHp ?? 0) <= 0) {
+          attack.attacker.currentHp -= cost
+          attack.attacker.substituteHp = cost
+          events.push({
+            type: 'recoil',
+            message: `${attack.attacker.name} made a substitute! (${cost} HP)`,
+            data: {
+              target: attack.isPlayer ? 'player' : 'enemy',
+              damage: cost,
+              hpAfter: attack.attacker.currentHp,
+              hpMax: attack.attacker.maxHp,
+            },
+          })
+        }
+      }
       else if (moveDef.effect?.type === 'weather') {
         activeWeather = { type: moveDef.effect.weather, turns: WEATHER_TURNS }
         events.push({
@@ -987,6 +1041,26 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     if (sashDamage !== totalDamage) {
       totalDamage = sashDamage
       attack.defender.heldItemUsed = !0
+    }
+    // A substitute soaks the damage before its owner.
+    if ((attack.defender.substituteHp ?? 0) > 0) {
+      const absorbed = Math.min(attack.defender.substituteHp, totalDamage)
+      attack.defender.substituteHp -= absorbed
+      totalDamage -= absorbed
+      if (attack.defender.substituteHp <= 0) {
+        attack.defender.substituteHp = 0
+        events.push({
+          type: 'status',
+          message: `${attack.defender.name}'s substitute faded!`,
+        })
+      }
+      if (totalDamage <= 0) {
+        events.push({
+          type: 'status',
+          message: `${attack.defender.name}'s substitute took the hit!`,
+        })
+        continue
+      }
     }
     if (
       ((attack.defender.currentHp = Math.max(0, attack.defender.currentHp - totalDamage)),
@@ -1238,6 +1312,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
   // End-of-turn abilities: Speed Boost raises Speed, Shed Skin may cure status.
   for (const [pokemon, isPlayerSide] of residualTargets) {
     if (pokemon.currentHp <= 0) continue
+    if ((pokemon.tauntTurns ?? 0) > 0) pokemon.tauntTurns -= 1
     const ability = abilityOf(pokemon)
     if (ability === 'speedBoost') {
       const stages = pokemon.statStages ?? (pokemon.statStages = {}),

@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.17.0**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.17.1**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -483,9 +483,9 @@ and trainers heal when low and set up early.
 
 Still open:
 
-- [ ] **Entry hazards & screens** (Stealth Rock, Spikes, Reflect, Light Screen,
-      Aurora Veil) and the remaining utility moves (Taunt, Substitute, weather)
-      — **screens shipped in 0.11.2**; hazards still need a switch-in hook.
+- [ ] **Entry hazards** (Stealth Rock, Spikes, Toxic Spikes, Sticky Web) — still
+      need a battle-level side-state + switch-in hook (weather 0.17.0 and
+      Taunt/Substitute 0.17.1 are done).
 - ✅ **Accuracy / evasion stat stages** — shipped 0.14.0.
 - [ ] Additional statuses if added to the data — **paralysis/toxic/confusion
       (0.11.1) and Leech Seed (0.14.0) shipped**; still missing infatuation,
@@ -1175,6 +1175,9 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.17.1 (Taunt & Substitute): Taunt blocks status moves for three turns;
+Substitute costs 25% HP and absorbs hits/status until it breaks.
 
 0.17.0 (weather): Rain/Sun/Sandstorm/Snow/Hail from moves and entry abilities,
 with damage scaling, weather abilities, chip damage/healing and a battle badge.

@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/Wrexial/pokeidle-fork/actions/workflows/ci.yml/badge.svg)](https://github.com/Wrexial/pokeidle-fork/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Game version](https://img.shields.io/badge/version-0.9.30-blue.svg)](src/data/changelog.js)
+[![Game version](https://img.shields.io/badge/version-0.36.1-blue.svg)](src/data/changelog.js)
 
 A browser-based **incremental / idle Pokémon game**. Train a party, battle wild
 Pokémon, catch and evolve them, take on gyms, the Elite Four and each region's
@@ -47,9 +47,9 @@ to your browser's `localStorage`.
 - **Wonder Trade**, **region Unlock Tokens**, region **Prestige**, **Records**
   and **Achievements**.
 
-For a player-facing walkthrough of each system, open the in-game **Pokédex →
-Guide** or [`public/guide.html`](public/guide.html). The generated
-"what spawns where" overview is at
+For a player-facing walkthrough of each system, open the in-game
+**Settings → Player Guide** or [`public/guide.html`](public/guide.html). The
+generated "what spawns where" overview is at
 [`public/encounter-index.html`](public/encounter-index.html).
 
 ## Run locally
@@ -92,8 +92,9 @@ No environment variables or server-side configuration are needed.
 | `index.html` | App entry; loads the data injector and `src/main.js`. |
 | `assets/` | `gameDataInjector.js` (loads `public/data/*.json`), `style.css`, fonts. |
 | `src/data/` | Static data + tuning: items, config, UI constants, changelog. |
-| `src/game/` | Game logic: Pokémon math, combat, catching, progression, reducer. |
+| `src/game/` | Game logic. Each entry point (`pokemon`, `combat`, `progression`, `reducer`, `minigames`) is a barrel over focused submodules. |
 | `src/components/` | One file per UI component (kebab-case). |
+| `tests/` | `node --test` suite (`npm test`). |
 | `public/data/` | **The game database** — species, moves, maps, encounters, trainers. |
 | `public/sprites/` | Pokémon / trainer sprites and backgrounds. |
 | `tools/` | One-off data scrapers/converters and the decompile tooling. |

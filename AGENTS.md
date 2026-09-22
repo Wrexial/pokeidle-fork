@@ -184,7 +184,7 @@ in `GameLayout`) dispatches `DEBUG_MAX_LEVEL` when the Konami code
 | `src/hooks.js` | Cross-cutting UI hooks: `useTypewriter`, `useIsMobile`, `useKonamiCode`, daily/notification/audio/quest hooks. |
 | `src/game/use-game-loop.js` | `useGameLoop` — the idle tick state machine. |
 | `src/game/minigames.js` | Barrel re-exporting `src/game/minigames/`: `mining`, `bug-contest`, `game-corner` and `registry`. |
-| `src/components/*.js` | **One file per component** (39 files, kebab-case, e.g. `battle-scene.js`, `pokedex-tile.js`). |
+| `src/components/*.js` | **One file per component** (53 files, kebab-case, e.g. `battle-scene.js`, `pokedex-tile.js`). |
 | `src/types.d.ts` | Ambient types for the injected `window.gameData*` globals. |
 | `assets/gameDataInjector.js` | Loads `public/data/*.json` into `window.gameDataInjector`. Add new data files here. |
 | `assets/style.css` | All game styling + CSS variables (theme colors). |
@@ -332,7 +332,11 @@ the code references keys and ids directly, and cross-file references
 
 - Split into modules by layer. Imports form a DAG (no cycles). The rough order
   is `data → game/pokemon|combat → game/progression → game/catching → game/reducer
-  → game/context → hooks → components/* → main`.
+  → game/context → hooks → components/* → main`. The larger subsystems are
+  barrels (`pokemon.js`, `combat.js`, `progression.js`, `minigames.js`,
+  `reducer.js`, `reducer/battle.js`, `reducer/pokemon.js`) re-exporting focused
+  modules in the matching `src/game/<name>/` folder; add new behaviour to a
+  submodule rather than re-inflating the barrel.
 - Each UI component is its own file under `src/components/` (kebab-case).
 - TypeScript runs in check-JS mode with **`strict: true`**: `npm run typecheck`
   must stay at 0 errors. Core shapes (`Pokemon`, `BattlePokemon`, `Move`,
@@ -350,9 +354,10 @@ the code references keys and ids directly, and cross-file references
   with the existing `jsx('div', { ... })` pattern.
 - `tools/index-backup.js` still contains the original minified 26k-line bundle
   if you ever need to compare against the pre-decompilation source.
-- To add/rename/move modules, edit `MODULES` in
-  `tools/decompile/split-modules.mjs` and re-run it (regenerates `src/` from the
-  former monolith — only do this while `tools/index-backup.js` still matches).
+- `tools/decompile/split-modules.mjs` and the other splitters are historical
+  one-shot records of the original monolith split. `src/` has since been
+  reorganized by hand, so re-running them would clobber the current layout —
+  treat the `MODULES`/rename tables as reference only.
 
 ## Tools (`tools/`)
 

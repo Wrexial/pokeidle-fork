@@ -671,6 +671,26 @@ export function gameReducer(state, action) {
         playerPokemon,
       }
     }
+    case 'TOGGLE_FAVOURITE': {
+      const { pokemonId } = action.payload,
+        toggle = /** @param {any} member */ (member) =>
+          member.id === pokemonId ? { ...member, favourite: !member.favourite } : member,
+        player = state.playerPokemon
+      if (
+        !state.party.some((member) => member.id === pokemonId) &&
+        !state.box.some((member) => member.id === pokemonId)
+      )
+        return state
+      return {
+        ...state,
+        party: state.party.map(toggle),
+        box: state.box.map(toggle),
+        playerPokemon:
+          player && player.id === pokemonId
+            ? { ...player, favourite: !player.favourite }
+            : player,
+      }
+    }
     case 'CATCH_POKEMON': {
       const {
           speciesKey,
@@ -2013,7 +2033,7 @@ export function gameReducer(state, action) {
         source === 'box'
           ? state.box.find((member) => member.id === pokemonId)
           : state.party.find((member) => member.id === pokemonId)
-      if (!released) return state
+      if (!released || released.favourite) return state
       const reward = releaseReward(released),
         inventory = { ...state.inventory }
       for (const [itemId, quantity] of Object.entries(reward.items))
@@ -2068,6 +2088,7 @@ export function gameReducer(state, action) {
         ? state.box.find((member) => member.id === pokemonId)
         : state.party.find((member) => member.id === pokemonId)
       if (!tradedPokemon) return state
+      if (tradedPokemon.favourite) return state
       const candidates = Object.keys(pokemonSpecies).filter((key) => pokemonSpecies[key].id > 0),
         receivedSpeciesKey = candidates[Math.floor(Math.random() * candidates.length)],
         // Undocumented perk: trading a shiny guarantees a shiny back.

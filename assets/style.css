@@ -1812,6 +1812,12 @@ img {
     letter-spacing: .3px
 }
 
+.party-favourite-badge {
+    margin-left: 4px;
+    color: var(--gold-bright);
+    text-shadow: 0 0 4px #ffd04088
+}
+
 .party-action-btn {
     font-size: 8px;
     padding: 4px 10px;
@@ -2073,6 +2079,82 @@ img {
     background: linear-gradient(#5a2a8a,#3a1a5a);
     border: 1px solid #a060ff;
     padding: 1px 6px
+}
+
+.stats-panel-fav-btn {
+    font-size: 13px;
+    line-height: 1;
+    padding: 0 5px;
+    background: none;
+    color: #8a7a60;
+    border: 2px solid transparent;
+    border-radius: 0;
+    cursor: pointer
+}
+
+.stats-panel-fav-btn:hover {
+    color: var(--gold-dark)
+}
+
+.stats-panel-fav-btn.active {
+    color: var(--gold-bright);
+    text-shadow: 0 0 6px #ffd040aa
+}
+
+.stats-panel-ivs {
+    display: flex;
+    flex-direction: column;
+    gap: 4px
+}
+
+.stats-panel-ivs-title {
+    font-size: 7px;
+    color: var(--gold-dark);
+    text-transform: uppercase;
+    letter-spacing: .5px
+}
+
+.stats-panel-iv-grid {
+    display: flex;
+    gap: 3px
+}
+
+.iv-chip {
+    flex: 1;
+    text-align: center;
+    font-size: 7px;
+    font-weight: 700;
+    padding: 3px 2px;
+    color: #2a1808;
+    background: #00000012;
+    border: 1px solid #a89870
+}
+
+.iv-best,
+.iv-fantastic {
+    background: #ffd870;
+    border-color: #b8901a
+}
+
+.iv-very-good {
+    background: #a8e0a8;
+    border-color: #4a8a4a
+}
+
+.iv-pretty-good {
+    background: #c8e0c8;
+    border-color: #7a9a7a
+}
+
+.iv-decent {
+    background: #d8c8a0;
+    border-color: #a89870
+}
+
+.iv-no-good {
+    background: #e0c0c0;
+    border-color: #a07070;
+    color: #6a2020
 }
 
 .stats-panel-grid {

@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.9.16'
+export const GAME_VERSION = '0.9.17'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.9.17',
+      subtitle: 'IV Judge & Favourites',
+      sections: [
+        {
+          heading: 'Pokemon',
+          items: [
+            'The stats panel now shows a Pokemon\u2019s IVs with an in-game-style judge \u2014 six stat chips plus an overall verdict (Decent \u2192 Wonderful)',
+            'Star a Pokemon to favourite it; favourites are protected from Release and Wonder Trade',
+          ],
+        },
+      ],
+    },
     {
       version: '0.9.16',
       subtitle: 'Dex Celebration & Sound On',

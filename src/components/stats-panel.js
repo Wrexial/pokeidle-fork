@@ -17,7 +17,7 @@ const NATURE_STAT_LABELS = {
 import { moveData, pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { genderForPokemon, genderSymbol } from '../game/breeding.js'
-import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
+import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, IV_STAT_LABELS, IV_STAT_ORDER, judgeIVs } from '../game/pokemon.js'
 import { MoveManagerPanel } from './move-manager-panel.js'
 
 /** @param {{ pokemon: Pokemon, source: 'party' | 'box', partyLength: number, onAction: () => void, onClose: () => void, evolutionInfo?: { entries: { targetName: string, canEvolve: boolean, requirementLabel: string, targetKey: string, itemId?: string }[] } | null, onEvolve?: (index: number) => void, onRelease?: () => void, canRelease?: boolean }} props */
@@ -39,6 +39,7 @@ export function StatsPanel({
     linkCables = state.inventory.linkCable ?? 0,
     gender = genderForPokemon(pokemon),
     nature = pokemon.nature ? natureByKey[pokemon.nature] : null,
+    ivJudge = judgeIVs(pokemon.ivs),
     natureEffect = /** @param {string} statKey @returns {1 | -1 | 0} */ (statKey) =>
       nature && nature.increased !== nature.decreased
         ? nature.increased === statKey
@@ -95,6 +96,18 @@ export function StatsPanel({
       jsxs('div', {
         className: 'stats-panel-header',
         children: [
+          jsx('button', {
+            className: `stats-panel-fav-btn${pokemon.favourite ? ' active' : ''}`,
+            onClick: () =>
+              dispatch({
+                type: 'TOGGLE_FAVOURITE',
+                payload: { pokemonId: pokemon.id },
+              }),
+            title: pokemon.favourite
+              ? 'Remove from favourites'
+              : 'Favourite (protects from Release and Wonder Trade)',
+            children: pokemon.favourite ? '\u2605' : '\u2606',
+          }),
           jsx('button', {
             className: 'stats-panel-manage',
             onClick: () => setShowMoveManager(!0),
@@ -273,6 +286,30 @@ export function StatsPanel({
         }),
       }),
       jsxs('div', {
+        className: 'stats-panel-ivs',
+        children: [
+          jsxs('span', {
+            className: 'stats-panel-ivs-title',
+            children: ['IVs \u00b7 ', ivJudge.verdict, ' (', ivJudge.total, '/186)'],
+          }),
+          jsx('div', {
+            className: 'stats-panel-iv-grid',
+            children: IV_STAT_ORDER.map((statKey) => {
+              const iv = ivJudge.perStat[statKey]
+              return jsxs(
+                'span',
+                {
+                  className: `iv-chip iv-${iv.label.toLowerCase().replace(/\s+/g, '-')}`,
+                  title: `${iv.label} (${iv.value}/31)`,
+                  children: [IV_STAT_LABELS[statKey], ' ', iv.value],
+                },
+                statKey
+              )
+            }),
+          }),
+        ],
+      }),
+      jsxs('div', {
         className: 'stats-panel-moves',
         children: [
           jsx('span', {
@@ -347,9 +384,13 @@ export function StatsPanel({
         className: 'stats-panel-trade',
         children: [
           jsx('button', {
-            className: `stats-panel-trade-btn${linkCables <= 0 ? ' disabled' : ''}`,
-            disabled: linkCables <= 0 || tradeConfirm,
-            title: linkCables <= 0 ? 'Buy a Link Cable in the Reward Shop' : 'Trade for a random Pokemon',
+            className: `stats-panel-trade-btn${linkCables <= 0 || pokemon.favourite ? ' disabled' : ''}`,
+            disabled: linkCables <= 0 || tradeConfirm || !!pokemon.favourite,
+            title: pokemon.favourite
+              ? 'Unfavourite this Pokemon before trading it'
+              : linkCables <= 0
+                ? 'Buy a Link Cable in the Reward Shop'
+                : 'Trade for a random Pokemon',
             onClick: () => setTradeConfirm(!0),
             children: `Wonder Trade (${linkCables})`,
           }),

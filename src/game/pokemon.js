@@ -120,6 +120,62 @@ export function getPerfectIVs() {
   }
 }
 
+/** Stat keys in the order the IV judge shows them. */
+export const IV_STAT_ORDER = ['hp', 'attack', 'defense', 'spAttack', 'spDefense', 'speed']
+
+/** Short labels for the IV chips (HP/Atk/Def/SpA/SpD/Spd). @type {Record<string, string>} */
+export const IV_STAT_LABELS = {
+  hp: 'HP',
+  attack: 'Atk',
+  defense: 'Def',
+  spAttack: 'SpA',
+  spDefense: 'SpD',
+  speed: 'Spd',
+}
+
+/**
+ * In-game-style individual-value rating for a single stat (0-31).
+ * @param {number} value
+ * @returns {string}
+ */
+export function ivStatLabel(value) {
+  if (value >= 31) return 'Best'
+  if (value >= 30) return 'Fantastic'
+  if (value >= 26) return 'Very Good'
+  if (value >= 16) return 'Pretty Good'
+  if (value >= 1) return 'Decent'
+  return 'No Good'
+}
+
+/**
+ * Overall judging summary ("Superior", "Best", ...) from the IV total.
+ * @param {number} total
+ * @returns {string}
+ */
+export function ivVerdict(total) {
+  if (total >= 151) return 'Wonderful'
+  if (total >= 121) return 'Superior'
+  if (total >= 91) return 'Above Average'
+  return 'Decent'
+}
+
+/**
+ * Judge a Pokemon's IVs: its total, an overall verdict and a label per stat.
+ * @param {Record<string, number>} ivs
+ * @returns {{ total: number, verdict: string, perStat: Record<string, { value: number, label: string, key: string }> }}
+ */
+export function judgeIVs(ivs) {
+  /** @type {Record<string, { value: number, label: string, key: string }>} */
+  const perStat = {}
+  let total = 0
+  for (const key of IV_STAT_ORDER) {
+    const value = ivs?.[key] ?? 0
+    total += value
+    perStat[key] = { value, label: ivStatLabel(value), key }
+  }
+  return { total, verdict: ivVerdict(total), perStat }
+}
+
 /**
  * @param {number} currentLevel
  * @param {string} growthRate

@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.16**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.17**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -35,8 +35,8 @@ items, best return first:
 
 16. **#7 Offline / idle progress** — M–L · ★★★★★ — the biggest missing *idle*
     feature; a returning player currently gets nothing.
-17. **#8 Pokémon management / IV checker** — M · ★★★★½ — IVs are generated
-    but invisible; box search, nicknames and lock are all high-use.
+17. **#8 Pokémon management / IV checker** — M · ★★★★½ — IV judge and
+    favourite/lock shipped in 0.9.17; nicknames and box search/filter remain.
 18. **#20 Honey/Repel DexNav hunting** — M · ★★★★½ — turns the existing
     shiny chain into a usable system.
 19. **#24 Move data pass** — M–L · ★★★★½ — ~290 moves currently do nothing;
@@ -205,9 +205,11 @@ Effort: **medium–large** (a real design decision, but high impact).
 IVs are generated in `createPokemon` but never shown, and the box has no search
 or protection against releasing something valuable.
 
-- [ ] IV display / judge (sum IVs stars, like the in-game judge).
+- [x] IV display / judge (sum IVs stars, like the in-game judge). Shipped in
+      0.9.17 (`judgeIVs` + stat chips in the stats panel).
 - [ ] Nicknames.
-- [ ] Favourite / lock a Pokémon so Release and Wonder Trade skip it.
+- [x] Favourite / lock a Pokémon so Release and Wonder Trade skip it. Shipped
+      in 0.9.17 (`TOGGLE_FAVOURITE`).
 - [ ] Box search + filter (name / type / level / shiny / favourite).
 - [ ] "Release all duplicates" bulk tool.
 
@@ -1193,6 +1195,10 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.9.17 (IV judge & favourites): the stats panel shows each Pokemon's IVs with
+an in-game-style judge, and a star favourites a Pokemon so Release and Wonder
+Trade skip it.
 
 0.9.16 (dex celebration + sound on): completing a region's national dex plays a
 full-screen badge/confetti celebration that pauses the game before the reward,

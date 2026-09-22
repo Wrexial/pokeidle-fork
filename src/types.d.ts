@@ -73,6 +73,8 @@ type Pokemon = BattlePokemon & {
   ivs: Record<string, number>
   /** One of the 25 nature keys (see src/data/natures.js). */
   nature?: string
+  /** Favourited Pokemon are protected from Release and Wonder Trade. */
+  favourite?: boolean
   isShiny: boolean
 }
 

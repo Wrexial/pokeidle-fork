@@ -77,7 +77,12 @@ export function PartyPanel({
         ;(setInspected(null), setReleaseConfirm(null))
       }
     }, [inspected, state.party, state.box, dispatch, setInspected, setReleaseConfirm]),
-    canReleaseNow = !!(inspectedPokemon && inspectedSource && (inspectedSource === 'box' || (inspectedSource === 'party' && state.party.length > 1))),
+    canReleaseNow = !!(
+      inspectedPokemon &&
+      !inspectedPokemon.favourite &&
+      inspectedSource &&
+      (inspectedSource === 'box' || (inspectedSource === 'party' && state.party.length > 1))
+    ),
     requestRelease = React.useCallback(() => {
       inspectedPokemon && setReleaseConfirm(inspectedPokemon.id)
     }, [inspectedPokemon, setReleaseConfirm]),
@@ -244,6 +249,12 @@ export function PartyPanel({
                                         children: '★',
                                       }),
                                     member.name,
+                                    member.favourite &&
+                                      jsx('span', {
+                                        className: 'party-favourite-badge',
+                                        title: 'Favourite',
+                                        children: '\u2605',
+                                      }),
                                     state.pokerus &&
                                       jsx('span', {
                                         className: 'party-pokerus-badge',

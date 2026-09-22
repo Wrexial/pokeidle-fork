@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.8**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.9**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -28,7 +28,7 @@ achievement rewards, map QoL, release rewards and notifications. The remaining
 items, best return first:
 
 1. **#16 More ideas (grab bag)** — mostly S · ★★★ — still open: quests,
-   Pok\u00e9rus, challenge modes (Nuzlocke / monotype / randomizer), form-changing
+   Pokérus, challenge modes (Nuzlocke / monotype / randomizer), form-changing
    items, accessibility, audio, combat feedback and a performance pass.
 
 ### Tier 2 — High impact, worth the effort (medium–large)
@@ -1184,6 +1184,11 @@ each).
 
 ## Recently done (context)
 
+0.9.9 (nature clarity): natures now show which stat they raise (green ▲) and
+lower (red ▼) on a badge, with the affected rows arrowed and coloured in the
+stat grid, and the stats panel scrolls instead of clipping. Also removed the
+stray Kanto "training area" debug route.
+
 0.9.8 (notifications): an opt-in setting mirrors key toasts (shinies, new
 dex entries, badges, raids, rare finds) to browser notifications while the tab
 is hidden, and returning after 30s+ away shows a "while you were away" summary
@@ -1208,7 +1213,7 @@ claimable once-per-day gift, surfaced from a battle top-bar button and a toast.
 Test suite: `npm test` runs a `node --test` suite under `tests/` covering
 unlocks, battle status/drain/flee, breeding, natures, shiny odds and the
 reducer's key actions, using a helper that loads `public/data` into
-`window.gameDataInjector` for headless imports (no version bump \u2014 dev-only).
+`window.gameDataInjector` for headless imports (no version bump — dev-only).
 
 0.9.3 (natures): every Pokemon rolls one of the 25 natures (shown on the stats
 panel, applied in `calculatePokemonStats`, migrated for old saves); a Nature

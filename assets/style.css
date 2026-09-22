@@ -5666,12 +5666,18 @@ img {
     gap: 3px
 }
 
-.battle-weather-badge {
+.battle-field-badges {
     position: absolute;
     top: 6px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 20;
+    display: flex;
+    gap: 4px;
+    pointer-events: none
+}
+
+.battle-weather-badge {
     font-size: 8px;
     font-weight: 700;
     color: #fff;
@@ -5682,6 +5688,11 @@ img {
     white-space: nowrap;
     pointer-events: none
 }
+
+.battle-weather-badge.terrain-electric { border-color: #f0d020 }
+.battle-weather-badge.terrain-grassy { border-color: #60b040 }
+.battle-weather-badge.terrain-misty { border-color: #f0a0d0 }
+.battle-weather-badge.terrain-psychic { border-color: #d060f0 }
 
 .battle-weather-badge.weather-rain { border-color: #60a0e0 }
 .battle-weather-badge.weather-sun { border-color: #f0c040 }

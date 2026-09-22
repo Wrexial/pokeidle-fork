@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.19.0**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.20.0**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -240,22 +240,24 @@ learnset (`getFamilyLearnset`). TMs/tutors would add *cross-family* moves.
 
 Effort: **medium**. Needs a compatibility data set.
 
-## 10. Weather & terrain (weather shipped in 0.17.0)
+## 10. ✅ Weather & terrain — shipped in 0.17.0 / 0.20.0
 
-Done for weather: `state.weather` (`{ type, turns }`) is set by Rain Dance /
-Sunny Day / Sandstorm / Snowscape / Hail and by Drizzle / Drought / Sand Stream /
-Snow Warning on entry, and threaded through `resolveBattleTurn` as a `weather`
-event. `src/game/weather.js` holds the pure helpers: Water/Fire damage scaling,
-Swift Swim / Chlorophyll / Sand Rush / Slush Rush speed, sandstorm/hail chip
-damage, and Rain Dish / Dry Skin / Ice Body healing. A badge in the battle scene
-shows it. Covered by `tests/weather.test.mjs`.
+Done for weather (0.17.0): `state.weather` (`{ type, turns }`) is set by Rain
+Dance / Sunny Day / Sandstorm / Snowscape / Hail and by Drizzle / Drought / Sand
+Stream / Snow Warning on entry, and threaded through `resolveBattleTurn` as a
+`weather` event. `src/game/weather.js` holds the pure helpers: Water/Fire damage
+scaling, Swift Swim / Chlorophyll / Sand Rush / Slush Rush speed, sandstorm/hail
+chip damage, and Rain Dish / Dry Skin / Ice Body healing.
 
-Still open:
+Done for terrain (0.20.0): `src/game/terrain.js` mirrors it \u2014 Electric / Grassy /
+Misty / Psychic Terrain from their moves and the Surge abilities, with grounded
+checks for damage boosts, Grassy healing and Earthquake softening, Electric
+sleep immunity, Misty status immunity, and Psychic priority blocking.
 
-- [ ] **Terrain** (Electric / Grassy / Misty / Psychic) — a parallel field
-      state with entry effects, damage boosts and healing.
-- [ ] Route-based weather, weather rocks (extended duration), and the remaining
-      weather abilities (Solar Power, Hydration, Leaf Guard, Forecast, ...).
+Remaining:
+
+- [ ] Terrain synergy abilities (Grass Pelt, Hadron Engine, Quark Drive), terrain
+      rocks/extended duration, and route-based field effects.
 - [ ] Weather-ball / move accuracy interactions (Thunder, Hurricane, Blizzard).
 
 Effort: **medium**.
@@ -489,7 +491,7 @@ Still open:
 - [ ] Additional statuses if added to the data — **paralysis/toxic/confusion
       (0.11.1) and Leech Seed (0.14.0) shipped**; still missing infatuation,
       curse, ability-based statuses.
-- [ ] Weather / terrain — **weather shipped in 0.17.0** (#10); terrain still open.
+- [ ] Weather / terrain — **weather (0.17.0) and terrain (0.20.0) shipped** (#10).
 - [ ] Ability / held-item hooks — see #2.
 - [ ] A damage / crit-rate **balance pass**.
 - [ ] AI polish: switch on a bad matchup, and don't spam setup when already
@@ -1181,6 +1183,10 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.20.0 (terrain): Electric/Grassy/Misty/Psychic Terrain from moves and Surge
+abilities, with grounded checks, Grassy healing, Electric sleep immunity, Misty
+status immunity and Psychic priority blocking. #10 complete.
 
 0.19.0 (deterministic Battle Tower): each floor is a fixed seeded opponent and
 tower battles run without crits/misses/variance, with a Gym-panel preview so the

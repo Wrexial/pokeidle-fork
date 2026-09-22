@@ -1,10 +1,24 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.19.0'
+export const GAME_VERSION = '0.20.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.20.0',
+      subtitle: 'Terrain',
+      sections: [
+        {
+          heading: 'Battles',
+          items: [
+            'Terrain is live: Electric, Grassy, Misty and Psychic Terrain (from their moves, or Electric/Grassy/Misty/Psychic Surge on entry) last five turns',
+            'Grassy Terrain heals grounded Pokemon and softens Earthquake, Electric Terrain blocks sleep and boosts Electric moves, Misty Terrain blocks status and halves Dragon damage, and Psychic Terrain blocks priority moves and boosts Psychic moves \u2014 the boosts only apply to grounded attackers/targets',
+            'A badge at the top of the battle shows the active terrain and turns left',
+          ],
+        },
+      ],
+    },
     {
       version: '0.19.0',
       subtitle: 'Deterministic Battle Tower',

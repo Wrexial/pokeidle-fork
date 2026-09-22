@@ -27,8 +27,8 @@ function rockEffectiveness(types) {
   return multiplier
 }
 
-/** @param {BattlePokemon} pokemon */
-function isGrounded(pokemon) {
+/** Whether a Pokemon is grounded (not Flying-type or Levitate). @param {BattlePokemon} pokemon */
+export function isGrounded(pokemon) {
   return !pokemon.types.includes('Flying') && abilityOf(pokemon) !== 'levitate'
 }
 

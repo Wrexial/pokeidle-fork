@@ -158,6 +158,9 @@ type CatchRule = {
 /** Active field weather for the current battle. */
 type BattleWeather = { type: string; turns: number }
 
+/** Active field terrain for the current battle. */
+type BattleTerrain = { type: string; turns: number }
+
 /** Extra information a situational ball needs at catch time. */
 type CatchContext = {
   /** Target's level (Nest Ball). */
@@ -254,6 +257,8 @@ type GameState = {
   battleTurn: number
   /** Active field weather (rain/sun/sandstorm/snow/hail), or null. */
   weather: BattleWeather | null
+  /** Active field terrain (electric/grassy/misty/psychic), or null. */
+  terrain: BattleTerrain | null
   /** Entry hazards for the current battle, one bucket per side. */
   battleHazards: { player: any, enemy: any }
   currentRoute: string

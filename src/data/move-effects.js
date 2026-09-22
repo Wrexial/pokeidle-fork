@@ -96,6 +96,11 @@ export const MOVE_OVERRIDES = {
   snowscape: { effect: { type: 'weather', weather: 'snow' } },
   hail: { effect: { type: 'weather', weather: 'hail' } },
   chillyReception: { effect: { type: 'weather', weather: 'snow' } },
+  // --- Terrain ---
+  electricTerrain: { effect: { type: 'terrain', terrain: 'electric' } },
+  grassyTerrain: { effect: { type: 'terrain', terrain: 'grassy' } },
+  mistyTerrain: { effect: { type: 'terrain', terrain: 'misty' } },
+  psychicTerrain: { effect: { type: 'terrain', terrain: 'psychic' } },
 
   // --- Screens (halve physical/special damage for 5 turns) ---
   reflect: { screen: 'reflect' },

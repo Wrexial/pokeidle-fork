@@ -418,7 +418,8 @@ export function useGameLoop() {
               (currentGameState.battleTurn ?? 0) === 0,
               currentGameState.weather ?? null,
               currentGameState.battleHazards ?? null,
-              isTowerBattle
+              isTowerBattle,
+              currentGameState.terrain ?? null
             )
           dispatch({
             type: 'EXECUTE_TURN',

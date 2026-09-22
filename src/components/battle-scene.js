@@ -9,6 +9,7 @@ import { hasClaimableQuests } from '../game/quests.js'
 import { locationImages } from '../data/ui.js'
 import { shouldOfferMasterBall } from '../game/catching.js'
 import { WEATHER_ICONS, WEATHER_NAMES } from '../game/weather.js'
+import { TERRAIN_ICONS, TERRAIN_NAMES } from '../game/terrain.js'
 import { completedGenerations, mapData, moveData, pokemonSpecies, speciesKeysByGeneration } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { shinyOddsForCompletedGenerations } from '../game/progression.js'
@@ -96,15 +97,31 @@ export function BattleScene() {
       backgroundImage: `url('${battleBackground}')`,
     },
     children: [
-      state.weather &&
-        jsx('div', {
-          className: `battle-weather-badge weather-${state.weather.type}`,
-          title: `${WEATHER_NAMES[state.weather.type] ?? state.weather.type} \u2014 ${
-            state.weather.turns
-          } turns left`,
-          children: `${WEATHER_ICONS[state.weather.type] ?? ''} ${
-            WEATHER_NAMES[state.weather.type] ?? state.weather.type
-          } \u00b7 ${state.weather.turns}`,
+      (state.weather || state.terrain) &&
+        jsxs('div', {
+          className: 'battle-field-badges',
+          children: [
+            state.weather &&
+              jsx('div', {
+                className: `battle-weather-badge weather-${state.weather.type}`,
+                title: `${WEATHER_NAMES[state.weather.type] ?? state.weather.type} \u2014 ${
+                  state.weather.turns
+                } turns left`,
+                children: `${WEATHER_ICONS[state.weather.type] ?? ''} ${
+                  WEATHER_NAMES[state.weather.type] ?? state.weather.type
+                } \u00b7 ${state.weather.turns}`,
+              }),
+            state.terrain &&
+              jsx('div', {
+                className: `battle-weather-badge terrain-${state.terrain.type}`,
+                title: `${TERRAIN_NAMES[state.terrain.type] ?? state.terrain.type} \u2014 ${
+                  state.terrain.turns
+                } turns left`,
+                children: `${TERRAIN_ICONS[state.terrain.type] ?? ''} ${
+                  TERRAIN_NAMES[state.terrain.type] ?? state.terrain.type
+                } \u00b7 ${state.terrain.turns}`,
+              }),
+          ],
         }),
       jsxs('div', {
         className: 'battle-top-buttons',

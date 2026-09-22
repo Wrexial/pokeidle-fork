@@ -27,6 +27,8 @@ export const initialGameState = {
   battleTurn: 0,
   /** Active field weather for the current battle, or null. */
   weather: null,
+  /** Active field terrain for the current battle, or null. */
+  terrain: null,
   /** Entry hazards for the current battle, one bucket per side. */
   battleHazards: emptyBattleHazards(),
   speed: 1,
@@ -313,6 +315,7 @@ export function gameReducer(state, action) {
         battleTurn: 0,
         weather: null,
         battleHazards: emptyBattleHazards(),
+        terrain: null,
         playerVolatile: createVolatileState(),
       }
     }
@@ -341,13 +344,17 @@ export function gameReducer(state, action) {
         wildBattlesWon = state.wildBattlesWon,
         battlesWonByLocation = state.battlesWonByLocation,
         weather = state.weather,
-        battleHazards = state.battleHazards
+        battleHazards = state.battleHazards,
+        terrain = state.terrain
       event.type === 'weather' &&
         event.data &&
         (weather = event.data.weather ?? weather)
       event.type === 'hazards' &&
         event.data &&
         (battleHazards = event.data.hazards ?? battleHazards)
+      event.type === 'terrain' &&
+        event.data &&
+        (terrain = event.data.terrain ?? terrain)
       event.type === 'flee' && (enemyPokemon = null)
       ;(event.type === 'damage' || event.type === 'recoil' || event.type === 'heal') &&
         event.data &&
@@ -484,6 +491,7 @@ export function gameReducer(state, action) {
         battlesWonByLocation,
         weather,
         battleHazards,
+        terrain,
         activeEffects,
         swarm,
         pokerus,
@@ -1277,6 +1285,7 @@ export function gameReducer(state, action) {
         battleTurn: 0,
         weather: null,
         battleHazards: emptyBattleHazards(),
+        terrain: null,
         activePlayerPokemonIndex: 0,
         trainerBattle: {
           trainerId,
@@ -1319,6 +1328,7 @@ export function gameReducer(state, action) {
         battleTurn: 0,
         weather: null,
         battleHazards: emptyBattleHazards(),
+        terrain: null,
         activePlayerPokemonIndex: 0,
         bossBattle: {
           bossId,
@@ -1533,6 +1543,7 @@ export function gameReducer(state, action) {
           battleTurn: 0,
           weather: null,
           battleHazards: emptyBattleHazards(),
+          terrain: null,
           pendingEvents: [
             { type: 'trainerAppear', message: `${trainerName} wants to battle!` },
             { type: 'trainerSendOut', message: `${trainerName} sent out ${firstPokemon.name}!` },
@@ -1647,6 +1658,7 @@ export function gameReducer(state, action) {
             battleTurn: 0,
             weather: null,
             battleHazards: emptyBattleHazards(),
+            terrain: null,
             bossBattle: {
               bossId: nextBoss.bossId,
               bossType: nextBoss.bossType,
@@ -2288,6 +2300,7 @@ export function gameReducer(state, action) {
           battleTurn: 0,
           weather: null,
           battleHazards: emptyBattleHazards(),
+          terrain: null,
           bossBattle: {
             bossId: bossBattle.bossId,
             bossType: bossBattle.bossType,
@@ -2639,6 +2652,7 @@ export function gameReducer(state, action) {
           battleTurn: 0,
           weather: null,
           battleHazards: emptyBattleHazards(),
+          terrain: null,
           enemyPokemon: null,
           playerPokemon: state.party.find((member) => isBattleReady(member)) ?? state.party[0] ?? state.playerPokemon,
           activePlayerPokemonIndex: 0,

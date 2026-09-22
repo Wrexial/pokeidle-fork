@@ -267,7 +267,9 @@
         <ul>
           <li>The familiar type chart, STAB, critical hits, damage variance and stat stages all apply — plus accuracy and evasion stages.</li>
           <li><strong>Status conditions</strong>: poison and toxic deal damage each turn, burn also halves physical attack, freeze and sleep stop a Pokémon acting, paralysis halves Speed and can skip a turn, confusion can make a Pokémon hurt itself, and flinching skips a turn. Leech Seed drains into the planter.</li>
-          <li><strong>Weather</strong> (rain, sun, sandstorm, snow, hail) scales damage, powers weather abilities and chips or heals each turn.</li>
+          <li><strong>Weather</strong> (rain, sun, sandstorm, snow, hail) and
+            <strong>terrain</strong> (electric, grassy, misty, psychic) scale damage,
+            power abilities and add healing, chip damage or status/priority protection each turn.</li>
           <li><strong>Abilities</strong> and <strong>held items</strong> are live, but only some are implemented — see <a href="#status">What works &amp; what's WIP</a>.</li>
           <li>Moves are learned by levelling; open a Pokémon's stats and use the move manager to teach it anything from its family's learnset.</li>
           <li>Use the speed controls to fast-forward, and the catch selector to batch-apply Repel/Honey.</li>
@@ -446,11 +448,12 @@
             Web — they hit Pokémon as they switch in.</li>
           <li><strong>Weather</strong>: Rain Dance, Sunny Day, Sandstorm, Snowscape and
             Hail.</li>
+          <li><strong>Terrain</strong>: Electric, Grassy, Misty and Psychic Terrain.</li>
           <li>Recoil, crash-on-miss, recharge (Hyper Beam), self-destruct and multi-turn
             locks (Outrage-style) are handled.</li>
         </ul>
         <div class="note">
-          <strong>Not yet implemented:</strong> terrain, infatuation, Curse, most
+          <strong>Not yet implemented:</strong> infatuation, Curse, most
           stat-change-clearing moves (Haze, Clear Smog), Taunt's full interaction rules,
           and the large tail of one-off utility moves. If it is not in the list above,
           assume it does little.
@@ -464,7 +467,7 @@
         </p>
         <ul>
           <li><strong>Entry:</strong> Intimidate, Drizzle, Drought, Sand Stream, Snow
-            Warning.</li>
+            Warning, Electric Surge, Grassy Surge, Misty Surge, Psychic Surge.</li>
           <li><strong>Type immunity / absorb:</strong> Levitate, Water Absorb, Dry Skin,
             Volt Absorb, Lightning Rod, Motor Drive, Flash Fire, Well-Baked Body, Sap
             Sipper, Storm Drain.</li>
@@ -522,7 +525,7 @@
 
         <h3>Still to come</h3>
         <ul>
-          <li>Terrain, the remaining abilities and held items, and the huge back-catalogue
+          <li>The remaining abilities and held items, and the huge back-catalogue
             of status moves.</li>
           <li>Minigames for the regions that don't host the Battle Tower.</li>
           <li>Online sync / cloud saves.</li>

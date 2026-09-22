@@ -8,6 +8,7 @@ import { heldBerryHeal, heldCuresStatus, heldDamageMultiplier, heldLeftoversHeal
 import { WEATHER_ABILITIES, WEATHER_MOVES, WEATHER_NAMES, WEATHER_TURNS, weatherAbilityHeal, weatherDamageMultiplier, weatherResidualDamage, weatherSpeedMultiplier } from './weather.js'
 import { abilityAbsorbsType, abilityAttackMultiplier, abilityBlocksNonSuperEffective, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityHalvesSuperEffective, abilityHealsFromType, abilityIgnoresIndirectDamage, abilityOf, abilityPreventsStatDrop, abilityPreventsStatus, abilitySurvivesAtFullHp } from './abilities.js'
 import { emptyBattleHazards } from './hazards.js'
+import { TERRAIN_ABILITIES, TERRAIN_MOVES, TERRAIN_NAMES, TERRAIN_TURNS, terrainDamageMultiplier, terrainHeal, terrainPreventsPriority, terrainPreventsStatus } from './terrain.js'
 
 /** @returns {VolatileState} */
 export function createVolatileState() {
@@ -56,8 +57,9 @@ const STATUS_IMMUNE_TYPES = {
  * @param {any[]} events
  * @param {boolean} targetIsPlayer whether `target` is the player's Pokemon
  * @param {boolean} [deterministic]
+ * @param {{ type: string } | null} [terrain]
  */
-function applyStatus(target, status, events, targetIsPlayer, deterministic = !1) {
+function applyStatus(target, status, events, targetIsPlayer, deterministic = !1, terrain = null) {
   if (!target || target.currentHp <= 0) return
   const side = targetIsPlayer ? 'player' : 'enemy'
   if (status === 'flinching') {
@@ -66,6 +68,7 @@ function applyStatus(target, status, events, targetIsPlayer, deterministic = !1)
   }
   if (!MAJOR_STATUSES.has(status) || target.status) return
   if (abilityPreventsStatus(target, status)) return
+  if (terrainPreventsStatus(terrain, target, status)) return
   if ((STATUS_IMMUNE_TYPES[status] ?? []).some((type) => target.types.includes(type))) return
   target.status = status
   target.statusTurns =
@@ -651,11 +654,13 @@ function applyIntimidate(source, target, events, sourceIsPlayer) {
  * @param {{ type: string, turns: number } | null} [weather]
  * @param {{ player: any, enemy: any } | null} [hazards]
  * @param {boolean} [deterministic] Battle Tower battles run without RNG.
+ * @param {{ type: string, turns: number } | null} [terrain]
  * @returns {any[]}
  */
-export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn = !1, weather = null, hazards = null, deterministic = !1) {
+export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn = !1, weather = null, hazards = null, deterministic = !1, terrain = null) {
   const events = /** @type {any[]} */ ([])
   let activeWeather = weather ?? null,
+    activeTerrain = terrain ?? null,
     activeHazards = hazards
       ? { player: { ...hazards.player }, enemy: { ...hazards.enemy } }
       : emptyBattleHazards()
@@ -668,6 +673,10 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       WEATHER_ABILITIES[abilityOf(player) ?? ''] ?? WEATHER_ABILITIES[abilityOf(enemy) ?? '']
     if (weatherSetter)
       activeWeather = { type: weatherSetter, turns: WEATHER_TURNS }
+    const terrainSetter =
+      TERRAIN_ABILITIES[abilityOf(player) ?? ''] ?? TERRAIN_ABILITIES[abilityOf(enemy) ?? '']
+    if (terrainSetter)
+      activeTerrain = { type: terrainSetter, turns: TERRAIN_TURNS }
   }
   // Flinches only last the turn they were inflicted; clear any left over.
   ;(player.flinch = !1, enemy.flinch = !1)
@@ -799,6 +808,17 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       })
       continue
     }
+    // Psychic Terrain blocks priority moves against grounded Pokemon.
+    if ((moveDef.priority ?? 0) > 0 && terrainPreventsPriority(activeTerrain, attack.defender)) {
+      events.push({
+        type: 'status',
+        message: `${attack.defender.name} is protected by the terrain!`,
+        data: {
+          target: attack.isPlayer ? 'enemy' : 'player',
+        },
+      })
+      continue
+    }
     if (moveDef.power === 0) {
       // A substitute blocks status moves aimed at its owner.
       if ((attack.defender.substituteHp ?? 0) > 0 && !isSelfTargetedMove(moveDef)) {
@@ -855,7 +875,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         moveDef.effect?.type === 'status' &&
         (moveDef.effect.chance === void 0 || chance(moveDef.effect.chance / 100, deterministic))
       )
-        applyStatus(attack.defender, moveDef.effect.status, events, !attack.isPlayer, deterministic)
+        applyStatus(attack.defender, moveDef.effect.status, events, !attack.isPlayer, deterministic, activeTerrain)
       else if (moveDef.effect?.type === 'heal') {
         const healPercent = moveDef.effect.percentage ?? 50,
           healed = Math.min(
@@ -877,7 +897,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
             hpMax: attack.attacker.maxHp,
           },
         })
-        moveDef.effect.status && applyStatus(attack.attacker, moveDef.effect.status, events, attack.isPlayer, deterministic)
+        moveDef.effect.status && applyStatus(attack.attacker, moveDef.effect.status, events, attack.isPlayer, deterministic, activeTerrain)
       } else if (moveDef.effect?.type === 'confusion') applyConfusion(attack.defender, events, !attack.isPlayer, deterministic)
       else if (moveDef.effect?.type === 'leechSeed')
         applyLeechSeed(attack.defender, events, !attack.isPlayer)
@@ -928,6 +948,12 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         events.push({
           type: 'weather',
           message: `The weather became ${WEATHER_NAMES[moveDef.effect.weather] ?? moveDef.effect.weather}!`,
+        })
+      } else if (moveDef.effect?.type === 'terrain') {
+        activeTerrain = { type: moveDef.effect.terrain, turns: TERRAIN_TURNS }
+        events.push({
+          type: 'terrain',
+          message: `The battlefield became ${TERRAIN_NAMES[moveDef.effect.terrain] ?? moveDef.effect.terrain}!`,
         })
       }
       continue
@@ -1072,7 +1098,8 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         abilityDamageDealtMultiplier(attack.attacker, moveDef) *
         abilityDamageTakenMultiplier(attack.defender, moveDef) *
         heldDamageMultiplier(attack.attacker, moveDef) *
-        weatherDamageMultiplier(activeWeather, moveDef)
+        weatherDamageMultiplier(activeWeather, moveDef) *
+        terrainDamageMultiplier(activeTerrain, attack.attacker, moveDef, attack.defender)
     )
     if (abilityHalvesSuperEffective(attack.defender) && damageResult.effectiveness > 1)
       totalDamage = Math.max(1, Math.floor(totalDamage / 2))
@@ -1191,7 +1218,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
             moveDef.effect.chance === void 0 ||
             chance(moveDef.effect.chance / 100, deterministic)
           )
-            applyStatus(attack.defender, moveDef.effect.status, events, !attack.isPlayer, deterministic)
+            applyStatus(attack.defender, moveDef.effect.status, events, !attack.isPlayer, deterministic, activeTerrain)
           break
         }
         case 'selfDestruct': {
@@ -1467,7 +1494,38 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         },
       })
     }
+    // Grassy Terrain heals grounded Pokemon each turn.
+    const terrainHealing = terrainHeal(activeTerrain, pokemon)
+    if (terrainHealing > 0 && pokemon.currentHp < pokemon.maxHp) {
+      pokemon.currentHp = Math.min(pokemon.maxHp, pokemon.currentHp + terrainHealing)
+      events.push({
+        type: 'heal',
+        message: `${pokemon.name} absorbed the grassy terrain! (+${terrainHealing} HP)`,
+        data: {
+          target: isPlayerSide ? 'player' : 'enemy',
+          hpAfter: pokemon.currentHp,
+          hpMax: pokemon.maxHp,
+        },
+      })
+    }
   }
+  // Terrain wears off when its turns run out.
+  if (activeTerrain) {
+    activeTerrain = { type: activeTerrain.type, turns: activeTerrain.turns - 1 }
+    if (activeTerrain.turns <= 0) {
+      events.push({
+        type: 'terrain',
+        message: `The ${TERRAIN_NAMES[activeTerrain.type] ?? activeTerrain.type} faded.`,
+      })
+      activeTerrain = null
+    }
+  }
+  // Report the terrain so the reducer can store it.
+  if (JSON.stringify(activeTerrain) !== JSON.stringify(terrain ?? null))
+    events.push({
+      type: 'terrain',
+      data: { terrain: activeTerrain },
+    })
   // Weather wears off when its turns run out.
   if (activeWeather) {
     activeWeather = { type: activeWeather.type, turns: activeWeather.turns - 1 }

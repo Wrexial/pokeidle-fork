@@ -142,6 +142,18 @@ type ActiveEffect = {
   [key: string]: any
 }
 
+/** A transient on-screen toast. Not persisted between sessions. */
+type GameNotification = {
+  id: number
+  message: string
+  /** Visual tone: info | success | shiny | warn. */
+  tone: string
+  icon: string | null
+  /** Collapses repeat events (same key inside the cooldown is dropped). */
+  dedupeKey: string
+  createdAt: number
+}
+
 type TrainerBattle = {
   trainerId?: string
   trainerName: string
@@ -215,6 +227,10 @@ type GameState = {
   bossQueue: any[]
   raidRegion: string | null
   levelUpNotification: string | null
+  /** Transient toast queue (see NotificationStack). */
+  notifications: GameNotification[]
+  /** Monotonic id source for toast keys. */
+  nextNotificationId: number
   [key: string]: any
 }
 

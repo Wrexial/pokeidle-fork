@@ -1252,6 +1252,68 @@ img {
     }
 }
 
+.notification-stack {
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 260;
+    pointer-events: none;
+    max-width: min(320px, 80vw)
+}
+
+.notification-toast {
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 10px;
+    font-size: 9px;
+    line-height: 1.35;
+    color: #2a1808;
+    background: linear-gradient(180deg,#f4ecd8 0% 50%,#e2d3b4 50% 100%);
+    border-left: 4px solid var(--gold-dark);
+    box-shadow: 2px 3px 0 #00000059;
+    cursor: pointer;
+    animation: notificationIn .22s ease-out
+}
+
+.notification-icon {
+    font-size: 12px;
+    line-height: 1
+}
+
+.notification-info {
+    border-left-color: #3a6a9a
+}
+
+.notification-success {
+    border-left-color: #4a7a30
+}
+
+.notification-shiny {
+    border-left-color: var(--gold-bright);
+    background: linear-gradient(180deg,#fff6cf 0% 50%,#f0dfa0 50% 100%)
+}
+
+.notification-warn {
+    border-left-color: #b04818
+}
+
+@keyframes notificationIn {
+    from {
+        transform: translateX(18px);
+        opacity: 0
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1
+    }
+}
+
 .hatch-popup-overlay {
     position: fixed;
     inset: 0;

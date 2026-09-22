@@ -22,6 +22,10 @@ export const initialGameState = {
   paused: !1,
   battleLog: [],
   levelUpNotification: null,
+  /** Transient toast queue (see NotificationStack). */
+  notifications: [],
+  /** Monotonic id source for toast keys. */
+  nextNotificationId: 1,
   wildBattlesWon: 0,
   trainerBattlesWon: 0,
   battlesWonByLocation: {},
@@ -101,6 +105,48 @@ function settleUnlockTokens(state) {
       ...state.battleLog,
       `${leftover} leftover Region Unlock Token${leftover > 1 ? 's' : ''} converted to Victory Token${leftover > 1 ? 's' : ''}.`,
     ].slice(-50),
+  }
+}
+
+/** Most toasts shown at once; older ones drop off the top. */
+const NOTIFICATION_CAP = 4
+/** Repeat events with the same dedupe key are dropped inside this window. */
+const NOTIFICATION_COOLDOWN_MS = 6000
+
+/**
+ * Add a toast to the queue, collapsing repeats (same `dedupeKey`) inside the
+ * cooldown so idle events can't spam the screen.
+ * @param {GameState} state
+ * @param {{ message: string, tone?: string, icon?: string | null, dedupeKey?: string, cooldown?: number }} notification
+ * @returns {GameState}
+ */
+function withNotification(state, notification) {
+  const now = Date.now(),
+    dedupeKey = notification.dedupeKey ?? notification.message,
+    cooldown = notification.cooldown ?? NOTIFICATION_COOLDOWN_MS,
+    active = state.notifications.filter(
+      (entry) => now - entry.createdAt <= NOTIFICATION_COOLDOWN_MS
+    )
+  if (active.some((entry) => entry.dedupeKey === dedupeKey && now - entry.createdAt <= cooldown))
+    return {
+      ...state,
+      notifications: active,
+    }
+  const nextId = state.nextNotificationId ?? 1
+  return {
+    ...state,
+    notifications: [
+      ...active,
+      {
+        id: nextId,
+        message: notification.message,
+        tone: notification.tone ?? 'info',
+        icon: notification.icon ?? null,
+        dedupeKey,
+        createdAt: now,
+      },
+    ].slice(-NOTIFICATION_CAP),
+    nextNotificationId: nextId + 1,
   }
 }
 
@@ -192,11 +238,19 @@ export function gameReducer(state, action) {
             ]),
           ],
         }
-      return settleUnlockTokens({
-        ...unlockedState,
-        unlockedLocations: computeUnlockedLocations(unlockedState),
-        battleLog: [...state.battleLog, `${region.name} unlocked!`].slice(-50),
-      })
+      return withNotification(
+        settleUnlockTokens({
+          ...unlockedState,
+          unlockedLocations: computeUnlockedLocations(unlockedState),
+          battleLog: [...state.battleLog, `${region.name} unlocked!`].slice(-50),
+        }),
+        {
+          message: `A new region opened: ${region.name}!`,
+          tone: 'success',
+          icon: '🗺️',
+          dedupeKey: `region:${regionId}`,
+        }
+      )
     }
     case 'START_ENCOUNTER': {
       const firstAliveIndex = state.party.findIndex((member) => member.currentHp > 0),
@@ -260,6 +314,7 @@ export function gameReducer(state, action) {
         daycare = state.daycare,
         inventory = state.inventory,
         secretNotices = [],
+        dropNotifications = [],
         swarmNotice = null
       if (
         event.type === 'faint' &&
@@ -301,6 +356,12 @@ export function gameReducer(state, action) {
             masterball: (inventory.masterball ?? 0) + 1,
           }
           secretNotices.push('You found a Master Ball!')
+          dropNotifications.push({
+            message: 'You found a Master Ball!',
+            tone: 'shiny',
+            icon: '🌐',
+            dedupeKey: 'drop:masterball',
+          })
         }
         // Treasure and candy finds, scaled by the foe's level.
         const dropLevel = enemyPokemon?.level ?? 1
@@ -320,9 +381,16 @@ export function gameReducer(state, action) {
             [foundCandyId]: (inventory[foundCandyId] ?? 0) + 1,
           }
           secretNotices.push(`You found a ${consumableItems[foundCandyId].name}!`)
+          if (candyId)
+            dropNotifications.push({
+              message: 'You found a Rare Candy!',
+              tone: 'success',
+              icon: '🍬',
+              dedupeKey: 'drop:rareCandy',
+            })
         }
       }
-      const syncedState = syncActivePokemonIntoParty({
+      let syncedState = syncActivePokemonIntoParty({
         ...state,
         phase: newPhase,
         pendingEvents: remainingEvents,
@@ -340,20 +408,32 @@ export function gameReducer(state, action) {
         daycare,
         inventory,
       })
+      for (const dropNotification of dropNotifications)
+        syncedState = withNotification(syncedState, dropNotification)
       if (
         event.type === 'victory' ||
         (event.type === 'faint' && event.data?.target === 'enemy')
       ) {
         const unlocked = computeUnlockedLocations(syncedState),
           newlyUnlocked = unlocked.filter((locationId) => !syncedState.unlockedLocations.includes(locationId))
-        let log = syncedState.battleLog
+        let log = syncedState.battleLog,
+          result = {
+            ...syncedState,
+            unlockedLocations: unlocked,
+          }
         for (const locationId of newlyUnlocked) {
           const location = mapData[locationId]
-          location && (log = [...log, `${location.name} is now accessible!`].slice(-50))
+          if (!location) continue
+          log = [...log, `${location.name} is now accessible!`].slice(-50)
+          result = withNotification(result, {
+            message: `${location.name} is now accessible!`,
+            tone: 'info',
+            icon: '🚩',
+            dedupeKey: `unlock:${locationId}`,
+          })
         }
         return {
-          ...syncedState,
-          unlockedLocations: unlocked,
+          ...result,
           battleLog: log,
         }
       }
@@ -465,6 +545,15 @@ export function gameReducer(state, action) {
       return {
         ...state,
         levelUpNotification: null,
+      }
+    case 'PUSH_NOTIFICATION':
+      return withNotification(state, action.payload)
+    case 'DISMISS_NOTIFICATION':
+      return {
+        ...state,
+        notifications: state.notifications.filter(
+          (notification) => notification.id !== action.payload.id
+        ),
       }
     case 'CLEAR_HATCH_RESULT':
       return {
@@ -749,20 +838,28 @@ export function gameReducer(state, action) {
         pokedexCaught = state.pokedexCaught.includes(toSpeciesKey)
           ? state.pokedexCaught
           : [...state.pokedexCaught, toSpeciesKey]
-      return {
-        ...state,
-        phase: 'idle',
-        evolutionState: null,
-        playerPokemon,
-        party,
-        box,
-        pokedexSeen,
-        pokedexCaught,
-        battleLog: [
-          ...state.battleLog,
-          `Congratulations! ${fromSpecies.name} evolved into ${toSpecies.name}!`,
-        ].slice(-50),
-      }
+      return withNotification(
+        {
+          ...state,
+          phase: 'idle',
+          evolutionState: null,
+          playerPokemon,
+          party,
+          box,
+          pokedexSeen,
+          pokedexCaught,
+          battleLog: [
+            ...state.battleLog,
+            `Congratulations! ${fromSpecies.name} evolved into ${toSpecies.name}!`,
+          ].slice(-50),
+        },
+        {
+          message: `${fromSpecies.name} evolved into ${toSpecies.name}!`,
+          tone: 'success',
+          icon: '⭐',
+          dedupeKey: `evolve:${pokemonId}:${toSpeciesKey}`,
+        }
+      )
     }
     case 'SET_CATCH_RULE': {
       const { routeKey, speciesKey, rule } = action.payload,
@@ -1028,15 +1125,30 @@ export function gameReducer(state, action) {
         defeatedChampions = state.defeatedChampions,
         victoryTokens = state.victoryTokens,
         championJustDefeated = false
-      const notifications = []
+      const notifications = [],
+        toastNotifications = []
       if (won && state.bossBattle) {
         const { bossType, bossId } = /** @type {{ bossType: string, bossId: string }} */ (
           state.bossBattle
         )
         bossType === 'gym' && !defeatedGyms.includes(bossId)
-          ? ((defeatedGyms = [...defeatedGyms, bossId]), (victoryTokens += 1), notifications.push('Earned a Victory Token!'))
+          ? ((defeatedGyms = [...defeatedGyms, bossId]),
+            (victoryTokens += 1),
+            notifications.push('Earned a Victory Token!'),
+            toastNotifications.push({
+              message: `${gymLeaderData.find((gym) => gym.id === bossId)?.badgeName ?? 'Badge'} earned!`,
+              tone: 'success',
+              icon: '🏅',
+              dedupeKey: `gym:${bossId}`,
+            }))
           : bossType === 'e4' && !defeatedEliteFour.includes(bossId)
-            ? (defeatedEliteFour = [...defeatedEliteFour, bossId])
+            ? ((defeatedEliteFour = [...defeatedEliteFour, bossId]),
+              toastNotifications.push({
+                message: 'Elite Four member defeated!',
+                tone: 'success',
+                icon: '🏅',
+                dedupeKey: `e4:${bossId}`,
+              }))
             : bossType === 'champion' &&
               (() => {
                 const championRegion = state.bossBattle.region ?? 'kanto'
@@ -1044,7 +1156,13 @@ export function gameReducer(state, action) {
                 // first win credits the region (and thus an Unlock Token).
                 defeatedChampions.includes(championRegion) ||
                   ((defeatedChampions = [...defeatedChampions, championRegion]),
-                  (championJustDefeated = true))
+                  (championJustDefeated = true),
+                  toastNotifications.push({
+                    message: `${regions.find((region) => region.id === championRegion)?.name ?? championRegion} Champion defeated!`,
+                    tone: 'shiny',
+                    icon: '👑',
+                    dedupeKey: `champion:${championRegion}`,
+                  }))
                 ;((victoryTokens += 1), notifications.push('Earned a Victory Token!'))
               })()
       }
@@ -1095,11 +1213,14 @@ export function gameReducer(state, action) {
             },
             bossQueue: remainingQueue,
           }
-        const result = {
+        let result = /** @type {GameState} */ ({
           ...stateWithNextBoss,
           unlockedLocations: computeUnlockedLocations(stateWithNextBoss),
-        }
-        return championJustDefeated ? settleUnlockTokens(result) : result
+        })
+        if (championJustDefeated) result = settleUnlockTokens(result)
+        for (const toastNotification of toastNotifications)
+          result = withNotification(result, toastNotification)
+        return result
       }
       const finalState = {
         ...prepareNextBattle(state),
@@ -1122,11 +1243,14 @@ export function gameReducer(state, action) {
           })),
         ],
       }
-      const finalResult = {
+      let finalResult = /** @type {GameState} */ ({
         ...finalState,
         unlockedLocations: computeUnlockedLocations(finalState),
-      }
-      return championJustDefeated ? settleUnlockTokens(finalResult) : finalResult
+      })
+      if (championJustDefeated) finalResult = settleUnlockTokens(finalResult)
+      for (const toastNotification of toastNotifications)
+        finalResult = withNotification(finalResult, toastNotification)
+      return finalResult
     }
     case 'HEAL_PARTY': {
       const healedParty = state.party.map((member) => ({
@@ -1304,33 +1428,69 @@ export function gameReducer(state, action) {
       const { speciesKey } = action.payload
       return state.pokedexSeen.includes(speciesKey)
         ? state
-        : {
-            ...state,
-            pokedexSeen: [...state.pokedexSeen, speciesKey],
-          }
+        : withNotification(
+            {
+              ...state,
+              pokedexSeen: [...state.pokedexSeen, speciesKey],
+            },
+            {
+              message: `You found a wild ${pokemonSpecies[speciesKey]?.name ?? speciesKey}!`,
+              tone: 'info',
+              icon: '👀',
+              dedupeKey: `seen:${speciesKey}`,
+            }
+          )
     }
     case 'MARK_CAUGHT': {
       const { speciesKey } = action.payload,
-        pokedexSeen = state.pokedexSeen.includes(speciesKey) ? state.pokedexSeen : [...state.pokedexSeen, speciesKey],
-        pokedexCaught = state.pokedexCaught.includes(speciesKey)
-          ? state.pokedexCaught
-          : [...state.pokedexCaught, speciesKey]
-      return pokedexSeen === state.pokedexSeen && pokedexCaught === state.pokedexCaught
-        ? state
-        : {
-            ...state,
-            pokedexSeen,
-            pokedexCaught,
-          }
+        isNewSpecies = !state.pokedexCaught.includes(speciesKey),
+        speciesName = pokemonSpecies[speciesKey]?.name ?? speciesKey,
+        pokedexSeen = state.pokedexSeen.includes(speciesKey)
+          ? state.pokedexSeen
+          : [...state.pokedexSeen, speciesKey],
+        pokedexCaught = isNewSpecies ? [...state.pokedexCaught, speciesKey] : state.pokedexCaught,
+        nextState =
+          pokedexSeen === state.pokedexSeen && pokedexCaught === state.pokedexCaught
+            ? state
+            : {
+                ...state,
+                pokedexSeen,
+                pokedexCaught,
+              }
+      return withNotification(
+        nextState,
+        isNewSpecies
+          ? {
+              message: `${speciesName} was registered in the Pokédex!`,
+              tone: 'success',
+              icon: '📕',
+              dedupeKey: `caught:${speciesKey}`,
+            }
+          : {
+              message: `${speciesName} was caught again.`,
+              tone: 'info',
+              icon: '🔴',
+              dedupeKey: `repeat:${speciesKey}`,
+              cooldown: 15000,
+            }
+      )
     }
     case 'MARK_SHINY_CAUGHT': {
       const { speciesKey } = action.payload
       return state.shinyCaught.includes(speciesKey)
         ? state
-        : {
-            ...state,
-            shinyCaught: [...state.shinyCaught, speciesKey],
-          }
+        : withNotification(
+            {
+              ...state,
+              shinyCaught: [...state.shinyCaught, speciesKey],
+            },
+            {
+              message: `Shiny ${pokemonSpecies[speciesKey]?.name ?? speciesKey} was caught!`,
+              tone: 'shiny',
+              icon: '🌟',
+              dedupeKey: `shinycaught:${speciesKey}`,
+            }
+          )
     }
     case 'CLAIM_DEX_REWARDS': {
       const generations = /** @type {number[]} */ (
@@ -1342,7 +1502,7 @@ export function gameReducer(state, action) {
             !state.rewardedGenerations.includes(generationIndex)
         )
       if (newlyCompleted.length === 0) return state
-      return {
+      let claimedState = /** @type {GameState} */ ({
         ...state,
         rewardedGenerations: [...state.rewardedGenerations, ...newlyCompleted],
         victoryTokens: state.victoryTokens + newlyCompleted.length * dexRewardVictoryTokens,
@@ -1357,7 +1517,15 @@ export function gameReducer(state, action) {
               `Generation ${generationIndex + 1} dex complete! Earned ${dexRewardVictoryTokens} Victory Tokens and a Master Ball.`
           ),
         ].slice(-50),
-      }
+      })
+      for (const generationIndex of newlyCompleted)
+        claimedState = withNotification(claimedState, {
+          message: `Generation ${generationIndex + 1} dex complete! +${dexRewardVictoryTokens} Victory Tokens, +1 Master Ball`,
+          tone: 'shiny',
+          icon: '🏆',
+          dedupeKey: `dexreward:${generationIndex}`,
+        })
+      return claimedState
     }
     case 'UPDATE_SHINY_CHAIN': {
       const { speciesKey } = action.payload
@@ -1373,10 +1541,18 @@ export function gameReducer(state, action) {
       const { speciesKey } = action.payload
       return state.shinySeen.includes(speciesKey)
         ? state
-        : {
-            ...state,
-            shinySeen: [...state.shinySeen, speciesKey],
-          }
+        : withNotification(
+            {
+              ...state,
+              shinySeen: [...state.shinySeen, speciesKey],
+            },
+            {
+              message: `A shiny ${pokemonSpecies[speciesKey]?.name ?? speciesKey} appeared!`,
+              tone: 'shiny',
+              icon: '✨',
+              dedupeKey: `shinyseen:${speciesKey}`,
+            }
+          )
     }
     case 'START_HEALING':
       return {
@@ -1793,24 +1969,32 @@ export function gameReducer(state, action) {
         playerPokemon = healedParty[0] || state.playerPokemon,
         raidLevel = action.payload.level ?? 60,
         raidLocation = action.payload.location ?? 'raidIsland'
-      return {
-        ...prepareNextBattle(state),
-        raidCooldownEnd: Date.now() + RAID_COOLDOWN_MS,
-        raidLegendary: action.payload.legendary,
-        raidRegion: action.payload.region ?? 'kanto',
-        inRaid: !0,
-        raidLevel,
-        preRaidLocation: state.currentLocation,
-        currentLocation: raidLocation,
-        currentRoute: raidLocation,
-        party: healedParty,
-        playerPokemon,
-        activePlayerPokemonIndex: 0,
-        battleLog: [
-          ...state.battleLog,
-          `Arrived at ${mapData[raidLocation]?.name ?? 'Raid Island'}! A legendary Pokemon awaits...`,
-        ].slice(-50),
-      }
+      return withNotification(
+        {
+          ...prepareNextBattle(state),
+          raidCooldownEnd: Date.now() + RAID_COOLDOWN_MS,
+          raidLegendary: action.payload.legendary,
+          raidRegion: action.payload.region ?? 'kanto',
+          inRaid: !0,
+          raidLevel,
+          preRaidLocation: state.currentLocation,
+          currentLocation: raidLocation,
+          currentRoute: raidLocation,
+          party: healedParty,
+          playerPokemon,
+          activePlayerPokemonIndex: 0,
+          battleLog: [
+            ...state.battleLog,
+            `Arrived at ${mapData[raidLocation]?.name ?? 'Raid Island'}! A legendary Pokemon awaits...`,
+          ].slice(-50),
+        },
+        {
+          message: `Raid: ${pokemonSpecies[action.payload.legendary]?.name ?? 'a legendary Pokemon'} awaits!`,
+          tone: 'warn',
+          icon: '⚡',
+          dedupeKey: `raid:${action.payload.legendary}`,
+        }
+      )
     }
     case 'END_RAID':
       return {

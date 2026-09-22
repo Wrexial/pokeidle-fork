@@ -5,6 +5,7 @@ import { trainerClassPayouts, missingnoEncounterChance, mewUnderTruckChance } fr
 import { ballOrder } from './data/items.js'
 import { MOBILE_BREAKPOINT } from './data/ui.js'
 import { completedGenerations, encounterData, mapData, pokemonSpecies, trainerData } from './data/gameData.js'
+import { ACHIEVEMENTS } from './data/achievements.js'
 import { useGame } from './game/context.js'
 import { attemptCatch, selectAutoCatchBall, selectBestBall, shouldAutoCatch } from './game/catching.js'
 import { createVolatileState, resolveBattleTurn } from './game/combat.js'
@@ -45,7 +46,9 @@ export function useGameLoop() {
   const { state, dispatch } = useGame(),
     intervalRef = React.useRef(/** @type {ReturnType<typeof setInterval> | null} */ (null)),
     phaseRef = React.useRef(state.phase),
-    stateRef = React.useRef(state)
+    stateRef = React.useRef(state),
+    /** Null until the first render, so already-earned medals don't all pop at once. */
+    announcedAchievementsRef = React.useRef(/** @type {Set<string> | null} */ (null))
   React.useEffect(() => {
     ;((phaseRef.current = state.phase), (stateRef.current = state))
   }, [state])
@@ -690,7 +693,45 @@ export function useGameLoop() {
             generations: pending,
           },
         })
-    }, [state.pokedexCaught, state.rewardedGenerations, dispatch]))
+    }, [state.pokedexCaught, state.rewardedGenerations, dispatch]),
+    React.useEffect(() => {
+      const achieved = ACHIEVEMENTS.filter(
+        (achievement) => achievement.check(state)
+      )
+      if (announcedAchievementsRef.current === null) {
+        announcedAchievementsRef.current = new Set(
+          achieved.map((achievement) => achievement.id)
+        )
+        return
+      }
+      const newlyAchieved = achieved.filter(
+        (achievement) => !announcedAchievementsRef.current?.has(achievement.id)
+      )
+      announcedAchievementsRef.current = new Set(
+        achieved.map((achievement) => achievement.id)
+      )
+      for (const achievement of newlyAchieved)
+        dispatch({
+          type: 'PUSH_NOTIFICATION',
+          payload: {
+            message: `Achievement unlocked: ${achievement.name}`,
+            tone: 'success',
+            icon: '🏆',
+            dedupeKey: `achievement:${achievement.id}`,
+          },
+        })
+    }, [
+      state.wildBattlesWon,
+      state.trainerBattlesWon,
+      state.pokedexCaught,
+      state.shinyCaught,
+      state.defeatedGyms,
+      state.defeatedChampions,
+      state.regionPrestige,
+      state.towerBest,
+      state.money,
+      dispatch,
+    ]))
 }
 
 export function useIsMobile() {

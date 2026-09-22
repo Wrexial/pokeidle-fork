@@ -9,6 +9,7 @@ import { PartyBoxPanel } from './party-box-panel.js'
 import { MobileTabs } from './mobile-tabs.js'
 import { RightPanel } from './right-panel.js'
 import { HatchPopup } from './hatch-popup.js'
+import { NotificationStack } from './notification-stack.js'
 
 export function GameLayout() {
   const { dispatch } = useGame()
@@ -17,7 +18,12 @@ export function GameLayout() {
   return useIsMobile()
     ? jsxs('div', {
         className: 'game-layout mobile',
-        children: [jsx(BattleScreen, {}), jsx(MobileTabs, {}), jsx(HatchPopup, {})],
+        children: [
+          jsx(BattleScreen, {}),
+          jsx(MobileTabs, {}),
+          jsx(HatchPopup, {}),
+          jsx(NotificationStack, {}),
+        ],
       })
     : jsxs('div', {
         className: 'game-layout',
@@ -29,6 +35,7 @@ export function GameLayout() {
           }),
           jsx(RightPanel, {}),
           jsx(HatchPopup, {}),
+          jsx(NotificationStack, {}),
         ],
       })
 }

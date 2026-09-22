@@ -10,6 +10,13 @@ export const CHANGELOG = [
       subtitle: 'Dex Rewards & Battle Clarity',
       sections: [
         {
+          heading: 'Notifications',
+          items: [
+            'A toast queue now surfaces important moments without watching the battle log: first sighting, new Pokedex entry, repeats, shinies, evolutions, badges, Champions, region and route unlocks, dex rewards, raids, achievements and rare item finds',
+            'Toasts stack in the corner, auto-dismiss, dedupe repeats and cap at four at once so idle events cannot spam the screen',
+          ],
+        },
+        {
           heading: 'Bag & Economy',
           items: [
             'Potions, Super/Hyper/Max Potions, Revives and Max Revives can be bought at every mart and used on a party Pokemon in or out of battle',

@@ -1,11 +1,20 @@
 // Popup shown when a Daycare egg hatches, so a (possibly shiny) hatch isn't
-// missed in the battle log. Gives Keep / quick-release actions.
+// missed in the battle log. Shows its IVs, nature and stats up front — the
+// numbers that decide whether to keep or release it — plus Keep / release.
 
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { pokemonSpecies } from '../data/gameData.js'
+import { natureByKey, natureName } from '../data/natures.js'
 import { useGame } from '../game/context.js'
 import { genderForPokemon, genderSymbol } from '../game/breeding.js'
-import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, pokemonDisplayName } from '../game/pokemon.js'
+import {
+  getPokemonSpriteFallbackUrl,
+  getPokemonSpriteUrl,
+  IV_STAT_LABELS,
+  IV_STAT_ORDER,
+  judgeIVs,
+  pokemonDisplayName,
+} from '../game/pokemon.js'
 
 export function HatchPopup() {
   const { state, dispatch } = useGame(),
@@ -15,7 +24,18 @@ export function HatchPopup() {
   if (!species) return null
   const gender = genderForPokemon(hatch),
     genderClass =
-      gender === 'male' ? 'gender-male' : gender === 'female' ? 'gender-female' : 'gender-none'
+      gender === 'male' ? 'gender-male' : gender === 'female' ? 'gender-female' : 'gender-none',
+    nature = hatch.nature ? natureByKey[hatch.nature] : null,
+    ivs = judgeIVs(hatch.ivs),
+    /** @type {Record<string, string | number>} */
+    statValues = {
+      hp: `${hatch.currentHp}/${hatch.maxHp}`,
+      attack: hatch.attack,
+      defense: hatch.defense,
+      spAttack: hatch.spAttack,
+      spDefense: hatch.spDefense,
+      speed: hatch.speed,
+    }
   return jsx('div', {
     className: 'hatch-popup-overlay',
     children: jsxs('div', {
@@ -50,6 +70,80 @@ export function HatchPopup() {
         jsxs('div', {
           className: 'hatch-popup-meta',
           children: [`Lv.${hatch.level}`, hatch.isShiny ? ' · Shiny!' : ''],
+        }),
+        nature &&
+          jsxs('span', {
+            className: 'stats-panel-nature',
+            children: [
+              jsx('span', {
+                className: 'stats-panel-nature-name',
+                children: natureName(hatch.nature),
+              }),
+              nature.increased !== nature.decreased
+                ? jsxs('span', {
+                    className: 'stats-panel-nature-effects',
+                    children: [
+                      jsxs('span', {
+                        className: 'nature-stat nature-up',
+                        children: ['▲', IV_STAT_LABELS[nature.increased] ?? nature.increased],
+                      }),
+                      jsxs('span', {
+                        className: 'nature-stat nature-down',
+                        children: ['▼', IV_STAT_LABELS[nature.decreased] ?? nature.decreased],
+                      }),
+                    ],
+                  })
+                : jsx('span', {
+                    className: 'nature-stat nature-neutral',
+                    children: 'Neutral',
+                  }),
+            ],
+          }),
+        jsxs('div', {
+          className: 'stats-panel-ivs',
+          children: [
+            jsxs('span', {
+              className: 'stats-panel-ivs-title',
+              children: ['IVs · ', ivs.verdict, ' (', ivs.total, '/186)'],
+            }),
+            jsx('div', {
+              className: 'stats-panel-iv-grid',
+              children: IV_STAT_ORDER.map((statKey) => {
+                const iv = ivs.perStat[statKey]
+                return jsxs(
+                  'span',
+                  {
+                    className: `iv-chip iv-${iv.label.toLowerCase().replace(/\s+/g, '-')}`,
+                    title: `${iv.label} (${iv.value}/31)`,
+                    children: [IV_STAT_LABELS[statKey], ' ', iv.value],
+                  },
+                  statKey
+                )
+              }),
+            }),
+          ],
+        }),
+        jsx('div', {
+          className: 'hatch-popup-stats',
+          children: IV_STAT_ORDER.map((statKey) =>
+            jsxs(
+              'span',
+              {
+                className: 'hatch-popup-stat',
+                children: [
+                  jsx('span', {
+                    className: 'hatch-popup-stat-label',
+                    children: IV_STAT_LABELS[statKey],
+                  }),
+                  jsx('span', {
+                    className: 'hatch-popup-stat-value',
+                    children: statValues[statKey],
+                  }),
+                ],
+              },
+              statKey
+            )
+          ),
         }),
         jsxs('div', {
           className: 'hatch-popup-buttons',

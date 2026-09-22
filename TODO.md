@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.26**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.27**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -1198,6 +1198,9 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.9.27 (hatch details): the egg-hatch popup shows the hatchling's stats, IVs
+(with judge) and nature before you keep or release it.
 
 0.9.26 (offline progress): time away now pays money + Exp. Candies (capped at 8
 hours) with a "While You Were Away" report. #7 is complete.

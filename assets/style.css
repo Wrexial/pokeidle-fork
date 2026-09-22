@@ -1517,6 +1517,10 @@ img {
     background: linear-gradient(180deg,#e8dcc0 0% 50%,#d8c8a0 50% 100%);
     color: #2a1808;
     padding: 18px 26px;
+    min-width: 320px;
+    max-width: 92vw;
+    max-height: 90vh;
+    overflow-y: auto;
     text-align: center;
     box-shadow: inset 2px 2px #ffffff40,inset -2px -2px #0000001f,-4px 0 0 0 var(--gold),4px 0 0 0 var(--gold),0 -4px 0 0 var(--gold),0 4px 0 0 var(--gold),-4px -4px 0 0 var(--gold),4px -4px 0 0 var(--gold),-4px 4px 0 0 var(--gold),4px 4px 0 0 var(--gold),4px 4px 0 8px #00000080
 }
@@ -1558,6 +1562,48 @@ img {
     gap: 8px;
     justify-content: center;
     margin-top: 14px
+}
+
+.hatch-popup .stats-panel-nature {
+    justify-content: center;
+    margin-top: 8px
+}
+
+.hatch-popup .stats-panel-ivs {
+    align-items: center;
+    margin-top: 8px
+}
+
+.hatch-popup .stats-panel-iv-grid {
+    width: 100%
+}
+
+.hatch-popup-stats {
+    display: flex;
+    gap: 4px;
+    margin-top: 8px
+}
+
+.hatch-popup-stat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+    background: #00000010;
+    border: 1px solid #a89870;
+    padding: 3px 2px
+}
+
+.hatch-popup-stat-label {
+    font-size: 6px;
+    color: #6a5a40
+}
+
+.hatch-popup-stat-value {
+    font-size: 8px;
+    font-weight: 700;
+    color: #2a1808
 }
 
 .hatch-popup-btn {

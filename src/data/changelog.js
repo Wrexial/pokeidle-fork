@@ -1,10 +1,22 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.9.26'
+export const GAME_VERSION = '0.9.27'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.9.27',
+      subtitle: 'Hatch Details',
+      sections: [
+        {
+          heading: 'Daycare',
+          items: [
+            'The egg-hatch popup now shows the hatchling\u2019s stats, IVs (with a judge) and nature, so you can decide whether to keep or quick-release it',
+          ],
+        },
+      ],
+    },
     {
       version: '0.9.26',
       subtitle: 'Offline Progress',

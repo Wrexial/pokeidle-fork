@@ -2,12 +2,14 @@
 
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { ACHIEVEMENTS } from '../data/achievements.js'
+import { formatReward } from '../game/progression.js'
 import { completedGenerations, gymLeaderData, pokedexIndexes, regions, speciesKeysByGeneration } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 
 /** @param {{ onClose: () => void }} props */
 export function RecordsModal({ onClose }) {
   const { state } = useGame(),
+    rewardedAchievements = new Set(state.rewardedAchievements ?? []),
     achieved = ACHIEVEMENTS.filter((achievement) => achievement.check(state)),
     nationalDex = pokedexIndexes.filter((entry) => entry[1].id > 0 && entry[1].id <= 1025),
     caughtCount = nationalDex.filter(([speciesKey]) => state.pokedexCaught.includes(speciesKey)).length,
@@ -103,7 +105,8 @@ export function RecordsModal({ onClose }) {
                 jsx('div', {
                   className: 'achievement-grid',
                   children: ACHIEVEMENTS.map((achievement) => {
-                    const isMet = achievement.check(state)
+                    const isMet = achievement.check(state),
+                      claimed = rewardedAchievements.has(achievement.id)
                     return jsxs(
                       'div',
                       {
@@ -123,6 +126,12 @@ export function RecordsModal({ onClose }) {
                               jsx('span', {
                                 className: 'achievement-desc',
                                 children: achievement.description,
+                              }),
+                              jsx('span', {
+                                className: `achievement-reward${claimed ? ' claimed' : ''}`,
+                                children: `${claimed ? '\u2605 Claimed' : 'Reward'}: ${formatReward(
+                                  achievement.reward
+                                )}`,
                               }),
                             ],
                           }),

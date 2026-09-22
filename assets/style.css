@@ -5162,6 +5162,16 @@ img {
     opacity: .75
 }
 
+.achievement-reward {
+    font-size: 8px;
+    color: var(--gold-dark);
+    margin-top: 1px
+}
+
+.achievement-reward.claimed {
+    color: #2e7d32
+}
+
 .daycare-slots {
     display: flex;
     gap: 8px;

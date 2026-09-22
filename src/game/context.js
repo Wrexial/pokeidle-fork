@@ -17,6 +17,7 @@ import {
   speciesKeysByGeneration,
 } from '../data/gameData.js'
 import { generateIVs, calculatePokemonStats, resolvePokemonMoves } from './pokemon.js'
+import { ACHIEVEMENTS } from '../data/achievements.js'
 import { natureByKey, randomNature } from '../data/natures.js'
 import { gameReducer, initialGameState } from './reducer.js'
 
@@ -288,6 +289,7 @@ function repairSave(saved) {
   const gymIds = new Set(gymLeaderData.map((gym) => gym.id)),
     eliteIds = new Set(elite4Data.map((member) => member.id)),
     regionIds = new Set(regions.map((region) => region.id)),
+    achievementIds = new Set(ACHIEVEMENTS.map((achievement) => achievement.id)),
     defeatedGyms = (Array.isArray(saved.defeatedGyms) ? saved.defeatedGyms : []).filter(
       /** @param {string} id */ (id) => gymIds.has(id)
     ),
@@ -321,7 +323,10 @@ function repairSave(saved) {
     ).filter(
       /** @param {any} index */ (index) =>
         Number.isInteger(index) && index >= 0 && index < speciesKeysByGeneration.length
-    )
+    ),
+    rewardedAchievements = (
+      Array.isArray(saved.rewardedAchievements) ? saved.rewardedAchievements : []
+    ).filter(/** @param {any} id */ (id) => achievementIds.has(id))
 
   return {
     ...initialGameState,
@@ -365,6 +370,7 @@ function repairSave(saved) {
     defeatedEliteFour,
     defeatedChampions,
     rewardedGenerations,
+    rewardedAchievements,
     regionPrestige: Object.fromEntries(
       Object.entries(saved.regionPrestige ?? {}).filter(
         ([regionId, level]) => regionIds.has(regionId) && typeof level === 'number' && level > 0
@@ -473,6 +479,7 @@ export function serializeSave(state) {
     defeatedEliteFour: state.defeatedEliteFour,
     defeatedChampions: state.defeatedChampions,
     rewardedGenerations: state.rewardedGenerations,
+    rewardedAchievements: state.rewardedAchievements,
     regionPrestige: state.regionPrestige,
     towerFloor: state.towerFloor,
     towerBest: state.towerBest,

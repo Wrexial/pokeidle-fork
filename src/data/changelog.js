@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.9.4'
+export const GAME_VERSION = '0.9.5'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.9.5',
+      subtitle: 'Achievement Rewards',
+      sections: [
+        {
+          heading: 'Achievements',
+          items: [
+            'Every achievement now pays a one-off reward \u2014 money, Victory Tokens and occasionally a Master Ball \u2014 granted automatically when it unlocks (existing saves get theirs on load)',
+            'The Records panel shows each achievement\u2019s reward and marks the ones already claimed',
+          ],
+        },
+      ],
+    },
     {
       version: '0.9.4',
       subtitle: 'Daily Events',

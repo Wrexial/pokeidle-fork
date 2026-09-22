@@ -133,6 +133,22 @@ export function getItemInfo(itemId) {
 }
 
 /**
+ * Human-readable summary of an achievement reward, e.g.
+ * "2 Victory Tokens \u00b7 $1,000 \u00b7 Master Ball \u00d71".
+ * @param {{ money?: number, victoryTokens?: number, items?: Record<string, number> }} reward
+ * @returns {string}
+ */
+export function formatReward(reward) {
+  const parts = []
+  if (reward.victoryTokens)
+    parts.push(`${reward.victoryTokens} Victory Token${reward.victoryTokens > 1 ? 's' : ''}`)
+  if (reward.money) parts.push(`$${reward.money.toLocaleString()}`)
+  for (const [itemId, quantity] of Object.entries(reward.items ?? {}))
+    parts.push(`${getItemInfo(itemId).name} \u00d7${quantity}`)
+  return parts.join(' \u00b7 ')
+}
+
+/**
  * @param {GameState} state
  * @returns {string[]}
  */

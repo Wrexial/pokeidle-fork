@@ -1,6 +1,7 @@
 // Split from the former assets/index.js — see tools/decompile/split-modules.mjs
 
 import { RAID_COOLDOWN_MS, RAID_LEVEL_MAX, breedShinyOdds, breedShinyParentOdds, daycareEggBattles, defaultCatchSettings, dexRewardVictoryTokens, expCandyDropChance, prestigeTokenReward, rareCandyDropChance, swarmBattleCount, swarmSpawnChance, valuableDropChance, wildMasterBallChance, wonderTradeShinyOdds } from '../data/config.js'
+import { ACHIEVEMENTS } from '../data/achievements.js'
 import { activeItems, consumableItems, pokeBalls } from '../data/items.js'
 import { dailyDropMultiplier, dailyEventByKey, rollDailyEvent, todayKey } from '../data/daily-events.js'
 import { natureName, randomNature } from '../data/natures.js'
@@ -8,7 +9,7 @@ import { elite4Data, encounterData, gymLeaderData, mapData, moveLearnsets, pokem
 import { createVolatileState } from './combat.js'
 import { calculatePokemonStats, calculateRequiredExperience, createPokemon, getLevelUpResults, insertIntoBox, nextBoxSortMode, resolvePokemonMoves, sortBoxMembers } from './pokemon.js'
 import { canBreed, eggSpeciesKey } from './breeding.js'
-import { checkShinyOdds, computeUnlockedLocations, getRegionUnlockTokens, isActiveEffectItem, loadActivePokemonFromParty, prepareNextBattle, rollCandyDrop, rollValuableDrop, syncActivePokemonIntoParty, tickBattleCounters } from './progression.js'
+import { checkShinyOdds, computeUnlockedLocations, formatReward, getRegionUnlockTokens, isActiveEffectItem, loadActivePokemonFromParty, prepareNextBattle, rollCandyDrop, rollValuableDrop, syncActivePokemonIntoParty, tickBattleCounters } from './progression.js'
 
 /** @type {GameState} */
 export const initialGameState = {
@@ -73,6 +74,8 @@ export const initialGameState = {
   defeatedChampions: [],
   /** Generation indices (0-based) whose dex-completion reward has been paid. */
   rewardedGenerations: [],
+  /** Achievement ids whose one-off reward has been paid. */
+  rewardedAchievements: [],
   regionPrestige: {},
   /** Next Battle Tower floor to attempt (0 = not in a run). */
   towerFloor: 0,
@@ -1644,6 +1647,45 @@ export function gameReducer(state, action) {
           icon: '🏆',
           dedupeKey: `dexreward:${generationIndex}`,
         })
+      return claimedState
+    }
+    case 'CLAIM_ACHIEVEMENT_REWARDS': {
+      const requestedIds = Array.isArray(action.payload?.ids) ? action.payload.ids : [],
+        rewarded = new Set(state.rewardedAchievements ?? []),
+        newlyRewarded = requestedIds.filter((/** @type {string} */ id) => {
+          const achievement = ACHIEVEMENTS.find((candidate) => candidate.id === id)
+          return achievement && !rewarded.has(id) && achievement.check(state)
+        })
+      if (newlyRewarded.length === 0) return state
+      let money = state.money,
+        victoryTokens = state.victoryTokens
+      const inventory = { ...state.inventory }
+      for (const id of newlyRewarded) {
+        const reward = /** @type {any} */ (
+          ACHIEVEMENTS.find((achievement) => achievement.id === id)
+        ).reward
+        money += reward.money ?? 0
+        victoryTokens += reward.victoryTokens ?? 0
+        for (const [itemId, quantity] of Object.entries(reward.items ?? {}))
+          inventory[itemId] = (inventory[itemId] ?? 0) + quantity
+      }
+      let claimedState = {
+        ...state,
+        money,
+        victoryTokens,
+        inventory,
+        rewardedAchievements: [...(state.rewardedAchievements ?? []), ...newlyRewarded],
+      }
+      for (const id of newlyRewarded) {
+        const achievement = ACHIEVEMENTS.find((candidate) => candidate.id === id)
+        if (!achievement) continue
+        claimedState = withNotification(claimedState, {
+          message: `Achievement: ${achievement.name} (+${formatReward(achievement.reward)})`,
+          tone: 'success',
+          icon: '🏆',
+          dedupeKey: `achievement:${id}`,
+        })
+      }
       return claimedState
     }
     case 'REFRESH_DAILY_EVENT': {

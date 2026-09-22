@@ -47,9 +47,7 @@ export function useGameLoop() {
   const { state, dispatch } = useGame(),
     intervalRef = React.useRef(/** @type {ReturnType<typeof setInterval> | null} */ (null)),
     phaseRef = React.useRef(state.phase),
-    stateRef = React.useRef(state),
-    /** Null until the first render, so already-earned medals don't all pop at once. */
-    announcedAchievementsRef = React.useRef(/** @type {Set<string> | null} */ (null))
+    stateRef = React.useRef(state)
   React.useEffect(() => {
     ;((phaseRef.current = state.phase), (stateRef.current = state))
   }, [state])
@@ -706,29 +704,18 @@ export function useGameLoop() {
         })
     }, [state.pokedexCaught, state.rewardedGenerations, dispatch]),
     React.useEffect(() => {
-      const achieved = ACHIEVEMENTS.filter(
-        (achievement) => achievement.check(state)
-      )
-      if (announcedAchievementsRef.current === null) {
-        announcedAchievementsRef.current = new Set(
-          achieved.map((achievement) => achievement.id)
+      // Claim any achieved-but-unpaid milestone rewards. This also runs on load,
+      // so older saves get their rewards retroactively (rewardedAchievements is
+      // persisted, so each reward is only paid once).
+      const rewarded = new Set(state.rewardedAchievements ?? []),
+        pending = ACHIEVEMENTS.filter(
+          (achievement) => !rewarded.has(achievement.id) && achievement.check(state)
         )
-        return
-      }
-      const newlyAchieved = achieved.filter(
-        (achievement) => !announcedAchievementsRef.current?.has(achievement.id)
-      )
-      announcedAchievementsRef.current = new Set(
-        achieved.map((achievement) => achievement.id)
-      )
-      for (const achievement of newlyAchieved)
+      pending.length > 0 &&
         dispatch({
-          type: 'PUSH_NOTIFICATION',
+          type: 'CLAIM_ACHIEVEMENT_REWARDS',
           payload: {
-            message: `Achievement unlocked: ${achievement.name}`,
-            tone: 'success',
-            icon: '🏆',
-            dedupeKey: `achievement:${achievement.id}`,
+            ids: pending.map((achievement) => achievement.id),
           },
         })
     }, [
@@ -741,6 +728,7 @@ export function useGameLoop() {
       state.regionPrestige,
       state.towerBest,
       state.money,
+      state.rewardedAchievements,
       dispatch,
     ]))
 }

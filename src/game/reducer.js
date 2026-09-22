@@ -96,6 +96,8 @@ export const initialGameState = {
   reducedMotion: !1,
   /** Add type labels to moves so type is not conveyed by colour alone. */
   colourblindTypes: !1,
+  /** Uniformly scale the UI up for readability. */
+  largeText: !1,
   /** Background music (off by default; the AudioContext starts on first use). */
   musicEnabled: !1,
   /** Sound effects for notable events (on by default). */
@@ -2420,6 +2422,11 @@ export function gameReducer(state, action) {
       return {
         ...state,
         colourblindTypes: !state.colourblindTypes,
+      }
+    case 'TOGGLE_LARGE_TEXT':
+      return {
+        ...state,
+        largeText: !state.largeText,
       }
     case 'TOGGLE_MUSIC':
       return {

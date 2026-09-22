@@ -196,6 +196,11 @@ export function SettingsModal({ onClose }) {
                           ? 'Move Type Labels: ON'
                           : 'Move Type Labels: OFF',
                       }),
+                      jsx('button', {
+                        className: `settings-toggle-btn${state.largeText ? ' active' : ''}`,
+                        onClick: () => dispatch({ type: 'TOGGLE_LARGE_TEXT' }),
+                        children: state.largeText ? 'Larger Text: ON' : 'Larger Text: OFF',
+                      }),
                     ],
                   }),
                   jsxs('div', {

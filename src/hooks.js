@@ -917,7 +917,8 @@ export function useAccessibilitySettings() {
     const root = document.documentElement
     root.dataset.reducedMotion = state.reducedMotion ? 'true' : 'false'
     root.dataset.colourblindTypes = state.colourblindTypes ? 'true' : 'false'
-  }, [state.reducedMotion, state.colourblindTypes])
+    root.dataset.largeText = state.largeText ? 'true' : 'false'
+  }, [state.reducedMotion, state.colourblindTypes, state.largeText])
 }
 
 /**

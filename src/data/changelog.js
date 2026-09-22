@@ -1,10 +1,22 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.9.23'
+export const GAME_VERSION = '0.9.24'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.9.24',
+      subtitle: 'Larger Text',
+      sections: [
+        {
+          heading: 'Settings',
+          items: [
+            'A "Larger Text" toggle in Settings scales the whole UI up by 15% (like browser zoom) for readability',
+          ],
+        },
+      ],
+    },
     {
       version: '0.9.23',
       subtitle: 'Challenge Modes',

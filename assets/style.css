@@ -826,6 +826,12 @@ img {
     scroll-behavior: auto !important
 }
 
+/* Accessibility: scale the whole UI up (works like browser zoom, so the layout
+   still fits the screen and anything tall reflows/scrolls). */
+[data-large-text=true] body {
+    zoom: 1.15
+}
+
 /* Keep the damage number visible instead of instantly fading it out. */
 [data-reduced-motion=true] .damage-float {
     animation: none !important;

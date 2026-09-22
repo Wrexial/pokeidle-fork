@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.23**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.24**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -28,7 +28,7 @@ achievement rewards, map QoL, release rewards and notifications. The remaining
 items, best return first:
 
 1. **#16 More ideas (grab bag)** — mostly S · ★★★ — still open: Nuzlocke /
-   monotype challenge modes, a larger-text option and a performance pass.
+   monotype challenge modes and a performance pass.
 
 ### Tier 2 — High impact, worth the effort (medium–large)
 
@@ -332,8 +332,8 @@ Smaller or more speculative, roughly highest-value first:
 - [x] **Accessibility: motion & colour** — a settings toggle forces reduced
       motion (overrides the OS), and "Move Type Labels" prints each move's type
       so it isn't colour-only. Shipped in 0.9.12.
-- [ ] **Accessibility: larger text** — a UI text-size option; the pixel UI is
-      fixed-size today, so this needs a scalable layout first.
+- [x] **Accessibility: larger text** — a "Larger Text" Settings toggle scales
+      the whole UI up 15%. Shipped 0.9.24 (CSS `zoom` on `body`).
 - [x] **Audio** — synthesized (no asset files) chiptune themes per region plus
       event SFX, with separate Music and Sound Effects toggles under Settings →
       Audio, both off by default. Shipped in 0.9.13 (`src/game/audio.js`).
@@ -1200,6 +1200,9 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.9.24 (larger text): a Settings toggle scales the whole UI up 15% for
+readability, completing the accessibility items.
 
 0.9.23 (challenge modes): Settings gained Randomizer (random wild species) and
 Level Scaling (wild levels match your active Pokemon) hard-mode toggles.

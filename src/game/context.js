@@ -428,6 +428,7 @@ function repairSave(saved) {
     browserNotifications: !!saved.browserNotifications,
     reducedMotion: !!saved.reducedMotion,
     colourblindTypes: !!saved.colourblindTypes,
+    largeText: !!saved.largeText,
     musicEnabled: !!saved.musicEnabled,
     // SFX default on for saves that predate the setting.
     sfxEnabled: saved.sfxEnabled === void 0 ? true : !!saved.sfxEnabled,
@@ -539,6 +540,7 @@ export function serializeSave(state) {
     browserNotifications: state.browserNotifications,
     reducedMotion: state.reducedMotion,
     colourblindTypes: state.colourblindTypes,
+    largeText: state.largeText,
     musicEnabled: state.musicEnabled,
     sfxEnabled: state.sfxEnabled,
     challengeRandomizer: state.challengeRandomizer,
@@ -601,6 +603,7 @@ export function GameProvider({ children }) {
       state.browserNotifications,
       state.reducedMotion,
       state.colourblindTypes,
+      state.largeText,
       state.musicEnabled,
       state.sfxEnabled,
       state.challengeRandomizer,

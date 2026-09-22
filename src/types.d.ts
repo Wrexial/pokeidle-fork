@@ -204,6 +204,8 @@ type GameState = {
   reducedMotion: boolean
   /** Add type labels to moves so type is not conveyed by colour alone. */
   colourblindTypes: boolean
+  /** Uniformly scale the UI up for readability. */
+  largeText: boolean
   /** Background music (off by default). */
   musicEnabled: boolean
   /** Sound effects for notable events (off by default). */

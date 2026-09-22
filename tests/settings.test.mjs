@@ -24,6 +24,10 @@ test('accessibility toggles flip their settings', () => {
     gameReducer(colourblind, { type: 'TOGGLE_COLOURBLIND_TYPES' }).colourblindTypes,
     false
   )
+
+  const largeText = gameReducer(initialGameState, { type: 'TOGGLE_LARGE_TEXT' })
+  assert.equal(largeText.largeText, true)
+  assert.equal(gameReducer(largeText, { type: 'TOGGLE_LARGE_TEXT' }).largeText, false)
 })
 
 test('audio toggles flip their settings', () => {
@@ -75,6 +79,8 @@ test('repairSave defaults the accessibility settings off and keeps them on', () 
   assert.equal(defaults.colourblindTypes, false)
   assert.equal(enabled.reducedMotion, true)
   assert.equal(enabled.colourblindTypes, true)
+  assert.equal(defaults.largeText, false)
+  assert.equal(repairSave(save({ largeText: true })).largeText, true)
   assert.equal(defaults.musicEnabled, false)
   assert.equal(defaults.sfxEnabled, true)
   assert.equal(repairSave(save({ musicEnabled: true, sfxEnabled: true })).musicEnabled, true)

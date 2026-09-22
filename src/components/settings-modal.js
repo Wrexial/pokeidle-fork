@@ -2,13 +2,63 @@
 
 import React from 'react'
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
-import { clearSave } from '../data/config.js'
+import { SAVE_KEY, SAVE_VERSION, clearSave } from '../data/config.js'
+import { repairSave, serializeSave, useGame } from '../game/context.js'
 
 /** @param {{ onClose: () => void }} props */
 export function SettingsModal({ onClose }) {
+  const { state, dispatch } = useGame()
   const [confirming, setConfirming] = React.useState(!1)
+  const [importError, setImportError] = React.useState('')
+  /** @type {React.RefObject<HTMLInputElement>} */
+  const fileInputRef = React.useRef(/** @type {any} */ (null))
   function resetSave() {
     ;(clearSave(), window.location.reload())
+  }
+  function exportSave() {
+    if (!state.playerPokemon) return
+    const blob = new Blob([JSON.stringify(serializeSave(state), null, 2)], {
+      type: 'application/json',
+    })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `pokemon-idle-save-${new Date().toISOString().slice(0, 10)}.json`
+    link.click()
+    URL.revokeObjectURL(url)
+  }
+  /** @param {React.ChangeEvent<HTMLInputElement>} event */
+  function importSave(event) {
+    const file = event.target.files?.[0]
+    event.target.value = ''
+    if (!file) return
+    const reader = new FileReader()
+    reader.onload = () => {
+      let parsed
+      let repaired = null
+      try {
+        parsed = JSON.parse(String(reader.result))
+        repaired = repairSave(parsed)
+      } catch {
+        repaired = null
+      }
+      if (!repaired) {
+        setImportError('That file is not a valid Pokémon Idle save.')
+        return
+      }
+      // Stop the idle loop so an autosave cannot overwrite the import before
+      // the reload finishes.
+      if (!state.paused) dispatch({ type: 'TOGGLE_PAUSE' })
+      // Stamp the current version: repairSave above already validated the
+      // shape, so a save from another build is upgraded rather than rejected.
+      try {
+        localStorage.setItem(SAVE_KEY, JSON.stringify({ ...parsed, version: SAVE_VERSION }))
+        window.location.reload()
+      } catch {
+        setImportError('Could not write the save to browser storage.')
+      }
+    }
+    reader.readAsText(file)
   }
   return jsx('div', {
     className: 'battle-info-overlay',
@@ -78,6 +128,49 @@ export function SettingsModal({ onClose }) {
                     target: '_blank',
                     rel: 'noopener noreferrer',
                     children: 'Wild Encounter Index',
+                  }),
+                  jsxs('div', {
+                    className: 'settings-section',
+                    children: [
+                      jsx('div', {
+                        className: 'settings-section-title',
+                        children: 'Save Data',
+                      }),
+                      jsx('p', {
+                        className: 'settings-hint',
+                        children:
+                          'Export a backup of your progress, or import one from a file. Importing replaces your current save.',
+                      }),
+                      jsxs('div', {
+                        className: 'settings-save-row',
+                        children: [
+                          jsx('button', {
+                            className: 'settings-save-btn',
+                            onClick: exportSave,
+                            disabled: !state.playerPokemon,
+                            children: '⬇ Export Save',
+                          }),
+                          jsx('button', {
+                            className: 'settings-save-btn',
+                            onClick: () => fileInputRef.current?.click(),
+                            children: '⬆ Import Save',
+                          }),
+                          jsx('input', {
+                            ref: fileInputRef,
+                            type: 'file',
+                            accept: '.json,application/json',
+                            style: { display: 'none' },
+                            onChange: importSave,
+                          }),
+                        ],
+                      }),
+                      importError
+                        ? jsx('p', {
+                            className: 'settings-save-error',
+                            children: importError,
+                          })
+                        : null,
+                    ],
                   }),
                   jsx('button', {
                     className: 'settings-reset-btn',

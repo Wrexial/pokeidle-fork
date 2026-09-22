@@ -1,10 +1,28 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.9.0'
+export const GAME_VERSION = '0.9.1'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.9.1',
+      subtitle: 'Save Backups & Box Order',
+      sections: [
+        {
+          heading: 'Save Data',
+          items: [
+            'Export your save to a JSON file and import a backup from Settings \u2014 importing replaces your current progress',
+          ],
+        },
+        {
+          heading: 'Fixes',
+          items: [
+            'With the box sorted by New, a freshly caught or hatched Pokemon now appears at the front instead of the end',
+          ],
+        },
+      ],
+    },
     {
       version: '0.9.0',
       subtitle: 'Dex Rewards & Battle Clarity',

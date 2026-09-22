@@ -393,6 +393,61 @@ function loadSavedState() {
   return repaired
 }
 
+/**
+ * Build the serialisable save blob for the current state. Kept in one place so
+ * the autosave and the manual export can never drift apart.
+ * @param {GameState} state
+ * @returns {Record<string, any>}
+ */
+export function serializeSave(state) {
+  return {
+    version: SAVE_VERSION,
+    playerPokemon: state.playerPokemon,
+    startRegion: state.startRegion,
+    currentRoute: state.currentRoute,
+    speed: state.speed,
+    wildBattlesWon: state.wildBattlesWon,
+    trainerBattlesWon: state.trainerBattlesWon,
+    battlesWonByLocation: state.battlesWonByLocation,
+    party: state.party,
+    box: state.box,
+    boxSort: state.boxSort,
+    autoCatch: state.autoCatch,
+    nextPokemonId: state.nextPokemonId,
+    currentLocation: state.currentLocation,
+    unlockedLocations: state.unlockedLocations,
+    unlockedRegions: state.unlockedRegions,
+    catchSettings: state.catchSettings,
+    globalCatchDefaults: state.globalCatchDefaults,
+    alwaysCatchShinies: state.alwaysCatchShinies,
+    money: state.money,
+    inventory: state.inventory,
+    pokedexSeen: state.pokedexSeen,
+    pokedexCaught: state.pokedexCaught,
+    shinyCaught: state.shinyCaught,
+    shinyChain: state.shinyChain,
+    swarm: state.swarm,
+    daycare: state.daycare,
+    shinySeen: state.shinySeen,
+    defeatedGyms: state.defeatedGyms,
+    defeatedEliteFour: state.defeatedEliteFour,
+    defeatedChampions: state.defeatedChampions,
+    rewardedGenerations: state.rewardedGenerations,
+    regionPrestige: state.regionPrestige,
+    towerFloor: state.towerFloor,
+    towerBest: state.towerBest,
+    victoryTokens: state.victoryTokens,
+    autoProceed: state.autoProceed,
+    raidCooldownEnd: state.raidCooldownEnd,
+    raidLegendary: state.raidLegendary,
+    raidRegion: state.raidRegion,
+    inRaid: state.inRaid,
+    raidLevel: state.raidLevel,
+    preRaidLocation: state.preRaidLocation,
+    activeEffects: state.activeEffects,
+  }
+}
+
 /** @param {{ children: any }} props */
 export function GameProvider({ children }) {
   const [state, dispatch] = React.useReducer(
@@ -403,52 +458,7 @@ export function GameProvider({ children }) {
   return (
     React.useEffect(() => {
       if (state.playerPokemon && (state.phase === 'idle' || state.phase === 'victory')) {
-        const saveData = {
-          version: SAVE_VERSION,
-          playerPokemon: state.playerPokemon,
-          startRegion: state.startRegion,
-          currentRoute: state.currentRoute,
-          speed: state.speed,
-          wildBattlesWon: state.wildBattlesWon,
-          trainerBattlesWon: state.trainerBattlesWon,
-          battlesWonByLocation: state.battlesWonByLocation,
-          party: state.party,
-          box: state.box,
-          boxSort: state.boxSort,
-          autoCatch: state.autoCatch,
-          nextPokemonId: state.nextPokemonId,
-          currentLocation: state.currentLocation,
-          unlockedLocations: state.unlockedLocations,
-          unlockedRegions: state.unlockedRegions,
-          catchSettings: state.catchSettings,
-          globalCatchDefaults: state.globalCatchDefaults,
-          alwaysCatchShinies: state.alwaysCatchShinies,
-          money: state.money,
-          inventory: state.inventory,
-          pokedexSeen: state.pokedexSeen,
-          pokedexCaught: state.pokedexCaught,
-          shinyCaught: state.shinyCaught,
-          shinyChain: state.shinyChain,
-          swarm: state.swarm,
-          daycare: state.daycare,
-          shinySeen: state.shinySeen,
-          defeatedGyms: state.defeatedGyms,
-          defeatedEliteFour: state.defeatedEliteFour,
-          defeatedChampions: state.defeatedChampions,
-          rewardedGenerations: state.rewardedGenerations,
-          regionPrestige: state.regionPrestige,
-          towerFloor: state.towerFloor,
-          towerBest: state.towerBest,
-          victoryTokens: state.victoryTokens,
-          autoProceed: state.autoProceed,
-          raidCooldownEnd: state.raidCooldownEnd,
-          raidLegendary: state.raidLegendary,
-          raidRegion: state.raidRegion,
-          inRaid: state.inRaid,
-          raidLevel: state.raidLevel,
-          preRaidLocation: state.preRaidLocation,
-          activeEffects: state.activeEffects,
-        }
+        const saveData = serializeSave(state)
         try {
           localStorage.setItem(SAVE_KEY, JSON.stringify(saveData))
           // Migration finished: the legacy key is no longer needed.

@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.8.1**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.1**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -19,35 +19,21 @@ working order, and the numbered sections as the details.
 
 ### Tier 1 — Quick wins (small effort, high gain)
 
-1. **#13 Auto-travel / idle QoL** — S · ★★★★ — the game is idle; walking to
-   the next route is a constant papercut.
-2. **#26 README + GitHub "About"** — S · ★★★★ — the project's front door is
-   missing; high value for how complete the game is.
-3. **#30 Caught / event QOL indicators** — S–M · ★★★★ — a caught badge plus a
-   reusable toast system that unblocks a dozen other notifications.
-4. **#37 Master Ball catch button** — S–M · ★★★★ — a dedicated, animated throw
+**Shipped** in 0.9.0/0.9.1: #13 auto-travel, #26 README/licence, #30 caught
+badge + toast queue, #1 healing items, #12 dex rewards, #21 unlock tokens, #33
+Rare/Exp. Candies, #34 sellable valuables, #15 save export/import (slots and
+share codes still open), and #41 box "New" sort prepend. The remaining items,
+best return first:
+
+1. **#37 Master Ball catch button** — S–M · ★★★★ — a dedicated, animated throw
    makes the rarest ball feel like an event instead of an auto-catch.
-5. **#15 Save management & sharing** — S–M · ★★★★ — export/import protects
-   the one save players care about; slots are a bonus.
-6. **#2b Natures** (slice of #2) — S–M · ★★★½ — cheap battle depth that also
+2. **#2b Natures** (slice of #2) — S–M · ★★★½ — cheap battle depth that also
    feeds daycare (#3).
-7. **#14 Lightweight test suite** — S–M · ★★★½ (dev value) — pays off every
+3. **#14 Lightweight test suite** — S–M · ★★★½ (dev value) — pays off every
    future change.
-8. **#1 Healing items / Potions** — S · ★★★ — a money sink and tactical
-   option; no new data files.
-9. **#12 Dex-completion rewards** — S · ★★★ — gives the Shiny Charm grind a
-   payoff.
-10. **#21 Unlock Tokens endgame** — S · ★★★ — removes a dead banner once all
-    regions are open.
-11. **#33 Rare Candy / EXP Candy drops** — S–M · ★★★ — a levelling shortcut
-    that gives rare wild finds more value.
-12. **#34 Valuables you can sell** — S–M · ★★★ — treasure drops plus a Sell
-    action extend the shops and give the economy an outlet.
-13. **#5 Daily / periodic events** — S–M · ★★★ — cheap engagement loop.
-14. **#16 More ideas (grab bag)** — mostly S · ★★★ — mine the quick ones
-    (achievement rewards, release/selling, map QoL, notifications).
-15. **#41 New additions in the box** — S · ★★ — in "New" sort, a caught or
-    hatched Pokemon should join the front of the box, not the end.
+4. **#5 Daily / periodic events** — S–M · ★★★ — cheap engagement loop.
+5. **#16 More ideas (grab bag)** — mostly S · ★★★ — mine the quick ones
+   (achievement rewards, release/selling, map QoL, notifications).
 
 ### Tier 2 — High impact, worth the effort (medium–large)
 
@@ -1220,6 +1206,18 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.9.1 (save backup + box order): Settings can export the save to a JSON file
+and import one back (stamped to the current version, so backups survive a save
+shape bump); the box serializer is now shared with the autosave so the two
+can't drift. With the box sorted by "New", freshly caught/hatched/withdrawn
+Pokemon are prepended so they show up at the front rather than the end.
+
+0.9.0 (Dex Rewards & Battle Clarity): potions/revives and marts, Rare/Exp.
+Candies and sellable treasures with Medicine/Candies/Valuables bag tabs, dex
+completion rewards + Records section, a caught-Pokemon battle indicator, a
+toast notification queue, and leftover Region Unlock Tokens converting to
+Victory Tokens once all regions are open.
 
 QOL batch (box sort modes with a remembered choice, egg-hatch popup with quick
 release, living-dex capture mode, and out-of-combat move editing with the

@@ -4,7 +4,7 @@ import { RAID_COOLDOWN_MS, RAID_LEVEL_MAX, breedShinyOdds, breedShinyParentOdds,
 import { activeItems, consumableItems, pokeBalls } from '../data/items.js'
 import { elite4Data, encounterData, gymLeaderData, mapData, moveLearnsets, pokemonSpecies, regions } from '../data/gameData.js'
 import { createVolatileState } from './combat.js'
-import { calculatePokemonStats, calculateRequiredExperience, createPokemon, getLevelUpResults, nextBoxSortMode, resolvePokemonMoves, sortBoxMembers } from './pokemon.js'
+import { calculatePokemonStats, calculateRequiredExperience, createPokemon, getLevelUpResults, insertIntoBox, nextBoxSortMode, resolvePokemonMoves, sortBoxMembers } from './pokemon.js'
 import { canBreed, eggSpeciesKey } from './breeding.js'
 import { checkShinyOdds, computeUnlockedLocations, getRegionUnlockTokens, isActiveEffectItem, loadActivePokemonFromParty, prepareNextBattle, rollCandyDrop, rollValuableDrop, syncActivePokemonIntoParty, tickBattleCounters } from './progression.js'
 
@@ -644,7 +644,7 @@ export function gameReducer(state, action) {
           }
         : {
             ...state,
-            box: [...state.box, newPokemon],
+            box: insertIntoBox(state.box, newPokemon, state.boxSort),
             nextPokemonId: state.nextPokemonId + 1,
             inventory,
             battleLog: [...state.battleLog, `Caught ${species.name}! Sent to box.`].slice(
@@ -1796,7 +1796,7 @@ export function gameReducer(state, action) {
       if (!parent) return state
       return {
         ...state,
-        box: [...state.box, parent],
+        box: insertIntoBox(state.box, parent, state.boxSort),
         daycare: {
           ...state.daycare,
           parents: state.daycare.parents.filter((member) => member.id !== pokemonId),
@@ -1818,7 +1818,7 @@ export function gameReducer(state, action) {
         )
       return {
         ...state,
-        box: [...state.box, egg],
+        box: insertIntoBox(state.box, egg, state.boxSort),
         nextPokemonId: state.nextPokemonId + 1,
         hatchResult: egg,
         daycare: {

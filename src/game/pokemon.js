@@ -298,6 +298,19 @@ export function sortBoxMembers(box, mode = 'dex') {
 }
 
 /**
+ * Add a newly obtained Pokemon to the box. With the "New" (newest) sort active
+ * it is prepended so it shows up at the front of the list; every other sort
+ * mode appends so a deliberate manual drag order survives new catches.
+ * @param {Pokemon[]} box
+ * @param {Pokemon} pokemon
+ * @param {string} [boxSort]
+ * @returns {Pokemon[]}
+ */
+export function insertIntoBox(box, pokemon, boxSort = 'dex') {
+  return boxSort === 'newest' ? [pokemon, ...box] : [...box, pokemon]
+}
+
+/**
  * The next box sort mode in the cycle. `BOX_SORT_OPTIONS` is the source of
  * truth for the order; keep this tolerant of unknown values.
  * @param {string} [mode]

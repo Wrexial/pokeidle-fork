@@ -12,8 +12,11 @@ import { useGame } from '../game/context.js'
 import {
   BUG_CONTEST_BUSHES,
   BUG_CONTEST_RUSTLES,
+  bugContestPrize,
   bugStays,
   buildContestResults,
+  contestPlayerRank,
+  rewardItemName,
   rollContestBug,
   throwNetBall,
 } from '../game/minigames.js'
@@ -35,6 +38,9 @@ export function BugContestScene() {
     [madeCatch, setMadeCatch] = React.useState(!1),
     [results, setResults] = React.useState(
       () => /** @type {ReturnType<typeof buildContestResults>} */ ([])
+    ),
+    [prize, setPrize] = React.useState(
+      () => /** @type {ReturnType<typeof bugContestPrize> | null} */ (null)
     )
 
   // Resolve a Net Ball throw after a short animation. Kept in an effect so the
@@ -98,8 +104,10 @@ export function BugContestScene() {
 
   function nextRustle() {
     if (rustlesLeft <= 0) {
+      const board = buildContestResults(caught, baseLevel)
       setMessage('The judges tally the scores\u2026')
-      setResults(buildContestResults(caught, baseLevel))
+      setResults(board)
+      setPrize(bugContestPrize(contestPlayerRank(board)))
       setStep('done')
       return
     }
@@ -211,6 +219,25 @@ export function BugContestScene() {
                           )
                         ),
                     }),
+                    prize &&
+                      jsxs('div', {
+                        className: 'bug-contest-prize',
+                        children: [
+                          jsx('span', {
+                            className: 'bug-contest-prize-label',
+                            children: prize.label,
+                          }),
+                          jsxs('span', {
+                            className: 'bug-contest-prize-reward',
+                            children: [
+                              `$${prize.money.toLocaleString()}`,
+                              ...prize.items.map(
+                                (item) => ` + ${rewardItemName(item.itemId)} x${item.quantity}`
+                              ),
+                            ],
+                          }),
+                        ],
+                      }),
                     jsx('span', {
                       className: 'bug-contest-results-note',
                       children:
@@ -299,8 +326,15 @@ export function BugContestScene() {
                         })
                       : jsx('button', {
                           className: 'move-panel-btn confirm',
-                          onClick: () => dispatch({ type: 'END_BUG_CONTEST' }),
-                          children: 'LEAVE THE PARK',
+                          onClick: () => {
+                            if (prize)
+                              dispatch({
+                                type: 'CLAIM_MINIGAME_REWARD',
+                                payload: { money: prize.money, items: prize.items },
+                              })
+                            dispatch({ type: 'END_BUG_CONTEST' })
+                          },
+                          children: prize ? 'COLLECT PRIZE & LEAVE' : 'LEAVE THE PARK',
                         }),
           }),
         ],

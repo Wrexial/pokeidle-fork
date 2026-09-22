@@ -279,6 +279,33 @@ export function buildContestResults(playerBugs, baseLevel = 20, rivalCount = 3) 
   return board.sort((a, b) => b.score - a.score || b.level - a.level)
 }
 
+/**
+ * The player's best finishing rank on the results board (1-based), or null if
+ * none of their catches placed.
+ * @param {{ isPlayer: boolean }[]} results
+ * @returns {number | null}
+ */
+export function contestPlayerRank(results) {
+  const index = results.findIndex((entry) => entry.isPlayer)
+  return index >= 0 ? index + 1 : null
+}
+
+/**
+ * Prize for the player's finishing rank (1-3), or the participant consolation
+ * when they did not place. Matches the podium in the results scene.
+ * @param {number | null} rank
+ * @returns {{ money: number, items: { itemId: string, quantity: number }[], label: string }}
+ */
+export function bugContestPrize(rank) {
+  if (rank === 1)
+    return { money: 4000, items: [{ itemId: 'rareCandy', quantity: 1 }], label: 'First place' }
+  if (rank === 2)
+    return { money: 2000, items: [{ itemId: 'expCandyL', quantity: 1 }], label: 'Second place' }
+  if (rank === 3)
+    return { money: 1000, items: [{ itemId: 'expCandyM', quantity: 1 }], label: 'Third place' }
+  return { money: 400, items: [{ itemId: 'expCandyS', quantity: 1 }], label: 'Participant' }
+}
+
 /** Region -> minigame section metadata for the Gyms panel. */
 /** @type {Record<string, { title: string, cost: number, action: string, hint: string }>} */
 export const MINIGAME_INFO = {
@@ -292,7 +319,7 @@ export const MINIGAME_INFO = {
     title: 'Bug Catching Contest',
     cost: BUG_CONTEST_COST,
     action: 'ENTER CONTEST',
-    hint: `Rustle the park bushes to scare out a bug, then throw a free Net Ball or let it go. You get ${BUG_CONTEST_RUSTLES} rustles \u2014 keep whatever you catch, but the rarer bugs may flee. Entry is $${BUG_CONTEST_COST.toLocaleString()}.`,
+    hint: `Rustle the park bushes to scare out a bug, then throw a free Net Ball or let it go. You get ${BUG_CONTEST_RUSTLES} rustles \u2014 keep whatever you catch, but the rarer bugs may flee. Placing in the top three wins a cash and candy prize. Entry is $${BUG_CONTEST_COST.toLocaleString()}.`,
   },
   gameCorner: {
     title: 'Game Corner',

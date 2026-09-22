@@ -7032,6 +7032,27 @@ img {
     font-weight: 700
 }
 
+.bug-contest-prize {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 10px;
+    background: linear-gradient(180deg,rgba(240,208,96,.18),rgba(120,90,20,.18));
+    border: 1px solid #c8a848;
+    border-radius: 4px
+}
+
+.bug-contest-prize-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--gold)
+}
+
+.bug-contest-prize-reward {
+    font-size: 8px;
+    color: #fff
+}
+
 .bug-contest-results-note {
     font-size: 8px;
     color: var(--parchment);

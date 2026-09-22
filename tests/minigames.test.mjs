@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 const gameData = installGameData()
 
-const { BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL, BUG_CONTEST_RUSTLES, MINIGAME_BY_REGION, MINING_COST, SLOT_SPIN_COST, SLOT_SYMBOLS, bugCatchChance, bugFleeChance, bugStays, buildContestResults, contestScore, rewardItemName, rollContestBug, rollMiningReward, spinSlots, throwNetBall } = await import(
+const { BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL, BUG_CONTEST_RUSTLES, MINIGAME_BY_REGION, MINING_COST, SLOT_SPIN_COST, SLOT_SYMBOLS, bugCatchChance, bugContestPrize, bugFleeChance, bugStays, buildContestResults, contestPlayerRank, contestScore, rewardItemName, rollContestBug, rollMiningReward, spinSlots, throwNetBall } = await import(
   '../src/game/minigames.js'
 )
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
@@ -119,6 +119,24 @@ test('contest results rank the player and fake rivals by score', () => {
   for (let index = 1; index < results.length; index++)
     assert.ok(results[index - 1].score >= results[index].score, 'the board is sorted by score')
   assert.equal(contestScore('volcarona'), 550)
+})
+
+test('the top three contest placings pay prizes, with a participant fallback', () => {
+  const first = bugContestPrize(1),
+    second = bugContestPrize(2),
+    third = bugContestPrize(3),
+    participant = bugContestPrize(null)
+  assert.ok(first.money > second.money && second.money > third.money)
+  assert.ok(first.items.length > 0 && second.items.length > 0 && third.items.length > 0)
+  assert.equal(first.label, 'First place')
+  assert.equal(participant.label, 'Participant')
+  assert.ok(participant.items.length > 0)
+})
+
+test('contestPlayerRank finds the player\u2019s best placement', () => {
+  assert.equal(contestPlayerRank([{ isPlayer: false }, { isPlayer: true }]), 2)
+  assert.equal(contestPlayerRank([{ isPlayer: true }, { isPlayer: false }]), 1)
+  assert.equal(contestPlayerRank([{ isPlayer: false }]), null)
 })
 
 test('the contest supplies free Net Balls with a real catch chance', () => {

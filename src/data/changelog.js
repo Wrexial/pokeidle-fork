@@ -13,6 +13,7 @@ export const CHANGELOG = [
           heading: 'Minigames',
           items: [
             'The Bug Catching Contest now ends with a top-3 results podium, ranking your catches against fake rival bug catchers by total base stats',
+            'Placing in the contest top three now pays a cash and candy prize \u2014 and there is a small participant reward if you do not place',
             'Every Bug-type Pokemon \u2014 legendaries included \u2014 can now appear in the contest. Non-legendary bugs have been cleared out of the Raid Islands since the contest now covers them, while the legendary bugs stay on their islands too',
           ],
         },

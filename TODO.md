@@ -68,26 +68,30 @@ working order, and the numbered sections as the details.
     add Wild Area sub-areas and DLC land, mostly data.
 23. **#28 More region areas (DLC, caves, POIs)** — L · ★★★★½ — real content
     (Crown Tundra, Kitakami, landmark caves); data-heavy. Pairs with #35/#36.
-24. **#18 Better settings** — M · ★★★★ — centralises QOL toggles and the
+24. **#38 Clean up the Raid Islands** — M · ★★★½ — later generations leave
+    50–60 species on one raid pool, turning raids into a shapeless grab bag.
+25. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of
+    Armor, Crown Tundra, Kitakami and the Terarium to first-class regions.
+26. **#18 Better settings** — M · ★★★★ — centralises QOL toggles and the
     export/import from #15.
 
 ### Tier 3 — Medium effort, medium gain
 
-25. **#3 Daycare inheritance** — M · ★★★
-26. **#6 Friendship / happiness** — M · ★★★
-27. **#9 Move tutor / TMs** — M · ★★★
-28. **#11 NPC gifts & static encounters** — M · ★★★
-29. **#17 Pokéball variants** — M · ★★★
-30. **#27 Gender-specific sprites** — M · ★★★ (assets are half-there)
-31. **#29 Minigames** — M–L · ★★★ (small per minigame once one exists)
-32. **#4 In-battle Mega evolution** — M–L · ★★★
-33. **#32 Battle Tower tuning** — M · ★★★½ — auto-climb, sane Victory Token
+27. **#3 Daycare inheritance** — M · ★★★
+28. **#6 Friendship / happiness** — M · ★★★
+29. **#9 Move tutor / TMs** — M · ★★★
+30. **#11 NPC gifts & static encounters** — M · ★★★
+31. **#17 Pokéball variants** — M · ★★★
+32. **#27 Gender-specific sprites** — M · ★★★ (assets are half-there)
+33. **#29 Minigames** — M–L · ★★★ (small per minigame once one exists)
+34. **#4 In-battle Mega evolution** — M–L · ★★★
+35. **#32 Battle Tower tuning** — M · ★★★½ — auto-climb, sane Victory Token
     payout, and harder/faster teams (6 fully evolved, late legendaries).
 
 ### Tier 4 — Big and low-return, defer
 
-34. **#10 Weather & terrain** — M · ★★½ (nice depth, no urgency)
-35. **#19 Online sync** — L · ★★★ — the project's first backend; needs a
+36. **#10 Weather & terrain** — M · ★★½ (nice depth, no urgency)
+37. **#19 Online sync** — L · ★★★ — the project's first backend; needs a
     design doc and real ops for modest player value today.
 
 ---
@@ -1000,6 +1004,105 @@ Relevant code: `src/game/catching.js` (`attemptCatch`, `selectBestBall`,
 `pokeBalls.masterball` in `src/data/items.js`.
 
 Effort: **small–medium** (one button + a new action + an animation/CSS pass).
+
+## 38. Clean up the Raid Islands (later generations are bloated)
+
+The raid scan gives each region its generation's species that appear on **no**
+region's wild routes and can't be reached by breeding/evolving a route species.
+Because later dexes are huge (and their DLC/regional forms have no native
+route), the pools balloon:
+
+| Region | Gen | raid pool |
+| --- | --- | --- |
+| Kanto | 1 | 9 |
+| Johto | 2 | 12 |
+| Hoenn | 3 | 15 |
+| Sinnoh | 4 | 20 |
+| Unova | 5 | 27 |
+| Kalos | 6 | 10 |
+| Alola | 7 | **51** |
+| Galar | 8 | **59** |
+| Paldea | 9 | **58** |
+
+A 50–60 entry pool makes a Raid Island a shapeless grab bag: legendaries sit
+alongside ordinary final stages, `START_RAID` rolls one uniform random entry,
+and `pickRaidLegendary` just prefers unseen/uncaught — so the "special" feel is
+diluted and a region's endgame becomes a big lottery. Trimming must not orphan
+anything: the raid pool is the safety net for otherwise-unobtainable species,
+and `npm run validate` checks every species is obtainable.
+
+- [ ] Decide a target shape per region: e.g. keep **all** legendaries/mythicals
+      (no other source) plus a capped non-legendary set (~10–15), and move the
+      overflow to a real acquisition path (routed encounters, DLC areas #39,
+      evolution items) rather than deleting it.
+- [ ] Separate legendaries from the general pool in the data and the UI, so a
+      raid can prioritise uncaught legends and ordinary finals are a distinct,
+      lower-tier source.
+- [ ] Consider weighting/level-gating the pool (by badges/prestige) instead of a
+      uniform pick, and whether `raidPoolFor` should return the capped list.
+- [ ] Explain *why* the later pools are big and fix the root cause where it is
+      a data gap (regional/paradox forms and DLC mons with no native route),
+      not just a cap (see #35, #39).
+- [ ] Re-run `tools/generate-regions.cjs`, re-check every region's `raidPool`,
+      and confirm `validate-data.cjs` still passes with nothing orphaned.
+
+Relevant code: `tools/generate-regions.cjs` (`raidCandidates`,
+`raidPoolSpecies`, `staysInRaidPool`, `FORM_RAID_REGION`, `paldeaExtrasFor`),
+`public/data/regions.json` (`raidPool`), `pickRaidLegendary` / `resolveRoamer`
+(`src/game/progression.js`), `START_RAID` (`src/game/reducer.js`), the raid UI
+(`src/components/town-map.js`, `location-panel.js`) and `tools/validate-data.cjs`.
+
+Effort: **medium** (mostly balance/data plus the generator; game logic is small).
+
+## 39. Introduce DLC regions from later games
+
+Later games shipped whole expansion areas that today are either folded into a
+parent region, trimmed, or pushed into a raid pool:
+
+- Galar — **Isle of Armor** and **Crown Tundra** (Sword/Shield Expansion Pass).
+- Paldea — **Kitakami** (Teal Mask) and **Blueberry Academy / Terarium**
+  (Indigo Disk). `paldea-mossui-town` is already scraped as a bare dead-end town.
+- Optional older post-games: Kanto's **Sevii Islands** and Unova's Black/White 2
+  areas.
+
+#28a covers adding these as *areas inside their parent region*. This item is
+about promoting them to **first-class regions** in `regions.json` — their own
+`entry`, level curve, unlock path, raid pool and map — so they can be opened
+with an Unlock Token like any other region.
+
+- [ ] Decide the model: a region whose `generation` points at its parent gen,
+      vs. a new `parentRegion` / `isDlc` flag. Regions currently map 1:1 to
+      generations (`generation`, `speciesForGen`, per-gen raid pools and the
+      per-generation Shiny Charm), so DLC needs an explicit answer.
+- [ ] Add each area to `tools/region-maps.json` / `EXTRA_MAP_AREAS` with its own
+      locations + encounters (`tools/scrape-region-maps.cjs` +
+      `tools/scrape-route-encounters.cjs`, manual for Paldea-style provinces),
+      and a `REGION_MAP_LAYOUTS` override where the layout needs hand-measuring.
+- [ ] Give each a progression: post-game (after the parent Champion) or bought
+      with an Unlock Token; decide whether it needs a league/Champion or just a
+      raid/legendary endgame.
+- [ ] Reconcile the dex/shininess/achievement structures:
+      `GENERATION_DEX_RANGES` / `speciesKeysByGeneration` / `completedGenerations`
+      key by national dex, so DLC mons already count toward their gen — decide
+      whether DLC regions count toward region completion, Unlock Tokens and the
+      World Tour achievement.
+- [ ] Register the new region files in `assets/gameDataInjector.js` (the region
+      list) and re-export in `src/data/gameData.js`.
+- [ ] Re-check raid pools (#38) afterwards: DLC mons that gain a native DLC
+      route must drop out of the parent generation's pool.
+- [ ] Shape the maps with **zones** (#36) where they're open-world (the
+      Terarium, Wild Area-style areas).
+- [ ] Suggested order: Galar DLC (fits Galar's thin map, #35) → Paldea DLC
+      (relieves Paldea's 15-species trim and 58-entry raid pool) → older
+      post-games if worthwhile.
+
+Relevant code: `public/data/regions.json`, `tools/generate-regions.cjs` (region
+construction, `speciesForGen`, `levelRoutes`, the raid scan),
+`tools/scrape-region-maps.cjs`, `assets/gameDataInjector.js` (region file list),
+`src/game/progression.js` (`getRegionUnlockTokens`,
+`computeUnlockedLocations`), and the Town Map (`src/components/town-map.js`).
+
+Effort: **medium–large** (data-heavy, but shares groundwork with #28/#35/#36).
 
 ---
 

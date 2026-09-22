@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.3**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.4**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -23,11 +23,10 @@ working order, and the numbered sections as the details.
 toast queue, #1 healing items, #12 dex rewards, #21 unlock tokens, #33
 Rare/Exp. Candies, #34 sellable valuables, #15 save export/import (slots and
 share codes still open), #41 box "New" sort prepend, #37 the Master Ball
-button, #2b natures, and #14 the `node --test` suite. The remaining items, best
-return first:
+button, #2b natures, #14 the `node --test` suite, and #5 daily events. The
+remaining items, best return first:
 
-1. **#5 Daily / periodic events** — S–M · ★★★ — cheap engagement loop.
-2. **#16 More ideas (grab bag)** — mostly S · ★★★ — mine the quick ones
+1. **#16 More ideas (grab bag)** — mostly S · ★★★ — mine the quick ones
    (achievement rewards, release/selling, map QoL, notifications).
 
 ### Tier 2 — High impact, worth the effort (medium–large)
@@ -163,15 +162,17 @@ mid-battle transformation.
 
 Effort: **medium–large**.
 
-## 5. Daily / periodic events
+## 5. ✅ Daily / periodic events — shipped in 0.9.4
 
-Raised once, never scoped. Could be a timed bonus (extra shiny odds, a boosted
-route, a gift) on a real-time or battle-count cadence.
-
-- [ ] Decide the cadence (real time vs battles) and where it surfaces.
-- [ ] Reuse the swarm/daycare tick pattern in `gameReducer`.
-
-Effort: **small–medium**.
+Done. `src/data/daily-events.js` defines four events (Harvest / Fortune /
+Training / Lucky); one is rolled per local calendar day (deterministically from
+the date, refreshed at midnight by `useDailyEvent` in `game-layout.js`) and
+surfaces from a gift button in the battle top bar plus a toast. Effects use
+small pure multipliers applied at their call sites: EXP (`awardExperience`),
+trainer prizes (`hooks.js`), wild drops (`reducer.js`) and wild shiny odds
+(`resolvePokemonEncounter`/`resolveRoamer`). `CLAIM_DAILY_GIFT` grants a
+once-per-day gift; `REFRESH_DAILY_EVENT` re-rolls on a new day. Saved and
+sanitised in `context.js`, covered by `tests/daily-events.test.mjs`.
 
 ## 6. Friendship / happiness
 
@@ -1173,6 +1174,10 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.9.4 (daily events): one rotating event per real calendar day (double wild
+drops / trainer prizes / battle EXP, or double wild shiny odds) with a
+claimable once-per-day gift, surfaced from a battle top-bar button and a toast.
 
 Test suite: `npm test` runs a `node --test` suite under `tests/` covering
 unlocks, battle status/drain/flee, breeding, natures, shiny odds and the

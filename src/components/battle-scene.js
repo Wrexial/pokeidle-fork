@@ -4,6 +4,7 @@ import React from 'react'
 import { createPortal } from 'react-dom'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { moveCategoryIcons } from '../data/moves.js'
+import { dailyEventByKey } from '../data/daily-events.js'
 import { locationImages } from '../data/ui.js'
 import { completedGenerations, mapData, moveData, pokemonSpecies, speciesKeysByGeneration } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
@@ -14,6 +15,7 @@ import { PlayerInfoBox } from './player-info-box.js'
 import { SettingsModal } from './settings-modal.js'
 import { BattleTextBox } from './battle-text-box.js'
 import { EvolutionScene } from './evolution-scene.js'
+import { DailyEventModal } from './daily-event-modal.js'
 import { HealingScene } from './healing-scene.js'
 import { MasterBallScene } from './master-ball-scene.js'
 import { PokeballIcon } from './pokeball-icon.js'
@@ -24,6 +26,7 @@ export function BattleScene() {
   const [showMoveManager, setShowMoveManager] = React.useState(!1),
     [showInfo, setShowInfo] = React.useState(!1),
     [showSettings, setShowSettings] = React.useState(!1),
+    [showDaily, setShowDaily] = React.useState(!1),
     { state, dispatch } = useGame(),
     { playerPokemon, enemyPokemon, battleEvents } = state,
     completedGenerationSet = completedGenerations(state.pokedexCaught),
@@ -92,6 +95,18 @@ export function BattleScene() {
               }),
             title: state.autoProceed ? 'Auto-proceed: ON' : 'Auto-proceed: OFF',
             children: '▶▶',
+          }),
+          jsx('button', {
+            className: `battle-info-btn daily-event-btn${
+              state.dailyEvent && !state.dailyEvent.claimed ? ' claimable' : ''
+            }`,
+            onClick: () => setShowDaily(!0),
+            title: state.dailyEvent
+              ? dailyEventByKey[state.dailyEvent.kind]?.name ?? 'Daily Event'
+              : 'Daily Event',
+            children: state.dailyEvent
+              ? dailyEventByKey[state.dailyEvent.kind]?.icon ?? '🎁'
+              : '🎁',
           }),
           jsx('button', {
             className: 'battle-info-btn',
@@ -409,6 +424,10 @@ export function BattleScene() {
       showSettings &&
         jsx(SettingsModal, {
           onClose: () => setShowSettings(!1),
+        }),
+      showDaily &&
+        jsx(DailyEventModal, {
+          onClose: () => setShowDaily(!1),
         }),
     ],
   })

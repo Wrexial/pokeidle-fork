@@ -3,6 +3,7 @@
 import React from 'react'
 import { jsx } from 'react/jsx-runtime'
 import { LEGACY_SAVE_KEYS, SAVE_BACKUP_KEY, SAVE_KEY, SAVE_VERSION } from '../data/config.js'
+import { dailyEventByKey, todayKey } from '../data/daily-events.js'
 import { activeItems, pokeBalls } from '../data/items.js'
 import {
   elite4Data,
@@ -304,6 +305,17 @@ function repairSave(saved) {
     activeEffects = (Array.isArray(saved.activeEffects) ? saved.activeEffects : []).filter(
       /** @param {any} effect */ (effect) => effect && typeof effect === 'object' && effect.type in activeItems
     ),
+    dailyEvent =
+      saved.dailyEvent &&
+      typeof saved.dailyEvent === 'object' &&
+      dailyEventByKey[saved.dailyEvent.kind] &&
+      saved.dailyEvent.date === todayKey()
+        ? {
+            date: saved.dailyEvent.date,
+            kind: saved.dailyEvent.kind,
+            claimed: !!saved.dailyEvent.claimed,
+          }
+        : null,
     rewardedGenerations = (
       Array.isArray(saved.rewardedGenerations) ? saved.rewardedGenerations : []
     ).filter(
@@ -372,6 +384,7 @@ function repairSave(saved) {
     inRaid: saved.inRaid ?? false,
     raidLevel: saved.inRaid ? (saved.raidLevel ?? 0) : 0,
     preRaidLocation: saved.inRaid ? (saved.preRaidLocation ?? null) : null,
+    dailyEvent,
     activeEffects,
     ...(saved.inRaid
       ? {
@@ -471,6 +484,7 @@ export function serializeSave(state) {
     inRaid: state.inRaid,
     raidLevel: state.raidLevel,
     preRaidLocation: state.preRaidLocation,
+    dailyEvent: state.dailyEvent,
     activeEffects: state.activeEffects,
   }
 }

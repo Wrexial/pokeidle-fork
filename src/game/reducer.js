@@ -2,6 +2,7 @@
 
 import { RAID_COOLDOWN_MS, RAID_LEVEL_MAX, breedShinyOdds, breedShinyParentOdds, daycareEggBattles, defaultCatchSettings, dexRewardVictoryTokens, expCandyDropChance, prestigeTokenReward, rareCandyDropChance, swarmBattleCount, swarmSpawnChance, valuableDropChance, wildMasterBallChance, wonderTradeShinyOdds } from '../data/config.js'
 import { activeItems, consumableItems, pokeBalls } from '../data/items.js'
+import { dailyDropMultiplier, dailyEventByKey, rollDailyEvent, todayKey } from '../data/daily-events.js'
 import { natureName, randomNature } from '../data/natures.js'
 import { elite4Data, encounterData, gymLeaderData, mapData, moveLearnsets, pokemonSpecies, regions } from '../data/gameData.js'
 import { createVolatileState } from './combat.js'
@@ -60,6 +61,8 @@ export const initialGameState = {
   shinyCaught: [],
   /** Active swarm: a route temporarily overrun by one species. */
   swarm: null,
+  /** Today's rotating event + whether its gift was claimed (see src/data/daily-events.js). */
+  dailyEvent: null,
   /** Daycare: up to two deposited parents breeding eggs. */
   daycare: { parents: [], progress: 0 },
   /** Consecutive encounters of one species, boosting shiny odds (DexNav). */
@@ -350,8 +353,11 @@ export function gameReducer(state, action) {
           daycare.progress < daycareEggBattles
         )
           daycare = { ...daycare, progress: daycare.progress + 1 }
+        // Daily "Harvest Day" doubles the chance of every wild item drop.
+        const dropBonus = dailyDropMultiplier(state.dailyEvent),
+          dropChance = /** @param {number} chance */ (chance) => Math.min(1, chance * dropBonus)
         // A very rare Master Ball find.
-        if (Math.random() < wildMasterBallChance) {
+        if (Math.random() < dropChance(wildMasterBallChance)) {
           inventory = {
             ...inventory,
             masterball: (inventory.masterball ?? 0) + 1,
@@ -366,7 +372,7 @@ export function gameReducer(state, action) {
         }
         // Treasure and candy finds, scaled by the foe's level.
         const dropLevel = enemyPokemon?.level ?? 1
-        if (Math.random() < valuableDropChance) {
+        if (Math.random() < dropChance(valuableDropChance)) {
           const valuableId = rollValuableDrop(dropLevel)
           inventory = {
             ...inventory,
@@ -374,8 +380,8 @@ export function gameReducer(state, action) {
           }
           secretNotices.push(`You found a ${consumableItems[valuableId].name}!`)
         }
-        const candyId = Math.random() < rareCandyDropChance ? 'rareCandy' : null
-        if (candyId || Math.random() < expCandyDropChance) {
+        const candyId = Math.random() < dropChance(rareCandyDropChance) ? 'rareCandy' : null
+        if (candyId || Math.random() < dropChance(expCandyDropChance)) {
           const foundCandyId = candyId ?? rollCandyDrop(dropLevel)
           inventory = {
             ...inventory,
@@ -1639,6 +1645,51 @@ export function gameReducer(state, action) {
           dedupeKey: `dexreward:${generationIndex}`,
         })
       return claimedState
+    }
+    case 'REFRESH_DAILY_EVENT': {
+      const today = action.payload?.today ?? todayKey()
+      if (state.dailyEvent?.date === today) return state
+      const dailyEvent = rollDailyEvent(today),
+        event = dailyEventByKey[dailyEvent.kind]
+      return withNotification(
+        {
+          ...state,
+          dailyEvent,
+        },
+        {
+          message: `${event.name}: ${event.description}`,
+          tone: 'info',
+          icon: event.icon,
+          dedupeKey: `daily:${today}`,
+        }
+      )
+    }
+    case 'CLAIM_DAILY_GIFT': {
+      const dailyEvent = state.dailyEvent,
+        event = dailyEvent ? dailyEventByKey[dailyEvent.kind] : null
+      if (!event || !dailyEvent || dailyEvent.claimed) return state
+      const inventory = { ...state.inventory }
+      for (const [itemId, quantity] of Object.entries(event.gift.items))
+        inventory[itemId] = (inventory[itemId] ?? 0) + quantity
+      const giftMoney = event.gift.money
+      return withNotification(
+        {
+          ...state,
+          money: state.money + giftMoney,
+          inventory,
+          dailyEvent: { ...dailyEvent, claimed: true },
+          battleLog: [
+            ...state.battleLog,
+            `Claimed the ${event.name} gift: $${giftMoney.toLocaleString()} and items!`,
+          ].slice(-50),
+        },
+        {
+          message: `${event.name} gift claimed!`,
+          tone: 'success',
+          icon: '🎁',
+          dedupeKey: `dailygift:${dailyEvent.date}`,
+        }
+      )
     }
     case 'UPDATE_SHINY_CHAIN': {
       const { speciesKey } = action.payload

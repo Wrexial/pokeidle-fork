@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.9.3'
+export const GAME_VERSION = '0.9.4'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.9.4',
+      subtitle: 'Daily Events',
+      sections: [
+        {
+          heading: 'Daily Events',
+          items: [
+            'A Daily Event now rotates each real-world day, shown from the gift button in the battle top bar \u2014 Harvest Day (double wild item drops), Fortune Day (double trainer prizes), Training Day (double battle EXP) or Lucky Day (double wild shiny odds)',
+            'A one-off Daily Gift of money and items can be claimed each day; it resets at local midnight and is announced with a toast',
+          ],
+        },
+      ],
+    },
     {
       version: '0.9.3',
       subtitle: 'Natures',

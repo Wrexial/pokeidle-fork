@@ -400,9 +400,10 @@ export function pickRaidLegendary(pool, pokedexSeen, pokedexCaught) {
  * @param {string[]} pokedexSeen
  * @param {string[]} pokedexCaught
  * @param {Set<number>} completedGenerationSet
+ * @param {number} [shinyBonus] Multiplier on shiny odds from a daily event.
  * @returns {{ species: Species, speciesKey: string, level: number, isShiny: boolean, isRoamer: boolean } | null}
  */
-export function resolveRoamer(regionId, pokedexSeen, pokedexCaught, completedGenerationSet) {
+export function resolveRoamer(regionId, pokedexSeen, pokedexCaught, completedGenerationSet, shinyBonus = 1) {
   const region = regions.find((candidate) => candidate.id === regionId),
     candidates = (region?.raidPool ?? []).filter(
       (entry) => pokemonSpecies[entry.speciesKey]?.legendary && !pokedexCaught.includes(entry.speciesKey)
@@ -414,7 +415,12 @@ export function resolveRoamer(regionId, pokedexSeen, pokedexCaught, completedGen
     species: pokemonSpecies[entry.speciesKey],
     speciesKey: entry.speciesKey,
     level: entry.level,
-    isShiny: checkShinyOdds(shinyOddsForSpecies(entry.speciesKey, completedGenerationSet)),
+    isShiny: checkShinyOdds(
+      Math.max(
+        1,
+        Math.round(shinyOddsForSpecies(entry.speciesKey, completedGenerationSet) / shinyBonus)
+      )
+    ),
     isRoamer: !0,
   }
 }
@@ -424,9 +430,10 @@ export function resolveRoamer(regionId, pokedexSeen, pokedexCaught, completedGen
  * @param {{ speciesKey: string, multiplier: number }[]} modifiers
  * @param {Set<number>} completedGenerationSet
  * @param {{ speciesKey: string | null, count: number } | undefined} [shinyChain]
+ * @param {number} [shinyBonus] Multiplier on shiny odds from a daily event.
  * @returns {{ species: Species, speciesKey: string, level: number, isShiny: boolean, isRoamer?: boolean }}
  */
-export function resolvePokemonEncounter(encounterData, modifiers, completedGenerationSet, shinyChain) {
+export function resolvePokemonEncounter(encounterData, modifiers, completedGenerationSet, shinyChain, shinyBonus = 1) {
   const weightedEncounters = encounterData.encounters.map((encounter) => {
       const modifier = modifiers?.find((candidate) => candidate.speciesKey === encounter.speciesKey)
       return modifier
@@ -451,7 +458,8 @@ export function resolvePokemonEncounter(encounterData, modifiers, completedGener
           Math.max(
             1,
             Math.round(
-              shinyOddsForSpecies(encounter.speciesKey, completedGenerationSet) / chainMultiplier
+              shinyOddsForSpecies(encounter.speciesKey, completedGenerationSet) /
+                (chainMultiplier * shinyBonus)
             )
           )
         ),
@@ -467,7 +475,7 @@ export function resolvePokemonEncounter(encounterData, modifiers, completedGener
         1,
         Math.round(
           shinyOddsForSpecies(fallback.speciesKey, completedGenerationSet) /
-            shinyChainMultiplier(fallback.speciesKey, shinyChain)
+            (shinyChainMultiplier(fallback.speciesKey, shinyChain) * shinyBonus)
         )
       )
     ),
@@ -482,12 +490,13 @@ export function resolvePokemonEncounter(encounterData, modifiers, completedGener
  * @param {boolean} [hasExpShare]
  * @param {Pokemon[]} [party]
  * @param {number} [activeIndex]
+ * @param {number} [bonusMultiplier] Extra EXP multiplier (e.g. a daily event).
  * @returns {void}
  */
-export function awardExperience(dispatch, playerPokemon, enemyPokemon, multiplier, hasExpShare = !1, party = [], activeIndex = 0) {
+export function awardExperience(dispatch, playerPokemon, enemyPokemon, multiplier, hasExpShare = !1, party = [], activeIndex = 0, bonusMultiplier = 1) {
   const enemySpecies = pokemonSpecies[enemyPokemon.speciesKey],
     baseExp = calculateExpYield(enemySpecies, enemyPokemon.level),
-    gainedExp = Math.floor(baseExp * multiplier),
+    gainedExp = Math.floor(baseExp * multiplier * bonusMultiplier),
     finalExp = hasExpShare ? Math.floor(gainedExp * 0.5) : gainedExp,
     playerSpecies = pokemonSpecies[playerPokemon.speciesKey],
     newTotalExp = playerPokemon.totalExp + finalExp,

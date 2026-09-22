@@ -6,6 +6,7 @@ import { ballOrder } from './data/items.js'
 import { MOBILE_BREAKPOINT } from './data/ui.js'
 import { completedGenerations, encounterData, mapData, pokemonSpecies, trainerData } from './data/gameData.js'
 import { ACHIEVEMENTS } from './data/achievements.js'
+import { dailyExpMultiplier, dailyPrizeMultiplier, dailyShinyMultiplier } from './data/daily-events.js'
 import { useGame } from './game/context.js'
 import { attemptCatch, selectAutoCatchBall, selectBestBall, shouldAutoCatch } from './game/catching.js'
 import { createVolatileState, resolveBattleTurn } from './game/combat.js'
@@ -66,7 +67,10 @@ export function useGameLoop() {
       }
       // The Shiny Charm is per generation: a species gets the boosted odds once
       // its own generation's national dex is complete.
-      const completedGenerationSet = completedGenerations(currentGameState.pokedexCaught)
+      const completedGenerationSet = completedGenerations(currentGameState.pokedexCaught),
+        dailyExpBonus = dailyExpMultiplier(currentGameState.dailyEvent),
+        dailyPrizeBonus = dailyPrizeMultiplier(currentGameState.dailyEvent),
+        dailyShinyBonus = dailyShinyMultiplier(currentGameState.dailyEvent)
       switch (currentGameState.phase) {
         case 'idle': {
           if (!currentGameState.playerPokemon) return
@@ -285,13 +289,15 @@ export function useGameLoop() {
                 regionId,
                 currentGameState.pokedexSeen,
                 currentGameState.pokedexCaught,
-                completedGenerationSet
+                completedGenerationSet,
+                dailyShinyBonus
               ) ??
               resolvePokemonEncounter(
                 routeEncounterData,
                 activeModifierMultipliers,
                 completedGenerationSet,
-                currentGameState.shinyChain
+                currentGameState.shinyChain,
+                dailyShinyBonus
               ),
             pokemonBaseStats = calculatePokemonStats(
               spawningPokemonData.species,
@@ -462,7 +468,8 @@ export function useGameLoop() {
                   : 1,
                 hasExpShare,
                 currentGameState.party,
-                currentGameState.activePlayerPokemonIndex
+                currentGameState.activePlayerPokemonIndex,
+                dailyExpBonus
               ))
             return
           }
@@ -476,7 +483,8 @@ export function useGameLoop() {
               1.5,
               hasExpShare,
               currentGameState.party,
-              currentGameState.activePlayerPokemonIndex
+              currentGameState.activePlayerPokemonIndex,
+              dailyExpBonus
             )
             const nextIndex = trainerBattle.currentTrainerPokemonIndex + 1
             if (nextIndex < trainerBattle.trainerTeam.length)
@@ -488,7 +496,7 @@ export function useGameLoop() {
               })
             else {
               const maxLevel = Math.max(...trainerBattle.trainerTeam.map((member) => member.level)),
-                payout = trainerClassPayouts[trainerBattle.trainerClass] * maxLevel
+                payout = trainerClassPayouts[trainerBattle.trainerClass] * maxLevel * dailyPrizeBonus
               currentGameState.bossBattle
                 ? dispatch({
                     type: 'BOSS_BATTLE_END',
@@ -515,7 +523,8 @@ export function useGameLoop() {
             1,
             hasExpShare,
             currentGameState.party,
-            currentGameState.activePlayerPokemonIndex
+            currentGameState.activePlayerPokemonIndex,
+            dailyExpBonus
           )
           const forceCatch = enemyPokemon.isShiny && currentGameState.alwaysCatchShinies
           if (
@@ -805,4 +814,19 @@ export function useKonamiCode(onUnlock) {
       () => window.removeEventListener('keydown', handleKeyDown)
     )
   }, [])
+}
+
+/**
+ * Keep the daily event in sync with the real calendar day: rolls today's event
+ * on mount and checks again every minute (so it refreshes at local midnight,
+ * even if the tab stays open).
+ */
+export function useDailyEvent() {
+  const { dispatch } = useGame()
+  return React.useEffect(() => {
+    const refresh = () => dispatch({ type: 'REFRESH_DAILY_EVENT' })
+    refresh()
+    const intervalId = setInterval(refresh, 60_000)
+    return () => clearInterval(intervalId)
+  }, [dispatch])
 }

@@ -200,6 +200,8 @@ type GameState = {
   catchSettings: Record<string, Record<string, CatchRule>>
   globalCatchDefaults: CatchRule
   activeEffects: ActiveEffect[]
+  /** Today's rotating daily event, or null before it is rolled. */
+  dailyEvent?: { date: string, kind: string, claimed: boolean } | null
   pokedexSeen: string[]
   pokedexCaught: string[]
   shinySeen: string[]

@@ -2,7 +2,7 @@
 
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { useGame } from '../game/context.js'
-import { useIsMobile, useKonamiCode } from '../hooks.js'
+import { useIsMobile, useKonamiCode, useDailyEvent } from '../hooks.js'
 import { BattleScreen } from './battle-screen.js'
 import { TownMap } from './town-map.js'
 import { PartyBoxPanel } from './party-box-panel.js'
@@ -15,6 +15,8 @@ export function GameLayout() {
   const { dispatch } = useGame()
   // Debug cheat: enter the Konami code to max the active Pokemon to level 100.
   useKonamiCode(() => dispatch({ type: 'DEBUG_MAX_LEVEL' }))
+  // Rolls today's daily event and refreshes it at local midnight.
+  useDailyEvent()
   return useIsMobile()
     ? jsxs('div', {
         className: 'game-layout mobile',

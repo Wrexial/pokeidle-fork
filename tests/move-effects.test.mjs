@@ -550,3 +550,93 @@ test('Aurora Veil raises both screens', () => {
     assert.equal(player.screens.lightScreen, 4)
   })
 })
+
+test('Haze resets both sides’ stat changes', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['haze'],
+        speed: 200,
+        statStages: { attack: 2 },
+      }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], statStages: { defense: 1 } })
+    resolveBattleTurn(player, enemy, false)
+    assert.equal(player.statStages.attack, 0)
+    assert.equal(enemy.statStages.defense, 0)
+  })
+})
+
+test('Clear Smog resets only the target', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['clearSmog'],
+        speed: 200,
+        spAttack: 300,
+        statStages: { attack: 2 },
+      }),
+      enemy = battler({
+        name: 'Foe',
+        moves: ['splash'],
+        currentHp: 9999,
+        maxHp: 9999,
+        spDefense: 200,
+        statStages: { spAttack: 2 },
+      })
+    resolveBattleTurn(player, enemy, false)
+    assert.equal(enemy.statStages.spAttack, 0)
+    assert.equal(player.statStages.attack, 2, 'the user keeps its boosts')
+  })
+})
+
+test('Static paralyzes an attacker that makes contact', () => {
+  withFixedRandom(0.1, () => {
+    const attacker = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['tackle'],
+        attack: 200,
+        speed: 200,
+      }),
+      defender = battler({
+        name: 'Foe',
+        ability: 'static',
+        moves: ['splash'],
+        currentHp: 9999,
+        maxHp: 9999,
+        defense: 200,
+      })
+    resolveBattleTurn(attacker, defender, false)
+    assert.equal(attacker.status, 'paralysis')
+  })
+})
+
+test('Rough Skin hurts a contact attacker, but not a non-contact move', () => {
+  withFixedRandom(0.5, () => {
+    const make = (/** @type {string} */ moveId) => {
+      const attacker = battler({
+          name: 'Player',
+          isPlayer: true,
+          moves: [moveId],
+          attack: 200,
+          speed: 200,
+          currentHp: 400,
+          maxHp: 400,
+        }),
+        defender = battler({
+          name: 'Foe',
+          ability: 'roughSkin',
+          moves: ['splash'],
+          currentHp: 9999,
+          maxHp: 9999,
+          defense: 200,
+        })
+      resolveBattleTurn(attacker, defender, false)
+      return attacker.currentHp
+    }
+    assert.equal(make('tackle'), 350, 'contact takes 1/8 recoil')
+    assert.equal(make('earthquake'), 400, 'Earthquake makes no contact')
+  })
+})

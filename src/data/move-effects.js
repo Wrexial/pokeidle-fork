@@ -86,6 +86,9 @@ export const MOVE_OVERRIDES = {
   substitute: { effect: { type: 'substitute' } },
   attract: { effect: { type: 'infatuation' } },
   curse: { effect: { type: 'curse' } },
+  haze: { effect: { type: 'statReset', target: 'all' } },
+  clearSmog: { effect: { type: 'statReset', target: 'opponent' }, accuracy: 100 },
+  ivyCudgel: { accuracy: 100 },
   // --- Entry hazards ---
   stealthRock: { effect: { type: 'hazard', hazard: 'stealthRock' } },
   spikes: { effect: { type: 'hazard', hazard: 'spikes' } },
@@ -153,6 +156,51 @@ export const MOVE_OVERRIDES = {
   extremeSpeed: { priority: 2 },
   fakeOut: { priority: 3 },
   feint: { priority: 2 },
+}
+
+/**
+ * Physical moves that do not make contact, so contact abilities don't trigger.
+ * Kept to the common projectile/ground moves; anything else physical is treated
+ * as contact.
+ */
+const NON_CONTACT_MOVES = new Set([
+  'Earthquake',
+  'Magnitude',
+  'Fissure',
+  'Bone Club',
+  'Bonemerang',
+  'Bone Rush',
+  'Bulldoze',
+  'Drill Run',
+  'Rock Throw',
+  'Rock Slide',
+  'Rock Tomb',
+  'Rock Blast',
+  'Stone Edge',
+  'Rock Wrecker',
+  'Smack Down',
+  'Accelerock',
+  'Diamond Storm',
+  'Meteor Beam',
+  'Bullet Seed',
+  'Seed Bomb',
+  'Pin Missile',
+  'Spike Cannon',
+  'Barrage',
+  'Egg Bomb',
+  'Gunk Shot',
+  'Self-Destruct',
+  'Explosion',
+  'Present',
+])
+
+/**
+ * Whether a move makes contact (for Static / Flame Body / Rough Skin, etc.).
+ * @param {Move} moveDef
+ * @returns {boolean}
+ */
+export function moveMakesContact(moveDef) {
+  return moveDef?.category === 'physical' && !NON_CONTACT_MOVES.has(moveDef.name)
 }
 
 /**

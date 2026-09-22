@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.21.0**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.22.0**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -488,14 +488,19 @@ Still open:
 - ✅ **Entry hazards** (Stealth Rock, Spikes, Toxic Spikes, Sticky Web) —
       shipped 0.18.0 (battle-level side state + switch-in hook).
 - ✅ **Accuracy / evasion stat stages** — shipped 0.14.0.
-- [ ] Additional statuses if added to the data — **paralysis/toxic/confusion
-      (0.11.1), Leech Seed (0.14.0) and infatuation/Curse (0.21.0) shipped**;
-      still missing ability-based statuses and Haze/Clear Smog.
-- [ ] Weather / terrain — **weather (0.17.0) and terrain (0.20.0) shipped** (#10).
-- [ ] Ability / held-item hooks — see #2.
-- [ ] A damage / crit-rate **balance pass**.
-- [ ] AI polish: **don't spam setup shipped 0.21.0**; still open — switch on a
-      bad matchup.
+- ✅ **Additional statuses** — paralysis/toxic/confusion (0.11.1), Leech Seed
+      (0.14.0), infatuation/Curse (0.21.0) and Haze/Clear Smog stat reset (0.22.0)
+      shipped. Ability-based statuses remain (see the ability list).
+- ✅ **Weather / terrain** — weather (0.17.0) and terrain (0.20.0) shipped (#10).
+- [ ] Ability / held-item hooks — **contact abilities (Static / Flame Body /
+      Poison Point / Effect Spore / Cute Charm / Rough Skin / Iron Barbs)
+      shipped 0.22.0**; the rest of the ~300 abilities remain (see #2a).
+- ✅ **Damage / crit-rate balance pass** — 0.22.0: base crit is the modern
+      1/24, with Super Luck (+1 stage), Sniper (2.25× crits) and Battle Armor /
+      Shell Armor (crit immunity).
+- ✅ **AI polish** — don't spam setup shipped 0.21.0. *(Switching on a bad
+      matchup is intentionally discarded: an auto-switching opponent is
+      frustrating to play against.)*
 - [ ] Battle polish: move animations / damage numbers / hit feedback — see #16.
 
 Effort: **medium–large** (do it in slices).
@@ -1183,6 +1188,11 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.22.0 (battle polish): Haze/Clear Smog reset stat stages, contact abilities
+(Static/Flame Body/Poison Point/Effect Spore/Cute Charm/Rough Skin/Iron Barbs)
+work, and the crit system got a pass (base 1/24, Super Luck, Sniper, Battle
+Armor/Shell Armor, never-miss accuracy fix). #25 is now down to battle polish.
 
 0.21.0 (Attract & Curse): Attract infatuates opposite-gender targets (50% chance
 to lose the turn); Ghost Curse costs half HP to drain the foe while other types

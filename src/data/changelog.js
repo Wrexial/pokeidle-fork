@@ -1,10 +1,25 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.21.0'
+export const GAME_VERSION = '0.22.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.22.0',
+      subtitle: 'Battle Polish',
+      sections: [
+        {
+          heading: 'Moves',
+          items: [
+            'Haze and Clear Smog now reset stat stages \u2014 Haze clears both sides, Clear Smog just the target',
+            'Contact abilities now trigger: Static (paralysis), Flame Body (burn), Poison Point (poison), Effect Spore (a random status), Cute Charm (infatuation), and Rough Skin / Iron Barbs (recoil on the attacker)',
+            'Critical-hit pass: the base rate is now the modern 1/24 (was 1/16), Super Luck adds a crit stage, Sniper makes crits deal 2.25\u00d7 and Battle Armor / Shell Armor block crits entirely',
+            'Never-miss damaging moves (zero listed accuracy \u2014 e.g. Smart Strike) now always hit, and Clear Smog / Ivy Cudgel got their correct accuracy back',
+          ],
+        },
+      ],
+    },
     {
       version: '0.21.0',
       subtitle: 'Attract & Curse',

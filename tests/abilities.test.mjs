@@ -6,8 +6,9 @@ import { installGameData } from './helpers/game-data.mjs'
 const data = installGameData()
 
 const { abilityAttackMultiplier, abilityPreventsStatus } = await import('../src/game/abilities.js')
-const { resolveBattleTurn } = await import('../src/game/combat.js')
+const { calculateDamage, resolveBattleTurn } = await import('../src/game/combat.js')
 const { abilityDisplayName, rollAbility } = await import('../src/game/pokemon.js')
+const { moveData } = await import('../src/data/gameData.js')
 
 /**
  * @param {Record<string, any>} [overrides]
@@ -150,4 +151,56 @@ test('Guts raises Attack while statused', () => {
   assert.equal(abilityAttackMultiplier({ ability: 'guts' }), 1)
   assert.equal(abilityAttackMultiplier({ ability: 'guts', status: 'burn' }), 1.5)
   assert.equal(abilityAttackMultiplier({ ability: 'hugePower' }), 2)
+})
+
+test('crit abilities modify the critical-hit system', () => {
+  withFixedRandom(0.5, () => {
+    const base = calculateDamage(
+        50,
+        200,
+        100,
+        moveData.tackle,
+        ['Normal'],
+        ['Normal'],
+        0,
+        0,
+        3
+      ),
+      immune = calculateDamage(
+        50,
+        200,
+        100,
+        moveData.tackle,
+        ['Normal'],
+        ['Normal'],
+        0,
+        0,
+        3,
+        !1,
+        0,
+        0,
+        !1,
+        2,
+        !0
+      ),
+      sniper = calculateDamage(
+        50,
+        200,
+        100,
+        moveData.tackle,
+        ['Normal'],
+        ['Normal'],
+        0,
+        0,
+        3,
+        !1,
+        0,
+        0,
+        !1,
+        2.25
+      )
+    assert.equal(base.isCrit, true)
+    assert.equal(immune.isCrit, false, 'Battle Armor / Shell Armor block crits')
+    assert.ok(sniper.damage > base.damage, 'Sniper hits harder on a crit')
+  })
 })

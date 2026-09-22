@@ -1,6 +1,7 @@
 // Split from src/game/logic.js — see tools/decompile/split-logic.mjs
 
 import { typechart } from '../data/moves.js'
+import { moveMakesContact } from '../data/move-effects.js'
 import { roamerFleeChance } from '../data/config.js'
 import { moveData } from '../data/gameData.js'
 import { canEvolveFurther } from './pokemon.js'
@@ -205,6 +206,71 @@ function handleConfusion(attacker, events, isPlayer, deterministic = !1) {
 }
 
 /**
+ * Apply the defender's contact ability to an attacker that just hit it with a
+ * contact move (Static, Flame Body, Poison Point, Effect Spore, Cute Charm,
+ * Rough Skin, Iron Barbs).
+ * @param {BattlePokemon} defender
+ * @param {BattlePokemon} attacker
+ * @param {Move} moveDef
+ * @param {any[]} events
+ * @param {boolean} attackerIsPlayer
+ * @param {boolean} deterministic
+ * @param {{ type: string } | null} terrain
+ */
+function applyContactAbility(defender, attacker, moveDef, events, attackerIsPlayer, deterministic, terrain) {
+  if (!moveMakesContact(moveDef)) return
+  const ability = abilityOf(defender),
+    roll = () => chance(0.3, deterministic)
+  switch (ability) {
+    case 'static':
+      if (roll()) applyStatus(attacker, 'paralysis', events, attackerIsPlayer, deterministic, terrain)
+      break
+    case 'flameBody':
+      if (roll()) applyStatus(attacker, 'burn', events, attackerIsPlayer, deterministic, terrain)
+      break
+    case 'poisonPoint':
+      if (roll()) applyStatus(attacker, 'poison', events, attackerIsPlayer, deterministic, terrain)
+      break
+    case 'effectSpore':
+      if (roll()) {
+        const pick = Math.random(),
+          status = pick < 0.34 ? 'poison' : pick < 0.67 ? 'paralysis' : 'sleep'
+        applyStatus(attacker, status, events, attackerIsPlayer, deterministic, terrain)
+      }
+      break
+    case 'cuteCharm':
+      if (roll()) applyInfatuation(defender, attacker, events, attackerIsPlayer)
+      break
+    case 'roughSkin':
+    case 'ironBarbs': {
+      const contactDamage = Math.max(1, Math.floor(attacker.maxHp / 8))
+      attacker.currentHp = Math.max(0, attacker.currentHp - contactDamage)
+      events.push({
+        type: 'recoil',
+        message: `${attacker.name} was hurt by ${defender.name}'s ${
+          ability === 'roughSkin' ? 'Rough Skin' : 'Iron Barbs'
+        }! (${contactDamage} damage)`,
+        data: {
+          target: attackerIsPlayer ? 'player' : 'enemy',
+          damage: contactDamage,
+          hpAfter: attacker.currentHp,
+          hpMax: attacker.maxHp,
+        },
+      })
+      attacker.currentHp <= 0 &&
+        events.push({
+          type: 'faint',
+          message: `${attacker.name} fainted!`,
+          data: {
+            target: attackerIsPlayer ? 'player' : 'enemy',
+          },
+        })
+      break
+    }
+  }
+}
+
+/**
  * Infatuate a target (Attract): only works between opposite, gendered Pokemon.
  * @param {BattlePokemon} source
  * @param {BattlePokemon} target
@@ -355,9 +421,11 @@ export function statStageMultiplier(stage) {
 }
 
 /**
- * Critical-hit chance by crit stage: 0 = 1/16, +1 = 1/8, +2 = 1/2, +3 = always.
+ * Critical-hit chance by crit stage: 0 = 1/24 (modern base rate), +1 = 1/8,
+ * +2 = 1/2, +3 = always. `superLuck` adds a stage; Battle Armor / Shell Armor
+ * and Sniper are handled at the call site.
  */
-const CRIT_CHANCES = [1 / 16, 1 / 8, 1 / 2, 1]
+const CRIT_CHANCES = [1 / 24, 1 / 8, 1 / 2, 1]
 
 /**
  * The game's stat keys are camelCase (`spAttack`); extracted move data sometimes
@@ -417,9 +485,11 @@ function chance(probability, deterministic) {
  * @param {number} [accuracyStage]
  * @param {number} [evasionStage]
  * @param {boolean} [deterministic] No misses, crits or damage variance.
+ * @param {number} [critMultiplierBase] Damage multiplier on a crit (Sniper = 2.25).
+ * @param {boolean} [critImmune] Battle Armor / Shell Armor block crits.
  * @returns {{ damage: number, isCrit: boolean, effectiveness: number, effectivenessLabel: string | null }}
  */
-export function calculateDamage(attackerLevel, attack, defense, move, attackerTypes, defenderTypes, attackerStage = 0, defenderStage = 0, critStage = 0, skipAccuracy = !1, accuracyStage = 0, evasionStage = 0, deterministic = !1) {
+export function calculateDamage(attackerLevel, attack, defense, move, attackerTypes, defenderTypes, attackerStage = 0, defenderStage = 0, critStage = 0, skipAccuracy = !1, accuracyStage = 0, evasionStage = 0, deterministic = !1, critMultiplierBase = 2, critImmune = !1) {
   if (move.power === 0)
     return {
       damage: 0,
@@ -428,7 +498,7 @@ export function calculateDamage(attackerLevel, attack, defense, move, attackerTy
       effectivenessLabel: null,
     }
   const effectiveAccuracy =
-    move.accuracy * statStageMultiplier(accuracyStage - evasionStage)
+    move.accuracy <= 0 ? 100 : move.accuracy * statStageMultiplier(accuracyStage - evasionStage)
   if (!deterministic && !skipAccuracy && Math.random() * 100 >= effectiveAccuracy)
     return {
       damage: 0,
@@ -440,8 +510,8 @@ export function calculateDamage(attackerLevel, attack, defense, move, attackerTy
     effectiveDefense = Math.max(1, Math.floor(defense * statStageMultiplier(defenderStage))),
     baseDamage = Math.floor((Math.floor((2 * attackerLevel) / 5 + 2) * move.power * effectiveAttack) / effectiveDefense / 50 + 2),
     critChance = CRIT_CHANCES[Math.min(3, Math.max(0, critStage))] ?? CRIT_CHANCES[0],
-    isCrit = !deterministic && Math.random() < critChance,
-    critMultiplier = isCrit ? 2 : 1,
+    isCrit = !deterministic && !critImmune && Math.random() < critChance,
+    critMultiplier = isCrit ? critMultiplierBase : 1,
     stabMultiplier = attackerTypes.includes(move.type) ? 1.5 : 1,
     effectiveness = getTypeMultiplier(move.type, defenderTypes),
     randomFactor = deterministic ? 0.925 : (Math.floor(Math.random() * 16) + 85) / 100,
@@ -673,6 +743,25 @@ function effectiveSpeed(pokemon, weather) {
       weatherSpeedMultiplier(weather, pokemon),
     effective = pokemon.status === 'paralysis' ? Math.max(1, Math.floor(speed / 2)) : speed
   return effective
+}
+
+/**
+ * Reset a Pokemon's stat stages to zero (Haze / Clear Smog).
+ * @param {BattlePokemon} target
+ * @param {any[]} events
+ * @param {boolean} targetIsPlayer
+ */
+function resetStatStages(target, events, targetIsPlayer) {
+  const stages = target.statStages
+  if (!stages || Object.values(stages).every((value) => value === 0)) return
+  for (const key of Object.keys(stages)) stages[key] = 0
+  events.push({
+    type: 'statChange',
+    message: `${target.name}'s stat changes were removed!`,
+    data: {
+      target: targetIsPlayer ? 'player' : 'enemy',
+    },
+  })
 }
 
 /**
@@ -1021,6 +1110,12 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           }
         }
       }
+      else if (moveDef.effect?.type === 'statReset') {
+        if (moveDef.effect.target === 'all') {
+          resetStatStages(attack.attacker, events, attack.isPlayer)
+          resetStatStages(attack.defender, events, !attack.isPlayer)
+        } else resetStatStages(attack.defender, events, !attack.isPlayer)
+      }
       else if (moveDef.effect?.type === 'hazard') {
         const targetSide = /** @type {any} */ (
             attack.isPlayer ? activeHazards.enemy : activeHazards.player
@@ -1112,11 +1207,13 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         attack.defender.types,
         attackerStage,
         defenderStage,
-        moveDef.critStage ?? 0,
+        (moveDef.critStage ?? 0) + (abilityOf(attack.attacker) === 'superLuck' ? 1 : 0),
         !1,
         accuracyStage,
         evasionStage,
-        deterministic
+        deterministic,
+        abilityOf(attack.attacker) === 'sniper' ? 2.25 : 2,
+        ['battleArmor', 'shellArmor'].includes(abilityOf(attack.defender) ?? '')
       )
     if (damageResult.effectivenessLabel === 'miss') {
       if (
@@ -1172,11 +1269,13 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           attack.defender.types,
           attackerStage,
           defenderStage,
-          moveDef.critStage ?? 0,
+          (moveDef.critStage ?? 0) + (abilityOf(attack.attacker) === 'superLuck' ? 1 : 0),
           !0,
           accuracyStage,
           evasionStage,
-          deterministic
+          deterministic,
+          abilityOf(attack.attacker) === 'sniper' ? 2.25 : 2,
+          ['battleArmor', 'shellArmor'].includes(abilityOf(attack.defender) ?? '')
         )
         totalDamage += hitResult.damage
         anyCrit = anyCrit || hitResult.isCrit
@@ -1313,6 +1412,13 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
             applyStatus(attack.defender, moveDef.effect.status, events, !attack.isPlayer, deterministic, activeTerrain)
           break
         }
+        case 'statReset': {
+          if (moveDef.effect.target === 'all') {
+            resetStatStages(attack.attacker, events, attack.isPlayer)
+            resetStatStages(attack.defender, events, !attack.isPlayer)
+          } else resetStatStages(attack.defender, events, !attack.isPlayer)
+          break
+        }
         case 'selfDestruct': {
           ;((attack.attacker.currentHp = 0),
             events.push({
@@ -1391,6 +1497,16 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           },
         })
     }
+    // The defender's contact ability hits back (Static, Rough Skin, ...).
+    applyContactAbility(
+      attack.defender,
+      attack.attacker,
+      moveDef,
+      events,
+      attack.isPlayer,
+      deterministic,
+      activeTerrain
+    )
     if (attack.defender.currentHp <= 0) {
       events.push({
         type: 'faint',

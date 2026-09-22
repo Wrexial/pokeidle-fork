@@ -2227,12 +2227,6 @@
     "weight": 1,
     "minLevel": 75,
     "maxLevel": 75
-   },
-   {
-    "speciesKey": "genesect",
-    "weight": 1,
-    "minLevel": 75,
-    "maxLevel": 75
    }
   ]
  }

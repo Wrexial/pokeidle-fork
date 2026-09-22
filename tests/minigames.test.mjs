@@ -88,26 +88,24 @@ test('rarer contest bugs are more skittish', () => {
   assert.ok(bugFleeChance('scyther') > bugFleeChance('caterpie'))
 })
 
-test('every non-legendary Bug-type is contest-eligible', () => {
+test('every Bug-type is contest-eligible, legendaries included', () => {
   const pool = new Set(BUG_CONTEST_POOL.map((entry) => entry.speciesKey))
   assert.ok(pool.has('caterpie'))
   assert.ok(pool.has('volcarona'), 'a non-Johto bug is eligible')
   assert.ok(pool.has('golisopod'))
-  assert.ok(!pool.has('genesect'), 'legendary bugs stay out of the contest')
-  assert.ok(!pool.has('pheromosa'))
+  assert.ok(pool.has('genesect'), 'legendary bugs are eligible too')
+  assert.ok(pool.has('pheromosa'))
   assert.ok(!pool.has('pikachu'), 'non-bugs are excluded')
 })
 
-test('raid islands no longer hand out non-legendary Bug-types', () => {
+test('raid islands no longer hand out any Bug-type', () => {
   const { pokemonSpecies, regions } = gameData
   for (const region of regions)
-    for (const entry of region.raidPool ?? []) {
-      const species = pokemonSpecies[entry.speciesKey]
+    for (const entry of region.raidPool ?? [])
       assert.ok(
-        !(species.types ?? []).includes('Bug') || species.legendary,
+        !(pokemonSpecies[entry.speciesKey].types ?? []).includes('Bug'),
         `${entry.speciesKey} in ${region.id} should be contest-only`
       )
-    }
 })
 
 test('contest results rank the player and fake rivals by score', () => {

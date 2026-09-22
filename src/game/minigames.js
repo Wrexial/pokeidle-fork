@@ -102,18 +102,13 @@ export const BUG_CONTEST_BALL = 'netball'
 const CONTEST_LEVEL_SPREAD = 3
 
 /**
- * Every non-legendary Bug-type is eligible for the contest. Common bugs (high
- * catch rate) turn up more often; the hard-to-catch headline acts are rare.
+ * Every Bug-type is eligible for the contest \u2014 legendaries included. Common
+ * bugs (high catch rate) turn up more often; the hard-to-catch headline acts
+ * are rare.
  * @type {{ speciesKey: string, weight: number }[]}
  */
 export const BUG_CONTEST_POOL = Object.entries(pokemonSpecies)
-  .filter(
-    ([, entry]) =>
-      entry.id > 0 &&
-      entry.id <= 1025 &&
-      !entry.legendary &&
-      (entry.types ?? []).includes('Bug')
-  )
+  .filter(([, entry]) => entry.id > 0 && entry.id <= 1025 && (entry.types ?? []).includes('Bug'))
   .map(([speciesKey, entry]) => ({
     speciesKey,
     // 255 catch rate -> 43; 45 -> 8.

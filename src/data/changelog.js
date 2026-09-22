@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.9.25'
+export const GAME_VERSION = '0.9.26'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.9.26',
+      subtitle: 'Offline Progress',
+      sections: [
+        {
+          heading: 'Idle',
+          items: [
+            'The game now pays out for time away: returning after a minute or more grants money and Exp. Candies, scaling with your party level and capped at 8 hours',
+            'A \u201cWhile You Were Away\u201d report shows how long you were gone and what you earned',
+          ],
+        },
+      ],
+    },
     {
       version: '0.9.25',
       subtitle: 'Box Search Fix',

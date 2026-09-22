@@ -1,6 +1,6 @@
 // Split from src/game/logic.js — see tools/decompile/split-logic.mjs
 
-import { shinyCharmMinOddsChance, shinyFullOddsChance, shinyWithCharmChance, roamerEncounterChance, pokerusChance, pokerusDurationBattles } from '../data/config.js'
+import { shinyCharmMinOddsChance, shinyFullOddsChance, shinyWithCharmChance, roamerEncounterChance, pokerusChance, pokerusDurationBattles, offlineCapMs, offlineMinMs, offlineMoneyPerHourPerLevel } from '../data/config.js'
 import { activeItems, consumableItems, evolutionItems, pokeBalls, valuableDropTable } from '../data/items.js'
 import { GENERATION_DEX_RANGES, encounterData, gymLeaderData, isSpeciesCharmed, mapData, moveData, pokemonSpecies, regions } from '../data/gameData.js'
 import { calculateExpYield, calculatePokemonStats, getLevelUpResults, getPerfectIVs, resolvePokemonMoves } from './pokemon.js'
@@ -217,6 +217,43 @@ export function tickPokerus(pokerus) {
 /** @param {{ battlesRemaining: number } | null | undefined} pokerus */
 export function pokerusExpMultiplier(pokerus) {
   return pokerus ? 2 : 1
+}
+
+/**
+ * Reward for time spent away from the game (offline). Scales with the highest
+ * party level so it stays relevant, and pays Exp. Candy alongside money.
+ * @param {GameState} state
+ * @param {number} awayMs
+ * @returns {{ awayMs: number, money: number, items: Record<string, number> } | null}
+ */
+export function computeOfflineReward(state, awayMs) {
+  const capped = Math.min(Math.max(0, awayMs), offlineCapMs)
+  if (capped < offlineMinMs) return null
+  const hours = capped / 3_600_000,
+    highestLevel = (state.party ?? []).reduce((max, member) => Math.max(max, member.level), 5),
+    money = Math.floor(hours * highestLevel * offlineMoneyPerHourPerLevel),
+    candyId =
+      highestLevel >= 75
+        ? 'expCandyXL'
+        : highestLevel >= 50
+          ? 'expCandyL'
+          : highestLevel >= 25
+            ? 'expCandyM'
+            : 'expCandyS',
+    candyCount = Math.max(1, Math.floor(hours))
+  return { awayMs: capped, money, items: { [candyId]: candyCount } }
+}
+
+/**
+ * Human duration like "2h 15m" or "45m".
+ * @param {number} ms
+ * @returns {string}
+ */
+export function formatAwayDuration(ms) {
+  const totalMinutes = Math.max(0, Math.floor(ms / 60_000)),
+    hours = Math.floor(totalMinutes / 60),
+    minutes = totalMinutes % 60
+  return hours > 0 ? `${hours}h ${minutes}m` : `${minutes}m`
 }
 
 /**

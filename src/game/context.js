@@ -20,6 +20,7 @@ import { generateIVs, calculatePokemonStats, resolvePokemonMoves } from './pokem
 import { ACHIEVEMENTS } from '../data/achievements.js'
 import { natureByKey, randomNature } from '../data/natures.js'
 import { gameReducer, initialGameState } from './reducer.js'
+import { computeOfflineReward } from './progression.js'
 
 /** @type {React.Context<{ state: GameState, dispatch: (action: GameAction) => void } | null>} */
 const GameContext = React.createContext(
@@ -486,7 +487,22 @@ function loadSavedState() {
     quarantineSave(raw)
     return null
   }
-  return repaired
+  // Grant offline progress for the time the game was closed (one-off, not saved
+  // back into the save, so it isn't re-awarded on the next load).
+  const offlineReward = computeOfflineReward(
+    repaired,
+    typeof saved.savedAt === 'number' ? Date.now() - saved.savedAt : 0
+  )
+  if (!offlineReward) return repaired
+  const inventory = { ...repaired.inventory }
+  for (const [itemId, quantity] of Object.entries(offlineReward.items))
+    inventory[itemId] = (inventory[itemId] ?? 0) + quantity
+  return {
+    ...repaired,
+    money: repaired.money + offlineReward.money,
+    inventory,
+    offlineReport: offlineReward,
+  }
 }
 
 /**
@@ -498,6 +514,7 @@ function loadSavedState() {
 export function serializeSave(state) {
   return {
     version: SAVE_VERSION,
+    savedAt: Date.now(),
     playerPokemon: state.playerPokemon,
     startRegion: state.startRegion,
     currentRoute: state.currentRoute,

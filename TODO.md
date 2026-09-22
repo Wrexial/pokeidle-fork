@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.25**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.26**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -32,8 +32,8 @@ items, best return first:
 
 ### Tier 2 — High impact, worth the effort (medium–large)
 
-16. **#7 Offline / idle progress** — M–L · ★★★★★ — the biggest missing *idle*
-    feature; a returning player currently gets nothing.
+16. ✅ **#7 Offline / idle progress** — shipped 0.9.26 (capped money + Exp.
+    Candies for time away, with a "While You Were Away" report).
 17. ✅ **#8 Pokémon management / IV checker** — shipped (IV judge, nicknames,
     favourite/lock, box search/filter and the release-duplicates tool).
 18. **#20 Honey/Repel DexNav hunting** — M · ★★★★½ — turns the existing
@@ -185,17 +185,15 @@ bonus, or flavour.
 
 Effort: **medium**.
 
-## 7. Offline / idle progress
+## 7. ✅ Offline / idle progress — shipped in 0.9.26
 
-The game is called *Pokémon Idle* but only advances while the tab is open. This
-is arguably the biggest missing idle feature: a returning player gets nothing
-for the time away.
-
-- [ ] Decide the model: bank "offline battles" and resolve them on return, or a
-      simpler overnight bonus (money / EXP / encounters).
-- [ ] Cap it (e.g. 8-24 hours) so it doesn't dwarf active play.
-- [ ] Show a "while you were away" summary (battles, catches, shinies, money).
-- [ ] Persist the timestamp in the save (`context.js`).
+Done. The save records `savedAt`; on load, `computeOfflineReward` grants money
+(per hour away per level of your highest party Pokemon) plus Exp. Candies,
+capped at 8 hours and ignored under a minute. The reward is applied by the save
+loader and surfaced once by `OfflineProgressModal` ("While You Were Away"),
+cleared with `CLEAR_OFFLINE_REPORT`. Covered by `tests/offline.test.mjs`. The
+online-while-hidden "away alert" (0.9.8) still covers a hidden tab; this covers
+time the game was fully closed.
 
 Effort: **medium–large** (a real design decision, but high impact).
 
@@ -1200,6 +1198,9 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.9.26 (offline progress): time away now pays money + Exp. Candies (capped at 8
+hours) with a "While You Were Away" report. #7 is complete.
 
 0.9.25 (box search fix): collapsing the box search now clears the query/filter.
 

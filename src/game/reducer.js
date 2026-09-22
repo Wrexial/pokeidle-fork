@@ -69,6 +69,8 @@ export const initialGameState = {
   quests: null,
   /** A pending region-dex-completion celebration (phase `dexComplete`). */
   dexCelebration: null,
+  /** A one-off offline-progress report shown on return (never saved). */
+  offlineReport: null,
   /** Today's rotating event + whether its gift was claimed (see src/data/daily-events.js). */
   dailyEvent: null,
   /** Daycare: up to two deposited parents breeding eggs. */
@@ -1911,6 +1913,11 @@ export function gameReducer(state, action) {
       return state.phase !== 'dexComplete'
         ? state
         : { ...prepareNextBattle(state), dexCelebration: null }
+    case 'CLEAR_OFFLINE_REPORT':
+      return {
+        ...state,
+        offlineReport: null,
+      }
     case 'REFRESH_DAILY_EVENT': {
       const today = action.payload?.today ?? todayKey()
       if (state.dailyEvent?.date === today) return state

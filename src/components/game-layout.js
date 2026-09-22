@@ -9,6 +9,7 @@ import { PartyBoxPanel } from './party-box-panel.js'
 import { MobileTabs } from './mobile-tabs.js'
 import { RightPanel } from './right-panel.js'
 import { HatchPopup } from './hatch-popup.js'
+import { OfflineProgressModal } from './offline-progress-modal.js'
 import { NotificationStack } from './notification-stack.js'
 
 export function GameLayout() {
@@ -33,6 +34,7 @@ export function GameLayout() {
           jsx(BattleScreen, {}),
           jsx(MobileTabs, {}),
           jsx(HatchPopup, {}),
+          jsx(OfflineProgressModal, {}),
           jsx(NotificationStack, {}),
         ],
       })
@@ -46,6 +48,7 @@ export function GameLayout() {
           }),
           jsx(RightPanel, {}),
           jsx(HatchPopup, {}),
+          jsx(OfflineProgressModal, {}),
           jsx(NotificationStack, {}),
         ],
       })

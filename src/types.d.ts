@@ -235,6 +235,8 @@ type GameState = {
   quests?: any
   /** A pending region-dex-completion celebration shown in the `dexComplete` phase. */
   dexCelebration?: { generation: number } | null
+  /** Offline-progress summary shown on return (transient). */
+  offlineReport?: { awayMs: number, money: number, items: Record<string, number> } | null
   /** Daycare parents (up to 2) and battles toward the next egg. */
   daycare: { parents: Pokemon[]; progress: number }
   defeatedGyms: string[]

@@ -31,6 +31,12 @@ export const pokerusChance = 1 / 10000
 /** How many wild battles Pokerus lasts before it cures. */
 export const pokerusDurationBattles = 150
 
+/** Offline progress: minimum time away to award anything, and the cap. */
+export const offlineMinMs = 60_000
+export const offlineCapMs = 8 * 3_600_000
+/** Money granted per hour away per level of your highest party Pokemon. */
+export const offlineMoneyPerHourPerLevel = 40
+
 /** Battles two daycare parents need to produce an egg. */
 export const daycareEggBattles = 50
 /** Shiny odds for a bred egg (1 in 4096), improved if a parent is shiny. */

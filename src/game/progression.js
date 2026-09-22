@@ -1,8 +1,9 @@
 // Split from src/game/logic.js — see tools/decompile/split-logic.mjs
 
 import { shinyCharmMinOddsChance, shinyFullOddsChance, shinyWithCharmChance, roamerEncounterChance, pokerusChance, pokerusDurationBattles, offlineCapMs, offlineMinMs, offlineMoneyPerHourPerLevel } from '../data/config.js'
-import { activeItems, consumableItems, evolutionItems, pokeBalls, valuableDropTable } from '../data/items.js'
+import { activeItems, consumableItems, evolutionItems, heldItems, pokeBalls, valuableDropTable } from '../data/items.js'
 import { GENERATION_DEX_RANGES, encounterData, evolutionData, gymLeaderData, isSpeciesCharmed, mapData, moveData, pokemonSpecies, regions } from '../data/gameData.js'
+import { rollHeldItem } from './held-items.js'
 import { calculateExpYield, calculatePokemonStats, getLevelUpResults, getPerfectIVs, isBattleReady, resolvePokemonMoves, rollAbility } from './pokemon.js'
 
 /** Gym ids grouped by region, so `badgesRequired` gates count that region only. */
@@ -29,7 +30,13 @@ export function getCatchRule(state, routeKey, speciesKey) {
  */
 export function getItemCategory(itemId) {
   if (itemId in pokeBalls) return 'pokeballs'
+  if (itemId in heldItems) return 'held'
   return consumableItems[itemId]?.category ?? 'items'
+}
+
+/** @param {string} itemId */
+export function isHeldItem(itemId) {
+  return itemId in heldItems
 }
 
 /**
@@ -38,7 +45,7 @@ export function getItemCategory(itemId) {
  * @returns {number | null}
  */
 export function getItemSellPrice(itemId) {
-  return consumableItems[itemId]?.sellPrice ?? null
+  return consumableItems[itemId]?.sellPrice ?? heldItems[itemId]?.sellPrice ?? null
 }
 
 /**
@@ -121,6 +128,13 @@ export function getItemInfo(itemId) {
   }
   if (itemId in consumableItems) {
     const item = consumableItems[itemId]
+    return {
+      name: item.name,
+      description: item.description,
+    }
+  }
+  if (itemId in heldItems) {
+    const item = heldItems[itemId]
     return {
       name: item.name,
       description: item.description,
@@ -853,6 +867,7 @@ export function buildTrainerTeam(team) {
       speed: scale(stats.speed),
       moves,
       ability: rollAbility(member.speciesKey),
+      heldItem: rollHeldItem(0.3),
       isPlayer: !1,
       isShiny: checkShinyOdds(),
     }

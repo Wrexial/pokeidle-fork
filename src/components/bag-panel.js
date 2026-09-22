@@ -2,13 +2,14 @@
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
-import { bagCategories, consumableItems } from '../data/items.js'
+import { bagCategories, consumableItems, heldItems } from '../data/items.js'
 import { useGame } from '../game/context.js'
 import {
   getItemCategory,
   getItemInfo,
   getItemSellPrice,
   isActiveEffectItem,
+  isHeldItem,
   isUsableConsumable,
 } from '../game/progression.js'
 
@@ -19,6 +20,7 @@ import {
  * @returns {boolean}
  */
 function canUseOn(item, member) {
+  if (heldItems[item.id]) return member.heldItem !== item.id
   if (item.natureMint) return true
   if (item.category === 'medicine')
     return item.revive
@@ -66,7 +68,7 @@ export function BagPanel() {
               itemId,
             },
           })
-        : isUsableConsumable(itemId) && setTargetItemId(itemId)
+        : (isUsableConsumable(itemId) || isHeldItem(itemId)) && setTargetItemId(itemId)
     },
     sellItem = /** @param {string} itemId @param {number | 'all'} quantity */ (
       itemId,
@@ -87,8 +89,10 @@ export function BagPanel() {
     canUse =
       selectedItem !== null &&
       selectedQty > 0 &&
-      (selectedItem === 'expShare' || isUsableConsumable(selectedItem)),
-    targetItem = targetItemId ? consumableItems[targetItemId] : null,
+      (selectedItem === 'expShare' || isUsableConsumable(selectedItem) || isHeldItem(selectedItem)),
+    targetItem = targetItemId
+      ? (consumableItems[targetItemId] ?? heldItems[targetItemId])
+      : null,
     activeEffects =
       selectedItem && isActiveEffectItem(selectedItem)
         ? state.activeEffects.filter((effect) => effect.type === selectedItem)

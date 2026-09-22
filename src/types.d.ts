@@ -77,6 +77,8 @@ type Pokemon = BattlePokemon & {
   friendship?: number
   /** This Pokemon's ability (see ability-data.json). */
   ability?: string | null
+  /** Equipped held item (see heldItems). */
+  heldItem?: string | null
   /** Favourited Pokemon are protected from Release and Wonder Trade. */
   favourite?: boolean
   /** Optional player-given nickname (max 12 characters). */
@@ -137,6 +139,15 @@ type PokeBall = {
   ballModifier: number
 }
 
+type HeldItem = {
+  id: string
+  name: string
+  description: string
+  buyPrice: number | null
+  sellPrice: number | null
+  effect: any
+}
+
 type CatchRule = {
   enabled: boolean
   mode: string
@@ -177,6 +188,8 @@ type VolatileState = {
   confusionTurns?: number
   /** Leech Seed is draining this Pokemon each turn. */
   leechSeeded?: boolean
+  /** Focus Sash / berry consumed for this battle. */
+  heldItemUsed?: boolean
   /** Remaining turns of Reflect / Light Screen (0 when down). */
   screens?: { reflect: number, lightScreen: number }
 }

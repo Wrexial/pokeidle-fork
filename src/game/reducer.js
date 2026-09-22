@@ -2,7 +2,7 @@
 
 import { RAID_COOLDOWN_MS, RAID_LEVEL_MAX, breedShinyOdds, breedShinyParentOdds, daycareEggBattles, defaultCatchSettings, dexRewardVictoryTokens, expCandyDropChance, prestigeTokenReward, rareCandyDropChance, swarmBattleCount, swarmSpawnChance, valuableDropChance, wildMasterBallChance, wonderTradeShinyOdds } from '../data/config.js'
 import { ACHIEVEMENTS } from '../data/achievements.js'
-import { activeItems, consumableItems, evolutionItems, pokeBalls } from '../data/items.js'
+import { activeItems, consumableItems, evolutionItems, heldItems, pokeBalls } from '../data/items.js'
 import { dailyDropMultiplier, dailyEventByKey, rollDailyEvent, todayKey } from '../data/daily-events.js'
 import { natureName, randomNature } from '../data/natures.js'
 import { elite4Data, encounterData, gymLeaderData, mapData, moveLearnsets, pokemonSpecies, regions } from '../data/gameData.js'
@@ -1687,11 +1687,26 @@ export function gameReducer(state, action) {
           battleLog: [...state.battleLog, `Bought ${quantity}x ${consumable.name}!`].slice(-50),
         }
       }
+      const heldItem = heldItems[itemId]
+      if (heldItem && heldItem.buyPrice) {
+        const cost = heldItem.buyPrice * quantity
+        if (state.money < cost) return state
+        const owned = state.inventory[itemId] ?? 0
+        return {
+          ...state,
+          money: state.money - cost,
+          inventory: {
+            ...state.inventory,
+            [itemId]: owned + quantity,
+          },
+          battleLog: [...state.battleLog, `Bought ${quantity}x ${heldItem.name}!`].slice(-50),
+        }
+      }
       return state
     }
     case 'SELL_ITEM': {
       const { itemId, quantity = 1 } = action.payload,
-        item = consumableItems[itemId],
+        item = consumableItems[itemId] ?? heldItems[itemId],
         owned = state.inventory[itemId] ?? 0
       if (!item || !item.sellPrice || owned <= 0) return state
       const sold = Math.min(quantity, owned),
@@ -1709,12 +1724,52 @@ export function gameReducer(state, action) {
         ].slice(-50),
       }
     }
+    case 'CLEAR_HELD_ITEM': {
+      const { pokemonId } = action.payload,
+        memberIndex = state.party.findIndex(/** @param {Pokemon} member */ (member) => member.id === pokemonId)
+      if (memberIndex < 0) return state
+      const member = state.party[memberIndex]
+      if (!member.heldItem) return state
+      const party = [...state.party]
+      party[memberIndex] = { ...member, heldItem: null }
+      return {
+        ...state,
+        party,
+        inventory: {
+          ...state.inventory,
+          [member.heldItem]: (state.inventory[member.heldItem] ?? 0) + 1,
+        },
+        battleLog: [
+          ...state.battleLog,
+          `${member.name} put away its ${heldItems[member.heldItem]?.name ?? member.heldItem}.`,
+        ].slice(-50),
+      }
+    }
     case 'USE_ITEM_ON_POKEMON': {
       const { itemId, pokemonId } = action.payload,
         item = consumableItems[itemId],
+        heldItem = heldItems[itemId],
         owned = state.inventory[itemId] ?? 0,
         memberIndex = state.party.findIndex(/** @param {Pokemon} member */ (member) => member.id === pokemonId)
-      if (!item || owned <= 0 || item.category === 'valuables' || memberIndex < 0) return state
+      if ((!item && !heldItem) || owned <= 0 || item?.category === 'valuables' || memberIndex < 0)
+        return state
+      // Held items are equipped (returning whatever was held); consumables are used.
+      if (heldItem) {
+        const member = state.party[memberIndex],
+          previous = member.heldItem,
+          party = [...state.party]
+        party[memberIndex] = { ...member, heldItem: itemId }
+        return {
+          ...state,
+          party,
+          inventory: {
+            ...state.inventory,
+            [itemId]: owned - 1,
+            ...(previous ? { [previous]: (state.inventory[previous] ?? 0) + 1 } : {}),
+          },
+          battleLog: [...state.battleLog, `${member.name} is now holding ${heldItem.name}!`].slice(-50),
+        }
+      }
       let member = { ...state.party[memberIndex] }
       const log = []
       if (item.natureMint) {
@@ -2650,6 +2705,7 @@ export function gameReducer(state, action) {
             flinch: enemyVolatile.flinch,
             confusionTurns: enemyVolatile.confusionTurns ?? 0,
             leechSeeded: enemyVolatile.leechSeeded ?? !1,
+            heldItemUsed: enemyVolatile.heldItemUsed ?? !1,
             screens: enemyVolatile.screens ?? { reflect: 0, lightScreen: 0 },
           }),
         {

@@ -2244,6 +2244,31 @@ img {
     padding: 1px 6px
 }
 
+.stats-panel-held {
+    margin-top: 3px;
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 8px;
+    font-weight: 700;
+    color: #fff0c8;
+    background: linear-gradient(#7a5a1a,#4a3a10);
+    border: 1px solid #e0c060;
+    padding: 1px 4px 1px 6px
+}
+
+.stats-panel-held-remove {
+    font-size: 7px;
+    font-weight: 700;
+    color: #4a3a10;
+    background: #e0c060;
+    border: none;
+    border-radius: 2px;
+    padding: 1px 4px;
+    cursor: pointer
+}
+
 .stats-panel-fav-btn {
     font-size: 9px;
     line-height: 1;

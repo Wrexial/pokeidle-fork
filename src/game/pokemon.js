@@ -1,7 +1,7 @@
 // Split from src/game/logic.js — see tools/decompile/split-logic.mjs
 
 import { evValue } from '../data/config.js'
-import { animatedSprites, abilityData, moveLearnsets, pokemonSpecies, preEvolutionMap, trainerClasses } from '../data/gameData.js'
+import { animatedSprites, abilityData, evolutionData, moveLearnsets, pokemonSpecies, preEvolutionMap, trainerClasses } from '../data/gameData.js'
 import { natureStatModifiers, randomNature } from '../data/natures.js'
 import { BOX_SORT_OPTIONS } from '../data/ui.js'
 
@@ -346,6 +346,21 @@ export const BASE_FRIENDSHIP = 70
 export const MAX_FRIENDSHIP = 255
 
 /**
+ * Whether a species has an ordinary (non-form) evolution left, used by the
+ * Eviolite. Megas/Gigantamax and alternate-form ids are ignored.
+ * @param {string} speciesKey
+ * @returns {boolean}
+ */
+export function canEvolveFurther(speciesKey) {
+  return (evolutionData[speciesKey] || []).some(
+    (evolution) =>
+      !evolution.form &&
+      pokemonSpecies[evolution.into] &&
+      pokemonSpecies[evolution.into].id <= 1025
+  )
+}
+
+/**
  * Roll a species' ability: usually one of its normal abilities, with a small
  * chance of its hidden ability. Returns null for a species with no data.
  * @param {string} speciesKey
@@ -413,6 +428,7 @@ export function createPokemon(speciesKey, level, id, isShiny = !1, inheritance) 
     nature,
     friendship: BASE_FRIENDSHIP,
     ability: rollAbility(speciesKey),
+    heldItem: null,
     isShiny,
   }
 }

@@ -134,6 +134,114 @@ export const ballOrder = [
 ]
 
 /**
+ * Held items. `effect` is read by the battle engine (src/game/held-items.js):
+ * `leftovers`, `lifeOrb`, `statBoost`, `eviolite`, `focusSash`, `berry`,
+ * `lumBerry` and `typeBoost`.
+ * @type {Record<string, HeldItem>}
+ */
+export const heldItems = {
+  leftovers: {
+    id: 'leftovers',
+    name: 'Leftovers',
+    description: 'Restores 1/16 of the holder\u2019s max HP at the end of each turn.',
+    buyPrice: 4000,
+    sellPrice: 2000,
+    effect: { type: 'leftovers' },
+  },
+  lifeOrb: {
+    id: 'lifeOrb',
+    name: 'Life Orb',
+    description: 'Boosts damage by 30%, but costs the holder 10% of its max HP each hit.',
+    buyPrice: 5000,
+    sellPrice: 2500,
+    effect: { type: 'lifeOrb', multiplier: 1.3, recoil: 0.1 },
+  },
+  choiceBand: {
+    id: 'choiceBand',
+    name: 'Choice Band',
+    description: 'Boosts Attack by 50%.',
+    buyPrice: 4000,
+    sellPrice: 2000,
+    effect: { type: 'statBoost', stat: 'attack', multiplier: 1.5 },
+  },
+  choiceSpecs: {
+    id: 'choiceSpecs',
+    name: 'Choice Specs',
+    description: 'Boosts Sp. Atk by 50%.',
+    buyPrice: 4000,
+    sellPrice: 2000,
+    effect: { type: 'statBoost', stat: 'spAttack', multiplier: 1.5 },
+  },
+  choiceScarf: {
+    id: 'choiceScarf',
+    name: 'Choice Scarf',
+    description: 'Boosts Speed by 50%.',
+    buyPrice: 4000,
+    sellPrice: 2000,
+    effect: { type: 'statBoost', stat: 'speed', multiplier: 1.5 },
+  },
+  assaultVest: {
+    id: 'assaultVest',
+    name: 'Assault Vest',
+    description: 'Boosts Sp. Def by 50%.',
+    buyPrice: 4000,
+    sellPrice: 2000,
+    effect: { type: 'statBoost', stat: 'spDefense', multiplier: 1.5 },
+  },
+  eviolite: {
+    id: 'eviolite',
+    name: 'Eviolite',
+    description: 'Boosts Defense and Sp. Def by 50% on Pokemon that can still evolve.',
+    buyPrice: 4000,
+    sellPrice: 2000,
+    effect: { type: 'eviolite' },
+  },
+  focusSash: {
+    id: 'focusSash',
+    name: 'Focus Sash',
+    description: 'Survives one hit that would KO the holder from full HP with 1 HP.',
+    buyPrice: 3000,
+    sellPrice: 1500,
+    effect: { type: 'focusSash' },
+  },
+  sitrusBerry: {
+    id: 'sitrusBerry',
+    name: 'Sitrus Berry',
+    description: 'Restores 25% max HP once when the holder drops below half HP.',
+    buyPrice: 1500,
+    sellPrice: 750,
+    effect: { type: 'berry', heal: 0.25, threshold: 0.5 },
+  },
+  lumBerry: {
+    id: 'lumBerry',
+    name: 'Lum Berry',
+    description: 'Cures one status condition when the holder is afflicted.',
+    buyPrice: 1500,
+    sellPrice: 750,
+    effect: { type: 'lumBerry' },
+  },
+  // --- type boosters (+20% to their type) ---
+  silkScarf: { id: 'silkScarf', name: 'Silk Scarf', description: 'Powers up Normal-type moves.', buyPrice: 2000, sellPrice: 1000, effect: { type: 'typeBoost', moveType: 'Normal' } },
+  charcoal: { id: 'charcoal', name: 'Charcoal', description: 'Powers up Fire-type moves.', buyPrice: 2000, sellPrice: 1000, effect: { type: 'typeBoost', moveType: 'Fire' } },
+  mysticWater: { id: 'mysticWater', name: 'Mystic Water', description: 'Powers up Water-type moves.', buyPrice: 2000, sellPrice: 1000, effect: { type: 'typeBoost', moveType: 'Water' } },
+  magnet: { id: 'magnet', name: 'Magnet', description: 'Powers up Electric-type moves.', buyPrice: 2000, sellPrice: 1000, effect: { type: 'typeBoost', moveType: 'Electric' } },
+  miracleSeed: { id: 'miracleSeed', name: 'Miracle Seed', description: 'Powers up Grass-type moves.', buyPrice: 2000, sellPrice: 1000, effect: { type: 'typeBoost', moveType: 'Grass' } },
+  neverMeltIce: { id: 'neverMeltIce', name: 'Never-Melt Ice', description: 'Powers up Ice-type moves.', buyPrice: 2000, sellPrice: 1000, effect: { type: 'typeBoost', moveType: 'Ice' } },
+  blackBelt: { id: 'blackBelt', name: 'Black Belt', description: 'Powers up Fighting-type moves.', buyPrice: 2000, sellPrice: 1000, effect: { type: 'typeBoost', moveType: 'Fighting' } },
+  poisonBarb: { id: 'poisonBarb', name: 'Poison Barb', description: 'Powers up Poison-type moves.', buyPrice: 2000, sellPrice: 1000, effect: { type: 'typeBoost', moveType: 'Poison' } },
+  softSand: { id: 'softSand', name: 'Soft Sand', description: 'Powers up Ground-type moves.', buyPrice: 2000, sellPrice: 1000, effect: { type: 'typeBoost', moveType: 'Ground' } },
+  sharpBeak: { id: 'sharpBeak', name: 'Sharp Beak', description: 'Powers up Flying-type moves.', buyPrice: 2000, sellPrice: 1000, effect: { type: 'typeBoost', moveType: 'Flying' } },
+  twistedSpoon: { id: 'twistedSpoon', name: 'Twisted Spoon', description: 'Powers up Psychic-type moves.', buyPrice: 2000, sellPrice: 1000, effect: { type: 'typeBoost', moveType: 'Psychic' } },
+  silverPowder: { id: 'silverPowder', name: 'Silver Powder', description: 'Powers up Bug-type moves.', buyPrice: 2000, sellPrice: 1000, effect: { type: 'typeBoost', moveType: 'Bug' } },
+  hardStone: { id: 'hardStone', name: 'Hard Stone', description: 'Powers up Rock-type moves.', buyPrice: 2000, sellPrice: 1000, effect: { type: 'typeBoost', moveType: 'Rock' } },
+  spellTag: { id: 'spellTag', name: 'Spell Tag', description: 'Powers up Ghost-type moves.', buyPrice: 2000, sellPrice: 1000, effect: { type: 'typeBoost', moveType: 'Ghost' } },
+  dragonFang: { id: 'dragonFang', name: 'Dragon Fang', description: 'Powers up Dragon-type moves.', buyPrice: 2000, sellPrice: 1000, effect: { type: 'typeBoost', moveType: 'Dragon' } },
+  blackGlasses: { id: 'blackGlasses', name: 'Black Glasses', description: 'Powers up Dark-type moves.', buyPrice: 2000, sellPrice: 1000, effect: { type: 'typeBoost', moveType: 'Dark' } },
+  ironPlate: { id: 'ironPlate', name: 'Iron Plate', description: 'Powers up Steel-type moves.', buyPrice: 2000, sellPrice: 1000, effect: { type: 'typeBoost', moveType: 'Steel' } },
+  pixiePlate: { id: 'pixiePlate', name: 'Pixie Plate', description: 'Powers up Fairy-type moves.', buyPrice: 2000, sellPrice: 1000, effect: { type: 'typeBoost', moveType: 'Fairy' } },
+}
+
+/**
  * Medicine, candy and treasure. `category` doubles as the bag tab id;
  * medicine and candy carry a use effect, valuables only a `sellPrice`.
  * @type {Record<string, ConsumableItem>}
@@ -337,6 +445,35 @@ export const standardMartItems = [
     { itemId: 'revive', unlockWildBattlesWon: 80 },
     { itemId: 'maxPotion', unlockWildBattlesWon: 300 },
     { itemId: 'maxRevive', unlockWildBattlesWon: 400 },
+    // Held items (gated so the early game stays simple).
+    { itemId: 'silkScarf', unlockWildBattlesWon: 60 },
+    { itemId: 'charcoal', unlockWildBattlesWon: 60 },
+    { itemId: 'mysticWater', unlockWildBattlesWon: 60 },
+    { itemId: 'magnet', unlockWildBattlesWon: 60 },
+    { itemId: 'miracleSeed', unlockWildBattlesWon: 60 },
+    { itemId: 'neverMeltIce', unlockWildBattlesWon: 80 },
+    { itemId: 'blackBelt', unlockWildBattlesWon: 80 },
+    { itemId: 'poisonBarb', unlockWildBattlesWon: 80 },
+    { itemId: 'softSand', unlockWildBattlesWon: 80 },
+    { itemId: 'sharpBeak', unlockWildBattlesWon: 80 },
+    { itemId: 'twistedSpoon', unlockWildBattlesWon: 100 },
+    { itemId: 'silverPowder', unlockWildBattlesWon: 100 },
+    { itemId: 'hardStone', unlockWildBattlesWon: 100 },
+    { itemId: 'spellTag', unlockWildBattlesWon: 100 },
+    { itemId: 'dragonFang', unlockWildBattlesWon: 150 },
+    { itemId: 'blackGlasses', unlockWildBattlesWon: 150 },
+    { itemId: 'ironPlate', unlockWildBattlesWon: 150 },
+    { itemId: 'pixiePlate', unlockWildBattlesWon: 150 },
+    { itemId: 'sitrusBerry', unlockWildBattlesWon: 60 },
+    { itemId: 'lumBerry', unlockWildBattlesWon: 100 },
+    { itemId: 'focusSash', unlockWildBattlesWon: 150 },
+    { itemId: 'eviolite', unlockWildBattlesWon: 200 },
+    { itemId: 'leftovers', unlockWildBattlesWon: 250 },
+    { itemId: 'assaultVest', unlockWildBattlesWon: 300 },
+    { itemId: 'choiceBand', unlockWildBattlesWon: 300 },
+    { itemId: 'choiceSpecs', unlockWildBattlesWon: 300 },
+    { itemId: 'choiceScarf', unlockWildBattlesWon: 300 },
+    { itemId: 'lifeOrb', unlockWildBattlesWon: 400 },
   ]
 
 export const bagCategories = [
@@ -355,6 +492,10 @@ export const bagCategories = [
     {
       id: 'items',
       label: 'Items',
+    },
+    {
+      id: 'held',
+      label: 'Held Items',
     },
     {
       id: 'valuables',

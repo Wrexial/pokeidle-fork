@@ -1,10 +1,24 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.15.0'
+export const GAME_VERSION = '0.16.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.16.0',
+      subtitle: 'Held Items',
+      sections: [
+        {
+          heading: 'Items',
+          items: [
+            'Pokemon can hold items again: the Bag has a Held Items tab, bought from marts as you win battles, and the stats panel shows what a Pokemon is holding (with a Take button)',
+            'First effects are live: Leftovers, Life Orb, Choice Band / Specs / Scarf, Assault Vest, Eviolite, Focus Sash, Sitrus Berry, Lum Berry and the 18 type-boosting items',
+            'Wild and trainer Pokemon can hold items too, so the mechanics cut both ways',
+          ],
+        },
+      ],
+    },
     {
       version: '0.15.0',
       subtitle: 'Abilities',

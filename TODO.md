@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.15.0**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.16.0**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -45,8 +45,9 @@ items, best return first:
 20. **#25 Battle engine pass** — M–L · ★★★★½ — pairs with #24; AI + healing +
     multi-hit first. **First slice shipped in 0.11.0**: the auto-battler and
     trainer AI now heal and set up; hazards/screens/accuracy stages still open.
-21. **#2a Abilities** ✅ (shipped 0.15.0) — the first ability set is live;
-    **#2c Held items** still open — the remaining battle-depth feature.
+21. ✅ **#2a Abilities** (0.15.0) and **#2c Held items** (0.16.0) — the
+    biggest remaining battle-depth feature is now in. Remaining ability/item
+    nuances live in sections #2a/#2c.
 22. **#36 Zones (route chunks)** — M–L · ★★★★ — lets Alola/Galar/Paldea map
     as chunks of areas instead of a single-route-wide graph.
 23. **#35 More Galar areas** — M · ★★★½ — Galar is the thinnest region map;
@@ -136,15 +137,18 @@ rolled and stats recomputed for Pokemon that lack one). Re-rolls use a
 party Pokemon via `USE_ITEM_ON_POKEMON`. Daycare inheritance (#3) can now
 inherit the parents' natures.
 
-### 2c. Held items
-- [ ] Add a held-item slot to `Pokemon` (type in `src/types.d.ts`, saved in
-      `context.js`).
-- [ ] Give wild/trainer/raid Pokémon held items from a pool.
-- [ ] Implement a first set of effects (Leftovers, type boosters/plates, Choice
-      Band/Specs/Scarf, Focus Sash, berries).
-- [ ] UI to give/take items from the bag.
+### 2c. ✅ Held items — shipped in 0.16.0
 
-Effort: **large** (mostly 2a/2c). New data file(s) required.
+Done. `heldItems` (`src/data/items.js`) holds 28 items with effect descriptors;
+the Bag gained a **Held Items** tab (`USE_ITEM_ON_POKEMON` equips, swapping any
+previous item back to the bag, `CLEAR_HELD_ITEM` takes it off) and the stats
+panel shows/removes the held item. `src/game/held-items.js` provides the pure
+lookups; `combat.js` applies Leftovers, Life Orb, stat boosts (Choice
+Band/Specs/Scarf, Assault Vest), Eviolite, Focus Sash, Sitrus/Lum Berries and
+the 18 type boosters, and `heldItemUsed` is threaded through the volatile state.
+Wild (8%) and trainer/tower (30%) Pokemon roll a held item from the same pool.
+Covered by `tests/held-items.test.mjs`. Remaining: Choice-move locking, more
+berries, contact items (Rocky Helmet), and the rest of the item list.
 
 ## 3. ✅ Daycare inheritance (IVs / egg moves / natures) — shipped in 0.10.0
 
@@ -1157,6 +1161,10 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.16.0 (held items): Pokemon can hold items (Bag Held Items tab, stats-panel
+Take button), 28 items with real effects are live, and wild/trainer Pokemon
+hold them too. #2c done; #2a/#2c are now both in.
 
 0.15.0 (abilities): every Pokemon has a real ability (fetched from PokeAPI,
 shown in the stats panel) and a first set of ~40 of them work in battle. #2a done.

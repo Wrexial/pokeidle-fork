@@ -3,6 +3,7 @@
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { moveCategoryIcons } from '../data/moves.js'
+import { heldItems } from '../data/items.js'
 import { statBarColors } from '../data/ui.js'
 import { natureByKey, natureName } from '../data/natures.js'
 
@@ -341,6 +342,28 @@ export function StatsPanel({
                   className: 'stats-panel-ability',
                   title: 'Ability',
                   children: abilityDisplayName(pokemon.ability),
+                }),
+              pokemon.heldItem &&
+                jsxs('span', {
+                  className: 'stats-panel-held',
+                  children: [
+                    jsx('span', {
+                      title: 'Held item',
+                      children: `\ud83c\udf81 ${heldItems[pokemon.heldItem]?.name ?? pokemon.heldItem}`,
+                    }),
+                    jsx('button', {
+                      className: 'stats-panel-held-remove',
+                      title: 'Take the held item back',
+                      onClick: () =>
+                        dispatch({
+                          type: 'CLEAR_HELD_ITEM',
+                          payload: {
+                            pokemonId: pokemon.id,
+                          },
+                        }),
+                      children: 'Take',
+                    }),
+                  ],
                 }),
             ],
           }),

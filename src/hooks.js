@@ -11,6 +11,7 @@ import { useGame } from './game/context.js'
 import { playSfx, startMusic, stopMusic, unlockAudio } from './game/audio.js'
 import { attemptCatch, isCaveLocation, isNightTime, isWaterLocation, selectAutoCatchBall, selectBestBall, shouldAutoCatch } from './game/catching.js'
 import { createVolatileState, resolveBattleTurn } from './game/combat.js'
+import { rollHeldItem } from './game/held-items.js'
 import { calculatePokemonStats, generateIVs, getPerfectIVs, isBattleReady, resolvePokemonMoves, rollAbility } from './game/pokemon.js'
 import { awaySummary, awardExperience, checkShinyOdds, pokerusExpMultiplier, resolveActiveModifiers, resolvePokemonEncounter, resolveRoamer, shinyOddsForSpecies } from './game/progression.js'
 
@@ -327,6 +328,7 @@ export function useGameLoop() {
               speed: pokemonBaseStats.speed,
               moves: pokemonMoves,
               ability: rollAbility(spawningPokemonData.speciesKey),
+              heldItem: rollHeldItem(0.08),
               isPlayer: !1,
               isRoamer: spawningPokemonData.isRoamer ?? !1,
               isShiny: spawningPokemonData.isShiny,
@@ -383,6 +385,7 @@ export function useGameLoop() {
               speed: currentGameState.playerPokemon.speed,
               moves: currentGameState.playerPokemon.moves,
               ability: currentGameState.playerPokemon.ability,
+              heldItem: currentGameState.playerPokemon.heldItem ?? null,
               isPlayer: !0,
               isShiny: currentGameState.playerPokemon.isShiny,
               statStages: {
@@ -396,6 +399,7 @@ export function useGameLoop() {
               flinch: playerVolatile.flinch ?? !1,
               confusionTurns: playerVolatile.confusionTurns ?? 0,
               leechSeeded: playerVolatile.leechSeeded ?? !1,
+              heldItemUsed: playerVolatile.heldItemUsed ?? !1,
               screens: playerVolatile.screens ?? { reflect: 0, lightScreen: 0 },
             },
             enemyBattlePokemon = {
@@ -426,6 +430,7 @@ export function useGameLoop() {
               flinch: playerBattlePokemon.flinch ?? !1,
               confusionTurns: playerBattlePokemon.confusionTurns ?? 0,
               leechSeeded: playerBattlePokemon.leechSeeded ?? !1,
+              heldItemUsed: playerBattlePokemon.heldItemUsed ?? !1,
               screens: playerBattlePokemon.screens ?? { reflect: 0, lightScreen: 0 },
             },
             enemyVolatileUpdate = {
@@ -438,6 +443,7 @@ export function useGameLoop() {
               flinch: enemyBattlePokemon.flinch ?? !1,
               confusionTurns: enemyBattlePokemon.confusionTurns ?? 0,
               leechSeeded: enemyBattlePokemon.leechSeeded ?? !1,
+              heldItemUsed: enemyBattlePokemon.heldItemUsed ?? !1,
               screens: enemyBattlePokemon.screens ?? { reflect: 0, lightScreen: 0 },
             }
           dispatch({

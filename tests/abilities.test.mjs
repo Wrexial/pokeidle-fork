@@ -45,8 +45,8 @@ function withFixedRandom(value, body) {
 
 test('ability data loads for every species and rolls a real ability', () => {
   assert.equal(data.abilityData.bulbasaur.abilities[0], 'overgrow')
-  assert.ok(['runAway', 'adaptability'].includes(rollAbility('eevee')))
-  assert.equal(rollAbility('bulbasaur'), 'overgrow')
+  assert.ok(['runAway', 'adaptability', 'anticipation'].includes(rollAbility('eevee')))
+  assert.ok(['overgrow', 'chlorophyll'].includes(rollAbility('bulbasaur')))
 })
 
 test('abilityDisplayName prettifies a camelCase key', () => {

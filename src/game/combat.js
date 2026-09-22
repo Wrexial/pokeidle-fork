@@ -3,6 +3,8 @@
 import { typechart } from '../data/moves.js'
 import { roamerFleeChance } from '../data/config.js'
 import { moveData } from '../data/gameData.js'
+import { canEvolveFurther } from './pokemon.js'
+import { heldBerryHeal, heldCuresStatus, heldDamageMultiplier, heldLeftoversHeal, heldLifeOrbRecoil, heldStatMultiplier, heldSurvivesAtFullHp } from './held-items.js'
 import { abilityAbsorbsType, abilityAttackMultiplier, abilityBlocksNonSuperEffective, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityHalvesSuperEffective, abilityHealsFromType, abilityIgnoresIndirectDamage, abilityOf, abilityPreventsStatDrop, abilityPreventsStatus, abilitySurvivesAtFullHp } from './abilities.js'
 
 /** @returns {VolatileState} */
@@ -23,6 +25,7 @@ export function createVolatileState() {
     flinch: !1,
     confusionTurns: 0,
     leechSeeded: !1,
+    heldItemUsed: !1,
     screens: { reflect: 0, lightScreen: 0 },
   }
 }
@@ -82,6 +85,19 @@ function applyStatus(target, status, events, targetIsPlayer) {
       target: side,
     },
   })
+  // A held Lum Berry cures the status immediately.
+  if (heldCuresStatus(target)) {
+    target.heldItemUsed = !0
+    target.status = null
+    target.statusTurns = 0
+    events.push({
+      type: 'status',
+      message: `${target.name}'s Lum Berry cured it!`,
+      data: {
+        target: side,
+      },
+    })
+  }
 }
 
 /**
@@ -556,9 +572,9 @@ function screenApplies(defender, moveDef) {
  * @returns {number}
  */
 function effectiveSpeed(pokemon) {
-  return pokemon.status === 'paralysis'
-    ? Math.max(1, Math.floor(pokemon.speed / 2))
-    : pokemon.speed
+  const speed = pokemon.speed * heldStatMultiplier(pokemon, 'speed'),
+    effective = pokemon.status === 'paralysis' ? Math.max(1, Math.floor(speed / 2)) : speed
+  return effective
 }
 
 /**
@@ -828,8 +844,20 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           ? attack.attacker.status === 'burn'
             ? Math.max(1, Math.floor(attack.attacker.attack / 2))
             : attack.attacker.attack
-          : attack.attacker.spAttack) * abilityAttackMultiplier(attack.attacker),
-      defenseStat = moveDef.category === 'physical' ? attack.defender.defense : attack.defender.spDefense,
+          : attack.attacker.spAttack) *
+        abilityAttackMultiplier(attack.attacker) *
+        heldStatMultiplier(
+          attack.attacker,
+          moveDef.category === 'physical' ? 'attack' : 'spAttack',
+          canEvolveFurther(attack.attacker.speciesKey)
+        ),
+      defenseStat =
+        (moveDef.category === 'physical' ? attack.defender.defense : attack.defender.spDefense) *
+        heldStatMultiplier(
+          attack.defender,
+          moveDef.category === 'physical' ? 'defense' : 'spDefense',
+          canEvolveFurther(attack.defender.speciesKey)
+        ),
       attackStatKey = moveDef.category === 'physical' ? 'attack' : 'spAttack',
       defenseStatKey = moveDef.category === 'physical' ? 'defense' : 'spDefense',
       attackerStage = getStatStage(attack.attacker, attackStatKey),
@@ -915,11 +943,12 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     }
     if (screenApplies(attack.defender, moveDef) && !anyCrit)
       totalDamage = Math.max(1, Math.floor(totalDamage / 2))
-    // Ability damage modifiers (Thick Fat, Multiscale, pinch boosts, ...).
+    // Ability + held-item damage modifiers (Thick Fat, Life Orb, ...).
     totalDamage = Math.floor(
       totalDamage *
         abilityDamageDealtMultiplier(attack.attacker, moveDef) *
-        abilityDamageTakenMultiplier(attack.defender, moveDef)
+        abilityDamageTakenMultiplier(attack.defender, moveDef) *
+        heldDamageMultiplier(attack.attacker, moveDef)
     )
     if (abilityHalvesSuperEffective(attack.defender) && damageResult.effectiveness > 1)
       totalDamage = Math.max(1, Math.floor(totalDamage / 2))
@@ -931,6 +960,15 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       continue
     }
     totalDamage = abilitySurvivesAtFullHp(attack.defender, attack.defender.currentHp, totalDamage)
+    const sashDamage = heldSurvivesAtFullHp(
+      attack.defender,
+      attack.defender.currentHp,
+      totalDamage
+    )
+    if (sashDamage !== totalDamage) {
+      totalDamage = sashDamage
+      attack.defender.heldItemUsed = !0
+    }
     if (
       ((attack.defender.currentHp = Math.max(0, attack.defender.currentHp - totalDamage)),
       events.push({
@@ -1067,6 +1105,29 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           break
         }
       }
+    // Life Orb costs the attacker some HP for each hit it lands.
+    const orbRecoil = heldLifeOrbRecoil(attack.attacker, totalDamage)
+    if (orbRecoil > 0) {
+      attack.attacker.currentHp = Math.max(0, attack.attacker.currentHp - orbRecoil)
+      events.push({
+        type: 'recoil',
+        message: `${attack.attacker.name} lost ${orbRecoil} HP to its Life Orb!`,
+        data: {
+          target: attack.isPlayer ? 'player' : 'enemy',
+          damage: orbRecoil,
+          hpAfter: attack.attacker.currentHp,
+          hpMax: attack.attacker.maxHp,
+        },
+      })
+      attack.attacker.currentHp <= 0 &&
+        events.push({
+          type: 'faint',
+          message: `${attack.attacker.name} fainted!`,
+          data: {
+            target: attack.isPlayer ? 'player' : 'enemy',
+          },
+        })
+    }
     if (attack.defender.currentHp <= 0) {
       events.push({
         type: 'faint',
@@ -1181,6 +1242,34 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         message: `${pokemon.name} shed its skin and recovered!`,
         data: {
           target: isPlayerSide ? 'player' : 'enemy',
+        },
+      })
+    }
+    // Held-item end-of-turn effects.
+    const leftovers = heldLeftoversHeal(pokemon)
+    if (leftovers > 0 && pokemon.currentHp < pokemon.maxHp) {
+      pokemon.currentHp = Math.min(pokemon.maxHp, pokemon.currentHp + leftovers)
+      events.push({
+        type: 'heal',
+        message: `${pokemon.name} restored HP with Leftovers!`,
+        data: {
+          target: isPlayerSide ? 'player' : 'enemy',
+          hpAfter: pokemon.currentHp,
+          hpMax: pokemon.maxHp,
+        },
+      })
+    }
+    const berryHeal = heldBerryHeal(pokemon)
+    if (berryHeal > 0) {
+      pokemon.currentHp = Math.min(pokemon.maxHp, pokemon.currentHp + berryHeal)
+      pokemon.heldItemUsed = !0
+      events.push({
+        type: 'heal',
+        message: `${pokemon.name}'s Sitrus Berry restored HP!`,
+        data: {
+          target: isPlayerSide ? 'player' : 'enemy',
+          hpAfter: pokemon.currentHp,
+          hpMax: pokemon.maxHp,
         },
       })
     }

@@ -2,7 +2,7 @@
 
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { useGame } from '../game/context.js'
-import { useIsMobile, useKonamiCode, useDailyEvent, useBrowserNotifications, useAwayAlert, useAccessibilitySettings } from '../hooks.js'
+import { useIsMobile, useKonamiCode, useDailyEvent, useBrowserNotifications, useAwayAlert, useAccessibilitySettings, useGameAudio } from '../hooks.js'
 import { BattleScreen } from './battle-screen.js'
 import { TownMap } from './town-map.js'
 import { PartyBoxPanel } from './party-box-panel.js'
@@ -22,6 +22,8 @@ export function GameLayout() {
   useAwayAlert()
   // Reduced-motion / colourblind display preferences.
   useAccessibilitySettings()
+  // Synthesized region music + event sound effects (opt-in).
+  useGameAudio()
   return useIsMobile()
     ? jsxs('div', {
         className: 'game-layout mobile',

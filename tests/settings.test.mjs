@@ -8,6 +8,7 @@ installGameData()
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 const { repairSave } = await import('../src/game/context.js')
 const { generateIVs } = await import('../src/game/pokemon.js')
+const { playSfx, startMusic, stopMusic, unlockAudio } = await import('../src/game/audio.js')
 
 test('accessibility toggles flip their settings', () => {
   const reduced = gameReducer(initialGameState, { type: 'TOGGLE_REDUCED_MOTION' })
@@ -23,6 +24,31 @@ test('accessibility toggles flip their settings', () => {
     gameReducer(colourblind, { type: 'TOGGLE_COLOURBLIND_TYPES' }).colourblindTypes,
     false
   )
+})
+
+test('audio toggles flip their settings', () => {
+  const music = gameReducer(initialGameState, { type: 'TOGGLE_MUSIC' })
+  assert.equal(music.musicEnabled, true)
+  assert.equal(gameReducer(music, { type: 'TOGGLE_MUSIC' }).musicEnabled, false)
+
+  const sfx = gameReducer(initialGameState, { type: 'TOGGLE_SFX' })
+  assert.equal(sfx.sfxEnabled, true)
+  assert.equal(gameReducer(sfx, { type: 'TOGGLE_SFX' }).sfxEnabled, false)
+})
+
+test('audio defaults off in a fresh save', () => {
+  assert.equal(initialGameState.musicEnabled, false)
+  assert.equal(initialGameState.sfxEnabled, false)
+})
+
+test('the audio engine is a no-op without a browser AudioContext', () => {
+  // The test helper sets window without AudioContext, so these must not throw.
+  assert.doesNotThrow(() => {
+    unlockAudio()
+    startMusic('kanto')
+    playSfx('shiny')
+    stopMusic()
+  })
 })
 
 test('repairSave defaults the accessibility settings off and keeps them on', () => {
@@ -49,4 +75,8 @@ test('repairSave defaults the accessibility settings off and keeps them on', () 
   assert.equal(defaults.colourblindTypes, false)
   assert.equal(enabled.reducedMotion, true)
   assert.equal(enabled.colourblindTypes, true)
+  assert.equal(defaults.musicEnabled, false)
+  assert.equal(defaults.sfxEnabled, false)
+  assert.equal(repairSave(save({ musicEnabled: true, sfxEnabled: true })).musicEnabled, true)
+  assert.equal(repairSave(save({ musicEnabled: true, sfxEnabled: true })).sfxEnabled, true)
 })

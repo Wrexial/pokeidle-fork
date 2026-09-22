@@ -8,6 +8,7 @@ import { completedGenerations, encounterData, mapData, pokemonSpecies, trainerDa
 import { ACHIEVEMENTS } from './data/achievements.js'
 import { dailyExpMultiplier, dailyPrizeMultiplier, dailyShinyMultiplier } from './data/daily-events.js'
 import { useGame } from './game/context.js'
+import { playSfx, startMusic, stopMusic } from './game/audio.js'
 import { attemptCatch, selectAutoCatchBall, selectBestBall, shouldAutoCatch } from './game/catching.js'
 import { createVolatileState, resolveBattleTurn } from './game/combat.js'
 import { calculatePokemonStats, generateIVs, getPerfectIVs, resolvePokemonMoves } from './game/pokemon.js'
@@ -905,4 +906,51 @@ export function useAccessibilitySettings() {
     root.dataset.reducedMotion = state.reducedMotion ? 'true' : 'false'
     root.dataset.colourblindTypes = state.colourblindTypes ? 'true' : 'false'
   }, [state.reducedMotion, state.colourblindTypes])
+}
+
+/**
+ * Play the synthesized region theme and event sound effects when the matching
+ * setting is on. Music switches as the player travels; effects are driven by
+ * toasts, phase changes and level-ups. Silent (and free) while audio is off.
+ */
+export function useGameAudio() {
+  const { state } = useGame(),
+    lastNotificationRef = React.useRef(/** @type {number | null} */ (null)),
+    lastPhaseRef = React.useRef(state.phase),
+    lastLevelUpRef = React.useRef(state.levelUpNotification)
+  return (
+    React.useEffect(() => {
+      if (!state.musicEnabled) {
+        stopMusic()
+        return
+      }
+      startMusic(mapData[state.currentLocation]?.region ?? state.startRegion ?? 'kanto')
+    }, [state.musicEnabled, state.currentLocation, state.startRegion]),
+    React.useEffect(() => () => stopMusic(), []),
+    React.useEffect(() => {
+      const latest = state.notifications[state.notifications.length - 1]
+      if (!latest) return
+      const previous = lastNotificationRef.current
+      lastNotificationRef.current = latest.id
+      if (!state.sfxEnabled || previous === null) return
+      for (const notification of state.notifications.filter((entry) => entry.id > previous)) {
+        if (notification.tone === 'shiny') playSfx('shiny')
+        else if (notification.tone === 'success') playSfx('notify')
+      }
+    }, [state.notifications, state.sfxEnabled]),
+    React.useEffect(() => {
+      const previous = lastPhaseRef.current
+      lastPhaseRef.current = state.phase
+      if (!state.sfxEnabled || previous === state.phase) return
+      if (state.phase === 'evolving') playSfx('evolution')
+      else if (state.phase === 'healing') playSfx('heal')
+      else if (state.phase === 'catching') playSfx('catch')
+    }, [state.phase, state.sfxEnabled]),
+    React.useEffect(() => {
+      const current = state.levelUpNotification,
+        previous = lastLevelUpRef.current
+      lastLevelUpRef.current = current
+      if (state.sfxEnabled && current && current !== previous) playSfx('levelUp')
+    }, [state.levelUpNotification, state.sfxEnabled])
+  )
 }

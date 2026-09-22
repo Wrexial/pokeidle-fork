@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.9.12'
+export const GAME_VERSION = '0.9.13'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.9.13',
+      subtitle: 'Optional Audio',
+      sections: [
+        {
+          heading: 'Audio',
+          items: [
+            'Optional synthesized audio, off by default: a looping chiptune theme for each region plus sound effects for catches, evolutions, level-ups and other big moments',
+            'Turn Music and Sound Effects on separately under Settings \u2192 Audio (the first click unlocks the browser\u2019s audio)',
+          ],
+        },
+      ],
+    },
     {
       version: '0.9.12',
       subtitle: 'Accessibility Options',

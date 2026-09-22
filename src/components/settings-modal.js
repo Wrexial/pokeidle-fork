@@ -3,6 +3,7 @@
 import React from 'react'
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
 import { SAVE_KEY, SAVE_VERSION, clearSave } from '../data/config.js'
+import { unlockAudio } from '../game/audio.js'
 import { repairSave, serializeSave, useGame } from '../game/context.js'
 
 /** @param {{ onClose: () => void }} props */
@@ -194,6 +195,36 @@ export function SettingsModal({ onClose }) {
                         children: state.colourblindTypes
                           ? 'Move Type Labels: ON'
                           : 'Move Type Labels: OFF',
+                      }),
+                    ],
+                  }),
+                  jsxs('div', {
+                    className: 'settings-section',
+                    children: [
+                      jsx('div', {
+                        className: 'settings-section-title',
+                        children: 'Audio',
+                      }),
+                      jsx('p', {
+                        className: 'settings-hint',
+                        children:
+                          'Sound is off by default. Music loops a simple theme for each region; effects play on catches, evolutions, level-ups and big moments.',
+                      }),
+                      jsx('button', {
+                        className: `settings-toggle-btn${state.musicEnabled ? ' active' : ''}`,
+                        onClick: () => {
+                          unlockAudio()
+                          dispatch({ type: 'TOGGLE_MUSIC' })
+                        },
+                        children: state.musicEnabled ? 'Music: ON' : 'Music: OFF',
+                      }),
+                      jsx('button', {
+                        className: `settings-toggle-btn${state.sfxEnabled ? ' active' : ''}`,
+                        onClick: () => {
+                          unlockAudio()
+                          dispatch({ type: 'TOGGLE_SFX' })
+                        },
+                        children: state.sfxEnabled ? 'Sound Effects: ON' : 'Sound Effects: OFF',
                       }),
                     ],
                   }),

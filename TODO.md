@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.12**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.13**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -29,7 +29,7 @@ items, best return first:
 
 1. **#16 More ideas (grab bag)** — mostly S · ★★★ — still open: quests,
    challenge modes (Nuzlocke / monotype / randomizer), form-changing items,
-   audio, a larger-text option and a performance pass.
+   a larger-text option and a performance pass.
 
 ### Tier 2 — High impact, worth the effort (medium–large)
 
@@ -324,7 +324,9 @@ Smaller or more speculative, roughly highest-value first:
       so it isn't colour-only. Shipped in 0.9.12.
 - [ ] **Accessibility: larger text** — a UI text-size option; the pixel UI is
       fixed-size today, so this needs a scalable layout first.
-- [ ] **Audio** — region music and catch/level-up SFX (currently silent).
+- [x] **Audio** — synthesized (no asset files) chiptune themes per region plus
+      event SFX, with separate Music and Sound Effects toggles under Settings →
+      Audio, both off by default. Shipped in 0.9.13 (`src/game/audio.js`).
 - [x] **Combat feedback** — damage now floats above the hit Pokemon and the
       sprite shakes on impact (both honour reduced-motion). Shipped in 0.9.11.
 - [ ] **Performance pass** — the idle loop dispatches a lot per tick; look at
@@ -1188,6 +1190,9 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.9.13 (audio): optional synthesized region themes and event sound effects,
+with separate off-by-default Music and Sound Effects toggles.
 
 0.9.12 (accessibility): settings to force reduced motion (overriding the OS
 preference) and to print move type labels so type isn't colour-only.

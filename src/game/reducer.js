@@ -91,6 +91,10 @@ export const initialGameState = {
   reducedMotion: !1,
   /** Add type labels to moves so type is not conveyed by colour alone. */
   colourblindTypes: !1,
+  /** Background music (off by default; the AudioContext starts on first use). */
+  musicEnabled: !1,
+  /** Sound effects for notable events (off by default). */
+  sfxEnabled: !1,
   raidCooldownEnd: null,
   raidLegendary: null,
   raidRegion: null,
@@ -2234,6 +2238,16 @@ export function gameReducer(state, action) {
       return {
         ...state,
         colourblindTypes: !state.colourblindTypes,
+      }
+    case 'TOGGLE_MUSIC':
+      return {
+        ...state,
+        musicEnabled: !state.musicEnabled,
+      }
+    case 'TOGGLE_SFX':
+      return {
+        ...state,
+        sfxEnabled: !state.sfxEnabled,
       }
     case 'BUY_REWARD_ITEM': {
       const { itemId, cost } = action.payload

@@ -25,67 +25,69 @@ working order, and the numbered sections as the details.
    missing; high value for how complete the game is.
 3. **#30 Caught / event QOL indicators** — S–M · ★★★★ — a caught badge plus a
    reusable toast system that unblocks a dozen other notifications.
-4. **#15 Save management & sharing** — S–M · ★★★★ — export/import protects
+4. **#37 Master Ball catch button** — S–M · ★★★★ — a dedicated, animated throw
+   makes the rarest ball feel like an event instead of an auto-catch.
+5. **#15 Save management & sharing** — S–M · ★★★★ — export/import protects
    the one save players care about; slots are a bonus.
-5. **#2b Natures** (slice of #2) — S–M · ★★★½ — cheap battle depth that also
+6. **#2b Natures** (slice of #2) — S–M · ★★★½ — cheap battle depth that also
    feeds daycare (#3).
-6. **#14 Lightweight test suite** — S–M · ★★★½ (dev value) — pays off every
+7. **#14 Lightweight test suite** — S–M · ★★★½ (dev value) — pays off every
    future change.
-7. **#1 Healing items / Potions** — S · ★★★ — a money sink and tactical
+8. **#1 Healing items / Potions** — S · ★★★ — a money sink and tactical
    option; no new data files.
-8. **#12 Dex-completion rewards** — S · ★★★ — gives the Shiny Charm grind a
+9. **#12 Dex-completion rewards** — S · ★★★ — gives the Shiny Charm grind a
    payoff.
-9. **#21 Unlock Tokens endgame** — S · ★★★ — removes a dead banner once all
-   regions are open.
-10. **#33 Rare Candy / EXP Candy drops** — S–M · ★★★ — a levelling shortcut
+10. **#21 Unlock Tokens endgame** — S · ★★★ — removes a dead banner once all
+    regions are open.
+11. **#33 Rare Candy / EXP Candy drops** — S–M · ★★★ — a levelling shortcut
     that gives rare wild finds more value.
-11. **#34 Valuables you can sell** — S–M · ★★★ — treasure drops plus a Sell
+12. **#34 Valuables you can sell** — S–M · ★★★ — treasure drops plus a Sell
     action extend the shops and give the economy an outlet.
-12. **#5 Daily / periodic events** — S–M · ★★★ — cheap engagement loop.
-13. **#16 More ideas (grab bag)** — mostly S · ★★★ — mine the quick ones
+13. **#5 Daily / periodic events** — S–M · ★★★ — cheap engagement loop.
+14. **#16 More ideas (grab bag)** — mostly S · ★★★ — mine the quick ones
     (achievement rewards, release/selling, map QoL, notifications).
 
 ### Tier 2 — High impact, worth the effort (medium–large)
 
-14. **#7 Offline / idle progress** — M–L · ★★★★★ — the biggest missing *idle*
+15. **#7 Offline / idle progress** — M–L · ★★★★★ — the biggest missing *idle*
     feature; a returning player currently gets nothing.
-15. **#8 Pokémon management / IV checker** — M · ★★★★½ — IVs are generated
+16. **#8 Pokémon management / IV checker** — M · ★★★★½ — IVs are generated
     but invisible; box search, nicknames and lock are all high-use.
-16. **#20 Honey/Repel DexNav hunting** — M · ★★★★½ — turns the existing
+17. **#20 Honey/Repel DexNav hunting** — M · ★★★★½ — turns the existing
     shiny chain into a usable system.
-17. **#24 Move data pass** — M–L · ★★★★½ — ~290 moves currently do nothing;
+18. **#24 Move data pass** — M–L · ★★★★½ — ~290 moves currently do nothing;
     do it in slices (healing/screens/setup first).
-18. **#25 Battle engine pass** — M–L · ★★★★½ — pairs with #24; AI + healing +
+19. **#25 Battle engine pass** — M–L · ★★★★½ — pairs with #24; AI + healing +
     multi-hit first.
-19. **#2a Abilities** (with **#2c Held items**) — L · ★★★★★ / ★★★★ — the
+20. **#2a Abilities** (with **#2c Held items**) — L · ★★★★★ / ★★★★ — the
     biggest remaining battle-depth feature; natures (#2b) are already in
     Tier 1.
-20. **#36 Zones (route chunks)** — M–L · ★★★★ — lets Alola/Galar/Paldea map
+21. **#36 Zones (route chunks)** — M–L · ★★★★ — lets Alola/Galar/Paldea map
     as chunks of areas instead of a single-route-wide graph.
-21. **#35 More Galar areas** — M · ★★★½ — Galar is the thinnest region map;
+22. **#35 More Galar areas** — M · ★★★½ — Galar is the thinnest region map;
     add Wild Area sub-areas and DLC land, mostly data.
-22. **#28 More region areas (DLC, caves, POIs)** — L · ★★★★½ — real content
+23. **#28 More region areas (DLC, caves, POIs)** — L · ★★★★½ — real content
     (Crown Tundra, Kitakami, landmark caves); data-heavy. Pairs with #35/#36.
-23. **#18 Better settings** — M · ★★★★ — centralises QOL toggles and the
+24. **#18 Better settings** — M · ★★★★ — centralises QOL toggles and the
     export/import from #15.
 
 ### Tier 3 — Medium effort, medium gain
 
-24. **#3 Daycare inheritance** — M · ★★★
-25. **#6 Friendship / happiness** — M · ★★★
-26. **#9 Move tutor / TMs** — M · ★★★
-27. **#11 NPC gifts & static encounters** — M · ★★★
-28. **#17 Pokéball variants** — M · ★★★
-29. **#27 Gender-specific sprites** — M · ★★★ (assets are half-there)
-30. **#29 Minigames** — M–L · ★★★ (small per minigame once one exists)
-31. **#4 In-battle Mega evolution** — M–L · ★★★
-32. **#32 Battle Tower tuning** — M · ★★★½ — auto-climb, sane Victory Token
+25. **#3 Daycare inheritance** — M · ★★★
+26. **#6 Friendship / happiness** — M · ★★★
+27. **#9 Move tutor / TMs** — M · ★★★
+28. **#11 NPC gifts & static encounters** — M · ★★★
+29. **#17 Pokéball variants** — M · ★★★
+30. **#27 Gender-specific sprites** — M · ★★★ (assets are half-there)
+31. **#29 Minigames** — M–L · ★★★ (small per minigame once one exists)
+32. **#4 In-battle Mega evolution** — M–L · ★★★
+33. **#32 Battle Tower tuning** — M · ★★★½ — auto-climb, sane Victory Token
     payout, and harder/faster teams (6 fully evolved, late legendaries).
 
 ### Tier 4 — Big and low-return, defer
 
-33. **#10 Weather & terrain** — M · ★★½ (nice depth, no urgency)
-34. **#19 Online sync** — L · ★★★ — the project's first backend; needs a
+34. **#10 Weather & terrain** — M · ★★½ (nice depth, no urgency)
+35. **#19 Online sync** — L · ★★★ — the project's first backend; needs a
     design doc and real ops for modest player value today.
 
 ---
@@ -728,11 +730,14 @@ for custom events.
 
 ### 30a. "Already caught" indicator
 
-- [ ] Add a ball / ✓ badge to the enemy's name row in `enemy-info-box.js` when
-      `pokedexCaught.includes(pokemon.speciesKey)`, so you can tell at a glance
-      whether the wild Pokemon is new.
+- [ ] Add a caught indicator to the enemy's name row in `enemy-info-box.js`
+      when `pokedexCaught.includes(pokemon.speciesKey)`, so you can tell at a
+      glance whether the wild Pokemon is new. **Use a Pokéball sprite** (reuse
+      `PokeballIcon` / `pokeballColors` in `src/data/ui.js`), not a text ✓ —
+      the ball reads instantly as "already in the ball".
 - [ ] Mirror it on the encounter list / Pokedex tile (already shows caught) and
-      distinguish *seen* vs *caught* vs *shiny caught* (`shinyCaught`).
+      distinguish *seen* vs *caught* vs *shiny caught* (`shinyCaught`), e.g. a
+      plain ball vs a shiny-tinted ball.
 - [ ] Maybe flag the battle sprite too (a small marker), and keep it off for
       trainer teams / raids where the species isn't the reward.
 
@@ -953,6 +958,48 @@ to replace the proximity stitching / 15-species trim.
 
 Effort: **medium–large** (a small data-model change plus map/encounter UI, but
 it unblocks the three regions that don't fit the route graph today).
+
+## 37. Master Ball as a dedicated, animated catch
+
+Catching is fully automated: the idle loop picks a ball from the route's
+enabled balls (`selectAutoCatchBall` / `selectBestBall`) and throws it in the
+battle log. The Master Ball — the rarest, most exciting item in the game — is
+therefore just another auto-selected ball, and because its `ballModifier` of 255
+always wins the "best ball" check it can be silently spent by a routine
+auto-catch. There's no ceremony around finding or using one.
+
+Make it a deliberate, cinematic action:
+
+- [ ] Add a **Master Ball button** to the battle UI (enemy side, near the enemy
+      info box / battle controls) that only shows (or only enables) when the
+      player owns one. Pressing it throws a Master Ball at the current wild
+      encounter and consumes one.
+- [ ] Add a dedicated `THROW_MASTER_BALL` (or reuse `CATCH_POKEMON` with a
+      flag) reducer action that bypasses the auto-catch rule engine, always
+      catches, and pauses the idle loop while it runs.
+- [ ] Play a **special animation** before the catch resolves: a unique ball
+      sprite and throw arc, a screen flash/zoom, the ball wobbling, then a
+      guaranteed click with confetti/sparkles (echo `healing-scene.js`,
+      `evolution-scene.js` and the `HatchPopup` for structure/CSS keyframes).
+      Consider a `MasterBallScene` / `CatchAnimation` component driven by a new
+      `catching` phase so the timer stops while it plays.
+- [ ] Stop the Master Ball being spent automatically: exclude it from
+      `selectBestBall` / `selectAutoCatchBall` (or gate it behind an explicit
+      setting) so it can only be used through the button.
+- [ ] Decide availability: wild encounters yes; trainer battles no; raids and
+      roamer legendaries probably yes (make the button prominent there).
+- [ ] Mark the moment in the battle log and celebrate a new/shiny catch through
+      the toast system (#30b).
+- [ ] Assets: a Master Ball throw sprite/animation — only the static
+      `pokeballColors` / `PokeballIcon` exist today.
+
+Relevant code: `src/game/catching.js` (`attemptCatch`, `selectBestBall`,
+`selectAutoCatchBall`, `calculateCatchChance`), the auto-catch score in
+`src/hooks.js`, `CATCH_POKEMON` / `USE_POKEBALL` (`src/game/reducer.js`),
+`battle-scene.js` (button placement), `pokeball-icon.js` and `assets/style.css`;
+`pokeBalls.masterball` in `src/data/items.js`.
+
+Effort: **small–medium** (one button + a new action + an animation/CSS pass).
 
 ---
 

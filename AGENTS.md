@@ -177,7 +177,7 @@ in `GameLayout`) dispatches `DEBUG_MAX_LEVEL` when the Konami code
 | `src/game/pokemon.js` | Species/stat/exp/learnset math, sprite URLs, `createPokemon`. |
 | `src/game/combat.js` | Battle math barrel re-exporting `src/game/combat/`: `damage` (type chart, stat stages, damage), `status` (status/volatile effects), `volatile` (volatile state, speed, screens), `ai` (move choice), `turn` (`resolveBattleTurn`) and `end-of-turn` (residual/field decay). |
 | `src/game/catching.js` | Catch rate/chance, ball selection, auto-catch rules, encounter rarity. |
-| `src/game/progression.js` | Encounters, EXP awards, unlocks, party sync, effects/items, roads. |
+| `src/game/progression.js` | Barrel re-exporting `src/game/progression/`: `items` (economy/effects), `offline`, `party` (sync/transitions), `unlocks`, `encounters`, `teams` (trainer/tower), `exp` and `roads`. |
 | `src/game/reducer.js` | `initialGameState` + a thin `gameReducer` dispatcher; the per-action handlers live in `src/game/reducer/*.js` (`world`, `battle`, `recovery`, `pokemon`, `collection`, `items`, `minigames`, `settings`) with shared helpers in `src/game/reducer-helpers.js`. |
 | `src/game/context.js` | `GameProvider` + `useGame` (React wiring); re-exports the save helpers. |
 | `src/game/save.js` | `repairSave`, `loadSavedState`, `serializeSave`, `persistSave` and `SAVED_STATE_KEYS` — the versioned localStorage save. |

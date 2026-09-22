@@ -115,7 +115,7 @@ export function StatsPanel({
             title: pokemon.favourite
               ? 'Remove from favourites'
               : 'Favourite (protects from Release and Wonder Trade)',
-            children: pokemon.favourite ? '\u2605' : '\u2606',
+            children: pokemon.favourite ? '\u2665' : '\u2661',
           }),
           jsx('button', {
             className: 'stats-panel-manage',

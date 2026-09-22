@@ -253,7 +253,7 @@ export function PartyPanel({
                                       jsx('span', {
                                         className: 'party-favourite-badge',
                                         title: 'Favourite',
-                                        children: '\u2605',
+                                        children: '\u2665',
                                       }),
                                     state.pokerus &&
                                       jsx('span', {

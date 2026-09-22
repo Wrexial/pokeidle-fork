@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.9.18'
+export const GAME_VERSION = '0.9.19'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.9.19',
+      subtitle: 'Favourite Hearts',
+      sections: [
+        {
+          heading: 'Pokemon',
+          items: [
+            'Favourites now use a heart instead of a star, so they no longer look like the shiny marker',
+            'The stats-panel favourite toggle is now a clear chip (with a filled red heart when active) instead of a faint outline',
+          ],
+        },
+      ],
+    },
     {
       version: '0.9.18',
       subtitle: 'Nicknames & Box Search',

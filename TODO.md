@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.18**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.19**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -1198,6 +1198,9 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.9.19 (favourite hearts): favourites use a heart (not the shiny star), and the
+stats-panel toggle is a clear chip that fills red when active.
 
 0.9.18 (nicknames & box search): Pokemon can be nicknamed from the stats panel
 (shown in party/battle/daycare), and the box gained a search field with

@@ -1814,8 +1814,8 @@ img {
 
 .party-favourite-badge {
     margin-left: 4px;
-    color: var(--gold-bright);
-    text-shadow: 0 0 4px #ffd04088
+    color: #ff5a78;
+    text-shadow: 0 0 4px #ff5a7888
 }
 
 .party-action-btn {
@@ -2152,23 +2152,27 @@ img {
 }
 
 .stats-panel-fav-btn {
-    font-size: 13px;
+    font-size: 15px;
     line-height: 1;
-    padding: 0 5px;
-    background: none;
-    color: #8a7a60;
-    border: 2px solid transparent;
+    padding: 1px 7px;
+    background: #00000026;
+    color: #7a6a58;
+    border: 2px solid #8a7a60;
     border-radius: 0;
-    cursor: pointer
+    cursor: pointer;
+    transition: .12s
 }
 
 .stats-panel-fav-btn:hover {
-    color: var(--gold-dark)
+    color: #d05070;
+    border-color: #d05070
 }
 
 .stats-panel-fav-btn.active {
-    color: var(--gold-bright);
-    text-shadow: 0 0 6px #ffd040aa
+    color: #ff5a78;
+    border-color: #ff5a78;
+    background: #ff5a7826;
+    text-shadow: 0 0 8px #ff5a78aa
 }
 
 .stats-panel-ivs {

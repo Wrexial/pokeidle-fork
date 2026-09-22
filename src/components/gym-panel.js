@@ -4,8 +4,9 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { championData, elite4Data, gymLeaderData, mapData, regions } from '../data/gameData.js'
 import { BATTLE_TOWER_REGION } from '../data/config.js'
-import { MINING_COST, MINING_DIGS, MINIGAME_BY_REGION } from '../game/minigames.js'
+import { MINIGAME_BY_REGION, MINIGAME_INFO } from '../game/minigames.js'
 import { MiningModal } from './mining-modal.js'
+import { BugContestModal } from './bug-contest-modal.js'
 import { useGame } from '../game/context.js'
 import { buildTrainerTeam, buildTowerFloor } from '../game/progression.js'
 
@@ -410,38 +411,49 @@ export function GymPanel({ onOpenShop }) {
             }),
           ],
         }),
-      regionMinigame === 'mining' &&
+      regionMinigame &&
+        MINIGAME_INFO[regionMinigame] &&
         isLeagueRematch &&
         jsxs('div', {
           className: 'gym-section tower-section',
           children: [
             jsx('div', {
               className: 'gym-section-title',
-              children: 'Sinnoh Underground',
+              children: MINIGAME_INFO[regionMinigame].title,
             }),
             jsx('div', {
               className: 'tower-hint',
-              children: `Dig for evolution stones, treasures and candies. Each run costs $${MINING_COST.toLocaleString()} and gives ${MINING_DIGS} digs.`,
+              children: MINIGAME_INFO[regionMinigame].hint,
             }),
             jsx('button', {
               className: 'gym-fight-btn champion',
               style: {
                 width: '100%',
               },
-              disabled: state.money < MINING_COST,
+              disabled: state.money < MINIGAME_INFO[regionMinigame].cost,
               onClick: () => {
-                if (state.money < MINING_COST) return
-                dispatch({ type: 'START_MINING' })
+                if (state.money < MINIGAME_INFO[regionMinigame].cost) return
+                dispatch({
+                  type: 'PAY_MINIGAME_FEE',
+                  payload: {
+                    amount: MINIGAME_INFO[regionMinigame].cost,
+                  },
+                })
                 setShowMining(!0)
               },
               children:
-                state.money < MINING_COST
+                state.money < MINIGAME_INFO[regionMinigame].cost
                   ? 'NOT ENOUGH MONEY'
-                  : `GO MINING ($${MINING_COST.toLocaleString()})`,
+                  : `${MINIGAME_INFO[regionMinigame].action} ($${MINIGAME_INFO[regionMinigame].cost.toLocaleString()})`,
             }),
           ],
         }),
-      showMining && jsx(MiningModal, { onClose: () => setShowMining(!1) }),
+      showMining &&
+        regionMinigame === 'bugContest' &&
+        jsx(BugContestModal, { onClose: () => setShowMining(!1) }),
+      showMining &&
+        regionMinigame === 'mining' &&
+        jsx(MiningModal, { onClose: () => setShowMining(!1) }),
       state.defeatedGyms.length > 0 &&
         jsxs('div', {
           className: 'gym-section',

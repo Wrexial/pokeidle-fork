@@ -2,10 +2,12 @@
 // own, starting with Sinnoh's Underground mining. Each minigame keeps its
 // interactive state in its modal and dispatches a single collect action.
 import { consumableItems, evolutionItems } from '../data/items.js'
+import { pokemonSpecies } from '../data/gameData.js'
 
 /** Region -> minigame id. Hoenn's tower is handled separately. */
 /** @type {Record<string, string>} */
 export const MINIGAME_BY_REGION = {
+  johto: 'bugContest',
   sinnoh: 'mining',
 }
 
@@ -77,9 +79,90 @@ export function rollMiningReward() {
 
 /** Display name for any reward item id. @param {string} itemId */
 export function rewardItemName(itemId) {
-  return (
-    consumableItems[itemId]?.name ??
-    evolutionItems[itemId]?.name ??
-    itemId
-  )
+  return consumableItems[itemId]?.name ?? evolutionItems[itemId]?.name ?? itemId
 }
+
+// --- Johto Bug Catching Contest -------------------------------------------
+
+/** Money spent to enter the contest. */
+export const BUG_CONTEST_COST = 800
+
+/** How many times you may pass on a bug before you must keep one. */
+export const BUG_CONTEST_SEARCHES = 5
+
+/**
+ * Contest bugs, with a weight (how often it turns up) and a score (how good it
+ * is). Weaker bugs are common, the big ones are rare.
+ * @type {{ speciesKey: string, weight: number }[]}
+ */
+export const BUG_CONTEST_POOL = [
+  { speciesKey: 'caterpie', weight: 22 },
+  { speciesKey: 'weedle', weight: 22 },
+  { speciesKey: 'ledyba', weight: 16 },
+  { speciesKey: 'spinarak', weight: 16 },
+  { speciesKey: 'paras', weight: 12 },
+  { speciesKey: 'venonat', weight: 10 },
+  { speciesKey: 'pineco', weight: 9 },
+  { speciesKey: 'yanma', weight: 6 },
+  { speciesKey: 'ariados', weight: 5 },
+  { speciesKey: 'forretress', weight: 4 },
+  { speciesKey: 'scyther', weight: 2 },
+  { speciesKey: 'pinsir', weight: 2 },
+  { speciesKey: 'heracross', weight: 2 },
+]
+
+const BUG_TOTAL_WEIGHT = BUG_CONTEST_POOL.reduce((sum, entry) => sum + entry.weight, 0)
+
+/** Total base stats for a species (its contest score). @param {string} speciesKey */
+export function contestScore(speciesKey) {
+  const species = pokemonSpecies[speciesKey]
+  return species
+    ? Object.values(species.baseStats).reduce((sum, value) => sum + value, 0)
+    : 0
+}
+
+/**
+ * Roll the next bug to appear.
+ * @returns {{ speciesKey: string, score: number }}
+ */
+export function rollContestBug() {
+  let roll = Math.random() * BUG_TOTAL_WEIGHT
+  for (const entry of BUG_CONTEST_POOL) {
+    roll -= entry.weight
+    if (roll <= 0) return { speciesKey: entry.speciesKey, score: contestScore(entry.speciesKey) }
+  }
+  const fallback = BUG_CONTEST_POOL[0]
+  return { speciesKey: fallback.speciesKey, score: contestScore(fallback.speciesKey) }
+}
+
+/**
+ * Prize for a caught bug's score.
+ * @param {number} score
+ * @returns {{ money: number, items: { itemId: string, quantity: number }[], label: string }}
+ */
+export function bugContestPrize(score) {
+  if (score >= 480) return { money: 4000, items: [{ itemId: 'rareCandy', quantity: 1 }], label: 'First place' }
+  if (score >= 400)
+    return { money: 2000, items: [{ itemId: 'expCandyL', quantity: 1 }], label: 'Second place' }
+  if (score >= 300)
+    return { money: 1000, items: [{ itemId: 'expCandyM', quantity: 1 }], label: 'Third place' }
+  return { money: 400, items: [{ itemId: 'expCandyS', quantity: 1 }], label: 'Participant' }
+}
+
+/** Region -> minigame section metadata for the Gyms panel. */
+/** @type {Record<string, { title: string, cost: number, action: string, hint: string }>} */
+export const MINIGAME_INFO = {
+  mining: {
+    title: 'Sinnoh Underground',
+    cost: MINING_COST,
+    action: 'GO MINING',
+    hint: `Dig for evolution stones, treasures and candies. Each run costs $${MINING_COST.toLocaleString()} and gives ${MINING_DIGS} digs.`,
+  },
+  bugContest: {
+    title: 'Bug Catching Contest',
+    cost: BUG_CONTEST_COST,
+    action: 'ENTER CONTEST',
+    hint: `Search the park for bugs \u2014 rarer ones score higher. Entry is $${BUG_CONTEST_COST.toLocaleString()}, and you get ${BUG_CONTEST_SEARCHES} chances to look before you must keep one.`,
+  },
+}
+

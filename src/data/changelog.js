@@ -1,10 +1,22 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.25.0'
+export const GAME_VERSION = '0.26.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.26.0',
+      subtitle: 'Bug Catching Contest',
+      sections: [
+        {
+          heading: 'Minigames',
+          items: [
+            'Johto now has its own minigame: once its Champion is beaten, the Gyms tab runs the Bug Catching Contest. Pay $800 and search the park \u2014 keep the bug you like before your searches run out, and rarer (higher-scoring) bugs win bigger cash and candy prizes',
+          ],
+        },
+      ],
+    },
     {
       version: '0.25.0',
       subtitle: 'Sinnoh Underground',

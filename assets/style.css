@@ -6774,6 +6774,61 @@ img {
     color: var(--gold)
 }
 
+.bug-contest-bug {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px
+}
+
+.bug-contest-sprite {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    image-rendering: pixelated
+}
+
+.bug-contest-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px
+}
+
+.bug-contest-name {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--parchment)
+}
+
+.bug-contest-score {
+    font-size: 8px;
+    color: var(--gold)
+}
+
+.bug-contest-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end
+}
+
+.bug-contest-result {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 8px
+}
+
+.bug-contest-place {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold)
+}
+
+.bug-contest-outcome {
+    font-size: 8px;
+    color: var(--parchment)
+}
+
 .reward-shop-token-display {
     text-align: center;
     padding: 6px 0 10px;

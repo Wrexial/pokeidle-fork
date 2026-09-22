@@ -4,7 +4,6 @@ import { BATTLE_TOWER_REGION, RAID_COOLDOWN_MS, RAID_LEVEL_MAX, breedShinyOdds, 
 import { ACHIEVEMENTS } from '../data/achievements.js'
 import { activeItems, consumableItems, evolutionItems, heldItems, pokeBalls } from '../data/items.js'
 import { dailyDropMultiplier, dailyEventByKey, rollDailyEvent, todayKey } from '../data/daily-events.js'
-import { MINING_COST } from './minigames.js'
 import { natureName, randomNature } from '../data/natures.js'
 import { elite4Data, encounterData, gymLeaderData, mapData, moveLearnsets, pokemonSpecies, regions } from '../data/gameData.js'
 import { createVolatileState } from './combat.js'
@@ -2748,12 +2747,27 @@ export function gameReducer(state, action) {
         ...state,
         challengeNuzlocke: !state.challengeNuzlocke,
       }
-    case 'START_MINING':
-      if (state.money < MINING_COST) return state
+    case 'PAY_MINIGAME_FEE': {
+      const amount = action.payload?.amount ?? 0
+      if (amount <= 0 || state.money < amount) return state
       return {
         ...state,
-        money: state.money - MINING_COST,
+        money: state.money - amount,
       }
+    }
+    case 'CLAIM_MINIGAME_REWARD': {
+      const { money = 0, items = [] } = action.payload ?? {},
+        inventory = { ...state.inventory }
+      for (const item of items)
+        if (item?.itemId && item.quantity > 0)
+          inventory[item.itemId] = (inventory[item.itemId] ?? 0) + item.quantity
+      return {
+        ...state,
+        money: state.money + money,
+        inventory,
+        battleLog: [...state.battleLog, 'Minigame reward claimed.'].slice(-50),
+      }
+    }
     case 'COLLECT_MINING': {
       const rewards = Array.isArray(action.payload?.rewards) ? action.payload.rewards : []
       if (rewards.length === 0) return state

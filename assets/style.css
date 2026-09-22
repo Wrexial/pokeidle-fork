@@ -7344,28 +7344,56 @@ img {
     to { opacity: 0 }
 }
 
-.game-corner-reels {
+.slot-machine {
     display: flex;
     gap: 8px;
     justify-content: center;
-    margin-bottom: 8px
+    padding: 8px;
+    background: linear-gradient(#241a10,#120c06);
+    border: 2px solid #8a7040;
+    border-radius: 8px;
+    box-shadow: inset 0 0 20px rgba(0,0,0,.6)
 }
 
-.game-corner-reel {
-    width: 56px;
-    height: 56px;
+.slot-reel {
+    display: flex;
+    flex-direction: column;
+    gap: 6px
+}
+
+.slot-cell {
+    width: 58px;
+    height: 58px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 28px;
     background: #1a1a2a;
     border: 2px solid #8a7040;
-    border-radius: 6px
+    border-radius: 6px;
+    overflow: hidden
 }
 
-.game-corner-reels.win .game-corner-reel {
+.slot-reel.spinning .slot-cell {
+    border-color: #4a4030;
+    animation: slotShake .12s linear infinite
+}
+
+@keyframes slotShake {
+    0%,100% { transform: translateY(-1px) }
+    50% { transform: translateY(1px) }
+}
+
+.slot-sprite {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,.5))
+}
+
+.slot-cell.win {
     border-color: #f0d060;
-    box-shadow: 0 0 8px #f0d060;
+    box-shadow: 0 0 10px #f0d060;
     animation: game-corner-pop .4s ease
 }
 
@@ -7392,11 +7420,21 @@ img {
 }
 
 .game-corner-payout {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
     font-size: 7px;
     color: #cbbf9c;
     background: rgba(0,0,0,.35);
     border-radius: 3px;
     padding: 2px 4px
+}
+
+.game-corner-payout-sprite {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    image-rendering: pixelated
 }
 
 .reward-shop-token-display {

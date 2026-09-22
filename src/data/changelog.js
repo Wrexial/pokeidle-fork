@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.34.0'
+export const GAME_VERSION = '0.35.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.35.0',
+      subtitle: 'Pok\u00e9mon Slots',
+      sections: [
+        {
+          heading: 'Minigames',
+          items: [
+            'The Kanto Game Corner is now a 3\u00d73 Pok\u00e9mon slot machine: match three along any of the 8 lines (3 rows, 3 columns and 2 diagonals) to win, with common Pok\u00e9mon paying a little and the rare faces paying a lot',
+            'Symbols now use Pok\u00e9mon faces (Magikarp up to Mewtwo) instead of fruit, and the reels fake-spin and stop one at a time',
+          ],
+        },
+      ],
+    },
     {
       version: '0.34.0',
       subtitle: 'Minigame Entry',

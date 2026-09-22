@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 const gameData = installGameData()
 
-const { BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL, BUG_CONTEST_RUSTLES, MINIGAME_BY_REGION, MINIGAME_UNLOCK_LOCATION, MINING_COST, SLOT_SPIN_COST, SLOT_SYMBOLS, bugCatchChance, bugContestPrize, bugFleeChance, bugStays, buildContestResults, contestPlayerRank, contestScore, rewardItemName, rollContestBug, rollMiningReward, spinSlots, throwNetBall } = await import(
+const { BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL, BUG_CONTEST_RUSTLES, MINIGAME_BY_REGION, MINIGAME_UNLOCK_LOCATION, MINING_COST, SLOT_JACKPOT, SLOT_PAYLINES, SLOT_REELS, SLOT_ROWS, SLOT_SPIN_COST, SLOT_SYMBOLS, bugCatchChance, bugContestPrize, bugFleeChance, bugStays, buildContestResults, contestPlayerRank, contestScore, rewardItemName, rollContestBug, rollMiningReward, spinSlots, throwNetBall } = await import(
   '../src/game/minigames.js'
 )
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
@@ -64,23 +64,37 @@ test('CLAIM_MINIGAME_REWARD pays money and items', () => {
   assert.equal(next.inventory.rareCandy, 1)
 })
 
-test('slot spins pay a real multiplier and stay near break-even', () => {
+test('the slot machine is a 3x3 with eight paylines', () => {
+  assert.equal(SLOT_REELS, 3)
+  assert.equal(SLOT_ROWS, 3)
+  assert.equal(SLOT_PAYLINES.length, 8, '3 rows + 3 columns + 2 diagonals')
+  for (const line of SLOT_PAYLINES) assert.equal(line.length, 3)
+})
+
+test('slot spins score every matching line and stay near break-even', () => {
   for (let roll = 0; roll < 200; roll++) {
     const result = spinSlots()
-    assert.equal(result.reels.length, 3)
-    const match = result.reels.every((symbol) => symbol.id === result.reels[0].id)
-    if (match) assert.equal(result.payout, result.reels[0].payout * SLOT_SPIN_COST)
-    else assert.equal(result.payout, 0)
+    assert.equal(result.grid.length, SLOT_ROWS)
+    for (const row of result.grid) assert.equal(row.length, SLOT_REELS)
+    let expectedPayout = 0
+    for (const win of result.wins) {
+      const line = SLOT_PAYLINES[win.lineIndex].map(([r, c]) => result.grid[r][c])
+      assert.ok(line.every((symbol) => symbol.id === win.symbol.id), 'a win line matches')
+      expectedPayout += win.symbol.payout * SLOT_SPIN_COST
+    }
+    assert.equal(result.payout, expectedPayout, 'the payout is the sum of the winning lines')
+    if (result.jackpot) assert.ok(result.payout > 0)
   }
-  // Theoretical return: sum(weight^3 * payout) / totalWeight^3.
+  // Theoretical return: 8 lines * sum((weight/total)^3 * payout).
   const total = SLOT_SYMBOLS.reduce((sum, symbol) => sum + symbol.weight, 0),
     expected =
+      8 *
       SLOT_SYMBOLS.reduce(
-        (sum, symbol) => sum + symbol.weight ** 3 * symbol.payout,
+        (sum, symbol) => sum + (symbol.weight / total) ** 3 * symbol.payout,
         0
-      ) /
-      total ** 3
-  assert.ok(expected > 0.7 && expected < 1.05, `return rate ${expected}`)
+      )
+  assert.ok(expected > 0.8 && expected < 1.0, `return rate ${expected}`)
+  assert.equal(SLOT_JACKPOT, Math.max(...SLOT_SYMBOLS.map((symbol) => symbol.payout)))
 })
 test('contest bugs roll a level, gender and flee chance', () => {
   assert.equal(BUG_CONTEST_BUSHES, 3)

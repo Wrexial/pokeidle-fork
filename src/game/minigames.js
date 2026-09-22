@@ -337,7 +337,7 @@ export const MINIGAME_INFO = {
     title: 'Game Corner',
     cost: 0,
     action: 'ENTER GAME CORNER',
-    hint: 'Try the slots \u2014 $200 a spin. Match all three reels for a payout (the Star top prize is 1,500x).',
+    hint: 'Spin the 3\u00d73 Pok\u00e9mon slots \u2014 $200 a go. Match three along any of the 8 lines (3 rows, 3 columns, 2 diagonals); the rarer the Pok\u00e9mon, the bigger the payout.',
   },
 }
 
@@ -346,27 +346,60 @@ export const MINIGAME_INFO = {
 /** Money spent per slot spin. */
 export const SLOT_SPIN_COST = 200
 
+/** The slot machine is 3 reels wide and 3 rows tall. */
+export const SLOT_REELS = 3
+export const SLOT_ROWS = 3
+
 /**
- * Slot symbols, their relative weight and the multiplier they pay on three of
- * a kind. The payouts are tuned to a ~92% return.
- * @type {{ id: string, name: string, icon: string, weight: number, payout: number }[]}
+ * The eight winning lines, each a [row, col] triple: 3 rows, 3 columns and
+ * 2 diagonals.
+ * @type {[number, number][][]}
+ */
+export const SLOT_PAYLINES = [
+  // rows
+  [[0, 0], [0, 1], [0, 2]],
+  [[1, 0], [1, 1], [1, 2]],
+  [[2, 0], [2, 1], [2, 2]],
+  // columns
+  [[0, 0], [1, 0], [2, 0]],
+  [[0, 1], [1, 1], [2, 1]],
+  [[0, 2], [1, 2], [2, 2]],
+  // diagonals
+  [[0, 0], [1, 1], [2, 2]],
+  [[0, 2], [1, 1], [2, 0]],
+]
+
+/**
+ * Pok\u00e9mon slot symbols, their relative weight and the multiplier they pay on
+ * three of a kind. The payouts are tuned to a ~91% return across all 8 lines.
+ * @type {{ id: string, name: string, speciesKey: string, weight: number, payout: number }[]}
  */
 export const SLOT_SYMBOLS = [
-  { id: 'cherry', name: 'Cherry', icon: '\ud83c\udf52', weight: 40, payout: 6 },
-  { id: 'bell', name: 'Bell', icon: '\ud83d\udd14', weight: 24, payout: 12 },
-  { id: 'bar', name: 'Bar', icon: '\ud83c\uddff', weight: 18, payout: 30 },
-  { id: 'seven', name: 'Seven', icon: '7', weight: 10, payout: 100 },
-  { id: 'diamond', name: 'Diamond', icon: '\ud83d\udc8e', weight: 6, payout: 400 },
-  { id: 'star', name: 'Star', icon: '\u2b50', weight: 2, payout: 1500 },
+  { id: 'magikarp', name: 'Magikarp', speciesKey: 'magikarp', weight: 30, payout: 1 },
+  { id: 'caterpie', name: 'Caterpie', speciesKey: 'caterpie', weight: 22, payout: 2 },
+  { id: 'rattata', name: 'Rattata', speciesKey: 'rattata', weight: 16, payout: 5 },
+  { id: 'meowth', name: 'Meowth', speciesKey: 'meowth', weight: 12, payout: 10 },
+  { id: 'eevee', name: 'Eevee', speciesKey: 'eevee', weight: 8, payout: 20 },
+  { id: 'snorlax', name: 'Snorlax', speciesKey: 'snorlax', weight: 5, payout: 45 },
+  { id: 'dragonite', name: 'Dragonite', speciesKey: 'dragonite', weight: 4, payout: 90 },
+  { id: 'mewtwo', name: 'Mewtwo', speciesKey: 'mewtwo', weight: 3, payout: 250 },
 ]
 
 const SLOT_TOTAL_WEIGHT = SLOT_SYMBOLS.reduce((sum, symbol) => sum + symbol.weight, 0)
 
-/** The top slot multiplier. */
-export const SLOT_JACKPOT = Math.max(...SLOT_SYMBOLS.map((symbol) => symbol.payout))
+/** The symbol that pays the most (its line is the jackpot). */
+const SLOT_JACKPOT_SYMBOL = SLOT_SYMBOLS.reduce(
+  (best, symbol) => (symbol.payout > best.payout ? symbol : best),
+  SLOT_SYMBOLS[0]
+)
 
-/** @returns {typeof SLOT_SYMBOLS[number]} */
-function rollSymbol() {
+/** The top slot multiplier. */
+export const SLOT_JACKPOT = SLOT_JACKPOT_SYMBOL.payout
+
+/** Roll one symbol for a cell (also used for the fake-spin animation).
+ * @returns {typeof SLOT_SYMBOLS[number]}
+ */
+export function rollSlotSymbol() {
   let roll = Math.random() * SLOT_TOTAL_WEIGHT
   for (const symbol of SLOT_SYMBOLS) {
     roll -= symbol.weight
@@ -376,17 +409,35 @@ function rollSymbol() {
 }
 
 /**
- * Spin the reels.
- * @returns {{ reels: typeof SLOT_SYMBOLS, payout: number, jackpot: boolean }}
+ * Spin the 3\u00d73 machine and score all eight lines.
+ * @returns {{
+ *   grid: (typeof SLOT_SYMBOLS[number])[][],
+ *   wins: { lineIndex: number, symbol: typeof SLOT_SYMBOLS[number], payout: number }[],
+ *   payout: number,
+ *   jackpot: boolean,
+ * }}
  */
 export function spinSlots() {
-  const reels = [rollSymbol(), rollSymbol(), rollSymbol()],
-    match = reels.every((symbol) => symbol.id === reels[0].id),
-    jackpot = match && reels[0].id === 'star'
+  const grid = Array.from({ length: SLOT_ROWS }, () =>
+    Array.from({ length: SLOT_REELS }, () => rollSlotSymbol())
+  )
+  /** @type {{ lineIndex: number, symbol: typeof SLOT_SYMBOLS[number], payout: number }[]} */
+  const wins = []
+  SLOT_PAYLINES.forEach((line, lineIndex) => {
+    const symbols = line.map(([row, col]) => grid[row][col])
+    if (symbols.every((symbol) => symbol.id === symbols[0].id))
+      wins.push({
+        lineIndex,
+        symbol: symbols[0],
+        payout: symbols[0].payout * SLOT_SPIN_COST,
+      })
+  })
+  const payout = wins.reduce((sum, win) => sum + win.payout, 0)
   return {
-    reels,
-    payout: match ? reels[0].payout * SLOT_SPIN_COST : 0,
-    jackpot,
+    grid,
+    wins,
+    payout,
+    jackpot: wins.some((win) => win.symbol.id === SLOT_JACKPOT_SYMBOL.id),
   }
 }
 

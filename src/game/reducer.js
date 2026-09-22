@@ -55,6 +55,8 @@ export const initialGameState = {
   unlockedLocations: ['palletTown', 'route1'],
   unlockedRegions: [],
   evolutionState: null,
+  /** A pending Wonder Trade swap shown in the `wonderTrade` phase. */
+  wonderTradeState: null,
   catchSettings: {},
   globalCatchDefaults: defaultCatchSettings,
   money: 3e3,
@@ -2490,6 +2492,24 @@ export function gameReducer(state, action) {
             receivedIsShiny ? ' \u2726 shiny!' : ''
           }!`,
         ].slice(-50),
+        // Hand the phase to the Wonder Trade animation, which returns to
+        // whatever phase the trade interrupted once it finishes.
+        phase: 'wonderTrade',
+        wonderTradeState: {
+          sentPokemon: tradedPokemon,
+          receivedPokemon,
+          receivedSpeciesKey,
+          receivedIsShiny,
+          returnPhase: baseState.phase || 'idle',
+        },
+      }
+    }
+    case 'COMPLETE_WONDER_TRADE': {
+      if (state.phase !== 'wonderTrade' || !state.wonderTradeState) return state
+      return {
+        ...state,
+        phase: state.wonderTradeState.returnPhase || 'idle',
+        wonderTradeState: null,
       }
     }
     case 'DEPOSIT_DAYCARE': {

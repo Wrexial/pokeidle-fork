@@ -1,10 +1,22 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.32.0'
+export const GAME_VERSION = '0.33.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.33.0',
+      subtitle: 'Wonder Trade',
+      sections: [
+        {
+          heading: 'Pokemon',
+          items: [
+            'Wonder Trade now plays a short main-stage animation: the Pokemon you send and the one that arrives are shown while the rest of the game pauses',
+          ],
+        },
+      ],
+    },
     {
       version: '0.32.0',
       subtitle: 'Minigame Unlocks',

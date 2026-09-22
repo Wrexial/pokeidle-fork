@@ -708,6 +708,8 @@ export function useGameLoop() {
           return
         case 'gameCorner':
           return
+        case 'wonderTrade':
+          return
         case 'dexComplete':
           return
       }
@@ -718,6 +720,7 @@ export function useGameLoop() {
       state.phase === 'bugCatching' ||
       state.phase === 'mining' ||
       state.phase === 'gameCorner' ||
+      state.phase === 'wonderTrade' ||
       state.paused
     ) {
       ;(intervalRef.current && clearInterval(intervalRef.current), (intervalRef.current = null))

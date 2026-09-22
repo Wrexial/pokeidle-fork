@@ -27,6 +27,7 @@ import { MasterBallScene } from './master-ball-scene.js'
 import { BugContestScene } from './bug-contest-scene.js'
 import { MiningScene } from './mining-scene.js'
 import { GameCornerScene } from './game-corner-scene.js'
+import { WonderTradeScene } from './wonder-trade-scene.js'
 import { PokeballIcon } from './pokeball-icon.js'
 import { MoveManagerPanel } from './move-manager-panel.js'
 import { SpeedControls } from './speed-controls.js'
@@ -51,6 +52,7 @@ export function BattleScene() {
   if (state.phase === 'bugCatching') return jsx(BugContestScene, {})
   if (state.phase === 'mining') return jsx(MiningScene, {})
   if (state.phase === 'gameCorner') return jsx(GameCornerScene, {})
+  if (state.phase === 'wonderTrade') return jsx(WonderTradeScene, {})
   if (state.phase === 'dexComplete') return jsx(DexCompleteScene, {})
   if (!playerPokemon) return null
   const currentEvent = battleEvents.length > 0 ? battleEvents[battleEvents.length - 1] : null,

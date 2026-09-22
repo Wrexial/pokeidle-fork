@@ -245,6 +245,16 @@ type TrainerBattle = {
   [key: string]: any
 }
 
+/** A pending Wonder Trade animation. The swap is already applied when set. */
+type WonderTradeState = {
+  sentPokemon: Pokemon
+  receivedPokemon: Pokemon
+  receivedSpeciesKey: string
+  receivedIsShiny: boolean
+  /** Phase to return to when the animation finishes. */
+  returnPhase: string
+}
+
 type GameState = {
   phase: string
   startRegion: string
@@ -252,6 +262,8 @@ type GameState = {
   enemyPokemon: any
   party: Pokemon[]
   box: Pokemon[]
+  /** A pending Wonder Trade shown in the `wonderTrade` phase. */
+  wonderTradeState?: WonderTradeState | null
   /** Chosen box sort mode (see BOX_SORT_OPTIONS). */
   boxSort: string
   /** The most recently hatched egg, shown in the hatch popup until dismissed. */

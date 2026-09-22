@@ -151,3 +151,21 @@ test('favourites are protected from release and Wonder Trade', () => {
     0
   )
 })
+
+test('Wonder Trade swaps the Pokemon and stages a pausing animation', () => {
+  const base = startedGame(),
+    boxMon = { ...base.party[0], id: 'box1' },
+    state = { ...base, box: [boxMon], inventory: { ...base.inventory, linkCable: 1 } },
+    staged = gameReducer(state, { type: 'WONDER_TRADE', payload: { pokemonId: 'box1' } })
+  assert.equal(staged.phase, 'wonderTrade')
+  assert.ok(staged.wonderTradeState, 'the swap is staged for the animation')
+  assert.equal(staged.wonderTradeState.sentPokemon.id, 'box1')
+  assert.ok(
+    staged.box.some((member) => member.id === staged.wonderTradeState.receivedPokemon.id),
+    'the received Pokemon is already in the box'
+  )
+  assert.equal(staged.inventory.linkCable, 0)
+  const done = gameReducer(staged, { type: 'COMPLETE_WONDER_TRADE' })
+  assert.equal(done.phase, 'idle')
+  assert.equal(done.wonderTradeState, null)
+})

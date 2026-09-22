@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 installGameData()
 
-const { ivStatLabel, ivVerdict, judgeIVs, pokemonDisplayName } = await import(
+const { createPokemon, ivStatLabel, ivVerdict, judgeIVs, pokemonDisplayName } = await import(
   '../src/game/pokemon.js'
 )
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
@@ -16,6 +16,38 @@ function startedGame() {
     payload: { region: 'kanto', speciesKey: 'bulbasaur' },
   })
 }
+
+test('RELEASE_DUPLICATES keeps the best copy and spares favourites/shinies', () => {
+  const mon = (/** @type {string} */ speciesKey, /** @type {string} */ id, /** @type {number} */ iv, /** @type {Record<string, any>} */ extra = {}) => ({
+      ...createPokemon(speciesKey, 20, id),
+      ivs: { hp: iv, attack: iv, defense: iv, spAttack: iv, spDefense: iv, speed: iv },
+      ...extra,
+    }),
+    a1 = mon('pidgey', 'a1', 0),
+    a2 = mon('pidgey', 'a2', 31),
+    a3 = mon('pidgey', 'a3', 10),
+    b1 = mon('rattata', 'b1', 5),
+    shiny = mon('caterpie', 'c1', 31, { isShiny: true }),
+    plain = mon('caterpie', 'c2', 0),
+    base = {
+      ...initialGameState,
+      box: [a1, a2, a3, b1, shiny, plain],
+      money: 0,
+      inventory: {},
+    },
+    result = gameReducer(base, { type: 'RELEASE_DUPLICATES' })
+  const ids = result.box.map((/** @type {any} */ member) => member.id)
+  assert.deepEqual(ids.sort(), ['a2', 'b1', 'c1'])
+  assert.ok(result.money > 0, 'releasing duplicates should pay out')
+})
+
+test('RELEASE_DUPLICATES is a no-op without duplicates', () => {
+  const base = {
+    ...initialGameState,
+    box: [createPokemon('pidgey', 20, 'a1'), createPokemon('rattata', 20, 'b1')],
+  }
+  assert.equal(gameReducer(base, { type: 'RELEASE_DUPLICATES' }), base)
+})
 
 const perfect = { hp: 31, attack: 31, defense: 31, spAttack: 31, spDefense: 31, speed: 31 },
   zero = { hp: 0, attack: 0, defense: 0, spAttack: 0, spDefense: 0, speed: 0 }

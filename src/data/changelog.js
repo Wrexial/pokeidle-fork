@@ -1,10 +1,22 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.9.19'
+export const GAME_VERSION = '0.9.20'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.9.20',
+      subtitle: 'Release Duplicates',
+      sections: [
+        {
+          heading: 'Pokemon',
+          items: [
+            'A "Release Dupes" tool in the box releases duplicate Pokemon \u2014 keeping your best of each species and protecting favourites and shinies \u2014 and pays out the usual release rewards',
+          ],
+        },
+      ],
+    },
     {
       version: '0.9.19',
       subtitle: 'Favourite Hearts',

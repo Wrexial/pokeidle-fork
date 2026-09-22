@@ -7,7 +7,7 @@ import { dailyDropMultiplier, dailyEventByKey, rollDailyEvent, todayKey } from '
 import { natureName, randomNature } from '../data/natures.js'
 import { elite4Data, encounterData, gymLeaderData, mapData, moveLearnsets, pokemonSpecies, regions } from '../data/gameData.js'
 import { createVolatileState } from './combat.js'
-import { calculatePokemonStats, calculateRequiredExperience, createPokemon, getLevelUpResults, insertIntoBox, nextBoxSortMode, resolvePokemonMoves, sortBoxMembers } from './pokemon.js'
+import { calculatePokemonStats, calculateRequiredExperience, createPokemon, getLevelUpResults, insertIntoBox, judgeIVs, nextBoxSortMode, resolvePokemonMoves, sortBoxMembers } from './pokemon.js'
 import { canBreed, eggSpeciesKey } from './breeding.js'
 import { advanceQuests, questLabel, rollQuests } from './quests.js'
 import { checkShinyOdds, computeUnlockedLocations, formatReward, getRegionUnlockTokens, isActiveEffectItem, loadActivePokemonFromParty, prepareNextBattle, releaseReward, rollCandyDrop, rollValuableDrop, syncActivePokemonIntoParty, tickBattleCounters, tickPokerus } from './progression.js'
@@ -600,6 +600,67 @@ export function gameReducer(state, action) {
         ...state,
         hatchResult: null,
       }
+    case 'RELEASE_DUPLICATES': {
+      /** A favourite or shiny is never auto-released. */
+      const protectedMember = /** @param {any} member */ (member) =>
+          member.favourite || member.isShiny,
+        /** @type {Map<string, any[]>} */
+        bySpecies = new Map()
+      for (const member of state.box) {
+        const list = bySpecies.get(member.speciesKey) ?? []
+        list.push(member)
+        bySpecies.set(member.speciesKey, list)
+      }
+      /** @type {any[]} */
+      const toRelease = []
+      for (const members of bySpecies.values()) {
+        const candidates = members.filter((member) => !protectedMember(member))
+        if (candidates.length === 0) continue
+        if (members.some((member) => protectedMember(member))) {
+          // A protected copy already exists, so every plain duplicate goes.
+          toRelease.push(...candidates)
+        } else {
+          // Otherwise keep the best (highest IV total, then level).
+          const sorted = [...candidates].sort(
+            (left, right) =>
+              judgeIVs(right.ivs).total - judgeIVs(left.ivs).total || right.level - left.level
+          )
+          toRelease.push(...sorted.slice(1))
+        }
+      }
+      if (toRelease.length === 0) return state
+      const releaseIds = new Set(toRelease.map((member) => member.id))
+      let money = state.money
+      const inventory = { ...state.inventory },
+        rewardItems = /** @type {Record<string, number>} */ ({})
+      for (const member of toRelease) {
+        const reward = releaseReward(member)
+        money += reward.money
+        for (const [itemId, quantity] of Object.entries(reward.items)) {
+          inventory[itemId] = (inventory[itemId] ?? 0) + quantity
+          rewardItems[itemId] = (rewardItems[itemId] ?? 0) + quantity
+        }
+      }
+      const rewardText = formatReward({ money: money - state.money, items: rewardItems })
+      return withNotification(
+        {
+          ...state,
+          box: state.box.filter((member) => !releaseIds.has(member.id)),
+          money,
+          inventory,
+          battleLog: [
+            ...state.battleLog,
+            `Released ${toRelease.length} duplicate Pokemon and received ${rewardText}.`,
+          ].slice(-50),
+        },
+        {
+          message: `Released ${toRelease.length} duplicate${toRelease.length === 1 ? '' : 's'}: +${rewardText}`,
+          tone: 'info',
+          icon: '🎁',
+          dedupeKey: `duplicates:${Date.now()}`,
+        }
+      )
+    }
     case 'RELEASE_HATCHLING': {
       const { pokemonId } = action.payload,
         hatchling =

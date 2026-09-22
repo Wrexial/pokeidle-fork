@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.19**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.20**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -35,9 +35,8 @@ items, best return first:
 
 16. **#7 Offline / idle progress** — M–L · ★★★★★ — the biggest missing *idle*
     feature; a returning player currently gets nothing.
-17. **#8 Pokémon management / IV checker** — M · ★★★★½ — IV judge,
-    favourite/lock, nicknames and box search shipped; only the bulk
-    "release duplicates" tool remains.
+17. ✅ **#8 Pokémon management / IV checker** — shipped (IV judge, nicknames,
+    favourite/lock, box search/filter and the release-duplicates tool).
 18. **#20 Honey/Repel DexNav hunting** — M · ★★★★½ — turns the existing
     shiny chain into a usable system.
 19. **#24 Move data pass** — M–L · ★★★★½ — ~290 moves currently do nothing;
@@ -214,7 +213,8 @@ or protection against releasing something valuable.
       in 0.9.17 (`TOGGLE_FAVOURITE`).
 - [x] Box search + filter (name / species / nickname, plus Shiny/Fav). Shipped
       0.9.18.
-- [ ] "Release all duplicates" bulk tool.
+- [x] "Release all duplicates" bulk tool. Shipped 0.9.20 (`RELEASE_DUPLICATES`),
+      keeping the best of each species and protecting favourites/shinies.
 
 Effort: **medium**.
 
@@ -1198,6 +1198,10 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.9.20 (release duplicates): a box tool releases duplicate Pokemon (keeping the
+best of each species, protecting favourites/shinies) and pays the release
+rewards. #8 Pokémon management is now complete.
 
 0.9.19 (favourite hearts): favourites use a heart (not the shiny star), and the
 stats-panel toggle is a clear chip that fills red when active.

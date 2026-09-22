@@ -34,6 +34,7 @@ export function BoxPanel({
     [showDaycare, setShowDaycare] = React.useState(!1),
     [query, setQuery] = React.useState(''),
     [filterMode, setFilterMode] = React.useState('all'),
+    [confirmDupes, setConfirmDupes] = React.useState(!1),
     searchActive = query.trim() !== '' || filterMode !== 'all',
     visibleBox = React.useMemo(() => {
       if (!searchActive) return state.box
@@ -93,6 +94,11 @@ export function BoxPanel({
                     className: 'box-pokedex-btn',
                     onClick: () => setShowDaycare(!0),
                     children: 'Daycare',
+                  }),
+                  jsx('button', {
+                    className: 'box-pokedex-btn',
+                    onClick: () => setConfirmDupes(!0),
+                    children: 'Release Dupes',
                   }),
                 ],
               }),
@@ -171,6 +177,34 @@ export function BoxPanel({
                 : null,
             ],
           }),
+          confirmDupes &&
+            jsxs('div', {
+              className: 'release-confirm',
+              children: [
+                jsx('span', {
+                  children:
+                    'Release duplicates? Keeps your best of each species and protects favourites and shinies.',
+                }),
+                jsxs('div', {
+                  className: 'release-confirm-buttons',
+                  children: [
+                    jsx('button', {
+                      className: 'release-confirm-yes',
+                      onClick: () => {
+                        dispatch({ type: 'RELEASE_DUPLICATES' })
+                        setConfirmDupes(!1)
+                      },
+                      children: 'Yes',
+                    }),
+                    jsx('button', {
+                      className: 'release-confirm-no',
+                      onClick: () => setConfirmDupes(!1),
+                      children: 'No',
+                    }),
+                  ],
+                }),
+              ],
+            }),
           jsx('div', {
             className: 'box-grid-wrapper',
             children: jsx('div', {

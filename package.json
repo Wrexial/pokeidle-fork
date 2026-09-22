@@ -1,8 +1,8 @@
 {
   "name": "pokemonidle",
   "version": "1.0.0",
-  "description": "",
-  "license": "ISC",
+  "description": "A browser-based incremental / idle Pokemon game",
+  "license": "MIT",
   "author": "",
   "type": "module",
   "scripts": {

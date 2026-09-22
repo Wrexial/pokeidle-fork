@@ -1,10 +1,35 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.8.1'
+export const GAME_VERSION = '0.9.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.9.0',
+      subtitle: 'Dex Rewards & Battle Clarity',
+      sections: [
+        {
+          heading: 'Pokedex',
+          items: [
+            'Completing a generation\u2019s national dex now pays a one-off reward: 3 Victory Tokens and a Master Ball',
+            'The Records panel gained a Dex Rewards section showing each generation\u2019s progress',
+          ],
+        },
+        {
+          heading: 'Battles',
+          items: [
+            'A wild Pokemon you have already caught now shows a check mark beside its name',
+          ],
+        },
+        {
+          heading: 'Town Map',
+          items: [
+            'The Region Unlock Token banner no longer appears once every region is open',
+          ],
+        },
+      ],
+    },
     {
       version: '0.8.1',
       subtitle: 'Battle Tower Scaling & Sprite Polish',

@@ -210,6 +210,8 @@ export function BattleScene() {
           children: jsx(EnemyInfoBox, {
             pokemon: enemyPokemon,
             status: enemyPokemon.status ?? null,
+            // Trainer teams and raids aren't a catch reward, so only flag wilds.
+            isCaught: !activeTrainerBattle && caughtSpeciesSet.has(enemyPokemon.speciesKey),
           }),
         }),
       activeTrainerBattle &&

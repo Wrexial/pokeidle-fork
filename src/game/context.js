@@ -13,6 +13,7 @@ import {
   pokemonSpecies,
   preEvolutionMap,
   regions,
+  speciesKeysByGeneration,
 } from '../data/gameData.js'
 import { generateIVs, resolvePokemonMoves } from './pokemon.js'
 import { gameReducer, initialGameState } from './reducer.js'
@@ -273,6 +274,12 @@ function repairSave(saved) {
     defeatedChampions = savedChampions.filter(/** @param {string} id */ (id) => regionIds.has(id)),
     activeEffects = (Array.isArray(saved.activeEffects) ? saved.activeEffects : []).filter(
       /** @param {any} effect */ (effect) => effect && typeof effect === 'object' && effect.type in activeItems
+    ),
+    rewardedGenerations = (
+      Array.isArray(saved.rewardedGenerations) ? saved.rewardedGenerations : []
+    ).filter(
+      /** @param {any} index */ (index) =>
+        Number.isInteger(index) && index >= 0 && index < speciesKeysByGeneration.length
     )
 
   return {
@@ -316,6 +323,7 @@ function repairSave(saved) {
     defeatedGyms,
     defeatedEliteFour,
     defeatedChampions,
+    rewardedGenerations,
     regionPrestige: Object.fromEntries(
       Object.entries(saved.regionPrestige ?? {}).filter(
         ([regionId, level]) => regionIds.has(regionId) && typeof level === 'number' && level > 0
@@ -425,6 +433,7 @@ export function GameProvider({ children }) {
           defeatedGyms: state.defeatedGyms,
           defeatedEliteFour: state.defeatedEliteFour,
           defeatedChampions: state.defeatedChampions,
+          rewardedGenerations: state.rewardedGenerations,
           regionPrestige: state.regionPrestige,
           towerFloor: state.towerFloor,
           towerBest: state.towerBest,
@@ -464,6 +473,7 @@ export function GameProvider({ children }) {
       state.defeatedGyms.length,
       state.defeatedEliteFour.length,
       state.defeatedChampions.length,
+      state.rewardedGenerations.length,
       state.unlockedRegions.length,
       state.regionPrestige,
       state.towerFloor,

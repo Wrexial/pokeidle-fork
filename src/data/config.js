@@ -80,6 +80,9 @@ export const shinyWithCharmChance = 4096
 /** Best Shiny Charm rate, reached once every generation's Pokedex is complete. */
 export const shinyCharmMinOddsChance = 256
 
+/** Victory Tokens awarded for completing a generation's national dex. */
+export const dexRewardVictoryTokens = 3
+
 /** @type {Record<string, string[]>} */
 export const regionalStarters = {
   kanto: ['bulbasaur', 'charmander', 'squirtle'],

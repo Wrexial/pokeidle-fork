@@ -13,8 +13,8 @@ const STATUS_LABELS = {
   flinching: 'FLN',
 }
 
-/** @param {{ pokemon: BattlePokemon }} props */
-export function EnemyInfoBox({ pokemon }) {
+/** @param {{ pokemon: BattlePokemon, isCaught?: boolean }} props */
+export function EnemyInfoBox({ pokemon, isCaught }) {
   return jsxs('div', {
     className: 'info-box',
     children: [
@@ -30,6 +30,12 @@ export function EnemyInfoBox({ pokemon }) {
             className: 'info-pokemon-name',
             children: pokemon.name.toUpperCase(),
           }),
+          isCaught &&
+            jsx('span', {
+              className: 'caught-badge',
+              title: 'Already registered in the Pokedex',
+              children: '✓',
+            }),
           pokemon.status &&
             jsx('span', {
               className: `status-badge status-${pokemon.status}`,

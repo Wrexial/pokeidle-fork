@@ -1,6 +1,6 @@
 // Split from the former assets/index.js — see tools/decompile/split-modules.mjs
 
-import { RAID_COOLDOWN_MS, RAID_LEVEL_MAX, breedShinyOdds, breedShinyParentOdds, daycareEggBattles, defaultCatchSettings, prestigeTokenReward, swarmBattleCount, swarmSpawnChance, wildMasterBallChance, wonderTradeShinyOdds } from '../data/config.js'
+import { RAID_COOLDOWN_MS, RAID_LEVEL_MAX, breedShinyOdds, breedShinyParentOdds, daycareEggBattles, defaultCatchSettings, dexRewardVictoryTokens, prestigeTokenReward, swarmBattleCount, swarmSpawnChance, wildMasterBallChance, wonderTradeShinyOdds } from '../data/config.js'
 import { activeItems, pokeBalls } from '../data/items.js'
 import { elite4Data, encounterData, gymLeaderData, mapData, moveLearnsets, pokemonSpecies, regions } from '../data/gameData.js'
 import { createVolatileState } from './combat.js'
@@ -63,6 +63,8 @@ export const initialGameState = {
   defeatedGyms: [],
   defeatedEliteFour: [],
   defeatedChampions: [],
+  /** Generation indices (0-based) whose dex-completion reward has been paid. */
+  rewardedGenerations: [],
   regionPrestige: {},
   /** Next Battle Tower floor to attempt (0 = not in a run). */
   towerFloor: 0,
@@ -1171,6 +1173,33 @@ export function gameReducer(state, action) {
             ...state,
             shinyCaught: [...state.shinyCaught, speciesKey],
           }
+    }
+    case 'CLAIM_DEX_REWARDS': {
+      const generations = /** @type {number[]} */ (
+          Array.isArray(action.payload?.generations) ? action.payload.generations : []
+        ),
+        newlyCompleted = generations.filter(
+          (generationIndex) =>
+            Number.isInteger(generationIndex) &&
+            !state.rewardedGenerations.includes(generationIndex)
+        )
+      if (newlyCompleted.length === 0) return state
+      return {
+        ...state,
+        rewardedGenerations: [...state.rewardedGenerations, ...newlyCompleted],
+        victoryTokens: state.victoryTokens + newlyCompleted.length * dexRewardVictoryTokens,
+        inventory: {
+          ...state.inventory,
+          masterball: (state.inventory.masterball ?? 0) + newlyCompleted.length,
+        },
+        battleLog: [
+          ...state.battleLog,
+          ...newlyCompleted.map(
+            (generationIndex) =>
+              `Generation ${generationIndex + 1} dex complete! Earned ${dexRewardVictoryTokens} Victory Tokens and a Master Ball.`
+          ),
+        ].slice(-50),
+      }
     }
     case 'UPDATE_SHINY_CHAIN': {
       const { speciesKey } = action.payload

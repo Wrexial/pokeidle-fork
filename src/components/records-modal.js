@@ -2,7 +2,7 @@
 
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { ACHIEVEMENTS } from '../data/achievements.js'
-import { gymLeaderData, pokedexIndexes, regions } from '../data/gameData.js'
+import { completedGenerations, gymLeaderData, pokedexIndexes, regions, speciesKeysByGeneration } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 
 /** @param {{ onClose: () => void }} props */
@@ -13,6 +13,7 @@ export function RecordsModal({ onClose }) {
     caughtCount = nationalDex.filter(([speciesKey]) => state.pokedexCaught.includes(speciesKey)).length,
     seenCount = nationalDex.filter(([speciesKey]) => state.pokedexSeen.includes(speciesKey)).length,
     percent = nationalDex.length ? Math.floor((caughtCount / nationalDex.length) * 100) : 0,
+    completedGenerationSet = completedGenerations(state.pokedexCaught),
     sections = [
       {
         title: 'Battles',
@@ -27,6 +28,21 @@ export function RecordsModal({ onClose }) {
         rows: [
           ['Species caught', `${caughtCount} / ${nationalDex.length} (${percent}%)`],
           ['Species seen', `${seenCount} / ${nationalDex.length}`],
+        ],
+      },
+      {
+        title: 'Dex Rewards',
+        rows: [
+          [
+            'Generations completed',
+            `${completedGenerationSet.size} / ${speciesKeysByGeneration.length}`,
+          ],
+          ...speciesKeysByGeneration.map((speciesKeys, generationIndex) => [
+            `Gen ${generationIndex + 1}`,
+            completedGenerationSet.has(generationIndex)
+              ? '★ Complete'
+              : `${speciesKeys.filter((speciesKey) => state.pokedexCaught.includes(speciesKey)).length} / ${speciesKeys.length}`,
+          ]),
         ],
       },
       {

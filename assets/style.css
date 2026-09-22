@@ -4182,6 +4182,14 @@ img {
     text-shadow: none
 }
 
+.caught-badge {
+    font-size: 9px;
+    font-weight: 700;
+    line-height: 1;
+    color: #2e7d32;
+    margin-right: 2px
+}
+
 .box-grid-slot {
     position: relative
 }

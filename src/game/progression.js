@@ -132,6 +132,11 @@ export function computeUnlockedLocations(state) {
  * @returns {number}
  */
 export function getRegionUnlockTokens(state) {
+  // Once every region is open there is no locked region left to spend a token
+  // on, so stop counting (and awarding) them — otherwise beating a Champion
+  // again would keep handing out dead tokens and the Town Map would show a
+  // banner with nothing to unlock.
+  if ((state.unlockedRegions ?? []).length >= regions.length) return 0
   const openedRegions = Math.max(0, (state.unlockedRegions ?? []).length - 1)
   return Math.max(0, state.defeatedChampions.length - openedRegions)
 }

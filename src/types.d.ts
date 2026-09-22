@@ -176,6 +176,8 @@ type GameState = {
   defeatedGyms: string[]
   defeatedEliteFour: string[]
   defeatedChampions: string[]
+  /** Generation indices (0-based) whose dex-completion reward has been paid. */
+  rewardedGenerations: number[]
   /** Times each region has been prestiged (map progress reset). */
   regionPrestige: Record<string, number>
   /** Next Battle Tower floor to attempt (0 = not in a run). */

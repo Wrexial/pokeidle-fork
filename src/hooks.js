@@ -674,7 +674,23 @@ export function useGameLoop() {
             locationId: pendingLocation,
           },
         }))
-    }, [state.phase, state.autoProceed, state.currentLocation, dispatch]))
+    }, [state.phase, state.autoProceed, state.currentLocation, dispatch]),
+    React.useEffect(() => {
+      // Completing a generation's national dex pays a one-off reward. Detected
+      // here so it fires however the last species arrived (catch, evolution,
+      // hatch, starter or trade).
+      const completed = completedGenerations(state.pokedexCaught),
+        pending = [...completed].filter(
+          (generationIndex) => !(state.rewardedGenerations ?? []).includes(generationIndex)
+        )
+      pending.length > 0 &&
+        dispatch({
+          type: 'CLAIM_DEX_REWARDS',
+          payload: {
+            generations: pending,
+          },
+        })
+    }, [state.pokedexCaught, state.rewardedGenerations, dispatch]))
 }
 
 export function useIsMobile() {

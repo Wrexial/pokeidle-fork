@@ -97,6 +97,27 @@ export function selectAutoCatchBall(state, routeKey, speciesKey) {
 }
 
 /**
+ * A catch rate at or below this is "really hard" for a non-legendary.
+ */
+export const HARD_CATCH_RATE = 25
+
+/**
+ * Whether the Master Ball throw button should be offered for this encounter.
+ * It is reserved for the encounters worth the rarest ball: any legendary, or
+ * a genuinely hard-to-catch species the player has never registered. Routine
+ * wild battles no longer advertise it, so it isn't spent by a stray tap.
+ * @param {{ pokedexCaught: string[] }} state
+ * @param {string} speciesKey
+ * @returns {boolean}
+ */
+export function shouldOfferMasterBall(state, speciesKey) {
+  const species = pokemonSpecies[speciesKey]
+  if (!species) return false
+  if (species.legendary) return true
+  return !state.pokedexCaught.includes(speciesKey) && (species.catchRate ?? 255) <= HARD_CATCH_RATE
+}
+
+/**
  * @param {number} rate
  * @returns {string}
  */

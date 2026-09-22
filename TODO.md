@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.10.0**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.10.1**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -937,8 +937,9 @@ the idle loop; `MasterBallScene` (`src/components/master-ball-scene.js`) plays
 the throw/flash/wobble/click animation before the catch resolves. The Master
 Ball is excluded from `selectBestBall` (so auto-catch and the
 always-catch-shinies rule can never spend one) and hidden from the
-catch-settings ball picker; it is thrown only from the battle button. The catch
-registers in the Pokedex and fires the usual new/repeat/shiny toasts.
+catch-settings ball picker; it is thrown only from the battle button, which
+since 0.10.1 only appears for legendaries or hard-to-catch unregistered species.
+The catch registers in the Pokedex and fires the usual new/repeat/shiny toasts.
 
 ## 38. Clean up the Raid Islands (later generations are bloated)
 
@@ -1151,6 +1152,9 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.10.1 (Master Ball discipline): the throw button only appears for legendaries
+or a hard-to-catch species you have never registered.
 
 0.10.0 (breeding inheritance, hunting & tower): eggs inherit 3 of the parents'
 best IVs, a 50% chance of a parent's nature and family moves; a 4+ shiny chain

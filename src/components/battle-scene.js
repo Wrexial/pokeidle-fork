@@ -7,6 +7,7 @@ import { moveCategoryIcons } from '../data/moves.js'
 import { dailyEventByKey } from '../data/daily-events.js'
 import { hasClaimableQuests } from '../game/quests.js'
 import { locationImages } from '../data/ui.js'
+import { shouldOfferMasterBall } from '../game/catching.js'
 import { completedGenerations, mapData, moveData, pokemonSpecies, speciesKeysByGeneration } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { shinyOddsForCompletedGenerations } from '../game/progression.js'
@@ -258,6 +259,7 @@ export function BattleScene() {
             !activeTrainerBattle &&
               state.phase === 'battling' &&
               (state.inventory.masterball ?? 0) > 0 &&
+              shouldOfferMasterBall(state, enemyPokemon.speciesKey) &&
               jsxs('button', {
                 className: 'masterball-throw-btn',
                 onClick: () => dispatch({ type: 'THROW_MASTER_BALL' }),

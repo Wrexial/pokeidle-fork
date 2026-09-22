@@ -1,10 +1,22 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.10.0'
+export const GAME_VERSION = '0.10.1'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.10.1',
+      subtitle: 'Master Ball Discipline',
+      sections: [
+        {
+          heading: 'Battles',
+          items: [
+            'The Master Ball throw button now only appears for legendary Pokemon, or for a hard-to-catch species you have never registered \u2014 ordinary wild battles no longer advertise it',
+          ],
+        },
+      ],
+    },
     {
       version: '0.10.0',
       subtitle: 'Breeding Inheritance & Shiny Hunting',

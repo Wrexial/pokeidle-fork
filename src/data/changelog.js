@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.9.20'
+export const GAME_VERSION = '0.9.21'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.9.21',
+      subtitle: 'Rarer Pokerus & Heart Polish',
+      sections: [
+        {
+          heading: 'Pokemon',
+          items: [
+            'Pok\u00e9rus is now much rarer \u2014 1 in 10,000 wild wins instead of 1 in 1,000',
+            'The favourite heart in the stats panel now matches the Manage and Close buttons beside it',
+          ],
+        },
+      ],
+    },
     {
       version: '0.9.20',
       subtitle: 'Release Duplicates',

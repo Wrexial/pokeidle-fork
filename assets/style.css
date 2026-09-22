@@ -2152,27 +2152,25 @@ img {
 }
 
 .stats-panel-fav-btn {
-    font-size: 15px;
+    font-size: 9px;
     line-height: 1;
     padding: 1px 7px;
-    background: #00000026;
-    color: #7a6a58;
-    border: 2px solid #8a7a60;
+    background: #685040;
+    color: var(--parchment);
+    border: 2px solid #483828;
     border-radius: 0;
     cursor: pointer;
-    transition: .12s
+    font-weight: 700;
+    box-shadow: 1px 1px #0000004d
 }
 
 .stats-panel-fav-btn:hover {
-    color: #d05070;
-    border-color: #d05070
+    background: #786050;
+    border-color: var(--gold-dark)
 }
 
 .stats-panel-fav-btn.active {
-    color: #ff5a78;
-    border-color: #ff5a78;
-    background: #ff5a7826;
-    text-shadow: 0 0 8px #ff5a78aa
+    color: #ff8aa0
 }
 
 .stats-panel-ivs {

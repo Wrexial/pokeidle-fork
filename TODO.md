@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.20**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.21**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -1198,6 +1198,9 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.9.21 (rarer Pokerus & heart polish): Pokerus dropped to 1 in 10,000 wild
+wins, and the stats-panel favourite heart now matches the Manage/Close buttons.
 
 0.9.20 (release duplicates): a box tool releases duplicate Pokemon (keeping the
 best of each species, protecting favourites/shinies) and pays the release

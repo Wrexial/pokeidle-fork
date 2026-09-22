@@ -1,7 +1,7 @@
 // Split from src/game/logic.js — see tools/decompile/split-logic.mjs
 
 import { shinyCharmMinOddsChance, shinyFullOddsChance, shinyWithCharmChance, roamerEncounterChance } from '../data/config.js'
-import { activeItems, evolutionItems, pokeBalls } from '../data/items.js'
+import { activeItems, consumableItems, evolutionItems, pokeBalls, valuableDropTable } from '../data/items.js'
 import { GENERATION_DEX_RANGES, encounterData, gymLeaderData, isSpeciesCharmed, mapData, moveData, pokemonSpecies, regions } from '../data/gameData.js'
 import { calculateExpYield, calculatePokemonStats, getLevelUpResults, getPerfectIVs, resolvePokemonMoves } from './pokemon.js'
 
@@ -28,7 +28,61 @@ export function getCatchRule(state, routeKey, speciesKey) {
  * @returns {string}
  */
 export function getItemCategory(itemId) {
-  return itemId in pokeBalls ? 'pokeballs' : 'items'
+  if (itemId in pokeBalls) return 'pokeballs'
+  return consumableItems[itemId]?.category ?? 'items'
+}
+
+/**
+ * Sell price for an item, or null when it can't be sold.
+ * @param {string} itemId
+ * @returns {number | null}
+ */
+export function getItemSellPrice(itemId) {
+  return consumableItems[itemId]?.sellPrice ?? null
+}
+
+/**
+ * Whether a consumable can be used on a Pokemon (medicine/candy, not treasure).
+ * @param {string} itemId
+ * @returns {boolean}
+ */
+export function isUsableConsumable(itemId) {
+  const item = consumableItems[itemId]
+  return !!item && item.category !== 'valuables'
+}
+
+/**
+ * Roll a treasure drop, biased toward the rarer entries at higher levels.
+ * @param {number} [level]
+ * @returns {string}
+ */
+export function rollValuableDrop(level = 1) {
+  const bias = 1 + Math.max(0, level - 5) / 40
+  let total = 0
+  const weighted = valuableDropTable.map((entry, index) => {
+    total += entry.weight * (index >= 3 ? bias : 1)
+    return {
+      itemId: entry.itemId,
+      cumulative: total,
+    }
+  })
+  const roll = Math.random() * total
+  return (
+    weighted.find((entry) => roll < entry.cumulative) ?? weighted[weighted.length - 1]
+  ).itemId
+}
+
+/**
+ * Roll an Exp. Candy tier for the given level. The player rolls separately for
+ * the much rarer Rare Candy.
+ * @param {number} [level]
+ * @returns {string}
+ */
+export function rollCandyDrop(level = 1) {
+  if (level >= 60) return Math.random() < 0.5 ? 'expCandyXL' : 'expCandyL'
+  if (level >= 40) return Math.random() < 0.5 ? 'expCandyL' : 'expCandyM'
+  if (level >= 20) return Math.random() < 0.5 ? 'expCandyM' : 'expCandyS'
+  return 'expCandyS'
 }
 
 /**
@@ -60,6 +114,13 @@ export function getItemInfo(itemId) {
   }
   if (itemId in activeItems) {
     const item = activeItems[itemId]
+    return {
+      name: item.name,
+      description: item.description,
+    }
+  }
+  if (itemId in consumableItems) {
+    const item = consumableItems[itemId]
     return {
       name: item.name,
       description: item.description,

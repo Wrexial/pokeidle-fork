@@ -83,6 +83,15 @@ export const shinyCharmMinOddsChance = 256
 /** Victory Tokens awarded for completing a generation's national dex. */
 export const dexRewardVictoryTokens = 3
 
+/** Chance a wild win drops a sellable treasure. */
+export const valuableDropChance = 0.03
+
+/** Chance a wild win drops an Exp. Candy (tier scales with the foe's level). */
+export const expCandyDropChance = 0.012
+
+/** Chance a wild win drops the much rarer Rare Candy. */
+export const rareCandyDropChance = 0.0015
+
 /** @type {Record<string, string[]>} */
 export const regionalStarters = {
   kanto: ['bulbasaur', 'charmander', 'squirtle'],

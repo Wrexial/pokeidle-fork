@@ -35,6 +35,8 @@ to your browser's `localStorage`.
   post-game rematch teams.
 - **Catching** — Poké Balls, per-route and global catch rules, auto-catch, and a
   guaranteed shiny catch option.
+- **Items** — Potions/Revives from every mart, Rare/Exp. Candies that drop from
+  wild battles, and sellable treasure (Nuggets, Pearls, Stardust, ...).
 - **Evolution** — level-up, item (elemental stones, Link Cable, held-item
   trades) and reversible form changes.
 - **Breeding** — the Daycare respects gender, egg groups and shiny odds.

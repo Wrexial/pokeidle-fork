@@ -62,14 +62,215 @@ export const pokeBalls = {
 
 export const ballOrder = ['pokeball', 'greatball', 'ultraball', 'masterball']
 
+/**
+ * Medicine, candy and treasure. `category` doubles as the bag tab id;
+ * medicine and candy carry a use effect, valuables only a `sellPrice`.
+ * @type {Record<string, ConsumableItem>}
+ */
+export const consumableItems = {
+    potion: {
+      id: 'potion',
+      name: 'Potion',
+      description: 'Restores 20 HP to a party Pokemon.',
+      category: 'medicine',
+      buyPrice: 300,
+      sellPrice: 150,
+      heal: 20,
+    },
+    superPotion: {
+      id: 'superPotion',
+      name: 'Super Potion',
+      description: 'Restores 60 HP to a party Pokemon.',
+      category: 'medicine',
+      buyPrice: 700,
+      sellPrice: 350,
+      heal: 60,
+    },
+    hyperPotion: {
+      id: 'hyperPotion',
+      name: 'Hyper Potion',
+      description: 'Restores 200 HP to a party Pokemon.',
+      category: 'medicine',
+      buyPrice: 1500,
+      sellPrice: 750,
+      heal: 200,
+    },
+    maxPotion: {
+      id: 'maxPotion',
+      name: 'Max Potion',
+      description: 'Fully restores a party Pokemon\u2019s HP.',
+      category: 'medicine',
+      buyPrice: 2500,
+      sellPrice: 1250,
+      full: true,
+    },
+    revive: {
+      id: 'revive',
+      name: 'Revive',
+      description: 'Revives a fainted party Pokemon with half its HP.',
+      category: 'medicine',
+      buyPrice: 1500,
+      sellPrice: 750,
+      revive: true,
+    },
+    maxRevive: {
+      id: 'maxRevive',
+      name: 'Max Revive',
+      description: 'Revives a fainted party Pokemon with full HP.',
+      category: 'medicine',
+      buyPrice: 4000,
+      sellPrice: 2000,
+      revive: true,
+      full: true,
+    },
+    expCandyS: {
+      id: 'expCandyS',
+      name: 'Exp. Candy S',
+      description: 'Gives a party Pokemon 1,000 EXP.',
+      category: 'candy',
+      buyPrice: null,
+      sellPrice: null,
+      exp: 1000,
+    },
+    expCandyM: {
+      id: 'expCandyM',
+      name: 'Exp. Candy M',
+      description: 'Gives a party Pokemon 3,000 EXP.',
+      category: 'candy',
+      buyPrice: null,
+      sellPrice: null,
+      exp: 3000,
+    },
+    expCandyL: {
+      id: 'expCandyL',
+      name: 'Exp. Candy L',
+      description: 'Gives a party Pokemon 10,000 EXP.',
+      category: 'candy',
+      buyPrice: null,
+      sellPrice: null,
+      exp: 10000,
+    },
+    expCandyXL: {
+      id: 'expCandyXL',
+      name: 'Exp. Candy XL',
+      description: 'Gives a party Pokemon 30,000 EXP.',
+      category: 'candy',
+      buyPrice: null,
+      sellPrice: null,
+      exp: 30000,
+    },
+    rareCandy: {
+      id: 'rareCandy',
+      name: 'Rare Candy',
+      description: 'Raises a party Pokemon by one level (up to Lv.100).',
+      category: 'candy',
+      buyPrice: null,
+      sellPrice: null,
+      levelUp: 1,
+    },
+    stardust: {
+      id: 'stardust',
+      name: 'Stardust',
+      description: 'A pretty red sand. Sell it at a mart.',
+      category: 'valuables',
+      buyPrice: null,
+      sellPrice: 1000,
+    },
+    pearl: {
+      id: 'pearl',
+      name: 'Pearl',
+      description: 'A lustrous pearl. Sell it at a mart.',
+      category: 'valuables',
+      buyPrice: null,
+      sellPrice: 1400,
+    },
+    bigPearl: {
+      id: 'bigPearl',
+      name: 'Big Pearl',
+      description: 'A large, valuable pearl. Sell it at a mart.',
+      category: 'valuables',
+      buyPrice: null,
+      sellPrice: 4000,
+    },
+    nugget: {
+      id: 'nugget',
+      name: 'Nugget',
+      description: 'A chunk of pure gold. Sell it at a mart.',
+      category: 'valuables',
+      buyPrice: null,
+      sellPrice: 5000,
+    },
+    starPiece: {
+      id: 'starPiece',
+      name: 'Star Piece',
+      description: 'A shard of a red jewel. Sell it at a mart.',
+      category: 'valuables',
+      buyPrice: null,
+      sellPrice: 6000,
+    },
+    bigNugget: {
+      id: 'bigNugget',
+      name: 'Big Nugget',
+      description: 'A big, impressive nugget of gold. Sell it at a mart.',
+      category: 'valuables',
+      buyPrice: null,
+      sellPrice: 10000,
+    },
+    cometShard: {
+      id: 'cometShard',
+      name: 'Comet Shard',
+      description: 'A shard of a comet. Sell it at a mart.',
+      category: 'valuables',
+      buyPrice: null,
+      sellPrice: 12000,
+    },
+  }
+
+/**
+ * Weighted treasure drops, common to rare. Higher-level battles bias the roll
+ * toward the rarer entries (see `rollValuableDrop`).
+ * @type {{ itemId: string, weight: number }[]}
+ */
+export const valuableDropTable = [
+    { itemId: 'stardust', weight: 30 },
+    { itemId: 'pearl', weight: 24 },
+    { itemId: 'nugget', weight: 16 },
+    { itemId: 'bigPearl', weight: 10 },
+    { itemId: 'starPiece', weight: 8 },
+    { itemId: 'bigNugget', weight: 5 },
+    { itemId: 'cometShard', weight: 2 },
+  ]
+
+/** Medicine every mart stocks, revealed as the player wins wild battles. */
+export const standardMartItems = [
+    { itemId: 'potion' },
+    { itemId: 'superPotion', unlockWildBattlesWon: 40 },
+    { itemId: 'hyperPotion', unlockWildBattlesWon: 120 },
+    { itemId: 'revive', unlockWildBattlesWon: 80 },
+    { itemId: 'maxPotion', unlockWildBattlesWon: 300 },
+    { itemId: 'maxRevive', unlockWildBattlesWon: 400 },
+  ]
+
 export const bagCategories = [
     {
       id: 'pokeballs',
       label: 'Poke Balls',
     },
     {
+      id: 'medicine',
+      label: 'Medicine',
+    },
+    {
+      id: 'candy',
+      label: 'Candies',
+    },
+    {
       id: 'items',
       label: 'Items',
+    },
+    {
+      id: 'valuables',
+      label: 'Valuables',
     },
   ]
 

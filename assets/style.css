@@ -4107,6 +4107,62 @@ img {
     background: #5a7840
 }
 
+.bag-sell-actions {
+    display: flex;
+    gap: 4px;
+    margin-top: 4px
+}
+
+.bag-sell-btn {
+    padding: 2px 8px;
+    font-size: 7px;
+    background: #8a6a20;
+    color: #ffe8a0;
+    border: 1px solid #b08a30;
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: inherit
+}
+
+.bag-sell-btn:hover {
+    background: #a07a28
+}
+
+.bag-target-picker {
+    margin-top: 4px;
+    border-top: 1px solid #483828;
+    padding-top: 4px
+}
+
+.bag-target-title {
+    margin-bottom: 3px;
+    color: #e8d0a0
+}
+
+.bag-target-btn {
+    display: block;
+    width: 100%;
+    margin-top: 2px;
+    padding: 3px 6px;
+    font-size: 7px;
+    text-align: left;
+    font-family: inherit;
+    background: #4a3a28;
+    color: #e8d0a0;
+    border: 1px solid #6a5a40;
+    border-radius: 2px;
+    cursor: pointer
+}
+
+.bag-target-btn:hover:not(.disabled) {
+    background: #5a4a34
+}
+
+.bag-target-btn.disabled {
+    opacity: .4;
+    cursor: not-allowed
+}
+
 .bag-active-effects {
     margin-top: 2px
 }

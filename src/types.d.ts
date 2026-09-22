@@ -84,6 +84,26 @@ type ActiveItem = {
   buyPrice: number | null
 }
 
+type ConsumableItem = {
+  id: string
+  name: string
+  description: string
+  /** Bag tab: medicine and candy can be used, valuables are sold. */
+  category: 'medicine' | 'candy' | 'valuables'
+  buyPrice: number | null
+  sellPrice: number | null
+  /** HP restored by a healing item (omitted for a full heal). */
+  heal?: number
+  /** Heal/revive to full HP. */
+  full?: boolean
+  /** Revive a fainted Pokemon instead of healing a conscious one. */
+  revive?: boolean
+  /** Flat EXP granted by an Exp. Candy. */
+  exp?: number
+  /** Levels granted by a Rare Candy. */
+  levelUp?: number
+}
+
 type PokeBall = {
   id: string
   name: string

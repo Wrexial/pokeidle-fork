@@ -1,12 +1,12 @@
 // Split from the former assets/index.js — see tools/decompile/split-modules.mjs
 
-import { RAID_COOLDOWN_MS, RAID_LEVEL_MAX, breedShinyOdds, breedShinyParentOdds, daycareEggBattles, defaultCatchSettings, dexRewardVictoryTokens, prestigeTokenReward, swarmBattleCount, swarmSpawnChance, wildMasterBallChance, wonderTradeShinyOdds } from '../data/config.js'
-import { activeItems, pokeBalls } from '../data/items.js'
+import { RAID_COOLDOWN_MS, RAID_LEVEL_MAX, breedShinyOdds, breedShinyParentOdds, daycareEggBattles, defaultCatchSettings, dexRewardVictoryTokens, expCandyDropChance, prestigeTokenReward, rareCandyDropChance, swarmBattleCount, swarmSpawnChance, valuableDropChance, wildMasterBallChance, wonderTradeShinyOdds } from '../data/config.js'
+import { activeItems, consumableItems, pokeBalls } from '../data/items.js'
 import { elite4Data, encounterData, gymLeaderData, mapData, moveLearnsets, pokemonSpecies, regions } from '../data/gameData.js'
 import { createVolatileState } from './combat.js'
-import { calculatePokemonStats, calculateRequiredExperience, createPokemon, nextBoxSortMode, resolvePokemonMoves, sortBoxMembers } from './pokemon.js'
+import { calculatePokemonStats, calculateRequiredExperience, createPokemon, getLevelUpResults, nextBoxSortMode, resolvePokemonMoves, sortBoxMembers } from './pokemon.js'
 import { canBreed, eggSpeciesKey } from './breeding.js'
-import { checkShinyOdds, computeUnlockedLocations, getRegionUnlockTokens, isActiveEffectItem, loadActivePokemonFromParty, prepareNextBattle, syncActivePokemonIntoParty, tickBattleCounters } from './progression.js'
+import { checkShinyOdds, computeUnlockedLocations, getRegionUnlockTokens, isActiveEffectItem, loadActivePokemonFromParty, prepareNextBattle, rollCandyDrop, rollValuableDrop, syncActivePokemonIntoParty, tickBattleCounters } from './progression.js'
 
 /** @type {GameState} */
 export const initialGameState = {
@@ -259,7 +259,7 @@ export function gameReducer(state, action) {
         swarm = state.swarm,
         daycare = state.daycare,
         inventory = state.inventory,
-        secretNotice = null,
+        secretNotices = [],
         swarmNotice = null
       if (
         event.type === 'faint' &&
@@ -300,7 +300,26 @@ export function gameReducer(state, action) {
             ...inventory,
             masterball: (inventory.masterball ?? 0) + 1,
           }
-          secretNotice = 'You found a Master Ball!'
+          secretNotices.push('You found a Master Ball!')
+        }
+        // Treasure and candy finds, scaled by the foe's level.
+        const dropLevel = enemyPokemon?.level ?? 1
+        if (Math.random() < valuableDropChance) {
+          const valuableId = rollValuableDrop(dropLevel)
+          inventory = {
+            ...inventory,
+            [valuableId]: (inventory[valuableId] ?? 0) + 1,
+          }
+          secretNotices.push(`You found a ${consumableItems[valuableId].name}!`)
+        }
+        const candyId = Math.random() < rareCandyDropChance ? 'rareCandy' : null
+        if (candyId || Math.random() < expCandyDropChance) {
+          const foundCandyId = candyId ?? rollCandyDrop(dropLevel)
+          inventory = {
+            ...inventory,
+            [foundCandyId]: (inventory[foundCandyId] ?? 0) + 1,
+          }
+          secretNotices.push(`You found a ${consumableItems[foundCandyId].name}!`)
         }
       }
       const syncedState = syncActivePokemonIntoParty({
@@ -309,8 +328,8 @@ export function gameReducer(state, action) {
         pendingEvents: remainingEvents,
         battleEvents: [...state.battleEvents, event],
         battleLog:
-          swarmNotice || secretNotice
-            ? [...battleLog, ...[swarmNotice, secretNotice].filter(Boolean)].slice(-50)
+          swarmNotice || secretNotices.length
+            ? [...battleLog, ...[swarmNotice, ...secretNotices].filter(Boolean)].slice(-50)
             : battleLog,
         playerPokemon,
         enemyPokemon,
@@ -1155,7 +1174,118 @@ export function gameReducer(state, action) {
           battleLog: [...state.battleLog, `Bought ${quantity}x ${item.name}!`].slice(-50),
         }
       }
+      const consumable = consumableItems[itemId]
+      if (consumable && consumable.buyPrice) {
+        const cost = consumable.buyPrice * quantity
+        if (state.money < cost) return state
+        const owned = state.inventory[itemId] ?? 0
+        return {
+          ...state,
+          money: state.money - cost,
+          inventory: {
+            ...state.inventory,
+            [itemId]: owned + quantity,
+          },
+          battleLog: [...state.battleLog, `Bought ${quantity}x ${consumable.name}!`].slice(-50),
+        }
+      }
       return state
+    }
+    case 'SELL_ITEM': {
+      const { itemId, quantity = 1 } = action.payload,
+        item = consumableItems[itemId],
+        owned = state.inventory[itemId] ?? 0
+      if (!item || !item.sellPrice || owned <= 0) return state
+      const sold = Math.min(quantity, owned),
+        earned = item.sellPrice * sold
+      return {
+        ...state,
+        money: state.money + earned,
+        inventory: {
+          ...state.inventory,
+          [itemId]: owned - sold,
+        },
+        battleLog: [
+          ...state.battleLog,
+          `Sold ${sold}x ${item.name} for $${earned.toLocaleString()}!`,
+        ].slice(-50),
+      }
+    }
+    case 'USE_ITEM_ON_POKEMON': {
+      const { itemId, pokemonId } = action.payload,
+        item = consumableItems[itemId],
+        owned = state.inventory[itemId] ?? 0,
+        memberIndex = state.party.findIndex(/** @param {Pokemon} member */ (member) => member.id === pokemonId)
+      if (!item || owned <= 0 || item.category === 'valuables' || memberIndex < 0) return state
+      let member = { ...state.party[memberIndex] }
+      const log = []
+      if (item.category === 'medicine') {
+        if (item.revive) {
+          if (member.currentHp > 0) return state
+          member.currentHp = item.full ? member.maxHp : Math.floor(member.maxHp / 2)
+          log.push(`${item.name} revived ${member.name}!`)
+        } else {
+          if (member.currentHp <= 0 || member.currentHp >= member.maxHp) return state
+          const healedHp = item.full
+            ? member.maxHp
+            : Math.min(member.maxHp, member.currentHp + (item.heal ?? 0))
+          log.push(
+            `${item.name} restored ${healedHp - member.currentHp} HP to ${member.name}!`
+          )
+          member.currentHp = healedHp
+        }
+      } else if (item.category === 'candy') {
+        if (member.level >= 100) return state
+        const species = pokemonSpecies[member.speciesKey],
+          newTotalExp = item.levelUp
+            ? calculateRequiredExperience(
+                Math.min(100, member.level + item.levelUp),
+                species.growthRate
+              )
+            : member.totalExp + (item.exp ?? 0),
+          levelUps = getLevelUpResults(
+            member.speciesKey,
+            species.growthRate,
+            member.level,
+            newTotalExp
+          )
+        member.totalExp = newTotalExp
+        if (levelUps.length > 0) {
+          const lastLevelUp = levelUps[levelUps.length - 1],
+            newStats = calculatePokemonStats(species, lastLevelUp.newLevel, member.ivs),
+            hpGain = newStats.hp - member.maxHp
+          member = {
+            ...member,
+            level: lastLevelUp.newLevel,
+            maxHp: newStats.hp,
+            currentHp: Math.min(member.currentHp + Math.max(0, hpGain), newStats.hp),
+            attack: newStats.attack,
+            defense: newStats.defense,
+            spAttack: newStats.spAttack,
+            spDefense: newStats.spDefense,
+            speed: newStats.speed,
+          }
+          let moves = [...member.moves]
+          for (const moveId of levelUps.flatMap((levelUp) => levelUp.newMoves))
+            moves.includes(moveId) ||
+              (moves = moves.length >= 4 ? [...moves.slice(1), moveId] : [...moves, moveId])
+          member.moves = moves
+          log.push(`${member.name} grew to level ${member.level}!`)
+        } else log.push(`${member.name} gained ${item.exp ?? 0} EXP!`)
+      }
+      const party = [...state.party]
+      party[memberIndex] = member
+      return {
+        ...state,
+        party,
+        playerPokemon:
+          state.activePlayerPokemonIndex === memberIndex ? member : state.playerPokemon,
+        inventory: {
+          ...state.inventory,
+          [itemId]: owned - 1,
+        },
+        battleLog: [...state.battleLog, ...log].slice(-50),
+      }
     }
     case 'USE_POKEBALL': {
       const { pokeballId } = action.payload,

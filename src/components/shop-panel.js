@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
-import { activeItems, pokeBalls } from '../data/items.js'
+import { activeItems, consumableItems, pokeBalls, standardMartItems } from '../data/items.js'
 import { useGame } from '../game/context.js'
 import { isActiveEffectItem } from '../game/progression.js'
 import { BallShopRow } from './ball-shop-row.js'
@@ -40,7 +40,7 @@ export function ShopPanel({ shopDef }) {
       }),
       jsx('div', {
         className: 'shop-items',
-        children: shopDef.items.map((shopItem) => {
+        children: [...shopDef.items, ...standardMartItems].map((shopItem) => {
           if (
             shopItem.unlockWildBattlesWon &&
             state.wildBattlesWon < shopItem.unlockWildBattlesWon
@@ -48,6 +48,25 @@ export function ShopPanel({ shopDef }) {
             return null
           if (isActiveEffectItem(shopItem.itemId)) {
             const item = activeItems[shopItem.itemId]
+            return item.buyPrice
+              ? jsx(
+                  ItemShopRow,
+                  {
+                    itemId: shopItem.itemId,
+                    name: item.name,
+                    description: item.description,
+                    price: item.buyPrice,
+                    owned: state.inventory[shopItem.itemId] ?? 0,
+                    money: state.money,
+                    qtyMode,
+                    dispatch,
+                  },
+                  shopItem.itemId
+                )
+              : null
+          }
+          if (consumableItems[shopItem.itemId]) {
+            const item = consumableItems[shopItem.itemId]
             return item.buyPrice
               ? jsx(
                   ItemShopRow,

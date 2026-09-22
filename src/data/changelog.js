@@ -10,6 +10,15 @@ export const CHANGELOG = [
       subtitle: 'Dex Rewards & Battle Clarity',
       sections: [
         {
+          heading: 'Bag & Economy',
+          items: [
+            'Potions, Super/Hyper/Max Potions, Revives and Max Revives can be bought at every mart and used on a party Pokemon in or out of battle',
+            'Rare Candy (one level) and Exp. Candy S/M/L/XL (flat EXP) now drop from wild battles, scaling with the foe\u2019s level',
+            'Treasures \u2014 Stardust, Pearls, Nuggets, Star Pieces and more \u2014 drop from wild battles and can be sold from a new Valuables bag tab',
+            'New Medicine, Candies and Valuables bag tabs keep consumables and treasure separate from Key items',
+          ],
+        },
+        {
           heading: 'Pokedex',
           items: [
             'Completing a generation\u2019s national dex now pays a one-off reward: 3 Victory Tokens and a Master Ball',

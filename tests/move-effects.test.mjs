@@ -165,3 +165,112 @@ test('Calm Mind raises special stats, not attack and defense', () => {
     assert.equal(player.statStages.defense ?? 0, 0)
   })
 })
+
+test('paralysis and toxic moves carry their status', () => {
+  assert.equal(moveData.thunderWave.effect.status, 'paralysis')
+  assert.equal(moveData.toxic.effect.status, 'toxic')
+  assert.equal(moveData.confuseRay.effect.type, 'confusion')
+  assert.equal(moveData.nuzzle.effect.status, 'paralysis')
+})
+
+/** @param {number} value */
+function withFixedRandom(value, /** @type {() => void} */ body) {
+  const originalRandom = Math.random
+  try {
+    Math.random = () => value
+    body()
+  } finally {
+    Math.random = originalRandom
+  }
+}
+
+test('Thunder Wave paralyzes, but not an Electric type', () => {
+  withFixedRandom(0.5, () => {
+    const attacker = battler({ name: 'Player', isPlayer: true, moves: ['thunderWave'], speed: 200 }),
+      normalFoe = battler({
+        name: 'Foe',
+        moves: ['splash'],
+        types: ['Normal'],
+        currentHp: 9999,
+        maxHp: 9999,
+      }),
+      electricFoe = battler({
+        name: 'Zap',
+        moves: ['splash'],
+        types: ['Electric'],
+        currentHp: 9999,
+        maxHp: 9999,
+      })
+    const firstEvents = resolveBattleTurn(attacker, normalFoe, false)
+    assert.ok(firstEvents.some((/** @type {any} */ event) => event.type === 'status'))
+    assert.equal(normalFoe.status, 'paralysis')
+    const electricEvents = resolveBattleTurn(attacker, electricFoe, false)
+    assert.ok(
+      !electricEvents.some(
+        (/** @type {any} */ event) =>
+          event.type === 'status' && event.message.includes('paralyzed')
+      )
+    )
+    assert.ok(!electricFoe.status, 'Electric types cannot be paralysed')
+  })
+})
+
+test('badly poisoned damage escalates each turn', () => {
+  withFixedRandom(0.99, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        status: 'toxic',
+        statusTurns: 1,
+        currentHp: 160,
+        maxHp: 160,
+        moves: ['splash'],
+        speed: 200,
+      }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], currentHp: 9999, maxHp: 9999 }),
+      events = resolveBattleTurn(player, enemy, false),
+      toxicEvent = events.find(
+        (/** @type {any} */ event) => event.type === 'damage' && event.message.includes('toxic')
+      )
+    assert.ok(toxicEvent, 'toxic should tick')
+    assert.equal(toxicEvent.data.damage, 10, '1/16 of 160')
+    assert.equal(player.statusTurns, 2)
+  })
+})
+
+test('paralysis halves speed for turn order', () => {
+  withFixedRandom(0.9, () => {
+    const player = battler({
+        name: 'Slow',
+        isPlayer: true,
+        status: 'paralysis',
+        speed: 100,
+        moves: ['tackle'],
+        attack: 200,
+      }),
+      enemy = battler({ name: 'Foe', speed: 60, moves: ['splash'] }),
+      events = resolveBattleTurn(player, enemy, false),
+      firstAttack = events.find((/** @type {any} */ event) => event.type === 'attack')
+    assert.match(firstAttack.message, /^Foe/, 'the un-halved foe should move first')
+  })
+})
+
+test('confusion can make a battler hurt itself', () => {
+  withZeroRandom(() => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['tackle'],
+        confusionTurns: 2,
+        speed: 200,
+      }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], currentHp: 9999, maxHp: 9999 }),
+      events = resolveBattleTurn(player, enemy, false)
+    assert.ok(
+      events.some(
+        (/** @type {any} */ event) => event.type === 'recoil' && event.message.includes('confused')
+      )
+    )
+    assert.equal(player.confusionTurns, 1)
+  })
+})

@@ -2630,6 +2630,7 @@ export function gameReducer(state, action) {
             status: enemyVolatile.status,
             statusTurns: enemyVolatile.statusTurns,
             flinch: enemyVolatile.flinch,
+            confusionTurns: enemyVolatile.confusionTurns ?? 0,
           }),
         {
           ...state,

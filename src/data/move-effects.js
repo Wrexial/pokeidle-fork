@@ -80,6 +80,32 @@ export const MOVE_OVERRIDES = {
   wickedBlow: { critStage: 3 },
   surgingStrikes: { critStage: 3, multiHit: [3, 3] },
 
+  // --- Status infliction ---
+  thunderWave: { effect: { type: 'status', status: 'paralysis' } },
+  glare: { effect: { type: 'status', status: 'paralysis' } },
+  stunSpore: { effect: { type: 'status', status: 'paralysis' } },
+  toxic: { effect: { type: 'status', status: 'toxic' } },
+  poisonPowder: { effect: { type: 'status', status: 'poison' } },
+  willOWisp: { effect: { type: 'status', status: 'burn' } },
+  sing: { effect: { type: 'status', status: 'sleep' } },
+  sleepPowder: { effect: { type: 'status', status: 'sleep' } },
+  spore: { effect: { type: 'status', status: 'sleep' } },
+  hypnosis: { effect: { type: 'status', status: 'sleep' } },
+  lovelyKiss: { effect: { type: 'status', status: 'sleep' } },
+  darkVoid: { effect: { type: 'status', status: 'sleep' } },
+  confuseRay: { effect: { type: 'confusion' } },
+  supersonic: { effect: { type: 'confusion' } },
+  sweetKiss: { effect: { type: 'confusion' } },
+  teeterDance: { effect: { type: 'confusion' } },
+  // Damaging moves that can paralyse.
+  nuzzle: { effect: { type: 'status', status: 'paralysis', chance: 100 } },
+  zapCannon: { effect: { type: 'status', status: 'paralysis', chance: 100 } },
+  bodySlam: { effect: { type: 'status', status: 'paralysis', chance: 30 } },
+  thunderShock: { effect: { type: 'status', status: 'paralysis', chance: 10 } },
+  thunderbolt: { effect: { type: 'status', status: 'paralysis', chance: 10 } },
+  discharge: { effect: { type: 'status', status: 'paralysis', chance: 30 } },
+  lick: { effect: { type: 'status', status: 'paralysis', chance: 30 } },
+
   // --- Data corrections ---
   // Calm Mind raised attack/defense because of Showdown's stat-key names.
   calmMind: {

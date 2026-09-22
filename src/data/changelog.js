@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.11.0'
+export const GAME_VERSION = '0.11.1'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.11.1',
+      subtitle: 'Status Effects',
+      sections: [
+        {
+          heading: 'Battles',
+          items: [
+            'Added paralysis (halves Speed and has a 25% chance to stop a move), badly poisoned / toxic (damage grows each turn) and confusion (may hurt itself)',
+            'Status moves that previously did nothing now work \u2014 Thunder Wave, Glare, Stun Spore, Toxic, Poison Powder, Will-O-Wisp, Sing / Sleep Powder / Spore / Hypnosis, Confuse Ray and friends \u2014 and damaging moves such as Body Slam, Thunderbolt and Nuzzle can paralyse',
+          ],
+        },
+      ],
+    },
     {
       version: '0.11.0',
       subtitle: 'Battle Depth',

@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.11.0**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.11.1**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -471,8 +471,9 @@ Still open:
       Aurora Veil) and the remaining utility moves (Taunt, Substitute, weather).
 - [ ] **Accuracy / evasion stat stages** (currently only accuracy from the move
       itself, no stages).
-- [ ] Additional statuses if added to the data — paralysis, confusion, badly
-      poisoned (data currently only has poison/burn/freeze/sleep/flinch).
+- [ ] Additional statuses if added to the data — **paralysis, toxic and
+      confusion shipped in 0.11.1**; still missing infatuation, leech seed,
+      curse, ability-based statuses.
 - [ ] Weather / terrain — see #10.
 - [ ] Ability / held-item hooks — see #2.
 - [ ] A damage / crit-rate **balance pass**.
@@ -1152,6 +1153,10 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.11.1 (status effects): paralysis, toxic and confusion are modelled, and the
+status moves that did nothing (Thunder Wave, Toxic, Will-O-Wisp, sleep/confusion
+moves, Body Slam/Thunderbolt paralysis) now work.
 
 0.11.0 (battle depth): healing moves work, multi-hit and high-crit moves are
 modelled, Protect blocks with +4 priority, Calm Mind/G-Max/priority data bugs

@@ -392,6 +392,7 @@ export function useGameLoop() {
               status: playerVolatile.status ?? null,
               statusTurns: playerVolatile.statusTurns ?? 0,
               flinch: playerVolatile.flinch ?? !1,
+              confusionTurns: playerVolatile.confusionTurns ?? 0,
             },
             enemyBattlePokemon = {
               ...currentGameState.enemyPokemon,
@@ -414,6 +415,7 @@ export function useGameLoop() {
               status: playerBattlePokemon.status ?? null,
               statusTurns: playerBattlePokemon.statusTurns ?? 0,
               flinch: playerBattlePokemon.flinch ?? !1,
+              confusionTurns: playerBattlePokemon.confusionTurns ?? 0,
             },
             enemyVolatileUpdate = {
               statStages: enemyBattlePokemon.statStages,
@@ -423,6 +425,7 @@ export function useGameLoop() {
               status: enemyBattlePokemon.status ?? null,
               statusTurns: enemyBattlePokemon.statusTurns ?? 0,
               flinch: enemyBattlePokemon.flinch ?? !1,
+              confusionTurns: enemyBattlePokemon.confusionTurns ?? 0,
             }
           dispatch({
             type: 'UPDATE_VOLATILE',

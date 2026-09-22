@@ -20,11 +20,12 @@ export function createVolatileState() {
     status: null,
     statusTurns: 0,
     flinch: !1,
+    confusionTurns: 0,
   }
 }
 
 /** Major status conditions that persist until cured and tick each turn. */
-const MAJOR_STATUSES = new Set(['poison', 'burn', 'freeze', 'sleep'])
+const MAJOR_STATUSES = new Set(['poison', 'toxic', 'burn', 'freeze', 'sleep', 'paralysis'])
 
 /** Types that can't be afflicted by a given status. */
 /** @type {Record<string, string[]>} */
@@ -32,6 +33,8 @@ const STATUS_IMMUNE_TYPES = {
   burn: ['Fire'],
   freeze: ['Ice'],
   poison: ['Poison', 'Steel'],
+  toxic: ['Poison', 'Steel'],
+  paralysis: ['Electric'],
 }
 
 /**
@@ -53,16 +56,97 @@ function applyStatus(target, status, events, targetIsPlayer) {
   if (!MAJOR_STATUSES.has(status) || target.status) return
   if ((STATUS_IMMUNE_TYPES[status] ?? []).some((type) => target.types.includes(type))) return
   target.status = status
-  target.statusTurns = status === 'sleep' ? 1 + Math.floor(Math.random() * 3) : 0
+  target.statusTurns =
+    status === 'sleep'
+      ? 1 + Math.floor(Math.random() * 3)
+      : status === 'toxic'
+        ? 1
+        : 0
   events.push({
     type: 'status',
     message: `${target.name} was ${
-      { poison: 'poisoned', burn: 'burned', freeze: 'frozen', sleep: 'put to sleep' }[status]
+      {
+        poison: 'poisoned',
+        toxic: 'badly poisoned',
+        burn: 'burned',
+        freeze: 'frozen',
+        sleep: 'put to sleep',
+        paralysis: 'paralyzed',
+      }[status]
     }!`,
     data: {
       target: side,
     },
   })
+}
+
+/**
+ * Confuse a Pokemon for 2-5 turns. Confusion is volatile, so it doesn't use
+ * the major-status slot; an already-confused target is left alone.
+ * @param {BattlePokemon} target
+ * @param {any[]} events
+ * @param {boolean} targetIsPlayer
+ */
+function applyConfusion(target, events, targetIsPlayer) {
+  if (!target || target.currentHp <= 0 || (target.confusionTurns ?? 0) > 0) return
+  target.confusionTurns = 2 + Math.floor(Math.random() * 4)
+  events.push({
+    type: 'status',
+    message: `${target.name} became confused!`,
+    data: {
+      target: targetIsPlayer ? 'player' : 'enemy',
+    },
+  })
+}
+
+/**
+ * A confused attacker may hurt itself instead of using its move. Returns true
+ * when the turn is skipped (and pushes the event), and clears confusion when
+ * it wears off.
+ * @param {BattlePokemon} attacker
+ * @param {any[]} events
+ * @param {boolean} isPlayer
+ * @returns {boolean}
+ */
+function handleConfusion(attacker, events, isPlayer) {
+  if ((attacker.confusionTurns ?? 0) <= 0) return !1
+  const side = isPlayer ? 'player' : 'enemy'
+  attacker.confusionTurns = (attacker.confusionTurns ?? 0) - 1
+  if (attacker.confusionTurns <= 0) {
+    attacker.confusionTurns = 0
+    events.push({
+      type: 'status',
+      message: `${attacker.name} snapped out of its confusion!`,
+      data: {
+        target: side,
+      },
+    })
+    return !1
+  }
+  if (Math.random() < 0.33) {
+    const selfDamage = Math.max(1, Math.floor(attacker.maxHp / 8))
+    attacker.currentHp = Math.max(0, attacker.currentHp - selfDamage)
+    events.push({
+      type: 'recoil',
+      message: `${attacker.name} is confused and hurt itself! (${selfDamage} damage)`,
+      data: {
+        target: side,
+        damage: selfDamage,
+        hpAfter: attacker.currentHp,
+        hpMax: attacker.maxHp,
+      },
+    })
+    attacker.currentHp <= 0 &&
+      events.push({
+        type: 'faint',
+        message: `${attacker.name} fainted!`,
+        data: {
+          target: side,
+        },
+      })
+    return !0
+  }
+  return !1
 }
 
 /**
@@ -114,6 +198,15 @@ function statusPreventsAction(attacker, events, isPlayer) {
         target: side,
       },
     })
+  } else if (attacker.status === 'paralysis' && Math.random() < 0.25) {
+    events.push({
+      type: 'status',
+      message: `${attacker.name} is paralyzed! It can't move!`,
+      data: {
+        target: side,
+      },
+    })
+    return !0
   }
   if (attacker.flinch) {
     attacker.flinch = !1
@@ -342,6 +435,20 @@ export function chooseMoveForBattle(attacker, defender) {
     })
     if (setupMove) return { moveId: setupMove, move: moveData[setupMove] }
   }
+  // Occasionally open with a status move the target isn't already suffering
+  // from (paralysis, poison, sleep, confusion).
+  if (hpFraction > 0.5 && Math.random() < 0.25) {
+    const statusMove = usableMoves.find((moveId) => {
+      const effect = moveData[moveId].effect
+      if (effect?.type === 'confusion') return (defender.confusionTurns ?? 0) === 0
+      if (effect?.type !== 'status' || effect.status === 'flinching') return false
+      return (
+        !defender.status &&
+        !(STATUS_IMMUNE_TYPES[effect.status] ?? []).some((type) => defender.types.includes(type))
+      )
+    })
+    if (statusMove) return { moveId: statusMove, move: moveData[statusMove] }
+  }
   return chooseBestMove(
     attacker.moves,
     attacker.level,
@@ -388,6 +495,17 @@ export function getStatStage(volatile, statKey) {
  */
 export function clampStatStage(stage) {
   return Math.max(-6, Math.min(6, stage))
+}
+
+/**
+ * Speed used for turn order: paralysis halves it.
+ * @param {BattlePokemon} pokemon
+ * @returns {number}
+ */
+function effectiveSpeed(pokemon) {
+  return pokemon.status === 'paralysis'
+    ? Math.max(1, Math.floor(pokemon.speed / 2))
+    : pokemon.speed
 }
 
 /**
@@ -455,7 +573,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1) {
             isPlayer: !0,
           }
         )
-      : player.speed >= enemy.speed
+      : effectiveSpeed(player) >= effectiveSpeed(enemy)
         ? attackOrder.push(
             {
               attacker: player,
@@ -494,6 +612,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1) {
       continue
     }
     if (statusPreventsAction(attack.attacker, events, attack.isPlayer)) continue
+    if (handleConfusion(attack.attacker, events, attack.isPlayer)) continue
     const moveDef = moveData[attack.moveId]
     if (!moveDef) continue
     if (
@@ -571,7 +690,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1) {
           },
         })
         moveDef.effect.status && applyStatus(attack.attacker, moveDef.effect.status, events, attack.isPlayer)
-      }
+      } else if (moveDef.effect?.type === 'confusion') applyConfusion(attack.defender, events, !attack.isPlayer)
       continue
     }
     const attackStat =
@@ -805,7 +924,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1) {
     }
     if (attack.attacker.currentHp <= 0) break
   }
-  // End-of-turn residual damage from poison / burn.
+  // End-of-turn residual damage from poison / toxic / burn.
   /** @type {[BattlePokemon, boolean][]} */
   const residualTargets = [
     [player, !0],
@@ -813,9 +932,15 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1) {
   ]
   for (const [pokemon, isPlayerSide] of residualTargets) {
     if (pokemon.currentHp <= 0) continue
-    const divisor = pokemon.status === 'poison' ? 8 : pokemon.status === 'burn' ? 16 : 0
-    if (!divisor) continue
-    const residual = Math.max(1, Math.floor(pokemon.maxHp / divisor))
+    let residual = 0
+    if (pokemon.status === 'poison') residual = Math.max(1, Math.floor(pokemon.maxHp / 8))
+    else if (pokemon.status === 'burn') residual = Math.max(1, Math.floor(pokemon.maxHp / 16))
+    else if (pokemon.status === 'toxic') {
+      // Badly poisoned damage escalates: 1/16, 2/16, 3/16, ...
+      const counter = Math.max(1, pokemon.statusTurns ?? 1)
+      residual = Math.max(1, Math.floor((pokemon.maxHp * counter) / 16))
+      pokemon.statusTurns = counter + 1
+    } else continue
     pokemon.currentHp = Math.max(0, pokemon.currentHp - residual)
     events.push({
       type: 'damage',

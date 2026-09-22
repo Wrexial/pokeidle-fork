@@ -145,12 +145,14 @@ type VolatileState = {
   mustRecharge: boolean
   lockedMove: string | null
   lockTurnsRemaining: number
-  /** Major status condition (poison/burn/freeze/sleep) or null. */
+  /** Major status condition (poison/toxic/burn/freeze/sleep/paralysis) or null. */
   status: string | null
-  /** Remaining sleep turns. */
+  /** Remaining sleep turns, or the escalating toxic counter. */
   statusTurns: number
   /** One-turn flinch flag. */
   flinch: boolean
+  /** Turns of confusion left (0 when not confused). */
+  confusionTurns?: number
 }
 
 type GameAction = { type: string; payload?: any; [key: string]: any }

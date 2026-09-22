@@ -17,7 +17,7 @@ const NATURE_STAT_LABELS = {
 import { moveData, pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { genderForPokemon, genderSymbol } from '../game/breeding.js'
-import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, IV_STAT_LABELS, IV_STAT_ORDER, judgeIVs } from '../game/pokemon.js'
+import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, IV_STAT_LABELS, IV_STAT_ORDER, judgeIVs, pokemonDisplayName } from '../game/pokemon.js'
 import { MoveManagerPanel } from './move-manager-panel.js'
 
 /** @param {{ pokemon: Pokemon, source: 'party' | 'box', partyLength: number, onAction: () => void, onClose: () => void, evolutionInfo?: { entries: { targetName: string, canEvolve: boolean, requirementLabel: string, targetKey: string, itemId?: string }[] } | null, onEvolve?: (index: number) => void, onRelease?: () => void, canRelease?: boolean }} props */
@@ -40,6 +40,8 @@ export function StatsPanel({
     gender = genderForPokemon(pokemon),
     nature = pokemon.nature ? natureByKey[pokemon.nature] : null,
     ivJudge = judgeIVs(pokemon.ivs),
+    [editingName, setEditingName] = React.useState(!1),
+    [nameDraft, setNameDraft] = React.useState(''),
     natureEffect = /** @param {string} statKey @returns {1 | -1 | 0} */ (statKey) =>
       nature && nature.increased !== nature.decreased
         ? nature.increased === statKey
@@ -49,6 +51,13 @@ export function StatsPanel({
             : 0
         : 0
   if (!species) return null
+  function commitName() {
+    dispatch({
+      type: 'SET_NICKNAME',
+      payload: { pokemonId: pokemon.id, nickname: nameDraft },
+    })
+    setEditingName(!1)
+  }
   const statRows = [
       {
         label: 'HP',
@@ -165,7 +174,34 @@ export function StatsPanel({
                       className: 'shiny-star',
                       children: '★',
                     }),
-                  pokemon.name,
+                  editingName
+                    ? jsx('input', {
+                        className: 'stats-panel-name-input',
+                        value: nameDraft,
+                        maxLength: 12,
+                        autoFocus: !0,
+                        onChange: /** @param {React.ChangeEvent<HTMLInputElement>} event */ (
+                          event
+                        ) => setNameDraft(event.target.value),
+                        onKeyDown: /** @param {React.KeyboardEvent<HTMLInputElement>} event */ (
+                          event
+                        ) => {
+                          event.key === 'Enter' && commitName()
+                          event.key === 'Escape' && setEditingName(!1)
+                        },
+                        onBlur: commitName,
+                      })
+                    : pokemonDisplayName(pokemon),
+                  !editingName &&
+                    jsx('button', {
+                      className: 'stats-panel-name-edit',
+                      title: 'Nickname',
+                      onClick: () => {
+                        setNameDraft(pokemon.nickname ?? '')
+                        setEditingName(!0)
+                      },
+                      children: '\u270e',
+                    }),
                   jsx('span', {
                     className: `pokemon-gender ${
                       gender === 'male'
@@ -399,7 +435,7 @@ export function StatsPanel({
               className: 'release-confirm',
               children: [
                 jsxs('span', {
-                  children: ['Trade ', pokemon.name, ' for a random Pokemon?'],
+                  children: ['Trade ', pokemonDisplayName(pokemon), ' for a random Pokemon?'],
                 }),
                 jsxs('div', {
                   className: 'release-confirm-buttons',

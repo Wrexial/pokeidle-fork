@@ -691,6 +691,27 @@ export function gameReducer(state, action) {
             : player,
       }
     }
+    case 'SET_NICKNAME': {
+      const { pokemonId, nickname } = action.payload,
+        cleaned = typeof nickname === 'string' ? nickname.trim().slice(0, 12) : '',
+        rename = /** @param {any} member */ (member) =>
+          member.id === pokemonId ? { ...member, nickname: cleaned || void 0 } : member
+      if (
+        !state.party.some((member) => member.id === pokemonId) &&
+        !state.box.some((member) => member.id === pokemonId)
+      )
+        return state
+      const player = state.playerPokemon
+      return {
+        ...state,
+        party: state.party.map(rename),
+        box: state.box.map(rename),
+        playerPokemon:
+          player && player.id === pokemonId
+            ? { ...player, nickname: cleaned || void 0 }
+            : player,
+      }
+    }
     case 'CATCH_POKEMON': {
       const {
           speciesKey,

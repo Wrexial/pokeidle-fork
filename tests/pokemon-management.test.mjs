@@ -5,7 +5,9 @@ import { installGameData } from './helpers/game-data.mjs'
 
 installGameData()
 
-const { ivStatLabel, ivVerdict, judgeIVs } = await import('../src/game/pokemon.js')
+const { ivStatLabel, ivVerdict, judgeIVs, pokemonDisplayName } = await import(
+  '../src/game/pokemon.js'
+)
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 
 function startedGame() {
@@ -57,6 +59,36 @@ test('TOGGLE_FAVOURITE flips the flag on the owned Pokemon', () => {
     gameReducer(favourited, { type: 'TOGGLE_FAVOURITE', payload: { pokemonId: id } }).party[0]
       .favourite,
     false
+  )
+})
+
+test('pokemonDisplayName prefers the nickname', () => {
+  assert.equal(pokemonDisplayName({ name: 'Pikachu' }), 'Pikachu')
+  assert.equal(pokemonDisplayName({ name: 'Pikachu', nickname: 'Sparky' }), 'Sparky')
+})
+
+test('SET_NICKNAME trims, caps at 12 characters and clears', () => {
+  const base = startedGame(),
+    id = base.party[0].id,
+    named = gameReducer(base, {
+      type: 'SET_NICKNAME',
+      payload: { pokemonId: id, nickname: '  Buddy  ' },
+    })
+  assert.equal(named.party[0].nickname, 'Buddy')
+  assert.equal(named.playerPokemon.nickname, 'Buddy')
+  assert.equal(
+    gameReducer(base, {
+      type: 'SET_NICKNAME',
+      payload: { pokemonId: id, nickname: 'ABCDEFGHIJKLMNOP' },
+    }).party[0].nickname,
+    'ABCDEFGHIJKL'
+  )
+  assert.equal(
+    gameReducer(named, {
+      type: 'SET_NICKNAME',
+      payload: { pokemonId: id, nickname: '' },
+    }).party[0].nickname,
+    undefined
   )
 })
 

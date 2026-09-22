@@ -5,7 +5,7 @@ import { breedShinyOdds, breedShinyParentOdds, daycareEggBattles } from '../data
 import { pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { breedingCompatibility, eggSpeciesKey, genderForPokemon, genderSymbol } from '../game/breeding.js'
-import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
+import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, pokemonDisplayName } from '../game/pokemon.js'
 
 const genderClass = (/** @type {'male' | 'female' | 'genderless'} */ gender) =>
   gender === 'male' ? 'gender-male' : gender === 'female' ? 'gender-female' : 'gender-none'
@@ -28,7 +28,7 @@ function ParentSlot({ pokemon }) {
         className: 'daycare-slot-name',
         children: [
           pokemon.isShiny && jsx('span', { className: 'shiny-star', children: '★' }),
-          pokemon.name,
+          pokemonDisplayName(pokemon),
           jsx('span', {
             className: `pokemon-gender ${genderClass(gender)}`,
             children: genderSymbol(gender),

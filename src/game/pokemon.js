@@ -177,6 +177,16 @@ export function judgeIVs(ivs) {
 }
 
 /**
+ * The name to show for a Pokemon: its nickname if it has one, else its species
+ * name.
+ * @param {{ name?: string, nickname?: string }} pokemon
+ * @returns {string}
+ */
+export function pokemonDisplayName(pokemon) {
+  return pokemon.nickname || pokemon.name || ''
+}
+
+/**
  * @param {number} currentLevel
  * @param {string} growthRate
  * @returns {number}

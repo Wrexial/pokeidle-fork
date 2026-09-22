@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.17**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.18**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -35,8 +35,9 @@ items, best return first:
 
 16. **#7 Offline / idle progress** — M–L · ★★★★★ — the biggest missing *idle*
     feature; a returning player currently gets nothing.
-17. **#8 Pokémon management / IV checker** — M · ★★★★½ — IV judge and
-    favourite/lock shipped in 0.9.17; nicknames and box search/filter remain.
+17. **#8 Pokémon management / IV checker** — M · ★★★★½ — IV judge,
+    favourite/lock, nicknames and box search shipped; only the bulk
+    "release duplicates" tool remains.
 18. **#20 Honey/Repel DexNav hunting** — M · ★★★★½ — turns the existing
     shiny chain into a usable system.
 19. **#24 Move data pass** — M–L · ★★★★½ — ~290 moves currently do nothing;
@@ -207,10 +208,12 @@ or protection against releasing something valuable.
 
 - [x] IV display / judge (sum IVs stars, like the in-game judge). Shipped in
       0.9.17 (`judgeIVs` + stat chips in the stats panel).
-- [ ] Nicknames.
+- [x] Nicknames — set from the stats panel, shown across the UI. Shipped
+      0.9.18 (`SET_NICKNAME` + `pokemonDisplayName`).
 - [x] Favourite / lock a Pokémon so Release and Wonder Trade skip it. Shipped
       in 0.9.17 (`TOGGLE_FAVOURITE`).
-- [ ] Box search + filter (name / type / level / shiny / favourite).
+- [x] Box search + filter (name / species / nickname, plus Shiny/Fav). Shipped
+      0.9.18.
 - [ ] "Release all duplicates" bulk tool.
 
 Effort: **medium**.
@@ -1195,6 +1198,10 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.9.18 (nicknames & box search): Pokemon can be nicknamed from the stats panel
+(shown in party/battle/daycare), and the box gained a search field with
+All/Shiny/Fav filters.
 
 0.9.17 (IV judge & favourites): the stats panel shows each Pokemon's IVs with
 an in-game-style judge, and a star favourites a Pokemon so Release and Wonder

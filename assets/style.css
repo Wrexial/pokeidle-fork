@@ -1866,6 +1866,49 @@ img {
     position: relative
 }
 
+.box-search {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border-bottom: 2px solid #483828
+}
+
+.box-search-input {
+    flex: 1;
+    min-width: 0;
+    font-family: var(--font-pixel);
+    font-size: 8px;
+    padding: 4px 6px;
+    color: #2a1808;
+    background: #e8dcc0;
+    border: 2px solid #5a3e20;
+    border-radius: 0;
+    outline: none
+}
+
+.box-filter-btn {
+    font-family: var(--font-pixel);
+    font-size: 7px;
+    padding: 4px 6px;
+    color: #c8b890;
+    background: linear-gradient(180deg,#3a2c1a,#2a1e10);
+    border: 2px solid #5a3e20;
+    cursor: pointer
+}
+
+.box-filter-btn.active {
+    color: #1a1208;
+    background: linear-gradient(180deg,var(--gold-bright),var(--gold));
+    border-color: #f0d060
+}
+
+.box-search-count {
+    flex: 0 0 auto;
+    font-size: 7px;
+    color: #8a7a60
+}
+
 .box-header-arrow {
     font-size: 10px;
     padding: 1px 6px;
@@ -1999,6 +2042,33 @@ img {
     font-size: 11px;
     font-weight: 700;
     color: #3a2818
+}
+
+.stats-panel-name-input {
+    width: 120px;
+    font-family: var(--font-pixel);
+    font-size: 11px;
+    font-weight: 700;
+    color: #2a1808;
+    background: #fff8e0;
+    border: 2px solid var(--gold-dark);
+    border-radius: 0;
+    padding: 0 3px;
+    outline: none
+}
+
+.stats-panel-name-edit {
+    margin-left: 4px;
+    padding: 0 2px;
+    font-size: 9px;
+    background: none;
+    border: none;
+    color: #8a7a60;
+    cursor: pointer
+}
+
+.stats-panel-name-edit:hover {
+    color: var(--gold-dark)
 }
 
 .pokemon-gender {

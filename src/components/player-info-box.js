@@ -1,6 +1,7 @@
 // Split from a grouped component file — see tools/decompile/split-components.mjs
 
 import { jsx, jsxs } from 'react/jsx-runtime'
+import { pokemonDisplayName } from '../game/pokemon.js'
 import { ExpBar } from './exp-bar.js'
 import { HpBar } from './hp-bar.js'
 
@@ -29,7 +30,7 @@ export function PlayerInfoBox({ pokemon, status }) {
             }),
           jsx('span', {
             className: 'info-pokemon-name',
-            children: pokemon.name.toUpperCase(),
+            children: pokemonDisplayName(pokemon).toUpperCase(),
           }),
           status &&
             jsx('span', {

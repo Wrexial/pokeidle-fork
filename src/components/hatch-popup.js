@@ -5,7 +5,7 @@ import { jsx, jsxs } from 'react/jsx-runtime'
 import { pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { genderForPokemon, genderSymbol } from '../game/breeding.js'
-import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
+import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, pokemonDisplayName } from '../game/pokemon.js'
 
 export function HatchPopup() {
   const { state, dispatch } = useGame(),
@@ -40,7 +40,7 @@ export function HatchPopup() {
                 className: 'shiny-star',
                 children: '★',
               }),
-            hatch.name,
+            pokemonDisplayName(hatch),
             jsx('span', {
               className: `pokemon-gender ${genderClass}`,
               children: genderSymbol(gender),

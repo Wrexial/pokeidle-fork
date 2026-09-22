@@ -5,7 +5,7 @@ import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
 import { evolutionItems } from '../data/items.js'
 import { evolutionData, pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
-import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
+import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, pokemonDisplayName } from '../game/pokemon.js'
 import { genderForPokemon } from '../game/breeding.js'
 import { formatReward, releaseReward } from '../game/progression.js'
 import { ExpBar } from './exp-bar.js'
@@ -248,7 +248,7 @@ export function PartyPanel({
                                         className: 'shiny-star',
                                         children: '★',
                                       }),
-                                    member.name,
+                                    pokemonDisplayName(member),
                                     member.favourite &&
                                       jsx('span', {
                                         className: 'party-favourite-badge',
@@ -319,7 +319,7 @@ export function PartyPanel({
                       jsxs('span', {
                         children: [
                           'Release ',
-                          releaseTarget.name,
+                          pokemonDisplayName(releaseTarget),
                           '? ',
                           jsx('span', {
                             className: 'release-reward-hint',

@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.9.17'
+export const GAME_VERSION = '0.9.18'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.9.18',
+      subtitle: 'Nicknames & Box Search',
+      sections: [
+        {
+          heading: 'Pokemon',
+          items: [
+            'Give any Pokemon a nickname from the stats panel (up to 12 characters); nicknames show in the party, battle and Daycare',
+            'The box has a search field plus All / Shiny / Fav filters to narrow the grid (drag-reordering pauses while searching)',
+          ],
+        },
+      ],
+    },
     {
       version: '0.9.17',
       subtitle: 'IV Judge & Favourites',

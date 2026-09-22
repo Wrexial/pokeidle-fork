@@ -75,6 +75,8 @@ type Pokemon = BattlePokemon & {
   nature?: string
   /** Favourited Pokemon are protected from Release and Wonder Trade. */
   favourite?: boolean
+  /** Optional player-given nickname (max 12 characters). */
+  nickname?: string
   isShiny: boolean
 }
 

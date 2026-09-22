@@ -5,7 +5,7 @@ import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
 import { BOX_PAGE_SIZE, BOX_SORT_OPTIONS } from '../data/ui.js'
 import { pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
-import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
+import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, pokemonDisplayName } from '../game/pokemon.js'
 import { PokedexModal } from './pokedex-modal.js'
 import { RecordsModal } from './records-modal.js'
 import { DaycareModal } from './daycare-modal.js'
@@ -32,7 +32,25 @@ export function BoxPanel({
     [showPokedex, setShowPokedex] = React.useState(!1),
     [showRecords, setShowRecords] = React.useState(!1),
     [showDaycare, setShowDaycare] = React.useState(!1),
-    totalPages = Math.max(1, Math.ceil(state.box.length / BOX_PAGE_SIZE)),
+    [query, setQuery] = React.useState(''),
+    [filterMode, setFilterMode] = React.useState('all'),
+    searchActive = query.trim() !== '' || filterMode !== 'all',
+    visibleBox = React.useMemo(() => {
+      if (!searchActive) return state.box
+      const needle = query.trim().toLowerCase()
+      return state.box.filter((pokemon) => {
+        if (filterMode === 'shiny' && !pokemon.isShiny) return false
+        if (filterMode === 'favourite' && !pokemon.favourite) return false
+        if (!needle) return true
+        const speciesName = pokemonSpecies[pokemon.speciesKey]?.name ?? pokemon.name
+        return (
+          (pokemon.nickname ?? '').toLowerCase().includes(needle) ||
+          pokemon.name.toLowerCase().includes(needle) ||
+          speciesName.toLowerCase().includes(needle)
+        )
+      })
+    }, [state.box, query, filterMode, searchActive]),
+    totalPages = Math.max(1, Math.ceil(visibleBox.length / BOX_PAGE_SIZE)),
     currentPage = Math.min(page, totalPages - 1),
     toggleInspected = /** @param {string} index */ (index) => {
       ;(setReleaseConfirm(null),
@@ -108,6 +126,51 @@ export function BoxPanel({
               }),
             ],
           }),
+          jsxs('div', {
+            className: 'box-search',
+            children: [
+              jsx('input', {
+                className: 'box-search-input',
+                type: 'text',
+                placeholder: 'Search box\u2026',
+                value: query,
+                onChange: /** @param {React.ChangeEvent<HTMLInputElement>} event */ (event) => {
+                  setQuery(event.target.value)
+                  setPage(0)
+                },
+              }),
+              jsx('button', {
+                className: `box-filter-btn${filterMode === 'all' ? ' active' : ''}`,
+                onClick: () => {
+                  setFilterMode('all')
+                  setPage(0)
+                },
+                children: 'All',
+              }),
+              jsx('button', {
+                className: `box-filter-btn${filterMode === 'shiny' ? ' active' : ''}`,
+                onClick: () => {
+                  setFilterMode('shiny')
+                  setPage(0)
+                },
+                children: 'Shiny',
+              }),
+              jsx('button', {
+                className: `box-filter-btn${filterMode === 'favourite' ? ' active' : ''}`,
+                onClick: () => {
+                  setFilterMode('favourite')
+                  setPage(0)
+                },
+                children: 'Fav',
+              }),
+              searchActive
+                ? jsx('span', {
+                    className: 'box-search-count',
+                    children: `${visibleBox.length} found`,
+                  })
+                : null,
+            ],
+          }),
           jsx('div', {
             className: 'box-grid-wrapper',
             children: jsx('div', {
@@ -117,22 +180,25 @@ export function BoxPanel({
                   length: BOX_PAGE_SIZE,
                 },
                 (index, slotIndex) => {
-                  const boxIndex = currentPage * BOX_PAGE_SIZE + slotIndex,
-                    pokemon = state.box[boxIndex]
+                  const visibleIndex = currentPage * BOX_PAGE_SIZE + slotIndex,
+                    boxIndex = searchActive ? -1 : visibleIndex,
+                    pokemon = visibleBox[visibleIndex]
                   if (pokemon) {
                     const species = pokemonSpecies[pokemon.speciesKey],
                       isInspected = inspected?.source === 'box' && inspected.id === pokemon.id,
-                      isDraggingIndex = dragSource === 'box' && boxDragFromIndex === boxIndex,
-                      isDropTarget = boxDropTargetIndex === boxIndex && dragSource !== null,
-                      isDraggable = !!onBoxDragStart
+                      isDraggingIndex =
+                        !searchActive && dragSource === 'box' && boxDragFromIndex === boxIndex,
+                      isDropTarget =
+                        !searchActive && boxDropTargetIndex === boxIndex && dragSource !== null,
+                      isDraggable = !!onBoxDragStart && !searchActive
                     return jsx(
                       'div',
                       {
                         className: `box-grid-slot filled${isInspected ? ' inspected' : ''}${pokemon.isShiny ? ' shiny-slot' : ''}${isDraggingIndex ? ' dragging' : ''}${isDropTarget ? ' drop-target' : ''}`,
                         onClick: () => toggleInspected(pokemon.id),
-                        title: `${pokemon.name} Lv${pokemon.level}`,
+                        title: `${pokemonDisplayName(pokemon)} Lv${pokemon.level}`,
                         draggable: isDraggable,
-                        onDragStart: onBoxDragStart ? /** @param {React.DragEvent} event */ (event) => onBoxDragStart(event, boxIndex, pokemon.id) : void 0,
+                        onDragStart: isDraggable ? /** @param {React.DragEvent} event */ (event) => onBoxDragStart(event, boxIndex, pokemon.id) : void 0,
                         onDragOver: onBoxSlotDragOver ? /** @param {React.DragEvent} event */ (event) => onBoxSlotDragOver(event, boxIndex) : void 0,
                         onDrop,
                         onDragEnd,
@@ -153,13 +219,13 @@ export function BoxPanel({
                     'div',
                     {
                       className: `box-grid-slot${boxDropTargetIndex === boxIndex && dragSource !== null ? ' drop-target' : ''}`,
-                      onDragOver: onBoxSlotDragOver
+                      onDragOver: onBoxSlotDragOver && !searchActive
                         ? /** @param {React.DragEvent} event */ (event) =>
                             onBoxSlotDragOver(
                               event,
                               Math.min(
                                 boxIndex,
-                                state.box.length > 0 ? state.box.length - 1 : 0
+                                visibleBox.length > 0 ? visibleBox.length - 1 : 0
                               )
                             )
                         : void 0,

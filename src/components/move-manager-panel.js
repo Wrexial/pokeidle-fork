@@ -5,7 +5,7 @@ import { jsx, jsxs } from 'react/jsx-runtime'
 import { moveCategoryIcons } from '../data/moves.js'
 import { moveData, pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
-import { getFamilyLearnset } from '../game/pokemon.js'
+import { getFamilyLearnset, pokemonDisplayName } from '../game/pokemon.js'
 
 /** @param {{ pokemon: Pokemon, onClose: () => void }} props */
 export function MoveManagerPanel({ pokemon, onClose }) {
@@ -50,7 +50,7 @@ export function MoveManagerPanel({ pokemon, onClose }) {
             }),
             jsxs('span', {
               className: 'move-panel-species',
-              children: [species.name, ' Lv.', target.level],
+              children: [pokemonDisplayName(target), ' Lv.', target.level],
             }),
           ],
         }),

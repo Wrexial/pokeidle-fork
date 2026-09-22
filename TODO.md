@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.16.1**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.17.0**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -240,15 +240,23 @@ learnset (`getFamilyLearnset`). TMs/tutors would add *cross-family* moves.
 
 Effort: **medium**. Needs a compatibility data set.
 
-## 10. Weather & terrain
+## 10. Weather & terrain (weather shipped in 0.17.0)
 
-A natural follow-on to status conditions; data-light and adds battle depth.
+Done for weather: `state.weather` (`{ type, turns }`) is set by Rain Dance /
+Sunny Day / Sandstorm / Snowscape / Hail and by Drizzle / Drought / Sand Stream /
+Snow Warning on entry, and threaded through `resolveBattleTurn` as a `weather`
+event. `src/game/weather.js` holds the pure helpers: Water/Fire damage scaling,
+Swift Swim / Chlorophyll / Sand Rush / Slush Rush speed, sandstorm/hail chip
+damage, and Rain Dish / Dry Skin / Ice Body healing. A badge in the battle scene
+shows it. Covered by `tests/weather.test.mjs`.
 
-- [ ] A weather state threaded like the volatile state (rain / sun / sandstorm /
-      snow), set by moves and/or per route.
-- [ ] Damage modifiers, weather-damage ticks, and interactions with abilities
-      (#2a) once those exist.
-- [ ] Small battle indicator + log lines.
+Still open:
+
+- [ ] **Terrain** (Electric / Grassy / Misty / Psychic) — a parallel field
+      state with entry effects, damage boosts and healing.
+- [ ] Route-based weather, weather rocks (extended duration), and the remaining
+      weather abilities (Solar Power, Hydration, Leaf Guard, Forecast, ...).
+- [ ] Weather-ball / move accuracy interactions (Thunder, Hurricane, Blizzard).
 
 Effort: **medium**.
 
@@ -482,7 +490,7 @@ Still open:
 - [ ] Additional statuses if added to the data — **paralysis/toxic/confusion
       (0.11.1) and Leech Seed (0.14.0) shipped**; still missing infatuation,
       curse, ability-based statuses.
-- [ ] Weather / terrain — see #10.
+- [ ] Weather / terrain — **weather shipped in 0.17.0** (#10); terrain still open.
 - [ ] Ability / held-item hooks — see #2.
 - [ ] A damage / crit-rate **balance pass**.
 - [ ] AI polish: switch on a bad matchup, and don't spam setup when already
@@ -1167,6 +1175,10 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.17.0 (weather): Rain/Sun/Sandstorm/Snow/Hail from moves and entry abilities,
+with damage scaling, weather abilities, chip damage/healing and a battle badge.
+First half of #10.
 
 0.16.1 (Hoenn Battle Tower): the tower is Hoenn-only, no longer leaks a run's
 floor between regions, and save repair consolidates legacy per-region records

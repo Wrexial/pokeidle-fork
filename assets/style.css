@@ -5666,6 +5666,29 @@ img {
     gap: 3px
 }
 
+.battle-weather-badge {
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    font-size: 8px;
+    font-weight: 700;
+    color: #fff;
+    background: rgba(0,0,0,0.55);
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 10px;
+    padding: 2px 8px;
+    white-space: nowrap;
+    pointer-events: none
+}
+
+.battle-weather-badge.weather-rain { border-color: #60a0e0 }
+.battle-weather-badge.weather-sun { border-color: #f0c040 }
+.battle-weather-badge.weather-sandstorm { border-color: #c0a060 }
+.battle-weather-badge.weather-snow,
+.battle-weather-badge.weather-hail { border-color: #a0e0ff }
+
 .battle-top-buttons .battle-info-btn {
     position: static
 }

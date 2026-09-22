@@ -82,8 +82,13 @@ export const MOVE_OVERRIDES = {
 
   // --- Utility ---
   leechSeed: { effect: { type: 'leechSeed' } },
-  // Snowscape was extracted with a stray "raise the opponent's Defense" effect.
-  snowscape: { effect: null },
+  // --- Weather ---
+  rainDance: { effect: { type: 'weather', weather: 'rain' } },
+  sunnyDay: { effect: { type: 'weather', weather: 'sun' } },
+  sandstorm: { effect: { type: 'weather', weather: 'sandstorm' } },
+  snowscape: { effect: { type: 'weather', weather: 'snow' } },
+  hail: { effect: { type: 'weather', weather: 'hail' } },
+  chillyReception: { effect: { type: 'weather', weather: 'snow' } },
 
   // --- Screens (halve physical/special damage for 5 turns) ---
   reflect: { screen: 'reflect' },

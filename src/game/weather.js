@@ -1,0 +1,111 @@
+// Field weather. Weather is battle-scoped: the active type and remaining turns
+// live in `state.weather`, are passed into `resolveBattleTurn`, and come back
+// out as a `weather` event the reducer stores. Pure helpers here; the battle
+// engine (src/game/combat.js) applies them.
+
+/** How many turns a weather effect lasts when set by a move. */
+export const WEATHER_TURNS = 5
+
+/** Move ids that set weather. @type {Record<string, string>} */
+export const WEATHER_MOVES = {
+  rainDance: 'rain',
+  sunnyDay: 'sun',
+  sandstorm: 'sandstorm',
+  snowscape: 'snow',
+  hail: 'hail',
+  chillyReception: 'snow',
+}
+
+/** Abilities that set weather on entry. @type {Record<string, string>} */
+export const WEATHER_ABILITIES = {
+  drizzle: 'rain',
+  drought: 'sun',
+  sandStream: 'sandstorm',
+  snowWarning: 'snow',
+}
+
+/** Human-readable weather name for logs/UI. @type {Record<string, string>} */
+export const WEATHER_NAMES = {
+  rain: 'rain',
+  sun: 'harsh sunlight',
+  sandstorm: 'a sandstorm',
+  snow: 'snow',
+  hail: 'hail',
+}
+
+/** Icon per weather for the battle badge. @type {Record<string, string>} */
+export const WEATHER_ICONS = {
+  rain: '\ud83c\udf27',
+  sun: '\u2600',
+  sandstorm: '\ud83c\udf2a',
+  snow: '\u2744',
+  hail: '\ud83c\udf28',
+}
+
+/**
+ * Damage multiplier the weather applies to a move.
+ * @param {{ type: string } | null | undefined} weather
+ * @param {Move} moveDef
+ * @returns {number}
+ */
+export function weatherDamageMultiplier(weather, moveDef) {
+  if (!weather || !moveDef) return 1
+  if (weather.type === 'rain')
+    return moveDef.type === 'Water' ? 1.5 : moveDef.type === 'Fire' ? 0.5 : 1
+  if (weather.type === 'sun')
+    return moveDef.type === 'Fire' ? 1.5 : moveDef.type === 'Water' ? 0.5 : 1
+  return 1
+}
+
+/**
+ * Speed multiplier a weather-dependent ability grants (Swift Swim, Chlorophyll,
+ * Sand Rush, Slush Rush).
+ * @param {{ type: string } | null | undefined} weather
+ * @param {BattlePokemon} pokemon
+ * @returns {number}
+ */
+export function weatherSpeedMultiplier(weather, pokemon) {
+  if (!weather) return 1
+  const ability = pokemon.ability
+  if (weather.type === 'rain' && ability === 'swiftSwim') return 2
+  if (weather.type === 'sun' && ability === 'chlorophyll') return 2
+  if (weather.type === 'sandstorm' && ability === 'sandRush') return 2
+  if (weather.type === 'snow' && ability === 'slushRush') return 2
+  return 1
+}
+
+/**
+ * End-of-turn weather damage (sandstorm/hail chip), 0 when the Pokemon is
+ * immune or the weather is harmless.
+ * @param {{ type: string } | null | undefined} weather
+ * @param {BattlePokemon} pokemon
+ * @returns {number}
+ */
+export function weatherResidualDamage(weather, pokemon) {
+  if (!weather) return 0
+  if (weather.type === 'sandstorm') {
+    const immune = pokemon.types.some((type) => type === 'Rock' || type === 'Ground' || type === 'Steel')
+    return immune ? 0 : Math.max(1, Math.floor(pokemon.maxHp / 16))
+  }
+  if (weather.type === 'hail') {
+    return pokemon.types.includes('Ice') ? 0 : Math.max(1, Math.floor(pokemon.maxHp / 16))
+  }
+  return 0
+}
+
+/**
+ * End-of-turn weather healing from an ability (Rain Dish, Dry Skin, Ice Body),
+ * or a small Dry Skin penalty in harsh sunlight.
+ * @param {{ type: string } | null | undefined} weather
+ * @param {BattlePokemon} pokemon
+ * @returns {number} Positive heals, negative damages.
+ */
+export function weatherAbilityHeal(weather, pokemon) {
+  if (!weather) return 0
+  const ability = pokemon.ability
+  if (weather.type === 'rain' && ability === 'rainDish') return Math.max(1, Math.floor(pokemon.maxHp / 16))
+  if (weather.type === 'rain' && ability === 'drySkin') return Math.max(1, Math.floor(pokemon.maxHp / 8))
+  if (weather.type === 'sun' && ability === 'drySkin') return -Math.max(1, Math.floor(pokemon.maxHp / 8))
+  if (weather.type === 'snow' && ability === 'iceBody') return Math.max(1, Math.floor(pokemon.maxHp / 16))
+  return 0
+}

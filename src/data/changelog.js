@@ -1,10 +1,24 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.16.1'
+export const GAME_VERSION = '0.17.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.17.0',
+      subtitle: 'Weather',
+      sections: [
+        {
+          heading: 'Battles',
+          items: [
+            'Weather is live: Rain Dance, Sunny Day, Sandstorm, Snowscape/Hail now set a five-turn field effect, and Drizzle, Drought, Sand Stream and Snow Warning set it on entry',
+            'It matters: rain boosts Water and weakens Fire (sun the reverse), Swift Swim / Chlorophyll / Sand Rush / Slush Rush double Speed, sandstorm and hail chip non-immune Pokemon each turn, and Rain Dish / Dry Skin / Ice Body heal from it',
+            'A badge at the top of the battle shows the active weather and turns left',
+          ],
+        },
+      ],
+    },
     {
       version: '0.16.1',
       subtitle: 'Hoenn Battle Tower',

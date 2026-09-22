@@ -5,6 +5,7 @@ import { roamerFleeChance } from '../data/config.js'
 import { moveData } from '../data/gameData.js'
 import { canEvolveFurther } from './pokemon.js'
 import { heldBerryHeal, heldCuresStatus, heldDamageMultiplier, heldLeftoversHeal, heldLifeOrbRecoil, heldStatMultiplier, heldSurvivesAtFullHp } from './held-items.js'
+import { WEATHER_ABILITIES, WEATHER_MOVES, WEATHER_NAMES, WEATHER_TURNS, weatherAbilityHeal, weatherDamageMultiplier, weatherResidualDamage, weatherSpeedMultiplier } from './weather.js'
 import { abilityAbsorbsType, abilityAttackMultiplier, abilityBlocksNonSuperEffective, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityHalvesSuperEffective, abilityHealsFromType, abilityIgnoresIndirectDamage, abilityOf, abilityPreventsStatDrop, abilityPreventsStatus, abilitySurvivesAtFullHp } from './abilities.js'
 
 /** @returns {VolatileState} */
@@ -567,12 +568,16 @@ function screenApplies(defender, moveDef) {
 }
 
 /**
- * Speed used for turn order: paralysis halves it.
+ * Speed used for turn order: weather abilities can double it, then paralysis halves it.
  * @param {BattlePokemon} pokemon
+ * @param {{ type: string } | null} [weather]
  * @returns {number}
  */
-function effectiveSpeed(pokemon) {
-  const speed = pokemon.speed * heldStatMultiplier(pokemon, 'speed'),
+function effectiveSpeed(pokemon, weather) {
+  const speed =
+      pokemon.speed *
+      heldStatMultiplier(pokemon, 'speed') *
+      weatherSpeedMultiplier(weather, pokemon),
     effective = pokemon.status === 'paralysis' ? Math.max(1, Math.floor(speed / 2)) : speed
   return effective
 }
@@ -606,15 +611,21 @@ function applyIntimidate(source, target, events, sourceIsPlayer) {
  * @param {BattlePokemon} enemy
  * @param {boolean} [isTrainerBattle]
  * @param {boolean} [firstTurn]
+ * @param {{ type: string, turns: number } | null} [weather]
  * @returns {any[]}
  */
-export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn = !1) {
+export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn = !1, weather = null) {
   const events = /** @type {any[]} */ ([])
+  let activeWeather = weather ?? null
   ;(player.statStages || (player.statStages = {}), enemy.statStages || (enemy.statStages = {}))
   // Intimidate fires the first time each side is on the field.
   if (firstTurn) {
     applyIntimidate(player, enemy, events, !0)
     applyIntimidate(enemy, player, events, !1)
+    const weatherSetter =
+      WEATHER_ABILITIES[abilityOf(player) ?? ''] ?? WEATHER_ABILITIES[abilityOf(enemy) ?? '']
+    if (weatherSetter)
+      activeWeather = { type: weatherSetter, turns: WEATHER_TURNS }
   }
   // Flinches only last the turn they were inflicted; clear any left over.
   ;(player.flinch = !1, enemy.flinch = !1)
@@ -672,7 +683,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
             isPlayer: !0,
           }
         )
-      : effectiveSpeed(player) >= effectiveSpeed(enemy)
+      : effectiveSpeed(player, activeWeather) >= effectiveSpeed(enemy, activeWeather)
         ? attackOrder.push(
             {
               attacker: player,
@@ -809,6 +820,13 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       } else if (moveDef.effect?.type === 'confusion') applyConfusion(attack.defender, events, !attack.isPlayer)
       else if (moveDef.effect?.type === 'leechSeed')
         applyLeechSeed(attack.defender, events, !attack.isPlayer)
+      else if (moveDef.effect?.type === 'weather') {
+        activeWeather = { type: moveDef.effect.weather, turns: WEATHER_TURNS }
+        events.push({
+          type: 'weather',
+          message: `The weather became ${WEATHER_NAMES[moveDef.effect.weather] ?? moveDef.effect.weather}!`,
+        })
+      }
       continue
     }
     // Levitate / type-absorbing abilities negate the move (and usually heal).
@@ -943,12 +961,13 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     }
     if (screenApplies(attack.defender, moveDef) && !anyCrit)
       totalDamage = Math.max(1, Math.floor(totalDamage / 2))
-    // Ability + held-item damage modifiers (Thick Fat, Life Orb, ...).
+    // Ability + held-item + weather damage modifiers.
     totalDamage = Math.floor(
       totalDamage *
         abilityDamageDealtMultiplier(attack.attacker, moveDef) *
         abilityDamageTakenMultiplier(attack.defender, moveDef) *
-        heldDamageMultiplier(attack.attacker, moveDef)
+        heldDamageMultiplier(attack.attacker, moveDef) *
+        weatherDamageMultiplier(activeWeather, moveDef)
     )
     if (abilityHalvesSuperEffective(attack.defender) && damageResult.effectiveness > 1)
       totalDamage = Math.max(1, Math.floor(totalDamage / 2))
@@ -1273,7 +1292,73 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         },
       })
     }
+    // Weather chip damage and weather-ability healing.
+    const weatherDamage = weatherResidualDamage(activeWeather, pokemon)
+    if (weatherDamage > 0 && !abilityIgnoresIndirectDamage(pokemon)) {
+      pokemon.currentHp = Math.max(0, pokemon.currentHp - weatherDamage)
+      events.push({
+        type: 'damage',
+        message: `${pokemon.name} was buffeted by the weather! (${weatherDamage} damage)`,
+        data: {
+          target: isPlayerSide ? 'player' : 'enemy',
+          damage: weatherDamage,
+          hpAfter: pokemon.currentHp,
+          hpMax: pokemon.maxHp,
+        },
+      })
+      pokemon.currentHp <= 0 &&
+        events.push({
+          type: 'faint',
+          message: `${pokemon.name} fainted!`,
+          data: {
+            target: isPlayerSide ? 'player' : 'enemy',
+          },
+        })
+    }
+    const weatherHeal = weatherAbilityHeal(activeWeather, pokemon)
+    if (weatherHeal > 0) {
+      const healed = Math.min(pokemon.maxHp, pokemon.currentHp + weatherHeal)
+      events.push({
+        type: 'heal',
+        message: `${pokemon.name} absorbed the weather! (+${healed - pokemon.currentHp} HP)`,
+        data: {
+          target: isPlayerSide ? 'player' : 'enemy',
+          hpAfter: healed,
+          hpMax: pokemon.maxHp,
+        },
+      })
+      pokemon.currentHp = healed
+    } else if (weatherHeal < 0 && !abilityIgnoresIndirectDamage(pokemon)) {
+      pokemon.currentHp = Math.max(0, pokemon.currentHp + weatherHeal)
+      events.push({
+        type: 'damage',
+        message: `${pokemon.name} was hurt by the harsh sunlight! (${-weatherHeal} damage)`,
+        data: {
+          target: isPlayerSide ? 'player' : 'enemy',
+          damage: -weatherHeal,
+          hpAfter: pokemon.currentHp,
+          hpMax: pokemon.maxHp,
+        },
+      })
+    }
   }
+  // Weather wears off when its turns run out.
+  if (activeWeather) {
+    activeWeather = { type: activeWeather.type, turns: activeWeather.turns - 1 }
+    if (activeWeather.turns <= 0) {
+      events.push({
+        type: 'weather',
+        message: `The ${WEATHER_NAMES[activeWeather.type] ?? activeWeather.type} subsided.`,
+      })
+      activeWeather = null
+    }
+  }
+  // Report the field's weather so the reducer can store it.
+  if (JSON.stringify(activeWeather) !== JSON.stringify(weather ?? null))
+    events.push({
+      type: 'weather',
+      data: { weather: activeWeather },
+    })
   // Screens wear off after five turns.
   for (const pokemon of [player, enemy]) {
     if (!pokemon.screens) continue

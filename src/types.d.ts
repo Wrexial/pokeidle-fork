@@ -155,6 +155,9 @@ type CatchRule = {
   enabledBalls: string[]
 }
 
+/** Active field weather for the current battle. */
+type BattleWeather = { type: string; turns: number }
+
 /** Extra information a situational ball needs at catch time. */
 type CatchContext = {
   /** Target's level (Nest Ball). */
@@ -245,6 +248,8 @@ type GameState = {
   pendingEvents: any[]
   /** Turns the current battle has lasted (reset when a new one starts). */
   battleTurn: number
+  /** Active field weather (rain/sun/sandstorm/snow/hail), or null. */
+  weather: BattleWeather | null
   currentRoute: string
   currentLocation: string
   unlockedLocations: string[]

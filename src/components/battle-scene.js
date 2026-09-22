@@ -8,6 +8,7 @@ import { dailyEventByKey } from '../data/daily-events.js'
 import { hasClaimableQuests } from '../game/quests.js'
 import { locationImages } from '../data/ui.js'
 import { shouldOfferMasterBall } from '../game/catching.js'
+import { WEATHER_ICONS, WEATHER_NAMES } from '../game/weather.js'
 import { completedGenerations, mapData, moveData, pokemonSpecies, speciesKeysByGeneration } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { shinyOddsForCompletedGenerations } from '../game/progression.js'
@@ -95,6 +96,16 @@ export function BattleScene() {
       backgroundImage: `url('${battleBackground}')`,
     },
     children: [
+      state.weather &&
+        jsx('div', {
+          className: `battle-weather-badge weather-${state.weather.type}`,
+          title: `${WEATHER_NAMES[state.weather.type] ?? state.weather.type} \u2014 ${
+            state.weather.turns
+          } turns left`,
+          children: `${WEATHER_ICONS[state.weather.type] ?? ''} ${
+            WEATHER_NAMES[state.weather.type] ?? state.weather.type
+          } \u00b7 ${state.weather.turns}`,
+        }),
       jsxs('div', {
         className: 'battle-top-buttons',
         children: [

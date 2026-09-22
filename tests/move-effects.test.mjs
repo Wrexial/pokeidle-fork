@@ -382,7 +382,9 @@ test('Grass types are immune to Leech Seed', () => {
 
 test('the utility overrides are applied', () => {
   assert.equal(moveData.leechSeed.effect.type, 'leechSeed')
-  assert.equal(moveData.snowscape.effect, null)
+  assert.equal(moveData.snowscape.effect.type, 'weather')
+  assert.equal(moveData.snowscape.effect.weather, 'snow')
+  assert.equal(moveData.rainDance.effect.weather, 'rain')
 })
 
 test('Aurora Veil raises both screens', () => {

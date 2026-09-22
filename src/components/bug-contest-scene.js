@@ -13,6 +13,7 @@ import {
   BUG_CONTEST_BUSHES,
   BUG_CONTEST_RUSTLES,
   bugStays,
+  buildContestResults,
   rollContestBug,
   throwNetBall,
 } from '../game/minigames.js'
@@ -31,7 +32,10 @@ export function BugContestScene() {
     [rustlesLeft, setRustlesLeft] = React.useState(BUG_CONTEST_RUSTLES),
     [caught, setCaught] = React.useState(/** @type {ContestBug[]} */ ([])),
     [message, setMessage] = React.useState('Rustle a bush and see what is hiding!'),
-    [madeCatch, setMadeCatch] = React.useState(!1)
+    [madeCatch, setMadeCatch] = React.useState(!1),
+    [results, setResults] = React.useState(
+      () => /** @type {ReturnType<typeof buildContestResults>} */ ([])
+    )
 
   // Resolve a Net Ball throw after a short animation. Kept in an effect so the
   // timer is cleared if the scene closes mid-throw.
@@ -94,6 +98,8 @@ export function BugContestScene() {
 
   function nextRustle() {
     if (rustlesLeft <= 0) {
+      setMessage('The judges tally the scores\u2026')
+      setResults(buildContestResults(caught, baseLevel))
       setStep('done')
       return
     }
@@ -155,39 +161,65 @@ export function BugContestScene() {
               })
             : step === 'done'
               ? jsxs('div', {
-                  className: 'bug-contest-summary',
+                  className: 'bug-contest-results',
                   children: [
                     jsx('span', {
-                      className: 'bug-contest-summary-title',
-                      children: 'The contest is over!',
+                      className: 'bug-contest-results-title',
+                      children: 'Contest Results',
                     }),
-                    caught.length > 0
-                      ? jsx('div', {
-                          className: 'bug-contest-summary-list',
-                          children: caught.map((entry, index) =>
-                            jsxs(
-                              'span',
-                              {
-                                className: 'bug-contest-summary-entry',
-                                children: [
-                                  jsx('img', {
-                                    className: 'bug-contest-summary-sprite',
-                                    src: getPokemonSpriteUrl(
-                                      pokemonSpecies[entry.speciesKey]?.id ?? 0
-                                    ),
-                                    alt: pokemonSpecies[entry.speciesKey]?.name ?? entry.speciesKey,
-                                  }),
-                                  `${pokemonSpecies[entry.speciesKey]?.name ?? entry.speciesKey} Lv.${entry.level} ${genderSymbol(entry.gender)}`,
-                                ],
-                              },
-                              index
-                            )
-                          ),
-                        })
-                      : jsx('span', {
-                          className: 'bug-contest-summary-empty',
-                          children: 'You did not catch anything this time.',
-                        }),
+                    jsx('div', {
+                      className: 'bug-contest-podium',
+                      children: [1, 0, 2]
+                        .map((place) => ({ place, entry: results[place] }))
+                        .filter(({ entry }) => entry)
+                        .map(({ place, entry }) =>
+                          jsxs(
+                            'div',
+                            {
+                              className: `bug-contest-place place-${place + 1}${
+                                entry.isPlayer ? ' player' : ''
+                              }`,
+                              children: [
+                                jsx('span', {
+                                  className: 'bug-contest-place-rank',
+                                  children: ['1st', '2nd', '3rd'][place],
+                                }),
+                                jsx('img', {
+                                  className: 'bug-contest-place-sprite',
+                                  src: getPokemonSpriteUrl(pokemonSpecies[entry.speciesKey]?.id ?? 0),
+                                  alt: pokemonSpecies[entry.speciesKey]?.name ?? entry.speciesKey,
+                                }),
+                                jsx('span', {
+                                  className: 'bug-contest-place-name',
+                                  children: pokemonSpecies[entry.speciesKey]?.name ?? entry.speciesKey,
+                                }),
+                                jsxs('span', {
+                                  className: 'bug-contest-place-detail',
+                                  children: [`Lv.${entry.level} `, genderSymbol(entry.gender)],
+                                }),
+                                jsx('span', {
+                                  className: 'bug-contest-place-owner',
+                                  children: entry.owner,
+                                }),
+                                jsx('span', {
+                                  className: 'bug-contest-place-score',
+                                  children: `Score ${entry.score}`,
+                                }),
+                              ],
+                            },
+                            `${entry.owner}-${entry.speciesKey}-${place}`
+                          )
+                        ),
+                    }),
+                    jsx('span', {
+                      className: 'bug-contest-results-note',
+                      children:
+                        caught.length > 0
+                          ? `You caught ${caught.length} bug${caught.length === 1 ? '' : 's'}: ${caught
+                              .map((bug) => pokemonSpecies[bug.speciesKey]?.name ?? bug.speciesKey)
+                              .join(', ')}.`
+                          : 'You did not catch anything this time.',
+                    }),
                   ],
                 })
               : bug &&

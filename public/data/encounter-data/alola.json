@@ -1203,12 +1203,6 @@
     "maxLevel": 70
    },
    {
-    "speciesKey": "golisopod",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "palossand",
     "weight": 1,
     "minLevel": 70,

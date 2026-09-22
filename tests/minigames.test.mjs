@@ -3,9 +3,9 @@ import assert from 'node:assert/strict'
 
 import { installGameData } from './helpers/game-data.mjs'
 
-installGameData()
+const gameData = installGameData()
 
-const { BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_RUSTLES, MINIGAME_BY_REGION, MINING_COST, SLOT_SPIN_COST, SLOT_SYMBOLS, bugCatchChance, bugFleeChance, bugStays, rewardItemName, rollContestBug, rollMiningReward, spinSlots, throwNetBall } = await import(
+const { BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL, BUG_CONTEST_RUSTLES, MINIGAME_BY_REGION, MINING_COST, SLOT_SPIN_COST, SLOT_SYMBOLS, bugCatchChance, bugFleeChance, bugStays, buildContestResults, contestScore, rewardItemName, rollContestBug, rollMiningReward, spinSlots, throwNetBall } = await import(
   '../src/game/minigames.js'
 )
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
@@ -86,6 +86,39 @@ test('contest bugs roll a level, gender and flee chance', () => {
 
 test('rarer contest bugs are more skittish', () => {
   assert.ok(bugFleeChance('scyther') > bugFleeChance('caterpie'))
+})
+
+test('every non-legendary Bug-type is contest-eligible', () => {
+  const pool = new Set(BUG_CONTEST_POOL.map((entry) => entry.speciesKey))
+  assert.ok(pool.has('caterpie'))
+  assert.ok(pool.has('volcarona'), 'a non-Johto bug is eligible')
+  assert.ok(pool.has('golisopod'))
+  assert.ok(!pool.has('genesect'), 'legendary bugs stay out of the contest')
+  assert.ok(!pool.has('pheromosa'))
+  assert.ok(!pool.has('pikachu'), 'non-bugs are excluded')
+})
+
+test('raid islands no longer hand out non-legendary Bug-types', () => {
+  const { pokemonSpecies, regions } = gameData
+  for (const region of regions)
+    for (const entry of region.raidPool ?? []) {
+      const species = pokemonSpecies[entry.speciesKey]
+      assert.ok(
+        !(species.types ?? []).includes('Bug') || species.legendary,
+        `${entry.speciesKey} in ${region.id} should be contest-only`
+      )
+    }
+})
+
+test('contest results rank the player and fake rivals by score', () => {
+  const playerBug = { speciesKey: 'volcarona', level: 50, gender: 'male', fleeChance: 0.1 },
+    results = buildContestResults([playerBug], 50, 3)
+  assert.ok(results.length >= 4, 'the player plus at least three rival bugs')
+  assert.ok(results.some((entry) => entry.isPlayer), 'the player is on the board')
+  assert.ok(results.some((entry) => !entry.isPlayer), 'the board includes fake rivals')
+  for (let index = 1; index < results.length; index++)
+    assert.ok(results[index - 1].score >= results[index].score, 'the board is sorted by score')
+  assert.equal(contestScore('volcarona'), 550)
 })
 
 test('the contest supplies free Net Balls with a real catch chance', () => {

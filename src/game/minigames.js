@@ -102,27 +102,37 @@ export const BUG_CONTEST_BALL = 'netball'
 const CONTEST_LEVEL_SPREAD = 3
 
 /**
- * Contest bugs, with a weight (how often one turns up). Weaker bugs are
- * common, the headline catches are rare.
+ * Every non-legendary Bug-type is eligible for the contest. Common bugs (high
+ * catch rate) turn up more often; the hard-to-catch headline acts are rare.
  * @type {{ speciesKey: string, weight: number }[]}
  */
-export const BUG_CONTEST_POOL = [
-  { speciesKey: 'caterpie', weight: 22 },
-  { speciesKey: 'weedle', weight: 22 },
-  { speciesKey: 'ledyba', weight: 16 },
-  { speciesKey: 'spinarak', weight: 16 },
-  { speciesKey: 'paras', weight: 12 },
-  { speciesKey: 'venonat', weight: 10 },
-  { speciesKey: 'pineco', weight: 9 },
-  { speciesKey: 'yanma', weight: 6 },
-  { speciesKey: 'ariados', weight: 5 },
-  { speciesKey: 'forretress', weight: 4 },
-  { speciesKey: 'scyther', weight: 2 },
-  { speciesKey: 'pinsir', weight: 2 },
-  { speciesKey: 'heracross', weight: 2 },
-]
+export const BUG_CONTEST_POOL = Object.entries(pokemonSpecies)
+  .filter(
+    ([, entry]) =>
+      entry.id > 0 &&
+      entry.id <= 1025 &&
+      !entry.legendary &&
+      (entry.types ?? []).includes('Bug')
+  )
+  .map(([speciesKey, entry]) => ({
+    speciesKey,
+    // 255 catch rate -> 43; 45 -> 8.
+    weight: Math.max(1, Math.round((entry.catchRate ?? 255) / 6)),
+  }))
 
 const BUG_TOTAL_WEIGHT = BUG_CONTEST_POOL.reduce((sum, entry) => sum + entry.weight, 0)
+
+/**
+ * A bug's contest score: its total base stats.
+ * @param {string} speciesKey
+ * @returns {number}
+ */
+export function contestScore(speciesKey) {
+  const species = pokemonSpecies[speciesKey]
+  return species
+    ? Object.values(species.baseStats ?? {}).reduce((sum, value) => sum + value, 0)
+    : 0
+}
 
 /**
  * How likely a bug is to flee after a failed throw. Rarer bugs (lower catch
@@ -204,6 +214,74 @@ export function throwNetBall(speciesKey) {
  */
 export function bugStays(speciesKey) {
   return Math.random() >= bugFleeChance(speciesKey)
+}
+
+/** Fake rival names for the results board. */
+const BUG_CONTEST_RIVALS = [
+  'Bug Catcher Doug',
+  'Youngster Joey',
+  'Camper Barry',
+  'Picnicker Liz',
+  'Fisherman Ralph',
+  'Ace Trainer Kelsey',
+]
+
+/**
+ * Roll the fake rivals' submitted catches. Each brings one to three bugs from
+ * the same pool the player sees.
+ * @param {number} [baseLevel]
+ * @param {number} [count]
+ * @returns {{ name: string, bugs: ReturnType<typeof rollContestBug>[] }[]}
+ */
+export function rollContestRivals(baseLevel = 20, count = 3) {
+  const names = [...BUG_CONTEST_RIVALS].sort(() => Math.random() - 0.5).slice(0, count)
+  return names.map((name) => ({
+    name,
+    bugs: Array.from(
+      { length: 1 + Math.floor(Math.random() * 3) },
+      () => rollContestBug(baseLevel)
+    ),
+  }))
+}
+
+/**
+ * The highest-scoring bug in a list, or null when the list is empty.
+ * @param {ReturnType<typeof rollContestBug>[]} bugs
+ * @returns {ReturnType<typeof rollContestBug> | null}
+ */
+function contestBest(bugs) {
+  let best = null
+  for (const bug of bugs)
+    if (!best || contestScore(bug.speciesKey) > contestScore(best.speciesKey)) best = bug
+  return best
+}
+
+/**
+ * Build the ranked results board: every bug the player caught, plus each fake
+ * rival's single best find, strongest first (ties broken by level).
+ * @param {ReturnType<typeof rollContestBug>[]} playerBugs
+ * @param {number} [baseLevel]
+ * @param {number} [rivalCount]
+ * @returns {{ owner: string, isPlayer: boolean, speciesKey: string, level: number, gender: 'male' | 'female' | 'genderless', score: number }[]}
+ */
+export function buildContestResults(playerBugs, baseLevel = 20, rivalCount = 3) {
+  const board = playerBugs.map((bug) => ({
+    ...bug,
+    owner: 'You',
+    isPlayer: true,
+    score: contestScore(bug.speciesKey),
+  }))
+  for (const rival of rollContestRivals(baseLevel, rivalCount)) {
+    const best = contestBest(rival.bugs)
+    if (best)
+      board.push({
+        ...best,
+        owner: rival.name,
+        isPlayer: false,
+        score: contestScore(best.speciesKey),
+      })
+  }
+  return board.sort((a, b) => b.score - a.score || b.level - a.level)
 }
 
 /** Region -> minigame section metadata for the Gyms panel. */

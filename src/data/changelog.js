@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.29.0'
+export const GAME_VERSION = '0.30.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.30.0',
+      subtitle: 'Contest Showcase',
+      sections: [
+        {
+          heading: 'Minigames',
+          items: [
+            'The Bug Catching Contest now ends with a top-3 results podium, ranking your catches against fake rival bug catchers by total base stats',
+            'Every non-legendary Bug-type Pokemon can now appear in the contest \u2014 and bugs have been cleared out of the Raid Islands, since the contest is now a home for all of them',
+          ],
+        },
+      ],
+    },
     {
       version: '0.29.0',
       subtitle: 'Tower Puzzles',

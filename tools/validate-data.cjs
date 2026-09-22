@@ -101,6 +101,12 @@ for (const bucket of Object.values(encounterData))
     if (!speciesKeys.has(encounter.speciesKey)) fail(`encounter uses unknown species ${encounter.speciesKey}`)
     obtainable.add(encounter.speciesKey)
   }
+// Every non-legendary Bug-type turns up in the Bug Catching Contest, so those
+// species are obtainable without a Raid Island (as is anything they evolve
+// into). Mirrors the pool in src/game/minigames.js.
+for (const [key, entry] of Object.entries(species))
+  if (entry.id > 0 && entry.id <= 1025 && !entry.legendary && (entry.types ?? []).includes('Bug'))
+    obtainable.add(key)
 let expanded = true
 while (expanded) {
   expanded = false

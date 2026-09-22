@@ -6934,49 +6934,109 @@ img {
     color: var(--gold)
 }
 
-.bug-contest-summary {
+.bug-contest-results {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 8px
 }
 
-.bug-contest-summary-title {
-    font-size: 14px;
+.bug-contest-results-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--gold);
+    text-shadow: 0 2px 0 #1c1408
+}
+
+.bug-contest-podium {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 10px
+}
+
+.bug-contest-place {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    width: 122px;
+    padding: 6px 6px 8px;
+    background: rgba(20,14,6,.82);
+    border: 2px solid #8a7040;
+    border-radius: 6px;
+    color: #fff
+}
+
+.bug-contest-place.place-1 {
+    padding-top: 12px;
+    padding-bottom: 14px;
+    border-color: #f0d060;
+    box-shadow: 0 0 14px rgba(240,208,96,.45)
+}
+
+.bug-contest-place.place-2 {
+    border-color: #c8ccd8
+}
+
+.bug-contest-place.place-3 {
+    border-color: #c88a5a
+}
+
+.bug-contest-place.player {
+    background: rgba(40,30,10,.92)
+}
+
+.bug-contest-place-rank {
+    font-size: 9px;
     font-weight: 700;
     color: var(--gold)
 }
 
-.bug-contest-summary-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    justify-content: center;
-    max-width: 440px
-}
-
-.bug-contest-summary-entry {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 8px;
-    color: #fff;
-    background: rgba(20,14,6,.7);
-    border: 1px solid #8a7040;
-    border-radius: 3px;
-    padding: 2px 5px
-}
-
-.bug-contest-summary-sprite {
-    width: 28px;
-    height: 28px;
+.bug-contest-place-sprite {
+    width: 56px;
+    height: 56px;
     object-fit: contain;
     image-rendering: pixelated
 }
 
-.bug-contest-summary-empty {
-    font-size: 9px;
-    color: var(--parchment)
+.bug-contest-place.place-1 .bug-contest-place-sprite {
+    width: 68px;
+    height: 68px
+}
+
+.bug-contest-place-name {
+    font-size: 10px;
+    font-weight: 700
+}
+
+.bug-contest-place-detail {
+    font-size: 8px;
+    color: var(--gold)
+}
+
+.bug-contest-place-owner {
+    font-size: 7px;
+    color: var(--parchment);
+    opacity: .85;
+    text-align: center
+}
+
+.bug-contest-place.player .bug-contest-place-owner {
+    color: #ffe680;
+    opacity: 1
+}
+
+.bug-contest-place-score {
+    font-size: 8px;
+    font-weight: 700
+}
+
+.bug-contest-results-note {
+    font-size: 8px;
+    color: var(--parchment);
+    text-align: center;
+    max-width: 460px
 }
 
 .bug-contest-lower {

@@ -1482,12 +1482,6 @@
     "maxLevel": 70
    },
    {
-    "speciesKey": "rabsca",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "tinkaton",
     "weight": 1,
     "minLevel": 70,
@@ -1543,12 +1537,6 @@
    },
    {
     "speciesKey": "flutter mane",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "slither wing",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70

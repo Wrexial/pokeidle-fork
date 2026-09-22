@@ -1835,12 +1835,6 @@
     "maxLevel": 70
    },
    {
-    "speciesKey": "armaldo",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "metagross",
     "weight": 1,
     "minLevel": 75,

@@ -21,6 +21,7 @@ npm run build      # production build -> dist/  (gitignored)
 npm run preview    # serve the production build
 npm run typecheck  # tsc --noEmit over src/ (jsconfig.json, checkJs)
 npm run validate   # integrity-check the generated public/data JSON
+npm test           # node --test suite under tests/
 npm run kill-vite  # kill orphaned dev servers (see note below)
 ```
 
@@ -33,13 +34,24 @@ provide an export named 'X'`. If you see something like that after edits, don't
 trust HMR — stop the server (Ctrl-C) and run `npm run kill-vite` (dry run with
 `node tools/kill-vite.cjs --dry`) before restarting `npm run dev`.
 
-There is **no test suite and no linter**. `npm run typecheck` runs the TypeScript
-compiler in JS-checking mode (`jsconfig.json` + `@types/react`) and should stay
-clean; fix it or add JSDoc rather than ignoring errors. `npm run validate`
-integrity-checks the generated JSON (every species has moves and is obtainable,
-teams/encounters reference real species, the map graph is sound, etc.) and
-should stay clean after any data regeneration. Verify behaviour by running the
-dev server and exercising the game in the browser.
+There is **no linter**. `npm run typecheck` runs the TypeScript compiler in
+JS-checking mode (`jsconfig.json` + `@types/react`) and should stay clean; fix
+it or add JSDoc rather than ignoring errors. `npm run validate` integrity-checks
+the generated JSON (every species has moves and is obtainable, teams/encounters
+reference real species, the map graph is sound, etc.) and should stay clean
+after any data regeneration. `npm test` runs the lightweight `node --test`
+suite (see below). Verify behaviour by running the dev server and exercising
+the game in the browser.
+
+**Tests (`tests/`):** `npm test` runs `node --test "tests/**/*.test.mjs"`.
+Files are plain `.mjs` using `node:test`, kept out of the TypeScript project.
+The shared `tests/helpers/game-data.mjs` loads `public/data` (merging the
+split per-region files) into `window.gameDataInjector` so `src/` modules can be
+`import()`ed in Node. Because `src/data/gameData.js` reads those globals during
+its own top-level evaluation, a test must call `installGameData()` and then
+`await import(...)` the modules under test (never a static import). Cover
+reducer/combat/breeding/unlock invariants and keep them deterministic (stub
+`Math.random` where needed).
 
 **Save recovery:** an incompatible/stuck save self-heals without DevTools.
 The save key is **versioned** (`pokemon-idle-save-v<n>`, see `SAVE_VERSION` in
@@ -183,6 +195,7 @@ in `GameLayout`) dispatches `DEBUG_MAX_LEVEL` when the Konami code
 | `public/heal-animation-web.mp4` | Healing animation. |
 | `ui/` | UI textures (parchment, wood button). |
 | `tools/` | One-off scrapers/converters for generating the data JSON, plus `tools/decompile/` (AST rename tool). Not part of the build. |
+| `tests/` | `node --test` suite (`npm test`); `tests/helpers/game-data.mjs` loads `public/data` for headless module tests. |
 | `dist/` | Build output. Gitignored — never edit or commit. |
 
 ## Data files (`public/data/`)
@@ -585,8 +598,10 @@ These scripts hit external sites (Serebii, PokémonDB) and may write large files
 
 ## Verifying changes
 
-1. `npm run dev` and load the game.
-2. Open the browser console and confirm `window.gameDataDebug.status()` reports
+1. `npm test` and `npm run typecheck` should pass; `npm run validate` after any
+   data regeneration.
+2. `npm run dev` and load the game.
+3. Open the browser console and confirm `window.gameDataDebug.status()` reports
    `loaded: true, hasError: false`.
-3. Play through the affected flow (encounter, battle, evolution, shop, etc.).
-4. `npm run build` should succeed with no errors before finishing.
+4. Play through the affected flow (encounter, battle, evolution, shop, etc.).
+5. `npm run build` should succeed with no errors before finishing.

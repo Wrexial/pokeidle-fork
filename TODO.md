@@ -23,12 +23,11 @@ working order, and the numbered sections as the details.
 toast queue, #1 healing items, #12 dex rewards, #21 unlock tokens, #33
 Rare/Exp. Candies, #34 sellable valuables, #15 save export/import (slots and
 share codes still open), #41 box "New" sort prepend, #37 the Master Ball
-button, and #2b natures. The remaining items, best return first:
+button, #2b natures, and #14 the `node --test` suite. The remaining items, best
+return first:
 
-1. **#14 Lightweight test suite** — S–M · ★★★½ (dev value) — pays off every
-   future change.
-2. **#5 Daily / periodic events** — S–M · ★★★ — cheap engagement loop.
-3. **#16 More ideas (grab bag)** — mostly S · ★★★ — mine the quick ones
+1. **#5 Daily / periodic events** — S–M · ★★★ — cheap engagement loop.
+2. **#16 More ideas (grab bag)** — mostly S · ★★★ — mine the quick ones
    (achievement rewards, release/selling, map QoL, notifications).
 
 ### Tier 2 — High impact, worth the effort (medium–large)
@@ -266,19 +265,17 @@ When a gate is satisfied the player still has to travel manually.
 
 Effort: **small**.
 
-## 14. A lightweight test suite
+## 14. ✅ A lightweight test suite — shipped
 
-There's no test runner (`AGENTS.md` calls `npm run validate` the closest thing),
-so reducer/combat/breeding invariants are only checked by ad-hoc headless
-scripts. `node --test` plus the existing `window.gameDataInjector.data` mock
-pattern would lock them in.
-
-- [ ] `npm test` running `node --test tools/../tests/*.test.mjs` (or similar).
-- [ ] Cover: `computeUnlockedLocations` (prestige re-lock, unlock tokens),
-      `resolveBattleTurn` (status/drain/flee), breeding compatibility, the
-      reducer's key actions, `checkShinyOdds`.
-
-Effort: **small–medium**, pays off every future change.
+Done. `npm test` runs `node --test "tests/**/*.test.mjs"`. `tests/helpers/game-data.mjs`
+loads the real `public/data` JSON into `window.gameDataInjector` so the src
+modules can be `import()`ed headlessly (call `installGameData()` first, then
+dynamic-import). Covered: `computeUnlockedLocations` (badge gates + prestige
+re-lock), `getRegionUnlockTokens`, `resolveBattleTurn` (status/drain/residual
+poison/roamer flee), breeding compatibility and egg species, `checkShinyOdds`,
+`shinyChainMultiplier`, natures including the mint and save migration, and the
+reducer's starter/catch/box-order/Master Ball flows. See AGENTS.md for the
+pattern.
 
 ## 15. Save management & sharing
 
@@ -1176,6 +1173,11 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+Test suite: `npm test` runs a `node --test` suite under `tests/` covering
+unlocks, battle status/drain/flee, breeding, natures, shiny odds and the
+reducer's key actions, using a helper that loads `public/data` into
+`window.gameDataInjector` for headless imports (no version bump \u2014 dev-only).
 
 0.9.3 (natures): every Pokemon rolls one of the 25 natures (shown on the stats
 panel, applied in `calculatePokemonStats`, migrated for old saves); a Nature

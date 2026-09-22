@@ -67,6 +67,7 @@ Development checks:
 
 ```bash
 npm run typecheck  # tsc --noEmit (JS checking mode, strict)
+npm test           # node --test suite (reducer/combat/breeding/unlocks)
 npm run validate   # integrity-check the generated public/data JSON
 ```
 

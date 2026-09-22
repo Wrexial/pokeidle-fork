@@ -27,8 +27,8 @@ button, #2b natures, #14 the `node --test` suite, #5 daily events, and #16's
 achievement rewards, map QoL, release rewards and notifications. The remaining
 items, best return first:
 
-1. **#16 More ideas (grab bag)** — mostly S · ★★★ — still open: Nuzlocke /
-   monotype challenge modes and a performance pass.
+1. **#16 More ideas (grab bag)** — mostly S · ★★★ — still open: monotype runs
+   and a performance pass. (Nuzlocke shipped 0.23.0.)
 
 ### Tier 2 — High impact, worth the effort (medium–large)
 
@@ -341,8 +341,10 @@ Smaller or more speculative, roughly highest-value first:
 - [x] **Challenge modes: Randomizer & Level Scaling** — toggles in Settings that
       roll random wild species / match wild levels to your active Pokemon.
       Shipped 0.9.23.
-- [ ] **Challenge modes: Nuzlocke / monotype** — permanent-faint and single-type
-      runs still open.
+- [x] **Challenge mode: Nuzlocke** — a Settings toggle; a fainted party
+      Pokemon is released for good, sparing the last one so a full wipe can't
+      brick the save. Shipped 0.23.0.
+- [ ] **Challenge mode: monotype** — a single-type run is still open.
 - [x] **Form-changing items** — reversible transforms now use their canonical,
       **reusable** items (Rotom Catalog, Gracidea, Meteorite, DNA Splicers, …)
       sold in the Reward Shop instead of a level gate; `START_EVOLUTION` leaves
@@ -1188,6 +1190,9 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.23.0 (Nuzlocke): a Settings challenge toggle releases fainted party Pokemon
+permanently (the last one is always spared). #16's Nuzlocke is done.
 
 0.22.0 (battle polish): Haze/Clear Smog reset stat stages, contact abilities
 (Static/Flame Body/Poison Point/Effect Spore/Cute Charm/Rough Skin/Iron Barbs)

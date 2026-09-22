@@ -213,7 +213,7 @@ export function SettingsModal({ onClose }) {
                       jsx('p', {
                         className: 'settings-hint',
                         children:
-                          'Optional hard-mode rules. Randomizer rolls a random species on every wild encounter; Level Scaling makes wild Pokemon match your active Pokemon\u2019s level so you cannot out-level content.',
+                          'Optional hard-mode rules. Randomizer rolls a random species on every wild encounter; Level Scaling makes wild Pokemon match your active Pokemon\u2019s level so you cannot out-level content; Nuzlocke releases a Pokemon for good when it faints.',
                       }),
                       jsx('button', {
                         className: `settings-toggle-btn${state.challengeRandomizer ? ' active' : ''}`,
@@ -228,6 +228,11 @@ export function SettingsModal({ onClose }) {
                         children: state.challengeLevelScale
                           ? 'Level Scaling: ON'
                           : 'Level Scaling: OFF',
+                      }),
+                      jsx('button', {
+                        className: `settings-toggle-btn${state.challengeNuzlocke ? ' active' : ''}`,
+                        onClick: () => dispatch({ type: 'TOGGLE_CHALLENGE_NUZLOCKE' }),
+                        children: state.challengeNuzlocke ? 'Nuzlocke: ON' : 'Nuzlocke: OFF',
                       }),
                     ],
                   }),

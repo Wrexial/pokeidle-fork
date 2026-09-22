@@ -1,10 +1,22 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.22.0'
+export const GAME_VERSION = '0.23.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.23.0',
+      subtitle: 'Nuzlocke Mode',
+      sections: [
+        {
+          heading: 'Challenges',
+          items: [
+            'Added a Nuzlocke challenge toggle in Settings: when a party Pokemon faints it is released for good (your last Pokemon is always spared, so a full wipe can\u2019t brick the save)',
+          ],
+        },
+      ],
+    },
     {
       version: '0.22.0',
       subtitle: 'Battle Polish',

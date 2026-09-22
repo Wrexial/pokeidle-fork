@@ -448,18 +448,42 @@ export function createIdleBattleState() {
 }
 
 /**
+ * Nuzlocke: release any party Pokemon that fainted. Never releases the last
+ * fighter, so a full wipe can't leave the player with nothing.
+ * @param {GameState} state
+ * @returns {GameState}
+ */
+function applyNuzlockeRelease(state) {
+  if (!state.challengeNuzlocke) return state
+  const fainted = state.party.filter(
+      (member) => !member.isEgg && (member.currentHp ?? 0) <= 0
+    ),
+    survivors = state.party.filter((member) => member.isEgg || (member.currentHp ?? 0) > 0)
+  if (fainted.length === 0 || survivors.length === 0) return state
+  const lostIds = new Set(fainted.map((member) => member.id))
+  return {
+    ...state,
+    party: state.party.filter((member) => !lostIds.has(member.id)),
+    battleLog: [
+      ...state.battleLog,
+      ...fainted.map((member) => `Nuzlocke: ${member.name} fainted and was released.`),
+    ].slice(-50),
+  }
+}
+
+/**
  * @param {GameState} state
  * @returns {GameState}
  */
 export function prepareNextBattle(state) {
-  const synced = syncActivePokemonIntoParty(state),
-    firstAliveIndex = synced.party.findIndex((member) => isBattleReady(member)),
+  const released = applyNuzlockeRelease(syncActivePokemonIntoParty(state)),
+    firstAliveIndex = released.party.findIndex((member) => isBattleReady(member)),
     nextIndex = firstAliveIndex >= 0 ? firstAliveIndex : 0
   return {
-    ...synced,
+    ...released,
     ...createIdleBattleState(),
     activePlayerPokemonIndex: nextIndex,
-    playerPokemon: synced.party[nextIndex] || synced.playerPokemon,
+    playerPokemon: released.party[nextIndex] || released.playerPokemon,
   }
 }
 

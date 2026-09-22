@@ -117,6 +117,8 @@ export const initialGameState = {
   challengeRandomizer: !1,
   /** Challenge: wild encounter levels match your active Pokemon. */
   challengeLevelScale: !1,
+  /** Challenge: a fainted party Pokemon is released permanently. */
+  challengeNuzlocke: !1,
   raidCooldownEnd: null,
   raidLegendary: null,
   raidRegion: null,
@@ -2723,6 +2725,11 @@ export function gameReducer(state, action) {
       return {
         ...state,
         challengeLevelScale: !state.challengeLevelScale,
+      }
+    case 'TOGGLE_CHALLENGE_NUZLOCKE':
+      return {
+        ...state,
+        challengeNuzlocke: !state.challengeNuzlocke,
       }
     case 'BUY_REWARD_ITEM': {
       const { itemId, cost } = action.payload

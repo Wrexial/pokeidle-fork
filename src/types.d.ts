@@ -290,6 +290,8 @@ type GameState = {
   challengeRandomizer: boolean
   /** Challenge: wild encounter levels match your active Pokemon. */
   challengeLevelScale: boolean
+  /** Challenge: a fainted party Pokemon is released permanently. */
+  challengeNuzlocke: boolean
   nextPokemonId: number
   money: number
   inventory: Record<string, number>

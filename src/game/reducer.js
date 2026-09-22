@@ -87,6 +87,10 @@ export const initialGameState = {
   autoProceed: !1,
   /** Whether key events raise a browser notification while the tab is hidden. */
   browserNotifications: !1,
+  /** Force reduced-motion animations off, regardless of the OS setting. */
+  reducedMotion: !1,
+  /** Add type labels to moves so type is not conveyed by colour alone. */
+  colourblindTypes: !1,
   raidCooldownEnd: null,
   raidLegendary: null,
   raidRegion: null,
@@ -2220,6 +2224,16 @@ export function gameReducer(state, action) {
       return {
         ...state,
         browserNotifications: !state.browserNotifications,
+      }
+    case 'TOGGLE_REDUCED_MOTION':
+      return {
+        ...state,
+        reducedMotion: !state.reducedMotion,
+      }
+    case 'TOGGLE_COLOURBLIND_TYPES':
+      return {
+        ...state,
+        colourblindTypes: !state.colourblindTypes,
       }
     case 'BUY_REWARD_ITEM': {
       const { itemId, cost } = action.payload

@@ -1,10 +1,22 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.9.11'
+export const GAME_VERSION = '0.9.12'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.9.12',
+      subtitle: 'Accessibility Options',
+      sections: [
+        {
+          heading: 'Settings',
+          items: [
+            'New Accessibility options: force Reduced Motion (overrides the OS setting) and turn on Move Type Labels, which print each move\u2019s type so it is not conveyed by colour alone',
+          ],
+        },
+      ],
+    },
     {
       version: '0.9.11',
       subtitle: 'Combat Feedback',

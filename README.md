@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/Wrexial/pokeidle-fork/actions/workflows/ci.yml/badge.svg)](https://github.com/Wrexial/pokeidle-fork/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Game version](https://img.shields.io/badge/version-0.9.11-blue.svg)](src/data/changelog.js)
+[![Game version](https://img.shields.io/badge/version-0.9.12-blue.svg)](src/data/changelog.js)
 
 A browser-based **incremental / idle Pokémon game**. Train a party, battle wild
 Pokémon, catch and evolve them, take on gyms, the Elite Four and each region's

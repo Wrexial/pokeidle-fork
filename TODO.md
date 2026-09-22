@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.11**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.12**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -29,7 +29,7 @@ items, best return first:
 
 1. **#16 More ideas (grab bag)** — mostly S · ★★★ — still open: quests,
    challenge modes (Nuzlocke / monotype / randomizer), form-changing items,
-   accessibility, audio and a performance pass.
+   audio, a larger-text option and a performance pass.
 
 ### Tier 2 — High impact, worth the effort (medium–large)
 
@@ -319,8 +319,11 @@ Smaller or more speculative, roughly highest-value first:
       Candy by level tier (double for shinies) via `releaseReward`, previewed in
       the release confirmation; selling items already shipped with #34. Shipped
       in 0.9.7.
-- [ ] **Accessibility** — reduced-motion toggle, colourblind-safe type badges,
-      larger text option.
+- [x] **Accessibility: motion & colour** — a settings toggle forces reduced
+      motion (overrides the OS), and "Move Type Labels" prints each move's type
+      so it isn't colour-only. Shipped in 0.9.12.
+- [ ] **Accessibility: larger text** — a UI text-size option; the pixel UI is
+      fixed-size today, so this needs a scalable layout first.
 - [ ] **Audio** — region music and catch/level-up SFX (currently silent).
 - [x] **Combat feedback** — damage now floats above the hit Pokemon and the
       sprite shakes on impact (both honour reduced-motion). Shipped in 0.9.11.
@@ -1185,6 +1188,9 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.9.12 (accessibility): settings to force reduced motion (overriding the OS
+preference) and to print move type labels so type isn't colour-only.
 
 0.9.11 (combat feedback): damage pops as a floating number above the struck
 Pokemon and the sprite shakes on impact; both respect reduced-motion.

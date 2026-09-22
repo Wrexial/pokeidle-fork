@@ -196,6 +196,10 @@ type GameState = {
   autoProceed: boolean
   /** Raise browser notifications for key events while the tab is hidden. */
   browserNotifications: boolean
+  /** Force reduced-motion animations off, regardless of the OS setting. */
+  reducedMotion: boolean
+  /** Add type labels to moves so type is not conveyed by colour alone. */
+  colourblindTypes: boolean
   nextPokemonId: number
   money: number
   inventory: Record<string, number>

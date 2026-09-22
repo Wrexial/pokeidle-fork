@@ -893,3 +893,16 @@ export function useAwayAlert() {
     return () => document.removeEventListener('visibilitychange', handleVisibilityChange)
   }, [dispatch])
 }
+
+/**
+ * Reflect the accessibility display preferences onto the document root so the
+ * stylesheet can react (reduced motion, colourblind-friendly move labels).
+ */
+export function useAccessibilitySettings() {
+  const { state } = useGame()
+  return React.useEffect(() => {
+    const root = document.documentElement
+    root.dataset.reducedMotion = state.reducedMotion ? 'true' : 'false'
+    root.dataset.colourblindTypes = state.colourblindTypes ? 'true' : 'false'
+  }, [state.reducedMotion, state.colourblindTypes])
+}

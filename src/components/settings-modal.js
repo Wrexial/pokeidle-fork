@@ -179,6 +179,29 @@ export function SettingsModal({ onClose }) {
                     children: [
                       jsx('div', {
                         className: 'settings-section-title',
+                        children: 'Accessibility',
+                      }),
+                      jsx('button', {
+                        className: `settings-toggle-btn${state.reducedMotion ? ' active' : ''}`,
+                        onClick: () => dispatch({ type: 'TOGGLE_REDUCED_MOTION' }),
+                        children: state.reducedMotion
+                          ? 'Reduced Motion: ON'
+                          : 'Reduced Motion: OFF',
+                      }),
+                      jsx('button', {
+                        className: `settings-toggle-btn${state.colourblindTypes ? ' active' : ''}`,
+                        onClick: () => dispatch({ type: 'TOGGLE_COLOURBLIND_TYPES' }),
+                        children: state.colourblindTypes
+                          ? 'Move Type Labels: ON'
+                          : 'Move Type Labels: OFF',
+                      }),
+                    ],
+                  }),
+                  jsxs('div', {
+                    className: 'settings-section',
+                    children: [
+                      jsx('div', {
+                        className: 'settings-section-title',
                         children: 'Save Data',
                       }),
                       jsx('p', {

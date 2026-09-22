@@ -3029,23 +3029,6 @@
    }
   ]
  },
- "trainingArea": {
-  "name": "Training Area",
-  "encounters": [
-   {
-    "speciesKey": "chansey",
-    "weight": 90,
-    "minLevel": 73,
-    "maxLevel": 75
-   },
-   {
-    "speciesKey": "blissey",
-    "weight": 10,
-    "minLevel": 73,
-    "maxLevel": 75
-   }
-  ]
- },
  "raidIsland": {
   "name": "Raid Island",
   "encounters": [

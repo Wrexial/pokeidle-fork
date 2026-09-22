@@ -35,8 +35,7 @@
   "routeKey": "victoryRoad",
   "connections": [
    "route23",
-   "indigoPlat",
-   "trainingArea"
+   "indigoPlat"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1401,34 +1400,5 @@
   },
   "region": "kanto",
   "routeKey": "raidIsland"
- },
- "trainingArea": {
-  "id": "trainingArea",
-  "name": "training area",
-  "type": "route",
-  "description": "WTF?!",
-  "routeKey": "trainingArea",
-  "connections": [
-   "victoryRoad"
-  ],
-  "unlock": {
-   "battlesAtLocation": [
-    {
-     "locationId": "victoryRoad",
-     "count": 30
-    },
-    {
-     "locationId": "cinnabarIsland",
-     "count": 15
-    }
-   ],
-   "badgesRequired": 8
-  },
-  "unlockOrder": 50,
-  "position": {
-   "x": 5,
-   "y": 16
-  },
-  "region": "kanto"
  }
 }

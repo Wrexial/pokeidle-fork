@@ -40,7 +40,6 @@ export let locationImages = {
     route20: '/backgrounds/beach.png',
     route21: '/backgrounds/beach.png',
     seafoamIslands: '/backgrounds/cave.png',
-    trainingArea: '/backgrounds/cave.png',
   }
 
 export const BATTLE_LOG_MIN_HEIGHT = 30

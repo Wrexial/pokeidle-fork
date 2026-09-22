@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.13.0**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.14.0**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -470,10 +470,9 @@ Still open:
 - [ ] **Entry hazards & screens** (Stealth Rock, Spikes, Reflect, Light Screen,
       Aurora Veil) and the remaining utility moves (Taunt, Substitute, weather)
       — **screens shipped in 0.11.2**; hazards still need a switch-in hook.
-- [ ] **Accuracy / evasion stat stages** (currently only accuracy from the move
-      itself, no stages).
-- [ ] Additional statuses if added to the data — **paralysis, toxic and
-      confusion shipped in 0.11.1**; still missing infatuation, leech seed,
+- ✅ **Accuracy / evasion stat stages** — shipped 0.14.0.
+- [ ] Additional statuses if added to the data — **paralysis/toxic/confusion
+      (0.11.1) and Leech Seed (0.14.0) shipped**; still missing infatuation,
       curse, ability-based statuses.
 - [ ] Weather / terrain — see #10.
 - [ ] Ability / held-item hooks — see #2.
@@ -1154,6 +1153,10 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.14.0 (accuracy/evasion & leech seed): stat stages now affect the hit chance
+(Sand Attack, Double Team, ...), Leech Seed drains into the planter, and the
+Snowscape data bug is fixed. More #24/#25 leftovers.
 
 0.13.0 (situational balls): Quick/Timer/Repeat/Net/Dive/Dusk/Nest/Premier balls
 with context-aware rates; auto-catch picks the best for the situation. #17 done.

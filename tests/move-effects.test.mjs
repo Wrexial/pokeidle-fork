@@ -310,6 +310,81 @@ test('Reflect halves physical damage and wears off', () => {
   })
 })
 
+test('accuracy and evasion stages change the hit chance', () => {
+  withFixedRandom(0.99, () => {
+    const base = calculateDamage(50, 100, 100, moveData.tackle, ['Normal'], ['Normal']),
+      loweredAccuracy = calculateDamage(
+        50,
+        100,
+        100,
+        moveData.tackle,
+        ['Normal'],
+        ['Normal'],
+        0,
+        0,
+        0,
+        !1,
+        -6
+      ),
+      raisedEvasion = calculateDamage(
+        50,
+        100,
+        100,
+        moveData.tackle,
+        ['Normal'],
+        ['Normal'],
+        0,
+        0,
+        0,
+        !1,
+        0,
+        6
+      )
+    assert.notEqual(base.effectivenessLabel, 'miss')
+    assert.equal(loweredAccuracy.effectivenessLabel, 'miss')
+    assert.equal(raisedEvasion.effectivenessLabel, 'miss')
+  })
+})
+
+test('Leech Seed drains the target into its planter', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['leechSeed'],
+        currentHp: 200,
+        maxHp: 400,
+        speed: 200,
+      }),
+      enemy = battler({
+        name: 'Foe',
+        moves: ['splash'],
+        currentHp: 400,
+        maxHp: 400,
+        types: ['Normal'],
+      }),
+      events = resolveBattleTurn(player, enemy, false)
+    assert.equal(enemy.leechSeeded, true)
+    assert.equal(enemy.currentHp, 350, 'the seeded foe loses 1/8 max HP')
+    assert.equal(player.currentHp, 250, 'the planter is healed by the drain')
+    assert.ok(events.some((/** @type {any} */ event) => event.message.includes('Leech Seed')))
+  })
+})
+
+test('Grass types are immune to Leech Seed', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({ name: 'Player', isPlayer: true, moves: ['leechSeed'], speed: 200 }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], types: ['Grass'] })
+    resolveBattleTurn(player, enemy, false)
+    assert.ok(!enemy.leechSeeded)
+  })
+})
+
+test('the utility overrides are applied', () => {
+  assert.equal(moveData.leechSeed.effect.type, 'leechSeed')
+  assert.equal(moveData.snowscape.effect, null)
+})
+
 test('Aurora Veil raises both screens', () => {
   withFixedRandom(0.5, () => {
     const player = battler({

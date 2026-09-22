@@ -1,10 +1,24 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.13.0'
+export const GAME_VERSION = '0.14.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.14.0',
+      subtitle: 'Accuracy, Evasion & Leech Seed',
+      sections: [
+        {
+          heading: 'Battles',
+          items: [
+            'Accuracy and evasion stat stages now work, so Sand Attack, Flash, Smokescreen, Double Team, Minimize, Sweet Scent and friends actually change the hit chance',
+            'Leech Seed now drains 1/8 of the target\u2019s max HP into the planter each turn (Grass types are immune)',
+            'Fixed Snowscape, which was extracted with a stray \u201craise the opponent\u2019s Defense\u201d effect',
+          ],
+        },
+      ],
+    },
     {
       version: '0.13.0',
       subtitle: 'Situational Poke Balls',

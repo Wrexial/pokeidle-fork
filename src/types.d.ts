@@ -173,6 +173,8 @@ type VolatileState = {
   flinch: boolean
   /** Turns of confusion left (0 when not confused). */
   confusionTurns?: number
+  /** Leech Seed is draining this Pokemon each turn. */
+  leechSeeded?: boolean
   /** Remaining turns of Reflect / Light Screen (0 when down). */
   screens?: { reflect: number, lightScreen: number }
 }

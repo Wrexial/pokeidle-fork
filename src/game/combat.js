@@ -21,6 +21,7 @@ export function createVolatileState() {
     statusTurns: 0,
     flinch: !1,
     confusionTurns: 0,
+    leechSeeded: !1,
     screens: { reflect: 0, lightScreen: 0 },
   }
 }
@@ -77,6 +78,26 @@ function applyStatus(target, status, events, targetIsPlayer) {
     }!`,
     data: {
       target: side,
+    },
+  })
+}
+
+/**
+ * Plant a Leech Seed on a target; it drains 1/8 max HP into the other side
+ * each turn. Grass types are immune, and it doesn't stack.
+ * @param {BattlePokemon} target
+ * @param {any[]} events
+ * @param {boolean} targetIsPlayer
+ */
+function applyLeechSeed(target, events, targetIsPlayer) {
+  if (!target || target.currentHp <= 0 || target.leechSeeded) return
+  if (target.types.includes('Grass')) return
+  target.leechSeeded = !0
+  events.push({
+    type: 'status',
+    message: `${target.name} was seeded!`,
+    data: {
+      target: targetIsPlayer ? 'player' : 'enemy',
     },
   })
 }
@@ -269,6 +290,7 @@ function normalizeStatKey(statKey) {
       'special-defense': 'spDefense',
       'sp-atk': 'spAttack',
       'sp-def': 'spDefense',
+      evasiveness: 'evasion',
     })[statKey] ?? statKey
   )
 }
@@ -294,9 +316,11 @@ function isSelfTargetedMove(moveDef) {
  * @param {number} [defenderStage]
  * @param {number} [critStage]
  * @param {boolean} [skipAccuracy]
+ * @param {number} [accuracyStage]
+ * @param {number} [evasionStage]
  * @returns {{ damage: number, isCrit: boolean, effectiveness: number, effectivenessLabel: string | null }}
  */
-export function calculateDamage(attackerLevel, attack, defense, move, attackerTypes, defenderTypes, attackerStage = 0, defenderStage = 0, critStage = 0, skipAccuracy = !1) {
+export function calculateDamage(attackerLevel, attack, defense, move, attackerTypes, defenderTypes, attackerStage = 0, defenderStage = 0, critStage = 0, skipAccuracy = !1, accuracyStage = 0, evasionStage = 0) {
   if (move.power === 0)
     return {
       damage: 0,
@@ -304,7 +328,9 @@ export function calculateDamage(attackerLevel, attack, defense, move, attackerTy
       effectiveness: 1,
       effectivenessLabel: null,
     }
-  if (!skipAccuracy && Math.random() * 100 >= move.accuracy)
+  const effectiveAccuracy =
+    move.accuracy * statStageMultiplier(accuracyStage - evasionStage)
+  if (!skipAccuracy && Math.random() * 100 >= effectiveAccuracy)
     return {
       damage: 0,
       isCrit: !1,
@@ -731,6 +757,8 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1) {
         })
         moveDef.effect.status && applyStatus(attack.attacker, moveDef.effect.status, events, attack.isPlayer)
       } else if (moveDef.effect?.type === 'confusion') applyConfusion(attack.defender, events, !attack.isPlayer)
+      else if (moveDef.effect?.type === 'leechSeed')
+        applyLeechSeed(attack.defender, events, !attack.isPlayer)
       continue
     }
     const attackStat =
@@ -744,6 +772,8 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1) {
       defenseStatKey = moveDef.category === 'physical' ? 'defense' : 'spDefense',
       attackerStage = getStatStage(attack.attacker, attackStatKey),
       defenderStage = getStatStage(attack.defender, defenseStatKey),
+      accuracyStage = getStatStage(attack.attacker, 'accuracy'),
+      evasionStage = getStatStage(attack.defender, 'evasion'),
       damageResult = calculateDamage(
         attack.attacker.level,
         attackStat,
@@ -753,7 +783,10 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1) {
         attack.defender.types,
         attackerStage,
         defenderStage,
-        moveDef.critStage ?? 0
+        moveDef.critStage ?? 0,
+        !1,
+        accuracyStage,
+        evasionStage
       )
     if (damageResult.effectivenessLabel === 'miss') {
       if (
@@ -810,7 +843,9 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1) {
           attackerStage,
           defenderStage,
           moveDef.critStage ?? 0,
-          !0
+          !0,
+          accuracyStage,
+          evasionStage
         )
         totalDamage += hitResult.damage
         anyCrit = anyCrit || hitResult.isCrit
@@ -974,6 +1009,43 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1) {
   ]
   for (const [pokemon, isPlayerSide] of residualTargets) {
     if (pokemon.currentHp <= 0) continue
+    // Leech Seed drains into the other side independently of a major status.
+    if (pokemon.leechSeeded) {
+      const drain = Math.max(1, Math.floor(pokemon.maxHp / 8)),
+        other = isPlayerSide ? enemy : player,
+        otherBefore = other.currentHp
+      pokemon.currentHp = Math.max(0, pokemon.currentHp - drain)
+      other.currentHp = Math.min(other.maxHp, otherBefore + drain)
+      events.push({
+        type: 'damage',
+        message: `${pokemon.name}'s health is sapped by Leech Seed! (${drain} damage)`,
+        data: {
+          target: isPlayerSide ? 'player' : 'enemy',
+          damage: drain,
+          hpAfter: pokemon.currentHp,
+          hpMax: pokemon.maxHp,
+        },
+      })
+      events.push({
+        type: 'heal',
+        message: `${other.name} drained health! (+${other.currentHp - otherBefore} HP)`,
+        data: {
+          target: isPlayerSide ? 'enemy' : 'player',
+          hpAfter: other.currentHp,
+          hpMax: other.maxHp,
+        },
+      })
+      if (pokemon.currentHp <= 0) {
+        events.push({
+          type: 'faint',
+          message: `${pokemon.name} fainted!`,
+          data: {
+            target: isPlayerSide ? 'player' : 'enemy',
+          },
+        })
+        continue
+      }
+    }
     let residual = 0
     if (pokemon.status === 'poison') residual = Math.max(1, Math.floor(pokemon.maxHp / 8))
     else if (pokemon.status === 'burn') residual = Math.max(1, Math.floor(pokemon.maxHp / 16))
@@ -1035,5 +1107,9 @@ export function getStatLabel(statKey) {
       return 'Sp. Def'
     case 'speed':
       return 'Speed'
+    case 'accuracy':
+      return 'accuracy'
+    case 'evasion':
+      return 'evasiveness'
   }
 }

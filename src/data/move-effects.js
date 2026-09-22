@@ -80,6 +80,11 @@ export const MOVE_OVERRIDES = {
   wickedBlow: { critStage: 3 },
   surgingStrikes: { critStage: 3, multiHit: [3, 3] },
 
+  // --- Utility ---
+  leechSeed: { effect: { type: 'leechSeed' } },
+  // Snowscape was extracted with a stray "raise the opponent's Defense" effect.
+  snowscape: { effect: null },
+
   // --- Screens (halve physical/special damage for 5 turns) ---
   reflect: { screen: 'reflect' },
   lightScreen: { screen: 'lightScreen' },

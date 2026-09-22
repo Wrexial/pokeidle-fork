@@ -10,10 +10,8 @@ import { ACHIEVEMENTS } from '../data/achievements.js'
 import { dailyExpMultiplier, dailyPrizeMultiplier, dailyShinyMultiplier } from '../data/daily-events.js'
 import { useGame } from './context.js'
 import { attemptCatch, isCaveLocation, isNightTime, isWaterLocation, selectAutoCatchBall, selectBestBall, shouldAutoCatch } from './catching.js'
-import { createVolatileState, resolveBattleTurn, volatileStateFromBattle } from './combat.js'
-import { rollGender } from './breeding.js'
-import { rollHeldItem } from './held-items.js'
-import { calculatePokemonStats, generateIVs, getPerfectIVs, isBattleReady, resolvePokemonMoves, rollAbility } from './pokemon.js'
+import { createBattlePokemon, createVolatileState, resolveBattleTurn, volatileStateFromBattle } from './combat.js'
+import { isBattleReady } from './pokemon.js'
 import { awardExperience, checkShinyOdds, pokerusExpMultiplier, resolveActiveModifiers, resolvePokemonEncounter, resolveRoamer, shinyOddsForSpecies } from './progression.js'
 
 export function useGameLoop() {
@@ -55,31 +53,11 @@ export function useGameLoop() {
               pokemonSpecies.missingno &&
               Math.random() < missingnoEncounterChance
             ) {
-              const missingnoLevel = Math.max(5, currentGameState.playerPokemon.level),
-                missingnoStats = calculatePokemonStats(
-                  pokemonSpecies.missingno,
-                  missingnoLevel,
-                  generateIVs()
-                )
+              const missingnoLevel = Math.max(5, currentGameState.playerPokemon.level)
               ;(dispatch({
                 type: 'START_ENCOUNTER',
                 payload: {
-                  enemy: {
-                    speciesKey: 'missingno',
-                    name: pokemonSpecies.missingno.name,
-                    types: pokemonSpecies.missingno.types,
-                    level: missingnoLevel,
-                    currentHp: missingnoStats.hp,
-                    maxHp: missingnoStats.hp,
-                    attack: missingnoStats.attack,
-                    defense: missingnoStats.defense,
-                    spAttack: missingnoStats.spAttack,
-                    spDefense: missingnoStats.spDefense,
-                    speed: missingnoStats.speed,
-                    moves: resolvePokemonMoves('missingno', missingnoLevel),
-                    isPlayer: !1,
-                    isShiny: !1,
-                  },
+                  enemy: createBattlePokemon('missingno', missingnoLevel),
                 },
               }),
                 dispatch({
@@ -102,27 +80,11 @@ export function useGameLoop() {
               pokemonSpecies.mew &&
               Math.random() < mewUnderTruckChance
             ) {
-              const mewLevel = Math.max(5, currentGameState.playerPokemon.level),
-                mewStats = calculatePokemonStats(pokemonSpecies.mew, mewLevel, generateIVs())
+              const mewLevel = Math.max(5, currentGameState.playerPokemon.level)
               ;(dispatch({
                 type: 'START_ENCOUNTER',
                 payload: {
-                  enemy: {
-                    speciesKey: 'mew',
-                    name: pokemonSpecies.mew.name,
-                    types: pokemonSpecies.mew.types,
-                    level: mewLevel,
-                    currentHp: mewStats.hp,
-                    maxHp: mewStats.hp,
-                    attack: mewStats.attack,
-                    defense: mewStats.defense,
-                    spAttack: mewStats.spAttack,
-                    spDefense: mewStats.spDefense,
-                    speed: mewStats.speed,
-                    moves: resolvePokemonMoves('mew', mewLevel),
-                    isPlayer: !1,
-                    isShiny: !1,
-                  },
+                  enemy: createBattlePokemon('mew', mewLevel),
                 },
               }),
                 dispatch({
@@ -142,28 +104,15 @@ export function useGameLoop() {
             const trainerList = trainerData[currentGameState.currentLocation]
             if (!trainerList?.length) return
             const trainer = trainerList[Math.floor(Math.random() * trainerList.length)],
-              trainerTeam = /** @type {any[]} */ (trainer.team).map((teamMember) => {
-                const species = pokemonSpecies[teamMember.speciesKey],
-                  stats = calculatePokemonStats(species, teamMember.level, getPerfectIVs()),
-                  moves = resolvePokemonMoves(teamMember.speciesKey, teamMember.level)
-                return {
-                  speciesKey: teamMember.speciesKey,
-                  name: species.name,
-                  types: species.types,
-                  level: teamMember.level,
-                  currentHp: stats.hp,
-                  maxHp: stats.hp,
-                  attack: stats.attack,
-                  defense: stats.defense,
-                  spAttack: stats.spAttack,
-                  spDefense: stats.spDefense,
-                  speed: stats.speed,
-                  moves,
-                  gender: rollGender(teamMember.speciesKey),
-                  isPlayer: !1,
-                  isShiny: checkShinyOdds(shinyOddsForSpecies(teamMember.speciesKey, completedGenerationSet)),
-                }
-              })
+              trainerTeam = /** @type {any[]} */ (trainer.team).map((teamMember) =>
+                createBattlePokemon(teamMember.speciesKey, teamMember.level, {
+                  perfectIvs: !0,
+                  isShiny: checkShinyOdds(
+                    shinyOddsForSpecies(teamMember.speciesKey, completedGenerationSet)
+                  ),
+                  gender: !0,
+                })
+              )
             dispatch({
               type: 'START_TRAINER_BATTLE',
               payload: {
@@ -184,25 +133,9 @@ export function useGameLoop() {
               species = pokemonSpecies[raidSpeciesKey]
             if (!species) return
             const raidLevel = currentGameState.raidLevel,
-              ivs = generateIVs(),
-              stats = calculatePokemonStats(species, raidLevel, ivs),
-              moves = resolvePokemonMoves(raidSpeciesKey, raidLevel),
-              enemyPokemon = {
-                speciesKey: raidSpeciesKey,
-                name: species.name,
-                types: species.types,
-                level: raidLevel,
-                currentHp: stats.hp,
-                maxHp: stats.hp,
-                attack: stats.attack,
-                defense: stats.defense,
-                spAttack: stats.spAttack,
-                spDefense: stats.spDefense,
-                speed: stats.speed,
-                moves,
-                isPlayer: !1,
+              enemyPokemon = createBattlePokemon(raidSpeciesKey, raidLevel, {
                 isShiny: checkShinyOdds(shinyOddsForSpecies(raidSpeciesKey, completedGenerationSet)),
-              }
+              })
             ;(dispatch({
               type: 'START_ENCOUNTER',
               payload: {
@@ -277,35 +210,11 @@ export function useGameLoop() {
                   ? currentGameState.playerPokemon?.level ?? 0
                   : 0
               ),
-            pokemonBaseStats = calculatePokemonStats(
-              spawningPokemonData.species,
-              spawningPokemonData.level,
-              generateIVs()
-            ),
-            pokemonMoves = resolvePokemonMoves(
-              spawningPokemonData.speciesKey,
-              spawningPokemonData.level
-            ),
-            pokemonData = {
-              speciesKey: spawningPokemonData.speciesKey,
-              name: spawningPokemonData.species.name,
-              types: spawningPokemonData.species.types,
-              level: spawningPokemonData.level,
-              currentHp: pokemonBaseStats.hp,
-              maxHp: pokemonBaseStats.hp,
-              attack: pokemonBaseStats.attack,
-              defense: pokemonBaseStats.defense,
-              spAttack: pokemonBaseStats.spAttack,
-              spDefense: pokemonBaseStats.spDefense,
-              speed: pokemonBaseStats.speed,
-              moves: pokemonMoves,
-              ability: rollAbility(spawningPokemonData.speciesKey),
-              heldItem: rollHeldItem(0.08),
-              gender: rollGender(spawningPokemonData.speciesKey),
-              isPlayer: !1,
-              isRoamer: spawningPokemonData.isRoamer ?? !1,
+            pokemonData = createBattlePokemon(spawningPokemonData.speciesKey, spawningPokemonData.level, {
               isShiny: spawningPokemonData.isShiny,
-            }
+              isRoamer: spawningPokemonData.isRoamer ?? !1,
+              wild: !0,
+            })
           ;(dispatch({
             type: 'START_ENCOUNTER',
             payload: {

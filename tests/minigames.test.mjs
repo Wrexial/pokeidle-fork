@@ -98,14 +98,16 @@ test('every Bug-type is contest-eligible, legendaries included', () => {
   assert.ok(!pool.has('pikachu'), 'non-bugs are excluded')
 })
 
-test('raid islands no longer hand out any Bug-type', () => {
+test('raid islands keep only the legendary Bug-types', () => {
   const { pokemonSpecies, regions } = gameData
   for (const region of regions)
-    for (const entry of region.raidPool ?? [])
+    for (const entry of region.raidPool ?? []) {
+      const species = pokemonSpecies[entry.speciesKey]
       assert.ok(
-        !(pokemonSpecies[entry.speciesKey].types ?? []).includes('Bug'),
+        !(species.types ?? []).includes('Bug') || species.legendary,
         `${entry.speciesKey} in ${region.id} should be contest-only`
       )
+    }
 })
 
 test('contest results rank the player and fake rivals by score', () => {

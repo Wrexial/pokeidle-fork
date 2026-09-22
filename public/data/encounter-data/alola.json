@@ -1299,6 +1299,18 @@
     "maxLevel": 70
    },
    {
+    "speciesKey": "buzzwole",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "pheromosa",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
     "speciesKey": "xurkitree",
     "weight": 1,
     "minLevel": 70,

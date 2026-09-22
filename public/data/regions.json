@@ -371,6 +371,10 @@
    {
     "speciesKey": "meloetta",
     "level": 75
+   },
+   {
+    "speciesKey": "genesect",
+    "level": 75
    }
   ]
  },
@@ -508,6 +512,14 @@
    },
    {
     "speciesKey": "nihilego",
+    "level": 70
+   },
+   {
+    "speciesKey": "buzzwole",
+    "level": 70
+   },
+   {
+    "speciesKey": "pheromosa",
     "level": 70
    },
    {

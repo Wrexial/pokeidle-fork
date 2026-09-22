@@ -1693,12 +1693,18 @@ for (const [bucketKey, bucket] of Object.entries(encounterData)) {
   if (mapData[bucketKey]?.type === 'raid') continue
   for (const encounter of bucket.encounters) routable.add(encounter.speciesKey)
 }
-// The Bug Catching Contest hands out every Bug-type (legendaries included), so
-// those species are obtainable without a Raid Island \u2014 and so is anything
-// they evolve into. Seed them here so they drop out of every region's raid
-// pool.
+// The Bug Catching Contest hands out every non-legendary Bug-type, so those
+// species are obtainable without a Raid Island \u2014 and so is anything they
+// evolve into. Legendary bugs are exempt: they keep their Raid Island slot as
+// well as appearing in the contest. Seed them here so the rest drop out of
+// every region's raid pool.
 for (const [key, entry] of Object.entries(species))
-  if (entry.id > 0 && entry.id <= 1025 && (entry.types ?? []).includes('Bug'))
+  if (
+    entry.id > 0 &&
+    entry.id <= 1025 &&
+    !entry.legendary &&
+    (entry.types ?? []).includes('Bug')
+  )
     routable.add(key)
 let routableExpanded = true
 while (routableExpanded) {

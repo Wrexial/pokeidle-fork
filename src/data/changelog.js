@@ -1,10 +1,24 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.18.0'
+export const GAME_VERSION = '0.19.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.19.0',
+      subtitle: 'Deterministic Battle Tower',
+      sections: [
+        {
+          heading: 'Battle Tower',
+          items: [
+            'Every floor is now a fixed puzzle: the opponent roster is seeded from the floor number, so floor 7 is always the same six Pokemon',
+            'Tower battles run without luck \u2014 no critical hits, no misses and no damage variance \u2014 so the outcome comes down to your team\u2019s stats, types, abilities, moves and held items',
+            'The Gym panel previews the next floor\u2019s opponents (hover for their level, types, ability and item) so you can build a counter before committing to the run',
+          ],
+        },
+      ],
+    },
     {
       version: '0.18.0',
       subtitle: 'Entry Hazards',

@@ -10,7 +10,7 @@ import { createVolatileState } from './combat.js'
 import { calculatePokemonStats, calculateRequiredExperience, createEgg, createPokemon, gainFriendship, getLevelUpResults, insertIntoBox, isBattleReady, judgeIVs, nextBoxSortMode, resolvePokemonMoves, sortBoxMembers } from './pokemon.js'
 import { canBreed, eggHatchSteps, eggSpeciesKey, inheritBreedingTraits } from './breeding.js'
 import { advanceQuests, questLabel, rollQuests } from './quests.js'
-import { buildTrainerTeam, buildTowerTeam, checkShinyOdds, computeUnlockedLocations, formatReward, getRegionUnlockTokens, isActiveEffectItem, loadActivePokemonFromParty, prepareNextBattle, releaseReward, rollCandyDrop, rollValuableDrop, syncActivePokemonIntoParty, tickBattleCounters, tickPartyEggs, tickPokerus } from './progression.js'
+import { buildTrainerTeam, buildTowerFloor, checkShinyOdds, computeUnlockedLocations, formatReward, getRegionUnlockTokens, isActiveEffectItem, loadActivePokemonFromParty, prepareNextBattle, releaseReward, rollCandyDrop, rollValuableDrop, syncActivePokemonIntoParty, tickBattleCounters, tickPartyEggs, tickPokerus } from './progression.js'
 import { applyEntryHazards, emptyBattleHazards } from './hazards.js'
 
 /** @type {GameState} */
@@ -1512,7 +1512,7 @@ export function gameReducer(state, action) {
         // Auto-climb: heal the party and immediately start the next floor so a
         // run only ends when you lose.
         const nextFloor = floor + 1,
-          nextTeam = buildTrainerTeam(buildTowerTeam(nextFloor)),
+          nextTeam = buildTowerFloor(nextFloor),
           firstPokemon = nextTeam[0]
         if (!firstPokemon) return clearedState
         const healedParty = clearedState.party.map((member) => ({

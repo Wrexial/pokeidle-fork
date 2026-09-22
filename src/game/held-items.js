@@ -7,12 +7,11 @@ const HELD_ITEM_KEYS = Object.keys(heldItems)
 /**
  * Roll a random held item for an enemy (or null).
  * @param {number} [chance]
+ * @param {() => number} [rng]
  * @returns {string | null}
  */
-export function rollHeldItem(chance = 0.25) {
-  return Math.random() < chance
-    ? HELD_ITEM_KEYS[Math.floor(Math.random() * HELD_ITEM_KEYS.length)]
-    : null
+export function rollHeldItem(chance = 0.25, rng = Math.random) {
+  return rng() < chance ? HELD_ITEM_KEYS[Math.floor(rng() * HELD_ITEM_KEYS.length)] : null
 }
 
 /** @param {BattlePokemon} pokemon */

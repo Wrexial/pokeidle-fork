@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.18.0**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.19.0**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -796,6 +796,13 @@ credits another region's record, and `repairSave` consolidates legacy
 per-region records into Hoenn (see `tests/battle-tower.test.mjs`). Other regions
 are meant to get their own minigames instead — see #29.
 
+**0.19.0:** the tower is a **deterministic puzzle**. `buildTowerFloor(floor)`
+(`src/game/progression.js`) seeds the roster and ability/item rolls from the
+floor number via `src/game/rng.js`, and `resolveBattleTurn(..., deterministic)`
+drops crits, misses, damage variance, random status effects and the random AI
+gates. The Gym panel previews the next floor's opponents so the player can plan.
+Covered by `tests/deterministic.test.mjs`.
+
 ## 33. Rare Candy and EXP Candy as rare drops
 
 Levelling only comes from battle EXP (`awardExperience`), and the only item
@@ -1174,6 +1181,10 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.19.0 (deterministic Battle Tower): each floor is a fixed seeded opponent and
+tower battles run without crits/misses/variance, with a Gym-panel preview so the
+player can plan a counter.
 
 0.18.0 (entry hazards): Stealth Rock, Spikes, Toxic Spikes and Sticky Web are
 set per side and hit Pokemon on switch-in; the AI uses them too.

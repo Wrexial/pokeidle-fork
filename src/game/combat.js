@@ -55,8 +55,9 @@ const STATUS_IMMUNE_TYPES = {
  * @param {string} status
  * @param {any[]} events
  * @param {boolean} targetIsPlayer whether `target` is the player's Pokemon
+ * @param {boolean} [deterministic]
  */
-function applyStatus(target, status, events, targetIsPlayer) {
+function applyStatus(target, status, events, targetIsPlayer, deterministic = !1) {
   if (!target || target.currentHp <= 0) return
   const side = targetIsPlayer ? 'player' : 'enemy'
   if (status === 'flinching') {
@@ -69,7 +70,9 @@ function applyStatus(target, status, events, targetIsPlayer) {
   target.status = status
   target.statusTurns =
     status === 'sleep'
-      ? 1 + Math.floor(Math.random() * 3)
+      ? deterministic
+        ? 2
+        : 1 + Math.floor(Math.random() * 3)
       : status === 'toxic'
         ? 1
         : 0
@@ -130,10 +133,11 @@ function applyLeechSeed(target, events, targetIsPlayer) {
  * @param {BattlePokemon} target
  * @param {any[]} events
  * @param {boolean} targetIsPlayer
+ * @param {boolean} [deterministic]
  */
-function applyConfusion(target, events, targetIsPlayer) {
+function applyConfusion(target, events, targetIsPlayer, deterministic = !1) {
   if (!target || target.currentHp <= 0 || (target.confusionTurns ?? 0) > 0) return
-  target.confusionTurns = 2 + Math.floor(Math.random() * 4)
+  target.confusionTurns = deterministic ? 3 : 2 + Math.floor(Math.random() * 4)
   events.push({
     type: 'status',
     message: `${target.name} became confused!`,
@@ -150,9 +154,10 @@ function applyConfusion(target, events, targetIsPlayer) {
  * @param {BattlePokemon} attacker
  * @param {any[]} events
  * @param {boolean} isPlayer
+ * @param {boolean} [deterministic]
  * @returns {boolean}
  */
-function handleConfusion(attacker, events, isPlayer) {
+function handleConfusion(attacker, events, isPlayer, deterministic = !1) {
   if ((attacker.confusionTurns ?? 0) <= 0) return !1
   const side = isPlayer ? 'player' : 'enemy'
   attacker.confusionTurns = (attacker.confusionTurns ?? 0) - 1
@@ -167,7 +172,7 @@ function handleConfusion(attacker, events, isPlayer) {
     })
     return !1
   }
-  if (Math.random() < 0.33) {
+  if (chance(0.33, deterministic)) {
     const selfDamage = Math.max(1, Math.floor(attacker.maxHp / 8))
     attacker.currentHp = Math.max(0, attacker.currentHp - selfDamage)
     events.push({
@@ -199,9 +204,10 @@ function handleConfusion(attacker, events, isPlayer) {
  * @param {BattlePokemon} attacker
  * @param {any[]} events
  * @param {boolean} isPlayer
+ * @param {boolean} [deterministic]
  * @returns {boolean}
  */
-function statusPreventsAction(attacker, events, isPlayer) {
+function statusPreventsAction(attacker, events, isPlayer, deterministic = !1) {
   const side = isPlayer ? 'player' : 'enemy'
   if (attacker.status === 'sleep') {
     if ((attacker.statusTurns ?? 0) > 0) {
@@ -224,7 +230,7 @@ function statusPreventsAction(attacker, events, isPlayer) {
       },
     })
   } else if (attacker.status === 'freeze') {
-    if (Math.random() >= 0.2) {
+    if (!deterministic && Math.random() >= 0.2) {
       events.push({
         type: 'status',
         message: `${attacker.name} is frozen solid!`,
@@ -242,7 +248,7 @@ function statusPreventsAction(attacker, events, isPlayer) {
         target: side,
       },
     })
-  } else if (attacker.status === 'paralysis' && Math.random() < 0.25) {
+  } else if (attacker.status === 'paralysis' && chance(0.25, deterministic)) {
     events.push({
       type: 'status',
       message: `${attacker.name} is paralyzed! It can't move!`,
@@ -333,6 +339,17 @@ function isSelfTargetedMove(moveDef) {
 }
 
 /**
+ * A probability check. In deterministic battles only guaranteed (100%) effects
+ * happen, so the outcome never depends on luck.
+ * @param {number} probability [0, 1]
+ * @param {boolean} deterministic
+ * @returns {boolean}
+ */
+function chance(probability, deterministic) {
+  return deterministic ? probability >= 1 : Math.random() < probability
+}
+
+/**
  * @param {number} attackerLevel
  * @param {number} attack
  * @param {number} defense
@@ -345,9 +362,10 @@ function isSelfTargetedMove(moveDef) {
  * @param {boolean} [skipAccuracy]
  * @param {number} [accuracyStage]
  * @param {number} [evasionStage]
+ * @param {boolean} [deterministic] No misses, crits or damage variance.
  * @returns {{ damage: number, isCrit: boolean, effectiveness: number, effectivenessLabel: string | null }}
  */
-export function calculateDamage(attackerLevel, attack, defense, move, attackerTypes, defenderTypes, attackerStage = 0, defenderStage = 0, critStage = 0, skipAccuracy = !1, accuracyStage = 0, evasionStage = 0) {
+export function calculateDamage(attackerLevel, attack, defense, move, attackerTypes, defenderTypes, attackerStage = 0, defenderStage = 0, critStage = 0, skipAccuracy = !1, accuracyStage = 0, evasionStage = 0, deterministic = !1) {
   if (move.power === 0)
     return {
       damage: 0,
@@ -357,7 +375,7 @@ export function calculateDamage(attackerLevel, attack, defense, move, attackerTy
     }
   const effectiveAccuracy =
     move.accuracy * statStageMultiplier(accuracyStage - evasionStage)
-  if (!skipAccuracy && Math.random() * 100 >= effectiveAccuracy)
+  if (!deterministic && !skipAccuracy && Math.random() * 100 >= effectiveAccuracy)
     return {
       damage: 0,
       isCrit: !1,
@@ -368,11 +386,11 @@ export function calculateDamage(attackerLevel, attack, defense, move, attackerTy
     effectiveDefense = Math.max(1, Math.floor(defense * statStageMultiplier(defenderStage))),
     baseDamage = Math.floor((Math.floor((2 * attackerLevel) / 5 + 2) * move.power * effectiveAttack) / effectiveDefense / 50 + 2),
     critChance = CRIT_CHANCES[Math.min(3, Math.max(0, critStage))] ?? CRIT_CHANCES[0],
-    isCrit = Math.random() < critChance,
+    isCrit = !deterministic && Math.random() < critChance,
     critMultiplier = isCrit ? 2 : 1,
     stabMultiplier = attackerTypes.includes(move.type) ? 1.5 : 1,
     effectiveness = getTypeMultiplier(move.type, defenderTypes),
-    randomFactor = (Math.floor(Math.random() * 16) + 85) / 100,
+    randomFactor = deterministic ? 0.925 : (Math.floor(Math.random() * 16) + 85) / 100,
     damage = Math.max(1, Math.floor(baseDamage * critMultiplier * stabMultiplier * effectiveness * randomFactor))
   /** @type {string | null} */
   let effectivenessLabel = null
@@ -471,14 +489,15 @@ export function chooseBestMove(moves, attackerLevel, attack, spAttack, attackerT
  * @param {BattlePokemon} attacker
  * @param {BattlePokemon} defender
  * @param {{ player: any, enemy: any } | null} [hazards]
+ * @param {boolean} [deterministic] Drop the random setup/status gates (Battle Tower).
  * @returns {{ moveId: string, move: Move }}
  */
-export function chooseMoveForBattle(attacker, defender, hazards) {
+export function chooseMoveForBattle(attacker, defender, hazards, deterministic = !1) {
   const usableMoves = attacker.moves.filter((moveId) => moveData[moveId]),
     hpFraction = attacker.maxHp > 0 ? attacker.currentHp / attacker.maxHp : 1,
     healMove = usableMoves.find((moveId) => moveData[moveId].effect?.type === 'heal')
   if (hpFraction < 0.45 && healMove) return { moveId: healMove, move: moveData[healMove] }
-  if (hpFraction > 0.6 && Math.random() < 0.5) {
+  if (deterministic ? hpFraction > 0.5 : hpFraction > 0.6 && Math.random() < 0.5) {
     const setupMove = usableMoves.find((moveId) => {
       const move = moveData[moveId]
       if (move.screen) {
@@ -508,7 +527,7 @@ export function chooseMoveForBattle(attacker, defender, hazards) {
   }
   // Occasionally open with a status move the target isn't already suffering
   // from (paralysis, poison, sleep, confusion).
-  if (hpFraction > 0.5 && Math.random() < 0.25) {
+  if (!deterministic && hpFraction > 0.5 && Math.random() < 0.25) {
     const statusMove = usableMoves.find((moveId) => {
       const effect = moveData[moveId].effect
       if (effect?.type === 'confusion') return (defender.confusionTurns ?? 0) === 0
@@ -631,9 +650,10 @@ function applyIntimidate(source, target, events, sourceIsPlayer) {
  * @param {boolean} [firstTurn]
  * @param {{ type: string, turns: number } | null} [weather]
  * @param {{ player: any, enemy: any } | null} [hazards]
+ * @param {boolean} [deterministic] Battle Tower battles run without RNG.
  * @returns {any[]}
  */
-export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn = !1, weather = null, hazards = null) {
+export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn = !1, weather = null, hazards = null, deterministic = !1) {
   const events = /** @type {any[]} */ ([])
   let activeWeather = weather ?? null,
     activeHazards = hazards
@@ -660,7 +680,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
   if (playerMustRecharge) ((playerMoveId = player.moves[0]), (playerMove = moveData[playerMoveId]))
   else if (player.lockedMove) ((playerMoveId = player.lockedMove), (playerMove = moveData[playerMoveId]))
   else {
-    const bestMove = chooseMoveForBattle(player, enemy, activeHazards)
+    const bestMove = chooseMoveForBattle(player, enemy, activeHazards, deterministic)
     ;((playerMoveId = bestMove.moveId), (playerMove = bestMove.move))
   }
   let enemyMoveId, enemyMove
@@ -668,7 +688,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
   else if (enemy.lockedMove) ((enemyMoveId = enemy.lockedMove), (enemyMove = moveData[enemyMoveId]))
   else {
     const bestMove = isTrainerBattle
-      ? chooseMoveForBattle(enemy, player, activeHazards)
+      ? chooseMoveForBattle(enemy, player, activeHazards, deterministic)
       : chooseRandomMove(enemy.moves)
     ;((enemyMoveId = bestMove.moveId), (enemyMove = bestMove.move))
   }
@@ -743,8 +763,8 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       })
       continue
     }
-    if (statusPreventsAction(attack.attacker, events, attack.isPlayer)) continue
-    if (handleConfusion(attack.attacker, events, attack.isPlayer)) continue
+    if (statusPreventsAction(attack.attacker, events, attack.isPlayer, deterministic)) continue
+    if (handleConfusion(attack.attacker, events, attack.isPlayer, deterministic)) continue
     const moveDef = moveData[attack.moveId]
     if (!moveDef) continue
     // Taunt prevents status moves while it lasts.
@@ -833,9 +853,9 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         }
       } else if (
         moveDef.effect?.type === 'status' &&
-        (moveDef.effect.chance === void 0 || Math.random() * 100 < moveDef.effect.chance)
+        (moveDef.effect.chance === void 0 || chance(moveDef.effect.chance / 100, deterministic))
       )
-        applyStatus(attack.defender, moveDef.effect.status, events, !attack.isPlayer)
+        applyStatus(attack.defender, moveDef.effect.status, events, !attack.isPlayer, deterministic)
       else if (moveDef.effect?.type === 'heal') {
         const healPercent = moveDef.effect.percentage ?? 50,
           healed = Math.min(
@@ -857,8 +877,8 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
             hpMax: attack.attacker.maxHp,
           },
         })
-        moveDef.effect.status && applyStatus(attack.attacker, moveDef.effect.status, events, attack.isPlayer)
-      } else if (moveDef.effect?.type === 'confusion') applyConfusion(attack.defender, events, !attack.isPlayer)
+        moveDef.effect.status && applyStatus(attack.attacker, moveDef.effect.status, events, attack.isPlayer, deterministic)
+      } else if (moveDef.effect?.type === 'confusion') applyConfusion(attack.defender, events, !attack.isPlayer, deterministic)
       else if (moveDef.effect?.type === 'leechSeed')
         applyLeechSeed(attack.defender, events, !attack.isPlayer)
       else if (moveDef.effect?.type === 'taunt') {
@@ -977,7 +997,8 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         moveDef.critStage ?? 0,
         !1,
         accuracyStage,
-        evasionStage
+        evasionStage,
+        deterministic
       )
     if (damageResult.effectivenessLabel === 'miss') {
       if (
@@ -1036,7 +1057,8 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           moveDef.critStage ?? 0,
           !0,
           accuracyStage,
-          evasionStage
+          evasionStage,
+          deterministic
         )
         totalDamage += hitResult.damage
         anyCrit = anyCrit || hitResult.isCrit
@@ -1167,9 +1189,9 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         case 'status': {
           if (
             moveDef.effect.chance === void 0 ||
-            Math.random() * 100 < moveDef.effect.chance
+            chance(moveDef.effect.chance / 100, deterministic)
           )
-            applyStatus(attack.defender, moveDef.effect.status, events, !attack.isPlayer)
+            applyStatus(attack.defender, moveDef.effect.status, events, !attack.isPlayer, deterministic)
           break
         }
         case 'selfDestruct': {
@@ -1357,7 +1379,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           },
         })
       }
-    } else if (ability === 'shedSkin' && pokemon.status && Math.random() < 0.33) {
+    } else if (ability === 'shedSkin' && pokemon.status && chance(0.33, deterministic)) {
       pokemon.status = null
       pokemon.statusTurns = 0
       events.push({

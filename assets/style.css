@@ -6660,6 +6660,43 @@ img {
     margin-bottom: 6px
 }
 
+.tower-hint.tower-deterministic {
+    opacity: .9;
+    color: #9fe0c0
+}
+
+.tower-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-bottom: 6px
+}
+
+.tower-preview-title {
+    font-size: 8px;
+    font-weight: 700;
+    color: var(--parchment)
+}
+
+.tower-preview-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px
+}
+
+.tower-preview-member {
+    font-size: 7px;
+    color: #fff;
+    background: rgba(0,0,0,0.35);
+    border: 1px solid rgba(224,192,96,0.6);
+    border-radius: 3px;
+    padding: 2px 4px
+}
+
+.tower-preview-level {
+    opacity: .7
+}
+
 .reward-shop-token-display {
     text-align: center;
     padding: 6px 0 10px;

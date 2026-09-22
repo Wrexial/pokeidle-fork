@@ -364,14 +364,15 @@ export function canEvolveFurther(speciesKey) {
  * Roll a species' ability: usually one of its normal abilities, with a small
  * chance of its hidden ability. Returns null for a species with no data.
  * @param {string} speciesKey
+ * @param {() => number} [rng]
  * @returns {string | null}
  */
-export function rollAbility(speciesKey) {
+export function rollAbility(speciesKey, rng = Math.random) {
   const entry = abilityData[speciesKey]
   if (!entry) return null
-  if (entry.hidden && Math.random() < 0.1) return entry.hidden
+  if (entry.hidden && rng() < 0.1) return entry.hidden
   return entry.abilities?.length > 0
-    ? entry.abilities[Math.floor(Math.random() * entry.abilities.length)]
+    ? entry.abilities[Math.floor(rng() * entry.abilities.length)]
     : (entry.hidden ?? null)
 }
 

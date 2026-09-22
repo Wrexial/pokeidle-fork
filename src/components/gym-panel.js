@@ -5,7 +5,7 @@ import { jsx, jsxs } from 'react/jsx-runtime'
 import { championData, elite4Data, gymLeaderData, mapData, regions } from '../data/gameData.js'
 import { BATTLE_TOWER_REGION } from '../data/config.js'
 import { useGame } from '../game/context.js'
-import { buildTrainerTeam, buildTowerTeam } from '../game/progression.js'
+import { buildTrainerTeam, buildTowerFloor } from '../game/progression.js'
 
 /** @param {{ onOpenShop: () => void }} props */
 export function GymPanel({ onOpenShop }) {
@@ -29,6 +29,8 @@ export function GymPanel({ onOpenShop }) {
       regionEliteFour.every((member) => state.defeatedEliteFour.includes(member.id)),
     prestigeLevel = state.regionPrestige[regionId] ?? 0,
     towerBest = state.towerBest[BATTLE_TOWER_REGION] ?? 0,
+    nextTowerFloor = state.towerFloor > 0 ? state.towerFloor : 1,
+    towerPreview = showTower ? buildTowerFloor(nextTowerFloor) : [],
     canFight = state.party.some((member) => member.currentHp > 0),
     isBusy = state.phase === 'evolving' || state.phase === 'healing',
     fightable = canFight && !isBusy
@@ -79,7 +81,7 @@ export function GymPanel({ onOpenShop }) {
           bossType: 'tower',
           trainerName: `Tower Trainer (Floor ${floor})`,
           trainerClass: 'ace',
-          trainerTeam: buildTrainerTeam(buildTowerTeam(floor)),
+          trainerTeam: buildTowerFloor(floor),
           spriteKey: 'acetrainer',
           region: regionId,
         },
@@ -356,6 +358,39 @@ export function GymPanel({ onOpenShop }) {
                 state.towerFloor > 0
                   ? `Currently on floor ${state.towerFloor}. Win to climb; lose and the run ends.`
                   : 'Fight endless, stronger trainers for Victory Tokens. Every floor fields six fully evolved Pokemon, your team is healed between floors, stats start scaling at floor 15 and legendaries appear from floor 40. A run only ends when you lose \u2014 floors now pay 1 token every 10 floors.',
+            }),
+            jsx('div', {
+              className: 'tower-hint tower-deterministic',
+              children:
+                'Tower battles are deterministic: the opponent is fixed and there are no critical hits, misses or damage variance. Build a team that beats the matchup \u2014 stats, types, abilities and held items decide it.',
+            }),
+            jsxs('div', {
+              className: 'tower-preview',
+              children: [
+                jsx('span', {
+                  className: 'tower-preview-title',
+                  children: `Floor ${nextTowerFloor} opponent:`,
+                }),
+                jsx('div', {
+                  className: 'tower-preview-list',
+                  children: towerPreview.map((member) =>
+                    jsxs(
+                      'span',
+                      {
+                        className: 'tower-preview-member',
+                        title: `${member.name} \u00b7 Lv.${member.level} \u00b7 ${member.types.join('/')}${
+                          member.ability ? ` \u00b7 ${member.ability}` : ''
+                        }${member.heldItem ? ` \u00b7 ${member.heldItem}` : ''}`,
+                        children: [
+                          member.name,
+                          jsx('span', { className: 'tower-preview-level', children: ` Lv.${member.level}` }),
+                        ],
+                      },
+                      member.speciesKey
+                    )
+                  ),
+                }),
+              ],
             }),
             jsx('button', {
               className: 'gym-fight-btn champion',

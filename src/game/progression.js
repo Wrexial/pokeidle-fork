@@ -5,6 +5,7 @@ import { activeItems, consumableItems, evolutionItems, heldItems, pokeBalls, val
 import { GENERATION_DEX_RANGES, encounterData, evolutionData, gymLeaderData, isSpeciesCharmed, mapData, moveData, pokemonSpecies, regions } from '../data/gameData.js'
 import { rollHeldItem } from './held-items.js'
 import { emptyBattleHazards } from './hazards.js'
+import { hashString, mulberry32 } from './rng.js'
 import { calculateExpYield, calculatePokemonStats, getLevelUpResults, getPerfectIVs, isBattleReady, resolvePokemonMoves, rollAbility } from './pokemon.js'
 
 /** Gym ids grouped by region, so `badgesRequired` gates count that region only. */
@@ -476,10 +477,11 @@ export function tickBattleCounters(effects) {
 
 /**
  * @param {number} [odds]
+ * @param {() => number} [rng]
  * @returns {boolean}
  */
-export function checkShinyOdds(odds = shinyFullOddsChance) {
-  return Math.floor(Math.random() * odds) === 0
+export function checkShinyOdds(odds = shinyFullOddsChance, rng = Math.random) {
+  return Math.floor(rng() * odds) === 0
 }
 
 /**
@@ -846,9 +848,10 @@ export function awardExperience(dispatch, playerPokemon, enemyPokemon, multiplie
 
 /**
  * @param {any[]} team
+ * @param {() => number} [rng] Deterministic source for ability/item/shiny rolls.
  * @returns {BattlePokemon[]}
  */
-export function buildTrainerTeam(team) {
+export function buildTrainerTeam(team, rng = Math.random) {
   return team.map((member) => {
     const species = pokemonSpecies[member.speciesKey],
       stats = calculatePokemonStats(species, member.level, getPerfectIVs()),
@@ -869,8 +872,8 @@ export function buildTrainerTeam(team) {
       spDefense: scale(stats.spDefense),
       speed: scale(stats.speed),
       moves,
-      ability: rollAbility(member.speciesKey),
-      heldItem: rollHeldItem(0.3),
+      ability: rollAbility(member.speciesKey, rng),
+      heldItem: rollHeldItem(0.3, rng),
       isPlayer: !1,
       isShiny: checkShinyOdds(),
     }
@@ -940,9 +943,10 @@ function isFinalEvolution(speciesKey) {
  * scale faster, begin multiplying stats at floor 15 and allow legendaries from
  * floor 40, so the tower stays a real climb rather than a walk.
  * @param {number} floor
+ * @param {() => number} [rng] Deterministic source; defaults to a floor-seeded PRNG.
  * @returns {{ speciesKey: string, level: number, statMultiplier: number }[]}
  */
-export function buildTowerTeam(floor) {
+export function buildTowerTeam(floor, rng = mulberry32(hashString(`tower-${floor}`))) {
   const level = Math.min(100, TOWER_BASE_LEVEL + floor * 3),
     statMultiplier = 1 + Math.max(0, floor - TOWER_MULTIPLIER_FLOOR) * 0.05,
     includeLegendaries = floor >= TOWER_LEGENDARY_FLOOR
@@ -966,7 +970,7 @@ export function buildTowerTeam(floor) {
   function pick(candidates) {
     const options = candidates.filter((key) => !used.has(key)),
       list = options.length > 0 ? options : candidates,
-      key = list[Math.floor(Math.random() * list.length)]
+      key = list[Math.floor(rng() * list.length)]
     used.add(key)
     return key
   }
@@ -977,6 +981,17 @@ export function buildTowerTeam(floor) {
     level: Math.min(100, level + index),
     statMultiplier,
   }))
+}
+
+/**
+ * The built Battle Tower roster for a floor. Seeded from the floor number, so a
+ * given floor is always the same puzzle for the player to plan against.
+ * @param {number} floor
+ * @returns {BattlePokemon[]}
+ */
+export function buildTowerFloor(floor) {
+  const rng = mulberry32(hashString(`tower-${floor}`))
+  return buildTrainerTeam(buildTowerTeam(floor, rng), rng)
 }
 
 /**

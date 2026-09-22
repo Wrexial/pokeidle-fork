@@ -410,13 +410,15 @@ export function useGameLoop() {
             isTrainerBattle =
               (currentGameState.trainerBattle ??
                 currentGameState.bossBattle) !== null,
+            isTowerBattle = currentGameState.bossBattle?.bossType === 'tower',
             turnEvents = resolveBattleTurn(
               playerBattlePokemon,
               enemyBattlePokemon,
               isTrainerBattle,
               (currentGameState.battleTurn ?? 0) === 0,
               currentGameState.weather ?? null,
-              currentGameState.battleHazards ?? null
+              currentGameState.battleHazards ?? null,
+              isTowerBattle
             )
           dispatch({
             type: 'EXECUTE_TURN',

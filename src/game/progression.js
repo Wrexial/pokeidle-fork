@@ -4,6 +4,7 @@ import { shinyCharmMinOddsChance, shinyFullOddsChance, shinyWithCharmChance, roa
 import { activeItems, consumableItems, evolutionItems, heldItems, pokeBalls, valuableDropTable } from '../data/items.js'
 import { GENERATION_DEX_RANGES, encounterData, evolutionData, gymLeaderData, isSpeciesCharmed, mapData, moveData, pokemonSpecies, regions } from '../data/gameData.js'
 import { rollHeldItem } from './held-items.js'
+import { emptyBattleHazards } from './hazards.js'
 import { calculateExpYield, calculatePokemonStats, getLevelUpResults, getPerfectIVs, isBattleReady, resolvePokemonMoves, rollAbility } from './pokemon.js'
 
 /** Gym ids grouped by region, so `badgesRequired` gates count that region only. */
@@ -435,6 +436,7 @@ export function createIdleBattleState() {
     currentEventIndex: 0,
     battleTurn: 0,
     weather: null,
+    battleHazards: emptyBattleHazards(),
     trainerBattle: null,
     bossBattle: null,
     bossQueue: [],

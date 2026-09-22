@@ -254,6 +254,8 @@ type GameState = {
   battleTurn: number
   /** Active field weather (rain/sun/sandstorm/snow/hail), or null. */
   weather: BattleWeather | null
+  /** Entry hazards for the current battle, one bucket per side. */
+  battleHazards: { player: any, enemy: any }
   currentRoute: string
   currentLocation: string
   unlockedLocations: string[]

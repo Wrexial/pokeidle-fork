@@ -7,6 +7,7 @@ import { canEvolveFurther } from './pokemon.js'
 import { heldBerryHeal, heldCuresStatus, heldDamageMultiplier, heldLeftoversHeal, heldLifeOrbRecoil, heldStatMultiplier, heldSurvivesAtFullHp } from './held-items.js'
 import { WEATHER_ABILITIES, WEATHER_MOVES, WEATHER_NAMES, WEATHER_TURNS, weatherAbilityHeal, weatherDamageMultiplier, weatherResidualDamage, weatherSpeedMultiplier } from './weather.js'
 import { abilityAbsorbsType, abilityAttackMultiplier, abilityBlocksNonSuperEffective, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityHalvesSuperEffective, abilityHealsFromType, abilityIgnoresIndirectDamage, abilityOf, abilityPreventsStatDrop, abilityPreventsStatus, abilitySurvivesAtFullHp } from './abilities.js'
+import { emptyBattleHazards } from './hazards.js'
 
 /** @returns {VolatileState} */
 export function createVolatileState() {
@@ -469,9 +470,10 @@ export function chooseBestMove(moves, attackerLevel, attack, spAttack, attackerT
  * and the trainer AI.
  * @param {BattlePokemon} attacker
  * @param {BattlePokemon} defender
+ * @param {{ player: any, enemy: any } | null} [hazards]
  * @returns {{ moveId: string, move: Move }}
  */
-export function chooseMoveForBattle(attacker, defender) {
+export function chooseMoveForBattle(attacker, defender, hazards) {
   const usableMoves = attacker.moves.filter((moveId) => moveData[moveId]),
     hpFraction = attacker.maxHp > 0 ? attacker.currentHp / attacker.maxHp : 1,
     healMove = usableMoves.find((moveId) => moveData[moveId].effect?.type === 'heal')
@@ -484,6 +486,15 @@ export function chooseMoveForBattle(attacker, defender) {
         return move.screen === 'both'
           ? !(screens.reflect > 0) && !(screens.lightScreen > 0)
           : !(screens[move.screen] > 0)
+      }
+      if (move.effect?.type === 'hazard' && hazards) {
+        const side = attacker.isPlayer ? hazards.enemy : hazards.player,
+          hazard = move.effect.hazard
+        return hazard === 'spikes'
+          ? (side?.spikes ?? 0) < 3
+          : hazard === 'toxicSpikes'
+            ? (side?.toxicSpikes ?? 0) < 2
+            : !side?.[hazard]
       }
       const effect = move.effect
       if (effect?.type !== 'statChange' || effect.target !== 'self') return false
@@ -619,11 +630,15 @@ function applyIntimidate(source, target, events, sourceIsPlayer) {
  * @param {boolean} [isTrainerBattle]
  * @param {boolean} [firstTurn]
  * @param {{ type: string, turns: number } | null} [weather]
+ * @param {{ player: any, enemy: any } | null} [hazards]
  * @returns {any[]}
  */
-export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn = !1, weather = null) {
+export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn = !1, weather = null, hazards = null) {
   const events = /** @type {any[]} */ ([])
-  let activeWeather = weather ?? null
+  let activeWeather = weather ?? null,
+    activeHazards = hazards
+      ? { player: { ...hazards.player }, enemy: { ...hazards.enemy } }
+      : emptyBattleHazards()
   ;(player.statStages || (player.statStages = {}), enemy.statStages || (enemy.statStages = {}))
   // Intimidate fires the first time each side is on the field.
   if (firstTurn) {
@@ -645,7 +660,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
   if (playerMustRecharge) ((playerMoveId = player.moves[0]), (playerMove = moveData[playerMoveId]))
   else if (player.lockedMove) ((playerMoveId = player.lockedMove), (playerMove = moveData[playerMoveId]))
   else {
-    const bestMove = chooseMoveForBattle(player, enemy)
+    const bestMove = chooseMoveForBattle(player, enemy, activeHazards)
     ;((playerMoveId = bestMove.moveId), (playerMove = bestMove.move))
   }
   let enemyMoveId, enemyMove
@@ -653,7 +668,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
   else if (enemy.lockedMove) ((enemyMoveId = enemy.lockedMove), (enemyMove = moveData[enemyMoveId]))
   else {
     const bestMove = isTrainerBattle
-      ? chooseMoveForBattle(enemy, player)
+      ? chooseMoveForBattle(enemy, player, activeHazards)
       : chooseRandomMove(enemy.moves)
     ;((enemyMoveId = bestMove.moveId), (enemyMove = bestMove.move))
   }
@@ -873,6 +888,20 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
             },
           })
         }
+      }
+      else if (moveDef.effect?.type === 'hazard') {
+        const targetSide = /** @type {any} */ (
+            attack.isPlayer ? activeHazards.enemy : activeHazards.player
+          ),
+          hazard = moveDef.effect.hazard
+        if (hazard === 'spikes') targetSide.spikes = Math.min(3, targetSide.spikes + 1)
+        else if (hazard === 'toxicSpikes')
+          targetSide.toxicSpikes = Math.min(2, targetSide.toxicSpikes + 1)
+        else targetSide[hazard] = !0
+        events.push({
+          type: 'hazard',
+          message: `${attack.attacker.name} set up a hazard!`,
+        })
       }
       else if (moveDef.effect?.type === 'weather') {
         activeWeather = { type: moveDef.effect.weather, turns: WEATHER_TURNS }
@@ -1433,6 +1462,12 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     events.push({
       type: 'weather',
       data: { weather: activeWeather },
+    })
+  // Report the field's entry hazards so the reducer can store them.
+  if (JSON.stringify(activeHazards) !== JSON.stringify(hazards ?? emptyBattleHazards()))
+    events.push({
+      type: 'hazards',
+      data: { hazards: activeHazards },
     })
   // Screens wear off after five turns.
   for (const pokemon of [player, enemy]) {

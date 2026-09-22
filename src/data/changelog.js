@@ -1,10 +1,24 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.17.1'
+export const GAME_VERSION = '0.18.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.18.0',
+      subtitle: 'Entry Hazards',
+      sections: [
+        {
+          heading: 'Battles',
+          items: [
+            'Stealth Rock, Spikes, Toxic Spikes and Sticky Web now work: they are set on the opposing side and hit Pokemon as they switch in (trainer battles send out up to six)',
+            'Stealth Rock scales with the Rock weakness, Spikes get stronger with each layer, Toxic Spikes poison or badly poison (Poison types absorb them) and Sticky Web lowers Speed \u2014 Flying types and Levitate avoid the grounded hazards',
+            'The AI sets hazards when it has them',
+          ],
+        },
+      ],
+    },
     {
       version: '0.17.1',
       subtitle: 'Taunt & Substitute',

@@ -11,6 +11,7 @@ import { calculatePokemonStats, calculateRequiredExperience, createEgg, createPo
 import { canBreed, eggHatchSteps, eggSpeciesKey, inheritBreedingTraits } from './breeding.js'
 import { advanceQuests, questLabel, rollQuests } from './quests.js'
 import { buildTrainerTeam, buildTowerTeam, checkShinyOdds, computeUnlockedLocations, formatReward, getRegionUnlockTokens, isActiveEffectItem, loadActivePokemonFromParty, prepareNextBattle, releaseReward, rollCandyDrop, rollValuableDrop, syncActivePokemonIntoParty, tickBattleCounters, tickPartyEggs, tickPokerus } from './progression.js'
+import { applyEntryHazards, emptyBattleHazards } from './hazards.js'
 
 /** @type {GameState} */
 export const initialGameState = {
@@ -26,6 +27,8 @@ export const initialGameState = {
   battleTurn: 0,
   /** Active field weather for the current battle, or null. */
   weather: null,
+  /** Entry hazards for the current battle, one bucket per side. */
+  battleHazards: emptyBattleHazards(),
   speed: 1,
   paused: !1,
   battleLog: [],
@@ -309,6 +312,7 @@ export function gameReducer(state, action) {
         currentEventIndex: 0,
         battleTurn: 0,
         weather: null,
+        battleHazards: emptyBattleHazards(),
         playerVolatile: createVolatileState(),
       }
     }
@@ -336,10 +340,14 @@ export function gameReducer(state, action) {
         enemyPokemon = state.enemyPokemon,
         wildBattlesWon = state.wildBattlesWon,
         battlesWonByLocation = state.battlesWonByLocation,
-        weather = state.weather
+        weather = state.weather,
+        battleHazards = state.battleHazards
       event.type === 'weather' &&
         event.data &&
         (weather = event.data.weather ?? weather)
+      event.type === 'hazards' &&
+        event.data &&
+        (battleHazards = event.data.hazards ?? battleHazards)
       event.type === 'flee' && (enemyPokemon = null)
       ;(event.type === 'damage' || event.type === 'recoil' || event.type === 'heal') &&
         event.data &&
@@ -475,6 +483,7 @@ export function gameReducer(state, action) {
         wildBattlesWon,
         battlesWonByLocation,
         weather,
+        battleHazards,
         activeEffects,
         swarm,
         pokerus,
@@ -1267,6 +1276,7 @@ export function gameReducer(state, action) {
         currentEventIndex: 0,
         battleTurn: 0,
         weather: null,
+        battleHazards: emptyBattleHazards(),
         activePlayerPokemonIndex: 0,
         trainerBattle: {
           trainerId,
@@ -1308,6 +1318,7 @@ export function gameReducer(state, action) {
         currentEventIndex: 0,
         battleTurn: 0,
         weather: null,
+        battleHazards: emptyBattleHazards(),
         activePlayerPokemonIndex: 0,
         bossBattle: {
           bossId,
@@ -1334,11 +1345,26 @@ export function gameReducer(state, action) {
           currentHp: state.playerPokemon.currentHp,
         })
       const nextPokemon = party[newIndex]
+      if (!nextPokemon) return state
+      const entry = applyEntryHazards(state.battleHazards?.player, nextPokemon),
+        switchedIn =
+          entry.damage > 0 || entry.status || entry.speedStage
+            ? {
+                ...nextPokemon,
+                // Hazards can't KO on switch-in in this implementation.
+                currentHp: Math.max(1, nextPokemon.currentHp - entry.damage),
+                ...(entry.status ? { status: entry.status } : {}),
+                ...(entry.speedStage
+                  ? { statStages: { ...(nextPokemon.statStages ?? {}), speed: entry.speedStage } }
+                  : {}),
+              }
+            : nextPokemon
+      party[newIndex] = switchedIn
       return nextPokemon
         ? {
             ...state,
             phase: 'battling',
-            playerPokemon: nextPokemon,
+            playerPokemon: switchedIn,
             battleEvents: [],
             party,
             activePlayerPokemonIndex: newIndex,
@@ -1348,6 +1374,14 @@ export function gameReducer(state, action) {
                 type: 'playerSwitch',
                 message: `Go! ${nextPokemon.name}!`,
               },
+              ...(entry.damage > 0
+                ? [
+                    {
+                      type: 'hazard',
+                      message: `${nextPokemon.name} was hurt by the entry hazards!`,
+                    },
+                  ]
+                : []),
             ],
             playerVolatile: createVolatileState(),
           }
@@ -1371,10 +1405,23 @@ export function gameReducer(state, action) {
         trainerTeam: team,
         currentTrainerPokemonIndex: newIndex,
       }
+      const enemyEntry = applyEntryHazards(state.battleHazards?.enemy, nextPokemon),
+        switchedInEnemy =
+          enemyEntry.damage > 0 || enemyEntry.status || enemyEntry.speedStage
+            ? {
+                ...nextPokemon,
+                // Hazards can't KO on switch-in in this implementation.
+                currentHp: Math.max(1, nextPokemon.currentHp - enemyEntry.damage),
+                ...(enemyEntry.status ? { status: enemyEntry.status } : {}),
+                ...(enemyEntry.speedStage
+                  ? { statStages: { ...(nextPokemon.statStages ?? {}), speed: enemyEntry.speedStage } }
+                  : {}),
+              }
+            : nextPokemon
       return {
         ...state,
         phase: 'battling',
-        enemyPokemon: nextPokemon,
+        enemyPokemon: switchedInEnemy,
         battleEvents: [],
         trainerBattle: state.trainerBattle ? updatedBattle : null,
         bossBattle: state.bossBattle ? updatedBattle : null,
@@ -1384,6 +1431,14 @@ export function gameReducer(state, action) {
             type: 'trainerAppear',
             message: `${battle.trainerName} is about to send out ${nextPokemon.name}!`,
           },
+          ...(enemyEntry.damage > 0
+            ? [
+                {
+                  type: 'hazard',
+                  message: `${nextPokemon.name} was hurt by the entry hazards!`,
+                },
+              ]
+            : []),
           {
             type: 'trainerSendOut',
             message: `${battle.trainerName} sent out ${nextPokemon.name}!`,
@@ -1477,6 +1532,7 @@ export function gameReducer(state, action) {
           currentEventIndex: 0,
           battleTurn: 0,
           weather: null,
+          battleHazards: emptyBattleHazards(),
           pendingEvents: [
             { type: 'trainerAppear', message: `${trainerName} wants to battle!` },
             { type: 'trainerSendOut', message: `${trainerName} sent out ${firstPokemon.name}!` },
@@ -1590,6 +1646,7 @@ export function gameReducer(state, action) {
             currentEventIndex: 0,
             battleTurn: 0,
             weather: null,
+            battleHazards: emptyBattleHazards(),
             bossBattle: {
               bossId: nextBoss.bossId,
               bossType: nextBoss.bossType,
@@ -2230,6 +2287,7 @@ export function gameReducer(state, action) {
           currentEventIndex: 0,
           battleTurn: 0,
           weather: null,
+          battleHazards: emptyBattleHazards(),
           bossBattle: {
             bossId: bossBattle.bossId,
             bossType: bossBattle.bossType,
@@ -2580,6 +2638,7 @@ export function gameReducer(state, action) {
           currentEventIndex: 0,
           battleTurn: 0,
           weather: null,
+          battleHazards: emptyBattleHazards(),
           enemyPokemon: null,
           playerPokemon: state.party.find((member) => isBattleReady(member)) ?? state.party[0] ?? state.playerPokemon,
           activePlayerPokemonIndex: 0,

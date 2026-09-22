@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.17.1**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.18.0**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -483,9 +483,8 @@ and trainers heal when low and set up early.
 
 Still open:
 
-- [ ] **Entry hazards** (Stealth Rock, Spikes, Toxic Spikes, Sticky Web) — still
-      need a battle-level side-state + switch-in hook (weather 0.17.0 and
-      Taunt/Substitute 0.17.1 are done).
+- ✅ **Entry hazards** (Stealth Rock, Spikes, Toxic Spikes, Sticky Web) —
+      shipped 0.18.0 (battle-level side state + switch-in hook).
 - ✅ **Accuracy / evasion stat stages** — shipped 0.14.0.
 - [ ] Additional statuses if added to the data — **paralysis/toxic/confusion
       (0.11.1) and Leech Seed (0.14.0) shipped**; still missing infatuation,
@@ -1175,6 +1174,9 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.18.0 (entry hazards): Stealth Rock, Spikes, Toxic Spikes and Sticky Web are
+set per side and hit Pokemon on switch-in; the AI uses them too.
 
 0.17.1 (Taunt & Substitute): Taunt blocks status moves for three turns;
 Substitute costs 25% HP and absorbs hits/status until it breaks.

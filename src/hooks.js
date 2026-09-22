@@ -415,7 +415,8 @@ export function useGameLoop() {
               enemyBattlePokemon,
               isTrainerBattle,
               (currentGameState.battleTurn ?? 0) === 0,
-              currentGameState.weather ?? null
+              currentGameState.weather ?? null,
+              currentGameState.battleHazards ?? null
             )
           dispatch({
             type: 'EXECUTE_TURN',

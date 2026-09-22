@@ -84,6 +84,11 @@ export const MOVE_OVERRIDES = {
   leechSeed: { effect: { type: 'leechSeed' } },
   taunt: { effect: { type: 'taunt' } },
   substitute: { effect: { type: 'substitute' } },
+  // --- Entry hazards ---
+  stealthRock: { effect: { type: 'hazard', hazard: 'stealthRock' } },
+  spikes: { effect: { type: 'hazard', hazard: 'spikes' } },
+  toxicSpikes: { effect: { type: 'hazard', hazard: 'toxicSpikes' } },
+  stickyWeb: { effect: { type: 'hazard', hazard: 'stickyWeb' } },
   // --- Weather ---
   rainDance: { effect: { type: 'weather', weather: 'rain' } },
   sunnyDay: { effect: { type: 'weather', weather: 'sun' } },

@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.20.0**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.21.0**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -489,13 +489,13 @@ Still open:
       shipped 0.18.0 (battle-level side state + switch-in hook).
 - ✅ **Accuracy / evasion stat stages** — shipped 0.14.0.
 - [ ] Additional statuses if added to the data — **paralysis/toxic/confusion
-      (0.11.1) and Leech Seed (0.14.0) shipped**; still missing infatuation,
-      curse, ability-based statuses.
+      (0.11.1), Leech Seed (0.14.0) and infatuation/Curse (0.21.0) shipped**;
+      still missing ability-based statuses and Haze/Clear Smog.
 - [ ] Weather / terrain — **weather (0.17.0) and terrain (0.20.0) shipped** (#10).
 - [ ] Ability / held-item hooks — see #2.
 - [ ] A damage / crit-rate **balance pass**.
-- [ ] AI polish: switch on a bad matchup, and don't spam setup when already
-      boosted.
+- [ ] AI polish: **don't spam setup shipped 0.21.0**; still open — switch on a
+      bad matchup.
 - [ ] Battle polish: move animations / damage numbers / hit feedback — see #16.
 
 Effort: **medium–large** (do it in slices).
@@ -1183,6 +1183,10 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.21.0 (Attract & Curse): Attract infatuates opposite-gender targets (50% chance
+to lose the turn); Ghost Curse costs half HP to drain the foe while other types
+gain Attack/Defense and lose Speed; the AI stops spamming setup once boosted.
 
 0.20.0 (terrain): Electric/Grassy/Misty/Psychic Terrain from moves and Surge
 abilities, with grounded checks, Grassy healing, Electric sleep immunity, Misty

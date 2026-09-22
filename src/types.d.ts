@@ -200,6 +200,10 @@ type VolatileState = {
   tauntTurns?: number
   /** Remaining hit points of a Substitute (0 when none). */
   substituteHp?: number
+  /** Infatuation (Attract) is active. */
+  infatuated?: boolean
+  /** A Ghost-type Curse is draining this Pokemon each turn. */
+  cursed?: boolean
   /** Remaining turns of Reflect / Light Screen (0 when down). */
   screens?: { reflect: number, lightScreen: number }
 }

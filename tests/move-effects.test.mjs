@@ -5,8 +5,9 @@ import { installGameData } from './helpers/game-data.mjs'
 
 installGameData()
 
-const { calculateDamage, resolveBattleTurn } = await import('../src/game/combat.js')
+const { calculateDamage, chooseMoveForBattle, resolveBattleTurn } = await import('../src/game/combat.js')
 const { moveData } = await import('../src/data/gameData.js')
+const { genderForPokemon } = await import('../src/game/breeding.js')
 
 /**
  * @param {Record<string, any>} [overrides]
@@ -447,6 +448,91 @@ test('Substitute costs HP and then absorbs hits', () => {
     resolveBattleTurn(attacker, shielded, false)
     assert.equal(shielded.currentHp, 400, 'the substitute took the damage')
     assert.ok(shielded.substituteHp < 100)
+  })
+})
+
+test('attract and curse carry their overrides', () => {
+  assert.equal(moveData.attract.effect.type, 'infatuation')
+  assert.equal(moveData.curse.effect.type, 'curse')
+})
+
+/** Find an id that makes a species read as the wanted gender. */
+function findGenderId(/** @type {string} */ speciesKey, /** @type {string} */ gender) {
+  for (let id = 1; id <= 5000; id++)
+    if (genderForPokemon({ speciesKey, id: String(id) }) === gender) return String(id)
+  throw new Error('no id')
+}
+
+test('Attract infatuates an opposite-gender target', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        speciesKey: 'pidgey',
+        id: findGenderId('pidgey', 'male'),
+        moves: ['attract'],
+        speed: 200,
+      }),
+      enemy = battler({
+        name: 'Foe',
+        speciesKey: 'pidgey',
+        id: findGenderId('pidgey', 'female'),
+        moves: ['splash'],
+      })
+    resolveBattleTurn(player, enemy, false)
+    assert.equal(enemy.infatuated, true)
+  })
+})
+
+test('Ghost-type Curse costs HP and drains the target', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        speciesKey: 'gengar',
+        types: ['Ghost', 'Poison'],
+        moves: ['curse'],
+        currentHp: 400,
+        maxHp: 400,
+        speed: 200,
+      }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], currentHp: 400, maxHp: 400, types: ['Normal'] })
+    resolveBattleTurn(player, enemy, false)
+    assert.equal(player.currentHp, 200, 'paid half its HP')
+    assert.equal(enemy.cursed, true)
+    assert.equal(enemy.currentHp, 300, 'took a quarter from the curse')
+  })
+})
+
+test('non-Ghost Curse raises Attack/Defense and lowers Speed', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({
+      name: 'Player',
+      isPlayer: true,
+      speciesKey: 'pidgey',
+      types: ['Normal', 'Flying'],
+      moves: ['curse'],
+      speed: 200,
+    })
+    resolveBattleTurn(player, battler({ name: 'Foe', moves: ['splash'] }), false)
+    assert.equal(player.statStages.attack, 1)
+    assert.equal(player.statStages.defense, 1)
+    assert.equal(player.statStages.speed, -1)
+  })
+})
+
+test('the AI stops setting up once it is boosted', () => {
+  withFixedRandom(0.1, () => {
+    const attacker = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['swordsDance', 'tackle'],
+        attack: 200,
+        statStages: { attack: 2 },
+      }),
+      defender = battler({ name: 'Foe' }),
+      chosen = chooseMoveForBattle(attacker, defender)
+    assert.equal(chosen.moveId, 'tackle')
   })
 })
 

@@ -4,6 +4,7 @@ import { typechart } from '../data/moves.js'
 import { roamerFleeChance } from '../data/config.js'
 import { moveData } from '../data/gameData.js'
 import { canEvolveFurther } from './pokemon.js'
+import { genderForPokemon } from './breeding.js'
 import { heldBerryHeal, heldCuresStatus, heldDamageMultiplier, heldLeftoversHeal, heldLifeOrbRecoil, heldStatMultiplier, heldSurvivesAtFullHp } from './held-items.js'
 import { WEATHER_ABILITIES, WEATHER_MOVES, WEATHER_NAMES, WEATHER_TURNS, weatherAbilityHeal, weatherDamageMultiplier, weatherResidualDamage, weatherSpeedMultiplier } from './weather.js'
 import { abilityAbsorbsType, abilityAttackMultiplier, abilityBlocksNonSuperEffective, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityHalvesSuperEffective, abilityHealsFromType, abilityIgnoresIndirectDamage, abilityOf, abilityPreventsStatDrop, abilityPreventsStatus, abilitySurvivesAtFullHp } from './abilities.js'
@@ -31,6 +32,8 @@ export function createVolatileState() {
     heldItemUsed: !1,
     tauntTurns: 0,
     substituteHp: 0,
+    infatuated: !1,
+    cursed: !1,
     screens: { reflect: 0, lightScreen: 0 },
   }
 }
@@ -199,6 +202,54 @@ function handleConfusion(attacker, events, isPlayer, deterministic = !1) {
     return !0
   }
   return !1
+}
+
+/**
+ * Infatuate a target (Attract): only works between opposite, gendered Pokemon.
+ * @param {BattlePokemon} source
+ * @param {BattlePokemon} target
+ * @param {any[]} events
+ * @param {boolean} targetIsPlayer
+ */
+function applyInfatuation(source, target, events, targetIsPlayer) {
+  if (!target || target.currentHp <= 0 || target.infatuated) return
+  const sourceGender = genderForPokemon(source),
+    targetGender = genderForPokemon(target)
+  if (
+    sourceGender === 'genderless' ||
+    targetGender === 'genderless' ||
+    sourceGender === targetGender
+  )
+    return
+  target.infatuated = !0
+  events.push({
+    type: 'status',
+    message: `${target.name} fell in love!`,
+    data: {
+      target: targetIsPlayer ? 'player' : 'enemy',
+    },
+  })
+}
+
+/**
+ * An infatuated attacker may be too lovestruck to move.
+ * @param {BattlePokemon} attacker
+ * @param {any[]} events
+ * @param {boolean} isPlayer
+ * @param {boolean} [deterministic]
+ * @returns {boolean}
+ */
+function handleInfatuation(attacker, events, isPlayer, deterministic = !1) {
+  if (!attacker.infatuated) return !1
+  if (!chance(0.5, deterministic)) return !1
+  events.push({
+    type: 'status',
+    message: `${attacker.name} is in love with the foe and can't move!`,
+    data: {
+      target: isPlayer ? 'player' : 'enemy',
+    },
+  })
+  return !0
 }
 
 /**
@@ -521,9 +572,11 @@ export function chooseMoveForBattle(attacker, defender, hazards, deterministic =
       const effect = move.effect
       if (effect?.type !== 'statChange' || effect.target !== 'self') return false
       const stages = attacker.statStages ?? {}
+      // Only set up while the relevant stats are still unboosted, so the AI
+      // doesn't spam Swords Dance instead of attacking.
       return Object.entries(effect.changes).some(([statKey, delta]) => {
         const key = normalizeStatKey(statKey)
-        return delta > 0 && (stages[key] ?? 0) < 6
+        return delta > 0 && (stages[key] ?? 0) <= 0
       })
     })
     if (setupMove) return { moveId: setupMove, move: moveData[setupMove] }
@@ -774,6 +827,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     }
     if (statusPreventsAction(attack.attacker, events, attack.isPlayer, deterministic)) continue
     if (handleConfusion(attack.attacker, events, attack.isPlayer, deterministic)) continue
+    if (handleInfatuation(attack.attacker, events, attack.isPlayer, deterministic)) continue
     const moveDef = moveData[attack.moveId]
     if (!moveDef) continue
     // Taunt prevents status moves while it lasts.
@@ -927,6 +981,44 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
               hpMax: attack.attacker.maxHp,
             },
           })
+        }
+      }
+      else if (moveDef.effect?.type === 'infatuation')
+        applyInfatuation(attack.attacker, attack.defender, events, !attack.isPlayer)
+      else if (moveDef.effect?.type === 'curse') {
+        if (attack.attacker.types.includes('Ghost')) {
+          const cost = Math.max(1, Math.floor(attack.attacker.maxHp / 2))
+          if (attack.attacker.currentHp > cost && !attack.defender.cursed) {
+            attack.attacker.currentHp -= cost
+            attack.defender.cursed = !0
+            events.push({
+              type: 'recoil',
+              message: `${attack.attacker.name} cut its own HP and put a curse on ${attack.defender.name}!`,
+              data: {
+                target: attack.isPlayer ? 'player' : 'enemy',
+                damage: cost,
+                hpAfter: attack.attacker.currentHp,
+                hpMax: attack.attacker.maxHp,
+              },
+            })
+          }
+        } else {
+          const stages = attack.attacker.statStages ?? (attack.attacker.statStages = {})
+          for (const [key, delta] of /** @type {[string, number][]} */ ([
+            ['attack', 1],
+            ['defense', 1],
+            ['speed', -1],
+          ])) {
+            const next = clampStatStage((stages[key] ?? 0) + delta)
+            stages[key] = next
+            events.push({
+              type: 'statChange',
+              message: `${attack.attacker.name}'s ${getStatLabel(key)} ${delta > 0 ? 'rose' : 'fell'}!`,
+              data: {
+                target: attack.isPlayer ? 'player' : 'enemy',
+              },
+            })
+          }
         }
       }
       else if (moveDef.effect?.type === 'hazard') {
@@ -1345,6 +1437,31 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           target: isPlayerSide ? 'enemy' : 'player',
           hpAfter: other.currentHp,
           hpMax: other.maxHp,
+        },
+      })
+      if (pokemon.currentHp <= 0) {
+        events.push({
+          type: 'faint',
+          message: `${pokemon.name} fainted!`,
+          data: {
+            target: isPlayerSide ? 'player' : 'enemy',
+          },
+        })
+        continue
+      }
+    }
+    // A Ghost-type Curse drains a quarter of max HP each turn.
+    if (pokemon.cursed) {
+      const curseDamage = Math.max(1, Math.floor(pokemon.maxHp / 4))
+      pokemon.currentHp = Math.max(0, pokemon.currentHp - curseDamage)
+      events.push({
+        type: 'damage',
+        message: `${pokemon.name} is afflicted by the curse! (${curseDamage} damage)`,
+        data: {
+          target: isPlayerSide ? 'player' : 'enemy',
+          damage: curseDamage,
+          hpAfter: pokemon.currentHp,
+          hpMax: pokemon.maxHp,
         },
       })
       if (pokemon.currentHp <= 0) {

@@ -70,7 +70,7 @@ const GENDER_FORM_SPECIES = {
  * A Pokemon's gender: fixed for a gender-form species, otherwise derived
  * deterministically from its id (so it's stable across reloads without being
  * saved) using its species' gender rate.
- * @param {Pokemon} pokemon
+ * @param {{ speciesKey: string, id?: string | number }} pokemon
  * @returns {'male' | 'female' | 'genderless'}
  */
 export function genderForPokemon(pokemon) {

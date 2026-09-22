@@ -1,10 +1,24 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.20.0'
+export const GAME_VERSION = '0.21.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.21.0',
+      subtitle: 'Attract & Curse',
+      sections: [
+        {
+          heading: 'Battles',
+          items: [
+            'Attract now infatuates an opposite-gender target, which then has a 50% chance to be too lovestruck to move (fails on genderless or same-gender Pokemon)',
+            'Curse now works: a Ghost-type pays half its HP to put a draining curse on the foe, while any other type raises its Attack and Defense but lowers its Speed',
+            'The auto-battler and trainers stop using setup moves once the relevant stat is already boosted, instead of spamming Swords Dance',
+          ],
+        },
+      ],
+    },
     {
       version: '0.20.0',
       subtitle: 'Terrain',

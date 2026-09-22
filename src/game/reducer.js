@@ -2800,6 +2800,8 @@ export function gameReducer(state, action) {
             heldItemUsed: enemyVolatile.heldItemUsed ?? !1,
             tauntTurns: enemyVolatile.tauntTurns ?? 0,
             substituteHp: enemyVolatile.substituteHp ?? 0,
+            infatuated: enemyVolatile.infatuated ?? !1,
+            cursed: enemyVolatile.cursed ?? !1,
             screens: enemyVolatile.screens ?? { reflect: 0, lightScreen: 0 },
           }),
         {

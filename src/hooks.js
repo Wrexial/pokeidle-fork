@@ -402,6 +402,8 @@ export function useGameLoop() {
               heldItemUsed: playerVolatile.heldItemUsed ?? !1,
               tauntTurns: playerVolatile.tauntTurns ?? 0,
               substituteHp: playerVolatile.substituteHp ?? 0,
+              infatuated: playerVolatile.infatuated ?? !1,
+              cursed: playerVolatile.cursed ?? !1,
               screens: playerVolatile.screens ?? { reflect: 0, lightScreen: 0 },
             },
             enemyBattlePokemon = {
@@ -440,6 +442,8 @@ export function useGameLoop() {
               heldItemUsed: playerBattlePokemon.heldItemUsed ?? !1,
               tauntTurns: playerBattlePokemon.tauntTurns ?? 0,
               substituteHp: playerBattlePokemon.substituteHp ?? 0,
+              infatuated: playerBattlePokemon.infatuated ?? !1,
+              cursed: playerBattlePokemon.cursed ?? !1,
               screens: playerBattlePokemon.screens ?? { reflect: 0, lightScreen: 0 },
             },
             enemyVolatileUpdate = {
@@ -455,6 +459,8 @@ export function useGameLoop() {
               heldItemUsed: enemyBattlePokemon.heldItemUsed ?? !1,
               tauntTurns: enemyBattlePokemon.tauntTurns ?? 0,
               substituteHp: enemyBattlePokemon.substituteHp ?? 0,
+              infatuated: enemyBattlePokemon.infatuated ?? !1,
+              cursed: enemyBattlePokemon.cursed ?? !1,
               screens: enemyBattlePokemon.screens ?? { reflect: 0, lightScreen: 0 },
             }
           dispatch({

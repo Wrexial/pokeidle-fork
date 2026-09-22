@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.14**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.15**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -28,8 +28,8 @@ achievement rewards, map QoL, release rewards and notifications. The remaining
 items, best return first:
 
 1. **#16 More ideas (grab bag)** — mostly S · ★★★ — still open: challenge
-   modes (Nuzlocke / monotype / randomizer), canonical form-change items, a
-   larger-text option and a performance pass.
+   modes (Nuzlocke / monotype / randomizer), a larger-text option and a
+   performance pass.
 
 ### Tier 2 — High impact, worth the effort (medium–large)
 
@@ -314,11 +314,10 @@ Smaller or more speculative, roughly highest-value first:
       progress).
 - [ ] **Challenge modes** — Nuzlocke, monotype, randomizer, or a level-scaling
       toggle; big replay value from flags on the existing state.
-- [ ] **Form-changing items** — the reversible form transforms already work as
-      free level-up evolutions (`fix-form-transforms.cjs`: Rotom, Deoxys,
-      Shaymin, Therian formes, Kyurem, Necrozma, Calyrex, Zygarde, …), so the
-      dex is already fillable. Left open only to switch them to their canonical
-      items (Rotom Catalog, Gracidea, Meteorite, …) for flavour.
+- [x] **Form-changing items** — reversible transforms now use their canonical,
+      **reusable** items (Rotom Catalog, Gracidea, Meteorite, DNA Splicers, …)
+      sold in the Reward Shop instead of a level gate; `START_EVOLUTION` leaves
+      reusable items in the bag. Shipped in 0.9.15.
 - [x] **Release rewards / item selling** — releasing now pays money + an Exp.
       Candy by level tier (double for shinies) via `releaseReward`, previewed in
       the release confirmation; selling items already shipped with #34. Shipped
@@ -1194,6 +1193,11 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.9.15 (form-change items): reversible formes (Rotom, Giratina, Shaymin,
+Deoxys, the Therian formes, Kyurem, Zygarde, Hoopa, Necrozma, Zacian/Zamazenta,
+Calyrex) now use their canonical, reusable items from the Reward Shop instead
+of level gates.
 
 0.9.14 (daily quests): three per-day objectives rolled from reachable routes
 and species, with progress bars and claimable rewards, from a top-bar button.

@@ -283,7 +283,7 @@ export const bagCategories = [
     },
   ]
 
-/** @type {Record<string, { id: string, name: string, description: string }>} */
+/** @type {Record<string, { id: string, name: string, description: string, reusable?: boolean }>} */
 export const evolutionItems = {
     thunderStone: {
       id: 'thunderStone',
@@ -460,6 +460,91 @@ export const evolutionItems = {
       name: 'Malicious Armor',
       description: 'Evolves Charcadet into Ceruledge.',
     },
+    // Reusable form-change items (not consumed when used).
+    rotomCatalog: {
+      id: 'rotomCatalog',
+      name: 'Rotom Catalog',
+      description: 'Changes Rotom between its appliance forms.',
+      reusable: !0,
+    },
+    griseousOrb: {
+      id: 'griseousOrb',
+      name: 'Griseous Orb',
+      description: 'Changes Giratina between its Altered and Origin Formes.',
+      reusable: !0,
+    },
+    gracidea: {
+      id: 'gracidea',
+      name: 'Gracidea',
+      description: 'Changes Shaymin between its Land and Sky Formes.',
+      reusable: !0,
+    },
+    meteorite: {
+      id: 'meteorite',
+      name: 'Meteorite',
+      description: 'Changes Deoxys between its Formes.',
+      reusable: !0,
+    },
+    revealGlass: {
+      id: 'revealGlass',
+      name: 'Reveal Glass',
+      description: 'Switches the Forces of Nature between their Incarnate and Therian Formes.',
+      reusable: !0,
+    },
+    dnaSplicers: {
+      id: 'dnaSplicers',
+      name: 'DNA Splicers',
+      description: 'Changes Kyurem between its base, Black and White Formes.',
+      reusable: !0,
+    },
+    zygardeCube: {
+      id: 'zygardeCube',
+      name: 'Zygarde Cube',
+      description: 'Changes Zygarde between its forms.',
+      reusable: !0,
+    },
+    prisonBottle: {
+      id: 'prisonBottle',
+      name: 'Prison Bottle',
+      description: 'Changes Hoopa between its Confined and Unbound forms.',
+      reusable: !0,
+    },
+    nSolarizer: {
+      id: 'nSolarizer',
+      name: 'N-Solarizer',
+      description: 'Changes Necrozma into Dusk Mane Necrozma.',
+      reusable: !0,
+    },
+    nLunarizer: {
+      id: 'nLunarizer',
+      name: 'N-Lunarizer',
+      description: 'Changes Necrozma into Dawn Wings Necrozma.',
+      reusable: !0,
+    },
+    ultranecroziumZ: {
+      id: 'ultranecroziumZ',
+      name: 'Ultranecrozium Z',
+      description: 'Changes Necrozma into Ultra Necrozma.',
+      reusable: !0,
+    },
+    rustedSword: {
+      id: 'rustedSword',
+      name: 'Rusted Sword',
+      description: 'Changes Zacian between its Hero and Crowned Formes.',
+      reusable: !0,
+    },
+    rustedShield: {
+      id: 'rustedShield',
+      name: 'Rusted Shield',
+      description: 'Changes Zamazenta between its Hero and Crowned Formes.',
+      reusable: !0,
+    },
+    reinsOfUnity: {
+      id: 'reinsOfUnity',
+      name: 'Reins of Unity',
+      description: 'Changes Calyrex between its base and rider forms.',
+      reusable: !0,
+    },
   }
 
 export const tokenShopItems = [
@@ -611,6 +696,20 @@ export const tokenShopItems = [
       itemId: 'natureMint',
       tokenCost: 2,
     },
+    { itemId: 'rotomCatalog', tokenCost: 2 },
+    { itemId: 'griseousOrb', tokenCost: 3 },
+    { itemId: 'gracidea', tokenCost: 3 },
+    { itemId: 'meteorite', tokenCost: 3 },
+    { itemId: 'revealGlass', tokenCost: 3 },
+    { itemId: 'dnaSplicers', tokenCost: 4 },
+    { itemId: 'zygardeCube', tokenCost: 4 },
+    { itemId: 'prisonBottle', tokenCost: 3 },
+    { itemId: 'nSolarizer', tokenCost: 4 },
+    { itemId: 'nLunarizer', tokenCost: 4 },
+    { itemId: 'ultranecroziumZ', tokenCost: 4 },
+    { itemId: 'rustedSword', tokenCost: 4 },
+    { itemId: 'rustedShield', tokenCost: 4 },
+    { itemId: 'reinsOfUnity', tokenCost: 4 },
   ]
 
 /** @type {Record<string, { name: string, items: { itemId: string, unlockWildBattlesWon?: number }[] }>} */

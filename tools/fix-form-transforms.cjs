@@ -24,22 +24,34 @@ const species = JSON.parse(fs.readFileSync(SPECIES_PATH, 'utf8'))
 
 /**
  * Form-change groups. `star` links the base to each form (and back); `allToAll`
- * links every member to every other. The level gates the transform in both
- * directions (it is only a progress gate — these are not level-up evolutions).
- * @type {{ base: string, forms: string[], level: number, allToAll?: boolean }[]}
+ * links every member to every other. A group with `item` (or a per-form `items`
+ * map) uses that canonical, reusable item instead of a level gate; otherwise
+ * the level is only a progress gate (these are not level-up evolutions).
+ * @type {{ base: string, forms: string[], level: number, allToAll?: boolean, item?: string, items?: Record<string, string> }[]}
  */
 const FORM_GROUPS = [
-  { base: 'deoxys', forms: ['deoxys-a', 'deoxys-d', 'deoxys-s'], level: 30, allToAll: true },
-  { base: 'rotom', forms: ['h-rotom', 'w-rotom', 'f-rotom', 'fan-rotom', 'm-rotom'], level: 5 },
-  { base: 'tornadus', forms: ['tornadus-t'], level: 50 },
-  { base: 'thundurus', forms: ['thundurus-t'], level: 50 },
-  { base: 'landorus', forms: ['landorus-t'], level: 50 },
-  { base: 'kyurem', forms: ['b-kyurem', 'w-kyurem'], level: 100 },
+  { base: 'deoxys', forms: ['deoxys-a', 'deoxys-d', 'deoxys-s'], level: 30, allToAll: true, item: 'meteorite' },
+  { base: 'rotom', forms: ['h-rotom', 'w-rotom', 'f-rotom', 'fan-rotom', 'm-rotom'], level: 5, item: 'rotomCatalog' },
+  { base: 'giratina', forms: ['giratina-o'], level: 50, item: 'griseousOrb' },
+  { base: 'shaymin', forms: ['shaymin-s'], level: 30, item: 'gracidea' },
+  { base: 'tornadus', forms: ['tornadus-t'], level: 50, item: 'revealGlass' },
+  { base: 'thundurus', forms: ['thundurus-t'], level: 50, item: 'revealGlass' },
+  { base: 'landorus', forms: ['landorus-t'], level: 50, item: 'revealGlass' },
+  { base: 'enamorus', forms: ['enamorus-t'], level: 50, item: 'revealGlass' },
+  { base: 'kyurem', forms: ['b-kyurem', 'w-kyurem'], level: 100, item: 'dnaSplicers' },
+  { base: 'hoopa', forms: ['hoopa-u'], level: 100, item: 'prisonBottle' },
   { base: 'keldeo', forms: ['keldeo-r'], level: 15 },
   { base: 'greninja', forms: ['ash-greninja'], level: 100 },
-  { base: 'zygarde', forms: ['zygarde-10', 'zygarde-c'], level: 10, allToAll: true },
-  { base: 'necrozma', forms: ['necrozma-s', 'necrozma-l', 'u-necrozma'], level: 100, allToAll: true },
-  { base: 'calyrex', forms: ['calyrex-ir', 'calyrex-sr'], level: 100, allToAll: true },
+  { base: 'zygarde', forms: ['zygarde-10', 'zygarde-c'], level: 10, allToAll: true, item: 'zygardeCube' },
+  {
+    base: 'necrozma',
+    forms: ['necrozma-s', 'necrozma-l', 'u-necrozma'],
+    level: 100,
+    items: { 'necrozma-s': 'nSolarizer', 'necrozma-l': 'nLunarizer', 'u-necrozma': 'ultranecroziumZ' },
+  },
+  { base: 'zacian', forms: ['zacian-cs'], level: 100, item: 'rustedSword' },
+  { base: 'zamazenta', forms: ['zamazenta-cs'], level: 100, item: 'rustedShield' },
+  { base: 'calyrex', forms: ['calyrex-ir', 'calyrex-sr'], level: 100, allToAll: true, item: 'reinsOfUnity' },
 ]
 
 /**
@@ -87,20 +99,28 @@ const removeEdge = (from, into) => {
   return true
 }
 
-/** Ensure exactly one `from -> into` edge at `level` (no duplicate, no item). */
-const setEdge = (from, into, level, gender) => {
+/** Ensure exactly one `from -> into` edge, gated by `item` (reusable) or `level`. */
+const setEdge = (from, into, level, gender, item) => {
   const list = evolutionData[from] ?? []
+  const apply = (/** @type {any} */ entry) => {
+    if (item) {
+      entry.item = item
+      delete entry.level
+    } else {
+      entry.level = level
+      delete entry.item
+    }
+    delete entry.form
+    if (gender) entry.gender = gender
+    else delete entry.gender
+  }
   const existing = list.find((evolution) => evolution.into === into)
   if (existing) {
-    existing.level = level
-    delete existing.item
-    delete existing.form
-    if (gender) existing.gender = gender
-    else delete existing.gender
+    apply(existing)
     return
   }
-  const entry = { into, level }
-  if (gender) entry.gender = gender
+  const entry = { into }
+  apply(entry)
   list.push(entry)
   evolutionData[from] = list
 }
@@ -110,7 +130,7 @@ const before = JSON.stringify(evolutionData)
 for (const [from, into] of REMOVE_EDGES)
   if (removeEdge(from, into)) console.log(`removed ${from} -> ${into}`)
 
-for (const { base, forms, level, allToAll } of FORM_GROUPS) {
+for (const { base, forms, level, allToAll, item, items } of FORM_GROUPS) {
   const members = [base, ...forms]
   // Normalize: first drop every edge *inside* the group, then rebuild it.
   for (const from of members)
@@ -119,11 +139,12 @@ for (const { base, forms, level, allToAll } of FORM_GROUPS) {
     )
   if (allToAll) {
     for (const from of members)
-      for (const to of members) if (from !== to) setEdge(from, to, level)
+      for (const to of members) if (from !== to) setEdge(from, to, level, undefined, item)
   } else {
     for (const form of forms) {
-      setEdge(base, form, level)
-      setEdge(form, base, level)
+      const itemFor = items ? items[form] : item
+      setEdge(base, form, level, undefined, itemFor)
+      setEdge(form, base, level, undefined, itemFor)
     }
   }
 }

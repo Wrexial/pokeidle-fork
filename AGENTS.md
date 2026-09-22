@@ -376,9 +376,16 @@ One-off scripts used to build the data JSON (not run during dev/build):
   re-extraction of `evolution-data.json`. Because item evolutions carry no
   `level`, `generate-regions.cjs` gives them a nominal one for team-maturity.
 - `fix-form-transforms.cjs` — makes temporary form transformations reversible
-  (Deoxys, the Rotom appliances, the Therian formes, Kyurem, Necrozma, Calyrex,
-  Zygarde — Deoxys/Zygarde/Necrozma/Calyrex fully all-to-all) and drops the bad
-  `armarouge <-> ceruledge` edges. It also handles **gender forms**: the manual
+  (Deoxys, the Rotom appliances, Giratina, Shaymin, the Therian formes, Kyurem,
+  Zygarde, Hoopa, Necrozma, Zacian/Zamazenta, Calyrex — Deoxys/Zygarde/Calyrex
+  fully all-to-all, Necrozma star-shaped with a per-form item) and drops the bad
+  `armarouge <-> ceruledge` edges. Most transforms are gated by their canonical
+  **reusable** item (Rotom Catalog, Griseous Orb, Gracidea, Meteorite, Reveal
+  Glass, DNA Splicers, Zygarde Cube, Prison Bottle, N-Solarizer/N-Lunarizer/
+  Ultranecrozium Z, Rusted Sword/Shield, Reins of Unity) sold in the Reward
+  Shop; forms with no canonical item (Keldeo, Ash-Greninja) keep a level gate.
+  `START_EVOLUTION` does not consume items flagged `reusable`. It also handles
+  **gender forms**: the manual
   `basculegion`/`indeedee`/`oinkologne` male↔female edges are removed, and
   Basculegion/Oinkologne carry a `gender` tag on their evolution so only the
   variant matching the Pokemon's gender is offered (filtered in the party/box

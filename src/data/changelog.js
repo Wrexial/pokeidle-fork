@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.9.14'
+export const GAME_VERSION = '0.9.15'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.9.15',
+      subtitle: 'Form-Change Items',
+      sections: [
+        {
+          heading: 'Pokemon',
+          items: [
+            'Reversible form changes now use their canonical, reusable items \u2014 Rotom Catalog, Griseous Orb, Gracidea, Meteorite, Reveal Glass, DNA Splicers, Zygarde Cube, Prison Bottle, N-Solarizer / N-Lunarizer / Ultranecrozium Z, Rusted Sword / Rusted Shield and Reins of Unity \u2014 sold in the Reward Shop',
+            'These items are never consumed, so you can switch formes back and forth freely',
+          ],
+        },
+      ],
+    },
     {
       version: '0.9.14',
       subtitle: 'Daily Quests',

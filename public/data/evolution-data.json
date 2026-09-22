@@ -3267,89 +3267,89 @@
   "kyurem": [
     {
       "into": "b-kyurem",
-      "level": 100
+      "item": "dnaSplicers"
     },
     {
       "into": "w-kyurem",
-      "level": 100
+      "item": "dnaSplicers"
     }
   ],
   "rotom": [
     {
       "into": "h-rotom",
-      "level": 5
+      "item": "rotomCatalog"
     },
     {
       "into": "w-rotom",
-      "level": 5
+      "item": "rotomCatalog"
     },
     {
       "into": "f-rotom",
-      "level": 5
+      "item": "rotomCatalog"
     },
     {
       "into": "fan-rotom",
-      "level": 5
+      "item": "rotomCatalog"
     },
     {
       "into": "m-rotom",
-      "level": 5
+      "item": "rotomCatalog"
     }
   ],
   "giratina": [
     {
       "into": "giratina-o",
-      "level": 50
+      "item": "griseousOrb"
     }
   ],
   "shaymin": [
     {
       "into": "shaymin-s",
-      "level": 30
+      "item": "gracidea"
     }
   ],
   "giratina-o": [
     {
       "into": "giratina",
-      "level": 50
+      "item": "griseousOrb"
     }
   ],
   "shaymin-s": [
     {
       "into": "shaymin",
-      "level": 30
+      "item": "gracidea"
     }
   ],
   "deoxys": [
     {
       "into": "deoxys-a",
-      "level": 30
+      "item": "meteorite"
     },
     {
       "into": "deoxys-d",
-      "level": 30
+      "item": "meteorite"
     },
     {
       "into": "deoxys-s",
-      "level": 30
+      "item": "meteorite"
     }
   ],
   "tornadus": [
     {
       "into": "tornadus-t",
-      "level": 50
+      "item": "revealGlass"
     }
   ],
   "thundurus": [
     {
       "into": "thundurus-t",
-      "level": 50
+      "item": "revealGlass"
     }
   ],
   "landorus": [
     {
       "into": "landorus-t",
-      "level": 50
+      "item": "revealGlass"
     }
   ],
   "keldeo": [
@@ -3397,43 +3397,43 @@
   "zygarde": [
     {
       "into": "zygarde-10",
-      "level": 10
+      "item": "zygardeCube"
     },
     {
       "into": "zygarde-c",
-      "level": 10
+      "item": "zygardeCube"
     }
   ],
   "zygarde-10": [
     {
       "into": "zygarde",
-      "level": 10
+      "item": "zygardeCube"
     },
     {
       "into": "zygarde-c",
-      "level": 10
+      "item": "zygardeCube"
     }
   ],
   "zygarde-c": [
     {
       "into": "zygarde",
-      "level": 10
+      "item": "zygardeCube"
     },
     {
       "into": "zygarde-10",
-      "level": 10
+      "item": "zygardeCube"
     }
   ],
   "hoopa": [
     {
       "into": "hoopa-u",
-      "level": 100
+      "item": "prisonBottle"
     }
   ],
   "hoopa-u": [
     {
       "into": "hoopa",
-      "level": 100
+      "item": "prisonBottle"
     }
   ],
   "wishiwashi-s": [
@@ -3445,43 +3445,27 @@
   "necrozma": [
     {
       "into": "necrozma-s",
-      "level": 100
+      "item": "nSolarizer"
     },
     {
       "into": "necrozma-l",
-      "level": 100
+      "item": "nLunarizer"
     },
     {
       "into": "u-necrozma",
-      "level": 100
+      "item": "ultranecroziumZ"
     }
   ],
   "necrozma-s": [
     {
       "into": "necrozma",
-      "level": 100
-    },
-    {
-      "into": "necrozma-l",
-      "level": 100
-    },
-    {
-      "into": "u-necrozma",
-      "level": 100
+      "item": "nSolarizer"
     }
   ],
   "necrozma-l": [
     {
       "into": "necrozma",
-      "level": 100
-    },
-    {
-      "into": "necrozma-s",
-      "level": 100
-    },
-    {
-      "into": "u-necrozma",
-      "level": 100
+      "item": "nLunarizer"
     }
   ],
   "g-darmanitan": [
@@ -3499,25 +3483,25 @@
   "zacian": [
     {
       "into": "zacian-cs",
-      "level": 100
+      "item": "rustedSword"
     }
   ],
   "zacian-cs": [
     {
       "into": "zacian",
-      "level": 100
+      "item": "rustedSword"
     }
   ],
   "zamazenta": [
     {
       "into": "zamazenta-cs",
-      "level": 100
+      "item": "rustedShield"
     }
   ],
   "zamazenta-cs": [
     {
       "into": "zamazenta",
-      "level": 100
+      "item": "rustedShield"
     }
   ],
   "g-slowpoke": [
@@ -3561,31 +3545,31 @@
   "calyrex": [
     {
       "into": "calyrex-ir",
-      "level": 100
+      "item": "reinsOfUnity"
     },
     {
       "into": "calyrex-sr",
-      "level": 100
+      "item": "reinsOfUnity"
     }
   ],
   "calyrex-ir": [
     {
       "into": "calyrex",
-      "level": 100
+      "item": "reinsOfUnity"
     },
     {
       "into": "calyrex-sr",
-      "level": 100
+      "item": "reinsOfUnity"
     }
   ],
   "calyrex-sr": [
     {
       "into": "calyrex",
-      "level": 100
+      "item": "reinsOfUnity"
     },
     {
       "into": "calyrex-ir",
-      "level": 100
+      "item": "reinsOfUnity"
     }
   ],
   "h-voltorb": [
@@ -3651,13 +3635,13 @@
   "enamorus": [
     {
       "into": "enamorus-t",
-      "level": 50
+      "item": "revealGlass"
     }
   ],
   "enamorus-t": [
     {
       "into": "enamorus",
-      "level": 50
+      "item": "revealGlass"
     }
   ],
   "dialga": [
@@ -3892,103 +3876,103 @@
   "deoxys-a": [
     {
       "into": "deoxys",
-      "level": 30
+      "item": "meteorite"
     },
     {
       "into": "deoxys-d",
-      "level": 30
+      "item": "meteorite"
     },
     {
       "into": "deoxys-s",
-      "level": 30
+      "item": "meteorite"
     }
   ],
   "deoxys-d": [
     {
       "into": "deoxys",
-      "level": 30
+      "item": "meteorite"
     },
     {
       "into": "deoxys-a",
-      "level": 30
+      "item": "meteorite"
     },
     {
       "into": "deoxys-s",
-      "level": 30
+      "item": "meteorite"
     }
   ],
   "deoxys-s": [
     {
       "into": "deoxys",
-      "level": 30
+      "item": "meteorite"
     },
     {
       "into": "deoxys-a",
-      "level": 30
+      "item": "meteorite"
     },
     {
       "into": "deoxys-d",
-      "level": 30
+      "item": "meteorite"
     }
   ],
   "h-rotom": [
     {
       "into": "rotom",
-      "level": 5
+      "item": "rotomCatalog"
     }
   ],
   "w-rotom": [
     {
       "into": "rotom",
-      "level": 5
+      "item": "rotomCatalog"
     }
   ],
   "f-rotom": [
     {
       "into": "rotom",
-      "level": 5
+      "item": "rotomCatalog"
     }
   ],
   "fan-rotom": [
     {
       "into": "rotom",
-      "level": 5
+      "item": "rotomCatalog"
     }
   ],
   "m-rotom": [
     {
       "into": "rotom",
-      "level": 5
+      "item": "rotomCatalog"
     }
   ],
   "tornadus-t": [
     {
       "into": "tornadus",
-      "level": 50
+      "item": "revealGlass"
     }
   ],
   "thundurus-t": [
     {
       "into": "thundurus",
-      "level": 50
+      "item": "revealGlass"
     }
   ],
   "landorus-t": [
     {
       "into": "landorus",
-      "level": 50
+      "item": "revealGlass"
     }
   ],
   "b-kyurem": [
     {
       "into": "kyurem",
-      "level": 100
+      "item": "dnaSplicers"
     }
   ],
   "w-kyurem": [
     {
       "into": "kyurem",
-      "level": 100
+      "item": "dnaSplicers"
     }
   ],
   "keldeo-r": [
@@ -4006,15 +3990,7 @@
   "u-necrozma": [
     {
       "into": "necrozma",
-      "level": 100
-    },
-    {
-      "into": "necrozma-s",
-      "level": 100
-    },
-    {
-      "into": "necrozma-l",
-      "level": 100
+      "item": "ultranecroziumZ"
     }
   ],
   "basculegion": [],

@@ -2,7 +2,7 @@
 
 import { RAID_COOLDOWN_MS, RAID_LEVEL_MAX, breedShinyOdds, breedShinyParentOdds, daycareEggBattles, defaultCatchSettings, dexRewardVictoryTokens, expCandyDropChance, prestigeTokenReward, rareCandyDropChance, swarmBattleCount, swarmSpawnChance, valuableDropChance, wildMasterBallChance, wonderTradeShinyOdds } from '../data/config.js'
 import { ACHIEVEMENTS } from '../data/achievements.js'
-import { activeItems, consumableItems, pokeBalls } from '../data/items.js'
+import { activeItems, consumableItems, evolutionItems, pokeBalls } from '../data/items.js'
 import { dailyDropMultiplier, dailyEventByKey, rollDailyEvent, todayKey } from '../data/daily-events.js'
 import { natureName, randomNature } from '../data/natures.js'
 import { elite4Data, encounterData, gymLeaderData, mapData, moveLearnsets, pokemonSpecies, regions } from '../data/gameData.js'
@@ -912,10 +912,12 @@ export function gameReducer(state, action) {
       if (consumeItem) {
         const ownedItemCount = state.inventory[consumeItem] ?? 0
         if (ownedItemCount <= 0) return state
-        inventory = {
-          ...state.inventory,
-          [consumeItem]: ownedItemCount - 1,
-        }
+        // Form-change items are reusable; every other evolution item is consumed.
+        if (!evolutionItems[consumeItem]?.reusable)
+          inventory = {
+            ...state.inventory,
+            [consumeItem]: ownedItemCount - 1,
+          }
       }
       return {
         ...prepareNextBattle(state),

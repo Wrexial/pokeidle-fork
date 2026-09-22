@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.6**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.7**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -24,10 +24,11 @@ toast queue, #1 healing items, #12 dex rewards, #21 unlock tokens, #33
 Rare/Exp. Candies, #34 sellable valuables, #15 save export/import (slots and
 share codes still open), #41 box "New" sort prepend, #37 the Master Ball
 button, #2b natures, #14 the `node --test` suite, #5 daily events, and #16's
-achievement rewards and map QoL. The remaining items, best return first:
+achievement rewards, map QoL and release rewards. The remaining items, best
+return first:
 
 1. **#16 More ideas (grab bag)** — mostly S · ★★★ — the rest of the list:
-   release-for-candy/selling, notifications, quests, challenge modes.
+   notifications, quests, challenge modes.
 
 ### Tier 2 — High impact, worth the effort (medium–large)
 
@@ -310,8 +311,10 @@ Smaller or more speculative, roughly highest-value first:
       toggle; big replay value from flags on the existing state.
 - [ ] **Form-changing items** — Rotom / Deoxys / Shaymin / site-based forms —
       cosmetic but fills in the Pokedex.
-- [ ] **Release rewards / item selling** — release a Pokémon for tokens or candy,
-      and sell items back, to close the economy loop.
+- [x] **Release rewards / item selling** — releasing now pays money + an Exp.
+      Candy by level tier (double for shinies) via `releaseReward`, previewed in
+      the release confirmation; selling items already shipped with #34. Shipped
+      in 0.9.7.
 - [ ] **Accessibility** — reduced-motion toggle, colourblind-safe type badges,
       larger text option.
 - [ ] **Audio** — region music and catch/level-up SFX (currently silent).
@@ -1177,6 +1180,10 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.9.7 (release rewards): releasing a Pokemon pays money plus an Exp. Candy for
+its level tier (double candy and more money for shinies), previewed in the
+confirmation; quick-releasing a hatchling pays out too.
 
 0.9.6 (map QoL): the Town Map search box finds and jumps to any unlocked
 location (travelling to ordinary ones), and the active swarm's route shows a

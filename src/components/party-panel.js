@@ -7,6 +7,7 @@ import { evolutionData, pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
 import { genderForPokemon } from '../game/breeding.js'
+import { formatReward, releaseReward } from '../game/progression.js'
 import { ExpBar } from './exp-bar.js'
 import { HpBar } from './hp-bar.js'
 import { StatsPanel } from './stats-panel.js'
@@ -299,7 +300,15 @@ export function PartyPanel({
                     className: 'release-confirm',
                     children: [
                       jsxs('span', {
-                        children: ['Release ', releaseTarget.name, '?'],
+                        children: [
+                          'Release ',
+                          releaseTarget.name,
+                          '? ',
+                          jsx('span', {
+                            className: 'release-reward-hint',
+                            children: `You'll receive ${formatReward(releaseReward(releaseTarget))}.`,
+                          }),
+                        ],
                       }),
                       jsxs('div', {
                         className: 'release-confirm-buttons',

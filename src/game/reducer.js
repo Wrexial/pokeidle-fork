@@ -9,7 +9,7 @@ import { elite4Data, encounterData, gymLeaderData, mapData, moveLearnsets, pokem
 import { createVolatileState } from './combat.js'
 import { calculatePokemonStats, calculateRequiredExperience, createPokemon, getLevelUpResults, insertIntoBox, nextBoxSortMode, resolvePokemonMoves, sortBoxMembers } from './pokemon.js'
 import { canBreed, eggSpeciesKey } from './breeding.js'
-import { checkShinyOdds, computeUnlockedLocations, formatReward, getRegionUnlockTokens, isActiveEffectItem, loadActivePokemonFromParty, prepareNextBattle, rollCandyDrop, rollValuableDrop, syncActivePokemonIntoParty, tickBattleCounters } from './progression.js'
+import { checkShinyOdds, computeUnlockedLocations, formatReward, getRegionUnlockTokens, isActiveEffectItem, loadActivePokemonFromParty, prepareNextBattle, releaseReward, rollCandyDrop, rollValuableDrop, syncActivePokemonIntoParty, tickBattleCounters } from './progression.js'
 
 /** @type {GameState} */
 export const initialGameState = {
@@ -571,13 +571,32 @@ export function gameReducer(state, action) {
         hatchResult: null,
       }
     case 'RELEASE_HATCHLING': {
-      const { pokemonId } = action.payload
-      return {
+      const { pokemonId } = action.payload,
+        hatchling =
+          state.hatchResult?.id === pokemonId
+            ? state.hatchResult
+            : state.box.find((member) => member.id === pokemonId),
+        reward = hatchling ? releaseReward(hatchling) : { money: 0, items: {} },
+        inventory = { ...state.inventory }
+      for (const [itemId, quantity] of Object.entries(reward.items))
+        inventory[itemId] = (inventory[itemId] ?? 0) + quantity
+      const releasedState = {
         ...state,
         box: state.box.filter((member) => member.id !== pokemonId),
         hatchResult: state.hatchResult?.id === pokemonId ? null : state.hatchResult,
+        money: state.money + reward.money,
+        inventory,
         battleLog: [...state.battleLog, 'The newly hatched Pokemon was released.'].slice(-50),
       }
+      return hatchling
+        ? withNotification(releasedState, {
+            message: `Released the hatchling: +${formatReward(reward)}`,
+            tone: 'info',
+            icon: '🎁',
+            dedupeKey: `release:${pokemonId}`,
+            cooldown: 5000,
+          })
+        : releasedState
     }
     case 'PHASE_IDLE': {
       const nextState = prepareNextBattle(state)
@@ -1891,18 +1910,48 @@ export function gameReducer(state, action) {
     }
     case 'RELEASE_POKEMON': {
       const { pokemonId, source } = action.payload
+      if (source === 'box' && !state.box.some((member) => member.id === pokemonId)) return state
+      if (source !== 'box' && (state.party.length <= 1 || !state.party.some((member) => member.id === pokemonId)))
+        return state
+      const released =
+        source === 'box'
+          ? state.box.find((member) => member.id === pokemonId)
+          : state.party.find((member) => member.id === pokemonId)
+      if (!released) return state
+      const reward = releaseReward(released),
+        inventory = { ...state.inventory }
+      for (const [itemId, quantity] of Object.entries(reward.items))
+        inventory[itemId] = (inventory[itemId] ?? 0) + quantity
+      const applyReward = /** @param {GameState} nextState */ (nextState) =>
+        withNotification(
+          {
+            ...nextState,
+            money: state.money + reward.money,
+            inventory,
+            battleLog: [
+              ...state.battleLog,
+              `Released ${released.name} and received ${formatReward(reward)}.`,
+            ].slice(-50),
+          },
+          {
+            message: `Released ${released.name}: +${formatReward(reward)}`,
+            tone: 'info',
+            icon: '🎁',
+            dedupeKey: `release:${pokemonId}`,
+            cooldown: 5000,
+          }
+        )
       if (source === 'box')
-        return {
+        return applyReward({
           ...state,
           box: state.box.filter((member) => member.id !== pokemonId),
-        }
-      if (state.party.length <= 1) return state
+        })
       const baseState = state.phase === 'battling' ? prepareNextBattle(state) : state,
         newParty = baseState.party.filter((member) => member.id !== pokemonId),
         activeId = baseState.playerPokemon?.id
       let newActiveIndex = activeId ? newParty.findIndex((member) => member.id === activeId) : 0
-      return (
-        newActiveIndex < 0 && (newActiveIndex = 0),
+      newActiveIndex < 0 && (newActiveIndex = 0)
+      return applyReward(
         loadActivePokemonFromParty({
           ...baseState,
           party: newParty,

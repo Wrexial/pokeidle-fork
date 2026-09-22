@@ -2134,6 +2134,11 @@ img {
     font-weight: 700
 }
 
+.release-reward-hint {
+    color: #ffd060;
+    font-weight: 400
+}
+
 .release-confirm-buttons {
     display: flex;
     gap: 6px

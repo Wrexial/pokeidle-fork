@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.9.6'
+export const GAME_VERSION = '0.9.7'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.9.7',
+      subtitle: 'Release Rewards',
+      sections: [
+        {
+          heading: 'Pokemon',
+          items: [
+            'Releasing a Pokemon now pays out money and an Exp. Candy for its level tier \u2014 bigger candies for higher levels, and double candy plus more money for a shiny',
+            'The release confirmation previews what you\u2019ll receive, and quick-releasing a hatchling pays out too',
+          ],
+        },
+      ],
+    },
     {
       version: '0.9.6',
       subtitle: 'Town Map QoL',

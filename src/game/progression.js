@@ -148,6 +148,31 @@ export function formatReward(reward) {
   return parts.join(' \u00b7 ')
 }
 
+/** Exp. Candy granted when releasing a Pokemon, by its level tier. */
+const RELEASE_CANDY_TIERS = [
+  { minLevel: 75, itemId: 'expCandyXL' },
+  { minLevel: 50, itemId: 'expCandyL' },
+  { minLevel: 25, itemId: 'expCandyM' },
+  { minLevel: 0, itemId: 'expCandyS' },
+]
+
+/**
+ * What releasing a Pokemon pays out: money scaled by level, plus an Exp. Candy
+ * for its level tier (an extra one, and more money, for a shiny). Deterministic
+ * so the release confirmation can preview it.
+ * @param {Pokemon} pokemon
+ * @returns {{ money: number, items: Record<string, number> }}
+ */
+export function releaseReward(pokemon) {
+  const level = pokemon.level ?? 1,
+    tier = RELEASE_CANDY_TIERS.find((candidate) => level >= candidate.minLevel),
+    quantity = (tier ? 1 : 0) + (pokemon.isShiny ? 1 : 0)
+  return {
+    money: Math.floor(level * (pokemon.isShiny ? 40 : 15)),
+    items: tier && quantity > 0 ? { [tier.itemId]: quantity } : {},
+  }
+}
+
 /**
  * @param {GameState} state
  * @returns {string[]}

@@ -117,6 +117,13 @@
       section h2 .icon {
         margin-right: 6px;
       }
+      section h3 {
+        margin: 16px 0 4px;
+        font-size: 15px;
+        color: var(--accent);
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 3px;
+      }
       section p {
         margin: 8px 0;
       }
@@ -191,6 +198,7 @@
           <li><a href="#dex">Pokédex &amp; Shiny Charm</a></li>
           <li><a href="#index">Encounter index</a></li>
           <li><a href="#saves">Saves</a></li>
+          <li><a href="#status">What works &amp; what's WIP</a></li>
           <li><a href="#secrets">Secrets</a></li>
         </ol>
       </div>
@@ -250,15 +258,17 @@
           <li>Every route uses its real wild table; the <strong>Wild Pokémon</strong> grid shows each species, its type, level range and rarity.</li>
           <li>The <strong>◆</strong> badge marks species that spawn <em>only</em> on that route.</li>
           <li><strong>Catch settings</strong> decide what gets auto-caught: always, only shinies, above a level, or only species new to the Pokédex — set globally or per route.</li>
-          <li>Balls: Poké Ball, Great Ball, Ultra Ball and the never-failing Master Ball.</li>
+          <li>Balls: Poké Ball, Great Ball, Ultra Ball, Premier Ball, the situational Quick / Timer / Repeat / Net / Dive / Dusk / Nest Balls, and the never-failing Master Ball. Each situational ball only gets its catch bonus in the right situation — see <a href="#status">What works &amp; what's WIP</a>.</li>
         </ul>
       </section>
 
       <section id="battle">
         <h2><span class="icon">⚔️</span>Battles</h2>
         <ul>
-          <li>The familiar type chart, STAB, critical hits and stat stages all apply.</li>
-          <li><strong>Status conditions</strong>: poison and burn deal damage each turn (burn halves physical attack), freeze and sleep stop a Pokémon acting, and flinching skips a turn. Drain moves heal the user.</li>
+          <li>The familiar type chart, STAB, critical hits, damage variance and stat stages all apply — plus accuracy and evasion stages.</li>
+          <li><strong>Status conditions</strong>: poison and toxic deal damage each turn, burn also halves physical attack, freeze and sleep stop a Pokémon acting, paralysis halves Speed and can skip a turn, confusion can make a Pokémon hurt itself, and flinching skips a turn. Leech Seed drains into the planter.</li>
+          <li><strong>Weather</strong> (rain, sun, sandstorm, snow, hail) scales damage, powers weather abilities and chips or heals each turn.</li>
+          <li><strong>Abilities</strong> and <strong>held items</strong> are live, but only some are implemented — see <a href="#status">What works &amp; what's WIP</a>.</li>
           <li>Moves are learned by levelling; open a Pokémon's stats and use the move manager to teach it anything from its family's learnset.</li>
           <li>Use the speed controls to fast-forward, and the catch selector to batch-apply Repel/Honey.</li>
         </ul>
@@ -280,9 +290,10 @@
       <section id="items">
         <h2><span class="icon">🛒</span>Items &amp; shops</h2>
         <ul>
-          <li><strong>Poké Marts</strong> (in towns) sell balls and repels; their stock opens up as you progress, so Ultra Balls aren't available in the first town.</li>
+          <li><strong>Poké Marts</strong> (in towns) sell balls, potions, repels and held items; their stock opens up as you progress, so Ultra Balls aren't available in the first town.</li>
           <li><strong>Victory Tokens</strong> — earned from gyms, Champions, Prestige and the Battle Tower — are spent in the <strong>Reward Shop</strong>.</li>
           <li>The Reward Shop stocks <strong>evolution items</strong>: elemental stones, King's Rock, Metal Coat, Protector, Upgrade, the <strong>Link Cable</strong> (trade evolutions) and more.</li>
+          <li><strong>Held items</strong> (Leftovers, Choice items, Berries, type boosters…) are equipped from the Bag's Held Items tab. Their effects are listed in <a href="#status">What works &amp; what's WIP</a>.</li>
           <li><strong>Repel</strong> halves a chosen species' encounter rate; <strong>Honey</strong> doubles it. <strong>Exp. Share</strong> levels the whole party.</li>
         </ul>
       </section>
@@ -294,7 +305,7 @@
           Eevee, Vulpix, Growlithe, Gloom…), and Pokémon that normally evolve by trading
           (Kadabra, Machoke, Graveler, Haunter and friends) use a <strong>Link Cable</strong>.
         </p>
-        <p>Open a Pokémon's stats panel to see every evolution it can make and what it needs.</p>
+        <p>Open a Pokémon's stats panel to see every evolution it can make and what it needs. Some evolutions need high <strong>friendship</strong> instead of a level (Golbat → Crobat, Pichu → Pikachu, Eevee's Espeon / Umbreon / Sylveon, and several others) — friendship rises as the Pokémon levels up and wins battles.</p>
       </section>
 
       <section id="raids">
@@ -311,7 +322,8 @@
         <ul>
           <li>Deposit two Pokémon from their stats panel into the Daycare; they produce an Egg after 50 battles.</li>
           <li>Breeding respects <strong>gender</strong> and <strong>egg groups</strong>: the parents must be opposite genders and share an egg group. <strong>Ditto</strong> can breed with almost anything, genderless Pokémon need a Ditto, and Undiscovered species (legendaries, babies) won't breed at all.</li>
-          <li>Eggs hatch into the mother's base form at level 1, with 1-in-4,096 shiny odds — improved to 1-in-512 if a parent is shiny.</li>
+          <li>Eggs hatch into the mother's base form at level 1, with 1-in-4,096 shiny odds — improved to 1-in-512 if a parent is shiny. The Egg goes to your party (or box when full) and hatches after 30–120 wild wins depending on the species.</li>
+          <li>Eggs <strong>inherit from their parents</strong>: 3 of the parents' best IVs, a 50% chance of a parent's nature, and any moves the hatchling can learn that the parents knew.</li>
         </ul>
       </section>
 
@@ -328,11 +340,18 @@
       <section id="tower">
         <h2><span class="icon">🏰</span>Battle Tower</h2>
         <p>
-          Once a region's Champion is beaten, its Gyms tab opens the
-          <strong>Battle Tower</strong>: endless, increasingly strong trainers for Victory
-          Tokens, with your team healed between floors. The first floors cap out at level
-          100 around floor 25, after which the trainers' stats keep climbing instead, so
-          it never truly plateaus. A loss ends the run and records your best floor.
+          The Battle Tower lives in <strong>Hoenn</strong>. Once Hoenn's Champion is
+          beaten, its Gyms tab opens the tower: endless, increasingly strong trainers for
+          Victory Tokens, with your team healed between floors. Stats start scaling at
+          floor 15, the pay is one token per ten floors, and a loss ends the run and
+          records your best floor.
+        </p>
+        <p>
+          Tower battles are a <strong>deterministic puzzle</strong>: each floor's six
+          opponents are fixed and there are no critical hits, misses or damage variance,
+          so the result comes down to your team's stats, types, moves, abilities and held
+          items. The Gyms tab previews the next floor so you can build a counter before
+          committing. Other regions are planned to get their own minigames instead.
         </p>
       </section>
 
@@ -341,7 +360,7 @@
         <ul>
           <li>Base shiny odds are 1 in 8,192; the <strong>Shiny Charm</strong> roughly doubles them.</li>
           <li>The <strong>shiny chain</strong> improves the odds of a species you encounter repeatedly (up to 4×), and resets when a different species appears — the chained species shows a <strong>✦</strong> badge.</li>
-          <li><strong>Honey</strong> doubles a species' encounter rate and <strong>Repel</strong> halves one, so you can steer a route toward the Pokémon you're hunting.</li>
+          <li><strong>Honey</strong> doubles a species' encounter rate and <strong>Repel</strong> halves one. Once the chain reaches 4 they lock the hunt in: Honey heavily favours the hunted species and Repel pushes every other species away, so a chain can't be broken by a random encounter.</li>
         </ul>
       </section>
 
@@ -385,9 +404,129 @@
       <section id="saves">
         <h2><span class="icon">💾</span>Saves</h2>
         <p>
-          Your game saves automatically to this browser. Settings (the gear / ? menu) has a
-          reset option if you ever want to start over. Back up or sync options are planned.
+          Your game saves automatically to this browser. Settings (the gear / ? menu) can
+          <strong>export your save to a file</strong> and import one back, or reset to
+          start over. Cloud sync is planned.
         </p>
+      </section>
+
+      <section id="status">
+        <h2><span class="icon">🧪</span>What works &amp; what's WIP</h2>
+        <p>
+          The engine is deep but not complete, and a few battle features are easy to
+          misread. This page lists what is fully implemented, what is only partly there,
+          and the quirks worth knowing about — especially <strong>moves</strong> and
+          <strong>abilities</strong>.
+        </p>
+
+        <h3>Moves — what actually does something</h3>
+        <p>
+          A move only works if its effect is one the engine understands. Any move whose
+          effect falls outside the list below behaves like a plain attack (if it has
+          power) or does nothing at all (if it is a status move). There are roughly 900
+          moves in the data, so many status moves are still cosmetic.
+        </p>
+        <ul>
+          <li><strong>Damage moves</strong> work, including STAB, the type chart, critical
+            hits and the 85–100% damage roll.</li>
+          <li><strong>Stat changes</strong> (Swords Dance, Growl, Calm Mind, Agility…),
+            including the <strong>accuracy</strong> and <strong>evasion</strong> stages used
+            by Sand Attack / Double Team.</li>
+          <li><strong>Status</strong>: poison, badly poisoned (toxic), burn, freeze, sleep,
+            paralysis, confusion and flinching.</li>
+          <li><strong>Healing</strong> (Recover, Roost, Synthesis, Rest…) and
+            <strong>drain</strong> moves (Giga Drain, Leech Life).</li>
+          <li><strong>Multi-hit</strong> moves (Bullet Seed, Icicle Spear…) and
+            <strong>high critical-hit</strong> moves (Slash, Stone Edge…).</li>
+          <li><strong>Protect / Detect</strong> (and King's Shield-style blocking),
+            <strong>Taunt</strong>, <strong>Substitute</strong> and
+            <strong>Leech Seed</strong>.</li>
+          <li><strong>Screens</strong>: Reflect, Light Screen, Aurora Veil.</li>
+          <li><strong>Entry hazards</strong>: Stealth Rock, Spikes, Toxic Spikes, Sticky
+            Web — they hit Pokémon as they switch in.</li>
+          <li><strong>Weather</strong>: Rain Dance, Sunny Day, Sandstorm, Snowscape and
+            Hail.</li>
+          <li>Recoil, crash-on-miss, recharge (Hyper Beam), self-destruct and multi-turn
+            locks (Outrage-style) are handled.</li>
+        </ul>
+        <div class="note">
+          <strong>Not yet implemented:</strong> terrain, infatuation, Curse, most
+          stat-change-clearing moves (Haze, Clear Smog), Taunt's full interaction rules,
+          and the large tail of one-off utility moves. If it is not in the list above,
+          assume it does little.
+        </div>
+
+        <h3>Abilities — the implemented set</h3>
+        <p>
+          Every Pokémon rolls one of its real abilities (there is a small chance of the
+          hidden one) and the stats panel shows it. Only about 40 of the ~300 abilities
+          have an effect so far; the rest are inert. The working ones are:
+        </p>
+        <ul>
+          <li><strong>Entry:</strong> Intimidate, Drizzle, Drought, Sand Stream, Snow
+            Warning.</li>
+          <li><strong>Type immunity / absorb:</strong> Levitate, Water Absorb, Dry Skin,
+            Volt Absorb, Lightning Rod, Motor Drive, Flash Fire, Well-Baked Body, Sap
+            Sipper, Storm Drain.</li>
+          <li><strong>Damage:</strong> Thick Fat, Multiscale, Shadow Shield, Filter, Solid
+            Rock, Prism Armor, Wonder Guard, Magic Guard, Sturdy, Overgrow, Blaze, Torrent,
+            Swarm.</li>
+          <li><strong>Stats:</strong> Huge Power, Pure Power, Guts, Speed Boost, Clear
+            Body, White Smoke, Hyper Cutter, Big Pecks, Keen Eye.</li>
+          <li><strong>Status &amp; weather:</strong> Immunity, Limber, Water Veil,
+            Insomnia, Vital Spirit, Sweet Veil, Magma Armor, Shed Skin, Swift Swim,
+            Chlorophyll, Sand Rush, Slush Rush, Rain Dish, Dry Skin, Ice Body.</li>
+        </ul>
+        <div class="note">
+          Contact abilities (Static, Flame Body, Rough Skin, Poison Point) and most
+          switch-out abilities (Regenerator, Natural Cure) are not wired up yet.
+        </div>
+
+        <h3>Held items</h3>
+        <p>
+          Held items are bought at marts and equipped from the Bag's <strong>Held
+          Items</strong> tab; wild and trainer Pokémon hold them too. These work:
+        </p>
+        <ul>
+          <li><strong>Leftovers</strong> (heal 1/16 a turn) and <strong>Life Orb</strong>
+            (+30% damage, 10% recoil).</li>
+          <li><strong>Choice Band / Specs / Scarf</strong> (+50% stat) and
+            <strong>Assault Vest</strong> (+50% Sp. Def). Note: the Choice items do
+            <em>not</em> lock you into one move yet.</li>
+          <li><strong>Eviolite</strong> (+50% Def/Sp. Def unless fully evolved),
+            <strong>Focus Sash</strong> (survive one KO from full HP).</li>
+          <li><strong>Sitrus Berry</strong> and <strong>Lum Berry</strong>.</li>
+          <li>All 18 <strong>type boosters</strong> (Charcoal, Mystic Water, Magnet, the
+            plates…), giving +20% to their type.</li>
+        </ul>
+
+        <h3>Other things that trip people up</h3>
+        <ul>
+          <li><strong>Battle Tower is Hoenn-only</strong> and is a <em>deterministic
+            puzzle</em>: each floor's opponent is fixed and there are no crits, misses or
+            damage variance. The Gyms tab previews the next floor so you can build a
+            counter. Other regions will get their own minigames later.</li>
+          <li><strong>Situational balls</strong> only get their bonus in the right
+            situation — Quick (one-turn battle), Timer (long battle), Repeat (already in
+            the Pokédex), Net (Water/Bug), Dive (water routes), Dusk (caves/night) and
+            Nest (low level). Auto-catch picks the best one.</li>
+          <li><strong>Honey + Repel</strong> become a real hunt once the shiny chain
+            reaches 4: Honey heavily favours the hunted species and Repel pushes every
+            other species away.</li>
+          <li><strong>Friendship</strong> (a ❤ badge in the stats panel) rises with
+            levels and wild wins, and gates friendship evolutions such as Golbat → Crobat
+            and Eevee's Espeon / Umbreon / Sylveon.</li>
+          <li><strong>Breeding inherits</strong> 3 of the parents' best IVs, a 50% chance
+            of a parent's nature, and moves the hatchling can learn.</li>
+        </ul>
+
+        <h3>Still to come</h3>
+        <ul>
+          <li>Terrain, the remaining abilities and held items, and the huge back-catalogue
+            of status moves.</li>
+          <li>Minigames for the regions that don't host the Battle Tower.</li>
+          <li>Online sync / cloud saves.</li>
+        </ul>
       </section>
 
       <section id="secrets">

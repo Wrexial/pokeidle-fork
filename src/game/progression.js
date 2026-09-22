@@ -174,6 +174,27 @@ export function releaseReward(pokemon) {
 }
 
 /**
+ * Summarise what happened while the tab was hidden, or null when nothing worth
+ * reporting changed. Used by the "welcome back" away alert.
+ * @param {{ wildBattlesWon: number, trainerBattlesWon: number, money: number, pokedexCaught: string[], shinyCaught: string[] }} before
+ * @param {{ wildBattlesWon: number, trainerBattlesWon: number, money: number, pokedexCaught: string[], shinyCaught: string[] }} after
+ * @returns {string | null}
+ */
+export function awaySummary(before, after) {
+  const battles =
+      after.wildBattlesWon + after.trainerBattlesWon - (before.wildBattlesWon + before.trainerBattlesWon),
+    caught = after.pokedexCaught.length - before.pokedexCaught.length,
+    shinies = after.shinyCaught.length - before.shinyCaught.length,
+    money = after.money - before.money,
+    parts = []
+  if (battles > 0) parts.push(`${battles.toLocaleString()} battle${battles === 1 ? '' : 's'}`)
+  if (caught > 0) parts.push(`${caught} new species`)
+  if (shinies > 0) parts.push(`${shinies} shin${shinies === 1 ? 'y' : 'ies'}`)
+  if (money !== 0) parts.push(`${money > 0 ? '+' : '-'}$${Math.abs(money).toLocaleString()}`)
+  return parts.length > 0 ? `While you were away: ${parts.join(', ')}.` : null
+}
+
+/**
  * @param {GameState} state
  * @returns {string[]}
  */

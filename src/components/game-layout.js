@@ -2,7 +2,7 @@
 
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { useGame } from '../game/context.js'
-import { useIsMobile, useKonamiCode, useDailyEvent } from '../hooks.js'
+import { useIsMobile, useKonamiCode, useDailyEvent, useBrowserNotifications, useAwayAlert } from '../hooks.js'
 import { BattleScreen } from './battle-screen.js'
 import { TownMap } from './town-map.js'
 import { PartyBoxPanel } from './party-box-panel.js'
@@ -17,6 +17,9 @@ export function GameLayout() {
   useKonamiCode(() => dispatch({ type: 'DEBUG_MAX_LEVEL' }))
   // Rolls today's daily event and refreshes it at local midnight.
   useDailyEvent()
+  // Browser notifications for key events while hidden + a "welcome back" alert.
+  useBrowserNotifications()
+  useAwayAlert()
   return useIsMobile()
     ? jsxs('div', {
         className: 'game-layout mobile',

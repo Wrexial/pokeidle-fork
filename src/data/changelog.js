@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.9.7'
+export const GAME_VERSION = '0.9.8'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.9.8',
+      subtitle: 'Notifications & Away Alert',
+      sections: [
+        {
+          heading: 'Notifications',
+          items: [
+            'An opt-in setting now mirrors key events (shinies, new Pokedex entries, badges, raids and rare finds) to a browser notification while the tab is in the background',
+            'Returning after the tab has been hidden for a while shows a \u201cwhile you were away\u201d summary of battles, new species, shinies and money',
+          ],
+        },
+      ],
+    },
     {
       version: '0.9.7',
       subtitle: 'Release Rewards',

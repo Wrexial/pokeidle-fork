@@ -11,7 +11,7 @@ import { useGame } from './game/context.js'
 import { attemptCatch, selectAutoCatchBall, selectBestBall, shouldAutoCatch } from './game/catching.js'
 import { createVolatileState, resolveBattleTurn } from './game/combat.js'
 import { calculatePokemonStats, generateIVs, getPerfectIVs, resolvePokemonMoves } from './game/pokemon.js'
-import { awardExperience, checkShinyOdds, resolveActiveModifiers, resolvePokemonEncounter, resolveRoamer, shinyOddsForSpecies } from './game/progression.js'
+import { awaySummary, awardExperience, checkShinyOdds, resolveActiveModifiers, resolvePokemonEncounter, resolveRoamer, shinyOddsForSpecies } from './game/progression.js'
 
 /**
  * @param {string} text
@@ -816,5 +816,79 @@ export function useDailyEvent() {
     refresh()
     const intervalId = setInterval(refresh, 60_000)
     return () => clearInterval(intervalId)
+  }, [dispatch])
+}
+
+/**
+ * Mirror important in-game toasts to a browser notification while the tab is
+ * hidden (opt-in from Settings). Info-only toasts are skipped so the alerts
+ * stay meaningful; the first observed toast just sets the baseline.
+ */
+export function useBrowserNotifications() {
+  const { state } = useGame(),
+    lastSeenRef = React.useRef(/** @type {number | null} */ (null))
+  return React.useEffect(() => {
+    const lastNotification = state.notifications[state.notifications.length - 1]
+    if (!lastNotification) return
+    const previousId = lastSeenRef.current
+    lastSeenRef.current = lastNotification.id
+    if (!state.browserNotifications || previousId === null) return
+    if (!document.hidden) return
+    if (typeof Notification === 'undefined' || Notification.permission !== 'granted') return
+    const fresh = state.notifications
+      .filter(
+        (notification) => notification.id > previousId && notification.tone !== 'info'
+      )
+      .slice(-3)
+    for (const notification of fresh)
+      new Notification('Pokemon Idle', {
+        body: `${notification.icon ? `${notification.icon} ` : ''}${notification.message}`,
+        tag: notification.dedupeKey ?? `pokemon-idle:${notification.id}`,
+      })
+  }, [state.notifications, state.browserNotifications])
+}
+
+/**
+ * Show a "while you were away" summary toast when the player returns after the
+ * tab has been hidden for a while. The idle loop keeps running in a background
+ * tab (throttled), so the summary reflects real progress.
+ */
+export function useAwayAlert() {
+  const { state, dispatch } = useGame(),
+    stateRef = React.useRef(state)
+  React.useEffect(() => {
+    stateRef.current = state
+  }, [state])
+  return React.useEffect(() => {
+    const AWAY_THRESHOLD_MS = 30_000
+    let hiddenAt = 0,
+      snapshot = /** @type {GameState | null} */ (null)
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        hiddenAt = Date.now()
+        snapshot = stateRef.current
+        return
+      }
+      const awayMs = hiddenAt ? Date.now() - hiddenAt : 0
+      hiddenAt = 0
+      if (!snapshot || awayMs < AWAY_THRESHOLD_MS) {
+        snapshot = null
+        return
+      }
+      const summary = awaySummary(snapshot, stateRef.current)
+      snapshot = null
+      summary &&
+        dispatch({
+          type: 'PUSH_NOTIFICATION',
+          payload: {
+            message: summary,
+            tone: 'info',
+            icon: '🌙',
+            dedupeKey: `away:${Date.now()}`,
+          },
+        })
+    }
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange)
   }, [dispatch])
 }

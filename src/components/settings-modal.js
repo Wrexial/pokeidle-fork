@@ -10,6 +10,7 @@ export function SettingsModal({ onClose }) {
   const { state, dispatch } = useGame()
   const [confirming, setConfirming] = React.useState(!1)
   const [importError, setImportError] = React.useState('')
+  const [notifyError, setNotifyError] = React.useState('')
   /** @type {React.RefObject<HTMLInputElement>} */
   const fileInputRef = React.useRef(/** @type {any} */ (null))
   function resetSave() {
@@ -59,6 +60,23 @@ export function SettingsModal({ onClose }) {
       }
     }
     reader.readAsText(file)
+  }
+  async function toggleBrowserNotifications() {
+    if (!state.browserNotifications) {
+      if (typeof Notification === 'undefined') {
+        setNotifyError('This browser does not support notifications.')
+        return
+      }
+      if (Notification.permission !== 'granted') {
+        const permission = await Notification.requestPermission()
+        if (permission !== 'granted') {
+          setNotifyError('Notification permission was denied by the browser.')
+          return
+        }
+      }
+    }
+    setNotifyError('')
+    dispatch({ type: 'TOGGLE_BROWSER_NOTIFICATIONS' })
   }
   return jsx('div', {
     className: 'battle-info-overlay',
@@ -128,6 +146,33 @@ export function SettingsModal({ onClose }) {
                     target: '_blank',
                     rel: 'noopener noreferrer',
                     children: 'Wild Encounter Index',
+                  }),
+                  jsxs('div', {
+                    className: 'settings-section',
+                    children: [
+                      jsx('div', {
+                        className: 'settings-section-title',
+                        children: 'Notifications',
+                      }),
+                      jsx('p', {
+                        className: 'settings-hint',
+                        children:
+                          'Get a browser notification for shinies, new Pokedex entries, badges and other key events while the tab is in the background. Returning after a while also shows a summary.',
+                      }),
+                      jsx('button', {
+                        className: `settings-toggle-btn${state.browserNotifications ? ' active' : ''}`,
+                        onClick: toggleBrowserNotifications,
+                        children: state.browserNotifications
+                          ? 'Browser Notifications: ON'
+                          : 'Browser Notifications: OFF',
+                      }),
+                      notifyError
+                        ? jsx('p', {
+                            className: 'settings-save-error',
+                            children: notifyError,
+                          })
+                        : null,
+                    ],
                   }),
                   jsxs('div', {
                     className: 'settings-section',

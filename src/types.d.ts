@@ -194,6 +194,8 @@ type GameState = {
   paused: boolean
   autoCatch: boolean
   autoProceed: boolean
+  /** Raise browser notifications for key events while the tab is hidden. */
+  browserNotifications: boolean
   nextPokemonId: number
   money: number
   inventory: Record<string, number>

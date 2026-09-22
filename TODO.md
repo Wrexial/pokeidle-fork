@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.7**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.8**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -24,11 +24,12 @@ toast queue, #1 healing items, #12 dex rewards, #21 unlock tokens, #33
 Rare/Exp. Candies, #34 sellable valuables, #15 save export/import (slots and
 share codes still open), #41 box "New" sort prepend, #37 the Master Ball
 button, #2b natures, #14 the `node --test` suite, #5 daily events, and #16's
-achievement rewards, map QoL and release rewards. The remaining items, best
-return first:
+achievement rewards, map QoL, release rewards and notifications. The remaining
+items, best return first:
 
-1. **#16 More ideas (grab bag)** — mostly S · ★★★ — the rest of the list:
-   notifications, quests, challenge modes.
+1. **#16 More ideas (grab bag)** — mostly S · ★★★ — still open: quests,
+   Pok\u00e9rus, challenge modes (Nuzlocke / monotype / randomizer), form-changing
+   items, accessibility, audio, combat feedback and a performance pass.
 
 ### Tier 2 — High impact, worth the effort (medium–large)
 
@@ -305,8 +306,10 @@ Smaller or more speculative, roughly highest-value first:
 - [x] **Map QoL** — the active swarm's route now carries a pulsing bee badge
       (hover for species + battles left), and the map has a search box that jumps
       to (and travels to) any unlocked location. Shipped in 0.9.6.
-- [ ] **Notifications** — browser notifications and an "away" alert (pairs
-      with offline progress, #7).
+- [x] **Notifications** — opt-in browser notifications for key events while
+      the tab is hidden, plus a "while you were away" summary on return. Shipped
+      in 0.9.8 (browser alerts are foreground-only until #7 adds offline
+      progress).
 - [ ] **Challenge modes** — Nuzlocke, monotype, randomizer, or a level-scaling
       toggle; big replay value from flags on the existing state.
 - [ ] **Form-changing items** — Rotom / Deoxys / Shaymin / site-based forms —
@@ -1180,6 +1183,11 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.9.8 (notifications): an opt-in setting mirrors key toasts (shinies, new
+dex entries, badges, raids, rare finds) to browser notifications while the tab
+is hidden, and returning after 30s+ away shows a "while you were away" summary
+of battles, new species, shinies and money.
 
 0.9.7 (release rewards): releasing a Pokemon pays money plus an Exp. Candy for
 its level tier (double candy and more money for shinies), previewed in the

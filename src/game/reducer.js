@@ -83,6 +83,8 @@ export const initialGameState = {
   towerBest: {},
   victoryTokens: 0,
   autoProceed: !1,
+  /** Whether key events raise a browser notification while the tab is hidden. */
+  browserNotifications: !1,
   raidCooldownEnd: null,
   raidLegendary: null,
   raidRegion: null,
@@ -2202,6 +2204,11 @@ export function gameReducer(state, action) {
       return {
         ...state,
         autoProceed: !state.autoProceed,
+      }
+    case 'TOGGLE_BROWSER_NOTIFICATIONS':
+      return {
+        ...state,
+        browserNotifications: !state.browserNotifications,
       }
     case 'BUY_REWARD_ITEM': {
       const { itemId, cost } = action.payload

@@ -103,7 +103,16 @@ export function BoxPanel({
                   }),
                   jsx('button', {
                     className: `box-pokedex-btn${searchActive ? ' active' : ''}`,
-                    onClick: () => setSearchOpen((open) => !open),
+                    onClick: () => {
+                      // Collapsing the search clears it so the box isn't left
+                      // filtered with the controls hidden.
+                      if (searchOpen) {
+                        setQuery('')
+                        setFilterMode('all')
+                        setPage(0)
+                      }
+                      setSearchOpen(!searchOpen)
+                    },
                     children: 'Search',
                   }),
                 ],

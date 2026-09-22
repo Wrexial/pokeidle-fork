@@ -1,10 +1,22 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.9.24'
+export const GAME_VERSION = '0.9.25'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.9.25',
+      subtitle: 'Box Search Fix',
+      sections: [
+        {
+          heading: 'Fixes',
+          items: [
+            'Collapsing the box search now clears the query and filter, so the box is never left filtered with the search controls hidden',
+          ],
+        },
+      ],
+    },
     {
       version: '0.9.24',
       subtitle: 'Larger Text',

@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.24**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.25**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -1200,6 +1200,8 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.9.25 (box search fix): collapsing the box search now clears the query/filter.
 
 0.9.24 (larger text): a Settings toggle scales the whole UI up 15% for
 readability, completing the accessibility items.

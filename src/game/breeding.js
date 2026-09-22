@@ -1,7 +1,14 @@
 // Breeding rules: gender and egg-group compatibility for the Daycare.
 
 import { breedingData, pokemonSpecies } from '../data/gameData.js'
-import { getPreEvolutionChain } from './pokemon.js'
+import { randomNature } from '../data/natures.js'
+import {
+  IV_STAT_ORDER,
+  generateIVs,
+  getFamilyLearnset,
+  getPreEvolutionChain,
+  resolvePokemonMoves,
+} from './pokemon.js'
 
 const isDitto = (/** @type {string} */ speciesKey) => speciesKey === 'ditto'
 
@@ -123,4 +130,76 @@ export function eggHatchSteps(speciesKey) {
       ? Object.values(species.baseStats).reduce((sum, value) => sum + value, 0)
       : 300
   return Math.max(30, Math.min(120, Math.round(total / 5)))
+}
+
+/** Fisher-Yates shuffle (in place). @param {any[]} items */
+function shuffle(items) {
+  for (let index = items.length - 1; index > 0; index--) {
+    const swap = Math.floor(Math.random() * (index + 1))
+    ;[items[index], items[swap]] = [items[swap], items[index]]
+  }
+  return items
+}
+
+/**
+ * Roll the egg's IVs, then overwrite 3 randomly chosen stats with the best of
+ * the two parents' value, so breeding can improve a bloodline (like the real
+ * games' inherited IVs).
+ * @param {Pokemon[]} parents
+ * @returns {Record<string, number>}
+ */
+export function inheritIVs(parents) {
+  const ivs = /** @type {Record<string, number>} */ (generateIVs())
+  for (const stat of shuffle([...IV_STAT_ORDER]).slice(0, 3))
+    ivs[stat] = Math.max(...parents.map((parent) => parent.ivs?.[stat] ?? 0))
+  return ivs
+}
+
+/**
+ * 50% chance the egg inherits one parent's nature (Everstone-style), otherwise
+ * it rolls a fresh one.
+ * @param {Pokemon[]} parents
+ * @returns {string}
+ */
+export function inheritNature(parents) {
+  const natures = /** @type {string[]} */ (
+    parents.map((parent) => parent.nature).filter((nature) => !!nature)
+  )
+  return natures.length > 0 && Math.random() < 0.5
+    ? natures[Math.floor(Math.random() * natures.length)]
+    : randomNature()
+}
+
+/**
+ * The egg's starting moves: its level-1 learnset, padded up to four moves with
+ * any moves its parents know that are also in the family's learnset (so a
+ * parent's hard-earned moves can be passed down as an early head start).
+ * @param {Pokemon[]} parents
+ * @param {string} speciesKey
+ * @returns {string[]}
+ */
+export function inheritMoves(parents, speciesKey) {
+  const inherited = resolvePokemonMoves(speciesKey, 1),
+    familyMoves = new Set(getFamilyLearnset(speciesKey, 1000).map((entry) => entry.moveId))
+  for (const parent of parents)
+    for (const moveId of parent.moves ?? []) {
+      if (inherited.length >= 4) break
+      if (familyMoves.has(moveId) && !inherited.includes(moveId)) inherited.push(moveId)
+    }
+  return inherited
+}
+
+/**
+ * All the traits a Daycare egg inherits from its parents at once: IVs, nature
+ * and starting moves.
+ * @param {Pokemon[]} parents
+ * @param {string} speciesKey
+ * @returns {BreedingInheritance}
+ */
+export function inheritBreedingTraits(parents, speciesKey) {
+  return {
+    ivs: inheritIVs(parents),
+    nature: inheritNature(parents),
+    moves: inheritMoves(parents, speciesKey),
+  }
 }

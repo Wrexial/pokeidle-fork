@@ -28,6 +28,18 @@ test('createEgg makes a non-battle-ready egg', () => {
   assert.equal(isBattleReady({ currentHp: 10 }), true)
 })
 
+test('createEgg applies inherited traits', () => {
+  const ivs = { hp: 31, attack: 31, defense: 31, spAttack: 0, spDefense: 0, speed: 0 },
+    egg = createEgg('pidgey', 1, false, 12, {
+      ivs,
+      nature: 'jolly',
+      moves: ['gust', 'quickAttack'],
+    })
+  assert.deepEqual(egg.ivs, ivs)
+  assert.equal(egg.nature, 'jolly')
+  assert.deepEqual(egg.moves, ['gust', 'quickAttack'])
+})
+
 test('tickPartyEggs counts down and hatches', () => {
   const egg = createEgg('pidgey', 1, false, 2),
     first = tickPartyEggs([egg])

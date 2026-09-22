@@ -2,7 +2,7 @@
 
 import { shinyCharmMinOddsChance, shinyFullOddsChance, shinyWithCharmChance, roamerEncounterChance, pokerusChance, pokerusDurationBattles, offlineCapMs, offlineMinMs, offlineMoneyPerHourPerLevel } from '../data/config.js'
 import { activeItems, consumableItems, evolutionItems, pokeBalls, valuableDropTable } from '../data/items.js'
-import { GENERATION_DEX_RANGES, encounterData, gymLeaderData, isSpeciesCharmed, mapData, moveData, pokemonSpecies, regions } from '../data/gameData.js'
+import { GENERATION_DEX_RANGES, encounterData, evolutionData, gymLeaderData, isSpeciesCharmed, mapData, moveData, pokemonSpecies, regions } from '../data/gameData.js'
 import { calculateExpYield, calculatePokemonStats, getLevelUpResults, getPerfectIVs, isBattleReady, resolvePokemonMoves } from './pokemon.js'
 
 /** Gym ids grouped by region, so `badgesRequired` gates count that region only. */
@@ -492,26 +492,71 @@ export function shinyOddsForSpecies(speciesKey, completedGenerationSet) {
     : shinyFullOddsChance
 }
 
+/** Chain length at which Honey locks a hunt and Repel suppresses the route. */
+export const HONEY_CHAIN_THRESHOLD = 4
+
+/** Weight multiplier Honey applies once a hunt is locked in. */
+const HONEY_LOCK_MULTIPLIER = 25
+
+/** Weight kept for every other species while a chain is protected by Repel. */
+const SUPPRESSED_WEIGHT = 0.02
+
+/**
+ * Apply Honey/Repel modifiers to a route's encounter table. While a Repel is
+ * suppressing a locked-in hunt, every species except the hunted one (and any
+ * Honey-boosted species) is weighted down to almost nothing, so the chain
+ * can't be broken by a random encounter. Shared with the route UI so the
+ * displayed odds match the real roll.
+ * @param {EncounterEntry[]} encounters
+ * @param {{ speciesKey: string, multiplier: number, kind?: string, suppressOthers?: boolean }[] | undefined} modifiers
+ * @param {{ speciesKey: string | null, count: number } | undefined | null} [shinyChain]
+ * @returns {EncounterEntry[]}
+ */
+export function applyEncounterModifiers(encounters, modifiers, shinyChain) {
+  const suppressOthers = !!modifiers?.some((modifier) => modifier.suppressOthers),
+    protectedSpecies = new Set(
+      (modifiers ?? [])
+        .filter((modifier) => modifier.kind === 'honey')
+        .map((modifier) => modifier.speciesKey)
+    )
+  if (shinyChain?.speciesKey) protectedSpecies.add(shinyChain.speciesKey)
+  return encounters.map((encounter) => {
+    const modifier = modifiers?.find((candidate) => candidate.speciesKey === encounter.speciesKey)
+    let weight = encounter.weight
+    if (suppressOthers && !protectedSpecies.has(encounter.speciesKey)) weight *= SUPPRESSED_WEIGHT
+    if (modifier) weight *= modifier.multiplier
+    return weight === encounter.weight ? encounter : { ...encounter, weight }
+  })
+}
+
 /**
  * @param {ActiveEffect[]} activeEffects
  * @param {string} routeKey
- * @returns {{ speciesKey: string, multiplier: number }[]}
+ * @param {{ speciesKey: string | null, count: number } | undefined | null} [shinyChain]
+ * @returns {{ speciesKey: string, multiplier: number, kind: 'honey' | 'repel', suppressOthers?: boolean }[]}
  */
-export function resolveActiveModifiers(activeEffects, routeKey) {
+export function resolveActiveModifiers(activeEffects, routeKey, shinyChain) {
+  /** @type {{ speciesKey: string, multiplier: number, kind: 'honey' | 'repel', suppressOthers?: boolean }[]} */
   const modifiers = []
-  for (const effect of activeEffects)
-    effect.type === 'repel' && effect.routeKey === routeKey && effect.speciesKey
-      ? modifiers.push({
-          speciesKey: effect.speciesKey,
-          multiplier: 0.5,
-        })
-      : effect.type === 'honey' &&
-        effect.routeKey === routeKey &&
-        effect.speciesKey &&
-        modifiers.push({
-          speciesKey: effect.speciesKey,
-          multiplier: 2,
-        })
+  // Once a hunt is locked in (4+ of the same species in a row), Honey and
+  // Repel stop being little nudges and actually protect the chain.
+  const locking = !!shinyChain && shinyChain.count >= HONEY_CHAIN_THRESHOLD
+  for (const effect of activeEffects) {
+    if (effect.routeKey !== routeKey || !effect.speciesKey) continue
+    if (effect.type === 'repel')
+      modifiers.push(
+        locking
+          ? { speciesKey: effect.speciesKey, multiplier: 1, kind: 'repel', suppressOthers: true }
+          : { speciesKey: effect.speciesKey, multiplier: 0.5, kind: 'repel' }
+      )
+    else if (effect.type === 'honey')
+      modifiers.push({
+        speciesKey: effect.speciesKey,
+        multiplier:
+          locking && shinyChain?.speciesKey === effect.speciesKey ? HONEY_LOCK_MULTIPLIER : 2,
+        kind: 'honey',
+      })
+  }
   return modifiers
 }
 
@@ -624,15 +669,11 @@ function resolveRandomEncounter(encounterData, completedGenerationSet, shinyBonu
 export function resolvePokemonEncounter(encounterData, modifiers, completedGenerationSet, shinyChain, shinyBonus = 1, randomize = !1, levelOverride = 0) {
   if (randomize)
     return resolveRandomEncounter(encounterData, completedGenerationSet, shinyBonus, levelOverride)
-  const weightedEncounters = encounterData.encounters.map((encounter) => {
-      const modifier = modifiers?.find((candidate) => candidate.speciesKey === encounter.speciesKey)
-      return modifier
-        ? {
-            ...encounter,
-            weight: encounter.weight * modifier.multiplier,
-          }
-        : encounter
-    }),
+  const weightedEncounters = applyEncounterModifiers(
+      encounterData.encounters,
+      modifiers,
+      shinyChain
+    ),
     totalWeight = weightedEncounters.reduce((accumulator, encounter) => accumulator + encounter.weight, 0)
   let roll = Math.random() * totalWeight
   for (const encounter of weightedEncounters)
@@ -816,36 +857,106 @@ export function buildTrainerTeam(team) {
   })
 }
 
-/** Battle Tower floors start at this level and climb two per floor. */
-const TOWER_BASE_LEVEL = 50
+/** Battle Tower floors start at this level and climb three per floor. */
+const TOWER_BASE_LEVEL = 55
+
+/** Every floor past this one multiplies the team's stats, so scaling is endless. */
+const TOWER_MULTIPLIER_FLOOR = 15
+
+/** Floors at or past this one may field legendary Pokemon. */
+const TOWER_LEGENDARY_FLOOR = 40
+
+/** @param {Species} species */
+function totalBaseStats(species) {
+  return Object.values(species.baseStats).reduce((sum, value) => sum + value, 0)
+}
 
 /**
- * Build a Battle Tower trainer's roster for a floor. Deeper floors field more
- * and stronger non-legendary Pokemon from the national dex. Teams level out at
- * Lv.100 around floor 25, so beyond that their stats are multiplied instead to
- * keep the tower genuinely endless.
+ * Evolution targets that are ordinary growth stages (ignoring Megas/Gigantamax
+ * alternate forms and ids above the national dex).
+ * @param {string} key
+ * @returns {any[]}
+ */
+function realEvolutions(key) {
+  return (evolutionData[key] || []).filter(
+    (evolution) =>
+      !evolution.form && pokemonSpecies[evolution.into] && pokemonSpecies[evolution.into].id <= 1025
+  )
+}
+
+/**
+ * Whether `target` can evolve (directly or through a chain) into `from`.
+ * @param {string} from
+ * @param {string} target
+ * @param {Set<string>} [seen]
+ * @returns {boolean}
+ */
+function canReachByEvolution(from, target, seen = new Set()) {
+  if (from === target) return true
+  if (seen.has(from)) return false
+  seen.add(from)
+  return realEvolutions(from).some((evolution) =>
+    canReachByEvolution(evolution.into, target, seen)
+  )
+}
+
+/**
+ * A species counts as a final stage when none of its ordinary evolutions can
+ * lead back to it (ignoring Megas/Gigantamax, which are alternate battle
+ * forms). Mirrors the stricter check `tools/generate-regions.cjs` uses for
+ * raid pools.
+ * @param {string} speciesKey
+ * @returns {boolean}
+ */
+function isFinalEvolution(speciesKey) {
+  return !realEvolutions(speciesKey).some(
+    (evolution) => !canReachByEvolution(evolution.into, speciesKey)
+  )
+}
+
+/**
+ * Build a Battle Tower trainer's roster for a floor. Every floor fields six
+ * fully evolved Pokemon, at least one of them genuinely strong. Deeper floors
+ * scale faster, begin multiplying stats at floor 15 and allow legendaries from
+ * floor 40, so the tower stays a real climb rather than a walk.
  * @param {number} floor
  * @returns {{ speciesKey: string, level: number, statMultiplier: number }[]}
  */
 export function buildTowerTeam(floor) {
-  const level = Math.min(100, TOWER_BASE_LEVEL + floor * 2),
-    size = Math.min(6, 2 + Math.floor(floor / 2)),
-    statMultiplier = 1 + Math.max(0, floor - 25) * 0.03,
-    pool = Object.keys(pokemonSpecies).filter((key) => {
-      const species = pokemonSpecies[key]
-      return species.id > 0 && species.id <= 1025 && !species.legendary && (species.catchRate ?? 0) > 3
-    })
-  if (pool.length === 0) return []
-  const team = [],
-    used = new Set()
-  for (let i = 0; i < size; i++) {
-    let key = pool[Math.floor(Math.random() * pool.length)],
-      guard = 0
-    while (used.has(key) && guard++ < 100) key = pool[Math.floor(Math.random() * pool.length)]
-    used.add(key)
-    team.push({ speciesKey: key, level: Math.min(100, level + i), statMultiplier })
+  const level = Math.min(100, TOWER_BASE_LEVEL + floor * 3),
+    statMultiplier = 1 + Math.max(0, floor - TOWER_MULTIPLIER_FLOOR) * 0.05,
+    includeLegendaries = floor >= TOWER_LEGENDARY_FLOOR
+  /** @param {string} key @returns {boolean} */
+  function isEligible(key) {
+    const species = pokemonSpecies[key]
+    return (
+      species.id > 0 &&
+      species.id <= 1025 &&
+      isFinalEvolution(key) &&
+      (species.legendary ? includeLegendaries : (species.catchRate ?? 0) > 3)
+    )
   }
-  return team
+  const pool = Object.keys(pokemonSpecies).filter(isEligible),
+    strongPool = pool.filter(
+      (key) => pokemonSpecies[key].legendary || totalBaseStats(pokemonSpecies[key]) >= 520
+    )
+  if (pool.length === 0) return []
+  const used = new Set()
+  /** @param {string[]} candidates @returns {string} */
+  function pick(candidates) {
+    const options = candidates.filter((key) => !used.has(key)),
+      list = options.length > 0 ? options : candidates,
+      key = list[Math.floor(Math.random() * list.length)]
+    used.add(key)
+    return key
+  }
+  const picks = [pick(strongPool.length > 0 ? strongPool : pool)]
+  while (picks.length < 6 && picks.length < pool.length) picks.push(pick(pool))
+  return picks.map((speciesKey, index) => ({
+    speciesKey,
+    level: Math.min(100, level + index),
+    statMultiplier,
+  }))
 }
 
 /**

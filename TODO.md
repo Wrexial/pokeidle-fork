@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.30**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.10.0**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -36,8 +36,8 @@ items, best return first:
     Candies for time away, with a "While You Were Away" report).
 17. ✅ **#8 Pokémon management / IV checker** — shipped (IV judge, nicknames,
     favourite/lock, box search/filter and the release-duplicates tool).
-18. **#20 Honey/Repel DexNav hunting** — M · ★★★★½ — turns the existing
-    shiny chain into a usable system.
+18. ✅ **#20 Honey/Repel DexNav hunting** — shipped 0.10.0 (Honey/Repel lock
+    and protect a 4+ chain).
 19. **#24 Move data pass** — M–L · ★★★★½ — ~290 moves currently do nothing;
     do it in slices (healing/screens/setup first).
 20. **#25 Battle engine pass** — M–L · ★★★★½ — pairs with #24; AI + healing +
@@ -62,7 +62,8 @@ items, best return first:
 
 ### Tier 3 — Medium effort, medium gain
 
-29. **#3 Daycare inheritance** — M · ★★★
+29. ✅ **#3 Daycare inheritance** — shipped 0.10.0 (3 inherited IVs, a 50%
+    inherited nature, and inherited moves).
 30. **#6 Friendship / happiness** — M · ★★★
 31. **#9 Move tutor / TMs** — M · ★★★
 32. **#11 NPC gifts & static encounters** — M · ★★★
@@ -70,8 +71,8 @@ items, best return first:
 34. **#27 Gender-specific sprites** — M · ★★★ (assets are half-there)
 35. **#29 Minigames** — M–L · ★★★ (small per minigame once one exists)
 36. **#4 In-battle Mega evolution** — M–L · ★★★
-37. **#32 Battle Tower tuning** — M · ★★★½ — auto-climb, sane Victory Token
-    payout, and harder/faster teams (6 fully evolved, late legendaries).
+37. ✅ **#32 Battle Tower tuning** — shipped 0.10.0 (auto-climb, rarer
+    tokens, six fully evolved teams plus legendaries late).
 
 ### Tier 4 — Big and low-return, defer
 
@@ -136,19 +137,16 @@ inherit the parents' natures.
 
 Effort: **large** (mostly 2a/2c). New data file(s) required.
 
-## 3. Daycare inheritance (IVs / egg moves / natures)
+## 3. ✅ Daycare inheritance (IVs / egg moves / natures) — shipped in 0.10.0
 
-Breeding now respects gender + egg groups and shiny odds, but eggs are level-1
-with **random IVs**, no inherited moves and no nature.
-
-- [ ] Inherit IVs: pass down a few of the parents' best IVs (real games: 3 of
-      6 from the parents, plus a Destiny Knot option).
-- [ ] Egg moves: let the parents' family learnset seed the baby's moves.
-- [ ] Inherit/hold nature (Everstone-style), especially once #2b lands.
-- [ ] `createPokemon` currently rolls random IVs and ignores parents — would
-      need an options argument.
-
-Effort: **medium**. Pairs with natures (#2b).
+Done. `inheritBreedingTraits` (`src/game/breeding.js`) rolls the egg's IVs,
+then overwrites 3 random stats with the best of both parents' values, gives a
+50% chance of a parent's nature, and pads the level-1 moveset with any of the
+parents' moves that are in the family's learnset (up to 4). `createPokemon` /
+`createEgg` take an optional `BreedingInheritance` argument and the Daycare
+reducer passes it through. Covered by `tests/breeding.test.mjs` and
+`tests/eggs.test.mjs`. A Destiny Knot / Everstone item layer is still possible
+later.
 
 ## 4. In-battle Mega evolution
 
@@ -399,40 +397,15 @@ client-only today with one `localStorage` save. Worth a short design doc first.
 
 Effort: **large** (auth + conflict handling + a new server to run).
 
-## 20. Make Honey/Repel actually enable DexNav shiny hunting
+## 20. ✅ Honey/Repel DexNav hunting — shipped in 0.10.0
 
-The shiny chain already exists (`state.shinyChain`, up to 4× odds at 120 in a
-row) but it **resets whenever a different species appears**, and Honey only
-doubles the chained species' weight while Repel only halves one species — so on
-any route with a decent number of species the chain breaks before it builds.
-Targeted shiny hunting for one Pokémon isn't really viable today.
-
-What we want:
-
-- [ ] Honey should be *much* stronger once a chain is going. E.g. at a 4+ chain,
-      a Honey'd species should keep appearing ("shouldn't drop easily") instead
-      of just getting a ×2 weight bump.
-- [ ] Repel should suppress the *other* species during a chain, not just one, so
-      the chain is protected from random breakers.
-- [ ] Together, a player should be able to pick a target species on a route and
-      chain-hunt it reliably with Honey (boost the target) + Repel (suppress the
-      rest).
-
-Implementation notes:
-
-- Relevant code: `resolveActiveModifiers` + `resolvePokemonEncounter` +
-      `shinyChainMultiplier` (`src/game/progression.js`), `USE_EFFECT_ITEM` /
-      `activeEffects` / `UPDATE_SHINY_CHAIN` (`src/game/reducer.js`), config in
-      `src/data/config.js`, R/H badges in `route-encounter-grid.js`.
-- Consider scaling Honey's multiplier with the current chain length (or making
-      it apply to the *chained* species regardless of which species it was
-      applied to), and letting Repel suppress every non-target species.
-- A "hunt target" concept (pick a species, Honey boosts it / Repel suppresses
-      everything else) would make the intent explicit and could drive the UI.
-- Keep it balanced: viable but not trivial — e.g. the guarantee only kicks in
-      above a chain threshold, or the boost is capped.
-
-Effort: **medium**, high player value (makes the shiny chain a real system).
+Done. Once the shiny chain reaches 4, `resolveActiveModifiers`
+(`src/game/progression.js`) locks the hunt: Honey boosts the hunted species'
+weight 25× and an active Repel suppresses every other species to 2% weight, so
+the chain can't be broken by a random encounter. Without a lock they keep their
+old ×2 / ×0.5 nudges. `applyEncounterModifiers` is shared with
+`route-encounter-grid.js`, so the displayed odds match the real roll and a
+"Hunt locked" badge appears. Covered by `tests/hunting.test.mjs`.
 
 ## 21. Region Unlock Tokens once every region is unlocked
 
@@ -791,35 +764,15 @@ screen.
 
 Effort: **small–medium**.
 
-## 32. Battle Tower should auto-climb, pay less, and hit harder
+## 32. ✅ Battle Tower auto-climb, payout and difficulty — shipped in 0.10.0
 
-`buildTowerTeam(floor)` (`src/game/progression.js`) starts at
-`TOWER_BASE_LEVEL` 50 + 2 per floor, grows from 2 to 6 Pokemon, and only starts
-raising a `statMultiplier` at floor 25; its pool is every non-legendary, non-form
-species. Each floor is a separate `START_TOWER` + `START_HEALING` triggered by
-the Gym panel's Continue button (`src/components/gym-panel.js`), and a win bumps
-`towerFloor` but returns to idle — so it never auto-climbs. The payout is
-`Math.max(1, Math.floor(floor / 5))` Victory Tokens per floor, which is far too
-generous.
-
-- [ ] **Auto-climb**: on a tower win, immediately build + start the next floor
-      (heal, `START_TOWER`, new team) instead of returning to the Continue
-      button, so a run keeps going until you lose.
-- [ ] **Payout**: 1 Victory Token per 10 floors (`Math.floor(floor / 10)`, no
-      per-floor minimum) instead of `floor / 5`.
-- [ ] **Difficulty**: start higher and scale faster — raise `TOWER_BASE_LEVEL`,
-      steepen the per-floor level gain, and bring the stat multiplier in
-      earlier so it feels like a climb rather than a walk.
-- [ ] **Teams**: always 6 Pokemon, all fully evolved (`isFinalEvolution`), with
-      at least one genuinely strong member (high `totalBaseStats`).
-- [ ] **Late floors**: allow legendaries into the pool and cap every tower
-      Pokemon at Lv.100 (the cap already exists; keep it).
-
-Relevant code: `buildTowerTeam` (`src/game/progression.js`), `BOSS_BATTLE_END`
-/ `START_TOWER` (`src/game/reducer.js`), `startTowerFloor`
-(`src/components/gym-panel.js`), `TOWER_BASE_LEVEL`.
-
-Effort: **medium**.
+Done. A tower win now heals the party and immediately builds/starts the next
+floor in `BOSS_BATTLE_END` (`src/game/reducer.js`), so a run only ends on a
+loss. `buildTowerTeam` (`src/game/progression.js`) always fields six fully
+evolved Pokemon (first pick from a strong pool, so at least one is genuinely
+strong), starts at Lv.55 + 3/floor, scales stats from floor 15 and allows
+legendaries from floor 40 (all capped at Lv.100). Payout is 1 Victory Token
+per 10 floors. Covered by `tests/battle-tower.test.mjs`.
 
 ## 33. Rare Candy and EXP Candy as rare drops
 
@@ -1198,6 +1151,12 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.10.0 (breeding inheritance, hunting & tower): eggs inherit 3 of the parents'
+best IVs, a 50% chance of a parent's nature and family moves; a 4+ shiny chain
+is locked in by Honey (25x target weight) + Repel (suppresses all others); and
+the Battle Tower auto-climbs, hits harder and pays 1 token per 10 floors. #3,
+#20 and #32 are complete.
 
 0.9.30 (slower egg hatching): eggs need 30-120 wild wins to hatch (was 8-40).
 

@@ -5273,6 +5273,12 @@ img {
     white-space: nowrap
 }
 
+.hunt-legend {
+    font-size: 6px;
+    color: #4fae4f;
+    white-space: nowrap
+}
+
 .pokedex-header-actions {
     display: flex;
     align-items: center;

@@ -351,7 +351,7 @@ export function GymPanel({ onOpenShop }) {
               children:
                 state.towerFloor > 0
                   ? `Currently on floor ${state.towerFloor}. Win to climb; lose and the run ends.`
-                  : 'Fight endless, stronger trainers for Victory Tokens. Your Pokemon are healed between floors; past floor 25 their stats keep climbing.',
+                  : 'Fight endless, stronger trainers for Victory Tokens. Every floor fields six fully evolved Pokemon, your team is healed between floors, stats start scaling at floor 15 and legendaries appear from floor 40. A run only ends when you lose \u2014 floors now pay 1 token every 10 floors.',
             }),
             jsx('button', {
               className: 'gym-fight-btn champion',

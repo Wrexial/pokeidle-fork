@@ -282,7 +282,8 @@ export function useGameLoop() {
               : currentEncounterData,
             activeModifierMultipliers = resolveActiveModifiers(
               currentGameState.activeEffects,
-              currentGameState.currentRoute
+              currentGameState.currentRoute,
+              currentGameState.shinyChain
             ),
             spawningPokemonData =
               resolveRoamer(

@@ -206,16 +206,18 @@ export function isBattleReady(pokemon) {
 
 /**
  * A Daycare egg: a level-1 Pokemon that needs `steps` wild wins in the party
- * before it hatches. Its species/nature/IVs are fixed at creation.
+ * before it hatches. Its species/nature/IVs are fixed at creation, optionally
+ * inherited from its parents (see `inheritBreedingTraits`).
  * @param {string} speciesKey
  * @param {number | string} id
  * @param {boolean} isShiny
  * @param {number} steps
+ * @param {BreedingInheritance} [inheritance]
  * @returns {Pokemon}
  */
-export function createEgg(speciesKey, id, isShiny, steps) {
+export function createEgg(speciesKey, id, isShiny, steps, inheritance) {
   return {
-    ...createPokemon(speciesKey, 1, id, isShiny),
+    ...createPokemon(speciesKey, 1, id, isShiny, inheritance),
     isEgg: true,
     eggStepsRemaining: steps,
   }
@@ -342,14 +344,18 @@ export function resolvePokemonMoves(speciesKey, level) {
  * @param {number} level
  * @param {number | string} id
  * @param {boolean} [isShiny]
+ * @param {BreedingInheritance} [inheritance] Traits passed down from Daycare parents.
  * @returns {Pokemon}
  */
-export function createPokemon(speciesKey, level, id, isShiny = !1) {
+export function createPokemon(speciesKey, level, id, isShiny = !1, inheritance) {
   const species = pokemonSpecies[speciesKey],
-    ivs = generateIVs(),
-    nature = randomNature(),
+    ivs = inheritance?.ivs ?? generateIVs(),
+    nature = inheritance?.nature ?? randomNature(),
     stats = calculatePokemonStats(species, level, ivs, nature),
-    moves = resolvePokemonMoves(speciesKey, level)
+    moves =
+      inheritance?.moves && inheritance.moves.length > 0
+        ? inheritance.moves
+        : resolvePokemonMoves(speciesKey, level)
   return {
     id: String(id),
     speciesKey,

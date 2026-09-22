@@ -4,6 +4,7 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { getRarityFromRate } from '../game/catching.js'
 import { pokemonSpecies, routeExclusiveSpecies } from '../data/gameData.js'
+import { applyEncounterModifiers, HONEY_CHAIN_THRESHOLD, resolveActiveModifiers } from '../game/progression.js'
 import { useGame } from '../game/context.js'
 import { PokeballIcon } from './pokeball-icon.js'
 import { EncounterDetailPanel } from './encounter-detail-panel.js'
@@ -23,8 +24,22 @@ export function RouteEncounterGrid({
     [applyingItem, setApplyingItem] = React.useState(/** @type {'repel' | 'honey' | null} */ (null)),
     repelCount = state.inventory.repel ?? 0,
     honeyCount = state.inventory.honey ?? 0,
-    totalWeight = React.useMemo(() => encounters.reduce((accumulator, encounter) => accumulator + encounter.weight, 0), [encounters]),
-    sortedEncounters = React.useMemo(() => [...encounters].sort((left, right) => right.weight - left.weight), [encounters]),
+    // Mirror the real encounter roll (Honey boosts, Repel suppresses once a
+    // chain is locked in) so the odds shown to the player stay honest.
+    displayEncounters = React.useMemo(
+      () =>
+        applyEncounterModifiers(
+          encounters,
+          resolveActiveModifiers(state.activeEffects, routeKey, state.shinyChain),
+          state.shinyChain
+        ),
+      [encounters, state.activeEffects, state.shinyChain, routeKey]
+    ),
+    huntLocked =
+      state.shinyChain.count >= HONEY_CHAIN_THRESHOLD &&
+      encounters.some((encounter) => encounter.speciesKey === state.shinyChain.speciesKey),
+    totalWeight = React.useMemo(() => displayEncounters.reduce((accumulator, encounter) => accumulator + encounter.weight, 0), [displayEncounters]),
+    sortedEncounters = React.useMemo(() => [...displayEncounters].sort((left, right) => right.weight - left.weight), [displayEncounters]),
     activeEffectMap = React.useMemo(() => {
       const effectMap = /** @type {Record<string, { repel: boolean, honey: boolean }>} */ ({})
       for (const effect of state.activeEffects)
@@ -72,7 +87,7 @@ export function RouteEncounterGrid({
     closeDetail = React.useCallback(() => {
       setSelected(null)
     }, []),
-    selectedEncounter = selected ? encounters.find((entry) => entry.speciesKey === selected) : null,
+    selectedEncounter = selected ? displayEncounters.find((entry) => entry.speciesKey === selected) : null,
     rate = selectedEncounter && totalWeight > 0 ? (selectedEncounter.weight / totalWeight) * 100 : 0,
     rarity = forceRarity ?? (rate > 0 ? getRarityFromRate(rate) : 'common')
   return jsxs('div', {
@@ -99,6 +114,15 @@ export function RouteEncounterGrid({
                 children: `Swarm! ${
                   pokemonSpecies[swarmHere.speciesKey]?.name ?? swarmHere.speciesKey
                 } (${swarmHere.battlesRemaining})`,
+              })
+            : null,
+          huntLocked
+            ? jsx('span', {
+                className: 'hunt-legend',
+                title: 'Honey and Repel now protect this chain \u2014 other species barely appear',
+                children: `\ud83c\udf6f Hunt locked: ${
+                  pokemonSpecies[state.shinyChain.speciesKey ?? '']?.name ?? state.shinyChain.speciesKey
+                } (${state.shinyChain.count})`,
               })
             : null,
           jsxs('div', {

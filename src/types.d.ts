@@ -83,6 +83,16 @@ type Pokemon = BattlePokemon & {
   isShiny: boolean
 }
 
+/** Traits a Daycare egg can inherit from its parents. */
+type BreedingInheritance = {
+  /** Complete IV block (3 stats take the best of both parents). */
+  ivs?: Record<string, number>
+  /** A nature inherited from a parent, or a random one. */
+  nature?: string
+  /** Start moves, including any moves the parents passed down. */
+  moves?: string[]
+}
+
 type Inspected = { source: string; id: string } | null
 
 type ActiveItem = {

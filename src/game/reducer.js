@@ -8,9 +8,9 @@ import { natureName, randomNature } from '../data/natures.js'
 import { elite4Data, encounterData, gymLeaderData, mapData, moveLearnsets, pokemonSpecies, regions } from '../data/gameData.js'
 import { createVolatileState } from './combat.js'
 import { calculatePokemonStats, calculateRequiredExperience, createEgg, createPokemon, getLevelUpResults, insertIntoBox, isBattleReady, judgeIVs, nextBoxSortMode, resolvePokemonMoves, sortBoxMembers } from './pokemon.js'
-import { canBreed, eggHatchSteps, eggSpeciesKey } from './breeding.js'
+import { canBreed, eggHatchSteps, eggSpeciesKey, inheritBreedingTraits } from './breeding.js'
 import { advanceQuests, questLabel, rollQuests } from './quests.js'
-import { checkShinyOdds, computeUnlockedLocations, formatReward, getRegionUnlockTokens, isActiveEffectItem, loadActivePokemonFromParty, prepareNextBattle, releaseReward, rollCandyDrop, rollValuableDrop, syncActivePokemonIntoParty, tickBattleCounters, tickPartyEggs, tickPokerus } from './progression.js'
+import { buildTrainerTeam, buildTowerTeam, checkShinyOdds, computeUnlockedLocations, formatReward, getRegionUnlockTokens, isActiveEffectItem, loadActivePokemonFromParty, prepareNextBattle, releaseReward, rollCandyDrop, rollValuableDrop, syncActivePokemonIntoParty, tickBattleCounters, tickPartyEggs, tickPokerus } from './progression.js'
 
 /** @type {GameState} */
 export const initialGameState = {
@@ -1404,23 +1404,65 @@ export function gameReducer(state, action) {
           regionId = state.bossBattle.region ?? mapData[state.currentLocation]?.region ?? 'kanto',
           floor = state.towerFloor,
           best = state.towerBest[regionId] ?? 0,
-          reward = Math.max(1, Math.floor(floor / 5))
+          reward = Math.floor(floor / 10),
+          clearedState = {
+            ...prepareNextBattle(state),
+            money: Math.max(0, state.money + towerMoneyDelta),
+            trainerBattlesWon: towerWon ? state.trainerBattlesWon + 1 : state.trainerBattlesWon,
+            victoryTokens: towerWon ? state.victoryTokens + reward : state.victoryTokens,
+            towerFloor: towerWon ? floor + 1 : 0,
+            towerBest: {
+              ...state.towerBest,
+              [regionId]: Math.max(best, towerWon ? floor : floor - 1),
+            },
+            battleLog: [
+              ...state.battleLog,
+              towerWon
+                ? `Tower floor ${floor} cleared!${
+                    reward > 0
+                      ? ` Earned ${reward} Victory Token${reward > 1 ? 's' : ''}.`
+                      : ''
+                  }`
+                : `Tower run ended on floor ${floor}.`,
+            ].slice(-50),
+          }
+        if (!towerWon) return clearedState
+        // Auto-climb: heal the party and immediately start the next floor so a
+        // run only ends when you lose.
+        const nextFloor = floor + 1,
+          nextTeam = buildTrainerTeam(buildTowerTeam(nextFloor)),
+          firstPokemon = nextTeam[0]
+        if (!firstPokemon) return clearedState
+        const healedParty = clearedState.party.map((member) => ({
+            ...member,
+            currentHp: member.maxHp,
+          })),
+          playerPokemon = healedParty[0] || clearedState.playerPokemon,
+          trainerName = `Tower Trainer (Floor ${nextFloor})`
         return {
-          ...prepareNextBattle(state),
-          money: Math.max(0, state.money + towerMoneyDelta),
-          trainerBattlesWon: towerWon ? state.trainerBattlesWon + 1 : state.trainerBattlesWon,
-          victoryTokens: towerWon ? state.victoryTokens + reward : state.victoryTokens,
-          towerFloor: towerWon ? floor + 1 : 0,
-          towerBest: {
-            ...state.towerBest,
-            [regionId]: Math.max(best, towerWon ? floor : floor - 1),
+          ...clearedState,
+          party: healedParty,
+          playerPokemon,
+          activePlayerPokemonIndex: 0,
+          phase: 'battling',
+          enemyPokemon: firstPokemon,
+          battleEvents: [],
+          currentEventIndex: 0,
+          pendingEvents: [
+            { type: 'trainerAppear', message: `${trainerName} wants to battle!` },
+            { type: 'trainerSendOut', message: `${trainerName} sent out ${firstPokemon.name}!` },
+          ],
+          bossBattle: {
+            bossId: 'tower',
+            bossType: 'tower',
+            trainerName,
+            trainerClass: 'ace',
+            trainerTeam: nextTeam,
+            currentTrainerPokemonIndex: 0,
+            spriteKey: 'acetrainer',
+            region: regionId,
           },
-          battleLog: [
-            ...state.battleLog,
-            towerWon
-              ? `Tower floor ${floor} cleared! Earned ${reward} Victory Token${reward > 1 ? 's' : ''}.`
-              : `Tower run ended on floor ${floor}.`,
-          ].slice(-50),
+          bossQueue: [],
         }
       }
       const { won, moneyDelta } = action.payload,
@@ -2345,7 +2387,8 @@ export function gameReducer(state, action) {
           baseSpeciesKey,
           state.nextPokemonId,
           checkShinyOdds(shinyParent ? breedShinyParentOdds : breedShinyOdds),
-          eggHatchSteps(baseSpeciesKey)
+          eggHatchSteps(baseSpeciesKey),
+          inheritBreedingTraits(parents, baseSpeciesKey)
         ),
         toParty = state.party.length < 6
       return withNotification(

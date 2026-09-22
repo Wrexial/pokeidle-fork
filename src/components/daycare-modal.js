@@ -127,7 +127,7 @@ export function DaycareModal({ onClose }) {
                         compatibility.reason
                       } An Egg of ${eggSpecies?.name ?? 'a base form'} is ready every ${daycareEggBattles} battles, with 1 in ${shinyOdds} shiny odds${
                         hasShinyParent ? ' (boosted by a shiny parent)' : ''
-                      }. Collect it, then carry it in your party to hatch it.`,
+                      }. Eggs inherit 3 of the parents' best IVs, may inherit a parent's nature, and can pass down moves. Collect it, then carry it in your party to hatch it.`,
             }),
             breedable &&
               jsxs('div', {

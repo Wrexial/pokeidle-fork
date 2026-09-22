@@ -1,10 +1,35 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.9.30'
+export const GAME_VERSION = '0.10.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.10.0',
+      subtitle: 'Breeding Inheritance & Shiny Hunting',
+      sections: [
+        {
+          heading: 'Daycare',
+          items: [
+            'Eggs now inherit 3 of the parents\u2019 best IVs, a 50% chance of a parent\u2019s nature, and any of the parents\u2019 moves the hatchling can learn',
+          ],
+        },
+        {
+          heading: 'Shiny Hunting',
+          items: [
+            'Honey and Repel now lock in a DexNav hunt: once a chain reaches 4, Honey heavily favours the hunted species and Repel keeps every other species away \u2014 the encounter list shows the real, boosted odds and a \u201cHunt locked\u201d badge',
+          ],
+        },
+        {
+          heading: 'Battle Tower',
+          items: [
+            'Tower runs now auto-climb: a win heals your team and immediately starts the next floor, so a run only ends when you lose',
+            'Floors field six fully evolved Pokemon and hit harder \u2014 stats start scaling at floor 15 and legendaries appear from floor 40 \u2014 but now pay 1 Victory Token every 10 floors',
+          ],
+        },
+      ],
+    },
     {
       version: '0.9.30',
       subtitle: 'Slower Egg Hatching',

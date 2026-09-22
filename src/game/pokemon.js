@@ -1,7 +1,7 @@
 // Split from src/game/logic.js — see tools/decompile/split-logic.mjs
 
 import { evValue } from '../data/config.js'
-import { animatedSprites, abilityData, evolutionData, moveLearnsets, pokemonSpecies, preEvolutionMap, tmLearnsets, trainerClasses } from '../data/gameData.js'
+import { animatedSprites, genderedSprites, abilityData, evolutionData, moveLearnsets, pokemonSpecies, preEvolutionMap, tmLearnsets, trainerClasses } from '../data/gameData.js'
 import { natureStatModifiers, randomNature } from '../data/natures.js'
 import { BOX_SORT_OPTIONS } from '../data/ui.js'
 
@@ -11,11 +11,14 @@ import { BOX_SORT_OPTIONS } from '../data/ui.js'
  * animated sprites for every later species/form (PokeAPI has no Gen 6+
  * animation). Anything missing here falls back to the static png — the
  * manifest from download_pokemon_sprites.cjs lets us skip the 404 request.
+ * `isFemale` only takes effect for the ids listed in genderedSprites (the
+ * species that actually have a female variant); everything else stays male.
  * @param {number | string} spriteId
  * @param {boolean} [isBack]
  * @param {boolean} [isShiny]
+ * @param {boolean} [isFemale]
  */
-export function getPokemonSpriteUrl(spriteId, isBack = !1, isShiny = !1) {
+export function getPokemonSpriteUrl(spriteId, isBack = !1, isShiny = !1, isFemale = !1) {
   const key = Number(spriteId),
     missing = isShiny
       ? isBack
@@ -23,34 +26,54 @@ export function getPokemonSpriteUrl(spriteId, isBack = !1, isShiny = !1) {
         : animatedSprites.shiny
       : isBack
         ? animatedSprites.back
-        : animatedSprites.front
-  if (!Number.isFinite(key) || key === 0 || missing.includes(key))
-    return getPokemonSpriteFallbackUrl(spriteId, isBack, isShiny)
-  const baseUrl = '/sprites/pokemon/versions/generation-v/black-white/animated'
-  return isShiny && isBack
-    ? `${baseUrl}/back/shiny/${spriteId}.gif`
-    : isShiny
-      ? `${baseUrl}/shiny/${spriteId}.gif`
+        : animatedSprites.front,
+    femaleAnimated = isShiny
+      ? isBack
+        ? genderedSprites.animatedBackShiny
+        : genderedSprites.animatedShiny
       : isBack
-        ? `${baseUrl}/back/${spriteId}.gif`
-        : `${baseUrl}/${spriteId}.gif`
+        ? genderedSprites.animatedBack
+        : genderedSprites.animatedFront,
+    femaleStatic = isShiny
+      ? isBack
+        ? genderedSprites.backShiny
+        : genderedSprites.shiny
+      : isBack
+        ? genderedSprites.back
+        : genderedSprites.front,
+    useFemale = isFemale && femaleAnimated.includes(key)
+  // Some species (Gen 6+) only have a static female sprite; prefer the right
+  // gender over the animation rather than showing the male gif.
+  if (isFemale && !useFemale && femaleStatic.includes(key))
+    return getPokemonSpriteFallbackUrl(spriteId, isBack, isShiny, true)
+  if (!Number.isFinite(key) || key === 0 || missing.includes(key))
+    return getPokemonSpriteFallbackUrl(spriteId, isBack, isShiny, isFemale)
+  const baseUrl = '/sprites/pokemon/versions/generation-v/black-white/animated'
+  return `${baseUrl}/${isBack ? 'back/' : ''}${isShiny ? 'shiny/' : ''}${
+    useFemale ? 'female/' : ''
+  }${spriteId}.gif`
 }
 
 /**
  * @param {number | string} spriteId
  * @param {boolean} [isBack]
  * @param {boolean} [isShiny]
+ * @param {boolean} [isFemale]
  */
-export function getPokemonSpriteFallbackUrl(spriteId, isBack = !1, isShiny = !1){
-  const baseUrl = '/sprites/pokemon'
-  return isShiny && isBack
-    ? `${baseUrl}/back/shiny/${spriteId}.png`
-    : isShiny
-      ? `${baseUrl}/shiny/${spriteId}.png`
+export function getPokemonSpriteFallbackUrl(spriteId, isBack = !1, isShiny = !1, isFemale = !1) {
+  const key = Number(spriteId),
+    female = isShiny
+      ? isBack
+        ? genderedSprites.backShiny
+        : genderedSprites.shiny
       : isBack
-        ? `${baseUrl}/back/${spriteId}.png`
-        : `${baseUrl}/${spriteId}.png`
-
+        ? genderedSprites.back
+        : genderedSprites.front,
+    useFemale = isFemale && female.includes(key),
+    baseUrl = '/sprites/pokemon'
+  return `${baseUrl}/${isBack ? 'back/' : ''}${isShiny ? 'shiny/' : ''}${
+    useFemale ? 'female/' : ''
+  }${spriteId}.png`
 }
 
 /**

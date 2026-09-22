@@ -6,7 +6,7 @@ import { jsx, jsxs } from 'react/jsx-runtime'
 import { pokemonSpecies } from '../data/gameData.js'
 import { natureByKey, natureName } from '../data/natures.js'
 import { useGame } from '../game/context.js'
-import { genderForPokemon, genderSymbol } from '../game/breeding.js'
+import { genderForPokemon, genderSymbol, isFemalePokemon } from '../game/breeding.js'
 import {
   getPokemonSpriteFallbackUrl,
   getPokemonSpriteUrl,
@@ -47,9 +47,14 @@ export function HatchPopup() {
         }),
         jsx('img', {
           className: 'hatch-popup-sprite',
-          src: getPokemonSpriteUrl(species.id, !1, hatch.isShiny),
+          src: getPokemonSpriteUrl(species.id, !1, hatch.isShiny, isFemalePokemon(hatch)),
           onError: /** @param {{ target: HTMLImageElement }} event */ (event) =>
-            (event.target.src = getPokemonSpriteFallbackUrl(species.id, !1, hatch.isShiny)),
+            (event.target.src = getPokemonSpriteFallbackUrl(
+              species.id,
+              !1,
+              hatch.isShiny,
+              isFemalePokemon(hatch)
+            )),
           alt: hatch.name,
         }),
         jsxs('div', {

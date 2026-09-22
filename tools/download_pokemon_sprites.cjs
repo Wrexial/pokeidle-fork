@@ -91,6 +91,28 @@ const STATIC_VARIANTS = [
     dest: (id) => path.join(STATIC_DIR, 'back', 'shiny', `${id}.png`),
     url: (id) => `${POKEAPI}/back/shiny/${id}.png`,
   },
+  // Female variants only exist for the ~100 species with a gender difference;
+  // the rest 404 and are left out of the manifest below.
+  {
+    name: 'female-front',
+    dest: (id) => path.join(STATIC_DIR, 'female', `${id}.png`),
+    url: (id) => `${POKEAPI}/female/${id}.png`,
+  },
+  {
+    name: 'female-back',
+    dest: (id) => path.join(STATIC_DIR, 'back', 'female', `${id}.png`),
+    url: (id) => `${POKEAPI}/back/female/${id}.png`,
+  },
+  {
+    name: 'female-shiny',
+    dest: (id) => path.join(STATIC_DIR, 'shiny', 'female', `${id}.png`),
+    url: (id) => `${POKEAPI}/shiny/female/${id}.png`,
+  },
+  {
+    name: 'female-back-shiny',
+    dest: (id) => path.join(STATIC_DIR, 'back', 'shiny', 'female', `${id}.png`),
+    url: (id) => `${POKEAPI}/back/shiny/female/${id}.png`,
+  },
 ]
 
 /**
@@ -102,10 +124,20 @@ const ANIMATED_VARIANTS = [
   { name: 'back', sub: 'back', sdSub: 'back' },
   { name: 'shiny', sub: 'shiny', sdSub: 'shiny' },
   { name: 'back-shiny', sub: 'back/shiny', sdSub: 'back/shiny' },
+  // Female animated sprites only exist in PokeAPI's Gen V set (ids 1-649);
+  // Showdown has no clean female-animated set, so those simply stay static.
+  { name: 'female-front', sub: 'female', female: true },
+  { name: 'female-back', sub: 'back/female', female: true },
+  { name: 'female-shiny', sub: 'shiny/female', female: true },
+  { name: 'female-back-shiny', sub: 'back/shiny/female', female: true },
 ].map((variant) => ({
   name: `animated-${variant.name}`,
   dest: (id) => path.join(ANIMATED_DIR, variant.sub, `${id}.gif`),
   sources: (id) => {
+    if (variant.female)
+      return id <= 649
+        ? [`${POKEAPI}/versions/generation-v/black-white/animated/${variant.sub}/${id}.gif`]
+        : []
     const showdown = `${SHOWDOWN}/${variant.sdSub ? variant.sdSub + '/' : ''}${id}.gif`
     // Gen V animated only exists for the national dex ids 1-649.
     if (id > 649) {
@@ -198,6 +230,44 @@ async function main() {
     JSON.stringify(missingAnimated, null, 1) + '\n'
   )
   console.log('Wrote animated-sprites.json (missing animated variants).')
+
+  // Record which ids actually have a female sprite per variant, so the game can
+  // pick the female path without ever requesting a 404.
+  const genderedSprites = {
+    front: [],
+    back: [],
+    shiny: [],
+    backShiny: [],
+    animatedFront: [],
+    animatedBack: [],
+    animatedShiny: [],
+    animatedBackShiny: [],
+  }
+  const staticFemaleDirs = {
+    front: 'female',
+    back: path.join('back', 'female'),
+    shiny: path.join('shiny', 'female'),
+    backShiny: path.join('back', 'shiny', 'female'),
+  }
+  for (const [category, sub] of Object.entries(staticFemaleDirs))
+    genderedSprites[category] = ids.filter((id) =>
+      fs.existsSync(path.join(STATIC_DIR, sub, `${id}.png`))
+    )
+  const animatedFemaleDirs = {
+    animatedFront: 'female',
+    animatedBack: path.join('back', 'female'),
+    animatedShiny: path.join('shiny', 'female'),
+    animatedBackShiny: path.join('back', 'shiny', 'female'),
+  }
+  for (const [category, sub] of Object.entries(animatedFemaleDirs))
+    genderedSprites[category] = ids.filter((id) =>
+      fs.existsSync(path.join(ANIMATED_DIR, sub, `${id}.gif`))
+    )
+  fs.writeFileSync(
+    path.join(ROOT, 'public', 'data', 'gendered-sprites.json'),
+    JSON.stringify(genderedSprites, null, 1) + '\n'
+  )
+  console.log('Wrote gendered-sprites.json (ids with a female sprite per variant).')
 
   console.log('\nSummary:')
   console.log(`  downloaded: ${stats.downloaded}`)

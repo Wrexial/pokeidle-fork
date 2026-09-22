@@ -8,6 +8,7 @@ import { dailyEventByKey } from '../data/daily-events.js'
 import { hasClaimableQuests } from '../game/quests.js'
 import { locationImages } from '../data/ui.js'
 import { shouldOfferMasterBall } from '../game/catching.js'
+import { isFemalePokemon } from '../game/breeding.js'
 import { WEATHER_ICONS, WEATHER_NAMES } from '../game/weather.js'
 import { TERRAIN_ICONS, TERRAIN_NAMES } from '../game/terrain.js'
 import { completedGenerations, mapData, moveData, pokemonSpecies, speciesKeysByGeneration } from '../data/gameData.js'
@@ -364,12 +365,14 @@ export function BattleScene() {
               src: getPokemonSpriteUrl(
                 pokemonSpecies[enemyPokemon.speciesKey].id,
                 !1,
-                enemyPokemon.isShiny
+                enemyPokemon.isShiny,
+                isFemalePokemon(enemyPokemon)
               ),
               onError: /** @param {{ target: HTMLImageElement }} event */ (event) => (event.target.src = getPokemonSpriteFallbackUrl(
                 pokemonSpecies[enemyPokemon.speciesKey].id,
                 !1,
-                enemyPokemon.isShiny
+                enemyPokemon.isShiny,
+                isFemalePokemon(enemyPokemon)
               )),
               alt: enemyPokemon.name,
             }),
@@ -388,8 +391,18 @@ export function BattleScene() {
               children: `-${damageFloat.amount}`,
             }),
           jsx('img', {
-            src: getPokemonSpriteUrl(playerSpecies.id, !0, state.playerPokemon?.isShiny),
-            onError: /** @param {{ target: HTMLImageElement }} event */ (event) => (event.target.src = getPokemonSpriteFallbackUrl(playerSpecies.id, !0, state.playerPokemon?.isShiny)),
+            src: getPokemonSpriteUrl(
+              playerSpecies.id,
+              !0,
+              state.playerPokemon?.isShiny,
+              isFemalePokemon(playerPokemon)
+            ),
+            onError: /** @param {{ target: HTMLImageElement }} event */ (event) => (event.target.src = getPokemonSpriteFallbackUrl(
+              playerSpecies.id,
+              !0,
+              state.playerPokemon?.isShiny,
+              isFemalePokemon(playerPokemon)
+            )),
             alt: playerPokemon.name,
           }),
         ],

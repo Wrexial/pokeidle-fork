@@ -1,10 +1,22 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.35.0'
+export const GAME_VERSION = '0.36.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.36.0',
+      subtitle: 'Gender Sprites',
+      sections: [
+        {
+          heading: 'Pokemon',
+          items: [
+            'Female Pokemon now show their female artwork where the species differs (Pikachu, Hippowdon, Unfezant, Meowstic, Indeedee and the rest) \u2014 in battle, the party and box, the stats panel, the Daycare, egg hatches and Wonder Trade',
+          ],
+        },
+      ],
+    },
     {
       version: '0.35.0',
       subtitle: 'Pok\u00e9mon Slots',

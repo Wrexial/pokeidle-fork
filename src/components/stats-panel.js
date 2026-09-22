@@ -17,7 +17,7 @@ const NATURE_STAT_LABELS = {
 }
 import { moveData, pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
-import { genderForPokemon, genderSymbol } from '../game/breeding.js'
+import { genderForPokemon, genderSymbol, isFemalePokemon } from '../game/breeding.js'
 import { abilityDisplayName, getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, IV_STAT_LABELS, IV_STAT_ORDER, judgeIVs, pokemonDisplayName } from '../game/pokemon.js'
 import { MoveManagerPanel } from './move-manager-panel.js'
 
@@ -218,8 +218,8 @@ export function StatsPanel({
         children: [
           jsx('img', {
             className: 'stats-panel-sprite',
-            src: getPokemonSpriteUrl(species.id, !1, pokemon.isShiny),
-            onError: /** @param {{ target: HTMLImageElement }} event */ (event) => (event.target.src = getPokemonSpriteFallbackUrl(species.id, !1, pokemon.isShiny)),
+            src: getPokemonSpriteUrl(species.id, !1, pokemon.isShiny, isFemalePokemon(pokemon)),
+            onError: /** @param {{ target: HTMLImageElement }} event */ (event) => (event.target.src = getPokemonSpriteFallbackUrl(species.id, !1, pokemon.isShiny, isFemalePokemon(pokemon))),
             alt: pokemon.name,
           }),
           jsxs('div', {

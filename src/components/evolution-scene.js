@@ -64,8 +64,18 @@ export function EvolutionScene() {
         className: 'evolution-sprite-container',
         children: jsx('img', {
           className: spriteClass,
-          src: getPokemonSpriteUrl(showNewSprite ? toSpecies.id : fromSpecies.id, !1, evolutionState.isShiny),
-          onError: /** @param {React.SyntheticEvent} event */ (event) => ((/** @type {HTMLImageElement} */ (event.target)).src = getPokemonSpriteFallbackUrl(showNewSprite ? toSpecies.id : fromSpecies.id, !1, evolutionState.isShiny)),
+          src: getPokemonSpriteUrl(
+            showNewSprite ? toSpecies.id : fromSpecies.id,
+            !1,
+            evolutionState.isShiny,
+            evolutionState.isFemale
+          ),
+          onError: /** @param {React.SyntheticEvent} event */ (event) => ((/** @type {HTMLImageElement} */ (event.target)).src = getPokemonSpriteFallbackUrl(
+            showNewSprite ? toSpecies.id : fromSpecies.id,
+            !1,
+            evolutionState.isShiny,
+            evolutionState.isFemale
+          )),
           alt: showNewSprite ? toSpecies.name : fromSpecies.name,
         }),
       }),

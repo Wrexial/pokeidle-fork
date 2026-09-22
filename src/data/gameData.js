@@ -28,6 +28,20 @@ export let animatedSprites = /** @type {{ front: number[], back: number[], shiny
   loadedGameData.animatedSprites ?? { front: [], back: [], shiny: [], backShiny: [] }
 )
 
+/** Ids with a female sprite, per variant (see download_pokemon_sprites.cjs). */
+export let genderedSprites = /** @type {{ front: number[], back: number[], shiny: number[], backShiny: number[], animatedFront: number[], animatedBack: number[], animatedShiny: number[], animatedBackShiny: number[] }} */ (
+  loadedGameData.genderedSprites ?? {
+    front: [],
+    back: [],
+    shiny: [],
+    backShiny: [],
+    animatedFront: [],
+    animatedBack: [],
+    animatedShiny: [],
+    animatedBackShiny: [],
+  }
+)
+
 export let evolutionData = /** @type {Record<string, Evolution[]>} */ (loadedGameData.evolutionData)
 
 export let moveLearnsets = /** @type {Record<string, [number, string][]>} */ (

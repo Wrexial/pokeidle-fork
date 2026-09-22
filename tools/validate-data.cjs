@@ -134,6 +134,30 @@ for (const region of regions) {
   }
   raidPools.set(region.id, seen)
 }
+
+// --- sprite manifests --------------------------------------------------------
+// The gendered manifest must match the files on disk, or a female Pokemon would
+// request a sprite that does not exist.
+const genderedSprites = read('gendered-sprites.json')
+const SPRITE_ROOT = path.join(__dirname, '../public/sprites/pokemon')
+const ANIMATED_ROOT = path.join(SPRITE_ROOT, 'versions/generation-v/black-white/animated')
+const femaleSpriteDirs = {
+  front: path.join(SPRITE_ROOT, 'female'),
+  back: path.join(SPRITE_ROOT, 'back', 'female'),
+  shiny: path.join(SPRITE_ROOT, 'shiny', 'female'),
+  backShiny: path.join(SPRITE_ROOT, 'back', 'shiny', 'female'),
+  animatedFront: path.join(ANIMATED_ROOT, 'female'),
+  animatedBack: path.join(ANIMATED_ROOT, 'back', 'female'),
+  animatedShiny: path.join(ANIMATED_ROOT, 'shiny', 'female'),
+  animatedBackShiny: path.join(ANIMATED_ROOT, 'back', 'shiny', 'female'),
+}
+for (const [category, dir] of Object.entries(femaleSpriteDirs)) {
+  const extension = category.startsWith('animated') ? 'gif' : 'png'
+  for (const id of genderedSprites[category] ?? [])
+    if (!fs.existsSync(path.join(dir, `${id}.${extension}`)))
+      fail(`gendered-sprite manifest lists ${category} #${id} but the file is missing`)
+}
+
 for (const [locationId, location] of Object.entries(mapData)) {
   if (location.background && !fs.existsSync(path.join(__dirname, '../public', location.background)))
     fail(`location ${locationId} uses missing background ${location.background}`)

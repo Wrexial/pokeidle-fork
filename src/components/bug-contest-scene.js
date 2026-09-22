@@ -194,7 +194,12 @@ export function BugContestScene() {
                                 }),
                                 jsx('img', {
                                   className: 'bug-contest-place-sprite',
-                                  src: getPokemonSpriteUrl(pokemonSpecies[entry.speciesKey]?.id ?? 0),
+                                  src: getPokemonSpriteUrl(
+                                    pokemonSpecies[entry.speciesKey]?.id ?? 0,
+                                    !1,
+                                    !1,
+                                    entry.gender === 'female'
+                                  ),
                                   alt: pokemonSpecies[entry.speciesKey]?.name ?? entry.speciesKey,
                                 }),
                                 jsx('span', {
@@ -255,10 +260,15 @@ export function BugContestScene() {
                   children: [
                     jsx('img', {
                       className: 'bug-contest-bug-sprite',
-                      src: getPokemonSpriteUrl(species?.id ?? 0),
+                      src: getPokemonSpriteUrl(species?.id ?? 0, !1, !1, bug.gender === 'female'),
                       onError: /** @param {React.SyntheticEvent} event */ (event) => {
                         const image = /** @type {HTMLImageElement} */ (event.target)
-                        image.src = getPokemonSpriteFallbackUrl(species?.id ?? 0)
+                        image.src = getPokemonSpriteFallbackUrl(
+                          species?.id ?? 0,
+                          !1,
+                          !1,
+                          bug.gender === 'female'
+                        )
                       },
                       alt: activeBugName,
                     }),

@@ -6,7 +6,7 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
-import { genderForPokemon, genderSymbol } from '../game/breeding.js'
+import { genderForPokemon, genderSymbol, isFemalePokemon } from '../game/breeding.js'
 import {
   getPokemonSpriteFallbackUrl,
   getPokemonSpriteUrl,
@@ -31,9 +31,14 @@ function TradePokemon({ pokemon, side, gone }) {
       }),
       jsx('img', {
         className: `wonder-trade-sprite${pokemon.isShiny ? ' shiny' : ''}`,
-        src: getPokemonSpriteUrl(species.id, !1, pokemon.isShiny),
+        src: getPokemonSpriteUrl(species.id, !1, pokemon.isShiny, isFemalePokemon(pokemon)),
         onError: /** @param {{ target: HTMLImageElement }} event */ (event) =>
-          (event.target.src = getPokemonSpriteFallbackUrl(species.id, !1, pokemon.isShiny)),
+          (event.target.src = getPokemonSpriteFallbackUrl(
+            species.id,
+            !1,
+            pokemon.isShiny,
+            isFemalePokemon(pokemon)
+          )),
         alt: species.name,
       }),
       jsxs('span', {

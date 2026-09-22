@@ -1,6 +1,6 @@
 # TODO
 
-Open ideas and follow-ups. Current game version: **0.34.0**
+Open ideas and follow-ups. Current game version: **0.36.0**
 (`src/data/changelog.js`). Finished work lives in the changelog, not here — this
 file only tracks what is **still open**. See `AGENTS.md` for architecture,
 commands and data conventions.
@@ -39,27 +39,25 @@ renumbered, so the gaps below are items that shipped.
    50–60 species on one raid pool, turning raids into a shapeless grab bag.
 9. **#40 Alola / Galar / Paldea league structures** — M · ★★★½ — trials, the
    Champion Cup and any-order gyms don't fit the 8-gyms + E4 model.
-10. **#27 Gender-specific sprites** — M · ★★★ — the animated female sprites are
-    already committed; the plumbing and static front files are not.
-11. **#11 NPC gifts & static encounters** — M · ★★★ — one-off gift NPCs and
+10. **#11 NPC gifts & static encounters** — M · ★★★ — one-off gift NPCs and
     single overworld catches; needs a few small state flags.
-12. **#29 Fishing / companion minigames** — M–L · ★★★ — the rest of the
+11. **#29 Fishing / companion minigames** — M–L · ★★★ — the rest of the
     minigame menu, now that the scene + phase pattern exists.
-13. **#35 More Galar areas** — M · ★★★½ — Galar is the thinnest region map.
-14. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of Armor,
+12. **#35 More Galar areas** — M · ★★★½ — Galar is the thinnest region map.
+13. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of Armor,
     Crown Tundra, Kitakami and the Terarium to first-class regions.
-15. **#18 Better settings** — M · ★★★★ — centralise the QOL toggles and store
+14. **#18 Better settings** — M · ★★★★ — centralise the QOL toggles and store
     settings separately from the save.
-16. **#28 More region areas (caves, POIs, DLC land)** — L · ★★★★½ — real
+15. **#28 More region areas (caves, POIs, DLC land)** — L · ★★★★½ — real
     content; data-heavy. Pairs with #35/#36/#39.
-17. **#4 In-battle Mega evolution** — M–L · ★★★ — Mega Stones plus a mid-battle
+16. **#4 In-battle Mega evolution** — M–L · ★★★ — Mega Stones plus a mid-battle
     transformation action.
 
 ### Tier 3 — Big / low-return, defer
 
-18. **#10 Weather & terrain leftovers** — M · ★★½ — terrain synergy abilities
+17. **#10 Weather & terrain leftovers** — M · ★★½ — terrain synergy abilities
     and weather/accuracy interactions.
-19. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+18. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
 ---
@@ -187,44 +185,6 @@ Still open:
 opponent is frustrating to play against.)*
 
 Effort: **medium–large** (do it in slices).
-
-## 27. Gender-specific sprites
-
-Gender exists (`genderForPokemon` in `src/game/breeding.js`, shown in the stats
-panel) but sprites still ignore it: `getPokemonSpriteUrl(spriteId, isBack,
-isShiny)` keys only by numeric id, so a female Pokemon always renders the male
-artwork. Several species differ by gender (Pikachu line, Hippopotas/Hippowdon,
-Unfezant, Frillish/Jellicent, Meowstic, Pyroar, Indeedee, …), and the sprite
-tree already carries `female/` folders for them.
-
-What exists: animated female variants (`animated/female/`, `.../shiny/female/`,
-`.../back/female/`, `.../back/shiny/female/`) are committed for the ~96 ids that
-differ; static `back/female/` and `back/shiny/female/` are committed, but the
-**front** and **front-shiny** female folders are missing and
-`tools/download_pokemon_sprites.cjs` never fetches female variants.
-
-- [ ] Thread gender into `getPokemonSpriteUrl` (a `gender`/`isFemale` argument,
-      or look it up from the Pokemon) and build the `female/` path for each of
-      the four variants; update `getPokemonSpriteFallbackUrl` too.
-- [ ] Update the call sites that render a specific Pokemon (battle scene, box,
-      party, daycare, dex?, bag) to pass the gender — a Pokemon's gender is
-      derived from its id, so it must come from the object, not the species.
-- [ ] Extend `tools/download_pokemon_sprites.cjs` with the four female variants
-      (PokeAPI `female/{id}.png`, `back/female/...`, `shiny/female/...`,
-      `back/shiny/...`) and download the missing front static files.
-- [ ] Only use the female sprite for species that actually have one; fall back
-      to the base sprite otherwise. Extend `animated-sprites.json` (or add a
-      `gendered-sprites.json` list) so the fallback is a manifest lookup, not a
-      404.
-- [ ] Check genderless/undiscovered Pokemon (gender `genderless`) never request
-      a female path.
-
-Relevant code: `getPokemonSpriteUrl` / `getPokemonSpriteFallbackUrl`
-(`src/game/pokemon.js`), `genderForPokemon` (`src/game/breeding.js`), the sprite
-manifest loader (`src/data/gameData.js`), and
-`tools/download_pokemon_sprites.cjs`.
-
-Effort: **medium** (mostly asset plumbing; assets are partly there already).
 
 ## 28. More region areas (DLC, caves, POIs)
 

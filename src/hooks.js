@@ -11,6 +11,7 @@ import { useGame } from './game/context.js'
 import { playSfx, startMusic, stopMusic, unlockAudio } from './game/audio.js'
 import { attemptCatch, isCaveLocation, isNightTime, isWaterLocation, selectAutoCatchBall, selectBestBall, shouldAutoCatch } from './game/catching.js'
 import { createVolatileState, resolveBattleTurn } from './game/combat.js'
+import { rollGender } from './game/breeding.js'
 import { rollHeldItem } from './game/held-items.js'
 import { calculatePokemonStats, generateIVs, getPerfectIVs, isBattleReady, resolvePokemonMoves, rollAbility } from './game/pokemon.js'
 import { awaySummary, awardExperience, checkShinyOdds, pokerusExpMultiplier, resolveActiveModifiers, resolvePokemonEncounter, resolveRoamer, shinyOddsForSpecies } from './game/progression.js'
@@ -188,6 +189,7 @@ export function useGameLoop() {
                   spDefense: stats.spDefense,
                   speed: stats.speed,
                   moves,
+                  gender: rollGender(teamMember.speciesKey),
                   isPlayer: !1,
                   isShiny: checkShinyOdds(shinyOddsForSpecies(teamMember.speciesKey, completedGenerationSet)),
                 }
@@ -329,6 +331,7 @@ export function useGameLoop() {
               moves: pokemonMoves,
               ability: rollAbility(spawningPokemonData.speciesKey),
               heldItem: rollHeldItem(0.08),
+              gender: rollGender(spawningPokemonData.speciesKey),
               isPlayer: !1,
               isRoamer: spawningPokemonData.isRoamer ?? !1,
               isShiny: spawningPokemonData.isShiny,

@@ -102,6 +102,32 @@ export function genderSymbol(/** @type {'male' | 'female' | 'genderless'} */ gen
 }
 
 /**
+ * Whether a Pokemon should use the female sprite. Species without a female
+ * variant simply keep the shared art, so this is only a hint for the renderer.
+ * @param {{ speciesKey: string, id?: string | number, gender?: 'male' | 'female' | 'genderless' }} pokemon
+ * @returns {boolean}
+ */
+export function isFemalePokemon(pokemon) {
+  return genderForPokemon(pokemon) === 'female'
+}
+
+/**
+ * Roll a fresh gender from a species' gender rate. Battle-only rivals have no
+ * id to derive a stable gender from, so this is rolled once when they appear.
+ * @param {string} speciesKey
+ * @returns {'male' | 'female' | 'genderless'}
+ */
+export function rollGender(speciesKey) {
+  const fixedGender = GENDER_FORM_SPECIES[speciesKey]
+  if (fixedGender) return fixedGender
+  const data = breedingData[speciesKey]
+  if (!data || data.genderRate === -1) return 'genderless'
+  if (data.genderRate === 0) return 'male'
+  if (data.genderRate === 8) return 'female'
+  return Math.random() < data.genderRate / 8 ? 'female' : 'male'
+}
+
+/**
  * Whether two Daycare parents can produce an egg. Ditto breeds with any other
  * breedable Pokemon; otherwise the pair must be opposite genders and share an
  * egg group. Genderless and undiscovered species only breed via Ditto.

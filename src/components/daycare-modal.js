@@ -4,7 +4,7 @@ import { jsx, jsxs } from 'react/jsx-runtime'
 import { breedShinyOdds, breedShinyParentOdds, daycareEggBattles } from '../data/config.js'
 import { pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
-import { breedingCompatibility, eggSpeciesKey, genderForPokemon, genderSymbol } from '../game/breeding.js'
+import { breedingCompatibility, eggSpeciesKey, genderForPokemon, genderSymbol, isFemalePokemon } from '../game/breeding.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, pokemonDisplayName } from '../game/pokemon.js'
 
 const genderClass = (/** @type {'male' | 'female' | 'genderless'} */ gender) =>
@@ -19,9 +19,14 @@ function ParentSlot({ pokemon }) {
     children: [
       jsx('img', {
         className: 'daycare-slot-sprite',
-        src: getPokemonSpriteUrl(species.id, !1, pokemon.isShiny),
+        src: getPokemonSpriteUrl(species.id, !1, pokemon.isShiny, isFemalePokemon(pokemon)),
         onError: /** @param {{ target: HTMLImageElement }} event */ (event) =>
-          (event.target.src = getPokemonSpriteFallbackUrl(species.id, !1, pokemon.isShiny)),
+          (event.target.src = getPokemonSpriteFallbackUrl(
+            species.id,
+            !1,
+            pokemon.isShiny,
+            isFemalePokemon(pokemon)
+          )),
         alt: pokemon.name,
       }),
       jsxs('span', {

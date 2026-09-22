@@ -8,7 +8,7 @@ import { natureName, randomNature } from '../data/natures.js'
 import { elite4Data, encounterData, gymLeaderData, mapData, moveLearnsets, pokemonSpecies, regions } from '../data/gameData.js'
 import { createVolatileState } from './combat.js'
 import { calculatePokemonStats, calculateRequiredExperience, createEgg, createPokemon, gainFriendship, getLevelUpResults, insertIntoBox, isBattleReady, isTutorMove, judgeIVs, nextBoxSortMode, resolvePokemonMoves, sortBoxMembers } from './pokemon.js'
-import { canBreed, eggHatchSteps, eggSpeciesKey, inheritBreedingTraits } from './breeding.js'
+import { canBreed, eggHatchSteps, eggSpeciesKey, genderForPokemon, inheritBreedingTraits } from './breeding.js'
 import { advanceQuests, questLabel, rollQuests } from './quests.js'
 import { buildTrainerTeam, checkShinyOdds, computeUnlockedLocations, createIdleBattleState, formatReward, getRegionUnlockTokens, isActiveEffectItem, loadActivePokemonFromParty, prepareNextBattle, releaseReward, rollCandyDrop, rollValuableDrop, syncActivePokemonIntoParty, tickBattleCounters, tickPartyEggs, tickPokerus } from './progression.js'
 import { BUG_CONTEST_COST, MINING_COST } from './minigames.js'
@@ -1190,6 +1190,7 @@ export function gameReducer(state, action) {
           toSpeciesKey,
           step: 'flash',
           isShiny: evolvingPokemon?.isShiny ?? !1,
+          isFemale: evolvingPokemon ? genderForPokemon(evolvingPokemon) === 'female' : !1,
         },
         battleLog: [...state.battleLog, `What? ${fromSpecies.name} is evolving!`].slice(-50),
       }

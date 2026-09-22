@@ -46,6 +46,7 @@ export function installGameData() {
       breedingData: readJSON('public/data/breeding-data.json'),
       abilityData: readJSON('public/data/ability-data.json'),
       animatedSprites: readJSON('public/data/animated-sprites.json'),
+      genderedSprites: readJSON('public/data/gendered-sprites.json'),
       evolutionData: readJSON('public/data/evolution-data.json'),
       moveLearnsets: readJSON('public/data/possible-learnsets.json'),
       tmLearnsets: readJSON('public/data/tm-learnsets.json'),

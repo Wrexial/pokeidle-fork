@@ -5,7 +5,7 @@ import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
 import { pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, pokemonDisplayName } from '../game/pokemon.js'
-import { getEvolutionOptions } from '../game/breeding.js'
+import { getEvolutionOptions, isFemalePokemon } from '../game/breeding.js'
 import { formatReward, releaseReward } from '../game/progression.js'
 import { ExpBar } from './exp-bar.js'
 import { HpBar } from './hp-bar.js'
@@ -203,14 +203,20 @@ export function PartyPanel({
                           className: 'party-sprite',
                           src: member.isEgg
                             ? getEggSpriteUrl()
-                            : getPokemonSpriteUrl(species.id, !1, member.isShiny),
+                            : getPokemonSpriteUrl(
+                                species.id,
+                                !1,
+                                member.isShiny,
+                                isFemalePokemon(member)
+                              ),
                           onError: member.isEgg
                             ? void 0
                             : /** @param {{ target: HTMLImageElement }} event */ (event) =>
                                 (event.target.src = getPokemonSpriteFallbackUrl(
                                   species.id,
                                   !1,
-                                  member.isShiny
+                                  member.isShiny,
+                                  isFemalePokemon(member)
                                 )),
                           alt: member.isEgg ? 'Egg' : member.name,
                         }),

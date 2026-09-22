@@ -6,6 +6,7 @@ import { BOX_PAGE_SIZE, BOX_SORT_OPTIONS } from '../data/ui.js'
 import { pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, pokemonDisplayName } from '../game/pokemon.js'
+import { isFemalePokemon } from '../game/breeding.js'
 import { PokedexModal } from './pokedex-modal.js'
 import { RecordsModal } from './records-modal.js'
 import { DaycareModal } from './daycare-modal.js'
@@ -261,14 +262,20 @@ export function BoxPanel({
                         children: jsx('img', {
                           src: pokemon.isEgg
                             ? getEggSpriteUrl()
-                            : getPokemonSpriteUrl(species.id, !1, pokemon.isShiny),
+                            : getPokemonSpriteUrl(
+                                species.id,
+                                !1,
+                                pokemon.isShiny,
+                                isFemalePokemon(pokemon)
+                              ),
                           onError: pokemon.isEgg
                             ? void 0
                             : /** @param {{ target: HTMLImageElement }} event */ (event) =>
                                 (event.target.src = getPokemonSpriteFallbackUrl(
                                   species.id,
                                   !1,
-                                  pokemon.isShiny
+                                  pokemon.isShiny,
+                                  isFemalePokemon(pokemon)
                                 )),
                           alt: pokemon.isEgg ? 'Egg' : pokemon.name,
                           style: {

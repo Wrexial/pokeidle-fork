@@ -67,6 +67,8 @@ export const initialGameState = {
   pokerus: null,
   /** Today's daily quests, or null before they are rolled. */
   quests: null,
+  /** A pending region-dex-completion celebration (phase `dexComplete`). */
+  dexCelebration: null,
   /** Today's rotating event + whether its gift was claimed (see src/data/daily-events.js). */
   dailyEvent: null,
   /** Daycare: up to two deposited parents breeding eggs. */
@@ -96,8 +98,8 @@ export const initialGameState = {
   colourblindTypes: !1,
   /** Background music (off by default; the AudioContext starts on first use). */
   musicEnabled: !1,
-  /** Sound effects for notable events (off by default). */
-  sfxEnabled: !1,
+  /** Sound effects for notable events (on by default). */
+  sfxEnabled: !0,
   raidCooldownEnd: null,
   raidLegendary: null,
   raidRegion: null,
@@ -1785,6 +1787,22 @@ export function gameReducer(state, action) {
         }
       )
     }
+    case 'START_DEX_CELEBRATION': {
+      if (state.phase === 'dexComplete') return state
+      const generation = action.payload?.generation
+      if (!Number.isInteger(generation)) return state
+      return {
+        ...state,
+        phase: 'dexComplete',
+        dexCelebration: { generation },
+        pendingEvents: [],
+        battleEvents: [],
+      }
+    }
+    case 'COMPLETE_DEX_CELEBRATION':
+      return state.phase !== 'dexComplete'
+        ? state
+        : { ...prepareNextBattle(state), dexCelebration: null }
     case 'REFRESH_DAILY_EVENT': {
       const today = action.payload?.today ?? todayKey()
       if (state.dailyEvent?.date === today) return state

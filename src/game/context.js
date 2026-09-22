@@ -429,7 +429,8 @@ function repairSave(saved) {
     reducedMotion: !!saved.reducedMotion,
     colourblindTypes: !!saved.colourblindTypes,
     musicEnabled: !!saved.musicEnabled,
-    sfxEnabled: !!saved.sfxEnabled,
+    // SFX default on for saves that predate the setting.
+    sfxEnabled: saved.sfxEnabled === void 0 ? true : !!saved.sfxEnabled,
     raidCooldownEnd: saved.raidCooldownEnd ?? null,
     raidLegendary: saved.inRaid ? (saved.raidLegendary ?? null) : null,
     raidRegion: saved.inRaid ? (saved.raidRegion ?? 'kanto') : null,

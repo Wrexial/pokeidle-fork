@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.15**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.16**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -1193,6 +1193,10 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.9.16 (dex celebration + sound on): completing a region's national dex plays a
+full-screen badge/confetti celebration that pauses the game before the reward,
+and SFX now default on (music still off).
 
 0.9.15 (form-change items): reversible formes (Rotom, Giratina, Shaymin,
 Deoxys, the Therian formes, Kyurem, Zygarde, Hoopa, Necrozma, Zacian/Zamazenta,

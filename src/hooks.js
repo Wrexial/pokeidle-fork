@@ -8,7 +8,7 @@ import { completedGenerations, encounterData, mapData, pokemonSpecies, trainerDa
 import { ACHIEVEMENTS } from './data/achievements.js'
 import { dailyExpMultiplier, dailyPrizeMultiplier, dailyShinyMultiplier } from './data/daily-events.js'
 import { useGame } from './game/context.js'
-import { playSfx, startMusic, stopMusic } from './game/audio.js'
+import { playSfx, startMusic, stopMusic, unlockAudio } from './game/audio.js'
 import { attemptCatch, selectAutoCatchBall, selectBestBall, shouldAutoCatch } from './game/catching.js'
 import { createVolatileState, resolveBattleTurn } from './game/combat.js'
 import { calculatePokemonStats, generateIVs, getPerfectIVs, resolvePokemonMoves } from './game/pokemon.js'
@@ -643,6 +643,8 @@ export function useGameLoop() {
           return
         case 'catching':
           return
+        case 'dexComplete':
+          return
       }
     }, [dispatch])
   React.useEffect(() => {
@@ -690,21 +692,27 @@ export function useGameLoop() {
         }))
     }, [state.phase, state.autoProceed, state.currentLocation, dispatch]),
     React.useEffect(() => {
-      // Completing a generation's national dex pays a one-off reward. Detected
-      // here so it fires however the last species arrived (catch, evolution,
-      // hatch, starter or trade).
+      // Completing a generation's national dex pays a one-off reward, shown as a
+      // celebration that pauses the game before the reward is granted.
+      if (state.phase === 'dexComplete' || state.dexCelebration) return
       const completed = completedGenerations(state.pokedexCaught),
         pending = [...completed].filter(
           (generationIndex) => !(state.rewardedGenerations ?? []).includes(generationIndex)
         )
       pending.length > 0 &&
         dispatch({
-          type: 'CLAIM_DEX_REWARDS',
+          type: 'START_DEX_CELEBRATION',
           payload: {
-            generations: pending,
+            generation: pending[0],
           },
         })
-    }, [state.pokedexCaught, state.rewardedGenerations, dispatch]),
+    }, [
+      state.pokedexCaught,
+      state.rewardedGenerations,
+      state.phase,
+      state.dexCelebration,
+      dispatch,
+    ]),
     React.useEffect(() => {
       // Claim any achieved-but-unpaid milestone rewards. This also runs on load,
       // so older saves get their rewards retroactively (rewardedAchievements is
@@ -920,6 +928,17 @@ export function useGameAudio() {
     lastLevelUpRef = React.useRef(state.levelUpNotification)
   return (
     React.useEffect(() => {
+      // Browsers only allow audio after a user gesture; resume on the first one.
+      if (!state.musicEnabled && !state.sfxEnabled) return
+      const unlock = () => unlockAudio()
+      window.addEventListener('pointerdown', unlock, { once: true })
+      window.addEventListener('keydown', unlock, { once: true })
+      return () => {
+        window.removeEventListener('pointerdown', unlock)
+        window.removeEventListener('keydown', unlock)
+      }
+    }, [state.musicEnabled, state.sfxEnabled]),
+    React.useEffect(() => {
       if (!state.musicEnabled) {
         stopMusic()
         return
@@ -945,6 +964,7 @@ export function useGameAudio() {
       if (state.phase === 'evolving') playSfx('evolution')
       else if (state.phase === 'healing') playSfx('heal')
       else if (state.phase === 'catching') playSfx('catch')
+      else if (state.phase === 'dexComplete') playSfx('dexComplete')
     }, [state.phase, state.sfxEnabled]),
     React.useEffect(() => {
       const current = state.levelUpNotification,

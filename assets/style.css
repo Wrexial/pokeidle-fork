@@ -3566,6 +3566,149 @@ img {
     margin: 0
 }
 
+.dex-complete-scene {
+    position: relative;
+    width: 560px;
+    height: 480px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px
+}
+
+.dex-complete-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 65% 55% at 50% 42%,#4a3a10,#1a1408 60%,#050402)
+}
+
+.dex-complete-sparks {
+    position: absolute;
+    inset: 0;
+    pointer-events: none
+}
+
+.dex-spark {
+    position: absolute;
+    top: 42%;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    margin: -4px 0 0 -4px;
+    background: #ffe680;
+    box-shadow: 0 0 8px #ffd040;
+    opacity: 0;
+    animation: dexSpark 1.6s ease-out infinite
+}
+
+.dex-spark-0 { --dex-angle: 0deg }
+.dex-spark-1 { --dex-angle: 45deg }
+.dex-spark-2 { --dex-angle: 90deg }
+.dex-spark-3 { --dex-angle: 135deg }
+.dex-spark-4 { --dex-angle: 180deg }
+.dex-spark-5 { --dex-angle: 225deg }
+.dex-spark-6 { --dex-angle: 270deg }
+.dex-spark-7 { --dex-angle: 315deg }
+
+@keyframes dexSpark {
+    0% {
+        opacity: 0;
+        transform: rotate(var(--dex-angle)) translateY(0) scale(.4)
+    }
+
+    25% {
+        opacity: 1
+    }
+
+    to {
+        opacity: 0;
+        transform: rotate(var(--dex-angle)) translateY(-170px) scale(1.1)
+    }
+}
+
+.dex-complete-badge {
+    position: relative;
+    z-index: 10;
+    width: 96px;
+    height: 96px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 40% 35%,#fff6c0,#f0c850 55%,#a87818);
+    border: 4px solid #5a3e20;
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px #8a6820,0 0 30px #ffd040aa;
+    animation: dexBadgePop .8s cubic-bezier(.2,1.6,.4,1) both
+}
+
+.dex-complete-badge-icon {
+    font-size: 44px;
+    line-height: 1
+}
+
+@keyframes dexBadgePop {
+    0% {
+        transform: scale(0) rotate(-30deg);
+        opacity: 0
+    }
+
+    60% {
+        transform: scale(1.15) rotate(6deg);
+        opacity: 1
+    }
+
+    to {
+        transform: scale(1) rotate(0)
+    }
+}
+
+.dex-complete-content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    text-align: center
+}
+
+.dex-complete-kicker {
+    font-size: 9px;
+    color: #f0d060;
+    text-transform: uppercase;
+    letter-spacing: 2px
+}
+
+.dex-complete-region {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff6d0;
+    text-shadow: 0 0 12px #ffd040aa,2px 2px 0 #3a2810
+}
+
+.dex-complete-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: #f0e6c0;
+    margin-top: 4px
+}
+
+.dex-complete-sub {
+    font-size: 9px;
+    color: #f0d060
+}
+
+.dex-complete-reward {
+    margin-top: 6px;
+    font-size: 9px;
+    color: #1a1208;
+    background: var(--gold-bright);
+    border: 2px solid var(--gold-dark);
+    padding: 4px 10px
+}
+
 .evolution-bg {
     position: absolute;
     inset: 0;

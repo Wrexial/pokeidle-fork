@@ -32,13 +32,13 @@ test('audio toggles flip their settings', () => {
   assert.equal(gameReducer(music, { type: 'TOGGLE_MUSIC' }).musicEnabled, false)
 
   const sfx = gameReducer(initialGameState, { type: 'TOGGLE_SFX' })
-  assert.equal(sfx.sfxEnabled, true)
-  assert.equal(gameReducer(sfx, { type: 'TOGGLE_SFX' }).sfxEnabled, false)
+  assert.equal(sfx.sfxEnabled, false)
+  assert.equal(gameReducer(sfx, { type: 'TOGGLE_SFX' }).sfxEnabled, true)
 })
 
-test('audio defaults off in a fresh save', () => {
+test('audio defaults: music off, sound effects on', () => {
   assert.equal(initialGameState.musicEnabled, false)
-  assert.equal(initialGameState.sfxEnabled, false)
+  assert.equal(initialGameState.sfxEnabled, true)
 })
 
 test('the audio engine is a no-op without a browser AudioContext', () => {
@@ -76,7 +76,7 @@ test('repairSave defaults the accessibility settings off and keeps them on', () 
   assert.equal(enabled.reducedMotion, true)
   assert.equal(enabled.colourblindTypes, true)
   assert.equal(defaults.musicEnabled, false)
-  assert.equal(defaults.sfxEnabled, false)
+  assert.equal(defaults.sfxEnabled, true)
   assert.equal(repairSave(save({ musicEnabled: true, sfxEnabled: true })).musicEnabled, true)
-  assert.equal(repairSave(save({ musicEnabled: true, sfxEnabled: true })).sfxEnabled, true)
+  assert.equal(repairSave(save({ musicEnabled: true, sfxEnabled: false })).sfxEnabled, false)
 })

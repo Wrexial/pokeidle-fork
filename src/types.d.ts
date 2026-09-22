@@ -223,6 +223,8 @@ type GameState = {
   pokerus?: { battlesRemaining: number } | null
   /** Today's daily quests (see src/game/quests.js). */
   quests?: any
+  /** A pending region-dex-completion celebration shown in the `dexComplete` phase. */
+  dexCelebration?: { generation: number } | null
   /** Daycare parents (up to 2) and battles toward the next egg. */
   daycare: { parents: Pokemon[]; progress: number }
   defeatedGyms: string[]

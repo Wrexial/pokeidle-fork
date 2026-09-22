@@ -17,6 +17,7 @@ import { SettingsModal } from './settings-modal.js'
 import { BattleTextBox } from './battle-text-box.js'
 import { EvolutionScene } from './evolution-scene.js'
 import { DailyEventModal } from './daily-event-modal.js'
+import { DexCompleteScene } from './dex-complete-scene.js'
 import { QuestsModal } from './quests-modal.js'
 import { HealingScene } from './healing-scene.js'
 import { MasterBallScene } from './master-ball-scene.js'
@@ -41,6 +42,7 @@ export function BattleScene() {
   if (state.phase === 'evolving') return jsx(EvolutionScene, {})
   if (state.phase === 'healing') return jsx(HealingScene, {})
   if (state.phase === 'catching') return jsx(MasterBallScene, {})
+  if (state.phase === 'dexComplete') return jsx(DexCompleteScene, {})
   if (!playerPokemon) return null
   const currentEvent = battleEvents.length > 0 ? battleEvents[battleEvents.length - 1] : null,
     playerSpecies = pokemonSpecies[playerPokemon.speciesKey],

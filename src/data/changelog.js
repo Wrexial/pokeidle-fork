@@ -1,10 +1,28 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.9.15'
+export const GAME_VERSION = '0.9.16'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.9.16',
+      subtitle: 'Dex Celebration & Sound On',
+      sections: [
+        {
+          heading: 'Pokedex',
+          items: [
+            'Completing a region\u2019s national dex now plays a full-screen celebration \u2014 badge, confetti and fanfare \u2014 that pauses the game before granting the reward',
+          ],
+        },
+        {
+          heading: 'Audio',
+          items: [
+            'Sound effects are now on by default (music is still off); the browser unlocks audio on your first click',
+          ],
+        },
+      ],
+    },
     {
       version: '0.9.15',
       subtitle: 'Form-Change Items',

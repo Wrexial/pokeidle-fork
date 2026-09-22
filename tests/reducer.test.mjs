@@ -119,3 +119,23 @@ test('the Master Ball cannot be thrown without one', () => {
     }
   assert.equal(gameReducer(battling, { type: 'THROW_MASTER_BALL' }), battling)
 })
+
+test('the dex-completion celebration pauses and then resumes', () => {
+  const base = startedGame(),
+    celebrating = gameReducer(base, {
+      type: 'START_DEX_CELEBRATION',
+      payload: { generation: 0 },
+    })
+  assert.equal(celebrating.phase, 'dexComplete')
+  assert.deepEqual(celebrating.dexCelebration, { generation: 0 })
+
+  const resumed = gameReducer(celebrating, { type: 'COMPLETE_DEX_CELEBRATION' })
+  assert.equal(resumed.phase, 'idle')
+  assert.equal(resumed.dexCelebration, null)
+
+  assert.equal(
+    gameReducer(base, { type: 'START_DEX_CELEBRATION', payload: { generation: 'x' } }),
+    base,
+    'an invalid generation is ignored'
+  )
+})

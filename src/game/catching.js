@@ -40,7 +40,13 @@ export function attemptCatch(speciesKey, ballId) {
  * @returns {string | null}
  */
 export function selectBestBall(speciesKey, enabledBalls, inventory) {
-  const usableBalls = ballOrder.filter((ballId) => enabledBalls.includes(ballId) && (inventory[ballId] ?? 0) > 0)
+  // The Master Ball is never picked automatically: it is a deliberate, one-off
+  // throw from the battle button so a routine auto-catch can't silently spend
+  // the rarest ball in the game. See THROW_MASTER_BALL in the reducer.
+  const usableBalls = ballOrder.filter(
+    (ballId) =>
+      ballId !== 'masterball' && enabledBalls.includes(ballId) && (inventory[ballId] ?? 0) > 0
+  )
   if (usableBalls.length === 0) return null
   const catchRate = getCatchRate(speciesKey)
   for (const ballId of usableBalls) if ((catchRate * pokeBalls[ballId].ballModifier) / 255 >= 1) return ballId

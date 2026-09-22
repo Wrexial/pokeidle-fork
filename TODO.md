@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.1**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.2**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -19,20 +19,18 @@ working order, and the numbered sections as the details.
 
 ### Tier 1 — Quick wins (small effort, high gain)
 
-**Shipped** in 0.9.0/0.9.1: #13 auto-travel, #26 README/licence, #30 caught
-badge + toast queue, #1 healing items, #12 dex rewards, #21 unlock tokens, #33
+**Shipped** in 0.9.x: #13 auto-travel, #26 README/licence, #30 caught badge +
+toast queue, #1 healing items, #12 dex rewards, #21 unlock tokens, #33
 Rare/Exp. Candies, #34 sellable valuables, #15 save export/import (slots and
-share codes still open), and #41 box "New" sort prepend. The remaining items,
-best return first:
+share codes still open), #41 box "New" sort prepend, and #37 the Master Ball
+button. The remaining items, best return first:
 
-1. **#37 Master Ball catch button** — S–M · ★★★★ — a dedicated, animated throw
-   makes the rarest ball feel like an event instead of an auto-catch.
-2. **#2b Natures** (slice of #2) — S–M · ★★★½ — cheap battle depth that also
+1. **#2b Natures** (slice of #2) — S–M · ★★★½ — cheap battle depth that also
    feeds daycare (#3).
-3. **#14 Lightweight test suite** — S–M · ★★★½ (dev value) — pays off every
+2. **#14 Lightweight test suite** — S–M · ★★★½ (dev value) — pays off every
    future change.
-4. **#5 Daily / periodic events** — S–M · ★★★ — cheap engagement loop.
-5. **#16 More ideas (grab bag)** — mostly S · ★★★ — mine the quick ones
+3. **#5 Daily / periodic events** — S–M · ★★★ — cheap engagement loop.
+4. **#16 More ideas (grab bag)** — mostly S · ★★★ — mine the quick ones
    (achievement rewards, release/selling, map QoL, notifications).
 
 ### Tier 2 — High impact, worth the effort (medium–large)
@@ -953,47 +951,16 @@ to replace the proximity stitching / 15-species trim.
 Effort: **medium–large** (a small data-model change plus map/encounter UI, but
 it unblocks the three regions that don't fit the route graph today).
 
-## 37. Master Ball as a dedicated, animated catch
+## 37. ✅ Master Ball as a dedicated, animated catch — shipped in 0.9.2
 
-Catching is fully automated: the idle loop picks a ball from the route's
-enabled balls (`selectAutoCatchBall` / `selectBestBall`) and throws it in the
-battle log. The Master Ball — the rarest, most exciting item in the game — is
-therefore just another auto-selected ball, and because its `ballModifier` of 255
-always wins the "best ball" check it can be silently spent by a routine
-auto-catch. There's no ceremony around finding or using one.
-
-Make it a deliberate, cinematic action:
-
-- [ ] Add a **Master Ball button** to the battle UI (enemy side, near the enemy
-      info box / battle controls) that only shows (or only enables) when the
-      player owns one. Pressing it throws a Master Ball at the current wild
-      encounter and consumes one.
-- [ ] Add a dedicated `THROW_MASTER_BALL` (or reuse `CATCH_POKEMON` with a
-      flag) reducer action that bypasses the auto-catch rule engine, always
-      catches, and pauses the idle loop while it runs.
-- [ ] Play a **special animation** before the catch resolves: a unique ball
-      sprite and throw arc, a screen flash/zoom, the ball wobbling, then a
-      guaranteed click with confetti/sparkles (echo `healing-scene.js`,
-      `evolution-scene.js` and the `HatchPopup` for structure/CSS keyframes).
-      Consider a `MasterBallScene` / `CatchAnimation` component driven by a new
-      `catching` phase so the timer stops while it plays.
-- [ ] Stop the Master Ball being spent automatically: exclude it from
-      `selectBestBall` / `selectAutoCatchBall` (or gate it behind an explicit
-      setting) so it can only be used through the button.
-- [ ] Decide availability: wild encounters yes; trainer battles no; raids and
-      roamer legendaries probably yes (make the button prominent there).
-- [ ] Mark the moment in the battle log and celebrate a new/shiny catch through
-      the toast system (#30b).
-- [ ] Assets: a Master Ball throw sprite/animation — only the static
-      `pokeballColors` / `PokeballIcon` exist today.
-
-Relevant code: `src/game/catching.js` (`attemptCatch`, `selectBestBall`,
-`selectAutoCatchBall`, `calculateCatchChance`), the auto-catch score in
-`src/hooks.js`, `CATCH_POKEMON` / `USE_POKEBALL` (`src/game/reducer.js`),
-`battle-scene.js` (button placement), `pokeball-icon.js` and `assets/style.css`;
-`pokeBalls.masterball` in `src/data/items.js`.
-
-Effort: **small–medium** (one button + a new action + an animation/CSS pass).
+Done. `THROW_MASTER_BALL` / `COMPLETE_MASTER_BALL` (`src/game/reducer.js`) catch
+a live wild encounter (raids included) from a new `catching` phase that pauses
+the idle loop; `MasterBallScene` (`src/components/master-ball-scene.js`) plays
+the throw/flash/wobble/click animation before the catch resolves. The Master
+Ball is excluded from `selectBestBall` (so auto-catch and the
+always-catch-shinies rule can never spend one) and hidden from the
+catch-settings ball picker; it is thrown only from the battle button. The catch
+registers in the Pokedex and fires the usual new/repeat/shiny toasts.
 
 ## 38. Clean up the Raid Islands (later generations are bloated)
 
@@ -1206,6 +1173,10 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.9.2 (Master Ball moment): the Master Ball is no longer auto-spent. A button in
+wild/raid battles throws it with a throw/flash/wobble/click animation and a
+guaranteed catch, driven by a new `catching` phase that pauses the idle loop.
 
 0.9.1 (save backup + box order): Settings can export the save to a JSON file
 and import one back (stamped to the current version, so backups survive a save

@@ -632,6 +632,8 @@ export function useGameLoop() {
           return
         case 'evolving':
           return
+        case 'catching':
+          return
       }
     }, [dispatch])
   React.useEffect(() => {

@@ -197,7 +197,10 @@ export const CatchSettingsModal = React.memo(
                     className: 'catch-ball-label',
                     children: 'Ball:',
                   }),
-                  ballOrder.map((event) =>
+                  ballOrder
+                    // The Master Ball is thrown from the battle button, not auto-catch.
+                    .filter((ballId) => ballId !== 'masterball')
+                    .map((event) =>
                     jsx(
                       'button',
                       {

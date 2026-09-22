@@ -15,6 +15,8 @@ import { SettingsModal } from './settings-modal.js'
 import { BattleTextBox } from './battle-text-box.js'
 import { EvolutionScene } from './evolution-scene.js'
 import { HealingScene } from './healing-scene.js'
+import { MasterBallScene } from './master-ball-scene.js'
+import { PokeballIcon } from './pokeball-icon.js'
 import { MoveManagerPanel } from './move-manager-panel.js'
 import { SpeedControls } from './speed-controls.js'
 
@@ -32,6 +34,7 @@ export function BattleScene() {
     )
   if (state.phase === 'evolving') return jsx(EvolutionScene, {})
   if (state.phase === 'healing') return jsx(HealingScene, {})
+  if (state.phase === 'catching') return jsx(MasterBallScene, {})
   if (!playerPokemon) return null
   const currentEvent = battleEvents.length > 0 ? battleEvents[battleEvents.length - 1] : null,
     playerSpecies = pokemonSpecies[playerPokemon.speciesKey],
@@ -205,14 +208,29 @@ export function BattleScene() {
         }),
       enemyPokemon &&
         !hideEnemySprite &&
-        jsx('div', {
+        jsxs('div', {
           className: 'enemy-info-anchor',
-          children: jsx(EnemyInfoBox, {
-            pokemon: enemyPokemon,
-            status: enemyPokemon.status ?? null,
-            // Trainer teams and raids aren't a catch reward, so only flag wilds.
-            isCaught: !activeTrainerBattle && caughtSpeciesSet.has(enemyPokemon.speciesKey),
-          }),
+          children: [
+            jsx(EnemyInfoBox, {
+              pokemon: enemyPokemon,
+              status: enemyPokemon.status ?? null,
+              // Trainer teams and raids aren't a catch reward, so only flag wilds.
+              isCaught: !activeTrainerBattle && caughtSpeciesSet.has(enemyPokemon.speciesKey),
+            }),
+            !activeTrainerBattle &&
+              state.phase === 'battling' &&
+              (state.inventory.masterball ?? 0) > 0 &&
+              jsxs('button', {
+                className: 'masterball-throw-btn',
+                onClick: () => dispatch({ type: 'THROW_MASTER_BALL' }),
+                disabled: enemyFainted,
+                title: 'Throw a Master Ball \u2014 catches without fail',
+                children: [
+                  jsx(PokeballIcon, { ballId: 'masterball', size: 16 }),
+                  jsx('span', { children: `MASTER BALL \u00d7${state.inventory.masterball}` }),
+                ],
+              }),
+          ],
         }),
       activeTrainerBattle &&
         jsx('div', {

@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.9.1'
+export const GAME_VERSION = '0.9.2'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.9.2',
+      subtitle: 'Master Ball Moment',
+      sections: [
+        {
+          heading: 'Battles',
+          items: [
+            'A Master Ball button appears in wild battles and raids whenever you own one; throwing it plays a throw/flash/wobble/click animation and always catches',
+            'The Master Ball is no longer spent automatically \u2014 auto-catch and the always-catch-shinies rule skip it, and it is only used from the button',
+          ],
+        },
+      ],
+    },
     {
       version: '0.9.1',
       subtitle: 'Save Backups & Box Order',

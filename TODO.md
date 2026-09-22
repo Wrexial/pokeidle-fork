@@ -72,26 +72,28 @@ working order, and the numbered sections as the details.
     50–60 species on one raid pool, turning raids into a shapeless grab bag.
 25. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of
     Armor, Crown Tundra, Kitakami and the Terarium to first-class regions.
-26. **#18 Better settings** — M · ★★★★ — centralises QOL toggles and the
+26. **#40 Alola / Galar / Paldea league structures** — M · ★★★½ — trials, the
+    Champion Cup and any-order gyms don't fit the 8-gyms + E4 model.
+27. **#18 Better settings** — M · ★★★★ — centralises QOL toggles and the
     export/import from #15.
 
 ### Tier 3 — Medium effort, medium gain
 
-27. **#3 Daycare inheritance** — M · ★★★
-28. **#6 Friendship / happiness** — M · ★★★
-29. **#9 Move tutor / TMs** — M · ★★★
-30. **#11 NPC gifts & static encounters** — M · ★★★
-31. **#17 Pokéball variants** — M · ★★★
-32. **#27 Gender-specific sprites** — M · ★★★ (assets are half-there)
-33. **#29 Minigames** — M–L · ★★★ (small per minigame once one exists)
-34. **#4 In-battle Mega evolution** — M–L · ★★★
-35. **#32 Battle Tower tuning** — M · ★★★½ — auto-climb, sane Victory Token
+28. **#3 Daycare inheritance** — M · ★★★
+29. **#6 Friendship / happiness** — M · ★★★
+30. **#9 Move tutor / TMs** — M · ★★★
+31. **#11 NPC gifts & static encounters** — M · ★★★
+32. **#17 Pokéball variants** — M · ★★★
+33. **#27 Gender-specific sprites** — M · ★★★ (assets are half-there)
+34. **#29 Minigames** — M–L · ★★★ (small per minigame once one exists)
+35. **#4 In-battle Mega evolution** — M–L · ★★★
+36. **#32 Battle Tower tuning** — M · ★★★½ — auto-climb, sane Victory Token
     payout, and harder/faster teams (6 fully evolved, late legendaries).
 
 ### Tier 4 — Big and low-return, defer
 
-36. **#10 Weather & terrain** — M · ★★½ (nice depth, no urgency)
-37. **#19 Online sync** — L · ★★★ — the project's first backend; needs a
+37. **#10 Weather & terrain** — M · ★★½ (nice depth, no urgency)
+38. **#19 Online sync** — L · ★★★ — the project's first backend; needs a
     design doc and real ops for modest player value today.
 
 ---
@@ -1103,6 +1105,69 @@ construction, `speciesForGen`, `levelRoutes`, the raid scan),
 `computeUnlockedLocations`), and the Town Map (`src/components/town-map.js`).
 
 Effort: **medium–large** (data-heavy, but shares groundwork with #28/#35/#36).
+
+## 40. Handle Alola, Galar and Paldea's league structures
+
+The league model assumes every region has **8 gym leaders in canonical order**,
+then a **4-member Elite Four** and a Champion at a `leagueLocationKey`, gated by
+`gymsRequired` / `badgesRequired` and unlocked along the route tree. That fits
+Gens 1–6, but it misrepresents three regions:
+
+- **Alola** has no gyms — 7 island trials (captain + totem Pokemon) award
+  Z-Crystals, plus 4 grand trials against the Kahunas. The data currently
+  fabricates **8** Z-Crystal "gyms" (e.g. a Groundium Z) and spreads them across
+  towns, so trial captains are ordinary trainers and the grand trials/totems
+  aren't modelled at all. Alola *does* have a real E4 + Champion (Mount
+  Lanakila), so only the badge track is wrong.
+- **Galar** has 8 gyms but **no Elite Four**: the Championship runs the Champion
+  Cup semifinals (Marnie / Hop / Bede / Raihan) then Champion Leon, with a
+  post-game rematch tournament. The data fakes an E4 from those rivals and
+  labels it "Elite Four & Champion".
+- **Paldea** has 8 gyms challengeable **in any order** and no fixed badge
+  order — the generator imposes canonical order via `gymsRequired` gates (gym
+  k's gate goes on the first route after it, and later routes inherit it).
+  Victory Road is also only one of three storylines (Path of Legends, Starfall
+  Street), so a badge-count gate is a poor fit.
+
+Make the league structure **data-driven per region** rather than assumed:
+
+- [ ] Decide the model: a per-region `league` block, e.g.
+      `{ badgeLabel, badgeKind: 'gym' | 'trial' | 'battle', order: 'ordered' | 'free', eliteLabel, eliteKind: 'elite4' | 'cup' | 'none' }`,
+      in `regions.json` (or a new data file), vs. flags on the existing
+      gym/E4/champion entries.
+- [ ] **Alola**: replace the 8 fabricated "gyms" with the 7 trials + 4 grand
+      trials (or an explicit, documented 8-slot mapping); decide whether a trial
+      is a captain battle, a totem battle, or both, and how Z-Crystals map to
+      `defeatedGyms`/badges.
+- [ ] **Galar**: keep the 8 gyms; relabel the endgame as the **Champion Cup**
+      and treat the E4 list as the semifinal opponents (already Marnie / Hop /
+      Bede / Raihan); decide what "E4 beaten" means and how the post-game
+      tournament (rematches) works.
+- [ ] **Paldea**: drop canonical badge ordering — allow any-order gyms (fixed
+      or level-scaled teams) and gate the league on a badge **count** instead of
+      ordered `gymsRequired`; decide whether Titans / Team Star are optional
+      side content.
+- [ ] Make `gym-panel.js` copy data-driven — badge track, "Gym Leaders" →
+      "Trial Captains" / "Gym Leaders", "Elite Four & Champion" → "Champion
+      Cup" / "Championship", "Badge" → "Z-Crystal" — instead of hardcoded
+      strings.
+- [ ] Update the generator's badge-order gate logic, `GYM_TOWNS` / `GYM_TYPES` /
+      `E4_TYPES` / `CHAMPION_TYPES`, and `tools/validate-data.cjs` (it currently
+      expects 8 gyms / 4 E4 / 1 champion per region).
+- [ ] Make the achievements region-aware: `badgeFull` ("all 8 badges") and the
+      `allBadgesOfARegion` check should use each region's own badge count.
+- [ ] Save shape is likely fine — `defeatedGyms` / `defeatedEliteFour` /
+      `defeatedChampions` stay id lists — so this is mostly data + UI + the
+      unlock-gate change.
+
+Relevant code: `tools/generate-regions.cjs` (gym placement, `gymsRequired`
+gates, league construction, `BADGE_NAMES` / `GYM_TOWNS`), `public/data/regions.json`
++ `gym-leader-data.json` / `elite-4-data.json` / `champion-data.json`,
+`src/components/gym-panel.js`, `src/game/reducer.js` (`BOSS_BATTLE_END`,
+`RESET_ELITE_FOUR`), `src/data/achievements.js`, `tools/validate-data.cjs`.
+
+Effort: **medium** (mostly data + panel copy; the Paldea any-order gate is the
+only real progression change).
 
 ---
 

@@ -11,7 +11,7 @@ import { useGame } from './game/context.js'
 import { playSfx, startMusic, stopMusic, unlockAudio } from './game/audio.js'
 import { attemptCatch, isCaveLocation, isNightTime, isWaterLocation, selectAutoCatchBall, selectBestBall, shouldAutoCatch } from './game/catching.js'
 import { createVolatileState, resolveBattleTurn } from './game/combat.js'
-import { calculatePokemonStats, generateIVs, getPerfectIVs, isBattleReady, resolvePokemonMoves } from './game/pokemon.js'
+import { calculatePokemonStats, generateIVs, getPerfectIVs, isBattleReady, resolvePokemonMoves, rollAbility } from './game/pokemon.js'
 import { awaySummary, awardExperience, checkShinyOdds, pokerusExpMultiplier, resolveActiveModifiers, resolvePokemonEncounter, resolveRoamer, shinyOddsForSpecies } from './game/progression.js'
 
 /**
@@ -326,6 +326,7 @@ export function useGameLoop() {
               spDefense: pokemonBaseStats.spDefense,
               speed: pokemonBaseStats.speed,
               moves: pokemonMoves,
+              ability: rollAbility(spawningPokemonData.speciesKey),
               isPlayer: !1,
               isRoamer: spawningPokemonData.isRoamer ?? !1,
               isShiny: spawningPokemonData.isShiny,
@@ -381,6 +382,7 @@ export function useGameLoop() {
               spDefense: currentGameState.playerPokemon.spDefense,
               speed: currentGameState.playerPokemon.speed,
               moves: currentGameState.playerPokemon.moves,
+              ability: currentGameState.playerPokemon.ability,
               isPlayer: !0,
               isShiny: currentGameState.playerPokemon.isShiny,
               statStages: {
@@ -402,7 +404,12 @@ export function useGameLoop() {
             isTrainerBattle =
               (currentGameState.trainerBattle ??
                 currentGameState.bossBattle) !== null,
-            turnEvents = resolveBattleTurn(playerBattlePokemon, enemyBattlePokemon, isTrainerBattle)
+            turnEvents = resolveBattleTurn(
+              playerBattlePokemon,
+              enemyBattlePokemon,
+              isTrainerBattle,
+              (currentGameState.battleTurn ?? 0) === 0
+            )
           dispatch({
             type: 'EXECUTE_TURN',
             payload: {

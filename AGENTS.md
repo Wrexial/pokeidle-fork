@@ -206,6 +206,7 @@ These are loaded by `assets/gameDataInjector.js` (`key` → file):
 | --- | --- |
 | `pokemonSpecies` | `pokemon-species.json` |
 | `breedingData` | `breeding-data.json` (gender rate + egg groups, see below) |
+| `abilityData` | `ability-data.json` (normal + hidden abilities per species) |
 | `animatedSprites` | `animated-sprites.json` (ids missing each animated variant) |
 | `evolutionData` | `evolution-data.json` |
 | `moveLearnsets` | **`possible-learnsets.json`** |
@@ -412,6 +413,11 @@ One-off scripts used to build the data JSON (not run during dev/build):
   `public/data/breeding-data.json`, which the Daycare's breeding rules use.
   Responses are cached under `tools/cache/`, so it's resumable and only hits
   the network once per id.
+- `fetch-abilities.cjs` — fetches each species' normal and hidden abilities from
+  PokeAPI and writes `public/data/ability-data.json` (keyed by species, camelCase
+  ability keys). Cached alongside the breeding data; `rollAbility`
+  (`src/game/pokemon.js`) assigns one when a Pokemon is created. Re-run after
+  adding species/form ids.
 - `download_pokemon_sprites.cjs` — fills the local sprite tree for every id in
   `pokemon-species.json`: static front/back/shiny from PokeAPI, and animated
   front/back/shiny from Gen V for dex ids 1-649 falling back to Pokémon

@@ -3,6 +3,7 @@
 import { typechart } from '../data/moves.js'
 import { roamerFleeChance } from '../data/config.js'
 import { moveData } from '../data/gameData.js'
+import { abilityAbsorbsType, abilityAttackMultiplier, abilityBlocksNonSuperEffective, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityHalvesSuperEffective, abilityHealsFromType, abilityIgnoresIndirectDamage, abilityOf, abilityPreventsStatDrop, abilityPreventsStatus, abilitySurvivesAtFullHp } from './abilities.js'
 
 /** @returns {VolatileState} */
 export function createVolatileState() {
@@ -56,6 +57,7 @@ function applyStatus(target, status, events, targetIsPlayer) {
     return
   }
   if (!MAJOR_STATUSES.has(status) || target.status) return
+  if (abilityPreventsStatus(target, status)) return
   if ((STATUS_IMMUNE_TYPES[status] ?? []).some((type) => target.types.includes(type))) return
   target.status = status
   target.statusTurns =
@@ -560,14 +562,44 @@ function effectiveSpeed(pokemon) {
 }
 
 /**
+ * Intimidate lowers the opposing Pokemon's Attack by one stage on entry.
+ * @param {BattlePokemon} source
+ * @param {BattlePokemon} target
+ * @param {any[]} events
+ * @param {boolean} sourceIsPlayer
+ */
+function applyIntimidate(source, target, events, sourceIsPlayer) {
+  if (abilityOf(source) !== 'intimidate' || target.currentHp <= 0) return
+  if (abilityPreventsStatDrop(target, 'attack')) return
+  const stages = target.statStages ?? (target.statStages = {}),
+    currentStage = stages.attack ?? 0,
+    newStage = clampStatStage(currentStage - 1)
+  if (newStage === currentStage) return
+  stages.attack = newStage
+  events.push({
+    type: 'statChange',
+    message: `${target.name}'s Attack fell!`,
+    data: {
+      target: sourceIsPlayer ? 'enemy' : 'player',
+    },
+  })
+}
+
+/**
  * @param {BattlePokemon} player
  * @param {BattlePokemon} enemy
  * @param {boolean} [isTrainerBattle]
+ * @param {boolean} [firstTurn]
  * @returns {any[]}
  */
-export function resolveBattleTurn(player, enemy, isTrainerBattle = !1) {
-  const events = []
+export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn = !1) {
+  const events = /** @type {any[]} */ ([])
   ;(player.statStages || (player.statStages = {}), enemy.statStages || (enemy.statStages = {}))
+  // Intimidate fires the first time each side is on the field.
+  if (firstTurn) {
+    applyIntimidate(player, enemy, events, !0)
+    applyIntimidate(enemy, player, events, !1)
+  }
   // Flinches only last the turn they were inflicted; clear any left over.
   ;(player.flinch = !1, enemy.flinch = !1)
   // Protect only lasts the turn it is used; clear any left over.
@@ -718,6 +750,8 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1) {
           const key = normalizeStatKey(statKey),
             currentStage = statTarget.statStages[key] ?? 0,
             newStage = clampStatStage(currentStage + delta)
+          // Clear Body / Hyper Cutter / ... block opponent-inflicted drops.
+          if (delta < 0 && abilityPreventsStatDrop(statTarget, key)) continue
           statTarget.statStages[key] = newStage
           const verb = delta > 0 ? 'rose' : 'fell',
             sharply = Math.abs(delta) >= 2 ? 'sharply ' : ''
@@ -761,12 +795,40 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1) {
         applyLeechSeed(attack.defender, events, !attack.isPlayer)
       continue
     }
+    // Levitate / type-absorbing abilities negate the move (and usually heal).
+    if (abilityAbsorbsType(attack.defender, moveDef.type)) {
+      if (abilityHealsFromType(attack.defender, moveDef.type)) {
+        const healed = Math.min(
+            attack.defender.maxHp,
+            attack.defender.currentHp + Math.max(1, Math.floor(attack.defender.maxHp / 4))
+          ),
+          gained = healed - attack.defender.currentHp
+        attack.defender.currentHp = healed
+        events.push({
+          type: 'heal',
+          message: `${attack.defender.name} absorbed the attack!${
+            gained > 0 ? ` (+${gained} HP)` : ''
+          }`,
+          data: {
+            target: attack.isPlayer ? 'enemy' : 'player',
+            hpAfter: healed,
+            hpMax: attack.defender.maxHp,
+          },
+        })
+      } else {
+        events.push({
+          type: 'miss',
+          message: `${attack.defender.name}'s ability made it immune!`,
+        })
+      }
+      continue
+    }
     const attackStat =
-        moveDef.category === 'physical'
+        (moveDef.category === 'physical'
           ? attack.attacker.status === 'burn'
             ? Math.max(1, Math.floor(attack.attacker.attack / 2))
             : attack.attacker.attack
-          : attack.attacker.spAttack,
+          : attack.attacker.spAttack) * abilityAttackMultiplier(attack.attacker),
       defenseStat = moveDef.category === 'physical' ? attack.defender.defense : attack.defender.spDefense,
       attackStatKey = moveDef.category === 'physical' ? 'attack' : 'spAttack',
       defenseStatKey = moveDef.category === 'physical' ? 'defense' : 'spDefense',
@@ -853,6 +915,22 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1) {
     }
     if (screenApplies(attack.defender, moveDef) && !anyCrit)
       totalDamage = Math.max(1, Math.floor(totalDamage / 2))
+    // Ability damage modifiers (Thick Fat, Multiscale, pinch boosts, ...).
+    totalDamage = Math.floor(
+      totalDamage *
+        abilityDamageDealtMultiplier(attack.attacker, moveDef) *
+        abilityDamageTakenMultiplier(attack.defender, moveDef)
+    )
+    if (abilityHalvesSuperEffective(attack.defender) && damageResult.effectiveness > 1)
+      totalDamage = Math.max(1, Math.floor(totalDamage / 2))
+    if (abilityBlocksNonSuperEffective(attack.defender, damageResult.effectiveness)) {
+      events.push({
+        type: 'miss',
+        message: `${attack.defender.name}'s Wonder Guard blocked the move!`,
+      })
+      continue
+    }
+    totalDamage = abilitySurvivesAtFullHp(attack.defender, attack.defender.currentHp, totalDamage)
     if (
       ((attack.defender.currentHp = Math.max(0, attack.defender.currentHp - totalDamage)),
       events.push({
@@ -1009,6 +1087,8 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1) {
   ]
   for (const [pokemon, isPlayerSide] of residualTargets) {
     if (pokemon.currentHp <= 0) continue
+    // Magic Guard blocks poison/burn/Leach Seed residual damage.
+    if (abilityIgnoresIndirectDamage(pokemon)) continue
     // Leech Seed drains into the other side independently of a major status.
     if (pokemon.leechSeeded) {
       const drain = Math.max(1, Math.floor(pokemon.maxHp / 8)),
@@ -1074,6 +1154,36 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1) {
           target: isPlayerSide ? 'player' : 'enemy',
         },
       })
+  }
+  // End-of-turn abilities: Speed Boost raises Speed, Shed Skin may cure status.
+  for (const [pokemon, isPlayerSide] of residualTargets) {
+    if (pokemon.currentHp <= 0) continue
+    const ability = abilityOf(pokemon)
+    if (ability === 'speedBoost') {
+      const stages = pokemon.statStages ?? (pokemon.statStages = {}),
+        currentStage = stages.speed ?? 0,
+        newStage = clampStatStage(currentStage + 1)
+      if (newStage !== currentStage) {
+        stages.speed = newStage
+        events.push({
+          type: 'statChange',
+          message: `${pokemon.name}'s Speed rose!`,
+          data: {
+            target: isPlayerSide ? 'player' : 'enemy',
+          },
+        })
+      }
+    } else if (ability === 'shedSkin' && pokemon.status && Math.random() < 0.33) {
+      pokemon.status = null
+      pokemon.statusTurns = 0
+      events.push({
+        type: 'status',
+        message: `${pokemon.name} shed its skin and recovered!`,
+        data: {
+          target: isPlayerSide ? 'player' : 'enemy',
+        },
+      })
+    }
   }
   // Screens wear off after five turns.
   for (const pokemon of [player, enemy]) {

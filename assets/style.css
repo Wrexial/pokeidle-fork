@@ -2233,6 +2233,17 @@ img {
     box-shadow: 0 0 4px #ff3d7f
 }
 
+.stats-panel-ability {
+    margin-top: 3px;
+    align-self: flex-start;
+    font-size: 8px;
+    font-weight: 700;
+    color: #d9f0ff;
+    background: linear-gradient(#2a4a7a,#1a2a4a);
+    border: 1px solid #60a0e0;
+    padding: 1px 6px
+}
+
 .stats-panel-fav-btn {
     font-size: 9px;
     line-height: 1;

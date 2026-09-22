@@ -75,6 +75,8 @@ type Pokemon = BattlePokemon & {
   nature?: string
   /** Friendship (0-255), raised by battling and levelling; gates friendship evolutions. */
   friendship?: number
+  /** This Pokemon's ability (see ability-data.json). */
+  ability?: string | null
   /** Favourited Pokemon are protected from Release and Wonder Trade. */
   favourite?: boolean
   /** Optional player-given nickname (max 12 characters). */

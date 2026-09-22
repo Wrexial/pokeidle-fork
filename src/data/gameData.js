@@ -18,6 +18,11 @@ export let breedingData = /** @type {Record<string, BreedingData>} */ (
   loadedGameData.breedingData ?? {}
 )
 
+/** Normal + hidden abilities per species (see tools/fetch-abilities.cjs). */
+export let abilityData = /** @type {Record<string, { abilities: string[], hidden: string | null }>} */ (
+  loadedGameData.abilityData ?? {}
+)
+
 /** Animated sprite ids with no gif, per variant (see download_pokemon_sprites.cjs). */
 export let animatedSprites = /** @type {{ front: number[], back: number[], shiny: number[], backShiny: number[] }} */ (
   loadedGameData.animatedSprites ?? { front: [], back: [], shiny: [], backShiny: [] }

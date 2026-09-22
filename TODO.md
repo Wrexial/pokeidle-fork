@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.14.0**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.15.0**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -45,9 +45,8 @@ items, best return first:
 20. **#25 Battle engine pass** — M–L · ★★★★½ — pairs with #24; AI + healing +
     multi-hit first. **First slice shipped in 0.11.0**: the auto-battler and
     trainer AI now heal and set up; hazards/screens/accuracy stages still open.
-21. **#2a Abilities** (with **#2c Held items**) — L · ★★★★★ / ★★★★ — the
-    biggest remaining battle-depth feature; natures (#2b) are already in
-    Tier 1.
+21. **#2a Abilities** ✅ (shipped 0.15.0) — the first ability set is live;
+    **#2c Held items** still open — the remaining battle-depth feature.
 22. **#36 Zones (route chunks)** — M–L · ★★★★ — lets Alola/Galar/Paldea map
     as chunks of areas instead of a single-route-wide graph.
 23. **#35 More Galar areas** — M · ★★★½ — Galar is the thinnest region map;
@@ -110,16 +109,21 @@ The biggest remaining feature. `pokemon-species.json` has only
 `id/name/types/baseStats/baseExpYield/growthRate/catchRate` — no abilities,
 natures or held items. Do it in slices:
 
-### 2a. Abilities
-- [ ] Fetch per-species abilities from PokéAPI (use `tools/fetch-breeding-data.cjs`
-      as the template — same caching pattern, writes a new
-      `public/data/ability-data.json`, loaded via `assets/gameDataInjector.js`).
-- [ ] Assign each Pokémon an ability (slot 1, or random of its slots) in
-      `createPokemon` (`src/game/pokemon.js`).
-- [ ] Hook ability effects into battle (`src/game/combat.js`): e.g. Intimidate
-      (on switch-in), Levitate (ground immunity), Sturdy (focus sash at full HP),
-      weather/type immunities, contact effects, etc. Start with a small set.
-- [ ] Show the ability in the stats panel.
+### 2a. ✅ Abilities — shipped in 0.15.0
+
+Done. `tools/fetch-abilities.cjs` writes `public/data/ability-data.json` (normal
++ hidden abilities from PokeAPI); `rollAbility` assigns one in `createPokemon`
+(and to wild/trainer teams), old saves get one in `repairSave`, and the stats
+panel shows it. `src/game/abilities.js` + `src/game/combat.js` implement a first
+set: Levitate and the type-absorbing abilities (Water/Volt Absorb, Flash Fire,
+Sap Sipper, Lightning Rod, Storm Drain, Motor Drive, Dry Skin, Well-Baked Body),
+Thick Fat, Multiscale/Shadow Shield, Filter/Solid Rock/Prism Armor, Huge
+Power/Pure Power, Guts, Overgrow/Blaze/Torrent/Swarm, Sturdy, Intimidate, Wonder
+Guard, Magic Guard, Speed Boost, Shed Skin and the status/stat blockers
+(Immunity, Limber, Water Veil, Insomnia/Vital Spirit, Sweet Veil, Clear Body,
+White Smoke, Hyper Cutter, Big Pecks, Keen Eye). Covered by
+`tests/abilities.test.mjs`. Remaining: contact abilities (Static, Flame Body,
+Rough Skin), weather abilities, switch-out abilities, and the rest of the 299.
 
 ### 2b. ✅ Natures — shipped in 0.9.3
 
@@ -1153,6 +1157,9 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.15.0 (abilities): every Pokemon has a real ability (fetched from PokeAPI,
+shown in the stats panel) and a first set of ~40 of them work in battle. #2a done.
 
 0.14.0 (accuracy/evasion & leech seed): stat stages now affect the hit chance
 (Sand Attack, Double Team, ...), Leech Seed drains into the planter, and the

@@ -1,7 +1,7 @@
 // Split from src/game/logic.js — see tools/decompile/split-logic.mjs
 
 import { evValue } from '../data/config.js'
-import { animatedSprites, moveLearnsets, pokemonSpecies, preEvolutionMap, trainerClasses } from '../data/gameData.js'
+import { animatedSprites, abilityData, moveLearnsets, pokemonSpecies, preEvolutionMap, trainerClasses } from '../data/gameData.js'
 import { natureStatModifiers, randomNature } from '../data/natures.js'
 import { BOX_SORT_OPTIONS } from '../data/ui.js'
 
@@ -346,6 +346,28 @@ export const BASE_FRIENDSHIP = 70
 export const MAX_FRIENDSHIP = 255
 
 /**
+ * Roll a species' ability: usually one of its normal abilities, with a small
+ * chance of its hidden ability. Returns null for a species with no data.
+ * @param {string} speciesKey
+ * @returns {string | null}
+ */
+export function rollAbility(speciesKey) {
+  const entry = abilityData[speciesKey]
+  if (!entry) return null
+  if (entry.hidden && Math.random() < 0.1) return entry.hidden
+  return entry.abilities?.length > 0
+    ? entry.abilities[Math.floor(Math.random() * entry.abilities.length)]
+    : (entry.hidden ?? null)
+}
+
+/** Display name for an ability key (e.g. `waterAbsorb` -> `Water Absorb`). @param {string} abilityKey */
+export function abilityDisplayName(abilityKey) {
+  return abilityKey
+    ? abilityKey.replace(/([A-Z])/g, ' $1').replace(/^./, (character) => character.toUpperCase())
+    : ''
+}
+
+/**
  * Clamp a Pokemon's friendship, defaulting old saves to the base value.
  * @param {Pokemon} pokemon
  * @param {number} amount
@@ -390,6 +412,7 @@ export function createPokemon(speciesKey, level, id, isShiny = !1, inheritance) 
     ivs,
     nature,
     friendship: BASE_FRIENDSHIP,
+    ability: rollAbility(speciesKey),
     isShiny,
   }
 }

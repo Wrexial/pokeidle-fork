@@ -17,7 +17,7 @@ const NATURE_STAT_LABELS = {
 import { moveData, pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { genderForPokemon, genderSymbol } from '../game/breeding.js'
-import { getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, IV_STAT_LABELS, IV_STAT_ORDER, judgeIVs, pokemonDisplayName } from '../game/pokemon.js'
+import { abilityDisplayName, getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, IV_STAT_LABELS, IV_STAT_ORDER, judgeIVs, pokemonDisplayName } from '../game/pokemon.js'
 import { MoveManagerPanel } from './move-manager-panel.js'
 
 /** @param {{ pokemon: Pokemon, source: 'party' | 'box', partyLength: number, onAction: () => void, onClose: () => void, evolutionInfo?: { entries: { targetName: string, canEvolve: boolean, requirementLabel: string, targetKey: string, itemId?: string }[] } | null, onEvolve?: (index: number) => void, onRelease?: () => void, canRelease?: boolean }} props */
@@ -336,6 +336,12 @@ export function StatsPanel({
                 title: 'Friendship \u2014 raised by battling and levelling up. Some Pokemon only evolve when it is high enough.',
                 children: `\u2665 ${friendship}/255`,
               }),
+              pokemon.ability &&
+                jsx('span', {
+                  className: 'stats-panel-ability',
+                  title: 'Ability',
+                  children: abilityDisplayName(pokemon.ability),
+                }),
             ],
           }),
         ],

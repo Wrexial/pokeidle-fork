@@ -3,7 +3,7 @@
 import { shinyCharmMinOddsChance, shinyFullOddsChance, shinyWithCharmChance, roamerEncounterChance, pokerusChance, pokerusDurationBattles, offlineCapMs, offlineMinMs, offlineMoneyPerHourPerLevel } from '../data/config.js'
 import { activeItems, consumableItems, evolutionItems, pokeBalls, valuableDropTable } from '../data/items.js'
 import { GENERATION_DEX_RANGES, encounterData, evolutionData, gymLeaderData, isSpeciesCharmed, mapData, moveData, pokemonSpecies, regions } from '../data/gameData.js'
-import { calculateExpYield, calculatePokemonStats, getLevelUpResults, getPerfectIVs, isBattleReady, resolvePokemonMoves } from './pokemon.js'
+import { calculateExpYield, calculatePokemonStats, getLevelUpResults, getPerfectIVs, isBattleReady, resolvePokemonMoves, rollAbility } from './pokemon.js'
 
 /** Gym ids grouped by region, so `badgesRequired` gates count that region only. */
 /** @type {Record<string, string[]>} */
@@ -852,6 +852,7 @@ export function buildTrainerTeam(team) {
       spDefense: scale(stats.spDefense),
       speed: scale(stats.speed),
       moves,
+      ability: rollAbility(member.speciesKey),
       isPlayer: !1,
       isShiny: checkShinyOdds(),
     }

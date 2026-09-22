@@ -30,6 +30,7 @@ const regionFiles = [
 const dataFilesToLoad = [
     { key: 'pokemonSpecies', path: '/data/pokemon-species.json', label: 'Pokémon species' },
     { key: 'breedingData', path: '/data/breeding-data.json', label: 'breeding data' },
+    { key: 'abilityData', path: '/data/ability-data.json', label: 'abilities' },
     { key: 'animatedSprites', path: '/data/animated-sprites.json', label: 'animated sprite manifest' },
     { key: 'evolutionData', path: '/data/evolution-data.json', label: 'evolution chains' },
     { key: 'moveLearnsets', path: '/data/possible-learnsets.json', label: 'move learnsets' },//move-learnsets

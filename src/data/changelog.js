@@ -1,10 +1,29 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.14.0'
+export const GAME_VERSION = '0.15.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.15.0',
+      subtitle: 'Abilities',
+      sections: [
+        {
+          heading: 'Pokemon',
+          items: [
+            'Every Pokemon now has one of its real abilities (fetched from PokeAPI), shown in the stats panel; the hidden ability has a small chance of being rolled',
+          ],
+        },
+        {
+          heading: 'Battles',
+          items: [
+            'A first set of abilities is now active: Levitate plus the type-absorbing abilities (Water/Volt Absorb, Flash Fire, Sap Sipper, Lightning Rod, Storm Drain, ...), Thick Fat, Multiscale/Shadow Shield, Filter/Solid Rock/Prism Armor, Huge Power/Pure Power, Guts, Overgrow/Blaze/Torrent/Swarm, Sturdy, Intimidate, Wonder Guard and Magic Guard',
+            'Status- and stat-blocking abilities work too: Immunity, Limber, Water Veil, Insomnia/Vital Spirit, Sweet Veil, Clear Body, White Smoke, Hyper Cutter, Big Pecks and Keen Eye; Speed Boost and Shed Skin trigger at the end of each turn',
+          ],
+        },
+      ],
+    },
     {
       version: '0.14.0',
       subtitle: 'Accuracy, Evasion & Leech Seed',

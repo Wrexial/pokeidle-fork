@@ -80,6 +80,11 @@ export const MOVE_OVERRIDES = {
   wickedBlow: { critStage: 3 },
   surgingStrikes: { critStage: 3, multiHit: [3, 3] },
 
+  // --- Screens (halve physical/special damage for 5 turns) ---
+  reflect: { screen: 'reflect' },
+  lightScreen: { screen: 'lightScreen' },
+  auroraVeil: { screen: 'both' },
+
   // --- Status infliction ---
   thunderWave: { effect: { type: 'status', status: 'paralysis' } },
   glare: { effect: { type: 'status', status: 'paralysis' } },

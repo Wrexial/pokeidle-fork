@@ -274,3 +274,53 @@ test('confusion can make a battler hurt itself', () => {
     assert.equal(player.confusionTurns, 1)
   })
 })
+
+test('screens carry their override data', () => {
+  assert.equal(moveData.reflect.screen, 'reflect')
+  assert.equal(moveData.lightScreen.screen, 'lightScreen')
+  assert.equal(moveData.auroraVeil.screen, 'both')
+})
+
+test('Reflect halves physical damage and wears off', () => {
+  withFixedRandom(0.5, () => {
+    const damageWith = (/** @type {any} */ screens) => {
+        const player = battler({
+            name: 'Player',
+            isPlayer: true,
+            moves: ['tackle'],
+            speed: 200,
+            attack: 200,
+          }),
+          enemy = battler({
+            name: 'Foe',
+            moves: ['splash'],
+            currentHp: 9999,
+            maxHp: 9999,
+            defense: 100,
+            screens,
+          }),
+          events = resolveBattleTurn(player, enemy, false)
+        return events.find(
+          (/** @type {any} */ event) => event.type === 'damage' && event.data?.target === 'enemy'
+        )
+      },
+      without = damageWith(undefined),
+      withScreen = damageWith({ reflect: 5, lightScreen: 0 })
+    assert.equal(withScreen.data.damage, Math.max(1, Math.floor(without.data.damage / 2)))
+  })
+})
+
+test('Aurora Veil raises both screens', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['auroraVeil'],
+        speed: 200,
+      }),
+      enemy = battler({ name: 'Foe', moves: ['splash'] })
+    resolveBattleTurn(player, enemy, false)
+    assert.equal(player.screens.reflect, 4, 'screens tick down at the end of the turn')
+    assert.equal(player.screens.lightScreen, 4)
+  })
+})

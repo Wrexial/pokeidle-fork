@@ -2631,6 +2631,7 @@ export function gameReducer(state, action) {
             statusTurns: enemyVolatile.statusTurns,
             flinch: enemyVolatile.flinch,
             confusionTurns: enemyVolatile.confusionTurns ?? 0,
+            screens: enemyVolatile.screens ?? { reflect: 0, lightScreen: 0 },
           }),
         {
           ...state,

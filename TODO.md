@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.11.1**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.11.2**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -468,7 +468,8 @@ and trainers heal when low and set up early.
 Still open:
 
 - [ ] **Entry hazards & screens** (Stealth Rock, Spikes, Reflect, Light Screen,
-      Aurora Veil) and the remaining utility moves (Taunt, Substitute, weather).
+      Aurora Veil) and the remaining utility moves (Taunt, Substitute, weather)
+      — **screens shipped in 0.11.2**; hazards still need a switch-in hook.
 - [ ] **Accuracy / evasion stat stages** (currently only accuracy from the move
       itself, no stages).
 - [ ] Additional statuses if added to the data — **paralysis, toxic and
@@ -1153,6 +1154,9 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.11.2 (screens): Reflect, Light Screen and Aurora Veil now halve incoming
+physical/special damage for five turns.
 
 0.11.1 (status effects): paralysis, toxic and confusion are modelled, and the
 status moves that did nothing (Thunder Wave, Toxic, Will-O-Wisp, sleep/confusion

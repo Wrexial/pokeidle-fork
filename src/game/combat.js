@@ -21,6 +21,7 @@ export function createVolatileState() {
     statusTurns: 0,
     flinch: !1,
     confusionTurns: 0,
+    screens: { reflect: 0, lightScreen: 0 },
   }
 }
 
@@ -425,7 +426,14 @@ export function chooseMoveForBattle(attacker, defender) {
   if (hpFraction < 0.45 && healMove) return { moveId: healMove, move: moveData[healMove] }
   if (hpFraction > 0.6 && Math.random() < 0.5) {
     const setupMove = usableMoves.find((moveId) => {
-      const effect = moveData[moveId].effect
+      const move = moveData[moveId]
+      if (move.screen) {
+        const screens = attacker.screens ?? {}
+        return move.screen === 'both'
+          ? !(screens.reflect > 0) && !(screens.lightScreen > 0)
+          : !(screens[move.screen] > 0)
+      }
+      const effect = move.effect
       if (effect?.type !== 'statChange' || effect.target !== 'self') return false
       const stages = attacker.statStages ?? {}
       return Object.entries(effect.changes).some(([statKey, delta]) => {
@@ -495,6 +503,23 @@ export function getStatStage(volatile, statKey) {
  */
 export function clampStatStage(stage) {
   return Math.max(-6, Math.min(6, stage))
+}
+
+/**
+ * Whether a screen halves this move's damage. Reflect stops physical hits,
+ * Light Screen special ones; critical hits ignore both.
+ * @param {BattlePokemon} defender
+ * @param {Move} moveDef
+ * @returns {boolean}
+ */
+function screenApplies(defender, moveDef) {
+  const screens = defender.screens
+  if (!screens) return !1
+  return moveDef.category === 'physical'
+    ? (screens.reflect ?? 0) > 0
+    : moveDef.category === 'special'
+      ? (screens.lightScreen ?? 0) > 0
+      : !1
 }
 
 /**
@@ -644,6 +669,21 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1) {
           message: `${attack.attacker.name} protected itself!`,
         })
       }
+      if (moveDef.screen) {
+        const screens = attack.attacker.screens ??
+          (attack.attacker.screens = { reflect: 0, lightScreen: 0 })
+        if (moveDef.screen === 'both') {
+          screens.reflect = 5
+          screens.lightScreen = 5
+        } else screens[moveDef.screen] = 5
+        events.push({
+          type: 'statChange',
+          message: `${attack.attacker.name} put up a barrier!`,
+          data: {
+            target: attack.isPlayer ? 'player' : 'enemy',
+          },
+        })
+      }
       if (moveDef.effect?.type === 'statChange') {
         const statTarget = moveDef.effect.target === 'self' ? attack.attacker : attack.defender,
           side = statTarget === player ? 'player' : 'enemy'
@@ -776,6 +816,8 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1) {
         anyCrit = anyCrit || hitResult.isCrit
       }
     }
+    if (screenApplies(attack.defender, moveDef) && !anyCrit)
+      totalDamage = Math.max(1, Math.floor(totalDamage / 2))
     if (
       ((attack.defender.currentHp = Math.max(0, attack.defender.currentHp - totalDamage)),
       events.push({
@@ -960,6 +1002,12 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1) {
           target: isPlayerSide ? 'player' : 'enemy',
         },
       })
+  }
+  // Screens wear off after five turns.
+  for (const pokemon of [player, enemy]) {
+    if (!pokemon.screens) continue
+    if (pokemon.screens.reflect > 0) pokemon.screens.reflect -= 1
+    if (pokemon.screens.lightScreen > 0) pokemon.screens.lightScreen -= 1
   }
   // A roaming legendary may flee at the end of the turn.
   if (enemy.isRoamer && enemy.currentHp > 0 && Math.random() < roamerFleeChance)

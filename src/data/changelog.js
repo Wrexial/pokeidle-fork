@@ -1,10 +1,22 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.11.1'
+export const GAME_VERSION = '0.11.2'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.11.2',
+      subtitle: 'Screens',
+      sections: [
+        {
+          heading: 'Battles',
+          items: [
+            'Reflect and Light Screen now work: they halve physical / special damage for five turns (critical hits ignore them), and Aurora Veil raises both at once',
+          ],
+        },
+      ],
+    },
     {
       version: '0.11.1',
       subtitle: 'Status Effects',

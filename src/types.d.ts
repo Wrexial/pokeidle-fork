@@ -153,6 +153,8 @@ type VolatileState = {
   flinch: boolean
   /** Turns of confusion left (0 when not confused). */
   confusionTurns?: number
+  /** Remaining turns of Reflect / Light Screen (0 when down). */
+  screens?: { reflect: number, lightScreen: number }
 }
 
 type GameAction = { type: string; payload?: any; [key: string]: any }

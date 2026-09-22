@@ -2,6 +2,7 @@
 
 import { evValue } from '../data/config.js'
 import { animatedSprites, moveLearnsets, pokemonSpecies, preEvolutionMap, trainerClasses } from '../data/gameData.js'
+import { natureStatModifiers, randomNature } from '../data/natures.js'
 import { BOX_SORT_OPTIONS } from '../data/ui.js'
 
 /**
@@ -76,16 +77,22 @@ export function calculateOtherStat(baseStat, level, iv) {
  * @param {Species} species
  * @param {number} level
  * @param {Record<string, number>} ivs
+ * @param {string} [nature]
  * @returns {StatBlock}
  */
-export function calculatePokemonStats(species, level, ivs) {
+export function calculatePokemonStats(species, level, ivs, nature) {
+  // A nature raises one non-HP stat by 10% and lowers another by 10%. HP is
+  // never affected. Unknown/neutral natures leave every stat untouched.
+  const modifiers = natureStatModifiers(nature),
+    applyNature = /** @param {string} statKey @param {number} value */ (statKey, value) =>
+      modifiers[statKey] ? Math.floor(value * modifiers[statKey]) : value
   return {
     hp: calculateHpStat(species.baseStats.hp, level, ivs.hp),
-    attack: calculateOtherStat(species.baseStats.attack, level, ivs.attack),
-    defense: calculateOtherStat(species.baseStats.defense, level, ivs.defense),
-    spAttack: calculateOtherStat(species.baseStats.spAttack, level, ivs.spAttack),
-    spDefense: calculateOtherStat(species.baseStats.spDefense, level, ivs.spDefense),
-    speed: calculateOtherStat(species.baseStats.speed, level, ivs.speed),
+    attack: applyNature('attack', calculateOtherStat(species.baseStats.attack, level, ivs.attack)),
+    defense: applyNature('defense', calculateOtherStat(species.baseStats.defense, level, ivs.defense)),
+    spAttack: applyNature('spAttack', calculateOtherStat(species.baseStats.spAttack, level, ivs.spAttack)),
+    spDefense: applyNature('spDefense', calculateOtherStat(species.baseStats.spDefense, level, ivs.spDefense)),
+    speed: applyNature('speed', calculateOtherStat(species.baseStats.speed, level, ivs.speed)),
   }
 }
 
@@ -239,7 +246,8 @@ export function resolvePokemonMoves(speciesKey, level) {
 export function createPokemon(speciesKey, level, id, isShiny = !1) {
   const species = pokemonSpecies[speciesKey],
     ivs = generateIVs(),
-    stats = calculatePokemonStats(species, level, ivs),
+    nature = randomNature(),
+    stats = calculatePokemonStats(species, level, ivs, nature),
     moves = resolvePokemonMoves(speciesKey, level)
   return {
     id: String(id),
@@ -257,6 +265,7 @@ export function createPokemon(speciesKey, level, id, isShiny = !1) {
     spDefense: stats.spDefense,
     speed: stats.speed,
     ivs,
+    nature,
     isShiny,
   }
 }

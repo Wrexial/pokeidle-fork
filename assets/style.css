@@ -1866,6 +1866,12 @@ img {
     margin-top: 2px
 }
 
+.stats-panel-nature {
+    margin-top: 2px;
+    font-size: 8px;
+    color: #5a4838
+}
+
 .stats-panel-grid {
     display: flex;
     flex-direction: column;

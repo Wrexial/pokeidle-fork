@@ -494,7 +494,7 @@ export function awardExperience(dispatch, playerPokemon, enemyPokemon, multiplie
     levelUps = getLevelUpResults(playerPokemon.speciesKey, playerSpecies.growthRate, playerPokemon.level, newTotalExp)
   if (levelUps.length > 0) {
     const lastLevelUp = levelUps[levelUps.length - 1],
-      newStats = calculatePokemonStats(playerSpecies, lastLevelUp.newLevel, playerPokemon.ivs),
+      newStats = calculatePokemonStats(playerSpecies, lastLevelUp.newLevel, playerPokemon.ivs, playerPokemon.nature),
       newMoves = levelUps.flatMap((moveId) => moveId.newMoves)
     ;(newMoves.forEach((moveId) => {
       const moveDef = moveData[moveId]
@@ -542,7 +542,7 @@ export function awardExperience(dispatch, playerPokemon, enemyPokemon, multiplie
           memberLevelUps = getLevelUpResults(member.speciesKey, memberSpecies.growthRate, member.level, memberTotalExp)
         if (memberLevelUps.length > 0) {
           const lastLevelUp = memberLevelUps[memberLevelUps.length - 1],
-            memberStats = calculatePokemonStats(memberSpecies, lastLevelUp.newLevel, member.ivs),
+            memberStats = calculatePokemonStats(memberSpecies, lastLevelUp.newLevel, member.ivs, member.nature),
             memberNewMoves = memberLevelUps.flatMap((moveId) => moveId.newMoves)
           ;(memberNewMoves.forEach((moveId) => {
             const moveDef = moveData[moveId]

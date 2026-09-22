@@ -15,7 +15,8 @@ import {
   regions,
   speciesKeysByGeneration,
 } from '../data/gameData.js'
-import { generateIVs, resolvePokemonMoves } from './pokemon.js'
+import { generateIVs, calculatePokemonStats, resolvePokemonMoves } from './pokemon.js'
+import { natureByKey, randomNature } from '../data/natures.js'
 import { gameReducer, initialGameState } from './reducer.js'
 
 /** @type {React.Context<{ state: GameState, dispatch: (action: GameAction) => void } | null>} */
@@ -132,6 +133,30 @@ function repairSave(saved) {
   party = party.map(repairMoves)
   box = box.map(repairMoves)
 
+  // Older saves predate natures. Roll one for any Pokemon missing it and
+  // recompute the stored stats so they reflect the new nature (HP is never
+  // changed by a nature, so maxHp is stable aside from rounding).
+  /** @param {any} pokemon */
+  const withNature = (pokemon) => {
+    if (pokemon.nature && natureByKey[pokemon.nature]) return pokemon
+    const nature = randomNature(),
+      species = pokemonSpecies[pokemon.speciesKey],
+      stats = calculatePokemonStats(species, pokemon.level || 1, pokemon.ivs, nature)
+    return {
+      ...pokemon,
+      nature,
+      maxHp: stats.hp,
+      currentHp: Math.min(pokemon.currentHp ?? stats.hp, stats.hp),
+      attack: stats.attack,
+      defense: stats.defense,
+      spAttack: stats.spAttack,
+      spDefense: stats.spDefense,
+      speed: stats.speed,
+    }
+  }
+  party = party.map(withNature)
+  box = box.map(withNature)
+
   /** @type {Record<string, Record<string, CatchRule>>} */
   const catchSettings = {}
   for (const [speciesKey, rules] of Object.entries(saved.catchSettings || {})) {
@@ -200,7 +225,9 @@ function repairSave(saved) {
       : null
   const daycareParents = /** @type {Pokemon[]} */ (
       Array.isArray(saved.daycare?.parents) ? saved.daycare.parents : []
-    ).filter(/** @param {any} parent */ (parent) => parent && pokemonSpecies[parent.speciesKey]),
+    )
+      .filter(/** @param {any} parent */ (parent) => parent && pokemonSpecies[parent.speciesKey])
+      .map(withNature),
     daycare = {
       parents: daycareParents.slice(0, 2),
       progress: typeof saved.daycare?.progress === 'number' ? saved.daycare.progress : 0,

@@ -2,6 +2,7 @@
 
 import { RAID_COOLDOWN_MS, RAID_LEVEL_MAX, breedShinyOdds, breedShinyParentOdds, daycareEggBattles, defaultCatchSettings, dexRewardVictoryTokens, expCandyDropChance, prestigeTokenReward, rareCandyDropChance, swarmBattleCount, swarmSpawnChance, valuableDropChance, wildMasterBallChance, wonderTradeShinyOdds } from '../data/config.js'
 import { activeItems, consumableItems, pokeBalls } from '../data/items.js'
+import { natureName, randomNature } from '../data/natures.js'
 import { elite4Data, encounterData, gymLeaderData, mapData, moveLearnsets, pokemonSpecies, regions } from '../data/gameData.js'
 import { createVolatileState } from './combat.js'
 import { calculatePokemonStats, calculateRequiredExperience, createPokemon, getLevelUpResults, insertIntoBox, nextBoxSortMode, resolvePokemonMoves, sortBoxMembers } from './pokemon.js'
@@ -492,7 +493,7 @@ export function gameReducer(state, action) {
         species = pokemon ? pokemonSpecies[pokemon.speciesKey] : null
       if (!pokemon || !species) return state
       const maxLevel = 100,
-        stats = calculatePokemonStats(species, maxLevel, pokemon.ivs),
+        stats = calculatePokemonStats(species, maxLevel, pokemon.ivs, pokemon.nature),
         maxedMoves = resolvePokemonMoves(pokemon.speciesKey, maxLevel),
         maxedPokemon = {
           ...pokemon,
@@ -898,7 +899,7 @@ export function gameReducer(state, action) {
         fromSpecies = pokemonSpecies[fromSpeciesKey],
         evolveMember = /** @param {Pokemon} member */ (member) => {
           if (member.id !== pokemonId) return member
-          const newStats = calculatePokemonStats(toSpecies, member.level, member.ivs),
+          const newStats = calculatePokemonStats(toSpecies, member.level, member.ivs, member.nature),
             hpGain = newStats.hp - member.maxHp,
             newMoveIds = (moveLearnsets[toSpeciesKey] || [])
               .filter(([moveId]) => moveId <= member.level)
@@ -1433,7 +1434,29 @@ export function gameReducer(state, action) {
       if (!item || owned <= 0 || item.category === 'valuables' || memberIndex < 0) return state
       let member = { ...state.party[memberIndex] }
       const log = []
-      if (item.category === 'medicine') {
+      if (item.natureMint) {
+        // Re-roll to a different nature so the mint always does something, then
+        // recompute the nature-affected stats (HP is never modified).
+        const previousNature = member.nature
+        let nextNature = randomNature()
+        while (nextNature === previousNature) nextNature = randomNature()
+        const newStats = calculatePokemonStats(
+          pokemonSpecies[member.speciesKey],
+          member.level,
+          member.ivs,
+          nextNature
+        )
+        member = {
+          ...member,
+          nature: nextNature,
+          attack: newStats.attack,
+          defense: newStats.defense,
+          spAttack: newStats.spAttack,
+          spDefense: newStats.spDefense,
+          speed: newStats.speed,
+        }
+        log.push(`${member.name}'s nature became ${natureName(nextNature)}!`)
+      } else if (item.category === 'medicine') {
         if (item.revive) {
           if (member.currentHp > 0) return state
           member.currentHp = item.full ? member.maxHp : Math.floor(member.maxHp / 2)
@@ -1466,7 +1489,7 @@ export function gameReducer(state, action) {
         member.totalExp = newTotalExp
         if (levelUps.length > 0) {
           const lastLevelUp = levelUps[levelUps.length - 1],
-            newStats = calculatePokemonStats(species, lastLevelUp.newLevel, member.ivs),
+            newStats = calculatePokemonStats(species, lastLevelUp.newLevel, member.ivs, member.nature),
             hpGain = newStats.hp - member.maxHp
           member = {
             ...member,

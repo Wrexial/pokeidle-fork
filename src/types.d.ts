@@ -71,6 +71,8 @@ type Pokemon = BattlePokemon & {
   id: string
   totalExp: number
   ivs: Record<string, number>
+  /** One of the 25 nature keys (see src/data/natures.js). */
+  nature?: string
   isShiny: boolean
 }
 
@@ -102,6 +104,8 @@ type ConsumableItem = {
   exp?: number
   /** Levels granted by a Rare Candy. */
   levelUp?: number
+  /** Re-rolls the target's nature instead of healing/levelling it. */
+  natureMint?: boolean
 }
 
 type PokeBall = {

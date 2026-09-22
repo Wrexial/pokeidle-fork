@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.9.2'
+export const GAME_VERSION = '0.9.3'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.9.3',
+      subtitle: 'Natures',
+      sections: [
+        {
+          heading: 'Battles',
+          items: [
+            'Every Pokemon now has one of the 25 natures \u2014 it raises one stat by 10% and lowers another (HP is never affected) \u2014 and its nature is shown on the stats panel',
+            'A Nature Mint in the Reward Shop re-rolls a party Pokemon\u2019s nature and recalculates its stats',
+          ],
+        },
+      ],
+    },
     {
       version: '0.9.2',
       subtitle: 'Master Ball Moment',

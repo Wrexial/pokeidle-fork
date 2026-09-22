@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.2**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.9.3**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -22,15 +22,13 @@ working order, and the numbered sections as the details.
 **Shipped** in 0.9.x: #13 auto-travel, #26 README/licence, #30 caught badge +
 toast queue, #1 healing items, #12 dex rewards, #21 unlock tokens, #33
 Rare/Exp. Candies, #34 sellable valuables, #15 save export/import (slots and
-share codes still open), #41 box "New" sort prepend, and #37 the Master Ball
-button. The remaining items, best return first:
+share codes still open), #41 box "New" sort prepend, #37 the Master Ball
+button, and #2b natures. The remaining items, best return first:
 
-1. **#2b Natures** (slice of #2) — S–M · ★★★½ — cheap battle depth that also
-   feeds daycare (#3).
-2. **#14 Lightweight test suite** — S–M · ★★★½ (dev value) — pays off every
+1. **#14 Lightweight test suite** — S–M · ★★★½ (dev value) — pays off every
    future change.
-3. **#5 Daily / periodic events** — S–M · ★★★ — cheap engagement loop.
-4. **#16 More ideas (grab bag)** — mostly S · ★★★ — mine the quick ones
+2. **#5 Daily / periodic events** — S–M · ★★★ — cheap engagement loop.
+3. **#16 More ideas (grab bag)** — mostly S · ★★★ — mine the quick ones
    (achievement rewards, release/selling, map QoL, notifications).
 
 ### Tier 2 — High impact, worth the effort (medium–large)
@@ -118,11 +116,16 @@ natures or held items. Do it in slices:
       weather/type immunities, contact effects, etc. Start with a small set.
 - [ ] Show the ability in the stats panel.
 
-### 2b. Natures
-- [ ] Fetch/derive natures (fixed 25-name table is fine; no fetch needed) and
-      give each Pokémon a nature in `createPokemon`.
-- [ ] Apply the ±10% stat modifier in `calculatePokemonStats`.
-- [ ] Save/display it; decide how natures are re-rollable (mints?).
+### 2b. ✅ Natures — shipped in 0.9.3
+
+Done. `src/data/natures.js` holds the 25 natures; `createPokemon` rolls one,
+`calculatePokemonStats` applies the ±10% modifier (`getLevelUpResults` callers
+pass the Pokemon's nature so level-ups/evolutions stay consistent), and the
+stats panel shows it. Existing saves are migrated in `repairSave` (a nature is
+rolled and stats recomputed for Pokemon that lack one). Re-rolls use a
+**Nature Mint** (2 Victory Tokens in the Reward Shop) consumed from the Bag on a
+party Pokemon via `USE_ITEM_ON_POKEMON`. Daycare inheritance (#3) can now
+inherit the parents' natures.
 
 ### 2c. Held items
 - [ ] Add a held-item slot to `Pokemon` (type in `src/types.d.ts`, saved in
@@ -1173,6 +1176,10 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.9.3 (natures): every Pokemon rolls one of the 25 natures (shown on the stats
+panel, applied in `calculatePokemonStats`, migrated for old saves); a Nature
+Mint in the Reward Shop re-rolls a party Pokemon's nature.
 
 0.9.2 (Master Ball moment): the Master Ball is no longer auto-spent. A button in
 wild/raid battles throws it with a throw/flash/wobble/click animation and a

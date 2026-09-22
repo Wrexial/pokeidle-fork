@@ -224,6 +224,15 @@ export const consumableItems = {
       buyPrice: null,
       sellPrice: 12000,
     },
+    natureMint: {
+      id: 'natureMint',
+      name: 'Nature Mint',
+      description: "Re-rolls a party Pokemon's nature and recalculates its stats.",
+      category: 'medicine',
+      buyPrice: null,
+      sellPrice: null,
+      natureMint: true,
+    },
   }
 
 /**
@@ -596,6 +605,10 @@ export const tokenShopItems = [
     },
     {
       itemId: 'maliciousArmor',
+      tokenCost: 2,
+    },
+    {
+      itemId: 'natureMint',
       tokenCost: 2,
     },
   ]

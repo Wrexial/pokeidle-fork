@@ -19,6 +19,7 @@ import {
  * @returns {boolean}
  */
 function canUseOn(item, member) {
+  if (item.natureMint) return true
   if (item.category === 'medicine')
     return item.revive
       ? member.currentHp <= 0

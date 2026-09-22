@@ -4,6 +4,7 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { moveCategoryIcons } from '../data/moves.js'
 import { statBarColors } from '../data/ui.js'
+import { natureName } from '../data/natures.js'
 import { moveData, pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { genderForPokemon, genderSymbol } from '../game/breeding.js'
@@ -163,6 +164,11 @@ export function StatsPanel({
                   )
                 ),
               }),
+              pokemon.nature &&
+                jsx('span', {
+                  className: 'stats-panel-nature',
+                  children: `${natureName(pokemon.nature)} nature`,
+                }),
             ],
           }),
         ],

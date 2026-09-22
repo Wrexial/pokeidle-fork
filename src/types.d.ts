@@ -73,6 +73,8 @@ type Pokemon = BattlePokemon & {
   ivs: Record<string, number>
   /** One of the 25 nature keys (see src/data/natures.js). */
   nature?: string
+  /** Friendship (0-255), raised by battling and levelling; gates friendship evolutions. */
+  friendship?: number
   /** Favourited Pokemon are protected from Release and Wonder Trade. */
   favourite?: boolean
   /** Optional player-given nickname (max 12 characters). */
@@ -352,7 +354,7 @@ type MapLocation = {
   [key: string]: any
 }
 
-type Evolution = { into: string; level?: number; item?: string; gender?: 'male' | 'female'; [key: string]: any }
+type Evolution = { into: string; level?: number; item?: string; friendship?: number; gender?: 'male' | 'female'; [key: string]: any }
 
 interface Window {
   /** set by the boot guard in index.html; flipped once the app mounts */

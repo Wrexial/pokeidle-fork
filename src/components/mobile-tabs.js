@@ -2,11 +2,10 @@
 
 import React from 'react'
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
-import { evolutionItems } from '../data/items.js'
 import { MOBILE_TABS } from '../data/ui.js'
-import { encounterData, evolutionData, raidPoolFor, mapData, pokemonSpecies } from '../data/gameData.js'
+import { encounterData, raidPoolFor, mapData, pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
-import { genderForPokemon } from '../game/breeding.js'
+import { getEvolutionOptions } from '../game/breeding.js'
 import { GymPanel } from './gym-panel.js'
 import { LocationPanel } from './location-panel.js'
 import { TownMap } from './town-map.js'
@@ -56,33 +55,7 @@ export function MobileTabs() {
     }, [boxInspected, state.box, dispatch]),
     evolutionInfo = React.useMemo(() => {
       if (!boxPokemon || state.phase === 'evolving') return
-      const evolutionChain = evolutionData[boxPokemon.speciesKey]
-      if (evolutionChain)
-        return {
-          entries: evolutionChain
-            .filter(
-              (evolution) =>
-                !evolution.gender || evolution.gender === genderForPokemon(boxPokemon)
-            )
-            .map((evolution) => {
-            const targetSpecies = pokemonSpecies[evolution.into],
-              levelMet = !evolution.level || boxPokemon.level >= evolution.level,
-              itemOwned = !evolution.item || (state.inventory[evolution.item] ?? 0) > 0,
-              canEvolve = levelMet && itemOwned,
-              requirementParts = []
-            if ((evolution.level && requirementParts.push(`Lv. ${evolution.level}`), evolution.item)) {
-              const evolutionEntry = evolution.item in evolutionItems ? evolutionItems[evolution.item].name : evolution.item
-              requirementParts.push(evolutionEntry)
-            }
-            return {
-              targetName: targetSpecies?.name ?? evolution.into,
-              canEvolve,
-              requirementLabel: requirementParts.join(' + ') || 'Ready',
-              targetKey: evolution.into,
-              itemId: evolution.item,
-            }
-          }),
-        }
+      return { entries: getEvolutionOptions(boxPokemon, state.inventory) }
     }, [boxPokemon, state.phase, state.inventory]),
     handleEvolve = React.useCallback(
       /** @param {any} evolutionEntry */ (evolutionEntry) => {

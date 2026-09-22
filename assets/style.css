@@ -2216,6 +2216,23 @@ img {
     padding: 1px 6px
 }
 
+.stats-panel-friendship {
+    margin-top: 3px;
+    align-self: flex-start;
+    font-size: 8px;
+    font-weight: 700;
+    color: #ffd9e6;
+    background: linear-gradient(#8a2a55,#5a1a38);
+    border: 1px solid #ff7aa8;
+    padding: 1px 6px
+}
+
+.stats-panel-friendship.high {
+    color: #fff;
+    border-color: #ff3d7f;
+    box-shadow: 0 0 4px #ff3d7f
+}
+
 .stats-panel-fav-btn {
     font-size: 9px;
     line-height: 1;

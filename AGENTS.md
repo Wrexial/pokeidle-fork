@@ -375,6 +375,13 @@ One-off scripts used to build the data JSON (not run during dev/build):
   (`tokenShopItems` in `src/data/items.js`). Idempotent; re-run after any
   re-extraction of `evolution-data.json`. Because item evolutions carry no
   `level`, `generate-regions.cjs` gives them a nominal one for team-maturity.
+- `add-friendship-evolutions.cjs` — rewrites the evolutions that canonically
+  require high friendship (Golbat→Crobat, Chansey→Blissey, Pichu→Pikachu,
+  Cleffa/Igglybuff, Togepi, Azurill, Budew, Buneary, Chingling, Munchlax, Riolu,
+  Woobat, Swadloon, Snom, Type: Null, Eevee's Espeon/Umbreon/Sylveon) into
+  `{ into, friendship: 160 }` entries, dropping their level. The party/box UI
+  checks the Pokemon's friendship. Idempotent; re-run after re-extracting
+  `evolution-data.json` (friendship is raised in `gainFriendship`).
 - `fix-form-transforms.cjs` — makes temporary form transformations reversible
   (Deoxys, the Rotom appliances, Giratina, Shaymin, the Therian formes, Kyurem,
   Zygarde, Hoopa, Necrozma, Zacian/Zamazenta, Calyrex — Deoxys/Zygarde/Calyrex

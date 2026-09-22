@@ -1,6 +1,6 @@
 # TODO
 
-Ideas and follow-ups that aren't implemented yet. Current game version: **0.11.2**
+Ideas and follow-ups that aren't implemented yet. Current game version: **0.12.0**
 (`src/data/changelog.js`). See `AGENTS.md` for architecture, commands and data
 conventions.
 
@@ -67,7 +67,8 @@ items, best return first:
 
 29. ✅ **#3 Daycare inheritance** — shipped 0.10.0 (3 inherited IVs, a 50%
     inherited nature, and inherited moves).
-30. **#6 Friendship / happiness** — M · ★★★
+30. ✅ **#6 Friendship / happiness** — shipped 0.12.0 (friendship rises with
+    levels and wins; gates 17 friendship evolutions).
 31. **#9 Move tutor / TMs** — M · ★★★
 32. **#11 NPC gifts & static encounters** — M · ★★★
 33. **#17 Pokéball variants** — M · ★★★
@@ -176,15 +177,18 @@ trainer prizes (`hooks.js`), wild drops (`reducer.js`) and wild shiny odds
 once-per-day gift; `REFRESH_DAILY_EVENT` re-rolls on a new day. Saved and
 sanitised in `context.js`, covered by `tests/daily-events.test.mjs`.
 
-## 6. Friendship / happiness
+## 6. ✅ Friendship / happiness — shipped in 0.12.0
 
-Raised once, never scoped. Could gate friendship evolutions, a small battle
-bonus, or flavour.
-
-- [ ] Add a friendship value per Pokémon, raised by levelling / battling.
-- [ ] Wire any friendship evolutions still modelled as level evolutions.
-
-Effort: **medium**.
+Done. Every Pokemon carries a `friendship` value (base 70, shown as a \u2665 badge
+in the stats panel), raised by +8 per level-up and +2 per wild battle won
+(`gainFriendship` in `src/game/pokemon.js`). The canonical friendship
+evolutions are now gated on friendship 160 instead of a level via
+`tools/add-friendship-evolutions.cjs`: Golbat\u2192Crobat, Chansey\u2192Blissey,
+Pichu\u2192Pikachu, Cleffa/Igglybuff, Togepi, Azurill, Budew, Buneary, Chingling,
+Munchlax, Riolu, Woobat, Swadloon, Snom, Type: Null and Eevee\u2019s
+Espeon/Umbreon/Sylveon. `getEvolutionOptions` (`src/game/breeding.js`) is now
+shared by the party and box UIs and checks the friendship/level/item gates.
+Covered by `tests/friendship.test.mjs`.
 
 ## 7. ✅ Offline / idle progress — shipped in 0.9.26
 
@@ -1154,6 +1158,9 @@ each).
 - **Commit** each logical change; never `git push`.
 
 ## Recently done (context)
+
+0.12.0 (friendship): Pokemon have a friendship value that rises with levels and
+wild wins and gates 17 friendship evolutions; the stats panel shows it. #6 done.
 
 0.11.2 (screens): Reflect, Light Screen and Aurora Veil now halve incoming
 physical/special damage for five turns.

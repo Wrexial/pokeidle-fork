@@ -16,7 +16,7 @@ import {
   regions,
   speciesKeysByGeneration,
 } from '../data/gameData.js'
-import { generateIVs, calculatePokemonStats, resolvePokemonMoves } from './pokemon.js'
+import { BASE_FRIENDSHIP, generateIVs, calculatePokemonStats, resolvePokemonMoves } from './pokemon.js'
 import { ACHIEVEMENTS } from '../data/achievements.js'
 import { natureByKey, randomNature } from '../data/natures.js'
 import { gameReducer, initialGameState } from './reducer.js'
@@ -160,6 +160,13 @@ function repairSave(saved) {
   party = party.map(withNature)
   box = box.map(withNature)
 
+  // Older saves predate friendship; default it to a freshly-caught Pokemon's.
+  /** @param {any} pokemon */
+  const withFriendship = (pokemon) =>
+    typeof pokemon.friendship === 'number' ? pokemon : { ...pokemon, friendship: BASE_FRIENDSHIP }
+  party = party.map(withFriendship)
+  box = box.map(withFriendship)
+
   /** @type {Record<string, Record<string, CatchRule>>} */
   const catchSettings = {}
   for (const [speciesKey, rules] of Object.entries(saved.catchSettings || {})) {
@@ -269,7 +276,8 @@ function repairSave(saved) {
       Array.isArray(saved.daycare?.parents) ? saved.daycare.parents : []
     )
       .filter(/** @param {any} parent */ (parent) => parent && pokemonSpecies[parent.speciesKey])
-      .map(withNature),
+      .map(withNature)
+      .map(withFriendship),
     daycare = {
       parents: daycareParents.slice(0, 2),
       progress: typeof saved.daycare?.progress === 'number' ? saved.daycare.progress : 0,

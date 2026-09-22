@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.11.2'
+export const GAME_VERSION = '0.12.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.12.0',
+      subtitle: 'Friendship',
+      sections: [
+        {
+          heading: 'Pokemon',
+          items: [
+            'Every Pokemon now has a friendship value, shown as a \u2665 badge in the stats panel, that rises when it levels up or wins wild battles',
+            'Friendship evolutions that were modelled as plain level-ups now need friendship 160 instead: Golbat \u2192 Crobat, Chansey \u2192 Blissey, Pichu \u2192 Pikachu, Cleffa/Igglybuff, Togepi, Azurill, Budew, Buneary, Chingling, Munchlax, Riolu, Woobat, Swadloon, Snom, Type: Null, and Eevee\u2019s Espeon / Umbreon / Sylveon',
+          ],
+        },
+      ],
+    },
     {
       version: '0.11.2',
       subtitle: 'Screens',

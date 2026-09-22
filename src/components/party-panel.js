@@ -2,11 +2,10 @@
 
 import React from 'react'
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
-import { evolutionItems } from '../data/items.js'
-import { evolutionData, pokemonSpecies } from '../data/gameData.js'
+import { pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, pokemonDisplayName } from '../game/pokemon.js'
-import { genderForPokemon } from '../game/breeding.js'
+import { getEvolutionOptions } from '../game/breeding.js'
 import { formatReward, releaseReward } from '../game/progression.js'
 import { ExpBar } from './exp-bar.js'
 import { HpBar } from './hp-bar.js'
@@ -104,35 +103,7 @@ export function PartyPanel({
     }, [setReleaseConfirm]),
     evolutionInfo = React.useMemo(() => {
       if (!inspectedPokemon || state.phase === 'evolving') return
-      const evolutionChain = evolutionData[inspectedPokemon.speciesKey]
-      if (evolutionChain)
-        return {
-          entries: evolutionChain
-            // Gender variants (Basculegion/Oinkologne) only offer the form that
-            // matches this Pokemon's gender.
-            .filter(
-              (evolution) =>
-                !evolution.gender || evolution.gender === genderForPokemon(inspectedPokemon)
-            )
-            .map((evolution) => {
-            const targetSpecies = pokemonSpecies[evolution.into],
-              levelMet = !evolution.level || inspectedPokemon.level >= evolution.level,
-              itemOwned = !evolution.item || (state.inventory[evolution.item] ?? 0) > 0,
-              canEvolve = levelMet && itemOwned,
-              requirementParts = []
-            if ((evolution.level && requirementParts.push(`Lv. ${evolution.level}`), evolution.item)) {
-              const evolutionEntry = evolution.item in evolutionItems ? evolutionItems[evolution.item].name : evolution.item
-              requirementParts.push(evolutionEntry)
-            }
-            return {
-              targetName: targetSpecies?.name ?? evolution.into,
-              canEvolve,
-              requirementLabel: requirementParts.join(' + ') || 'Ready',
-              targetKey: evolution.into,
-              itemId: evolution.item,
-            }
-          }),
-        }
+      return { entries: getEvolutionOptions(inspectedPokemon, state.inventory) }
     }, [inspectedPokemon, state.phase, state.inventory]),
     handleEvolve = React.useCallback(
       /** @param {number} evolutionEntry */ (evolutionEntry) => {

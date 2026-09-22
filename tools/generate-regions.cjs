@@ -855,10 +855,11 @@ const buildTeam = (list, types, size, baseLevel, step = 1, offset = 0) => {
   // below `minimum` (so a sparse type keeps its members).
   const refined = (pool) => {
     const mature = pool.filter((species) => {
-      // Item evolutions have no level gate, so give them a nominal one for team
-      // building (a Lv.60 trainer shouldn't still field a Vulpix).
+      // Item and friendship evolutions have no level gate, so give them a
+      // nominal one for team building (a Lv.60 trainer shouldn't still field a
+      // Vulpix or a Pichu).
       const levels = (evolutionData[species.key] || [])
-        .map((evolution) => evolution.level ?? (evolution.item ? ITEM_EVOLUTION_LEVEL : null))
+        .map((evolution) => evolution.level ?? (evolution.item || evolution.friendship ? ITEM_EVOLUTION_LEVEL : null))
         .filter(Boolean)
       return levels.length === 0 || Math.min(...levels) > baseLevel
     })

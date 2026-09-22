@@ -7,7 +7,7 @@ import { dailyDropMultiplier, dailyEventByKey, rollDailyEvent, todayKey } from '
 import { natureName, randomNature } from '../data/natures.js'
 import { elite4Data, encounterData, gymLeaderData, mapData, moveLearnsets, pokemonSpecies, regions } from '../data/gameData.js'
 import { createVolatileState } from './combat.js'
-import { calculatePokemonStats, calculateRequiredExperience, createEgg, createPokemon, getLevelUpResults, insertIntoBox, isBattleReady, judgeIVs, nextBoxSortMode, resolvePokemonMoves, sortBoxMembers } from './pokemon.js'
+import { calculatePokemonStats, calculateRequiredExperience, createEgg, createPokemon, gainFriendship, getLevelUpResults, insertIntoBox, isBattleReady, judgeIVs, nextBoxSortMode, resolvePokemonMoves, sortBoxMembers } from './pokemon.js'
 import { canBreed, eggHatchSteps, eggSpeciesKey, inheritBreedingTraits } from './breeding.js'
 import { advanceQuests, questLabel, rollQuests } from './quests.js'
 import { buildTrainerTeam, buildTowerTeam, checkShinyOdds, computeUnlockedLocations, formatReward, getRegionUnlockTokens, isActiveEffectItem, loadActivePokemonFromParty, prepareNextBattle, releaseReward, rollCandyDrop, rollValuableDrop, syncActivePokemonIntoParty, tickBattleCounters, tickPartyEggs, tickPokerus } from './progression.js'
@@ -359,6 +359,12 @@ export function gameReducer(state, action) {
         !state.bossBattle
       ) {
         wildBattlesWon++
+        // Battling together builds friendship (and can unlock friendship evolutions).
+        playerPokemon &&
+          (playerPokemon = {
+            ...playerPokemon,
+            friendship: gainFriendship(playerPokemon, 2),
+          })
         const locationWins = battlesWonByLocation[state.currentLocation] ?? 0
         ;((battlesWonByLocation = {
           ...battlesWonByLocation,
@@ -538,10 +544,12 @@ export function gameReducer(state, action) {
       }
       const battleLog = [...state.battleLog, `${updatedPokemon.name} gained ${action.payload.expGained} EXP!`]
       if (action.payload.newLevel && action.payload.newStats) {
-        const hpGain = (action.payload.newStats.maxHp ?? updatedPokemon.maxHp) - updatedPokemon.maxHp
+        const hpGain = (action.payload.newStats.maxHp ?? updatedPokemon.maxHp) - updatedPokemon.maxHp,
+          levelsGained = Math.max(1, action.payload.newLevel - updatedPokemon.level)
         ;((updatedPokemon = {
           ...updatedPokemon,
           level: action.payload.newLevel,
+          friendship: gainFriendship(updatedPokemon, levelsGained * 8),
           maxHp: action.payload.newStats.maxHp ?? updatedPokemon.maxHp,
           currentHp: Math.min(
             updatedPokemon.currentHp + hpGain,

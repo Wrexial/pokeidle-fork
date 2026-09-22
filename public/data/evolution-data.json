@@ -141,7 +141,7 @@
   "pichu": [
     {
       "into": "pikachu",
-      "level": 10
+      "friendship": 160
     }
   ],
   "pikachu": [
@@ -192,7 +192,7 @@
   "cleffa": [
     {
       "into": "clefairy",
-      "level": 10
+      "friendship": 160
     }
   ],
   "clefairy": [
@@ -210,7 +210,7 @@
   "igglybuff": [
     {
       "into": "jigglypuff",
-      "level": 10
+      "friendship": 160
     }
   ],
   "jigglypuff": [
@@ -228,7 +228,7 @@
   "golbat": [
     {
       "into": "crobat",
-      "level": 45
+      "friendship": 160
     }
   ],
   "oddish": [
@@ -552,7 +552,7 @@
   "chansey": [
     {
       "into": "blissey",
-      "level": 40
+      "friendship": 160
     }
   ],
   "tangela": [
@@ -676,11 +676,11 @@
     },
     {
       "into": "espeon",
-      "level": 25
+      "friendship": 160
     },
     {
       "into": "umbreon",
-      "level": 25
+      "friendship": 160
     },
     {
       "into": "glaceon",
@@ -692,7 +692,7 @@
     },
     {
       "into": "sylveon",
-      "level": 25
+      "friendship": 160
     },
     {
       "into": "gx-eevee",
@@ -733,7 +733,7 @@
   "munchlax": [
     {
       "into": "snorlax",
-      "level": 20
+      "friendship": 160
     }
   ],
   "dratini": [
@@ -843,7 +843,7 @@
   "togepi": [
     {
       "into": "togetic",
-      "level": 20
+      "friendship": 160
     }
   ],
   "togetic": [
@@ -879,7 +879,7 @@
   "azurill": [
     {
       "into": "marill",
-      "level": 7
+      "friendship": 160
     }
   ],
   "marill": [
@@ -1323,7 +1323,7 @@
   "budew": [
     {
       "into": "roselia",
-      "level": 12
+      "friendship": 160
     }
   ],
   "roselia": [
@@ -1467,7 +1467,7 @@
   "chingling": [
     {
       "into": "chimecho",
-      "level": 20
+      "friendship": 160
     }
   ],
   "absol": [
@@ -1707,7 +1707,7 @@
   "buneary": [
     {
       "into": "lopunny",
-      "level": 25
+      "friendship": 160
     }
   ],
   "lopunny": [
@@ -1755,7 +1755,7 @@
   "riolu": [
     {
       "into": "lucario",
-      "level": 35
+      "friendship": 160
     }
   ],
   "lucario": [
@@ -1921,7 +1921,7 @@
   "woobat": [
     {
       "into": "swoobat",
-      "level": 27
+      "friendship": 160
     }
   ],
   "drilbur": [
@@ -1969,7 +1969,7 @@
   "swadloon": [
     {
       "into": "leavanny",
-      "level": 30
+      "friendship": 160
     }
   ],
   "venipede": [
@@ -2657,7 +2657,7 @@
   "type: null": [
     {
       "into": "silvally",
-      "level": 50
+      "friendship": 160
     }
   ],
   "jangmo-o": [
@@ -2887,7 +2887,7 @@
   "snom": [
     {
       "into": "frosmoth",
-      "level": 35
+      "friendship": 160
     }
   ],
   "cufant": [

@@ -1,6 +1,7 @@
 // Breeding rules: gender and egg-group compatibility for the Daycare.
 
-import { breedingData, pokemonSpecies } from '../data/gameData.js'
+import { breedingData, evolutionData, pokemonSpecies } from '../data/gameData.js'
+import { evolutionItems } from '../data/items.js'
 import { randomNature } from '../data/natures.js'
 import {
   IV_STAT_ORDER,
@@ -11,6 +12,43 @@ import {
 } from './pokemon.js'
 
 const isDitto = (/** @type {string} */ speciesKey) => speciesKey === 'ditto'
+
+/**
+ * Evolution options available to a Pokemon, with requirement labels and
+ * whether each is currently met. Shared by the party and box UIs (gender
+ * variants only offer the form matching this Pokemon's gender).
+ * @param {Pokemon} pokemon
+ * @param {Record<string, number>} inventory
+ * @returns {{ targetName: string, canEvolve: boolean, requirementLabel: string, targetKey: string, itemId?: string }[]}
+ */
+export function getEvolutionOptions(pokemon, inventory) {
+  const evolutionChain = evolutionData[pokemon.speciesKey]
+  if (!evolutionChain) return []
+  return evolutionChain
+    .filter((evolution) => !evolution.gender || evolution.gender === genderForPokemon(pokemon))
+    .map((evolution) => {
+      const targetSpecies = pokemonSpecies[evolution.into],
+        levelMet = !evolution.level || pokemon.level >= evolution.level,
+        itemOwned = !evolution.item || (inventory[evolution.item] ?? 0) > 0,
+        friendshipMet = !evolution.friendship || (pokemon.friendship ?? 0) >= evolution.friendship,
+        canEvolve = levelMet && itemOwned && friendshipMet,
+        requirementParts = []
+      if (evolution.level) requirementParts.push(`Lv. ${evolution.level}`)
+      if (evolution.item) {
+        const itemName =
+          evolution.item in evolutionItems ? evolutionItems[evolution.item].name : evolution.item
+        requirementParts.push(itemName)
+      }
+      if (evolution.friendship) requirementParts.push(`Friendship ${evolution.friendship}`)
+      return {
+        targetName: targetSpecies?.name ?? evolution.into,
+        canEvolve,
+        requirementLabel: requirementParts.join(' + ') || 'Ready',
+        targetKey: evolution.into,
+        itemId: evolution.item,
+      }
+    })
+}
 
 /**
  * Species whose form *is* their gender — the male/female variants are fixed,

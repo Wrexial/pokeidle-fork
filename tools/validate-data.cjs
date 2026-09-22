@@ -50,7 +50,8 @@ for (const [from, evolutions] of Object.entries(evolutionData)) {
   if (!speciesKeys.has(from)) fail(`evolution from unknown species ${from}`)
   for (const evolution of evolutions) {
     if (!speciesKeys.has(evolution.into)) fail(`evolution ${from} -> unknown ${evolution.into}`)
-    if (evolution.level == null && !evolution.item) fail(`evolution ${from} -> ${evolution.into} has no trigger`)
+    if (evolution.level == null && !evolution.item && evolution.friendship == null)
+      fail(`evolution ${from} -> ${evolution.into} has no trigger`)
   }
 }
 

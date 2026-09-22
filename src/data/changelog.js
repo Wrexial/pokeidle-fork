@@ -1,10 +1,22 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.9.29'
+export const GAME_VERSION = '0.9.30'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.9.30',
+      subtitle: 'Slower Egg Hatching',
+      sections: [
+        {
+          heading: 'Daycare',
+          items: [
+            'Eggs now take longer to hatch \u2014 30 to 120 wild wins depending on the species (previously 8 to 40)',
+          ],
+        },
+      ],
+    },
     {
       version: '0.9.29',
       subtitle: 'Egg Ticking & Secrecy',

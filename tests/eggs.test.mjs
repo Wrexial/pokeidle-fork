@@ -13,8 +13,8 @@ const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 test('eggHatchSteps scales with species strength and stays in range', () => {
   const weak = eggHatchSteps('caterpie'),
     strong = eggHatchSteps('mewtwo')
-  assert.ok(weak >= 8 && weak <= 40)
-  assert.ok(strong >= 8 && strong <= 40)
+  assert.ok(weak >= 30 && weak <= 120)
+  assert.ok(strong >= 30 && strong <= 120)
   assert.ok(strong > weak)
 })
 
@@ -61,7 +61,7 @@ test('HATCH_DAYCARE_EGG gives an egg, not a hatched Pokemon', () => {
     egg = result.party[1]
   assert.equal(result.party.length, 2)
   assert.equal(egg.isEgg, true)
-  assert.ok(egg.eggStepsRemaining >= 8)
+  assert.ok(egg.eggStepsRemaining >= 30)
   assert.equal(result.hatchResult, null, 'it should not hatch immediately')
   assert.equal(result.daycare.progress, 0)
 })

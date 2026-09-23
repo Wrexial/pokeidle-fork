@@ -671,3 +671,9 @@ These scripts hit external sites (Serebii, PokémonDB) and may write large files
    `loaded: true, hasError: false`.
 4. Play through the affected flow (encounter, battle, evolution, shop, etc.).
 5. `npm run build` should succeed with no errors before finishing.
+
+For layout/UI work, `node tools/screenshot.cjs` (with `npm run dev` running)
+drives headless Chrome over the DevTools Protocol and writes PNGs to
+`screenshots/` (gitignored) — handy for eyeballing the battle screen, the Box
+header or a modal without a browser. It seeds an Alola save and captures the
+Poké Pelago tabs and Settings; edit the sequence for the screen you need.

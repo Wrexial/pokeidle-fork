@@ -45,3 +45,6 @@ tools/cache/
 # Region map comparison output (downloaded refs + rendered composites)
 tools/map-compare/refs/
 tools/map-compare/out/
+
+# Headless screenshot output (tools/screenshot.cjs)
+screenshots/

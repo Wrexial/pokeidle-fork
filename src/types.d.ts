@@ -250,6 +250,8 @@ type VolatileState = {
   abilityOverride?: string | null
   /** Gastro Acid has suppressed this Pokemon's ability. */
   abilitySuppressed?: boolean
+  /** Types replaced by Soak / Magic Powder / Reflect Type / Forest's Curse. */
+  typesOverride?: string[] | null
 }
 
 type GameAction = { type: string; payload?: any; [key: string]: any }

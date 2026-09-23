@@ -1,6 +1,6 @@
 // Turn resolution: move selection, attack order and damage application. Split from game/combat.js.
 
-import { moveData } from '../../data/gameData.js'
+import { moveData, moveLearnsets } from '../../data/gameData.js'
 import { abilityAbsorbsType, abilityAttackMultiplier, abilityBlocksNonSuperEffective, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityHalvesSuperEffective, abilityHealsFromType, abilityOf, abilityPreventsStatDrop, abilitySurvivesAtFullHp } from '../abilities.js'
 import { chooseMoveForBattle, chooseRandomMove } from './ai.js'
 import { calculateDamage, chance, isSelfTargetedMove, normalizeStatKey } from './damage.js'
@@ -12,6 +12,56 @@ import { applyConfusion, applyContactAbility, applyInfatuation, applyLeechSeed, 
 import { TERRAIN_ABILITIES, TERRAIN_NAMES, TERRAIN_TURNS, terrainAbilityMultiplier, terrainDamageMultiplier, terrainPreventsPriority } from '../terrain.js'
 import { applyIntimidate, clampStatStage, effectiveSpeed, getStatLabel, getStatStage, resetStatStages, screenApplies } from './volatile.js'
 import { WEATHER_ABILITIES, WEATHER_NAMES, WEATHER_TURNS, applyWeatherToMove, weatherDamageMultiplier } from '../weather.js'
+
+/**
+ * Moves that call another move. They are swapped out for the called move during
+ * move selection, so the engine only ever sees a normal move.
+ */
+const CALLING_MOVES = new Set(['metronome', 'copycat', 'mirrorMove', 'naturePower'])
+
+/** The move Nature Power becomes, by terrain. @type {Record<string, string>} */
+const NATURE_POWER_BY_TERRAIN = {
+  electric: 'thunderbolt',
+  grassy: 'energyBall',
+  misty: 'moonblast',
+  psychic: 'psychic',
+  none: 'triAttack',
+}
+
+/** @type {string[] | null} */
+let metronomePool = null
+
+/** Every move Metronome can call: a real learnset move, not another calling move. */
+function callableMoves() {
+  if (metronomePool) return metronomePool
+  const keys = new Set()
+  for (const moves of Object.values(moveLearnsets))
+    for (const [, moveId] of moves)
+      if (moveData[moveId] && !CALLING_MOVES.has(moveId)) keys.add(moveId)
+  metronomePool = [...keys]
+  return metronomePool
+}
+
+/**
+ * Resolve a calling move into the move it actually uses this turn.
+ * @param {string} moveId
+ * @param {BattlePokemon} target
+ * @param {{ type: string } | null} terrain
+ * @returns {string}
+ */
+function resolveCalledMove(moveId, target, terrain) {
+  if (moveId === 'metronome') {
+    const pool = callableMoves()
+    return pool[Math.floor(Math.random() * pool.length)] ?? moveId
+  }
+  if (moveId === 'copycat' || moveId === 'mirrorMove') {
+    const last = target.lastMove
+    return last && moveData[last] && !CALLING_MOVES.has(last) ? last : moveId
+  }
+  if (moveId === 'naturePower')
+    return NATURE_POWER_BY_TERRAIN[terrain?.type ?? 'none'] ?? 'triAttack'
+  return moveId
+}
 
 /**
  * Encore forces a move and Disable blocks one, while the stored move is still
@@ -76,17 +126,19 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
   if (playerMustRecharge) ((playerMoveId = player.moves[0]), (playerMove = moveData[playerMoveId]))
   else if (player.lockedMove) ((playerMoveId = player.lockedMove), (playerMove = moveData[playerMoveId]))
   else {
-    const bestMove = chooseMoveForBattle(player, enemy, activeHazards, deterministic)
-    ;((playerMoveId = applyMoveLock(player, bestMove.moveId)), (playerMove = moveData[playerMoveId]))
+    const bestMove = chooseMoveForBattle(player, enemy, activeHazards, deterministic),
+      lockedMove = applyMoveLock(player, bestMove.moveId)
+    ;((playerMoveId = resolveCalledMove(lockedMove, enemy, activeTerrain)), (playerMove = moveData[playerMoveId]))
   }
   let enemyMoveId, enemyMove
   if (enemyMustRecharge) ((enemyMoveId = enemy.moves[0]), (enemyMove = moveData[enemyMoveId]))
   else if (enemy.lockedMove) ((enemyMoveId = enemy.lockedMove), (enemyMove = moveData[enemyMoveId]))
   else {
     const bestMove = isTrainerBattle
-      ? chooseMoveForBattle(enemy, player, activeHazards, deterministic)
-      : chooseRandomMove(enemy.moves)
-    ;((enemyMoveId = applyMoveLock(enemy, bestMove.moveId)), (enemyMove = moveData[enemyMoveId]))
+        ? chooseMoveForBattle(enemy, player, activeHazards, deterministic)
+        : chooseRandomMove(enemy.moves),
+      lockedMove = applyMoveLock(enemy, bestMove.moveId)
+    ;((enemyMoveId = resolveCalledMove(lockedMove, player, activeTerrain)), (enemyMove = moveData[enemyMoveId]))
   }
   const trickRoomActive = (player.trickRoomTurns ?? 0) > 0 || (enemy.trickRoomTurns ?? 0) > 0,
     playerSpeed = effectiveSpeed(player, activeWeather),
@@ -626,6 +678,68 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           type: 'status',
           message: `${attack.attacker.name} and ${attack.defender.name} swapped abilities!`,
         })
+      }
+      else if (moveDef.effect?.type === 'typeChange') {
+        const newTypes = [...moveDef.effect.types]
+        attack.defender.typesOverride = newTypes
+        attack.defender.types = newTypes
+        events.push({
+          type: 'status',
+          message: `${attack.defender.name} was transformed into the ${moveDef.effect.types.join('/')} type!`,
+          data: { target: attack.isPlayer ? 'enemy' : 'player' },
+        })
+      }
+      else if (moveDef.effect?.type === 'reflectType') {
+        const newTypes = [...attack.defender.types]
+        attack.attacker.typesOverride = newTypes
+        attack.attacker.types = newTypes
+        events.push({
+          type: 'status',
+          message: `${attack.attacker.name} copied ${attack.defender.name}'s type!`,
+          data: { target: attack.isPlayer ? 'player' : 'enemy' },
+        })
+      }
+      else if (moveDef.effect?.type === 'typeAdd') {
+        const currentTypes = attack.defender.typesOverride ?? attack.defender.types
+        if (!currentTypes.includes(moveDef.effect.typeName)) {
+          const newTypes = [...currentTypes, moveDef.effect.typeName]
+          attack.defender.typesOverride = newTypes
+          attack.defender.types = newTypes
+        }
+        events.push({
+          type: 'status',
+          message: `${attack.defender.name} gained the ${moveDef.effect.typeName} type!`,
+          data: { target: attack.isPlayer ? 'enemy' : 'player' },
+        })
+      }
+      else if (moveDef.effect?.type === 'statSwap') {
+        attack.attacker.statStages || (attack.attacker.statStages = {})
+        attack.defender.statStages || (attack.defender.statStages = {})
+        for (const stat of moveDef.effect.stats) {
+          const attackerStage = attack.attacker.statStages[stat] ?? 0,
+            defenderStage = attack.defender.statStages[stat] ?? 0
+          attack.attacker.statStages[stat] = defenderStage
+          attack.defender.statStages[stat] = attackerStage
+        }
+        events.push({
+          type: 'statChange',
+          message: `${attack.attacker.name} and ${attack.defender.name} swapped stat changes!`,
+        })
+      }
+      else if (moveDef.effect?.type === 'recycle') {
+        if (attack.attacker.heldItemUsed) {
+          attack.attacker.heldItemUsed = !1
+          events.push({
+            type: 'status',
+            message: `${attack.attacker.name} recycled its held item!`,
+            data: { target: attack.isPlayer ? 'player' : 'enemy' },
+          })
+        } else {
+          events.push({
+            type: 'status',
+            message: `${attack.attacker.name}'s Recycle failed!`,
+          })
+        }
       }
       else if (moveDef.effect?.type === 'hazard') {
         const targetSide = /** @type {any} */ (

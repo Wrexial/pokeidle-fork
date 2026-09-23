@@ -132,6 +132,23 @@ const MOVE_OVERRIDES = {
   rolePlay: { effect: { type: 'rolePlay', target: 'self' } },
   entrainment: { effect: { type: 'entrainment' }, accuracy: 100 },
   skillSwap: { effect: { type: 'skillSwap' } },
+  // Type changes: Soak / Magic Powder replace the target's types, Reflect Type
+  // copies the foe's onto the user, Forest's Curse / Trick-or-Treat add one.
+  soak: { effect: { type: 'typeChange', types: ['Water'] }, accuracy: 100 },
+  magicPowder: { effect: { type: 'typeChange', types: ['Psychic'] }, accuracy: 100 },
+  reflectType: { effect: { type: 'reflectType', target: 'self' } },
+  forestsCurse: { effect: { type: 'typeAdd', typeName: 'Grass' }, accuracy: 100 },
+  trickOrTreat: { effect: { type: 'typeAdd', typeName: 'Ghost' }, accuracy: 100 },
+  // Stat-stage swaps and Recycle.
+  powerSwap: { effect: { type: 'statSwap', stats: ['attack', 'spAttack'] } },
+  guardSwap: { effect: { type: 'statSwap', stats: ['defense', 'spDefense'] } },
+  heartSwap: {
+    effect: {
+      type: 'statSwap',
+      stats: ['attack', 'defense', 'spAttack', 'spDefense', 'speed'],
+    },
+  },
+  recycle: { effect: { type: 'recycle', target: 'self' } },
   // --- Entry hazards ---
   stealthRock: { effect: { type: 'hazard', hazard: 'stealthRock' } },
   spikes: { effect: { type: 'hazard', hazard: 'spikes' } },

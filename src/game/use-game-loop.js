@@ -259,6 +259,7 @@ export function useGameLoop() {
               speciesKey: currentGameState.playerPokemon.speciesKey,
               name: currentGameState.playerPokemon.name,
               types:
+                playerVolatile.typesOverride ??
                 pokemonSpecies[currentGameState.playerPokemon.speciesKey].types,
               level: currentGameState.playerPokemon.level,
               currentHp: currentGameState.playerPokemon.currentHp,
@@ -311,9 +312,13 @@ export function useGameLoop() {
               lockOnTurns: playerVolatile.lockOnTurns ?? 0,
               abilityOverride: playerVolatile.abilityOverride ?? null,
               abilitySuppressed: playerVolatile.abilitySuppressed ?? !1,
+              typesOverride: playerVolatile.typesOverride ?? null,
             },
             enemyBattlePokemon = {
               ...currentGameState.enemyPokemon,
+              types:
+                currentGameState.enemyPokemon.typesOverride ??
+                currentGameState.enemyPokemon.types,
             },
             isTrainerBattle =
               (currentGameState.trainerBattle ??

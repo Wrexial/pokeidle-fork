@@ -1,10 +1,24 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.38.11'
+export const GAME_VERSION = '0.38.12'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.38.12',
+      subtitle: 'Type, Stat & Call Moves',
+      sections: [
+        {
+          heading: 'Battle',
+          items: [
+            'Type-changing moves now work: Soak and Magic Powder replace the target\u2019s type, Reflect Type copies the foe\u2019s, and Forest\u2019s Curse / Trick-or-Treat add one \u2014 the new type drives damage, STAB and status immunity',
+            'Power Swap, Guard Swap and Heart Swap trade stat changes between the battlers, and Recycle restores a consumed held item',
+            'Metronome, Copycat, Mirror Move and Nature Power now call a real move (Nature Power changes with the terrain)',
+          ],
+        },
+      ],
+    },
     {
       version: '0.38.11',
       subtitle: 'Ability Swaps',

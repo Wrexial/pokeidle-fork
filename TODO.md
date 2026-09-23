@@ -1,6 +1,6 @@
 # TODO
 
-Open ideas and follow-ups. Current game version: **0.38.11**
+Open ideas and follow-ups. Current game version: **0.38.12**
 (`src/data/changelog.js`). Finished work lives in the changelog, not here — this
 file only tracks what is **still open**. See `AGENTS.md` for architecture,
 commands and data conventions.
@@ -174,20 +174,22 @@ bars), Safeguard (blocks opponent status), Mist (blocks stat drops), Encore
 Perish Song (both sides faint after three turns), Tailwind (doubles the side's
 Speed), Trick Room (reverses the speed order), Destiny Bond (takes the attacker
 down), Laser Focus (next hit crits), Lock-On / Mind Reader (next hit lands),
-the side heals Life Dew / Jungle Healing / Lunar Blessing, and the ability
+the side heals Life Dew / Jungle Healing / Lunar Blessing, the ability
 moves Gastro Acid / Worry Seed / Simple Beam / Role Play / Entrainment /
-Skill Swap. These are `effect` branches (Encore/Disable hook move selection;
-Tailwind/Trick Room/Laser Focus/Lock-On feed turn order and accuracy) backed by
-new volatile fields, with `abilityOf` honouring the new ability override /
-suppression.
+Skill Swap, the type moves Soak / Magic Powder / Reflect Type / Forest's Curse
+/ Trick-or-Treat, the stat swaps Power Swap / Guard Swap / Heart Swap, Recycle,
+and the calling moves Metronome / Copycat / Mirror Move / Nature Power. These
+are `effect` branches (Encore/Disable and the calling moves hook move
+selection; Tailwind/Trick Room/Laser Focus/Lock-On feed turn order and
+accuracy) backed by new volatile fields, with `abilityOf` honouring the ability
+override / suppression and the type override applied at battle construction.
 
 Still open:
 
-- [ ] Type-changing utility (Soak, Magic Powder, Reflect Type, Forest's Curse,
-      Trick-or-Treat) and stat/item swaps (Power/Guard/Speed Swap, Heart Swap,
-      Trick/Switcheroo, Recycle, Bestow, Heal Block).
-- [ ] Move-calling moves (Metronome, Copycat, Mirror Move, Sleep Talk, Assist,
-      Me First, Nature Power).
+- [ ] Item/HP utility (Trick / Switcheroo / Bestow / Corrosive Gas, Heal Block,
+      Speed Swap, Power/Guard Split, the remaining Z-Move-adjacent moves).
+- [ ] Move-calling moves that need more context (Sleep Talk, Assist, Me First)
+      and the multi-turn/charging moves (Focus Punch, Sky Attack, …).
 - [ ] The remaining doubles-only moves (After You, Ally Switch, Follow Me,
       Helping Hand, Quick/Wide Guard, Rage Powder, …) — the game is singles
       only, so these are intentionally inert.

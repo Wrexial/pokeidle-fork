@@ -49,6 +49,7 @@ export function createVolatileState() {
     lockOnTurns: 0,
     abilityOverride: null,
     abilitySuppressed: !1,
+    typesOverride: null,
   }
 }
 
@@ -96,6 +97,7 @@ export function volatileStateFromBattle(pokemon) {
     lockOnTurns: pokemon.lockOnTurns ?? 0,
     abilityOverride: pokemon.abilityOverride ?? null,
     abilitySuppressed: pokemon.abilitySuppressed ?? !1,
+    typesOverride: pokemon.typesOverride ?? null,
   }
 }
 

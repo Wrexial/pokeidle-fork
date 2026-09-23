@@ -85,6 +85,12 @@ test('the new utility moves carry their effects', () => {
   assert.equal(moveData.rolePlay.effect.type, 'rolePlay')
   assert.equal(moveData.entrainment.effect.type, 'entrainment')
   assert.equal(moveData.skillSwap.effect.type, 'skillSwap')
+  assert.equal(moveData.soak.effect.type, 'typeChange')
+  assert.equal(moveData.reflectType.effect.type, 'reflectType')
+  assert.equal(moveData.forestsCurse.effect.type, 'typeAdd')
+  assert.equal(moveData.powerSwap.effect.type, 'statSwap')
+  assert.equal(moveData.heartSwap.effect.stats.length, 5)
+  assert.equal(moveData.recycle.effect.type, 'recycle')
 })
 
 test('Focus Energy raises the user critical-hit stage', () => {
@@ -427,4 +433,124 @@ test('Worry Seed replaces the target ability', () => {
     enemy = battler({ name: 'Foe', moves: ['splash'], ability: 'intimidate' })
   turn(player, enemy)
   assert.equal(abilityOf(enemy), 'insomnia')
+})
+
+test('Soak and Magic Powder replace the target types', () => {
+  const run = (/** @type {string} */ move) => {
+    const player = battler({ name: 'Player', isPlayer: true, moves: [move], speed: 200 }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], types: ['Normal', 'Flying'] })
+    turn(player, enemy)
+    return { override: enemy.typesOverride, live: enemy.types }
+  }
+  assert.deepEqual(run('soak'), { override: ['Water'], live: ['Water'] })
+  assert.deepEqual(run('magicPowder'), { override: ['Psychic'], live: ['Psychic'] })
+})
+
+test('Reflect Type copies the target types', () => {
+  const player = battler({
+      name: 'Player',
+      isPlayer: true,
+      moves: ['reflectType'],
+      speed: 200,
+      types: ['Normal', 'Flying'],
+    }),
+    enemy = battler({ name: 'Foe', moves: ['splash'], types: ['Water', 'Ice'] })
+  turn(player, enemy)
+  assert.deepEqual(player.typesOverride, ['Water', 'Ice'])
+})
+
+test("Forest's Curse and Trick-or-Treat add a type", () => {
+  const run = (/** @type {string} */ move) => {
+    const player = battler({ name: 'Player', isPlayer: true, moves: [move], speed: 200 }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], types: ['Normal'] })
+    turn(player, enemy)
+    return enemy.typesOverride
+  }
+  assert.deepEqual(run('forestsCurse'), ['Normal', 'Grass'])
+  assert.deepEqual(run('trickOrTreat'), ['Normal', 'Ghost'])
+})
+
+test('Power Swap trades the offensive stat stages', () => {
+  const player = battler({
+      name: 'Player',
+      isPlayer: true,
+      moves: ['powerSwap'],
+      speed: 200,
+      statStages: { attack: 2, spAttack: 0 },
+    }),
+    enemy = battler({
+      name: 'Foe',
+      moves: ['splash'],
+      statStages: { attack: -1, spAttack: 1 },
+    })
+  turn(player, enemy)
+  assert.equal(player.statStages.attack, -1)
+  assert.equal(player.statStages.spAttack, 1)
+  assert.equal(enemy.statStages.attack, 2)
+  assert.equal(enemy.statStages.spAttack, 0)
+})
+
+test('Guard Swap trades the defensive stat stages', () => {
+  const player = battler({
+      name: 'Player',
+      isPlayer: true,
+      moves: ['guardSwap'],
+      speed: 200,
+      statStages: { defense: 3, spDefense: 0 },
+    }),
+    enemy = battler({
+      name: 'Foe',
+      moves: ['splash'],
+      statStages: { defense: -2, spDefense: 1 },
+    })
+  turn(player, enemy)
+  assert.equal(player.statStages.defense, -2)
+  assert.equal(player.statStages.spDefense, 1)
+  assert.equal(enemy.statStages.defense, 3)
+})
+
+test('Recycle restores a consumed held item', () => {
+  const player = battler({
+      name: 'Player',
+      isPlayer: true,
+      moves: ['recycle'],
+      speed: 200,
+      heldItemUsed: true,
+    }),
+    enemy = battler({ name: 'Foe', moves: ['splash'] })
+  turn(player, enemy)
+  assert.equal(player.heldItemUsed, false)
+})
+
+test('Metronome calls a real move', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({ name: 'Player', isPlayer: true, moves: ['metronome'], speed: 200 }),
+      enemy = battler({ name: 'Foe', moves: ['splash'] })
+    turn(player, enemy)
+    assert.notEqual(player.lastMove, 'metronome')
+    assert.ok(moveData[player.lastMove], 'the called move exists')
+  })
+})
+
+test('Copycat and Mirror Move repeat the target last move', () => {
+  const run = (/** @type {string} */ move) => {
+    const player = battler({ name: 'Player', isPlayer: true, moves: [move], speed: 200 }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], lastMove: 'tackle' })
+    turn(player, enemy)
+    return player.lastMove
+  }
+  assert.equal(run('copycat'), 'tackle')
+  assert.equal(run('mirrorMove'), 'tackle')
+})
+
+test('Nature Power becomes a terrain move', () => {
+  const run = (/** @type {any} */ terrain) => {
+    const player = battler({ name: 'Player', isPlayer: true, moves: ['naturePower'], speed: 200 }),
+      enemy = battler({ name: 'Foe', moves: ['splash'] })
+    resolveBattleTurn(player, enemy, false, false, null, null, false, terrain)
+    return player.lastMove
+  }
+  assert.equal(run(null), 'triAttack')
+  assert.equal(run({ type: 'electric', turns: 5 }), 'thunderbolt')
+  assert.equal(run({ type: 'grassy', turns: 5 }), 'energyBall')
 })

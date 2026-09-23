@@ -51,6 +51,7 @@ export function updateVolatile(state, action) {
         lockOnTurns: enemyVolatile.lockOnTurns ?? 0,
         abilityOverride: enemyVolatile.abilityOverride ?? null,
         abilitySuppressed: enemyVolatile.abilitySuppressed ?? !1,
+        typesOverride: enemyVolatile.typesOverride ?? null,
       }),
     {
       ...state,

@@ -6,6 +6,7 @@ import { installGameData } from './helpers/game-data.mjs'
 const data = installGameData()
 
 const { abilityAttackMultiplier, abilityChangesMoveType, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityEffectivenessMultiplier, abilityPreventsStatus, fieldAuraMultiplier, onHitStatBoost, ruinDefenseMultiplier, ruinOffenseMultiplier } = await import('../src/game/abilities.js')
+const { heldLeftoversHeal } = await import('../src/game/held-items.js')
 const { calculateDamage, resolveBattleTurn } = await import('../src/game/combat.js')
 const { abilityDisplayName, rollAbility } = await import('../src/game/pokemon.js')
 const { moveData } = await import('../src/data/gameData.js')
@@ -1020,4 +1021,121 @@ test('Poison Touch, Scrappy, Own Tempo and Corrosion work', () => {
     resolveBattleTurn(corrodor, steel, false)
     assert.equal(steel.status, 'toxic')
   })
+})
+
+test('priority abilities change the turn order', () => {
+  withFixedRandom(0.9, () => {
+    const firstAttacker = (/** @type {string} */ move, ability) => {
+      const player = battler({ name: 'Player', isPlayer: true, moves: [move], speed: 40, ability }),
+        enemy = battler({ name: 'Foe', moves: ['tackle'], speed: 200 })
+      return resolveBattleTurn(player, enemy, false).find(
+        (/** @type {any} */ event) => event.type === 'attack'
+      ).message
+    }
+    assert.match(firstAttacker('growl', undefined), /^Foe/, 'the faster foe moves first normally')
+    assert.match(firstAttacker('growl', 'prankster'), /^Player/, 'Prankster gives a status move priority')
+    assert.match(
+      firstAttacker('gust', 'galeWings'),
+      /^Player/,
+      'Gale Wings gives a Flying move priority at full HP'
+    )
+  })
+})
+
+test('Compound Eyes sharpens accuracy', () => {
+  withFixedRandom(0.8, () => {
+    const missed = (/** @type {any} */ ability) => {
+      const player = battler({ name: 'Player', isPlayer: true, moves: ['thunder'], speed: 200, ability }),
+        enemy = battler({ name: 'Foe', moves: ['splash'] })
+      return resolveBattleTurn(player, enemy, false).some(
+        (/** @type {any} */ event) => event.message?.includes('missed')
+      )
+    }
+    assert.equal(missed(undefined), true, 'Thunder misses on an 80 roll')
+    assert.equal(missed('compoundEyes'), false, 'Compound Eyes makes it land')
+  })
+})
+
+test('Truant loafs every other turn', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({ name: 'Player', isPlayer: true, moves: ['tackle'], speed: 200, ability: 'truant' }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], currentHp: 2000, maxHp: 2000 })
+    resolveBattleTurn(player, enemy, false)
+    assert.equal(player.truantSkip, true, 'acted on the first turn')
+    const second = resolveBattleTurn(player, enemy, false)
+    assert.ok(second.some((/** @type {any} */ event) => event.message?.includes('loafing')))
+    assert.equal(player.truantSkip, false)
+  })
+})
+
+test('Slow Start halves Attack until it wears off', () => {
+  withFixedRandom(0.5, () => {
+    const damage = (/** @type {any} */ ability) => {
+      const player = battler({
+          name: 'Player',
+          isPlayer: true,
+          moves: ['tackle'],
+          speed: 200,
+          attack: 200,
+          ability,
+        }),
+        enemy = battler({ name: 'Foe', moves: ['splash'], currentHp: 2000, maxHp: 2000 })
+      resolveBattleTurn(player, enemy, false, !0)
+      return 2000 - enemy.currentHp
+    }
+    assert.ok(damage('slowStart') < damage(undefined), 'Slow Start halves the damage')
+  })
+})
+
+test('Klutz ignores the held item', () => {
+  assert.equal(heldLeftoversHeal(battler({ heldItem: 'leftovers' })) > 0, true)
+  assert.equal(heldLeftoversHeal(battler({ heldItem: 'leftovers', ability: 'klutz' })), 0)
+})
+
+test('Zen Mode transforms Darmanitan below half HP', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['tackle'],
+        speed: 200,
+        attack: 300,
+      }),
+      enemy = battler({
+        name: 'Darmanitan',
+        moves: ['splash'],
+        ability: 'zenMode',
+        speciesKey: 'darmanitan',
+        currentHp: 120,
+        maxHp: 200,
+      })
+    resolveBattleTurn(player, enemy, false)
+    assert.equal(enemy.speciesKey, 'darmanitan-z')
+  })
+})
+
+test('Forecast and Mimicry change the holder type', () => {
+  const castform = battler({
+      name: 'Castform',
+      isPlayer: true,
+      moves: ['splash'],
+      speed: 200,
+      ability: 'forecast',
+      speciesKey: 'castform',
+    }),
+    enemy = battler({ name: 'Foe', moves: ['splash'] })
+  resolveBattleTurn(castform, enemy, false, false, { type: 'rain', turns: 5 })
+  assert.deepEqual(castform.types, ['Water'])
+
+  const stunfisk = battler({
+      name: 'Stunfisk',
+      isPlayer: true,
+      moves: ['splash'],
+      speed: 200,
+      ability: 'mimicry',
+      speciesKey: 'g-stunfisk',
+    }),
+    enemy2 = battler({ name: 'Foe', moves: ['splash'] })
+  resolveBattleTurn(stunfisk, enemy2, false, false, null, null, false, { type: 'electric', turns: 5 })
+  assert.deepEqual(stunfisk.types, ['Electric'])
 })

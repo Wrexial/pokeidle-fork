@@ -320,6 +320,8 @@ export function useGameLoop() {
               heldItemOverride: playerVolatile.heldItemOverride ?? null,
               heldItemOverridden: playerVolatile.heldItemOverridden ?? !1,
               formKey: playerVolatile.formKey ?? null,
+              truantSkip: playerVolatile.truantSkip ?? !1,
+              slowStartTurns: playerVolatile.slowStartTurns ?? 0,
               ivs: currentGameState.playerPokemon.ivs,
               nature: currentGameState.playerPokemon.nature,
             },

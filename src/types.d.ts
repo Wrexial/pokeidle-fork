@@ -262,6 +262,10 @@ type VolatileState = {
   heldItemOverridden?: boolean
   /** Mid-battle form (species key) the Pokemon has changed into. */
   formKey?: string | null
+  /** Truant's alternating loaf-around flag. */
+  truantSkip?: boolean
+  /** Turns of Slow Start left (halves Attack and Speed while above 0). */
+  slowStartTurns?: number
 }
 
 type GameAction = { type: string; payload?: any; [key: string]: any }

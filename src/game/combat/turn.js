@@ -74,6 +74,8 @@ function resolveCalledMove(moveId, target, terrain) {
  */
 function stealHeldItem(thief, victim, events, thiefIsPlayer) {
   if (thief.heldItem || !victim.heldItem) return
+  // Sticky Hold glues the item in place.
+  if (abilityOf(victim) === 'stickyHold') return
   const item = victim.heldItem
   thief.heldItem = item
   thief.heldItemOverride = item
@@ -86,6 +88,28 @@ function stealHeldItem(thief, victim, events, thiefIsPlayer) {
     message: `${thief.name} stole ${victim.name}'s held item!`,
     data: { target: thiefIsPlayer ? 'player' : 'enemy' },
   })
+}
+
+/**
+ * Priority after ability modifiers (Prankster, Gale Wings, Triage, Stall).
+ * @param {BattlePokemon} pokemon
+ * @param {Move | undefined} moveDef
+ * @returns {number}
+ */
+function effectivePriority(pokemon, moveDef) {
+  if (!moveDef) return 0
+  const ability = abilityOf(pokemon)
+  let priority = moveDef.priority ?? 0
+  if (ability === 'prankster' && moveDef.category === 'status') priority += 1
+  if (
+    ability === 'galeWings' &&
+    moveDef.type === 'Flying' &&
+    pokemon.currentHp >= pokemon.maxHp
+  )
+    priority += 1
+  if (ability === 'triage' && moveDef.effect?.type === 'heal') priority += 3
+  if (ability === 'stall') priority -= 1
+  return priority
 }
 
 /**
@@ -154,6 +178,33 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     if (terrainSetter)
       activeTerrain = { type: terrainSetter, turns: TERRAIN_TURNS }
   }
+  // Forecast and Mimicry change the holder's type with the weather / terrain.
+  for (const [mon, isPlayerSide] of /** @type {[any, boolean][]} */ ([ [player, !0], [enemy, !1] ])) {
+    const ability = abilityOf(mon)
+    if (ability === 'forecast') {
+      const type =
+        activeWeather?.type === 'sun' || activeWeather?.type === 'harshSunlight'
+          ? 'Fire'
+          : activeWeather?.type === 'rain' || activeWeather?.type === 'heavyRain'
+            ? 'Water'
+            : activeWeather?.type === 'snow' || activeWeather?.type === 'hail'
+              ? 'Ice'
+              : 'Normal'
+      mon.types = [type]
+      mon.typesOverride = [type]
+    } else if (ability === 'mimicry') {
+      const type = /** @type {Record<string, string>} */ ({
+        electric: 'Electric',
+        grassy: 'Grass',
+        misty: 'Fairy',
+        psychic: 'Psychic',
+      })[activeTerrain?.type ?? '']
+      if (type) {
+        mon.types = [type]
+        mon.typesOverride = [type]
+      }
+    }
+  }
   // Flinches only last the turn they were inflicted; clear any left over.
   ;(player.flinch = !1, enemy.flinch = !1)
   // Protect only lasts the turn it is used; clear any left over.
@@ -185,8 +236,8 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     // Trick Room makes the slower Pokemon move first.
     playerActsFirst = trickRoomActive ? playerSpeed <= enemySpeed : playerSpeed >= enemySpeed,
     attackOrder = [],
-    playerPriority = playerMustRecharge ? -10 : (playerMove?.priority ?? 0),
-    enemyPriority = enemyMustRecharge ? -10 : (enemyMove?.priority ?? 0)
+    playerPriority = playerMustRecharge ? -10 : effectivePriority(player, playerMove),
+    enemyPriority = enemyMustRecharge ? -10 : effectivePriority(enemy, enemyMove)
   playerPriority > enemyPriority
     ? attackOrder.push(
         {
@@ -261,6 +312,19 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     attack.attacker.lastMove = attack.moveId
     const moveDef = moveData[attack.moveId]
     if (!moveDef) continue
+    // Truant loafs around every other turn.
+    if (abilityOf(attack.attacker) === 'truant') {
+      if (attack.attacker.truantSkip) {
+        attack.attacker.truantSkip = !1
+        events.push({
+          type: 'status',
+          message: `${attack.attacker.name} is loafing around!`,
+          data: { target: attack.isPlayer ? 'player' : 'enemy' },
+        })
+        continue
+      }
+      attack.attacker.truantSkip = !0
+    }
     // Stance Change turns Aegislash into Blade form for an attack and back for
     // King's Shield.
     if (abilityOf(attack.attacker) === 'stanceChange') {
@@ -306,8 +370,13 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       })
       continue
     }
-    // Psychic Terrain blocks priority moves against grounded Pokemon.
-    if ((moveDef.priority ?? 0) > 0 && terrainPreventsPriority(activeTerrain, attack.defender)) {
+    // Psychic Terrain and Dazzling / Queenly Majesty / Armor Tail block priority
+    // moves against the protected side.
+    if (
+      (moveDef.priority ?? 0) > 0 &&
+      (terrainPreventsPriority(activeTerrain, attack.defender) ||
+        ['dazzling', 'queenlyMajesty', 'armorTail'].includes(abilityOf(attack.defender) ?? ''))
+    ) {
       events.push({
         type: 'status',
         message: `${attack.defender.name} is protected by the terrain!`,
@@ -832,8 +901,14 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         }
       }
       else if (moveDef.effect?.type === 'itemSwap') {
-        const attackerItem = attack.attacker.heldItem ?? null,
-          defenderItem = attack.defender.heldItem ?? null
+        if (abilityOf(attack.attacker) === 'stickyHold' || abilityOf(attack.defender) === 'stickyHold') {
+          events.push({
+            type: 'status',
+            message: `${attack.attacker.name}'s ${moveDef.name} failed!`,
+          })
+        } else {
+          const attackerItem = attack.attacker.heldItem ?? null,
+            defenderItem = attack.defender.heldItem ?? null
         attack.attacker.heldItem = defenderItem
         attack.attacker.heldItemOverride = defenderItem
         attack.attacker.heldItemOverridden = !0
@@ -844,6 +919,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           type: 'status',
           message: `${attack.attacker.name} swapped held items with ${attack.defender.name}!`,
         })
+        }
       }
       else if (moveDef.effect?.type === 'bestow') {
         if (!attack.defender.heldItem && attack.attacker.heldItem) {
@@ -866,7 +942,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         }
       }
       else if (moveDef.effect?.type === 'corrosiveGas') {
-        if (attack.defender.heldItem) {
+        if (attack.defender.heldItem && abilityOf(attack.defender) !== 'stickyHold') {
           attack.defender.heldItem = null
           attack.defender.heldItemOverride = null
           attack.defender.heldItemOverridden = !0
@@ -906,12 +982,20 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       }
       continue
     }
-    // Weather rewrites Weather Ball's type/power, and abilities like Normalize,
-    // the -ate family and Liquid Voice rewrite the move type too.
-    const effectiveMove = abilityChangesMoveType(
-      attack.attacker,
-      applyWeatherToMove(activeWeather, moveDef)
-    )
+    // Weather rewrites Weather Ball's type/power, abilities like Normalize and
+    // the -ate family rewrite the move type, and Compound Eyes / Victory Star
+    // sharpen accuracy.
+    const baseMove = abilityChangesMoveType(
+        attack.attacker,
+        applyWeatherToMove(activeWeather, moveDef)
+      ),
+      accuracyMult =
+        (abilityOf(attack.attacker) === 'compoundEyes' ? 1.3 : 1) *
+        (abilityOf(attack.attacker) === 'victoryStar' ? 1.1 : 1),
+      effectiveMove =
+        accuracyMult === 1 || !(baseMove.accuracy > 0)
+          ? baseMove
+          : { ...baseMove, accuracy: Math.min(100, baseMove.accuracy * accuracyMult) }
     // Protean / Libero change the user's type to the move it is about to use.
     if (abilityOf(attack.attacker) === 'protean' || abilityOf(attack.attacker) === 'libero') {
       attack.attacker.types = [effectiveMove.type]
@@ -983,6 +1067,10 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         attack.attacker.currentHp <= attack.attacker.maxHp / 2
           ? 0.5
           : 1) *
+        (abilityOf(attack.attacker) === 'slowStart' && (attack.attacker.slowStartTurns ?? 0) > 0
+          ? 0.5
+          : 1) *
+        (abilityOf(attack.attacker) === 'flowerGift' && activeWeather?.type === 'sun' ? 1.5 : 1) *
         abilityAttackMultiplier(attack.attacker, effectiveMove) *
         ruinOffenseMultiplier(attack.defender, moveDef.category) *
         terrainAbilityMultiplier(
@@ -1015,7 +1103,16 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       defenderStage =
         abilityOf(attack.attacker) === 'unaware' ? 0 : getStatStage(attack.defender, defenseStatKey),
       accuracyStage = getStatStage(attack.attacker, 'accuracy'),
-      evasionStage = getStatStage(attack.defender, 'evasion'),
+      evasionStage =
+        getStatStage(attack.defender, 'evasion') +
+        (abilityOf(attack.defender) === 'sandVeil' && activeWeather?.type === 'sandstorm' ? 1 : 0) +
+        (abilityOf(attack.defender) === 'snowCloak' &&
+        (activeWeather?.type === 'snow' || activeWeather?.type === 'hail')
+          ? 1
+          : 0) +
+        (abilityOf(attack.defender) === 'tangledFeet' && (attack.defender.confusionTurns ?? 0) > 0
+          ? 1
+          : 0),
       damageResult = calculateDamage(
         attack.attacker.level,
         attackStat,
@@ -1404,6 +1501,15 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       attack.defender.currentHp <= attack.defender.maxHp / 2
     )
       changeBattleForm(attack.defender, 'zygarde-c', events, !attack.isPlayer)
+    // Zen Mode puts Darmanitan into its Zen form below half HP.
+    if (abilityOf(attack.defender) === 'zenMode') {
+      const galarian = attack.defender.speciesKey.startsWith('g-darmanitan'),
+        zenForm = galarian ? 'g-darmanitan-z' : 'darmanitan-z',
+        baseForm = galarian ? 'g-darmanitan' : 'darmanitan'
+      if (attack.defender.currentHp > 0 && attack.defender.currentHp <= attack.defender.maxHp / 2)
+        changeBattleForm(attack.defender, zenForm, events, !attack.isPlayer)
+      else changeBattleForm(attack.defender, baseForm, events, !attack.isPlayer)
+    }
     // Magician steals on the hit; Pickpocket steals on contact.
     if (abilityOf(attack.attacker) === 'magician')
       stealHeldItem(attack.attacker, attack.defender, events, attack.isPlayer)
@@ -1416,6 +1522,61 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       chance(0.3, deterministic)
     )
       applyStatus(attack.defender, 'poison', events, !attack.isPlayer, deterministic, activeTerrain, !0, attack.attacker)
+    // Further on-hit ability reactions.
+    const attackerAbility = abilityOf(attack.attacker),
+      defenderAbilityOnHit = abilityOf(attack.defender)
+    if (attackerAbility === 'stench' && chance(0.1, deterministic)) attack.defender.flinch = !0
+    if (attackerAbility === 'toxicChain' && chance(0.3, deterministic)) {
+      applyStatus(attack.defender, 'toxic', events, !attack.isPlayer, deterministic, activeTerrain, !0, attack.attacker)
+      if (attackerAbility === 'poisonPuppeteer') applyConfusion(attack.defender, events, !attack.isPlayer, deterministic)
+    }
+    if (defenderAbilityOnHit === 'cursedBody' && chance(0.3, deterministic)) {
+      attack.attacker.disabledMove = attack.moveId
+      attack.attacker.disableTurns = 4
+      events.push({
+        type: 'status',
+        message: `${attack.attacker.name}'s ${moveDef.name} was disabled!`,
+        data: { target: attack.isPlayer ? 'player' : 'enemy' },
+      })
+    }
+    if (defenderAbilityOnHit === 'cottonDown') {
+      const stages = attack.attacker.statStages ?? (attack.attacker.statStages = {}),
+        current = stages.speed ?? 0,
+        next = clampStatStage(current - 1)
+      if (next !== current && !abilityPreventsStatDrop(attack.attacker, 'speed')) {
+        stages.speed = next
+        events.push({
+          type: 'statChange',
+          message: `${attack.attacker.name}'s Speed fell!`,
+          data: { target: attack.isPlayer ? 'player' : 'enemy' },
+        })
+      }
+    }
+    if (defenderAbilityOnHit === 'sandSpit') activeWeather = { type: 'sandstorm', turns: WEATHER_TURNS }
+    if (defenderAbilityOnHit === 'seedSower') activeTerrain = { type: 'grassy', turns: TERRAIN_TURNS }
+    if (defenderAbilityOnHit === 'toxicDebris' && effectiveMove.category === 'physical') {
+      const side = attack.isPlayer ? activeHazards.player : activeHazards.enemy
+      side.toxicSpikes = Math.min(2, side.toxicSpikes + 1)
+    }
+    if (defenderAbilityOnHit === 'wanderingSpirit' && moveMakesContact(effectiveMove)) {
+      const attackerAbility2 = abilityOf(attack.attacker)
+      if (attackerAbility2 && attackerAbility2 !== 'wanderingSpirit') {
+        attack.attacker.abilityOverride = defenderAbilityOnHit
+        attack.attacker.abilitySuppressed = !1
+        attack.defender.abilityOverride = attackerAbility2
+        attack.defender.abilitySuppressed = !1
+      }
+    }
+    if (defenderAbilityOnHit === 'perishBody' && moveMakesContact(effectiveMove)) {
+      if ((attack.attacker.perishTurns ?? 0) <= 0 && (attack.defender.perishTurns ?? 0) <= 0) {
+        attack.attacker.perishTurns = 3
+        attack.defender.perishTurns = 3
+        events.push({ type: 'status', message: 'Both battlers were afflicted by Perish Body!' })
+      }
+    }
+    // Analytic boosts the damage when the attacker moves last.
+    if (attackerAbility === 'analytic' && attackOrder[attackOrder.length - 1] === attack)
+      totalDamage = Math.max(1, Math.floor(totalDamage * 1.3))
     if (attack.defender.currentHp <= 0) {
       events.push({
         type: 'faint',
@@ -1434,6 +1595,27 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           data: {
             target: attack.isPlayer ? 'player' : 'enemy',
             damage: aftermath,
+            hpAfter: attack.attacker.currentHp,
+            hpMax: attack.attacker.maxHp,
+          },
+        })
+        attack.attacker.currentHp <= 0 &&
+          events.push({
+            type: 'faint',
+            message: `${attack.attacker.name} fainted!`,
+            data: { target: attack.isPlayer ? 'player' : 'enemy' },
+          })
+      }
+      // Innards Out deals the fainted Pokemon's remaining HP to the attacker.
+      if (abilityOf(attack.defender) === 'innardsOut' && attack.attacker.currentHp > 0) {
+        const innards = Math.max(1, attack.defender.maxHp)
+        attack.attacker.currentHp = Math.max(0, attack.attacker.currentHp - innards)
+        events.push({
+          type: 'recoil',
+          message: `${attack.attacker.name} was hurt by Innards Out! (${innards} damage)`,
+          data: {
+            target: attack.isPlayer ? 'player' : 'enemy',
+            damage: innards,
             hpAfter: attack.attacker.currentHp,
             hpMax: attack.attacker.maxHp,
           },

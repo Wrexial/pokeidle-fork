@@ -217,8 +217,11 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
         },
       })
     }
-    // Ripen doubles a berry's healing.
-    const berryHeal = heldBerryHeal(pokemon) * (abilityOf(pokemon) === 'ripen' ? 2 : 1)
+    // Ripen doubles a berry's healing; an opponent's Unnerve blocks it entirely.
+    const berryHeal =
+      abilityOf(isPlayerSide ? enemy : player) === 'unnerve'
+        ? 0
+        : heldBerryHeal(pokemon) * (abilityOf(pokemon) === 'ripen' ? 2 : 1)
     if (berryHeal > 0) {
       pokemon.currentHp = Math.min(pokemon.maxHp, pokemon.currentHp + berryHeal)
       pokemon.heldItemUsed = !0
@@ -407,6 +410,7 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
     if ((pokemon.tailwindTurns ?? 0) > 0) pokemon.tailwindTurns -= 1
     if ((pokemon.trickRoomTurns ?? 0) > 0) pokemon.trickRoomTurns -= 1
     if ((pokemon.destinyBondTurns ?? 0) > 0) pokemon.destinyBondTurns -= 1
+    if ((pokemon.slowStartTurns ?? 0) > 0) pokemon.slowStartTurns -= 1
     // Perish Song counts both sides down to a faint that ignores abilities.
     if ((pokemon.perishTurns ?? 0) > 0) {
       pokemon.perishTurns -= 1

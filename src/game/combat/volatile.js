@@ -56,6 +56,8 @@ export function createVolatileState() {
     heldItemOverride: null,
     heldItemOverridden: !1,
     formKey: null,
+    truantSkip: !1,
+    slowStartTurns: 0,
   }
 }
 
@@ -109,6 +111,8 @@ export function volatileStateFromBattle(pokemon) {
     heldItemOverride: pokemon.heldItemOverride ?? null,
     heldItemOverridden: pokemon.heldItemOverridden ?? !1,
     formKey: pokemon.formKey ?? null,
+    truantSkip: pokemon.truantSkip ?? !1,
+    slowStartTurns: pokemon.slowStartTurns ?? 0,
   }
 }
 
@@ -171,6 +175,7 @@ export function effectiveSpeed(pokemon, weather, terrain = null) {
   if (ability === 'quickFeet' && pokemon.status) speed *= 1.5
   if (ability === 'unburden' && pokemon.heldItemUsed) speed *= 2
   if (ability === 'defeatist' && pokemon.currentHp <= pokemon.maxHp / 2) speed *= 0.5
+  if (ability === 'slowStart' && (pokemon.slowStartTurns ?? 0) > 0) speed *= 0.5
   if (ability === 'surgeSurfer' && terrain?.type === 'electric') speed *= 2
   if (ability === 'protosynthesis' && weather?.type === 'sun') speed *= 1.5
   if (ability === 'quarkDrive' && terrain?.type === 'electric') speed *= 1.5
@@ -236,6 +241,8 @@ export function applyEntryAbility(source, target, events, sourceIsPlayer) {
         data: { target: sourceIsPlayer ? 'player' : 'enemy' },
       })
     }
+  } else if (ability === 'slowStart') {
+    source.slowStartTurns = 5
   } else if (ability === 'zeroToHero' && source.speciesKey === 'palafin') {
     changeBattleForm(source, 'palafin-h', events, sourceIsPlayer)
   } else if (

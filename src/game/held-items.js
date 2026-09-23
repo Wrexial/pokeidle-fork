@@ -1,6 +1,7 @@
 // Held-item effects. Like abilities, the battle engine (src/game/combat.js)
 // reads these pure lookups; the acquisition/equip UI lives elsewhere.
 import { heldItems } from '../data/items.js'
+import { abilityOf } from './abilities.js'
 
 const HELD_ITEM_KEYS = Object.keys(heldItems)
 
@@ -21,6 +22,8 @@ function heldItemOf(pokemon) {
 
 /** @param {BattlePokemon} pokemon */
 function heldItemEffect(pokemon) {
+  // Klutz ignores the holder's held item entirely.
+  if (abilityOf(pokemon) === 'klutz') return null
   const heldItem = heldItemOf(pokemon)
   return heldItem ? (heldItems[heldItem]?.effect ?? null) : null
 }
@@ -75,11 +78,14 @@ export function heldLeftoversHeal(pokemon) {
 
 /** Sitrus-style berry healing once below its threshold. @param {BattlePokemon} pokemon */
 export function heldBerryHeal(pokemon) {
-  const effect = heldItemEffect(pokemon)
+  const effect = heldItemEffect(pokemon),
+    // Gluttony triggers the berry earlier (at half HP instead of the usual).
+    threshold =
+      abilityOf(pokemon) === 'gluttony' && effect ? Math.max(effect.threshold, 0.5) : effect?.threshold
   return effect?.type === 'berry' &&
     !pokemon.heldItemUsed &&
     pokemon.currentHp > 0 &&
-    pokemon.currentHp <= pokemon.maxHp * effect.threshold
+    pokemon.currentHp <= pokemon.maxHp * threshold
     ? Math.max(1, Math.floor(pokemon.maxHp * effect.heal))
     : 0
 }

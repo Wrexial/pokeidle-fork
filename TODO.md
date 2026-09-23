@@ -227,7 +227,14 @@ hooks (Trick / Switcheroo / Bestow / Corrosive Gas / Magician / Pickpocket), the
 mid-battle form-change subsystem (Stance Change, Zero to Hero, Power Construct,
 Schooling, Imposter, Battle Bond) and the reaction batch (Rattled, Merciless,
 No Guard, Defeatist, Skill Link, Serene Grace, Aftermath, Poison Touch, Scrappy,
-Inner Focus / Own Tempo / Oblivious, Corrosion, Cheek Pouch).
+Inner Focus / Own Tempo / Oblivious, Corrosion, Cheek Pouch), the priority /
+accuracy batch (Prankster, Gale Wings, Triage, Stall, Dazzling / Queenly
+Majesty / Armor Tail, Compound Eyes, Victory Star, Sand Veil / Snow Cloak /
+Tangled Feet), the utility/reaction batch (Truant, Slow Start, Klutz, Sticky
+Hold, Unnerve, Gluttony, Stench, Analytic, Toxic Chain, Toxic Debris, Poison
+Puppeteer, Cursed Body, Cotton Down, Sand Spit, Seed Sower, Innards Out,
+Wandering Spirit, Perish Body) and the form/type batch (Zen Mode, Forecast,
+Mimicry, Flower Gift).
 `abilityPreventsStatus` also now treats badly-poisoned as poison
 (Immunity / Pastel Veil).
 

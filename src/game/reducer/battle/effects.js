@@ -57,6 +57,8 @@ export function updateVolatile(state, action) {
         heldItemOverride: enemyVolatile.heldItemOverride ?? null,
         heldItemOverridden: enemyVolatile.heldItemOverridden ?? !1,
         formKey: enemyVolatile.formKey ?? null,
+        truantSkip: enemyVolatile.truantSkip ?? !1,
+        slowStartTurns: enemyVolatile.slowStartTurns ?? 0,
       }),
     {
       ...state,

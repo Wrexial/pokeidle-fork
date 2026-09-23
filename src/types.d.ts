@@ -240,6 +240,12 @@ type VolatileState = {
   trickRoomTurns?: number
   /** Turns Destiny Bond drags down whoever faints the holder (0 when off). */
   destinyBondTurns?: number
+  /** Ingrain heals this Pokemon each end of turn. */
+  ingrained?: boolean
+  /** The next damaging move is a guaranteed critical hit. */
+  laserFocus?: boolean
+  /** The next damaging move cannot miss (Lock-On / Mind Reader). */
+  lockOnTurns?: number
 }
 
 type GameAction = { type: string; payload?: any; [key: string]: any }

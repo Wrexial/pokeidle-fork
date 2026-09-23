@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.38.9'
+export const GAME_VERSION = '0.38.10'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.38.10',
+      subtitle: 'Focus & Recovery',
+      sections: [
+        {
+          heading: 'Battle',
+          items: [
+            'Ingrain now heals the user a little each turn, Laser Focus guarantees the next hit is a critical, and Lock-On (and Mind Reader) make the next hit land',
+            'Life Dew, Jungle Healing and Lunar Blessing now heal the user (the last two also cure status)',
+          ],
+        },
+      ],
+    },
     {
       version: '0.38.9',
       subtitle: 'Tailwind & Trick Room',

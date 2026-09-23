@@ -306,6 +306,9 @@ export function useGameLoop() {
               tailwindTurns: playerVolatile.tailwindTurns ?? 0,
               trickRoomTurns: playerVolatile.trickRoomTurns ?? 0,
               destinyBondTurns: playerVolatile.destinyBondTurns ?? 0,
+              ingrained: playerVolatile.ingrained ?? !1,
+              laserFocus: playerVolatile.laserFocus ?? !1,
+              lockOnTurns: playerVolatile.lockOnTurns ?? 0,
             },
             enemyBattlePokemon = {
               ...currentGameState.enemyPokemon,

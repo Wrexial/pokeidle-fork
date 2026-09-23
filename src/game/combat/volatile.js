@@ -44,6 +44,9 @@ export function createVolatileState() {
     tailwindTurns: 0,
     trickRoomTurns: 0,
     destinyBondTurns: 0,
+    ingrained: !1,
+    laserFocus: !1,
+    lockOnTurns: 0,
   }
 }
 
@@ -86,6 +89,9 @@ export function volatileStateFromBattle(pokemon) {
     tailwindTurns: pokemon.tailwindTurns ?? 0,
     trickRoomTurns: pokemon.trickRoomTurns ?? 0,
     destinyBondTurns: pokemon.destinyBondTurns ?? 0,
+    ingrained: pokemon.ingrained ?? !1,
+    laserFocus: pokemon.laserFocus ?? !1,
+    lockOnTurns: pokemon.lockOnTurns ?? 0,
   }
 }
 

@@ -113,6 +113,17 @@ const MOVE_OVERRIDES = {
   tailwind: { effect: { type: 'tailwind', target: 'self' } },
   trickRoom: { effect: { type: 'trickRoom', target: 'self' }, priority: -7 },
   destinyBond: { effect: { type: 'destinyBond', target: 'self' } },
+  // Ingrain heals each turn; Laser Focus guarantees the next hit crits; Lock-On
+  // and Mind Reader make the next hit land.
+  ingrain: { effect: { type: 'ingrain', target: 'self' } },
+  laserFocus: { effect: { type: 'laserFocus', target: 'self' } },
+  lockOn: { effect: { type: 'lockOn', target: 'self' } },
+  mindReader: { effect: { type: 'lockOn', target: 'self' } },
+  // Single-target ally heals; in singles they heal the user. Life Dew heals the
+  // side, Jungle Healing / Lunar Blessing also cure status.
+  lifeDew: { effect: { type: 'heal', percentage: 25 } },
+  jungleHealing: { effect: { type: 'heal', percentage: 25, statusCure: true } },
+  lunarBlessing: { effect: { type: 'heal', percentage: 25, statusCure: true } },
   // --- Entry hazards ---
   stealthRock: { effect: { type: 'hazard', hazard: 'stealthRock' } },
   spikes: { effect: { type: 'hazard', hazard: 'spikes' } },

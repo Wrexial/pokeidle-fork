@@ -46,6 +46,9 @@ export function updateVolatile(state, action) {
         tailwindTurns: enemyVolatile.tailwindTurns ?? 0,
         trickRoomTurns: enemyVolatile.trickRoomTurns ?? 0,
         destinyBondTurns: enemyVolatile.destinyBondTurns ?? 0,
+        ingrained: enemyVolatile.ingrained ?? !1,
+        laserFocus: enemyVolatile.laserFocus ?? !1,
+        lockOnTurns: enemyVolatile.lockOnTurns ?? 0,
       }),
     {
       ...state,

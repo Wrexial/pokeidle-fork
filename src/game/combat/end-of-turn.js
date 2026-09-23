@@ -259,6 +259,20 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
         },
       })
     }
+    // Ingrain heals its holder a little each turn.
+    if (pokemon.ingrained && pokemon.currentHp < pokemon.maxHp) {
+      const ingrainHeal = Math.max(1, Math.floor(pokemon.maxHp / 16))
+      pokemon.currentHp = Math.min(pokemon.maxHp, pokemon.currentHp + ingrainHeal)
+      events.push({
+        type: 'heal',
+        message: `${pokemon.name} absorbed nutrients with its roots! (+${ingrainHeal} HP)`,
+        data: {
+          target: isPlayerSide ? 'player' : 'enemy',
+          hpAfter: pokemon.currentHp,
+          hpMax: pokemon.maxHp,
+        },
+      })
+    }
     // A pending Wish heals its side once its timer runs out.
     if ((pokemon.wishTurns ?? 0) > 0) {
       pokemon.wishTurns -= 1

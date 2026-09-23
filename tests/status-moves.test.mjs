@@ -45,6 +45,17 @@ function withZeroRandom(body) {
   }
 }
 
+/** Run `body` with Math.random pinned to `value`. @param {number} value @param {() => void} body */
+function withFixedRandom(value, body) {
+  const originalRandom = Math.random
+  try {
+    Math.random = () => value
+    body()
+  } finally {
+    Math.random = originalRandom
+  }
+}
+
 test('the new utility moves carry their effects', () => {
   assert.equal(moveData.focusEnergy.effect.type, 'focusEnergy')
   assert.equal(moveData.aquaRing.effect.type, 'aquaRing')
@@ -61,6 +72,12 @@ test('the new utility moves carry their effects', () => {
   assert.equal(moveData.trickRoom.effect.type, 'trickRoom')
   assert.equal(moveData.trickRoom.priority, -7)
   assert.equal(moveData.destinyBond.effect.type, 'destinyBond')
+  assert.equal(moveData.ingrain.effect.type, 'ingrain')
+  assert.equal(moveData.laserFocus.effect.type, 'laserFocus')
+  assert.equal(moveData.lockOn.effect.type, 'lockOn')
+  assert.equal(moveData.mindReader.effect.type, 'lockOn')
+  assert.equal(moveData.lifeDew.effect.type, 'heal')
+  assert.equal(moveData.lunarBlessing.effect.statusCure, true)
 })
 
 test('Focus Energy raises the user critical-hit stage', () => {
@@ -270,4 +287,88 @@ test('Destiny Bond drags down the attacker that lands the KO', () => {
     assert.equal(player.currentHp, 0, 'the holder faints')
     assert.equal(enemy.currentHp, 0, 'and takes the attacker with it')
   })
+})
+
+test('Ingrain heals its holder each end of turn', () => {
+  const player = battler({
+      name: 'Player',
+      isPlayer: true,
+      moves: ['splash'],
+      speed: 200,
+      currentHp: 100,
+      maxHp: 400,
+      ingrained: true,
+    }),
+    enemy = battler({ name: 'Foe', moves: ['splash'] })
+  turn(player, enemy)
+  assert.equal(player.currentHp, 125, '1/16 of 400 HP')
+})
+
+test('Laser Focus guarantees a critical hit on the next move', () => {
+  withFixedRandom(0.99, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['tackle'],
+        speed: 200,
+        laserFocus: true,
+      }),
+      enemy = battler({ name: 'Foe', moves: ['splash'] })
+    const events = turn(player, enemy)
+    assert.ok(
+      events.some((/** @type {any} */ event) => event.type === 'critical'),
+      'the hit is a critical'
+    )
+    assert.equal(player.laserFocus, false, 'and is consumed')
+  })
+})
+
+test('Lock-On makes the next move land', () => {
+  withFixedRandom(0.99, () => {
+    const make = (/** @type {number} */ lockOnTurns) => {
+      const player = battler({
+          name: 'Player',
+          isPlayer: true,
+          moves: ['thunder'],
+          speed: 200,
+          lockOnTurns,
+        }),
+        enemy = battler({ name: 'Foe', moves: ['splash'] })
+      const events = turn(player, enemy)
+      return events.some((/** @type {any} */ event) => event.message?.includes('missed'))
+    }
+    assert.equal(make(0), true, 'Thunder misses on a bad roll')
+    assert.equal(make(2), false, 'Lock-On makes it land')
+  })
+})
+
+test('Life Dew heals a quarter of the user HP', () => {
+  const player = battler({
+      name: 'Player',
+      isPlayer: true,
+      moves: ['lifeDew'],
+      speed: 200,
+      currentHp: 100,
+      maxHp: 400,
+    }),
+    enemy = battler({ name: 'Foe', moves: ['splash'] })
+  turn(player, enemy)
+  assert.equal(player.currentHp, 200)
+})
+
+test('Jungle Healing heals and cures status', () => {
+  const player = battler({
+      name: 'Player',
+      isPlayer: true,
+      moves: ['jungleHealing'],
+      speed: 200,
+      currentHp: 100,
+      maxHp: 400,
+      status: 'burn',
+      statusTurns: 0,
+    }),
+    enemy = battler({ name: 'Foe', moves: ['splash'] })
+  turn(player, enemy)
+  assert.equal(player.currentHp, 200)
+  assert.equal(player.status, null)
 })

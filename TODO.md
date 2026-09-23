@@ -1,6 +1,6 @@
 # TODO
 
-Open ideas and follow-ups. Current game version: **0.38.9**
+Open ideas and follow-ups. Current game version: **0.38.10**
 (`src/data/changelog.js`). Finished work lives in the changelog, not here — this
 file only tracks what is **still open**. See `AGENTS.md` for architecture,
 commands and data conventions.
@@ -165,22 +165,26 @@ Healing, multi-hit, crit stages, Protect, statuses, screens, entry hazards,
 Taunt/Substitute, weather setters, Haze/Clear Smog, Weather Ball / weather
 accuracy and the terrain synergy abilities have all shipped.
 
-**Shipped (0.38.7–0.38.9):** Focus Energy (adds 2 crit stages for the battle),
-Aqua Ring (heals 1/16 each turn), Wish (heals half the user's HP at the end of
-the next turn), Yawn (sleeps the target at the end of the next turn),
+**Shipped (0.38.7–0.38.10):** Focus Energy (adds 2 crit stages for the battle),
+Aqua Ring / Ingrain (heal each turn), Wish (heals half the user's HP at the end
+of the next turn), Yawn (sleeps the target at the end of the next turn),
 Topsy-Turvy (reverses the target's stat changes), Pain Split (averages both HP
 bars), Safeguard (blocks opponent status), Mist (blocks stat drops), Encore
 (locks the target into its last move), Disable (blocks the target's last move),
 Perish Song (both sides faint after three turns), Tailwind (doubles the side's
-Speed), Trick Room (reverses the speed order) and Destiny Bond (takes the
-attacker down). These are `effect` branches (Encore/Disable also hook move
-selection, Tailwind/Trick Room feed turn order) backed by new volatile fields.
+Speed), Trick Room (reverses the speed order), Destiny Bond (takes the attacker
+down), Laser Focus (next hit crits), Lock-On / Mind Reader (next hit lands) and
+the side heals Life Dew / Jungle Healing / Lunar Blessing. These are `effect`
+branches (Encore/Disable hook move selection; Tailwind/Trick Room/Laser Focus/
+Lock-On feed turn order and accuracy) backed by new volatile fields.
 
 Still open:
 
-- [ ] The healing-field moves (Heal Pulse's allies, Floral Healing, Life Dew,
-      Jungle Healing, Lunar Blessing, Healing Wish) — mostly pointless in
-      singles but could heal the active Pokemon.
+- [ ] Ability/type/item-swapping utility (Skill Swap, Role Play, Entrainment,
+      Gastro Acid, Worry Seed, Reflect Type, Soak, Power/Guard/Speed Swap,
+      Power/Guard Split, Heart Swap, Trick/Switcheroo, Recycle, Heal Block).
+- [ ] Move-calling moves (Metronome, Copycat, Mirror Move, Sleep Talk, Assist,
+      Me First, Nature Power).
 - [ ] The remaining doubles-only moves (After You, Ally Switch, Follow Me,
       Helping Hand, Quick/Wide Guard, Rage Powder, …) — the game is singles
       only, so these are intentionally inert.

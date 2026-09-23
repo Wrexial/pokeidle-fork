@@ -297,6 +297,17 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           },
         })
         moveDef.effect.status && applyStatus(attack.attacker, moveDef.effect.status, events, attack.isPlayer, deterministic, activeTerrain)
+        if (moveDef.effect.statusCure && attack.attacker.status) {
+          attack.attacker.status = null
+          attack.attacker.statusTurns = 0
+          events.push({
+            type: 'status',
+            message: `${attack.attacker.name}'s status was cured!`,
+            data: {
+              target: attack.isPlayer ? 'player' : 'enemy',
+            },
+          })
+        }
       } else if (moveDef.effect?.type === 'confusion') applyConfusion(attack.defender, events, !attack.isPlayer, deterministic)
       else if (moveDef.effect?.type === 'leechSeed')
         applyLeechSeed(attack.defender, events, !attack.isPlayer)
@@ -541,6 +552,32 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           data: { target: attack.isPlayer ? 'player' : 'enemy' },
         })
       }
+      else if (moveDef.effect?.type === 'ingrain') {
+        if (!attack.attacker.ingrained) {
+          attack.attacker.ingrained = !0
+          events.push({
+            type: 'status',
+            message: `${attack.attacker.name} planted its roots!`,
+            data: { target: attack.isPlayer ? 'player' : 'enemy' },
+          })
+        }
+      }
+      else if (moveDef.effect?.type === 'laserFocus') {
+        attack.attacker.laserFocus = !0
+        events.push({
+          type: 'statChange',
+          message: `${attack.attacker.name} focused its mind on a weak point!`,
+          data: { target: attack.isPlayer ? 'player' : 'enemy' },
+        })
+      }
+      else if (moveDef.effect?.type === 'lockOn') {
+        attack.attacker.lockOnTurns = 2
+        events.push({
+          type: 'status',
+          message: `${attack.attacker.name} took aim at ${attack.defender.name}!`,
+          data: { target: attack.isPlayer ? 'player' : 'enemy' },
+        })
+      }
       else if (moveDef.effect?.type === 'hazard') {
         const targetSide = /** @type {any} */ (
             attack.isPlayer ? activeHazards.enemy : activeHazards.player
@@ -601,6 +638,11 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       }
       continue
     }
+    // Laser Focus guarantees this hit crits; Lock-On / Mind Reader make it land.
+    const guaranteedCrit = attack.attacker.laserFocus === !0,
+      neverMiss = (attack.attacker.lockOnTurns ?? 0) > 0
+    if (guaranteedCrit) attack.attacker.laserFocus = !1
+    if (neverMiss) attack.attacker.lockOnTurns = 0
     const attackStat =
         (moveDef.category === 'physical'
           ? attack.attacker.status === 'burn'
@@ -645,10 +687,13 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         attack.defender.types,
         attackerStage,
         defenderStage,
-        (moveDef.critStage ?? 0) +
-          (abilityOf(attack.attacker) === 'superLuck' ? 1 : 0) +
-          (attack.attacker.focusEnergy ? 2 : 0),
-        !1,
+        Math.max(
+          (moveDef.critStage ?? 0) +
+            (abilityOf(attack.attacker) === 'superLuck' ? 1 : 0) +
+            (attack.attacker.focusEnergy ? 2 : 0),
+          guaranteedCrit ? 3 : 0
+        ),
+        neverMiss,
         accuracyStage,
         evasionStage,
         deterministic,
@@ -709,9 +754,12 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           attack.defender.types,
           attackerStage,
           defenderStage,
-          (moveDef.critStage ?? 0) +
-            (abilityOf(attack.attacker) === 'superLuck' ? 1 : 0) +
-            (attack.attacker.focusEnergy ? 2 : 0),
+          Math.max(
+            (moveDef.critStage ?? 0) +
+              (abilityOf(attack.attacker) === 'superLuck' ? 1 : 0) +
+              (attack.attacker.focusEnergy ? 2 : 0),
+            guaranteedCrit ? 3 : 0
+          ),
           !0,
           accuracyStage,
           evasionStage,

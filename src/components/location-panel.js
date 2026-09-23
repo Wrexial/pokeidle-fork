@@ -63,6 +63,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
       'catching',
       'bugCatching',
       'safari',
+      'academyQuiz',
       'mining',
       'gameCorner',
       'routeActivity',

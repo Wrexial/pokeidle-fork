@@ -626,6 +626,48 @@ Relevant code: `tools/generate-regions.cjs` (`LEAGUES`, gym placement,
 Effort: **medium** (mostly data + panel copy; the Paldea any-order gate is the
 only real progression change).
 
+## 41. Region-filler minigames (ideas)
+
+Every region now has *something* (fishing / foraging / rock smash / headbutt /
+diving, plus the fixed Safari / Game Corner / Bug Contest / Underground / Battle
+Tower), but Unova, Kalos, Alola, Galar and Paldea have no **signature** minigame
+of their own. These are the candidate ideas — all mechanically distinct from the
+sets that already exist, roughly one per region. Add one the same way as the
+others: a scene component, a `START_*`/`END_MINIGAME` reducer pair, a
+`MINIGAME_LOCATIONS` + `MINIGAME_START_ACTION` + `MINIGAME_INFO` entry, the phase
+added to the pause/busy lists, and tests.
+
+**Shipped (0.21.0):** the Academy Quiz (Paldea, Mesagoza). The rest are open.
+
+- [ ] **Poké Pelago (Alola)** — M. An idle-within-idle: assign boxed Pokémon to
+      islands (berry fields, bean farm, training, caves) that produce resources
+      over real time / battle counts. Reuses the garden/companion tick infra.
+- [ ] **Voltorb Flip (Unova)** — M. A 5×5 deduction/risk board: each row and
+      column advertises its Voltorb count and score total; flip safe tiles for
+      coins, avoid the bombs.
+- [ ] **Poké Radar chaining (Sinnoh)** — M. Memory/risk: pick the one shaking
+      grass patch to extend a chain; a wrong pick breaks it, and longer chains
+      give better shiny odds. Feeds the existing shiny chain.
+- [ ] **Dynamax Adventures (Galar)** — L. A roguelike raid gauntlet: choose a
+      path through three encounters, pick a teammate after each, then a
+      legendary boss. Reuses the combat pipeline.
+- [ ] **Auction House (Kalos/Unova)** — M. Bid against NPCs for rare lots;
+      overbid and you lose. An economic push-your-luck break from the timing
+      games.
+- [ ] **Pokémon Contest (Hoenn)** — M. Appeal scoring: pick a move each round,
+      match the contest theme, score against rivals. Reuses the Bug Contest
+      ranking/prize UI.
+- [ ] **Battle Royal (Alola)** — M. Wave survival in a time limit with your
+      party; rewards scale with depth. A combat gauntlet, not a puzzle.
+- [ ] **Pokéathlon (Johto/Sinnoh)** — M–L. Three micro-events (mash sprint,
+      timing hurdle, target throw) scored together.
+
+Relevant code: `src/game/minigames/` (one module per game), `registry.js`
+(`MINIGAME_LOCATIONS` / `MINIGAME_INFO`), `src/components/*-scene.js`,
+`src/game/reducer/minigames.js`, and the existing scenes to mirror.
+
+Effort: **small–medium each**, **large as a full set** (one region at a time).
+
 ---
 
 ## Map cleanup reference maps

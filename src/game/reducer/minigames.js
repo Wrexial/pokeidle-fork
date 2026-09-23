@@ -1,6 +1,6 @@
 // Reducer handlers for minigames actions. Split from game/reducer.js.
 
-import { BUG_CONTEST_COST, MINING_COST, ROUTE_ACTIVITIES, SAFARI_COST, routeActivityIds } from '../minigames.js'
+import { BUG_CONTEST_COST, MINING_COST, QUIZ_COST, ROUTE_ACTIVITIES, SAFARI_COST, routeActivityIds } from '../minigames.js'
 import { mapData } from '../../data/gameData.js'
 import { createIdleBattleState } from '../progression.js'
 import { enterMinigame } from '../reducer-helpers.js'
@@ -56,6 +56,21 @@ export function endSafari(state, action) {
 }
 
 /**
+ * Handle the `START_ACADEMY_QUIZ` action.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function startAcademyQuiz(state, action) {
+  return enterMinigame(
+    state,
+    'academyQuiz',
+    QUIZ_COST,
+    'You sat down for the Academy Quiz.'
+  )
+}
+
+/**
  * Handle the `START_MINING` action.
  * @param {GameState} state
  * @param {GameAction} action
@@ -87,7 +102,9 @@ export function startGameCorner(state, action) {
  * @returns {GameState}
  */
 export function endMinigame(state, action) {
-  return state.phase === 'mining' || state.phase === 'gameCorner'
+  return state.phase === 'mining' ||
+    state.phase === 'gameCorner' ||
+    state.phase === 'academyQuiz'
     ? { ...state, ...createIdleBattleState() }
     : state
 }

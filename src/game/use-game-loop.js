@@ -637,6 +637,7 @@ export function useGameLoop() {
       state.phase === 'starterSelect' ||
       state.phase === 'bugCatching' ||
       state.phase === 'safari' ||
+      state.phase === 'academyQuiz' ||
       state.phase === 'mining' ||
       state.phase === 'gameCorner' ||
       state.phase === 'routeActivity' ||

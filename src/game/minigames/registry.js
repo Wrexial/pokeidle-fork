@@ -1,6 +1,7 @@
 // Fixed minigame registry and panel metadata. Split from game/minigames.js.
 
 import { BUG_CONTEST_COST, BUG_CONTEST_RUSTLES } from './bug-contest.js'
+import { QUIZ_COST, QUIZ_LIVES, QUIZ_QUESTIONS } from './academy-quiz.js'
 import { SAFARI_BALLS, SAFARI_COST } from './safari.js'
 import { BATTLE_TOWER_LOCATION } from '../../data/config.js'
 import { SLOT_SPIN_COST } from './game-corner.js'
@@ -16,6 +17,7 @@ export const MINIGAME_LOCATIONS = {
   'johto-route-35': 'bugContest',
   'sinnoh-eterna-city': 'mining',
   safariZone: 'safari',
+  'paldea-mesagoza': 'academyQuiz',
 }
 
 /**
@@ -27,6 +29,7 @@ export const MINIGAME_START_ACTION = {
   bugContest: 'START_BUG_CONTEST',
   mining: 'START_MINING',
   safari: 'START_SAFARI',
+  academyQuiz: 'START_ACADEMY_QUIZ',
 }
 
 /**
@@ -61,5 +64,11 @@ export const MINIGAME_INFO = {
     cost: SAFARI_COST,
     action: 'ENTER SAFARI ZONE',
     hint: `Explore the reserve with ${SAFARI_BALLS} free Safari Balls. Bait calms a Pokemon (but makes it harder to catch) and a Rock makes it easier to catch (but more likely to run). Entry is $${SAFARI_COST.toLocaleString()}.`,
+  },
+  academyQuiz: {
+    title: 'Academy Quiz',
+    cost: QUIZ_COST,
+    action: 'SIT THE QUIZ',
+    hint: `Answer ${QUIZ_QUESTIONS} type-matchup questions against a 10-second clock. A wrong answer or a timeout costs one of your ${QUIZ_LIVES} lives; a good score earns money and candy. Entry is $${QUIZ_COST.toLocaleString()}.`,
   },
 }

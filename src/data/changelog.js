@@ -1,10 +1,22 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.20.0'
+export const GAME_VERSION = '0.21.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.21.0',
+      subtitle: 'Academy Quiz',
+      sections: [
+        {
+          heading: 'Minigames',
+          items: [
+            "Paldea's Mesagoza Academy now runs the Academy Quiz: answer 10 type-matchup questions against a 10-second clock with 3 lives. Most ask which type is super-effective; some ask about immunities. A good score pays money and candy, and a perfect run earns a Rare Candy",
+          ],
+        },
+      ],
+    },
     {
       version: '0.20.0',
       subtitle: 'Safari & Route Activities',

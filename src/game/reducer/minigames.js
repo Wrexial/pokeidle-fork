@@ -1,6 +1,7 @@
 // Reducer handlers for minigames actions. Split from game/reducer.js.
 
-import { BUG_CONTEST_COST, MINING_COST } from '../minigames.js'
+import { BUG_CONTEST_COST, MINING_COST, ROUTE_ACTIVITIES, routeActivityIds } from '../minigames.js'
+import { mapData } from '../../data/gameData.js'
 import { createIdleBattleState } from '../progression.js'
 import { enterMinigame } from '../reducer-helpers.js'
 
@@ -63,6 +64,39 @@ export function startGameCorner(state, action) {
 export function endMinigame(state, action) {
   return state.phase === 'mining' || state.phase === 'gameCorner'
     ? { ...state, ...createIdleBattleState() }
+    : state
+}
+
+/**
+ * Handle the `START_ROUTE_ACTIVITY` action. Only starts an activity that is
+ * actually available at the current location.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function startRouteActivity(state, action) {
+  const activityId = action.payload?.activityId,
+    activity = ROUTE_ACTIVITIES[activityId]
+  if (!activity || !routeActivityIds(mapData[state.currentLocation]).includes(activityId))
+    return state
+  const base = enterMinigame(
+    state,
+    'routeActivity',
+    0,
+    `You started ${activity.title.toLowerCase()}.`
+  )
+  return base === state ? state : { ...base, routeActivity: activityId }
+}
+
+/**
+ * Handle the `END_ROUTE_ACTIVITY` action.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function endRouteActivity(state, action) {
+  return state.phase === 'routeActivity'
+    ? { ...state, ...createIdleBattleState(), routeActivity: null }
     : state
 }
 

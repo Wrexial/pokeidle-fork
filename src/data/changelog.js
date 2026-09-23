@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.15.0'
+export const GAME_VERSION = '0.16.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.16.0',
+      subtitle: 'Route Minigames',
+      sections: [
+        {
+          heading: 'Minigames',
+          items: [
+            'Two new route activities: go Fishing on water routes and areas, or forage for berries and supplies in forests and gardens. Land the timing bar on the sweet spot \u2014 a hooked Pokemon starts a normal wild battle from that route',
+            'Minigames now launch from where you are standing: the Game Corner, Bug Catching Contest, Underground and route activities appear as cards in the location panel instead of the League tab',
+          ],
+        },
+      ],
+    },
     {
       version: '0.15.0',
       subtitle: 'Challenges & Save Slots',

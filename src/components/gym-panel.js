@@ -4,7 +4,6 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { championData, elite4Data, gymLeaderData, mapData, regions } from '../data/gameData.js'
 import { BATTLE_TOWER_REGION } from '../data/config.js'
-import { MINIGAME_BY_REGION, MINIGAME_INFO, MINIGAME_UNLOCK_LOCATION } from '../game/minigames.js'
 import { useGame } from '../game/context.js'
 import { buildTrainerTeam, buildTowerFloor } from '../game/progression.js'
 
@@ -25,14 +24,9 @@ export function GymPanel({ onOpenShop }) {
     defeatedRegionGyms = regionGyms.filter((gym) => state.defeatedGyms.includes(gym.id)).length,
     allBadgesEarned = regionGyms.length > 0 && defeatedRegionGyms >= regionGyms.length,
     isLeagueRematch = state.defeatedChampions.includes(regionId),
-    // Minigames unlock with a real location, but can only be played while the
-    // player is standing there — the panel shows a pointer otherwise. Hoenn's
-    // Battle Tower is that region's minigame too.
-    minigameLocation = MINIGAME_UNLOCK_LOCATION[regionId] ?? '',
-    minigameUnlocked = state.unlockedLocations.includes(minigameLocation),
-    atMinigameLocation = state.currentLocation === minigameLocation,
-    showTower = regionId === BATTLE_TOWER_REGION && atMinigameLocation,
-    regionMinigame = MINIGAME_BY_REGION[regionId],
+    // The Battle Tower keeps its own panel (it is a full battle flow rather
+    // than a minigame); every other minigame launches from the route it is on.
+    showTower = regionId === BATTLE_TOWER_REGION && state.currentLocation === 'hoenn-route-111',
     // The Elite Four reset on each prestige, so they must be beaten again
     // before the region can be prestiged once more.
     allEliteFourBeaten =
@@ -53,6 +47,7 @@ export function GymPanel({ onOpenShop }) {
       state.phase === 'bugCatching' ||
       state.phase === 'mining' ||
       state.phase === 'gameCorner' ||
+      state.phase === 'routeActivity' ||
       state.phase === 'wonderTrade',
     fightable = canFight && !isBusy
 
@@ -366,8 +361,8 @@ export function GymPanel({ onOpenShop }) {
           ],
         }),
       regionId === BATTLE_TOWER_REGION &&
-        minigameUnlocked &&
-        !atMinigameLocation &&
+        state.unlockedLocations.includes('hoenn-route-111') &&
+        !showTower &&
         jsxs('div', {
           className: 'gym-section',
           children: [
@@ -377,7 +372,7 @@ export function GymPanel({ onOpenShop }) {
             }),
             jsx('div', {
               className: 'tower-hint',
-              children: `Visit ${mapData[minigameLocation]?.name ?? minigameLocation} to climb the tower.`,
+              children: `Visit ${mapData['hoenn-route-111']?.name ?? 'Hoenn Route 111'} to climb the tower.`,
             }),
           ],
         }),
@@ -440,59 +435,6 @@ export function GymPanel({ onOpenShop }) {
                 nextTowerFloor > 1
                   ? `FIGHT FLOOR ${nextTowerFloor}`
                   : 'ENTER THE BATTLE TOWER',
-            }),
-          ],
-        }),
-      regionMinigame &&
-        MINIGAME_INFO[regionMinigame] &&
-        minigameUnlocked &&
-        !atMinigameLocation &&
-        jsxs('div', {
-          className: 'gym-section',
-          children: [
-            jsx('div', {
-              className: 'gym-section-title',
-              children: MINIGAME_INFO[regionMinigame].title,
-            }),
-            jsx('div', {
-              className: 'tower-hint',
-              children: `Visit ${mapData[minigameLocation]?.name ?? minigameLocation} to play.`,
-            }),
-          ],
-        }),
-      regionMinigame &&
-        MINIGAME_INFO[regionMinigame] &&
-        atMinigameLocation &&
-        jsxs('div', {
-          className: 'gym-section tower-section',
-          children: [
-            jsx('div', {
-              className: 'gym-section-title',
-              children: MINIGAME_INFO[regionMinigame].title,
-            }),
-            jsx('div', {
-              className: 'tower-hint',
-              children: MINIGAME_INFO[regionMinigame].hint,
-            }),
-            jsx('button', {
-              className: 'gym-fight-btn champion',
-              style: {
-                width: '100%',
-              },
-              disabled: state.money < MINIGAME_INFO[regionMinigame].cost || isBusy,
-              onClick: () => {
-                if (state.money < MINIGAME_INFO[regionMinigame].cost) return
-                // Every minigame is a full-stage scene now: hand the phase to
-                // the reducer rather than opening a modal.
-                if (regionMinigame === 'bugContest') dispatch({ type: 'START_BUG_CONTEST' })
-                else if (regionMinigame === 'mining') dispatch({ type: 'START_MINING' })
-                else if (regionMinigame === 'gameCorner')
-                  dispatch({ type: 'START_GAME_CORNER' })
-              },
-              children:
-                state.money < MINIGAME_INFO[regionMinigame].cost
-                  ? 'NOT ENOUGH MONEY'
-                  : `${MINIGAME_INFO[regionMinigame].action} ($${MINIGAME_INFO[regionMinigame].cost.toLocaleString()})`,
             }),
           ],
         }),

@@ -338,6 +338,8 @@ type GameState = {
   box: Pokemon[]
   /** A pending Wonder Trade shown in the `wonderTrade` phase. */
   wonderTradeState?: WonderTradeState | null
+  /** The route activity playing in the `routeActivity` phase, or null. */
+  routeActivity?: string | null
   /** Chosen box sort mode (see BOX_SORT_OPTIONS). */
   boxSort: string
   /** The most recently hatched egg, shown in the hatch popup until dismissed. */

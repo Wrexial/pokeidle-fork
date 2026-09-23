@@ -3349,6 +3349,64 @@ img {
     margin-bottom: 4px
 }
 
+.location-minigames {
+    display: flex;
+    flex-direction: column;
+    gap: 6px
+}
+
+.location-minigame-card {
+    padding: 8px;
+    background: #00000033;
+    border: 2px solid #483828
+}
+
+.location-minigame-head {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px
+}
+
+.location-minigame-icon {
+    font-size: 12px;
+    line-height: 1
+}
+
+.location-minigame-title {
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--gold)
+}
+
+.location-minigame-hint {
+    margin: 0 0 6px;
+    font-size: 8px;
+    line-height: 1.45;
+    color: #cbbfa6
+}
+
+.location-minigame-start {
+    width: 100%;
+    padding: 6px 8px;
+    font: inherit;
+    font-size: 8px;
+    font-weight: 700;
+    color: #1a1008;
+    background: var(--gold);
+    border: 2px solid var(--gold-dark);
+    cursor: pointer
+}
+
+.location-minigame-start:hover:not(:disabled) {
+    background: var(--gold-bright)
+}
+
+.location-minigame-start:disabled {
+    opacity: 0.5;
+    cursor: not-allowed
+}
+
 .zone-area-list {
     display: flex;
     flex-wrap: wrap;
@@ -7077,6 +7135,86 @@ img {
     justify-content: flex-end;
     gap: 8px;
     min-height: 24px
+}
+
+.route-activity-scene {
+    background-image: url(/backgrounds/beach.png)
+}
+
+.route-activity-scene.activity-forage {
+    background-image: url(/backgrounds/grassland.png)
+}
+
+.activity-hint {
+    max-width: 92%;
+    text-align: center;
+    font-size: 9px;
+    line-height: 1.5;
+    color: var(--parchment)
+}
+
+.activity-bar {
+    position: relative;
+    width: 90%;
+    height: 34px;
+    background: rgba(10,14,10,.8);
+    border: 2px solid #8a7040;
+    border-radius: 4px;
+    overflow: hidden
+}
+
+.activity-bar.locked .activity-marker {
+    opacity: 0.4
+}
+
+.activity-zone {
+    position: absolute;
+    top: 0;
+    bottom: 0
+}
+
+.activity-zone-hit {
+    background: #6ab04c55;
+    border-left: 1px solid #6ab04c;
+    border-right: 1px solid #6ab04c
+}
+
+.activity-zone-perfect {
+    background: #f0c85088;
+    border-left: 1px solid #f0c850;
+    border-right: 1px solid #f0c850
+}
+
+.activity-marker {
+    position: absolute;
+    top: -2px;
+    bottom: -2px;
+    width: 4px;
+    margin-left: -2px;
+    background: #fff;
+    box-shadow: 0 0 6px 2px #fff8
+}
+
+.activity-message {
+    min-height: 12px;
+    text-align: center;
+    font-size: 9px;
+    color: var(--gold)
+}
+
+.activity-found {
+    max-width: 92%;
+    text-align: center;
+    font-size: 8px;
+    line-height: 1.5;
+    color: #cbbfa6
+}
+
+.activity-actions {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    justify-content: flex-end
 }
 
 .wonder-trade-scene {

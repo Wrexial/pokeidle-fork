@@ -29,6 +29,7 @@ import { MasterBallScene } from './master-ball-scene.js'
 import { BugContestScene } from './bug-contest-scene.js'
 import { MiningScene } from './mining-scene.js'
 import { GameCornerScene } from './game-corner-scene.js'
+import { RouteActivityScene } from './route-activity-scene.js'
 import { WonderTradeScene } from './wonder-trade-scene.js'
 import { PokeballIcon } from './pokeball-icon.js'
 import { MoveManagerPanel } from './move-manager-panel.js'
@@ -54,6 +55,7 @@ export function BattleScene() {
   if (state.phase === 'bugCatching') return jsx(BugContestScene, {})
   if (state.phase === 'mining') return jsx(MiningScene, {})
   if (state.phase === 'gameCorner') return jsx(GameCornerScene, {})
+  if (state.phase === 'routeActivity') return jsx(RouteActivityScene, {})
   if (state.phase === 'wonderTrade') return jsx(WonderTradeScene, {})
   if (state.phase === 'dexComplete') return jsx(DexCompleteScene, {})
   if (!playerPokemon) return null

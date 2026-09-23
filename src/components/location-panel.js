@@ -3,8 +3,10 @@
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
 import { martShopItems } from '../data/items.js'
 import { encounterData, gymLeaderData, mapData, pokemonSpecies, regions, raidPoolFor } from '../data/gameData.js'
+import { MINIGAME_INFO, MINIGAME_LOCATIONS, MINIGAME_START_ACTION, ROUTE_ACTIVITIES, routeActivityIds } from '../game/minigames.js'
 import { useGame } from '../game/context.js'
 import { computeUnlockedLocations } from '../game/progression.js'
+import { MinigameCard } from './minigame-card.js'
 import { RouteEncounterGrid } from './route-encounter-grid.js'
 import { ShopPanel } from './shop-panel.js'
 
@@ -47,6 +49,22 @@ export function LocationPanel({ onOpenCatchSettings }) {
     routeKey = location?.routeKey,
     routeEncounters = routeKey ? encounterData[routeKey] : null
   if (!location) return null
+
+  // The minigame or route activity played from here. Fixed minigames live at a
+  // single POI; route activities depend on the terrain (water, undergrowth).
+  const fixedMinigameId = MINIGAME_LOCATIONS[location.id],
+    fixedMinigame = fixedMinigameId ? MINIGAME_INFO[fixedMinigameId] : null,
+    activityIds = routeActivityIds(location),
+    minigameBusy = [
+      'evolving',
+      'healing',
+      'catching',
+      'bugCatching',
+      'mining',
+      'gameCorner',
+      'routeActivity',
+      'wonderTrade',
+    ].includes(state.phase)
 
   /**
    * Whether a location is somewhere the player can travel to right now.
@@ -420,6 +438,50 @@ export function LocationPanel({ onOpenCatchSettings }) {
             routeKey,
             encounters: routeEncounters.encounters,
             onOpenCatchSettings: onOpenCatchSettings ?? (() => {}),
+          }),
+        (fixedMinigame || activityIds.length > 0) &&
+          jsxs('div', {
+            className: 'location-minigames',
+            children: [
+              jsx('div', {
+                className: 'location-section-title',
+                children: fixedMinigame ? 'Minigame' : 'Activities',
+              }),
+              fixedMinigame &&
+                jsx(MinigameCard, {
+                  icon: '⭐',
+                  title: fixedMinigame.title,
+                  hint: fixedMinigame.hint,
+                  actionLabel:
+                    state.money < fixedMinigame.cost
+                      ? 'NOT ENOUGH MONEY'
+                      : fixedMinigame.cost > 0
+                        ? `${fixedMinigame.action} ($${fixedMinigame.cost.toLocaleString()})`
+                        : fixedMinigame.action,
+                  disabled: minigameBusy || state.money < fixedMinigame.cost,
+                  onStart: () => dispatch({ type: MINIGAME_START_ACTION[fixedMinigameId] }),
+                }),
+              activityIds.map((activityId) => {
+                const activity = ROUTE_ACTIVITIES[activityId]
+                if (!activity) return null
+                return jsx(
+                  MinigameCard,
+                  {
+                    icon: activity.icon,
+                    title: activity.title,
+                    hint: activity.hint,
+                    actionLabel: activity.action,
+                    disabled:
+                      minigameBusy ||
+                      (activity.mode === 'encounter' &&
+                        !state.party.some((member) => member.currentHp > 0)),
+                    onStart: () =>
+                      dispatch({ type: 'START_ROUTE_ACTIVITY', payload: { activityId } }),
+                  },
+                  activityId
+                )
+              }),
+            ],
           }),
         frontierLockedLocations.length > 0 &&
           jsxs('div', {

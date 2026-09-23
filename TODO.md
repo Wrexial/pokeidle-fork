@@ -1,6 +1,6 @@
 # TODO
 
-Open ideas and follow-ups. Current game version: **0.15.0**
+Open ideas and follow-ups. Current game version: **0.16.0**
 (`src/data/changelog.js`). Finished work lives in the changelog, not here — this
 file only tracks what is **still open**. See `AGENTS.md` for architecture,
 commands and data conventions.
@@ -282,28 +282,27 @@ Kanto's Game Corner slots all landed in 0.12.0 as full-stage, game-pausing
 scenes that unlock from a location rather than the region Champion; the contest
 also has a top-3 podium with prizes and now covers every Bug-type.
 
-`src/game/minigames.js` holds `MINIGAME_BY_REGION` (region → minigame id),
-`MINIGAME_UNLOCK_LOCATION` and `MINIGAME_INFO` (title/cost/action/hint) plus
-each game's config/reward table. Adding the next one is a scene component + a
-`START_*`/`END_MINIGAME` reducer pair + one entry in each map. Covered by
-`tests/minigames.test.mjs`.
+**Shipped (0.16.0):** Fishing and Berry Foraging are route activities, attached
+by terrain (water routes / forests and gardens) rather than a fixed POI, and
+every minigame now launches from the location panel while you are standing there
+instead of from the League tab.
+
+`src/game/minigames.js` holds `MINIGAME_LOCATIONS` (location → fixed minigame),
+`MINIGAME_INFO` (title/cost/action/hint) and `ROUTE_ACTIVITIES` plus each game's
+config/reward table. Adding a fixed minigame is a scene component + a
+`START_*`/`END_MINIGAME` reducer pair + a `MINIGAME_LOCATIONS` entry; a route
+activity is an entry in `ROUTE_ACTIVITIES` and a terrain predicate. Covered by
+`tests/minigames.test.mjs` and `tests/route-activities.test.mjs`.
 
 ### 29a. Fishing minigame
 
-Encounter data already keeps water/fishing methods in the scrape but the game
-discards the method, so "fishing" is only flavour. Build a real one on water
-routes:
+**Shipped (0.16.0):** a timing-bar fishing activity on water routes that hooks a
+Water species from the route's own table and starts a normal wild battle, plus a
+Berry Foraging counterpart on forested routes. Still open:
 
 - [ ] Rod tiers (Old / Good / Super) as items, each unlocking deeper water —
-      then let the player cast from a water route for that route's water
-      species only.
-- [ ] A short timing minigame (a moving bar / reel-in window, Pokémon-style)
-      where a good result improves the catch chance or the level/shiny odds,
-      and a perfect one guarantees the encounter.
-- [ ] Tie the result into the battle/catch flow (start a normal encounter on
-      success) rather than a separate reward table, so it stays consistent.
-- [ ] Persist water-only encounter pools (or re-derive them from the scraper
-      `method`) so casting targets the right species.
+      and restricting a cast to the route's water species only (it currently
+      falls back to the full table when a route has no Water types).
 
 ### 29b. Companion / tamagotchi care
 

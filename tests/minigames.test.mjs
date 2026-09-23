@@ -5,25 +5,18 @@ import { installGameData } from './helpers/game-data.mjs'
 
 const gameData = installGameData()
 
-const { BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL, BUG_CONTEST_RUSTLES, MINIGAME_BY_REGION, MINIGAME_UNLOCK_LOCATION, MINING_COST, SLOT_JACKPOT, SLOT_PAYLINES, SLOT_REELS, SLOT_ROWS, SLOT_SPIN_COST, SLOT_SYMBOLS, bugCatchChance, bugContestPrize, bugFleeChance, bugStays, buildContestResults, contestPlayerRank, contestScore, rewardItemName, rollContestBug, rollMiningReward, spinSlots, throwNetBall } = await import(
+const { BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL, BUG_CONTEST_RUSTLES, MINIGAME_LOCATIONS, MINING_COST, SLOT_JACKPOT, SLOT_PAYLINES, SLOT_REELS, SLOT_ROWS, SLOT_SPIN_COST, SLOT_SYMBOLS, bugCatchChance, bugContestPrize, bugFleeChance, bugStays, buildContestResults, contestPlayerRank, contestScore, rewardItemName, rollContestBug, rollMiningReward, spinSlots, throwNetBall } = await import(
   '../src/game/minigames.js'
 )
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 const { consumableItems, evolutionItems } = await import('../src/data/items.js')
 const { createPokemon } = await import('../src/game/pokemon.js')
 
-test('Sinnoh hosts the mining minigame and Johto the bug contest', () => {
-  assert.equal(MINIGAME_BY_REGION.sinnoh, 'mining')
-  assert.equal(MINIGAME_BY_REGION.johto, 'bugContest')
-  assert.equal(MINIGAME_BY_REGION.kanto, 'gameCorner')
-})
-
-test('minigames unlock at their in-game locations', () => {
-  assert.equal(MINIGAME_UNLOCK_LOCATION.kanto, 'celadonCity')
-  assert.equal(MINIGAME_UNLOCK_LOCATION.johto, 'johto-route-35')
-  assert.equal(MINIGAME_UNLOCK_LOCATION.hoenn, 'hoenn-route-111')
-  assert.equal(MINIGAME_UNLOCK_LOCATION.sinnoh, 'sinnoh-eterna-city')
-  for (const locationId of Object.values(MINIGAME_UNLOCK_LOCATION))
+test('fixed minigames live at their in-game locations', () => {
+  assert.equal(MINIGAME_LOCATIONS.celadonCity, 'gameCorner')
+  assert.equal(MINIGAME_LOCATIONS['johto-route-35'], 'bugContest')
+  assert.equal(MINIGAME_LOCATIONS['sinnoh-eterna-city'], 'mining')
+  for (const locationId of Object.keys(MINIGAME_LOCATIONS))
     assert.ok(gameData.mapData[locationId], `${locationId} should be a real location`)
 })
 
@@ -291,8 +284,9 @@ test('COLLECT_MINING adds the found rewards to the bag', () => {
   assert.equal(next.inventory.fireStone, 1)
 })
 
-test('every minigame location is a map POI', async () => {
+test('every fixed minigame location is a map POI', async () => {
   const { POI_LOCATIONS } = await import('../src/game/minigames.js')
-  for (const id of Object.values(MINIGAME_UNLOCK_LOCATION)) assert.ok(POI_LOCATIONS.has(id))
+  for (const id of Object.keys(MINIGAME_LOCATIONS)) assert.ok(POI_LOCATIONS.has(id))
+  assert.ok(POI_LOCATIONS.has('hoenn-route-111'), 'the Battle Tower is a POI')
   assert.equal(POI_LOCATIONS.size, 4)
 })

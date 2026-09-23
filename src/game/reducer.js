@@ -6,7 +6,7 @@ import { emptyBattleHazards } from './hazards.js'
 import { applyExp, applySharedExp, bossBattleEnd, completeMasterBall, consumeEvent, debugMaxLevel, endRaid, executeTurn, startBossBattle, startEncounter, startRaid, startTower, startTrainerBattle, switchPlayerPokemon, throwMasterBall, trainerBattleEnd, trainerSendNextPokemon, updateVolatile, useEffectItem, usePokeball } from './reducer/battle.js'
 import { claimAchievementRewards, claimDailyGift, claimDexRewards, claimQuest, clearOfflineReport, completeDexCelebration, markCaught, markSeen, markShinyCaught, markShinySeen, refreshDailyEvent, refreshQuests, startDexCelebration, updateShinyChain } from './reducer/collection.js'
 import { buyItem, buyRewardItem, clearHeldItem, sellItem, setAlwaysCatchShinies, setCatchRule, toggleAutoCatch, toggleRouteCatchAll, useItemOnPokemon } from './reducer/items.js'
-import { claimMinigameReward, collectMining, endBugContest, endMinigame, payMinigameFee, startBugContest, startGameCorner, startMining } from './reducer/minigames.js'
+import { claimMinigameReward, collectMining, endBugContest, endMinigame, endRouteActivity, payMinigameFee, startBugContest, startGameCorner, startMining, startRouteActivity } from './reducer/minigames.js'
 import { boxToParty, catchPokemon, clearHatchResult, completeEvolution, completeWonderTrade, depositDaycare, evolutionStep, hatchDaycareEgg, partyToBox, releaseDuplicates, releaseHatchling, releasePokemon, reorderBox, reorderParty, setBoxSort, setMoves, setNickname, startEvolution, swapParty, swapPartyBox, toggleFavourite, withdrawDaycare, wonderTrade } from './reducer/pokemon.js'
 import { completeHealing, heal, healParty, healingStep, startHealing } from './reducer/recovery.js'
 import { addLog, clearLevelUp, dismissNotification, pushNotification, setChallengeMonotype, setSpeed, toggleAutoProceed, toggleBrowserNotifications, toggleChallengeLevelScale, toggleChallengeNuzlocke, toggleChallengeRandomizer, toggleColourblindTypes, toggleLargeText, toggleMusic, togglePause, toggleReducedMotion, toggleSfx } from './reducer/settings.js'
@@ -55,6 +55,8 @@ export const initialGameState = {
   evolutionState: null,
   /** A pending Wonder Trade swap shown in the `wonderTrade` phase. */
   wonderTradeState: null,
+  /** The route activity playing in the `routeActivity` phase, or null. */
+  routeActivity: null,
   catchSettings: {},
   globalCatchDefaults: defaultCatchSettings,
   money: 3e3,
@@ -325,6 +327,10 @@ export function gameReducer(state, action) {
       return startGameCorner(state, action)
     case 'END_MINIGAME':
       return endMinigame(state, action)
+    case 'START_ROUTE_ACTIVITY':
+      return startRouteActivity(state, action)
+    case 'END_ROUTE_ACTIVITY':
+      return endRouteActivity(state, action)
     case 'PAY_MINIGAME_FEE':
       return payMinigameFee(state, action)
     case 'CLAIM_MINIGAME_REWARD':

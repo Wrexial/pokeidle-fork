@@ -627,6 +627,7 @@ export function useGameLoop() {
       state.phase === 'bugCatching' ||
       state.phase === 'mining' ||
       state.phase === 'gameCorner' ||
+      state.phase === 'routeActivity' ||
       state.phase === 'wonderTrade' ||
       state.paused
     ) {

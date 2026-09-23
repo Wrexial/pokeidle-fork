@@ -1,34 +1,36 @@
-// Region-to-minigame registry and panel metadata. Split from game/minigames.js.
+// Fixed minigame registry and panel metadata. Split from game/minigames.js.
 
 import { BUG_CONTEST_COST, BUG_CONTEST_RUSTLES } from './bug-contest.js'
 import { SLOT_SPIN_COST } from './game-corner.js'
 import { MINING_COST, MINING_DIGS } from './mining.js'
 
-/** @type {Record<string, string>} */
-export const MINIGAME_BY_REGION = {
-  kanto: 'gameCorner',
-  johto: 'bugContest',
-  sinnoh: 'mining',
-}
-
 /**
- * Region -> the location that must be unlocked before that region's minigame
- * becomes available (Hoenn's Battle Tower included).
+ * Locations that host a fixed minigame. Unlike the route activities in
+ * `route-activities.js`, these are unique points of interest.
  * @type {Record<string, string>}
  */
-export const MINIGAME_UNLOCK_LOCATION = {
-  kanto: 'celadonCity',
-  johto: 'johto-route-35',
-  hoenn: 'hoenn-route-111',
-  sinnoh: 'sinnoh-eterna-city',
+export const MINIGAME_LOCATIONS = {
+  celadonCity: 'gameCorner',
+  'johto-route-35': 'bugContest',
+  'sinnoh-eterna-city': 'mining',
 }
 
 /**
- * Every location that hosts a point of interest (today, the minigames). Used
- * by the Town Map to badge the node with a `+`.
+ * Location -> the action that launches its minigame.
+ * @type {Record<string, string>}
+ */
+export const MINIGAME_START_ACTION = {
+  gameCorner: 'START_GAME_CORNER',
+  bugContest: 'START_BUG_CONTEST',
+  mining: 'START_MINING',
+}
+
+/**
+ * Every location that hosts a fixed point of interest (the minigames plus
+ * Hoenn's Battle Tower). Used by the Town Map to badge the node with a `+`.
  * @type {Set<string>}
  */
-export const POI_LOCATIONS = new Set(Object.values(MINIGAME_UNLOCK_LOCATION))
+export const POI_LOCATIONS = new Set([...Object.keys(MINIGAME_LOCATIONS), 'hoenn-route-111'])
 
 /** @type {Record<string, { title: string, cost: number, action: string, hint: string }>} */
 export const MINIGAME_INFO = {

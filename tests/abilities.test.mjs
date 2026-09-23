@@ -1273,3 +1273,113 @@ test('Comatose blocks status and Color Change matches the hit type', () => {
     assert.deepEqual(changer.types, ['Fire'])
   })
 })
+
+test('Air Lock suppresses the weather', () => {
+  withFixedRandom(0.5, () => {
+    const damage = (/** @type {any} */ ability) => {
+      const player = battler({
+          name: 'Player',
+          isPlayer: true,
+          moves: ['flamethrower'],
+          speed: 200,
+          spAttack: 200,
+          ability,
+        }),
+        enemy = battler({ name: 'Foe', moves: ['splash'], currentHp: 2000, maxHp: 2000 })
+      resolveBattleTurn(player, enemy, false, false, { type: 'sun', turns: 5 })
+      return 2000 - enemy.currentHp
+    }
+    assert.ok(damage('airLock') < damage(undefined), 'Air Lock negates the sun boost')
+  })
+})
+
+test('Mold Breaker ignores the target ability', () => {
+  withFixedRandom(0.5, () => {
+    const hpAfter = (/** @type {any} */ ability) => {
+      const player = battler({
+          name: 'Player',
+          isPlayer: true,
+          moves: ['earthquake'],
+          speed: 200,
+          attack: 200,
+          ability,
+        }),
+        enemy = battler({
+          name: 'Foe',
+          moves: ['splash'],
+          ability: 'levitate',
+          currentHp: 400,
+          maxHp: 400,
+          types: ['Normal'],
+        })
+      resolveBattleTurn(player, enemy, false)
+      return enemy.currentHp
+    }
+    assert.equal(hpAfter(undefined), 400, 'Levitate blocks Earthquake')
+    assert.ok(hpAfter('moldBreaker') < 400, 'Mold Breaker ignores Levitate')
+  })
+})
+
+test('Opportunist copies a foe self-boost', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['swordsDance'],
+        speed: 200,
+        statStages: {},
+      }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], ability: 'opportunist', statStages: {} })
+    resolveBattleTurn(player, enemy, false)
+    assert.equal(player.statStages.attack, 2)
+    assert.equal(enemy.statStages.attack, 2, 'Opportunist copied the boost')
+  })
+})
+
+test('Parental Bond adds a second hit', () => {
+  withFixedRandom(0.5, () => {
+    const damage = (/** @type {any} */ ability) => {
+      const player = battler({
+          name: 'Player',
+          isPlayer: true,
+          moves: ['tackle'],
+          speed: 200,
+          attack: 200,
+          ability,
+        }),
+        enemy = battler({ name: 'Foe', moves: ['splash'], currentHp: 2000, maxHp: 2000 })
+      resolveBattleTurn(player, enemy, false)
+      return 2000 - enemy.currentHp
+    }
+    assert.ok(damage('parentalBond') > damage(undefined))
+  })
+})
+
+test('Orichalcum Pulse sets the sun and Hunger Switch flips its form flag', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['splash'],
+        speed: 200,
+        ability: 'orichalcumPulse',
+      }),
+      enemy = battler({ name: 'Foe', moves: ['splash'] }),
+      events = resolveBattleTurn(player, enemy, false, !0),
+      weather = [...events].reverse().find(
+        (/** @type {any} */ event) => event.type === 'weather' && event.data && 'weather' in event.data
+      )
+    assert.equal(weather.data.weather.type, 'sun')
+
+    const morpeko = battler({
+        name: 'Morpeko',
+        isPlayer: true,
+        moves: ['splash'],
+        speed: 200,
+        ability: 'hungerSwitch',
+      }),
+      enemy2 = battler({ name: 'Foe', moves: ['splash'] })
+    resolveBattleTurn(morpeko, enemy2, false)
+    assert.equal(morpeko.hangry, true)
+  })
+})

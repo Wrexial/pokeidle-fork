@@ -17,6 +17,7 @@ export const WEATHER_ABILITIES = {
   desolateLand: 'harshSunlight',
   primordialSea: 'heavyRain',
   deltaStream: 'strongWinds',
+  orichalcumPulse: 'sun',
 }
 
 /** Weather Ball's type per weather; its power doubles in any weather. @type {Record<string, string>} */

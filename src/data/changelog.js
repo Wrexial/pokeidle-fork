@@ -30,6 +30,7 @@ export const CHANGELOG = [
             'More utility and reactions: Truant, Slow Start, Klutz, Sticky Hold, Unnerve, Gluttony, Stench, Analytic, Toxic Chain, Toxic Debris, Poison Puppeteer, Cursed Body, Cotton Down, Sand Spit, Seed Sower, Innards Out, Wandering Spirit and Perish Body',
             'Form and type abilities: Zen Mode (Darmanitan), Forecast (Castform), Mimicry (Stunfisk) and Flower Gift',
             'Protection and switch abilities: Damp, Bulletproof, Soundproof, Overcoat (move family blocks), Rock Head and Liquid Ooze (recoil / drain), Shield Dust, Color Change, Comatose, Aroma Veil, Guard Dog, Steadfast, Early Bird, Mycelium Might, Screen Cleaner, Natural Cure and Regenerator. Recoil was also added to Double-Edge, Brave Bird, Flare Blitz and friends so Rock Head and Reckless matter',
+            'Suppression and reaction abilities: Air Lock and Cloud Nine negate the weather, Mold Breaker / Teravolt / Turboblaze ignore the target\u2019s ability, and Opportunist, Parental Bond, Orichalcum Pulse, Hunger Switch and Cud Chew sit alongside them',
             'Fixed a battle bug where an immune hit (a Normal move into a Ghost) could still deal 1 damage',
           ],
         },

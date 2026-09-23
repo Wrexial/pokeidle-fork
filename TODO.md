@@ -237,7 +237,9 @@ Wandering Spirit, Perish Body) and the form/type batch (Zen Mode, Forecast,
 Mimicry, Flower Gift), plus the protection/switch batch (Damp, Bulletproof,
 Soundproof, Overcoat, Rock Head, Liquid Ooze, Shield Dust, Color Change,
 Comatose, Aroma Veil, Guard Dog, Steadfast, Early Bird, Mycelium Might,
-Screen Cleaner, Natural Cure, Regenerator).
+Screen Cleaner, Natural Cure, Regenerator), plus the suppression/reaction batch
+(Air Lock / Cloud Nine, Mold Breaker / Teravolt / Turboblaze, Opportunist,
+Parental Bond, Orichalcum Pulse, Hunger Switch, Cud Chew).
 `abilityPreventsStatus` also now treats badly-poisoned as poison
 (Immunity / Pastel Veil).
 

@@ -217,6 +217,21 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
         },
       })
     }
+    // Cud Chew re-eats the berry from last turn before this turn's berry.
+    if ((pokemon.cudChewHeal ?? 0) > 0) {
+      const chewHeal = pokemon.cudChewHeal
+      pokemon.cudChewHeal = 0
+      pokemon.currentHp = Math.min(pokemon.maxHp, pokemon.currentHp + chewHeal)
+      events.push({
+        type: 'heal',
+        message: `${pokemon.name} chewed its cud! (+${chewHeal} HP)`,
+        data: {
+          target: isPlayerSide ? 'player' : 'enemy',
+          hpAfter: pokemon.currentHp,
+          hpMax: pokemon.maxHp,
+        },
+      })
+    }
     // Ripen doubles a berry's healing; an opponent's Unnerve blocks it entirely.
     const berryHeal =
       abilityOf(isPlayerSide ? enemy : player) === 'unnerve'
@@ -248,6 +263,8 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
           },
         })
       }
+      // Cud Chew schedules a second helping next turn.
+      if (abilityOf(pokemon) === 'cudChew') pokemon.cudChewHeal = berryHeal
     }
     // Harvest restores a consumed berry (always in sun, else 50%).
     if (
@@ -411,6 +428,7 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
     if ((pokemon.trickRoomTurns ?? 0) > 0) pokemon.trickRoomTurns -= 1
     if ((pokemon.destinyBondTurns ?? 0) > 0) pokemon.destinyBondTurns -= 1
     if ((pokemon.slowStartTurns ?? 0) > 0) pokemon.slowStartTurns -= 1
+    if (abilityOf(pokemon) === 'hungerSwitch') pokemon.hangry = !pokemon.hangry
     // Perish Song counts both sides down to a faint that ignores abilities.
     if ((pokemon.perishTurns ?? 0) > 0) {
       pokemon.perishTurns -= 1

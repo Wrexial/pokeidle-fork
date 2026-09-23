@@ -59,6 +59,8 @@ export function updateVolatile(state, action) {
         formKey: enemyVolatile.formKey ?? null,
         truantSkip: enemyVolatile.truantSkip ?? !1,
         slowStartTurns: enemyVolatile.slowStartTurns ?? 0,
+        hangry: enemyVolatile.hangry ?? !1,
+        cudChewHeal: enemyVolatile.cudChewHeal ?? 0,
       }),
     {
       ...state,

@@ -266,6 +266,10 @@ type VolatileState = {
   truantSkip?: boolean
   /** Turns of Slow Start left (halves Attack and Speed while above 0). */
   slowStartTurns?: number
+  /** Hunger Switch's alternating Hangry form flag. */
+  hangry?: boolean
+  /** Pending Cud Chew heal (the berry eaten last turn). */
+  cudChewHeal?: number
 }
 
 type GameAction = { type: string; payload?: any; [key: string]: any }

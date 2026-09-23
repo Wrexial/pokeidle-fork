@@ -113,6 +113,9 @@ export function abilityChangesMoveType(attacker, moveDef) {
     return { ...moveDef, type: ateType, power: (moveDef.power ?? 0) * 1.2 }
   if (ability === 'liquidVoice' && SOUND_MOVE.test(moveDef.name ?? ''))
     return { ...moveDef, type: 'Water' }
+  // Hunger Switch makes Aura Wheel Dark in the Hangry form.
+  if (ability === 'hungerSwitch' && attacker.hangry && moveDef.name === 'Aura Wheel')
+    return { ...moveDef, type: 'Dark' }
   return moveDef
 }
 
@@ -137,9 +140,11 @@ export function onHpThresholdBoost(defender, hpBefore) {
  * Overcoat's powder block).
  * @param {BattlePokemon} defender
  * @param {Move} moveDef
+ * @param {BattlePokemon} [attacker]
  * @returns {boolean}
  */
-export function abilityBlocksMove(defender, moveDef) {
+export function abilityBlocksMove(defender, moveDef, attacker) {
+  if (abilityIgnoresTargetAbility(attacker)) return false
   const ability = abilityOf(defender)
   if (!ability || !moveDef) return false
   const name = moveDef.name ?? ''
@@ -193,13 +198,26 @@ export function onHitStatBoost(defender, moveDef, isCrit = false) {
 }
 
 /**
+ * Whether the attacker's ability ignores the defender's ability (Mold Breaker,
+ * Teravolt, Turboblaze).
+ * @param {BattlePokemon | null | undefined} attacker
+ * @returns {boolean}
+ */
+export function abilityIgnoresTargetAbility(attacker) {
+  const ability = attacker ? abilityOf(attacker) : null
+  return ability === 'moldBreaker' || ability === 'teravolt' || ability === 'turboblaze'
+}
+
+/**
  * Whether an ability makes the holder immune to a move of this type (Ground
  * immunity or a type-absorbing ability).
  * @param {BattlePokemon} defender
  * @param {string} moveType
+ * @param {BattlePokemon} [attacker]
  * @returns {boolean}
  */
-export function abilityAbsorbsType(defender, moveType) {
+export function abilityAbsorbsType(defender, moveType, attacker) {
+  if (abilityIgnoresTargetAbility(attacker)) return false
   const ability = abilityOf(defender)
   if (!ability) return false
   if (moveType === 'Ground' && GROUND_IMMUNE_ABILITIES.has(ability)) return true
@@ -211,9 +229,11 @@ export function abilityAbsorbsType(defender, moveType) {
  * Volt Absorb, Flash Fire, ...).
  * @param {BattlePokemon} defender
  * @param {string} moveType
+ * @param {BattlePokemon} [attacker]
  * @returns {boolean}
  */
-export function abilityHealsFromType(defender, moveType) {
+export function abilityHealsFromType(defender, moveType, attacker) {
+  if (abilityIgnoresTargetAbility(attacker)) return false
   return TYPE_ABSORB_ABILITIES[abilityOf(defender) ?? ''] === moveType
 }
 
@@ -306,9 +326,11 @@ export function abilityEffectivenessMultiplier(attacker, effectiveness) {
  * Salt, Punk Rock, Fur Coat, Dry Skin and Marvel Scale).
  * @param {BattlePokemon} defender
  * @param {Move} moveDef
+ * @param {BattlePokemon} [attacker]
  * @returns {number}
  */
-export function abilityDamageTakenMultiplier(defender, moveDef) {
+export function abilityDamageTakenMultiplier(defender, moveDef, attacker) {
+  if (abilityIgnoresTargetAbility(attacker)) return 1
   const ability = abilityOf(defender)
   if (!ability || !moveDef) return 1
   const name = moveDef.name ?? '',
@@ -331,8 +353,14 @@ export function abilityDamageTakenMultiplier(defender, moveDef) {
   return 1
 }
 
-/** Abilities that halve damage from a super-effective hit. @param {BattlePokemon} defender */
-export function abilityHalvesSuperEffective(defender) {
+/**
+ * Abilities that halve damage from a super-effective hit.
+ * @param {BattlePokemon} defender
+ * @param {BattlePokemon} [attacker]
+ * @returns {boolean}
+ */
+export function abilityHalvesSuperEffective(defender, attacker) {
+  if (abilityIgnoresTargetAbility(attacker)) return false
   const ability = abilityOf(defender)
   return ability === 'filter' || ability === 'solidRock' || ability === 'prismArmor'
 }
@@ -387,9 +415,11 @@ export function abilityPreventsStatDrop(target, statKey) {
  * @param {BattlePokemon} defender
  * @param {number} hpBefore
  * @param {number} damage
+ * @param {BattlePokemon} [attacker]
  * @returns {number} The damage to actually apply.
  */
-export function abilitySurvivesAtFullHp(defender, hpBefore, damage) {
+export function abilitySurvivesAtFullHp(defender, hpBefore, damage, attacker) {
+  if (abilityIgnoresTargetAbility(attacker)) return damage
   return abilityOf(defender) === 'sturdy' && hpBefore >= defender.maxHp && damage >= hpBefore
     ? hpBefore - 1
     : damage
@@ -410,8 +440,10 @@ export function abilityIgnoresIndirectDamage(pokemon) {
  * (Wonder Guard).
  * @param {BattlePokemon} defender
  * @param {number} effectiveness
+ * @param {BattlePokemon} [attacker]
  * @returns {boolean}
  */
-export function abilityBlocksNonSuperEffective(defender, effectiveness) {
+export function abilityBlocksNonSuperEffective(defender, effectiveness, attacker) {
+  if (abilityIgnoresTargetAbility(attacker)) return false
   return abilityOf(defender) === 'wonderGuard' && effectiveness <= 1
 }

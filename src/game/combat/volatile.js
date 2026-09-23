@@ -58,6 +58,8 @@ export function createVolatileState() {
     formKey: null,
     truantSkip: !1,
     slowStartTurns: 0,
+    hangry: !1,
+    cudChewHeal: 0,
   }
 }
 
@@ -113,6 +115,8 @@ export function volatileStateFromBattle(pokemon) {
     formKey: pokemon.formKey ?? null,
     truantSkip: pokemon.truantSkip ?? !1,
     slowStartTurns: pokemon.slowStartTurns ?? 0,
+    hangry: pokemon.hangry ?? !1,
+    cudChewHeal: pokemon.cudChewHeal ?? 0,
   }
 }
 

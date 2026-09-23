@@ -179,16 +179,21 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     if (terrainSetter)
       activeTerrain = { type: terrainSetter, turns: TERRAIN_TURNS }
   }
+  // Air Lock / Cloud Nine suppress the weather's effects entirely.
+  const weatherSuppressed =
+      ['airLock', 'cloudNine'].includes(abilityOf(player) ?? '') ||
+      ['airLock', 'cloudNine'].includes(abilityOf(enemy) ?? ''),
+    effectiveWeather = weatherSuppressed ? null : activeWeather
   // Forecast and Mimicry change the holder's type with the weather / terrain.
   for (const [mon, isPlayerSide] of /** @type {[any, boolean][]} */ ([ [player, !0], [enemy, !1] ])) {
     const ability = abilityOf(mon)
     if (ability === 'forecast') {
       const type =
-        activeWeather?.type === 'sun' || activeWeather?.type === 'harshSunlight'
+        effectiveWeather?.type === 'sun' || effectiveWeather?.type === 'harshSunlight'
           ? 'Fire'
-          : activeWeather?.type === 'rain' || activeWeather?.type === 'heavyRain'
+          : effectiveWeather?.type === 'rain' || effectiveWeather?.type === 'heavyRain'
             ? 'Water'
-            : activeWeather?.type === 'snow' || activeWeather?.type === 'hail'
+            : effectiveWeather?.type === 'snow' || effectiveWeather?.type === 'hail'
               ? 'Ice'
               : 'Normal'
       mon.types = [type]
@@ -232,8 +237,8 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     ;((enemyMoveId = resolveCalledMove(lockedMove, player, activeTerrain)), (enemyMove = moveData[enemyMoveId]))
   }
   const trickRoomActive = (player.trickRoomTurns ?? 0) > 0 || (enemy.trickRoomTurns ?? 0) > 0,
-    playerSpeed = effectiveSpeed(player, activeWeather, activeTerrain),
-    enemySpeed = effectiveSpeed(enemy, activeWeather, activeTerrain),
+    playerSpeed = effectiveSpeed(player, effectiveWeather, activeTerrain),
+    enemySpeed = effectiveSpeed(enemy, effectiveWeather, activeTerrain),
     // Trick Room makes the slower Pokemon move first.
     playerActsFirst = trickRoomActive ? playerSpeed <= enemySpeed : playerSpeed >= enemySpeed,
     attackOrder = [],
@@ -388,7 +393,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       continue
     }
     // Bulletproof / Soundproof / Damp / Overcoat block their move families.
-    if (abilityBlocksMove(attack.defender, moveDef)) {
+    if (abilityBlocksMove(attack.defender, moveDef, attack.attacker)) {
       events.push({
         type: 'miss',
         message: `${attack.defender.name}'s ability blocked the move!`,
@@ -464,6 +469,20 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
               target: side,
             },
           })
+          // Opportunist copies a foe's self-boost onto the holder.
+          if (!fromOpponent && appliedDelta > 0 && abilityOf(attack.defender) === 'opportunist') {
+            const oppStages = attack.defender.statStages ?? (attack.defender.statStages = {}),
+              oppCurrent = oppStages[key] ?? 0,
+              oppNext = clampStatStage(oppCurrent + appliedDelta)
+            if (oppNext !== oppCurrent) {
+              oppStages[key] = oppNext
+              events.push({
+                type: 'statChange',
+                message: `${attack.defender.name} copied the boost!`,
+                data: { target: attack.isPlayer ? 'enemy' : 'player' },
+              })
+            }
+          }
           // Defiant / Competitive punish an opponent's drop with a big boost.
           if (delta < 0 && fromOpponent && targetAbility !== 'contrary') {
             const boostKey =
@@ -996,7 +1015,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     // sharpen accuracy.
     const baseMove = abilityChangesMoveType(
         attack.attacker,
-        applyWeatherToMove(activeWeather, moveDef)
+        applyWeatherToMove(effectiveWeather, moveDef)
       ),
       accuracyMult =
         (abilityOf(attack.attacker) === 'compoundEyes' ? 1.3 : 1) *
@@ -1012,8 +1031,8 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     }
     // The extreme weathers refuse the opposite elemental type.
     if (
-      (activeWeather?.type === 'harshSunlight' && effectiveMove.type === 'Water') ||
-      (activeWeather?.type === 'heavyRain' && effectiveMove.type === 'Fire')
+      (effectiveWeather?.type === 'harshSunlight' && effectiveMove.type === 'Water') ||
+      (effectiveWeather?.type === 'heavyRain' && effectiveMove.type === 'Fire')
     ) {
       events.push({
         type: 'miss',
@@ -1022,8 +1041,8 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       continue
     }
     // Levitate / type-absorbing abilities negate the move (and usually heal).
-    if (abilityAbsorbsType(attack.defender, effectiveMove.type)) {
-      if (abilityHealsFromType(attack.defender, effectiveMove.type)) {
+    if (abilityAbsorbsType(attack.defender, effectiveMove.type, attack.attacker)) {
+      if (abilityHealsFromType(attack.defender, effectiveMove.type, attack.attacker)) {
         const healed = Math.min(
             attack.defender.maxHp,
             attack.defender.currentHp + Math.max(1, Math.floor(attack.defender.maxHp / 4))
@@ -1079,7 +1098,12 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         (abilityOf(attack.attacker) === 'slowStart' && (attack.attacker.slowStartTurns ?? 0) > 0
           ? 0.5
           : 1) *
-        (abilityOf(attack.attacker) === 'flowerGift' && activeWeather?.type === 'sun' ? 1.5 : 1) *
+        (abilityOf(attack.attacker) === 'flowerGift' && effectiveWeather?.type === 'sun' ? 1.5 : 1) *
+        (abilityOf(attack.attacker) === 'orichalcumPulse' &&
+        moveDef.category === 'physical' &&
+        effectiveWeather?.type === 'sun'
+          ? 1.33
+          : 1) *
         abilityAttackMultiplier(attack.attacker, effectiveMove) *
         ruinOffenseMultiplier(attack.defender, moveDef.category) *
         terrainAbilityMultiplier(
@@ -1114,9 +1138,9 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       accuracyStage = getStatStage(attack.attacker, 'accuracy'),
       evasionStage =
         getStatStage(attack.defender, 'evasion') +
-        (abilityOf(attack.defender) === 'sandVeil' && activeWeather?.type === 'sandstorm' ? 1 : 0) +
+        (abilityOf(attack.defender) === 'sandVeil' && effectiveWeather?.type === 'sandstorm' ? 1 : 0) +
         (abilityOf(attack.defender) === 'snowCloak' &&
-        (activeWeather?.type === 'snow' || activeWeather?.type === 'hail')
+        (effectiveWeather?.type === 'snow' || effectiveWeather?.type === 'hail')
           ? 1
           : 0) +
         (abilityOf(attack.defender) === 'tangledFeet' && (attack.defender.confusionTurns ?? 0) > 0
@@ -1226,14 +1250,14 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     // Ability + held-item + weather damage modifiers.
     totalDamage = Math.floor(
       totalDamage *
-        abilityDamageDealtMultiplier(attack.attacker, effectiveMove, activeWeather) *
-        abilityDamageTakenMultiplier(attack.defender, effectiveMove) *
+        abilityDamageDealtMultiplier(attack.attacker, effectiveMove, effectiveWeather) *
+        abilityDamageTakenMultiplier(attack.defender, effectiveMove, attack.attacker) *
         heldDamageMultiplier(attack.attacker, effectiveMove) *
-        weatherDamageMultiplier(activeWeather, effectiveMove) *
+        weatherDamageMultiplier(effectiveWeather, effectiveMove) *
         fieldAuraMultiplier(player, enemy, effectiveMove) *
         terrainDamageMultiplier(activeTerrain, attack.attacker, effectiveMove, attack.defender)
     )
-    if (abilityHalvesSuperEffective(attack.defender) && damageResult.effectiveness > 1)
+    if (abilityHalvesSuperEffective(attack.defender, attack.attacker) && damageResult.effectiveness > 1)
       totalDamage = Math.max(1, Math.floor(totalDamage / 2))
     // Tinted Lens / Neuroforce scale the effectiveness-based damage (but never
     // turn an immune hit into damage).
@@ -1244,19 +1268,19 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       )
     // Delta Stream cancels Flying-type weaknesses.
     if (
-      activeWeather?.type === 'strongWinds' &&
+      effectiveWeather?.type === 'strongWinds' &&
       attack.defender.types.includes('Flying') &&
       damageResult.effectiveness > 1
     )
       totalDamage = Math.max(1, Math.floor(totalDamage / damageResult.effectiveness))
-    if (abilityBlocksNonSuperEffective(attack.defender, damageResult.effectiveness)) {
+    if (abilityBlocksNonSuperEffective(attack.defender, damageResult.effectiveness, attack.attacker)) {
       events.push({
         type: 'miss',
         message: `${attack.defender.name}'s Wonder Guard blocked the move!`,
       })
       continue
     }
-    totalDamage = abilitySurvivesAtFullHp(attack.defender, attack.defender.currentHp, totalDamage)
+    totalDamage = abilitySurvivesAtFullHp(attack.defender, attack.defender.currentHp, totalDamage, attack.attacker)
     const sashDamage = heldSurvivesAtFullHp(
       attack.defender,
       attack.defender.currentHp,
@@ -1287,6 +1311,13 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       }
     }
     const defenderHpBefore = attack.defender.currentHp
+    // Parental Bond lands a second, weaker hit.
+    if (
+      abilityOf(attack.attacker) === 'parentalBond' &&
+      !moveDef.multiHit &&
+      (moveDef.power ?? 0) > 0
+    )
+      totalDamage += Math.max(1, Math.floor(totalDamage * 0.25))
     // Disguise (Mimikyu) and Ice Face (Eiscue) absorb the first hit.
     const defenderAbility = abilityOf(attack.defender)
     if (
@@ -1719,7 +1750,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     }
     if (attack.attacker.currentHp <= 0) break
   }
-  applyEndOfTurn(player, enemy, events, activeWeather, activeTerrain, deterministic)
+  applyEndOfTurn(player, enemy, events, effectiveWeather, activeTerrain, deterministic)
   reportFieldEffects(player, enemy, events, activeWeather, activeTerrain, activeHazards, weather, terrain, hazards)
   restoreGas()
   return events

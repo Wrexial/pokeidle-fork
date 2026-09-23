@@ -215,6 +215,25 @@ export function consumeEvent(state, action) {
           dedupeKey: 'drop:rareCandy',
         })
     }
+    // Out-of-battle abilities: Pickup and Honey Gather can find something.
+    const partyAbilities = new Set(
+      [state.playerPokemon, ...state.party].filter(Boolean).map((member) => member?.ability)
+    )
+    if (partyAbilities.has('pickup') && Math.random() < dropChance(0.1)) {
+      const foundId = rollValuableDrop(dropLevel)
+      inventory = {
+        ...inventory,
+        [foundId]: (inventory[foundId] ?? 0) + 1,
+      }
+      secretNotices.push(`Your Pickup found a ${consumableItems[foundId].name}!`)
+    }
+    if (partyAbilities.has('honeyGather') && Math.random() < dropChance(0.2)) {
+      inventory = {
+        ...inventory,
+        honey: (inventory.honey ?? 0) + 1,
+      }
+      secretNotices.push('Your Honey Gather found a Honey!')
+    }
   }
   let syncedState = syncActivePokemonIntoParty({
     ...state,

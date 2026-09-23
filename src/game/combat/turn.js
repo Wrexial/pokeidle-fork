@@ -188,16 +188,15 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
   for (const [mon, isPlayerSide] of /** @type {[any, boolean][]} */ ([ [player, !0], [enemy, !1] ])) {
     const ability = abilityOf(mon)
     if (ability === 'forecast') {
-      const type =
+      const formKey =
         effectiveWeather?.type === 'sun' || effectiveWeather?.type === 'harshSunlight'
-          ? 'Fire'
+          ? 'castform-sunny'
           : effectiveWeather?.type === 'rain' || effectiveWeather?.type === 'heavyRain'
-            ? 'Water'
+            ? 'castform-rainy'
             : effectiveWeather?.type === 'snow' || effectiveWeather?.type === 'hail'
-              ? 'Ice'
-              : 'Normal'
-      mon.types = [type]
-      mon.typesOverride = [type]
+              ? 'castform-snowy'
+              : 'castform'
+      changeBattleForm(mon, formKey, events, isPlayerSide)
     } else if (ability === 'mimicry') {
       const type = /** @type {Record<string, string>} */ ({
         electric: 'Electric',
@@ -1327,7 +1326,10 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         effectiveMove.category === 'physical')
     ) {
       if (defenderAbility === 'disguise') attack.defender.disguiseBroken = !0
-      else attack.defender.iceFaceBroken = !0
+      else {
+        attack.defender.iceFaceBroken = !0
+        changeBattleForm(attack.defender, 'eiscue-noice', events, !attack.isPlayer)
+      }
       events.push({
         type: 'miss',
         message: `${attack.defender.name}'s ${defenderAbility === 'disguise' ? 'disguise' : 'Ice Face'} absorbed the hit!`,
@@ -1578,6 +1580,12 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       if (attack.defender.currentHp > 0 && attack.defender.currentHp <= attack.defender.maxHp / 2)
         changeBattleForm(attack.defender, zenForm, events, !attack.isPlayer)
       else changeBattleForm(attack.defender, baseForm, events, !attack.isPlayer)
+    }
+    // Shields Down flips Minior between its Meteor and Core forms.
+    if (abilityOf(attack.defender) === 'shieldsDown') {
+      if (attack.defender.currentHp > 0 && attack.defender.currentHp <= attack.defender.maxHp / 2)
+        changeBattleForm(attack.defender, 'minior-core', events, !attack.isPlayer)
+      else changeBattleForm(attack.defender, 'minior-meteor', events, !attack.isPlayer)
     }
     // Magician steals on the hit; Pickpocket steals on contact.
     if (abilityOf(attack.attacker) === 'magician')

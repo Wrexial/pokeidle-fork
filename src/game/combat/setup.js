@@ -1,6 +1,7 @@
 // Build the BattlePokemon object used for wild, trainer and raid opponents.
 // Centralises the stat/moves block so every opponent carries the same fields.
 import { pokemonSpecies } from '../../data/gameData.js'
+import { FORM_SPECIES } from '../../data/form-species.js'
 import { rollGender } from '../breeding.js'
 import { rollHeldItem } from '../held-items.js'
 import { calculatePokemonStats, generateIVs, getPerfectIVs, resolvePokemonMoves, rollAbility } from '../pokemon.js'
@@ -54,6 +55,16 @@ export function createBattlePokemon(speciesKey, level, options = {}) {
 }
 
 /**
+ * A species entry by key, falling back to the battle-only synthetic forms
+ * (Castform's weather forms, Morpeko Hangry, Minior Core, ...).
+ * @param {string} speciesKey
+ * @returns {any}
+ */
+export function battleSpecies(speciesKey) {
+  return pokemonSpecies[speciesKey] ?? FORM_SPECIES[speciesKey] ?? null
+}
+
+/**
  * Rebuild a battle Pokemon's species, types and stats from its `formKey` (a
  * mid-battle form change), preserving the HP ratio. Does nothing when there is
  * no pending form.
@@ -62,7 +73,7 @@ export function createBattlePokemon(speciesKey, level, options = {}) {
  */
 export function applyBattleForm(pokemon) {
   if (!pokemon?.formKey) return pokemon
-  const form = pokemonSpecies[pokemon.formKey]
+  const form = battleSpecies(pokemon.formKey)
   if (!form) return pokemon
   const stats = calculatePokemonStats(form, pokemon.level, pokemon.ivs ?? getPerfectIVs(), pokemon.nature),
     hpRatio = pokemon.maxHp > 0 ? pokemon.currentHp / pokemon.maxHp : 1
@@ -88,7 +99,7 @@ export function applyBattleForm(pokemon) {
  * @param {boolean} isPlayer
  */
 export function changeBattleForm(pokemon, formKey, events, isPlayer) {
-  if (!pokemon || pokemon.speciesKey === formKey || !pokemonSpecies[formKey]) return
+  if (!pokemon || pokemon.speciesKey === formKey || !battleSpecies(formKey)) return
   pokemon.formKey = formKey
   applyBattleForm(pokemon)
   events.push({

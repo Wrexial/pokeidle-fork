@@ -8,6 +8,7 @@ import { heldBerryHeal, heldLeftoversHeal } from '../held-items.js'
 import { TERRAIN_NAMES, terrainHeal } from '../terrain.js'
 import { WEATHER_NAMES, weatherAbilityHeal, weatherResidualDamage } from '../weather.js'
 import { chance } from './damage.js'
+import { changeBattleForm } from './setup.js'
 import { applyStatus } from './status.js'
 import { clampStatStage, getStatLabel } from './volatile.js'
 
@@ -284,6 +285,7 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
     // Ice Face reforms in snow or hail.
     if (pokemon.iceFaceBroken && (activeWeather?.type === 'snow' || activeWeather?.type === 'hail')) {
       pokemon.iceFaceBroken = !1
+      changeBattleForm(pokemon, 'eiscue', events, isPlayerSide)
       events.push({
         type: 'status',
         message: `${pokemon.name}'s Ice Face reformed!`,
@@ -428,7 +430,10 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
     if ((pokemon.trickRoomTurns ?? 0) > 0) pokemon.trickRoomTurns -= 1
     if ((pokemon.destinyBondTurns ?? 0) > 0) pokemon.destinyBondTurns -= 1
     if ((pokemon.slowStartTurns ?? 0) > 0) pokemon.slowStartTurns -= 1
-    if (abilityOf(pokemon) === 'hungerSwitch') pokemon.hangry = !pokemon.hangry
+    if (abilityOf(pokemon) === 'hungerSwitch') {
+      pokemon.hangry = !pokemon.hangry
+      changeBattleForm(pokemon, pokemon.hangry ? 'morpeko-hangry' : 'morpeko', events, isPlayerSide)
+    }
     // Perish Song counts both sides down to a faint that ignores abilities.
     if ((pokemon.perishTurns ?? 0) > 0) {
       pokemon.perishTurns -= 1

@@ -247,6 +247,8 @@ export function applyEntryAbility(source, target, events, sourceIsPlayer) {
     }
   } else if (ability === 'slowStart') {
     source.slowStartTurns = 5
+  } else if (ability === 'shieldsDown') {
+    changeBattleForm(source, 'minior-meteor', events, sourceIsPlayer)
   } else if (ability === 'screenCleaner') {
     const clear = { reflect: 0, lightScreen: 0 }
     source.screens = { ...clear }

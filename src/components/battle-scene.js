@@ -8,6 +8,7 @@ import { dailyEventByKey } from '../data/daily-events.js'
 import { hasClaimableQuests } from '../game/quests.js'
 import { biomeForLocation, BIOME_FILTERS, locationImages } from '../data/ui.js'
 import { getDexStatus, shouldOfferMasterBall } from '../game/catching.js'
+import { battleSpecies } from '../game/combat.js'
 import { isFemalePokemon } from '../game/breeding.js'
 import { WEATHER_ICONS, WEATHER_NAMES } from '../game/weather.js'
 import { TERRAIN_ICONS, TERRAIN_NAMES } from '../game/terrain.js'
@@ -57,7 +58,7 @@ export function BattleScene() {
   if (state.phase === 'dexComplete') return jsx(DexCompleteScene, {})
   if (!playerPokemon) return null
   const currentEvent = battleEvents.length > 0 ? battleEvents[battleEvents.length - 1] : null,
-    playerSpecies = pokemonSpecies[state.playerVolatile?.formKey ?? playerPokemon.speciesKey],
+    playerSpecies = battleSpecies(state.playerVolatile?.formKey ?? playerPokemon.speciesKey),
     activeTrainerBattle = state.bossBattle ?? state.trainerBattle,
     lastDamageEvent = battleEvents
       .filter((event) => event.type === 'damage' || event.type === 'recoil')
@@ -372,13 +373,13 @@ export function BattleScene() {
               }),
             jsx('img', {
               src: getPokemonSpriteUrl(
-                pokemonSpecies[enemyPokemon.formKey ?? enemyPokemon.speciesKey].id,
+                battleSpecies(enemyPokemon.formKey ?? enemyPokemon.speciesKey).id,
                 !1,
                 enemyPokemon.isShiny,
                 isFemalePokemon(enemyPokemon)
               ),
               onError: /** @param {{ target: HTMLImageElement }} event */ (event) => (event.target.src = getPokemonSpriteFallbackUrl(
-                pokemonSpecies[enemyPokemon.formKey ?? enemyPokemon.speciesKey].id,
+                battleSpecies(enemyPokemon.formKey ?? enemyPokemon.speciesKey).id,
                 !1,
                 enemyPokemon.isShiny,
                 isFemalePokemon(enemyPokemon)

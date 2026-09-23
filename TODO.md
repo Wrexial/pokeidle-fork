@@ -239,16 +239,20 @@ Soundproof, Overcoat, Rock Head, Liquid Ooze, Shield Dust, Color Change,
 Comatose, Aroma Veil, Guard Dog, Steadfast, Early Bird, Mycelium Might,
 Screen Cleaner, Natural Cure, Regenerator), plus the suppression/reaction batch
 (Air Lock / Cloud Nine, Mold Breaker / Teravolt / Turboblaze, Opportunist,
-Parental Bond, Orichalcum Pulse, Hunger Switch, Cud Chew).
+Parental Bond, Orichalcum Pulse, Hunger Switch, Cud Chew), the battle-only
+synthetic form species (Minior Meteor/Core, Castform Sunny/Rainy/Snowy, Morpeko
+Hangry, Eiscue Noice — see `src/data/form-species.js`) and the out-of-battle
+Pickup / Honey Gather.
 `abilityPreventsStatus` also now treats badly-poisoned as poison
 (Immunity / Pastel Veil).
 
 Still open:
 
-- [ ] The remaining ability long tail mostly needs flavour rather than new
-      systems now: Hunger Switch (Morpeko has no separate form in the data),
-      Cud Chew (eat a berry twice), Symbiosis / Gulp Missile (need an ally or a
-      form), and the doubles-only abilities.
+- [ ] The remaining ability long tail mostly needs ally/doubles context now:
+      Battery, Power Spot, Friend Guard, Healer, Telepathy, Aroma/Flower Veil,
+      Costar, Commander, Hospitality, Symbiosis, Gulp Missile, plus the complex
+      ones (Illusion, Magic Bounce, Synchronize, Stakeout, Supreme Overlord,
+      Quick Draw, Rivalry) and the out-of-battle Illuminate / Run Away.
 - [ ] The remaining item nuances (Choice locking, more berries, Rocky Helmet).
 - [ ] Battle polish: move animations / damage numbers / hit feedback.
 

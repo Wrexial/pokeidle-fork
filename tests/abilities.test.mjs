@@ -641,7 +641,7 @@ test('Disguise absorbs the first hit', () => {
 
 test('Ice Face absorbs the first physical hit but not a special one', () => {
   withFixedRandom(0.5, () => {
-    const hpAfter = (/** @type {string} */ move, extra = {}) => {
+    const result = (/** @type {string} */ move, extra = {}) => {
       const player = battler({
           name: 'Player',
           isPlayer: true,
@@ -657,10 +657,12 @@ test('Ice Face absorbs the first physical hit but not a special one', () => {
           maxHp: 400,
         })
       resolveBattleTurn(player, enemy, false)
-      return enemy.currentHp
+      return { hp: enemy.currentHp, max: enemy.maxHp }
     }
-    assert.equal(hpAfter('tackle', { attack: 200 }), 400, 'the physical hit is absorbed')
-    assert.ok(hpAfter('flamethrower', { spAttack: 200 }) < 400, 'a special hit gets through')
+    const physical = result('tackle', { attack: 200 })
+    assert.equal(physical.hp, physical.max, 'the physical hit is absorbed')
+    const special = result('flamethrower', { spAttack: 200 })
+    assert.ok(special.hp < special.max, 'a special hit gets through')
   })
 })
 
@@ -1381,5 +1383,76 @@ test('Orichalcum Pulse sets the sun and Hunger Switch flips its form flag', () =
       enemy2 = battler({ name: 'Foe', moves: ['splash'] })
     resolveBattleTurn(morpeko, enemy2, false)
     assert.equal(morpeko.hangry, true)
+  })
+})
+
+test('Shields Down, Forecast and Hunger Switch swap the form species', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['tackle'],
+        speed: 200,
+        attack: 300,
+      }),
+      minior = battler({
+        name: 'Minior',
+        moves: ['splash'],
+        ability: 'shieldsDown',
+        speciesKey: 'minior',
+        currentHp: 300,
+        maxHp: 500,
+        types: ['Rock', 'Flying'],
+      })
+    resolveBattleTurn(player, minior, false, !0)
+    assert.equal(minior.speciesKey, 'minior-core', 'Shields Down drops to Core below half')
+  })
+
+  const castform = battler({
+      name: 'Castform',
+      isPlayer: true,
+      moves: ['splash'],
+      speed: 200,
+      ability: 'forecast',
+      speciesKey: 'castform',
+    }),
+    enemy = battler({ name: 'Foe', moves: ['splash'] })
+  resolveBattleTurn(castform, enemy, false, false, { type: 'rain', turns: 5 })
+  assert.equal(castform.speciesKey, 'castform-rainy')
+  assert.deepEqual(castform.types, ['Water'])
+
+  const morpeko = battler({
+      name: 'Morpeko',
+      isPlayer: true,
+      moves: ['splash'],
+      speed: 200,
+      ability: 'hungerSwitch',
+      speciesKey: 'morpeko',
+    }),
+    enemy2 = battler({ name: 'Foe', moves: ['splash'] })
+  resolveBattleTurn(morpeko, enemy2, false)
+  assert.equal(morpeko.speciesKey, 'morpeko-hangry')
+})
+
+test('Ice Face switches Eiscue to its Noice form', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['tackle'],
+        speed: 200,
+        attack: 200,
+      }),
+      eiscue = battler({
+        name: 'Eiscue',
+        moves: ['splash'],
+        ability: 'iceFace',
+        speciesKey: 'eiscue',
+        currentHp: 400,
+        maxHp: 400,
+        types: ['Ice'],
+      })
+    resolveBattleTurn(player, eiscue, false)
+    assert.equal(eiscue.speciesKey, 'eiscue-noice')
   })
 })

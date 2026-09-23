@@ -1442,29 +1442,257 @@
    }
   ]
  },
+ "paldea-kitakami-revelers-road": {
+  "name": "Reveler's Road",
+  "encounters": [
+   {
+    "speciesKey": "poltchageist",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "dipplin",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "applin",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "nymble",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "tarountula",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "fidough",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   }
+  ]
+ },
+ "paldea-kitakami-apple-hills": {
+  "name": "Apple Hills",
+  "encounters": [
+   {
+    "speciesKey": "applin",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "dipplin",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "smoliv",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "nymble",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "tadbulb",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "tarountula",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   }
+  ]
+ },
+ "paldea-kitakami-oni-mountain": {
+  "name": "Oni Mountain",
+  "encounters": [
+   {
+    "speciesKey": "poltchageist",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "charcadet",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "nacli",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "frigibax",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "tadbulb",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "smoliv",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   }
+  ]
+ },
+ "paldea-terarium-savanna-biome": {
+  "name": "Savanna Biome",
+  "encounters": [
+   {
+    "speciesKey": "frigibax",
+    "weight": 20,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "cetoddle",
+    "weight": 20,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "pawmi",
+    "weight": 20,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "nacli",
+    "weight": 12,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "tatsugiri",
+    "weight": 12,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "veluza",
+    "weight": 12,
+    "minLevel": 78,
+    "maxLevel": 80
+   }
+  ]
+ },
+ "paldea-terarium-coastal-biome": {
+  "name": "Coastal Biome",
+  "encounters": [
+   {
+    "speciesKey": "veluza",
+    "weight": 20,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "dondozo",
+    "weight": 20,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "tatsugiri",
+    "weight": 20,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "wiglett",
+    "weight": 12,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "finizen",
+    "weight": 12,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "cetoddle",
+    "weight": 12,
+    "minLevel": 78,
+    "maxLevel": 80
+   }
+  ]
+ },
+ "paldea-terarium-polar-biome": {
+  "name": "Polar Biome",
+  "encounters": [
+   {
+    "speciesKey": "cetoddle",
+    "weight": 20,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "frigibax",
+    "weight": 20,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "nacli",
+    "weight": 20,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "pawmi",
+    "weight": 12,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "dondozo",
+    "weight": 12,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "veluza",
+    "weight": 12,
+    "minLevel": 78,
+    "maxLevel": 80
+   }
+  ]
+ },
  "paldea-raid": {
   "name": "Paldea Raid Island",
   "encounters": [
    {
-    "speciesKey": "pawmot",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "maushold",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "armarouge",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "ceruledge",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70
@@ -1488,31 +1716,7 @@
     "maxLevel": 70
    },
    {
-    "speciesKey": "palafin",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "glimmora",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "veluza",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "dondozo",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "tatsugiri",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70
@@ -1584,12 +1788,6 @@
     "maxLevel": 70
    },
    {
-    "speciesKey": "baxcalibur",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "gimmighoul",
     "weight": 1,
     "minLevel": 70,
@@ -1650,6 +1848,78 @@
     "maxLevel": 75
    },
    {
+    "speciesKey": "walkingWake",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "ironLeaves",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "okidogi",
+    "weight": 1,
+    "minLevel": 75,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "munkidori",
+    "weight": 1,
+    "minLevel": 75,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "fezandipiti",
+    "weight": 1,
+    "minLevel": 75,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "ogerpon",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "gougingFire",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "ragingBolt",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "ironBoulder",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "ironCrown",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "terapagos",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "pecharunt",
+    "weight": 1,
+    "minLevel": 75,
+    "maxLevel": 75
+   },
+   {
     "speciesKey": "p-tauros",
     "weight": 1,
     "minLevel": 70,
@@ -1669,12 +1939,6 @@
    },
    {
     "speciesKey": "p-wooper",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "dachsbun",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70
@@ -1710,12 +1974,6 @@
     "maxLevel": 70
    },
    {
-    "speciesKey": "wugtrio",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "houndstone",
     "weight": 1,
     "minLevel": 70,
@@ -1723,12 +1981,6 @@
    },
    {
     "speciesKey": "scovillain",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "cetitan",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70

@@ -1713,6 +1713,69 @@ const ZONES = {
       ],
     },
   ],
+  paldea: [
+    {
+      // Scarlet/Violet DLC, post-game. Kitakami hangs off the already-scraped
+      // (but otherwise empty) Mossui Town.
+      node: 'kitakami',
+      name: 'Kitakami',
+      position: { x: 7, y: 4 },
+      background: '/backgrounds/grassland.png',
+      connections: ['paldea-mossui-town'],
+      level: 72,
+      unlock: { championDefeated: 'paldea' },
+      subAreas: [
+        {
+          node: 'kitakami-revelers-road',
+          name: "Reveler's Road",
+          position: { x: 6, y: 3 },
+          species: ['poltchageist', 'dipplin', 'applin', 'nymble', 'tarountula', 'fidough'],
+        },
+        {
+          node: 'kitakami-apple-hills',
+          name: 'Apple Hills',
+          position: { x: 9, y: 3 },
+          species: ['applin', 'dipplin', 'smoliv', 'nymble', 'tadbulb', 'tarountula'],
+        },
+        {
+          node: 'kitakami-oni-mountain',
+          name: 'Oni Mountain',
+          position: { x: 5, y: 6 },
+          species: ['poltchageist', 'charcadet', 'nacli', 'frigibax', 'tadbulb', 'smoliv'],
+        },
+      ],
+    },
+    {
+      // Blueberry Academy's Terarium (Indigo Disk).
+      node: 'terarium',
+      name: 'Terarium',
+      position: { x: 96, y: 20 },
+      background: '/backgrounds/grassland.png',
+      connections: ['paldea-league'],
+      level: 78,
+      unlock: { championDefeated: 'paldea' },
+      subAreas: [
+        {
+          node: 'terarium-savanna-biome',
+          name: 'Savanna Biome',
+          position: { x: 95, y: 22 },
+          species: ['frigibax', 'cetoddle', 'pawmi', 'nacli', 'tatsugiri', 'veluza'],
+        },
+        {
+          node: 'terarium-coastal-biome',
+          name: 'Coastal Biome',
+          position: { x: 97, y: 19 },
+          species: ['veluza', 'dondozo', 'tatsugiri', 'wiglett', 'finizen', 'cetoddle'],
+        },
+        {
+          node: 'terarium-polar-biome',
+          name: 'Polar Biome',
+          position: { x: 97, y: 23 },
+          species: ['cetoddle', 'frigibax', 'nacli', 'pawmi', 'dondozo', 'veluza'],
+        },
+      ],
+    },
+  ],
 }
 for (const [regionId, zones] of Object.entries(ZONES)) {
   const region = regions.find((candidate) => candidate.id === regionId)

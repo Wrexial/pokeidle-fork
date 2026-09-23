@@ -16,6 +16,8 @@ export const CHANGELOG = [
             "Slumbering Weald, Galar Mine and Glimwood Tangle are now real wild areas too, so Galarian and Hisuian forms like Galarian Zigzagoon, Corsola and Yamask, and Hisuian Growlithe and Voltorb, can be caught in the wild",
             "The Sword/Shield expansion areas are here as post-game zones: after beating Galar's Champion, the Isle of Armor (Fields of Honor, Soothing Wetlands, Brawlers' Cave) and the Crown Tundra (Snowslide Slope, Frigid Sea, Giant's Bed) open from Hulbury and Wyndon",
             "Galar's Raid Island shrank from 59 Pokemon to 22, because those wild areas and the DLC gave its Galarian/Hisuian forms and Slowpoke line a native source",
+            "The 17 missing Gen 9 DLC Pokemon (Walking Wake through Pecharunt, including Dipplin, Poltchageist, Archaludon and Ogerpon) were added with their stats, moves, abilities, breeding data and sprites",
+            "Paldea's DLC is here too: Kitakami (off Mossui Town) and the Terarium (off the Pokemon League) are post-game zones with three areas each, opening after Paldea's Champion",
           ],
         },
       ],

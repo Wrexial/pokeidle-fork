@@ -2816,6 +2816,10 @@
     {
       "into": "appletun",
       "item": "sweetApple"
+    },
+    {
+      "into": "dipplin",
+      "level": 40
     }
   ],
   "silicobra": [
@@ -3864,6 +3868,10 @@
       "into": "gx-duraludon",
       "level": 100,
       "form": true
+    },
+    {
+      "into": "archaludon",
+      "level": 60
     }
   ],
   "eternatus": [
@@ -3996,5 +4004,17 @@
   "basculegion": [],
   "basculegion-f": [],
   "indeedee": [],
-  "indeedee-f": []
+  "indeedee-f": [],
+  "dipplin": [
+    {
+      "into": "hydrapple",
+      "level": 55
+    }
+  ],
+  "poltchageist": [
+    {
+      "into": "sinistcha",
+      "level": 40
+    }
+  ]
 }

@@ -8677,5 +8677,129 @@
    "water2"
   ],
   "undiscovered": false
+ },
+ "walkingWake": {
+  "genderRate": -1,
+  "eggGroups": [
+   "no-eggs"
+  ],
+  "undiscovered": true
+ },
+ "ironLeaves": {
+  "genderRate": -1,
+  "eggGroups": [
+   "no-eggs"
+  ],
+  "undiscovered": true
+ },
+ "dipplin": {
+  "genderRate": 4,
+  "eggGroups": [
+   "plant",
+   "dragon"
+  ],
+  "undiscovered": false
+ },
+ "poltchageist": {
+  "genderRate": -1,
+  "eggGroups": [
+   "mineral",
+   "indeterminate"
+  ],
+  "undiscovered": false
+ },
+ "sinistcha": {
+  "genderRate": -1,
+  "eggGroups": [
+   "mineral",
+   "indeterminate"
+  ],
+  "undiscovered": false
+ },
+ "okidogi": {
+  "genderRate": 0,
+  "eggGroups": [
+   "no-eggs"
+  ],
+  "undiscovered": true
+ },
+ "munkidori": {
+  "genderRate": 0,
+  "eggGroups": [
+   "no-eggs"
+  ],
+  "undiscovered": true
+ },
+ "fezandipiti": {
+  "genderRate": 0,
+  "eggGroups": [
+   "no-eggs"
+  ],
+  "undiscovered": true
+ },
+ "ogerpon": {
+  "genderRate": 8,
+  "eggGroups": [
+   "no-eggs"
+  ],
+  "undiscovered": true
+ },
+ "archaludon": {
+  "genderRate": 4,
+  "eggGroups": [
+   "mineral",
+   "dragon"
+  ],
+  "undiscovered": false
+ },
+ "hydrapple": {
+  "genderRate": 4,
+  "eggGroups": [
+   "plant",
+   "dragon"
+  ],
+  "undiscovered": false
+ },
+ "gougingFire": {
+  "genderRate": -1,
+  "eggGroups": [
+   "no-eggs"
+  ],
+  "undiscovered": true
+ },
+ "ragingBolt": {
+  "genderRate": -1,
+  "eggGroups": [
+   "no-eggs"
+  ],
+  "undiscovered": true
+ },
+ "ironBoulder": {
+  "genderRate": -1,
+  "eggGroups": [
+   "no-eggs"
+  ],
+  "undiscovered": true
+ },
+ "ironCrown": {
+  "genderRate": -1,
+  "eggGroups": [
+   "no-eggs"
+  ],
+  "undiscovered": true
+ },
+ "terapagos": {
+  "genderRate": 4,
+  "eggGroups": [
+   "no-eggs"
+  ],
+  "undiscovered": true
+ },
+ "pecharunt": {
+  "genderRate": -1,
+  "eggGroups": [
+   "no-eggs"
+  ],
+  "undiscovered": true
  }
 }

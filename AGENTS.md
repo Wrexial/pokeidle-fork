@@ -426,6 +426,13 @@ One-off scripts used to build the data JSON (not run during dev/build):
   `preEvolutionMap` (`src/data/gameData.js`, mirrored in the Node tools) skips
   a form's reverse edge so breeding/learnset chains still start from the real
   base (e.g. Palafin → Finizen).
+- `add-gen9-dlc-species.cjs` — adds the Gen 9 DLC species PokeAPI has but the
+  extracted bundle predates (ids 1009-1025, Walking Wake through Pecharunt) to
+  `pokemon-species.json` / `possible-learnsets.json` / `evolution-data.json`,
+  level-gating the item evolutions (Syrupy Apple, Metal Alloy, the teacups)
+  since those items aren't modelled. Then run `fetch-abilities` /
+  `fetch-breeding-data` / `fetch-tm-learnsets` / `download_pokemon_sprites`.
+  PokeAPI responses are cached; idempotent.
 - `fix-pokemon-stats.cjs` — reconciles every `pokemon-species.json` `baseStats`
   block and type set with the modern games (base species against Pokemon
   Showdown's dex, alternate forms against cached PokeAPI). The extracted data

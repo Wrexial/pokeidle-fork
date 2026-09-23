@@ -260,9 +260,9 @@
    "caughtOnRoute": {
     "routeKey": "paldea-south-province-area-three",
     "species": [
-     "nymble",
      "oricorio",
-     "klawf"
+     "klawf",
+     "squawkabilly"
     ],
     "count": 3
    }
@@ -294,9 +294,9 @@
    "caughtOnRoute": {
     "routeKey": "paldea-south-province-area-three",
     "species": [
-     "nymble",
      "oricorio",
-     "klawf"
+     "klawf",
+     "squawkabilly"
     ],
     "count": 3
    }
@@ -341,9 +341,9 @@
    "caughtOnRoute": {
     "routeKey": "paldea-south-province-area-three",
     "species": [
-     "nymble",
      "oricorio",
-     "klawf"
+     "klawf",
+     "squawkabilly"
     ],
     "count": 3
    }
@@ -430,10 +430,9 @@
    "caughtOnRoute": {
     "routeKey": "paldea-south-province-area-two",
     "species": [
-     "smoliv",
      "maschiff"
     ],
-    "count": 2
+    "count": 1
    }
   },
   "unlockOrder": 910004.0004,
@@ -951,7 +950,8 @@
   "region": "paldea",
   "description": "A town in the Paldea region.",
   "connections": [
-   "paldea-north-province-area-three"
+   "paldea-north-province-area-three",
+   "paldea-kitakami"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -967,8 +967,8 @@
   },
   "unlockOrder": 910006.5002,
   "position": {
-   "x": 9.06,
-   "y": 6.58
+   "x": 9.32344617638786,
+   "y": 6.878754140328271
   },
   "mart": {
    "name": "Paldea Mart",
@@ -1012,8 +1012,8 @@
   },
   "unlockOrder": 910007.5,
   "position": {
-   "x": 94,
-   "y": 25
+   "x": 93.97168607131609,
+   "y": 25.430756333464565
   }
  },
  "paldea-league": {
@@ -1023,7 +1023,8 @@
   "region": "paldea",
   "description": "The Paldea Pokémon League.",
   "connections": [
-   "paldea-east-province-area-two"
+   "paldea-east-province-area-two",
+   "paldea-terarium"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1047,6 +1048,224 @@
   "position": {
    "x": 94,
    "y": 31
+  }
+ },
+ "paldea-kitakami-revelers-road": {
+  "id": "paldea-kitakami-revelers-road",
+  "name": "Reveler's Road",
+  "type": "route",
+  "region": "paldea",
+  "description": "A sub-area of the Kitakami.",
+  "routeKey": "paldea-kitakami-revelers-road",
+  "background": "/backgrounds/grassland.png",
+  "connections": [
+   "paldea-kitakami"
+  ],
+  "hidden": true,
+  "zone": "paldea-kitakami",
+  "unlock": {
+   "requires": [
+    "paldea-kitakami"
+   ]
+  },
+  "unlockOrder": 910007,
+  "position": {
+   "x": 5.350599463558225,
+   "y": 2.3382932874226787
+  }
+ },
+ "paldea-kitakami-apple-hills": {
+  "id": "paldea-kitakami-apple-hills",
+  "name": "Apple Hills",
+  "type": "route",
+  "region": "paldea",
+  "description": "A sub-area of the Kitakami.",
+  "routeKey": "paldea-kitakami-apple-hills",
+  "background": "/backgrounds/grassland.png",
+  "connections": [
+   "paldea-kitakami"
+  ],
+  "hidden": true,
+  "zone": "paldea-kitakami",
+  "unlock": {
+   "requires": [
+    "paldea-kitakami"
+   ]
+  },
+  "unlockOrder": 910007.001,
+  "position": {
+   "x": 9.43098037209967,
+   "y": 2.54067158346724
+  }
+ },
+ "paldea-kitakami-oni-mountain": {
+  "id": "paldea-kitakami-oni-mountain",
+  "name": "Oni Mountain",
+  "type": "route",
+  "region": "paldea",
+  "description": "A sub-area of the Kitakami.",
+  "routeKey": "paldea-kitakami-oni-mountain",
+  "background": "/backgrounds/mountain.png",
+  "connections": [
+   "paldea-kitakami"
+  ],
+  "hidden": true,
+  "zone": "paldea-kitakami",
+  "unlock": {
+   "requires": [
+    "paldea-kitakami"
+   ]
+  },
+  "unlockOrder": 910007.002,
+  "position": {
+   "x": 4.677467672063965,
+   "y": 6.164311719765116
+  }
+ },
+ "paldea-kitakami": {
+  "id": "paldea-kitakami",
+  "name": "Kitakami",
+  "type": "zone",
+  "region": "paldea",
+  "description": "The Kitakami is a wide-open stretch with several distinct habitats.",
+  "routeKey": "paldea-kitakami-revelers-road",
+  "background": "/backgrounds/grassland.png",
+  "connections": [
+   "paldea-mossui-town",
+   "paldea-kitakami-revelers-road",
+   "paldea-kitakami-apple-hills",
+   "paldea-kitakami-oni-mountain"
+  ],
+  "subAreas": [
+   {
+    "id": "paldea-kitakami-revelers-road",
+    "name": "Reveler's Road"
+   },
+   {
+    "id": "paldea-kitakami-apple-hills",
+    "name": "Apple Hills"
+   },
+   {
+    "id": "paldea-kitakami-oni-mountain",
+    "name": "Oni Mountain"
+   }
+  ],
+  "unlock": {
+   "championDefeated": "paldea"
+  },
+  "unlockOrder": 910006.9,
+  "position": {
+   "x": 7.277506315890282,
+   "y": 4.6579692690166965
+  }
+ },
+ "paldea-terarium-savanna-biome": {
+  "id": "paldea-terarium-savanna-biome",
+  "name": "Savanna Biome",
+  "type": "route",
+  "region": "paldea",
+  "description": "A sub-area of the Terarium.",
+  "routeKey": "paldea-terarium-savanna-biome",
+  "background": "/backgrounds/mountain.png",
+  "connections": [
+   "paldea-terarium"
+  ],
+  "hidden": true,
+  "zone": "paldea-terarium",
+  "unlock": {
+   "requires": [
+    "paldea-terarium"
+   ]
+  },
+  "unlockOrder": 910009,
+  "position": {
+   "x": 93.99811372274266,
+   "y": 22.428301572745625
+  }
+ },
+ "paldea-terarium-coastal-biome": {
+  "id": "paldea-terarium-coastal-biome",
+  "name": "Coastal Biome",
+  "type": "route",
+  "region": "paldea",
+  "description": "A sub-area of the Terarium.",
+  "routeKey": "paldea-terarium-coastal-biome",
+  "background": "/backgrounds/beach.png",
+  "connections": [
+   "paldea-terarium"
+  ],
+  "hidden": true,
+  "zone": "paldea-terarium",
+  "unlock": {
+   "requires": [
+    "paldea-terarium"
+   ]
+  },
+  "unlockOrder": 910009.001,
+  "position": {
+   "x": 98,
+   "y": 18.07335602995268
+  }
+ },
+ "paldea-terarium-polar-biome": {
+  "id": "paldea-terarium-polar-biome",
+  "name": "Polar Biome",
+  "type": "route",
+  "region": "paldea",
+  "description": "A sub-area of the Terarium.",
+  "routeKey": "paldea-terarium-polar-biome",
+  "background": "/backgrounds/mountain.png",
+  "connections": [
+   "paldea-terarium"
+  ],
+  "hidden": true,
+  "zone": "paldea-terarium",
+  "unlock": {
+   "requires": [
+    "paldea-terarium"
+   ]
+  },
+  "unlockOrder": 910009.002,
+  "position": {
+   "x": 97.35058505840988,
+   "y": 23.175292529204935
+  }
+ },
+ "paldea-terarium": {
+  "id": "paldea-terarium",
+  "name": "Terarium",
+  "type": "zone",
+  "region": "paldea",
+  "description": "The Terarium is a wide-open stretch with several distinct habitats.",
+  "routeKey": "paldea-terarium-savanna-biome",
+  "background": "/backgrounds/grassland.png",
+  "connections": [
+   "paldea-league",
+   "paldea-terarium-savanna-biome",
+   "paldea-terarium-coastal-biome",
+   "paldea-terarium-polar-biome"
+  ],
+  "subAreas": [
+   {
+    "id": "paldea-terarium-savanna-biome",
+    "name": "Savanna Biome"
+   },
+   {
+    "id": "paldea-terarium-coastal-biome",
+    "name": "Coastal Biome"
+   },
+   {
+    "id": "paldea-terarium-polar-biome",
+    "name": "Polar Biome"
+   }
+  ],
+  "unlock": {
+   "championDefeated": "paldea"
+  },
+  "unlockOrder": 910008.9,
+  "position": {
+   "x": 95.60456249184469,
+   "y": 19.892293534632195
   }
  }
 }

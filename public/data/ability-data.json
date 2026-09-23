@@ -7750,5 +7750,110 @@
    "zeroToHero"
   ],
   "hidden": null
+ },
+ "walkingWake": {
+  "abilities": [
+   "protosynthesis"
+  ],
+  "hidden": null
+ },
+ "ironLeaves": {
+  "abilities": [
+   "quarkDrive"
+  ],
+  "hidden": null
+ },
+ "dipplin": {
+  "abilities": [
+   "supersweetSyrup",
+   "gluttony"
+  ],
+  "hidden": "stickyHold"
+ },
+ "poltchageist": {
+  "abilities": [
+   "hospitality"
+  ],
+  "hidden": "heatproof"
+ },
+ "sinistcha": {
+  "abilities": [
+   "hospitality"
+  ],
+  "hidden": "heatproof"
+ },
+ "okidogi": {
+  "abilities": [
+   "toxicChain"
+  ],
+  "hidden": "guardDog"
+ },
+ "munkidori": {
+  "abilities": [
+   "toxicChain"
+  ],
+  "hidden": "frisk"
+ },
+ "fezandipiti": {
+  "abilities": [
+   "toxicChain"
+  ],
+  "hidden": "technician"
+ },
+ "ogerpon": {
+  "abilities": [
+   "defiant"
+  ],
+  "hidden": null
+ },
+ "archaludon": {
+  "abilities": [
+   "stamina",
+   "sturdy"
+  ],
+  "hidden": "stalwart"
+ },
+ "hydrapple": {
+  "abilities": [
+   "supersweetSyrup",
+   "regenerator"
+  ],
+  "hidden": "stickyHold"
+ },
+ "gougingFire": {
+  "abilities": [
+   "protosynthesis"
+  ],
+  "hidden": null
+ },
+ "ragingBolt": {
+  "abilities": [
+   "protosynthesis"
+  ],
+  "hidden": null
+ },
+ "ironBoulder": {
+  "abilities": [
+   "quarkDrive"
+  ],
+  "hidden": null
+ },
+ "ironCrown": {
+  "abilities": [
+   "quarkDrive"
+  ],
+  "hidden": null
+ },
+ "terapagos": {
+  "abilities": [
+   "teraShift"
+  ],
+  "hidden": null
+ },
+ "pecharunt": {
+  "abilities": [
+   "poisonPuppeteer"
+  ],
+  "hidden": null
  }
 }

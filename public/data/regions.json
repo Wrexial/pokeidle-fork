@@ -749,19 +749,7 @@
   "leagueLocationKey": "paldea-league",
   "raidPool": [
    {
-    "speciesKey": "pawmot",
-    "level": 70
-   },
-   {
     "speciesKey": "maushold",
-    "level": 70
-   },
-   {
-    "speciesKey": "armarouge",
-    "level": 70
-   },
-   {
-    "speciesKey": "ceruledge",
     "level": 70
    },
    {
@@ -777,23 +765,7 @@
     "level": 70
    },
    {
-    "speciesKey": "palafin",
-    "level": 70
-   },
-   {
     "speciesKey": "glimmora",
-    "level": 70
-   },
-   {
-    "speciesKey": "veluza",
-    "level": 70
-   },
-   {
-    "speciesKey": "dondozo",
-    "level": 70
-   },
-   {
-    "speciesKey": "tatsugiri",
     "level": 70
    },
    {
@@ -841,10 +813,6 @@
     "level": 70
    },
    {
-    "speciesKey": "baxcalibur",
-    "level": 70
-   },
-   {
     "speciesKey": "gimmighoul",
     "level": 70
    },
@@ -885,6 +853,54 @@
     "level": 75
    },
    {
+    "speciesKey": "walkingWake",
+    "level": 70
+   },
+   {
+    "speciesKey": "ironLeaves",
+    "level": 70
+   },
+   {
+    "speciesKey": "okidogi",
+    "level": 75
+   },
+   {
+    "speciesKey": "munkidori",
+    "level": 75
+   },
+   {
+    "speciesKey": "fezandipiti",
+    "level": 75
+   },
+   {
+    "speciesKey": "ogerpon",
+    "level": 70
+   },
+   {
+    "speciesKey": "gougingFire",
+    "level": 70
+   },
+   {
+    "speciesKey": "ragingBolt",
+    "level": 70
+   },
+   {
+    "speciesKey": "ironBoulder",
+    "level": 70
+   },
+   {
+    "speciesKey": "ironCrown",
+    "level": 70
+   },
+   {
+    "speciesKey": "terapagos",
+    "level": 70
+   },
+   {
+    "speciesKey": "pecharunt",
+    "level": 75
+   },
+   {
     "speciesKey": "p-tauros",
     "level": 70
    },
@@ -898,10 +914,6 @@
    },
    {
     "speciesKey": "p-wooper",
-    "level": 70
-   },
-   {
-    "speciesKey": "dachsbun",
     "level": 70
    },
    {
@@ -925,19 +937,11 @@
     "level": 70
    },
    {
-    "speciesKey": "wugtrio",
-    "level": 70
-   },
-   {
     "speciesKey": "houndstone",
     "level": 70
    },
    {
     "speciesKey": "scovillain",
-    "level": 70
-   },
-   {
-    "speciesKey": "cetitan",
     "level": 70
    },
    {

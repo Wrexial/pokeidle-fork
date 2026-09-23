@@ -480,7 +480,9 @@ with an Unlock Token like any other region.
 **Partial (0.37.0):** Galar's DLC shipped the first (smaller) way — Isle of
 Armor and Crown Tundra are post-game zones inside Galar (see #36), gated on
 `championDefeated: 'galar'`, with their own sub-areas and encounters. Paldea's
-Kitakami/Terarium and first-class-region promotion are still open.
+Kitakami and Terarium shipped the same way (gated on `championDefeated:
+'paldea'`), which needed the 17 missing Gen 9 DLC species to be added first
+(`tools/add-gen9-dlc-species.cjs`). First-class-region promotion is still open.
 
 - [ ] Decide the model: a region whose `generation` points at its parent gen,
       vs. a new `parentRegion` / `isDlc` flag. Regions currently map 1:1 to

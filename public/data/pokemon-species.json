@@ -22258,5 +22258,332 @@
     "baseExpYield": 44,
     "growthRate": "slow",
     "catchRate": 29
+  },
+  "walkingWake": {
+    "id": 1009,
+    "name": "Walking Wake",
+    "types": [
+      "Water",
+      "Dragon"
+    ],
+    "baseStats": {
+      "hp": 99,
+      "attack": 83,
+      "defense": 91,
+      "spAttack": 125,
+      "spDefense": 83,
+      "speed": 109
+    },
+    "baseExpYield": 295,
+    "growthRate": "slow",
+    "catchRate": 5
+  },
+  "ironLeaves": {
+    "id": 1010,
+    "name": "Iron Leaves",
+    "types": [
+      "Grass",
+      "Psychic"
+    ],
+    "baseStats": {
+      "hp": 90,
+      "attack": 130,
+      "defense": 88,
+      "spAttack": 70,
+      "spDefense": 108,
+      "speed": 104
+    },
+    "baseExpYield": 295,
+    "growthRate": "slow",
+    "catchRate": 5
+  },
+  "dipplin": {
+    "id": 1011,
+    "name": "Dipplin",
+    "types": [
+      "Grass",
+      "Dragon"
+    ],
+    "baseStats": {
+      "hp": 80,
+      "attack": 80,
+      "defense": 110,
+      "spAttack": 95,
+      "spDefense": 80,
+      "speed": 40
+    },
+    "baseExpYield": 170,
+    "growthRate": "slow",
+    "catchRate": 45
+  },
+  "poltchageist": {
+    "id": 1012,
+    "name": "Poltchageist",
+    "types": [
+      "Grass",
+      "Ghost"
+    ],
+    "baseStats": {
+      "hp": 40,
+      "attack": 45,
+      "defense": 45,
+      "spAttack": 74,
+      "spDefense": 54,
+      "speed": 50
+    },
+    "baseExpYield": 62,
+    "growthRate": "slow",
+    "catchRate": 120
+  },
+  "sinistcha": {
+    "id": 1013,
+    "name": "Sinistcha",
+    "types": [
+      "Grass",
+      "Ghost"
+    ],
+    "baseStats": {
+      "hp": 71,
+      "attack": 60,
+      "defense": 106,
+      "spAttack": 121,
+      "spDefense": 80,
+      "speed": 70
+    },
+    "baseExpYield": 178,
+    "growthRate": "slow",
+    "catchRate": 60
+  },
+  "okidogi": {
+    "id": 1014,
+    "name": "Okidogi",
+    "types": [
+      "Poison",
+      "Fighting"
+    ],
+    "baseStats": {
+      "hp": 88,
+      "attack": 128,
+      "defense": 115,
+      "spAttack": 58,
+      "spDefense": 86,
+      "speed": 80
+    },
+    "baseExpYield": 278,
+    "growthRate": "slow",
+    "catchRate": 3,
+    "legendary": true
+  },
+  "munkidori": {
+    "id": 1015,
+    "name": "Munkidori",
+    "types": [
+      "Poison",
+      "Psychic"
+    ],
+    "baseStats": {
+      "hp": 88,
+      "attack": 75,
+      "defense": 66,
+      "spAttack": 130,
+      "spDefense": 90,
+      "speed": 106
+    },
+    "baseExpYield": 278,
+    "growthRate": "slow",
+    "catchRate": 3,
+    "legendary": true
+  },
+  "fezandipiti": {
+    "id": 1016,
+    "name": "Fezandipiti",
+    "types": [
+      "Poison",
+      "Fairy"
+    ],
+    "baseStats": {
+      "hp": 88,
+      "attack": 91,
+      "defense": 82,
+      "spAttack": 70,
+      "spDefense": 125,
+      "speed": 99
+    },
+    "baseExpYield": 278,
+    "growthRate": "slow",
+    "catchRate": 3,
+    "legendary": true
+  },
+  "ogerpon": {
+    "id": 1017,
+    "name": "Ogerpon",
+    "types": [
+      "Grass"
+    ],
+    "baseStats": {
+      "hp": 80,
+      "attack": 120,
+      "defense": 84,
+      "spAttack": 60,
+      "spDefense": 96,
+      "speed": 110
+    },
+    "baseExpYield": 275,
+    "growthRate": "slow",
+    "catchRate": 5,
+    "legendary": true
+  },
+  "archaludon": {
+    "id": 1018,
+    "name": "Archaludon",
+    "types": [
+      "Steel",
+      "Dragon"
+    ],
+    "baseStats": {
+      "hp": 90,
+      "attack": 105,
+      "defense": 130,
+      "spAttack": 125,
+      "spDefense": 65,
+      "speed": 85
+    },
+    "baseExpYield": 300,
+    "growthRate": "mediumFast",
+    "catchRate": 10
+  },
+  "hydrapple": {
+    "id": 1019,
+    "name": "Hydrapple",
+    "types": [
+      "Grass",
+      "Dragon"
+    ],
+    "baseStats": {
+      "hp": 106,
+      "attack": 80,
+      "defense": 110,
+      "spAttack": 120,
+      "spDefense": 80,
+      "speed": 44
+    },
+    "baseExpYield": 270,
+    "growthRate": "mediumSlow",
+    "catchRate": 10
+  },
+  "gougingFire": {
+    "id": 1020,
+    "name": "Gouging Fire",
+    "types": [
+      "Fire",
+      "Dragon"
+    ],
+    "baseStats": {
+      "hp": 105,
+      "attack": 115,
+      "defense": 121,
+      "spAttack": 65,
+      "spDefense": 93,
+      "speed": 91
+    },
+    "baseExpYield": 295,
+    "growthRate": "slow",
+    "catchRate": 10
+  },
+  "ragingBolt": {
+    "id": 1021,
+    "name": "Raging Bolt",
+    "types": [
+      "Electric",
+      "Dragon"
+    ],
+    "baseStats": {
+      "hp": 125,
+      "attack": 73,
+      "defense": 91,
+      "spAttack": 137,
+      "spDefense": 89,
+      "speed": 75
+    },
+    "baseExpYield": 295,
+    "growthRate": "slow",
+    "catchRate": 10
+  },
+  "ironBoulder": {
+    "id": 1022,
+    "name": "Iron Boulder",
+    "types": [
+      "Rock",
+      "Psychic"
+    ],
+    "baseStats": {
+      "hp": 90,
+      "attack": 120,
+      "defense": 80,
+      "spAttack": 68,
+      "spDefense": 108,
+      "speed": 124
+    },
+    "baseExpYield": 295,
+    "growthRate": "slow",
+    "catchRate": 10
+  },
+  "ironCrown": {
+    "id": 1023,
+    "name": "Iron Crown",
+    "types": [
+      "Steel",
+      "Psychic"
+    ],
+    "baseStats": {
+      "hp": 90,
+      "attack": 72,
+      "defense": 100,
+      "spAttack": 122,
+      "spDefense": 108,
+      "speed": 98
+    },
+    "baseExpYield": 295,
+    "growthRate": "slow",
+    "catchRate": 10
+  },
+  "terapagos": {
+    "id": 1024,
+    "name": "Terapagos",
+    "types": [
+      "Normal"
+    ],
+    "baseStats": {
+      "hp": 90,
+      "attack": 65,
+      "defense": 85,
+      "spAttack": 65,
+      "spDefense": 85,
+      "speed": 60
+    },
+    "baseExpYield": 90,
+    "growthRate": "slow",
+    "catchRate": 255,
+    "legendary": true
+  },
+  "pecharunt": {
+    "id": 1025,
+    "name": "Pecharunt",
+    "types": [
+      "Poison",
+      "Ghost"
+    ],
+    "baseStats": {
+      "hp": 88,
+      "attack": 88,
+      "defense": 160,
+      "spAttack": 88,
+      "spDefense": 88,
+      "speed": 88
+    },
+    "baseExpYield": 300,
+    "growthRate": "slow",
+    "catchRate": 3,
+    "legendary": true
   }
 }

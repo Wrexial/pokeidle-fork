@@ -14,6 +14,9 @@ export const WEATHER_ABILITIES = {
   drought: 'sun',
   sandStream: 'sandstorm',
   snowWarning: 'snow',
+  desolateLand: 'harshSunlight',
+  primordialSea: 'heavyRain',
+  deltaStream: 'strongWinds',
 }
 
 /** Weather Ball's type per weather; its power doubles in any weather. @type {Record<string, string>} */
@@ -32,6 +35,9 @@ export const WEATHER_NAMES = {
   sandstorm: 'a sandstorm',
   snow: 'snow',
   hail: 'hail',
+  harshSunlight: 'extremely harsh sunlight',
+  heavyRain: 'a heavy downpour',
+  strongWinds: 'strong winds',
 }
 
 /** Icon per weather for the battle badge. @type {Record<string, string>} */
@@ -41,6 +47,9 @@ export const WEATHER_ICONS = {
   sandstorm: '\ud83c\udf2a',
   snow: '\u2744',
   hail: '\ud83c\udf28',
+  harshSunlight: '\u2600',
+  heavyRain: '\ud83c\udf27',
+  strongWinds: '\ud83c\udf00',
 }
 
 /**
@@ -73,6 +82,10 @@ export function weatherDamageMultiplier(weather, moveDef) {
     return moveDef.type === 'Water' ? 1.5 : moveDef.type === 'Fire' ? 0.5 : 1
   if (weather.type === 'sun')
     return moveDef.type === 'Fire' ? 1.5 : moveDef.type === 'Water' ? 0.5 : 1
+  // The extreme weathers boost their type; the nullified type is refused in
+  // the turn resolver so it never reaches the damage step.
+  if (weather.type === 'harshSunlight') return moveDef.type === 'Fire' ? 1.5 : 1
+  if (weather.type === 'heavyRain') return moveDef.type === 'Water' ? 1.5 : 1
   return 1
 }
 

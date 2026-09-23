@@ -220,7 +220,8 @@ Beast Boost). Field auras (Dark/Fairy Aura, Aura Break), Trace, and the on-hit
 boosters (Justified, Steam Engine, Thermal Exchange, Water Compaction, Weak
 Armor, Anger Point, Soul-Heart) are in too, along with Berserk / Anger Shell
 (HP-threshold), Moody, Harvest, Ripen, Infiltrator, Unseen Fist and Good as
-Gold. `abilityPreventsStatus` also now treats badly-poisoned as poison
+Gold, plus the extreme weathers (Desolate Land / Primordial Sea / Delta
+Stream). `abilityPreventsStatus` also now treats badly-poisoned as poison
 (Immunity / Pastel Veil).
 
 Still open:

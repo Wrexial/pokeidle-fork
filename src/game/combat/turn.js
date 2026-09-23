@@ -815,6 +815,17 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     // Weather rewrites Weather Ball's type/power and makes Thunder, Hurricane
     // and Blizzard never miss.
     const effectiveMove = applyWeatherToMove(activeWeather, moveDef)
+    // The extreme weathers refuse the opposite elemental type.
+    if (
+      (activeWeather?.type === 'harshSunlight' && effectiveMove.type === 'Water') ||
+      (activeWeather?.type === 'heavyRain' && effectiveMove.type === 'Fire')
+    ) {
+      events.push({
+        type: 'miss',
+        message: `The ${effectiveMove.type}-type move was negated by the extreme weather!`,
+      })
+      continue
+    }
     // Levitate / type-absorbing abilities negate the move (and usually heal).
     if (abilityAbsorbsType(attack.defender, effectiveMove.type)) {
       if (abilityHealsFromType(attack.defender, effectiveMove.type)) {
@@ -1001,6 +1012,13 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       1,
       Math.floor(totalDamage * abilityEffectivenessMultiplier(attack.attacker, damageResult.effectiveness))
     )
+    // Delta Stream cancels Flying-type weaknesses.
+    if (
+      activeWeather?.type === 'strongWinds' &&
+      attack.defender.types.includes('Flying') &&
+      damageResult.effectiveness > 1
+    )
+      totalDamage = Math.max(1, Math.floor(totalDamage / damageResult.effectiveness))
     if (abilityBlocksNonSuperEffective(attack.defender, damageResult.effectiveness)) {
       events.push({
         type: 'miss',

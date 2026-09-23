@@ -179,3 +179,63 @@ test('weather expires after its turns run out', () => {
     assert.ok(events.some((/** @type {any} */ event) => event.message?.includes('subsided')))
   })
 })
+
+test('the extreme weather abilities set their weather on entry', () => {
+  withFixedRandom(0.5, () => {
+    const weatherFor = (/** @type {string} */ ability) => {
+      const player = battler({ name: 'Player', isPlayer: true, moves: ['splash'], speed: 200, ability }),
+        enemy = battler({ name: 'Foe', moves: ['splash'] }),
+        weather = lastWeather(resolveBattleTurn(player, enemy, false, !0))
+      return weather?.data?.weather?.type
+    }
+    assert.equal(weatherFor('desolateLand'), 'harshSunlight')
+    assert.equal(weatherFor('primordialSea'), 'heavyRain')
+    assert.equal(weatherFor('deltaStream'), 'strongWinds')
+  })
+})
+
+test('harsh sunlight negates Water moves and heavy rain negates Fire moves', () => {
+  withFixedRandom(0.5, () => {
+    const run = (/** @type {string} */ move, weather) => {
+      const player = battler({ name: 'Player', isPlayer: true, moves: [move], speed: 200 }),
+        enemy = battler({ name: 'Foe', moves: ['splash'], currentHp: 400, maxHp: 400 })
+      const events = resolveBattleTurn(player, enemy, false, false, weather)
+      return {
+        hp: enemy.currentHp,
+        negated: events.some((/** @type {any} */ event) =>
+          event.message?.includes('negated by the extreme weather')
+        ),
+      }
+    }
+    const water = run('waterGun', { type: 'harshSunlight', turns: 5 })
+    assert.equal(water.hp, 400)
+    assert.equal(water.negated, true)
+    const fire = run('flamethrower', { type: 'heavyRain', turns: 5 })
+    assert.equal(fire.hp, 400)
+    assert.equal(fire.negated, true)
+  })
+})
+
+test('Delta Stream cancels Flying weaknesses', () => {
+  withFixedRandom(0.5, () => {
+    const damage = (/** @type {any} */ weather) => {
+      const player = battler({
+          name: 'Player',
+          isPlayer: true,
+          moves: ['thunderbolt'],
+          speed: 200,
+          spAttack: 300,
+        }),
+        enemy = battler({
+          name: 'Foe',
+          moves: ['splash'],
+          types: ['Flying'],
+          currentHp: 2000,
+          maxHp: 2000,
+        })
+      resolveBattleTurn(player, enemy, false, false, weather)
+      return 2000 - enemy.currentHp
+    }
+    assert.ok(damage({ type: 'strongWinds', turns: 5 }) < damage(null), 'the Electric weakness is removed')
+  })
+})

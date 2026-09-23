@@ -78,12 +78,24 @@ export let championData = /** @type {any[]} */ (loadedGameData.championData)
 export let regions = /** @type {Region[]} */ (loadedGameData.regions || [])
 
 /**
- * Raid pool for a region — its generation's Pokemon that can't be caught in
- * the region (empty if the region is unknown).
+ * The Raid Island's encounter table for a region: its legendaries first, then
+ * the ordinary finals that have no other source (empty if the region is
+ * unknown). Used for the island's display and wild table.
  * @param {string} regionId
  * @returns {{ speciesKey: string, level: number }[]}
  */
 export function raidPoolFor(regionId) {
+  const region = regions.find((candidate) => candidate.id === regionId)
+  return region ? [...(region.raidPool ?? []), ...(region.raidOrdinaryPool ?? [])] : []
+}
+
+/**
+ * The legendaries a region's Raid Island can headline a raid with. Raids are a
+ * legendary hunt; the ordinary finals are a separate, lower tier.
+ * @param {string} regionId
+ * @returns {{ speciesKey: string, level: number }[]}
+ */
+export function raidLegendaryPoolFor(regionId) {
   return regions.find((region) => region.id === regionId)?.raidPool ?? []
 }
 

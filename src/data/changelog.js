@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.38.4'
+export const GAME_VERSION = '0.38.5'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.38.5',
+      subtitle: 'Raid Islands',
+      sections: [
+        {
+          heading: 'Raids',
+          items: [
+            'Raid Islands now headline a legendary every time: each region splits its pool into its legendaries and a separate, lower tier of ordinary finals (fossils, regional forms and one-off lines), so a Simisage or a fossil can no longer turn up as the island\u2019s \u201clegendary\u201d raid boss',
+            'The ordinary finals still roam the island\u2019s wild table \u2014 each region\u2019s set is capped at 15 \u2014 while raid bosses and overworld roamers are drawn from the legendaries only',
+          ],
+        },
+      ],
+    },
     {
       version: '0.38.4',
       subtitle: 'Caught Indicators',

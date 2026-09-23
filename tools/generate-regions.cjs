@@ -2420,20 +2420,31 @@ while (breedGrew) {
         (breedReachable.add(evolution.into), (breedGrew = true))
 }
 
+// The legendary pool is every legendary/mythical with no other source, and is
+// kept in full. Ordinary finals (fossils, regional forms, one-off lines) are a
+// distinct lower tier: they still live on the island's wild table, but never
+// headline a raid. The cap is a safety rail — the route/breeding scan already
+// keeps the ordinary sets around a dozen.
+const RAID_ORDINARY_CAP = 15
 for (const pending of pendingRaids) {
-  const { regionObj, raidId, raidNodeName } = pending
-  regionObj.raidPool = raidPoolSpecies(raidCandidates(pending), breedReachable).map((entry) => ({
-    speciesKey: entry.key,
-    level: raidLevel(entry),
-  }))
+  const { regionObj, raidId, raidNodeName } = pending,
+    pool = raidPoolSpecies(raidCandidates(pending), breedReachable),
+    legendaryPool = pool.filter((entry) => entry.legendary),
+    ordinaryPool = pool.filter((entry) => !entry.legendary).slice(0, RAID_ORDINARY_CAP),
+    toEntry = (entry) => ({ speciesKey: entry.key, level: raidLevel(entry) })
+  regionObj.raidPool = legendaryPool.map(toEntry)
+  regionObj.raidOrdinaryPool = ordinaryPool.map(toEntry)
+  // The island's wild table carries both tiers, in legendary-first order, so
+  // nothing is orphaned and idling on the island can surface the ordinary set.
+  const islandPool = [...legendaryPool, ...ordinaryPool]
   if (raidId)
     encounterData[raidId] = {
       name: raidNodeName,
-      encounters: regionObj.raidPool.map((entry) => ({
-        speciesKey: entry.speciesKey,
+      encounters: islandPool.map((entry) => ({
+        speciesKey: entry.key,
         weight: 1,
-        minLevel: entry.level,
-        maxLevel: entry.level,
+        minLevel: raidLevel(entry),
+        maxLevel: raidLevel(entry),
       })),
     }
 }

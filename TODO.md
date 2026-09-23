@@ -1,6 +1,6 @@
 # TODO
 
-Open ideas and follow-ups. Current game version: **0.38.4**
+Open ideas and follow-ups. Current game version: **0.38.5**
 (`src/data/changelog.js`). Finished work lives in the changelog, not here — this
 file only tracks what is **still open**. See `AGENTS.md` for architecture,
 commands and data conventions.
@@ -26,37 +26,35 @@ renumbered, so the gaps below are items that shipped.
 
 ### Tier 2 — High impact, worth the effort (medium–large)
 
-5. **#24 Move data pass (remaining)** — M–L · ★★★★½ — the rest of the
+4. **#24 Move data pass (remaining)** — M–L · ★★★★½ — the rest of the
    no-op/partly-modelled moves.
-6. **#25 Battle engine pass (remaining)** — M–L · ★★★★½ — pairs with #24; the
+5. **#25 Battle engine pass (remaining)** — M–L · ★★★★½ — pairs with #24; the
    rest of the abilities/items hooks and battle polish.
-7. **#36 Zones (route chunks)** — M–L · ★★★★ — lets Alola/Galar/Paldea map as
+6. **#36 Zones (route chunks)** — M–L · ★★★★ — lets Alola/Galar/Paldea map as
    chunks of areas instead of a single-route-wide graph.
-8. **#38 Clean up the Raid Islands** — M · ★★★½ — later generations leave
-   50–60 species on one raid pool, turning raids into a shapeless grab bag.
-9. **#40 Alola / Galar / Paldea league structures** — M · ★★★½ — trials, the
+7. **#40 Alola / Galar / Paldea league structures** — M · ★★★½ — trials, the
    Champion Cup and any-order gyms don't fit the 8-gyms + E4 model. **(partial:
    0.38.0 shipped the data-driven model; Alola's full 11-slot trial track and
    Paldea's Titans / Team Star remain.)**
-10. **#11 NPC gifts & static encounters** — M · ★★★ — one-off gift NPCs and
-    single overworld catches; needs a few small state flags.
-11. **#29 Fishing / companion minigames** — M–L · ★★★ — the rest of the
-    minigame menu, now that the scene + phase pattern exists.
-12. **#35 More Galar areas** — M · ★★★½ — Galar is the thinnest region map.
-13. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of Armor,
+8. **#11 NPC gifts & static encounters** — M · ★★★ — one-off gift NPCs and
+   single overworld catches; needs a few small state flags.
+9. **#29 Fishing / companion minigames** — M–L · ★★★ — the rest of the
+   minigame menu, now that the scene + phase pattern exists.
+10. **#35 More Galar areas** — M · ★★★½ — Galar is the thinnest region map.
+11. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of Armor,
     Crown Tundra, Kitakami and the Terarium to first-class regions.
-14. **#18 Better settings** — M · ★★★★ — centralise the QOL toggles and store
+12. **#18 Better settings** — M · ★★★★ — centralise the QOL toggles and store
     settings separately from the save.
-15. **#28 More region areas (caves, POIs, DLC land)** — L · ★★★★½ — real
+13. **#28 More region areas (caves, POIs, DLC land)** — L · ★★★★½ — real
     content; data-heavy. Pairs with #35/#36/#39.
-16. **#4 In-battle Mega evolution** — M–L · ★★★ — Mega Stones plus a mid-battle
+14. **#4 In-battle Mega evolution** — M–L · ★★★ — Mega Stones plus a mid-battle
     transformation action.
 
 ### Tier 3 — Big / low-return, defer
 
-17. **#10 Weather & terrain leftovers** — M · ★★½ — terrain synergy abilities
+15. **#10 Weather & terrain leftovers** — M · ★★½ — terrain synergy abilities
     and weather/accuracy interactions.
-18. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+16. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
 ---
@@ -436,33 +434,36 @@ Hoenn 15, Sinnoh 20, Unova 27, Kalos 10, Alola **51**, Galar **59**, Paldea
 otherwise-unobtainable species, and `npm run validate` checks every species is
 obtainable.
 
-**Partial (0.37.0):** Galar's pool dropped from 59 to 20, Alola's from 50 to
-27 and Paldea's from 56 to 12 (the last two are legendaries only) once the Wild
-Area, the new Galar areas, the DLC zones and Area Zero gave their regional
-forms, DLC species and paradox Pokemon native routes. The remaining Galar
-ordinary members are the revived fossils, the Galarian birds and female
-Indeedee. The earlier regions (Unova 26, Sinnoh 20) could still be trimmed the
-same way if desired.
+**Shipped (0.38.5):** each region's island is now split into two tiers in
+`regions.json`:
 
-- [ ] Decide a target shape per region: e.g. keep **all** legendaries/mythicals
-      (no other source) plus a capped non-legendary set (~10–15), and move the
-      overflow to a real acquisition path (routed encounters, DLC areas #39,
-      evolution items) rather than deleting it.
-- [ ] Separate legendaries from the general pool in the data and the UI, so a
-      raid can prioritise uncaught legends and ordinary finals are a distinct,
-      lower-tier source.
-- [ ] Consider weighting/level-gating the pool (by badges/prestige) instead of a
-      uniform pick, and whether `raidPoolFor` should return the capped list.
-- [ ] Explain *why* the later pools are big and fix the root cause where it is
-      a data gap (regional/paradox forms and DLC mons with no native route),
-      not just a cap (see #35, #39).
-- [ ] Re-run `tools/generate-regions.cjs`, re-check every region's `raidPool`,
-      and confirm `validate-data.cjs` still passes with nothing orphaned.
+- `raidPool` — every legendary/mythical with no other source; these are the
+  raid bosses.
+- `raidOrdinaryPool` — the ordinary finals (fossils, regional forms, one-off
+  lines) with no other source, capped at 15.
+
+`raidLegendaryPoolFor` feeds `pickRaidLegendary`, so a raid always headlines a
+legendary (an ordinary final can no longer turn up as the "legendary" boss), and
+`resolveRoamer` rolls legendaries only. `raidPoolFor` still returns the island's
+full table (legendaries first) for the UI and the wild bucket, so the ordinary
+set stays obtainable by idling on the island; levels already tier the two
+(legendaries fight at 75, ordinary finals at 70). `validate-data.cjs` now checks
+the split (all legendaries in `raidPool`, none in `raidOrdinaryPool`, no overlap,
+ordinary ≤ 15), and the earlier regions were already within the cap, so nothing
+was trimmed and nothing is orphaned.
+
+Still open:
+
+- [ ] Weight / level-gate the legendary pick by badges or prestige instead of a
+      uniform "unseen first" pick.
+- [ ] If a smaller Unova (13 ordinary) pool is wanted, give a few of its finals a
+      real route or evolution source (part of #28/#35/#39).
 
 Relevant code: `tools/generate-regions.cjs` (`raidCandidates`,
-`raidPoolSpecies`, `staysInRaidPool`, `FORM_RAID_REGION`, `paldeaExtrasFor`),
-`public/data/regions.json` (`raidPool`), `pickRaidLegendary` / `resolveRoamer`
-(`src/game/progression.js`), `START_RAID` (`src/game/reducer.js`), the raid UI
+`raidPoolSpecies`, `staysInRaidPool`, `FORM_RAID_REGION`, `paldeaExtrasFor`, the
+raid scan), `public/data/regions.json` (`raidPool` / `raidOrdinaryPool`),
+`raidPoolFor` / `raidLegendaryPoolFor` (`src/data/gameData.js`),
+`pickRaidLegendary` / `resolveRoamer` (`src/game/progression.js`), the raid UI
 (`src/components/town-map.js`, `location-panel.js`) and `tools/validate-data.cjs`.
 
 Effort: **medium** (mostly balance/data plus the generator; game logic is small).

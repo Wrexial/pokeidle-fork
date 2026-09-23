@@ -123,16 +123,32 @@ while (expanded) {
 for (const key of realSpecies) if (!obtainable.has(key)) fail(`species ${key} cannot be obtained`)
 
 // --- encounters and map ------------------------------------------------------
-const raidPools = new Map()
+const RAID_ORDINARY_CAP = 15
 for (const region of regions) {
-  const pool = region.raidPool ?? []
-  const seen = new Set()
-  for (const entry of pool) {
-    if (!speciesKeys.has(entry.speciesKey)) fail(`raid pool ${region.id} has unknown species ${entry.speciesKey}`)
-    if (seen.has(entry.speciesKey)) fail(`raid pool ${region.id} lists ${entry.speciesKey} twice`)
-    seen.add(entry.speciesKey)
+  const seen = new Set(),
+    tiers = [
+      ['raidPool', region.raidPool ?? [], true],
+      ['raidOrdinaryPool', region.raidOrdinaryPool ?? [], false],
+    ]
+  for (const [tier, entries, expectLegendary] of tiers) {
+    for (const entry of entries) {
+      if (!speciesKeys.has(entry.speciesKey)) {
+        fail(`${tier} for ${region.id} has unknown species ${entry.speciesKey}`)
+        continue
+      }
+      if (seen.has(entry.speciesKey))
+        fail(`${region.id} lists ${entry.speciesKey} in both raid pools`)
+      seen.add(entry.speciesKey)
+      if (!!species[entry.speciesKey].legendary !== expectLegendary)
+        fail(
+          `${tier} for ${region.id} has ${expectLegendary ? 'non-' : ''}legendary ${entry.speciesKey}`
+        )
+    }
   }
-  raidPools.set(region.id, seen)
+  if ((region.raidOrdinaryPool ?? []).length > RAID_ORDINARY_CAP)
+    fail(
+      `region ${region.id} has ${region.raidOrdinaryPool.length} ordinary raid Pokemon (cap ${RAID_ORDINARY_CAP})`
+    )
 }
 
 // --- league structure --------------------------------------------------------

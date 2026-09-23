@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
-import { encounterData, raidPoolFor, mapAreas, mapData, pokemonSpecies, regions } from '../data/gameData.js'
+import { encounterData, raidLegendaryPoolFor, mapAreas, mapData, pokemonSpecies, regions } from '../data/gameData.js'
 import { biomeForLocation } from '../data/ui.js'
 import { useGame } from '../game/context.js'
 import { createRoads, getRegionUnlockTokens, pickRaidLegendary } from '../game/progression.js'
@@ -123,7 +123,7 @@ export function TownMap() {
     const locationData = mapData[location]
     if (locationData?.type === 'raid') {
       if (state.raidCooldownEnd && Date.now() < state.raidCooldownEnd) return
-      const pool = raidPoolFor(locationData.region ?? 'kanto'),
+      const pool = raidLegendaryPoolFor(locationData.region ?? 'kanto'),
         legendary = pickRaidLegendary(pool, state.pokedexSeen, state.pokedexCaught)
       if (!legendary) return
       dispatch({

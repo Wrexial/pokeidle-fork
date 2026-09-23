@@ -8,22 +8,6 @@
   "startLevel": 5,
   "raidPool": [
    {
-    "speciesKey": "jynx",
-    "level": 70
-   },
-   {
-    "speciesKey": "omastar",
-    "level": 70
-   },
-   {
-    "speciesKey": "kabutops",
-    "level": 70
-   },
-   {
-    "speciesKey": "aerodactyl",
-    "level": 70
-   },
-   {
     "speciesKey": "articuno",
     "level": 75
    },
@@ -50,7 +34,25 @@
    "badgeTrack": "Gym Leaders",
    "badgeName": "Badge",
    "eliteTrack": "Elite Four & Champion"
-  }
+  },
+  "raidOrdinaryPool": [
+   {
+    "speciesKey": "jynx",
+    "level": 70
+   },
+   {
+    "speciesKey": "omastar",
+    "level": 70
+   },
+   {
+    "speciesKey": "kabutops",
+    "level": 70
+   },
+   {
+    "speciesKey": "aerodactyl",
+    "level": 70
+   }
+  ]
  },
  {
   "id": "johto",
@@ -67,30 +69,6 @@
   },
   "leagueLocationKey": "johto-league",
   "raidPool": [
-   {
-    "speciesKey": "cleffa",
-    "level": 70
-   },
-   {
-    "speciesKey": "togepi",
-    "level": 70
-   },
-   {
-    "speciesKey": "xatu",
-    "level": 70
-   },
-   {
-    "speciesKey": "unown",
-    "level": 70
-   },
-   {
-    "speciesKey": "smoochum",
-    "level": 70
-   },
-   {
-    "speciesKey": "magby",
-    "level": 70
-   },
    {
     "speciesKey": "raikou",
     "level": 75
@@ -115,6 +93,32 @@
     "speciesKey": "celebi",
     "level": 70
    }
+  ],
+  "raidOrdinaryPool": [
+   {
+    "speciesKey": "cleffa",
+    "level": 70
+   },
+   {
+    "speciesKey": "togepi",
+    "level": 70
+   },
+   {
+    "speciesKey": "xatu",
+    "level": 70
+   },
+   {
+    "speciesKey": "unown",
+    "level": 70
+   },
+   {
+    "speciesKey": "smoochum",
+    "level": 70
+   },
+   {
+    "speciesKey": "magby",
+    "level": 70
+   }
   ]
  },
  {
@@ -132,22 +136,6 @@
   },
   "leagueLocationKey": "hoenn-league",
   "raidPool": [
-   {
-    "speciesKey": "slaking",
-    "level": 70
-   },
-   {
-    "speciesKey": "mawile",
-    "level": 70
-   },
-   {
-    "speciesKey": "cradily",
-    "level": 70
-   },
-   {
-    "speciesKey": "metagross",
-    "level": 75
-   },
    {
     "speciesKey": "regirock",
     "level": 75
@@ -188,6 +176,24 @@
     "speciesKey": "deoxys",
     "level": 75
    }
+  ],
+  "raidOrdinaryPool": [
+   {
+    "speciesKey": "slaking",
+    "level": 70
+   },
+   {
+    "speciesKey": "mawile",
+    "level": 70
+   },
+   {
+    "speciesKey": "cradily",
+    "level": 70
+   },
+   {
+    "speciesKey": "metagross",
+    "level": 75
+   }
   ]
  },
  {
@@ -205,30 +211,6 @@
   },
   "leagueLocationKey": "sinnoh-league",
   "raidPool": [
-   {
-    "speciesKey": "rampardos",
-    "level": 70
-   },
-   {
-    "speciesKey": "bastiodon",
-    "level": 70
-   },
-   {
-    "speciesKey": "ambipom",
-    "level": 70
-   },
-   {
-    "speciesKey": "spiritomb",
-    "level": 70
-   },
-   {
-    "speciesKey": "togekiss",
-    "level": 70
-   },
-   {
-    "speciesKey": "porygon-z",
-    "level": 70
-   },
    {
     "speciesKey": "uxie",
     "level": 75
@@ -285,6 +267,32 @@
     "speciesKey": "arceus",
     "level": 75
    }
+  ],
+  "raidOrdinaryPool": [
+   {
+    "speciesKey": "rampardos",
+    "level": 70
+   },
+   {
+    "speciesKey": "bastiodon",
+    "level": 70
+   },
+   {
+    "speciesKey": "ambipom",
+    "level": 70
+   },
+   {
+    "speciesKey": "spiritomb",
+    "level": 70
+   },
+   {
+    "speciesKey": "togekiss",
+    "level": 70
+   },
+   {
+    "speciesKey": "porygon-z",
+    "level": 70
+   }
   ]
  },
  {
@@ -306,6 +314,56 @@
     "speciesKey": "victini",
     "level": 75
    },
+   {
+    "speciesKey": "cobalion",
+    "level": 75
+   },
+   {
+    "speciesKey": "terrakion",
+    "level": 75
+   },
+   {
+    "speciesKey": "virizion",
+    "level": 75
+   },
+   {
+    "speciesKey": "tornadus",
+    "level": 75
+   },
+   {
+    "speciesKey": "thundurus",
+    "level": 75
+   },
+   {
+    "speciesKey": "reshiram",
+    "level": 75
+   },
+   {
+    "speciesKey": "zekrom",
+    "level": 75
+   },
+   {
+    "speciesKey": "landorus",
+    "level": 75
+   },
+   {
+    "speciesKey": "kyurem",
+    "level": 75
+   },
+   {
+    "speciesKey": "keldeo",
+    "level": 75
+   },
+   {
+    "speciesKey": "meloetta",
+    "level": 75
+   },
+   {
+    "speciesKey": "genesect",
+    "level": 75
+   }
+  ],
+  "raidOrdinaryPool": [
    {
     "speciesKey": "simisage",
     "level": 70
@@ -357,54 +415,6 @@
    {
     "speciesKey": "druddigon",
     "level": 70
-   },
-   {
-    "speciesKey": "cobalion",
-    "level": 75
-   },
-   {
-    "speciesKey": "terrakion",
-    "level": 75
-   },
-   {
-    "speciesKey": "virizion",
-    "level": 75
-   },
-   {
-    "speciesKey": "tornadus",
-    "level": 75
-   },
-   {
-    "speciesKey": "thundurus",
-    "level": 75
-   },
-   {
-    "speciesKey": "reshiram",
-    "level": 75
-   },
-   {
-    "speciesKey": "zekrom",
-    "level": 75
-   },
-   {
-    "speciesKey": "landorus",
-    "level": 75
-   },
-   {
-    "speciesKey": "kyurem",
-    "level": 75
-   },
-   {
-    "speciesKey": "keldeo",
-    "level": 75
-   },
-   {
-    "speciesKey": "meloetta",
-    "level": 75
-   },
-   {
-    "speciesKey": "genesect",
-    "level": 75
    }
   ]
  },
@@ -423,22 +433,6 @@
   },
   "leagueLocationKey": "kalos-league",
   "raidPool": [
-   {
-    "speciesKey": "tyrantrum",
-    "level": 70
-   },
-   {
-    "speciesKey": "aurorus",
-    "level": 70
-   },
-   {
-    "speciesKey": "carbink",
-    "level": 70
-   },
-   {
-    "speciesKey": "gourgeist",
-    "level": 70
-   },
    {
     "speciesKey": "xerneas",
     "level": 70
@@ -462,6 +456,24 @@
    {
     "speciesKey": "volcanion",
     "level": 75
+   }
+  ],
+  "raidOrdinaryPool": [
+   {
+    "speciesKey": "tyrantrum",
+    "level": 70
+   },
+   {
+    "speciesKey": "aurorus",
+    "level": 70
+   },
+   {
+    "speciesKey": "carbink",
+    "level": 70
+   },
+   {
+    "speciesKey": "gourgeist",
+    "level": 70
    }
   ]
  },
@@ -588,7 +600,8 @@
     "speciesKey": "melmetal",
     "level": 75
    }
-  ]
+  ],
+  "raidOrdinaryPool": []
  },
  {
   "id": "galar",
@@ -605,22 +618,6 @@
   },
   "leagueLocationKey": "galar-league",
   "raidPool": [
-   {
-    "speciesKey": "dracozolt",
-    "level": 70
-   },
-   {
-    "speciesKey": "arctozolt",
-    "level": 70
-   },
-   {
-    "speciesKey": "dracovish",
-    "level": 70
-   },
-   {
-    "speciesKey": "arctovish",
-    "level": 70
-   },
    {
     "speciesKey": "zacian",
     "level": 70
@@ -668,6 +665,24 @@
    {
     "speciesKey": "enamorus",
     "level": 75
+   }
+  ],
+  "raidOrdinaryPool": [
+   {
+    "speciesKey": "dracozolt",
+    "level": 70
+   },
+   {
+    "speciesKey": "arctozolt",
+    "level": 70
+   },
+   {
+    "speciesKey": "dracovish",
+    "level": 70
+   },
+   {
+    "speciesKey": "arctovish",
+    "level": 70
    },
    {
     "speciesKey": "g-articuno",
@@ -750,6 +765,7 @@
     "speciesKey": "pecharunt",
     "level": 75
    }
-  ]
+  ],
+  "raidOrdinaryPool": []
  }
 ]

@@ -325,7 +325,7 @@
   },
   "unlockOrder": 40,
   "position": {
-   "x": 22,
+   "x": 21.74,
    "y": 88
   },
   "region": "kanto"
@@ -416,7 +416,7 @@
   "unlockOrder": 7,
   "position": {
    "x": 46,
-   "y": 14
+   "y": 14.26
   },
   "region": "kanto"
  },
@@ -448,7 +448,7 @@
   "unlockOrder": 8,
   "position": {
    "x": 54,
-   "y": 14
+   "y": 14.26
   },
   "region": "kanto"
  },
@@ -478,7 +478,7 @@
   "unlockOrder": 12,
   "position": {
    "x": 64,
-   "y": 14
+   "y": 14.26
   },
   "region": "kanto"
  },
@@ -538,7 +538,7 @@
   "unlockOrder": 9,
   "position": {
    "x": 54,
-   "y": 8
+   "y": 7.74
   },
   "region": "kanto"
  },
@@ -567,7 +567,7 @@
   "unlockOrder": 10,
   "position": {
    "x": 64,
-   "y": 8
+   "y": 7.74
   },
   "region": "kanto"
  },
@@ -597,7 +597,7 @@
   "unlockOrder": 45,
   "position": {
    "x": 46,
-   "y": 8
+   "y": 7.74
   },
   "region": "kanto"
  },
@@ -807,8 +807,8 @@
   },
   "unlockOrder": 19,
   "position": {
-   "x": 46,
-   "y": 40
+   "x": 46.042042875900364,
+   "y": 39.872013260185085
   },
   "region": "kanto"
  },
@@ -987,8 +987,8 @@
   },
   "unlockOrder": 25,
   "position": {
-   "x": 44,
-   "y": 46
+   "x": 44.08888632509771,
+   "y": 46.0862031545062
   },
   "region": "kanto"
  },
@@ -1017,8 +1017,8 @@
   },
   "unlockOrder": 26,
   "position": {
-   "x": 38,
-   "y": 48
+   "x": 37.869070799001925,
+   "y": 48.041783585308714
   },
   "region": "kanto"
  },
@@ -1230,7 +1230,7 @@
   "unlockOrder": 33,
   "position": {
    "x": 46,
-   "y": 72
+   "y": 72.26
   },
   "region": "kanto"
  },
@@ -1259,7 +1259,7 @@
   "unlockOrder": 34,
   "position": {
    "x": 46,
-   "y": 66
+   "y": 65.74
   },
   "region": "kanto"
  },
@@ -1348,7 +1348,7 @@
   },
   "unlockOrder": 39,
   "position": {
-   "x": 28,
+   "x": 28.26,
    "y": 88
   },
   "region": "kanto"

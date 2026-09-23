@@ -2470,6 +2470,36 @@ for (let iteration = 0; iteration < 120; iteration++) {
   }
 }
 
+// Some hand-measured layouts pack towns/routes so tightly that labels and roads
+// stack (Sinnoh's south-west, Kalos and Unova). Symmetrically push apart any
+// visible pair closer than the threshold — both nodes move, so the shape stays
+// roughly in place. Regions that are already spaced out are left untouched.
+const RELAX_MIN_DISTANCE = 6.5
+for (const region of regions) {
+  const nodes = visibleLocations.filter((location) => (location.region ?? 'kanto') === region.id)
+  for (let iteration = 0; iteration < 150; iteration++) {
+    let moved = false
+    for (let i = 0; i < nodes.length; i++)
+      for (let j = i + 1; j < nodes.length; j++) {
+        const a = nodes[i],
+          b = nodes[j],
+          dx = b.position.x - a.position.x,
+          dy = b.position.y - a.position.y,
+          distance = Math.hypot(dx, dy)
+        if (distance >= RELAX_MIN_DISTANCE || distance === 0) continue
+        const push = (RELAX_MIN_DISTANCE - distance) / 2 + 0.01,
+          unitX = dx / distance,
+          unitY = dy / distance
+        a.position.x = clampPosition(a.position.x - unitX * push)
+        a.position.y = clampPosition(a.position.y - unitY * push)
+        b.position.x = clampPosition(b.position.x + unitX * push)
+        b.position.y = clampPosition(b.position.y + unitY * push)
+        moved = true
+      }
+    if (!moved) break
+  }
+}
+
 // Region entry points unlock when the player spends an Unlock Token earned by
 // beating a region's Champion (see the Pokedex/Town Map). A starting region is
 // open immediately.

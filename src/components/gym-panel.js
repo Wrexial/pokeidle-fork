@@ -20,13 +20,13 @@ export function GymPanel({ onOpenShop }) {
     defeatedRegionGyms = regionGyms.filter((gym) => state.defeatedGyms.includes(gym.id)).length,
     allBadgesEarned = regionGyms.length > 0 && defeatedRegionGyms >= regionGyms.length,
     isLeagueRematch = state.defeatedChampions.includes(regionId),
-    // Minigames unlock with a real location rather than the region's Champion:
-    // the panel's current region must have reached its minigame's town/route.
-    // Hoenn's Battle Tower is that region's minigame too.
-    minigameUnlocked = state.unlockedLocations.includes(
-      MINIGAME_UNLOCK_LOCATION[regionId] ?? ''
-    ),
-    showTower = regionId === BATTLE_TOWER_REGION && minigameUnlocked,
+    // Minigames unlock with a real location, but can only be played while the
+    // player is standing there — the panel shows a pointer otherwise. Hoenn's
+    // Battle Tower is that region's minigame too.
+    minigameLocation = MINIGAME_UNLOCK_LOCATION[regionId] ?? '',
+    minigameUnlocked = state.unlockedLocations.includes(minigameLocation),
+    atMinigameLocation = state.currentLocation === minigameLocation,
+    showTower = regionId === BATTLE_TOWER_REGION && atMinigameLocation,
     regionMinigame = MINIGAME_BY_REGION[regionId],
     // The Elite Four reset on each prestige, so they must be beaten again
     // before the region can be prestiged once more.
@@ -360,6 +360,22 @@ export function GymPanel({ onOpenShop }) {
             }),
           ],
         }),
+      regionId === BATTLE_TOWER_REGION &&
+        minigameUnlocked &&
+        !atMinigameLocation &&
+        jsxs('div', {
+          className: 'gym-section',
+          children: [
+            jsx('div', {
+              className: 'gym-section-title',
+              children: 'Battle Tower',
+            }),
+            jsx('div', {
+              className: 'tower-hint',
+              children: `Visit ${mapData[minigameLocation]?.name ?? minigameLocation} to climb the tower.`,
+            }),
+          ],
+        }),
       showTower &&
         jsxs('div', {
           className: 'gym-section tower-section',
@@ -425,6 +441,23 @@ export function GymPanel({ onOpenShop }) {
       regionMinigame &&
         MINIGAME_INFO[regionMinigame] &&
         minigameUnlocked &&
+        !atMinigameLocation &&
+        jsxs('div', {
+          className: 'gym-section',
+          children: [
+            jsx('div', {
+              className: 'gym-section-title',
+              children: MINIGAME_INFO[regionMinigame].title,
+            }),
+            jsx('div', {
+              className: 'tower-hint',
+              children: `Visit ${mapData[minigameLocation]?.name ?? minigameLocation} to play.`,
+            }),
+          ],
+        }),
+      regionMinigame &&
+        MINIGAME_INFO[regionMinigame] &&
+        atMinigameLocation &&
         jsxs('div', {
           className: 'gym-section tower-section',
           children: [

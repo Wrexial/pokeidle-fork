@@ -26,6 +26,7 @@ export const CHANGELOG = [
             "Packed region layouts (Sinnoh, Kalos, Unova and friends) are spread out so town and route labels no longer stack on each other",
             "Battle backgrounds pick up a biome colour grade, so forests, deserts, swamps, volcanoes and tundra read differently even though they share a handful of base scenes",
             "The Town Map draws a generated terrain layer \u2014 blue water with green/brown land blobs \u2014 from each location's biome and wild types, so you can read the geography at a glance",
+            "Minigames are now played on location: the Game Corner at Celadon City, the Bug Catching Contest on Route 35, the Underground at Eterna City and the Battle Tower on Route 111. The Gyms tab points you there when you are elsewhere, and each of those places carries a + badge on the Town Map",
           ],
         },
       ],

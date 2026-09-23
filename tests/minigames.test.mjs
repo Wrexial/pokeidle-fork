@@ -290,3 +290,9 @@ test('COLLECT_MINING adds the found rewards to the bag', () => {
   assert.equal(next.inventory.nugget, 2)
   assert.equal(next.inventory.fireStone, 1)
 })
+
+test('every minigame location is a map POI', async () => {
+  const { POI_LOCATIONS } = await import('../src/game/minigames.js')
+  for (const id of Object.values(MINIGAME_UNLOCK_LOCATION)) assert.ok(POI_LOCATIONS.has(id))
+  assert.equal(POI_LOCATIONS.size, 4)
+})

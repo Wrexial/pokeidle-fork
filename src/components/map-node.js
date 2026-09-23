@@ -3,6 +3,7 @@
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { formatCooldown } from '../game/progression.js'
+import { POI_LOCATIONS } from '../game/minigames.js'
 
 /** @param {{ location: MapLocation, isCurrent: boolean, isUnlocked: boolean, isClickable: boolean, onClick: () => void, cooldownEnd?: number, swarmLabel?: string | null }} props */
 export
@@ -20,6 +21,7 @@ function MapNode({
     isTown = location.type === 'town',
     isRaid = location.type === 'raid',
     isZone = location.type === 'zone',
+    isPoi = isUnlocked && POI_LOCATIONS.has(location.id),
     locationName = isUnlocked ? location.name : '???',
     timeNow = Date.now(),
     raidOnCooldown = isRaid && cooldownEnd != null && timeNow < cooldownEnd
@@ -66,6 +68,11 @@ function MapNode({
           jsx('span', {
             className: 'map-node-swarm',
             children: '\u{1f41d}',
+          }),
+        isPoi &&
+          jsx('span', {
+            className: 'map-node-poi',
+            children: '+',
           }),
         showLabel &&
           jsx('span', {

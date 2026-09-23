@@ -23,6 +23,13 @@ export const MINIGAME_UNLOCK_LOCATION = {
   sinnoh: 'sinnoh-eterna-city',
 }
 
+/**
+ * Every location that hosts a point of interest (today, the minigames). Used
+ * by the Town Map to badge the node with a `+`.
+ * @type {Set<string>}
+ */
+export const POI_LOCATIONS = new Set(Object.values(MINIGAME_UNLOCK_LOCATION))
+
 /** @type {Record<string, { title: string, cost: number, action: string, hint: string }>} */
 export const MINIGAME_INFO = {
   mining: {

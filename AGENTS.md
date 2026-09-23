@@ -183,7 +183,7 @@ in `GameLayout`) dispatches `DEBUG_MAX_LEVEL` when the Konami code
 | `src/game/save.js` | `repairSave`, `loadSavedState`, `serializeSave`, `persistSave` and `SAVED_STATE_KEYS` — the versioned localStorage save. |
 | `src/hooks.js` | Cross-cutting UI hooks: `useTypewriter`, `useIsMobile`, `useKonamiCode`, daily/notification/audio/quest hooks. |
 | `src/game/use-game-loop.js` | `useGameLoop` — the idle tick state machine. |
-| `src/game/minigames.js` | Barrel re-exporting `src/game/minigames/`: `mining`, `bug-contest`, `game-corner` and `registry`. |
+| `src/game/minigames.js` | Barrel re-exporting `src/game/minigames/`: `mining`, `bug-contest`, `game-corner` and `registry`. Minigames are played on location (`MINIGAME_UNLOCK_LOCATION`, badged on the Town Map via `POI_LOCATIONS`). |
 | `src/components/*.js` | **One file per component** (53 files, kebab-case, e.g. `battle-scene.js`, `pokedex-tile.js`). |
 | `src/types.d.ts` | Ambient types for the injected `window.gameData*` globals. |
 | `assets/gameDataInjector.js` | Loads `public/data/*.json` into `window.gameDataInjector`. Add new data files here. |

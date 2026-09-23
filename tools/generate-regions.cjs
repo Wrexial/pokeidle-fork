@@ -1775,6 +1775,60 @@ const ZONES = {
         },
       ],
     },
+    {
+      // The Great Crater, post-game. Holds the paradox Pokemon (and Glimmet),
+      // which otherwise had no wild route.
+      node: 'area-zero',
+      name: 'Area Zero',
+      position: { x: 53, y: 61 },
+      background: '/backgrounds/cave.png',
+      connections: ['paldea-mesagoza'],
+      level: 68,
+      unlock: { championDefeated: 'paldea' },
+      subAreas: [
+        {
+          node: 'area-zero-gate',
+          name: 'Zero Gate',
+          position: { x: 52, y: 62 },
+          species: ['glimmet', 'glimmora'],
+        },
+        {
+          node: 'area-zero-station-two',
+          name: 'Research Station 2',
+          position: { x: 54, y: 60 },
+          species: ['great tusk', 'iron treads', 'scream tail', 'iron bundle'],
+        },
+        {
+          node: 'area-zero-station-four',
+          name: 'Research Station 4',
+          position: { x: 51, y: 59 },
+          species: [
+            'brute bonnet',
+            'iron hands',
+            'flutter mane',
+            'iron jugulis',
+            'sandy shocks',
+            'iron moth',
+            'iron thorns',
+          ],
+        },
+        {
+          node: 'area-zero-depths',
+          name: 'Area Zero Depths',
+          position: { x: 55, y: 63 },
+          species: [
+            'roaring moon',
+            'iron valiant',
+            'walkingWake',
+            'ironLeaves',
+            'gougingFire',
+            'ragingBolt',
+            'ironBoulder',
+            'ironCrown',
+          ],
+        },
+      ],
+    },
   ],
 }
 for (const [regionId, zones] of Object.entries(ZONES)) {
@@ -1979,38 +2033,55 @@ for (const champion of champData) {
 }
 
 // --- Alolan forms & missing natives ------------------------------------------
-// PokeAPI's Alola encounter tables use the base species and drop several
-// Alola-native species, so the Alolan regional forms and a handful of others
-// never landed on an Alola route and ended up raid-only. Port them onto the
-// early/mid routes (dropping the Kantonian base a form replaces), which makes
-// their evolutions reachable and shrinks Alola's Raid Island. This runs after
-// the catch-gate pass so it doesn't change any route's catch rule.
-const ALOLA_ROUTE_ADDS = {
-  'alola-route-1': ['a-rattata', 'a-meowth', 'a-diglett', 'a-grimer'],
-  'alola-route-1--hauoli-outskirts': ['a-meowth', 'a-diglett'],
-  'alola-route-2': ['a-meowth', 'a-grimer', 'a-geodude'],
-  'alola-route-3': ['a-sandshrew', 'a-vulpix', 'a-geodude'],
-  // Alola-native species the scrape dropped, so they stop being raid-only.
-  'alola-route-4': ['crabrawler'],
-  'alola-route-5': ['comfey'],
-  'alola-route-6': ['wishiwashi'],
-  'alola-route-7': ['minior'],
-  'alola-route-8': ['turtonator', 'drampa'],
-  'alola-route-9': ['sandygast'],
-  'alola-route-10': ['jangmo-o'],
+// PokeAPI's encounter tables use base species and drop several natives, so
+// regional forms (Alola) and ordinary wilds (Alola, Paldea) never landed on a
+// route and ended up raid-only. Port them onto routes here, after the
+// catch-gate pass so no route's catch rule changes.
+const REGION_ROUTE_ADDS = {
+  alola: {
+    'alola-route-1': ['a-rattata', 'a-meowth', 'a-diglett', 'a-grimer'],
+    'alola-route-1--hauoli-outskirts': ['a-meowth', 'a-diglett'],
+    'alola-route-2': ['a-meowth', 'a-grimer', 'a-geodude'],
+    'alola-route-3': ['a-sandshrew', 'a-vulpix', 'a-geodude'],
+    'alola-route-4': ['crabrawler'],
+    'alola-route-5': ['comfey'],
+    'alola-route-6': ['wishiwashi'],
+    'alola-route-7': ['minior'],
+    'alola-route-8': ['turtonator', 'drampa'],
+    'alola-route-9': ['sandygast'],
+    'alola-route-10': ['jangmo-o'],
+  },
+  paldea: {
+    'paldea-south-province-area-one': ['tandemaus', 'flamigo'],
+    'paldea-south-province-area-two': ['shroodle', 'bombirdier'],
+    'paldea-south-province-area-three': ['toedscool', 'cyclizar'],
+    'paldea-south-province-area-four': ['tinkatink', 'orthworm'],
+    'paldea-south-province-area-five': ['varoom', 'oranguru'],
+    'paldea-south-province-area-six': ['greavard', 'passimian'],
+    'paldea-west-province-area-one': ['capsakid', 'sableye'],
+    'paldea-west-province-area-two': ['bramblin', 'rotom'],
+    'paldea-west-province-area-three': ['mimikyu'],
+    'paldea-east-province-area-one': ['petilil'],
+    'paldea-east-province-area-two': ['p-wooper'],
+    'paldea-east-province-area-three': ['gimmighoul'],
+    'paldea-north-province-area-one': ['p-tauros', 'p-tauros-b', 'p-tauros-a'],
+  },
 }
-for (const [locationId, forms] of Object.entries(ALOLA_ROUTE_ADDS)) {
-  const bucket = encounterData[locationId]
-  if (!bucket) continue
-  const level = bucket.encounters[0]?.minLevel ?? 5,
-    maxLevel = bucket.encounters[0]?.maxLevel ?? clampLevel(level + 2)
-  // the Kantonian base the Alolan form replaces is dropped, not duplicated
-  bucket.encounters = bucket.encounters.filter(
-    (entry) => !(locationId === 'alola-route-1' && entry.speciesKey === 'rattata')
-  )
-  for (const form of forms)
-    if (species[form] && !bucket.encounters.some((entry) => entry.speciesKey === form))
-      bucket.encounters.push({ speciesKey: form, weight: 12, minLevel: level, maxLevel })
+// A Kantonian base an Alolan form supersedes is dropped, not duplicated.
+const REPLACED_BASES = { 'alola-route-1': 'rattata' }
+for (const adds of Object.values(REGION_ROUTE_ADDS)) {
+  for (const [locationId, speciesKeys] of Object.entries(adds)) {
+    const bucket = encounterData[locationId]
+    if (!bucket) continue
+    const level = bucket.encounters[0]?.minLevel ?? 5,
+      maxLevel = bucket.encounters[0]?.maxLevel ?? clampLevel(level + 2),
+      replaced = REPLACED_BASES[locationId]
+    if (replaced)
+      bucket.encounters = bucket.encounters.filter((entry) => entry.speciesKey !== replaced)
+    for (const key of speciesKeys)
+      if (species[key] && !bucket.encounters.some((entry) => entry.speciesKey === key))
+        bucket.encounters.push({ speciesKey: key, weight: 12, minLevel: level, maxLevel })
+  }
 }
 
 // --- raid pools --------------------------------------------------------------

@@ -109,6 +109,18 @@
     "weight": 1,
     "minLevel": 5,
     "maxLevel": 7
+   },
+   {
+    "speciesKey": "tandemaus",
+    "weight": 12,
+    "minLevel": 5,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "flamigo",
+    "weight": 12,
+    "minLevel": 5,
+    "maxLevel": 7
    }
   ]
  },
@@ -202,6 +214,18 @@
    {
     "speciesKey": "squawkabilly",
     "weight": 10,
+    "minLevel": 10,
+    "maxLevel": 12
+   },
+   {
+    "speciesKey": "toedscool",
+    "weight": 12,
+    "minLevel": 10,
+    "maxLevel": 12
+   },
+   {
+    "speciesKey": "cyclizar",
+    "weight": 12,
     "minLevel": 10,
     "maxLevel": 12
    }
@@ -299,6 +323,18 @@
     "weight": 25,
     "minLevel": 15,
     "maxLevel": 17
+   },
+   {
+    "speciesKey": "shroodle",
+    "weight": 12,
+    "minLevel": 15,
+    "maxLevel": 17
+   },
+   {
+    "speciesKey": "bombirdier",
+    "weight": 12,
+    "minLevel": 15,
+    "maxLevel": 17
    }
   ]
  },
@@ -392,6 +428,12 @@
    {
     "speciesKey": "naclstack",
     "weight": 30,
+    "minLevel": 20,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "mimikyu",
+    "weight": 12,
     "minLevel": 20,
     "maxLevel": 22
    }
@@ -489,6 +531,18 @@
     "weight": 30,
     "minLevel": 24,
     "maxLevel": 26
+   },
+   {
+    "speciesKey": "capsakid",
+    "weight": 12,
+    "minLevel": 24,
+    "maxLevel": 26
+   },
+   {
+    "speciesKey": "sableye",
+    "weight": 12,
+    "minLevel": 24,
+    "maxLevel": 26
    }
   ]
  },
@@ -582,6 +636,12 @@
    {
     "speciesKey": "magikarp",
     "weight": 30,
+    "minLevel": 29,
+    "maxLevel": 31
+   },
+   {
+    "speciesKey": "petilil",
+    "weight": 12,
     "minLevel": 29,
     "maxLevel": 31
    }
@@ -679,6 +739,24 @@
     "weight": 15,
     "minLevel": 34,
     "maxLevel": 36
+   },
+   {
+    "speciesKey": "p-tauros",
+    "weight": 12,
+    "minLevel": 34,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "p-tauros-b",
+    "weight": 12,
+    "minLevel": 34,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "p-tauros-a",
+    "weight": 12,
+    "minLevel": 34,
+    "maxLevel": 36
    }
   ]
  },
@@ -772,6 +850,18 @@
    {
     "speciesKey": "basculin",
     "weight": 30,
+    "minLevel": 39,
+    "maxLevel": 41
+   },
+   {
+    "speciesKey": "tinkatink",
+    "weight": 12,
+    "minLevel": 39,
+    "maxLevel": 41
+   },
+   {
+    "speciesKey": "orthworm",
+    "weight": 12,
     "minLevel": 39,
     "maxLevel": 41
    }
@@ -869,6 +959,12 @@
     "weight": 30,
     "minLevel": 44,
     "maxLevel": 46
+   },
+   {
+    "speciesKey": "gimmighoul",
+    "weight": 12,
+    "minLevel": 44,
+    "maxLevel": 46
    }
   ]
  },
@@ -964,6 +1060,18 @@
     "weight": 30,
     "minLevel": 49,
     "maxLevel": 51
+   },
+   {
+    "speciesKey": "greavard",
+    "weight": 12,
+    "minLevel": 49,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "passimian",
+    "weight": 12,
+    "minLevel": 49,
+    "maxLevel": 51
    }
   ]
  },
@@ -1057,6 +1165,18 @@
    {
     "speciesKey": "yungoos",
     "weight": 30,
+    "minLevel": 54,
+    "maxLevel": 56
+   },
+   {
+    "speciesKey": "bramblin",
+    "weight": 12,
+    "minLevel": 54,
+    "maxLevel": 56
+   },
+   {
+    "speciesKey": "rotom",
+    "weight": 12,
     "minLevel": 54,
     "maxLevel": 56
    }
@@ -1249,6 +1369,18 @@
     "weight": 30,
     "minLevel": 63,
     "maxLevel": 65
+   },
+   {
+    "speciesKey": "varoom",
+    "weight": 12,
+    "minLevel": 63,
+    "maxLevel": 65
+   },
+   {
+    "speciesKey": "oranguru",
+    "weight": 12,
+    "minLevel": 63,
+    "maxLevel": 65
    }
   ]
  },
@@ -1437,6 +1569,12 @@
    {
     "speciesKey": "clauncher",
     "weight": 30,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "p-wooper",
+    "weight": 12,
     "minLevel": 73,
     "maxLevel": 75
    }
@@ -1688,117 +1826,155 @@
    }
   ]
  },
- "paldea-raid": {
-  "name": "Paldea Raid Island",
+ "paldea-area-zero-gate": {
+  "name": "Zero Gate",
   "encounters": [
    {
-    "speciesKey": "maushold",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "grafaiai",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "toedscruel",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "tinkaton",
-    "weight": 1,
-    "minLevel": 70,
+    "speciesKey": "glimmet",
+    "weight": 20,
+    "minLevel": 68,
     "maxLevel": 70
    },
    {
     "speciesKey": "glimmora",
-    "weight": 1,
-    "minLevel": 70,
+    "weight": 20,
+    "minLevel": 68,
     "maxLevel": 70
-   },
+   }
+  ]
+ },
+ "paldea-area-zero-station-two": {
+  "name": "Research Station 2",
+  "encounters": [
    {
     "speciesKey": "great tusk",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "scream tail",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "brute bonnet",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "flutter mane",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "sandy shocks",
-    "weight": 1,
-    "minLevel": 70,
+    "weight": 20,
+    "minLevel": 68,
     "maxLevel": 70
    },
    {
     "speciesKey": "iron treads",
-    "weight": 1,
-    "minLevel": 70,
+    "weight": 20,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "scream tail",
+    "weight": 20,
+    "minLevel": 68,
     "maxLevel": 70
    },
    {
     "speciesKey": "iron bundle",
-    "weight": 1,
-    "minLevel": 70,
+    "weight": 12,
+    "minLevel": 68,
+    "maxLevel": 70
+   }
+  ]
+ },
+ "paldea-area-zero-station-four": {
+  "name": "Research Station 4",
+  "encounters": [
+   {
+    "speciesKey": "brute bonnet",
+    "weight": 20,
+    "minLevel": 68,
     "maxLevel": 70
    },
    {
     "speciesKey": "iron hands",
-    "weight": 1,
-    "minLevel": 70,
+    "weight": 20,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "flutter mane",
+    "weight": 20,
+    "minLevel": 68,
     "maxLevel": 70
    },
    {
     "speciesKey": "iron jugulis",
-    "weight": 1,
-    "minLevel": 70,
+    "weight": 12,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "sandy shocks",
+    "weight": 12,
+    "minLevel": 68,
     "maxLevel": 70
    },
    {
     "speciesKey": "iron moth",
-    "weight": 1,
-    "minLevel": 70,
+    "weight": 12,
+    "minLevel": 68,
     "maxLevel": 70
    },
    {
     "speciesKey": "iron thorns",
-    "weight": 1,
-    "minLevel": 70,
+    "weight": 12,
+    "minLevel": 68,
+    "maxLevel": 70
+   }
+  ]
+ },
+ "paldea-area-zero-depths": {
+  "name": "Area Zero Depths",
+  "encounters": [
+   {
+    "speciesKey": "roaring moon",
+    "weight": 20,
+    "minLevel": 68,
     "maxLevel": 70
    },
    {
-    "speciesKey": "gimmighoul",
-    "weight": 1,
-    "minLevel": 70,
+    "speciesKey": "iron valiant",
+    "weight": 20,
+    "minLevel": 68,
     "maxLevel": 70
    },
    {
-    "speciesKey": "gholdengo",
-    "weight": 1,
-    "minLevel": 70,
+    "speciesKey": "walkingWake",
+    "weight": 20,
+    "minLevel": 68,
     "maxLevel": 70
    },
+   {
+    "speciesKey": "ironLeaves",
+    "weight": 12,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "gougingFire",
+    "weight": 12,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "ragingBolt",
+    "weight": 12,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "ironBoulder",
+    "weight": 12,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "ironCrown",
+    "weight": 12,
+    "minLevel": 68,
+    "maxLevel": 70
+   }
+  ]
+ },
+ "paldea-raid": {
+  "name": "Paldea Raid Island",
+  "encounters": [
    {
     "speciesKey": "wo-chien",
     "weight": 1,
@@ -1824,18 +2000,6 @@
     "maxLevel": 70
    },
    {
-    "speciesKey": "roaring moon",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "iron valiant",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "koraidon",
     "weight": 1,
     "minLevel": 75,
@@ -1846,18 +2010,6 @@
     "weight": 1,
     "minLevel": 75,
     "maxLevel": 75
-   },
-   {
-    "speciesKey": "walkingWake",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "ironLeaves",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
    },
    {
     "speciesKey": "okidogi",
@@ -1884,30 +2036,6 @@
     "maxLevel": 70
    },
    {
-    "speciesKey": "gougingFire",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "ragingBolt",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "ironBoulder",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "ironCrown",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "terapagos",
     "weight": 1,
     "minLevel": 70,
@@ -1918,114 +2046,6 @@
     "weight": 1,
     "minLevel": 75,
     "maxLevel": 75
-   },
-   {
-    "speciesKey": "p-tauros",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "p-tauros-b",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "p-tauros-a",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "p-wooper",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "flamigo",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "bombirdier",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "lilligant",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "sableye",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "revavroom",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "houndstone",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "scovillain",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "brambleghast",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "orthworm",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "cyclizar",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "rotom",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "oranguru",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "passimian",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "mimikyu",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
    }
   ]
  }

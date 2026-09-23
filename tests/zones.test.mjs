@@ -98,3 +98,16 @@ test('the Alolan forms are wild in Alola and its raid pool is legendaries only',
     ordinary = alola.raidPool.filter((entry) => !pokemonSpecies[entry.speciesKey]?.legendary)
   assert.deepEqual(ordinary, [], 'Alola raid pool holds only legendaries')
 })
+
+test('Paldea has its DLC and Area Zero zones, and a legendary-only pool', () => {
+  for (const id of ['paldea-kitakami', 'paldea-terarium', 'paldea-area-zero']) {
+    const hub = mapData[id]
+    assert.ok(hub, `${id} exists`)
+    assert.equal(hub.type, 'zone')
+    assert.deepEqual(hub.unlock, { championDefeated: 'paldea' })
+    assert.ok(hub.subAreas.length >= 2, `${id} has sub-areas`)
+  }
+  const paldea = regions.find((region) => region.id === 'paldea'),
+    ordinary = paldea.raidPool.filter((entry) => !pokemonSpecies[entry.speciesKey]?.legendary)
+  assert.deepEqual(ordinary, [], 'Paldea raid pool holds only legendaries')
+})

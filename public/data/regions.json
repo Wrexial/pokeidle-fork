@@ -634,14 +634,6 @@
     "level": 75
    },
    {
-    "speciesKey": "h-rotom",
-    "level": 70
-   },
-   {
-    "speciesKey": "h-lilligant",
-    "level": 70
-   },
-   {
     "speciesKey": "indeedee-f",
     "level": 70
    }
@@ -656,78 +648,6 @@
   "startLevel": 5,
   "leagueLocationKey": "paldea-league",
   "raidPool": [
-   {
-    "speciesKey": "maushold",
-    "level": 70
-   },
-   {
-    "speciesKey": "grafaiai",
-    "level": 70
-   },
-   {
-    "speciesKey": "toedscruel",
-    "level": 70
-   },
-   {
-    "speciesKey": "tinkaton",
-    "level": 70
-   },
-   {
-    "speciesKey": "glimmora",
-    "level": 70
-   },
-   {
-    "speciesKey": "great tusk",
-    "level": 70
-   },
-   {
-    "speciesKey": "scream tail",
-    "level": 70
-   },
-   {
-    "speciesKey": "brute bonnet",
-    "level": 70
-   },
-   {
-    "speciesKey": "flutter mane",
-    "level": 70
-   },
-   {
-    "speciesKey": "sandy shocks",
-    "level": 70
-   },
-   {
-    "speciesKey": "iron treads",
-    "level": 70
-   },
-   {
-    "speciesKey": "iron bundle",
-    "level": 70
-   },
-   {
-    "speciesKey": "iron hands",
-    "level": 70
-   },
-   {
-    "speciesKey": "iron jugulis",
-    "level": 70
-   },
-   {
-    "speciesKey": "iron moth",
-    "level": 70
-   },
-   {
-    "speciesKey": "iron thorns",
-    "level": 70
-   },
-   {
-    "speciesKey": "gimmighoul",
-    "level": 70
-   },
-   {
-    "speciesKey": "gholdengo",
-    "level": 70
-   },
    {
     "speciesKey": "wo-chien",
     "level": 70
@@ -745,28 +665,12 @@
     "level": 70
    },
    {
-    "speciesKey": "roaring moon",
-    "level": 70
-   },
-   {
-    "speciesKey": "iron valiant",
-    "level": 70
-   },
-   {
     "speciesKey": "koraidon",
     "level": 75
    },
    {
     "speciesKey": "miraidon",
     "level": 75
-   },
-   {
-    "speciesKey": "walkingWake",
-    "level": 70
-   },
-   {
-    "speciesKey": "ironLeaves",
-    "level": 70
    },
    {
     "speciesKey": "okidogi",
@@ -785,100 +689,12 @@
     "level": 70
    },
    {
-    "speciesKey": "gougingFire",
-    "level": 70
-   },
-   {
-    "speciesKey": "ragingBolt",
-    "level": 70
-   },
-   {
-    "speciesKey": "ironBoulder",
-    "level": 70
-   },
-   {
-    "speciesKey": "ironCrown",
-    "level": 70
-   },
-   {
     "speciesKey": "terapagos",
     "level": 70
    },
    {
     "speciesKey": "pecharunt",
     "level": 75
-   },
-   {
-    "speciesKey": "p-tauros",
-    "level": 70
-   },
-   {
-    "speciesKey": "p-tauros-b",
-    "level": 70
-   },
-   {
-    "speciesKey": "p-tauros-a",
-    "level": 70
-   },
-   {
-    "speciesKey": "p-wooper",
-    "level": 70
-   },
-   {
-    "speciesKey": "flamigo",
-    "level": 70
-   },
-   {
-    "speciesKey": "bombirdier",
-    "level": 70
-   },
-   {
-    "speciesKey": "lilligant",
-    "level": 70
-   },
-   {
-    "speciesKey": "sableye",
-    "level": 70
-   },
-   {
-    "speciesKey": "revavroom",
-    "level": 70
-   },
-   {
-    "speciesKey": "houndstone",
-    "level": 70
-   },
-   {
-    "speciesKey": "scovillain",
-    "level": 70
-   },
-   {
-    "speciesKey": "brambleghast",
-    "level": 70
-   },
-   {
-    "speciesKey": "orthworm",
-    "level": 70
-   },
-   {
-    "speciesKey": "cyclizar",
-    "level": 70
-   },
-   {
-    "speciesKey": "rotom",
-    "level": 70
-   },
-   {
-    "speciesKey": "oranguru",
-    "level": 70
-   },
-   {
-    "speciesKey": "passimian",
-    "level": 70
-   },
-   {
-    "speciesKey": "mimikyu",
-    "level": 70
    }
   ]
  }

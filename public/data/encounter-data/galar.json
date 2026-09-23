@@ -1673,18 +1673,6 @@
     "maxLevel": 75
    },
    {
-    "speciesKey": "h-rotom",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "h-lilligant",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "indeedee-f",
     "weight": 1,
     "minLevel": 70,

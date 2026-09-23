@@ -92,7 +92,8 @@
    "paldea-south-province-area-one",
    "paldea-south-province-area-three",
    "paldea-south-province-area-two",
-   "paldea-medali"
+   "paldea-medali",
+   "paldea-area-zero"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -136,7 +137,7 @@
     }
    ]
   },
-  "unlockOrder": 910002.5001,
+  "unlockOrder": 910002.5002,
   "position": {
    "x": 39.680445930557475,
    "y": 41.35120174665779
@@ -178,7 +179,7 @@
    ],
    "caughtCount": 6
   },
-  "unlockOrder": 910002.5002,
+  "unlockOrder": 910002.5003,
   "position": {
    "x": 62.43,
    "y": 69.08
@@ -205,7 +206,7 @@
     }
    ]
   },
-  "unlockOrder": 910002.5003,
+  "unlockOrder": 910002.5004,
   "position": {
    "x": 37.57,
    "y": 71.27
@@ -232,7 +233,7 @@
    ],
    "partyLevel": 18
   },
-  "unlockOrder": 910002.5004,
+  "unlockOrder": 910002.5005,
   "position": {
    "x": 36.709554069442525,
    "y": 40.808798253342204
@@ -1266,6 +1267,144 @@
   "position": {
    "x": 95.60456249184469,
    "y": 19.892293534632195
+  }
+ },
+ "paldea-area-zero-gate": {
+  "id": "paldea-area-zero-gate",
+  "name": "Zero Gate",
+  "type": "route",
+  "region": "paldea",
+  "description": "A sub-area of the Area Zero.",
+  "routeKey": "paldea-area-zero-gate",
+  "background": "/backgrounds/mountain.png",
+  "connections": [
+   "paldea-area-zero"
+  ],
+  "hidden": true,
+  "zone": "paldea-area-zero",
+  "unlock": {
+   "requires": [
+    "paldea-area-zero"
+   ]
+  },
+  "unlockOrder": 910002.5001,
+  "position": {
+   "x": 50.8747159066519,
+   "y": 63.14562044441027
+  }
+ },
+ "paldea-area-zero-station-two": {
+  "id": "paldea-area-zero-station-two",
+  "name": "Research Station 2",
+  "type": "route",
+  "region": "paldea",
+  "description": "A sub-area of the Area Zero.",
+  "routeKey": "paldea-area-zero-station-two",
+  "background": "/backgrounds/beach.png",
+  "connections": [
+   "paldea-area-zero"
+  ],
+  "hidden": true,
+  "zone": "paldea-area-zero",
+  "unlock": {
+   "requires": [
+    "paldea-area-zero"
+   ]
+  },
+  "unlockOrder": 910002.501,
+  "position": {
+   "x": 55.12805167143751,
+   "y": 58.881257510917884
+  }
+ },
+ "paldea-area-zero-station-four": {
+  "id": "paldea-area-zero-station-four",
+  "name": "Research Station 4",
+  "type": "route",
+  "region": "paldea",
+  "description": "A sub-area of the Area Zero.",
+  "routeKey": "paldea-area-zero-station-four",
+  "background": "/backgrounds/beach.png",
+  "connections": [
+   "paldea-area-zero"
+  ],
+  "hidden": true,
+  "zone": "paldea-area-zero",
+  "unlock": {
+   "requires": [
+    "paldea-area-zero"
+   ]
+  },
+  "unlockOrder": 910002.502,
+  "position": {
+   "x": 50.87617818454376,
+   "y": 58.85545230834547
+  }
+ },
+ "paldea-area-zero-depths": {
+  "id": "paldea-area-zero-depths",
+  "name": "Area Zero Depths",
+  "type": "route",
+  "region": "paldea",
+  "description": "A sub-area of the Area Zero.",
+  "routeKey": "paldea-area-zero-depths",
+  "background": "/backgrounds/cave.png",
+  "connections": [
+   "paldea-area-zero"
+  ],
+  "hidden": true,
+  "zone": "paldea-area-zero",
+  "unlock": {
+   "requires": [
+    "paldea-area-zero"
+   ]
+  },
+  "unlockOrder": 910002.503,
+  "position": {
+   "x": 55.141101029544274,
+   "y": 63.11366094685157
+  }
+ },
+ "paldea-area-zero": {
+  "id": "paldea-area-zero",
+  "name": "Area Zero",
+  "type": "zone",
+  "region": "paldea",
+  "description": "The Area Zero is a wide-open stretch with several distinct habitats.",
+  "routeKey": "paldea-area-zero-gate",
+  "background": "/backgrounds/cave.png",
+  "connections": [
+   "paldea-mesagoza",
+   "paldea-area-zero-gate",
+   "paldea-area-zero-station-two",
+   "paldea-area-zero-station-four",
+   "paldea-area-zero-depths"
+  ],
+  "subAreas": [
+   {
+    "id": "paldea-area-zero-gate",
+    "name": "Zero Gate"
+   },
+   {
+    "id": "paldea-area-zero-station-two",
+    "name": "Research Station 2"
+   },
+   {
+    "id": "paldea-area-zero-station-four",
+    "name": "Research Station 4"
+   },
+   {
+    "id": "paldea-area-zero-depths",
+    "name": "Area Zero Depths"
+   }
+  ],
+  "unlock": {
+   "championDefeated": "paldea"
+  },
+  "unlockOrder": 910002.4,
+  "position": {
+   "x": 52.979953207822554,
+   "y": 61.00400878947481
   }
  }
 }

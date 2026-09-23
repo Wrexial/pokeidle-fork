@@ -432,12 +432,13 @@ Hoenn 15, Sinnoh 20, Unova 27, Kalos 10, Alola **51**, Galar **59**, Paldea
 otherwise-unobtainable species, and `npm run validate` checks every species is
 obtainable.
 
-**Partial (0.37.0):** Galar's pool dropped from 59 to 22 once the Wild Area,
-the new Galar areas (Slumbering Weald / Galar Mine / Glimwood Tangle) and the
-Isle of Armor / Crown Tundra zones gave its regional forms and DLC species
-native routes. Alola is now down to 27 (its legendaries only) after its routes
-gained the Alolan forms and the missing natives. Paldea (~55) is still bloated
-and needs the same treatment via zones (#36) and DLC (#39).
+**Partial (0.37.0):** Galar's pool dropped from 59 to 20, Alola's from 50 to
+27 and Paldea's from 56 to 12 (the last two are legendaries only) once the Wild
+Area, the new Galar areas, the DLC zones and Area Zero gave their regional
+forms, DLC species and paradox Pokemon native routes. The remaining Galar
+ordinary members are the revived fossils, the Galarian birds and female
+Indeedee. The earlier regions (Unova 26, Sinnoh 20) could still be trimmed the
+same way if desired.
 
 - [ ] Decide a target shape per region: e.g. keep **all** legendaries/mythicals
       (no other source) plus a capped non-legendary set (~10–15), and move the

@@ -9,7 +9,7 @@ import { TERRAIN_NAMES, terrainHeal } from '../terrain.js'
 import { WEATHER_NAMES, weatherAbilityHeal, weatherResidualDamage } from '../weather.js'
 import { chance } from './damage.js'
 import { applyStatus } from './status.js'
-import { clampStatStage } from './volatile.js'
+import { clampStatStage, getStatLabel } from './volatile.js'
 
 /**
  * End-of-turn residual damage (Leech Seed, Curse, poison/toxic/burn) and
@@ -179,6 +179,29 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
           target: isPlayerSide ? 'player' : 'enemy',
         },
       })
+    } else if (ability === 'moody') {
+      // Moody raises one random stat by two and lowers another by one.
+      const stats = ['attack', 'defense', 'spAttack', 'spDefense', 'speed'],
+        raised = deterministic ? 'attack' : stats[Math.floor(Math.random() * stats.length)],
+        lowerOptions = stats.filter((stat) => stat !== raised),
+        lowered = deterministic
+          ? 'spAttack'
+          : lowerOptions[Math.floor(Math.random() * lowerOptions.length)],
+        stages = pokemon.statStages ?? (pokemon.statStages = {})
+      for (const [stat, delta] of /** @type {[string, number][]} */ ([
+        [raised, 2],
+        [lowered, -1],
+      ])) {
+        const current = stages[stat] ?? 0,
+          next = clampStatStage(current + delta)
+        if (next === current) continue
+        stages[stat] = next
+        events.push({
+          type: 'statChange',
+          message: `${pokemon.name}'s ${getStatLabel(stat)} ${delta > 0 ? 'sharply rose' : 'fell'}!`,
+          data: { target: isPlayerSide ? 'player' : 'enemy' },
+        })
+      }
     }
     // Held-item end-of-turn effects.
     const leftovers = heldLeftoversHeal(pokemon)
@@ -194,7 +217,8 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
         },
       })
     }
-    const berryHeal = heldBerryHeal(pokemon)
+    // Ripen doubles a berry's healing.
+    const berryHeal = heldBerryHeal(pokemon) * (abilityOf(pokemon) === 'ripen' ? 2 : 1)
     if (berryHeal > 0) {
       pokemon.currentHp = Math.min(pokemon.maxHp, pokemon.currentHp + berryHeal)
       pokemon.heldItemUsed = !0
@@ -205,6 +229,21 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
           target: isPlayerSide ? 'player' : 'enemy',
           hpAfter: pokemon.currentHp,
           hpMax: pokemon.maxHp,
+        },
+      })
+    }
+    // Harvest restores a consumed berry (always in sun, else 50%).
+    if (
+      abilityOf(pokemon) === 'harvest' &&
+      pokemon.heldItemUsed &&
+      (activeWeather?.type === 'sun' || chance(0.5, deterministic))
+    ) {
+      pokemon.heldItemUsed = !1
+      events.push({
+        type: 'status',
+        message: `${pokemon.name} harvested its held item!`,
+        data: {
+          target: isPlayerSide ? 'player' : 'enemy',
         },
       })
     }

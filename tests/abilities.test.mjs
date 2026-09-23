@@ -508,3 +508,83 @@ test('Soul-Heart boosts Sp. Atk after a KO', () => {
   resolveBattleTurn(player, enemy, false)
   assert.equal(player.statStages.spAttack, 1)
 })
+
+test('Berserk and Anger Shell trigger when HP drops below half', () => {
+  withFixedRandom(0.5, () => {
+    const run = (/** @type {string} */ ability) => {
+      const player = battler({
+          name: 'Player',
+          isPlayer: true,
+          moves: ['tackle'],
+          speed: 200,
+          attack: 200,
+        }),
+        enemy = battler({
+          name: 'Foe',
+          moves: ['splash'],
+          ability,
+          currentHp: 60,
+          maxHp: 60,
+          statStages: {},
+        })
+      resolveBattleTurn(player, enemy, false)
+      return { hp: enemy.currentHp, stages: enemy.statStages }
+    }
+    const berserk = run('berserk')
+    assert.ok(berserk.hp > 0 && berserk.hp <= 30, 'dropped below half HP')
+    assert.equal(berserk.stages.spAttack, 1)
+    const angerShell = run('angerShell')
+    assert.equal(angerShell.stages.spAttack, 1)
+    assert.equal(angerShell.stages.speed, 1)
+    assert.equal(angerShell.stages.defense, -1)
+  })
+})
+
+test('Moody raises one stat and lowers another', () => {
+  const player = battler({
+      name: 'Player',
+      isPlayer: true,
+      moves: ['splash'],
+      speed: 200,
+      ability: 'moody',
+      statStages: {},
+    }),
+    enemy = battler({ name: 'Foe', moves: ['splash'] })
+  resolveBattleTurn(player, enemy, false, false, null, null, true)
+  assert.equal(player.statStages.attack, 2)
+  assert.equal(player.statStages.spAttack, -1)
+})
+
+test('Good as Gold blocks status moves', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({ name: 'Player', isPlayer: true, moves: ['toxic'], speed: 200 }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], ability: 'goodAsGold', types: ['Normal'] })
+    resolveBattleTurn(player, enemy, false)
+    assert.equal(enemy.status ?? null, null)
+  })
+})
+
+test('Infiltrator ignores screens', () => {
+  withFixedRandom(0.5, () => {
+    const damageWith = (/** @type {any} */ attackerAbility) => {
+      const player = battler({
+          name: 'Player',
+          isPlayer: true,
+          moves: ['tackle'],
+          speed: 200,
+          attack: 300,
+          ability: attackerAbility,
+        }),
+        enemy = battler({
+          name: 'Foe',
+          moves: ['splash'],
+          currentHp: 2000,
+          maxHp: 2000,
+          screens: { reflect: 5, lightScreen: 0 },
+        })
+      resolveBattleTurn(player, enemy, false)
+      return 2000 - enemy.currentHp
+    }
+    assert.ok(damageWith('infiltrator') > damageWith(undefined), 'the screen is ignored')
+  })
+})

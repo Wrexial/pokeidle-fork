@@ -59,6 +59,22 @@ const STATUS_IMMUNE_ABILITIES = /** @type {Record<string, string>} */ ({
 })
 
 /**
+ * HP-threshold ability reactions: Berserk and Anger Shell trigger when a hit
+ * drops the holder from above half HP to at or below it.
+ * @param {BattlePokemon} defender
+ * @param {number} hpBefore
+ * @returns {Record<string, number> | null}
+ */
+export function onHpThresholdBoost(defender, hpBefore) {
+  const ability = abilityOf(defender)
+  if (!ability || defender.currentHp <= 0) return null
+  if (!(hpBefore > defender.maxHp / 2 && defender.currentHp <= defender.maxHp / 2)) return null
+  if (ability === 'berserk') return { spAttack: 1 }
+  if (ability === 'angerShell') return { spAttack: 1, speed: 1, defense: -1, spDefense: -1 }
+  return null
+}
+
+/**
  * Field-wide aura multiplier from any active Pokemon: Dark Aura / Fairy Aura
  * boost their type by 1.33x, and Aura Break flips them into a 0.75x drop.
  * @param {BattlePokemon} player

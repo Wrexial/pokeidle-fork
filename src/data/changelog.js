@@ -18,6 +18,7 @@ export const CHANGELOG = [
             'Recovery and speed abilities: Poison Heal, Bad Dreams, Hydration, and Quick Feet / Unburden / Surge Surfer / Protosynthesis / Quark Drive for turn order',
             'Stat-shaping abilities: Contrary flips stat changes and Simple doubles them, Defiant and Competitive punish a drop, Unaware ignores the foe\u2019s stat stages, and Moxie / Chilling Neigh / Grim Neigh / Beast Boost reward a KO with a stat boost',
             'Field auras and reactions: Dark Aura and Fairy Aura boost their type (Aura Break reverses them), Trace copies the foe\u2019s ability on switch-in, and Justified / Steam Engine / Thermal Exchange / Water Compaction / Weak Armor / Anger Point reward the holder for being hit',
+            'More reactions: Berserk and Anger Shell fire when a hit drops the holder below half HP, Moody shuffles stats each turn, Harvest restores a berry, Ripen doubles a berry\u2019s healing, Infiltrator ignores screens, Unseen Fist hits through Protect, and Good as Gold blocks status moves',
           ],
         },
       ],

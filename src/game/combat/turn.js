@@ -1,7 +1,8 @@
 // Turn resolution: move selection, attack order and damage application. Split from game/combat.js.
 
+import { moveMakesContact } from '../../data/move-effects.js'
 import { moveData, moveLearnsets } from '../../data/gameData.js'
-import { abilityAbsorbsType, abilityAttackMultiplier, abilityBlocksNonSuperEffective, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityEffectivenessMultiplier, abilityHalvesSuperEffective, abilityHealsFromType, abilityOf, abilityPreventsStatDrop, abilitySurvivesAtFullHp, fieldAuraMultiplier, onHitStatBoost } from '../abilities.js'
+import { abilityAbsorbsType, abilityAttackMultiplier, abilityBlocksNonSuperEffective, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityEffectivenessMultiplier, abilityHalvesSuperEffective, abilityHealsFromType, abilityOf, abilityPreventsStatDrop, abilitySurvivesAtFullHp, fieldAuraMultiplier, onHitStatBoost, onHpThresholdBoost } from '../abilities.js'
 import { chooseMoveForBattle, chooseRandomMove } from './ai.js'
 import { calculateDamage, chance, isSelfTargetedMove, normalizeStatKey } from './damage.js'
 import { applyEndOfTurn, reportFieldEffects } from './end-of-turn.js'
@@ -248,8 +249,13 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         target: attack.isPlayer ? 'enemy' : 'player',
       },
     })
-    // Protect blocks anything aimed at the protected Pokemon this turn.
-    if (attack.defender.protecting && !isSelfTargetedMove(moveDef)) {
+    // Protect blocks anything aimed at the protected Pokemon this turn, but
+    // Unseen Fist lets a contact move through it.
+    if (
+      attack.defender.protecting &&
+      !isSelfTargetedMove(moveDef) &&
+      !(abilityOf(attack.attacker) === 'unseenFist' && moveMakesContact(moveDef))
+    ) {
       events.push({
         type: 'protect',
         message: `${attack.defender.name} protected itself!`,
@@ -268,6 +274,14 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       continue
     }
     if (moveDef.power === 0) {
+      // Good as Gold makes the holder immune to status moves.
+      if (abilityOf(attack.defender) === 'goodAsGold' && !isSelfTargetedMove(moveDef)) {
+        events.push({
+          type: 'miss',
+          message: `${attack.defender.name}'s Good as Gold blocked the move!`,
+        })
+        continue
+      }
       // A substitute blocks status moves aimed at its owner.
       if ((attack.defender.substituteHp ?? 0) > 0 && !isSelfTargetedMove(moveDef)) {
         events.push({
@@ -964,7 +978,11 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         anyCrit = anyCrit || hitResult.isCrit
       }
     }
-    if (screenApplies(attack.defender, moveDef) && !anyCrit)
+    if (
+      screenApplies(attack.defender, moveDef) &&
+      !anyCrit &&
+      abilityOf(attack.attacker) !== 'infiltrator'
+    )
       totalDamage = Math.max(1, Math.floor(totalDamage / 2))
     // Ability + held-item + weather damage modifiers.
     totalDamage = Math.floor(
@@ -1020,6 +1038,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         continue
       }
     }
+    const defenderHpBefore = attack.defender.currentHp
     if (
       ((attack.defender.currentHp = Math.max(0, attack.defender.currentHp - totalDamage)),
       events.push({
@@ -1197,9 +1216,12 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       activeTerrain
     )
     // The defender's ability may reward it for being hit (Justified, Weak
-    // Armor, ...).
-    const onHit = onHitStatBoost(attack.defender, effectiveMove, anyCrit)
-    if (onHit) {
+    // Armor, ...) or react to dropping below half HP (Berserk, Anger Shell).
+    const onHit = {
+      ...onHitStatBoost(attack.defender, effectiveMove, anyCrit),
+      ...onHpThresholdBoost(attack.defender, defenderHpBefore),
+    }
+    if (Object.keys(onHit).length) {
       attack.defender.statStages || (attack.defender.statStages = {})
       for (const [stat, delta] of Object.entries(onHit)) {
         const current = attack.defender.statStages[stat] ?? 0,

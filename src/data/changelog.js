@@ -21,6 +21,7 @@ export const CHANGELOG = [
           heading: 'Items',
           items: [
             'Held battle items are actually purchasable now: marts listed Leftovers, the Choice items, the type boosters and the rest, but the shop had no row for them, so they could never be bought',
+            'Marts no longer all sell the same shelves: only the basics are common to every region, while each region has its own situational Poke Ball and handful of held battle items (the Underground still drops them all)',
             'The Sinnoh Underground now digs up those battle items too \u2014 type boosters, Choice Band / Specs / Scarf, Leftovers, Life Orb, Assault Vest, Eviolite, Focus Sash and Sitrus / Lum Berries \u2014 giving every held item a second source',
           ],
         },

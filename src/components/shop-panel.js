@@ -2,7 +2,8 @@
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
-import { activeItems, consumableItems, heldItems, pokeBalls, standardMartItems } from '../data/items.js'
+import { activeItems, consumableItems, coreMartItems, heldItems, pokeBalls, regionalMartItems } from '../data/items.js'
+import { mapData } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { isActiveEffectItem } from '../game/progression.js'
 import { BallShopRow } from './ball-shop-row.js'
@@ -11,7 +12,22 @@ import { ItemShopRow } from './item-shop-row.js'
 /** @param {{ shopDef: { name: string, items: { itemId: string, unlockWildBattlesWon?: number }[] } }} props */
 export function ShopPanel({ shopDef }) {
   const { state, dispatch } = useGame(),
-    [qtyMode, setQtyMode] = React.useState(/** @type {number | 'max'} */ (1))
+    [qtyMode, setQtyMode] = React.useState(/** @type {number | 'max'} */ (1)),
+    regionId = mapData[state.currentLocation]?.region ?? 'kanto',
+    // Location stock wins over the shared core/region stock, and a duplicate
+    // item id is only shown once so a mart never repeats a shelf.
+    stock = React.useMemo(() => {
+      const seen = new Set()
+      return [
+        ...shopDef.items,
+        ...coreMartItems,
+        ...(regionalMartItems[regionId] ?? []),
+      ].filter((entry) => {
+        if (seen.has(entry.itemId)) return false
+        seen.add(entry.itemId)
+        return true
+      })
+    }, [shopDef, regionId])
   return jsxs('div', {
     className: 'shop-panel',
     children: [
@@ -40,7 +56,7 @@ export function ShopPanel({ shopDef }) {
       }),
       jsx('div', {
         className: 'shop-items',
-        children: [...shopDef.items, ...standardMartItems].map((shopItem) => {
+        children: stock.map((shopItem) => {
           if (
             shopItem.unlockWildBattlesWon &&
             state.wildBattlesWon < shopItem.unlockWildBattlesWon

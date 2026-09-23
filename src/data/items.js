@@ -448,53 +448,83 @@ export const valuableDropTable = [
     { itemId: 'cometShard', weight: 2 },
   ]
 
-/** Medicine every mart stocks, revealed as the player wins wild battles. */
-export const standardMartItems = [
-    { itemId: 'premierball' },
+/**
+ * Basics every region's marts stock, revealed as the player wins wild battles.
+ * The advanced stock (situational balls and held battle items) lives in
+ * `regionalMartItems` below, so marts don't all sell the same shelves.
+ */
+export const coreMartItems = [
+  { itemId: 'premierball' },
+  { itemId: 'potion' },
+  { itemId: 'oranBerry' },
+  { itemId: 'superPotion', unlockWildBattlesWon: 40 },
+  { itemId: 'hyperPotion', unlockWildBattlesWon: 120 },
+  { itemId: 'revive', unlockWildBattlesWon: 80 },
+  { itemId: 'maxPotion', unlockWildBattlesWon: 300 },
+  { itemId: 'maxRevive', unlockWildBattlesWon: 400 },
+]
+
+/**
+ * Advanced stock split by region: a situational Poké Ball and a handful of held
+ * battle items each, so every region's marts have their own flavour. The
+ * Sinnoh Underground is the universal fallback if a region is never opened.
+ * @type {Record<string, { itemId: string, unlockWildBattlesWon?: number }[]>}
+ */
+export const regionalMartItems = {
+  kanto: [
     { itemId: 'quickball', unlockWildBattlesWon: 75 },
-    { itemId: 'repeatball', unlockWildBattlesWon: 75 },
-    { itemId: 'netball', unlockWildBattlesWon: 100 },
-    { itemId: 'nestball', unlockWildBattlesWon: 100 },
-    { itemId: 'diveball', unlockWildBattlesWon: 150 },
-    { itemId: 'timerball', unlockWildBattlesWon: 150 },
-    { itemId: 'duskball', unlockWildBattlesWon: 200 },
-    { itemId: 'potion' },
-    { itemId: 'oranBerry' },
-    { itemId: 'superPotion', unlockWildBattlesWon: 40 },
-    { itemId: 'hyperPotion', unlockWildBattlesWon: 120 },
-    { itemId: 'revive', unlockWildBattlesWon: 80 },
-    { itemId: 'maxPotion', unlockWildBattlesWon: 300 },
-    { itemId: 'maxRevive', unlockWildBattlesWon: 400 },
-    // Held items (gated so the early game stays simple).
     { itemId: 'silkScarf', unlockWildBattlesWon: 60 },
     { itemId: 'charcoal', unlockWildBattlesWon: 60 },
     { itemId: 'mysticWater', unlockWildBattlesWon: 60 },
+  ],
+  johto: [
+    { itemId: 'repeatball', unlockWildBattlesWon: 75 },
     { itemId: 'magnet', unlockWildBattlesWon: 60 },
     { itemId: 'miracleSeed', unlockWildBattlesWon: 60 },
     { itemId: 'neverMeltIce', unlockWildBattlesWon: 80 },
+  ],
+  hoenn: [
+    { itemId: 'netball', unlockWildBattlesWon: 100 },
     { itemId: 'blackBelt', unlockWildBattlesWon: 80 },
     { itemId: 'poisonBarb', unlockWildBattlesWon: 80 },
     { itemId: 'softSand', unlockWildBattlesWon: 80 },
+  ],
+  sinnoh: [
+    { itemId: 'nestball', unlockWildBattlesWon: 100 },
     { itemId: 'sharpBeak', unlockWildBattlesWon: 80 },
     { itemId: 'twistedSpoon', unlockWildBattlesWon: 100 },
     { itemId: 'silverPowder', unlockWildBattlesWon: 100 },
+  ],
+  unova: [
+    { itemId: 'diveball', unlockWildBattlesWon: 150 },
     { itemId: 'hardStone', unlockWildBattlesWon: 100 },
     { itemId: 'spellTag', unlockWildBattlesWon: 100 },
     { itemId: 'dragonFang', unlockWildBattlesWon: 150 },
+  ],
+  kalos: [
+    { itemId: 'timerball', unlockWildBattlesWon: 150 },
     { itemId: 'blackGlasses', unlockWildBattlesWon: 150 },
     { itemId: 'ironPlate', unlockWildBattlesWon: 150 },
     { itemId: 'pixiePlate', unlockWildBattlesWon: 150 },
+  ],
+  alola: [
+    { itemId: 'duskball', unlockWildBattlesWon: 200 },
     { itemId: 'sitrusBerry', unlockWildBattlesWon: 60 },
     { itemId: 'lumBerry', unlockWildBattlesWon: 100 },
-    { itemId: 'focusSash', unlockWildBattlesWon: 150 },
     { itemId: 'eviolite', unlockWildBattlesWon: 200 },
-    { itemId: 'leftovers', unlockWildBattlesWon: 250 },
+  ],
+  galar: [
+    { itemId: 'focusSash', unlockWildBattlesWon: 150 },
     { itemId: 'assaultVest', unlockWildBattlesWon: 300 },
     { itemId: 'choiceBand', unlockWildBattlesWon: 300 },
     { itemId: 'choiceSpecs', unlockWildBattlesWon: 300 },
+  ],
+  paldea: [
     { itemId: 'choiceScarf', unlockWildBattlesWon: 300 },
+    { itemId: 'leftovers', unlockWildBattlesWon: 250 },
     { itemId: 'lifeOrb', unlockWildBattlesWon: 400 },
-  ]
+  ],
+}
 
 export const bagCategories = [
     {

@@ -21,6 +21,7 @@ export const CHANGELOG = [
           heading: 'Fixes',
           items: [
             'The Settings and Pok\u00e9 Pelago modals are no longer clipped: the centre column no longer traps fixed-position overlays (Daily Quests and the Daily Event benefit too)',
+            'Layout pass on crowded controls: the Box header no longer overlaps its pager with the Pokedex / Records / Daycare buttons, the MOVES button sits above the move grid instead of over it, and toolbar / tab / save-button rows wrap instead of colliding',
           ],
         },
       ],

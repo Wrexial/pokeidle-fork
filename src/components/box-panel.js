@@ -120,19 +120,24 @@ export function BoxPanel({
                   }),
                 ],
               }),
-              jsx('button', {
-                className: 'box-header-arrow',
-                onClick: prevPage,
-                children: '<',
-              }),
-              jsxs('span', {
-                className: 'box-header-name',
-                children: ['Box ', currentPage + 1],
-              }),
-              jsx('button', {
-                className: 'box-header-arrow',
-                onClick: nextPage,
-                children: '>',
+              jsxs('div', {
+                className: 'box-header-pager',
+                children: [
+                  jsx('button', {
+                    className: 'box-header-arrow',
+                    onClick: prevPage,
+                    children: '<',
+                  }),
+                  jsxs('span', {
+                    className: 'box-header-name',
+                    children: ['Box ', currentPage + 1],
+                  }),
+                  jsx('button', {
+                    className: 'box-header-arrow',
+                    onClick: nextPage,
+                    children: '>',
+                  }),
+                ],
               }),
               jsx('button', {
                 className: 'box-sort-btn',

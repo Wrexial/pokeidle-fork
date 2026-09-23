@@ -966,9 +966,10 @@ img {
     flex: 1;
     background: url(/ui/wood-button.png) center / cover no-repeat;
     background-color: #483828;
-    padding: 8px 10px;
+    padding: 6px 10px;
     display: flex;
-    align-items: stretch
+    flex-direction: column;
+    gap: 4px
 }
 
 .move-grid {
@@ -1112,10 +1113,7 @@ img {
 }
 
 .move-swap-btn {
-    position: absolute;
-    top: 4px;
-    right: 4px;
-    z-index: 10;
+    align-self: flex-end;
     font-size: 7px;
     padding: 2px 6px;
     background: var(--gold);
@@ -1313,6 +1311,7 @@ img {
 
 .move-panel-buttons {
     display: flex;
+    flex-wrap: wrap;
     gap: 8px;
     padding: 8px 14px 10px;
     justify-content: flex-end;
@@ -1777,6 +1776,7 @@ img {
 
 .tab-bar {
     display: flex;
+    flex-wrap: wrap;
     gap: 2px;
     background: var(--bg-panel-light);
     padding: 6px 6px 0;
@@ -1793,6 +1793,10 @@ img {
     border-radius: 0;
     transition: none;
     flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     box-shadow: inset 1px 1px #ffffff14
 }
 
@@ -1941,8 +1945,9 @@ img {
 .box-header {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 8px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
     padding: 4px 8px;
     background: linear-gradient(180deg,#4a6838,#3a5428);
     border-bottom: 2px solid #2a3a18;
@@ -2568,8 +2573,6 @@ img {
     cursor: pointer;
     font-weight: 700;
     line-height: 1;
-    position: absolute;
-    right: 6px;
     box-shadow: 1px 1px #0000004d,inset 1px 1px #ffffff1a
 }
 
@@ -5603,13 +5606,16 @@ img {
 }
 
 .box-header-actions {
-    position: absolute;
-    left: 6px;
-    top: 50%;
-    transform: translateY(-50%);
     display: flex;
+    flex-wrap: wrap;
     gap: 4px;
     z-index: 2
+}
+
+.box-header-pager {
+    display: flex;
+    align-items: center;
+    gap: 4px
 }
 
 .box-pokedex-btn {
@@ -5872,7 +5878,9 @@ img {
     left: 6px;
     z-index: 20;
     display: flex;
-    gap: 3px
+    flex-wrap: wrap;
+    gap: 3px;
+    max-width: 45%
 }
 
 .battle-field-badges {
@@ -5882,7 +5890,10 @@ img {
     transform: translateX(-50%);
     z-index: 20;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 4px;
+    max-width: 50%;
     pointer-events: none
 }
 
@@ -6193,10 +6204,13 @@ img {
 .battle-info-title {
     font-size: 9px;
     font-weight: 700;
-    color: #3a2818
+    color: #3a2818;
+    min-width: 0
 }
 
 .battle-info-close {
+    flex: 0 0 auto;
+    margin-left: 8px;
     font-size: 8px;
     padding: 1px 6px;
     background: #685040;
@@ -6501,6 +6515,7 @@ img {
 
 .settings-save-row {
     display: flex;
+    flex-wrap: wrap;
     gap: 8px;
     margin-top: 8px
 }

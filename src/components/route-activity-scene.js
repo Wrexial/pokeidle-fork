@@ -189,27 +189,74 @@ export function RouteActivityScene() {
                   }),
                 ],
               })
-            : jsxs('div', {
-                className: `activity-bar${stage === 'aiming' ? '' : ' locked'}`,
-                children: [
-                  jsx('div', {
-                    className: 'activity-zone activity-zone-hit',
-                    style: { left: `${50 - hitWidth / 2}%`, width: `${hitWidth}%` },
+            : activity.display === 'swing'
+              ? jsxs('div', {
+                  className: `activity-swing${stage === 'aiming' ? '' : ' locked'}`,
+                  children: [
+                    jsx('div', {
+                      className: 'activity-zone activity-zone-hit',
+                      style: { left: `${50 - hitWidth / 2}%`, width: `${hitWidth}%` },
+                    }),
+                    jsx('div', {
+                      className: 'activity-zone activity-zone-perfect',
+                      style: { left: `${50 - perfectWidth / 2}%`, width: `${perfectWidth}%` },
+                    }),
+                    jsx('div', {
+                      className: 'activity-zone activity-zone-ultra',
+                      style: { left: `${50 - ultraWidth / 2}%`, width: `${ultraWidth}%` },
+                    }),
+                    jsx('div', {
+                      className: `activity-swing-marker${liveZone ? ` ${liveZone}` : ''}`,
+                      style: { left: `${position * 100}%` },
+                      children: '\u26cf\ufe0f',
+                    }),
+                    jsx('div', { className: 'activity-swing-rock', children: '\u{1faa8}' }),
+                  ],
+                })
+              : activity.display === 'trunk' || activity.display === 'depth'
+                ? jsxs('div', {
+                    className: `activity-gauge activity-gauge-${activity.display}${stage === 'aiming' ? '' : ' locked'}`,
+                    children: [
+                      jsx('div', {
+                        className: 'activity-zone activity-zone-hit',
+                        style: { top: `${50 - hitWidth / 2}%`, height: `${hitWidth}%` },
+                      }),
+                      jsx('div', {
+                        className: 'activity-zone activity-zone-perfect',
+                        style: { top: `${50 - perfectWidth / 2}%`, height: `${perfectWidth}%` },
+                      }),
+                      jsx('div', {
+                        className: 'activity-zone activity-zone-ultra',
+                        style: { top: `${50 - ultraWidth / 2}%`, height: `${ultraWidth}%` },
+                      }),
+                      jsx('div', {
+                        className: `activity-gauge-marker${liveZone ? ` ${liveZone}` : ''}`,
+                        style: { top: `${position * 100}%` },
+                        children: activity.icon,
+                      }),
+                    ],
+                  })
+                : jsxs('div', {
+                    className: `activity-bar${stage === 'aiming' ? '' : ' locked'}`,
+                    children: [
+                      jsx('div', {
+                        className: 'activity-zone activity-zone-hit',
+                        style: { left: `${50 - hitWidth / 2}%`, width: `${hitWidth}%` },
+                      }),
+                      jsx('div', {
+                        className: 'activity-zone activity-zone-perfect',
+                        style: { left: `${50 - perfectWidth / 2}%`, width: `${perfectWidth}%` },
+                      }),
+                      jsx('div', {
+                        className: 'activity-zone activity-zone-ultra',
+                        style: { left: `${50 - ultraWidth / 2}%`, width: `${ultraWidth}%` },
+                      }),
+                      jsx('div', {
+                        className: 'activity-marker',
+                        style: { left: `${position * 100}%` },
+                      }),
+                    ],
                   }),
-                  jsx('div', {
-                    className: 'activity-zone activity-zone-perfect',
-                    style: { left: `${50 - perfectWidth / 2}%`, width: `${perfectWidth}%` },
-                  }),
-                  jsx('div', {
-                    className: 'activity-zone activity-zone-ultra',
-                    style: { left: `${50 - ultraWidth / 2}%`, width: `${ultraWidth}%` },
-                  }),
-                  jsx('div', {
-                    className: 'activity-marker',
-                    style: { left: `${position * 100}%` },
-                  }),
-                ],
-              }),
           message && jsx('div', { className: 'activity-message', children: message }),
           activity.mode === 'loot' &&
             found.length > 0 &&

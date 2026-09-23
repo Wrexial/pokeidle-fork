@@ -209,3 +209,46 @@ test('END_ROUTE_ACTIVITY returns to idle', () => {
   assert.equal(next.phase, 'idle')
   assert.equal(next.routeActivity, null)
 })
+
+test('rock smash, headbutt and diving are offered only where their types live', () => {
+  assert.equal(ROUTE_ACTIVITIES.rockSmash.display, 'swing')
+  assert.equal(ROUTE_ACTIVITIES.headbutt.display, 'trunk')
+  assert.equal(ROUTE_ACTIVITIES.diving.display, 'depth')
+  for (const activity of [ROUTE_ACTIVITIES.rockSmash, ROUTE_ACTIVITIES.headbutt, ROUTE_ACTIVITIES.diving]) {
+    assert.equal(activity.mode, 'encounter')
+    assert.ok(activity.preferTypes.length > 0)
+  }
+
+  const find = (/** @type {string} */ id) =>
+    locations.find((location) => routeActivityIds(location).includes(id))
+  const smash = find('rockSmash'),
+    headbutt = find('headbutt'),
+    diving = find('diving')
+  assert.ok(smash && headbutt && diving, 'each activity has at least one route')
+
+  // Every offered route holds at least one matching-type species.
+  const activityTypes = [
+    ['rockSmash', ['Rock', 'Ground']],
+    ['headbutt', ['Normal', 'Flying']],
+    ['diving', ['Water']],
+  ]
+  for (const [activityId, types] of activityTypes)
+    for (const location of locations.filter((candidate) =>
+      routeActivityIds(candidate).includes(activityId)
+    ))
+      assert.ok(
+        encounterData[location.routeKey].encounters.some((entry) =>
+          types.some((type) => pokemonSpecies[entry.speciesKey].types.includes(type))
+        ),
+        `${location.id} offers ${activityId} but has no ${types.join('/')}`
+      )
+
+  for (let roll = 0; roll < 20; roll++) {
+    const smashed = rollActivityEncounter('rockSmash', smash.routeKey, roll % 2 === 0),
+      butted = rollActivityEncounter('headbutt', headbutt.routeKey, roll % 2 === 0),
+      dived = rollActivityEncounter('diving', diving.routeKey, roll % 2 === 0)
+    assert.ok(['Rock', 'Ground'].some((type) => pokemonSpecies[smashed.speciesKey].types.includes(type)))
+    assert.ok(['Normal', 'Flying'].some((type) => pokemonSpecies[butted.speciesKey].types.includes(type)))
+    assert.ok(pokemonSpecies[dived.speciesKey].types.includes('Water'))
+  }
+})

@@ -7,12 +7,14 @@ export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 export const CHANGELOG = [
     {
       version: '0.20.0',
-      subtitle: 'Safari Zone',
+      subtitle: 'Safari & Route Activities',
       sections: [
         {
           heading: 'Minigames',
           items: [
             "Kanto's Safari Zone is now playable: pay $500 for 30 free Safari Balls and roam the reserve. Bait calms a Pokemon but makes it harder to catch, while a Rock makes it easier to catch but far more likely to bolt \u2014 so the rare catches are a gamble",
+            'Three new route activities join Fishing and Foraging: Rock Smash on cave routes finds Rock and Ground Pokemon, Headbutt on grassy routes finds Normal and Flying Pokemon, and Diving on water routes reaches the deeper Water Pokemon that fishing cannot',
+            'Each activity has its own look \u2014 a swinging pickaxe, a marker bobbing up a tree trunk, and a descending depth gauge \u2014 so the timing game never looks the same twice',
           ],
         },
       ],

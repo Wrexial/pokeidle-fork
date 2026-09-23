@@ -8980,3 +8980,109 @@ img {
     25% { transform: rotate(-6deg) }
     75% { transform: rotate(6deg) }
 }
+
+.route-activity-scene.activity-rockSmash {
+    background-image: url(/backgrounds/cave.png)
+}
+
+.route-activity-scene.activity-headbutt {
+    background-image: url(/backgrounds/grassland.png)
+}
+
+.route-activity-scene.activity-diving {
+    background-image: url(/backgrounds/beach.png)
+}
+
+.activity-diving .minigame-scene-bg {
+    background: linear-gradient(180deg,rgba(10,40,80,.45),rgba(4,16,40,.82))
+}
+
+.activity-swing {
+    position: relative;
+    width: 90%;
+    height: 66px;
+    overflow: hidden;
+    background: rgba(20,14,6,.6);
+    border: 2px solid #8a7040;
+    border-radius: 4px
+}
+
+.activity-swing-marker {
+    position: absolute;
+    top: 3px;
+    transform: translateX(-50%);
+    font-size: 18px;
+    line-height: 1
+}
+
+.activity-swing-marker.hit {
+    filter: drop-shadow(0 0 4px #6ab04c)
+}
+
+.activity-swing-marker.perfect {
+    filter: drop-shadow(0 0 6px #f0c850)
+}
+
+.activity-swing-marker.ultra {
+    filter: drop-shadow(0 0 8px #54e0ff)
+}
+
+.activity-swing.locked .activity-swing-marker {
+    opacity: 0.5
+}
+
+.activity-swing-rock {
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 22px
+}
+
+.activity-gauge {
+    position: relative;
+    width: 64px;
+    height: 172px;
+    overflow: hidden;
+    background: rgba(20,14,6,.6);
+    border: 2px solid #8a7040;
+    border-radius: 4px
+}
+
+.activity-gauge .activity-zone {
+    left: 0;
+    right: 0;
+    bottom: auto
+}
+
+.activity-gauge-trunk {
+    background: linear-gradient(180deg,#5a3a1a,#2a1a0a)
+}
+
+.activity-gauge-depth {
+    background: linear-gradient(180deg,#0b3a6a,#062038)
+}
+
+.activity-gauge-marker {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    line-height: 1
+}
+
+.activity-gauge-marker.hit {
+    filter: drop-shadow(0 0 4px #6ab04c)
+}
+
+.activity-gauge-marker.perfect {
+    filter: drop-shadow(0 0 6px #f0c850)
+}
+
+.activity-gauge-marker.ultra {
+    filter: drop-shadow(0 0 8px #54e0ff)
+}
+
+.activity-gauge.locked .activity-gauge-marker {
+    opacity: 0.5
+}

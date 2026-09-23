@@ -32,8 +32,9 @@ export const ACTIVITY_ULTRA_ZONE = 0.055
  * activities don't look alike.
  * @type {Record<string, {
  *   id: string, title: string, action: string, icon: string, hint: string,
- *   mode: 'encounter' | 'loot', display: 'bar' | 'rings', preferTypes?: string[],
- *   encounterChance?: number, perfectEncounterChance?: number,
+ *   mode: 'encounter' | 'loot', display: 'bar' | 'rings' | 'swing' | 'trunk' | 'depth',
+ *   preferTypes?: string[], encounterChance?: number, perfectEncounterChance?: number,
+ *   deepWater?: boolean,
  * }>}
  */
 export const ROUTE_ACTIVITIES = {
@@ -60,6 +61,59 @@ export const ROUTE_ACTIVITIES = {
     encounterChance: 0.3,
     perfectEncounterChance: 0.6,
   },
+  rockSmash: {
+    id: 'rockSmash',
+    title: 'Rock Smash',
+    action: 'SMASH',
+    icon: '\u{1faa8}',
+    hint: 'Smash a cracked boulder to shake out the Rock and Ground Pokemon sheltering inside.',
+    mode: 'encounter',
+    display: 'swing',
+    preferTypes: ['Rock', 'Ground'],
+  },
+  headbutt: {
+    id: 'headbutt',
+    title: 'Headbutt',
+    action: 'HEADBUTT',
+    icon: '\u{1f333}',
+    hint: 'Headbutt a tree to knock loose the Normal and Flying Pokemon roosting in it.',
+    mode: 'encounter',
+    display: 'trunk',
+    preferTypes: ['Normal', 'Flying'],
+  },
+  diving: {
+    id: 'diving',
+    title: 'Diving',
+    action: 'DIVE',
+    icon: '\u{1f93f}',
+    hint: 'Dive under the surface to reach the deeper Water Pokemon that fishing cannot.',
+    mode: 'encounter',
+    display: 'depth',
+    preferTypes: ['Water'],
+    // Diving skips the fishing-rod gate and reaches the rarer, deeper species.
+    deepWater: true,
+  },
+}
+
+/**
+ * Whether a route's table holds at least one species of one of `types`.
+ * @param {string} routeKey
+ * @param {string[]} types
+ * @returns {boolean}
+ */
+function routeHasType(routeKey, types) {
+  return (encounterData[routeKey]?.encounters ?? []).some((entry) =>
+    types.some((type) => pokemonSpecies[entry.speciesKey]?.types?.includes(type))
+  )
+}
+
+/**
+ * Whether a location has trees worth headbutting.
+ * @param {MapLocation | undefined} location
+ * @returns {boolean}
+ */
+function isHeadbuttLocation(location) {
+  return isForageLocation(location)
 }
 
 /**
@@ -84,11 +138,16 @@ function isForageLocation(location) {
  */
 export function routeActivityIds(location) {
   if (!location || !encounterData[location.routeKey ?? '']) return []
+  const routeKey = location.routeKey ?? ''
   /** @type {string[]} */
   const ids = []
-  if (FISHING_LOCATIONS.has(location.id) && routeHasWaterSpecies(location.routeKey ?? ''))
-    ids.push('fishing')
+  if (FISHING_LOCATIONS.has(location.id) && routeHasWaterSpecies(routeKey)) ids.push('fishing')
   if (isForageLocation(location)) ids.push('forage')
+  if (isCaveLocation(location) && routeHasType(routeKey, ['Rock', 'Ground']))
+    ids.push('rockSmash')
+  if (isForageLocation(location) && routeHasType(routeKey, ['Normal', 'Flying']))
+    ids.push('headbutt')
+  if (isWaterLocation(location) && routeHasType(routeKey, ['Water'])) ids.push('diving')
   return ids
 }
 
@@ -125,14 +184,17 @@ export function rollActivityEncounter(activityId, routeKey, perfect, rodId = DEF
   if (typePool.length === 0) return null
   // A rod only reaches part of the water for fishing; foraging sees the whole
   // type pool instead of the shallow end of it.
-  const rodGated = activity.mode === 'encounter',
+  // Only the fishing cast is limited by which rod the player owns.
+  const rodGated = activity.id === 'fishing',
     reachable = rodGated
       ? [...typePool]
           .sort((left, right) => right.weight - left.weight)
           .slice(0, Math.max(1, Math.ceil(typePool.length * rod.rarity)))
       : typePool,
     sorted = [...reachable].sort((left, right) => left.weight - right.weight),
-    candidates = perfect ? sorted.slice(0, Math.max(1, Math.ceil(sorted.length / 2))) : reachable,
+    candidates = (perfect || activity.deepWater)
+      ? sorted.slice(0, Math.max(1, Math.ceil(sorted.length / 2)))
+      : reachable,
     levelBonus = rodGated ? rod.levelBonus : 0,
     totalWeight = candidates.reduce((sum, entry) => sum + entry.weight, 0)
   let roll = Math.random() * totalWeight

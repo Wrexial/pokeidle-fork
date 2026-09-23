@@ -14,7 +14,8 @@ export const CHANGELOG = [
           items: [
             "Galar's Wild Area is now a proper zone: a single map node that opens a picker for Rolling Fields, Dappled Grove and Giant's Mirror, each with its own wild Pokemon table",
             "Slumbering Weald, Galar Mine and Glimwood Tangle are now real wild areas too, so Galarian and Hisuian forms like Galarian Zigzagoon, Corsola and Yamask, and Hisuian Growlithe and Voltorb, can be caught in the wild",
-            "Galar's Raid Island shrank from 57 Pokemon to 35 as those wild areas gave their evolutions a native source",
+            "The Sword/Shield expansion areas are here as post-game zones: after beating Galar's Champion, the Isle of Armor (Fields of Honor, Soothing Wetlands, Brawlers' Cave) and the Crown Tundra (Snowslide Slope, Frigid Sea, Giant's Bed) open from Hulbury and Wyndon",
+            "Galar's Raid Island shrank from 59 Pokemon to 22, because those wild areas and the DLC gave its Galarian/Hisuian forms and Slowpoke line a native source",
           ],
         },
       ],

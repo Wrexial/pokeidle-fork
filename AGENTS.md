@@ -300,7 +300,9 @@ Data conventions:
   wilds, so they drop out of the Raid Islands. `POST_AREAS` injects standalone
   wild areas (Slumbering Weald, Galar Mine, Glimwood Tangle) the same way,
   with a level band averaged from the routes they connect to so adding one
-  never re-levels the region.
+  never re-levels the region. Galar's DLC uses zones too: the Isle of Armor and
+  Crown Tundra are post-game hubs gated on `championDefeated` with fixed high
+  levels (`zone.level`).
 - Some regions' scraped force-directed layout doesn't match the real map, so
   `REGION_MAP_LAYOUTS` in `generate-regions.cjs` overrides it with
   hand-measured coordinates from a labelled reference map. Every region except

@@ -650,14 +650,6 @@
   "leagueLocationKey": "galar-league",
   "raidPool": [
    {
-    "speciesKey": "mr. rime",
-    "level": 70
-   },
-   {
-    "speciesKey": "morpeko",
-    "level": 70
-   },
-   {
     "speciesKey": "dracozolt",
     "level": 70
    },
@@ -718,32 +710,8 @@
     "level": 75
    },
    {
-    "speciesKey": "basculegion",
-    "level": 70
-   },
-   {
-    "speciesKey": "sneasler",
-    "level": 70
-   },
-   {
-    "speciesKey": "overqwil",
-    "level": 70
-   },
-   {
     "speciesKey": "enamorus",
     "level": 75
-   },
-   {
-    "speciesKey": "g-slowpoke",
-    "level": 70
-   },
-   {
-    "speciesKey": "g-slowbro",
-    "level": 70
-   },
-   {
-    "speciesKey": "g-mr. mime",
-    "level": 70
    },
    {
     "speciesKey": "g-articuno",
@@ -758,18 +726,6 @@
     "level": 75
    },
    {
-    "speciesKey": "g-slowking",
-    "level": 70
-   },
-   {
-    "speciesKey": "h-qwilfish",
-    "level": 70
-   },
-   {
-    "speciesKey": "h-sneasel",
-    "level": 70
-   },
-   {
     "speciesKey": "h-rotom",
     "level": 70
    },
@@ -778,15 +734,7 @@
     "level": 70
    },
    {
-    "speciesKey": "basculin-w",
-    "level": 70
-   },
-   {
     "speciesKey": "indeedee-f",
-    "level": 70
-   },
-   {
-    "speciesKey": "basculegion-f",
     "level": 70
    }
   ]

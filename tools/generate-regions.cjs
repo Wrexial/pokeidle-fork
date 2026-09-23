@@ -1652,6 +1652,66 @@ const ZONES = {
         },
       ],
     },
+    {
+      // Sword/Shield Expansion Pass. Post-game, so it carries an explicit
+      // level and a Champion gate instead of a neighbour-level band.
+      node: 'isle-of-armor',
+      name: 'Isle of Armor',
+      position: { x: 69, y: 60 },
+      background: '/backgrounds/beach.png',
+      connections: ['galar-hulbury'],
+      level: 72,
+      unlock: { championDefeated: 'galar' },
+      subAreas: [
+        {
+          node: 'isle-of-armor-fields-of-honor',
+          name: 'Fields of Honor',
+          position: { x: 69, y: 62 },
+          species: ['g-slowpoke', 'g-mr. mime', 'gossifleur', 'blipbug', 'skwovet', 'chewtle'],
+        },
+        {
+          node: 'isle-of-armor-soothing-wetlands',
+          name: 'Soothing Wetlands',
+          position: { x: 71, y: 59 },
+          species: ['g-slowpoke', 'chewtle', 'gossifleur', 'toxel', 'pincurchin', 'clobbopus'],
+        },
+        {
+          node: 'isle-of-armor-brawlers-cave',
+          name: "Brawlers' Cave",
+          position: { x: 70, y: 57 },
+          species: ["g-farfetch'd", 'clobbopus', 'falinks', 'rolycoly', 'g-meowth', 'g-darumaka'],
+        },
+      ],
+    },
+    {
+      node: 'crown-tundra',
+      name: 'Crown Tundra',
+      position: { x: 60, y: 12 },
+      background: '/backgrounds/mountain.png',
+      connections: ['galar-wyndon'],
+      level: 75,
+      unlock: { championDefeated: 'galar' },
+      subAreas: [
+        {
+          node: 'crown-tundra-snowslide-slope',
+          name: 'Snowslide Slope',
+          position: { x: 59, y: 10 },
+          species: ['h-sneasel', 'snom', 'g-stunfisk', 'cufant', 'h-qwilfish', 'stonjourner'],
+        },
+        {
+          node: 'crown-tundra-frigid-sea',
+          name: 'Frigid Sea',
+          position: { x: 62, y: 13 },
+          species: ['basculin-w', 'h-qwilfish', 'arrokuda', 'chewtle', 'g-corsola', 'pincurchin'],
+        },
+        {
+          node: 'crown-tundra-giants-bed',
+          name: "Giant's Bed",
+          position: { x: 58, y: 14 },
+          species: ['h-sneasel', 'cufant', 'stonjourner', 'snom', 'morpeko', 'rolycoly'],
+        },
+      ],
+    },
   ],
 }
 for (const [regionId, zones] of Object.entries(ZONES)) {
@@ -1663,7 +1723,7 @@ for (const [regionId, zones] of Object.entries(ZONES)) {
     const neighbourLevel = zone.connections
       .map((id) => mapData[id]?.routeKey && encounterData[mapData[id].routeKey]?.encounters?.[0]?.minLevel)
       .find((level) => typeof level === 'number')
-    const zoneLevel = clampLevel(neighbourLevel ?? region.startLevel ?? 5),
+    const zoneLevel = clampLevel(zone.level ?? neighbourLevel ?? region.startLevel ?? 5),
       anchor = mapData[zone.connections[0]]?.unlockOrder ?? 0,
       subAreaIds = []
     for (const subArea of zone.subAreas) {
@@ -1701,10 +1761,10 @@ for (const [regionId, zones] of Object.entries(ZONES)) {
       region: regionId,
       description: `The ${zone.name} is a wide-open stretch with several distinct habitats.`,
       routeKey: subAreaIds[0],
-      background: '/backgrounds/grassland.png',
+      background: zone.background ?? '/backgrounds/grassland.png',
       connections: [...zone.connections, ...subAreaIds],
       subAreas: subAreaIds.map((id) => ({ id, name: mapData[id].name })),
-      unlock: { battlesAtLocation: [{ locationId: zone.connections[0], count: 3 }] },
+      unlock: zone.unlock ?? { battlesAtLocation: [{ locationId: zone.connections[0], count: 3 }] },
       unlockOrder: anchor + 0.4,
       position: zone.position,
     }

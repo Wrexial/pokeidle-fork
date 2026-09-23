@@ -1150,6 +1150,252 @@
    }
   ]
  },
+ "galar-isle-of-armor-fields-of-honor": {
+  "name": "Fields of Honor",
+  "encounters": [
+   {
+    "speciesKey": "g-slowpoke",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "g-mr. mime",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "gossifleur",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "blipbug",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "skwovet",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "chewtle",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   }
+  ]
+ },
+ "galar-isle-of-armor-soothing-wetlands": {
+  "name": "Soothing Wetlands",
+  "encounters": [
+   {
+    "speciesKey": "g-slowpoke",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "chewtle",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "gossifleur",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "toxel",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "pincurchin",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "clobbopus",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   }
+  ]
+ },
+ "galar-isle-of-armor-brawlers-cave": {
+  "name": "Brawlers' Cave",
+  "encounters": [
+   {
+    "speciesKey": "g-farfetch'd",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "clobbopus",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "falinks",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "rolycoly",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "g-meowth",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "g-darumaka",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   }
+  ]
+ },
+ "galar-crown-tundra-snowslide-slope": {
+  "name": "Snowslide Slope",
+  "encounters": [
+   {
+    "speciesKey": "h-sneasel",
+    "weight": 20,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "snom",
+    "weight": 20,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "g-stunfisk",
+    "weight": 20,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "cufant",
+    "weight": 12,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "h-qwilfish",
+    "weight": 12,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "stonjourner",
+    "weight": 12,
+    "minLevel": 75,
+    "maxLevel": 77
+   }
+  ]
+ },
+ "galar-crown-tundra-frigid-sea": {
+  "name": "Frigid Sea",
+  "encounters": [
+   {
+    "speciesKey": "basculin-w",
+    "weight": 20,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "h-qwilfish",
+    "weight": 20,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "arrokuda",
+    "weight": 20,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "chewtle",
+    "weight": 12,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "g-corsola",
+    "weight": 12,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "pincurchin",
+    "weight": 12,
+    "minLevel": 75,
+    "maxLevel": 77
+   }
+  ]
+ },
+ "galar-crown-tundra-giants-bed": {
+  "name": "Giant's Bed",
+  "encounters": [
+   {
+    "speciesKey": "h-sneasel",
+    "weight": 20,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "cufant",
+    "weight": 20,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "stonjourner",
+    "weight": 20,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "snom",
+    "weight": 12,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "morpeko",
+    "weight": 12,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "rolycoly",
+    "weight": 12,
+    "minLevel": 75,
+    "maxLevel": 77
+   }
+  ]
+ },
  "galar-slumbering-weald": {
   "name": "Slumbering Weald",
   "encounters": [
@@ -1313,18 +1559,6 @@
   "name": "Galar Raid Island",
   "encounters": [
    {
-    "speciesKey": "mr. rime",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "morpeko",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "dracozolt",
     "weight": 1,
     "minLevel": 70,
@@ -1415,46 +1649,10 @@
     "maxLevel": 75
    },
    {
-    "speciesKey": "basculegion",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "sneasler",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "overqwil",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "enamorus",
     "weight": 1,
     "minLevel": 75,
     "maxLevel": 75
-   },
-   {
-    "speciesKey": "g-slowpoke",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "g-slowbro",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "g-mr. mime",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
    },
    {
     "speciesKey": "g-articuno",
@@ -1475,24 +1673,6 @@
     "maxLevel": 75
    },
    {
-    "speciesKey": "g-slowking",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "h-qwilfish",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "h-sneasel",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "h-rotom",
     "weight": 1,
     "minLevel": 70,
@@ -1505,19 +1685,7 @@
     "maxLevel": 70
    },
    {
-    "speciesKey": "basculin-w",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "indeedee-f",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "basculegion-f",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70

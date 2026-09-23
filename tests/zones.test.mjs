@@ -61,3 +61,26 @@ test('the extra Galar wild areas exist with their own encounters', () => {
     assert.ok(location.connections.length > 0, `${id} connects to the map`)
   }
 })
+
+test('the DLC zones are post-game and gated on the Galar Champion', () => {
+  for (const id of ['galar-isle-of-armor', 'galar-crown-tundra']) {
+    const hub = mapData[id]
+    assert.ok(hub, `${id} exists`)
+    assert.equal(hub.type, 'zone')
+    assert.deepEqual(hub.unlock, { championDefeated: 'galar' })
+    assert.ok(hub.subAreas.length >= 2, `${id} has sub-areas`)
+    for (const subArea of hub.subAreas) {
+      assert.equal(mapData[subArea.id].hidden, true)
+      assert.ok(encounterData[subArea.id]?.encounters?.length, `${subArea.id} has encounters`)
+    }
+  }
+
+  const locked = computeUnlockedLocations(stateWith(['galar-hulbury', 'galar-wyndon']))
+  assert.ok(!locked.includes('galar-isle-of-armor'), 'locked before the Champion')
+  const unlocked = computeUnlockedLocations({
+    ...stateWith(['galar-hulbury', 'galar-wyndon']),
+    defeatedChampions: ['galar'],
+  })
+  assert.ok(unlocked.includes('galar-isle-of-armor'), 'opens after the Champion')
+  assert.ok(unlocked.includes('galar-crown-tundra'), 'opens after the Champion')
+})

@@ -354,9 +354,10 @@ and `raidPoolFor` in `src/data/gameData.js`.
 
 **Partial (0.37.0):** the Wild Area is now a zone (#36) with three sub-areas,
 and Slumbering Weald, Galar Mine and Glimwood Tangle are real wild areas too.
-Those areas added several Galar/Hisuian forms as wilds, which shrank Galar's
-`raidPool` from 57 to 35. Still missing: the Isle of Armor / Crown Tundra DLC
-(see #39).
+The Expansion Pass is in as two more post-game zones (#39): the Isle of Armor
+and the Crown Tundra, gated on beating Galar's Champion. Those areas added
+galarian/hisuian and DLC species as wilds, which shrank Galar's `raidPool` from
+59 to 22. Galar is now content-complete; first-class DLC *regions* remain #39.
 
 Effort: **medium** (mostly data; the Wild Area zone work depends on #36).
 
@@ -431,10 +432,11 @@ Hoenn 15, Sinnoh 20, Unova 27, Kalos 10, Alola **51**, Galar **59**, Paldea
 otherwise-unobtainable species, and `npm run validate` checks every species is
 obtainable.
 
-**Partial (0.37.0):** Galar's pool dropped from 59 to 35 once the Wild Area and
-the new Galar areas (Slumbering Weald / Galar Mine / Glimwood Tangle) gave its
-regional forms native routes. The later regions are still bloated (Alola 50,
-Paldea ~55) and need the same treatment via zones (#36) and DLC (#39).
+**Partial (0.37.0):** Galar's pool dropped from 59 to 22 once the Wild Area,
+the new Galar areas (Slumbering Weald / Galar Mine / Glimwood Tangle) and the
+Isle of Armor / Crown Tundra zones gave its regional forms and DLC species
+native routes. The later regions are still bloated (Alola 50, Paldea ~55) and
+need the same treatment via zones (#36) and DLC (#39).
 
 - [ ] Decide a target shape per region: e.g. keep **all** legendaries/mythicals
       (no other source) plus a capped non-legendary set (~10–15), and move the
@@ -474,6 +476,11 @@ parent region, trimmed, or pushed into a raid pool:
 about promoting them to **first-class regions** in `regions.json` — their own
 `entry`, level curve, unlock path, raid pool and map — so they can be opened
 with an Unlock Token like any other region.
+
+**Partial (0.37.0):** Galar's DLC shipped the first (smaller) way — Isle of
+Armor and Crown Tundra are post-game zones inside Galar (see #36), gated on
+`championDefeated: 'galar'`, with their own sub-areas and encounters. Paldea's
+Kitakami/Terarium and first-class-region promotion are still open.
 
 - [ ] Decide the model: a region whose `generation` points at its parent gen,
       vs. a new `parentRegion` / `isDlc` flag. Regions currently map 1:1 to

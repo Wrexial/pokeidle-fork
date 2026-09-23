@@ -278,7 +278,8 @@
   "region": "galar",
   "description": "A town in the Galar region, home to Nessa's Water Gym.",
   "connections": [
-   "galar-route-5"
+   "galar-route-5",
+   "galar-isle-of-armor"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -338,7 +339,7 @@
     "galar-gym-2"
    ]
   },
-  "unlockOrder": 800006,
+  "unlockOrder": 800006.0002,
   "position": {
    "x": 45.29,
    "y": 53.33
@@ -681,7 +682,8 @@
   "region": "galar",
   "description": "A town in the Galar region.",
   "connections": [
-   "galar-route-10"
+   "galar-route-10",
+   "galar-crown-tundra"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -939,6 +941,224 @@
   "position": {
    "x": 50.13070523367197,
    "y": 57.92523217565375
+  }
+ },
+ "galar-isle-of-armor-fields-of-honor": {
+  "id": "galar-isle-of-armor-fields-of-honor",
+  "name": "Fields of Honor",
+  "type": "route",
+  "region": "galar",
+  "description": "A sub-area of the Isle of Armor.",
+  "routeKey": "galar-isle-of-armor-fields-of-honor",
+  "background": "/backgrounds/grassland.png",
+  "connections": [
+   "galar-isle-of-armor"
+  ],
+  "hidden": true,
+  "zone": "galar-isle-of-armor",
+  "unlock": {
+   "requires": [
+    "galar-isle-of-armor"
+   ]
+  },
+  "unlockOrder": 800006.0001,
+  "position": {
+   "x": 69,
+   "y": 62.51
+  }
+ },
+ "galar-isle-of-armor-soothing-wetlands": {
+  "id": "galar-isle-of-armor-soothing-wetlands",
+  "name": "Soothing Wetlands",
+  "type": "route",
+  "region": "galar",
+  "description": "A sub-area of the Isle of Armor.",
+  "routeKey": "galar-isle-of-armor-soothing-wetlands",
+  "background": "/backgrounds/beach.png",
+  "connections": [
+   "galar-isle-of-armor"
+  ],
+  "hidden": true,
+  "zone": "galar-isle-of-armor",
+  "unlock": {
+   "requires": [
+    "galar-isle-of-armor"
+   ]
+  },
+  "unlockOrder": 800006.001,
+  "position": {
+   "x": 71.59455458234684,
+   "y": 59.32371446796515
+  }
+ },
+ "galar-isle-of-armor-brawlers-cave": {
+  "id": "galar-isle-of-armor-brawlers-cave",
+  "name": "Brawlers' Cave",
+  "type": "route",
+  "region": "galar",
+  "description": "A sub-area of the Isle of Armor.",
+  "routeKey": "galar-isle-of-armor-brawlers-cave",
+  "background": "/backgrounds/cave.png",
+  "connections": [
+   "galar-isle-of-armor"
+  ],
+  "hidden": true,
+  "zone": "galar-isle-of-armor",
+  "unlock": {
+   "requires": [
+    "galar-isle-of-armor"
+   ]
+  },
+  "unlockOrder": 800006.002,
+  "position": {
+   "x": 69.82470747079506,
+   "y": 56.64941494159013
+  }
+ },
+ "galar-isle-of-armor": {
+  "id": "galar-isle-of-armor",
+  "name": "Isle of Armor",
+  "type": "zone",
+  "region": "galar",
+  "description": "The Isle of Armor is a wide-open stretch with several distinct habitats.",
+  "routeKey": "galar-isle-of-armor-fields-of-honor",
+  "background": "/backgrounds/beach.png",
+  "connections": [
+   "galar-hulbury",
+   "galar-isle-of-armor-fields-of-honor",
+   "galar-isle-of-armor-soothing-wetlands",
+   "galar-isle-of-armor-brawlers-cave"
+  ],
+  "subAreas": [
+   {
+    "id": "galar-isle-of-armor-fields-of-honor",
+    "name": "Fields of Honor"
+   },
+   {
+    "id": "galar-isle-of-armor-soothing-wetlands",
+    "name": "Soothing Wetlands"
+   },
+   {
+    "id": "galar-isle-of-armor-brawlers-cave",
+    "name": "Brawlers' Cave"
+   }
+  ],
+  "unlock": {
+   "championDefeated": "galar"
+  },
+  "unlockOrder": 800005.9,
+  "position": {
+   "x": 68.5807379468581,
+   "y": 59.516870590444725
+  }
+ },
+ "galar-crown-tundra-snowslide-slope": {
+  "id": "galar-crown-tundra-snowslide-slope",
+  "name": "Snowslide Slope",
+  "type": "route",
+  "region": "galar",
+  "description": "A sub-area of the Crown Tundra.",
+  "routeKey": "galar-crown-tundra-snowslide-slope",
+  "background": "/backgrounds/grassland.png",
+  "connections": [
+   "galar-crown-tundra"
+  ],
+  "hidden": true,
+  "zone": "galar-crown-tundra",
+  "unlock": {
+   "requires": [
+    "galar-crown-tundra"
+   ]
+  },
+  "unlockOrder": 800011,
+  "position": {
+   "x": 58.69591236794558,
+   "y": 9.35580953380847
+  }
+ },
+ "galar-crown-tundra-frigid-sea": {
+  "id": "galar-crown-tundra-frigid-sea",
+  "name": "Frigid Sea",
+  "type": "route",
+  "region": "galar",
+  "description": "A sub-area of the Crown Tundra.",
+  "routeKey": "galar-crown-tundra-frigid-sea",
+  "background": "/backgrounds/beach.png",
+  "connections": [
+   "galar-crown-tundra"
+  ],
+  "hidden": true,
+  "zone": "galar-crown-tundra",
+  "unlock": {
+   "requires": [
+    "galar-crown-tundra"
+   ]
+  },
+  "unlockOrder": 800011.001,
+  "position": {
+   "x": 62.669903975427374,
+   "y": 13.243673970695541
+  }
+ },
+ "galar-crown-tundra-giants-bed": {
+  "id": "galar-crown-tundra-giants-bed",
+  "name": "Giant's Bed",
+  "type": "route",
+  "region": "galar",
+  "description": "A sub-area of the Crown Tundra.",
+  "routeKey": "galar-crown-tundra-giants-bed",
+  "background": "/backgrounds/mountain.png",
+  "connections": [
+   "galar-crown-tundra"
+  ],
+  "hidden": true,
+  "zone": "galar-crown-tundra",
+  "unlock": {
+   "requires": [
+    "galar-crown-tundra"
+   ]
+  },
+  "unlockOrder": 800011.002,
+  "position": {
+   "x": 57.75277274265659,
+   "y": 14.267119303777706
+  }
+ },
+ "galar-crown-tundra": {
+  "id": "galar-crown-tundra",
+  "name": "Crown Tundra",
+  "type": "zone",
+  "region": "galar",
+  "description": "The Crown Tundra is a wide-open stretch with several distinct habitats.",
+  "routeKey": "galar-crown-tundra-snowslide-slope",
+  "background": "/backgrounds/mountain.png",
+  "connections": [
+   "galar-wyndon",
+   "galar-crown-tundra-snowslide-slope",
+   "galar-crown-tundra-frigid-sea",
+   "galar-crown-tundra-giants-bed"
+  ],
+  "subAreas": [
+   {
+    "id": "galar-crown-tundra-snowslide-slope",
+    "name": "Snowslide Slope"
+   },
+   {
+    "id": "galar-crown-tundra-frigid-sea",
+    "name": "Frigid Sea"
+   },
+   {
+    "id": "galar-crown-tundra-giants-bed",
+    "name": "Giant's Bed"
+   }
+  ],
+  "unlock": {
+   "championDefeated": "galar"
+  },
+  "unlockOrder": 800010.9,
+  "position": {
+   "x": 59.881410913970456,
+   "y": 12.133397191718283
   }
  },
  "galar-slumbering-weald": {

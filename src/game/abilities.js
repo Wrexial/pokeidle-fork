@@ -164,6 +164,7 @@ export function onHitStatBoost(defender, moveDef, isCrit = false) {
   if (!ability || !moveDef) return null
   if (ability === 'angerPoint' && isCrit) return { attack: 6 }
   if (ability === 'justified' && moveDef.type === 'Dark') return { attack: 1 }
+  if (ability === 'rattled' && ['Bug', 'Dark', 'Ghost'].includes(moveDef.type)) return { speed: 1 }
   if (ability === 'thermalExchange' && moveDef.type === 'Fire') return { attack: 1 }
   if (ability === 'waterCompaction' && moveDef.type === 'Water') return { defense: 2 }
   if (ability === 'steamEngine' && (moveDef.type === 'Water' || moveDef.type === 'Fire'))
@@ -324,10 +325,22 @@ export function abilityHalvesSuperEffective(defender) {
  * @returns {boolean}
  */
 export function abilityPreventsStatus(target, status) {
-  const blocked = STATUS_IMMUNE_ABILITIES[abilityOf(target) ?? ''],
+  const ability = abilityOf(target),
+    blocked = STATUS_IMMUNE_ABILITIES[ability ?? ''],
     // Badly poisoned still counts as poison for Immunity / Pastel Veil.
     normalized = status === 'toxic' ? 'poison' : status
-  return blocked === normalized || blocked === 'all'
+  if (blocked === normalized || blocked === 'all') return true
+  return false
+}
+
+/**
+ * Whether an ability lets its holder poison a Steel- or Poison-type
+ * (Corrosion).
+ * @param {BattlePokemon} source
+ * @returns {boolean}
+ */
+export function abilityIgnoresPoisonImmunity(source) {
+  return abilityOf(source) === 'corrosion'
 }
 
 /**

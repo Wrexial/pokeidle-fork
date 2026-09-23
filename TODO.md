@@ -222,10 +222,12 @@ Armor, Anger Point, Soul-Heart) are in too, along with Berserk / Anger Shell
 (HP-threshold), Moody, Harvest, Ripen, Infiltrator, Unseen Fist and Good as
 Gold, plus the extreme weathers (Desolate Land / Primordial Sea / Delta
 Stream), the type-changers (Protean / Libero / Normalize / Liquid Voice / the
--ate family) and Disguise / Ice Face, plus the Ruin quartet and Neutralizing
-Gas, plus the item hooks (Trick / Switcheroo / Bestow / Corrosive Gas /
-Magician / Pickpocket) and the mid-battle form-change subsystem (Stance Change,
-Zero to Hero, Power Construct, Schooling, Imposter, Battle Bond).
+-ate family), Disguise / Ice Face, the Ruin quartet, Neutralizing Gas, the item
+hooks (Trick / Switcheroo / Bestow / Corrosive Gas / Magician / Pickpocket), the
+mid-battle form-change subsystem (Stance Change, Zero to Hero, Power Construct,
+Schooling, Imposter, Battle Bond) and the reaction batch (Rattled, Merciless,
+No Guard, Defeatist, Skill Link, Serene Grace, Aftermath, Poison Touch, Scrappy,
+Inner Focus / Own Tempo / Oblivious, Corrosion, Cheek Pouch).
 `abilityPreventsStatus` also now treats badly-poisoned as poison
 (Immunity / Pastel Veil).
 

@@ -231,6 +231,20 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
           hpMax: pokemon.maxHp,
         },
       })
+      // Cheek Pouch heals extra when a berry is eaten.
+      if (abilityOf(pokemon) === 'cheekPouch' && pokemon.currentHp < pokemon.maxHp) {
+        const pouchHeal = Math.max(1, Math.floor(pokemon.maxHp / 3))
+        pokemon.currentHp = Math.min(pokemon.maxHp, pokemon.currentHp + pouchHeal)
+        events.push({
+          type: 'heal',
+          message: `${pokemon.name}'s Cheek Pouch restored HP!`,
+          data: {
+            target: isPlayerSide ? 'player' : 'enemy',
+            hpAfter: pokemon.currentHp,
+            hpMax: pokemon.maxHp,
+          },
+        })
+      }
     }
     // Harvest restores a consumed berry (always in sun, else 50%).
     if (

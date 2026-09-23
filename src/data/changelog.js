@@ -25,6 +25,8 @@ export const CHANGELOG = [
             'Global stat pressure: the Ruin quartet (Tablets of Ruin weakens physical offence, Beads of Ruin special offence, Sword of Ruin physical defence, Vessel of Ruin special defence) and Neutralizing Gas, which suppresses every other Pokemon\u2019s ability while its holder is on the field',
             'Held-item manipulation works: Trick / Switcheroo swap items, Bestow gives one away, Corrosive Gas destroys the foe\u2019s, and the Magician / Pickpocket abilities steal one on the hit or on contact',
             'A mid-battle form-change subsystem is in: Stance Change (Aegislash Blade/Shield), Zero to Hero (Palafin), Power Construct (Zygarde Complete), Schooling (Wishiwashi), Imposter (copy the foe\u2019s stats and types) and Battle Bond (Ash-Greninja). The battle sprite follows the new form, and forms revert when the Pokemon switches out',
+            'More ability hooks: Rattled, Merciless (always crits a statused foe), No Guard accuracy, Defeatist, Skill Link, Serene Grace, Aftermath, Poison Touch, Scrappy (Normal/Fighting hit Ghosts), Inner Focus / Own Tempo / Oblivious (flinch / confusion / infatuation immunity), Corrosion (poisons Steel and Poison types) and Cheek Pouch',
+            'Fixed a battle bug where an immune hit (a Normal move into a Ghost) could still deal 1 damage',
           ],
         },
       ],

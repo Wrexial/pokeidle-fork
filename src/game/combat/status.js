@@ -1,7 +1,7 @@
 // Status conditions and volatile effects (confusion, infatuation, Leech Seed, contact abilities). Split from game/combat.js.
 
 import { moveMakesContact } from '../../data/move-effects.js'
-import { abilityOf, abilityPreventsStatDrop, abilityPreventsStatus } from '../abilities.js'
+import { abilityIgnoresPoisonImmunity, abilityOf, abilityPreventsStatDrop, abilityPreventsStatus } from '../abilities.js'
 import { genderForPokemon } from '../breeding.js'
 import { chance } from './damage.js'
 import { heldCuresStatus } from '../held-items.js'
@@ -32,8 +32,9 @@ export const STATUS_IMMUNE_TYPES = {
  * @param {boolean} [deterministic]
  * @param {{ type: string } | null} [terrain]
  * @param {boolean} [sourceIsOpponent] Safeguard blocks these
+ * @param {BattlePokemon | null} [source] the inflicting Pokemon (for Corrosion)
  */
-export function applyStatus(target, status, events, targetIsPlayer, deterministic = !1, terrain = null, sourceIsOpponent = !1) {
+export function applyStatus(target, status, events, targetIsPlayer, deterministic = !1, terrain = null, sourceIsOpponent = !1, source = null) {
   if (!target || target.currentHp <= 0) return
   const side = targetIsPlayer ? 'player' : 'enemy'
   if (status === 'flinching') {
@@ -45,7 +46,15 @@ export function applyStatus(target, status, events, targetIsPlayer, deterministi
   if (!MAJOR_STATUSES.has(status) || target.status) return
   if (abilityPreventsStatus(target, status)) return
   if (terrainPreventsStatus(terrain, target, status)) return
-  if ((STATUS_IMMUNE_TYPES[status] ?? []).some((type) => target.types.includes(type))) return
+  if (
+    !(
+      source &&
+      abilityIgnoresPoisonImmunity(source) &&
+      (status === 'poison' || status === 'toxic')
+    ) &&
+    (STATUS_IMMUNE_TYPES[status] ?? []).some((type) => target.types.includes(type))
+  )
+    return
   target.status = status
   target.statusTurns =
     status === 'sleep'
@@ -116,6 +125,7 @@ export function applyLeechSeed(target, events, targetIsPlayer) {
  */
 export function applyConfusion(target, events, targetIsPlayer, deterministic = !1) {
   if (!target || target.currentHp <= 0 || (target.confusionTurns ?? 0) > 0) return
+  if (abilityOf(target) === 'ownTempo') return
   target.confusionTurns = deterministic ? 3 : 2 + Math.floor(Math.random() * 4)
   events.push({
     type: 'status',
@@ -293,6 +303,7 @@ export function applyContactAbility(defender, attacker, moveDef, events, attacke
  */
 export function applyInfatuation(source, target, events, targetIsPlayer) {
   if (!target || target.currentHp <= 0 || target.infatuated) return
+  if (abilityOf(target) === 'oblivious') return
   const sourceGender = genderForPokemon(source),
     targetGender = genderForPokemon(target)
   if (
@@ -392,7 +403,7 @@ export function statusPreventsAction(attacker, events, isPlayer, deterministic =
     })
     return !0
   }
-  if (attacker.flinch) {
+  if (attacker.flinch && abilityOf(attacker) !== 'innerFocus') {
     attacker.flinch = !1
     events.push({
       type: 'status',

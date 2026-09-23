@@ -170,6 +170,7 @@ export function effectiveSpeed(pokemon, weather, terrain = null) {
     ((pokemon.tailwindTurns ?? 0) > 0 ? 2 : 1)
   if (ability === 'quickFeet' && pokemon.status) speed *= 1.5
   if (ability === 'unburden' && pokemon.heldItemUsed) speed *= 2
+  if (ability === 'defeatist' && pokemon.currentHp <= pokemon.maxHp / 2) speed *= 0.5
   if (ability === 'surgeSurfer' && terrain?.type === 'electric') speed *= 2
   if (ability === 'protosynthesis' && weather?.type === 'sun') speed *= 1.5
   if (ability === 'quarkDrive' && terrain?.type === 'electric') speed *= 1.5
@@ -267,6 +268,7 @@ export function applyEntryAbility(source, target, events, sourceIsPlayer) {
  */
 export function applyIntimidate(source, target, events, sourceIsPlayer) {
   if (abilityOf(source) !== 'intimidate' || target.currentHp <= 0) return
+  if (abilityOf(target) === 'oblivious') return
   if (abilityPreventsStatDrop(target, 'attack')) return
   if ((target.mistTurns ?? 0) > 0) return
   const stages = target.statStages ?? (target.statStages = {}),

@@ -885,3 +885,139 @@ test('Battle Bond transforms Greninja after a KO', () => {
   resolveBattleTurn(player, enemy, false)
   assert.equal(player.speciesKey, 'ash-greninja')
 })
+
+test('reaction abilities: Rattled, Merciless, Defeatist, Skill Link, Aftermath', () => {
+  assert.deepEqual(onHitStatBoost(battler({ ability: 'rattled' }), moveData.crunch), { speed: 1 })
+
+  withFixedRandom(0.5, () => {
+    // Merciless always crits a statused foe.
+    const merciless = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['tackle'],
+        speed: 200,
+        attack: 200,
+        ability: 'merciless',
+      }),
+      poisoned = battler({ name: 'Foe', moves: ['splash'], status: 'poison', currentHp: 400, maxHp: 400 })
+    assert.ok(
+      resolveBattleTurn(merciless, poisoned, false).some(
+        (/** @type {any} */ event) => event.type === 'critical'
+      )
+    )
+
+    // Defeatist halves offence below half HP.
+    const damage = (/** @type {any} */ ability) => {
+      const player = battler({
+          name: 'Player',
+          isPlayer: true,
+          moves: ['tackle'],
+          speed: 200,
+          attack: 200,
+          ability,
+          currentHp: 100,
+          maxHp: 400,
+        }),
+        enemy = battler({ name: 'Foe', moves: ['splash'], currentHp: 2000, maxHp: 2000 })
+      resolveBattleTurn(player, enemy, false)
+      return 2000 - enemy.currentHp
+    }
+    assert.ok(damage('defeatist') < damage(undefined), 'Defeatist halves the damage')
+
+    // Skill Link always lands the maximum number of hits.
+    const linker = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['bulletSeed'],
+        speed: 200,
+        attack: 200,
+        ability: 'skillLink',
+      }),
+      dummy = battler({ name: 'Foe', moves: ['splash'], currentHp: 400, maxHp: 400 })
+    assert.ok(
+      resolveBattleTurn(linker, dummy, false).some((/** @type {any} */ event) =>
+        event.message?.includes('(5 hits)')
+      )
+    )
+
+    // Aftermath punishes a contact KO.
+    const attacker = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['tackle'],
+        speed: 200,
+        attack: 400,
+        currentHp: 400,
+        maxHp: 400,
+      }),
+      bombshell = battler({
+        name: 'Foe',
+        moves: ['splash'],
+        ability: 'aftermath',
+        currentHp: 1,
+        maxHp: 100,
+      })
+    resolveBattleTurn(attacker, bombshell, false)
+    assert.ok(attacker.currentHp < 400, 'Aftermath damaged the attacker')
+  })
+})
+
+test('Poison Touch, Scrappy, Own Tempo and Corrosion work', () => {
+  withFixedRandom(0.1, () => {
+    const toucher = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['tackle'],
+        speed: 200,
+        attack: 200,
+        ability: 'poisonTouch',
+      }),
+      target = battler({ name: 'Foe', moves: ['splash'], currentHp: 400, maxHp: 400, types: ['Normal'] })
+    resolveBattleTurn(toucher, target, false)
+    assert.equal(target.status, 'poison')
+  })
+
+  withFixedRandom(0.5, () => {
+    const normalDamage = () => {
+      const player = battler({
+          name: 'Player',
+          isPlayer: true,
+          moves: ['tackle'],
+          speed: 200,
+          attack: 200,
+        }),
+        ghost = battler({ name: 'Foe', moves: ['splash'], types: ['Ghost'], currentHp: 400, maxHp: 400 })
+      resolveBattleTurn(player, ghost, false)
+      return ghost.currentHp
+    }
+    assert.equal(normalDamage(), 400, 'Normal cannot hit Ghost')
+
+    const scrappy = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['tackle'],
+        speed: 200,
+        attack: 200,
+        ability: 'scrappy',
+      }),
+      ghost = battler({ name: 'Foe', moves: ['splash'], types: ['Ghost'], currentHp: 400, maxHp: 400 })
+    resolveBattleTurn(scrappy, ghost, false)
+    assert.ok(ghost.currentHp < 400, 'Scrappy lets Normal hit Ghost')
+
+    const confusing = battler({ name: 'Player', isPlayer: true, moves: ['confuseRay'], speed: 200 }),
+      ownTempo = battler({ name: 'Foe', moves: ['splash'], ability: 'ownTempo' })
+    resolveBattleTurn(confusing, ownTempo, false)
+    assert.equal(ownTempo.confusionTurns ?? 0, 0)
+
+    const corrodor = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['toxic'],
+        speed: 200,
+        ability: 'corrosion',
+      }),
+      steel = battler({ name: 'Foe', moves: ['splash'], types: ['Steel'] })
+    resolveBattleTurn(corrodor, steel, false)
+    assert.equal(steel.status, 'toxic')
+  })
+})

@@ -410,9 +410,13 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         }
       } else if (
         moveDef.effect?.type === 'status' &&
-        (moveDef.effect.chance === void 0 || chance(moveDef.effect.chance / 100, deterministic))
+        (moveDef.effect.chance === void 0 ||
+          chance(
+            (moveDef.effect.chance * (abilityOf(attack.attacker) === 'sereneGrace' ? 2 : 1)) / 100,
+            deterministic
+          ))
       )
-        applyStatus(attack.defender, moveDef.effect.status, events, !attack.isPlayer, deterministic, activeTerrain, !0)
+        applyStatus(attack.defender, moveDef.effect.status, events, !attack.isPlayer, deterministic, activeTerrain, !0, attack.attacker)
       else if (moveDef.effect?.type === 'heal') {
         const healPercent = moveDef.effect.percentage ?? 50,
           healed = Math.min(
@@ -952,17 +956,33 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       }
       continue
     }
-    // Laser Focus guarantees this hit crits; Lock-On / Mind Reader make it land.
-    const guaranteedCrit = attack.attacker.laserFocus === !0,
-      neverMiss = (attack.attacker.lockOnTurns ?? 0) > 0
-    if (guaranteedCrit) attack.attacker.laserFocus = !1
-    if (neverMiss) attack.attacker.lockOnTurns = 0
+    // Laser Focus guarantees this hit crits; Merciless always crits a statused
+    // foe; Lock-On / Mind Reader make it land.
+    const guaranteedCrit =
+        attack.attacker.laserFocus === !0 ||
+        (abilityOf(attack.attacker) === 'merciless' && !!attack.defender.status),
+      neverMiss =
+        (attack.attacker.lockOnTurns ?? 0) > 0 ||
+        abilityOf(attack.attacker) === 'noGuard' ||
+        abilityOf(attack.defender) === 'noGuard'
+    if (attack.attacker.laserFocus === !0) attack.attacker.laserFocus = !1
+    if ((attack.attacker.lockOnTurns ?? 0) > 0) attack.attacker.lockOnTurns = 0
+    // Scrappy lets Normal and Fighting moves hit Ghost-types.
+    const defenderTypesForMove =
+      abilityOf(attack.attacker) === 'scrappy' &&
+      (effectiveMove.type === 'Normal' || effectiveMove.type === 'Fighting')
+        ? attack.defender.types.filter((type) => type !== 'Ghost')
+        : attack.defender.types
     const attackStat =
         (moveDef.category === 'physical'
           ? attack.attacker.status === 'burn'
             ? Math.max(1, Math.floor(attack.attacker.attack / 2))
             : attack.attacker.attack
           : attack.attacker.spAttack) *
+        (abilityOf(attack.attacker) === 'defeatist' &&
+        attack.attacker.currentHp <= attack.attacker.maxHp / 2
+          ? 0.5
+          : 1) *
         abilityAttackMultiplier(attack.attacker, effectiveMove) *
         ruinOffenseMultiplier(attack.defender, moveDef.category) *
         terrainAbilityMultiplier(
@@ -1002,7 +1022,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         defenseStat,
         effectiveMove,
         attack.attacker.types,
-        attack.defender.types,
+        defenderTypesForMove,
         attackerStage,
         defenderStage,
         Math.max(
@@ -1060,8 +1080,10 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       anyCrit = damageResult.isCrit
     if (moveDef.multiHit) {
       hitCount =
-        moveDef.multiHit[0] +
-        Math.floor(Math.random() * (moveDef.multiHit[1] - moveDef.multiHit[0] + 1))
+        abilityOf(attack.attacker) === 'skillLink'
+          ? moveDef.multiHit[1]
+          : moveDef.multiHit[0] +
+            Math.floor(Math.random() * (moveDef.multiHit[1] - moveDef.multiHit[0] + 1))
       for (let hit = 1; hit < hitCount; hit++) {
         const hitResult = calculateDamage(
           attack.attacker.level,
@@ -1069,7 +1091,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           defenseStat,
           effectiveMove,
           attack.attacker.types,
-          attack.defender.types,
+          defenderTypesForMove,
           attackerStage,
           defenderStage,
           Math.max(
@@ -1107,11 +1129,13 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     )
     if (abilityHalvesSuperEffective(attack.defender) && damageResult.effectiveness > 1)
       totalDamage = Math.max(1, Math.floor(totalDamage / 2))
-    // Tinted Lens / Neuroforce scale the effectiveness-based damage.
-    totalDamage = Math.max(
-      1,
-      Math.floor(totalDamage * abilityEffectivenessMultiplier(attack.attacker, damageResult.effectiveness))
-    )
+    // Tinted Lens / Neuroforce scale the effectiveness-based damage (but never
+    // turn an immune hit into damage).
+    if (totalDamage > 0)
+      totalDamage = Math.max(
+        1,
+        Math.floor(totalDamage * abilityEffectivenessMultiplier(attack.attacker, damageResult.effectiveness))
+      )
     // Delta Stream cancels Flying-type weaknesses.
     if (
       activeWeather?.type === 'strongWinds' &&
@@ -1249,9 +1273,13 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         case 'status': {
           if (
             moveDef.effect.chance === void 0 ||
-            chance(moveDef.effect.chance / 100, deterministic)
+            chance(
+              (moveDef.effect.chance * (abilityOf(attack.attacker) === 'sereneGrace' ? 2 : 1)) /
+                100,
+              deterministic
+            )
           )
-            applyStatus(attack.defender, moveDef.effect.status, events, !attack.isPlayer, deterministic, activeTerrain, !0)
+            applyStatus(attack.defender, moveDef.effect.status, events, !attack.isPlayer, deterministic, activeTerrain, !0, attack.attacker)
           break
         }
         case 'statReset': {
@@ -1381,6 +1409,13 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       stealHeldItem(attack.attacker, attack.defender, events, attack.isPlayer)
     if (abilityOf(attack.defender) === 'pickpocket' && moveMakesContact(effectiveMove))
       stealHeldItem(attack.defender, attack.attacker, events, !attack.isPlayer)
+    // Poison Touch can poison the target from a contact move.
+    if (
+      abilityOf(attack.attacker) === 'poisonTouch' &&
+      moveMakesContact(effectiveMove) &&
+      chance(0.3, deterministic)
+    )
+      applyStatus(attack.defender, 'poison', events, !attack.isPlayer, deterministic, activeTerrain, !0, attack.attacker)
     if (attack.defender.currentHp <= 0) {
       events.push({
         type: 'faint',
@@ -1389,6 +1424,27 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           target: attack.isPlayer ? 'enemy' : 'player',
         },
       })
+      // Aftermath punishes a contact KO.
+      if (abilityOf(attack.defender) === 'aftermath' && moveMakesContact(effectiveMove) && attack.attacker.currentHp > 0) {
+        const aftermath = Math.max(1, Math.floor(attack.attacker.maxHp / 4))
+        attack.attacker.currentHp = Math.max(0, attack.attacker.currentHp - aftermath)
+        events.push({
+          type: 'recoil',
+          message: `${attack.attacker.name} was hurt by Aftermath! (${aftermath} damage)`,
+          data: {
+            target: attack.isPlayer ? 'player' : 'enemy',
+            damage: aftermath,
+            hpAfter: attack.attacker.currentHp,
+            hpMax: attack.attacker.maxHp,
+          },
+        })
+        attack.attacker.currentHp <= 0 &&
+          events.push({
+            type: 'faint',
+            message: `${attack.attacker.name} fainted!`,
+            data: { target: attack.isPlayer ? 'player' : 'enemy' },
+          })
+      }
       // Destiny Bond drags down whoever landed the KO.
       if ((attack.defender.destinyBondTurns ?? 0) > 0 && attack.attacker.currentHp > 0) {
         attack.attacker.currentHp = 0

@@ -19,34 +19,47 @@ const ZOOM_STEP = 1.35
 const DRAG_THRESHOLD = 4
 
 /**
- * Colours for the generated terrain layer: water vs land shades per biome.
+ * Colours for the generated terrain layer: oceans, a sandy shore and one shade
+ * per land biome. Deliberately saturated so land and water read apart even when
+ * the map is zoomed out.
  * @type {Record<string, string>}
  */
 const TERRAIN_COLORS = {
-  water: '#4179bd',
-  waterDeep: '#2f5f9e',
-  grassland: '#74b05a',
-  forest: '#4f9149',
-  autumn: '#b5853c',
-  desert: '#cdb27a',
-  swamp: '#5f8a55',
-  volcanic: '#8a4a32',
-  tundra: '#dfe9f0',
-  cave: '#8a7a68',
-  ruins: '#98917f',
-  mountain: '#9c7c57',
-  coast: '#6fa6c8',
-  town: '#c2a466',
+  water: '#2f6fae',
+  waterDeep: '#1b4a80',
+  shore: '#ecd9a2',
+  grassland: '#6cb04e',
+  forest: '#3f8a3a',
+  autumn: '#b9772f',
+  desert: '#dcc07a',
+  swamp: '#5b8a4f',
+  volcanic: '#8a4530',
+  tundra: '#d8e8f2',
+  cave: '#8a7864',
+  ruins: '#9a9380',
+  mountain: '#a07a4e',
+  // Beaches, ports and islands are land, so they get a grassy tone rather than
+  // the pale blue that made coastal towns look like open water. The sandy
+  // coastline comes from the shore rim drawn under every land blob.
+  coast: '#a9c46e',
+  town: '#c8a45c',
 }
 
+// Aquatic names that should read as water even when the wild table isn't
+// Water-majority (a lake full of Magikarp and Psyduck is still a lake).
+const WATER_NAME_PATTERN =
+  /sea|ocean|lake|river|bay|strait|channel|underwater|abyss|deep|waterway|seafloor|trench|rapids/i
+
 /**
- * The terrain colour for a location: water routes (or routes whose wild table
- * is mostly Water-types) are blue, everything else takes its biome shade.
+ * The terrain for a location: water routes (or routes whose wild table is
+ * mostly Water-types) are blue, everything else takes its biome shade. The
+ * `water` flag lets the renderer draw water and land as separate layers with a
+ * defined coastline between them.
  * @param {MapLocation} location
  * @param {any} bucket
- * @returns {string}
+ * @returns {{ color: string, water: boolean }}
  */
-function terrainColorFor(location, bucket) {
+function terrainFor(location, bucket) {
   if (location.type !== 'zone') {
     const encounters = bucket?.encounters
     if (encounters?.length) {
@@ -56,10 +69,15 @@ function terrainColorFor(location, bucket) {
             sum + (pokemonSpecies[entry.speciesKey]?.types?.includes('Water') ? entry.weight : 0),
           0
         )
-      if (total > 0 && water / total >= 0.5) return TERRAIN_COLORS.waterDeep
+      if (total > 0 && water / total >= 0.5) return { color: TERRAIN_COLORS.waterDeep, water: true }
     }
+    if (WATER_NAME_PATTERN.test(location.name ?? ''))
+      return { color: TERRAIN_COLORS.waterDeep, water: true }
   }
-  return TERRAIN_COLORS[biomeForLocation(location)] ?? TERRAIN_COLORS.grassland
+  return {
+    color: TERRAIN_COLORS[biomeForLocation(location)] ?? TERRAIN_COLORS.grassland,
+    water: false,
+  }
 }
 
 /** @typedef {{ x: number, y: number, scale: number }} MapView */
@@ -137,23 +155,31 @@ export function TownMap() {
     activeLocationIds = locationsByRegion[activeRegion] ?? [],
     activeLocationSet = new Set(activeLocationIds)
 
-  // Terrain blobs, one per visible location, merged by an SVG blur into a
-  // generated landmass/water map. Water is the base, so only land and deeper
-  // water show as blobs.
-  const terrainBlobs = React.useMemo(
-    () =>
-      activeLocationIds.map((locationId) => {
-        const location = mapData[locationId]
-        return {
+  // Terrain blobs, one per visible location, split into water and land so the
+  // renderer can lay down oceans, a coastline and land as separate blurred
+  // passes. Water is the base, so only deeper water and land show as blobs.
+  const terrain = React.useMemo(() => {
+    /** @type {{ id: string, x: number, y: number, radius: number, color: string }[]} */
+    const waterBlobs = [],
+      /** @type {{ id: string, x: number, y: number, radius: number, color: string }[]} */
+      landBlobs = []
+    for (const locationId of activeLocationIds) {
+      const location = mapData[locationId],
+        { color, water } = terrainFor(
+          location,
+          location.routeKey ? encounterData[location.routeKey] : null
+        ),
+        blob = {
           id: locationId,
           x: location.position.x,
           y: location.position.y,
-          radius: location.type === 'zone' ? 14 : location.type === 'town' ? 9 : 7,
-          color: terrainColorFor(location, location.routeKey ? encounterData[location.routeKey] : null),
+          radius: location.type === 'zone' ? 16 : location.type === 'town' ? 10 : 8,
+          color,
         }
-      }),
-    [activeLocationIds]
-  )
+      ;(water ? waterBlobs : landBlobs).push(blob)
+    }
+    return { waterBlobs, landBlobs }
+  }, [activeLocationIds])
 
   const roads = [],
     roadSet = new Set()
@@ -526,24 +552,61 @@ export function TownMap() {
                 preserveAspectRatio: 'none',
                 children: [
                   jsx('defs', {
-                    children: jsx('filter', {
-                      id: 'town-terrain-blur',
-                      x: '-25%',
-                      y: '-25%',
-                      width: '150%',
-                      height: '150%',
-                      children: jsx('feGaussianBlur', { stdDeviation: 7 }),
-                    }),
+                    children: [
+                      jsx('filter', {
+                        id: 'town-terrain-water',
+                        x: '-25%',
+                        y: '-25%',
+                        width: '150%',
+                        height: '150%',
+                        children: jsx('feGaussianBlur', { stdDeviation: 8 }),
+                      }),
+                      jsx('filter', {
+                        id: 'town-terrain-shore',
+                        x: '-25%',
+                        y: '-25%',
+                        width: '150%',
+                        height: '150%',
+                        children: jsx('feGaussianBlur', { stdDeviation: 5 }),
+                      }),
+                      jsx('filter', {
+                        id: 'town-terrain-land',
+                        x: '-25%',
+                        y: '-25%',
+                        width: '150%',
+                        height: '150%',
+                        children: jsx('feGaussianBlur', { stdDeviation: 3 }),
+                      }),
+                    ],
                   }),
                   jsx('rect', { x: 0, y: 0, width: 100, height: 100, fill: TERRAIN_COLORS.water }),
+                  // Deep water first, then a blurred sand rim underneath the
+                  // land so every landmass gets a beach before its biome fill.
                   jsx('g', {
-                    filter: 'url(#town-terrain-blur)',
-                    children: terrainBlobs.map((blob) =>
+                    filter: 'url(#town-terrain-water)',
+                    children: terrain.waterBlobs.map((blob) =>
+                      jsx('circle', { cx: blob.x, cy: blob.y, r: blob.radius, fill: blob.color }, blob.id)
+                    ),
+                  }),
+                  jsx('g', {
+                    filter: 'url(#town-terrain-shore)',
+                    children: terrain.landBlobs.map((blob) =>
                       jsx(
                         'circle',
-                        { cx: blob.x, cy: blob.y, r: blob.radius, fill: blob.color },
+                        {
+                          cx: blob.x,
+                          cy: blob.y,
+                          r: blob.radius + 2.4,
+                          fill: TERRAIN_COLORS.shore,
+                        },
                         blob.id
                       )
+                    ),
+                  }),
+                  jsx('g', {
+                    filter: 'url(#town-terrain-land)',
+                    children: terrain.landBlobs.map((blob) =>
+                      jsx('circle', { cx: blob.x, cy: blob.y, r: blob.radius, fill: blob.color }, blob.id)
                     ),
                   }),
                 ],

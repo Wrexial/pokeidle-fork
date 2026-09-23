@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.38.1'
+export const GAME_VERSION = '0.38.2'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.38.2',
+      subtitle: 'Map Terrain',
+      sections: [
+        {
+          heading: 'Town Map',
+          items: [
+            "The Town Map's generated terrain is much bolder now: saturated land colours over a strong blue ocean, so you can tell at a glance where the water is, with a sandy coastline around every landmass",
+            "Beaches, ports and island areas now read as land (grassy) instead of pale blue, so coastal towns no longer blend into the sea",
+          ],
+        },
+      ],
+    },
     {
       version: '0.38.1',
       subtitle: 'Quest Routes',

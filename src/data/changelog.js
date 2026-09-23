@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.38.2'
+export const GAME_VERSION = '0.38.3'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.38.3',
+      subtitle: 'Alola Islands',
+      sections: [
+        {
+          heading: 'Town Map',
+          items: [
+            "Alola is now laid out as its four separate islands \u2014 Melemele in the north-west, Akala in the north-east, Ula'ula in the south-east and Poni in the south-west \u2014 with the Pokemon League on a small plateau in the middle of the ocean between them, instead of one merged landmass",
+            'Each region now settles its own map independently, so changing one region no longer nudges another region\u2019s towns and zones (Galar\u2019s and Paldea\u2019s hub positions shifted slightly to match)',
+          ],
+        },
+      ],
+    },
     {
       version: '0.38.2',
       subtitle: 'Map Terrain',

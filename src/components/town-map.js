@@ -43,6 +43,9 @@ const TERRAIN_COLORS = {
   // coastline comes from the shore rim drawn under every land blob.
   coast: '#a9c46e',
   town: '#c8a45c',
+  // A region's Pokemon League reads as a distinct pale-stone plateau, so the
+  // central Alolan league stands out from the islands around it.
+  league: '#d8d3c2',
 }
 
 // Aquatic names that should read as water even when the wild table isn't
@@ -74,6 +77,7 @@ function terrainFor(location, bucket) {
     if (WATER_NAME_PATTERN.test(location.name ?? ''))
       return { color: TERRAIN_COLORS.waterDeep, water: true }
   }
+  if (location.id.endsWith('-league')) return { color: TERRAIN_COLORS.league, water: false }
   return {
     color: TERRAIN_COLORS[biomeForLocation(location)] ?? TERRAIN_COLORS.grassland,
     water: false,
@@ -173,7 +177,16 @@ export function TownMap() {
           id: locationId,
           x: location.position.x,
           y: location.position.y,
-          radius: location.type === 'zone' ? 16 : location.type === 'town' ? 10 : 8,
+          // Zone hubs are the big island landmasses; the league is a small
+          // central plateau; towns and routes are normal patches.
+          radius:
+            location.type === 'zone'
+              ? 14
+              : locationId.endsWith('-league')
+                ? 7
+                : location.type === 'town'
+                  ? 9
+                  : 7,
           color,
         }
       ;(water ? waterBlobs : landBlobs).push(blob)
@@ -559,7 +572,7 @@ export function TownMap() {
                         y: '-25%',
                         width: '150%',
                         height: '150%',
-                        children: jsx('feGaussianBlur', { stdDeviation: 8 }),
+                        children: jsx('feGaussianBlur', { stdDeviation: 7 }),
                       }),
                       jsx('filter', {
                         id: 'town-terrain-shore',
@@ -567,7 +580,7 @@ export function TownMap() {
                         y: '-25%',
                         width: '150%',
                         height: '150%',
-                        children: jsx('feGaussianBlur', { stdDeviation: 5 }),
+                        children: jsx('feGaussianBlur', { stdDeviation: 4 }),
                       }),
                       jsx('filter', {
                         id: 'town-terrain-land',

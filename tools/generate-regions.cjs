@@ -317,34 +317,47 @@ const REGION_MAP_LAYOUTS = {
     },
   },
   alola: {
-    width: 1400,
-    height: 997,
+    // Hand-laid as four separate islands around a central league so the
+    // generated terrain reads as distinct landmasses instead of one merged
+    // blob: Melemele north-west, Akala north-east, Poni south-west and
+    // Ula'ula south-east, with the Pokemon League (and the Raid Island off
+    // Poni) in the middle of the ocean between them. Coordinates are in the
+    // 0-100 world space (width/height 100 keep the scale at 1:1).
+    width: 100,
+    height: 100,
     positions: {
-      'alola-route-1--hauoli-outskirts': [200, 122],
-      'alola-route-1': [225, 243],
-      'alola-route-3': [202, 185],
-      'alola-route-2': [160, 232],
-      'iki-town': [200, 205],
-      'alola-route-4': [507, 337],
-      'alola-route-5': [759, 337],
-      'alola-route-6': [570, 337],
-      'alola-route-7': [696, 337],
-      'alola-route-8': [633, 337],
-      'alola-route-9': [585, 419],
-      'paniola-town': [665, 295],
-      'heahea-city': [600, 378],
-      'konikoni-city': [570, 460],
-      'alola-route-10': [1155, 471],
-      'alola-route-11': [1155, 534],
-      'alola-route-13': [1155, 722],
-      'alola-route-15': [1155, 785],
-      'alola-route-16': [1058, 569],
-      'alola-route-17': [960, 441],
-      'alola-route-12': [1155, 597],
-      'alola-route-14': [1155, 660],
-      'po-town': [960, 475],
-      'hauoli-city': [175, 280],
-      'malie-city': [1155, 560],
+      // Melemele Island (north-west)
+      'alola-route-1--hauoli-outskirts': [16, 12],
+      'alola-route-1': [22, 18],
+      'alola-route-3': [16, 26],
+      'alola-route-2': [28, 22],
+      'iki-town': [24, 30],
+      'hauoli-city': [30, 16],
+      // Akala Island (north-east)
+      'alola-route-4': [68, 18],
+      'alola-route-6': [74, 14],
+      'alola-route-8': [78, 20],
+      'alola-route-7': [84, 18],
+      'alola-route-5': [88, 26],
+      'paniola-town': [72, 26],
+      // Ula'ula Island (south-east)
+      'alola-route-9': [64, 66],
+      'alola-route-10': [72, 64],
+      'alola-route-11': [78, 68],
+      'alola-route-12': [74, 76],
+      'alola-route-13': [66, 82],
+      'alola-route-14': [68, 72],
+      'alola-route-15': [78, 84],
+      'heahea-city': [70, 60],
+      'konikoni-city': [64, 78],
+      'malie-city': [84, 74],
+      // Poni Island (south-west)
+      'alola-route-16': [20, 70],
+      'alola-route-17': [26, 78],
+      'po-town': [30, 74],
+      // In the middle of the four islands.
+      league: [52, 52],
+      raid: [8, 90],
     },
   },
   galar: {
@@ -2225,6 +2238,9 @@ const GROUP_ZONES = {
     },
   ],
 }
+// Hubs created by GROUP_ZONES sit at their own areas' centroid; the settle
+// pass below must not pull them toward remote hub-to-hub links.
+const groupedHubIds = new Set()
 for (const [regionId, groups] of Object.entries(GROUP_ZONES)) {
   // Group adjacency, from the areas' connections before anything is hidden, so
   // two groups whose areas touched get a hub-to-hub link even though the areas
@@ -2299,6 +2315,7 @@ for (const [regionId, groups] of Object.entries(GROUP_ZONES)) {
       unlockOrder: Math.min(...areas.map((id) => mapData[id].unlockOrder)) - 0.5,
       position: hubPosition,
     }
+    groupedHubIds.add(hubId)
     for (const connection of external) {
       if (!mapData[connection]) continue
       mapData[connection].connections = mapData[connection].connections.filter(
@@ -2535,17 +2552,24 @@ const MOVABLE_MIN_DISTANCE = 8,
 for (let iteration = 0; iteration < 120; iteration++) {
   for (const location of visibleLocations) {
     if (location.type !== 'zone' && !addedAreaIds.has(location.id)) continue
-    const neighbours = location.connections
-      .map((id) => mapData[id])
-      .filter((other) => other && !other.hidden && other !== location)
-    if (neighbours.length) {
-      const averageX = neighbours.reduce((sum, other) => sum + other.position.x, 0) / neighbours.length,
-        averageY = neighbours.reduce((sum, other) => sum + other.position.y, 0) / neighbours.length
-      location.position.x += (averageX - location.position.x) * 0.1
-      location.position.y += (averageY - location.position.y) * 0.1
+    // Keep a hub's roads short by pulling it toward its local neighbours —
+    // but not a hand-grouped island hub, which sits at its own areas' centre.
+    if (!groupedHubIds.has(location.id)) {
+      const neighbours = location.connections
+        .map((id) => mapData[id])
+        .filter((other) => other && !other.hidden && other !== location)
+      if (neighbours.length) {
+        const averageX = neighbours.reduce((sum, other) => sum + other.position.x, 0) / neighbours.length,
+          averageY = neighbours.reduce((sum, other) => sum + other.position.y, 0) / neighbours.length
+        location.position.x += (averageX - location.position.x) * 0.1
+        location.position.y += (averageY - location.position.y) * 0.1
+      }
     }
     for (const other of visibleLocations) {
-      if (other === location) continue
+      // Regions are separate maps that happen to share the 0-100 coordinate
+      // space, so only settle against nodes in the same region.
+      if (other === location || (other.region ?? 'kanto') !== (location.region ?? 'kanto'))
+        continue
       const dx = location.position.x - other.position.x,
         dy = location.position.y - other.position.y,
         distance = Math.hypot(dx, dy) || 0.001

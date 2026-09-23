@@ -1655,12 +1655,14 @@ img {
     border-right: 3px solid #483828;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
-    container-type: size;
-    container-name: center
+    overflow: hidden
 }
 
-@container center (max-height: 820px) {
+/* The center column is full height, so a viewport media query matches the
+   old `@container center (max-height: ...)` without the containment that a
+   `container-type` would add — which made the column a containing block for
+   `position: fixed` and clipped the Settings / Poké Pelago overlays. */
+@media (max-height: 820px) {
     .bottom-right-panel {
         display: none
     }

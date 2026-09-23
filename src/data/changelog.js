@@ -17,6 +17,12 @@ export const CHANGELOG = [
             'Caught wild Pokemon now keep the IVs, ability and held item of the one you actually battled',
           ],
         },
+        {
+          heading: 'Fixes',
+          items: [
+            'The Settings and Pok\u00e9 Pelago modals are no longer clipped: the centre column no longer traps fixed-position overlays (Daily Quests and the Daily Event benefit too)',
+          ],
+        },
       ],
     },
     {

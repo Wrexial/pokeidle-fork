@@ -1,5 +1,6 @@
 // Split from a grouped component file — see tools/decompile/split-components.mjs
 
+import { createPortal } from 'react-dom'
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
 import React from 'react'
 import { BATTLE_TOWER_LOCATION } from '../data/config.js'
@@ -592,7 +593,11 @@ export function LocationPanel({ onOpenCatchSettings }) {
               }),
             ],
           }),
-        showPelago && jsx(PokePelagoModal, { onClose: () => setShowPelago(!1) }),
+        showPelago &&
+          createPortal(
+            jsx(PokePelagoModal, { onClose: () => setShowPelago(!1) }),
+            document.body
+          ),
       ],
     }),
   })

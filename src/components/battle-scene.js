@@ -524,17 +524,26 @@ export function BattleScene() {
           onClose: () => setShowMoveManager(!1),
         }),
       showSettings &&
-        jsx(SettingsModal, {
-          onClose: () => setShowSettings(!1),
-        }),
+        createPortal(
+          jsx(SettingsModal, {
+            onClose: () => setShowSettings(!1),
+          }),
+          document.body
+        ),
       showDaily &&
-        jsx(DailyEventModal, {
-          onClose: () => setShowDaily(!1),
-        }),
+        createPortal(
+          jsx(DailyEventModal, {
+            onClose: () => setShowDaily(!1),
+          }),
+          document.body
+        ),
       showQuests &&
-        jsx(QuestsModal, {
-          onClose: () => setShowQuests(!1),
-        }),
+        createPortal(
+          jsx(QuestsModal, {
+            onClose: () => setShowQuests(!1),
+          }),
+          document.body
+        ),
     ],
   })
 }

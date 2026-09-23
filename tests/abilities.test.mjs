@@ -769,3 +769,119 @@ test('Pickpocket steals on contact', () => {
   assert.equal(enemy.heldItem, 'leftovers')
   assert.equal(player.heldItem, null)
 })
+
+test('Stance Change swaps Aegislash between Blade and Shield', () => {
+  const withFixedRandomBody = () => {
+    const attacker = battler({
+        name: 'Aegislash',
+        isPlayer: true,
+        moves: ['tackle'],
+        speed: 200,
+        ability: 'stanceChange',
+        speciesKey: 'aegislash',
+        types: ['Steel', 'Ghost'],
+      }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], currentHp: 400, maxHp: 400 })
+    resolveBattleTurn(attacker, enemy, false)
+    assert.equal(attacker.speciesKey, 'aegislash-b', 'an attack switches to Blade')
+
+    const shielder = battler({
+        name: 'Aegislash',
+        isPlayer: true,
+        moves: ['kingsShield'],
+        speed: 200,
+        ability: 'stanceChange',
+        speciesKey: 'aegislash-b',
+        types: ['Steel', 'Ghost'],
+      }),
+      enemy2 = battler({ name: 'Foe', moves: ['splash'] })
+    resolveBattleTurn(shielder, enemy2, false)
+    assert.equal(shielder.speciesKey, 'aegislash', "King's Shield switches to Shield")
+  }
+  withFixedRandom(0.5, withFixedRandomBody)
+})
+
+test('Zero to Hero and Schooling transform on entry', () => {
+  const palafin = battler({
+      name: 'Palafin',
+      isPlayer: true,
+      moves: ['splash'],
+      speed: 200,
+      ability: 'zeroToHero',
+      speciesKey: 'palafin',
+    }),
+    enemy = battler({ name: 'Foe', moves: ['splash'] })
+  resolveBattleTurn(palafin, enemy, false, !0)
+  assert.equal(palafin.speciesKey, 'palafin-h')
+
+  const wishiwashi = battler({
+      name: 'Wishiwashi',
+      isPlayer: true,
+      moves: ['splash'],
+      speed: 200,
+      level: 25,
+      ability: 'schooling',
+      speciesKey: 'wishiwashi',
+      currentHp: 400,
+      maxHp: 400,
+    }),
+    enemy2 = battler({ name: 'Foe', moves: ['splash'] })
+  resolveBattleTurn(wishiwashi, enemy2, false, !0)
+  assert.equal(wishiwashi.speciesKey, 'wishiwashi-s')
+})
+
+test('Power Construct transforms Zygarde below half HP', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['tackle'],
+        speed: 200,
+        attack: 300,
+      }),
+      enemy = battler({
+        name: 'Zygarde',
+        moves: ['splash'],
+        ability: 'powerConstruct',
+        speciesKey: 'zygarde',
+        currentHp: 120,
+        maxHp: 200,
+        types: ['Dragon', 'Ground'],
+      })
+    resolveBattleTurn(player, enemy, false)
+    assert.equal(enemy.speciesKey, 'zygarde-c')
+  })
+})
+
+test('Imposter copies the foe stats and types', () => {
+  const player = battler({
+      name: 'Ditto',
+      isPlayer: true,
+      moves: ['splash'],
+      speed: 200,
+      ability: 'imposter',
+      speciesKey: 'ditto',
+      types: ['Normal'],
+      attack: 48,
+    }),
+    enemy = battler({ name: 'Foe', moves: ['splash'], types: ['Fire'], attack: 200, defense: 150 })
+  resolveBattleTurn(player, enemy, false, !0)
+  assert.deepEqual(player.types, ['Fire'])
+  assert.equal(player.attack, 200)
+})
+
+test('Battle Bond transforms Greninja after a KO', () => {
+  const player = battler({
+      name: 'Greninja',
+      isPlayer: true,
+      moves: ['tackle'],
+      speed: 200,
+      attack: 400,
+      ability: 'battleBond',
+      speciesKey: 'greninja',
+      types: ['Water', 'Dark'],
+    }),
+    enemy = battler({ name: 'Foe', moves: ['splash'], currentHp: 1, maxHp: 100 })
+  resolveBattleTurn(player, enemy, false)
+  assert.equal(player.speciesKey, 'ash-greninja')
+})

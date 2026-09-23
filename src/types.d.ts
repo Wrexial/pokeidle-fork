@@ -260,6 +260,8 @@ type VolatileState = {
   heldItemOverride?: string | null
   /** Whether `heldItemOverride` is set (so a null item is distinguishable). */
   heldItemOverridden?: boolean
+  /** Mid-battle form (species key) the Pokemon has changed into. */
+  formKey?: string | null
 }
 
 type GameAction = { type: string; payload?: any; [key: string]: any }

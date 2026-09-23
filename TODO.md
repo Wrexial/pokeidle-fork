@@ -223,18 +223,18 @@ Armor, Anger Point, Soul-Heart) are in too, along with Berserk / Anger Shell
 Gold, plus the extreme weathers (Desolate Land / Primordial Sea / Delta
 Stream), the type-changers (Protean / Libero / Normalize / Liquid Voice / the
 -ate family) and Disguise / Ice Face, plus the Ruin quartet and Neutralizing
-Gas. `abilityPreventsStatus` also now treats badly-poisoned as poison
+Gas, plus the item hooks (Trick / Switcheroo / Bestow / Corrosive Gas /
+Magician / Pickpocket) and the mid-battle form-change subsystem (Stance Change,
+Zero to Hero, Power Construct, Schooling, Imposter, Battle Bond).
+`abilityPreventsStatus` also now treats badly-poisoned as poison
 (Immunity / Pastel Veil).
 
 Still open:
 
-- [ ] The REST of the ~300 abilities. The long tail is the complex ones:
-      transformation (Imposter, Transform-like, Disguise, Ice Face, Stance
-      Change, Zero to Hero, Power Construct), weather-aura abilities (Desolate
-      Land / Primordial Sea / Delta Stream, the Ruin quartet), ability copy /
-      on-KO chains (Trace, Moxie, Beast Boost, Chilling/Grim Neigh, Soul-Heart,
-      Battle Bond), and picky on-hit/item abilities (Pickpocket, Magician,
-      Symbiosis, Cud Chew, Gulp Missile).
+- [ ] The remaining ability long tail mostly needs flavour rather than new
+      systems now: Hunger Switch (Morpeko has no separate form in the data),
+      Cud Chew (eat a berry twice), Symbiosis / Gulp Missile (need an ally or a
+      form), and the doubles-only abilities.
 - [ ] The remaining item nuances (Choice locking, more berries, Rocky Helmet).
 - [ ] Battle polish: move animations / damage numbers / hit feedback.
 

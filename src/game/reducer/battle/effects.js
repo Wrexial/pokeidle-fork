@@ -56,6 +56,7 @@ export function updateVolatile(state, action) {
         iceFaceBroken: enemyVolatile.iceFaceBroken ?? !1,
         heldItemOverride: enemyVolatile.heldItemOverride ?? null,
         heldItemOverridden: enemyVolatile.heldItemOverridden ?? !1,
+        formKey: enemyVolatile.formKey ?? null,
       }),
     {
       ...state,

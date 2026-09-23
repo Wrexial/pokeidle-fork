@@ -57,7 +57,7 @@ export function BattleScene() {
   if (state.phase === 'dexComplete') return jsx(DexCompleteScene, {})
   if (!playerPokemon) return null
   const currentEvent = battleEvents.length > 0 ? battleEvents[battleEvents.length - 1] : null,
-    playerSpecies = pokemonSpecies[playerPokemon.speciesKey],
+    playerSpecies = pokemonSpecies[state.playerVolatile?.formKey ?? playerPokemon.speciesKey],
     activeTrainerBattle = state.bossBattle ?? state.trainerBattle,
     lastDamageEvent = battleEvents
       .filter((event) => event.type === 'damage' || event.type === 'recoil')
@@ -372,13 +372,13 @@ export function BattleScene() {
               }),
             jsx('img', {
               src: getPokemonSpriteUrl(
-                pokemonSpecies[enemyPokemon.speciesKey].id,
+                pokemonSpecies[enemyPokemon.formKey ?? enemyPokemon.speciesKey].id,
                 !1,
                 enemyPokemon.isShiny,
                 isFemalePokemon(enemyPokemon)
               ),
               onError: /** @param {{ target: HTMLImageElement }} event */ (event) => (event.target.src = getPokemonSpriteFallbackUrl(
-                pokemonSpecies[enemyPokemon.speciesKey].id,
+                pokemonSpecies[enemyPokemon.formKey ?? enemyPokemon.speciesKey].id,
                 !1,
                 enemyPokemon.isShiny,
                 isFemalePokemon(enemyPokemon)

@@ -4,6 +4,7 @@ import { moveMakesContact } from '../../data/move-effects.js'
 import { moveData, moveLearnsets } from '../../data/gameData.js'
 import { abilityAbsorbsType, abilityAttackMultiplier, abilityBlocksNonSuperEffective, abilityChangesMoveType, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityEffectivenessMultiplier, abilityHalvesSuperEffective, abilityHealsFromType, abilityOf, abilityPreventsStatDrop, abilitySurvivesAtFullHp, fieldAuraMultiplier, onHitStatBoost, onHpThresholdBoost, ruinDefenseMultiplier, ruinOffenseMultiplier } from '../abilities.js'
 import { chooseMoveForBattle, chooseRandomMove } from './ai.js'
+import { changeBattleForm } from './setup.js'
 import { calculateDamage, chance, isSelfTargetedMove, normalizeStatKey } from './damage.js'
 import { applyEndOfTurn, reportFieldEffects } from './end-of-turn.js'
 import { emptyBattleHazards } from '../hazards.js'
@@ -260,6 +261,14 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     attack.attacker.lastMove = attack.moveId
     const moveDef = moveData[attack.moveId]
     if (!moveDef) continue
+    // Stance Change turns Aegislash into Blade form for an attack and back for
+    // King's Shield.
+    if (abilityOf(attack.attacker) === 'stanceChange') {
+      if (moveDef.name === "King's Shield")
+        changeBattleForm(attack.attacker, 'aegislash', events, attack.isPlayer)
+      else if (moveDef.category !== 'status')
+        changeBattleForm(attack.attacker, 'aegislash-b', events, attack.isPlayer)
+    }
     // Taunt prevents status moves while it lasts.
     if ((attack.attacker.tauntTurns ?? 0) > 0 && moveDef.category === 'status') {
       events.push({
@@ -1360,6 +1369,13 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         })
       }
     }
+    // Power Construct transforms Zygarde into its Complete Forme below half HP.
+    if (
+      abilityOf(attack.defender) === 'powerConstruct' &&
+      attack.defender.currentHp > 0 &&
+      attack.defender.currentHp <= attack.defender.maxHp / 2
+    )
+      changeBattleForm(attack.defender, 'zygarde-c', events, !attack.isPlayer)
     // Magician steals on the hit; Pickpocket steals on contact.
     if (abilityOf(attack.attacker) === 'magician')
       stealHeldItem(attack.attacker, attack.defender, events, attack.isPlayer)
@@ -1415,6 +1431,9 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           })
         }
       }
+      // Battle Bond turns Greninja into Ash-Greninja after a KO.
+      if (koAbility === 'battleBond' && attack.attacker.speciesKey === 'greninja')
+        changeBattleForm(attack.attacker, 'ash-greninja', events, attack.isPlayer)
       break
     }
     if (attack.attacker.currentHp <= 0) break

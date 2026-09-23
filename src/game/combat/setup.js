@@ -21,7 +21,8 @@ import { calculatePokemonStats, generateIVs, getPerfectIVs, resolvePokemonMoves,
 export function createBattlePokemon(speciesKey, level, options = {}) {
   const { isShiny = false, isRoamer = false, perfectIvs = false, gender = false, wild = false } = options,
     species = pokemonSpecies[speciesKey],
-    stats = calculatePokemonStats(species, level, perfectIvs ? getPerfectIVs() : generateIVs())
+    ivs = perfectIvs ? getPerfectIVs() : generateIVs(),
+    stats = calculatePokemonStats(species, level, ivs)
   return {
     speciesKey,
     name: species.name,
@@ -35,6 +36,8 @@ export function createBattlePokemon(speciesKey, level, options = {}) {
     spDefense: stats.spDefense,
     speed: stats.speed,
     moves: resolvePokemonMoves(speciesKey, level),
+    // Kept so a mid-battle form change can recompute the new form's stats.
+    ivs,
     ...(wild
       ? {
           ability: rollAbility(speciesKey),
@@ -48,4 +51,49 @@ export function createBattlePokemon(speciesKey, level, options = {}) {
     isPlayer: !1,
     isShiny,
   }
+}
+
+/**
+ * Rebuild a battle Pokemon's species, types and stats from its `formKey` (a
+ * mid-battle form change), preserving the HP ratio. Does nothing when there is
+ * no pending form.
+ * @param {any} pokemon
+ * @returns {any}
+ */
+export function applyBattleForm(pokemon) {
+  if (!pokemon?.formKey) return pokemon
+  const form = pokemonSpecies[pokemon.formKey]
+  if (!form) return pokemon
+  const stats = calculatePokemonStats(form, pokemon.level, pokemon.ivs ?? getPerfectIVs(), pokemon.nature),
+    hpRatio = pokemon.maxHp > 0 ? pokemon.currentHp / pokemon.maxHp : 1
+  pokemon.speciesKey = pokemon.formKey
+  pokemon.name = form.name
+  pokemon.types = form.types
+  pokemon.typesOverride = null
+  pokemon.maxHp = stats.hp
+  pokemon.currentHp = Math.max(1, Math.round(stats.hp * hpRatio))
+  pokemon.attack = stats.attack
+  pokemon.defense = stats.defense
+  pokemon.spAttack = stats.spAttack
+  pokemon.spDefense = stats.spDefense
+  pokemon.speed = stats.speed
+  return pokemon
+}
+
+/**
+ * Change a battle Pokemon into `formKey` and push a log event.
+ * @param {any} pokemon
+ * @param {string} formKey
+ * @param {any[]} events
+ * @param {boolean} isPlayer
+ */
+export function changeBattleForm(pokemon, formKey, events, isPlayer) {
+  if (!pokemon || pokemon.speciesKey === formKey || !pokemonSpecies[formKey]) return
+  pokemon.formKey = formKey
+  applyBattleForm(pokemon)
+  events.push({
+    type: 'status',
+    message: `${pokemon.name} changed form!`,
+    data: { target: isPlayer ? 'player' : 'enemy' },
+  })
 }

@@ -10,7 +10,7 @@ import { ACHIEVEMENTS } from '../data/achievements.js'
 import { dailyExpMultiplier, dailyPrizeMultiplier, dailyShinyMultiplier } from '../data/daily-events.js'
 import { useGame } from './context.js'
 import { attemptCatch, isCaveLocation, isNightTime, isWaterLocation, selectAutoCatchBall, selectBestBall, shouldAutoCatch } from './catching.js'
-import { createBattlePokemon, createVolatileState, resolveBattleTurn, volatileStateFromBattle } from './combat.js'
+import { applyBattleForm, createBattlePokemon, createVolatileState, resolveBattleTurn, volatileStateFromBattle } from './combat.js'
 import { isBattleReady } from './pokemon.js'
 import { awardExperience, checkShinyOdds, pokerusExpMultiplier, resolveActiveModifiers, resolvePokemonEncounter, resolveRoamer, shinyOddsForSpecies } from './progression.js'
 
@@ -319,6 +319,9 @@ export function useGameLoop() {
               iceFaceBroken: playerVolatile.iceFaceBroken ?? !1,
               heldItemOverride: playerVolatile.heldItemOverride ?? null,
               heldItemOverridden: playerVolatile.heldItemOverridden ?? !1,
+              formKey: playerVolatile.formKey ?? null,
+              ivs: currentGameState.playerPokemon.ivs,
+              nature: currentGameState.playerPokemon.nature,
             },
             enemyBattlePokemon = {
               ...currentGameState.enemyPokemon,
@@ -332,8 +335,10 @@ export function useGameLoop() {
             isTrainerBattle =
               (currentGameState.trainerBattle ??
                 currentGameState.bossBattle) !== null,
-            isTowerBattle = currentGameState.bossBattle?.bossType === 'tower',
-            turnEvents = resolveBattleTurn(
+            isTowerBattle = currentGameState.bossBattle?.bossType === 'tower'
+          // Rebuild any mid-battle form before the turn resolves.
+          ;(applyBattleForm(playerBattlePokemon), applyBattleForm(enemyBattlePokemon))
+          const turnEvents = resolveBattleTurn(
               playerBattlePokemon,
               enemyBattlePokemon,
               isTrainerBattle,

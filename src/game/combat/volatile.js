@@ -2,6 +2,7 @@
 
 import { abilityOf, abilityPreventsStatDrop } from '../abilities.js'
 import { heldStatMultiplier } from '../held-items.js'
+import { changeBattleForm } from './setup.js'
 import { weatherSpeedMultiplier } from '../weather.js'
 
 /** @returns {VolatileState} */
@@ -54,6 +55,7 @@ export function createVolatileState() {
     iceFaceBroken: !1,
     heldItemOverride: null,
     heldItemOverridden: !1,
+    formKey: null,
   }
 }
 
@@ -106,6 +108,7 @@ export function volatileStateFromBattle(pokemon) {
     iceFaceBroken: pokemon.iceFaceBroken ?? !1,
     heldItemOverride: pokemon.heldItemOverride ?? null,
     heldItemOverridden: pokemon.heldItemOverridden ?? !1,
+    formKey: pokemon.formKey ?? null,
   }
 }
 
@@ -232,6 +235,26 @@ export function applyEntryAbility(source, target, events, sourceIsPlayer) {
         data: { target: sourceIsPlayer ? 'player' : 'enemy' },
       })
     }
+  } else if (ability === 'zeroToHero' && source.speciesKey === 'palafin') {
+    changeBattleForm(source, 'palafin-h', events, sourceIsPlayer)
+  } else if (
+    ability === 'schooling' &&
+    source.speciesKey === 'wishiwashi' &&
+    source.level >= 20 &&
+    source.currentHp > source.maxHp / 4
+  ) {
+    changeBattleForm(source, 'wishiwashi-s', events, sourceIsPlayer)
+  } else if (ability === 'imposter' && target) {
+    // Imposter copies the foe's types and stats (but not HP).
+    source.types = [...target.types]
+    source.typesOverride = [...target.types]
+    for (const stat of ['attack', 'defense', 'spAttack', 'spDefense', 'speed'])
+      source[stat] = target[stat]
+    events.push({
+      type: 'status',
+      message: `${source.name} transformed into ${target.name}!`,
+      data: { target: sourceIsPlayer ? 'player' : 'enemy' },
+    })
   }
 }
 

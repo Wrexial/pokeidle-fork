@@ -24,6 +24,7 @@ export const CHANGELOG = [
             'Disguise and Ice Face absorb the first hit (Ice Face reforms in snow or hail)',
             'Global stat pressure: the Ruin quartet (Tablets of Ruin weakens physical offence, Beads of Ruin special offence, Sword of Ruin physical defence, Vessel of Ruin special defence) and Neutralizing Gas, which suppresses every other Pokemon\u2019s ability while its holder is on the field',
             'Held-item manipulation works: Trick / Switcheroo swap items, Bestow gives one away, Corrosive Gas destroys the foe\u2019s, and the Magician / Pickpocket abilities steal one on the hit or on contact',
+            'A mid-battle form-change subsystem is in: Stance Change (Aegislash Blade/Shield), Zero to Hero (Palafin), Power Construct (Zygarde Complete), Schooling (Wishiwashi), Imposter (copy the foe\u2019s stats and types) and Battle Bond (Ash-Greninja). The battle sprite follows the new form, and forms revert when the Pokemon switches out',
           ],
         },
       ],

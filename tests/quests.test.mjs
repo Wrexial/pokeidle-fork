@@ -53,6 +53,17 @@ test('questLabel describes each quest kind', () => {
   assert.match(questLabel(quest({ kind: 'catchShiny' })), /shiny/)
 })
 
+test('a route quest names the region so same-named routes are not ambiguous', () => {
+  const label = questLabel(
+    quest({ kind: 'routeBattles', params: { locationId: 'route1' }, goal: 5 })
+  )
+  assert.match(label, /Route 1 \(Kanto\)/)
+  assert.match(
+    questLabel(quest({ kind: 'routeBattles', params: { locationId: 'johto-route-29' }, goal: 5 })),
+    /Route 29 \(Johto\)/
+  )
+})
+
 test('advanceQuests only counts matching events and caps at the goal', () => {
   const quests = {
       date: '2024-06-15',

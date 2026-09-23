@@ -5,7 +5,7 @@
 // Unlike achievements (always-on milestones, recomputed on render), quests are
 // active goals with explicit progress that expire at midnight.
 
-import { encounterData, mapData, pokemonSpecies } from '../data/gameData.js'
+import { encounterData, mapData, pokemonSpecies, regions } from '../data/gameData.js'
 
 const QUESTS_PER_DAY = 3
 
@@ -122,8 +122,17 @@ export function questLabel(quest) {
   switch (quest.kind) {
     case 'wildBattles':
       return `Win ${quest.goal} wild battles`
-    case 'routeBattles':
-      return `Win ${quest.goal} battles at ${mapData[quest.params.locationId]?.name ?? 'a route'}`
+    case 'routeBattles': {
+      // Route names repeat across regions (almost every region has a Route 1),
+      // so name the region too or the objective is ambiguous.
+      const location = mapData[quest.params.locationId],
+        regionName = location
+          ? regions.find((region) => region.id === (location.region ?? 'kanto'))?.name
+          : null
+      return `Win ${quest.goal} battles at ${location?.name ?? 'a route'}${
+        regionName ? ` (${regionName})` : ''
+      }`
+    }
     case 'catchType':
       return `Catch ${quest.goal} ${quest.params.type}-type Pokemon`
     case 'catchSpecies':

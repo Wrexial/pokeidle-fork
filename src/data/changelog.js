@@ -1,10 +1,22 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.38.0'
+export const GAME_VERSION = '0.38.1'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.38.1',
+      subtitle: 'Quest Routes',
+      sections: [
+        {
+          heading: 'Fixes',
+          items: [
+            "Daily Quest route objectives now name the region \u2014 \"Win 5 battles at Route 1 (Kanto)\" \u2014 so the same-named routes across regions are no longer ambiguous",
+          ],
+        },
+      ],
+    },
     {
       version: '0.38.0',
       subtitle: 'League Structures',

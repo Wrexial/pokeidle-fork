@@ -274,6 +274,18 @@ type VolatileState = {
 
 type GameAction = { type: string; payload?: any; [key: string]: any }
 
+/** A save slot as summarised for the boot picker and Settings. */
+type SaveSlotSummary = {
+  slot: number
+  empty: boolean
+  regionId?: string
+  regionName?: string
+  level?: number
+  dex?: number
+  badges?: number
+  savedAt?: number
+}
+
 type ActiveEffect = {
   type: string
   battlesRemaining: number

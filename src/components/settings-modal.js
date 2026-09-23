@@ -7,6 +7,7 @@ import { unlockAudio } from '../game/audio.js'
 import { useGame } from '../game/context.js'
 import { decodeShareCode, encodeShareCode, repairSave, serializeSave, writeImportedSave } from '../game/save.js'
 import { MonotypeSelect } from './monotype-select.js'
+import { SaveSlotsPanel } from './save-slots.js'
 
 /** @param {{ onClose: () => void }} props */
 export function SettingsModal({ onClose }) {
@@ -150,7 +151,7 @@ export function SettingsModal({ onClose }) {
                 children: [
                   jsx('p', {
                     children:
-                      'Are you sure? This will permanently delete all save data and restart the game.',
+                      'Are you sure? This will permanently delete this slot\u2019s save data and restart the game.',
                   }),
                   jsxs('div', {
                     className: 'settings-confirm-buttons',
@@ -398,10 +399,25 @@ export function SettingsModal({ onClose }) {
                       }),
                     ],
                   }),
+                  jsxs('div', {
+                    className: 'settings-section',
+                    children: [
+                      jsx('div', {
+                        className: 'settings-section-title',
+                        children: 'Save Slots',
+                      }),
+                      jsx('p', {
+                        className: 'settings-hint',
+                        children:
+                          'The game keeps up to three independent saves. Play a different one, or start a new game in any slot.',
+                      }),
+                      jsx(SaveSlotsPanel, {}),
+                    ],
+                  }),
                   jsx('button', {
                     className: 'settings-reset-btn',
                     onClick: () => setConfirming(!0),
-                    children: 'Reset Save Data',
+                    children: 'Reset This Slot',
                   }),
                 ],
               }),

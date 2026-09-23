@@ -5,10 +5,12 @@ import { createRoot } from 'react-dom/client'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { ErrorBoundary } from './components/error-boundary.js'
 import { GameLayout } from './components/game-layout.js'
+import { SlotSelect } from './components/slot-select.js'
 import { StarterSelect } from './components/starter-select.js'
 import { PatchNotesModal } from './components/patch-notes-modal.js'
 import { PatchNotesPage } from './components/patch-notes-page.js'
 import { GameProvider, useGame } from './game/context.js'
+import { needsSlotChoice } from './game/save.js'
 import { clearSave } from './data/config.js'
 
 // Console helper for stuck saves: `pokemonIdleResetSave()`
@@ -20,6 +22,7 @@ window.pokemonIdleResetSave = () => {
 
 function AppContent() {
   const { state } = useGame()
+  if (needsSlotChoice()) return jsx(SlotSelect, {})
   return state.phase === 'starterSelect' ? jsx(StarterSelect, {}) : jsx(GameLayout, {})
 }
 

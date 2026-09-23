@@ -1,6 +1,6 @@
 # TODO
 
-Open ideas and follow-ups. Current game version: **0.40.0**
+Open ideas and follow-ups. Current game version: **0.41.0**
 (`src/data/changelog.js`). Finished work lives in the changelog, not here — this
 file only tracks what is **still open**. See `AGENTS.md` for architecture,
 commands and data conventions.
@@ -17,9 +17,7 @@ renumbered, so the gaps below are items that shipped.
 
 ### Tier 1 — Quick wins (small effort, high gain)
 
-1. **#15 Multiple save slots** — S–M · ★★★ — export/import and the base64
-   share code have shipped; picking a slot at boot is what's left.
-2. **#16 Performance pass** — S–M · ★★ — the idle loop dispatches a lot per
+1. **#16 Performance pass** — S–M · ★★ — the idle loop dispatches a lot per
    tick; look at memoisation / batching if it ever gets heavy.
 
 ### Tier 2 — High impact, worth the effort (medium–large)
@@ -101,15 +99,6 @@ content (and give fossils/starters a clean source outside the raid pool).
 - [ ] Reuse the boss-battle / wild-encounter plumbing.
 
 Effort: **medium**. Needs small new state flags.
-
-## 15. Save management & sharing
-
-A save lives in one versioned `localStorage` key. Export/import shipped in
-0.9.1 and the base64 share code in 0.40.0; what's left:
-
-- [ ] Multiple save slots (pick a slot at boot).
-
-Effort: **small–medium**.
 
 ## 16. More ideas (unsorted)
 

@@ -1,10 +1,22 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.40.0'
+export const GAME_VERSION = '0.41.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.41.0',
+      subtitle: 'Save Slots',
+      sections: [
+        {
+          heading: 'Quality of Life',
+          items: [
+            'The game now keeps up to three independent save slots. When more than one slot holds a save you choose which to continue at boot, and Settings \u2192 Save Slots lets you play, start a new game in, or delete any slot',
+          ],
+        },
+      ],
+    },
     {
       version: '0.40.0',
       subtitle: 'Monotype & Sharing',

@@ -63,7 +63,8 @@ export let defaultCatchSettings = {
  * doesn't understand, and an older save is treated as legacy (see
  * `src/game/context.js`): it's migrated if it loads cleanly, otherwise parked
  * under `SAVE_BACKUP_KEY` and ignored so it can't crash the game on every boot.
- * When bumping, add the previous `pokemon-idle-save-v<n>` to `LEGACY_SAVE_KEYS`.
+ * When bumping, add the previous `pokemon-idle-save-v<n>` to `LEGACY_SAVE_KEYS`
+ * (and the previous per-slot keys, `-slot2` … `-slot3`, if slots should migrate).
  */
 export const SAVE_VERSION = 2
 /** Current storage key (versioned). */
@@ -72,12 +73,52 @@ export const SAVE_KEY = `pokemon-idle-save-v${SAVE_VERSION}`
 export const LEGACY_SAVE_KEYS = ['pokemon-idle-save']
 /** Where a save that fails to load is parked (never retried, never auto-deleted). */
 export const SAVE_BACKUP_KEY = 'pi-save-backup'
-/** All keys the game treats as a live save (the quarantine backup is kept). */
-const SAVE_KEYS = [SAVE_KEY, ...LEGACY_SAVE_KEYS]
 
-/** Remove every live save; the quarantine backup is intentionally preserved. */
-export function clearSave() {
-  for (const key of SAVE_KEYS) {
+/** How many independent save slots the game offers. */
+export const SAVE_SLOT_COUNT = 3
+/** Storage key holding the slot the game is currently playing (1-based). */
+export const ACTIVE_SLOT_KEY = 'pokemon-idle-active-slot'
+
+/**
+ * Storage key for a save slot. Slot 1 keeps the original versioned key so
+ * existing saves migrate in place; the other slots are suffixed.
+ * @param {number} slot
+ * @returns {string}
+ */
+export function saveSlotKey(slot) {
+  return slot === 1 ? SAVE_KEY : `${SAVE_KEY}-slot${slot}`
+}
+
+/**
+ * The active 1-based save slot, or 0 when none has been chosen yet.
+ * @returns {number}
+ */
+export function getActiveSlot() {
+  try {
+    const slot = Number(localStorage.getItem(ACTIVE_SLOT_KEY))
+    return Number.isInteger(slot) && slot >= 1 && slot <= SAVE_SLOT_COUNT ? slot : 0
+  } catch {
+    return 0
+  }
+}
+
+/** @param {number} slot */
+export function setActiveSlot(slot) {
+  try {
+    localStorage.setItem(ACTIVE_SLOT_KEY, String(slot))
+  } catch {
+    /* storage may be unavailable */
+  }
+}
+
+/**
+ * Remove a slot's save. Defaults to the active slot; the legacy keys are only
+ * read for (and cleared with) slot 1.
+ * @param {number} [slot]
+ */
+export function clearSave(slot = getActiveSlot() || 1) {
+  const keys = [saveSlotKey(slot), ...(slot === 1 ? LEGACY_SAVE_KEYS : [])]
+  for (const key of keys) {
     try {
       localStorage.removeItem(key)
     } catch {

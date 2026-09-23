@@ -2,7 +2,7 @@
 // save. Split out of context.js so the provider is just React wiring and this
 // repair logic stays testable on its own.
 
-import { BATTLE_TOWER_REGION, LEGACY_SAVE_KEYS, SAVE_BACKUP_KEY, SAVE_KEY, SAVE_VERSION } from '../data/config.js'
+import { BATTLE_TOWER_REGION, LEGACY_SAVE_KEYS, SAVE_BACKUP_KEY, SAVE_SLOT_COUNT, SAVE_VERSION, getActiveSlot, saveSlotKey, setActiveSlot } from '../data/config.js'
 import { dailyEventByKey, todayKey } from '../data/daily-events.js'
 import { activeItems, pokeBalls } from '../data/items.js'
 import { elite4Data, encounterData, gymLeaderData, mapData, moveData, pokemonSpecies, preEvolutionMap, regions, speciesKeysByGeneration } from '../data/gameData.js'
@@ -56,22 +56,67 @@ function quarantineSave(raw) {
 }
 
 /**
- * Read the current versioned save, falling back once to a legacy key so an
- * older save can be migrated.
+ * Read a slot's save, falling back once to a legacy key for slot 1 so an
+ * older single-save install can be migrated in place.
+ * @param {number} slot
  * @returns {{ key: string, json: string, legacy: boolean } | null}
  */
-function readRawSave() {
+function readRawSave(slot) {
   try {
-    const current = localStorage.getItem(SAVE_KEY)
-    if (current) return { key: SAVE_KEY, json: current, legacy: false }
-    for (const key of LEGACY_SAVE_KEYS) {
-      const json = localStorage.getItem(key)
-      if (json) return { key, json, legacy: true }
+    const key = saveSlotKey(slot),
+      current = localStorage.getItem(key)
+    if (current) return { key, json: current, legacy: false }
+    if (slot === 1) {
+      for (const legacyKey of LEGACY_SAVE_KEYS) {
+        const json = localStorage.getItem(legacyKey)
+        if (json) return { key: legacyKey, json, legacy: true }
+      }
     }
   } catch {
     /* storage may be unavailable */
   }
   return null
+}
+
+/**
+ * Whether a slot (or, for slot 1, a legacy key) holds a save.
+ * @param {number} slot
+ * @returns {boolean}
+ */
+function slotHasSave(slot) {
+  try {
+    if (localStorage.getItem(saveSlotKey(slot))) return true
+    return slot === 1 && LEGACY_SAVE_KEYS.some((key) => localStorage.getItem(key))
+  } catch {
+    return false
+  }
+}
+
+/** 1-based numbers of every slot that holds a save. */
+function occupiedSlots() {
+  return Array.from({ length: SAVE_SLOT_COUNT }, (_, index) => index + 1).filter(slotHasSave)
+}
+
+/**
+ * Whether the player must choose a slot before the game can load: no slot has
+ * been picked yet and more than one slot holds a save. A single save migrates
+ * straight in, and a brand-new player starts in slot 1.
+ * @returns {boolean}
+ */
+export function needsSlotChoice() {
+  return getActiveSlot() === 0 && occupiedSlots().length > 1
+}
+
+/**
+ * The slot to load at boot, or null when the player should pick one
+ * (see `needsSlotChoice`).
+ * @returns {number | null}
+ */
+export function resolveBootSlot() {
+  const active = getActiveSlot()
+  if (active) return active
+  const occupied = occupiedSlots()
+  return occupied.length > 1 ? null : (occupied[0] ?? 1)
 }
 
 /**
@@ -475,10 +520,11 @@ export function repairSave(saved) {
  * Load a save if there is one we can trust: the versioned save must carry the
  * current version, and a legacy save is migrated only if it repairs cleanly.
  * Anything else is quarantined and the game starts fresh.
+ * @param {number} [slot]
  * @returns {GameState | null}
  */
-export function loadSavedState() {
-  const raw = readRawSave()
+export function loadSavedState(slot = getActiveSlot() || 1) {
+  const raw = readRawSave(slot)
   if (!raw) return null
   let saved
   try {
@@ -608,12 +654,14 @@ export function serializeSave(state) {
  * Write the current state to storage and clear the migrated legacy keys. Never
  * throws: storage may be unavailable or full.
  * @param {GameState} state
+ * @param {number} [slot]
  */
-export function persistSave(state) {
+export function persistSave(state, slot = getActiveSlot() || 1) {
   try {
-    localStorage.setItem(SAVE_KEY, JSON.stringify(serializeSave(state)))
+    localStorage.setItem(saveSlotKey(slot), JSON.stringify(serializeSave(state)))
+    setActiveSlot(slot)
     // Migration finished: the legacy key is no longer needed.
-    for (const key of LEGACY_SAVE_KEYS) localStorage.removeItem(key)
+    if (slot === 1) for (const key of LEGACY_SAVE_KEYS) localStorage.removeItem(key)
   } catch {
     /* storage may be unavailable / full */
   }
@@ -623,15 +671,53 @@ export function persistSave(state) {
  * Write an imported save blob as-is, stamping the current version so the loader
  * accepts it. Returns false when storage rejects the write.
  * @param {Record<string, any>} save
+ * @param {number} [slot]
  * @returns {boolean}
  */
-export function writeImportedSave(save) {
+export function writeImportedSave(save, slot = getActiveSlot() || 1) {
   try {
-    localStorage.setItem(SAVE_KEY, JSON.stringify({ ...save, version: SAVE_VERSION }))
+    localStorage.setItem(saveSlotKey(slot), JSON.stringify({ ...save, version: SAVE_VERSION }))
+    setActiveSlot(slot)
     return true
   } catch {
     return false
   }
+}
+
+/**
+ * Summarise one slot for the picker/Settings without repairing it. Reads the
+ * raw JSON, so it is cheap and never throws.
+ * @param {number} slot
+ * @returns {SaveSlotSummary & { slot: number }}
+ */
+function summarizeSlot(slot) {
+  const raw = readRawSave(slot)
+  if (!raw) return { slot, empty: true }
+  try {
+    const saved = JSON.parse(raw.json)
+    if (!saved || typeof saved !== 'object') return { slot, empty: false }
+    const regionId = typeof saved.startRegion === 'string' ? saved.startRegion : 'kanto'
+    return {
+      slot,
+      empty: false,
+      regionId,
+      regionName: regions.find((region) => region.id === regionId)?.name ?? regionId,
+      level: saved.playerPokemon?.level ?? 1,
+      dex: Array.isArray(saved.pokedexCaught) ? saved.pokedexCaught.length : 0,
+      badges: Array.isArray(saved.defeatedGyms) ? saved.defeatedGyms.length : 0,
+      savedAt: typeof saved.savedAt === 'number' ? saved.savedAt : 0,
+    }
+  } catch {
+    return { slot, empty: false }
+  }
+}
+
+/**
+ * Summarise every save slot, in order, for the boot picker and Settings.
+ * @returns {(SaveSlotSummary & { slot: number })[]}
+ */
+export function listSaveSlots() {
+  return Array.from({ length: SAVE_SLOT_COUNT }, (_, index) => summarizeSlot(index + 1))
 }
 
 /**

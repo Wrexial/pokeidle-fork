@@ -6548,6 +6548,101 @@ img {
     line-height: 1.4
 }
 
+.slot-select {
+    align-items: center
+}
+
+.save-slot-grid {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center
+}
+
+.save-slot-grid.compact {
+    flex-direction: column;
+    gap: 8px
+}
+
+.save-slot-card {
+    width: 200px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+    background: linear-gradient(180deg, #e8dcc0 0% 50%, #d8c8a0 50% 100%);
+    box-shadow: -3px 0 #483828, 3px 0 #483828, 0 -3px #483828, 0 3px #483828;
+    color: #3a2818
+}
+
+.save-slot-grid.compact .save-slot-card {
+    width: 100%
+}
+
+.save-slot-card.active {
+    box-shadow: -3px 0 var(--gold), 3px 0 var(--gold), 0 -3px var(--gold), 0 3px var(--gold), -5px 0 var(--gold-dark), 5px 0 var(--gold-dark), 0 -5px var(--gold-dark), 0 5px var(--gold-dark)
+}
+
+.save-slot-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px
+}
+
+.save-slot-name {
+    font-size: 10px;
+    font-weight: 700
+}
+
+.save-slot-badge {
+    font-size: 7px;
+    font-weight: 700;
+    padding: 2px 5px;
+    background: var(--gold-dark);
+    color: var(--parchment)
+}
+
+.save-slot-empty {
+    margin: 0;
+    font-size: 9px;
+    opacity: 0.7
+}
+
+.save-slot-info {
+    font-size: 9px;
+    line-height: 1.5
+}
+
+.save-slot-date {
+    font-size: 7px;
+    opacity: 0.6;
+    margin-top: 2px
+}
+
+.save-slot-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: auto
+}
+
+.save-slot-actions .settings-save-btn {
+    flex: 1;
+    min-width: 0
+}
+
+.settings-save-btn.danger {
+    background: #8b3030;
+    border-color: #5a1a1a
+}
+
+.settings-save-btn.danger:hover:not(:disabled) {
+    background: #a03a3a;
+    color: var(--parchment)
+}
+
 .settings-save-error {
     margin: 8px 0 0;
     font-size: 9px;

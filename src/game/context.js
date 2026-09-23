@@ -3,7 +3,7 @@
 import React from 'react'
 import { jsx } from 'react/jsx-runtime'
 import { gameReducer, initialGameState } from './reducer.js'
-import { SAVED_STATE_KEYS, loadSavedState, persistSave } from './save.js'
+import { SAVED_STATE_KEYS, loadSavedState, persistSave, resolveBootSlot } from './save.js'
 
 /** @type {React.Context<{ state: GameState, dispatch: (action: GameAction) => void } | null>} */
 const GameContext = React.createContext(
@@ -15,7 +15,10 @@ export function GameProvider({ children }) {
   const [state, dispatch] = React.useReducer(
     gameReducer,
     initialGameState,
-    /** @returns {GameState} */ () => loadSavedState() ?? initialGameState
+    /** @returns {GameState} */ () => {
+      const slot = resolveBootSlot()
+      return (slot ? loadSavedState(slot) : null) ?? initialGameState
+    }
   )
   return (
     React.useEffect(() => {

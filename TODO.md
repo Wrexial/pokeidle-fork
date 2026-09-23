@@ -1,6 +1,6 @@
 # TODO
 
-Open ideas and follow-ups. Current game version: **0.18.0**
+Open ideas and follow-ups. Current game version: **0.19.0**
 (`src/data/changelog.js`). Finished work lives in the changelog, not here — this
 file only tracks what is **still open**. See `AGENTS.md` for architecture,
 commands and data conventions.
@@ -312,6 +312,9 @@ Foraging counterpart on forested routes.
 **Shipped (0.17.0):** rod tiers gate the rarity of what a cast reaches, fishing
 is limited to 30 curated water-rich routes (`FISHING_LOCATIONS`), and a cast only
 ever hooks a Water species.
+**Shipped (0.19.0):** each fishing route has an exclusive Water Pokemon that only
+appears on the tiny perfect-cast zone and is removed from the route's normal
+wild table (`fishingExclusiveFor`).
 
 Nothing left here; see #29b (companion care) and #29c (berry growing) for the
 remaining minigame ideas.

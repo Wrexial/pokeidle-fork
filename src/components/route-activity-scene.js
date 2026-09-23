@@ -12,12 +12,14 @@ import {
   ACTIVITY_HIT_ZONE,
   ACTIVITY_PERFECT_ZONE,
   ACTIVITY_SWEEP_MS,
+  ACTIVITY_ULTRA_ZONE,
   ROUTE_ACTIVITIES,
   activityRewardName,
   bestRodId,
   rodForId,
   rollActivityEncounter,
   rollActivityLoot,
+  rollFishingExclusive,
 } from '../game/minigames.js'
 import { checkShinyOdds, shinyOddsForSpecies } from '../game/progression.js'
 
@@ -59,6 +61,7 @@ export function RouteActivityScene() {
     if (!activity || stage !== 'aiming') return
     const distance = Math.abs(position - 0.5),
       perfect = distance <= ACTIVITY_PERFECT_ZONE,
+      ultra = distance <= ACTIVITY_ULTRA_ZONE,
       hit = distance <= ACTIVITY_HIT_ZONE,
       nextAttempts = attemptsLeft - 1
     setAttemptsLeft(nextAttempts)
@@ -70,7 +73,10 @@ export function RouteActivityScene() {
       return
     }
     if (activity.mode === 'encounter') {
-      const encounter = rollActivityEncounter(activity.id, routeKey, perfect, rod.id)
+      const exclusive =
+          activity.id === 'fishing' && ultra ? rollFishingExclusive(routeKey) : null,
+        encounter =
+          exclusive ?? rollActivityEncounter(activity.id, routeKey, perfect, rod.id)
       if (!encounter) {
         setMessage('Nothing is biting here.')
         setStage(nextAttempts <= 0 ? 'done' : 'result')
@@ -103,7 +109,8 @@ export function RouteActivityScene() {
   }
 
   const hitWidth = ACTIVITY_HIT_ZONE * 200,
-    perfectWidth = ACTIVITY_PERFECT_ZONE * 200
+    perfectWidth = ACTIVITY_PERFECT_ZONE * 200,
+    ultraWidth = ACTIVITY_ULTRA_ZONE * 200
   return jsxs('div', {
     className: `minigame-scene route-activity-scene activity-${activity.id}`,
     children: [
@@ -144,6 +151,10 @@ export function RouteActivityScene() {
               jsx('div', {
                 className: 'activity-zone activity-zone-perfect',
                 style: { left: `${50 - perfectWidth / 2}%`, width: `${perfectWidth}%` },
+              }),
+              jsx('div', {
+                className: 'activity-zone activity-zone-ultra',
+                style: { left: `${50 - ultraWidth / 2}%`, width: `${ultraWidth}%` },
               }),
               jsx('div', {
                 className: 'activity-marker',

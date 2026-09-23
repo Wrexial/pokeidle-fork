@@ -1,10 +1,22 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.18.0'
+export const GAME_VERSION = '0.19.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.19.0',
+      subtitle: 'Fishing Exclusives',
+      sections: [
+        {
+          heading: 'Minigames',
+          items: [
+            'Every fishing route now guards an exclusive Water Pokemon. Hit the tiny centre of the cast bar \u2014 a fourth, smallest zone \u2014 to hook it. It is pulled out of the route\u2019s normal wild table and marked with a fishing rod in the Wild Pokemon list',
+          ],
+        },
+      ],
+    },
     {
       version: '0.18.0',
       subtitle: 'Companion & Garden',

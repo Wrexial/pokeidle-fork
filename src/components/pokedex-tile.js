@@ -7,7 +7,7 @@ import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemo
 import { DexBallBadge } from './dex-ball-badge.js'
 
 export let PokedexTile = React.memo(
-  /** @param {{ speciesKey: string, status: string, rarity: string, isSelected: boolean, onClick: () => void, isShinyCaught: boolean, isExclusive?: boolean, chainCount?: number, activeEffect: any, selectorMode: any }} props */
+  /** @param {{ speciesKey: string, status: string, rarity: string, isSelected: boolean, onClick: () => void, isShinyCaught: boolean, isExclusive?: boolean, isFishingExclusive?: boolean, chainCount?: number, activeEffect: any, selectorMode: any }} props */
   function ({
     speciesKey,
     status,
@@ -16,6 +16,7 @@ export let PokedexTile = React.memo(
     onClick,
     isShinyCaught,
     isExclusive,
+    isFishingExclusive,
     chainCount,
     activeEffect,
     selectorMode,
@@ -43,6 +44,12 @@ export let PokedexTile = React.memo(
                 className: 'pokedex-exclusive-badge',
                 title: 'Only found on this route',
                 children: '◆',
+              }),
+            isFishingExclusive &&
+              jsx('span', {
+                className: 'pokedex-fishing-badge',
+                title: 'Fishing only \u2014 land a perfect cast',
+                children: '\u{1f3a3}',
               }),
             (chainCount ?? 0) > 0 &&
               jsx('span', {

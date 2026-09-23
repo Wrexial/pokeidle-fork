@@ -8,6 +8,7 @@ import { encounterData, pokemonSpecies } from '../../data/gameData.js'
 import { consumableItems, evolutionItems, heldItems } from '../../data/items.js'
 import { isCaveLocation, isWaterLocation } from '../catching.js'
 import { DEFAULT_ROD, rodForId } from './rods.js'
+import { FISHING_LOCATIONS, encountersWithoutFishingExclusive, fishingExclusiveFor, routeHasWaterSpecies } from './fishing.js'
 
 /** How many attempts (casts/searches) a visit gives. */
 export const ACTIVITY_ATTEMPTS = 3
@@ -20,6 +21,9 @@ export const ACTIVITY_HIT_ZONE = 0.22
 
 /** Distance from the centre that lands a perfect hit. */
 export const ACTIVITY_PERFECT_ZONE = 0.08
+
+/** Distance from the centre that lands a perfect catch (route-exclusive). */
+export const ACTIVITY_ULTRA_ZONE = 0.03
 
 /**
  * Route activities. `mode` picks the outcome: `encounter` starts a normal wild
@@ -35,7 +39,7 @@ export const ROUTE_ACTIVITIES = {
     title: 'Fishing',
     action: 'CAST LINE',
     icon: '\u{1f3a3}',
-    hint: 'Cast into the water and reel in on the sweet spot to hook a Water Pokemon from this route.',
+    hint: 'Cast into the water and reel in on the sweet spot to hook a Water Pokemon. A perfect cast in the tiny centre hooks this route\u2019s exclusive catch.',
     mode: 'encounter',
     preferTypes: ['Water'],
   },
@@ -47,66 +51,6 @@ export const ROUTE_ACTIVITIES = {
     hint: 'Search the undergrowth for berries, candy and supplies. The closer to the sweet spot, the better the find.',
     mode: 'loot',
   },
-}
-
-/**
- * The hand-picked water-rich routes where fishing is available. A cast only
- * ever hooks a Water-type Pokemon, so rather than offering it on every route
- * that merely sounds watery, this list names the routes whose tables are
- * actually made of Water species.
- * @type {Set<string>}
- */
-export const FISHING_LOCATIONS = new Set([
-  // Kanto
-  'seafoamIslands',
-  'route19',
-  'route20',
-  'route21',
-  // Johto
-  'johto-whirl-islands',
-  'johto-sea-route-40',
-  'johto-sea-route-41',
-  // Hoenn
-  'hoenn-route-124',
-  'hoenn-route-126',
-  'hoenn-route-128',
-  'hoenn-route-134',
-  // Sinnoh
-  'sinnoh-sea-route-220',
-  'sinnoh-route-219',
-  'sinnoh-sea-route-223',
-  'sinnoh-route-213',
-  // Unova
-  'unova-route-17',
-  'unova-route-21',
-  'unova-route-4',
-  // Kalos
-  'kalos-route-12',
-  'kalos-route-8',
-  'kalos-route-22',
-  // Alola
-  'alola-route-15',
-  'alola-route-7',
-  'alola-route-9',
-  // Galar
-  'galar-route-9',
-  'galar-route-2',
-  'galar-crown-tundra-frigid-sea',
-  // Paldea
-  'paldea-terarium-coastal-biome',
-  'paldea-east-province-area-two',
-  'paldea-west-province-area-one',
-])
-
-/**
- * Whether a route's table actually holds Water-type Pokemon.
- * @param {string} routeKey
- * @returns {boolean}
- */
-function hasWaterSpecies(routeKey) {
-  return (encounterData[routeKey]?.encounters ?? []).some((entry) =>
-    (pokemonSpecies[entry.speciesKey]?.types ?? []).includes('Water')
-  )
 }
 
 /**
@@ -133,7 +77,7 @@ export function routeActivityIds(location) {
   if (!location || !encounterData[location.routeKey ?? '']) return []
   /** @type {string[]} */
   const ids = []
-  if (FISHING_LOCATIONS.has(location.id) && hasWaterSpecies(location.routeKey ?? ''))
+  if (FISHING_LOCATIONS.has(location.id) && routeHasWaterSpecies(location.routeKey ?? ''))
     ids.push('fishing')
   if (isForageLocation(location)) ids.push('forage')
   return ids
@@ -153,7 +97,12 @@ export function routeActivityIds(location) {
 export function rollActivityEncounter(activityId, routeKey, perfect, rodId = DEFAULT_ROD) {
   const activity = ROUTE_ACTIVITIES[activityId],
     rod = rodForId(rodId),
-    table = encounterData[routeKey]?.encounters ?? []
+    // The fishing-exclusive species is pulled from normal casts; it only
+    // appears on a perfect cast (see `rollFishingExclusive`).
+    table = encountersWithoutFishingExclusive(
+      routeKey,
+      encounterData[routeKey]?.encounters ?? []
+    )
   if (!activity || table.length === 0) return null
   // Strict type filter: fishing only ever hooks Water Pokemon, so a route with
   // none has nothing to catch rather than falling back to its land species.
@@ -192,6 +141,27 @@ export function rollActivityEncounter(activityId, routeKey, perfect, rodId = DEF
     speciesKey: fallback.speciesKey,
     level: fallback.minLevel + rod.levelBonus,
     isWater: false,
+  }
+}
+
+/**
+ * Roll the route's fishing-exclusive species, which is only reachable on a
+ * perfect cast (the tiny centre of the timing bar).
+ * @param {string} routeKey
+ * @returns {{ speciesKey: string, level: number, isWater: boolean } | null}
+ */
+export function rollFishingExclusive(routeKey) {
+  const speciesKey = fishingExclusiveFor(routeKey),
+    entry = speciesKey
+      ? encounterData[routeKey]?.encounters?.find(
+          (candidate) => candidate.speciesKey === speciesKey
+        )
+      : null
+  if (!speciesKey || !entry) return null
+  return {
+    speciesKey,
+    level: entry.minLevel + Math.floor(Math.random() * (entry.maxLevel - entry.minLevel + 1)),
+    isWater: true,
   }
 }
 

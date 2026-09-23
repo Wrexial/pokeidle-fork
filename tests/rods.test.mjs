@@ -8,10 +8,12 @@ const gameData = installGameData()
 const {
   RODS,
   bestRodId,
+  fishingExclusiveFor,
   nextRod,
   rodForId,
   rodsForRegionCount,
   rollActivityEncounter,
+  rollFishingExclusive,
   routeActivityIds,
 } = await import('../src/game/minigames.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
@@ -20,13 +22,14 @@ const { generateIVs } = await import('../src/game/pokemon.js')
 
 const { mapData, pokemonSpecies, mapEncounterData, regions } = gameData
 
-/** A water route whose table has at least two Water species to gate. */
+/** A water route whose table has at least three Water species to gate (one of
+ * which becomes the fishing exclusive, leaving at least two for the rods). */
 const waterRoute = Object.values(mapData).find((location) => {
   if (!routeActivityIds(location).includes('fishing')) return false
   const water = (mapEncounterData[location.routeKey]?.encounters ?? []).filter((entry) =>
     pokemonSpecies[entry.speciesKey].types.includes('Water')
   )
-  return water.length >= 2
+  return water.length >= 3
 })
 
 test('there are three rod tiers that get better as regions open', () => {
@@ -57,8 +60,10 @@ test('bestRodId and nextRod track the rod collection', () => {
 
 test('the Old Rod only reaches the common half of a route, the Super Rod all of it', () => {
   const table = mapEncounterData[waterRoute.routeKey].encounters,
+    exclusive = fishingExclusiveFor(waterRoute.routeKey),
     water = table
       .filter((entry) => pokemonSpecies[entry.speciesKey].types.includes('Water'))
+      .filter((entry) => entry.speciesKey !== exclusive)
       .sort((left, right) => right.weight - left.weight),
     rarest = water[water.length - 1].speciesKey,
     totalWeight = water.reduce((sum, entry) => sum + entry.weight, 0),
@@ -70,8 +75,16 @@ test('the Old Rod only reaches the common half of a route, the Super Rod all of 
     oldTotalWeight = oldPool.reduce((sum, entry) => sum + entry.weight, 0),
     original = Math.random
   try {
+    // The exclusive species is never reachable by an ordinary cast.
+    for (let roll = 0; roll < 10; roll++)
+      assert.notEqual(
+        rollActivityEncounter('fishing', waterRoute.routeKey, false, 'superRod').speciesKey,
+        exclusive,
+        'the exclusive species is not reachable by a rod'
+      )
+
     // Aim at the very last reachable entry: the Old Rod's shallowest pool must
-    // stop short of the rarest species.
+    // stop short of the rarest non-exclusive species.
     Math.random = () => (oldTotalWeight - 0.5) / oldTotalWeight
     for (let roll = 0; roll < 10; roll++) {
       const encounter = rollActivityEncounter('fishing', waterRoute.routeKey, false, 'oldRod')
@@ -79,11 +92,14 @@ test('the Old Rod only reaches the common half of a route, the Super Rod all of 
       assert.ok(encounter.level >= routeMinLevel)
     }
 
-    // The Super Rod's full pool reaches the rarest, with its level bonus.
+    // The Super Rod's full pool reaches the rarest reachable species...
     Math.random = () => (totalWeight - 0.5) / totalWeight
     const deep = rollActivityEncounter('fishing', waterRoute.routeKey, false, 'superRod')
     assert.equal(deep.speciesKey, rarest)
     assert.ok(deep.level >= routeMinLevel + 4, 'the Super Rod adds its level bonus')
+
+    // ...while the exclusive only comes from a perfect cast.
+    assert.equal(rollFishingExclusive(waterRoute.routeKey).speciesKey, exclusive)
   } finally {
     Math.random = original
   }

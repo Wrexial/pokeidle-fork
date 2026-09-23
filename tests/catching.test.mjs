@@ -5,9 +5,24 @@ import { installGameData } from './helpers/game-data.mjs'
 
 installGameData()
 
-const { calculateCatchChance, getBallModifier, isCaveLocation, isNightTime, isWaterLocation, selectBestBall, shouldOfferMasterBall } = await import(
+const { calculateCatchChance, getBallModifier, getDexStatus, isCaveLocation, isNightTime, isWaterLocation, selectBestBall, shouldOfferMasterBall } = await import(
   '../src/game/catching.js'
 )
+
+test('getDexStatus reports the strongest Pokedex state first', () => {
+  const state = {
+    pokedexSeen: ['pidgey', 'rattata'],
+    pokedexCaught: ['rattata'],
+    shinyCaught: ['pidgey'],
+  }
+  assert.equal(getDexStatus(state, 'pidgey'), 'shiny', 'a caught shiny beats a plain catch')
+  assert.equal(getDexStatus(state, 'rattata'), 'caught')
+  assert.equal(getDexStatus(state, 'caterpie'), null, 'an unregistered species has no badge')
+  assert.equal(
+    getDexStatus({ pokedexSeen: [], pokedexCaught: [], shinyCaught: [] }, 'pidgey'),
+    null
+  )
+})
 
 test('the Master Ball is offered for legendaries even once caught', () => {
   assert.equal(shouldOfferMasterBall({ pokedexCaught: [] }, 'mewtwo'), true)

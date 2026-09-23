@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.38.3'
+export const GAME_VERSION = '0.38.4'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.38.4',
+      subtitle: 'Caught Indicators',
+      sections: [
+        {
+          heading: 'Quality of Life',
+          items: [
+            'Wild Pokemon you have already registered now show a Pokeball badge in battle instead of a plain tick: grey for seen-only, red for caught, and gold for a shiny you have caught',
+            'The same ball appears on route encounter lists and Pokedex tiles (replacing the old shiny star), so seen, caught and shiny-caught read at a glance; it stays hidden for trainer battles',
+          ],
+        },
+      ],
+    },
     {
       version: '0.38.3',
       subtitle: 'Alola Islands',

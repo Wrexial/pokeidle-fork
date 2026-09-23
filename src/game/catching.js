@@ -181,6 +181,20 @@ export function shouldOfferMasterBall(state, speciesKey) {
 }
 
 /**
+ * The Pokedex status of a species for the caught indicators, strongest first:
+ * a shiny that has been caught, a caught species, or one only seen so far.
+ * @param {{ pokedexSeen: string[], pokedexCaught: string[], shinyCaught: string[] }} state
+ * @param {string} speciesKey
+ * @returns {'seen' | 'caught' | 'shiny' | null}
+ */
+export function getDexStatus(state, speciesKey) {
+  if (state.shinyCaught.includes(speciesKey)) return 'shiny'
+  if (state.pokedexCaught.includes(speciesKey)) return 'caught'
+  if (state.pokedexSeen.includes(speciesKey)) return 'seen'
+  return null
+}
+
+/**
  * @param {number} rate
  * @returns {string}
  */

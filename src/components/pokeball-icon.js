@@ -4,10 +4,10 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { pokeballColors } from '../data/ui.js'
 
-/** @param {{ ballId: string, size?: number, disabled?: boolean }} props */
-export function PokeballIcon({ ballId, size = 10, disabled }) {
+/** @param {{ ballId?: string, size?: number, disabled?: boolean, colors?: { top: string, bottom: string, ring: string, dot: string } }} props */
+export function PokeballIcon({ ballId = 'pokeball', size = 10, disabled, colors: colorOverride }) {
   const clipId = React.useId(),
-    colors = pokeballColors[ballId]
+    colors = colorOverride ?? pokeballColors[ballId]
   return jsxs('svg', {
     className: disabled ? 'pokeball-disabled' : void 0,
     viewBox: '0 0 24 24',

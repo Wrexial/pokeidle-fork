@@ -1,6 +1,7 @@
 // Split from a grouped component file — see tools/decompile/split-components.mjs
 
 import { jsx, jsxs } from 'react/jsx-runtime'
+import { DexBallBadge } from './dex-ball-badge.js'
 import { HpBar } from './hp-bar.js'
 
 /** Short labels for the battle status badge. */
@@ -13,8 +14,8 @@ const STATUS_LABELS = {
   flinching: 'FLN',
 }
 
-/** @param {{ pokemon: BattlePokemon, isCaught?: boolean }} props */
-export function EnemyInfoBox({ pokemon, isCaught }) {
+/** @param {{ pokemon: BattlePokemon, dexStatus?: 'seen' | 'caught' | 'shiny' | null }} props */
+export function EnemyInfoBox({ pokemon, dexStatus }) {
   return jsxs('div', {
     className: 'info-box',
     children: [
@@ -30,12 +31,10 @@ export function EnemyInfoBox({ pokemon, isCaught }) {
             className: 'info-pokemon-name',
             children: pokemon.name.toUpperCase(),
           }),
-          isCaught &&
-            jsx('span', {
-              className: 'caught-badge',
-              title: 'Already registered in the Pokedex',
-              children: '✓',
-            }),
+          jsx(DexBallBadge, {
+            status: dexStatus,
+            size: 11,
+          }),
           pokemon.status &&
             jsx('span', {
               className: `status-badge status-${pokemon.status}`,

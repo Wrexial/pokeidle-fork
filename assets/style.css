@@ -5375,12 +5375,26 @@ img {
     text-shadow: none
 }
 
-.caught-badge {
-    font-size: 9px;
-    font-weight: 700;
+.dex-ball-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 2px;
     line-height: 1;
-    color: #2e7d32;
-    margin-right: 2px
+    vertical-align: middle;
+    filter: drop-shadow(0 1px 0 rgba(0,0,0,.45))
+}
+
+.dex-ball-shiny {
+    filter: drop-shadow(0 0 3px rgba(255,232,96,.9))
+}
+
+.pokedex-tile-ball {
+    position: absolute;
+    bottom: 1px;
+    right: 2px;
+    margin: 0;
+    z-index: 5
 }
 
 .box-grid-slot {
@@ -5400,15 +5414,6 @@ img {
 
 .pokedex-tile {
     position: relative
-}
-
-.pokedex-shiny-star {
-    position: absolute;
-    top: 2px;
-    right: 2px;
-    font-size: 8px;
-    color: #ffe860;
-    z-index: 5
 }
 
 .pokedex-exclusive-badge {

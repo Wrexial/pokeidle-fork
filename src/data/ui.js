@@ -158,6 +158,32 @@ export const pokeballColors = {
     },
   }
 
+/**
+ * Pokedex status ball palettes: grey for a species merely seen, the normal
+ * red ball for one caught, and gold for one caught as a shiny.
+ * @type {Record<'seen' | 'caught' | 'shiny', { top: string, bottom: string, ring: string, dot: string }>}
+ */
+export const dexBallColors = {
+  seen: {
+    top: '#6c6c6c',
+    bottom: '#bdbdbd',
+    ring: '#8a8a8a',
+    dot: '#2a1808',
+  },
+  caught: {
+    top: '#c83030',
+    bottom: '#e8dcc0',
+    ring: '#e8dcc0',
+    dot: '#2a1808',
+  },
+  shiny: {
+    top: '#e8b020',
+    bottom: '#fff2c0',
+    ring: '#f0d060',
+    dot: '#8a6010',
+  },
+}
+
 export const CATCH_MODE_OPTIONS = [
     {
       value: 'always',

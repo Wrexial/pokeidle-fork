@@ -1,6 +1,6 @@
 # TODO
 
-Open ideas and follow-ups. Current game version: **0.38.3**
+Open ideas and follow-ups. Current game version: **0.38.4**
 (`src/data/changelog.js`). Finished work lives in the changelog, not here — this
 file only tracks what is **still open**. See `AGENTS.md` for architecture,
 commands and data conventions.
@@ -17,14 +17,11 @@ renumbered, so the gaps below are items that shipped.
 
 ### Tier 1 — Quick wins (small effort, high gain)
 
-1. **#30a Caught-indicator polish** — S · ★★½ — the enemy name row's caught
-   badge is a plain `✓`; use a Pokéball sprite and tell seen / caught / shiny
-   apart.
-2. **#15 Save slots + share code** — S–M · ★★★ — export/import already
+1. **#15 Save slots + share code** — S–M · ★★★ — export/import already
    shipped; multiple slots and a base64 share code are still open.
-3. **#16 Challenge mode: monotype** — S · ★★★ — the last challenge toggle
+2. **#16 Challenge mode: monotype** — S · ★★★ — the last challenge toggle
    beside Randomizer / Level Scaling / Nuzlocke.
-4. **#16 Performance pass** — S–M · ★★ — the idle loop dispatches a lot per
+3. **#16 Performance pass** — S–M · ★★ — the idle loop dispatches a lot per
    tick; look at memoisation / batching if it ever gets heavy.
 
 ### Tier 2 — High impact, worth the effort (medium–large)
@@ -311,16 +308,21 @@ Effort: **small per minigame, medium–large as a feature**.
 
 ## 30. Caught / event QOL indicators
 
-The notification queue and basic caught badge shipped in 0.9.0. What's left:
+The notification queue shipped in 0.9.0.
 
-- [ ] Swap the enemy name row's `✓` caught badge (`enemy-info-box.js`) for a
-      **Pokéball sprite** (reuse `PokeballIcon` / `pokeballColors` in
-      `src/data/ui.js`) — the ball reads instantly as "already in the ball".
-- [ ] Distinguish *seen* vs *caught* vs *shiny caught* (`shinyCaught`) — e.g. a
-      plain ball vs a shiny-tinted ball — on the enemy row, the encounter list
-      and the Pokédex tile.
-- [ ] Maybe flag the battle sprite too (a small marker), and keep it off for
-      trainer teams / raids where the species isn't the reward.
+**Shipped (0.38.4):** the caught indicator is now a Pokéball badge that tells
+**seen** (grey ball) from **caught** (red ball) from **shiny caught** (gold
+ball). It replaces the old `✓` on the enemy name row (`enemy-info-box.js`,
+via the shared `dex-ball-badge.js` and `getDexStatus` in `src/game/catching.js`)
+and the shiny star on the encounter list / Pokédex tiles, and stays hidden for
+trainer battles.
+
+Still open:
+
+- [ ] Flag the battle **sprite** too (a small marker), if it adds value over the
+      name-row ball.
+- [ ] Decide whether raids should show the badge (they currently do, since the
+      raid boss is a catch reward).
 
 Effort: **small**.
 

@@ -7,7 +7,7 @@ import { moveCategoryIcons } from '../data/moves.js'
 import { dailyEventByKey } from '../data/daily-events.js'
 import { hasClaimableQuests } from '../game/quests.js'
 import { biomeForLocation, BIOME_FILTERS, locationImages } from '../data/ui.js'
-import { shouldOfferMasterBall } from '../game/catching.js'
+import { getDexStatus, shouldOfferMasterBall } from '../game/catching.js'
 import { isFemalePokemon } from '../game/breeding.js'
 import { WEATHER_ICONS, WEATHER_NAMES } from '../game/weather.js'
 import { TERRAIN_ICONS, TERRAIN_NAMES } from '../game/terrain.js'
@@ -296,8 +296,11 @@ export function BattleScene() {
             jsx(EnemyInfoBox, {
               pokemon: enemyPokemon,
               status: enemyPokemon.status ?? null,
-              // Trainer teams and raids aren't a catch reward, so only flag wilds.
-              isCaught: !activeTrainerBattle && caughtSpeciesSet.has(enemyPokemon.speciesKey),
+              // Trainer teams aren't a catch reward, so only flag wilds with a
+              // seen / caught / shiny-caught ball.
+              dexStatus: !activeTrainerBattle
+                ? getDexStatus(state, enemyPokemon.speciesKey)
+                : null,
             }),
             !activeTrainerBattle &&
               state.phase === 'battling' &&

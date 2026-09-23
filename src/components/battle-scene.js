@@ -22,7 +22,6 @@ import { SettingsModal } from './settings-modal.js'
 import { BattleTextBox } from './battle-text-box.js'
 import { EvolutionScene } from './evolution-scene.js'
 import { DailyEventModal } from './daily-event-modal.js'
-import { PokePelagoModal } from './poke-pelago-modal.js'
 import { DexCompleteScene } from './dex-complete-scene.js'
 import { QuestsModal } from './quests-modal.js'
 import { HealingScene } from './healing-scene.js'
@@ -44,7 +43,6 @@ export function BattleScene() {
     [showSettings, setShowSettings] = React.useState(!1),
     [showDaily, setShowDaily] = React.useState(!1),
     [showQuests, setShowQuests] = React.useState(!1),
-    [showPelago, setShowPelago] = React.useState(!1),
     { state, dispatch } = useGame(),
     { playerPokemon, enemyPokemon, battleEvents } = state,
     completedGenerationSet = completedGenerations(state.pokedexCaught),
@@ -175,17 +173,6 @@ export function BattleScene() {
             children: state.dailyEvent
               ? dailyEventByKey[state.dailyEvent.kind]?.icon ?? '🎁'
               : '🎁',
-          }),
-          jsx('button', {
-            className: `battle-info-btn daily-event-btn pelago-btn${
-              (state.companion?.id && state.wildBattlesWon > state.companion.careBattle) ||
-              state.garden?.plots?.some((plot) => plot && plot.battlesRemaining <= 0)
-                ? ' claimable'
-                : ''
-            }`,
-            onClick: () => setShowPelago(!0),
-            title: 'Poké Pelago',
-            children: '\u{1f3dd}\ufe0f',
           }),
           jsx('button', {
             className: `battle-info-btn daily-event-btn${
@@ -547,10 +534,6 @@ export function BattleScene() {
       showQuests &&
         jsx(QuestsModal, {
           onClose: () => setShowQuests(!1),
-        }),
-      showPelago &&
-        jsx(PokePelagoModal, {
-          onClose: () => setShowPelago(!1),
         }),
     ],
   })

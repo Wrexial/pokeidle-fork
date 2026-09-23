@@ -1,6 +1,7 @@
 // Split from a grouped component file — see tools/decompile/split-components.mjs
 
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
+import React from 'react'
 import { BATTLE_TOWER_LOCATION } from '../data/config.js'
 import { martShopItems } from '../data/items.js'
 import { encounterData, gymLeaderData, mapData, pokemonSpecies, regions, raidPoolFor } from '../data/gameData.js'
@@ -9,6 +10,7 @@ import { useGame } from '../game/context.js'
 import { computeUnlockedLocations } from '../game/progression.js'
 import { MinigameCard } from './minigame-card.js'
 import { BattleTowerPanel } from './battle-tower-panel.js'
+import { PokePelagoModal } from './poke-pelago-modal.js'
 import { RouteEncounterGrid } from './route-encounter-grid.js'
 import { ShopPanel } from './shop-panel.js'
 
@@ -49,7 +51,8 @@ export function LocationPanel({ onOpenCatchSettings }) {
         .slice(0, NEXT_UNLOCK_LIMIT)
     })(),
     routeKey = location?.routeKey,
-    routeEncounters = routeKey ? encounterData[routeKey] : null
+    routeEncounters = routeKey ? encounterData[routeKey] : null,
+    [showPelago, setShowPelago] = React.useState(!1)
   if (!location) return null
 
   // The minigame or route activity played from here. Fixed minigames live at a
@@ -390,7 +393,14 @@ export function LocationPanel({ onOpenCatchSettings }) {
           children: [
             jsx('span', {
               className: 'location-type-icon',
-              children: location.type === 'town' ? '🏠' : location.hidden ? '🗺️' : '🌿',
+              children:
+                location.type === 'town'
+                  ? '🏠'
+                  : location.type === 'facility'
+                    ? '🏝️'
+                    : location.hidden
+                      ? '🗺️'
+                      : '🌿',
             }),
             jsxs('div', {
               children: [
@@ -403,9 +413,11 @@ export function LocationPanel({ onOpenCatchSettings }) {
                   children:
                     location.type === 'town'
                       ? 'Town'
-                      : location.hidden
-                        ? (mapData[location.zone]?.name ?? 'Zone')
-                        : 'Route',
+                      : location.type === 'facility'
+                        ? 'Island'
+                        : location.hidden
+                          ? (mapData[location.zone]?.name ?? 'Zone')
+                          : 'Route',
                 }),
               ],
             }),
@@ -465,7 +477,10 @@ export function LocationPanel({ onOpenCatchSettings }) {
                         ? `${fixedMinigame.action} ($${fixedMinigame.cost.toLocaleString()})`
                         : fixedMinigame.action,
                   disabled: minigameBusy || state.money < fixedMinigame.cost,
-                  onStart: () => dispatch({ type: MINIGAME_START_ACTION[fixedMinigameId] }),
+                  onStart:
+                    fixedMinigameId === 'pokePelago'
+                      ? () => setShowPelago(!0)
+                      : () => dispatch({ type: MINIGAME_START_ACTION[fixedMinigameId] }),
                 }),
               activityIds.map((activityId) => {
                 const activity = ROUTE_ACTIVITIES[activityId]
@@ -577,6 +592,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
               }),
             ],
           }),
+        showPelago && jsx(PokePelagoModal, { onClose: () => setShowPelago(!1) }),
       ],
     }),
   })

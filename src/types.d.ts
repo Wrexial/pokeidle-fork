@@ -108,6 +108,10 @@ type GardenPlot = { berryId: string; battlesRemaining: number } | null
 /** The Berry Garden (see game/garden.js). */
 type Garden = { plots: GardenPlot[] }
 
+/** Poké Pelago's passive islands (see game/pelago.js). */
+type PelagoIsland = { assigned: string[]; progress: number; ready: number }
+type Pelago = Record<string, PelagoIsland>
+
 /** Traits a Daycare egg can inherit from its parents. */
 type BreedingInheritance = {
   /** Complete IV block (3 stats take the best of both parents). */
@@ -434,6 +438,8 @@ type GameState = {
   companion: Companion
   /** The Berry Garden plots (see game/garden.js). */
   garden: Garden
+  /** Poké Pelago's passive islands (see game/pelago.js). */
+  pelago: Pelago
   defeatedGyms: string[]
   defeatedEliteFour: string[]
   defeatedChampions: string[]

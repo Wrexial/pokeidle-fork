@@ -110,7 +110,8 @@
   "region": "alola",
   "description": "A town in the Alola region, home to Ilima's Normal Trial.",
   "connections": [
-   "alola-melemele-island"
+   "alola-melemele-island",
+   "alola-poke-pelago"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1087,5 +1088,30 @@
    "x": 22,
    "y": 74
   }
+ },
+ "alola-poke-pelago": {
+  "id": "alola-poke-pelago",
+  "name": "Poké Pelago",
+  "type": "facility",
+  "region": "alola",
+  "description": "Four small islands where your Pokemon relax, train and grow berries.",
+  "routeKey": "alola-poke-pelago",
+  "connections": [
+   "alola-hauoli-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-hauoli-city",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 700002.7501,
+  "position": {
+   "x": 14,
+   "y": 10
+  },
+  "background": "/backgrounds/beach.png"
  }
 }

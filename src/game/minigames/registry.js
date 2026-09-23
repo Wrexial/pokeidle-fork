@@ -18,6 +18,7 @@ export const MINIGAME_LOCATIONS = {
   'sinnoh-eterna-city': 'mining',
   safariZone: 'safari',
   'paldea-mesagoza': 'academyQuiz',
+  'alola-poke-pelago': 'pokePelago',
 }
 
 /**
@@ -70,5 +71,11 @@ export const MINIGAME_INFO = {
     cost: QUIZ_COST,
     action: 'SIT THE QUIZ',
     hint: `Answer ${QUIZ_QUESTIONS} type-matchup questions against a 10-second clock. A wrong answer or a timeout costs one of your ${QUIZ_LIVES} lives; a good score earns money and candy. Entry is $${QUIZ_COST.toLocaleString()}.`,
+  },
+  pokePelago: {
+    title: 'Poké Pelago',
+    cost: 0,
+    action: 'VISIT POKÉ PELAGO',
+    hint: 'Care for your companion, tend the Berry Garden, and staff the passive islands that gather resources while you battle.',
   },
 }

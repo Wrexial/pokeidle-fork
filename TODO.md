@@ -639,11 +639,10 @@ added to the pause/busy lists, and tests.
 
 **Shipped (0.21.0):** the Academy Quiz (Paldea, Mesagoza). The rest are open.
 
-- [ ] **Poké Pelago (Alola)** — **partial (0.22.0):** the hub now hosts
-      companion care (with Pat/Brush/Wash and a Cleanliness stat) and the Berry
-      Garden, opened from the top bar instead of separate buttons. Still open:
-      the idle islands — a bean farm, a training island and caves that assign
-      *boxed* Pokémon for passive resources.
+- [x] **Poké Pelago (Alola)** — **shipped (0.22.0):** a new Alola island hub
+      (off Hau\u2019oli City) hosting companion care (Pat/Brush/Wash +
+      Cleanliness), the Berry Garden, and three passive islands (Bean Farm,
+      Training Isle, Isle Caves) staffed with *boxed* Pokemon.
 - [ ] **Voltorb Flip (Unova)** — M. A 5×5 deduction/risk board: each row and
       column advertises its Voltorb count and score total; flip safe tiles for
       coins, avoid the bombs.

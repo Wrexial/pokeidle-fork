@@ -272,6 +272,15 @@ export const consumableItems = {
       sellPrice: 50,
       heal: 10,
     },
+    pokebean: {
+      id: 'pokebean',
+      name: 'Poke Bean',
+      description: 'A sweet bean grown on Poke Pelago. Restores 20 HP to a party Pokemon.',
+      category: 'medicine',
+      buyPrice: null,
+      sellPrice: 100,
+      heal: 20,
+    },
     poffin: {
       id: 'poffin',
       name: 'Poffin',

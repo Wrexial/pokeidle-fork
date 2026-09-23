@@ -12,8 +12,9 @@ export const CHANGELOG = [
         {
           heading: 'Idle Life',
           items: [
-            'Poké Pelago is here: companion care and the Berry Garden now live on one island hub, opened from a single palm-tree button in the top bar instead of two separate buttons',
+            'Poké Pelago is here: a new island off Alola (Hau\u2019oli City) that you visit from the Town Map. Companion care and the Berry Garden move there from the top bar and share one hub',
             'Companion care gained a Cleanliness stat and Pat, Brush and Wash actions, so there is more to do between battles. The +15% EXP bonus now needs all four care stats at 50+',
+            'Three passive islands \u2014 the Bean Farm, Training Isle and Isle Caves \u2014 can be staffed with boxed Pokemon. They gather Poke Beans, EXP and items while you battle, banking rewards to collect when you return',
           ],
         },
       ],

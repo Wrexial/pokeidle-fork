@@ -1997,6 +1997,19 @@ for (const [regionId, zones] of Object.entries(ZONES)) {
 // appended after the region loop with an explicit level band (the average of
 // the routes they connect to), so adding one never re-levels the region.
 const POST_AREAS = {
+  alola: [
+    {
+      node: 'poke-pelago',
+      name: 'Poké Pelago',
+      type: 'facility',
+      position: { x: 14, y: 10 },
+      connects: ['alola-hauoli-city'],
+      description: 'Four small islands where your Pokemon relax, train and grow berries.',
+      background: '/backgrounds/beach.png',
+      // No wild encounters: Pelago is a facility, not a route.
+      species: [],
+    },
+  ],
   galar: [
     {
       node: 'slumbering-weald',
@@ -2049,15 +2062,15 @@ for (const [regionId, areas] of Object.entries(POST_AREAS)) {
           maxLevel: clampLevel(level + 2),
         })),
       anchor = Math.min(...area.connects.map((node) => mapData[node]?.unlockOrder ?? 0))
-    encounterData[id] = { name: area.name, encounters }
+    if (encounters.length > 0) encounterData[id] = { name: area.name, encounters }
     mapData[id] = {
       id,
       name: area.name,
-      type: 'route',
+      type: area.type ?? 'route',
       region: regionId,
-      description: `A wild area in the ${region.name} region.`,
+      description: area.description ?? `A wild area in the ${region.name} region.`,
       routeKey: id,
-      background: routeBackground(area.name, encounters),
+      background: area.background ?? routeBackground(area.name, encounters),
       connections: [...area.connects],
       unlock: { battlesAtLocation: [{ locationId: area.gate ?? area.connects[0], count: 5 }] },
       unlockOrder: anchor + 0.25,

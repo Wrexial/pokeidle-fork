@@ -7,10 +7,12 @@ import { jsx, jsxs } from 'react/jsx-runtime'
 import { useGame } from '../game/context.js'
 import { CompanionCarePanel } from './companion-panel.js'
 import { GardenPanel } from './garden-panel.js'
+import { PelagoIslandsPanel } from './pelago-panel.js'
 
 const PELAGO_TABS = [
   { id: 'companion', label: 'Companion', icon: '\u{1f43e}' },
   { id: 'garden', label: 'Berry Fields', icon: '\u{1f331}' },
+  { id: 'islands', label: 'Islands', icon: '\u{1f3d6}\ufe0f' },
 ]
 
 /** @param {{ onClose: () => void }} props */
@@ -18,7 +20,8 @@ export function PokePelagoModal({ onClose }) {
   const { state } = useGame(),
     [tab, setTab] = React.useState('companion'),
     canCare = !!state.companion?.id && state.wildBattlesWon > state.companion.careBattle,
-    gardenReady = !!state.garden?.plots?.some((plot) => plot && plot.battlesRemaining <= 0)
+    gardenReady = !!state.garden?.plots?.some((plot) => plot && plot.battlesRemaining <= 0),
+    islandReady = Object.values(state.pelago ?? {}).some((island) => island.ready > 0)
   return jsx('div', {
     className: 'battle-info-overlay',
     onClick: onClose,
@@ -37,7 +40,9 @@ export function PokePelagoModal({ onClose }) {
           className: 'pelago-tabs',
           children: PELAGO_TABS.map((entry) => {
             const alert =
-              (entry.id === 'companion' && canCare) || (entry.id === 'garden' && gardenReady)
+              (entry.id === 'companion' && canCare) ||
+              (entry.id === 'garden' && gardenReady) ||
+              (entry.id === 'islands' && islandReady)
             return jsxs(
               'button',
               {
@@ -57,7 +62,9 @@ export function PokePelagoModal({ onClose }) {
           children:
             tab === 'companion'
               ? jsx(CompanionCarePanel, {})
-              : jsx(GardenPanel, {}),
+              : tab === 'garden'
+                ? jsx(GardenPanel, {})
+                : jsx(PelagoIslandsPanel, {}),
         }),
       ],
     }),

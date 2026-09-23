@@ -8,6 +8,7 @@ import { canBreed } from '../../breeding.js'
 import { tickCompanion } from '../../companion.js'
 import { createVolatileState } from '../../combat.js'
 import { tickGarden } from '../../garden.js'
+import { tickPelago } from '../../pelago.js'
 import { emptyBattleHazards } from '../../hazards.js'
 import { gainFriendship, isBattleReady } from '../../pokemon.js'
 import { computeUnlockedLocations, rollCandyDrop, rollValuableDrop, syncActivePokemonIntoParty, tickBattleCounters, tickPartyEggs, tickPokerus } from '../../progression.js'
@@ -118,6 +119,7 @@ export function consumeEvent(state, action) {
     daycare = state.daycare,
     companion = state.companion,
     garden = state.garden,
+    pelago = state.pelago,
     party = state.party,
     hatchedEgg = /** @type {Pokemon[]} */ ([]),
     inventory = state.inventory,
@@ -177,6 +179,8 @@ export function consumeEvent(state, action) {
     // A pinned companion's care fades, and garden berries ripen.
     companion = tickCompanion(companion)
     garden = tickGarden(garden)
+    // Poké Pelago's passive islands tick down their cycles.
+    pelago = tickPelago(pelago)
     // Daily quests track wild wins (and route-specific ones).
     quests = advanceQuests(quests, { kind: 'wild', locationId: state.currentLocation })
     // Daily "Harvest Day" doubles the chance of every wild item drop.
@@ -266,6 +270,7 @@ export function consumeEvent(state, action) {
     daycare,
     companion,
     garden,
+    pelago,
     inventory,
   })
   for (const dropNotification of dropNotifications)

@@ -12,6 +12,7 @@ import { natureByKey, randomNature } from '../data/natures.js'
 import { POKEMON_TYPES } from '../data/moves.js'
 import { COMPANION_MAX_CARE, createCompanionCare } from './companion.js'
 import { GARDEN_BERRIES, createGarden } from './garden.js'
+import { PELAGO_MAX_READY, PELAGO_SLOTS, createPelago } from './pelago.js'
 import { RODS, rodsForRegionCount } from './minigames.js'
 import { initialGameState } from './reducer.js'
 import { computeOfflineReward } from './progression.js'
@@ -356,6 +357,26 @@ export function repairSave(saved) {
     }
   })
 
+  // Poké Pelago islands: keep only assignments whose Pokemon still exist.
+  const pelago = createPelago(),
+    savedPelago = saved.pelago && typeof saved.pelago === 'object' ? saved.pelago : {}
+  for (const islandId of Object.keys(pelago)) {
+    const savedIsland = savedPelago[islandId]
+    if (!savedIsland || typeof savedIsland !== 'object') continue
+    pelago[islandId] = {
+      assigned: Array.isArray(savedIsland.assigned)
+        ? savedIsland.assigned.filter((/** @type {string} */ id) => companionIds.has(id)).slice(0, PELAGO_SLOTS)
+        : [],
+      progress:
+        typeof savedIsland.progress === 'number'
+          ? Math.max(0, Math.floor(savedIsland.progress))
+          : 0,
+      ready: Number.isInteger(savedIsland.ready)
+        ? Math.max(0, Math.min(PELAGO_MAX_READY, savedIsland.ready))
+        : 0,
+    }
+  }
+
   // Repair save data that references content which no longer exists (regions,
   // routes and locations have been rebuilt several times), so an old save can't
   // put the game loop into an unknown location and crash.
@@ -514,6 +535,7 @@ export function repairSave(saved) {
     daycare,
     companion,
     garden,
+    pelago,
     shinySeen,
     alwaysCatchShinies: saved.alwaysCatchShinies ?? true,
     defeatedGyms,
@@ -651,6 +673,7 @@ export const SAVED_STATE_KEYS = [
   'daycare',
   'companion',
   'garden',
+  'pelago',
   'shinySeen',
   'defeatedGyms',
   'defeatedEliteFour',

@@ -222,3 +222,49 @@ export const MOBILE_TABS = [
     label: 'Location',
   },
 ]
+
+/**
+ * Per-biome colour grades applied over the battle background image, so the four
+ * base scenes (grassland, beach, mountain, cave) read as forest, autumn, desert,
+ * swamp, volcanic, tundra and so on. `none` keeps the image untouched.
+ * @type {Record<string, string>}
+ */
+export const BIOME_FILTERS = {
+  grassland: 'none',
+  forest: 'hue-rotate(-18deg) saturate(1.3) brightness(.9)',
+  autumn: 'hue-rotate(28deg) saturate(1.4) brightness(.95)',
+  desert: 'sepia(.55) hue-rotate(-18deg) saturate(1.25) brightness(1.08)',
+  swamp: 'hue-rotate(55deg) saturate(.75) brightness(.72)',
+  volcanic: 'sepia(.35) hue-rotate(-38deg) saturate(1.6) brightness(.82)',
+  tundra: 'hue-rotate(175deg) saturate(.85) brightness(1.12)',
+  coast: 'hue-rotate(8deg) saturate(1.15)',
+  cave: 'brightness(.82) saturate(.9)',
+  ruins: 'sepia(.5) brightness(.85)',
+  mountain: 'saturate(.95) brightness(.95)',
+  town: 'none',
+}
+
+/**
+ * Pick a biome tint for a location from its name, falling back to its
+ * background image. Purely visual — the battle background image is unchanged.
+ * @param {MapLocation | undefined} location
+ * @returns {string}
+ */
+export function biomeForLocation(location) {
+  const name = location?.name ?? ''
+  if (/forest|woods|grove|tangle|jungle/i.test(name)) return 'forest'
+  if (/autumn|fall/i.test(name)) return 'autumn'
+  if (/desert|sand|dune|wasteland/i.test(name)) return 'desert'
+  if (/swamp|marsh|fen|bog|moor|wetland/i.test(name)) return 'swamp'
+  if (/volcan|ember|blaze|magma|cinder/i.test(name)) return 'volcanic'
+  if (/snow|ice|frost|glacier|tundra/i.test(name)) return 'tundra'
+  if (/ruins|tower|temple|shrine|catacomb/i.test(name)) return 'ruins'
+  if (/cave|cavern|tunnel|mine|grotto|depths|underground|well|sewer/i.test(name)) return 'cave'
+  if (/sea|ocean|beach|shore|bay|harbor|harbour|port|island|marine|coast|river|lake|pond|fall|rapid|strait|channel|dock/i.test(name))
+    return 'coast'
+  if (/\bmt\b|mt\.|mount|peak|summit|highland|ridge|cliff|gorge|canyon|quarry|spire/i.test(name))
+    return 'mountain'
+  const background = (location?.background ?? '').match(/\/([a-z_]+)\.png/)?.[1]
+  if (!background) return 'grassland'
+  return { beach: 'coast', town_port: 'town' }[background] ?? background
+}

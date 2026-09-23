@@ -6,7 +6,7 @@ import { jsx, jsxs } from 'react/jsx-runtime'
 import { moveCategoryIcons } from '../data/moves.js'
 import { dailyEventByKey } from '../data/daily-events.js'
 import { hasClaimableQuests } from '../game/quests.js'
-import { locationImages } from '../data/ui.js'
+import { biomeForLocation, BIOME_FILTERS, locationImages } from '../data/ui.js'
 import { shouldOfferMasterBall } from '../game/catching.js'
 import { isFemalePokemon } from '../game/breeding.js'
 import { WEATHER_ICONS, WEATHER_NAMES } from '../game/weather.js'
@@ -102,10 +102,16 @@ export function BattleScene() {
           locationImages.route1
   return jsxs('div', {
     className: 'battle-scene',
-    style: {
-      backgroundImage: `url('${battleBackground}')`,
-    },
     children: [
+      jsx('div', {
+        className: 'battle-scene-bg',
+        style: {
+          backgroundImage: `url('${battleBackground}')`,
+          filter: BIOME_FILTERS[
+            activeTrainerBattle || isTown ? 'town' : biomeForLocation(mapData[state.currentLocation])
+          ],
+        },
+      }),
       (state.weather || state.terrain) &&
         jsxs('div', {
           className: 'battle-field-badges',

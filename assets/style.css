@@ -277,6 +277,14 @@ img {
     background-position: center bottom
 }
 
+.battle-scene-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center bottom;
+    pointer-events: none
+}
+
 .bg-layer,.bg-sky,.bg-clouds,.bg-mountains,.bg-trees-far,.bg-trees-near,.bg-field,.bg-field-detail {
     display: none
 }

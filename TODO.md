@@ -242,7 +242,7 @@ Screen Cleaner, Natural Cure, Regenerator), plus the suppression/reaction batch
 Parental Bond, Orichalcum Pulse, Hunger Switch, Cud Chew), the battle-only
 synthetic form species (Minior Meteor/Core, Castform Sunny/Rainy/Snowy, Morpeko
 Hangry, Eiscue Noice — see `src/data/form-species.js`) and the out-of-battle
-Pickup / Honey Gather.
+Pickup / Honey Gather / Ball Fetch.
 `abilityPreventsStatus` also now treats badly-poisoned as poison
 (Immunity / Pastel Veil).
 
@@ -252,7 +252,8 @@ Still open:
       Battery, Power Spot, Friend Guard, Healer, Telepathy, Aroma/Flower Veil,
       Costar, Commander, Hospitality, Symbiosis, Gulp Missile, plus the complex
       ones (Illusion, Magic Bounce, Synchronize, Stakeout, Supreme Overlord,
-      Quick Draw, Rivalry) and the out-of-battle Illuminate / Run Away.
+      Quick Draw, Rivalry) and the overworld Illuminate / Run Away (no effect in
+      an idle auto-battler).
 - [ ] The remaining item nuances (Choice locking, more berries, Rocky Helmet).
 - [ ] Battle polish: move animations / damage numbers / hit feedback.
 

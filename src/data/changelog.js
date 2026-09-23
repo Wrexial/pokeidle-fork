@@ -32,7 +32,7 @@ export const CHANGELOG = [
             'Protection and switch abilities: Damp, Bulletproof, Soundproof, Overcoat (move family blocks), Rock Head and Liquid Ooze (recoil / drain), Shield Dust, Color Change, Comatose, Aroma Veil, Guard Dog, Steadfast, Early Bird, Mycelium Might, Screen Cleaner, Natural Cure and Regenerator. Recoil was also added to Double-Edge, Brave Bird, Flare Blitz and friends so Rock Head and Reckless matter',
             'Suppression and reaction abilities: Air Lock and Cloud Nine negate the weather, Mold Breaker / Teravolt / Turboblaze ignore the target\u2019s ability, and Opportunist, Parental Bond, Orichalcum Pulse, Hunger Switch and Cud Chew sit alongside them',
             'Battle-only alternate forms now swap to their real form species \u2014 Shields Down (Minior Meteor/Core), Forecast (Castform Sunny/Rainy/Snowy), Hunger Switch (Morpeko Hangry) and Ice Face (Eiscue Noice) \u2014 with their own sprites',
-            'Out-of-battle abilities: Pickup and Honey Gather can find an item after a wild win',
+            'Out-of-battle abilities: Pickup and Honey Gather can find an item after a wild win, and Ball Fetch returns a Poké Ball after a failed catch',
             'Fixed a battle bug where an immune hit (a Normal move into a Ghost) could still deal 1 damage',
           ],
         },

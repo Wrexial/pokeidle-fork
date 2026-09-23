@@ -10,6 +10,7 @@ import { ACHIEVEMENTS } from '../data/achievements.js'
 import { dailyExpMultiplier, dailyPrizeMultiplier, dailyShinyMultiplier } from '../data/daily-events.js'
 import { useGame } from './context.js'
 import { attemptCatch, isCaveLocation, isNightTime, isWaterLocation, selectAutoCatchBall, selectBestBall, shouldAutoCatch } from './catching.js'
+import { abilityOf } from './abilities.js'
 import { applyBattleForm, createBattlePokemon, createVolatileState, resolveBattleTurn, volatileStateFromBattle } from './combat.js'
 import { isBattleReady } from './pokemon.js'
 import { awardExperience, checkShinyOdds, pokerusExpMultiplier, resolveActiveModifiers, resolvePokemonEncounter, resolveRoamer, shinyOddsForSpecies } from './progression.js'
@@ -524,18 +525,25 @@ export function useGameLoop() {
                         speciesKey: enemyPokemon.speciesKey,
                       },
                     }))
-                : (dispatch({
-                    type: 'USE_POKEBALL',
-                    payload: {
-                      pokeballId: ballId,
-                    },
-                  }),
-                  dispatch({
-                    type: 'ADD_LOG',
-                    payload: {
-                      message: `${enemyPokemon.name} broke free!`,
-                    },
-                  }))
+                : abilityOf(currentGameState.playerPokemon) === 'ballFetch'
+                  ? dispatch({
+                      type: 'ADD_LOG',
+                      payload: {
+                        message: `${enemyPokemon.name} broke free! Ball Fetch returned the ball!`,
+                      },
+                    })
+                  : (dispatch({
+                      type: 'USE_POKEBALL',
+                      payload: {
+                        pokeballId: ballId,
+                      },
+                    }),
+                    dispatch({
+                      type: 'ADD_LOG',
+                      payload: {
+                        message: `${enemyPokemon.name} broke free!`,
+                      },
+                    }))
               : dispatch({
                   type: 'ADD_LOG',
                   payload: {

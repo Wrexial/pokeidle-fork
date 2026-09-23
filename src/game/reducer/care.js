@@ -6,7 +6,7 @@ import {
   applyCareAction,
   createCompanionCare,
 } from '../companion.js'
-import { GARDEN_BERRIES, isPlantableBerry, rollHarvest } from '../garden.js'
+import { BLEND_BERRY_COST, BLEND_RESULT_ITEM, GARDEN_BERRIES, isPlantableBerry, rollHarvest } from '../garden.js'
 import { consumableItems, heldItems } from '../../data/items.js'
 import { gainFriendship } from '../pokemon.js'
 
@@ -114,8 +114,7 @@ export function plantBerry(state, action) {
  * @param {GameAction} action
  * @returns {GameState}
  */
-export function harvestBerry(state, action) {
-  const plotIndex = action.payload?.plotIndex,
+export function harvestBerry(state, action) {  const plotIndex = action.payload?.plotIndex,
     plots = state.garden?.plots,
     plot = plots?.[plotIndex]
   if (!plots || !plot || plot.battlesRemaining > 0) return state
@@ -127,5 +126,30 @@ export function harvestBerry(state, action) {
     inventory: { ...state.inventory, [plot.berryId]: (state.inventory[plot.berryId] ?? 0) + quantity },
     garden: { ...state.garden, plots: nextPlots },
     battleLog: [...state.battleLog, `Harvested ${quantity}x ${berryName(plot.berryId)}.`].slice(-50),
+  }
+}
+
+/**
+ * Handle the `BLEND_BERRIES` action. Consumes a few berries of one kind and
+ * produces a Poffin.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function blendBerries(state, action) {
+  const berryId = action.payload?.berryId
+  if (!isPlantableBerry(berryId)) return state
+  if ((state.inventory[berryId] ?? 0) < BLEND_BERRY_COST) return state
+  return {
+    ...state,
+    inventory: {
+      ...state.inventory,
+      [berryId]: state.inventory[berryId] - BLEND_BERRY_COST,
+      [BLEND_RESULT_ITEM]: (state.inventory[BLEND_RESULT_ITEM] ?? 0) + 1,
+    },
+    battleLog: [
+      ...state.battleLog,
+      `Blended ${BLEND_BERRY_COST}x ${berryName(berryId)} into a Poffin.`,
+    ].slice(-50),
   }
 }

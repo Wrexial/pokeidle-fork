@@ -14,6 +14,7 @@ export const CHANGELOG = [
           items: [
             'New Companion: pin one of your party Pokemon (the paw button in the top bar) and keep it fed, happy and rested. Care fades as you win battles, one care action is allowed per win, and a content companion grants +15% EXP',
             'New Berry Garden (the sprout button): plant Oran, Sitrus or Lum Berries in four plots, let them ripen over wild wins, and harvest a crop back into the bag',
+            'Blend three Berries into a Poffin, which raises a party Pokemon\u2019s friendship by 30 when used',
             'Oran Berries are sold at every Mart so the garden is easy to start',
           ],
         },

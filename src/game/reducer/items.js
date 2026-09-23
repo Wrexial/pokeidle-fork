@@ -3,7 +3,7 @@
 import { encounterData, pokemonSpecies } from '../../data/gameData.js'
 import { activeItems, consumableItems, heldItems, pokeBalls } from '../../data/items.js'
 import { natureName, randomNature } from '../../data/natures.js'
-import { calculatePokemonStats, calculateRequiredExperience, getLevelUpResults } from '../pokemon.js'
+import { MAX_FRIENDSHIP, calculatePokemonStats, calculateRequiredExperience, gainFriendship, getLevelUpResults } from '../pokemon.js'
 import { isActiveEffectItem } from '../progression.js'
 
 /**
@@ -166,7 +166,11 @@ export function useItemOnPokemon(state, action) {
   }
   let member = { ...state.party[memberIndex] }
   const log = []
-  if (item.natureMint) {
+  if (item.friendship) {
+    if ((member.friendship ?? 0) >= MAX_FRIENDSHIP) return state
+    member.friendship = gainFriendship(member, item.friendship)
+    log.push(`${member.name} loved the ${item.name}!`)
+  } else if (item.natureMint) {
     // Re-roll to a different nature so the mint always does something, then
     // recompute the nature-affected stats (HP is never modified).
     const previousNature = member.nature

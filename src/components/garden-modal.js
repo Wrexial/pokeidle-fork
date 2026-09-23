@@ -5,7 +5,7 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { consumableItems, heldItems } from '../data/items.js'
 import { useGame } from '../game/context.js'
-import { GARDEN_BERRIES, isPlotReady } from '../game/garden.js'
+import { BLEND_BERRY_COST, GARDEN_BERRIES, isPlotReady } from '../game/garden.js'
 
 /** @param {string} berryId */
 function berryName(berryId) {
@@ -145,6 +145,20 @@ export function GardenModal({ onClose }) {
                 children:
                   'No plantable berries in the bag. Oran Berries are sold at any Mart; Sitrus and Lum Berries can be foraged or bought later.',
               }),
+            jsx('div', {
+              className: 'garden-picker-title',
+              children: 'Blend',
+            }),
+            jsxs('button', {
+              className: 'garden-blend-btn',
+              disabled: (state.inventory[selectedBerry] ?? 0) < BLEND_BERRY_COST,
+              onClick: () =>
+                dispatch({ type: 'BLEND_BERRIES', payload: { berryId: selectedBerry } }),
+              children: [
+                `Blend ${BLEND_BERRY_COST}x ${berryName(selectedBerry)} into a Poffin`,
+                ' \u2014 a party Pokemon\u2019s friendship +30',
+              ],
+            }),
           ],
         }),
       ],

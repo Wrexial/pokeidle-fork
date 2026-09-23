@@ -293,7 +293,8 @@ rod is found by opening another region.
 
 **Shipped (0.18.0):** a Companion (care decays per wild win, feed/play/rest with
 a one-per-win limit, +15% EXP while content) and a Berry Garden (plant Oran /
-Sitrus / Lum Berries, ripen over wild wins, harvest), both in the top bar.
+Sitrus / Lum Berries, ripen over wild wins, harvest, and blend three into a
+Poffin for +30 friendship), both in the top bar.
 
 `src/game/minigames.js` holds `MINIGAME_LOCATIONS` (location → fixed minigame),
 `MINIGAME_INFO` (title/cost/action/hint), `ROUTE_ACTIVITIES` and `RODS` plus
@@ -328,8 +329,9 @@ care decays per wild win, one action per win, and a content companion gives
 
 - [x] **Berry growing** — plant / pick berries over a battle count
       (`src/game/garden.js`).
-- [ ] **Berry blending** — turn harvested berries into Poffins / items (ties
-      into care and held items, #2c).
+- [x] **Berry blending** — blend three berries into a Poffin (friendship +30).
+
+Both shipped in 0.18.0; nothing left here.
 
 Relevant code: the real-time loop and battle-count ticks (`src/hooks.js`
 `useGameLoop`, `tickBattleCounters` in `src/game/progression.js`), the reducer's

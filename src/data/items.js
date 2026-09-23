@@ -265,6 +265,16 @@ export const consumableItems = {
       sellPrice: 50,
       heal: 10,
     },
+    poffin: {
+      id: 'poffin',
+      name: 'Poffin',
+      description:
+        'A sweet blend of Berries. Raises a party Pokemon\u2019s friendship by 30.',
+      category: 'medicine',
+      buyPrice: null,
+      sellPrice: 300,
+      friendship: 30,
+    },
     superPotion: {
       id: 'superPotion',
       name: 'Super Potion',

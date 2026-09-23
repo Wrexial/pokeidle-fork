@@ -9,7 +9,7 @@ import { DEFAULT_ROD } from './minigames.js'
 import { applyExp, applySharedExp, bossBattleEnd, completeMasterBall, consumeEvent, debugMaxLevel, endRaid, executeTurn, startBossBattle, startEncounter, startRaid, startTower, startTrainerBattle, switchPlayerPokemon, throwMasterBall, trainerBattleEnd, trainerSendNextPokemon, updateVolatile, useEffectItem, usePokeball } from './reducer/battle.js'
 import { claimAchievementRewards, claimDailyGift, claimDexRewards, claimQuest, clearOfflineReport, completeDexCelebration, markCaught, markSeen, markShinyCaught, markShinySeen, refreshDailyEvent, refreshQuests, startDexCelebration, updateShinyChain } from './reducer/collection.js'
 import { buyItem, buyRewardItem, clearHeldItem, sellItem, setAlwaysCatchShinies, setCatchRule, toggleAutoCatch, toggleRouteCatchAll, useItemOnPokemon } from './reducer/items.js'
-import { careCompanion, harvestBerry, plantBerry, setCompanion } from './reducer/care.js'
+import { blendBerries, careCompanion, harvestBerry, plantBerry, setCompanion } from './reducer/care.js'
 import { claimMinigameReward, collectMining, endBugContest, endMinigame, endRouteActivity, payMinigameFee, startBugContest, startGameCorner, startMining, startRouteActivity } from './reducer/minigames.js'
 import { boxToParty, catchPokemon, clearHatchResult, completeEvolution, completeWonderTrade, depositDaycare, evolutionStep, hatchDaycareEgg, partyToBox, releaseDuplicates, releaseHatchling, releasePokemon, reorderBox, reorderParty, setBoxSort, setMoves, setNickname, startEvolution, swapParty, swapPartyBox, toggleFavourite, withdrawDaycare, wonderTrade } from './reducer/pokemon.js'
 import { completeHealing, heal, healParty, healingStep, startHealing } from './reducer/recovery.js'
@@ -353,6 +353,8 @@ export function gameReducer(state, action) {
       return plantBerry(state, action)
     case 'HARVEST_BERRY':
       return harvestBerry(state, action)
+    case 'BLEND_BERRIES':
+      return blendBerries(state, action)
     case 'COLLECT_MINING':
       return collectMining(state, action)
     case 'BUY_REWARD_ITEM':

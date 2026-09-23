@@ -147,6 +147,8 @@ type ConsumableItem = {
   levelUp?: number
   /** Re-rolls the target's nature instead of healing/levelling it. */
   natureMint?: boolean
+  /** Raises the target's friendship by this much (Poffin). */
+  friendship?: number
 }
 
 type PokeBall = {

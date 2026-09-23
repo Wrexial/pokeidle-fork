@@ -6,6 +6,8 @@ import { installGameData } from './helpers/game-data.mjs'
 installGameData()
 
 const {
+  BLEND_BERRY_COST,
+  BLEND_RESULT_ITEM,
   GARDEN_BERRIES,
   GARDEN_PLOTS,
   createGarden,
@@ -16,7 +18,7 @@ const {
 } = await import('../src/game/garden.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 const { repairSave } = await import('../src/game/save.js')
-const { generateIVs } = await import('../src/game/pokemon.js')
+const { createPokemon, generateIVs } = await import('../src/game/pokemon.js')
 
 test('garden helpers', () => {
   const garden = createGarden()
@@ -98,8 +100,7 @@ test('HARVEST_BERRY only pays out a ripe plot', () => {
   assert.equal(gameReducer(growing, { type: 'HARVEST_BERRY', payload: { plotIndex: 0 } }), growing)
 })
 
-test('repairSave rebuilds the garden and validates the companion', () => {
-  const save = (/** @type {Record<string, any>} */ overrides) => ({
+test('repairSave rebuilds the garden and validates the companion', () => {  const save = (/** @type {Record<string, any>} */ overrides) => ({
       version: 2,
       playerPokemon: {
         id: 'a',
@@ -141,4 +142,34 @@ test('repairSave rebuilds the garden and validates the companion', () => {
   const legacy = repairSave(save({}))
   assert.equal(legacy.companion.id, null)
   assert.equal(legacy.garden.plots.length, GARDEN_PLOTS)
+})
+
+test('BLEND_BERRIES turns berries into a Poffin', () => {
+  const base = { ...initialGameState, inventory: { oranBerry: BLEND_BERRY_COST } },
+    blended = gameReducer(base, { type: 'BLEND_BERRIES', payload: { berryId: 'oranBerry' } })
+  assert.equal(blended.inventory.oranBerry, 0)
+  assert.equal(blended.inventory[BLEND_RESULT_ITEM], 1)
+
+  const short = { ...initialGameState, inventory: { oranBerry: BLEND_BERRY_COST - 1 } }
+  assert.equal(gameReducer(short, { type: 'BLEND_BERRIES', payload: { berryId: 'oranBerry' } }), short)
+  assert.equal(
+    gameReducer(base, { type: 'BLEND_BERRIES', payload: { berryId: 'pokeball' } }),
+    base
+  )
+})
+
+test('a Poffin raises friendship and is used up', () => {
+  const member = { ...createPokemon('eevee', 10, 'a'), friendship: 100 },
+    state = {
+      ...initialGameState,
+      party: [member],
+      playerPokemon: member,
+      inventory: { [BLEND_RESULT_ITEM]: 1 },
+    },
+    used = gameReducer(state, {
+      type: 'USE_ITEM_ON_POKEMON',
+      payload: { itemId: BLEND_RESULT_ITEM, pokemonId: 'a' },
+    })
+  assert.equal(used.party[0].friendship, 130)
+  assert.equal(used.inventory[BLEND_RESULT_ITEM], 0)
 })

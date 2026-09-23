@@ -5,6 +5,10 @@
 /** Number of plots in the garden. */
 export const GARDEN_PLOTS = 4
 
+/** Berries a single blend consumes, and the item it produces. */
+export const BLEND_BERRY_COST = 3
+export const BLEND_RESULT_ITEM = 'poffin'
+
 /**
  * Plantable berries: how many wild wins they take and how many they yield.
  * @type {Record<string, { growBattles: number, minYield: number, maxYield: number }>}

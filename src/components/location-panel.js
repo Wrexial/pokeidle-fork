@@ -296,8 +296,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
           ...subArea,
           unlocked: state.unlockedLocations.includes(subArea.id),
         })
-      ),
-      activeEncounters = encounterData[activeSubArea]
+      )
     return jsx('div', {
       className: 'location-panel-scroll',
       children: jsxs('div', {
@@ -332,6 +331,10 @@ export function LocationPanel({ onOpenCatchSettings }) {
             className: 'location-section-title',
             children: 'Areas',
           }),
+          jsx('p', {
+            className: 'settings-hint',
+            children: 'Pick an area to travel there and battle the Pokemon that live in it.',
+          }),
           jsx('div', {
             className: 'zone-area-list',
             children: subAreas.map(/** @param {any} subArea */ (subArea) =>
@@ -347,12 +350,6 @@ export function LocationPanel({ onOpenCatchSettings }) {
               )
             ),
           }),
-          activeEncounters &&
-            jsx(RouteEncounterGrid, {
-              routeKey: activeSubArea,
-              encounters: activeEncounters.encounters,
-              onOpenCatchSettings: onOpenCatchSettings ?? (() => {}),
-            }),
         ],
       }),
     })

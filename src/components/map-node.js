@@ -19,6 +19,7 @@ function MapNode({
     [, tick] = React.useState(0),
     isTown = location.type === 'town',
     isRaid = location.type === 'raid',
+    isZone = location.type === 'zone',
     locationName = isUnlocked ? location.name : '???',
     timeNow = Date.now(),
     raidOnCooldown = isRaid && cooldownEnd != null && timeNow < cooldownEnd
@@ -30,7 +31,7 @@ function MapNode({
   const showLabel = isCurrent || hovering
   let className = 'map-node'
   return (
-    isRaid ? (className += ' raid') : isTown ? (className += ' town') : (className += ' route'),
+    isRaid ? (className += ' raid') : isTown ? (className += ' town') : isZone ? (className += ' zone') : (className += ' route'),
     raidOnCooldown && (className += ' cooldown'),
     swarmLabel && (className += ' swarm'),
     isCurrent

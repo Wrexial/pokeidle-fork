@@ -2,7 +2,7 @@
 
 import { moveMakesContact } from '../../data/move-effects.js'
 import { moveData, moveLearnsets } from '../../data/gameData.js'
-import { abilityAbsorbsType, abilityAttackMultiplier, abilityBlocksNonSuperEffective, abilityChangesMoveType, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityEffectivenessMultiplier, abilityHalvesSuperEffective, abilityHealsFromType, abilityOf, abilityPreventsStatDrop, abilitySurvivesAtFullHp, fieldAuraMultiplier, onHitStatBoost, onHpThresholdBoost } from '../abilities.js'
+import { abilityAbsorbsType, abilityAttackMultiplier, abilityBlocksNonSuperEffective, abilityChangesMoveType, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityEffectivenessMultiplier, abilityHalvesSuperEffective, abilityHealsFromType, abilityOf, abilityPreventsStatDrop, abilitySurvivesAtFullHp, fieldAuraMultiplier, onHitStatBoost, onHpThresholdBoost, ruinDefenseMultiplier, ruinOffenseMultiplier } from '../abilities.js'
 import { chooseMoveForBattle, chooseRandomMove } from './ai.js'
 import { calculateDamage, chance, isSelfTargetedMove, normalizeStatKey } from './damage.js'
 import { applyEndOfTurn, reportFieldEffects } from './end-of-turn.js'
@@ -103,6 +103,18 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       ? { player: { ...hazards.player }, enemy: { ...hazards.enemy } }
       : emptyBattleHazards()
   ;(player.statStages || (player.statStages = {}), enemy.statStages || (enemy.statStages = {}))
+  // Neutralizing Gas suppresses every other Pokemon's ability for the turn.
+  // Apply it temporarily so it does not persist through the volatile state.
+  const gasActive =
+    abilityOf(player) === 'neutralizingGas' || abilityOf(enemy) === 'neutralizingGas',
+    suppressPlayer = gasActive && abilityOf(player) !== 'neutralizingGas',
+    suppressEnemy = gasActive && abilityOf(enemy) !== 'neutralizingGas'
+  if (suppressPlayer) player.abilitySuppressed = !0
+  if (suppressEnemy) enemy.abilitySuppressed = !0
+  const restoreGas = () => {
+    if (suppressPlayer) player.abilitySuppressed = !1
+    if (suppressEnemy) enemy.abilitySuppressed = !1
+  }
   // Intimidate fires the first time each side is on the field.
   if (firstTurn) {
     applyIntimidate(player, enemy, events, !0)
@@ -874,6 +886,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
             : attack.attacker.attack
           : attack.attacker.spAttack) *
         abilityAttackMultiplier(attack.attacker, effectiveMove) *
+        ruinOffenseMultiplier(attack.defender, moveDef.category) *
         terrainAbilityMultiplier(
           activeTerrain,
           attack.attacker,
@@ -891,6 +904,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           attack.defender,
           moveDef.category === 'physical' ? 'defense' : 'spDefense'
         ) *
+        ruinDefenseMultiplier(attack.attacker, moveDef.category) *
         heldStatMultiplier(
           attack.defender,
           moveDef.category === 'physical' ? 'defense' : 'spDefense',
@@ -1333,5 +1347,6 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
   }
   applyEndOfTurn(player, enemy, events, activeWeather, activeTerrain, deterministic)
   reportFieldEffects(player, enemy, events, activeWeather, activeTerrain, activeHazards, weather, terrain, hazards)
+  restoreGas()
   return events
 }

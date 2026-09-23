@@ -58,6 +58,34 @@ const STATUS_IMMUNE_ABILITIES = /** @type {Record<string, string>} */ ({
   purifyingSalt: 'all',
 })
 
+/**
+ * Ruin ability that weakens the attacker's offence: the defender's Tablets of
+ * Ruin lower physical Attack and Beads of Ruin lower Sp. Atk by 25%.
+ * @param {BattlePokemon} defender
+ * @param {string} category
+ * @returns {number}
+ */
+export function ruinOffenseMultiplier(defender, category) {
+  const ability = abilityOf(defender)
+  if (category === 'physical' && ability === 'tabletsOfRuin') return 0.75
+  if (category === 'special' && ability === 'beadsOfRuin') return 0.75
+  return 1
+}
+
+/**
+ * Ruin ability that weakens the defender's bulk: the attacker's Sword of Ruin
+ * lowers physical Defense and Vessel of Ruin lowers Sp. Def by 25%.
+ * @param {BattlePokemon} attacker
+ * @param {string} category
+ * @returns {number}
+ */
+export function ruinDefenseMultiplier(attacker, category) {
+  const ability = abilityOf(attacker)
+  if (category === 'physical' && ability === 'swordOfRuin') return 0.75
+  if (category === 'special' && ability === 'vesselOfRuin') return 0.75
+  return 1
+}
+
 /** -ate abilities: Normal moves become this type (and hit 20% harder). */
 const ATE_ABILITIES = /** @type {Record<string, string>} */ ({
   pixilate: 'Fairy',

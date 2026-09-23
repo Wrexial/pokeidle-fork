@@ -222,8 +222,9 @@ Armor, Anger Point, Soul-Heart) are in too, along with Berserk / Anger Shell
 (HP-threshold), Moody, Harvest, Ripen, Infiltrator, Unseen Fist and Good as
 Gold, plus the extreme weathers (Desolate Land / Primordial Sea / Delta
 Stream), the type-changers (Protean / Libero / Normalize / Liquid Voice / the
--ate family) and Disguise / Ice Face. `abilityPreventsStatus` also now treats
-badly-poisoned as poison (Immunity / Pastel Veil).
+-ate family) and Disguise / Ice Face, plus the Ruin quartet and Neutralizing
+Gas. `abilityPreventsStatus` also now treats badly-poisoned as poison
+(Immunity / Pastel Veil).
 
 Still open:
 

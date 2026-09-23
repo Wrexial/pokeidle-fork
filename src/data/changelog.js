@@ -22,6 +22,7 @@ export const CHANGELOG = [
             'The extreme weathers are in: Desolate Land sets extremely harsh sunlight that negates Water moves, Primordial Sea sets a heavy downpour that negates Fire moves, and Delta Stream\u2019s strong winds cancel Flying-type weaknesses',
             'Type-changing abilities: Protean and Libero change the user\u2019s type to the move it is about to use, Normalize forces Normal, Liquid Voice makes sound moves Water, and the -ate family (Pixilate, Refrigerate, Aerilate, Galvanize, Dragonize) turns Normal moves into their type with a 20% boost',
             'Disguise and Ice Face absorb the first hit (Ice Face reforms in snow or hail)',
+            'Global stat pressure: the Ruin quartet (Tablets of Ruin weakens physical offence, Beads of Ruin special offence, Sword of Ruin physical defence, Vessel of Ruin special defence) and Neutralizing Gas, which suppresses every other Pokemon\u2019s ability while its holder is on the field',
           ],
         },
       ],

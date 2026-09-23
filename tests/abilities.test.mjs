@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 const data = installGameData()
 
-const { abilityAttackMultiplier, abilityChangesMoveType, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityEffectivenessMultiplier, abilityPreventsStatus, fieldAuraMultiplier, onHitStatBoost } = await import('../src/game/abilities.js')
+const { abilityAttackMultiplier, abilityChangesMoveType, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityEffectivenessMultiplier, abilityPreventsStatus, fieldAuraMultiplier, onHitStatBoost, ruinDefenseMultiplier, ruinOffenseMultiplier } = await import('../src/game/abilities.js')
 const { calculateDamage, resolveBattleTurn } = await import('../src/game/combat.js')
 const { abilityDisplayName, rollAbility } = await import('../src/game/pokemon.js')
 const { moveData } = await import('../src/data/gameData.js')
@@ -660,5 +660,59 @@ test('Ice Face absorbs the first physical hit but not a special one', () => {
     }
     assert.equal(hpAfter('tackle', { attack: 200 }), 400, 'the physical hit is absorbed')
     assert.ok(hpAfter('flamethrower', { spAttack: 200 }) < 400, 'a special hit gets through')
+  })
+})
+
+test('Ruin abilities weaken the right stats', () => {
+  assert.equal(ruinOffenseMultiplier(battler({ ability: 'tabletsOfRuin' }), 'physical'), 0.75)
+  assert.equal(ruinOffenseMultiplier(battler({ ability: 'beadsOfRuin' }), 'special'), 0.75)
+  assert.equal(ruinOffenseMultiplier(battler({ ability: 'beadsOfRuin' }), 'physical'), 1)
+  assert.equal(ruinDefenseMultiplier(battler({ ability: 'swordOfRuin' }), 'physical'), 0.75)
+  assert.equal(ruinDefenseMultiplier(battler({ ability: 'vesselOfRuin' }), 'special'), 0.75)
+  assert.equal(ruinDefenseMultiplier(battler({ ability: 'vesselOfRuin' }), 'physical'), 1)
+})
+
+test('Neutralizing Gas suppresses the other ability', () => {
+  withFixedRandom(0.5, () => {
+    const withoutGas = () => {
+      const player = battler({
+          name: 'Player',
+          isPlayer: true,
+          moves: ['earthquake'],
+          speed: 200,
+          attack: 200,
+        }),
+        enemy = battler({
+          name: 'Foe',
+          moves: ['splash'],
+          ability: 'levitate',
+          currentHp: 400,
+          maxHp: 400,
+          types: ['Normal'],
+        })
+      resolveBattleTurn(player, enemy, false)
+      return enemy.currentHp
+    }
+    assert.equal(withoutGas(), 400, 'Levitate blocks Earthquake')
+
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['earthquake'],
+        speed: 200,
+        attack: 200,
+        ability: 'neutralizingGas',
+      }),
+      enemy = battler({
+        name: 'Foe',
+        moves: ['splash'],
+        ability: 'levitate',
+        currentHp: 400,
+        maxHp: 400,
+        types: ['Normal'],
+      })
+    resolveBattleTurn(player, enemy, false)
+    assert.ok(enemy.currentHp < 400, 'Neutralizing Gas suppresses Levitate')
+    assert.equal(enemy.abilitySuppressed, false, 'the suppression does not persist')
   })
 })

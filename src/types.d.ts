@@ -368,6 +368,8 @@ type GameState = {
   challengeLevelScale: boolean
   /** Challenge: a fainted party Pokemon is released permanently. */
   challengeNuzlocke: boolean
+  /** Challenge: wild encounters are limited to this type (null = off). */
+  challengeMonotype: string | null
   nextPokemonId: number
   money: number
   inventory: Record<string, number>

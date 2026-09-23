@@ -201,7 +201,8 @@ export function useGameLoop() {
                 currentGameState.pokedexSeen,
                 currentGameState.pokedexCaught,
                 completedGenerationSet,
-                dailyShinyBonus
+                dailyShinyBonus,
+                currentGameState.challengeMonotype
               ) ??
               resolvePokemonEncounter(
                 routeEncounterData,
@@ -212,7 +213,8 @@ export function useGameLoop() {
                 currentGameState.challengeRandomizer,
                 currentGameState.challengeLevelScale
                   ? currentGameState.playerPokemon?.level ?? 0
-                  : 0
+                  : 0,
+                currentGameState.challengeMonotype
               ),
             pokemonData = createBattlePokemon(spawningPokemonData.speciesKey, spawningPokemonData.level, {
               isShiny: spawningPokemonData.isShiny,

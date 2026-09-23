@@ -5,7 +5,8 @@ import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
 import { clearSave } from '../data/config.js'
 import { unlockAudio } from '../game/audio.js'
 import { useGame } from '../game/context.js'
-import { repairSave, serializeSave, writeImportedSave } from '../game/save.js'
+import { decodeShareCode, encodeShareCode, repairSave, serializeSave, writeImportedSave } from '../game/save.js'
+import { MonotypeSelect } from './monotype-select.js'
 
 /** @param {{ onClose: () => void }} props */
 export function SettingsModal({ onClose }) {
@@ -13,6 +14,9 @@ export function SettingsModal({ onClose }) {
   const [confirming, setConfirming] = React.useState(!1)
   const [importError, setImportError] = React.useState('')
   const [notifyError, setNotifyError] = React.useState('')
+  const [shareCode, setShareCode] = React.useState('')
+  const [shareInput, setShareInput] = React.useState('')
+  const [shareStatus, setShareStatus] = React.useState('')
   /** @type {React.RefObject<HTMLInputElement>} */
   const fileInputRef = React.useRef(/** @type {any} */ (null))
   function resetSave() {
@@ -62,6 +66,43 @@ export function SettingsModal({ onClose }) {
       window.location.reload()
     }
     reader.readAsText(file)
+  }
+  /** Generate a share code from the current save and try to copy it. */
+  function generateShareCode() {
+    if (!state.playerPokemon) return
+    const code = encodeShareCode(serializeSave(state))
+    setShareCode(code)
+    setShareStatus('')
+    copyText(code)
+  }
+  /** @param {string} text */
+  function copyText(text) {
+    const clipboard = /** @type {any} */ (navigator).clipboard
+    if (!clipboard?.writeText) {
+      setShareStatus('Copy the code from the box below.')
+      return
+    }
+    clipboard.writeText(text).then(
+      () => setShareStatus('Share code copied to the clipboard!'),
+      () => setShareStatus('Copy the code from the box below.')
+    )
+  }
+  /** Load a pasted share code, replacing the current save. */
+  function importShareCode() {
+    const parsed = decodeShareCode(shareInput),
+      repaired = parsed ? repairSave(parsed) : null
+    if (!repaired) {
+      setShareStatus('That share code is not a valid Pokemon Idle save.')
+      return
+    }
+    // Stop the idle loop so an autosave cannot overwrite the import before
+    // the reload finishes.
+    if (!state.paused) dispatch({ type: 'TOGGLE_PAUSE' })
+    if (!writeImportedSave(/** @type {any} */ (parsed))) {
+      setShareStatus('Could not write the save to browser storage.')
+      return
+    }
+    window.location.reload()
   }
   async function toggleBrowserNotifications() {
     if (!state.browserNotifications) {
@@ -214,7 +255,7 @@ export function SettingsModal({ onClose }) {
                       jsx('p', {
                         className: 'settings-hint',
                         children:
-                          'Optional hard-mode rules. Randomizer rolls a random species on every wild encounter; Level Scaling makes wild Pokemon match your active Pokemon\u2019s level so you cannot out-level content; Nuzlocke releases a Pokemon for good when it faints.',
+                          'Optional hard-mode rules. Randomizer rolls a random species on every wild encounter; Level Scaling makes wild Pokemon match your active Pokemon\u2019s level so you cannot out-level content; Nuzlocke releases a Pokemon for good when it faints; Monotype limits wild encounters to a single type.',
                       }),
                       jsx('button', {
                         className: `settings-toggle-btn${state.challengeRandomizer ? ' active' : ''}`,
@@ -234,6 +275,14 @@ export function SettingsModal({ onClose }) {
                         className: `settings-toggle-btn${state.challengeNuzlocke ? ' active' : ''}`,
                         onClick: () => dispatch({ type: 'TOGGLE_CHALLENGE_NUZLOCKE' }),
                         children: state.challengeNuzlocke ? 'Nuzlocke: ON' : 'Nuzlocke: OFF',
+                      }),
+                      jsx(MonotypeSelect, {
+                        value: state.challengeMonotype,
+                        onChange: /** @param {string | null} monotype */ (monotype) =>
+                          dispatch({
+                            type: 'SET_CHALLENGE_MONOTYPE',
+                            payload: { monotype },
+                          }),
                       }),
                     ],
                   }),
@@ -308,6 +357,45 @@ export function SettingsModal({ onClose }) {
                             children: importError,
                           })
                         : null,
+                      jsx('p', {
+                        className: 'settings-hint settings-share-hint',
+                        children:
+                          'Or use a share code: copy the text and paste it into another device to move your progress without a file.',
+                      }),
+                      jsxs('div', {
+                        className: 'settings-share',
+                        children: [
+                          jsx('button', {
+                            className: 'settings-save-btn',
+                            onClick: generateShareCode,
+                            disabled: !state.playerPokemon,
+                            children: '🔗 Copy Share Code',
+                          }),
+                          shareCode
+                            ? jsx('textarea', {
+                                className: 'settings-share-code',
+                                readOnly: true,
+                                value: shareCode,
+                                onFocus: /** @param {React.FocusEvent<HTMLTextAreaElement>} event */ (event) => event.target.select(),
+                              })
+                            : null,
+                          jsx('textarea', {
+                            className: 'settings-share-code',
+                            placeholder: 'Paste a share code here to load it',
+                            value: shareInput,
+                            onChange: /** @param {React.ChangeEvent<HTMLTextAreaElement>} event */ (event) => setShareInput(event.target.value),
+                          }),
+                          jsx('button', {
+                            className: 'settings-save-btn',
+                            onClick: importShareCode,
+                            disabled: !shareInput.trim(),
+                            children: '⬆ Load Share Code',
+                          }),
+                          shareStatus
+                            ? jsx('p', { className: 'settings-share-status', children: shareStatus })
+                            : null,
+                        ],
+                      }),
                     ],
                   }),
                   jsx('button', {

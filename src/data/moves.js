@@ -165,3 +165,6 @@ export const typechart = {
     Steel: 0.5,
   },
 }
+
+/** All 18 elemental types, in type-chart order (used by the monotype selector). */
+export const POKEMON_TYPES = Object.keys(typechart)

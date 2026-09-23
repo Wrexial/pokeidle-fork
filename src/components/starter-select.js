@@ -7,10 +7,12 @@ import { pokemonSpecies, regions } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { calculatePokemonStats, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
 import { checkShinyOdds } from '../game/progression.js'
+import { MonotypeSelect } from './monotype-select.js'
 
 export function StarterSelect() {
   const { dispatch } = useGame()
   const [regionId, setRegionId] = React.useState('kanto'),
+    [monotype, setMonotype] = React.useState(/** @type {string | null} */ (null)),
     regionOrder = React.useMemo(() => [...regions].sort((a, b) => a.order - b.order), []),
     region = regions.find((candidate) => candidate.id === regionId),
     starters = regionalStarters[regionId] ?? regionalStarters.kanto,
@@ -26,6 +28,13 @@ export function StarterSelect() {
       jsx('p', {
         className: 'starter-subtitle',
         children: 'Your choice decides which region your journey begins in.',
+      }),
+      jsx(MonotypeSelect, {
+        value: monotype,
+        onChange: setMonotype,
+        hint: monotype
+          ? `Wild encounters will be limited to ${monotype}-type Pokemon.`
+          : 'Optional: restrict wild encounters to a single type.',
       }),
       jsx('div', {
         className: 'map-region-tabs starter-region-tabs',
@@ -65,6 +74,7 @@ export function StarterSelect() {
                     speciesKey,
                     isShiny: checkShinyOdds(),
                     region: regionId,
+                    monotype,
                   },
                 }),
               children: [

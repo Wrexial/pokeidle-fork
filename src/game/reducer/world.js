@@ -1,6 +1,7 @@
 // Reducer handlers for world actions. Split from game/reducer.js.
 
 import { RAID_LEVEL_MAX, prestigeTokenReward } from '../../data/config.js'
+import { POKEMON_TYPES } from '../../data/moves.js'
 import { elite4Data, gymLeaderData, mapData, regions } from '../../data/gameData.js'
 import { emptyBattleHazards } from '../hazards.js'
 import { createPokemon, isBattleReady } from '../pokemon.js'
@@ -33,6 +34,9 @@ export function selectStarter(state, action) {
     ...state,
     phase: 'idle',
     startRegion: regionId,
+    challengeMonotype: POKEMON_TYPES.includes(action.payload.monotype)
+      ? action.payload.monotype
+      : null,
     playerPokemon: starterPokemon,
     party: [starterPokemon],
     nextPokemonId: state.nextPokemonId + 1,

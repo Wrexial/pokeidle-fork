@@ -1,5 +1,6 @@
 // Reducer handlers for settings actions. Split from game/reducer.js.
 
+import { POKEMON_TYPES } from '../../data/moves.js'
 import { withNotification } from '../reducer-helpers.js'
 
 /**
@@ -206,5 +207,21 @@ export function toggleChallengeNuzlocke(state, action) {
   return {
     ...state,
     challengeNuzlocke: !state.challengeNuzlocke,
+  }
+}
+
+/**
+ * Handle the `SET_CHALLENGE_MONOTYPE` action. The payload's `monotype` is a
+ * type name, or null/anything unrecognised to turn the challenge off.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function setChallengeMonotype(state, action) {
+  const monotype = action.payload?.monotype
+  return {
+    ...state,
+    challengeMonotype:
+      typeof monotype === 'string' && POKEMON_TYPES.includes(monotype) ? monotype : null,
   }
 }

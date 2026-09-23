@@ -9,7 +9,7 @@ import { buyItem, buyRewardItem, clearHeldItem, sellItem, setAlwaysCatchShinies,
 import { claimMinigameReward, collectMining, endBugContest, endMinigame, payMinigameFee, startBugContest, startGameCorner, startMining } from './reducer/minigames.js'
 import { boxToParty, catchPokemon, clearHatchResult, completeEvolution, completeWonderTrade, depositDaycare, evolutionStep, hatchDaycareEgg, partyToBox, releaseDuplicates, releaseHatchling, releasePokemon, reorderBox, reorderParty, setBoxSort, setMoves, setNickname, startEvolution, swapParty, swapPartyBox, toggleFavourite, withdrawDaycare, wonderTrade } from './reducer/pokemon.js'
 import { completeHealing, heal, healParty, healingStep, startHealing } from './reducer/recovery.js'
-import { addLog, clearLevelUp, dismissNotification, pushNotification, setSpeed, toggleAutoProceed, toggleBrowserNotifications, toggleChallengeLevelScale, toggleChallengeNuzlocke, toggleChallengeRandomizer, toggleColourblindTypes, toggleLargeText, toggleMusic, togglePause, toggleReducedMotion, toggleSfx } from './reducer/settings.js'
+import { addLog, clearLevelUp, dismissNotification, pushNotification, setChallengeMonotype, setSpeed, toggleAutoProceed, toggleBrowserNotifications, toggleChallengeLevelScale, toggleChallengeNuzlocke, toggleChallengeRandomizer, toggleColourblindTypes, toggleLargeText, toggleMusic, togglePause, toggleReducedMotion, toggleSfx } from './reducer/settings.js'
 import { loadSave, phaseIdle, prestigeRegion, resetEliteFour, selectStarter, travel, unlockRegion } from './reducer/world.js'
 
 /** @type {GameState} */
@@ -120,6 +120,8 @@ export const initialGameState = {
   challengeLevelScale: !1,
   /** Challenge: a fainted party Pokemon is released permanently. */
   challengeNuzlocke: !1,
+  /** Challenge: wild encounters are limited to this type (null = off). */
+  challengeMonotype: null,
   raidCooldownEnd: null,
   raidLegendary: null,
   raidRegion: null,
@@ -311,6 +313,8 @@ export function gameReducer(state, action) {
       return toggleChallengeLevelScale(state, action)
     case 'TOGGLE_CHALLENGE_NUZLOCKE':
       return toggleChallengeNuzlocke(state, action)
+    case 'SET_CHALLENGE_MONOTYPE':
+      return setChallengeMonotype(state, action)
     case 'START_BUG_CONTEST':
       return startBugContest(state, action)
     case 'END_BUG_CONTEST':

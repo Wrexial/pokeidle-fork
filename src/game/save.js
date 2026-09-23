@@ -9,6 +9,7 @@ import { elite4Data, encounterData, gymLeaderData, mapData, moveData, pokemonSpe
 import { BASE_FRIENDSHIP, generateIVs, calculatePokemonStats, resolvePokemonMoves, rollAbility } from './pokemon.js'
 import { ACHIEVEMENTS } from '../data/achievements.js'
 import { natureByKey, randomNature } from '../data/natures.js'
+import { POKEMON_TYPES } from '../data/moves.js'
 import { initialGameState } from './reducer.js'
 import { computeOfflineReward } from './progression.js'
 
@@ -451,6 +452,9 @@ export function repairSave(saved) {
     challengeRandomizer: !!saved.challengeRandomizer,
     challengeLevelScale: !!saved.challengeLevelScale,
     challengeNuzlocke: !!saved.challengeNuzlocke,
+    challengeMonotype: POKEMON_TYPES.includes(saved.challengeMonotype)
+      ? saved.challengeMonotype
+      : null,
     raidCooldownEnd: saved.raidCooldownEnd ?? null,
     raidLegendary: saved.inRaid ? (saved.raidLegendary ?? null) : null,
     raidRegion: saved.inRaid ? (saved.raidRegion ?? 'kanto') : null,
@@ -575,6 +579,7 @@ export const SAVED_STATE_KEYS = [
   'challengeRandomizer',
   'challengeLevelScale',
   'challengeNuzlocke',
+  'challengeMonotype',
   'raidCooldownEnd',
   'raidLegendary',
   'raidRegion',
@@ -626,5 +631,37 @@ export function writeImportedSave(save) {
     return true
   } catch {
     return false
+  }
+}
+
+/**
+ * Encode a save blob as a URL-safe base64 share code so it can be pasted to
+ * another device. UTF-8 (names, nicknames) is handled explicitly rather than
+ * relying on `btoa`'s Latin-1 input.
+ * @param {Record<string, any>} save
+ * @returns {string}
+ */
+export function encodeShareCode(save) {
+  const bytes = new TextEncoder().encode(JSON.stringify(save))
+  let binary = ''
+  for (const byte of bytes) binary += String.fromCharCode(byte)
+  return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
+}
+
+/**
+ * Decode a share code produced by `encodeShareCode`. Returns null when the
+ * code is missing, malformed or not valid JSON.
+ * @param {string} code
+ * @returns {Record<string, any> | null}
+ */
+export function decodeShareCode(code) {
+  try {
+    const normalized = String(code).replace(/\s+/g, '').replace(/-/g, '+').replace(/_/g, '/'),
+      padded = normalized + '='.repeat((4 - (normalized.length % 4)) % 4),
+      binary = atob(padded),
+      bytes = Uint8Array.from(binary, (char) => char.charCodeAt(0))
+    return JSON.parse(new TextDecoder().decode(bytes))
+  } catch {
+    return null
   }
 }

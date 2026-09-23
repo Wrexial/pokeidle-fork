@@ -1,10 +1,28 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.39.0'
+export const GAME_VERSION = '0.40.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.40.0',
+      subtitle: 'Monotype & Sharing',
+      sections: [
+        {
+          heading: 'Challenges',
+          items: [
+            'New Monotype challenge: limit wild encounters to a single type. Pick it on the starter screen or in Settings \u2014 a route with no on-type Pokemon falls back to its normal table so a run can\u2019t soft-lock, and off-type roamers stay away',
+          ],
+        },
+        {
+          heading: 'Quality of Life',
+          items: [
+            'A new share code moves your save between devices as plain text: copy it from Settings and paste it on another device, no file needed',
+          ],
+        },
+      ],
+    },
     {
       version: '0.39.0',
       subtitle: 'More Abilities',

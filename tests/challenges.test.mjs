@@ -41,6 +41,95 @@ test('level scaling overrides the encounter level', () => {
   assert.equal(scaled.level, 42)
 })
 
+test('SET_CHALLENGE_MONOTYPE accepts a real type and rejects anything else', () => {
+  const water = gameReducer(initialGameState, {
+    type: 'SET_CHALLENGE_MONOTYPE',
+    payload: { monotype: 'Water' },
+  })
+  assert.equal(water.challengeMonotype, 'Water')
+  assert.equal(
+    gameReducer(water, { type: 'SET_CHALLENGE_MONOTYPE', payload: { monotype: 'Nonsense' } })
+      .challengeMonotype,
+    null
+  )
+  assert.equal(
+    gameReducer(water, { type: 'SET_CHALLENGE_MONOTYPE', payload: { monotype: null } })
+      .challengeMonotype,
+    null
+  )
+})
+
+test('starting a run records a valid starter-screen monotype', () => {
+  const started = gameReducer(initialGameState, {
+    type: 'SELECT_STARTER',
+    payload: { region: 'kanto', speciesKey: 'squirtle', monotype: 'Water' },
+  })
+  assert.equal(started.challengeMonotype, 'Water')
+  const invalid = gameReducer(initialGameState, {
+    type: 'SELECT_STARTER',
+    payload: { region: 'kanto', speciesKey: 'squirtle', monotype: 'Bogus' },
+  })
+  assert.equal(invalid.challengeMonotype, null)
+})
+
+test('Monotype confines wild encounters to the chosen type', () => {
+  /** @type {EncounterData} */
+  const data = {
+    name: 'test',
+    encounters: [
+      { speciesKey: 'charmander', weight: 1, minLevel: 5, maxLevel: 5 },
+      { speciesKey: 'squirtle', weight: 1, minLevel: 5, maxLevel: 5 },
+    ],
+  }
+  for (let i = 0; i < 50; i++) {
+    const fire = resolvePokemonEncounter(data, [], new Set(), undefined, 1, false, 0, 'Fire')
+    assert.equal(fire.speciesKey, 'charmander')
+  }
+  assert.equal(
+    resolvePokemonEncounter(data, [], new Set(), undefined, 1, false, 0, 'Water').speciesKey,
+    'squirtle'
+  )
+})
+
+test('Monotype falls back to the full route table when nothing matches', () => {
+  /** @type {EncounterData} */
+  const data = {
+    name: 'test',
+    encounters: [
+      { speciesKey: 'charmander', weight: 1, minLevel: 5, maxLevel: 5 },
+      { speciesKey: 'squirtle', weight: 1, minLevel: 5, maxLevel: 5 },
+    ],
+  }
+  const seen = new Set()
+  for (let i = 0; i < 100; i++)
+    seen.add(
+      resolvePokemonEncounter(data, [], new Set(), undefined, 1, false, 0, 'Grass').speciesKey
+    )
+  assert.ok(seen.has('charmander') && seen.has('squirtle'), 'uses the route\u2019s normal table')
+})
+
+test('Monotype constrains Randomizer rolls too', () => {
+  /** @type {EncounterData} */
+  const data = {
+    name: 'test',
+    encounters: [{ speciesKey: 'charmander', weight: 1, minLevel: 5, maxLevel: 5 }],
+  }
+  for (let i = 0; i < 50; i++) {
+    const encounter = resolvePokemonEncounter(data, [], new Set(), undefined, 1, true, 0, 'Water')
+    assert.ok(pokemonSpecies[encounter.speciesKey].types.includes('Water'))
+  }
+})
+
+test('Monotype falls back to any species when its type has no Randomizer entry', () => {
+  /** @type {EncounterData} */
+  const data = {
+    name: 'test',
+    encounters: [{ speciesKey: 'charmander', weight: 1, minLevel: 5, maxLevel: 5 }],
+  }
+  const encounter = resolvePokemonEncounter(data, [], new Set(), undefined, 1, true, 0, 'Stellar')
+  assert.ok(pokemonSpecies[encounter.speciesKey])
+})
+
 test('repairSave defaults the challenge flags off and keeps them on', () => {
   const save = (/** @type {Record<string, any>} */ overrides) => ({
       version: 2,
@@ -65,4 +154,7 @@ test('repairSave defaults the challenge flags off and keeps them on', () => {
   assert.equal(defaults.challengeLevelScale, false)
   assert.equal(enabled.challengeRandomizer, true)
   assert.equal(enabled.challengeLevelScale, true)
+  assert.equal(defaults.challengeMonotype, null)
+  assert.equal(repairSave(save({ challengeMonotype: 'Fire' })).challengeMonotype, 'Fire')
+  assert.equal(repairSave(save({ challengeMonotype: 'Bogus' })).challengeMonotype, null)
 })

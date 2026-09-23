@@ -60,3 +60,17 @@ test('roamers only roll legendaries', () => {
     Math.random = originalRandom
   }
 })
+
+test('Monotype roamers stay on-type and off-type ones never appear', () => {
+  const originalRandom = Math.random
+  try {
+    Math.random = () => 0
+    const ice = resolveRoamer('kanto', [], [], new Set(), 1, 'Ice')
+    assert.ok(ice, 'Kanto has an Ice legendary to roam')
+    assert.ok(pokemonSpecies[ice.speciesKey].types.includes('Ice'))
+    // No Kanto legendary is Fairy, so none may roam while Fairy is chosen.
+    assert.equal(resolveRoamer('kanto', [], [], new Set(), 1, 'Fairy'), null)
+  } finally {
+    Math.random = originalRandom
+  }
+})

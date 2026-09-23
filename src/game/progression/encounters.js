@@ -4,6 +4,17 @@ import { roamerEncounterChance, shinyCharmMinOddsChance, shinyFullOddsChance, sh
 import { GENERATION_DEX_RANGES, isSpeciesCharmed, pokemonSpecies, regions } from '../../data/gameData.js'
 
 /**
+ * Whether a species carries `type` (e.g. "Water"). Used by the Monotype
+ * challenge to keep wild encounters on-type.
+ * @param {string} speciesKey
+ * @param {string} type
+ * @returns {boolean}
+ */
+function speciesHasType(speciesKey, type) {
+  return !!pokemonSpecies[speciesKey]?.types?.includes(type)
+}
+
+/**
  * @param {GameState} state
  * @param {string} routeKey
  * @param {string} speciesKey
@@ -160,12 +171,16 @@ export function pickRaidLegendary(pool, pokedexSeen, pokedexCaught) {
  * @param {string[]} pokedexCaught
  * @param {Set<number>} completedGenerationSet
  * @param {number} [shinyBonus] Multiplier on shiny odds from a daily event.
+ * @param {string | null} [monotype] Monotype challenge: only this type may appear.
  * @returns {{ species: Species, speciesKey: string, level: number, isShiny: boolean, isRoamer: boolean } | null}
  */
-export function resolveRoamer(regionId, pokedexSeen, pokedexCaught, completedGenerationSet, shinyBonus = 1) {
+export function resolveRoamer(regionId, pokedexSeen, pokedexCaught, completedGenerationSet, shinyBonus = 1, monotype = null) {
   const region = regions.find((candidate) => candidate.id === regionId),
     candidates = (region?.raidPool ?? []).filter(
-      (entry) => pokemonSpecies[entry.speciesKey]?.legendary && !pokedexCaught.includes(entry.speciesKey)
+      (entry) =>
+        pokemonSpecies[entry.speciesKey]?.legendary &&
+        !pokedexCaught.includes(entry.speciesKey) &&
+        (!monotype || speciesHasType(entry.speciesKey, monotype))
     )
   if (candidates.length === 0 || Math.random() >= roamerEncounterChance) return null
   const entry = pickRaidLegendary(candidates, pokedexSeen, pokedexCaught)
@@ -196,11 +211,15 @@ const RANDOMIZER_SPECIES = Object.keys(pokemonSpecies).filter((key) => {
  * @param {Set<number>} completedGenerationSet
  * @param {number} shinyBonus
  * @param {number} levelOverride
+ * @param {string | null} [monotype] Monotype challenge: only this type may appear.
  */
-function resolveRandomEncounter(encounterData, completedGenerationSet, shinyBonus, levelOverride) {
-  const speciesKey =
-      RANDOMIZER_SPECIES[Math.floor(Math.random() * RANDOMIZER_SPECIES.length)] ??
-      encounterData.encounters[0].speciesKey,
+function resolveRandomEncounter(encounterData, completedGenerationSet, shinyBonus, levelOverride, monotype = null) {
+  const monotypePool = monotype
+      ? RANDOMIZER_SPECIES.filter((speciesKey) => speciesHasType(speciesKey, monotype))
+      : RANDOMIZER_SPECIES,
+    pool = monotypePool.length > 0 ? monotypePool : RANDOMIZER_SPECIES,
+    speciesKey =
+      pool[Math.floor(Math.random() * pool.length)] ?? encounterData.encounters[0].speciesKey,
     minLevel = Math.min(...encounterData.encounters.map((encounter) => encounter.minLevel)),
     maxLevel = Math.max(...encounterData.encounters.map((encounter) => encounter.maxLevel)),
     level = levelOverride || minLevel + Math.floor(Math.random() * (maxLevel - minLevel + 1))
@@ -222,19 +241,26 @@ function resolveRandomEncounter(encounterData, completedGenerationSet, shinyBonu
  * @param {number} [shinyBonus] Multiplier on shiny odds from a daily event.
  * @param {boolean} [randomize] Randomizer challenge: pick any species.
  * @param {number} [levelOverride] Level-scaling challenge: force this level.
+ * @param {string | null} [monotype] Monotype challenge: only this type may appear.
  * @returns {{ species: Species, speciesKey: string, level: number, isShiny: boolean, isRoamer?: boolean }}
  */
-export function resolvePokemonEncounter(encounterData, modifiers, completedGenerationSet, shinyChain, shinyBonus = 1, randomize = !1, levelOverride = 0) {
+export function resolvePokemonEncounter(encounterData, modifiers, completedGenerationSet, shinyChain, shinyBonus = 1, randomize = !1, levelOverride = 0, monotype = null) {
   if (randomize)
-    return resolveRandomEncounter(encounterData, completedGenerationSet, shinyBonus, levelOverride)
+    return resolveRandomEncounter(encounterData, completedGenerationSet, shinyBonus, levelOverride, monotype)
   const weightedEncounters = applyEncounterModifiers(
       encounterData.encounters,
       modifiers,
       shinyChain
     ),
-    totalWeight = weightedEncounters.reduce((accumulator, encounter) => accumulator + encounter.weight, 0)
+    // Monotype challenge: only roll species that carry the chosen type. If a
+    // route has none, fall back to its full table so a run can't soft-lock.
+    monotypePool = monotype
+      ? weightedEncounters.filter((encounter) => speciesHasType(encounter.speciesKey, monotype))
+      : weightedEncounters,
+    pool = monotypePool.length > 0 ? monotypePool : weightedEncounters,
+    totalWeight = pool.reduce((accumulator, encounter) => accumulator + encounter.weight, 0)
   let roll = Math.random() * totalWeight
-  for (const encounter of weightedEncounters)
+  for (const encounter of pool)
     if (((roll -= encounter.weight), roll <= 0)) {
       const level =
         levelOverride ||
@@ -255,7 +281,7 @@ export function resolvePokemonEncounter(encounterData, modifiers, completedGener
         ),
       }
     }
-  const fallback = weightedEncounters[weightedEncounters.length - 1]
+  const fallback = pool[pool.length - 1]
   return {
     species: pokemonSpecies[fallback.speciesKey],
     speciesKey: fallback.speciesKey,

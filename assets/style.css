@@ -6470,6 +6470,84 @@ img {
     margin-top: 6px
 }
 
+.monotype-select {
+    margin-top: 8px
+}
+
+.monotype-select label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 9px;
+    font-weight: 700;
+    color: #3a2818
+}
+
+.monotype-select select {
+    flex: 1;
+    min-width: 0;
+    font-family: inherit;
+    font-size: 9px;
+    padding: 6px 8px;
+    background: var(--parchment);
+    color: #3a2818;
+    border: 2px solid #483828;
+    border-radius: 0;
+    cursor: pointer
+}
+
+.monotype-hint {
+    margin: 6px 0 0;
+    font-size: 8px;
+    line-height: 1.4;
+    color: #5a4838
+}
+
+.starter-select .monotype-select {
+    width: 100%;
+    max-width: 360px;
+    margin-top: 0
+}
+
+.starter-select .monotype-select label,
+.starter-select .monotype-hint {
+    color: var(--text-muted)
+}
+
+.settings-share-hint {
+    margin-top: 12px
+}
+
+.settings-share {
+    display: flex;
+    flex-direction: column;
+    gap: 8px
+}
+
+.settings-share-code {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 54px;
+    resize: vertical;
+    font-family: monospace;
+    font-size: 8px;
+    line-height: 1.4;
+    word-break: break-all;
+    padding: 6px;
+    background: var(--parchment);
+    color: #3a2818;
+    border: 2px solid #483828;
+    border-radius: 0
+}
+
+.settings-share-status {
+    margin: 0;
+    font-size: 9px;
+    font-weight: 700;
+    color: #2e7d32;
+    line-height: 1.4
+}
+
 .settings-save-error {
     margin: 8px 0 0;
     font-size: 9px;

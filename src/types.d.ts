@@ -208,6 +208,16 @@ type VolatileState = {
   cursed?: boolean
   /** Remaining turns of Reflect / Light Screen (0 when down). */
   screens?: { reflect: number, lightScreen: number }
+  /** Focus Energy is active (adds 2 critical-hit stages). */
+  focusEnergy?: boolean
+  /** Aqua Ring heals this Pokemon each end of turn. */
+  aquaRing?: boolean
+  /** Turns until Yawn puts this Pokemon to sleep (0 when not drowsy). */
+  yawnTurns?: number
+  /** Turns until a pending Wish heals the user's side (0 when none). */
+  wishTurns?: number
+  /** How much HP that pending Wish restores. */
+  wishHeal?: number
 }
 
 type GameAction = { type: string; payload?: any; [key: string]: any }

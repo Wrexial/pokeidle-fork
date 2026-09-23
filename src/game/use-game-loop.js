@@ -290,6 +290,11 @@ export function useGameLoop() {
               infatuated: playerVolatile.infatuated ?? !1,
               cursed: playerVolatile.cursed ?? !1,
               screens: playerVolatile.screens ?? { reflect: 0, lightScreen: 0 },
+              focusEnergy: playerVolatile.focusEnergy ?? !1,
+              aquaRing: playerVolatile.aquaRing ?? !1,
+              yawnTurns: playerVolatile.yawnTurns ?? 0,
+              wishTurns: playerVolatile.wishTurns ?? 0,
+              wishHeal: playerVolatile.wishHeal ?? 0,
             },
             enemyBattlePokemon = {
               ...currentGameState.enemyPokemon,

@@ -1,10 +1,22 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.38.6'
+export const GAME_VERSION = '0.38.7'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.38.7',
+      subtitle: 'More Status Moves',
+      sections: [
+        {
+          heading: 'Battle',
+          items: [
+            'Six more status moves now do something: Focus Energy (two extra critical-hit stages for the rest of the battle), Aqua Ring (heals the holder each turn), Wish (heals half the user\u2019s HP at the end of the next turn), Yawn (puts the target to sleep at the end of the next turn), Topsy-Turvy (reverses the target\u2019s stat changes) and Pain Split (averages both HP bars)',
+          ],
+        },
+      ],
+    },
     {
       version: '0.38.6',
       subtitle: 'Weather & Terrain',

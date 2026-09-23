@@ -89,6 +89,17 @@ const MOVE_OVERRIDES = {
   haze: { effect: { type: 'statReset', target: 'all' } },
   clearSmog: { effect: { type: 'statReset', target: 'opponent' }, accuracy: 100 },
   ivyCudgel: { accuracy: 100 },
+  // Focus Energy raises the user's critical-hit stage for the rest of the
+  // battle, and Aqua Ring heals each end of turn.
+  focusEnergy: { effect: { type: 'focusEnergy', target: 'self' } },
+  aquaRing: { effect: { type: 'aquaRing', target: 'self' } },
+  // Wish heals the user's side at the end of the next turn; Yawn puts the
+  // target to sleep at the end of the next turn.
+  wish: { effect: { type: 'wish', target: 'self' } },
+  yawn: { effect: { type: 'yawn' } },
+  // Topsy-Turvy flips the target's stat stages; Pain Split averages both HP bars.
+  topsyTurvy: { effect: { type: 'statInvert' } },
+  painSplit: { effect: { type: 'painSplit' } },
   // --- Entry hazards ---
   stealthRock: { effect: { type: 'hazard', hazard: 'stealthRock' } },
   spikes: { effect: { type: 'hazard', hazard: 'spikes' } },

@@ -30,6 +30,11 @@ export function updateVolatile(state, action) {
         infatuated: enemyVolatile.infatuated ?? !1,
         cursed: enemyVolatile.cursed ?? !1,
         screens: enemyVolatile.screens ?? { reflect: 0, lightScreen: 0 },
+        focusEnergy: enemyVolatile.focusEnergy ?? !1,
+        aquaRing: enemyVolatile.aquaRing ?? !1,
+        yawnTurns: enemyVolatile.yawnTurns ?? 0,
+        wishTurns: enemyVolatile.wishTurns ?? 0,
+        wishHeal: enemyVolatile.wishHeal ?? 0,
       }),
     {
       ...state,

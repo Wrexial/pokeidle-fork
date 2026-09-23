@@ -341,6 +341,94 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           resetStatStages(attack.defender, events, !attack.isPlayer)
         } else resetStatStages(attack.defender, events, !attack.isPlayer)
       }
+      else if (moveDef.effect?.type === 'focusEnergy') {
+        if (!attack.attacker.focusEnergy) {
+          attack.attacker.focusEnergy = !0
+          events.push({
+            type: 'statChange',
+            message: `${attack.attacker.name} is getting pumped!`,
+            data: { target: attack.isPlayer ? 'player' : 'enemy' },
+          })
+        }
+      }
+      else if (moveDef.effect?.type === 'aquaRing') {
+        if (!attack.attacker.aquaRing) {
+          attack.attacker.aquaRing = !0
+          events.push({
+            type: 'status',
+            message: `${attack.attacker.name} surrounded itself with a veil of water!`,
+            data: { target: attack.isPlayer ? 'player' : 'enemy' },
+          })
+        }
+      }
+      else if (moveDef.effect?.type === 'wish') {
+        attack.attacker.wishTurns = 2
+        attack.attacker.wishHeal = Math.max(1, Math.floor(attack.attacker.maxHp / 2))
+        events.push({
+          type: 'status',
+          message: `${attack.attacker.name} made a wish!`,
+          data: { target: attack.isPlayer ? 'player' : 'enemy' },
+        })
+      }
+      else if (moveDef.effect?.type === 'yawn') {
+        if ((attack.defender.yawnTurns ?? 0) <= 0 && !attack.defender.status) {
+          attack.defender.yawnTurns = 2
+          events.push({
+            type: 'status',
+            message: `${attack.defender.name} grew drowsy!`,
+            data: { target: attack.isPlayer ? 'enemy' : 'player' },
+          })
+        }
+      }
+      else if (moveDef.effect?.type === 'statInvert') {
+        const stages = attack.defender.statStages
+        if (stages && Object.values(stages).some((value) => value !== 0)) {
+          for (const key of Object.keys(stages)) stages[key] = clampStatStage(-stages[key])
+          events.push({
+            type: 'statChange',
+            message: `${attack.defender.name}'s stat changes were reversed!`,
+            data: { target: attack.isPlayer ? 'enemy' : 'player' },
+          })
+        }
+      }
+      else if (moveDef.effect?.type === 'painSplit') {
+        const each = Math.max(
+            1,
+            Math.floor((attack.attacker.currentHp + attack.defender.currentHp) / 2)
+          ),
+          attackerHp = Math.min(attack.attacker.maxHp, each),
+          defenderHp = Math.min(attack.defender.maxHp, each),
+          attackerDelta = attackerHp - attack.attacker.currentHp,
+          defenderDelta = defenderHp - attack.defender.currentHp
+        events.push({
+          type: 'status',
+          message: 'The battlers shared their pain!',
+        })
+        if (attackerDelta !== 0)
+          events.push({
+            type: attackerDelta > 0 ? 'heal' : 'damage',
+            message: `${attack.attacker.name}${attackerDelta > 0 ? ' recovered HP' : ' lost HP'}!`,
+            data: {
+              target: attack.isPlayer ? 'player' : 'enemy',
+              damage: Math.abs(attackerDelta),
+              hpAfter: attackerHp,
+              hpMax: attack.attacker.maxHp,
+            },
+          })
+        if (defenderDelta !== 0)
+          events.push({
+            type: defenderDelta > 0 ? 'heal' : 'damage',
+            message: `${attack.defender.name}${defenderDelta > 0 ? ' recovered HP' : ' lost HP'}!`,
+            data: {
+              target: attack.isPlayer ? 'enemy' : 'player',
+              damage: Math.abs(defenderDelta),
+              hpAfter: defenderHp,
+              hpMax: attack.defender.maxHp,
+            },
+          })
+        attack.attacker.currentHp = attackerHp
+        attack.defender.currentHp = defenderHp
+      }
       else if (moveDef.effect?.type === 'hazard') {
         const targetSide = /** @type {any} */ (
             attack.isPlayer ? activeHazards.enemy : activeHazards.player
@@ -445,7 +533,9 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         attack.defender.types,
         attackerStage,
         defenderStage,
-        (moveDef.critStage ?? 0) + (abilityOf(attack.attacker) === 'superLuck' ? 1 : 0),
+        (moveDef.critStage ?? 0) +
+          (abilityOf(attack.attacker) === 'superLuck' ? 1 : 0) +
+          (attack.attacker.focusEnergy ? 2 : 0),
         !1,
         accuracyStage,
         evasionStage,
@@ -507,7 +597,9 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           attack.defender.types,
           attackerStage,
           defenderStage,
-          (moveDef.critStage ?? 0) + (abilityOf(attack.attacker) === 'superLuck' ? 1 : 0),
+          (moveDef.critStage ?? 0) +
+            (abilityOf(attack.attacker) === 'superLuck' ? 1 : 0) +
+            (attack.attacker.focusEnergy ? 2 : 0),
           !0,
           accuracyStage,
           evasionStage,

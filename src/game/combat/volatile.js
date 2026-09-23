@@ -28,6 +28,11 @@ export function createVolatileState() {
     infatuated: !1,
     cursed: !1,
     screens: { reflect: 0, lightScreen: 0 },
+    focusEnergy: !1,
+    aquaRing: !1,
+    yawnTurns: 0,
+    wishTurns: 0,
+    wishHeal: 0,
   }
 }
 
@@ -54,6 +59,11 @@ export function volatileStateFromBattle(pokemon) {
     infatuated: pokemon.infatuated ?? !1,
     cursed: pokemon.cursed ?? !1,
     screens: pokemon.screens ?? { reflect: 0, lightScreen: 0 },
+    focusEnergy: pokemon.focusEnergy ?? !1,
+    aquaRing: pokemon.aquaRing ?? !1,
+    yawnTurns: pokemon.yawnTurns ?? 0,
+    wishTurns: pokemon.wishTurns ?? 0,
+    wishHeal: pokemon.wishHeal ?? 0,
   }
 }
 

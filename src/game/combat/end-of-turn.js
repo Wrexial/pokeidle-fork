@@ -8,6 +8,7 @@ import { heldBerryHeal, heldLeftoversHeal } from '../held-items.js'
 import { TERRAIN_NAMES, terrainHeal } from '../terrain.js'
 import { WEATHER_NAMES, weatherAbilityHeal, weatherResidualDamage } from '../weather.js'
 import { chance } from './damage.js'
+import { applyStatus } from './status.js'
 import { clampStatStage } from './volatile.js'
 
 /**
@@ -243,6 +244,50 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
           hpMax: pokemon.maxHp,
         },
       })
+    }
+    // Aqua Ring heals its holder a little each turn.
+    if (pokemon.aquaRing && pokemon.currentHp < pokemon.maxHp) {
+      const aquaHeal = Math.max(1, Math.floor(pokemon.maxHp / 16))
+      pokemon.currentHp = Math.min(pokemon.maxHp, pokemon.currentHp + aquaHeal)
+      events.push({
+        type: 'heal',
+        message: `${pokemon.name} absorbed water from its Aqua Ring! (+${aquaHeal} HP)`,
+        data: {
+          target: isPlayerSide ? 'player' : 'enemy',
+          hpAfter: pokemon.currentHp,
+          hpMax: pokemon.maxHp,
+        },
+      })
+    }
+    // A pending Wish heals its side once its timer runs out.
+    if ((pokemon.wishTurns ?? 0) > 0) {
+      pokemon.wishTurns -= 1
+      if (pokemon.wishTurns <= 0) {
+        pokemon.wishTurns = 0
+        const wishHeal = pokemon.wishHeal || Math.max(1, Math.floor(pokemon.maxHp / 2))
+        if (pokemon.currentHp > 0 && pokemon.currentHp < pokemon.maxHp) {
+          pokemon.currentHp = Math.min(pokemon.maxHp, pokemon.currentHp + wishHeal)
+          events.push({
+            type: 'heal',
+            message: `${pokemon.name}'s wish came true!`,
+            data: {
+              target: isPlayerSide ? 'player' : 'enemy',
+              hpAfter: pokemon.currentHp,
+              hpMax: pokemon.maxHp,
+            },
+          })
+        }
+        pokemon.wishHeal = 0
+      }
+    }
+    // Yawn puts its target to sleep once its timer runs out.
+    if ((pokemon.yawnTurns ?? 0) > 0) {
+      pokemon.yawnTurns -= 1
+      if (pokemon.yawnTurns <= 0) {
+        pokemon.yawnTurns = 0
+        if (pokemon.currentHp > 0 && !pokemon.status)
+          applyStatus(pokemon, 'sleep', events, isPlayerSide, deterministic, activeTerrain)
+      }
     }
   }
 }

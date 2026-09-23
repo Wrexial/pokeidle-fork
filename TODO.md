@@ -1,6 +1,6 @@
 # TODO
 
-Open ideas and follow-ups. Current game version: **0.38.10**
+Open ideas and follow-ups. Current game version: **0.38.11**
 (`src/data/changelog.js`). Finished work lives in the changelog, not here — this
 file only tracks what is **still open**. See `AGENTS.md` for architecture,
 commands and data conventions.
@@ -165,7 +165,7 @@ Healing, multi-hit, crit stages, Protect, statuses, screens, entry hazards,
 Taunt/Substitute, weather setters, Haze/Clear Smog, Weather Ball / weather
 accuracy and the terrain synergy abilities have all shipped.
 
-**Shipped (0.38.7–0.38.10):** Focus Energy (adds 2 crit stages for the battle),
+**Shipped (0.38.7–0.38.11):** Focus Energy (adds 2 crit stages for the battle),
 Aqua Ring / Ingrain (heal each turn), Wish (heals half the user's HP at the end
 of the next turn), Yawn (sleeps the target at the end of the next turn),
 Topsy-Turvy (reverses the target's stat changes), Pain Split (averages both HP
@@ -173,16 +173,19 @@ bars), Safeguard (blocks opponent status), Mist (blocks stat drops), Encore
 (locks the target into its last move), Disable (blocks the target's last move),
 Perish Song (both sides faint after three turns), Tailwind (doubles the side's
 Speed), Trick Room (reverses the speed order), Destiny Bond (takes the attacker
-down), Laser Focus (next hit crits), Lock-On / Mind Reader (next hit lands) and
-the side heals Life Dew / Jungle Healing / Lunar Blessing. These are `effect`
-branches (Encore/Disable hook move selection; Tailwind/Trick Room/Laser Focus/
-Lock-On feed turn order and accuracy) backed by new volatile fields.
+down), Laser Focus (next hit crits), Lock-On / Mind Reader (next hit lands),
+the side heals Life Dew / Jungle Healing / Lunar Blessing, and the ability
+moves Gastro Acid / Worry Seed / Simple Beam / Role Play / Entrainment /
+Skill Swap. These are `effect` branches (Encore/Disable hook move selection;
+Tailwind/Trick Room/Laser Focus/Lock-On feed turn order and accuracy) backed by
+new volatile fields, with `abilityOf` honouring the new ability override /
+suppression.
 
 Still open:
 
-- [ ] Ability/type/item-swapping utility (Skill Swap, Role Play, Entrainment,
-      Gastro Acid, Worry Seed, Reflect Type, Soak, Power/Guard/Speed Swap,
-      Power/Guard Split, Heart Swap, Trick/Switcheroo, Recycle, Heal Block).
+- [ ] Type-changing utility (Soak, Magic Powder, Reflect Type, Forest's Curse,
+      Trick-or-Treat) and stat/item swaps (Power/Guard/Speed Swap, Heart Swap,
+      Trick/Switcheroo, Recycle, Bestow, Heal Block).
 - [ ] Move-calling moves (Metronome, Copycat, Mirror Move, Sleep Talk, Assist,
       Me First, Nature Power).
 - [ ] The remaining doubles-only moves (After You, Ally Switch, Follow Me,

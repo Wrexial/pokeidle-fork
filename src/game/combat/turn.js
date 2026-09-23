@@ -578,6 +578,55 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           data: { target: attack.isPlayer ? 'player' : 'enemy' },
         })
       }
+      else if (moveDef.effect?.type === 'gastroAcid') {
+        attack.defender.abilitySuppressed = !0
+        attack.defender.abilityOverride = null
+        events.push({
+          type: 'status',
+          message: `${attack.defender.name}'s ability was suppressed!`,
+          data: { target: attack.isPlayer ? 'enemy' : 'player' },
+        })
+      }
+      else if (moveDef.effect?.type === 'worrySeed' || moveDef.effect?.type === 'simpleBeam') {
+        attack.defender.abilitySuppressed = !1
+        attack.defender.abilityOverride =
+          moveDef.effect.type === 'worrySeed' ? 'insomnia' : 'simple'
+        events.push({
+          type: 'status',
+          message: `${attack.defender.name}'s ability changed!`,
+          data: { target: attack.isPlayer ? 'enemy' : 'player' },
+        })
+      }
+      else if (moveDef.effect?.type === 'rolePlay') {
+        attack.attacker.abilitySuppressed = !1
+        attack.attacker.abilityOverride = abilityOf(attack.defender)
+        events.push({
+          type: 'status',
+          message: `${attack.attacker.name} copied ${attack.defender.name}'s ability!`,
+          data: { target: attack.isPlayer ? 'player' : 'enemy' },
+        })
+      }
+      else if (moveDef.effect?.type === 'entrainment') {
+        attack.defender.abilitySuppressed = !1
+        attack.defender.abilityOverride = abilityOf(attack.attacker)
+        events.push({
+          type: 'status',
+          message: `${attack.defender.name} was made to share ${attack.attacker.name}'s ability!`,
+          data: { target: attack.isPlayer ? 'enemy' : 'player' },
+        })
+      }
+      else if (moveDef.effect?.type === 'skillSwap') {
+        const attackerAbility = abilityOf(attack.attacker),
+          defenderAbility = abilityOf(attack.defender)
+        attack.attacker.abilitySuppressed = !1
+        attack.defender.abilitySuppressed = !1
+        attack.attacker.abilityOverride = defenderAbility
+        attack.defender.abilityOverride = attackerAbility
+        events.push({
+          type: 'status',
+          message: `${attack.attacker.name} and ${attack.defender.name} swapped abilities!`,
+        })
+      }
       else if (moveDef.effect?.type === 'hazard') {
         const targetSide = /** @type {any} */ (
             attack.isPlayer ? activeHazards.enemy : activeHazards.player

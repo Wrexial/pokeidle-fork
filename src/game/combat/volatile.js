@@ -47,6 +47,8 @@ export function createVolatileState() {
     ingrained: !1,
     laserFocus: !1,
     lockOnTurns: 0,
+    abilityOverride: null,
+    abilitySuppressed: !1,
   }
 }
 
@@ -92,6 +94,8 @@ export function volatileStateFromBattle(pokemon) {
     ingrained: pokemon.ingrained ?? !1,
     laserFocus: pokemon.laserFocus ?? !1,
     lockOnTurns: pokemon.lockOnTurns ?? 0,
+    abilityOverride: pokemon.abilityOverride ?? null,
+    abilitySuppressed: pokemon.abilitySuppressed ?? !1,
   }
 }
 

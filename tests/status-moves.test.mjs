@@ -7,6 +7,7 @@ installGameData()
 
 const { resolveBattleTurn } = await import('../src/game/combat.js')
 const { moveData } = await import('../src/data/gameData.js')
+const { abilityOf } = await import('../src/game/abilities.js')
 
 /**
  * @param {Record<string, any>} [overrides]
@@ -78,6 +79,12 @@ test('the new utility moves carry their effects', () => {
   assert.equal(moveData.mindReader.effect.type, 'lockOn')
   assert.equal(moveData.lifeDew.effect.type, 'heal')
   assert.equal(moveData.lunarBlessing.effect.statusCure, true)
+  assert.equal(moveData.gastroAcid.effect.type, 'gastroAcid')
+  assert.equal(moveData.worrySeed.effect.type, 'worrySeed')
+  assert.equal(moveData.simpleBeam.effect.type, 'simpleBeam')
+  assert.equal(moveData.rolePlay.effect.type, 'rolePlay')
+  assert.equal(moveData.entrainment.effect.type, 'entrainment')
+  assert.equal(moveData.skillSwap.effect.type, 'skillSwap')
 })
 
 test('Focus Energy raises the user critical-hit stage', () => {
@@ -371,4 +378,53 @@ test('Jungle Healing heals and cures status', () => {
   turn(player, enemy)
   assert.equal(player.currentHp, 200)
   assert.equal(player.status, null)
+})
+
+test('Gastro Acid suppresses the target ability', () => {
+  const player = battler({ name: 'Player', isPlayer: true, moves: ['gastroAcid'], speed: 200 }),
+    enemy = battler({ name: 'Foe', moves: ['splash'], ability: 'intimidate' })
+  turn(player, enemy)
+  assert.equal(enemy.abilitySuppressed, true)
+  assert.equal(abilityOf(enemy), null)
+})
+
+test('Skill Swap trades abilities', () => {
+  const player = battler({
+      name: 'Player',
+      isPlayer: true,
+      moves: ['skillSwap'],
+      speed: 200,
+      ability: 'drizzle',
+    }),
+    enemy = battler({ name: 'Foe', moves: ['splash'], ability: 'intimidate' })
+  turn(player, enemy)
+  assert.equal(abilityOf(player), 'intimidate')
+  assert.equal(abilityOf(enemy), 'drizzle')
+})
+
+test('Role Play copies the target ability', () => {
+  const player = battler({ name: 'Player', isPlayer: true, moves: ['rolePlay'], speed: 200 }),
+    enemy = battler({ name: 'Foe', moves: ['splash'], ability: 'intimidate' })
+  turn(player, enemy)
+  assert.equal(abilityOf(player), 'intimidate')
+})
+
+test('Entrainment shares the user ability', () => {
+  const player = battler({
+      name: 'Player',
+      isPlayer: true,
+      moves: ['entrainment'],
+      speed: 200,
+      ability: 'drizzle',
+    }),
+    enemy = battler({ name: 'Foe', moves: ['splash'], ability: 'intimidate' })
+  turn(player, enemy)
+  assert.equal(abilityOf(enemy), 'drizzle')
+})
+
+test('Worry Seed replaces the target ability', () => {
+  const player = battler({ name: 'Player', isPlayer: true, moves: ['worrySeed'], speed: 200 }),
+    enemy = battler({ name: 'Foe', moves: ['splash'], ability: 'intimidate' })
+  turn(player, enemy)
+  assert.equal(abilityOf(enemy), 'insomnia')
 })

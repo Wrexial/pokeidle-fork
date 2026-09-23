@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.38.10'
+export const GAME_VERSION = '0.38.11'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.38.11',
+      subtitle: 'Ability Swaps',
+      sections: [
+        {
+          heading: 'Battle',
+          items: [
+            'Gastro Acid now suppresses the target\u2019s ability, while Worry Seed and Simple Beam replace it, Role Play copies the foe\u2019s, Entrainment shares the user\u2019s and Skill Swap trades them',
+            'Ability-dependent effects (weather/terrain abilities, stat boosts) now respect a suppressed or swapped ability',
+          ],
+        },
+      ],
+    },
     {
       version: '0.38.10',
       subtitle: 'Focus & Recovery',

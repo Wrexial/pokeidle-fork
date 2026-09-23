@@ -7,7 +7,11 @@
 
 /** @param {BattlePokemon} pokemon */
 export function abilityOf(pokemon) {
-  return pokemon?.ability ?? null
+  if (!pokemon) return null
+  // Gastro Acid suppresses the ability; Skill Swap / Role Play / Entrainment /
+  // Worry Seed / Simple Beam replace it.
+  if (pokemon.abilitySuppressed) return null
+  return pokemon.abilityOverride ?? pokemon.ability ?? null
 }
 
 /** Abilities whose holder is immune to Ground moves. */

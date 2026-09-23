@@ -49,6 +49,8 @@ export function updateVolatile(state, action) {
         ingrained: enemyVolatile.ingrained ?? !1,
         laserFocus: enemyVolatile.laserFocus ?? !1,
         lockOnTurns: enemyVolatile.lockOnTurns ?? 0,
+        abilityOverride: enemyVolatile.abilityOverride ?? null,
+        abilitySuppressed: enemyVolatile.abilitySuppressed ?? !1,
       }),
     {
       ...state,

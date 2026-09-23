@@ -2,6 +2,7 @@
 // type and turns, is passed into `resolveBattleTurn`, and comes back as a
 // `terrain` event the reducer stores. Pure helpers here; src/game/combat.js
 // applies them.
+import { abilityOf } from './abilities.js'
 import { isGrounded } from './hazards.js'
 
 /** How many turns a terrain lasts. */
@@ -93,7 +94,7 @@ export function terrainPreventsPriority(terrain, target) {
  */
 export function terrainAbilityMultiplier(terrain, pokemon, statKey) {
   if (!terrain) return 1
-  const ability = pokemon.ability
+  const ability = abilityOf(pokemon)
   if (terrain.type === 'grassy' && ability === 'grassPelt' && statKey === 'defense') return 1.5
   if (terrain.type === 'electric' && ability === 'hadronEngine' && statKey === 'spAttack') return 1.33
   if (

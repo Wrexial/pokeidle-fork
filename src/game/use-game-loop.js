@@ -309,6 +309,8 @@ export function useGameLoop() {
               ingrained: playerVolatile.ingrained ?? !1,
               laserFocus: playerVolatile.laserFocus ?? !1,
               lockOnTurns: playerVolatile.lockOnTurns ?? 0,
+              abilityOverride: playerVolatile.abilityOverride ?? null,
+              abilitySuppressed: playerVolatile.abilitySuppressed ?? !1,
             },
             enemyBattlePokemon = {
               ...currentGameState.enemyPokemon,

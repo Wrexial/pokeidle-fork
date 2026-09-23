@@ -3,6 +3,8 @@
 // out as a `weather` event the reducer stores. Pure helpers here; the battle
 // engine (src/game/combat.js) applies them.
 
+import { abilityOf } from './abilities.js'
+
 /** How many turns a weather effect lasts when set by a move. */
 export const WEATHER_TURNS = 5
 
@@ -83,7 +85,7 @@ export function weatherDamageMultiplier(weather, moveDef) {
  */
 export function weatherSpeedMultiplier(weather, pokemon) {
   if (!weather) return 1
-  const ability = pokemon.ability
+  const ability = abilityOf(pokemon)
   if (weather.type === 'rain' && ability === 'swiftSwim') return 2
   if (weather.type === 'sun' && ability === 'chlorophyll') return 2
   if (weather.type === 'sandstorm' && ability === 'sandRush') return 2
@@ -119,7 +121,7 @@ export function weatherResidualDamage(weather, pokemon) {
  */
 export function weatherAbilityHeal(weather, pokemon) {
   if (!weather) return 0
-  const ability = pokemon.ability
+  const ability = abilityOf(pokemon)
   if (weather.type === 'rain' && ability === 'rainDish') return Math.max(1, Math.floor(pokemon.maxHp / 16))
   if (weather.type === 'rain' && ability === 'drySkin') return Math.max(1, Math.floor(pokemon.maxHp / 8))
   if (weather.type === 'sun' && ability === 'drySkin') return -Math.max(1, Math.floor(pokemon.maxHp / 8))

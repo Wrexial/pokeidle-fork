@@ -246,6 +246,10 @@ type VolatileState = {
   laserFocus?: boolean
   /** The next damaging move cannot miss (Lock-On / Mind Reader). */
   lockOnTurns?: number
+  /** Ability replaced by Skill Swap / Role Play / Entrainment / Worry Seed. */
+  abilityOverride?: string | null
+  /** Gastro Acid has suppressed this Pokemon's ability. */
+  abilitySuppressed?: boolean
 }
 
 type GameAction = { type: string; payload?: any; [key: string]: any }

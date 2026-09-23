@@ -124,6 +124,14 @@ const MOVE_OVERRIDES = {
   lifeDew: { effect: { type: 'heal', percentage: 25 } },
   jungleHealing: { effect: { type: 'heal', percentage: 25, statusCure: true } },
   lunarBlessing: { effect: { type: 'heal', percentage: 25, statusCure: true } },
+  // Ability manipulation: Gastro Acid suppresses, Worry Seed / Simple Beam
+  // replace, Role Play copies the foe's, Entrainment shares, Skill Swap trades.
+  gastroAcid: { effect: { type: 'gastroAcid' }, accuracy: 100 },
+  worrySeed: { effect: { type: 'worrySeed' }, accuracy: 100 },
+  simpleBeam: { effect: { type: 'simpleBeam' }, accuracy: 100 },
+  rolePlay: { effect: { type: 'rolePlay', target: 'self' } },
+  entrainment: { effect: { type: 'entrainment' }, accuracy: 100 },
+  skillSwap: { effect: { type: 'skillSwap' } },
   // --- Entry hazards ---
   stealthRock: { effect: { type: 'hazard', hazard: 'stealthRock' } },
   spikes: { effect: { type: 'hazard', hazard: 'spikes' } },

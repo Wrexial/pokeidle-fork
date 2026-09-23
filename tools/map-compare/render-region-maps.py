@@ -24,7 +24,7 @@ REGIONS = ["kanto", "johto", "hoenn", "sinnoh", "unova", "kalos", "alola", "gala
 PAPER = (246, 241, 227)
 INK = (40, 34, 26)
 ROAD = (176, 164, 142)
-NODE_COLORS = {"town": (44, 96, 176), "route": (56, 148, 66), "raid": (150, 62, 178)}
+NODE_COLORS = {"town": (44, 96, 176), "route": (56, 148, 66), "zone": (58, 120, 200), "raid": (150, 62, 178)}
 
 CANVAS = 900
 MARGIN = 46
@@ -55,6 +55,7 @@ def project(position):
 
 
 def draw_ours(region, locations):
+    locations = {k: v for k, v in locations.items() if not v.get("hidden")}
     image = Image.new("RGB", (CANVAS, CANVAS), PAPER)
     draw = ImageDraw.Draw(image)
 
@@ -78,7 +79,7 @@ def draw_ours(region, locations):
     for location in locations.values():
         x, y = project(location["position"])
         color = NODE_COLORS.get(location["type"], (110, 110, 110))
-        radius = 10 if location["type"] == "town" else 8
+        radius = 11 if location["type"] == "zone" else 10 if location["type"] == "town" else 8
         draw.ellipse([x - radius, y - radius, x + radius, y + radius], fill=color, outline=INK)
         label = location["name"]
         draw.text((x + radius + 3, y - 7), label, fill=INK, font=FONT,

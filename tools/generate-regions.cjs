@@ -2395,6 +2395,42 @@ for (const location of visibleLocations) {
   }
 }
 
+// Added zone hubs and injected wild areas are placed at hand-picked or
+// centroid coordinates that can land on top of a measured town/route. Settle
+// only those nodes: a spring pulls each toward its visible neighbours' centre
+// (so roads stay local) and a repulsion pushes it clear of every other node.
+const addedAreaIds = new Set()
+for (const [regionId, areas] of Object.entries(POST_AREAS))
+  for (const area of areas) addedAreaIds.add(locId(regionId, area.node))
+const MOVABLE_MIN_DISTANCE = 8,
+  clampPosition = (value) => Math.max(2, Math.min(98, value))
+for (let iteration = 0; iteration < 120; iteration++) {
+  for (const location of visibleLocations) {
+    if (location.type !== 'zone' && !addedAreaIds.has(location.id)) continue
+    const neighbours = location.connections
+      .map((id) => mapData[id])
+      .filter((other) => other && !other.hidden && other !== location)
+    if (neighbours.length) {
+      const averageX = neighbours.reduce((sum, other) => sum + other.position.x, 0) / neighbours.length,
+        averageY = neighbours.reduce((sum, other) => sum + other.position.y, 0) / neighbours.length
+      location.position.x += (averageX - location.position.x) * 0.1
+      location.position.y += (averageY - location.position.y) * 0.1
+    }
+    for (const other of visibleLocations) {
+      if (other === location) continue
+      const dx = location.position.x - other.position.x,
+        dy = location.position.y - other.position.y,
+        distance = Math.hypot(dx, dy) || 0.001
+      if (distance >= MOVABLE_MIN_DISTANCE) continue
+      const push = (MOVABLE_MIN_DISTANCE - distance) * 0.5
+      location.position.x += (dx / distance) * push
+      location.position.y += (dy / distance) * push
+    }
+    location.position.x = clampPosition(location.position.x)
+    location.position.y = clampPosition(location.position.y)
+  }
+}
+
 // Region entry points unlock when the player spends an Unlock Token earned by
 // beating a region's Champion (see the Pokedex/Town Map). A starting region is
 // open immediately.

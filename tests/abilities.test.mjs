@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 const data = installGameData()
 
-const { abilityAttackMultiplier, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityEffectivenessMultiplier, abilityPreventsStatus } = await import('../src/game/abilities.js')
+const { abilityAttackMultiplier, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityEffectivenessMultiplier, abilityPreventsStatus, fieldAuraMultiplier, onHitStatBoost } = await import('../src/game/abilities.js')
 const { calculateDamage, resolveBattleTurn } = await import('../src/game/combat.js')
 const { abilityDisplayName, rollAbility } = await import('../src/game/pokemon.js')
 const { moveData } = await import('../src/data/gameData.js')
@@ -448,4 +448,63 @@ test('Moxie and Beast Boost reward a KO', () => {
   }
   assert.equal(stagesAfterKo('moxie').attack, 1)
   assert.equal(stagesAfterKo('beastBoost').attack, 1, 'Beast Boost raises the highest stat')
+})
+
+test('field auras boost Dark and Fairy moves', () => {
+  assert.equal(fieldAuraMultiplier(battler({ ability: 'darkAura' }), battler({}), moveData.crunch), 1.33)
+  assert.equal(
+    fieldAuraMultiplier(battler({}), battler({ ability: 'fairyAura' }), moveData.moonblast),
+    1.33
+  )
+  assert.equal(fieldAuraMultiplier(battler({ ability: 'darkAura' }), battler({}), moveData.tackle), 1)
+  assert.equal(
+    fieldAuraMultiplier(battler({ ability: 'darkAura' }), battler({ ability: 'auraBreak' }), moveData.crunch),
+    0.75
+  )
+})
+
+test('on-hit abilities grant stat boosts', () => {
+  assert.deepEqual(onHitStatBoost(battler({ ability: 'justified' }), moveData.crunch), { attack: 1 })
+  assert.deepEqual(onHitStatBoost(battler({ ability: 'steamEngine' }), moveData.waterGun), { speed: 6 })
+  assert.deepEqual(onHitStatBoost(battler({ ability: 'waterCompaction' }), moveData.waterGun), {
+    defense: 2,
+  })
+  assert.deepEqual(onHitStatBoost(battler({ ability: 'weakArmor' }), moveData.tackle), {
+    speed: 2,
+    defense: -1,
+  })
+  assert.deepEqual(onHitStatBoost(battler({ ability: 'angerPoint' }), moveData.tackle, true), {
+    attack: 6,
+  })
+  assert.equal(onHitStatBoost(battler({ ability: 'justified' }), moveData.tackle), null)
+})
+
+test('Trace copies the opponent ability on entry', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['splash'],
+        speed: 200,
+        ability: 'trace',
+      }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], ability: 'intimidate' })
+    resolveBattleTurn(player, enemy, false, !0)
+    assert.equal(player.abilityOverride, 'intimidate')
+  })
+})
+
+test('Soul-Heart boosts Sp. Atk after a KO', () => {
+  const player = battler({
+      name: 'Player',
+      isPlayer: true,
+      moves: ['tackle'],
+      speed: 200,
+      attack: 400,
+      ability: 'soulHeart',
+      statStages: {},
+    }),
+    enemy = battler({ name: 'Foe', moves: ['splash'], currentHp: 1, maxHp: 100 })
+  resolveBattleTurn(player, enemy, false)
+  assert.equal(player.statStages.spAttack, 1)
 })

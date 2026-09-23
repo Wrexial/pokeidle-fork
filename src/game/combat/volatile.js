@@ -213,6 +213,18 @@ export function applyEntryAbility(source, target, events, sourceIsPlayer) {
   else if (ability === 'dauntlessShield') raise('defense', 'Defense')
   else if (ability === 'download')
     raise(target.defense <= target.spDefense ? 'attack' : 'spAttack', target.defense <= target.spDefense ? 'Attack' : 'Sp. Atk')
+  else if (ability === 'trace') {
+    const copied = abilityOf(target)
+    if (copied && copied !== 'trace') {
+      source.abilityOverride = copied
+      source.abilitySuppressed = !1
+      events.push({
+        type: 'status',
+        message: `${source.name} traced ${target.name}'s ${copied}!`,
+        data: { target: sourceIsPlayer ? 'player' : 'enemy' },
+      })
+    }
+  }
 }
 
 /**

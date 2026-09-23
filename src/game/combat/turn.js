@@ -1,7 +1,7 @@
 // Turn resolution: move selection, attack order and damage application. Split from game/combat.js.
 
 import { moveData, moveLearnsets } from '../../data/gameData.js'
-import { abilityAbsorbsType, abilityAttackMultiplier, abilityBlocksNonSuperEffective, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityEffectivenessMultiplier, abilityHalvesSuperEffective, abilityHealsFromType, abilityOf, abilityPreventsStatDrop, abilitySurvivesAtFullHp } from '../abilities.js'
+import { abilityAbsorbsType, abilityAttackMultiplier, abilityBlocksNonSuperEffective, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityEffectivenessMultiplier, abilityHalvesSuperEffective, abilityHealsFromType, abilityOf, abilityPreventsStatDrop, abilitySurvivesAtFullHp, fieldAuraMultiplier, onHitStatBoost } from '../abilities.js'
 import { chooseMoveForBattle, chooseRandomMove } from './ai.js'
 import { calculateDamage, chance, isSelfTargetedMove, normalizeStatKey } from './damage.js'
 import { applyEndOfTurn, reportFieldEffects } from './end-of-turn.js'
@@ -973,6 +973,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         abilityDamageTakenMultiplier(attack.defender, effectiveMove) *
         heldDamageMultiplier(attack.attacker, effectiveMove) *
         weatherDamageMultiplier(activeWeather, effectiveMove) *
+        fieldAuraMultiplier(player, enemy, effectiveMove) *
         terrainDamageMultiplier(activeTerrain, attack.attacker, effectiveMove, attack.defender)
     )
     if (abilityHalvesSuperEffective(attack.defender) && damageResult.effectiveness > 1)
@@ -1195,6 +1196,23 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       deterministic,
       activeTerrain
     )
+    // The defender's ability may reward it for being hit (Justified, Weak
+    // Armor, ...).
+    const onHit = onHitStatBoost(attack.defender, effectiveMove, anyCrit)
+    if (onHit) {
+      attack.defender.statStages || (attack.defender.statStages = {})
+      for (const [stat, delta] of Object.entries(onHit)) {
+        const current = attack.defender.statStages[stat] ?? 0,
+          next = clampStatStage(current + delta)
+        if (next === current) continue
+        attack.defender.statStages[stat] = next
+        events.push({
+          type: 'statChange',
+          message: `${attack.defender.name}'s ${getStatLabel(stat)} ${delta > 0 ? 'rose' : 'fell'}!`,
+          data: { target: attack.isPlayer ? 'enemy' : 'player' },
+        })
+      }
+    }
     if (attack.defender.currentHp <= 0) {
       events.push({
         type: 'faint',
@@ -1219,7 +1237,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       let koStat =
         koAbility === 'moxie' || koAbility === 'chillingNeigh'
           ? 'attack'
-          : koAbility === 'grimNeigh'
+          : koAbility === 'grimNeigh' || koAbility === 'soulHeart'
             ? 'spAttack'
             : null
       if (koAbility === 'beastBoost') {

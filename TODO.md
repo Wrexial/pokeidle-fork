@@ -216,8 +216,10 @@ contact (Gooey / Tangling Hair, Stamina, Mummy), absorb (Earth Eater), recovery
 (Poison Heal, Bad Dreams, Hydration) and speed (Quick Feet, Unburden, Surge
 Surfer, Protosynthesis, Quark Drive). Stat-shaping additions: Contrary, Simple,
 Defiant, Competitive, Unaware and the KO boosts (Moxie, Chilling/Grim Neigh,
-Beast Boost). `abilityPreventsStatus` also now treats badly-poisoned as poison
-(Immunity / Pastel Veil).
+Beast Boost). Field auras (Dark/Fairy Aura, Aura Break), Trace, and the on-hit
+boosters (Justified, Steam Engine, Thermal Exchange, Water Compaction, Weak
+Armor, Anger Point, Soul-Heart) are in too. `abilityPreventsStatus` also now
+treats badly-poisoned as poison (Immunity / Pastel Veil).
 
 Still open:
 

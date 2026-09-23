@@ -59,6 +59,47 @@ const STATUS_IMMUNE_ABILITIES = /** @type {Record<string, string>} */ ({
 })
 
 /**
+ * Field-wide aura multiplier from any active Pokemon: Dark Aura / Fairy Aura
+ * boost their type by 1.33x, and Aura Break flips them into a 0.75x drop.
+ * @param {BattlePokemon} player
+ * @param {BattlePokemon} enemy
+ * @param {Move} moveDef
+ * @returns {number}
+ */
+export function fieldAuraMultiplier(player, enemy, moveDef) {
+  if (!moveDef) return 1
+  const dark = moveDef.type === 'Dark',
+    fairy = moveDef.type === 'Fairy'
+  if (!dark && !fairy) return 1
+  const abilities = [abilityOf(player), abilityOf(enemy)]
+  if (abilities.includes('auraBreak')) return 0.75
+  if (dark && abilities.includes('darkAura')) return 1.33
+  if (fairy && abilities.includes('fairyAura')) return 1.33
+  return 1
+}
+
+/**
+ * Stat-stage changes a defender's ability grants when it is hit (Justified,
+ * Steam Engine, Thermal Exchange, Water Compaction, Weak Armor, Anger Point).
+ * @param {BattlePokemon} defender
+ * @param {Move} moveDef
+ * @param {boolean} isCrit
+ * @returns {Record<string, number> | null}
+ */
+export function onHitStatBoost(defender, moveDef, isCrit = false) {
+  const ability = abilityOf(defender)
+  if (!ability || !moveDef) return null
+  if (ability === 'angerPoint' && isCrit) return { attack: 6 }
+  if (ability === 'justified' && moveDef.type === 'Dark') return { attack: 1 }
+  if (ability === 'thermalExchange' && moveDef.type === 'Fire') return { attack: 1 }
+  if (ability === 'waterCompaction' && moveDef.type === 'Water') return { defense: 2 }
+  if (ability === 'steamEngine' && (moveDef.type === 'Water' || moveDef.type === 'Fire'))
+    return { speed: 6 }
+  if (ability === 'weakArmor' && moveDef.category === 'physical') return { speed: 2, defense: -1 }
+  return null
+}
+
+/**
  * Whether an ability makes the holder immune to a move of this type (Ground
  * immunity or a type-absorbing ability).
  * @param {BattlePokemon} defender

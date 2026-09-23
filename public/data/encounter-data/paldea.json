@@ -1704,12 +1704,6 @@
     "maxLevel": 70
    },
    {
-    "speciesKey": "copperajah",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "revavroom",
     "weight": 1,
     "minLevel": 70,

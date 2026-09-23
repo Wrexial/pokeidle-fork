@@ -25,7 +25,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
     frontierLockedLocations = (() => {
       const unlockedSet = new Set(unlockedNow)
       const candidates = Object.values(mapData).filter((candidateLocation) => {
-        if (unlockedSet.has(candidateLocation.id)) return false
+        if (unlockedSet.has(candidateLocation.id) || candidateLocation.hidden) return false
         const unlockRule = candidateLocation.unlock
         return (
           unlockRule.battlesAtLocation !== void 0 ||
@@ -289,6 +289,68 @@ export function LocationPanel({ onOpenCatchSettings }) {
       }),
     })
   }
+  if (location.type === 'zone') {
+    const activeSubArea = state.currentRoute,
+      subAreas = location.subAreas ?? [],
+      activeEncounters = encounterData[activeSubArea]
+    return jsx('div', {
+      className: 'location-panel-scroll',
+      children: jsxs('div', {
+        className: 'location-info zone-location-panel',
+        children: [
+          jsxs('div', {
+            className: 'location-header',
+            children: [
+              jsx('span', {
+                className: 'location-type-icon',
+                children: '🗺️',
+              }),
+              jsxs('div', {
+                children: [
+                  jsx('div', {
+                    className: 'location-name',
+                    children: location.name,
+                  }),
+                  jsx('div', {
+                    className: 'location-type-label',
+                    children: 'Zone',
+                  }),
+                ],
+              }),
+            ],
+          }),
+          jsx('p', {
+            className: 'location-description',
+            children: location.description,
+          }),
+          jsx('div', {
+            className: 'location-section-title',
+            children: 'Areas',
+          }),
+          jsx('div', {
+            className: 'zone-area-list',
+            children: subAreas.map(/** @param {any} subArea */ (subArea) =>
+              jsx(
+                'button',
+                {
+                  className: `zone-area-btn${subArea.id === activeSubArea ? ' active' : ''}`,
+                  onClick: () => travelToTarget(subArea.id),
+                  children: subArea.name,
+                },
+                subArea.id
+              )
+            ),
+          }),
+          activeEncounters &&
+            jsx(RouteEncounterGrid, {
+              routeKey: activeSubArea,
+              encounters: activeEncounters.encounters,
+              onOpenCatchSettings: onOpenCatchSettings ?? (() => {}),
+            }),
+        ],
+      }),
+    })
+  }
   return jsx('div', {
     className: 'location-panel-scroll',
     children: jsxs('div', {
@@ -299,7 +361,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
           children: [
             jsx('span', {
               className: 'location-type-icon',
-              children: location.type === 'town' ? '🏠' : '🌿',
+              children: location.type === 'town' ? '🏠' : location.hidden ? '🗺️' : '🌿',
             }),
             jsxs('div', {
               children: [
@@ -309,7 +371,12 @@ export function LocationPanel({ onOpenCatchSettings }) {
                 }),
                 jsx('div', {
                   className: 'location-type-label',
-                  children: location.type === 'town' ? 'Town' : 'Route',
+                  children:
+                    location.type === 'town'
+                      ? 'Town'
+                      : location.hidden
+                        ? (mapData[location.zone]?.name ?? 'Zone')
+                        : 'Route',
                 }),
               ],
             }),
@@ -319,6 +386,13 @@ export function LocationPanel({ onOpenCatchSettings }) {
           className: 'location-description',
           children: location.description,
         }),
+        location.hidden &&
+          location.zone &&
+          jsx('button', {
+            className: 'zone-back-btn',
+            onClick: () => travelToTarget(location.zone),
+            children: `← ${mapData[location.zone]?.name ?? 'Zone'}`,
+          }),
         location.type === 'town' &&
           jsxs(Fragment, {
             children: [

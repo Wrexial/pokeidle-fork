@@ -288,6 +288,16 @@ Data conventions:
   progress key** (`region generation * 100000 + route rank`), used only for
   ordering. It is computed, not counted, so adding a zone never renumbers its
   neighbours — or, importantly, any other region.
+- **Zones** (`ZONES` in `generate-regions.cjs`) group several route-like
+  sub-areas behind one map node. The hub is `type: 'zone'` with a `subAreas`
+  list and a `routeKey` pointing at its first sub-area; each sub-area is a real
+  route with its own `routeKey`/encounter bucket, but `hidden: true`,
+  `zone: <hubId>` and `unlock: { requires: [hubId] }`, so it never renders on
+  the Town Map and unlocks with the hub. Picking a sub-area from the hub panel
+  travels to it (the existing `TRAVEL`/encounter plumbing carries it) and its
+  panel shows a back button; the idle loop skips wild spawns at the hub itself.
+  Galar's Wild Area is the first one, and the species it adds count as native
+  wilds, so they drop out of the Raid Islands.
 - Some regions' scraped force-directed layout doesn't match the real map, so
   `REGION_MAP_LAYOUTS` in `generate-regions.cjs` overrides it with
   hand-measured coordinates from a labelled reference map. Every region except
@@ -569,7 +579,9 @@ One-off scripts used to build the data JSON (not run during dev/build):
   real region maps. `fetch-refs.cjs` downloads Bulbapedia references (gitignored
   `refs/`); `render-region-maps.py` (uses Pillow from `.venv`) draws each
   region's locations/roads from `public/data/map-data/` and writes side-by-side
-  composites to gitignored `out/`. Not part of the build.
+  composites to gitignored `out/`; `overlay-region-maps.py` draws the game's
+  nodes on top of the reference so the hand-measured `REGION_MAP_LAYOUTS`
+  coordinates can be checked and nudged. Not part of the build.
 - `generate-encounter-index.cjs` + `encounter-index-template.html` — build
   `public/encounter-index.html`, a self-contained, offline "what spawns where"
   page (region → location → species with types, level range and encounter

@@ -193,14 +193,7 @@
      "locationId": "galar-route-3",
      "count": 19
     }
-   ],
-   "caughtOnRoute": {
-    "routeKey": "galar-route-3",
-    "species": [
-     "rolycoly"
-    ],
-    "count": 1
-   }
+   ]
   },
   "unlockOrder": 800004,
   "position": {
@@ -255,7 +248,8 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "galar-hulbury",
-   "galar-turffield"
+   "galar-turffield",
+   "galar-wild-area"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -270,8 +264,8 @@
   },
   "unlockOrder": 800005,
   "position": {
-   "x": 47.64,
-   "y": 59.35
+   "x": 47.50929476632803,
+   "y": 59.424767824346254
   }
  },
  "galar-hulbury": {
@@ -293,13 +287,12 @@
    "caughtOnRoute": {
     "routeKey": "galar-route-5",
     "species": [
-     "dottler",
-     "applin"
+     "dottler"
     ],
-    "count": 2
+    "count": 1
    }
   },
-  "unlockOrder": 800005.5,
+  "unlockOrder": 800005.5001,
   "position": {
    "x": 54.98,
    "y": 58.67
@@ -328,7 +321,8 @@
   "connections": [
    "galar-hammerlocke",
    "galar-stow-on-side",
-   "galar-motostoke"
+   "galar-motostoke",
+   "galar-wild-area"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -417,11 +411,10 @@
    "caughtOnRoute": {
     "routeKey": "galar-route-6",
     "species": [
-     "silicobra",
      "drednaw",
      "maractus"
     ],
-    "count": 3
+    "count": 2
    }
   },
   "unlockOrder": 800006.5002,
@@ -614,8 +607,8 @@
     "routeKey": "galar-route-9",
     "species": [
      "bergmite",
-     "clobbopus",
-     "cramorant"
+     "cramorant",
+     "toxapex"
     ],
     "count": 3
    }
@@ -826,6 +819,121 @@
   "position": {
    "x": 61,
    "y": 33
+  }
+ },
+ "galar-wild-area-rolling-fields": {
+  "id": "galar-wild-area-rolling-fields",
+  "name": "Rolling Fields",
+  "type": "route",
+  "region": "galar",
+  "description": "A sub-area of the Wild Area.",
+  "routeKey": "galar-wild-area-rolling-fields",
+  "background": "/backgrounds/grassland.png",
+  "connections": [
+   "galar-wild-area"
+  ],
+  "hidden": true,
+  "zone": "galar-wild-area",
+  "unlock": {
+   "requires": [
+    "galar-wild-area"
+   ]
+  },
+  "unlockOrder": 800005.5002,
+  "position": {
+   "x": 52,
+   "y": 61
+  }
+ },
+ "galar-wild-area-dappled-grove": {
+  "id": "galar-wild-area-dappled-grove",
+  "name": "Dappled Grove",
+  "type": "route",
+  "region": "galar",
+  "description": "A sub-area of the Wild Area.",
+  "routeKey": "galar-wild-area-dappled-grove",
+  "background": "/backgrounds/grassland.png",
+  "connections": [
+   "galar-wild-area"
+  ],
+  "hidden": true,
+  "zone": "galar-wild-area",
+  "unlock": {
+   "requires": [
+    "galar-wild-area"
+   ]
+  },
+  "unlockOrder": 800005.501,
+  "position": {
+   "x": 47,
+   "y": 56
+  }
+ },
+ "galar-wild-area-giants-mirror": {
+  "id": "galar-wild-area-giants-mirror",
+  "name": "Giant's Mirror",
+  "type": "route",
+  "region": "galar",
+  "description": "A sub-area of the Wild Area.",
+  "routeKey": "galar-wild-area-giants-mirror",
+  "background": "/backgrounds/grassland.png",
+  "connections": [
+   "galar-wild-area"
+  ],
+  "hidden": true,
+  "zone": "galar-wild-area",
+  "unlock": {
+   "requires": [
+    "galar-wild-area"
+   ]
+  },
+  "unlockOrder": 800005.502,
+  "position": {
+   "x": 53,
+   "y": 55
+  }
+ },
+ "galar-wild-area": {
+  "id": "galar-wild-area",
+  "name": "Wild Area",
+  "type": "zone",
+  "region": "galar",
+  "description": "The Wild Area is a wide-open stretch with several distinct habitats.",
+  "routeKey": "galar-wild-area-rolling-fields",
+  "background": "/backgrounds/grassland.png",
+  "connections": [
+   "galar-route-5",
+   "galar-route-6",
+   "galar-wild-area-rolling-fields",
+   "galar-wild-area-dappled-grove",
+   "galar-wild-area-giants-mirror"
+  ],
+  "subAreas": [
+   {
+    "id": "galar-wild-area-rolling-fields",
+    "name": "Rolling Fields"
+   },
+   {
+    "id": "galar-wild-area-dappled-grove",
+    "name": "Dappled Grove"
+   },
+   {
+    "id": "galar-wild-area-giants-mirror",
+    "name": "Giant's Mirror"
+   }
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-route-5",
+     "count": 3
+    }
+   ]
+  },
+  "unlockOrder": 800005.4,
+  "position": {
+   "x": 50.13070523367197,
+   "y": 57.92523217565375
   }
  }
 }

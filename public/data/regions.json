@@ -650,14 +650,6 @@
   "leagueLocationKey": "galar-league",
   "raidPool": [
    {
-    "speciesKey": "hatterene",
-    "level": 70
-   },
-   {
-    "speciesKey": "grimmsnarl",
-    "level": 70
-   },
-   {
     "speciesKey": "obstagoon",
     "level": 70
    },
@@ -1066,10 +1058,6 @@
    },
    {
     "speciesKey": "sableye",
-    "level": 70
-   },
-   {
-    "speciesKey": "copperajah",
     "level": 70
    },
    {

@@ -3291,6 +3291,49 @@ img {
     margin-bottom: 4px
 }
 
+.zone-area-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 6px
+}
+
+.zone-area-btn {
+    padding: 4px 8px;
+    font: inherit;
+    font-size: 8px;
+    color: var(--parchment);
+    background: #00000026;
+    border: 2px solid #483828;
+    cursor: pointer
+}
+
+.zone-area-btn.active {
+    color: var(--gold);
+    border-color: var(--gold)
+}
+
+.zone-area-btn:hover {
+    border-color: var(--gold)
+}
+
+.zone-back-btn {
+    align-self: flex-start;
+    margin: 4px 0 6px;
+    padding: 3px 8px;
+    font: inherit;
+    font-size: 8px;
+    color: var(--parchment);
+    background: #00000026;
+    border: 2px solid #483828;
+    cursor: pointer
+}
+
+.zone-back-btn:hover {
+    color: var(--gold);
+    border-color: var(--gold)
+}
+
 .location-encounters {
     display: flex;
     flex-direction: column;

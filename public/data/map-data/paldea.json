@@ -719,14 +719,7 @@
      "locationId": "paldea-south-province-area-six",
      "count": 18
     }
-   ],
-   "caughtOnRoute": {
-    "routeKey": "paldea-south-province-area-six",
-    "species": [
-     "sinistea"
-    ],
-    "count": 1
-   }
+   ]
   },
   "unlockOrder": 910005,
   "position": {

@@ -991,21 +991,168 @@
    }
   ]
  },
+ "galar-wild-area-rolling-fields": {
+  "name": "Rolling Fields",
+  "encounters": [
+   {
+    "speciesKey": "wooloo",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "rookidee",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "skwovet",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "nickit",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "gossifleur",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "yamper",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "blipbug",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "chewtle",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   }
+  ]
+ },
+ "galar-wild-area-dappled-grove": {
+  "name": "Dappled Grove",
+  "encounters": [
+   {
+    "speciesKey": "gossifleur",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "blipbug",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "applin",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "silicobra",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "toxel",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "snom",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "milcery",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "rolycoly",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   }
+  ]
+ },
+ "galar-wild-area-giants-mirror": {
+  "name": "Giant's Mirror",
+  "encounters": [
+   {
+    "speciesKey": "hatenna",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "impidimp",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "sinistea",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "falinks",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "clobbopus",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "pincurchin",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "stonjourner",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "cufant",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   }
+  ]
+ },
  "galar-raid": {
   "name": "Galar Raid Island",
   "encounters": [
-   {
-    "speciesKey": "hatterene",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "grimmsnarl",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
    {
     "speciesKey": "obstagoon",
     "weight": 1,

@@ -1,10 +1,22 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.36.1'
+export const GAME_VERSION = '0.37.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.37.0',
+      subtitle: 'The Wild Area',
+      sections: [
+        {
+          heading: 'Regions',
+          items: [
+            "Galar's Wild Area is now a proper zone: a single map node that opens a picker for Rolling Fields, Dappled Grove and Giant's Mirror, each with its own wild Pokemon table \u2014 and the Galar Pokemon those areas add no longer need to come from a Raid Island",
+          ],
+        },
+      ],
+    },
     {
       version: '0.36.1',
       subtitle: 'Save Reliability',

@@ -1,6 +1,6 @@
 # TODO
 
-Open ideas and follow-ups. Current game version: **0.36.1**
+Open ideas and follow-ups. Current game version: **0.37.0**
 (`src/data/changelog.js`). Finished work lives in the changelog, not here — this
 file only tracks what is **still open**. See `AGENTS.md` for architecture,
 commands and data conventions.
@@ -352,6 +352,11 @@ carries the Wild Area links), `tools/scrape-route-encounters.cjs`,
 `public/data/map-data/galar.json` and `public/data/encounter-data/galar.json`,
 and `raidPoolFor` in `src/data/gameData.js`.
 
+**Partial (0.37.0):** the Wild Area is now a zone (#36) with three sub-areas,
+which added several Galar Pokemon as native wilds and shrank Galar's (and
+Paldea's) `raidPool`. Still missing: Slumbering Weald, Galar Mine, Glimwood
+Tangle and the Isle of Armor / Crown Tundra DLC (see #39).
+
 Effort: **medium** (mostly data; the Wild Area zone work depends on #36).
 
 ## 36. Zones — route-like chunks of areas
@@ -402,6 +407,14 @@ and the `map-data/` / `encounter-data/` region files.
 Good first candidate: **Galar's Wild Area** (one zone, many sub-areas) together
 with #35, then **Alola** (islands as zones) and **Paldea** (provinces as zones)
 to replace the proximity stitching / 15-species trim.
+
+**Partial (0.37.0):** the model shipped. Galar's Wild Area is one
+`type: 'zone'` node (`ZONES` in `generate-regions.cjs`) whose panel lists three
+sub-areas (Rolling Fields, Dappled Grove, Giant's Mirror); each is a hidden
+route with its own encounter bucket and a back button, reusing `TRAVEL` and the
+unlock fixpoint with no new state or action. Still open: more sub-areas, a
+distinct zone glyph on the map, inline per-sub-area encounter grids, and
+Alola/Paldea zones.
 
 Effort: **medium–large** (a small data-model change plus map/encounter UI, but
 it unblocks the three regions that don't fit the route graph today).

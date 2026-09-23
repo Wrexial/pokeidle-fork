@@ -163,6 +163,9 @@ export function useGameLoop() {
                 })))
             return
           }
+          // A zone hub is a picker, not a wild route; the player travels to a
+          // sub-area to battle (see `location-panel.js`).
+          if (currentLocationData?.type === 'zone') return
           const currentEncounterData =
             encounterData[currentGameState.currentRoute]
           if (!currentEncounterData) return

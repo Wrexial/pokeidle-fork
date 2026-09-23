@@ -83,6 +83,7 @@ export function TownMap() {
       /** @type {Record<string, string[]>} */
       const map = {}
       for (const id of mapAreas) {
+        if (mapData[id].hidden) continue
         const region = mapData[id].region ?? 'kanto'
         ;(map[region] || (map[region] = [])).push(id)
       }
@@ -291,7 +292,10 @@ export function TownMap() {
     const query = searchQuery.trim().toLowerCase()
     if (!query) return []
     return unlockedLocations
-      .filter((locationId) => mapData[locationId]?.name.toLowerCase().includes(query))
+      .filter(
+        (locationId) =>
+          !mapData[locationId]?.hidden && mapData[locationId]?.name.toLowerCase().includes(query)
+      )
       .sort((left, right) => mapData[left].name.localeCompare(mapData[right].name))
       .slice(0, 8)
   }, [searchQuery, unlockedLocations])

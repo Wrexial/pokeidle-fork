@@ -1618,6 +1618,101 @@ if (realEncounters.kanto) {
   console.log('kanto buckets refreshed:', refreshed)
 }
 
+// --- zones -------------------------------------------------------------------
+// A zone groups several route-like sub-areas behind one map node. The hub is
+// `type: 'zone'` and lists its sub-areas; each sub-area is a hidden route with
+// its own encounter bucket, unlocked once the hub is. The existing
+// TRAVEL/encounter plumbing carries them (see `location-panel.js`), and the
+// sub-area species count as native wilds for the raid-pool scan below.
+const ZONES = {
+  galar: [
+    {
+      node: 'wild-area',
+      name: 'Wild Area',
+      position: { x: 50, y: 58 },
+      connections: ['galar-route-5', 'galar-route-6'],
+      subAreas: [
+        {
+          node: 'wild-area-rolling-fields',
+          name: 'Rolling Fields',
+          position: { x: 52, y: 61 },
+          species: ['wooloo', 'rookidee', 'skwovet', 'nickit', 'gossifleur', 'yamper', 'blipbug', 'chewtle'],
+        },
+        {
+          node: 'wild-area-dappled-grove',
+          name: 'Dappled Grove',
+          position: { x: 47, y: 56 },
+          species: ['gossifleur', 'blipbug', 'applin', 'silicobra', 'toxel', 'snom', 'milcery', 'rolycoly'],
+        },
+        {
+          node: 'wild-area-giants-mirror',
+          name: "Giant's Mirror",
+          position: { x: 53, y: 55 },
+          species: ['hatenna', 'impidimp', 'sinistea', 'falinks', 'clobbopus', 'pincurchin', 'stonjourner', 'cufant'],
+        },
+      ],
+    },
+  ],
+}
+for (const [regionId, zones] of Object.entries(ZONES)) {
+  const region = regions.find((candidate) => candidate.id === regionId)
+  if (!region) continue
+  for (const zone of zones) {
+    const hubId = locId(regionId, zone.node)
+    if (mapData[hubId]) continue
+    const neighbourLevel = zone.connections
+      .map((id) => mapData[id]?.routeKey && encounterData[mapData[id].routeKey]?.encounters?.[0]?.minLevel)
+      .find((level) => typeof level === 'number')
+    const zoneLevel = clampLevel(neighbourLevel ?? region.startLevel ?? 5),
+      anchor = mapData[zone.connections[0]]?.unlockOrder ?? 0,
+      subAreaIds = []
+    for (const subArea of zone.subAreas) {
+      const subAreaId = locId(regionId, subArea.node),
+        encounters = subArea.species
+          .filter((key) => species[key])
+          .map((key, index) => ({
+            speciesKey: key,
+            weight: encounterWeight(null, index),
+            minLevel: zoneLevel,
+            maxLevel: clampLevel(zoneLevel + 2),
+          }))
+      encounterData[subAreaId] = { name: subArea.name, encounters }
+      mapData[subAreaId] = {
+        id: subAreaId,
+        name: subArea.name,
+        type: 'route',
+        region: regionId,
+        description: `A sub-area of the ${zone.name}.`,
+        routeKey: subAreaId,
+        background: routeBackground(subArea.name, encounters),
+        connections: [hubId],
+        hidden: true,
+        zone: hubId,
+        unlock: { requires: [hubId] },
+        unlockOrder: anchor + 0.5 + subAreaIds.length * 0.001,
+        position: subArea.position,
+      }
+      subAreaIds.push(subAreaId)
+    }
+    mapData[hubId] = {
+      id: hubId,
+      name: zone.name,
+      type: 'zone',
+      region: regionId,
+      description: `The ${zone.name} is a wide-open stretch with several distinct habitats.`,
+      routeKey: subAreaIds[0],
+      background: '/backgrounds/grassland.png',
+      connections: [...zone.connections, ...subAreaIds],
+      subAreas: subAreaIds.map((id) => ({ id, name: mapData[id].name })),
+      unlock: { battlesAtLocation: [{ locationId: zone.connections[0], count: 3 }] },
+      unlockOrder: anchor + 0.4,
+      position: zone.position,
+    }
+    for (const id of zone.connections)
+      if (mapData[id] && !mapData[id].connections.includes(hubId)) mapData[id].connections.push(hubId)
+  }
+}
+
 // --- route-exclusive catch gates ---------------------------------------------
 // A share of the generated progress gates ask the player to catch Pokemon that
 // spawn only on the route they just cleared — a route-specific, harder variant

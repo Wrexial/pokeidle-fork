@@ -2,7 +2,7 @@
 
 import { moveMakesContact } from '../../data/move-effects.js'
 import { moveData, moveLearnsets } from '../../data/gameData.js'
-import { abilityAbsorbsType, abilityAttackMultiplier, abilityBlocksNonSuperEffective, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityEffectivenessMultiplier, abilityHalvesSuperEffective, abilityHealsFromType, abilityOf, abilityPreventsStatDrop, abilitySurvivesAtFullHp, fieldAuraMultiplier, onHitStatBoost, onHpThresholdBoost } from '../abilities.js'
+import { abilityAbsorbsType, abilityAttackMultiplier, abilityBlocksNonSuperEffective, abilityChangesMoveType, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityEffectivenessMultiplier, abilityHalvesSuperEffective, abilityHealsFromType, abilityOf, abilityPreventsStatDrop, abilitySurvivesAtFullHp, fieldAuraMultiplier, onHitStatBoost, onHpThresholdBoost } from '../abilities.js'
 import { chooseMoveForBattle, chooseRandomMove } from './ai.js'
 import { calculateDamage, chance, isSelfTargetedMove, normalizeStatKey } from './damage.js'
 import { applyEndOfTurn, reportFieldEffects } from './end-of-turn.js'
@@ -812,9 +812,17 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       }
       continue
     }
-    // Weather rewrites Weather Ball's type/power and makes Thunder, Hurricane
-    // and Blizzard never miss.
-    const effectiveMove = applyWeatherToMove(activeWeather, moveDef)
+    // Weather rewrites Weather Ball's type/power, and abilities like Normalize,
+    // the -ate family and Liquid Voice rewrite the move type too.
+    const effectiveMove = abilityChangesMoveType(
+      attack.attacker,
+      applyWeatherToMove(activeWeather, moveDef)
+    )
+    // Protean / Libero change the user's type to the move it is about to use.
+    if (abilityOf(attack.attacker) === 'protean' || abilityOf(attack.attacker) === 'libero') {
+      attack.attacker.types = [effectiveMove.type]
+      attack.attacker.typesOverride = [effectiveMove.type]
+    }
     // The extreme weathers refuse the opposite elemental type.
     if (
       (activeWeather?.type === 'harshSunlight' && effectiveMove.type === 'Water') ||
@@ -1057,6 +1065,22 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       }
     }
     const defenderHpBefore = attack.defender.currentHp
+    // Disguise (Mimikyu) and Ice Face (Eiscue) absorb the first hit.
+    const defenderAbility = abilityOf(attack.defender)
+    if (
+      (defenderAbility === 'disguise' && !attack.defender.disguiseBroken) ||
+      (defenderAbility === 'iceFace' &&
+        !attack.defender.iceFaceBroken &&
+        effectiveMove.category === 'physical')
+    ) {
+      if (defenderAbility === 'disguise') attack.defender.disguiseBroken = !0
+      else attack.defender.iceFaceBroken = !0
+      events.push({
+        type: 'miss',
+        message: `${attack.defender.name}'s ${defenderAbility === 'disguise' ? 'disguise' : 'Ice Face'} absorbed the hit!`,
+      })
+      continue
+    }
     if (
       ((attack.defender.currentHp = Math.max(0, attack.defender.currentHp - totalDamage)),
       events.push({

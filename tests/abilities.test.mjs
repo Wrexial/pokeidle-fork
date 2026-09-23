@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 const data = installGameData()
 
-const { abilityAttackMultiplier, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityEffectivenessMultiplier, abilityPreventsStatus, fieldAuraMultiplier, onHitStatBoost } = await import('../src/game/abilities.js')
+const { abilityAttackMultiplier, abilityChangesMoveType, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityEffectivenessMultiplier, abilityPreventsStatus, fieldAuraMultiplier, onHitStatBoost } = await import('../src/game/abilities.js')
 const { calculateDamage, resolveBattleTurn } = await import('../src/game/combat.js')
 const { abilityDisplayName, rollAbility } = await import('../src/game/pokemon.js')
 const { moveData } = await import('../src/data/gameData.js')
@@ -586,5 +586,79 @@ test('Infiltrator ignores screens', () => {
       return 2000 - enemy.currentHp
     }
     assert.ok(damageWith('infiltrator') > damageWith(undefined), 'the screen is ignored')
+  })
+})
+
+test('type-changing abilities rewrite the move type', () => {
+  assert.equal(abilityChangesMoveType(battler({ ability: 'pixilate' }), moveData.tackle).type, 'Fairy')
+  assert.equal(abilityChangesMoveType(battler({ ability: 'refrigerate' }), moveData.tackle).type, 'Ice')
+  assert.equal(
+    abilityChangesMoveType(battler({ ability: 'pixilate' }), moveData.flamethrower).type,
+    'Fire',
+    'non-Normal moves are unchanged'
+  )
+  assert.equal(abilityChangesMoveType(battler({ ability: 'normalize' }), moveData.flamethrower).type, 'Normal')
+  assert.equal(abilityChangesMoveType(battler({ ability: 'liquidVoice' }), moveData.hyperVoice).type, 'Water')
+})
+
+test('Protean changes the user type to the move type', () => {
+  const player = battler({
+      name: 'Player',
+      isPlayer: true,
+      moves: ['flamethrower'],
+      speed: 200,
+      ability: 'protean',
+      types: ['Normal'],
+    }),
+    enemy = battler({ name: 'Foe', moves: ['splash'] })
+  resolveBattleTurn(player, enemy, false)
+  assert.deepEqual(player.types, ['Fire'])
+  assert.deepEqual(player.typesOverride, ['Fire'])
+})
+
+test('Disguise absorbs the first hit', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['tackle'],
+        speed: 200,
+        attack: 200,
+      }),
+      enemy = battler({
+        name: 'Foe',
+        moves: ['splash'],
+        ability: 'disguise',
+        currentHp: 400,
+        maxHp: 400,
+      })
+    resolveBattleTurn(player, enemy, false)
+    assert.equal(enemy.currentHp, 400, 'the first hit is absorbed')
+    assert.equal(enemy.disguiseBroken, true)
+  })
+})
+
+test('Ice Face absorbs the first physical hit but not a special one', () => {
+  withFixedRandom(0.5, () => {
+    const hpAfter = (/** @type {string} */ move, extra = {}) => {
+      const player = battler({
+          name: 'Player',
+          isPlayer: true,
+          moves: [move],
+          speed: 200,
+          ...extra,
+        }),
+        enemy = battler({
+          name: 'Foe',
+          moves: ['splash'],
+          ability: 'iceFace',
+          currentHp: 400,
+          maxHp: 400,
+        })
+      resolveBattleTurn(player, enemy, false)
+      return enemy.currentHp
+    }
+    assert.equal(hpAfter('tackle', { attack: 200 }), 400, 'the physical hit is absorbed')
+    assert.ok(hpAfter('flamethrower', { spAttack: 200 }) < 400, 'a special hit gets through')
   })
 })

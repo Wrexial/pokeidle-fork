@@ -247,6 +247,17 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
         },
       })
     }
+    // Ice Face reforms in snow or hail.
+    if (pokemon.iceFaceBroken && (activeWeather?.type === 'snow' || activeWeather?.type === 'hail')) {
+      pokemon.iceFaceBroken = !1
+      events.push({
+        type: 'status',
+        message: `${pokemon.name}'s Ice Face reformed!`,
+        data: {
+          target: isPlayerSide ? 'player' : 'enemy',
+        },
+      })
+    }
     // Weather chip damage and weather-ability healing.
     const weatherDamage = weatherResidualDamage(activeWeather, pokemon)
     if (weatherDamage > 0 && !abilityIgnoresIndirectDamage(pokemon)) {

@@ -20,6 +20,8 @@ export const CHANGELOG = [
             'Field auras and reactions: Dark Aura and Fairy Aura boost their type (Aura Break reverses them), Trace copies the foe\u2019s ability on switch-in, and Justified / Steam Engine / Thermal Exchange / Water Compaction / Weak Armor / Anger Point reward the holder for being hit',
             'More reactions: Berserk and Anger Shell fire when a hit drops the holder below half HP, Moody shuffles stats each turn, Harvest restores a berry, Ripen doubles a berry\u2019s healing, Infiltrator ignores screens, Unseen Fist hits through Protect, and Good as Gold blocks status moves',
             'The extreme weathers are in: Desolate Land sets extremely harsh sunlight that negates Water moves, Primordial Sea sets a heavy downpour that negates Fire moves, and Delta Stream\u2019s strong winds cancel Flying-type weaknesses',
+            'Type-changing abilities: Protean and Libero change the user\u2019s type to the move it is about to use, Normalize forces Normal, Liquid Voice makes sound moves Water, and the -ate family (Pixilate, Refrigerate, Aerilate, Galvanize, Dragonize) turns Normal moves into their type with a 20% boost',
+            'Disguise and Ice Face absorb the first hit (Ice Face reforms in snow or hail)',
           ],
         },
       ],

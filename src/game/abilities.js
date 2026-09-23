@@ -58,6 +58,35 @@ const STATUS_IMMUNE_ABILITIES = /** @type {Record<string, string>} */ ({
   purifyingSalt: 'all',
 })
 
+/** -ate abilities: Normal moves become this type (and hit 20% harder). */
+const ATE_ABILITIES = /** @type {Record<string, string>} */ ({
+  pixilate: 'Fairy',
+  refrigerate: 'Ice',
+  aerilate: 'Flying',
+  galvanize: 'Electric',
+  dragonize: 'Dragon',
+})
+
+/**
+ * Rewrite the move type from an ability: Normalize forces Normal, the -ate
+ * abilities convert Normal moves (with a 20% power boost), and Liquid Voice
+ * makes sound moves Water.
+ * @param {BattlePokemon} attacker
+ * @param {Move} moveDef
+ * @returns {Move}
+ */
+export function abilityChangesMoveType(attacker, moveDef) {
+  const ability = abilityOf(attacker)
+  if (!ability || !moveDef) return moveDef
+  if (ability === 'normalize' && moveDef.type !== 'Normal') return { ...moveDef, type: 'Normal' }
+  const ateType = ATE_ABILITIES[ability]
+  if (ateType && moveDef.type === 'Normal')
+    return { ...moveDef, type: ateType, power: (moveDef.power ?? 0) * 1.2 }
+  if (ability === 'liquidVoice' && SOUND_MOVE.test(moveDef.name ?? ''))
+    return { ...moveDef, type: 'Water' }
+  return moveDef
+}
+
 /**
  * HP-threshold ability reactions: Berserk and Anger Shell trigger when a hit
  * drops the holder from above half HP to at or below it.

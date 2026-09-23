@@ -252,6 +252,10 @@ type VolatileState = {
   abilitySuppressed?: boolean
   /** Types replaced by Soak / Magic Powder / Reflect Type / Forest's Curse. */
   typesOverride?: string[] | null
+  /** Disguise (Mimikyu) has already absorbed a hit. */
+  disguiseBroken?: boolean
+  /** Ice Face (Eiscue) has already absorbed a physical hit. */
+  iceFaceBroken?: boolean
 }
 
 type GameAction = { type: string; payload?: any; [key: string]: any }

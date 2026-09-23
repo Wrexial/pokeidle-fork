@@ -313,6 +313,8 @@ export function useGameLoop() {
               abilityOverride: playerVolatile.abilityOverride ?? null,
               abilitySuppressed: playerVolatile.abilitySuppressed ?? !1,
               typesOverride: playerVolatile.typesOverride ?? null,
+              disguiseBroken: playerVolatile.disguiseBroken ?? !1,
+              iceFaceBroken: playerVolatile.iceFaceBroken ?? !1,
             },
             enemyBattlePokemon = {
               ...currentGameState.enemyPokemon,

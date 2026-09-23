@@ -161,6 +161,50 @@ function alolaSave() {
   }
 }
 
+/** A minimal Kanto save standing on a fishing route. */
+function kantoSave() {
+  const pokemon = {
+    id: '1',
+    speciesKey: 'charmander',
+    name: 'Charmander',
+    types: ['Fire'],
+    level: 30,
+    totalExp: 0,
+    moves: ['tackle', 'ember'],
+    currentHp: 80,
+    maxHp: 80,
+    attack: 45,
+    defense: 40,
+    spAttack: 42,
+    spDefense: 40,
+    speed: 48,
+    ivs: { hp: 31, attack: 31, defense: 31, spAttack: 31, spDefense: 31, speed: 31 },
+    nature: 'adamant',
+    friendship: 70,
+    ability: 'blaze',
+    heldItem: null,
+    isShiny: false,
+  }
+  return {
+    version: 2,
+    savedAt: Date.now(),
+    startRegion: 'kanto',
+    playerPokemon: pokemon,
+    party: [pokemon],
+    box: [],
+    nextPokemonId: 2,
+    currentLocation: 'route21',
+    currentRoute: 'route21',
+    unlockedLocations: ['palletTown', 'route1', 'route21'],
+    unlockedRegions: ['kanto'],
+    inventory: { pokeball: 30, greatball: 10, ultraball: 5 },
+    money: 50000,
+    pokedexSeen: ['charmander'],
+    pokedexCaught: ['charmander'],
+    battleLog: ['Screenshot run'],
+  }
+}
+
 async function main() {
   fs.mkdirSync(OUT, { recursive: true })
   const profile = fs.mkdtempSync(path.join(os.tmpdir(), 'pi-chrome-'))
@@ -272,6 +316,39 @@ async function main() {
       })
       fs.writeFileSync(path.join(OUT, '07-battle-bottom.png'), Buffer.from(data, 'base64'))
       console.log('saved screenshots\\07-battle-bottom.png')
+    }
+
+    // Route-activity encounter: verify the manual catch option appears.
+    await cdp.eval(
+      `localStorage.setItem('pokemon-idle-save-v2', ${JSON.stringify(
+        JSON.stringify(kantoSave())
+      )}); 'ok'`
+    )
+    await cdp.send('Page.navigate', { url: APP_URL })
+    await cdp.waitFor('window.gameDataDebug.status().loaded === true', 20000, 'kanto data')
+    await cdp.eval(
+      `(() => { const b = document.querySelector('.patch-notes-dismiss-btn'); if (b) b.click(); return true })()`
+    )
+    await sleep(600)
+    await cdp.click('.location-minigame-start')
+    await sleep(400)
+    let gotEncounter = false
+    for (let attempt = 0; attempt < 8 && !gotEncounter; attempt++) {
+      await cdp.click('.move-panel-btn.confirm')
+      await sleep(200)
+      gotEncounter = await cdp.eval('!!document.querySelector(".activity-encounter")')
+    }
+    if (gotEncounter) {
+      await cdp.screenshot(path.join(OUT, '08-activity-encounter.png'))
+      await cdp.click('.move-panel-btn.confirm') // BATTLE
+      await sleep(700)
+      const catchBtn = await cdp.eval(
+        `(() => { const b = document.querySelector('.activity-catch-btn'); if (!b) return null; const r = b.getBoundingClientRect(); return { text: b.textContent.trim(), top: Math.round(r.top), right: Math.round(r.right) } })()`
+      )
+      console.log('activity catch button:', JSON.stringify(catchBtn))
+      await cdp.screenshot(path.join(OUT, '09-activity-battle.png'))
+    } else {
+      console.log('WARNING: no activity encounter captured')
     }
     console.log('done')
   } finally {

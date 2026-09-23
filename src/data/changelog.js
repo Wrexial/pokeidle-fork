@@ -15,6 +15,7 @@ export const CHANGELOG = [
             'Fishing, Rock Smash, Headbutt, Diving and foraging now show what you found before the battle \u2014 the Pokemon, its level and its bonuses \u2014 with a BATTLE or LET IT GO choice',
             'Activity encounters are now worth chasing: they spawn a few levels above the route, have boosted shiny odds, and can carry a held item (guaranteed on an ultra hit). Better hit quality improves all three',
             'Caught wild Pokemon now keep the IVs, ability and held item of the one you actually battled',
+            'A minigame battle now offers an ATTEMPT CATCH button: throw your configured ball at the find (falling back to your best ball) instead of waiting for the auto-catcher',
           ],
         },
         {

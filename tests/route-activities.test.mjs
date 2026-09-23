@@ -26,6 +26,7 @@ const {
 const { isWaterLocation } = await import('../src/game/catching.js')
 const { consumableItems, evolutionItems, heldItems } = await import('../src/data/items.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
+const { createPokemon } = await import('../src/game/pokemon.js')
 
 const { mapData, pokemonSpecies, mapEncounterData: encounterData } = gameData,
   locations = Object.values(mapData),
@@ -238,6 +239,64 @@ test('CATCH_POKEMON keeps the wild IVs, ability and held item', () => {
   assert.deepEqual(next.party[0].ivs, ivs)
   assert.equal(next.party[0].heldItem, 'leftovers')
   assert.equal(next.party[0].ability, 'static')
+})
+
+test('ATTEMPT_CATCH manually catches a minigame Pokemon', () => {
+  const player = createPokemon('rowlet', 20, 'p'),
+    enemy = {
+      speciesKey: 'dratini',
+      name: 'Dratini',
+      types: ['Dragon'],
+      level: 15,
+      currentHp: 30,
+      maxHp: 30,
+      attack: 10,
+      defense: 10,
+      spAttack: 10,
+      spDefense: 10,
+      speed: 10,
+      moves: ['tackle'],
+      ivs: { hp: 1, attack: 1, defense: 1, spAttack: 1, spDefense: 1, speed: 1 },
+      ability: 'shedSkin',
+      heldItem: 'leftovers',
+      isShiny: false,
+      fromActivity: true,
+    },
+    base = {
+      ...initialGameState,
+      phase: 'battling',
+      currentLocation: 'route21',
+      currentRoute: 'route21',
+      party: [player],
+      playerPokemon: player,
+      enemyPokemon: enemy,
+      inventory: { pokeball: 5 },
+    },
+    original = Math.random
+  try {
+    Math.random = () => 0.999
+    const missed = gameReducer(base, { type: 'ATTEMPT_CATCH' })
+    assert.equal(missed.phase, 'battling', 'a failed throw keeps the battle going')
+    assert.equal(missed.inventory.pokeball, 4, 'the ball is spent')
+    assert.equal(missed.enemyPokemon.speciesKey, 'dratini')
+
+    Math.random = () => 0
+    const caught = gameReducer(base, { type: 'ATTEMPT_CATCH' })
+    assert.equal(caught.phase, 'idle', 'a successful catch ends the battle')
+    assert.equal(caught.inventory.pokeball, 4)
+    assert.ok(caught.pokedexCaught.includes('dratini'))
+    const caughtMon = [...caught.party, ...caught.box].find(
+      (member) => member.speciesKey === 'dratini'
+    )
+    assert.ok(caughtMon, 'the Pokemon joined the party or box')
+    assert.equal(caughtMon.heldItem, 'leftovers', 'the wild held item carried over')
+
+    // No balls at all: nothing happens.
+    const broke = gameReducer({ ...base, inventory: {} }, { type: 'ATTEMPT_CATCH' })
+    assert.equal(broke.phase, 'battling')
+  } finally {
+    Math.random = original
+  }
 })
 
 test('END_ROUTE_ACTIVITY returns to idle', () => {

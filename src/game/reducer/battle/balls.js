@@ -1,9 +1,20 @@
 // // Poké Ball use, the Master Ball sequence and its completion. Split from game/reducer/battle.js.
 
 import { RAID_LEVEL_MAX } from '../../../data/config.js'
-import { pokemonSpecies } from '../../../data/gameData.js'
+import { mapData, pokemonSpecies } from '../../../data/gameData.js'
+import { ballOrder } from '../../../data/items.js'
+import {
+  attemptCatch,
+  isCaveLocation,
+  isNightTime,
+  isWaterLocation,
+  selectAutoCatchBall,
+  selectBestBall,
+} from '../../catching.js'
 import { createPokemon, insertIntoBox } from '../../pokemon.js'
 import { prepareNextBattle } from '../../progression.js'
+import { markCaught, markShinyCaught } from '../collection.js'
+import { catchPokemon } from '../pokemon/management.js'
 import { withNotification } from '../../reducer-helpers.js'
 
 /**
@@ -24,6 +35,69 @@ export function usePokeball(state, action) {
           [pokeballId]: owned - 1,
         },
       }
+}
+
+/**
+ * Handle the `ATTEMPT_CATCH` action. A manual ball throw at a wild Pokemon
+ * that a route activity hooked or flushed out: it uses the configured
+ * auto-catch ball, falling back to the best owned ball, and on success ends
+ * the battle with the catch (keeping the wild's IVs / ability / held item).
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function attemptActivityCatch(state, action) {
+  const enemy = state.enemyPokemon
+  if (state.phase !== 'battling' || !enemy || state.trainerBattle || state.bossBattle) return state
+  const catchContext = {
+      level: enemy.level,
+      types: pokemonSpecies[enemy.speciesKey]?.types ?? [],
+      alreadyCaught: state.pokedexCaught.includes(enemy.speciesKey),
+      turn: state.battleTurn ?? 1,
+      isWater: isWaterLocation(mapData[state.currentLocation]),
+      isCave: isCaveLocation(mapData[state.currentLocation]),
+      isNight: isNightTime(),
+    },
+    ballId =
+      selectAutoCatchBall(state, state.currentRoute, enemy.speciesKey, catchContext) ??
+      selectBestBall(enemy.speciesKey, ballOrder, state.inventory, catchContext)
+  if (!ballId)
+    return {
+      ...state,
+      battleLog: [...state.battleLog, 'You have no Poke Balls to throw!'].slice(-50),
+    }
+  const name = pokemonSpecies[enemy.speciesKey]?.name ?? enemy.speciesKey
+  if (!attemptCatch(enemy.speciesKey, ballId, catchContext))
+    return {
+      ...state,
+      inventory: { ...state.inventory, [ballId]: (state.inventory[ballId] ?? 0) - 1 },
+      battleLog: [...state.battleLog, `You threw a ball \u2014 ${name} broke free!`].slice(-50),
+    }
+  let next = catchPokemon(state, {
+    type: 'CATCH_POKEMON',
+    payload: {
+      speciesKey: enemy.speciesKey,
+      level: state.inRaid ? 60 : enemy.level,
+      pokeballUsed: ballId,
+      isShiny: enemy.isShiny,
+      ivs: enemy.ivs,
+      heldItem: enemy.heldItem,
+      ability: enemy.ability,
+    },
+  })
+  next = markCaught(next, { type: 'MARK_CAUGHT', payload: { speciesKey: enemy.speciesKey } })
+  if (enemy.isShiny)
+    next = markShinyCaught(next, {
+      type: 'MARK_SHINY_CAUGHT',
+      payload: { speciesKey: enemy.speciesKey },
+    })
+  next = prepareNextBattle(next)
+  return withNotification(next, {
+    message: `Gotcha! ${name} was caught!`,
+    tone: 'success',
+    icon: '\ud83d\udd34',
+    dedupeKey: `activitycatch:${enemy.speciesKey}`,
+  })
 }
 
 /**

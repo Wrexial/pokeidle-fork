@@ -9550,3 +9550,28 @@ img {
     font-size: 8px;
     color: #9fd0ff
 }
+
+.activity-catch-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    color: #10240c;
+    background: linear-gradient(#8ecf6a,#4c9a34);
+    border: 2px solid #2e7d32;
+    border-radius: 0;
+    cursor: pointer;
+    white-space: nowrap
+}
+
+.activity-catch-btn:hover:not(:disabled) {
+    background: linear-gradient(#a5e07f,#5cb040)
+}
+
+.activity-catch-btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed
+}

@@ -95,6 +95,8 @@ export function RouteActivityScene() {
       ),
       enemy = createBattlePokemon(encounter.speciesKey, level, { isShiny, wild: true }),
       bonusItem = rollActivityHeldItem(quality)
+    // Flags this as a minigame find so the battle offers a manual catch.
+    enemy.fromActivity = true
     if (bonusItem) enemy.heldItem = bonusItem
     setPending({
       enemy,

@@ -323,6 +323,19 @@ export function BattleScene() {
                   jsx('span', { children: `MASTER BALL \u00d7${state.inventory.masterball}` }),
                 ],
               }),
+            !activeTrainerBattle &&
+              state.phase === 'battling' &&
+              enemyPokemon.fromActivity &&
+              jsxs('button', {
+                className: 'activity-catch-btn',
+                onClick: () => dispatch({ type: 'ATTEMPT_CATCH' }),
+                disabled: enemyFainted,
+                title: 'Throw your best ball at this Pokemon',
+                children: [
+                  jsx(PokeballIcon, { ballId: 'pokeball', size: 16 }),
+                  jsx('span', { children: 'ATTEMPT CATCH' }),
+                ],
+              }),
           ],
         }),
       activeTrainerBattle &&

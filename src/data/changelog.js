@@ -1,10 +1,24 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.22.0'
+export const GAME_VERSION = '0.23.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.23.0',
+      subtitle: 'Hunting Rewards',
+      sections: [
+        {
+          heading: 'Minigames',
+          items: [
+            'Fishing, Rock Smash, Headbutt, Diving and foraging now show what you found before the battle \u2014 the Pokemon, its level and its bonuses \u2014 with a BATTLE or LET IT GO choice',
+            'Activity encounters are now worth chasing: they spawn a few levels above the route, have boosted shiny odds, and can carry a held item (guaranteed on an ultra hit). Better hit quality improves all three',
+            'Caught wild Pokemon now keep the IVs, ability and held item of the one you actually battled',
+          ],
+        },
+      ],
+    },
     {
       version: '0.22.0',
       subtitle: 'Poké Pelago',

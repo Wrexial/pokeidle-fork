@@ -252,11 +252,24 @@ export function catchPokemon(state, action) {
       pokeballUsed,
       isShiny,
       gender,
+      ivs,
+      heldItem,
+      ability,
     } = action.payload,
     catchLevel = state.inRaid ? 60 : level,
-    rolledPokemon = createPokemon(speciesKey, catchLevel, state.nextPokemonId, isShiny),
-    newPokemon = gender ? { ...rolledPokemon, gender } : rolledPokemon,
+    // Keep the wild Pokemon's IVs when the caller passes them, so a caught
+    // Pokemon is the one you actually battled.
+    rolledPokemon = createPokemon(
+      speciesKey,
+      catchLevel,
+      state.nextPokemonId,
+      isShiny,
+      ivs ? { ivs } : undefined
+    ),
     species = pokemonSpecies[speciesKey]
+  let newPokemon = gender ? { ...rolledPokemon, gender } : rolledPokemon
+  if (heldItem) newPokemon = { ...newPokemon, heldItem }
+  if (ability) newPokemon = { ...newPokemon, ability }
   let inventory = state.inventory
   if (pokeballUsed) {
     const ownedCount = inventory[pokeballUsed] ?? 0

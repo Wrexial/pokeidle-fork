@@ -12,10 +12,13 @@ const {
   ACTIVITY_ULTRA_ZONE,
   FISHING_LOCATIONS,
   ROUTE_ACTIVITIES,
+  activityLevelBonus,
   activityRewardName,
+  activityShinyMultiplier,
   encountersWithoutFishingExclusive,
   fishingExclusiveFor,
   rollActivityEncounter,
+  rollActivityHeldItem,
   rollActivityLoot,
   rollFishingExclusive,
   routeActivityIds,
@@ -199,6 +202,42 @@ test('START_ROUTE_ACTIVITY only starts an activity available here', () => {
     })
   assert.equal(wrongPlace.phase, 'idle')
   assert.equal(bogus.phase, 'idle')
+})
+
+test('activity hit quality scales the encounter rewards', () => {
+  assert.ok(activityLevelBonus('ultra') > activityLevelBonus('perfect'))
+  assert.ok(activityLevelBonus('perfect') > activityLevelBonus('hit'))
+  assert.ok(activityShinyMultiplier('ultra') > activityShinyMultiplier('hit'))
+  const original = Math.random
+  try {
+    Math.random = () => 0.999
+    assert.equal(rollActivityHeldItem('hit'), null, 'a plain hit usually carries nothing')
+    Math.random = () => 0
+    assert.ok(rollActivityHeldItem('ultra'), 'an ultra hit guarantees a held item')
+    assert.ok(heldItems[rollActivityHeldItem('ultra')], 'the held item is real')
+  } finally {
+    Math.random = original
+  }
+})
+
+test('CATCH_POKEMON keeps the wild IVs, ability and held item', () => {
+  const ivs = { hp: 31, attack: 30, defense: 29, spAttack: 28, spDefense: 27, speed: 26 },
+    next = gameReducer(
+      { ...initialGameState, party: [], nextPokemonId: 1 },
+      {
+        type: 'CATCH_POKEMON',
+        payload: {
+          speciesKey: 'pikachu',
+          level: 20,
+          ivs,
+          heldItem: 'leftovers',
+          ability: 'static',
+        },
+      }
+    )
+  assert.deepEqual(next.party[0].ivs, ivs)
+  assert.equal(next.party[0].heldItem, 'leftovers')
+  assert.equal(next.party[0].ability, 'static')
 })
 
 test('END_ROUTE_ACTIVITY returns to idle', () => {

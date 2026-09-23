@@ -523,6 +523,9 @@ export function useGameLoop() {
                       level: enemyPokemon.level,
                       pokeballUsed: ballId,
                       isShiny: enemyPokemon.isShiny,
+                      ivs: enemyPokemon.ivs,
+                      heldItem: enemyPokemon.heldItem,
+                      ability: enemyPokemon.ability,
                     },
                   }),
                   dispatch({

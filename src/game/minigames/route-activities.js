@@ -151,6 +151,69 @@ export function routeActivityIds(location) {
   return ids
 }
 
+/** Level bonus an activity encounter gets, by hit quality. */
+export const ACTIVITY_LEVEL_BONUS = { hit: 2, perfect: 4, ultra: 6 }
+
+/** Shiny-odds multiplier an activity encounter gets, by hit quality. */
+export const ACTIVITY_SHINY_MULTIPLIER = { hit: 2, perfect: 3, ultra: 4 }
+
+/** Chance a hit / perfect / ultra encounter is holding an item. */
+const ACTIVITY_HELD_ITEM_CHANCE = { hit: 0.25, perfect: 0.6, ultra: 1 }
+
+/** Weighted held item an activity encounter can carry. */
+const ACTIVITY_HELD_ITEM_TABLE = [
+  { itemId: 'sitrusBerry', weight: 20 },
+  { itemId: 'lumBerry', weight: 12 },
+  { itemId: 'mysticWater', weight: 7 },
+  { itemId: 'miracleSeed', weight: 7 },
+  { itemId: 'charcoal', weight: 7 },
+  { itemId: 'magnet', weight: 7 },
+  { itemId: 'focusSash', weight: 8 },
+  { itemId: 'eviolite', weight: 6 },
+  { itemId: 'leftovers', weight: 2 },
+  { itemId: 'lifeOrb', weight: 2 },
+  { itemId: 'choiceBand', weight: 1 },
+  { itemId: 'choiceSpecs', weight: 1 },
+  { itemId: 'choiceScarf', weight: 1 },
+  { itemId: 'assaultVest', weight: 1 },
+]
+const ACTIVITY_HELD_ITEM_TOTAL = ACTIVITY_HELD_ITEM_TABLE.reduce(
+  (sum, entry) => sum + entry.weight,
+  0
+)
+
+/**
+ * @param {'hit' | 'perfect' | 'ultra'} quality
+ * @returns {number}
+ */
+export function activityLevelBonus(quality) {
+  return ACTIVITY_LEVEL_BONUS[quality] ?? ACTIVITY_LEVEL_BONUS.hit
+}
+
+/**
+ * @param {'hit' | 'perfect' | 'ultra'} quality
+ * @returns {number}
+ */
+export function activityShinyMultiplier(quality) {
+  return ACTIVITY_SHINY_MULTIPLIER[quality] ?? 1
+}
+
+/**
+ * Roll a held item for an activity encounter, or null when it carries none.
+ * @param {'hit' | 'perfect' | 'ultra'} quality
+ * @returns {string | null}
+ */
+export function rollActivityHeldItem(quality) {
+  const chance = ACTIVITY_HELD_ITEM_CHANCE[quality] ?? 0
+  if (chance <= 0 || Math.random() >= chance) return null
+  let roll = Math.random() * ACTIVITY_HELD_ITEM_TOTAL
+  for (const entry of ACTIVITY_HELD_ITEM_TABLE) {
+    roll -= entry.weight
+    if (roll <= 0) return entry.itemId
+  }
+  return ACTIVITY_HELD_ITEM_TABLE[0].itemId
+}
+
 /**
  * Roll a wild encounter for an `encounter` activity, drawn from the route's
  * table and narrowed to the activity's preferred types when it has any. The

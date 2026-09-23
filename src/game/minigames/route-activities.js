@@ -1,7 +1,8 @@
 // Route-attached minigames. Unlike the fixed minigames in registry.js (one
-// unique POI each), these are available wherever the terrain fits: fishing on
-// water areas, foraging on land routes. Both resolve through the route's own
-// encounter table so they stay consistent with normal wild battles.
+// unique POI each), these are available wherever the terrain fits: fishing on a
+// curated set of water-rich routes, foraging on land routes. Both resolve
+// through the route's own encounter table so they stay consistent with normal
+// wild battles.
 
 import { encounterData, pokemonSpecies } from '../../data/gameData.js'
 import { consumableItems, evolutionItems, heldItems } from '../../data/items.js'
@@ -49,6 +50,66 @@ export const ROUTE_ACTIVITIES = {
 }
 
 /**
+ * The hand-picked water-rich routes where fishing is available. A cast only
+ * ever hooks a Water-type Pokemon, so rather than offering it on every route
+ * that merely sounds watery, this list names the routes whose tables are
+ * actually made of Water species.
+ * @type {Set<string>}
+ */
+export const FISHING_LOCATIONS = new Set([
+  // Kanto
+  'seafoamIslands',
+  'route19',
+  'route20',
+  'route21',
+  // Johto
+  'johto-whirl-islands',
+  'johto-sea-route-40',
+  'johto-sea-route-41',
+  // Hoenn
+  'hoenn-route-124',
+  'hoenn-route-126',
+  'hoenn-route-128',
+  'hoenn-route-134',
+  // Sinnoh
+  'sinnoh-sea-route-220',
+  'sinnoh-route-219',
+  'sinnoh-sea-route-223',
+  'sinnoh-route-213',
+  // Unova
+  'unova-route-17',
+  'unova-route-21',
+  'unova-route-4',
+  // Kalos
+  'kalos-route-12',
+  'kalos-route-8',
+  'kalos-route-22',
+  // Alola
+  'alola-route-15',
+  'alola-route-7',
+  'alola-route-9',
+  // Galar
+  'galar-route-9',
+  'galar-route-2',
+  'galar-crown-tundra-frigid-sea',
+  // Paldea
+  'paldea-terarium-coastal-biome',
+  'paldea-east-province-area-two',
+  'paldea-west-province-area-one',
+])
+
+/**
+ * Whether a route's table actually holds Water-type Pokemon.
+ * @param {string} routeKey
+ * @returns {boolean}
+ */
+function hasWaterSpecies(routeKey) {
+  return (encounterData[routeKey]?.encounters ?? []).some((entry) =>
+    (pokemonSpecies[entry.speciesKey]?.types ?? []).includes('Water')
+  )
+}
+
+/**
  * Whether a location is overgrown enough to forage.
  * @param {MapLocation | undefined} location
  * @returns {boolean}
@@ -72,7 +133,8 @@ export function routeActivityIds(location) {
   if (!location || !encounterData[location.routeKey ?? '']) return []
   /** @type {string[]} */
   const ids = []
-  if (isWaterLocation(location)) ids.push('fishing')
+  if (FISHING_LOCATIONS.has(location.id) && hasWaterSpecies(location.routeKey ?? ''))
+    ids.push('fishing')
   if (isForageLocation(location)) ids.push('forage')
   return ids
 }
@@ -93,14 +155,17 @@ export function rollActivityEncounter(activityId, routeKey, perfect, rodId = DEF
     rod = rodForId(rodId),
     table = encounterData[routeKey]?.encounters ?? []
   if (!activity || table.length === 0) return null
-  const typed = activity.preferTypes
-      ? table.filter((entry) =>
-          activity.preferTypes?.some((type) =>
-            pokemonSpecies[entry.speciesKey]?.types?.includes(type)
-          )
+  // Strict type filter: fishing only ever hooks Water Pokemon, so a route with
+  // none has nothing to catch rather than falling back to its land species.
+  const typePool = activity.preferTypes
+    ? table.filter((entry) =>
+        activity.preferTypes?.some((type) =>
+          pokemonSpecies[entry.speciesKey]?.types?.includes(type)
         )
-      : [],
-    typePool = typed.length > 0 ? typed : table,
+      )
+    : table
+  if (typePool.length === 0) return null
+  const
     // A rod only reaches part of the water: keep the most common entries for
     // shallower rods, the whole table for the Super Rod.
     reachable = [...typePool].sort((left, right) => right.weight - left.weight),

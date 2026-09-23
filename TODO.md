@@ -301,15 +301,15 @@ activity is an entry in `ROUTE_ACTIVITIES` and a terrain predicate. Covered by
 
 ### 29a. Fishing minigame
 
-**Shipped (0.16.0):** a timing-bar fishing activity on water routes that hooks a
-Water species from the route's own table and starts a normal wild battle, plus a
-Berry Foraging counterpart on forested routes.
-**Shipped (0.17.0):** rod tiers gate the rarity of what a cast reaches. Still
-open:
+**Shipped (0.16.0):** a timing-bar fishing activity that hooks a Water species
+from the route's own table and starts a normal wild battle, plus a Berry
+Foraging counterpart on forested routes.
+**Shipped (0.17.0):** rod tiers gate the rarity of what a cast reaches, fishing
+is limited to 30 curated water-rich routes (`FISHING_LOCATIONS`), and a cast only
+ever hooks a Water species.
 
-- [ ] Restrict a cast to the route's water species only — it still falls back
-      to the full table when a route has no Water types (so a rod can currently
-      hook a non-Water species on a dry-ish route).
+Nothing left here; see #29b (companion care) and #29c (berry growing) for the
+remaining minigame ideas.
 
 ### 29b. Companion / tamagotchi care
 

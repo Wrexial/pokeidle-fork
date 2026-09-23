@@ -14,6 +14,7 @@ export const CHANGELOG = [
           items: [
             'Fishing now uses rod tiers: the Old Rod only reaches the common Pokemon near the surface, the Good Rod reaches deeper mid-water species, and the Super Rod hooks the rarest in the deep with a level bonus',
             'You find a better rod each time you open another region \u2014 the Old Rod from the start, the Good Rod with a second region and the Super Rod with a third \u2014 and the fishing card and scene show the rod you are using and the next one to find',
+            'Fishing is limited to 30 hand-picked water-rich routes (about three per region, marked with a rod on the Town Map), and a cast only ever hooks a Water Pokemon \u2014 a route with none has nothing to catch',
           ],
         },
       ],

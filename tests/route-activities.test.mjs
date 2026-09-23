@@ -7,12 +7,14 @@ const gameData = installGameData()
 
 const {
   ACTIVITY_ATTEMPTS,
+  FISHING_LOCATIONS,
   ROUTE_ACTIVITIES,
   activityRewardName,
   rollActivityEncounter,
   rollActivityLoot,
   routeActivityIds,
 } = await import('../src/game/minigames.js')
+const { isWaterLocation } = await import('../src/game/catching.js')
 const { consumableItems, evolutionItems, heldItems } = await import('../src/data/items.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 
@@ -29,6 +31,45 @@ test('route activities are offered by terrain', () => {
   assert.ok(routeActivityIds(forageRoute).includes('forage'))
   assert.deepEqual(routeActivityIds(town), [], 'towns offer nothing to fish for or forage')
   assert.deepEqual(routeActivityIds(undefined), [])
+})
+
+test('fishing is only offered on the curated water-rich routes', () => {
+  assert.ok(FISHING_LOCATIONS.size > 0)
+  for (const locationId of FISHING_LOCATIONS) {
+    const location = mapData[locationId]
+    assert.ok(location, `${locationId} should be a real location`)
+    const water = (encounterData[location.routeKey]?.encounters ?? []).filter((entry) =>
+      pokemonSpecies[entry.speciesKey].types.includes('Water')
+    )
+    assert.ok(water.length >= 2, `${locationId} should be water-rich`)
+    assert.ok(routeActivityIds(location).includes('fishing'))
+  }
+  // A water route outside the curated list does not offer fishing.
+  const otherWater = locations.find(
+    (location) =>
+      isWaterLocation(location) &&
+      !FISHING_LOCATIONS.has(location.id) &&
+      encounterData[location.routeKey]?.encounters
+  )
+  assert.ok(otherWater, 'there is a water route outside the list')
+  assert.ok(!routeActivityIds(otherWater).includes('fishing'))
+})
+
+test('a cast never falls back to non-Water species', () => {
+  const landRoute = locations.find(
+    (location) =>
+      encounterData[location.routeKey]?.encounters?.length &&
+      !encounterData[location.routeKey].encounters.some((entry) =>
+        pokemonSpecies[entry.speciesKey].types.includes('Water')
+      )
+  )
+  assert.ok(landRoute, 'a route with no Water species exists')
+  for (let roll = 0; roll < 20; roll++)
+    assert.equal(
+      rollActivityEncounter('fishing', landRoute.routeKey, roll % 2 === 0),
+      null,
+      'nothing to catch on a dry route'
+    )
 })
 
 test('each activity is configured with an outcome and copy', () => {

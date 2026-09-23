@@ -61,26 +61,32 @@ test('the Old Rod only reaches the common half of a route, the Super Rod all of 
       .filter((entry) => pokemonSpecies[entry.speciesKey].types.includes('Water'))
       .sort((left, right) => right.weight - left.weight),
     rarest = water[water.length - 1].speciesKey,
-    routeMinLevel = Math.min(...water.map((entry) => entry.minLevel))
+    totalWeight = water.reduce((sum, entry) => sum + entry.weight, 0),
+    routeMinLevel = Math.min(...water.map((entry) => entry.minLevel)),
+    oldPool = water.slice(
+      0,
+      Math.max(1, Math.ceil(water.length * rodForId('oldRod').rarity))
+    ),
+    oldTotalWeight = oldPool.reduce((sum, entry) => sum + entry.weight, 0),
+    original = Math.random
+  try {
+    // Aim at the very last reachable entry: the Old Rod's shallowest pool must
+    // stop short of the rarest species.
+    Math.random = () => (oldTotalWeight - 0.5) / oldTotalWeight
+    for (let roll = 0; roll < 10; roll++) {
+      const encounter = rollActivityEncounter('fishing', waterRoute.routeKey, false, 'oldRod')
+      assert.notEqual(encounter.speciesKey, rarest, 'the Old Rod cannot reach the rarest species')
+      assert.ok(encounter.level >= routeMinLevel)
+    }
 
-  for (let roll = 0; roll < 120; roll++) {
-    const encounter = rollActivityEncounter('fishing', waterRoute.routeKey, roll % 2 === 0, 'oldRod')
-    assert.notEqual(encounter.speciesKey, rarest, 'the Old Rod cannot reach the rarest species')
-    assert.ok(encounter.level >= routeMinLevel)
+    // The Super Rod's full pool reaches the rarest, with its level bonus.
+    Math.random = () => (totalWeight - 0.5) / totalWeight
+    const deep = rollActivityEncounter('fishing', waterRoute.routeKey, false, 'superRod')
+    assert.equal(deep.speciesKey, rarest)
+    assert.ok(deep.level >= routeMinLevel + 4, 'the Super Rod adds its level bonus')
+  } finally {
+    Math.random = original
   }
-
-  let sawRarest = false
-  for (let roll = 0; roll < 300; roll++) {
-    const encounter = rollActivityEncounter(
-      'fishing',
-      waterRoute.routeKey,
-      false,
-      'superRod'
-    )
-    if (encounter.speciesKey === rarest) sawRarest = true
-    assert.ok(encounter.level >= routeMinLevel + 4, 'the Super Rod adds its level bonus')
-  }
-  assert.ok(sawRarest, 'the Super Rod can reach every species')
 })
 
 test('UNLOCK_REGION hands out the next rod', () => {

@@ -3156,6 +3156,16 @@ img {
     pointer-events: none
 }
 
+.map-node-fishing {
+    position: absolute;
+    bottom: -13px;
+    right: -13px;
+    font-size: 11px;
+    line-height: 1;
+    filter: drop-shadow(0 0 3px #4a90e2);
+    pointer-events: none
+}
+
 @keyframes swarmBob {
     0%,to {
         transform: translateY(0)

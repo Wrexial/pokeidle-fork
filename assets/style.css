@@ -8724,3 +8724,53 @@ img {
     gap: 3px;
     margin-top: 4px
 }
+
+.activity-rings {
+    position: relative;
+    flex: 0 0 auto;
+    width: 170px;
+    height: 170px;
+    border-radius: 50%
+}
+
+.activity-rings.locked .activity-ring-marker {
+    opacity: 0.4
+}
+
+.activity-ring-target {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    border: 1px dashed #ffffff80;
+    border-radius: 50%
+}
+
+.activity-ring-marker {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    box-sizing: border-box;
+    transform: translate(-50%, -50%);
+    border: 2px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 6px #ffffff88
+}
+
+.activity-ring-marker.hit {
+    border-color: #6ab04c;
+    box-shadow: 0 0 6px #6ab04c
+}
+
+.activity-ring-marker.perfect {
+    border-color: #f0c850;
+    box-shadow: 0 0 8px #f0c850
+}
+
+.activity-ring-marker.ultra {
+    border-color: #54e0ff;
+    box-shadow: 0 0 10px #54e0ff
+}

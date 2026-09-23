@@ -149,6 +149,32 @@ test('forage loot is always a real item', () => {
   }
 })
 
+test('foraging uses a ring display and can flush out a Grass Pokemon', () => {
+  assert.equal(ROUTE_ACTIVITIES.forage.display, 'rings')
+  assert.equal(ROUTE_ACTIVITIES.fishing.display, 'bar', 'fishing keeps the bar')
+  assert.equal(ROUTE_ACTIVITIES.forage.mode, 'loot')
+  assert.ok(ROUTE_ACTIVITIES.forage.preferTypes.includes('Grass'))
+  assert.ok(ROUTE_ACTIVITIES.forage.encounterChance > 0)
+  assert.ok(
+    ROUTE_ACTIVITIES.forage.perfectEncounterChance > ROUTE_ACTIVITIES.forage.encounterChance,
+    'a perfect search is likelier to flush a Pokemon out'
+  )
+
+  const grassyForage = locations.find(
+    (location) =>
+      routeActivityIds(location).includes('forage') &&
+      (encounterData[location.routeKey]?.encounters ?? []).some((entry) =>
+        pokemonSpecies[entry.speciesKey].types.includes('Grass')
+      )
+  )
+  assert.ok(grassyForage, 'a forage route with a Grass Pokemon exists')
+  for (let roll = 0; roll < 20; roll++) {
+    const hidden = rollActivityEncounter('forage', grassyForage.routeKey, roll % 2 === 0)
+    assert.ok(hidden, 'a Grass Pokemon can be flushed out')
+    assert.ok(pokemonSpecies[hidden.speciesKey].types.includes('Grass'))
+  }
+})
+
 test('START_ROUTE_ACTIVITY only starts an activity available here', () => {
   const base = {
       ...initialGameState,

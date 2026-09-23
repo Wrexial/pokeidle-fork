@@ -57,6 +57,24 @@ export function RouteActivityScene() {
     dispatch({ type: 'END_ROUTE_ACTIVITY' })
   }
 
+  /** A hooked or flushed-out Pokemon runs through the normal wild-battle flow.
+   * @param {{ speciesKey: string, level: number }} encounter */
+  function beginEncounter(encounter) {
+    const completedGenerationSet = completedGenerations(state.pokedexCaught)
+    ;(dispatch({
+      type: 'START_ENCOUNTER',
+      payload: {
+        enemy: createBattlePokemon(encounter.speciesKey, encounter.level, {
+          isShiny: checkShinyOdds(
+            Math.max(1, shinyOddsForSpecies(encounter.speciesKey, completedGenerationSet))
+          ),
+          wild: true,
+        }),
+      },
+    }),
+      dispatch({ type: 'MARK_SEEN', payload: { speciesKey: encounter.speciesKey } }))
+  }
+
   function stop() {
     if (!activity || stage !== 'aiming') return
     const distance = Math.abs(position - 0.5),
@@ -82,21 +100,21 @@ export function RouteActivityScene() {
         setStage(nextAttempts <= 0 ? 'done' : 'result')
         return
       }
-      // A hooked Pokemon runs through the normal wild-battle flow.
-      const completedGenerationSet = completedGenerations(state.pokedexCaught)
-      ;(dispatch({
-        type: 'START_ENCOUNTER',
-        payload: {
-          enemy: createBattlePokemon(encounter.speciesKey, encounter.level, {
-            isShiny: checkShinyOdds(
-              Math.max(1, shinyOddsForSpecies(encounter.speciesKey, completedGenerationSet))
-            ),
-            wild: true,
-          }),
-        },
-      }),
-        dispatch({ type: 'MARK_SEEN', payload: { speciesKey: encounter.speciesKey } }))
+      beginEncounter(encounter)
       return
+    }
+    // Foraging can flush out a hidden Grass-type before it pays out loot.
+    if (activity.encounterChance) {
+      const chance = perfect
+        ? (activity.perfectEncounterChance ?? activity.encounterChance)
+        : activity.encounterChance
+      if (Math.random() < chance) {
+        const hidden = rollActivityEncounter(activity.id, routeKey, perfect)
+        if (hidden) {
+          beginEncounter(hidden)
+          return
+        }
+      }
     }
     const reward = rollActivityLoot(perfect),
       money = perfect ? 200 + Math.floor(Math.random() * 201) : 80 + Math.floor(Math.random() * 121)
@@ -110,7 +128,22 @@ export function RouteActivityScene() {
 
   const hitWidth = ACTIVITY_HIT_ZONE * 200,
     perfectWidth = ACTIVITY_PERFECT_ZONE * 200,
-    ultraWidth = ACTIVITY_ULTRA_ZONE * 200
+    ultraWidth = ACTIVITY_ULTRA_ZONE * 200,
+    liveDistance = Math.abs(position - 0.5),
+    liveZone =
+      liveDistance <= ACTIVITY_ULTRA_ZONE
+        ? 'ultra'
+        : liveDistance <= ACTIVITY_PERFECT_ZONE
+          ? 'perfect'
+          : liveDistance <= ACTIVITY_HIT_ZONE
+            ? 'hit'
+            : '',
+    ringBand = /** @param {number} value */ (value) => `${Math.round(value * 100)}%`,
+    // A bullseye whose bands are the hit / perfect / ultra annuli, so the
+    // expanding ring has a clear target to meet.
+    ringStyle = {
+      background: `radial-gradient(circle at center, transparent 0 ${ringBand(0.5 - ACTIVITY_HIT_ZONE)}, #6ab04c ${ringBand(0.5 - ACTIVITY_HIT_ZONE)} ${ringBand(0.5 - ACTIVITY_PERFECT_ZONE)}, #f0c850 ${ringBand(0.5 - ACTIVITY_PERFECT_ZONE)} ${ringBand(0.5 - ACTIVITY_ULTRA_ZONE)}, #54e0ff ${ringBand(0.5 - ACTIVITY_ULTRA_ZONE)} ${ringBand(0.5 + ACTIVITY_ULTRA_ZONE)}, #f0c850 ${ringBand(0.5 + ACTIVITY_ULTRA_ZONE)} ${ringBand(0.5 + ACTIVITY_PERFECT_ZONE)}, #6ab04c ${ringBand(0.5 + ACTIVITY_PERFECT_ZONE)} ${ringBand(0.5 + ACTIVITY_HIT_ZONE)}, transparent ${ringBand(0.5 + ACTIVITY_HIT_ZONE)})`,
+    }
   return jsxs('div', {
     className: `minigame-scene route-activity-scene activity-${activity.id}`,
     children: [
@@ -141,27 +174,42 @@ export function RouteActivityScene() {
               className: 'activity-rod',
               children: [`Rod: `, rod.name, ` — `, rod.hint],
             }),
-          jsxs('div', {
-            className: `activity-bar${stage === 'aiming' ? '' : ' locked'}`,
-            children: [
-              jsx('div', {
-                className: 'activity-zone activity-zone-hit',
-                style: { left: `${50 - hitWidth / 2}%`, width: `${hitWidth}%` },
+          activity.display === 'rings'
+            ? jsxs('div', {
+                className: `activity-rings${stage === 'aiming' ? '' : ' locked'}`,
+                style: ringStyle,
+                children: [
+                  jsx('div', { className: 'activity-ring-target' }),
+                  jsx('div', {
+                    className: `activity-ring-marker${liveZone ? ` ${liveZone}` : ''}`,
+                    style: {
+                      width: `${Math.max(position * 100, 4)}%`,
+                      height: `${Math.max(position * 100, 4)}%`,
+                    },
+                  }),
+                ],
+              })
+            : jsxs('div', {
+                className: `activity-bar${stage === 'aiming' ? '' : ' locked'}`,
+                children: [
+                  jsx('div', {
+                    className: 'activity-zone activity-zone-hit',
+                    style: { left: `${50 - hitWidth / 2}%`, width: `${hitWidth}%` },
+                  }),
+                  jsx('div', {
+                    className: 'activity-zone activity-zone-perfect',
+                    style: { left: `${50 - perfectWidth / 2}%`, width: `${perfectWidth}%` },
+                  }),
+                  jsx('div', {
+                    className: 'activity-zone activity-zone-ultra',
+                    style: { left: `${50 - ultraWidth / 2}%`, width: `${ultraWidth}%` },
+                  }),
+                  jsx('div', {
+                    className: 'activity-marker',
+                    style: { left: `${position * 100}%` },
+                  }),
+                ],
               }),
-              jsx('div', {
-                className: 'activity-zone activity-zone-perfect',
-                style: { left: `${50 - perfectWidth / 2}%`, width: `${perfectWidth}%` },
-              }),
-              jsx('div', {
-                className: 'activity-zone activity-zone-ultra',
-                style: { left: `${50 - ultraWidth / 2}%`, width: `${ultraWidth}%` },
-              }),
-              jsx('div', {
-                className: 'activity-marker',
-                style: { left: `${position * 100}%` },
-              }),
-            ],
-          }),
           message && jsx('div', { className: 'activity-message', children: message }),
           activity.mode === 'loot' &&
             found.length > 0 &&

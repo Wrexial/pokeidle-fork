@@ -27,10 +27,13 @@ export const ACTIVITY_ULTRA_ZONE = 0.03
 
 /**
  * Route activities. `mode` picks the outcome: `encounter` starts a normal wild
- * battle from the route's table, `loot` pays out items and money.
+ * battle from the route's table, `loot` pays out items and money. `display`
+ * picks the timing visual (`bar` for fishing, `rings` for foraging) so the two
+ * activities don't look alike.
  * @type {Record<string, {
  *   id: string, title: string, action: string, icon: string, hint: string,
- *   mode: 'encounter' | 'loot', preferTypes?: string[],
+ *   mode: 'encounter' | 'loot', display: 'bar' | 'rings', preferTypes?: string[],
+ *   encounterChance?: number, perfectEncounterChance?: number,
  * }>}
  */
 export const ROUTE_ACTIVITIES = {
@@ -41,6 +44,7 @@ export const ROUTE_ACTIVITIES = {
     icon: '\u{1f3a3}',
     hint: 'Cast into the water and reel in on the sweet spot to hook a Water Pokemon. A perfect cast in the tiny centre hooks this route\u2019s exclusive catch.',
     mode: 'encounter',
+    display: 'bar',
     preferTypes: ['Water'],
   },
   forage: {
@@ -48,8 +52,13 @@ export const ROUTE_ACTIVITIES = {
     title: 'Berry Foraging',
     action: 'SEARCH',
     icon: '\u{1fab0}',
-    hint: 'Search the undergrowth for berries, candy and supplies. The closer to the sweet spot, the better the find.',
+    hint: 'Time the ring as it closes on the centre to find berries and supplies. Now and then a Grass Pokemon is hiding in the bush.',
     mode: 'loot',
+    display: 'rings',
+    preferTypes: ['Grass'],
+    // A successful search can flush out a hidden Grass-type instead of loot.
+    encounterChance: 0.3,
+    perfectEncounterChance: 0.6,
   },
 }
 
@@ -114,13 +123,17 @@ export function rollActivityEncounter(activityId, routeKey, perfect, rodId = DEF
       )
     : table
   if (typePool.length === 0) return null
-  const
-    // A rod only reaches part of the water: keep the most common entries for
-    // shallower rods, the whole table for the Super Rod.
-    reachable = [...typePool].sort((left, right) => right.weight - left.weight),
-    rodPool = reachable.slice(0, Math.max(1, Math.ceil(reachable.length * rod.rarity))),
-    sorted = [...rodPool].sort((left, right) => left.weight - right.weight),
-    candidates = perfect ? sorted.slice(0, Math.max(1, Math.ceil(sorted.length / 2))) : rodPool,
+  // A rod only reaches part of the water for fishing; foraging sees the whole
+  // type pool instead of the shallow end of it.
+  const rodGated = activity.mode === 'encounter',
+    reachable = rodGated
+      ? [...typePool]
+          .sort((left, right) => right.weight - left.weight)
+          .slice(0, Math.max(1, Math.ceil(typePool.length * rod.rarity)))
+      : typePool,
+    sorted = [...reachable].sort((left, right) => left.weight - right.weight),
+    candidates = perfect ? sorted.slice(0, Math.max(1, Math.ceil(sorted.length / 2))) : reachable,
+    levelBonus = rodGated ? rod.levelBonus : 0,
     totalWeight = candidates.reduce((sum, entry) => sum + entry.weight, 0)
   let roll = Math.random() * totalWeight
   for (const entry of candidates) {
@@ -132,14 +145,14 @@ export function rollActivityEncounter(activityId, routeKey, perfect, rodId = DEF
           entry.minLevel +
           Math.floor(Math.random() * (entry.maxLevel - entry.minLevel + 1)) +
           (perfect ? 1 : 0) +
-          rod.levelBonus,
+          levelBonus,
         isWater: (pokemonSpecies[entry.speciesKey]?.types ?? []).includes('Water'),
       }
   }
   const fallback = candidates[candidates.length - 1]
   return {
     speciesKey: fallback.speciesKey,
-    level: fallback.minLevel + rod.levelBonus,
+    level: fallback.minLevel + levelBonus,
     isWater: false,
   }
 }

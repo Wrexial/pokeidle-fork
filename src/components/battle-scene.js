@@ -29,6 +29,7 @@ import { QuestsModal } from './quests-modal.js'
 import { HealingScene } from './healing-scene.js'
 import { MasterBallScene } from './master-ball-scene.js'
 import { BugContestScene } from './bug-contest-scene.js'
+import { SafariScene } from './safari-scene.js'
 import { MiningScene } from './mining-scene.js'
 import { GameCornerScene } from './game-corner-scene.js'
 import { RouteActivityScene } from './route-activity-scene.js'
@@ -57,6 +58,7 @@ export function BattleScene() {
   if (state.phase === 'healing') return jsx(HealingScene, {})
   if (state.phase === 'catching') return jsx(MasterBallScene, {})
   if (state.phase === 'bugCatching') return jsx(BugContestScene, {})
+  if (state.phase === 'safari') return jsx(SafariScene, {})
   if (state.phase === 'mining') return jsx(MiningScene, {})
   if (state.phase === 'gameCorner') return jsx(GameCornerScene, {})
   if (state.phase === 'routeActivity') return jsx(RouteActivityScene, {})

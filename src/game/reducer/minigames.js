@@ -1,6 +1,6 @@
 // Reducer handlers for minigames actions. Split from game/reducer.js.
 
-import { BUG_CONTEST_COST, MINING_COST, ROUTE_ACTIVITIES, routeActivityIds } from '../minigames.js'
+import { BUG_CONTEST_COST, MINING_COST, ROUTE_ACTIVITIES, SAFARI_COST, routeActivityIds } from '../minigames.js'
 import { mapData } from '../../data/gameData.js'
 import { createIdleBattleState } from '../progression.js'
 import { enterMinigame } from '../reducer-helpers.js'
@@ -28,6 +28,31 @@ export function startBugContest(state, action) {
  */
 export function endBugContest(state, action) {
   return state.phase === 'bugCatching' ? { ...state, ...createIdleBattleState() } : state
+}
+
+/**
+ * Handle the `START_SAFARI` action.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function startSafari(state, action) {
+  return enterMinigame(
+    state,
+    'safari',
+    SAFARI_COST,
+    'You headed into the Safari Zone!'
+  )
+}
+
+/**
+ * Handle the `END_SAFARI` action.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function endSafari(state, action) {
+  return state.phase === 'safari' ? { ...state, ...createIdleBattleState() } : state
 }
 
 /**

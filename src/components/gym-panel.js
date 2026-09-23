@@ -36,6 +36,7 @@ export function GymPanel({ onOpenShop }) {
       state.phase === 'healing' ||
       state.phase === 'catching' ||
       state.phase === 'bugCatching' ||
+      state.phase === 'safari' ||
       state.phase === 'mining' ||
       state.phase === 'gameCorner' ||
       state.phase === 'routeActivity' ||

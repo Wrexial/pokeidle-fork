@@ -109,6 +109,13 @@ export const pokeBalls = {
       buyPrice: 200,
       ballModifier: 1,
     },
+    safariball: {
+      id: 'safariball',
+      name: 'Safari Ball',
+      description: 'A special ball used only in the Safari Zone.',
+      buyPrice: null,
+      ballModifier: 1.5,
+    },
     masterball: {
       id: 'masterball',
       name: 'Master Ball',

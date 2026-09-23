@@ -46,6 +46,7 @@ export function enterMinigame(state, phase, cost = 0, log) {
     state.phase === 'healing' ||
     state.phase === 'catching' ||
     state.phase === 'bugCatching' ||
+    state.phase === 'safari' ||
     state.phase === 'mining' ||
     state.phase === 'gameCorner' ||
     state.phase === 'routeActivity' ||

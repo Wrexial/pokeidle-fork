@@ -1,6 +1,7 @@
 // Fixed minigame registry and panel metadata. Split from game/minigames.js.
 
 import { BUG_CONTEST_COST, BUG_CONTEST_RUSTLES } from './bug-contest.js'
+import { SAFARI_BALLS, SAFARI_COST } from './safari.js'
 import { BATTLE_TOWER_LOCATION } from '../../data/config.js'
 import { SLOT_SPIN_COST } from './game-corner.js'
 import { MINING_COST, MINING_DIGS } from './mining.js'
@@ -14,6 +15,7 @@ export const MINIGAME_LOCATIONS = {
   celadonCity: 'gameCorner',
   'johto-route-35': 'bugContest',
   'sinnoh-eterna-city': 'mining',
+  safariZone: 'safari',
 }
 
 /**
@@ -24,6 +26,7 @@ export const MINIGAME_START_ACTION = {
   gameCorner: 'START_GAME_CORNER',
   bugContest: 'START_BUG_CONTEST',
   mining: 'START_MINING',
+  safari: 'START_SAFARI',
 }
 
 /**
@@ -52,5 +55,11 @@ export const MINIGAME_INFO = {
     cost: 0,
     action: 'ENTER GAME CORNER',
     hint: `Spin the 3\u00d73 Pok\u00e9mon slots \u2014 $${SLOT_SPIN_COST.toLocaleString()} a go. Match three along any of the 8 lines (3 rows, 3 columns, 2 diagonals); the rarer the Pok\u00e9mon, the bigger the payout.`,
+  },
+  safari: {
+    title: 'Safari Zone',
+    cost: SAFARI_COST,
+    action: 'ENTER SAFARI ZONE',
+    hint: `Explore the reserve with ${SAFARI_BALLS} free Safari Balls. Bait calms a Pokemon (but makes it harder to catch) and a Rock makes it easier to catch (but more likely to run). Entry is $${SAFARI_COST.toLocaleString()}.`,
   },
 }

@@ -1,10 +1,22 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.19.0'
+export const GAME_VERSION = '0.20.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.20.0',
+      subtitle: 'Safari Zone',
+      sections: [
+        {
+          heading: 'Minigames',
+          items: [
+            "Kanto's Safari Zone is now playable: pay $500 for 30 free Safari Balls and roam the reserve. Bait calms a Pokemon but makes it harder to catch, while a Rock makes it easier to catch but far more likely to bolt \u2014 so the rare catches are a gamble",
+          ],
+        },
+      ],
+    },
     {
       version: '0.19.0',
       subtitle: 'Minigames & Battle Items',

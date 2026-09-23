@@ -62,6 +62,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
       'healing',
       'catching',
       'bugCatching',
+      'safari',
       'mining',
       'gameCorner',
       'routeActivity',

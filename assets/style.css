@@ -8774,3 +8774,209 @@ img {
     border-color: #54e0ff;
     box-shadow: 0 0 10px #54e0ff
 }
+
+.safari-scene {
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 560px;
+    height: 480px;
+    overflow: hidden;
+    padding: 10px 14px;
+    background-image: url(/backgrounds/grassland.png);
+    background-size: cover;
+    background-position: center bottom;
+    color: var(--parchment)
+}
+
+.safari-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg,rgba(8,24,10,.25),rgba(6,18,8,.6))
+}
+
+.safari-topbar {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 4px 8px;
+    background: rgba(20,14,6,.72);
+    border: 1px solid #8a7040;
+    border-radius: 4px
+}
+
+.safari-heading {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--gold)
+}
+
+.safari-tally {
+    font-size: 8px
+}
+
+.safari-field {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+.safari-pokemon {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px
+}
+
+.safari-sprite {
+    width: 130px;
+    height: 130px;
+    image-rendering: pixelated;
+    filter: drop-shadow(0 6px 4px #0006)
+}
+
+.safari-pokemon.throwing .safari-sprite {
+    animation: safariWobble .6s ease-in-out
+}
+
+.safari-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 4px 10px;
+    background: rgba(20,14,6,.72);
+    border: 1px solid #8a7040;
+    border-radius: 4px
+}
+
+.safari-name {
+    font-size: 11px;
+    font-weight: 700
+}
+
+.safari-detail {
+    font-size: 8px
+}
+
+.safari-effects {
+    display: flex;
+    gap: 4px
+}
+
+.safari-effect {
+    padding: 1px 5px;
+    font-size: 7px;
+    font-weight: 700;
+    border-radius: 8px
+}
+
+.safari-effect.baited {
+    background: #30b0d0;
+    color: #062028
+}
+
+.safari-effect.rocked {
+    background: #c07030;
+    color: #2a1206
+}
+
+.safari-ball {
+    position: absolute;
+    top: 10px;
+    animation: safariThrow .6s ease-in-out infinite alternate
+}
+
+.safari-ready {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px
+}
+
+.safari-ready-icon {
+    font-size: 44px
+}
+
+.safari-ready-text,
+.safari-summary-note {
+    max-width: 320px;
+    text-align: center;
+    font-size: 9px;
+    line-height: 1.5
+}
+
+.safari-summary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 20px;
+    background: rgba(20,14,6,.72);
+    border: 1px solid #8a7040;
+    border-radius: 6px
+}
+
+.safari-summary-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gold)
+}
+
+.safari-lower {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 6px
+}
+
+.safari-text {
+    min-height: 30px;
+    padding: 6px 8px;
+    font-size: 9px;
+    line-height: 1.4;
+    color: #fff;
+    background: rgba(20,14,6,.78);
+    border: 1px solid #8a7040;
+    border-radius: 4px
+}
+
+.safari-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 8px;
+    min-height: 24px
+}
+
+.safari-flash {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+    background: radial-gradient(circle at 50% 45%,#fff,#ffe680 30%,transparent 65%);
+    animation: bugContestFlash .5s ease-out forwards
+}
+
+@keyframes safariThrow {
+    from { transform: translateY(0) rotate(0) }
+    to { transform: translateY(-6px) rotate(20deg) }
+}
+
+@keyframes safariWobble {
+    0%,to { transform: rotate(0) }
+    25% { transform: rotate(-6deg) }
+    75% { transform: rotate(6deg) }
+}

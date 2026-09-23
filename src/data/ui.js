@@ -108,6 +108,12 @@ export const pokeballColors = {
       ring: '#c83030',
       dot: '#2a1808',
     },
+    safariball: {
+      top: '#4a9a3a',
+      bottom: '#e8dcc0',
+      ring: '#2a1808',
+      dot: '#f0d060',
+    },
     quickball: {
       top: '#f0d020',
       bottom: '#e8dcc0',

@@ -10,7 +10,7 @@ import { applyExp, applySharedExp, bossBattleEnd, completeMasterBall, consumeEve
 import { claimAchievementRewards, claimDailyGift, claimDexRewards, claimQuest, clearOfflineReport, completeDexCelebration, markCaught, markSeen, markShinyCaught, markShinySeen, refreshDailyEvent, refreshQuests, startDexCelebration, updateShinyChain } from './reducer/collection.js'
 import { buyItem, buyRewardItem, clearHeldItem, sellItem, setAlwaysCatchShinies, setCatchRule, toggleAutoCatch, toggleRouteCatchAll, useItemOnPokemon } from './reducer/items.js'
 import { blendBerries, careCompanion, harvestBerry, plantBerry, setCompanion } from './reducer/care.js'
-import { claimMinigameReward, collectMining, endBugContest, endMinigame, endRouteActivity, payMinigameFee, startBugContest, startGameCorner, startMining, startRouteActivity } from './reducer/minigames.js'
+import { claimMinigameReward, collectMining, endBugContest, endMinigame, endRouteActivity, endSafari, payMinigameFee, startBugContest, startGameCorner, startMining, startRouteActivity, startSafari } from './reducer/minigames.js'
 import { boxToParty, catchPokemon, clearHatchResult, completeEvolution, completeWonderTrade, depositDaycare, evolutionStep, hatchDaycareEgg, partyToBox, releaseDuplicates, releaseHatchling, releasePokemon, reorderBox, reorderParty, setBoxSort, setMoves, setNickname, startEvolution, swapParty, swapPartyBox, toggleFavourite, withdrawDaycare, wonderTrade } from './reducer/pokemon.js'
 import { completeHealing, heal, healParty, healingStep, startHealing } from './reducer/recovery.js'
 import { addLog, clearLevelUp, dismissNotification, pushNotification, setChallengeMonotype, setSpeed, toggleAutoProceed, toggleBrowserNotifications, toggleChallengeLevelScale, toggleChallengeNuzlocke, toggleChallengeRandomizer, toggleColourblindTypes, toggleLargeText, toggleMusic, togglePause, toggleReducedMotion, toggleSfx } from './reducer/settings.js'
@@ -331,6 +331,10 @@ export function gameReducer(state, action) {
       return startBugContest(state, action)
     case 'END_BUG_CONTEST':
       return endBugContest(state, action)
+    case 'START_SAFARI':
+      return startSafari(state, action)
+    case 'END_SAFARI':
+      return endSafari(state, action)
     case 'START_MINING':
       return startMining(state, action)
     case 'START_GAME_CORNER':

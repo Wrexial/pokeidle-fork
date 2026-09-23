@@ -22,6 +22,7 @@ export function BattleTowerPanel() {
       'healing',
       'catching',
       'bugCatching',
+      'safari',
       'mining',
       'gameCorner',
       'routeActivity',

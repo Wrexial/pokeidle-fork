@@ -44,7 +44,13 @@
     "level": 70
    }
   ],
-  "leagueLocationKey": "indigoPlat"
+  "leagueLocationKey": "indigoPlat",
+  "league": {
+   "badgeOrder": "ordered",
+   "badgeTrack": "Gym Leaders",
+   "badgeName": "Badge",
+   "eliteTrack": "Elite Four & Champion"
+  }
  },
  {
   "id": "johto",
@@ -53,6 +59,12 @@
   "order": 2,
   "entry": "johto-new-bark-town",
   "startLevel": 5,
+  "league": {
+   "badgeOrder": "ordered",
+   "badgeTrack": "Gym Leaders",
+   "badgeName": "Badge",
+   "eliteTrack": "Elite Four & Champion"
+  },
   "leagueLocationKey": "johto-league",
   "raidPool": [
    {
@@ -112,6 +124,12 @@
   "order": 3,
   "entry": "hoenn-littleroot-town",
   "startLevel": 5,
+  "league": {
+   "badgeOrder": "ordered",
+   "badgeTrack": "Gym Leaders",
+   "badgeName": "Badge",
+   "eliteTrack": "Elite Four & Champion"
+  },
   "leagueLocationKey": "hoenn-league",
   "raidPool": [
    {
@@ -179,6 +197,12 @@
   "order": 4,
   "entry": "sinnoh-twinleaf-town",
   "startLevel": 5,
+  "league": {
+   "badgeOrder": "ordered",
+   "badgeTrack": "Gym Leaders",
+   "badgeName": "Badge",
+   "eliteTrack": "Elite Four & Champion"
+  },
   "leagueLocationKey": "sinnoh-league",
   "raidPool": [
    {
@@ -270,6 +294,12 @@
   "order": 5,
   "entry": "unova-nuvema-town",
   "startLevel": 5,
+  "league": {
+   "badgeOrder": "ordered",
+   "badgeTrack": "Gym Leaders",
+   "badgeName": "Badge",
+   "eliteTrack": "Elite Four & Champion"
+  },
   "leagueLocationKey": "unova-league",
   "raidPool": [
    {
@@ -385,6 +415,12 @@
   "order": 6,
   "entry": "kalos-vaniville-town",
   "startLevel": 5,
+  "league": {
+   "badgeOrder": "ordered",
+   "badgeTrack": "Gym Leaders",
+   "badgeName": "Badge",
+   "eliteTrack": "Elite Four & Champion"
+  },
   "leagueLocationKey": "kalos-league",
   "raidPool": [
    {
@@ -436,6 +472,12 @@
   "order": 7,
   "entry": "alola-iki-town",
   "startLevel": 5,
+  "league": {
+   "badgeOrder": "ordered",
+   "badgeTrack": "Island Trials",
+   "badgeName": "Z-Crystal",
+   "eliteTrack": "Elite Four & Champion"
+  },
   "leagueLocationKey": "alola-league",
   "raidPool": [
    {
@@ -555,6 +597,12 @@
   "order": 8,
   "entry": "galar-postwick",
   "startLevel": 5,
+  "league": {
+   "badgeOrder": "ordered",
+   "badgeTrack": "Gym Leaders",
+   "badgeName": "Badge",
+   "eliteTrack": "Champion Cup"
+  },
   "leagueLocationKey": "galar-league",
   "raidPool": [
    {
@@ -646,6 +694,12 @@
   "order": 9,
   "entry": "paldea-los-platos",
   "startLevel": 5,
+  "league": {
+   "badgeOrder": "free",
+   "badgeTrack": "Gym Leaders",
+   "badgeName": "Badge",
+   "eliteTrack": "Elite Four & Champion"
+  },
   "leagueLocationKey": "paldea-league",
   "raidPool": [
    {

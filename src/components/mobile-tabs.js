@@ -192,7 +192,7 @@ export function MobileTabs() {
                     jsx('button', {
                       className: `tab-btn${locationTab === 'gym' ? ' active' : ''}`,
                       onClick: () => setLocationTab('gym'),
-                      children: 'Gyms',
+                      children: 'League',
                     }),
                   ],
                 }),

@@ -14,6 +14,11 @@ export function GymPanel({ onOpenShop }) {
     [confirmingPrestige, setConfirmingPrestige] = React.useState(false),
     regionId = mapData[state.currentLocation]?.region ?? 'kanto',
     region = regions.find((candidate) => candidate.id === regionId),
+    // Per-region league copy (Alola's trials / Z-Crystals, Galar's Champion
+    // Cup). Falls back to the gym/Elite Four default for older saves/data.
+    regionLeague = region?.league,
+    badgeTrackLabel = regionLeague?.badgeTrack ?? 'Gym Leaders',
+    eliteTrackLabel = regionLeague?.eliteTrack ?? 'Elite Four & Champion',
     regionGyms = gymLeaderData.filter((gym) => (gym.region ?? 'kanto') === regionId),
     regionEliteFour = elite4Data.filter((member) => (member.region ?? 'kanto') === regionId),
     regionChampion = championData.find((champion) => (champion.region ?? 'kanto') === regionId),
@@ -194,7 +199,7 @@ export function GymPanel({ onOpenShop }) {
         children: [
           jsx('div', {
             className: 'gym-section-title',
-            children: 'Gym Leaders',
+            children: badgeTrackLabel,
           }),
           regionGyms.map((leader, leaderIndex) => {
             const unlocked = state.unlockedLocations.includes(leader.locationKey),
@@ -274,7 +279,7 @@ export function GymPanel({ onOpenShop }) {
             jsxs('div', {
               className: 'gym-section-title',
               children: [
-                'Elite Four & Champion',
+                eliteTrackLabel,
                 isLeagueRematch ? ' · Rematch Lv.90' : '',
               ],
             }),

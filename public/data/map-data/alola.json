@@ -4,7 +4,7 @@
   "name": "Iki Town",
   "type": "town",
   "region": "alola",
-  "description": "A town in the Alola region, home to Ilima's Normal Gym.",
+  "description": "A town in the Alola region, home to Hapu's Ground Trial.",
   "connections": [
    "alola-melemele-island"
   ],
@@ -40,10 +40,7 @@
    "requires": [
     "alola-iki-town"
    ],
-   "caughtCount": 2,
-   "gymsRequired": [
-    "alola-gym-1"
-   ]
+   "caughtCount": 2
   },
   "unlockOrder": 700001.0001,
   "position": {
@@ -68,10 +65,7 @@
    "requires": [
     "alola-iki-town"
    ],
-   "caughtCount": 2,
-   "gymsRequired": [
-    "alola-gym-1"
-   ]
+   "caughtCount": 2
   },
   "unlockOrder": 700001.0002,
   "position": {
@@ -114,7 +108,7 @@
   "name": "Hauoli City",
   "type": "town",
   "region": "alola",
-  "description": "A town in the Alola region, home to Lana's Water Gym.",
+  "description": "A town in the Alola region, home to Ilima's Normal Trial.",
   "connections": [
    "alola-melemele-island"
   ],
@@ -128,8 +122,8 @@
   },
   "unlockOrder": 700002.5001,
   "position": {
-   "x": 11.89472670809821,
-   "y": 35.16761418092104
+   "x": 11.894600410718297,
+   "y": 35.16756517708873
   },
   "mart": {
    "name": "Alola Mart",
@@ -145,7 +139,7 @@
   "name": "Po Town",
   "type": "town",
   "region": "alola",
-  "description": "A town in the Alola region, home to Kiawe's Fire Gym.",
+  "description": "A town in the Alola region, home to Acerola's Ghost Trial.",
   "connections": [
    "alola-poni-island"
   ],
@@ -158,7 +152,7 @@
    ],
    "caughtCount": 6,
    "gymsRequired": [
-    "alola-gym-2"
+    "alola-gym-1"
    ]
   },
   "unlockOrder": 700002.5002,
@@ -220,7 +214,7 @@
   "name": "Paniola Town",
   "type": "town",
   "region": "alola",
-  "description": "A town in the Alola region, home to Mallow's Grass Gym.",
+  "description": "A town in the Alola region, home to Kiawe's Fire Trial.",
   "connections": [
    "alola-akala-island"
   ],
@@ -231,10 +225,7 @@
      "count": 5
     }
    ],
-   "partyLevel": 19,
-   "gymsRequired": [
-    "alola-gym-3"
-   ]
+   "partyLevel": 19
   },
   "unlockOrder": 700003.5002,
   "position": {
@@ -278,9 +269,6 @@
      "count": 11
     }
    ],
-   "gymsRequired": [
-    "alola-gym-4"
-   ],
    "caughtOnRoute": {
     "routeKey": "alola-route-3",
     "species": [
@@ -302,7 +290,7 @@
   "name": "Heahea City",
   "type": "town",
   "region": "alola",
-  "description": "A town in the Alola region, home to Sophocles's Electric Gym.",
+  "description": "A town in the Alola region, home to Mallow's Grass Trial.",
   "connections": [
    "alola-ulaula-island"
   ],
@@ -356,7 +344,7 @@
    ],
    "caughtCount": 2,
    "gymsRequired": [
-    "alola-gym-5"
+    "alola-gym-1"
    ]
   },
   "unlockOrder": 700005,
@@ -385,10 +373,7 @@
      "count": 5
     }
    ],
-   "partyLevel": 27,
-   "gymsRequired": [
-    "alola-gym-5"
-   ]
+   "partyLevel": 27
   },
   "unlockOrder": 700006,
   "position": {
@@ -483,9 +468,6 @@
      "locationId": "alola-heahea-city",
      "count": 20
     }
-   ],
-   "gymsRequired": [
-    "alola-gym-5"
    ]
   },
   "unlockOrder": 700009,
@@ -501,7 +483,7 @@
   "name": "Konikoni City",
   "type": "town",
   "region": "alola",
-  "description": "A town in the Alola region, home to Acerola's Ghost Gym.",
+  "description": "A town in the Alola region, home to Lana's Water Trial.",
   "connections": [
    "alola-ulaula-island"
   ],
@@ -559,7 +541,7 @@
     }
    ],
    "gymsRequired": [
-    "alola-gym-6"
+    "alola-gym-2"
    ]
   },
   "unlockOrder": 700010,
@@ -575,7 +557,7 @@
   "name": "Malie City",
   "type": "town",
   "region": "alola",
-  "description": "A town in the Alola region, home to Mina's Fairy Gym.",
+  "description": "A town in the Alola region, home to Sophocles's Electric Trial.",
   "connections": [
    "alola-ulaula-island"
   ],
@@ -586,7 +568,10 @@
      "count": 5
     }
    ],
-   "caughtCount": 21
+   "caughtCount": 21,
+   "gymsRequired": [
+    "alola-gym-3"
+   ]
   },
   "unlockOrder": 700010.5,
   "position": {
@@ -633,7 +618,7 @@
     }
    ],
    "gymsRequired": [
-    "alola-gym-7"
+    "alola-gym-4"
    ]
   },
   "unlockOrder": 700011,
@@ -664,7 +649,7 @@
    ],
    "partyLevel": 51,
    "gymsRequired": [
-    "alola-gym-8"
+    "alola-gym-5"
    ]
   },
   "unlockOrder": 700012,
@@ -694,7 +679,7 @@
     }
    ],
    "gymsRequired": [
-    "alola-gym-8"
+    "alola-gym-6"
    ]
   },
   "unlockOrder": 700013,
@@ -725,7 +710,7 @@
    ],
    "caughtCount": 26,
    "gymsRequired": [
-    "alola-gym-8"
+    "alola-gym-7"
    ]
   },
   "unlockOrder": 700014,
@@ -924,15 +909,12 @@
    "requires": [
     "alola-iki-town"
    ],
-   "caughtCount": 2,
-   "gymsRequired": [
-    "alola-gym-1"
-   ]
+   "caughtCount": 2
   },
   "unlockOrder": 700000.5,
   "position": {
-   "x": 18.284678549425823,
-   "y": 36.463343884799826
+   "x": 18.284452584866784,
+   "y": 36.46378629731855
   }
  },
  "alola-akala-island": {
@@ -982,9 +964,6 @@
      "count": 11
     }
    ],
-   "gymsRequired": [
-    "alola-gym-4"
-   ],
    "caughtOnRoute": {
     "routeKey": "alola-route-3",
     "species": [
@@ -995,8 +974,8 @@
   },
   "unlockOrder": 700003.5001,
   "position": {
-   "x": 43.0113585503465,
-   "y": 17.951234529802576
+   "x": 42.965169784039645,
+   "y": 17.980024753129978
   }
  },
  "alola-ulaula-island": {
@@ -1056,15 +1035,12 @@
      "locationId": "alola-heahea-city",
      "count": 20
     }
-   ],
-   "gymsRequired": [
-    "alola-gym-5"
    ]
   },
   "unlockOrder": 700008.5,
   "position": {
-   "x": 53.28680878174826,
-   "y": 53.59532178045177
+   "x": 53.286808705797746,
+   "y": 53.59532201271365
   }
  },
  "alola-poni-island": {
@@ -1108,8 +1084,8 @@
   },
   "unlockOrder": 700015.5,
   "position": {
-   "x": 69.63645520966162,
-   "y": 42.19276549207099
+   "x": 69.63643718170782,
+   "y": 42.19281045281372
   }
  }
 }

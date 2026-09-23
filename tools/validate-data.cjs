@@ -135,6 +135,28 @@ for (const region of regions) {
   raidPools.set(region.id, seen)
 }
 
+// --- league structure --------------------------------------------------------
+// The league shape is per-region data (see LEAGUES in generate-regions.cjs):
+// Alola's trials award Z-Crystals, Galar ends in the Champion Cup, and Paldea's
+// gyms can be challenged in any order. Check each region describes its track so
+// the panel can label it instead of assuming "8 gyms + Elite Four".
+for (const region of regions) {
+  const league = region.league
+  if (!league) {
+    fail(`region ${region.id} has no league block`)
+  } else {
+    if (!['ordered', 'free'].includes(league.badgeOrder))
+      fail(`region ${region.id} league has invalid badgeOrder ${league.badgeOrder}`)
+    for (const field of ['badgeTrack', 'badgeName', 'eliteTrack'])
+      if (typeof league[field] !== 'string' || !league[field])
+        fail(`region ${region.id} league is missing ${field}`)
+  }
+  if (!gyms.some((gym) => (gym.region ?? 'kanto') === region.id))
+    fail(`region ${region.id} has no badge-track members`)
+  if (!champions.some((champion) => (champion.region ?? 'kanto') === region.id))
+    fail(`region ${region.id} has no Champion`)
+}
+
 // --- sprite manifests --------------------------------------------------------
 // The gendered manifest must match the files on disk, or a female Pokemon would
 // request a sprite that does not exist.

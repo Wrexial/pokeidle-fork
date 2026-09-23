@@ -515,6 +515,11 @@ const GYM_TOWNS = {
   galar: ['Turffield', 'Hulbury', 'Motostoke', 'Stow On Side', 'Ballonlea', 'Circhester', 'Spikemuth', 'Hammerlocke'],
   // Grusha's gym is on Glaseado Mountain (not a town); Zapapico is the closest.
   paldea: ['Cortondo', 'Artazon', 'Levincia', 'Cascarrafa', 'Medali', 'Montenevera', 'Alfornada', 'Zapapico'],
+  // Alola isn't a town-per-trial map: Melemele's two sit in Iki Town / Hauoli
+  // City, the Akala trio plus Olivia around Heahea/Paniola/Konikoni, Ula'ula's
+  // around Malie City and Po Town. Poni Island has no scraped town, so Mina and
+  // Hapu reuse Iki Town / Hauoli City rather than both landing on Iki Town.
+  alola: ['Hauoli City', 'Konikoni City', 'Paniola Town', 'Heahea City', 'Malie City', 'Po Town', 'Hauoli City', 'Iki Town'],
 }
 const ELITE_FOUR = {
   johto: ['Will', 'Koga', 'Bruno', 'Karen'], hoenn: ['Sidney', 'Phoebe', 'Glacia', 'Drake'],
@@ -557,6 +562,80 @@ const CHAMPION_TYPES = {
   alola: [],
   galar: ['Fire'],
   paldea: ['Rock'],
+}
+// Per-region league structure. Regions map 1:1 to a generation, but their
+// league isn't always "8 gyms in canonical order, then an Elite Four". These
+// fields are written into `regions.json` (as the region's `league` block) so
+// the UI can describe the region correctly:
+//   badgeOrder: 'ordered' lays a badge gate on the route tree in badge order;
+//               'free' (Paldea) lets the gyms be challenged in any order and
+//               gates the league on a badge count instead.
+//   badgeTitle: the default name for a badge holder (or `badgeTitles` per
+//               index, e.g. Alola's captains vs. its island kahuna).
+//   badgeTrack: the badge track's section heading in the gym panel.
+//   badgeName:  the singular noun for a badge (Badge / Z-Crystal).
+//   eliteTitle: what each endgame member is called.
+//   eliteTrack: the endgame section heading (Elite Four & Champion / Champion Cup).
+const DEFAULT_LEAGUE = {
+  badgeOrder: 'ordered',
+  badgeTitle: 'Gym Leader',
+  badgeTrack: 'Gym Leaders',
+  badgeName: 'Badge',
+  gymNoun: 'Gym',
+  eliteTitle: 'Elite Four',
+  eliteTrack: 'Elite Four & Champion',
+}
+const LEAGUES = {
+  johto: DEFAULT_LEAGUE,
+  hoenn: DEFAULT_LEAGUE,
+  sinnoh: DEFAULT_LEAGUE,
+  unova: DEFAULT_LEAGUE,
+  kalos: DEFAULT_LEAGUE,
+  alola: {
+    ...DEFAULT_LEAGUE,
+    // Alola has 7 island trials + 4 grand trials, not gyms. The scraped map has
+    // no Poni town, so the 7 trial captains + Hapu's grand trial are mapped to
+    // the region's 8 badge slots (the grand trial last). The copy calls the
+    // track "Island Trials" and the rewards Z-Crystals. See TODO #40.
+    badgeTitles: [
+      'Trial Captain',
+      'Trial Captain',
+      'Trial Captain',
+      'Trial Captain',
+      'Trial Captain',
+      'Trial Captain',
+      'Trial Captain',
+      'Island Kahuna',
+    ],
+    badgeTitle: 'Trial Captain',
+    badgeTrack: 'Island Trials',
+    badgeName: 'Z-Crystal',
+    gymNoun: 'Trial',
+  },
+  galar: {
+    ...DEFAULT_LEAGUE,
+    // Galar has 8 gyms but no Elite Four: the endgame is the Champion Cup, so
+    // the four "Elite Four" entries are its semifinal opponents.
+    eliteTitle: 'Champion Cup',
+    eliteTrack: 'Champion Cup',
+  },
+  paldea: {
+    ...DEFAULT_LEAGUE,
+    // Paldea's 8 gyms can be challenged in any order, so the generator lays no
+    // ordered badge gates and the league is gated on a badge count instead.
+    badgeOrder: 'free',
+  },
+}
+// Only these fields are written to `regions.json`; the titles live on the
+// generated gym/Elite members themselves.
+const leagueFor = (regionId) => {
+  const league = LEAGUES[regionId] ?? DEFAULT_LEAGUE
+  return {
+    badgeOrder: league.badgeOrder,
+    badgeTrack: league.badgeTrack,
+    badgeName: league.badgeName,
+    eliteTrack: league.eliteTrack,
+  }
 }
 // Route trainers are themed by class so a Bug Catcher isn't fielding starters.
 const TRAINER_CLASS_TYPES = {
@@ -932,7 +1011,7 @@ function levelRoutes(orderedKeys, entriesByKey) {
 }
 
 // --- generate ----------------------------------------------------------------
-const regions = [{ id: 'kanto', name: 'Kanto', generation: 1, order: 1, entry: 'palletTown', startLevel: 5, raidPool: [], leagueLocationKey: 'indigoPlat' }]
+const regions = [{ id: 'kanto', name: 'Kanto', generation: 1, order: 1, entry: 'palletTown', startLevel: 5, raidPool: [], leagueLocationKey: 'indigoPlat', league: leagueFor('kanto') }]
 // Raid pools can only be worked out once every region's routes exist (a raid
 // species must be absent from *all* routes), so regions queue up here and are
 // filled in by the raid scan lower down.
@@ -1134,6 +1213,10 @@ for (const region of REGIONS) {
       townNode: preferredNode ?? gymTowns[i % gymTowns.length],
     }
   })
+  const leagueConfig = LEAGUES[regionId] ?? DEFAULT_LEAGUE
+  // Paldea challenges its gyms in any order, so no badge is laid on the route
+  // tree; the league itself is gated on a badge count instead (see below).
+  const freeBadgeOrder = leagueConfig.badgeOrder === 'free'
   // Attach each gym's badge gate to the point in the route order where the
   // badge is actually needed. Gyms sit in their real cities, which are visited
   // in an order that can differ from the canonical gym order (Hoenn's Petalburg
@@ -1165,40 +1248,42 @@ for (const region of REGIONS) {
     return false
   }
   const gateGymByNode = {}
-  let previousGate = -1
-  for (const gym of gymPlacements) {
-    const start = Math.max(
-      previousGate + 1,
-      (nodePosition.get(gym.townNode) ?? 0) + 1,
-      1
-    )
-    for (let position = start; position < order.length; position++) {
-      const candidate = order[position]
-      if (candidate === gym.townNode || isAncestorOf(candidate, gym.townNode)) continue
-      gateGymByNode[candidate] = gym.id
-      previousGate = position
-      break
-    }
-  }
-  // A location that unlocks from a neighbour sitting before a badge gate can
-  // slip past that badge (Johto's Route 36 opens from Violet City, skipping the
-  // badges earned down the southern path). Make those locations require the gate
-  // they bypass too, unless they are needed to reach that gate's own gym town.
-  const gymTownById = Object.fromEntries(gymPlacements.map((gym) => [gym.id, gym.townNode]))
-  const gatePositionByGym = {}
-  for (const [node, gymId] of Object.entries(gateGymByNode))
-    if (gatePositionByGym[gymId] === undefined) gatePositionByGym[gymId] = nodePosition.get(node)
   const propagatedGateByNode = {}
-  let activeGate = null
-  for (const node of order) {
-    if (gateGymByNode[node]) activeGate = gateGymByNode[node]
-    if (!activeGate || gateGymByNode[node]) continue
-    const parentNode = unlockParent[node] ?? parent[node]
-    if (!parentNode || parentNode === node) continue
-    const parentPosition = nodePosition.get(parentNode)
-    if (parentPosition === undefined || parentPosition >= gatePositionByGym[activeGate]) continue
-    if (isAncestorOf(node, gymTownById[activeGate])) continue
-    propagatedGateByNode[node] = activeGate
+  if (!freeBadgeOrder) {
+    let previousGate = -1
+    for (const gym of gymPlacements) {
+      const start = Math.max(
+        previousGate + 1,
+        (nodePosition.get(gym.townNode) ?? 0) + 1,
+        1
+      )
+      for (let position = start; position < order.length; position++) {
+        const candidate = order[position]
+        if (candidate === gym.townNode || isAncestorOf(candidate, gym.townNode)) continue
+        gateGymByNode[candidate] = gym.id
+        previousGate = position
+        break
+      }
+    }
+    // A location that unlocks from a neighbour sitting before a badge gate can
+    // slip past that badge (Johto's Route 36 opens from Violet City, skipping the
+    // badges earned down the southern path). Make those locations require the gate
+    // they bypass too, unless they are needed to reach that gate's own gym town.
+    const gymTownById = Object.fromEntries(gymPlacements.map((gym) => [gym.id, gym.townNode]))
+    const gatePositionByGym = {}
+    for (const [node, gymId] of Object.entries(gateGymByNode))
+      if (gatePositionByGym[gymId] === undefined) gatePositionByGym[gymId] = nodePosition.get(node)
+    let activeGate = null
+    for (const node of order) {
+      if (gateGymByNode[node]) activeGate = gateGymByNode[node]
+      if (!activeGate || gateGymByNode[node]) continue
+      const parentNode = unlockParent[node] ?? parent[node]
+      if (!parentNode || parentNode === node) continue
+      const parentPosition = nodePosition.get(parentNode)
+      if (parentPosition === undefined || parentPosition >= gatePositionByGym[activeGate]) continue
+      if (isAncestorOf(node, gymTownById[activeGate])) continue
+      propagatedGateByNode[node] = activeGate
+    }
   }
 
   const regionObj = {
@@ -1208,6 +1293,7 @@ for (const region of REGIONS) {
     order: gen,
     entry: locId(regionId, entryNode),
     startLevel: base,
+    league: leagueFor(regionId),
   }
   regions.push(regionObj)
 
@@ -1393,7 +1479,7 @@ for (const region of REGIONS) {
         description: gymHere
           ? `A town in the ${name} region, home to ${gymHere.leaderName}'s ${
               gymType ? `${gymType} ` : ''
-            }Gym.`
+            }${leagueConfig.gymNoun}.`
           : `A town in the ${name} region.`,
         connections: [...adjacency[node]].map((n) => locId(regionId, n)),
         unlock,
@@ -1506,8 +1592,11 @@ for (const region of REGIONS) {
     unlock: {
       battlesAtLocation: [{ locationId: locId(regionId, leagueNode), count: 20 }],
       // Every badge is required for the league, including any gym that got no
-      // road gate (see gateGymByNode above).
-      gymsRequired: gymPlacements.map((gym) => gym.id),
+      // road gate (see gateGymByNode above). An any-order region can't name the
+      // badges in sequence, so it gates on the count instead.
+      ...(freeBadgeOrder
+        ? { badgesRequired: gymPlacements.length }
+        : { gymsRequired: gymPlacements.map((gym) => gym.id) }),
     },
     unlockOrder: maxProgressKey + 2,
     position:
@@ -1525,7 +1614,7 @@ for (const region of REGIONS) {
     gymData.push({
       id: gymId,
       name: leaderName,
-      title: `${name} Gym Leader`,
+      title: `${name} ${leagueConfig.badgeTitles?.[index] ?? leagueConfig.badgeTitle}`,
       region: regionId,
       locationKey: locId(regionId, townNode),
       badgeName: BADGE_NAMES[regionId]?.[index] ?? `${name} Badge ${index + 1}`,
@@ -1555,7 +1644,7 @@ for (const region of REGIONS) {
     e4Data.push({
       id: `${regionId}-e4-${i + 1}`,
       name: memberName,
-      title: `${name} Elite Four`,
+      title: `${name} ${leagueConfig.eliteTitle}`,
       region: regionId,
       spriteKey: trainerSpriteKey(memberName),
       team: buildTeam(roster, E4_TYPES[regionId]?.[i], 5, clampLevel(E4_LEVEL_MIN + i), 1, i * 2),

@@ -53,7 +53,7 @@ export const ACHIEVEMENTS = [
   { id: 'shiny50', name: 'Shiny Hunter', description: 'Catch 50 shiny forms', reward: { victoryTokens: 2, items: { masterball: 1 } }, check: (state) => state.shinyCaught.length >= 50 },
   // League
   { id: 'badgeFirst', name: 'First Badge', description: 'Earn a gym badge', reward: { money: 1000 }, check: (state) => state.defeatedGyms.length >= 1 },
-  { id: 'badgeFull', name: 'Gym Challenger', description: 'Earn all 8 badges of a region', reward: { victoryTokens: 2 }, check: allBadgesOfARegion },
+  { id: 'badgeFull', name: 'Gym Challenger', description: 'Earn every badge of a region', reward: { victoryTokens: 2 }, check: allBadgesOfARegion },
   { id: 'championFirst', name: 'Champion', description: 'Beat a region Champion', reward: { victoryTokens: 2 }, check: (state) => state.defeatedChampions.length >= 1 },
   { id: 'championAll', name: 'World Tour', description: `Conquer all ${regions.length} regions`, reward: { victoryTokens: 3, items: { masterball: 1 } }, check: (state) => state.defeatedChampions.length >= regions.length },
   // Prestige & Tower

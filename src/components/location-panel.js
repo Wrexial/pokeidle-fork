@@ -114,9 +114,11 @@ export function LocationPanel({ onOpenCatchSettings }) {
         // Count only this region's badges, matching computeUnlockedLocations.
         regionBadgeCount = gymLeaderData.filter(
           (gym) => (gym.region ?? 'kanto') === regionId && state.defeatedGyms.includes(gym.id)
-        ).length
+        ).length,
+        // Alola awards Z-Crystals rather than badges; use the region's own noun.
+        badgeNoun = regions.find((candidate) => candidate.id === regionId)?.league?.badgeName ?? 'Badge'
       requirements.push({
-        label: 'Badges',
+        label: `${badgeNoun}s`,
         current: regionBadgeCount,
         required: unlockRule.badgesRequired,
         met: regionBadgeCount >= unlockRule.badgesRequired,

@@ -1,10 +1,25 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.37.0'
+export const GAME_VERSION = '0.38.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.38.0',
+      subtitle: 'League Structures',
+      sections: [
+        {
+          heading: 'League & Progression',
+          items: [
+            "Every region now describes its own league instead of assuming 8 gyms in order: Alola runs the island trials (Ilima through Hapu's grand trial) for Z-Crystals, Galar's endgame is billed as the Champion Cup, and Paldea's gyms can be tackled in any order",
+            "Paldea's Pokemon League opens once you have all eight badges rather than demanding them in a fixed sequence, and its routes now gate on battles and catches instead of ordered badges",
+            "Alola's trial captains are placed across the islands (Ilima no longer doubles up with Hapu in Iki Town), and the badge copy, records and achievements now use each region's own reward name (Z-Crystals in Alola)",
+            "The side panel's Gyms tab is now the League tab, which better fits regions without gyms",
+          ],
+        },
+      ],
+    },
     {
       version: '0.37.0',
       subtitle: 'The Wild Area',

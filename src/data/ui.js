@@ -200,7 +200,7 @@ export const SIDE_PANEL_TABS = [
   },
   {
     id: 'gym',
-    label: 'Gyms',
+    label: 'League',
   },
 ]
 

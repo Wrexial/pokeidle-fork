@@ -382,6 +382,19 @@ type Region = {
   /** Location of the region's Pokémon League; the Elite Four can only be
    * challenged while standing here. */
   leagueLocationKey?: string
+  /** Per-region league structure/copy (Alola's island trials, Galar's
+   * Champion Cup, Paldea's any-order gyms). */
+  league?: {
+    /** 'ordered' lays ordered badge gates on the map; 'free' lets the gyms be
+     * challenged in any order and gates the league on a badge count. */
+    badgeOrder?: 'ordered' | 'free'
+    /** Section heading for the badge track, e.g. 'Gym Leaders' / 'Island Trials'. */
+    badgeTrack?: string
+    /** Singular noun for a badge, e.g. 'Badge' / 'Z-Crystal'. */
+    badgeName?: string
+    /** Section heading for the endgame, e.g. 'Elite Four & Champion' / 'Champion Cup'. */
+    eliteTrack?: string
+  }
 }
 
 type Mart = {

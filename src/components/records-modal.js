@@ -192,6 +192,8 @@ export function RecordsModal({ onClose }) {
                         (gym) =>
                           (gym.region ?? 'kanto') === region.id && state.defeatedGyms.includes(gym.id)
                       ).length,
+                      badgeTotal = gymLeaderData.filter((gym) => (gym.region ?? 'kanto') === region.id).length,
+                      badgeNoun = region.league?.badgeName ?? 'Badge',
                       beaten = state.defeatedChampions.includes(region.id),
                       prestige = state.regionPrestige[region.id] ?? 0,
                       towerBest = state.towerBest[region.id] ?? 0
@@ -206,7 +208,7 @@ export function RecordsModal({ onClose }) {
                           }),
                           jsx('span', {
                             className: 'records-value',
-                            children: `${badges}/${gymLeaderData.filter((gym) => (gym.region ?? 'kanto') === region.id).length} badges${
+                            children: `${badges}/${badgeTotal} ${badgeNoun.toLowerCase()}s${
                               beaten ? ' · Champion ★' : ''
                             }${prestige ? ` · Prestige ${prestige}` : ''}${
                               towerBest ? ` · Tower ${towerBest}` : ''

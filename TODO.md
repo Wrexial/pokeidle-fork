@@ -1,6 +1,6 @@
 # TODO
 
-Open ideas and follow-ups. Current game version: **0.37.0**
+Open ideas and follow-ups. Current game version: **0.38.0**
 (`src/data/changelog.js`). Finished work lives in the changelog, not here — this
 file only tracks what is **still open**. See `AGENTS.md` for architecture,
 commands and data conventions.
@@ -38,7 +38,9 @@ renumbered, so the gaps below are items that shipped.
 8. **#38 Clean up the Raid Islands** — M · ★★★½ — later generations leave
    50–60 species on one raid pool, turning raids into a shapeless grab bag.
 9. **#40 Alola / Galar / Paldea league structures** — M · ★★★½ — trials, the
-   Champion Cup and any-order gyms don't fit the 8-gyms + E4 model.
+   Champion Cup and any-order gyms don't fit the 8-gyms + E4 model. **(partial:
+   0.38.0 shipped the data-driven model; Alola's full 11-slot trial track and
+   Paldea's Titans / Team Star remain.)**
 10. **#11 NPC gifts & static encounters** — M · ★★★ — one-off gift NPCs and
     single overworld catches; needs a few small state flags.
 11. **#29 Fishing / companion minigames** — M–L · ★★★ — the rest of the
@@ -539,42 +541,41 @@ Gens 1–6, but it misrepresents three regions:
 
 **Partial fix (0.36.1):** Paldea's Elite Four now uses its real roster and
 types (Rika, Poppy, Larry, Hassel) — the third/fourth slots were previously
-Hassel and Academy director Clavell. Still open: Alola's fabricated 8 "gyms"
-(Ilima and Hapu both sit on Iki Town, since the scraped map has no Poni town),
-Galar's E4 label and Paldea's canonical badge order.
+Hassel and Academy director Clavell.
 
-Make the league structure **data-driven per region**:
+**Shipped (0.38.0):** the league is now **data-driven per region** via a
+`league` block in `regions.json` (`badgeOrder`, `badgeTrack`, `badgeName`,
+`eliteTrack`). The generator's `LEAGUES` table carries the shape and member
+titles; `gym-panel.js`, `records-modal.js`, `location-panel.js` and the
+achievements read the region's own wording. Specifically:
 
-- [ ] Decide the model: a per-region `league` block, e.g.
-      `{ badgeLabel, badgeKind: 'gym' | 'trial' | 'battle', order: 'ordered' | 'free', eliteLabel, eliteKind: 'elite4' | 'cup' | 'none' }`,
-      in `regions.json` (or a new data file), vs. flags on the existing
-      gym/E4/champion entries.
-- [ ] **Alola**: replace the 8 fabricated "gyms" with the 7 trials + 4 grand
-      trials (or an explicit, documented 8-slot mapping); decide whether a trial
-      is a captain battle, a totem battle, or both, and how Z-Crystals map to
-      `defeatedGyms`/badges.
-- [ ] **Galar**: keep the 8 gyms; relabel the endgame as the **Champion Cup**
-      and treat the E4 list as the semifinal opponents; decide what "E4 beaten"
-      means and how the post-game tournament works.
-- [ ] **Paldea**: drop canonical badge ordering — allow any-order gyms (fixed or
-      level-scaled teams) and gate the league on a badge **count** instead of
-      ordered `gymsRequired`; decide whether Titans / Team Star are optional
-      side content.
-- [ ] Make `gym-panel.js` copy data-driven — badge track, "Gym Leaders" →
-      "Trial Captains" / "Gym Leaders", "Elite Four & Champion" → "Champion
-      Cup" / "Championship", "Badge" → "Z-Crystal" — instead of hardcoded
-      strings.
-- [ ] Update the generator's badge-order gate logic, `GYM_TOWNS` / `GYM_TYPES` /
-      `E4_TYPES` / `CHAMPION_TYPES`, and `tools/validate-data.cjs` (it currently
-      expects 8 gyms / 4 E4 / 1 champion per region).
-- [ ] Make the achievements region-aware: `badgeFull` and the
-      `allBadgesOfARegion` check should use each region's own badge count.
-- [ ] Save shape is likely fine — `defeatedGyms` / `defeatedEliteFour` /
-      `defeatedChampions` stay id lists — so this is mostly data + UI + the
-      unlock-gate change.
+- **Alola** is billed as the island trials and awards **Z-Crystals**; its gym
+  entries are titled "Trial Captain" with Hapu's grand trial as the
+  **Island Kahuna**, and they are placed across the islands via a `GYM_TOWNS`
+  map (Ilima no longer doubles up with Hapu in Iki Town).
+- **Galar** keeps its 8 gyms but the endgame is labelled the **Champion Cup**
+  (all four rivals show that title).
+- **Paldea** uses `badgeOrder: 'free'`: the generator lays **no** ordered badge
+  gates, and the league is gated by `badgesRequired` (a badge **count**) instead
+  of `gymsRequired`, so its gyms can be beaten in any order.
 
-Relevant code: `tools/generate-regions.cjs` (gym placement, `gymsRequired`
-gates, league construction, `BADGE_NAMES` / `GYM_TOWNS`),
+Still open:
+
+- [ ] **Alola full trial track**: the scraped map has no Poni town, so the
+      region is mapped to 8 slots (7 trial captains + Hapu's grand trial). Add
+      a Poni town / trial site and promote it to the real 7 trials + 4 grand
+      trials, deciding whether a trial is a captain battle, a totem battle, or
+      both.
+- [ ] **Galar post-game tournament**: the Champion Cup's rematch is currently
+      the generic Lv.90 rematch; model the post-game tournament separately if
+      wanted.
+- [ ] **Paldea side content**: Titans and Team Star are not modelled — decide
+      whether they are optional side content or part of progression.
+- [ ] Save shape stayed fine — `defeatedGyms` / `defeatedEliteFour` /
+      `defeatedChampions` remain id lists, so no `SAVE_VERSION` bump was needed.
+
+Relevant code: `tools/generate-regions.cjs` (`LEAGUES`, gym placement,
+`gymsRequired` gates, league construction, `BADGE_NAMES` / `GYM_TOWNS`),
 `public/data/regions.json` + `gym-leader-data.json` / `elite-4-data.json` /
 `champion-data.json`, `src/components/gym-panel.js`, `src/game/reducer.js`
 (`BOSS_BATTLE_END`, `RESET_ELITE_FOUR`), `src/data/achievements.js`,

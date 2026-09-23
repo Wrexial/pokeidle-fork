@@ -8717,3 +8717,10 @@ img {
     opacity: 0.5;
     cursor: not-allowed
 }
+
+.location-tower {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-top: 4px
+}

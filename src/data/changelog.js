@@ -7,12 +7,18 @@ export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 export const CHANGELOG = [
     {
       version: '0.19.0',
-      subtitle: 'Fishing Exclusives',
+      subtitle: 'Fishing & Battle Tower',
       sections: [
         {
           heading: 'Minigames',
           items: [
             'Every fishing route now guards an exclusive Water Pokemon. Hit the tiny centre of the cast bar \u2014 a fourth, smallest zone \u2014 to hook it. It is pulled out of the route\u2019s normal wild table and marked with a fishing rod in the Wild Pokemon list',
+          ],
+        },
+        {
+          heading: 'Quality of Life',
+          items: [
+            'The Battle Tower now launches from Hoenn Route 111 itself: its opponent preview and FIGHT FLOOR button appear in the location panel, and the League tab simply points you there',
           ],
         },
       ],

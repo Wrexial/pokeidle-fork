@@ -1,12 +1,14 @@
 // Split from a grouped component file — see tools/decompile/split-components.mjs
 
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
+import { BATTLE_TOWER_LOCATION } from '../data/config.js'
 import { martShopItems } from '../data/items.js'
 import { encounterData, gymLeaderData, mapData, pokemonSpecies, regions, raidPoolFor } from '../data/gameData.js'
 import { MINIGAME_INFO, MINIGAME_LOCATIONS, MINIGAME_START_ACTION, ROUTE_ACTIVITIES, bestRodId, nextRod, rodForId, routeActivityIds } from '../game/minigames.js'
 import { useGame } from '../game/context.js'
 import { computeUnlockedLocations } from '../game/progression.js'
 import { MinigameCard } from './minigame-card.js'
+import { BattleTowerPanel } from './battle-tower-panel.js'
 import { RouteEncounterGrid } from './route-encounter-grid.js'
 import { ShopPanel } from './shop-panel.js'
 
@@ -488,6 +490,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
               }),
             ],
           }),
+        location.id === BATTLE_TOWER_LOCATION && jsx(BattleTowerPanel, {}),
         frontierLockedLocations.length > 0 &&
           jsxs('div', {
             className: 'location-next-unlock',

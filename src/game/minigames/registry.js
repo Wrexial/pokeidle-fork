@@ -1,6 +1,7 @@
 // Fixed minigame registry and panel metadata. Split from game/minigames.js.
 
 import { BUG_CONTEST_COST, BUG_CONTEST_RUSTLES } from './bug-contest.js'
+import { BATTLE_TOWER_LOCATION } from '../../data/config.js'
 import { SLOT_SPIN_COST } from './game-corner.js'
 import { MINING_COST, MINING_DIGS } from './mining.js'
 
@@ -30,7 +31,7 @@ export const MINIGAME_START_ACTION = {
  * Hoenn's Battle Tower). Used by the Town Map to badge the node with a `+`.
  * @type {Set<string>}
  */
-export const POI_LOCATIONS = new Set([...Object.keys(MINIGAME_LOCATIONS), 'hoenn-route-111'])
+export const POI_LOCATIONS = new Set([...Object.keys(MINIGAME_LOCATIONS), BATTLE_TOWER_LOCATION])
 
 /** @type {Record<string, { title: string, cost: number, action: string, hint: string }>} */
 export const MINIGAME_INFO = {

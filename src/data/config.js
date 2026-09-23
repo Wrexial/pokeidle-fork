@@ -168,6 +168,8 @@ export const starterSpecies = regionalStarters.kanto
  * Hoenn-only and save repair consolidates any legacy per-region records here.
  */
 export const BATTLE_TOWER_REGION = 'hoenn'
+/** The Hoenn route that hosts the Battle Tower (its map POI / launch spot). */
+export const BATTLE_TOWER_LOCATION = 'hoenn-route-111'
 /** @type {Record<string, number>} */
 export let trainerClassPayouts = {
   youngster: 16,

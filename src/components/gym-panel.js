@@ -3,9 +3,9 @@
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { championData, elite4Data, gymLeaderData, mapData, regions } from '../data/gameData.js'
-import { BATTLE_TOWER_REGION } from '../data/config.js'
+import { BATTLE_TOWER_LOCATION, BATTLE_TOWER_REGION } from '../data/config.js'
 import { useGame } from '../game/context.js'
-import { buildTrainerTeam, buildTowerFloor } from '../game/progression.js'
+import { buildTrainerTeam } from '../game/progression.js'
 
 /** @param {{ onOpenShop: () => void }} props */
 export function GymPanel({ onOpenShop }) {
@@ -24,21 +24,12 @@ export function GymPanel({ onOpenShop }) {
     defeatedRegionGyms = regionGyms.filter((gym) => state.defeatedGyms.includes(gym.id)).length,
     allBadgesEarned = regionGyms.length > 0 && defeatedRegionGyms >= regionGyms.length,
     isLeagueRematch = state.defeatedChampions.includes(regionId),
-    // The Battle Tower keeps its own panel (it is a full battle flow rather
-    // than a minigame); every other minigame launches from the route it is on.
-    showTower = regionId === BATTLE_TOWER_REGION && state.currentLocation === 'hoenn-route-111',
     // The Elite Four reset on each prestige, so they must be beaten again
     // before the region can be prestiged once more.
     allEliteFourBeaten =
       regionEliteFour.length > 0 &&
       regionEliteFour.every((member) => state.defeatedEliteFour.includes(member.id)),
     prestigeLevel = state.regionPrestige[regionId] ?? 0,
-    towerBest = state.towerBest[BATTLE_TOWER_REGION] ?? 0,
-    // Floors are discrete puzzles: you always resume at the next uncleared
-    // floor, so a loss can be retried without replaying the climb. The max
-    // also repairs legacy saves whose stored floor lagged behind their best.
-    nextTowerFloor = Math.max(state.towerFloor, towerBest + 1),
-    towerPreview = showTower ? buildTowerFloor(nextTowerFloor) : [],
     canFight = state.party.some((member) => member.currentHp > 0),
     isBusy =
       state.phase === 'evolving' ||
@@ -70,35 +61,6 @@ export function GymPanel({ onOpenShop }) {
             allBadgesEarned && leader.rematchTeam?.length ? leader.rematchTeam : leader.team
           ),
           spriteKey: leader.spriteKey,
-          region: regionId,
-        },
-      },
-    })
-  }
-
-  /** @param {number} floor */
-  function startTowerFloor(floor) {
-    if (!fightable) return
-    if (state.phase === 'battling' || state.phase === 'victory' || state.phase === 'defeat')
-      dispatch({
-        type: 'PHASE_IDLE',
-      })
-    dispatch({
-      type: 'START_TOWER',
-      payload: {
-        floor,
-      },
-    })
-    dispatch({
-      type: 'START_HEALING',
-      payload: {
-        pendingBossBattle: {
-          bossId: 'tower',
-          bossType: 'tower',
-          trainerName: `Tower Trainer (Floor ${floor})`,
-          trainerClass: 'ace',
-          trainerTeam: buildTowerFloor(floor),
-          spriteKey: 'acetrainer',
           region: regionId,
         },
       },
@@ -361,8 +323,8 @@ export function GymPanel({ onOpenShop }) {
           ],
         }),
       regionId === BATTLE_TOWER_REGION &&
-        state.unlockedLocations.includes('hoenn-route-111') &&
-        !showTower &&
+        state.unlockedLocations.includes(BATTLE_TOWER_LOCATION) &&
+        state.currentLocation !== BATTLE_TOWER_LOCATION &&
         jsxs('div', {
           className: 'gym-section',
           children: [
@@ -372,69 +334,7 @@ export function GymPanel({ onOpenShop }) {
             }),
             jsx('div', {
               className: 'tower-hint',
-              children: `Visit ${mapData['hoenn-route-111']?.name ?? 'Hoenn Route 111'} to climb the tower.`,
-            }),
-          ],
-        }),
-      showTower &&
-        jsxs('div', {
-          className: 'gym-section tower-section',
-          children: [
-            jsxs('div', {
-              className: 'gym-section-title',
-              children: ['Battle Tower', towerBest > 0 ? ` · Best Floor ${towerBest}` : ''],
-            }),
-            jsx('div', {
-              className: 'tower-hint',
-              children:
-                nextTowerFloor > 1
-                  ? `Next up: floor ${nextTowerFloor}. Win to advance; losing just means retrying this floor \u2014 the climb never resets.`
-                  : 'Fight stronger trainers for Victory Tokens, one puzzle floor at a time. Every floor fields six fully evolved Pokemon and your team is healed before each one \u2014 stats start scaling at floor 15 and legendaries appear from floor 40. Floors pay 1 token every 10 cleared.',
-            }),
-            jsx('div', {
-              className: 'tower-hint tower-deterministic',
-              children:
-                'Tower battles are deterministic: the opponent is fixed and there are no critical hits, misses or damage variance. Build a team that beats the matchup \u2014 stats, types, abilities and held items decide it.',
-            }),
-            jsxs('div', {
-              className: 'tower-preview',
-              children: [
-                jsx('span', {
-                  className: 'tower-preview-title',
-                  children: `Floor ${nextTowerFloor} opponent:`,
-                }),
-                jsx('div', {
-                  className: 'tower-preview-list',
-                  children: towerPreview.map((member) =>
-                    jsxs(
-                      'span',
-                      {
-                        className: 'tower-preview-member',
-                        title: `${member.name} \u00b7 Lv.${member.level} \u00b7 ${member.types.join('/')}${
-                          member.ability ? ` \u00b7 ${member.ability}` : ''
-                        }${member.heldItem ? ` \u00b7 ${member.heldItem}` : ''}`,
-                        children: [
-                          member.name,
-                          jsx('span', { className: 'tower-preview-level', children: ` Lv.${member.level}` }),
-                        ],
-                      },
-                      member.speciesKey
-                    )
-                  ),
-                }),
-              ],
-            }),
-            jsx('button', {
-              className: 'gym-fight-btn champion',
-              style: {
-                width: '100%',
-              },
-              disabled: !fightable,
-              onClick: () => startTowerFloor(nextTowerFloor),
-              children:
-                nextTowerFloor > 1
-                  ? `FIGHT FLOOR ${nextTowerFloor}`
-                  : 'ENTER THE BATTLE TOWER',
+              children: `Visit ${mapData[BATTLE_TOWER_LOCATION]?.name ?? 'Hoenn Route 111'} to climb the tower.`,
             }),
           ],
         }),

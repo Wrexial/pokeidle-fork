@@ -1,6 +1,6 @@
 # TODO
 
-Open ideas and follow-ups. Current game version: **0.41.0**
+Open ideas and follow-ups. Current game version: **0.15.0**
 (`src/data/changelog.js`). Finished work lives in the changelog, not here — this
 file only tracks what is **still open**. See `AGENTS.md` for architecture,
 commands and data conventions.
@@ -22,10 +22,10 @@ renumbered, so the gaps below are items that shipped.
 
 ### Tier 2 — High impact, worth the effort (medium–large)
 
-4. **#24 Move data pass** — **(largely done: 0.38.7–0.38.12 modelled the
+4. **#24 Move data pass** — **(largely done: 0.14.0 modelled the
    remaining status/utility moves; only Heal Block, Speed/Power/Guard Swap-Split,
    the charging moves and the dead Z/Max data remain.)**
-5. **#25 Battle engine pass** — **(largely done: 0.39.0 modelled the bulk of
+5. **#25 Battle engine pass** — **(largely done: 0.14.0 modelled the bulk of
    the ~300 abilities, the item hooks, the mid-battle form-change subsystem and
    the battle-only form species; only ally/doubles abilities, a few complex
    ones and the item nuances remain.)**
@@ -33,7 +33,7 @@ renumbered, so the gaps below are items that shipped.
    chunks of areas instead of a single-route-wide graph.
 7. **#40 Alola / Galar / Paldea league structures** — M · ★★★½ — trials, the
    Champion Cup and any-order gyms don't fit the 8-gyms + E4 model. **(partial:
-   0.38.0 shipped the data-driven model; Alola's full 11-slot trial track and
+   0.13.0 shipped the data-driven model; Alola's full 11-slot trial track and
    Paldea's Titans / Team Star remain.)**
 8. **#11 NPC gifts & static encounters** — M · ★★★ — one-off gift NPCs and
    single overworld catches; needs a few small state flags.
@@ -51,7 +51,7 @@ renumbered, so the gaps below are items that shipped.
 
 ### Tier 3 — Big / low-return, defer
 
-15. **#10 Weather & terrain leftovers** — M · ★★½ — **(partial: 0.38.6 shipped
+15. **#10 Weather & terrain leftovers** — M · ★★½ — **(partial: 0.14.0 shipped
     Weather Ball, weather-perfect accuracy and the terrain synergy abilities;
     terrain rocks and route-based field effects remain.)**
 16. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
@@ -74,9 +74,9 @@ Effort: **medium–large**.
 
 ## 10. Weather & terrain leftovers
 
-Weather (0.17.0) and terrain (0.20.0) both shipped.
+Weather and terrain shipped together in 0.11.0.
 
-**Shipped (0.38.6):** Weather Ball takes the weather's type (Water/Fire/Rock/
+**Shipped (0.14.0):** Weather Ball takes the weather's type (Water/Fire/Rock/
 Ice) with doubled power; Thunder and Hurricane never miss in rain and Blizzard
 never misses in snow/hail; and the terrain synergy abilities work — Grass Pelt
 raises Defense on Grassy Terrain, and Hadron Engine (which now also sets
@@ -150,7 +150,7 @@ Effort: **large** (auth + conflict handling + a new server to run).
 `possible-moves.json` carries `name / type / category / power / accuracy / pp /
 priority / effect`, and `src/data/move-effects.js` layers richer effects on top.
 
-**Done (0.38.7–0.38.12):** healing, multi-hit, crit stages, Protect, statuses,
+**Done (0.14.0):** healing, multi-hit, crit stages, Protect, statuses,
 screens, entry hazards, Taunt/Substitute, weather setters, Haze/Clear Smog,
 Weather Ball + weather accuracy, terrain synergy, Focus Energy, Aqua Ring /
 Ingrain, Wish, Yawn, Topsy-Turvy, Pain Split, Safeguard, Mist, Encore, Disable,
@@ -184,8 +184,8 @@ status + stat changes. Healing, multi-hit, Protect, hazards, accuracy/evasion
 stages, the extra statuses, weather/terrain, the crit-rate pass, the
 auto-battler AI and the contact abilities have shipped.
 
-**Done (0.39.0):** most of the ~300 abilities are now modelled. See the 0.39.0
-changelog for the full list; the coverage spans attacking modifiers, defensive
+**Done (0.14.0):** most of the ~300 abilities are now modelled; the coverage
+spans attacking modifiers, defensive
 modifiers, stat shaping, field & side effects, ability suppression, switch-in,
 contact / on-hit reactions, recovery & residual, speed / priority / accuracy,
 type changing, and the held-item hooks. The mid-battle form-change subsystem
@@ -277,11 +277,10 @@ Effort: **large** (data-heavy; 28a/28b mostly data, 28c a small feature).
 
 ## 29. Minigames (fishing, companion care, and more)
 
-**Shipped:** Sinnoh's Underground mining (0.25.0), Johto's Bug Catching Contest
-(0.26.0) and Kanto's Game Corner slots (0.27.0). All three are now full-stage,
-game-pausing scenes (0.31.0 / 0.33.0) that unlock from a location rather than
-the region Champion (0.32.0); the contest also has a top-3 podium with prizes
-and now covers every Bug-type.
+**Shipped:** Sinnoh's Underground mining, Johto's Bug Catching Contest and
+Kanto's Game Corner slots all landed in 0.12.0 as full-stage, game-pausing
+scenes that unlock from a location rather than the region Champion; the contest
+also has a top-3 podium with prizes and now covers every Bug-type.
 
 `src/game/minigames.js` holds `MINIGAME_BY_REGION` (region → minigame id),
 `MINIGAME_UNLOCK_LOCATION` and `MINIGAME_INFO` (title/cost/action/hint) plus
@@ -338,7 +337,7 @@ Effort: **small per minigame, medium–large as a feature**.
 
 The notification queue shipped in 0.9.0.
 
-**Shipped (0.38.4):** the caught indicator is now a Pokéball badge that tells
+**Shipped (0.13.0):** the caught indicator is now a Pokéball badge that tells
 **seen** (grey ball) from **caught** (red ball) from **shiny caught** (gold
 ball). It replaces the old `✓` on the enemy name row (`enemy-info-box.js`,
 via the shared `dex-ball-badge.js` and `getDexStatus` in `src/game/catching.js`)
@@ -384,7 +383,7 @@ carries the Wild Area links), `tools/scrape-route-encounters.cjs`,
 `public/data/map-data/galar.json` and `public/data/encounter-data/galar.json`,
 and `raidPoolFor` in `src/data/gameData.js`.
 
-**Partial (0.37.0):** the Wild Area is now a zone (#36) with three sub-areas,
+**Partial (0.13.0):** the Wild Area is now a zone (#36) with three sub-areas,
 and Slumbering Weald, Galar Mine and Glimwood Tangle are real wild areas too.
 The Expansion Pass is in as two more post-game zones (#39): the Isle of Armor
 and the Crown Tundra, gated on beating Galar's Champion. Those areas added
@@ -442,7 +441,7 @@ Good first candidate: **Galar's Wild Area** (one zone, many sub-areas) together
 with #35, then **Alola** (islands as zones) and **Paldea** (provinces as zones)
 to replace the proximity stitching / 15-species trim.
 
-**Partial (0.37.0):** the model shipped. Galar's Wild Area, the Galar/Paldea
+**Partial (0.13.0):** the model shipped. Galar's Wild Area, the Galar/Paldea
 DLC and Paldea's Area Zero are `type: 'zone'` nodes with sub-area pickers, and
 existing routes can be grouped too (`GROUP_ZONES`): Alola's routes are grouped
 by island and Paldea's by province. Sub-areas are hidden routes with their own
@@ -464,7 +463,7 @@ Hoenn 15, Sinnoh 20, Unova 27, Kalos 10, Alola **51**, Galar **59**, Paldea
 otherwise-unobtainable species, and `npm run validate` checks every species is
 obtainable.
 
-**Shipped (0.38.5):** each region's island is now split into two tiers in
+**Shipped (0.13.0):** each region's island is now split into two tiers in
 `regions.json`:
 
 - `raidPool` — every legendary/mythical with no other source; these are the
@@ -514,7 +513,7 @@ about promoting them to **first-class regions** in `regions.json` — their own
 `entry`, level curve, unlock path, raid pool and map — so they can be opened
 with an Unlock Token like any other region.
 
-**Partial (0.37.0):** Galar's DLC shipped the first (smaller) way — Isle of
+**Partial (0.13.0):** Galar's DLC shipped the first (smaller) way — Isle of
 Armor and Crown Tundra are post-game zones inside Galar (see #36), gated on
 `championDefeated: 'galar'`, with their own sub-areas and encounters. Paldea's
 Kitakami and Terarium shipped the same way (gated on `championDefeated:
@@ -572,11 +571,11 @@ Gens 1–6, but it misrepresents three regions:
   Victory Road is also only one of three storylines, so a badge-count gate is a
   poor fit.
 
-**Partial fix (0.36.1):** Paldea's Elite Four now uses its real roster and
+**Partial fix (0.12.0):** Paldea's Elite Four now uses its real roster and
 types (Rika, Poppy, Larry, Hassel) — the third/fourth slots were previously
 Hassel and Academy director Clavell.
 
-**Shipped (0.38.0):** the league is now **data-driven per region** via a
+**Shipped (0.13.0):** the league is now **data-driven per region** via a
 `league` block in `regions.json` (`badgeOrder`, `badgeTrack`, `badgeName`,
 `eliteTrack`). The generator's `LEAGUES` table carries the shape and member
 titles; `gym-panel.js`, `records-modal.js`, `location-panel.js` and the
@@ -624,7 +623,7 @@ only real progression change).
 All eight non-Kanto regions have hand-measured `REGION_MAP_LAYOUTS` overrides.
 `tools/map-compare/overlay-region-maps.py` draws the game's nodes on top of each
 reference image (`tools/map-compare/refs/`, fetched by `fetch-refs.cjs`) to
-check them. As of 0.36.1 the Sinnoh, Galar, Kalos and Unova nodes all land on
+check them. As of 0.12.0 the Sinnoh, Galar, Kalos and Unova nodes all land on
 their matching reference places, so there is no outstanding coordinate work for
 these four — the remaining Galar gap is the missing areas, not placement (see
 #35/#36). Re-run the overlay after moving or adding nodes.

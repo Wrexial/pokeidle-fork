@@ -339,6 +339,7 @@ export function repairSave(saved) {
             fullness: clampCare(savedCompanion.fullness),
             happiness: clampCare(savedCompanion.happiness),
             energy: clampCare(savedCompanion.energy),
+            cleanliness: clampCare(savedCompanion.cleanliness),
             careBattle:
               typeof savedCompanion.careBattle === 'number' ? savedCompanion.careBattle : -1,
           }

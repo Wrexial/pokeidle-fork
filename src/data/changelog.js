@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.21.0'
+export const GAME_VERSION = '0.22.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.22.0',
+      subtitle: 'Poké Pelago',
+      sections: [
+        {
+          heading: 'Idle Life',
+          items: [
+            'Poké Pelago is here: companion care and the Berry Garden now live on one island hub, opened from a single palm-tree button in the top bar instead of two separate buttons',
+            'Companion care gained a Cleanliness stat and Pat, Brush and Wash actions, so there is more to do between battles. The +15% EXP bonus now needs all four care stats at 50+',
+          ],
+        },
+      ],
+    },
     {
       version: '0.21.0',
       subtitle: 'Academy Quiz',

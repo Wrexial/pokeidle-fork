@@ -639,9 +639,11 @@ added to the pause/busy lists, and tests.
 
 **Shipped (0.21.0):** the Academy Quiz (Paldea, Mesagoza). The rest are open.
 
-- [ ] **Poké Pelago (Alola)** — M. An idle-within-idle: assign boxed Pokémon to
-      islands (berry fields, bean farm, training, caves) that produce resources
-      over real time / battle counts. Reuses the garden/companion tick infra.
+- [ ] **Poké Pelago (Alola)** — **partial (0.22.0):** the hub now hosts
+      companion care (with Pat/Brush/Wash and a Cleanliness stat) and the Berry
+      Garden, opened from the top bar instead of separate buttons. Still open:
+      the idle islands — a bean farm, a training island and caves that assign
+      *boxed* Pokémon for passive resources.
 - [ ] **Voltorb Flip (Unova)** — M. A 5×5 deduction/risk board: each row and
       column advertises its Voltorb count and score total; flip safe tiles for
       coins, avoid the bombs.

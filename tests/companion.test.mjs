@@ -6,6 +6,7 @@ import { installGameData } from './helpers/game-data.mjs'
 installGameData()
 
 const {
+  COMPANION_CARE_ACTIONS,
   COMPANION_CONTENT_THRESHOLD,
   COMPANION_EXP_MULTIPLIER,
   COMPANION_FEED_COST,
@@ -26,6 +27,7 @@ test('companion care helpers', () => {
     fullness: COMPANION_MAX_CARE,
     happiness: COMPANION_MAX_CARE,
     energy: COMPANION_MAX_CARE,
+    cleanliness: COMPANION_MAX_CARE,
     careBattle: 4,
   })
   assert.equal(isCompanionContent(care), true)
@@ -109,8 +111,19 @@ test('complete care gives the EXP bonus', () => {
       fullness: COMPANION_CONTENT_THRESHOLD,
       happiness: COMPANION_CONTENT_THRESHOLD,
       energy: COMPANION_CONTENT_THRESHOLD,
+      cleanliness: COMPANION_CONTENT_THRESHOLD,
     },
-    hungry = { ...content, fullness: COMPANION_CONTENT_THRESHOLD - 1 }
+    hungry = { ...content, fullness: COMPANION_CONTENT_THRESHOLD - 1 },
+    grubby = { ...content, cleanliness: COMPANION_CONTENT_THRESHOLD - 1 }
   assert.equal(companionExpMultiplier(content), COMPANION_EXP_MULTIPLIER)
   assert.equal(companionExpMultiplier(hungry), 1)
+  assert.equal(companionExpMultiplier(grubby), 1, 'a dirty companion drops the bonus too')
+})
+
+test('pat, brush and wash care for the companion', () => {
+  const care = { ...createCompanionCare('a', 0), happiness: 40, cleanliness: 30, energy: 60 }
+  assert.ok(COMPANION_CARE_ACTIONS.pat.changes.happiness > 0)
+  assert.ok(applyCareAction(care, 'pat').happiness > care.happiness)
+  assert.ok(applyCareAction(care, 'brush').cleanliness > care.cleanliness)
+  assert.ok(applyCareAction(care, 'wash').cleanliness > applyCareAction(care, 'brush').cleanliness)
 })

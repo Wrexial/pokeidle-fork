@@ -97,6 +97,7 @@ type Companion = {
   fullness: number
   happiness: number
   energy: number
+  cleanliness: number
   /** Wild-battle count at the last care action, for the one-per-win limit. */
   careBattle: number
 }

@@ -18,10 +18,13 @@ export const COMPANION_EXP_MULTIPLIER = 1.15
 /** Money each feed costs. */
 export const COMPANION_FEED_COST = 500
 
+/** Money each wash costs (soap). */
+export const COMPANION_WASH_COST = 200
+
 /**
  * The care actions and what they change. `friendship` is how much the pinned
  * Pokemon's friendship rises.
- * @type {Record<string, { label: string, icon: string, cost: number, changes: { fullness?: number, happiness?: number, energy?: number }, friendship: number, verb: string }>}
+ * @type {Record<string, { label: string, icon: string, cost: number, changes: { fullness?: number, happiness?: number, energy?: number, cleanliness?: number }, friendship: number, verb: string }>}
  */
 export const COMPANION_CARE_ACTIONS = {
   feed: {
@@ -39,6 +42,30 @@ export const COMPANION_CARE_ACTIONS = {
     changes: { happiness: 30, energy: -10 },
     friendship: 3,
     verb: 'played with',
+  },
+  pat: {
+    label: 'Pat',
+    icon: '\u270b',
+    cost: 0,
+    changes: { happiness: 12 },
+    friendship: 2,
+    verb: 'patted',
+  },
+  brush: {
+    label: 'Brush',
+    icon: '\u{1f9f9}',
+    cost: 0,
+    changes: { cleanliness: 35, happiness: 5 },
+    friendship: 3,
+    verb: 'brushed',
+  },
+  wash: {
+    label: 'Wash',
+    icon: '\u{1f6c1}',
+    cost: COMPANION_WASH_COST,
+    changes: { cleanliness: 60, energy: -10 },
+    friendship: 4,
+    verb: 'washed',
   },
   rest: {
     label: 'Rest',
@@ -61,6 +88,7 @@ export function createCompanionCare(id, wildBattlesWon = 0) {
     fullness: COMPANION_MAX_CARE,
     happiness: COMPANION_MAX_CARE,
     energy: COMPANION_MAX_CARE,
+    cleanliness: COMPANION_MAX_CARE,
     // Care is one action per wild win; the first is allowed straight away.
     careBattle: wildBattlesWon - 1,
   }
@@ -72,7 +100,8 @@ export function isCompanionContent(companion) {
     !!companion?.id &&
     companion.fullness >= COMPANION_CONTENT_THRESHOLD &&
     companion.happiness >= COMPANION_CONTENT_THRESHOLD &&
-    companion.energy >= COMPANION_CONTENT_THRESHOLD
+    companion.energy >= COMPANION_CONTENT_THRESHOLD &&
+    companion.cleanliness >= COMPANION_CONTENT_THRESHOLD
   )
 }
 
@@ -91,6 +120,7 @@ export function tickCompanion(companion) {
     fullness: decay(companion.fullness),
     happiness: decay(companion.happiness),
     energy: decay(companion.energy),
+    cleanliness: decay(companion.cleanliness),
   }
 }
 
@@ -110,5 +140,6 @@ export function applyCareAction(companion, actionId) {
     fullness: clamp(companion.fullness + (action.changes.fullness ?? 0)),
     happiness: clamp(companion.happiness + (action.changes.happiness ?? 0)),
     energy: clamp(companion.energy + (action.changes.energy ?? 0)),
+    cleanliness: clamp(companion.cleanliness + (action.changes.cleanliness ?? 0)),
   }
 }

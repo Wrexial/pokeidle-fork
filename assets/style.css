@@ -8508,7 +8508,8 @@ img {
 }
 
 .companion-actions {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 6px
 }
 
@@ -9266,4 +9267,48 @@ img {
     justify-content: flex-end;
     gap: 8px;
     min-height: 24px
+}
+
+.pelago-modal {
+    width: 520px
+}
+
+.pelago-tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 2px
+}
+
+.pelago-tab {
+    position: relative;
+    flex: 1;
+    padding: 7px 8px;
+    font: inherit;
+    font-size: 9px;
+    font-weight: 700;
+    color: #3a2818;
+    background: #00000012;
+    border: 2px solid #483828;
+    cursor: pointer
+}
+
+.pelago-tab:hover {
+    background: #00000022
+}
+
+.pelago-tab.active {
+    background: var(--gold);
+    border-color: var(--gold-dark);
+    color: #1a1008
+}
+
+.pelago-tab-dot {
+    position: absolute;
+    top: 4px;
+    right: 5px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #c83030;
+    border: 1px solid #ffe680
 }

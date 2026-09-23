@@ -24,6 +24,7 @@ export const CHANGELOG = [
             "Zones get their own map marker (a blue diamond) instead of looking like a route, and the hub no longer lists encounters it can't battle",
             "Added areas and zone hubs are settled apart from the measured towns, and each zone hub now links only to its entry point and its neighbouring zones, so Alola's and Paldea's roads are no longer an overlapping web",
             "Battle backgrounds pick up a biome colour grade, so forests, deserts, swamps, volcanoes and tundra read differently even though they share a handful of base scenes",
+            "The Town Map draws a generated terrain layer \u2014 blue water with green/brown land blobs \u2014 from each location's biome and wild types, so you can read the geography at a glance",
           ],
         },
       ],

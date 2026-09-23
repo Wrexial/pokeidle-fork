@@ -2,7 +2,8 @@
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
-import { raidPoolFor, mapAreas, mapData, pokemonSpecies, regions } from '../data/gameData.js'
+import { encounterData, raidPoolFor, mapAreas, mapData, pokemonSpecies, regions } from '../data/gameData.js'
+import { biomeForLocation } from '../data/ui.js'
 import { useGame } from '../game/context.js'
 import { createRoads, getRegionUnlockTokens, pickRaidLegendary } from '../game/progression.js'
 import { MapNode } from './map-node.js'
@@ -16,6 +17,50 @@ const MIN_SCALE = 0.1
 const MAX_SCALE = 3
 const ZOOM_STEP = 1.35
 const DRAG_THRESHOLD = 4
+
+/**
+ * Colours for the generated terrain layer: water vs land shades per biome.
+ * @type {Record<string, string>}
+ */
+const TERRAIN_COLORS = {
+  water: '#4179bd',
+  waterDeep: '#2f5f9e',
+  grassland: '#74b05a',
+  forest: '#4f9149',
+  autumn: '#b5853c',
+  desert: '#cdb27a',
+  swamp: '#5f8a55',
+  volcanic: '#8a4a32',
+  tundra: '#dfe9f0',
+  cave: '#8a7a68',
+  ruins: '#98917f',
+  mountain: '#9c7c57',
+  coast: '#6fa6c8',
+  town: '#c2a466',
+}
+
+/**
+ * The terrain colour for a location: water routes (or routes whose wild table
+ * is mostly Water-types) are blue, everything else takes its biome shade.
+ * @param {MapLocation} location
+ * @param {any} bucket
+ * @returns {string}
+ */
+function terrainColorFor(location, bucket) {
+  if (location.type !== 'zone') {
+    const encounters = bucket?.encounters
+    if (encounters?.length) {
+      const total = encounters.reduce((/** @type {number} */ sum, /** @type {any} */ entry) => sum + entry.weight, 0),
+        water = encounters.reduce(
+          (/** @type {number} */ sum, /** @type {any} */ entry) =>
+            sum + (pokemonSpecies[entry.speciesKey]?.types?.includes('Water') ? entry.weight : 0),
+          0
+        )
+      if (total > 0 && water / total >= 0.5) return TERRAIN_COLORS.waterDeep
+    }
+  }
+  return TERRAIN_COLORS[biomeForLocation(location)] ?? TERRAIN_COLORS.grassland
+}
 
 /** @typedef {{ x: number, y: number, scale: number }} MapView */
 
@@ -91,6 +136,24 @@ export function TownMap() {
     }, []),
     activeLocationIds = locationsByRegion[activeRegion] ?? [],
     activeLocationSet = new Set(activeLocationIds)
+
+  // Terrain blobs, one per visible location, merged by an SVG blur into a
+  // generated landmass/water map. Water is the base, so only land and deeper
+  // water show as blobs.
+  const terrainBlobs = React.useMemo(
+    () =>
+      activeLocationIds.map((locationId) => {
+        const location = mapData[locationId]
+        return {
+          id: locationId,
+          x: location.position.x,
+          y: location.position.y,
+          radius: location.type === 'zone' ? 14 : location.type === 'town' ? 9 : 7,
+          color: terrainColorFor(location, location.routeKey ? encounterData[location.routeKey] : null),
+        }
+      }),
+    [activeLocationIds]
+  )
 
   const roads = [],
     roadSet = new Set()
@@ -457,6 +520,34 @@ export function TownMap() {
               transform: `translate(${view.x}px, ${view.y}px) scale(${view.scale})`,
             },
             children: [
+              jsx('svg', {
+                className: 'town-map-terrain',
+                viewBox: '0 0 100 100',
+                preserveAspectRatio: 'none',
+                children: [
+                  jsx('defs', {
+                    children: jsx('filter', {
+                      id: 'town-terrain-blur',
+                      x: '-25%',
+                      y: '-25%',
+                      width: '150%',
+                      height: '150%',
+                      children: jsx('feGaussianBlur', { stdDeviation: 7 }),
+                    }),
+                  }),
+                  jsx('rect', { x: 0, y: 0, width: 100, height: 100, fill: TERRAIN_COLORS.water }),
+                  jsx('g', {
+                    filter: 'url(#town-terrain-blur)',
+                    children: terrainBlobs.map((blob) =>
+                      jsx(
+                        'circle',
+                        { cx: blob.x, cy: blob.y, r: blob.radius, fill: blob.color },
+                        blob.id
+                      )
+                    ),
+                  }),
+                ],
+              }),
               jsxs('svg', {
                 className: 'town-map-svg',
                 children: [

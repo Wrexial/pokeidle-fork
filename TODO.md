@@ -609,12 +609,11 @@ Reference images kept for future checks:
 The generated maps are readable graphs; the next visual steps need art/design
 decisions:
 
-- [ ] Draw real terrain under the Town Map. The nodes use the reference-map
-      pixel frames, so the references in `tools/map-compare/refs/` would align,
-      but Kanto/Johto/Hoenn reference images are tiny (a few KB) and the rest are
-      large; a consistent, optimised terrain set per region is needed first.
+- [x] Draw a generated terrain layer under the Town Map (blue water, green/
+      brown land) from each location's biome and wild types. See `TERRAIN_COLORS`
+      and `terrainColorFor` in `town-map.js`.
 - [ ] Add more battle background art. There are only four base scenes
-      (grassland, beach, mountain, cave) plus the new biome colour grades; real
+      (grassland, beach, mountain, cave) plus the biome colour grades; real
       forest/desert/swamp/volcano/tundra art would let `routeBackground` stop
       tinting a handful of images.
 - [ ] A zone glyph/label polish pass once the terrain layer exists.

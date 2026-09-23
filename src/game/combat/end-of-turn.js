@@ -96,7 +96,22 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
       }
     }
     let residual = 0
-    if (pokemon.status === 'poison') residual = Math.max(1, Math.floor(pokemon.maxHp / 8))
+    const poisonHeal =
+      abilityOf(pokemon) === 'poisonHeal' &&
+      (pokemon.status === 'poison' || pokemon.status === 'toxic')
+    if (poisonHeal) {
+      const heal = Math.max(1, Math.floor(pokemon.maxHp / 8))
+      pokemon.currentHp = Math.min(pokemon.maxHp, pokemon.currentHp + heal)
+      events.push({
+        type: 'heal',
+        message: `${pokemon.name} restored HP with Poison Heal!`,
+        data: {
+          target: isPlayerSide ? 'player' : 'enemy',
+          hpAfter: pokemon.currentHp,
+          hpMax: pokemon.maxHp,
+        },
+      })
+    } else if (pokemon.status === 'poison') residual = Math.max(1, Math.floor(pokemon.maxHp / 8))
     else if (pokemon.status === 'burn') residual = Math.max(1, Math.floor(pokemon.maxHp / 16))
     else if (pokemon.status === 'toxic') {
       // Badly poisoned damage escalates: 1/16, 2/16, 3/16, ...
@@ -104,6 +119,7 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
       residual = Math.max(1, Math.floor((pokemon.maxHp * counter) / 16))
       pokemon.statusTurns = counter + 1
     } else continue
+    if (residual <= 0) continue
     pokemon.currentHp = Math.max(0, pokemon.currentHp - residual)
     events.push({
       type: 'damage',
@@ -149,6 +165,16 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
       events.push({
         type: 'status',
         message: `${pokemon.name} shed its skin and recovered!`,
+        data: {
+          target: isPlayerSide ? 'player' : 'enemy',
+        },
+      })
+    } else if (ability === 'hydration' && activeWeather?.type === 'rain' && pokemon.status) {
+      pokemon.status = null
+      pokemon.statusTurns = 0
+      events.push({
+        type: 'status',
+        message: `${pokemon.name}'s Hydration cured its status!`,
         data: {
           target: isPlayerSide ? 'player' : 'enemy',
         },
@@ -332,6 +358,32 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
         })
       }
     }
+  }
+  // Bad Dreams chips away at a sleeping opponent.
+  for (const [pokemon, isPlayerSide] of residualTargets) {
+    if (pokemon.currentHp <= 0 || abilityOf(pokemon) !== 'badDreams') continue
+    const victim = isPlayerSide ? enemy : player
+    if (victim.currentHp <= 0 || victim.status !== 'sleep') continue
+    const damage = Math.max(1, Math.floor(victim.maxHp / 8))
+    victim.currentHp = Math.max(0, victim.currentHp - damage)
+    events.push({
+      type: 'damage',
+      message: `${victim.name} is tormented by Bad Dreams! (${damage} damage)`,
+      data: {
+        target: isPlayerSide ? 'enemy' : 'player',
+        damage,
+        hpAfter: victim.currentHp,
+        hpMax: victim.maxHp,
+      },
+    })
+    victim.currentHp <= 0 &&
+      events.push({
+        type: 'faint',
+        message: `${victim.name} fainted!`,
+        data: {
+          target: isPlayerSide ? 'enemy' : 'player',
+        },
+      })
   }
 }
 

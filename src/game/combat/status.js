@@ -1,7 +1,7 @@
 // Status conditions and volatile effects (confusion, infatuation, Leech Seed, contact abilities). Split from game/combat.js.
 
 import { moveMakesContact } from '../../data/move-effects.js'
-import { abilityOf, abilityPreventsStatus } from '../abilities.js'
+import { abilityOf, abilityPreventsStatDrop, abilityPreventsStatus } from '../abilities.js'
 import { genderForPokemon } from '../breeding.js'
 import { chance } from './damage.js'
 import { heldCuresStatus } from '../held-items.js'
@@ -237,6 +237,48 @@ export function applyContactAbility(defender, attacker, moveDef, events, attacke
             target: attackerIsPlayer ? 'player' : 'enemy',
           },
         })
+      break
+    }
+    case 'gooey':
+    case 'tanglingHair': {
+      const stages = attacker.statStages ?? (attacker.statStages = {}),
+        current = stages.speed ?? 0,
+        next = Math.max(-6, current - 1)
+      if (next !== current && !abilityPreventsStatDrop(attacker, 'speed')) {
+        stages.speed = next
+        events.push({
+          type: 'statChange',
+          message: `${attacker.name}'s Speed fell!`,
+          data: { target: attackerIsPlayer ? 'player' : 'enemy' },
+        })
+      }
+      break
+    }
+    case 'stamina': {
+      const stages = defender.statStages ?? (defender.statStages = {}),
+        current = stages.defense ?? 0,
+        next = Math.min(6, current + 1)
+      if (next !== current) {
+        stages.defense = next
+        events.push({
+          type: 'statChange',
+          message: `${defender.name}'s Defense rose!`,
+          data: { target: attackerIsPlayer ? 'enemy' : 'player' },
+        })
+      }
+      break
+    }
+    case 'mummy': {
+      const attackerAbility = abilityOf(attacker)
+      if (attackerAbility && attackerAbility !== 'mummy') {
+        attacker.abilityOverride = 'mummy'
+        attacker.abilitySuppressed = !1
+        events.push({
+          type: 'status',
+          message: `${attacker.name}'s ability was changed to Mummy!`,
+          data: { target: attackerIsPlayer ? 'player' : 'enemy' },
+        })
+      }
       break
     }
   }

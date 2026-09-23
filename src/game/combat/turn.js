@@ -1,7 +1,7 @@
 // Turn resolution: move selection, attack order and damage application. Split from game/combat.js.
 
 import { moveData, moveLearnsets } from '../../data/gameData.js'
-import { abilityAbsorbsType, abilityAttackMultiplier, abilityBlocksNonSuperEffective, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityHalvesSuperEffective, abilityHealsFromType, abilityOf, abilityPreventsStatDrop, abilitySurvivesAtFullHp } from '../abilities.js'
+import { abilityAbsorbsType, abilityAttackMultiplier, abilityBlocksNonSuperEffective, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityEffectivenessMultiplier, abilityHalvesSuperEffective, abilityHealsFromType, abilityOf, abilityPreventsStatDrop, abilitySurvivesAtFullHp } from '../abilities.js'
 import { chooseMoveForBattle, chooseRandomMove } from './ai.js'
 import { calculateDamage, chance, isSelfTargetedMove, normalizeStatKey } from './damage.js'
 import { applyEndOfTurn, reportFieldEffects } from './end-of-turn.js'
@@ -10,7 +10,7 @@ import { heldDamageMultiplier, heldLifeOrbRecoil, heldStatMultiplier, heldSurviv
 import { canEvolveFurther } from '../pokemon.js'
 import { applyConfusion, applyContactAbility, applyInfatuation, applyLeechSeed, applyStatus, handleConfusion, handleInfatuation, statusPreventsAction } from './status.js'
 import { TERRAIN_ABILITIES, TERRAIN_NAMES, TERRAIN_TURNS, terrainAbilityMultiplier, terrainDamageMultiplier, terrainPreventsPriority } from '../terrain.js'
-import { applyIntimidate, clampStatStage, effectiveSpeed, getStatLabel, getStatStage, resetStatStages, screenApplies } from './volatile.js'
+import { applyEntryAbility, applyIntimidate, clampStatStage, effectiveSpeed, getStatLabel, getStatStage, resetStatStages, screenApplies } from './volatile.js'
 import { WEATHER_ABILITIES, WEATHER_NAMES, WEATHER_TURNS, applyWeatherToMove, weatherDamageMultiplier } from '../weather.js'
 
 /**
@@ -106,6 +106,8 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
   if (firstTurn) {
     applyIntimidate(player, enemy, events, !0)
     applyIntimidate(enemy, player, events, !1)
+    applyEntryAbility(player, enemy, events, !0)
+    applyEntryAbility(enemy, player, events, !1)
     const weatherSetter =
       WEATHER_ABILITIES[abilityOf(player) ?? ''] ?? WEATHER_ABILITIES[abilityOf(enemy) ?? '']
     if (weatherSetter)
@@ -141,8 +143,8 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     ;((enemyMoveId = resolveCalledMove(lockedMove, player, activeTerrain)), (enemyMove = moveData[enemyMoveId]))
   }
   const trickRoomActive = (player.trickRoomTurns ?? 0) > 0 || (enemy.trickRoomTurns ?? 0) > 0,
-    playerSpeed = effectiveSpeed(player, activeWeather),
-    enemySpeed = effectiveSpeed(enemy, activeWeather),
+    playerSpeed = effectiveSpeed(player, activeWeather, activeTerrain),
+    enemySpeed = effectiveSpeed(enemy, activeWeather, activeTerrain),
     // Trick Room makes the slower Pokemon move first.
     playerActsFirst = trickRoomActive ? playerSpeed <= enemySpeed : playerSpeed >= enemySpeed,
     attackOrder = [],
@@ -812,7 +814,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
             ? Math.max(1, Math.floor(attack.attacker.attack / 2))
             : attack.attacker.attack
           : attack.attacker.spAttack) *
-        abilityAttackMultiplier(attack.attacker) *
+        abilityAttackMultiplier(attack.attacker, effectiveMove) *
         terrainAbilityMultiplier(
           activeTerrain,
           attack.attacker,
@@ -939,7 +941,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     // Ability + held-item + weather damage modifiers.
     totalDamage = Math.floor(
       totalDamage *
-        abilityDamageDealtMultiplier(attack.attacker, effectiveMove) *
+        abilityDamageDealtMultiplier(attack.attacker, effectiveMove, activeWeather) *
         abilityDamageTakenMultiplier(attack.defender, effectiveMove) *
         heldDamageMultiplier(attack.attacker, effectiveMove) *
         weatherDamageMultiplier(activeWeather, effectiveMove) *
@@ -947,6 +949,11 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     )
     if (abilityHalvesSuperEffective(attack.defender) && damageResult.effectiveness > 1)
       totalDamage = Math.max(1, Math.floor(totalDamage / 2))
+    // Tinted Lens / Neuroforce scale the effectiveness-based damage.
+    totalDamage = Math.max(
+      1,
+      Math.floor(totalDamage * abilityEffectivenessMultiplier(attack.attacker, damageResult.effectiveness))
+    )
     if (abilityBlocksNonSuperEffective(attack.defender, damageResult.effectiveness)) {
       events.push({
         type: 'miss',

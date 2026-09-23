@@ -1,6 +1,6 @@
 # TODO
 
-Open ideas and follow-ups. Current game version: **0.38.12**
+Open ideas and follow-ups. Current game version: **0.39.0**
 (`src/data/changelog.js`). Finished work lives in the changelog, not here — this
 file only tracks what is **still open**. See `AGENTS.md` for architecture,
 commands and data conventions.
@@ -206,10 +206,27 @@ status + stat changes. Healing, multi-hit, Protect, hazards, accuracy/evasion
 stages, the extra statuses, weather/terrain, the crit-rate pass, the
 auto-battler AI and the contact abilities have shipped.
 
+**Shipped (0.39.0):** a large expansion of the ability hooks — attacking
+modifiers (type specialists, Technician, Tough Claws, Iron Fist, Strong Jaw,
+Mega Launcher, Sharpness, Reckless, Sheer Force, Punk Rock, Sand Force, Solar
+Power, Tinted Lens, Neuroforce, Hustle, Gorilla Tactics, Toxic/Flare Boost),
+defensive ones (Fluffy, Heatproof, Ice Scales, Fur Coat, Purifying Salt, Dry
+Skin, Marvel Scale), switch-in (Intrepid Sword, Dauntless Shield, Download),
+contact (Gooey / Tangling Hair, Stamina, Mummy), absorb (Earth Eater), recovery
+(Poison Heal, Bad Dreams, Hydration) and speed (Quick Feet, Unburden, Surge
+Surfer, Protosynthesis, Quark Drive). `abilityPreventsStatus` also now treats
+badly-poisoned as poison (Immunity / Pastel Veil).
+
 Still open:
 
-- [ ] Ability / held-item hooks — the rest of the ~300 abilities (see #2a) and
-      the remaining item nuances (Choice locking, more berries, Rocky Helmet).
+- [ ] The REST of the ~300 abilities. The long tail is the complex ones:
+      transformation (Imposter, Transform-like, Disguise, Ice Face, Stance
+      Change, Zero to Hero, Power Construct), weather-aura abilities (Desolate
+      Land / Primordial Sea / Delta Stream, the Ruin quartet), ability copy /
+      on-KO chains (Trace, Moxie, Beast Boost, Chilling/Grim Neigh, Soul-Heart,
+      Battle Bond), and picky on-hit/item abilities (Pickpocket, Magician,
+      Symbiosis, Cud Chew, Gulp Missile).
+- [ ] The remaining item nuances (Choice locking, more berries, Rocky Helmet).
 - [ ] Battle polish: move animations / damage numbers / hit feedback.
 
 *(Switching on a bad matchup is intentionally discarded: an auto-switching

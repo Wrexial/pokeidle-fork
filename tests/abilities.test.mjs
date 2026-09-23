@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 const data = installGameData()
 
-const { abilityAttackMultiplier, abilityPreventsStatus } = await import('../src/game/abilities.js')
+const { abilityAttackMultiplier, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityEffectivenessMultiplier, abilityPreventsStatus } = await import('../src/game/abilities.js')
 const { calculateDamage, resolveBattleTurn } = await import('../src/game/combat.js')
 const { abilityDisplayName, rollAbility } = await import('../src/game/pokemon.js')
 const { moveData } = await import('../src/data/gameData.js')
@@ -203,4 +203,182 @@ test('crit abilities modify the critical-hit system', () => {
     assert.equal(immune.isCrit, false, 'Battle Armor / Shell Armor block crits')
     assert.ok(sniper.damage > base.damage, 'Sniper hits harder on a crit')
   })
+})
+
+test('type-specialist and move-family abilities boost the right moves', () => {
+  assert.equal(abilityDamageDealtMultiplier(battler({ ability: 'dragonsMaw' }), moveData.dragonClaw), 1.5)
+  assert.equal(abilityDamageDealtMultiplier(battler({ ability: 'transistor' }), moveData.thunderbolt), 1.5)
+  assert.equal(abilityDamageDealtMultiplier(battler({ ability: 'technician' }), moveData.tackle), 1.5)
+  assert.equal(abilityDamageDealtMultiplier(battler({ ability: 'technician' }), moveData.flamethrower), 1)
+  assert.equal(abilityDamageDealtMultiplier(battler({ ability: 'ironFist' }), moveData.firePunch), 1.2)
+  assert.equal(abilityDamageDealtMultiplier(battler({ ability: 'strongJaw' }), moveData.crunch), 1.5)
+  assert.equal(abilityDamageDealtMultiplier(battler({ ability: 'sharpness' }), moveData.nightSlash), 1.5)
+  assert.equal(abilityDamageDealtMultiplier(battler({ ability: 'toughClaws' }), moveData.tackle), 1.3)
+  assert.equal(
+    abilityDamageDealtMultiplier(battler({ ability: 'sandForce' }), moveData.earthquake, { type: 'sandstorm' }),
+    1.3
+  )
+})
+
+test('defensive abilities halve the right hits', () => {
+  const withAbility = (ability, extra = {}) => battler({ ability, ...extra })
+  assert.equal(abilityDamageTakenMultiplier(withAbility('fluffy'), moveData.tackle), 0.5)
+  assert.equal(abilityDamageTakenMultiplier(withAbility('fluffy'), moveData.flamethrower), 2)
+  assert.equal(abilityDamageTakenMultiplier(withAbility('iceScales'), moveData.flamethrower), 0.5)
+  assert.equal(abilityDamageTakenMultiplier(withAbility('furCoat'), moveData.tackle), 0.5)
+  assert.equal(abilityDamageTakenMultiplier(withAbility('heatproof'), moveData.flamethrower), 0.5)
+  assert.equal(abilityDamageTakenMultiplier(withAbility('purifyingSalt'), moveData.shadowBall), 0.5)
+  assert.equal(
+    abilityDamageTakenMultiplier(withAbility('marvelScale', { status: 'burn' }), moveData.tackle),
+    2 / 3
+  )
+})
+
+test('Tinted Lens and Neuroforce scale effectiveness', () => {
+  assert.equal(abilityEffectivenessMultiplier(battler({ ability: 'tintedLens' }), 0.5), 2)
+  assert.equal(abilityEffectivenessMultiplier(battler({ ability: 'tintedLens' }), 2), 1)
+  assert.equal(abilityEffectivenessMultiplier(battler({ ability: 'neuroforce' }), 2), 1.25)
+  assert.equal(abilityEffectivenessMultiplier(battler({ ability: 'neuroforce' }), 0.5), 1)
+})
+
+test('attack abilities boost the right moves', () => {
+  assert.equal(abilityAttackMultiplier(battler({ ability: 'hustle' })), 1.5)
+  assert.equal(abilityAttackMultiplier(battler({ ability: 'gorillaTactics' })), 1.5)
+  assert.equal(
+    abilityAttackMultiplier(battler({ ability: 'toxicBoost', status: 'poison' }), moveData.tackle),
+    1.5
+  )
+  assert.equal(
+    abilityAttackMultiplier(battler({ ability: 'toxicBoost', status: 'poison' }), moveData.flamethrower),
+    1,
+    'Toxic Boost only boosts physical moves'
+  )
+  assert.equal(
+    abilityAttackMultiplier(battler({ ability: 'flareBoost', status: 'burn' }), moveData.flamethrower),
+    1.5
+  )
+})
+
+test('Earth Eater absorbs Ground moves and heals', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({ name: 'Player', isPlayer: true, moves: ['earthquake'], speed: 200 }),
+      enemy = battler({
+        name: 'Foe',
+        ability: 'earthEater',
+        currentHp: 200,
+        maxHp: 400,
+        types: ['Normal'],
+      })
+    resolveBattleTurn(player, enemy, false)
+    assert.ok(enemy.currentHp > 200, 'the Ground move heals the holder')
+  })
+})
+
+test('gooey lowers the attacker speed on contact', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['tackle'],
+        speed: 200,
+        statStages: { speed: 0 },
+      }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], ability: 'gooey' })
+    resolveBattleTurn(player, enemy, false)
+    assert.equal(player.statStages.speed, -1)
+  })
+})
+
+test('Stamina raises Defense and Mummy replaces the attacker ability', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({ name: 'Player', isPlayer: true, moves: ['tackle'], speed: 200 }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], ability: 'stamina' })
+    resolveBattleTurn(player, enemy, false)
+    assert.equal(enemy.statStages.defense, 1)
+  })
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['tackle'],
+        speed: 200,
+        ability: 'blaze',
+      }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], ability: 'mummy' })
+    resolveBattleTurn(player, enemy, false)
+    assert.equal(player.abilityOverride, 'mummy')
+  })
+})
+
+test('Pastel Veil blocks poison', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({ name: 'Player', isPlayer: true, moves: ['toxic'], speed: 200 }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], ability: 'pastelVeil', types: ['Normal'] })
+    resolveBattleTurn(player, enemy, false)
+    assert.equal(enemy.status ?? null, null)
+  })
+})
+
+test('entry abilities raise a stat on switch in', () => {
+  withFixedRandom(0.5, () => {
+    const stagesFor = (/** @type {string} */ ability) => {
+      const player = battler({ name: 'Player', isPlayer: true, moves: ['splash'], speed: 200, ability }),
+        enemy = battler({ name: 'Foe', moves: ['splash'] })
+      resolveBattleTurn(player, enemy, false, !0)
+      return player.statStages
+    }
+    assert.equal(stagesFor('intrepidSword').attack, 1)
+    assert.equal(stagesFor('dauntlessShield').defense, 1)
+    assert.equal(stagesFor('download').attack, 1)
+  })
+})
+
+test('Poison Heal heals instead of taking poison damage', () => {
+  const player = battler({
+      name: 'Player',
+      isPlayer: true,
+      moves: ['splash'],
+      speed: 200,
+      ability: 'poisonHeal',
+      status: 'poison',
+      currentHp: 200,
+      maxHp: 400,
+    }),
+    enemy = battler({ name: 'Foe', moves: ['splash'] })
+  resolveBattleTurn(player, enemy, false)
+  assert.equal(player.currentHp, 250, 'heals 1/8 max HP')
+})
+
+test('Bad Dreams hurts a sleeping opponent', () => {
+  const player = battler({
+      name: 'Player',
+      isPlayer: true,
+      moves: ['splash'],
+      speed: 200,
+      ability: 'badDreams',
+    }),
+    enemy = battler({
+      name: 'Foe',
+      moves: ['splash'],
+      status: 'sleep',
+      statusTurns: 3,
+      currentHp: 400,
+      maxHp: 400,
+    })
+  resolveBattleTurn(player, enemy, false)
+  assert.equal(enemy.currentHp, 350, 'chips 1/8 max HP')
+})
+
+test('Hydration cures status in the rain', () => {
+  const player = battler({
+      name: 'Player',
+      isPlayer: true,
+      moves: ['splash'],
+      speed: 200,
+      ability: 'hydration',
+      status: 'burn',
+    }),
+    enemy = battler({ name: 'Foe', moves: ['splash'] })
+  resolveBattleTurn(player, enemy, false, false, { type: 'rain', turns: 5 })
+  assert.equal(player.status, null)
 })

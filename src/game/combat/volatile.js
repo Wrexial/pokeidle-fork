@@ -141,14 +141,28 @@ export function screenApplies(defender, moveDef) {
  * @param {{ type: string } | null} [weather]
  * @returns {number}
  */
-export function effectiveSpeed(pokemon, weather) {
-  const speed =
-      pokemon.speed *
-      heldStatMultiplier(pokemon, 'speed') *
-      weatherSpeedMultiplier(weather, pokemon) *
-      // Tailwind doubles the holder's side Speed.
-      ((pokemon.tailwindTurns ?? 0) > 0 ? 2 : 1),
-    effective = pokemon.status === 'paralysis' ? Math.max(1, Math.floor(speed / 2)) : speed
+/**
+ * Speed used for turn order: abilities (Weather, terrain, Quick Feet,
+ * Unburden), then paralysis halves it.
+ * @param {BattlePokemon} pokemon
+ * @param {{ type: string } | null} [weather]
+ * @param {{ type: string } | null} [terrain]
+ * @returns {number}
+ */
+export function effectiveSpeed(pokemon, weather, terrain = null) {
+  const ability = abilityOf(pokemon)
+  let speed =
+    pokemon.speed *
+    heldStatMultiplier(pokemon, 'speed') *
+    weatherSpeedMultiplier(weather, pokemon) *
+    // Tailwind doubles the holder's side Speed.
+    ((pokemon.tailwindTurns ?? 0) > 0 ? 2 : 1)
+  if (ability === 'quickFeet' && pokemon.status) speed *= 1.5
+  if (ability === 'unburden' && pokemon.heldItemUsed) speed *= 2
+  if (ability === 'surgeSurfer' && terrain?.type === 'electric') speed *= 2
+  if (ability === 'protosynthesis' && weather?.type === 'sun') speed *= 1.5
+  if (ability === 'quarkDrive' && terrain?.type === 'electric') speed *= 1.5
+  const effective = pokemon.status === 'paralysis' ? Math.max(1, Math.floor(speed / 2)) : speed
   return effective
 }
 
@@ -169,6 +183,36 @@ export function resetStatStages(target, events, targetIsPlayer) {
       target: targetIsPlayer ? 'player' : 'enemy',
     },
   })
+}
+
+/**
+ * Entry stat abilities: Intrepid Sword / Dauntless Shield raise a stat on switch
+ * in, and Download raises the better attacking stat against the foe's defenses.
+ * @param {BattlePokemon} source
+ * @param {BattlePokemon} target
+ * @param {any[]} events
+ * @param {boolean} sourceIsPlayer
+ */
+export function applyEntryAbility(source, target, events, sourceIsPlayer) {
+  const ability = abilityOf(source)
+  if (!ability) return
+  /** @param {string} statKey @param {string} label */
+  const raise = (statKey, label) => {
+    const stages = source.statStages ?? (source.statStages = {}),
+      current = stages[statKey] ?? 0,
+      next = clampStatStage(current + 1)
+    if (next === current) return
+    stages[statKey] = next
+    events.push({
+      type: 'statChange',
+      message: `${source.name}'s ${label} rose!`,
+      data: { target: sourceIsPlayer ? 'player' : 'enemy' },
+    })
+  }
+  if (ability === 'intrepidSword') raise('attack', 'Attack')
+  else if (ability === 'dauntlessShield') raise('defense', 'Defense')
+  else if (ability === 'download')
+    raise(target.defense <= target.spDefense ? 'attack' : 'spAttack', target.defense <= target.spDefense ? 'Attack' : 'Sp. Atk')
 }
 
 /**

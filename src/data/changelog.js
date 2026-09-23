@@ -1,10 +1,25 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.38.12'
+export const GAME_VERSION = '0.39.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.39.0',
+      subtitle: 'More Abilities',
+      sections: [
+        {
+          heading: 'Abilities',
+          items: [
+            'A large batch of attacking abilities is now modelled: type specialists (Dragon\u2019s Maw, Steelworker, Transistor, Rocky Payload, Water Bubble, Adaptability), power boosts (Technician, Tough Claws, Iron Fist, Strong Jaw, Mega Launcher, Sharpness, Reckless, Sheer Force, Punk Rock, Sand Force, Solar Power, Tinted Lens, Neuroforce) and stat boosts (Hustle, Gorilla Tactics, Toxic Boost, Flare Boost)',
+            'Defensive abilities now halve or amplify the right hits: Fluffy, Heatproof, Ice Scales, Fur Coat, Purifying Salt, Dry Skin and Marvel Scale join the existing Thick Fat / Multiscale / Filter set',
+            'Switch-in and support abilities: Intrepid Sword, Dauntless Shield, Download, Gooey / Tangling Hair, Stamina, Mummy, Earth Eater, Pastel Veil and Mirror Armor / Full Metal Body',
+            'Recovery and speed abilities: Poison Heal, Bad Dreams, Hydration, and Quick Feet / Unburden / Surge Surfer / Protosynthesis / Quark Drive for turn order',
+          ],
+        },
+      ],
+    },
     {
       version: '0.38.12',
       subtitle: 'Type, Stat & Call Moves',

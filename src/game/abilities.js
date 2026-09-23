@@ -5,6 +5,8 @@
 // Only a first, high-impact set is modelled — the full 299 abilities from
 // PokeAPI fall through to no effect until they are added here.
 
+import { moveMakesContact } from '../data/move-effects.js'
+
 /** @param {BattlePokemon} pokemon */
 export function abilityOf(pokemon) {
   if (!pokemon) return null
@@ -13,6 +15,15 @@ export function abilityOf(pokemon) {
   if (pokemon.abilitySuppressed) return null
   return pokemon.abilityOverride ?? pokemon.ability ?? null
 }
+
+// Move-name families used by ability damage modifiers (Iron Fist, Strong Jaw,
+// Mega Launcher, Sharpness, Punk Rock, Soundproof).
+const PUNCH_MOVE = /punch|hammer arm|sky uppercut|meteor mash|double iron bash/i
+const BITE_MOVE = /fang|bite|crunch|jaw/i
+const PULSE_MOVE = /pulse|aura sphere/i
+const SLICING_MOVE = /slash|blade|sword|scissor|psycho cut|fury cutter|cut/i
+const SOUND_MOVE =
+  /boomburst|buzz|voice|overdrive|snarl|snore|uproar|sing|perish song|round|metal sound|whistle|clanging|torch song|alluring voice/i
 
 /** Abilities whose holder is immune to Ground moves. */
 const GROUND_IMMUNE_ABILITIES = new Set(['levitate'])
@@ -28,6 +39,7 @@ const TYPE_ABSORB_ABILITIES = /** @type {Record<string, string>} */ ({
   wellBakedBody: 'Fire',
   sapSipper: 'Grass',
   stormDrain: 'Water',
+  earthEater: 'Ground',
 })
 
 /** Abilities that double the holder's Attack. */
@@ -42,6 +54,8 @@ const STATUS_IMMUNE_ABILITIES = /** @type {Record<string, string>} */ ({
   vitalSpirit: 'sleep',
   sweetVeil: 'sleep',
   magmaArmor: 'freeze',
+  pastelVeil: 'poison',
+  purifyingSalt: 'all',
 })
 
 /**
@@ -70,49 +84,116 @@ export function abilityHealsFromType(defender, moveType) {
 }
 
 /**
- * Attack multiplier from an ability (Huge Power / Pure Power, Guts).
+ * Attack multiplier from an ability (Huge Power / Pure Power, Guts, Hustle,
+ * Gorilla Tactics, Toxic Boost, Flare Boost).
  * @param {BattlePokemon} attacker
+ * @param {Move} [moveDef]
  * @returns {number}
  */
-export function abilityAttackMultiplier(attacker) {
+export function abilityAttackMultiplier(attacker, moveDef) {
   const ability = abilityOf(attacker)
   if (!ability) return 1
   if (HUGE_POWER_ABILITIES.has(ability)) return 2
   if (ability === 'guts' && attacker.status) return 1.5
+  if (ability === 'hustle') return 1.5
+  if (ability === 'gorillaTactics') return 1.5
+  if (ability === 'toxicBoost' && attacker.status && moveDef?.category === 'physical') return 1.5
+  if (ability === 'flareBoost' && attacker.status && moveDef?.category === 'special') return 1.5
   return 1
 }
 
 /**
- * Damage multiplier for the attacker's own ability (the starter pinch
- * abilities boost their type below a third HP).
+ * Damage multiplier for the attacker's own ability: the pinch abilities (boost
+ * their type below a third HP), type specialists, Adaptability, Technician,
+ * contact/move-family boosts, Reckless, Sheer Force, Sand Force and Solar Power.
  * @param {BattlePokemon} attacker
  * @param {Move} moveDef
+ * @param {{ type: string } | null} [weather]
  * @returns {number}
  */
-export function abilityDamageDealtMultiplier(attacker, moveDef) {
-  const pinchTypes = /** @type {Record<string, string>} */ ({
-      overgrow: 'Grass',
-      blaze: 'Fire',
-      torrent: 'Water',
-      swarm: 'Bug',
-    }),
-    ability = abilityOf(attacker)
+export function abilityDamageDealtMultiplier(attacker, moveDef, weather = null) {
+  const ability = abilityOf(attacker)
   if (!ability || !moveDef) return 1
-  return pinchTypes[ability] === moveDef.type && attacker.currentHp <= attacker.maxHp / 3 ? 1.5 : 1
+  const name = moveDef.name ?? ''
+  // Pinch abilities boost their own type below a third HP.
+  const pinchTypes = /** @type {Record<string, string>} */ ({
+    overgrow: 'Grass',
+    blaze: 'Fire',
+    torrent: 'Water',
+    swarm: 'Bug',
+  })
+  if (pinchTypes[ability] === moveDef.type && attacker.currentHp <= attacker.maxHp / 3) return 1.5
+  // Type specialists.
+  const typeBoost = /** @type {Record<string, string>} */ ({
+    dragonsMaw: 'Dragon',
+    steelworker: 'Steel',
+    transistor: 'Electric',
+    rockyPayload: 'Rock',
+  })
+  if (typeBoost[ability] === moveDef.type) return 1.5
+  if (ability === 'waterBubble' && moveDef.type === 'Water') return 2
+  if (ability === 'adaptability' && attacker.types?.includes(moveDef.type)) return 4 / 3
+  if (ability === 'technician' && (moveDef.power ?? 0) > 0 && moveDef.power <= 60) return 1.5
+  if (ability === 'toughClaws' && moveMakesContact(moveDef)) return 1.3
+  if (ability === 'ironFist' && PUNCH_MOVE.test(name)) return 1.2
+  if (ability === 'strongJaw' && BITE_MOVE.test(name)) return 1.5
+  if (ability === 'megaLauncher' && PULSE_MOVE.test(name)) return 1.5
+  if (ability === 'sharpness' && SLICING_MOVE.test(name)) return 1.5
+  if (ability === 'reckless' && moveDef.effect?.type === 'recoil') return 1.2
+  if (ability === 'sheerForce' && moveDef.effect) return 1.3
+  if (ability === 'punkRock' && SOUND_MOVE.test(name)) return 1.3
+  if (
+    ability === 'sandForce' &&
+    weather?.type === 'sandstorm' &&
+    ['Rock', 'Ground', 'Steel'].includes(moveDef.type)
+  )
+    return 1.3
+  if (ability === 'solarPower' && weather?.type === 'sun' && moveDef.category === 'special') return 1.5
+  return 1
 }
 
 /**
- * Damage multiplier from the defender's ability (Thick Fat, Multiscale).
+ * Effectiveness-based attacker multipliers: Tinted Lens doubles not-very-
+ * effective hits, Neuroforce boosts super-effective ones.
+ * @param {BattlePokemon} attacker
+ * @param {number} effectiveness
+ * @returns {number}
+ */
+export function abilityEffectivenessMultiplier(attacker, effectiveness) {
+  const ability = abilityOf(attacker)
+  if (ability === 'tintedLens' && effectiveness > 0 && effectiveness < 1) return 2
+  if (ability === 'neuroforce' && effectiveness > 1) return 1.25
+  return 1
+}
+
+/**
+ * Damage multiplier from the defender's ability (Thick Fat, Multiscale / Shadow
+ * Shield at full HP, Fluffy, Heatproof, Water Bubble, Ice Scales, Purifying
+ * Salt, Punk Rock, Fur Coat, Dry Skin and Marvel Scale).
  * @param {BattlePokemon} defender
  * @param {Move} moveDef
  * @returns {number}
  */
 export function abilityDamageTakenMultiplier(defender, moveDef) {
   const ability = abilityOf(defender)
-  if (!ability) return 1
+  if (!ability || !moveDef) return 1
+  const name = moveDef.name ?? '',
+    contact = moveMakesContact(moveDef)
   if (ability === 'thickFat' && (moveDef.type === 'Fire' || moveDef.type === 'Ice')) return 0.5
   if ((ability === 'multiscale' || ability === 'shadowShield') && defender.currentHp >= defender.maxHp)
     return 0.5
+  if (ability === 'fluffy') {
+    if (moveDef.type === 'Fire') return 2
+    if (contact) return 0.5
+  }
+  if (ability === 'heatproof' && moveDef.type === 'Fire') return 0.5
+  if (ability === 'waterBubble' && moveDef.type === 'Fire') return 0.5
+  if (ability === 'iceScales' && moveDef.category === 'special') return 0.5
+  if (ability === 'purifyingSalt' && moveDef.type === 'Ghost') return 0.5
+  if (ability === 'punkRock' && SOUND_MOVE.test(name)) return 0.5
+  if (ability === 'furCoat' && moveDef.category === 'physical') return 0.5
+  if (ability === 'drySkin' && moveDef.type === 'Fire') return 1.25
+  if (ability === 'marvelScale' && defender.status && moveDef.category === 'physical') return 2 / 3
   return 1
 }
 
@@ -129,7 +210,10 @@ export function abilityHalvesSuperEffective(defender) {
  * @returns {boolean}
  */
 export function abilityPreventsStatus(target, status) {
-  return STATUS_IMMUNE_ABILITIES[abilityOf(target) ?? ''] === status
+  const blocked = STATUS_IMMUNE_ABILITIES[abilityOf(target) ?? ''],
+    // Badly poisoned still counts as poison for Immunity / Pastel Veil.
+    normalized = status === 'toxic' ? 'poison' : status
+  return blocked === normalized || blocked === 'all'
 }
 
 /**
@@ -143,6 +227,8 @@ export function abilityPreventsStatDrop(target, statKey) {
   const blocked = /** @type {Record<string, string[]>} */ ({
     clearBody: ['all'],
     whiteSmoke: ['all'],
+    mirrorArmor: ['all'],
+    fullMetalBody: ['all'],
     hyperCutter: ['attack'],
     bigPecks: ['defense'],
     keenEye: ['accuracy'],

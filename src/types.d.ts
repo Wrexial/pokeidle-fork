@@ -91,6 +91,22 @@ type Pokemon = BattlePokemon & {
   isShiny: boolean
 }
 
+/** A pinned companion and its care stats (see game/companion.js). */
+type Companion = {
+  id: string | null
+  fullness: number
+  happiness: number
+  energy: number
+  /** Wild-battle count at the last care action, for the one-per-win limit. */
+  careBattle: number
+}
+
+/** One Berry Garden plot: a growing berry, or null when empty. */
+type GardenPlot = { berryId: string; battlesRemaining: number } | null
+
+/** The Berry Garden (see game/garden.js). */
+type Garden = { plots: GardenPlot[] }
+
 /** Traits a Daycare egg can inherit from its parents. */
 type BreedingInheritance = {
   /** Complete IV block (3 stats take the best of both parents). */
@@ -411,6 +427,10 @@ type GameState = {
   offlineReport?: { awayMs: number, money: number, items: Record<string, number> } | null
   /** Daycare parents (up to 2) and battles toward the next egg. */
   daycare: { parents: Pokemon[]; progress: number }
+  /** The pinned companion and its care stats (see game/companion.js). */
+  companion: Companion
+  /** The Berry Garden plots (see game/garden.js). */
+  garden: Garden
   defeatedGyms: string[]
   defeatedEliteFour: string[]
   defeatedChampions: string[]

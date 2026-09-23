@@ -10,6 +10,8 @@ import { BASE_FRIENDSHIP, generateIVs, calculatePokemonStats, resolvePokemonMove
 import { ACHIEVEMENTS } from '../data/achievements.js'
 import { natureByKey, randomNature } from '../data/natures.js'
 import { POKEMON_TYPES } from '../data/moves.js'
+import { COMPANION_MAX_CARE, createCompanionCare } from './companion.js'
+import { GARDEN_BERRIES, createGarden } from './garden.js'
 import { RODS, rodsForRegionCount } from './minigames.js'
 import { initialGameState } from './reducer.js'
 import { computeOfflineReward } from './progression.js'
@@ -323,6 +325,36 @@ export function repairSave(saved) {
       progress: typeof saved.daycare?.progress === 'number' ? saved.daycare.progress : 0,
     }
 
+  // Companion care: keep the pinned Pokemon only if it still exists, and clamp
+  // the care stats. Garden plots are rebuilt to the current plot count.
+  const companionIds = new Set([...party, ...box].map((pokemon) => pokemon.id)),
+    savedCompanion =
+      saved.companion && typeof saved.companion === 'object' ? saved.companion : null,
+    clampCare = /** @param {any} value */ (value) =>
+      Math.max(0, Math.min(COMPANION_MAX_CARE, typeof value === 'number' ? value : COMPANION_MAX_CARE)),
+    companion =
+      savedCompanion?.id && companionIds.has(savedCompanion.id)
+        ? {
+            id: savedCompanion.id,
+            fullness: clampCare(savedCompanion.fullness),
+            happiness: clampCare(savedCompanion.happiness),
+            energy: clampCare(savedCompanion.energy),
+            careBattle:
+              typeof savedCompanion.careBattle === 'number' ? savedCompanion.careBattle : -1,
+          }
+        : createCompanionCare(null, 0),
+    savedPlots = Array.isArray(saved.garden?.plots) ? saved.garden.plots : [],
+    garden = createGarden()
+  garden.plots = garden.plots.map((_, index) => {
+    const plot = savedPlots[index]
+    if (!plot || !GARDEN_BERRIES[plot.berryId]) return null
+    const remaining = Number(plot.battlesRemaining)
+    return {
+      berryId: plot.berryId,
+      battlesRemaining: Number.isFinite(remaining) ? Math.max(0, Math.floor(remaining)) : 0,
+    }
+  })
+
   // Repair save data that references content which no longer exists (regions,
   // routes and locations have been rebuilt several times), so an old save can't
   // put the game loop into an unknown location and crash.
@@ -479,6 +511,8 @@ export function repairSave(saved) {
     pokerus,
     quests,
     daycare,
+    companion,
+    garden,
     shinySeen,
     alwaysCatchShinies: saved.alwaysCatchShinies ?? true,
     defeatedGyms,
@@ -614,6 +648,8 @@ export const SAVED_STATE_KEYS = [
   'pokerus',
   'quests',
   'daycare',
+  'companion',
+  'garden',
   'shinySeen',
   'defeatedGyms',
   'defeatedEliteFour',

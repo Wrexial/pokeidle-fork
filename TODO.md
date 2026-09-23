@@ -1,6 +1,6 @@
 # TODO
 
-Open ideas and follow-ups. Current game version: **0.17.0**
+Open ideas and follow-ups. Current game version: **0.18.0**
 (`src/data/changelog.js`). Finished work lives in the changelog, not here — this
 file only tracks what is **still open**. See `AGENTS.md` for architecture,
 commands and data conventions.
@@ -291,6 +291,10 @@ instead of from the League tab.
 a route's water species a cast can reach, with a level bonus, and each better
 rod is found by opening another region.
 
+**Shipped (0.18.0):** a Companion (care decays per wild win, feed/play/rest with
+a one-per-win limit, +15% EXP while content) and a Berry Garden (plant Oran /
+Sitrus / Lum Berries, ripen over wild wins, harvest), both in the top bar.
+
 `src/game/minigames.js` holds `MINIGAME_LOCATIONS` (location → fixed minigame),
 `MINIGAME_INFO` (title/cost/action/hint), `ROUTE_ACTIVITIES` and `RODS` plus
 each game's config/reward table. Adding a fixed minigame is a scene component + a
@@ -313,24 +317,19 @@ remaining minigame ideas.
 
 ### 29b. Companion / tamagotchi care
 
-The Daycare is already a passive version of this (two parents → egg). A
-hands-on companion that you feed/play with/rest would be the active counterpart
-and would give friendship (#6) a purpose:
+**Shipped (0.18.0):** pin a party Pokémon and keep it fed, happy and rested;
+care decays per wild win, one action per win, and a content companion gives
++15% EXP (see `src/game/companion.js`). Still open:
 
-- [ ] Pick (or pin) one party Pokémon as the companion; add `care` state
-      (hunger / happiness / energy) that decays on a real-time timer or battle
-      count.
-- [ ] Feed / play / rest actions with small cooldowns, costing money or berries;
-      raising friendship and a temporary bonus (EXP, catch rate, shiny odds).
-- [ ] Visual feedback — an animated buddy panel / petting scene using the
-      existing sprite helpers.
-- [ ] Keep it optional and non-punishing (the game is idle) — neglect should
-      pause bonuses, not damage the Pokémon.
+- [ ] An animated buddy panel / petting scene using the existing sprite helpers
+      (it is a static modal today).
 
 ### 29c. Other minigame ideas
 
-- [ ] **Berry growing + blending** — plant/pick berries on a timer, blend into
-      Poffins/items (ties into care and held items, #2c).
+- [x] **Berry growing** — plant / pick berries over a battle count
+      (`src/game/garden.js`).
+- [ ] **Berry blending** — turn harvested berries into Poffins / items (ties
+      into care and held items, #2c).
 
 Relevant code: the real-time loop and battle-count ticks (`src/hooks.js`
 `useGameLoop`, `tickBattleCounters` in `src/game/progression.js`), the reducer's

@@ -256,6 +256,15 @@ export const consumableItems = {
       sellPrice: 150,
       heal: 20,
     },
+    oranBerry: {
+      id: 'oranBerry',
+      name: 'Oran Berry',
+      description: 'Restores 10 HP to a party Pokemon. Can also be planted in the Berry Garden.',
+      category: 'medicine',
+      buyPrice: 100,
+      sellPrice: 50,
+      heal: 10,
+    },
     superPotion: {
       id: 'superPotion',
       name: 'Super Potion',
@@ -440,6 +449,7 @@ export const standardMartItems = [
     { itemId: 'timerball', unlockWildBattlesWon: 150 },
     { itemId: 'duskball', unlockWildBattlesWon: 200 },
     { itemId: 'potion' },
+    { itemId: 'oranBerry' },
     { itemId: 'superPotion', unlockWildBattlesWon: 40 },
     { itemId: 'hyperPotion', unlockWildBattlesWon: 120 },
     { itemId: 'revive', unlockWildBattlesWon: 80 },

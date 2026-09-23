@@ -5,7 +5,9 @@ import { dailyDropMultiplier } from '../../../data/daily-events.js'
 import { mapData, pokemonSpecies } from '../../../data/gameData.js'
 import { consumableItems } from '../../../data/items.js'
 import { canBreed } from '../../breeding.js'
+import { tickCompanion } from '../../companion.js'
 import { createVolatileState } from '../../combat.js'
+import { tickGarden } from '../../garden.js'
 import { emptyBattleHazards } from '../../hazards.js'
 import { gainFriendship, isBattleReady } from '../../pokemon.js'
 import { computeUnlockedLocations, rollCandyDrop, rollValuableDrop, syncActivePokemonIntoParty, tickBattleCounters, tickPartyEggs, tickPokerus } from '../../progression.js'
@@ -114,6 +116,8 @@ export function consumeEvent(state, action) {
     pokerus = state.pokerus,
     quests = state.quests,
     daycare = state.daycare,
+    companion = state.companion,
+    garden = state.garden,
     party = state.party,
     hatchedEgg = /** @type {Pokemon[]} */ ([]),
     inventory = state.inventory,
@@ -170,6 +174,9 @@ export function consumeEvent(state, action) {
     pokerusResult.infected &&
       secretNotices.push('Your Pokemon caught Pokerus! EXP gain is doubled for a while.')
     pokerusResult.cured && secretNotices.push('Your Pokemon recovered from Pokerus.')
+    // A pinned companion's care fades, and garden berries ripen.
+    companion = tickCompanion(companion)
+    garden = tickGarden(garden)
     // Daily quests track wild wins (and route-specific ones).
     quests = advanceQuests(quests, { kind: 'wild', locationId: state.currentLocation })
     // Daily "Harvest Day" doubles the chance of every wild item drop.
@@ -257,6 +264,8 @@ export function consumeEvent(state, action) {
     quests,
     party,
     daycare,
+    companion,
+    garden,
     inventory,
   })
   for (const dropNotification of dropNotifications)

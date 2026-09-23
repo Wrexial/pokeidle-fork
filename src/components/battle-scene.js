@@ -22,6 +22,8 @@ import { SettingsModal } from './settings-modal.js'
 import { BattleTextBox } from './battle-text-box.js'
 import { EvolutionScene } from './evolution-scene.js'
 import { DailyEventModal } from './daily-event-modal.js'
+import { CompanionModal } from './companion-modal.js'
+import { GardenModal } from './garden-modal.js'
 import { DexCompleteScene } from './dex-complete-scene.js'
 import { QuestsModal } from './quests-modal.js'
 import { HealingScene } from './healing-scene.js'
@@ -41,6 +43,8 @@ export function BattleScene() {
     [showSettings, setShowSettings] = React.useState(!1),
     [showDaily, setShowDaily] = React.useState(!1),
     [showQuests, setShowQuests] = React.useState(!1),
+    [showCompanion, setShowCompanion] = React.useState(!1),
+    [showGarden, setShowGarden] = React.useState(!1),
     { state, dispatch } = useGame(),
     { playerPokemon, enemyPokemon, battleEvents } = state,
     completedGenerationSet = completedGenerations(state.pokedexCaught),
@@ -169,6 +173,22 @@ export function BattleScene() {
             children: state.dailyEvent
               ? dailyEventByKey[state.dailyEvent.kind]?.icon ?? '🎁'
               : '🎁',
+          }),
+          jsx('button', {
+            className: 'battle-info-btn',
+            onClick: () => setShowCompanion(!0),
+            title: 'Companion',
+            children: '\u{1f43e}',
+          }),
+          jsx('button', {
+            className: `battle-info-btn daily-event-btn garden-btn${
+              state.garden?.plots?.some((plot) => plot && plot.battlesRemaining <= 0)
+                ? ' claimable'
+                : ''
+            }`,
+            onClick: () => setShowGarden(!0),
+            title: 'Berry Garden',
+            children: '\u{1f331}',
           }),
           jsx('button', {
             className: `battle-info-btn daily-event-btn${
@@ -530,6 +550,14 @@ export function BattleScene() {
       showQuests &&
         jsx(QuestsModal, {
           onClose: () => setShowQuests(!1),
+        }),
+      showCompanion &&
+        jsx(CompanionModal, {
+          onClose: () => setShowCompanion(!1),
+        }),
+      showGarden &&
+        jsx(GardenModal, {
+          onClose: () => setShowGarden(!1),
         }),
     ],
   })

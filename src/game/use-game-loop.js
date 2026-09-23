@@ -11,6 +11,7 @@ import { dailyExpMultiplier, dailyPrizeMultiplier, dailyShinyMultiplier } from '
 import { useGame } from './context.js'
 import { attemptCatch, isCaveLocation, isNightTime, isWaterLocation, selectAutoCatchBall, selectBestBall, shouldAutoCatch } from './catching.js'
 import { abilityOf } from './abilities.js'
+import { companionExpMultiplier } from './companion.js'
 import { applyBattleForm, createBattlePokemon, createVolatileState, resolveBattleTurn, volatileStateFromBattle } from './combat.js'
 import { isBattleReady } from './pokemon.js'
 import { awardExperience, checkShinyOdds, pokerusExpMultiplier, resolveActiveModifiers, resolvePokemonEncounter, resolveRoamer, shinyOddsForSpecies } from './progression.js'
@@ -39,7 +40,7 @@ export function useGameLoop() {
       // its own generation's national dex is complete.
       const completedGenerationSet = completedGenerations(currentGameState.pokedexCaught),
         dailyExpBonus = dailyExpMultiplier(currentGameState.dailyEvent),
-        expBonus = dailyExpBonus * pokerusExpMultiplier(currentGameState.pokerus),
+        expBonus = dailyExpBonus * pokerusExpMultiplier(currentGameState.pokerus) * companionExpMultiplier(currentGameState.companion),
         dailyPrizeBonus = dailyPrizeMultiplier(currentGameState.dailyEvent),
         dailyShinyBonus = dailyShinyMultiplier(currentGameState.dailyEvent)
       switch (currentGameState.phase) {

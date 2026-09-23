@@ -1,10 +1,24 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.17.0'
+export const GAME_VERSION = '0.18.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.18.0',
+      subtitle: 'Companion & Garden',
+      sections: [
+        {
+          heading: 'Idle Life',
+          items: [
+            'New Companion: pin one of your party Pokemon (the paw button in the top bar) and keep it fed, happy and rested. Care fades as you win battles, one care action is allowed per win, and a content companion grants +15% EXP',
+            'New Berry Garden (the sprout button): plant Oran, Sitrus or Lum Berries in four plots, let them ripen over wild wins, and harvest a crop back into the bag',
+            'Oran Berries are sold at every Mart so the garden is easy to start',
+          ],
+        },
+      ],
+    },
     {
       version: '0.17.0',
       subtitle: 'Fishing Rods',

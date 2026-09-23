@@ -8388,3 +8388,289 @@ img {
         box-shadow: none
     }
 }
+
+.companion-content,
+.garden-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px
+}
+
+.companion-card {
+    display: flex;
+    gap: 10px;
+    align-items: center
+}
+
+.companion-portrait {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    width: 96px
+}
+
+.companion-sprite {
+    width: 72px;
+    height: 72px;
+    image-rendering: pixelated
+}
+
+.companion-name {
+    font-size: 9px;
+    font-weight: 700;
+    text-align: center
+}
+
+.companion-level {
+    font-size: 8px;
+    color: #5a4838
+}
+
+.companion-care {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px
+}
+
+.companion-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 6px
+}
+
+.companion-bar-label {
+    width: 62px;
+    font-size: 8px;
+    color: #3a2818
+}
+
+.companion-bar {
+    flex: 1;
+    height: 10px;
+    background: #00000022;
+    border: 1px solid #a89870;
+    border-radius: 3px;
+    overflow: hidden
+}
+
+.companion-bar-fill {
+    height: 100%;
+    background: #4c9a4c
+}
+
+.companion-bar-fill.low {
+    background: #c07030
+}
+
+.companion-bar-value {
+    width: 24px;
+    font-size: 8px;
+    text-align: right
+}
+
+.companion-bonus {
+    font-size: 8px;
+    color: #5a4838;
+    padding: 6px;
+    background: #00000012;
+    border: 1px solid #00000022
+}
+
+.companion-bonus.active {
+    color: #1e5a1e;
+    background: #4c9a4c22;
+    border-color: #4c9a4c
+}
+
+.companion-actions {
+    display: flex;
+    gap: 6px
+}
+
+.companion-action-btn {
+    flex: 1;
+    padding: 8px 6px;
+    font: inherit;
+    font-size: 8px;
+    font-weight: 700;
+    color: var(--parchment);
+    background: var(--gold-dark);
+    border: 2px solid var(--gold);
+    cursor: pointer
+}
+
+.companion-action-btn:hover:not(:disabled) {
+    background: var(--gold);
+    color: #1a1008
+}
+
+.companion-action-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed
+}
+
+.companion-cooldown {
+    margin: 0;
+    font-size: 8px;
+    color: #5a4838;
+    text-align: center
+}
+
+.companion-picker-title,
+.garden-picker-title {
+    font-size: 9px;
+    font-weight: 700;
+    color: #3a2818;
+    margin-top: 4px
+}
+
+.companion-picker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px
+}
+
+.companion-pick {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 6px;
+    font: inherit;
+    font-size: 8px;
+    color: #3a2818;
+    background: #00000012;
+    border: 2px solid #483828;
+    cursor: pointer
+}
+
+.companion-pick.active {
+    border-color: var(--gold);
+    background: #f0c85033
+}
+
+.companion-pick-sprite {
+    width: 22px;
+    height: 22px;
+    image-rendering: pixelated
+}
+
+.companion-unpin {
+    align-self: center;
+    padding: 5px 12px;
+    font: inherit;
+    font-size: 8px;
+    color: var(--parchment);
+    background: #8b3030;
+    border: 2px solid #5a1a1a;
+    cursor: pointer
+}
+
+.garden-plots {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px
+}
+
+.garden-plot {
+    min-height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    text-align: center;
+    background: #00000014;
+    border: 2px solid #483828
+}
+
+.garden-plot.empty {
+    cursor: pointer;
+    border-style: dashed;
+    color: #7a6848
+}
+
+.garden-plot.ready {
+    border-color: #4c9a4c;
+    background: #4c9a4c22
+}
+
+.garden-plot-filled {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%
+}
+
+.garden-berry-name {
+    font-size: 9px;
+    font-weight: 700
+}
+
+.garden-harvest-btn {
+    padding: 5px;
+    font: inherit;
+    font-size: 8px;
+    font-weight: 700;
+    color: var(--parchment);
+    background: #2e7d32;
+    border: 2px solid #1b4d1f;
+    cursor: pointer
+}
+
+.garden-growth-bar {
+    height: 8px;
+    background: #00000022;
+    border: 1px solid #a89870;
+    border-radius: 3px;
+    overflow: hidden
+}
+
+.garden-growth-fill {
+    height: 100%;
+    background: #6ab04c
+}
+
+.garden-growth-label,
+.garden-plot-empty-label {
+    font-size: 8px;
+    color: #5a4838
+}
+
+.garden-picker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px
+}
+
+.garden-berry-pick {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 5px 8px;
+    font: inherit;
+    font-size: 8px;
+    color: #3a2818;
+    background: #00000012;
+    border: 2px solid #483828;
+    cursor: pointer
+}
+
+.garden-berry-pick.active {
+    border-color: var(--gold);
+    background: #f0c85033
+}
+
+.garden-berry-pick.empty {
+    opacity: 0.55
+}
+
+.garden-berry-pick-name {
+    font-weight: 700
+}
+
+.garden-berry-pick-owned {
+    font-size: 7px;
+    color: #5a4838
+}

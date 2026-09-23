@@ -14,6 +14,26 @@ import { applyIntimidate, clampStatStage, effectiveSpeed, getStatLabel, getStatS
 import { WEATHER_ABILITIES, WEATHER_NAMES, WEATHER_TURNS, applyWeatherToMove, weatherDamageMultiplier } from '../weather.js'
 
 /**
+ * Encore forces a move and Disable blocks one, while the stored move is still
+ * in the Pokemon's moveset. Self-inflicted move locks (Outrage etc.) take
+ * precedence and are handled before this.
+ * @param {BattlePokemon} pokemon
+ * @param {string} moveId
+ * @returns {string}
+ */
+function applyMoveLock(pokemon, moveId) {
+  if (
+    (pokemon.encoreTurns ?? 0) > 0 &&
+    pokemon.encoreMove &&
+    pokemon.moves.includes(pokemon.encoreMove)
+  )
+    return pokemon.encoreMove
+  if ((pokemon.disableTurns ?? 0) > 0 && moveId === pokemon.disabledMove)
+    return pokemon.moves.find((id) => id !== pokemon.disabledMove) ?? moveId
+  return moveId
+}
+
+/**
  * @param {BattlePokemon} player
  * @param {BattlePokemon} enemy
  * @param {boolean} [isTrainerBattle]
@@ -57,7 +77,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
   else if (player.lockedMove) ((playerMoveId = player.lockedMove), (playerMove = moveData[playerMoveId]))
   else {
     const bestMove = chooseMoveForBattle(player, enemy, activeHazards, deterministic)
-    ;((playerMoveId = bestMove.moveId), (playerMove = bestMove.move))
+    ;((playerMoveId = applyMoveLock(player, bestMove.moveId)), (playerMove = moveData[playerMoveId]))
   }
   let enemyMoveId, enemyMove
   if (enemyMustRecharge) ((enemyMoveId = enemy.moves[0]), (enemyMove = moveData[enemyMoveId]))
@@ -66,7 +86,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     const bestMove = isTrainerBattle
       ? chooseMoveForBattle(enemy, player, activeHazards, deterministic)
       : chooseRandomMove(enemy.moves)
-    ;((enemyMoveId = bestMove.moveId), (enemyMove = bestMove.move))
+    ;((enemyMoveId = applyMoveLock(enemy, bestMove.moveId)), (enemyMove = moveData[enemyMoveId]))
   }
   const attackOrder = [],
     playerPriority = playerMustRecharge ? -10 : (playerMove?.priority ?? 0),
@@ -142,6 +162,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     if (statusPreventsAction(attack.attacker, events, attack.isPlayer, deterministic)) continue
     if (handleConfusion(attack.attacker, events, attack.isPlayer, deterministic)) continue
     if (handleInfatuation(attack.attacker, events, attack.isPlayer, deterministic)) continue
+    attack.attacker.lastMove = attack.moveId
     const moveDef = moveData[attack.moveId]
     if (!moveDef) continue
     // Taunt prevents status moves while it lasts.
@@ -226,8 +247,13 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           const key = normalizeStatKey(statKey),
             currentStage = statTarget.statStages[key] ?? 0,
             newStage = clampStatStage(currentStage + delta)
-          // Clear Body / Hyper Cutter / ... block opponent-inflicted drops.
-          if (delta < 0 && abilityPreventsStatDrop(statTarget, key)) continue
+          // Clear Body / Hyper Cutter / ... and Mist block opponent-inflicted drops.
+          if (
+            delta < 0 &&
+            (abilityPreventsStatDrop(statTarget, key) ||
+              (moveDef.effect.target !== 'self' && (statTarget.mistTurns ?? 0) > 0))
+          )
+            continue
           statTarget.statStages[key] = newStage
           const verb = delta > 0 ? 'rose' : 'fell',
             sharply = Math.abs(delta) >= 2 ? 'sharply ' : ''
@@ -243,7 +269,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         moveDef.effect?.type === 'status' &&
         (moveDef.effect.chance === void 0 || chance(moveDef.effect.chance / 100, deterministic))
       )
-        applyStatus(attack.defender, moveDef.effect.status, events, !attack.isPlayer, deterministic, activeTerrain)
+        applyStatus(attack.defender, moveDef.effect.status, events, !attack.isPlayer, deterministic, activeTerrain, !0)
       else if (moveDef.effect?.type === 'heal') {
         const healPercent = moveDef.effect.percentage ?? 50,
           healed = Math.min(
@@ -428,6 +454,58 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           })
         attack.attacker.currentHp = attackerHp
         attack.defender.currentHp = defenderHp
+      }
+      else if (moveDef.effect?.type === 'safeguard') {
+        if ((attack.attacker.safeguardTurns ?? 0) <= 0) {
+          attack.attacker.safeguardTurns = 5
+          events.push({
+            type: 'statChange',
+            message: `${attack.attacker.name}'s team became cloaked in a mystical veil!`,
+            data: { target: attack.isPlayer ? 'player' : 'enemy' },
+          })
+        }
+      }
+      else if (moveDef.effect?.type === 'mist') {
+        if ((attack.attacker.mistTurns ?? 0) <= 0) {
+          attack.attacker.mistTurns = 5
+          events.push({
+            type: 'statChange',
+            message: `${attack.attacker.name} became shrouded in mist!`,
+            data: { target: attack.isPlayer ? 'player' : 'enemy' },
+          })
+        }
+      }
+      else if (moveDef.effect?.type === 'encore') {
+        if ((attack.defender.encoreTurns ?? 0) <= 0 && attack.defender.lastMove) {
+          attack.defender.encoreMove = attack.defender.lastMove
+          attack.defender.encoreTurns = 3
+          events.push({
+            type: 'status',
+            message: `${attack.defender.name} received an encore!`,
+            data: { target: attack.isPlayer ? 'enemy' : 'player' },
+          })
+        }
+      }
+      else if (moveDef.effect?.type === 'disable') {
+        if ((attack.defender.disableTurns ?? 0) <= 0 && attack.defender.lastMove) {
+          attack.defender.disabledMove = attack.defender.lastMove
+          attack.defender.disableTurns = 4
+          events.push({
+            type: 'status',
+            message: `${attack.defender.name}'s ${moveData[attack.defender.disabledMove]?.name ?? 'move'} was disabled!`,
+            data: { target: attack.isPlayer ? 'enemy' : 'player' },
+          })
+        }
+      }
+      else if (moveDef.effect?.type === 'perishSong') {
+        if ((attack.attacker.perishTurns ?? 0) <= 0 && (attack.defender.perishTurns ?? 0) <= 0) {
+          attack.attacker.perishTurns = 3
+          attack.defender.perishTurns = 3
+          events.push({
+            type: 'status',
+            message: 'The song will doom both battlers in three turns!',
+          })
+        }
       }
       else if (moveDef.effect?.type === 'hazard') {
         const targetSide = /** @type {any} */ (
@@ -739,7 +817,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
             moveDef.effect.chance === void 0 ||
             chance(moveDef.effect.chance / 100, deterministic)
           )
-            applyStatus(attack.defender, moveDef.effect.status, events, !attack.isPlayer, deterministic, activeTerrain)
+            applyStatus(attack.defender, moveDef.effect.status, events, !attack.isPlayer, deterministic, activeTerrain, !0)
           break
         }
         case 'statReset': {

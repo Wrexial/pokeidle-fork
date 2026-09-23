@@ -34,6 +34,17 @@ function battler(overrides = {}) {
 /** Run one turn with the player going first. @param {any} player @param {any} enemy */
 const turn = (player, enemy) => resolveBattleTurn(player, enemy, false, false)
 
+/** Run `body` with Math.random pinned to 0 (picks the first move, no crits). @param {() => void} body */
+function withZeroRandom(body) {
+  const originalRandom = Math.random
+  try {
+    Math.random = () => 0
+    body()
+  } finally {
+    Math.random = originalRandom
+  }
+}
+
 test('the new utility moves carry their effects', () => {
   assert.equal(moveData.focusEnergy.effect.type, 'focusEnergy')
   assert.equal(moveData.aquaRing.effect.type, 'aquaRing')
@@ -41,6 +52,11 @@ test('the new utility moves carry their effects', () => {
   assert.equal(moveData.yawn.effect.type, 'yawn')
   assert.equal(moveData.topsyTurvy.effect.type, 'statInvert')
   assert.equal(moveData.painSplit.effect.type, 'painSplit')
+  assert.equal(moveData.safeguard.effect.type, 'safeguard')
+  assert.equal(moveData.mist.effect.type, 'mist')
+  assert.equal(moveData.encore.effect.type, 'encore')
+  assert.equal(moveData.disable.effect.type, 'disable')
+  assert.equal(moveData.perishSong.effect.type, 'perishSong')
 })
 
 test('Focus Energy raises the user critical-hit stage', () => {
@@ -113,4 +129,87 @@ test('Pain Split averages both HP bars', () => {
   turn(player, enemy)
   assert.equal(player.currentHp, 250)
   assert.equal(enemy.currentHp, 250)
+})
+
+test('Safeguard blocks status inflicted by the opponent', () => {
+  const statusWith = (/** @type {number} */ safeguardTurns) => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['splash'],
+        speed: 80,
+        safeguardTurns,
+      }),
+      enemy = battler({ name: 'Foe', moves: ['spore'], speed: 200 })
+    withZeroRandom(() => turn(player, enemy))
+    return player.status ?? null
+  }
+  assert.equal(statusWith(5), null, 'Safeguard blocks Spore')
+  assert.equal(statusWith(0), 'sleep', 'Spore lands without Safeguard')
+})
+
+test('Mist blocks opponent stat drops', () => {
+  const attackWith = (/** @type {number} */ mistTurns) => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['splash'],
+        speed: 80,
+        mistTurns,
+        statStages: { attack: 0 },
+      }),
+      enemy = battler({ name: 'Foe', moves: ['growl'], speed: 200 })
+    withZeroRandom(() => turn(player, enemy))
+    return player.statStages.attack
+  }
+  assert.equal(attackWith(5), 0, 'Mist blocks Growl')
+  assert.equal(attackWith(0), -1, 'Growl lands without Mist')
+})
+
+test('Encore locks the target into its last move', () => {
+  withZeroRandom(() => {
+    const player = battler({ name: 'Player', isPlayer: true, moves: ['encore'], speed: 200 }),
+      enemy = battler({
+        name: 'Foe',
+        moves: ['splash', 'tackle'],
+        speed: 80,
+        lastMove: 'tackle',
+      })
+    turn(player, enemy)
+    assert.equal(enemy.encoreMove, 'tackle')
+    assert.equal(enemy.encoreTurns, 2, 'set for 3 turns, then ticked down')
+    turn(player, enemy)
+    assert.equal(enemy.lastMove, 'tackle', 'the encore forced Tackle on the next turn')
+  })
+})
+
+test('Disable blocks the target last move', () => {
+  withZeroRandom(() => {
+    const player = battler({ name: 'Player', isPlayer: true, moves: ['disable'], speed: 200 }),
+      enemy = battler({
+        name: 'Foe',
+        moves: ['tackle', 'splash'],
+        speed: 80,
+        lastMove: 'tackle',
+      })
+    turn(player, enemy)
+    assert.equal(enemy.disabledMove, 'tackle')
+    assert.equal(enemy.disableTurns, 3, 'set for 4 turns, then ticked down')
+    turn(player, enemy)
+    assert.equal(enemy.lastMove, 'splash', 'Disable forced the other move')
+  })
+})
+
+test('Perish Song faints both sides after three turns', () => {
+  withZeroRandom(() => {
+    const player = battler({ name: 'Player', isPlayer: true, moves: ['perishSong'], speed: 200 }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], speed: 80 })
+    turn(player, enemy)
+    assert.equal(player.perishTurns, 2)
+    assert.equal(enemy.perishTurns, 2)
+    turn(player, enemy)
+    turn(player, enemy)
+    assert.equal(player.currentHp, 0)
+    assert.equal(enemy.currentHp, 0)
+  })
 })

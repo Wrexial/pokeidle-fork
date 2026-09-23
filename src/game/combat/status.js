@@ -31,14 +31,17 @@ export const STATUS_IMMUNE_TYPES = {
  * @param {boolean} targetIsPlayer whether `target` is the player's Pokemon
  * @param {boolean} [deterministic]
  * @param {{ type: string } | null} [terrain]
+ * @param {boolean} [sourceIsOpponent] Safeguard blocks these
  */
-export function applyStatus(target, status, events, targetIsPlayer, deterministic = !1, terrain = null) {
+export function applyStatus(target, status, events, targetIsPlayer, deterministic = !1, terrain = null, sourceIsOpponent = !1) {
   if (!target || target.currentHp <= 0) return
   const side = targetIsPlayer ? 'player' : 'enemy'
   if (status === 'flinching') {
     target.flinch = !0
     return
   }
+  // Safeguard shields the holder's side from status inflicted by the opponent.
+  if (sourceIsOpponent && (target.safeguardTurns ?? 0) > 0) return
   if (!MAJOR_STATUSES.has(status) || target.status) return
   if (abilityPreventsStatus(target, status)) return
   if (terrainPreventsStatus(terrain, target, status)) return
@@ -192,19 +195,19 @@ export function applyContactAbility(defender, attacker, moveDef, events, attacke
     roll = () => chance(0.3, deterministic)
   switch (ability) {
     case 'static':
-      if (roll()) applyStatus(attacker, 'paralysis', events, attackerIsPlayer, deterministic, terrain)
+      if (roll()) applyStatus(attacker, 'paralysis', events, attackerIsPlayer, deterministic, terrain, !0)
       break
     case 'flameBody':
-      if (roll()) applyStatus(attacker, 'burn', events, attackerIsPlayer, deterministic, terrain)
+      if (roll()) applyStatus(attacker, 'burn', events, attackerIsPlayer, deterministic, terrain, !0)
       break
     case 'poisonPoint':
-      if (roll()) applyStatus(attacker, 'poison', events, attackerIsPlayer, deterministic, terrain)
+      if (roll()) applyStatus(attacker, 'poison', events, attackerIsPlayer, deterministic, terrain, !0)
       break
     case 'effectSpore':
       if (roll()) {
         const pick = Math.random(),
           status = pick < 0.34 ? 'poison' : pick < 0.67 ? 'paralysis' : 'sleep'
-        applyStatus(attacker, status, events, attackerIsPlayer, deterministic, terrain)
+        applyStatus(attacker, status, events, attackerIsPlayer, deterministic, terrain, !0)
       }
       break
     case 'cuteCharm':

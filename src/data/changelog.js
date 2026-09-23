@@ -1,10 +1,22 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.38.7'
+export const GAME_VERSION = '0.38.8'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.38.8',
+      subtitle: 'Locks & Protection',
+      sections: [
+        {
+          heading: 'Battle',
+          items: [
+            'Five more status moves now work: Safeguard (blocks status conditions from the opponent), Mist (blocks stat drops, including Intimidate), Encore (locks the target into its last move for three turns), Disable (blocks the target\u2019s last move) and Perish Song (both battlers faint after three turns)',
+          ],
+        },
+      ],
+    },
     {
       version: '0.38.7',
       subtitle: 'More Status Moves',

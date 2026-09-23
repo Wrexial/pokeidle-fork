@@ -100,6 +100,14 @@ const MOVE_OVERRIDES = {
   // Topsy-Turvy flips the target's stat stages; Pain Split averages both HP bars.
   topsyTurvy: { effect: { type: 'statInvert' } },
   painSplit: { effect: { type: 'painSplit' } },
+  // Safeguard blocks status and Mist blocks stat drops for the user's side;
+  // Encore locks the target into its last move and Disable blocks it; Perish
+  // Song gives both sides a three-turn countdown.
+  safeguard: { effect: { type: 'safeguard', target: 'self' } },
+  mist: { effect: { type: 'mist', target: 'self' } },
+  encore: { effect: { type: 'encore' }, accuracy: 100 },
+  disable: { effect: { type: 'disable' }, accuracy: 100 },
+  perishSong: { effect: { type: 'perishSong' } },
   // --- Entry hazards ---
   stealthRock: { effect: { type: 'hazard', hazard: 'stealthRock' } },
   spikes: { effect: { type: 'hazard', hazard: 'spikes' } },

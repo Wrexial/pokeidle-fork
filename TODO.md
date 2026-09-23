@@ -1,6 +1,6 @@
 # TODO
 
-Open ideas and follow-ups. Current game version: **0.38.7**
+Open ideas and follow-ups. Current game version: **0.38.8**
 (`src/data/changelog.js`). Finished work lives in the changelog, not here — this
 file only tracks what is **still open**. See `AGENTS.md` for architecture,
 commands and data conventions.
@@ -165,18 +165,25 @@ Healing, multi-hit, crit stages, Protect, statuses, screens, entry hazards,
 Taunt/Substitute, weather setters, Haze/Clear Smog, Weather Ball / weather
 accuracy and the terrain synergy abilities have all shipped.
 
-**Shipped (0.38.7):** Focus Energy (adds 2 crit stages for the battle), Aqua
-Ring (heals 1/16 each turn), Wish (heals half the user's HP at the end of the
-next turn), Yawn (sleeps the target at the end of the next turn), Topsy-Turvy
-(reverses the target's stat changes) and Pain Split (averages both HP bars).
-These are `effect` branches backed by new volatile fields
-(`focusEnergy`/`aquaRing`/`yawnTurns`/`wishTurns`).
+**Shipped (0.38.7–0.38.8):** Focus Energy (adds 2 crit stages for the battle),
+Aqua Ring (heals 1/16 each turn), Wish (heals half the user's HP at the end of
+the next turn), Yawn (sleeps the target at the end of the next turn),
+Topsy-Turvy (reverses the target's stat changes), Pain Split (averages both HP
+bars), Safeguard (blocks opponent status), Mist (blocks stat drops), Encore
+(locks the target into its last move), Disable (blocks the target's last move)
+and Perish Song (both sides faint after three turns). These are `effect`
+branches (Encore/Disable also hook move selection) backed by new volatile
+fields (`focusEnergy`/`aquaRing`/`yawnTurns`/`wishTurns`/`safeguardTurns`/
+`mistTurns`/`encoreTurns`/`disableTurns`/`perishTurns`).
 
 Still open:
 
-- [ ] The rest of the no-op status moves: Tailwind and Trick Room (need
-      side/field state), the screens' cousin Safeguard/Mist, Encore/Disable,
-      Destiny Bond/Perish Song, and the healing-field moves.
+- [ ] Moves that need field/side state: Tailwind (double the side's Speed),
+      Trick Room (reverse speed order), Destiny Bond, and the healing-field
+      moves.
+- [ ] The remaining doubles-only moves (After You, Ally Switch, Follow Me,
+      Helping Hand, Quick/Wide Guard, Rage Powder, …) — the game is singles
+      only, so these are intentionally inert.
 - [ ] Re-check the rest of the priority table (the doubles-only moves).
 - [ ] PP is stored but unused; decide whether to implement it or drop it.
 - [ ] Z-moves / G-Max moves are otherwise dead data — decide keep/drop.

@@ -33,6 +33,14 @@ export function createVolatileState() {
     yawnTurns: 0,
     wishTurns: 0,
     wishHeal: 0,
+    lastMove: null,
+    encoreTurns: 0,
+    encoreMove: null,
+    disableTurns: 0,
+    disabledMove: null,
+    safeguardTurns: 0,
+    mistTurns: 0,
+    perishTurns: 0,
   }
 }
 
@@ -64,6 +72,14 @@ export function volatileStateFromBattle(pokemon) {
     yawnTurns: pokemon.yawnTurns ?? 0,
     wishTurns: pokemon.wishTurns ?? 0,
     wishHeal: pokemon.wishHeal ?? 0,
+    lastMove: pokemon.lastMove ?? null,
+    encoreTurns: pokemon.encoreTurns ?? 0,
+    encoreMove: pokemon.encoreMove ?? null,
+    disableTurns: pokemon.disableTurns ?? 0,
+    disabledMove: pokemon.disabledMove ?? null,
+    safeguardTurns: pokemon.safeguardTurns ?? 0,
+    mistTurns: pokemon.mistTurns ?? 0,
+    perishTurns: pokemon.perishTurns ?? 0,
   }
 }
 
@@ -145,6 +161,7 @@ export function resetStatStages(target, events, targetIsPlayer) {
 export function applyIntimidate(source, target, events, sourceIsPlayer) {
   if (abilityOf(source) !== 'intimidate' || target.currentHp <= 0) return
   if (abilityPreventsStatDrop(target, 'attack')) return
+  if ((target.mistTurns ?? 0) > 0) return
   const stages = target.statStages ?? (target.statStages = {}),
     currentStage = stages.attack ?? 0,
     newStage = clampStatStage(currentStage - 1)

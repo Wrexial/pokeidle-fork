@@ -218,6 +218,22 @@ type VolatileState = {
   wishTurns?: number
   /** How much HP that pending Wish restores. */
   wishHeal?: number
+  /** The last move this Pokemon attempted (for Encore / Disable). */
+  lastMove?: string | null
+  /** Turns Encore locks this Pokemon into `encoreMove` (0 when free). */
+  encoreTurns?: number
+  /** The move Encore keeps forcing. */
+  encoreMove?: string | null
+  /** Turns Disable blocks `disabledMove` (0 when free). */
+  disableTurns?: number
+  /** The move Disable blocks. */
+  disabledMove?: string | null
+  /** Turns Safeguard blocks status conditions (0 when down). */
+  safeguardTurns?: number
+  /** Turns Mist blocks stat drops (0 when down). */
+  mistTurns?: number
+  /** Perish Song countdown: faints at 0 (0 when not counting). */
+  perishTurns?: number
 }
 
 type GameAction = { type: string; payload?: any; [key: string]: any }

@@ -286,7 +286,33 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
       if (pokemon.yawnTurns <= 0) {
         pokemon.yawnTurns = 0
         if (pokemon.currentHp > 0 && !pokemon.status)
-          applyStatus(pokemon, 'sleep', events, isPlayerSide, deterministic, activeTerrain)
+          applyStatus(pokemon, 'sleep', events, isPlayerSide, deterministic, activeTerrain, !0)
+      }
+    }
+    // Encore / Disable / Safeguard / Mist wear off after their turns.
+    if ((pokemon.encoreTurns ?? 0) > 0) {
+      pokemon.encoreTurns -= 1
+      if (pokemon.encoreTurns <= 0) pokemon.encoreMove = null
+    }
+    if ((pokemon.disableTurns ?? 0) > 0) {
+      pokemon.disableTurns -= 1
+      if (pokemon.disableTurns <= 0) pokemon.disabledMove = null
+    }
+    if ((pokemon.safeguardTurns ?? 0) > 0) pokemon.safeguardTurns -= 1
+    if ((pokemon.mistTurns ?? 0) > 0) pokemon.mistTurns -= 1
+    // Perish Song counts both sides down to a faint that ignores abilities.
+    if ((pokemon.perishTurns ?? 0) > 0) {
+      pokemon.perishTurns -= 1
+      if (pokemon.perishTurns <= 0) {
+        pokemon.perishTurns = 0
+        pokemon.currentHp = 0
+        events.push({
+          type: 'faint',
+          message: `${pokemon.name} fainted from the Perish Song!`,
+          data: {
+            target: isPlayerSide ? 'player' : 'enemy',
+          },
+        })
       }
     }
   }

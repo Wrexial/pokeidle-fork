@@ -302,7 +302,9 @@ Data conventions:
   with a level band averaged from the routes they connect to so adding one
   never re-levels the region. Galar's DLC uses zones too: the Isle of Armor and
   Crown Tundra are post-game hubs gated on `championDefeated` with fixed high
-  levels (`zone.level`).
+  levels (`zone.level`). `GROUP_ZONES` wraps *existing* route nodes in a hub
+  (Alola's islands, Paldea's provinces): the routes become hidden sub-areas that
+  keep their own unlock rules, so a locked area shows as ??? in the picker.
 - Some regions' scraped force-directed layout doesn't match the real map, so
   `REGION_MAP_LAYOUTS` in `generate-regions.cjs` overrides it with
   hand-measured coordinates from a labelled reference map. Every region except

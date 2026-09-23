@@ -291,7 +291,12 @@ export function LocationPanel({ onOpenCatchSettings }) {
   }
   if (location.type === 'zone') {
     const activeSubArea = state.currentRoute,
-      subAreas = location.subAreas ?? [],
+      subAreas = (location.subAreas ?? []).map(
+        /** @param {any} subArea */ (subArea) => ({
+          ...subArea,
+          unlocked: state.unlockedLocations.includes(subArea.id),
+        })
+      ),
       activeEncounters = encounterData[activeSubArea]
     return jsx('div', {
       className: 'location-panel-scroll',
@@ -333,9 +338,10 @@ export function LocationPanel({ onOpenCatchSettings }) {
               jsx(
                 'button',
                 {
-                  className: `zone-area-btn${subArea.id === activeSubArea ? ' active' : ''}`,
-                  onClick: () => travelToTarget(subArea.id),
-                  children: subArea.name,
+                  className: `zone-area-btn${subArea.id === activeSubArea ? ' active' : ''}${subArea.unlocked ? '' : ' locked'}`,
+                  onClick: subArea.unlocked ? () => travelToTarget(subArea.id) : void 0,
+                  title: subArea.unlocked ? void 0 : 'Not available yet',
+                  children: subArea.unlocked ? subArea.name : '???',
                 },
                 subArea.id
               )

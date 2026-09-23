@@ -2084,6 +2084,104 @@ for (const adds of Object.values(REGION_ROUTE_ADDS)) {
   }
 }
 
+// --- group existing routes into zones ----------------------------------------
+// Alola's islands and Paldea's provinces read badly as long chains of single
+// route nodes, so wrap each group behind one `type: 'zone'` hub; the routes
+// become hidden sub-areas (their own unlock rules still gate them) reachable
+// from the hub's picker. The hub itself takes the first area's unlock rule and
+// sits at the group's bounding-box centre.
+const GROUP_ZONES = {
+  alola: [
+    {
+      node: 'melemele-island',
+      name: 'Melemele Island',
+      areas: ['alola-route-1', 'alola-route-1--hauoli-outskirts', 'alola-route-2', 'alola-route-3'],
+    },
+    {
+      node: 'akala-island',
+      name: 'Akala Island',
+      areas: ['alola-route-4', 'alola-route-5', 'alola-route-6', 'alola-route-7', 'alola-route-8'],
+    },
+    {
+      node: 'ulaula-island',
+      name: "Ula'ula Island",
+      areas: ['alola-route-9', 'alola-route-10', 'alola-route-11', 'alola-route-12', 'alola-route-13', 'alola-route-14', 'alola-route-15'],
+    },
+    {
+      node: 'poni-island',
+      name: 'Poni Island',
+      areas: ['alola-route-16', 'alola-route-17'],
+    },
+  ],
+  paldea: [
+    {
+      node: 'south-province',
+      name: 'South Province',
+      areas: ['paldea-south-province-area-one', 'paldea-south-province-area-two', 'paldea-south-province-area-three', 'paldea-south-province-area-four', 'paldea-south-province-area-five', 'paldea-south-province-area-six'],
+    },
+    {
+      node: 'west-province',
+      name: 'West Province',
+      areas: ['paldea-west-province-area-one', 'paldea-west-province-area-two', 'paldea-west-province-area-three'],
+    },
+    {
+      node: 'east-province',
+      name: 'East Province',
+      areas: ['paldea-east-province-area-one', 'paldea-east-province-area-two', 'paldea-east-province-area-three'],
+    },
+    {
+      node: 'north-province',
+      name: 'North Province',
+      areas: ['paldea-north-province-area-one', 'paldea-north-province-area-two', 'paldea-north-province-area-three'],
+    },
+  ],
+}
+for (const [regionId, groups] of Object.entries(GROUP_ZONES)) {
+  for (const group of groups) {
+    const areas = group.areas.filter((id) => mapData[id] && !mapData[id].hidden)
+    if (areas.length < 2) continue
+    const hubId = locId(regionId, group.node)
+    if (mapData[hubId]) continue
+    const external = new Set()
+    for (const id of areas)
+      for (const connection of mapData[id].connections)
+        if (!areas.includes(connection)) external.add(connection)
+    const xs = areas.map((id) => mapData[id].position.x),
+      ys = areas.map((id) => mapData[id].position.y),
+      first = mapData[areas[0]]
+    for (const id of areas) {
+      mapData[id].hidden = true
+      mapData[id].zone = hubId
+      mapData[id].connections = [hubId]
+    }
+    mapData[hubId] = {
+      id: hubId,
+      name: group.name,
+      type: 'zone',
+      region: regionId,
+      description: `${group.name} is made up of several areas, each with its own Pokemon.`,
+      routeKey: areas[0],
+      background: first.background ?? '/backgrounds/grassland.png',
+      connections: [...external, ...areas],
+      subAreas: areas.map((id) => ({ id, name: mapData[id].name })),
+      unlock: JSON.parse(JSON.stringify(first.unlock)),
+      unlockOrder: Math.min(...areas.map((id) => mapData[id].unlockOrder)) - 0.5,
+      position: {
+        x: (Math.min(...xs) + Math.max(...xs)) / 2,
+        y: (Math.min(...ys) + Math.max(...ys)) / 2,
+      },
+    }
+    for (const connection of external) {
+      if (!mapData[connection]) continue
+      mapData[connection].connections = mapData[connection].connections.filter(
+        (id) => !areas.includes(id)
+      )
+      if (!mapData[connection].connections.includes(hubId))
+        mapData[connection].connections.push(hubId)
+    }
+  }
+}
+
 // --- raid pools --------------------------------------------------------------
 // A species belongs on a Raid Island only if it turns up on no region's wild
 // routes and can't be reached by evolving something that does. Scan every
@@ -2272,6 +2370,28 @@ for (const loc of Object.values(mapData)) {
   if (best) {
     loc.connections.push(best.id)
     best.connections.push(loc.id)
+  }
+}
+
+// Zones hide their sub-area routes. Any road that ended up pointing at a hidden
+// sub-area (the league/raid island are stitched on after the grouping pass)
+// should point at that sub-area's zone hub instead, or it floats unconnected.
+const hiddenAreas = Object.values(mapData).filter((location) => location.hidden)
+for (const area of hiddenAreas) area.connections = [area.zone]
+const visibleLocations = Object.values(mapData).filter((location) => !location.hidden)
+for (const location of visibleLocations)
+  location.connections = [
+    ...new Set(
+      location.connections.map((id) => (mapData[id]?.hidden ? mapData[id].zone : id))
+    ),
+  ].filter((id) => id !== location.id)
+// A zone hub keeps a link to each sub-area, and the remapped links are mutual.
+for (const location of visibleLocations) {
+  for (const subArea of location.subAreas ?? [])
+    if (!location.connections.includes(subArea.id)) location.connections.push(subArea.id)
+  for (const id of [...location.connections]) {
+    const other = mapData[id]
+    if (other && !other.connections.includes(location.id)) other.connections.push(location.id)
   }
 }
 

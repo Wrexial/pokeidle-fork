@@ -111,3 +111,26 @@ test('Paldea has its DLC and Area Zero zones, and a legendary-only pool', () => 
     ordinary = paldea.raidPool.filter((entry) => !pokemonSpecies[entry.speciesKey]?.legendary)
   assert.deepEqual(ordinary, [], 'Paldea raid pool holds only legendaries')
 })
+
+test('Alola routes and Paldea provinces are grouped into zones', () => {
+  for (const id of [
+    'alola-melemele-island',
+    'alola-akala-island',
+    'alola-ulaula-island',
+    'alola-poni-island',
+    'paldea-south-province',
+    'paldea-west-province',
+    'paldea-east-province',
+    'paldea-north-province',
+  ]) {
+    const hub = mapData[id]
+    assert.ok(hub, `${id} exists`)
+    assert.equal(hub.type, 'zone')
+    assert.ok(hub.subAreas.length >= 2, `${id} groups several areas`)
+    for (const subArea of hub.subAreas) {
+      assert.equal(mapData[subArea.id].hidden, true, `${subArea.id} is hidden`)
+      assert.equal(mapData[subArea.id].zone, id)
+      assert.ok(encounterData[subArea.id]?.encounters?.length, `${subArea.id} has encounters`)
+    }
+  }
+})

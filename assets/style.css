@@ -3317,6 +3317,15 @@ img {
     border-color: var(--gold)
 }
 
+.zone-area-btn.locked {
+    opacity: .45;
+    cursor: default
+}
+
+.zone-area-btn.locked:hover {
+    border-color: #483828
+}
+
 .zone-back-btn {
     align-self: flex-start;
     margin: 4px 0 6px;

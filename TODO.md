@@ -410,13 +410,13 @@ Good first candidate: **Galar's Wild Area** (one zone, many sub-areas) together
 with #35, then **Alola** (islands as zones) and **Paldea** (provinces as zones)
 to replace the proximity stitching / 15-species trim.
 
-**Partial (0.37.0):** the model shipped. Galar's Wild Area is one
-`type: 'zone'` node (`ZONES` in `generate-regions.cjs`) whose panel lists three
-sub-areas (Rolling Fields, Dappled Grove, Giant's Mirror); each is a hidden
-route with its own encounter bucket and a back button, reusing `TRAVEL` and the
-unlock fixpoint with no new state or action. Still open: more sub-areas, a
-distinct zone glyph on the map, inline per-sub-area encounter grids, and
-Alola/Paldea zones.
+**Partial (0.37.0):** the model shipped. Galar's Wild Area, the Galar/Paldea
+DLC and Paldea's Area Zero are `type: 'zone'` nodes with sub-area pickers, and
+existing routes can be grouped too (`GROUP_ZONES`): Alola's routes are grouped
+by island and Paldea's by province. Sub-areas are hidden routes with their own
+encounter buckets; they unlock via their own (unchanged) rules, so a locked
+area shows as ??? in the picker. Still open: more sub-areas, a distinct zone
+glyph on the map, and inline per-sub-area encounter grids.
 
 Effort: **medium–large** (a small data-model change plus map/encounter UI, but
 it unblocks the three regions that don't fit the route graph today).

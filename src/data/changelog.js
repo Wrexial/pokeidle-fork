@@ -20,6 +20,7 @@ export const CHANGELOG = [
             "Paldea's DLC is here too: Kitakami (off Mossui Town) and the Terarium (off the Pokemon League) are post-game zones with three areas each, opening after Paldea's Champion",
             "Alola's routes now carry the Alolan forms (Rattata, Meowth, Diglett, Grimer, Geodude, Sandshrew, Vulpix) and the native species the scrape dropped, so Alola's Raid Island is down to just its 27 legendary Pokemon",
             "Area Zero is a post-game zone holding the paradox Pokemon, and Paldea's other missing wilds (Paldean Tauros, Gimmighoul, Sableye, Rotom and more) now spawn on its province routes \u2014 Paldea's Raid Island is down to its 12 legendaries",
+            "Alola's routes are now grouped by island and Paldea's by province: each opens as a zone with an area picker, and an area shows as ??? until it unlocks",
           ],
         },
       ],

@@ -6,17 +6,16 @@
   "region": "alola",
   "description": "A town in the Alola region, home to Ilima's Normal Gym.",
   "connections": [
-   "alola-route-1--hauoli-outskirts",
-   "alola-route-1",
-   "alola-route-5"
+   "alola-melemele-island",
+   "alola-akala-island"
   ],
   "unlock": {
    "entry": true
   },
   "unlockOrder": 699999,
   "position": {
-   "x": 14.117629166773412,
-   "y": 29.73718345283658
+   "x": 14.159129444668327,
+   "y": 29.957400912813032
   },
   "mart": {
    "name": "Alola Mart",
@@ -36,9 +35,7 @@
   "routeKey": "alola-route-1",
   "background": "/backgrounds/grassland.png",
   "connections": [
-   "alola-iki-town",
-   "alola-route-3",
-   "alola-route-1--hauoli-outskirts"
+   "alola-melemele-island"
   ],
   "unlock": {
    "requires": [
@@ -51,9 +48,11 @@
   },
   "unlockOrder": 700001.0001,
   "position": {
-   "x": 16.20901128510399,
-   "y": 31.893688369002064
-  }
+   "x": 16.364677912708547,
+   "y": 32.02039775118323
+  },
+  "hidden": true,
+  "zone": "alola-melemele-island"
  },
  "alola-route-1--hauoli-outskirts": {
   "id": "alola-route-1--hauoli-outskirts",
@@ -64,8 +63,7 @@
   "routeKey": "alola-route-1--hauoli-outskirts",
   "background": "/backgrounds/grassland.png",
   "connections": [
-   "alola-iki-town",
-   "alola-route-1"
+   "alola-melemele-island"
   ],
   "unlock": {
    "requires": [
@@ -80,7 +78,9 @@
   "position": {
    "x": 14.29,
    "y": 23.11
-  }
+  },
+  "hidden": true,
+  "zone": "alola-melemele-island"
  },
  "alola-route-2": {
   "id": "alola-route-2",
@@ -91,9 +91,7 @@
   "routeKey": "alola-route-2",
   "background": "/backgrounds/grassland.png",
   "connections": [
-   "alola-route-3",
-   "alola-hauoli-city",
-   "alola-po-town"
+   "alola-melemele-island"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -106,9 +104,11 @@
   },
   "unlockOrder": 700002,
   "position": {
-   "x": 11.375804161937078,
-   "y": 30.98534730750893
-  }
+   "x": 11.338076959012426,
+   "y": 30.996641371162628
+  },
+  "hidden": true,
+  "zone": "alola-melemele-island"
  },
  "alola-hauoli-city": {
   "id": "alola-hauoli-city",
@@ -117,8 +117,8 @@
   "region": "alola",
   "description": "A town in the Alola region, home to Lana's Water Gym.",
   "connections": [
-   "alola-route-2",
-   "alola-route-9"
+   "alola-melemele-island",
+   "alola-ulaula-island"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -149,8 +149,8 @@
   "region": "alola",
   "description": "A town in the Alola region, home to Kiawe's Fire Gym.",
   "connections": [
-   "alola-route-17",
-   "alola-route-2"
+   "alola-melemele-island",
+   "alola-poni-island"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -191,11 +191,7 @@
   "routeKey": "alola-route-3",
   "background": "/backgrounds/grassland.png",
   "connections": [
-   "alola-route-1",
-   "alola-route-2",
-   "alola-route-4",
-   "alola-route-6",
-   "alola-paniola-town"
+   "alola-melemele-island"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -216,9 +212,11 @@
   },
   "unlockOrder": 700003,
   "position": {
-   "x": 14.517555386185519,
-   "y": 26.743780870652426
-  }
+   "x": 15.503575298581177,
+   "y": 26.424422345425054
+  },
+  "hidden": true,
+  "zone": "alola-melemele-island"
  },
  "alola-paniola-town": {
   "id": "alola-paniola-town",
@@ -227,9 +225,8 @@
   "region": "alola",
   "description": "A town in the Alola region, home to Mallow's Grass Gym.",
   "connections": [
-   "alola-route-4",
-   "alola-route-6",
-   "alola-route-3"
+   "alola-melemele-island",
+   "alola-akala-island"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -243,7 +240,7 @@
     "alola-gym-3"
    ]
   },
-  "unlockOrder": 700003.5,
+  "unlockOrder": 700003.5002,
   "position": {
    "x": 47.5,
    "y": 35.46
@@ -276,10 +273,7 @@
   "routeKey": "alola-route-4",
   "background": "/backgrounds/grassland.png",
   "connections": [
-   "alola-paniola-town",
-   "alola-heahea-city",
-   "alola-route-3",
-   "alola-route-16"
+   "alola-akala-island"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -303,7 +297,9 @@
   "position": {
    "x": 36.21,
    "y": 38.46
-  }
+  },
+  "hidden": true,
+  "zone": "alola-akala-island"
  },
  "alola-heahea-city": {
   "id": "alola-heahea-city",
@@ -312,10 +308,8 @@
   "region": "alola",
   "description": "A town in the Alola region, home to Sophocles's Electric Gym.",
   "connections": [
-   "alola-route-4",
-   "alola-route-6",
-   "alola-route-9",
-   "alola-route-10"
+   "alola-akala-island",
+   "alola-ulaula-island"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -359,10 +353,7 @@
   "routeKey": "alola-route-5",
   "background": "/backgrounds/grassland.png",
   "connections": [
-   "alola-route-8",
-   "alola-route-6",
-   "alola-iki-town",
-   "alola-route-7"
+   "alola-akala-island"
   ],
   "unlock": {
    "requires": [
@@ -377,7 +368,9 @@
   "position": {
    "x": 54.21,
    "y": 38.46
-  }
+  },
+  "hidden": true,
+  "zone": "alola-akala-island"
  },
  "alola-route-6": {
   "id": "alola-route-6",
@@ -388,11 +381,7 @@
   "routeKey": "alola-route-6",
   "background": "/backgrounds/grassland.png",
   "connections": [
-   "alola-heahea-city",
-   "alola-paniola-town",
-   "alola-route-5",
-   "alola-route-7",
-   "alola-route-3"
+   "alola-akala-island"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -410,7 +399,9 @@
   "position": {
    "x": 40.71,
    "y": 38.46
-  }
+  },
+  "hidden": true,
+  "zone": "alola-akala-island"
  },
  "alola-route-7": {
   "id": "alola-route-7",
@@ -421,10 +412,7 @@
   "routeKey": "alola-route-7",
   "background": "/backgrounds/beach.png",
   "connections": [
-   "alola-route-8",
-   "alola-route-6",
-   "alola-route-5",
-   "alola-route-17"
+   "alola-akala-island"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -445,7 +433,9 @@
   "position": {
    "x": 49.71,
    "y": 38.46
-  }
+  },
+  "hidden": true,
+  "zone": "alola-akala-island"
  },
  "alola-route-8": {
   "id": "alola-route-8",
@@ -456,8 +446,7 @@
   "routeKey": "alola-route-8",
   "background": "/backgrounds/grassland.png",
   "connections": [
-   "alola-route-7",
-   "alola-route-5"
+   "alola-akala-island"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -476,9 +465,11 @@
   },
   "unlockOrder": 700008,
   "position": {
-   "x": 45.21,
-   "y": 38.46
-  }
+   "x": 44.142268760408314,
+   "y": 37.392268760408314
+  },
+  "hidden": true,
+  "zone": "alola-akala-island"
  },
  "alola-route-9": {
   "id": "alola-route-9",
@@ -489,12 +480,7 @@
   "routeKey": "alola-route-9",
   "background": "/backgrounds/beach.png",
   "connections": [
-   "alola-konikoni-city",
-   "alola-heahea-city",
-   "alola-hauoli-city",
-   "alola-route-11",
-   "alola-route-13",
-   "alola-route-14"
+   "alola-ulaula-island"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -511,7 +497,9 @@
   "position": {
    "x": 41.79,
    "y": 44.32
-  }
+  },
+  "hidden": true,
+  "zone": "alola-ulaula-island"
  },
  "alola-konikoni-city": {
   "id": "alola-konikoni-city",
@@ -520,8 +508,7 @@
   "region": "alola",
   "description": "A town in the Alola region, home to Acerola's Ghost Gym.",
   "connections": [
-   "alola-route-9",
-   "alola-route-15"
+   "alola-ulaula-island"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -567,8 +554,7 @@
   "routeKey": "alola-route-10",
   "background": "/backgrounds/grassland.png",
   "connections": [
-   "alola-malie-city",
-   "alola-heahea-city"
+   "alola-ulaula-island"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -585,7 +571,9 @@
   "position": {
    "x": 82.5,
    "y": 48.04
-  }
+  },
+  "hidden": true,
+  "zone": "alola-ulaula-island"
  },
  "alola-malie-city": {
   "id": "alola-malie-city",
@@ -594,8 +582,7 @@
   "region": "alola",
   "description": "A town in the Alola region, home to Mina's Fairy Gym.",
   "connections": [
-   "alola-route-10",
-   "alola-route-11"
+   "alola-ulaula-island"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -641,9 +628,7 @@
   "routeKey": "alola-route-11",
   "background": "/backgrounds/grassland.png",
   "connections": [
-   "alola-malie-city",
-   "alola-route-12",
-   "alola-route-9"
+   "alola-ulaula-island"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -660,7 +645,9 @@
   "position": {
    "x": 82.5,
    "y": 51.641640625
-  }
+  },
+  "hidden": true,
+  "zone": "alola-ulaula-island"
  },
  "alola-route-12": {
   "id": "alola-route-12",
@@ -671,8 +658,7 @@
   "routeKey": "alola-route-12",
   "background": "/backgrounds/mountain.png",
   "connections": [
-   "alola-route-11",
-   "alola-route-13"
+   "alola-ulaula-island"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -690,7 +676,9 @@
   "position": {
    "x": 82.5,
    "y": 57.66671875
-  }
+  },
+  "hidden": true,
+  "zone": "alola-ulaula-island"
  },
  "alola-route-13": {
   "id": "alola-route-13",
@@ -701,10 +689,7 @@
   "routeKey": "alola-route-13",
   "background": "/backgrounds/beach.png",
   "connections": [
-   "alola-route-12",
-   "alola-route-15",
-   "alola-route-14",
-   "alola-route-9"
+   "alola-ulaula-island"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -721,7 +706,9 @@
   "position": {
    "x": 82.5,
    "y": 65.96
-  }
+  },
+  "hidden": true,
+  "zone": "alola-ulaula-island"
  },
  "alola-route-14": {
   "id": "alola-route-14",
@@ -732,8 +719,7 @@
   "routeKey": "alola-route-14",
   "background": "/backgrounds/beach.png",
   "connections": [
-   "alola-route-13",
-   "alola-route-9"
+   "alola-ulaula-island"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -751,7 +737,9 @@
   "position": {
    "x": 82.5,
    "y": 61.54
-  }
+  },
+  "hidden": true,
+  "zone": "alola-ulaula-island"
  },
  "alola-route-15": {
   "id": "alola-route-15",
@@ -762,9 +750,7 @@
   "routeKey": "alola-route-15",
   "background": "/backgrounds/beach.png",
   "connections": [
-   "alola-route-16",
-   "alola-route-13",
-   "alola-konikoni-city"
+   "alola-ulaula-island"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -781,7 +767,9 @@
   "position": {
    "x": 82.5,
    "y": 70.46
-  }
+  },
+  "hidden": true,
+  "zone": "alola-ulaula-island"
  },
  "alola-route-16": {
   "id": "alola-route-16",
@@ -792,9 +780,7 @@
   "routeKey": "alola-route-16",
   "background": "/backgrounds/grassland.png",
   "connections": [
-   "alola-route-15",
-   "alola-route-17",
-   "alola-route-4"
+   "alola-poni-island"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -812,7 +798,9 @@
   "position": {
    "x": 75.57,
    "y": 55.04
-  }
+  },
+  "hidden": true,
+  "zone": "alola-poni-island"
  },
  "alola-route-17": {
   "id": "alola-route-17",
@@ -823,11 +811,7 @@
   "routeKey": "alola-route-17",
   "background": "/backgrounds/grassland.png",
   "connections": [
-   "alola-po-town",
-   "alola-route-16",
-   "alola-route-7",
-   "alola-raid",
-   "alola-league"
+   "alola-poni-island"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -844,7 +828,9 @@
   "position": {
    "x": 68.57,
    "y": 45.595
-  }
+  },
+  "hidden": true,
+  "zone": "alola-poni-island"
  },
  "alola-raid": {
   "id": "alola-raid",
@@ -855,7 +841,7 @@
   "routeKey": "alola-raid",
   "background": "/backgrounds/cave.png",
   "connections": [
-   "alola-route-17"
+   "alola-poni-island"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -878,7 +864,7 @@
   "region": "alola",
   "description": "The Alola Pokémon League.",
   "connections": [
-   "alola-route-17"
+   "alola-poni-island"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -902,6 +888,238 @@
   "position": {
    "x": 70,
    "y": 25
+  }
+ },
+ "alola-melemele-island": {
+  "id": "alola-melemele-island",
+  "name": "Melemele Island",
+  "type": "zone",
+  "region": "alola",
+  "description": "Melemele Island is made up of several areas, each with its own Pokemon.",
+  "routeKey": "alola-route-1",
+  "background": "/backgrounds/grassland.png",
+  "connections": [
+   "alola-iki-town",
+   "alola-hauoli-city",
+   "alola-po-town",
+   "alola-paniola-town",
+   "alola-akala-island",
+   "alola-route-1",
+   "alola-route-1--hauoli-outskirts",
+   "alola-route-2",
+   "alola-route-3"
+  ],
+  "subAreas": [
+   {
+    "id": "alola-route-1",
+    "name": "Route 1"
+   },
+   {
+    "id": "alola-route-1--hauoli-outskirts",
+    "name": "Route 1 (Hauoli Outskirts)"
+   },
+   {
+    "id": "alola-route-2",
+    "name": "Route 2"
+   },
+   {
+    "id": "alola-route-3",
+    "name": "Route 3"
+   }
+  ],
+  "unlock": {
+   "requires": [
+    "alola-iki-town"
+   ],
+   "caughtCount": 2,
+   "gymsRequired": [
+    "alola-gym-1"
+   ]
+  },
+  "unlockOrder": 700000.5,
+  "position": {
+   "x": 12.60454038502952,
+   "y": 27.391137619416057
+  }
+ },
+ "alola-akala-island": {
+  "id": "alola-akala-island",
+  "name": "Akala Island",
+  "type": "zone",
+  "region": "alola",
+  "description": "Akala Island is made up of several areas, each with its own Pokemon.",
+  "routeKey": "alola-route-4",
+  "background": "/backgrounds/grassland.png",
+  "connections": [
+   "alola-paniola-town",
+   "alola-heahea-city",
+   "alola-melemele-island",
+   "alola-iki-town",
+   "alola-poni-island",
+   "alola-route-4",
+   "alola-route-5",
+   "alola-route-6",
+   "alola-route-7",
+   "alola-route-8"
+  ],
+  "subAreas": [
+   {
+    "id": "alola-route-4",
+    "name": "Route 4"
+   },
+   {
+    "id": "alola-route-5",
+    "name": "Route 5"
+   },
+   {
+    "id": "alola-route-6",
+    "name": "Route 6"
+   },
+   {
+    "id": "alola-route-7",
+    "name": "Route 7"
+   },
+   {
+    "id": "alola-route-8",
+    "name": "Route 8"
+   }
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-3",
+     "count": 11
+    }
+   ],
+   "gymsRequired": [
+    "alola-gym-4"
+   ],
+   "caughtOnRoute": {
+    "routeKey": "alola-route-3",
+    "species": [
+     "salamence"
+    ],
+    "count": 1
+   }
+  },
+  "unlockOrder": 700003.5001,
+  "position": {
+   "x": 46.27773123959169,
+   "y": 39.52773123959169
+  }
+ },
+ "alola-ulaula-island": {
+  "id": "alola-ulaula-island",
+  "name": "Ula'ula Island",
+  "type": "zone",
+  "region": "alola",
+  "description": "Ula'ula Island is made up of several areas, each with its own Pokemon.",
+  "routeKey": "alola-route-9",
+  "background": "/backgrounds/beach.png",
+  "connections": [
+   "alola-konikoni-city",
+   "alola-heahea-city",
+   "alola-hauoli-city",
+   "alola-malie-city",
+   "alola-poni-island",
+   "alola-route-9",
+   "alola-route-10",
+   "alola-route-11",
+   "alola-route-12",
+   "alola-route-13",
+   "alola-route-14",
+   "alola-route-15"
+  ],
+  "subAreas": [
+   {
+    "id": "alola-route-9",
+    "name": "Route 9"
+   },
+   {
+    "id": "alola-route-10",
+    "name": "Route 10"
+   },
+   {
+    "id": "alola-route-11",
+    "name": "Route 11"
+   },
+   {
+    "id": "alola-route-12",
+    "name": "Route 12"
+   },
+   {
+    "id": "alola-route-13",
+    "name": "Route 13"
+   },
+   {
+    "id": "alola-route-14",
+    "name": "Route 14"
+   },
+   {
+    "id": "alola-route-15",
+    "name": "Route 15"
+   }
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-heahea-city",
+     "count": 20
+    }
+   ],
+   "gymsRequired": [
+    "alola-gym-5"
+   ]
+  },
+  "unlockOrder": 700008.5,
+  "position": {
+   "x": 62.144999999999996,
+   "y": 57.39
+  }
+ },
+ "alola-poni-island": {
+  "id": "alola-poni-island",
+  "name": "Poni Island",
+  "type": "zone",
+  "region": "alola",
+  "description": "Poni Island is made up of several areas, each with its own Pokemon.",
+  "routeKey": "alola-route-16",
+  "background": "/backgrounds/grassland.png",
+  "connections": [
+   "alola-akala-island",
+   "alola-ulaula-island",
+   "alola-po-town",
+   "alola-raid",
+   "alola-league",
+   "alola-route-16",
+   "alola-route-17"
+  ],
+  "subAreas": [
+   {
+    "id": "alola-route-16",
+    "name": "Route 16"
+   },
+   {
+    "id": "alola-route-17",
+    "name": "Route 17"
+   }
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-4",
+     "count": 5
+    }
+   ],
+   "partyLevel": 67,
+   "gymsRequired": [
+    "alola-gym-8"
+   ]
+  },
+  "unlockOrder": 700015.5,
+  "position": {
+   "x": 72.07,
+   "y": 50.465
   }
  }
 }

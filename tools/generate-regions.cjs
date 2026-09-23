@@ -2137,18 +2137,60 @@ const GROUP_ZONES = {
   ],
 }
 for (const [regionId, groups] of Object.entries(GROUP_ZONES)) {
-  for (const group of groups) {
+  // Group adjacency, from the areas' connections before anything is hidden, so
+  // two groups whose areas touched get a hub-to-hub link even though the areas
+  // are detached during the loop.
+  const groupIndexByArea = new Map()
+  groups.forEach((group, index) => group.areas.forEach((id) => groupIndexByArea.set(id, index)))
+  const linkedGroups = groups.map(() => new Set())
+  groups.forEach((group, index) => {
+    for (const id of group.areas)
+      for (const connection of mapData[id]?.connections ?? []) {
+        const other = groupIndexByArea.get(connection)
+        if (other !== undefined && other !== index) linkedGroups[index].add(other)
+      }
+  })
+  groups.forEach((group, index) => {
     const areas = group.areas.filter((id) => mapData[id] && !mapData[id].hidden)
-    if (areas.length < 2) continue
+    if (areas.length < 2) return
     const hubId = locId(regionId, group.node)
-    if (mapData[hubId]) continue
+    if (mapData[hubId]) return
+    // Every external neighbour, so the areas can be detached from all of them.
     const external = new Set()
     for (const id of areas)
       for (const connection of mapData[id].connections)
         if (!areas.includes(connection)) external.add(connection)
     const xs = areas.map((id) => mapData[id].position.x),
       ys = areas.map((id) => mapData[id].position.y),
-      first = mapData[areas[0]]
+      first = mapData[areas[0]],
+      hubPosition = {
+        x: (Math.min(...xs) + Math.max(...xs)) / 2,
+        y: (Math.min(...ys) + Math.max(...ys)) / 2,
+      }
+    // The hub only needs the first area's entry point(s) plus the groups it is
+    // adjacent to: carrying every area's neighbour turns the map into a web.
+    const entryConnections = new Set()
+    const parents = [
+      ...(first.unlock?.requires ?? []),
+      ...(first.unlock?.battlesAtLocation ?? []).map((rule) => rule.locationId),
+      ...(first.unlock?.caughtOnRoute ? [first.unlock.caughtOnRoute.routeKey] : []),
+    ]
+    for (const id of parents) {
+      const resolved = mapData[id]?.hidden ? mapData[id].zone : id
+      if (resolved && resolved !== hubId && !areas.includes(resolved)) entryConnections.add(resolved)
+    }
+    for (const linked of linkedGroups[index]) entryConnections.add(locId(regionId, groups[linked].node))
+    for (const id of external) if (mapData[id]?.type === 'zone') entryConnections.add(id)
+    if (entryConnections.size === 0 && external.size > 0) {
+      const nearest = [...external]
+        .filter((id) => mapData[id])
+        .sort(
+          (left, right) =>
+            Math.hypot(mapData[left].position.x - hubPosition.x, mapData[left].position.y - hubPosition.y) -
+            Math.hypot(mapData[right].position.x - hubPosition.x, mapData[right].position.y - hubPosition.y)
+        )[0]
+      if (nearest) entryConnections.add(nearest)
+    }
     for (const id of areas) {
       mapData[id].hidden = true
       mapData[id].zone = hubId
@@ -2162,24 +2204,21 @@ for (const [regionId, groups] of Object.entries(GROUP_ZONES)) {
       description: `${group.name} is made up of several areas, each with its own Pokemon.`,
       routeKey: areas[0],
       background: first.background ?? '/backgrounds/grassland.png',
-      connections: [...external, ...areas],
+      connections: [...entryConnections, ...areas],
       subAreas: areas.map((id) => ({ id, name: mapData[id].name })),
       unlock: JSON.parse(JSON.stringify(first.unlock)),
       unlockOrder: Math.min(...areas.map((id) => mapData[id].unlockOrder)) - 0.5,
-      position: {
-        x: (Math.min(...xs) + Math.max(...xs)) / 2,
-        y: (Math.min(...ys) + Math.max(...ys)) / 2,
-      },
+      position: hubPosition,
     }
     for (const connection of external) {
       if (!mapData[connection]) continue
       mapData[connection].connections = mapData[connection].connections.filter(
         (id) => !areas.includes(id)
       )
-      if (!mapData[connection].connections.includes(hubId))
+      if (entryConnections.has(connection) && !mapData[connection].connections.includes(hubId))
         mapData[connection].connections.push(hubId)
     }
-  }
+  })
 }
 
 // --- raid pools --------------------------------------------------------------

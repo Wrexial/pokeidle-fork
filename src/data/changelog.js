@@ -22,7 +22,7 @@ export const CHANGELOG = [
             "Area Zero is a post-game zone holding the paradox Pokemon, and Paldea's other missing wilds (Paldean Tauros, Gimmighoul, Sableye, Rotom and more) now spawn on its province routes \u2014 Paldea's Raid Island is down to its 12 legendaries",
             "Alola's routes are now grouped by island and Paldea's by province: each opens as a zone with an area picker, and an area shows as ??? until it unlocks",
             "Zones get their own map marker (a blue diamond) instead of looking like a route, and the hub no longer lists encounters it can't battle",
-            "Added areas and zone hubs are settled apart from the measured towns, so the later regions' maps no longer stack labels on top of each other",
+            "Added areas and zone hubs are settled apart from the measured towns, and each zone hub now links only to its entry point and its neighbouring zones, so Alola's and Paldea's roads are no longer an overlapping web",
             "Battle backgrounds pick up a biome colour grade, so forests, deserts, swamps, volcanoes and tundra read differently even though they share a handful of base scenes",
           ],
         },

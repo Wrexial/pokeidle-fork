@@ -6,7 +6,8 @@
   "region": "paldea",
   "description": "A town in the Paldea region.",
   "connections": [
-   "paldea-south-province"
+   "paldea-south-province",
+   "paldea-cabo-poco"
   ],
   "unlock": {
    "entry": true
@@ -57,8 +58,7 @@
   "region": "paldea",
   "description": "A town in the Paldea region.",
   "connections": [
-   "paldea-south-province",
-   "paldea-west-province"
+   "paldea-los-platos"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -90,8 +90,7 @@
   "description": "A town in the Paldea region.",
   "connections": [
    "paldea-medali",
-   "paldea-area-zero",
-   "paldea-south-province"
+   "paldea-area-zero"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -124,8 +123,7 @@
   "description": "A town in the Paldea region, home to Larry's Normal Gym.",
   "connections": [
    "paldea-zapapico",
-   "paldea-mesagoza",
-   "paldea-west-province"
+   "paldea-mesagoza"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -279,7 +277,6 @@
   "region": "paldea",
   "description": "A town in the Paldea region, home to Tulip's Psychic Gym.",
   "connections": [
-   "paldea-south-province",
    "paldea-north-province"
   ],
   "unlock": {
@@ -325,7 +322,6 @@
   "description": "A town in the Paldea region, home to Brassius's Grass Gym.",
   "connections": [
    "paldea-cascarrafa",
-   "paldea-south-province",
    "paldea-east-province"
   ],
   "unlock": {
@@ -412,7 +408,7 @@
   "region": "paldea",
   "description": "A town in the Paldea region, home to Ryme's Ghost Gym.",
   "connections": [
-   "paldea-south-province"
+   "paldea-north-province"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -463,9 +459,7 @@
   "region": "paldea",
   "description": "A town in the Paldea region, home to Grusha's Ice Gym.",
   "connections": [
-   "paldea-medali",
-   "paldea-south-province",
-   "paldea-east-province"
+   "paldea-medali"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -510,8 +504,7 @@
   "region": "paldea",
   "description": "A town in the Paldea region, home to Kofu's Water Gym.",
   "connections": [
-   "paldea-artazon",
-   "paldea-west-province"
+   "paldea-artazon"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -836,8 +829,7 @@
   "region": "paldea",
   "description": "A town in the Paldea region.",
   "connections": [
-   "paldea-west-province",
-   "paldea-east-province"
+   "paldea-west-province"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -952,8 +944,7 @@
   "region": "paldea",
   "description": "A town in the Paldea region.",
   "connections": [
-   "paldea-kitakami",
-   "paldea-north-province"
+   "paldea-kitakami"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1417,16 +1408,10 @@
   "routeKey": "paldea-south-province-area-one",
   "background": "/backgrounds/grassland.png",
   "connections": [
-   "paldea-cabo-poco",
    "paldea-los-platos",
-   "paldea-mesagoza",
-   "paldea-cortondo",
-   "paldea-montenevera",
-   "paldea-artazon",
-   "paldea-alfornada",
-   "paldea-zapapico",
    "paldea-west-province",
    "paldea-east-province",
+   "paldea-cortondo",
    "paldea-south-province-area-one",
    "paldea-south-province-area-two",
    "paldea-south-province-area-three",
@@ -1468,8 +1453,8 @@
   },
   "unlockOrder": 910000,
   "position": {
-   "x": 38.96386342343238,
-   "y": 79.1275746462887
+   "x": 38.547245576629706,
+   "y": 79.29147160841588
   }
  },
  "paldea-west-province": {
@@ -1481,12 +1466,9 @@
   "routeKey": "paldea-west-province-area-one",
   "background": "/backgrounds/grassland.png",
   "connections": [
-   "paldea-cascarrafa",
    "paldea-south-province",
-   "paldea-porto-marinada",
-   "paldea-medali",
-   "paldea-cabo-poco",
    "paldea-north-province",
+   "paldea-porto-marinada",
    "paldea-west-province-area-one",
    "paldea-west-province-area-two",
    "paldea-west-province-area-three"
@@ -1524,8 +1506,8 @@
   },
   "unlockOrder": 910002.0003,
   "position": {
-   "x": 24.293486923137195,
-   "y": 51.492996477049886
+   "x": 24.24779318328376,
+   "y": 51.2741925957859
   }
  },
  "paldea-east-province": {
@@ -1538,10 +1520,8 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "paldea-artazon",
-   "paldea-levincia",
-   "paldea-porto-marinada",
    "paldea-south-province",
-   "paldea-zapapico",
+   "paldea-levincia",
    "paldea-raid",
    "paldea-league",
    "paldea-east-province-area-one",
@@ -1576,8 +1556,8 @@
   },
   "unlockOrder": 910004.0004,
   "position": {
-   "x": 78.10729931812276,
-   "y": 59.944443824572204
+   "x": 78.33294637416829,
+   "y": 60.04385891480825
   }
  },
  "paldea-north-province": {
@@ -1591,7 +1571,7 @@
   "connections": [
    "paldea-alfornada",
    "paldea-west-province",
-   "paldea-mossui-town",
+   "paldea-montenevera",
    "paldea-north-province-area-one",
    "paldea-north-province-area-two",
    "paldea-north-province-area-three"
@@ -1623,8 +1603,8 @@
   },
   "unlockOrder": 910004.0006,
   "position": {
-   "x": 54.74491074545981,
-   "y": 24.244121664926098
+   "x": 53.296118337441754,
+   "y": 24.43996832736834
   }
  }
 }

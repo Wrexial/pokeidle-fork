@@ -300,22 +300,27 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       }
       if (moveDef.effect?.type === 'statChange') {
         const statTarget = moveDef.effect.target === 'self' ? attack.attacker : attack.defender,
-          side = statTarget === player ? 'player' : 'enemy'
+          side = statTarget === player ? 'player' : 'enemy',
+          targetAbility = abilityOf(statTarget),
+          fromOpponent = moveDef.effect.target !== 'self'
         statTarget.statStages || (statTarget.statStages = {})
         for (const [statKey, delta] of Object.entries(moveDef.effect.changes)) {
           const key = normalizeStatKey(statKey),
+            // Contrary flips the change, Simple doubles it.
+            appliedDelta =
+              targetAbility === 'contrary' ? -delta : targetAbility === 'simple' ? delta * 2 : delta,
             currentStage = statTarget.statStages[key] ?? 0,
-            newStage = clampStatStage(currentStage + delta)
+            newStage = clampStatStage(currentStage + appliedDelta)
           // Clear Body / Hyper Cutter / ... and Mist block opponent-inflicted drops.
           if (
-            delta < 0 &&
+            appliedDelta < 0 &&
             (abilityPreventsStatDrop(statTarget, key) ||
-              (moveDef.effect.target !== 'self' && (statTarget.mistTurns ?? 0) > 0))
+              (fromOpponent && (statTarget.mistTurns ?? 0) > 0))
           )
             continue
           statTarget.statStages[key] = newStage
-          const verb = delta > 0 ? 'rose' : 'fell',
-            sharply = Math.abs(delta) >= 2 ? 'sharply ' : ''
+          const verb = appliedDelta > 0 ? 'rose' : 'fell',
+            sharply = Math.abs(appliedDelta) >= 2 ? 'sharply ' : ''
           events.push({
             type: 'statChange',
             message: `${statTarget.name}'s ${getStatLabel(key)} ${sharply}${verb}!`,
@@ -323,6 +328,27 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
               target: side,
             },
           })
+          // Defiant / Competitive punish an opponent's drop with a big boost.
+          if (delta < 0 && fromOpponent && targetAbility !== 'contrary') {
+            const boostKey =
+                targetAbility === 'defiant'
+                  ? 'attack'
+                  : targetAbility === 'competitive'
+                    ? 'spAttack'
+                    : null,
+              boostCurrent = boostKey ? (statTarget.statStages[boostKey] ?? 0) : 0,
+              boostNext = boostKey ? clampStatStage(boostCurrent + 2) : boostCurrent
+            if (boostKey && boostNext !== boostCurrent) {
+              statTarget.statStages[boostKey] = boostNext
+              events.push({
+                type: 'statChange',
+                message: `${statTarget.name}'s ${getStatLabel(boostKey)} sharply rose!`,
+                data: {
+                  target: side,
+                },
+              })
+            }
+          }
         }
       } else if (
         moveDef.effect?.type === 'status' &&
@@ -839,8 +865,10 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         ),
       attackStatKey = moveDef.category === 'physical' ? 'attack' : 'spAttack',
       defenseStatKey = moveDef.category === 'physical' ? 'defense' : 'spDefense',
-      attackerStage = getStatStage(attack.attacker, attackStatKey),
-      defenderStage = getStatStage(attack.defender, defenseStatKey),
+      attackerStage =
+        abilityOf(attack.defender) === 'unaware' ? 0 : getStatStage(attack.attacker, attackStatKey),
+      defenderStage =
+        abilityOf(attack.attacker) === 'unaware' ? 0 : getStatStage(attack.defender, defenseStatKey),
       accuracyStage = getStatStage(attack.attacker, 'accuracy'),
       evasionStage = getStatStage(attack.defender, 'evasion'),
       damageResult = calculateDamage(
@@ -1185,6 +1213,37 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
             target: attack.isPlayer ? 'player' : 'enemy',
           },
         })
+      }
+      // Moxie / Chilling Neigh / Grim Neigh / Beast Boost reward a KO.
+      const koAbility = abilityOf(attack.attacker)
+      let koStat =
+        koAbility === 'moxie' || koAbility === 'chillingNeigh'
+          ? 'attack'
+          : koAbility === 'grimNeigh'
+            ? 'spAttack'
+            : null
+      if (koAbility === 'beastBoost') {
+        const stats = {
+          attack: attack.attacker.attack,
+          defense: attack.attacker.defense,
+          spAttack: attack.attacker.spAttack,
+          spDefense: attack.attacker.spDefense,
+          speed: attack.attacker.speed,
+        }
+        koStat = /** @type {any} */ (Object.entries(stats).sort((a, b) => b[1] - a[1])[0][0])
+      }
+      if (koStat) {
+        const stages = attack.attacker.statStages ?? (attack.attacker.statStages = {}),
+          current = stages[koStat] ?? 0,
+          next = clampStatStage(current + 1)
+        if (next !== current) {
+          stages[koStat] = next
+          events.push({
+            type: 'statChange',
+            message: `${attack.attacker.name}'s ${getStatLabel(koStat)} rose!`,
+            data: { target: attack.isPlayer ? 'player' : 'enemy' },
+          })
+        }
       }
       break
     }

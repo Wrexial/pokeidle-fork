@@ -382,3 +382,70 @@ test('Hydration cures status in the rain', () => {
   resolveBattleTurn(player, enemy, false, false, { type: 'rain', turns: 5 })
   assert.equal(player.status, null)
 })
+
+test('Contrary flips and Simple doubles stat changes', () => {
+  const stagesFor = (/** @type {string} */ ability) => {
+    const player = battler({ name: 'Player', isPlayer: true, moves: ['growl'], speed: 200 }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], ability, statStages: {} })
+    resolveBattleTurn(player, enemy, false)
+    return enemy.statStages
+  }
+  assert.equal(stagesFor('contrary').attack, 1, 'a drop becomes a raise')
+  assert.equal(stagesFor('simple').attack, -2, 'a drop is doubled')
+})
+
+test('Defiant and Competitive punish stat drops', () => {
+  const stagesFor = (/** @type {string} */ ability) => {
+    const player = battler({ name: 'Player', isPlayer: true, moves: ['growl'], speed: 200 }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], ability, statStages: {} })
+    resolveBattleTurn(player, enemy, false)
+    return enemy.statStages
+  }
+  assert.equal(stagesFor('defiant').attack, 1, '-1 then +2')
+  assert.equal(stagesFor('competitive').spAttack, 2)
+})
+
+test('Unaware ignores the opponent stat stages', () => {
+  withFixedRandom(0.9, () => {
+    const damageAgainst = (/** @type {any} */ defenderAbility) => {
+      const player = battler({
+          name: 'Player',
+          isPlayer: true,
+          moves: ['tackle'],
+          speed: 200,
+          attack: 200,
+          statStages: { attack: 4 },
+        }),
+        enemy = battler({
+          name: 'Foe',
+          moves: ['splash'],
+          ability: defenderAbility,
+          statStages: { defense: 0 },
+          currentHp: 2000,
+          maxHp: 2000,
+        })
+      resolveBattleTurn(player, enemy, false)
+      return 2000 - enemy.currentHp
+    }
+    assert.ok(damageAgainst('unaware') < damageAgainst(undefined), 'the attack stages are ignored')
+  })
+})
+
+test('Moxie and Beast Boost reward a KO', () => {
+  const stagesAfterKo = (/** @type {string} */ ability) => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['tackle'],
+        speed: 200,
+        attack: 400,
+        ability,
+        statStages: {},
+      }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], currentHp: 1, maxHp: 100 })
+    resolveBattleTurn(player, enemy, false)
+    return player.statStages
+  }
+  assert.equal(stagesAfterKo('moxie').attack, 1)
+  assert.equal(stagesAfterKo('beastBoost').attack, 1, 'Beast Boost raises the highest stat')
+})

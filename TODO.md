@@ -214,8 +214,10 @@ defensive ones (Fluffy, Heatproof, Ice Scales, Fur Coat, Purifying Salt, Dry
 Skin, Marvel Scale), switch-in (Intrepid Sword, Dauntless Shield, Download),
 contact (Gooey / Tangling Hair, Stamina, Mummy), absorb (Earth Eater), recovery
 (Poison Heal, Bad Dreams, Hydration) and speed (Quick Feet, Unburden, Surge
-Surfer, Protosynthesis, Quark Drive). `abilityPreventsStatus` also now treats
-badly-poisoned as poison (Immunity / Pastel Veil).
+Surfer, Protosynthesis, Quark Drive). Stat-shaping additions: Contrary, Simple,
+Defiant, Competitive, Unaware and the KO boosts (Moxie, Chilling/Grim Neigh,
+Beast Boost). `abilityPreventsStatus` also now treats badly-poisoned as poison
+(Immunity / Pastel Veil).
 
 Still open:
 

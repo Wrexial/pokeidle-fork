@@ -16,6 +16,7 @@ export const CHANGELOG = [
             'Defensive abilities now halve or amplify the right hits: Fluffy, Heatproof, Ice Scales, Fur Coat, Purifying Salt, Dry Skin and Marvel Scale join the existing Thick Fat / Multiscale / Filter set',
             'Switch-in and support abilities: Intrepid Sword, Dauntless Shield, Download, Gooey / Tangling Hair, Stamina, Mummy, Earth Eater, Pastel Veil and Mirror Armor / Full Metal Body',
             'Recovery and speed abilities: Poison Heal, Bad Dreams, Hydration, and Quick Feet / Unburden / Surge Surfer / Protosynthesis / Quark Drive for turn order',
+            'Stat-shaping abilities: Contrary flips stat changes and Simple doubles them, Defiant and Competitive punish a drop, Unaware ignores the foe\u2019s stat stages, and Moxie / Chilling Neigh / Grim Neigh / Beast Boost reward a KO with a stat boost',
           ],
         },
       ],

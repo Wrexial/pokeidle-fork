@@ -297,7 +297,10 @@ Data conventions:
   travels to it (the existing `TRAVEL`/encounter plumbing carries it) and its
   panel shows a back button; the idle loop skips wild spawns at the hub itself.
   Galar's Wild Area is the first one, and the species it adds count as native
-  wilds, so they drop out of the Raid Islands.
+  wilds, so they drop out of the Raid Islands. `POST_AREAS` injects standalone
+  wild areas (Slumbering Weald, Galar Mine, Glimwood Tangle) the same way,
+  with a level band averaged from the routes they connect to so adding one
+  never re-levels the region.
 - Some regions' scraped force-directed layout doesn't match the real map, so
   `REGION_MAP_LAYOUTS` in `generate-regions.cjs` overrides it with
   hand-measured coordinates from a labelled reference map. Every region except

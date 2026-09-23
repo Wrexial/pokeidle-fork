@@ -650,23 +650,7 @@
   "leagueLocationKey": "galar-league",
   "raidPool": [
    {
-    "speciesKey": "obstagoon",
-    "level": 70
-   },
-   {
-    "speciesKey": "cursola",
-    "level": 70
-   },
-   {
-    "speciesKey": "sirfetch'd",
-    "level": 70
-   },
-   {
     "speciesKey": "mr. rime",
-    "level": 70
-   },
-   {
-    "speciesKey": "runerigus",
     "level": 70
    },
    {
@@ -750,43 +734,11 @@
     "level": 75
    },
    {
-    "speciesKey": "g-meowth",
-    "level": 70
-   },
-   {
-    "speciesKey": "h-growlithe",
-    "level": 70
-   },
-   {
-    "speciesKey": "h-arcanine",
-    "level": 70
-   },
-   {
-    "speciesKey": "g-ponyta",
-    "level": 70
-   },
-   {
-    "speciesKey": "g-rapidash",
-    "level": 70
-   },
-   {
-    "speciesKey": "g-farfetch'd",
-    "level": 70
-   },
-   {
     "speciesKey": "g-slowpoke",
     "level": 70
    },
    {
     "speciesKey": "g-slowbro",
-    "level": 70
-   },
-   {
-    "speciesKey": "h-voltorb",
-    "level": 70
-   },
-   {
-    "speciesKey": "h-electrode",
     "level": 70
    },
    {
@@ -818,18 +770,6 @@
     "level": 70
    },
    {
-    "speciesKey": "g-corsola",
-    "level": 70
-   },
-   {
-    "speciesKey": "g-zigzagoon",
-    "level": 70
-   },
-   {
-    "speciesKey": "g-linoone",
-    "level": 70
-   },
-   {
     "speciesKey": "h-rotom",
     "level": 70
    },
@@ -839,34 +779,6 @@
    },
    {
     "speciesKey": "basculin-w",
-    "level": 70
-   },
-   {
-    "speciesKey": "g-darumaka",
-    "level": 70
-   },
-   {
-    "speciesKey": "g-darmanitan",
-    "level": 70
-   },
-   {
-    "speciesKey": "g-darmanitan-z",
-    "level": 70
-   },
-   {
-    "speciesKey": "g-yamask",
-    "level": 70
-   },
-   {
-    "speciesKey": "h-zorua",
-    "level": 70
-   },
-   {
-    "speciesKey": "h-zoroark",
-    "level": 70
-   },
-   {
-    "speciesKey": "g-stunfisk",
     "level": 70
    },
    {

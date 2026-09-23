@@ -353,9 +353,10 @@ carries the Wild Area links), `tools/scrape-route-encounters.cjs`,
 and `raidPoolFor` in `src/data/gameData.js`.
 
 **Partial (0.37.0):** the Wild Area is now a zone (#36) with three sub-areas,
-which added several Galar Pokemon as native wilds and shrank Galar's (and
-Paldea's) `raidPool`. Still missing: Slumbering Weald, Galar Mine, Glimwood
-Tangle and the Isle of Armor / Crown Tundra DLC (see #39).
+and Slumbering Weald, Galar Mine and Glimwood Tangle are real wild areas too.
+Those areas added several Galar/Hisuian forms as wilds, which shrank Galar's
+`raidPool` from 57 to 35. Still missing: the Isle of Armor / Crown Tundra DLC
+(see #39).
 
 Effort: **medium** (mostly data; the Wild Area zone work depends on #36).
 
@@ -429,6 +430,11 @@ Hoenn 15, Sinnoh 20, Unova 27, Kalos 10, Alola **51**, Galar **59**, Paldea
 **58**. Trimming must not orphan anything — the raid pool is the safety net for
 otherwise-unobtainable species, and `npm run validate` checks every species is
 obtainable.
+
+**Partial (0.37.0):** Galar's pool dropped from 59 to 35 once the Wild Area and
+the new Galar areas (Slumbering Weald / Galar Mine / Glimwood Tangle) gave its
+regional forms native routes. The later regions are still bloated (Alola 50,
+Paldea ~55) and need the same treatment via zones (#36) and DLC (#39).
 
 - [ ] Decide a target shape per region: e.g. keep **all** legendaries/mythicals
       (no other source) plus a capped non-legendary set (~10–15), and move the

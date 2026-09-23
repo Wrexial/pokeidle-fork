@@ -1150,35 +1150,170 @@
    }
   ]
  },
+ "galar-slumbering-weald": {
+  "name": "Slumbering Weald",
+  "encounters": [
+   {
+    "speciesKey": "g-zigzagoon",
+    "weight": 20,
+    "minLevel": 5,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "g-yamask",
+    "weight": 20,
+    "minLevel": 5,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "h-zorua",
+    "weight": 20,
+    "minLevel": 5,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "blipbug",
+    "weight": 12,
+    "minLevel": 5,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "rookidee",
+    "weight": 12,
+    "minLevel": 5,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "skwovet",
+    "weight": 12,
+    "minLevel": 5,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "gossifleur",
+    "weight": 12,
+    "minLevel": 5,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "nickit",
+    "weight": 12,
+    "minLevel": 5,
+    "maxLevel": 7
+   }
+  ]
+ },
+ "galar-mine": {
+  "name": "Galar Mine",
+  "encounters": [
+   {
+    "speciesKey": "g-meowth",
+    "weight": 20,
+    "minLevel": 24,
+    "maxLevel": 26
+   },
+   {
+    "speciesKey": "g-corsola",
+    "weight": 20,
+    "minLevel": 24,
+    "maxLevel": 26
+   },
+   {
+    "speciesKey": "g-darumaka",
+    "weight": 20,
+    "minLevel": 24,
+    "maxLevel": 26
+   },
+   {
+    "speciesKey": "rolycoly",
+    "weight": 12,
+    "minLevel": 24,
+    "maxLevel": 26
+   },
+   {
+    "speciesKey": "cufant",
+    "weight": 12,
+    "minLevel": 24,
+    "maxLevel": 26
+   },
+   {
+    "speciesKey": "silicobra",
+    "weight": 12,
+    "minLevel": 24,
+    "maxLevel": 26
+   },
+   {
+    "speciesKey": "toxel",
+    "weight": 12,
+    "minLevel": 24,
+    "maxLevel": 26
+   },
+   {
+    "speciesKey": "g-stunfisk",
+    "weight": 12,
+    "minLevel": 24,
+    "maxLevel": 26
+   }
+  ]
+ },
+ "galar-glimwood-tangle": {
+  "name": "Glimwood Tangle",
+  "encounters": [
+   {
+    "speciesKey": "g-ponyta",
+    "weight": 20,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "g-farfetch'd",
+    "weight": 20,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "h-growlithe",
+    "weight": 20,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "impidimp",
+    "weight": 12,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "hatenna",
+    "weight": 12,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "sinistea",
+    "weight": 12,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "milcery",
+    "weight": 12,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "h-voltorb",
+    "weight": 12,
+    "minLevel": 43,
+    "maxLevel": 45
+   }
+  ]
+ },
  "galar-raid": {
   "name": "Galar Raid Island",
   "encounters": [
    {
-    "speciesKey": "obstagoon",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "cursola",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "sirfetch'd",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "mr. rime",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "runerigus",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70
@@ -1304,42 +1439,6 @@
     "maxLevel": 75
    },
    {
-    "speciesKey": "g-meowth",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "h-growlithe",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "h-arcanine",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "g-ponyta",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "g-rapidash",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "g-farfetch'd",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "g-slowpoke",
     "weight": 1,
     "minLevel": 70,
@@ -1347,18 +1446,6 @@
    },
    {
     "speciesKey": "g-slowbro",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "h-voltorb",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "h-electrode",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70
@@ -1406,24 +1493,6 @@
     "maxLevel": 70
    },
    {
-    "speciesKey": "g-corsola",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "g-zigzagoon",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "g-linoone",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "h-rotom",
     "weight": 1,
     "minLevel": 70,
@@ -1437,48 +1506,6 @@
    },
    {
     "speciesKey": "basculin-w",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "g-darumaka",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "g-darmanitan",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "g-darmanitan-z",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "g-yamask",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "h-zorua",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "h-zoroark",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "g-stunfisk",
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70

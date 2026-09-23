@@ -1713,6 +1713,82 @@ for (const [regionId, zones] of Object.entries(ZONES)) {
   }
 }
 
+// --- extra wild areas ---------------------------------------------------------
+// Single wild areas the scrapers only keep as towns/routes. Like zones they are
+// appended after the region loop with an explicit level band (the average of
+// the routes they connect to), so adding one never re-levels the region.
+const POST_AREAS = {
+  galar: [
+    {
+      node: 'slumbering-weald',
+      name: 'Slumbering Weald',
+      position: { x: 46, y: 93 },
+      connects: ['galar-route-1'],
+      species: [
+        'g-zigzagoon', 'g-yamask', 'h-zorua', 'blipbug', 'rookidee', 'skwovet', 'gossifleur', 'nickit',
+      ],
+    },
+    {
+      node: 'galar-mine',
+      name: 'Galar Mine',
+      position: { x: 43.5, y: 63.5 },
+      connects: ['galar-route-3', 'galar-route-4'],
+      species: [
+        'g-meowth', 'g-corsola', 'g-darumaka', 'rolycoly', 'cufant', 'silicobra', 'toxel', 'g-stunfisk',
+      ],
+    },
+    {
+      node: 'glimwood-tangle',
+      name: 'Glimwood Tangle',
+      position: { x: 37.5, y: 40.5 },
+      connects: ['galar-stow-on-side', 'galar-ballonlea'],
+      gate: 'galar-route-6',
+      species: [
+        'g-ponyta', "g-farfetch'd", 'h-growlithe', 'impidimp', 'hatenna', 'sinistea', 'milcery', 'h-voltorb',
+      ],
+    },
+  ],
+}
+for (const [regionId, areas] of Object.entries(POST_AREAS)) {
+  const region = regions.find((candidate) => candidate.id === regionId)
+  if (!region) continue
+  for (const area of areas) {
+    const id = locId(regionId, area.node)
+    if (mapData[id]) continue
+    const levels = [...area.connects, ...(area.gate ? [area.gate] : [])]
+        .map((node) => mapData[node]?.routeKey && encounterData[mapData[node].routeKey]?.encounters?.[0]?.minLevel)
+        .filter((level) => typeof level === 'number'),
+      level = clampLevel(
+        levels.length ? Math.round(levels.reduce((sum, value) => sum + value, 0) / levels.length) : (region.startLevel ?? 5)
+      ),
+      encounters = area.species
+        .filter((key) => species[key])
+        .map((key, index) => ({
+          speciesKey: key,
+          weight: encounterWeight(null, index),
+          minLevel: level,
+          maxLevel: clampLevel(level + 2),
+        })),
+      anchor = Math.min(...area.connects.map((node) => mapData[node]?.unlockOrder ?? 0))
+    encounterData[id] = { name: area.name, encounters }
+    mapData[id] = {
+      id,
+      name: area.name,
+      type: 'route',
+      region: regionId,
+      description: `A wild area in the ${region.name} region.`,
+      routeKey: id,
+      background: routeBackground(area.name, encounters),
+      connections: [...area.connects],
+      unlock: { battlesAtLocation: [{ locationId: area.gate ?? area.connects[0], count: 5 }] },
+      unlockOrder: anchor + 0.25,
+      position: area.position,
+    }
+    for (const node of area.connects)
+      if (mapData[node] && !mapData[node].connections.includes(id)) mapData[node].connections.push(id)
+  }
+}
+
 // --- route-exclusive catch gates ---------------------------------------------
 // A share of the generated progress gates ask the player to catch Pokemon that
 // spawn only on the route they just cleared — a route-specific, harder variant

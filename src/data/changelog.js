@@ -12,7 +12,9 @@ export const CHANGELOG = [
         {
           heading: 'Regions',
           items: [
-            "Galar's Wild Area is now a proper zone: a single map node that opens a picker for Rolling Fields, Dappled Grove and Giant's Mirror, each with its own wild Pokemon table \u2014 and the Galar Pokemon those areas add no longer need to come from a Raid Island",
+            "Galar's Wild Area is now a proper zone: a single map node that opens a picker for Rolling Fields, Dappled Grove and Giant's Mirror, each with its own wild Pokemon table",
+            "Slumbering Weald, Galar Mine and Glimwood Tangle are now real wild areas too, so Galarian and Hisuian forms like Galarian Zigzagoon, Corsola and Yamask, and Hisuian Growlithe and Voltorb, can be caught in the wild",
+            "Galar's Raid Island shrank from 57 Pokemon to 35 as those wild areas gave their evolutions a native source",
           ],
         },
       ],

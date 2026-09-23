@@ -51,3 +51,13 @@ test('sub-areas unlock once the zone hub is unlocked', () => {
   for (const subArea of hub.subAreas)
     assert.ok(unlocked.includes(subArea.id), `${subArea.id} unlocks with the hub`)
 })
+
+test('the extra Galar wild areas exist with their own encounters', () => {
+  for (const id of ['galar-slumbering-weald', 'galar-mine', 'galar-glimwood-tangle']) {
+    const location = mapData[id]
+    assert.ok(location, `${id} exists`)
+    assert.equal(location.type, 'route')
+    assert.ok(encounterData[id]?.encounters?.length, `${id} has wild encounters`)
+    assert.ok(location.connections.length > 0, `${id} connects to the map`)
+  }
+})

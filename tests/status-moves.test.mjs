@@ -57,6 +57,10 @@ test('the new utility moves carry their effects', () => {
   assert.equal(moveData.encore.effect.type, 'encore')
   assert.equal(moveData.disable.effect.type, 'disable')
   assert.equal(moveData.perishSong.effect.type, 'perishSong')
+  assert.equal(moveData.tailwind.effect.type, 'tailwind')
+  assert.equal(moveData.trickRoom.effect.type, 'trickRoom')
+  assert.equal(moveData.trickRoom.priority, -7)
+  assert.equal(moveData.destinyBond.effect.type, 'destinyBond')
 })
 
 test('Focus Energy raises the user critical-hit stage', () => {
@@ -211,5 +215,59 @@ test('Perish Song faints both sides after three turns', () => {
     turn(player, enemy)
     assert.equal(player.currentHp, 0)
     assert.equal(enemy.currentHp, 0)
+  })
+})
+
+test('Tailwind doubles the holder side Speed for turn order', () => {
+  withZeroRandom(() => {
+    const firstAttacker = (/** @type {number} */ tailwindTurns) => {
+      const player = battler({
+          name: 'Player',
+          isPlayer: true,
+          moves: ['tackle'],
+          speed: 50,
+          tailwindTurns,
+        }),
+        enemy = battler({ name: 'Foe', moves: ['splash'], speed: 80 })
+      return turn(player, enemy).find((/** @type {any} */ event) => event.type === 'attack').message
+    }
+    assert.match(firstAttacker(0), /^Foe/, 'the faster Foe moves first normally')
+    assert.match(firstAttacker(4), /^Player/, 'Tailwind makes the player move first')
+  })
+})
+
+test('Trick Room makes the slower Pokemon move first', () => {
+  withZeroRandom(() => {
+    const firstAttacker = (/** @type {number} */ trickRoomTurns) => {
+      const player = battler({
+          name: 'Player',
+          isPlayer: true,
+          moves: ['tackle'],
+          speed: 200,
+          trickRoomTurns,
+        }),
+        enemy = battler({ name: 'Foe', moves: ['splash'], speed: 50 })
+      return turn(player, enemy).find((/** @type {any} */ event) => event.type === 'attack').message
+    }
+    assert.match(firstAttacker(0), /^Player/, 'the faster player moves first normally')
+    assert.match(firstAttacker(5), /^Foe/, 'Trick Room makes the slower Foe move first')
+  })
+})
+
+test('Destiny Bond drags down the attacker that lands the KO', () => {
+  withZeroRandom(() => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['splash'],
+        speed: 50,
+        currentHp: 10,
+        maxHp: 400,
+        destinyBondTurns: 2,
+      }),
+      enemy = battler({ name: 'Foe', moves: ['tackle'], speed: 200, attack: 300 })
+    turn(player, enemy)
+    assert.equal(player.currentHp, 0, 'the holder faints')
+    assert.equal(enemy.currentHp, 0, 'and takes the attacker with it')
   })
 })

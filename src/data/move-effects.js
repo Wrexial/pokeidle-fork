@@ -108,6 +108,11 @@ const MOVE_OVERRIDES = {
   encore: { effect: { type: 'encore' }, accuracy: 100 },
   disable: { effect: { type: 'disable' }, accuracy: 100 },
   perishSong: { effect: { type: 'perishSong' } },
+  // Tailwind doubles the user's side Speed; Trick Room reverses the speed
+  // order (and goes last); Destiny Bond drags down whoever faints the user.
+  tailwind: { effect: { type: 'tailwind', target: 'self' } },
+  trickRoom: { effect: { type: 'trickRoom', target: 'self' }, priority: -7 },
+  destinyBond: { effect: { type: 'destinyBond', target: 'self' } },
   // --- Entry hazards ---
   stealthRock: { effect: { type: 'hazard', hazard: 'stealthRock' } },
   spikes: { effect: { type: 'hazard', hazard: 'spikes' } },

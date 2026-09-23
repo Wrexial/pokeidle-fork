@@ -234,6 +234,12 @@ type VolatileState = {
   mistTurns?: number
   /** Perish Song countdown: faints at 0 (0 when not counting). */
   perishTurns?: number
+  /** Tailwind doubles this Pokemon's side Speed while above 0. */
+  tailwindTurns?: number
+  /** Trick Room reverses the speed order while above 0. */
+  trickRoomTurns?: number
+  /** Turns Destiny Bond drags down whoever faints the holder (0 when off). */
+  destinyBondTurns?: number
 }
 
 type GameAction = { type: string; payload?: any; [key: string]: any }

@@ -88,7 +88,12 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       : chooseRandomMove(enemy.moves)
     ;((enemyMoveId = applyMoveLock(enemy, bestMove.moveId)), (enemyMove = moveData[enemyMoveId]))
   }
-  const attackOrder = [],
+  const trickRoomActive = (player.trickRoomTurns ?? 0) > 0 || (enemy.trickRoomTurns ?? 0) > 0,
+    playerSpeed = effectiveSpeed(player, activeWeather),
+    enemySpeed = effectiveSpeed(enemy, activeWeather),
+    // Trick Room makes the slower Pokemon move first.
+    playerActsFirst = trickRoomActive ? playerSpeed <= enemySpeed : playerSpeed >= enemySpeed,
+    attackOrder = [],
     playerPriority = playerMustRecharge ? -10 : (playerMove?.priority ?? 0),
     enemyPriority = enemyMustRecharge ? -10 : (enemyMove?.priority ?? 0)
   playerPriority > enemyPriority
@@ -121,7 +126,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
             isPlayer: !0,
           }
         )
-      : effectiveSpeed(player, activeWeather) >= effectiveSpeed(enemy, activeWeather)
+      : playerActsFirst
         ? attackOrder.push(
             {
               attacker: player,
@@ -506,6 +511,35 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
             message: 'The song will doom both battlers in three turns!',
           })
         }
+      }
+      else if (moveDef.effect?.type === 'tailwind') {
+        if ((attack.attacker.tailwindTurns ?? 0) <= 0) {
+          attack.attacker.tailwindTurns = 4
+          events.push({
+            type: 'statChange',
+            message: `The tailwind blew from behind ${attack.attacker.name}'s team!`,
+            data: { target: attack.isPlayer ? 'player' : 'enemy' },
+          })
+        }
+      }
+      else if (moveDef.effect?.type === 'trickRoom') {
+        // Field-wide, so both sides carry the timer while either is in battle.
+        if ((attack.attacker.trickRoomTurns ?? 0) <= 0 && (attack.defender.trickRoomTurns ?? 0) <= 0) {
+          attack.attacker.trickRoomTurns = 5
+          attack.defender.trickRoomTurns = 5
+          events.push({
+            type: 'status',
+            message: `${attack.attacker.name} twisted the dimensions!`,
+          })
+        }
+      }
+      else if (moveDef.effect?.type === 'destinyBond') {
+        attack.attacker.destinyBondTurns = 2
+        events.push({
+          type: 'status',
+          message: `${attack.attacker.name} is trying to take its foe down with it!`,
+          data: { target: attack.isPlayer ? 'player' : 'enemy' },
+        })
       }
       else if (moveDef.effect?.type === 'hazard') {
         const targetSide = /** @type {any} */ (
@@ -923,6 +957,17 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           target: attack.isPlayer ? 'enemy' : 'player',
         },
       })
+      // Destiny Bond drags down whoever landed the KO.
+      if ((attack.defender.destinyBondTurns ?? 0) > 0 && attack.attacker.currentHp > 0) {
+        attack.attacker.currentHp = 0
+        events.push({
+          type: 'faint',
+          message: `${attack.attacker.name} was dragged down by Destiny Bond!`,
+          data: {
+            target: attack.isPlayer ? 'player' : 'enemy',
+          },
+        })
+      }
       break
     }
     if (attack.attacker.currentHp <= 0) break

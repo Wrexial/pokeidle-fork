@@ -43,6 +43,9 @@ export function updateVolatile(state, action) {
         safeguardTurns: enemyVolatile.safeguardTurns ?? 0,
         mistTurns: enemyVolatile.mistTurns ?? 0,
         perishTurns: enemyVolatile.perishTurns ?? 0,
+        tailwindTurns: enemyVolatile.tailwindTurns ?? 0,
+        trickRoomTurns: enemyVolatile.trickRoomTurns ?? 0,
+        destinyBondTurns: enemyVolatile.destinyBondTurns ?? 0,
       }),
     {
       ...state,

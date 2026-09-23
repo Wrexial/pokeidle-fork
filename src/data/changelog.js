@@ -1,10 +1,24 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.38.8'
+export const GAME_VERSION = '0.38.9'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.38.9',
+      subtitle: 'Tailwind & Trick Room',
+      sections: [
+        {
+          heading: 'Battle',
+          items: [
+            'Tailwind now doubles your side\u2019s Speed for four turns, so it wins the turn-order race',
+            'Trick Room now reverses the speed order for five turns (and goes last), making the slower battler move first',
+            'Destiny Bond takes whoever knocks the user out down with them',
+          ],
+        },
+      ],
+    },
     {
       version: '0.38.8',
       subtitle: 'Locks & Protection',

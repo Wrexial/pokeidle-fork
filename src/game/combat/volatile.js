@@ -41,6 +41,9 @@ export function createVolatileState() {
     safeguardTurns: 0,
     mistTurns: 0,
     perishTurns: 0,
+    tailwindTurns: 0,
+    trickRoomTurns: 0,
+    destinyBondTurns: 0,
   }
 }
 
@@ -80,6 +83,9 @@ export function volatileStateFromBattle(pokemon) {
     safeguardTurns: pokemon.safeguardTurns ?? 0,
     mistTurns: pokemon.mistTurns ?? 0,
     perishTurns: pokemon.perishTurns ?? 0,
+    tailwindTurns: pokemon.tailwindTurns ?? 0,
+    trickRoomTurns: pokemon.trickRoomTurns ?? 0,
+    destinyBondTurns: pokemon.destinyBondTurns ?? 0,
   }
 }
 
@@ -127,7 +133,9 @@ export function effectiveSpeed(pokemon, weather) {
   const speed =
       pokemon.speed *
       heldStatMultiplier(pokemon, 'speed') *
-      weatherSpeedMultiplier(weather, pokemon),
+      weatherSpeedMultiplier(weather, pokemon) *
+      // Tailwind doubles the holder's side Speed.
+      ((pokemon.tailwindTurns ?? 0) > 0 ? 2 : 1),
     effective = pokemon.status === 'paralysis' ? Math.max(1, Math.floor(speed / 2)) : speed
   return effective
 }

@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 installGameData()
 
-const { encounterData, mapData } = await import('../src/data/gameData.js')
+const { encounterData, mapData, pokemonSpecies, regions } = await import('../src/data/gameData.js')
 const { computeUnlockedLocations } = await import('../src/game/progression.js')
 
 /** Minimal GameState for computeUnlockedLocations. */
@@ -62,8 +62,7 @@ test('the extra Galar wild areas exist with their own encounters', () => {
   }
 })
 
-test('the DLC zones are post-game and gated on the Galar Champion', () => {
-  for (const id of ['galar-isle-of-armor', 'galar-crown-tundra']) {
+test('the DLC zones are post-game and gated on the Galar Champion', () => {  for (const id of ['galar-isle-of-armor', 'galar-crown-tundra']) {
     const hub = mapData[id]
     assert.ok(hub, `${id} exists`)
     assert.equal(hub.type, 'zone')
@@ -83,4 +82,19 @@ test('the DLC zones are post-game and gated on the Galar Champion', () => {
   })
   assert.ok(unlocked.includes('galar-isle-of-armor'), 'opens after the Champion')
   assert.ok(unlocked.includes('galar-crown-tundra'), 'opens after the Champion')
+})
+
+test('the Alolan forms are wild in Alola and its raid pool is legendaries only', () => {
+  const wild = new Set()
+  for (const [key, bucket] of Object.entries(encounterData)) {
+    const location = mapData[key]
+    if (!location || location.type === 'raid' || location.region !== 'alola') continue
+    for (const encounter of bucket.encounters) wild.add(encounter.speciesKey)
+  }
+  for (const form of ['a-rattata', 'a-meowth', 'a-diglett', 'a-grimer', 'a-geodude', 'a-sandshrew', 'a-vulpix'])
+    assert.ok(wild.has(form), `${form} is wild in Alola`)
+
+  const alola = regions.find((region) => region.id === 'alola'),
+    ordinary = alola.raidPool.filter((entry) => !pokemonSpecies[entry.speciesKey]?.legendary)
+  assert.deepEqual(ordinary, [], 'Alola raid pool holds only legendaries')
 })

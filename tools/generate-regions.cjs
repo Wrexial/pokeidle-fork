@@ -1978,6 +1978,41 @@ for (const champion of champData) {
   champion.rematchTeam = buildTeam(teamPoolForGen(1), [], 6, CHAMPION_REMATCH_LEVEL, 1)
 }
 
+// --- Alolan forms & missing natives ------------------------------------------
+// PokeAPI's Alola encounter tables use the base species and drop several
+// Alola-native species, so the Alolan regional forms and a handful of others
+// never landed on an Alola route and ended up raid-only. Port them onto the
+// early/mid routes (dropping the Kantonian base a form replaces), which makes
+// their evolutions reachable and shrinks Alola's Raid Island. This runs after
+// the catch-gate pass so it doesn't change any route's catch rule.
+const ALOLA_ROUTE_ADDS = {
+  'alola-route-1': ['a-rattata', 'a-meowth', 'a-diglett', 'a-grimer'],
+  'alola-route-1--hauoli-outskirts': ['a-meowth', 'a-diglett'],
+  'alola-route-2': ['a-meowth', 'a-grimer', 'a-geodude'],
+  'alola-route-3': ['a-sandshrew', 'a-vulpix', 'a-geodude'],
+  // Alola-native species the scrape dropped, so they stop being raid-only.
+  'alola-route-4': ['crabrawler'],
+  'alola-route-5': ['comfey'],
+  'alola-route-6': ['wishiwashi'],
+  'alola-route-7': ['minior'],
+  'alola-route-8': ['turtonator', 'drampa'],
+  'alola-route-9': ['sandygast'],
+  'alola-route-10': ['jangmo-o'],
+}
+for (const [locationId, forms] of Object.entries(ALOLA_ROUTE_ADDS)) {
+  const bucket = encounterData[locationId]
+  if (!bucket) continue
+  const level = bucket.encounters[0]?.minLevel ?? 5,
+    maxLevel = bucket.encounters[0]?.maxLevel ?? clampLevel(level + 2)
+  // the Kantonian base the Alolan form replaces is dropped, not duplicated
+  bucket.encounters = bucket.encounters.filter(
+    (entry) => !(locationId === 'alola-route-1' && entry.speciesKey === 'rattata')
+  )
+  for (const form of forms)
+    if (species[form] && !bucket.encounters.some((entry) => entry.speciesKey === form))
+      bucket.encounters.push({ speciesKey: form, weight: 12, minLevel: level, maxLevel })
+}
+
 // --- raid pools --------------------------------------------------------------
 // A species belongs on a Raid Island only if it turns up on no region's wild
 // routes and can't be reached by evolving something that does. Scan every

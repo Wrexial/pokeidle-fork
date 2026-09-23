@@ -439,44 +439,12 @@
   "leagueLocationKey": "alola-league",
   "raidPool": [
    {
-    "speciesKey": "crabominable",
-    "level": 70
-   },
-   {
-    "speciesKey": "wishiwashi",
-    "level": 70
-   },
-   {
-    "speciesKey": "comfey",
-    "level": 70
-   },
-   {
-    "speciesKey": "palossand",
-    "level": 70
-   },
-   {
     "speciesKey": "type: null",
     "level": 75
    },
    {
     "speciesKey": "silvally",
     "level": 75
-   },
-   {
-    "speciesKey": "minior",
-    "level": 70
-   },
-   {
-    "speciesKey": "turtonator",
-    "level": 70
-   },
-   {
-    "speciesKey": "drampa",
-    "level": 70
-   },
-   {
-    "speciesKey": "kommo-o",
-    "level": 70
    },
    {
     "speciesKey": "tapu koko",
@@ -577,66 +545,6 @@
    {
     "speciesKey": "melmetal",
     "level": 75
-   },
-   {
-    "speciesKey": "a-rattata",
-    "level": 70
-   },
-   {
-    "speciesKey": "a-raticate",
-    "level": 70
-   },
-   {
-    "speciesKey": "a-sandshrew",
-    "level": 70
-   },
-   {
-    "speciesKey": "a-sandslash",
-    "level": 70
-   },
-   {
-    "speciesKey": "a-vulpix",
-    "level": 70
-   },
-   {
-    "speciesKey": "a-ninetales",
-    "level": 70
-   },
-   {
-    "speciesKey": "a-diglett",
-    "level": 70
-   },
-   {
-    "speciesKey": "a-dugtrio",
-    "level": 70
-   },
-   {
-    "speciesKey": "a-meowth",
-    "level": 70
-   },
-   {
-    "speciesKey": "a-persian",
-    "level": 70
-   },
-   {
-    "speciesKey": "a-geodude",
-    "level": 70
-   },
-   {
-    "speciesKey": "a-graveler",
-    "level": 70
-   },
-   {
-    "speciesKey": "a-golem",
-    "level": 70
-   },
-   {
-    "speciesKey": "a-grimer",
-    "level": 70
-   },
-   {
-    "speciesKey": "a-muk",
-    "level": 70
    }
   ]
  },

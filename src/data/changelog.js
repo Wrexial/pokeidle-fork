@@ -18,6 +18,7 @@ export const CHANGELOG = [
             "Galar's Raid Island shrank from 59 Pokemon to 22, because those wild areas and the DLC gave its Galarian/Hisuian forms and Slowpoke line a native source",
             "The 17 missing Gen 9 DLC Pokemon (Walking Wake through Pecharunt, including Dipplin, Poltchageist, Archaludon and Ogerpon) were added with their stats, moves, abilities, breeding data and sprites",
             "Paldea's DLC is here too: Kitakami (off Mossui Town) and the Terarium (off the Pokemon League) are post-game zones with three areas each, opening after Paldea's Champion",
+            "Alola's routes now carry the Alolan forms (Rattata, Meowth, Diglett, Grimer, Geodude, Sandshrew, Vulpix) and the native species the scrape dropped, so Alola's Raid Island is down to just its 27 legendary Pokemon",
           ],
         },
       ],

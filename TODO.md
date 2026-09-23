@@ -435,8 +435,9 @@ obtainable.
 **Partial (0.37.0):** Galar's pool dropped from 59 to 22 once the Wild Area,
 the new Galar areas (Slumbering Weald / Galar Mine / Glimwood Tangle) and the
 Isle of Armor / Crown Tundra zones gave its regional forms and DLC species
-native routes. The later regions are still bloated (Alola 50, Paldea ~55) and
-need the same treatment via zones (#36) and DLC (#39).
+native routes. Alola is now down to 27 (its legendaries only) after its routes
+gained the Alolan forms and the missing natives. Paldea (~55) is still bloated
+and needs the same treatment via zones (#36) and DLC (#39).
 
 - [ ] Decide a target shape per region: e.g. keep **all** legendaries/mythicals
       (no other source) plus a capped non-legendary set (~10–15), and move the

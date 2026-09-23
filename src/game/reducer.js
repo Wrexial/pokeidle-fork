@@ -3,6 +3,7 @@
 
 import { defaultCatchSettings } from '../data/config.js'
 import { emptyBattleHazards } from './hazards.js'
+import { DEFAULT_ROD } from './minigames.js'
 import { applyExp, applySharedExp, bossBattleEnd, completeMasterBall, consumeEvent, debugMaxLevel, endRaid, executeTurn, startBossBattle, startEncounter, startRaid, startTower, startTrainerBattle, switchPlayerPokemon, throwMasterBall, trainerBattleEnd, trainerSendNextPokemon, updateVolatile, useEffectItem, usePokeball } from './reducer/battle.js'
 import { claimAchievementRewards, claimDailyGift, claimDexRewards, claimQuest, clearOfflineReport, completeDexCelebration, markCaught, markSeen, markShinyCaught, markShinySeen, refreshDailyEvent, refreshQuests, startDexCelebration, updateShinyChain } from './reducer/collection.js'
 import { buyItem, buyRewardItem, clearHeldItem, sellItem, setAlwaysCatchShinies, setCatchRule, toggleAutoCatch, toggleRouteCatchAll, useItemOnPokemon } from './reducer/items.js'
@@ -63,6 +64,8 @@ export const initialGameState = {
   inventory: {
     pokeball: 20,
   },
+  /** Fishing rods the player has found (see game/minigames/rods.js). */
+  rods: [DEFAULT_ROD],
   trainerBattle: null,
   bossBattle: null,
   bossQueue: [],

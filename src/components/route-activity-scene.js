@@ -14,6 +14,8 @@ import {
   ACTIVITY_SWEEP_MS,
   ROUTE_ACTIVITIES,
   activityRewardName,
+  bestRodId,
+  rodForId,
   rollActivityEncounter,
   rollActivityLoot,
 } from '../game/minigames.js'
@@ -46,6 +48,9 @@ export function RouteActivityScene() {
 
   if (!activity) return null
 
+  // Fishing uses the best rod the player owns; other activities ignore it.
+  const rod = rodForId(bestRodId(state.rods))
+
   function leave() {
     dispatch({ type: 'END_ROUTE_ACTIVITY' })
   }
@@ -65,7 +70,7 @@ export function RouteActivityScene() {
       return
     }
     if (activity.mode === 'encounter') {
-      const encounter = rollActivityEncounter(activity.id, routeKey, perfect)
+      const encounter = rollActivityEncounter(activity.id, routeKey, perfect, rod.id)
       if (!encounter) {
         setMessage('Nothing is biting here.')
         setStage(nextAttempts <= 0 ? 'done' : 'result')
@@ -124,6 +129,11 @@ export function RouteActivityScene() {
         className: 'minigame-scene-body',
         children: [
           jsx('div', { className: 'activity-hint', children: activity.hint }),
+          activity.id === 'fishing' &&
+            jsxs('div', {
+              className: 'activity-rod',
+              children: [`Rod: `, rod.name, ` — `, rod.hint],
+            }),
           jsxs('div', {
             className: `activity-bar${stage === 'aiming' ? '' : ' locked'}`,
             children: [

@@ -6,6 +6,7 @@
 import { encounterData, pokemonSpecies } from '../../data/gameData.js'
 import { consumableItems, evolutionItems, heldItems } from '../../data/items.js'
 import { isCaveLocation, isWaterLocation } from '../catching.js'
+import { DEFAULT_ROD, rodForId } from './rods.js'
 
 /** How many attempts (casts/searches) a visit gives. */
 export const ACTIVITY_ATTEMPTS = 3
@@ -78,15 +79,18 @@ export function routeActivityIds(location) {
 
 /**
  * Roll a wild encounter for an `encounter` activity, drawn from the route's
- * table and narrowed to the activity's preferred types when it has any. A
- * perfect result biases toward the rarer (lower-weight) half.
+ * table and narrowed to the activity's preferred types when it has any. The
+ * rod's rarity gate keeps shallow casts to the common species, and a perfect
+ * result biases toward the rarer (lower-weight) half of what is reachable.
  * @param {string} activityId
  * @param {string} routeKey
  * @param {boolean} perfect
+ * @param {string} [rodId]
  * @returns {{ speciesKey: string, level: number, isWater: boolean } | null}
  */
-export function rollActivityEncounter(activityId, routeKey, perfect) {
+export function rollActivityEncounter(activityId, routeKey, perfect, rodId = DEFAULT_ROD) {
   const activity = ROUTE_ACTIVITIES[activityId],
+    rod = rodForId(rodId),
     table = encounterData[routeKey]?.encounters ?? []
   if (!activity || table.length === 0) return null
   const typed = activity.preferTypes
@@ -96,9 +100,13 @@ export function rollActivityEncounter(activityId, routeKey, perfect) {
           )
         )
       : [],
-    pool = typed.length > 0 ? typed : table,
-    sorted = [...pool].sort((left, right) => left.weight - right.weight),
-    candidates = perfect ? sorted.slice(0, Math.max(1, Math.ceil(sorted.length / 2))) : pool,
+    typePool = typed.length > 0 ? typed : table,
+    // A rod only reaches part of the water: keep the most common entries for
+    // shallower rods, the whole table for the Super Rod.
+    reachable = [...typePool].sort((left, right) => right.weight - left.weight),
+    rodPool = reachable.slice(0, Math.max(1, Math.ceil(reachable.length * rod.rarity))),
+    sorted = [...rodPool].sort((left, right) => left.weight - right.weight),
+    candidates = perfect ? sorted.slice(0, Math.max(1, Math.ceil(sorted.length / 2))) : rodPool,
     totalWeight = candidates.reduce((sum, entry) => sum + entry.weight, 0)
   let roll = Math.random() * totalWeight
   for (const entry of candidates) {
@@ -109,12 +117,17 @@ export function rollActivityEncounter(activityId, routeKey, perfect) {
         level:
           entry.minLevel +
           Math.floor(Math.random() * (entry.maxLevel - entry.minLevel + 1)) +
-          (perfect ? 1 : 0),
+          (perfect ? 1 : 0) +
+          rod.levelBonus,
         isWater: (pokemonSpecies[entry.speciesKey]?.types ?? []).includes('Water'),
       }
   }
   const fallback = candidates[candidates.length - 1]
-  return { speciesKey: fallback.speciesKey, level: fallback.minLevel, isWater: false }
+  return {
+    speciesKey: fallback.speciesKey,
+    level: fallback.minLevel + rod.levelBonus,
+    isWater: false,
+  }
 }
 
 /**

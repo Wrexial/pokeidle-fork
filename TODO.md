@@ -1,6 +1,6 @@
 # TODO
 
-Open ideas and follow-ups. Current game version: **0.16.0**
+Open ideas and follow-ups. Current game version: **0.17.0**
 (`src/data/changelog.js`). Finished work lives in the changelog, not here — this
 file only tracks what is **still open**. See `AGENTS.md` for architecture,
 commands and data conventions.
@@ -287,22 +287,29 @@ by terrain (water routes / forests and gardens) rather than a fixed POI, and
 every minigame now launches from the location panel while you are standing there
 instead of from the League tab.
 
+**Shipped (0.17.0):** fishing rod tiers (Old / Good / Super) gate how deep into
+a route's water species a cast can reach, with a level bonus, and each better
+rod is found by opening another region.
+
 `src/game/minigames.js` holds `MINIGAME_LOCATIONS` (location → fixed minigame),
-`MINIGAME_INFO` (title/cost/action/hint) and `ROUTE_ACTIVITIES` plus each game's
-config/reward table. Adding a fixed minigame is a scene component + a
+`MINIGAME_INFO` (title/cost/action/hint), `ROUTE_ACTIVITIES` and `RODS` plus
+each game's config/reward table. Adding a fixed minigame is a scene component + a
 `START_*`/`END_MINIGAME` reducer pair + a `MINIGAME_LOCATIONS` entry; a route
 activity is an entry in `ROUTE_ACTIVITIES` and a terrain predicate. Covered by
-`tests/minigames.test.mjs` and `tests/route-activities.test.mjs`.
+`tests/minigames.test.mjs`, `tests/route-activities.test.mjs` and
+`tests/rods.test.mjs`.
 
 ### 29a. Fishing minigame
 
 **Shipped (0.16.0):** a timing-bar fishing activity on water routes that hooks a
 Water species from the route's own table and starts a normal wild battle, plus a
-Berry Foraging counterpart on forested routes. Still open:
+Berry Foraging counterpart on forested routes.
+**Shipped (0.17.0):** rod tiers gate the rarity of what a cast reaches. Still
+open:
 
-- [ ] Rod tiers (Old / Good / Super) as items, each unlocking deeper water —
-      and restricting a cast to the route's water species only (it currently
-      falls back to the full table when a route has no Water types).
+- [ ] Restrict a cast to the route's water species only — it still falls back
+      to the full table when a route has no Water types (so a rod can currently
+      hook a non-Water species on a dry-ish route).
 
 ### 29b. Companion / tamagotchi care
 

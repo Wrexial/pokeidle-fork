@@ -10,6 +10,7 @@ import { BASE_FRIENDSHIP, generateIVs, calculatePokemonStats, resolvePokemonMove
 import { ACHIEVEMENTS } from '../data/achievements.js'
 import { natureByKey, randomNature } from '../data/natures.js'
 import { POKEMON_TYPES } from '../data/moves.js'
+import { RODS, rodsForRegionCount } from './minigames.js'
 import { initialGameState } from './reducer.js'
 import { computeOfflineReward } from './progression.js'
 
@@ -372,6 +373,12 @@ export function repairSave(saved) {
         .map((region) => region.id),
     ]),
   ]
+  // Fishing rods are re-derived from how many regions are open, so an older
+  // save (or one from before rods existed) never ends up without one.
+  const savedRods = Array.isArray(saved.rods)
+      ? saved.rods.filter(/** @param {string} id */ (id) => RODS.some((rod) => rod.id === id))
+      : [],
+    rods = [...new Set([...savedRods, ...rodsForRegionCount(unlockedRegions.length)])]
 
   const gymIds = new Set(gymLeaderData.map((gym) => gym.id)),
     eliteIds = new Set(elite4Data.map((member) => member.id)),
@@ -457,6 +464,7 @@ export function repairSave(saved) {
     globalCatchDefaults: sanitizeCatchRule(saved.globalCatchDefaults ?? FALLBACK_CATCH_RULE),
     money: saved.money ?? 3e3,
     inventory: saved.inventory ?? { pokeball: 20 },
+    rods,
     trainerBattle: null,
     bossBattle: null,
     bossQueue: [],
@@ -597,6 +605,7 @@ export const SAVED_STATE_KEYS = [
   'alwaysCatchShinies',
   'money',
   'inventory',
+  'rods',
   'pokedexSeen',
   'pokedexCaught',
   'shinyCaught',

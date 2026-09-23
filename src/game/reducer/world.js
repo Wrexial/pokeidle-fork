@@ -6,6 +6,7 @@ import { elite4Data, gymLeaderData, mapData, regions } from '../../data/gameData
 import { emptyBattleHazards } from '../hazards.js'
 import { createPokemon, isBattleReady } from '../pokemon.js'
 import { computeUnlockedLocations, getRegionUnlockTokens, prepareNextBattle } from '../progression.js'
+import { rodForId, rodsForRegionCount } from '../minigames.js'
 import { settleUnlockTokens, withNotification } from '../reducer-helpers.js'
 
 /**
@@ -86,20 +87,39 @@ export function unlockRegion(state, action) {
           ...(firstRoute ? [firstRoute] : []),
         ]),
       ],
-    }
-  return withNotification(
-    settleUnlockTokens({
-      ...unlockedState,
-      unlockedLocations: computeUnlockedLocations(unlockedState),
-      battleLog: [...state.battleLog, `${region.name} unlocked!`].slice(-50),
-    }),
-    {
-      message: `A new region opened: ${region.name}!`,
+    },
+    // Better rods are found as more regions open, so fishing deepens with the
+    // world rather than being tied to one place.
+    newRods = rodsForRegionCount(unlockedState.unlockedRegions.length).filter(
+      (rodId) => !(state.rods ?? []).includes(rodId)
+    ),
+    withRods =
+      newRods.length > 0
+        ? { ...unlockedState, rods: [...(state.rods ?? []), ...newRods] }
+        : unlockedState,
+    settled = settleUnlockTokens({
+      ...withRods,
+      unlockedLocations: computeUnlockedLocations(withRods),
+      battleLog: [
+        ...state.battleLog,
+        `${region.name} unlocked!`,
+        ...newRods.map((rodId) => `Obtained the ${rodForId(rodId).name}!`),
+      ].slice(-50),
+    })
+  let next = settled
+  for (const rodId of newRods)
+    next = withNotification(next, {
+      message: `You obtained the ${rodForId(rodId).name}! Fishing just got better.`,
       tone: 'success',
-      icon: '🗺️',
-      dedupeKey: `region:${regionId}`,
-    }
-  )
+      icon: '🎣',
+      dedupeKey: `rod:${rodId}`,
+    })
+  return withNotification(next, {
+    message: `A new region opened: ${region.name}!`,
+    tone: 'success',
+    icon: '🗺️',
+    dedupeKey: `region:${regionId}`,
+  })
 }
 
 /**

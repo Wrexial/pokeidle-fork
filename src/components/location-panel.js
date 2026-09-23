@@ -3,7 +3,7 @@
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
 import { martShopItems } from '../data/items.js'
 import { encounterData, gymLeaderData, mapData, pokemonSpecies, regions, raidPoolFor } from '../data/gameData.js'
-import { MINIGAME_INFO, MINIGAME_LOCATIONS, MINIGAME_START_ACTION, ROUTE_ACTIVITIES, routeActivityIds } from '../game/minigames.js'
+import { MINIGAME_INFO, MINIGAME_LOCATIONS, MINIGAME_START_ACTION, ROUTE_ACTIVITIES, bestRodId, nextRod, rodForId, routeActivityIds } from '../game/minigames.js'
 import { useGame } from '../game/context.js'
 import { computeUnlockedLocations } from '../game/progression.js'
 import { MinigameCard } from './minigame-card.js'
@@ -64,7 +64,9 @@ export function LocationPanel({ onOpenCatchSettings }) {
       'gameCorner',
       'routeActivity',
       'wonderTrade',
-    ].includes(state.phase)
+    ].includes(state.phase),
+    bestRod = rodForId(bestRodId(state.rods)),
+    upcomingRod = nextRod(state.rods)
 
   /**
    * Whether a location is somewhere the player can travel to right now.
@@ -469,7 +471,10 @@ export function LocationPanel({ onOpenCatchSettings }) {
                   {
                     icon: activity.icon,
                     title: activity.title,
-                    hint: activity.hint,
+                    hint:
+                      activity.id === 'fishing'
+                        ? `${activity.hint} Current rod: ${bestRod.name}.${upcomingRod ? ` Open more regions to find the ${upcomingRod.name}.` : ''}`
+                        : activity.hint,
                     actionLabel: activity.action,
                     disabled:
                       minigameBusy ||

@@ -387,6 +387,8 @@ type GameState = {
   nextPokemonId: number
   money: number
   inventory: Record<string, number>
+  /** Fishing rods the player has found (see game/minigames/rods.js). */
+  rods: string[]
   catchSettings: Record<string, Record<string, CatchRule>>
   globalCatchDefaults: CatchRule
   activeEffects: ActiveEffect[]

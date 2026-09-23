@@ -7153,6 +7153,12 @@ img {
     color: var(--parchment)
 }
 
+.activity-rod {
+    text-align: center;
+    font-size: 8px;
+    color: #9fd0ff
+}
+
 .activity-bar {
     position: relative;
     width: 90%;

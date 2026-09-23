@@ -557,11 +557,15 @@ only real progression change).
 
 ## Map cleanup reference maps
 
-Reference maps to compare the generated region layouts against. These regions'
-scraped force-directed layouts don't match the real geography, so they need
-hand-measured coordinates the same way Hoenn/Johto already do (see
-`REGION_MAP_LAYOUTS` in `tools/generate-regions.cjs`, `tools/map-compare/`, and
-#28/#35/#36).
+All eight non-Kanto regions have hand-measured `REGION_MAP_LAYOUTS` overrides.
+`tools/map-compare/overlay-region-maps.py` draws the game's nodes on top of each
+reference image (`tools/map-compare/refs/`, fetched by `fetch-refs.cjs`) to
+check them. As of 0.36.1 the Sinnoh, Galar, Kalos and Unova nodes all land on
+their matching reference places, so there is no outstanding coordinate work for
+these four — the remaining Galar gap is the missing areas, not placement (see
+#35/#36). Re-run the overlay after moving or adding nodes.
+
+Reference images kept for future checks:
 
 - **Sinnoh** — https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/e3b63315-f949-4899-bfec-5e53edcb71bc/de3deoc-13a15e88-ca36-4f15-8824-44f4f7c83833.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiIvZi9lM2I2MzMxNS1mOTQ5LTQ4OTktYmZlYy01ZTUzZWRjYjcxYmMvZGUzZGVvYy0xM2ExNWU4OC1jYTM2LTRmMTUtODgyNC00NGY0ZjdjODM4MzMucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.2o7QyN1MjdspHH1EYhWWIpV8_2aer0TBwtswDubtGzw
 - **Galar** — https://static0.polygonimages.com/wordpress/wp-content/uploads/chorus/uploads/chorus_asset/file/19375993/Pokemon_sword_shield_galar_map_locations.jpg?q=50&fit=crop&w=750&dpr=1.5

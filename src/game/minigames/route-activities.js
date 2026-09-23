@@ -13,17 +13,17 @@ import { FISHING_LOCATIONS, encountersWithoutFishingExclusive, fishingExclusiveF
 /** How many attempts (casts/searches) a visit gives. */
 export const ACTIVITY_ATTEMPTS = 3
 
-/** How long one sweep of the timing bar takes, in ms. */
-export const ACTIVITY_SWEEP_MS = 1100
+/** How long one there-and-back sweep of the timing marker takes, in ms. */
+export const ACTIVITY_SWEEP_MS = 1600
 
-/** Distance from the centre (in 0..1 bar units) that still lands a hit. */
-export const ACTIVITY_HIT_ZONE = 0.22
+/** Distance from the centre (in 0..1 units) that still lands a hit. */
+export const ACTIVITY_HIT_ZONE = 0.28
 
 /** Distance from the centre that lands a perfect hit. */
-export const ACTIVITY_PERFECT_ZONE = 0.08
+export const ACTIVITY_PERFECT_ZONE = 0.14
 
 /** Distance from the centre that lands a perfect catch (route-exclusive). */
-export const ACTIVITY_ULTRA_ZONE = 0.03
+export const ACTIVITY_ULTRA_ZONE = 0.055
 
 /**
  * Route activities. `mode` picks the outcome: `encounter` starts a normal wild

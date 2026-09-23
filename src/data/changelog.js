@@ -15,6 +15,13 @@ export const CHANGELOG = [
             'Every fishing route now guards an exclusive Water Pokemon. Hit the tiny centre of the cast bar \u2014 a fourth, smallest zone \u2014 to hook it. It is pulled out of the route\u2019s normal wild table and marked with a fishing rod in the Wild Pokemon list',
             'Berry Foraging now plays as an expanding ring you time on the target instead of a left-to-right bar, so it no longer looks like fishing',
             'A successful search can now flush a Grass Pokemon out of the bush (more likely on a perfect search) and start a normal wild battle',
+            'Fishing and foraging are easier to time: the marker sweeps slower (about 1.6s a pass) and the hit / perfect / centre zones are much wider, so the sweet spot is a bigger target',
+          ],
+        },
+        {
+          heading: 'Fixes',
+          items: [
+            'The trainer name banner no longer overlaps the top-bar buttons during trainer battles',
           ],
         },
         {

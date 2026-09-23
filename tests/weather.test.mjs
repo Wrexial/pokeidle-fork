@@ -6,7 +6,9 @@ import { installGameData } from './helpers/game-data.mjs'
 installGameData()
 
 const { resolveBattleTurn } = await import('../src/game/combat.js')
-const { weatherDamageMultiplier, weatherResidualDamage } = await import('../src/game/weather.js')
+const { applyWeatherToMove, weatherDamageMultiplier, weatherResidualDamage } = await import(
+  '../src/game/weather.js'
+)
 
 /**
  * @param {Record<string, any>} [overrides]
@@ -111,6 +113,59 @@ test('Swift Swim doubles speed in the rain', () => {
     }
     assert.match(make(null), /^Foe/)
     assert.match(make({ type: 'rain', turns: 5 }), /^Swimmer/)
+  })
+})
+
+test('weather rewrites Weather Ball and makes some moves never miss', () => {
+  const weatherBall = { name: 'Weather Ball', type: 'Normal', power: 50, accuracy: 100 },
+    thunder = { name: 'Thunder', type: 'Electric', power: 110, accuracy: 70 }
+  assert.deepEqual(applyWeatherToMove({ type: 'rain' }, weatherBall), {
+    ...weatherBall,
+    type: 'Water',
+    power: 100,
+  })
+  assert.equal(applyWeatherToMove({ type: 'sun' }, weatherBall).type, 'Fire')
+  assert.equal(applyWeatherToMove({ type: 'sandstorm' }, weatherBall).type, 'Rock')
+  assert.equal(applyWeatherToMove({ type: 'snow' }, weatherBall).type, 'Ice')
+  assert.equal(applyWeatherToMove(null, weatherBall), weatherBall, 'unchanged with no weather')
+  assert.equal(applyWeatherToMove({ type: 'rain' }, thunder).accuracy, 0, 'Thunder cannot miss in rain')
+  assert.equal(applyWeatherToMove({ type: 'sun' }, thunder).accuracy, 70, 'but can outside it')
+  assert.equal(
+    applyWeatherToMove({ type: 'snow' }, { name: 'Blizzard', type: 'Ice', power: 110, accuracy: 70 })
+      .accuracy,
+    0
+  )
+})
+
+test('Weather Ball takes the weather type in battle', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['weatherBall'],
+        spAttack: 200,
+        speed: 200,
+      }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], types: ['Fire'] }),
+      events = resolveBattleTurn(player, enemy, false, false, { type: 'rain', turns: 5 })
+    assert.ok(
+      events.some((/** @type {any} */ event) => event.message === "It's super effective!"),
+      'a Water Weather Ball is super effective against Fire'
+    )
+  })
+})
+
+test('Thunder never misses in the rain', () => {
+  withFixedRandom(0.99, () => {
+    const missed = (/** @type {any} */ weather) => {
+      const player = battler({ name: 'Player', isPlayer: true, moves: ['thunder'], speed: 200 }),
+        enemy = battler({ name: 'Foe', moves: ['splash'] })
+      return resolveBattleTurn(player, enemy, false, false, weather).some(
+        (/** @type {any} */ event) => event.message?.includes('missed')
+      )
+    }
+    assert.equal(missed(null), true, 'Thunder can miss normally')
+    assert.equal(missed({ type: 'rain', turns: 5 }), false, 'but never in the rain')
   })
 })
 

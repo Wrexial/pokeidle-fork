@@ -1,6 +1,6 @@
 # TODO
 
-Open ideas and follow-ups. Current game version: **0.38.5**
+Open ideas and follow-ups. Current game version: **0.38.6**
 (`src/data/changelog.js`). Finished work lives in the changelog, not here — this
 file only tracks what is **still open**. See `AGENTS.md` for architecture,
 commands and data conventions.
@@ -52,8 +52,9 @@ renumbered, so the gaps below are items that shipped.
 
 ### Tier 3 — Big / low-return, defer
 
-15. **#10 Weather & terrain leftovers** — M · ★★½ — terrain synergy abilities
-    and weather/accuracy interactions.
+15. **#10 Weather & terrain leftovers** — M · ★★½ — **(partial: 0.38.6 shipped
+    Weather Ball, weather-perfect accuracy and the terrain synergy abilities;
+    terrain rocks and route-based field effects remain.)**
 16. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
@@ -74,11 +75,18 @@ Effort: **medium–large**.
 
 ## 10. Weather & terrain leftovers
 
-Weather (0.17.0) and terrain (0.20.0) both shipped; what remains:
+Weather (0.17.0) and terrain (0.20.0) both shipped.
 
-- [ ] Terrain synergy abilities (Grass Pelt, Hadron Engine, Quark Drive),
-      terrain rocks/extended duration, and route-based field effects.
-- [ ] Weather-ball / move accuracy interactions (Thunder, Hurricane, Blizzard).
+**Shipped (0.38.6):** Weather Ball takes the weather's type (Water/Fire/Rock/
+Ice) with doubled power; Thunder and Hurricane never miss in rain and Blizzard
+never misses in snow/hail; and the terrain synergy abilities work — Grass Pelt
+raises Defense on Grassy Terrain, and Hadron Engine (which now also sets
+Electric Terrain on entry) and Quark Drive boost offence on Electric Terrain.
+
+Still open:
+
+- [ ] Terrain rocks (an item/ability that extends a terrain's duration), and
+      route-based field effects (a route that starts sunny/raining/etc.).
 
 Effort: **medium**.
 

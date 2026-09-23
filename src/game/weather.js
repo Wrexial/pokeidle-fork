@@ -14,6 +14,15 @@ export const WEATHER_ABILITIES = {
   snowWarning: 'snow',
 }
 
+/** Weather Ball's type per weather; its power doubles in any weather. @type {Record<string, string>} */
+const WEATHER_BALL_TYPES = {
+  rain: 'Water',
+  sun: 'Fire',
+  sandstorm: 'Rock',
+  snow: 'Ice',
+  hail: 'Ice',
+}
+
 /** Human-readable weather name for logs/UI. @type {Record<string, string>} */
 export const WEATHER_NAMES = {
   rain: 'rain',
@@ -30,6 +39,24 @@ export const WEATHER_ICONS = {
   sandstorm: '\ud83c\udf2a',
   snow: '\u2744',
   hail: '\ud83c\udf28',
+}
+
+/**
+ * The move as the weather changes it, before damage is worked out: Weather Ball
+ * takes the weather's type with doubled power, and Thunder, Hurricane (rain) and
+ * Blizzard (snow/hail) never miss (accuracy 0 means "can't miss" in the engine).
+ * @param {{ type: string } | null | undefined} weather
+ * @param {Move} moveDef
+ * @returns {Move}
+ */
+export function applyWeatherToMove(weather, moveDef) {
+  if (!weather || !moveDef) return moveDef
+  const name = moveDef.name
+  if (name === 'Weather Ball' && WEATHER_BALL_TYPES[weather.type])
+    return { ...moveDef, type: WEATHER_BALL_TYPES[weather.type], power: (moveDef.power ?? 0) * 2 }
+  const perfectInRain = weather.type === 'rain' && (name === 'Thunder' || name === 'Hurricane'),
+    perfectInSnow = (weather.type === 'snow' || weather.type === 'hail') && name === 'Blizzard'
+  return perfectInRain || perfectInSnow ? { ...moveDef, accuracy: 0 } : moveDef
 }
 
 /**

@@ -13,6 +13,8 @@ export const TERRAIN_ABILITIES = {
   grassySurge: 'grassy',
   mistySurge: 'misty',
   psychicSurge: 'psychic',
+  // Hadron Engine (Miraidon) sets Electric Terrain as well as boosting Sp. Atk.
+  hadronEngine: 'electric',
 }
 
 /** Human-readable terrain name. @type {Record<string, string>} */
@@ -77,6 +79,30 @@ export function terrainPreventsStatus(terrain, target, status) {
  */
 export function terrainPreventsPriority(terrain, target) {
   return !!terrain && terrain.type === 'psychic' && isGrounded(target)
+}
+
+/**
+ * Stat multiplier from a terrain synergy ability: Grass Pelt boosts Defense in
+ * Grassy Terrain, while Quark Drive and Hadron Engine boost offence in Electric
+ * Terrain. (Quark Drive really boosts the highest stat; the game boosts both
+ * attacking stats, since only one is used per move.)
+ * @param {{ type: string } | null | undefined} terrain
+ * @param {BattlePokemon} pokemon
+ * @param {'attack' | 'spAttack' | 'defense' | 'spDefense' | 'speed'} statKey
+ * @returns {number}
+ */
+export function terrainAbilityMultiplier(terrain, pokemon, statKey) {
+  if (!terrain) return 1
+  const ability = pokemon.ability
+  if (terrain.type === 'grassy' && ability === 'grassPelt' && statKey === 'defense') return 1.5
+  if (terrain.type === 'electric' && ability === 'hadronEngine' && statKey === 'spAttack') return 1.33
+  if (
+    terrain.type === 'electric' &&
+    ability === 'quarkDrive' &&
+    (statKey === 'attack' || statKey === 'spAttack')
+  )
+    return 1.3
+  return 1
 }
 
 /**

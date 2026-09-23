@@ -9,9 +9,9 @@ import { emptyBattleHazards } from '../hazards.js'
 import { heldDamageMultiplier, heldLifeOrbRecoil, heldStatMultiplier, heldSurvivesAtFullHp } from '../held-items.js'
 import { canEvolveFurther } from '../pokemon.js'
 import { applyConfusion, applyContactAbility, applyInfatuation, applyLeechSeed, applyStatus, handleConfusion, handleInfatuation, statusPreventsAction } from './status.js'
-import { TERRAIN_ABILITIES, TERRAIN_NAMES, TERRAIN_TURNS, terrainDamageMultiplier, terrainPreventsPriority } from '../terrain.js'
+import { TERRAIN_ABILITIES, TERRAIN_NAMES, TERRAIN_TURNS, terrainAbilityMultiplier, terrainDamageMultiplier, terrainPreventsPriority } from '../terrain.js'
 import { applyIntimidate, clampStatStage, effectiveSpeed, getStatLabel, getStatStage, resetStatStages, screenApplies } from './volatile.js'
-import { WEATHER_ABILITIES, WEATHER_NAMES, WEATHER_TURNS, weatherDamageMultiplier } from '../weather.js'
+import { WEATHER_ABILITIES, WEATHER_NAMES, WEATHER_TURNS, applyWeatherToMove, weatherDamageMultiplier } from '../weather.js'
 
 /**
  * @param {BattlePokemon} player
@@ -370,9 +370,12 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       }
       continue
     }
+    // Weather rewrites Weather Ball's type/power and makes Thunder, Hurricane
+    // and Blizzard never miss.
+    const effectiveMove = applyWeatherToMove(activeWeather, moveDef)
     // Levitate / type-absorbing abilities negate the move (and usually heal).
-    if (abilityAbsorbsType(attack.defender, moveDef.type)) {
-      if (abilityHealsFromType(attack.defender, moveDef.type)) {
+    if (abilityAbsorbsType(attack.defender, effectiveMove.type)) {
+      if (abilityHealsFromType(attack.defender, effectiveMove.type)) {
         const healed = Math.min(
             attack.defender.maxHp,
             attack.defender.currentHp + Math.max(1, Math.floor(attack.defender.maxHp / 4))
@@ -405,6 +408,11 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
             : attack.attacker.attack
           : attack.attacker.spAttack) *
         abilityAttackMultiplier(attack.attacker) *
+        terrainAbilityMultiplier(
+          activeTerrain,
+          attack.attacker,
+          moveDef.category === 'physical' ? 'attack' : 'spAttack'
+        ) *
         heldStatMultiplier(
           attack.attacker,
           moveDef.category === 'physical' ? 'attack' : 'spAttack',
@@ -412,6 +420,11 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         ),
       defenseStat =
         (moveDef.category === 'physical' ? attack.defender.defense : attack.defender.spDefense) *
+        terrainAbilityMultiplier(
+          activeTerrain,
+          attack.defender,
+          moveDef.category === 'physical' ? 'defense' : 'spDefense'
+        ) *
         heldStatMultiplier(
           attack.defender,
           moveDef.category === 'physical' ? 'defense' : 'spDefense',
@@ -427,7 +440,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         attack.attacker.level,
         attackStat,
         defenseStat,
-        moveDef,
+        effectiveMove,
         attack.attacker.types,
         attack.defender.types,
         attackerStage,
@@ -489,7 +502,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           attack.attacker.level,
           attackStat,
           defenseStat,
-          moveDef,
+          effectiveMove,
           attack.attacker.types,
           attack.defender.types,
           attackerStage,
@@ -511,11 +524,11 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     // Ability + held-item + weather damage modifiers.
     totalDamage = Math.floor(
       totalDamage *
-        abilityDamageDealtMultiplier(attack.attacker, moveDef) *
-        abilityDamageTakenMultiplier(attack.defender, moveDef) *
-        heldDamageMultiplier(attack.attacker, moveDef) *
-        weatherDamageMultiplier(activeWeather, moveDef) *
-        terrainDamageMultiplier(activeTerrain, attack.attacker, moveDef, attack.defender)
+        abilityDamageDealtMultiplier(attack.attacker, effectiveMove) *
+        abilityDamageTakenMultiplier(attack.defender, effectiveMove) *
+        heldDamageMultiplier(attack.attacker, effectiveMove) *
+        weatherDamageMultiplier(activeWeather, effectiveMove) *
+        terrainDamageMultiplier(activeTerrain, attack.attacker, effectiveMove, attack.defender)
     )
     if (abilityHalvesSuperEffective(attack.defender) && damageResult.effectiveness > 1)
       totalDamage = Math.max(1, Math.floor(totalDamage / 2))

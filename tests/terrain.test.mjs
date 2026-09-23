@@ -6,7 +6,9 @@ import { installGameData } from './helpers/game-data.mjs'
 installGameData()
 
 const { resolveBattleTurn } = await import('../src/game/combat.js')
-const { terrainDamageMultiplier, terrainHeal } = await import('../src/game/terrain.js')
+const { terrainAbilityMultiplier, terrainDamageMultiplier, terrainHeal } = await import(
+  '../src/game/terrain.js'
+)
 
 /**
  * @param {Record<string, any>} [overrides]
@@ -89,6 +91,34 @@ test('a terrain ability sets the terrain on entry', () => {
         isPlayer: true,
         moves: ['splash'],
         ability: 'electricSurge',
+        speed: 200,
+      }),
+      enemy = battler({ name: 'Foe', moves: ['splash'] }),
+      terrain = terrainEvent(resolveBattleTurn(player, enemy, false, true, null, null, !1, null))
+    assert.equal(terrain.data.terrain.type, 'electric')
+  })
+})
+
+test('terrain synergy abilities boost their stat in the right terrain', () => {
+  const grassPelt = battler({ ability: 'grassPelt' }),
+    hadron = battler({ ability: 'hadronEngine' }),
+    quark = battler({ ability: 'quarkDrive' })
+  assert.equal(terrainAbilityMultiplier({ type: 'grassy' }, grassPelt, 'defense'), 1.5)
+  assert.equal(terrainAbilityMultiplier({ type: 'grassy' }, grassPelt, 'attack'), 1)
+  assert.equal(terrainAbilityMultiplier({ type: 'electric' }, hadron, 'spAttack'), 1.33)
+  assert.equal(terrainAbilityMultiplier({ type: 'electric' }, quark, 'attack'), 1.3)
+  assert.equal(terrainAbilityMultiplier({ type: 'electric' }, quark, 'spAttack'), 1.3)
+  assert.equal(terrainAbilityMultiplier({ type: 'grassy' }, quark, 'attack'), 1, 'wrong terrain')
+  assert.equal(terrainAbilityMultiplier(null, grassPelt, 'defense'), 1, 'no terrain')
+})
+
+test('Hadron Engine sets Electric Terrain on entry', () => {
+  withFixedRandom(0.9, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['splash'],
+        ability: 'hadronEngine',
         speed: 200,
       }),
       enemy = battler({ name: 'Foe', moves: ['splash'] }),

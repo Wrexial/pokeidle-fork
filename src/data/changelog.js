@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.38.5'
+export const GAME_VERSION = '0.38.6'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.38.6',
+      subtitle: 'Weather & Terrain',
+      sections: [
+        {
+          heading: 'Battle',
+          items: [
+            'Weather Ball now changes type with the weather (Water in rain, Fire in sun, Rock in a sandstorm, Ice in snow) and doubles its power, and Thunder and Hurricane never miss in rain while Blizzard never misses in snow or hail',
+            'Terrain synergy abilities now work: Grass Pelt raises Defense on Grassy Terrain, and Hadron Engine (which now sets Electric Terrain on entry) and Quark Drive boost offence on Electric Terrain',
+          ],
+        },
+      ],
+    },
     {
       version: '0.38.5',
       subtitle: 'Raid Islands',

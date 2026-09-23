@@ -256,6 +256,10 @@ type VolatileState = {
   disguiseBroken?: boolean
   /** Ice Face (Eiscue) has already absorbed a physical hit. */
   iceFaceBroken?: boolean
+  /** Held item after Trick / Magician / Pickpocket / Bestow / Corrosive Gas. */
+  heldItemOverride?: string | null
+  /** Whether `heldItemOverride` is set (so a null item is distinguishable). */
+  heldItemOverridden?: boolean
 }
 
 type GameAction = { type: string; payload?: any; [key: string]: any }

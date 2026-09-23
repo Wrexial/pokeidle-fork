@@ -65,6 +65,29 @@ function resolveCalledMove(moveId, target, terrain) {
 }
 
 /**
+ * Move a held item from `victim` to `thief` (Magician / Pickpocket).
+ * @param {BattlePokemon} thief
+ * @param {BattlePokemon} victim
+ * @param {any[]} events
+ * @param {boolean} thiefIsPlayer
+ */
+function stealHeldItem(thief, victim, events, thiefIsPlayer) {
+  if (thief.heldItem || !victim.heldItem) return
+  const item = victim.heldItem
+  thief.heldItem = item
+  thief.heldItemOverride = item
+  thief.heldItemOverridden = !0
+  victim.heldItem = null
+  victim.heldItemOverride = null
+  victim.heldItemOverridden = !0
+  events.push({
+    type: 'status',
+    message: `${thief.name} stole ${victim.name}'s held item!`,
+    data: { target: thiefIsPlayer ? 'player' : 'enemy' },
+  })
+}
+
+/**
  * Encore forces a move and Disable blocks one, while the stored move is still
  * in the Pokemon's moveset. Self-inflicted move locks (Outrage etc.) take
  * precedence and are handled before this.
@@ -795,6 +818,52 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           })
         }
       }
+      else if (moveDef.effect?.type === 'itemSwap') {
+        const attackerItem = attack.attacker.heldItem ?? null,
+          defenderItem = attack.defender.heldItem ?? null
+        attack.attacker.heldItem = defenderItem
+        attack.attacker.heldItemOverride = defenderItem
+        attack.attacker.heldItemOverridden = !0
+        attack.defender.heldItem = attackerItem
+        attack.defender.heldItemOverride = attackerItem
+        attack.defender.heldItemOverridden = !0
+        events.push({
+          type: 'status',
+          message: `${attack.attacker.name} swapped held items with ${attack.defender.name}!`,
+        })
+      }
+      else if (moveDef.effect?.type === 'bestow') {
+        if (!attack.defender.heldItem && attack.attacker.heldItem) {
+          const item = attack.attacker.heldItem
+          attack.defender.heldItem = item
+          attack.defender.heldItemOverride = item
+          attack.defender.heldItemOverridden = !0
+          attack.attacker.heldItem = null
+          attack.attacker.heldItemOverride = null
+          attack.attacker.heldItemOverridden = !0
+          events.push({
+            type: 'status',
+            message: `${attack.attacker.name} gave its held item to ${attack.defender.name}!`,
+          })
+        } else {
+          events.push({
+            type: 'status',
+            message: `${attack.attacker.name}'s Bestow failed!`,
+          })
+        }
+      }
+      else if (moveDef.effect?.type === 'corrosiveGas') {
+        if (attack.defender.heldItem) {
+          attack.defender.heldItem = null
+          attack.defender.heldItemOverride = null
+          attack.defender.heldItemOverridden = !0
+          events.push({
+            type: 'status',
+            message: `${attack.defender.name}'s held item was corroded away!`,
+            data: { target: attack.isPlayer ? 'enemy' : 'player' },
+          })
+        }
+      }
       else if (moveDef.effect?.type === 'hazard') {
         const targetSide = /** @type {any} */ (
             attack.isPlayer ? activeHazards.enemy : activeHazards.player
@@ -1291,6 +1360,11 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         })
       }
     }
+    // Magician steals on the hit; Pickpocket steals on contact.
+    if (abilityOf(attack.attacker) === 'magician')
+      stealHeldItem(attack.attacker, attack.defender, events, attack.isPlayer)
+    if (abilityOf(attack.defender) === 'pickpocket' && moveMakesContact(effectiveMove))
+      stealHeldItem(attack.defender, attack.attacker, events, !attack.isPlayer)
     if (attack.defender.currentHp <= 0) {
       events.push({
         type: 'faint',

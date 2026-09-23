@@ -271,7 +271,9 @@ export function useGameLoop() {
               speed: currentGameState.playerPokemon.speed,
               moves: currentGameState.playerPokemon.moves,
               ability: currentGameState.playerPokemon.ability,
-              heldItem: currentGameState.playerPokemon.heldItem ?? null,
+              heldItem: playerVolatile.heldItemOverridden
+                ? playerVolatile.heldItemOverride
+                : currentGameState.playerPokemon.heldItem ?? null,
               isPlayer: !0,
               isShiny: currentGameState.playerPokemon.isShiny,
               statStages: {
@@ -315,12 +317,17 @@ export function useGameLoop() {
               typesOverride: playerVolatile.typesOverride ?? null,
               disguiseBroken: playerVolatile.disguiseBroken ?? !1,
               iceFaceBroken: playerVolatile.iceFaceBroken ?? !1,
+              heldItemOverride: playerVolatile.heldItemOverride ?? null,
+              heldItemOverridden: playerVolatile.heldItemOverridden ?? !1,
             },
             enemyBattlePokemon = {
               ...currentGameState.enemyPokemon,
               types:
                 currentGameState.enemyPokemon.typesOverride ??
                 currentGameState.enemyPokemon.types,
+              heldItem: currentGameState.enemyPokemon.heldItemOverridden
+                ? currentGameState.enemyPokemon.heldItemOverride
+                : currentGameState.enemyPokemon.heldItem ?? null,
             },
             isTrainerBattle =
               (currentGameState.trainerBattle ??

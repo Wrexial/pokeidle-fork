@@ -716,3 +716,56 @@ test('Neutralizing Gas suppresses the other ability', () => {
     assert.equal(enemy.abilitySuppressed, false, 'the suppression does not persist')
   })
 })
+
+test('Trick swaps held items', () => {
+  const player = battler({
+      name: 'Player',
+      isPlayer: true,
+      moves: ['trick'],
+      speed: 200,
+      heldItem: 'leftovers',
+    }),
+    enemy = battler({ name: 'Foe', moves: ['splash'], heldItem: 'sitrusBerry' })
+  resolveBattleTurn(player, enemy, false)
+  assert.equal(player.heldItem, 'sitrusBerry')
+  assert.equal(enemy.heldItem, 'leftovers')
+  assert.equal(player.heldItemOverridden, true)
+})
+
+test('Corrosive Gas removes the target held item', () => {
+  const player = battler({ name: 'Player', isPlayer: true, moves: ['corrosiveGas'], speed: 200 }),
+    enemy = battler({ name: 'Foe', moves: ['splash'], heldItem: 'sitrusBerry' })
+  resolveBattleTurn(player, enemy, false)
+  assert.equal(enemy.heldItem, null)
+  assert.equal(enemy.heldItemOverridden, true)
+})
+
+test('Magician steals the target item on hit', () => {
+  const player = battler({
+      name: 'Player',
+      isPlayer: true,
+      moves: ['tackle'],
+      speed: 200,
+      attack: 200,
+      ability: 'magician',
+    }),
+    enemy = battler({ name: 'Foe', moves: ['splash'], heldItem: 'sitrusBerry', currentHp: 400, maxHp: 400 })
+  resolveBattleTurn(player, enemy, false)
+  assert.equal(player.heldItem, 'sitrusBerry')
+  assert.equal(enemy.heldItem, null)
+})
+
+test('Pickpocket steals on contact', () => {
+  const player = battler({
+      name: 'Player',
+      isPlayer: true,
+      moves: ['tackle'],
+      speed: 200,
+      attack: 200,
+      heldItem: 'leftovers',
+    }),
+    enemy = battler({ name: 'Foe', moves: ['splash'], ability: 'pickpocket', currentHp: 400, maxHp: 400 })
+  resolveBattleTurn(player, enemy, false)
+  assert.equal(enemy.heldItem, 'leftovers')
+  assert.equal(player.heldItem, null)
+})

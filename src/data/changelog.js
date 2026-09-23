@@ -23,6 +23,7 @@ export const CHANGELOG = [
             'Type-changing abilities: Protean and Libero change the user\u2019s type to the move it is about to use, Normalize forces Normal, Liquid Voice makes sound moves Water, and the -ate family (Pixilate, Refrigerate, Aerilate, Galvanize, Dragonize) turns Normal moves into their type with a 20% boost',
             'Disguise and Ice Face absorb the first hit (Ice Face reforms in snow or hail)',
             'Global stat pressure: the Ruin quartet (Tablets of Ruin weakens physical offence, Beads of Ruin special offence, Sword of Ruin physical defence, Vessel of Ruin special defence) and Neutralizing Gas, which suppresses every other Pokemon\u2019s ability while its holder is on the field',
+            'Held-item manipulation works: Trick / Switcheroo swap items, Bestow gives one away, Corrosive Gas destroys the foe\u2019s, and the Magician / Pickpocket abilities steal one on the hit or on contact',
           ],
         },
       ],

@@ -52,6 +52,8 @@ export function createVolatileState() {
     typesOverride: null,
     disguiseBroken: !1,
     iceFaceBroken: !1,
+    heldItemOverride: null,
+    heldItemOverridden: !1,
   }
 }
 
@@ -102,6 +104,8 @@ export function volatileStateFromBattle(pokemon) {
     typesOverride: pokemon.typesOverride ?? null,
     disguiseBroken: pokemon.disguiseBroken ?? !1,
     iceFaceBroken: pokemon.iceFaceBroken ?? !1,
+    heldItemOverride: pokemon.heldItemOverride ?? null,
+    heldItemOverridden: pokemon.heldItemOverridden ?? !1,
   }
 }
 

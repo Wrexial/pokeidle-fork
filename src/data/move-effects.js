@@ -149,6 +149,11 @@ const MOVE_OVERRIDES = {
     },
   },
   recycle: { effect: { type: 'recycle', target: 'self' } },
+  // Held-item manipulation.
+  trick: { effect: { type: 'itemSwap' }, accuracy: 100 },
+  switcheroo: { effect: { type: 'itemSwap' }, accuracy: 100 },
+  bestow: { effect: { type: 'bestow' }, accuracy: 100 },
+  corrosiveGas: { effect: { type: 'corrosiveGas' }, accuracy: 100 },
   // --- Entry hazards ---
   stealthRock: { effect: { type: 'hazard', hazard: 'stealthRock' } },
   spikes: { effect: { type: 'hazard', hazard: 'spikes' } },

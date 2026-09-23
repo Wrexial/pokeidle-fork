@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
-import { activeItems, consumableItems, pokeBalls, standardMartItems } from '../data/items.js'
+import { activeItems, consumableItems, heldItems, pokeBalls, standardMartItems } from '../data/items.js'
 import { useGame } from '../game/context.js'
 import { isActiveEffectItem } from '../game/progression.js'
 import { BallShopRow } from './ball-shop-row.js'
@@ -67,6 +67,25 @@ export function ShopPanel({ shopDef }) {
           }
           if (consumableItems[shopItem.itemId]) {
             const item = consumableItems[shopItem.itemId]
+            return item.buyPrice
+              ? jsx(
+                  ItemShopRow,
+                  {
+                    itemId: shopItem.itemId,
+                    name: item.name,
+                    description: item.description,
+                    price: item.buyPrice,
+                    owned: state.inventory[shopItem.itemId] ?? 0,
+                    money: state.money,
+                    qtyMode,
+                    dispatch,
+                  },
+                  shopItem.itemId
+                )
+              : null
+          }
+          if (heldItems[shopItem.itemId]) {
+            const item = heldItems[shopItem.itemId]
             return item.buyPrice
               ? jsx(
                   ItemShopRow,

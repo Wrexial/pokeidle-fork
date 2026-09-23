@@ -9,7 +9,7 @@ const { BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL
   '../src/game/minigames.js'
 )
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
-const { consumableItems, evolutionItems } = await import('../src/data/items.js')
+const { consumableItems, evolutionItems, heldItems } = await import('../src/data/items.js')
 const { createPokemon } = await import('../src/game/pokemon.js')
 
 test('fixed minigames live at their in-game locations', () => {
@@ -24,12 +24,22 @@ test('mining rewards are real items with a positive quantity', () => {
   for (let roll = 0; roll < 60; roll++) {
     const reward = rollMiningReward()
     assert.ok(
-      consumableItems[reward.itemId] || evolutionItems[reward.itemId],
+      consumableItems[reward.itemId] ||
+        evolutionItems[reward.itemId] ||
+        heldItems[reward.itemId],
       `${reward.itemId} should be a real item`
     )
     assert.ok(reward.quantity >= 1)
     assert.equal(typeof rewardItemName(reward.itemId), 'string')
   }
+})
+
+test('mining can find held battle items and names them', () => {
+  const found = new Set()
+  for (let roll = 0; roll < 800; roll++) found.add(rollMiningReward().itemId)
+  const battleItems = [...found].filter((itemId) => heldItems[itemId])
+  assert.ok(battleItems.length >= 3, `expected several battle items, got ${battleItems.length}`)
+  for (const itemId of battleItems) assert.equal(rewardItemName(itemId), heldItems[itemId].name)
 })
 
 test('PAY_MINIGAME_FEE charges the fee and refuses when broke', () => {

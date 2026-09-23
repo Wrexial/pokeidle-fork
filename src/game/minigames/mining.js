@@ -1,6 +1,6 @@
 // Sinnoh Underground mining runs. Split from game/minigames.js.
 
-import { consumableItems, evolutionItems } from '../../data/items.js'
+import { consumableItems, evolutionItems, heldItems } from '../../data/items.js'
 
 /** Money spent to start a mining run. */
 export const MINING_COST = 1500
@@ -45,6 +45,36 @@ const MINING_REWARD_TABLE = [
   // Candies.
   { itemId: 'expCandyL', weight: 4, min: 1, max: 2 },
   { itemId: 'rareCandy', weight: 1, min: 1, max: 1 },
+  // Held battle items. These are the mart's late-game stock; the Underground
+  // is the alternate source so they are never “unobtainable”.
+  { itemId: 'silkScarf', weight: 2, min: 1, max: 1 },
+  { itemId: 'charcoal', weight: 2, min: 1, max: 1 },
+  { itemId: 'mysticWater', weight: 2, min: 1, max: 1 },
+  { itemId: 'magnet', weight: 2, min: 1, max: 1 },
+  { itemId: 'miracleSeed', weight: 2, min: 1, max: 1 },
+  { itemId: 'neverMeltIce', weight: 2, min: 1, max: 1 },
+  { itemId: 'blackBelt', weight: 2, min: 1, max: 1 },
+  { itemId: 'poisonBarb', weight: 2, min: 1, max: 1 },
+  { itemId: 'softSand', weight: 2, min: 1, max: 1 },
+  { itemId: 'sharpBeak', weight: 2, min: 1, max: 1 },
+  { itemId: 'twistedSpoon', weight: 2, min: 1, max: 1 },
+  { itemId: 'silverPowder', weight: 2, min: 1, max: 1 },
+  { itemId: 'hardStone', weight: 2, min: 1, max: 1 },
+  { itemId: 'spellTag', weight: 2, min: 1, max: 1 },
+  { itemId: 'dragonFang', weight: 2, min: 1, max: 1 },
+  { itemId: 'blackGlasses', weight: 2, min: 1, max: 1 },
+  { itemId: 'ironPlate', weight: 2, min: 1, max: 1 },
+  { itemId: 'pixiePlate', weight: 2, min: 1, max: 1 },
+  { itemId: 'eviolite', weight: 2, min: 1, max: 1 },
+  { itemId: 'focusSash', weight: 2, min: 1, max: 1 },
+  { itemId: 'sitrusBerry', weight: 3, min: 1, max: 1 },
+  { itemId: 'lumBerry', weight: 2, min: 1, max: 1 },
+  { itemId: 'choiceBand', weight: 1, min: 1, max: 1 },
+  { itemId: 'choiceSpecs', weight: 1, min: 1, max: 1 },
+  { itemId: 'choiceScarf', weight: 1, min: 1, max: 1 },
+  { itemId: 'leftovers', weight: 1, min: 1, max: 1 },
+  { itemId: 'lifeOrb', weight: 1, min: 1, max: 1 },
+  { itemId: 'assaultVest', weight: 1, min: 1, max: 1 },
 ]
 
 /** Total weight of the reward table. */
@@ -70,7 +100,12 @@ export function rollMiningReward() {
 
 /** Display name for any reward item id. @param {string} itemId */
 export function rewardItemName(itemId) {
-  return consumableItems[itemId]?.name ?? evolutionItems[itemId]?.name ?? itemId
+  return (
+    consumableItems[itemId]?.name ??
+    evolutionItems[itemId]?.name ??
+    heldItems[itemId]?.name ??
+    itemId
+  )
 }
 
 // --- Johto Bug Catching Contest -------------------------------------------

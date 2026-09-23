@@ -7,7 +7,7 @@ export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 export const CHANGELOG = [
     {
       version: '0.19.0',
-      subtitle: 'Fishing, Foraging & Tower',
+      subtitle: 'Minigames & Battle Items',
       sections: [
         {
           heading: 'Minigames',
@@ -15,6 +15,13 @@ export const CHANGELOG = [
             'Every fishing route now guards an exclusive Water Pokemon. Hit the tiny centre of the cast bar \u2014 a fourth, smallest zone \u2014 to hook it. It is pulled out of the route\u2019s normal wild table and marked with a fishing rod in the Wild Pokemon list',
             'Berry Foraging now plays as an expanding ring you time on the target instead of a left-to-right bar, so it no longer looks like fishing',
             'A successful search can now flush a Grass Pokemon out of the bush (more likely on a perfect search) and start a normal wild battle',
+          ],
+        },
+        {
+          heading: 'Items',
+          items: [
+            'Held battle items are actually purchasable now: marts listed Leftovers, the Choice items, the type boosters and the rest, but the shop had no row for them, so they could never be bought',
+            'The Sinnoh Underground now digs up those battle items too \u2014 type boosters, Choice Band / Specs / Scarf, Leftovers, Life Orb, Assault Vest, Eviolite, Focus Sash and Sitrus / Lum Berries \u2014 giving every held item a second source',
           ],
         },
         {

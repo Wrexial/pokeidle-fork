@@ -234,7 +234,10 @@ Tangled Feet), the utility/reaction batch (Truant, Slow Start, Klutz, Sticky
 Hold, Unnerve, Gluttony, Stench, Analytic, Toxic Chain, Toxic Debris, Poison
 Puppeteer, Cursed Body, Cotton Down, Sand Spit, Seed Sower, Innards Out,
 Wandering Spirit, Perish Body) and the form/type batch (Zen Mode, Forecast,
-Mimicry, Flower Gift).
+Mimicry, Flower Gift), plus the protection/switch batch (Damp, Bulletproof,
+Soundproof, Overcoat, Rock Head, Liquid Ooze, Shield Dust, Color Change,
+Comatose, Aroma Veil, Guard Dog, Steadfast, Early Bird, Mycelium Might,
+Screen Cleaner, Natural Cure, Regenerator).
 `abilityPreventsStatus` also now treats badly-poisoned as poison
 (Immunity / Pastel Veil).
 

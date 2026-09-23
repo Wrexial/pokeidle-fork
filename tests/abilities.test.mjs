@@ -1139,3 +1139,137 @@ test('Forecast and Mimicry change the holder type', () => {
   resolveBattleTurn(stunfisk, enemy2, false, false, null, null, false, { type: 'electric', turns: 5 })
   assert.deepEqual(stunfisk.types, ['Electric'])
 })
+
+test('Rock Head ignores recoil', () => {
+  withFixedRandom(0.5, () => {
+    const hpAfter = (/** @type {any} */ ability) => {
+      const player = battler({
+          name: 'Player',
+          isPlayer: true,
+          moves: ['doubleEdge'],
+          speed: 200,
+          attack: 200,
+          ability,
+          currentHp: 400,
+          maxHp: 400,
+        }),
+        enemy = battler({ name: 'Foe', moves: ['splash'], currentHp: 2000, maxHp: 2000 })
+      resolveBattleTurn(player, enemy, false)
+      return player.currentHp
+    }
+    assert.equal(hpAfter('rockHead'), 400, 'no recoil with Rock Head')
+    assert.ok(hpAfter(undefined) < 400, 'Double-Edge recoils otherwise')
+  })
+})
+
+test('Liquid Ooze turns drain into damage', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['absorb'],
+        speed: 200,
+        spAttack: 200,
+        currentHp: 200,
+        maxHp: 400,
+      }),
+      enemy = battler({
+        name: 'Foe',
+        moves: ['splash'],
+        ability: 'liquidOoze',
+        currentHp: 400,
+        maxHp: 400,
+        types: ['Normal'],
+      })
+    resolveBattleTurn(player, enemy, false)
+    assert.ok(player.currentHp < 200, 'the drain hurt the attacker')
+  })
+})
+
+test('Bulletproof and Soundproof block their move families', () => {
+  withFixedRandom(0.5, () => {
+    const hpAfter = (/** @type {string} */ ability, /** @type {string} */ move) => {
+      const player = battler({
+          name: 'Player',
+          isPlayer: true,
+          moves: [move],
+          speed: 200,
+          spAttack: 200,
+        }),
+        enemy = battler({
+          name: 'Foe',
+          moves: ['splash'],
+          ability,
+          currentHp: 400,
+          maxHp: 400,
+          types: ['Normal'],
+        })
+      resolveBattleTurn(player, enemy, false)
+      return enemy.currentHp
+    }
+    assert.equal(hpAfter('bulletproof', 'shadowBall'), 400)
+    assert.equal(hpAfter('soundproof', 'hyperVoice'), 400)
+  })
+})
+
+test('Guard Dog boosts Attack from Intimidate', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({ name: 'Player', isPlayer: true, moves: ['splash'], speed: 200, ability: 'intimidate' }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], ability: 'guardDog', statStages: {} })
+    resolveBattleTurn(player, enemy, false, !0)
+    assert.equal(enemy.statStages.attack, 1)
+  })
+})
+
+test('Early Bird shortens sleep', () => {
+  withFixedRandom(0.9, () => {
+    const player = battler({ name: 'Player', isPlayer: true, moves: ['spore'], speed: 200 }),
+      early = battler({ name: 'Foe', moves: ['splash'], ability: 'earlyBird', types: ['Normal'] }),
+      normal = battler({ name: 'Foe2', moves: ['splash'], types: ['Normal'] })
+    resolveBattleTurn(player, early, false)
+    resolveBattleTurn(player, normal, false)
+    assert.ok(early.statusTurns < normal.statusTurns)
+  })
+})
+
+test('Screen Cleaner removes screens on entry', () => {
+  const player = battler({
+      name: 'Player',
+      isPlayer: true,
+      moves: ['splash'],
+      speed: 200,
+      ability: 'screenCleaner',
+      screens: { reflect: 5, lightScreen: 5 },
+    }),
+    enemy = battler({ name: 'Foe', moves: ['splash'], screens: { reflect: 5, lightScreen: 5 } })
+  resolveBattleTurn(player, enemy, false, !0)
+  assert.equal(enemy.screens.reflect, 0)
+  assert.equal(player.screens.reflect, 0)
+})
+
+test('Comatose blocks status and Color Change matches the hit type', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({ name: 'Player', isPlayer: true, moves: ['toxic'], speed: 200 }),
+      comatose = battler({ name: 'Foe', moves: ['splash'], ability: 'comatose', types: ['Normal'] })
+    resolveBattleTurn(player, comatose, false)
+    assert.equal(comatose.status ?? null, null)
+
+    const attacker = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['flamethrower'],
+        speed: 200,
+        spAttack: 200,
+      }),
+      changer = battler({
+        name: 'Foe',
+        moves: ['splash'],
+        ability: 'colorChange',
+        currentHp: 400,
+        maxHp: 400,
+        types: ['Normal'],
+      })
+    resolveBattleTurn(attacker, changer, false)
+    assert.deepEqual(changer.types, ['Fire'])
+  })
+})

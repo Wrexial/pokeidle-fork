@@ -2,7 +2,7 @@
 
 import { moveMakesContact } from '../../data/move-effects.js'
 import { moveData, moveLearnsets } from '../../data/gameData.js'
-import { abilityAbsorbsType, abilityAttackMultiplier, abilityBlocksNonSuperEffective, abilityChangesMoveType, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityEffectivenessMultiplier, abilityHalvesSuperEffective, abilityHealsFromType, abilityOf, abilityPreventsStatDrop, abilitySurvivesAtFullHp, fieldAuraMultiplier, onHitStatBoost, onHpThresholdBoost, ruinDefenseMultiplier, ruinOffenseMultiplier } from '../abilities.js'
+import { abilityAbsorbsType, abilityAttackMultiplier, abilityBlocksMove, abilityBlocksNonSuperEffective, abilityChangesMoveType, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityEffectivenessMultiplier, abilityHalvesSuperEffective, abilityHealsFromType, abilityOf, abilityPreventsStatDrop, abilitySurvivesAtFullHp, fieldAuraMultiplier, onHitStatBoost, onHpThresholdBoost, ruinDefenseMultiplier, ruinOffenseMultiplier } from '../abilities.js'
 import { chooseMoveForBattle, chooseRandomMove } from './ai.js'
 import { changeBattleForm } from './setup.js'
 import { calculateDamage, chance, isSelfTargetedMove, normalizeStatKey } from './damage.js'
@@ -108,6 +108,7 @@ function effectivePriority(pokemon, moveDef) {
   )
     priority += 1
   if (ability === 'triage' && moveDef.effect?.type === 'heal') priority += 3
+  if (ability === 'myceliumMight' && moveDef.category === 'status') priority -= 1
   if (ability === 'stall') priority -= 1
   return priority
 }
@@ -386,6 +387,14 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       })
       continue
     }
+    // Bulletproof / Soundproof / Damp / Overcoat block their move families.
+    if (abilityBlocksMove(attack.defender, moveDef)) {
+      events.push({
+        type: 'miss',
+        message: `${attack.defender.name}'s ability blocked the move!`,
+      })
+      continue
+    }
     if (moveDef.power === 0) {
       // Good as Gold makes the holder immune to status moves.
       if (abilityOf(attack.defender) === 'goodAsGold' && !isSelfTargetedMove(moveDef)) {
@@ -523,7 +532,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       else if (moveDef.effect?.type === 'leechSeed')
         applyLeechSeed(attack.defender, events, !attack.isPlayer)
       else if (moveDef.effect?.type === 'taunt') {
-        if ((attack.defender.tauntTurns ?? 0) <= 0) {
+        if ((attack.defender.tauntTurns ?? 0) <= 0 && abilityOf(attack.defender) !== 'aromaVeil') {
           attack.defender.tauntTurns = 3
           events.push({
             type: 'status',
@@ -1322,6 +1331,8 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     )
       switch (moveDef.effect.type) {
         case 'recoil': {
+          // Rock Head ignores recoil damage.
+          if (abilityOf(attack.attacker) === 'rockHead') break
           const recoilDamage = Math.max(1, Math.floor(totalDamage * moveDef.effect.fraction))
           ;((attack.attacker.currentHp = Math.max(0, attack.attacker.currentHp - recoilDamage)),
             events.push({
@@ -1349,6 +1360,31 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           break
         }
         case 'drain': {
+          // Liquid Ooze turns the drain into damage for the attacker.
+          if (abilityOf(attack.defender) === 'liquidOoze') {
+            const oozeDamage = Math.max(
+              1,
+              Math.floor((totalDamage * (moveDef.effect.percentage ?? 50)) / 100)
+            )
+            attack.attacker.currentHp = Math.max(0, attack.attacker.currentHp - oozeDamage)
+            events.push({
+              type: 'recoil',
+              message: `${attack.attacker.name} was hurt by Liquid Ooze! (${oozeDamage} damage)`,
+              data: {
+                target: attack.isPlayer ? 'player' : 'enemy',
+                damage: oozeDamage,
+                hpAfter: attack.attacker.currentHp,
+                hpMax: attack.attacker.maxHp,
+              },
+            })
+            attack.attacker.currentHp <= 0 &&
+              events.push({
+                type: 'faint',
+                message: `${attack.attacker.name} fainted!`,
+                data: { target: attack.isPlayer ? 'player' : 'enemy' },
+              })
+            break
+          }
           const attackerHpBefore = attack.attacker.currentHp,
             healAmount = Math.max(
               1,
@@ -1368,6 +1404,8 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           break
         }
         case 'status': {
+          // Shield Dust ignores secondary effects on its holder.
+          if (abilityOf(attack.defender) === 'shieldDust') break
           if (
             moveDef.effect.chance === void 0 ||
             chance(
@@ -1513,6 +1551,11 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     // Magician steals on the hit; Pickpocket steals on contact.
     if (abilityOf(attack.attacker) === 'magician')
       stealHeldItem(attack.attacker, attack.defender, events, attack.isPlayer)
+    // Color Change matches the holder's type to the move that hit it.
+    if (abilityOf(attack.defender) === 'colorChange') {
+      attack.defender.types = [effectiveMove.type]
+      attack.defender.typesOverride = [effectiveMove.type]
+    }
     if (abilityOf(attack.defender) === 'pickpocket' && moveMakesContact(effectiveMove))
       stealHeldItem(attack.defender, attack.attacker, events, !attack.isPlayer)
     // Poison Touch can poison the target from a contact move.

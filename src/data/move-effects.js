@@ -20,6 +20,18 @@ const MOVE_OVERRIDES = {
   // Rest cures its user by putting them to sleep for a couple of turns.
   rest: { effect: { type: 'heal', percentage: 100, status: 'sleep' } },
 
+  // --- Recoil moves (fraction of the damage dealt) ---
+  doubleEdge: { effect: { type: 'recoil', fraction: 1 / 3 } },
+  takeDown: { effect: { type: 'recoil', fraction: 1 / 4 } },
+  braveBird: { effect: { type: 'recoil', fraction: 1 / 3 } },
+  flareBlitz: { effect: { type: 'recoil', fraction: 1 / 3 } },
+  woodHammer: { effect: { type: 'recoil', fraction: 1 / 3 } },
+  wildCharge: { effect: { type: 'recoil', fraction: 1 / 4 } },
+  voltTackle: { effect: { type: 'recoil', fraction: 1 / 3 } },
+  headSmash: { effect: { type: 'recoil', fraction: 1 / 2 } },
+  submission: { effect: { type: 'recoil', fraction: 1 / 4 } },
+  headCharge: { effect: { type: 'recoil', fraction: 1 / 4 } },
+  lightOfRuin: { effect: { type: 'recoil', fraction: 1 / 2 } },
   // --- Protect-style blocking (all get +4 priority below) ---
   protect: { protect: true, priority: 4 },
   detect: { protect: true, priority: 4 },

@@ -243,6 +243,11 @@ export function applyEntryAbility(source, target, events, sourceIsPlayer) {
     }
   } else if (ability === 'slowStart') {
     source.slowStartTurns = 5
+  } else if (ability === 'screenCleaner') {
+    const clear = { reflect: 0, lightScreen: 0 }
+    source.screens = { ...clear }
+    if (target) target.screens = { ...clear }
+    events.push({ type: 'status', message: `${source.name} cleaned the battlefield!` })
   } else if (ability === 'zeroToHero' && source.speciesKey === 'palafin') {
     changeBattleForm(source, 'palafin-h', events, sourceIsPlayer)
   } else if (
@@ -276,6 +281,21 @@ export function applyEntryAbility(source, target, events, sourceIsPlayer) {
 export function applyIntimidate(source, target, events, sourceIsPlayer) {
   if (abilityOf(source) !== 'intimidate' || target.currentHp <= 0) return
   if (abilityOf(target) === 'oblivious') return
+  // Guard Dog turns the drop into a boost.
+  if (abilityOf(target) === 'guardDog') {
+    const stages = target.statStages ?? (target.statStages = {}),
+      current = stages.attack ?? 0,
+      next = clampStatStage(current + 1)
+    if (next !== current) {
+      stages.attack = next
+      events.push({
+        type: 'statChange',
+        message: `${target.name}'s Attack rose!`,
+        data: { target: sourceIsPlayer ? 'enemy' : 'player' },
+      })
+    }
+    return
+  }
   if (abilityPreventsStatDrop(target, 'attack')) return
   if ((target.mistTurns ?? 0) > 0) return
   const stages = target.statStages ?? (target.statStages = {}),

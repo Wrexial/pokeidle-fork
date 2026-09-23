@@ -1,5 +1,6 @@
 // // Trainer battle lifecycle: start, switch, next Pokemon, end-of-battle. Split from game/reducer/battle.js.
 
+import { abilityOf } from '../../abilities.js'
 import { createVolatileState } from '../../combat.js'
 import { applyEntryHazards, emptyBattleHazards } from '../../hazards.js'
 import { computeUnlockedLocations, prepareNextBattle, tickBattleCounters } from '../../progression.js'
@@ -65,6 +66,18 @@ export function switchPlayerPokemon(state, action) {
     (party[oldIndex] = {
       ...party[oldIndex],
       currentHp: state.playerPokemon.currentHp,
+      // Natural Cure clears status and Regenerator heals on the way out.
+      ...(abilityOf(state.playerPokemon) === 'naturalCure' && state.playerPokemon.status
+        ? { status: null, statusTurns: 0 }
+        : {}),
+      ...(abilityOf(state.playerPokemon) === 'regenerator'
+        ? {
+            currentHp: Math.min(
+              party[oldIndex].maxHp,
+              state.playerPokemon.currentHp + Math.max(1, Math.floor(party[oldIndex].maxHp / 3))
+            ),
+          }
+        : {}),
     })
   const nextPokemon = party[newIndex]
   if (!nextPokemon) return state

@@ -29,6 +29,7 @@ export const CHANGELOG = [
             'Priority and accuracy abilities: Prankster, Gale Wings, Triage and Stall change the turn order; Dazzling / Queenly Majesty / Armor Tail block priority moves; Compound Eyes and Victory Star sharpen accuracy; Sand Veil / Snow Cloak / Tangled Feet raise evasion',
             'More utility and reactions: Truant, Slow Start, Klutz, Sticky Hold, Unnerve, Gluttony, Stench, Analytic, Toxic Chain, Toxic Debris, Poison Puppeteer, Cursed Body, Cotton Down, Sand Spit, Seed Sower, Innards Out, Wandering Spirit and Perish Body',
             'Form and type abilities: Zen Mode (Darmanitan), Forecast (Castform), Mimicry (Stunfisk) and Flower Gift',
+            'Protection and switch abilities: Damp, Bulletproof, Soundproof, Overcoat (move family blocks), Rock Head and Liquid Ooze (recoil / drain), Shield Dust, Color Change, Comatose, Aroma Veil, Guard Dog, Steadfast, Early Bird, Mycelium Might, Screen Cleaner, Natural Cure and Regenerator. Recoil was also added to Double-Edge, Brave Bird, Flare Blitz and friends so Rock Head and Reckless matter',
             'Fixed a battle bug where an immune hit (a Normal move into a Ghost) could still deal 1 damage',
           ],
         },

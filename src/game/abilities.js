@@ -56,6 +56,7 @@ const STATUS_IMMUNE_ABILITIES = /** @type {Record<string, string>} */ ({
   magmaArmor: 'freeze',
   pastelVeil: 'poison',
   purifyingSalt: 'all',
+  comatose: 'all',
 })
 
 /**
@@ -129,6 +130,24 @@ export function onHpThresholdBoost(defender, hpBefore) {
   if (ability === 'berserk') return { spAttack: 1 }
   if (ability === 'angerShell') return { spAttack: 1, speed: 1, defense: -1, spDefense: -1 }
   return null
+}
+
+/**
+ * Whether an ability blocks a move outright (Damp, Bulletproof, Soundproof,
+ * Overcoat's powder block).
+ * @param {BattlePokemon} defender
+ * @param {Move} moveDef
+ * @returns {boolean}
+ */
+export function abilityBlocksMove(defender, moveDef) {
+  const ability = abilityOf(defender)
+  if (!ability || !moveDef) return false
+  const name = moveDef.name ?? ''
+  if (ability === 'damp' && /self-destruct|explosion|final gambit/i.test(name)) return true
+  if (ability === 'bulletproof' && /ball|bomb/i.test(name)) return true
+  if (ability === 'soundproof' && SOUND_MOVE.test(name)) return true
+  if (ability === 'overcoat' && /powder|spore/i.test(name)) return true
+  return false
 }
 
 /**

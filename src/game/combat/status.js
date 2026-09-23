@@ -60,7 +60,7 @@ export function applyStatus(target, status, events, targetIsPlayer, deterministi
     status === 'sleep'
       ? deterministic
         ? 2
-        : 1 + Math.floor(Math.random() * 3)
+        : Math.max(1, Math.ceil((1 + Math.floor(Math.random() * 3)) / (abilityOf(target) === 'earlyBird' ? 2 : 1)))
       : status === 'toxic'
         ? 1
         : 0
@@ -303,7 +303,7 @@ export function applyContactAbility(defender, attacker, moveDef, events, attacke
  */
 export function applyInfatuation(source, target, events, targetIsPlayer) {
   if (!target || target.currentHp <= 0 || target.infatuated) return
-  if (abilityOf(target) === 'oblivious') return
+  if (abilityOf(target) === 'oblivious' || abilityOf(target) === 'aromaVeil') return
   const sourceGender = genderForPokemon(source),
     targetGender = genderForPokemon(target)
   if (
@@ -405,6 +405,20 @@ export function statusPreventsAction(attacker, events, isPlayer, deterministic =
   }
   if (attacker.flinch && abilityOf(attacker) !== 'innerFocus') {
     attacker.flinch = !1
+    // Steadfast rewards the flinch with a Speed boost.
+    if (abilityOf(attacker) === 'steadfast') {
+      const stages = attacker.statStages ?? (attacker.statStages = {}),
+        current = stages.speed ?? 0,
+        next = Math.min(6, current + 1)
+      if (next !== current) {
+        stages.speed = next
+        events.push({
+          type: 'statChange',
+          message: `${attacker.name}'s Speed rose!`,
+          data: { target: side },
+        })
+      }
+    }
     events.push({
       type: 'status',
       message: `${attacker.name} flinched and couldn't move!`,

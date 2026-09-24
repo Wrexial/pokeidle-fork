@@ -6,6 +6,7 @@ import React from 'react'
 import { trainerClassPayouts, missingnoEncounterChance, mewUnderTruckChance } from '../data/config.js'
 import { ballOrder } from '../data/items.js'
 import { completedGenerations, encounterData, mapData, pokemonSpecies, trainerData } from '../data/gameData.js'
+import { megaEvolveReady } from '../data/mega-evolution.js'
 import { ACHIEVEMENTS } from '../data/achievements.js'
 import { dailyExpMultiplier, dailyPrizeMultiplier, dailyShinyMultiplier } from '../data/daily-events.js'
 import { useGame } from './context.js'
@@ -288,6 +289,14 @@ export function useGameLoop() {
         case 'battling': {
           if (!currentGameState.playerPokemon || !currentGameState.enemyPokemon)
             return
+          // A Mega Stone holder transforms as soon as the battle starts; the
+          // next tick rebuilds the battler from the volatile form.
+          if (megaEvolveReady(currentGameState)) {
+            dispatch({
+              type: 'MEGA_EVOLVE',
+            })
+            return
+          }
           const playerVolatile = currentGameState.playerVolatile ?? createVolatileState(),
             playerBattlePokemon = {
               speciesKey: currentGameState.playerPokemon.speciesKey,

@@ -19,6 +19,12 @@ export const CHANGELOG = [
           ],
         },
         {
+          heading: 'Battles',
+          items: [
+            'In-battle Mega Evolution: give a Mega-capable Pokemon the new held Mega Stone (from the Reward Shop, Kalos marts or the Auction House) and it transforms for the rest of the battle \u2014 taking the physical X forme or the special Y forme \u2014 with the forme\u2019s stats, typing and ability, then reverting afterwards',
+          ],
+        },
+        {
           heading: 'Fixes',
           items: [
             'Wild Pokemon can no longer be caught twice from one battle: the idle loop now waits for a turn / catch to commit before acting again, so a fast battle speed can not replay the same victory and duplicate the catch',

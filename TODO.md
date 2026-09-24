@@ -46,8 +46,7 @@ renumbered, so the gaps below are items that shipped.
     settings separately from the save.
 13. **#28 More region areas (caves, POIs, DLC land)** — L · ★★★★½ — real
     content; data-heavy. Pairs with #35/#36/#39.
-14. **#4 In-battle Mega evolution** — M–L · ★★★ — Mega Stones plus a mid-battle
-    transformation action.
+14. ~~**#4 In-battle Mega evolution**~~ — **shipped (0.18.0).**
 
 ### Tier 3 — Big / low-return, defer
 
@@ -61,16 +60,17 @@ renumbered, so the gaps below are items that shipped.
 
 ## 4. In-battle Mega evolution
 
-Megas exist only as level-100 **evolutions** (`evolution-data.json`); there's no
-mid-battle transformation.
+**Shipped (0.18.0):** a Mega-capable Pokemon holding the new held **Mega Stone**
+transforms as the battle starts (or via the MEGA EVOLVE button in the battle
+scene). It stores the forme on `playerVolatile.formKey`, so it keeps the forme's
+stats, typing and ability for the rest of the battle and reverts when the battle
+ends \u2014 the saved Pokemon never changes. Charizard and Mewtwo (the only
+species with two Megas) take the physical X forme when Attack is higher, the
+special Y forme otherwise. The stone sits alongside the existing level-100 Mega
+evolutions rather than replacing them, and the idle loop auto-triggers it so
+idle play benefits.
 
-- [ ] Give Mega-capable Pokémon a held Mega Stone (ties into #2c).
-- [ ] Add a battle action / auto-trigger that swaps to the Mega form for the
-      rest of the battle (stats + typing), then reverts.
-- [ ] Decide whether this replaces the current level-100 evolution or sits
-      alongside it.
-
-Effort: **medium–large**.
+Effort: **done**.
 
 ## 10. Weather & terrain leftovers
 

@@ -82,6 +82,16 @@ export const AUCTION_LOTS = [
       { itemId: 'magnet', quantity: 1 },
     ],
   },
+  {
+    id: 'megaCache',
+    name: 'Sealed Mega Cache',
+    blurb: 'A Mega Stone from a retired champion.',
+    value: 16000,
+    items: [
+      { itemId: 'megaStone', quantity: 1 },
+      { itemId: 'rareCandy', quantity: 1 },
+    ],
+  },
 ]
 
 /** The rival bidders and how aggressively they push a lot's value. */

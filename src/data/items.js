@@ -246,6 +246,15 @@ export const heldItems = {
   blackGlasses: { id: 'blackGlasses', name: 'Black Glasses', description: 'Powers up Dark-type moves.', buyPrice: 2000, sellPrice: 1000, effect: { type: 'typeBoost', moveType: 'Dark' } },
   ironPlate: { id: 'ironPlate', name: 'Iron Plate', description: 'Powers up Steel-type moves.', buyPrice: 2000, sellPrice: 1000, effect: { type: 'typeBoost', moveType: 'Steel' } },
   pixiePlate: { id: 'pixiePlate', name: 'Pixie Plate', description: 'Powers up Fairy-type moves.', buyPrice: 2000, sellPrice: 1000, effect: { type: 'typeBoost', moveType: 'Fairy' } },
+  megaStone: {
+    id: 'megaStone',
+    name: 'Mega Stone',
+    description:
+      'Held by a Pokemon that can Mega Evolve, it transforms for the rest of the battle \u2014 the physical X forme for attackers, the special Y forme otherwise.',
+    buyPrice: null,
+    sellPrice: 2500,
+    effect: { type: 'megaEvolve' },
+  },
 }
 
 /**
@@ -522,6 +531,7 @@ export const regionalMartItems = {
     { itemId: 'blackGlasses', unlockWildBattlesWon: 150 },
     { itemId: 'ironPlate', unlockWildBattlesWon: 150 },
     { itemId: 'pixiePlate', unlockWildBattlesWon: 150 },
+    { itemId: 'megaStone', unlockWildBattlesWon: 250 },
   ],
   alola: [
     { itemId: 'duskball', unlockWildBattlesWon: 200 },
@@ -996,6 +1006,7 @@ export const tokenShopItems = [
     { itemId: 'rustedSword', tokenCost: 4 },
     { itemId: 'rustedShield', tokenCost: 4 },
     { itemId: 'reinsOfUnity', tokenCost: 4 },
+    { itemId: 'megaStone', tokenCost: 5 },
   ]
 
 /** @type {Record<string, { name: string, items: { itemId: string, unlockWildBattlesWon?: number }[] }>} */

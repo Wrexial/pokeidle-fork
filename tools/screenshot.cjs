@@ -249,6 +249,50 @@ function minigameSave(region, location, route, unlocked) {
   }
 }
 
+/** A Kanto save with a Mega Stone holder, to watch Mega Evolution fire. */
+function megaSave() {
+  const pokemon = {
+    id: '1',
+    speciesKey: 'charizard',
+    name: 'Charizard',
+    types: ['Fire', 'Flying'],
+    level: 50,
+    totalExp: 0,
+    moves: ['flamethrower', 'dragonClaw'],
+    currentHp: 200,
+    maxHp: 200,
+    attack: 120,
+    defense: 100,
+    spAttack: 140,
+    spDefense: 110,
+    speed: 130,
+    ivs: { hp: 31, attack: 31, defense: 31, spAttack: 31, spDefense: 31, speed: 31 },
+    nature: 'modest',
+    friendship: 70,
+    ability: 'blaze',
+    heldItem: 'megaStone',
+    isShiny: false,
+  }
+  return {
+    version: 2,
+    savedAt: Date.now(),
+    startRegion: 'kanto',
+    playerPokemon: pokemon,
+    party: [pokemon],
+    box: [],
+    nextPokemonId: 2,
+    currentLocation: 'route21',
+    currentRoute: 'route21',
+    unlockedLocations: ['palletTown', 'route1', 'route21'],
+    unlockedRegions: ['kanto'],
+    inventory: {},
+    money: 50000,
+    pokedexSeen: ['charizard'],
+    pokedexCaught: ['charizard'],
+    battleLog: ['Screenshot run'],
+  }
+}
+
 async function main() {
   fs.mkdirSync(OUT, { recursive: true })
   const profile = fs.mkdtempSync(path.join(os.tmpdir(), 'pi-chrome-'))
@@ -485,6 +529,24 @@ async function main() {
       }
       console.log(`${name} scene ok`)
     }
+    // Mega Evolution auto-triggers on the first battling turn.
+    await cdp.eval(
+      `localStorage.setItem('pokemon-idle-save-v2', ${JSON.stringify(
+        JSON.stringify(megaSave())
+      )}); 'ok'`
+    )
+    await cdp.send('Page.navigate', { url: APP_URL })
+    await cdp.waitFor('window.gameDataDebug.status().loaded === true', 20000, 'mega data')
+    await cdp.eval(
+      `(() => { const b = document.querySelector('.patch-notes-dismiss-btn'); if (b) b.click(); return true })()`
+    )
+    await cdp.waitFor(
+      `(() => { const el = document.querySelector('.player-info-anchor .info-pokemon-name'); return !!el && /mega/i.test(el.textContent) })()`,
+      15000,
+      'mega evolution'
+    )
+    await cdp.screenshot(path.join(OUT, '17-mega-evolution.png'))
+    console.log('Mega Evolution scene ok')
     console.log('done')
   } finally {
     chrome.kill()

@@ -10297,3 +10297,33 @@ img {
     height: 84px;
     image-rendering: pixelated
 }
+
+.mega-evolve-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    color: #1a0a24;
+    background: linear-gradient(#d59bf0,#8e4fd0);
+    border: 2px solid #6a2fa0;
+    border-radius: 0;
+    cursor: pointer;
+    white-space: nowrap;
+    animation: mega-pulse 1.2s ease-in-out infinite
+}
+
+.mega-evolve-btn:hover {
+    background: linear-gradient(#e5b6ff,#9d5fe0)
+}
+
+.mega-evolve-icon {
+    font-size: 11px
+}
+
+@keyframes mega-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(190,120,240,.6) }
+    50% { box-shadow: 0 0 10px 2px rgba(190,120,240,.75) }
+}

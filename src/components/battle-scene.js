@@ -13,6 +13,7 @@ import { isFemalePokemon } from '../game/breeding.js'
 import { WEATHER_ICONS, WEATHER_NAMES } from '../game/weather.js'
 import { TERRAIN_ICONS, TERRAIN_NAMES } from '../game/terrain.js'
 import { completedGenerations, mapData, moveData, pokemonSpecies, speciesKeysByGeneration } from '../data/gameData.js'
+import { megaEvolveReady } from '../data/mega-evolution.js'
 import { useGame } from '../game/context.js'
 import { shinyOddsForCompletedGenerations } from '../game/progression.js'
 import { getBossTrainerSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, getTrainerSpriteUrl } from '../game/pokemon.js'
@@ -339,6 +340,18 @@ export function BattleScene() {
               }),
             !activeTrainerBattle &&
               state.phase === 'battling' &&
+              megaEvolveReady(state) &&
+              jsxs('button', {
+                className: 'mega-evolve-btn',
+                onClick: () => dispatch({ type: 'MEGA_EVOLVE' }),
+                title: 'Mega Evolve for the rest of the battle',
+                children: [
+                  jsx('span', { className: 'mega-evolve-icon', children: '\u2726' }),
+                  jsx('span', { children: 'MEGA EVOLVE' }),
+                ],
+              }),
+            !activeTrainerBattle &&
+              state.phase === 'battling' &&
               enemyPokemon.fromActivity &&
               jsxs('button', {
                 className: 'activity-catch-btn',
@@ -456,7 +469,8 @@ export function BattleScene() {
       jsx('div', {
         className: 'player-info-anchor',
         children: jsx(PlayerInfoBox, {
-          pokemon: playerPokemon,
+          // Reflect the battle-only form (Mega Evolution) in the name/typing.
+          pokemon: { ...playerPokemon, name: playerSpecies.name, types: playerSpecies.types },
           status: state.playerVolatile?.status ?? null,
         }),
       }),

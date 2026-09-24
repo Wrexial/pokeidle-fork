@@ -8,4 +8,5 @@ export { startTrainerBattle, switchPlayerPokemon, trainerSendNextPokemon, traine
 export { startBossBattle, bossBattleEnd } from './battle/boss.js'
 export { usePokeball, throwMasterBall, completeMasterBall, attemptActivityCatch } from './battle/balls.js'
 export { updateVolatile, useEffectItem } from './battle/effects.js'
+export { megaEvolve } from './battle/mega.js'
 export { startRaid, endRaid, startTower } from './battle/raid.js'

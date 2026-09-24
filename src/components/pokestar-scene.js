@@ -6,6 +6,7 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { useGame } from '../game/context.js'
 import { pickPokestarShots, pokestarPrize } from '../game/minigames.js'
+import { MinigameRewardScreen, useMinigameClaim } from './minigame-reward.js'
 
 export function PokestarScene() {
   const { state, dispatch } = useGame(),
@@ -18,7 +19,8 @@ export function PokestarScene() {
     ),
     [prize, setPrize] = React.useState(
       () => /** @type {ReturnType<typeof pokestarPrize> | null} */ (null)
-    )
+    ),
+    collect = useMinigameClaim(dispatch)
 
   const shot = shots[index],
     isLast = index + 1 >= shots.length
@@ -33,10 +35,8 @@ export function PokestarScene() {
 
   function next() {
     if (isLast) {
-      const reward = pokestarPrize(score)
-      setPrize(reward)
+      setPrize(pokestarPrize(score))
       setPhase('done')
-      dispatch({ type: 'CLAIM_MINIGAME_REWARD', payload: reward })
       return
     }
     setIndex((value) => value + 1)
@@ -45,7 +45,10 @@ export function PokestarScene() {
   }
 
   function leave() {
-    dispatch({ type: 'END_MINIGAME' })
+    collect(
+      { type: 'END_MINIGAME' },
+      prize ? { type: 'CLAIM_MINIGAME_REWARD', payload: prize } : null
+    )
   }
 
   return jsxs('div', {
@@ -68,23 +71,19 @@ export function PokestarScene() {
       jsxs('div', {
         className: 'minigame-scene-body',
         children: [
-          jsx('div', {
-            className: 'pokestar-brief',
-            children: shot ? shot.brief : '',
-          }),
+          phase !== 'done' &&
+            jsx('div', {
+              className: 'pokestar-brief',
+              children: shot ? shot.brief : '',
+            }),
           phase === 'done'
-            ? jsxs('div', {
-                className: 'pokestar-summary',
-                children: [
-                  jsx('span', {
-                    className: 'pokestar-summary-score',
-                    children: `${score} / ${shots.length * 3} points`,
-                  }),
-                  jsx('span', {
-                    className: 'pokestar-summary-label',
-                    children: prize?.label ?? '',
-                  }),
-                ],
+            ? jsx(MinigameRewardScreen, {
+                prize,
+                onCollect: leave,
+                summary: jsx('span', {
+                  className: 'pokestar-summary-score',
+                  children: `${score} / ${shots.length * 3} points`,
+                }),
               })
             : jsx('div', {
                 className: 'pokestar-takes',
@@ -124,11 +123,12 @@ export function PokestarScene() {
       jsxs('div', {
         className: 'minigame-scene-footer',
         children: [
-          jsx('button', {
-            className: 'move-panel-btn cancel',
-            onClick: leave,
-            children: phase === 'done' ? 'COLLECT & LEAVE' : 'LEAVE',
-          }),
+          phase !== 'done' &&
+            jsx('button', {
+              className: 'move-panel-btn cancel',
+              onClick: leave,
+              children: 'LEAVE',
+            }),
           phase === 'reveal' &&
             jsx('button', {
               className: 'move-panel-btn confirm',

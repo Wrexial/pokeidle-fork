@@ -15,6 +15,7 @@ import {
   radarSequence,
 } from '../game/minigames.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
+import { MinigameRewardScreen, useMinigameClaim } from './minigame-reward.js'
 
 const SHOW_MS = 420,
   GAP_MS = 180
@@ -33,6 +34,10 @@ export function PokeRadarScene() {
     [result, setResult] = React.useState(
       /** @type {{ label: string, chain: number, points: number } | null} */ (null)
     ),
+    [prize, setPrize] = React.useState(
+      () => /** @type {ReturnType<typeof pokeRadarPrize> | null} */ (null)
+    ),
+    collect = useMinigameClaim(dispatch),
     settledRef = React.useRef(!1)
 
   // Play the sequence back, one patch at a time.
@@ -93,11 +98,10 @@ export function PokeRadarScene() {
   function finish(chainRounds, label = 'You banked your chain.') {
     if (settledRef.current) return
     settledRef.current = !0
-    const prize = pokeRadarPrize(chainRounds)
+    setPrize(pokeRadarPrize(chainRounds))
     setResult({ label, chain: chainRounds, points: radarChainPoints(chainRounds) })
     setMessage(label)
     setPhase('done')
-    dispatch({ type: 'CLAIM_MINIGAME_REWARD', payload: prize })
     if (target && chainRounds > 0)
       dispatch({
         type: 'UPDATE_SHINY_CHAIN',
@@ -106,7 +110,10 @@ export function PokeRadarScene() {
   }
 
   function leave() {
-    dispatch({ type: 'END_MINIGAME' })
+    collect(
+      { type: 'END_MINIGAME' },
+      prize ? { type: 'CLAIM_MINIGAME_REWARD', payload: prize } : null
+    )
   }
 
   const species = target ? pokemonSpecies[target.speciesKey] : null,
@@ -128,7 +135,16 @@ export function PokeRadarScene() {
       }),
       jsxs('div', {
         className: 'minigame-scene-body',
-        children: [
+        children: phase === 'done'
+          ? jsx(MinigameRewardScreen, {
+              prize,
+              onCollect: leave,
+              summary: jsx('span', {
+                className: 'radar-target-chain',
+                children: result ? `Chain of ${result.chain} \u00b7 +${result.points} points` : '',
+              }),
+            })
+          : [
           jsxs('div', {
             className: 'radar-target',
             children: [
@@ -172,27 +188,19 @@ export function PokeRadarScene() {
           }),
           jsx('div', {
             className: 'minigame-scene-log',
-            children:
-              phase === 'done' && result
-                ? `${result.label} Banked a chain of ${result.chain}.`
-                : message,
+            children: message,
           }),
         ],
       }),
       jsxs('div', {
         className: 'minigame-scene-footer',
         children: [
-          phase === 'done'
-            ? jsx('button', {
-                className: 'move-panel-btn confirm',
-                onClick: leave,
-                children: 'COLLECT & LEAVE',
-              })
-            : jsx('button', {
-                className: 'move-panel-btn cancel',
-                onClick: () => finish(round),
-                children: round > 0 ? `BANK CHAIN (${round})` : 'LEAVE',
-              }),
+          phase !== 'done' &&
+            jsx('button', {
+              className: 'move-panel-btn confirm',
+              onClick: () => finish(round),
+              children: round > 0 ? `BANK CHAIN (${round})` : 'LEAVE',
+            }),
         ],
       }),
     ],

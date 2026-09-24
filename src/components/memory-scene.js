@@ -7,6 +7,7 @@ import { pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { createMemoryDeck, memoryPrize } from '../game/minigames.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
+import { MinigameRewardScreen, useMinigameClaim } from './minigame-reward.js'
 
 export function MemoryScene() {
   const { state, dispatch } = useGame(),
@@ -18,6 +19,7 @@ export function MemoryScene() {
     [prize, setPrize] = React.useState(
       () => /** @type {ReturnType<typeof memoryPrize> | null} */ (null)
     ),
+    collect = useMinigameClaim(dispatch),
     lockRef = React.useRef(false)
 
   /** @param {number} index */
@@ -65,8 +67,10 @@ export function MemoryScene() {
   }
 
   function leave() {
-    if (prize) dispatch({ type: 'CLAIM_MINIGAME_REWARD', payload: prize })
-    dispatch({ type: 'END_MINIGAME' })
+    collect(
+      { type: 'END_MINIGAME' },
+      prize ? { type: 'CLAIM_MINIGAME_REWARD', payload: prize } : null
+    )
   }
 
   return jsxs('div', {
@@ -89,7 +93,16 @@ export function MemoryScene() {
       }),
       jsx('div', {
         className: 'minigame-scene-body',
-        children: jsx('div', {
+        children: prize
+          ? jsx(MinigameRewardScreen, {
+              prize,
+              onCollect: leave,
+              summary: jsx('span', {
+                className: 'memory-solved',
+                children: `All pairs cleared in ${moves} flips`,
+              }),
+            })
+          : jsx('div', {
           className: 'memory-grid',
           children: cards.map((card, index) => {
             const species = pokemonSpecies[card.speciesKey],
@@ -118,11 +131,12 @@ export function MemoryScene() {
       jsxs('div', {
         className: 'minigame-scene-footer',
         children: [
-          jsx('button', {
-            className: 'move-panel-btn cancel',
-            onClick: leave,
-            children: prize ? 'COLLECT & LEAVE' : 'LEAVE',
-          }),
+          !prize &&
+            jsx('button', {
+              className: 'move-panel-btn cancel',
+              onClick: leave,
+              children: 'LEAVE',
+            }),
         ],
       }),
     ],

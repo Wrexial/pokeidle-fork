@@ -16,6 +16,7 @@ import {
   toBattlePokemon,
 } from '../game/minigames.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
+import { MinigameRewardScreen, useMinigameClaim } from './minigame-reward.js'
 
 export function BattleRoyalScene() {
   const { state, dispatch } = useGame(),
@@ -36,6 +37,7 @@ export function BattleRoyalScene() {
     [result, setResult] = React.useState(
       /** @type {ReturnType<typeof battleRoyalPrize> | null} */ (null)
     ),
+    collect = useMinigameClaim(dispatch),
     settledRef = React.useRef(!1)
 
   const baseLevel = Math.max(...squad.map((member) => member.level), 5),
@@ -79,7 +81,6 @@ export function BattleRoyalScene() {
     setResult(prize)
     setLog(`${prize.label} \u2014 ${waves} wave${waves === 1 ? '' : 's'} cleared.`)
     setPhase('done')
-    dispatch({ type: 'CLAIM_MINIGAME_REWARD', payload: prize })
   }
 
   function nextWave() {
@@ -88,7 +89,10 @@ export function BattleRoyalScene() {
   }
 
   function leave() {
-    dispatch({ type: 'END_MINIGAME' })
+    collect(
+      { type: 'END_MINIGAME' },
+      result ? { type: 'CLAIM_MINIGAME_REWARD', payload: result } : null
+    )
   }
 
   return jsxs('div', {
@@ -107,7 +111,16 @@ export function BattleRoyalScene() {
       }),
       jsxs('div', {
         className: 'minigame-scene-body',
-        children: [
+        children: phase === 'done'
+          ? jsx(MinigameRewardScreen, {
+              prize: result,
+              onCollect: leave,
+              summary: jsx('span', {
+                className: 'royal-wave-summary',
+                children: `${wave} wave${wave === 1 ? '' : 's'} cleared`,
+              }),
+            })
+          : [
           jsxs('div', {
             className: 'royal-arena',
             children: [
@@ -186,11 +199,12 @@ export function BattleRoyalScene() {
       jsxs('div', {
         className: 'minigame-scene-footer',
         children: [
-          jsx('button', {
-            className: 'move-panel-btn cancel',
-            onClick: leave,
-            children: phase === 'done' ? 'COLLECT & LEAVE' : 'FORFEIT',
-          }),
+          phase !== 'done' &&
+            jsx('button', {
+              className: 'move-panel-btn cancel',
+              onClick: leave,
+              children: 'FORFEIT',
+            }),
           phase === 'ready' &&
             jsx('button', {
               className: 'move-panel-btn confirm',

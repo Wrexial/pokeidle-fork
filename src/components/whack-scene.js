@@ -13,6 +13,7 @@ import {
   whackPrize,
 } from '../game/minigames.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
+import { MinigameRewardScreen, useMinigameClaim } from './minigame-reward.js'
 
 /** Which Pokemon each target kind shows. @type {Record<string, string>} */
 const WHACK_SPECIES = { diglett: 'diglett', zubat: 'zubat' }
@@ -27,6 +28,7 @@ export function WhackScene() {
     [prize, setPrize] = React.useState(
       () => /** @type {ReturnType<typeof whackPrize> | null} */ (null)
     ),
+    collect = useMinigameClaim(dispatch),
     activeRef = React.useRef(/** @type {any} */ (null)),
     scoreRef = React.useRef(0),
     startRef = React.useRef(Date.now()),
@@ -50,13 +52,11 @@ export function WhackScene() {
       if (remaining <= 0) {
         finishedRef.current = true
         clearInterval(tick)
-        const reward = whackPrize(scoreRef.current)
-        setPrize(reward)
-        dispatch({ type: 'CLAIM_MINIGAME_REWARD', payload: reward })
+        setPrize(whackPrize(scoreRef.current))
       }
     }, 60)
     return () => clearInterval(tick)
-  }, [dispatch])
+  }, [])
 
   /** @param {number} index */
   function whack(index) {
@@ -70,7 +70,10 @@ export function WhackScene() {
   }
 
   function leave() {
-    dispatch({ type: 'END_MINIGAME' })
+    collect(
+      { type: 'END_MINIGAME' },
+      prize ? { type: 'CLAIM_MINIGAME_REWARD', payload: prize } : null
+    )
   }
 
   const speciesKey = active ? WHACK_SPECIES[active.kind] : null,
@@ -96,7 +99,16 @@ export function WhackScene() {
       }),
       jsx('div', {
         className: 'minigame-scene-body',
-        children: jsx('div', {
+        children: prize
+          ? jsx(MinigameRewardScreen, {
+              prize,
+              onCollect: leave,
+              summary: jsx('span', {
+                className: 'whack-solved',
+                children: `Final score ${score}`,
+              }),
+            })
+          : jsx('div', {
           className: 'whack-grid',
           children: Array.from({ length: WHACK_CELLS }, (_, index) => {
             const showTarget = active?.index === index
@@ -126,11 +138,12 @@ export function WhackScene() {
       jsxs('div', {
         className: 'minigame-scene-footer',
         children: [
-          jsx('button', {
-            className: 'move-panel-btn cancel',
-            onClick: leave,
-            children: prize ? 'COLLECT & LEAVE' : 'LEAVE',
-          }),
+          !prize &&
+            jsx('button', {
+              className: 'move-panel-btn cancel',
+              onClick: leave,
+              children: 'LEAVE',
+            }),
         ],
       }),
     ],

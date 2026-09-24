@@ -18,6 +18,7 @@ import {
   toBattlePokemon,
 } from '../game/minigames.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
+import { MinigameRewardScreen, useMinigameClaim } from './minigame-reward.js'
 
 /** @param {string} speciesKey */
 function spriteFor(speciesKey) {
@@ -47,6 +48,7 @@ export function DynamaxAdventuresScene() {
     [result, setResult] = React.useState(
       /** @type {ReturnType<typeof dynamaxPrize> | null} */ (null)
     ),
+    collect = useMinigameClaim(dispatch),
     settledRef = React.useRef(!1)
 
   const baseLevel = Math.max(...squad.map((member) => member.level), 5),
@@ -121,11 +123,13 @@ export function DynamaxAdventuresScene() {
     setResult(prize)
     setLog(prize.label)
     setPhase('done')
-    dispatch({ type: 'CLAIM_MINIGAME_REWARD', payload: prize })
   }
 
   function leave() {
-    dispatch({ type: 'END_MINIGAME' })
+    collect(
+      { type: 'END_MINIGAME' },
+      result ? { type: 'CLAIM_MINIGAME_REWARD', payload: result } : null
+    )
   }
 
   return jsxs('div', {
@@ -148,7 +152,31 @@ export function DynamaxAdventuresScene() {
       }),
       jsxs('div', {
         className: 'minigame-scene-body',
-        children: [
+        children: phase === 'done'
+          ? jsx(MinigameRewardScreen, {
+              prize: result,
+              onCollect: leave,
+              summary: caught
+                ? jsxs('div', {
+                    className: 'dynamax-caught',
+                    children: [
+                      jsx('img', {
+                        className: 'dynamax-boss-sprite',
+                        src: getPokemonSpriteUrl(spriteFor(caught.speciesKey)),
+                        onError: /** @param {{ target: HTMLImageElement }} event */ (event) =>
+                          (event.target.src = getPokemonSpriteFallbackUrl(
+                            spriteFor(caught.speciesKey)
+                          )),
+                        alt: pokemonSpecies[caught.speciesKey]?.name ?? caught.speciesKey,
+                      }),
+                      jsx('span', {
+                        children: `Caught ${pokemonSpecies[caught.speciesKey]?.name ?? caught.speciesKey}!`,
+                      }),
+                    ],
+                  })
+                : undefined,
+            })
+          : [
           phase === 'choose'
             ? jsx('div', {
                 className: 'dynamax-paths',
@@ -205,16 +233,6 @@ export function DynamaxAdventuresScene() {
               : jsxs('div', {
                   className: 'dynamax-boss',
                   children: [
-                    caught &&
-                      jsx('img', {
-                        className: 'dynamax-boss-sprite',
-                        src: getPokemonSpriteUrl(spriteFor(caught.speciesKey)),
-                        onError: /** @param {{ target: HTMLImageElement }} event */ (event) =>
-                          (event.target.src = getPokemonSpriteFallbackUrl(
-                            spriteFor(caught.speciesKey)
-                          )),
-                        alt: pokemonSpecies[caught.speciesKey]?.name ?? caught.speciesKey,
-                      }),
                     jsx('span', {
                       className: 'dynamax-path-info',
                       children: result?.label ?? '',
@@ -256,11 +274,12 @@ export function DynamaxAdventuresScene() {
       jsxs('div', {
         className: 'minigame-scene-footer',
         children: [
-          jsx('button', {
-            className: 'move-panel-btn cancel',
-            onClick: leave,
-            children: phase === 'done' ? 'COLLECT & LEAVE' : 'RETREAT',
-          }),
+          phase !== 'done' &&
+            jsx('button', {
+              className: 'move-panel-btn cancel',
+              onClick: leave,
+              children: 'RETREAT',
+            }),
           phase === 'boss' &&
             jsx('button', {
               className: 'move-panel-btn confirm',

@@ -11,8 +11,8 @@ import {
   QUIZ_SECONDS,
   generateQuizQuestion,
   quizPrize,
-  rewardItemName,
 } from '../game/minigames.js'
+import { MinigameRewardScreen, useMinigameClaim } from './minigame-reward.js'
 
 export function AcademyQuizScene() {
   const { state, dispatch } = useGame(),
@@ -27,7 +27,8 @@ export function AcademyQuizScene() {
     [timeLeft, setTimeLeft] = React.useState(QUIZ_SECONDS),
     [prize, setPrize] = React.useState(
       () => /** @type {ReturnType<typeof quizPrize> | null} */ (null)
-    )
+    ),
+    collect = useMinigameClaim(dispatch)
 
   // Count down the current question; a timeout is treated as a wrong answer.
   React.useEffect(() => {
@@ -69,8 +70,10 @@ export function AcademyQuizScene() {
   }
 
   function leave() {
-    if (prize) dispatch({ type: 'CLAIM_MINIGAME_REWARD', payload: prize })
-    dispatch({ type: 'END_MINIGAME' })
+    collect(
+      { type: 'END_MINIGAME' },
+      prize ? { type: 'CLAIM_MINIGAME_REWARD', payload: prize } : null
+    )
   }
 
   const correct = selected === question.correct,
@@ -100,32 +103,13 @@ export function AcademyQuizScene() {
         className: 'academy-field',
         children:
           phase === 'done'
-            ? jsxs('div', {
-                className: 'academy-summary',
-                children: [
-                  jsx('span', { className: 'academy-summary-title', children: 'Exam Over' }),
-                  jsx('span', {
-                    className: 'academy-summary-score',
-                    children: `${score} / ${QUIZ_QUESTIONS} correct`,
-                  }),
-                  prize &&
-                    jsxs('div', {
-                      className: 'academy-prize',
-                      children: [
-                        jsx('span', { className: 'academy-prize-label', children: prize.label }),
-                        jsxs('span', {
-                          className: 'academy-prize-reward',
-                          children: [
-                            `$${prize.money.toLocaleString()}`,
-                            ...prize.items.map(
-                              (item) =>
-                                ` + ${rewardItemName(item.itemId)} x${item.quantity}`
-                            ),
-                          ],
-                        }),
-                      ],
-                    }),
-                ],
+            ? jsx(MinigameRewardScreen, {
+                prize,
+                onCollect: leave,
+                summary: jsx('span', {
+                  className: 'academy-summary-score',
+                  children: `${score} / ${QUIZ_QUESTIONS} correct`,
+                }),
               })
             : jsxs('div', {
                 className: 'academy-question',
@@ -182,20 +166,14 @@ export function AcademyQuizScene() {
           jsx('div', {
             className: 'academy-actions',
             children:
-              phase === 'done'
+              phase === 'reveal'
                 ? jsx('button', {
                     className: 'move-panel-btn confirm',
-                    onClick: leave,
-                    children: prize ? 'COLLECT & LEAVE' : 'LEAVE',
+                    onClick: advance,
+                    children:
+                      lives <= 0 || index + 1 >= QUIZ_QUESTIONS ? 'FINISH' : 'NEXT QUESTION',
                   })
-                : phase === 'reveal'
-                  ? jsx('button', {
-                      className: 'move-panel-btn confirm',
-                      onClick: advance,
-                      children:
-                        lives <= 0 || index + 1 >= QUIZ_QUESTIONS ? 'FINISH' : 'NEXT QUESTION',
-                    })
-                  : null,
+                : null,
           }),
         ],
       }),

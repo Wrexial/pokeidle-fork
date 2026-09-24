@@ -16,6 +16,7 @@ import {
   rollContestRivalRound,
   rollContestTheme,
 } from '../game/minigames.js'
+import { MinigameRewardScreen, useMinigameClaim } from './minigame-reward.js'
 
 /** The three rivals' per-round difficulty tiers. */
 const RIVAL_SKILL = [0, 1, 2]
@@ -39,7 +40,8 @@ export function ContestScene() {
     ),
     [board, setBoard] = React.useState(
       /** @type {{ owner: string, isPlayer: boolean, score: number }[] | null} */ (null)
-    )
+    ),
+    collect = useMinigameClaim(dispatch)
 
   const moves = state.playerPokemon?.moves?.length ? state.playerPokemon.moves : ['tackle']
 
@@ -93,8 +95,10 @@ export function ContestScene() {
   const prize = board ? contestPrize(contestRank(board)) : null
 
   function leave() {
-    if (prize) dispatch({ type: 'CLAIM_MINIGAME_REWARD', payload: prize })
-    dispatch({ type: 'END_MINIGAME' })
+    collect(
+      { type: 'END_MINIGAME' },
+      prize ? { type: 'CLAIM_MINIGAME_REWARD', payload: prize } : null
+    )
   }
 
   return jsxs('div', {
@@ -132,22 +136,29 @@ export function ContestScene() {
             ],
           }),
           phase === 'done' && board
-            ? jsxs('div', {
-                className: 'contest-board',
-                children: board.map((entry, index) =>
-                  jsxs(
-                    'div',
-                    {
-                      className: `contest-rank${entry.isPlayer ? ' player' : ''}`,
-                      children: [
-                        jsx('span', { className: 'contest-rank-place', children: `${index + 1}.` }),
-                        jsx('span', { className: 'contest-rank-name', children: entry.owner }),
-                        jsx('span', { className: 'contest-rank-score', children: entry.score }),
-                      ],
-                    },
-                    entry.owner
-                  )
-                ),
+            ? jsx(MinigameRewardScreen, {
+                prize,
+                onCollect: leave,
+                summary: jsxs('div', {
+                  className: 'contest-board',
+                  children: board.map((entry, index) =>
+                    jsxs(
+                      'div',
+                      {
+                        className: `contest-rank${entry.isPlayer ? ' player' : ''}`,
+                        children: [
+                          jsx('span', {
+                            className: 'contest-rank-place',
+                            children: `${index + 1}.`,
+                          }),
+                          jsx('span', { className: 'contest-rank-name', children: entry.owner }),
+                          jsx('span', { className: 'contest-rank-score', children: entry.score }),
+                        ],
+                      },
+                      entry.owner
+                    )
+                  ),
+                }),
               })
             : jsx('div', {
                 className: 'contest-moves',
@@ -198,22 +209,17 @@ export function ContestScene() {
       jsxs('div', {
         className: 'minigame-scene-footer',
         children: [
-          jsx('button', {
-            className: 'move-panel-btn cancel',
-            onClick: leave,
-            children: phase === 'done' ? 'COLLECT & LEAVE' : 'LEAVE',
-          }),
+          phase !== 'done' &&
+            jsx('button', {
+              className: 'move-panel-btn cancel',
+              onClick: leave,
+              children: 'LEAVE',
+            }),
           phase === 'reveal' &&
             jsx('button', {
               className: 'move-panel-btn confirm',
               onClick: next,
               children: round + 1 >= CONTEST_ROUNDS ? 'SEE RESULTS' : 'NEXT ROUND',
-            }),
-          phase === 'done' &&
-            prize &&
-            jsx('span', {
-              className: 'contest-prize',
-              children: `${prize.label} \u00b7 $${prize.money.toLocaleString()}`,
             }),
         ],
       }),

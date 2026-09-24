@@ -11,6 +11,7 @@ import {
   rollMiningReward,
 } from '../game/minigames.js'
 import { useGame } from '../game/context.js'
+import { MinigameRewardScreen, useMinigameClaim } from './minigame-reward.js'
 
 /**
  * A shuffled grid with hidden rewards.
@@ -36,6 +37,8 @@ export function MiningScene() {
     [found, setFound] = React.useState(
       () => /** @type {{ itemId: string, quantity: number }[]} */ ([])
     ),
+    [showReward, setShowReward] = React.useState(false),
+    collect = useMinigameClaim(dispatch),
     digsLeft = MINING_DIGS - dug.size,
     finished = digsLeft <= 0
 
@@ -49,14 +52,16 @@ export function MiningScene() {
     if (reward) setFound((current) => [...current, reward])
   }
 
-  function collect() {
-    dispatch({
-      type: 'COLLECT_MINING',
-      payload: {
-        rewards: found,
-      },
-    })
-    dispatch({ type: 'END_MINIGAME' })
+  function requestCollect() {
+    if (found.length > 0) setShowReward(true)
+    else collect({ type: 'END_MINIGAME' })
+  }
+
+  function leaveAndClaim() {
+    collect(
+      { type: 'END_MINIGAME' },
+      found.length > 0 ? { type: 'COLLECT_MINING', payload: { rewards: found } } : null
+    )
   }
 
   return jsxs('div', {
@@ -82,7 +87,13 @@ export function MiningScene() {
       }),
       jsxs('div', {
         className: 'minigame-scene-body',
-        children: [
+        children: showReward
+          ? jsx(MinigameRewardScreen, {
+              prize: { items: found },
+              onCollect: leaveAndClaim,
+              buttonLabel: 'COLLECT & LEAVE',
+            })
+          : [
           jsx('div', {
             className: 'mining-grid',
             children: grid.map((reward, index) => {
@@ -121,9 +132,9 @@ export function MiningScene() {
       }),
       jsx('div', {
         className: 'minigame-scene-footer',
-        children: jsx('button', {
+        children: !showReward && jsx('button', {
           className: 'move-panel-btn confirm',
-          onClick: collect,
+          onClick: requestCollect,
           children:
             found.length > 0
               ? `COLLECT & LEAVE (${found.length})`

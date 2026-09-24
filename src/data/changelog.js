@@ -16,6 +16,8 @@ export const CHANGELOG = [
             'Activity encounters are now worth chasing: they spawn a few levels above the route, have boosted shiny odds, and can carry a held item (guaranteed on an ultra hit). Better hit quality improves all three',
             'Caught wild Pokemon now keep the IVs, ability and held item of the one you actually battled',
             'A minigame battle now offers an ATTEMPT CATCH button: throw your configured ball at the find (falling back to your best ball) instead of waiting for the auto-catcher',
+            'Every minigame now ends on a reward screen that itemises what you won \u2014 money and each item by name \u2014 before you collect it, instead of tucking the prize into a line of text',
+            'The minigames are livelier: Voltorb tiles flip, memory cards turn over, lights glow and pulse, targets pop, markers flicker, and the reward panel bursts in',
           ],
         },
         {

@@ -12,6 +12,7 @@ import {
   lightsSolved,
   toggleLights,
 } from '../game/minigames.js'
+import { MinigameRewardScreen, useMinigameClaim } from './minigame-reward.js'
 
 export function LightsOutScene() {
   const { state, dispatch } = useGame(),
@@ -19,7 +20,8 @@ export function LightsOutScene() {
     [moves, setMoves] = React.useState(0),
     [prize, setPrize] = React.useState(
       () => /** @type {ReturnType<typeof lightsOutPrize> | null} */ (null)
-    )
+    ),
+    collect = useMinigameClaim(dispatch)
 
   const done = prize !== null
 
@@ -38,8 +40,10 @@ export function LightsOutScene() {
   }
 
   function leave() {
-    if (prize) dispatch({ type: 'CLAIM_MINIGAME_REWARD', payload: prize })
-    dispatch({ type: 'END_MINIGAME' })
+    collect(
+      { type: 'END_MINIGAME' },
+      prize ? { type: 'CLAIM_MINIGAME_REWARD', payload: prize } : null
+    )
   }
 
   return jsxs('div', {
@@ -58,31 +62,41 @@ export function LightsOutScene() {
       }),
       jsx('div', {
         className: 'minigame-scene-body',
-        children: jsx('div', {
-          className: 'lights-grid',
-          style: { gridTemplateColumns: `repeat(${LIGHTS_OUT_SIZE}, 1fr)` },
-          children: grid.map((lit, index) =>
-            jsx(
-              'button',
-              {
-                className: `light-tile${lit ? ' lit' : ''}`,
-                disabled: done,
-                onClick: () => tap(index),
-                'aria-label': `Light ${index + 1} ${lit ? 'on' : 'off'}`,
-              },
-              index
-            )
-          ),
-        }),
+        children: done
+          ? jsx(MinigameRewardScreen, {
+              prize,
+              onCollect: leave,
+              summary: jsxs('span', {
+                className: 'lights-out-solved',
+                children: ['Solved in ', moves, moves === 1 ? ' tap' : ' taps'],
+              }),
+            })
+          : jsx('div', {
+              className: 'lights-grid',
+              style: { gridTemplateColumns: `repeat(${LIGHTS_OUT_SIZE}, 1fr)` },
+              children: grid.map((lit, index) =>
+                jsx(
+                  'button',
+                  {
+                    className: `light-tile${lit ? ' lit' : ''}`,
+                    disabled: done,
+                    onClick: () => tap(index),
+                    'aria-label': `Light ${index + 1} ${lit ? 'on' : 'off'}`,
+                  },
+                  index
+                )
+              ),
+            }),
       }),
       jsxs('div', {
         className: 'minigame-scene-footer',
         children: [
-          jsx('button', {
-            className: 'move-panel-btn cancel',
-            onClick: done ? leave : giveUp,
-            children: done ? 'COLLECT & LEAVE' : 'GIVE UP',
-          }),
+          !done &&
+            jsx('button', {
+              className: 'move-panel-btn cancel',
+              onClick: giveUp,
+              children: 'GIVE UP',
+            }),
         ],
       }),
     ],

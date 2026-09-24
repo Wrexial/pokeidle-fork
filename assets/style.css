@@ -10777,3 +10777,230 @@ img {
     height: 60px;
     image-rendering: pixelated
 }
+
+/* --- Shared minigame reward screen ------------------------------------- */
+.minigame-reward {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%
+}
+
+.minigame-reward-rays {
+    position: absolute;
+    width: 340px;
+    height: 340px;
+    border-radius: 50%;
+    background: repeating-conic-gradient(rgba(255,214,90,.16) 0deg 10deg, transparent 10deg 20deg);
+    animation: rewardRaysSpin 14s linear infinite;
+    pointer-events: none
+}
+
+.minigame-reward-panel {
+    position: relative;
+    z-index: 1;
+    width: min(360px, 90%);
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 14px 16px 16px;
+    box-sizing: border-box;
+    background: linear-gradient(180deg, rgba(38,28,12,.97), rgba(18,12,5,.97));
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    box-shadow: 0 0 0 2px rgba(0,0,0,.5), 0 12px 30px rgba(0,0,0,.55), inset 0 0 24px rgba(255,200,80,.12);
+    animation: rewardPanelIn .45s cubic-bezier(.2,1.4,.5,1) both
+}
+
+.minigame-reward-badge {
+    font-size: 26px;
+    line-height: 1;
+    animation: rewardBadgePop .7s cubic-bezier(.2,1.5,.5,1) both
+}
+
+.minigame-reward-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--gold);
+    text-shadow: 0 0 8px rgba(255,200,80,.5)
+}
+
+.minigame-reward-label {
+    font-size: 9px;
+    color: #ffe9a8;
+    text-align: center
+}
+
+.minigame-reward-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+    max-height: 190px;
+    overflow-y: auto;
+    margin-top: 2px
+}
+
+.minigame-reward-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 8px;
+    font-size: 9px;
+    color: #f0e6c8;
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(255,214,90,.25);
+    border-radius: 4px;
+    animation: rewardRowIn .4s ease both
+}
+
+.minigame-reward-row.money {
+    color: #fff;
+    background: rgba(255,214,90,.12);
+    border-color: rgba(255,214,90,.6)
+}
+
+.minigame-reward-icon {
+    font-size: 13px
+}
+
+.minigame-reward-name {
+    flex: 1
+}
+
+.minigame-reward-qty {
+    font-weight: 700;
+    color: var(--gold)
+}
+
+.minigame-reward-empty {
+    padding: 8px;
+    font-size: 9px;
+    text-align: center;
+    opacity: .7
+}
+
+.minigame-reward-btn {
+    align-self: stretch;
+    margin-top: 6px;
+    animation: rewardBtnPulse 1.6s ease-in-out infinite
+}
+
+@keyframes rewardRaysSpin { to { transform: rotate(360deg) } }
+@keyframes rewardPanelIn { from { opacity: 0; transform: scale(.72) translateY(18px) } to { opacity: 1; transform: scale(1) translateY(0) } }
+@keyframes rewardBadgePop { 0% { opacity: 0; transform: scale(0) rotate(-40deg) } 65% { opacity: 1; transform: scale(1.35) rotate(10deg) } 100% { opacity: 1; transform: scale(1) rotate(0) } }
+@keyframes rewardRowIn { from { opacity: 0; transform: translateX(-16px) } to { opacity: 1; transform: translateX(0) } }
+@keyframes rewardBtnPulse { 0%,100% { box-shadow: 0 0 0 0 rgba(255,214,90,.5) } 50% { box-shadow: 0 0 10px 2px rgba(255,214,90,.6) } }
+
+/* --- Minigame animation polish ----------------------------------------- */
+.minigame-scene-bg {
+    animation: minigameBgPulse 7s ease-in-out infinite alternate
+}
+@keyframes minigameBgPulse { from { opacity: 1 } to { opacity: .78 } }
+
+.minigame-scene-title {
+    animation: minigameTitleGlow 2.6s ease-in-out infinite
+}
+@keyframes minigameTitleGlow {
+    0%,100% { text-shadow: 0 0 0 rgba(255,214,90,0) }
+    50% { text-shadow: 0 0 8px rgba(255,214,90,.55) }
+}
+
+/* Underground Mining */
+.mining-tile.dug { animation: miningDig .32s ease both }
+.mining-tile.reward { animation: miningSparkle .5s ease both }
+@keyframes miningDig { 0% { transform: scale(1) } 45% { transform: scale(.86) } 100% { transform: scale(1) } }
+@keyframes miningSparkle { 0% { box-shadow: 0 0 0 0 rgba(255,214,90,.8); transform: scale(.9) } 100% { box-shadow: 0 0 12px 3px rgba(255,214,90,0); transform: scale(1) } }
+
+/* Voltorb Flip */
+.voltorb-tile.flipped { animation: voltorbFlip .28s ease both }
+.voltorb-tile.flipped.voltorb { animation: voltorbFlip .28s ease both, voltorbFizz .5s ease .1s }
+.voltorb-mark { animation: voltorbMarkPulse 1s ease-in-out infinite }
+@keyframes voltorbFlip { from { transform: rotateY(90deg) scale(.85) } to { transform: rotateY(0) scale(1) } }
+@keyframes voltorbFizz { 0%,100% { filter: brightness(1) } 50% { filter: brightness(1.5) } }
+@keyframes voltorbMarkPulse { 0%,100% { transform: scale(1) } 50% { transform: scale(1.25) } }
+
+/* Grand Auction House */
+.auction-price { animation: auctionPricePulse 1.6s ease-in-out infinite }
+.auction-bidder.leading { animation: auctionLeader 1.4s ease-in-out infinite }
+@keyframes auctionPricePulse { 0%,100% { text-shadow: 0 0 0 rgba(255,214,90,0) } 50% { text-shadow: 0 0 10px rgba(255,214,90,.7) } }
+@keyframes auctionLeader { 0%,100% { box-shadow: 0 0 0 0 rgba(255,214,90,.5) } 50% { box-shadow: 0 0 8px 2px rgba(255,214,90,.5) } }
+
+/* Pokemon Contest */
+.contest-move { transition: transform .12s ease, filter .12s ease }
+.contest-move:hover:not(:disabled) { transform: translateY(-2px) }
+.contest-theme { animation: contestThemeGlow 2.4s ease-in-out infinite }
+.contest-rank.player { animation: contestPlayerRank 1.6s ease-in-out infinite }
+@keyframes contestThemeGlow { 0%,100% { filter: brightness(1) } 50% { filter: brightness(1.18) } }
+@keyframes contestPlayerRank { 0%,100% { box-shadow: 0 0 0 0 rgba(255,214,90,.4) } 50% { box-shadow: 0 0 10px 2px rgba(255,214,90,.4) } }
+
+/* Pokeathlon */
+.athlon-sweet-spot { animation: athlonSpot 1.4s ease-in-out infinite }
+.athlon-mash-btn:not(:disabled) { animation: athlonMash 1s ease-in-out infinite }
+@keyframes athlonSpot { 0%,100% { opacity: .55 } 50% { opacity: 1 } }
+@keyframes athlonMash { 0%,100% { box-shadow: 0 0 0 0 rgba(127,208,106,.5) } 50% { box-shadow: 0 0 16px 4px rgba(127,208,106,.45) } }
+
+/* Poke Radar */
+.radar-patch.lit { animation: radarLit .5s ease }
+.radar-target-sprite { animation: radarSpriteBob 2.6s ease-in-out infinite }
+@keyframes radarLit { 0% { transform: scale(.82) } 60% { transform: scale(1.08) } 100% { transform: scale(1) } }
+@keyframes radarSpriteBob { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-4px) } }
+
+/* Battle Royal */
+.royal-fighter { animation: royalBob 2.2s ease-in-out infinite }
+.royal-versus { animation: royalVersus 1.2s ease-in-out infinite }
+.royal-member.active { animation: royalActive 1.4s ease-in-out infinite }
+@keyframes royalBob { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-3px) } }
+@keyframes royalVersus { 0%,100% { transform: scale(1) } 50% { transform: scale(1.2) } }
+@keyframes royalActive { 0%,100% { box-shadow: 0 0 0 0 rgba(255,214,90,.35) } 50% { box-shadow: 0 0 8px 1px rgba(255,214,90,.5) } }
+
+/* Dynamax Adventures */
+.dynamax-path { transition: transform .14s ease }
+.dynamax-path:hover { transform: translateY(-3px) }
+.dynamax-boss-sprite { animation: dynamaxFloat 3s ease-in-out infinite }
+.dynamax-boss { animation: dynamaxGlow 2.4s ease-in-out infinite }
+@keyframes dynamaxFloat { 0%,100% { transform: translateY(0) scale(1) } 50% { transform: translateY(-5px) scale(1.03) } }
+@keyframes dynamaxGlow { 0%,100% { box-shadow: 0 0 0 0 rgba(160,111,208,.4) } 50% { box-shadow: 0 0 16px 3px rgba(160,111,208,.5) } }
+
+/* Lights Out */
+.light-tile.lit { animation: lightOn .28s ease, lightPulse 2s ease-in-out .28s infinite }
+@keyframes lightOn { 0% { transform: scale(.9) } 60% { transform: scale(1.08) } 100% { transform: scale(1) } }
+@keyframes lightPulse { 0%,100% { box-shadow: 0 0 12px #e8c94a } 50% { box-shadow: 0 0 18px 2px #ffe98a } }
+
+/* Curry Cooking */
+.curry-flame-marker { animation: curryFlicker .5s ease-in-out infinite alternate }
+.curry-fan-btn:not(:disabled) { animation: curryFanHint 2s ease-in-out infinite }
+@keyframes curryFlicker { from { filter: brightness(1) } to { filter: brightness(1.35) } }
+@keyframes curryFanHint { 0%,100% { box-shadow: 0 0 0 0 rgba(232,137,43,.4) } 50% { box-shadow: 0 0 14px 3px rgba(232,137,43,.5) } }
+
+/* Pokestar Studios */
+.pokestar-take:not(:disabled) { animation: pokestarTakeIn .3s ease both }
+.pokestar-summary-score { animation: pokestarScorePop .5s cubic-bezier(.2,1.5,.5,1) both }
+@keyframes pokestarTakeIn { from { opacity: 0; transform: translateY(8px) } to { opacity: 1; transform: translateY(0) } }
+@keyframes pokestarScorePop { from { transform: scale(.6); opacity: 0 } to { transform: scale(1); opacity: 1 } }
+
+/* Puzzle League */
+.match3-tile { transition: transform .12s ease }
+.match3-tile:active:not(:disabled) { transform: scale(.92) }
+.match3-tile.selected { animation: match3Select .7s ease-in-out infinite }
+@keyframes match3Select { 0%,100% { transform: scale(1) } 50% { transform: scale(1.08) } }
+
+/* Pokemon Memory */
+.memory-card.up { animation: memoryFlip .34s ease both }
+.memory-card.matched { animation: memoryMatch .5s cubic-bezier(.2,1.5,.5,1) both }
+@keyframes memoryFlip { from { transform: rotateY(90deg) } to { transform: rotateY(0) } }
+@keyframes memoryMatch { 0% { transform: scale(1) } 45% { transform: scale(1.15) } 100% { transform: scale(1) } }
+
+/* Whack-a-Diglett */
+.whack-hole.diglett { animation: whackRise .1s ease }
+.whack-hole.zubat { animation: whackFlee .1s ease }
+.whack-sprite { animation: whackPop .18s ease }
+@keyframes whackRise { from { transform: scale(.7) } to { transform: scale(1) } }
+@keyframes whackFlee { from { filter: brightness(1.6) } to { filter: brightness(1) } }
+@keyframes whackPop { from { transform: translateY(10px) scale(.8) } to { transform: translateY(0) scale(1) } }

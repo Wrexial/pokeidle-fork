@@ -13,6 +13,7 @@ import {
   pokeathlonPrize,
   sprintScore,
 } from '../game/minigames.js'
+import { MinigameRewardScreen, useMinigameClaim } from './minigame-reward.js'
 
 const EVENT_NAMES = ['Sprint', 'Hurdle', 'Target Throw']
 
@@ -147,7 +148,8 @@ export function PokeathlonScene() {
     [scores, setScores] = React.useState(() => /** @type {number[]} */ ([])),
     [phase, setPhase] = React.useState(
       /** @type {'play' | 'between' | 'done'} */ ('play')
-    )
+    ),
+    collect = useMinigameClaim(dispatch)
 
   const total = scores.reduce((sum, value) => sum + value, 0),
     prize = pokeathlonPrize(total),
@@ -169,8 +171,10 @@ export function PokeathlonScene() {
   }
 
   function leave() {
-    if (phase === 'done') dispatch({ type: 'CLAIM_MINIGAME_REWARD', payload: prize })
-    dispatch({ type: 'END_MINIGAME' })
+    collect(
+      { type: 'END_MINIGAME' },
+      phase === 'done' ? { type: 'CLAIM_MINIGAME_REWARD', payload: prize } : null
+    )
   }
 
   const lastScore = scores.length > 0 ? scores[scores.length - 1] : 0
@@ -199,25 +203,28 @@ export function PokeathlonScene() {
         className: 'minigame-scene-body',
         children:
           phase === 'done'
-            ? jsxs('div', {
-                className: 'athlon-summary',
-                children: [
-                  jsx('span', { className: 'athlon-summary-title', children: prize.label }),
-                  jsx('span', {
-                    className: 'athlon-summary-score',
-                    children: `${total} / ${EVENT_NAMES.length * POKEATHLON_EVENT_MAX}`,
-                  }),
-                  jsx('div', {
-                    className: 'athlon-summary-events',
-                    children: EVENT_NAMES.map((name, index) =>
+            ? jsx(MinigameRewardScreen, {
+                prize,
+                onCollect: leave,
+                summary: jsxs('div', {
+                  className: 'athlon-summary-events',
+                  children: [
+                    jsx('span', {
+                      className: 'athlon-summary-score',
+                      children: `${total} / ${EVENT_NAMES.length * POKEATHLON_EVENT_MAX}`,
+                    }),
+                    ...EVENT_NAMES.map((name, index) =>
                       jsx(
                         'span',
-                        { className: 'athlon-summary-event', children: `${name}: ${scores[index] ?? 0}` },
+                        {
+                          className: 'athlon-summary-event',
+                          children: `${name}: ${scores[index] ?? 0}`,
+                        },
                         name
                       )
                     ),
-                  }),
-                ],
+                  ],
+                }),
               })
             : phase === 'between'
               ? jsxs('div', {
@@ -250,11 +257,12 @@ export function PokeathlonScene() {
       jsxs('div', {
         className: 'minigame-scene-footer',
         children: [
-          jsx('button', {
-            className: 'move-panel-btn cancel',
-            onClick: leave,
-            children: phase === 'done' ? 'COLLECT & LEAVE' : 'LEAVE',
-          }),
+          phase !== 'done' &&
+            jsx('button', {
+              className: 'move-panel-btn cancel',
+              onClick: leave,
+              children: 'LEAVE',
+            }),
           phase === 'between' &&
             jsx('button', {
               className: 'move-panel-btn confirm',

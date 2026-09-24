@@ -12,6 +12,7 @@ import {
   match3Prize,
   tryMatch3Swap,
 } from '../game/minigames.js'
+import { MinigameRewardScreen, useMinigameClaim } from './minigame-reward.js'
 
 export function PuzzleLeagueScene() {
   const { state, dispatch } = useGame(),
@@ -22,7 +23,8 @@ export function PuzzleLeagueScene() {
     [message, setMessage] = React.useState('Swap two adjacent tiles to line up three.'),
     [prize, setPrize] = React.useState(
       () => /** @type {ReturnType<typeof match3Prize> | null} */ (null)
-    )
+    ),
+    collect = useMinigameClaim(dispatch)
 
   const done = prize !== null
 
@@ -63,8 +65,10 @@ export function PuzzleLeagueScene() {
   }
 
   function leave() {
-    if (prize) dispatch({ type: 'CLAIM_MINIGAME_REWARD', payload: prize })
-    dispatch({ type: 'END_MINIGAME' })
+    collect(
+      { type: 'END_MINIGAME' },
+      prize ? { type: 'CLAIM_MINIGAME_REWARD', payload: prize } : null
+    )
   }
 
   return jsxs('div', {
@@ -83,7 +87,16 @@ export function PuzzleLeagueScene() {
       }),
       jsxs('div', {
         className: 'minigame-scene-body',
-        children: [
+        children: done
+          ? jsx(MinigameRewardScreen, {
+              prize,
+              onCollect: leave,
+              summary: jsx('span', {
+                className: 'puzzle-solved',
+                children: `Score ${score}`,
+              }),
+            })
+          : [
           jsx('div', {
             className: 'match3-grid',
             style: { gridTemplateColumns: `repeat(${MATCH3_SIZE}, 1fr)` },
@@ -108,11 +121,12 @@ export function PuzzleLeagueScene() {
       jsxs('div', {
         className: 'minigame-scene-footer',
         children: [
-          jsx('button', {
-            className: 'move-panel-btn cancel',
-            onClick: leave,
-            children: done ? 'COLLECT & LEAVE' : 'LEAVE',
-          }),
+          !done &&
+            jsx('button', {
+              className: 'move-panel-btn cancel',
+              onClick: leave,
+              children: 'LEAVE',
+            }),
         ],
       }),
     ],

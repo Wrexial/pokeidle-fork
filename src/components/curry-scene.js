@@ -13,6 +13,7 @@ import {
   curryScore,
   rollCurryRequest,
 } from '../game/minigames.js'
+import { MinigameRewardScreen, useMinigameClaim } from './minigame-reward.js'
 
 export function CurryScene() {
   const { state, dispatch } = useGame(),
@@ -29,6 +30,7 @@ export function CurryScene() {
     [prize, setPrize] = React.useState(
       () => /** @type {ReturnType<typeof curryPrize> | null} */ (null)
     ),
+    collect = useMinigameClaim(dispatch),
     matchedRef = React.useRef(false),
     flameRef = React.useRef(0.5),
     inBandRef = React.useRef(0),
@@ -56,15 +58,13 @@ export function CurryScene() {
         finishedRef.current = true
         clearInterval(id)
         const quality = Math.min(1, inBandRef.current / CURRY_COOK_MS),
-          score = curryScore(matchedRef.current, quality),
-          reward = curryPrize(score)
-        setPrize(reward)
+          score = curryScore(matchedRef.current, quality)
+        setPrize(curryPrize(score))
         setPhase('done')
-        dispatch({ type: 'CLAIM_MINIGAME_REWARD', payload: reward })
       }
     }, 50)
     return () => clearInterval(id)
-  }, [phase, dispatch])
+  }, [phase])
 
   /** @param {typeof CURRY_INGREDIENTS[number]} entry */
   function chooseIngredient(entry) {
@@ -75,7 +75,10 @@ export function CurryScene() {
   }
 
   function leave() {
-    dispatch({ type: 'END_MINIGAME' })
+    collect(
+      { type: 'END_MINIGAME' },
+      prize ? { type: 'CLAIM_MINIGAME_REWARD', payload: prize } : null
+    )
   }
 
   const lowEdge = (0.5 - CURRY_ZONE) * 100,
@@ -103,7 +106,9 @@ export function CurryScene() {
       jsx('div', {
         className: 'minigame-scene-body',
         children:
-          phase === 'choose'
+          phase === 'done'
+            ? jsx(MinigameRewardScreen, { prize, onCollect: leave })
+            : phase === 'choose'
             ? jsxs('div', {
                 className: 'curry-choose',
                 children: [
@@ -175,11 +180,12 @@ export function CurryScene() {
       jsxs('div', {
         className: 'minigame-scene-footer',
         children: [
-          jsx('button', {
-            className: 'move-panel-btn cancel',
-            onClick: leave,
-            children: phase === 'done' ? 'COLLECT & LEAVE' : 'LEAVE',
-          }),
+          phase !== 'done' &&
+            jsx('button', {
+              className: 'move-panel-btn cancel',
+              onClick: leave,
+              children: 'LEAVE',
+            }),
         ],
       }),
     ],

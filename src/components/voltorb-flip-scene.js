@@ -17,6 +17,7 @@ import {
   voltorbBoardCoins,
   voltorbFlipPrize,
 } from '../game/minigames.js'
+import { MinigameRewardScreen, useMinigameClaim } from './minigame-reward.js'
 
 /** The face value shown on a flipped tile. */
 const TILE_LABEL = { one: '1', two: '2', three: '3', voltorb: '\u26a1' }
@@ -28,7 +29,9 @@ export function VoltorbFlipScene() {
     [maxLevel, setMaxLevel] = React.useState(1),
     [phase, setPhase] = React.useState(
       /** @type {'playing' | 'exploded' | 'cleared' | 'done'} */ ('playing')
-    )
+    ),
+    [showReward, setShowReward] = React.useState(false),
+    collect = useMinigameClaim(dispatch)
 
   const exploded = boardExploded(board),
     cleared = boardCleared(board),
@@ -66,13 +69,24 @@ export function VoltorbFlipScene() {
     setPhase('playing')
   }
 
-  function leave() {
-    if (banked > 0 || prize.items.length > 0)
-      dispatch({ type: 'CLAIM_MINIGAME_REWARD', payload: prize })
-    dispatch({ type: 'END_MINIGAME' })
-  }
+  const finished = phase === 'exploded' || phase === 'done',
+    rewardVisible = finished || showReward,
+    hasPrize = banked > 0 || prize.items.length > 0
 
-  const finished = phase === 'exploded' || phase === 'done'
+  function leave() {
+    if (rewardVisible) {
+      collect(
+        { type: 'END_MINIGAME' },
+        hasPrize ? { type: 'CLAIM_MINIGAME_REWARD', payload: prize } : null
+      )
+      return
+    }
+    if (hasPrize) {
+      setShowReward(true)
+      return
+    }
+    collect({ type: 'END_MINIGAME' })
+  }
 
   return jsxs('div', {
     className: 'minigame-scene voltorb-scene',
@@ -96,7 +110,16 @@ export function VoltorbFlipScene() {
       }),
       jsxs('div', {
         className: 'minigame-scene-body',
-        children: [
+        children: rewardVisible
+          ? jsx(MinigameRewardScreen, {
+              prize,
+              onCollect: leave,
+              summary: jsx('span', {
+                className: 'voltorb-summary-score',
+                children: `Banked $${banked.toLocaleString()}`,
+              }),
+            })
+          : [
           jsx('div', {
             className: 'voltorb-board',
             children: [
@@ -160,39 +183,24 @@ export function VoltorbFlipScene() {
               ]),
             ],
           }),
-          finished
-            ? jsxs('div', {
-                className: 'voltorb-summary',
-                children: [
-                  jsx('span', {
-                    className: 'voltorb-summary-title',
-                    children: phase === 'exploded' ? 'Voltorb!' : 'Table cleared',
-                  }),
-                  jsx('span', {
-                    className: 'voltorb-summary-score',
-                    children: `${prize.label} \u00b7 $${prize.money.toLocaleString()}${
-                      prize.items.length > 0 ? ' + a candy' : ''
-                    }`,
-                  }),
-                ],
-              })
-            : jsx('div', {
-                className: 'minigame-scene-log',
-                children:
-                  phase === 'cleared'
-                    ? `Level ${board.level} cleared! $${voltorbBoardCoins(board).toLocaleString()} banked.`
-                    : 'Left-click a tile to flip it, right-click to mark a suspected Voltorb.',
-              }),
+          jsx('div', {
+            className: 'minigame-scene-log',
+            children:
+              phase === 'cleared'
+                ? `Level ${board.level} cleared! $${voltorbBoardCoins(board).toLocaleString()} banked.`
+                : 'Left-click a tile to flip it, right-click to mark a suspected Voltorb.',
+          }),
         ],
       }),
       jsxs('div', {
         className: 'minigame-scene-footer',
         children: [
-          jsx('button', {
-            className: 'move-panel-btn cancel',
-            onClick: leave,
-            children: finished || banked > 0 ? 'COLLECT & LEAVE' : 'LEAVE',
-          }),
+          !rewardVisible &&
+            jsx('button', {
+              className: 'move-panel-btn cancel',
+              onClick: leave,
+              children: hasPrize ? 'CASH OUT' : 'LEAVE',
+            }),
           !finished &&
             jsx('button', {
               className: 'move-panel-btn confirm',

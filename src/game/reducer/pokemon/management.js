@@ -279,10 +279,18 @@ export function catchPokemon(state, action) {
         [pokeballUsed]: ownedCount - 1,
       })
   }
+  // Catching a static overworld Pokemon (Snorlax, Sudowoodo, ...) claims it so
+  // it never respawns. Fainting or fleeing leaves it available to retry.
+  const staticId = state.enemyPokemon?.staticId,
+    claimedGifts =
+      staticId && !(state.claimedGifts ?? []).includes(staticId)
+        ? [...(state.claimedGifts ?? []), staticId]
+        : state.claimedGifts
   return state.party.length < 6
     ? {
         ...state,
         party: [...state.party, newPokemon],
+        claimedGifts,
         nextPokemonId: state.nextPokemonId + 1,
         inventory,
         quests: advanceQuests(state.quests, { kind: 'catch', speciesKey, isShiny }),
@@ -294,6 +302,7 @@ export function catchPokemon(state, action) {
     : {
         ...state,
         box: insertIntoBox(state.box, newPokemon, state.boxSort),
+        claimedGifts,
         nextPokemonId: state.nextPokemonId + 1,
         inventory,
         quests: advanceQuests(state.quests, { kind: 'catch', speciesKey, isShiny }),

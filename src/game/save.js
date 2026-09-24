@@ -14,6 +14,7 @@ import { COMPANION_MAX_CARE, createCompanionCare } from './companion.js'
 import { GARDEN_BERRIES, createGarden } from './garden.js'
 import { PELAGO_MAX_READY, PELAGO_SLOTS, createPelago } from './pelago.js'
 import { RODS, rodsForRegionCount } from './minigames.js'
+import { GIFTS, STATIC_ENCOUNTERS } from './gifts.js'
 import { initialGameState } from './reducer.js'
 import { computeOfflineReward } from './progression.js'
 
@@ -543,6 +544,10 @@ export function repairSave(saved) {
     defeatedChampions,
     rewardedGenerations,
     rewardedAchievements,
+    claimedGifts: (Array.isArray(saved.claimedGifts) ? saved.claimedGifts : []).filter(
+      (/** @type {string} */ id) =>
+        GIFTS.some((gift) => gift.id === id) || STATIC_ENCOUNTERS.some((entry) => entry.id === id)
+    ),
     regionPrestige: Object.fromEntries(
       Object.entries(saved.regionPrestige ?? {}).filter(
         ([regionId, level]) => regionIds.has(regionId) && typeof level === 'number' && level > 0
@@ -680,6 +685,7 @@ export const SAVED_STATE_KEYS = [
   'defeatedChampions',
   'rewardedGenerations',
   'rewardedAchievements',
+  'claimedGifts',
   'regionPrestige',
   'towerFloor',
   'towerBest',

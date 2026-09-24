@@ -35,8 +35,7 @@ renumbered, so the gaps below are items that shipped.
    Champion Cup and any-order gyms don't fit the 8-gyms + E4 model. **(partial:
    0.13.0 shipped the data-driven model; Alola's full 11-slot trial track and
    Paldea's Titans / Team Star remain.)**
-8. **#11 NPC gifts & static encounters** — M · ★★★ — one-off gift NPCs and
-   single overworld catches; needs a few small state flags.
+8. ~~**#11 NPC gifts & static encounters**~~ — **shipped (0.18.0).**
 9. **#29 Fishing / companion minigames** — M–L · ★★★ — the rest of the
    minigame menu, now that the scene + phase pattern exists.
 10. **#35 More Galar areas** — M · ★★★½ — Galar is the thinnest region map.
@@ -91,14 +90,18 @@ Effort: **medium**.
 
 ## 11. NPC gifts & static encounters
 
-Towns are currently marts + gyms; a few one-off NPCs would add flavour and
-content (and give fossils/starters a clean source outside the raid pool).
+**Shipped (0.18.0):** a curated `GIFTS` / `STATIC_ENCOUNTERS` table
+(`src/game/gifts.js`) drives a new **People & Places** section in the location
+panel. Gifts hand over items, money or a Pokemon (Oak's parcel, Celadon's Eevee,
+Elm's Cyndaquil, the Weather Institute's Castform, Bebe's Eevee, a Nacrene
+Larvesta, Korrina's Riolu, an Alola/Paldea starter, a Galar Toxel); statics start
+a normal wild battle with a fixed species/level (Route 12/16 Snorlax, Route 36
+Sudowoodo, Route 119 Kecleon, Route 210 Munchlax, Route 7 Snorlax). Both are
+claimed once per save (`claimedGifts`); a static only counts as claimed when it
+is caught, so a failed catch can be retried. Requirements are region-local
+badge / champion / Pokedex gates, shown as a checklist.
 
-- [ ] A gift NPC per region (fossil, starter, an item) gated on a flag.
-- [ ] Static overworld encounters (a fixed species/level you catch once).
-- [ ] Reuse the boss-battle / wild-encounter plumbing.
-
-Effort: **medium**. Needs small new state flags.
+Effort: **done**.
 
 ## 16. More ideas (unsorted)
 

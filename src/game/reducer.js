@@ -12,6 +12,7 @@ import { claimAchievementRewards, claimDailyGift, claimDexRewards, claimQuest, c
 import { buyItem, buyRewardItem, clearHeldItem, sellItem, setAlwaysCatchShinies, setCatchRule, toggleAutoCatch, toggleRouteCatchAll, useItemOnPokemon } from './reducer/items.js'
 import { blendBerries, careCompanion, harvestBerry, plantBerry, setCompanion } from './reducer/care.js'
 import { assignPelago, collectPelago, unassignPelago } from './reducer/pelago.js'
+import { claimGift, startStaticEncounter } from './reducer/gifts.js'
 import { claimMinigameReward, collectMining, endBugContest, endMinigame, endRouteActivity, endSafari, payMinigameFee, startAcademyQuiz, startAuctionHouse, startBattleRoyal, startBugContest, startContest, startDynamaxAdventures, startGameCorner, startMining, startPokeathlon, startPokeRadar, startRouteActivity, startSafari, startVoltorbFlip } from './reducer/minigames.js'
 import { boxToParty, catchPokemon, clearHatchResult, completeEvolution, completeWonderTrade, depositDaycare, evolutionStep, hatchDaycareEgg, partyToBox, releaseDuplicates, releaseHatchling, releasePokemon, reorderBox, reorderParty, setBoxSort, setMoves, setNickname, startEvolution, swapParty, swapPartyBox, toggleFavourite, withdrawDaycare, wonderTrade } from './reducer/pokemon.js'
 import { completeHealing, heal, healParty, healingStep, startHealing } from './reducer/recovery.js'
@@ -111,6 +112,8 @@ export const initialGameState = {
   rewardedGenerations: [],
   /** Achievement ids whose one-off reward has been paid. */
   rewardedAchievements: [],
+  /** NPC gift / static-encounter ids already claimed this save. */
+  claimedGifts: [],
   regionPrestige: {},
   /** Next Battle Tower floor to attempt (0 = not in a run). Hoenn only. */
   towerFloor: 0,
@@ -373,6 +376,10 @@ export function gameReducer(state, action) {
       return payMinigameFee(state, action)
     case 'CLAIM_MINIGAME_REWARD':
       return claimMinigameReward(state, action)
+    case 'CLAIM_GIFT':
+      return claimGift(state, action)
+    case 'START_STATIC_ENCOUNTER':
+      return startStaticEncounter(state, action)
     case 'SET_COMPANION':
       return setCompanion(state, action)
     case 'CARE_COMPANION':

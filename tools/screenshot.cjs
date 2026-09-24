@@ -547,6 +547,21 @@ async function main() {
     )
     await cdp.screenshot(path.join(OUT, '17-mega-evolution.png'))
     console.log('Mega Evolution scene ok')
+
+    // NPC gifts panel at Pallet Town.
+    await cdp.eval(
+      `localStorage.setItem('pokemon-idle-save-v2', ${JSON.stringify(
+        JSON.stringify(minigameSave('kanto', 'palletTown', 'route1', ['palletTown', 'route1']))
+      )}); 'ok'`
+    )
+    await cdp.send('Page.navigate', { url: APP_URL })
+    await cdp.waitFor('window.gameDataDebug.status().loaded === true', 20000, 'gift data')
+    await cdp.eval(
+      `(() => { const b = document.querySelector('.patch-notes-dismiss-btn'); if (b) b.click(); return true })()`
+    )
+    await cdp.waitFor(`!!document.querySelector('.location-gift-card')`, 8000, 'gift card')
+    await cdp.screenshot(path.join(OUT, '18-gifts.png'))
+    console.log('Gift panel scene ok')
     console.log('done')
   } finally {
     chrome.kill()

@@ -447,6 +447,8 @@ type GameState = {
   rewardedGenerations: number[]
   /** Achievement ids whose one-off reward has been paid. */
   rewardedAchievements: string[]
+  /** NPC gift / static-encounter ids already claimed this save. */
+  claimedGifts: string[]
   /** Times each region has been prestiged (map progress reset). */
   regionPrestige: Record<string, number>
   /** Next Battle Tower floor to attempt (0 = not in a run). Hoenn only. */

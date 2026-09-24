@@ -10,6 +10,7 @@ import { MINIGAME_INFO, MINIGAME_LOCATIONS, MINIGAME_START_ACTION, ROUTE_ACTIVIT
 import { useGame } from '../game/context.js'
 import { computeUnlockedLocations } from '../game/progression.js'
 import { MinigameCard } from './minigame-card.js'
+import { GiftPanel } from './gift-panel.js'
 import { BattleTowerPanel } from './battle-tower-panel.js'
 import { PokePelagoModal } from './poke-pelago-modal.js'
 import { RouteEncounterGrid } from './route-encounter-grid.js'
@@ -509,6 +510,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
             ],
           }),
         location.id === BATTLE_TOWER_LOCATION && jsx(BattleTowerPanel, {}),
+        jsx(GiftPanel, { locationId: location.id }),
         frontierLockedLocations.length > 0 &&
           jsxs('div', {
             className: 'location-next-unlock',

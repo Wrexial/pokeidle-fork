@@ -47,6 +47,7 @@ export const CHANGELOG = [
           heading: 'Progression',
           items: [
             'High-level wild areas no longer open before the region expects them: routes whose wilds jump far above the area that unlocks them (Paldea\u2019s province areas, Alola\u2019s late island routes, several end-game routes) now also require a party level closer to their wilds, so you cannot wander into Lv.70+ Pokemon with a starter team',
+            'Galar\u2019s opening route (and the Slumbering Weald) now starts at Lv. 2-3 instead of Lv. 5-7, so the starter has room to find its feet before Galar\u2019s short route list starts climbing',
           ],
         },
         {

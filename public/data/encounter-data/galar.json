@@ -5,68 +5,68 @@
    {
     "speciesKey": "skwovet",
     "weight": 23,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 2,
+    "maxLevel": 3
    },
    {
     "speciesKey": "rookidee",
     "weight": 8,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 2,
+    "maxLevel": 3
    },
    {
     "speciesKey": "blipbug",
     "weight": 8,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 2,
+    "maxLevel": 3
    },
    {
     "speciesKey": "caterpie",
     "weight": 4,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 2,
+    "maxLevel": 3
    },
    {
     "speciesKey": "wooloo",
     "weight": 4,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 2,
+    "maxLevel": 3
    },
    {
     "speciesKey": "grubbin",
     "weight": 3,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 2,
+    "maxLevel": 3
    },
    {
     "speciesKey": "hoothoot",
     "weight": 1,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 2,
+    "maxLevel": 3
    },
    {
     "speciesKey": "nickit",
     "weight": 1,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 2,
+    "maxLevel": 3
    },
    {
     "speciesKey": "grookey",
     "weight": 1,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 2,
+    "maxLevel": 3
    },
    {
     "speciesKey": "scorbunny",
     "weight": 1,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 2,
+    "maxLevel": 3
    },
    {
     "speciesKey": "sobble",
     "weight": 1,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 2,
+    "maxLevel": 3
    }
   ]
  },
@@ -1402,50 +1402,50 @@
    {
     "speciesKey": "g-zigzagoon",
     "weight": 20,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 2,
+    "maxLevel": 3
    },
    {
     "speciesKey": "g-yamask",
     "weight": 20,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 2,
+    "maxLevel": 3
    },
    {
     "speciesKey": "h-zorua",
     "weight": 20,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 2,
+    "maxLevel": 3
    },
    {
     "speciesKey": "blipbug",
     "weight": 12,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 2,
+    "maxLevel": 3
    },
    {
     "speciesKey": "rookidee",
     "weight": 12,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 2,
+    "maxLevel": 3
    },
    {
     "speciesKey": "skwovet",
     "weight": 12,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 2,
+    "maxLevel": 3
    },
    {
     "speciesKey": "gossifleur",
     "weight": 12,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 2,
+    "maxLevel": 3
    },
    {
     "speciesKey": "nickit",
     "weight": 12,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 2,
+    "maxLevel": 3
    }
   ]
  },

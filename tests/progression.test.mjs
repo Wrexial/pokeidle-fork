@@ -8,7 +8,7 @@ installGameData()
 const { computeUnlockedLocations, getRegionUnlockTokens, checkShinyOdds, shinyChainMultiplier } =
   await import('../src/game/progression.js')
 const { initialGameState } = await import('../src/game/reducer.js')
-const { gymLeaderData } = await import('../src/data/gameData.js')
+const { encounterData, gymLeaderData } = await import('../src/data/gameData.js')
 
 /** @param {Record<string, any>} [overrides] */
 function baseState(overrides = {}) {
@@ -75,6 +75,15 @@ test('badge gates open with the right badges and re-lock after prestige', () => 
   assert.ok(
     !computeUnlockedLocations(baseState(prestiged)).includes('route23'),
     'prestiging Kanto should re-lock route23'
+  )
+})
+
+test('Galar opens on its gentler first route', () => {
+  const first = encounterData['galar-route-1']?.encounters ?? []
+  assert.ok(first.length > 0, 'Galar route 1 has wilds')
+  assert.ok(
+    Math.max(...first.map((entry) => entry.maxLevel)) <= 3,
+    'Galar route 1 stays at Lv. 2-3'
   )
 })
 

@@ -3,7 +3,7 @@
 import React from 'react'
 import { createPortal } from 'react-dom'
 import { jsx, jsxs } from 'react/jsx-runtime'
-import { moveCategoryIcons } from '../data/moves.js'
+import { formatMoveAccuracy, moveCategoryIcons } from '../data/moves.js'
 import { dailyEventByKey } from '../data/daily-events.js'
 import { hasClaimableQuests } from '../game/quests.js'
 import { biomeForLocation, BIOME_FILTERS, locationImages } from '../data/ui.js'
@@ -556,8 +556,7 @@ export function BattleScene() {
                                       children: 'Acc',
                                     }),
                                     ' ',
-                                    moveDef.accuracy,
-                                    '%',
+                                    formatMoveAccuracy(moveDef.accuracy),
                                   ],
                                 }),
                               ],

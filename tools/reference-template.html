@@ -592,7 +592,7 @@
           return '<span class="type" style="--c:' + (TYPE_COLORS[type] || '#888') + '">' + esc(type) + '</span>'
         }
         function pct(value) {
-          return value ? value + '%' : '—'
+          return value > 100 ? '—' : value ? value + '%' : '—'
         }
 
         // ── tabs ─────────────────────────────────────────────────────────

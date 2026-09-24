@@ -1020,7 +1020,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         (abilityOf(attack.attacker) === 'compoundEyes' ? 1.3 : 1) *
         (abilityOf(attack.attacker) === 'victoryStar' ? 1.1 : 1),
       effectiveMove =
-        accuracyMult === 1 || !(baseMove.accuracy > 0)
+        accuracyMult === 1 || !(baseMove.accuracy > 0) || baseMove.accuracy > 100
           ? baseMove
           : { ...baseMove, accuracy: Math.min(100, baseMove.accuracy * accuracyMult) }
     // Protean / Libero change the user's type to the move it is about to use.

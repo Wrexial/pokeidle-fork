@@ -107,9 +107,15 @@ export function calculateDamage(attackerLevel, attack, defense, move, attackerTy
       effectiveness: 1,
       effectivenessLabel: null,
     }
-  const effectiveAccuracy =
-    move.accuracy <= 0 ? 100 : move.accuracy * statStageMultiplier(accuracyStage - evasionStage)
-  if (!deterministic && !skipAccuracy && Math.random() * 100 >= effectiveAccuracy)
+  // An accuracy above 100 (the data's marker for a move that never misses)
+  // ignores accuracy / evasion stages entirely. Accuracy 0 is the other
+  // can't-miss convention (weather-perfected Thunder / Blizzard).
+  const alwaysHits = move.accuracy > 100,
+    effectiveAccuracy =
+      move.accuracy <= 0 || alwaysHits
+        ? 100
+        : move.accuracy * statStageMultiplier(accuracyStage - evasionStage)
+  if (!deterministic && !skipAccuracy && !alwaysHits && Math.random() * 100 >= effectiveAccuracy)
     return {
       damage: 0,
       isCrit: !1,

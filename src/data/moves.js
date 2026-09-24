@@ -7,6 +7,17 @@ export const moveCategoryIcons = {
   status: '☯',
 }
 
+/**
+ * Display an accuracy value. The data marks a move that never misses with an
+ * accuracy above 100 (101), which the games show as an em dash rather than
+ * "101%".
+ * @param {number} accuracy
+ * @returns {string}
+ */
+export function formatMoveAccuracy(accuracy) {
+  return accuracy > 100 ? '\u2014' : `${accuracy}%`
+}
+
 /** @type {Record<string, Record<string, number>>} */
 export const typechart = {
   Normal: {

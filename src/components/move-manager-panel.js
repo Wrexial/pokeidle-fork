@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
-import { moveCategoryIcons } from '../data/moves.js'
+import { formatMoveAccuracy, moveCategoryIcons } from '../data/moves.js'
 import { moveData } from '../data/gameData.js'
 import { tutorMoveCost } from '../data/config.js'
 import { useGame } from '../game/context.js'
@@ -129,9 +129,9 @@ export function MoveManagerPanel({ pokemon, onClose }) {
                     className: 'move-panel-item-stats',
                     children: moveDef.power > 0 ? moveDef.power : '---',
                   }),
-                  jsxs('span', {
+                  jsx('span', {
                     className: 'move-panel-item-stats',
-                    children: [moveDef.accuracy, '%'],
+                    children: formatMoveAccuracy(moveDef.accuracy),
                   }),
                   jsxs('span', {
                     className: 'move-panel-item-level',

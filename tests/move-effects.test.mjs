@@ -347,6 +347,45 @@ test('accuracy and evasion stages change the hit chance', () => {
   })
 })
 
+test('always-hit moves ignore accuracy and evasion stages', () => {
+  // Accuracy above 100 is the data's "never misses" marker (Swift, Aerial Ace,
+  // the G-Max moves, ...). Even at -6 accuracy / +6 evasion they must land.
+  assert.ok(moveData.swift.accuracy > 100, 'Swift is stored as an always-hit move')
+  withFixedRandom(0.99, () => {
+    const alwaysHit = calculateDamage(
+        50,
+        100,
+        100,
+        moveData.swift,
+        ['Normal'],
+        ['Normal'],
+        0,
+        0,
+        0,
+        !1,
+        -6,
+        6
+      ),
+      normal = calculateDamage(
+        50,
+        100,
+        100,
+        moveData.tackle,
+        ['Normal'],
+        ['Normal'],
+        0,
+        0,
+        0,
+        !1,
+        -6,
+        6
+      )
+    assert.notEqual(alwaysHit.effectivenessLabel, 'miss')
+    assert.ok(alwaysHit.damage > 0, 'the always-hit move still deals damage')
+    assert.equal(normal.effectivenessLabel, 'miss', 'a 100-accuracy move can still miss')
+  })
+})
+
 test('Leech Seed drains the target into its planter', () => {
   withFixedRandom(0.5, () => {
     const player = battler({

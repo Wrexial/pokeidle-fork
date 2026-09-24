@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
-import { moveCategoryIcons } from '../data/moves.js'
+import { formatMoveAccuracy, moveCategoryIcons } from '../data/moves.js'
 import { heldItems } from '../data/items.js'
 import { statBarColors } from '../data/ui.js'
 import { natureByKey, natureName } from '../data/natures.js'
@@ -467,8 +467,8 @@ export function StatsPanel({
                             jsxs('span', {
                               children: [moveDef.power, ' pw'],
                             }),
-                          jsxs('span', {
-                            children: [moveDef.accuracy, '%'],
+                          jsx('span', {
+                            children: formatMoveAccuracy(moveDef.accuracy),
                           }),
                         ],
                       }),

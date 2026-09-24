@@ -1,6 +1,6 @@
 // Reducer handlers for minigames actions. Split from game/reducer.js.
 
-import { BUG_CONTEST_COST, MINING_COST, QUIZ_COST, ROUTE_ACTIVITIES, SAFARI_COST, routeActivityIds } from '../minigames.js'
+import { BUG_CONTEST_COST, MINING_COST, QUIZ_COST, ROUTE_ACTIVITIES, SAFARI_COST, VOLTORB_FLIP_COST, routeActivityIds } from '../minigames.js'
 import { mapData } from '../../data/gameData.js'
 import { createIdleBattleState } from '../progression.js'
 import { enterMinigame } from '../reducer-helpers.js'
@@ -96,6 +96,31 @@ export function startGameCorner(state, action) {
 }
 
 /**
+ * Handle the `START_VOLTORB_FLIP` action.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function startVoltorbFlip(state, action) {
+  return enterMinigame(
+    state,
+    'voltorbFlip',
+    VOLTORB_FLIP_COST,
+    'You sat down at the Voltorb Flip table.'
+  )
+}
+
+/**
+ * Handle the `START_AUCTION_HOUSE` action.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function startAuctionHouse(state, action) {
+  return enterMinigame(state, 'auctionHouse', 0, 'You took a seat at the Grand Auction House.')
+}
+
+/**
  * Handle the `END_MINIGAME` action.
  * @param {GameState} state
  * @param {GameAction} action
@@ -104,7 +129,9 @@ export function startGameCorner(state, action) {
 export function endMinigame(state, action) {
   return state.phase === 'mining' ||
     state.phase === 'gameCorner' ||
-    state.phase === 'academyQuiz'
+    state.phase === 'academyQuiz' ||
+    state.phase === 'voltorbFlip' ||
+    state.phase === 'auctionHouse'
     ? { ...state, ...createIdleBattleState() }
     : state
 }

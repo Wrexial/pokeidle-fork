@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 const gameData = installGameData()
 
-const { BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL, BUG_CONTEST_RUSTLES, MINIGAME_LOCATIONS, MINING_COST, SLOT_JACKPOT, SLOT_PAYLINES, SLOT_REELS, SLOT_ROWS, SLOT_SPIN_COST, SLOT_SYMBOLS, bugCatchChance, bugContestPrize, bugFleeChance, bugStays, buildContestResults, contestPlayerRank, contestScore, rewardItemName, rollContestBug, rollMiningReward, spinSlots, throwNetBall } = await import(
+const { BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL, BUG_CONTEST_RUSTLES, MINIGAME_LOCATIONS, MINING_COST, SLOT_JACKPOT, SLOT_PAYLINES, SLOT_REELS, SLOT_ROWS, SLOT_SPIN_COST, SLOT_SYMBOLS, VOLTORB_FLIP_COST, VOLTORB_MAX_LEVEL, VOLTORB_SIZE, AUCTION_LOTS, auctionAppraisal, boardCleared, boardExploded, boardHints, bugCatchChance, bugContestPrize, bugFleeChance, bugStays, buildContestResults, canAuctionBid, contestPlayerRank, contestScore, createAuction, createVoltorbBoard, flipVoltorbCell, placeAuctionBid, rewardItemName, rollContestBug, rollMiningReward, spinSlots, throwNetBall, toggleVoltorbMark, voltorbBoardCoins, voltorbCountForLevel, voltorbFlipPrize } = await import(
   '../src/game/minigames.js'
 )
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
@@ -298,5 +298,143 @@ test('every fixed minigame location is a map POI', async () => {
   const { POI_LOCATIONS } = await import('../src/game/minigames.js')
   for (const id of Object.keys(MINIGAME_LOCATIONS)) assert.ok(POI_LOCATIONS.has(id))
   assert.ok(POI_LOCATIONS.has('hoenn-route-111'), 'the Battle Tower is a POI')
-  assert.equal(POI_LOCATIONS.size, 7)
+  assert.equal(POI_LOCATIONS.size, 9)
+})
+
+test('a Voltorb board has the level\u2019s Voltorbs and consistent hints', () => {
+  assert.equal(VOLTORB_SIZE, 5)
+  for (const level of [1, 4, VOLTORB_MAX_LEVEL]) {
+    const board = createVoltorbBoard(level),
+      voltorbs = board.cells.filter((cell) => cell.kind === 'voltorb').length,
+      { rows, cols } = boardHints(board)
+    assert.equal(board.cells.length, VOLTORB_SIZE * VOLTORB_SIZE)
+    assert.equal(voltorbs, voltorbCountForLevel(level))
+    // The hint sums are the values of the non-Voltorb tiles, and the row and
+    // column totals therefore agree.
+    const rowSum = rows.reduce((sum, hint) => sum + hint.sum, 0),
+      colSum = cols.reduce((sum, hint) => sum + hint.sum, 0)
+    assert.equal(rowSum, colSum)
+    assert.equal(
+      rows.reduce((sum, hint) => sum + hint.voltorbs, 0),
+      voltorbs
+    )
+  }
+})
+
+test('flipping clears a board, and a Voltorb ends it', () => {
+  const board = createVoltorbBoard(1),
+    safeIndexes = board.cells
+      .map((cell, index) => (cell.kind === 'voltorb' ? -1 : index))
+      .filter((index) => index >= 0),
+    explodedIndex = board.cells.findIndex((cell) => cell.kind === 'voltorb')
+  let cleared = board
+  for (const index of safeIndexes) cleared = flipVoltorbCell(cleared, index)
+  assert.ok(boardCleared(cleared), 'every non-Voltorb tile is face up')
+  assert.ok(voltorbBoardCoins(cleared) > 0, 'a cleared board banks coins')
+  assert.equal(flipVoltorbCell(cleared, safeIndexes[0]), cleared, 'a flipped tile is ignored')
+
+  const boom = flipVoltorbCell(board, explodedIndex)
+  assert.ok(boardExploded(boom), 'flipping a Voltorb explodes')
+  assert.ok(!boardCleared(boom))
+})
+
+test('tiles can be marked and unmarked while hidden', () => {
+  const board = createVoltorbBoard(1),
+    marked = toggleVoltorbMark(board, 0)
+  assert.equal(marked.cells[0].marked, true)
+  assert.equal(toggleVoltorbMark(marked, 0).cells[0].marked, false)
+})
+
+test('Voltorb Flip pays out a banked run and a deep-run candy', () => {
+  const shallow = voltorbFlipPrize(1200, 1),
+    deep = voltorbFlipPrize(9000, VOLTORB_MAX_LEVEL)
+  assert.equal(shallow.money, 1200)
+  assert.equal(shallow.items.length, 0)
+  assert.ok(deep.items.length > 0)
+  assert.ok(deep.items[0].itemId)
+  assert.notEqual(shallow.label, deep.label)
+})
+
+test('START_VOLTORB_FLIP charges entry and END_MINIGAME returns to idle', () => {
+  const started = gameReducer(
+      { ...initialGameState, phase: 'idle', money: VOLTORB_FLIP_COST + 40 },
+      { type: 'START_VOLTORB_FLIP' }
+    ),
+    broke = gameReducer(
+      { ...initialGameState, phase: 'idle', money: VOLTORB_FLIP_COST - 1 },
+      { type: 'START_VOLTORB_FLIP' }
+    ),
+    ended = gameReducer(started, { type: 'END_MINIGAME' })
+  assert.equal(started.phase, 'voltorbFlip')
+  assert.equal(started.money, 40)
+  assert.equal(broke.phase, 'idle')
+  assert.equal(ended.phase, 'idle')
+})
+
+test('auction lots carry real items and a sensible appraisal', () => {
+  assert.ok(AUCTION_LOTS.length >= 4)
+  for (const lot of AUCTION_LOTS) {
+    assert.ok(lot.value > 0)
+    assert.ok(lot.items.length > 0)
+    for (const item of lot.items) {
+      assert.ok(
+        consumableItems[item.itemId] ||
+          evolutionItems[item.itemId] ||
+          heldItems[item.itemId],
+        `${item.itemId} should be a real item`
+      )
+      assert.ok(item.quantity >= 1)
+      assert.equal(typeof rewardItemName(item.itemId), 'string')
+    }
+    const { low, high } = auctionAppraisal(lot)
+    assert.ok(low > 0 && high > low)
+  }
+})
+
+test('auction bidding raises the price until the rivals drop out', () => {
+  const lot = AUCTION_LOTS.find((candidate) => candidate.id === 'choiceSet')
+  assert.ok(lot)
+  let auction = createAuction(lot, () => 0)
+  assert.equal(auction.highest, null)
+  assert.ok(canAuctionBid(auction, 1e9))
+
+  // Keep raising; the rivals answer at first, then drop out one by one.
+  let guard = 0
+  while (!auction.won && guard < 25) {
+    const next = placeAuctionBid(auction)
+    assert.ok(next.price >= auction.price, 'the price never goes down')
+    auction = next
+    guard++
+  }
+  assert.ok(auction.won, 'bidding past every rival wins the lot')
+  assert.equal(auction.highest, 'player')
+  assert.ok(auction.bidders.every((bidder) => !bidder.active))
+
+  // You cannot bid past your wallet.
+  const opening = createAuction(lot, () => 0)
+  assert.equal(canAuctionBid(opening, opening.price), false)
+  assert.equal(canAuctionBid(opening, opening.price + opening.raise), true)
+})
+
+test('START_AUCTION_HOUSE enters the scene and charges nothing', () => {
+  const started = gameReducer(
+      { ...initialGameState, phase: 'idle', money: 777 },
+      { type: 'START_AUCTION_HOUSE' }
+    ),
+    ended = gameReducer(started, { type: 'END_MINIGAME' })
+  assert.equal(started.phase, 'auctionHouse')
+  assert.equal(started.money, 777)
+  assert.equal(ended.phase, 'idle')
+})
+
+test('winning an auction pays the bid and adds the lot', () => {
+  const next = gameReducer(
+    { ...initialGameState, inventory: {}, money: 20000 },
+    {
+      type: 'CLAIM_MINIGAME_REWARD',
+      payload: { money: -8000, items: [{ itemId: 'fireStone', quantity: 2 }] },
+    }
+  )
+  assert.equal(next.money, 12000)
+  assert.equal(next.inventory.fireStone, 2)
 })

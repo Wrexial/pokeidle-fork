@@ -50,6 +50,8 @@ export function enterMinigame(state, phase, cost = 0, log) {
     state.phase === 'academyQuiz' ||
     state.phase === 'mining' ||
     state.phase === 'gameCorner' ||
+    state.phase === 'voltorbFlip' ||
+    state.phase === 'auctionHouse' ||
     state.phase === 'routeActivity' ||
     state.phase === 'wonderTrade'
   )

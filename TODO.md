@@ -1,6 +1,6 @@
 # TODO
 
-Open ideas and follow-ups. Current game version: **0.19.0**
+Open ideas and follow-ups. Current game version: **0.18.0**
 (`src/data/changelog.js`). Finished work lives in the changelog, not here — this
 file only tracks what is **still open**. See `AGENTS.md` for architecture,
 commands and data conventions.
@@ -287,11 +287,11 @@ by terrain (water routes / forests and gardens) rather than a fixed POI, and
 every minigame now launches from the location panel while you are standing there
 instead of from the League tab.
 
-**Shipped (0.17.0):** fishing rod tiers (Old / Good / Super) gate how deep into
+**Shipped (0.16.0):** fishing rod tiers (Old / Good / Super) gate how deep into
 a route's water species a cast can reach, with a level bonus, and each better
 rod is found by opening another region.
 
-**Shipped (0.18.0):** a Companion (care decays per wild win, feed/play/rest with
+**Shipped (0.17.0):** a Companion (care decays per wild win, feed/play/rest with
 a one-per-win limit, +15% EXP while content) and a Berry Garden (plant Oran /
 Sitrus / Lum Berries, ripen over wild wins, harvest, and blend three into a
 Poffin for +30 friendship), both in the top bar.
@@ -309,10 +309,10 @@ activity is an entry in `ROUTE_ACTIVITIES` and a terrain predicate. Covered by
 **Shipped (0.16.0):** a timing-bar fishing activity that hooks a Water species
 from the route's own table and starts a normal wild battle, plus a Berry
 Foraging counterpart on forested routes.
-**Shipped (0.17.0):** rod tiers gate the rarity of what a cast reaches, fishing
+**Shipped (0.16.0):** rod tiers gate the rarity of what a cast reaches, fishing
 is limited to 30 curated water-rich routes (`FISHING_LOCATIONS`), and a cast only
 ever hooks a Water species.
-**Shipped (0.19.0):** each fishing route has an exclusive Water Pokemon that only
+**Shipped (0.16.0):** each fishing route has an exclusive Water Pokemon that only
 appears on the tiny perfect-cast zone and is removed from the route's normal
 wild table (`fishingExclusiveFor`).
 
@@ -321,7 +321,7 @@ remaining minigame ideas.
 
 ### 29b. Companion / tamagotchi care
 
-**Shipped (0.18.0):** pin a party Pokémon and keep it fed, happy and rested;
+**Shipped (0.17.0):** pin a party Pokémon and keep it fed, happy and rested;
 care decays per wild win, one action per win, and a content companion gives
 +15% EXP (see `src/game/companion.js`). Still open:
 
@@ -334,7 +334,7 @@ care decays per wild win, one action per win, and a content companion gives
       (`src/game/garden.js`).
 - [x] **Berry blending** — blend three berries into a Poffin (friendship +30).
 
-Both shipped in 0.18.0; nothing left here.
+Both shipped in 0.17.0; nothing left here.
 
 Relevant code: the real-time loop and battle-count ticks (`src/hooks.js`
 `useGameLoop`, `tickBattleCounters` in `src/game/progression.js`), the reducer's
@@ -637,24 +637,27 @@ others: a scene component, a `START_*`/`END_MINIGAME` reducer pair, a
 `MINIGAME_LOCATIONS` + `MINIGAME_START_ACTION` + `MINIGAME_INFO` entry, the phase
 added to the pause/busy lists, and tests.
 
-**Shipped (0.21.0):** the Academy Quiz (Paldea, Mesagoza). The rest are open.
+**Shipped (0.16.0):** the Academy Quiz (Paldea), Voltorb Flip (Unova) and the
+Grand Auction House (Kalos). The rest are open.
 
-- [x] **Poké Pelago (Alola)** — **shipped (0.22.0):** a new Alola island hub
-      (off Hau\u2019oli City) hosting companion care (Pat/Brush/Wash +
+- [x] **Poké Pelago (Alola)** — **shipped (0.17.0):** a new Alola island hub
+      (off Hau'oli City) hosting companion care (Pat/Brush/Wash +
       Cleanliness), the Berry Garden, and three passive islands (Bean Farm,
       Training Isle, Isle Caves) staffed with *boxed* Pokemon.
-- [ ] **Voltorb Flip (Unova)** — M. A 5×5 deduction/risk board: each row and
-      column advertises its Voltorb count and score total; flip safe tiles for
-      coins, avoid the bombs.
+- [x] **Voltorb Flip (Unova)** — **shipped (0.16.0):** a 5×5 deduction board
+      at Nimbasa City. Every row and column advertises its Voltorb count and
+      point total; flip the 2s and 3s to bank coins, clear a board to climb a
+      level, and a single Voltorb ends the run.
 - [ ] **Poké Radar chaining (Sinnoh)** — M. Memory/risk: pick the one shaking
       grass patch to extend a chain; a wrong pick breaks it, and longer chains
       give better shiny odds. Feeds the existing shiny chain.
 - [ ] **Dynamax Adventures (Galar)** — L. A roguelike raid gauntlet: choose a
       path through three encounters, pick a teammate after each, then a
       legendary boss. Reuses the combat pipeline.
-- [ ] **Auction House (Kalos/Unova)** — M. Bid against NPCs for rare lots;
-      overbid and you lose. An economic push-your-luck break from the timing
-      games.
+- [x] **Auction House (Kalos)** — **shipped (0.16.0):** the Grand Auction House at
+      Lumiose City. Bid against hidden rival budgets for a lot of items; the
+      appraiser gives a value range, rivals drop out at their own ceilings, and
+      winning the hammer means paying whatever you bid.
 - [ ] **Pokémon Contest (Hoenn)** — M. Appeal scoring: pick a move each round,
       match the contest theme, score against rivals. Reuses the Bug Contest
       ranking/prize UI.

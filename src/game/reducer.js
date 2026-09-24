@@ -12,7 +12,7 @@ import { claimAchievementRewards, claimDailyGift, claimDexRewards, claimQuest, c
 import { buyItem, buyRewardItem, clearHeldItem, sellItem, setAlwaysCatchShinies, setCatchRule, toggleAutoCatch, toggleRouteCatchAll, useItemOnPokemon } from './reducer/items.js'
 import { blendBerries, careCompanion, harvestBerry, plantBerry, setCompanion } from './reducer/care.js'
 import { assignPelago, collectPelago, unassignPelago } from './reducer/pelago.js'
-import { claimMinigameReward, collectMining, endBugContest, endMinigame, endRouteActivity, endSafari, payMinigameFee, startAcademyQuiz, startBugContest, startGameCorner, startMining, startRouteActivity, startSafari } from './reducer/minigames.js'
+import { claimMinigameReward, collectMining, endBugContest, endMinigame, endRouteActivity, endSafari, payMinigameFee, startAcademyQuiz, startAuctionHouse, startBugContest, startGameCorner, startMining, startRouteActivity, startSafari, startVoltorbFlip } from './reducer/minigames.js'
 import { boxToParty, catchPokemon, clearHatchResult, completeEvolution, completeWonderTrade, depositDaycare, evolutionStep, hatchDaycareEgg, partyToBox, releaseDuplicates, releaseHatchling, releasePokemon, reorderBox, reorderParty, setBoxSort, setMoves, setNickname, startEvolution, swapParty, swapPartyBox, toggleFavourite, withdrawDaycare, wonderTrade } from './reducer/pokemon.js'
 import { completeHealing, heal, healParty, healingStep, startHealing } from './reducer/recovery.js'
 import { addLog, clearLevelUp, dismissNotification, pushNotification, setChallengeMonotype, setSpeed, toggleAutoProceed, toggleBrowserNotifications, toggleChallengeLevelScale, toggleChallengeNuzlocke, toggleChallengeRandomizer, toggleColourblindTypes, toggleLargeText, toggleMusic, togglePause, toggleReducedMotion, toggleSfx } from './reducer/settings.js'
@@ -343,6 +343,10 @@ export function gameReducer(state, action) {
       return endSafari(state, action)
     case 'START_ACADEMY_QUIZ':
       return startAcademyQuiz(state, action)
+    case 'START_VOLTORB_FLIP':
+      return startVoltorbFlip(state, action)
+    case 'START_AUCTION_HOUSE':
+      return startAuctionHouse(state, action)
     case 'START_MINING':
       return startMining(state, action)
     case 'START_GAME_CORNER':

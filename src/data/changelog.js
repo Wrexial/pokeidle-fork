@@ -67,6 +67,8 @@ export const CHANGELOG = [
             'Three new route activities join Fishing and Foraging: Rock Smash on cave routes finds Rock and Ground Pokemon, Headbutt on grassy routes finds Normal and Flying Pokemon, and Diving on water routes reaches the deeper Water Pokemon that fishing cannot',
             'Each activity has its own look \u2014 a swinging pickaxe, a marker bobbing up a tree trunk, and a descending depth gauge \u2014 so the timing game never looks the same twice',
             'Paldea\u2019s Mesagoza Academy now runs the Academy Quiz: answer 10 type-matchup questions against a 10-second clock with 3 lives. Most ask which type is super-effective; some ask about immunities. A good score pays money and candy, and a perfect run earns a Rare Candy',
+            'Unova\u2019s Nimbasa City hosts Voltorb Flip: a 5\u00d75 deduction board where every row and column advertises how many Voltorbs and how many points it hides. Flip the 2s and 3s to bank coins, clear a board to climb a level, and a single Voltorb ends the run',
+            'Kalos\u2019s Lumiose City opens the Grand Auction House: bid against hidden rival budgets for a lot of items. The appraiser gives a value range and the rivals drop out at their own ceilings, but win the hammer and you pay whatever you bid \u2014 even over the odds',
           ],
         },
         {

@@ -29,6 +29,8 @@ import { MasterBallScene } from './master-ball-scene.js'
 import { BugContestScene } from './bug-contest-scene.js'
 import { SafariScene } from './safari-scene.js'
 import { AcademyQuizScene } from './academy-quiz-scene.js'
+import { VoltorbFlipScene } from './voltorb-flip-scene.js'
+import { AuctionHouseScene } from './auction-house-scene.js'
 import { MiningScene } from './mining-scene.js'
 import { GameCornerScene } from './game-corner-scene.js'
 import { RouteActivityScene } from './route-activity-scene.js'
@@ -57,6 +59,8 @@ export function BattleScene() {
   if (state.phase === 'bugCatching') return jsx(BugContestScene, {})
   if (state.phase === 'safari') return jsx(SafariScene, {})
   if (state.phase === 'academyQuiz') return jsx(AcademyQuizScene, {})
+  if (state.phase === 'voltorbFlip') return jsx(VoltorbFlipScene, {})
+  if (state.phase === 'auctionHouse') return jsx(AuctionHouseScene, {})
   if (state.phase === 'mining') return jsx(MiningScene, {})
   if (state.phase === 'gameCorner') return jsx(GameCornerScene, {})
   if (state.phase === 'routeActivity') return jsx(RouteActivityScene, {})

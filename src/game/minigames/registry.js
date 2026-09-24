@@ -3,6 +3,7 @@
 import { BUG_CONTEST_COST, BUG_CONTEST_RUSTLES } from './bug-contest.js'
 import { QUIZ_COST, QUIZ_LIVES, QUIZ_QUESTIONS } from './academy-quiz.js'
 import { SAFARI_BALLS, SAFARI_COST } from './safari.js'
+import { VOLTORB_FLIP_COST } from './voltorb-flip.js'
 import { BATTLE_TOWER_LOCATION } from '../../data/config.js'
 import { SLOT_SPIN_COST } from './game-corner.js'
 import { MINING_COST, MINING_DIGS } from './mining.js'
@@ -18,6 +19,8 @@ export const MINIGAME_LOCATIONS = {
   'sinnoh-eterna-city': 'mining',
   safariZone: 'safari',
   'paldea-mesagoza': 'academyQuiz',
+  'unova-nimbasa-city': 'voltorbFlip',
+  'kalos-lumiose-city': 'auctionHouse',
   'alola-poke-pelago': 'pokePelago',
 }
 
@@ -31,6 +34,8 @@ export const MINIGAME_START_ACTION = {
   mining: 'START_MINING',
   safari: 'START_SAFARI',
   academyQuiz: 'START_ACADEMY_QUIZ',
+  voltorbFlip: 'START_VOLTORB_FLIP',
+  auctionHouse: 'START_AUCTION_HOUSE',
 }
 
 /**
@@ -71,6 +76,18 @@ export const MINIGAME_INFO = {
     cost: QUIZ_COST,
     action: 'SIT THE QUIZ',
     hint: `Answer ${QUIZ_QUESTIONS} type-matchup questions against a 10-second clock. A wrong answer or a timeout costs one of your ${QUIZ_LIVES} lives; a good score earns money and candy. Entry is $${QUIZ_COST.toLocaleString()}.`,
+  },
+  voltorbFlip: {
+    title: 'Voltorb Flip',
+    cost: VOLTORB_FLIP_COST,
+    action: 'PLAY VOLTORB FLIP',
+    hint: `Flip tiles on a 5\u00d75 board for coins. Each row and column shows how many Voltorbs and how many points it hides \u2014 a Voltorb ends the run, but clearing every 2 and 3 banks the board and climbs a level. Entry is $${VOLTORB_FLIP_COST.toLocaleString()}.`,
+  },
+  auctionHouse: {
+    title: 'Grand Auction House',
+    cost: 0,
+    action: 'ENTER AUCTION HOUSE',
+    hint: 'Bid against hidden budgets for a lot of items. The appraiser gives a value range; rivals drop out at their own ceilings. Win the hammer and you pay what you bid \u2014 even if that is over the odds.',
   },
   pokePelago: {
     title: 'Poké Pelago',

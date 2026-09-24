@@ -205,6 +205,50 @@ function kantoSave() {
   }
 }
 
+/** A minimal save stood at a fixed minigame location, for scene smoke tests. */
+function minigameSave(region, location, route, unlocked) {
+  const pokemon = {
+    id: '1',
+    speciesKey: 'charmander',
+    name: 'Charmander',
+    types: ['Fire'],
+    level: 30,
+    totalExp: 0,
+    moves: ['tackle', 'ember'],
+    currentHp: 80,
+    maxHp: 80,
+    attack: 45,
+    defense: 40,
+    spAttack: 42,
+    spDefense: 40,
+    speed: 48,
+    ivs: { hp: 31, attack: 31, defense: 31, spAttack: 31, spDefense: 31, speed: 31 },
+    nature: 'adamant',
+    friendship: 70,
+    ability: 'blaze',
+    heldItem: null,
+    isShiny: false,
+  }
+  return {
+    version: 2,
+    savedAt: Date.now(),
+    startRegion: region,
+    playerPokemon: pokemon,
+    party: [pokemon],
+    box: [],
+    nextPokemonId: 2,
+    currentLocation: location,
+    currentRoute: route,
+    unlockedLocations: unlocked,
+    unlockedRegions: [region],
+    inventory: { pokeball: 30, greatball: 10, ultraball: 5 },
+    money: 50000,
+    pokedexSeen: ['charmander'],
+    pokedexCaught: ['charmander'],
+    battleLog: ['Screenshot run'],
+  }
+}
+
 async function main() {
   fs.mkdirSync(OUT, { recursive: true })
   const profile = fs.mkdtempSync(path.join(os.tmpdir(), 'pi-chrome-'))
@@ -349,6 +393,45 @@ async function main() {
       await cdp.screenshot(path.join(OUT, '09-activity-battle.png'))
     } else {
       console.log('WARNING: no activity encounter captured')
+    }
+
+    // Fixed minigames: Voltorb Flip (Unova) and the Auction House (Kalos).
+    const fixedScenes = [
+      [
+        'Voltorb Flip',
+        'unova',
+        'unova-nimbasa-city',
+        'unova-route-4',
+        ['unova-nuvema-town', 'unova-route-4', 'unova-nimbasa-city'],
+        '.voltorb-board',
+        '10-voltorb-flip.png',
+      ],
+      [
+        'Auction House',
+        'kalos',
+        'kalos-lumiose-city',
+        'kalos-route-4',
+        ['kalos-vaniville-town', 'kalos-route-4', 'kalos-lumiose-city'],
+        '.auction-podium',
+        '11-auction-house.png',
+      ],
+    ]
+    for (const [name, region, location, route, unlocked, selector, file] of fixedScenes) {
+      await cdp.eval(
+        `localStorage.setItem('pokemon-idle-save-v2', ${JSON.stringify(
+          JSON.stringify(minigameSave(region, location, route, unlocked))
+        )}); 'ok'`
+      )
+      await cdp.send('Page.navigate', { url: APP_URL })
+      await cdp.waitFor('window.gameDataDebug.status().loaded === true', 20000, `${name} data`)
+      await cdp.eval(
+        `(() => { const b = document.querySelector('.patch-notes-dismiss-btn'); if (b) b.click(); return true })()`
+      )
+      await sleep(600)
+      await cdp.click('.location-minigame-start')
+      await cdp.waitFor(`!!document.querySelector(${JSON.stringify(selector)})`, 5000, name)
+      await cdp.screenshot(path.join(OUT, file))
+      console.log(`${name} scene ok`)
     }
     console.log('done')
   } finally {

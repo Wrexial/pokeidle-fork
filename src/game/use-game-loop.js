@@ -663,6 +663,8 @@ export function useGameLoop() {
       state.phase === 'academyQuiz' ||
       state.phase === 'mining' ||
       state.phase === 'gameCorner' ||
+      state.phase === 'voltorbFlip' ||
+      state.phase === 'auctionHouse' ||
       state.phase === 'routeActivity' ||
       state.phase === 'wonderTrade' ||
       state.paused

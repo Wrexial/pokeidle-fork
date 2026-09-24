@@ -31,6 +31,13 @@ export const CHANGELOG = [
           ],
         },
         {
+          heading: 'Guides',
+          items: [
+            'New Battle Reference page (/reference.html): a searchable breakdown of every move, ability and held item, showing what each one does in this engine and which are still inert. It is generated from the game data, so it stays in step with the engine',
+            'The player guide now covers the Companion, Berry Garden and Poke Pelago, the full line-up of minigames and route activities, and gifts and static encounters, and its ability / move coverage notes are refreshed for the current engine',
+          ],
+        },
+        {
           heading: 'Fixes',
           items: [
             'Wild Pokemon can no longer be caught twice from one battle: the idle loop now waits for a turn / catch to commit before acting again, so a fast battle speed can not replay the same victory and duplicate the catch',

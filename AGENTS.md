@@ -197,6 +197,7 @@ in `GameLayout`) dispatches `DEBUG_MAX_LEVEL` when the Konami code
 | `assets/fonts.css` | Local "Press Start 2P" `@font-face` declarations. |
 | `public/data/*.json` | **The game database** (see below). Served at `/data/...`. |
 | `public/encounter-index.html` | Generated offline "what spawns where" overview (see `tools/generate-encounter-index.cjs`). |
+| `public/reference.html` | Generated offline battle reference: every move, ability and held item with its effect and whether the engine implements it (see `tools/generate-reference.cjs`). |
 | `public/guide.html` | Hand-written player guide (features explained); linked from Settings and the encounter index. |
 | `public/sprites/pokemon/` | Pokémon sprites, named by numeric species/form id (`25.png`, `shiny/25.png`, `back/25.png`, `back/shiny/25.png`, animated gifs under `versions/generation-v/black-white/animated/`). |
 | `public/sprites/trainers/` | Trainer images. |
@@ -610,6 +611,14 @@ One-off scripts used to build the data JSON (not run during dev/build):
   `/encounter-index.html`; sprites use relative `sprites/pokemon/...` paths so
   the file also works when opened directly. Its header links to
   `public/guide.html`, the hand-written player-facing feature guide.
+- `generate-reference.cjs` + `reference-template.html` — build
+  `public/reference.html`, a self-contained battle reference that lists every
+  move, ability and held item with what the engine does with it, marking the
+  ones that are inert. Move data is read live (with `src/data/move-effects.js`
+  applied) so the page always matches the engine, and the curated ability
+  descriptions live in `reference-data.cjs` (`ABILITY_META`). Re-run it after
+  changing moves, abilities or held items. Linked from the guide, the encounter
+  index and Settings.
 - `*.md` in `tools/` (`SUMMARY.md`, `DATA_INTEGRATION.md`,
   `REFACTORING_GUIDE.md`, `QUICKSTART_DATA_INTEGRATION.md`) — historical design
   docs. Some counts/claims there are outdated (e.g. they still say "151

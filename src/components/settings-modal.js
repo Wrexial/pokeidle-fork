@@ -175,7 +175,7 @@ export function SettingsModal({ onClose }) {
                   jsx('p', {
                     className: 'settings-hint',
                     children:
-                      'New here? The player guide explains every feature — regions, catching, breeding, shiny hunting and more.',
+                      'New here? The player guide explains every feature, and the battle reference lists every move, ability and held item.',
                   }),
                   jsx('a', {
                     className: 'settings-guide-btn',
@@ -190,6 +190,13 @@ export function SettingsModal({ onClose }) {
                     target: '_blank',
                     rel: 'noopener noreferrer',
                     children: 'Wild Encounter Index',
+                  }),
+                  jsx('a', {
+                    className: 'settings-link',
+                    href: '/reference.html',
+                    target: '_blank',
+                    rel: 'noopener noreferrer',
+                    children: 'Battle Reference',
                   }),
                   jsxs('div', {
                     className: 'settings-section',

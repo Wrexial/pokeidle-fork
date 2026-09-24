@@ -172,7 +172,10 @@
     <header class="top">
       <h1>Pokémon Idle — Player Guide</h1>
       <span class="sub">A browser-based incremental Pokémon game</span>
-      <nav><a href="/encounter-index.html">Wild Encounter Index →</a></nav>
+      <nav>
+        <a href="/reference.html">Battle Reference →</a>
+        <a href="/encounter-index.html">Encounter Index →</a>
+      </nav>
     </header>
 
     <main>
@@ -192,11 +195,15 @@
           <li><a href="#daycare">Daycare &amp; breeding</a></li>
           <li><a href="#wonder">Wonder Trade</a></li>
           <li><a href="#tower">Battle Tower</a></li>
+          <li><a href="#minigames">Minigames &amp; activities</a></li>
+          <li><a href="#companion">Companion &amp; Poké Pelago</a></li>
+          <li><a href="#gifts">Gifts &amp; static encounters</a></li>
           <li><a href="#shiny">Shiny hunting</a></li>
           <li><a href="#events">Swarms &amp; roamers</a></li>
           <li><a href="#records">Records &amp; achievements</a></li>
           <li><a href="#dex">Pokédex &amp; Shiny Charm</a></li>
           <li><a href="#index">Encounter index</a></li>
+          <li><a href="#reference">Battle reference</a></li>
           <li><a href="#saves">Saves</a></li>
           <li><a href="#status">What works &amp; what's WIP</a></li>
           <li><a href="#secrets">Secrets</a></li>
@@ -273,6 +280,8 @@
           <li><strong>Abilities</strong> and <strong>held items</strong> are live, but only some are implemented — see <a href="#status">What works &amp; what's WIP</a>.</li>
           <li>Moves are learned by levelling; open a Pokémon's stats and use the Manage Moves panel to re-learn its family's moves for free, or pay the <strong>Move Tutor</strong> ($4,000 per move) to teach a TM it can learn.</li>
           <li>Use the speed controls to fast-forward, and the catch selector to batch-apply Repel/Honey.</li>
+          <li><strong>Mega Evolution</strong>: a Mega-capable Pokémon holding the <strong>Mega Stone</strong> transforms for the rest of the battle (attackers take the X forme, others the Y forme), then reverts afterwards.</li>
+          <li>The <a href="/reference.html">Battle Reference</a> lists every move and ability and what the engine does with it.</li>
         </ul>
       </section>
 
@@ -356,7 +365,69 @@
           opponents are fixed and there are no critical hits, misses or damage variance,
           so the result comes down to your team's stats, types, moves, abilities and held
           items. The Gyms tab previews the next floor so you can build a counter before
-          committing. Other regions are planned to get their own minigames instead.
+          committing. Other regions use their own minigames (see below).
+        </p>
+      </section>
+
+      <section id="minigames">
+        <h2><span class="icon">🎲</span>Minigames &amp; activities</h2>
+        <p>
+          Reaching the right place opens that area's minigame in its location panel.
+          Each one takes over the main screen and pauses the idle loop while it runs.
+        </p>
+        <h3>Route activities</h3>
+        <ul>
+          <li><strong>Fishing</strong> on water routes — time the cast bar to hook a Water Pokémon; a perfect cast reaches the route-exclusive catch. Better rods unlock as you open regions: Old → Good → Super.</li>
+          <li><strong>Foraging</strong> in forests and gardens — time the ring for berries and supplies, and a good search can flush out a Grass Pokémon.</li>
+          <li><strong>Rock Smash</strong> on cave routes, <strong>Headbutt</strong> on grassy routes and <strong>Diving</strong> on water routes find Rock/Ground, Normal/Flying and deep Water Pokémon.</li>
+          <li>Activity finds spawn a few levels above the route, have boosted shiny odds and can hold an item. You see the find before the battle with a BATTLE / LET IT GO choice, and can <strong>ATTEMPT CATCH</strong> it directly.</li>
+        </ul>
+        <h3>Regional minigames</h3>
+        <ul>
+          <li><strong>Kanto:</strong> Celadon City's Game Corner slots, Vermilion City's Whack-a-Diglett and the Safari Zone.</li>
+          <li><strong>Johto:</strong> Route 35's Bug Catching Contest, Ecruteak City's Pokéathlon and Goldenrod City's Puzzle League.</li>
+          <li><strong>Hoenn:</strong> Route 111's Battle Tower, Lilycove City's Pokémon Contest, Slateport City's Pokémon Memory and Mauville City's Lights Out.</li>
+          <li><strong>Sinnoh:</strong> Eterna City's Underground and Sandgem Town's Poké Radar.</li>
+          <li><strong>Unova:</strong> Nimbasa City's Voltorb Flip and Virbank City's Pokéstar Studios.</li>
+          <li><strong>Kalos:</strong> Lumiose City's Auction House.</li>
+          <li><strong>Alola:</strong> Heahea City's Battle Royal and the Poké Pelago hub.</li>
+          <li><strong>Galar:</strong> Motostoke's Curry cooking and Hammerlocke's Dynamax Adventures.</li>
+          <li><strong>Paldea:</strong> Mesagoza's Academy Quiz.</li>
+        </ul>
+      </section>
+
+      <section id="companion">
+        <h2><span class="icon">🐾</span>Companion &amp; Poké Pelago</h2>
+        <p>
+          Pin one party Pokémon as your <strong>companion</strong> (the paw button in the
+          top bar) and keep it fed, happy and rested. Its care fades as you win battles
+          and one care action is allowed per win; a companion with all four care stats
+          at 50+ grants <strong>+15% EXP</strong>.
+        </p>
+        <p>
+          In Alola, the <strong>Poké Pelago</strong> hub (from Hau'oli City) hosts
+          companion care, the <strong>Berry Garden</strong> and three passive islands.
+          Plant Oran, Sitrus or Lum Berries in the garden's four plots and harvest them
+          as they ripen, then blend three Berries into a <strong>Poffin</strong> (+30
+          friendship).
+        </p>
+        <ul>
+          <li>The <strong>Bean Farm</strong>, <strong>Training Isle</strong> and
+            <strong>Isle Caves</strong> can each be staffed with boxed Pokémon. They
+            gather Poké Beans, EXP and items/treasures while you battle, banking rewards
+            to collect when you return.</li>
+        </ul>
+      </section>
+
+      <section id="gifts">
+        <h2><span class="icon">🎁</span>Gifts &amp; static encounters</h2>
+        <p>
+          Towns and routes offer one-off NPC <strong>gifts</strong> (item packs, Eevee, a
+          regional starter, a Riolu…) and fixed <strong>static</strong> wild battles (a
+          Snorlax blocking the road, a wiggling Sudowoodo, a honey-tree Munchlax…). Each
+          is claimable once per save and is listed in the location panel, with any badge
+          or Pokédex gate spelled out. A static only counts as claimed once you actually
+          catch it.
         </p>
       </section>
 
@@ -383,7 +454,7 @@
           The <strong>Records</strong> panel (in the Box) summarises your journey: battles
           won, Pokédex and shiny progress, badges, Victory Tokens, per-region completion
           and prestige, and your best Tower floor. It also tracks
-          <strong>21 achievements</strong>.
+          <strong>22 achievements</strong>.
         </p>
       </section>
 
@@ -391,8 +462,9 @@
         <h2><span class="icon">📖</span>Pokédex &amp; Shiny Charm</h2>
         <p>
           The Pokédex has tabs per generation. Completing a generation's national dex
-          unlocks the <strong>Shiny Charm</strong> for that generation's species — so the
-          more you catch, the better everyone's shiny odds get.
+          unlocks the <strong>Shiny Charm</strong> for that generation's species: shiny
+          odds improve from 1 in 8,192 to 1 in 4,096 for the first completed generation,
+          then tighten toward 1 in 256 once every generation is complete.
         </p>
       </section>
 
@@ -402,7 +474,19 @@
           Looking for a specific Pokémon? The
           <a href="/encounter-index.html">Wild Encounter Index</a> is a searchable,
           offline page listing every species, level range and rate for every location
-          across all nine regions.
+          across all nine regions. Looking for what a move or ability actually does?
+          The <a href="/reference.html">Battle Reference</a> breaks down every one.
+        </p>
+      </section>
+
+      <section id="reference">
+        <h2><span class="icon">📋</span>Battle reference</h2>
+        <p>
+          The <a href="/reference.html">Battle Reference</a> is the companion to this
+          guide: a searchable, offline breakdown of every move (with its type, power,
+          accuracy and effect), every ability (with what it does, grouped by effect, and
+          which are still inert) and every held item. It is generated straight from the
+          game data, so it always matches what the engine actually runs.
         </p>
       </section>
 
@@ -418,18 +502,19 @@
       <section id="status">
         <h2><span class="icon">🧪</span>What works &amp; what's WIP</h2>
         <p>
-          The engine is deep but not complete, and a few battle features are easy to
-          misread. This page lists what is fully implemented, what is only partly there,
-          and the quirks worth knowing about — especially <strong>moves</strong> and
-          <strong>abilities</strong>.
+          The engine is deep but not complete. The full, auto-generated
+          <a href="/reference.html">Battle Reference</a> lists every move, ability and
+          held item and what the engine does with it; this section is the short version.
         </p>
 
         <h3>Moves — what actually does something</h3>
         <p>
           A move only works if its effect is one the engine understands. Any move whose
           effect falls outside the list below behaves like a plain attack (if it has
-          power) or does nothing at all (if it is a status move). There are roughly 900
-          moves in the data, so many status moves are still cosmetic.
+          power) or does nothing at all (if it is a status move). Of the 934 moves in
+          the data, about 385 have a recognised effect, 395 more are plain damaging
+          attacks, and the remaining ~154 status moves are still cosmetic — see the
+          <a href="/reference.html#moves">move list</a>.
         </p>
         <ul>
           <li><strong>Damage moves</strong> work, including STAB, the type chart, critical
@@ -453,45 +538,62 @@
           <li><strong>Weather</strong>: Rain Dance, Sunny Day, Sandstorm, Snowscape and
             Hail.</li>
           <li><strong>Terrain</strong>: Electric, Grassy, Misty and Psychic Terrain.</li>
+          <li><strong>Utility</strong>: Wish, Yawn, Encore, Disable, Perish Song,
+            Tailwind, Trick Room, Focus Energy, Aqua Ring, Ingrain, type changes,
+            ability swaps and item tricks.</li>
           <li>Recoil, crash-on-miss, recharge (Hyper Beam), self-destruct and multi-turn
             locks (Outrage-style) are handled.</li>
           <li><strong>Move Tutor</strong>: the Manage Moves panel lists the TMs a Pokemon
             can learn (its real machine move set) and teaches them for $4,000 each.</li>
         </ul>
         <div class="note">
-          <strong>Not yet implemented:</strong> Taunt's full interaction rules and the
-          large tail of one-off utility moves. If it is not in the list above, assume it
-          does little.
+          <strong>Not yet implemented:</strong> the large tail of one-off utility moves.
+          The ~154 status moves not listed above do little.
         </div>
 
         <h3>Abilities — the implemented set</h3>
         <p>
           Every Pokémon rolls one of its real abilities (there is a small chance of the
-          hidden one) and the stats panel shows it. About 65 of the ~300 abilities
-          have an effect so far; the rest are inert. The working ones are:
+          hidden one) and the stats panel shows it. <strong>250 of the 304 abilities</strong>
+          now have an effect — entry and weather/terrain setters, type absorbers,
+          offensive and defensive modifiers, speed abilities, status control, contact
+          and on-hit reactions, on-KO rewards, stat protection, form changes and
+          item/berry abilities. The classes of effect are:
         </p>
         <ul>
-          <li><strong>Entry:</strong> Intimidate, Drizzle, Drought, Sand Stream, Snow
-            Warning, Electric Surge, Grassy Surge, Misty Surge, Psychic Surge.</li>
+          <li><strong>Entry &amp; field:</strong> Intimidate, Drizzle, Drought, Sand
+            Stream, Snow Warning, the four Surges, Hadron Engine, Orichalcum Pulse,
+            Intrepid Sword, Dauntless Shield, Download, Trace, Imposter, Neutralizing
+            Gas, Air Lock, Mold Breaker and friends.</li>
           <li><strong>Type immunity / absorb:</strong> Levitate, Water Absorb, Dry Skin,
             Volt Absorb, Lightning Rod, Motor Drive, Flash Fire, Well-Baked Body, Sap
-            Sipper, Storm Drain.</li>
-          <li><strong>Damage:</strong> Thick Fat, Multiscale, Shadow Shield, Filter, Solid
-            Rock, Prism Armor, Wonder Guard, Magic Guard, Sturdy, Overgrow, Blaze, Torrent,
-            Swarm.</li>
-          <li><strong>Stats:</strong> Huge Power, Pure Power, Guts, Speed Boost, Clear
-            Body, White Smoke, Hyper Cutter, Big Pecks, Keen Eye.</li>
+            Sipper, Storm Drain, Earth Eater, Wonder Guard, Soundproof, Bulletproof.</li>
+          <li><strong>Offence:</strong> Huge Power, Adaptability, Technician, Tough
+            Claws, Sheer Force, Tinted Lens, Sniper, the pinch abilities (Overgrow, Blaze,
+            Torrent, Swarm), Iron Fist, Strong Jaw, Sharpness, Mega Launcher, Protean /
+            Libero and the move-type changers (Normalize, Pixilate…).</li>
+          <li><strong>Defence:</strong> Thick Fat, Multiscale, Shadow Shield, Filter,
+            Solid Rock, Prism Armor, Fluffy, Ice Scales, Fur Coat, Magic Guard, Sturdy,
+            the Ruin quartet.</li>
+          <li><strong>Speed:</strong> Speed Boost, Quick Feet, Unburden, and the weather
+            runners (Swift Swim, Chlorophyll, Sand Rush, Slush Rush).</li>
           <li><strong>Status &amp; weather:</strong> Immunity, Limber, Water Veil,
-            Insomnia, Vital Spirit, Sweet Veil, Magma Armor, Shed Skin, Swift Swim,
-            Chlorophyll, Sand Rush, Slush Rush, Rain Dish, Dry Skin, Ice Body.</li>
-          <li><strong>Contact (when hit):</strong> Static, Flame Body, Poison Point,
-            Effect Spore, Cute Charm, Rough Skin, Iron Barbs.</li>
-          <li><strong>Critical hits:</strong> Super Luck, Sniper, Battle Armor, Shell
-            Armor.</li>
+            Insomnia, Vital Spirit, Sweet Veil, Magma Armor, Comatose, Shed Skin,
+            Hydration, Poison Heal, Rain Dish, Ice Body, Solar Power.</li>
+          <li><strong>Contact &amp; on-hit:</strong> Static, Flame Body, Poison Point,
+            Effect Spore, Cute Charm, Rough Skin, Iron Barbs, Gooey, Mummy, Stamina,
+            Justified, Weak Armor, Anger Shell and more.</li>
+          <li><strong>On-KO &amp; crits:</strong> Moxie, Chilling / Grim Neigh, Beast
+            Boost, Soul-Heart, Aftermath, Innards Out, Super Luck, Sniper, Battle Armor,
+            Shell Armor, Merciless.</li>
         </ul>
         <div class="note">
-          Most switch-out abilities (Regenerator, Natural Cure) and the large tail of
-          situational abilities are not wired up yet.
+          About 54 abilities are still inert — mostly ally/doubles abilities (Battery,
+          Friend Guard, Telepathy), trapping (Arena Trap, Shadow Tag) and information
+          abilities (Frisk, Forewarn). A few working ones are simplified: type absorbers
+          heal 1/4 max HP instead of raising a stat, and Hustle skips its accuracy
+          penalty. See the
+          <a href="/reference.html#abilities">full ability list</a>.
         </div>
 
         <h3>Held items</h3>
@@ -505,6 +607,8 @@
           <li><strong>Choice Band / Specs / Scarf</strong> (+50% stat) and
             <strong>Assault Vest</strong> (+50% Sp. Def). Note: the Choice items do
             <em>not</em> lock you into one move yet.</li>
+          <li><strong>Mega Stone</strong> enables in-battle Mega Evolution for a
+            Mega-capable holder.</li>
           <li><strong>Eviolite</strong> (+50% Def/Sp. Def unless fully evolved),
             <strong>Focus Sash</strong> (survive one KO from full HP).</li>
           <li><strong>Sitrus Berry</strong> and <strong>Lum Berry</strong>.</li>
@@ -517,7 +621,7 @@
           <li><strong>Battle Tower is Hoenn-only</strong> and is a <em>deterministic
             puzzle</em>: each floor's opponent is fixed and there are no crits, misses or
             damage variance. The Gyms tab previews the next floor so you can build a
-            counter. Other regions will get their own minigames later.</li>
+            counter. Other regions use their own minigames (see above).</li>
           <li><strong>Situational balls</strong> only get their bonus in the right
             situation — Quick (one-turn battle), Timer (long battle), Repeat (already in
             the Pokédex), Net (Water/Bug), Dive (water routes), Dusk (caves/night) and
@@ -532,25 +636,15 @@
             of a parent's nature, and moves the hatchling can learn.</li>
           <li><strong>Challenge modes</strong> (Settings): <strong>Randomizer</strong>
             (random wild species), <strong>Level Scaling</strong> (wild levels match your
-            active Pokemon) and <strong>Nuzlocke</strong> (a fainted party Pokemon is
-            released for good \u2014 your last one is spared).</li>
-          <li><strong>Region minigames</strong>: reaching the right place opens that
-            region's activity in the Gyms tab — Celadon City for Kanto's <strong>Game
-            Corner</strong> slots ($200 a spin on a 3×3, 8-line Pokémon machine),
-            Route 35 for Johto's <strong>Bug
-            Catching Contest</strong> (rustle three bushes, then throw a free Net Ball
-            at any Bug-type — legendaries included — for five rustles a run, then a
-            top-3 podium against rival bug catchers; the top three win cash and
-            candy), Eterna City for Sinnoh's <strong>Underground</strong> (pay to dig
-            for stones and treasures), and Route 111 for Hoenn's <strong>Battle
-            Tower</strong>. Each minigame takes over the main screen and pauses the
-            game while it runs. Other regions will get their own.</li>
+            active Pokemon), <strong>Nuzlocke</strong> (a fainted party Pokemon is
+            released for good — your last one is spared) and a <strong>Monotype</strong> run.</li>
+          <li><strong>Region minigames</strong> are covered in full above — each opens
+            from its location's panel and pauses the idle loop while it runs.</li>
         </ul>
 
         <h3>Still to come</h3>
         <ul>
-          <li>Minigames for the remaining regions, more abilities and held items, and
-            the huge back-catalogue of status moves.</li>
+          <li>The remaining ~54 abilities and ~154 status moves.</li>
           <li>Online sync / cloud saves.</li>
         </ul>
       </section>

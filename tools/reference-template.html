@@ -1,0 +1,809 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokémon Idle — Battle Reference</title>
+    <style>
+      :root {
+        --paper: #f4ecd8;
+        --paper-2: #fffaf0;
+        --ink: #2a2118;
+        --muted: #6f5f49;
+        --line: #dccbaa;
+        --accent: #8a1c1c;
+        --gold: #c9a227;
+        --shadow: rgba(60, 40, 15, 0.18);
+        --ok: #2f7d32;
+        --partial: #b06a12;
+        --warn: #9a2c2c;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        font: 14px/1.5 "Segoe UI", Roboto, system-ui, sans-serif;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 20% 0%, #fdf6e4 0%, transparent 55%),
+          var(--paper);
+      }
+      a {
+        color: var(--accent);
+      }
+      .hidden {
+        display: none !important;
+      }
+
+      /* ---- header ---- */
+      .top {
+        position: sticky;
+        top: 0;
+        z-index: 30;
+        background: linear-gradient(#241a10, #3c2b17);
+        color: #f7efdc;
+        border-bottom: 3px solid var(--gold);
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.35);
+        padding: 12px 18px 10px;
+      }
+      .top h1 {
+        margin: 0;
+        font-size: 20px;
+        letter-spacing: 0.5px;
+      }
+      .top h1 small {
+        font-weight: 400;
+        color: #e6d3a3;
+        font-size: 13px;
+        margin-left: 8px;
+      }
+      .top .links {
+        float: right;
+        font-size: 13px;
+        font-weight: 700;
+      }
+      .top .links a {
+        color: #f0d060;
+        text-decoration: none;
+        margin-left: 14px;
+      }
+      .top .links a:hover {
+        text-decoration: underline;
+      }
+      .totals {
+        margin-top: 4px;
+        font-size: 12.5px;
+        color: #e2d3ad;
+      }
+      .totals b {
+        color: #fff;
+      }
+
+      /* ---- tabs ---- */
+      .tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 10px;
+      }
+      .tab {
+        border: 1px solid #6a5233;
+        background: #2f2213;
+        color: #f0e2bd;
+        padding: 6px 13px;
+        border-radius: 8px;
+        font-size: 13px;
+        cursor: pointer;
+      }
+      .tab:hover {
+        background: #4a3620;
+      }
+      .tab.active {
+        background: var(--gold);
+        border-color: var(--gold);
+        color: #2a2118;
+        font-weight: 700;
+      }
+
+      /* ---- layout ---- */
+      main {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 22px 18px 70px;
+      }
+      .panel {
+        background: var(--paper-2);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        box-shadow: 0 1px 0 var(--shadow);
+        padding: 16px 20px;
+        margin-bottom: 16px;
+      }
+      .panel h2 {
+        margin: 0 0 10px;
+        font-size: 18px;
+      }
+      .panel h3 {
+        margin: 18px 0 6px;
+        font-size: 15px;
+        color: var(--accent);
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 3px;
+      }
+      .panel p {
+        margin: 8px 0;
+      }
+      .panel ul {
+        margin: 8px 0;
+        padding-left: 20px;
+      }
+      .panel li {
+        margin: 4px 0;
+      }
+      .lead {
+        color: var(--muted);
+      }
+
+      /* ---- controls ---- */
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+      .search {
+        position: relative;
+        flex: 1 1 240px;
+        max-width: 380px;
+      }
+      .search input,
+      select {
+        width: 100%;
+        padding: 8px 30px 8px 11px;
+        border-radius: 8px;
+        border: 2px solid var(--line);
+        background: #fff;
+        color: var(--ink);
+        font-size: 13.5px;
+        outline: none;
+      }
+      select {
+        width: auto;
+        padding-right: 10px;
+        cursor: pointer;
+      }
+      .search input:focus,
+      select:focus {
+        border-color: var(--gold);
+        box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.28);
+      }
+      .search .clear {
+        position: absolute;
+        right: 4px;
+        top: 50%;
+        transform: translateY(-50%);
+        border: 0;
+        background: transparent;
+        color: var(--muted);
+        font-size: 17px;
+        cursor: pointer;
+        padding: 3px 6px;
+      }
+      .chip {
+        border: 1px solid var(--line);
+        background: #fff;
+        color: var(--ink);
+        padding: 6px 11px;
+        border-radius: 999px;
+        font-size: 12.5px;
+        cursor: pointer;
+      }
+      .chip:hover {
+        background: #f6eeda;
+      }
+      .chip.active {
+        background: var(--gold);
+        border-color: var(--gold);
+        font-weight: 700;
+      }
+      .count {
+        margin-left: auto;
+        font-size: 12.5px;
+        color: var(--muted);
+        white-space: nowrap;
+      }
+
+      /* ---- tables ---- */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+      thead th {
+        position: sticky;
+        top: 108px;
+        background: #efe4c9;
+        text-align: left;
+        padding: 7px 9px;
+        border-bottom: 2px solid var(--line);
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+        color: var(--muted);
+        z-index: 2;
+      }
+      tbody td {
+        padding: 6px 9px;
+        border-bottom: 1px solid rgba(220, 203, 170, 0.6);
+        vertical-align: top;
+      }
+      tbody tr:hover td {
+        background: #f9f2e0;
+      }
+      td.name {
+        font-weight: 600;
+        white-space: nowrap;
+      }
+      td.num {
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+        white-space: nowrap;
+      }
+      td.act {
+        color: #4a3c2a;
+      }
+      tr.inert td.name {
+        color: var(--muted);
+        font-weight: 500;
+      }
+      tr.inert td.act {
+        color: var(--warn);
+        font-style: italic;
+      }
+      tr.attack td.act {
+        color: var(--muted);
+      }
+
+      .type,
+      .cat,
+      .status-tag {
+        display: inline-block;
+        font-size: 10px;
+        font-weight: 700;
+        color: #fff;
+        padding: 1px 7px;
+        border-radius: 999px;
+        background: var(--c, #888);
+        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+        white-space: nowrap;
+      }
+      .cat {
+        background: #8a7a5f;
+        text-shadow: none;
+      }
+      .cat.physical {
+        background: #b4552f;
+      }
+      .cat.special {
+        background: #41679c;
+      }
+      .cat.status {
+        background: #7a7363;
+      }
+      .status-tag.ok {
+        background: var(--ok);
+      }
+      .status-tag.attack {
+        background: #8a7a5f;
+      }
+      .status-tag.inert {
+        background: var(--warn);
+      }
+
+      /* ---- ability grid ---- */
+      .ability-group {
+        margin-bottom: 20px;
+      }
+      .ability-group h3 {
+        margin-top: 14px;
+      }
+      .ability-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 8px;
+      }
+      .ability {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 8px 10px;
+        background: #fff;
+      }
+      .ability.inert {
+        background: #f6efe0;
+        border-style: dashed;
+      }
+      .ability .ability-name {
+        font-weight: 700;
+        margin-bottom: 2px;
+      }
+      .ability.inert .ability-name {
+        color: var(--muted);
+      }
+      .ability .ability-text {
+        font-size: 12.5px;
+        color: #55452f;
+      }
+      .ability.inert .ability-text {
+        color: var(--muted);
+        font-style: italic;
+      }
+      .ability .ability-name .status-tag {
+        float: right;
+      }
+
+      .note {
+        border-left: 3px solid var(--gold);
+        background: #fff6dc;
+        padding: 8px 12px;
+        border-radius: 0 6px 6px 0;
+        margin: 10px 0;
+        font-size: 13.5px;
+      }
+      .empty {
+        text-align: center;
+        padding: 40px 20px;
+        color: var(--muted);
+        font-size: 15px;
+      }
+      code {
+        background: #eadfc4;
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        padding: 0 4px;
+        font-size: 12.5px;
+      }
+      footer {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 0 18px 40px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      @media (max-width: 720px) {
+        .top .links {
+          float: none;
+          display: block;
+          margin-top: 6px;
+        }
+        .top .links a {
+          margin: 0 12px 0 0;
+        }
+        thead th {
+          top: 138px;
+        }
+        td.act {
+          font-size: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="top">
+      <h1>
+        Pokémon Idle — Battle Reference <small>moves, abilities &amp; held items</small>
+        <span class="links">
+          <a href="/guide.html">Player Guide →</a>
+          <a href="/encounter-index.html">Encounter Index →</a>
+        </span>
+      </h1>
+      <div class="totals" id="totals"></div>
+      <div class="tabs" id="tabs">
+        <button class="tab active" data-tab="overview">Overview</button>
+        <button class="tab" data-tab="moves">Moves</button>
+        <button class="tab" data-tab="abilities">Abilities</button>
+        <button class="tab" data-tab="items">Held Items</button>
+      </div>
+    </header>
+
+    <main>
+      <!-- ── Overview ─────────────────────────────────────────────────── -->
+      <section class="panel" data-panel="overview">
+        <h2>How battles work</h2>
+        <p class="lead">
+          Battles run themselves: the two Pokémon trade moves until one faints. This
+          page is the engine's honest inventory — what each move and ability actually
+          does in <em>this</em> game, and which ones are still cosmetic.
+        </p>
+        <p>
+          Use the <strong>Moves</strong>, <strong>Abilities</strong> and
+          <strong>Held Items</strong> tabs above, or search them directly. Rows tagged
+          <span class="status-tag inert">inert</span> have no battle effect yet;
+          <span class="status-tag attack">attack</span> moves simply deal damage.
+        </p>
+
+        <h3>Damage &amp; turn order</h3>
+        <ul>
+          <li>The real type chart, same-type attack bonus (STAB), critical hits and an 85–100% damage roll all apply.</li>
+          <li>Stat stages run from −6 to +6; accuracy and evasion are tracked too.</li>
+          <li>Turn order is by Speed, then by move priority. Tailwind, Trick Room, paralysis and the weather/terrain speed abilities all adjust it.</li>
+          <li>Physical moves make contact unless they are projectiles or ground moves, which matters for contact abilities.</li>
+        </ul>
+
+        <h3>Status conditions</h3>
+        <ul>
+          <li><strong>Poison</strong> deals 1/8 max HP each turn; <strong>badly poisoned</strong> grows from 1/16 upward each turn.</li>
+          <li><strong>Burn</strong> deals 1/16 each turn and halves physical Attack.</li>
+          <li><strong>Sleep</strong> and <strong>freeze</strong> stop the Pokémon acting; sleep counts down, freeze has a 20% thaw chance each turn.</li>
+          <li><strong>Paralysis</strong> halves Speed and has a 25% chance to skip a turn.</li>
+          <li>Type and ability immunities apply (Fire can't burn, Electric can't be paralysed, and so on).</li>
+        </ul>
+
+        <h3>Volatile &amp; field effects</h3>
+        <ul>
+          <li><strong>Confusion</strong> (2–5 turns, 33% self-hit), <strong>infatuation</strong> (Attract), <strong>flinching</strong> and <strong>Curse</strong>.</li>
+          <li><strong>Leech Seed</strong> drains 1/8 max HP into the other side; <strong>Ingrain</strong> and <strong>Aqua Ring</strong> heal the holder each turn.</li>
+          <li><strong>Substitute</strong> absorbs damage, <strong>Protect</strong> blocks the turn, <strong>Taunt</strong> blocks status moves, and <strong>Encore</strong>/<strong>Disable</strong> control the target's moves.</li>
+          <li><strong>Screens</strong> (Reflect, Light Screen, Aurora Veil), <strong>safeguard</strong>, <strong>mist</strong> and <strong>Tailwind</strong>/<strong>Trick Room</strong>.</li>
+          <li><strong>Entry hazards</strong>: Stealth Rock, Spikes, Toxic Spikes and Sticky Web hit Pokémon as they switch in.</li>
+        </ul>
+
+        <h3>Weather &amp; terrain</h3>
+        <ul>
+          <li><strong>Rain</strong> boosts Water and weakens Fire; <strong>sun</strong> does the reverse. Both last five turns.</li>
+          <li><strong>Sandstorm</strong> chips non-Rock/Ground/Steel Pokémon; <strong>snow</strong> chips non-Ice Pokémon. The primal weathers and strong winds add their own rules.</li>
+          <li><strong>Terrain</strong> (electric, grassy, misty, psychic) boosts its type for grounded Pokémon, and Grassy Terrain heals them each turn.</li>
+        </ul>
+
+        <h3>Abilities, held items &amp; moves</h3>
+        <p>
+          Every Pokémon rolls one of its real abilities on creation, and the stats panel
+          shows it. <strong>250 of the 304 abilities</strong> in the data have a real
+          effect — the rest are rolled and displayed but do nothing. The same goes for
+          moves: any status move whose effect the engine doesn't recognise is inert.
+        </p>
+        <div class="note">
+          A few abilities are simplified. For example the type-absorbing abilities heal
+          1/4 max HP in this engine rather than raising a stat, and
+          <strong>Hustle</strong> gives its Attack boost without the accuracy penalty.
+          The per-ability text below describes what this engine does, not the official
+          games.
+        </div>
+      </section>
+
+      <!-- ── Moves ────────────────────────────────────────────────────── -->
+      <section class="panel hidden" data-panel="moves">
+        <h2>Moves</h2>
+        <p class="lead">
+          Every move in the data, with what the engine does with it. Effect descriptions
+          are generated from the live move table.
+        </p>
+        <div class="controls">
+          <label class="search">
+            <input id="moveSearch" type="search" placeholder="Search a move…" autocomplete="off" />
+            <button class="clear hidden" id="moveClear" type="button" aria-label="Clear search">×</button>
+          </label>
+          <div class="chips" id="moveChips">
+            <button class="chip active" data-status="all">All</button>
+            <button class="chip" data-status="implemented">Has an effect</button>
+            <button class="chip" data-status="attack">Plain attack</button>
+            <button class="chip" data-status="inert">Inert</button>
+          </div>
+          <select id="moveType" aria-label="Filter by type"></select>
+          <select id="moveCategory" aria-label="Filter by category">
+            <option value="all">All categories</option>
+            <option value="physical">Physical</option>
+            <option value="special">Special</option>
+            <option value="status">Status</option>
+          </select>
+          <span class="count" id="moveCount"></span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Move</th>
+              <th>Type</th>
+              <th>Cat</th>
+              <th class="num">Pow</th>
+              <th class="num">Acc</th>
+              <th>What it does</th>
+            </tr>
+          </thead>
+          <tbody id="moveRows"></tbody>
+        </table>
+        <div class="empty hidden" id="moveEmpty">No move matches those filters.</div>
+      </section>
+
+      <!-- ── Abilities ────────────────────────────────────────────────── -->
+      <section class="panel hidden" data-panel="abilities">
+        <h2>Abilities</h2>
+        <p class="lead">
+          Every ability a Pokémon can roll, grouped by what it does. Dashed cards are
+          rolled but have no effect yet.
+        </p>
+        <div class="controls">
+          <label class="search">
+            <input id="abilitySearch" type="search" placeholder="Search an ability…" autocomplete="off" />
+            <button class="clear hidden" id="abilityClear" type="button" aria-label="Clear search">×</button>
+          </label>
+          <div class="chips" id="abilityChips">
+            <button class="chip active" data-group="all">All</button>
+          </div>
+          <span class="count" id="abilityCount"></span>
+        </div>
+        <div id="abilityList"></div>
+      </section>
+
+      <!-- ── Held items ───────────────────────────────────────────────── -->
+      <section class="panel hidden" data-panel="items">
+        <h2>Held items</h2>
+        <p class="lead">
+          Bought at Poké Marts and equipped from the Bag's Held Items tab. Wild and
+          trainer Pokémon hold them too.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Effect</th>
+            </tr>
+          </thead>
+          <tbody id="itemRows"></tbody>
+        </table>
+      </section>
+    </main>
+
+    <footer>
+      Generated from <code>public/data/possible-moves.json</code>,
+      <code>public/data/ability-data.json</code> and <code>src/data/items.js</code> on
+      <span id="generatedAt"></span>. Regenerate with
+      <code>node tools/generate-reference.cjs</code>. This is an unofficial fan project;
+      Pokémon and Pokémon character names are trademarks of Nintendo.
+    </footer>
+
+    <script>
+      window.__REFERENCE_DATA__ = __REFERENCE_DATA_JSON__
+    </script>
+    <script>
+      ;(function () {
+        var DATA = window.__REFERENCE_DATA__
+        var TYPE_COLORS = {
+          Normal: '#A8A77A', Fire: '#EE8130', Water: '#6390F0', Electric: '#F7D02C',
+          Grass: '#7AC74C', Ice: '#96D9D6', Fighting: '#C22E28', Poison: '#A33EA1',
+          Ground: '#E2BF65', Flying: '#A98FF3', Psychic: '#F95587', Bug: '#A6B91A',
+          Rock: '#B6A136', Ghost: '#735797', Dragon: '#6F35FC', Dark: '#705746',
+          Steel: '#B7B7CE', Fairy: '#D685AD',
+        }
+        var CAT_LABEL = { physical: 'Physical', special: 'Special', status: 'Status' }
+        var MOVE_STATUS_LABEL = { implemented: 'effect', attack: 'attack', inert: 'inert' }
+        var moveState = { query: '', status: 'all', type: 'all', category: 'all' }
+        var abilityState = { query: '', group: 'all' }
+
+        function esc(text) {
+          return String(text == null ? '' : text).replace(/[&<>"']/g, function (ch) {
+            return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]
+          })
+        }
+        function typeBadge(type) {
+          return '<span class="type" style="--c:' + (TYPE_COLORS[type] || '#888') + '">' + esc(type) + '</span>'
+        }
+        function pct(value) {
+          return value ? value + '%' : '—'
+        }
+
+        // ── tabs ─────────────────────────────────────────────────────────
+        function showTab(name) {
+          Array.prototype.forEach.call(document.querySelectorAll('.tab'), function (tab) {
+            tab.classList.toggle('active', tab.dataset.tab === name)
+          })
+          Array.prototype.forEach.call(document.querySelectorAll('.panel'), function (panel) {
+            panel.classList.toggle('hidden', panel.dataset.panel !== name)
+          })
+          window.scrollTo({ top: 0 })
+        }
+        document.getElementById('tabs').addEventListener('click', function (event) {
+          var tab = event.target.closest('.tab')
+          if (tab) showTab(tab.dataset.tab)
+        })
+
+        // ── moves ────────────────────────────────────────────────────────
+        function renderMoves() {
+          var rows = DATA.moves.map(function (move) {
+            var action = move.text || (move.status === 'inert' ? 'No effect in this engine yet.' : 'Deals damage.')
+            return (
+              '<tr class="' + move.status + '" data-name="' + esc(move.name.toLowerCase()) +
+              '" data-text="' + esc(action.toLowerCase()) +
+              '" data-type="' + esc(move.type) + '" data-category="' + esc(move.category) +
+              '" data-status="' + move.status + '">' +
+              '<td class="name">' + esc(move.name) + '</td>' +
+              '<td>' + typeBadge(move.type) + '</td>' +
+              '<td><span class="cat ' + esc(move.category) + '">' + esc(CAT_LABEL[move.category] || move.category) + '</span></td>' +
+              '<td class="num">' + (move.power || '—') + '</td>' +
+              '<td class="num">' + pct(move.accuracy) + '</td>' +
+              '<td class="act">' + esc(action) + '</td></tr>'
+            )
+          })
+          document.getElementById('moveRows').innerHTML = rows.join('')
+        }
+        function applyMoveFilters() {
+          var query = moveState.query.trim().toLowerCase()
+          var visible = 0
+          Array.prototype.forEach.call(document.querySelectorAll('#moveRows tr'), function (row) {
+            var match =
+              (moveState.status === 'all' || row.dataset.status === moveState.status) &&
+              (moveState.type === 'all' || row.dataset.type === moveState.type) &&
+              (moveState.category === 'all' || row.dataset.category === moveState.category) &&
+              (!query || row.dataset.name.indexOf(query) !== -1 || row.dataset.text.indexOf(query) !== -1)
+            row.classList.toggle('hidden', !match)
+            if (match) visible++
+          })
+          document.getElementById('moveCount').textContent = visible + ' moves'
+          document.getElementById('moveEmpty').classList.toggle('hidden', visible > 0)
+        }
+        function initMoves() {
+          var types = {}
+          DATA.moves.forEach(function (move) { types[move.type] = 1 })
+          var options = ['<option value="all">All types</option>']
+          Object.keys(types).sort().forEach(function (type) {
+            options.push('<option value="' + esc(type) + '">' + esc(type) + '</option>')
+          })
+          document.getElementById('moveType').innerHTML = options.join('')
+          renderMoves()
+
+          var search = document.getElementById('moveSearch')
+          var clear = document.getElementById('moveClear')
+          search.addEventListener('input', function () {
+            moveState.query = search.value
+            clear.classList.toggle('hidden', !search.value)
+            applyMoveFilters()
+          })
+          clear.addEventListener('click', function () {
+            search.value = ''
+            moveState.query = ''
+            clear.classList.add('hidden')
+            applyMoveFilters()
+            search.focus()
+          })
+          document.getElementById('moveChips').addEventListener('click', function (event) {
+            var chip = event.target.closest('.chip')
+            if (!chip) return
+            moveState.status = chip.dataset.status
+            Array.prototype.forEach.call(document.querySelectorAll('#moveChips .chip'), function (el) {
+              el.classList.toggle('active', el === chip)
+            })
+            applyMoveFilters()
+          })
+          document.getElementById('moveType').addEventListener('change', function (event) {
+            moveState.type = event.target.value
+            applyMoveFilters()
+          })
+          document.getElementById('moveCategory').addEventListener('change', function (event) {
+            moveState.category = event.target.value
+            applyMoveFilters()
+          })
+          applyMoveFilters()
+        }
+
+        // ── abilities ────────────────────────────────────────────────────
+        function renderAbilities() {
+          var order = DATA.groupLabels.map(function (pair) { return pair[0] })
+          var labels = {}
+          DATA.groupLabels.forEach(function (pair) { labels[pair[0]] = pair[1] })
+          var byGroup = {}
+          DATA.abilities.forEach(function (ability) {
+            ;(byGroup[ability.group] = byGroup[ability.group] || []).push(ability)
+          })
+          var html = order
+            .filter(function (group) { return byGroup[group] && byGroup[group].length })
+            .map(function (group) {
+              var cards = byGroup[group].map(function (ability) {
+                var tag = ability.implemented
+                  ? '<span class="status-tag ok">works</span>'
+                  : '<span class="status-tag inert">inert</span>'
+                var text = ability.text || 'No effect in this engine yet.'
+                return (
+                  '<div class="ability ' + (ability.implemented ? '' : 'inert') +
+                  '" data-name="' + esc(ability.name.toLowerCase()) + '" data-group="' + esc(group) +
+                  '" data-text="' + esc(text.toLowerCase()) + '">' +
+                  '<div class="ability-name">' + tag + esc(ability.name) + '</div>' +
+                  '<div class="ability-text">' + esc(text) + '</div></div>'
+                )
+              })
+              return (
+                '<div class="ability-group" data-group="' + esc(group) + '">' +
+                '<h3>' + esc(labels[group] || group) + '</h3>' +
+                '<div class="ability-grid">' + cards.join('') + '</div></div>'
+              )
+            })
+            .join('')
+          document.getElementById('abilityList').innerHTML = html
+        }
+        function applyAbilityFilters() {
+          var query = abilityState.query.trim().toLowerCase()
+          var visible = 0
+          Array.prototype.forEach.call(document.querySelectorAll('#abilityList .ability'), function (card) {
+            var match =
+              (abilityState.group === 'all' || card.dataset.group === abilityState.group) &&
+              (!query || card.dataset.name.indexOf(query) !== -1 || card.dataset.text.indexOf(query) !== -1)
+            card.classList.toggle('hidden', !match)
+            if (match) visible++
+          })
+          Array.prototype.forEach.call(document.querySelectorAll('#abilityList .ability-group'), function (group) {
+            var shown = group.querySelectorAll('.ability:not(.hidden)').length
+            group.classList.toggle('hidden', shown === 0)
+          })
+          document.getElementById('abilityCount').textContent = visible + ' abilities'
+        }
+        function initAbilities() {
+          var usedGroups = {}
+          DATA.abilities.forEach(function (ability) { usedGroups[ability.group] = 1 })
+          var chips = ['<button class="chip active" data-group="all">All</button>']
+          DATA.groupLabels.forEach(function (pair) {
+            if (!usedGroups[pair[0]]) return
+            var count = DATA.abilities.filter(function (a) { return a.group === pair[0] }).length
+            chips.push('<button class="chip" data-group="' + esc(pair[0]) + '">' + esc(pair[1]) + ' (' + count + ')</button>')
+          })
+          document.getElementById('abilityChips').innerHTML = chips.join('')
+          renderAbilities()
+
+          var search = document.getElementById('abilitySearch')
+          var clear = document.getElementById('abilityClear')
+          search.addEventListener('input', function () {
+            abilityState.query = search.value
+            clear.classList.toggle('hidden', !search.value)
+            applyAbilityFilters()
+          })
+          clear.addEventListener('click', function () {
+            search.value = ''
+            abilityState.query = ''
+            clear.classList.add('hidden')
+            applyAbilityFilters()
+            search.focus()
+          })
+          document.getElementById('abilityChips').addEventListener('click', function (event) {
+            var chip = event.target.closest('.chip')
+            if (!chip) return
+            abilityState.group = chip.dataset.group
+            Array.prototype.forEach.call(document.querySelectorAll('#abilityChips .chip'), function (el) {
+              el.classList.toggle('active', el === chip)
+            })
+            applyAbilityFilters()
+          })
+          applyAbilityFilters()
+        }
+
+        // ── held items ───────────────────────────────────────────────────
+        function renderItems() {
+          document.getElementById('itemRows').innerHTML = DATA.items
+            .map(function (item) {
+              return (
+                '<tr><td class="name">' + esc(item.name) + '</td>' +
+                '<td class="act">' + esc(item.description) + '</td></tr>'
+              )
+            })
+            .join('')
+        }
+
+        function init() {
+          var counts = DATA.counts
+          document.getElementById('totals').innerHTML =
+            '<b>' + counts.moves + '</b> moves &middot; <b>' + counts.implementedMoves +
+            '</b> with an effect &middot; <b>' + counts.implementedAbilities + '/' + counts.abilities +
+            '</b> abilities live &middot; <b>' + counts.items + '</b> held items'
+          document.getElementById('generatedAt').textContent = new Date(DATA.generatedAt).toLocaleString()
+
+          initMoves()
+          initAbilities()
+          renderItems()
+        }
+
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init)
+        else init()
+      })()
+    </script>
+  </body>
+</html>

@@ -2,18 +2,9 @@
 
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { pokemonDisplayName } from '../game/pokemon.js'
+import { statusLabel } from '../data/ui.js'
 import { ExpBar } from './exp-bar.js'
 import { HpBar } from './hp-bar.js'
-
-/** Short labels for the battle status badge. */
-/** @type {Record<string, string>} */
-const STATUS_LABELS = {
-  poison: 'PSN',
-  burn: 'BRN',
-  freeze: 'FRZ',
-  sleep: 'SLP',
-  flinching: 'FLN',
-}
 
 /** @param {{ pokemon: Pokemon, status?: string | null }} props */
 export function PlayerInfoBox({ pokemon, status }) {
@@ -32,11 +23,12 @@ export function PlayerInfoBox({ pokemon, status }) {
             className: 'info-pokemon-name',
             children: pokemonDisplayName(pokemon).toUpperCase(),
           }),
-          status &&
-            jsx('span', {
-              className: `status-badge status-${status}`,
-              children: STATUS_LABELS[status] ?? status,
-            }),
+          // Rendered even with no status so the name row never changes width
+          // when a status wears off or is applied mid-battle.
+          jsx('span', {
+            className: `status-badge${status ? ` status-${status}` : ' status-empty'}`,
+            children: status ? statusLabel(status) : '\u00a0',
+          }),
           jsxs('span', {
             className: 'info-pokemon-level',
             children: ['Lv.', pokemon.level],

@@ -48,6 +48,30 @@ export const MOBILE_BREAKPOINT = 768
 
 export const DESIGN_WIDTH = 560
 
+/**
+ * Three-letter battle status abbreviations shown on the info nameplates.
+ * @type {Record<string, string>}
+ */
+export const statusLabels = {
+  poison: 'PSN',
+  toxic: 'TOX',
+  burn: 'BRN',
+  freeze: 'FRZ',
+  sleep: 'SLP',
+  paralysis: 'PAR',
+  flinching: 'FLN',
+}
+
+/**
+ * The three-letter label for a battle status, falling back to the first three
+ * letters so an unmapped status can never widen the nameplate.
+ * @param {string} status
+ * @returns {string}
+ */
+export function statusLabel(status) {
+  return statusLabels[status] ?? status.slice(0, 3).toUpperCase()
+}
+
 /** @type {Record<string, string>} */
 export const statBarColors = {
     hp: '#60a040',

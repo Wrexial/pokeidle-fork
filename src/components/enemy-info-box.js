@@ -1,18 +1,9 @@
 // Split from a grouped component file — see tools/decompile/split-components.mjs
 
 import { jsx, jsxs } from 'react/jsx-runtime'
+import { statusLabel } from '../data/ui.js'
 import { DexBallBadge } from './dex-ball-badge.js'
 import { HpBar } from './hp-bar.js'
-
-/** Short labels for the battle status badge. */
-/** @type {Record<string, string>} */
-const STATUS_LABELS = {
-  poison: 'PSN',
-  burn: 'BRN',
-  freeze: 'FRZ',
-  sleep: 'SLP',
-  flinching: 'FLN',
-}
 
 /** @param {{ pokemon: BattlePokemon, dexStatus?: 'seen' | 'caught' | 'shiny' | null }} props */
 export function EnemyInfoBox({ pokemon, dexStatus }) {
@@ -35,11 +26,14 @@ export function EnemyInfoBox({ pokemon, dexStatus }) {
             status: dexStatus,
             size: 11,
           }),
-          pokemon.status &&
-            jsx('span', {
-              className: `status-badge status-${pokemon.status}`,
-              children: STATUS_LABELS[pokemon.status] ?? pokemon.status,
-            }),
+          // Rendered even with no status so the name row never changes width
+          // when a status wears off or is applied mid-battle.
+          jsx('span', {
+            className: `status-badge${
+              pokemon.status ? ` status-${pokemon.status}` : ' status-empty'
+            }`,
+            children: pokemon.status ? statusLabel(pokemon.status) : '\u00a0',
+          }),
           jsxs('span', {
             className: 'info-pokemon-level',
             children: ['Lv.', pokemon.level],

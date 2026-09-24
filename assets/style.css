@@ -482,20 +482,40 @@ img {
 }
 
 .status-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    box-sizing: border-box;
+    width: 36px;
     font-size: 8px;
     font-weight: 700;
     padding: 1px 4px;
     border-radius: 3px;
     letter-spacing: .5px;
+    white-space: nowrap;
     color: #fff
+}
+
+.status-empty {
+    visibility: hidden
 }
 
 .status-poison {
     background: #a040a0
 }
 
+.status-toxic {
+    background: #6a2c8a
+}
+
 .status-burn {
     background: #e07030
+}
+
+.status-paralysis {
+    background: #d8b020;
+    color: #302810
 }
 
 .status-freeze {

@@ -107,6 +107,20 @@ export function toggleBrowserNotifications(state, action) {
 }
 
 /**
+ * Handle the `TOGGLE_MART_COLLAPSED` action. Persisted so a minimised mart
+ * stays minimised the next time the player opens any mart.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function toggleMartCollapsed(state, action) {
+  return {
+    ...state,
+    martCollapsed: !state.martCollapsed,
+  }
+}
+
+/**
  * Handle the `TOGGLE_REDUCED_MOTION` action.
  * @param {GameState} state
  * @param {GameAction} action

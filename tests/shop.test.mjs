@@ -18,6 +18,7 @@ const {
 } = await import('../src/data/items.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 const { isActiveEffectItem } = await import('../src/game/progression.js')
+const { regionMartIds, regionalStockForMart } = await import('../src/game/shop.js')
 
 const allStandardItems = [
     ...coreMartItems,
@@ -70,6 +71,58 @@ test('every held battle item is sold by exactly one region', () => {
   for (const itemId of Object.keys(heldItems))
     assert.ok(sold.includes(itemId), `${itemId} is sold by no region`)
   assert.equal(new Set(sold).size, sold.length, 'a held item is sold by two regions')
+})
+
+test('marts split the region advanced stock instead of all selling it', () => {
+  for (const [region, entries] of Object.entries(regionalMartItems)) {
+    const marts = regionMartIds(region)
+    if (entries.length <= 1 || marts.length <= 1) continue
+    const stocks = marts.map((id) => regionalStockForMart(region, id).map((entry) => entry.itemId)),
+      full = entries.length
+    for (const stock of stocks)
+      assert.ok(stock.length < full, `${region} mart sells the whole regional list`)
+    assert.ok(
+      stocks.some(
+        (stock, index) => stock.join(',') !== stocks[(index + 1) % stocks.length].join(',')
+      ),
+      `${region} marts all sell the same shelves`
+    )
+    const covered = new Set(stocks.flat())
+    for (const { itemId } of entries)
+      assert.ok(covered.has(itemId), `${itemId} is sold by no ${region} mart`)
+  }
+})
+
+test('buying balls awards a free Premier Ball per 10', () => {
+  const state = { ...initialGameState, money: 1e6, inventory: {} },
+    nine = gameReducer(state, { type: 'BUY_ITEM', payload: { itemId: 'pokeball', quantity: 9 } }),
+    ten = gameReducer(state, { type: 'BUY_ITEM', payload: { itemId: 'pokeball', quantity: 10 } }),
+    hundred = gameReducer(state, {
+      type: 'BUY_ITEM',
+      payload: { itemId: 'ultraball', quantity: 100 },
+    })
+  assert.equal(nine.inventory.premierball ?? 0, 0)
+  assert.equal(ten.inventory.pokeball, 10)
+  assert.equal(ten.inventory.premierball, 1)
+  assert.equal(hundred.inventory.ultraball, 100)
+  assert.equal(hundred.inventory.premierball, 10)
+})
+
+test('the Premier Ball cannot be bought', () => {
+  assert.equal(pokeBalls.premierball.buyPrice, null)
+  assert.ok(!coreMartItems.some((entry) => entry.itemId === 'premierball'))
+  const state = { ...initialGameState, money: 1e6, inventory: {} },
+    bought = gameReducer(state, {
+      type: 'BUY_ITEM',
+      payload: { itemId: 'premierball', quantity: 1 },
+    })
+  assert.equal(bought, state, 'a Premier Ball purchase is a no-op')
+})
+
+test('TOGGLE_MART_COLLAPSED persists the mart collapse state', () => {
+  const collapsed = gameReducer(initialGameState, { type: 'TOGGLE_MART_COLLAPSED' })
+  assert.equal(collapsed.martCollapsed, true)
+  assert.equal(gameReducer(collapsed, { type: 'TOGGLE_MART_COLLAPSED' }).martCollapsed, false)
 })
 
 test('BUY_ITEM buys a held battle item into the bag', () => {

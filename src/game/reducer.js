@@ -16,7 +16,7 @@ import { claimGift, startStaticEncounter } from './reducer/gifts.js'
 import { claimMinigameReward, collectMining, endBugContest, endMinigame, endRouteActivity, endSafari, payMinigameFee, startAcademyQuiz, startAuctionHouse, startBattleRoyal, startBugContest, startContest, startCurry, startDynamaxAdventures, startGameCorner, startLightsOut, startMemory, startMining, startPokeathlon, startPokeRadar, startPokestar, startPuzzleLeague, startRouteActivity, startSafari, startVoltorbFlip, startWhack } from './reducer/minigames.js'
 import { boxToParty, catchPokemon, clearHatchResult, completeEvolution, completeWonderTrade, depositDaycare, evolutionStep, hatchDaycareEgg, partyToBox, releaseDuplicates, releaseHatchling, releasePokemon, reorderBox, reorderParty, setBoxSort, setMoves, setNickname, startEvolution, swapParty, swapPartyBox, toggleFavourite, withdrawDaycare, wonderTrade } from './reducer/pokemon.js'
 import { completeHealing, heal, healParty, healingStep, startHealing } from './reducer/recovery.js'
-import { addLog, clearLevelUp, dismissNotification, pushNotification, setChallengeMonotype, setSpeed, toggleAutoProceed, toggleBrowserNotifications, toggleChallengeLevelScale, toggleChallengeNuzlocke, toggleChallengeRandomizer, toggleColourblindTypes, toggleLargeText, toggleMusic, togglePause, toggleReducedMotion, toggleSfx } from './reducer/settings.js'
+import { addLog, clearLevelUp, dismissNotification, pushNotification, setChallengeMonotype, setSpeed, toggleAutoProceed, toggleBrowserNotifications, toggleChallengeLevelScale, toggleChallengeNuzlocke, toggleChallengeRandomizer, toggleColourblindTypes, toggleLargeText, toggleMartCollapsed, toggleMusic, togglePause, toggleReducedMotion, toggleSfx } from './reducer/settings.js'
 import { loadSave, phaseIdle, prestigeRegion, resetEliteFour, selectStarter, travel, unlockRegion } from './reducer/world.js'
 
 /** @type {GameState} */
@@ -129,6 +129,8 @@ export const initialGameState = {
   colourblindTypes: !1,
   /** Uniformly scale the UI up for readability. */
   largeText: !1,
+  /** Whether the town Poke Mart starts collapsed (persisted UI preference). */
+  martCollapsed: !1,
   /** Background music (off by default; the AudioContext starts on first use). */
   musicEnabled: !1,
   /** Sound effects for notable events (on by default). */
@@ -326,6 +328,8 @@ export function gameReducer(state, action) {
       return toggleColourblindTypes(state, action)
     case 'TOGGLE_LARGE_TEXT':
       return toggleLargeText(state, action)
+    case 'TOGGLE_MART_COLLAPSED':
+      return toggleMartCollapsed(state, action)
     case 'TOGGLE_MUSIC':
       return toggleMusic(state, action)
     case 'TOGGLE_SFX':

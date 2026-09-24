@@ -105,8 +105,8 @@ export const pokeBalls = {
     premierball: {
       id: 'premierball',
       name: 'Premier Ball',
-      description: 'A commemorative ball with a standard catch rate.',
-      buyPrice: 200,
+      description: 'A commemorative ball with a standard catch rate. Not for sale \u2014 one comes free with every 10 balls you buy.',
+      buyPrice: null,
       ballModifier: 1,
     },
     safariball: {
@@ -495,7 +495,6 @@ export const valuableDropTable = [
  * `regionalMartItems` below, so marts don't all sell the same shelves.
  */
 export const coreMartItems = [
-  { itemId: 'premierball' },
   { itemId: 'potion' },
   { itemId: 'oranBerry' },
   { itemId: 'superPotion', unlockWildBattlesWon: 40 },

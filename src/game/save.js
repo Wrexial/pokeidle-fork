@@ -566,6 +566,7 @@ export function repairSave(saved) {
     reducedMotion: !!saved.reducedMotion,
     colourblindTypes: !!saved.colourblindTypes,
     largeText: !!saved.largeText,
+    martCollapsed: !!saved.martCollapsed,
     musicEnabled: !!saved.musicEnabled,
     // SFX default on for saves that predate the setting.
     sfxEnabled: saved.sfxEnabled === void 0 ? true : !!saved.sfxEnabled,
@@ -700,6 +701,7 @@ export const SAVED_STATE_KEYS = [
   'reducedMotion',
   'colourblindTypes',
   'largeText',
+  'martCollapsed',
   'musicEnabled',
   'sfxEnabled',
   'challengeRandomizer',

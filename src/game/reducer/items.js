@@ -18,15 +18,27 @@ export function buyItem(state, action) {
   if (ball && ball.buyPrice) {
     const cost = ball.buyPrice * quantity
     if (state.money < cost) return state
-    const owned = state.inventory[itemId] ?? 0
+    const owned = state.inventory[itemId] ?? 0,
+      // Buying balls earns free Premier Balls: one per full 10 bought.
+      premierBonus = Math.floor(quantity / 10),
+      inventory = {
+        ...state.inventory,
+        [itemId]: owned + quantity,
+        ...(premierBonus > 0
+          ? { premierball: (state.inventory.premierball ?? 0) + premierBonus }
+          : {}),
+      }
     return {
       ...state,
       money: state.money - cost,
-      inventory: {
-        ...state.inventory,
-        [itemId]: owned + quantity,
-      },
-      battleLog: [...state.battleLog, `Bought ${quantity}x ${ball.name}!`].slice(-50),
+      inventory,
+      battleLog: [
+        ...state.battleLog,
+        `Bought ${quantity}x ${ball.name}!`,
+        ...(premierBonus > 0
+          ? [`Obtained ${premierBonus}x Premier Ball!`]
+          : []),
+      ].slice(-50),
     }
   }
   if (isActiveEffectItem(itemId)) {

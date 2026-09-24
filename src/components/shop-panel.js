@@ -2,10 +2,11 @@
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
-import { activeItems, consumableItems, coreMartItems, heldItems, pokeBalls, regionalMartItems } from '../data/items.js'
+import { activeItems, consumableItems, coreMartItems, heldItems, pokeBalls } from '../data/items.js'
 import { mapData } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { isActiveEffectItem } from '../game/progression.js'
+import { regionalStockForMart } from '../game/shop.js'
 import { BallShopRow } from './ball-shop-row.js'
 import { ItemShopRow } from './item-shop-row.js'
 
@@ -13,22 +14,24 @@ import { ItemShopRow } from './item-shop-row.js'
 export function ShopPanel({ shopDef }) {
   const { state, dispatch } = useGame(),
     [qtyMode, setQtyMode] = React.useState(/** @type {number | 'max'} */ (1)),
-    [open, setOpen] = React.useState(true),
+    open = !state.martCollapsed,
     regionId = mapData[state.currentLocation]?.region ?? 'kanto',
+    // This mart's slice of the region's advanced stock, so every town's shelves
+    // differ instead of all selling the whole regional list.
+    regionalStock = React.useMemo(
+      () => regionalStockForMart(regionId, state.currentLocation),
+      [regionId, state.currentLocation]
+    ),
     // Location stock wins over the shared core/region stock, and a duplicate
     // item id is only shown once so a mart never repeats a shelf.
     stock = React.useMemo(() => {
       const seen = new Set()
-      return [
-        ...shopDef.items,
-        ...coreMartItems,
-        ...(regionalMartItems[regionId] ?? []),
-      ].filter((entry) => {
+      return [...shopDef.items, ...coreMartItems, ...regionalStock].filter((entry) => {
         if (seen.has(entry.itemId)) return false
         seen.add(entry.itemId)
         return true
       })
-    }, [shopDef, regionId])
+    }, [shopDef, regionalStock])
   return jsxs('div', {
     className: 'shop-panel',
     children: [
@@ -37,7 +40,7 @@ export function ShopPanel({ shopDef }) {
         children: [
           jsxs('button', {
             className: 'shop-toggle',
-            onClick: () => setOpen((value) => !value),
+            onClick: () => dispatch({ type: 'TOGGLE_MART_COLLAPSED' }),
             'aria-expanded': open,
             title: open ? 'Hide shop' : 'Show shop',
             children: [

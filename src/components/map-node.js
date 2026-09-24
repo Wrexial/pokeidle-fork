@@ -3,7 +3,7 @@
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { formatCooldown } from '../game/progression.js'
-import { FISHING_LOCATIONS, POI_LOCATIONS } from '../game/minigames.js'
+import { FISHING_LOCATIONS, POI_LOCATIONS, minigameNameForLocation } from '../game/minigames.js'
 
 /** @param {{ location: MapLocation, isCurrent: boolean, isUnlocked: boolean, isClickable: boolean, onClick: () => void, cooldownEnd?: number, swarmLabel?: string | null }} props */
 export
@@ -23,6 +23,7 @@ function MapNode({
     isZone = location.type === 'zone',
     isPoi = isUnlocked && POI_LOCATIONS.has(location.id),
     isFishingSpot = isUnlocked && FISHING_LOCATIONS.has(location.id),
+    minigameName = isUnlocked ? minigameNameForLocation(location.id) : null,
     locationName = isUnlocked ? location.name : '???',
     timeNow = Date.now(),
     raidOnCooldown = isRaid && cooldownEnd != null && timeNow < cooldownEnd
@@ -50,9 +51,14 @@ function MapNode({
       },
       onClick: isClickable ? onClick : void 0,
       title: isUnlocked
-        ? swarmLabel
-          ? `${location.description} \u2014 Swarm: ${swarmLabel}`
-          : location.description
+        ? [
+            location.description,
+            minigameName ? `Minigame: ${minigameName}` : null,
+            isFishingSpot ? 'Fishing spot' : null,
+            swarmLabel ? `Swarm: ${swarmLabel}` : null,
+          ]
+            .filter(Boolean)
+            .join(' \u2014 ')
         : 'Unknown location',
       onMouseEnter: () => setHovering(!0),
       onMouseLeave: () => setHovering(!1),
@@ -73,6 +79,7 @@ function MapNode({
         isPoi &&
           jsx('span', {
             className: 'map-node-poi',
+            title: minigameName ?? 'Minigame',
             children: '+',
           }),
         isFishingSpot &&

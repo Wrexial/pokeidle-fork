@@ -92,6 +92,7 @@ export const CHANGELOG = [
             'Johto\u2019s Goldenrod City adds the Pok\u00e9mon Puzzle League: swap adjacent tiles to line up three or more, clear them in cascades and score as much as you can in 12 swaps',
             'Hoenn\u2019s Slateport City adds Pok\u00e9mon Memory: flip cards two at a time to find all eight matching pairs, with fewer flips scoring better',
             'Kanto\u2019s Vermilion City adds Whack-a-Diglett: tap each Diglett before it ducks back down and leave the Zubat alone across a 20-second round',
+            'Every minigame is now explicitly tied to its map area: the Town Map tooltip for a point of interest names the minigame based there',
           ],
         },
         {

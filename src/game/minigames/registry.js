@@ -14,6 +14,7 @@ import { POKESTAR_COST } from './pokestar.js'
 import { MATCH3_COST, MATCH3_MOVES } from './match3.js'
 import { MEMORY_COST, MEMORY_PAIRS } from './memory.js'
 import { WHACK_COST, WHACK_DURATION_MS } from './whack.js'
+import { mapData } from '../../data/gameData.js'
 import { VOLTORB_FLIP_COST } from './voltorb-flip.js'
 import { BATTLE_TOWER_LOCATION } from '../../data/config.js'
 import { SLOT_SPIN_COST } from './game-corner.js'
@@ -47,7 +48,48 @@ export const MINIGAME_LOCATIONS = {
 }
 
 /**
- * Location -> the action that launches its minigame.
+ * The reverse of `MINIGAME_LOCATIONS`: each minigame's home area. Together with
+ * `MINIGAME_REGIONS` this is the authoritative minigame -> area link, derived
+ * from the map data so it can never drift from the area's own region.
+ * @type {Record<string, string>}
+ */
+export const MINIGAME_AREAS = Object.fromEntries(
+  Object.entries(MINIGAME_LOCATIONS).map(([locationId, minigameId]) => [minigameId, locationId])
+)
+
+/**
+ * Each minigame's region, read from the home area's `region` field.
+ * @type {Record<string, string>}
+ */
+export const MINIGAME_REGIONS = Object.fromEntries(
+  Object.entries(MINIGAME_AREAS).map(([minigameId, locationId]) => [
+    minigameId,
+    mapData[locationId]?.region ?? 'kanto',
+  ])
+)
+
+/**
+ * The minigame id based at a location, or null.
+ * @param {string} locationId
+ * @returns {string | null}
+ */
+export function minigameForLocation(locationId) {
+  return MINIGAME_LOCATIONS[locationId] ?? null
+}
+
+/**
+ * Every minigame based in a region, in registry order.
+ * @param {string} regionId
+ * @returns {string[]}
+ */
+export function minigamesInRegion(regionId) {
+  return Object.keys(MINIGAME_REGIONS).filter((minigameId) => MINIGAME_REGIONS[minigameId] === regionId)
+}
+
+/**
+ * Location -> the action that launches its minigame. `pokePelago` is handled
+ * directly by the location panel (it opens a modal rather than a phase), so it
+ * has no start action here.
  * @type {Record<string, string>}
  */
 export const MINIGAME_START_ACTION = {
@@ -194,4 +236,15 @@ export const MINIGAME_INFO = {
     action: 'VISIT POKÉ PELAGO',
     hint: 'Care for your companion, tend the Berry Garden, and staff the passive islands that gather resources while you battle.',
   },
+}
+
+/**
+ * The display title of the minigame based at a location, or null when the area
+ * hosts none. Used by the Town Map node tooltip so the link is visible.
+ * @param {string} locationId
+ * @returns {string | null}
+ */
+export function minigameNameForLocation(locationId) {
+  const minigameId = MINIGAME_LOCATIONS[locationId]
+  return minigameId ? (MINIGAME_INFO[minigameId]?.title ?? null) : null
 }

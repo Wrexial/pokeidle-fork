@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 const gameData = installGameData()
 
-const { BATTLE_ROYAL_COST, BATTLE_ROYAL_POOL, BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL, BUG_CONTEST_RUSTLES, CONTEST_COST, CONTEST_THEMES, DYNAMAX_ADVENTURES_COST, DYNAMAX_STAGES, MINIGAME_LOCATIONS, MINING_COST, POKEATHLON_COST, POKEATHLON_SPRINT_MS, POKE_RADAR_CHAIN_STEP, POKE_RADAR_COST, POKE_RADAR_SIZE, SLOT_JACKPOT, SLOT_PAYLINES, SLOT_REELS, SLOT_ROWS, SLOT_SPIN_COST, SLOT_SYMBOLS, VOLTORB_FLIP_COST, VOLTORB_MAX_LEVEL, VOLTORB_SIZE, AUCTION_LOTS, accuracyScore, auctionAppraisal, battleRoyalOpponent, battleRoyalPrize, boardCleared, boardExploded, boardHints, bugCatchChance, bugContestPrize, bugFleeChance, bugStays, buildContestResults, canAuctionBid, contestAppeal, contestPlacement, contestPlayerRank, contestPrize, contestRank, contestScore, contestTheme, createAuction, createOpponent, createVoltorbBoard, dynamaxBoss, dynamaxPaths, dynamaxPrize, flipVoltorbCell, healSquad, moveBaseAppeal, pickRadarTarget, placeAuctionBid, pokeathlonPrize, pokeRadarPrize, radarChainPoints, radarSequence, rewardItemName, rollContestBug, rollContestRivalRound, rollContestTheme, rollMiningReward, simulateBattle, spinSlots, sprintScore, throwNetBall, toBattlePokemon, toggleVoltorbMark, voltorbBoardCoins, voltorbCountForLevel, voltorbFlipPrize, LIGHTS_OUT_COST, LIGHTS_OUT_SCRAMBLE, LIGHTS_OUT_SIZE, CURRY_COST, CURRY_FLAVORS, CURRY_INGREDIENTS, POKESTAR_COST, POKESTAR_SHOT_COUNT, createLightsOut, toggleLights, lightsSolved, lightsOutPrize, rollCurryRequest, curryScore, curryPrize, pickPokestarShots, pokestarPrize, MATCH3_COST, MATCH3_MOVES, MATCH3_SIZE, MEMORY_COST, MEMORY_PAIRS, WHACK_COST, createMatch3Board, findMatches, tryMatch3Swap, resolveMatch3, match3Prize, createMemoryDeck, memoryPrize, rollWhackTarget, whackPrize } = await import(
+const { BATTLE_ROYAL_COST, BATTLE_ROYAL_POOL, BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL, BUG_CONTEST_RUSTLES, CONTEST_COST, CONTEST_THEMES, DYNAMAX_ADVENTURES_COST, DYNAMAX_STAGES, MINIGAME_LOCATIONS, MINIGAME_INFO, MINIGAME_AREAS, MINIGAME_REGIONS, MINIGAME_START_ACTION, minigameForLocation, minigamesInRegion, minigameNameForLocation, MINING_COST, POKEATHLON_COST, POKEATHLON_SPRINT_MS, POKE_RADAR_CHAIN_STEP, POKE_RADAR_COST, POKE_RADAR_SIZE, SLOT_JACKPOT, SLOT_PAYLINES, SLOT_REELS, SLOT_ROWS, SLOT_SPIN_COST, SLOT_SYMBOLS, VOLTORB_FLIP_COST, VOLTORB_MAX_LEVEL, VOLTORB_SIZE, AUCTION_LOTS, accuracyScore, auctionAppraisal, battleRoyalOpponent, battleRoyalPrize, boardCleared, boardExploded, boardHints, bugCatchChance, bugContestPrize, bugFleeChance, bugStays, buildContestResults, canAuctionBid, contestAppeal, contestPlacement, contestPlayerRank, contestPrize, contestRank, contestScore, contestTheme, createAuction, createOpponent, createVoltorbBoard, dynamaxBoss, dynamaxPaths, dynamaxPrize, flipVoltorbCell, healSquad, moveBaseAppeal, pickRadarTarget, placeAuctionBid, pokeathlonPrize, pokeRadarPrize, radarChainPoints, radarSequence, rewardItemName, rollContestBug, rollContestRivalRound, rollContestTheme, rollMiningReward, simulateBattle, spinSlots, sprintScore, throwNetBall, toBattlePokemon, toggleVoltorbMark, voltorbBoardCoins, voltorbCountForLevel, voltorbFlipPrize, LIGHTS_OUT_COST, LIGHTS_OUT_SCRAMBLE, LIGHTS_OUT_SIZE, CURRY_COST, CURRY_FLAVORS, CURRY_INGREDIENTS, POKESTAR_COST, POKESTAR_SHOT_COUNT, createLightsOut, toggleLights, lightsSolved, lightsOutPrize, rollCurryRequest, curryScore, curryPrize, pickPokestarShots, pokestarPrize, MATCH3_COST, MATCH3_MOVES, MATCH3_SIZE, MEMORY_COST, MEMORY_PAIRS, WHACK_COST, createMatch3Board, findMatches, tryMatch3Swap, resolveMatch3, match3Prize, createMemoryDeck, memoryPrize, rollWhackTarget, whackPrize } = await import(
   '../src/game/minigames.js'
 )
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
@@ -819,4 +819,55 @@ test('START_WHACK charges entry and END_MINIGAME returns to idle', () => {
   assert.equal(started.money, 5)
   assert.equal(broke.phase, 'idle')
   assert.equal(gameReducer(started, { type: 'END_MINIGAME' }).phase, 'idle')
+})
+
+test('every minigame is linked to a real area in its own region', () => {
+  const expectedRegions = {
+    gameCorner: 'kanto',
+    bugContest: 'johto',
+    mining: 'sinnoh',
+    safari: 'kanto',
+    academyQuiz: 'paldea',
+    voltorbFlip: 'unova',
+    auctionHouse: 'kalos',
+    contest: 'hoenn',
+    pokeathlon: 'johto',
+    pokeRadar: 'sinnoh',
+    battleRoyal: 'alola',
+    dynamaxAdventures: 'galar',
+    lightsOut: 'hoenn',
+    curry: 'galar',
+    pokestar: 'unova',
+    puzzleLeague: 'johto',
+    memory: 'hoenn',
+    whack: 'kanto',
+    pokePelago: 'alola',
+  }
+  // Every catalogued minigame has exactly one home area, and vice versa: no
+  // orphaned info entries and no locations pointing at missing metadata.
+  for (const minigameId of Object.keys(MINIGAME_INFO)) {
+    assert.ok(MINIGAME_AREAS[minigameId], `${minigameId} has no home area`)
+    assert.equal(MINIGAME_REGIONS[minigameId], expectedRegions[minigameId], `${minigameId} region`)
+  }
+  for (const minigameId of Object.values(MINIGAME_LOCATIONS))
+    assert.ok(MINIGAME_INFO[minigameId], `${minigameId} has no panel info`)
+
+  for (const [locationId, minigameId] of Object.entries(MINIGAME_LOCATIONS)) {
+    const location = gameData.mapData[locationId]
+    assert.ok(location, `${locationId} is a real area`)
+    assert.ok(!location.hidden, `${minigameId} is on a visible area`)
+    assert.equal(MINIGAME_REGIONS[minigameId], location.region ?? 'kanto')
+    assert.equal(minigameForLocation(locationId), minigameId)
+    assert.equal(minigameNameForLocation(locationId), MINIGAME_INFO[minigameId].title)
+    if (minigameId !== 'pokePelago')
+      assert.ok(MINIGAME_START_ACTION[minigameId], `${minigameId} has a start action`)
+  }
+  assert.equal(minigameNameForLocation('route1'), null, 'a plain route hosts no minigame')
+})
+
+test('minigamesInRegion groups them by region', () => {
+  assert.deepEqual(minigamesInRegion('kanto').sort(), ['gameCorner', 'safari', 'whack'])
+  assert.deepEqual(minigamesInRegion('johto').sort(), ['bugContest', 'pokeathlon', 'puzzleLeague'])
+  assert.ok(minigamesInRegion('hoenn').includes('contest'))
+  assert.deepEqual(minigamesInRegion('nope'), [])
 })

@@ -35,6 +35,7 @@ export const CHANGELOG = [
           heading: 'People & Places',
           items: [
             'One-off NPC gifts and static encounters: towns and routes now offer a gift (an item pack, an Eevee, a regional starter, a Riolu, ...) or a fixed wild battle (a Snorlax blocking the road, a wiggling Sudowoodo, a honey-tree Munchlax, ...), each claimable once per save and listed in the location panel with any badge gate spelled out',
+            'A town\u2019s Poke Mart can now be collapsed from its header, so a long shop list no longer pushes the area\u2019s encounters and activities off-screen',
           ],
         },
         {

@@ -4531,6 +4531,32 @@ img {
     letter-spacing: .5px
 }
 
+.shop-toggle {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0;
+    font-family: inherit;
+    color: inherit;
+    background: none;
+    border: none;
+    cursor: pointer
+}
+
+.shop-toggle-arrow {
+    font-size: 8px;
+    color: var(--gold);
+    transition: transform .15s ease
+}
+
+.shop-header.collapsed .shop-toggle-arrow {
+    color: var(--text-muted)
+}
+
+.shop-toggle:hover .shop-name {
+    color: #ffe9a8
+}
+
 .shop-qty-selector {
     display: flex;
     gap: 2px

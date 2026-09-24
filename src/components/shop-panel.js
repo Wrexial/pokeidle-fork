@@ -13,6 +13,7 @@ import { ItemShopRow } from './item-shop-row.js'
 export function ShopPanel({ shopDef }) {
   const { state, dispatch } = useGame(),
     [qtyMode, setQtyMode] = React.useState(/** @type {number | 'max'} */ (1)),
+    [open, setOpen] = React.useState(true),
     regionId = mapData[state.currentLocation]?.region ?? 'kanto',
     // Location stock wins over the shared core/region stock, and a duplicate
     // item id is only shown once so a mart never repeats a shelf.
@@ -32,31 +33,45 @@ export function ShopPanel({ shopDef }) {
     className: 'shop-panel',
     children: [
       jsxs('div', {
-        className: 'shop-header',
+        className: `shop-header${open ? '' : ' collapsed'}`,
         children: [
-          jsx('span', {
-            className: 'shop-name',
-            children: shopDef.name,
+          jsxs('button', {
+            className: 'shop-toggle',
+            onClick: () => setOpen((value) => !value),
+            'aria-expanded': open,
+            title: open ? 'Hide shop' : 'Show shop',
+            children: [
+              jsx('span', {
+                className: 'shop-toggle-arrow',
+                children: open ? '\u25be' : '\u25b8',
+              }),
+              jsx('span', {
+                className: 'shop-name',
+                children: shopDef.name,
+              }),
+            ],
           }),
-          jsx('div', {
-            className: 'shop-qty-selector',
-            children: /** @type {(number | 'max')[]} */ ([1, 10, 100, 'max']).map((qtyOption) =>
-              jsx(
-                'button',
-                {
-                  className: `shop-qty-btn${qtyMode === qtyOption ? ' active' : ''}`,
-                  onClick: () => setQtyMode(qtyOption),
-                  children: qtyOption === 'max' ? 'Max' : qtyOption,
-                },
-                String(qtyOption)
-              )
-            ),
-          }),
+          open &&
+            jsx('div', {
+              className: 'shop-qty-selector',
+              children: /** @type {(number | 'max')[]} */ ([1, 10, 100, 'max']).map((qtyOption) =>
+                jsx(
+                  'button',
+                  {
+                    className: `shop-qty-btn${qtyMode === qtyOption ? ' active' : ''}`,
+                    onClick: () => setQtyMode(qtyOption),
+                    children: qtyOption === 'max' ? 'Max' : qtyOption,
+                  },
+                  String(qtyOption)
+                )
+              ),
+            }),
         ],
       }),
-      jsx('div', {
-        className: 'shop-items',
-        children: stock.map((shopItem) => {
+      open &&
+        jsx('div', {
+          className: 'shop-items',
+          children: stock.map((shopItem) => {
           if (
             shopItem.unlockWildBattlesWon &&
             state.wildBattlesWon < shopItem.unlockWildBattlesWon
@@ -137,8 +152,8 @@ export function ShopPanel({ shopDef }) {
                 },
                 shopItem.itemId
               )
+          }),
         }),
-      }),
     ],
   })
 }

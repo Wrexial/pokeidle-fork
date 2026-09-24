@@ -5,7 +5,12 @@ import { POKEMON_TYPES } from '../../data/moves.js'
 import { elite4Data, gymLeaderData, mapData, regions } from '../../data/gameData.js'
 import { emptyBattleHazards } from '../hazards.js'
 import { createPokemon, isBattleReady } from '../pokemon.js'
-import { computeUnlockedLocations, getRegionUnlockTokens, prepareNextBattle } from '../progression.js'
+import {
+  computeUnlockedLocations,
+  entryRoutePath,
+  getRegionUnlockTokens,
+  prepareNextBattle,
+} from '../progression.js'
 import { rodForId, rodsForRegionCount } from '../minigames.js'
 import { settleUnlockTokens, withNotification } from '../reducer-helpers.js'
 
@@ -19,10 +24,8 @@ export function selectStarter(state, action) {
   const regionId = action.payload.region ?? 'kanto',
     region = regions.find((candidate) => candidate.id === regionId),
     entryTown = region?.entry,
-    firstRoute =
-      entryTown && mapData[entryTown]
-        ? mapData[entryTown].connections.find((id) => mapData[id]?.type === 'route')
-        : null,
+    entryPath = entryRoutePath(entryTown),
+    firstRoute = entryPath.route,
     starterLevel = region?.startLevel ?? 5,
     starterPokemon = createPokemon(
       action.payload.speciesKey,
@@ -42,10 +45,10 @@ export function selectStarter(state, action) {
     party: [starterPokemon],
     nextPokemonId: state.nextPokemonId + 1,
     currentLocation: firstRoute ?? entryTown ?? state.currentLocation,
-    currentRoute: firstRoute ?? state.currentRoute,
+    currentRoute: firstRoute ? mapData[firstRoute]?.routeKey ?? firstRoute : state.currentRoute,
     unlockedRegions: [regionId],
     unlockedLocations: entryTown
-      ? [...new Set([entryTown, ...(firstRoute ? [firstRoute] : [])])]
+      ? [...new Set([entryTown, ...entryPath.path])]
       : state.unlockedLocations,
     battleLog: [
       `You began your journey in ${region?.name ?? 'Kanto'} with ${starterPokemon.name}!`,
@@ -71,12 +74,7 @@ export function unlockRegion(state, action) {
   if (!region || state.unlockedRegions.includes(regionId)) return state
   if (getRegionUnlockTokens(state) <= 0) return state
   const entryId = region.entry,
-    firstRoute =
-      entryId && mapData[entryId]
-        ? mapData[entryId].connections.find(
-            /** @param {string} id */ (id) => mapData[id]?.type === 'route'
-          ) ?? null
-        : null,
+    entryPath = entryRoutePath(entryId),
     unlockedState = {
       ...state,
       unlockedRegions: [...state.unlockedRegions, regionId],
@@ -84,7 +82,7 @@ export function unlockRegion(state, action) {
         ...new Set([
           ...state.unlockedLocations,
           ...(entryId ? [entryId] : []),
-          ...(firstRoute ? [firstRoute] : []),
+          ...entryPath.path,
         ]),
       ],
     },
@@ -191,16 +189,13 @@ export function prestigeRegion(state, action) {
         .map((location) => location.id)
     ),
     entryId = region.entry,
-    firstRoute =
-      entryId && mapData[entryId]
-        ? mapData[entryId].connections.find(
-            /** @param {string} id */ (id) => mapData[id]?.type === 'route'
-          ) ?? null
-        : null,
-    // Keep the entry and first route unlocked; computeUnlockedLocations
-    // rebuilds the rest from the region's (now cleared) gates.
+    entryPath = entryRoutePath(entryId),
+    firstRoute = entryPath.route,
+    // Keep the entry, its zone hub (when there is one) and the first sub-area
+    // unlocked; computeUnlockedLocations rebuilds the rest from the region's
+    // (now cleared) gates.
     keepUnlocked = /** @param {string} id */ (id) =>
-      !regionLocationIds.has(id) || id === entryId || id === firstRoute,
+      !regionLocationIds.has(id) || id === entryId || entryPath.path.includes(id),
     regionGymIds = new Set(
       gymLeaderData
         .filter((gym) => (gym.region ?? 'kanto') === regionId)

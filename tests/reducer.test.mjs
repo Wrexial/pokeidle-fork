@@ -6,6 +6,7 @@ import { installGameData } from './helpers/game-data.mjs'
 installGameData()
 
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
+const { mapData } = await import('../src/data/gameData.js')
 
 /** Start a Kanto run with Bulbasaur. */
 function startedGame() {
@@ -23,6 +24,45 @@ test('SELECT_STARTER sets up a Kanto run', () => {
   assert.equal(state.party[0].speciesKey, 'bulbasaur')
   assert.ok(state.pokedexCaught.includes('bulbasaur'))
   assert.ok(state.unlockedLocations.includes('palletTown'))
+})
+
+test('starting in a zone region opens the entry hub and its first area', () => {
+  const state = gameReducer(initialGameState, {
+    type: 'SELECT_STARTER',
+    payload: { region: 'alola', speciesKey: 'rowlet' },
+  })
+  assert.ok(state.unlockedLocations.includes('alola-iki-town'))
+  assert.ok(state.unlockedLocations.includes('alola-melemele-island'), 'the zone hub opens')
+  assert.ok(state.unlockedLocations.includes('alola-route-1'), 'the first sub-area opens')
+  assert.equal(state.currentLocation, 'alola-route-1')
+  assert.equal(state.currentRoute, 'alola-route-1')
+})
+
+test('UNLOCK_REGION opens a zone region entry hub and first area', () => {
+  const base = {
+    ...initialGameState,
+    phase: 'idle',
+    startRegion: 'kanto',
+    unlockedRegions: ['kanto'],
+    unlockedLocations: ['palletTown', 'route1'],
+    defeatedChampions: ['kanto'],
+  }
+  for (const regionId of ['alola', 'paldea']) {
+    const state = gameReducer(base, { type: 'UNLOCK_REGION', payload: { regionId } })
+    assert.ok(state.unlockedRegions.includes(regionId))
+    assert.ok(
+      state.unlockedLocations.some(
+        (id) => mapData[id]?.type === 'zone' && mapData[id].region === regionId
+      ),
+      `${regionId} opens its entry zone hub`
+    )
+    assert.ok(
+      state.unlockedLocations.some(
+        (id) => mapData[id]?.type === 'route' && mapData[id].region === regionId
+      ),
+      `${regionId} opens a wild route to play`
+    )
+  }
 })
 
 test('CATCH_POKEMON adds to the party and spends the ball', () => {

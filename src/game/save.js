@@ -16,7 +16,7 @@ import { PELAGO_MAX_READY, PELAGO_SLOTS, createPelago } from './pelago.js'
 import { RODS, rodsForRegionCount } from './minigames.js'
 import { GIFTS, STATIC_ENCOUNTERS } from './gifts.js'
 import { initialGameState } from './reducer.js'
-import { computeOfflineReward } from './progression.js'
+import { computeOfflineReward, entryRoutePath } from './progression.js'
 
 const FALLBACK_CATCH_RULE = {
   enabled: true,
@@ -403,19 +403,24 @@ export function repairSave(saved) {
       'kanto',
     entryId = regions.find((region) => region.id === fallbackRegion)?.entry,
     safeLocation = savedLocation || entryId || 'palletTown',
-    entryRoute = entryId
-      ? mapData[entryId]?.connections.find((id) => mapData[id]?.type === 'route')
-      : null,
+    entryPath = entryRoutePath(entryId),
+    savedRoute =
+      saved.currentRoute && encounterData[saved.currentRoute] ? saved.currentRoute : null,
+    // A saved route from another region (an Alola save seeded with Kanto's
+    // route1, say) is dropped in favour of this region's first route.
+    sameRegionRoute = /** @param {string} routeKey */ (routeKey) =>
+      !safeLocation || !mapData[routeKey] || mapData[routeKey].region === mapData[safeLocation]?.region,
     safeRoute =
-      (saved.currentRoute && encounterData[saved.currentRoute] ? saved.currentRoute : null) ??
+      (savedRoute && sameRegionRoute(savedRoute) ? savedRoute : null) ??
       mapData[safeLocation]?.routeKey ??
-      entryRoute ??
+      entryPath.route ??
+      savedRoute ??
       'route1'
   let safeUnlocked = /** @type {string[]} */ (
     Array.isArray(saved.unlockedLocations) ? saved.unlockedLocations : []
   ).filter((id) => mapData[id])
-  for (const id of [entryId, safeLocation]) if (id && mapData[id]) safeUnlocked.push(id)
-  if (entryRoute) safeUnlocked.push(entryRoute)
+  for (const id of [entryId, safeLocation, ...entryPath.path])
+    if (id && mapData[id]) safeUnlocked.push(id)
   safeUnlocked = [...new Set(safeUnlocked)]
   if (safeUnlocked.length === 0) safeUnlocked = ['palletTown', 'route1']
   // Rebuild the set of open regions from whichever entry towns are reachable,

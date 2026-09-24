@@ -59,6 +59,24 @@ test('a serialized save round-trips through repairSave', () => {
     assert.deepEqual(repaired[key], state[key], key)
 })
 
+test('repairSave opens a zone region entry hub for a stuck save', () => {
+  // An Alola save whose entry hub was gated behind an unreachable catch goal:
+  // the repair has to open the hub and its first area so the region is playable.
+  const stuck = {
+      ...startedGame(),
+      startRegion: 'alola',
+      currentLocation: 'alola-iki-town',
+      currentRoute: 'route1',
+      unlockedLocations: ['alola-iki-town'],
+      unlockedRegions: ['alola'],
+    },
+    repaired = repairSave(serializeSave(stuck))
+  assert.ok(repaired, 'the stuck save repairs')
+  assert.ok(repaired.unlockedLocations.includes('alola-melemele-island'), 'the zone hub is opened')
+  assert.ok(repaired.unlockedLocations.includes('alola-route-1'), 'the first sub-area is opened')
+  assert.equal(repaired.currentRoute, 'alola-route-1', 'the wrong-region route is replaced')
+})
+
 test('the autosave tracks fields that are not covered by other slices', () => {
   // GameProvider derives its effect dependencies from this list, so these
   // must be present for a change to them to trigger an autosave.

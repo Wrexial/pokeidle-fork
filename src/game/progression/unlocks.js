@@ -64,6 +64,30 @@ export function computeUnlockedLocations(state) {
 }
 
 /**
+ * The first wild route a region's entry leads to. Normally that is the entry
+ * town's first route connection, but Alola and Paldea connect their entry town
+ * to a zone hub (an island / province) whose sub-areas hold the wilds, so the
+ * search walks into the hub and takes its first sub-area. `path` lists every
+ * location that has to be unlocked for the player to actually reach a wild
+ * area (the hub included, because a zone hub itself never spawns wilds).
+ * @param {string | undefined | null} entryId
+ * @returns {{ route: string | null, path: string[] }}
+ */
+export function entryRoutePath(entryId) {
+  const entry = entryId ? mapData[entryId] : null
+  if (!entry) return { route: null, path: [] }
+  const route = (entry.connections ?? []).find((id) => mapData[id]?.type === 'route')
+  if (route) return { route, path: [route] }
+  const zone = (entry.connections ?? []).find((id) => mapData[id]?.type === 'zone')
+  if (!zone) return { route: null, path: [] }
+  const subArea = mapData[zone]?.routeKey ?? mapData[zone]?.subAreas?.[0]?.id ?? null
+  return {
+    route: subArea && mapData[subArea]?.type === 'route' ? subArea : null,
+    path: [zone, ...(subArea ? [subArea] : [])],
+  }
+}
+
+/**
  * Region Unlock Tokens available to spend: one per region Champion beaten,
  * minus the regions already opened beyond the starting one. Once every region
  * is open there is nothing left to spend them on; the leftover is converted to

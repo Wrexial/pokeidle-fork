@@ -23,7 +23,6 @@ import {
   rollActivityEncounter,
   rollActivityHeldItem,
   rollActivityLoot,
-  rollFishingExclusive,
 } from '../game/minigames.js'
 import {
   getPokemonSpriteFallbackUrl,
@@ -142,10 +141,7 @@ export function RouteActivityScene() {
       return
     }
     if (activity.mode === 'encounter') {
-      const exclusive =
-          activity.id === 'fishing' && ultra ? rollFishingExclusive(routeKey) : null,
-        encounter =
-          exclusive ?? rollActivityEncounter(activity.id, routeKey, perfect, rod.id)
+      const encounter = rollActivityEncounter(activity.id, routeKey, perfect, rod.id)
       if (!encounter) {
         setMessage('Nothing is biting here.')
         setStage(nextAttempts <= 0 ? 'done' : 'result')

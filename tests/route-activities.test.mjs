@@ -15,12 +15,9 @@ const {
   activityLevelBonus,
   activityRewardName,
   activityShinyMultiplier,
-  encountersWithoutFishingExclusive,
-  fishingExclusiveFor,
   rollActivityEncounter,
   rollActivityHeldItem,
   rollActivityLoot,
-  rollFishingExclusive,
   routeActivityIds,
 } = await import('../src/game/minigames.js')
 const { isWaterLocation } = await import('../src/game/catching.js')
@@ -81,7 +78,7 @@ test('a cast never falls back to non-Water species', () => {  const landRoute = 
     )
 })
 
-test('each fishing route has a Water-only exclusive catch', () => {
+test('fishing has no exclusive species; every Water species is reachable', () => {
   assert.ok(
     ACTIVITY_ULTRA_ZONE < ACTIVITY_PERFECT_ZONE && ACTIVITY_PERFECT_ZONE < ACTIVITY_HIT_ZONE,
     'the perfect-catch zone is the smallest'
@@ -90,28 +87,33 @@ test('each fishing route has a Water-only exclusive catch', () => {
   for (const locationId of FISHING_LOCATIONS) {
     const location = mapData[locationId],
       routeKey = location.routeKey,
-      exclusive = fishingExclusiveFor(routeKey)
-    if (!exclusive) continue
-    checked++
-    assert.ok(
-      pokemonSpecies[exclusive].types.includes('Water'),
-      `${locationId}'s exclusive should be a Water Pokemon`
-    )
-    assert.ok(
-      !encountersWithoutFishingExclusive(routeKey, encounterData[routeKey].encounters).some(
-        (entry) => entry.speciesKey === exclusive
-      ),
-      `${exclusive} should be removed from the normal wild table`
-    )
-    assert.equal(rollFishingExclusive(routeKey).speciesKey, exclusive)
-    // Never reachable by an ordinary cast, only by the perfect-cast roll.
-    for (let roll = 0; roll < 20; roll++)
-      assert.notEqual(
-        rollActivityEncounter('fishing', routeKey, roll % 2 === 0, 'superRod').speciesKey,
-        exclusive
+      water = (encounterData[routeKey]?.encounters ?? []).filter((entry) =>
+        pokemonSpecies[entry.speciesKey].types.includes('Water')
       )
+    if (water.length === 0) continue
+    checked++
+    // A Super Rod cast can reach every Water species on the route — none are
+    // fenced off as a fishing exclusive any more.
+    const candidates = [...water].sort((left, right) => right.weight - left.weight),
+      total = candidates.reduce((sum, entry) => sum + entry.weight, 0),
+      original = Math.random
+    try {
+      for (let index = 0; index < candidates.length; index++) {
+        const before = candidates
+          .slice(0, index)
+          .reduce((sum, entry) => sum + entry.weight, 0)
+        Math.random = () => (before + candidates[index].weight / 2) / total
+        assert.equal(
+          rollActivityEncounter('fishing', routeKey, false, 'superRod').speciesKey,
+          candidates[index].speciesKey,
+          `${locationId} should be able to hook ${candidates[index].speciesKey}`
+        )
+      }
+    } finally {
+      Math.random = original
+    }
   }
-  assert.ok(checked > 0, 'at least one fishing route has an exclusive catch')
+  assert.ok(checked > 0, 'at least one fishing route has Water species')
 })
 
 test('each activity is configured with an outcome and copy', () => {

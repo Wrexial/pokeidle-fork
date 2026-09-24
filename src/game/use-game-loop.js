@@ -15,7 +15,6 @@ import { abilityOf } from './abilities.js'
 import { companionExpMultiplier } from './companion.js'
 import { applyBattleForm, createBattlePokemon, createVolatileState, resolveBattleTurn, volatileStateFromBattle } from './combat.js'
 import { isBattleReady } from './pokemon.js'
-import { encountersWithoutFishingExclusive } from './minigames/fishing.js'
 import { awardExperience, checkShinyOdds, pokerusExpMultiplier, resolveActiveModifiers, resolvePokemonEncounter, resolveRoamer, shinyOddsForSpecies } from './progression.js'
 
 export function useGameLoop() {
@@ -193,15 +192,7 @@ export function useGameLoop() {
           const currentEncounterData =
             encounterData[currentGameState.currentRoute]
           if (!currentEncounterData) return
-          // A route's fishing-exclusive species only appears by fishing, so it
-          // is dropped from the normal wild roll.
-          const wildEncounterData = {
-              ...currentEncounterData,
-              encounters: encountersWithoutFishingExclusive(
-                currentGameState.currentRoute,
-                currentEncounterData.encounters
-              ),
-            },
+          const wildEncounterData = currentEncounterData,
             regionId = mapData[currentGameState.currentLocation]?.region ?? 'kanto',
             activeSwarm =
               currentGameState.swarm?.routeKey === currentGameState.currentRoute

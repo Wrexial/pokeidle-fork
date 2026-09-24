@@ -8,7 +8,7 @@ import { encounterData, pokemonSpecies } from '../../data/gameData.js'
 import { consumableItems, evolutionItems, heldItems } from '../../data/items.js'
 import { isCaveLocation, isWaterLocation } from '../catching.js'
 import { DEFAULT_ROD, rodForId } from './rods.js'
-import { FISHING_LOCATIONS, encountersWithoutFishingExclusive, fishingExclusiveFor, routeHasWaterSpecies } from './fishing.js'
+import { FISHING_LOCATIONS, routeHasWaterSpecies } from './fishing.js'
 
 /** How many attempts (casts/searches) a visit gives. */
 export const ACTIVITY_ATTEMPTS = 3
@@ -22,7 +22,7 @@ export const ACTIVITY_HIT_ZONE = 0.28
 /** Distance from the centre that lands a perfect hit. */
 export const ACTIVITY_PERFECT_ZONE = 0.14
 
-/** Distance from the centre that lands a perfect catch (route-exclusive). */
+/** Distance from the centre that lands a bullseye (the best shiny/level bonus). */
 export const ACTIVITY_ULTRA_ZONE = 0.055
 
 /**
@@ -43,7 +43,7 @@ export const ROUTE_ACTIVITIES = {
     title: 'Fishing',
     action: 'CAST LINE',
     icon: '\u{1f3a3}',
-    hint: 'Cast into the water and reel in on the sweet spot to hook a Water Pokemon. A perfect cast in the tiny centre hooks this route\u2019s exclusive catch.',
+    hint: 'Cast into the water and reel in on the sweet spot to hook a Water Pokemon. A perfect cast in the tiny centre boosts the shiny odds and level.',
     mode: 'encounter',
     display: 'bar',
     preferTypes: ['Water'],
@@ -228,12 +228,7 @@ export function rollActivityHeldItem(quality) {
 export function rollActivityEncounter(activityId, routeKey, perfect, rodId = DEFAULT_ROD) {
   const activity = ROUTE_ACTIVITIES[activityId],
     rod = rodForId(rodId),
-    // The fishing-exclusive species is pulled from normal casts; it only
-    // appears on a perfect cast (see `rollFishingExclusive`).
-    table = encountersWithoutFishingExclusive(
-      routeKey,
-      encounterData[routeKey]?.encounters ?? []
-    )
+    table = encounterData[routeKey]?.encounters ?? []
   if (!activity || table.length === 0) return null
   // Strict type filter: fishing only ever hooks Water Pokemon, so a route with
   // none has nothing to catch rather than falling back to its land species.
@@ -279,27 +274,6 @@ export function rollActivityEncounter(activityId, routeKey, perfect, rodId = DEF
     speciesKey: fallback.speciesKey,
     level: fallback.minLevel + levelBonus,
     isWater: false,
-  }
-}
-
-/**
- * Roll the route's fishing-exclusive species, which is only reachable on a
- * perfect cast (the tiny centre of the timing bar).
- * @param {string} routeKey
- * @returns {{ speciesKey: string, level: number, isWater: boolean } | null}
- */
-export function rollFishingExclusive(routeKey) {
-  const speciesKey = fishingExclusiveFor(routeKey),
-    entry = speciesKey
-      ? encounterData[routeKey]?.encounters?.find(
-          (candidate) => candidate.speciesKey === speciesKey
-        )
-      : null
-  if (!speciesKey || !entry) return null
-  return {
-    speciesKey,
-    level: entry.minLevel + Math.floor(Math.random() * (entry.maxLevel - entry.minLevel + 1)),
-    isWater: true,
   }
 }
 

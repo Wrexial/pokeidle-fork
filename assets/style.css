@@ -3161,16 +3161,6 @@ img {
     pointer-events: none
 }
 
-.map-node-fishing {
-    position: absolute;
-    bottom: -13px;
-    right: -13px;
-    font-size: 11px;
-    line-height: 1;
-    filter: drop-shadow(0 0 3px #4a90e2);
-    pointer-events: none
-}
-
 @keyframes swarmBob {
     0%,to {
         transform: translateY(0)
@@ -5499,25 +5489,9 @@ img {
     z-index: 5
 }
 
-.pokedex-fishing-badge {
-    position: absolute;
-    top: 2px;
-    right: 2px;
-    font-size: 9px;
-    line-height: 1;
-    filter: drop-shadow(0 0 2px #000);
-    z-index: 5
-}
-
 .pokedex-exclusive-legend {
     font-size: 6px;
     color: #54c8c8;
-    white-space: nowrap
-}
-
-.fishing-legend {
-    font-size: 6px;
-    color: #7fd4ff;
     white-space: nowrap
 }
 

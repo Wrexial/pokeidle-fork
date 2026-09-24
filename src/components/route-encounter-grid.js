@@ -3,7 +3,6 @@
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { getRarityFromRate } from '../game/catching.js'
-import { fishingExclusiveFor } from '../game/minigames/fishing.js'
 import { pokemonSpecies, routeExclusiveSpecies } from '../data/gameData.js'
 import { applyEncounterModifiers, HONEY_CHAIN_THRESHOLD, resolveActiveModifiers } from '../game/progression.js'
 import { useGame } from '../game/context.js'
@@ -20,7 +19,6 @@ export function RouteEncounterGrid({
 }) {
   const { state, dispatch } = useGame(),
     exclusiveSpecies = routeExclusiveSpecies[routeKey],
-    fishingExclusive = fishingExclusiveFor(routeKey),
     swarmHere = state.swarm?.routeKey === routeKey ? state.swarm : null,
     [selected, setSelected] = React.useState(/** @type {string | null} */ (null)),
     [applyingItem, setApplyingItem] = React.useState(/** @type {'repel' | 'honey' | null} */ (null)),
@@ -42,10 +40,8 @@ export function RouteEncounterGrid({
       encounters.some((encounter) => encounter.speciesKey === state.shinyChain.speciesKey),
     totalWeight = React.useMemo(
       () =>
-        displayEncounters
-          .filter((encounter) => encounter.speciesKey !== fishingExclusive)
-          .reduce((accumulator, encounter) => accumulator + encounter.weight, 0),
-      [displayEncounters, fishingExclusive]
+        displayEncounters.reduce((accumulator, encounter) => accumulator + encounter.weight, 0),
+      [displayEncounters]
     ),
     sortedEncounters = React.useMemo(() => [...displayEncounters].sort((left, right) => right.weight - left.weight), [displayEncounters]),
     activeEffectMap = React.useMemo(() => {
@@ -96,10 +92,7 @@ export function RouteEncounterGrid({
       setSelected(null)
     }, []),
     selectedEncounter = selected ? displayEncounters.find((entry) => entry.speciesKey === selected) : null,
-    rate =
-      selectedEncounter && selectedEncounter.speciesKey !== fishingExclusive && totalWeight > 0
-        ? (selectedEncounter.weight / totalWeight) * 100
-        : 0,
+    rate = selectedEncounter && totalWeight > 0 ? (selectedEncounter.weight / totalWeight) * 100 : 0,
     rarity = forceRarity ?? (rate > 0 ? getRarityFromRate(rate) : 'common')
   return jsxs('div', {
     className: 'pokedex-grid-container',
@@ -116,13 +109,6 @@ export function RouteEncounterGrid({
                 className: 'pokedex-exclusive-legend',
                 title: 'Species found only on this route',
                 children: '◆ only found here',
-              })
-            : null,
-          fishingExclusive
-            ? jsx('span', {
-                className: 'fishing-legend',
-                title: 'Only catchable by landing a perfect cast while fishing here',
-                children: '\u{1f3a3} fishing only',
               })
             : null,
           swarmHere
@@ -186,9 +172,7 @@ export function RouteEncounterGrid({
         className: `pokedex-grid${applyingItem ? ' selector-mode' : ''}`,
         children: sortedEncounters.map((encounter) => {
           const weightedRate =
-              encounter.speciesKey === fishingExclusive || totalWeight <= 0
-                ? 0
-                : (encounter.weight / totalWeight) * 100,
+              totalWeight <= 0 ? 0 : (encounter.weight / totalWeight) * 100,
             tier = forceRarity ?? getRarityFromRate(weightedRate)
           return jsx(
             PokedexTile,
@@ -200,7 +184,6 @@ export function RouteEncounterGrid({
               onClick: () => handleTileClick(encounter.speciesKey),
               isShinyCaught: state.shinyCaught.includes(encounter.speciesKey),
               isExclusive: exclusiveSpecies?.has(encounter.speciesKey) ?? false,
-              isFishingExclusive: encounter.speciesKey === fishingExclusive,
               chainCount:
                 state.shinyChain.speciesKey === encounter.speciesKey
                   ? state.shinyChain.count

@@ -1,8 +1,9 @@
-// Fishing spots and their exclusive catches. Kept separate from
-// route-activities.js so the normal encounter roll can consult the fishing
-// exclusives without importing the catching helpers (which would cycle).
+// Fishing spots. Kept separate from route-activities.js so the crafted
+// water-rich route list can be shared without importing the catching helpers
+// (which would cycle). The rare species on these routes are no longer fishing
+// exclusives: a good cast simply boosts the shiny odds and level instead.
 
-import { encounterData, mapData, pokemonSpecies } from '../../data/gameData.js'
+import { encounterData, pokemonSpecies } from '../../data/gameData.js'
 
 /**
  * The hand-picked water-rich routes where fishing is available. A cast only
@@ -53,54 +54,9 @@ export const FISHING_LOCATIONS = new Set([
   'paldea-west-province-area-one',
 ])
 
-/** Route keys belonging to a fishing spot. */
-const FISHING_ROUTE_KEYS = new Set(
-  Object.values(mapData)
-    .filter((location) => location.routeKey && FISHING_LOCATIONS.has(location.id))
-    .map((location) => location.routeKey)
-)
-
-/** Whether a route is one of the curated fishing spots. @param {string} routeKey */
-export function isFishingRoute(routeKey) {
-  return FISHING_ROUTE_KEYS.has(routeKey)
-}
-
 /** Whether a route's table actually holds Water-type Pokemon. @param {string} routeKey */
 export function routeHasWaterSpecies(routeKey) {
   return (encounterData[routeKey]?.encounters ?? []).some((entry) =>
     (pokemonSpecies[entry.speciesKey]?.types ?? []).includes('Water')
   )
-}
-
-/**
- * The rarest Water species on a fishing route. It is pulled out of the normal
- * wild table and only appears on a perfect fishing cast, so it is the route's
- * fishing-exclusive catch. Returns null when the route is not a fishing spot or
- * has too few Water species to spare one.
- * @param {string} routeKey
- * @returns {string | null}
- */
-export function fishingExclusiveFor(routeKey) {
-  if (!isFishingRoute(routeKey)) return null
-  const water = (encounterData[routeKey]?.encounters ?? []).filter((entry) =>
-    (pokemonSpecies[entry.speciesKey]?.types ?? []).includes('Water')
-  )
-  if (water.length < 2) return null
-  return water.reduce((best, entry) => {
-    if (entry.weight < best.weight) return entry
-    if (entry.weight === best.weight && entry.minLevel > best.minLevel) return entry
-    return best
-  }, water[0]).speciesKey
-}
-
-/**
- * The normal wild table for a route with its fishing-exclusive species removed,
- * so that species can only be caught by fishing.
- * @param {string} routeKey
- * @param {EncounterEntry[]} encounters
- * @returns {EncounterEntry[]}
- */
-export function encountersWithoutFishingExclusive(routeKey, encounters) {
-  const exclusive = fishingExclusiveFor(routeKey)
-  return exclusive ? encounters.filter((entry) => entry.speciesKey !== exclusive) : encounters
 }

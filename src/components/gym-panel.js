@@ -44,6 +44,18 @@ export function GymPanel({ onOpenShop }) {
       state.phase === 'wonderTrade',
     fightable = canFight && !isBusy
 
+  /**
+   * Travel to a location from a gym/league shortcut. Mirrors the location
+   * panel's travel rule: the place must be unlocked and not already here.
+   * @param {string | undefined | null} locationId
+   */
+  function travelToLocation(locationId) {
+    if (isBusy || !locationId) return
+    if (!state.unlockedLocations.includes(locationId)) return
+    if (state.currentLocation === locationId) return
+    dispatch({ type: 'TRAVEL', payload: { locationId } })
+  }
+
   /** @param {any} leader */
   function startGymBattle(leader) {
     if (!fightable) return
@@ -212,9 +224,10 @@ export function GymPanel({ onOpenShop }) {
                             children: 'FIGHT',
                           })
                         : mustTravel
-                          ? jsx('span', {
-                              className: 'gym-locked-label travel',
-                              title: `Go to ${mapData[leader.locationKey]?.name ?? 'the gym'}`,
+                          ? jsx('button', {
+                              className: 'gym-locked-label travel clickable',
+                              onClick: () => travelToLocation(leader.locationKey),
+                              title: `Travel to ${mapData[leader.locationKey]?.name ?? 'the gym'}`,
                               children: `GO TO ${(mapData[leader.locationKey]?.name ?? 'TOWN').toUpperCase()}`,
                             })
                           : jsx('span', {

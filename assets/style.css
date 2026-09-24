@@ -10072,3 +10072,228 @@ img {
     font-size: 8px;
     color: #e7dcc0
 }
+
+.radar-scene {
+    background-image: url(/backgrounds/grassland.png)
+}
+
+.radar-target {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px
+}
+
+.radar-target-sprite {
+    width: 52px;
+    height: 52px;
+    image-rendering: pixelated
+}
+
+.radar-target-label {
+    font-size: 9px;
+    color: #f0e6c8
+}
+
+.radar-target-chain {
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--gold)
+}
+
+.radar-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    width: 100%;
+    max-width: 280px
+}
+
+.radar-patch {
+    aspect-ratio: 1;
+    background: linear-gradient(#6fae4a,#3f7a2c);
+    border: 2px solid #4f7a35;
+    border-radius: 6px;
+    cursor: default;
+    transition: box-shadow .1s, filter .1s
+}
+
+.radar-patch.active {
+    cursor: pointer
+}
+
+.radar-patch.active:active {
+    filter: brightness(1.15)
+}
+
+.radar-patch.lit {
+    box-shadow: 0 0 0 3px var(--gold), 0 0 14px var(--gold);
+    filter: brightness(1.5)
+}
+
+.royal-scene {
+    background-image: url(/backgrounds/town.png)
+}
+
+.royal-arena {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px
+}
+
+.royal-fighter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    min-width: 70px
+}
+
+.royal-empty {
+    font-size: 20px;
+    color: #888
+}
+
+.royal-sprite {
+    width: 64px;
+    height: 64px;
+    image-rendering: pixelated
+}
+
+.royal-sprite.down {
+    filter: grayscale(1) brightness(.6);
+    transform: rotate(90deg)
+}
+
+.royal-name {
+    font-size: 8px;
+    color: #f0e6c8
+}
+
+.royal-versus {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold)
+}
+
+.royal-party {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+    width: 100%
+}
+
+.royal-member {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 90px;
+    padding: 4px 6px;
+    font-size: 7px;
+    color: #f0e6c8;
+    background: rgba(20,14,6,.72);
+    border: 1px solid #8a7040;
+    border-radius: 4px
+}
+
+.royal-member.active {
+    border-color: var(--gold)
+}
+
+.royal-member.fainted {
+    opacity: .45
+}
+
+.royal-member-name {
+    font-weight: 700
+}
+
+.royal-member-hp {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 10px;
+    padding-right: 3px;
+    overflow: hidden;
+    font-size: 7px;
+    color: #fff;
+    background: #00000066;
+    border-radius: 999px
+}
+
+.royal-hp-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background: linear-gradient(#7fd06a,#4c9a34)
+}
+
+.dynamax-scene {
+    background-image: url(/backgrounds/cave.png)
+}
+
+.dynamax-paths {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    width: 100%
+}
+
+.dynamax-path {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 14px;
+    color: #f0e6c8;
+    background: rgba(20,14,6,.78);
+    border: 2px solid #8a7040;
+    border-radius: 8px;
+    cursor: pointer
+}
+
+.dynamax-path:hover {
+    border-color: var(--gold)
+}
+
+.dynamax-path-sprite {
+    width: 56px;
+    height: 56px;
+    image-rendering: pixelated
+}
+
+.dynamax-path-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    font-size: 8px;
+    color: #f0e6c8
+}
+
+.dynamax-boss {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 12px 18px;
+    background: radial-gradient(rgba(120,60,160,.5), rgba(20,10,30,.85));
+    border: 2px solid #a06fd0;
+    border-radius: 10px
+}
+
+.dynamax-boss-tag {
+    font-size: 8px;
+    letter-spacing: 2px;
+    color: #e0b0ff
+}
+
+.dynamax-boss-sprite {
+    width: 84px;
+    height: 84px;
+    image-rendering: pixelated
+}

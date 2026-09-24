@@ -355,13 +355,13 @@ export function claimDailyGift(state, action) {
  * @returns {GameState}
  */
 export function updateShinyChain(state, action) {
-  const { speciesKey } = action.payload
+  const { speciesKey, amount = 1 } = action.payload
   return {
     ...state,
     shinyChain:
       state.shinyChain.speciesKey === speciesKey
-        ? { speciesKey, count: state.shinyChain.count + 1 }
-        : { speciesKey, count: 1 },
+        ? { speciesKey, count: state.shinyChain.count + amount }
+        : { speciesKey, count: amount },
   }
 }
 

@@ -1,6 +1,6 @@
 // Reducer handlers for minigames actions. Split from game/reducer.js.
 
-import { BUG_CONTEST_COST, CONTEST_COST, MINING_COST, POKEATHLON_COST, QUIZ_COST, ROUTE_ACTIVITIES, SAFARI_COST, VOLTORB_FLIP_COST, routeActivityIds } from '../minigames.js'
+import { BATTLE_ROYAL_COST, BUG_CONTEST_COST, CONTEST_COST, DYNAMAX_ADVENTURES_COST, MINING_COST, POKEATHLON_COST, POKE_RADAR_COST, QUIZ_COST, ROUTE_ACTIVITIES, SAFARI_COST, VOLTORB_FLIP_COST, routeActivityIds } from '../minigames.js'
 import { mapData } from '../../data/gameData.js'
 import { createIdleBattleState } from '../progression.js'
 import { enterMinigame } from '../reducer-helpers.js'
@@ -151,6 +151,51 @@ export function startPokeathlon(state, action) {
 }
 
 /**
+ * Handle the `START_POKE_RADAR` action.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function startPokeRadar(state, action) {
+  return enterMinigame(
+    state,
+    'pokeRadar',
+    POKE_RADAR_COST,
+    'You raised the Poke Radar and the grass began to rustle.'
+  )
+}
+
+/**
+ * Handle the `START_BATTLE_ROYAL` action.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function startBattleRoyal(state, action) {
+  return enterMinigame(
+    state,
+    'battleRoyal',
+    BATTLE_ROYAL_COST,
+    'You stepped into the Battle Royal ring.'
+  )
+}
+
+/**
+ * Handle the `START_DYNAMAX_ADVENTURES` action.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function startDynamaxAdventures(state, action) {
+  return enterMinigame(
+    state,
+    'dynamaxAdventures',
+    DYNAMAX_ADVENTURES_COST,
+    'You descended into the Max Lair.'
+  )
+}
+
+/**
  * Handle the `END_MINIGAME` action.
  * @param {GameState} state
  * @param {GameAction} action
@@ -163,7 +208,10 @@ export function endMinigame(state, action) {
     state.phase === 'voltorbFlip' ||
     state.phase === 'auctionHouse' ||
     state.phase === 'contest' ||
-    state.phase === 'pokeathlon'
+    state.phase === 'pokeathlon' ||
+    state.phase === 'pokeRadar' ||
+    state.phase === 'battleRoyal' ||
+    state.phase === 'dynamaxAdventures'
     ? { ...state, ...createIdleBattleState() }
     : state
 }

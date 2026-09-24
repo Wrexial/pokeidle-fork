@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 const gameData = installGameData()
 
-const { BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL, BUG_CONTEST_RUSTLES, CONTEST_COST, CONTEST_THEMES, MINIGAME_LOCATIONS, MINING_COST, POKEATHLON_COST, POKEATHLON_SPRINT_MS, SLOT_JACKPOT, SLOT_PAYLINES, SLOT_REELS, SLOT_ROWS, SLOT_SPIN_COST, SLOT_SYMBOLS, VOLTORB_FLIP_COST, VOLTORB_MAX_LEVEL, VOLTORB_SIZE, AUCTION_LOTS, accuracyScore, auctionAppraisal, boardCleared, boardExploded, boardHints, bugCatchChance, bugContestPrize, bugFleeChance, bugStays, buildContestResults, canAuctionBid, contestAppeal, contestPlacement, contestPlayerRank, contestPrize, contestRank, contestScore, contestTheme, createAuction, createVoltorbBoard, flipVoltorbCell, moveBaseAppeal, placeAuctionBid, pokeathlonPrize, rewardItemName, rollContestBug, rollContestRivalRound, rollContestTheme, rollMiningReward, spinSlots, sprintScore, throwNetBall, toggleVoltorbMark, voltorbBoardCoins, voltorbCountForLevel, voltorbFlipPrize } = await import(
+const { BATTLE_ROYAL_COST, BATTLE_ROYAL_POOL, BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL, BUG_CONTEST_RUSTLES, CONTEST_COST, CONTEST_THEMES, DYNAMAX_ADVENTURES_COST, DYNAMAX_STAGES, MINIGAME_LOCATIONS, MINING_COST, POKEATHLON_COST, POKEATHLON_SPRINT_MS, POKE_RADAR_CHAIN_STEP, POKE_RADAR_COST, POKE_RADAR_SIZE, SLOT_JACKPOT, SLOT_PAYLINES, SLOT_REELS, SLOT_ROWS, SLOT_SPIN_COST, SLOT_SYMBOLS, VOLTORB_FLIP_COST, VOLTORB_MAX_LEVEL, VOLTORB_SIZE, AUCTION_LOTS, accuracyScore, auctionAppraisal, battleRoyalOpponent, battleRoyalPrize, boardCleared, boardExploded, boardHints, bugCatchChance, bugContestPrize, bugFleeChance, bugStays, buildContestResults, canAuctionBid, contestAppeal, contestPlacement, contestPlayerRank, contestPrize, contestRank, contestScore, contestTheme, createAuction, createOpponent, createVoltorbBoard, dynamaxBoss, dynamaxPaths, dynamaxPrize, flipVoltorbCell, healSquad, moveBaseAppeal, pickRadarTarget, placeAuctionBid, pokeathlonPrize, pokeRadarPrize, radarChainPoints, radarSequence, rewardItemName, rollContestBug, rollContestRivalRound, rollContestTheme, rollMiningReward, simulateBattle, spinSlots, sprintScore, throwNetBall, toBattlePokemon, toggleVoltorbMark, voltorbBoardCoins, voltorbCountForLevel, voltorbFlipPrize } = await import(
   '../src/game/minigames.js'
 )
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
@@ -298,7 +298,119 @@ test('every fixed minigame location is a map POI', async () => {
   const { POI_LOCATIONS } = await import('../src/game/minigames.js')
   for (const id of Object.keys(MINIGAME_LOCATIONS)) assert.ok(POI_LOCATIONS.has(id))
   assert.ok(POI_LOCATIONS.has('hoenn-route-111'), 'the Battle Tower is a POI')
-  assert.equal(POI_LOCATIONS.size, 11)
+  assert.equal(POI_LOCATIONS.size, 14)
+})
+
+test('a radar sequence is distinct patches of the right length', () => {
+  assert.equal(POKE_RADAR_SIZE, 4)
+  const sequence = radarSequence(6)
+  assert.equal(sequence.length, 6)
+  assert.equal(new Set(sequence).size, 6, 'patches never repeat in a sequence')
+  for (const index of sequence) assert.ok(index >= 0 && index < POKE_RADAR_SIZE * POKE_RADAR_SIZE)
+  assert.equal(radarSequence(999).length, POKE_RADAR_SIZE * POKE_RADAR_SIZE, 'capped at the field')
+})
+
+test('the radar targets a real rare route species and pays a chain', () => {
+  const target = pickRadarTarget({ currentRoute: 'route1', unlockedLocations: ['route1'] })
+  assert.ok(target, 'a Kanto route has a target')
+  assert.ok(gameData.pokemonSpecies[target.speciesKey], 'the target is a real species')
+  assert.equal(target.routeKey, 'route1')
+  assert.equal(radarChainPoints(4), 4 * POKE_RADAR_CHAIN_STEP)
+  assert.ok(pokeRadarPrize(10).money > pokeRadarPrize(1).money)
+})
+
+test('UPDATE_SHINY_CHAIN can add a batch of chain points', () => {
+  const next = gameReducer(
+    { ...initialGameState, shinyChain: { speciesKey: null, count: 0 } },
+    { type: 'UPDATE_SHINY_CHAIN', payload: { speciesKey: 'pikachu', amount: 40 } }
+  )
+  assert.deepEqual(next.shinyChain, { speciesKey: 'pikachu', count: 40 })
+  const extended = gameReducer(next, {
+    type: 'UPDATE_SHINY_CHAIN',
+    payload: { speciesKey: 'pikachu', amount: 10 },
+  })
+  assert.equal(extended.shinyChain.count, 50)
+})
+
+test('START_POKE_RADAR charges entry and END_MINIGAME returns to idle', () => {
+  const started = gameReducer(
+      { ...initialGameState, phase: 'idle', money: POKE_RADAR_COST + 5 },
+      { type: 'START_POKE_RADAR' }
+    ),
+    broke = gameReducer(
+      { ...initialGameState, phase: 'idle', money: POKE_RADAR_COST - 1 },
+      { type: 'START_POKE_RADAR' }
+    ),
+    ended = gameReducer(started, { type: 'END_MINIGAME' })
+  assert.equal(started.phase, 'pokeRadar')
+  assert.equal(started.money, 5)
+  assert.equal(broke.phase, 'idle')
+  assert.equal(ended.phase, 'idle')
+})
+
+test('a real battle simulation resolves to a winner', () => {
+  const player = toBattlePokemon(createOpponent('charizard', 50), { isPlayer: true }),
+    enemy = createOpponent('venusaur', 48),
+    outcome = simulateBattle(player, enemy)
+  assert.equal(typeof outcome.won, 'boolean')
+  assert.ok(outcome.turns >= 1 && outcome.turns <= 80)
+  assert.ok(player.currentHp <= player.maxHp)
+})
+
+test('Battle Royal waves scale and heal the squad', () => {
+  assert.ok(BATTLE_ROYAL_POOL.length > 0)
+  const early = battleRoyalOpponent(1, 50),
+    late = battleRoyalOpponent(10, 50)
+  assert.ok(late.level > early.level, 'later waves are higher level')
+  assert.ok(gameData.pokemonSpecies[early.speciesKey])
+  const hurt = [{ name: 'A', currentHp: 10, maxHp: 100 }, { name: 'B', currentHp: 0, maxHp: 100 }],
+    healed = healSquad(hurt, 0.5)
+  assert.equal(healed[0].currentHp, 60)
+  assert.equal(healed[1].currentHp, 0, 'fainted Pokemon are not revived')
+  assert.ok(battleRoyalPrize(15).money > battleRoyalPrize(1).money)
+})
+
+test('START_BATTLE_ROYAL charges entry and END_MINIGAME returns to idle', () => {
+  const started = gameReducer(
+      { ...initialGameState, phase: 'idle', money: BATTLE_ROYAL_COST + 5 },
+      { type: 'START_BATTLE_ROYAL' }
+    ),
+    broke = gameReducer(
+      { ...initialGameState, phase: 'idle', money: BATTLE_ROYAL_COST - 1 },
+      { type: 'START_BATTLE_ROYAL' }
+    ),
+    ended = gameReducer(started, { type: 'END_MINIGAME' })
+  assert.equal(started.phase, 'battleRoyal')
+  assert.equal(started.money, 5)
+  assert.equal(broke.phase, 'idle')
+  assert.equal(ended.phase, 'idle')
+})
+
+test('Dynamax Adventures offer paths and a real Galar legendary boss', () => {
+  assert.equal(DYNAMAX_STAGES, 3)
+  const paths = dynamaxPaths(0, 50)
+  assert.equal(paths.length, 2)
+  for (const path of paths) assert.ok(gameData.pokemonSpecies[path.speciesKey])
+  const boss = dynamaxBoss('galar'),
+    galarPool = new Set((gameData.regions.find((r) => r.id === 'galar')?.raidPool ?? []).map((e) => e.speciesKey))
+  assert.ok(galarPool.has(boss.speciesKey), `${boss.speciesKey} should be a Galar raid legendary`)
+  assert.ok(dynamaxPrize(3, !0).money > dynamaxPrize(1, !1).money)
+})
+
+test('START_DYNAMAX_ADVENTURES charges entry and END_MINIGAME returns to idle', () => {
+  const started = gameReducer(
+      { ...initialGameState, phase: 'idle', money: DYNAMAX_ADVENTURES_COST + 5 },
+      { type: 'START_DYNAMAX_ADVENTURES' }
+    ),
+    broke = gameReducer(
+      { ...initialGameState, phase: 'idle', money: DYNAMAX_ADVENTURES_COST - 1 },
+      { type: 'START_DYNAMAX_ADVENTURES' }
+    ),
+    ended = gameReducer(started, { type: 'END_MINIGAME' })
+  assert.equal(started.phase, 'dynamaxAdventures')
+  assert.equal(started.money, 5)
+  assert.equal(broke.phase, 'idle')
+  assert.equal(ended.phase, 'idle')
 })
 
 test('contest appeal rewards theme, combo and move power', () => {

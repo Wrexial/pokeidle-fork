@@ -5,6 +5,9 @@ import { QUIZ_COST, QUIZ_LIVES, QUIZ_QUESTIONS } from './academy-quiz.js'
 import { SAFARI_BALLS, SAFARI_COST } from './safari.js'
 import { CONTEST_COST, CONTEST_ROUNDS } from './contest.js'
 import { POKEATHLON_COST, POKEATHLON_ATTEMPTS } from './pokeathlon.js'
+import { POKE_RADAR_COST } from './poke-radar.js'
+import { BATTLE_ROYAL_COST } from './battle-royal.js'
+import { DYNAMAX_ADVENTURES_COST, DYNAMAX_STAGES } from './dynamax-adventures.js'
 import { VOLTORB_FLIP_COST } from './voltorb-flip.js'
 import { BATTLE_TOWER_LOCATION } from '../../data/config.js'
 import { SLOT_SPIN_COST } from './game-corner.js'
@@ -25,6 +28,9 @@ export const MINIGAME_LOCATIONS = {
   'kalos-lumiose-city': 'auctionHouse',
   'hoenn-lilycove-city': 'contest',
   'johto-ecruteak-city': 'pokeathlon',
+  'sinnoh-sandgem-town': 'pokeRadar',
+  'alola-heahea-city': 'battleRoyal',
+  'galar-hammerlocke': 'dynamaxAdventures',
   'alola-poke-pelago': 'pokePelago',
 }
 
@@ -42,6 +48,9 @@ export const MINIGAME_START_ACTION = {
   auctionHouse: 'START_AUCTION_HOUSE',
   contest: 'START_CONTEST',
   pokeathlon: 'START_POKEATHLON',
+  pokeRadar: 'START_POKE_RADAR',
+  battleRoyal: 'START_BATTLE_ROYAL',
+  dynamaxAdventures: 'START_DYNAMAX_ADVENTURES',
 }
 
 /**
@@ -106,6 +115,24 @@ export const MINIGAME_INFO = {
     cost: POKEATHLON_COST,
     action: 'ENTER POK\u00c9ATHLON',
     hint: `Three events \u2014 mash the Sprint, time the Hurdles and throw at the moving target \u2014 each scored out of 100 (${POKEATHLON_ATTEMPTS} attempts in the last two). A medal pays money and candy. Entry is $${POKEATHLON_COST.toLocaleString()}.`,
+  },
+  pokeRadar: {
+    title: 'Pok\u00e9 Radar',
+    cost: POKE_RADAR_COST,
+    action: 'CHAIN THE RADAR',
+    hint: `Watch the grass light up, then tap the patches back in order. Every completed round lengthens the next sequence and builds a chain that boosts the shiny odds of a route's rarest species \u2014 a wrong tap breaks it. Entry is $${POKE_RADAR_COST.toLocaleString()}.`,
+  },
+  battleRoyal: {
+    title: 'Battle Royal',
+    cost: BATTLE_ROYAL_COST,
+    action: 'ENTER BATTLE ROYAL',
+    hint: `An endless wave gauntlet for your party. Each win heals the squad a little; the deeper you get, the bigger the purse. Entry is $${BATTLE_ROYAL_COST.toLocaleString()}.`,
+  },
+  dynamaxAdventures: {
+    title: 'Dynamax Adventures',
+    cost: DYNAMAX_ADVENTURES_COST,
+    action: 'ENTER MAX LAIR',
+    hint: `Pick a path through ${DYNAMAX_STAGES} encounters, then face a legendary from Galar's raid pool. Win and you catch it; lose the party and you go home empty-handed. Entry is $${DYNAMAX_ADVENTURES_COST.toLocaleString()}.`,
   },
   pokePelago: {
     title: 'Poké Pelago',

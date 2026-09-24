@@ -433,8 +433,37 @@ async function main() {
         '.athlon-event',
         '13-pokeathlon.png',
       ],
+      [
+        'Poke Radar',
+        'sinnoh',
+        'sinnoh-sandgem-town',
+        'sinnoh-route-202',
+        ['sinnoh-twinleaf-town', 'sinnoh-route-202', 'sinnoh-sandgem-town'],
+        '.radar-grid',
+        '14-poke-radar.png',
+      ],
+      [
+        'Battle Royal',
+        'alola',
+        'alola-heahea-city',
+        'alola-route-1',
+        ['alola-iki-town', 'alola-route-1', 'alola-heahea-city'],
+        '.royal-arena',
+        '15-battle-royal.png',
+        '.move-panel-btn.confirm',
+      ],
+      [
+        'Dynamax Adventures',
+        'galar',
+        'galar-hammerlocke',
+        'galar-route-1',
+        ['galar-postwick', 'galar-route-1', 'galar-hammerlocke'],
+        '.dynamax-paths',
+        '16-dynamax.png',
+        '.dynamax-path',
+      ],
     ]
-    for (const [name, region, location, route, unlocked, selector, file] of fixedScenes) {
+    for (const [name, region, location, route, unlocked, selector, file, action] of fixedScenes) {
       await cdp.eval(
         `localStorage.setItem('pokemon-idle-save-v2', ${JSON.stringify(
           JSON.stringify(minigameSave(region, location, route, unlocked))
@@ -449,6 +478,11 @@ async function main() {
       await cdp.click('.location-minigame-start')
       await cdp.waitFor(`!!document.querySelector(${JSON.stringify(selector)})`, 5000, name)
       await cdp.screenshot(path.join(OUT, file))
+      if (action) {
+        await cdp.click(action)
+        await sleep(500)
+        await cdp.screenshot(path.join(OUT, file.replace('.png', '-act.png')))
+      }
       console.log(`${name} scene ok`)
     }
     console.log('done')

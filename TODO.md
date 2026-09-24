@@ -638,8 +638,9 @@ others: a scene component, a `START_*`/`END_MINIGAME` reducer pair, a
 added to the pause/busy lists, and tests.
 
 **Shipped (0.16.0):** the Academy Quiz (Paldea), Voltorb Flip (Unova), the
-Grand Auction House (Kalos), the Pokemon Contest (Hoenn) and the Pokeathlon
-(Johto). The rest are open.
+Grand Auction House (Kalos), the Pokemon Contest (Hoenn), the Pokeathlon
+(Johto), Poke Radar chaining (Sinnoh), the Battle Royal (Alola) and Dynamax
+Adventures (Galar). Every region now has its signature minigame.
 
 - [x] **Poké Pelago (Alola)** — **shipped (0.17.0):** a new Alola island hub
       (off Hau'oli City) hosting companion care (Pat/Brush/Wash +
@@ -649,12 +650,12 @@ Grand Auction House (Kalos), the Pokemon Contest (Hoenn) and the Pokeathlon
       at Nimbasa City. Every row and column advertises its Voltorb count and
       point total; flip the 2s and 3s to bank coins, clear a board to climb a
       level, and a single Voltorb ends the run.
-- [ ] **Poké Radar chaining (Sinnoh)** — M. Memory/risk: pick the one shaking
-      grass patch to extend a chain; a wrong pick breaks it, and longer chains
-      give better shiny odds. Feeds the existing shiny chain.
-- [ ] **Dynamax Adventures (Galar)** — L. A roguelike raid gauntlet: choose a
-      path through three encounters, pick a teammate after each, then a
-      legendary boss. Reuses the combat pipeline.
+- [x] **Poké Radar chaining (Sinnoh)** — **shipped (0.16.0):** Sandgem Town's
+      memory chain. Watch the grass, repeat the sequence, and bank a chain that
+      boosts a route's rarest species' shiny odds.
+- [x] **Dynamax Adventures (Galar)** — **shipped (0.16.0):** the Max Lair at
+      Hammerlocke. Pick a path through three encounters, then beat a Galar raid
+      legendary to catch it. Uses the real combat pipeline.
 - [x] **Auction House (Kalos)** — **shipped (0.16.0):** the Grand Auction House at
       Lumiose City. Bid against hidden rival budgets for a lot of items; the
       appraiser gives a value range, rivals drop out at their own ceilings, and
@@ -665,8 +666,9 @@ Grand Auction House (Kalos), the Pokemon Contest (Hoenn) and the Pokeathlon
 - [x] **Pokéathlon (Johto)** — **shipped (0.16.0):** Ecruteak City's three-event
       meet (Sprint mash, Hurdle timing, Target throw) scored together for a
       medal.
-- [ ] **Battle Royal (Alola)** — M. Wave survival in a time limit with your
-      party; rewards scale with depth. A combat gauntlet, not a puzzle.
+- [x] **Battle Royal (Alola)** — **shipped (0.16.0):** Heahea City's endless
+      wave gauntlet for your party, resolved with the real combat pipeline.
+      Each win heals a little and the reward scales with depth.
 
 Relevant code: `src/game/minigames/` (one module per game), `registry.js`
 (`MINIGAME_LOCATIONS` / `MINIGAME_INFO`), `src/components/*-scene.js`,

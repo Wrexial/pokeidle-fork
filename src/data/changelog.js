@@ -71,6 +71,9 @@ export const CHANGELOG = [
             'Kalos\u2019s Lumiose City opens the Grand Auction House: bid against hidden rival budgets for a lot of items. The appraiser gives a value range and the rivals drop out at their own ceilings, but win the hammer and you pay whatever you bid \u2014 even over the odds',
             'Hoenn\u2019s Lilycove City runs the Pok\u00e9mon Contest: pick a move each round for four rounds, matching the contest theme and chaining two different moves of the same type for a combo while avoiding repeats, then rank against the rivals',
             'Johto\u2019s Ecruteak City hosts the Pok\u00e9athlon: three events \u2014 mash the Sprint, time the Hurdle and hit the moving Target \u2014 scored together for a gold, silver or bronze medal',
+            'Sinnoh\u2019s Sandgem Town raises the Pok\u00e9 Radar: watch the grass light up, repeat the sequence and build a chain that boosts the shiny odds of a route\u2019s rarest species, with a wrong tap breaking it',
+            'Alola\u2019s Heahea City hosts the Battle Royal: an endless wave gauntlet for your party that heals a little between wins, with the purse growing the deeper you get',
+            'Galar\u2019s Max Lair (Hammerlocke) offers Dynamax Adventures: pick a path through three encounters, then face a legendary from Galar\u2019s raid pool \u2014 beat it to add it to your team',
           ],
         },
         {

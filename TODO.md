@@ -646,8 +646,10 @@ Grand Auction House (Kalos), the Pokemon Contest (Hoenn), the Pokeathlon
 Adventures (Galar). Every region now has its signature minigame.
 
 **Extra minigames (0.16.0):** Hoenn's **Lights Out** (Mauville City), Galar's
-**Curry Cooking** (Motostoke) and Unova's **Pokestar Studios** (Virbank City)
-were added on top of the one-per-region set.
+**Curry Cooking** (Motostoke), Unova's **Pokestar Studios** (Virbank City),
+Johto's **Pokemon Puzzle League** (Goldenrod City), Hoenn's **Pokemon Memory**
+(Slateport City) and Kanto's **Whack-a-Diglett** (Vermilion City) were added on
+top of the one-per-region set.
 
 - [x] **Poké Pelago (Alola)** — **shipped (0.17.0):** a new Alola island hub
       (off Hau'oli City) hosting companion care (Pat/Brush/Wash +

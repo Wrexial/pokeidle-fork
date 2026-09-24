@@ -682,6 +682,9 @@ export function useGameLoop() {
       state.phase === 'lightsOut' ||
       state.phase === 'curry' ||
       state.phase === 'pokestar' ||
+      state.phase === 'puzzleLeague' ||
+      state.phase === 'memory' ||
+      state.phase === 'whack' ||
       state.phase === 'routeActivity' ||
       state.phase === 'wonderTrade' ||
       state.paused

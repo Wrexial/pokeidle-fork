@@ -89,6 +89,9 @@ export const CHANGELOG = [
             'Hoenn\u2019s Mauville City adds Lights Out: every tap toggles a tile and its four neighbours, and turning all 16 lights back on in a flawless few taps pays best',
             'Galar\u2019s Motostoke lets you cook a Curry: match the customer\u2019s flavour, then hold the fan to keep the campfire in the sweet spot while it simmers \u2014 a great curry is worth money and a full-heal Curry',
             'Unova\u2019s Virbank City runs Pok\u00e9star Studios: the director calls three shots and you pick the take that best matches each brief',
+            'Johto\u2019s Goldenrod City adds the Pok\u00e9mon Puzzle League: swap adjacent tiles to line up three or more, clear them in cascades and score as much as you can in 12 swaps',
+            'Hoenn\u2019s Slateport City adds Pok\u00e9mon Memory: flip cards two at a time to find all eight matching pairs, with fewer flips scoring better',
+            'Kanto\u2019s Vermilion City adds Whack-a-Diglett: tap each Diglett before it ducks back down and leave the Zubat alone across a 20-second round',
           ],
         },
         {

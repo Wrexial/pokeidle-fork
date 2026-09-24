@@ -10649,3 +10649,131 @@ img {
     font-size: 9px;
     color: #fff
 }
+
+.puzzle-league-scene {
+    background-image: url(/backgrounds/town_port.png)
+}
+
+.match3-grid {
+    display: grid;
+    gap: 3px;
+    width: 100%;
+    max-width: 360px
+}
+
+.match3-tile {
+    aspect-ratio: 1;
+    border: 1px solid #00000055;
+    border-radius: 4px;
+    box-shadow: inset 0 -3px 0 #00000033;
+    cursor: pointer
+}
+
+.match3-tile:hover:not(:disabled) {
+    filter: brightness(1.12)
+}
+
+.match3-tile.selected {
+    box-shadow: 0 0 0 3px var(--gold), inset 0 -3px 0 #00000033
+}
+
+.match3-fire { background: #f08030 }
+.match3-water { background: #6890f0 }
+.match3-grass { background: #78c850 }
+.match3-electric { background: #f8d030 }
+.match3-psychic { background: #f85888 }
+.match3-normal { background: #a8a878 }
+
+.memory-scene {
+    background-image: url(/backgrounds/beach.png)
+}
+
+.memory-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    width: 100%;
+    max-width: 340px
+}
+
+.memory-card {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(#3a4a6a,#23304a);
+    border: 2px solid #5a6a8a;
+    border-radius: 6px;
+    cursor: pointer
+}
+
+.memory-card.up {
+    background: #f3e7c8;
+    border-color: #8a7040
+}
+
+.memory-card.matched {
+    opacity: .8;
+    box-shadow: 0 0 0 2px var(--gold)
+}
+
+.memory-back {
+    font-size: 20px;
+    font-weight: 700;
+    color: #8fa6d8
+}
+
+.memory-sprite {
+    width: 48px;
+    height: 48px;
+    image-rendering: pixelated
+}
+
+.whack-scene {
+    background-image: url(/backgrounds/grassland.png)
+}
+
+.whack-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    width: 100%;
+    max-width: 300px
+}
+
+.whack-hole {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: radial-gradient(#3a2c1a,#241a0e);
+    border: 3px solid #4f3a22;
+    border-radius: 50%;
+    cursor: pointer
+}
+
+.whack-hole:hover {
+    filter: brightness(1.1)
+}
+
+.whack-hole.diglett {
+    background: radial-gradient(#7a5a2a,#4a3418)
+}
+
+.whack-hole.zubat {
+    background: radial-gradient(#4a3a6a,#241a3a)
+}
+
+.whack-hole-dot {
+    width: 14px;
+    height: 14px;
+    background: #00000066;
+    border-radius: 50%
+}
+
+.whack-sprite {
+    width: 60px;
+    height: 60px;
+    image-rendering: pixelated
+}

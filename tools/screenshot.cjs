@@ -533,6 +533,33 @@ async function main() {
         '.pokestar-takes',
         '21-pokestar.png',
       ],
+      [
+        'Puzzle League',
+        'johto',
+        'johto-goldenrod-city',
+        'johto-route-34',
+        ['johto-new-bark-town', 'johto-route-34', 'johto-goldenrod-city'],
+        '.match3-grid',
+        '22-puzzle-league.png',
+      ],
+      [
+        'Memory',
+        'hoenn',
+        'hoenn-slateport-city',
+        'hoenn-route-110',
+        ['hoenn-littleroot-town', 'hoenn-route-110', 'hoenn-slateport-city'],
+        '.memory-grid',
+        '23-memory.png',
+      ],
+      [
+        'Whack',
+        'kanto',
+        'vermilionCity',
+        'route6',
+        ['palletTown', 'route1', 'vermilionCity', 'route6'],
+        '.whack-grid',
+        '24-whack.png',
+      ],
     ]
     for (const [name, region, location, route, unlocked, selector, file, action] of fixedScenes) {
       await cdp.eval(

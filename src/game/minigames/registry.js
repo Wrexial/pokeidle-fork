@@ -11,6 +11,9 @@ import { DYNAMAX_ADVENTURES_COST, DYNAMAX_STAGES } from './dynamax-adventures.js
 import { LIGHTS_OUT_COST } from './lights-out.js'
 import { CURRY_COST } from './curry.js'
 import { POKESTAR_COST } from './pokestar.js'
+import { MATCH3_COST, MATCH3_MOVES } from './match3.js'
+import { MEMORY_COST, MEMORY_PAIRS } from './memory.js'
+import { WHACK_COST, WHACK_DURATION_MS } from './whack.js'
 import { VOLTORB_FLIP_COST } from './voltorb-flip.js'
 import { BATTLE_TOWER_LOCATION } from '../../data/config.js'
 import { SLOT_SPIN_COST } from './game-corner.js'
@@ -37,6 +40,9 @@ export const MINIGAME_LOCATIONS = {
   'hoenn-mauville-city': 'lightsOut',
   'galar-motostoke': 'curry',
   'unova-virbank-city': 'pokestar',
+  'johto-goldenrod-city': 'puzzleLeague',
+  'hoenn-slateport-city': 'memory',
+  vermilionCity: 'whack',
   'alola-poke-pelago': 'pokePelago',
 }
 
@@ -60,6 +66,9 @@ export const MINIGAME_START_ACTION = {
   lightsOut: 'START_LIGHTS_OUT',
   curry: 'START_CURRY',
   pokestar: 'START_POKESTAR',
+  puzzleLeague: 'START_PUZZLE_LEAGUE',
+  memory: 'START_MEMORY',
+  whack: 'START_WHACK',
 }
 
 /**
@@ -160,6 +169,24 @@ export const MINIGAME_INFO = {
     cost: POKESTAR_COST,
     action: 'SHOOT A FILM',
     hint: 'The director calls each shot; pick the take that best matches the brief. Three shots, scored out of nine. Entry is $' + POKESTAR_COST.toLocaleString() + '.',
+  },
+  puzzleLeague: {
+    title: 'Pok\u00e9mon Puzzle League',
+    cost: MATCH3_COST,
+    action: 'PLAY PUZZLE LEAGUE',
+    hint: `Swap adjacent tiles to line up three or more and clear them; cleared tiles cascade for a bigger score. You get ${MATCH3_MOVES} swaps. Entry is $${MATCH3_COST.toLocaleString()}.`,
+  },
+  memory: {
+    title: 'Pok\u00e9mon Memory',
+    cost: MEMORY_COST,
+    action: 'PLAY MEMORY',
+    hint: `Flip two cards at a time to find all ${MEMORY_PAIRS} matching pairs. Fewer attempts scores better. Entry is $${MEMORY_COST.toLocaleString()}.`,
+  },
+  whack: {
+    title: 'Whack-a-Diglett',
+    cost: WHACK_COST,
+    action: 'PLAY WHACK-A-DIGLETT',
+    hint: `Tap each Diglett before it ducks back down \u2014 and leave the Zubat alone, it costs you a point. You have ${WHACK_DURATION_MS / 1000} seconds. Entry is $${WHACK_COST.toLocaleString()}.`,
   },
   pokePelago: {
     title: 'Poké Pelago',

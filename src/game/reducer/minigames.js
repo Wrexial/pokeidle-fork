@@ -1,6 +1,6 @@
 // Reducer handlers for minigames actions. Split from game/reducer.js.
 
-import { BATTLE_ROYAL_COST, BUG_CONTEST_COST, CONTEST_COST, CURRY_COST, DYNAMAX_ADVENTURES_COST, LIGHTS_OUT_COST, MINING_COST, POKEATHLON_COST, POKE_RADAR_COST, POKESTAR_COST, QUIZ_COST, ROUTE_ACTIVITIES, SAFARI_COST, VOLTORB_FLIP_COST, routeActivityIds } from '../minigames.js'
+import { MATCH3_COST, MEMORY_COST, WHACK_COST, BATTLE_ROYAL_COST, BUG_CONTEST_COST, CONTEST_COST, CURRY_COST, DYNAMAX_ADVENTURES_COST, LIGHTS_OUT_COST, MINING_COST, POKEATHLON_COST, POKE_RADAR_COST, POKESTAR_COST, QUIZ_COST, ROUTE_ACTIVITIES, SAFARI_COST, VOLTORB_FLIP_COST, routeActivityIds } from '../minigames.js'
 import { mapData } from '../../data/gameData.js'
 import { createIdleBattleState } from '../progression.js'
 import { enterMinigame } from '../reducer-helpers.js'
@@ -226,6 +226,36 @@ export function startPokestar(state, action) {
 }
 
 /**
+ * Handle the `START_PUZZLE_LEAGUE` action.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function startPuzzleLeague(state, action) {
+  return enterMinigame(state, 'puzzleLeague', MATCH3_COST, 'You entered the Puzzle League.')
+}
+
+/**
+ * Handle the `START_MEMORY` action.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function startMemory(state, action) {
+  return enterMinigame(state, 'memory', MEMORY_COST, 'You shuffled the memory deck.')
+}
+
+/**
+ * Handle the `START_WHACK` action.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function startWhack(state, action) {
+  return enterMinigame(state, 'whack', WHACK_COST, 'The Diglett are ready to pop.')
+}
+
+/**
  * Handle the `END_MINIGAME` action.
  * @param {GameState} state
  * @param {GameAction} action
@@ -244,7 +274,10 @@ export function endMinigame(state, action) {
     state.phase === 'dynamaxAdventures' ||
     state.phase === 'lightsOut' ||
     state.phase === 'curry' ||
-    state.phase === 'pokestar'
+    state.phase === 'pokestar' ||
+    state.phase === 'puzzleLeague' ||
+    state.phase === 'memory' ||
+    state.phase === 'whack'
     ? { ...state, ...createIdleBattleState() }
     : state
 }

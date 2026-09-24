@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 const gameData = installGameData()
 
-const { BATTLE_ROYAL_COST, BATTLE_ROYAL_POOL, BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL, BUG_CONTEST_RUSTLES, CONTEST_COST, CONTEST_THEMES, DYNAMAX_ADVENTURES_COST, DYNAMAX_STAGES, MINIGAME_LOCATIONS, MINING_COST, POKEATHLON_COST, POKEATHLON_SPRINT_MS, POKE_RADAR_CHAIN_STEP, POKE_RADAR_COST, POKE_RADAR_SIZE, SLOT_JACKPOT, SLOT_PAYLINES, SLOT_REELS, SLOT_ROWS, SLOT_SPIN_COST, SLOT_SYMBOLS, VOLTORB_FLIP_COST, VOLTORB_MAX_LEVEL, VOLTORB_SIZE, AUCTION_LOTS, accuracyScore, auctionAppraisal, battleRoyalOpponent, battleRoyalPrize, boardCleared, boardExploded, boardHints, bugCatchChance, bugContestPrize, bugFleeChance, bugStays, buildContestResults, canAuctionBid, contestAppeal, contestPlacement, contestPlayerRank, contestPrize, contestRank, contestScore, contestTheme, createAuction, createOpponent, createVoltorbBoard, dynamaxBoss, dynamaxPaths, dynamaxPrize, flipVoltorbCell, healSquad, moveBaseAppeal, pickRadarTarget, placeAuctionBid, pokeathlonPrize, pokeRadarPrize, radarChainPoints, radarSequence, rewardItemName, rollContestBug, rollContestRivalRound, rollContestTheme, rollMiningReward, simulateBattle, spinSlots, sprintScore, throwNetBall, toBattlePokemon, toggleVoltorbMark, voltorbBoardCoins, voltorbCountForLevel, voltorbFlipPrize, LIGHTS_OUT_COST, LIGHTS_OUT_SCRAMBLE, LIGHTS_OUT_SIZE, CURRY_COST, CURRY_FLAVORS, CURRY_INGREDIENTS, POKESTAR_COST, POKESTAR_SHOT_COUNT, createLightsOut, toggleLights, lightsSolved, lightsOutPrize, rollCurryRequest, curryScore, curryPrize, pickPokestarShots, pokestarPrize } = await import(
+const { BATTLE_ROYAL_COST, BATTLE_ROYAL_POOL, BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL, BUG_CONTEST_RUSTLES, CONTEST_COST, CONTEST_THEMES, DYNAMAX_ADVENTURES_COST, DYNAMAX_STAGES, MINIGAME_LOCATIONS, MINING_COST, POKEATHLON_COST, POKEATHLON_SPRINT_MS, POKE_RADAR_CHAIN_STEP, POKE_RADAR_COST, POKE_RADAR_SIZE, SLOT_JACKPOT, SLOT_PAYLINES, SLOT_REELS, SLOT_ROWS, SLOT_SPIN_COST, SLOT_SYMBOLS, VOLTORB_FLIP_COST, VOLTORB_MAX_LEVEL, VOLTORB_SIZE, AUCTION_LOTS, accuracyScore, auctionAppraisal, battleRoyalOpponent, battleRoyalPrize, boardCleared, boardExploded, boardHints, bugCatchChance, bugContestPrize, bugFleeChance, bugStays, buildContestResults, canAuctionBid, contestAppeal, contestPlacement, contestPlayerRank, contestPrize, contestRank, contestScore, contestTheme, createAuction, createOpponent, createVoltorbBoard, dynamaxBoss, dynamaxPaths, dynamaxPrize, flipVoltorbCell, healSquad, moveBaseAppeal, pickRadarTarget, placeAuctionBid, pokeathlonPrize, pokeRadarPrize, radarChainPoints, radarSequence, rewardItemName, rollContestBug, rollContestRivalRound, rollContestTheme, rollMiningReward, simulateBattle, spinSlots, sprintScore, throwNetBall, toBattlePokemon, toggleVoltorbMark, voltorbBoardCoins, voltorbCountForLevel, voltorbFlipPrize, LIGHTS_OUT_COST, LIGHTS_OUT_SCRAMBLE, LIGHTS_OUT_SIZE, CURRY_COST, CURRY_FLAVORS, CURRY_INGREDIENTS, POKESTAR_COST, POKESTAR_SHOT_COUNT, createLightsOut, toggleLights, lightsSolved, lightsOutPrize, rollCurryRequest, curryScore, curryPrize, pickPokestarShots, pokestarPrize, MATCH3_COST, MATCH3_MOVES, MATCH3_SIZE, MEMORY_COST, MEMORY_PAIRS, WHACK_COST, createMatch3Board, findMatches, tryMatch3Swap, resolveMatch3, match3Prize, createMemoryDeck, memoryPrize, rollWhackTarget, whackPrize } = await import(
   '../src/game/minigames.js'
 )
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
@@ -298,7 +298,7 @@ test('every fixed minigame location is a map POI', async () => {
   const { POI_LOCATIONS } = await import('../src/game/minigames.js')
   for (const id of Object.keys(MINIGAME_LOCATIONS)) assert.ok(POI_LOCATIONS.has(id))
   assert.ok(POI_LOCATIONS.has('hoenn-route-111'), 'the Battle Tower is a POI')
-  assert.equal(POI_LOCATIONS.size, 17)
+  assert.equal(POI_LOCATIONS.size, 20)
 })
 
 test('a radar sequence is distinct patches of the right length', () => {
@@ -725,6 +725,97 @@ test('START_POKESTAR charges entry and END_MINIGAME returns to idle', () => {
       { type: 'START_POKESTAR' }
     )
   assert.equal(started.phase, 'pokestar')
+  assert.equal(started.money, 5)
+  assert.equal(broke.phase, 'idle')
+  assert.equal(gameReducer(started, { type: 'END_MINIGAME' }).phase, 'idle')
+})
+
+test('a fresh match-3 board has no matches ready to clear', () => {
+  assert.equal(MATCH3_SIZE, 8)
+  for (let attempt = 0; attempt < 5; attempt++) {
+    const board = createMatch3Board()
+    assert.equal(board.length, MATCH3_SIZE * MATCH3_SIZE)
+    assert.equal(findMatches(board).size, 0, 'no initial matches')
+  }
+})
+
+test('findMatches spots horizontal and vertical runs', () => {
+  const board = ['A', 'B', 'A', 'B', 'A', 'B', 'C', 'C', 'C']
+  assert.deepEqual([...findMatches(board, 3)].sort(), [6, 7, 8])
+  assert.equal(findMatches(createMatch3Board(4), 4).size, 0)
+})
+
+test('a swap only counts when it makes a match', () => {
+  const board = ['A', 'B', 'A', 'B', 'A', 'C', 'D', 'E', 'C'],
+    invalid = tryMatch3Swap(board, 0, 1, 3),
+    valid = tryMatch3Swap(board, 1, 4, 3)
+  assert.equal(invalid.valid, false)
+  assert.equal(invalid.board, board, 'an invalid swap leaves the board untouched')
+  assert.equal(valid.valid, true)
+  assert.ok(valid.score > 0)
+  assert.equal(findMatches(valid.board, 3).size, 0, 'the board settles with no matches left')
+  assert.ok(match3Prize(1600).money > match3Prize(100).money)
+})
+
+test('START_PUZZLE_LEAGUE charges entry and END_MINIGAME returns to idle', () => {
+  const started = gameReducer(
+      { ...initialGameState, phase: 'idle', money: MATCH3_COST + 5 },
+      { type: 'START_PUZZLE_LEAGUE' }
+    ),
+    broke = gameReducer(
+      { ...initialGameState, phase: 'idle', money: MATCH3_COST - 1 },
+      { type: 'START_PUZZLE_LEAGUE' }
+    )
+  assert.equal(started.phase, 'puzzleLeague')
+  assert.equal(started.money, 5)
+  assert.equal(broke.phase, 'idle')
+  assert.equal(gameReducer(started, { type: 'END_MINIGAME' }).phase, 'idle')
+})
+
+test('a memory deck holds every pair exactly twice', () => {
+  const deck = createMemoryDeck(MEMORY_PAIRS)
+  assert.equal(deck.length, MEMORY_PAIRS * 2)
+  const counts = new Map()
+  for (const speciesKey of deck) counts.set(speciesKey, (counts.get(speciesKey) ?? 0) + 1)
+  assert.equal(counts.size, MEMORY_PAIRS)
+  for (const count of counts.values()) assert.equal(count, 2)
+  assert.ok(memoryPrize(MEMORY_PAIRS).money > memoryPrize(MEMORY_PAIRS + 12).money)
+})
+
+test('START_MEMORY charges entry and END_MINIGAME returns to idle', () => {
+  const started = gameReducer(
+      { ...initialGameState, phase: 'idle', money: MEMORY_COST + 5 },
+      { type: 'START_MEMORY' }
+    ),
+    broke = gameReducer(
+      { ...initialGameState, phase: 'idle', money: MEMORY_COST - 1 },
+      { type: 'START_MEMORY' }
+    )
+  assert.equal(started.phase, 'memory')
+  assert.equal(started.money, 5)
+  assert.equal(broke.phase, 'idle')
+  assert.equal(gameReducer(started, { type: 'END_MINIGAME' }).phase, 'idle')
+})
+
+test('whack targets roll and pay by score', () => {
+  for (let roll = 0; roll < 40; roll++) {
+    const target = rollWhackTarget()
+    assert.ok(['diglett', 'zubat'].includes(target.kind))
+    assert.equal(typeof target.points, 'number')
+  }
+  assert.ok(whackPrize(35).money > whackPrize(5).money)
+})
+
+test('START_WHACK charges entry and END_MINIGAME returns to idle', () => {
+  const started = gameReducer(
+      { ...initialGameState, phase: 'idle', money: WHACK_COST + 5 },
+      { type: 'START_WHACK' }
+    ),
+    broke = gameReducer(
+      { ...initialGameState, phase: 'idle', money: WHACK_COST - 1 },
+      { type: 'START_WHACK' }
+    )
+  assert.equal(started.phase, 'whack')
   assert.equal(started.money, 5)
   assert.equal(broke.phase, 'idle')
   assert.equal(gameReducer(started, { type: 'END_MINIGAME' }).phase, 'idle')

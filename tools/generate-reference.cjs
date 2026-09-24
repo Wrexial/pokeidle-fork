@@ -4,17 +4,18 @@
  * battle engine: every move, ability and held item, marked with what it does
  * and whether the engine actually implements it.
  *
- * It reads the live move data (with src/data/move-effects.js applied), the
- * ability table, the held items and the curated registry in
- * tools/reference-data.cjs, then inlines a compact payload into
- * tools/reference-template.html and writes the static page.
+ * It reads the live move data (with src/data/move-effects.js applied), the held
+ * items, the curated ability descriptions (src/data/ability-info.js) and the
+ * shared move descriptions (src/game/move-info.js), then inlines a compact
+ * payload into tools/reference-template.html and writes the static page.
  *
  * Re-run after changing moves, abilities or held items:
  *   node tools/generate-reference.cjs
  */
 const fs = require('fs')
 const path = require('path')
-const { ABILITY_META, MOVE_EFFECT_TEXT, MOVE_NOTES } = require('./reference-data.cjs')
+const { abilityInfo } = require('../src/data/ability-info.js')
+const { describeMove, handledMoveEffectTypes } = require('../src/game/move-info.js')
 
 const ROOT = path.join(__dirname, '..')
 const DATA = path.join(ROOT, 'public', 'data')
@@ -23,143 +24,8 @@ const OUT = path.join(ROOT, 'public', 'reference.html')
 
 const read = (file) => JSON.parse(fs.readFileSync(file, 'utf8'))
 
-const STAT_LABELS = {
-  attack: 'Attack',
-  defense: 'Defense',
-  spAttack: 'Sp. Atk',
-  spDefense: 'Sp. Def',
-  speed: 'Speed',
-  accuracy: 'accuracy',
-  evasion: 'evasiveness',
-}
-
-const STATUS_LABELS = {
-  poison: 'poison',
-  toxic: 'badly poison',
-  burn: 'burn',
-  freeze: 'freeze',
-  sleep: 'sleep',
-  paralysis: 'paralyze',
-  flinching: 'flinch',
-}
-
-function normalizeStatKey(key) {
-  return (
-    {
-      'special-attack': 'spAttack',
-      'special-defense': 'spDefense',
-      'sp-atk': 'spAttack',
-      'sp-def': 'spDefense',
-      evasiveness: 'evasion',
-    }[key] ?? key
-  )
-}
-
 function titleCase(key) {
   return key.replace(/([A-Z])/g, ' $1').replace(/^./, (c) => c.toUpperCase())
-}
-
-/** Turn a `statChange` effect's changes into readable text. */
-function describeStatChange(effect) {
-  const parts = Object.entries(effect.changes ?? {}).map(([key, delta]) => {
-    const label = STAT_LABELS[normalizeStatKey(key)] ?? normalizeStatKey(key)
-    const magnitude =
-      Math.abs(delta) === 1 ? '' : Math.abs(delta) === 2 ? ' sharply' : ` by ${Math.abs(delta)}`
-    return `${label} ${delta > 0 ? 'up' : 'down'}${magnitude}`
-  })
-  const subject = effect.target === 'self' ? 'the user' : 'the target'
-  const prefix = effect.chance && effect.chance < 100 ? `${effect.chance}% chance to change ` : 'Changes '
-  return `${prefix}${subject}\u2019s stats: ${parts.join(', ')}.`
-}
-
-/** A one-line description of a move's implemented effect, or null if inert. */
-function describeMove(move) {
-  const notes = MOVE_NOTES[move.key]
-  const effect = move.effect
-
-  if (move.protect) return 'Blocks most moves for the turn (priority +4).'
-  if (move.screen === 'both') return 'Halves physical and special damage for five turns.'
-  if (move.screen === 'reflect') return 'Halves physical damage for five turns.'
-  if (move.screen === 'lightScreen') return 'Halves special damage for five turns.'
-  if (move.multiHit) {
-    const [min, max] = move.multiHit
-    return min === max ? `Hits ${min} times.` : `Hits ${min}\u2013${max} times.`
-  }
-  if (move.critStage) return 'High critical-hit ratio.'
-  if (!effect) return null
-
-  switch (effect.type) {
-    case 'heal': {
-      let text = `Heals the user ${effect.percentage}% of its max HP`
-      if (effect.status === 'sleep') text += ' and puts it to sleep'
-      if (effect.statusCure) text += ' and cures its status'
-      return `${text}.${notes ? ' ' + notes : ''}`
-    }
-    case 'recoil':
-      return `The user takes recoil (${Math.round(effect.fraction * 100)}% of the damage dealt).`
-    case 'drain':
-      return `Heals the user for ${effect.percentage ?? 50}% of the damage dealt.`
-    case 'status': {
-      const label = STATUS_LABELS[effect.status] ?? effect.status
-      return effect.chance && effect.chance < 100
-        ? `${effect.chance}% chance to ${label} the target.`
-        : `Inflicts ${label} on the target.`
-    }
-    case 'statChange':
-      return describeStatChange(effect)
-    case 'confusion':
-      return 'Confuses the target.'
-    case 'infatuation':
-      return 'Infatuates the target (needs opposite genders).'
-    case 'statReset':
-      return effect.target === 'all'
-        ? 'Resets all stat stages on the field.'
-        : 'Resets the target\u2019s stat stages.'
-    case 'hazard': {
-      const labels = {
-        stealthRock: 'Stealth Rock',
-        spikes: 'Spikes',
-        toxicSpikes: 'Toxic Spikes',
-        stickyWeb: 'Sticky Web',
-      }
-      return `Sets ${labels[effect.hazard] ?? 'an entry hazard'} on the foe\u2019s side.`
-    }
-    case 'weather': {
-      const labels = {
-        rain: 'rain',
-        sun: 'harsh sunlight',
-        sandstorm: 'a sandstorm',
-        snow: 'snow',
-        hail: 'hail',
-      }
-      return `Summons ${labels[effect.weather] ?? 'weather'} for five turns.`
-    }
-    case 'terrain': {
-      const labels = {
-        electric: 'Electric',
-        grassy: 'Grassy',
-        misty: 'Misty',
-        psychic: 'Psychic',
-      }
-      return `Sets ${labels[effect.terrain] ?? ''} Terrain for five turns.`
-    }
-    case 'typeChange':
-      return `Changes the target\u2019s type to ${effect.types.join('/')}.`
-    case 'typeAdd':
-      return `Adds the ${effect.typeName} type to the target.`
-    case 'statSwap':
-      return `Swaps ${effect.stats.map((s) => STAT_LABELS[s] ?? s).join(', ')} with the target.`
-  }
-  if (MOVE_EFFECT_TEXT[effect.type]) {
-    // A hand-written note is more precise than the generic line, so prefer it.
-    if (notes) return notes
-    let text = MOVE_EFFECT_TEXT[effect.type]
-    if (text.includes('{percentage}')) text = text.replace('{percentage}', effect.percentage ?? 50)
-    if (text.includes('{status}')) text = text.replace('{status}', STATUS_LABELS[effect.status] ?? effect.status ?? '')
-    if (text.includes('{changes}')) text = text.replace('{changes}', '')
-    return `${text}${notes ? ' ' + notes : ''}`
-  }
-  return null
 }
 
 async function main() {
@@ -171,7 +37,7 @@ async function main() {
   const abilityData = read(path.join(DATA, 'ability-data.json'))
   const { heldItems } = await import('../src/data/items.js')
 
-  const HANDLED_EFFECTS = new Set(Object.keys(MOVE_EFFECT_TEXT))
+  const HANDLED_EFFECTS = handledMoveEffectTypes
 
   // ── Moves ────────────────────────────────────────────────────────────────
   const moves = []
@@ -215,17 +81,17 @@ async function main() {
     if (entry.hidden) abilityKeys.add(entry.hidden)
   }
   const abilities = [...abilityKeys].sort().map((key) => {
-    const meta = ABILITY_META[key]
+    const meta = abilityInfo[key]
     return { key, name: titleCase(key), group: meta?.group ?? 'inert', text: meta?.text ?? null, implemented: !!meta }
   })
 
   // Warn (but don't fail) when the registry and the live engine disagree, so a
   // new ability is noticed the next time this page is regenerated.
-  const metaNotUsed = Object.keys(ABILITY_META).filter((key) => !abilityKeys.has(key))
-  if (metaNotUsed.length) console.warn('warning: ABILITY_META has keys not in ability-data.json:', metaNotUsed.join(', '))
+  const metaNotUsed = Object.keys(abilityInfo).filter((key) => !abilityKeys.has(key))
+  if (metaNotUsed.length) console.warn('warning: ability-info.js has keys not in ability-data.json:', metaNotUsed.join(', '))
 
   // Cross-check the curated registry against the engine source: a newly wired
-  // ability missing from ABILITY_META would otherwise be listed as inert.
+  // ability missing from ability-info.js would otherwise be listed as inert.
   const ENGINE_FILES = [
     'src/game/abilities.js',
     'src/game/held-items.js',
@@ -245,10 +111,10 @@ async function main() {
   ]
   const engineText = ENGINE_FILES.map((file) => fs.readFileSync(path.join(ROOT, file), 'utf8')).join('\n')
   const scanned = new Set([...abilityKeys].filter((key) => new RegExp('\\b' + key + '\\b').test(engineText)))
-  const missingMeta = [...scanned].filter((key) => !ABILITY_META[key])
-  const extraMeta = Object.keys(ABILITY_META).filter((key) => abilityKeys.has(key) && !scanned.has(key))
-  if (missingMeta.length) console.warn('warning: implemented in the engine but missing from reference-data.cjs:', missingMeta.join(', '))
-  if (extraMeta.length) console.warn('warning: listed in reference-data.cjs but not found in the engine:', extraMeta.join(', '))
+  const missingMeta = [...scanned].filter((key) => !abilityInfo[key])
+  const extraMeta = Object.keys(abilityInfo).filter((key) => abilityKeys.has(key) && !scanned.has(key))
+  if (missingMeta.length) console.warn('warning: implemented in the engine but missing from src/data/ability-info.js:', missingMeta.join(', '))
+  if (extraMeta.length) console.warn('warning: listed in src/data/ability-info.js but not found in the engine:', extraMeta.join(', '))
 
   // ── Held items ───────────────────────────────────────────────────────────
   const items = Object.keys(heldItems).map((key) => {

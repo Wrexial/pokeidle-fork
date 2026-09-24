@@ -11,6 +11,7 @@ import { RightPanel } from './right-panel.js'
 import { HatchPopup } from './hatch-popup.js'
 import { OfflineProgressModal } from './offline-progress-modal.js'
 import { NotificationStack } from './notification-stack.js'
+import { GlobalTooltip } from './global-tooltip.js'
 
 export function GameLayout() {
   const { dispatch } = useGame()
@@ -36,6 +37,7 @@ export function GameLayout() {
           jsx(HatchPopup, {}),
           jsx(OfflineProgressModal, {}),
           jsx(NotificationStack, {}),
+          jsx(GlobalTooltip, {}),
         ],
       })
     : jsxs('div', {
@@ -50,6 +52,7 @@ export function GameLayout() {
           jsx(HatchPopup, {}),
           jsx(OfflineProgressModal, {}),
           jsx(NotificationStack, {}),
+          jsx(GlobalTooltip, {}),
         ],
       })
 }

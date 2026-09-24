@@ -4,6 +4,7 @@ import React from 'react'
 import { createPortal } from 'react-dom'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { formatMoveAccuracy, moveCategoryIcons } from '../data/moves.js'
+import { moveTooltip } from '../game/move-info.js'
 import { dailyEventByKey } from '../data/daily-events.js'
 import { hasClaimableQuests } from '../game/quests.js'
 import { biomeForLocation, BIOME_FILTERS, locationImages } from '../data/ui.js'
@@ -522,6 +523,7 @@ export function BattleScene() {
                         'div',
                         {
                           className: `move-cell type-bg-${moveDef.type.toLowerCase()}`,
+                          'data-tooltip': moveTooltip(moveId, moveDef),
                           children: [
                             jsxs('div', {
                               className: 'move-top-row',

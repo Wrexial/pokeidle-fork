@@ -8,6 +8,8 @@ installGameData()
 const { calculateDamage, chooseMoveForBattle, resolveBattleTurn } = await import('../src/game/combat.js')
 const { moveData } = await import('../src/data/gameData.js')
 const { genderForPokemon } = await import('../src/game/breeding.js')
+const { describeMove, moveTooltip } = await import('../src/game/move-info.js')
+const { abilityTooltip } = await import('../src/data/ability-info.js')
 
 /**
  * @param {Record<string, any>} [overrides]
@@ -309,6 +311,24 @@ test('Reflect halves physical damage and wears off', () => {
       withScreen = damageWith({ reflect: 5, lightScreen: 0 })
     assert.equal(withScreen.data.damage, Math.max(1, Math.floor(without.data.damage / 2)))
   })
+})
+
+test('move tooltips describe the effect alongside the core stats', () => {
+  const ember = moveTooltip('ember', moveData.ember)
+  assert.match(ember, /Fire/)
+  assert.match(ember, /Special/)
+  assert.match(ember, /burn/i)
+  // A plain damaging move still gets a stat line (and no invented effect).
+  assert.match(moveTooltip('tackle', moveData.tackle), /Physical/)
+  assert.equal(describeMove({ key: 'tackle', ...moveData.tackle }), null)
+  // Never-miss moves read as such rather than a silly 101%.
+  assert.match(moveTooltip('swift', moveData.swift), /never misses/)
+})
+
+test('ability tooltips fall back for unimplemented abilities', () => {
+  assert.match(abilityTooltip('intimidate'), /Attack/i)
+  assert.equal(abilityTooltip(null), null)
+  assert.equal(abilityTooltip('definitelyNotAnAbility'), 'No battle effect implemented yet.')
 })
 
 test('accuracy and evasion stages change the hit chance', () => {

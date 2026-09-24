@@ -11106,3 +11106,23 @@ img {
 @keyframes whackRise { from { transform: scale(.7) } to { transform: scale(1) } }
 @keyframes whackFlee { from { filter: brightness(1.6) } to { filter: brightness(1) } }
 @keyframes whackPop { from { transform: translateY(10px) scale(.8) } to { transform: translateY(0) scale(1) } }
+
+/* Global hover tooltip (see src/components/global-tooltip.js) */
+.global-tooltip {
+    position: fixed;
+    z-index: 9999;
+    transform: translate(-50%, calc(-100% - 8px));
+    max-width: 240px;
+    box-sizing: border-box;
+    padding: 6px 8px;
+    font-size: 8px;
+    line-height: 1.45;
+    text-align: left;
+    color: var(--parchment);
+    background: rgba(20,14,6,.98);
+    border: 1px solid var(--gold);
+    border-radius: 4px;
+    box-shadow: 0 6px 18px rgba(0,0,0,.55);
+    pointer-events: none;
+    white-space: normal
+}

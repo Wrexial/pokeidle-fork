@@ -7,6 +7,7 @@ import { moveData } from '../data/gameData.js'
 import { tutorMoveCost } from '../data/config.js'
 import { useGame } from '../game/context.js'
 import { getFamilyLearnset, getTutorMoves, pokemonDisplayName } from '../game/pokemon.js'
+import { moveTooltip } from '../game/move-info.js'
 
 /** @param {{ pokemon: Pokemon, onClose: () => void }} props */
 export function MoveManagerPanel({ pokemon, onClose }) {
@@ -77,6 +78,7 @@ export function MoveManagerPanel({ pokemon, onClose }) {
                   'div',
                   {
                     className: `move-panel-slot type-bg-${moveDef.type.toLowerCase()}`,
+                    'data-tooltip': moveTooltip(moveId, moveDef),
                     onClick: () => toggleMove(moveId),
                     children: [
                       jsx('span', {
@@ -115,6 +117,7 @@ export function MoveManagerPanel({ pokemon, onClose }) {
               'div',
               {
                 className: `move-panel-item type-bg-${moveDef.type.toLowerCase()} ${isSelected ? 'selected' : ''}`,
+                'data-tooltip': moveTooltip(moveId, moveDef),
                 onClick: () => toggleMove(moveId),
                 children: [
                   jsx('span', {

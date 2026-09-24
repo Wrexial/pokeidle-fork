@@ -623,10 +623,11 @@ One-off scripts used to build the data JSON (not run during dev/build):
   `public/reference.html`, a self-contained battle reference that lists every
   move, ability and held item with what the engine does with it, marking the
   ones that are inert. Move data is read live (with `src/data/move-effects.js`
-  applied) so the page always matches the engine, and the curated ability
-  descriptions live in `reference-data.cjs` (`ABILITY_META`). Re-run it after
-  changing moves, abilities or held items. Linked from the guide, the encounter
-  index and Settings.
+  applied) so the page always matches the engine; the curated ability
+  descriptions live in `src/data/ability-info.js` and the shared move
+  descriptions in `src/game/move-info.js` (both also power the in-game hover
+  tooltips). Re-run it after changing moves, abilities or held items. Linked
+  from the guide, the encounter index and Settings.
 - `*.md` in `tools/` (`SUMMARY.md`, `DATA_INTEGRATION.md`,
   `REFACTORING_GUIDE.md`, `QUICKSTART_DATA_INTEGRATION.md`) — historical design
   docs. Some counts/claims there are outdated (e.g. they still say "151

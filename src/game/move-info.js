@@ -1,0 +1,259 @@
+// Human-readable move descriptions, shared by the in-game hover tooltips and
+// the generated Battle Reference page (tools/generate-reference.cjs requires
+// this module). `describeMove` mirrors the engine's effect handling and reads
+// the enriched move table (src/data/move-effects.js applied), so a tooltip
+// matches what the move actually does.
+
+/** @type {Record<string, string>} */
+const STAT_LABELS = {
+  attack: 'Attack',
+  defense: 'Defense',
+  spAttack: 'Sp. Atk',
+  spDefense: 'Sp. Def',
+  speed: 'Speed',
+  accuracy: 'accuracy',
+  evasion: 'evasiveness',
+}
+
+/** @type {Record<string, string>} */
+const STATUS_LABELS = {
+  poison: 'poison',
+  toxic: 'badly poison',
+  burn: 'burn',
+  freeze: 'freeze',
+  sleep: 'sleep',
+  paralysis: 'paralyze',
+  flinching: 'flinch',
+}
+
+/**
+ * @param {string} key
+ * @returns {string}
+ */
+function normalizeStatKey(key) {
+  return (
+    /** @type {Record<string, string>} */ ({
+      'special-attack': 'spAttack',
+      'special-defense': 'spDefense',
+      'sp-atk': 'spAttack',
+      'sp-def': 'spDefense',
+      evasiveness: 'evasion',
+    })[key] ?? key
+  )
+}
+
+/**
+ * Turn a `statChange` effect's changes into readable text.
+ * @param {{ changes?: Record<string, number>, target?: string, chance?: number }} effect
+ */
+function describeStatChange(effect) {
+  const parts = Object.entries(effect.changes ?? {}).map(([key, delta]) => {
+    const label = STAT_LABELS[normalizeStatKey(key)] ?? normalizeStatKey(key)
+    const magnitude =
+      Math.abs(delta) === 1 ? '' : Math.abs(delta) === 2 ? ' sharply' : ` by ${Math.abs(delta)}`
+    return `${label} ${delta > 0 ? 'up' : 'down'}${magnitude}`
+  })
+  const subject = effect.target === 'self' ? 'the user' : 'the target'
+  const prefix =
+    effect.chance && effect.chance < 100 ? `${effect.chance}% chance to change ` : 'Changes '
+  return `${prefix}${subject}\u2019s stats: ${parts.join(', ')}.`
+}
+
+/**
+ * Description of each `effect.type` the turn resolver acts on. Move entries
+ * reference these; `{...}` placeholders are filled from the move data.
+ * @type {Record<string, string>}
+ */
+/** @type {Record<string, string>} */
+export const moveEffectText = {
+  heal: 'Heals the user{status}.',
+  recoil: 'The user takes recoil damage.',
+  drain: 'Heals the user for {percentage}% of the damage dealt.',
+  status: 'May {status} the target.',
+  statChange: 'Changes stats ({changes}).',
+  statReset: 'Resets the target\u2019s stat stages.',
+  selfDestruct: 'The user faints.',
+  recharge: 'The user must recharge next turn.',
+  crashOnMiss: 'The user takes crash damage if the move misses.',
+  multiTurnLock: 'Locks the user in for several turns, then confuses it.',
+  confusion: 'Confuses the target.',
+  leechSeed: 'Seeds the target, draining 1/8 max HP into the user each turn.',
+  taunt: 'The target cannot use status moves for a few turns.',
+  substitute: 'The user spends HP to make a substitute that soaks damage.',
+  infatuation: 'Infatuates the target if the two are compatible genders.',
+  curse: 'A Ghost-type Curse; otherwise raises Attack and Speed and slowly drains HP.',
+  focusEnergy: 'Raises the user\u2019s critical-hit stage for the rest of the battle.',
+  aquaRing: 'Heals the user 1/16 max HP each turn.',
+  wish: 'Heals the user\u2019s side at the end of the next turn.',
+  yawn: 'Puts the target to sleep at the end of the next turn.',
+  statInvert: 'Inverts the target\u2019s stat stages.',
+  painSplit: 'Averages the user\u2019s and target\u2019s HP.',
+  safeguard: 'Protects the user\u2019s side from status for a few turns.',
+  mist: 'Protects the user\u2019s side from stat drops for a few turns.',
+  encore: 'Locks the target into its last move for a few turns.',
+  disable: 'Disables the target\u2019s last move for a few turns.',
+  perishSong: 'Gives both sides a three-turn countdown to faint.',
+  tailwind: 'Doubles the user\u2019s side Speed for a few turns.',
+  trickRoom: 'Reverses the speed order (goes last when used).',
+  destinyBond: 'Drags down whoever KOs the user.',
+  ingrain: 'Heals the user 1/16 max HP each turn.',
+  laserFocus: 'The user\u2019s next hit is a guaranteed critical hit.',
+  lockOn: 'The user\u2019s next hit cannot miss.',
+  gastroAcid: 'Suppresses the target\u2019s ability.',
+  worrySeed: 'Changes the target\u2019s ability to Insomnia.',
+  simpleBeam: 'Changes the target\u2019s ability to Simple.',
+  rolePlay: 'Copies the target\u2019s ability.',
+  entrainment: 'Shares the user\u2019s ability with the target.',
+  skillSwap: 'Swaps abilities with the target.',
+  typeChange: 'Changes the target\u2019s type.',
+  reflectType: 'Copies the target\u2019s type onto the user.',
+  typeAdd: 'Adds a type to the target.',
+  statSwap: 'Swaps stat stages with the target.',
+  recycle: 'Restores the user\u2019s consumed held item.',
+  itemSwap: 'Swaps held items with the target.',
+  bestow: 'Gives the target the user\u2019s held item.',
+  corrosiveGas: 'Destroys the target\u2019s held item.',
+  hazard: 'Sets an entry hazard on the foe\u2019s side of the field.',
+  weather: 'Changes the weather.',
+  terrain: 'Changes the terrain.',
+}
+
+/**
+ * Extra explanation for moves whose effect needs more than the generic line.
+ * @type {Record<string, string>}
+ */
+export const moveNotes = {
+  curse:
+    'A Ghost-type user pays HP for the curse; other types raise Attack/Speed and are drained each turn.',
+  wish: 'Heals the user\u2019s side by up to 50% max HP when the timer ends.',
+  yawn: 'The target falls asleep at the end of the next turn unless it switches out.',
+  trickRoom: 'Moves last when used, then reverses the turn order for its duration.',
+  perishSong:
+    'A three-turn countdown; when it ends the Pokemon faints (ignores abilities).',
+  painSplit: 'Averages both Pokemon\u2019s current HP.',
+}
+
+/** The `effect.type`s with a hand-written description above. */
+export const handledMoveEffectTypes = new Set(Object.keys(moveEffectText))
+
+/**
+ * A one-line description of a move's implemented effect, or null when the
+ * engine does not act on it.
+ * @param {Move & { key?: string }} move
+ * @returns {string | null}
+ */
+export function describeMove(move) {
+  const notes = moveNotes[move.key ?? '']
+  const effect = move.effect
+
+  if (move.protect) return 'Blocks most moves for the turn (priority +4).'
+  if (move.screen === 'both') return 'Halves physical and special damage for five turns.'
+  if (move.screen === 'reflect') return 'Halves physical damage for five turns.'
+  if (move.screen === 'lightScreen') return 'Halves special damage for five turns.'
+  if (move.multiHit) {
+    const [min, max] = move.multiHit
+    return min === max ? `Hits ${min} times.` : `Hits ${min}\u2013${max} times.`
+  }
+  if (move.critStage) return 'High critical-hit ratio.'
+  if (!effect) return null
+
+  switch (effect.type) {
+    case 'heal': {
+      let text = `Heals the user ${effect.percentage}% of its max HP`
+      if (effect.status === 'sleep') text += ' and puts it to sleep'
+      if (effect.statusCure) text += ' and cures its status'
+      return `${text}.${notes ? ' ' + notes : ''}`
+    }
+    case 'recoil':
+      return `The user takes recoil (${Math.round(effect.fraction * 100)}% of the damage dealt).`
+    case 'drain':
+      return `Heals the user for ${effect.percentage ?? 50}% of the damage dealt.`
+    case 'status': {
+      const label = STATUS_LABELS[effect.status] ?? effect.status
+      return effect.chance && effect.chance < 100
+        ? `${effect.chance}% chance to ${label} the target.`
+        : `Inflicts ${label} on the target.`
+    }
+    case 'statChange':
+      return describeStatChange(effect)
+    case 'confusion':
+      return 'Confuses the target.'
+    case 'infatuation':
+      return 'Infatuates the target (needs opposite genders).'
+    case 'statReset':
+      return effect.target === 'all'
+        ? 'Resets all stat stages on the field.'
+        : 'Resets the target\u2019s stat stages.'
+    case 'hazard': {
+      /** @type {Record<string, string>} */
+      const labels = {
+        stealthRock: 'Stealth Rock',
+        spikes: 'Spikes',
+        toxicSpikes: 'Toxic Spikes',
+        stickyWeb: 'Sticky Web',
+      }
+      return `Sets ${labels[effect.hazard] ?? 'an entry hazard'} on the foe\u2019s side.`
+    }
+    case 'weather': {
+      /** @type {Record<string, string>} */
+      const labels = {
+        rain: 'rain',
+        sun: 'harsh sunlight',
+        sandstorm: 'a sandstorm',
+        snow: 'snow',
+        hail: 'hail',
+      }
+      return `Summons ${labels[effect.weather] ?? 'weather'} for five turns.`
+    }
+    case 'terrain': {
+      /** @type {Record<string, string>} */
+      const labels = {
+        electric: 'Electric',
+        grassy: 'Grassy',
+        misty: 'Misty',
+        psychic: 'Psychic',
+      }
+      return `Sets ${labels[effect.terrain] ?? ''} Terrain for five turns.`
+    }
+    case 'typeChange':
+      return `Changes the target\u2019s type to ${effect.types.join('/')}.`
+    case 'typeAdd':
+      return `Adds the ${effect.typeName} type to the target.`
+    case 'statSwap':
+      return `Swaps ${effect.stats.map(/** @param {string} stat */ (stat) => STAT_LABELS[stat] ?? stat).join(', ')} with the target.`
+  }
+  if (moveEffectText[effect.type]) {
+    // A hand-written note is more precise than the generic line, so prefer it.
+    if (notes) return notes
+    let text = moveEffectText[effect.type]
+    if (text.includes('{percentage}')) text = text.replace('{percentage}', effect.percentage ?? 50)
+    if (text.includes('{status}'))
+      text = text.replace('{status}', STATUS_LABELS[effect.status] ?? effect.status ?? '')
+    if (text.includes('{changes}')) text = text.replace('{changes}', '')
+    return `${text}${notes ? ' ' + notes : ''}`
+  }
+  return null
+}
+
+/**
+ * Full hover-tooltip text for a move: its type / category / power / accuracy,
+ * then a plain-English description of the effect (when the engine acts on it).
+ * @param {string} moveId
+ * @param {Move} move
+ * @returns {string}
+ */
+export function moveTooltip(moveId, move) {
+  const kind =
+      move.category === 'physical'
+        ? 'Physical'
+        : move.category === 'special'
+          ? 'Special'
+          : 'Status',
+    accuracy = move.accuracy > 100 ? 'never misses' : `${move.accuracy}% accuracy`,
+    statLine =
+      move.power > 0
+        ? `${move.type} \u00b7 ${kind} \u00b7 ${move.power} power \u00b7 ${accuracy}`
+        : `${move.type} \u00b7 ${kind} \u00b7 ${accuracy}`,
+    effect = describeMove({ key: moveId, ...move })
+  return effect ? `${statLine}\n${effect}` : statLine
+}

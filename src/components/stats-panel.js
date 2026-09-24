@@ -16,6 +16,8 @@ const NATURE_STAT_LABELS = {
   speed: 'Spd',
 }
 import { moveData, pokemonSpecies } from '../data/gameData.js'
+import { abilityTooltip } from '../data/ability-info.js'
+import { moveTooltip } from '../game/move-info.js'
 import { useGame } from '../game/context.js'
 import { genderForPokemon, genderSymbol, isFemalePokemon } from '../game/breeding.js'
 import { abilityDisplayName, getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, IV_STAT_LABELS, IV_STAT_ORDER, judgeIVs, pokemonDisplayName } from '../game/pokemon.js'
@@ -341,6 +343,7 @@ export function StatsPanel({
                 jsx('span', {
                   className: 'stats-panel-ability',
                   title: 'Ability',
+                  'data-tooltip': abilityTooltip(pokemon.ability),
                   children: abilityDisplayName(pokemon.ability),
                 }),
               pokemon.heldItem &&
@@ -451,6 +454,7 @@ export function StatsPanel({
                   'div',
                   {
                     className: `stats-panel-move type-bg-${moveDef.type.toLowerCase()}`,
+                    'data-tooltip': moveTooltip(moveId, moveDef),
                     children: [
                       jsx('span', {
                         className: 'stats-panel-move-icon',

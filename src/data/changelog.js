@@ -29,6 +29,7 @@ export const CHANGELOG = [
             'In-battle Mega Evolution: give a Mega-capable Pokemon the new held Mega Stone (from the Reward Shop, Kalos marts or the Auction House) and it transforms for the rest of the battle \u2014 taking the physical X forme or the special Y forme \u2014 with the forme\u2019s stats, typing and ability, then reverting afterwards',
             'Moves that never miss (Swift, Aerial Ace, Aura Sphere, the G-Max moves and the rest) now truly cannot miss: they ignore accuracy and evasion stages instead of having their accuracy lowered by them, and their accuracy reads as an em dash rather than "101%"',
             'Battle status effects always show a three-letter tag now \u2014 including TOX for badly poisoned and PAR for paralysis \u2014 and the info nameplate reserves the tag\u2019s space so it never jumps or resizes when a status lands or wears off',
+            'Moves and abilities now have hover tooltips: hover a move (battle bar, Move Manager or a Pokémon\u2019s summary) for its type, category, power, accuracy and a plain-English effect, and hover an ability for what it does',
           ],
         },
         {

@@ -8,7 +8,8 @@ installGameData()
 const { awaySummary } = await import('../src/game/progression.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 const { repairSave } = await import('../src/game/context.js')
-const { generateIVs } = await import('../src/game/pokemon.js')
+const { createPokemon, generateIVs } = await import('../src/game/pokemon.js')
+const { pokemonSpecies } = await import('../src/data/gameData.js')
 
 const snapshot = (/** @type {Record<string, any>} */ overrides = {}) => ({
   wildBattlesWon: 10,
@@ -50,6 +51,40 @@ test('awaySummary pluralises and signs correctly', () => {
     awaySummary(snapshot(), snapshot({ wildBattlesWon: 11 })),
     'While you were away: 1 battle.'
   )
+})
+
+test('a swarm spawn names the area but not the Pokemon', () => {
+  const active = createPokemon('charmander', 10, 'a'),
+    state = {
+      ...initialGameState,
+      party: [active],
+      playerPokemon: active,
+      activePlayerPokemonIndex: 0,
+      phase: 'battling',
+      currentLocation: 'route1',
+      unlockedLocations: ['route1'],
+      enemyPokemon: { ...createPokemon('rattata', 5, 'r'), currentHp: 0 },
+      pendingEvents: [{ type: 'faint', message: 'Rattata fainted!', data: { target: 'enemy' } }],
+    },
+    original = Math.random
+  try {
+    Math.random = () => 0
+    const next = gameReducer(state, { type: 'CONSUME_EVENT' })
+    assert.ok(next.swarm, 'a swarm spawned')
+    const toast = next.notifications.find((entry) => /swarm spawned/i.test(entry.message))
+    assert.ok(toast, 'a swarm toast was queued')
+    assert.match(toast.message, /^A swarm spawned in the .+ area!$/)
+    assert.ok(
+      !toast.message.includes(pokemonSpecies[next.swarm.speciesKey]?.name ?? '\u0000'),
+      'the toast does not name the species'
+    )
+    assert.ok(
+      next.battleLog.some((line) => /swarm spawned/i.test(line)),
+      'the battle log also notes the swarm'
+    )
+  } finally {
+    Math.random = original
+  }
 })
 
 test('TOGGLE_BROWSER_NOTIFICATIONS flips the setting', () => {

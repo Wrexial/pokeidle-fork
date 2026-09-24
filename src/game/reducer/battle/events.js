@@ -2,7 +2,7 @@
 
 import { daycareEggBattles, expCandyDropChance, rareCandyDropChance, swarmSpawnChance, valuableDropChance, wildMasterBallChance } from '../../../data/config.js'
 import { dailyDropMultiplier } from '../../../data/daily-events.js'
-import { mapData, pokemonSpecies } from '../../../data/gameData.js'
+import { mapData } from '../../../data/gameData.js'
 import { consumableItems } from '../../../data/items.js'
 import { canBreed } from '../../breeding.js'
 import { tickCompanion } from '../../companion.js'
@@ -157,10 +157,18 @@ export function consumeEvent(state, action) {
           : { ...swarm, battlesRemaining: swarm.battlesRemaining - 1 }
     else if (Math.random() < swarmSpawnChance) {
       swarm = rollSwarm(state)
-      if (swarm)
-        swarmNotice = `A swarm of ${
-          pokemonSpecies[swarm.speciesKey]?.name ?? swarm.speciesKey
-        } appeared on ${mapData[swarm.routeKey]?.name ?? swarm.routeKey}!`
+      if (swarm) {
+        // The notice names the area but not the Pokemon, so the swarm is a
+        // reason to go and look rather than a spoiler in the battle log.
+        const swarmArea = mapData[swarm.routeKey]?.name ?? swarm.routeKey
+        swarmNotice = `A swarm spawned in the ${swarmArea} area!`
+        dropNotifications.push({
+          message: swarmNotice,
+          tone: 'info',
+          icon: '\u{1f41d}',
+          dedupeKey: `swarm:${swarm.routeKey}`,
+        })
+      }
     }
     // Daycare parents make progress toward an egg.
     if (

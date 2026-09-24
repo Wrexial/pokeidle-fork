@@ -680,9 +680,11 @@ export function TownMap() {
                     isClickable,
                     onClick: () => travelTo(locationId),
                     cooldownEnd: location.type === 'raid' ? state.raidCooldownEnd : void 0,
+                    // Deliberately omits the species: the Town Map should only
+                    // say a swarm is active here, not spoil which Pokemon.
                     swarmLabel:
                       state.swarm?.routeKey === locationId
-                        ? `${pokemonSpecies[state.swarm.speciesKey]?.name ?? state.swarm.speciesKey} \u00b7 ${state.swarm.battlesRemaining} battle${state.swarm.battlesRemaining === 1 ? '' : 's'} left`
+                        ? `${state.swarm.battlesRemaining} battle${state.swarm.battlesRemaining === 1 ? '' : 's'} left`
                         : null,
                   },
                   locationId

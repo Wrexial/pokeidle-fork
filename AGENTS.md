@@ -627,15 +627,18 @@ These scripts hit external sites (Serebii, PokémonDB) and may write large files
   `/sprites/...`), served out of `public/`.
 - Keep diffs scoped; avoid touching `tools/index-backup.js`, `dist/`, and the
   committed base64/PNG assets unless the task requires it.
-- **Changelog:** whenever you add or change a user-facing feature (or fix a
-  player-visible bug), update `src/data/changelog.js` in the same change. Add
-  the entry to the **top** `CHANGELOG` object (newest first, grouped under
-  `sections[].heading`, `items[]` one line per change), give the release a
-  `subtitle`, and bump `GAME_VERSION` to match its `version` so the in-game
-  "What's New" modal shows it once per player (`LAST_SEEN_VERSION_KEY`). If
-  several changes land together, group them under one version bump instead of
-  bumping per commit. Keep secrets/cheats and purely internal refactors out of
-  the changelog by convention.
+- **Changelog & versioning:** record user-facing features and player-visible
+  bug fixes in `src/data/changelog.js`, grouped under
+  `sections[].heading` with `items[]` one line per change. **Do not bump
+  `GAME_VERSION` or add a new version entry per task/commit.** Fold the change
+  into the existing top `CHANGELOG` entry, adding an item (or a new
+  `sections[]` heading) as needed. Only cut a new version — a new top entry
+  with a `subtitle`, and `GAME_VERSION` set to its `version` — at a coherent
+  milestone, or when the maintainer asks to release. One version should cover
+  a batch of work, not a single change. `LAST_SEEN_VERSION_KEY` makes the
+  in-game "What's New" modal show exactly once per version, so fewer, larger
+  bumps also mean fewer interruptions. Keep secrets/cheats and purely internal
+  refactors out of the changelog by convention.
 
 ## Git
 

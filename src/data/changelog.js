@@ -1,25 +1,12 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.24.0'
+export const GAME_VERSION = '0.18.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
     {
-      version: '0.24.0',
-      subtitle: 'Settled Catches',
-      sections: [
-        {
-          heading: 'Fixes',
-          items: [
-            'Wild Pokemon can no longer be caught twice from one battle: the idle loop now waits for a turn / catch to commit before acting again, so a fast battle speed can not replay the same victory and duplicate the catch',
-            'A queued turn can no longer resolve after the battle has already ended, and the ATTEMPT CATCH button is disabled while a turn is still resolving',
-          ],
-        },
-      ],
-    },
-    {
-      version: '0.23.0',
+      version: '0.18.0',
       subtitle: 'Hunting Rewards',
       sections: [
         {
@@ -34,6 +21,8 @@ export const CHANGELOG = [
         {
           heading: 'Fixes',
           items: [
+            'Wild Pokemon can no longer be caught twice from one battle: the idle loop now waits for a turn / catch to commit before acting again, so a fast battle speed can not replay the same victory and duplicate the catch',
+            'A queued turn can no longer resolve after the battle has already ended, and the ATTEMPT CATCH button is disabled while a turn is still resolving',
             'The Settings and Pok\u00e9 Pelago modals are no longer clipped: the centre column no longer traps fixed-position overlays (Daily Quests and the Daily Event benefit too)',
             'Layout pass on crowded controls: the Box header no longer overlaps its pager with the Pokedex / Records / Daycare buttons, the MOVES button sits above the move grid instead of over it, and toolbar / tab / save-button rows wrap instead of colliding',
           ],
@@ -41,13 +30,17 @@ export const CHANGELOG = [
       ],
     },
     {
-      version: '0.22.0',
-      subtitle: 'Poké Pelago',
+      version: '0.17.0',
+      subtitle: 'Companion, Garden & Pok\u00e9 Pelago',
       sections: [
         {
           heading: 'Idle Life',
           items: [
-            'Poké Pelago is here: a new island off Alola (Hau\u2019oli City) that you visit from the Town Map. Companion care and the Berry Garden move there from the top bar and share one hub',
+            'New Companion: pin one of your party Pokemon (the paw button in the top bar) and keep it fed, happy and rested. Care fades as you win battles, one care action is allowed per win, and a content companion grants +15% EXP',
+            'New Berry Garden (the sprout button): plant Oran, Sitrus or Lum Berries in four plots, let them ripen over wild wins, and harvest a crop back into the bag',
+            'Blend three Berries into a Poffin, which raises a party Pokemon\u2019s friendship by 30 when used',
+            'Oran Berries are sold at every Mart so the garden is easy to start',
+            'Pok\u00e9 Pelago is here: a new island off Alola (Hau\u2019oli City) that you visit from the Town Map. Companion care and the Berry Garden move there from the top bar and share one hub',
             'Companion care gained a Cleanliness stat and Pat, Brush and Wash actions, so there is more to do between battles. The +15% EXP bonus now needs all four care stats at 50+',
             'Three passive islands \u2014 the Bean Farm, Training Isle and Isle Caves \u2014 can be staffed with boxed Pokemon. They gather Poke Beans, EXP and items while you battle, banking rewards to collect when you return',
           ],
@@ -55,48 +48,25 @@ export const CHANGELOG = [
       ],
     },
     {
-      version: '0.21.0',
-      subtitle: 'Academy Quiz',
-      sections: [
-        {
-          heading: 'Minigames',
-          items: [
-            "Paldea's Mesagoza Academy now runs the Academy Quiz: answer 10 type-matchup questions against a 10-second clock with 3 lives. Most ask which type is super-effective; some ask about immunities. A good score pays money and candy, and a perfect run earns a Rare Candy",
-          ],
-        },
-      ],
-    },
-    {
-      version: '0.20.0',
-      subtitle: 'Safari & Route Activities',
-      sections: [
-        {
-          heading: 'Minigames',
-          items: [
-            "Kanto's Safari Zone is now playable: pay $500 for 30 free Safari Balls and roam the reserve. Bait calms a Pokemon but makes it harder to catch, while a Rock makes it easier to catch but far more likely to bolt \u2014 so the rare catches are a gamble",
-            'Three new route activities join Fishing and Foraging: Rock Smash on cave routes finds Rock and Ground Pokemon, Headbutt on grassy routes finds Normal and Flying Pokemon, and Diving on water routes reaches the deeper Water Pokemon that fishing cannot',
-            'Each activity has its own look \u2014 a swinging pickaxe, a marker bobbing up a tree trunk, and a descending depth gauge \u2014 so the timing game never looks the same twice',
-          ],
-        },
-      ],
-    },
-    {
-      version: '0.19.0',
+      version: '0.16.0',
       subtitle: 'Minigames & Battle Items',
       sections: [
         {
           heading: 'Minigames',
           items: [
+            'Two new route activities: go Fishing on water routes and areas, or forage for berries and supplies in forests and gardens. Land the timing bar on the sweet spot \u2014 a hooked Pokemon starts a normal wild battle from that route',
+            'Minigames now launch from where you are standing: the Game Corner, Bug Catching Contest, Underground and route activities appear as cards in the location panel instead of the League tab',
+            'Fishing now uses rod tiers: the Old Rod only reaches the common Pokemon near the surface, the Good Rod reaches deeper mid-water species, and the Super Rod hooks the rarest in the deep with a level bonus',
+            'You find a better rod each time you open another region \u2014 the Old Rod from the start, the Good Rod with a second region and the Super Rod with a third \u2014 and the fishing card and scene show the rod you are using and the next one to find',
+            'Fishing is limited to 30 hand-picked water-rich routes (about three per region, marked with a rod on the Town Map), and a cast only ever hooks a Water Pokemon \u2014 a route with none has nothing to catch',
             'Every fishing route now guards an exclusive Water Pokemon. Hit the tiny centre of the cast bar \u2014 a fourth, smallest zone \u2014 to hook it. It is pulled out of the route\u2019s normal wild table and marked with a fishing rod in the Wild Pokemon list',
             'Berry Foraging now plays as an expanding ring you time on the target instead of a left-to-right bar, so it no longer looks like fishing',
             'A successful search can now flush a Grass Pokemon out of the bush (more likely on a perfect search) and start a normal wild battle',
             'Fishing and foraging are easier to time: the marker sweeps slower (about 1.6s a pass) and the hit / perfect / centre zones are much wider, so the sweet spot is a bigger target',
-          ],
-        },
-        {
-          heading: 'Fixes',
-          items: [
-            'The trainer name banner no longer overlaps the top-bar buttons during trainer battles',
+            'Kanto\u2019s Safari Zone is now playable: pay $500 for 30 free Safari Balls and roam the reserve. Bait calms a Pokemon but makes it harder to catch, while a Rock makes it easier to catch but far more likely to bolt \u2014 so the rare catches are a gamble',
+            'Three new route activities join Fishing and Foraging: Rock Smash on cave routes finds Rock and Ground Pokemon, Headbutt on grassy routes finds Normal and Flying Pokemon, and Diving on water routes reaches the deeper Water Pokemon that fishing cannot',
+            'Each activity has its own look \u2014 a swinging pickaxe, a marker bobbing up a tree trunk, and a descending depth gauge \u2014 so the timing game never looks the same twice',
+            'Paldea\u2019s Mesagoza Academy now runs the Academy Quiz: answer 10 type-matchup questions against a 10-second clock with 3 lives. Most ask which type is super-effective; some ask about immunities. A good score pays money and candy, and a perfect run earns a Rare Candy',
           ],
         },
         {
@@ -108,51 +78,15 @@ export const CHANGELOG = [
           ],
         },
         {
+          heading: 'Fixes',
+          items: [
+            'The trainer name banner no longer overlaps the top-bar buttons during trainer battles',
+          ],
+        },
+        {
           heading: 'Quality of Life',
           items: [
             'The Battle Tower now launches from Hoenn Route 111 itself: its opponent preview and FIGHT FLOOR button appear in the location panel, and the League tab simply points you there',
-          ],
-        },
-      ],
-    },
-    {
-      version: '0.18.0',
-      subtitle: 'Companion & Garden',
-      sections: [
-        {
-          heading: 'Idle Life',
-          items: [
-            'New Companion: pin one of your party Pokemon (the paw button in the top bar) and keep it fed, happy and rested. Care fades as you win battles, one care action is allowed per win, and a content companion grants +15% EXP',
-            'New Berry Garden (the sprout button): plant Oran, Sitrus or Lum Berries in four plots, let them ripen over wild wins, and harvest a crop back into the bag',
-            'Blend three Berries into a Poffin, which raises a party Pokemon\u2019s friendship by 30 when used',
-            'Oran Berries are sold at every Mart so the garden is easy to start',
-          ],
-        },
-      ],
-    },
-    {
-      version: '0.17.0',
-      subtitle: 'Fishing Rods',
-      sections: [
-        {
-          heading: 'Minigames',
-          items: [
-            'Fishing now uses rod tiers: the Old Rod only reaches the common Pokemon near the surface, the Good Rod reaches deeper mid-water species, and the Super Rod hooks the rarest in the deep with a level bonus',
-            'You find a better rod each time you open another region \u2014 the Old Rod from the start, the Good Rod with a second region and the Super Rod with a third \u2014 and the fishing card and scene show the rod you are using and the next one to find',
-            'Fishing is limited to 30 hand-picked water-rich routes (about three per region, marked with a rod on the Town Map), and a cast only ever hooks a Water Pokemon \u2014 a route with none has nothing to catch',
-          ],
-        },
-      ],
-    },
-    {
-      version: '0.16.0',
-      subtitle: 'Route Minigames',
-      sections: [
-        {
-          heading: 'Minigames',
-          items: [
-            'Two new route activities: go Fishing on water routes and areas, or forage for berries and supplies in forests and gardens. Land the timing bar on the sweet spot \u2014 a hooked Pokemon starts a normal wild battle from that route',
-            'Minigames now launch from where you are standing: the Game Corner, Bug Catching Contest, Underground and route activities appear as cards in the location panel instead of the League tab',
           ],
         },
       ],

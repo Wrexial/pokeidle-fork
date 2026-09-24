@@ -8,6 +8,18 @@ installGameData()
 const { calculateCatchChance, getBallModifier, getDexStatus, isCaveLocation, isNightTime, isWaterLocation, selectBestBall, shouldOfferMasterBall } = await import(
   '../src/game/catching.js'
 )
+const { initialGameState } = await import('../src/game/reducer.js')
+const { autoCatchBallOrder } = await import('../src/data/items.js')
+
+test('every auto-catch ball is enabled by default', () => {
+  assert.deepEqual(initialGameState.globalCatchDefaults.enabledBalls, autoCatchBallOrder)
+  assert.ok(autoCatchBallOrder.includes('pokeball'))
+  assert.ok(autoCatchBallOrder.includes('ultraball'))
+  assert.ok(
+    !autoCatchBallOrder.includes('masterball'),
+    'the Master Ball is thrown from its own button, not the auto-catcher'
+  )
+})
 
 test('getDexStatus reports the strongest Pokedex state first', () => {
   const state = {

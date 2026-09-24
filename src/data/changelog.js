@@ -62,6 +62,7 @@ export const CHANGELOG = [
             'Layout pass on crowded controls: the Box header no longer overlaps its pager with the Pokedex / Records / Daycare buttons, the MOVES button sits above the move grid instead of over it, and toolbar / tab / save-button rows wrap instead of colliding',
             'Alola and Paldea are playable again: starting in one (or opening it with an Unlock Token) now unlocks the entry island/province hub and its first area, instead of stranding the player because the hub asked for a Pokedex count they had no route to reach',
             'The gym tab\u2019s "GO TO <town>" hint is now a button: click it to travel straight to that leader\u2019s town',
+            'Catch Settings now start with every ball enabled (the Master Ball keeps its own battle button), so the auto-catcher uses your best available ball instead of only Poke Balls',
           ],
         },
       ],

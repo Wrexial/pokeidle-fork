@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
-import { ballOrder, pokeBalls } from '../data/items.js'
+import { autoCatchBallOrder, pokeBalls } from '../data/items.js'
 import { CATCH_MODE_OPTIONS } from '../data/ui.js'
 import { pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
@@ -197,10 +197,9 @@ export const CatchSettingsModal = React.memo(
                     className: 'catch-ball-label',
                     children: 'Ball:',
                   }),
-                  ballOrder
-                    // The Master Ball is thrown from the battle button, not auto-catch.
-                    .filter((ballId) => ballId !== 'masterball')
-                    .map((event) =>
+                  // autoCatchBallOrder already leaves out the Master Ball, which
+                  // is thrown from its own battle button rather than auto-catch.
+                  autoCatchBallOrder.map((event) =>
                     jsx(
                       'button',
                       {

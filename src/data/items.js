@@ -141,6 +141,13 @@ export const ballOrder = [
 ]
 
 /**
+ * Balls the catch rule may auto-throw, in preference order. The Master Ball is
+ * thrown from its own battle button (never by the auto-catcher), so it is left
+ * out. This is the default "all balls enabled" set.
+ */
+export const autoCatchBallOrder = ballOrder.filter((ballId) => ballId !== 'masterball')
+
+/**
  * Held items. `effect` is read by the battle engine (src/game/held-items.js):
  * `leftovers`, `lifeOrb`, `statBoost`, `eviolite`, `focusSash`, `berry`,
  * `lumBerry` and `typeBoost`.

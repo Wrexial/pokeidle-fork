@@ -4,7 +4,7 @@
 
 import { BATTLE_TOWER_REGION, LEGACY_SAVE_KEYS, SAVE_BACKUP_KEY, SAVE_SLOT_COUNT, SAVE_VERSION, getActiveSlot, saveSlotKey, setActiveSlot } from '../data/config.js'
 import { dailyEventByKey, todayKey } from '../data/daily-events.js'
-import { activeItems, pokeBalls } from '../data/items.js'
+import { activeItems, autoCatchBallOrder, pokeBalls } from '../data/items.js'
 import { elite4Data, encounterData, gymLeaderData, mapData, moveData, pokemonSpecies, preEvolutionMap, regions, speciesKeysByGeneration } from '../data/gameData.js'
 import { BASE_FRIENDSHIP, generateIVs, calculatePokemonStats, resolvePokemonMoves, rollAbility } from './pokemon.js'
 import { ACHIEVEMENTS } from '../data/achievements.js'
@@ -22,7 +22,7 @@ const FALLBACK_CATCH_RULE = {
   enabled: true,
   mode: 'always',
   levelThreshold: 1,
-  enabledBalls: ['pokeball'],
+  enabledBalls: [...autoCatchBallOrder],
 }
 
 /**
@@ -42,7 +42,7 @@ function sanitizeCatchRule(rule) {
     enabled: source.enabled !== false,
     mode: typeof source.mode === 'string' ? source.mode : 'pokedex_new',
     levelThreshold: typeof source.levelThreshold === 'number' ? source.levelThreshold : 1,
-    enabledBalls: enabledBalls.length > 0 ? enabledBalls : ['pokeball'],
+    enabledBalls: enabledBalls.length > 0 ? enabledBalls : [...autoCatchBallOrder],
   }
 }
 

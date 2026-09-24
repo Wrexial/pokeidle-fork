@@ -1,5 +1,7 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
+import { autoCatchBallOrder } from './items.js'
+
 export const evValue = 0
 
 /** Victory Tokens awarded each time a region is prestiged (map progress reset). */
@@ -54,7 +56,9 @@ export let defaultCatchSettings = {
     enabled: !0,
     mode: 'pokedex_new',
     levelThreshold: 1,
-    enabledBalls: ['pokeball'],
+    // Every ball the auto-catcher can throw is enabled out of the box; the
+    // Master Ball is excluded (it has its own battle button).
+    enabledBalls: [...autoCatchBallOrder],
   }
 
 /**

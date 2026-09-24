@@ -337,7 +337,8 @@
    ],
    "gymsRequired": [
     "galar-gym-2"
-   ]
+   ],
+   "partyLevel": 37
   },
   "unlockOrder": 800006.0002,
   "position": {
@@ -584,7 +585,8 @@
      "corviknight"
     ],
     "count": 2
-   }
+   },
+   "partyLevel": 59
   },
   "unlockOrder": 800009,
   "position": {
@@ -667,7 +669,8 @@
    ],
    "gymsRequired": [
     "galar-gym-7"
-   ]
+   ],
+   "partyLevel": 67
   },
   "unlockOrder": 800010,
   "position": {

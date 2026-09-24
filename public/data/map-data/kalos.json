@@ -750,7 +750,8 @@
    ],
    "gymsRequired": [
     "kalos-gym-4"
-   ]
+   ],
+   "partyLevel": 38
   },
   "unlockOrder": 600013,
   "position": {
@@ -1285,7 +1286,8 @@
    "caughtCount": 30,
    "gymsRequired": [
     "kalos-gym-8"
-   ]
+   ],
+   "partyLevel": 67
   },
   "unlockOrder": 600022,
   "position": {

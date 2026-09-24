@@ -38,6 +38,12 @@ export const CHANGELOG = [
           ],
         },
         {
+          heading: 'Progression',
+          items: [
+            'High-level wild areas no longer open before the region expects them: routes whose wilds jump far above the area that unlocks them (Paldea\u2019s province areas, Alola\u2019s late island routes, several end-game routes) now also require a party level closer to their wilds, so you cannot wander into Lv.70+ Pokemon with a starter team',
+          ],
+        },
+        {
           heading: 'Fixes',
           items: [
             'Wild Pokemon can no longer be caught twice from one battle: the idle loop now waits for a turn / catch to commit before acting again, so a fast battle speed can not replay the same victory and duplicate the catch',

@@ -469,7 +469,8 @@
      "locationId": "alola-heahea-city",
      "count": 20
     }
-   ]
+   ],
+   "partyLevel": 35
   },
   "unlockOrder": 700009,
   "position": {
@@ -543,7 +544,8 @@
    ],
    "gymsRequired": [
     "alola-gym-2"
-   ]
+   ],
+   "partyLevel": 39
   },
   "unlockOrder": 700010,
   "position": {
@@ -681,7 +683,8 @@
    ],
    "gymsRequired": [
     "alola-gym-6"
-   ]
+   ],
+   "partyLevel": 51
   },
   "unlockOrder": 700013,
   "position": {
@@ -712,7 +715,8 @@
    "caughtCount": 26,
    "gymsRequired": [
     "alola-gym-7"
-   ]
+   ],
+   "partyLevel": 55
   },
   "unlockOrder": 700014,
   "position": {
@@ -742,7 +746,8 @@
    ],
    "gymsRequired": [
     "alola-gym-8"
-   ]
+   ],
+   "partyLevel": 59
   },
   "unlockOrder": 700015,
   "position": {
@@ -803,7 +808,8 @@
    ],
    "gymsRequired": [
     "alola-gym-8"
-   ]
+   ],
+   "partyLevel": 67
   },
   "unlockOrder": 700017,
   "position": {
@@ -1036,7 +1042,8 @@
      "locationId": "alola-heahea-city",
      "count": 20
     }
-   ]
+   ],
+   "partyLevel": 35
   },
   "unlockOrder": 700008.5,
   "position": {

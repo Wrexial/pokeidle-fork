@@ -260,7 +260,8 @@
      "squawkabilly"
     ],
     "count": 3
-   }
+   },
+   "partyLevel": 18
   },
   "unlockOrder": 910003,
   "position": {
@@ -579,7 +580,8 @@
      "locationId": "paldea-alfornada",
      "count": 12
     }
-   ]
+   ],
+   "partyLevel": 28
   },
   "unlockOrder": 910004.5004,
   "position": {
@@ -607,7 +609,8 @@
      "count": 5
     }
    ],
-   "caughtCount": 19
+   "caughtCount": 19,
+   "partyLevel": 33
   },
   "unlockOrder": 910004.5005,
   "position": {
@@ -634,7 +637,8 @@
      "locationId": "paldea-zapapico",
      "count": 15
     }
-   ]
+   ],
+   "partyLevel": 38
   },
   "unlockOrder": 910004.5003,
   "position": {
@@ -894,7 +898,8 @@
      "locationId": "paldea-levincia",
      "count": 16
     }
-   ]
+   ],
+   "partyLevel": 67
   },
   "unlockOrder": 910006.5001,
   "position": {
@@ -1457,7 +1462,8 @@
      "squawkabilly"
     ],
     "count": 3
-   }
+   },
+   "partyLevel": 18
   },
   "unlockOrder": 910002.0003,
   "position": {
@@ -1548,7 +1554,8 @@
      "locationId": "paldea-alfornada",
      "count": 12
     }
-   ]
+   ],
+   "partyLevel": 28
   },
   "unlockOrder": 910004.0006,
   "position": {

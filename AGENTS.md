@@ -590,6 +590,14 @@ One-off scripts used to build the data JSON (not run during dev/build):
   (Johto's Blackthorn via Route 46/45, Hoenn's sea routes off Slateport, Kalos
   routes radiating from Lumiose) and keeps the path matching the real route
   order. Paldea has no numbered routes, so it falls back to BFS depth order.
+  A final pass also gives a route a `partyLevel` gate when its wilds jump far
+  above the area that unlocks it, so a high-level branch (Paldea's province
+  areas, Alola's island hubs) can't be entered under-levelled. Because the
+  committed `public/data` is not currently idempotent with this generator
+  (re-running also churns random trainer teams/raid pools and Kanto's
+  encounters), `tools/apply-unlock-level-gates.cjs` mirrors that pass on the
+  committed map data alone; it is idempotent and becomes obsolete once the data
+  is regenerated from scratch.
 - `RawMoveData`, `index-backup.js` — large reference/backup data; leave alone.
 - `kill-vite.cjs` — kills orphaned Vite dev servers on the port range (Windows
   `taskkill`, else `kill`). Run `npm run kill-vite`, or `--dry` to preview.

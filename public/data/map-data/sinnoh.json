@@ -973,7 +973,8 @@
    "caughtCount": 20,
    "gymsRequired": [
     "sinnoh-gym-5"
-   ]
+   ],
+   "partyLevel": 39
   },
   "unlockOrder": 400218,
   "position": {
@@ -1133,7 +1134,8 @@
    ],
    "gymsRequired": [
     "sinnoh-gym-7"
-   ]
+   ],
+   "partyLevel": 48
   },
   "unlockOrder": 400222,
   "position": {
@@ -1263,7 +1265,8 @@
    ],
    "gymsRequired": [
     "sinnoh-gym-8"
-   ]
+   ],
+   "partyLevel": 55
   },
   "unlockOrder": 400225,
   "position": {
@@ -1368,7 +1371,8 @@
      "luxio"
     ],
     "count": 1
-   }
+   },
+   "partyLevel": 62
   },
   "unlockOrder": 400228,
   "position": {

@@ -381,7 +381,8 @@
    ],
    "gymsRequired": [
     "johto-gym-3"
-   ]
+   ],
+   "partyLevel": 21
   },
   "unlockOrder": 200036,
   "position": {
@@ -944,7 +945,8 @@
    "caughtCount": 27,
    "gymsRequired": [
     "johto-gym-8"
-   ]
+   ],
+   "partyLevel": 58
   },
   "unlockOrder": 200046,
   "position": {
@@ -973,7 +975,8 @@
    ],
    "gymsRequired": [
     "johto-gym-8"
-   ]
+   ],
+   "partyLevel": 61
   },
   "unlockOrder": 200047,
   "position": {

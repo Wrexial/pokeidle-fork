@@ -1243,7 +1243,8 @@
    ],
    "gymsRequired": [
     "unova-gym-8"
-   ]
+   ],
+   "partyLevel": 43
   },
   "unlockOrder": 500016,
   "position": {
@@ -1361,7 +1362,8 @@
    ],
    "gymsRequired": [
     "unova-gym-8"
-   ]
+   ],
+   "partyLevel": 55
   },
   "unlockOrder": 500019,
   "position": {
@@ -1421,7 +1423,8 @@
    ],
    "gymsRequired": [
     "unova-gym-8"
-   ]
+   ],
+   "partyLevel": 61
   },
   "unlockOrder": 500021,
   "position": {
@@ -1449,7 +1452,8 @@
      "count": 5
     }
    ],
-   "caughtCount": 29
+   "caughtCount": 29,
+   "partyLevel": 64
   },
   "unlockOrder": 500022,
   "position": {

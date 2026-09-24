@@ -2637,6 +2637,64 @@ for (const region of regions) {
   }
 }
 
+// --- level gates -------------------------------------------------------------
+// Most routes ramp smoothly from the area that unlocks them, but a few hang off
+// a much earlier town (Paldea's province areas, Alola's island hubs) or were
+// re-levelled by rank rather than by gate. Give those a party-level gate so a
+// high-level area can't be wandered into under-levelled. Only genuine jumps are
+// gated, so the varied battle/Pokedex gates still lead the progression.
+const LEVEL_GATE_GAP = 12
+const LEVEL_GATE_BUFFER = 6
+const bucketLevel = (id) => {
+  const owner = mapData[id],
+    encounters = owner?.routeKey ? encounterData[owner.routeKey]?.encounters : null
+  return encounters?.length ? Math.min(...encounters.map((entry) => entry.minLevel)) : null
+}
+/**
+ * The highest wild level reachable before `id`, following the unlock graph
+ * through towns and zone hubs that have no wilds of their own.
+ * @param {string} id @param {Set<string>} selfIds @param {Set<string>} [seen]
+ */
+const prerequisiteLevel = (id, selfIds, seen = new Set()) => {
+  const direct = bucketLevel(id)
+  if (direct != null) return direct
+  if (selfIds.has(id) || seen.has(id)) return null
+  seen.add(id)
+  const unlock = mapData[id]?.unlock ?? {},
+    parentIds = [
+      ...(unlock.requires ?? []),
+      ...(unlock.battlesAtLocation ?? []).map((rule) => rule.locationId),
+      ...(unlock.caughtOnRoute ? [unlock.caughtOnRoute.routeKey] : []),
+    ]
+  let best = null
+  for (const parentId of parentIds) {
+    const level = prerequisiteLevel(parentId, selfIds, seen)
+    if (level != null && (best == null || level > best)) best = level
+  }
+  return best
+}
+for (const location of Object.values(mapData)) {
+  if (location.type === 'raid' || !location.routeKey) continue
+  const level = bucketLevel(location.id)
+  if (level == null) continue
+  const selfIds = new Set([location.id, location.zone].filter(Boolean)),
+    unlock = location.unlock ?? {},
+    prereqIds = [
+      ...(unlock.requires ?? []),
+      ...(unlock.battlesAtLocation ?? []).map((rule) => rule.locationId),
+      ...(unlock.caughtOnRoute ? [unlock.caughtOnRoute.routeKey] : []),
+    ]
+  let prereqLevel = null
+  for (const id of prereqIds) {
+    const reached = prerequisiteLevel(id, selfIds)
+    if (reached != null && (prereqLevel == null || reached > prereqLevel)) prereqLevel = reached
+  }
+  if (prereqLevel == null || level - prereqLevel <= LEVEL_GATE_GAP) continue
+  const gate = Math.max(LEVEL_MIN, level - LEVEL_GATE_BUFFER)
+  if ((unlock.partyLevel ?? 0) >= gate) continue
+  location.unlock = { ...unlock, partyLevel: gate }
+}
+
 // Region entry points unlock when the player spends an Unlock Token earned by
 // beating a region's Champion (see the Pokedex/Town Map). A starting region is
 // open immediately.

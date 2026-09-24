@@ -769,7 +769,8 @@
    ],
    "gymsRequired": [
     "hoenn-gym-5"
-   ]
+   ],
+   "partyLevel": 30
   },
   "unlockOrder": 300116,
   "position": {
@@ -847,7 +848,8 @@
    ],
    "gymsRequired": [
     "hoenn-gym-5"
-   ]
+   ],
+   "partyLevel": 32
   },
   "unlockOrder": 300117,
   "position": {
@@ -1594,7 +1596,8 @@
    "caughtCount": 30,
    "gymsRequired": [
     "hoenn-gym-8"
-   ]
+   ],
+   "partyLevel": 67
   },
   "unlockOrder": 300134,
   "position": {

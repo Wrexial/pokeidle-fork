@@ -9047,8 +9047,75 @@ img {
     bottom: auto
 }
 
-.activity-gauge-trunk {
-    background: linear-gradient(180deg,#5a3a1a,#2a1a0a)
+.activity-charge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%
+}
+
+.activity-trees {
+    display: flex;
+    gap: 22px;
+    align-items: flex-end
+}
+
+.activity-tree {
+    width: 78px;
+    height: 92px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 52px;
+    line-height: 1;
+    background: linear-gradient(180deg,#2e5220,#1a2f12);
+    border: 2px solid #6d8a4d;
+    border-radius: 12px 12px 6px 6px;
+    cursor: pointer;
+    touch-action: none;
+    user-select: none;
+    transition: transform .1s ease, filter .1s ease, box-shadow .1s ease
+}
+
+.activity-tree:hover:not(:disabled) {
+    filter: brightness(1.12);
+    transform: translateY(-2px)
+}
+
+.activity-tree.charging {
+    animation: activityTreeShake .16s linear infinite;
+    box-shadow: 0 0 0 3px var(--gold), 0 0 18px rgba(255,214,90,.6);
+    border-color: var(--gold)
+}
+
+.activity-tree:disabled {
+    cursor: default;
+    opacity: .75
+}
+
+.activity-charge.locked .activity-tree {
+    opacity: .6
+}
+
+.activity-charge .activity-bar {
+    width: 80%
+}
+
+.activity-charge-fill {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(90deg,rgba(255,214,90,.35),rgba(255,255,255,.12));
+    border-right: 2px solid rgba(255,255,255,.85);
+    pointer-events: none
+}
+
+@keyframes activityTreeShake {
+    0%, 100% { transform: translateX(0) rotate(0) }
+    25% { transform: translateX(-2px) rotate(-1.5deg) }
+    75% { transform: translateX(2px) rotate(1.5deg) }
 }
 
 .activity-gauge-depth {

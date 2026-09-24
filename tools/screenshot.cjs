@@ -439,6 +439,40 @@ async function main() {
       console.log('WARNING: no activity encounter captured')
     }
 
+    // Headbutt: three trees and the hold-to-charge sweet-spot bar.
+    await cdp.eval(
+      `localStorage.setItem('pokemon-idle-save-v2', ${JSON.stringify(
+        JSON.stringify(
+          minigameSave('kanto', 'viridianForest', 'viridianForest', [
+            'palletTown',
+            'route1',
+            'viridianForest',
+          ])
+        )
+      )}); 'ok'`
+    )
+    await cdp.send('Page.navigate', { url: APP_URL })
+    await cdp.waitFor('window.gameDataDebug.status().loaded === true', 20000, 'headbutt data')
+    await cdp.eval(
+      `(() => { const b = document.querySelector('.patch-notes-dismiss-btn'); if (b) b.click(); return true })()`
+    )
+    await sleep(600)
+    const startedHeadbutt = await cdp.eval(
+      `(() => {
+        const card = [...document.querySelectorAll('.location-minigame-card')].find((el) => /Headbutt/.test(el.textContent))
+        if (!card) return false
+        card.querySelector('.location-minigame-start').click()
+        return true
+      })()`
+    )
+    if (startedHeadbutt) {
+      await cdp.waitFor(`!!document.querySelector('.activity-trees')`, 5000, 'headbutt scene')
+      await cdp.screenshot(path.join(OUT, '25-headbutt.png'))
+      console.log('Headbutt scene ok')
+    } else {
+      console.log('WARNING: no Headbutt activity card found')
+    }
+
     // Fixed minigames: Voltorb Flip (Unova) and the Auction House (Kalos).
     const fixedScenes = [
       [

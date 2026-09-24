@@ -338,7 +338,7 @@ test('END_ROUTE_ACTIVITY returns to idle', () => {
 
 test('rock smash, headbutt and diving are offered only where their types live', () => {
   assert.equal(ROUTE_ACTIVITIES.rockSmash.display, 'swing')
-  assert.equal(ROUTE_ACTIVITIES.headbutt.display, 'trunk')
+  assert.equal(ROUTE_ACTIVITIES.headbutt.display, 'charge')
   assert.equal(ROUTE_ACTIVITIES.diving.display, 'depth')
   for (const activity of [ROUTE_ACTIVITIES.rockSmash, ROUTE_ACTIVITIES.headbutt, ROUTE_ACTIVITIES.diving]) {
     assert.equal(activity.mode, 'encounter')

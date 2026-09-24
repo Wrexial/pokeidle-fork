@@ -16,6 +16,9 @@ export const ACTIVITY_ATTEMPTS = 3
 /** How long one there-and-back sweep of the timing marker takes, in ms. */
 export const ACTIVITY_SWEEP_MS = 1600
 
+/** How long a held charge takes to fill from empty to full, in ms. */
+export const ACTIVITY_CHARGE_MS = 900
+
 /** Distance from the centre (in 0..1 units) that still lands a hit. */
 export const ACTIVITY_HIT_ZONE = 0.28
 
@@ -32,7 +35,7 @@ export const ACTIVITY_ULTRA_ZONE = 0.055
  * activities don't look alike.
  * @type {Record<string, {
  *   id: string, title: string, action: string, icon: string, hint: string,
- *   mode: 'encounter' | 'loot', display: 'bar' | 'rings' | 'swing' | 'trunk' | 'depth',
+ *   mode: 'encounter' | 'loot', display: 'bar' | 'rings' | 'swing' | 'charge' | 'depth',
  *   preferTypes?: string[], encounterChance?: number, perfectEncounterChance?: number,
  *   deepWater?: boolean,
  * }>}
@@ -76,9 +79,9 @@ export const ROUTE_ACTIVITIES = {
     title: 'Headbutt',
     action: 'HEADBUTT',
     icon: '\u{1f333}',
-    hint: 'Headbutt a tree to knock loose the Normal and Flying Pokemon roosting in it.',
+    hint: 'Hold one of the three trees to charge your headbutt, then let go in the sweet spot to shake loose the Normal and Flying Pokemon roosting in it.',
     mode: 'encounter',
-    display: 'trunk',
+    display: 'charge',
     preferTypes: ['Normal', 'Flying'],
   },
   diving: {

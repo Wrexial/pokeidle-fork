@@ -10,6 +10,7 @@ import { useGame } from '../game/context.js'
 import { createBattlePokemon } from '../game/combat.js'
 import {
   ACTIVITY_ATTEMPTS,
+  ACTIVITY_CHARGE_MS,
   ACTIVITY_HIT_ZONE,
   ACTIVITY_PERFECT_ZONE,
   ACTIVITY_SWEEP_MS,
@@ -39,6 +40,8 @@ export function RouteActivityScene() {
     routeKey = mapData[state.currentLocation]?.routeKey ?? state.currentRoute,
     [attemptsLeft, setAttemptsLeft] = React.useState(ACTIVITY_ATTEMPTS),
     [position, setPosition] = React.useState(0.5),
+    [charge, setCharge] = React.useState(0),
+    [chargingTree, setChargingTree] = React.useState(/** @type {number | null} */ (null)),
     [stage, setStage] = React.useState(
       /** @type {'aiming' | 'encounter' | 'result' | 'done'} */ ('aiming')
     ),
@@ -48,11 +51,14 @@ export function RouteActivityScene() {
       /** @type {{ enemy: any, speciesKey: string, level: number, isShiny: boolean, quality: ActivityQuality, heldItem: string | null, levelBonus: number, shinyMultiplier: number } | null} */ (
         null
       )
-    )
+    ),
+    chargingTreeRef = React.useRef(/** @type {number | null} */ (null)),
+    chargeRef = React.useRef(0)
 
-  // Sweep the marker back and forth while the player is aiming.
+  // Sweep the marker back and forth while the player is aiming. Headbutt drives
+  // its own charge bar from the held tree instead.
   React.useEffect(() => {
-    if (stage !== 'aiming') return
+    if (stage !== 'aiming' || activity?.display === 'charge') return
     let frame = 0
     const start = performance.now()
     const loop = /** @param {number} now */ (now) => {
@@ -62,7 +68,40 @@ export function RouteActivityScene() {
     }
     frame = requestAnimationFrame(loop)
     return () => cancelAnimationFrame(frame)
-  }, [stage])
+  }, [stage, activity?.display])
+
+  // Headbutt: hold a tree to charge the bar. It fills and falls back so the
+  // player can time a release at the sweet spot.
+  React.useEffect(() => {
+    if (chargingTree === null) return
+    let frame = 0
+    const start = performance.now()
+    const loop = /** @param {number} now */ (now) => {
+      const cycle = (now - start) % (ACTIVITY_CHARGE_MS * 2),
+        value =
+          cycle <= ACTIVITY_CHARGE_MS
+            ? cycle / ACTIVITY_CHARGE_MS
+            : 2 - cycle / ACTIVITY_CHARGE_MS
+      chargeRef.current = value
+      setCharge(value)
+      frame = requestAnimationFrame(loop)
+    }
+    frame = requestAnimationFrame(loop)
+    return () => cancelAnimationFrame(frame)
+  }, [chargingTree])
+
+  // A held charge releases wherever the pointer is lifted.
+  React.useEffect(() => {
+    if (chargingTree === null) return
+    const release = () => releaseCharge()
+    window.addEventListener('pointerup', release)
+    window.addEventListener('pointercancel', release)
+    return () => {
+      window.removeEventListener('pointerup', release)
+      window.removeEventListener('pointercancel', release)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [chargingTree])
 
   if (!activity) return null
 
@@ -124,9 +163,13 @@ export function RouteActivityScene() {
     setStage(attemptsLeft <= 0 ? 'done' : 'result')
   }
 
-  function stop() {
+  /**
+   * Resolve a timing attempt at `aimPosition` (0..1, sweet spot at 0.5).
+   * @param {number} aimPosition
+   */
+  function resolveAt(aimPosition) {
     if (!activity || stage !== 'aiming') return
-    const distance = Math.abs(position - 0.5),
+    const distance = Math.abs(aimPosition - 0.5),
       perfect = distance <= ACTIVITY_PERFECT_ZONE,
       ultra = distance <= ACTIVITY_ULTRA_ZONE,
       hit = distance <= ACTIVITY_HIT_ZONE,
@@ -173,10 +216,31 @@ export function RouteActivityScene() {
     setStage(nextAttempts <= 0 ? 'done' : 'result')
   }
 
+  function stop() {
+    resolveAt(position)
+  }
+
+  /** @param {number} index */
+  function startCharge(index) {
+    if (stage !== 'aiming' || chargingTreeRef.current !== null) return
+    chargingTreeRef.current = index
+    chargeRef.current = 0
+    setChargingTree(index)
+    setCharge(0)
+  }
+
+  function releaseCharge() {
+    if (chargingTreeRef.current === null) return
+    chargingTreeRef.current = null
+    setChargingTree(null)
+    resolveAt(chargeRef.current)
+  }
+
   const hitWidth = ACTIVITY_HIT_ZONE * 200,
     perfectWidth = ACTIVITY_PERFECT_ZONE * 200,
     ultraWidth = ACTIVITY_ULTRA_ZONE * 200,
-    liveDistance = Math.abs(position - 0.5),
+    aimValue = activity.display === 'charge' ? charge : position,
+    liveDistance = Math.abs(aimValue - 0.5),
     liveZone =
       liveDistance <= ACTIVITY_ULTRA_ZONE
         ? 'ultra'
@@ -312,10 +376,68 @@ export function RouteActivityScene() {
                       jsx('div', { className: 'activity-swing-rock', children: '\u{1faa8}' }),
                     ],
                   })
-                : activity.display === 'trunk' || activity.display === 'depth'
+                : activity.display === 'charge'
                   ? jsxs('div', {
-                      className: `activity-gauge activity-gauge-${activity.display}${stage === 'aiming' ? '' : ' locked'}`,
+                      className: `activity-charge${stage === 'aiming' ? '' : ' locked'}`,
                       children: [
+                        jsxs('div', {
+                          className: 'activity-trees',
+                          children: [0, 1, 2].map((index) =>
+                            jsx(
+                              'button',
+                              {
+                                className: `activity-tree${chargingTree === index ? ' charging' : ''}`,
+                                disabled: stage !== 'aiming',
+                                onPointerDown: (
+                                  /** @type {React.PointerEvent<HTMLButtonElement>} */ event
+                                ) => {
+                                  event.preventDefault()
+                                  startCharge(index)
+                                },
+                                onContextMenu: (
+                                  /** @type {React.MouseEvent} */ event
+                                ) => event.preventDefault(),
+                                'aria-label': `Headbutt tree ${index + 1}`,
+                                children: '\u{1f333}',
+                              },
+                              index
+                            )
+                          ),
+                        }),
+                        jsxs('div', {
+                          className: 'activity-bar activity-charge-bar',
+                          children: [
+                            jsx('div', {
+                              className: 'activity-zone activity-zone-hit',
+                              style: { left: `${50 - hitWidth / 2}%`, width: `${hitWidth}%` },
+                            }),
+                            jsx('div', {
+                              className: 'activity-zone activity-zone-perfect',
+                              style: {
+                                left: `${50 - perfectWidth / 2}%`,
+                                width: `${perfectWidth}%`,
+                              },
+                            }),
+                            jsx('div', {
+                              className: 'activity-zone activity-zone-ultra',
+                              style: { left: `${50 - ultraWidth / 2}%`, width: `${ultraWidth}%` },
+                            }),
+                            jsx('div', {
+                              className: 'activity-charge-fill',
+                              style: { width: `${charge * 100}%` },
+                            }),
+                            jsx('div', {
+                              className: `activity-marker${liveZone ? ` ${liveZone}` : ''}`,
+                              style: { left: `${charge * 100}%` },
+                            }),
+                          ],
+                        }),
+                      ],
+                    })
+                  : activity.display === 'depth'
+                    ? jsxs('div', {
+                        className: `activity-gauge activity-gauge-${activity.display}${stage === 'aiming' ? '' : ' locked'}`,
+                        children: [
                         jsx('div', {
                           className: 'activity-zone activity-zone-hit',
                           style: { top: `${50 - hitWidth / 2}%`, height: `${hitWidth}%` },
@@ -374,11 +496,12 @@ export function RouteActivityScene() {
             ? jsxs('div', {
                 className: 'activity-actions',
                 children: [
-                  jsx('button', {
-                    className: 'move-panel-btn confirm',
-                    onClick: stop,
-                    children: activity.action,
-                  }),
+                  activity.display !== 'charge' &&
+                    jsx('button', {
+                      className: 'move-panel-btn confirm',
+                      onClick: stop,
+                      children: activity.action,
+                    }),
                   jsx('button', {
                     className: 'move-panel-btn',
                     onClick: leave,

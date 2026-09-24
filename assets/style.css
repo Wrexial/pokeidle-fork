@@ -9813,3 +9813,262 @@ img {
     display: flex;
     gap: 8px
 }
+
+.contest-scene {
+    background-image: url(/backgrounds/town_port.png)
+}
+
+.contest-theme {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 6px 14px;
+    background: rgba(20,14,6,.72);
+    border: 1px solid #8a7040;
+    border-radius: 6px
+}
+
+.contest-theme-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold)
+}
+
+.contest-theme-types {
+    font-size: 8px;
+    color: #f0e6c8
+}
+
+.contest-theme-cool { box-shadow: inset 0 0 0 2px #e05a2b }
+.contest-theme-beauty { box-shadow: inset 0 0 0 2px #4aa8d8 }
+.contest-theme-cute { box-shadow: inset 0 0 0 2px #e88fb0 }
+.contest-theme-clever { box-shadow: inset 0 0 0 2px #8e6fd0 }
+.contest-theme-tough { box-shadow: inset 0 0 0 2px #b08040 }
+
+.contest-moves {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+    width: 100%;
+    max-width: 360px
+}
+
+.contest-move {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 8px;
+    font-size: 9px;
+    color: #1a1008;
+    background: linear-gradient(#efe3c4,#cdbd94);
+    border: 2px solid #8a7040;
+    border-radius: 4px;
+    cursor: pointer
+}
+
+.contest-move:hover:not(:disabled) {
+    filter: brightness(1.06)
+}
+
+.contest-move:disabled {
+    opacity: .6;
+    cursor: default
+}
+
+.contest-move-name {
+    flex: 1;
+    text-align: left;
+    font-weight: 700
+}
+
+.contest-move-appeal {
+    font-weight: 700;
+    color: #1b6f3a
+}
+
+.contest-rivals {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center
+}
+
+.contest-rival {
+    padding: 2px 6px;
+    font-size: 8px;
+    color: #e7dcc0;
+    background: #00000044;
+    border: 1px solid #8a7040;
+    border-radius: 999px
+}
+
+.contest-rival strong {
+    color: var(--gold)
+}
+
+.contest-board {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+    max-width: 340px
+}
+
+.contest-rank {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 8px;
+    font-size: 9px;
+    color: #f0e6c8;
+    background: rgba(20,14,6,.72);
+    border: 1px solid #8a7040;
+    border-radius: 4px
+}
+
+.contest-rank.player {
+    color: #fff;
+    border-color: var(--gold)
+}
+
+.contest-rank-place {
+    width: 14px;
+    font-weight: 700;
+    color: var(--gold)
+}
+
+.contest-rank-name { flex: 1 }
+.contest-rank-score { font-weight: 700 }
+
+.contest-prize {
+    align-self: center;
+    font-size: 9px;
+    color: var(--gold)
+}
+
+.pokeathlon-scene {
+    background-image: url(/backgrounds/grassland.png)
+}
+
+.athlon-event {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 380px
+}
+
+.athlon-event-label {
+    font-size: 9px;
+    color: #f0e6c8;
+    text-align: center
+}
+
+.athlon-timer {
+    width: 100%;
+    height: 10px;
+    overflow: hidden;
+    background: #00000066;
+    border: 1px solid #8a7040;
+    border-radius: 999px
+}
+
+.athlon-timer-fill {
+    height: 100%;
+    background: linear-gradient(90deg,#7fd06a,#e8c94a);
+    transition: width .05s linear
+}
+
+.athlon-big-readout {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gold)
+}
+
+.athlon-mash-btn {
+    width: 120px;
+    height: 120px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #10240c;
+    background: radial-gradient(#a5e07f,#4c9a34);
+    border: 4px solid #2e7d32;
+    border-radius: 50%;
+    cursor: pointer
+}
+
+.athlon-mash-btn:active {
+    transform: scale(.96)
+}
+
+.athlon-mash-btn:disabled {
+    opacity: .55;
+    cursor: default
+}
+
+.athlon-track {
+    position: relative;
+    width: 100%;
+    height: 36px;
+    overflow: hidden;
+    background: rgba(20,14,6,.72);
+    border: 1px solid #8a7040;
+    border-radius: 6px
+}
+
+.athlon-sweet-spot {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 16%;
+    transform: translateX(-50%);
+    background: rgba(210,180,60,.35)
+}
+
+.athlon-marker {
+    position: absolute;
+    top: 2px;
+    bottom: 2px;
+    width: 6px;
+    margin-left: -3px;
+    background: #fff;
+    border-radius: 3px;
+    box-shadow: 0 0 6px #fff
+}
+
+.athlon-summary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 18px;
+    background: rgba(20,14,6,.8);
+    border: 1px solid #8a7040;
+    border-radius: 6px
+}
+
+.athlon-summary-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold)
+}
+
+.athlon-summary-score {
+    font-size: 10px;
+    color: #fff
+}
+
+.athlon-summary-events {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center
+}
+
+.athlon-summary-event {
+    font-size: 8px;
+    color: #e7dcc0
+}

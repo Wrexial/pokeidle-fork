@@ -69,6 +69,8 @@ export const CHANGELOG = [
             'Paldea\u2019s Mesagoza Academy now runs the Academy Quiz: answer 10 type-matchup questions against a 10-second clock with 3 lives. Most ask which type is super-effective; some ask about immunities. A good score pays money and candy, and a perfect run earns a Rare Candy',
             'Unova\u2019s Nimbasa City hosts Voltorb Flip: a 5\u00d75 deduction board where every row and column advertises how many Voltorbs and how many points it hides. Flip the 2s and 3s to bank coins, clear a board to climb a level, and a single Voltorb ends the run',
             'Kalos\u2019s Lumiose City opens the Grand Auction House: bid against hidden rival budgets for a lot of items. The appraiser gives a value range and the rivals drop out at their own ceilings, but win the hammer and you pay whatever you bid \u2014 even over the odds',
+            'Hoenn\u2019s Lilycove City runs the Pok\u00e9mon Contest: pick a move each round for four rounds, matching the contest theme and chaining two different moves of the same type for a combo while avoiding repeats, then rank against the rivals',
+            'Johto\u2019s Ecruteak City hosts the Pok\u00e9athlon: three events \u2014 mash the Sprint, time the Hurdle and hit the moving Target \u2014 scored together for a gold, silver or bronze medal',
           ],
         },
         {

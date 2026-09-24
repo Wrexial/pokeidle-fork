@@ -31,6 +31,8 @@ import { SafariScene } from './safari-scene.js'
 import { AcademyQuizScene } from './academy-quiz-scene.js'
 import { VoltorbFlipScene } from './voltorb-flip-scene.js'
 import { AuctionHouseScene } from './auction-house-scene.js'
+import { ContestScene } from './contest-scene.js'
+import { PokeathlonScene } from './pokeathlon-scene.js'
 import { MiningScene } from './mining-scene.js'
 import { GameCornerScene } from './game-corner-scene.js'
 import { RouteActivityScene } from './route-activity-scene.js'
@@ -61,6 +63,8 @@ export function BattleScene() {
   if (state.phase === 'academyQuiz') return jsx(AcademyQuizScene, {})
   if (state.phase === 'voltorbFlip') return jsx(VoltorbFlipScene, {})
   if (state.phase === 'auctionHouse') return jsx(AuctionHouseScene, {})
+  if (state.phase === 'contest') return jsx(ContestScene, {})
+  if (state.phase === 'pokeathlon') return jsx(PokeathlonScene, {})
   if (state.phase === 'mining') return jsx(MiningScene, {})
   if (state.phase === 'gameCorner') return jsx(GameCornerScene, {})
   if (state.phase === 'routeActivity') return jsx(RouteActivityScene, {})

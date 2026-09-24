@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 const gameData = installGameData()
 
-const { BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL, BUG_CONTEST_RUSTLES, MINIGAME_LOCATIONS, MINING_COST, SLOT_JACKPOT, SLOT_PAYLINES, SLOT_REELS, SLOT_ROWS, SLOT_SPIN_COST, SLOT_SYMBOLS, VOLTORB_FLIP_COST, VOLTORB_MAX_LEVEL, VOLTORB_SIZE, AUCTION_LOTS, auctionAppraisal, boardCleared, boardExploded, boardHints, bugCatchChance, bugContestPrize, bugFleeChance, bugStays, buildContestResults, canAuctionBid, contestPlayerRank, contestScore, createAuction, createVoltorbBoard, flipVoltorbCell, placeAuctionBid, rewardItemName, rollContestBug, rollMiningReward, spinSlots, throwNetBall, toggleVoltorbMark, voltorbBoardCoins, voltorbCountForLevel, voltorbFlipPrize } = await import(
+const { BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL, BUG_CONTEST_RUSTLES, CONTEST_COST, CONTEST_THEMES, MINIGAME_LOCATIONS, MINING_COST, POKEATHLON_COST, POKEATHLON_SPRINT_MS, SLOT_JACKPOT, SLOT_PAYLINES, SLOT_REELS, SLOT_ROWS, SLOT_SPIN_COST, SLOT_SYMBOLS, VOLTORB_FLIP_COST, VOLTORB_MAX_LEVEL, VOLTORB_SIZE, AUCTION_LOTS, accuracyScore, auctionAppraisal, boardCleared, boardExploded, boardHints, bugCatchChance, bugContestPrize, bugFleeChance, bugStays, buildContestResults, canAuctionBid, contestAppeal, contestPlacement, contestPlayerRank, contestPrize, contestRank, contestScore, contestTheme, createAuction, createVoltorbBoard, flipVoltorbCell, moveBaseAppeal, placeAuctionBid, pokeathlonPrize, rewardItemName, rollContestBug, rollContestRivalRound, rollContestTheme, rollMiningReward, spinSlots, sprintScore, throwNetBall, toggleVoltorbMark, voltorbBoardCoins, voltorbCountForLevel, voltorbFlipPrize } = await import(
   '../src/game/minigames.js'
 )
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
@@ -298,7 +298,104 @@ test('every fixed minigame location is a map POI', async () => {
   const { POI_LOCATIONS } = await import('../src/game/minigames.js')
   for (const id of Object.keys(MINIGAME_LOCATIONS)) assert.ok(POI_LOCATIONS.has(id))
   assert.ok(POI_LOCATIONS.has('hoenn-route-111'), 'the Battle Tower is a POI')
-  assert.equal(POI_LOCATIONS.size, 9)
+  assert.equal(POI_LOCATIONS.size, 11)
+})
+
+test('contest appeal rewards theme, combo and move power', () => {
+  const cool = 'cool'
+  assert.ok(moveBaseAppeal('flamethrower') > moveBaseAppeal('ember'))
+  assert.equal(moveBaseAppeal('growl'), 1, 'status moves are the minimum')
+
+  // Flamethrower is Fire, which is a Cool theme type.
+  const onTheme = contestAppeal('flamethrower', cool, null)
+  assert.ok(onTheme.onTheme)
+  assert.ok(onTheme.appeal > moveBaseAppeal('flamethrower'))
+
+  // A different Fire move the next round chains a combo.
+  const combo = contestAppeal('ember', cool, { moveId: 'flamethrower', type: 'Fire' })
+  assert.ok(combo.combo)
+  assert.equal(combo.appeal, moveBaseAppeal('ember') + 2 + 2)
+
+  // Repeating the exact same move is penalised to 1.
+  const repeat = contestAppeal('ember', cool, { moveId: 'ember', type: 'Fire' })
+  assert.ok(repeat.repeated)
+  assert.equal(repeat.appeal, 1)
+})
+
+test('contest themes and rivals behave sanely', () => {
+  const theme = rollContestTheme()
+  assert.ok(CONTEST_THEMES.some((candidate) => candidate.id === theme.id))
+  assert.equal(contestTheme('nonsense').id, CONTEST_THEMES[0].id)
+  for (const skill of [0, 1, 2]) {
+    const score = rollContestRivalRound(skill)
+    assert.ok(score >= 2 && score <= 7)
+  }
+
+  const board = contestPlacement(20, [
+    { name: 'A', score: 25 },
+    { name: 'B', score: 10 },
+    { name: 'C', score: 30 },
+  ])
+  assert.equal(board[0].owner, 'C')
+  assert.ok(board.some((entry) => entry.isPlayer))
+  assert.equal(contestRank(board), 3)
+  const won = contestPlacement(99, [{ name: 'A', score: 1 }])
+  assert.equal(contestRank(won), 1)
+  assert.ok(contestPrize(1).money > contestPrize(4).money)
+})
+
+test('START_CONTEST charges entry and END_MINIGAME returns to idle', () => {
+  const started = gameReducer(
+      { ...initialGameState, phase: 'idle', money: CONTEST_COST + 10 },
+      { type: 'START_CONTEST' }
+    ),
+    broke = gameReducer(
+      { ...initialGameState, phase: 'idle', money: CONTEST_COST - 1 },
+      { type: 'START_CONTEST' }
+    ),
+    ended = gameReducer(started, { type: 'END_MINIGAME' })
+  assert.equal(started.phase, 'contest')
+  assert.equal(started.money, 10)
+  assert.equal(broke.phase, 'idle')
+  assert.equal(ended.phase, 'idle')
+})
+
+test('Pokeathlon scores scale from zero to a hundred', () => {
+  assert.equal(sprintScore(0), 0)
+  assert.equal(sprintScore(60, POKEATHLON_SPRINT_MS), 100, '12 presses a second is perfect')
+  assert.ok(sprintScore(30, POKEATHLON_SPRINT_MS) > 0)
+  assert.equal(accuracyScore(0), 100, 'dead centre is perfect')
+  assert.equal(accuracyScore(1), 0, 'the edge scores nothing')
+  assert.ok(accuracyScore(0.25) > accuracyScore(0.75))
+})
+
+test('Pokeathlon medals pay by combined total', () => {
+  const gold = pokeathlonPrize(300),
+    silver = pokeathlonPrize(240),
+    bronze = pokeathlonPrize(160),
+    none = pokeathlonPrize(60)
+  assert.equal(gold.tier, 'gold')
+  assert.equal(silver.tier, 'silver')
+  assert.equal(bronze.tier, 'bronze')
+  assert.equal(none.tier, 'none')
+  assert.ok(gold.money > silver.money && silver.money > bronze.money)
+  assert.ok(gold.items.length > 0)
+})
+
+test('START_POKEATHLON charges entry and END_MINIGAME returns to idle', () => {
+  const started = gameReducer(
+      { ...initialGameState, phase: 'idle', money: POKEATHLON_COST + 55 },
+      { type: 'START_POKEATHLON' }
+    ),
+    broke = gameReducer(
+      { ...initialGameState, phase: 'idle', money: POKEATHLON_COST - 1 },
+      { type: 'START_POKEATHLON' }
+    ),
+    ended = gameReducer(started, { type: 'END_MINIGAME' })
+  assert.equal(started.phase, 'pokeathlon')
+  assert.equal(started.money, 55)
+  assert.equal(broke.phase, 'idle')
+  assert.equal(ended.phase, 'idle')
 })
 
 test('a Voltorb board has the level\u2019s Voltorbs and consistent hints', () => {

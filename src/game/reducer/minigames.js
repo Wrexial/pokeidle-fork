@@ -1,6 +1,6 @@
 // Reducer handlers for minigames actions. Split from game/reducer.js.
 
-import { BUG_CONTEST_COST, MINING_COST, QUIZ_COST, ROUTE_ACTIVITIES, SAFARI_COST, VOLTORB_FLIP_COST, routeActivityIds } from '../minigames.js'
+import { BUG_CONTEST_COST, CONTEST_COST, MINING_COST, POKEATHLON_COST, QUIZ_COST, ROUTE_ACTIVITIES, SAFARI_COST, VOLTORB_FLIP_COST, routeActivityIds } from '../minigames.js'
 import { mapData } from '../../data/gameData.js'
 import { createIdleBattleState } from '../progression.js'
 import { enterMinigame } from '../reducer-helpers.js'
@@ -121,6 +121,36 @@ export function startAuctionHouse(state, action) {
 }
 
 /**
+ * Handle the `START_CONTEST` action.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function startContest(state, action) {
+  return enterMinigame(
+    state,
+    'contest',
+    CONTEST_COST,
+    'You stepped onto the Contest stage.'
+  )
+}
+
+/**
+ * Handle the `START_POKEATHLON` action.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function startPokeathlon(state, action) {
+  return enterMinigame(
+    state,
+    'pokeathlon',
+    POKEATHLON_COST,
+    'You signed up for the Pokeathlon.'
+  )
+}
+
+/**
  * Handle the `END_MINIGAME` action.
  * @param {GameState} state
  * @param {GameAction} action
@@ -131,7 +161,9 @@ export function endMinigame(state, action) {
     state.phase === 'gameCorner' ||
     state.phase === 'academyQuiz' ||
     state.phase === 'voltorbFlip' ||
-    state.phase === 'auctionHouse'
+    state.phase === 'auctionHouse' ||
+    state.phase === 'contest' ||
+    state.phase === 'pokeathlon'
     ? { ...state, ...createIdleBattleState() }
     : state
 }

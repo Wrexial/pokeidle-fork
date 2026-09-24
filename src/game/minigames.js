@@ -8,6 +8,8 @@ export { SAFARI_COST, SAFARI_BALLS, SAFARI_BALL, SAFARI_ROUTE_KEY, SAFARI_EFFECT
 export { QUIZ_COST, QUIZ_QUESTIONS, QUIZ_SECONDS, QUIZ_LIVES, QUIZ_OPTIONS, generateQuizQuestion, quizPrize } from './minigames/academy-quiz.js'
 export { VOLTORB_FLIP_COST, VOLTORB_SIZE, VOLTORB_MAX_LEVEL, VOLTORB_CLEAR_BONUS, VOLTORB_COIN_SCALE, voltorbCountForLevel, createVoltorbBoard, boardHints, boardCleared, boardExploded, flipVoltorbCell, toggleVoltorbMark, voltorbBoardCoins, voltorbFlipPrize } from './minigames/voltorb-flip.js'
 export { AUCTION_LOTS, AUCTION_NPCS, rollAuctionLot, auctionAppraisal, auctionRaise, createAuction, canAuctionBid, placeAuctionBid } from './minigames/auction-house.js'
+export { CONTEST_COST, CONTEST_ROUNDS, CONTEST_THEMES, CONTEST_RIVALS, rollContestTheme, contestTheme, moveBaseAppeal, contestAppeal, rollContestRivalRound, contestPlacement, contestRank, contestPrize } from './minigames/contest.js'
+export { POKEATHLON_COST, POKEATHLON_EVENT_MAX, POKEATHLON_SPRINT_MS, POKEATHLON_ATTEMPTS, sprintScore, accuracyScore, pokeathlonPrize } from './minigames/pokeathlon.js'
 export { SLOT_SPIN_COST, SLOT_REELS, SLOT_ROWS, SLOT_PAYLINES, SLOT_SYMBOLS, SLOT_JACKPOT, rollSlotSymbol, spinSlots } from './minigames/game-corner.js'
 export { MINIGAME_LOCATIONS, MINIGAME_START_ACTION, MINIGAME_INFO, POI_LOCATIONS } from './minigames/registry.js'
 export { RODS, DEFAULT_ROD, rodForId, bestRodId, rodsForRegionCount, nextRod } from './minigames/rods.js'

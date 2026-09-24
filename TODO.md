@@ -637,8 +637,9 @@ others: a scene component, a `START_*`/`END_MINIGAME` reducer pair, a
 `MINIGAME_LOCATIONS` + `MINIGAME_START_ACTION` + `MINIGAME_INFO` entry, the phase
 added to the pause/busy lists, and tests.
 
-**Shipped (0.16.0):** the Academy Quiz (Paldea), Voltorb Flip (Unova) and the
-Grand Auction House (Kalos). The rest are open.
+**Shipped (0.16.0):** the Academy Quiz (Paldea), Voltorb Flip (Unova), the
+Grand Auction House (Kalos), the Pokemon Contest (Hoenn) and the Pokeathlon
+(Johto). The rest are open.
 
 - [x] **Poké Pelago (Alola)** — **shipped (0.17.0):** a new Alola island hub
       (off Hau'oli City) hosting companion care (Pat/Brush/Wash +
@@ -658,13 +659,14 @@ Grand Auction House (Kalos). The rest are open.
       Lumiose City. Bid against hidden rival budgets for a lot of items; the
       appraiser gives a value range, rivals drop out at their own ceilings, and
       winning the hammer means paying whatever you bid.
-- [ ] **Pokémon Contest (Hoenn)** — M. Appeal scoring: pick a move each round,
-      match the contest theme, score against rivals. Reuses the Bug Contest
-      ranking/prize UI.
+- [x] **Pokémon Contest (Hoenn)** — **shipped (0.16.0):** Lilycove City's stage.
+      Pick a move each round to appeal to the theme, chain the same type for a
+      combo and avoid repeats, then rank against the rivals.
+- [x] **Pokéathlon (Johto)** — **shipped (0.16.0):** Ecruteak City's three-event
+      meet (Sprint mash, Hurdle timing, Target throw) scored together for a
+      medal.
 - [ ] **Battle Royal (Alola)** — M. Wave survival in a time limit with your
       party; rewards scale with depth. A combat gauntlet, not a puzzle.
-- [ ] **Pokéathlon (Johto/Sinnoh)** — M–L. Three micro-events (mash sprint,
-      timing hurdle, target throw) scored together.
 
 Relevant code: `src/game/minigames/` (one module per game), `registry.js`
 (`MINIGAME_LOCATIONS` / `MINIGAME_INFO`), `src/components/*-scene.js`,

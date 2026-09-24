@@ -3,6 +3,8 @@
 import { BUG_CONTEST_COST, BUG_CONTEST_RUSTLES } from './bug-contest.js'
 import { QUIZ_COST, QUIZ_LIVES, QUIZ_QUESTIONS } from './academy-quiz.js'
 import { SAFARI_BALLS, SAFARI_COST } from './safari.js'
+import { CONTEST_COST, CONTEST_ROUNDS } from './contest.js'
+import { POKEATHLON_COST, POKEATHLON_ATTEMPTS } from './pokeathlon.js'
 import { VOLTORB_FLIP_COST } from './voltorb-flip.js'
 import { BATTLE_TOWER_LOCATION } from '../../data/config.js'
 import { SLOT_SPIN_COST } from './game-corner.js'
@@ -21,6 +23,8 @@ export const MINIGAME_LOCATIONS = {
   'paldea-mesagoza': 'academyQuiz',
   'unova-nimbasa-city': 'voltorbFlip',
   'kalos-lumiose-city': 'auctionHouse',
+  'hoenn-lilycove-city': 'contest',
+  'johto-ecruteak-city': 'pokeathlon',
   'alola-poke-pelago': 'pokePelago',
 }
 
@@ -36,6 +40,8 @@ export const MINIGAME_START_ACTION = {
   academyQuiz: 'START_ACADEMY_QUIZ',
   voltorbFlip: 'START_VOLTORB_FLIP',
   auctionHouse: 'START_AUCTION_HOUSE',
+  contest: 'START_CONTEST',
+  pokeathlon: 'START_POKEATHLON',
 }
 
 /**
@@ -88,6 +94,18 @@ export const MINIGAME_INFO = {
     cost: 0,
     action: 'ENTER AUCTION HOUSE',
     hint: 'Bid against hidden budgets for a lot of items. The appraiser gives a value range; rivals drop out at their own ceilings. Win the hammer and you pay what you bid \u2014 even if that is over the odds.',
+  },
+  contest: {
+    title: 'Pok\u00e9mon Contest',
+    cost: CONTEST_COST,
+    action: 'ENTER CONTEST',
+    hint: `Pick a move each round for ${CONTEST_ROUNDS} rounds. On-theme moves score best, chaining two different moves of the same type adds a combo, and repeating a move is penalised. Rank against the rivals at the end. Entry is $${CONTEST_COST.toLocaleString()}.`,
+  },
+  pokeathlon: {
+    title: 'Pok\u00e9athlon',
+    cost: POKEATHLON_COST,
+    action: 'ENTER POK\u00c9ATHLON',
+    hint: `Three events \u2014 mash the Sprint, time the Hurdles and throw at the moving target \u2014 each scored out of 100 (${POKEATHLON_ATTEMPTS} attempts in the last two). A medal pays money and candy. Entry is $${POKEATHLON_COST.toLocaleString()}.`,
   },
   pokePelago: {
     title: 'Poké Pelago',

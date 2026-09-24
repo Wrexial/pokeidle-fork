@@ -415,6 +415,24 @@ async function main() {
         '.auction-podium',
         '11-auction-house.png',
       ],
+      [
+        'Contest',
+        'hoenn',
+        'hoenn-lilycove-city',
+        'hoenn-route-121',
+        ['hoenn-littleroot-town', 'hoenn-route-121', 'hoenn-lilycove-city'],
+        '.contest-moves',
+        '12-contest.png',
+      ],
+      [
+        'Pokeathlon',
+        'johto',
+        'johto-ecruteak-city',
+        'johto-route-42',
+        ['johto-new-bark-town', 'johto-route-42', 'johto-ecruteak-city'],
+        '.athlon-event',
+        '13-pokeathlon.png',
+      ],
     ]
     for (const [name, region, location, route, unlocked, selector, file] of fixedScenes) {
       await cdp.eval(

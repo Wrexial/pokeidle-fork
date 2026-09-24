@@ -52,6 +52,8 @@ export function enterMinigame(state, phase, cost = 0, log) {
     state.phase === 'gameCorner' ||
     state.phase === 'voltorbFlip' ||
     state.phase === 'auctionHouse' ||
+    state.phase === 'contest' ||
+    state.phase === 'pokeathlon' ||
     state.phase === 'routeActivity' ||
     state.phase === 'wonderTrade'
   )

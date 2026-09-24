@@ -665,6 +665,8 @@ export function useGameLoop() {
       state.phase === 'gameCorner' ||
       state.phase === 'voltorbFlip' ||
       state.phase === 'auctionHouse' ||
+      state.phase === 'contest' ||
+      state.phase === 'pokeathlon' ||
       state.phase === 'routeActivity' ||
       state.phase === 'wonderTrade' ||
       state.paused

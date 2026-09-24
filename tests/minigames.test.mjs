@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 const gameData = installGameData()
 
-const { BATTLE_ROYAL_COST, BATTLE_ROYAL_POOL, BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL, BUG_CONTEST_RUSTLES, CONTEST_COST, CONTEST_THEMES, DYNAMAX_ADVENTURES_COST, DYNAMAX_STAGES, MINIGAME_LOCATIONS, MINING_COST, POKEATHLON_COST, POKEATHLON_SPRINT_MS, POKE_RADAR_CHAIN_STEP, POKE_RADAR_COST, POKE_RADAR_SIZE, SLOT_JACKPOT, SLOT_PAYLINES, SLOT_REELS, SLOT_ROWS, SLOT_SPIN_COST, SLOT_SYMBOLS, VOLTORB_FLIP_COST, VOLTORB_MAX_LEVEL, VOLTORB_SIZE, AUCTION_LOTS, accuracyScore, auctionAppraisal, battleRoyalOpponent, battleRoyalPrize, boardCleared, boardExploded, boardHints, bugCatchChance, bugContestPrize, bugFleeChance, bugStays, buildContestResults, canAuctionBid, contestAppeal, contestPlacement, contestPlayerRank, contestPrize, contestRank, contestScore, contestTheme, createAuction, createOpponent, createVoltorbBoard, dynamaxBoss, dynamaxPaths, dynamaxPrize, flipVoltorbCell, healSquad, moveBaseAppeal, pickRadarTarget, placeAuctionBid, pokeathlonPrize, pokeRadarPrize, radarChainPoints, radarSequence, rewardItemName, rollContestBug, rollContestRivalRound, rollContestTheme, rollMiningReward, simulateBattle, spinSlots, sprintScore, throwNetBall, toBattlePokemon, toggleVoltorbMark, voltorbBoardCoins, voltorbCountForLevel, voltorbFlipPrize } = await import(
+const { BATTLE_ROYAL_COST, BATTLE_ROYAL_POOL, BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL, BUG_CONTEST_RUSTLES, CONTEST_COST, CONTEST_THEMES, DYNAMAX_ADVENTURES_COST, DYNAMAX_STAGES, MINIGAME_LOCATIONS, MINING_COST, POKEATHLON_COST, POKEATHLON_SPRINT_MS, POKE_RADAR_CHAIN_STEP, POKE_RADAR_COST, POKE_RADAR_SIZE, SLOT_JACKPOT, SLOT_PAYLINES, SLOT_REELS, SLOT_ROWS, SLOT_SPIN_COST, SLOT_SYMBOLS, VOLTORB_FLIP_COST, VOLTORB_MAX_LEVEL, VOLTORB_SIZE, AUCTION_LOTS, accuracyScore, auctionAppraisal, battleRoyalOpponent, battleRoyalPrize, boardCleared, boardExploded, boardHints, bugCatchChance, bugContestPrize, bugFleeChance, bugStays, buildContestResults, canAuctionBid, contestAppeal, contestPlacement, contestPlayerRank, contestPrize, contestRank, contestScore, contestTheme, createAuction, createOpponent, createVoltorbBoard, dynamaxBoss, dynamaxPaths, dynamaxPrize, flipVoltorbCell, healSquad, moveBaseAppeal, pickRadarTarget, placeAuctionBid, pokeathlonPrize, pokeRadarPrize, radarChainPoints, radarSequence, rewardItemName, rollContestBug, rollContestRivalRound, rollContestTheme, rollMiningReward, simulateBattle, spinSlots, sprintScore, throwNetBall, toBattlePokemon, toggleVoltorbMark, voltorbBoardCoins, voltorbCountForLevel, voltorbFlipPrize, LIGHTS_OUT_COST, LIGHTS_OUT_SCRAMBLE, LIGHTS_OUT_SIZE, CURRY_COST, CURRY_FLAVORS, CURRY_INGREDIENTS, POKESTAR_COST, POKESTAR_SHOT_COUNT, createLightsOut, toggleLights, lightsSolved, lightsOutPrize, rollCurryRequest, curryScore, curryPrize, pickPokestarShots, pokestarPrize } = await import(
   '../src/game/minigames.js'
 )
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
@@ -298,7 +298,7 @@ test('every fixed minigame location is a map POI', async () => {
   const { POI_LOCATIONS } = await import('../src/game/minigames.js')
   for (const id of Object.keys(MINIGAME_LOCATIONS)) assert.ok(POI_LOCATIONS.has(id))
   assert.ok(POI_LOCATIONS.has('hoenn-route-111'), 'the Battle Tower is a POI')
-  assert.equal(POI_LOCATIONS.size, 14)
+  assert.equal(POI_LOCATIONS.size, 17)
 })
 
 test('a radar sequence is distinct patches of the right length', () => {
@@ -646,4 +646,86 @@ test('winning an auction pays the bid and adds the lot', () => {
   )
   assert.equal(next.money, 12000)
   assert.equal(next.inventory.fireStone, 2)
+})
+
+test('Lights Out toggles a cross and scrambles to a solvable board', () => {
+  assert.equal(LIGHTS_OUT_SIZE, 4)
+  const solved = Array(LIGHTS_OUT_SIZE * LIGHTS_OUT_SIZE).fill(true),
+    toggled = toggleLights(solved, 0)
+  assert.equal(toggled[0], false)
+  assert.equal(toggled[1], false, 'the right neighbour flips')
+  assert.equal(toggled[4], false, 'the below neighbour flips')
+  assert.equal(toggled[5], true, 'the diagonal is untouched')
+  const board = createLightsOut()
+  assert.equal(board.length, LIGHTS_OUT_SIZE * LIGHTS_OUT_SIZE)
+  assert.ok(!lightsSolved(board), 'a fresh board is scrambled')
+  assert.ok(lightsSolved(Array(LIGHTS_OUT_SIZE * LIGHTS_OUT_SIZE).fill(true)))
+  assert.ok(lightsOutPrize(4, true).money > lightsOutPrize(12, true).money)
+  assert.ok(lightsOutPrize(12, true).money > lightsOutPrize(0, false).money)
+})
+
+test('START_LIGHTS_OUT charges entry and END_MINIGAME returns to idle', () => {
+  const started = gameReducer(
+      { ...initialGameState, phase: 'idle', money: LIGHTS_OUT_COST + 5 },
+      { type: 'START_LIGHTS_OUT' }
+    ),
+    broke = gameReducer(
+      { ...initialGameState, phase: 'idle', money: LIGHTS_OUT_COST - 1 },
+      { type: 'START_LIGHTS_OUT' }
+    )
+  assert.equal(started.phase, 'lightsOut')
+  assert.equal(started.money, 5)
+  assert.equal(broke.phase, 'idle')
+  assert.equal(gameReducer(started, { type: 'END_MINIGAME' }).phase, 'idle')
+})
+
+test('curry scoring rewards a matching flavour and good timing', () => {
+  assert.ok(CURRY_FLAVORS.includes(rollCurryRequest()))
+  assert.ok(CURRY_INGREDIENTS.some((entry) => entry.flavor))
+  assert.equal(curryScore(false, 0), 0)
+  assert.equal(curryScore(false, 1), 70)
+  assert.equal(curryScore(true, 1), 100)
+  assert.ok(curryPrize(95).money > curryPrize(60).money)
+  assert.ok(curryPrize(95).items.some((item) => item.itemId === 'curry'))
+})
+
+test('START_CURRY charges entry and END_MINIGAME returns to idle', () => {
+  const started = gameReducer(
+      { ...initialGameState, phase: 'idle', money: CURRY_COST + 5 },
+      { type: 'START_CURRY' }
+    ),
+    broke = gameReducer(
+      { ...initialGameState, phase: 'idle', money: CURRY_COST - 1 },
+      { type: 'START_CURRY' }
+    )
+  assert.equal(started.phase, 'curry')
+  assert.equal(started.money, 5)
+  assert.equal(broke.phase, 'idle')
+  assert.equal(gameReducer(started, { type: 'END_MINIGAME' }).phase, 'idle')
+})
+
+test('Pokestar picks distinct shots with one best take each', () => {
+  const shots = pickPokestarShots(POKESTAR_SHOT_COUNT)
+  assert.equal(shots.length, POKESTAR_SHOT_COUNT)
+  assert.equal(new Set(shots.map((shot) => shot.brief)).size, POKESTAR_SHOT_COUNT)
+  for (const shot of shots) {
+    assert.equal(shot.takes.length, 4)
+    assert.ok(shot.takes.some((take) => take.score === 3), 'every shot has a best take')
+  }
+  assert.ok(pokestarPrize(9).money > pokestarPrize(3).money)
+})
+
+test('START_POKESTAR charges entry and END_MINIGAME returns to idle', () => {
+  const started = gameReducer(
+      { ...initialGameState, phase: 'idle', money: POKESTAR_COST + 5 },
+      { type: 'START_POKESTAR' }
+    ),
+    broke = gameReducer(
+      { ...initialGameState, phase: 'idle', money: POKESTAR_COST - 1 },
+      { type: 'START_POKESTAR' }
+    )
+  assert.equal(started.phase, 'pokestar')
+  assert.equal(started.money, 5)
+  assert.equal(broke.phase, 'idle')
+  assert.equal(gameReducer(started, { type: 'END_MINIGAME' }).phase, 'idle')
 })

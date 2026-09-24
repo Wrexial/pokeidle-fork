@@ -506,6 +506,33 @@ async function main() {
         '16-dynamax.png',
         '.dynamax-path',
       ],
+      [
+        'Lights Out',
+        'hoenn',
+        'hoenn-mauville-city',
+        'hoenn-route-110',
+        ['hoenn-littleroot-town', 'hoenn-route-110', 'hoenn-mauville-city'],
+        '.lights-grid',
+        '19-lights-out.png',
+      ],
+      [
+        'Curry Cooking',
+        'galar',
+        'galar-motostoke',
+        'galar-route-3',
+        ['galar-postwick', 'galar-route-3', 'galar-motostoke'],
+        '.curry-ingredients',
+        '20-curry.png',
+      ],
+      [
+        'Pokestar Studios',
+        'unova',
+        'unova-virbank-city',
+        'unova-route-4',
+        ['unova-nuvema-town', 'unova-route-4', 'unova-virbank-city'],
+        '.pokestar-takes',
+        '21-pokestar.png',
+      ],
     ]
     for (const [name, region, location, route, unlocked, selector, file, action] of fixedScenes) {
       await cdp.eval(

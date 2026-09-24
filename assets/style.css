@@ -10422,3 +10422,230 @@ img {
     opacity: .5;
     cursor: not-allowed
 }
+
+.lights-out-scene {
+    background-image: url(/backgrounds/cave.png)
+}
+
+.lights-grid {
+    display: grid;
+    gap: 8px;
+    width: 100%;
+    max-width: 300px
+}
+
+.light-tile {
+    aspect-ratio: 1;
+    background: #2a2416;
+    border: 2px solid #4a3a1a;
+    border-radius: 8px;
+    box-shadow: inset 0 0 8px #000;
+    cursor: pointer;
+    transition: background .12s, box-shadow .12s
+}
+
+.light-tile.lit {
+    background: radial-gradient(#fff6c0,#e8c94a);
+    border-color: var(--gold);
+    box-shadow: 0 0 12px #e8c94a
+}
+
+.light-tile:hover:not(:disabled) {
+    filter: brightness(1.1)
+}
+
+.curry-scene {
+    background-image: url(/backgrounds/grassland.png)
+}
+
+.curry-choose,
+.curry-cook {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%
+}
+
+.curry-request {
+    font-size: 10px;
+    color: #f0e6c8
+}
+
+.curry-request strong {
+    color: var(--gold)
+}
+
+.curry-ingredients {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    width: 100%;
+    max-width: 380px
+}
+
+.curry-ingredient {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 8px 6px;
+    font-size: 8px;
+    color: #1a1008;
+    background: linear-gradient(#efe3c4,#cdbd94);
+    border: 2px solid #8a7040;
+    border-radius: 5px;
+    cursor: pointer
+}
+
+.curry-ingredient:hover {
+    filter: brightness(1.06)
+}
+
+.curry-ingredient.match {
+    box-shadow: 0 0 0 2px var(--gold)
+}
+
+.curry-ingredient-flavor {
+    opacity: .7
+}
+
+.curry-flame {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    height: 28px;
+    overflow: hidden;
+    background: rgba(20,14,6,.72);
+    border: 1px solid #8a7040;
+    border-radius: 999px
+}
+
+.curry-flame-target {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background: rgba(210,180,60,.35)
+}
+
+.curry-flame-marker {
+    position: absolute;
+    top: -2px;
+    bottom: -2px;
+    width: 8px;
+    margin-left: -4px;
+    background: #ff8a3a;
+    border-radius: 4px;
+    box-shadow: 0 0 8px #ff8a3a
+}
+
+.curry-flame-marker.hot {
+    background: #ffd24a;
+    box-shadow: 0 0 10px #ffd24a
+}
+
+.curry-fan-btn {
+    width: 100%;
+    max-width: 380px;
+    padding: 16px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #10240c;
+    background: radial-gradient(#ffd98a,#e8892b);
+    border: 3px solid #a85a12;
+    border-radius: 8px;
+    cursor: pointer;
+    user-select: none;
+    touch-action: none
+}
+
+.curry-fan-btn:active {
+    transform: scale(.99)
+}
+
+.curry-hint {
+    font-size: 8px;
+    color: #cbbf9c
+}
+
+.pokestar-scene {
+    background-image: url(/backgrounds/town_port.png)
+}
+
+.pokestar-brief {
+    max-width: 92%;
+    padding: 8px 12px;
+    font-size: 10px;
+    line-height: 1.4;
+    text-align: center;
+    color: #fff;
+    background: rgba(20,14,6,.78);
+    border: 1px solid #8a7040;
+    border-radius: 4px
+}
+
+.pokestar-takes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+    width: 100%;
+    max-width: 400px
+}
+
+.pokestar-take {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 8px;
+    font-size: 9px;
+    color: #1a1008;
+    background: linear-gradient(#efe3c4,#cdbd94);
+    border: 2px solid #8a7040;
+    border-radius: 5px;
+    cursor: pointer
+}
+
+.pokestar-take:hover:not(:disabled) {
+    filter: brightness(1.06)
+}
+
+.pokestar-take:disabled {
+    opacity: .7;
+    cursor: default
+}
+
+.pokestar-take.best {
+    box-shadow: 0 0 0 2px var(--gold)
+}
+
+.pokestar-take.chosen {
+    box-shadow: 0 0 0 2px #d08a8a
+}
+
+.pokestar-take-score {
+    font-weight: 700;
+    color: #1b6f3a
+}
+
+.pokestar-summary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 12px 18px;
+    background: rgba(20,14,6,.8);
+    border: 1px solid #8a7040;
+    border-radius: 6px
+}
+
+.pokestar-summary-score {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gold)
+}
+
+.pokestar-summary-label {
+    font-size: 9px;
+    color: #fff
+}

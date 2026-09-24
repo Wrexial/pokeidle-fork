@@ -679,6 +679,9 @@ export function useGameLoop() {
       state.phase === 'pokeRadar' ||
       state.phase === 'battleRoyal' ||
       state.phase === 'dynamaxAdventures' ||
+      state.phase === 'lightsOut' ||
+      state.phase === 'curry' ||
+      state.phase === 'pokestar' ||
       state.phase === 'routeActivity' ||
       state.phase === 'wonderTrade' ||
       state.paused

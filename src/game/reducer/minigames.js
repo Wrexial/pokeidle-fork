@@ -1,6 +1,6 @@
 // Reducer handlers for minigames actions. Split from game/reducer.js.
 
-import { BATTLE_ROYAL_COST, BUG_CONTEST_COST, CONTEST_COST, DYNAMAX_ADVENTURES_COST, MINING_COST, POKEATHLON_COST, POKE_RADAR_COST, QUIZ_COST, ROUTE_ACTIVITIES, SAFARI_COST, VOLTORB_FLIP_COST, routeActivityIds } from '../minigames.js'
+import { BATTLE_ROYAL_COST, BUG_CONTEST_COST, CONTEST_COST, CURRY_COST, DYNAMAX_ADVENTURES_COST, LIGHTS_OUT_COST, MINING_COST, POKEATHLON_COST, POKE_RADAR_COST, POKESTAR_COST, QUIZ_COST, ROUTE_ACTIVITIES, SAFARI_COST, VOLTORB_FLIP_COST, routeActivityIds } from '../minigames.js'
 import { mapData } from '../../data/gameData.js'
 import { createIdleBattleState } from '../progression.js'
 import { enterMinigame } from '../reducer-helpers.js'
@@ -196,6 +196,36 @@ export function startDynamaxAdventures(state, action) {
 }
 
 /**
+ * Handle the `START_LIGHTS_OUT` action.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function startLightsOut(state, action) {
+  return enterMinigame(state, 'lightsOut', LIGHTS_OUT_COST, 'You flicked the lights off.')
+}
+
+/**
+ * Handle the `START_CURRY` action.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function startCurry(state, action) {
+  return enterMinigame(state, 'curry', CURRY_COST, 'You set up a campfire to cook.')
+}
+
+/**
+ * Handle the `START_POKESTAR` action.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function startPokestar(state, action) {
+  return enterMinigame(state, 'pokestar', POKESTAR_COST, 'You stepped onto the Pokestar lot.')
+}
+
+/**
  * Handle the `END_MINIGAME` action.
  * @param {GameState} state
  * @param {GameAction} action
@@ -211,7 +241,10 @@ export function endMinigame(state, action) {
     state.phase === 'pokeathlon' ||
     state.phase === 'pokeRadar' ||
     state.phase === 'battleRoyal' ||
-    state.phase === 'dynamaxAdventures'
+    state.phase === 'dynamaxAdventures' ||
+    state.phase === 'lightsOut' ||
+    state.phase === 'curry' ||
+    state.phase === 'pokestar'
     ? { ...state, ...createIdleBattleState() }
     : state
 }

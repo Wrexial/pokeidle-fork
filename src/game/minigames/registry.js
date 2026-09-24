@@ -8,6 +8,9 @@ import { POKEATHLON_COST, POKEATHLON_ATTEMPTS } from './pokeathlon.js'
 import { POKE_RADAR_COST } from './poke-radar.js'
 import { BATTLE_ROYAL_COST } from './battle-royal.js'
 import { DYNAMAX_ADVENTURES_COST, DYNAMAX_STAGES } from './dynamax-adventures.js'
+import { LIGHTS_OUT_COST } from './lights-out.js'
+import { CURRY_COST } from './curry.js'
+import { POKESTAR_COST } from './pokestar.js'
 import { VOLTORB_FLIP_COST } from './voltorb-flip.js'
 import { BATTLE_TOWER_LOCATION } from '../../data/config.js'
 import { SLOT_SPIN_COST } from './game-corner.js'
@@ -31,6 +34,9 @@ export const MINIGAME_LOCATIONS = {
   'sinnoh-sandgem-town': 'pokeRadar',
   'alola-heahea-city': 'battleRoyal',
   'galar-hammerlocke': 'dynamaxAdventures',
+  'hoenn-mauville-city': 'lightsOut',
+  'galar-motostoke': 'curry',
+  'unova-virbank-city': 'pokestar',
   'alola-poke-pelago': 'pokePelago',
 }
 
@@ -51,6 +57,9 @@ export const MINIGAME_START_ACTION = {
   pokeRadar: 'START_POKE_RADAR',
   battleRoyal: 'START_BATTLE_ROYAL',
   dynamaxAdventures: 'START_DYNAMAX_ADVENTURES',
+  lightsOut: 'START_LIGHTS_OUT',
+  curry: 'START_CURRY',
+  pokestar: 'START_POKESTAR',
 }
 
 /**
@@ -133,6 +142,24 @@ export const MINIGAME_INFO = {
     cost: DYNAMAX_ADVENTURES_COST,
     action: 'ENTER MAX LAIR',
     hint: `Pick a path through ${DYNAMAX_STAGES} encounters, then face a legendary from Galar's raid pool. Win and you catch it; lose the party and you go home empty-handed. Entry is $${DYNAMAX_ADVENTURES_COST.toLocaleString()}.`,
+  },
+  lightsOut: {
+    title: 'Lights Out',
+    cost: LIGHTS_OUT_COST,
+    action: 'START PUZZLE',
+    hint: `Every tap toggles a tile and its four neighbours. Turn all 16 lights back on in as few taps as you can \u2014 a flawless solve pays best. Entry is $${LIGHTS_OUT_COST.toLocaleString()}.`,
+  },
+  curry: {
+    title: 'Curry Cooking',
+    cost: CURRY_COST,
+    action: 'COOK A CURRY',
+    hint: `Pick an ingredient to match the customer's flavour, then hold the fan to keep the campfire in the sweet spot while it simmers. A great curry is worth money and a full-heal Curry. Entry is $${CURRY_COST.toLocaleString()}.`,
+  },
+  pokestar: {
+    title: 'Pok\u00e9star Studios',
+    cost: POKESTAR_COST,
+    action: 'SHOOT A FILM',
+    hint: 'The director calls each shot; pick the take that best matches the brief. Three shots, scored out of nine. Entry is $' + POKESTAR_COST.toLocaleString() + '.',
   },
   pokePelago: {
     title: 'Poké Pelago',

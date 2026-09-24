@@ -300,6 +300,15 @@ export const consumableItems = {
       sellPrice: 300,
       friendship: 30,
     },
+    curry: {
+      id: 'curry',
+      name: 'Curry',
+      description: 'A hearty campfire curry. Restores a party Pokemon to full HP.',
+      category: 'medicine',
+      buyPrice: null,
+      sellPrice: 400,
+      heal: 999,
+    },
     superPotion: {
       id: 'superPotion',
       name: 'Super Potion',

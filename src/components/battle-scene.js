@@ -37,6 +37,9 @@ import { PokeathlonScene } from './pokeathlon-scene.js'
 import { PokeRadarScene } from './poke-radar-scene.js'
 import { BattleRoyalScene } from './battle-royal-scene.js'
 import { DynamaxAdventuresScene } from './dynamax-adventures-scene.js'
+import { LightsOutScene } from './lights-out-scene.js'
+import { CurryScene } from './curry-scene.js'
+import { PokestarScene } from './pokestar-scene.js'
 import { MiningScene } from './mining-scene.js'
 import { GameCornerScene } from './game-corner-scene.js'
 import { RouteActivityScene } from './route-activity-scene.js'
@@ -72,6 +75,9 @@ export function BattleScene() {
   if (state.phase === 'pokeRadar') return jsx(PokeRadarScene, {})
   if (state.phase === 'battleRoyal') return jsx(BattleRoyalScene, {})
   if (state.phase === 'dynamaxAdventures') return jsx(DynamaxAdventuresScene, {})
+  if (state.phase === 'lightsOut') return jsx(LightsOutScene, {})
+  if (state.phase === 'curry') return jsx(CurryScene, {})
+  if (state.phase === 'pokestar') return jsx(PokestarScene, {})
   if (state.phase === 'mining') return jsx(MiningScene, {})
   if (state.phase === 'gameCorner') return jsx(GameCornerScene, {})
   if (state.phase === 'routeActivity') return jsx(RouteActivityScene, {})

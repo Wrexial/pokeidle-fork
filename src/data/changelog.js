@@ -86,6 +86,9 @@ export const CHANGELOG = [
             'Sinnoh\u2019s Sandgem Town raises the Pok\u00e9 Radar: watch the grass light up, repeat the sequence and build a chain that boosts the shiny odds of a route\u2019s rarest species, with a wrong tap breaking it',
             'Alola\u2019s Heahea City hosts the Battle Royal: an endless wave gauntlet for your party that heals a little between wins, with the purse growing the deeper you get',
             'Galar\u2019s Max Lair (Hammerlocke) offers Dynamax Adventures: pick a path through three encounters, then face a legendary from Galar\u2019s raid pool \u2014 beat it to add it to your team',
+            'Hoenn\u2019s Mauville City adds Lights Out: every tap toggles a tile and its four neighbours, and turning all 16 lights back on in a flawless few taps pays best',
+            'Galar\u2019s Motostoke lets you cook a Curry: match the customer\u2019s flavour, then hold the fan to keep the campfire in the sweet spot while it simmers \u2014 a great curry is worth money and a full-heal Curry',
+            'Unova\u2019s Virbank City runs Pok\u00e9star Studios: the director calls three shots and you pick the take that best matches each brief',
           ],
         },
         {

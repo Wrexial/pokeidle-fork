@@ -55,6 +55,10 @@ export function startEncounter(state, action) {
  * @returns {GameState}
  */
 export function executeTurn(state, action) {
+  // Ignore a turn that was queued while `battling` but applied after the battle
+  // already ended (e.g. a manual catch committed first). Replaying it would
+  // append another faint event and make the loop run the victory handler again.
+  if (state.phase !== 'battling' || !state.enemyPokemon) return state
   return {
     ...state,
     battleTurn: (state.battleTurn ?? 0) + 1,

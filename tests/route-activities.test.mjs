@@ -294,9 +294,35 @@ test('ATTEMPT_CATCH manually catches a minigame Pokemon', () => {
     // No balls at all: nothing happens.
     const broke = gameReducer({ ...base, inventory: {} }, { type: 'ATTEMPT_CATCH' })
     assert.equal(broke.phase, 'battling')
+
+    // While a turn is still resolving (a faint event queued but not consumed),
+    // a manual throw must not also end the battle, or the loop's victory
+    // handler would catch the same Pokemon a second time.
+    const midTurnBase = {
+        ...base,
+        pendingEvents: [{ type: 'faint', data: { target: 'enemy' } }],
+      },
+      midTurn = gameReducer(midTurnBase, { type: 'ATTEMPT_CATCH' })
+    assert.equal(midTurn, midTurnBase, 'the throw is ignored while events are queued')
+    assert.equal(midTurn.phase, 'battling')
+    assert.equal(midTurn.inventory.pokeball, 5, 'no ball is spent')
   } finally {
     Math.random = original
   }
+})
+
+test('EXECUTE_TURN is ignored once the battle has ended', () => {
+  const finished = {
+      ...initialGameState,
+      phase: 'idle',
+      enemyPokemon: null,
+    },
+    next = gameReducer(finished, {
+      type: 'EXECUTE_TURN',
+      payload: { events: [{ type: 'faint', data: { target: 'enemy' } }] },
+    })
+  assert.equal(next, finished, 'a stale turn cannot re-queue a faint')
+  assert.equal(next.phase, 'idle')
 })
 
 test('END_ROUTE_ACTIVITY returns to idle', () => {

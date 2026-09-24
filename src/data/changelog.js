@@ -1,10 +1,23 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.23.0'
+export const GAME_VERSION = '0.24.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.24.0',
+      subtitle: 'Settled Catches',
+      sections: [
+        {
+          heading: 'Fixes',
+          items: [
+            'Wild Pokemon can no longer be caught twice from one battle: the idle loop now waits for a turn / catch to commit before acting again, so a fast battle speed can not replay the same victory and duplicate the catch',
+            'A queued turn can no longer resolve after the battle has already ended, and the ATTEMPT CATCH button is disabled while a turn is still resolving',
+          ],
+        },
+      ],
+    },
     {
       version: '0.23.0',
       subtitle: 'Hunting Rewards',

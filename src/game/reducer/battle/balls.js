@@ -49,6 +49,10 @@ export function usePokeball(state, action) {
 export function attemptActivityCatch(state, action) {
   const enemy = state.enemyPokemon
   if (state.phase !== 'battling' || !enemy || state.trainerBattle || state.bossBattle) return state
+  // Don't let a manual throw resolve an enemy the current turn may have already
+  // knocked out (its faint event is still queued). Ending the battle here would
+  // let the loop's victory handler catch the same Pokemon a second time.
+  if (state.pendingEvents.length > 0) return state
   const catchContext = {
       level: enemy.level,
       types: pokemonSpecies[enemy.speciesKey]?.types ?? [],

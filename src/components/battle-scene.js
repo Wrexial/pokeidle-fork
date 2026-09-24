@@ -329,7 +329,10 @@ export function BattleScene() {
               jsxs('button', {
                 className: 'activity-catch-btn',
                 onClick: () => dispatch({ type: 'ATTEMPT_CATCH' }),
-                disabled: enemyFainted,
+                // Also block while a turn is still resolving: the queued faint
+                // must finish first so the loop can't catch the same Pokemon
+                // again from its victory handler.
+                disabled: enemyFainted || state.pendingEvents.length > 0,
                 title: 'Throw your best ball at this Pokemon',
                 children: [
                   jsx(PokeballIcon, { ballId: 'pokeball', size: 16 }),

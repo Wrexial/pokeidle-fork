@@ -18,18 +18,38 @@ import { encountersWithoutFishingExclusive } from './minigames/fishing.js'
 import { awardExperience, checkShinyOdds, pokerusExpMultiplier, resolveActiveModifiers, resolvePokemonEncounter, resolveRoamer, shinyOddsForSpecies } from './progression.js'
 
 export function useGameLoop() {
-  const { state, dispatch } = useGame(),
+  const { state, dispatch: rawDispatch } = useGame(),
     intervalRef = React.useRef(/** @type {ReturnType<typeof setInterval> | null} */ (null)),
     phaseRef = React.useRef(state.phase),
-    stateRef = React.useRef(state)
+    stateRef = React.useRef(state),
+    // True from the moment a tick dispatches an action until React commits the
+    // resulting state. React applies timer updates asynchronously, so at fast
+    // speeds the interval can fire again before the commit lands and `stateRef`
+    // still holds the state the previous tick already acted on. Acting on that
+    // stale state resolves the same turn / victory twice (a double catch, or a
+    // second batch of EXP). Skipping while this is set serialises the loop with
+    // React's commits.
+    waitingForCommitRef = React.useRef(false),
+    dispatch = React.useCallback(
+      /** @param {GameAction} action */ (action) => {
+        waitingForCommitRef.current = true
+        rawDispatch(action)
+      },
+      [rawDispatch]
+    )
   React.useEffect(() => {
     ;((phaseRef.current = state.phase), (stateRef.current = state))
+    waitingForCommitRef.current = false
   }, [state])
   const getTickDelay = React.useCallback(() => {
       const speed = stateRef.current.speed
       return speed === 25 ? 40 : speed === 5 ? 200 : speed === 2 ? 500 : 1e3
     }, []),
     tick = React.useCallback(() => {
+      // Wait for the previous tick's dispatch to be committed before reading
+      // the state again; otherwise a fast tick can double-process a turn or a
+      // victory (see `waitingForCommitRef`).
+      if (waitingForCommitRef.current) return
       const currentGameState = stateRef.current
       if (currentGameState.pendingEvents.length > 0) {
         dispatch({

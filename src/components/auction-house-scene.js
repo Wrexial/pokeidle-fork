@@ -5,6 +5,7 @@
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { useGame } from '../game/context.js'
+import { ItemIcon } from './item-icon.js'
 import {
   auctionAppraisal,
   canAuctionBid,
@@ -81,13 +82,19 @@ export function AuctionHouseScene() {
               jsx('div', {
                 className: 'auction-lot-items',
                 children: auction.lot.items.map((item) =>
-                  jsx(
+                  jsxs(
                     'span',
                     {
                       className: 'auction-lot-item',
-                      children: `${rewardItemName(item.itemId)}${
-                        item.quantity > 1 ? ` \u00d7${item.quantity}` : ''
-                      }`,
+                      children: [
+                        jsx(ItemIcon, {
+                          itemId: item.itemId,
+                          size: 10,
+                        }),
+                        `${rewardItemName(item.itemId)}${
+                          item.quantity > 1 ? ` \u00d7${item.quantity}` : ''
+                        }`,
+                      ],
                     },
                     item.itemId
                   )

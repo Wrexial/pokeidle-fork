@@ -1,11 +1,16 @@
-// In-battle Mega Evolution. Sets the volatile form so the battle loop rebuilds
-// the active Pokemon into its Mega forme with the forme's stats, types and
-// ability. The change is battle-only and reverts when the battle ends.
+// In-battle Mega Evolution / Primal Reversion. Sets the volatile form so the
+// battle loop rebuilds the active Pokemon into its battle forme with the
+// forme's stats, types and ability. The change is battle-only and reverts when
+// the battle ends.
 
 import { pokemonSpecies } from '../../../data/gameData.js'
-import { chooseMegaForm, megaAbility, megaEvolveReady } from '../../../data/mega-evolution.js'
+import {
+  chooseMegaForm,
+  isPrimalForm,
+  megaAbility,
+  megaEvolveReady,
+} from '../../../data/mega-evolution.js'
 import { createVolatileState } from '../../combat.js'
-import { withNotification } from '../../reducer-helpers.js'
 
 /**
  * Handle the `MEGA_EVOLVE` action. Only a Mega Stone holder that can still
@@ -22,26 +27,18 @@ export function megaEvolve(state, action) {
   if (!formKey) return state
   const form = pokemonSpecies[formKey],
     volatile = state.playerVolatile ?? createVolatileState(),
-    ability = megaAbility(formKey)
-  return withNotification(
-    {
-      ...state,
-      playerVolatile: {
-        ...volatile,
-        formKey,
-        abilityOverride: ability ?? volatile.abilityOverride ?? null,
-      },
-      battleLog: [
-        ...state.battleLog,
-        `${pokemon.name} Mega Evolved into ${form?.name ?? formKey}!`,
-      ].slice(-50),
+    ability = megaAbility(formKey),
+    transformation = isPrimalForm(formKey) ? 'Primal Reverted' : 'Mega Evolved'
+  return {
+    ...state,
+    playerVolatile: {
+      ...volatile,
+      formKey,
+      abilityOverride: ability ?? volatile.abilityOverride ?? null,
     },
-    {
-      message: `${pokemon.name} Mega Evolved!`,
-      tone: 'shiny',
-      icon: '\u2728',
-      dedupeKey: `mega:${pokemon.id}`,
-      cooldown: 15000,
-    }
-  )
+    battleLog: [
+      ...state.battleLog,
+      `${pokemon.name} ${transformation} into ${form?.name ?? formKey}!`,
+    ].slice(-50),
+  }
 }

@@ -2,6 +2,7 @@
 
 import { breedingData, evolutionData, pokemonSpecies } from '../data/gameData.js'
 import { evolutionItems } from '../data/items.js'
+import { isMegaOrPrimalForm } from '../data/mega-evolution.js'
 import { randomNature } from '../data/natures.js'
 import {
   IV_STAT_ORDER,
@@ -25,6 +26,7 @@ export function getEvolutionOptions(pokemon, inventory) {
   const evolutionChain = evolutionData[pokemon.speciesKey]
   if (!evolutionChain) return []
   return evolutionChain
+    .filter((evolution) => !isMegaOrPrimalForm(evolution.into))
     .filter((evolution) => !evolution.gender || evolution.gender === genderForPokemon(pokemon))
     .map((evolution) => {
       const targetSpecies = pokemonSpecies[evolution.into],

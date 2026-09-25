@@ -3,7 +3,7 @@
 // hooks.js so the cross-cutting UI hooks stay small.
 
 import React from 'react'
-import { trainerClassPayouts, missingnoEncounterChance, mewUnderTruckChance } from '../data/config.js'
+import { trainerClassPayouts, missingnoEncounterChance, mewUnderTruckChance, swarmShinyMultiplier, swarmShinyOddsFloor } from '../data/config.js'
 import { ballOrder } from '../data/items.js'
 import { completedGenerations, encounterData, mapData, pokemonSpecies, trainerData } from '../data/gameData.js'
 import { megaEvolveReady } from '../data/mega-evolution.js'
@@ -203,12 +203,24 @@ export function useGameLoop() {
               ? {
                   ...wildEncounterData,
                   encounters: [
-                    ...wildEncounterData.encounters,
+                    // Every roll of the swarm's species gets the shiny boost,
+                    // not just the extra high-weight entry below.
+                    ...wildEncounterData.encounters.map((encounter) =>
+                      encounter.speciesKey === activeSwarm.speciesKey
+                        ? {
+                            ...encounter,
+                            shinyMultiplier: swarmShinyMultiplier,
+                            shinyOddsFloor: swarmShinyOddsFloor,
+                          }
+                        : encounter
+                    ),
                     {
                       speciesKey: activeSwarm.speciesKey,
                       weight: 80,
                       minLevel: swarmLevel,
                       maxLevel: swarmLevel + 2,
+                      shinyMultiplier: swarmShinyMultiplier,
+                      shinyOddsFloor: swarmShinyOddsFloor,
                     },
                   ],
                 }

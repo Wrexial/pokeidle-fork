@@ -16,7 +16,11 @@ export const wonderTradeShinyOdds = 512
 /** Chance per wild win that a new swarm appears on a random unlocked route. */
 export const swarmSpawnChance = 0.01
 /** How many wild battles an active swarm lasts. */
-export const swarmBattleCount = 100
+export const swarmBattleCount = 256
+/** Shiny-odds multiplier for the species a swarm is boosting (4x as likely). */
+export const swarmShinyMultiplier = 4
+/** Best shiny odds a swarm can reach — never better than 1 in 256. */
+export const swarmShinyOddsFloor = 256
 
 /** Chance per wild encounter that a region's roaming legendary appears. */
 export const roamerEncounterChance = 1 / 1500

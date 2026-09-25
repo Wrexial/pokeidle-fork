@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
+import { ItemIcon } from './item-icon.js'
 
 /** @param {{ itemId: string, name: string, description: string, price: number, owned: number, money: number, qtyMode: number | 'max', dispatch: (action: GameAction) => void }} props */
 export function ItemShopRow({
@@ -30,8 +31,8 @@ export function ItemShopRow({
   return jsxs('div', {
     className: 'shop-item-row',
     children: [
-      jsx('div', {
-        className: 'shop-item-icon-placeholder',
+      jsx(ItemIcon, {
+        itemId,
       }),
       jsxs('div', {
         className: 'shop-item-info',

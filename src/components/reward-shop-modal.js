@@ -4,6 +4,7 @@ import { jsx, jsxs } from 'react/jsx-runtime'
 import { tokenShopItems } from '../data/items.js'
 import { useGame } from '../game/context.js'
 import { getItemInfo } from '../game/progression.js'
+import { ItemIcon } from './item-icon.js'
 
 /** @param {{ onClose: () => void }} props */
 export function RewardShopModal({ onClose }) {
@@ -53,15 +54,24 @@ export function RewardShopModal({ onClose }) {
                     className: 'reward-shop-row',
                     children: [
                       jsxs('div', {
-                        className: 'reward-shop-item-info',
+                        className: 'reward-shop-left',
                         children: [
-                          jsx('span', {
-                            className: 'reward-shop-item-name',
-                            children: item.name,
+                          jsx(ItemIcon, {
+                            itemId: rewardItem.itemId,
+                            size: 16,
                           }),
-                          jsx('span', {
-                            className: 'reward-shop-item-desc',
-                            children: item.description,
+                          jsxs('div', {
+                            className: 'reward-shop-item-info',
+                            children: [
+                              jsx('span', {
+                                className: 'reward-shop-item-name',
+                                children: item.name,
+                              }),
+                              jsx('span', {
+                                className: 'reward-shop-item-desc',
+                                children: item.description,
+                              }),
+                            ],
                           }),
                         ],
                       }),

@@ -114,7 +114,7 @@ export function RouteEncounterGrid({
           swarmHere
             ? jsx('span', {
                 className: 'swarm-legend',
-                title: 'A swarm is boosting this species right now',
+                title: 'A swarm is boosting this species: it is very common and its shiny odds are 4x (never better than 1 in 256)',
                 children: `Swarm! ${
                   pokemonSpecies[swarmHere.speciesKey]?.name ?? swarmHere.speciesKey
                 } (${swarmHere.battlesRemaining})`,

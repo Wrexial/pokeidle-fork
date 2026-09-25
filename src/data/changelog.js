@@ -30,6 +30,10 @@ export const CHANGELOG = [
           items: [
             'Variable-power moves now work: Heat Crash and Heavy Slam scale with how much heavier the user is, Low Kick and Grass Knot with the target\u2019s weight, Electro Ball and Gyro Ball with the speed gap, Flail / Reversal / Eruption / Water Spout / Dragon Energy with HP, Crush Grip and Wring Out with the target\u2019s HP, Stored Power / Power Trip / Punishment with stat boosts, and Return / Frustration with friendship',
             'In-battle Mega Evolution: give a Mega-capable Pokemon the new held Mega Stone (from the Reward Shop, Kalos marts or the Auction House) and it transforms for the rest of the battle \u2014 taking the physical X forme or the special Y forme \u2014 with the forme\u2019s stats, typing and ability, then reverting afterwards',
+            'The same Mega Stone now triggers Primal Reversion: Primal Groudon and Kyogre transform in battle with Desolate Land and Primordial Sea',
+            'Mega Evolution is no longer offered as a level-100 evolution \u2014 the Mega Stone is the way to Mega Evolve, so a Lv.100 Pokemon no longer shows a redundant evolve option',
+            'Mega Evolution no longer raises a notification toast; the battle log and the transformed sprite still show it',
+            'The battle screen\u2019s MOVES button is gone \u2014 manage moves from a Pokemon\u2019s summary instead (the Manage button in its stats panel)',
             'Moves that never miss (Swift, Aerial Ace, Aura Sphere, the G-Max moves and the rest) now truly cannot miss: they ignore accuracy and evasion stages instead of having their accuracy lowered by them, and their accuracy reads as an em dash rather than "101%"',
             'Battle status effects always show a three-letter tag now \u2014 including TOX for badly poisoned and PAR for paralysis \u2014 and the info nameplate reserves the tag\u2019s space so it never jumps or resizes when a status lands or wears off',
             'Moves and abilities now have hover tooltips: hover a move (battle bar, Move Manager or a Pokémon\u2019s summary) for its type, category, power, accuracy and a plain-English effect, and hover an ability for what it does',
@@ -42,7 +46,8 @@ export const CHANGELOG = [
             'A town\u2019s Poke Mart can now be collapsed from its header, and it stays collapsed on your next visit, so a long shop list no longer pushes the area\u2019s encounters and activities off-screen',
             'Marts now stock different shelves: each region\u2019s situational balls and held items are split between its towns instead of every mart listing the whole regional set',
             'Premier Balls are no longer sold \u2014 you get one free for every 10 balls you buy',
-            'Swarms last twice as long (100 wild battles) and now announce themselves with a toast: "A swarm spawned in the <area> area!" The Pokemon is not named \u2014 the Town Map only shows that a swarm is active there \u2014 so it stays a surprise until you arrive',
+            'Swarms last 256 wild battles and their species has 4x shiny odds (never better than 1 in 256). They still announce themselves with a toast that names the area but not the Pokemon, so it stays a surprise until you arrive',
+            'Poke Mart and Reward Shop rows now show an icon for each item instead of a blank square',
           ],
         },
         {

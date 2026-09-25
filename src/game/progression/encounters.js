@@ -234,6 +234,25 @@ function resolveRandomEncounter(encounterData, completedGenerationSet, shinyBonu
 }
 
 /**
+ * Shiny odds for a rolled encounter. A per-entry boost (a swarm makes its
+ * species 4x as likely) stacks with the shiny chain and the daily bonus, but
+ * the result is never better than the entry's floor (1 in 256 during a swarm).
+ * @param {EncounterEntry} encounter
+ * @param {Set<number>} completedGenerationSet
+ * @param {number} chainMultiplier
+ * @param {number} shinyBonus
+ * @returns {number}
+ */
+function shinyOddsForEncounter(encounter, completedGenerationSet, chainMultiplier, shinyBonus) {
+  const multiplier = (encounter.shinyMultiplier ?? 1) * chainMultiplier * shinyBonus,
+    floor = encounter.shinyOddsFloor ?? 1
+  return Math.max(
+    floor,
+    Math.round(shinyOddsForSpecies(encounter.speciesKey, completedGenerationSet) / multiplier)
+  )
+}
+
+/**
  * @param {EncounterData} encounterData
  * @param {{ speciesKey: string, multiplier: number }[]} modifiers
  * @param {Set<number>} completedGenerationSet
@@ -271,13 +290,7 @@ export function resolvePokemonEncounter(encounterData, modifiers, completedGener
         speciesKey: encounter.speciesKey,
         level,
         isShiny: checkShinyOdds(
-          Math.max(
-            1,
-            Math.round(
-              shinyOddsForSpecies(encounter.speciesKey, completedGenerationSet) /
-                (chainMultiplier * shinyBonus)
-            )
-          )
+          shinyOddsForEncounter(encounter, completedGenerationSet, chainMultiplier, shinyBonus)
         ),
       }
     }
@@ -287,12 +300,11 @@ export function resolvePokemonEncounter(encounterData, modifiers, completedGener
     speciesKey: fallback.speciesKey,
     level: levelOverride || fallback.minLevel,
     isShiny: checkShinyOdds(
-      Math.max(
-        1,
-        Math.round(
-          shinyOddsForSpecies(fallback.speciesKey, completedGenerationSet) /
-            (shinyChainMultiplier(fallback.speciesKey, shinyChain) * shinyBonus)
-        )
+      shinyOddsForEncounter(
+        fallback,
+        completedGenerationSet,
+        shinyChainMultiplier(fallback.speciesKey, shinyChain),
+        shinyBonus
       )
     ),
   }

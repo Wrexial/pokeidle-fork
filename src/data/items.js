@@ -257,7 +257,7 @@ export const heldItems = {
     id: 'megaStone',
     name: 'Mega Stone',
     description:
-      'Held by a Pokemon that can Mega Evolve, it transforms for the rest of the battle \u2014 the physical X forme for attackers, the special Y forme otherwise.',
+      'Held by a Pokemon that can Mega Evolve or undergo Primal Reversion, it transforms for the rest of the battle \u2014 the physical X forme for attackers, the special Y forme otherwise.',
     buyPrice: null,
     sellPrice: 2500,
     effect: { type: 'megaEvolve' },

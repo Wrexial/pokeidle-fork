@@ -49,12 +49,10 @@ import { GameCornerScene } from './game-corner-scene.js'
 import { RouteActivityScene } from './route-activity-scene.js'
 import { WonderTradeScene } from './wonder-trade-scene.js'
 import { PokeballIcon } from './pokeball-icon.js'
-import { MoveManagerPanel } from './move-manager-panel.js'
 import { SpeedControls } from './speed-controls.js'
 
 export function BattleScene() {
-  const [showMoveManager, setShowMoveManager] = React.useState(!1),
-    [showInfo, setShowInfo] = React.useState(!1),
+  const [showInfo, setShowInfo] = React.useState(!1),
     [showSettings, setShowSettings] = React.useState(!1),
     [showDaily, setShowDaily] = React.useState(!1),
     [showQuests, setShowQuests] = React.useState(!1),
@@ -509,11 +507,6 @@ export function BattleScene() {
           jsxs('div', {
             className: 'bottom-right-panel',
             children: [
-              jsx('button', {
-                className: 'move-swap-btn',
-                onClick: () => setShowMoveManager(!0),
-                children: 'MOVES',
-              }),
               jsx('div', {
                 className: 'move-grid',
                 children: playerPokemon.moves.map((moveId) => {
@@ -574,12 +567,6 @@ export function BattleScene() {
           }),
         ],
       }),
-      showMoveManager &&
-        state.playerPokemon &&
-        jsx(MoveManagerPanel, {
-          pokemon: state.playerPokemon,
-          onClose: () => setShowMoveManager(!1),
-        }),
       showSettings &&
         createPortal(
           jsx(SettingsModal, {

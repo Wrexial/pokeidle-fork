@@ -482,6 +482,10 @@ type EncounterEntry = {
   weight: number
   minLevel: number
   maxLevel: number
+  /** Shiny-odds multiplier for this entry (swarms make their species 4x as likely). */
+  shinyMultiplier?: number
+  /** Best shiny odds this entry can reach (a divisor floor, e.g. 256 during a swarm). */
+  shinyOddsFloor?: number
 }
 
 type EncounterData = { name: string; encounters: EncounterEntry[]; [key: string]: any }

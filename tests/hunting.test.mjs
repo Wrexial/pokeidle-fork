@@ -8,6 +8,20 @@ installGameData()
 const { applyEncounterModifiers, resolveActiveModifiers, resolvePokemonEncounter } = await import(
   '../src/game/progression.js'
 )
+const { swarmBattleCount, swarmShinyMultiplier, swarmShinyOddsFloor } = await import(
+  '../src/data/config.js'
+)
+
+/** Run `fn` with `Math.random` pinned to a constant, then restore it. */
+function withRandom(/** @type {number} */ value, /** @type {() => any} */ fn) {
+  const original = Math.random
+  Math.random = () => value
+  try {
+    return fn()
+  } finally {
+    Math.random = original
+  }
+}
 
 const ROUTE = 'routeTest',
   CHAIN = { speciesKey: 'pidgey', count: 5 },
@@ -80,4 +94,51 @@ test('Honey + Repel make a locked hunt overwhelmingly likely', () => {
     if (result.speciesKey === targetKey) hits++
   }
   assert.ok(hits > 180, `expected the target almost every time, got ${hits}/200`)
+})
+
+test('a swarm lasts 256 battles and boosts its species', () => {
+  assert.equal(swarmBattleCount, 256)
+  assert.equal(swarmShinyMultiplier, 4)
+  assert.equal(swarmShinyOddsFloor, 256)
+})
+
+test('a swarm entry rolls shiny four times as often', () => {
+  const base = { speciesKey: 'pidgey', weight: 100, minLevel: 2, maxLevel: 2 },
+    swarm = { ...base, shinyMultiplier: 4, shinyOddsFloor: 256 },
+    data = (/** @type {any} */ entry) => ({ name: 'Test Route', encounters: [entry] }),
+    // 1/4096 is shiny under the boosted 1/2048 odds, but not under full 1/8192 odds.
+    roll = 1 / 4096
+  const plain = withRandom(roll, () =>
+      resolvePokemonEncounter(data(base), [], new Set(), undefined, 1, false, 2)
+    ),
+    boosted = withRandom(roll, () =>
+      resolvePokemonEncounter(data(swarm), [], new Set(), undefined, 1, false, 2)
+    )
+  assert.equal(plain.isShiny, false)
+  assert.equal(boosted.isShiny, true)
+})
+
+test('a swarm never beats 1 in 256 shiny odds', () => {
+  // A huge shiny bonus would normally push the odds far below the floor.
+  const swarm = {
+      speciesKey: 'pidgey',
+      weight: 100,
+      minLevel: 2,
+      maxLevel: 2,
+      shinyMultiplier: 4,
+      shinyOddsFloor: 256,
+    },
+    // 0.05 is shiny at 1/8 odds but not at the 1/256 floor.
+    result = withRandom(0.05, () =>
+      resolvePokemonEncounter(
+        { name: 'Test Route', encounters: [swarm] },
+        [],
+        new Set(),
+        undefined,
+        1000,
+        false,
+        2
+      )
+    )
+  assert.equal(result.isShiny, false)
 })

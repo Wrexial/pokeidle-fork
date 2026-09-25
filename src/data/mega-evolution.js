@@ -1,16 +1,39 @@
-// In-battle Mega Evolution data. Megas exist as level-100 evolutions in
-// `evolutionData` (keys prefixed `m-`); this module maps a base species to its
-// Mega form(s) and decides which one a Pokemon takes. The transformation is
+// In-battle Mega Evolution and Primal Reversion. Mega forms exist in
+// `evolutionData` as level-100 `m-` evolutions and Primal Groudon/Kyogre as
+// level-100 `p-` evolutions; this module maps a base species to its battle
+// form(s) and decides which one a Pokemon takes. The transformation is
 // battle-only: it lives on `playerVolatile.formKey`, so it reverts when the
 // battle ends and never touches the saved Pokemon.
 
 import { abilityData, evolutionData, pokemonSpecies } from './gameData.js'
 
-/** The held item that enables a Mega Evolution in battle. */
+/** The held item that enables a Mega Evolution (or Primal Reversion) in battle. */
 export const MEGA_STONE_ITEM = 'megaStone'
 
 /**
- * Base species key -> its Mega form keys, in evolution-table order.
+ * The Primal Reversions. They use the same held Mega Stone as Megas, and their
+ * `p-` prefix collides with the Paldean regional forms (`p-tauros`, ...), so
+ * they are listed explicitly rather than matched by prefix.
+ * @type {Set<string>}
+ */
+const PRIMAL_FORM_KEYS = new Set(['p-groudon', 'p-kyogre'])
+
+/**
+ * The battle-only forms a held Mega Stone can trigger for a species.
+ * @param {Evolution} evolution
+ * @returns {boolean}
+ */
+function isMegaEvolution(evolution) {
+  return (
+    evolution?.level === 100 &&
+    typeof evolution.into === 'string' &&
+    (evolution.into.startsWith('m-') || PRIMAL_FORM_KEYS.has(evolution.into)) &&
+    !!pokemonSpecies[evolution.into]
+  )
+}
+
+/**
+ * Base species key -> its Mega / Primal form keys, in evolution-table order.
  * @type {Record<string, string[]>}
  */
 export const MEGA_FORMS = (() => {
@@ -18,15 +41,7 @@ export const MEGA_FORMS = (() => {
   const forms = {}
   for (const [speciesKey, evolutions] of Object.entries(evolutionData)) {
     if (!Array.isArray(evolutions)) continue
-    const megaForms = evolutions
-      .filter(
-        (evolution) =>
-          evolution?.level === 100 &&
-          typeof evolution.into === 'string' &&
-          evolution.into.startsWith('m-') &&
-          pokemonSpecies[evolution.into]
-      )
-      .map((evolution) => evolution.into)
+    const megaForms = evolutions.filter(isMegaEvolution).map((evolution) => evolution.into)
     if (megaForms.length > 0) forms[speciesKey] = megaForms
   }
   return forms
@@ -43,6 +58,22 @@ export function megaFormsFor(speciesKey) {
 /** @param {string | null | undefined} formKey */
 export function isMegaForm(formKey) {
   return typeof formKey === 'string' && formKey.startsWith('m-')
+}
+
+/**
+ * Whether `formKey` is a Primal Reversion (battle-only, like a Mega).
+ * @param {string | null | undefined} formKey
+ */
+export function isPrimalForm(formKey) {
+  return typeof formKey === 'string' && PRIMAL_FORM_KEYS.has(formKey)
+}
+
+/**
+ * Whether `formKey` is a held-stone battle form (Mega or Primal).
+ * @param {string | null | undefined} formKey
+ */
+export function isMegaOrPrimalForm(formKey) {
+  return isMegaForm(formKey) || isPrimalForm(formKey)
 }
 
 /**
@@ -81,6 +112,6 @@ export function megaAbility(formKey) {
 export function megaEvolveReady(state) {
   const pokemon = state?.playerPokemon
   if (!pokemon || pokemon.heldItem !== MEGA_STONE_ITEM) return false
-  if (isMegaForm(state?.playerVolatile?.formKey)) return false
+  if (isMegaOrPrimalForm(state?.playerVolatile?.formKey)) return false
   return megaFormsFor(pokemon.speciesKey).length > 0
 }

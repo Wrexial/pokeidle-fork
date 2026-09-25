@@ -5,11 +5,12 @@ import { installGameData } from './helpers/game-data.mjs'
 
 installGameData()
 
-const { MEGA_STONE_ITEM, MEGA_FORMS, chooseMegaForm, isMegaForm, megaAbility, megaEvolveReady, megaFormsFor } = await import(
+const { MEGA_STONE_ITEM, MEGA_FORMS, chooseMegaForm, isMegaForm, isMegaOrPrimalForm, isPrimalForm, megaAbility, megaEvolveReady, megaFormsFor } = await import(
   '../src/data/mega-evolution.js'
 )
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 const { createPokemon } = await import('../src/game/pokemon.js')
+const { getEvolutionOptions } = await import('../src/game/breeding.js')
 const { heldItems } = await import('../src/data/items.js')
 
 /** A battling state with `pokemon` as the active, optionally stone-holding, Pokemon. */
@@ -83,6 +84,31 @@ test('MEGA_EVOLVE refuses without a stone or without a Mega form', () => {
     noMega = gameReducer(battlingState('pikachu', 60, 'megaStone'), { type: 'MEGA_EVOLVE' })
   assert.equal(noStone.playerVolatile, null)
   assert.equal(noMega.playerVolatile, null)
+})
+
+test('Primal Groudon and Kyogre are held-stone battle forms', () => {
+  assert.deepEqual(megaFormsFor('groudon'), ['p-groudon'])
+  assert.deepEqual(megaFormsFor('kyogre'), ['p-kyogre'])
+  assert.ok(isPrimalForm('p-groudon'))
+  assert.ok(isMegaOrPrimalForm('p-kyogre'))
+  // Paldean regional forms share the `p-` prefix but are not primal forms.
+  assert.ok(!isPrimalForm('p-tauros'))
+  assert.equal(megaFormsFor('p-tauros').length, 0)
+})
+
+test('Groudon transforms into Primal Groudon with the Mega Stone', () => {
+  const state = battlingState('groudon', 60, 'megaStone'),
+    next = gameReducer(state, { type: 'MEGA_EVOLVE' })
+  assert.equal(next.playerVolatile.formKey, 'p-groudon')
+  assert.equal(next.playerVolatile.abilityOverride, 'desolateLand')
+  assert.ok(next.battleLog.some((line) => /Primal Reverted/.test(line)))
+})
+
+test('Mega and Primal forms are not offered as level-100 evolutions', () => {
+  const charizard = getEvolutionOptions({ speciesKey: 'charizard', level: 100 }, {}),
+    groudon = getEvolutionOptions({ speciesKey: 'groudon', level: 100 }, {})
+  assert.ok(!charizard.some((entry) => entry.targetKey.startsWith('m-')))
+  assert.equal(groudon.length, 0, 'Groudon has no ordinary evolution left')
 })
 
 test('a Pokemon can only Mega Evolve once per battle', () => {

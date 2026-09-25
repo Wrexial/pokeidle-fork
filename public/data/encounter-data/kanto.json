@@ -74,7 +74,7 @@
    },
    {
     "speciesKey": "pidgey",
-    "weight": 6,
+    "weight": 7,
     "minLevel": 9,
     "maxLevel": 11
    },
@@ -86,12 +86,6 @@
    },
    {
     "speciesKey": "metapod",
-    "weight": 1,
-    "minLevel": 9,
-    "maxLevel": 11
-   },
-   {
-    "speciesKey": "pidgeotto",
     "weight": 1,
     "minLevel": 9,
     "maxLevel": 11
@@ -203,7 +197,7 @@
    },
    {
     "speciesKey": "magikarp",
-    "weight": 30,
+    "weight": 34,
     "minLevel": 14,
     "maxLevel": 16
    },
@@ -244,12 +238,6 @@
     "maxLevel": 16
    },
    {
-    "speciesKey": "gyarados",
-    "weight": 4,
-    "minLevel": 14,
-    "maxLevel": 16
-   },
-   {
     "speciesKey": "psyduck",
     "weight": 1,
     "minLevel": 14,
@@ -280,7 +268,7 @@
    },
    {
     "speciesKey": "magikarp",
-    "weight": 30,
+    "weight": 34,
     "minLevel": 16,
     "maxLevel": 18
    },
@@ -292,7 +280,7 @@
    },
    {
     "speciesKey": "goldeen",
-    "weight": 21,
+    "weight": 24,
     "minLevel": 16,
     "maxLevel": 18
    },
@@ -334,7 +322,7 @@
    },
    {
     "speciesKey": "pidgey",
-    "weight": 4,
+    "weight": 5,
     "minLevel": 16,
     "maxLevel": 18
    },
@@ -345,19 +333,7 @@
     "maxLevel": 18
    },
    {
-    "speciesKey": "gyarados",
-    "weight": 4,
-    "minLevel": 16,
-    "maxLevel": 18
-   },
-   {
     "speciesKey": "venonat",
-    "weight": 3,
-    "minLevel": 16,
-    "maxLevel": 18
-   },
-   {
-    "speciesKey": "seaking",
     "weight": 3,
     "minLevel": 16,
     "maxLevel": 18
@@ -370,12 +346,6 @@
    },
    {
     "speciesKey": "kakuna",
-    "weight": 1,
-    "minLevel": 16,
-    "maxLevel": 18
-   },
-   {
-    "speciesKey": "pidgeotto",
     "weight": 1,
     "minLevel": 16,
     "maxLevel": 18
@@ -399,7 +369,7 @@
   "encounters": [
    {
     "speciesKey": "magikarp",
-    "weight": 30,
+    "weight": 34,
     "minLevel": 18,
     "maxLevel": 20
    },
@@ -417,25 +387,13 @@
    },
    {
     "speciesKey": "poliwag",
-    "weight": 25,
-    "minLevel": 18,
-    "maxLevel": 20
-   },
-   {
-    "speciesKey": "poliwhirl",
-    "weight": 10,
+    "weight": 35,
     "minLevel": 18,
     "maxLevel": 20
    },
    {
     "speciesKey": "krabby",
-    "weight": 8,
-    "minLevel": 18,
-    "maxLevel": 20
-   },
-   {
-    "speciesKey": "kingler",
-    "weight": 8,
+    "weight": 16,
     "minLevel": 18,
     "maxLevel": 20
    },
@@ -477,12 +435,6 @@
    },
    {
     "speciesKey": "abra",
-    "weight": 4,
-    "minLevel": 18,
-    "maxLevel": 20
-   },
-   {
-    "speciesKey": "gyarados",
     "weight": 4,
     "minLevel": 18,
     "maxLevel": 20
@@ -583,7 +535,7 @@
    },
    {
     "speciesKey": "psyduck",
-    "weight": 26,
+    "weight": 27,
     "minLevel": 30,
     "maxLevel": 32
    },
@@ -679,12 +631,6 @@
    },
    {
     "speciesKey": "pidgeotto",
-    "weight": 1,
-    "minLevel": 30,
-    "maxLevel": 32
-   },
-   {
-    "speciesKey": "golduck",
     "weight": 1,
     "minLevel": 30,
     "maxLevel": 32
@@ -833,7 +779,7 @@
    },
    {
     "speciesKey": "krabby",
-    "weight": 5,
+    "weight": 8,
     "minLevel": 26,
     "maxLevel": 28
    },
@@ -851,12 +797,6 @@
    },
    {
     "speciesKey": "nidoranM",
-    "weight": 3,
-    "minLevel": 26,
-    "maxLevel": 28
-   },
-   {
-    "speciesKey": "kingler",
     "weight": 3,
     "minLevel": 26,
     "maxLevel": 28
@@ -892,7 +832,7 @@
   "encounters": [
    {
     "speciesKey": "geodude",
-    "weight": 33,
+    "weight": 34,
     "minLevel": 24,
     "maxLevel": 26
    },
@@ -917,12 +857,6 @@
    {
     "speciesKey": "onix",
     "weight": 3,
-    "minLevel": 24,
-    "maxLevel": 26
-   },
-   {
-    "speciesKey": "graveler",
-    "weight": 1,
     "minLevel": 24,
     "maxLevel": 26
    }
@@ -2677,7 +2611,7 @@
   "encounters": [
    {
     "speciesKey": "magnemite",
-    "weight": 8,
+    "weight": 11,
     "minLevel": 28,
     "maxLevel": 30
    },
@@ -2695,13 +2629,7 @@
    },
    {
     "speciesKey": "grimer",
-    "weight": 4,
-    "minLevel": 28,
-    "maxLevel": 30
-   },
-   {
-    "speciesKey": "magneton",
-    "weight": 3,
+    "weight": 5,
     "minLevel": 28,
     "maxLevel": 30
    },
@@ -2712,13 +2640,7 @@
     "maxLevel": 30
    },
    {
-    "speciesKey": "muk",
-    "weight": 1,
-    "minLevel": 28,
-    "maxLevel": 30
-   },
-   {
-    "speciesKey": "electabuzz",
+    "speciesKey": "elekid",
     "weight": 1,
     "minLevel": 28,
     "maxLevel": 30

@@ -139,7 +139,7 @@
     "maxLevel": 11
    },
    {
-    "speciesKey": "sharpedo",
+    "speciesKey": "carvanha",
     "weight": 10,
     "minLevel": 9,
     "maxLevel": 11
@@ -152,13 +152,7 @@
    },
    {
     "speciesKey": "wingull",
-    "weight": 1,
-    "minLevel": 9,
-    "maxLevel": 11
-   },
-   {
-    "speciesKey": "pelipper",
-    "weight": 1,
+    "weight": 2,
     "minLevel": 9,
     "maxLevel": 11
    }
@@ -175,7 +169,7 @@
    },
    {
     "speciesKey": "wingull",
-    "weight": 26,
+    "weight": 27,
     "minLevel": 11,
     "maxLevel": 13
    },
@@ -208,12 +202,6 @@
     "weight": 3,
     "minLevel": 11,
     "maxLevel": 13
-   },
-   {
-    "speciesKey": "pelipper",
-    "weight": 1,
-    "minLevel": 11,
-    "maxLevel": 13
    }
   ]
  },
@@ -240,13 +228,7 @@
    },
    {
     "speciesKey": "wingull",
-    "weight": 9,
-    "minLevel": 13,
-    "maxLevel": 15
-   },
-   {
-    "speciesKey": "pelipper",
-    "weight": 1,
+    "weight": 10,
     "minLevel": 13,
     "maxLevel": 15
    }
@@ -275,13 +257,7 @@
    },
    {
     "speciesKey": "wingull",
-    "weight": 9,
-    "minLevel": 15,
-    "maxLevel": 17
-   },
-   {
-    "speciesKey": "pelipper",
-    "weight": 1,
+    "weight": 10,
     "minLevel": 15,
     "maxLevel": 17
    }
@@ -310,13 +286,7 @@
    },
    {
     "speciesKey": "wingull",
-    "weight": 9,
-    "minLevel": 17,
-    "maxLevel": 19
-   },
-   {
-    "speciesKey": "pelipper",
-    "weight": 1,
+    "weight": 10,
     "minLevel": 17,
     "maxLevel": 19
    }
@@ -345,13 +315,7 @@
    },
    {
     "speciesKey": "wingull",
-    "weight": 9,
-    "minLevel": 19,
-    "maxLevel": 21
-   },
-   {
-    "speciesKey": "pelipper",
-    "weight": 1,
+    "weight": 10,
     "minLevel": 19,
     "maxLevel": 21
    }
@@ -380,13 +344,7 @@
    },
    {
     "speciesKey": "wingull",
-    "weight": 9,
-    "minLevel": 21,
-    "maxLevel": 23
-   },
-   {
-    "speciesKey": "pelipper",
-    "weight": 1,
+    "weight": 10,
     "minLevel": 21,
     "maxLevel": 23
    }
@@ -421,7 +379,7 @@
    },
    {
     "speciesKey": "wingull",
-    "weight": 11,
+    "weight": 12,
     "minLevel": 24,
     "maxLevel": 26
    },
@@ -458,12 +416,6 @@
    {
     "speciesKey": "oddish",
     "weight": 3,
-    "minLevel": 24,
-    "maxLevel": 26
-   },
-   {
-    "speciesKey": "pelipper",
-    "weight": 1,
     "minLevel": 24,
     "maxLevel": 26
    },

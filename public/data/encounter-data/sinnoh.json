@@ -74,31 +74,19 @@
   "encounters": [
    {
     "speciesKey": "magikarp",
-    "weight": 39,
+    "weight": 53,
     "minLevel": 10,
     "maxLevel": 12
    },
    {
     "speciesKey": "psyduck",
-    "weight": 23,
-    "minLevel": 10,
-    "maxLevel": 12
-   },
-   {
-    "speciesKey": "gyarados",
-    "weight": 14,
+    "weight": 26,
     "minLevel": 10,
     "maxLevel": 12
    },
    {
     "speciesKey": "goldeen",
-    "weight": 11,
-    "minLevel": 10,
-    "maxLevel": 12
-   },
-   {
-    "speciesKey": "seaking",
-    "weight": 11,
+    "weight": 22,
     "minLevel": 10,
     "maxLevel": 12
    },
@@ -137,12 +125,6 @@
     "weight": 3,
     "minLevel": 10,
     "maxLevel": 12
-   },
-   {
-    "speciesKey": "golduck",
-    "weight": 3,
-    "minLevel": 10,
-    "maxLevel": 12
    }
   ]
  },
@@ -151,31 +133,19 @@
   "encounters": [
    {
     "speciesKey": "magikarp",
-    "weight": 39,
+    "weight": 53,
     "minLevel": 12,
     "maxLevel": 14
    },
    {
     "speciesKey": "psyduck",
-    "weight": 23,
-    "minLevel": 12,
-    "maxLevel": 14
-   },
-   {
-    "speciesKey": "gyarados",
-    "weight": 14,
+    "weight": 26,
     "minLevel": 12,
     "maxLevel": 14
    },
    {
     "speciesKey": "goldeen",
-    "weight": 11,
-    "minLevel": 12,
-    "maxLevel": 14
-   },
-   {
-    "speciesKey": "seaking",
-    "weight": 11,
+    "weight": 22,
     "minLevel": 12,
     "maxLevel": 14
    },
@@ -220,12 +190,6 @@
     "weight": 3,
     "minLevel": 12,
     "maxLevel": 14
-   },
-   {
-    "speciesKey": "golduck",
-    "weight": 3,
-    "minLevel": 12,
-    "maxLevel": 14
    }
   ]
  },
@@ -234,61 +198,43 @@
   "encounters": [
    {
     "speciesKey": "magikarp",
-    "weight": 39,
+    "weight": 53,
     "minLevel": 14,
     "maxLevel": 16
    },
    {
     "speciesKey": "shellos",
-    "weight": 31,
+    "weight": 33,
     "minLevel": 14,
     "maxLevel": 16
    },
    {
     "speciesKey": "psyduck",
-    "weight": 23,
-    "minLevel": 14,
-    "maxLevel": 16
-   },
-   {
-    "speciesKey": "gyarados",
-    "weight": 14,
+    "weight": 26,
     "minLevel": 14,
     "maxLevel": 16
    },
    {
     "speciesKey": "finneon",
-    "weight": 11,
-    "minLevel": 14,
-    "maxLevel": 16
-   },
-   {
-    "speciesKey": "lumineon",
-    "weight": 11,
+    "weight": 22,
     "minLevel": 14,
     "maxLevel": 16
    },
    {
     "speciesKey": "barboach",
-    "weight": 11,
-    "minLevel": 14,
-    "maxLevel": 16
-   },
-   {
-    "speciesKey": "whiscash",
-    "weight": 11,
+    "weight": 22,
     "minLevel": 14,
     "maxLevel": 16
    },
    {
     "speciesKey": "tentacool",
-    "weight": 8,
+    "weight": 9,
     "minLevel": 14,
     "maxLevel": 16
    },
    {
     "speciesKey": "wingull",
-    "weight": 8,
+    "weight": 9,
     "minLevel": 14,
     "maxLevel": 16
    },
@@ -335,12 +281,6 @@
     "maxLevel": 16
    },
    {
-    "speciesKey": "golduck",
-    "weight": 3,
-    "minLevel": 14,
-    "maxLevel": 16
-   },
-   {
     "speciesKey": "hoothoot",
     "weight": 3,
     "minLevel": 14,
@@ -355,24 +295,6 @@
    {
     "speciesKey": "cascoon",
     "weight": 3,
-    "minLevel": 14,
-    "maxLevel": 16
-   },
-   {
-    "speciesKey": "gastrodon",
-    "weight": 2,
-    "minLevel": 14,
-    "maxLevel": 16
-   },
-   {
-    "speciesKey": "tentacruel",
-    "weight": 1,
-    "minLevel": 14,
-    "maxLevel": 16
-   },
-   {
-    "speciesKey": "pelipper",
-    "weight": 1,
     "minLevel": 14,
     "maxLevel": 16
    },
@@ -495,7 +417,7 @@
    },
    {
     "speciesKey": "psyduck",
-    "weight": 23,
+    "weight": 26,
     "minLevel": 21,
     "maxLevel": 23
    },
@@ -507,25 +429,13 @@
    },
    {
     "speciesKey": "goldeen",
-    "weight": 11,
-    "minLevel": 21,
-    "maxLevel": 23
-   },
-   {
-    "speciesKey": "seaking",
-    "weight": 11,
+    "weight": 22,
     "minLevel": 21,
     "maxLevel": 23
    },
    {
     "speciesKey": "barboach",
-    "weight": 11,
-    "minLevel": 21,
-    "maxLevel": 23
-   },
-   {
-    "speciesKey": "whiscash",
-    "weight": 11,
+    "weight": 22,
     "minLevel": 21,
     "maxLevel": 23
    },
@@ -572,12 +482,6 @@
     "maxLevel": 23
    },
    {
-    "speciesKey": "golduck",
-    "weight": 3,
-    "minLevel": 21,
-    "maxLevel": 23
-   },
-   {
     "speciesKey": "roselia",
     "weight": 3,
     "minLevel": 21,
@@ -596,7 +500,7 @@
    },
    {
     "speciesKey": "psyduck",
-    "weight": 23,
+    "weight": 26,
     "minLevel": 24,
     "maxLevel": 26
    },
@@ -608,13 +512,7 @@
    },
    {
     "speciesKey": "goldeen",
-    "weight": 11,
-    "minLevel": 24,
-    "maxLevel": 26
-   },
-   {
-    "speciesKey": "seaking",
-    "weight": 11,
+    "weight": 22,
     "minLevel": 24,
     "maxLevel": 26
    },
@@ -667,12 +565,6 @@
     "maxLevel": 26
    },
    {
-    "speciesKey": "golduck",
-    "weight": 3,
-    "minLevel": 24,
-    "maxLevel": 26
-   },
-   {
     "speciesKey": "gastly",
     "weight": 3,
     "minLevel": 24,
@@ -703,7 +595,7 @@
    },
    {
     "speciesKey": "psyduck",
-    "weight": 23,
+    "weight": 26,
     "minLevel": 26,
     "maxLevel": 28
    },
@@ -714,19 +606,13 @@
     "maxLevel": 28
    },
    {
-    "speciesKey": "whiscash",
-    "weight": 13,
+    "speciesKey": "barboach",
+    "weight": 23,
     "minLevel": 26,
     "maxLevel": 28
    },
    {
     "speciesKey": "ponyta",
-    "weight": 10,
-    "minLevel": 26,
-    "maxLevel": 28
-   },
-   {
-    "speciesKey": "barboach",
     "weight": 10,
     "minLevel": 26,
     "maxLevel": 28
@@ -804,20 +690,8 @@
     "maxLevel": 28
    },
    {
-    "speciesKey": "golduck",
-    "weight": 3,
-    "minLevel": 26,
-    "maxLevel": 28
-   },
-   {
     "speciesKey": "machop",
-    "weight": 3,
-    "minLevel": 26,
-    "maxLevel": 28
-   },
-   {
-    "speciesKey": "machoke",
-    "weight": 2,
+    "weight": 5,
     "minLevel": 26,
     "maxLevel": 28
    },
@@ -929,7 +803,7 @@
    },
    {
     "speciesKey": "psyduck",
-    "weight": 23,
+    "weight": 26,
     "minLevel": 31,
     "maxLevel": 33
    },
@@ -941,13 +815,7 @@
    },
    {
     "speciesKey": "goldeen",
-    "weight": 11,
-    "minLevel": 31,
-    "maxLevel": 33
-   },
-   {
-    "speciesKey": "seaking",
-    "weight": 11,
+    "weight": 22,
     "minLevel": 31,
     "maxLevel": 33
    },
@@ -1032,12 +900,6 @@
    {
     "speciesKey": "starly",
     "weight": 5,
-    "minLevel": 31,
-    "maxLevel": 33
-   },
-   {
-    "speciesKey": "golduck",
-    "weight": 3,
     "minLevel": 31,
     "maxLevel": 33
    },

@@ -57,7 +57,7 @@
   "encounters": [
    {
     "speciesKey": "poliwag",
-    "weight": 61,
+    "weight": 64,
     "minLevel": 8,
     "maxLevel": 10
    },
@@ -122,12 +122,6 @@
     "maxLevel": 10
    },
    {
-    "speciesKey": "poliwhirl",
-    "weight": 3,
-    "minLevel": 8,
-    "maxLevel": 10
-   },
-   {
     "speciesKey": "hoppip",
     "weight": 3,
     "minLevel": 8,
@@ -146,7 +140,7 @@
   "encounters": [
    {
     "speciesKey": "poliwag",
-    "weight": 61,
+    "weight": 64,
     "minLevel": 11,
     "maxLevel": 13
    },
@@ -211,12 +205,6 @@
     "maxLevel": 13
    },
    {
-    "speciesKey": "poliwhirl",
-    "weight": 3,
-    "minLevel": 11,
-    "maxLevel": 13
-   },
-   {
     "speciesKey": "hoothoot",
     "weight": 3,
     "minLevel": 11,
@@ -247,7 +235,7 @@
   "encounters": [
    {
     "speciesKey": "tentacool",
-    "weight": 50,
+    "weight": 53,
     "minLevel": 14,
     "maxLevel": 16
    },
@@ -277,18 +265,12 @@
    },
    {
     "speciesKey": "wooper",
-    "weight": 9,
+    "weight": 17,
     "minLevel": 14,
     "maxLevel": 16
    },
    {
     "speciesKey": "ekans",
-    "weight": 8,
-    "minLevel": 14,
-    "maxLevel": 16
-   },
-   {
-    "speciesKey": "quagsire",
     "weight": 8,
     "minLevel": 14,
     "maxLevel": 16
@@ -313,12 +295,6 @@
    },
    {
     "speciesKey": "zubat",
-    "weight": 3,
-    "minLevel": 14,
-    "maxLevel": 16
-   },
-   {
-    "speciesKey": "tentacruel",
     "weight": 3,
     "minLevel": 14,
     "maxLevel": 16
@@ -377,7 +353,7 @@
   "encounters": [
    {
     "speciesKey": "krabby",
-    "weight": 31,
+    "weight": 34,
     "minLevel": 20,
     "maxLevel": 22
    },
@@ -389,7 +365,7 @@
    },
    {
     "speciesKey": "tentacool",
-    "weight": 23,
+    "weight": 26,
     "minLevel": 20,
     "maxLevel": 22
    },
@@ -442,18 +418,6 @@
     "maxLevel": 22
    },
    {
-    "speciesKey": "tentacruel",
-    "weight": 3,
-    "minLevel": 20,
-    "maxLevel": 22
-   },
-   {
-    "speciesKey": "kingler",
-    "weight": 3,
-    "minLevel": 20,
-    "maxLevel": 22
-   },
-   {
     "speciesKey": "ditto",
     "weight": 1,
     "minLevel": 20,
@@ -478,7 +442,7 @@
    },
    {
     "speciesKey": "psyduck",
-    "weight": 23,
+    "weight": 26,
     "minLevel": 24,
     "maxLevel": 26
    },
@@ -526,12 +490,6 @@
    },
    {
     "speciesKey": "pidgey",
-    "weight": 3,
-    "minLevel": 24,
-    "maxLevel": 26
-   },
-   {
-    "speciesKey": "golduck",
     "weight": 3,
     "minLevel": 24,
     "maxLevel": 26

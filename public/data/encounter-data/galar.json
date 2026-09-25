@@ -75,13 +75,13 @@
   "encounters": [
    {
     "speciesKey": "magikarp",
-    "weight": 20,
+    "weight": 21,
     "minLevel": 13,
     "maxLevel": 15
    },
    {
     "speciesKey": "arrokuda",
-    "weight": 18,
+    "weight": 25,
     "minLevel": 13,
     "maxLevel": 15
    },
@@ -122,12 +122,6 @@
     "maxLevel": 15
    },
    {
-    "speciesKey": "barraskewda",
-    "weight": 7,
-    "minLevel": 13,
-    "maxLevel": 15
-   },
-   {
     "speciesKey": "lotad",
     "weight": 5,
     "minLevel": 13,
@@ -153,12 +147,6 @@
    },
    {
     "speciesKey": "yamper",
-    "weight": 1,
-    "minLevel": 13,
-    "maxLevel": 15
-   },
-   {
-    "speciesKey": "gyarados",
     "weight": 1,
     "minLevel": 13,
     "maxLevel": 15

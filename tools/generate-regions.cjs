@@ -21,6 +21,7 @@ const DATA = path.join(__dirname, '../public/data')
 const read = (f) => JSON.parse(fs.readFileSync(path.join(DATA, f), 'utf8'))
 const write = (f, v) => fs.writeFileSync(path.join(DATA, f), JSON.stringify(v, null, 1) + '\n')
 const { readRegionDir, writeRegionDir } = require('./lib/region-data.cjs')
+const { buildEvolutionLevels, stageForLevel } = require('./lib/evolution-levels.cjs')
 
 const GEN_RANGES = [
   [1, 151], [152, 251], [252, 386], [387, 493], [494, 649],
@@ -700,6 +701,7 @@ const realEncounters = fs.existsSync(path.join(__dirname, 'route-encounters.json
   : {}
 const species = read('pokemon-species.json')
 const evolutionData = read('evolution-data.json')
+const evolutionLevels = buildEvolutionLevels(evolutionData, species)
 const breedingData = read('breeding-data.json')
 const mapData = readRegionDir(path.join(DATA, 'map-data'))
 const encounterData = readRegionDir(path.join(DATA, 'encounter-data'))
@@ -966,6 +968,12 @@ const buildTeam = (list, types, size, baseLevel, step = 1, offset = 0) => {
       return levels.length === 0 || Math.min(...levels) > baseLevel
     })
     let result = mature.length >= minimum ? mature : pool
+    // Drop species that are too advanced for this level (a Lv. 7 Machamp), as
+    // long as enough plausible species remain to keep the type theme.
+    const plausible = result.filter(
+      (species) => (evolutionLevels.minLevel[species.key] ?? 1) <= baseLevel
+    )
+    if (plausible.length >= minimum) result = plausible
     if (baseLevel >= 55) {
       const strong = result.filter((species) => totalBaseStats(species) >= 380)
       if (strong.length >= minimum) result = strong
@@ -1031,6 +1039,27 @@ function levelRoutes(orderedKeys, entriesByKey) {
       entry.maxLevel = Math.max(zoneLevel, Math.min(LEVEL_MAX, zoneLevel + 2))
     }
   })
+}
+
+/**
+ * Step any evolved species in a route's table back to a form that could exist at
+ * the route's level, merging entries that collapse onto the same species. The
+ * compressed curve otherwise pulls a Lv. 3 Chesnaught or a Lv. 7 Machamp onto
+ * an early route.
+ * @param {{ speciesKey: string, weight: number, minLevel: number, maxLevel: number }[]} entries
+ */
+function plausibleEncounters(entries) {
+  const merged = new Map()
+  for (const entry of entries) {
+    const next = stageForLevel(entry.speciesKey, entry.minLevel, evolutionLevels),
+      existing = merged.get(next)
+    if (existing) {
+      existing.weight += entry.weight
+      existing.minLevel = Math.min(existing.minLevel, entry.minLevel)
+      existing.maxLevel = Math.max(existing.maxLevel, entry.maxLevel)
+    } else merged.set(next, { ...entry, speciesKey: next })
+  }
+  return [...merged.values()]
 }
 
 // --- generate ----------------------------------------------------------------
@@ -1396,6 +1425,10 @@ for (const region of REGIONS) {
         })
   }
 
+  // Step evolved species back to a form that could exist at the route's level.
+  for (const entries of Object.values(routeEntries))
+    entries.splice(0, entries.length, ...plausibleEncounters(entries))
+
   // The raid pool is filled in after the region loop (see the raid scan).
 
   // A route's wild level (or the nearest route's), so flavour gates can ask the
@@ -1722,6 +1755,8 @@ if (realEncounters.kanto) {
       .map((loc) => loc.routeKey),
     kantoEntries
   )
+  for (const entries of Object.values(kantoEntries))
+    entries.splice(0, entries.length, ...plausibleEncounters(entries))
   // re-add the Kanto starters as rare Safari Zone finds, at that zone's level
   const safariAfter = encounterData.safariZone
   if (safariAfter) {

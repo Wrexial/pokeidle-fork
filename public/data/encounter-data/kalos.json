@@ -3,68 +3,26 @@
   "name": "Route 1",
   "encounters": [
    {
-    "speciesKey": "quilladin",
-    "weight": 20,
-    "minLevel": 3,
-    "maxLevel": 5
-   },
-   {
-    "speciesKey": "chesnaught",
-    "weight": 20,
-    "minLevel": 3,
-    "maxLevel": 5
-   },
-   {
-    "speciesKey": "braixen",
-    "weight": 20,
-    "minLevel": 3,
-    "maxLevel": 5
-   },
-   {
-    "speciesKey": "delphox",
-    "weight": 12,
-    "minLevel": 3,
-    "maxLevel": 5
-   },
-   {
-    "speciesKey": "frogadier",
-    "weight": 12,
-    "minLevel": 3,
-    "maxLevel": 5
-   },
-   {
-    "speciesKey": "greninja",
-    "weight": 12,
-    "minLevel": 3,
-    "maxLevel": 5
-   },
-   {
-    "speciesKey": "bunnelby",
-    "weight": 12,
-    "minLevel": 3,
-    "maxLevel": 5
-   },
-   {
-    "speciesKey": "diggersby",
-    "weight": 12,
-    "minLevel": 3,
-    "maxLevel": 5
-   },
-   {
     "speciesKey": "chespin",
-    "weight": 1,
+    "weight": 41,
     "minLevel": 3,
     "maxLevel": 5
    },
    {
     "speciesKey": "fennekin",
-    "weight": 1,
+    "weight": 33,
     "minLevel": 3,
     "maxLevel": 5
    },
    {
     "speciesKey": "froakie",
-    "weight": 1,
+    "weight": 25,
+    "minLevel": 3,
+    "maxLevel": 5
+   },
+   {
+    "speciesKey": "bunnelby",
+    "weight": 24,
     "minLevel": 3,
     "maxLevel": 5
    }
@@ -122,31 +80,19 @@
   "encounters": [
    {
     "speciesKey": "magikarp",
-    "weight": 25,
+    "weight": 40,
     "minLevel": 11,
     "maxLevel": 13
    },
    {
-    "speciesKey": "masquerain",
+    "speciesKey": "surskit",
     "weight": 17,
     "minLevel": 11,
     "maxLevel": 13
    },
    {
     "speciesKey": "goldeen",
-    "weight": 16,
-    "minLevel": 11,
-    "maxLevel": 13
-   },
-   {
-    "speciesKey": "gyarados",
-    "weight": 15,
-    "minLevel": 11,
-    "maxLevel": 13
-   },
-   {
-    "speciesKey": "seaking",
-    "weight": 9,
+    "weight": 25,
     "minLevel": 11,
     "maxLevel": 13
    },
@@ -158,7 +104,7 @@
    },
    {
     "speciesKey": "corphish",
-    "weight": 9,
+    "weight": 10,
     "minLevel": 11,
     "maxLevel": 13
    },
@@ -206,12 +152,6 @@
    },
    {
     "speciesKey": "dunsparce",
-    "weight": 1,
-    "minLevel": 11,
-    "maxLevel": 13
-   },
-   {
-    "speciesKey": "crawdaunt",
     "weight": 1,
     "minLevel": 11,
     "maxLevel": 13
@@ -459,13 +399,13 @@
    },
    {
     "speciesKey": "skrelp",
-    "weight": 16,
+    "weight": 25,
     "minLevel": 28,
     "maxLevel": 30
    },
    {
     "speciesKey": "clauncher",
-    "weight": 16,
+    "weight": 25,
     "minLevel": 28,
     "maxLevel": 30
    },
@@ -519,18 +459,6 @@
    },
    {
     "speciesKey": "binacle",
-    "weight": 9,
-    "minLevel": 28,
-    "maxLevel": 30
-   },
-   {
-    "speciesKey": "dragalge",
-    "weight": 9,
-    "minLevel": 28,
-    "maxLevel": 30
-   },
-   {
-    "speciesKey": "clawitzer",
     "weight": 9,
     "minLevel": 28,
     "maxLevel": 30

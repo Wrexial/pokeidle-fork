@@ -28,7 +28,7 @@
    },
    {
     "speciesKey": "caterpie",
-    "weight": 9,
+    "weight": 12,
     "minLevel": 3,
     "maxLevel": 5
    },
@@ -58,7 +58,7 @@
    },
    {
     "speciesKey": "bonsly",
-    "weight": 8,
+    "weight": 12,
     "minLevel": 3,
     "maxLevel": 5
    },
@@ -113,18 +113,6 @@
    {
     "speciesKey": "snorlax",
     "weight": 4,
-    "minLevel": 3,
-    "maxLevel": 5
-   },
-   {
-    "speciesKey": "sudowoodo",
-    "weight": 4,
-    "minLevel": 3,
-    "maxLevel": 5
-   },
-   {
-    "speciesKey": "metapod",
-    "weight": 3,
     "minLevel": 3,
     "maxLevel": 5
    },
@@ -188,44 +176,20 @@
   "name": "Route 1 (Hauoli Outskirts)",
   "encounters": [
    {
-    "speciesKey": "brionne",
-    "weight": 20,
-    "minLevel": 9,
-    "maxLevel": 11
-   },
-   {
-    "speciesKey": "primarina",
-    "weight": 20,
+    "speciesKey": "popplio",
+    "weight": 40,
     "minLevel": 9,
     "maxLevel": 11
    },
    {
     "speciesKey": "pikipek",
-    "weight": 20,
-    "minLevel": 9,
-    "maxLevel": 11
-   },
-   {
-    "speciesKey": "trumbeak",
-    "weight": 12,
-    "minLevel": 9,
-    "maxLevel": 11
-   },
-   {
-    "speciesKey": "toucannon",
-    "weight": 12,
+    "weight": 44,
     "minLevel": 9,
     "maxLevel": 11
    },
    {
     "speciesKey": "yungoos",
-    "weight": 12,
-    "minLevel": 9,
-    "maxLevel": 11
-   },
-   {
-    "speciesKey": "gumshoos",
-    "weight": 12,
+    "weight": 24,
     "minLevel": 9,
     "maxLevel": 11
    },
@@ -372,8 +336,8 @@
     "maxLevel": 19
    },
    {
-    "speciesKey": "salamence",
-    "weight": 4,
+    "speciesKey": "bagon",
+    "weight": 5,
     "minLevel": 17,
     "maxLevel": 19
    },
@@ -392,12 +356,6 @@
    {
     "speciesKey": "yungoos",
     "weight": 3,
-    "minLevel": 17,
-    "maxLevel": 19
-   },
-   {
-    "speciesKey": "bagon",
-    "weight": 1,
     "minLevel": 17,
     "maxLevel": 19
    },

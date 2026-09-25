@@ -3,14 +3,14 @@
   "name": "Route 1",
   "encounters": [
    {
-    "speciesKey": "herdier",
-    "weight": 22,
+    "speciesKey": "lillipup",
+    "weight": 36,
     "minLevel": 3,
     "maxLevel": 5
    },
    {
-    "speciesKey": "watchog",
-    "weight": 20,
+    "speciesKey": "patrat",
+    "weight": 33,
     "minLevel": 3,
     "maxLevel": 5
    },
@@ -22,25 +22,13 @@
    },
    {
     "speciesKey": "feebas",
-    "weight": 15,
-    "minLevel": 3,
-    "maxLevel": 5
-   },
-   {
-    "speciesKey": "patrat",
-    "weight": 13,
-    "minLevel": 3,
-    "maxLevel": 5
-   },
-   {
-    "speciesKey": "lillipup",
-    "weight": 13,
+    "weight": 16,
     "minLevel": 3,
     "maxLevel": 5
    },
    {
     "speciesKey": "scraggy",
-    "weight": 6,
+    "weight": 9,
     "minLevel": 3,
     "maxLevel": 5
    },
@@ -57,25 +45,7 @@
     "maxLevel": 5
    },
    {
-    "speciesKey": "scrafty",
-    "weight": 3,
-    "minLevel": 3,
-    "maxLevel": 5
-   },
-   {
     "speciesKey": "wigglytuff",
-    "weight": 1,
-    "minLevel": 3,
-    "maxLevel": 5
-   },
-   {
-    "speciesKey": "milotic",
-    "weight": 1,
-    "minLevel": 3,
-    "maxLevel": 5
-   },
-   {
-    "speciesKey": "stoutland",
     "weight": 1,
     "minLevel": 3,
     "maxLevel": 5
@@ -111,37 +81,19 @@
    },
    {
     "speciesKey": "patrat",
-    "weight": 10,
+    "weight": 18,
     "minLevel": 8,
     "maxLevel": 10
    },
    {
     "speciesKey": "lillipup",
-    "weight": 10,
-    "minLevel": 8,
-    "maxLevel": 10
-   },
-   {
-    "speciesKey": "watchog",
-    "weight": 8,
-    "minLevel": 8,
-    "maxLevel": 10
-   },
-   {
-    "speciesKey": "herdier",
-    "weight": 8,
+    "weight": 19,
     "minLevel": 8,
     "maxLevel": 10
    },
    {
     "speciesKey": "purrloin",
-    "weight": 5,
-    "minLevel": 8,
-    "maxLevel": 10
-   },
-   {
-    "speciesKey": "liepard",
-    "weight": 5,
+    "weight": 10,
     "minLevel": 8,
     "maxLevel": 10
    },
@@ -153,7 +105,7 @@
    },
    {
     "speciesKey": "lickitung",
-    "weight": 3,
+    "weight": 4,
     "minLevel": 8,
     "maxLevel": 10
    },
@@ -168,18 +120,6 @@
     "weight": 1,
     "minLevel": 8,
     "maxLevel": 10
-   },
-   {
-    "speciesKey": "lickilicky",
-    "weight": 1,
-    "minLevel": 8,
-    "maxLevel": 10
-   },
-   {
-    "speciesKey": "stoutland",
-    "weight": 1,
-    "minLevel": 8,
-    "maxLevel": 10
    }
   ]
  },
@@ -188,13 +128,13 @@
   "encounters": [
    {
     "speciesKey": "goldeen",
-    "weight": 25,
+    "weight": 30,
     "minLevel": 11,
     "maxLevel": 13
    },
    {
     "speciesKey": "corphish",
-    "weight": 23,
+    "weight": 26,
     "minLevel": 11,
     "maxLevel": 13
    },
@@ -206,91 +146,37 @@
    },
    {
     "speciesKey": "pidove",
-    "weight": 20,
-    "minLevel": 11,
-    "maxLevel": 13
-   },
-   {
-    "speciesKey": "tranquill",
-    "weight": 15,
+    "weight": 36,
     "minLevel": 11,
     "maxLevel": 13
    },
    {
     "speciesKey": "patrat",
-    "weight": 10,
-    "minLevel": 11,
-    "maxLevel": 13
-   },
-   {
-    "speciesKey": "watchog",
-    "weight": 10,
+    "weight": 20,
     "minLevel": 11,
     "maxLevel": 13
    },
    {
     "speciesKey": "blitzle",
-    "weight": 10,
-    "minLevel": 11,
-    "maxLevel": 13
-   },
-   {
-    "speciesKey": "zebstrika",
-    "weight": 10,
-    "minLevel": 11,
-    "maxLevel": 13
-   },
-   {
-    "speciesKey": "seaking",
-    "weight": 5,
+    "weight": 20,
     "minLevel": 11,
     "maxLevel": 13
    },
    {
     "speciesKey": "yanma",
-    "weight": 5,
+    "weight": 6,
     "minLevel": 11,
     "maxLevel": 13
    },
    {
     "speciesKey": "lillipup",
-    "weight": 5,
-    "minLevel": 11,
-    "maxLevel": 13
-   },
-   {
-    "speciesKey": "herdier",
-    "weight": 5,
+    "weight": 11,
     "minLevel": 11,
     "maxLevel": 13
    },
    {
     "speciesKey": "purrloin",
     "weight": 5,
-    "minLevel": 11,
-    "maxLevel": 13
-   },
-   {
-    "speciesKey": "crawdaunt",
-    "weight": 3,
-    "minLevel": 11,
-    "maxLevel": 13
-   },
-   {
-    "speciesKey": "yanmega",
-    "weight": 1,
-    "minLevel": 11,
-    "maxLevel": 13
-   },
-   {
-    "speciesKey": "stoutland",
-    "weight": 1,
-    "minLevel": 11,
-    "maxLevel": 13
-   },
-   {
-    "speciesKey": "unfezant",
-    "weight": 1,
     "minLevel": 11,
     "maxLevel": 13
    }
@@ -307,13 +193,13 @@
    },
    {
     "speciesKey": "krabby",
-    "weight": 14,
+    "weight": 18,
     "minLevel": 14,
     "maxLevel": 16
    },
    {
     "speciesKey": "finneon",
-    "weight": 14,
+    "weight": 24,
     "minLevel": 14,
     "maxLevel": 16
    },
@@ -331,12 +217,6 @@
    },
    {
     "speciesKey": "clamperl",
-    "weight": 10,
-    "minLevel": 14,
-    "maxLevel": 16
-   },
-   {
-    "speciesKey": "lumineon",
     "weight": 10,
     "minLevel": 14,
     "maxLevel": 16
@@ -362,12 +242,6 @@
    {
     "speciesKey": "minccino",
     "weight": 6,
-    "minLevel": 14,
-    "maxLevel": 16
-   },
-   {
-    "speciesKey": "kingler",
-    "weight": 4,
     "minLevel": 14,
     "maxLevel": 16
    },
@@ -425,7 +299,7 @@
     "maxLevel": 19
    },
    {
-    "speciesKey": "liepard",
+    "speciesKey": "purrloin",
     "weight": 10,
     "minLevel": 17,
     "maxLevel": 19
@@ -461,19 +335,13 @@
    },
    {
     "speciesKey": "poliwag",
-    "weight": 15,
+    "weight": 30,
     "minLevel": 20,
     "maxLevel": 22
    },
    {
     "speciesKey": "deerling",
     "weight": 15,
-    "minLevel": 20,
-    "maxLevel": 22
-   },
-   {
-    "speciesKey": "poliwhirl",
-    "weight": 14,
     "minLevel": 20,
     "maxLevel": 22
    },
@@ -490,8 +358,8 @@
     "maxLevel": 22
    },
    {
-    "speciesKey": "tranquill",
-    "weight": 8,
+    "speciesKey": "pidove",
+    "weight": 9,
     "minLevel": 20,
     "maxLevel": 22
    },
@@ -538,19 +406,7 @@
     "maxLevel": 22
    },
    {
-    "speciesKey": "politoed",
-    "weight": 1,
-    "minLevel": 20,
-    "maxLevel": 22
-   },
-   {
     "speciesKey": "castform",
-    "weight": 1,
-    "minLevel": 20,
-    "maxLevel": 22
-   },
-   {
-    "speciesKey": "unfezant",
     "weight": 1,
     "minLevel": 20,
     "maxLevel": 22
@@ -568,7 +424,7 @@
   "encounters": [
    {
     "speciesKey": "tranquill",
-    "weight": 50,
+    "weight": 51,
     "minLevel": 23,
     "maxLevel": 25
    },
@@ -591,7 +447,7 @@
     "maxLevel": 25
    },
    {
-    "speciesKey": "zebstrika",
+    "speciesKey": "blitzle",
     "weight": 10,
     "minLevel": 23,
     "maxLevel": 25
@@ -625,12 +481,6 @@
     "weight": 3,
     "minLevel": 23,
     "maxLevel": 25
-   },
-   {
-    "speciesKey": "unfezant",
-    "weight": 1,
-    "minLevel": 23,
-    "maxLevel": 25
    }
   ]
  },
@@ -645,19 +495,13 @@
    },
    {
     "speciesKey": "palpitoad",
-    "weight": 45,
+    "weight": 50,
     "minLevel": 26,
     "maxLevel": 28
    },
    {
     "speciesKey": "barboach",
-    "weight": 40,
-    "minLevel": 26,
-    "maxLevel": 28
-   },
-   {
-    "speciesKey": "whiscash",
-    "weight": 20,
+    "weight": 60,
     "minLevel": 26,
     "maxLevel": 28
    },
@@ -670,12 +514,6 @@
    {
     "speciesKey": "croagunk",
     "weight": 11,
-    "minLevel": 26,
-    "maxLevel": 28
-   },
-   {
-    "speciesKey": "seismitoad",
-    "weight": 5,
     "minLevel": 26,
     "maxLevel": 28
    },
@@ -703,19 +541,19 @@
     "maxLevel": 31
    },
    {
-    "speciesKey": "gothorita",
-    "weight": 13,
+    "speciesKey": "gothita",
+    "weight": 14,
     "minLevel": 29,
     "maxLevel": 31
    },
    {
-    "speciesKey": "duosion",
-    "weight": 13,
+    "speciesKey": "solosis",
+    "weight": 14,
     "minLevel": 29,
     "maxLevel": 31
    },
    {
-    "speciesKey": "garbodor",
+    "speciesKey": "trubbish",
     "weight": 8,
     "minLevel": 29,
     "maxLevel": 31
@@ -733,7 +571,7 @@
     "maxLevel": 31
    },
    {
-    "speciesKey": "muk",
+    "speciesKey": "grimer",
     "weight": 3,
     "minLevel": 29,
     "maxLevel": 31
@@ -746,18 +584,6 @@
    },
    {
     "speciesKey": "cinccino",
-    "weight": 1,
-    "minLevel": 29,
-    "maxLevel": 31
-   },
-   {
-    "speciesKey": "gothitelle",
-    "weight": 1,
-    "minLevel": 29,
-    "maxLevel": 31
-   },
-   {
-    "speciesKey": "reuniclus",
     "weight": 1,
     "minLevel": 29,
     "maxLevel": 31
@@ -811,13 +637,7 @@
    },
    {
     "speciesKey": "foongus",
-    "weight": 3,
-    "minLevel": 32,
-    "maxLevel": 34
-   },
-   {
-    "speciesKey": "amoonguss",
-    "weight": 3,
+    "weight": 6,
     "minLevel": 32,
     "maxLevel": 34
    },
@@ -876,25 +696,13 @@
    },
    {
     "speciesKey": "rufflet",
-    "weight": 6,
-    "minLevel": 35,
-    "maxLevel": 37
-   },
-   {
-    "speciesKey": "braviary",
-    "weight": 6,
+    "weight": 12,
     "minLevel": 35,
     "maxLevel": 37
    },
    {
     "speciesKey": "vullaby",
-    "weight": 6,
-    "minLevel": 35,
-    "maxLevel": 37
-   },
-   {
-    "speciesKey": "mandibuzz",
-    "weight": 6,
+    "weight": 12,
     "minLevel": 35,
     "maxLevel": 37
    },
@@ -941,7 +749,7 @@
     "maxLevel": 37
    },
    {
-    "speciesKey": "amoonguss",
+    "speciesKey": "foongus",
     "weight": 3,
     "minLevel": 35,
     "maxLevel": 37
@@ -960,13 +768,7 @@
    },
    {
     "speciesKey": "pawniard",
-    "weight": 1,
-    "minLevel": 35,
-    "maxLevel": 37
-   },
-   {
-    "speciesKey": "bisharp",
-    "weight": 1,
+    "weight": 2,
     "minLevel": 35,
     "maxLevel": 37
    }
@@ -1036,7 +838,7 @@
     "maxLevel": 40
    },
    {
-    "speciesKey": "rapidash",
+    "speciesKey": "ponyta",
     "weight": 5,
     "minLevel": 38,
     "maxLevel": 40
@@ -1263,7 +1065,7 @@
    },
    {
     "speciesKey": "mienfoo",
-    "weight": 13,
+    "weight": 16,
     "minLevel": 43,
     "maxLevel": 45
    },
@@ -1334,12 +1136,6 @@
     "maxLevel": 45
    },
    {
-    "speciesKey": "mienshao",
-    "weight": 3,
-    "minLevel": 43,
-    "maxLevel": 45
-   },
-   {
     "speciesKey": "wigglytuff",
     "weight": 1,
     "minLevel": 43,
@@ -1388,7 +1184,7 @@
    },
    {
     "speciesKey": "pupitar",
-    "weight": 8,
+    "weight": 9,
     "minLevel": 46,
     "maxLevel": 48
    },
@@ -1407,12 +1203,6 @@
    {
     "speciesKey": "emolga",
     "weight": 3,
-    "minLevel": 46,
-    "maxLevel": 48
-   },
-   {
-    "speciesKey": "tyranitar",
-    "weight": 1,
     "minLevel": 46,
     "maxLevel": 48
    },

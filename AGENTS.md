@@ -612,6 +612,19 @@ One-off scripts used to build the data JSON (not run during dev/build):
   encounters), `tools/apply-unlock-level-gates.cjs` mirrors that pass on the
   committed map data alone; it is idempotent and becomes obsolete once the data
   is regenerated from scratch.
+- `apply-starting-route-levels.cjs` — sets every region's opening route to
+  Lv. 3-5 on the committed data (the generator's `FIRST_ROUTE_LEVEL_MIN/MAX`
+  pass does it on regeneration). Idempotent (`--dry`).
+- `fix-impossible-encounters.cjs` / `fix-impossible-teams.cjs` — step wild
+  encounters and trainer/gym/Elite Four/Champion Pokemon back to a form that
+  could exist at their level (a Lv. 3 Chesnaught becomes a Chespin), merging
+  encounter entries that collapse together and updating `caughtOnRoute` gates
+  that named a replaced species. Both use `lib/evolution-levels.cjs` (a
+  `minLevel` fixpoint over the evolution graph, ignoring reversible form
+  transforms). Idempotent (`--dry`); obsolete once the generator's
+  `plausibleEncounters` pass and `buildTeam` filter regenerate the data.
+- `lib/evolution-levels.cjs` — shared `buildEvolutionLevels` / `stageForLevel`
+  helpers (also used by `validate-data.cjs` and the impossible-levels test).
 - `RawMoveData`, `index-backup.js` — large reference/backup data; leave alone.
 - `kill-vite.cjs` — kills orphaned Vite dev servers on the port range (Windows
   `taskkill`, else `kill`). Run `npm run kill-vite`, or `--dry` to preview.

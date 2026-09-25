@@ -421,13 +421,7 @@
    },
    {
     "speciesKey": "nacli",
-    "weight": 30,
-    "minLevel": 20,
-    "maxLevel": 22
-   },
-   {
-    "speciesKey": "naclstack",
-    "weight": 30,
+    "weight": 60,
     "minLevel": 20,
     "maxLevel": 22
    },

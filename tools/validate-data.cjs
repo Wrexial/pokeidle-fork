@@ -11,6 +11,7 @@
 const fs = require('fs')
 const path = require('path')
 const { readRegionDir } = require('./lib/region-data.cjs')
+const { buildEvolutionLevels, stageForLevel } = require('./lib/evolution-levels.cjs')
 
 const DATA = path.join(__dirname, '../public/data')
 const read = (file) => JSON.parse(fs.readFileSync(path.join(DATA, file), 'utf8'))
@@ -222,8 +223,16 @@ for (const [locationId, location] of Object.entries(mapData)) {
     )
     for (const key of caughtOnRoute.species)
       if (!bucket.has(key)) fail(`${locationId} caughtOnRoute lists ${key}, not on ${caughtOnRoute.routeKey}`)
-    if (caughtOnRoute.count !== caughtOnRoute.species.length)
-      fail(`${locationId} caughtOnRoute count does not match its species list`)
+    // `count` may be lower than the list length: the gate then wants any
+    // `count` of the listed species (e.g. either Alolan Sandshrew or Vulpix).
+    if (
+      !Number.isInteger(caughtOnRoute.count) ||
+      caughtOnRoute.count < 1 ||
+      caughtOnRoute.count > caughtOnRoute.species.length
+    )
+      fail(`${locationId} caughtOnRoute count is outside its species list`)
+    if (new Set(caughtOnRoute.species).size !== caughtOnRoute.species.length)
+      fail(`${locationId} caughtOnRoute species list has duplicates`)
   }
 }
 for (const [bucketKey, bucket] of Object.entries(encounterData)) {
@@ -239,6 +248,17 @@ for (const [bucketKey, bucket] of Object.entries(encounterData)) {
       fail(`encounter ${bucketKey}/${encounter.speciesKey} has invalid weight/levels`)
 }
 
+// A wild species must not sit below the level it could actually evolve at.
+const evolutionLevels = buildEvolutionLevels(evolutionData, species)
+for (const [bucketKey, bucket] of Object.entries(encounterData))
+  for (const encounter of bucket.encounters ?? []) {
+    const floor = evolutionLevels.minLevel[encounter.speciesKey] ?? 1
+    if (encounter.minLevel < floor)
+      fail(
+        `encounter ${bucketKey}/${encounter.speciesKey} is Lv.${encounter.minLevel}, below its Lv.${floor} evolution floor`
+      )
+  }
+
 // --- trainers and league -----------------------------------------------------
 const teamLists = [
   ...Object.entries(trainerData).map(([id, list]) => [id, list]),
@@ -253,6 +273,11 @@ for (const [owner, list] of teamLists)
         if (!speciesKeys.has(member.speciesKey)) fail(`${owner} team uses unknown species ${member.speciesKey}`)
         if (!(member.level >= 1 && member.level <= 100)) fail(`${owner} has an invalid level ${member.level}`)
         if (species[member.speciesKey]?.legendary) fail(`${owner} team uses legendary ${member.speciesKey}`)
+        const floor = evolutionLevels.minLevel[member.speciesKey] ?? 1
+        if (member.level < floor)
+          fail(
+            `${owner} fields ${member.speciesKey} Lv.${member.level}, below its Lv.${floor} evolution floor`
+          )
       }
 
 // --- report ------------------------------------------------------------------

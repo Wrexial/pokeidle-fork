@@ -786,8 +786,8 @@
    "caughtOnRoute": {
     "routeKey": "unova-route-9",
     "species": [
-     "duosion",
-     "garbodor"
+     "solosis",
+     "trubbish"
     ],
     "count": 2
    }
@@ -896,8 +896,8 @@
    "caughtOnRoute": {
     "routeKey": "unova-route-11",
     "species": [
-     "braviary",
-     "mandibuzz"
+     "rufflet",
+     "vullaby"
     ],
     "count": 2
    }
@@ -928,7 +928,7 @@
    "caughtOnRoute": {
     "routeKey": "unova-route-12",
     "species": [
-     "rapidash",
+     "ponyta",
      "cherrim"
     ],
     "count": 2

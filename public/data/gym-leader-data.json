@@ -430,7 +430,7 @@
     "level": 13
    },
    {
-    "speciesKey": "pidgeotto",
+    "speciesKey": "pidgey",
     "level": 14
    }
   ],
@@ -472,7 +472,7 @@
   "spriteKey": "bugsy",
   "team": [
    {
-    "speciesKey": "parasect",
+    "speciesKey": "paras",
     "level": 19
    },
    {
@@ -480,7 +480,7 @@
     "level": 20
    },
    {
-    "speciesKey": "venomoth",
+    "speciesKey": "venonat",
     "level": 21
    }
   ],
@@ -826,11 +826,11 @@
     "level": 12
    },
    {
-    "speciesKey": "graveler",
+    "speciesKey": "geodude",
     "level": 13
    },
    {
-    "speciesKey": "golem",
+    "speciesKey": "geodude",
     "level": 14
    }
   ],
@@ -876,11 +876,11 @@
     "level": 19
    },
    {
-    "speciesKey": "machoke",
+    "speciesKey": "machop",
     "level": 20
    },
    {
-    "speciesKey": "machamp",
+    "speciesKey": "machop",
     "level": 21
    }
   ],
@@ -922,7 +922,7 @@
   "spriteKey": "wattson",
   "team": [
    {
-    "speciesKey": "electabuzz",
+    "speciesKey": "elekid",
     "level": 27
    },
    {
@@ -972,7 +972,7 @@
   "spriteKey": "flannery",
   "team": [
    {
-    "speciesKey": "magcargo",
+    "speciesKey": "slugma",
     "level": 34
    },
    {
@@ -1226,11 +1226,11 @@
     "level": 12
    },
    {
-    "speciesKey": "graveler",
+    "speciesKey": "geodude",
     "level": 13
    },
    {
-    "speciesKey": "golem",
+    "speciesKey": "geodude",
     "level": 14
    }
   ],
@@ -1276,7 +1276,7 @@
     "level": 19
    },
    {
-    "speciesKey": "parasect",
+    "speciesKey": "paras",
     "level": 20
    },
    {
@@ -1626,11 +1626,11 @@
     "level": 12
    },
    {
-    "speciesKey": "gloom",
+    "speciesKey": "oddish",
     "level": 13
    },
    {
-    "speciesKey": "vileplume",
+    "speciesKey": "oddish",
     "level": 14
    }
   ],
@@ -1672,7 +1672,7 @@
   "spriteKey": "lenora",
   "team": [
    {
-    "speciesKey": "raticate",
+    "speciesKey": "rattata",
     "level": 19
    },
    {
@@ -1772,7 +1772,7 @@
   "spriteKey": "elesa",
   "team": [
    {
-    "speciesKey": "manectric",
+    "speciesKey": "electrike",
     "level": 34
    },
    {
@@ -2080,7 +2080,7 @@
     "level": 20
    },
    {
-    "speciesKey": "rhydon",
+    "speciesKey": "rhyhorn",
     "level": 21
    }
   ],
@@ -2226,7 +2226,7 @@
     "level": 42
    },
    {
-    "speciesKey": "magnezone",
+    "speciesKey": "magneton",
     "level": 43
    },
    {
@@ -2426,11 +2426,11 @@
     "level": 12
    },
    {
-    "speciesKey": "pidgeotto",
+    "speciesKey": "pidgey",
     "level": 13
    },
    {
-    "speciesKey": "pidgeot",
+    "speciesKey": "pidgey",
     "level": 14
    }
   ],
@@ -2472,11 +2472,11 @@
   "spriteKey": "lana",
   "team": [
    {
-    "speciesKey": "poliwhirl",
+    "speciesKey": "poliwag",
     "level": 19
    },
    {
-    "speciesKey": "poliwrath",
+    "speciesKey": "poliwag",
     "level": 20
    },
    {
@@ -2522,7 +2522,7 @@
   "spriteKey": "kiawe",
   "team": [
    {
-    "speciesKey": "magmar",
+    "speciesKey": "magby",
     "level": 27
    },
    {
@@ -2626,7 +2626,7 @@
     "level": 42
    },
    {
-    "speciesKey": "magnezone",
+    "speciesKey": "magneton",
     "level": 43
    },
    {
@@ -2826,11 +2826,11 @@
     "level": 12
    },
    {
-    "speciesKey": "gloom",
+    "speciesKey": "oddish",
     "level": 13
    },
    {
-    "speciesKey": "vileplume",
+    "speciesKey": "oddish",
     "level": 14
    }
   ],
@@ -2872,11 +2872,11 @@
   "spriteKey": "nessa",
   "team": [
    {
-    "speciesKey": "poliwhirl",
+    "speciesKey": "poliwag",
     "level": 19
    },
    {
-    "speciesKey": "poliwrath",
+    "speciesKey": "poliwag",
     "level": 20
    },
    {
@@ -2922,7 +2922,7 @@
   "spriteKey": "kabu",
   "team": [
    {
-    "speciesKey": "magmar",
+    "speciesKey": "magby",
     "level": 27
    },
    {
@@ -2980,7 +2980,7 @@
     "level": 35
    },
    {
-    "speciesKey": "medicham",
+    "speciesKey": "meditite",
     "level": 36
    }
   ],
@@ -3276,7 +3276,7 @@
     "level": 19
    },
    {
-    "speciesKey": "parasect",
+    "speciesKey": "paras",
     "level": 20
    },
    {
@@ -3322,7 +3322,7 @@
   "spriteKey": "iono",
   "team": [
    {
-    "speciesKey": "electabuzz",
+    "speciesKey": "elekid",
     "level": 27
    },
    {

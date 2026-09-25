@@ -273,7 +273,8 @@
    "caughtOnRoute": {
     "routeKey": "alola-route-3",
     "species": [
-     "salamence"
+     "a-sandshrew",
+     "a-vulpix"
     ],
     "count": 1
    }
@@ -974,7 +975,8 @@
    "caughtOnRoute": {
     "routeKey": "alola-route-3",
     "species": [
-     "salamence"
+     "a-sandshrew",
+     "a-vulpix"
     ],
     "count": 1
    }

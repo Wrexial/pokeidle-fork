@@ -88,7 +88,7 @@ test('Galar opens on its gentler first route', () => {
   )
 })
 
-test('Exp. Share keeps the active at full EXP and shares half with the party', () => {
+test('Exp. Share gives the active 50% and each other member 25%', () => {
   const active = createPokemon('charmander', 50, 'a'),
     ally = createPokemon('pidgey', 10, 'b'),
     enemy = { speciesKey: 'rattata', level: 20 },
@@ -105,11 +105,15 @@ test('Exp. Share keeps the active at full EXP and shares half with the party', (
   )
   const applied = withShare.find((action) => action.type === 'APPLY_EXP'),
     shared = withShare.find((action) => action.type === 'APPLY_SHARED_EXP')
-  assert.equal(applied.payload.expGained, expected, 'the active keeps the full award')
+  assert.equal(
+    applied.payload.expGained,
+    Math.floor(expected * 0.5),
+    'the active takes half while the item is active'
+  )
   assert.equal(
     shared.payload.partyExp[0].expGained,
-    Math.floor(expected * 0.5),
-    'each other member gains half'
+    Math.floor(expected * 0.25),
+    'each other member gains a quarter'
   )
 
   const withoutShare = []

@@ -54,7 +54,7 @@ export const CHANGELOG = [
           items: [
             'High-level wild areas no longer open before the region expects them: routes whose wilds jump far above the area that unlocks them (Paldea\u2019s province areas, Alola\u2019s late island routes, several end-game routes) now also require a party level closer to their wilds, so you cannot wander into Lv.70+ Pokemon with a starter team',
             'Galar\u2019s opening route (and the Slumbering Weald) now starts at Lv. 2-3 instead of Lv. 5-7, so the starter has room to find its feet before Galar\u2019s short route list starts climbing',
-            'The Exp. Share is much stronger: the active Pokemon now keeps its full EXP and every other non-fainted party member gains 50% of the win (it used to halve the active\u2019s EXP and give the rest only 5%)',
+            'The Exp. Share is rebalanced: over 500 battles the active Pokemon gains 50% EXP and every other non-fainted party member gains 25% (it used to give the rest only 5%, but lasted 1000 battles)',
           ],
         },
         {

@@ -155,8 +155,8 @@ export const rareCandyDropChance = 0.0015
  * Exp. Share payout while active. The active Pokemon keeps this fraction of a
  * win's EXP, and every other non-fainted party member gains this fraction each.
  */
-export const expShareActiveMultiplier = 1
-export const expSharePartyMultiplier = 0.5
+export const expShareActiveMultiplier = 0.5
+export const expSharePartyMultiplier = 0.25
 
 /** @type {Record<string, string[]>} */
 export const regionalStarters = {

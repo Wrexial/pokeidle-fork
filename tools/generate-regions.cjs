@@ -2160,23 +2160,36 @@ for (const [bucketKey, bucket] of Object.entries(encounterData)) {
 }
 /** @type {Record<string, string[]>} */
 const exclusiveSpeciesByRoute = {}
+/** @type {Record<string, string[]>} */
+const commonExclusiveSpeciesByRoute = {}
 for (const [speciesKey, routes] of Object.entries(routesBySpecies)) {
   if (routes.size !== 1) continue
   const entry = species[speciesKey]
-  if (!entry || entry.catchRate <= 3 || entry.legendary || ALL_STARTERS.has(speciesKey)) continue
+  if (!entry || entry.catchRate <= 3 || entry.legendary) continue
   const [routeKey] = routes
   const wild = encounterData[routeKey]?.encounters?.find((e) => e.speciesKey === speciesKey)
-  if (!wild || wild.weight < ROUTE_CATCH_MIN_WEIGHT) continue
+  if (!wild) continue
   ;(exclusiveSpeciesByRoute[routeKey] ??= []).push(speciesKey)
+  // Ultra-rare finds (weight 1-2) still count as exclusives for the checklist,
+  // but a route whose only exclusives are that rare keeps its `caughtCount`
+  // rather than turning a flavour check into a chore.
+  if (wild.weight >= ROUTE_CATCH_MIN_WEIGHT && !ALL_STARTERS.has(speciesKey))
+    (commonExclusiveSpeciesByRoute[routeKey] ??= []).push(speciesKey)
 }
 for (const location of Object.values(mapData)) {
   const unlockRule = location.unlock
   if (!unlockRule?.routeCatchParent) continue
-  const exclusives = exclusiveSpeciesByRoute[unlockRule.routeCatchParent]
-  if (exclusives && exclusives.length > 0) {
-    const speciesKeys = exclusives.slice(0, ROUTE_CATCH_LIMIT)
+  const routeKey = unlockRule.routeCatchParent
+  const exclusives = exclusiveSpeciesByRoute[routeKey] ?? []
+  if (exclusives.length > 0 && (commonExclusiveSpeciesByRoute[routeKey] ?? []).length > 0) {
+    // List every exclusive so the player can catch any few of them, rather
+    // than being forced through a specific handful.
     delete unlockRule.caughtCount
-    unlockRule.caughtOnRoute = { routeKey: unlockRule.routeCatchParent, species: speciesKeys, count: speciesKeys.length }
+    unlockRule.caughtOnRoute = {
+      routeKey,
+      species: exclusives,
+      count: Math.min(ROUTE_CATCH_LIMIT, exclusives.length),
+    }
   }
   delete unlockRule.routeCatchParent
 }

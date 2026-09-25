@@ -68,3 +68,21 @@ test('the Alola Route 3 gate asks for a Pokemon that spawns there', () => {
   assert.deepEqual(gate.species, ['a-sandshrew', 'a-vulpix'])
   assert.equal(gate.count, 1, 'either Alolan form satisfies the gate')
 })
+
+test('the Alola Route 3 gate lists every Route 1 exclusive but only asks for 3', () => {
+  const gate = mapData['alola-route-3']?.unlock?.caughtOnRoute
+  assert.ok(gate, 'the Route 3 gate exists')
+  assert.equal(gate.count, 3)
+  // Every species exclusive to Route 1 (ignoring raid buckets) is offered.
+  const routesBySpecies = {}
+  for (const [routeKey, bucket] of Object.entries(encounterData)) {
+    if (mapData[routeKey]?.type === 'raid') continue
+    for (const encounter of bucket.encounters) (routesBySpecies[encounter.speciesKey] ??= new Set()).add(routeKey)
+  }
+  const exclusives = Object.keys(routesBySpecies).filter((key) => {
+    const routes = routesBySpecies[key]
+    return routes.size === 1 && routes.has('alola-route-1')
+  })
+  assert.ok(exclusives.length > 3, 'Route 1 has more than three exclusives to choose from')
+  assert.deepEqual([...gate.species].sort(), [...exclusives].sort())
+})

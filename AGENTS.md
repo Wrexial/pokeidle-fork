@@ -189,7 +189,7 @@ in `GameLayout`) dispatches `DEBUG_MAX_LEVEL` when the Konami code
 | `src/hooks.js` | Cross-cutting UI hooks: `useTypewriter`, `useIsMobile`, `useKonamiCode`, daily/notification/audio/quest hooks. |
 | `src/game/use-game-loop.js` | `useGameLoop` — the idle tick state machine. |
 | `src/game/minigames.js` | Barrel re-exporting `src/game/minigames/`: `mining`, `bug-contest`, `safari` (Kanto Safari Zone), `academy-quiz` (Paldea type quiz), `game-corner`, `registry` (fixed `MINIGAME_LOCATIONS` POIs), `rods` (fishing tiers), `fishing` (curated `FISHING_LOCATIONS` + route-exclusive catches) and `route-activities` (terrain-driven Rock Smash / Headbutt / Diving / foraging). Minigames launch from the location panel, and Town Map nodes are badged via `POI_LOCATIONS` / `FISHING_LOCATIONS`. |
-| `src/game/pelago.js` | Poké Pelago's passive islands (Bean Farm / Training Isle / Isle Caves) that bank rewards per wild win. Companion care (`companion.js`) and the Berry Garden (`garden.js`) are hosted by the Pelago hub (`poke-pelago-modal.js`), opened from the Alola Pelago location. |
+| `src/game/pelago.js` | Poké Pelago's passive islands (Bean Farm / Training Isle / Isle Caves) that bank rewards per wild win. Companion care (`companion.js`) and the Berry Garden (`garden.js`) are hosted by the Pelago hub scene (`poke-pelago-scene.js`), opened from the Alola Pelago location. |
 | `src/components/*.js` | **One file per component** (53 files, kebab-case, e.g. `battle-scene.js`, `pokedex-tile.js`). |
 | `src/types.d.ts` | Ambient types for the injected `window.gameData*` globals. |
 | `assets/gameDataInjector.js` | Loads `public/data/*.json` into `window.gameDataInjector`. Add new data files here. |

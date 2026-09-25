@@ -112,6 +112,17 @@ type Garden = { plots: GardenPlot[] }
 type PelagoIsland = { assigned: string[]; progress: number; ready: number }
 type Pelago = Record<string, PelagoIsland>
 
+/** The result of collecting a Pelago island, shown once in a card. */
+type PelagoCollect = {
+  islandId: string
+  /** Banked completions that were collected. */
+  count: number
+  /** Aggregated item haul (Bean Farm / Isle Caves). */
+  items: { itemId: string; quantity: number }[]
+  /** EXP each Training Isle worker gained. */
+  exp: number
+}
+
 /** Traits a Daycare egg can inherit from its parents. */
 type BreedingInheritance = {
   /** Complete IV block (3 stats take the best of both parents). */
@@ -446,6 +457,8 @@ type GameState = {
   garden: Garden
   /** Poké Pelago's passive islands (see game/pelago.js). */
   pelago: Pelago
+  /** The last Pelago collection, shown in a result card until dismissed. */
+  pelagoCollect: PelagoCollect | null
   defeatedGyms: string[]
   defeatedEliteFour: string[]
   defeatedChampions: string[]

@@ -93,9 +93,7 @@ export function minigamesInRegion(regionId) {
 }
 
 /**
- * Location -> the action that launches its minigame. `pokePelago` is handled
- * directly by the location panel (it opens a modal rather than a phase), so it
- * has no start action here.
+ * Location -> the action that launches its minigame.
  * @type {Record<string, string>}
  */
 export const MINIGAME_START_ACTION = {
@@ -120,6 +118,7 @@ export const MINIGAME_START_ACTION = {
   musical: 'START_MUSICAL',
   picnic: 'START_PICNIC',
   pokeballFactory: 'START_POKEBALL_FACTORY',
+  pokePelago: 'START_PELAGO',
 }
 
 /**
@@ -213,7 +212,7 @@ export const MINIGAME_INFO = {
     title: 'Curry Cooking',
     cost: CURRY_COST,
     action: 'COOK A CURRY',
-    hint: `Pick an ingredient to match the customer's flavour, then hold the fan to keep the campfire in the sweet spot while it simmers. A great curry is worth money and a full-heal Curry. Entry is $${CURRY_COST.toLocaleString()}.`,
+    hint: `Pick an ingredient to match the customer's flavour. After a 3-2-1 countdown, hold the fan to keep the campfire in the narrow sweet spot while it simmers. A great curry is worth money and a full-heal Curry. Entry is $${CURRY_COST.toLocaleString()}.`,
   },
   pokestar: {
     title: 'Pok\u00e9star Studios',

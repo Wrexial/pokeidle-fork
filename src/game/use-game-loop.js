@@ -693,6 +693,7 @@ export function useGameLoop() {
       state.phase === 'musical' ||
       state.phase === 'picnic' ||
       state.phase === 'pokeballFactory' ||
+      state.phase === 'pelago' ||
       state.phase === 'routeActivity' ||
       state.phase === 'wonderTrade' ||
       state.paused

@@ -114,6 +114,12 @@ test('COLLECT_PELAGO pays out each island', () => {
   })
   assert.equal(beans.inventory.pokebean, 2 * 2 * 1, 'beans scale with workers and completions')
   assert.equal(beans.pelago.beans.ready, 0)
+  assert.deepEqual(
+    beans.pelagoCollect.items,
+    [{ itemId: 'pokebean', quantity: 4 }],
+    'the Beans haul is itemised for the collect card'
+  )
+  assert.equal(beans.pelagoCollect.count, 2)
 
   const training = gameReducer(withReady('training'), {
     type: 'COLLECT_PELAGO',
@@ -123,6 +129,8 @@ test('COLLECT_PELAGO pays out each island', () => {
     training.box[0].totalExp > base.box[0].totalExp,
     'the assigned boxed Pokemon trained'
   )
+  assert.ok(training.pelagoCollect.exp > 0, 'the Training haul records the EXP gained')
+  assert.deepEqual(training.pelagoCollect.items, [])
 
   const caves = gameReducer(withReady('caves'), {
     type: 'COLLECT_PELAGO',
@@ -130,6 +138,16 @@ test('COLLECT_PELAGO pays out each island', () => {
   })
   const gained = Object.values(caves.inventory).reduce((sum, count) => sum + count, 0)
   assert.ok(gained > 0, 'the caves produced items')
+  assert.equal(
+    caves.pelagoCollect.items.reduce((sum, item) => sum + item.quantity, 0),
+    gained,
+    'the haul matches what the caves produced'
+  )
+  assert.equal(
+    gameReducer(caves, { type: 'DISMISS_PELAGO_COLLECT' }).pelagoCollect,
+    null,
+    'the collect card can be dismissed'
+  )
 
   // Collecting with nothing banked is a no-op.
   assert.equal(

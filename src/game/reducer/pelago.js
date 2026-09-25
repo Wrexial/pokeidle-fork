@@ -68,25 +68,32 @@ export function collectPelago(state, action) {
   if (!PELAGO_ISLANDS[islandId] || !island || island.ready <= 0) return state
   const count = island.ready,
     workers = Math.max(1, island.assigned.length),
-    inventory = { ...state.inventory }
+    inventory = { ...state.inventory },
+    /** @type {PelagoCollect} */
+    haul = { islandId, count, items: [], exp: 0 }
   let box = state.box
   const log = []
   if (islandId === 'beans') {
     const quantity = PELAGO_BEANS_PER_POKEMON * workers * count
     inventory.pokebean = (inventory.pokebean ?? 0) + quantity
+    haul.items.push({ itemId: 'pokebean', quantity })
     log.push(`The Bean Farm produced ${quantity}x Poke Bean!`)
   } else if (islandId === 'caves') {
-    const pulls = workers * count
+    const pulls = workers * count,
+      totals = /** @type {Map<string, number>} */ (new Map())
     for (let index = 0; index < pulls; index++) {
       const reward = rollMiningReward()
       inventory[reward.itemId] = (inventory[reward.itemId] ?? 0) + reward.quantity
+      totals.set(reward.itemId, (totals.get(reward.itemId) ?? 0) + reward.quantity)
     }
+    haul.items = [...totals].map(([itemId, quantity]) => ({ itemId, quantity }))
     log.push(`The Isle Caves yielded ${pulls} haul${pulls === 1 ? '' : 's'} from the deep!`)
   } else if (islandId === 'training') {
     const exp = PELAGO_TRAINING_EXP * count
     box = box.map((member) =>
       island.assigned.includes(member.id) ? grantExperience(member, exp) : member
     )
+    haul.exp = exp
     log.push(`The Training Isle earned your Pokemon ${exp.toLocaleString()} EXP each!`)
   }
   return {
@@ -94,6 +101,17 @@ export function collectPelago(state, action) {
     inventory,
     box,
     pelago: { ...state.pelago, [islandId]: { ...island, ready: 0 } },
+    pelagoCollect: haul,
     battleLog: [...state.battleLog, ...log].slice(-50),
   }
+}
+
+/**
+ * Handle the `DISMISS_PELAGO_COLLECT` action: close the collection result card.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function dismissPelagoCollect(state, action) {
+  return state.pelagoCollect ? { ...state, pelagoCollect: null } : state
 }

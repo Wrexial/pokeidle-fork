@@ -9583,6 +9583,97 @@ img {
     width: 520px
 }
 
+.pelago-scene {
+    background-image: url(/backgrounds/beach.png)
+}
+
+.pelago-scene-body {
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 6px;
+    padding: 8px;
+    overflow-y: auto;
+    background: linear-gradient(#f3e7c8,#e2d3ad);
+    border: 2px solid #8a7040;
+    border-radius: 6px
+}
+
+.pelago-scene-content {
+    flex: 1;
+    min-height: 0
+}
+
+.pelago-collect {
+    position: absolute;
+    inset: 0;
+    z-index: 6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background: rgba(8,12,20,.72)
+}
+
+.pelago-collect-card {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    width: 100%;
+    max-width: 340px;
+    padding: 14px 18px;
+    background: linear-gradient(#f3e7c8,#e2d3ad);
+    border: 3px solid #8a7040;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px #00000088
+}
+
+.pelago-collect-title {
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+    color: #3a2818
+}
+
+.pelago-collect-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    max-height: 200px;
+    overflow-y: auto
+}
+
+.pelago-collect-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    color: #3a2818
+}
+
+.pelago-collect-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px
+}
+
+.pelago-collect-name {
+    flex: 1
+}
+
+.pelago-collect-qty {
+    font-weight: 700
+}
+
+.pelago-collect-exp {
+    font-size: 11px;
+    font-weight: 700;
+    text-align: center;
+    color: #1b6f3a
+}
+
 .pelago-tabs {
     display: flex;
     gap: 6px;
@@ -9713,6 +9804,18 @@ img {
     text-overflow: ellipsis;
     white-space: nowrap;
     max-width: 100%
+}
+
+.pelago-slot-exp {
+    width: 100%
+}
+
+.pelago-slot-exp .exp-label {
+    font-size: 6px
+}
+
+.pelago-slot-exp .exp-bar {
+    margin-top: 2px
 }
 
 .pelago-progress {
@@ -10913,6 +11016,31 @@ img {
     align-items: center;
     gap: 10px;
     width: 100%
+}
+
+.curry-countdown {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px
+}
+
+.curry-countdown-number {
+    font-size: 64px;
+    font-weight: 700;
+    color: var(--gold);
+    text-shadow: 0 4px 0 #000, 0 0 24px #ffd24a;
+    animation: curryCountdownPop .5s ease-out
+}
+
+.curry-countdown-hint {
+    font-size: 10px;
+    color: #f0e6c8
+}
+
+@keyframes curryCountdownPop {
+    from { transform: scale(1.6); opacity: .2 }
+    to { transform: scale(1); opacity: 1 }
 }
 
 .curry-request {

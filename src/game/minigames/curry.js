@@ -8,8 +8,9 @@ export const CURRY_COST = 400
 /** How long the pot simmers. */
 export const CURRY_COOK_MS = 8000
 
-/** Half-width of the sweet spot around mid-flame (0-0.5). */
-export const CURRY_ZONE = 0.2
+/** Half-width of the sweet spot around mid-flame (0-0.5). Tightened to offset
+ * the 3-2-1 countdown that lets the player start fanning the instant it ends. */
+export const CURRY_ZONE = 0.14
 
 /** The flavours a customer can ask for. */
 export const CURRY_FLAVORS = ['Spicy', 'Dry', 'Sweet', 'Bitter', 'Sour']

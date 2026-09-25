@@ -147,8 +147,23 @@ function alolaSave() {
     startRegion: 'alola',
     playerPokemon: pokemon,
     party: [pokemon],
-    box: [],
-    nextPokemonId: 2,
+    box: [
+      {
+        ...pokemon,
+        id: '2',
+        name: 'Rowlet',
+        level: 24,
+        totalExp: 11000,
+        currentHp: 70,
+        maxHp: 70,
+      },
+    ],
+    nextPokemonId: 3,
+    pelago: {
+      beans: { assigned: [], progress: 0, ready: 0 },
+      training: { assigned: ['2'], progress: 12, ready: 2 },
+      caves: { assigned: [], progress: 0, ready: 0 },
+    },
     currentLocation: 'alola-poke-pelago',
     currentRoute: 'alola-route-1',
     unlockedLocations: ['alola-iki-town', 'alola-poke-pelago', 'alola-route-1', 'alola-hauoli-city'],
@@ -332,11 +347,15 @@ async function main() {
     )
     await cdp.send('Page.navigate', { url: APP_URL })
     await cdp.waitFor('window.gameDataDebug.status().loaded === true', 20000, 'reload data')
-    // Dismiss the first-run patch notes so they don't cover the capture.
+    // Dismiss the first-run patch notes so they don't cover the capture. It
+    // mounts a beat after boot, so give it a moment before looking.
+    await cdp
+      .waitFor('!!document.querySelector(".patch-notes-dismiss-btn")', 6000, 'patch notes')
+      .catch(() => {})
     await cdp.eval(
-      `(() => { const b = document.querySelector('.patch-notes-dismiss-btn'); if (b) { b.click(); return true } return false })()`
+      `(() => { document.querySelectorAll('.patch-notes-dismiss-btn').forEach((b) => b.click()); return true })()`
     )
-    await sleep(800)
+    await sleep(600)
     console.log(
       'layout metrics:',
       await cdp.eval('({ w: window.innerWidth, h: window.innerHeight })')
@@ -352,6 +371,15 @@ async function main() {
     )
     await sleep(300)
     await cdp.screenshot(path.join(OUT, '03-pelago-islands.png'))
+    await cdp.eval(
+      `(() => { const cards = [...document.querySelectorAll('.pelago-island')]; const training = cards.find((c) => /Training Isle/.test(c.textContent)); const b = training && training.querySelector('.pelago-collect-btn'); if (b && !b.disabled) { b.click(); return true } return false })()`
+    )
+    await sleep(400)
+    await cdp.screenshot(path.join(OUT, '03b-pelago-collect.png'))
+    await cdp.eval(
+      `(() => { const b = document.querySelector('.pelago-collect .move-panel-btn.confirm'); if (b) b.click(); return true })()`
+    )
+    await sleep(200)
     await cdp.eval(
       `(() => { const t = [...document.querySelectorAll('.pelago-tab')].find((el) => /Berry/.test(el.textContent)); t && t.click(); return !!t })()`
     )
@@ -557,6 +585,7 @@ async function main() {
         ['galar-postwick', 'galar-route-3', 'galar-motostoke'],
         '.curry-ingredients',
         '20-curry.png',
+        '.curry-ingredient',
       ],
       [
         'Pokestar Studios',

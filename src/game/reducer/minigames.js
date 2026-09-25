@@ -291,6 +291,16 @@ export function startPokeballFactory(state, action) {
 }
 
 /**
+ * Handle the `START_PELAGO` action.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function startPelago(state, action) {
+  return enterMinigame(state, 'pelago', 0, 'You arrived at Pok\u00e9 Pelago.')
+}
+
+/**
  * Handle the `END_MINIGAME` action.
  * @param {GameState} state
  * @param {GameAction} action
@@ -315,7 +325,8 @@ export function endMinigame(state, action) {
     state.phase === 'whack' ||
     state.phase === 'musical' ||
     state.phase === 'picnic' ||
-    state.phase === 'pokeballFactory'
+    state.phase === 'pokeballFactory' ||
+    state.phase === 'pelago'
     ? { ...state, ...createIdleBattleState() }
     : state
 }

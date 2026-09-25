@@ -1,6 +1,5 @@
 // Split from a grouped component file — see tools/decompile/split-components.mjs
 
-import { createPortal } from 'react-dom'
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
 import React from 'react'
 import { BATTLE_TOWER_LOCATION } from '../data/config.js'
@@ -12,7 +11,6 @@ import { computeUnlockedLocations, regionProgressionGoal } from '../game/progres
 import { MinigameCard } from './minigame-card.js'
 import { GiftPanel } from './gift-panel.js'
 import { BattleTowerPanel } from './battle-tower-panel.js'
-import { PokePelagoModal } from './poke-pelago-modal.js'
 import { RouteEncounterGrid } from './route-encounter-grid.js'
 import { ShopPanel } from './shop-panel.js'
 
@@ -66,7 +64,6 @@ export function LocationPanel({ onOpenCatchSettings }) {
         : null,
     routeKey = location?.routeKey,
     routeEncounters = routeKey ? encounterData[routeKey] : null,
-    [showPelago, setShowPelago] = React.useState(!1),
     // The "Next Unlocks" block is useful from a zone hub too, not just a
     // normal location, so it is built once and rendered by both branches.
     nextUnlocksSection = regionGoal
@@ -649,10 +646,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
                         ? `${fixedMinigame.action} ($${fixedMinigame.cost.toLocaleString()})`
                         : fixedMinigame.action,
                   disabled: minigameBusy || state.money < fixedMinigame.cost,
-                  onStart:
-                    fixedMinigameId === 'pokePelago'
-                      ? () => setShowPelago(!0)
-                      : () => dispatch({ type: MINIGAME_START_ACTION[fixedMinigameId] }),
+                  onStart: () => dispatch({ type: MINIGAME_START_ACTION[fixedMinigameId] }),
                 }),
               activityIds.map((activityId) => {
                 const activity = ROUTE_ACTIVITIES[activityId]
@@ -682,11 +676,6 @@ export function LocationPanel({ onOpenCatchSettings }) {
         location.id === BATTLE_TOWER_LOCATION && jsx(BattleTowerPanel, {}),
         jsx(GiftPanel, { locationId: location.id }),
         nextUnlocksSection,
-        showPelago &&
-          createPortal(
-            jsx(PokePelagoModal, { onClose: () => setShowPelago(!1) }),
-            document.body
-          ),
       ],
     }),
   })

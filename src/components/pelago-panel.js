@@ -7,6 +7,7 @@ import { pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { PELAGO_ISLANDS, PELAGO_SLOTS } from '../game/pelago.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, pokemonDisplayName } from '../game/pokemon.js'
+import { ExpBar } from './exp-bar.js'
 
 export function PelagoIslandsPanel() {
   const { state, dispatch } = useGame(),
@@ -84,6 +85,15 @@ export function PelagoIslandsPanel() {
                           className: 'pelago-slot-name',
                           children: [pokemonDisplayName(member), ` Lv.${member.level}`],
                         }),
+                        island.id === 'training' &&
+                          jsx('span', {
+                            className: 'pelago-slot-exp',
+                            children: jsx(ExpBar, {
+                              speciesKey: member.speciesKey,
+                              level: member.level,
+                              totalExp: member.totalExp ?? 0,
+                            }),
+                          }),
                       ],
                     },
                     member.id

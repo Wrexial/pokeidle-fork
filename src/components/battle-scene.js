@@ -47,6 +47,7 @@ import { WhackScene } from './whack-scene.js'
 import { MusicalScene } from './musical-scene.js'
 import { PicnicScene } from './picnic-scene.js'
 import { PokeballFactoryScene } from './pokeball-factory-scene.js'
+import { PokePelagoScene } from './poke-pelago-scene.js'
 import { MiningScene } from './mining-scene.js'
 import { GameCornerScene } from './game-corner-scene.js'
 import { RouteActivityScene } from './route-activity-scene.js'
@@ -89,6 +90,7 @@ export function BattleScene() {
   if (state.phase === 'musical') return jsx(MusicalScene, {})
   if (state.phase === 'picnic') return jsx(PicnicScene, {})
   if (state.phase === 'pokeballFactory') return jsx(PokeballFactoryScene, {})
+  if (state.phase === 'pelago') return jsx(PokePelagoScene, {})
   if (state.phase === 'mining') return jsx(MiningScene, {})
   if (state.phase === 'gameCorner') return jsx(GameCornerScene, {})
   if (state.phase === 'routeActivity') return jsx(RouteActivityScene, {})

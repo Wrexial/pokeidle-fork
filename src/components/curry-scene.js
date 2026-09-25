@@ -22,9 +22,10 @@ export function CurryScene() {
       /** @type {typeof CURRY_INGREDIENTS[number] | null} */ (null)
     ),
     [phase, setPhase] = React.useState(
-      /** @type {'choose' | 'cooking' | 'done'} */ ('choose')
+      /** @type {'choose' | 'countdown' | 'cooking' | 'done'} */ ('choose')
     ),
     [flame, setFlame] = React.useState(0.5),
+    [countdown, setCountdown] = React.useState(3),
     [timeLeft, setTimeLeft] = React.useState(CURRY_COOK_MS),
     [inBand, setInBand] = React.useState(0),
     [prize, setPrize] = React.useState(
@@ -37,6 +38,21 @@ export function CurryScene() {
     holdingRef = React.useRef(false),
     startRef = React.useRef(0),
     finishedRef = React.useRef(false)
+
+  React.useEffect(() => {
+    if (phase !== 'countdown') return
+    setCountdown(3)
+    const started = Date.now(),
+      id = setInterval(() => {
+        const remaining = 3 - Math.floor((Date.now() - started) / 1000)
+        if (remaining <= 0) {
+          clearInterval(id)
+          setCountdown(0)
+          setPhase('cooking')
+        } else setCountdown(remaining)
+      }, 100)
+    return () => clearInterval(id)
+  }, [phase])
 
   React.useEffect(() => {
     if (phase !== 'cooking') return
@@ -71,7 +87,8 @@ export function CurryScene() {
     if (phase !== 'choose') return
     setIngredient(entry)
     matchedRef.current = entry.flavor === request
-    setPhase('cooking')
+    setCountdown(3)
+    setPhase('countdown')
   }
 
   function leave() {
@@ -97,9 +114,11 @@ export function CurryScene() {
             children:
               phase === 'choose'
                 ? `Wanted: ${request}`
-                : phase === 'cooking'
-                  ? `${(timeLeft / 1000).toFixed(1)}s \u00b7 ${Math.round(inBand * 100)}% in the zone`
-                  : (prize?.label ?? ''),
+                : phase === 'countdown'
+                  ? 'Get ready to fan\u2026'
+                  : phase === 'cooking'
+                    ? `${(timeLeft / 1000).toFixed(1)}s \u00b7 ${Math.round(inBand * 100)}% in the zone`
+                    : (prize?.label ?? ''),
           }),
         ],
       }),
@@ -145,7 +164,22 @@ export function CurryScene() {
                   }),
                 ],
               })
-            : jsxs('div', {
+            : phase === 'countdown'
+              ? jsxs('div', {
+                  className: 'curry-countdown',
+                  children: [
+                    jsx('span', {
+                      className: 'curry-countdown-number',
+                      key: countdown,
+                      children: countdown,
+                    }),
+                    jsx('span', {
+                      className: 'curry-countdown-hint',
+                      children: `Get ready to fan!${ingredient ? ` \u00b7 ${ingredient.name}` : ''}`,
+                    }),
+                  ],
+                })
+              : jsxs('div', {
                 className: 'curry-cook',
                 children: [
                   jsxs('div', {

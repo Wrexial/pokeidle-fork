@@ -129,10 +129,13 @@ export function unlockRegion(state, action) {
  */
 export function travel(state, action) {
   const { locationId } = action.payload
-  if (!state.unlockedLocations.includes(locationId) || locationId === state.currentLocation) return state
+  if (locationId === state.currentLocation) return state
+  // Check the freshly-computed set, not just the saved list: a loaded save can
+  // meet a gate without having recomputed its unlocked locations yet.
   const location = mapData[locationId],
-    routeKey = location.routeKey || state.currentRoute,
     unlocked = computeUnlockedLocations(state)
+  if (!location || !unlocked.includes(locationId)) return state
+  const routeKey = location.routeKey || state.currentRoute
   return {
     ...prepareNextBattle(state),
     currentLocation: locationId,

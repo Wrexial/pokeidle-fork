@@ -25,6 +25,7 @@ const NEXT_UNLOCK_LIMIT = 5
 export function LocationPanel({ onOpenCatchSettings }) {
   const { state, dispatch } = useGame(),
     unlockedNow = computeUnlockedLocations(state),
+    unlockedNowSet = new Set(unlockedNow),
     location = mapData[state.currentLocation],
     // Every locked location on the player's frontier (adjacent to somewhere
     // already unlocked). Several can become available at once — a town with two
@@ -86,7 +87,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
     return Boolean(
       locationId &&
         locationId !== state.currentLocation &&
-        state.unlockedLocations.includes(locationId) &&
+        unlockedNowSet.has(locationId) &&
         mapData[locationId]?.type !== 'raid'
     )
   }
@@ -325,7 +326,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
       subAreas = (location.subAreas ?? []).map(
         /** @param {any} subArea */ (subArea) => ({
           ...subArea,
-          unlocked: state.unlockedLocations.includes(subArea.id),
+          unlocked: unlockedNowSet.has(subArea.id),
         })
       )
     return jsx('div', {
@@ -368,18 +369,41 @@ export function LocationPanel({ onOpenCatchSettings }) {
           }),
           jsx('div', {
             className: 'zone-area-list',
-            children: subAreas.map(/** @param {any} subArea */ (subArea) =>
-              jsx(
+            children: subAreas.map(/** @param {any} subArea */ (subArea) => {
+              // Show what a locked area still needs, so a sub-area is never an
+              // unexplained "???" (Route 2 needs wins at Route 1 and a Lv. 11 team).
+              const requirementText = subArea.unlocked
+                  ? ''
+                  : unlockRequirements(mapData[subArea.id])
+                      .filter((requirement) => !requirement.met)
+                      .map((requirement) =>
+                        requirement.required > 1
+                          ? `${requirement.current}/${requirement.required} ${requirement.label}`
+                          : requirement.label
+                      )
+                      .join(' \u00b7 ')
+              return jsx(
                 'button',
                 {
                   className: `zone-area-btn${subArea.id === activeSubArea ? ' active' : ''}${subArea.unlocked ? '' : ' locked'}`,
                   onClick: subArea.unlocked ? () => travelToTarget(subArea.id) : void 0,
-                  title: subArea.unlocked ? void 0 : 'Not available yet',
-                  children: subArea.unlocked ? subArea.name : '???',
+                  title: subArea.unlocked ? void 0 : requirementText || 'Not available yet',
+                  children: [
+                    jsx('span', {
+                      className: 'zone-area-name',
+                      children: subArea.unlocked ? subArea.name : '???',
+                    }),
+                    !subArea.unlocked && requirementText
+                      ? jsx('span', {
+                          className: 'zone-area-req',
+                          children: requirementText,
+                        })
+                      : null,
+                  ],
                 },
                 subArea.id
               )
-            ),
+            }),
           }),
         ],
       }),

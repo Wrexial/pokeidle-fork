@@ -3432,12 +3432,18 @@ img {
 
 .zone-area-list {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 4px;
     margin-bottom: 6px
 }
 
 .zone-area-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1px;
+    width: 100%;
+    box-sizing: border-box;
     padding: 4px 8px;
     font: inherit;
     font-size: 8px;
@@ -3445,6 +3451,12 @@ img {
     background: #00000026;
     border: 2px solid #483828;
     cursor: pointer
+}
+
+.zone-area-req {
+    font-size: 6px;
+    color: #c8a848c0;
+    text-align: left
 }
 
 .zone-area-btn.active {
@@ -3457,7 +3469,7 @@ img {
 }
 
 .zone-area-btn.locked {
-    opacity: .45;
+    opacity: .7;
     cursor: default
 }
 

@@ -39,6 +39,28 @@ test('starting in a zone region opens the entry hub and its first area', () => {
   assert.equal(state.currentRoute, 'alola-route-1')
 })
 
+test('TRAVEL reaches a location whose gate is met even if the saved list is stale', () => {
+  // A loaded save can meet a gate without having recomputed its unlock list
+  // yet, so TRAVEL checks the freshly-computed set rather than only the save.
+  const started = gameReducer(initialGameState, {
+      type: 'SELECT_STARTER',
+      payload: { region: 'alola', speciesKey: 'rowlet' },
+    }),
+    stale = {
+      ...started,
+      unlockedLocations: started.unlockedLocations.filter(
+        (id) => id !== 'alola-route-1--hauoli-outskirts'
+      ),
+      pokedexCaught: ['rowlet', 'wingull'],
+    },
+    traveled = gameReducer(stale, {
+      type: 'TRAVEL',
+      payload: { locationId: 'alola-route-1--hauoli-outskirts' },
+    })
+  assert.equal(traveled.currentLocation, 'alola-route-1--hauoli-outskirts')
+  assert.ok(traveled.unlockedLocations.includes('alola-route-1--hauoli-outskirts'))
+})
+
 test('UNLOCK_REGION opens a zone region entry hub and first area', () => {
   const base = {
     ...initialGameState,

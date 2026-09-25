@@ -465,17 +465,17 @@
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "route5",
+     "locationId": "route7",
      "count": 12
     },
     {
-     "locationId": "ceruleanCity",
+     "locationId": "celadonCity",
      "count": 6
     }
    ],
-   "badgesRequired": 2
+   "badgesRequired": 3
   },
-  "unlockOrder": 12,
+  "unlockOrder": 17,
   "position": {
    "x": 64,
    "y": 14.26
@@ -503,9 +503,9 @@
      "count": 6
     }
    ],
-   "badgesRequired": 2
+   "badgesRequired": 3
   },
-  "unlockOrder": 13,
+  "unlockOrder": 18,
   "position": {
    "x": 74,
    "y": 14
@@ -623,9 +623,9 @@
      "count": 6
     }
    ],
-   "badgesRequired": 2
+   "badgesRequired": 3
   },
-  "unlockOrder": 14,
+  "unlockOrder": 19,
   "position": {
    "x": 74,
    "y": 27
@@ -653,9 +653,9 @@
      "count": 6
     }
    ],
-   "badgesRequired": 2
+   "badgesRequired": 3
   },
-  "unlockOrder": 15,
+  "unlockOrder": 20,
   "position": {
    "x": 84,
    "y": 27
@@ -710,13 +710,13 @@
      "count": 15
     },
     {
-     "locationId": "ceruleanCity",
-     "count": 8
+     "locationId": "route6",
+     "count": 6
     }
    ],
    "badgesRequired": 2
   },
-  "unlockOrder": 16,
+  "unlockOrder": 14,
   "position": {
    "x": 54,
    "y": 40
@@ -740,13 +740,13 @@
      "count": 15
     },
     {
-     "locationId": "saffronCity",
-     "count": 5
+     "locationId": "ceruleanCity",
+     "count": 6
     }
    ],
    "badgesRequired": 2
   },
-  "unlockOrder": 17,
+  "unlockOrder": 12,
   "position": {
    "x": 54,
    "y": 50
@@ -769,13 +769,13 @@
      "count": 15
     },
     {
-     "locationId": "saffronCity",
+     "locationId": "ceruleanCity",
      "count": 8
     }
    ],
    "badgesRequired": 2
   },
-  "unlockOrder": 18,
+  "unlockOrder": 13,
   "position": {
    "x": 54,
    "y": 58
@@ -795,17 +795,17 @@
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "route5",
-     "count": 15
+     "locationId": "route6",
+     "count": 12
     },
     {
-     "locationId": "saffronCity",
-     "count": 5
+     "locationId": "vermilionCity",
+     "count": 6
     }
    ],
    "badgesRequired": 3
   },
-  "unlockOrder": 19,
+  "unlockOrder": 15,
   "position": {
    "x": 46.042042875900364,
    "y": 39.872013260185085
@@ -828,13 +828,13 @@
      "count": 12
     },
     {
-     "locationId": "saffronCity",
+     "locationId": "vermilionCity",
      "count": 6
     }
    ],
    "badgesRequired": 3
   },
-  "unlockOrder": 20,
+  "unlockOrder": 16,
   "position": {
    "x": 38,
    "y": 40
@@ -854,12 +854,12 @@
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "route6",
+     "locationId": "route7",
      "count": 15
     },
     {
-     "locationId": "vermilionCity",
-     "count": 5
+     "locationId": "celadonCity",
+     "count": 6
     }
    ],
    "badgesRequired": 4
@@ -889,7 +889,7 @@
      "count": 15
     },
     {
-     "locationId": "vermilionCity",
+     "locationId": "celadonCity",
      "count": 8
     }
    ],

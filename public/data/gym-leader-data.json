@@ -102,15 +102,15 @@
   "team": [
    {
     "speciesKey": "voltorb",
-    "level": 29
+    "level": 26
    },
    {
     "speciesKey": "pikachu",
-    "level": 27
+    "level": 25
    },
    {
     "speciesKey": "raichu",
-    "level": 31
+    "level": 28
    }
   ],
   "region": "kanto",

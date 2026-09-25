@@ -4516,9 +4516,17 @@ img {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 6px;
     padding: 4px 8px;
     background: #0003;
     border: 2px solid #483828
+}
+
+.shop-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0
 }
 
 .shop-name {
@@ -4526,13 +4534,18 @@ img {
     color: var(--gold);
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: .5px
+    letter-spacing: .5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
 }
 
 .shop-toggle {
     display: flex;
     align-items: center;
     gap: 5px;
+    min-width: 0;
+    flex: 1;
     padding: 0;
     font-family: inherit;
     color: inherit;
@@ -4579,6 +4592,40 @@ img {
     color: #2a1808;
     border-color: var(--gold-dark);
     font-weight: 700
+}
+
+.shop-mode-toggle {
+    display: flex;
+    gap: 2px
+}
+
+.shop-mode-btn {
+    font-size: 7px;
+    padding: 2px 7px;
+    background: #0003;
+    border: 1px solid #483828;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-weight: 700
+}
+
+.shop-mode-btn:hover {
+    background: #ffffff0d;
+    color: var(--parchment)
+}
+
+.shop-mode-btn.active {
+    background: #8a6a20;
+    color: #ffe8a0;
+    border-color: #b08a30
+}
+
+.shop-empty {
+    font-size: 8px;
+    color: #c8a84866;
+    text-align: center;
+    padding: 12px 0;
+    font-style: italic
 }
 
 .shop-items {
@@ -4638,6 +4685,30 @@ img {
 }
 
 .shop-buy-btn.disabled {
+    background: #685040;
+    color: #a89878;
+    border-color: #483828;
+    cursor: not-allowed;
+    opacity: .7
+}
+
+.shop-sell-btn {
+    font-size: 7px;
+    padding: 3px 8px;
+    background: #8a6a20;
+    color: #ffe8a0;
+    border: 2px solid #b08a30;
+    border-radius: 0;
+    cursor: pointer;
+    font-weight: 700;
+    white-space: nowrap
+}
+
+.shop-sell-btn:hover:not(.disabled) {
+    background: #a07a28
+}
+
+.shop-sell-btn.disabled {
     background: #685040;
     color: #a89878;
     border-color: #483828;
@@ -5232,45 +5303,43 @@ img {
     border-bottom: 2px solid #3a1e10
 }
 
-.bag-header-arrow {
-    font-size: 10px;
-    padding: 1px 6px;
-    background: #685040;
-    color: var(--parchment);
-    border: 2px solid #483828;
+.bag-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    flex: 1;
+    min-width: 0
+}
+
+.bag-tab {
+    font-size: 7px;
+    padding: 2px 5px;
+    background: #4a3426;
+    color: #c8a84899;
+    border: 1px solid transparent;
     border-radius: 0;
     cursor: pointer;
     font-weight: 700;
-    line-height: 1;
-    box-shadow: 1px 1px #0000004d,inset 1px 1px #ffffff1a
+    line-height: 1.2
 }
 
-.bag-header-arrow:hover {
-    background: #786050;
-    border-color: var(--gold-dark)
+.bag-tab:hover {
+    background: #685040;
+    color: var(--parchment)
 }
 
-.bag-header-spacer {
-    flex: 1
+.bag-tab.active {
+    background: #c8a84840;
+    border-color: var(--gold-dark);
+    color: var(--gold-bright)
 }
 
 .bag-header-money {
-    flex: 1;
-    text-align: right;
     font-size: 9px;
     color: var(--gold-bright);
     font-weight: 700;
+    white-space: nowrap;
     text-shadow: 1px 1px 0 rgba(0,0,0,.6)
-}
-
-.bag-header-name {
-    font-size: 9px;
-    color: var(--gold-bright);
-    text-shadow: 1px 1px 0 rgba(0,0,0,.6);
-    letter-spacing: .5px;
-    font-weight: 700;
-    min-width: 60px;
-    text-align: center
 }
 
 .bag-content {
@@ -5356,27 +5425,6 @@ img {
 
 .bag-use-btn:hover {
     background: #5a7840
-}
-
-.bag-sell-actions {
-    display: flex;
-    gap: 4px;
-    margin-top: 4px
-}
-
-.bag-sell-btn {
-    padding: 2px 8px;
-    font-size: 7px;
-    background: #8a6a20;
-    color: #ffe8a0;
-    border: 1px solid #b08a30;
-    border-radius: 2px;
-    cursor: pointer;
-    font-family: inherit
-}
-
-.bag-sell-btn:hover {
-    background: #a07a28
 }
 
 .bag-target-picker {

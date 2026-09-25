@@ -9,7 +9,6 @@ import { ItemIcon } from './item-icon.js'
 import {
   getItemCategory,
   getItemInfo,
-  getItemSellPrice,
   isActiveEffectItem,
   isHeldItem,
   isUsableConsumable,
@@ -51,15 +50,8 @@ export function BagPanel() {
     items = Object.entries(state.inventory).filter(
       ([itemId, quantity]) => quantity > 0 && getItemCategory(itemId) === tab.id
     ),
-    prevTab = () => {
-      ;(setTabIndex((tabIndex - 1 + bagCategories.length) % bagCategories.length),
-        setSelectedItem(null),
-        setTargetItemId(null))
-    },
-    nextTab = () => {
-      ;(setTabIndex((tabIndex + 1) % bagCategories.length),
-        setSelectedItem(null),
-        setTargetItemId(null))
+    selectTab = /** @param {number} index */ (index) => {
+      ;(setTabIndex(index), setSelectedItem(null), setTargetItemId(null))
     },
     toggleItem = /** @param {string} itemId */ (itemId) => {
       ;(setSelectedItem((current) => (current === itemId ? null : itemId)), setTargetItemId(null))
@@ -75,22 +67,8 @@ export function BagPanel() {
         : (isUsableConsumable(itemId) || isHeldItem(itemId)) &&
           (setTargetItemId(itemId), setUseQty(1))
     },
-    sellItem = /** @param {string} itemId @param {number | 'all'} quantity */ (
-      itemId,
-      quantity
-    ) => {
-      const owned = state.inventory[itemId] ?? 0
-      dispatch({
-        type: 'SELL_ITEM',
-        payload: {
-          itemId,
-          quantity: quantity === 'all' ? owned : quantity,
-        },
-      })
-    },
     itemInfo = selectedItem ? getItemInfo(selectedItem) : null,
     selectedQty = selectedItem ? state.inventory[selectedItem] ?? 0 : 0,
-    sellPrice = selectedItem ? getItemSellPrice(selectedItem) : null,
     canUse =
       selectedItem !== null &&
       selectedQty > 0 &&
@@ -108,22 +86,19 @@ export function BagPanel() {
       jsxs('div', {
         className: 'bag-header',
         children: [
-          jsx('span', {
-            className: 'bag-header-spacer',
-          }),
-          jsx('button', {
-            className: 'bag-header-arrow',
-            onClick: prevTab,
-            children: '<',
-          }),
-          jsx('span', {
-            className: 'bag-header-name',
-            children: tab.label,
-          }),
-          jsx('button', {
-            className: 'bag-header-arrow',
-            onClick: nextTab,
-            children: '>',
+          jsx('div', {
+            className: 'bag-tabs',
+            children: bagCategories.map((category, index) =>
+              jsx(
+                'button',
+                {
+                  className: `bag-tab${index === tabIndex ? ' active' : ''}`,
+                  onClick: () => selectTab(index),
+                  children: category.label,
+                },
+                category.id
+              )
+            ),
           }),
           jsxs('span', {
             className: 'bag-header-money',
@@ -187,27 +162,6 @@ export function BagPanel() {
                 onClick: () => selectedItem && useItem(selectedItem),
                 children: 'Use',
               }),
-            sellPrice && selectedQty > 0
-              ? jsxs('div', {
-                  className: 'bag-sell-actions',
-                  children: [
-                    jsx('button', {
-                      className: 'bag-sell-btn',
-                      onClick: () => selectedItem && sellItem(selectedItem, 1),
-                      children: ['Sell 1 (+$', sellPrice.toLocaleString(), ')'],
-                    }),
-                    jsx('button', {
-                      className: 'bag-sell-btn',
-                      onClick: () => selectedItem && sellItem(selectedItem, 'all'),
-                      children: [
-                        'Sell All (+$',
-                        (sellPrice * selectedQty).toLocaleString(),
-                        ')',
-                      ],
-                    }),
-                  ],
-                })
-              : null,
             targetItem &&
               jsxs('div', {
                 className: 'bag-target-picker',

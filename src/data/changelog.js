@@ -49,6 +49,8 @@ export const CHANGELOG = [
             'Premier Balls are no longer sold \u2014 you get one free for every 10 balls you buy',
             'Swarms last 256 wild battles and their species has 4x shiny odds (never better than 1 in 256). They still announce themselves with a toast that names the area but not the Pokemon, so it stays a surprise until you arrive',
             'The Bag, Poke Mart, Reward Shop and Auction House now show a proper item sprite next to every item instead of a blank square',
+            'The Bag uses category tabs (Poke Balls, Medicine, Candies, Items, Held Items, Valuables) instead of next/previous arrows, so you can jump straight to the pocket you want',
+            'Selling moved to the Poke Mart: each mart now has a BUY / SELL toggle, so you sell your items where you shop instead of from the Bag',
           ],
         },
         {

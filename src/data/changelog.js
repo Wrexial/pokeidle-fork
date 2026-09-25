@@ -20,6 +20,7 @@ export const CHANGELOG = [
             'The minigames are livelier: Voltorb tiles flip, memory cards turn over, lights glow and pulse, targets pop, markers flicker, and the reward panel bursts in',
             'Headbutt no longer plays like Diving: hold one of three trees to charge a bar, then release in the green/yellow/cyan sweet spot to shake a Pokemon loose',
             'Headbutt and the Bug Catching Contest can now shake out two Pokemon at once. You can only engage one \u2014 pick your target and the other slips away with an \u201cawwhh\u201d',
+            'Voltorb Flip: clicking a Voltorb now actually explodes \u2014 a burst on the tile, a board shake and a new explosion sound effect',
             'Fishing no longer hides a route-exclusive catch behind a perfect cast: the rarest Water species is back in the normal wild table and can be found while exploring, and a perfect cast instead just boosts the shiny odds and level',
             'The Town Map no longer badges fishing spots with a rod icon now that route activities live in the location panel',
           ],

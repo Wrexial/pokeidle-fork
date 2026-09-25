@@ -17,6 +17,7 @@ import {
   voltorbBoardCoins,
   voltorbFlipPrize,
 } from '../game/minigames.js'
+import { playSfx } from '../game/audio.js'
 import { MinigameRewardScreen, useMinigameClaim } from './minigame-reward.js'
 
 /** The face value shown on a flipped tile. */
@@ -31,6 +32,9 @@ export function VoltorbFlipScene() {
       /** @type {'playing' | 'exploded' | 'cleared' | 'done'} */ ('playing')
     ),
     [showReward, setShowReward] = React.useState(false),
+    // Which tile just went off, so it can show the explosion.
+    [explodedIndex, setExplodedIndex] = React.useState(-1),
+    [exploding, setExploding] = React.useState(false),
     collect = useMinigameClaim(dispatch)
 
   const exploded = boardExploded(board),
@@ -45,8 +49,12 @@ export function VoltorbFlipScene() {
     const next = flipVoltorbCell(board, index)
     if (next === board) return
     setBoard(next)
-    if (boardExploded(next)) setPhase('exploded')
-    else if (boardCleared(next)) {
+    if (boardExploded(next)) {
+      setExplodedIndex(index)
+      setExploding(true)
+      if (state.sfxEnabled) playSfx('explosion')
+      setPhase('exploded')
+    } else if (boardCleared(next)) {
       setBanked((value) => value + voltorbBoardCoins(next))
       setMaxLevel((value) => Math.max(value, next.level))
       setPhase('cleared')
@@ -60,17 +68,25 @@ export function VoltorbFlipScene() {
     setBoard((current) => toggleVoltorbMark(current, index))
   }
 
+  // Hold the board on screen for the blast before the reward summary takes over.
+  React.useEffect(() => {
+    if (!exploding) return
+    const timer = setTimeout(() => setExploding(false), 800)
+    return () => clearTimeout(timer)
+  }, [exploding])
+
   function nextLevel() {
     if (board.level >= VOLTORB_MAX_LEVEL) {
       setPhase('done')
       return
     }
     setBoard(createVoltorbBoard(board.level + 1))
+    setExplodedIndex(-1)
     setPhase('playing')
   }
 
   const finished = phase === 'exploded' || phase === 'done',
-    rewardVisible = finished || showReward,
+    rewardVisible = (finished && !exploding) || showReward,
     hasPrize = banked > 0 || prize.items.length > 0
 
   function leave() {
@@ -121,7 +137,7 @@ export function VoltorbFlipScene() {
             })
           : [
           jsx('div', {
-            className: 'voltorb-board',
+            className: `voltorb-board${exploding ? ' exploded' : ''}`,
             children: [
               jsx('div', { className: 'voltorb-corner' }),
               ...hints.cols.map((hint, col) =>
@@ -166,16 +182,20 @@ export function VoltorbFlipScene() {
                     {
                       className: `voltorb-tile${cell.flipped ? ` flipped ${cell.kind}` : ''}${
                         cell.marked && !cell.flipped ? ' marked' : ''
-                      }`,
+                      }${index === explodedIndex ? ' exploding' : ''}`,
                       disabled: phase !== 'playing' || cell.flipped,
                       onClick: () => flip(index),
                       onContextMenu: (/** @type {React.MouseEvent} */ event) =>
                         mark(event, index),
-                      children: cell.flipped
-                        ? TILE_LABEL[cell.kind]
-                        : cell.marked
-                          ? jsx('span', { className: 'voltorb-mark', children: '\u26a1' })
-                          : '',
+                      children: [
+                        cell.flipped
+                          ? TILE_LABEL[cell.kind]
+                          : cell.marked
+                            ? jsx('span', { className: 'voltorb-mark', children: '\u26a1' })
+                            : '',
+                        index === explodedIndex &&
+                          jsx('span', { className: 'voltorb-boom', children: '\u{1f4a5}' }),
+                      ],
                     },
                     `tile-${index}`
                   )

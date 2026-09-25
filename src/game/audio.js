@@ -111,6 +111,14 @@ const SFX = {
     [1318.51, 0.54, 0.2],
     [1567.98, 0.72, 0.5],
   ],
+  // A Voltorb going off: a sharp crack into a low, rumbling boom.
+  explosion: [
+    [880, 0, 0.05],
+    [196, 0.02, 0.12],
+    [146.83, 0.08, 0.16],
+    [110, 0.14, 0.24],
+    [73.42, 0.22, 0.42],
+  ],
 }
 
 /** @param {string} name */

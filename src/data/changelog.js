@@ -66,6 +66,7 @@ export const CHANGELOG = [
             'Alola and Paldea are playable again: starting in one (or opening it with an Unlock Token) now unlocks the entry island/province hub and its first area, instead of stranding the player because the hub asked for a Pokedex count they had no route to reach',
             'The gym tab\u2019s "GO TO <town>" hint is now a button: click it to travel straight to that leader\u2019s town',
             'Candies can be applied in bulk: choose 1, 10 or All in the bag and use them in one go. A stack stops at Lv.100 and only spends the candies it actually needed',
+            'Mossdeep City\u2019s Gym leaders are now correctly named Tate & Liza (they were shown as just "Tate")',
             'Catch Settings now start with every ball enabled (the Master Ball keeps its own battle button), so the auto-catcher uses your best available ball instead of only Poke Balls',
           ],
         },

@@ -461,7 +461,13 @@ const TRAINER_NAMES = [
 // Showdown trainer sprite keys are the leader's name slugified ("Crasher Wake"
 // -> "crasherwake"). A few characters only have a generation-suffixed or
 // alternate sprite. Kanto is hand-curated and keeps its own gen3 keys.
-const TRAINER_SPRITE_OVERRIDES = { Phoebe: 'phoebe-gen3', Drake: 'drake-gen3' }
+const TRAINER_SPRITE_OVERRIDES = {
+  Phoebe: 'phoebe-gen3',
+  Drake: 'drake-gen3',
+  // Mossdeep's Gym is run by the twins Tate and Liza; Showdown only has
+  // separate 'tate'/'liza' art, so keep the shared 'tate' sprite.
+  'Tate & Liza': 'tate',
+}
 const trainerSpriteKey = (name) =>
   TRAINER_SPRITE_OVERRIDES[name] ??
   name.toLowerCase().replace(/['.]/g, '').replace(/\s+/g, '').replace(/[^a-z0-9-]/g, '')
@@ -510,7 +516,7 @@ const GEN_STARTERS = {
 }
 const GYM_LEADERS = {
   johto: ['Falkner', 'Bugsy', 'Whitney', 'Morty', 'Chuck', 'Jasmine', 'Pryce', 'Clair'],
-  hoenn: ['Roxanne', 'Brawly', 'Wattson', 'Flannery', 'Norman', 'Winona', 'Tate', 'Juan'],
+  hoenn: ['Roxanne', 'Brawly', 'Wattson', 'Flannery', 'Norman', 'Winona', 'Tate & Liza', 'Juan'],
   sinnoh: ['Roark', 'Gardenia', 'Maylene', 'Crasher Wake', 'Fantina', 'Byron', 'Candice', 'Volkner'],
   unova: ['Cilan', 'Lenora', 'Burgh', 'Elesa', 'Clay', 'Skyla', 'Brycen', 'Drayden'],
   kalos: ['Viola', 'Grant', 'Korrina', 'Ramos', 'Clemont', 'Valerie', 'Olympia', 'Wulfric'],

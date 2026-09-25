@@ -12239,3 +12239,157 @@ img {
     30% { transform: scale(1.3); opacity: 1 }
     100% { transform: scale(1.6); opacity: 0 }
 }
+
+/* --- Ruins of Alph (Johto) ------------------------------------------------ */
+.ruins-scene {
+    background-image: url(/backgrounds/cave.png)
+}
+
+.ruins-wrap,
+.ice-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%
+}
+
+.ruins-grid {
+    display: grid;
+    gap: 6px;
+    width: 100%;
+    max-width: 320px
+}
+
+.ruins-tile {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 700;
+    color: #f3e7c8;
+    background: linear-gradient(#6a5330,#3f3018);
+    border: 2px solid #8a7040;
+    border-radius: 6px;
+    box-shadow: inset 0 -3px 0 #00000055;
+    cursor: default;
+    transition: transform .1s ease
+}
+
+.ruins-tile.slidable {
+    background: linear-gradient(#8a6d3c,#5a4423);
+    border-color: var(--gold);
+    cursor: pointer
+}
+
+.ruins-tile.slidable:hover {
+    filter: brightness(1.12)
+}
+
+.ruins-tile.slidable:active {
+    transform: scale(.94)
+}
+
+.ruins-tile.blank {
+    background: rgba(0,0,0,.45);
+    border-style: dashed;
+    border-color: #4a3a1a
+}
+
+.ruins-hint,
+.ice-hint {
+    font-size: 8px;
+    color: #cbbf9c
+}
+
+.ruins-summary,
+.ice-summary {
+    font-size: 9px;
+    color: #fff;
+    text-align: center
+}
+
+/* --- Snowpoint Temple (Sinnoh) ------------------------------------------- */
+.ice-scene {
+    background-image: url(/backgrounds/cave.png)
+}
+
+.ice-grid {
+    display: grid;
+    gap: 3px
+}
+
+.ice-cell {
+    position: relative;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(#bfe3f5,#7fb8d8);
+    border: 1px solid #5a90b0;
+    border-radius: 4px
+}
+
+.ice-cell.wall {
+    background: #2a3340;
+    border-color: #1a2028
+}
+
+.ice-cell.rock {
+    background: linear-gradient(#8a7a5a,#5a4a30)
+}
+
+.ice-cell.goal {
+    background: radial-gradient(#fff6c0,#e8c94a);
+    border-color: var(--gold);
+    box-shadow: 0 0 10px #e8c94a
+}
+
+.ice-player-sprite {
+    width: 80%;
+    height: 80%;
+    image-rendering: pixelated;
+    animation: icePop .14s ease
+}
+
+.ice-rock-mark {
+    font-size: 14px;
+    color: #f0e6c8
+}
+
+.ice-goal-mark {
+    font-size: 14px;
+    color: #7a5a10
+}
+
+.ice-controls {
+    display: grid;
+    grid-template-columns: repeat(3, 56px);
+    grid-template-rows: repeat(2, 56px);
+    gap: 6px;
+    justify-content: center
+}
+
+.ice-arrow {
+    font-size: 16px;
+    color: #10240c;
+    background: linear-gradient(#efe3c4,#cdbd94);
+    border: 2px solid #8a7040;
+    border-radius: 8px;
+    cursor: pointer
+}
+
+.ice-arrow:hover {
+    filter: brightness(1.08)
+}
+
+.ice-arrow-n { grid-column: 2; grid-row: 1 }
+.ice-arrow-w { grid-column: 1; grid-row: 2 }
+.ice-arrow-s { grid-column: 2; grid-row: 2 }
+.ice-arrow-e { grid-column: 3; grid-row: 2 }
+
+@keyframes icePop {
+    from { transform: scale(.8) }
+    to { transform: scale(1) }
+}

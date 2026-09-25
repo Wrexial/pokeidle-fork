@@ -33,6 +33,8 @@ export const CHANGELOG = [
             'Poke Pelago opens as a full main-screen scene from the Alola Pelago location instead of a popup, with its Companion, Berry Fields and Islands tabs and an X to leave',
             'Bean Farm and Isle Caves collections now show a result card itemising exactly what you got \u2014 every item by name and sprite \u2014 and Training Isle workers show an EXP bar that fills up when you collect',
             'Three new region minigames: Castelia City\u2019s Pokemon Musical (tap the four arrows on the beat), Cortondo\u2019s Picnic (drop ingredients onto the sandwich without toppling it) and Laverre City\u2019s Poke Ball Factory (rotate the conveyor tiles to link the inlet to the outlet)',
+            'Violet City\u2019s Ruins of Alph is a sliding picture puzzle \u2014 tap a stone tile beside the gap (or use the arrow keys) to shuffle the 3\u00d73 picture back into order, and a quicker solve pays more',
+            'Snowpoint City\u2019s Snowpoint Temple is a four-room ice-slide maze \u2014 pick a direction and the hero slides until a wall or boulder stops them; clear every room to reach the heart, with a flawless run levelling a Never-Melt Ice and an Ice Stone',
           ],
         },
         {

@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 const gameData = installGameData()
 
-const { BATTLE_ROYAL_COST, BATTLE_ROYAL_POOL, BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL, BUG_CONTEST_RUSTLES, CONTEST_COST, CONTEST_THEMES, DYNAMAX_ADVENTURES_COST, DYNAMAX_STAGES, MINIGAME_LOCATIONS, MINIGAME_INFO, MINIGAME_AREAS, MINIGAME_REGIONS, MINIGAME_START_ACTION, minigameForLocation, minigamesInRegion, minigameNameForLocation, MINING_COST, POKEATHLON_COST, POKEATHLON_SPRINT_MS, POKE_RADAR_CHAIN_STEP, POKE_RADAR_COST, POKE_RADAR_SIZE, SLOT_JACKPOT, SLOT_PAYLINES, SLOT_REELS, SLOT_ROWS, SLOT_SPIN_COST, SLOT_SYMBOLS, VOLTORB_FLIP_COST, VOLTORB_MAX_LEVEL, VOLTORB_SIZE, AUCTION_LOTS, accuracyScore, auctionAppraisal, battleRoyalOpponent, battleRoyalPrize, boardCleared, boardExploded, boardHints, bugCatchChance, bugContestPrize, bugFleeChance, bugStays, buildContestResults, canAuctionBid, contestAppeal, contestPlacement, contestPlayerRank, contestPrize, contestRank, contestScore, contestTheme, createAuction, createOpponent, createVoltorbBoard, dynamaxBoss, dynamaxPaths, dynamaxPrize, flipVoltorbCell, healSquad, moveBaseAppeal, pickRadarTarget, placeAuctionBid, pokeathlonPrize, pokeRadarPrize, radarChainPoints, radarSequence, rewardItemName, rollContestBug, rollContestBugs, rollContestRivalRound, rollContestTheme, rollMiningReward, simulateBattle, spinSlots, sprintScore, throwNetBall, toBattlePokemon, toggleVoltorbMark, voltorbBoardCoins, voltorbCountForLevel, voltorbFlipPrize, LIGHTS_OUT_COST, LIGHTS_OUT_SCRAMBLE, LIGHTS_OUT_SIZE, CURRY_COST, CURRY_FLAVORS, CURRY_INGREDIENTS, CURRY_ZONE, POKESTAR_COST, POKESTAR_SHOT_COUNT, createLightsOut, toggleLights, lightsSolved, lightsOutPrize, rollCurryRequest, curryScore, curryPrize, pickPokestarShots, pokestarPrize, MATCH3_COST, MATCH3_MOVES, MATCH3_SIZE, MEMORY_COST, MEMORY_PAIRS, WHACK_COST, createMatch3Board, findMatches, tryMatch3Swap, resolveMatch3, match3Prize, createMemoryDeck, memoryPrize, rollWhackTarget, whackPrize, MUSICAL_COST, MUSICAL_NOTES, MUSICAL_MAX_SCORE, generateMusicalPattern, judgeMusicalHit, musicalPrize, musicalTotalMs, PICNIC_COST, PICNIC_PICKS, PICNIC_INGREDIENTS, PICNIC_SHINY_MULTIPLIER, ingredientById, sandwichTypes, rollSandwichType, picnicDropScore, picnicSpeciesPool, rollPicnicEncounter, POKEBALL_FACTORY_COST, FACTORY_SIZE, connectionsFor, createFactoryPuzzle, rotateFactoryTile, factoryPowered, factorySolved, factoryPrize, FACTORY_BALL_POOL, rollFactoryBalls } = await import(
+const { BATTLE_ROYAL_COST, BATTLE_ROYAL_POOL, BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL, BUG_CONTEST_RUSTLES, CONTEST_COST, CONTEST_THEMES, DYNAMAX_ADVENTURES_COST, DYNAMAX_STAGES, MINIGAME_LOCATIONS, MINIGAME_INFO, MINIGAME_AREAS, MINIGAME_REGIONS, MINIGAME_START_ACTION, minigameForLocation, minigamesInRegion, minigameNameForLocation, MINING_COST, POKEATHLON_COST, POKEATHLON_SPRINT_MS, POKE_RADAR_CHAIN_STEP, POKE_RADAR_COST, POKE_RADAR_SIZE, SLOT_JACKPOT, SLOT_PAYLINES, SLOT_REELS, SLOT_ROWS, SLOT_SPIN_COST, SLOT_SYMBOLS, VOLTORB_FLIP_COST, VOLTORB_MAX_LEVEL, VOLTORB_SIZE, AUCTION_LOTS, accuracyScore, auctionAppraisal, battleRoyalOpponent, battleRoyalPrize, boardCleared, boardExploded, boardHints, bugCatchChance, bugContestPrize, bugFleeChance, bugStays, buildContestResults, canAuctionBid, contestAppeal, contestPlacement, contestPlayerRank, contestPrize, contestRank, contestScore, contestTheme, createAuction, createOpponent, createVoltorbBoard, dynamaxBoss, dynamaxPaths, dynamaxPrize, flipVoltorbCell, healSquad, moveBaseAppeal, pickRadarTarget, placeAuctionBid, pokeathlonPrize, pokeRadarPrize, radarChainPoints, radarSequence, rewardItemName, rollContestBug, rollContestBugs, rollContestRivalRound, rollContestTheme, rollMiningReward, simulateBattle, spinSlots, sprintScore, throwNetBall, toBattlePokemon, toggleVoltorbMark, voltorbBoardCoins, voltorbCountForLevel, voltorbFlipPrize, LIGHTS_OUT_COST, LIGHTS_OUT_SCRAMBLE, LIGHTS_OUT_SIZE, CURRY_COST, CURRY_FLAVORS, CURRY_INGREDIENTS, CURRY_ZONE, POKESTAR_COST, POKESTAR_SHOT_COUNT, createLightsOut, toggleLights, lightsSolved, lightsOutPrize, rollCurryRequest, curryScore, curryPrize, pickPokestarShots, pokestarPrize, MATCH3_COST, MATCH3_MOVES, MATCH3_SIZE, MEMORY_COST, MEMORY_PAIRS, WHACK_COST, createMatch3Board, findMatches, tryMatch3Swap, resolveMatch3, match3Prize, createMemoryDeck, memoryPrize, rollWhackTarget, whackPrize, MUSICAL_COST, MUSICAL_NOTES, MUSICAL_MAX_SCORE, generateMusicalPattern, judgeMusicalHit, musicalPrize, musicalTotalMs, PICNIC_COST, PICNIC_PICKS, PICNIC_INGREDIENTS, PICNIC_SHINY_MULTIPLIER, ingredientById, sandwichTypes, rollSandwichType, picnicDropScore, picnicSpeciesPool, rollPicnicEncounter, POKEBALL_FACTORY_COST, FACTORY_SIZE, connectionsFor, createFactoryPuzzle, rotateFactoryTile, factoryPowered, factorySolved, factoryPrize, FACTORY_BALL_POOL, rollFactoryBalls, SLIDING_COST, SLIDING_SIZE, solvedSlidingBoard, canSlide, slideTile, isSlidingSolved, createSlidingPuzzle, slidingTileForDirection, slidingPrize, ICE_SLIDE_COST, ICE_SLIDE_ROOMS, ICE_SLIDE_TOTAL_PAR, iceSlidePosition, iceSlideSolved, iceSlidePrize } = await import(
   '../src/game/minigames.js'
 )
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
@@ -989,6 +989,91 @@ test('START_POKEBALL_FACTORY charges entry and END_MINIGAME returns to idle', ()
   assert.equal(gameReducer(started, { type: 'END_MINIGAME' }).phase, 'idle')
 })
 
+test('the Ruins puzzle scrambles from the solved board and slides back', () => {
+  const solved = solvedSlidingBoard(SLIDING_SIZE)
+  assert.deepEqual(solved, [1, 2, 3, 4, 5, 6, 7, 8, 0])
+  assert.ok(isSlidingSolved(solved))
+  assert.equal(canSlide(solved, 7), true, 'the tile left of the blank can move')
+  assert.equal(canSlide(solved, 0), false, 'a corner tile cannot')
+  assert.deepEqual(slideTile([1, 2, 3, 4, 5, 6, 7, 8, 0], 7), [1, 2, 3, 4, 5, 6, 7, 0, 8])
+  assert.deepEqual(
+    slideTile([1, 2, 3, 4, 5, 6, 7, 8, 0], 0),
+    [1, 2, 3, 4, 5, 6, 7, 8, 0],
+    'an illegal slide leaves the board alone'
+  )
+  assert.equal(slidingTileForDirection([1, 2, 3, 4, 5, 6, 7, 8, 0], 'W'), 7)
+  assert.equal(slidingTileForDirection([1, 2, 3, 4, 5, 6, 7, 8, 0], 'N'), 5)
+  assert.equal(slidingTileForDirection([1, 2, 3, 4, 5, 6, 7, 8, 0], 'E'), null)
+  assert.equal(slidingTileForDirection([1, 2, 3, 4, 5, 6, 7, 8, 0], 'S'), null)
+
+  const puzzle = createSlidingPuzzle(SLIDING_SIZE)
+  assert.equal(puzzle.length, SLIDING_SIZE * SLIDING_SIZE)
+  assert.ok(!isSlidingSolved(puzzle), 'a fresh puzzle is scrambled')
+  assert.deepEqual([...puzzle].sort((a, b) => a - b), [...solvedSlidingBoard(SLIDING_SIZE)].sort((a, b) => a - b))
+  assert.ok(slidingPrize(10, true).money > slidingPrize(60, true).money)
+  assert.equal(slidingPrize(10, false).money < slidingPrize(60, true).money, true)
+})
+
+test('START_RUINS_PUZZLE charges entry and END_MINIGAME returns to idle', () => {
+  const started = gameReducer(
+      { ...initialGameState, phase: 'idle', money: SLIDING_COST + 5 },
+      { type: 'START_RUINS_PUZZLE' }
+    ),
+    broke = gameReducer(
+      { ...initialGameState, phase: 'idle', money: SLIDING_COST - 1 },
+      { type: 'START_RUINS_PUZZLE' }
+    )
+  assert.equal(started.phase, 'ruinsPuzzle')
+  assert.equal(started.money, 5)
+  assert.equal(broke.phase, 'idle')
+  assert.equal(gameReducer(started, { type: 'END_MINIGAME' }).phase, 'idle')
+})
+
+test('every ice room has a finite par and its exit lands', () => {
+  assert.equal(ICE_SLIDE_ROOMS.length, 4)
+  assert.ok(ICE_SLIDE_TOTAL_PAR > 0)
+  for (const room of ICE_SLIDE_ROOMS) {
+    assert.ok(Number.isFinite(room.par) && room.par > 0, 'each room is solvable')
+    assert.notEqual(room.start, room.goal)
+    // A wall always stops a slide in each of the four directions.
+    for (const direction of ['N', 'E', 'S', 'W']) {
+      const landing = iceSlidePosition(room, room.start, direction)
+      assert.ok(landing >= 0 && landing < room.width * room.height)
+      assert.notEqual(room.rows[Math.floor(landing / room.width)][landing % room.width], '#')
+    }
+  }
+})
+
+test('ice slides stop at walls and boulders and never overshoot the exit', () => {
+  const room = ICE_SLIDE_ROOMS[0]
+  // From the start, sliding east stops against the wall before the exit row.
+  const east = iceSlidePosition(room, room.start, 'E')
+  assert.notEqual(east, room.start)
+  assert.equal(iceSlidePosition(room, east, 'E'), east, 'a wall blocks further travel')
+  assert.equal(iceSlideSolved(room, room.goal), true)
+  assert.equal(iceSlideSolved(room, room.start), false)
+  // A slide that reaches the exit lands on it rather than sliding past.
+  const crossing = iceSlidePosition(room, east, 'S')
+  assert.equal(room.rows[Math.floor(crossing / room.width)][crossing % room.width], 'E')
+  assert.ok(iceSlidePrize(4, ICE_SLIDE_TOTAL_PAR, ICE_SLIDE_TOTAL_PAR, true).money > iceSlidePrize(4, 40, ICE_SLIDE_TOTAL_PAR, true).money)
+  assert.equal(iceSlidePrize(0, 0, 0, false).money > 0, true)
+})
+
+test('START_ICE_SLIDE charges entry and END_MINIGAME returns to idle', () => {
+  const started = gameReducer(
+      { ...initialGameState, phase: 'idle', money: ICE_SLIDE_COST + 5 },
+      { type: 'START_ICE_SLIDE' }
+    ),
+    broke = gameReducer(
+      { ...initialGameState, phase: 'idle', money: ICE_SLIDE_COST - 1 },
+      { type: 'START_ICE_SLIDE' }
+    )
+  assert.equal(started.phase, 'iceSlide')
+  assert.equal(started.money, 5)
+  assert.equal(broke.phase, 'idle')
+  assert.equal(gameReducer(started, { type: 'END_MINIGAME' }).phase, 'idle')
+})
+
 test('every minigame is linked to a real area in its own region', () => {
   const expectedRegions = {
     gameCorner: 'kanto',
@@ -1012,6 +1097,8 @@ test('every minigame is linked to a real area in its own region', () => {
     musical: 'unova',
     picnic: 'paldea',
     pokeballFactory: 'kalos',
+    ruinsPuzzle: 'johto',
+    iceSlide: 'sinnoh',
     pokePelago: 'alola',
   }
   // Every catalogued minigame has exactly one home area, and vice versa: no
@@ -1038,7 +1125,7 @@ test('every minigame is linked to a real area in its own region', () => {
 
 test('minigamesInRegion groups them by region', () => {
   assert.deepEqual(minigamesInRegion('kanto').sort(), ['gameCorner', 'safari', 'whack'])
-  assert.deepEqual(minigamesInRegion('johto').sort(), ['bugContest', 'pokeathlon', 'puzzleLeague'])
+  assert.deepEqual(minigamesInRegion('johto').sort(), ['bugContest', 'pokeathlon', 'puzzleLeague', 'ruinsPuzzle'])
   assert.ok(minigamesInRegion('hoenn').includes('contest'))
   assert.deepEqual(minigamesInRegion('nope'), [])
 })

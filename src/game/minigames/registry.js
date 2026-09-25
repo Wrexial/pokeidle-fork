@@ -17,6 +17,8 @@ import { WHACK_COST, WHACK_DURATION_MS } from './whack.js'
 import { MUSICAL_COST, MUSICAL_NOTES } from './musical.js'
 import { PICNIC_COST, PICNIC_PICKS } from './picnic.js'
 import { POKEBALL_FACTORY_COST, FACTORY_SIZE } from './pokeball-factory.js'
+import { SLIDING_COST, SLIDING_SIZE } from './sliding-puzzle.js'
+import { ICE_SLIDE_COST, ICE_SLIDE_LEVELS } from './ice-slide.js'
 import { mapData } from '../../data/gameData.js'
 import { VOLTORB_FLIP_COST } from './voltorb-flip.js'
 import { BATTLE_TOWER_LOCATION } from '../../data/config.js'
@@ -50,6 +52,8 @@ export const MINIGAME_LOCATIONS = {
   'unova-castelia-city': 'musical',
   'paldea-cortondo': 'picnic',
   'kalos-laverre-city': 'pokeballFactory',
+  'johto-violet-city': 'ruinsPuzzle',
+  'sinnoh-snowpoint-city': 'iceSlide',
   'alola-poke-pelago': 'pokePelago',
 }
 
@@ -118,6 +122,8 @@ export const MINIGAME_START_ACTION = {
   musical: 'START_MUSICAL',
   picnic: 'START_PICNIC',
   pokeballFactory: 'START_POKEBALL_FACTORY',
+  ruinsPuzzle: 'START_RUINS_PUZZLE',
+  iceSlide: 'START_ICE_SLIDE',
   pokePelago: 'START_PELAGO',
 }
 
@@ -255,6 +261,18 @@ export const MINIGAME_INFO = {
     cost: POKEBALL_FACTORY_COST,
     action: 'START THE SHIFT',
     hint: `Tap the conveyor tiles to spin them a quarter-turn and link a line from the left inlet to the right outlet. The ${FACTORY_SIZE}\u00d7${FACTORY_SIZE} grid is scrambled every shift. Entry is $${POKEBALL_FACTORY_COST.toLocaleString()}.`,
+  },
+  ruinsPuzzle: {
+    title: 'Ruins of Alph',
+    cost: SLIDING_COST,
+    action: 'SOLVE THE RUINS',
+    hint: `Slide the stone tiles back into order against the single empty slot \u2014 tap a tile beside the gap to move it, or use the arrow keys. The ${SLIDING_SIZE}\u00d7${SLIDING_SIZE} picture is scrambled every visit, and a quicker solve pays better. Entry is $${SLIDING_COST.toLocaleString()}.`,
+  },
+  iceSlide: {
+    title: 'Snowpoint Temple',
+    cost: ICE_SLIDE_COST,
+    action: 'ENTER THE TEMPLE',
+    hint: `Pick a direction and the hero slides until a wall or boulder stops them. Clear all ${ICE_SLIDE_LEVELS.length} ice rooms to reach the temple\u2019s heart; the fewer slides the better. Entry is $${ICE_SLIDE_COST.toLocaleString()}.`,
   },
   pokePelago: {
     title: 'Poké Pelago',

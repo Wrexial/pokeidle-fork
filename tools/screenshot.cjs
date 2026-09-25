@@ -650,6 +650,26 @@ async function main() {
         '.factory-grid',
         '28-pokeball-factory.png',
       ],
+      [
+        'Ruins of Alph',
+        'johto',
+        'johto-violet-city',
+        'johto-route-36',
+        ['johto-new-bark-town', 'johto-route-36', 'johto-violet-city'],
+        '.ruins-grid',
+        '30-ruins-puzzle.png',
+        '.ruins-tile.slidable',
+      ],
+      [
+        'Snowpoint Temple',
+        'sinnoh',
+        'sinnoh-snowpoint-city',
+        'sinnoh-route-217',
+        ['sinnoh-twinleaf-town', 'sinnoh-route-217', 'sinnoh-snowpoint-city'],
+        '.ice-grid',
+        '31-ice-slide.png',
+        '.ice-arrow-e',
+      ],
     ]
     for (const [name, region, location, route, unlocked, selector, file, action] of fixedScenes) {
       await cdp.eval(

@@ -1,6 +1,6 @@
 // Reducer handlers for minigames actions. Split from game/reducer.js.
 
-import { MATCH3_COST, MEMORY_COST, MUSICAL_COST, PICNIC_COST, POKEBALL_FACTORY_COST, WHACK_COST, BATTLE_ROYAL_COST, BUG_CONTEST_COST, CONTEST_COST, CURRY_COST, DYNAMAX_ADVENTURES_COST, LIGHTS_OUT_COST, MINING_COST, POKEATHLON_COST, POKE_RADAR_COST, POKESTAR_COST, QUIZ_COST, ROUTE_ACTIVITIES, SAFARI_COST, VOLTORB_FLIP_COST, routeActivityIds } from '../minigames.js'
+import { MATCH3_COST, MEMORY_COST, MUSICAL_COST, PICNIC_COST, POKEBALL_FACTORY_COST, WHACK_COST, BATTLE_ROYAL_COST, BUG_CONTEST_COST, CONTEST_COST, CURRY_COST, DYNAMAX_ADVENTURES_COST, LIGHTS_OUT_COST, MINING_COST, POKEATHLON_COST, POKE_RADAR_COST, POKESTAR_COST, QUIZ_COST, ROUTE_ACTIVITIES, SAFARI_COST, SLIDING_COST, ICE_SLIDE_COST, VOLTORB_FLIP_COST, routeActivityIds } from '../minigames.js'
 import { mapData } from '../../data/gameData.js'
 import { createIdleBattleState } from '../progression.js'
 import { enterMinigame } from '../reducer-helpers.js'
@@ -301,6 +301,26 @@ export function startPelago(state, action) {
 }
 
 /**
+ * Handle the `START_RUINS_PUZZLE` action.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function startRuinsPuzzle(state, action) {
+  return enterMinigame(state, 'ruinsPuzzle', SLIDING_COST, 'You stepped into the Ruins of Alph.')
+}
+
+/**
+ * Handle the `START_ICE_SLIDE` action.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function startIceSlide(state, action) {
+  return enterMinigame(state, 'iceSlide', ICE_SLIDE_COST, 'You entered Snowpoint Temple.')
+}
+
+/**
  * Handle the `END_MINIGAME` action.
  * @param {GameState} state
  * @param {GameAction} action
@@ -326,6 +346,8 @@ export function endMinigame(state, action) {
     state.phase === 'musical' ||
     state.phase === 'picnic' ||
     state.phase === 'pokeballFactory' ||
+    state.phase === 'ruinsPuzzle' ||
+    state.phase === 'iceSlide' ||
     state.phase === 'pelago'
     ? { ...state, ...createIdleBattleState() }
     : state

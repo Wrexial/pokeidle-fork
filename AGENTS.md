@@ -634,6 +634,10 @@ One-off scripts used to build the data JSON (not run during dev/build):
   routes distinct unlock gates (battles / Pokedex / route-exclusive catches /
   party levels) instead of repeating the island's own requirement, leaving the
   sequential `requires` chain intact. Idempotent (`--dry`).
+- `gate-alola-towns-by-zone.cjs` — adds each Alola town / facility's island hub
+  to its `requires`, so a town can't open before the island it sits on
+  (Paniola, Heahea and Po Town used to gate on an earlier island's route).
+  Idempotent (`--dry`).
 - `RawMoveData`, `index-backup.js` — large reference/backup data; leave alone.
 - `kill-vite.cjs` — kills orphaned Vite dev servers on the port range (Windows
   `taskkill`, else `kill`). Run `npm run kill-vite`, or `--dry` to preview.

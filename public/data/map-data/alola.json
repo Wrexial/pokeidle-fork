@@ -130,6 +130,9 @@
      "locationId": "alola-route-2",
      "count": 16
     }
+   ],
+   "requires": [
+    "alola-melemele-island"
    ]
   },
   "unlockOrder": 700002.5001,
@@ -165,6 +168,9 @@
    "caughtCount": 6,
    "gymsRequired": [
     "alola-gym-1"
+   ],
+   "requires": [
+    "alola-ulaula-island"
    ]
   },
   "unlockOrder": 700002.5002,
@@ -247,7 +253,10 @@
      "count": 5
     }
    ],
-   "partyLevel": 19
+   "partyLevel": 19,
+   "requires": [
+    "alola-akala-island"
+   ]
   },
   "unlockOrder": 700003.5002,
   "position": {
@@ -313,7 +322,10 @@
      "count": 5
     }
    ],
-   "caughtCount": 11
+   "caughtCount": 11,
+   "requires": [
+    "alola-akala-island"
+   ]
   },
   "unlockOrder": 700004.5,
   "position": {
@@ -510,7 +522,10 @@
      "count": 5
     }
    ],
-   "partyLevel": 39
+   "partyLevel": 39,
+   "requires": [
+    "alola-akala-island"
+   ]
   },
   "unlockOrder": 700009.5,
   "position": {
@@ -591,6 +606,9 @@
    "caughtCount": 21,
    "gymsRequired": [
     "alola-gym-3"
+   ],
+   "requires": [
+    "alola-ulaula-island"
    ]
   },
   "unlockOrder": 700010.5,
@@ -864,6 +882,9 @@
      "locationId": "alola-route-17",
      "count": 20
     }
+   ],
+   "requires": [
+    "alola-poni-island"
    ]
   },
   "unlockOrder": 700018,
@@ -897,6 +918,9 @@
     "alola-gym-6",
     "alola-gym-7",
     "alola-gym-8"
+   ],
+   "requires": [
+    "alola-poni-island"
    ]
   },
   "unlockOrder": 700019,
@@ -1141,6 +1165,9 @@
      "locationId": "alola-hauoli-city",
      "count": 5
     }
+   ],
+   "requires": [
+    "alola-melemele-island"
    ]
   },
   "unlockOrder": 700002.7501,

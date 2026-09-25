@@ -112,6 +112,19 @@ test('Paldea has its DLC and Area Zero zones, and a legendary-only pool', () => 
   assert.deepEqual(ordinary, [], 'Paldea raid pool holds only legendaries')
 })
 
+test('Alola towns and facilities sit behind their island hub', () => {
+  for (const location of Object.values(mapData)) {
+    if ((location.region ?? 'kanto') !== 'alola') continue
+    if (location.type !== 'town' && location.type !== 'facility') continue
+    if (location.unlock?.entry) continue
+    const requires = location.unlock?.requires ?? []
+    assert.ok(
+      requires.some((id) => mapData[id]?.type === 'zone'),
+      `${location.id} should require an island hub`
+    )
+  }
+})
+
 test('Alola sub-areas have their own gates, not copies of the island', () => {
   const withoutRequires = (/** @type {any} */ unlock) => {
     const copy = { ...(unlock ?? {}) }

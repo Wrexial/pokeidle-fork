@@ -80,6 +80,7 @@ export const CHANGELOG = [
           heading: 'Fixes',
           items: [
             'Wild Pokemon can no longer be caught twice from one battle: the idle loop now waits for a turn / catch to commit before acting again, so a fast battle speed can not replay the same victory and duplicate the catch',
+            'New species no longer raise a toast for every first encounter \u2014 the Pokedex still records the sighting quietly',
             'A queued turn can no longer resolve after the battle has already ended, and the ATTEMPT CATCH button is disabled while a turn is still resolving',
             'The Settings and Pok\u00e9 Pelago modals are no longer clipped: the centre column no longer traps fixed-position overlays (Daily Quests and the Daily Event benefit too)',
             'Layout pass on crowded controls: the Box header no longer overlaps its pager with the Pokedex / Records / Daycare buttons, and toolbar / tab / save-button rows wrap instead of colliding',

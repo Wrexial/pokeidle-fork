@@ -16,20 +16,13 @@ import { withNotification } from '../reducer-helpers.js'
  */
 export function markSeen(state, action) {
   const { speciesKey } = action.payload
+  // Record the sighting silently; the toast for every first-encounter was noise.
   return state.pokedexSeen.includes(speciesKey)
     ? state
-    : withNotification(
-        {
-          ...state,
-          pokedexSeen: [...state.pokedexSeen, speciesKey],
-        },
-        {
-          message: `You found a wild ${pokemonSpecies[speciesKey]?.name ?? speciesKey}!`,
-          tone: 'info',
-          icon: '👀',
-          dedupeKey: `seen:${speciesKey}`,
-        }
-      )
+    : {
+        ...state,
+        pokedexSeen: [...state.pokedexSeen, speciesKey],
+      }
 }
 
 /**

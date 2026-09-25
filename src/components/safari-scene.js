@@ -63,7 +63,7 @@ export function SafariScene() {
     [modifiers, setModifiers] = React.useState(
       /** @type {{ baited?: number, rocked?: number }} */ ({})
     ),
-    [outcome, setOutcome] = React.useState(/** @type {'caught' | 'fled' | 'ran' | null} */ (null)),
+    [outcome, setOutcome] = React.useState(/** @type {'caught' | 'fled' | null} */ (null)),
     [message, setMessage] = React.useState(
       `Welcome to the Safari Zone! ${SAFARI_BALLS} Safari Balls \u2014 pick an area to explore.`
     )
@@ -163,9 +163,8 @@ export function SafariScene() {
 
   function runAway() {
     if (phase !== 'encounter' || !pokemon) return
-    setOutcome('ran')
-    setMessage('You backed away slowly.')
-    setPhase('result')
+    // Running straight back into the grass saves a click over a result screen.
+    search(areaId ?? SAFARI_AREAS[0].id)
   }
 
   function changeArea() {

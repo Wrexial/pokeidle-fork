@@ -7058,6 +7058,18 @@ img {
     color: #8a7a60
 }
 
+.gym-level-range {
+    align-self: flex-start;
+    margin-top: 1px;
+    padding: 0 4px;
+    font-size: 7px;
+    font-weight: 700;
+    color: var(--gold);
+    background: #00000040;
+    border: 1px solid #8a7040;
+    border-radius: 3px
+}
+
 .gym-rematch-tag {
     font-size: 7px;
     font-weight: 700;

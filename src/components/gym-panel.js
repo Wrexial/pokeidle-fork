@@ -7,6 +7,16 @@ import { BATTLE_TOWER_LOCATION, BATTLE_TOWER_REGION } from '../data/config.js'
 import { useGame } from '../game/context.js'
 import { buildTrainerTeam } from '../game/progression.js'
 
+/**
+ * "Lv.12-16" for a team, or an empty string when it has no members.
+ * @param {{ level: number }[] | undefined | null} team
+ * @returns {string}
+ */
+function teamLevelRange(team) {
+  const levels = (team ?? []).map((member) => member.level)
+  return levels.length ? `Lv.${Math.min(...levels)}\u2013${Math.max(...levels)}` : ''
+}
+
 /** @param {{ onOpenShop: () => void }} props */
 export function GymPanel({ onOpenShop }) {
   const { state, dispatch } = useGame(),
@@ -24,6 +34,11 @@ export function GymPanel({ onOpenShop }) {
     defeatedRegionGyms = regionGyms.filter((gym) => state.defeatedGyms.includes(gym.id)).length,
     allBadgesEarned = regionGyms.length > 0 && defeatedRegionGyms >= regionGyms.length,
     isLeagueRematch = state.defeatedChampions.includes(regionId),
+    championLevelRange = teamLevelRange(
+      isLeagueRematch && regionChampion?.rematchTeam?.length
+        ? regionChampion.rematchTeam
+        : regionChampion?.team
+    ),
     // The Elite Four reset on each prestige, so they must be beaten again
     // before the region can be prestiged once more.
     allEliteFourBeaten =
@@ -149,7 +164,8 @@ export function GymPanel({ onOpenShop }) {
       jsx('div', {
         className: 'gym-badge-display',
         children: regionGyms.map((gymLeader) => {
-          const earned = state.defeatedGyms.includes(gymLeader.id)
+          const earned = state.defeatedGyms.includes(gymLeader.id),
+            levelRange = teamLevelRange(gymLeader.team)
           return jsx(
             'div',
             {
@@ -159,7 +175,9 @@ export function GymPanel({ onOpenShop }) {
                     backgroundColor: gymLeader.badgeColor,
                   }
                 : void 0,
-              title: earned ? gymLeader.badgeName : '???',
+              title: earned
+                ? `${gymLeader.badgeName}${levelRange ? ` \u00b7 ${levelRange}` : ''}`
+                : '???',
             },
             gymLeader.id
           )
@@ -182,7 +200,10 @@ export function GymPanel({ onOpenShop }) {
               revealed = unlocked && (regionId !== 'kanto' || defeatedRegionGyms >= leaderIndex),
               atGym = state.currentLocation === leader.locationKey,
               canStart = revealed && atGym,
-              mustTravel = revealed && !atGym
+              mustTravel = revealed && !atGym,
+              levelRange = teamLevelRange(
+                allBadgesEarned && leader.rematchTeam?.length ? leader.rematchTeam : leader.team
+              )
             return jsxs(
               'div',
               {
@@ -199,6 +220,13 @@ export function GymPanel({ onOpenShop }) {
                         className: 'gym-badge-label',
                         children: revealed ? leader.badgeName : 'Locked',
                       }),
+                      revealed && levelRange
+                        ? jsx('span', {
+                            className: 'gym-level-range',
+                            title: 'Expected team level range',
+                            children: levelRange,
+                          })
+                        : null,
                       revealed && allBadgesEarned && leader.rematchTeam?.length
                         ? jsx('span', {
                             className: 'gym-rematch-tag',
@@ -275,7 +303,10 @@ export function GymPanel({ onOpenShop }) {
             regionEliteFour.map((member) => {
               const defeated = state.defeatedEliteFour.includes(member.id),
                 isActive =
-                  state.bossBattle?.bossType === 'e4' && state.bossBattle?.bossId === member.id
+                  state.bossBattle?.bossType === 'e4' && state.bossBattle?.bossId === member.id,
+                levelRange = teamLevelRange(
+                  isLeagueRematch && member.rematchTeam?.length ? member.rematchTeam : member.team
+                )
               return jsxs(
                 'div',
                 {
@@ -292,6 +323,13 @@ export function GymPanel({ onOpenShop }) {
                           className: 'gym-badge-label',
                           children: member.title,
                         }),
+                        levelRange
+                          ? jsx('span', {
+                              className: 'gym-level-range',
+                              title: 'Expected team level range',
+                              children: levelRange,
+                            })
+                          : null,
                       ],
                     }),
                     jsx('div', {
@@ -322,6 +360,13 @@ export function GymPanel({ onOpenShop }) {
                       className: 'gym-badge-label',
                       children: regionChampion.title,
                     }),
+                    championLevelRange
+                      ? jsx('span', {
+                          className: 'gym-level-range',
+                          title: 'Expected team level range',
+                          children: championLevelRange,
+                        })
+                      : null,
                   ],
                 }),
                 jsx('div', {

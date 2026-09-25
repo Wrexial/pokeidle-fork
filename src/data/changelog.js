@@ -68,6 +68,7 @@ export const CHANGELOG = [
         {
           heading: 'Progression',
           items: [
+            'The League panel now shows each gym leader, Elite Four member and Champion\u2019s team level range (e.g. Lv.12-16), and an earned badge lists it in its tooltip \u2014 so you can tell what you are walking into',
             'High-level wild areas no longer open before the region expects them: routes whose wilds jump far above the area that unlocks them (Paldea\u2019s province areas, Alola\u2019s late island routes, several end-game routes) now also require a party level closer to their wilds, so you cannot wander into Lv.70+ Pokemon with a starter team',
             'Every region\u2019s opening route now starts at Lv. 3-5 instead of Lv. 5-7 (Galar\u2019s opening route and the Slumbering Weald included), so a fresh starter has room to find its feet before the region\u2019s curve starts climbing',
             'The Exp. Share is rebalanced: over 500 battles the active Pokemon gains 50% EXP and every other non-fainted party member gains 25% (it used to give the rest only 5%, but lasted 1000 battles)',

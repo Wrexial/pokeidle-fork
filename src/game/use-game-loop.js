@@ -316,6 +316,8 @@ export function useGameLoop() {
               mustRecharge: playerVolatile.mustRecharge,
               lockedMove: playerVolatile.lockedMove,
               lockTurnsRemaining: playerVolatile.lockTurnsRemaining,
+              chargingMove: playerVolatile.chargingMove ?? null,
+              semiInvulnerable: playerVolatile.semiInvulnerable ?? null,
               status: playerVolatile.status ?? null,
               statusTurns: playerVolatile.statusTurns ?? 0,
               flinch: playerVolatile.flinch ?? !1,

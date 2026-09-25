@@ -349,6 +349,46 @@ test('self-destruct moves faint the user', () => {
   })
 })
 
+test('two-turn moves charge on the first turn and strike on the second', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['solarBeam'],
+        speed: 200,
+      }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], currentHp: 5000, maxHp: 5000 }),
+      first = resolveBattleTurn(player, enemy, false)
+    assert.ok(
+      first.some((event) => /absorbed light/.test(event.message ?? '')),
+      'charges on the first turn'
+    )
+    assert.equal(player.chargingMove, 'solarBeam')
+    assert.ok(
+      !first.some((event) => event.type === 'damage'),
+      'no damage on the charge turn'
+    )
+    const hpBefore = enemy.currentHp,
+      second = resolveBattleTurn(player, enemy, false)
+    assert.ok(second.some((event) => event.type === 'damage'), 'strikes on the second turn')
+    assert.ok(enemy.currentHp < hpBefore)
+    assert.equal(player.chargingMove, null)
+  })
+})
+
+test('a semi-invulnerable charge turn dodges most attacks', () => {
+  withFixedRandom(0.5, () => {
+    const flyer = battler({ name: 'Flyer', isPlayer: true, moves: ['fly'], speed: 300 }),
+      foe = battler({ name: 'Foe', moves: ['tackle'], speed: 10 }),
+      events = resolveBattleTurn(flyer, foe, false)
+    assert.equal(flyer.semiInvulnerable, 'air')
+    assert.ok(
+      events.some((event) => event.type === 'miss'),
+      'the foe misses the airborne target'
+    )
+  })
+})
+
 test('move tooltips describe the effect alongside the core stats', () => {
   const ember = moveTooltip('ember', moveData.ember)
   assert.match(ember, /Fire/)

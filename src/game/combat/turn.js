@@ -11,6 +11,7 @@ import { emptyBattleHazards } from '../hazards.js'
 import { heldDamageMultiplier, heldLifeOrbRecoil, heldStatMultiplier, heldSurvivesAtFullHp } from '../held-items.js'
 import { canEvolveFurther } from '../pokemon.js'
 import { VARIABLE_POWER_MOVES, withVariablePower } from './variable-power.js'
+import { CHARGE_MOVES, hitsSemiInvulnerable } from './charge-moves.js'
 import { applyConfusion, applyContactAbility, applyInfatuation, applyLeechSeed, applyStatus, handleConfusion, handleInfatuation, statusPreventsAction } from './status.js'
 import { TERRAIN_ABILITIES, TERRAIN_NAMES, TERRAIN_TURNS, terrainAbilityMultiplier, terrainDamageMultiplier, terrainPreventsPriority } from '../terrain.js'
 import { applyEntryAbility, applyIntimidate, clampStatStage, effectiveSpeed, getStatLabel, getStatStage, resetStatStages, screenApplies } from './volatile.js'
@@ -220,6 +221,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
   ;(playerMustRecharge && (player.mustRecharge = !1), enemyMustRecharge && (enemy.mustRecharge = !1))
   let playerMoveId, playerMove
   if (playerMustRecharge) ((playerMoveId = player.moves[0]), (playerMove = moveData[playerMoveId]))
+  else if (player.chargingMove) ((playerMoveId = player.chargingMove), (playerMove = moveData[playerMoveId]))
   else if (player.lockedMove) ((playerMoveId = player.lockedMove), (playerMove = moveData[playerMoveId]))
   else {
     const bestMove = chooseMoveForBattle(player, enemy, activeHazards, deterministic),
@@ -228,6 +230,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
   }
   let enemyMoveId, enemyMove
   if (enemyMustRecharge) ((enemyMoveId = enemy.moves[0]), (enemyMove = moveData[enemyMoveId]))
+  else if (enemy.chargingMove) ((enemyMoveId = enemy.chargingMove), (enemyMove = moveData[enemyMoveId]))
   else if (enemy.lockedMove) ((enemyMoveId = enemy.lockedMove), (enemyMove = moveData[enemyMoveId]))
   else {
     const bestMove = isTrainerBattle
@@ -363,6 +366,31 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         target: attack.isPlayer ? 'enemy' : 'player',
       },
     })
+    // Two-turn moves: the user charges this turn and strikes on the next.
+    const chargeMove = CHARGE_MOVES[attack.moveId]
+    if (chargeMove) {
+      if (attack.attacker.chargingMove !== attack.moveId) {
+        attack.attacker.chargingMove = attack.moveId
+        attack.attacker.semiInvulnerable = chargeMove.invulnerable ?? null
+        events.push({ type: 'status', message: chargeMove.message(attack.attacker.name) })
+        continue
+      }
+      attack.attacker.chargingMove = null
+      attack.attacker.semiInvulnerable = null
+    }
+    // A semi-invulnerable target (Fly, Dig, Dive, ...) only takes hits from the
+    // handful of moves that reach it.
+    if (
+      attack.defender.semiInvulnerable &&
+      !isSelfTargetedMove(moveDef) &&
+      !hitsSemiInvulnerable(attack.moveId, attack.defender.semiInvulnerable)
+    ) {
+      events.push({
+        type: 'miss',
+        message: `${attack.attacker.name}'s attack missed!`,
+      })
+      continue
+    }
     // Protect blocks anything aimed at the protected Pokemon this turn, but
     // Unseen Fist lets a contact move through it.
     if (

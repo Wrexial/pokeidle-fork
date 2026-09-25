@@ -209,6 +209,10 @@ type VolatileState = {
   mustRecharge: boolean
   lockedMove: string | null
   lockTurnsRemaining: number
+  /** Move being charged for a two-turn attack, or null. */
+  chargingMove: string | null
+  /** Semi-invulnerable charge state (air/ground/water/vanish), or null. */
+  semiInvulnerable: string | null
   /** Major status condition (poison/toxic/burn/freeze/sleep/paralysis) or null. */
   status: string | null
   /** Remaining sleep turns, or the escalating toxic counter. */

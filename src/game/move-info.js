@@ -145,6 +145,29 @@ export const variablePowerNotes = {
 }
 
 /**
+ * Two-turn charge moves (see src/game/combat/charge-moves.js).
+ * @type {Record<string, string>}
+ */
+export const chargeMoveNotes = {
+  solarBeam: 'Charges on the first turn, then attacks on the next.',
+  solarBlade: 'Charges on the first turn, then attacks on the next.',
+  razorWind: 'Charges on the first turn, then attacks on the next.',
+  skyAttack: 'Charges on the first turn, then attacks on the next.',
+  skullBash: 'Charges on the first turn, then attacks on the next.',
+  freezeShock: 'Charges on the first turn, then attacks on the next.',
+  iceBurn: 'Charges on the first turn, then attacks on the next.',
+  geomancy: 'Charges on the first turn, then takes effect on the next.',
+  meteorBeam: 'Charges on the first turn, then attacks on the next.',
+  electroShot: 'Charges on the first turn, then attacks on the next.',
+  fly: 'Flies up on the first turn (semi-invulnerable), then attacks on the next.',
+  bounce: 'Bounces up on the first turn (semi-invulnerable), then attacks on the next.',
+  dig: 'Burrows on the first turn (semi-invulnerable), then attacks on the next.',
+  dive: 'Dives on the first turn (semi-invulnerable), then attacks on the next.',
+  phantomForce: 'Vanishes on the first turn (semi-invulnerable), then attacks on the next.',
+  shadowForce: 'Vanishes on the first turn (semi-invulnerable), then attacks on the next.',
+}
+
+/**
  * Extra explanation for moves whose effect needs more than the generic line.
  * @type {Record<string, string>}
  */
@@ -171,6 +194,8 @@ export const handledMoveEffectTypes = new Set(Object.keys(moveEffectText))
 export function describeMove(move) {
   const variableNote = variablePowerNotes[move.key ?? '']
   if (variableNote) return variableNote
+  const chargeNote = chargeMoveNotes[move.key ?? '']
+  if (chargeNote && !move.effect) return chargeNote
   // Memento keeps its stat drop but also faints the user.
   if (move.selfDestruct) {
     const base = describeMove({ ...move, selfDestruct: false })

@@ -16,6 +16,7 @@ const fs = require('fs')
 const path = require('path')
 const { abilityInfo } = require('../src/data/ability-info.js')
 const {
+  chargeMoveNotes,
   describeMove,
   handledMoveEffectTypes,
   variablePowerNotes,
@@ -51,9 +52,10 @@ async function main() {
     const effect = move.effect
     const hasField = !!(move.protect || move.screen || move.multiHit || move.critStage)
     let status
-    let text = variablePowerNotes[key] ?? null
+    let text = variablePowerNotes[key] ?? chargeMoveNotes[key] ?? null
     if (text) {
-      // Variable-power moves carry no `effect`; the engine computes their power.
+      // Variable-power / two-turn moves carry no `effect`; the engine handles
+      // them specially.
       status = 'implemented'
     } else if (effect && !HANDLED_EFFECTS.has(effect.type) && !['heal', 'recoil', 'drain', 'status', 'statChange', 'statReset', 'confusion', 'infatuation', 'hazard', 'weather', 'terrain', 'typeChange', 'typeAdd', 'statSwap'].includes(effect.type)) {
       unknownEffects.add(effect.type)

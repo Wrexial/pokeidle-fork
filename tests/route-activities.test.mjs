@@ -16,6 +16,7 @@ const {
   activityRewardName,
   activityShinyMultiplier,
   rollActivityEncounter,
+  rollActivityEncounters,
   rollActivityHeldItem,
   rollActivityLoot,
   routeActivityIds,
@@ -140,6 +141,41 @@ test('fishing rolls a species from the route table, preferring Water', () => {
         pokemonSpecies[encounter.speciesKey].types.includes('Water'),
         'Water species win when the route has any'
       )
+  }
+})
+
+test('headbutt can shake out two Pokemon, other activities cannot', () => {
+  const headbuttRoute = locations.find(
+    (location) =>
+      routeActivityIds(location).includes('headbutt') &&
+      encounterData[location.routeKey]?.encounters?.length
+  )
+  assert.ok(headbuttRoute, 'a headbutt route exists')
+  const fishingRoute = locations.find((location) =>
+    routeActivityIds(location).includes('fishing')
+  )
+  const original = Math.random
+  try {
+    Math.random = () => 0
+    assert.equal(
+      rollActivityEncounters('headbutt', headbuttRoute.routeKey, true).length,
+      2,
+      'a low roll produces a second Pokemon'
+    )
+    if (fishingRoute)
+      assert.equal(
+        rollActivityEncounters('fishing', fishingRoute.routeKey, true, 'superRod').length,
+        1,
+        'only headbutt doubles up'
+      )
+    Math.random = () => 0.999
+    assert.equal(
+      rollActivityEncounters('headbutt', headbuttRoute.routeKey, true).length,
+      1,
+      'a high roll keeps it single'
+    )
+  } finally {
+    Math.random = original
   }
 })
 

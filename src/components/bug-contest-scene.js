@@ -17,21 +17,24 @@ import {
   buildContestResults,
   contestPlayerRank,
   rewardItemName,
-  rollContestBug,
+  rollContestBugs,
   throwNetBall,
 } from '../game/minigames.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
 import { PokeballIcon } from './pokeball-icon.js'
 
 /**
- * @typedef {ReturnType<typeof rollContestBug>} ContestBug
+ * @typedef {ReturnType<typeof rollContestBugs>[number]} ContestBug
  */
 
 export function BugContestScene() {
   const { state, dispatch } = useGame(),
     baseLevel = state.playerPokemon?.level ?? 20,
     [step, setStep] = React.useState('bushes'),
-    [bug, setBug] = React.useState(/** @type {ContestBug | null} */ (null)),
+    [bugs, setBugs] = React.useState(/** @type {ContestBug[]} */ ([])),
+    [selectedBug, setSelectedBug] = React.useState(0),
+    // Name of the unselected bug that fled, for the "awwhh" line.
+    [fledName, setFledName] = React.useState(/** @type {string | null} */ (null)),
     [rustlesLeft, setRustlesLeft] = React.useState(BUG_CONTEST_RUSTLES),
     [caught, setCaught] = React.useState(/** @type {ContestBug[]} */ ([])),
     [message, setMessage] = React.useState('Rustle a bush and see what is hiding!'),
@@ -41,7 +44,8 @@ export function BugContestScene() {
     ),
     [prize, setPrize] = React.useState(
       () => /** @type {ReturnType<typeof bugContestPrize> | null} */ (null)
-    )
+    ),
+    bug = bugs[selectedBug] ?? null
 
   // Resolve a Net Ball throw after a short animation. Kept in an effect so the
   // timer is cleared if the scene closes mid-throw.
@@ -50,7 +54,8 @@ export function BugContestScene() {
     const timer = setTimeout(
       () => {
         const species = pokemonSpecies[bug.speciesKey],
-          name = species?.name ?? bug.speciesKey
+          name = species?.name ?? bug.speciesKey,
+          aww = fledName ? ` The other ${fledName} slipped away\u2026 awwh!` : ''
         if (throwNetBall(bug.speciesKey)) {
           dispatch({
             type: 'CATCH_POKEMON',
@@ -59,37 +64,53 @@ export function BugContestScene() {
           dispatch({ type: 'MARK_CAUGHT', payload: { speciesKey: bug.speciesKey } })
           setCaught((current) => [...current, bug])
           setMadeCatch(!0)
-          setMessage(`Gotcha! ${name} was caught!`)
+          setMessage(`Gotcha! ${name} was caught!${aww}`)
         } else if (bugStays(bug.speciesKey)) {
           setMadeCatch(!1)
-          setMessage(`${name} broke free and stayed put. Throw again?`)
+          setMessage(`${name} broke free and stayed put. Throw again?${aww}`)
+          setFledName(null)
           setStep('revealed')
           return
         } else {
           setMadeCatch(!1)
-          setMessage(`${name} broke free and scurried into the grass!`)
+          setMessage(`${name} broke free and scurried into the grass!${aww}`)
         }
+        setFledName(null)
         setStep('resolved')
       },
       // A touch slower than the game speed so the throw reads clearly.
       750 / (state.speed || 1)
     )
     return () => clearTimeout(timer)
-  }, [step, bug, dispatch, state.speed])
+  }, [step, bug, fledName, dispatch, state.speed])
 
   /** @param {number} index */
   function rustleBush(index) {
     if (step !== 'bushes') return
-    const nextBug = rollContestBug(baseLevel)
-    setBug(nextBug)
+    const nextBugs = rollContestBugs(baseLevel)
+    setBugs(nextBugs)
+    setSelectedBug(0)
+    setFledName(null)
     setRustlesLeft((left) => left - 1)
     setStep('revealed')
-    setMessage(`Something rustles in bush ${index + 1}\u2026`)
-    dispatch({ type: 'MARK_SEEN', payload: { speciesKey: nextBug.speciesKey } })
+    setMessage(
+      nextBugs.length > 1
+        ? `Two bugs burst from bush ${index + 1} \u2014 pick one!`
+        : `Something rustles in bush ${index + 1}\u2026`
+    )
+    for (const nextBug of nextBugs)
+      dispatch({ type: 'MARK_SEEN', payload: { speciesKey: nextBug.speciesKey } })
   }
 
   function throwBall() {
     if (!bug || step !== 'revealed') return
+    // Going for one bug scares the other off.
+    const other = bugs.find((_, index) => index !== selectedBug)
+    if (other) {
+      setFledName(pokemonSpecies[other.speciesKey]?.name ?? other.speciesKey)
+      setBugs([bug])
+      setSelectedBug(0)
+    }
     setStep('throwing')
     setMessage('You threw a Net Ball!')
   }
@@ -97,8 +118,15 @@ export function BugContestScene() {
   function runAway() {
     if (!bug || step !== 'revealed') return
     setMadeCatch(!1)
-    const name = pokemonSpecies[bug.speciesKey]?.name ?? bug.speciesKey
-    setMessage(`You let the ${name} go.`)
+    const name = pokemonSpecies[bug.speciesKey]?.name ?? bug.speciesKey,
+      other = bugs.find((_, index) => index !== selectedBug),
+      aww = other
+        ? ` The other ${
+            pokemonSpecies[other.speciesKey]?.name ?? other.speciesKey
+          } slipped away\u2026 awwh!`
+        : ''
+    setBugs([bug])
+    setMessage(`You let the ${name} go.${aww}`)
     setStep('resolved')
   }
 
@@ -111,14 +139,13 @@ export function BugContestScene() {
       setStep('done')
       return
     }
-    setBug(null)
+    setBugs([])
+    setSelectedBug(0)
+    setFledName(null)
     setMadeCatch(!1)
     setStep('bushes')
     setMessage('Rustle a bush and see what is hiding!')
   }
-
-  const species = bug ? pokemonSpecies[bug.speciesKey] : null,
-    activeBugName = species?.name ?? bug?.speciesKey ?? ''
 
   return jsxs('div', {
     className: 'bug-contest-scene',
@@ -254,47 +281,69 @@ export function BugContestScene() {
                     }),
                   ],
                 })
-              : bug &&
-                jsxs('div', {
-                  className: `bug-contest-bug${step === 'throwing' ? ' throwing' : ''}`,
-                  children: [
-                    jsx('img', {
-                      className: 'bug-contest-bug-sprite',
-                      src: getPokemonSpriteUrl(species?.id ?? 0, !1, !1, bug.gender === 'female'),
-                      onError: /** @param {React.SyntheticEvent} event */ (event) => {
-                        const image = /** @type {HTMLImageElement} */ (event.target)
-                        image.src = getPokemonSpriteFallbackUrl(
-                          species?.id ?? 0,
-                          !1,
-                          !1,
-                          bug.gender === 'female'
-                        )
+              : bugs.length > 0 &&
+                jsx('div', {
+                  className: 'bug-contest-bugs',
+                  children: bugs.map((entry, index) => {
+                    const entrySpecies = pokemonSpecies[entry.speciesKey],
+                      entryName = entrySpecies?.name ?? entry.speciesKey,
+                      isSelected = index === selectedBug
+                    return jsxs(
+                      'button',
+                      {
+                        className: `bug-contest-bug${isSelected ? ' selected' : ''}${
+                          step === 'throwing' && isSelected ? ' throwing' : ''
+                        }`,
+                        disabled: step !== 'revealed',
+                        onClick: () => step === 'revealed' && setSelectedBug(index),
+                        children: [
+                          jsx('img', {
+                            className: 'bug-contest-bug-sprite',
+                            src: getPokemonSpriteUrl(
+                              entrySpecies?.id ?? 0,
+                              !1,
+                              !1,
+                              entry.gender === 'female'
+                            ),
+                            onError: /** @param {React.SyntheticEvent} event */ (event) => {
+                              const image = /** @type {HTMLImageElement} */ (event.target)
+                              image.src = getPokemonSpriteFallbackUrl(
+                                entrySpecies?.id ?? 0,
+                                !1,
+                                !1,
+                                entry.gender === 'female'
+                              )
+                            },
+                            alt: entryName,
+                          }),
+                          jsxs('div', {
+                            className: 'bug-contest-bug-meta',
+                            children: [
+                              jsx('span', {
+                                className: 'bug-contest-bug-name',
+                                children: entryName,
+                              }),
+                              jsxs('span', {
+                                className: 'bug-contest-bug-detail',
+                                children: [
+                                  `Lv.${entry.level}`,
+                                  ' \u00b7 ',
+                                  genderSymbol(entry.gender),
+                                ],
+                              }),
+                            ],
+                          }),
+                          step === 'throwing' &&
+                            isSelected &&
+                            jsx('div', {
+                              className: 'bug-contest-ball',
+                              children: jsx(PokeballIcon, { ballId: 'netball', size: 48 }),
+                            }),
+                        ],
                       },
-                      alt: activeBugName,
-                    }),
-                    jsxs('div', {
-                      className: 'bug-contest-bug-meta',
-                      children: [
-                        jsx('span', {
-                          className: 'bug-contest-bug-name',
-                          children: activeBugName,
-                        }),
-                        jsxs('span', {
-                          className: 'bug-contest-bug-detail',
-                          children: [
-                            `Lv.${bug.level}`,
-                            ' \u00b7 ',
-                            genderSymbol(bug.gender),
-                          ],
-                        }),
-                      ],
-                    }),
-                    step === 'throwing' &&
-                      jsx('div', {
-                        className: 'bug-contest-ball',
-                        children: jsx(PokeballIcon, { ballId: 'netball', size: 48 }),
-                      }),
-                  ],
+                      `${entry.speciesKey}-${index}`
+                    )
+                  }),
                 }),
       }),
       jsxs('div', {

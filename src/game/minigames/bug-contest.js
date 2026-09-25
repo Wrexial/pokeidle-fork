@@ -1,6 +1,7 @@
 // Johto Bug Catching Contest. Split from game/minigames.js.
 
 import { breedingData, pokemonSpecies } from '../../data/gameData.js'
+import { doubleSpawnChance } from '../../data/config.js'
 import { calculateCatchChance } from '../catching.js'
 
 /** Money spent to enter the contest. */
@@ -97,6 +98,22 @@ export function rollContestBug(baseLevel = 20) {
     gender: rollContestGender(chosen.speciesKey),
     fleeChance: bugFleeChance(chosen.speciesKey),
   }
+}
+
+/**
+ * Rustle a contest bush: usually one bug, but sometimes a second bursts out
+ * too. You can only keep one, so the other flees.
+ * @param {number} [baseLevel]
+ * @returns {ReturnType<typeof rollContestBug>[]}
+ */
+export function rollContestBugs(baseLevel = 20) {
+  const first = rollContestBug(baseLevel)
+  if (Math.random() >= doubleSpawnChance) return [first]
+  let second = rollContestBug(baseLevel)
+  // Prefer a different species so the choice actually matters.
+  for (let attempt = 0; attempt < 3 && second.speciesKey === first.speciesKey; attempt++)
+    second = rollContestBug(baseLevel)
+  return [first, second]
 }
 
 /**

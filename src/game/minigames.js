@@ -3,7 +3,7 @@
 // keep importing from game/minigames.js.
 
 export { MINING_COST, MINING_TILES, MINING_REWARD_TILES, MINING_DIGS, rollMiningReward, rewardItemName } from './minigames/mining.js'
-export { BUG_CONTEST_COST, BUG_CONTEST_BUSHES, BUG_CONTEST_RUSTLES, BUG_CONTEST_BALL, BUG_CONTEST_POOL, contestScore, bugFleeChance, rollContestBug, bugCatchChance, throwNetBall, bugStays, buildContestResults, contestPlayerRank, bugContestPrize } from './minigames/bug-contest.js'
+export { BUG_CONTEST_COST, BUG_CONTEST_BUSHES, BUG_CONTEST_RUSTLES, BUG_CONTEST_BALL, BUG_CONTEST_POOL, contestScore, bugFleeChance, rollContestBug, rollContestBugs, bugCatchChance, throwNetBall, bugStays, buildContestResults, contestPlayerRank, bugContestPrize } from './minigames/bug-contest.js'
 export { SAFARI_COST, SAFARI_BALLS, SAFARI_BALL, SAFARI_ROUTE_KEY, SAFARI_EFFECT_TURNS, rollSafariPokemon, safariCatchChance, safariFleeChance, applySafariAction, tickSafariEffects, safariThrowsBall, safariFlees } from './minigames/safari.js'
 export { QUIZ_COST, QUIZ_QUESTIONS, QUIZ_SECONDS, QUIZ_LIVES, QUIZ_OPTIONS, generateQuizQuestion, quizPrize } from './minigames/academy-quiz.js'
 export { VOLTORB_FLIP_COST, VOLTORB_SIZE, VOLTORB_MAX_LEVEL, VOLTORB_CLEAR_BONUS, VOLTORB_COIN_SCALE, voltorbCountForLevel, createVoltorbBoard, boardHints, boardCleared, boardExploded, flipVoltorbCell, toggleVoltorbMark, voltorbBoardCoins, voltorbFlipPrize } from './minigames/voltorb-flip.js'
@@ -24,4 +24,4 @@ export { SLOT_SPIN_COST, SLOT_REELS, SLOT_ROWS, SLOT_PAYLINES, SLOT_SYMBOLS, SLO
 export { MINIGAME_LOCATIONS, MINIGAME_START_ACTION, MINIGAME_INFO, POI_LOCATIONS, MINIGAME_AREAS, MINIGAME_REGIONS, minigameForLocation, minigamesInRegion, minigameNameForLocation } from './minigames/registry.js'
 export { RODS, DEFAULT_ROD, rodForId, bestRodId, rodsForRegionCount, nextRod } from './minigames/rods.js'
 export { FISHING_LOCATIONS, routeHasWaterSpecies } from './minigames/fishing.js'
-export { ACTIVITY_ATTEMPTS, ACTIVITY_SWEEP_MS, ACTIVITY_CHARGE_MS, ACTIVITY_HIT_ZONE, ACTIVITY_PERFECT_ZONE, ACTIVITY_ULTRA_ZONE, ACTIVITY_LEVEL_BONUS, ACTIVITY_SHINY_MULTIPLIER, ROUTE_ACTIVITIES, routeActivityIds, activityLevelBonus, activityShinyMultiplier, rollActivityHeldItem, rollActivityEncounter, rollActivityLoot, activityRewardName } from './minigames/route-activities.js'
+export { ACTIVITY_ATTEMPTS, ACTIVITY_SWEEP_MS, ACTIVITY_CHARGE_MS, ACTIVITY_HIT_ZONE, ACTIVITY_PERFECT_ZONE, ACTIVITY_ULTRA_ZONE, ACTIVITY_LEVEL_BONUS, ACTIVITY_SHINY_MULTIPLIER, ROUTE_ACTIVITIES, routeActivityIds, activityLevelBonus, activityShinyMultiplier, rollActivityHeldItem, rollActivityEncounter, rollActivityEncounters, rollActivityLoot, activityRewardName } from './minigames/route-activities.js'

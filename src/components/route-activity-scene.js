@@ -22,6 +22,7 @@ import {
   bestRodId,
   rodForId,
   rollActivityEncounter,
+  rollActivityEncounters,
   rollActivityHeldItem,
   rollActivityLoot,
 } from '../game/minigames.js'
@@ -47,11 +48,12 @@ export function RouteActivityScene() {
     ),
     [message, setMessage] = React.useState(''),
     [found, setFound] = React.useState(/** @type {{ itemId: string, quantity: number }[]} */ ([])),
-    [pending, setPending] = React.useState(
-      /** @type {{ enemy: any, speciesKey: string, level: number, isShiny: boolean, quality: ActivityQuality, heldItem: string | null, levelBonus: number, shinyMultiplier: number } | null} */ (
-        null
+    [pendings, setPendings] = React.useState(
+      /** @type {{ enemy: any, speciesKey: string, level: number, isShiny: boolean, quality: ActivityQuality, heldItem: string | null, levelBonus: number, shinyMultiplier: number }[]} */ (
+        []
       )
     ),
+    [selectedPending, setSelectedPending] = React.useState(0),
     chargingTreeRef = React.useRef(/** @type {number | null} */ (null)),
     chargeRef = React.useRef(0)
 
@@ -106,19 +108,20 @@ export function RouteActivityScene() {
   if (!activity) return null
 
   // Fishing uses the best rod the player owns; other activities ignore it.
-  const rod = rodForId(bestRodId(state.rods))
+  const rod = rodForId(bestRodId(state.rods)),
+    pending = pendings[selectedPending] ?? null
 
   function leave() {
     dispatch({ type: 'END_ROUTE_ACTIVITY' })
   }
 
   /**
-   * Build the encounter with its hit-quality bonuses and show it before the
-   * battle, so the player can see what they found (and choose to skip it).
+   * Build an encounter with its hit-quality bonuses so the player can see what
+   * they found (and choose to skip it).
    * @param {{ speciesKey: string, level: number }} encounter
    * @param {ActivityQuality} quality
    */
-  function previewEncounter(encounter, quality) {
+  function buildPending(encounter, quality) {
     const completedGenerationSet = completedGenerations(state.pokedexCaught),
       levelBonus = activityLevelBonus(quality),
       level = encounter.level + levelBonus,
@@ -136,7 +139,7 @@ export function RouteActivityScene() {
     // Flags this as a minigame find so the battle offers a manual catch.
     enemy.fromActivity = true
     if (bonusItem) enemy.heldItem = bonusItem
-    setPending({
+    return {
       enemy,
       speciesKey: encounter.speciesKey,
       level,
@@ -145,21 +148,44 @@ export function RouteActivityScene() {
       heldItem: enemy.heldItem ?? null,
       levelBonus,
       shinyMultiplier,
-    })
+    }
+  }
+
+  /**
+   * @param {{ speciesKey: string, level: number }[]} encounters
+   * @param {ActivityQuality} quality
+   */
+  function previewEncounter(encounters, quality) {
+    setPendings(encounters.map((encounter) => buildPending(encounter, quality)))
+    setSelectedPending(0)
     setStage('encounter')
   }
 
   function fight() {
     if (!pending) return
+    const other = pendings.find((_, index) => index !== selectedPending)
+    if (other)
+      dispatch({
+        type: 'ADD_LOG',
+        payload: {
+          message: `The other ${
+            pokemonSpecies[other.speciesKey]?.name ?? other.speciesKey
+          } fled\u2026 awwh!`,
+        },
+      })
     dispatch({ type: 'MARK_SEEN', payload: { speciesKey: pending.speciesKey } })
     dispatch({ type: 'START_ENCOUNTER', payload: { enemy: pending.enemy } })
-    setPending(null)
+    setPendings([])
   }
 
   function letGo() {
     if (!pending) return
-    setMessage(`You left the ${pokemonSpecies[pending.speciesKey]?.name ?? 'Pokemon'} alone.`)
-    setPending(null)
+    setMessage(
+      `You left the ${pokemonSpecies[pending.speciesKey]?.name ?? 'Pokemon'} alone.${
+        pendings.length > 1 ? ' The other slipped away\u2026 awwh!' : ''
+      }`
+    )
+    setPendings([])
     setStage(attemptsLeft <= 0 ? 'done' : 'result')
   }
 
@@ -184,13 +210,15 @@ export function RouteActivityScene() {
       return
     }
     if (activity.mode === 'encounter') {
-      const encounter = rollActivityEncounter(activity.id, routeKey, perfect, rod.id)
-      if (!encounter) {
+      // A headbutted tree sometimes shakes out a second Pokemon that slips away
+      // while you deal with the first.
+      const encounters = rollActivityEncounters(activity.id, routeKey, perfect, rod.id)
+      if (encounters.length === 0) {
         setMessage('Nothing is biting here.')
         setStage(nextAttempts <= 0 ? 'done' : 'result')
         return
       }
-      previewEncounter(encounter, quality)
+      previewEncounter(encounters, quality)
       return
     }
     // Foraging can flush out a hidden Grass-type before it pays out loot.
@@ -201,7 +229,7 @@ export function RouteActivityScene() {
       if (Math.random() < chance) {
         const hidden = rollActivityEncounter(activity.id, routeKey, perfect)
         if (hidden) {
-          previewEncounter(hidden, quality)
+          previewEncounter([hidden], quality)
           return
         }
       }
@@ -254,8 +282,7 @@ export function RouteActivityScene() {
     // expanding ring has a clear target to meet.
     ringStyle = {
       background: `radial-gradient(circle at center, transparent 0 ${ringBand(0.5 - ACTIVITY_HIT_ZONE)}, #6ab04c ${ringBand(0.5 - ACTIVITY_HIT_ZONE)} ${ringBand(0.5 - ACTIVITY_PERFECT_ZONE)}, #f0c850 ${ringBand(0.5 - ACTIVITY_PERFECT_ZONE)} ${ringBand(0.5 - ACTIVITY_ULTRA_ZONE)}, #54e0ff ${ringBand(0.5 - ACTIVITY_ULTRA_ZONE)} ${ringBand(0.5 + ACTIVITY_ULTRA_ZONE)}, #f0c850 ${ringBand(0.5 + ACTIVITY_ULTRA_ZONE)} ${ringBand(0.5 + ACTIVITY_PERFECT_ZONE)}, #6ab04c ${ringBand(0.5 + ACTIVITY_PERFECT_ZONE)} ${ringBand(0.5 + ACTIVITY_HIT_ZONE)}, transparent ${ringBand(0.5 + ACTIVITY_HIT_ZONE)})`,
-    },
-    previewSpecies = pending ? pokemonSpecies[pending.speciesKey] : null
+    }
 
   return jsxs('div', {
     className: `minigame-scene route-activity-scene activity-${activity.id}`,
@@ -287,55 +314,71 @@ export function RouteActivityScene() {
               className: 'activity-rod',
               children: [`Rod: `, rod.name, ` — `, rod.hint],
             }),
-          stage === 'encounter' && pending && previewSpecies
-            ? jsxs('div', {
-                className: `activity-encounter${pending.isShiny ? ' shiny' : ''}`,
-                children: [
-                  jsx('img', {
-                    className: 'activity-encounter-sprite',
-                    src: getPokemonSpriteUrl(previewSpecies.id),
-                    onError: /** @param {{ target: HTMLImageElement }} event */ (event) =>
-                      (event.target.src = getPokemonSpriteFallbackUrl(previewSpecies.id)),
-                    alt: previewSpecies.name,
-                  }),
-                  jsxs('span', {
-                    className: 'activity-encounter-name',
-                    children: [pending.isShiny ? '\u2605 ' : '', previewSpecies.name],
-                  }),
-                  jsx('span', {
-                    className: 'activity-encounter-level',
-                    children: `Lv.${pending.level}`,
-                  }),
-                  jsx('div', {
-                    className: 'activity-encounter-types',
-                    children: previewSpecies.types.map((type) =>
-                      jsx(
-                        'span',
-                        {
-                          className: `type-badge type-${type.toLowerCase()}`,
-                          children: type,
-                        },
-                        type
-                      )
-                    ),
-                  }),
-                  jsxs('div', {
-                    className: 'activity-encounter-bonuses',
-                    children: [
-                      pending.quality === 'ultra'
-                        ? 'PERFECT! '
-                        : pending.quality === 'perfect'
-                          ? 'Great hit! '
-                          : '',
-                      `Lv +${pending.levelBonus}`,
-                      ' \u00b7 ',
-                      `Shiny odds x${pending.shinyMultiplier}`,
-                      pending.heldItem
-                        ? ` \u00b7 Holding ${activityRewardName(pending.heldItem)}`
-                        : '',
-                    ],
-                  }),
-                ],
+          stage === 'encounter' && pendings.length > 0
+            ? jsx('div', {
+                className: 'activity-encounters',
+                children: pendings.map((choice, index) => {
+                  const choiceSpecies = pokemonSpecies[choice.speciesKey]
+                  return jsxs(
+                    'div',
+                    {
+                      className: `activity-encounter${choice.isShiny ? ' shiny' : ''}${
+                        index === selectedPending ? ' selected' : ''
+                      }`,
+                      onClick: () => setSelectedPending(index),
+                      children: [
+                        jsx('img', {
+                          className: 'activity-encounter-sprite',
+                          src: getPokemonSpriteUrl(choiceSpecies?.id ?? 0),
+                          onError: /** @param {{ target: HTMLImageElement }} event */ (event) =>
+                            (event.target.src = getPokemonSpriteFallbackUrl(choiceSpecies?.id ?? 0)),
+                          alt: choiceSpecies?.name ?? choice.speciesKey,
+                        }),
+                        jsxs('span', {
+                          className: 'activity-encounter-name',
+                          children: [
+                            choice.isShiny ? '\u2605 ' : '',
+                            choiceSpecies?.name ?? choice.speciesKey,
+                          ],
+                        }),
+                        jsx('span', {
+                          className: 'activity-encounter-level',
+                          children: `Lv.${choice.level}`,
+                        }),
+                        jsx('div', {
+                          className: 'activity-encounter-types',
+                          children: (choiceSpecies?.types ?? []).map((type) =>
+                            jsx(
+                              'span',
+                              {
+                                className: `type-badge type-${type.toLowerCase()}`,
+                                children: type,
+                              },
+                              type
+                            )
+                          ),
+                        }),
+                        jsxs('div', {
+                          className: 'activity-encounter-bonuses',
+                          children: [
+                            choice.quality === 'ultra'
+                              ? 'PERFECT! '
+                              : choice.quality === 'perfect'
+                                ? 'Great hit! '
+                                : '',
+                            `Lv +${choice.levelBonus}`,
+                            ' \u00b7 ',
+                            `Shiny odds x${choice.shinyMultiplier}`,
+                            choice.heldItem
+                              ? ` \u00b7 Holding ${activityRewardName(choice.heldItem)}`
+                              : '',
+                          ],
+                        }),
+                      ],
+                    },
+                    `${choice.speciesKey}-${index}`
+                  )
+                }),
               })
             : activity.display === 'rings'
               ? jsxs('div', {

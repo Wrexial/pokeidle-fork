@@ -152,6 +152,12 @@ export const expCandyDropChance = 0.012
 export const rareCandyDropChance = 0.0015
 
 /**
+ * Chance a headbutted tree or rustled contest bush shakes out a second Pokemon.
+ * You can only keep one, so the other flees \u2014 the "awwhh" moment.
+ */
+export const doubleSpawnChance = 0.2
+
+/**
  * Exp. Share payout while active. The active Pokemon keeps this fraction of a
  * win's EXP, and every other non-fainted party member gains this fraction each.
  */

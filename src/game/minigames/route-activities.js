@@ -5,6 +5,7 @@
 // wild battles.
 
 import { encounterData, pokemonSpecies } from '../../data/gameData.js'
+import { doubleSpawnChance } from '../../data/config.js'
 import { consumableItems, evolutionItems, heldItems } from '../../data/items.js'
 import { isCaveLocation, isWaterLocation } from '../catching.js'
 import { DEFAULT_ROD, rodForId } from './rods.js'
@@ -278,6 +279,27 @@ export function rollActivityEncounter(activityId, routeKey, perfect, rodId = DEF
     level: fallback.minLevel + levelBonus,
     isWater: false,
   }
+}
+
+/**
+ * Roll the encounters for an activity. A headbutted tree occasionally shakes out
+ * a second Pokemon as well; the player can only engage one, so the other slips
+ * away.
+ * @param {string} activityId
+ * @param {string} routeKey
+ * @param {boolean} perfect
+ * @param {string} [rodId]
+ * @returns {{ speciesKey: string, level: number, isWater: boolean }[]}
+ */
+export function rollActivityEncounters(activityId, routeKey, perfect, rodId = DEFAULT_ROD) {
+  const first = rollActivityEncounter(activityId, routeKey, perfect, rodId)
+  if (!first) return []
+  if (activityId !== 'headbutt' || Math.random() >= doubleSpawnChance) return [first]
+  let second = rollActivityEncounter(activityId, routeKey, perfect, rodId)
+  // Prefer a different species so the choice actually matters.
+  for (let attempt = 0; attempt < 3 && second && second.speciesKey === first.speciesKey; attempt++)
+    second = rollActivityEncounter(activityId, routeKey, perfect, rodId)
+  return second ? [first, second] : [first]
 }
 
 /**

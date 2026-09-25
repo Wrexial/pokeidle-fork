@@ -3,7 +3,7 @@
 import { pokemonSpecies } from '../../data/gameData.js'
 import { FORM_SPECIES } from '../../data/form-species.js'
 import { rollGender } from '../breeding.js'
-import { rollHeldItem } from '../held-items.js'
+import { rollWildHeldItem } from '../held-items.js'
 import { calculatePokemonStats, generateIVs, getPerfectIVs, resolvePokemonMoves, rollAbility } from '../pokemon.js'
 
 /**
@@ -42,7 +42,7 @@ export function createBattlePokemon(speciesKey, level, options = {}) {
     ...(wild
       ? {
           ability: rollAbility(speciesKey),
-          heldItem: rollHeldItem(0.05),
+          heldItem: rollWildHeldItem(species.types),
           gender: rollGender(speciesKey),
           isRoamer,
         }

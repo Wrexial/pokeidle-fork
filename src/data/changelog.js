@@ -38,7 +38,7 @@ export const CHANGELOG = [
             'Battle status effects always show a three-letter tag now \u2014 including TOX for badly poisoned and PAR for paralysis \u2014 and the info nameplate reserves the tag\u2019s space so it never jumps or resizes when a status lands or wears off',
             'Moves and abilities now have hover tooltips: hover a move (battle bar, Move Manager or a Pokémon\u2019s summary) for its type, category, power, accuracy and a plain-English effect, and hover an ability for what it does',
             'Held-item moves now actually act on the item: Thief and Covet steal it, Knock Off removes it, Pluck and Bug Bite eat a held Berry, and Incinerate burns one away \u2014 all stopped by Sticky Hold',
-            'Wild Pokemon and trainers hold items far less often (8% / 30% down to 5% / 15%) and only from a sensible pool, so a random Pidgey no longer turns up with a Mega Stone or Choice Specs',
+            'Wild Pokemon and trainers hold items far less often (8% / 30% down to 5% / 15%) and only from a sensible pool, so a random Pidgey no longer turns up with a Mega Stone or Choice Specs; type boosters match the holder, so a Water type never carries Charcoal',
             'A small item badge now marks any Pokemon holding an item in the party and in the Box',
           ],
         },

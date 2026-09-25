@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 installGameData()
 
-const { heldStatMultiplier, rollHeldItem, WILD_HELD_ITEMS } = await import('../src/game/held-items.js')
+const { heldStatMultiplier, rollHeldItem, rollWildHeldItem, WILD_HELD_ITEMS } = await import('../src/game/held-items.js')
 const { resolveBattleTurn } = await import('../src/game/combat.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 const { getItemCategory } = await import('../src/game/progression.js')
@@ -181,6 +181,28 @@ test('wild held items are curated and never a Mega Stone', () => {
     assert.ok(item && WILD_HELD_ITEMS.includes(item), `unexpected wild item ${item}`)
     assert.notEqual(item, 'megaStone')
   }
+})
+
+test('wild held items suit the holder types', () => {
+  const water = new Set(),
+    fire = new Set()
+  for (let roll = 0; roll < 400; roll++) {
+    water.add(rollWildHeldItem(['Water'], 1))
+    fire.add(rollWildHeldItem(['Fire', 'Flying'], 1))
+  }
+  for (const item of water)
+    assert.ok(
+      ['sitrusBerry', 'lumBerry', 'mysticWater'].includes(item),
+      `Water type held ${item}`
+    )
+  assert.ok(water.has('mysticWater'))
+  // A dual type can hold either booster, but never an unrelated one.
+  for (const item of fire)
+    assert.ok(
+      ['sitrusBerry', 'lumBerry', 'charcoal', 'sharpBeak'].includes(item),
+      `Fire/Flying type held ${item}`
+    )
+  assert.ok(fire.has('charcoal') || fire.has('sharpBeak'))
 })
 
 test('Thief and Covet steal the foe held item', () => {

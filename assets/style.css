@@ -11179,3 +11179,18 @@ img {
 .global-tooltip.below {
     transform: translate(-50%, 8px)
 }
+
+.global-tooltip .tooltip-up,
+.global-tooltip .tooltip-down {
+    display: block;
+    margin-top: 3px;
+    font-weight: 700
+}
+
+.global-tooltip .tooltip-up {
+    color: #8fe07a
+}
+
+.global-tooltip .tooltip-down {
+    color: #f08a8a
+}

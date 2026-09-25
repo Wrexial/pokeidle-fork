@@ -16,7 +16,16 @@ function tooltipOwner(target) {
 
 export function GlobalTooltip() {
   const [tip, setTip] = React.useState(
-    /** @type {{ text: string, x: number, y: number, below: boolean } | null} */ (null)
+    /**
+     * @type {{
+     *   text: string,
+     *   up?: string | null,
+     *   down?: string | null,
+     *   x: number,
+     *   y: number,
+     *   below: boolean,
+     * } | null}
+     */ (null)
   )
   React.useEffect(() => {
     /** @param {Event} event */
@@ -31,6 +40,9 @@ export function GlobalTooltip() {
         below = rect.top < 64
       setTip({
         text,
+        // Optional coloured extra lines (e.g. a nature's raised/lowered stat).
+        up: owner.getAttribute('data-tooltip-up'),
+        down: owner.getAttribute('data-tooltip-down'),
         x: rect.left + rect.width / 2,
         y: below ? rect.bottom : rect.top,
         below,
@@ -64,7 +76,11 @@ export function GlobalTooltip() {
           className: `global-tooltip${tip.below ? ' below' : ''}`,
           role: 'tooltip',
           style: { left: `${tip.x}px`, top: `${tip.y}px` },
-          children: tip.text,
+          children: [
+            tip.text,
+            tip.up && jsx('span', { className: 'tooltip-up', children: tip.up }),
+            tip.down && jsx('span', { className: 'tooltip-down', children: tip.down }),
+          ],
         }),
         document.body
       )

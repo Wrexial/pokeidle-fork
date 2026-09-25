@@ -53,14 +53,7 @@ export function StatsPanel({
           : nature.decreased === statKey
             ? -1
             : 0
-        : 0,
-    natureText = nature
-      ? nature.increased !== nature.decreased
-        ? `${natureName(pokemon.nature)} nature \u2014 +10% ${
-            NATURE_STAT_NAMES[nature.increased] ?? nature.increased
-          }, \u221210% ${NATURE_STAT_NAMES[nature.decreased] ?? nature.decreased}.`
-        : `${natureName(pokemon.nature)} nature \u2014 no stat changes.`
-      : null
+        : 0
   if (!species) return null
   function commitName() {
     dispatch({
@@ -312,7 +305,19 @@ export function StatsPanel({
                   nature &&
                     jsx('span', {
                       className: 'stats-panel-nature',
-                      'data-tooltip': natureText,
+                      'data-tooltip':
+                        nature.increased !== nature.decreased
+                          ? `${natureName(pokemon.nature)} nature`
+                          : `${natureName(pokemon.nature)} nature \u2014 no stat changes.`,
+                      // The boosted stat reads green and the lowered one red.
+                      'data-tooltip-up':
+                        nature.increased !== nature.decreased
+                          ? `+10% ${NATURE_STAT_NAMES[nature.increased] ?? nature.increased}`
+                          : void 0,
+                      'data-tooltip-down':
+                        nature.increased !== nature.decreased
+                          ? `\u221210% ${NATURE_STAT_NAMES[nature.decreased] ?? nature.decreased}`
+                          : void 0,
                       children: natureName(pokemon.nature),
                     }),
                   pokemon.ability &&

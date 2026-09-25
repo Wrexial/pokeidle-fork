@@ -1474,6 +1474,10 @@
     {
       "into": "m-absol",
       "level": 100
+    },
+    {
+      "into": "m-absol z",
+      "level": 100
     }
   ],
   "snorunt": [
@@ -1750,6 +1754,10 @@
     {
       "into": "m-garchomp",
       "level": 100
+    },
+    {
+      "into": "m-garchomp z",
+      "level": 100
     }
   ],
   "riolu": [
@@ -1761,6 +1769,10 @@
   "lucario": [
     {
       "into": "m-lucario",
+      "level": 100
+    },
+    {
+      "into": "m-lucario z",
       "level": 100
     }
   ],
@@ -2302,6 +2314,10 @@
     {
       "into": "ash-greninja",
       "level": 100
+    },
+    {
+      "into": "m-greninja",
+      "level": 100
     }
   ],
   "bunnelby": [
@@ -2350,6 +2366,10 @@
     {
       "into": "florges",
       "item": "shinyStone"
+    },
+    {
+      "into": "m-floette",
+      "level": 100
     }
   ],
   "skiddo": [
@@ -3406,6 +3426,10 @@
     {
       "into": "zygarde-c",
       "item": "zygardeCube"
+    },
+    {
+      "into": "m-zygarde",
+      "level": 100
     }
   ],
   "zygarde-10": [
@@ -4015,6 +4039,242 @@
     {
       "into": "sinistcha",
       "level": 40
+    }
+  ],
+  "clefable": [
+    {
+      "into": "m-clefable",
+      "level": 100
+    }
+  ],
+  "victreebel": [
+    {
+      "into": "m-victreebel",
+      "level": 100
+    }
+  ],
+  "starmie": [
+    {
+      "into": "m-starmie",
+      "level": 100
+    }
+  ],
+  "meganium": [
+    {
+      "into": "m-meganium",
+      "level": 100
+    }
+  ],
+  "skarmory": [
+    {
+      "into": "m-skarmory",
+      "level": 100
+    }
+  ],
+  "froslass": [
+    {
+      "into": "m-froslass",
+      "level": 100
+    }
+  ],
+  "emboar": [
+    {
+      "into": "m-emboar",
+      "level": 100
+    }
+  ],
+  "excadrill": [
+    {
+      "into": "m-excadrill",
+      "level": 100
+    }
+  ],
+  "scolipede": [
+    {
+      "into": "m-scolipede",
+      "level": 100
+    }
+  ],
+  "scrafty": [
+    {
+      "into": "m-scrafty",
+      "level": 100
+    }
+  ],
+  "eelektross": [
+    {
+      "into": "m-eelektross",
+      "level": 100
+    }
+  ],
+  "chandelure": [
+    {
+      "into": "m-chandelure",
+      "level": 100
+    }
+  ],
+  "chesnaught": [
+    {
+      "into": "m-chesnaught",
+      "level": 100
+    }
+  ],
+  "delphox": [
+    {
+      "into": "m-delphox",
+      "level": 100
+    }
+  ],
+  "pyroar": [
+    {
+      "into": "m-pyroar",
+      "level": 100
+    }
+  ],
+  "malamar": [
+    {
+      "into": "m-malamar",
+      "level": 100
+    }
+  ],
+  "barbaracle": [
+    {
+      "into": "m-barbaracle",
+      "level": 100
+    }
+  ],
+  "dragalge": [
+    {
+      "into": "m-dragalge",
+      "level": 100
+    }
+  ],
+  "hawlucha": [
+    {
+      "into": "m-hawlucha",
+      "level": 100
+    }
+  ],
+  "drampa": [
+    {
+      "into": "m-drampa",
+      "level": 100
+    }
+  ],
+  "falinks": [
+    {
+      "into": "m-falinks",
+      "level": 100
+    }
+  ],
+  "raichu": [
+    {
+      "into": "m-raichu x",
+      "level": 100
+    },
+    {
+      "into": "m-raichu y",
+      "level": 100
+    }
+  ],
+  "chimecho": [
+    {
+      "into": "m-chimecho",
+      "level": 100
+    }
+  ],
+  "staraptor": [
+    {
+      "into": "m-staraptor",
+      "level": 100
+    }
+  ],
+  "heatran": [
+    {
+      "into": "m-heatran",
+      "level": 100
+    }
+  ],
+  "darkrai": [
+    {
+      "into": "m-darkrai",
+      "level": 100
+    }
+  ],
+  "golurk": [
+    {
+      "into": "m-golurk",
+      "level": 100
+    }
+  ],
+  "meowstic": [
+    {
+      "into": "m-meowstic",
+      "level": 100
+    },
+    {
+      "into": "m-meowstic-f",
+      "level": 100
+    }
+  ],
+  "crabominable": [
+    {
+      "into": "m-crabominable",
+      "level": 100
+    }
+  ],
+  "golisopod": [
+    {
+      "into": "m-golisopod",
+      "level": 100
+    }
+  ],
+  "magearna": [
+    {
+      "into": "m-magearna",
+      "level": 100
+    },
+    {
+      "into": "m-magearna-o",
+      "level": 100
+    }
+  ],
+  "zeraora": [
+    {
+      "into": "m-zeraora",
+      "level": 100
+    }
+  ],
+  "scovillain": [
+    {
+      "into": "m-scovillain",
+      "level": 100
+    }
+  ],
+  "glimmora": [
+    {
+      "into": "m-glimmora",
+      "level": 100
+    }
+  ],
+  "tatsugiri": [
+    {
+      "into": "m-tatsugiri",
+      "level": 100
+    },
+    {
+      "into": "m-tatsugiri-droopy",
+      "level": 100
+    },
+    {
+      "into": "m-tatsugiri-stretchy",
+      "level": 100
+    }
+  ],
+  "baxcalibur": [
+    {
+      "into": "m-baxcalibur",
+      "level": 100
     }
   ]
 }

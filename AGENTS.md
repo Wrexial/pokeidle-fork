@@ -401,6 +401,13 @@ One-off scripts used to build the data JSON (not run during dev/build):
   Megas already do. The added entries carry `form: true`, which
   `generate-regions.cjs`'s `isFinalEvolution` ignores so team generation is
   unchanged. Re-run after any re-extraction of `evolution-data.json`.
+- `add-mega-forms.cjs` — adds the Legends: Z-A Mega Evolutions PokeAPI has but
+  the extracted bundle predates (pokemon ids 10278-10326) to
+  `pokemon-species.json`, `ability-data.json`, `evolution-data.json` and
+  `possible-learnsets.json`, then `download_pokemon_sprites.cjs` fills the art.
+  A few belong to forms the game doesn't model (female Meowstic, droopy /
+  stretchy Tatsugiri, Original Magearna) and are attached to the form it does.
+  Idempotent; cached under `tools/cache/`.
 - `fix-missing-learnsets.cjs` — fills the ~195 species (every alternate form
   plus a few base species) absent from `possible-learnsets.json` by borrowing
   the learnset of their base form, pre-evolution or evolution (falling back to

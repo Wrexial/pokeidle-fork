@@ -48,6 +48,13 @@ export const MEGA_FORMS = (() => {
 })()
 
 /**
+ * Every real Mega form key. Checked as a set rather than by the `m-` prefix,
+ * which also starts keys like `m-rotom` (Mow Rotom).
+ * @type {Set<string>}
+ */
+const MEGA_FORM_KEYS = new Set(Object.values(MEGA_FORMS).flat())
+
+/**
  * @param {string | null | undefined} speciesKey
  * @returns {string[]}
  */
@@ -57,7 +64,7 @@ export function megaFormsFor(speciesKey) {
 
 /** @param {string | null | undefined} formKey */
 export function isMegaForm(formKey) {
-  return typeof formKey === 'string' && formKey.startsWith('m-')
+  return typeof formKey === 'string' && MEGA_FORM_KEYS.has(formKey)
 }
 
 /**
@@ -87,6 +94,10 @@ export function chooseMegaForm(speciesKey, pokemon) {
   const forms = megaFormsFor(speciesKey)
   if (forms.length === 0) return null
   if (forms.length === 1) return forms[0]
+  // Legends Z-A added upgraded "Z" variants (Mega Absol Z, Mega Garchomp Z,
+  // Mega Lucario Z) alongside the original Mega; prefer the newer one.
+  const zForm = forms.find((form) => /\sz$/.test(form))
+  if (zForm) return zForm
   const special = (pokemon?.spAttack ?? 0) > (pokemon?.attack ?? 0),
     yForm = forms.find((form) => /\sy$/.test(form)),
     xForm = forms.find((form) => /\sx$/.test(form))

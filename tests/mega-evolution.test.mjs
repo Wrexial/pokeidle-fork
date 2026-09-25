@@ -30,17 +30,30 @@ function battlingState(speciesKey, level, heldItem) {
 test('Mega forms are discovered from the evolution table', () => {
   assert.ok(Object.keys(MEGA_FORMS).length > 30, 'plenty of Megas are modelled')
   assert.deepEqual(megaFormsFor('charizard'), ['m-charizard x', 'm-charizard y'])
-  assert.equal(megaFormsFor('lucario').length, 1)
+  assert.equal(megaFormsFor('manectric').length, 1)
   assert.equal(megaFormsFor('pikachu').length, 0)
   assert.ok(isMegaForm('m-charizard x'))
   assert.ok(!isMegaForm('charizard'))
+  // `m-rotom` is Mow Rotom, not a Mega, despite the prefix.
+  assert.ok(!isMegaForm('m-rotom'))
+  // Legends Z-A's newer Megas are picked up too.
+  assert.ok(isMegaForm('m-clefable'))
+  assert.ok(isMegaForm('m-baxcalibur'))
 })
 
 test('a two-Mega species picks X for physical and Y for special', () => {
   assert.equal(chooseMegaForm('charizard', { attack: 200, spAttack: 100 }), 'm-charizard x')
   assert.equal(chooseMegaForm('charizard', { attack: 100, spAttack: 200 }), 'm-charizard y')
-  assert.equal(chooseMegaForm('lucario', { attack: 1, spAttack: 1 }), 'm-lucario')
+  assert.equal(chooseMegaForm('raichu', { attack: 200, spAttack: 100 }), 'm-raichu x')
+  assert.equal(chooseMegaForm('raichu', { attack: 100, spAttack: 200 }), 'm-raichu y')
+  assert.equal(chooseMegaForm('manectric', { attack: 1, spAttack: 1 }), 'm-manectric')
   assert.equal(chooseMegaForm('pikachu', { attack: 1, spAttack: 1 }), null)
+})
+
+test('a Mega with a Z-A variant prefers the newer Z form', () => {
+  assert.equal(chooseMegaForm('lucario', { attack: 200, spAttack: 100 }), 'm-lucario z')
+  assert.equal(chooseMegaForm('garchomp', { attack: 200, spAttack: 100 }), 'm-garchomp z')
+  assert.equal(chooseMegaForm('absol', { attack: 200, spAttack: 100 }), 'm-absol z')
 })
 
 test('Mega forms carry their own ability', () => {
@@ -112,15 +125,15 @@ test('Mega and Primal forms are not offered as level-100 evolutions', () => {
 })
 
 test('a Pokemon can only Mega Evolve once per battle', () => {
-  const once = gameReducer(battlingState('lucario', 60, 'megaStone'), { type: 'MEGA_EVOLVE' }),
+  const once = gameReducer(battlingState('manectric', 60, 'megaStone'), { type: 'MEGA_EVOLVE' }),
     twice = gameReducer(once, { type: 'MEGA_EVOLVE' })
-  assert.equal(once.playerVolatile.formKey, 'm-lucario')
+  assert.equal(once.playerVolatile.formKey, 'm-manectric')
   assert.equal(twice, once, 'the second attempt is ignored')
 })
 
 test('ending the battle clears the Mega form', () => {
-  const evolved = gameReducer(battlingState('lucario', 60, 'megaStone'), { type: 'MEGA_EVOLVE' }),
+  const evolved = gameReducer(battlingState('manectric', 60, 'megaStone'), { type: 'MEGA_EVOLVE' }),
     ended = gameReducer(evolved, { type: 'PHASE_IDLE' })
   assert.equal(ended.playerVolatile, null)
-  assert.equal(ended.playerPokemon.speciesKey, 'lucario')
+  assert.equal(ended.playerPokemon.speciesKey, 'manectric')
 })

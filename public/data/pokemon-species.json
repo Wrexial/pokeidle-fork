@@ -23796,5 +23796,935 @@
     "catchRate": 3,
     "legendary": true,
     "weight": 0.3
+  },
+  "m-clefable": {
+    "id": 10278,
+    "name": "Mega Clefable",
+    "types": [
+      "Fairy",
+      "Flying"
+    ],
+    "baseStats": {
+      "hp": 95,
+      "attack": 80,
+      "defense": 93,
+      "spAttack": 135,
+      "spDefense": 110,
+      "speed": 70
+    },
+    "baseExpYield": 217,
+    "growthRate": "fast",
+    "catchRate": 25,
+    "weight": 42.3
+  },
+  "m-victreebel": {
+    "id": 10279,
+    "name": "Mega Victreebel",
+    "types": [
+      "Grass",
+      "Poison"
+    ],
+    "baseStats": {
+      "hp": 80,
+      "attack": 125,
+      "defense": 85,
+      "spAttack": 135,
+      "spDefense": 95,
+      "speed": 70
+    },
+    "baseExpYield": 221,
+    "growthRate": "mediumSlow",
+    "catchRate": 45,
+    "weight": 125.5
+  },
+  "m-starmie": {
+    "id": 10280,
+    "name": "Mega Starmie",
+    "types": [
+      "Water",
+      "Psychic"
+    ],
+    "baseStats": {
+      "hp": 60,
+      "attack": 100,
+      "defense": 105,
+      "spAttack": 130,
+      "spDefense": 105,
+      "speed": 120
+    },
+    "baseExpYield": 182,
+    "growthRate": "slow",
+    "catchRate": 60,
+    "weight": 80
+  },
+  "m-meganium": {
+    "id": 10282,
+    "name": "Mega Meganium",
+    "types": [
+      "Grass",
+      "Fairy"
+    ],
+    "baseStats": {
+      "hp": 80,
+      "attack": 92,
+      "defense": 115,
+      "spAttack": 143,
+      "spDefense": 115,
+      "speed": 80
+    },
+    "baseExpYield": 236,
+    "growthRate": "mediumSlow",
+    "catchRate": 45,
+    "weight": 201
+  },
+  "m-skarmory": {
+    "id": 10284,
+    "name": "Mega Skarmory",
+    "types": [
+      "Steel",
+      "Flying"
+    ],
+    "baseStats": {
+      "hp": 65,
+      "attack": 140,
+      "defense": 110,
+      "spAttack": 40,
+      "spDefense": 100,
+      "speed": 110
+    },
+    "baseExpYield": 163,
+    "growthRate": "slow",
+    "catchRate": 25,
+    "weight": 40.4
+  },
+  "m-froslass": {
+    "id": 10285,
+    "name": "Mega Froslass",
+    "types": [
+      "Ice",
+      "Ghost"
+    ],
+    "baseStats": {
+      "hp": 70,
+      "attack": 80,
+      "defense": 70,
+      "spAttack": 140,
+      "spDefense": 100,
+      "speed": 120
+    },
+    "baseExpYield": 168,
+    "growthRate": "mediumFast",
+    "catchRate": 75,
+    "weight": 29.6
+  },
+  "m-emboar": {
+    "id": 10286,
+    "name": "Mega Emboar",
+    "types": [
+      "Fire",
+      "Fighting"
+    ],
+    "baseStats": {
+      "hp": 110,
+      "attack": 148,
+      "defense": 75,
+      "spAttack": 110,
+      "spDefense": 110,
+      "speed": 75
+    },
+    "baseExpYield": 238,
+    "growthRate": "mediumSlow",
+    "catchRate": 45,
+    "weight": 180.3
+  },
+  "m-excadrill": {
+    "id": 10287,
+    "name": "Mega Excadrill",
+    "types": [
+      "Ground",
+      "Steel"
+    ],
+    "baseStats": {
+      "hp": 110,
+      "attack": 165,
+      "defense": 100,
+      "spAttack": 65,
+      "spDefense": 65,
+      "speed": 103
+    },
+    "baseExpYield": 178,
+    "growthRate": "mediumFast",
+    "catchRate": 60,
+    "weight": 60
+  },
+  "m-scolipede": {
+    "id": 10288,
+    "name": "Mega Scolipede",
+    "types": [
+      "Bug",
+      "Poison"
+    ],
+    "baseStats": {
+      "hp": 60,
+      "attack": 140,
+      "defense": 149,
+      "spAttack": 75,
+      "spDefense": 99,
+      "speed": 62
+    },
+    "baseExpYield": 218,
+    "growthRate": "mediumSlow",
+    "catchRate": 45,
+    "weight": 230.5
+  },
+  "m-scrafty": {
+    "id": 10289,
+    "name": "Mega Scrafty",
+    "types": [
+      "Dark",
+      "Fighting"
+    ],
+    "baseStats": {
+      "hp": 65,
+      "attack": 130,
+      "defense": 135,
+      "spAttack": 55,
+      "spDefense": 135,
+      "speed": 68
+    },
+    "baseExpYield": 171,
+    "growthRate": "mediumFast",
+    "catchRate": 90,
+    "weight": 31
+  },
+  "m-eelektross": {
+    "id": 10290,
+    "name": "Mega Eelektross",
+    "types": [
+      "Electric"
+    ],
+    "baseStats": {
+      "hp": 85,
+      "attack": 145,
+      "defense": 80,
+      "spAttack": 135,
+      "spDefense": 90,
+      "speed": 80
+    },
+    "baseExpYield": 232,
+    "growthRate": "slow",
+    "catchRate": 30,
+    "weight": 180
+  },
+  "m-chandelure": {
+    "id": 10291,
+    "name": "Mega Chandelure",
+    "types": [
+      "Ghost",
+      "Fire"
+    ],
+    "baseStats": {
+      "hp": 60,
+      "attack": 75,
+      "defense": 110,
+      "spAttack": 175,
+      "spDefense": 110,
+      "speed": 90
+    },
+    "baseExpYield": 234,
+    "growthRate": "mediumSlow",
+    "catchRate": 45,
+    "weight": 69.6
+  },
+  "m-chesnaught": {
+    "id": 10292,
+    "name": "Mega Chesnaught",
+    "types": [
+      "Grass",
+      "Fighting"
+    ],
+    "baseStats": {
+      "hp": 88,
+      "attack": 137,
+      "defense": 172,
+      "spAttack": 74,
+      "spDefense": 115,
+      "speed": 44
+    },
+    "baseExpYield": 239,
+    "growthRate": "mediumSlow",
+    "catchRate": 45,
+    "weight": 90
+  },
+  "m-delphox": {
+    "id": 10293,
+    "name": "Mega Delphox",
+    "types": [
+      "Fire",
+      "Psychic"
+    ],
+    "baseStats": {
+      "hp": 75,
+      "attack": 69,
+      "defense": 72,
+      "spAttack": 159,
+      "spDefense": 125,
+      "speed": 134
+    },
+    "baseExpYield": 240,
+    "growthRate": "mediumSlow",
+    "catchRate": 45,
+    "weight": 39
+  },
+  "m-greninja": {
+    "id": 10294,
+    "name": "Mega Greninja",
+    "types": [
+      "Water",
+      "Dark"
+    ],
+    "baseStats": {
+      "hp": 72,
+      "attack": 125,
+      "defense": 77,
+      "spAttack": 133,
+      "spDefense": 81,
+      "speed": 142
+    },
+    "baseExpYield": 239,
+    "growthRate": "mediumSlow",
+    "catchRate": 45,
+    "weight": 40
+  },
+  "m-pyroar": {
+    "id": 10295,
+    "name": "Mega Pyroar",
+    "types": [
+      "Fire",
+      "Normal"
+    ],
+    "baseStats": {
+      "hp": 86,
+      "attack": 88,
+      "defense": 92,
+      "spAttack": 129,
+      "spDefense": 86,
+      "speed": 126
+    },
+    "baseExpYield": 177,
+    "growthRate": "mediumSlow",
+    "catchRate": 65,
+    "weight": 93.3
+  },
+  "m-floette": {
+    "id": 10296,
+    "name": "Mega Floette",
+    "types": [
+      "Fairy"
+    ],
+    "baseStats": {
+      "hp": 74,
+      "attack": 85,
+      "defense": 87,
+      "spAttack": 155,
+      "spDefense": 148,
+      "speed": 102
+    },
+    "baseExpYield": 130,
+    "growthRate": "mediumFast",
+    "catchRate": 120,
+    "weight": 100.8
+  },
+  "m-malamar": {
+    "id": 10297,
+    "name": "Mega Malamar",
+    "types": [
+      "Dark",
+      "Psychic"
+    ],
+    "baseStats": {
+      "hp": 86,
+      "attack": 102,
+      "defense": 88,
+      "spAttack": 98,
+      "spDefense": 120,
+      "speed": 88
+    },
+    "baseExpYield": 169,
+    "growthRate": "mediumFast",
+    "catchRate": 80,
+    "weight": 69.8
+  },
+  "m-barbaracle": {
+    "id": 10298,
+    "name": "Mega Barbaracle",
+    "types": [
+      "Rock",
+      "Fighting"
+    ],
+    "baseStats": {
+      "hp": 72,
+      "attack": 140,
+      "defense": 130,
+      "spAttack": 64,
+      "spDefense": 106,
+      "speed": 88
+    },
+    "baseExpYield": 175,
+    "growthRate": "mediumFast",
+    "catchRate": 45,
+    "weight": 100
+  },
+  "m-dragalge": {
+    "id": 10299,
+    "name": "Mega Dragalge",
+    "types": [
+      "Poison",
+      "Dragon"
+    ],
+    "baseStats": {
+      "hp": 65,
+      "attack": 85,
+      "defense": 105,
+      "spAttack": 132,
+      "spDefense": 163,
+      "speed": 44
+    },
+    "baseExpYield": 173,
+    "growthRate": "mediumFast",
+    "catchRate": 55,
+    "weight": 100.3
+  },
+  "m-hawlucha": {
+    "id": 10300,
+    "name": "Mega Hawlucha",
+    "types": [
+      "Fighting",
+      "Flying"
+    ],
+    "baseStats": {
+      "hp": 78,
+      "attack": 137,
+      "defense": 100,
+      "spAttack": 74,
+      "spDefense": 93,
+      "speed": 118
+    },
+    "baseExpYield": 175,
+    "growthRate": "mediumFast",
+    "catchRate": 100,
+    "weight": 25
+  },
+  "m-zygarde": {
+    "id": 10301,
+    "name": "Mega Zygarde",
+    "types": [
+      "Dragon",
+      "Ground"
+    ],
+    "baseStats": {
+      "hp": 216,
+      "attack": 70,
+      "defense": 91,
+      "spAttack": 216,
+      "spDefense": 85,
+      "speed": 100
+    },
+    "baseExpYield": 270,
+    "growthRate": "slow",
+    "catchRate": 3,
+    "weight": 610
+  },
+  "m-drampa": {
+    "id": 10302,
+    "name": "Mega Drampa",
+    "types": [
+      "Normal",
+      "Dragon"
+    ],
+    "baseStats": {
+      "hp": 78,
+      "attack": 85,
+      "defense": 110,
+      "spAttack": 160,
+      "spDefense": 116,
+      "speed": 36
+    },
+    "baseExpYield": 170,
+    "growthRate": "mediumFast",
+    "catchRate": 70,
+    "weight": 240.5
+  },
+  "m-falinks": {
+    "id": 10303,
+    "name": "Mega Falinks",
+    "types": [
+      "Fighting"
+    ],
+    "baseStats": {
+      "hp": 65,
+      "attack": 135,
+      "defense": 135,
+      "spAttack": 70,
+      "spDefense": 65,
+      "speed": 100
+    },
+    "baseExpYield": 165,
+    "growthRate": "mediumFast",
+    "catchRate": 45,
+    "weight": 99
+  },
+  "m-raichu x": {
+    "id": 10304,
+    "name": "Mega Raichu X",
+    "types": [
+      "Electric"
+    ],
+    "baseStats": {
+      "hp": 60,
+      "attack": 135,
+      "defense": 95,
+      "spAttack": 90,
+      "spDefense": 95,
+      "speed": 110
+    },
+    "baseExpYield": 218,
+    "growthRate": "mediumFast",
+    "catchRate": 75,
+    "weight": 38
+  },
+  "m-raichu y": {
+    "id": 10305,
+    "name": "Mega Raichu Y",
+    "types": [
+      "Electric"
+    ],
+    "baseStats": {
+      "hp": 60,
+      "attack": 100,
+      "defense": 55,
+      "spAttack": 160,
+      "spDefense": 80,
+      "speed": 130
+    },
+    "baseExpYield": 218,
+    "growthRate": "mediumFast",
+    "catchRate": 75,
+    "weight": 26
+  },
+  "m-chimecho": {
+    "id": 10306,
+    "name": "Mega Chimecho",
+    "types": [
+      "Psychic",
+      "Steel"
+    ],
+    "baseStats": {
+      "hp": 75,
+      "attack": 50,
+      "defense": 110,
+      "spAttack": 135,
+      "spDefense": 120,
+      "speed": 65
+    },
+    "baseExpYield": 149,
+    "growthRate": "fast",
+    "catchRate": 45,
+    "weight": 8
+  },
+  "m-absol z": {
+    "id": 10307,
+    "name": "Mega Absol Z",
+    "types": [
+      "Dark",
+      "Ghost"
+    ],
+    "baseStats": {
+      "hp": 65,
+      "attack": 154,
+      "defense": 60,
+      "spAttack": 75,
+      "spDefense": 60,
+      "speed": 151
+    },
+    "baseExpYield": 163,
+    "growthRate": "mediumSlow",
+    "catchRate": 30,
+    "weight": 49
+  },
+  "m-staraptor": {
+    "id": 10308,
+    "name": "Mega Staraptor",
+    "types": [
+      "Fighting",
+      "Flying"
+    ],
+    "baseStats": {
+      "hp": 85,
+      "attack": 140,
+      "defense": 100,
+      "spAttack": 60,
+      "spDefense": 90,
+      "speed": 110
+    },
+    "baseExpYield": 218,
+    "growthRate": "mediumSlow",
+    "catchRate": 45,
+    "weight": 50
+  },
+  "m-garchomp z": {
+    "id": 10309,
+    "name": "Mega Garchomp Z",
+    "types": [
+      "Dragon"
+    ],
+    "baseStats": {
+      "hp": 108,
+      "attack": 130,
+      "defense": 85,
+      "spAttack": 141,
+      "spDefense": 85,
+      "speed": 151
+    },
+    "baseExpYield": 270,
+    "growthRate": "slow",
+    "catchRate": 45,
+    "weight": 99
+  },
+  "m-lucario z": {
+    "id": 10310,
+    "name": "Mega Lucario Z",
+    "types": [
+      "Fighting",
+      "Steel"
+    ],
+    "baseStats": {
+      "hp": 70,
+      "attack": 100,
+      "defense": 70,
+      "spAttack": 164,
+      "spDefense": 70,
+      "speed": 151
+    },
+    "baseExpYield": 184,
+    "growthRate": "mediumSlow",
+    "catchRate": 45,
+    "weight": 49.4
+  },
+  "m-heatran": {
+    "id": 10311,
+    "name": "Mega Heatran",
+    "types": [
+      "Fire",
+      "Steel"
+    ],
+    "baseStats": {
+      "hp": 91,
+      "attack": 120,
+      "defense": 106,
+      "spAttack": 175,
+      "spDefense": 141,
+      "speed": 67
+    },
+    "baseExpYield": 270,
+    "growthRate": "slow",
+    "catchRate": 3,
+    "weight": 570
+  },
+  "m-darkrai": {
+    "id": 10312,
+    "name": "Mega Darkrai",
+    "types": [
+      "Dark"
+    ],
+    "baseStats": {
+      "hp": 70,
+      "attack": 120,
+      "defense": 130,
+      "spAttack": 165,
+      "spDefense": 130,
+      "speed": 85
+    },
+    "baseExpYield": 270,
+    "growthRate": "slow",
+    "catchRate": 3,
+    "weight": 240
+  },
+  "m-golurk": {
+    "id": 10313,
+    "name": "Mega Golurk",
+    "types": [
+      "Ground",
+      "Ghost"
+    ],
+    "baseStats": {
+      "hp": 89,
+      "attack": 159,
+      "defense": 105,
+      "spAttack": 70,
+      "spDefense": 105,
+      "speed": 55
+    },
+    "baseExpYield": 169,
+    "growthRate": "mediumFast",
+    "catchRate": 90,
+    "weight": 330
+  },
+  "m-meowstic": {
+    "id": 10314,
+    "name": "Mega Meowstic",
+    "types": [
+      "Psychic"
+    ],
+    "baseStats": {
+      "hp": 74,
+      "attack": 48,
+      "defense": 76,
+      "spAttack": 143,
+      "spDefense": 101,
+      "speed": 124
+    },
+    "baseExpYield": 163,
+    "growthRate": "mediumFast",
+    "catchRate": 75,
+    "weight": 10.1
+  },
+  "m-crabominable": {
+    "id": 10315,
+    "name": "Mega Crabominable",
+    "types": [
+      "Fighting",
+      "Ice"
+    ],
+    "baseStats": {
+      "hp": 97,
+      "attack": 157,
+      "defense": 122,
+      "spAttack": 62,
+      "spDefense": 107,
+      "speed": 33
+    },
+    "baseExpYield": 167,
+    "growthRate": "mediumFast",
+    "catchRate": 60,
+    "weight": 252.8
+  },
+  "m-golisopod": {
+    "id": 10316,
+    "name": "Mega Golisopod",
+    "types": [
+      "Bug",
+      "Steel"
+    ],
+    "baseStats": {
+      "hp": 75,
+      "attack": 150,
+      "defense": 175,
+      "spAttack": 70,
+      "spDefense": 120,
+      "speed": 40
+    },
+    "baseExpYield": 186,
+    "growthRate": "mediumFast",
+    "catchRate": 45,
+    "weight": 148
+  },
+  "m-magearna": {
+    "id": 10317,
+    "name": "Mega Magearna",
+    "types": [
+      "Steel",
+      "Fairy"
+    ],
+    "baseStats": {
+      "hp": 80,
+      "attack": 125,
+      "defense": 115,
+      "spAttack": 170,
+      "spDefense": 115,
+      "speed": 95
+    },
+    "baseExpYield": 120,
+    "growthRate": "slow",
+    "catchRate": 3,
+    "weight": 248.1
+  },
+  "m-magearna-o": {
+    "id": 10318,
+    "name": "Mega Magearna (Original)",
+    "types": [
+      "Steel",
+      "Fairy"
+    ],
+    "baseStats": {
+      "hp": 80,
+      "attack": 125,
+      "defense": 115,
+      "spAttack": 170,
+      "spDefense": 115,
+      "speed": 95
+    },
+    "baseExpYield": 120,
+    "growthRate": "slow",
+    "catchRate": 3,
+    "weight": 248.1
+  },
+  "m-zeraora": {
+    "id": 10319,
+    "name": "Mega Zeraora",
+    "types": [
+      "Electric"
+    ],
+    "baseStats": {
+      "hp": 88,
+      "attack": 157,
+      "defense": 75,
+      "spAttack": 147,
+      "spDefense": 80,
+      "speed": 153
+    },
+    "baseExpYield": 270,
+    "growthRate": "slow",
+    "catchRate": 3,
+    "weight": 44.5
+  },
+  "m-scovillain": {
+    "id": 10320,
+    "name": "Mega Scovillain",
+    "types": [
+      "Grass",
+      "Fire"
+    ],
+    "baseStats": {
+      "hp": 65,
+      "attack": 138,
+      "defense": 85,
+      "spAttack": 138,
+      "spDefense": 85,
+      "speed": 75
+    },
+    "baseExpYield": 170,
+    "growthRate": "mediumFast",
+    "catchRate": 75,
+    "weight": 22
+  },
+  "m-glimmora": {
+    "id": 10321,
+    "name": "Mega Glimmora",
+    "types": [
+      "Rock",
+      "Poison"
+    ],
+    "baseStats": {
+      "hp": 83,
+      "attack": 90,
+      "defense": 105,
+      "spAttack": 150,
+      "spDefense": 96,
+      "speed": 101
+    },
+    "baseExpYield": 184,
+    "growthRate": "mediumSlow",
+    "catchRate": 25,
+    "weight": 77
+  },
+  "m-tatsugiri": {
+    "id": 10322,
+    "name": "Mega Tatsugiri",
+    "types": [
+      "Dragon",
+      "Water"
+    ],
+    "baseStats": {
+      "hp": 68,
+      "attack": 65,
+      "defense": 90,
+      "spAttack": 135,
+      "spDefense": 125,
+      "speed": 92
+    },
+    "baseExpYield": 166,
+    "growthRate": "mediumSlow",
+    "catchRate": 100,
+    "weight": 24
+  },
+  "m-tatsugiri-droopy": {
+    "id": 10323,
+    "name": "Mega Tatsugiri (Droopy)",
+    "types": [
+      "Dragon",
+      "Water"
+    ],
+    "baseStats": {
+      "hp": 68,
+      "attack": 65,
+      "defense": 90,
+      "spAttack": 135,
+      "spDefense": 125,
+      "speed": 92
+    },
+    "baseExpYield": 166,
+    "growthRate": "mediumSlow",
+    "catchRate": 100,
+    "weight": 24
+  },
+  "m-tatsugiri-stretchy": {
+    "id": 10324,
+    "name": "Mega Tatsugiri (Stretchy)",
+    "types": [
+      "Dragon",
+      "Water"
+    ],
+    "baseStats": {
+      "hp": 68,
+      "attack": 65,
+      "defense": 90,
+      "spAttack": 135,
+      "spDefense": 125,
+      "speed": 92
+    },
+    "baseExpYield": 166,
+    "growthRate": "mediumSlow",
+    "catchRate": 100,
+    "weight": 24
+  },
+  "m-baxcalibur": {
+    "id": 10325,
+    "name": "Mega Baxcalibur",
+    "types": [
+      "Dragon",
+      "Ice"
+    ],
+    "baseStats": {
+      "hp": 115,
+      "attack": 175,
+      "defense": 117,
+      "spAttack": 105,
+      "spDefense": 101,
+      "speed": 87
+    },
+    "baseExpYield": 300,
+    "growthRate": "slow",
+    "catchRate": 10,
+    "weight": 315
+  },
+  "m-meowstic-f": {
+    "id": 10326,
+    "name": "Mega Meowstic (Female)",
+    "types": [
+      "Psychic"
+    ],
+    "baseStats": {
+      "hp": 74,
+      "attack": 48,
+      "defense": 76,
+      "spAttack": 143,
+      "spDefense": 101,
+      "speed": 124
+    },
+    "baseExpYield": 163,
+    "growthRate": "mediumFast",
+    "catchRate": 75,
+    "weight": 10.1
   }
 }

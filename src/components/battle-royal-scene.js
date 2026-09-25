@@ -18,6 +18,45 @@ import {
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
 import { MinigameRewardScreen, useMinigameClaim } from './minigame-reward.js'
 
+/**
+ * One fighter card: sprite, name, level and an HP bar. The active fighter and
+ * the latest opponent share it so the arena reads the same on both sides.
+ * @param {{ speciesKey: string, name: string, level?: number, hp: number, maxHp: number, down?: boolean, hit?: boolean, empty?: boolean }} props
+ */
+function RoyalFighter({ speciesKey, name, level, hp, maxHp, down, hit, empty }) {
+  if (empty) return jsx('div', { className: 'royal-fighter royal-empty', children: '?' })
+  const id = pokemonSpecies[speciesKey]?.id ?? 0,
+    ratio = maxHp > 0 ? Math.max(0, Math.min(1, hp / maxHp)) : 0
+  return jsxs('div', {
+    className: `royal-fighter${down ? ' down' : ''}${hit ? ' hit' : ''}`,
+    children: [
+      jsx('img', {
+        className: 'royal-sprite',
+        src: getPokemonSpriteUrl(id),
+        onError: /** @param {{ target: HTMLImageElement }} event */ (event) =>
+          (event.target.src = getPokemonSpriteFallbackUrl(id)),
+        alt: name,
+      }),
+      jsx('span', { className: 'royal-name', children: name }),
+      level != null && jsx('span', { className: 'royal-level', children: `Lv.${level}` }),
+      maxHp > 0 &&
+        jsxs('div', {
+          className: 'royal-hp',
+          children: [
+            jsx('span', {
+              className: 'royal-hp-fill',
+              style: { width: `${ratio * 100}%` },
+            }),
+            jsx('span', {
+              className: 'royal-hp-text',
+              children: `${Math.max(0, hp)}/${maxHp}`,
+            }),
+          ],
+        }),
+    ],
+  })
+}
+
 export function BattleRoyalScene() {
   const { state, dispatch } = useGame(),
     [squad, setSquad] = React.useState(() =>
@@ -32,8 +71,9 @@ export function BattleRoyalScene() {
     ),
     [log, setLog] = React.useState('Ring the bell to face the first challenger.'),
     [lastBattle, setLastBattle] = React.useState(
-      /** @type {{ enemy: string, enemySpecies: string, won: boolean } | null} */ (null)
+      /** @type {{ ally: any, enemy: any, won: boolean, turns: number } | null} */ (null)
     ),
+    [hit, setHit] = React.useState(/** @type {'ally' | 'enemy' | null} */ (null)),
     [result, setResult] = React.useState(
       /** @type {ReturnType<typeof battleRoyalPrize> | null} */ (null)
     ),
@@ -42,7 +82,11 @@ export function BattleRoyalScene() {
 
   const baseLevel = Math.max(...squad.map((member) => member.level), 5),
     active = activeIndex >= 0 ? squad[activeIndex] : null,
-    partyAlive = squad.some((member) => member.currentHp > 0)
+    partyAlive = squad.some((member) => member.currentHp > 0),
+    // The arena keeps the pair that just fought until the next bell, so a
+    // knockout is never wiped from the screen before the player reads it.
+    arenaAlly = lastBattle?.ally ?? active,
+    arenaEnemy = lastBattle?.enemy ?? null
 
   function fight() {
     if (phase !== 'ready' || !active) return
@@ -50,13 +94,32 @@ export function BattleRoyalScene() {
       ally = nextSquad[activeIndex],
       info = battleRoyalOpponent(wave + 1, baseLevel),
       enemy = createOpponent(info.speciesKey, info.level),
-      outcome = simulateBattle(ally, enemy)
-    setLastBattle({ enemy: info.name, enemySpecies: info.speciesKey, won: outcome.won })
+      outcome = simulateBattle(ally, enemy),
+      snapshot = /** @param {any} pokemon */ (pokemon) => ({
+        speciesKey: pokemon.speciesKey,
+        name: pokemon.name,
+        level: pokemon.level,
+        hp: Math.max(0, pokemon.currentHp),
+        maxHp: pokemon.maxHp,
+      })
+    setHit(outcome.won ? 'enemy' : 'ally')
+    window.setTimeout(() => setHit(null), 550)
     if (outcome.won) {
-      const clearedWaves = wave + 1
-      setSquad(healSquad(nextSquad))
+      const clearedWaves = wave + 1,
+        healed = healSquad(nextSquad)
+      setSquad(healed)
       setWave(clearedWaves)
-      setLog(`Wave ${clearedWaves} cleared! The party recovers a little.`)
+      setLastBattle({
+        ally: snapshot(healed[activeIndex]),
+        enemy: snapshot(enemy),
+        won: true,
+        turns: outcome.turns,
+      })
+      setLog(
+        `Wave ${clearedWaves} cleared in ${outcome.turns} turn${
+          outcome.turns === 1 ? '' : 's'
+        }! The party recovers a little.`
+      )
       setPhase('between')
       return
     }
@@ -65,10 +128,15 @@ export function BattleRoyalScene() {
       (member, index) => index !== activeIndex && member.currentHp > 0
     )
     setSquad(nextSquad)
+    setLastBattle({ ally: snapshot(ally), enemy: snapshot(enemy), won: false, turns: outcome.turns })
     if (nextIndex === -1) finish(wave)
     else {
       setActiveIndex(nextIndex)
-      setLog(`${ally.name} went down. ${nextSquad[nextIndex].name} steps into the ring!`)
+      setLog(
+        `${ally.name} was knocked out after ${outcome.turns} turn${
+          outcome.turns === 1 ? '' : 's'
+        }. ${nextSquad[nextIndex].name} steps into the ring!`
+      )
       setPhase('ready')
     }
   }
@@ -121,80 +189,115 @@ export function BattleRoyalScene() {
               }),
             })
           : [
-          jsxs('div', {
-            className: 'royal-arena',
-            children: [
-              active &&
+              jsxs('div', {
+                className: 'royal-arena',
+                children: [
+                  arenaAlly
+                    ? jsx(RoyalFighter, {
+                        speciesKey: arenaAlly.speciesKey,
+                        name: arenaAlly.name,
+                        level: arenaAlly.level,
+                        hp: arenaAlly.currentHp ?? arenaAlly.hp,
+                        maxHp: arenaAlly.maxHp,
+                        down: !!(lastBattle && !lastBattle.won && lastBattle.ally === arenaAlly),
+                        hit: hit === 'ally',
+                      })
+                    : jsx(RoyalFighter, { speciesKey: '', name: '', hp: 0, maxHp: 0, empty: true }),
+                  jsx('span', { className: 'royal-versus', children: 'VS' }),
+                  jsx(RoyalFighter, {
+                    speciesKey: arenaEnemy?.speciesKey ?? '',
+                    name: arenaEnemy?.name ?? '',
+                    level: arenaEnemy?.level,
+                    hp: arenaEnemy?.hp ?? 0,
+                    maxHp: arenaEnemy?.maxHp ?? 0,
+                    down: !!(arenaEnemy && lastBattle?.won),
+                    hit: hit === 'enemy',
+                    empty: !arenaEnemy,
+                  }),
+                ],
+              }),
+              lastBattle &&
                 jsxs('div', {
-                  className: 'royal-fighter',
+                  className: `royal-result${lastBattle.won ? ' win' : ' loss'}`,
                   children: [
-                    jsx('img', {
-                      className: 'royal-sprite',
-                      src: getPokemonSpriteUrl(
-                        pokemonSpecies[active.speciesKey]?.id ?? 0
-                      ),
-                      onError: /** @param {{ target: HTMLImageElement }} event */ (event) =>
-                        (event.target.src = getPokemonSpriteFallbackUrl(
-                          pokemonSpecies[active.speciesKey]?.id ?? 0
-                        )),
-                      alt: active.name,
+                    jsx('span', {
+                      className: 'royal-result-title',
+                      children: lastBattle.won
+                        ? `Wave ${wave} cleared!`
+                        : `${lastBattle.ally.name} was knocked out!`,
                     }),
-                    jsx('span', { className: 'royal-name', children: active.name }),
+                    jsx('span', {
+                      className: 'royal-result-sub',
+                      children: `${lastBattle.turns} turn${
+                        lastBattle.turns === 1 ? '' : 's'
+                      } \u00b7 ${lastBattle.enemy.name} was left at ${lastBattle.enemy.hp}/${
+                        lastBattle.enemy.maxHp
+                      } HP`,
+                    }),
                   ],
                 }),
-              jsx('span', { className: 'royal-versus', children: 'VS' }),
-              lastBattle
-                ? jsxs('div', {
-                    className: 'royal-fighter',
-                    children: [
-                      jsx('img', {
-                        className: `royal-sprite${lastBattle.won ? ' down' : ''}`,
-                        src: getPokemonSpriteUrl(
-                          pokemonSpecies[lastBattle.enemySpecies]?.id ?? 0
-                        ),
-                        onError: /** @param {{ target: HTMLImageElement }} event */ (event) =>
-                          (event.target.src = getPokemonSpriteFallbackUrl(
-                            pokemonSpecies[lastBattle.enemySpecies]?.id ?? 0
-                          )),
-                        alt: lastBattle.enemy,
-                      }),
-                      jsx('span', { className: 'royal-name', children: lastBattle.enemy }),
-                    ],
-                  })
-                : jsx('div', { className: 'royal-fighter royal-empty', children: '?' }),
-            ],
-          }),
-          jsx('div', {
-            className: 'royal-party',
-            children: squad.map((member, index) =>
-              jsxs(
-                'div',
-                {
-                  className: `royal-member${member.currentHp <= 0 ? ' fainted' : ''}${
-                    index === activeIndex ? ' active' : ''
-                  }`,
-                  children: [
-                    jsx('span', { className: 'royal-member-name', children: member.name }),
-                    jsxs('span', {
-                      className: 'royal-member-hp',
+              jsxs('div', {
+                className: 'royal-party',
+                children: squad.map((member, index) =>
+                  jsxs(
+                    'div',
+                    {
+                      className: `royal-member${member.currentHp <= 0 ? ' fainted' : ''}${
+                        index === activeIndex ? ' active' : ''
+                      }`,
                       children: [
-                        jsx('span', {
-                          className: 'royal-hp-fill',
-                          style: {
-                            width: `${Math.max(0, (member.currentHp / member.maxHp) * 100)}%`,
-                          },
+                        jsx('img', {
+                          className: 'royal-member-sprite',
+                          src: getPokemonSpriteUrl(
+                            pokemonSpecies[member.speciesKey]?.id ?? 0
+                          ),
+                          onError: /** @param {{ target: HTMLImageElement }} event */ (
+                            event
+                          ) =>
+                            (event.target.src = getPokemonSpriteFallbackUrl(
+                              pokemonSpecies[member.speciesKey]?.id ?? 0
+                            )),
+                          alt: member.name,
                         }),
-                        `${Math.max(0, member.currentHp)}/${member.maxHp}`,
+                        jsxs('span', {
+                          className: 'royal-member-info',
+                          children: [
+                            jsxs('span', {
+                              className: 'royal-member-name',
+                              children: [
+                                member.name,
+                                member.currentHp <= 0 &&
+                                  jsx('span', { className: 'royal-ko', children: 'KO' }),
+                                index === activeIndex &&
+                                  member.currentHp > 0 &&
+                                  jsx('span', { className: 'royal-in', children: 'IN' }),
+                              ],
+                            }),
+                            jsxs('span', {
+                              className: 'royal-member-hp',
+                              children: [
+                                jsx('span', {
+                                  className: 'royal-hp-fill',
+                                  style: {
+                                    width: `${Math.max(
+                                      0,
+                                      (member.currentHp / member.maxHp) * 100
+                                    )}%`,
+                                  },
+                                }),
+                                `${Math.max(0, member.currentHp)}/${member.maxHp}`,
+                              ],
+                            }),
+                          ],
+                        }),
                       ],
-                    }),
-                  ],
-                },
-                `${member.name}-${index}`
-              )
-            ),
-          }),
-          jsx('div', { className: 'minigame-scene-log', children: log }),
-        ],
+                    },
+                    `${member.name}-${index}`
+                  )
+                ),
+              }),
+              jsx('div', { className: 'minigame-scene-log', children: log }),
+            ],
       }),
       jsxs('div', {
         className: 'minigame-scene-footer',

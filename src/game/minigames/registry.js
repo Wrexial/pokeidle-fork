@@ -15,7 +15,7 @@ import { MATCH3_COST, MATCH3_MOVES } from './match3.js'
 import { MEMORY_COST, MEMORY_PAIRS } from './memory.js'
 import { WHACK_COST, WHACK_DURATION_MS } from './whack.js'
 import { MUSICAL_COST, MUSICAL_NOTES } from './musical.js'
-import { PICNIC_COST, PICNIC_PIECES } from './picnic.js'
+import { PICNIC_COST, PICNIC_PICKS } from './picnic.js'
 import { POKEBALL_FACTORY_COST, FACTORY_SIZE } from './pokeball-factory.js'
 import { mapData } from '../../data/gameData.js'
 import { VOLTORB_FLIP_COST } from './voltorb-flip.js'
@@ -249,7 +249,7 @@ export const MINIGAME_INFO = {
     title: 'Picnic',
     cost: PICNIC_COST,
     action: 'START A PICNIC',
-    hint: `Drop each ingredient as it swings over the plate \u2014 land it near the middle for the most points. Build ${PICNIC_PIECES} layers without dropping one off the edge. Entry is $${PICNIC_COST.toLocaleString()}.`,
+    hint: `Pick ${PICNIC_PICKS} fillings \u2014 their types decide what the sandwich lures out. Drop each onto the bread (Bread bookends) without toppling it, then a Pokemon of that type appears with tripled shiny odds. Entry is $${PICNIC_COST.toLocaleString()}.`,
   },
   pokeballFactory: {
     title: 'Pok\u00e9 Ball Factory',

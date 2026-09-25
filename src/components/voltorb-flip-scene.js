@@ -1,6 +1,7 @@
 // Unova's Voltorb Flip, played as a full-stage scene while the reducer is in
 // the `voltorbFlip` phase. Each row and column advertises its Voltorb count and
-// point total; flipping 2s and 3s banks coins, and a Voltorb ends the run.
+// point total; flipping 2s and 3s banks coins, and a Voltorb ends the run. When
+// the run ends every hidden Voltorb is revealed so the board can be read back.
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
@@ -37,11 +38,15 @@ export function VoltorbFlipScene() {
     [exploding, setExploding] = React.useState(false),
     collect = useMinigameClaim(dispatch)
 
-  const exploded = boardExploded(board),
-    cleared = boardCleared(board),
-    hints = boardHints(board),
+  const hints = boardHints(board),
     boardCoins = voltorbBoardCoins(board),
-    prize = voltorbFlipPrize(banked, maxLevel)
+    prize = voltorbFlipPrize(banked, maxLevel),
+    // Once the run is over, lay every hidden Voltorb face up so the board can
+    // be read back.
+    revealed = phase === 'done' || (phase === 'exploded' && !exploding),
+    finished = phase === 'exploded' || phase === 'done',
+    hasPrize = banked > 0 || prize.items.length > 0,
+    rewardVisible = showReward
 
   /** @param {number} index */
   function flip(index) {
@@ -68,7 +73,7 @@ export function VoltorbFlipScene() {
     setBoard((current) => toggleVoltorbMark(current, index))
   }
 
-  // Hold the board on screen for the blast before the reward summary takes over.
+  // Hold the board on screen for the blast, then leave every bomb revealed.
   React.useEffect(() => {
     if (!exploding) return
     const timer = setTimeout(() => setExploding(false), 800)
@@ -85,23 +90,22 @@ export function VoltorbFlipScene() {
     setPhase('playing')
   }
 
-  const finished = phase === 'exploded' || phase === 'done',
-    rewardVisible = (finished && !exploding) || showReward,
-    hasPrize = banked > 0 || prize.items.length > 0
+  /** End the run (revealing the board) so the player can cash out. */
+  function endRun() {
+    if (phase === 'playing' || phase === 'cleared') setPhase('done')
+  }
 
-  function leave() {
-    if (rewardVisible) {
-      collect(
-        { type: 'END_MINIGAME' },
-        hasPrize ? { type: 'CLAIM_MINIGAME_REWARD', payload: prize } : null
-      )
-      return
-    }
-    if (hasPrize) {
-      setShowReward(true)
-      return
-    }
-    collect({ type: 'END_MINIGAME' })
+  function collectReward() {
+    collect(
+      { type: 'END_MINIGAME' },
+      hasPrize ? { type: 'CLAIM_MINIGAME_REWARD', payload: prize } : null
+    )
+  }
+
+  /** Show the reward screen (or leave outright when there is nothing to pay). */
+  function finishRun() {
+    if (hasPrize) setShowReward(true)
+    else collectReward()
   }
 
   return jsxs('div', {
@@ -129,7 +133,7 @@ export function VoltorbFlipScene() {
         children: rewardVisible
           ? jsx(MinigameRewardScreen, {
               prize,
-              onCollect: leave,
+              onCollect: collectReward,
               summary: jsx('span', {
                 className: 'voltorb-summary-score',
                 children: `Banked $${banked.toLocaleString()}`,
@@ -137,7 +141,7 @@ export function VoltorbFlipScene() {
             })
           : [
           jsx('div', {
-            className: `voltorb-board${exploding ? ' exploded' : ''}`,
+            className: `voltorb-board${exploding ? ' exploded' : ''}${revealed ? ' revealed' : ''}`,
             children: [
               jsx('div', { className: 'voltorb-corner' }),
               ...hints.cols.map((hint, col) =>
@@ -176,13 +180,16 @@ export function VoltorbFlipScene() {
                 ),
                 ...Array.from({ length: VOLTORB_SIZE }, (_, col) => {
                   const index = row * VOLTORB_SIZE + col,
-                    cell = board.cells[index]
+                    cell = board.cells[index],
+                    showBomb = cell.kind === 'voltorb' && (cell.flipped || revealed)
                   return jsx(
                     'button',
                     {
                       className: `voltorb-tile${cell.flipped ? ` flipped ${cell.kind}` : ''}${
-                        cell.marked && !cell.flipped ? ' marked' : ''
-                      }${index === explodedIndex ? ' exploding' : ''}`,
+                        showBomb && !cell.flipped ? ' revealed voltorb' : ''
+                      }${cell.marked && !cell.flipped && !revealed ? ' marked' : ''}${
+                        index === explodedIndex && exploding ? ' exploding' : ''
+                      }`,
                       disabled: phase !== 'playing' || cell.flipped,
                       onClick: () => flip(index),
                       onContextMenu: (/** @type {React.MouseEvent} */ event) =>
@@ -190,10 +197,13 @@ export function VoltorbFlipScene() {
                       children: [
                         cell.flipped
                           ? TILE_LABEL[cell.kind]
-                          : cell.marked
-                            ? jsx('span', { className: 'voltorb-mark', children: '\u26a1' })
-                            : '',
+                          : showBomb
+                            ? jsx('span', { className: 'voltorb-revealed', children: '\u26a1' })
+                            : cell.marked
+                              ? jsx('span', { className: 'voltorb-mark', children: '\u26a1' })
+                              : '',
                         index === explodedIndex &&
+                          exploding &&
                           jsx('span', { className: 'voltorb-boom', children: '\u{1f4a5}' }),
                       ],
                     },
@@ -205,31 +215,41 @@ export function VoltorbFlipScene() {
           }),
           jsx('div', {
             className: 'minigame-scene-log',
-            children:
-              phase === 'cleared'
-                ? `Level ${board.level} cleared! $${voltorbBoardCoins(board).toLocaleString()} banked.`
-                : 'Left-click a tile to flip it, right-click to mark a suspected Voltorb.',
+            children: rewardVisible
+              ? ''
+              : revealed
+                ? 'The run is over \u2014 every Voltorb is revealed. Collect your coins.'
+                : phase === 'cleared'
+                  ? `Level ${board.level} cleared! $${voltorbBoardCoins(board).toLocaleString()} banked.`
+                  : 'Left-click a tile to flip it, right-click to mark a suspected Voltorb.',
           }),
         ],
       }),
       jsxs('div', {
         className: 'minigame-scene-footer',
-        children: [
-          !rewardVisible &&
-            jsx('button', {
-              className: 'move-panel-btn cancel',
-              onClick: leave,
-              children: hasPrize ? 'CASH OUT' : 'LEAVE',
-            }),
-          !finished &&
-            jsx('button', {
-              className: 'move-panel-btn confirm',
-              disabled: phase !== 'cleared',
-              onClick: nextLevel,
-              children:
-                board.level >= VOLTORB_MAX_LEVEL ? 'FINISH RUN' : 'NEXT LEVEL',
-            }),
-        ],
+        children: rewardVisible
+          ? []
+          : finished
+            ? [
+                jsx('button', {
+                  className: 'move-panel-btn confirm',
+                  onClick: finishRun,
+                  children: hasPrize ? 'COLLECT' : 'LEAVE',
+                }),
+              ]
+            : [
+                jsx('button', {
+                  className: 'move-panel-btn cancel',
+                  onClick: endRun,
+                  children: hasPrize ? 'CASH OUT' : 'LEAVE',
+                }),
+                jsx('button', {
+                  className: 'move-panel-btn confirm',
+                  disabled: phase !== 'cleared',
+                  onClick: nextLevel,
+                  children: board.level >= VOLTORB_MAX_LEVEL ? 'FINISH RUN' : 'NEXT LEVEL',
+                }),
+              ],
       }),
     ],
   })

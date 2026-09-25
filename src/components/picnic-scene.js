@@ -1,21 +1,28 @@
 // Paldea's Picnic, played as a full-stage scene while the reducer is in the
-// `picnic` phase. The next ingredient swings over the plate; drop it near the
-// middle to score, but drop it too far off and the sandwich topples.
+// `picnic` phase. Pick three fillings (their types set the sandwich's type),
+// drop them onto the bread without toppling it, then a wild Pokemon of that
+// type appears with tripled shiny odds.
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
+import { completedGenerations, mapData, pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
+import { createBattlePokemon } from '../game/combat.js'
 import {
+  PICNIC_BREAD,
   PICNIC_INGREDIENTS,
-  PICNIC_PIECES,
+  PICNIC_PICKS,
+  PICNIC_SHINY_MULTIPLIER,
   PICNIC_SWING_MS,
+  ingredientById,
   picnicDropScore,
-  picnicIngredientFor,
-  picnicPrize,
+  rollPicnicEncounter,
+  sandwichType,
 } from '../game/minigames.js'
-import { MinigameRewardScreen, useMinigameClaim } from './minigame-reward.js'
+import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
+import { checkShinyOdds, shinyOddsForSpecies } from '../game/progression.js'
 
-/** Colours cycled through the stacked ingredients. */
+/** Pastel fill colours cycled through the stacked layers. */
 const PICNIC_COLORS = [
   '#e8c98a',
   '#7cc45a',
@@ -31,27 +38,37 @@ const PICNIC_COLORS = [
 
 export function PicnicScene() {
   const { state, dispatch } = useGame(),
+    region = mapData[state.currentLocation]?.region ?? 'paldea',
+    [stage, setStage] = React.useState(
+      /** @type {'choose' | 'stack' | 'reward' | 'failed'} */ ('choose')
+    ),
+    [picks, setPicks] = React.useState(/** @type {string[]} */ ([])),
     [position, setPosition] = React.useState(-0.5),
-    [drops, setDrops] = React.useState(
-      () => /** @type {{ ingredient: string, offset: number, points: number, grade: string }[]} */ ([])
+    [layers, setLayers] = React.useState(
+      () => /** @type {{ ingredientId: string, offset: number, grade: string }[]} */ ([])
     ),
     [score, setScore] = React.useState(0),
     [lastGrade, setLastGrade] = React.useState(''),
-    [prize, setPrize] = React.useState(
-      () => /** @type {ReturnType<typeof picnicPrize> | null} */ (null)
+    [pending, setPending] = React.useState(
+      () =>
+        /** @type {{ enemy: any, speciesKey: string, level: number, isShiny: boolean, type: string } | null} */ (
+          null
+        )
     ),
-    collect = useMinigameClaim(dispatch),
-    startRef = React.useRef(Date.now()),
     startedRef = React.useRef(false),
+    startRef = React.useRef(Date.now()),
     posRef = React.useRef(-0.5),
-    scoreRef = React.useRef(0),
-    dropsRef = React.useRef(
-      /** @type {{ ingredient: string, offset: number, points: number, grade: string }[]} */ ([])
+    layersRef = React.useRef(
+      /** @type {{ ingredientId: string, offset: number, grade: string }[]} */ ([])
     ),
+    scoreRef = React.useRef(0),
     finishedRef = React.useRef(false)
 
+  // Sweep the next filling back and forth over the plate while stacking.
   React.useEffect(() => {
+    if (stage !== 'stack') return
     startRef.current = Date.now()
+    startedRef.current = false
     const tick = setInterval(() => {
       if (finishedRef.current) return
       const elapsed = Date.now() - startRef.current,
@@ -62,42 +79,116 @@ export function PicnicScene() {
       setPosition(next)
     }, 30)
     return () => clearInterval(tick)
-  }, [])
+  }, [stage])
 
-  /** @param {boolean} toppled */
-  function finish(toppled) {
-    finishedRef.current = true
-    setPrize(picnicPrize(scoreRef.current, toppled))
+  /** @param {string} id */
+  function chooseIngredient(id) {
+    if (stage !== 'choose') return
+    setPicks((current) => {
+      if (current.includes(id)) return current.filter((entry) => entry !== id)
+      if (current.length >= PICNIC_PICKS) return current
+      return [...current, id]
+    })
+  }
+
+  function build() {
+    if (stage !== 'choose' || picks.length !== PICNIC_PICKS) return
+    layersRef.current = [{ ingredientId: PICNIC_BREAD.id, offset: 0, grade: 'perfect' }]
+    scoreRef.current = 0
+    finishedRef.current = false
+    setLayers([...layersRef.current])
+    setScore(0)
+    setStage('stack')
+  }
+
+  function buildReward() {
+    const type = sandwichType(picks)
+    if (!type) {
+      setStage('failed')
+      return
+    }
+    const party = state.party ?? [],
+      averageLevel =
+        party.length > 0
+          ? Math.round(party.reduce((sum, member) => sum + member.level, 0) / party.length)
+          : 20,
+      baseLevel = Math.max(5, Math.min(75, averageLevel + Math.floor(scoreRef.current / 150))),
+      encounter = rollPicnicEncounter(type, region, baseLevel)
+    if (!encounter) {
+      setStage('failed')
+      return
+    }
+    const completedGenerationSet = completedGenerations(state.pokedexCaught),
+      isShiny = checkShinyOdds(
+        Math.max(
+          1,
+          Math.round(
+            shinyOddsForSpecies(encounter.speciesKey, completedGenerationSet) /
+              PICNIC_SHINY_MULTIPLIER
+          )
+        )
+      ),
+      enemy = createBattlePokemon(encounter.speciesKey, encounter.level, {
+        isShiny,
+        wild: true,
+      })
+    // Flags this as a minigame find so the battle offers a manual catch.
+    enemy.fromActivity = true
+    setPending({
+      enemy,
+      speciesKey: encounter.speciesKey,
+      level: encounter.level,
+      isShiny,
+      type,
+    })
+    setStage('reward')
   }
 
   function drop() {
-    if (finishedRef.current || prize || !startedRef.current) return
+    if (stage !== 'stack' || finishedRef.current || !startedRef.current) return
+    const placedFillings = layersRef.current.filter(
+        (layer) => layer.ingredientId !== PICNIC_BREAD.id
+      ).length,
+      ingredientId = picks[placedFillings]
+    if (!ingredientId) return
     const offset = posRef.current,
-      result = picnicDropScore(offset),
-      entry = {
-        ingredient: picnicIngredientFor(dropsRef.current.length),
-        offset,
-        points: result.points,
-        grade: result.grade,
-      }
-    dropsRef.current = [...dropsRef.current, entry]
+      result = picnicDropScore(offset)
+    layersRef.current = [...layersRef.current, { ingredientId, offset, grade: result.grade }]
     scoreRef.current += result.points
-    setDrops(dropsRef.current)
+    setLayers([...layersRef.current])
     setScore(scoreRef.current)
     setLastGrade(result.grade)
-    if (result.topple) finish(true)
-    else if (dropsRef.current.length >= PICNIC_PIECES) finish(false)
+    if (result.topple) {
+      finishedRef.current = true
+      setStage('failed')
+      return
+    }
+    if (placedFillings + 1 >= PICNIC_PICKS) {
+      // Cap the sandwich with the top slice of Bread.
+      layersRef.current = [
+        ...layersRef.current,
+        { ingredientId: PICNIC_BREAD.id, offset: 0, grade: 'perfect' },
+      ]
+      setLayers([...layersRef.current])
+      finishedRef.current = true
+      buildReward()
+    }
+  }
+
+  function fight() {
+    if (!pending) return
+    dispatch({ type: 'MARK_SEEN', payload: { speciesKey: pending.speciesKey } })
+    dispatch({ type: 'START_ENCOUNTER', payload: { enemy: pending.enemy } })
   }
 
   function leave() {
-    collect(
-      { type: 'END_MINIGAME' },
-      prize ? { type: 'CLAIM_MINIGAME_REWARD', payload: prize } : null
-    )
+    dispatch({ type: 'END_MINIGAME' })
   }
 
-  const nextIngredient = picnicIngredientFor(drops.length),
-    nextColor = PICNIC_COLORS[drops.length % PICNIC_COLORS.length]
+  const placedFillings = layers.filter((layer) => layer.ingredientId !== PICNIC_BREAD.id).length,
+    nextIngredient = stage === 'stack' ? ingredientById(picks[placedFillings]) : null,
+    previewType = sandwichType(picks),
+    spawnSpecies = pending ? pokemonSpecies[pending.speciesKey] : null
 
   return jsxs('div', {
     className: 'minigame-scene picnic-scene',
@@ -109,83 +200,224 @@ export function PicnicScene() {
           jsx('span', { className: 'minigame-scene-title', children: 'Picnic' }),
           jsxs('span', {
             className: 'minigame-scene-tally',
-            children: [
-              `Score ${score}`,
-              ' \u00b7 ',
-              drops.length >= PICNIC_PIECES
-                ? 'Full sandwich'
-                : lastGrade
-                  ? `Last: ${lastGrade}`
-                  : `Next: ${nextIngredient}`,
-            ],
+            children:
+              stage === 'choose'
+                ? `${picks.length}/${PICNIC_PICKS} picked`
+                : stage === 'stack'
+                  ? `Score ${score} \u00b7 Stack ${placedFillings}/${PICNIC_PICKS}`
+                  : stage === 'reward'
+                    ? `${previewType} sandwich`
+                    : (lastGrade === 'topple' ? 'The stack toppled!' : 'No Pokemon'),
           }),
         ],
       }),
       jsx('div', {
         className: 'minigame-scene-body',
-        children: prize
-          ? jsx(MinigameRewardScreen, {
-              prize,
-              onCollect: leave,
-              summary: jsx('span', {
-                className: 'picnic-summary',
-                children: `Stacked ${drops.length}/${PICNIC_PIECES} · ${score} points`,
-              }),
-            })
-          : jsxs('div', {
-              className: 'picnic-board',
-              children: [
-                jsx('div', {
-                  className: 'picnic-swing',
-                  children: jsxs('span', {
-                    className: 'picnic-piece',
-                    style: {
-                      left: `${(position + 0.5) * 100}%`,
-                      background: nextColor,
-                    },
-                    children: nextIngredient,
+        children:
+          stage === 'choose'
+            ? jsxs('div', {
+                className: 'picnic-choose',
+                children: [
+                  jsxs('div', {
+                    className: 'picnic-request',
+                    children: [
+                      'Pick ',
+                      jsx('strong', { children: PICNIC_PICKS }),
+                      ' fillings \u2014 their types lure out the Pokemon.',
+                    ],
                   }),
-                }),
-                jsxs('div', {
-                  className: 'picnic-stack',
-                  children: [
-                    jsx('div', { className: 'picnic-plate' }),
-                    ...drops.map((entry, index) =>
-                      jsx(
-                        'span',
+                  jsx('div', {
+                    className: 'picnic-ingredients',
+                    children: PICNIC_INGREDIENTS.map((ingredient) => {
+                      const picked = picks.includes(ingredient.id)
+                      return jsxs(
+                        'button',
                         {
-                          className: `picnic-layer grade-${entry.grade}`,
-                          style: {
-                            left: `${50 + entry.offset * 100}%`,
-                            bottom: `${8 + index * 15}px`,
-                            background: PICNIC_COLORS[index % PICNIC_COLORS.length],
-                          },
-                          title: `${entry.ingredient} +${entry.points}`,
+                          className: `picnic-ingredient${picked ? ' picked' : ''}`,
+                          onClick: () => chooseIngredient(ingredient.id),
+                          'aria-pressed': picked,
+                          children: [
+                            jsx('span', {
+                              className: 'picnic-ingredient-emoji',
+                              children: ingredient.emoji,
+                            }),
+                            jsx('span', {
+                              className: 'picnic-ingredient-name',
+                              children: ingredient.name,
+                            }),
+                            jsx('span', {
+                              className: `type-badge type-${ingredient.type.toLowerCase()}`,
+                              children: ingredient.type,
+                            }),
+                          ],
                         },
-                        index
+                        ingredient.id
                       )
-                    ),
+                    }),
+                  }),
+                  jsx('div', {
+                    className: 'picnic-type-preview',
+                    children: previewType
+                      ? jsxs('span', {
+                          children: [
+                            'Sandwich type: ',
+                            jsx('strong', { children: previewType }),
+                          ],
+                        })
+                      : 'Pick at least one filling.',
+                  }),
+                ],
+              })
+            : stage === 'stack'
+              ? jsxs('div', {
+                  className: 'picnic-board',
+                  children: [
+                    jsx('div', {
+                      className: 'picnic-swing',
+                      children: nextIngredient
+                        ? jsxs('span', {
+                            className: 'picnic-piece',
+                            style: { left: `${(position + 0.5) * 100}%` },
+                            children: [nextIngredient.emoji, ' ', nextIngredient.name],
+                          })
+                        : null,
+                    }),
+                    jsxs('div', {
+                      className: 'picnic-stack',
+                      children: [
+                        jsx('div', { className: 'picnic-plate' }),
+                        ...layers.map((layer, index) => {
+                          const ingredient = ingredientById(layer.ingredientId)
+                          return jsx(
+                            'span',
+                            {
+                              className: `picnic-layer${ingredient?.id === PICNIC_BREAD.id ? ' bread' : ''} grade-${layer.grade}`,
+                              style: {
+                                left: `${50 + layer.offset * 100}%`,
+                                bottom: `${8 + index * 15}px`,
+                                background:
+                                  ingredient?.id === PICNIC_BREAD.id
+                                    ? '#e8c98a'
+                                    : PICNIC_COLORS[index % PICNIC_COLORS.length],
+                              },
+                              title: `${ingredient?.name ?? layer.ingredientId} +${picnicDropScore(layer.offset).points}`,
+                              children: ingredient?.emoji,
+                            },
+                            index
+                          )
+                        }),
+                      ],
+                    }),
+                    jsx('button', {
+                      className: 'picnic-drop-btn',
+                      onClick: drop,
+                      children: 'DROP',
+                    }),
                   ],
-                }),
-                jsx('button', {
-                  className: 'picnic-drop-btn',
-                  disabled: !!prize,
-                  onPointerDown: drop,
-                  children: 'DROP',
-                }),
-              ],
-            }),
+                })
+              : stage === 'reward' && pending && spawnSpecies
+                ? jsxs('div', {
+                    className: `picnic-spawn${pending.isShiny ? ' shiny' : ''}`,
+                    children: [
+                      jsx('img', {
+                        className: 'picnic-spawn-sprite',
+                        src: getPokemonSpriteUrl(spawnSpecies.id, false, pending.isShiny),
+                        onError: /** @param {{ target: HTMLImageElement }} event */ (event) =>
+                          (event.target.src = getPokemonSpriteFallbackUrl(
+                            spawnSpecies.id,
+                            false,
+                            pending.isShiny
+                          )),
+                        alt: spawnSpecies.name,
+                      }),
+                      jsxs('span', {
+                        className: 'picnic-spawn-name',
+                        children: [
+                          pending.isShiny ? '\u2605 ' : '',
+                          spawnSpecies.name,
+                        ],
+                      }),
+                      jsx('span', {
+                        className: 'picnic-spawn-level',
+                        children: `Lv.${pending.level}`,
+                      }),
+                      jsx('div', {
+                        className: 'picnic-spawn-types',
+                        children: (spawnSpecies.types ?? []).map((type) =>
+                          jsx(
+                            'span',
+                            {
+                              className: `type-badge type-${type.toLowerCase()}`,
+                              children: type,
+                            },
+                            type
+                          )
+                        ),
+                      }),
+                      jsxs('span', {
+                        className: 'picnic-spawn-odds',
+                        children: [
+                          `Shiny odds \u00d7${PICNIC_SHINY_MULTIPLIER}`,
+                          ' \u00b7 ',
+                          `${pending.type} sandwich`,
+                        ],
+                      }),
+                    ],
+                  })
+                : jsx('div', {
+                    className: 'picnic-failed',
+                    children: lastGrade === 'topple'
+                      ? 'The sandwich toppled and the Pokemon slipped away.'
+                      : 'Nothing turned up for this sandwich.',
+                  }),
       }),
-      jsxs('div', {
+      jsx('div', {
         className: 'minigame-scene-footer',
-        children: [
-          !prize &&
-            jsx('button', {
-              className: 'move-panel-btn cancel',
-              onClick: leave,
-              children: 'LEAVE',
-            }),
-        ],
+        children:
+          stage === 'choose'
+            ? jsxs('div', {
+                className: 'activity-actions',
+                children: [
+                  jsx('button', {
+                    className: 'move-panel-btn confirm',
+                    disabled: picks.length !== PICNIC_PICKS,
+                    onClick: build,
+                    children: 'BUILD',
+                  }),
+                  jsx('button', {
+                    className: 'move-panel-btn cancel',
+                    onClick: leave,
+                    children: 'LEAVE',
+                  }),
+                ],
+              })
+            : stage === 'stack'
+              ? jsx('button', {
+                  className: 'move-panel-btn cancel',
+                  onClick: leave,
+                  children: 'LEAVE',
+                })
+              : stage === 'reward'
+                ? jsxs('div', {
+                    className: 'activity-actions',
+                    children: [
+                      jsx('button', {
+                        className: 'move-panel-btn confirm',
+                        onClick: fight,
+                        children: 'BATTLE',
+                      }),
+                      jsx('button', {
+                        className: 'move-panel-btn cancel',
+                        onClick: leave,
+                        children: 'LET IT GO',
+                      }),
+                    ],
+                  })
+                : jsx('button', {
+                    className: 'move-panel-btn confirm',
+                    onClick: leave,
+                    children: 'CONTINUE',
+                  }),
       }),
     ],
   })

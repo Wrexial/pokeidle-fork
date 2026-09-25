@@ -119,6 +119,35 @@ test('the Premier Ball cannot be bought', () => {
   assert.equal(bought, state, 'a Premier Ball purchase is a no-op')
 })
 
+test('the situational balls are factory-only, not sold or buyable', () => {
+  const sold = new Set([
+      ...coreMartItems.map((entry) => entry.itemId),
+      ...Object.values(regionalMartItems)
+        .flat()
+        .map((entry) => entry.itemId),
+      ...Object.values(martShopItems).flatMap((shop) => shop.items.map((entry) => entry.itemId)),
+    ]),
+    specialBalls = [
+      'quickball',
+      'timerball',
+      'repeatball',
+      'netball',
+      'diveball',
+      'duskball',
+      'nestball',
+    ]
+  for (const ballId of specialBalls) {
+    assert.equal(pokeBalls[ballId].buyPrice, null, `${ballId} is not for sale`)
+    assert.ok(!sold.has(ballId), `${ballId} should not appear in any mart`)
+    const state = { ...initialGameState, money: 1e6, inventory: {} },
+      bought = gameReducer(state, {
+        type: 'BUY_ITEM',
+        payload: { itemId: ballId, quantity: 1 },
+      })
+    assert.equal(bought, state, `${ballId} purchase is a no-op`)
+  }
+})
+
 test('TOGGLE_MART_COLLAPSED persists the mart collapse state', () => {
   const collapsed = gameReducer(initialGameState, { type: 'TOGGLE_MART_COLLAPSED' })
   assert.equal(collapsed.martCollapsed, true)

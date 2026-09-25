@@ -9991,6 +9991,23 @@ img {
     color: #c0392b
 }
 
+.voltorb-tile.revealed.voltorb {
+    color: #ff8a8a;
+    background: #3a1d1d;
+    border-color: #7a2020;
+    opacity: .9
+}
+
+.voltorb-revealed {
+    font-size: 11px;
+    animation: voltorbReveal .35s ease both
+}
+
+@keyframes voltorbReveal {
+    from { transform: scale(.4); opacity: 0 }
+    to { transform: scale(1); opacity: 1 }
+}
+
 .voltorb-summary {
     display: flex;
     flex-direction: column;
@@ -11215,11 +11232,122 @@ img {
 }
 
 .musical-board {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 8px;
     width: 100%
+}
+
+.musical-progress {
+    width: 100%;
+    max-width: 360px;
+    height: 4px;
+    background: rgba(255,255,255,.14);
+    border-radius: 999px;
+    overflow: hidden
+}
+
+.musical-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg,#6ac4ff,#ffd24a);
+    transition: width .1s linear
+}
+
+.musical-hud {
+    display: flex;
+    align-items: baseline;
+    gap: 10px
+}
+
+.musical-hud-label {
+    margin-right: 4px;
+    font-size: 7px;
+    opacity: .7
+}
+
+.musical-score-value {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gold);
+    animation: musicalScorePop .25s ease-out
+}
+
+.musical-hud-acc {
+    font-size: 10px;
+    color: #9fd0ff
+}
+
+.musical-combo {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    z-index: 4;
+    padding: 2px 10px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #1a1008;
+    background: linear-gradient(#ffe08a,#e8892b);
+    border-radius: 999px;
+    transform: translateX(-50%);
+    animation: musicalComboPop .3s ease-out
+}
+
+.musical-combo.hot {
+    animation: musicalComboPop .3s ease-out, musicalComboGlow .7s ease-in-out infinite alternate
+}
+
+.musical-feedback {
+    position: absolute;
+    top: 56%;
+    left: 50%;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: none;
+    animation: musicalFeedback .6s ease-out forwards
+}
+
+.musical-feedback-label {
+    font-size: 22px;
+    font-weight: 700;
+    text-shadow: 0 2px 0 #000, 0 0 14px currentColor
+}
+
+.musical-feedback-points {
+    font-size: 11px;
+    color: #fff;
+    text-shadow: 0 1px 0 #000
+}
+
+.musical-feedback.grade-perfect .musical-feedback-label { color: #ffd24a }
+.musical-feedback.grade-good .musical-feedback-label { color: #6ac4ff }
+.musical-feedback.grade-ok .musical-feedback-label { color: #9fd0ff }
+.musical-feedback.grade-miss .musical-feedback-label { color: #d06a6a }
+
+@keyframes musicalScorePop {
+    from { transform: scale(1.45) }
+    to { transform: scale(1) }
+}
+
+@keyframes musicalComboPop {
+    from { transform: translateX(-50%) scale(.65) }
+    to { transform: translateX(-50%) scale(1) }
+}
+
+@keyframes musicalComboGlow {
+    from { box-shadow: 0 0 4px #ffd24a }
+    to { box-shadow: 0 0 16px #ffd24a }
+}
+
+@keyframes musicalFeedback {
+    0% { opacity: 0; transform: translate(-50%, -30%) scale(.6) }
+    25% { opacity: 1; transform: translate(-50%, -50%) scale(1.15) }
+    70% { opacity: 1; transform: translate(-50%, -62%) scale(1) }
+    100% { opacity: 0; transform: translate(-50%, -95%) scale(1) }
 }
 
 .musical-track {
@@ -11293,6 +11421,18 @@ img {
     transform: scale(.96)
 }
 
+.musical-btn.hit {
+    color: #1a1008;
+    background: linear-gradient(#ffe08a,#e8892b);
+    border-color: #fff;
+    animation: musicalBtnHit .2s ease-out
+}
+
+@keyframes musicalBtnHit {
+    from { transform: scale(.9) }
+    to { transform: scale(1) }
+}
+
 .musical-btn.lane-up { border-color: #6ac4ff }
 .musical-btn.lane-right { border-color: #f08030 }
 .musical-btn.lane-down { border-color: #78c850 }
@@ -11331,6 +11471,7 @@ img {
     padding: 4px 10px;
     font-size: 9px;
     color: #1a1008;
+    background: #f0e6c8;
     border: 2px solid #00000055;
     border-radius: 6px;
     white-space: nowrap;
@@ -11359,8 +11500,13 @@ img {
 
 .picnic-layer {
     position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 62%;
     height: 13px;
+    font-size: 9px;
+    line-height: 1;
     transform: translateX(-50%);
     border: 1px solid #00000055;
     border-radius: 4px;
@@ -11369,6 +11515,10 @@ img {
 
 .picnic-layer.grade-perfect {
     box-shadow: 0 0 0 2px var(--gold), inset 0 -3px 0 #00000022
+}
+
+.picnic-layer.bread {
+    border-color: #a8792f
 }
 
 .picnic-drop-btn {
@@ -11389,9 +11539,125 @@ img {
     transform: scale(.99)
 }
 
-.picnic-summary {
-    font-size: 10px;
+.picnic-choose {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 100%
+}
+
+.picnic-request {
+    font-size: 9px;
+    color: #f0e6c8;
+    text-align: center
+}
+
+.picnic-request strong {
+    color: var(--gold)
+}
+
+.picnic-ingredients {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    width: 100%;
+    max-width: 380px;
+    max-height: 250px;
+    overflow-y: auto
+}
+
+.picnic-ingredient {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 6px 4px;
+    font-size: 7px;
+    color: #1a1008;
+    background: linear-gradient(#efe3c4,#cdbd94);
+    border: 2px solid #8a7040;
+    border-radius: 5px;
+    cursor: pointer
+}
+
+.picnic-ingredient:hover {
+    filter: brightness(1.06)
+}
+
+.picnic-ingredient.picked {
+    box-shadow: 0 0 0 2px var(--gold)
+}
+
+.picnic-ingredient-emoji {
+    font-size: 16px
+}
+
+.picnic-ingredient-name {
+    text-align: center
+}
+
+.picnic-ingredient .type-badge {
+    font-size: 7px
+}
+
+.picnic-type-preview {
+    font-size: 9px;
     color: #fff
+}
+
+.picnic-type-preview strong {
+    color: var(--gold)
+}
+
+.picnic-spawn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 12px 22px;
+    background: rgba(20,14,6,.8);
+    border: 1px solid #8a7040;
+    border-radius: 8px
+}
+
+.picnic-spawn.shiny {
+    border-color: var(--gold);
+    box-shadow: 0 0 16px #e8c94a88
+}
+
+.picnic-spawn-sprite {
+    width: 84px;
+    height: 84px;
+    image-rendering: pixelated
+}
+
+.picnic-spawn-name {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold)
+}
+
+.picnic-spawn-level {
+    font-size: 9px;
+    color: #fff
+}
+
+.picnic-spawn-types {
+    display: flex;
+    gap: 4px
+}
+
+.picnic-spawn-odds {
+    font-size: 8px;
+    color: #9fd0ff
+}
+
+.picnic-failed {
+    max-width: 90%;
+    text-align: center;
+    font-size: 10px;
+    color: #f0e6c8
 }
 
 /* --- Poke Ball Factory (Kalos) ------------------------------------------ */

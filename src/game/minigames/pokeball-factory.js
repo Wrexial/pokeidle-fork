@@ -239,17 +239,48 @@ export function factorySolved(puzzle) {
   return factoryPowered(puzzle).has(outlet) && connectionsFor(tile.type, tile.rot).includes('E')
 }
 
+/** The situational balls the factory produces; none of them are sold in marts. */
+export const FACTORY_BALL_POOL = [
+  'quickball',
+  'timerball',
+  'repeatball',
+  'netball',
+  'diveball',
+  'duskball',
+  'nestball',
+]
+
 /**
- * Prize for finishing a shift.
+ * Roll a batch of finished balls. Duplicates merge into one stack.
+ * @param {number} count
+ * @param {() => number} [rng]
+ * @returns {{ itemId: string, quantity: number }[]}
+ */
+export function rollFactoryBalls(count, rng = Math.random) {
+  /** @type {{ itemId: string, quantity: number }[]} */
+  const items = []
+  for (let index = 0; index < Math.max(0, count); index++) {
+    const itemId = FACTORY_BALL_POOL[Math.floor(rng() * FACTORY_BALL_POOL.length)],
+      existing = items.find((entry) => entry.itemId === itemId)
+    if (existing) existing.quantity++
+    else items.push({ itemId, quantity: 1 })
+  }
+  return items
+}
+
+/**
+ * Prize for finishing a shift: a batch of the otherwise-unobtainable special
+ * balls, more for a cleaner line.
  * @param {number} moves
  * @param {boolean} solved
+ * @param {() => number} [rng]
  * @returns {{ money: number, items: { itemId: string, quantity: number }[], label: string }}
  */
-export function factoryPrize(moves, solved) {
+export function factoryPrize(moves, solved, rng = Math.random) {
   if (!solved) return { money: 200, items: [], label: 'The conveyor jammed' }
   if (moves <= FACTORY_SIZE + 2)
-    return { money: 3000, items: [{ itemId: 'expCandyL', quantity: 1 }], label: 'Flawless shift!' }
+    return { money: 3000, items: rollFactoryBalls(4, rng), label: 'Flawless shift!' }
   if (moves <= 12)
-    return { money: 1800, items: [{ itemId: 'expCandyM', quantity: 1 }], label: 'Line cleared' }
-  return { money: 800, items: [{ itemId: 'expCandyS', quantity: 1 }], label: 'Line patched up' }
+    return { money: 1800, items: rollFactoryBalls(2, rng), label: 'Line cleared' }
+  return { money: 800, items: rollFactoryBalls(1, rng), label: 'Line patched up' }
 }

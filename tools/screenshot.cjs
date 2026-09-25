@@ -609,9 +609,8 @@ async function main() {
         'paldea-cortondo',
         'paldea-south-province-area-one',
         ['paldea-los-platos', 'paldea-south-province-area-one', 'paldea-cortondo'],
-        '.picnic-board',
+        '.picnic-choose',
         '27-picnic.png',
-        '.picnic-drop-btn',
       ],
       [
         'Poke Ball Factory',
@@ -645,6 +644,47 @@ async function main() {
       }
       console.log(`${name} scene ok`)
     }
+
+    // Picnic: pick three fillings, build, drop near the centre and capture the
+    // spawned Pokemon preview.
+    await cdp.eval(
+      `localStorage.setItem('pokemon-idle-save-v2', ${JSON.stringify(
+        JSON.stringify(
+          minigameSave('paldea', 'paldea-cortondo', 'paldea-south-province-area-one', [
+            'paldea-los-platos',
+            'paldea-south-province-area-one',
+            'paldea-cortondo',
+          ])
+        )
+      )}); 'ok'`
+    )
+    await cdp.send('Page.navigate', { url: APP_URL })
+    await cdp.waitFor('window.gameDataDebug.status().loaded === true', 20000, 'picnic flow data')
+    await cdp.eval(
+      `(() => { const b = document.querySelector('.patch-notes-dismiss-btn'); if (b) b.click(); return true })()`
+    )
+    await sleep(600)
+    await cdp.click('.location-minigame-start')
+    await cdp.waitFor(`!!document.querySelector('.picnic-choose')`, 5000, 'picnic choose')
+    await cdp.eval(
+      `(() => { [...document.querySelectorAll('.picnic-ingredient')].slice(0, 3).forEach((b) => b.click()); return true })()`
+    )
+    await sleep(200)
+    await cdp.click('.move-panel-btn.confirm')
+    await cdp.waitFor(`!!document.querySelector('.picnic-board')`, 5000, 'picnic stack')
+    for (let attempt = 0; attempt < 3; attempt++) {
+      await cdp.waitFor(
+        `(() => { const el = document.querySelector('.picnic-piece'); if (!el) return false; const left = parseFloat(el.style.left); return left > 35 && left < 65 })()`,
+        4000,
+        'picnic centre'
+      )
+      await cdp.click('.picnic-drop-btn')
+      await sleep(120)
+    }
+    await cdp.waitFor(`!!document.querySelector('.picnic-spawn')`, 4000, 'picnic spawn')
+    await cdp.screenshot(path.join(OUT, '27-picnic-spawn.png'))
+    console.log('Picnic full flow ok')
+
     // Mega Evolution auto-triggers on the first battling turn.
     await cdp.eval(
       `localStorage.setItem('pokemon-idle-save-v2', ${JSON.stringify(

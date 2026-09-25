@@ -57,49 +57,49 @@ export const pokeBalls = {
       id: 'quickball',
       name: 'Quick Ball',
       description: 'A x5 catch rate if thrown on the first turn of a battle.',
-      buyPrice: 1000,
+      buyPrice: null,
       ballModifier: 1,
     },
     timerball: {
       id: 'timerball',
       name: 'Timer Ball',
       description: 'Gets better the longer the battle has lasted (up to x4).',
-      buyPrice: 1000,
+      buyPrice: null,
       ballModifier: 1,
     },
     repeatball: {
       id: 'repeatball',
       name: 'Repeat Ball',
       description: 'A x3.5 catch rate on a species already in your Pokedex.',
-      buyPrice: 1000,
+      buyPrice: null,
       ballModifier: 1,
     },
     netball: {
       id: 'netball',
       name: 'Net Ball',
       description: 'A x3.5 catch rate on Water- and Bug-type Pokemon.',
-      buyPrice: 1000,
+      buyPrice: null,
       ballModifier: 1,
     },
     diveball: {
       id: 'diveball',
       name: 'Dive Ball',
       description: 'A x3.5 catch rate on water routes.',
-      buyPrice: 1000,
+      buyPrice: null,
       ballModifier: 1,
     },
     duskball: {
       id: 'duskball',
       name: 'Dusk Ball',
       description: 'A x3 catch rate in caves or at night.',
-      buyPrice: 1000,
+      buyPrice: null,
       ballModifier: 1,
     },
     nestball: {
       id: 'nestball',
       name: 'Nest Ball',
       description: 'Catches lower-level Pokemon more easily.',
-      buyPrice: 1000,
+      buyPrice: null,
       ballModifier: 1,
     },
     premierball: {
@@ -505,51 +505,45 @@ export const coreMartItems = [
 ]
 
 /**
- * Advanced stock split by region: a situational Poké Ball and a handful of held
- * battle items each, so every region's marts have their own flavour. The
- * Sinnoh Underground is the universal fallback if a region is never opened.
+ * Advanced stock split by region: a handful of held battle items each, so every
+ * region's marts have their own flavour. The situational Poke Balls are not sold
+ * anywhere — the Poke Ball Factory is the only source. The Sinnoh Underground is
+ * the universal fallback if a region is never opened.
  * @type {Record<string, { itemId: string, unlockWildBattlesWon?: number }[]>}
  */
 export const regionalMartItems = {
   kanto: [
-    { itemId: 'quickball', unlockWildBattlesWon: 75 },
     { itemId: 'silkScarf', unlockWildBattlesWon: 60 },
     { itemId: 'charcoal', unlockWildBattlesWon: 60 },
     { itemId: 'mysticWater', unlockWildBattlesWon: 60 },
   ],
   johto: [
-    { itemId: 'repeatball', unlockWildBattlesWon: 75 },
     { itemId: 'magnet', unlockWildBattlesWon: 60 },
     { itemId: 'miracleSeed', unlockWildBattlesWon: 60 },
     { itemId: 'neverMeltIce', unlockWildBattlesWon: 80 },
   ],
   hoenn: [
-    { itemId: 'netball', unlockWildBattlesWon: 100 },
     { itemId: 'blackBelt', unlockWildBattlesWon: 80 },
     { itemId: 'poisonBarb', unlockWildBattlesWon: 80 },
     { itemId: 'softSand', unlockWildBattlesWon: 80 },
   ],
   sinnoh: [
-    { itemId: 'nestball', unlockWildBattlesWon: 100 },
     { itemId: 'sharpBeak', unlockWildBattlesWon: 80 },
     { itemId: 'twistedSpoon', unlockWildBattlesWon: 100 },
     { itemId: 'silverPowder', unlockWildBattlesWon: 100 },
   ],
   unova: [
-    { itemId: 'diveball', unlockWildBattlesWon: 150 },
     { itemId: 'hardStone', unlockWildBattlesWon: 100 },
     { itemId: 'spellTag', unlockWildBattlesWon: 100 },
     { itemId: 'dragonFang', unlockWildBattlesWon: 150 },
   ],
   kalos: [
-    { itemId: 'timerball', unlockWildBattlesWon: 150 },
     { itemId: 'blackGlasses', unlockWildBattlesWon: 150 },
     { itemId: 'ironPlate', unlockWildBattlesWon: 150 },
     { itemId: 'pixiePlate', unlockWildBattlesWon: 150 },
     { itemId: 'megaStone', unlockWildBattlesWon: 250 },
   ],
   alola: [
-    { itemId: 'duskball', unlockWildBattlesWon: 200 },
     { itemId: 'sitrusBerry', unlockWildBattlesWon: 60 },
     { itemId: 'lumBerry', unlockWildBattlesWon: 100 },
     { itemId: 'eviolite', unlockWildBattlesWon: 200 },

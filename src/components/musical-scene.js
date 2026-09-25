@@ -1,6 +1,6 @@
 // Unova's Pokemon Musical, played as a full-stage scene while the reducer is in
 // the `musical` phase. Notes fall down one of four lanes; tap the matching arrow
-// on the beat to score.
+// on the beat to score, with a callout for each grade and a live score/combo.
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
@@ -17,6 +17,17 @@ import {
 } from '../game/minigames.js'
 import { MinigameRewardScreen, useMinigameClaim } from './minigame-reward.js'
 
+/** Callout shown for each timing grade. @type {Record<string, string>} */
+const MUSICAL_GRADE_LABELS = {
+  perfect: 'PERFECT!',
+  good: 'GREAT!',
+  ok: 'GOOD!',
+  miss: 'MISS',
+}
+
+/** Weight each grade contributes to the accuracy readout. @type {Record<string, number>} */
+const MUSICAL_GRADE_WEIGHT = { perfect: 100, good: 66, ok: 33, miss: 0 }
+
 export function MusicalScene() {
   const { state, dispatch } = useGame(),
     [pattern] = React.useState(() => generateMusicalPattern()),
@@ -24,46 +35,75 @@ export function MusicalScene() {
     [judged, setJudged] = React.useState(() => /** @type {Record<number, string>} */ ({})),
     [score, setScore] = React.useState(0),
     [combo, setCombo] = React.useState(0),
-    [lastGrade, setLastGrade] = React.useState(''),
+    [feedback, setFeedback] = React.useState(
+      () =>
+        /** @type {{ key: number, grade: string, points: number } | null} */ (null)
+    ),
+    [hitLane, setHitLane] = React.useState(
+      () => /** @type {{ key: number, lane: number } | null} */ (null)
+    ),
     [prize, setPrize] = React.useState(
       () => /** @type {ReturnType<typeof musicalPrize> | null} */ (null)
     ),
     collect = useMinigameClaim(dispatch),
+    totalMs = React.useMemo(() => musicalTotalMs(pattern), [pattern]),
     startRef = React.useRef(Date.now()),
     judgedRef = React.useRef(/** @type {Record<number, string>} */ ({})),
     scoreRef = React.useRef(0),
     comboRef = React.useRef(0),
+    feedbackKeyRef = React.useRef(0),
     finishedRef = React.useRef(false)
+
+  /**
+   * Show the grade callout (and flash the lane) for the latest judgement.
+   * @param {string} grade
+   * @param {number} points
+   * @param {number} [lane]
+   */
+  function showFeedback(grade, points, lane = -1) {
+    feedbackKeyRef.current += 1
+    setFeedback({ key: feedbackKeyRef.current, grade, points })
+    if (lane >= 0) setHitLane({ key: feedbackKeyRef.current, lane })
+  }
 
   React.useEffect(() => {
     startRef.current = Date.now()
-    const total = musicalTotalMs(pattern),
-      tick = setInterval(() => {
-        if (finishedRef.current) return
-        const now = Date.now() - startRef.current
-        let missed = false
-        for (const note of pattern) {
-          if (!judgedRef.current[note.id] && now - note.time > MUSICAL_OK_MS) {
-            judgedRef.current[note.id] = 'miss'
-            comboRef.current = 0
-            missed = true
-          }
+    const tick = setInterval(() => {
+      if (finishedRef.current) return
+      const now = Date.now() - startRef.current
+      let missed = false
+      for (const note of pattern) {
+        if (!judgedRef.current[note.id] && now - note.time > MUSICAL_OK_MS) {
+          judgedRef.current[note.id] = 'miss'
+          comboRef.current = 0
+          missed = true
         }
-        setElapsed(now)
-        if (missed) {
-          setJudged({ ...judgedRef.current })
-          setCombo(comboRef.current)
-          setLastGrade('miss')
-        }
-        if (Object.keys(judgedRef.current).length >= pattern.length || now >= total) {
-          finishedRef.current = true
-          clearInterval(tick)
-          setJudged({ ...judgedRef.current })
-          setPrize(musicalPrize(scoreRef.current))
-        }
-      }, 40)
+      }
+      setElapsed(now)
+      if (missed) {
+        setJudged({ ...judgedRef.current })
+        setCombo(comboRef.current)
+        showFeedback('miss', 0)
+      }
+      if (Object.keys(judgedRef.current).length >= pattern.length || now >= totalMs) {
+        finishedRef.current = true
+        clearInterval(tick)
+        setJudged({ ...judgedRef.current })
+        setPrize(musicalPrize(scoreRef.current))
+      }
+    }, 40)
     return () => clearInterval(tick)
-  }, [pattern])
+  }, [pattern, totalMs])
+
+  // Fade the latest callout and lane flash back out.
+  React.useEffect(() => {
+    if (!feedback) return
+    const timer = setTimeout(() => {
+      setFeedback(null)
+      setHitLane(null)
+    }, 600)
+    return () => clearTimeout(timer)
+  }, [feedback])
 
   /** @param {number} lane */
   function hit(lane) {
@@ -84,7 +124,7 @@ export function MusicalScene() {
     setJudged({ ...judgedRef.current })
     setScore(scoreRef.current)
     setCombo(comboRef.current)
-    setLastGrade(grade)
+    showFeedback(grade, points, lane)
   }
 
   function leave() {
@@ -93,6 +133,16 @@ export function MusicalScene() {
       prize ? { type: 'CLAIM_MINIGAME_REWARD', payload: prize } : null
     )
   }
+
+  const grades = Object.values(judged),
+    accuracy =
+      grades.length > 0
+        ? Math.round(
+            grades.reduce((sum, grade) => sum + (MUSICAL_GRADE_WEIGHT[grade] ?? 0), 0) /
+              grades.length
+          )
+        : 100,
+    progress = Math.max(0, Math.min(1, elapsed / totalMs))
 
   return jsxs('div', {
     className: 'minigame-scene musical-scene',
@@ -103,11 +153,23 @@ export function MusicalScene() {
         children: [
           jsx('span', { className: 'minigame-scene-title', children: 'Pok\u00e9mon Musical' }),
           jsxs('span', {
-            className: 'minigame-scene-tally',
+            className: 'musical-hud',
             children: [
-              `Score ${score}`,
-              ' \u00b7 ',
-              combo > 1 ? `Combo ${combo}` : lastGrade ? lastGrade.toUpperCase() : 'On the beat!',
+              jsxs('span', {
+                className: 'musical-hud-score',
+                children: [
+                  jsx('span', { className: 'musical-hud-label', children: 'SCORE' }),
+                  jsx('span', {
+                    key: score,
+                    className: 'musical-score-value',
+                    children: score,
+                  }),
+                ],
+              }),
+              jsx('span', {
+                className: 'musical-hud-acc',
+                children: `${accuracy}%`,
+              }),
             ],
           }),
         ],
@@ -120,12 +182,41 @@ export function MusicalScene() {
               onCollect: leave,
               summary: jsx('span', {
                 className: 'musical-summary',
-                children: `Final score ${score}`,
+                children: `Final score ${score} \u00b7 ${accuracy}% accuracy`,
               }),
             })
           : jsxs('div', {
               className: 'musical-board',
               children: [
+                jsx('div', {
+                  className: 'musical-progress',
+                  children: jsx('div', {
+                    className: 'musical-progress-fill',
+                    style: { width: `${progress * 100}%` },
+                  }),
+                }),
+                combo >= 2 &&
+                  jsx('div', {
+                    key: combo,
+                    className: `musical-combo${combo >= 5 ? ' hot' : ''}`,
+                    children: `COMBO \u00d7${combo}`,
+                  }),
+                feedback &&
+                  jsxs('div', {
+                    key: feedback.key,
+                    className: `musical-feedback grade-${feedback.grade}`,
+                    children: [
+                      jsx('span', {
+                        className: 'musical-feedback-label',
+                        children: MUSICAL_GRADE_LABELS[feedback.grade] ?? '',
+                      }),
+                      feedback.points > 0 &&
+                        jsx('span', {
+                          className: 'musical-feedback-points',
+                          children: `+${feedback.points}`,
+                        }),
+                    ],
+                  }),
                 jsx('div', {
                   className: 'musical-track',
                   children: MUSICAL_LANES.map((laneName, lane) => {
@@ -171,7 +262,7 @@ export function MusicalScene() {
                     jsx(
                       'button',
                       {
-                        className: `musical-btn lane-${laneName}`,
+                        className: `musical-btn lane-${laneName}${hitLane?.lane === lane ? ' hit' : ''}`,
                         onPointerDown: () => hit(lane),
                         disabled: !!prize,
                         'aria-label': `Tap ${laneName}`,

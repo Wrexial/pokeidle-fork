@@ -44,6 +44,9 @@ export let genderedSprites = /** @type {{ front: number[], back: number[], shiny
 
 export let evolutionData = /** @type {Record<string, Evolution[]>} */ (loadedGameData.evolutionData)
 
+/** Item id -> its sprite filename under /sprites/items (see download-item-sprites.cjs). */
+export let itemIcons = /** @type {Record<string, string>} */ (loadedGameData.itemIcons ?? {})
+
 export let moveLearnsets = /** @type {Record<string, [number, string][]>} */ (
   loadedGameData.moveLearnsets
 )

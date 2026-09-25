@@ -33,6 +33,7 @@ const dataFilesToLoad = [
     { key: 'abilityData', path: '/data/ability-data.json', label: 'abilities' },
     { key: 'animatedSprites', path: '/data/animated-sprites.json', label: 'animated sprite manifest' },
     { key: 'genderedSprites', path: '/data/gendered-sprites.json', label: 'gendered sprite manifest' },
+    { key: 'itemIcons', path: '/data/item-icons.json', label: 'item icon manifest' },
     { key: 'evolutionData', path: '/data/evolution-data.json', label: 'evolution chains' },
     { key: 'moveLearnsets', path: '/data/possible-learnsets.json', label: 'move learnsets' },//move-learnsets
     { key: 'tmLearnsets', path: '/data/tm-learnsets.json', label: 'TM learnsets' },

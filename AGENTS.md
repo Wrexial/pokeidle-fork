@@ -218,6 +218,8 @@ These are loaded by `assets/gameDataInjector.js` (`key` → file):
 | `breedingData` | `breeding-data.json` (gender rate + egg groups, see below) |
 | `abilityData` | `ability-data.json` (normal + hidden abilities per species) |
 | `animatedSprites` | `animated-sprites.json` (ids missing each animated variant) |
+| `genderedSprites` | `gendered-sprites.json` (ids with a female sprite, per variant) |
+| `itemIcons` | `item-icons.json` (item id → sprite under `sprites/items/`, see `download-item-sprites.cjs`) |
 | `evolutionData` | `evolution-data.json` |
 | `moveLearnsets` | **`possible-learnsets.json`** |
 | `tmLearnsets` | `tm-learnsets.json` (machine/TM moves per species) |
@@ -474,6 +476,13 @@ One-off scripts used to build the data JSON (not run during dev/build):
   Showdown for the rest (plus Showdown's `gen5ani` by name for a few Gen 9
   forms). Also writes `public/data/animated-sprites.json`, the ids with no gif
   per variant. Idempotent (`--only=static|animated`, `--force`).
+- `download-item-sprites.cjs` — downloads the shop / Auction House item icons
+  from Serebii's itemdex into `public/sprites/items/<itemId>.png` and writes
+  `public/data/item-icons.json`. Serebii is used because PokeAPI and PokemonDB
+  have no art for many of the modelled items (the Galar/Hisui/Paldea evolution
+  items, mints, key items). Item ids come from the live mart/Reward
+  Shop/Auction tables; add to `SEREBII_NAMES` if a filename differs. Idempotent
+  (`--force`).
 - `scrape-region-maps.cjs` — scrapes real region maps: location lists from
   PokéAPI and route/town compass connections (`north/south/east/west`) from
   Bulbapedia's raw infoboxes, then computes a directional layout. Caches HTTP

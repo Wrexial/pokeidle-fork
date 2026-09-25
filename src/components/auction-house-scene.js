@@ -89,7 +89,7 @@ export function AuctionHouseScene() {
                       children: [
                         jsx(ItemIcon, {
                           itemId: item.itemId,
-                          size: 10,
+                          size: 14,
                         }),
                         `${rewardItemName(item.itemId)}${
                           item.quantity > 1 ? ` \u00d7${item.quantity}` : ''

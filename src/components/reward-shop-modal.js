@@ -58,7 +58,7 @@ export function RewardShopModal({ onClose }) {
                         children: [
                           jsx(ItemIcon, {
                             itemId: rewardItem.itemId,
-                            size: 16,
+                            size: 22,
                           }),
                           jsxs('div', {
                             className: 'reward-shop-item-info',

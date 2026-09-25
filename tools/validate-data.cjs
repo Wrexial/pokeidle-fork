@@ -196,6 +196,14 @@ for (const [category, dir] of Object.entries(femaleSpriteDirs)) {
       fail(`gendered-sprite manifest lists ${category} #${id} but the file is missing`)
 }
 
+// The shop / auction item sprite manifest must match the files on disk, or a
+// row would request an icon that does not exist.
+const itemIcons = read('item-icons.json')
+const ITEM_SPRITE_ROOT = path.join(__dirname, '../public/sprites/items')
+for (const [itemId, file] of Object.entries(itemIcons))
+  if (!fs.existsSync(path.join(ITEM_SPRITE_ROOT, file)))
+    fail(`item sprite manifest lists ${itemId} but ${file} is missing`)
+
 for (const [locationId, location] of Object.entries(mapData)) {
   if (location.background && !fs.existsSync(path.join(__dirname, '../public', location.background)))
     fail(`location ${locationId} uses missing background ${location.background}`)

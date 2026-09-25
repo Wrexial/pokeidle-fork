@@ -59,7 +59,94 @@ export function LocationPanel({ onOpenCatchSettings }) {
     })(),
     routeKey = location?.routeKey,
     routeEncounters = routeKey ? encounterData[routeKey] : null,
-    [showPelago, setShowPelago] = React.useState(!1)
+    [showPelago, setShowPelago] = React.useState(!1),
+    // The "Next Unlocks" block is useful from a zone hub too, not just a
+    // normal location, so it is built once and rendered by both branches.
+    nextUnlocksSection =
+      frontierLockedLocations.length > 0
+        ? jsxs('div', {
+            className: 'location-next-unlock',
+            children: [
+              jsx('div', {
+                className: 'location-section-title',
+                children: frontierLockedLocations.length > 1 ? 'Next Unlocks' : 'Next Unlock',
+              }),
+              frontierLockedLocations.map((nextLockedLocation) => {
+                const requirements = unlockRequirements(nextLockedLocation),
+                  primaryRequirement = requirements.find(
+                    (requirement) => !requirement.met && isTravelable(requirement.locationId)
+                  ),
+                  primaryTarget = primaryRequirement?.locationId ?? null
+                return jsxs(
+                  'div',
+                  {
+                    className: `location-unlock-entry${primaryTarget ? ' clickable' : ''}`,
+                    onClick: primaryTarget ? () => travelToTarget(primaryTarget) : void 0,
+                    title: primaryTarget
+                      ? `Travel to ${mapData[primaryTarget]?.name ?? primaryTarget}`
+                      : void 0,
+                    children: [
+                      jsx('div', {
+                        className: 'location-unlock-name',
+                        children: nextLockedLocation.name,
+                      }),
+                      jsx('div', {
+                        className: 'location-unlock-checklist',
+                        children: requirements.map((requirement, index) => {
+                          const targetLocationId =
+                            !requirement.met && isTravelable(requirement.locationId)
+                              ? /** @type {string} */ (requirement.locationId)
+                              : null
+                          return jsxs(
+                            'div',
+                            {
+                              className: `location-unlock-check${requirement.met ? ' met' : ''}${targetLocationId ? ' clickable' : ''}`,
+                              onClick: targetLocationId
+                                ? /** @param {{ stopPropagation: () => void }} event */ (event) => {
+                                    event.stopPropagation()
+                                    travelToTarget(targetLocationId)
+                                  }
+                                : void 0,
+                              title: targetLocationId
+                                ? `Travel to ${mapData[targetLocationId]?.name ?? targetLocationId}`
+                                : void 0,
+                              children: [
+                                jsxs('div', {
+                                  className: 'location-unlock-check-row',
+                                  children: [
+                                    jsx('span', {
+                                      className: 'location-unlock-check-icon',
+                                      children: requirement.met ? '✓' : targetLocationId ? '→' : '○',
+                                    }),
+                                    jsx('span', {
+                                      className: 'location-unlock-check-label',
+                                      children: requirement.met
+                                        ? requirement.label
+                                        : requirement.required > 1
+                                          ? `${requirement.current}/${requirement.required} ${requirement.label.toLowerCase()}`
+                                          : requirement.label,
+                                    }),
+                                  ],
+                                }),
+                                requirement.detail &&
+                                  jsx('div', {
+                                    className: 'location-unlock-check-detail',
+                                    children: requirement.detail,
+                                  }),
+                              ],
+                            },
+                            index
+                          )
+                        }),
+                      }),
+                    ],
+                  },
+                  nextLockedLocation.id
+                )
+              }),
+            ],
+          })
+        : null
   if (!location) return null
 
   // The minigame or route activity played from here. Fixed minigames live at a
@@ -409,6 +496,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
               )
             }),
           }),
+          nextUnlocksSection,
         ],
       }),
     })
@@ -539,90 +627,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
           }),
         location.id === BATTLE_TOWER_LOCATION && jsx(BattleTowerPanel, {}),
         jsx(GiftPanel, { locationId: location.id }),
-        frontierLockedLocations.length > 0 &&
-          jsxs('div', {
-            className: 'location-next-unlock',
-            children: [
-              jsx('div', {
-                className: 'location-section-title',
-                children:
-                  frontierLockedLocations.length > 1 ? 'Next Unlocks' : 'Next Unlock',
-              }),
-              frontierLockedLocations.map((nextLockedLocation) => {
-                const requirements = unlockRequirements(nextLockedLocation),
-                  primaryRequirement = requirements.find(
-                    (requirement) => !requirement.met && isTravelable(requirement.locationId)
-                  ),
-                  primaryTarget = primaryRequirement?.locationId ?? null
-                return jsxs(
-                  'div',
-                  {
-                    className: `location-unlock-entry${primaryTarget ? ' clickable' : ''}`,
-                    onClick: primaryTarget ? () => travelToTarget(primaryTarget) : void 0,
-                    title: primaryTarget
-                      ? `Travel to ${mapData[primaryTarget]?.name ?? primaryTarget}`
-                      : void 0,
-                    children: [
-                      jsx('div', {
-                        className: 'location-unlock-name',
-                        children: nextLockedLocation.name,
-                      }),
-                      jsx('div', {
-                        className: 'location-unlock-checklist',
-                        children: requirements.map((requirement, index) => {
-                          const targetLocationId =
-                            !requirement.met && isTravelable(requirement.locationId)
-                              ? /** @type {string} */ (requirement.locationId)
-                              : null
-                          return jsxs(
-                            'div',
-                            {
-                              className: `location-unlock-check${requirement.met ? ' met' : ''}${targetLocationId ? ' clickable' : ''}`,
-                              onClick: targetLocationId
-                                ? /** @param {{ stopPropagation: () => void }} event */ (event) => {
-                                    event.stopPropagation()
-                                    travelToTarget(targetLocationId)
-                                  }
-                                : void 0,
-                              title: targetLocationId
-                                ? `Travel to ${mapData[targetLocationId]?.name ?? targetLocationId}`
-                                : void 0,
-                              children: [
-                                jsxs('div', {
-                                  className: 'location-unlock-check-row',
-                                  children: [
-                                    jsx('span', {
-                                      className: 'location-unlock-check-icon',
-                                      children: requirement.met ? '✓' : targetLocationId ? '→' : '○',
-                                    }),
-                                    jsx('span', {
-                                      className: 'location-unlock-check-label',
-                                      children: requirement.met
-                                        ? requirement.label
-                                        : requirement.required > 1
-                                          ? `${requirement.current}/${requirement.required} ${requirement.label.toLowerCase()}`
-                                          : requirement.label,
-                                    }),
-                                  ],
-                                }),
-                                requirement.detail &&
-                                  jsx('div', {
-                                    className: 'location-unlock-check-detail',
-                                    children: requirement.detail,
-                                  }),
-                              ],
-                            },
-                            index
-                          )
-                        }),
-                      }),
-                    ],
-                  },
-                  nextLockedLocation.id
-                )
-              }),
-            ],
-          }),
+        nextUnlocksSection,
         showPelago &&
           createPortal(
             jsx(PokePelagoModal, { onClose: () => setShowPelago(!1) }),

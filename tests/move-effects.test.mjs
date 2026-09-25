@@ -313,6 +313,42 @@ test('Reflect halves physical damage and wears off', () => {
   })
 })
 
+test('self-destruct moves faint the user', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['explosion'],
+        speed: 200,
+        currentHp: 300,
+        maxHp: 300,
+      }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], currentHp: 5000, maxHp: 5000 }),
+      events = resolveBattleTurn(player, enemy, false)
+    assert.equal(player.currentHp, 0, 'the user faints')
+    assert.ok(
+      events.some((event) => event.type === 'faint' && event.data?.target === 'player'),
+      'a faint event is reported'
+    )
+
+    // Memento is a status move that faints its user after the stat drop.
+    const mementoUser = battler({
+        name: 'M',
+        isPlayer: true,
+        moves: ['memento'],
+        speed: 200,
+        currentHp: 300,
+        maxHp: 300,
+      }),
+      foe = battler({ name: 'F', moves: ['splash'], currentHp: 5000, maxHp: 5000 }),
+      mementoEvents = resolveBattleTurn(mementoUser, foe, false)
+    assert.equal(mementoUser.currentHp, 0, 'Memento faints the user')
+    assert.ok(
+      mementoEvents.some((event) => event.type === 'faint' && event.data?.target === 'player')
+    )
+  })
+})
+
 test('move tooltips describe the effect alongside the core stats', () => {
   const ember = moveTooltip('ember', moveData.ember)
   assert.match(ember, /Fire/)

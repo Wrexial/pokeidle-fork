@@ -171,6 +171,11 @@ export const handledMoveEffectTypes = new Set(Object.keys(moveEffectText))
 export function describeMove(move) {
   const variableNote = variablePowerNotes[move.key ?? '']
   if (variableNote) return variableNote
+  // Memento keeps its stat drop but also faints the user.
+  if (move.selfDestruct) {
+    const base = describeMove({ ...move, selfDestruct: false })
+    return base ? `${base} The user faints.` : 'The user faints.'
+  }
   const notes = moveNotes[move.key ?? '']
   const effect = move.effect
 

@@ -32,6 +32,14 @@ const MOVE_OVERRIDES = {
   submission: { effect: { type: 'recoil', fraction: 1 / 4 } },
   headCharge: { effect: { type: 'recoil', fraction: 1 / 4 } },
   lightOfRuin: { effect: { type: 'recoil', fraction: 1 / 2 } },
+
+  // --- Self-destructing moves: the user faints once the hit lands ---
+  selfDestruct: { effect: { type: 'selfDestruct' } },
+  explosion: { effect: { type: 'selfDestruct' } },
+  mistyExplosion: { effect: { type: 'selfDestruct' } },
+  // Memento keeps its stat drop and additionally faints the user.
+  memento: { selfDestruct: true },
+
   // --- Protect-style blocking (all get +4 priority below) ---
   protect: { protect: true, priority: 4 },
   detect: { protect: true, priority: 4 },

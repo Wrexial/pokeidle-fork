@@ -1010,6 +1010,15 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           message: `The battlefield became ${TERRAIN_NAMES[moveDef.effect.terrain] ?? moveDef.effect.terrain}!`,
         })
       }
+      // Status moves flagged selfDestruct (Memento) faint their user too.
+      if (moveDef.selfDestruct && attack.attacker.currentHp > 0) {
+        attack.attacker.currentHp = 0
+        events.push({
+          type: 'faint',
+          message: `${attack.attacker.name} fainted!`,
+          data: { target: attack.isPlayer ? 'player' : 'enemy' },
+        })
+      }
       continue
     }
     // Weather rewrites Weather Ball's type/power, abilities like Normalize and

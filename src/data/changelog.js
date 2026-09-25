@@ -71,6 +71,7 @@ export const CHANGELOG = [
             'The gym tab\u2019s "GO TO <town>" hint is now a button: click it to travel straight to that leader\u2019s town',
             'Candies can be applied in bulk: choose 1, 10 or All in the bag and use them in one go. A stack stops at Lv.100 and only spends the candies it actually needed',
             'Mossdeep City\u2019s Gym leaders are now correctly named Tate & Liza (they were shown as just "Tate")',
+            'Self-Destruct, Explosion, Misty Explosion and Memento now actually faint their user once they resolve',
             'The Pokemon summary\u2019s header is tidier: the name and level share a row, with nature, ability, held item and friendship in a chip strip beneath the types. A nature\u2019s stat effect now lives in its hover tooltip instead of inline arrows, colour-coded with the raised stat in green and the lowered one in red',
             'Catch Settings now start with every ball enabled (the Master Ball keeps its own battle button), so the auto-catcher uses your best available ball instead of only Poke Balls',
           ],

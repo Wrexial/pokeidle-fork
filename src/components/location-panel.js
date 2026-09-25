@@ -34,7 +34,11 @@ export function LocationPanel({ onOpenCatchSettings }) {
     frontierLockedLocations = (() => {
       const unlockedSet = new Set(unlockedNow)
       const candidates = Object.values(mapData).filter((candidateLocation) => {
-        if (unlockedSet.has(candidateLocation.id) || candidateLocation.hidden) return false
+        if (unlockedSet.has(candidateLocation.id)) return false
+        // Zone sub-areas are hidden from the map but are the real next step in
+        // Alola / Paldea; show them once their zone hub is open, so the goal is
+        // visible instead of only living in the zone picker.
+        if (candidateLocation.hidden && !unlockedSet.has(candidateLocation.zone)) return false
         const unlockRule = candidateLocation.unlock
         return (
           unlockRule.battlesAtLocation !== void 0 ||

@@ -5,10 +5,11 @@ import { installGameData } from './helpers/game-data.mjs'
 
 installGameData()
 
-const { computeUnlockedLocations, getRegionUnlockTokens, checkShinyOdds, shinyChainMultiplier } =
+const { awardExperience, computeUnlockedLocations, getRegionUnlockTokens, checkShinyOdds, shinyChainMultiplier } =
   await import('../src/game/progression.js')
 const { initialGameState } = await import('../src/game/reducer.js')
-const { encounterData, gymLeaderData } = await import('../src/data/gameData.js')
+const { encounterData, gymLeaderData, pokemonSpecies } = await import('../src/data/gameData.js')
+const { calculateExpYield, createPokemon } = await import('../src/game/pokemon.js')
 
 /** @param {Record<string, any>} [overrides] */
 function baseState(overrides = {}) {
@@ -84,6 +85,47 @@ test('Galar opens on its gentler first route', () => {
   assert.ok(
     Math.max(...first.map((entry) => entry.maxLevel)) <= 3,
     'Galar route 1 stays at Lv. 2-3'
+  )
+})
+
+test('Exp. Share keeps the active at full EXP and shares half with the party', () => {
+  const active = createPokemon('charmander', 50, 'a'),
+    ally = createPokemon('pidgey', 10, 'b'),
+    enemy = { speciesKey: 'rattata', level: 20 },
+    expected = calculateExpYield(pokemonSpecies.rattata, 20)
+  const withShare = []
+  awardExperience(
+    (action) => withShare.push(action),
+    active,
+    enemy,
+    1,
+    true,
+    [active, ally],
+    0
+  )
+  const applied = withShare.find((action) => action.type === 'APPLY_EXP'),
+    shared = withShare.find((action) => action.type === 'APPLY_SHARED_EXP')
+  assert.equal(applied.payload.expGained, expected, 'the active keeps the full award')
+  assert.equal(
+    shared.payload.partyExp[0].expGained,
+    Math.floor(expected * 0.5),
+    'each other member gains half'
+  )
+
+  const withoutShare = []
+  awardExperience(
+    (action) => withoutShare.push(action),
+    active,
+    enemy,
+    1,
+    false,
+    [active, ally],
+    0
+  )
+  assert.equal(withoutShare.find((action) => action.type === 'APPLY_EXP').payload.expGained, expected)
+  assert.ok(
+    !withoutShare.some((action) => action.type === 'APPLY_SHARED_EXP'),
+    'no shared EXP without the item'
   )
 })
 

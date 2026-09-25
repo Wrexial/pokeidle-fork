@@ -151,6 +151,13 @@ export const expCandyDropChance = 0.012
 /** Chance a wild win drops the much rarer Rare Candy. */
 export const rareCandyDropChance = 0.0015
 
+/**
+ * Exp. Share payout while active. The active Pokemon keeps this fraction of a
+ * win's EXP, and every other non-fainted party member gains this fraction each.
+ */
+export const expShareActiveMultiplier = 1
+export const expSharePartyMultiplier = 0.5
+
 /** @type {Record<string, string[]>} */
 export const regionalStarters = {
   kanto: ['bulbasaur', 'charmander', 'squirtle'],

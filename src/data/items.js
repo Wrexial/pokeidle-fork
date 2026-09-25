@@ -6,7 +6,7 @@ export const activeItems = {
       id: 'expShare',
       name: 'Exp. Share',
       description:
-        'Shares 5% EXP with each non-fainted party member for 1000 battles. Active Pokemon gets 50%.',
+        'For 1000 battles, the active Pokemon keeps full EXP and every other non-fainted party member gains 50% of the win\u2019s EXP.',
       duration: 1e3,
       buyPrice: null,
     },

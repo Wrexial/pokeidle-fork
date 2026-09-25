@@ -1,6 +1,7 @@
 // // Experience awards shared by wild, trainer and Battle Tower battles. Split from game/progression.js.
 
 import { moveData, pokemonSpecies } from '../../data/gameData.js'
+import { expShareActiveMultiplier, expSharePartyMultiplier } from '../../data/config.js'
 import { calculateExpYield, calculatePokemonStats, getLevelUpResults, isBattleReady } from '../pokemon.js'
 
 /**
@@ -18,7 +19,9 @@ export function awardExperience(dispatch, playerPokemon, enemyPokemon, multiplie
   const enemySpecies = pokemonSpecies[enemyPokemon.speciesKey],
     baseExp = calculateExpYield(enemySpecies, enemyPokemon.level),
     gainedExp = Math.floor(baseExp * multiplier * bonusMultiplier),
-    finalExp = hasExpShare ? Math.floor(gainedExp * 0.5) : gainedExp,
+    finalExp = hasExpShare
+      ? Math.floor(gainedExp * expShareActiveMultiplier)
+      : gainedExp,
     playerSpecies = pokemonSpecies[playerPokemon.speciesKey],
     newTotalExp = playerPokemon.totalExp + finalExp,
     levelUps = getLevelUpResults(playerPokemon.speciesKey, playerSpecies.growthRate, playerPokemon.level, newTotalExp)
@@ -60,7 +63,7 @@ export function awardExperience(dispatch, playerPokemon, enemyPokemon, multiplie
       },
     })
   if (hasExpShare && party.length > 1) {
-    const sharedExp = Math.floor(gainedExp * 0.05)
+    const sharedExp = Math.floor(gainedExp * expSharePartyMultiplier)
     if (sharedExp > 0) {
       const sharedResults = []
       for (let memberIndex = 0; memberIndex < party.length; memberIndex++) {

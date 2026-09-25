@@ -119,6 +119,7 @@ export function PartyPanel({
               fromSpeciesKey: inspectedPokemon.speciesKey,
               toSpeciesKey: evolution.targetKey,
               consumeItem: evolution.itemId,
+              isForm: evolution.isForm,
             },
           }),
           setInspected(null))

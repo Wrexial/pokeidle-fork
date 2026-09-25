@@ -52,8 +52,12 @@ export function EvolutionScene() {
           : 'evo-sprite evo-glow',
     message =
       evolutionState.step === 'done'
-        ? `${fromSpecies.name} evolved into ${toSpecies.name}!`
-        : `What? ${fromSpecies.name} is evolving!`
+        ? evolutionState.isForm
+          ? `${fromSpecies.name} changed into ${toSpecies.name}!`
+          : `${fromSpecies.name} evolved into ${toSpecies.name}!`
+        : evolutionState.isForm
+          ? `What? ${fromSpecies.name} is changing form!`
+          : `What? ${fromSpecies.name} is evolving!`
   return jsxs('div', {
     className: 'evolution-scene',
     children: [

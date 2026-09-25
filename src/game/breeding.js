@@ -15,12 +15,26 @@ import {
 const isDitto = (/** @type {string} */ speciesKey) => speciesKey === 'ditto'
 
 /**
+ * A transformation that swaps to an alternate form of the same Pokemon rather
+ * than evolving it: Gigantamax (`form: true`) or a reversible form item (Rotom
+ * Catalog, Griseous Orb, ...). These are form changes, not evolutions.
+ * @param {Evolution} evolution
+ * @returns {boolean}
+ */
+function isFormChange(evolution) {
+  return (
+    evolution.form === true ||
+    (!!evolution.item && !!evolutionItems[evolution.item]?.reusable)
+  )
+}
+
+/**
  * Evolution options available to a Pokemon, with requirement labels and
  * whether each is currently met. Shared by the party and box UIs (gender
  * variants only offer the form matching this Pokemon's gender).
  * @param {Pokemon} pokemon
  * @param {Record<string, number>} inventory
- * @returns {{ targetName: string, canEvolve: boolean, requirementLabel: string, targetKey: string, itemId?: string }[]}
+ * @returns {{ targetName: string, canEvolve: boolean, requirementLabel: string, targetKey: string, itemId?: string, isForm: boolean }[]}
  */
 export function getEvolutionOptions(pokemon, inventory) {
   const evolutionChain = evolutionData[pokemon.speciesKey]
@@ -48,6 +62,7 @@ export function getEvolutionOptions(pokemon, inventory) {
         requirementLabel: requirementParts.join(' + ') || 'Ready',
         targetKey: evolution.into,
         itemId: evolution.item,
+        isForm: isFormChange(evolution),
       }
     })
 }

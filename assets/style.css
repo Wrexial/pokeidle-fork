@@ -4394,6 +4394,15 @@ img {
     background: #50b850
 }
 
+.stats-panel-evolve-btn.form {
+    background: #3a6ea8;
+    border-color: #274d78
+}
+
+.stats-panel-evolve-btn.form:hover:not(.disabled) {
+    background: #4a80bd
+}
+
 .stats-panel-evolve-btn.disabled {
     opacity: .45;
     cursor: not-allowed;

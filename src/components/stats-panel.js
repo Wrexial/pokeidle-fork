@@ -23,7 +23,7 @@ import { genderForPokemon, genderSymbol, isFemalePokemon } from '../game/breedin
 import { abilityDisplayName, getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, IV_STAT_LABELS, IV_STAT_ORDER, judgeIVs, pokemonDisplayName } from '../game/pokemon.js'
 import { MoveManagerPanel } from './move-manager-panel.js'
 
-/** @param {{ pokemon: Pokemon, source: 'party' | 'box', partyLength: number, onAction: () => void, onClose: () => void, evolutionInfo?: { entries: { targetName: string, canEvolve: boolean, requirementLabel: string, targetKey: string, itemId?: string }[] } | null, onEvolve?: (index: number) => void, onRelease?: () => void, canRelease?: boolean }} props */
+/** @param {{ pokemon: Pokemon, source: 'party' | 'box', partyLength: number, onAction: () => void, onClose: () => void, evolutionInfo?: { entries: { targetName: string, canEvolve: boolean, requirementLabel: string, targetKey: string, itemId?: string, isForm: boolean }[] } | null, onEvolve?: (index: number) => void, onRelease?: () => void, canRelease?: boolean }} props */
 export function StatsPanel({
   pokemon,
   source,
@@ -191,19 +191,29 @@ export function StatsPanel({
         ],
       }),
       evolutionInfo &&
+        evolutionInfo.entries.length > 0 &&
         jsx('div', {
           className: 'stats-panel-evolve-row',
           children: evolutionInfo.entries.map((evolutionEntry, entryIndex) =>
             jsxs(
               'button',
               {
-                className: `stats-panel-evolve-btn${evolutionEntry.canEvolve ? '' : ' disabled'}`,
+                className: `stats-panel-evolve-btn${evolutionEntry.isForm ? ' form' : ''}${evolutionEntry.canEvolve ? '' : ' disabled'}`,
                 onClick: () => evolutionEntry.canEvolve && onEvolve?.(entryIndex),
                 disabled: !evolutionEntry.canEvolve,
+                title: evolutionEntry.isForm
+                  ? 'Change between forms \u2014 not an evolution'
+                  : void 0,
                 children: [
                   jsx('span', {
                     className: 'evolve-btn-label',
-                    children: evolutionInfo.entries.length > 1 ? evolutionEntry.targetName : 'EVOLVE',
+                    children: evolutionEntry.isForm
+                      ? evolutionInfo.entries.length > 1
+                        ? `FORM: ${evolutionEntry.targetName}`
+                        : 'CHANGE FORM'
+                      : evolutionInfo.entries.length > 1
+                        ? evolutionEntry.targetName
+                        : 'EVOLVE',
                   }),
                   jsx('span', {
                     className: 'evolve-btn-req',

@@ -69,6 +69,7 @@ export function MobileTabs() {
               fromSpeciesKey: boxPokemon.speciesKey,
               toSpeciesKey: evolution.targetKey,
               consumeItem: evolution.itemId,
+              isForm: evolution.isForm,
             },
           }),
           setBoxInspected(null))

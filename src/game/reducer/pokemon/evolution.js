@@ -19,6 +19,7 @@ export function startEvolution(state, action) {
       fromSpeciesKey,
       toSpeciesKey,
       consumeItem,
+      isForm,
     } = action.payload,
     fromSpecies = pokemonSpecies[fromSpeciesKey],
     evolvingPokemon = state.party.find((member) => member.id === pokemonId) || state.box.find((member) => member.id === pokemonId)
@@ -42,10 +43,16 @@ export function startEvolution(state, action) {
       fromSpeciesKey,
       toSpeciesKey,
       step: 'flash',
+      isForm: !!isForm,
       isShiny: evolvingPokemon?.isShiny ?? !1,
       isFemale: evolvingPokemon ? genderForPokemon(evolvingPokemon) === 'female' : !1,
     },
-    battleLog: [...state.battleLog, `What? ${fromSpecies.name} is evolving!`].slice(-50),
+    battleLog: [
+      ...state.battleLog,
+      isForm
+        ? `What? ${fromSpecies.name} is changing form!`
+        : `What? ${fromSpecies.name} is evolving!`,
+    ].slice(-50),
   }
 }
 
@@ -84,6 +91,7 @@ export function completeEvolution(state, action) {
       pokemonId,
       fromSpeciesKey,
       toSpeciesKey,
+      isForm,
     } = state.evolutionState,
     toSpecies = pokemonSpecies[toSpeciesKey],
     fromSpecies = pokemonSpecies[fromSpeciesKey],
@@ -131,13 +139,17 @@ export function completeEvolution(state, action) {
       pokedexCaught,
       battleLog: [
         ...state.battleLog,
-        `Congratulations! ${fromSpecies.name} evolved into ${toSpecies.name}!`,
+        isForm
+          ? `${fromSpecies.name} changed into ${toSpecies.name}!`
+          : `Congratulations! ${fromSpecies.name} evolved into ${toSpecies.name}!`,
       ].slice(-50),
     },
     {
-      message: `${fromSpecies.name} evolved into ${toSpecies.name}!`,
+      message: isForm
+        ? `${fromSpecies.name} changed into ${toSpecies.name}!`
+        : `${fromSpecies.name} evolved into ${toSpecies.name}!`,
       tone: 'success',
-      icon: '⭐',
+      icon: isForm ? '\ud83d\udd04' : '\u2b50',
       dedupeKey: `evolve:${pokemonId}:${toSpeciesKey}`,
     }
   )

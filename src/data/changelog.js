@@ -33,6 +33,7 @@ export const CHANGELOG = [
             'In-battle Mega Evolution: give a Mega-capable Pokemon the new held Mega Stone (from the Reward Shop, Kalos marts or the Auction House) and it transforms for the rest of the battle \u2014 taking the physical X forme or the special Y forme \u2014 with the forme\u2019s stats, typing and ability, then reverting afterwards',
             'The same Mega Stone now triggers Primal Reversion: Primal Groudon and Kyogre transform in battle with Desolate Land and Primordial Sea',
             'Mega Evolution is no longer offered as a level-100 evolution \u2014 the Mega Stone is the way to Mega Evolve, so a Lv.100 Pokemon no longer shows a redundant evolve option',
+            'Gigantamax and the item-based alternate forms (Rotom appliances, Giratina-Origin, the Therian formes, Necrozma, Calyrex, ...) are no longer labelled as evolutions \u2014 their button reads FORM: <name> in blue and the scene says the Pokemon changed form',
             'Mega Evolution no longer raises a notification toast; the battle log and the transformed sprite still show it',
             'The battle screen\u2019s MOVES button is gone \u2014 manage moves from a Pokemon\u2019s summary instead (the Manage button in its stats panel)',
             'Moves that never miss (Swift, Aerial Ace, Aura Sphere, the G-Max moves and the rest) now truly cannot miss: they ignore accuracy and evasion stages instead of having their accuracy lowered by them, and their accuracy reads as an em dash rather than "101%"',

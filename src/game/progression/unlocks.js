@@ -1,6 +1,6 @@
 // // Location unlocking: resolve the unlock graph and spend Region Unlock Tokens. Split from game/progression.js.
 
-import { gymLeaderData, mapData } from '../../data/gameData.js'
+import { gymLeaderData, mapData, regions } from '../../data/gameData.js'
 
 /** @type {Record<string, string[]>} */
 const gymIdsByRegion = {}
@@ -99,4 +99,40 @@ export function entryRoutePath(entryId) {
 export function getRegionUnlockTokens(state) {
   const openedRegions = Math.max(0, (state.unlockedRegions ?? []).length - 1)
   return Math.max(0, state.defeatedChampions.length - openedRegions)
+}
+
+/**
+ * The goal to show when a region has no locations left to unlock (so there is
+ * no next route to point at): beat its Champion for the Unlock Token, spend a
+ * token that is already banked, or, with nothing left, a completion message.
+ * @param {GameState} state
+ * @param {string} regionId
+ * @returns {{ title: string, detail: string, locationId: string | null }}
+ */
+export function regionProgressionGoal(state, regionId) {
+  const region = regions.find((candidate) => candidate.id === regionId)
+  if ((state.unlockedRegions ?? []).length >= regions.length)
+    return {
+      title: 'Every region is open',
+      detail: 'The whole world is yours to explore.',
+      locationId: null,
+    }
+  if (!state.defeatedChampions.includes(regionId))
+    return {
+      title: `Beat the ${region?.name ?? regionId} Champion`,
+      detail: 'Beating a region Champion earns a Region Unlock Token to open a new region.',
+      locationId: region?.leagueLocationKey ?? null,
+    }
+  const tokens = getRegionUnlockTokens(state)
+  if (tokens > 0)
+    return {
+      title: `${tokens} Region Unlock Token${tokens > 1 ? 's' : ''} ready`,
+      detail: 'Open the Town Map and pick a locked region to spend it.',
+      locationId: null,
+    }
+  return {
+    title: 'Beat another region Champion',
+    detail: 'Any region Champion earns a new Region Unlock Token.',
+    locationId: null,
+  }
 }

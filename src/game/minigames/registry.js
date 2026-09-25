@@ -249,7 +249,7 @@ export const MINIGAME_INFO = {
     title: 'Picnic',
     cost: PICNIC_COST,
     action: 'START A PICNIC',
-    hint: `Pick ${PICNIC_PICKS} fillings \u2014 their types decide what the sandwich lures out. Drop each onto the bread (Bread bookends) without toppling it, then a Pokemon of that type appears with tripled shiny odds. Entry is $${PICNIC_COST.toLocaleString()}.`,
+    hint: `Pick ${PICNIC_PICKS} fillings \u2014 the finished sandwich lures out a Pokemon of one of their types (picked at random) with tripled shiny odds. Drop each filling between a bottom and a top slice of Bread without toppling the stack. Entry is $${PICNIC_COST.toLocaleString()}.`,
   },
   pokeballFactory: {
     title: 'Pok\u00e9 Ball Factory',

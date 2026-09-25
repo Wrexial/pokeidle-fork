@@ -8,7 +8,7 @@ import { martShopItems } from '../data/items.js'
 import { encounterData, gymLeaderData, mapData, pokemonSpecies, regions, raidPoolFor } from '../data/gameData.js'
 import { MINIGAME_INFO, MINIGAME_LOCATIONS, MINIGAME_START_ACTION, ROUTE_ACTIVITIES, bestRodId, nextRod, rodForId, routeActivityIds } from '../game/minigames.js'
 import { useGame } from '../game/context.js'
-import { computeUnlockedLocations } from '../game/progression.js'
+import { computeUnlockedLocations, regionProgressionGoal } from '../game/progression.js'
 import { MinigameCard } from './minigame-card.js'
 import { GiftPanel } from './gift-panel.js'
 import { BattleTowerPanel } from './battle-tower-panel.js'
@@ -16,9 +16,10 @@ import { PokePelagoModal } from './poke-pelago-modal.js'
 import { RouteEncounterGrid } from './route-encounter-grid.js'
 import { ShopPanel } from './shop-panel.js'
 
-/** How many upcoming unlocks the panel lists at once. When the current
- * region is fully unlocked the "frontier" is empty, and falling back to every
- * locked location on the map (hundreds) would lock up the main thread. */
+/** How many upcoming unlocks the panel lists at once. `computeUnlockedLocations`
+ * already folds the whole map into the unlocked set, so only the frontier — the
+ * locked locations adjacent to somewhere open — is worth showing; listing every
+ * locked location would page through far-off regions. */
 const NEXT_UNLOCK_LIMIT = 5
 
 /** @param {{ onOpenCatchSettings: () => void }} props */
@@ -52,18 +53,71 @@ export function LocationPanel({ onOpenCatchSettings }) {
       const frontier = candidates.filter((candidateLocation) =>
         candidateLocation.connections.some((connectionId) => unlockedSet.has(connectionId))
       )
-      const upcoming = frontier.length ? frontier : candidates
-      return upcoming
+      return frontier
         .sort((left, right) => left.unlockOrder - right.unlockOrder)
         .slice(0, NEXT_UNLOCK_LIMIT)
     })(),
+    // When nothing anywhere is on the frontier the region is finished, so point
+    // at its Champion (or a banked Unlock Token) rather than surfacing a locked
+    // region the player cannot reach yet (Kanto, if they started elsewhere).
+    regionGoal =
+      frontierLockedLocations.length === 0
+        ? regionProgressionGoal(state, location?.region ?? 'kanto')
+        : null,
     routeKey = location?.routeKey,
     routeEncounters = routeKey ? encounterData[routeKey] : null,
     [showPelago, setShowPelago] = React.useState(!1),
     // The "Next Unlocks" block is useful from a zone hub too, not just a
     // normal location, so it is built once and rendered by both branches.
-    nextUnlocksSection =
-      frontierLockedLocations.length > 0
+    nextUnlocksSection = regionGoal
+      ? jsxs('div', {
+          className: 'location-next-unlock location-region-goal',
+          children: [
+            jsx('div', {
+              className: 'location-section-title',
+              children: 'Next Goal',
+            }),
+            jsxs('div', {
+              className: `location-unlock-entry${
+                regionGoal.locationId && isTravelable(regionGoal.locationId) ? ' clickable' : ''
+              }`,
+              onClick:
+                regionGoal.locationId && isTravelable(regionGoal.locationId)
+                  ? () => travelToTarget(regionGoal.locationId ?? '')
+                  : void 0,
+              title:
+                regionGoal.locationId && isTravelable(regionGoal.locationId)
+                  ? `Travel to ${mapData[regionGoal.locationId]?.name ?? regionGoal.locationId}`
+                  : void 0,
+              children: [
+                jsx('div', {
+                  className: 'location-unlock-name',
+                  children: regionGoal.title,
+                }),
+                jsx('div', {
+                  className: 'location-unlock-checklist',
+                  children: jsx('div', {
+                    className: 'location-unlock-check',
+                    children: jsxs('div', {
+                      className: 'location-unlock-check-row',
+                      children: [
+                        jsx('span', {
+                          className: 'location-unlock-check-icon',
+                          children: regionGoal.locationId ? '\u2192' : '\u{1f5dd}\ufe0f',
+                        }),
+                        jsx('span', {
+                          className: 'location-unlock-check-label',
+                          children: regionGoal.detail,
+                        }),
+                      ],
+                    }),
+                  }),
+                }),
+              ],
+            }),
+          ],
+        })
+      : frontierLockedLocations.length > 0
         ? jsxs('div', {
             className: 'location-next-unlock',
             children: [

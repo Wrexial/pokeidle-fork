@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 const gameData = installGameData()
 
-const { BATTLE_ROYAL_COST, BATTLE_ROYAL_POOL, BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL, BUG_CONTEST_RUSTLES, CONTEST_COST, CONTEST_THEMES, DYNAMAX_ADVENTURES_COST, DYNAMAX_STAGES, MINIGAME_LOCATIONS, MINIGAME_INFO, MINIGAME_AREAS, MINIGAME_REGIONS, MINIGAME_START_ACTION, minigameForLocation, minigamesInRegion, minigameNameForLocation, MINING_COST, POKEATHLON_COST, POKEATHLON_SPRINT_MS, POKE_RADAR_CHAIN_STEP, POKE_RADAR_COST, POKE_RADAR_SIZE, SLOT_JACKPOT, SLOT_PAYLINES, SLOT_REELS, SLOT_ROWS, SLOT_SPIN_COST, SLOT_SYMBOLS, VOLTORB_FLIP_COST, VOLTORB_MAX_LEVEL, VOLTORB_SIZE, AUCTION_LOTS, accuracyScore, auctionAppraisal, battleRoyalOpponent, battleRoyalPrize, boardCleared, boardExploded, boardHints, bugCatchChance, bugContestPrize, bugFleeChance, bugStays, buildContestResults, canAuctionBid, contestAppeal, contestPlacement, contestPlayerRank, contestPrize, contestRank, contestScore, contestTheme, createAuction, createOpponent, createVoltorbBoard, dynamaxBoss, dynamaxPaths, dynamaxPrize, flipVoltorbCell, healSquad, moveBaseAppeal, pickRadarTarget, placeAuctionBid, pokeathlonPrize, pokeRadarPrize, radarChainPoints, radarSequence, rewardItemName, rollContestBug, rollContestBugs, rollContestRivalRound, rollContestTheme, rollMiningReward, simulateBattle, spinSlots, sprintScore, throwNetBall, toBattlePokemon, toggleVoltorbMark, voltorbBoardCoins, voltorbCountForLevel, voltorbFlipPrize, LIGHTS_OUT_COST, LIGHTS_OUT_SCRAMBLE, LIGHTS_OUT_SIZE, CURRY_COST, CURRY_FLAVORS, CURRY_INGREDIENTS, POKESTAR_COST, POKESTAR_SHOT_COUNT, createLightsOut, toggleLights, lightsSolved, lightsOutPrize, rollCurryRequest, curryScore, curryPrize, pickPokestarShots, pokestarPrize, MATCH3_COST, MATCH3_MOVES, MATCH3_SIZE, MEMORY_COST, MEMORY_PAIRS, WHACK_COST, createMatch3Board, findMatches, tryMatch3Swap, resolveMatch3, match3Prize, createMemoryDeck, memoryPrize, rollWhackTarget, whackPrize, MUSICAL_COST, MUSICAL_NOTES, MUSICAL_MAX_SCORE, generateMusicalPattern, judgeMusicalHit, musicalPrize, musicalTotalMs, PICNIC_COST, PICNIC_PICKS, PICNIC_INGREDIENTS, PICNIC_SHINY_MULTIPLIER, ingredientById, sandwichType, picnicDropScore, picnicSpeciesPool, rollPicnicEncounter, POKEBALL_FACTORY_COST, FACTORY_SIZE, connectionsFor, createFactoryPuzzle, rotateFactoryTile, factoryPowered, factorySolved, factoryPrize, FACTORY_BALL_POOL, rollFactoryBalls } = await import(
+const { BATTLE_ROYAL_COST, BATTLE_ROYAL_POOL, BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL, BUG_CONTEST_RUSTLES, CONTEST_COST, CONTEST_THEMES, DYNAMAX_ADVENTURES_COST, DYNAMAX_STAGES, MINIGAME_LOCATIONS, MINIGAME_INFO, MINIGAME_AREAS, MINIGAME_REGIONS, MINIGAME_START_ACTION, minigameForLocation, minigamesInRegion, minigameNameForLocation, MINING_COST, POKEATHLON_COST, POKEATHLON_SPRINT_MS, POKE_RADAR_CHAIN_STEP, POKE_RADAR_COST, POKE_RADAR_SIZE, SLOT_JACKPOT, SLOT_PAYLINES, SLOT_REELS, SLOT_ROWS, SLOT_SPIN_COST, SLOT_SYMBOLS, VOLTORB_FLIP_COST, VOLTORB_MAX_LEVEL, VOLTORB_SIZE, AUCTION_LOTS, accuracyScore, auctionAppraisal, battleRoyalOpponent, battleRoyalPrize, boardCleared, boardExploded, boardHints, bugCatchChance, bugContestPrize, bugFleeChance, bugStays, buildContestResults, canAuctionBid, contestAppeal, contestPlacement, contestPlayerRank, contestPrize, contestRank, contestScore, contestTheme, createAuction, createOpponent, createVoltorbBoard, dynamaxBoss, dynamaxPaths, dynamaxPrize, flipVoltorbCell, healSquad, moveBaseAppeal, pickRadarTarget, placeAuctionBid, pokeathlonPrize, pokeRadarPrize, radarChainPoints, radarSequence, rewardItemName, rollContestBug, rollContestBugs, rollContestRivalRound, rollContestTheme, rollMiningReward, simulateBattle, spinSlots, sprintScore, throwNetBall, toBattlePokemon, toggleVoltorbMark, voltorbBoardCoins, voltorbCountForLevel, voltorbFlipPrize, LIGHTS_OUT_COST, LIGHTS_OUT_SCRAMBLE, LIGHTS_OUT_SIZE, CURRY_COST, CURRY_FLAVORS, CURRY_INGREDIENTS, POKESTAR_COST, POKESTAR_SHOT_COUNT, createLightsOut, toggleLights, lightsSolved, lightsOutPrize, rollCurryRequest, curryScore, curryPrize, pickPokestarShots, pokestarPrize, MATCH3_COST, MATCH3_MOVES, MATCH3_SIZE, MEMORY_COST, MEMORY_PAIRS, WHACK_COST, createMatch3Board, findMatches, tryMatch3Swap, resolveMatch3, match3Prize, createMemoryDeck, memoryPrize, rollWhackTarget, whackPrize, MUSICAL_COST, MUSICAL_NOTES, MUSICAL_MAX_SCORE, generateMusicalPattern, judgeMusicalHit, musicalPrize, musicalTotalMs, PICNIC_COST, PICNIC_PICKS, PICNIC_INGREDIENTS, PICNIC_SHINY_MULTIPLIER, ingredientById, sandwichTypes, rollSandwichType, picnicDropScore, picnicSpeciesPool, rollPicnicEncounter, POKEBALL_FACTORY_COST, FACTORY_SIZE, connectionsFor, createFactoryPuzzle, rotateFactoryTile, factoryPowered, factorySolved, factoryPrize, FACTORY_BALL_POOL, rollFactoryBalls } = await import(
   '../src/game/minigames.js'
 )
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
@@ -880,17 +880,19 @@ test('START_MUSICAL charges entry and END_MINIGAME returns to idle', () => {
   assert.equal(gameReducer(started, { type: 'END_MINIGAME' }).phase, 'idle')
 })
 
-test('picnic picks set the sandwich type by majority', () => {
+test('a sandwich can turn out any of its three fillings', () => {
   assert.equal(PICNIC_INGREDIENTS.length, 18)
   for (const ingredient of PICNIC_INGREDIENTS) {
     assert.ok(ingredient.type, `${ingredient.id} has a type`)
     assert.equal(ingredientById(ingredient.id)?.name, ingredient.name)
+    assert.equal(ingredientById(ingredient.id)?.type, ingredient.type)
   }
-  assert.equal(sandwichType(['lettuce']), 'Grass')
-  assert.equal(sandwichType(['lettuce', 'lettuce', 'popcorn']), 'Grass')
-  assert.equal(sandwichType(['popcorn', 'lettuce', 'lettuce']), 'Grass')
-  assert.equal(sandwichType(['popcorn', 'lettuce', 'egg']), 'Flying', 'the first pick breaks ties')
-  assert.equal(sandwichType([]), null)
+  assert.deepEqual(sandwichTypes(['lettuce', 'popcorn', 'egg']), ['Grass', 'Flying', 'Normal'])
+  // The reward is a random one of the picks, so every pick matters.
+  assert.equal(rollSandwichType(['lettuce', 'popcorn', 'egg'], () => 0), 'Grass')
+  assert.equal(rollSandwichType(['lettuce', 'popcorn', 'egg'], () => 0.5), 'Flying')
+  assert.equal(rollSandwichType(['lettuce', 'popcorn', 'egg'], () => 0.999), 'Normal')
+  assert.equal(rollSandwichType([], () => 0), null)
 })
 
 test('picnic drops score by accuracy and topple off the edge', () => {
@@ -943,7 +945,8 @@ test('the factory puzzle is solvable and rotating links the line', () => {
   assert.ok(factoryPowered(solved).size >= 2)
   assert.deepEqual(connectionsFor('straight', 0).slice().sort(), ['N', 'S'])
   assert.deepEqual(connectionsFor('straight', 1).slice().sort(), ['E', 'W'])
-  assert.ok(factoryPrize(3, true).money > factoryPrize(3, false).money)
+  assert.ok(factoryPrize(3, true).items.length > 0)
+  assert.equal(factoryPrize(3, true).money, 0, 'the factory pays balls, not money')
 })
 
 test('the factory pays out special balls, more for a cleaner shift', () => {
@@ -957,8 +960,14 @@ test('the factory pays out special balls, more for a cleaner shift', () => {
   assert.ok(count(cleared) > count(patched))
   assert.equal(count(failed), 0, 'a jammed line pays no balls')
   for (const prize of [flawless, cleared, patched])
-    for (const item of prize.items)
+    for (const item of prize.items) {
       assert.ok(FACTORY_BALL_POOL.includes(item.itemId), `${item.itemId} is a factory ball`)
+      assert.notEqual(
+        rewardItemName(item.itemId),
+        item.itemId,
+        'the reward uses the ball\u2019s display name'
+      )
+    }
   // A fixed roll draws the first pool entry and merges the duplicates.
   const batch = rollFactoryBalls(3, () => 0)
   assert.deepEqual(batch, [{ itemId: FACTORY_BALL_POOL[0], quantity: 3 }])

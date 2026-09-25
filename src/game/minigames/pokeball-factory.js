@@ -277,10 +277,10 @@ export function rollFactoryBalls(count, rng = Math.random) {
  * @returns {{ money: number, items: { itemId: string, quantity: number }[], label: string }}
  */
 export function factoryPrize(moves, solved, rng = Math.random) {
-  if (!solved) return { money: 200, items: [], label: 'The conveyor jammed' }
+  if (!solved) return { money: 0, items: [], label: 'The conveyor jammed' }
   if (moves <= FACTORY_SIZE + 2)
-    return { money: 3000, items: rollFactoryBalls(4, rng), label: 'Flawless shift!' }
+    return { money: 0, items: rollFactoryBalls(4, rng), label: 'Flawless shift!' }
   if (moves <= 12)
-    return { money: 1800, items: rollFactoryBalls(2, rng), label: 'Line cleared' }
-  return { money: 800, items: rollFactoryBalls(1, rng), label: 'Line patched up' }
+    return { money: 0, items: rollFactoryBalls(2, rng), label: 'Line cleared' }
+  return { money: 0, items: rollFactoryBalls(1, rng), label: 'Line patched up' }
 }

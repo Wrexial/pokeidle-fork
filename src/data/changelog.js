@@ -24,8 +24,8 @@ export const CHANGELOG = [
             'Voltorb Flip: clicking a Voltorb now actually explodes \u2014 a burst on the tile, a board shake and a new explosion sound effect',
             'Fishing no longer hides a route-exclusive catch behind a perfect cast: the rarest Water species is back in the normal wild table and can be found while exploring, and a perfect cast instead just boosts the shiny odds and level',
             'The Town Map no longer badges fishing spots with a rod icon now that route activities live in the location panel',
-            'Picnic rework: pick three fillings (each a different type), drop them between a bottom and top slice of Bread, and the finished sandwich lures out a wild Pokemon of the fillings\u2019 type at tripled shiny odds \u2014 the toppled or timed-out stack spawns nothing',
-            'The Poke Ball Factory now pays out the situational balls (Quick, Timer, Repeat, Net, Dive, Dusk and Nest) instead of candy, more for a cleaner shift \u2014 and those balls are no longer sold in any Poke Mart, so the factory is the only source (Poke, Great and Ultra Balls stay on the shelves, and Premier Balls still come free with every ten bought)',
+            'Picnic rework: pick three fillings (each a different type), drop them between a bottom and top slice of Bread, and the finished sandwich lures out a wild Pokemon of one of the fillings\u2019 types (chosen at random) at tripled shiny odds \u2014 the toppled or timed-out stack spawns nothing',
+            'The Poke Ball Factory now pays out the situational balls (Quick, Timer, Repeat, Net, Dive, Dusk and Nest) instead of candy, more for a cleaner shift and with no cash payout \u2014 each ball is listed by its proper name and sprite. Those balls are no longer sold in any Poke Mart, so the factory is the only source (Poke, Great and Ultra Balls stay on the shelves, and Premier Balls still come free with every ten bought)',
             'Pokemon Musical gives real feedback: a PERFECT! / GREAT! / GOOD! / MISS callout with the points on every note, a pulsing combo badge and lane flash, a live score and accuracy readout, and a song progress bar',
             'Voltorb Flip reveals every Voltorb on the board once the run ends, so you can see where the bombs were hiding before you collect',
             'Pokestar Studios has twice as many film briefs and shuffles each shot\u2019s takes, so the best take is no longer always in the top-left corner',
@@ -80,6 +80,7 @@ export const CHANGELOG = [
             'High-level wild areas no longer open before the region expects them: routes whose wilds jump far above the area that unlocks them (Paldea\u2019s province areas, Alola\u2019s late island routes, several end-game routes) now also require a party level closer to their wilds, so you cannot wander into Lv.70+ Pokemon with a starter team',
             'Every region\u2019s opening route now starts at Lv. 3-5 instead of Lv. 5-7 (Galar\u2019s opening route and the Slumbering Weald included), so a fresh starter has room to find its feet before the region\u2019s curve starts climbing',
             'The Exp. Share is rebalanced: over 500 battles the active Pokemon gains 50% EXP and every other non-fainted party member gains 25% (it used to give the rest only 5%, but lasted 1000 battles)',
+            'When a region has nothing left to unlock, the location panel now shows a single Next Goal \u2014 beat its Champion to earn a Region Unlock Token, or spend a token you already hold \u2014 instead of listing far-off locations from a locked region',
           ],
         },
         {

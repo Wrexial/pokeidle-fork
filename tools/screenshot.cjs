@@ -718,6 +718,27 @@ async function main() {
     await cdp.waitFor(`!!document.querySelector('.location-gift-card')`, 8000, 'gift card')
     await cdp.screenshot(path.join(OUT, '18-gifts.png'))
     console.log('Gift panel scene ok')
+
+    // A finished region (all Kanto locations open, Champion unbeaten) should
+    // show the region goal instead of a locked region's unlocks.
+    const kantoIds = Object.keys(
+      JSON.parse(
+        fs.readFileSync(path.join(__dirname, '..', 'public', 'data', 'map-data', 'kanto.json'), 'utf8')
+      )
+    )
+    await cdp.eval(
+      `localStorage.setItem('pokemon-idle-save-v2', ${JSON.stringify(
+        JSON.stringify(minigameSave('kanto', 'saffronCity', 'route6', kantoIds))
+      )}); 'ok'`
+    )
+    await cdp.send('Page.navigate', { url: APP_URL })
+    await cdp.waitFor('window.gameDataDebug.status().loaded === true', 20000, 'region goal data')
+    await cdp.eval(
+      `(() => { const b = document.querySelector('.patch-notes-dismiss-btn'); if (b) b.click(); return true })()`
+    )
+    await cdp.waitFor(`!!document.querySelector('.location-region-goal')`, 8000, 'region goal')
+    await cdp.screenshot(path.join(OUT, '29-region-goal.png'))
+    console.log('Region goal card ok')
     console.log('done')
   } finally {
     chrome.kill()

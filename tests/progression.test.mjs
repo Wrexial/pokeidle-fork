@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 installGameData()
 
-const { awardExperience, computeUnlockedLocations, getRegionUnlockTokens, checkShinyOdds, shinyChainMultiplier, entryRoutePath } =
+const { awardExperience, computeUnlockedLocations, getRegionUnlockTokens, regionProgressionGoal, checkShinyOdds, shinyChainMultiplier, entryRoutePath } =
   await import('../src/game/progression.js')
 const { initialGameState } = await import('../src/game/reducer.js')
 const { encounterData, gymLeaderData, mapData, pokemonSpecies, regions } = await import('../src/data/gameData.js')
@@ -43,6 +43,46 @@ test('getRegionUnlockTokens counts Champions minus opened regions', () => {
     2
   )
   assert.equal(getRegionUnlockTokens(baseState({ defeatedChampions: [], unlockedRegions: [] })), 0)
+})
+
+test('a finished region points at its Champion, then a banked token', () => {
+  const kanto = regions.find((region) => region.id === 'kanto')
+  // Region complete, Champion unbeaten: send the player to the league.
+  const beforeChampion = regionProgressionGoal(
+    baseState({ defeatedChampions: [], unlockedRegions: ['kanto'] }),
+    'kanto'
+  )
+  assert.match(beforeChampion.title, /Kanto Champion/)
+  assert.equal(beforeChampion.locationId, kanto.leagueLocationKey)
+
+  // Champion beaten, token unspent: tell them to spend it.
+  const withToken = regionProgressionGoal(
+    baseState({ defeatedChampions: ['kanto'], unlockedRegions: ['kanto'] }),
+    'kanto'
+  )
+  assert.match(withToken.title, /1 Region Unlock Token/)
+  assert.equal(withToken.locationId, null)
+
+  // Token spent on Johto, whose Champion is still unbeaten.
+  const spent = regionProgressionGoal(
+    baseState({
+      startRegion: 'johto',
+      defeatedChampions: ['kanto'],
+      unlockedRegions: ['kanto', 'johto'],
+    }),
+    'johto'
+  )
+  assert.match(spent.title, /Johto Champion/)
+
+  // Every region open: nothing left to unlock.
+  const allOpen = regionProgressionGoal(
+    baseState({
+      defeatedChampions: regions.map((region) => region.id),
+      unlockedRegions: regions.map((region) => region.id),
+    }),
+    'kanto'
+  )
+  assert.match(allOpen.title, /Every region is open/)
 })
 
 test('the entry town opens its first route', () => {

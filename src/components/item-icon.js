@@ -24,3 +24,13 @@ export function ItemIcon({ itemId, size = 20, className }) {
   if (pokeBalls[itemId]) return jsx(PokeballIcon, { ballId: itemId, size })
   return null
 }
+
+/**
+ * Whether `ItemIcon` can draw anything for an item. Callers that want a fallback
+ * glyph (the minigame reward list) can check before rendering one.
+ * @param {string} itemId
+ * @returns {boolean}
+ */
+export function hasItemIcon(itemId) {
+  return Boolean(itemIcons[itemId] || pokeBalls[itemId])
+}

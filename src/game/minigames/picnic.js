@@ -60,30 +60,31 @@ export function ingredientById(id) {
 }
 
 /**
- * The type the picked fillings add up to: the most-picked type, with the
- * earliest pick breaking a tie. Bread carries no type and is ignored.
+ * The distinct types the picked fillings could produce, in pick order.
  * @param {string[]} pickedIds
- * @returns {string | null}
+ * @returns {string[]}
  */
-export function sandwichType(pickedIds) {
-  const counts = new Map(),
-    order = []
+export function sandwichTypes(pickedIds) {
+  /** @type {string[]} */
+  const types = []
   for (const id of pickedIds) {
     const type = ingredientById(id)?.type
-    if (!type) continue
-    if (!counts.has(type)) order.push(type)
-    counts.set(type, (counts.get(type) ?? 0) + 1)
+    if (type && !types.includes(type)) types.push(type)
   }
-  let best = null,
-    bestCount = 0
-  for (const type of order) {
-    const count = counts.get(type) ?? 0
-    if (count > bestCount) {
-      best = type
-      bestCount = count
-    }
-  }
-  return best
+  return types
+}
+
+/**
+ * Which of the picked fillings' types the sandwich ends up producing. Every pick
+ * is a real candidate: the reward is one of them, chosen at random.
+ * @param {string[]} pickedIds
+ * @param {() => number} [rng]
+ * @returns {string | null}
+ */
+export function rollSandwichType(pickedIds, rng = Math.random) {
+  const types = sandwichTypes(pickedIds)
+  if (types.length === 0) return null
+  return types[Math.floor(rng() * types.length)]
 }
 
 /**

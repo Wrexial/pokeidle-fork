@@ -19,7 +19,7 @@ export { MATCH3_COST, MATCH3_SIZE, MATCH3_MOVES, MATCH3_MATCH_POINTS, MATCH3_TYP
 export { MEMORY_COST, MEMORY_PAIRS, MEMORY_POOL, createMemoryDeck, memoryPrize } from './minigames/memory.js'
 export { WHACK_COST, WHACK_DURATION_MS, WHACK_CELLS, WHACK_POP_MS, WHACK_TARGETS, rollWhackTarget, whackPrize } from './minigames/whack.js'
 export { MUSICAL_COST, MUSICAL_LANES, MUSICAL_ARROWS, MUSICAL_NOTES, MUSICAL_BEAT_MS, MUSICAL_LEAD_MS, MUSICAL_VIEW_MS, MUSICAL_PERFECT_MS, MUSICAL_GOOD_MS, MUSICAL_OK_MS, MUSICAL_MAX_SCORE, generateMusicalPattern, musicalTotalMs, judgeMusicalHit, musicalPrize } from './minigames/musical.js'
-export { PICNIC_COST, PICNIC_PICKS, PICNIC_SWING_MS, PICNIC_TOPPLE_LIMIT, PICNIC_SHINY_MULTIPLIER, PICNIC_BREAD, PICNIC_INGREDIENTS, ingredientById, sandwichType, picnicDropScore, picnicSpeciesPool, rollPicnicEncounter } from './minigames/picnic.js'
+export { PICNIC_COST, PICNIC_PICKS, PICNIC_SWING_MS, PICNIC_TOPPLE_LIMIT, PICNIC_SHINY_MULTIPLIER, PICNIC_BREAD, PICNIC_INGREDIENTS, ingredientById, sandwichTypes, rollSandwichType, picnicDropScore, picnicSpeciesPool, rollPicnicEncounter } from './minigames/picnic.js'
 export { POKEBALL_FACTORY_COST, FACTORY_SIZE, FACTORY_DIRECTIONS, FACTORY_BALL_POOL, connectionsFor, createFactoryPuzzle, rotateFactoryTile, factoryPowered, factorySolved, rollFactoryBalls, factoryPrize } from './minigames/pokeball-factory.js'
 export { BATTLE_ROYAL_COST, BATTLE_ROYAL_HEAL, BATTLE_ROYAL_POOL, battleRoyalOpponent, healSquad, battleRoyalPrize } from './minigames/battle-royal.js'
 export { DYNAMAX_ADVENTURES_COST, DYNAMAX_STAGES, DYNAMAX_BOSS_LEVEL, dynamaxPaths, dynamaxBoss, dynamaxPrize } from './minigames/dynamax-adventures.js'

@@ -7,6 +7,7 @@
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { rewardItemName } from '../game/minigames.js'
+import { ItemIcon, hasItemIcon } from './item-icon.js'
 
 /**
  * @param {{
@@ -72,7 +73,12 @@ export function MinigameRewardScreen({
                     className: 'minigame-reward-row',
                     style: { animationDelay: `${0.12 + index * 0.1}s` },
                     children: [
-                      jsx('span', { className: 'minigame-reward-icon', children: '🎁' }),
+                      jsx('span', {
+                        className: 'minigame-reward-icon',
+                        children: hasItemIcon(item.itemId)
+                          ? jsx(ItemIcon, { itemId: item.itemId, size: 20 })
+                          : '\u{1f381}',
+                      }),
                       jsx('span', {
                         className: 'minigame-reward-name',
                         children: itemName(item.itemId),

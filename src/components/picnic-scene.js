@@ -17,7 +17,8 @@ import {
   ingredientById,
   picnicDropScore,
   rollPicnicEncounter,
-  sandwichType,
+  rollSandwichType,
+  sandwichTypes,
 } from '../game/minigames.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
 import { checkShinyOdds, shinyOddsForSpecies } from '../game/progression.js'
@@ -102,7 +103,7 @@ export function PicnicScene() {
   }
 
   function buildReward() {
-    const type = sandwichType(picks)
+    const type = rollSandwichType(picks)
     if (!type) {
       setStage('failed')
       return
@@ -187,7 +188,7 @@ export function PicnicScene() {
 
   const placedFillings = layers.filter((layer) => layer.ingredientId !== PICNIC_BREAD.id).length,
     nextIngredient = stage === 'stack' ? ingredientById(picks[placedFillings]) : null,
-    previewType = sandwichType(picks),
+    previewTypes = sandwichTypes(picks),
     spawnSpecies = pending ? pokemonSpecies[pending.speciesKey] : null
 
   return jsxs('div', {
@@ -206,7 +207,7 @@ export function PicnicScene() {
                 : stage === 'stack'
                   ? `Score ${score} \u00b7 Stack ${placedFillings}/${PICNIC_PICKS}`
                   : stage === 'reward'
-                    ? `${previewType} sandwich`
+                    ? `${pending?.type ?? ''} sandwich`
                     : (lastGrade === 'topple' ? 'The stack toppled!' : 'No Pokemon'),
           }),
         ],
@@ -255,16 +256,38 @@ export function PicnicScene() {
                       )
                     }),
                   }),
+                  jsxs('div', {
+                    className: 'picnic-order',
+                    children: [
+                      jsx('span', {
+                        className: 'picnic-order-bread',
+                        children: PICNIC_BREAD.emoji,
+                      }),
+                      ...picks.map((id) => {
+                        const ingredient = ingredientById(id)
+                        return jsx(
+                          'span',
+                          { className: 'picnic-order-item', children: ingredient?.emoji ?? '' },
+                          id
+                        )
+                      }),
+                      jsx('span', {
+                        className: 'picnic-order-bread',
+                        children: PICNIC_BREAD.emoji,
+                      }),
+                    ],
+                  }),
                   jsx('div', {
                     className: 'picnic-type-preview',
-                    children: previewType
-                      ? jsxs('span', {
-                          children: [
-                            'Sandwich type: ',
-                            jsx('strong', { children: previewType }),
-                          ],
-                        })
-                      : 'Pick at least one filling.',
+                    children:
+                      previewTypes.length > 0
+                        ? jsxs('span', {
+                            children: [
+                              'Sandwich type: one of ',
+                              jsx('strong', { children: previewTypes.join(' / ') }),
+                            ],
+                          })
+                        : 'Pick at least one filling.',
                   }),
                 ],
               })

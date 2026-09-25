@@ -2773,20 +2773,34 @@ if (mapData.raidIsland) mapData.raidIsland.routeKey = 'raidIsland'
 
 // Zone sub-areas unlock in order, behind their hub: a grouped zone's routes are
 // not otherwise ordered, so Route 6 could open before Akala Island and Route 5.
+// The chain follows `unlockOrder` (the progress key the level curve uses), not
+// the hub's list position — Paldea's provinces are listed numerically, which
+// put (Area Three) before (Area Two) and, with the battle gates, deadlocked
+// South Province (Area Five) against (Area Six).
 for (const hub of Object.values(mapData)) {
   if (hub.type !== 'zone' || !Array.isArray(hub.subAreas)) continue
+  const subAreaIds = new Set(hub.subAreas.map((subArea) => subArea.id)),
+    ordered = [...hub.subAreas].sort((left, right) => {
+      const leftOrder = mapData[left.id]?.unlockOrder ?? 0,
+        rightOrder = mapData[right.id]?.unlockOrder ?? 0
+      return leftOrder - rightOrder || left.id.localeCompare(right.id)
+    })
   let previous = null
-  for (const subArea of hub.subAreas) {
+  for (const subArea of ordered) {
     const location = mapData[subArea.id]
     if (!location) continue
     const unlock = location.unlock ?? {},
-      existing = unlock.requires ?? []
+      existing = unlock.requires ?? [],
+      // Drop this hub's own chain links (the hub and any sibling sub-area)
+      // before rebuilding them in the right order.
+      external = existing.filter((id) => id !== hub.id && !subAreaIds.has(id))
     location.unlock = {
       ...unlock,
-      requires: [...new Set([...existing, hub.id, ...(previous ? [previous] : [])])],
+      requires: [...new Set([...external, hub.id, ...(previous ? [previous] : [])])],
     }
     previous = subArea.id
   }
+  hub.subAreas = ordered.map((subArea) => ({ id: subArea.id, name: subArea.name }))
 }
 
 write('regions.json', regions)

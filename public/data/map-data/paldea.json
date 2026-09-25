@@ -173,7 +173,7 @@
    "caughtCount": 6,
    "requires": [
     "paldea-south-province",
-    "paldea-south-province-area-two"
+    "paldea-south-province-area-one"
    ]
   },
   "unlockOrder": 910002.5003,
@@ -204,7 +204,7 @@
    ],
    "requires": [
     "paldea-south-province",
-    "paldea-south-province-area-one"
+    "paldea-south-province-area-three"
    ]
   },
   "unlockOrder": 910002.5004,
@@ -235,8 +235,7 @@
    ],
    "partyLevel": 18,
    "requires": [
-    "paldea-west-province",
-    "paldea-west-province-area-two"
+    "paldea-west-province"
    ]
   },
   "unlockOrder": 910002.5005,
@@ -276,7 +275,8 @@
    },
    "partyLevel": 18,
    "requires": [
-    "paldea-west-province"
+    "paldea-west-province",
+    "paldea-west-province-area-three"
    ]
   },
   "unlockOrder": 910003,
@@ -635,7 +635,7 @@
    "partyLevel": 33,
    "requires": [
     "paldea-south-province",
-    "paldea-south-province-area-three"
+    "paldea-south-province-area-two"
    ]
   },
   "unlockOrder": 910004.5005,
@@ -667,7 +667,7 @@
    "partyLevel": 38,
    "requires": [
     "paldea-east-province",
-    "paldea-east-province-area-two"
+    "paldea-east-province-area-one"
    ]
   },
   "unlockOrder": 910004.5003,
@@ -699,7 +699,7 @@
    "partyLevel": 47,
    "requires": [
     "paldea-south-province",
-    "paldea-south-province-area-five"
+    "paldea-south-province-area-four"
    ]
   },
   "unlockOrder": 910004.5006,
@@ -837,7 +837,7 @@
    "partyLevel": 61,
    "requires": [
     "paldea-south-province",
-    "paldea-south-province-area-four"
+    "paldea-south-province-area-six"
    ]
   },
   "unlockOrder": 910006.0004,
@@ -952,7 +952,7 @@
    "partyLevel": 67,
    "requires": [
     "paldea-east-province",
-    "paldea-east-province-area-one"
+    "paldea-east-province-area-three"
    ]
   },
   "unlockOrder": 910006.5001,
@@ -1446,24 +1446,24 @@
     "name": "South Province (Area One)"
    },
    {
-    "id": "paldea-south-province-area-two",
-    "name": "South Province (Area Two)"
-   },
-   {
     "id": "paldea-south-province-area-three",
     "name": "South Province (Area Three)"
+   },
+   {
+    "id": "paldea-south-province-area-two",
+    "name": "South Province (Area Two)"
    },
    {
     "id": "paldea-south-province-area-four",
     "name": "South Province (Area Four)"
    },
    {
-    "id": "paldea-south-province-area-five",
-    "name": "South Province (Area Five)"
-   },
-   {
     "id": "paldea-south-province-area-six",
     "name": "South Province (Area Six)"
+   },
+   {
+    "id": "paldea-south-province-area-five",
+    "name": "South Province (Area Five)"
    }
   ],
   "unlock": {
@@ -1496,16 +1496,16 @@
   ],
   "subAreas": [
    {
+    "id": "paldea-west-province-area-three",
+    "name": "West Province (Area Three)"
+   },
+   {
     "id": "paldea-west-province-area-one",
     "name": "West Province (Area One)"
    },
    {
     "id": "paldea-west-province-area-two",
     "name": "West Province (Area Two)"
-   },
-   {
-    "id": "paldea-west-province-area-three",
-    "name": "West Province (Area Three)"
    }
   ],
   "unlock": {
@@ -1556,12 +1556,12 @@
     "name": "East Province (Area One)"
    },
    {
-    "id": "paldea-east-province-area-two",
-    "name": "East Province (Area Two)"
-   },
-   {
     "id": "paldea-east-province-area-three",
     "name": "East Province (Area Three)"
+   },
+   {
+    "id": "paldea-east-province-area-two",
+    "name": "East Province (Area Two)"
    }
   ],
   "unlock": {

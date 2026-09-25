@@ -162,6 +162,45 @@ test('zone sub-areas unlock in order behind their hub', () => {
   }
 })
 
+test('zone sub-areas are chained by unlockOrder, not list position', () => {
+  // The sub-area list must follow `unlockOrder`, the progress key the level
+  // curve is built from. Paldea's provinces were listed in plain numeric order,
+  // so chaining the list put Area Three before Area Two and made West Province
+  // (Area Three) look like the next goal while it was actually gated far ahead.
+  for (const hub of Object.values(mapData)) {
+    if (hub.type !== 'zone' || !Array.isArray(hub.subAreas)) continue
+    const orders = hub.subAreas.map((subArea) => mapData[subArea.id]?.unlockOrder ?? 0)
+    for (let index = 1; index < orders.length; index++)
+      assert.ok(
+        orders[index] >= orders[index - 1],
+        `${hub.id} sub-areas should ascend in unlockOrder (${orders.join(', ')})`
+      )
+  }
+})
+
+test('no unlock gate waits on a location that waits on it', () => {
+  // A `battlesAtLocation` gate closes an implicit edge in the unlock graph: if
+  // South Province (Area Five) asks for wins in (Area Six) while (Area Six)
+  // needs (Area Five), neither can ever unlock.
+  const requiresClosure = (/** @type {string} */ start) => {
+    const seen = new Set()
+    const stack = [...(mapData[start]?.unlock?.requires ?? [])]
+    while (stack.length > 0) {
+      const id = stack.pop()
+      if (seen.has(id) || !mapData[id]) continue
+      seen.add(id)
+      for (const next of mapData[id].unlock?.requires ?? []) stack.push(next)
+    }
+    return seen
+  }
+  for (const [id, location] of Object.entries(mapData))
+    for (const gate of location.unlock?.battlesAtLocation ?? [])
+      assert.ok(
+        !requiresClosure(gate.locationId).has(id),
+        `${id} asks for wins at ${gate.locationId}, which is gated behind it`
+      )
+})
+
 test('every hidden sub-area has a visible zone hub to focus the map on', () => {
   // The Town Map cannot draw a hidden sub-area, so when the player stands on
   // one (starting in Alola/Paldea) it focuses the parent zone hub instead. A

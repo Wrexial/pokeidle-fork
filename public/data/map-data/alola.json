@@ -100,7 +100,7 @@
    ],
    "battlesAtLocation": [
     {
-     "locationId": "alola-route-1",
+     "locationId": "alola-route-1--hauoli-outskirts",
      "count": 8
     }
    ],
@@ -203,7 +203,7 @@
    ],
    "battlesAtLocation": [
     {
-     "locationId": "alola-route-1",
+     "locationId": "alola-route-2",
      "count": 15
     }
    ],
@@ -391,7 +391,13 @@
     "alola-route-5"
    ],
    "partyLevel": 27,
-   "caughtCount": 16
+   "caughtCount": 16,
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-5",
+     "count": 4
+    }
+   ]
   },
   "unlockOrder": 700006,
   "position": {
@@ -667,6 +673,12 @@
    "caughtCount": 26,
    "gymsRequired": [
     "alola-gym-5"
+   ],
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-11",
+     "count": 4
+    }
    ]
   },
   "unlockOrder": 700012,

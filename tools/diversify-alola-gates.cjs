@@ -41,11 +41,11 @@ const GATES = {
     battlesAtLocation: [{ locationId: 'alola-route-1', count: 4 }],
   },
   'alola-route-2': {
-    battlesAtLocation: [{ locationId: 'alola-route-1', count: 8 }],
+    battlesAtLocation: [{ locationId: 'alola-route-1--hauoli-outskirts', count: 8 }],
     partyLevel: 11,
   },
   'alola-route-3': {
-    battlesAtLocation: [{ locationId: 'alola-route-1', count: 15 }],
+    battlesAtLocation: [{ locationId: 'alola-route-2', count: 15 }],
     caughtOnRoute: { routeKey: 'alola-route-1', species: ROUTE_1_EXCLUSIVES, count: 3 },
   },
   // Akala
@@ -54,7 +54,11 @@ const GATES = {
     battlesAtLocation: [{ locationId: 'alola-route-4', count: 8 }],
     gymsRequired: ['alola-gym-1'],
   },
-  'alola-route-6': { partyLevel: 27, caughtCount: 16 },
+  'alola-route-6': {
+    partyLevel: 27,
+    caughtCount: 16,
+    battlesAtLocation: [{ locationId: 'alola-route-5', count: 4 }],
+  },
   'alola-route-7': {
     caughtOnRoute: { routeKey: 'alola-route-6', species: ['wishiwashi'], count: 1 },
   },
@@ -69,7 +73,11 @@ const GATES = {
     caughtOnRoute: { routeKey: 'alola-route-10', species: ['jangmo-o'], count: 1 },
     gymsRequired: ['alola-gym-4'],
   },
-  'alola-route-12': { caughtCount: 26, gymsRequired: ['alola-gym-5'] },
+  'alola-route-12': {
+    caughtCount: 26,
+    gymsRequired: ['alola-gym-5'],
+    battlesAtLocation: [{ locationId: 'alola-route-11', count: 4 }],
+  },
   'alola-route-13': {
     battlesAtLocation: [{ locationId: 'alola-route-12', count: 12 }],
     partyLevel: 51,

@@ -1,7 +1,7 @@
 // Reducer handlers for the one-off NPC gifts and static encounters.
 
 import { createBattlePokemon } from '../combat.js'
-import { entryRequirementStatus, findGift, findStatic, giftRewardLabel } from '../gifts.js'
+import { entryRequirementStatus, findGift, findStatic, giftRewardLabel, resolveGiftStarter } from '../gifts.js'
 import { markCaught } from './collection.js'
 import { catchPokemon } from './pokemon/management.js'
 import { startEncounter } from './battle/events.js'
@@ -31,15 +31,18 @@ export function claimGift(state, action) {
       inventory[itemId] = (inventory[itemId] ?? 0) + quantity
     next = { ...next, inventory }
   }
-  if (gift.pokemon) {
-    next = catchPokemon(next, {
-      type: 'CATCH_POKEMON',
-      payload: { speciesKey: gift.pokemon.speciesKey, level: gift.pokemon.level },
-    })
-    next = markCaught(next, {
-      type: 'MARK_CAUGHT',
-      payload: { speciesKey: gift.pokemon.speciesKey },
-    })
+  if (gift.pokemon || gift.randomStarter) {
+    const speciesKey = gift.pokemon?.speciesKey ?? resolveGiftStarter(state, gift)
+    if (speciesKey) {
+      next = catchPokemon(next, {
+        type: 'CATCH_POKEMON',
+        payload: { speciesKey, level: gift.pokemon?.level ?? 5 },
+      })
+      next = markCaught(next, {
+        type: 'MARK_CAUGHT',
+        payload: { speciesKey },
+      })
+    }
   }
   const reward = giftRewardLabel(gift)
   return withNotification(

@@ -38,6 +38,7 @@ export function selectStarter(state, action) {
     ...state,
     phase: 'idle',
     startRegion: regionId,
+    starterSpeciesKey: speciesKey,
     challengeMonotype: POKEMON_TYPES.includes(action.payload.monotype)
       ? action.payload.monotype
       : null,

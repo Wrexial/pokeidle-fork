@@ -5,6 +5,7 @@
 // simple region-local gates (badges / champion / Pokedex size).
 
 import { gymLeaderData, mapData, pokemonSpecies, regions } from '../data/gameData.js'
+import { regionalStarters } from '../data/config.js'
 import { rewardItemName } from './minigames/mining.js'
 
 /**
@@ -12,6 +13,7 @@ import { rewardItemName } from './minigames/mining.js'
  *   id: string, location: string, name: string, description: string,
  *   items?: Record<string, number>, money?: number,
  *   pokemon?: { speciesKey: string, level: number },
+ *   randomStarter?: string,
  *   requires?: { badges?: number, champion?: string, caught?: number },
  * }} GiftEntry
  */
@@ -38,7 +40,7 @@ export const GIFTS = [
     location: 'johto-new-bark-town',
     name: "Professor Elm's Lab",
     description: 'Elm has a spare Johto starter to give away.',
-    pokemon: { speciesKey: 'cyndaquil', level: 5 },
+    randomStarter: 'johto',
   },
   {
     id: 'gift-hoenn-castform',
@@ -77,7 +79,7 @@ export const GIFTS = [
     location: 'alola-iki-town',
     name: 'Iki Town Festival',
     description: 'A trial-goer shares one of the Alola starters.',
-    pokemon: { speciesKey: 'rowlet', level: 5 },
+    randomStarter: 'alola',
   },
   {
     id: 'gift-galar-toxel',
@@ -92,7 +94,7 @@ export const GIFTS = [
     location: 'paldea-mesagoza',
     name: 'Naranja Academy',
     description: 'The academy spares one of the Paldea starters.',
-    pokemon: { speciesKey: 'sprigatito', level: 5 },
+    randomStarter: 'paldea',
   },
 ]
 
@@ -245,6 +247,27 @@ export function locationEntries(state, locationId) {
 }
 
 /**
+ * The starter a `randomStarter` gift hands over: a random member of the
+ * region's starter trio. In the region the player started in, the starter they
+ * picked pre-game is left out so the gift is never a duplicate.
+ * @param {GameState} state
+ * @param {GiftEntry} gift
+ * @param {() => number} [rng]
+ * @returns {string | null}
+ */
+export function resolveGiftStarter(state, gift, rng = Math.random) {
+  const regionId = gift.randomStarter
+  if (!regionId) return null
+  const starters = (regionalStarters[regionId] ?? []).filter((key) => pokemonSpecies[key])
+  if (starters.length === 0) return null
+  let pool = starters
+  if (regionId === state.startRegion && state.starterSpeciesKey)
+    pool = starters.filter((key) => key !== state.starterSpeciesKey)
+  if (pool.length === 0) pool = starters
+  return pool[Math.floor(rng() * pool.length)] ?? pool[0]
+}
+
+/**
  * A short human label for what a gift hands over.
  * @param {GiftEntry} gift
  * @returns {string}
@@ -253,6 +276,11 @@ export function giftRewardLabel(gift) {
   const parts = []
   if (gift.pokemon)
     parts.push(pokemonSpecies[gift.pokemon.speciesKey]?.name ?? gift.pokemon.speciesKey)
+  if (gift.randomStarter) {
+    const regionName =
+      regions.find((region) => region.id === gift.randomStarter)?.name ?? gift.randomStarter
+    parts.push(`a random ${regionName} starter`)
+  }
   if (gift.money) parts.push(`$${gift.money.toLocaleString()}`)
   for (const [itemId, quantity] of Object.entries(gift.items ?? {}))
     parts.push(`${rewardItemName(itemId)} x${quantity}`)

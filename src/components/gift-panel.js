@@ -3,6 +3,7 @@
 
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { pokemonSpecies } from '../data/gameData.js'
+import { regionalStarters } from '../data/config.js'
 import { useGame } from '../game/context.js'
 import { giftRewardLabel, locationEntries } from '../game/gifts.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
@@ -62,11 +63,26 @@ export function GiftPanel({ locationId }) {
               jsxs('div', {
                 className: 'location-gift-main',
                 children: [
-                  gift.pokemon &&
-                    jsx(EntrySprite, {
-                      speciesKey: gift.pokemon.speciesKey,
-                      alt: pokemonSpecies[gift.pokemon.speciesKey]?.name ?? gift.pokemon.speciesKey,
-                    }),
+                  gift.randomStarter
+                    ? jsx('div', {
+                        className: 'location-gift-starters',
+                        children: (regionalStarters[gift.randomStarter] ?? []).map((speciesKey) =>
+                          jsx(
+                            EntrySprite,
+                            {
+                              speciesKey,
+                              alt: pokemonSpecies[speciesKey]?.name ?? speciesKey,
+                            },
+                            speciesKey
+                          )
+                        ),
+                      })
+                    : gift.pokemon &&
+                      jsx(EntrySprite, {
+                        speciesKey: gift.pokemon.speciesKey,
+                        alt:
+                          pokemonSpecies[gift.pokemon.speciesKey]?.name ?? gift.pokemon.speciesKey,
+                      }),
                   jsxs('div', {
                     className: 'location-gift-text',
                     children: [

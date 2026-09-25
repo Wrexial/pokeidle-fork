@@ -43,6 +43,7 @@ export const CHANGELOG = [
           heading: 'People & Places',
           items: [
             'One-off NPC gifts and static encounters: towns and routes now offer a gift (an item pack, an Eevee, a regional starter, a Riolu, ...) or a fixed wild battle (a Snorlax blocking the road, a wiggling Sudowoodo, a honey-tree Munchlax, ...), each claimable once per save and listed in the location panel with any badge gate spelled out',
+            'The Johto, Alola and Paldea starter gifts now hand over a random starter from that region (shown as its trio), and skip the starter you picked if it is your first region',
             'A town\u2019s Poke Mart can now be collapsed from its header, and it stays collapsed on your next visit, so a long shop list no longer pushes the area\u2019s encounters and activities off-screen',
             'Marts now stock different shelves: each region\u2019s situational balls and held items are split between its towns instead of every mart listing the whole regional set',
             'Premier Balls are no longer sold \u2014 you get one free for every 10 balls you buy',

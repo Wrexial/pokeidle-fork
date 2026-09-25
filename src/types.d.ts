@@ -359,6 +359,8 @@ type WonderTradeState = {
 type GameState = {
   phase: string
   startRegion: string
+  /** Species key of the starter chosen at game start (see SELECT_STARTER). */
+  starterSpeciesKey?: string | null
   playerPokemon: Pokemon | null
   enemyPokemon: any
   party: Pokemon[]

@@ -23,6 +23,8 @@ import { loadSave, phaseIdle, prestigeRegion, resetEliteFour, selectStarter, tra
 export const initialGameState = {
   phase: 'starterSelect',
   startRegion: 'kanto',
+  /** The starter picked at SELECT_STARTER, so a first-region starter gift can avoid duplicating it. */
+  starterSpeciesKey: null,
   playerPokemon: null,
   enemyPokemon: null,
   currentRoute: 'route1',

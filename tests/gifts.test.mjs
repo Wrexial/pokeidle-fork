@@ -5,11 +5,12 @@ import { installGameData } from './helpers/game-data.mjs'
 
 const gameData = installGameData()
 
-const { GIFTS, STATIC_ENCOUNTERS, entryRequirementStatus, findGift, findStatic, giftRewardLabel, locationEntries } =
+const { GIFTS, STATIC_ENCOUNTERS, entryRequirementStatus, findGift, findStatic, giftRewardLabel, locationEntries, resolveGiftStarter } =
   await import('../src/game/gifts.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 const { createPokemon } = await import('../src/game/pokemon.js')
 const { consumableItems, evolutionItems, heldItems, pokeBalls } = await import('../src/data/items.js')
+const { regionalStarters } = await import('../src/data/config.js')
 
 const { mapData, pokemonSpecies, gymLeaderData } = gameData
 
@@ -20,6 +21,11 @@ test('every gift and static is real data on a real location', () => {
     ids.add(gift.id)
     assert.ok(mapData[gift.location], `${gift.id} is on a real location`)
     if (gift.pokemon) assert.ok(pokemonSpecies[gift.pokemon.speciesKey], `${gift.id} species`)
+    if (gift.randomStarter)
+      assert.ok(
+        (regionalStarters[gift.randomStarter] ?? []).length > 0,
+        `${gift.id} is a real starter region`
+      )
     for (const itemId of Object.keys(gift.items ?? {}))
       assert.ok(
         consumableItems[itemId] || heldItems[itemId] || evolutionItems[itemId] || pokeBalls[itemId],
@@ -91,26 +97,61 @@ test('CLAIM_GIFT hands over items once, at the right place', () => {
   assert.equal(twice.claimedGifts.filter((id) => id === gift.id).length, 1, 'claimed only once')
 })
 
-test('a Pokemon gift joins the party and the Pokedex', () => {
-  const gift = GIFTS.find((entry) => entry.pokemon && !entry.requires)
+test('a random starter gift joins the party and the Pokedex', () => {
+  const gift = GIFTS.find((entry) => entry.randomStarter && !entry.requires)
   assert.ok(gift)
-  const next = gameReducer(
-    {
+  const starters = regionalStarters[gift.randomStarter],
+    next = gameReducer(
+      {
+        ...initialGameState,
+        phase: 'idle',
+        currentLocation: gift.location,
+        party: [],
+        box: [],
+        pokedexCaught: [],
+      },
+      { type: 'CLAIM_GIFT', payload: { giftId: gift.id } }
+    ),
+    member = [...next.party, ...next.box].find((pokemon) => starters.includes(pokemon.speciesKey))
+  assert.ok(member, 'one of the region starters joined the squad')
+  assert.equal(member.level, 5)
+  assert.ok(next.pokedexCaught.includes(member.speciesKey))
+})
+
+test('the first region starter gift never repeats the pre-game starter', () => {
+  const gift = GIFTS.find((entry) => entry.randomStarter === 'alola')
+  assert.ok(gift)
+  const starters = regionalStarters.alola,
+    state = {
       ...initialGameState,
       phase: 'idle',
+      startRegion: 'alola',
+      starterSpeciesKey: 'rowlet',
       currentLocation: gift.location,
       party: [],
       box: [],
       pokedexCaught: [],
-    },
-    { type: 'CLAIM_GIFT', payload: { giftId: gift.id } }
-  )
-  const member = [...next.party, ...next.box].find(
-    (pokemon) => pokemon.speciesKey === gift.pokemon.speciesKey
-  )
-  assert.ok(member, 'the gifted Pokemon joined the squad')
-  assert.equal(member.level, gift.pokemon.level)
-  assert.ok(next.pokedexCaught.includes(gift.pokemon.speciesKey))
+    }
+  for (let attempt = 0; attempt < 40; attempt++) {
+    const next = gameReducer(state, { type: 'CLAIM_GIFT', payload: { giftId: gift.id } }),
+      member = [...next.party, ...next.box].find((pokemon) =>
+        starters.includes(pokemon.speciesKey)
+      )
+    assert.ok(member)
+    assert.notEqual(member.speciesKey, 'rowlet', 'the chosen starter is never handed back')
+  }
+})
+
+test('resolveGiftStarter keeps the picked starter out of the first region pool', () => {
+  const gift = GIFTS.find((entry) => entry.randomStarter === 'alola'),
+    state = { startRegion: 'alola', starterSpeciesKey: 'rowlet' }
+  for (let attempt = 0; attempt < 20; attempt++)
+    assert.notEqual(resolveGiftStarter(state, gift), 'rowlet')
+  // A later region is not the player's first, so all three can appear.
+  const later = { startRegion: 'kanto', starterSpeciesKey: 'charmander' },
+    seen = new Set()
+  for (let attempt = 0; attempt < 120; attempt++) seen.add(resolveGiftStarter(later, gift))
+  assert.ok(seen.size > 1, 'a later region rolls freely')
 })
 
 test('START_STATIC_ENCOUNTER begins a real battle with the fixed foe', () => {

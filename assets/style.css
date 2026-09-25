@@ -10557,6 +10557,18 @@ img {
     image-rendering: pixelated
 }
 
+.location-gift-starters {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+    flex-shrink: 0
+}
+
+.location-gift-starters .location-gift-sprite {
+    width: 34px;
+    height: 34px
+}
+
 .location-gift-text {
     display: flex;
     flex-direction: column;

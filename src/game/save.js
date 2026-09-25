@@ -2,7 +2,7 @@
 // save. Split out of context.js so the provider is just React wiring and this
 // repair logic stays testable on its own.
 
-import { BATTLE_TOWER_REGION, LEGACY_SAVE_KEYS, SAVE_BACKUP_KEY, SAVE_SLOT_COUNT, SAVE_VERSION, getActiveSlot, saveSlotKey, setActiveSlot } from '../data/config.js'
+import { BATTLE_TOWER_REGION, LEGACY_SAVE_KEYS, SAVE_BACKUP_KEY, SAVE_SLOT_COUNT, SAVE_VERSION, getActiveSlot, regionalStarters, saveSlotKey, setActiveSlot } from '../data/config.js'
 import { dailyEventByKey, todayKey } from '../data/daily-events.js'
 import { activeItems, autoCatchBallOrder, pokeBalls } from '../data/items.js'
 import { elite4Data, encounterData, gymLeaderData, mapData, moveData, pokemonSpecies, preEvolutionMap, regions, speciesKeysByGeneration } from '../data/gameData.js'
@@ -504,6 +504,14 @@ export function repairSave(saved) {
     ...initialGameState,
     phase: 'idle',
     startRegion: fallbackRegion,
+    starterSpeciesKey:
+      typeof saved.starterSpeciesKey === 'string'
+        ? saved.starterSpeciesKey
+        : (Array.isArray(saved.pokedexCaught)
+            ? saved.pokedexCaught.find(/** @param {string} key */ (key) =>
+                (regionalStarters[fallbackRegion] ?? []).includes(key)
+              )
+            : null) ?? null,
     playerPokemon: party[0] || playerPokemon,
     currentRoute: safeRoute,
     speed: saved.speed || initialGameState.speed,
@@ -655,6 +663,7 @@ export function loadSavedState(slot = getActiveSlot() || 1) {
 export const SAVED_STATE_KEYS = [
   'playerPokemon',
   'startRegion',
+  'starterSpeciesKey',
   'currentRoute',
   'speed',
   'wildBattlesWon',

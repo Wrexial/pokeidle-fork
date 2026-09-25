@@ -112,6 +112,20 @@ test('Paldea has its DLC and Area Zero zones, and a legendary-only pool', () => 
   assert.deepEqual(ordinary, [], 'Paldea raid pool holds only legendaries')
 })
 
+test('every hidden sub-area has a visible zone hub to focus the map on', () => {
+  // The Town Map cannot draw a hidden sub-area, so when the player stands on
+  // one (starting in Alola/Paldea) it focuses the parent zone hub instead. A
+  // missing or hidden hub would leave the camera on empty space and the map
+  // looking blank.
+  for (const [id, location] of Object.entries(mapData)) {
+    if (!location.hidden) continue
+    const hub = location.zone ? mapData[location.zone] : null
+    assert.ok(hub, `${id} names a zone hub`)
+    assert.equal(hub.type, 'zone', `${id}'s hub is a zone node`)
+    assert.ok(!hub.hidden, `${id}'s hub is not hidden from the map`)
+  }
+})
+
 test('Alola routes and Paldea provinces are grouped into zones', () => {
   for (const id of [
     'alola-melemele-island',

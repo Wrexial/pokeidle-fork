@@ -262,18 +262,28 @@ export function TownMap() {
     const rect = canvasRect()
     if (!rect) return
     const fitScale = Math.min(rect.width, rect.height) / WORLD_SIZE
-    const scale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, Math.max(1, fitScale)))
     const requested = focusRef.current
     focusRef.current = null
-    const focusId =
-      requested && mapData[requested]?.region === activeRegion
-        ? requested
-        : activeLocationSet.has(currentLocation)
-          ? currentLocation
-          : null
-    const focus = focusId
-      ? mapData[focusId].position
-      : { x: (regionCentre.x / WORLD_SIZE) * 100, y: (regionCentre.y / WORLD_SIZE) * 100 }
+    // A hidden sub-area (Alola's islands, Paldea's provinces) is not drawn on
+    // the map, so fall back to its zone hub. Focusing on the region centre
+    // instead used to land between nodes and leave the map looking blank.
+    const hiddenZone = mapData[currentLocation]?.zone,
+      focusId =
+        requested && mapData[requested]?.region === activeRegion
+          ? requested
+          : activeLocationSet.has(currentLocation)
+            ? currentLocation
+            : hiddenZone && activeLocationSet.has(hiddenZone)
+              ? hiddenZone
+              : null,
+      // Zoomed in on a real node, but fit the whole region when there is nothing
+      // to focus (an empty map, or a sub-area whose hub isn't visible).
+      scale = focusId
+        ? Math.min(MAX_SCALE, Math.max(MIN_SCALE, Math.max(1, fitScale)))
+        : Math.min(MAX_SCALE, Math.max(MIN_SCALE, fitScale)),
+      focus = focusId
+        ? mapData[focusId].position
+        : { x: (regionCentre.x / WORLD_SIZE) * 100, y: (regionCentre.y / WORLD_SIZE) * 100 }
     centreOn((focus.x / 100) * WORLD_SIZE, (focus.y / 100) * WORLD_SIZE, scale)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeRegion, focusNonce])

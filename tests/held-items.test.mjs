@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 installGameData()
 
-const { heldStatMultiplier } = await import('../src/game/held-items.js')
+const { heldStatMultiplier, rollHeldItem, WILD_HELD_ITEMS } = await import('../src/game/held-items.js')
 const { resolveBattleTurn } = await import('../src/game/combat.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 const { getItemCategory } = await import('../src/game/progression.js')
@@ -171,6 +171,111 @@ test('a Lum Berry cures an inflicted status', () => {
     assert.ok(!enemy.status, 'the status is cured immediately')
     assert.equal(enemy.heldItemUsed, true)
     assert.ok(events.some((/** @type {any} */ event) => event.message.includes('Lum Berry')))
+  })
+})
+
+test('wild held items are curated and never a Mega Stone', () => {
+  assert.equal(rollHeldItem(0), null, 'a zero chance gives no item')
+  for (let roll = 0; roll < 300; roll++) {
+    const item = rollHeldItem(1)
+    assert.ok(item && WILD_HELD_ITEMS.includes(item), `unexpected wild item ${item}`)
+    assert.notEqual(item, 'megaStone')
+  }
+})
+
+test('Thief and Covet steal the foe held item', () => {
+  for (const move of ['thief', 'covet']) {
+    withFixedRandom(0.5, () => {
+      const player = battler({
+          name: 'Player',
+          isPlayer: true,
+          moves: [move],
+          speed: 200,
+          attack: 200,
+        }),
+        enemy = battler({
+          name: 'Foe',
+          moves: ['splash'],
+          heldItem: 'sitrusBerry',
+          currentHp: 9999,
+          maxHp: 9999,
+          defense: 1,
+        })
+      resolveBattleTurn(player, enemy, false)
+      assert.equal(player.heldItem, 'sitrusBerry', `${move} takes the item`)
+      assert.equal(enemy.heldItem, null)
+    })
+  }
+})
+
+test('Knock Off removes the foe item but keeps it for itself', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['knockOff'],
+        speed: 200,
+        attack: 200,
+      }),
+      enemy = battler({
+        name: 'Foe',
+        moves: ['splash'],
+        heldItem: 'leftovers',
+        currentHp: 9999,
+        maxHp: 9999,
+        defense: 1,
+      })
+    resolveBattleTurn(player, enemy, false)
+    assert.equal(enemy.heldItem, null)
+    assert.ok(!player.heldItem, 'Knock Off does not take the item')
+  })
+})
+
+test('Pluck and Bug Bite eat the foe Berry', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['bugBite'],
+        speed: 200,
+        attack: 200,
+        currentHp: 100,
+        maxHp: 400,
+      }),
+      enemy = battler({
+        name: 'Foe',
+        moves: ['splash'],
+        heldItem: 'sitrusBerry',
+        currentHp: 9999,
+        maxHp: 9999,
+        defense: 1,
+      })
+    resolveBattleTurn(player, enemy, false)
+    assert.equal(enemy.heldItem, null, 'the Berry is eaten')
+    assert.ok(player.currentHp > 100, 'the eater is healed')
+  })
+})
+
+test('Sticky Hold keeps an item through Knock Off', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['knockOff'],
+        speed: 200,
+        attack: 200,
+      }),
+      enemy = battler({
+        name: 'Foe',
+        moves: ['splash'],
+        heldItem: 'leftovers',
+        ability: 'stickyHold',
+        currentHp: 9999,
+        maxHp: 9999,
+        defense: 1,
+      })
+    resolveBattleTurn(player, enemy, false)
+    assert.equal(enemy.heldItem, 'leftovers')
   })
 })
 

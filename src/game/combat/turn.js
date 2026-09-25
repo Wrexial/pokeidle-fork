@@ -2,6 +2,7 @@
 
 import { moveMakesContact } from '../../data/move-effects.js'
 import { moveData, moveLearnsets } from '../../data/gameData.js'
+import { heldItems } from '../../data/items.js'
 import { abilityAbsorbsType, abilityAttackMultiplier, abilityBlocksMove, abilityBlocksNonSuperEffective, abilityChangesMoveType, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityEffectivenessMultiplier, abilityHalvesSuperEffective, abilityHealsFromType, abilityOf, abilityPreventsStatDrop, abilitySurvivesAtFullHp, fieldAuraMultiplier, onHitStatBoost, onHpThresholdBoost, ruinDefenseMultiplier, ruinOffenseMultiplier } from '../abilities.js'
 import { chooseMoveForBattle, chooseRandomMove } from './ai.js'
 import { changeBattleForm } from './setup.js'
@@ -1645,6 +1646,51 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     }
     if (abilityOf(attack.defender) === 'pickpocket' && moveMakesContact(effectiveMove))
       stealHeldItem(attack.defender, attack.attacker, events, !attack.isPlayer)
+    // Item-targeting moves. Sticky Hold still protects the item.
+    if (moveDef.effect?.type === 'stealItem')
+      stealHeldItem(attack.attacker, attack.defender, events, attack.isPlayer)
+    else if (moveDef.effect?.type === 'knockOff' || moveDef.effect?.type === 'incinerate') {
+      const item = attack.defender.heldItem,
+        itemName = item ? (heldItems[item]?.name ?? item) : null,
+        isBerry = item ? heldItems[item]?.effect?.type === 'berry' : false
+      if (
+        item &&
+        abilityOf(attack.defender) !== 'stickyHold' &&
+        (moveDef.effect.type !== 'incinerate' || isBerry)
+      ) {
+        attack.defender.heldItem = null
+        attack.defender.heldItemOverride = null
+        attack.defender.heldItemOverridden = !0
+        events.push({
+          type: 'status',
+          message:
+            moveDef.effect.type === 'incinerate'
+              ? `${attack.defender.name}'s ${itemName} was burned away!`
+              : `${attack.attacker.name} knocked off ${attack.defender.name}'s ${itemName}!`,
+          data: { target: attack.isPlayer ? 'enemy' : 'player' },
+        })
+      }
+    } else if (moveDef.effect?.type === 'eatBerry') {
+      const item = attack.defender.heldItem,
+        effect = item ? heldItems[item]?.effect : null
+      if (item && effect?.type === 'berry') {
+        attack.defender.heldItem = null
+        attack.defender.heldItemOverride = null
+        attack.defender.heldItemOverridden = !0
+        const heal = Math.max(1, Math.floor(attack.attacker.maxHp * effect.heal))
+        attack.attacker.currentHp = Math.min(
+          attack.attacker.maxHp,
+          attack.attacker.currentHp + heal
+        )
+        events.push({
+          type: 'status',
+          message: `${attack.attacker.name} ate ${attack.defender.name}'s ${
+            heldItems[item]?.name ?? item
+          }!`,
+          data: { target: attack.isPlayer ? 'player' : 'enemy' },
+        })
+      }
+    }
     // Poison Touch can poison the target from a contact move.
     if (
       abilityOf(attack.attacker) === 'poisonTouch' &&

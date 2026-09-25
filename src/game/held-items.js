@@ -3,16 +3,60 @@
 import { heldItems } from '../data/items.js'
 import { abilityOf } from './abilities.js'
 
-const HELD_ITEM_KEYS = Object.keys(heldItems)
+/**
+ * Berries and type boosters a wild Pokemon can be found holding. Kept to
+ * sensible wild finds — no Mega Stones or competitive items.
+ * @type {string[]}
+ */
+export const WILD_HELD_ITEMS = [
+  'sitrusBerry',
+  'lumBerry',
+  'silkScarf',
+  'charcoal',
+  'mysticWater',
+  'magnet',
+  'miracleSeed',
+  'neverMeltIce',
+  'blackBelt',
+  'poisonBarb',
+  'softSand',
+  'sharpBeak',
+  'twistedSpoon',
+  'silverPowder',
+  'hardStone',
+  'spellTag',
+  'dragonFang',
+  'blackGlasses',
+  'ironPlate',
+  'pixiePlate',
+]
+
+/** The stronger competitive items a trainer's Pokemon may hold. */
+export const TRAINER_HELD_ITEMS = [
+  ...WILD_HELD_ITEMS,
+  'leftovers',
+  'focusSash',
+  'eviolite',
+  'lifeOrb',
+  'choiceBand',
+  'choiceSpecs',
+  'choiceScarf',
+  'assaultVest',
+]
+
+const WILD_ITEM_KEYS = WILD_HELD_ITEMS.filter((key) => heldItems[key])
 
 /**
- * Roll a random held item for an enemy (or null).
+ * Roll a random held item (or null). Defaults to the wild pool; trainers pass
+ * `TRAINER_HELD_ITEMS` for the broader competitive set.
  * @param {number} [chance]
  * @param {() => number} [rng]
+ * @param {string[]} [pool]
  * @returns {string | null}
  */
-export function rollHeldItem(chance = 0.25, rng = Math.random) {
-  return rng() < chance ? HELD_ITEM_KEYS[Math.floor(rng() * HELD_ITEM_KEYS.length)] : null
+export function rollHeldItem(chance = 0.05, rng = Math.random, pool = WILD_ITEM_KEYS) {
+  const keys = pool.filter((key) => heldItems[key])
+  return keys.length > 0 && rng() < chance ? keys[Math.floor(rng() * keys.length)] : null
 }
 
 /** @param {BattlePokemon} pokemon */

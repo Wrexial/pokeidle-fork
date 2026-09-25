@@ -1856,6 +1856,33 @@ img {
     object-fit: contain
 }
 
+.party-sprite-wrap {
+    position: relative;
+    flex-shrink: 0;
+    line-height: 0
+}
+
+.party-held-item,
+.box-held-item {
+    position: absolute;
+    right: -3px;
+    bottom: -3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1px;
+    background: #1a1208;
+    border: 1px solid #483828;
+    line-height: 0;
+    z-index: 2
+}
+
+.party-held-item .item-icon,
+.box-held-item .item-icon {
+    width: 12px;
+    height: 12px
+}
+
 .party-info {
     flex: 1;
     min-width: 0
@@ -2055,6 +2082,15 @@ img {
     width: 40px;
     height: 40px;
     object-fit: contain
+}
+
+.box-sprite-wrap {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center
 }
 
 .box-grid-slot.filled {

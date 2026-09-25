@@ -174,6 +174,14 @@ const MOVE_OVERRIDES = {
   switcheroo: { effect: { type: 'itemSwap' }, accuracy: 100 },
   bestow: { effect: { type: 'bestow' }, accuracy: 100 },
   corrosiveGas: { effect: { type: 'corrosiveGas' }, accuracy: 100 },
+  // Damaging item moves: Thief / Covet steal, Knock Off removes, Pluck /
+  // Bug Bite eat a held Berry, Incinerate burns one away.
+  thief: { effect: { type: 'stealItem' } },
+  covet: { effect: { type: 'stealItem' } },
+  knockOff: { effect: { type: 'knockOff' } },
+  pluck: { effect: { type: 'eatBerry' } },
+  bugBite: { effect: { type: 'eatBerry' } },
+  incinerate: { effect: { type: 'incinerate' } },
   // --- Entry hazards ---
   stealthRock: { effect: { type: 'hazard', hazard: 'stealthRock' } },
   spikes: { effect: { type: 'hazard', hazard: 'spikes' } },

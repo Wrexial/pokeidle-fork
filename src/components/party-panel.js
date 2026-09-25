@@ -3,11 +3,13 @@
 import React from 'react'
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
 import { pokemonSpecies } from '../data/gameData.js'
+import { heldItems } from '../data/items.js'
 import { useGame } from '../game/context.js'
 import { getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, pokemonDisplayName } from '../game/pokemon.js'
 import { getEvolutionOptions, isFemalePokemon } from '../game/breeding.js'
 import { formatReward, releaseReward } from '../game/progression.js'
 import { ExpBar } from './exp-bar.js'
+import { ItemIcon } from './item-icon.js'
 import { HpBar } from './hp-bar.js'
 import { StatsPanel } from './stats-panel.js'
 
@@ -199,26 +201,43 @@ export function PartyPanel({
                       onDrop,
                       onDragEnd,
                       children: [
-                        jsx('img', {
-                          className: 'party-sprite',
-                          src: member.isEgg
-                            ? getEggSpriteUrl()
-                            : getPokemonSpriteUrl(
-                                species.id,
-                                !1,
-                                member.isShiny,
-                                isFemalePokemon(member)
-                              ),
-                          onError: member.isEgg
-                            ? void 0
-                            : /** @param {{ target: HTMLImageElement }} event */ (event) =>
-                                (event.target.src = getPokemonSpriteFallbackUrl(
-                                  species.id,
-                                  !1,
-                                  member.isShiny,
-                                  isFemalePokemon(member)
-                                )),
-                          alt: member.isEgg ? 'Egg' : member.name,
+                        jsxs('div', {
+                          className: 'party-sprite-wrap',
+                          children: [
+                            jsx('img', {
+                              className: 'party-sprite',
+                              src: member.isEgg
+                                ? getEggSpriteUrl()
+                                : getPokemonSpriteUrl(
+                                    species.id,
+                                    !1,
+                                    member.isShiny,
+                                    isFemalePokemon(member)
+                                  ),
+                              onError: member.isEgg
+                                ? void 0
+                                : /** @param {{ target: HTMLImageElement }} event */ (event) =>
+                                    (event.target.src = getPokemonSpriteFallbackUrl(
+                                      species.id,
+                                      !1,
+                                      member.isShiny,
+                                      isFemalePokemon(member)
+                                    )),
+                              alt: member.isEgg ? 'Egg' : member.name,
+                            }),
+                            !member.isEgg &&
+                              member.heldItem &&
+                              jsx('span', {
+                                className: 'party-held-item',
+                                title: `Holding ${
+                                  heldItems[member.heldItem]?.name ?? member.heldItem
+                                }`,
+                                children: jsx(ItemIcon, {
+                                  itemId: member.heldItem,
+                                  size: 12,
+                                }),
+                              }),
+                          ],
                         }),
                         jsxs('div', {
                           className: 'party-info',

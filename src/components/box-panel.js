@@ -4,9 +4,11 @@ import React from 'react'
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
 import { BOX_PAGE_SIZE, BOX_SORT_OPTIONS } from '../data/ui.js'
 import { pokemonSpecies } from '../data/gameData.js'
+import { heldItems } from '../data/items.js'
 import { useGame } from '../game/context.js'
 import { getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, pokemonDisplayName } from '../game/pokemon.js'
 import { isFemalePokemon } from '../game/breeding.js'
+import { ItemIcon } from './item-icon.js'
 import { PokedexModal } from './pokedex-modal.js'
 import { RecordsModal } from './records-modal.js'
 import { DaycareModal } from './daycare-modal.js'
@@ -264,28 +266,45 @@ export function BoxPanel({
                         onDragOver: onBoxSlotDragOver ? /** @param {React.DragEvent} event */ (event) => onBoxSlotDragOver(event, boxIndex) : void 0,
                         onDrop,
                         onDragEnd,
-                        children: jsx('img', {
-                          src: pokemon.isEgg
-                            ? getEggSpriteUrl()
-                            : getPokemonSpriteUrl(
-                                species.id,
-                                !1,
-                                pokemon.isShiny,
-                                isFemalePokemon(pokemon)
-                              ),
-                          onError: pokemon.isEgg
-                            ? void 0
-                            : /** @param {{ target: HTMLImageElement }} event */ (event) =>
-                                (event.target.src = getPokemonSpriteFallbackUrl(
-                                  species.id,
-                                  !1,
-                                  pokemon.isShiny,
-                                  isFemalePokemon(pokemon)
-                                )),
-                          alt: pokemon.isEgg ? 'Egg' : pokemon.name,
-                          style: {
-                            imageRendering: 'pixelated',
-                          },
+                        children: jsxs('div', {
+                          className: 'box-sprite-wrap',
+                          children: [
+                            jsx('img', {
+                              src: pokemon.isEgg
+                                ? getEggSpriteUrl()
+                                : getPokemonSpriteUrl(
+                                    species.id,
+                                    !1,
+                                    pokemon.isShiny,
+                                    isFemalePokemon(pokemon)
+                                  ),
+                              onError: pokemon.isEgg
+                                ? void 0
+                                : /** @param {{ target: HTMLImageElement }} event */ (event) =>
+                                    (event.target.src = getPokemonSpriteFallbackUrl(
+                                      species.id,
+                                      !1,
+                                      pokemon.isShiny,
+                                      isFemalePokemon(pokemon)
+                                    )),
+                              alt: pokemon.isEgg ? 'Egg' : pokemon.name,
+                              style: {
+                                imageRendering: 'pixelated',
+                              },
+                            }),
+                            !pokemon.isEgg &&
+                              pokemon.heldItem &&
+                              jsx('span', {
+                                className: 'box-held-item',
+                                title: `Holding ${
+                                  heldItems[pokemon.heldItem]?.name ?? pokemon.heldItem
+                                }`,
+                                children: jsx(ItemIcon, {
+                                  itemId: pokemon.heldItem,
+                                  size: 12,
+                                }),
+                              }),
+                          ],
                         }),
                       },
                       pokemon.id

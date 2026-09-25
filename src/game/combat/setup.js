@@ -42,7 +42,7 @@ export function createBattlePokemon(speciesKey, level, options = {}) {
     ...(wild
       ? {
           ability: rollAbility(speciesKey),
-          heldItem: rollHeldItem(0.08),
+          heldItem: rollHeldItem(0.05),
           gender: rollGender(speciesKey),
           isRoamer,
         }

@@ -2,7 +2,7 @@
 
 import { evolutionData, pokemonSpecies } from '../../data/gameData.js'
 import { checkShinyOdds } from './encounters.js'
-import { rollHeldItem } from '../held-items.js'
+import { rollHeldItem, TRAINER_HELD_ITEMS } from '../held-items.js'
 import { calculatePokemonStats, getPerfectIVs, resolvePokemonMoves, rollAbility } from '../pokemon.js'
 import { hashString, mulberry32 } from '../rng.js'
 
@@ -33,7 +33,7 @@ export function buildTrainerTeam(team, rng = Math.random) {
       speed: scale(stats.speed),
       moves,
       ability: rollAbility(member.speciesKey, rng),
-      heldItem: rollHeldItem(0.3, rng),
+      heldItem: rollHeldItem(0.15, rng, TRAINER_HELD_ITEMS),
       isPlayer: !1,
       isShiny: checkShinyOdds(),
     }

@@ -20,12 +20,111 @@ export const SAFARI_ROUTE_KEY = 'safariZone'
 /** How many turns Bait / a Rock keeps affecting the active Pokemon. */
 export const SAFARI_EFFECT_TURNS = 3
 
+/** Safari finds roll shiny at this many times the usual odds. */
+export const SAFARI_SHINY_MULTIPLIER = 2
+
 /** Catch-rate multiplier a Safari Ball applies. */
 const SAFARI_BALL_MULTIPLIER = 1.5
 
-/** The Safari Zone's own weighted encounter pool. */
-const SAFARI_POOL = encounterData[SAFARI_ROUTE_KEY]?.encounters ?? []
-const SAFARI_TOTAL_WEIGHT = SAFARI_POOL.reduce((sum, entry) => sum + entry.weight, 0)
+/** Level band for the Safari Zone's wilds (from its encounter bucket). */
+const SAFARI_LEVEL_RANGE = (() => {
+  const table = encounterData[SAFARI_ROUTE_KEY]?.encounters ?? [],
+    min = Math.min(...table.map((entry) => entry.minLevel)),
+    max = Math.max(...table.map((entry) => entry.maxLevel))
+  return Number.isFinite(min) && Number.isFinite(max) ? { min, max } : { min: 54, max: 56 }
+})()
+
+/**
+ * The Safari Zone is split into four subsections. Each carries its own weighted
+ * distribution, and the rare species are spread across them, so a hunter can
+ * pick the area that has what they are after instead of rolling one flat pool.
+ * @type {{ id: string, name: string, description: string, rares: string[], pool: { speciesKey: string, weight: number }[] }[]}
+ */
+export const SAFARI_AREAS = [
+  {
+    id: 'center',
+    name: 'Center Area',
+    description: 'Open plains in the middle of the reserve. Nidoran herds roam here.',
+    rares: ['tauros', 'kangaskhan', 'chansey'],
+    pool: [
+      { speciesKey: 'nidoranF', weight: 16 },
+      { speciesKey: 'nidoranM', weight: 16 },
+      { speciesKey: 'nidorino', weight: 8 },
+      { speciesKey: 'nidorina', weight: 8 },
+      { speciesKey: 'doduo', weight: 16 },
+      { speciesKey: 'rhyhorn', weight: 12 },
+      { speciesKey: 'exeggcute', weight: 8 },
+      { speciesKey: 'paras', weight: 6 },
+      { speciesKey: 'venonat', weight: 6 },
+      { speciesKey: 'tauros', weight: 3 },
+      { speciesKey: 'kangaskhan', weight: 3 },
+      { speciesKey: 'chansey', weight: 2 },
+    ],
+  },
+  {
+    id: 'east',
+    name: 'East Area',
+    description: 'The river delta. Water Pokemon and Dratini live in the shallows.',
+    rares: ['dratini', 'dragonair', 'squirtle'],
+    pool: [
+      { speciesKey: 'magikarp', weight: 30 },
+      { speciesKey: 'psyduck', weight: 24 },
+      { speciesKey: 'slowpoke', weight: 24 },
+      { speciesKey: 'goldeen', weight: 20 },
+      { speciesKey: 'krabby', weight: 12 },
+      { speciesKey: 'poliwag', weight: 12 },
+      { speciesKey: 'seaking', weight: 8 },
+      { speciesKey: 'dratini', weight: 6 },
+      { speciesKey: 'squirtle', weight: 2 },
+      { speciesKey: 'dragonair', weight: 1 },
+    ],
+  },
+  {
+    id: 'north',
+    name: 'North Area',
+    description: 'Rocky highlands. Scyther and Pinsir duel on the cliffs.',
+    rares: ['scyther', 'pinsir', 'charmander'],
+    pool: [
+      { speciesKey: 'rhyhorn', weight: 14 },
+      { speciesKey: 'cubone', weight: 12 },
+      { speciesKey: 'parasect', weight: 3 },
+      { speciesKey: 'venomoth', weight: 3 },
+      { speciesKey: 'scyther', weight: 3 },
+      { speciesKey: 'pinsir', weight: 3 },
+      { speciesKey: 'marowak', weight: 2 },
+      { speciesKey: 'tauros', weight: 2 },
+      { speciesKey: 'kangaskhan', weight: 2 },
+      { speciesKey: 'chansey', weight: 1 },
+      { speciesKey: 'charmander', weight: 2 },
+    ],
+  },
+  {
+    id: 'west',
+    name: 'West Area',
+    description: 'Dense thickets. Tangela and Exeggcute thrive under the canopy.',
+    rares: ['tangela', 'bulbasaur', 'exeggcute'],
+    pool: [
+      { speciesKey: 'exeggcute', weight: 16 },
+      { speciesKey: 'paras', weight: 12 },
+      { speciesKey: 'venonat', weight: 12 },
+      { speciesKey: 'doduo', weight: 12 },
+      { speciesKey: 'nidorina', weight: 6 },
+      { speciesKey: 'nidorino', weight: 6 },
+      { speciesKey: 'tangela', weight: 4 },
+      { speciesKey: 'bulbasaur', weight: 3 },
+      { speciesKey: 'chansey', weight: 1 },
+    ],
+  },
+]
+
+/**
+ * Look up a Safari subsection, falling back to the first.
+ * @param {string} areaId
+ * @returns {typeof SAFARI_AREAS[number]}
+ */
+export function safariAreaById(areaId) {
+  return SAFARI_AREAS.find((area) => area.id === areaId) ?? SAFARI_AREAS[0]
+}
 
 /** @param {string} speciesKey @returns {'male' | 'female' | 'genderless'} */
 function rollGender(speciesKey) {
@@ -37,24 +136,29 @@ function rollGender(speciesKey) {
 }
 
 /**
- * Roll a wild Pokemon hiding in the Safari Zone.
- * @returns {{ speciesKey: string, level: number, gender: 'male' | 'female' | 'genderless' }}
+ * Roll a wild Pokemon hiding in a Safari subsection.
+ * @param {string} [areaId]
+ * @returns {{ speciesKey: string, level: number, gender: 'male' | 'female' | 'genderless', areaId: string }}
  */
-export function rollSafariPokemon() {
-  let roll = Math.random() * SAFARI_TOTAL_WEIGHT,
-    chosen = SAFARI_POOL[SAFARI_POOL.length - 1]
-  for (const entry of SAFARI_POOL) {
+export function rollSafariPokemon(areaId = SAFARI_AREAS[0].id) {
+  const area = safariAreaById(areaId),
+    pool = area.pool,
+    total = pool.reduce((sum, entry) => sum + entry.weight, 0)
+  let roll = Math.random() * total,
+    chosen = pool[pool.length - 1]
+  for (const entry of pool) {
     roll -= entry.weight
     if (roll <= 0) {
       chosen = entry
       break
     }
   }
+  const { min, max } = SAFARI_LEVEL_RANGE
   return {
     speciesKey: chosen.speciesKey,
-    level:
-      chosen.minLevel + Math.floor(Math.random() * (chosen.maxLevel - chosen.minLevel + 1)),
+    level: min + Math.floor(Math.random() * (max - min + 1)),
     gender: rollGender(chosen.speciesKey),
+    areaId: area.id,
   }
 }
 

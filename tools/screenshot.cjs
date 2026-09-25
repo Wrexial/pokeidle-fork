@@ -670,6 +670,16 @@ async function main() {
         '31-ice-slide.png',
         '.ice-arrow-e',
       ],
+      [
+        'Safari Zone',
+        'kanto',
+        'safariZone',
+        'safariZone',
+        ['palletTown', 'route1', 'fuchsiaCity', 'safariZone'],
+        '.safari-area-grid',
+        '32-safari-areas.png',
+        '.safari-area-card-east',
+      ],
     ]
     for (const [name, region, location, route, unlocked, selector, file, action] of fixedScenes) {
       await cdp.eval(

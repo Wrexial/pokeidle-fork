@@ -12,8 +12,11 @@ const {
   SAFARI_BALLS,
   SAFARI_COST,
   SAFARI_EFFECT_TURNS,
+  SAFARI_AREAS,
+  SAFARI_SHINY_MULTIPLIER,
   applySafariAction,
   rollSafariPokemon,
+  safariAreaById,
   safariCatchChance,
   safariFlees,
   safariFleeChance,
@@ -28,16 +31,61 @@ test('the Safari Zone is a registered POI minigame', () => {
   assert.ok(POI_LOCATIONS.has('safariZone'))
 })
 
-test('Safari Pokemon come from the Safari Zone encounter table', () => {
+test('the Safari Zone has four areas that cover its encounter table', () => {
+  assert.equal(SAFARI_AREAS.length, 4)
+  const table = new Set(encounterData.safariZone.encounters.map((entry) => entry.speciesKey)),
+    pooled = new Set()
+  for (const area of SAFARI_AREAS) {
+    assert.ok(area.id && area.name && area.description, `${area.id} is described`)
+    assert.ok(area.pool.length > 0, `${area.id} has a pool`)
+    assert.ok(area.rares.length > 0, `${area.id} advertises rare finds`)
+    for (const entry of area.pool) {
+      assert.ok(table.has(entry.speciesKey), `${entry.speciesKey} is a Safari species`)
+      assert.ok(entry.weight > 0, `${entry.speciesKey} has a positive weight`)
+      pooled.add(entry.speciesKey)
+    }
+    for (const speciesKey of area.rares)
+      assert.ok(
+        area.pool.some((entry) => entry.speciesKey === speciesKey),
+        `${area.id}'s rare ${speciesKey} is in its pool`
+      )
+  }
+  for (const speciesKey of table)
+    assert.ok(pooled.has(speciesKey), `${speciesKey} is still reachable in some area`)
+  assert.equal(safariAreaById('nope').id, SAFARI_AREAS[0].id, 'an unknown area falls back')
+})
+
+test('Safari finds roll shiny at a boosted rate', () => {
+  assert.ok(SAFARI_SHINY_MULTIPLIER > 1, 'the Safari is a better shiny hunt than idling')
+})
+
+test('the Safari starters live in different areas', () => {
+  /** @param {string} starter @returns {string | undefined} */
+  const areaOf = (starter) =>
+    SAFARI_AREAS.find((area) => area.pool.some((entry) => entry.speciesKey === starter))?.id
+  const bulbasaur = areaOf('bulbasaur'),
+    charmander = areaOf('charmander'),
+    squirtle = areaOf('squirtle')
+  assert.ok(bulbasaur && charmander && squirtle, 'each starter is in a Safari area')
+  assert.equal(new Set([bulbasaur, charmander, squirtle]).size, 3, 'each starter has its own area')
+  // Rare species are advertised by the area that carries them.
+  assert.ok(SAFARI_AREAS.find((area) => area.id === 'east').rares.includes('dratini'))
+  assert.ok(SAFARI_AREAS.find((area) => area.id === 'north').rares.includes('scyther'))
+})
+
+test('Safari Pokemon come from the chosen area', () => {
   const table = encounterData.safariZone.encounters,
-    keys = new Set(table.map((entry) => entry.speciesKey)),
     minLevel = Math.min(...table.map((entry) => entry.minLevel)),
     maxLevel = Math.max(...table.map((entry) => entry.maxLevel))
-  for (let roll = 0; roll < 60; roll++) {
-    const pokemon = rollSafariPokemon()
-    assert.ok(keys.has(pokemon.speciesKey), `${pokemon.speciesKey} should be in the Safari pool`)
-    assert.ok(pokemon.level >= minLevel && pokemon.level <= maxLevel)
-    assert.ok(['male', 'female', 'genderless'].includes(pokemon.gender))
+  for (const area of SAFARI_AREAS) {
+    const keys = new Set(area.pool.map((entry) => entry.speciesKey))
+    for (let roll = 0; roll < 60; roll++) {
+      const pokemon = rollSafariPokemon(area.id)
+      assert.equal(pokemon.areaId, area.id)
+      assert.ok(keys.has(pokemon.speciesKey), `${pokemon.speciesKey} should be in ${area.id}`)
+      assert.ok(pokemon.level >= minLevel && pokemon.level <= maxLevel)
+      assert.ok(['male', 'female', 'genderless'].includes(pokemon.gender))
+    }
   }
 })
 

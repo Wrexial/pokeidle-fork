@@ -35,6 +35,7 @@ export const CHANGELOG = [
             'Three new region minigames: Castelia City\u2019s Pokemon Musical (tap the four arrows on the beat), Cortondo\u2019s Picnic (drop ingredients onto the sandwich without toppling it) and Laverre City\u2019s Poke Ball Factory (rotate the conveyor tiles to link the inlet to the outlet)',
             'Violet City\u2019s Ruins of Alph is a sliding picture puzzle \u2014 tap a stone tile beside the gap (or use the arrow keys) to shuffle the 3\u00d73 picture back into order, and a quicker solve pays more',
             'Snowpoint City\u2019s Snowpoint Temple is a four-room ice-slide maze \u2014 pick a direction and the hero slides until a wall or boulder stops them; clear every room to reach the heart, with a flawless run levelling a Never-Melt Ice and an Ice Stone',
+            'The Safari Zone is now four areas \u2014 Center, East, North and West \u2014 each with its own Pok\u00e9mon distribution and advertised rare finds (Tauros, Kangaskhan and Chansey in the Center; Dratini, Dragonair and Squirtle in the East; Scyther, Pinsir and Charmander in the North; Tangela, Bulbasaur and Exeggcute in the West). Switch areas freely between encounters, and Safari finds roll shiny at twice the usual odds',
           ],
         },
         {

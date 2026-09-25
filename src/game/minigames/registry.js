@@ -158,7 +158,7 @@ export const MINIGAME_INFO = {
     title: 'Safari Zone',
     cost: SAFARI_COST,
     action: 'ENTER SAFARI ZONE',
-    hint: `Explore the reserve with ${SAFARI_BALLS} free Safari Balls. Bait calms a Pokemon (but makes it harder to catch) and a Rock makes it easier to catch (but more likely to run). Entry is $${SAFARI_COST.toLocaleString()}.`,
+    hint: `Explore the reserve with ${SAFARI_BALLS} free Safari Balls. It is split into four areas, each with its own Pokemon \u2014 the Center Area (Nidoran, Tauros, Kangaskhan), the river East Area (Dratini, Squirtle), the rocky North Area (Scyther, Pinsir, Charmander) and the thicketed West Area (Tangela, Bulbasaur, Exeggcute). Bait calms a Pokemon (but makes it harder to catch) and a Rock makes it easier to catch (but more likely to run). Safari finds roll shiny at twice the usual odds. Entry is $${SAFARI_COST.toLocaleString()}.`,
   },
   academyQuiz: {
     title: 'Academy Quiz',

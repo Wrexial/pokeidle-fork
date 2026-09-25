@@ -9136,6 +9136,22 @@ img {
     color: #2a1206
 }
 
+.safari-shiny {
+    padding: 1px 6px;
+    font-size: 7px;
+    font-weight: 700;
+    color: #3a2a00;
+    background: linear-gradient(#ffe680,#f0c030);
+    border-radius: 8px;
+    box-shadow: 0 0 8px #ffd24a;
+    animation: safariShiny 1.4s ease-in-out infinite
+}
+
+@keyframes safariShiny {
+    0%,to { box-shadow: 0 0 6px #ffd24a }
+    50% { box-shadow: 0 0 16px #ffe680 }
+}
+
 .safari-ball {
     position: absolute;
     top: 10px;
@@ -9223,6 +9239,97 @@ img {
     0%,to { transform: rotate(0) }
     25% { transform: rotate(-6deg) }
     75% { transform: rotate(6deg) }
+}
+
+.safari-areas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 100%
+}
+
+.safari-areas-title {
+    font-size: 9px;
+    color: #f0e6c8
+}
+
+.safari-area-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    width: 100%;
+    max-width: 480px
+}
+
+.safari-area {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 8px 10px;
+    text-align: left;
+    color: #1a1008;
+    background: linear-gradient(#efe3c4,#cdbd94);
+    border: 2px solid #8a7040;
+    border-radius: 6px;
+    cursor: pointer
+}
+
+.safari-area:hover {
+    filter: brightness(1.06)
+}
+
+.safari-area-name {
+    font-size: 10px;
+    font-weight: 700
+}
+
+.safari-area-desc {
+    font-size: 7px;
+    line-height: 1.35;
+    opacity: .85
+}
+
+.safari-area-rares {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 2px
+}
+
+.safari-area-rare {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 1px 4px 1px 1px;
+    font-size: 7px;
+    font-weight: 700;
+    color: #f3e7c8;
+    background: rgba(20,14,6,.72);
+    border-radius: 8px
+}
+
+.safari-area-rare-sprite {
+    width: 16px;
+    height: 16px;
+    image-rendering: pixelated
+}
+
+.safari-area-center {
+    background-image: linear-gradient(rgba(120,200,120,.18),rgba(120,200,120,.18)),url(/backgrounds/grassland.png)
+}
+
+.safari-area-east {
+    background-image: linear-gradient(rgba(80,150,220,.22),rgba(80,150,220,.22)),url(/backgrounds/grassland.png)
+}
+
+.safari-area-north {
+    background-image: linear-gradient(rgba(180,140,80,.22),rgba(180,140,80,.22)),url(/backgrounds/grassland.png)
+}
+
+.safari-area-west {
+    background-image: linear-gradient(rgba(90,160,90,.28),rgba(40,90,50,.3)),url(/backgrounds/grassland.png)
 }
 
 .route-activity-scene.activity-rockSmash {

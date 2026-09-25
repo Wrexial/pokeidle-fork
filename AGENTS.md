@@ -301,10 +301,12 @@ Data conventions:
   sub-areas behind one map node. The hub is `type: 'zone'` with a `subAreas`
   list and a `routeKey` pointing at its first sub-area; each sub-area is a real
   route with its own `routeKey`/encounter bucket, but `hidden: true`,
-  `zone: <hubId>` and `unlock: { requires: [hubId] }`, so it never renders on
-  the Town Map and unlocks with the hub. Picking a sub-area from the hub panel
-  travels to it (the existing `TRAVEL`/encounter plumbing carries it) and its
-  panel shows a back button; the idle loop skips wild spawns at the hub itself.
+  `zone: <hubId>` and `unlock: { requires: [hubId, <previous sub-area>] }`, so
+  it never renders on the Town Map and unlocks in order behind the hub (Route 6
+  can't open before the island and Routes 4-5). Picking a sub-area from the hub
+  panel travels to it (the existing `TRAVEL`/encounter plumbing carries it) and
+  its panel shows a back button; the idle loop skips wild spawns at the hub
+  itself.
   Galar's Wild Area is the first one, and the species it adds count as native
   wilds, so they drop out of the Raid Islands. `POST_AREAS` injects standalone
   wild areas (Slumbering Weald, Galar Mine, Glimwood Tangle) the same way,
@@ -625,6 +627,9 @@ One-off scripts used to build the data JSON (not run during dev/build):
   `plausibleEncounters` pass and `buildTeam` filter regenerate the data.
 - `lib/evolution-levels.cjs` — shared `buildEvolutionLevels` / `stageForLevel`
   helpers (also used by `validate-data.cjs` and the impossible-levels test).
+- `enforce-zone-chains.cjs` — adds the `requires: [hub, previous sub-area]`
+  chain to the committed zone sub-areas so they unlock in order behind the hub
+  (the generator does it in its final pass). Idempotent (`--dry`).
 - `RawMoveData`, `index-backup.js` — large reference/backup data; leave alone.
 - `kill-vite.cjs` — kills orphaned Vite dev servers on the port range (Windows
   `taskkill`, else `kill`). Run `npm run kill-vite`, or `--dry` to preview.

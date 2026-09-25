@@ -870,7 +870,8 @@
   "zone": "galar-wild-area",
   "unlock": {
    "requires": [
-    "galar-wild-area"
+    "galar-wild-area",
+    "galar-wild-area-rolling-fields"
    ]
   },
   "unlockOrder": 800005.501,
@@ -894,7 +895,8 @@
   "zone": "galar-wild-area",
   "unlock": {
    "requires": [
-    "galar-wild-area"
+    "galar-wild-area",
+    "galar-wild-area-dappled-grove"
    ]
   },
   "unlockOrder": 800005.502,
@@ -985,7 +987,8 @@
   "zone": "galar-isle-of-armor",
   "unlock": {
    "requires": [
-    "galar-isle-of-armor"
+    "galar-isle-of-armor",
+    "galar-isle-of-armor-fields-of-honor"
    ]
   },
   "unlockOrder": 800006.001,
@@ -1009,7 +1012,8 @@
   "zone": "galar-isle-of-armor",
   "unlock": {
    "requires": [
-    "galar-isle-of-armor"
+    "galar-isle-of-armor",
+    "galar-isle-of-armor-soothing-wetlands"
    ]
   },
   "unlockOrder": 800006.002,
@@ -1094,7 +1098,8 @@
   "zone": "galar-crown-tundra",
   "unlock": {
    "requires": [
-    "galar-crown-tundra"
+    "galar-crown-tundra",
+    "galar-crown-tundra-snowslide-slope"
    ]
   },
   "unlockOrder": 800011.001,
@@ -1118,7 +1123,8 @@
   "zone": "galar-crown-tundra",
   "unlock": {
    "requires": [
-    "galar-crown-tundra"
+    "galar-crown-tundra",
+    "galar-crown-tundra-frigid-sea"
    ]
   },
   "unlockOrder": 800011.002,

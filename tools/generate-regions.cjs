@@ -2771,6 +2771,24 @@ if (mapData.route1) mapData.route1.unlock = { requires: ['palletTown'] }
 // `encounterData[state.currentRoute]` resolves while raiding.
 if (mapData.raidIsland) mapData.raidIsland.routeKey = 'raidIsland'
 
+// Zone sub-areas unlock in order, behind their hub: a grouped zone's routes are
+// not otherwise ordered, so Route 6 could open before Akala Island and Route 5.
+for (const hub of Object.values(mapData)) {
+  if (hub.type !== 'zone' || !Array.isArray(hub.subAreas)) continue
+  let previous = null
+  for (const subArea of hub.subAreas) {
+    const location = mapData[subArea.id]
+    if (!location) continue
+    const unlock = location.unlock ?? {},
+      existing = unlock.requires ?? []
+    location.unlock = {
+      ...unlock,
+      requires: [...new Set([...existing, hub.id, ...(previous ? [previous] : [])])],
+    }
+    previous = subArea.id
+  }
+}
+
 write('regions.json', regions)
 writeRegionDir(path.join(DATA, 'map-data'), mapData)
 writeRegionDir(

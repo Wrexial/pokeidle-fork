@@ -35,7 +35,7 @@ test('the Galar Wild Area zone groups its sub-areas', () => {
     assert.equal(location.type, 'route')
     assert.equal(location.hidden, true, `${subArea.id} is hidden from the map`)
     assert.equal(location.zone, hub.id, `${subArea.id} points back at the hub`)
-    assert.deepEqual(location.unlock.requires, [hub.id])
+    assert.ok(location.unlock.requires.includes(hub.id), `${subArea.id} requires the hub`)
     assert.ok(location.connections.includes(hub.id), `${subArea.id} connects to the hub`)
     assert.ok(encounterData[subArea.id]?.encounters?.length, `${subArea.id} has wild encounters`)
   }
@@ -110,6 +110,23 @@ test('Paldea has its DLC and Area Zero zones, and a legendary-only pool', () => 
   const paldea = regions.find((region) => region.id === 'paldea'),
     ordinary = paldea.raidPool.filter((entry) => !pokemonSpecies[entry.speciesKey]?.legendary)
   assert.deepEqual(ordinary, [], 'Paldea raid pool holds only legendaries')
+})
+
+test('zone sub-areas unlock in order behind their hub', () => {
+  for (const hub of Object.values(mapData)) {
+    if (hub.type !== 'zone' || !Array.isArray(hub.subAreas)) continue
+    let previous = null
+    for (const subArea of hub.subAreas) {
+      const unlock = mapData[subArea.id]?.unlock
+      assert.ok(unlock?.requires?.includes(hub.id), `${subArea.id} requires its hub ${hub.id}`)
+      if (previous)
+        assert.ok(
+          unlock.requires.includes(previous),
+          `${subArea.id} requires the previous sub-area ${previous}`
+        )
+      previous = subArea.id
+    }
+  }
 })
 
 test('every hidden sub-area has a visible zone hub to focus the map on', () => {

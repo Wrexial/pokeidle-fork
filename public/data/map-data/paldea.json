@@ -39,7 +39,8 @@
   ],
   "unlock": {
    "requires": [
-    "paldea-los-platos"
+    "paldea-los-platos",
+    "paldea-south-province"
    ],
    "caughtCount": 2
   },
@@ -169,7 +170,11 @@
      "count": 5
     }
    ],
-   "caughtCount": 6
+   "caughtCount": 6,
+   "requires": [
+    "paldea-south-province",
+    "paldea-south-province-area-two"
+   ]
   },
   "unlockOrder": 910002.5003,
   "position": {
@@ -196,6 +201,10 @@
      "locationId": "paldea-mesagoza",
      "count": 19
     }
+   ],
+   "requires": [
+    "paldea-south-province",
+    "paldea-south-province-area-one"
    ]
   },
   "unlockOrder": 910002.5004,
@@ -224,7 +233,11 @@
      "count": 5
     }
    ],
-   "partyLevel": 18
+   "partyLevel": 18,
+   "requires": [
+    "paldea-west-province",
+    "paldea-west-province-area-two"
+   ]
   },
   "unlockOrder": 910002.5005,
   "position": {
@@ -261,7 +274,10 @@
     ],
     "count": 3
    },
-   "partyLevel": 18
+   "partyLevel": 18,
+   "requires": [
+    "paldea-west-province"
+   ]
   },
   "unlockOrder": 910003,
   "position": {
@@ -553,7 +569,10 @@
      "count": 5
     }
    ],
-   "partyLevel": 27
+   "partyLevel": 27,
+   "requires": [
+    "paldea-east-province"
+   ]
   },
   "unlockOrder": 910004.5002,
   "position": {
@@ -581,7 +600,10 @@
      "count": 12
     }
    ],
-   "partyLevel": 28
+   "partyLevel": 28,
+   "requires": [
+    "paldea-north-province"
+   ]
   },
   "unlockOrder": 910004.5004,
   "position": {
@@ -610,7 +632,11 @@
     }
    ],
    "caughtCount": 19,
-   "partyLevel": 33
+   "partyLevel": 33,
+   "requires": [
+    "paldea-south-province",
+    "paldea-south-province-area-three"
+   ]
   },
   "unlockOrder": 910004.5005,
   "position": {
@@ -638,7 +664,11 @@
      "count": 15
     }
    ],
-   "partyLevel": 38
+   "partyLevel": 38,
+   "requires": [
+    "paldea-east-province",
+    "paldea-east-province-area-two"
+   ]
   },
   "unlockOrder": 910004.5003,
   "position": {
@@ -666,7 +696,11 @@
      "count": 5
     }
    ],
-   "partyLevel": 47
+   "partyLevel": 47,
+   "requires": [
+    "paldea-south-province",
+    "paldea-south-province-area-five"
+   ]
   },
   "unlockOrder": 910004.5006,
   "position": {
@@ -693,6 +727,10 @@
      "locationId": "paldea-south-province-area-six",
      "count": 18
     }
+   ],
+   "requires": [
+    "paldea-west-province",
+    "paldea-west-province-area-one"
    ]
   },
   "unlockOrder": 910005,
@@ -721,7 +759,11 @@
      "count": 5
     }
    ],
-   "caughtCount": 23
+   "caughtCount": 23,
+   "requires": [
+    "paldea-north-province",
+    "paldea-north-province-area-one"
+   ]
   },
   "unlockOrder": 910005.5,
   "position": {
@@ -792,7 +834,11 @@
      "count": 5
     }
    ],
-   "partyLevel": 61
+   "partyLevel": 61,
+   "requires": [
+    "paldea-south-province",
+    "paldea-south-province-area-four"
+   ]
   },
   "unlockOrder": 910006.0004,
   "position": {
@@ -871,7 +917,11 @@
      "drakloak"
     ],
     "count": 3
-   }
+   },
+   "requires": [
+    "paldea-north-province",
+    "paldea-north-province-area-two"
+   ]
   },
   "unlockOrder": 910006.0002,
   "position": {
@@ -899,7 +949,11 @@
      "count": 16
     }
    ],
-   "partyLevel": 67
+   "partyLevel": 67,
+   "requires": [
+    "paldea-east-province",
+    "paldea-east-province-area-one"
+   ]
   },
   "unlockOrder": 910006.5001,
   "position": {
@@ -1042,7 +1096,8 @@
   "zone": "paldea-kitakami",
   "unlock": {
    "requires": [
-    "paldea-kitakami"
+    "paldea-kitakami",
+    "paldea-kitakami-revelers-road"
    ]
   },
   "unlockOrder": 910007.001,
@@ -1066,7 +1121,8 @@
   "zone": "paldea-kitakami",
   "unlock": {
    "requires": [
-    "paldea-kitakami"
+    "paldea-kitakami",
+    "paldea-kitakami-apple-hills"
    ]
   },
   "unlockOrder": 910007.002,
@@ -1151,7 +1207,8 @@
   "zone": "paldea-terarium",
   "unlock": {
    "requires": [
-    "paldea-terarium"
+    "paldea-terarium",
+    "paldea-terarium-savanna-biome"
    ]
   },
   "unlockOrder": 910009.001,
@@ -1175,7 +1232,8 @@
   "zone": "paldea-terarium",
   "unlock": {
    "requires": [
-    "paldea-terarium"
+    "paldea-terarium",
+    "paldea-terarium-coastal-biome"
    ]
   },
   "unlockOrder": 910009.002,
@@ -1260,7 +1318,8 @@
   "zone": "paldea-area-zero",
   "unlock": {
    "requires": [
-    "paldea-area-zero"
+    "paldea-area-zero",
+    "paldea-area-zero-gate"
    ]
   },
   "unlockOrder": 910002.501,
@@ -1284,7 +1343,8 @@
   "zone": "paldea-area-zero",
   "unlock": {
    "requires": [
-    "paldea-area-zero"
+    "paldea-area-zero",
+    "paldea-area-zero-station-two"
    ]
   },
   "unlockOrder": 910002.502,
@@ -1308,7 +1368,8 @@
   "zone": "paldea-area-zero",
   "unlock": {
    "requires": [
-    "paldea-area-zero"
+    "paldea-area-zero",
+    "paldea-area-zero-station-four"
    ]
   },
   "unlockOrder": 910002.503,

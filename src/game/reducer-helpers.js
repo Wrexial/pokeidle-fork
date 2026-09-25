@@ -63,6 +63,9 @@ export function enterMinigame(state, phase, cost = 0, log) {
     state.phase === 'puzzleLeague' ||
     state.phase === 'memory' ||
     state.phase === 'whack' ||
+    state.phase === 'musical' ||
+    state.phase === 'picnic' ||
+    state.phase === 'pokeballFactory' ||
     state.phase === 'routeActivity' ||
     state.phase === 'wonderTrade'
   )

@@ -1,6 +1,6 @@
 // Reducer handlers for minigames actions. Split from game/reducer.js.
 
-import { MATCH3_COST, MEMORY_COST, WHACK_COST, BATTLE_ROYAL_COST, BUG_CONTEST_COST, CONTEST_COST, CURRY_COST, DYNAMAX_ADVENTURES_COST, LIGHTS_OUT_COST, MINING_COST, POKEATHLON_COST, POKE_RADAR_COST, POKESTAR_COST, QUIZ_COST, ROUTE_ACTIVITIES, SAFARI_COST, VOLTORB_FLIP_COST, routeActivityIds } from '../minigames.js'
+import { MATCH3_COST, MEMORY_COST, MUSICAL_COST, PICNIC_COST, POKEBALL_FACTORY_COST, WHACK_COST, BATTLE_ROYAL_COST, BUG_CONTEST_COST, CONTEST_COST, CURRY_COST, DYNAMAX_ADVENTURES_COST, LIGHTS_OUT_COST, MINING_COST, POKEATHLON_COST, POKE_RADAR_COST, POKESTAR_COST, QUIZ_COST, ROUTE_ACTIVITIES, SAFARI_COST, VOLTORB_FLIP_COST, routeActivityIds } from '../minigames.js'
 import { mapData } from '../../data/gameData.js'
 import { createIdleBattleState } from '../progression.js'
 import { enterMinigame } from '../reducer-helpers.js'
@@ -256,6 +256,41 @@ export function startWhack(state, action) {
 }
 
 /**
+ * Handle the `START_MUSICAL` action.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function startMusical(state, action) {
+  return enterMinigame(state, 'musical', MUSICAL_COST, 'You stepped onto the Musical stage.')
+}
+
+/**
+ * Handle the `START_PICNIC` action.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function startPicnic(state, action) {
+  return enterMinigame(state, 'picnic', PICNIC_COST, 'You set out a picnic blanket.')
+}
+
+/**
+ * Handle the `START_POKEBALL_FACTORY` action.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function startPokeballFactory(state, action) {
+  return enterMinigame(
+    state,
+    'pokeballFactory',
+    POKEBALL_FACTORY_COST,
+    'You clocked on at the Pok\u00e9 Ball Factory.'
+  )
+}
+
+/**
  * Handle the `END_MINIGAME` action.
  * @param {GameState} state
  * @param {GameAction} action
@@ -277,7 +312,10 @@ export function endMinigame(state, action) {
     state.phase === 'pokestar' ||
     state.phase === 'puzzleLeague' ||
     state.phase === 'memory' ||
-    state.phase === 'whack'
+    state.phase === 'whack' ||
+    state.phase === 'musical' ||
+    state.phase === 'picnic' ||
+    state.phase === 'pokeballFactory'
     ? { ...state, ...createIdleBattleState() }
     : state
 }

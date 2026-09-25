@@ -14,6 +14,9 @@ import { POKESTAR_COST } from './pokestar.js'
 import { MATCH3_COST, MATCH3_MOVES } from './match3.js'
 import { MEMORY_COST, MEMORY_PAIRS } from './memory.js'
 import { WHACK_COST, WHACK_DURATION_MS } from './whack.js'
+import { MUSICAL_COST, MUSICAL_NOTES } from './musical.js'
+import { PICNIC_COST, PICNIC_PIECES } from './picnic.js'
+import { POKEBALL_FACTORY_COST, FACTORY_SIZE } from './pokeball-factory.js'
 import { mapData } from '../../data/gameData.js'
 import { VOLTORB_FLIP_COST } from './voltorb-flip.js'
 import { BATTLE_TOWER_LOCATION } from '../../data/config.js'
@@ -44,6 +47,9 @@ export const MINIGAME_LOCATIONS = {
   'johto-goldenrod-city': 'puzzleLeague',
   'hoenn-slateport-city': 'memory',
   vermilionCity: 'whack',
+  'unova-castelia-city': 'musical',
+  'paldea-cortondo': 'picnic',
+  'kalos-laverre-city': 'pokeballFactory',
   'alola-poke-pelago': 'pokePelago',
 }
 
@@ -111,6 +117,9 @@ export const MINIGAME_START_ACTION = {
   puzzleLeague: 'START_PUZZLE_LEAGUE',
   memory: 'START_MEMORY',
   whack: 'START_WHACK',
+  musical: 'START_MUSICAL',
+  picnic: 'START_PICNIC',
+  pokeballFactory: 'START_POKEBALL_FACTORY',
 }
 
 /**
@@ -229,6 +238,24 @@ export const MINIGAME_INFO = {
     cost: WHACK_COST,
     action: 'PLAY WHACK-A-DIGLETT',
     hint: `Tap each Diglett before it ducks back down \u2014 and leave the Zubat alone, it costs you a point. You have ${WHACK_DURATION_MS / 1000} seconds. Entry is $${WHACK_COST.toLocaleString()}.`,
+  },
+  musical: {
+    title: 'Pok\u00e9mon Musical',
+    cost: MUSICAL_COST,
+    action: 'TAKE THE STAGE',
+    hint: `Notes fall down four lanes \u2014 tap the matching arrow on the beat. Perfect timing scores the most; a routine is ${MUSICAL_NOTES} notes. Entry is $${MUSICAL_COST.toLocaleString()}.`,
+  },
+  picnic: {
+    title: 'Picnic',
+    cost: PICNIC_COST,
+    action: 'START A PICNIC',
+    hint: `Drop each ingredient as it swings over the plate \u2014 land it near the middle for the most points. Build ${PICNIC_PIECES} layers without dropping one off the edge. Entry is $${PICNIC_COST.toLocaleString()}.`,
+  },
+  pokeballFactory: {
+    title: 'Pok\u00e9 Ball Factory',
+    cost: POKEBALL_FACTORY_COST,
+    action: 'START THE SHIFT',
+    hint: `Tap the conveyor tiles to spin them a quarter-turn and link a line from the left inlet to the right outlet. The ${FACTORY_SIZE}\u00d7${FACTORY_SIZE} grid is scrambled every shift. Entry is $${POKEBALL_FACTORY_COST.toLocaleString()}.`,
   },
   pokePelago: {
     title: 'Poké Pelago',

@@ -651,6 +651,12 @@ Johto's **Pokemon Puzzle League** (Goldenrod City), Hoenn's **Pokemon Memory**
 (Slateport City) and Kanto's **Whack-a-Diglett** (Vermilion City) were added on
 top of the one-per-region set.
 
+**More minigames (0.18.0):** Unova's **Pokemon Musical** (Castelia City, a
+four-lane rhythm game), Paldea's **Picnic** (Cortondo, stack ingredients on the
+sandwich) and Kalos's **Poke Ball Factory** (Laverre City, rotate the conveyor
+tiles to link the inlet and outlet) were added, so every region now has at least
+two signature minigames.
+
 - [x] **Poké Pelago (Alola)** — **shipped (0.17.0):** a new Alola island hub
       (off Hau'oli City) hosting companion care (Pat/Brush/Wash +
       Cleanliness), the Berry Garden, and three passive islands (Bean Farm,

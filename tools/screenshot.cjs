@@ -594,6 +594,34 @@ async function main() {
         '.whack-grid',
         '24-whack.png',
       ],
+      [
+        'Musical',
+        'unova',
+        'unova-castelia-city',
+        'unova-route-4',
+        ['unova-nuvema-town', 'unova-route-4', 'unova-castelia-city'],
+        '.musical-track',
+        '26-musical.png',
+      ],
+      [
+        'Picnic',
+        'paldea',
+        'paldea-cortondo',
+        'paldea-south-province-area-one',
+        ['paldea-los-platos', 'paldea-south-province-area-one', 'paldea-cortondo'],
+        '.picnic-board',
+        '27-picnic.png',
+        '.picnic-drop-btn',
+      ],
+      [
+        'Poke Ball Factory',
+        'kalos',
+        'kalos-laverre-city',
+        'kalos-route-14',
+        ['kalos-vaniville-town', 'kalos-route-14', 'kalos-laverre-city'],
+        '.factory-grid',
+        '28-pokeball-factory.png',
+      ],
     ]
     for (const [name, region, location, route, unlocked, selector, file, action] of fixedScenes) {
       await cdp.eval(

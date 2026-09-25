@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 const gameData = installGameData()
 
-const { BATTLE_ROYAL_COST, BATTLE_ROYAL_POOL, BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL, BUG_CONTEST_RUSTLES, CONTEST_COST, CONTEST_THEMES, DYNAMAX_ADVENTURES_COST, DYNAMAX_STAGES, MINIGAME_LOCATIONS, MINIGAME_INFO, MINIGAME_AREAS, MINIGAME_REGIONS, MINIGAME_START_ACTION, minigameForLocation, minigamesInRegion, minigameNameForLocation, MINING_COST, POKEATHLON_COST, POKEATHLON_SPRINT_MS, POKE_RADAR_CHAIN_STEP, POKE_RADAR_COST, POKE_RADAR_SIZE, SLOT_JACKPOT, SLOT_PAYLINES, SLOT_REELS, SLOT_ROWS, SLOT_SPIN_COST, SLOT_SYMBOLS, VOLTORB_FLIP_COST, VOLTORB_MAX_LEVEL, VOLTORB_SIZE, AUCTION_LOTS, accuracyScore, auctionAppraisal, battleRoyalOpponent, battleRoyalPrize, boardCleared, boardExploded, boardHints, bugCatchChance, bugContestPrize, bugFleeChance, bugStays, buildContestResults, canAuctionBid, contestAppeal, contestPlacement, contestPlayerRank, contestPrize, contestRank, contestScore, contestTheme, createAuction, createOpponent, createVoltorbBoard, dynamaxBoss, dynamaxPaths, dynamaxPrize, flipVoltorbCell, healSquad, moveBaseAppeal, pickRadarTarget, placeAuctionBid, pokeathlonPrize, pokeRadarPrize, radarChainPoints, radarSequence, rewardItemName, rollContestBug, rollContestBugs, rollContestRivalRound, rollContestTheme, rollMiningReward, simulateBattle, spinSlots, sprintScore, throwNetBall, toBattlePokemon, toggleVoltorbMark, voltorbBoardCoins, voltorbCountForLevel, voltorbFlipPrize, LIGHTS_OUT_COST, LIGHTS_OUT_SCRAMBLE, LIGHTS_OUT_SIZE, CURRY_COST, CURRY_FLAVORS, CURRY_INGREDIENTS, POKESTAR_COST, POKESTAR_SHOT_COUNT, createLightsOut, toggleLights, lightsSolved, lightsOutPrize, rollCurryRequest, curryScore, curryPrize, pickPokestarShots, pokestarPrize, MATCH3_COST, MATCH3_MOVES, MATCH3_SIZE, MEMORY_COST, MEMORY_PAIRS, WHACK_COST, createMatch3Board, findMatches, tryMatch3Swap, resolveMatch3, match3Prize, createMemoryDeck, memoryPrize, rollWhackTarget, whackPrize } = await import(
+const { BATTLE_ROYAL_COST, BATTLE_ROYAL_POOL, BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL, BUG_CONTEST_RUSTLES, CONTEST_COST, CONTEST_THEMES, DYNAMAX_ADVENTURES_COST, DYNAMAX_STAGES, MINIGAME_LOCATIONS, MINIGAME_INFO, MINIGAME_AREAS, MINIGAME_REGIONS, MINIGAME_START_ACTION, minigameForLocation, minigamesInRegion, minigameNameForLocation, MINING_COST, POKEATHLON_COST, POKEATHLON_SPRINT_MS, POKE_RADAR_CHAIN_STEP, POKE_RADAR_COST, POKE_RADAR_SIZE, SLOT_JACKPOT, SLOT_PAYLINES, SLOT_REELS, SLOT_ROWS, SLOT_SPIN_COST, SLOT_SYMBOLS, VOLTORB_FLIP_COST, VOLTORB_MAX_LEVEL, VOLTORB_SIZE, AUCTION_LOTS, accuracyScore, auctionAppraisal, battleRoyalOpponent, battleRoyalPrize, boardCleared, boardExploded, boardHints, bugCatchChance, bugContestPrize, bugFleeChance, bugStays, buildContestResults, canAuctionBid, contestAppeal, contestPlacement, contestPlayerRank, contestPrize, contestRank, contestScore, contestTheme, createAuction, createOpponent, createVoltorbBoard, dynamaxBoss, dynamaxPaths, dynamaxPrize, flipVoltorbCell, healSquad, moveBaseAppeal, pickRadarTarget, placeAuctionBid, pokeathlonPrize, pokeRadarPrize, radarChainPoints, radarSequence, rewardItemName, rollContestBug, rollContestBugs, rollContestRivalRound, rollContestTheme, rollMiningReward, simulateBattle, spinSlots, sprintScore, throwNetBall, toBattlePokemon, toggleVoltorbMark, voltorbBoardCoins, voltorbCountForLevel, voltorbFlipPrize, LIGHTS_OUT_COST, LIGHTS_OUT_SCRAMBLE, LIGHTS_OUT_SIZE, CURRY_COST, CURRY_FLAVORS, CURRY_INGREDIENTS, POKESTAR_COST, POKESTAR_SHOT_COUNT, createLightsOut, toggleLights, lightsSolved, lightsOutPrize, rollCurryRequest, curryScore, curryPrize, pickPokestarShots, pokestarPrize, MATCH3_COST, MATCH3_MOVES, MATCH3_SIZE, MEMORY_COST, MEMORY_PAIRS, WHACK_COST, createMatch3Board, findMatches, tryMatch3Swap, resolveMatch3, match3Prize, createMemoryDeck, memoryPrize, rollWhackTarget, whackPrize, MUSICAL_COST, MUSICAL_NOTES, MUSICAL_MAX_SCORE, generateMusicalPattern, judgeMusicalHit, musicalPrize, musicalTotalMs, PICNIC_COST, PICNIC_PIECES, PICNIC_INGREDIENTS, picnicIngredientFor, picnicDropScore, picnicPrize, POKEBALL_FACTORY_COST, FACTORY_SIZE, connectionsFor, createFactoryPuzzle, rotateFactoryTile, factoryPowered, factorySolved, factoryPrize } = await import(
   '../src/game/minigames.js'
 )
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
@@ -310,7 +310,7 @@ test('every fixed minigame location is a map POI', async () => {
   const { POI_LOCATIONS } = await import('../src/game/minigames.js')
   for (const id of Object.keys(MINIGAME_LOCATIONS)) assert.ok(POI_LOCATIONS.has(id))
   assert.ok(POI_LOCATIONS.has('hoenn-route-111'), 'the Battle Tower is a POI')
-  assert.equal(POI_LOCATIONS.size, 20)
+  assert.equal(POI_LOCATIONS.size, Object.keys(MINIGAME_LOCATIONS).length + 1)
 })
 
 test('a radar sequence is distinct patches of the right length', () => {
@@ -833,6 +833,93 @@ test('START_WHACK charges entry and END_MINIGAME returns to idle', () => {
   assert.equal(gameReducer(started, { type: 'END_MINIGAME' }).phase, 'idle')
 })
 
+test('a Musical routine is playable and judged by timing', () => {
+  const pattern = generateMusicalPattern(MUSICAL_NOTES)
+  assert.equal(pattern.length, MUSICAL_NOTES)
+  assert.ok(musicalTotalMs(pattern) > pattern[pattern.length - 1].time)
+  for (let index = 1; index < pattern.length; index++)
+    assert.notEqual(pattern[index].lane, pattern[index - 1].lane, 'no immediate repeats')
+  for (const note of pattern) assert.ok(note.lane >= 0 && note.lane < 4)
+  assert.equal(judgeMusicalHit(0).grade, 'perfect')
+  assert.equal(judgeMusicalHit(0).points, 100)
+  assert.ok(judgeMusicalHit(120).points < judgeMusicalHit(20).points)
+  assert.equal(judgeMusicalHit(9999).grade, 'miss')
+  assert.ok(musicalPrize(MUSICAL_MAX_SCORE).money > musicalPrize(0).money)
+})
+
+test('START_MUSICAL charges entry and END_MINIGAME returns to idle', () => {
+  const started = gameReducer(
+      { ...initialGameState, phase: 'idle', money: MUSICAL_COST + 5 },
+      { type: 'START_MUSICAL' }
+    ),
+    broke = gameReducer(
+      { ...initialGameState, phase: 'idle', money: MUSICAL_COST - 1 },
+      { type: 'START_MUSICAL' }
+    )
+  assert.equal(started.phase, 'musical')
+  assert.equal(started.money, 5)
+  assert.equal(broke.phase, 'idle')
+  assert.equal(gameReducer(started, { type: 'END_MINIGAME' }).phase, 'idle')
+})
+
+test('picnic drops score by accuracy and topple off the edge', () => {
+  assert.equal(picnicIngredientFor(0), 'Bread')
+  assert.equal(picnicIngredientFor(PICNIC_INGREDIENTS.length), picnicIngredientFor(0))
+  assert.equal(picnicDropScore(0).grade, 'perfect')
+  assert.ok(picnicDropScore(0).points > picnicDropScore(0.15).points)
+  assert.equal(picnicDropScore(0.5).topple, true)
+  assert.ok(picnicPrize(700, false).money > picnicPrize(100, true).money)
+})
+
+test('START_PICNIC charges entry and END_MINIGAME returns to idle', () => {
+  const started = gameReducer(
+      { ...initialGameState, phase: 'idle', money: PICNIC_COST + 5 },
+      { type: 'START_PICNIC' }
+    ),
+    broke = gameReducer(
+      { ...initialGameState, phase: 'idle', money: PICNIC_COST - 1 },
+      { type: 'START_PICNIC' }
+    )
+  assert.equal(started.phase, 'picnic')
+  assert.equal(started.money, 5)
+  assert.equal(broke.phase, 'idle')
+  assert.equal(gameReducer(started, { type: 'END_MINIGAME' }).phase, 'idle')
+})
+
+test('the factory puzzle is solvable and rotating links the line', () => {
+  const puzzle = createFactoryPuzzle(FACTORY_SIZE)
+  assert.equal(puzzle.tiles.length, FACTORY_SIZE * FACTORY_SIZE)
+  assert.equal(puzzle.size, FACTORY_SIZE)
+  assert.ok(!factorySolved(puzzle), 'a fresh puzzle is scrambled')
+  const solved = puzzle.tiles.reduce((current, tile, index) => {
+    const target = puzzle.solution[index]
+    let next = current
+    for (let step = 0; step < 4 && next.tiles[index].rot % 4 !== target % 4; step++)
+      next = rotateFactoryTile(next, index)
+    return next
+  }, puzzle)
+  assert.ok(factorySolved(solved), 'the stored solution solves it')
+  assert.ok(factoryPowered(solved).size >= 2)
+  assert.deepEqual(connectionsFor('straight', 0).slice().sort(), ['N', 'S'])
+  assert.deepEqual(connectionsFor('straight', 1).slice().sort(), ['E', 'W'])
+  assert.ok(factoryPrize(3, true).money > factoryPrize(3, false).money)
+})
+
+test('START_POKEBALL_FACTORY charges entry and END_MINIGAME returns to idle', () => {
+  const started = gameReducer(
+      { ...initialGameState, phase: 'idle', money: POKEBALL_FACTORY_COST + 5 },
+      { type: 'START_POKEBALL_FACTORY' }
+    ),
+    broke = gameReducer(
+      { ...initialGameState, phase: 'idle', money: POKEBALL_FACTORY_COST - 1 },
+      { type: 'START_POKEBALL_FACTORY' }
+    )
+  assert.equal(started.phase, 'pokeballFactory')
+  assert.equal(started.money, 5)
+  assert.equal(broke.phase, 'idle')
+  assert.equal(gameReducer(started, { type: 'END_MINIGAME' }).phase, 'idle')
+})
+
 test('every minigame is linked to a real area in its own region', () => {
   const expectedRegions = {
     gameCorner: 'kanto',
@@ -853,6 +940,9 @@ test('every minigame is linked to a real area in its own region', () => {
     puzzleLeague: 'johto',
     memory: 'hoenn',
     whack: 'kanto',
+    musical: 'unova',
+    picnic: 'paldea',
+    pokeballFactory: 'kalos',
     pokePelago: 'alola',
   }
   // Every catalogued minigame has exactly one home area, and vice versa: no

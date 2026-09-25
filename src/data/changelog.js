@@ -24,6 +24,7 @@ export const CHANGELOG = [
             'Voltorb Flip: clicking a Voltorb now actually explodes \u2014 a burst on the tile, a board shake and a new explosion sound effect',
             'Fishing no longer hides a route-exclusive catch behind a perfect cast: the rarest Water species is back in the normal wild table and can be found while exploring, and a perfect cast instead just boosts the shiny odds and level',
             'The Town Map no longer badges fishing spots with a rod icon now that route activities live in the location panel',
+            'Three new region minigames: Castelia City\u2019s Pokemon Musical (tap the four arrows on the beat), Cortondo\u2019s Picnic (drop ingredients onto the sandwich without toppling it) and Laverre City\u2019s Poke Ball Factory (rotate the conveyor tiles to link the inlet to the outlet)',
           ],
         },
         {

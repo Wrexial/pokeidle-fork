@@ -44,6 +44,9 @@ import { PokestarScene } from './pokestar-scene.js'
 import { PuzzleLeagueScene } from './puzzle-league-scene.js'
 import { MemoryScene } from './memory-scene.js'
 import { WhackScene } from './whack-scene.js'
+import { MusicalScene } from './musical-scene.js'
+import { PicnicScene } from './picnic-scene.js'
+import { PokeballFactoryScene } from './pokeball-factory-scene.js'
 import { MiningScene } from './mining-scene.js'
 import { GameCornerScene } from './game-corner-scene.js'
 import { RouteActivityScene } from './route-activity-scene.js'
@@ -83,6 +86,9 @@ export function BattleScene() {
   if (state.phase === 'puzzleLeague') return jsx(PuzzleLeagueScene, {})
   if (state.phase === 'memory') return jsx(MemoryScene, {})
   if (state.phase === 'whack') return jsx(WhackScene, {})
+  if (state.phase === 'musical') return jsx(MusicalScene, {})
+  if (state.phase === 'picnic') return jsx(PicnicScene, {})
+  if (state.phase === 'pokeballFactory') return jsx(PokeballFactoryScene, {})
   if (state.phase === 'mining') return jsx(MiningScene, {})
   if (state.phase === 'gameCorner') return jsx(GameCornerScene, {})
   if (state.phase === 'routeActivity') return jsx(RouteActivityScene, {})

@@ -386,13 +386,11 @@ export function SafariScene() {
                           children: 'CHANGE AREA',
                         }),
                       ]
-                    : phase === 'done'
-                      ? jsx('button', {
-                          className: 'move-panel-btn confirm',
-                          onClick: () => dispatch({ type: 'END_SAFARI' }),
-                          children: 'LEAVE THE SAFARI ZONE',
-                        })
-                      : null,
+                    : jsx('button', {
+                        className: 'move-panel-btn confirm',
+                        onClick: () => dispatch({ type: 'END_SAFARI' }),
+                        children: 'LEAVE THE SAFARI ZONE',
+                      }),
           }),
         ],
       }),

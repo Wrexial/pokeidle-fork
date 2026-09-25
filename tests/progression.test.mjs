@@ -5,10 +5,10 @@ import { installGameData } from './helpers/game-data.mjs'
 
 installGameData()
 
-const { awardExperience, computeUnlockedLocations, getRegionUnlockTokens, checkShinyOdds, shinyChainMultiplier } =
+const { awardExperience, computeUnlockedLocations, getRegionUnlockTokens, checkShinyOdds, shinyChainMultiplier, entryRoutePath } =
   await import('../src/game/progression.js')
 const { initialGameState } = await import('../src/game/reducer.js')
-const { encounterData, gymLeaderData, pokemonSpecies } = await import('../src/data/gameData.js')
+const { encounterData, gymLeaderData, mapData, pokemonSpecies, regions } = await import('../src/data/gameData.js')
 const { calculateExpYield, createPokemon } = await import('../src/game/pokemon.js')
 
 /** @param {Record<string, any>} [overrides] */
@@ -79,13 +79,33 @@ test('badge gates open with the right badges and re-lock after prestige', () => 
   )
 })
 
-test('Galar opens on its gentler first route', () => {
-  const first = encounterData['galar-route-1']?.encounters ?? []
-  assert.ok(first.length > 0, 'Galar route 1 has wilds')
-  assert.ok(
-    Math.max(...first.map((entry) => entry.maxLevel)) <= 3,
-    'Galar route 1 stays at Lv. 2-3'
-  )
+test('every region opens on a gentle Lv. 3-5 first route', () => {
+  for (const region of [...regions].sort((a, b) => a.order - b.order)) {
+    const { route } = entryRoutePath(region.entry),
+      location = route ? mapData[route] : null,
+      entries = location?.routeKey ? (encounterData[location.routeKey]?.encounters ?? []) : []
+    assert.ok(entries.length > 0, `${region.id} has a first route with wilds`)
+    assert.equal(
+      Math.min(...entries.map((entry) => entry.minLevel)),
+      3,
+      `${region.id}'s first route starts at Lv. 3`
+    )
+    assert.ok(
+      Math.max(...entries.map((entry) => entry.maxLevel)) <= 5,
+      `${region.id}'s first route stays at Lv. 5 or below`
+    )
+  }
+})
+
+test('Alola route 2 unlocks from an earlier route, not the locked route 3', () => {
+  const route2 = mapData['alola-route-2'],
+    refs = (route2.unlock.battlesAtLocation ?? []).map((rule) => rule.locationId)
+  assert.ok(refs.length > 0, 'route 2 has a battle gate')
+  for (const ref of refs)
+    assert.ok(
+      mapData[ref].unlockOrder < route2.unlockOrder,
+      `${ref} must unlock before route 2 (${route2.unlockOrder})`
+    )
 })
 
 test('Exp. Share gives the active 50% and each other member 25%', () => {

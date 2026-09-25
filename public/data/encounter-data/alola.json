@@ -5,182 +5,182 @@
    {
     "speciesKey": "magnemite",
     "weight": 13,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "wingull",
     "weight": 13,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "tentacool",
     "weight": 10,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "finneon",
     "weight": 10,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "caterpie",
     "weight": 9,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "yungoos",
     "weight": 9,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "buneary",
     "weight": 8,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "happiny",
     "weight": 8,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "inkay",
     "weight": 8,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "bonsly",
     "weight": 8,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "zorua",
     "weight": 8,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "ledyba",
     "weight": 5,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "spinarak",
     "weight": 5,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "pikipek",
     "weight": 5,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "slowpoke",
     "weight": 5,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "rockruff",
     "weight": 5,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "pikachu",
     "weight": 4,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "grubbin",
     "weight": 4,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "snorlax",
     "weight": 4,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "sudowoodo",
     "weight": 4,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "metapod",
     "weight": 3,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "munchlax",
     "weight": 3,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "pichu",
     "weight": 1,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "rowlet",
     "weight": 1,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "litten",
     "weight": 1,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "popplio",
     "weight": 1,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "a-rattata",
     "weight": 12,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "a-meowth",
     "weight": 12,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "a-diglett",
     "weight": 12,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "a-grimer",
     "weight": 12,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    }
   ]
  },

@@ -5,122 +5,122 @@
    {
     "speciesKey": "lechonk",
     "weight": 40,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "wingull",
     "weight": 40,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "hoppip",
     "weight": 30,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "fletchling",
     "weight": 30,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "scatterbug",
     "weight": 30,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "tarountula",
     "weight": 30,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "bounsweet",
     "weight": 30,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "igglybuff",
     "weight": 30,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "psyduck",
     "weight": 30,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "magikarp",
     "weight": 30,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "wooper",
     "weight": 30,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "surskit",
     "weight": 30,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "azurill",
     "weight": 30,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "arrokuda",
     "weight": 30,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "sunkern",
     "weight": 30,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "sprigatito",
     "weight": 1,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "fuecoco",
     "weight": 1,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "quaxly",
     "weight": 1,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "tandemaus",
     "weight": 12,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "flamigo",
     "weight": 12,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    }
   ]
  },

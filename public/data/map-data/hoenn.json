@@ -30,7 +30,7 @@
   "name": "Route 101",
   "type": "route",
   "region": "hoenn",
-  "description": "A route in the Hoenn region where Normal and Bug Pokemon roam around Lv. 5-7.",
+  "description": "A route in the Hoenn region where Normal and Bug Pokemon roam around Lv. 3-5.",
   "routeKey": "hoenn-route-101",
   "background": "/backgrounds/grassland.png",
   "connections": [

@@ -5,14 +5,14 @@
    {
     "speciesKey": "pidgey",
     "weight": 13,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "rattata",
     "weight": 13,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    }
   ]
  },

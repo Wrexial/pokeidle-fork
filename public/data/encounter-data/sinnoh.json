@@ -5,38 +5,38 @@
    {
     "speciesKey": "starly",
     "weight": 14,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "bidoof",
     "weight": 14,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "kricketot",
     "weight": 5,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "turtwig",
     "weight": 1,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "chimchar",
     "weight": 1,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "piplup",
     "weight": 1,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    }
   ]
  },

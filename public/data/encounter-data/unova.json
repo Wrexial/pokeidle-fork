@@ -5,98 +5,98 @@
    {
     "speciesKey": "herdier",
     "weight": 22,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "watchog",
     "weight": 20,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "audino",
     "weight": 20,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "feebas",
     "weight": 15,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "patrat",
     "weight": 13,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "lillipup",
     "weight": 13,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "scraggy",
     "weight": 6,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "jigglypuff",
     "weight": 5,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "dunsparce",
     "weight": 3,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "scrafty",
     "weight": 3,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "wigglytuff",
     "weight": 1,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "milotic",
     "weight": 1,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "stoutland",
     "weight": 1,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "snivy",
     "weight": 1,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "tepig",
     "weight": 1,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    },
    {
     "speciesKey": "oshawott",
     "weight": 1,
-    "minLevel": 5,
-    "maxLevel": 7
+    "minLevel": 3,
+    "maxLevel": 5
    }
   ]
  },

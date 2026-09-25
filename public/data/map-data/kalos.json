@@ -30,7 +30,7 @@
   "name": "Route 1",
   "type": "route",
   "region": "kalos",
-  "description": "A route in the Kalos region where Grass and Fire Pokemon roam around Lv. 5-7.",
+  "description": "A route in the Kalos region where Grass and Fire Pokemon roam around Lv. 3-5.",
   "routeKey": "kalos-route-1",
   "background": "/backgrounds/grassland.png",
   "connections": [

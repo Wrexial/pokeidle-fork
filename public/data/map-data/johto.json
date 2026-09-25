@@ -31,7 +31,7 @@
   "name": "Route 29",
   "type": "route",
   "region": "johto",
-  "description": "A route in the Johto region where Normal and Flying Pokemon roam around Lv. 5-7.",
+  "description": "A route in the Johto region where Normal and Flying Pokemon roam around Lv. 3-5.",
   "routeKey": "johto-route-29",
   "background": "/backgrounds/grassland.png",
   "connections": [

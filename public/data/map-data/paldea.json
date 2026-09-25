@@ -31,7 +31,7 @@
   "name": "South Province (Area One)",
   "type": "route",
   "region": "paldea",
-  "description": "A route in the Paldea region where Water and Normal Pokemon roam around Lv. 5-7.",
+  "description": "A route in the Paldea region where Water and Normal Pokemon roam around Lv. 3-5.",
   "routeKey": "paldea-south-province-area-one",
   "background": "/backgrounds/grassland.png",
   "connections": [

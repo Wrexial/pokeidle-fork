@@ -61,7 +61,7 @@ export const CHANGELOG = [
           heading: 'Progression',
           items: [
             'High-level wild areas no longer open before the region expects them: routes whose wilds jump far above the area that unlocks them (Paldea\u2019s province areas, Alola\u2019s late island routes, several end-game routes) now also require a party level closer to their wilds, so you cannot wander into Lv.70+ Pokemon with a starter team',
-            'Galar\u2019s opening route (and the Slumbering Weald) now starts at Lv. 2-3 instead of Lv. 5-7, so the starter has room to find its feet before Galar\u2019s short route list starts climbing',
+            'Every region\u2019s opening route now starts at Lv. 3-5 instead of Lv. 5-7 (Galar\u2019s opening route and the Slumbering Weald included), so a fresh starter has room to find its feet before the region\u2019s curve starts climbing',
             'The Exp. Share is rebalanced: over 500 battles the active Pokemon gains 50% EXP and every other non-fainted party member gains 25% (it used to give the rest only 5%, but lasted 1000 battles)',
           ],
         },
@@ -74,6 +74,7 @@ export const CHANGELOG = [
             'Layout pass on crowded controls: the Box header no longer overlaps its pager with the Pokedex / Records / Daycare buttons, and toolbar / tab / save-button rows wrap instead of colliding',
             'Alola and Paldea are playable again: starting in one (or opening it with an Unlock Token) now unlocks the entry island/province hub and its first area, instead of stranding the player because the hub asked for a Pokedex count they had no route to reach',
             'The Town Map no longer renders blank when you stand on a hidden zone sub-area (starting in Alola or Paldea): the camera focuses the entry island/province hub instead of empty space between nodes, so the map stays navigable',
+            'Alola\u2019s Route 2 no longer asks for wins on the later, still-locked Route 3: it now opens from Route 1, so the island\u2019s early progression and the \u201cNext Unlocks\u201d list point somewhere you can actually reach',
             'The gym tab\u2019s "GO TO <town>" hint is now a button: click it to travel straight to that leader\u2019s town',
             'Candies can be applied in bulk: choose 1, 10 or All in the bag and use them in one go. A stack stops at Lv.100 and only spends the candies it actually needed',
             'Mossdeep City\u2019s Gym leaders are now correctly named Tate & Liza (they were shown as just "Tate")',

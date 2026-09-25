@@ -30,7 +30,7 @@
   "name": "Route 1",
   "type": "route",
   "region": "unova",
-  "description": "A route in the Unova region where Normal and Water Pokemon roam around Lv. 5-7.",
+  "description": "A route in the Unova region where Normal and Water Pokemon roam around Lv. 3-5.",
   "routeKey": "unova-route-1",
   "background": "/backgrounds/grassland.png",
   "connections": [

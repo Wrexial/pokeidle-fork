@@ -43,10 +43,10 @@ const REGIONS = [
 // earlier region is a known, separate balance issue.
 const LEVEL_MIN = 5
 const LEVEL_MAX = 75
-// Regions whose opening route should be gentler than the standard 5-7 band.
-// Galar's numbered route list is short, so its curve climbs fast; a softer
-// first zone gives the starter room to breathe before the first big jump.
-const REGION_FIRST_ROUTE_LEVEL = { galar: 2 }
+// Every region opens on a gentler Lv. 3-5 first route so a fresh starter has
+// room to find its feet before the region's curve starts climbing.
+const FIRST_ROUTE_LEVEL_MIN = 3
+const FIRST_ROUTE_LEVEL_MAX = 5
 // The last wild zone sits two levels below the cap so its +2 window ends at 75.
 const WILD_LEVEL_MAX = LEVEL_MAX - 2
 // Item evolutions have no level requirement; treat them as evolving around here
@@ -1373,12 +1373,11 @@ for (const region of REGIONS) {
     routeEntries
   )
 
-  // A gentler opening route for the regions that ask for it (see above).
-  const firstRouteLevel = REGION_FIRST_ROUTE_LEVEL[regionId]
-  if (firstRouteLevel !== undefined && routeNodes.length > 0) {
+  // A gentler opening route for every region (see above).
+  if (routeNodes.length > 0) {
     for (const entry of routeEntries[locId(regionId, routeNodes[0])] ?? []) {
-      entry.minLevel = firstRouteLevel
-      entry.maxLevel = firstRouteLevel + 1
+      entry.minLevel = FIRST_ROUTE_LEVEL_MIN
+      entry.maxLevel = FIRST_ROUTE_LEVEL_MAX
     }
   }
 

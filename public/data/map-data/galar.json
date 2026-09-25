@@ -30,7 +30,7 @@
   "name": "Route 1",
   "type": "route",
   "region": "galar",
-  "description": "A route in the Galar region where Normal and Bug Pokemon roam around Lv. 2-3.",
+  "description": "A route in the Galar region where Normal and Bug Pokemon roam around Lv. 3-5.",
   "routeKey": "galar-route-1",
   "background": "/backgrounds/grassland.png",
   "connections": [

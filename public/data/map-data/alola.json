@@ -30,7 +30,7 @@
   "name": "Route 1",
   "type": "route",
   "region": "alola",
-  "description": "A route in the Alola region where Normal and Water Pokemon roam around Lv. 5-7.",
+  "description": "A route in the Alola region where Normal and Water Pokemon roam around Lv. 3-5.",
   "routeKey": "alola-route-1",
   "background": "/backgrounds/grassland.png",
   "connections": [
@@ -89,8 +89,8 @@
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "alola-route-3",
-     "count": 5
+     "locationId": "alola-route-1",
+     "count": 8
     }
    ],
    "partyLevel": 11

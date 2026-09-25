@@ -30,7 +30,7 @@
   "name": "Route 201",
   "type": "route",
   "region": "sinnoh",
-  "description": "A route in the Sinnoh region where Normal and Flying Pokemon roam around Lv. 5-7.",
+  "description": "A route in the Sinnoh region where Normal and Flying Pokemon roam around Lv. 3-5.",
   "routeKey": "sinnoh-route-201",
   "background": "/backgrounds/grassland.png",
   "connections": [

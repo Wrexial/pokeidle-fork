@@ -119,6 +119,32 @@ export const moveEffectText = {
 }
 
 /**
+ * Moves whose base power is computed from the battlers at use time (see
+ * src/game/combat/variable-power.js).
+ * @type {Record<string, string>}
+ */
+export const variablePowerNotes = {
+  heatCrash: 'Stronger the heavier the user is relative to the target (40\u2013120 power).',
+  heavySlam: 'Stronger the heavier the user is relative to the target (40\u2013120 power).',
+  lowKick: 'Stronger the heavier the target is (20\u2013120 power).',
+  grassKnot: 'Stronger the heavier the target is (20\u2013120 power).',
+  electroBall: 'Stronger the faster the user is relative to the target (40\u2013150 power).',
+  gyroBall: 'Stronger the slower the user is relative to the target (up to 150 power).',
+  flail: 'Stronger the lower the user\u2019s HP (40\u2013200 power).',
+  reversal: 'Stronger the lower the user\u2019s HP (40\u2013200 power).',
+  eruption: 'Power scales with the user\u2019s remaining HP (up to 150).',
+  waterSpout: 'Power scales with the user\u2019s remaining HP (up to 150).',
+  dragonEnergy: 'Power scales with the user\u2019s remaining HP (up to 150).',
+  crushGrip: 'Power scales with the target\u2019s remaining HP (up to 120).',
+  wringOut: 'Power scales with the target\u2019s remaining HP (up to 120).',
+  return: 'Stronger the higher the user\u2019s friendship (up to 102 power).',
+  frustration: 'Stronger the lower the user\u2019s friendship (up to 102 power).',
+  storedPower: '20 power, plus 20 for each of the user\u2019s raised stats.',
+  powerTrip: '20 power, plus 20 for each of the user\u2019s raised stats.',
+  punishment: '60 power, plus 20 for each of the target\u2019s raised stats (max 200).',
+}
+
+/**
  * Extra explanation for moves whose effect needs more than the generic line.
  * @type {Record<string, string>}
  */
@@ -143,6 +169,8 @@ export const handledMoveEffectTypes = new Set(Object.keys(moveEffectText))
  * @returns {string | null}
  */
 export function describeMove(move) {
+  const variableNote = variablePowerNotes[move.key ?? '']
+  if (variableNote) return variableNote
   const notes = moveNotes[move.key ?? '']
   const effect = move.effect
 
@@ -253,7 +281,9 @@ export function moveTooltip(moveId, move) {
     statLine =
       move.power > 0
         ? `${move.type} \u00b7 ${kind} \u00b7 ${move.power} power \u00b7 ${accuracy}`
-        : `${move.type} \u00b7 ${kind} \u00b7 ${accuracy}`,
+        : variablePowerNotes[moveId]
+          ? `${move.type} \u00b7 ${kind} \u00b7 variable power \u00b7 ${accuracy}`
+          : `${move.type} \u00b7 ${kind} \u00b7 ${accuracy}`,
     effect = describeMove({ key: moveId, ...move })
   return effect ? `${statLine}\n${effect}` : statLine
 }

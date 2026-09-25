@@ -458,6 +458,11 @@ One-off scripts used to build the data JSON (not run during dev/build):
   ability keys). Cached alongside the breeding data; `rollAbility`
   (`src/game/pokemon.js`) assigns one when a Pokemon is created. Re-run after
   adding species/form ids.
+- `fetch-weights.cjs` — reads each species' cached `/pokemon/{id}` response and
+  writes its `weight` (kg) into `public/data/pokemon-species.json`. Drives the
+  weight-based moves (Heat Crash, Heavy Slam, Low Kick, Grass Knot, see
+  `src/game/combat/variable-power.js`). Needs no network (the responses are
+  cached by fetch-abilities.cjs); re-run after adding species/form ids.
 - `fetch-tm-learnsets.cjs` — reads each species' cached `/pokemon/{id}` response
   and writes `public/data/tm-learnsets.json`, the machine (TM) moves it can learn
   in its newest game. Feeds the Move Tutor (`getTutorMoves` in

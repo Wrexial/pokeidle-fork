@@ -10,6 +10,7 @@ import { applyEndOfTurn, reportFieldEffects } from './end-of-turn.js'
 import { emptyBattleHazards } from '../hazards.js'
 import { heldDamageMultiplier, heldLifeOrbRecoil, heldStatMultiplier, heldSurvivesAtFullHp } from '../held-items.js'
 import { canEvolveFurther } from '../pokemon.js'
+import { VARIABLE_POWER_MOVES, withVariablePower } from './variable-power.js'
 import { applyConfusion, applyContactAbility, applyInfatuation, applyLeechSeed, applyStatus, handleConfusion, handleInfatuation, statusPreventsAction } from './status.js'
 import { TERRAIN_ABILITIES, TERRAIN_NAMES, TERRAIN_TURNS, terrainAbilityMultiplier, terrainDamageMultiplier, terrainPreventsPriority } from '../terrain.js'
 import { applyEntryAbility, applyIntimidate, clampStatStage, effectiveSpeed, getStatLabel, getStatStage, resetStatStages, screenApplies } from './volatile.js'
@@ -399,7 +400,9 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       })
       continue
     }
-    if (moveDef.power === 0) {
+    // Variable-power moves (Heat Crash, Low Kick, ...) store power 0 in the
+    // table but are damaging, so they skip the status-move branch.
+    if (moveDef.power === 0 && !VARIABLE_POWER_MOVES.has(attack.moveId)) {
       // Good as Gold makes the holder immune to status moves.
       if (abilityOf(attack.defender) === 'goodAsGold' && !isSelfTargetedMove(moveDef)) {
         events.push({
@@ -1019,10 +1022,18 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       accuracyMult =
         (abilityOf(attack.attacker) === 'compoundEyes' ? 1.3 : 1) *
         (abilityOf(attack.attacker) === 'victoryStar' ? 1.1 : 1),
-      effectiveMove =
+      accuracyMove =
         accuracyMult === 1 || !(baseMove.accuracy > 0) || baseMove.accuracy > 100
           ? baseMove
-          : { ...baseMove, accuracy: Math.min(100, baseMove.accuracy * accuracyMult) }
+          : { ...baseMove, accuracy: Math.min(100, baseMove.accuracy * accuracyMult) },
+      // Heat Crash, Electro Ball, Eruption, Stored Power, ... fill in their base
+      // power from the two battlers here.
+      effectiveMove = withVariablePower(
+        attack.moveId,
+        attack.attacker,
+        attack.defender,
+        accuracyMove
+      )
     // Protean / Libero change the user's type to the move it is about to use.
     if (abilityOf(attack.attacker) === 'protean' || abilityOf(attack.attacker) === 'libero') {
       attack.attacker.types = [effectiveMove.type]

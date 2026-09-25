@@ -15,7 +15,11 @@
 const fs = require('fs')
 const path = require('path')
 const { abilityInfo } = require('../src/data/ability-info.js')
-const { describeMove, handledMoveEffectTypes } = require('../src/game/move-info.js')
+const {
+  describeMove,
+  handledMoveEffectTypes,
+  variablePowerNotes,
+} = require('../src/game/move-info.js')
 
 const ROOT = path.join(__dirname, '..')
 const DATA = path.join(ROOT, 'public', 'data')
@@ -47,8 +51,11 @@ async function main() {
     const effect = move.effect
     const hasField = !!(move.protect || move.screen || move.multiHit || move.critStage)
     let status
-    let text = null
-    if (effect && !HANDLED_EFFECTS.has(effect.type) && !['heal', 'recoil', 'drain', 'status', 'statChange', 'statReset', 'confusion', 'infatuation', 'hazard', 'weather', 'terrain', 'typeChange', 'typeAdd', 'statSwap'].includes(effect.type)) {
+    let text = variablePowerNotes[key] ?? null
+    if (text) {
+      // Variable-power moves carry no `effect`; the engine computes their power.
+      status = 'implemented'
+    } else if (effect && !HANDLED_EFFECTS.has(effect.type) && !['heal', 'recoil', 'drain', 'status', 'statChange', 'statReset', 'confusion', 'infatuation', 'hazard', 'weather', 'terrain', 'typeChange', 'typeAdd', 'statSwap'].includes(effect.type)) {
       unknownEffects.add(effect.type)
       status = 'inert'
     } else if (effect || hasField) {

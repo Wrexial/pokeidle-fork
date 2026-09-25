@@ -2146,6 +2146,29 @@ img {
     min-width: 0
 }
 
+.stats-panel-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    flex: 1
+}
+
+.stats-panel-name-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px
+}
+
+.stats-panel-chips {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+    margin-top: 3px
+}
+
 .stats-panel-name {
     font-size: 11px;
     font-weight: 700;
@@ -2209,11 +2232,12 @@ img {
 }
 
 .stats-panel-nature {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 4px;
-    margin-top: 3px
+    font-size: 8px;
+    font-weight: 700;
+    color: #4a3a28;
+    background: linear-gradient(#e8dcc0,#cdbd94);
+    border: 1px solid #a89870;
+    padding: 1px 6px
 }
 
 .stats-panel-nature-name {
@@ -2249,8 +2273,6 @@ img {
 }
 
 .stats-panel-pokerus {
-    margin-top: 3px;
-    align-self: flex-start;
     font-size: 8px;
     font-weight: 700;
     color: #f0e6ff;
@@ -2260,8 +2282,6 @@ img {
 }
 
 .stats-panel-friendship {
-    margin-top: 3px;
-    align-self: flex-start;
     font-size: 8px;
     font-weight: 700;
     color: #ffd9e6;
@@ -2277,8 +2297,6 @@ img {
 }
 
 .stats-panel-ability {
-    margin-top: 3px;
-    align-self: flex-start;
     font-size: 8px;
     font-weight: 700;
     color: #d9f0ff;
@@ -2288,8 +2306,6 @@ img {
 }
 
 .stats-panel-held {
-    margin-top: 3px;
-    align-self: flex-start;
     display: inline-flex;
     align-items: center;
     gap: 4px;
@@ -11158,4 +11174,8 @@ img {
     box-shadow: 0 6px 18px rgba(0,0,0,.55);
     pointer-events: none;
     white-space: normal
+}
+
+.global-tooltip.below {
+    transform: translate(-50%, 8px)
 }

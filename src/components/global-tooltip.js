@@ -16,7 +16,7 @@ function tooltipOwner(target) {
 
 export function GlobalTooltip() {
   const [tip, setTip] = React.useState(
-    /** @type {{ text: string, x: number, y: number } | null} */ (null)
+    /** @type {{ text: string, x: number, y: number, below: boolean } | null} */ (null)
   )
   React.useEffect(() => {
     /** @param {Event} event */
@@ -25,8 +25,16 @@ export function GlobalTooltip() {
       if (!owner) return
       const text = owner.getAttribute('data-tooltip')
       if (!text) return
-      const rect = owner.getBoundingClientRect()
-      setTip({ text, x: rect.left + rect.width / 2, y: rect.top })
+      const rect = owner.getBoundingClientRect(),
+        // Flip below when there is not enough room above (e.g. the summary's
+        // nature/ability chips sit near the top of the panel).
+        below = rect.top < 64
+      setTip({
+        text,
+        x: rect.left + rect.width / 2,
+        y: below ? rect.bottom : rect.top,
+        below,
+      })
     }
     /** @param {Event} event */
     const hide = (event) => {
@@ -53,7 +61,7 @@ export function GlobalTooltip() {
   return tip
     ? createPortal(
         jsx('div', {
-          className: 'global-tooltip',
+          className: `global-tooltip${tip.below ? ' below' : ''}`,
           role: 'tooltip',
           style: { left: `${tip.x}px`, top: `${tip.y}px` },
           children: tip.text,

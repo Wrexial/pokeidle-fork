@@ -7,13 +7,13 @@ import { heldItems } from '../data/items.js'
 import { statBarColors } from '../data/ui.js'
 import { natureByKey, natureName } from '../data/natures.js'
 
-/** Short stat labels for the nature badge (matches the stat grid). @type {Record<string, string>} */
-const NATURE_STAT_LABELS = {
-  attack: 'Atk',
-  defense: 'Def',
-  spAttack: 'SpA',
-  spDefense: 'SpD',
-  speed: 'Spd',
+/** Full stat names for the nature tooltip. @type {Record<string, string>} */
+const NATURE_STAT_NAMES = {
+  attack: 'Attack',
+  defense: 'Defense',
+  spAttack: 'Sp. Atk',
+  spDefense: 'Sp. Def',
+  speed: 'Speed',
 }
 import { moveData, pokemonSpecies } from '../data/gameData.js'
 import { abilityTooltip } from '../data/ability-info.js'
@@ -53,7 +53,14 @@ export function StatsPanel({
           : nature.decreased === statKey
             ? -1
             : 0
-        : 0
+        : 0,
+    natureText = nature
+      ? nature.increased !== nature.decreased
+        ? `${natureName(pokemon.nature)} nature \u2014 +10% ${
+            NATURE_STAT_NAMES[nature.increased] ?? nature.increased
+          }, \u221210% ${NATURE_STAT_NAMES[nature.decreased] ?? nature.decreased}.`
+        : `${natureName(pokemon.nature)} nature \u2014 no stat changes.`
+      : null
   if (!species) return null
   function commitName() {
     dispatch({
@@ -225,59 +232,64 @@ export function StatsPanel({
             alt: pokemon.name,
           }),
           jsxs('div', {
-            className: 'stats-panel-name-block',
+            className: 'stats-panel-info',
             children: [
-              jsxs('span', {
-                className: 'stats-panel-name',
+              jsxs('div', {
+                className: 'stats-panel-name-row',
                 children: [
-                  pokemon.isShiny &&
-                    jsx('span', {
-                      className: 'shiny-star',
-                      children: '★',
-                    }),
-                  editingName
-                    ? jsx('input', {
-                        className: 'stats-panel-name-input',
-                        value: nameDraft,
-                        maxLength: 12,
-                        autoFocus: !0,
-                        onChange: /** @param {React.ChangeEvent<HTMLInputElement>} event */ (
-                          event
-                        ) => setNameDraft(event.target.value),
-                        onKeyDown: /** @param {React.KeyboardEvent<HTMLInputElement>} event */ (
-                          event
-                        ) => {
-                          event.key === 'Enter' && commitName()
-                          event.key === 'Escape' && setEditingName(!1)
-                        },
-                        onBlur: commitName,
-                      })
-                    : pokemonDisplayName(pokemon),
-                  !editingName &&
-                    jsx('button', {
-                      className: 'stats-panel-name-edit',
-                      title: 'Nickname',
-                      onClick: () => {
-                        setNameDraft(pokemon.nickname ?? '')
-                        setEditingName(!0)
-                      },
-                      children: '\u270e',
-                    }),
-                  jsx('span', {
-                    className: `pokemon-gender ${
-                      gender === 'male'
-                        ? 'gender-male'
-                        : gender === 'female'
-                          ? 'gender-female'
-                          : 'gender-none'
-                    }`,
-                    children: genderSymbol(gender),
+                  jsxs('span', {
+                    className: 'stats-panel-name',
+                    children: [
+                      pokemon.isShiny &&
+                        jsx('span', {
+                          className: 'shiny-star',
+                          children: '★',
+                        }),
+                      editingName
+                        ? jsx('input', {
+                            className: 'stats-panel-name-input',
+                            value: nameDraft,
+                            maxLength: 12,
+                            autoFocus: !0,
+                            onChange: /** @param {React.ChangeEvent<HTMLInputElement>} event */ (
+                              event
+                            ) => setNameDraft(event.target.value),
+                            onKeyDown: /** @param {React.KeyboardEvent<HTMLInputElement>} event */ (
+                              event
+                            ) => {
+                              event.key === 'Enter' && commitName()
+                              event.key === 'Escape' && setEditingName(!1)
+                            },
+                            onBlur: commitName,
+                          })
+                        : pokemonDisplayName(pokemon),
+                      !editingName &&
+                        jsx('button', {
+                          className: 'stats-panel-name-edit',
+                          title: 'Nickname',
+                          onClick: () => {
+                            setNameDraft(pokemon.nickname ?? '')
+                            setEditingName(!0)
+                          },
+                          children: '\u270e',
+                        }),
+                      jsx('span', {
+                        className: `pokemon-gender ${
+                          gender === 'male'
+                            ? 'gender-male'
+                            : gender === 'female'
+                              ? 'gender-female'
+                              : 'gender-none'
+                        }`,
+                        children: genderSymbol(gender),
+                      }),
+                    ],
+                  }),
+                  jsxs('span', {
+                    className: 'stats-panel-level',
+                    children: ['Lv', pokemon.level],
                   }),
                 ],
-              }),
-              jsxs('span', {
-                className: 'stats-panel-level',
-                children: ['Lv', pokemon.level],
               }),
               jsx('div', {
                 className: 'stats-panel-types',
@@ -292,82 +304,59 @@ export function StatsPanel({
                   )
                 ),
               }),
-              nature &&
-                jsxs('span', {
-                  className: 'stats-panel-nature',
-                  children: [
+              // A compact strip of traits below the name. Nature is a chip with
+              // its full effect in the hover tooltip rather than inline arrows.
+              jsxs('div', {
+                className: 'stats-panel-chips',
+                children: [
+                  nature &&
                     jsx('span', {
-                      className: 'stats-panel-nature-name',
+                      className: 'stats-panel-nature',
+                      'data-tooltip': natureText,
                       children: natureName(pokemon.nature),
                     }),
-                    nature.increased !== nature.decreased
-                      ? jsxs('span', {
-                          className: 'stats-panel-nature-effects',
-                          children: [
-                            jsxs('span', {
-                              className: 'nature-stat nature-up',
-                              title: `Raised 10% by ${natureName(pokemon.nature)}`,
-                              children: [
-                                '\u25b2',
-                                NATURE_STAT_LABELS[nature.increased] ?? nature.increased,
-                              ],
-                            }),
-                            jsxs('span', {
-                              className: 'nature-stat nature-down',
-                              title: `Lowered 10% by ${natureName(pokemon.nature)}`,
-                              children: [
-                                '\u25bc',
-                                NATURE_STAT_LABELS[nature.decreased] ?? nature.decreased,
-                              ],
-                            }),
-                          ],
-                        })
-                      : jsx('span', {
-                          className: 'nature-stat nature-neutral',
-                          children: 'Neutral',
-                        }),
-                  ],
-                }),
-              state.pokerus &&
-                jsx('span', {
-                  className: 'stats-panel-pokerus',
-                  title: `Pokerus: double EXP for ${state.pokerus.battlesRemaining} more battles`,
-                  children: ['PKRS \u00b7 ', state.pokerus.battlesRemaining, ' battles'],
-                }),
-              jsx('span', {
-                className: `stats-panel-friendship${friendship >= 160 ? ' high' : ''}`,
-                title: 'Friendship \u2014 raised by battling and levelling up. Some Pokemon only evolve when it is high enough.',
-                children: `\u2665 ${friendship}/255`,
-              }),
-              pokemon.ability &&
-                jsx('span', {
-                  className: 'stats-panel-ability',
-                  title: 'Ability',
-                  'data-tooltip': abilityTooltip(pokemon.ability),
-                  children: abilityDisplayName(pokemon.ability),
-                }),
-              pokemon.heldItem &&
-                jsxs('span', {
-                  className: 'stats-panel-held',
-                  children: [
+                  pokemon.ability &&
                     jsx('span', {
-                      title: 'Held item',
-                      children: `\ud83c\udf81 ${heldItems[pokemon.heldItem]?.name ?? pokemon.heldItem}`,
+                      className: 'stats-panel-ability',
+                      title: 'Ability',
+                      'data-tooltip': abilityTooltip(pokemon.ability),
+                      children: abilityDisplayName(pokemon.ability),
                     }),
-                    jsx('button', {
-                      className: 'stats-panel-held-remove',
-                      title: 'Take the held item back',
-                      onClick: () =>
-                        dispatch({
-                          type: 'CLEAR_HELD_ITEM',
-                          payload: {
-                            pokemonId: pokemon.id,
-                          },
+                  pokemon.heldItem &&
+                    jsxs('span', {
+                      className: 'stats-panel-held',
+                      children: [
+                        jsx('span', {
+                          title: 'Held item',
+                          children: `\ud83c\udf81 ${heldItems[pokemon.heldItem]?.name ?? pokemon.heldItem}`,
                         }),
-                      children: 'Take',
+                        jsx('button', {
+                          className: 'stats-panel-held-remove',
+                          title: 'Take the held item back',
+                          onClick: () =>
+                            dispatch({
+                              type: 'CLEAR_HELD_ITEM',
+                              payload: {
+                                pokemonId: pokemon.id,
+                              },
+                            }),
+                          children: 'Take',
+                        }),
+                      ],
                     }),
-                  ],
-                }),
+                  state.pokerus &&
+                    jsx('span', {
+                      className: 'stats-panel-pokerus',
+                      title: `Pokerus: double EXP for ${state.pokerus.battlesRemaining} more battles`,
+                      children: ['PKRS \u00b7 ', state.pokerus.battlesRemaining, ' battles'],
+                    }),
+                  jsx('span', {
+                    className: `stats-panel-friendship${friendship >= 160 ? ' high' : ''}`,
+                    title: 'Friendship \u2014 raised by battling and levelling up. Some Pokemon only evolve when it is high enough.',
+                    children: `\u2665 ${friendship}/255`,
+                  }),
+                ],
+              }),
             ],
           }),
         ],

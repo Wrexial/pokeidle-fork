@@ -7,6 +7,7 @@ installGameData()
 
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 const { mapData } = await import('../src/data/gameData.js')
+const { createPokemon } = await import('../src/game/pokemon.js')
 
 /** Start a Kanto run with Bulbasaur. */
 function startedGame() {
@@ -63,6 +64,37 @@ test('UNLOCK_REGION opens a zone region entry hub and first area', () => {
       `${regionId} opens a wild route to play`
     )
   }
+})
+
+test('candies apply in bulk and stop at level 100', () => {
+  const mon = createPokemon('bulbasaur', 5, 'a'),
+    state = {
+      ...initialGameState,
+      party: [mon],
+      playerPokemon: mon,
+      activePlayerPokemonIndex: 0,
+      inventory: { rareCandy: 200 },
+    },
+    ten = gameReducer(state, {
+      type: 'USE_ITEM_ON_POKEMON',
+      payload: { itemId: 'rareCandy', pokemonId: 'a', quantity: 10 },
+    })
+  assert.equal(ten.party[0].level, 15)
+  assert.equal(ten.inventory.rareCandy, 190)
+  // A big stack stops at 100 and only consumes the candies it actually used
+  // (85 more levels), not the whole request.
+  const capped = gameReducer(ten, {
+    type: 'USE_ITEM_ON_POKEMON',
+    payload: { itemId: 'rareCandy', pokemonId: 'a', quantity: 999 },
+  })
+  assert.equal(capped.party[0].level, 100)
+  assert.equal(capped.inventory.rareCandy, 105)
+  // No candy is spent on an already maxed Pokemon.
+  const maxed = gameReducer(capped, {
+    type: 'USE_ITEM_ON_POKEMON',
+    payload: { itemId: 'rareCandy', pokemonId: 'a', quantity: 1 },
+  })
+  assert.equal(maxed, capped)
 })
 
 test('CATCH_POKEMON adds to the party and spends the ball', () => {

@@ -176,7 +176,9 @@ export function useItemOnPokemon(state, action) {
       battleLog: [...state.battleLog, `${member.name} is now holding ${heldItem.name}!`].slice(-50),
     }
   }
-  let member = { ...state.party[memberIndex] }
+  let member = { ...state.party[memberIndex] },
+    // Candies can be applied several at a time; everything else is one shot.
+    consumed = 1
   const log = []
   if (item.friendship) {
     if ((member.friendship ?? 0) >= MAX_FRIENDSHIP) return state
@@ -221,42 +223,61 @@ export function useItemOnPokemon(state, action) {
     }
   } else if (item.category === 'candy') {
     if (member.level >= 100) return state
-    const species = pokemonSpecies[member.speciesKey],
-      newTotalExp = item.levelUp
-        ? calculateRequiredExperience(
-            Math.min(100, member.level + item.levelUp),
-            species.growthRate
-          )
-        : member.totalExp + (item.exp ?? 0),
-      levelUps = getLevelUpResults(
-        member.speciesKey,
-        species.growthRate,
-        member.level,
-        newTotalExp
-      )
-    member.totalExp = newTotalExp
-    if (levelUps.length > 0) {
-      const lastLevelUp = levelUps[levelUps.length - 1],
-        newStats = calculatePokemonStats(species, lastLevelUp.newLevel, member.ivs, member.nature),
-        hpGain = newStats.hp - member.maxHp
-      member = {
-        ...member,
-        level: lastLevelUp.newLevel,
-        maxHp: newStats.hp,
-        currentHp: Math.min(member.currentHp + Math.max(0, hpGain), newStats.hp),
-        attack: newStats.attack,
-        defense: newStats.defense,
-        spAttack: newStats.spAttack,
-        spDefense: newStats.spDefense,
-        speed: newStats.speed,
+    const requested = Math.min(
+        owned,
+        Math.max(1, Math.floor(action.payload.quantity ?? 1))
+      ),
+      startLevel = member.level
+    let used = 0
+    // Apply one candy per loop so a big stack stops exactly at level 100 and
+    // only the candies actually used are consumed.
+    while (used < requested && member.level < 100) {
+      const species = pokemonSpecies[member.speciesKey],
+        newTotalExp = item.levelUp
+          ? calculateRequiredExperience(
+              Math.min(100, member.level + item.levelUp),
+              species.growthRate
+            )
+          : member.totalExp + (item.exp ?? 0),
+        levelUps = getLevelUpResults(
+          member.speciesKey,
+          species.growthRate,
+          member.level,
+          newTotalExp
+        )
+      member.totalExp = newTotalExp
+      if (levelUps.length > 0) {
+        const lastLevelUp = levelUps[levelUps.length - 1],
+          newStats = calculatePokemonStats(species, lastLevelUp.newLevel, member.ivs, member.nature),
+          hpGain = newStats.hp - member.maxHp
+        member = {
+          ...member,
+          level: lastLevelUp.newLevel,
+          maxHp: newStats.hp,
+          currentHp: Math.min(member.currentHp + Math.max(0, hpGain), newStats.hp),
+          attack: newStats.attack,
+          defense: newStats.defense,
+          spAttack: newStats.spAttack,
+          spDefense: newStats.spDefense,
+          speed: newStats.speed,
+        }
+        let moves = [...member.moves]
+        for (const moveId of levelUps.flatMap((levelUp) => levelUp.newMoves))
+          moves.includes(moveId) ||
+            (moves = moves.length >= 4 ? [...moves.slice(1), moveId] : [...moves, moveId])
+        member.moves = moves
       }
-      let moves = [...member.moves]
-      for (const moveId of levelUps.flatMap((levelUp) => levelUp.newMoves))
-        moves.includes(moveId) ||
-          (moves = moves.length >= 4 ? [...moves.slice(1), moveId] : [...moves, moveId])
-      member.moves = moves
-      log.push(`${member.name} grew to level ${member.level}!`)
-    } else log.push(`${member.name} gained ${item.exp ?? 0} EXP!`)
+      used++
+    }
+    if (used === 0) return state
+    consumed = used
+    if (member.level > startLevel)
+      log.push(
+        used > 1
+          ? `${member.name} grew to level ${member.level} using ${used}x ${item.name}!`
+          : `${member.name} grew to level ${member.level}!`
+      )
+    else log.push(`${member.name} gained EXP!`)
   }
   const party = [...state.party]
   party[memberIndex] = member
@@ -267,7 +288,7 @@ export function useItemOnPokemon(state, action) {
       state.activePlayerPokemonIndex === memberIndex ? member : state.playerPokemon,
     inventory: {
       ...state.inventory,
-      [itemId]: owned - 1,
+      [itemId]: owned - consumed,
     },
     battleLog: [...state.battleLog, ...log].slice(-50),
   }

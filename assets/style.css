@@ -5385,6 +5385,39 @@ img {
     color: #e8d0a0
 }
 
+.bag-use-qty {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 3px
+}
+
+.bag-use-qty-label {
+    color: #cbbfa6
+}
+
+.bag-use-qty-btn {
+    padding: 2px 7px;
+    font-size: 7px;
+    font-family: inherit;
+    background: #4a3a28;
+    color: #e8d0a0;
+    border: 1px solid #6a5a40;
+    border-radius: 2px;
+    cursor: pointer
+}
+
+.bag-use-qty-btn:hover {
+    background: #5a4a34
+}
+
+.bag-use-qty-btn.active {
+    background: var(--gold);
+    color: #2a1808;
+    border-color: var(--gold-dark);
+    font-weight: 700
+}
+
 .bag-target-btn {
     display: block;
     width: 100%;

@@ -45,6 +45,7 @@ export function BagPanel() {
     [tabIndex, setTabIndex] = React.useState(0),
     [selectedItem, setSelectedItem] = React.useState(/** @type {string | null} */ (null)),
     [targetItemId, setTargetItemId] = React.useState(/** @type {string | null} */ (null)),
+    [useQty, setUseQty] = React.useState(/** @type {number | 'all'} */ (1)),
     tab = bagCategories[tabIndex],
     items = Object.entries(state.inventory).filter(
       ([itemId, quantity]) => quantity > 0 && getItemCategory(itemId) === tab.id
@@ -70,7 +71,8 @@ export function BagPanel() {
               itemId,
             },
           })
-        : (isUsableConsumable(itemId) || isHeldItem(itemId)) && setTargetItemId(itemId)
+        : (isUsableConsumable(itemId) || isHeldItem(itemId)) &&
+          (setTargetItemId(itemId), setUseQty(1))
     },
     sellItem = /** @param {string} itemId @param {number | 'all'} quantity */ (
       itemId,
@@ -204,6 +206,29 @@ export function BagPanel() {
                     className: 'bag-target-title',
                     children: ['Use ', targetItem.name, ' on:'],
                   }),
+                  // Candies can be applied in bulk; medicine and held items are
+                  // one at a time.
+                  targetItem.category === 'candy' &&
+                    jsxs('div', {
+                      className: 'bag-use-qty',
+                      children: [
+                        jsx('span', {
+                          className: 'bag-use-qty-label',
+                          children: 'Amount:',
+                        }),
+                        /** @type {(number | 'all')[]} */ ([1, 10, 'all']).map((option) =>
+                          jsx(
+                            'button',
+                            {
+                              className: `bag-use-qty-btn${useQty === option ? ' active' : ''}`,
+                              onClick: () => setUseQty(option),
+                              children: option === 'all' ? 'All' : option,
+                            },
+                            String(option)
+                          )
+                        ),
+                      ],
+                    }),
                   state.party.length > 0
                     ? state.party.map((member) => {
                         const usable = canUseOn(targetItem, member)
@@ -218,6 +243,12 @@ export function BagPanel() {
                                 payload: {
                                   itemId: targetItemId,
                                   pokemonId: member.id,
+                                  quantity:
+                                    targetItem.category !== 'candy'
+                                      ? 1
+                                      : useQty === 'all'
+                                        ? (targetItemId ? state.inventory[targetItemId] : 1) ?? 1
+                                        : useQty,
                                 },
                               })
                               setTargetItemId(null)

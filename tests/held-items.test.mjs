@@ -324,3 +324,13 @@ test('the reducer equips and removes held items', () => {
   assert.equal(cleared.party[0].heldItem, null)
   assert.equal(cleared.inventory.choiceBand, 1)
 })
+
+test('a held item can be taken back from a boxed Pokemon', () => {
+  const member = createPokemon('bulbasaur', 10, 'boxed')
+  member.heldItem = 'leftovers'
+  const state = { ...initialGameState, party: [], box: [member], inventory: {} },
+    cleared = gameReducer(state, { type: 'CLEAR_HELD_ITEM', payload: { pokemonId: 'boxed' } })
+  assert.equal(cleared.box[0].heldItem, null)
+  assert.equal(cleared.inventory.leftovers, 1, 'the item returns to the bag')
+  assert.deepEqual(cleared.party, [], 'the party is untouched')
+})

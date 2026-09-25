@@ -125,15 +125,21 @@ export function sellItem(state, action) {
  */
 export function clearHeldItem(state, action) {
   const { pokemonId } = action.payload,
-    memberIndex = state.party.findIndex(/** @param {Pokemon} member */ (member) => member.id === pokemonId)
-  if (memberIndex < 0) return state
-  const member = state.party[memberIndex]
+    partyIndex = state.party.findIndex(/** @param {Pokemon} member */ (member) => member.id === pokemonId),
+    fromParty = partyIndex >= 0,
+    boxIndex = fromParty
+      ? -1
+      : state.box.findIndex(/** @param {Pokemon} member */ (member) => member.id === pokemonId)
+  if (!fromParty && boxIndex < 0) return state
+  const member = fromParty ? state.party[partyIndex] : state.box[boxIndex]
   if (!member.heldItem) return state
-  const party = [...state.party]
-  party[memberIndex] = { ...member, heldItem: null }
+  const updated = { ...member, heldItem: null },
+    replace = /** @param {Pokemon} candidate */ (candidate) =>
+      candidate.id === pokemonId ? updated : candidate
   return {
     ...state,
-    party,
+    party: fromParty ? state.party.map(replace) : state.party,
+    box: fromParty ? state.box : state.box.map(replace),
     inventory: {
       ...state.inventory,
       [member.heldItem]: (state.inventory[member.heldItem] ?? 0) + 1,

@@ -40,6 +40,7 @@ export const CHANGELOG = [
             'Held-item moves now actually act on the item: Thief and Covet steal it, Knock Off removes it, Pluck and Bug Bite eat a held Berry, and Incinerate burns one away \u2014 all stopped by Sticky Hold',
             'Wild Pokemon and trainers hold items far less often (8% / 30% down to 5% / 15%) and only from a sensible pool, so a random Pidgey no longer turns up with a Mega Stone or Choice Specs; type boosters match the holder, so a Water type never carries Charcoal',
             'A small item badge now marks any Pokemon holding an item in the party and in the Box',
+            'A held item can now be taken back from a boxed Pokemon in its stats window \u2014 the Take button only searched the party before',
           ],
         },
         {

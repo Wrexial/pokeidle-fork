@@ -5310,6 +5310,13 @@ img {
     color: var(--parchment)
 }
 
+.bag-item-left {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    min-width: 0
+}
+
 .bag-item-qty {
     font-size: 8px;
     color: var(--gold-bright);
@@ -5379,6 +5386,9 @@ img {
 }
 
 .bag-target-title {
+    display: flex;
+    align-items: center;
+    gap: 4px;
     margin-bottom: 3px;
     color: #e8d0a0
 }

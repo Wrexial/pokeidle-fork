@@ -47,7 +47,7 @@ export const CHANGELOG = [
             'Marts now stock different shelves: each region\u2019s situational balls and held items are split between its towns instead of every mart listing the whole regional set',
             'Premier Balls are no longer sold \u2014 you get one free for every 10 balls you buy',
             'Swarms last 256 wild battles and their species has 4x shiny odds (never better than 1 in 256). They still announce themselves with a toast that names the area but not the Pokemon, so it stays a surprise until you arrive',
-            'Poke Mart, Reward Shop and Auction House rows now show a proper item sprite instead of a blank square',
+            'The Bag, Poke Mart, Reward Shop and Auction House now show a proper item sprite next to every item instead of a blank square',
           ],
         },
         {

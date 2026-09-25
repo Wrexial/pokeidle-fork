@@ -31,24 +31,32 @@ const SEREBII = 'https://www.serebii.net/itemdex/sprites'
 const FORCE = process.argv.includes('--force')
 
 /**
- * The few items whose Serebii filename isn't just the lowercased item id.
+ * The few items whose Serebii filename isn't just the lowercased item id, plus
+ * the items Serebii has no art for at all and a close stand-in.
  * @type {Record<string, string>}
  */
 const SEREBII_NAMES = {
   linkCable: 'linkingcord',
   expShare: 'exp.share',
+  expCandyS: 'exp.candys',
+  expCandyM: 'exp.candym',
   expCandyL: 'exp.candyl',
+  expCandyXL: 'exp.candyxl',
   nLunarizer: 'n-lunarizer',
   nSolarizer: 'n-solarizer',
   natureMint: 'seriousmint',
   megaStone: 'keystone',
+  // No generic sprite exists for these minigame foods, so use a close item.
+  curry: 'packagedcurry',
+  pokebean: 'tinofbeans',
+  poffin: 'sweetheart',
 }
 
-/** Every item id that can appear in a shop or auction lot. */
+/** Every item id that can appear in the bag, a shop or an auction lot. */
 function collectItemIds() {
   const ids = new Set(),
-    add = (/** @type {Record<string, any>} */ table) => {
-      for (const item of Object.values(table)) if (item?.buyPrice) ids.add(item.id)
+    addTable = (/** @type {Record<string, any>} */ table) => {
+      for (const item of Object.values(table)) if (item?.id) ids.add(item.id)
     },
     addEntries = (/** @type {{ itemId: string }[]} */ entries) => {
       for (const entry of entries) if (entry?.itemId) ids.add(entry.itemId)
@@ -57,9 +65,11 @@ function collectItemIds() {
     import(pathToFileURL(path.join(ROOT, 'src', 'data', 'items.js')).href),
     import(pathToFileURL(path.join(ROOT, 'src', 'game', 'minigames', 'auction-house.js')).href),
   ]).then(([items, auction]) => {
-    add(items.activeItems)
-    add(items.consumableItems)
-    add(items.heldItems)
+    addTable(items.activeItems)
+    addTable(items.consumableItems)
+    addTable(items.heldItems)
+    addTable(items.evolutionItems)
+    addEntries(items.valuableDropTable)
     addEntries(items.coreMartItems)
     for (const stock of Object.values(items.regionalMartItems)) addEntries(stock)
     addEntries(items.tokenShopItems)

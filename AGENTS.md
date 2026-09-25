@@ -476,13 +476,13 @@ One-off scripts used to build the data JSON (not run during dev/build):
   Showdown for the rest (plus Showdown's `gen5ani` by name for a few Gen 9
   forms). Also writes `public/data/animated-sprites.json`, the ids with no gif
   per variant. Idempotent (`--only=static|animated`, `--force`).
-- `download-item-sprites.cjs` — downloads the shop / Auction House item icons
-  from Serebii's itemdex into `public/sprites/items/<itemId>.png` and writes
-  `public/data/item-icons.json`. Serebii is used because PokeAPI and PokemonDB
-  have no art for many of the modelled items (the Galar/Hisui/Paldea evolution
-  items, mints, key items). Item ids come from the live mart/Reward
-  Shop/Auction tables; add to `SEREBII_NAMES` if a filename differs. Idempotent
-  (`--force`).
+- `download-item-sprites.cjs` — downloads the bag / shop / Auction House item
+  icons from Serebii's itemdex into `public/sprites/items/<itemId>.png` and
+  writes `public/data/item-icons.json`. Serebii is used because PokeAPI and
+  PokemonDB have no art for many of the modelled items (the Galar/Hisui/Paldea
+  evolution items, mints, key items). Item ids come from the live item tables
+  (mart, Reward Shop, Auction lots, drops); add to `SEREBII_NAMES` if a filename
+  differs from the lowercased item id. Idempotent (`--force`).
 - `scrape-region-maps.cjs` — scrapes real region maps: location lists from
   PokéAPI and route/town compass connections (`north/south/east/west`) from
   Bulbapedia's raw infoboxes, then computes a directional layout. Caches HTTP

@@ -5,6 +5,7 @@ import { jsx, jsxs } from 'react/jsx-runtime'
 import { bagCategories, consumableItems, heldItems } from '../data/items.js'
 import { MAX_FRIENDSHIP } from '../game/pokemon.js'
 import { useGame } from '../game/context.js'
+import { ItemIcon } from './item-icon.js'
 import {
   getItemCategory,
   getItemInfo,
@@ -147,9 +148,18 @@ export function BagPanel() {
                       className: `bag-item${selectedItem === itemId ? ' selected' : ''}${isActive ? ' effect-active' : ''}`,
                       onClick: () => toggleItem(itemId),
                       children: [
-                        jsx('span', {
-                          className: 'bag-item-name',
-                          children: item.name,
+                        jsxs('span', {
+                          className: 'bag-item-left',
+                          children: [
+                            jsx(ItemIcon, {
+                              itemId,
+                              size: 16,
+                            }),
+                            jsx('span', {
+                              className: 'bag-item-name',
+                              children: item.name,
+                            }),
+                          ],
                         }),
                         jsxs('span', {
                           className: 'bag-item-qty',
@@ -204,7 +214,15 @@ export function BagPanel() {
                 children: [
                   jsx('div', {
                     className: 'bag-target-title',
-                    children: ['Use ', targetItem.name, ' on:'],
+                    children: [
+                      jsx(ItemIcon, {
+                        itemId: targetItemId,
+                        size: 14,
+                      }),
+                      'Use ',
+                      targetItem.name,
+                      ' on:',
+                    ],
                   }),
                   // Candies can be applied in bulk; medicine and held items are
                   // one at a time.

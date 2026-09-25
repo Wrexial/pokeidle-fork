@@ -630,6 +630,10 @@ One-off scripts used to build the data JSON (not run during dev/build):
 - `enforce-zone-chains.cjs` — adds the `requires: [hub, previous sub-area]`
   chain to the committed zone sub-areas so they unlock in order behind the hub
   (the generator does it in its final pass). Idempotent (`--dry`).
+- `diversify-alola-gates.cjs` — one-off balance pass giving Alola's island
+  routes distinct unlock gates (battles / Pokedex / route-exclusive catches /
+  party levels) instead of repeating the island's own requirement, leaving the
+  sequential `requires` chain intact. Idempotent (`--dry`).
 - `RawMoveData`, `index-backup.js` — large reference/backup data; leave alone.
 - `kill-vite.cjs` — kills orphaned Vite dev servers on the port range (Windows
   `taskkill`, else `kill`). Run `npm run kill-vite`, or `--dry` to preview.

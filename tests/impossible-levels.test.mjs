@@ -59,9 +59,9 @@ test('no trainer fields a Pokemon below its species evolution level', () => {
   }
 })
 
-test('the Alola Route 3 gate asks for a Pokemon that spawns there', () => {
-  const gate = mapData['alola-route-4']?.unlock?.caughtOnRoute
-  assert.ok(gate, 'the Route 4 gate exists')
+test('the Akala Island gate asks for a Pokemon that spawns on Route 3', () => {
+  const gate = mapData['alola-akala-island']?.unlock?.caughtOnRoute
+  assert.ok(gate, 'the Akala Island gate exists')
   const onRoute = new Set((encounterData[gate.routeKey]?.encounters ?? []).map((e) => e.speciesKey))
   for (const speciesKey of gate.species)
     assert.ok(onRoute.has(speciesKey), `${speciesKey} spawns on ${gate.routeKey}`)

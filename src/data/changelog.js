@@ -86,6 +86,7 @@ export const CHANGELOG = [
             'Route-exclusive catch gates now list every exclusive on the route and ask for only a few of them \u2014 Alola\u2019s gate wants any three of Route 1\u2019s nine exclusives, not three specific ones',
             'Zone sub-areas now unlock in order behind their hub: you can no longer reach Akala Island\u2019s Route 6 before Route 4 and Route 5 (and Route 4 can\u2019t be skipped past its island)',
             'Zone hubs now show the Next Unlocks list as well as their own areas, so an island or province panel tells you what the next route or town still needs',
+            'Alola\u2019s island routes now have varied unlock gates instead of repeating the island\u2019s own requirement \u2014 a mix of battles, Pokedex counts, route-exclusive catches and party levels \u2014 while still unlocking one after another (Route 4, 9 and 16 open as soon as their island does)',
             'Alola\u2019s Route 2 no longer asks for wins on the later, still-locked Route 3: it now opens from Route 1, so the island\u2019s early progression and the \u201cNext Unlocks\u201d list point somewhere you can actually reach',
             'The gym tab\u2019s "GO TO <town>" hint is now a button: click it to travel straight to that leader\u2019s town',
             'Candies can be applied in bulk: choose 1, 10 or All in the bag and use them in one go. A stack stops at Lv.100 and only spends the candies it actually needed',

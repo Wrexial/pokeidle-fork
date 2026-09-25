@@ -52,6 +52,8 @@ test('TRAVEL reaches a location whose gate is met even if the saved list is stal
         (id) => id !== 'alola-route-1--hauoli-outskirts'
       ),
       pokedexCaught: ['rowlet', 'wingull'],
+      // The outskirts now need a few Route 1 wins as well as the entry town.
+      battlesWonByLocation: { 'alola-route-1': 4 },
     },
     traveled = gameReducer(stale, {
       type: 'TRAVEL',

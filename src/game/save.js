@@ -502,7 +502,7 @@ export function repairSave(saved) {
 
   return {
     ...initialGameState,
-    phase: 'idle',
+    phase: saved.nuzlockeGameOver ? 'gameOver' : 'idle',
     startRegion: fallbackRegion,
     starterSpeciesKey:
       typeof saved.starterSpeciesKey === 'string'
@@ -588,6 +588,7 @@ export function repairSave(saved) {
     challengeMonotype: POKEMON_TYPES.includes(saved.challengeMonotype)
       ? saved.challengeMonotype
       : null,
+    nuzlockeGameOver: !!saved.nuzlockeGameOver,
     raidCooldownEnd: saved.raidCooldownEnd ?? null,
     raidLegendary: saved.inRaid ? (saved.raidLegendary ?? null) : null,
     raidRegion: saved.inRaid ? (saved.raidRegion ?? 'kanto') : null,
@@ -723,6 +724,7 @@ export const SAVED_STATE_KEYS = [
   'challengeRestrictCatches',
   'challengeCatchRoutes',
   'challengeMonotype',
+  'nuzlockeGameOver',
   'raidCooldownEnd',
   'raidLegendary',
   'raidRegion',

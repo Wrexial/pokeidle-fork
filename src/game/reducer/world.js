@@ -42,6 +42,7 @@ export function selectStarter(state, action) {
     challengeMonotype: POKEMON_TYPES.includes(action.payload.monotype)
       ? action.payload.monotype
       : null,
+    nuzlockeGameOver: !1,
     playerPokemon: starterPokemon,
     party: [starterPokemon],
     nextPokemonId: state.nextPokemonId + 1,

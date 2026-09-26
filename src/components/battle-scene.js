@@ -25,6 +25,7 @@ import { BattleTextBox } from './battle-text-box.js'
 import { EvolutionScene } from './evolution-scene.js'
 import { DailyEventModal } from './daily-event-modal.js'
 import { DexCompleteScene } from './dex-complete-scene.js'
+import { GameOverScene } from './game-over-scene.js'
 import { QuestsModal } from './quests-modal.js'
 import { HealingScene } from './healing-scene.js'
 import { MasterBallScene } from './master-ball-scene.js'
@@ -100,6 +101,7 @@ export function BattleScene() {
   if (state.phase === 'routeActivity') return jsx(RouteActivityScene, {})
   if (state.phase === 'wonderTrade') return jsx(WonderTradeScene, {})
   if (state.phase === 'dexComplete') return jsx(DexCompleteScene, {})
+  if (state.phase === 'gameOver') return jsx(GameOverScene, {})
   if (!playerPokemon) return null
   const currentEvent = battleEvents.length > 0 ? battleEvents[battleEvents.length - 1] : null,
     playerSpecies = battleSpecies(state.playerVolatile?.formKey ?? playerPokemon.speciesKey),

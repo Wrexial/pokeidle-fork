@@ -435,6 +435,8 @@ type GameState = {
   challengeCatchRoutes: string[]
   /** Challenge: wild encounters are limited to this type (null = off). */
   challengeMonotype: string | null
+  /** Nuzlocke only: the last party Pokemon fainted, ending the run. */
+  nuzlockeGameOver: boolean
   nextPokemonId: number
   money: number
   inventory: Record<string, number>

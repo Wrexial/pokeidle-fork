@@ -67,6 +67,7 @@ export const CHANGELOG = [
             'Auto-battling Pokemon now adapt to an ability that cancels an attack: once a move is absorbed or blocked (Water Absorb, Levitate, Flash Fire, Bulletproof, Wonder Guard and the rest) they switch to their next best move instead of repeating it \u2014 they are not told the ability up front, so the first attempt still goes through',
             'Foes now have AI skill tiers: wild Pokemon and route trainers throw out random attacks, legendary wilds and gym leaders play the full move-picking heuristic, and the Elite Four, Champion, Battle Tower and your own auto-battler always take the best action',
             'The Champion and your own auto-battler also switch Pokemon now: when the active one is losing the type matchup and a teammate lines up much better, they bring the teammate in',
+            'Every Pokemon that took part in a battle now shares its EXP, not just the one that landed the final blow',
           ],
         },
         {
@@ -109,6 +110,9 @@ export const CHANGELOG = [
           items: [
             'New games now open by asking Normal Mode or Challenge Mode: pick Challenge and you set the Randomizer, Level Scaling, Nuzlocke and Monotype rules before choosing a starter, and the same toggles stay in Settings for later changes',
             'Monotype no longer leaks other types onto a route that has none of your chosen type: it now rolls a random Pokemon of that type that could actually exist at the route\u2019s level',
+            'Monotype runs now skip the starter choice: you only pick the region, and begin with a random base of a three-stage evolution line of your chosen type',
+            'Pokemon-reward minigames obey the Monotype challenge: fishing, Headbutt, Rock Smash, Diving, foraging, the Safari Zone, the Bug Catching Contest, Picnic and Dynamax Adventures all hand out a Pokemon of your chosen type',
+            'In a Nuzlocke run, fainting your last Pokemon now ends the run on a Game Over screen, with the option to start a new save, instead of healing it back up',
             'The Challenge Mode setup screen now explains what each rule does, instead of leaving you to guess from the toggle names',
             'Nuzlocke now releases a Pokemon the moment it faints rather than batching the releases at the end of a battle; your last one is still spared',
             'New challenge: One Catch per Route \u2014 you may only catch the first wild Pokemon you meet on each route or area, and that first encounter uses the route up even if it gets away',
@@ -122,6 +126,7 @@ export const CHANGELOG = [
             'On ultrawide monitors (21:9 and 32:9) each side panel now splits into two columns and the battle scene grows to fill the centre instead of sitting in a sea of empty background',
             'Pop-up windows (Settings, patch notes, the move manager, the Pok\u00e9dex) now fit inside narrow screens instead of running off the edge',
             'Phones respect screen notches and rounded corners (safe-area insets) and the battle scene sizes itself to the device in either orientation',
+            'Save slots now say whether each run is Normal or Challenge and list the active rules',
           ],
         },
         {

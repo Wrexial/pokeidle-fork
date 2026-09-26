@@ -150,6 +150,7 @@ function kantoSave() {
     pokedexSeen: ['charmander'],
     pokedexCaught: ['charmander'],
     battleLog: ['Responsive audit'],
+    ...(process.env.GAMEOVER ? { challengeNuzlocke: true, nuzlockeGameOver: true } : {}),
   }
 }
 

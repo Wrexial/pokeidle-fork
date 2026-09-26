@@ -15,7 +15,7 @@ import { assignPelago, collectPelago, dismissPelagoCollect, unassignPelago } fro
 import { claimGift, startStaticEncounter } from './reducer/gifts.js'
 import { claimMinigameReward, collectMining, endBugContest, endMinigame, endRouteActivity, endSafari, payMinigameFee, startAcademyQuiz, startAuctionHouse, startBattleRoyal, startBugContest, startContest, startCurry, startDynamaxAdventures, startGameCorner, startIceSlide, startLightsOut, startMemory, startMining, startMusical, startPelago, startPicnic, startPokeathlon, startPokeRadar, startPokeballFactory, startPokestar, startPuzzleLeague, startRouteActivity, startRuinsPuzzle, startSafari, startVoltorbFlip, startWhack } from './reducer/minigames.js'
 import { boxToParty, catchPokemon, clearHatchResult, completeEvolution, completeWonderTrade, depositDaycare, evolutionStep, hatchDaycareEgg, partyToBox, releaseDuplicates, releaseFainted, releaseHatchling, releasePokemon, reorderBox, reorderParty, setBoxSort, setMoves, setNickname, startEvolution, swapParty, swapPartyBox, toggleFavourite, withdrawDaycare, wonderTrade } from './reducer/pokemon.js'
-import { completeHealing, heal, healParty, healingStep, startHealing } from './reducer/recovery.js'
+import { completeHealing, heal, healParty, healingStep, nuzlockeGameOver, startHealing } from './reducer/recovery.js'
 import { addLog, clearLevelUp, dismissNotification, markCatchRoute, pushNotification, setChallengeMonotype, setSpeed, toggleAutoProceed, toggleBrowserNotifications, toggleChallengeLevelScale, toggleChallengeNuzlocke, toggleChallengeRandomizer, toggleChallengeRestrictCatches, toggleColourblindTypes, toggleLargeText, toggleMartCollapsed, toggleMusic, togglePause, toggleReducedMotion, toggleSfx } from './reducer/settings.js'
 import { loadSave, phaseIdle, prestigeRegion, resetEliteFour, selectStarter, travel, unlockRegion } from './reducer/world.js'
 
@@ -151,6 +151,8 @@ export const initialGameState = {
   challengeCatchRoutes: [],
   /** Challenge: wild encounters are limited to this type (null = off). */
   challengeMonotype: null,
+  /** Challenge: the Nuzlocke run has ended (last party Pokemon fainted). */
+  nuzlockeGameOver: !1,
   raidCooldownEnd: null,
   raidLegendary: null,
   raidRegion: null,
@@ -314,6 +316,8 @@ export function gameReducer(state, action) {
       return releasePokemon(state, action)
     case 'RELEASE_FAINTED':
       return releaseFainted(state)
+    case 'NUZLOCKE_GAME_OVER':
+      return nuzlockeGameOver(state)
     case 'WONDER_TRADE':
       return wonderTrade(state, action)
     case 'COMPLETE_WONDER_TRADE':

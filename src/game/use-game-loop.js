@@ -519,6 +519,11 @@ export function useGameLoop() {
               dispatch({
                 type: 'RELEASE_FAINTED',
               })
+            } else if (
+              currentGameState.challengeNuzlocke &&
+              !currentGameState.party.some((member) => isBattleReady(member))
+            ) {
+              dispatch({ type: 'NUZLOCKE_GAME_OVER' })
             } else {
               dispatch({
                 type: 'START_HEALING',
@@ -701,6 +706,11 @@ export function useGameLoop() {
             dispatch({
               type: 'RELEASE_FAINTED',
             })
+          } else if (
+            currentGameState.challengeNuzlocke &&
+            !currentGameState.party.some((member) => isBattleReady(member))
+          ) {
+            dispatch({ type: 'NUZLOCKE_GAME_OVER' })
           } else {
             if (currentGameState.bossBattle ?? currentGameState.trainerBattle) {
               const penalty = Math.min(
@@ -755,6 +765,7 @@ export function useGameLoop() {
   React.useEffect(() => {
     if (
       state.phase === 'starterSelect' ||
+      state.phase === 'gameOver' ||
       state.phase === 'bugCatching' ||
       state.phase === 'safari' ||
       state.phase === 'academyQuiz' ||

@@ -64,6 +64,26 @@ export function startHealing(state, action) {
 }
 
 /**
+ * Handle the `NUZLOCKE_GAME_OVER` action: the last party Pokemon has fainted
+ * during a Nuzlocke run, so the run is over. The player starts a fresh save
+ * from the game-over screen.
+ * @param {GameState} state
+ * @returns {GameState}
+ */
+export function nuzlockeGameOver(state) {
+  return {
+    ...state,
+    phase: 'gameOver',
+    nuzlockeGameOver: true,
+    battleEvents: [],
+    pendingEvents: [],
+    battleLog: [...state.battleLog, 'Your last Pokemon fainted. The Nuzlocke run is over.'].slice(
+      -50
+    ),
+  }
+}
+
+/**
  * Handle the `HEALING_STEP` action.
  * @param {GameState} state
  * @param {GameAction} action

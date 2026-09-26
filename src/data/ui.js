@@ -260,17 +260,6 @@ export const BOX_SORT_OPTIONS = [
     { value: 'newest', label: 'New' },
   ]
 
-export const SIDE_PANEL_TABS = [
-  {
-    id: 'location',
-    label: 'Location',
-  },
-  {
-    id: 'backpack',
-    label: 'Backpack',
-  },
-]
-
 export const MOBILE_TABS = [
   {
     id: 'map',
@@ -287,10 +276,6 @@ export const MOBILE_TABS = [
   {
     id: 'location',
     label: 'Location',
-  },
-  {
-    id: 'backpack',
-    label: 'Backpack',
   },
 ]
 

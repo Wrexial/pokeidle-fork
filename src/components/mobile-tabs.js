@@ -12,7 +12,6 @@ import { BoxPanel } from './box-panel.js'
 import { PartyPanel } from './party-panel.js'
 import { StatsPanel } from './stats-panel.js'
 import { CatchSettingsModal } from './catch-settings-modal.js'
-import { BackpackPanel } from './backpack-panel.js'
 
 export function MobileTabs() {
   const { state, dispatch } = useGame(),
@@ -183,11 +182,6 @@ export function MobileTabs() {
                   onOpenCatchSettings: () => setShowCatchSettings(!0),
                 }),
               }),
-            }),
-          tab === 'backpack' &&
-            jsx('div', {
-              className: 'mobile-backpack-wrapper',
-              children: jsx(BackpackPanel, {}),
             }),
         ],
       }),

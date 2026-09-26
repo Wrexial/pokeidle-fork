@@ -846,20 +846,20 @@ The side panel has two tabs today (`SIDE_PANEL_TABS` in `src/data/ui.js`):
 Pokédex, bank and items, which the player reads as unrelated things bundled
 under a misleading name.
 
-**Shipped:** the right panel now has **Location** and **Backpack** main tabs.
-Backpack (`backpack-panel.js`) has sub-tabs **League / Dex / Bank / Items /
-Records**; the old always-on bag below the panel is gone and the gym/league
-overview moved into the Backpack's **League** tab (badges read as a trainer-card
-tab). The Pokédex, Records and Reward Shop components gained an `inline` mode so
-they render in a tab instead of a modal; the mobile tab set gained **Backpack**
-too, with the League tab included there and the location tab's always-on bag
-gone.
+**Shipped:** the right panel is now **Location** only, and the **Backpack** is
+its own full-screen section opened from the battle top bar (the 🎒 button,
+alongside Info / Daily / Quests / Settings). Backpack (`backpack-panel.js`) has
+sub-tabs **League / Dex / Bank / Items / Records** — the gym/league overview
+lives there (badges read as a trainer-card tab). The Pokédex, Records and Reward
+Shop components gained an `inline` mode so they render in a tab instead of a
+modal; the mobile tab set dropped its old Backpack tab (it is the top-bar section
+everywhere) and the always-on bag below the panels is gone.
 
 - [x] Keep **Location** as its own section (the area, wilds and activities).
-- [x] Rename **League** to **Backpack** and host the **Pokédex**, **Bank**,
-      **Items**, **Records** and the gym **League** progress in it.
+- [x] Move the **Backpack** out of the Location panel into its own section, with
+      the **Pokédex**, **Bank**, **Items**, **Records** and gym **League** tabs.
 - [x] Decide the section split: the League overview lives in the Backpack.
-- [x] Update `MOBILE_TABS` (added Backpack; the location sub-tabs are gone).
+- [x] Update `MOBILE_TABS` (Backpack is a shared top-bar section, not a tab).
 - [x] Re-tune the panel copy/labels and the old `'gym'` tab id.
 
 Likely touch points: `src/data/ui.js` (`SIDE_PANEL_TABS` / `MOBILE_TABS`),

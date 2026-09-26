@@ -8992,12 +8992,6 @@ img {
     flex: 1
 }
 
-.mobile-backpack-wrapper {
-    display: flex;
-    flex-direction: column;
-    height: 100%
-}
-
 .mobile-tab-content .town-map {
     min-height: 300px;
     height: 100%;
@@ -13065,6 +13059,21 @@ img {
     display: flex;
     flex-direction: column;
     min-height: 0
+}
+
+/* The Backpack as its own section, opened from the battle top bar. */
+.backpack-section {
+    background: linear-gradient(180deg,#e8dcc0,#d8c8a0);
+    border: 2px solid #483828;
+    width: min(520px,100%);
+    height: min(680px,88vh);
+    max-height: 88vh;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    overflow: hidden;
+    box-shadow: inset 2px 2px #ffdca04d,inset -2px -2px #00000026,0 0 0 4px #5a3e20,0 0 0 6px #3a2810,0 0 0 8px #6a4e30,0 0 0 10px #8a6840,0 0 0 12px #6a4e30,0 0 0 14px #3a2810,4px 6px 0 14px #0006
 }
 
 .backpack-tab-bar {

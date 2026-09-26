@@ -111,6 +111,9 @@ export function TownMap() {
       originX: 0,
       originY: 0,
       moved: false,
+      /** @type {Map<number, { x: number, y: number }>} */
+      pointers: new Map(),
+      pinchDist: 0,
     })
 
   // follow the player when they travel between regions
@@ -327,6 +330,22 @@ export function TownMap() {
   /** @param {PointerEvent} event */
   function moveDrag(event) {
     const drag = dragRef.current
+    if (!drag.pointers.has(event.pointerId)) return
+    drag.pointers.set(event.pointerId, { x: event.clientX, y: event.clientY })
+    // Two fingers pinch-zoom around their midpoint. Each move applies the
+    // incremental scale so the point under the fingers stays put.
+    if (drag.pointers.size >= 2) {
+      const points = [...drag.pointers.values()],
+        dist = Math.hypot(points[0].x - points[1].x, points[0].y - points[1].y)
+      if (drag.pinchDist > 0 && dist > 0) {
+        const midX = (points[0].x + points[1].x) / 2,
+          midY = (points[0].y + points[1].y) / 2
+        zoomAt(midX, midY, dist / drag.pinchDist)
+      }
+      drag.pinchDist = dist
+      drag.moved = true
+      return
+    }
     if (!drag.active || event.pointerId !== drag.pointerId) return
     const dx = event.clientX - drag.startX,
       dy = event.clientY - drag.startY
@@ -334,9 +353,14 @@ export function TownMap() {
     setView((previous) => ({ ...previous, x: drag.originX + dx, y: drag.originY + dy }))
   }
 
-  function endDrag() {
+  /** @param {PointerEvent} event */
+  function endDrag(event) {
     const drag = dragRef.current
-    if (!drag.active) return
+    drag.pointers.delete(event.pointerId)
+    if (drag.pointers.size < 2) drag.pinchDist = 0
+    // Keep going while any finger is down; a lifted finger never resumes the
+    // pan (a fresh touch will), so the origin can't go stale.
+    if (drag.pointers.size > 0) return
     drag.active = false
     window.removeEventListener('pointermove', moveDrag)
     window.removeEventListener('pointerup', endDrag)
@@ -347,13 +371,21 @@ export function TownMap() {
   function handlePointerDown(event) {
     if (event.button !== 0) return
     const drag = dragRef.current
-    ;(drag.active = true),
-      (drag.pointerId = event.pointerId),
-      (drag.startX = event.clientX),
-      (drag.startY = event.clientY),
-      (drag.originX = view.x),
-      (drag.originY = view.y),
-      (drag.moved = false)
+    drag.pointers.set(event.pointerId, { x: event.clientX, y: event.clientY })
+    drag.moved = false
+    if (drag.pointers.size === 1) {
+      ;(drag.active = true),
+        (drag.pointerId = event.pointerId),
+        (drag.startX = event.clientX),
+        (drag.startY = event.clientY),
+        (drag.originX = view.x),
+        (drag.originY = view.y)
+    } else {
+      // A second pointer starts a pinch: stop panning and record the gap.
+      drag.active = false
+      const points = [...drag.pointers.values()]
+      drag.pinchDist = Math.hypot(points[0].x - points[1].x, points[0].y - points[1].y)
+    }
     window.addEventListener('pointermove', moveDrag)
     window.addEventListener('pointerup', endDrag)
     window.addEventListener('pointercancel', endDrag)
@@ -744,7 +776,7 @@ export function TownMap() {
           }),
           jsx('div', {
             className: 'map-pan-hint',
-            children: 'Drag to pan · scroll to zoom',
+            children: 'Drag to pan · pinch or +/\u2212 to zoom',
           }),
         ],
       }),

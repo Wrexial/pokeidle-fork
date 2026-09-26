@@ -813,17 +813,16 @@ Effort: **small** (three assets plus call-site swaps), once the art exists.
 
 Three concrete mobile issues found while playing on a phone:
 
-- [ ] **Party drag/drop order doesn't work on touch.** Reordering the party
-      (and box) uses HTML5 drag-and-drop, which phones don't fire. Add
-      touch/pointer handling (pointer events, or up/down reorder buttons as a
-      simpler fallback) and keep the desktop drag path.
-- [ ] **Map pan/zoom controls don't work on touch.** The Town Map relies on
-      mouse events for dragging/zooming; route touch input (single-finger pan,
-      pinch-zoom) or add explicit on-screen zoom/pan buttons.
-- [ ] **The bottom of the Map and Items tabs is cut off.** On phones the tab
-      content extends under the browser chrome / below the visible viewport, so
-      the last row is unreachable. Audit the mobile layout height (dynamic
-      viewport units / safe-area insets) and make the tab body scroll correctly.
+- [x] **Party drag/drop order doesn't work on touch.** *Done: the mobile party
+      panel now shows compact up/down reorder buttons (desktop keeps drag and
+      drop). The box panel still has no touch reorder.*
+- [x] **Map pan/zoom controls don't work on touch.** *Done: pan already used
+      pointer events; two-finger pinch-to-zoom was added and the on-screen
+      +/−/F/C buttons are now touch-sized on small screens.*
+- [x] **The bottom of the Map and Items tabs is cut off.** *Done: the `100dvh`
+      override was declared before the `100vh` fallback, so `100vh` always won
+      and the bottom sat under the mobile browser chrome (hiding the map's
+      bottom-corner zoom buttons too). The order is fixed.*
 
 Likely touch points: `src/components/party-panel.js` / `box-panel.js`
 (reorder), `src/components/town-map.js` (pan/zoom input), `mobile-tabs.js` and

@@ -299,6 +299,42 @@ export function PartyPanel({
                                 }),
                               ],
                         }),
+                      // No drag-and-drop on touch devices (the mobile party
+                      // panel), so offer explicit reorder controls instead.
+                      !isDraggable &&
+                        jsx('div', {
+                          className: 'party-reorder',
+                          children: [
+                            jsx('button', {
+                              type: 'button',
+                              className: 'party-reorder-btn',
+                              disabled: index === 0,
+                              'aria-label': 'Move up',
+                              onClick: /** @param {React.MouseEvent} event */ (event) => {
+                                event.stopPropagation()
+                                dispatch({
+                                  type: 'REORDER_PARTY',
+                                  payload: { pokemonId: member.id, toIndex: index - 1 },
+                                })
+                              },
+                              children: '\u25b2',
+                            }),
+                            jsx('button', {
+                              type: 'button',
+                              className: 'party-reorder-btn',
+                              disabled: index === state.party.length - 1,
+                              'aria-label': 'Move down',
+                              onClick: /** @param {React.MouseEvent} event */ (event) => {
+                                event.stopPropagation()
+                                dispatch({
+                                  type: 'REORDER_PARTY',
+                                  payload: { pokemonId: member.id, toIndex: index + 1 },
+                                })
+                              },
+                              children: '\u25bc',
+                            }),
+                          ],
+                        }),
                       ],
                     }),
                     showDropBelow &&

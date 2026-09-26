@@ -1977,6 +1977,33 @@ img {
     cursor: pointer
 }
 
+.party-reorder {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex-shrink: 0
+}
+
+.party-reorder-btn {
+    width: 22px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 7px;
+    line-height: 1;
+    padding: 0;
+    color: var(--gold-bright);
+    background: #2a1e10;
+    border: 2px solid #5a3e20;
+    cursor: pointer
+}
+
+.party-reorder-btn:disabled {
+    opacity: .35;
+    cursor: default
+}
+
 .party-slot.active {
     border-color: var(--gold-dark)
 }
@@ -8795,6 +8822,25 @@ img {
         gap: 2px
     }
 
+    /* Touch-friendly reorder controls, shown when drag-and-drop isn't
+       available (the mobile party panel). */
+    .party-reorder-btn {
+        width: 30px;
+        height: 26px;
+        font-size: 9px
+    }
+
+    /* Bigger map zoom targets for touch. */
+    .map-zoom-btn {
+        width: 34px;
+        height: 34px;
+        font-size: 12px
+    }
+
+    .map-pan-hint {
+        font-size: 7px
+    }
+
     .box-grid-slot {
         width: 36px;
         height: 36px
@@ -8878,8 +8924,8 @@ img {
 .game-layout.mobile {
     display: flex;
     flex-direction: column;
-    height: 100dvh;
     height: 100vh;
+    height: 100dvh;
     padding: env(safe-area-inset-top,0) env(safe-area-inset-right,0) env(safe-area-inset-bottom,0) env(safe-area-inset-left,0);
     overflow: hidden
 }
@@ -8983,8 +9029,8 @@ img {
 
 @media(max-width: 767px) {
     .move-panel-overlay {
-        max-height: 100dvh;
         max-height: 100vh;
+        max-height: 100dvh;
         overflow-y: auto
     }
 

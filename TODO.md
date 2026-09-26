@@ -19,6 +19,10 @@ renumbered, so the gaps below are items that shipped.
 
 1. **#16 Performance pass** — S–M · ★★ — the idle loop dispatches a lot per
    tick; look at memoisation / batching if it ever gets heavy.
+2. **#46 Mobile UX fixes** — S–M · ★★★ — party drag/drop order, map pan/zoom
+   controls and the cut-off bottom of the Map/Items tabs on phones.
+3. **#48 Colour-accessibility pass** — S · ★★ — yellow-on-yellow move-learning
+   text plus a broader contrast sweep.
 
 ### Tier 2 — High impact, worth the effort (medium–large)
 
@@ -46,13 +50,23 @@ renumbered, so the gaps below are items that shipped.
 13. **#28 More region areas (caves, POIs, DLC land)** — L · ★★★★½ — real
     content; data-heavy. Pairs with #35/#36/#39.
 14. ~~**#4 In-battle Mega evolution**~~ — **shipped (0.18.0).**
+15. **#42 Manual battle mode** — M · ★★★★ — let the player pick moves instead
+    of always auto-battling.
+16. **#44 Set / Switch toggle** — S · ★★★ — choose whether a faint asks for a
+    replacement or keeps the next party member in automatically.
+17. **#45 Move-category icons** — S · ★★ — replace the ✴/◎/☯ glyphs with
+    physical/special/status images.
+18. **#47 Backpack section** — M · ★★★ — rename the League tab and host the
+    Pokédex, Bank, Items and Records inside it.
+19. **#43 Multi-battles (double/triple/rotation)** — M–L · ★★½ — a
+    self-contained minigame that reuses the combat pipeline.
 
 ### Tier 3 — Big / low-return, defer
 
-15. **#10 Weather & terrain leftovers** — M · ★★½ — **(partial: 0.14.0 shipped
+20. **#10 Weather & terrain leftovers** — M · ★★½ — **(partial: 0.14.0 shipped
     Weather Ball, weather-perfect accuracy and the terrain synergy abilities;
     terrain rocks and route-based field effects remain.)**
-16. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+21. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
 ---
@@ -690,6 +704,183 @@ Relevant code: `src/game/minigames/` (one module per game), `registry.js`
 `src/game/reducer/minigames.js`, and the existing scenes to mirror.
 
 Effort: **small–medium each**, **large as a full set** (one region at a time).
+
+## 42. Manual battle mode
+
+The game is an idle auto-battler: `resolveBattleTurn` (`src/game/combat/turn.js`)
+resolves each turn with the AI (`src/game/combat/ai.js`) and the loop never waits
+for input. There is no way to choose a move.
+
+Add a manual mode so the player can actually play a battle, at minimum while it
+is open, without abandoning the idle loop for normal play.
+
+- [ ] Decide the scope: a global auto/manual toggle, or manual only for
+      trainer / gym / Elite Four / Champion / raid battles (where the choices
+      matter) with wild battles staying automatic.
+- [ ] Wire the battle scene to pause the tick while awaiting input and surface
+      the existing move buttons (they are rendered today but read-only).
+- [ ] Handle switching (the move picker needs a switch option) and the
+      faint-replacement prompt (see #44).
+- [ ] Decide what happens if the player never acts (idle timeout back to auto,
+      or a visible prompt), so a forgotten manual battle can't stall the game
+      forever.
+- [ ] Persist the preference in settings (#18), not the save.
+
+Likely touch points: `src/game/use-game-loop.js` (the tick state machine),
+`src/game/combat/turn.js` / `ai.js`, `src/game/reducer/battle.js`,
+`src/components/battle-scene.js`, and `src/data/ui.js` (settings toggles).
+
+Effort: **medium** (the combat engine already exposes per-turn state; the work
+is the interactive phase and the reducer round-trip).
+
+## 43. Multi-battles (double / triple / rotation) as a minigame
+
+The engine is **singles only** — the move data already flags the doubles-only
+moves (Follow Me, Helping Hand, Quick/Wide Guard, …) as unimplemented (see #24),
+and the ally/doubles abilities are on the #25 list. Building full multi-battle
+support into the main loop is a large change with little idle value.
+
+Instead, make multi-battles a **self-contained minigame** (a scene + a
+`START_*`/`END_MINIGAME` reducer pair + a `MINIGAME_LOCATIONS` entry, per the
+#29 pattern), so the main game stays singles and the extra modes stay fun and
+contained.
+
+- [ ] Pick the first mode: **double battle** (2v2) is the most legible and the
+      most reusable; triple and rotation battles are stretch goals.
+- [ ] Decide how much of the combat engine is shared: the damage/status math is
+      reusable, but target selection, spread moves and per-slot speed order are
+      new.
+- [ ] Minimal doubles rules: one target chosen per move, spread moves hit both,
+      and the existing ally-targeted moves (#24) can finally do something.
+- [ ] Give it a home location per region (a Battle Maison / Battle Tower-style
+      node) and a reward table, mirroring the Battle Royal (#41).
+- [ ] Consider a "3-way / 4-way" free-for-all variant as a separate mode if the
+      2v2 version lands well.
+
+Likely touch points: `src/game/combat/` (a parallel multi-target turn
+resolver), `src/components/*-scene.js`, `src/game/reducer/minigames.js`, and
+`src/game/minigames/registry.js`.
+
+Effort: **medium–large** (the shared math helps, but target/order handling is
+genuinely new).
+
+## 44. Toggleable Set / Switch battle style
+
+The mainline games let the player choose **Set** (the next party member is sent
+out without being asked) or **Switch** (the game prompts after a faint). An idle
+auto-battler currently always behaves like Set, silently pulling the next
+healthy party member in.
+
+- [ ] Add a `battleStyle` setting (`'set'` | `'switch'`) under gameplay (#18).
+- [ ] In Switch mode, when the active Pokemon faints, pause and prompt the
+      player to choose a replacement from the healthy party.
+- [ ] Ties into manual mode (#42) and the auto-switch behaviour — make sure the
+      two don't fight (manual mode should always allow a choice; auto-switch
+      health rules still apply to *when* the AI switches, not the faint prompt).
+- [ ] Default to Set so idle play is unchanged for existing saves.
+
+Likely touch points: `src/game/reducer/battle.js` (the faint/replacement path),
+`src/components/battle-scene.js` (the prompt), `src/data/ui.js` and
+`src/hooks.js` (settings plumbing).
+
+Effort: **small** (the replacement party selection already exists for manual
+switching; this is a prompt + preference).
+
+## 45. Physical / special / status as images
+
+Move categories are rendered from three Unicode glyphs in
+`src/data/moves.js` (`moveCategoryIcons`: `✴` physical, `◎` special, `☯`
+status), drawn in `battle-scene.js`, `move-manager-panel.js` and `stats-panel.js`.
+The glyphs render inconsistently across platforms and fonts and read poorly at
+small sizes.
+
+- [ ] Add small category icons (physical/special/status) as image assets, e.g.
+      `public/sprites/moves/` or an inline SVG set, and export a helper that
+      returns the URL (mirroring `getPokemonSpriteUrl`).
+- [ ] Replace every `moveCategoryIcons[...]` call site with the image (an
+      `<img>` or a CSS background on the existing badge element).
+- [ ] Keep `moveCategoryIcons` as a text fallback if the image fails to load.
+- [ ] Check the move list, the battle move buttons and the stats panel at both
+      desktop and mobile sizes.
+
+Likely touch points: `src/data/moves.js`, `src/components/battle-scene.js`,
+`move-manager-panel.js`, `stats-panel.js`, and a new asset directory under
+`public/sprites/`.
+
+Effort: **small** (three assets plus call-site swaps), once the art exists.
+
+## 46. Mobile UX fixes
+
+Three concrete mobile issues found while playing on a phone:
+
+- [ ] **Party drag/drop order doesn't work on touch.** Reordering the party
+      (and box) uses HTML5 drag-and-drop, which phones don't fire. Add
+      touch/pointer handling (pointer events, or up/down reorder buttons as a
+      simpler fallback) and keep the desktop drag path.
+- [ ] **Map pan/zoom controls don't work on touch.** The Town Map relies on
+      mouse events for dragging/zooming; route touch input (single-finger pan,
+      pinch-zoom) or add explicit on-screen zoom/pan buttons.
+- [ ] **The bottom of the Map and Items tabs is cut off.** On phones the tab
+      content extends under the browser chrome / below the visible viewport, so
+      the last row is unreachable. Audit the mobile layout height (dynamic
+      viewport units / safe-area insets) and make the tab body scroll correctly.
+
+Likely touch points: `src/components/party-panel.js` / `box-panel.js`
+(reorder), `src/components/town-map.js` (pan/zoom input), `mobile-tabs.js` and
+`assets/style.css` (viewport/scroll), plus `.party-*` / `.map-*` rules.
+
+Effort: **small–medium** (three separate, largely CSS/event fixes).
+
+## 47. Rename the League tab to Backpack
+
+The side panel has two tabs today (`SIDE_PANEL_TABS` in `src/data/ui.js`):
+**Location** and **League**. The League tab mixes the gym progress, records,
+Pokédex, bank and items, which the player reads as unrelated things bundled
+under a misleading name.
+
+- [ ] Keep **Location** as its own section (the current location, wild
+      encounters, activities, People & Places).
+- [ ] Rename **League** to **Backpack** and make it the home for the
+      player-owned data: the current **Pokédex**, **Bank** (money), **Items**
+      (bag) and **Records** tabs, with the gym/league progress moved into the
+      Location section or a dedicated progression view.
+- [ ] Decide the section split: does League progress live under Location, or
+      get its own third section? The gym panel is currently the bulk of the
+      League tab.
+- [ ] Update the mobile tab set (`MOBILE_TABS`) to match where it makes sense.
+- [ ] Re-tune the panel copy/labels and any deep links that reference the old
+      tab id.
+
+Likely touch points: `src/data/ui.js` (`SIDE_PANEL_TABS` / `MOBILE_TABS`),
+`src/components/game-layout.js`, `mobile-tabs.js`, `gym-panel.js`,
+`league-location-panel.js`, `records-modal.js`, `bag-panel.js` and the Pokédex /
+bank panels.
+
+Effort: **medium** (mostly restructuring the panel; the tab bodies already
+exist).
+
+## 48. Colour-accessibility pass
+
+There is currently **yellow text on a yellow background** when learning a new
+move (the move-manager / level-up flow), which is close to unreadable. This is
+one instance of a broader problem: several theme colours (the parchment/gold
+palette in `assets/style.css`) are used for both text and surfaces without
+checking contrast.
+
+- [ ] Fix the move-learning text first (give the text a darker ink colour or
+      the panel a non-yellow surface).
+- [ ] Sweep the UI for other low-contrast pairs and check body text, badges,
+      status tags and buttons at WCAG AA for their size.
+- [ ] Consider a slightly darker text token or a `--text-on-gold` variable
+      rather than fixing colours case by case.
+- [ ] Spot-check the shiny/gold, warning and error states, and the battle
+      log / floating damage numbers.
+
+Likely touch points: `assets/style.css` (the `:root` custom properties and the
+move-manager / learn-move rules), `src/components/move-manager-panel.js`, and
+any component with inline colours.
+
+Effort: **small** (mostly CSS; the sweep is the bulk of the work).
 
 ---
 

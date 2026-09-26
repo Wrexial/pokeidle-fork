@@ -129,6 +129,8 @@ export const CHANGELOG = [
             'Pop-up windows (Settings, patch notes, the move manager, the Pok\u00e9dex) now fit inside narrow screens instead of running off the edge',
             'Phones respect screen notches and rounded corners (safe-area insets) and the battle scene sizes itself to the device in either orientation',
             'Save slots now say whether each run is Normal or Challenge and list the active rules',
+            'Move-learning text is readable again: the tutor cost line in the move manager and its section labels use dark ink on the parchment panel, and the light move types (Electric, Ground, Ice, Steel) show dark text instead of white',
+            'The stats-panel HP label now uses dark ink on the parchment background instead of low-contrast gold',
           ],
         },
         {

@@ -867,12 +867,19 @@ one instance of a broader problem: several theme colours (the parchment/gold
 palette in `assets/style.css`) are used for both text and surfaces without
 checking contrast.
 
-- [ ] Fix the move-learning text first (give the text a darker ink colour or
-      the panel a non-yellow surface).
+- [x] Fix the move-learning text first (give the text a darker ink colour or
+      the panel a non-yellow surface). *(Done: the tutor-cost line and the
+      section/species labels in the move manager now use a dark `--ink`, and
+      the light type colours (electric/ground/ice/steel) get dark text again in
+      the move list — the component `color:#fff` rules were overriding the
+      `.type-bg-*` ones.)*
 - [ ] Sweep the UI for other low-contrast pairs and check body text, badges,
-      status tags and buttons at WCAG AA for their size.
+      status tags and buttons at WCAG AA for their size. White on the lighter
+      type colours (normal, rock, bug, fairy, grass, flying) is still below AA
+      for the small move text; decide whether to darken those too.
 - [ ] Consider a slightly darker text token or a `--text-on-gold` variable
-      rather than fixing colours case by case.
+      rather than fixing colours case by case. *(Started: `--ink` added for
+      text on parchment — the stats-panel HP label uses it now.)*
 - [ ] Spot-check the shiny/gold, warning and error states, and the battle
       log / floating damage numbers.
 

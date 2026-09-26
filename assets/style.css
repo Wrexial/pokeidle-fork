@@ -19,6 +19,7 @@
     --stone-light: #887060;
     --parchment: #e8dcc0;
     --parchment-dark: #b8a878;
+    --ink: #3a2818;
     --wood-dark: #4a3828;
     --wood-mid: #685038;
     --gold: #c8a848;
@@ -697,6 +698,12 @@ img {
     font-weight: 700
 }
 
+/* The stats panel sits on parchment, where the gold HP label is too low
+   contrast; use dark ink there instead (the battle info boxes keep gold). */
+.stats-panel .hp-label {
+    color: var(--ink)
+}
+
 .hp-track {
     flex: 1;
     height: 8px;
@@ -1315,12 +1322,12 @@ img {
 
 .move-panel-species {
     font-size: 10px;
-    color: var(--gold-dark)
+    color: var(--ink)
 }
 
 .move-panel-section-label {
     font-size: 8px;
-    color: var(--gold-dark);
+    color: var(--ink);
     padding: 6px 14px 2px;
     text-transform: uppercase;
     letter-spacing: .5px
@@ -1452,7 +1459,7 @@ img {
 .move-panel-tutor-cost {
     font-size: 8px;
     font-weight: 700;
-    color: #f0d060;
+    color: var(--ink);
     padding: 4px 14px 0;
     text-align: right
 }
@@ -2633,7 +2640,7 @@ img {
 
 .stats-panel-moves-title {
     font-size: 7px;
-    color: var(--gold-dark);
+    color: var(--ink);
     text-transform: uppercase;
     letter-spacing: .5px
 }
@@ -12933,4 +12940,16 @@ img {
 @keyframes icePop {
     from { transform: scale(.8) }
     to { transform: scale(1) }
+}
+
+/* Light type colours need dark ink so the move text stays readable. These
+   re-assert the intended colours after the components (.move-cell,
+   .move-panel-slot, .move-panel-item, .stats-panel-move) that default to
+   white text, which otherwise override the .type-bg-* rules. */
+.type-bg-electric,
+.type-bg-ground,
+.type-bg-ice,
+.type-bg-steel {
+    color: #1a1808;
+    text-shadow: none
 }

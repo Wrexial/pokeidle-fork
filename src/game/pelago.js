@@ -6,9 +6,6 @@
 import { pokemonSpecies } from '../data/gameData.js'
 import { calculatePokemonStats, getLevelUpResults } from './pokemon.js'
 
-/** The Alola location that hosts Poké Pelago. */
-export const PELAGO_LOCATION = 'alola-poke-pelago'
-
 /** Pokemon that can be assigned to one island. */
 export const PELAGO_SLOTS = 3
 

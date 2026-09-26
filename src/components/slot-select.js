@@ -2,7 +2,7 @@
 // active slot has been chosen yet, so the player picks which one to continue.
 
 import React from 'react'
-import { jsx, jsxs } from 'react/jsx-runtime'
+import { jsx } from 'react/jsx-runtime'
 import { clearSave, setActiveSlot } from '../data/config.js'
 import { listSaveSlots } from '../game/save.js'
 import { SaveSlotCard } from './save-slot-card.js'

@@ -164,7 +164,7 @@ export const STATIC_ENCOUNTERS = [
  * @param {{ location: string }} entry
  * @returns {string}
  */
-export function entryRegion(entry) {
+function entryRegion(entry) {
   return mapData[entry.location]?.region ?? 'kanto'
 }
 

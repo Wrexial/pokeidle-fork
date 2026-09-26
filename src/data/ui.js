@@ -52,7 +52,7 @@ export const DESIGN_WIDTH = 560
  * Three-letter battle status abbreviations shown on the info nameplates.
  * @type {Record<string, string>}
  */
-export const statusLabels = {
+const statusLabels = {
   poison: 'PSN',
   toxic: 'TOX',
   burn: 'BRN',

@@ -14,7 +14,7 @@ const WILD_BERRIES = ['sitrusBerry', 'lumBerry']
 /** The type-boosting item that suits each type.
  * @type {Record<string, string>}
  */
-export const TYPE_BOOST_ITEM = {
+const TYPE_BOOST_ITEM = {
   Normal: 'silkScarf',
   Fire: 'charcoal',
   Water: 'mysticWater',
@@ -41,7 +41,7 @@ const TYPE_BOOST_ITEMS = [...new Set(Object.values(TYPE_BOOST_ITEM))]
 export const WILD_HELD_ITEMS = [...WILD_BERRIES, ...TYPE_BOOST_ITEMS]
 
 /** The stronger competitive items only trainers hold. */
-export const TRAINER_ONLY_ITEMS = [
+const TRAINER_ONLY_ITEMS = [
   'leftovers',
   'focusSash',
   'eviolite',
@@ -52,15 +52,12 @@ export const TRAINER_ONLY_ITEMS = [
   'assaultVest',
 ]
 
-/** @type {string[]} */
-export const TRAINER_HELD_ITEMS = [...WILD_HELD_ITEMS, ...TRAINER_ONLY_ITEMS]
-
 /**
  * The type boosters that suit a Pokemon's types (empty for a typeless one).
  * @param {string[] | null | undefined} types
  * @returns {string[]}
  */
-export function typeBoosterItems(types) {
+function typeBoosterItems(types) {
   return [...new Set((types ?? []).map((type) => TYPE_BOOST_ITEM[type]).filter(Boolean))]
 }
 
@@ -70,7 +67,7 @@ export function typeBoosterItems(types) {
  * @param {string[] | null | undefined} types
  * @returns {string[]}
  */
-export function wildHeldItemPool(types) {
+function wildHeldItemPool(types) {
   return [...new Set([...WILD_BERRIES, ...typeBoosterItems(types)])]
 }
 

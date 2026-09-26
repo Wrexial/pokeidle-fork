@@ -65,7 +65,7 @@ function describeStatChange(effect) {
  * @type {Record<string, string>}
  */
 /** @type {Record<string, string>} */
-export const moveEffectText = {
+const moveEffectText = {
   heal: 'Heals the user{status}.',
   recoil: 'The user takes recoil damage.',
   drain: 'Heals the user for {percentage}% of the damage dealt.',
@@ -171,7 +171,7 @@ export const chargeMoveNotes = {
  * Extra explanation for moves whose effect needs more than the generic line.
  * @type {Record<string, string>}
  */
-export const moveNotes = {
+const moveNotes = {
   curse:
     'A Ghost-type user pays HP for the curse; other types raise Attack/Speed and are drained each turn.',
   wish: 'Heals the user\u2019s side by up to 50% max HP when the timer ends.',

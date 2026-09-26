@@ -181,8 +181,6 @@ export const regionalStarters = {
   paldea: ['sprigatito', 'fuecoco', 'quaxly'],
 }
 
-export const starterSpecies = regionalStarters.kanto
-
 /**
  * The region whose Battle Tower is the game's only one. Other regions are
  * planned to get their own minigames instead, so `towerFloor`/`towerBest` are

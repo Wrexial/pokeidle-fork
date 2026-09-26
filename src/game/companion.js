@@ -7,7 +7,7 @@
 export const COMPANION_MAX_CARE = 100
 
 /** Care lost from each stat per wild win. */
-export const COMPANION_DECAY_PER_WIN = 2
+const COMPANION_DECAY_PER_WIN = 2
 
 /** Every care stat must be at least this for the companion to count as content. */
 export const COMPANION_CONTENT_THRESHOLD = 50
@@ -19,7 +19,7 @@ export const COMPANION_EXP_MULTIPLIER = 1.15
 export const COMPANION_FEED_COST = 500
 
 /** Money each wash costs (soap). */
-export const COMPANION_WASH_COST = 200
+const COMPANION_WASH_COST = 200
 
 /**
  * The care actions and what they change. `friendship` is how much the pinned

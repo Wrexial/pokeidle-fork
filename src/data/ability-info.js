@@ -1011,15 +1011,6 @@ export const abilityInfo = {
 }
 
 /**
- * A one-line description of an ability, or null when it is not implemented.
- * @param {string | null | undefined} abilityKey
- * @returns {string | null}
- */
-export function abilityDescription(abilityKey) {
-  return abilityKey ? abilityInfo[abilityKey]?.text ?? null : null
-}
-
-/**
  * Hover-tooltip text for an ability. Implemented abilities get their curated
  * description; anything else says so rather than showing nothing.
  * @param {string | null | undefined} abilityKey

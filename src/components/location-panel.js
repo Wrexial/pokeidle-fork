@@ -1,7 +1,6 @@
 // Split from a grouped component file — see tools/decompile/split-components.mjs
 
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
-import React from 'react'
 import { BATTLE_TOWER_LOCATION } from '../data/config.js'
 import { martShopItems } from '../data/items.js'
 import { encounterData, gymLeaderData, mapData, pokemonSpecies, regions, raidPoolFor } from '../data/gameData.js'

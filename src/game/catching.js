@@ -8,7 +8,7 @@ import { getCatchRule } from './progression.js'
  * @param {string} speciesKey
  * @returns {number}
  */
-export function getCatchRate(speciesKey) {
+function getCatchRate(speciesKey) {
   return pokemonSpecies[speciesKey].catchRate ?? 255
 }
 

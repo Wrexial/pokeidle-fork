@@ -112,15 +112,6 @@ function routeHasType(routeKey, types) {
 }
 
 /**
- * Whether a location has trees worth headbutting.
- * @param {MapLocation | undefined} location
- * @returns {boolean}
- */
-function isHeadbuttLocation(location) {
-  return isForageLocation(location)
-}
-
-/**
  * Whether a location is overgrown enough to forage.
  * @param {MapLocation | undefined} location
  * @returns {boolean}

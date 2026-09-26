@@ -149,10 +149,6 @@ index.html
    `mapData`, …) plus derived maps (`preEvolutionMap`, `pokedexIndexes`, …).
 3. The rest of `src/` imports that data as needed.
 
-`assets/gameDataLoader.js` and `assets/dataIntegrationUtils.js` are optional
-helper/debug modules describing the integration; the live path is
-`gameDataInjector.js` + `index.js`.
-
 ### Debugging at runtime (browser console)
 
 ```js
@@ -232,10 +228,6 @@ These are loaded by `assets/gameDataInjector.js` (`key` → file):
 | `elite4Data` | `elite-4-data.json` |
 | `championData` | `champion-data.json` (array, one per region) |
 | `regions` | `regions.json` |
-
-**Watch out:** `move-data.json` and `move-learnsets.json` are *not* loaded by
-the injector — they are older/smaller files. The live move data is
-`possible-moves.json` / `possible-learnsets.json`. Don't edit the wrong pair.
 
 The map and encounter databases are **split one file per region** under
 `public/data/map-data/` and `public/data/encounter-data/` (`kanto.json` …
@@ -675,10 +667,6 @@ One-off scripts used to build the data JSON (not run during dev/build):
   descriptions in `src/game/move-info.js` (both also power the in-game hover
   tooltips). Re-run it after changing moves, abilities or held items. Linked
   from the guide, the encounter index and Settings.
-- `*.md` in `tools/` (`SUMMARY.md`, `DATA_INTEGRATION.md`,
-  `REFACTORING_GUIDE.md`, `QUICKSTART_DATA_INTEGRATION.md`) — historical design
-  docs. Some counts/claims there are outdated (e.g. they still say "151
-  Pokémon"); treat the JSON files and code as authoritative.
 
 These scripts hit external sites (Serebii, PokémonDB) and may write large files
 — only run them when the task is explicitly about re-scraping data.

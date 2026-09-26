@@ -203,7 +203,7 @@ export function onHitStatBoost(defender, moveDef, isCrit = false) {
  * @param {BattlePokemon | null | undefined} attacker
  * @returns {boolean}
  */
-export function abilityIgnoresTargetAbility(attacker) {
+function abilityIgnoresTargetAbility(attacker) {
   const ability = attacker ? abilityOf(attacker) : null
   return ability === 'moldBreaker' || ability === 'teravolt' || ability === 'turboblaze'
 }

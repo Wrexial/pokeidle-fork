@@ -91,7 +91,7 @@ export function BugContestScene() {
   function rustleBush(index) {
     if (step !== 'bushes') return
     if (state.sfxEnabled) playSfx('tap')
-    const nextBugs = rollContestBugs(baseLevel)
+    const nextBugs = rollContestBugs(baseLevel, state.challengeMonotype)
     setBugs(nextBugs)
     setSelectedBug(0)
     setFledName(null)

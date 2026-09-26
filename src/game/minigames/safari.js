@@ -4,6 +4,7 @@
 // it easier to catch (but more likely to bolt).
 
 import { breedingData, encounterData, pokemonSpecies } from '../../data/gameData.js'
+import { monotypeSpeciesPool } from '../pokemon.js'
 
 /** Money spent to enter the Safari Zone. */
 export const SAFARI_COST = 500
@@ -136,21 +137,28 @@ function rollGender(speciesKey) {
 }
 
 /**
- * Roll a wild Pokemon hiding in a Safari subsection.
+ * Roll a wild Pokemon hiding in a Safari subsection. Under a Monotype run the
+ * area's own distribution is overridden by a random Pokemon of the chosen type.
  * @param {string} [areaId]
+ * @param {string | null} [monotype]
  * @returns {{ speciesKey: string, level: number, gender: 'male' | 'female' | 'genderless', areaId: string }}
  */
-export function rollSafariPokemon(areaId = SAFARI_AREAS[0].id) {
+export function rollSafariPokemon(areaId = SAFARI_AREAS[0].id, monotype = null) {
   const area = safariAreaById(areaId),
-    pool = area.pool,
-    total = pool.reduce((sum, entry) => sum + entry.weight, 0)
-  let roll = Math.random() * total,
+    monotypePool = monotype ? monotypeSpeciesPool(monotype) : []
+  let chosen
+  if (monotypePool.length > 0) chosen = { speciesKey: monotypePool[Math.floor(Math.random() * monotypePool.length)] }
+  else {
+    const pool = area.pool,
+      total = pool.reduce((sum, entry) => sum + entry.weight, 0)
+    let roll = Math.random() * total
     chosen = pool[pool.length - 1]
-  for (const entry of pool) {
-    roll -= entry.weight
-    if (roll <= 0) {
-      chosen = entry
-      break
+    for (const entry of pool) {
+      roll -= entry.weight
+      if (roll <= 0) {
+        chosen = entry
+        break
+      }
     }
   }
   const { min, max } = SAFARI_LEVEL_RANGE

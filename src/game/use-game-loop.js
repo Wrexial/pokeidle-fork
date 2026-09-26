@@ -534,7 +534,8 @@ export function useGameLoop() {
               hasExpShare,
               currentGameState.party,
               currentGameState.activePlayerPokemonIndex,
-              expBonus
+              expBonus,
+              currentGameState.battleParticipants
             )
             return
           }
@@ -549,7 +550,8 @@ export function useGameLoop() {
               hasExpShare,
               currentGameState.party,
               currentGameState.activePlayerPokemonIndex,
-              expBonus
+              expBonus,
+              currentGameState.battleParticipants
             )
             const nextIndex = trainerBattle.currentTrainerPokemonIndex + 1
             if (nextIndex < trainerBattle.trainerTeam.length)
@@ -598,7 +600,8 @@ export function useGameLoop() {
             hasExpShare,
             currentGameState.party,
             currentGameState.activePlayerPokemonIndex,
-            expBonus
+            expBonus,
+            currentGameState.battleParticipants
           )
           const forceCatch = enemyPokemon.isShiny && currentGameState.alwaysCatchShinies
           if (

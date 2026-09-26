@@ -8,6 +8,7 @@ import { encounterData, pokemonSpecies } from '../../data/gameData.js'
 import { doubleSpawnChance } from '../../data/config.js'
 import { consumableItems, evolutionItems, heldItems } from '../../data/items.js'
 import { isCaveLocation, isWaterLocation } from '../catching.js'
+import { monotypeSpeciesPool, speciesHasType } from '../pokemon.js'
 import { DEFAULT_ROD, rodForId } from './rods.js'
 import { FISHING_LOCATIONS, routeHasWaterSpecies } from './fishing.js'
 
@@ -218,13 +219,34 @@ export function rollActivityHeldItem(quality) {
  * @param {string} routeKey
  * @param {boolean} perfect
  * @param {string} [rodId]
+ * @param {string | null} [monotype] Monotype challenge: only this type may appear.
  * @returns {{ speciesKey: string, level: number, isWater: boolean } | null}
  */
-export function rollActivityEncounter(activityId, routeKey, perfect, rodId = DEFAULT_ROD) {
+export function rollActivityEncounter(activityId, routeKey, perfect, rodId = DEFAULT_ROD, monotype = null) {
   const activity = ROUTE_ACTIVITIES[activityId],
     rod = rodForId(rodId),
     table = encounterData[routeKey]?.encounters ?? []
-  if (!activity || table.length === 0) return null
+  if (!activity) return null
+  // A Monotype run overrides the activity's usual type preference, so fishing
+  // can still hook the chosen type even on a route that has none of it.
+  if (monotype) {
+    const pool = monotypeSpeciesPool(monotype)
+    if (pool.length === 0) return null
+    const speciesKey = pool[Math.floor(Math.random() * pool.length)],
+      levels = table.length > 0 ? table : [{ minLevel: 5, maxLevel: 7 }],
+      min = Math.min(...levels.map((entry) => entry.minLevel)),
+      max = Math.max(...levels.map((entry) => entry.maxLevel))
+    return {
+      speciesKey,
+      level:
+        min +
+        Math.floor(Math.random() * (max - min + 1)) +
+        (perfect ? 1 : 0) +
+        (activity.id === 'fishing' ? rod.levelBonus : 0),
+      isWater: speciesHasType(speciesKey, 'Water'),
+    }
+  }
+  if (table.length === 0) return null
   // Strict type filter: fishing only ever hooks Water Pokemon, so a route with
   // none has nothing to catch rather than falling back to its land species.
   const typePool = activity.preferTypes
@@ -280,13 +302,14 @@ export function rollActivityEncounter(activityId, routeKey, perfect, rodId = DEF
  * @param {string} routeKey
  * @param {boolean} perfect
  * @param {string} [rodId]
+ * @param {string | null} [monotype] Monotype challenge: only this type may appear.
  * @returns {{ speciesKey: string, level: number, isWater: boolean }[]}
  */
-export function rollActivityEncounters(activityId, routeKey, perfect, rodId = DEFAULT_ROD) {
-  const first = rollActivityEncounter(activityId, routeKey, perfect, rodId)
+export function rollActivityEncounters(activityId, routeKey, perfect, rodId = DEFAULT_ROD, monotype = null) {
+  const first = rollActivityEncounter(activityId, routeKey, perfect, rodId, monotype)
   if (!first) return []
   if (activityId !== 'headbutt' || Math.random() >= doubleSpawnChance) return [first]
-  let second = rollActivityEncounter(activityId, routeKey, perfect, rodId)
+  let second = rollActivityEncounter(activityId, routeKey, perfect, rodId, monotype)
   // Prefer a different species so the choice actually matters.
   for (let attempt = 0; attempt < 3 && second && second.speciesKey === first.speciesKey; attempt++)
     second = rollActivityEncounter(activityId, routeKey, perfect, rodId)

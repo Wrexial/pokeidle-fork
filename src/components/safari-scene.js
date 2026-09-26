@@ -75,7 +75,7 @@ export function SafariScene() {
       setPhase('done')
       return
     }
-    const nextPokemon = rollSafariPokemon(nextAreaId),
+    const nextPokemon = rollSafariPokemon(nextAreaId, state.challengeMonotype),
       completedGenerationSet = completedGenerations(state.pokedexCaught),
       isShiny = checkShinyOdds(
         Math.max(

@@ -3,6 +3,7 @@
 // pool. Win the boss and you catch it; wipe and you go home empty-handed.
 
 import { pokemonSpecies, regions } from '../../data/gameData.js'
+import { speciesHasType } from '../pokemon.js'
 import { BATTLE_ROYAL_POOL } from './battle-royal.js'
 
 /** Money spent to enter an adventure. */
@@ -33,13 +34,20 @@ export function dynamaxPaths(stage, baseLevel) {
 }
 
 /**
- * The adventure's legendary boss, drawn from the region's raid pool.
+ * The adventure's legendary boss, drawn from the region's raid pool. Under a
+ * Monotype run the pool is narrowed to legends of the chosen type (falling back
+ * to the full pool when the type has none).
  * @param {string} [regionId]
+ * @param {string | null} [monotype]
  * @returns {{ speciesKey: string, level: number, name: string }}
  */
-export function dynamaxBoss(regionId = 'galar') {
-  const region = regions.find((candidate) => candidate.id === regionId),
-    pool = (region?.raidPool ?? []).filter((entry) => pokemonSpecies[entry.speciesKey])
+export function dynamaxBoss(regionId = 'galar', monotype = null) {
+  const region = regions.find((candidate) => candidate.id === regionId)
+  let pool = (region?.raidPool ?? []).filter((entry) => pokemonSpecies[entry.speciesKey])
+  if (monotype) {
+    const typed = pool.filter((entry) => speciesHasType(entry.speciesKey, monotype))
+    if (typed.length > 0) pool = typed
+  }
   if (pool.length === 0) return randomOpponent(DYNAMAX_BOSS_LEVEL)
   const entry = pool[Math.floor(Math.random() * pool.length)]
   return {

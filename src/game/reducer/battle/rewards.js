@@ -71,9 +71,14 @@ export function applySharedExp(state, action) {
   const party = [...state.party],
     battleLog = []
   for (const entry of partyExp) {
-    if (entry.partyIndex < 0 || entry.partyIndex >= party.length) continue
+    // Prefer the id so a Nuzlocke release earlier in the same tick can't shift
+    // the target onto the wrong party slot.
+    const partyIndex = entry.pokemonId
+      ? party.findIndex((member) => member.id === entry.pokemonId)
+      : entry.partyIndex
+    if (partyIndex < 0 || partyIndex >= party.length) continue
     let member = {
-      ...party[entry.partyIndex],
+      ...party[partyIndex],
     }
     if (
       ((member.totalExp = member.totalExp + entry.expGained),
@@ -104,7 +109,7 @@ export function applySharedExp(state, action) {
         moves,
       }
     }
-    party[entry.partyIndex] = member
+    party[partyIndex] = member
   }
   const activeIndex = state.activePlayerPokemonIndex,
     playerPokemon = party[activeIndex] || state.playerPokemon

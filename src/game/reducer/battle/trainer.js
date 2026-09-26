@@ -40,6 +40,9 @@ export function startTrainerBattle(state, action) {
     battleHazards: emptyBattleHazards(),
     terrain: null,
     activePlayerPokemonIndex: 0,
+    battleParticipants: (state.party[0]?.id ?? state.playerPokemon?.id)
+      ? [state.party[0]?.id ?? state.playerPokemon?.id]
+      : [],
     trainerBattle: {
       trainerId,
       trainerName,
@@ -103,6 +106,7 @@ export function switchPlayerPokemon(state, action) {
         battleEvents: [],
         party,
         activePlayerPokemonIndex: newIndex,
+        battleParticipants: [...new Set([...(state.battleParticipants ?? []), nextPokemon.id])],
         pendingEvents: [
           ...state.pendingEvents,
           {

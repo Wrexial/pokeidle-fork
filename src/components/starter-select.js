@@ -6,7 +6,7 @@ import { jsx, jsxs } from 'react/jsx-runtime'
 import { regionalStarters } from '../data/config.js'
 import { pokemonSpecies, regions } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
-import { calculatePokemonStats, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
+import { calculatePokemonStats, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, getThreeStageBaseSpecies, monotypeSpeciesPool } from '../game/pokemon.js'
 import { checkShinyOdds } from '../game/progression.js'
 import { MonotypeSelect } from './monotype-select.js'
 
@@ -17,7 +17,17 @@ export function StarterSelect() {
     regionOrder = React.useMemo(() => [...regions].sort((a, b) => a.order - b.order), []),
     region = regions.find((candidate) => candidate.id === regionId),
     starters = regionalStarters[regionId] ?? regionalStarters.kanto,
-    startLevel = region?.startLevel ?? 5
+    startLevel = region?.startLevel ?? 5,
+    // A Monotype run doesn't let the player pick: it hands out a random base of
+    // a three-stage line of the chosen type. Re-rolling per region keeps the
+    // region pick meaningful (and gives the player a different partner).
+    monotypeStarterKey = React.useMemo(() => {
+      if (!state.challengeMonotype) return null
+      const threeStage = getThreeStageBaseSpecies(state.challengeMonotype),
+        pool = threeStage.length > 0 ? threeStage : monotypeSpeciesPool(state.challengeMonotype)
+      return pool.length > 0 ? pool[Math.floor(Math.random() * pool.length)] : null
+    }, [state.challengeMonotype, regionId]),
+    monotypeStarterSpecies = monotypeStarterKey ? pokemonSpecies[monotypeStarterKey] : null
 
   /** Turn every challenge rule off (normal mode). */
   function clearChallenges() {
@@ -194,11 +204,13 @@ export function StarterSelect() {
     children: [
       jsx('h2', {
         className: 'starter-title',
-        children: 'Choose Your Starter!',
+        children: state.challengeMonotype ? 'Choose Your Region' : 'Choose Your Starter!',
       }),
       jsx('p', {
         className: 'starter-subtitle',
-        children: 'Your choice decides which region your journey begins in.',
+        children: state.challengeMonotype
+          ? `Pick where your journey begins. A random three-stage ${state.challengeMonotype}-type Pokemon will start it with you.`
+          : 'Your choice decides which region your journey begins in.',
       }),
       jsx('div', {
         className: 'starter-mode-summary',
@@ -226,7 +238,63 @@ export function StarterSelect() {
           )
         ),
       }),
-      jsx('div', {
+      state.challengeMonotype &&
+        jsx('div', {
+          className: 'starter-cards monotype-starter',
+          children: monotypeStarterSpecies
+            ? jsxs('div', {
+                className: 'starter-card monotype-starter-card',
+                children: [
+                  jsx('img', {
+                    src: getPokemonSpriteUrl(monotypeStarterSpecies.id),
+                    onError: /** @param {React.SyntheticEvent} event */ (event) => ((/** @type {HTMLImageElement} */ (event.target)).src = getPokemonSpriteFallbackUrl(monotypeStarterSpecies.id)),
+                    alt: monotypeStarterSpecies.name,
+                    className: 'starter-sprite',
+                  }),
+                  jsx('h3', {
+                    children: monotypeStarterSpecies.name,
+                  }),
+                  jsx('div', {
+                    className: 'starter-types',
+                    children: monotypeStarterSpecies.types.map((type) =>
+                      jsx(
+                        'span',
+                        {
+                          className: `type-badge type-${type.toLowerCase()}`,
+                          children: type,
+                        },
+                        type
+                      )
+                    ),
+                  }),
+                  jsx('p', {
+                    className: 'monotype-starter-note',
+                    children: `A random three-stage ${state.challengeMonotype}-type partner, ready to grow with you.`,
+                  }),
+                  jsx('button', {
+                    className: 'choose-btn',
+                    onClick: () =>
+                      dispatch({
+                        type: 'SELECT_STARTER',
+                        payload: {
+                          speciesKey: monotypeStarterKey,
+                          isShiny: checkShinyOdds(),
+                          region: regionId,
+                          monotype: state.challengeMonotype,
+                        },
+                      }),
+                    children: 'Begin Journey',
+                  }),
+                ],
+              })
+            : jsx('p', {
+                className: 'starter-subtitle',
+                children:
+                  'No three-stage Pokemon of this type exists. Pick another type in Settings.',
+              }),
+        }),
+      !state.challengeMonotype &&
+        jsx('div', {
         className: 'starter-cards',
         children: starters.map((speciesKey) => {
           const species = pokemonSpecies[speciesKey]

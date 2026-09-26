@@ -38,7 +38,7 @@ export function DynamaxAdventuresScene() {
     [paths, setPaths] = React.useState(() =>
       dynamaxPaths(0, Math.max(...state.party.map((member) => member.level), 5))
     ),
-    [boss] = React.useState(() => dynamaxBoss()),
+    [boss] = React.useState(() => dynamaxBoss('galar', state.challengeMonotype)),
     [phase, setPhase] = React.useState(
       /** @type {'choose' | 'boss' | 'done'} */ ('choose')
     ),

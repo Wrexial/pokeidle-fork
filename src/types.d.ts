@@ -327,6 +327,8 @@ type SaveSlotSummary = {
   dex?: number
   badges?: number
   savedAt?: number
+  /** Active challenge rules, empty for a normal run. */
+  challenges?: string[]
 }
 
 type ActiveEffect = {
@@ -488,6 +490,8 @@ type GameState = {
   wildBattlesWon: number
   trainerBattlesWon: number
   activePlayerPokemonIndex: number
+  /** Pokemon ids that have taken part in the current battle (EXP shares). */
+  battleParticipants?: string[]
   alwaysCatchShinies: boolean
   trainerBattle: TrainerBattle | null
   bossBattle: TrainerBattle | null

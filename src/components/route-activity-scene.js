@@ -215,7 +215,7 @@ export function RouteActivityScene() {
     if (activity.mode === 'encounter') {
       // A headbutted tree sometimes shakes out a second Pokemon that slips away
       // while you deal with the first.
-      const encounters = rollActivityEncounters(activity.id, routeKey, perfect, rod.id)
+      const encounters = rollActivityEncounters(activity.id, routeKey, perfect, rod.id, state.challengeMonotype)
       if (encounters.length === 0) {
         setMessage('Nothing is biting here.')
         setStage(nextAttempts <= 0 ? 'done' : 'result')
@@ -230,7 +230,7 @@ export function RouteActivityScene() {
         ? (activity.perfectEncounterChance ?? activity.encounterChance)
         : activity.encounterChance
       if (Math.random() < chance) {
-        const hidden = rollActivityEncounter(activity.id, routeKey, perfect)
+        const hidden = rollActivityEncounter(activity.id, routeKey, perfect, undefined, state.challengeMonotype)
         if (hidden) {
           previewEncounter([hidden], quality)
           return

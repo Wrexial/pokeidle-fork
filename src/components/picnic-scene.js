@@ -105,7 +105,7 @@ export function PicnicScene() {
   }
 
   function buildReward() {
-    const type = rollSandwichType(picks)
+    const type = state.challengeMonotype ?? rollSandwichType(picks)
     if (!type) {
       setStage('failed')
       return

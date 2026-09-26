@@ -23,13 +23,15 @@ import { rollSwarm, withNotification } from '../../reducer-helpers.js'
  */
 export function startEncounter(state, action) {
   const firstAliveIndex = state.party.findIndex((member) => isBattleReady(member)),
-    activeIndex = firstAliveIndex >= 0 ? firstAliveIndex : 0
+    activeIndex = firstAliveIndex >= 0 ? firstAliveIndex : 0,
+    activePokemon = state.party[activeIndex] || state.playerPokemon
   return {
     ...state,
     phase: 'battling',
     enemyPokemon: action.payload.enemy,
-    playerPokemon: state.party[activeIndex] || state.playerPokemon,
+    playerPokemon: activePokemon,
     activePlayerPokemonIndex: activeIndex,
+    battleParticipants: activePokemon?.id ? [activePokemon.id] : [],
     battleEvents: [],
     pendingEvents: [
       {

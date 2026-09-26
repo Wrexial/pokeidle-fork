@@ -2,17 +2,7 @@
 
 import { roamerEncounterChance, shinyCharmMinOddsChance, shinyFullOddsChance, shinyWithCharmChance } from '../../data/config.js'
 import { GENERATION_DEX_RANGES, evolutionData, isSpeciesCharmed, pokemonSpecies, regions } from '../../data/gameData.js'
-
-/**
- * Whether a species carries `type` (e.g. "Water"). Used by the Monotype
- * challenge to keep wild encounters on-type.
- * @param {string} speciesKey
- * @param {string} type
- * @returns {boolean}
- */
-function speciesHasType(speciesKey, type) {
-  return !!pokemonSpecies[speciesKey]?.types?.includes(type)
-}
+import { challengeEligibleSpecies, speciesHasType } from '../pokemon.js'
 
 /** Cached fixpoint of the minimum level each species can exist at. @type {Map<string, number> | null} */
 let speciesLevelFloors = null
@@ -247,10 +237,7 @@ export function resolveRoamer(regionId, pokedexSeen, pokedexCaught, completedGen
 }
 
 /** Species eligible for Randomizer encounters (national dex, no legendaries). */
-const RANDOMIZER_SPECIES = Object.keys(pokemonSpecies).filter((key) => {
-  const species = pokemonSpecies[key]
-  return species.id > 0 && species.id <= 1025 && !species.legendary
-})
+const RANDOMIZER_SPECIES = challengeEligibleSpecies
 
 /**
  * A Randomizer wild encounter: any eligible species at the route's level band.

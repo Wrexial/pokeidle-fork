@@ -89,17 +89,17 @@ async function connect() {
   return cdp
 }
 
-function kantoSave() {
-  const pokemon = {
-    id: '1',
-    speciesKey: 'charmander',
-    name: 'Charmander',
-    types: ['Fire'],
-    level: 30,
+function makePokemon(id, speciesKey, name, level, currentHp, maxHp) {
+  return {
+    id,
+    speciesKey,
+    name,
+    types: ['Normal'],
+    level,
     totalExp: 0,
-    moves: ['tackle', 'ember'],
-    currentHp: 80,
-    maxHp: 80,
+    moves: ['tackle', 'ember', 'growl', 'scratch'],
+    currentHp,
+    maxHp,
     attack: 45,
     defense: 40,
     spAttack: 42,
@@ -112,19 +112,40 @@ function kantoSave() {
     heldItem: null,
     isShiny: false,
   }
+}
+
+function kantoSave() {
+  const party = [
+    makePokemon('1', 'charmander', 'Charmander', 30, 80, 80),
+    makePokemon('2', 'pidgey', 'Pidgey', 28, 42, 62),
+    makePokemon('3', 'rattata', 'Rattata', 27, 12, 58),
+    makePokemon('4', 'pikachu', 'Pikachu', 31, 51, 70),
+    makePokemon('5', 'bulbasaur', 'Bulbasaur', 29, 0, 74),
+    makePokemon('6', 'squirtle', 'Squirtle', 30, 66, 68),
+  ]
+  const box = [
+    makePokemon('7', 'geodude', 'Geodude', 24, 55, 55),
+    makePokemon('8', 'magikarp', 'Magikarp', 12, 30, 30),
+    makePokemon('9', 'abra', 'Abra', 20, 44, 44),
+    makePokemon('10', 'eevee', 'Eevee', 33, 61, 61),
+    makePokemon('11', 'gastly', 'Gastly', 26, 39, 39),
+    makePokemon('12', 'onix', 'Onix', 22, 47, 47),
+    makePokemon('13', 'zubat', 'Zubat', 18, 35, 35),
+    makePokemon('14', 'oddish', 'Oddish', 25, 50, 50),
+  ]
   return {
     version: 2,
     savedAt: Date.now(),
     startRegion: 'kanto',
-    playerPokemon: pokemon,
-    party: [pokemon],
-    box: [],
-    nextPokemonId: 2,
+    playerPokemon: party[0],
+    party,
+    box,
+    nextPokemonId: 15,
     currentLocation: 'route21',
     currentRoute: 'route21',
     unlockedLocations: ['palletTown', 'route1', 'route21'],
     unlockedRegions: ['kanto'],
-    inventory: { pokeball: 30, greatball: 10, ultraball: 5 },
+    inventory: { pokeball: 30, greatball: 10, ultraball: 5, oranBerry: 3, superPotion: 2, linkCable: 1 },
     money: 50000,
     pokedexSeen: ['charmander'],
     pokedexCaught: ['charmander'],

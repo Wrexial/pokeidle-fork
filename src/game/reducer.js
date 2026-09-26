@@ -159,6 +159,8 @@ export const initialGameState = {
   preRaidLocation: null,
   playerVolatile: null,
   activeEffects: [],
+  /** Pokemon ids that have taken part in the current battle (EXP shares). */
+  battleParticipants: [],
 }
 
 /**

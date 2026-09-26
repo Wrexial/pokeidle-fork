@@ -95,3 +95,47 @@ export function canEvolveFurther(speciesKey) {
       pokemonSpecies[evolution.into].id <= 1025
   )
 }
+
+/**
+ * The longest ordinary evolution path from `speciesKey`, counting the species
+ * itself (a species with no evolution has length 1). Mega/Gigantamax pseudo-
+ * evolutions and alternate forms are ignored.
+ * @param {string} speciesKey
+ * @param {Set<string>} [seen]
+ * @returns {number}
+ */
+function evolutionDepth(speciesKey, seen = new Set()) {
+  if (seen.has(speciesKey)) return 0
+  seen.add(speciesKey)
+  const evolutions = (evolutionData[speciesKey] || []).filter((evolution) => {
+    const species = pokemonSpecies[evolution.into]
+    return !evolution.form && !!species && species.id > 0 && species.id <= 1025
+  })
+  if (evolutions.length === 0) return 1
+  let longest = 0
+  for (const evolution of evolutions)
+    longest = Math.max(longest, 1 + evolutionDepth(evolution.into, new Set(seen)))
+  return longest
+}
+
+/**
+ * Species that sit at the root of a three-stage evolution line (base -> middle
+ * -> final), optionally narrowed to a type. The Monotype challenge hands out a
+ * random one of these so the run starts with a Pokemon that still has room to
+ * grow. Legendaries, alternate forms and MissingNo are ignored.
+ * @param {string} [type]
+ * @returns {string[]}
+ */
+export function getThreeStageBaseSpecies(type) {
+  return Object.keys(pokemonSpecies).filter((speciesKey) => {
+    const species = pokemonSpecies[speciesKey]
+    return (
+      species.id > 0 &&
+      species.id <= 1025 &&
+      !species.legendary &&
+      !preEvolutionMap[speciesKey] &&
+      evolutionDepth(speciesKey) === 3 &&
+      (!type || species.types.includes(type))
+    )
+  })
+}

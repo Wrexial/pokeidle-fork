@@ -3,6 +3,7 @@
 import { breedingData, pokemonSpecies } from '../../data/gameData.js'
 import { doubleSpawnChance } from '../../data/config.js'
 import { calculateCatchChance } from '../catching.js'
+import { monotypeSpeciesPool } from '../pokemon.js'
 
 /** Money spent to enter the contest. */
 export const BUG_CONTEST_COST = 800
@@ -73,19 +74,27 @@ function rollContestGender(speciesKey) {
 }
 
 /**
- * Roll the bug hiding in a rustled bush.
+ * Roll the bug hiding in a rustled bush. Under a Monotype run the contest
+ * yields a Pokemon of the chosen type instead.
  * @param {number} [baseLevel] The player's active Pokemon level; the bug stays
  *   within {@link CONTEST_LEVEL_SPREAD} levels of it.
+ * @param {string | null} [monotype]
  * @returns {{ speciesKey: string, level: number, gender: 'male' | 'female' | 'genderless', fleeChance: number }}
  */
-export function rollContestBug(baseLevel = 20) {
-  let roll = Math.random() * BUG_TOTAL_WEIGHT,
+export function rollContestBug(baseLevel = 20, monotype = null) {
+  const monotypePool = monotype ? monotypeSpeciesPool(monotype) : []
+  let chosen
+  if (monotypePool.length > 0)
+    chosen = { speciesKey: monotypePool[Math.floor(Math.random() * monotypePool.length)] }
+  else {
+    let roll = Math.random() * BUG_TOTAL_WEIGHT
     chosen = BUG_CONTEST_POOL[BUG_CONTEST_POOL.length - 1]
-  for (const entry of BUG_CONTEST_POOL) {
-    roll -= entry.weight
-    if (roll <= 0) {
-      chosen = entry
-      break
+    for (const entry of BUG_CONTEST_POOL) {
+      roll -= entry.weight
+      if (roll <= 0) {
+        chosen = entry
+        break
+      }
     }
   }
   const level = Math.max(
@@ -104,15 +113,16 @@ export function rollContestBug(baseLevel = 20) {
  * Rustle a contest bush: usually one bug, but sometimes a second bursts out
  * too. You can only keep one, so the other flees.
  * @param {number} [baseLevel]
+ * @param {string | null} [monotype]
  * @returns {ReturnType<typeof rollContestBug>[]}
  */
-export function rollContestBugs(baseLevel = 20) {
-  const first = rollContestBug(baseLevel)
+export function rollContestBugs(baseLevel = 20, monotype = null) {
+  const first = rollContestBug(baseLevel, monotype)
   if (Math.random() >= doubleSpawnChance) return [first]
-  let second = rollContestBug(baseLevel)
+  let second = rollContestBug(baseLevel, monotype)
   // Prefer a different species so the choice actually matters.
   for (let attempt = 0; attempt < 3 && second.speciesKey === first.speciesKey; attempt++)
-    second = rollContestBug(baseLevel)
+    second = rollContestBug(baseLevel, monotype)
   return [first, second]
 }
 

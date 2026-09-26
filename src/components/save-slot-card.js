@@ -31,6 +31,13 @@ export function SaveSlotCard({ entry, active, onPlay, onNew, onDelete }) {
                 className: 'save-slot-region',
                 children: [entry.regionName ?? 'Unknown', ' · Lv.', entry.level ?? 1],
               }),
+              jsx('div', {
+                className: `save-slot-mode${entry.challenges && entry.challenges.length > 0 ? ' challenge' : ''}`,
+                children:
+                  entry.challenges && entry.challenges.length > 0
+                    ? `Challenge: ${entry.challenges.join(' · ')}`
+                    : 'Normal run',
+              }),
               jsxs('div', {
                 children: [entry.dex ?? 0, ' caught · ', entry.badges ?? 0, ' badges'],
               }),

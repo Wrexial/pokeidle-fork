@@ -46,6 +46,9 @@ export function startBossBattle(state, action) {
     battleHazards: emptyBattleHazards(),
     terrain: null,
     activePlayerPokemonIndex: 0,
+    battleParticipants: (state.party[0]?.id ?? state.playerPokemon?.id)
+      ? [state.party[0]?.id ?? state.playerPokemon?.id]
+      : [],
     bossBattle: {
       bossId,
       bossType,

@@ -829,7 +829,14 @@ function summarizeSlot(slot) {
   try {
     const saved = JSON.parse(raw.json)
     if (!saved || typeof saved !== 'object') return { slot, empty: false }
-    const regionId = typeof saved.startRegion === 'string' ? saved.startRegion : 'kanto'
+    const regionId = typeof saved.startRegion === 'string' ? saved.startRegion : 'kanto',
+      challenges = []
+    if (saved.challengeRandomizer) challenges.push('Randomizer')
+    if (saved.challengeLevelScale) challenges.push('Level Scaling')
+    if (saved.challengeNuzlocke) challenges.push('Nuzlocke')
+    if (saved.challengeRestrictCatches) challenges.push('One Catch per Route')
+    if (typeof saved.challengeMonotype === 'string' && saved.challengeMonotype)
+      challenges.push(`${saved.challengeMonotype} Monotype`)
     return {
       slot,
       empty: false,
@@ -839,6 +846,7 @@ function summarizeSlot(slot) {
       dex: Array.isArray(saved.pokedexCaught) ? saved.pokedexCaught.length : 0,
       badges: Array.isArray(saved.defeatedGyms) ? saved.defeatedGyms.length : 0,
       savedAt: typeof saved.savedAt === 'number' ? saved.savedAt : 0,
+      challenges,
     }
   } catch {
     return { slot, empty: false }

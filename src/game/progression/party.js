@@ -76,6 +76,7 @@ export function createIdleBattleState() {
     bossQueue: [],
     activePlayerPokemonIndex: 0,
     playerVolatile: null,
+    battleParticipants: [],
   }
 }
 

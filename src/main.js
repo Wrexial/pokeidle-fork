@@ -10,12 +10,13 @@ import { StarterSelect } from './components/starter-select.js'
 import { PatchNotesModal } from './components/patch-notes-modal.js'
 import { PatchNotesPage } from './components/patch-notes-page.js'
 import { GameProvider, useGame } from './game/context.js'
-import { needsSlotChoice } from './game/save.js'
+import { needsSlotChoice, suspendAutosave } from './game/save.js'
 import { clearSave } from './data/config.js'
 
 // Console helper for stuck saves: `pokemonIdleResetSave()`
 // @ts-ignore
 window.pokemonIdleResetSave = () => {
+  suspendAutosave()
   clearSave()
   window.location.reload()
 }

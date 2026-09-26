@@ -758,6 +758,42 @@ export function persistSave(state, slot = getActiveSlot() || 1) {
   }
 }
 
+/** Set while a slot switch, delete or import is in flight. */
+let autosaveSuspended = false
+
+/**
+ * Stop the background autosave while the player switches, deletes or imports a
+ * slot. Without this the idle loop keeps ticking and an autosave can land after
+ * the active slot changed (or after a slot was cleared), writing the running
+ * session over the save the player just picked. Cleared by the reload that
+ * always follows.
+ */
+export function suspendAutosave() {
+  autosaveSuspended = true
+}
+
+/** Allow autosaves again (used by tests). */
+export function resumeAutosave() {
+  autosaveSuspended = false
+}
+
+/** @returns {boolean} */
+export function isAutosaveSuspended() {
+  return autosaveSuspended
+}
+
+/**
+ * The background autosave: write the current state to its slot unless a slot
+ * operation is in flight. Returns whether a write happened.
+ * @param {GameState} state
+ * @returns {boolean}
+ */
+export function autosaveSave(state) {
+  if (autosaveSuspended) return false
+  persistSave(state)
+  return true
+}
+
 /**
  * Write an imported save blob as-is, stamping the current version so the loader
  * accepts it. Returns false when storage rejects the write.

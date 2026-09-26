@@ -3,7 +3,7 @@
 import React from 'react'
 import { jsx } from 'react/jsx-runtime'
 import { gameReducer, initialGameState } from './reducer.js'
-import { SAVED_STATE_KEYS, loadSavedState, persistSave, resolveBootSlot } from './save.js'
+import { SAVED_STATE_KEYS, autosaveSave, loadSavedState, resolveBootSlot } from './save.js'
 
 /** @type {React.Context<{ state: GameState, dispatch: (action: GameAction) => void } | null>} */
 const GameContext = React.createContext(
@@ -23,7 +23,7 @@ export function GameProvider({ children }) {
   return (
     React.useEffect(() => {
       if (state.playerPokemon && (state.phase === 'idle' || state.phase === 'victory')) {
-        persistSave(state)
+        autosaveSave(state)
       }
       // Autosave whenever the phase or any persisted slice changes. The field
       // list comes from SAVED_STATE_KEYS, so a new save field is tracked here

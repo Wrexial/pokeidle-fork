@@ -4,11 +4,12 @@
 import React from 'react'
 import { jsx } from 'react/jsx-runtime'
 import { clearSave, setActiveSlot } from '../data/config.js'
-import { listSaveSlots } from '../game/save.js'
+import { listSaveSlots, suspendAutosave } from '../game/save.js'
 import { SaveSlotCard } from './save-slot-card.js'
 
 /** @param {number} slot */
 function playSlot(slot) {
+  suspendAutosave()
   setActiveSlot(slot)
   window.location.reload()
 }
@@ -19,6 +20,7 @@ function playSlot(slot) {
  */
 function newGameInSlot(slot, empty) {
   if (!empty && !window.confirm(`Overwrite the save in Slot ${slot}? This cannot be undone.`)) return
+  suspendAutosave()
   clearSave(slot)
   setActiveSlot(slot)
   window.location.reload()

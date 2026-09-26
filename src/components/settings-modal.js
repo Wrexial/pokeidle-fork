@@ -5,7 +5,7 @@ import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
 import { clearSave } from '../data/config.js'
 import { unlockAudio } from '../game/audio.js'
 import { useGame } from '../game/context.js'
-import { decodeShareCode, encodeShareCode, repairSave, serializeSave, writeImportedSave } from '../game/save.js'
+import { decodeShareCode, encodeShareCode, repairSave, serializeSave, suspendAutosave, writeImportedSave } from '../game/save.js'
 import { MonotypeSelect } from './monotype-select.js'
 import { SaveSlotsPanel } from './save-slots.js'
 
@@ -21,7 +21,9 @@ export function SettingsModal({ onClose }) {
   /** @type {React.RefObject<HTMLInputElement>} */
   const fileInputRef = React.useRef(/** @type {any} */ (null))
   function resetSave() {
-    ;(clearSave(), window.location.reload())
+    suspendAutosave()
+    clearSave()
+    window.location.reload()
   }
   function exportSave() {
     if (!state.playerPokemon) return
@@ -54,8 +56,9 @@ export function SettingsModal({ onClose }) {
         setImportError('That file is not a valid Pokémon Idle save.')
         return
       }
-      // Stop the idle loop so an autosave cannot overwrite the import before
-      // the reload finishes.
+      // Stop the idle loop and the autosave so neither can overwrite the
+      // import before the reload finishes.
+      suspendAutosave()
       if (!state.paused) dispatch({ type: 'TOGGLE_PAUSE' })
       // repairSave above already validated the shape, and writeImportedSave
       // stamps the current version, so a save from another build is upgraded
@@ -96,8 +99,9 @@ export function SettingsModal({ onClose }) {
       setShareStatus('That share code is not a valid Pokemon Idle save.')
       return
     }
-    // Stop the idle loop so an autosave cannot overwrite the import before
-    // the reload finishes.
+    // Stop the idle loop and the autosave so neither can overwrite the import
+    // before the reload finishes.
+    suspendAutosave()
     if (!state.paused) dispatch({ type: 'TOGGLE_PAUSE' })
     if (!writeImportedSave(/** @type {any} */ (parsed))) {
       setShareStatus('Could not write the save to browser storage.')

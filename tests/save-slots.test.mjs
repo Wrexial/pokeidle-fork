@@ -23,11 +23,15 @@ globalThis.localStorage = {
 const { ACTIVE_SLOT_KEY, SAVE_KEY, SAVE_SLOT_COUNT, clearSave, getActiveSlot, saveSlotKey, setActiveSlot } =
   await import('../src/data/config.js')
 const {
+  autosaveSave,
+  isAutosaveSuspended,
   listSaveSlots,
   loadSavedState,
   needsSlotChoice,
   persistSave,
   resolveBootSlot,
+  resumeAutosave,
+  suspendAutosave,
 } = await import('../src/game/save.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 
@@ -89,6 +93,27 @@ test('a legacy single save migrates into slot 1', () => {
   const state = loadSavedState(1)
   assert.ok(state)
   assert.equal(state.playerPokemon.speciesKey, 'bulbasaur')
+})
+
+test('a suspended autosave cannot overwrite a chosen slot', () => {
+  store.clear()
+  persistSave(startedSave('charmander'), 1)
+  persistSave(startedSave('squirtle'), 2)
+  // The player picks slot 1; the running slot-2 session must not be written
+  // over it before the reload.
+  setActiveSlot(1)
+  suspendAutosave()
+  assert.equal(isAutosaveSuspended(), true)
+  assert.equal(autosaveSave(startedSave('bulbasaur')), false, 'autosave is skipped')
+  assert.equal(
+    loadSavedState(1).playerPokemon.speciesKey,
+    'charmander',
+    'the picked slot is untouched'
+  )
+  resumeAutosave()
+  assert.equal(isAutosaveSuspended(), false)
+  assert.equal(autosaveSave(startedSave('bulbasaur')), true, 'autosaves resume')
+  assert.equal(loadSavedState(1).playerPokemon.speciesKey, 'bulbasaur')
 })
 
 test('listSaveSlots summarises each slot', () => {

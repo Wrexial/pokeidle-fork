@@ -3,6 +3,7 @@
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { clearSave } from '../data/config.js'
+import { suspendAutosave } from '../game/save.js'
 
 /**
  * Catches render errors anywhere below it (e.g. an old save that references
@@ -35,6 +36,7 @@ export class ErrorBoundary extends React.Component {
   }
 
   reset() {
+    suspendAutosave()
     clearSave()
     window.location.reload()
   }

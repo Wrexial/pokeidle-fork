@@ -127,7 +127,7 @@ export function IceSlideScene() {
                   className: 'ice-grid',
                   style: {
                     gridTemplateColumns: `repeat(${room.width}, 1fr)`,
-                    width: `min(92vw, ${room.width * 44}px)`,
+                    width: `min(92vw, ${room.width * 44}px, 330px)`,
                   },
                   children: room.rows.flatMap((row, rowIndex) =>
                     [...row].map((cell, colIndex) => {
@@ -167,24 +167,29 @@ export function IceSlideScene() {
                     })
                   ),
                 }),
-                jsx('div', {
-                  className: 'ice-controls',
-                  children: ARROWS.map(([direction, glyph, label]) =>
-                    jsx(
-                      'button',
-                      {
-                        className: `ice-arrow ice-arrow-${direction.toLowerCase()}`,
-                        onClick: () => attempt(direction),
-                        'aria-label': `Slide ${label}`,
-                        children: glyph,
-                      },
-                      direction
-                    )
-                  ),
-                }),
-                jsx('span', {
-                  className: 'ice-hint',
-                  children: 'Slides stop at walls and boulders \u2014 reach the snowflake',
+                jsxs('div', {
+                  className: 'ice-side',
+                  children: [
+                    jsx('div', {
+                      className: 'ice-controls',
+                      children: ARROWS.map(([direction, glyph, label]) =>
+                        jsx(
+                          'button',
+                          {
+                            className: `ice-arrow ice-arrow-${direction.toLowerCase()}`,
+                            onClick: () => attempt(direction),
+                            'aria-label': `Slide ${label}`,
+                            children: glyph,
+                          },
+                          direction
+                        )
+                      ),
+                    }),
+                    jsx('span', {
+                      className: 'ice-hint',
+                      children: 'Slides stop at walls and boulders \u2014 reach the snowflake',
+                    }),
+                  ],
                 }),
               ],
             }),

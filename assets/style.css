@@ -12448,10 +12448,19 @@ img {
 .ruins-wrap,
 .ice-wrap {
     display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    width: 100%
+}
+
+.ice-side {
+    display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
-    width: 100%
+    gap: 8px;
+    width: 168px
 }
 
 .ruins-grid {
@@ -12500,7 +12509,8 @@ img {
 .ruins-hint,
 .ice-hint {
     font-size: 8px;
-    color: #cbbf9c
+    color: #cbbf9c;
+    text-align: center
 }
 
 .ruins-summary,
@@ -12565,8 +12575,8 @@ img {
 
 .ice-controls {
     display: grid;
-    grid-template-columns: repeat(3, 56px);
-    grid-template-rows: repeat(2, 56px);
+    grid-template-columns: repeat(3, 48px);
+    grid-template-rows: repeat(2, 48px);
     gap: 6px;
     justify-content: center
 }

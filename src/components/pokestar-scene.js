@@ -5,6 +5,7 @@
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { useGame } from '../game/context.js'
+import { playSfx } from '../game/audio.js'
 import { pickPokestarShots, pokestarPrize } from '../game/minigames.js'
 import { MinigameRewardScreen, useMinigameClaim } from './minigame-reward.js'
 
@@ -28,6 +29,7 @@ export function PokestarScene() {
   /** @param {any} take */
   function choose(take) {
     if (phase !== 'choose') return
+    if (state.sfxEnabled) playSfx(take.score >= 3 ? 'great' : take.score >= 2 ? 'good' : 'miss')
     setChosen(take)
     setScore((value) => value + take.score)
     setPhase('reveal')

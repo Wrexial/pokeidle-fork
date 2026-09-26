@@ -5,6 +5,7 @@
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { useGame } from '../game/context.js'
+import { playSfx } from '../game/audio.js'
 import {
   LIGHTS_OUT_SIZE,
   createLightsOut,
@@ -32,7 +33,10 @@ export function LightsOutScene() {
       nextMoves = moves + 1
     setGrid(next)
     setMoves(nextMoves)
-    if (lightsSolved(next)) setPrize(lightsOutPrize(nextMoves, true))
+    if (lightsSolved(next)) {
+      if (state.sfxEnabled) playSfx('win')
+      setPrize(lightsOutPrize(nextMoves, true))
+    } else if (state.sfxEnabled) playSfx('tap')
   }
 
   function giveUp() {

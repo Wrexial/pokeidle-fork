@@ -6,6 +6,7 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
+import { playSfx } from '../game/audio.js'
 import {
   POKE_RADAR_SIZE,
   POKE_RADAR_START_LENGTH,
@@ -78,6 +79,7 @@ export function PokeRadarScene() {
   function tap(index) {
     if (phase !== 'input') return
     if (sequence[inputIndex] !== index) {
+      if (state.sfxEnabled) playSfx('miss')
       finish(round, 'The chain broke!')
       return
     }
@@ -85,13 +87,17 @@ export function PokeRadarScene() {
     setHighlight(index)
     setTimeout(() => setHighlight(-1), 140)
     if (next >= sequence.length) {
+      if (state.sfxEnabled) playSfx('great')
       const nextRound = round + 1
       setRound(nextRound)
       setMessage(`Chain ${nextRound}! Get ready\u2026`)
       setInputIndex(0)
       setSequence(radarSequence(POKE_RADAR_START_LENGTH + nextRound))
       setPhase('showing')
-    } else setInputIndex(next)
+    } else {
+      if (state.sfxEnabled) playSfx('tap')
+      setInputIndex(next)
+    }
   }
 
   /** @param {number} chainRounds @param {string} [label] */

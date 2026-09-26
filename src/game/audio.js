@@ -66,7 +66,7 @@ function playTone(frequency, start, duration, type = 'square', gain = 0.05) {
 }
 
 /** @type {Record<string, [number, number, number][]>} */
-const SFX = {
+export const SFX = {
   notify: [
     [880, 0, 0.08],
     [1174.66, 0.08, 0.14],
@@ -118,6 +118,45 @@ const SFX = {
     [146.83, 0.08, 0.16],
     [110, 0.14, 0.24],
     [73.42, 0.22, 0.42],
+  ],
+  // Minigame feedback: a soft tick for a UI action, positive / negative
+  // stingers for a good or bad result, and a fanfare for finishing.
+  tap: [[392, 0, 0.04]],
+  good: [
+    [659.25, 0, 0.06],
+    [987.77, 0.06, 0.12],
+  ],
+  great: [
+    [659.25, 0, 0.05],
+    [987.77, 0.05, 0.05],
+    [1318.51, 0.1, 0.16],
+  ],
+  combo: [
+    [880, 0, 0.04],
+    [1174.66, 0.04, 0.04],
+    [1567.98, 0.08, 0.16],
+  ],
+  miss: [
+    [293.66, 0, 0.07],
+    [220, 0.07, 0.16],
+  ],
+  win: [
+    [523.25, 0, 0.09],
+    [659.25, 0.09, 0.09],
+    [783.99, 0.18, 0.09],
+    [1046.5, 0.27, 0.3],
+  ],
+  coin: [
+    [1046.5, 0, 0.05],
+    [1318.51, 0.05, 0.12],
+  ],
+  dig: [
+    [164.81, 0, 0.05],
+    [123.47, 0.05, 0.12],
+  ],
+  splash: [
+    [196, 0, 0.07],
+    [261.63, 0.05, 0.1],
   ],
 }
 

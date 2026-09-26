@@ -7,6 +7,7 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
+import { playSfx } from '../game/audio.js'
 import {
   DYNAMAX_STAGES,
   createOpponent,
@@ -63,6 +64,7 @@ export function DynamaxAdventuresScene() {
       outcome = simulateBattle(ally, enemy)
     setSquad(nextSquad)
     if (outcome.won) {
+      if (state.sfxEnabled) playSfx('good')
       const nextStage = stage + 1
       if (nextStage >= DYNAMAX_STAGES) {
         // One last breather before the legendary.
@@ -83,6 +85,7 @@ export function DynamaxAdventuresScene() {
     )
     if (nextIndex === -1) finish(stage, !1)
     else {
+      if (state.sfxEnabled) playSfx('miss')
       setActiveIndex(nextIndex)
       setLog(`${ally.name} went down. ${nextSquad[nextIndex].name} takes over!`)
     }
@@ -96,6 +99,7 @@ export function DynamaxAdventuresScene() {
       outcome = simulateBattle(ally, enemy)
     setSquad(nextSquad)
     if (outcome.won) {
+      if (state.sfxEnabled) playSfx('win')
       setCaught({ speciesKey: boss.speciesKey })
       dispatch({
         type: 'CATCH_POKEMON',
@@ -104,6 +108,7 @@ export function DynamaxAdventuresScene() {
       dispatch({ type: 'MARK_CAUGHT', payload: { speciesKey: boss.speciesKey } })
       finish(DYNAMAX_STAGES, !0)
     } else {
+      if (state.sfxEnabled) playSfx('miss')
       const nextIndex = nextSquad.findIndex(
         (member, index) => index !== activeIndex && member.currentHp > 0
       )

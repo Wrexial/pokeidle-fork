@@ -5,6 +5,7 @@
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { useGame } from '../game/context.js'
+import { playSfx } from '../game/audio.js'
 import {
   QUIZ_LIVES,
   QUIZ_QUESTIONS,
@@ -53,6 +54,7 @@ export function AcademyQuizScene() {
     const correct = choice === question.correct
     setSelected(choice)
     setPhase('reveal')
+    if (state.sfxEnabled) playSfx(correct ? 'good' : 'miss')
     if (correct) setScore((value) => value + 1)
     else setLives((value) => value - 1)
   }

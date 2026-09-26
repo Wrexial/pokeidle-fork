@@ -5,6 +5,7 @@
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { useGame } from '../game/context.js'
+import { playSfx } from '../game/audio.js'
 import {
   MUSICAL_ARROWS,
   MUSICAL_LANES,
@@ -81,6 +82,7 @@ export function MusicalScene() {
       }
       setElapsed(now)
       if (missed) {
+        if (state.sfxEnabled) playSfx('miss')
         setJudged({ ...judgedRef.current })
         setCombo(comboRef.current)
         showFeedback('miss', 0)
@@ -117,6 +119,8 @@ export function MusicalScene() {
     }
     if (!best) return
     const { grade, points } = judgeMusicalHit(best.delta)
+    if (state.sfxEnabled)
+      playSfx(grade === 'perfect' ? 'great' : grade === 'miss' ? 'miss' : 'good')
     judgedRef.current[best.note.id] = grade
     scoreRef.current += points
     if (grade === 'miss') comboRef.current = 0

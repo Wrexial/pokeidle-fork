@@ -7,6 +7,7 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { completedGenerations, mapData, pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
+import { playSfx } from '../game/audio.js'
 import { createBattlePokemon } from '../game/combat.js'
 import {
   ACTIVITY_ATTEMPTS,
@@ -203,12 +204,14 @@ export function RouteActivityScene() {
       nextAttempts = attemptsLeft - 1
     setAttemptsLeft(nextAttempts)
     if (!hit) {
+      if (state.sfxEnabled) playSfx('miss')
       setMessage(
         activity.mode === 'encounter' ? 'The Pokemon got away...' : 'You found nothing.'
       )
       setStage(nextAttempts <= 0 ? 'done' : 'result')
       return
     }
+    if (state.sfxEnabled) playSfx(ultra || perfect ? 'great' : 'good')
     if (activity.mode === 'encounter') {
       // A headbutted tree sometimes shakes out a second Pokemon that slips away
       // while you deal with the first.

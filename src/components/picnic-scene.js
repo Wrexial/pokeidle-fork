@@ -7,6 +7,7 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { completedGenerations, mapData, pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
+import { playSfx } from '../game/audio.js'
 import { createBattlePokemon } from '../game/combat.js'
 import {
   PICNIC_BREAD,
@@ -85,6 +86,7 @@ export function PicnicScene() {
   /** @param {string} id */
   function chooseIngredient(id) {
     if (stage !== 'choose') return
+    if (state.sfxEnabled) playSfx('tap')
     setPicks((current) => {
       if (current.includes(id)) return current.filter((entry) => entry !== id)
       if (current.length >= PICNIC_PICKS) return current
@@ -142,6 +144,7 @@ export function PicnicScene() {
       isShiny,
       type,
     })
+    if (state.sfxEnabled) playSfx('win')
     setStage('reward')
   }
 
@@ -159,6 +162,7 @@ export function PicnicScene() {
     setLayers([...layersRef.current])
     setScore(scoreRef.current)
     setLastGrade(result.grade)
+    if (state.sfxEnabled) playSfx(result.topple ? 'miss' : result.grade === 'perfect' ? 'great' : 'good')
     if (result.topple) {
       finishedRef.current = true
       setStage('failed')

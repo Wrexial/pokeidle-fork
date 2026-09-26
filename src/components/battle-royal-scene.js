@@ -7,6 +7,7 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
+import { playSfx } from '../game/audio.js'
 import {
   battleRoyalOpponent,
   battleRoyalPrize,
@@ -120,6 +121,7 @@ export function BattleRoyalScene() {
           outcome.turns === 1 ? '' : 's'
         }! The party recovers a little.`
       )
+      if (state.sfxEnabled) playSfx('good')
       setPhase('between')
       return
     }
@@ -129,6 +131,7 @@ export function BattleRoyalScene() {
     )
     setSquad(nextSquad)
     setLastBattle({ ally: snapshot(ally), enemy: snapshot(enemy), won: false, turns: outcome.turns })
+    if (state.sfxEnabled) playSfx('miss')
     if (nextIndex === -1) finish(wave)
     else {
       setActiveIndex(nextIndex)
@@ -145,6 +148,7 @@ export function BattleRoyalScene() {
   function finish(waves) {
     if (settledRef.current) return
     settledRef.current = !0
+    if (state.sfxEnabled) playSfx('coin')
     const prize = battleRoyalPrize(waves)
     setResult(prize)
     setLog(`${prize.label} \u2014 ${waves} wave${waves === 1 ? '' : 's'} cleared.`)

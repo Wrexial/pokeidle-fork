@@ -5,6 +5,7 @@
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { useGame } from '../game/context.js'
+import { playSfx } from '../game/audio.js'
 import { ItemIcon } from './item-icon.js'
 import {
   auctionAppraisal,
@@ -34,6 +35,7 @@ export function AuctionHouseScene() {
     if (result !== null || !canAuctionBid(auction, state.money)) return
     const next = placeAuctionBid(auction)
     setAuction(next)
+    if (state.sfxEnabled) playSfx(next.won ? 'win' : 'tap')
     if (next.won) {
       dispatch({
         type: 'CLAIM_MINIGAME_REWARD',
@@ -43,7 +45,13 @@ export function AuctionHouseScene() {
     }
   }
 
+  function pass() {
+    if (state.sfxEnabled) playSfx('miss')
+    setResult('lost')
+  }
+
   function nextLot() {
+    if (state.sfxEnabled) playSfx('tap')
     setAuction(createAuction(rollAuctionLot()))
     setResult(null)
   }
@@ -170,7 +178,7 @@ export function AuctionHouseScene() {
                 children: [
                   jsx('button', {
                     className: 'move-panel-btn cancel',
-                    onClick: () => setResult('lost'),
+                    onClick: pass,
                     children: 'PASS',
                   }),
                   jsx('button', {

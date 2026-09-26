@@ -38,6 +38,7 @@ export const CHANGELOG = [
             'The Safari Zone is now four areas \u2014 Center, East, North and West \u2014 each with its own Pok\u00e9mon distribution and advertised rare finds (Tauros, Kangaskhan and Chansey in the Center; Dratini, Dragonair and Squirtle in the East; Scyther, Pinsir and Charmander in the North; Tangela, Bulbasaur and Exeggcute in the West). Switch areas freely between encounters, and Safari finds roll shiny at twice the usual odds',
             'The Safari Zone\u2019s RUN button now darts straight back into the grass for the next Pokemon instead of stopping on a result screen',
             'The Safari Zone\u2019s area picker now has a LEAVE option, so a run can end without spending the rest of the Safari Balls',
+            'Minigames now react with sound: a soft tick for a tap, slide or rotation, a positive chime for a match, correct answer, good note or clean cast, a bigger fanfare for a perfect, combo or solved result, and a buzz for a miss or wrong answer (with the Sound Effects setting on)',
           ],
         },
         {

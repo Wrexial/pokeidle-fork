@@ -5,6 +5,7 @@
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { useGame } from '../game/context.js'
+import { playSfx } from '../game/audio.js'
 import {
   canSlide,
   createSlidingPuzzle,
@@ -19,7 +20,7 @@ import { MinigameRewardScreen, useMinigameClaim } from './minigame-reward.js'
 const ARROW_DIRECTIONS = { ArrowUp: 'N', ArrowDown: 'S', ArrowLeft: 'W', ArrowRight: 'E' }
 
 export function RuinsPuzzleScene() {
-  const { dispatch } = useGame(),
+  const { state, dispatch } = useGame(),
     [board, setBoard] = React.useState(() => createSlidingPuzzle()),
     [moves, setMoves] = React.useState(0),
     [prize, setPrize] = React.useState(
@@ -33,12 +34,16 @@ export function RuinsPuzzleScene() {
     if (prize) return
     const next = slideTile(board, index, size)
     if (next === board) return
+    if (state.sfxEnabled) playSfx('tap')
     setBoard(next)
     setMoves(moves + 1)
   }
 
   React.useEffect(() => {
-    if (!prize && isSlidingSolved(board)) setPrize(slidingPrize(moves, true))
+    if (!prize && isSlidingSolved(board)) {
+      if (state.sfxEnabled) playSfx('win')
+      setPrize(slidingPrize(moves, true))
+    }
   }, [board, prize, moves])
 
   React.useEffect(() => {

@@ -5,6 +5,7 @@
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { useGame } from '../game/context.js'
+import { playSfx } from '../game/audio.js'
 import {
   CURRY_COOK_MS,
   CURRY_INGREDIENTS,
@@ -75,6 +76,7 @@ export function CurryScene() {
         clearInterval(id)
         const quality = Math.min(1, inBandRef.current / CURRY_COOK_MS),
           score = curryScore(matchedRef.current, quality)
+        if (state.sfxEnabled) playSfx(score >= 80 ? 'win' : score >= 50 ? 'good' : 'miss')
         setPrize(curryPrize(score))
         setPhase('done')
       }
@@ -85,6 +87,7 @@ export function CurryScene() {
   /** @param {typeof CURRY_INGREDIENTS[number]} entry */
   function chooseIngredient(entry) {
     if (phase !== 'choose') return
+    if (state.sfxEnabled) playSfx('tap')
     setIngredient(entry)
     matchedRef.current = entry.flavor === request
     setCountdown(3)

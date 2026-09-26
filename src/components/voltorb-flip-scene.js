@@ -60,10 +60,11 @@ export function VoltorbFlipScene() {
       if (state.sfxEnabled) playSfx('explosion')
       setPhase('exploded')
     } else if (boardCleared(next)) {
+      if (state.sfxEnabled) playSfx('win')
       setBanked((value) => value + voltorbBoardCoins(next))
       setMaxLevel((value) => Math.max(value, next.level))
       setPhase('cleared')
-    }
+    } else if (state.sfxEnabled) playSfx('tap')
   }
 
   /** @param {React.MouseEvent} event @param {number} index */

@@ -10,6 +10,7 @@ import { jsx, jsxs } from 'react/jsx-runtime'
 import { completedGenerations, pokemonSpecies } from '../data/gameData.js'
 import { genderSymbol } from '../game/breeding.js'
 import { useGame } from '../game/context.js'
+import { playSfx } from '../game/audio.js'
 import { checkShinyOdds, shinyOddsForSpecies } from '../game/progression.js'
 import {
   SAFARI_AREAS,
@@ -103,6 +104,7 @@ export function SafariScene() {
     const timer = setTimeout(
       () => {
         if (safariThrowsBall(pokemon.speciesKey, modifiers)) {
+          if (state.sfxEnabled) playSfx('catch')
           dispatch({
             type: 'CATCH_POKEMON',
             payload: {
@@ -120,6 +122,7 @@ export function SafariScene() {
           return
         }
         if (safariFlees(pokemon.speciesKey, modifiers)) {
+          if (state.sfxEnabled) playSfx('miss')
           setOutcome('fled')
           setMessage(`${name} broke free and fled!`)
           setPhase('result')
@@ -136,6 +139,7 @@ export function SafariScene() {
 
   function throwBall() {
     if (phase !== 'encounter' || !pokemon || ballsLeft <= 0) return
+    if (state.sfxEnabled) playSfx('splash')
     setBallsLeft((left) => left - 1)
     setPhase('throwing')
     setMessage('You threw a Safari Ball!')

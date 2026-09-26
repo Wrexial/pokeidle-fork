@@ -5,6 +5,7 @@
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { useGame } from '../game/context.js'
+import { playSfx } from '../game/audio.js'
 import {
   connectionsFor,
   createFactoryPuzzle,
@@ -29,7 +30,10 @@ export function PokeballFactoryScene() {
       connectionsFor(puzzle.tiles[outlet].type, puzzle.tiles[outlet].rot).includes('E')
 
   React.useEffect(() => {
-    if (solved && !prize) setPrize(factoryPrize(moves, true))
+    if (solved && !prize) {
+      if (state.sfxEnabled) playSfx('win')
+      setPrize(factoryPrize(moves, true))
+    }
   }, [solved, moves, prize])
 
   /** @param {number} index */
@@ -37,6 +41,7 @@ export function PokeballFactoryScene() {
     if (prize || solved) return
     const tile = puzzle.tiles[index]
     if (!tile || tile.fixed) return
+    if (state.sfxEnabled) playSfx('tap')
     setPuzzle(rotateFactoryTile(puzzle, index))
     setMoves(moves + 1)
   }

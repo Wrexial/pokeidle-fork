@@ -6,6 +6,7 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { moveData } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
+import { playSfx } from '../game/audio.js'
 import {
   CONTEST_ROUNDS,
   CONTEST_RIVALS,
@@ -51,6 +52,8 @@ export function ContestScene() {
     const result = contestAppeal(moveId, theme.id, lastMove),
       move = moveData[moveId],
       name = move?.name ?? moveId
+    if (state.sfxEnabled)
+      playSfx(result.repeated ? 'miss' : result.onTheme && result.combo ? 'great' : 'good')
     setScore((value) => value + result.appeal)
     setLastMove({ moveId, type: result.type })
     setRivals((current) =>

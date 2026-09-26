@@ -5,6 +5,7 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
+import { playSfx } from '../game/audio.js'
 import { createMemoryDeck, memoryPrize } from '../game/minigames.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
 import { MinigameRewardScreen, useMinigameClaim } from './minigame-reward.js'
@@ -51,9 +52,13 @@ export function MemoryScene() {
       )
       setFirst(-1)
       const matchedCount = cards.filter((entry) => entry.matched).length + 2
-      if (matchedCount >= cards.length) setPrize(memoryPrize(attempts))
+      if (matchedCount >= cards.length) {
+        if (state.sfxEnabled) playSfx('win')
+        setPrize(memoryPrize(attempts))
+      } else if (state.sfxEnabled) playSfx('good')
       return
     }
+    if (state.sfxEnabled) playSfx('miss')
     lockRef.current = true
     setTimeout(() => {
       setCards((current) =>

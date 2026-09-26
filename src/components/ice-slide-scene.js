@@ -6,6 +6,7 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
+import { playSfx } from '../game/audio.js'
 import {
   ICE_SLIDE_ROOMS,
   ICE_SLIDE_TOTAL_PAR,
@@ -47,15 +48,18 @@ export function IceSlideScene() {
     if (landing === position) return
     const nextMoves = totalMoves + 1,
       nextRoomMoves = roomMoves + 1
+    if (state.sfxEnabled) playSfx('tap')
     setTotalMoves(nextMoves)
     setRoomMoves(nextRoomMoves)
     setPosition(landing)
     if (!iceSlideSolved(room, landing)) return
     // Reached the exit: move on, or finish the temple.
     if (roomIndex >= ICE_SLIDE_ROOMS.length - 1) {
+      if (state.sfxEnabled) playSfx('win')
       setCleared(cleared + 1)
       setPrize(iceSlidePrize(cleared + 1, nextMoves, ICE_SLIDE_TOTAL_PAR, true))
     } else {
+      if (state.sfxEnabled) playSfx('good')
       const next = ICE_SLIDE_ROOMS[roomIndex + 1]
       setCleared(cleared + 1)
       setRoomIndex(roomIndex + 1)

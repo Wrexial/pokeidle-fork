@@ -5,6 +5,7 @@
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { useGame } from '../game/context.js'
+import { playSfx } from '../game/audio.js'
 import {
   MATCH3_MOVES,
   MATCH3_SIZE,
@@ -50,9 +51,11 @@ export function PuzzleLeagueScene() {
     const result = tryMatch3Swap(board, selected, index)
     setSelected(-1)
     if (!result.valid) {
+      if (state.sfxEnabled) playSfx('miss')
       setMessage('No match there \u2014 try another swap.')
       return
     }
+    if (state.sfxEnabled) playSfx(result.cascade > 1 ? 'combo' : 'good')
     setBoard(result.board)
     const nextScore = score + result.score
     setScore(nextScore)

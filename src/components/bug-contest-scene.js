@@ -9,6 +9,7 @@ import { jsx, jsxs } from 'react/jsx-runtime'
 import { pokemonSpecies } from '../data/gameData.js'
 import { genderSymbol } from '../game/breeding.js'
 import { useGame } from '../game/context.js'
+import { playSfx } from '../game/audio.js'
 import {
   BUG_CONTEST_BUSHES,
   BUG_CONTEST_RUSTLES,
@@ -57,6 +58,7 @@ export function BugContestScene() {
           name = species?.name ?? bug.speciesKey,
           aww = fledName ? ` The other ${fledName} slipped away\u2026 awwh!` : ''
         if (throwNetBall(bug.speciesKey)) {
+          if (state.sfxEnabled) playSfx('catch')
           dispatch({
             type: 'CATCH_POKEMON',
             payload: { speciesKey: bug.speciesKey, level: bug.level, gender: bug.gender },
@@ -72,6 +74,7 @@ export function BugContestScene() {
           setStep('revealed')
           return
         } else {
+          if (state.sfxEnabled) playSfx('miss')
           setMadeCatch(!1)
           setMessage(`${name} broke free and scurried into the grass!${aww}`)
         }
@@ -87,6 +90,7 @@ export function BugContestScene() {
   /** @param {number} index */
   function rustleBush(index) {
     if (step !== 'bushes') return
+    if (state.sfxEnabled) playSfx('tap')
     const nextBugs = rollContestBugs(baseLevel)
     setBugs(nextBugs)
     setSelectedBug(0)
@@ -104,6 +108,7 @@ export function BugContestScene() {
 
   function throwBall() {
     if (!bug || step !== 'revealed') return
+    if (state.sfxEnabled) playSfx('splash')
     // Going for one bug scares the other off.
     const other = bugs.find((_, index) => index !== selectedBug)
     if (other) {

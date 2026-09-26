@@ -5,6 +5,7 @@
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { useGame } from '../game/context.js'
+import { playSfx } from '../game/audio.js'
 import {
   POKEATHLON_ATTEMPTS,
   POKEATHLON_EVENT_MAX,
@@ -157,6 +158,7 @@ export function PokeathlonScene() {
 
   /** @param {number} score */
   function finishEvent(score) {
+    if (state.sfxEnabled) playSfx(score >= 80 ? 'great' : score >= 50 ? 'good' : 'miss')
     setScores((current) => [...current, score])
     setPhase('between')
   }

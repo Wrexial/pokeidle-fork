@@ -7,6 +7,7 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
+import { playSfx } from '../game/audio.js'
 import {
   SLOT_PAYLINES,
   SLOT_REELS,
@@ -70,6 +71,7 @@ export function GameCornerScene() {
 
   function spin() {
     if (!canSpin) return
+    if (state.sfxEnabled) playSfx('tap')
     timers.current.forEach((timer) => clearTimeout(timer))
     timers.current = []
     const result = spinSlots()
@@ -103,6 +105,8 @@ export function GameCornerScene() {
             jackpot: result.jackpot,
             lineCount: result.wins.length,
           })
+          if (state.sfxEnabled)
+            playSfx(result.payout > 0 ? (result.jackpot ? 'win' : 'coin') : 'miss')
           if (result.payout > 0)
             dispatch({
               type: 'CLAIM_MINIGAME_REWARD',

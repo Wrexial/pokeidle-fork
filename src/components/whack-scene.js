@@ -5,6 +5,7 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
+import { playSfx } from '../game/audio.js'
 import {
   WHACK_CELLS,
   WHACK_DURATION_MS,
@@ -63,6 +64,7 @@ export function WhackScene() {
     if (prize) return
     const current = activeRef.current
     if (!current || current.index !== index) return
+    if (state.sfxEnabled) playSfx(current.kind === 'zubat' ? 'miss' : 'good')
     scoreRef.current = Math.max(0, scoreRef.current + current.points)
     setScore(scoreRef.current)
     activeRef.current = null

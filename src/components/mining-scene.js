@@ -11,6 +11,7 @@ import {
   rollMiningReward,
 } from '../game/minigames.js'
 import { useGame } from '../game/context.js'
+import { playSfx } from '../game/audio.js'
 import { MinigameRewardScreen, useMinigameClaim } from './minigame-reward.js'
 
 /**
@@ -49,6 +50,7 @@ export function MiningScene() {
     nextDug.add(index)
     setDug(nextDug)
     const reward = grid[index]
+    if (state.sfxEnabled) playSfx(reward ? 'coin' : 'dig')
     if (reward) setFound((current) => [...current, reward])
   }
 

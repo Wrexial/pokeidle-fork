@@ -83,6 +83,7 @@ export const CHANGELOG = [
             'The Bag, Poke Mart, Reward Shop and Auction House now show a proper item sprite next to every item instead of a blank square',
             'The Bag uses category tabs (Poke Balls, Medicine, Candies, Items, Held Items, Valuables) instead of next/previous arrows, so you can jump straight to the pocket you want',
             'Selling moved to the Poke Mart: each mart now has a BUY / SELL toggle, so you sell your items where you shop instead of from the Bag',
+            'The Weather Institute gift now sits on Hoenn Route 119 (where it belongs) and the invisible Kecleon static has moved to Route 120',
           ],
         },
         {

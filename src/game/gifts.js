@@ -44,7 +44,7 @@ export const GIFTS = [
   },
   {
     id: 'gift-hoenn-castform',
-    location: 'hoenn-fallarbor-town',
+    location: 'hoenn-route-119',
     name: 'Weather Institute',
     description: 'The researchers give you the Castform they study.',
     pokemon: { speciesKey: 'castform', level: 25 },
@@ -136,7 +136,7 @@ export const STATIC_ENCOUNTERS = [
   },
   {
     id: 'static-hoenn-kecleon',
-    location: 'hoenn-route-119',
+    location: 'hoenn-route-120',
     speciesKey: 'kecleon',
     level: 25,
     name: 'Invisible Pokemon',

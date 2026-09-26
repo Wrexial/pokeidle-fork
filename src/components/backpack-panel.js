@@ -25,6 +25,13 @@ export function BackpackPanel() {
     className: 'backpack-panel',
     children: [
       jsx('div', {
+        className: 'backpack-header',
+        children: jsx('span', {
+          className: 'backpack-title',
+          children: 'Backpack',
+        }),
+      }),
+      jsx('div', {
         className: 'tab-bar backpack-tab-bar',
         children: BACKPACK_TABS.map((tabDef) =>
           jsx(

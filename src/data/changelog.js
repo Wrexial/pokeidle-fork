@@ -136,7 +136,8 @@ export const CHANGELOG = [
             'Party order on phones: the mobile party panel now has up/down buttons on each Pokemon, since touch devices have no drag-and-drop',
             'The Town Map supports two-finger pinch-to-zoom on touch screens and its +/−/fit/centre buttons are touch-sized on phones',
             'Mobile layouts no longer run under the browser\u2019s address bar: the dynamic-viewport height override was declared before the old fallback, so the bottom of the Map and item tabs is reachable again',
-            'The Backpack is now its own section, opened from the new 🎒 button in the battle top bar: it holds the League badges / Elite Four, Pokedex, Bank (money + Reward Shop), Items (bag) and Records as tabs, while the side panel is just the Location again \u2014 no more permanent bag or League tab',
+            'The Backpack is a new section under the Location panel (where the bag used to be): it holds the League badges / Elite Four, Pokedex, Bank (money + Reward Shop), Items (bag) and Records as tabs, so the League no longer shares a tab with the location',
+            'On 21:9 and wider screens the party and box now stack vertically instead of splitting into two side-by-side columns',
           ],
         },
         {

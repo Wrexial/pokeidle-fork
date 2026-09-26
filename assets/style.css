@@ -8865,35 +8865,8 @@ img {
     }
 }
 
-/* On 21:9 / 32:9 the side panels are very wide, so split each into two columns
-   instead of one tall, stretched column with empty margins. */
-@media (min-aspect-ratio: 21/9) {
-    .side-panel.left-panel {
-        display: grid;
-        grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr);
-        grid-template-rows: auto minmax(0,1fr);
-        align-items: stretch
-    }
-
-    .side-panel.left-panel > .panel-header {
-        grid-column: 1;
-        grid-row: 1
-    }
-
-    .side-panel.left-panel > .party-content {
-        grid-column: 1;
-        grid-row: 2;
-        overflow-y: auto;
-        scrollbar-width: thin;
-        scrollbar-color: #685040 #1a1208
-    }
-
-    .side-panel.left-panel > .box-container {
-        grid-column: 2;
-        grid-row: 1 / span 2
-    }
-
-}
+/* Party and Box stack vertically on 21:9 / 32:9 too, like the normal
+   column layout, rather than splitting into two side-by-side columns. */
 
 /* --- Tabbed layout (phones, tablets and short viewports) --- */
 
@@ -8990,6 +8963,10 @@ img {
 
 .mobile-location-wrapper .panel-content {
     flex: 1
+}
+
+.mobile-location-wrapper .backpack-panel {
+    height: clamp(280px,45vh,460px)
 }
 
 .mobile-tab-content .town-map {
@@ -13055,29 +13032,31 @@ img {
 /* Right panel: Location (Area / League) and the Backpack (Dex / Bank /
    Items / Records) sub-tabs. */
 .backpack-panel {
-    flex: 1;
+    flex: 0 0 auto;
+    height: clamp(280px,40vh,520px);
     display: flex;
     flex-direction: column;
-    min-height: 0
+    min-height: 0;
+    border-top: 2px solid #483828
 }
 
-/* The Backpack as its own section, opened from the battle top bar. */
-.backpack-section {
-    background: linear-gradient(180deg,#e8dcc0,#d8c8a0);
-    border: 2px solid #483828;
-    width: min(520px,100%);
-    height: min(680px,88vh);
-    max-height: 88vh;
-    padding: 8px;
+.backpack-header {
     display: flex;
-    flex-direction: column;
-    gap: 6px;
-    overflow: hidden;
-    box-shadow: inset 2px 2px #ffdca04d,inset -2px -2px #00000026,0 0 0 4px #5a3e20,0 0 0 6px #3a2810,0 0 0 8px #6a4e30,0 0 0 10px #8a6840,0 0 0 12px #6a4e30,0 0 0 14px #3a2810,4px 6px 0 14px #0006
+    align-items: center;
+    padding: 6px 10px 2px;
+    background: var(--bg-panel-light)
+}
+
+.backpack-title {
+    font-size: 8px;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 1px
 }
 
 .backpack-tab-bar {
-    padding: 4px 6px 0
+    padding: 4px 6px 0;
+    background: var(--bg-panel-light)
 }
 
 .backpack-tab-bar .tab-btn {

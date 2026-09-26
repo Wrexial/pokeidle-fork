@@ -12,6 +12,7 @@ import { BoxPanel } from './box-panel.js'
 import { PartyPanel } from './party-panel.js'
 import { StatsPanel } from './stats-panel.js'
 import { CatchSettingsModal } from './catch-settings-modal.js'
+import { BackpackPanel } from './backpack-panel.js'
 
 export function MobileTabs() {
   const { state, dispatch } = useGame(),
@@ -174,14 +175,17 @@ export function MobileTabs() {
               ],
             }),
           tab === 'location' &&
-            jsx('div', {
+            jsxs('div', {
               className: 'mobile-location-wrapper',
-              children: jsx('div', {
-                className: 'panel-content',
-                children: jsx(LocationPanel, {
-                  onOpenCatchSettings: () => setShowCatchSettings(!0),
+              children: [
+                jsx('div', {
+                  className: 'panel-content',
+                  children: jsx(LocationPanel, {
+                    onOpenCatchSettings: () => setShowCatchSettings(!0),
+                  }),
                 }),
-              }),
+                jsx(BackpackPanel, {}),
+              ],
             }),
         ],
       }),

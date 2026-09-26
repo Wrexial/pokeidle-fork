@@ -22,7 +22,6 @@ import { getBossTrainerSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteU
 import { EnemyInfoBox } from './enemy-info-box.js'
 import { PlayerInfoBox } from './player-info-box.js'
 import { SettingsModal } from './settings-modal.js'
-import { BackpackPanel } from './backpack-panel.js'
 import { BattleTextBox } from './battle-text-box.js'
 import { EvolutionScene } from './evolution-scene.js'
 import { DailyEventModal } from './daily-event-modal.js'
@@ -63,7 +62,6 @@ import { SpeedControls } from './speed-controls.js'
 export function BattleScene() {
   const [showInfo, setShowInfo] = React.useState(!1),
     [showSettings, setShowSettings] = React.useState(!1),
-    [showBackpack, setShowBackpack] = React.useState(!1),
     [showDaily, setShowDaily] = React.useState(!1),
     [showQuests, setShowQuests] = React.useState(!1),
     { state, dispatch } = useGame(),
@@ -199,12 +197,6 @@ export function BattleScene() {
             className: 'battle-info-btn',
             onClick: () => setShowInfo(!0),
             children: '?',
-          }),
-          jsx('button', {
-            className: 'battle-info-btn',
-            onClick: () => setShowBackpack(!0),
-            title: 'Backpack',
-            children: '\u{1f392}',
           }),
           jsx('button', {
             className: `battle-info-btn auto-proceed-btn${state.autoProceed ? ' active' : ''}`,
@@ -598,35 +590,6 @@ export function BattleScene() {
           }),
         ],
       }),
-      showBackpack &&
-        createPortal(
-          jsx('div', {
-            className: 'battle-info-overlay',
-            onClick: () => setShowBackpack(!1),
-            children: jsxs('div', {
-              className: 'backpack-section',
-              onClick: /** @param {React.MouseEvent} event */ (event) => event.stopPropagation(),
-              children: [
-                jsxs('div', {
-                  className: 'battle-info-header',
-                  children: [
-                    jsx('span', {
-                      className: 'battle-info-title',
-                      children: 'Backpack',
-                    }),
-                    jsx('button', {
-                      className: 'battle-info-close',
-                      onClick: () => setShowBackpack(!1),
-                      children: 'X',
-                    }),
-                  ],
-                }),
-                jsx(BackpackPanel, {}),
-              ],
-            }),
-          }),
-          document.body
-        ),
       showSettings &&
         createPortal(
           jsx(SettingsModal, {

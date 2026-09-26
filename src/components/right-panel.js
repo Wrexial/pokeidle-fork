@@ -5,6 +5,7 @@ import { jsx, jsxs } from 'react/jsx-runtime'
 import { encounterData, raidPoolFor, mapData } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { LocationPanel } from './location-panel.js'
+import { BackpackPanel } from './backpack-panel.js'
 import { CatchSettingsModal } from './catch-settings-modal.js'
 
 export function RightPanel() {
@@ -34,6 +35,7 @@ export function RightPanel() {
           onOpenCatchSettings: openCatchSettings,
         }),
       }),
+      jsx(BackpackPanel, {}),
       showCatchSettings &&
         encounters &&
         routeKey &&

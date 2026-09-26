@@ -10,6 +10,7 @@ import { computeUnlockedLocations, regionProgressionGoal } from '../game/progres
 import { MinigameCard } from './minigame-card.js'
 import { GiftPanel } from './gift-panel.js'
 import { BattleTowerPanel } from './battle-tower-panel.js'
+import { GymLocationPanel } from './gym-location-panel.js'
 import { RouteEncounterGrid } from './route-encounter-grid.js'
 import { ShopPanel } from './shop-panel.js'
 
@@ -618,6 +619,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
                 }),
             ],
           }),
+        jsx(GymLocationPanel, {}),
         routeEncounters &&
           routeKey &&
           jsx(RouteEncounterGrid, {

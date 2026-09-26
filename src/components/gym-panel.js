@@ -71,31 +71,6 @@ export function GymPanel({ onOpenShop }) {
     dispatch({ type: 'TRAVEL', payload: { locationId } })
   }
 
-  /** @param {any} leader */
-  function startGymBattle(leader) {
-    if (!fightable) return
-    if (state.phase === 'battling' || state.phase === 'victory' || state.phase === 'defeat')
-      dispatch({
-        type: 'PHASE_IDLE',
-      })
-    dispatch({
-      type: 'START_HEALING',
-      payload: {
-        pendingBossBattle: {
-          bossId: leader.id,
-          bossType: 'gym',
-          trainerName: leader.name,
-          trainerClass: 'ace',
-          trainerTeam: buildTrainerTeam(
-            allBadgesEarned && leader.rematchTeam?.length ? leader.rematchTeam : leader.team
-          ),
-          spriteKey: leader.spriteKey,
-          region: regionId,
-        },
-      },
-    })
-  }
-
   function startEliteChallenge() {
     if (!fightable || !regionChampion) return
     if (state.phase === 'battling' || state.phase === 'victory' || state.phase === 'defeat')
@@ -245,11 +220,10 @@ export function GymPanel({ onOpenShop }) {
                           children: '✓',
                         }),
                       canStart
-                        ? jsx('button', {
-                            className: 'gym-fight-btn',
-                            disabled: !fightable,
-                            onClick: () => startGymBattle(leader),
-                            children: 'FIGHT',
+                        ? jsx('span', {
+                            className: 'gym-locked-label travel',
+                            title: 'Challenge this leader from the location panel',
+                            children: 'AT GYM',
                           })
                         : mustTravel
                           ? jsx('button', {

@@ -8,8 +8,8 @@ import { useGame } from '../game/context.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
 import { PokedexTile } from './pokedex-tile.js'
 
-/** @param {{ onClose: () => void }} props */
-export function PokedexModal({ onClose }) {
+/** @param {{ onClose?: () => void, inline?: boolean }} props */
+export function PokedexModal({ onClose, inline = false }) {
   const { state } = useGame(),
     [selected, setSelected] = React.useState(/** @type {string | null} */ (null)),
     [gen, setGen] = React.useState(0),
@@ -78,13 +78,12 @@ export function PokedexModal({ onClose }) {
           },
         ]
       : []
-  return jsx('div', {
-    className: 'pokedex-modal-overlay',
-    onClick: onClose,
-    children: jsxs('div', {
-      className: 'pokedex-modal',
-      onClick: /** @param {React.MouseEvent} event */ (event) => event.stopPropagation(),
-      children: [
+  const panel = jsxs('div', {
+    className: inline ? 'pokedex-inline' : 'pokedex-modal',
+    ...(inline
+      ? {}
+      : { onClick: /** @param {React.MouseEvent} event */ (event) => event.stopPropagation() }),
+    children: [
         jsxs('div', {
           className: 'pokedex-modal-header',
           children: [
@@ -96,11 +95,12 @@ export function PokedexModal({ onClose }) {
               className: 'pokedex-modal-counts',
               children: [caughtCount, '/', totalEntries, ' caught · ', seenCount, '/', totalEntries, ' seen'],
             }),
-            jsx('button', {
-              className: 'pokedex-modal-close',
-              onClick: onClose,
-              children: 'X',
-            }),
+            onClose &&
+              jsx('button', {
+                className: 'pokedex-modal-close',
+                onClick: onClose,
+                children: 'X',
+              }),
           ],
         }),
         jsx('div', {
@@ -251,6 +251,12 @@ export function PokedexModal({ onClose }) {
             ],
           }),
       ],
-    }),
-  })
+    })
+  return inline
+    ? panel
+    : jsx('div', {
+        className: 'pokedex-modal-overlay',
+        onClick: onClose,
+        children: panel,
+      })
 }

@@ -7,13 +7,19 @@ import { encounterData, raidPoolFor, mapData } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { GymPanel } from './gym-panel.js'
 import { LocationPanel } from './location-panel.js'
+import { BackpackPanel } from './backpack-panel.js'
 import { CatchSettingsModal } from './catch-settings-modal.js'
-import { BagPanel } from './bag-panel.js'
 import { RewardShopModal } from './reward-shop-modal.js'
+
+const LOCATION_TABS = [
+  { id: 'area', label: 'Area' },
+  { id: 'league', label: 'League' },
+]
 
 export function RightPanel() {
   const { state } = useGame(),
     [tab, setTab] = React.useState('location'),
+    [locationTab, setLocationTab] = React.useState('area'),
     [showCatchSettings, setShowCatchSettings] = React.useState(!1),
     [showRewardShop, setShowRewardShop] = React.useState(!1),
     openCatchSettings = React.useCallback(() => setShowCatchSettings(!0), []),
@@ -50,20 +56,38 @@ export function RightPanel() {
           )
         ),
       }),
-      jsx('div', {
-        className: 'panel-content',
-        children:
-          tab === 'location'
-            ? jsx(LocationPanel, {
-                onOpenCatchSettings: openCatchSettings,
-              })
-            : tab === 'gym'
-              ? jsx(GymPanel, {
-                  onOpenShop: openRewardShop,
-                })
-              : null,
-      }),
-      jsx(BagPanel, {}),
+      tab === 'location'
+        ? jsxs('div', {
+            className: 'right-subpanel',
+            children: [
+              jsx('div', {
+                className: 'tab-bar right-subtab-bar',
+                children: LOCATION_TABS.map((tabDef) =>
+                  jsx(
+                    'button',
+                    {
+                      className: `tab-btn${locationTab === tabDef.id ? ' active' : ''}`,
+                      onClick: () => setLocationTab(tabDef.id),
+                      children: tabDef.label,
+                    },
+                    tabDef.id
+                  )
+                ),
+              }),
+              jsx('div', {
+                className: 'panel-content',
+                children:
+                  locationTab === 'area'
+                    ? jsx(LocationPanel, {
+                        onOpenCatchSettings: openCatchSettings,
+                      })
+                    : jsx(GymPanel, {
+                        onOpenShop: openRewardShop,
+                      }),
+              }),
+            ],
+          })
+        : jsx(BackpackPanel, {}),
       showCatchSettings &&
         encounters &&
         routeKey &&

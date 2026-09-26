@@ -8893,30 +8893,6 @@ img {
         grid-row: 1 / span 2
     }
 
-    .side-panel.right-panel {
-        display: grid;
-        grid-template-columns: minmax(0,1fr) minmax(0,.85fr);
-        grid-template-rows: auto minmax(0,1fr);
-        align-items: stretch
-    }
-
-    .side-panel.right-panel > .tab-bar {
-        grid-column: 1 / -1;
-        grid-row: 1
-    }
-
-    .side-panel.right-panel > .panel-content {
-        grid-column: 1;
-        grid-row: 2
-    }
-
-    .side-panel.right-panel > .bag-container {
-        grid-column: 2;
-        grid-row: 2;
-        height: auto;
-        min-height: 0;
-        border-left: 2px solid #483828
-    }
 }
 
 /* --- Tabbed layout (phones, tablets and short viewports) --- */
@@ -8975,9 +8951,9 @@ img {
 }
 
 .mobile-tabs .tab-btn {
-    font-size: 11px;
+    font-size: 9px;
     min-height: 44px;
-    padding: 10px 8px
+    padding: 10px 4px
 }
 
 .mobile-tabs .tab-btn:active {
@@ -9016,9 +8992,10 @@ img {
     flex: 1
 }
 
-.mobile-location-wrapper .bag-container {
-    height: auto;
-    max-height: 200px
+.mobile-backpack-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%
 }
 
 .mobile-tab-content .town-map {
@@ -13079,4 +13056,91 @@ img {
 
 .switch-prompt .hp-label {
     color: var(--ink)
+}
+
+/* Right panel: Location (Area / League) and the Backpack (Dex / Bank /
+   Items / Records) sub-tabs. */
+.right-subpanel,
+.backpack-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0
+}
+
+.right-subtab-bar,
+.backpack-tab-bar {
+    padding: 4px 6px 0
+}
+
+.right-subtab-bar .tab-btn,
+.backpack-tab-bar .tab-btn {
+    font-size: 7px;
+    padding: 5px 8px
+}
+
+.backpack-content {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden
+}
+
+.pokedex-inline,
+.records-inline,
+.reward-shop-inline {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 8px;
+    overflow: hidden;
+    background: linear-gradient(180deg,#e8dcc0,#d8c8a0);
+    color: #2a1808
+}
+
+.records-inline,
+.reward-shop-inline {
+    overflow-y: auto
+}
+
+.backpack-bank {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px
+}
+
+.backpack-bank-balance {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 8px 10px;
+    background: linear-gradient(180deg,#6a4030,#5a3020);
+    border: 2px solid #3a1e10
+}
+
+.backpack-bank-label {
+    font-size: 8px;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 1px
+}
+
+.backpack-bank-amount {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold-bright)
+}
+
+.backpack-content .bag-container {
+    flex: 1;
+    min-height: 0;
+    height: auto;
+    border-top: none
 }

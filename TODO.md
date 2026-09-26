@@ -846,26 +846,27 @@ The side panel has two tabs today (`SIDE_PANEL_TABS` in `src/data/ui.js`):
 Pokédex, bank and items, which the player reads as unrelated things bundled
 under a misleading name.
 
-- [ ] Keep **Location** as its own section (the current location, wild
-      encounters, activities, People & Places).
-- [ ] Rename **League** to **Backpack** and make it the home for the
-      player-owned data: the current **Pokédex**, **Bank** (money), **Items**
-      (bag) and **Records** tabs, with the gym/league progress moved into the
-      Location section or a dedicated progression view.
-- [ ] Decide the section split: does League progress live under Location, or
-      get its own third section? The gym panel is currently the bulk of the
-      League tab.
-- [ ] Update the mobile tab set (`MOBILE_TABS`) to match where it makes sense.
-- [ ] Re-tune the panel copy/labels and any deep links that reference the old
-      tab id.
+**Shipped:** the right panel now has **Location** and **Backpack** main tabs.
+Backpack (`backpack-panel.js`) has sub-tabs **Dex / Bank / Items / Records**;
+the old always-on bag below the panel is gone and the League progress moved
+into the Location section as an **Area / League** sub-tab. The Pokédex,
+Records and Reward Shop components gained an `inline` mode so they render in a
+tab instead of a modal; the mobile tab set gained **Backpack** too and dropped
+the location tab's always-on bag.
+
+- [x] Keep **Location** as its own section (with the League progress as a
+      sub-tab).
+- [x] Rename **League** to **Backpack** and host the **Pokédex**, **Bank**,
+      **Items** and **Records** in it.
+- [x] Decide the section split: League progress lives under Location.
+- [x] Update `MOBILE_TABS` (added Backpack; Location sub-tabs are Area/League).
+- [x] Re-tune the panel copy/labels and the old `'gym'` tab id.
 
 Likely touch points: `src/data/ui.js` (`SIDE_PANEL_TABS` / `MOBILE_TABS`),
-`src/components/game-layout.js`, `mobile-tabs.js`, `gym-panel.js`,
-`league-location-panel.js`, `records-modal.js`, `bag-panel.js` and the Pokédex /
-bank panels.
+`src/components/right-panel.js`, `backpack-panel.js`, `mobile-tabs.js`,
+`pokedex-modal.js`, `records-modal.js` and `reward-shop-modal.js`.
 
-Effort: **medium** (mostly restructuring the panel; the tab bodies already
-exist).
+Effort: **medium**.
 
 ## 48. Colour-accessibility pass
 

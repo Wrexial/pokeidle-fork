@@ -13,7 +13,7 @@ import { BoxPanel } from './box-panel.js'
 import { PartyPanel } from './party-panel.js'
 import { StatsPanel } from './stats-panel.js'
 import { CatchSettingsModal } from './catch-settings-modal.js'
-import { BagPanel } from './bag-panel.js'
+import { BackpackPanel } from './backpack-panel.js'
 import { RewardShopModal } from './reward-shop-modal.js'
 
 export function MobileTabs() {
@@ -188,7 +188,7 @@ export function MobileTabs() {
                     jsx('button', {
                       className: `tab-btn${locationTab === 'location' ? ' active' : ''}`,
                       onClick: () => setLocationTab('location'),
-                      children: 'Location',
+                      children: 'Area',
                     }),
                     jsx('button', {
                       className: `tab-btn${locationTab === 'gym' ? ' active' : ''}`,
@@ -208,8 +208,12 @@ export function MobileTabs() {
                           onOpenShop: () => setShowRewardShop(!0),
                         }),
                 }),
-                jsx(BagPanel, {}),
               ],
+            }),
+          tab === 'backpack' &&
+            jsx('div', {
+              className: 'mobile-backpack-wrapper',
+              children: jsx(BackpackPanel, {}),
             }),
         ],
       }),

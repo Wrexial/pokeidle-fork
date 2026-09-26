@@ -7,15 +7,15 @@ import { getItemInfo } from '../game/progression.js'
 import { ItemIcon } from './item-icon.js'
 
 /** @param {{ onClose: () => void }} props */
-export function RewardShopModal({ onClose }) {
+/** @param {{ onClose?: () => void, inline?: boolean }} props */
+export function RewardShopModal({ onClose, inline = false }) {
   const { state, dispatch } = useGame()
-  return jsx('div', {
-    className: 'battle-info-overlay',
-    onClick: onClose,
-    children: jsxs('div', {
-      className: 'battle-info-modal',
-      onClick: /** @param {React.MouseEvent} event */ (event) => event.stopPropagation(),
-      children: [
+  const panel = jsxs('div', {
+    className: inline ? 'reward-shop-inline' : 'battle-info-modal',
+    ...(inline
+      ? {}
+      : { onClick: /** @param {React.MouseEvent} event */ (event) => event.stopPropagation() }),
+    children: [
         jsxs('div', {
           className: 'battle-info-header',
           children: [
@@ -23,11 +23,12 @@ export function RewardShopModal({ onClose }) {
               className: 'battle-info-title',
               children: 'Reward Shop',
             }),
-            jsx('button', {
-              className: 'battle-info-close',
-              onClick: onClose,
-              children: 'X',
-            }),
+            onClose &&
+              jsx('button', {
+                className: 'battle-info-close',
+                onClick: onClose,
+                children: 'X',
+              }),
           ],
         }),
         jsxs('div', {
@@ -119,6 +120,12 @@ export function RewardShopModal({ onClose }) {
           ],
         }),
       ],
-    }),
-  })
+    })
+  return inline
+    ? panel
+    : jsx('div', {
+        className: 'battle-info-overlay',
+        onClick: onClose,
+        children: panel,
+      })
 }

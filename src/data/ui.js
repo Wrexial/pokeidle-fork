@@ -266,8 +266,8 @@ export const SIDE_PANEL_TABS = [
     label: 'Location',
   },
   {
-    id: 'gym',
-    label: 'League',
+    id: 'backpack',
+    label: 'Backpack',
   },
 ]
 
@@ -287,6 +287,10 @@ export const MOBILE_TABS = [
   {
     id: 'location',
     label: 'Location',
+  },
+  {
+    id: 'backpack',
+    label: 'Backpack',
   },
 ]
 

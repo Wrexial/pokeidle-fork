@@ -6,8 +6,8 @@ import { formatReward } from '../game/progression.js'
 import { completedGenerations, gymLeaderData, pokedexIndexes, regions, speciesKeysByGeneration } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 
-/** @param {{ onClose: () => void }} props */
-export function RecordsModal({ onClose }) {
+/** @param {{ onClose?: () => void, inline?: boolean }} props */
+export function RecordsModal({ onClose, inline = false }) {
   const { state } = useGame(),
     rewardedAchievements = new Set(state.rewardedAchievements ?? []),
     achieved = ACHIEVEMENTS.filter((achievement) => achievement.check(state)),
@@ -71,13 +71,12 @@ export function RecordsModal({ onClose }) {
         ],
       },
     ]
-  return jsx('div', {
-    className: 'battle-info-overlay',
-    onClick: onClose,
-    children: jsxs('div', {
-      className: 'battle-info-modal',
-      onClick: /** @param {React.MouseEvent} event */ (event) => event.stopPropagation(),
-      children: [
+  const panel = jsxs('div', {
+    className: inline ? 'records-inline' : 'battle-info-modal',
+    ...(inline
+      ? {}
+      : { onClick: /** @param {React.MouseEvent} event */ (event) => event.stopPropagation() }),
+    children: [
         jsxs('div', {
           className: 'battle-info-header',
           children: [
@@ -85,11 +84,12 @@ export function RecordsModal({ onClose }) {
               className: 'battle-info-title',
               children: 'Records',
             }),
-            jsx('button', {
-              className: 'battle-info-close',
-              onClick: onClose,
-              children: 'X',
-            }),
+            onClose &&
+              jsx('button', {
+                className: 'battle-info-close',
+                onClick: onClose,
+                children: 'X',
+              }),
           ],
         }),
         jsxs('div', {
@@ -224,6 +224,12 @@ export function RecordsModal({ onClose }) {
           ],
         }),
       ],
-    }),
-  })
+    })
+  return inline
+    ? panel
+    : jsx('div', {
+        className: 'battle-info-overlay',
+        onClick: onClose,
+        children: panel,
+      })
 }

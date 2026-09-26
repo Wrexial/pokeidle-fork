@@ -13060,7 +13060,6 @@ img {
 
 /* Right panel: Location (Area / League) and the Backpack (Dex / Bank /
    Items / Records) sub-tabs. */
-.right-subpanel,
 .backpack-panel {
     flex: 1;
     display: flex;
@@ -13068,12 +13067,10 @@ img {
     min-height: 0
 }
 
-.right-subtab-bar,
 .backpack-tab-bar {
     padding: 4px 6px 0
 }
 
-.right-subtab-bar .tab-btn,
 .backpack-tab-bar .tab-btn {
     font-size: 7px;
     padding: 5px 8px

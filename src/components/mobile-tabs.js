@@ -6,7 +6,6 @@ import { MOBILE_TABS } from '../data/ui.js'
 import { encounterData, raidPoolFor, mapData } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { getEvolutionOptions } from '../game/breeding.js'
-import { GymPanel } from './gym-panel.js'
 import { LocationPanel } from './location-panel.js'
 import { TownMap } from './town-map.js'
 import { BoxPanel } from './box-panel.js'
@@ -14,7 +13,6 @@ import { PartyPanel } from './party-panel.js'
 import { StatsPanel } from './stats-panel.js'
 import { CatchSettingsModal } from './catch-settings-modal.js'
 import { BackpackPanel } from './backpack-panel.js'
-import { RewardShopModal } from './reward-shop-modal.js'
 
 export function MobileTabs() {
   const { state, dispatch } = useGame(),
@@ -23,9 +21,7 @@ export function MobileTabs() {
     [releaseConfirm, setReleaseConfirm] = React.useState(/** @type {string | null} */ (null)),
     [boxInspected, setBoxInspected] = React.useState(/** @type {{ source: string, id: string } | null} */ (null)),
     [boxReleaseConfirm, setBoxReleaseConfirm] = React.useState(/** @type {string | null} */ (null)),
-    [locationTab, setLocationTab] = React.useState('location'),
     [showCatchSettings, setShowCatchSettings] = React.useState(!1),
-    [showRewardShop, setShowRewardShop] = React.useState(!1),
     location = mapData[state.currentLocation],
     isRaid = location?.type === 'raid',
     routeKey = isRaid ? location?.id : location?.routeKey,
@@ -179,36 +175,14 @@ export function MobileTabs() {
               ],
             }),
           tab === 'location' &&
-            jsxs('div', {
+            jsx('div', {
               className: 'mobile-location-wrapper',
-              children: [
-                jsxs('div', {
-                  className: 'tab-bar',
-                  children: [
-                    jsx('button', {
-                      className: `tab-btn${locationTab === 'location' ? ' active' : ''}`,
-                      onClick: () => setLocationTab('location'),
-                      children: 'Area',
-                    }),
-                    jsx('button', {
-                      className: `tab-btn${locationTab === 'gym' ? ' active' : ''}`,
-                      onClick: () => setLocationTab('gym'),
-                      children: 'League',
-                    }),
-                  ],
+              children: jsx('div', {
+                className: 'panel-content',
+                children: jsx(LocationPanel, {
+                  onOpenCatchSettings: () => setShowCatchSettings(!0),
                 }),
-                jsx('div', {
-                  className: 'panel-content',
-                  children:
-                    locationTab === 'location'
-                      ? jsx(LocationPanel, {
-                          onOpenCatchSettings: () => setShowCatchSettings(!0),
-                        })
-                      : jsx(GymPanel, {
-                          onOpenShop: () => setShowRewardShop(!0),
-                        }),
-                }),
-              ],
+              }),
             }),
           tab === 'backpack' &&
             jsx('div', {
@@ -224,10 +198,6 @@ export function MobileTabs() {
           routeKey,
           encounters,
           onClose: () => setShowCatchSettings(!1),
-        }),
-      showRewardShop &&
-        jsx(RewardShopModal, {
-          onClose: () => setShowRewardShop(!1),
         }),
     ],
   })

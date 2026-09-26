@@ -5,11 +5,13 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { useGame } from '../game/context.js'
 import { BagPanel } from './bag-panel.js'
+import { GymPanel } from './gym-panel.js'
 import { PokedexModal } from './pokedex-modal.js'
 import { RecordsModal } from './records-modal.js'
 import { RewardShopModal } from './reward-shop-modal.js'
 
 const BACKPACK_TABS = [
+  { id: 'league', label: 'League' },
   { id: 'dex', label: 'Dex' },
   { id: 'bank', label: 'Bank' },
   { id: 'items', label: 'Items' },
@@ -18,7 +20,7 @@ const BACKPACK_TABS = [
 
 export function BackpackPanel() {
   const { state } = useGame(),
-    [tab, setTab] = React.useState('dex')
+    [tab, setTab] = React.useState('league')
   return jsxs('div', {
     className: 'backpack-panel',
     children: [
@@ -39,6 +41,11 @@ export function BackpackPanel() {
       jsxs('div', {
         className: 'backpack-content',
         children: [
+          tab === 'league' &&
+            jsx('div', {
+              className: 'panel-content',
+              children: jsx(GymPanel, { onOpenShop: () => setTab('bank') }),
+            }),
           tab === 'dex' && jsx(PokedexModal, { inline: !0 }),
           tab === 'records' && jsx(RecordsModal, { inline: !0 }),
           tab === 'items' && jsx(BagPanel, {}),

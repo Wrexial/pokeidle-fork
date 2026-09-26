@@ -847,25 +847,24 @@ Pokédex, bank and items, which the player reads as unrelated things bundled
 under a misleading name.
 
 **Shipped:** the right panel now has **Location** and **Backpack** main tabs.
-Backpack (`backpack-panel.js`) has sub-tabs **Dex / Bank / Items / Records**;
-the old always-on bag below the panel is gone and the League progress moved
-into the Location section as an **Area / League** sub-tab. The Pokédex,
-Records and Reward Shop components gained an `inline` mode so they render in a
-tab instead of a modal; the mobile tab set gained **Backpack** too and dropped
-the location tab's always-on bag.
+Backpack (`backpack-panel.js`) has sub-tabs **League / Dex / Bank / Items /
+Records**; the old always-on bag below the panel is gone and the gym/league
+overview moved into the Backpack's **League** tab (badges read as a trainer-card
+tab). The Pokédex, Records and Reward Shop components gained an `inline` mode so
+they render in a tab instead of a modal; the mobile tab set gained **Backpack**
+too, with the League tab included there and the location tab's always-on bag
+gone.
 
-- [x] Keep **Location** as its own section (with the League progress as a
-      sub-tab).
+- [x] Keep **Location** as its own section (the area, wilds and activities).
 - [x] Rename **League** to **Backpack** and host the **Pokédex**, **Bank**,
-      **Items** and **Records** in it.
-- [x] Decide the section split: League progress lives under Location.
-- [x] Update `MOBILE_TABS` (added Backpack; Location sub-tabs are Area/League).
+      **Items**, **Records** and the gym **League** progress in it.
+- [x] Decide the section split: the League overview lives in the Backpack.
+- [x] Update `MOBILE_TABS` (added Backpack; the location sub-tabs are gone).
 - [x] Re-tune the panel copy/labels and the old `'gym'` tab id.
 
 Likely touch points: `src/data/ui.js` (`SIDE_PANEL_TABS` / `MOBILE_TABS`),
 `src/components/right-panel.js`, `backpack-panel.js`, `mobile-tabs.js`,
 `pokedex-modal.js`, `records-modal.js` and `reward-shop-modal.js`.
-
 Effort: **medium**.
 
 ## 48. Colour-accessibility pass

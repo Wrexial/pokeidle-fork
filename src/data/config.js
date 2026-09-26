@@ -182,6 +182,23 @@ export const regionalStarters = {
 }
 
 /**
+ * The route that hosts each region's Daycare. The breeding state is global, so
+ * a pair deposited in one region can be collected in another.
+ * @type {Record<string, string>}
+ */
+export const DAYCARE_LOCATIONS = {
+  kanto: 'route5',
+  johto: 'johto-route-34',
+  hoenn: 'hoenn-route-117',
+  sinnoh: 'sinnoh-route-209',
+  unova: 'unova-route-3',
+  kalos: 'kalos-route-7',
+  alola: 'alola-route-5',
+  galar: 'galar-route-5',
+  paldea: 'paldea-south-province-area-two',
+}
+
+/**
  * The region whose Battle Tower is the game's only one. Other regions are
  * planned to get their own minigames instead, so `towerFloor`/`towerBest` are
  * Hoenn-only and save repair consolidates any legacy per-region records here.

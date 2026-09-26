@@ -9,6 +9,7 @@ const { awardExperience, computeUnlockedLocations, getRegionUnlockTokens, region
   await import('../src/game/progression.js')
 const { initialGameState } = await import('../src/game/reducer.js')
 const { encounterData, gymLeaderData, mapData, pokemonSpecies, regions } = await import('../src/data/gameData.js')
+const { DAYCARE_LOCATIONS } = await import('../src/data/config.js')
 const { calculateExpYield, createPokemon } = await import('../src/game/pokemon.js')
 
 /** @param {Record<string, any>} [overrides] */
@@ -213,4 +214,15 @@ test('shiny chain multiplier only applies to the chained species and is capped',
     large = shinyChainMultiplier('pidgey', { speciesKey: 'pidgey', count: 120 })
   assert.ok(large > small && large > 1)
   assert.ok(large <= 4)
+})
+
+test('every region has a Daycare on one of its real routes', () => {
+  for (const region of regions) {
+    const locationId = DAYCARE_LOCATIONS[region.id]
+    assert.ok(locationId, `${region.id} has a Daycare route`)
+    const location = mapData[locationId]
+    assert.ok(location, `${region.id} Daycare ${locationId} exists`)
+    assert.equal(location.region, region.id, `${locationId} sits in ${region.id}`)
+    assert.equal(location.type, 'route', `${locationId} is a route`)
+  }
 })

@@ -156,6 +156,7 @@ export const CHANGELOG = [
             'Pok\u00e9 Pelago is here: a new island off Alola (Hau\u2019oli City) that you visit from the Town Map. Companion care and the Berry Garden move there from the top bar and share one hub',
             'Companion care gained a Cleanliness stat and Pat, Brush and Wash actions, so there is more to do between battles. The +15% EXP bonus now needs all four care stats at 50+',
             'Three passive islands \u2014 the Bean Farm, Training Isle and Isle Caves \u2014 can be staffed with boxed Pokemon. They gather Poke Beans, EXP and items while you battle, banking rewards to collect when you return',
+            'The Daycare now sits on a route in every region (Kanto Route 5, Johto Route 34, and so on) \u2014 open it from the location panel to pick two Box Pokemon and collect Eggs, instead of depositing from a Pokemon\u2019s stats window. The breeding pair is shared across regions',
           ],
         },
       ],

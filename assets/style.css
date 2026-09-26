@@ -6670,6 +6670,95 @@ img {
     color: #3a2818
 }
 
+/* Daycare panel (location panel, dark theme) */
+.daycare-panel .daycare-slot {
+    color: #a89a80;
+    border-color: #8a7040
+}
+
+.daycare-panel .daycare-slot.filled {
+    background: #00000033
+}
+
+.daycare-panel .daycare-slot-name {
+    color: var(--parchment)
+}
+
+.daycare-panel .daycare-slot-level {
+    color: #a89a80
+}
+
+.daycare-panel .daycare-progress-label {
+    color: #e7dcc0
+}
+
+.daycare-deposit {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 6px
+}
+
+.daycare-deposit-search {
+    width: 100%;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 9px;
+    padding: 5px 8px;
+    background: rgba(20,14,6,.72);
+    color: var(--parchment);
+    border: 1px solid #8a7040;
+    border-radius: 4px
+}
+
+.daycare-deposit-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-height: 240px;
+    overflow-y: auto;
+    padding-right: 2px
+}
+
+.daycare-deposit-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 6px;
+    background: #00000026;
+    border: 1px solid #483828
+}
+
+.daycare-deposit-row.incompatible {
+    opacity: .5
+}
+
+.daycare-deposit-sprite {
+    width: 32px;
+    height: 32px;
+    image-rendering: pixelated;
+    flex: 0 0 auto
+}
+
+.daycare-deposit-info {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 1px;
+    min-width: 0
+}
+
+.daycare-deposit-name {
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--parchment)
+}
+
+.daycare-deposit-detail {
+    font-size: 7px;
+    color: #8a7a60
+}
+
 .battle-info-content p {
     margin: 0 0 8px
 }

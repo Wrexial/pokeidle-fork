@@ -11,7 +11,6 @@ import { itemTooltip } from '../game/progression.js'
 import { ItemIcon } from './item-icon.js'
 import { PokedexModal } from './pokedex-modal.js'
 import { RecordsModal } from './records-modal.js'
-import { DaycareModal } from './daycare-modal.js'
 
 /** @param {{ inspected: Inspected, setInspected: (value: Inspected) => void, setReleaseConfirm: (value: string | null) => void, dragSource?: 'party' | 'box' | null, boxDragOver?: boolean, boxDragFromIndex?: number | null, boxDropTargetIndex?: number | null, onBoxDragStart?: any, onBoxSlotDragOver?: any, onBoxDragOver?: any, onBoxDrop?: any, onBoxDragLeave?: any, onDrop?: any, onDragEnd?: any }} props */
 export function BoxPanel({
@@ -34,7 +33,6 @@ export function BoxPanel({
     [page, setPage] = React.useState(0),
     [showPokedex, setShowPokedex] = React.useState(!1),
     [showRecords, setShowRecords] = React.useState(!1),
-    [showDaycare, setShowDaycare] = React.useState(!1),
     [query, setQuery] = React.useState(''),
     [filterMode, setFilterMode] = React.useState('all'),
     [confirmDupes, setConfirmDupes] = React.useState(!1),
@@ -95,11 +93,6 @@ export function BoxPanel({
                     className: 'box-pokedex-btn',
                     onClick: () => setShowRecords(!0),
                     children: 'Records',
-                  }),
-                  jsx('button', {
-                    className: 'box-pokedex-btn',
-                    onClick: () => setShowDaycare(!0),
-                    children: 'Daycare',
                   }),
                   jsx('button', {
                     className: 'box-pokedex-btn',
@@ -339,10 +332,6 @@ export function BoxPanel({
       showRecords &&
         jsx(RecordsModal, {
           onClose: () => setShowRecords(!1),
-        }),
-      showDaycare &&
-        jsx(DaycareModal, {
-          onClose: () => setShowDaycare(!1),
         }),
     ],
   })

@@ -1,13 +1,13 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.18.0'
+export const GAME_VERSION = '0.21.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
     {
       version: '0.18.0',
-      subtitle: 'Hunting Rewards',
+      subtitle: 'Minigame Overhaul',
       sections: [
         {
           heading: 'Minigames',
@@ -46,6 +46,12 @@ export const CHANGELOG = [
             'Snowpoint Temple no longer runs off the bottom of the screen: the ice board now sits beside a smaller D-pad, so the arrow buttons stay fully visible on the larger rooms',
           ],
         },
+      ],
+    },
+    {
+      version: '0.19.0',
+      subtitle: 'Mega Evolution & Battle Polish',
+      sections: [
         {
           heading: 'Battles',
           items: [
@@ -69,9 +75,16 @@ export const CHANGELOG = [
             'The Champion and your own auto-battler also switch Pokemon now: when the active one is losing the type matchup and a teammate lines up much better, they bring the teammate in',
             'Every Pokemon that took part in a battle now shares its EXP, not just the one that landed the final blow',
             'Switching a Pokemon in or using an item during a battle now uses up that turn: the foe still acts, and your Pokemon does not attack',
-            'Set / Switch battle style: choose Set (the next party Pokemon goes out automatically when one faints, as before) or Switch (the battle pauses so you pick which one goes out) in Settings \u2192 Battles',
+            'Set / Switch battle style in Settings \u2192 Battles: Switch (the default) lets your auto-battler switch to a better type matchup on its own, while Set never switches automatically',
+            'Wild shiny odds are now 1 in 4096 (down from 1/8192); the per-generation Shiny Charm still halves them, from 1/2048 down to 1/256 as generations are completed',
           ],
         },
+      ],
+    },
+    {
+      version: '0.20.0',
+      subtitle: 'World, Guides & Challenges',
+      sections: [
         {
           heading: 'People & Places',
           items: [
@@ -121,6 +134,12 @@ export const CHANGELOG = [
             'New challenge: One Catch per Route \u2014 you may only catch the first wild Pokemon you meet on each route or area, and that first encounter uses the route up even if it gets away',
           ],
         },
+      ],
+    },
+    {
+      version: '0.21.0',
+      subtitle: 'Interface & Fixes',
+      sections: [
         {
           heading: 'Interface',
           items: [
@@ -136,7 +155,9 @@ export const CHANGELOG = [
             'Party order on phones: the mobile party panel now has up/down buttons on each Pokemon, since touch devices have no drag-and-drop',
             'The Town Map supports two-finger pinch-to-zoom on touch screens and its +/−/fit/centre buttons are touch-sized on phones',
             'Mobile layouts no longer run under the browser\u2019s address bar: the dynamic-viewport height override was declared before the old fallback, so the bottom of the Map and item tabs is reachable again',
-            'The Backpack is a new section under the Location panel (where the bag used to be): it holds the League badges / Elite Four, Pokedex, Bank (money + Reward Shop), Items (bag) and Records as tabs, so the League no longer shares a tab with the location',
+            'The Backpack is a new section under the Location panel (where the bag used to be): it holds the League badges / Elite Four, Pokedex, Kecleon Wares (Victory Tokens and the Kecleon Shop), Items (bag) and Records as tabs, so the League no longer shares a tab with the location. On mobile the Backpack and the battle Log are their own tabs alongside Map / Party / Box / Location',
+            'The Reward Shop is now the Kecleon Shop and its Backpack tab is Kecleon Wares (the separate money line was dropped since the Bag header already shows it), and the Pokedex / Records buttons were removed from the Box header now that the Backpack holds them',
+            'The Kecleon Shop and the Town Map search boxes can now be collapsed: the shop has a Search toggle, and the map hides its search behind a magnifier button',
             'On 21:9 and wider screens the party and box now stack vertically instead of splitting into two side-by-side columns',
             'Empty Box slots now show a recessed placeholder shadow, so it is obvious which slots are free',
           ],

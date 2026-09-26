@@ -1,6 +1,6 @@
 # TODO
 
-Open ideas and follow-ups. Current game version: **0.18.0**
+Open ideas and follow-ups. Current game version: **0.21.0**
 (`src/data/changelog.js`). Finished work lives in the changelog, not here — this
 file only tracks what is **still open**. See `AGENTS.md` for architecture,
 commands and data conventions.
@@ -39,7 +39,7 @@ renumbered, so the gaps below are items that shipped.
    Champion Cup and any-order gyms don't fit the 8-gyms + E4 model. **(partial:
    0.13.0 shipped the data-driven model; Alola's full 11-slot trial track and
    Paldea's Titans / Team Star remain.)**
-8. ~~**#11 NPC gifts & static encounters**~~ — **shipped (0.18.0).**
+8. ~~**#11 NPC gifts & static encounters**~~ — **shipped (0.20.0).**
 9. **#29 Fishing / companion minigames** — M–L · ★★★ — the rest of the
    minigame menu, now that the scene + phase pattern exists.
 10. **#35 More Galar areas** — M · ★★★½ — Galar is the thinnest region map.
@@ -49,7 +49,7 @@ renumbered, so the gaps below are items that shipped.
     settings separately from the save.
 13. **#28 More region areas (caves, POIs, DLC land)** — L · ★★★★½ — real
     content; data-heavy. Pairs with #35/#36/#39.
-14. ~~**#4 In-battle Mega evolution**~~ — **shipped (0.18.0).**
+14. ~~**#4 In-battle Mega evolution**~~ — **shipped (0.19.0).**
 15. **#42 Manual battle mode** — M · ★★★★ — let the player pick moves instead
     of always auto-battling.
 16. **#44 Set / Switch toggle** — S · ★★★ — choose whether a faint asks for a
@@ -73,7 +73,7 @@ renumbered, so the gaps below are items that shipped.
 
 ## 4. In-battle Mega evolution
 
-**Shipped (0.18.0):** a Mega-capable Pokemon holding the new held **Mega Stone**
+**Shipped (0.19.0):** a Mega-capable Pokemon holding the new held **Mega Stone**
 transforms as the battle starts (or via the MEGA EVOLVE button in the battle
 scene). It stores the forme on `playerVolatile.formKey`, so it keeps the forme's
 stats, typing and ability for the rest of the battle and reverts when the battle
@@ -104,7 +104,7 @@ Effort: **medium**.
 
 ## 11. NPC gifts & static encounters
 
-**Shipped (0.18.0):** a curated `GIFTS` / `STATIC_ENCOUNTERS` table
+**Shipped (0.20.0):** a curated `GIFTS` / `STATIC_ENCOUNTERS` table
 (`src/game/gifts.js`) drives a new **People & Places** section in the location
 panel. Gifts hand over items, money or a Pokemon (Oak's parcel, Celadon's Eevee,
 Elm's Cyndaquil, the Weather Institute's Castform, Bebe's Eevee, a Nacrene
@@ -771,28 +771,26 @@ out without being asked) or **Switch** (the game prompts after a faint). An idle
 auto-battler currently always behaves like Set, silently pulling the next
 healthy party member in.
 
-**Shipped:** `battleStyle` (`'set'` | `'switch'`, default `'set'`) is saved
-with the game and toggled in Settings → Battles. When Switch is on and the
-active Pokemon faints with a healthy party member available, the game loop
-dispatches `PROMPT_SWITCH`, pauses in the `chooseSwitch` phase, and
-`switch-prompt.js` asks which Pokemon goes out next. Auto-battle switching (the
-matchup-aware `chooseBestSwitch`) is unchanged.
+**Shipped:** `battleStyle` (`'set'` | `'switch'`, default `'switch'`) is saved
+with the game and toggled in Settings → Battles. It gates the auto-battler's
+matchup switching (`chooseBestSwitch` in `use-game-loop.js`): **Switch** (the
+default) lets the active Pokemon be swapped for a teammate that lines up better,
+while **Set** never switches on its own. The next party member is still sent out
+automatically after a faint either way. (An earlier version of this feature
+paused for a faint replacement picker; that was replaced by the matchup-switch
+meaning.)
 
 - [x] Add a `battleStyle` setting (`'set'` | `'switch'`).
-- [x] In Switch mode, pause and prompt for a replacement from the healthy party.
-- [ ] Tie the prompt into manual battle mode (#42) when that lands — it should
-      just reuse `SWITCH_PLAYER_POKEMON`.
-- [x] Default to Set so idle play is unchanged for existing saves.
+- [x] Gate the auto-battler's matchup switching on the setting.
+- [x] Default to Switch.
 
 Noticed while testing: shared EXP that levels a *fainted* party member adds the
 HP gained by the level-up, reviving it (see `applySharedExp` in
-`src/game/progression/exp.js`). That is a pre-existing quirk, not introduced
-here, but it does undercut the point of choosing the replacement — worth a
-small follow-up fix (only apply `hpGain` when `currentHp > 0`).
+`src/game/progression/exp.js`). That is a pre-existing quirk worth a small
+follow-up fix (only apply `hpGain` when `currentHp > 0`).
 
-Likely touch points: `src/game/reducer/battle/events.js` (`promptSwitch`),
-`src/game/reducer/settings.js` (`setBattleStyle`), `src/game/use-game-loop.js`,
-`src/components/switch-prompt.js` and `settings-modal.js`.
+Likely touch points: `src/game/reducer/settings.js` (`setBattleStyle`),
+`src/game/use-game-loop.js` and `settings-modal.js`.
 
 Effort: **small**.
 

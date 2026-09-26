@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 installGameData()
 
-const { AI_SKILL, calculateDamage, chooseMoveForBattle, resolveBattleTurn } = await import('../src/game/combat.js')
+const { AI_SKILL, calculateDamage, chooseBestSwitch, chooseMoveForBattle, resolveBattleTurn } = await import('../src/game/combat.js')
 const { moveData } = await import('../src/data/gameData.js')
 const { genderForPokemon } = await import('../src/game/breeding.js')
 const { describeMove, moveTooltip } = await import('../src/game/move-info.js')
@@ -669,6 +669,36 @@ test('the AI stops setting up once it is boosted', () => {
       chosen = chooseMoveForBattle(attacker, defender)
     assert.equal(chosen.moveId, 'tackle')
   })
+})
+
+test('the AI switches out of a losing matchup when a teammate lines up better', () => {
+  const foe = battler({
+      name: 'Foe',
+      types: ['Water'],
+      moves: ['waterGun'],
+      attack: 200,
+      spAttack: 200,
+    }),
+    charizard = battler({
+      speciesKey: 'charizard',
+      types: ['Fire', 'Flying'],
+      moves: ['ember'],
+    }),
+    venusaur = battler({
+      speciesKey: 'venusaur',
+      types: ['Grass', 'Poison'],
+      moves: ['energyBall'],
+    }),
+    fainted = battler({
+      speciesKey: 'blastoise',
+      types: ['Water'],
+      moves: ['waterGun'],
+      currentHp: 0,
+    })
+  // Fire into Water is losing and Grass resists Water, so it brings in Venusaur.
+  assert.equal(chooseBestSwitch(charizard, [charizard, venusaur, fainted], foe, 0), 1)
+  // Grass already wins the matchup, and a fainted teammate is never chosen.
+  assert.equal(chooseBestSwitch(venusaur, [charizard, venusaur, fainted], foe, 1), -1)
 })
 
 test('AI skill tiers change how a battler plays', () => {

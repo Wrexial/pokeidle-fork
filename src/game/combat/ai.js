@@ -1,7 +1,7 @@
 // Move-choice AI: pick the best damaging/setup/status move. Split from game/combat.js.
 
 import { moveData } from '../../data/gameData.js'
-import { estimateMoveDamage, normalizeStatKey } from './damage.js'
+import { estimateMoveDamage, getTypeMultiplier, normalizeStatKey } from './damage.js'
 import { STATUS_IMMUNE_TYPES } from './status.js'
 
 /**
@@ -162,6 +162,63 @@ export function chooseMoveForBattle(attacker, defender, hazards, skill = AI_SKIL
     attacker.statStages,
     defender.statStages
   )
+}
+
+/** A switch only happens when the active Pokemon is losing and a teammate is clearly better. */
+const SWITCH_MARGIN = 40
+
+/**
+ * The best power-weighted attack `attacker` can land on `defender`, by type
+ * matchup. Status moves count as 0.
+ * @param {BattlePokemon} attacker
+ * @param {BattlePokemon} defender
+ * @returns {number}
+ */
+function bestOffence(attacker, defender) {
+  let best = 0
+  for (const moveId of attacker.moves ?? []) {
+    const move = moveData[moveId]
+    if (!move || move.power <= 0) continue
+    best = Math.max(best, move.power * getTypeMultiplier(move.type, defender.types))
+  }
+  return best
+}
+
+/**
+ * How well `pokemon` lines up against `foe`: its best attack matchup minus the
+ * foe's best one into it. Negative means it is losing the type war.
+ * @param {BattlePokemon} pokemon
+ * @param {BattlePokemon} foe
+ * @returns {number}
+ */
+export function matchupScore(pokemon, foe) {
+  return bestOffence(pokemon, foe) - bestOffence(foe, pokemon)
+}
+
+/**
+ * The party index worth switching to when the active Pokemon is losing the type
+ * matchup and a teammate lines up much better, else -1. Shared by the Champion
+ * and the player's auto-battler.
+ * @param {BattlePokemon} active
+ * @param {BattlePokemon[]} party
+ * @param {BattlePokemon} foe
+ * @param {number} activeIndex
+ * @returns {number}
+ */
+export function chooseBestSwitch(active, party, foe, activeIndex) {
+  const activeScore = matchupScore(active, foe)
+  if (activeScore >= 0) return -1
+  let bestIndex = -1,
+    bestScore = activeScore + SWITCH_MARGIN
+  ;(party ?? []).forEach((member, index) => {
+    if (index === activeIndex || !member || member.currentHp <= 0) return
+    const score = matchupScore(member, foe)
+    if (score > bestScore) {
+      bestScore = score
+      bestIndex = index
+    }
+  })
+  return bestIndex
 }
 
 /**

@@ -13,7 +13,7 @@ import { useGame } from './context.js'
 import { attemptCatch, isCaveLocation, isNightTime, isWaterLocation, selectAutoCatchBall, selectBestBall, shouldAutoCatch } from './catching.js'
 import { abilityOf } from './abilities.js'
 import { companionExpMultiplier } from './companion.js'
-import { applyBattleForm, createBattlePokemon, createVolatileState, resolveBattleTurn, volatileStateFromBattle, AI_SKILL } from './combat.js'
+import { applyBattleForm, createBattlePokemon, createVolatileState, resolveBattleTurn, volatileStateFromBattle, AI_SKILL, chooseBestSwitch } from './combat.js'
 import { isBattleReady } from './pokemon.js'
 import { awardExperience, checkShinyOdds, pokerusExpMultiplier, resolveActiveModifiers, resolvePokemonEncounter, resolveRoamer, shinyOddsForSpecies } from './progression.js'
 
@@ -409,6 +409,36 @@ export function useGameLoop() {
                       ? AI_SKILL.smart
                       : AI_SKILL.dumb,
             playerSkill = AI_SKILL.smartest
+          // The Champion and the player's auto-battler may switch to a better
+          // type matchup before the turn resolves.
+          const playerSwitch = chooseBestSwitch(
+            playerBattlePokemon,
+            currentGameState.party,
+            enemyBattlePokemon,
+            currentGameState.activePlayerPokemonIndex
+          )
+          if (playerSwitch >= 0) {
+            dispatch({
+              type: 'SWITCH_PLAYER_POKEMON',
+              payload: { newPokemonIndex: playerSwitch },
+            })
+            return
+          }
+          if (bossType === 'champion' && currentGameState.bossBattle) {
+            const championSwitch = chooseBestSwitch(
+              enemyBattlePokemon,
+              currentGameState.bossBattle.trainerTeam,
+              playerBattlePokemon,
+              currentGameState.bossBattle.currentTrainerPokemonIndex
+            )
+            if (championSwitch >= 0) {
+              dispatch({
+                type: 'TRAINER_SEND_NEXT_POKEMON',
+                payload: { newPokemonIndex: championSwitch },
+              })
+              return
+            }
+          }
           // Rebuild any mid-battle form before the turn resolves.
           ;(applyBattleForm(playerBattlePokemon), applyBattleForm(enemyBattlePokemon))
           const turnEvents = resolveBattleTurn(

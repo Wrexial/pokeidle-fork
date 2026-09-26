@@ -250,12 +250,23 @@ test('activity hit quality scales the encounter rewards', () => {
   const original = Math.random
   try {
     Math.random = () => 0.999
-    assert.equal(rollActivityHeldItem('hit'), null, 'a plain hit usually carries nothing')
+    assert.equal(
+      rollActivityHeldItem('hit', ['Water']),
+      null,
+      'a plain hit usually carries nothing'
+    )
     Math.random = () => 0
-    assert.ok(rollActivityHeldItem('ultra'), 'an ultra hit guarantees a held item')
-    assert.ok(heldItems[rollActivityHeldItem('ultra')], 'the held item is real')
+    assert.ok(rollActivityHeldItem('ultra', ['Water']), 'an ultra hit guarantees a held item')
+    assert.ok(heldItems[rollActivityHeldItem('ultra', ['Water'])], 'the held item is real')
   } finally {
     Math.random = original
+  }
+  // Activity finds use the same pooled wild items as normal battles: a berry
+  // or a booster of one of the Pokemon's own types (never a trainer-only item).
+  const allowedFire = new Set(['sitrusBerry', 'lumBerry', 'charcoal'])
+  for (let i = 0; i < 300; i++) {
+    const item = rollActivityHeldItem('ultra', ['Fire'])
+    assert.ok(item && allowedFire.has(item), `a Fire find held ${item}`)
   }
 })
 

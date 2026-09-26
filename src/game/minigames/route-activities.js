@@ -8,6 +8,7 @@ import { encounterData, pokemonSpecies } from '../../data/gameData.js'
 import { doubleSpawnChance } from '../../data/config.js'
 import { consumableItems, evolutionItems, heldItems } from '../../data/items.js'
 import { isCaveLocation, isWaterLocation } from '../catching.js'
+import { rollWildHeldItem } from '../held-items.js'
 import { monotypeSpeciesPool, speciesHasType } from '../pokemon.js'
 import { DEFAULT_ROD, rodForId } from './rods.js'
 import { FISHING_LOCATIONS, routeHasWaterSpecies } from './fishing.js'
@@ -156,28 +157,6 @@ export const ACTIVITY_SHINY_MULTIPLIER = { hit: 2, perfect: 3, ultra: 4 }
 /** Chance a hit / perfect / ultra encounter is holding an item. */
 const ACTIVITY_HELD_ITEM_CHANCE = { hit: 0.25, perfect: 0.6, ultra: 1 }
 
-/** Weighted held item an activity encounter can carry. */
-const ACTIVITY_HELD_ITEM_TABLE = [
-  { itemId: 'sitrusBerry', weight: 20 },
-  { itemId: 'lumBerry', weight: 12 },
-  { itemId: 'mysticWater', weight: 7 },
-  { itemId: 'miracleSeed', weight: 7 },
-  { itemId: 'charcoal', weight: 7 },
-  { itemId: 'magnet', weight: 7 },
-  { itemId: 'focusSash', weight: 8 },
-  { itemId: 'eviolite', weight: 6 },
-  { itemId: 'leftovers', weight: 2 },
-  { itemId: 'lifeOrb', weight: 2 },
-  { itemId: 'choiceBand', weight: 1 },
-  { itemId: 'choiceSpecs', weight: 1 },
-  { itemId: 'choiceScarf', weight: 1 },
-  { itemId: 'assaultVest', weight: 1 },
-]
-const ACTIVITY_HELD_ITEM_TOTAL = ACTIVITY_HELD_ITEM_TABLE.reduce(
-  (sum, entry) => sum + entry.weight,
-  0
-)
-
 /**
  * @param {'hit' | 'perfect' | 'ultra'} quality
  * @returns {number}
@@ -196,18 +175,16 @@ export function activityShinyMultiplier(quality) {
 
 /**
  * Roll a held item for an activity encounter, or null when it carries none.
+ * Uses the same type-appropriate wild pool as ordinary wild battles (a berry
+ * or a booster of one of the Pokemon's own types), just with a better chance
+ * the cleaner the hit — no trainer-only competitive items.
  * @param {'hit' | 'perfect' | 'ultra'} quality
+ * @param {string[] | null | undefined} types
  * @returns {string | null}
  */
-export function rollActivityHeldItem(quality) {
+export function rollActivityHeldItem(quality, types) {
   const chance = ACTIVITY_HELD_ITEM_CHANCE[quality] ?? 0
-  if (chance <= 0 || Math.random() >= chance) return null
-  let roll = Math.random() * ACTIVITY_HELD_ITEM_TOTAL
-  for (const entry of ACTIVITY_HELD_ITEM_TABLE) {
-    roll -= entry.weight
-    if (roll <= 0) return entry.itemId
-  }
-  return ACTIVITY_HELD_ITEM_TABLE[0].itemId
+  return chance > 0 ? rollWildHeldItem(types, chance) : null
 }
 
 /**

@@ -58,6 +58,7 @@ export const CHANGELOG = [
             'Catch Settings now start with every ball enabled (the Master Ball keeps its own battle button), so the auto-catcher uses your best available ball instead of only Poke Balls',
             'Switching or deleting a save slot no longer overwrites the slot you picked: the autosave pauses while a slot is being loaded, deleted or imported, so the running session cannot clobber it before the reload',
             'Elite Four and Champion battles no longer flash the next Pokemon on screen before its trainer walks in \u2014 the incoming Pokemon stays hidden until the trainer actually sends it out',
+            'Pokemon found through route activities (fishing, foraging, Rock Smash, Headbutt, Diving) now carry the same type-appropriate items as ordinary wild Pokemon \u2014 a berry or a booster of one of their own types \u2014 instead of a random shop item like a Choice Band or a mismatched type booster',
           ],
         },
       ],

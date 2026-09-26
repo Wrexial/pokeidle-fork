@@ -4,10 +4,10 @@ import React from 'react'
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
 import { BOX_PAGE_SIZE, BOX_SORT_OPTIONS } from '../data/ui.js'
 import { pokemonSpecies } from '../data/gameData.js'
-import { heldItems } from '../data/items.js'
 import { useGame } from '../game/context.js'
 import { getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, pokemonDisplayName } from '../game/pokemon.js'
 import { isFemalePokemon } from '../game/breeding.js'
+import { itemTooltip } from '../game/progression.js'
 import { ItemIcon } from './item-icon.js'
 import { PokedexModal } from './pokedex-modal.js'
 import { RecordsModal } from './records-modal.js'
@@ -296,9 +296,7 @@ export function BoxPanel({
                               pokemon.heldItem &&
                               jsx('span', {
                                 className: 'box-held-item',
-                                title: `Holding ${
-                                  heldItems[pokemon.heldItem]?.name ?? pokemon.heldItem
-                                }`,
+                                'data-tooltip': itemTooltip(pokemon.heldItem),
                                 children: jsx(ItemIcon, {
                                   itemId: pokemon.heldItem,
                                   size: 12,

@@ -18,6 +18,7 @@ const NATURE_STAT_NAMES = {
 import { moveData, pokemonSpecies } from '../data/gameData.js'
 import { abilityTooltip } from '../data/ability-info.js'
 import { moveTooltip } from '../game/move-info.js'
+import { itemTooltip } from '../game/progression.js'
 import { useGame } from '../game/context.js'
 import { genderForPokemon, genderSymbol, isFemalePokemon } from '../game/breeding.js'
 import { abilityDisplayName, getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, IV_STAT_LABELS, IV_STAT_ORDER, judgeIVs, pokemonDisplayName } from '../game/pokemon.js'
@@ -342,7 +343,7 @@ export function StatsPanel({
                       className: 'stats-panel-held',
                       children: [
                         jsx('span', {
-                          title: 'Held item',
+                          'data-tooltip': itemTooltip(pokemon.heldItem),
                           children: `\ud83c\udf81 ${heldItems[pokemon.heldItem]?.name ?? pokemon.heldItem}`,
                         }),
                         jsx('button', {

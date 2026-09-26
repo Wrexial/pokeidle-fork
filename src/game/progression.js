@@ -2,7 +2,7 @@
 // items, offline, party, unlocks, encounters, teams, exp and roads. Re-exported
 // here so callers keep importing from game/progression.js.
 
-export { getItemCategory, isHeldItem, getItemSellPrice, isUsableConsumable, rollValuableDrop, rollCandyDrop, isActiveEffectItem, getItemInfo, formatReward, releaseReward } from './progression/items.js'
+export { getItemCategory, isHeldItem, getItemSellPrice, isUsableConsumable, rollValuableDrop, rollCandyDrop, isActiveEffectItem, getItemInfo, itemTooltip, formatReward, releaseReward } from './progression/items.js'
 export { awaySummary, computeOfflineReward, formatAwayDuration } from './progression/offline.js'
 export { tickPokerus, pokerusExpMultiplier, tickPartyEggs, getActivePartyIndex, syncActivePokemonIntoParty, loadActivePokemonFromParty, createIdleBattleState, prepareNextBattle, tickBattleCounters } from './progression/party.js'
 export { computeUnlockedLocations, getRegionUnlockTokens, regionProgressionGoal, entryRoutePath } from './progression/unlocks.js'

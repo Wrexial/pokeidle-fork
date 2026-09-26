@@ -128,6 +128,18 @@ export function getItemInfo(itemId) {
 }
 
 /**
+ * Hover-tooltip text for an item: its name, then its effect description.
+ * Mirrors `moveTooltip` / `abilityTooltip` so held items read the same way on
+ * hover as moves and abilities.
+ * @param {string} itemId
+ * @returns {string}
+ */
+export function itemTooltip(itemId) {
+  const { name, description } = getItemInfo(itemId)
+  return description ? `${name}\n${description}` : name
+}
+
+/**
  * Human-readable summary of an achievement reward, e.g.
  * "2 Victory Tokens \u00b7 $1,000 \u00b7 Master Ball \u00d71".
  * @param {{ money?: number, victoryTokens?: number, items?: Record<string, number> }} reward

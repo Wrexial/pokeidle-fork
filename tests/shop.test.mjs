@@ -17,7 +17,7 @@ const {
   tokenShopItems,
 } = await import('../src/data/items.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
-const { getItemSellPrice, isActiveEffectItem } = await import('../src/game/progression.js')
+const { getItemSellPrice, isActiveEffectItem, itemTooltip } = await import('../src/game/progression.js')
 const { regionMartIds, regionalStockForMart } = await import('../src/game/shop.js')
 
 const allStandardItems = [
@@ -163,6 +163,13 @@ test('BUY_ITEM buys a held battle item into the bag', () => {
     })
   assert.equal(bought.money, 50)
   assert.equal(bought.inventory.leftovers, 1)
+})
+
+test('item tooltips name the item and describe its effect', () => {
+  const tip = itemTooltip('leftovers')
+  assert.match(tip, /^Leftovers\n/)
+  assert.match(tip, /Restores 1\/16/)
+  assert.equal(itemTooltip('silkScarf'), 'Silk Scarf\nPowers up Normal-type moves.')
 })
 
 test('only valuables can be sold back to a mart', () => {

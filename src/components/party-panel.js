@@ -3,11 +3,10 @@
 import React from 'react'
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
 import { pokemonSpecies } from '../data/gameData.js'
-import { heldItems } from '../data/items.js'
 import { useGame } from '../game/context.js'
 import { getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, pokemonDisplayName } from '../game/pokemon.js'
 import { getEvolutionOptions, isFemalePokemon } from '../game/breeding.js'
-import { formatReward, releaseReward } from '../game/progression.js'
+import { formatReward, itemTooltip, releaseReward } from '../game/progression.js'
 import { ExpBar } from './exp-bar.js'
 import { ItemIcon } from './item-icon.js'
 import { HpBar } from './hp-bar.js'
@@ -230,9 +229,7 @@ export function PartyPanel({
                               member.heldItem &&
                               jsx('span', {
                                 className: 'party-held-item',
-                                title: `Holding ${
-                                  heldItems[member.heldItem]?.name ?? member.heldItem
-                                }`,
+                                'data-tooltip': itemTooltip(member.heldItem),
                                 children: jsx(ItemIcon, {
                                   itemId: member.heldItem,
                                   size: 12,

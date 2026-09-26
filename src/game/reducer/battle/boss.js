@@ -49,6 +49,7 @@ export function startBossBattle(state, action) {
     battleParticipants: (state.party[0]?.id ?? state.playerPokemon?.id)
       ? [state.party[0]?.id ?? state.playerPokemon?.id]
       : [],
+    playerTurnSpent: !1,
     bossBattle: {
       bossId,
       bossType,

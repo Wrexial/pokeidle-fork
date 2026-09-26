@@ -43,6 +43,7 @@ export function startTrainerBattle(state, action) {
     battleParticipants: (state.party[0]?.id ?? state.playerPokemon?.id)
       ? [state.party[0]?.id ?? state.playerPokemon?.id]
       : [],
+    playerTurnSpent: !1,
     trainerBattle: {
       trainerId,
       trainerName,
@@ -107,6 +108,9 @@ export function switchPlayerPokemon(state, action) {
         party,
         activePlayerPokemonIndex: newIndex,
         battleParticipants: [...new Set([...(state.battleParticipants ?? []), nextPokemon.id])],
+        // A deliberate switch costs the turn; a forced switch after a faint
+        // does not (the foe already acted this turn).
+        playerTurnSpent: !!action.payload.costsTurn || !!state.playerTurnSpent,
         pendingEvents: [
           ...state.pendingEvents,
           {

@@ -107,3 +107,25 @@ test('a non-roamer never flees', () => {
     Math.random = originalRandom
   }
 })
+
+test('a skip turn lets only the foe act (switch or item use)', () => {
+  const player = battler({ name: 'Player', isPlayer: true, moves: ['tackle'], speed: 999 }),
+    enemy = battler({ name: 'Foe', moves: ['tackle'], speed: 1 }),
+    // Signature: (...skill args, playerSkipMove)
+    events = resolveBattleTurn(
+      player,
+      enemy,
+      false,
+      false,
+      null,
+      null,
+      false,
+      null,
+      null,
+      null,
+      true
+    ),
+    attacks = events.filter((/** @type {any} */ event) => event.type === 'attack')
+  assert.equal(attacks.length, 1, 'only one Pokemon should attack')
+  assert.match(attacks[0].message, /Foe used/, 'the foe is the one that acts')
+})

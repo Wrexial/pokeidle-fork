@@ -494,6 +494,8 @@ type GameState = {
   activePlayerPokemonIndex: number
   /** Pokemon ids that have taken part in the current battle (EXP shares). */
   battleParticipants?: string[]
+  /** The player switched or used an item this turn, so only the foe acts. */
+  playerTurnSpent?: boolean
   alwaysCatchShinies: boolean
   trainerBattle: TrainerBattle | null
   bossBattle: TrainerBattle | null

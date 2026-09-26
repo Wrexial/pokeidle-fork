@@ -32,6 +32,7 @@ export function startEncounter(state, action) {
     playerPokemon: activePokemon,
     activePlayerPokemonIndex: activeIndex,
     battleParticipants: activePokemon?.id ? [activePokemon.id] : [],
+    playerTurnSpent: !1,
     battleEvents: [],
     pendingEvents: [
       {
@@ -64,6 +65,7 @@ export function executeTurn(state, action) {
   return {
     ...state,
     battleTurn: (state.battleTurn ?? 0) + 1,
+    playerTurnSpent: !1,
     pendingEvents: [...state.pendingEvents, ...action.payload.events],
   }
 }

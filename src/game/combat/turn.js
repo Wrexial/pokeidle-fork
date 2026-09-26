@@ -162,9 +162,11 @@ function applyMoveLock(pokemon, moveId) {
  * @param {{ type: string, turns: number } | null} [terrain]
  * @param {string | null} [enemySkill] AI skill for the foe (defaults from `isTrainerBattle`).
  * @param {string | null} [playerSkill] AI skill for the player's auto-battler.
+ * @param {boolean} [playerSkipMove] The player switched or used an item this
+ *   turn, so their Pokemon does not attack — only the foe acts.
  * @returns {any[]}
  */
-export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn = !1, weather = null, hazards = null, deterministic = !1, terrain = null, enemySkill = null, playerSkill = null) {
+export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn = !1, weather = null, hazards = null, deterministic = !1, terrain = null, enemySkill = null, playerSkill = null, playerSkipMove = !1) {
   const events = /** @type {any[]} */ ([])
   let activeWeather = weather ?? null,
     activeTerrain = terrain ?? null,
@@ -243,7 +245,11 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       enemySkill ?? (deterministic ? AI_SKILL.smartest : isTrainerBattle ? AI_SKILL.smart : AI_SKILL.dumb),
     playerAiSkill = playerSkill ?? (deterministic ? AI_SKILL.smartest : AI_SKILL.smart)
   let playerMoveId, playerMove
-  if (playerMustRecharge) ((playerMoveId = player.moves[0]), (playerMove = moveData[playerMoveId]))
+  if (playerSkipMove) {
+    // The player switched or used an item, so their Pokemon takes no action.
+    playerMoveId = null
+    playerMove = void 0
+  } else if (playerMustRecharge) ((playerMoveId = player.moves[0]), (playerMove = moveData[playerMoveId]))
   else if (player.chargingMove) ((playerMoveId = player.chargingMove), (playerMove = moveData[playerMoveId]))
   else if (player.lockedMove) ((playerMoveId = player.lockedMove), (playerMove = moveData[playerMoveId]))
   else {
@@ -268,7 +274,14 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     attackOrder = [],
     playerPriority = playerMustRecharge ? -10 : effectivePriority(player, playerMove),
     enemyPriority = enemyMustRecharge ? -10 : effectivePriority(enemy, enemyMove)
-  playerPriority > enemyPriority
+  playerSkipMove
+    ? attackOrder.push({
+        attacker: enemy,
+        defender: player,
+        moveId: enemyMoveId,
+        isPlayer: !1,
+      })
+    : playerPriority > enemyPriority
     ? attackOrder.push(
         {
           attacker: player,

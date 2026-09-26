@@ -77,6 +77,7 @@ export function createIdleBattleState() {
     activePlayerPokemonIndex: 0,
     playerVolatile: null,
     battleParticipants: [],
+    playerTurnSpent: !1,
   }
 }
 

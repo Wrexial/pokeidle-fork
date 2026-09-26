@@ -426,19 +426,24 @@ export function useGameLoop() {
                     : isLegendaryWild
                       ? AI_SKILL.smart
                       : AI_SKILL.dumb,
-            playerSkill = AI_SKILL.smartest
+            playerSkill = AI_SKILL.smartest,
+            // If the player already switched or used an item this turn, their
+            // Pokemon does not attack — only the foe acts.
+            playerSkipMove = !!currentGameState.playerTurnSpent
           // The Champion and the player's auto-battler may switch to a better
           // type matchup before the turn resolves.
-          const playerSwitch = chooseBestSwitch(
-            playerBattlePokemon,
-            currentGameState.party,
-            enemyBattlePokemon,
-            currentGameState.activePlayerPokemonIndex
-          )
+          const playerSwitch = playerSkipMove
+            ? -1
+            : chooseBestSwitch(
+                playerBattlePokemon,
+                currentGameState.party,
+                enemyBattlePokemon,
+                currentGameState.activePlayerPokemonIndex
+              )
           if (playerSwitch >= 0) {
             dispatch({
               type: 'SWITCH_PLAYER_POKEMON',
-              payload: { newPokemonIndex: playerSwitch },
+              payload: { newPokemonIndex: playerSwitch, costsTurn: !0 },
             })
             return
           }
@@ -469,7 +474,8 @@ export function useGameLoop() {
               isTowerBattle,
               currentGameState.terrain ?? null,
               enemySkill,
-              playerSkill
+              playerSkill,
+              playerSkipMove
             )
           dispatch({
             type: 'EXECUTE_TURN',

@@ -163,6 +163,8 @@ export const initialGameState = {
   activeEffects: [],
   /** Pokemon ids that have taken part in the current battle (EXP shares). */
   battleParticipants: [],
+  /** The player switched or used an item this turn, so only the foe acts. */
+  playerTurnSpent: !1,
 }
 
 /**

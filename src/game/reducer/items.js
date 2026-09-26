@@ -180,6 +180,8 @@ export function useItemOnPokemon(state, action) {
         [itemId]: owned - 1,
         ...(previous ? { [previous]: (state.inventory[previous] ?? 0) + 1 } : {}),
       },
+      // Using an item mid-battle costs the player's action for the turn.
+      playerTurnSpent: state.phase === 'battling' ? !0 : state.playerTurnSpent,
       battleLog: [...state.battleLog, `${member.name} is now holding ${heldItem.name}!`].slice(-50),
     }
   }
@@ -297,6 +299,8 @@ export function useItemOnPokemon(state, action) {
       ...state.inventory,
       [itemId]: owned - consumed,
     },
+    // Using an item mid-battle costs the player's action for the turn.
+    playerTurnSpent: state.phase === 'battling' ? !0 : state.playerTurnSpent,
     battleLog: [...state.battleLog, ...log].slice(-50),
   }
 }

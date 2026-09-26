@@ -91,7 +91,7 @@ test('Monotype confines wild encounters to the chosen type', () => {
   )
 })
 
-test('Monotype falls back to the full route table when nothing matches', () => {
+test('Monotype rolls a random on-type Pokemon when the route has none', () => {
   /** @type {EncounterData} */
   const data = {
     name: 'test',
@@ -101,11 +101,16 @@ test('Monotype falls back to the full route table when nothing matches', () => {
     ],
   }
   const seen = new Set()
-  for (let i = 0; i < 100; i++)
-    seen.add(
-      resolvePokemonEncounter(data, [], new Set(), undefined, 1, false, 0, 'Grass').speciesKey
+  for (let i = 0; i < 200; i++) {
+    const encounter = resolvePokemonEncounter(data, [], new Set(), undefined, 1, false, 0, 'Grass')
+    assert.ok(
+      pokemonSpecies[encounter.speciesKey].types.includes('Grass'),
+      `${encounter.speciesKey} should be Grass-type`
     )
-  assert.ok(seen.has('charmander') && seen.has('squirtle'), 'uses the route\u2019s normal table')
+    assert.equal(encounter.level, 5, 'keeps the route\u2019s level band')
+    seen.add(encounter.speciesKey)
+  }
+  assert.ok(seen.size > 1, 'rolls more than one Grass species')
 })
 
 test('Monotype constrains Randomizer rolls too', () => {

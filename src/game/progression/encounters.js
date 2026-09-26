@@ -271,12 +271,22 @@ export function resolvePokemonEncounter(encounterData, modifiers, completedGener
       modifiers,
       shinyChain
     ),
-    // Monotype challenge: only roll species that carry the chosen type. If a
-    // route has none, fall back to its full table so a run can't soft-lock.
+    // Monotype challenge: only roll species that carry the chosen type.
     monotypePool = monotype
       ? weightedEncounters.filter((encounter) => speciesHasType(encounter.speciesKey, monotype))
-      : weightedEncounters,
-    pool = monotypePool.length > 0 ? monotypePool : weightedEncounters,
+      : weightedEncounters
+  // If the route has none of the chosen type, roll a random Pokemon of that
+  // type at the route's level band instead of leaking other types into the
+  // pool (which would break the challenge).
+  if (monotype && monotypePool.length === 0)
+    return resolveRandomEncounter(
+      encounterData,
+      completedGenerationSet,
+      shinyBonus,
+      levelOverride,
+      monotype
+    )
+  const pool = monotypePool.length > 0 ? monotypePool : weightedEncounters,
     totalWeight = pool.reduce((accumulator, encounter) => accumulator + encounter.weight, 0)
   let roll = Math.random() * totalWeight
   for (const encounter of pool)

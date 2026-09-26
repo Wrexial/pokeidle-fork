@@ -138,6 +138,7 @@ export const CHANGELOG = [
             'Mobile layouts no longer run under the browser\u2019s address bar: the dynamic-viewport height override was declared before the old fallback, so the bottom of the Map and item tabs is reachable again',
             'The Backpack is a new section under the Location panel (where the bag used to be): it holds the League badges / Elite Four, Pokedex, Bank (money + Reward Shop), Items (bag) and Records as tabs, so the League no longer shares a tab with the location',
             'On 21:9 and wider screens the party and box now stack vertically instead of splitting into two side-by-side columns',
+            'Empty Box slots now show a recessed placeholder shadow, so it is obvious which slots are free',
           ],
         },
         {

@@ -2246,6 +2246,12 @@ img {
     overflow: hidden
 }
 
+/* Unfilled slots read as recessed empty sockets. */
+.box-grid-slot:not(.filled) {
+    background: #00000033;
+    box-shadow: inset 2px 2px 0 #00000059,inset -2px -2px 0 #ffffff0f
+}
+
 .box-grid-slot img {
     width: 40px;
     height: 40px;

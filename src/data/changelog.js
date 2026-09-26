@@ -115,6 +115,15 @@ export const CHANGELOG = [
           ],
         },
         {
+          heading: 'Interface',
+          items: [
+            'The game now adapts to any screen shape: on short or narrow windows (laptops, tablets, landscape phones) the battle scene scales down to fit instead of clipping the HP bars or move bar, and the party / box / location panels move into a tabbed layout rather than being squeezed off the edge',
+            'The battle move bar no longer disappears on short screens, and the battle log keeps a few lines of room',
+            'On ultrawide monitors the side panels\u2019 content stays aligned with the battle scene instead of stretching every bar, row and sprite across the full width',
+            'Pop-up windows (Settings, patch notes, the move manager, the Pok\u00e9dex) now fit inside narrow screens instead of running off the edge',
+          ],
+        },
+        {
           heading: 'Fixes',
           items: [
             'Wild Pokemon can no longer be caught twice from one battle: the idle loop now waits for a turn / catch to commit before acting again, so a fast battle speed can not replay the same victory and duplicate the catch',

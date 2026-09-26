@@ -44,9 +44,20 @@ export let locationImages = {
 
 export const BATTLE_LOG_MIN_HEIGHT = 30
 
-export const MOBILE_BREAKPOINT = 768
+// Vertical room the battle log is guaranteed before the scene is scaled to fit
+// (the log collapses below `BATTLE_LOG_MIN_HEIGHT` content height).
+export const BATTLE_LOG_RESERVE = 60
+
+export const MOBILE_BREAKPOINT = 1000
+
+// A viewport shorter than this (landscape phones, short desktop windows) uses
+// the stacked/tabbed layout even when it is wide enough for three columns,
+// because the centre column cannot fit the battle scene and town map.
+export const MOBILE_HEIGHT_BREAKPOINT = 600
 
 export const DESIGN_WIDTH = 560
+
+export const DESIGN_HEIGHT = 480
 
 /**
  * Three-letter battle status abbreviations shown on the info nameplates.

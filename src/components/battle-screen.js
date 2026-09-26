@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
-import { DESIGN_WIDTH } from '../data/ui.js'
+import { BATTLE_LOG_RESERVE, DESIGN_HEIGHT, DESIGN_WIDTH } from '../data/ui.js'
 import { useGame } from '../game/context.js'
 import { useGameLoop } from '../game/use-game-loop.js'
 import { useIsMobile } from '../hooks.js'
@@ -10,66 +10,72 @@ import { BattleLog } from './battle-log.js'
 import { BattleScene } from './battle-scene.js'
 import { LevelUpNotification } from './level-up-notification.js'
 
+// Never shrink the battle scene past this — on an extremely short viewport the
+// bottom of the scene clips rather than the whole scene becoming unreadable.
+const MIN_SCENE_SCALE = 0.5
+
 export function BattleScreen() {
   const { state } = useGame(),
     isMobile = useIsMobile(),
     containerRef = React.useRef(/** @type {HTMLDivElement | null} */ (null)),
-    contentRef = React.useRef(/** @type {HTMLDivElement | null} */ (null)),
-    [scale, setScale] = React.useState(1),
-    [contentHeight, setContentHeight] = React.useState(480)
+    [scale, setScale] = React.useState(1)
   useGameLoop()
   const recalcSize = React.useCallback(() => {
     if (!containerRef.current) return
     const containerWidth = containerRef.current.clientWidth
-    if ((setScale(Math.min(containerWidth / DESIGN_WIDTH, 1)), contentRef.current)) {
-      const battleScene = contentRef.current.querySelector('.battle-scene'),
-        scrollHeight = contentRef.current.scrollHeight,
-        marginBottom = battleScene ? parseFloat(getComputedStyle(battleScene).marginBottom) : 0
-      setContentHeight(scrollHeight + marginBottom)
-    }
-  }, [])
-  if (
-    (React.useEffect(() => {
-      if (!isMobile || !containerRef.current) return
-      const resizeObserver = new ResizeObserver(() => recalcSize())
-      return (resizeObserver.observe(containerRef.current), recalcSize(), () => resizeObserver.disconnect())
-    }, [isMobile, recalcSize]),
-    React.useEffect(() => {
-      if (isMobile && contentRef.current) {
-        const battleScene = contentRef.current.querySelector('.battle-scene'),
-          scrollHeight = contentRef.current.scrollHeight,
-          marginBottom = battleScene ? parseFloat(getComputedStyle(battleScene).marginBottom) : 0
-        setContentHeight(scrollHeight + marginBottom)
-      }
+    // In the stacked (tabbed) layout this element is sized *by* the scene, so
+    // cap the scene against the viewport instead, leaving room for the tabs.
+    // In the three-column layout the element is a flex child with a fixed
+    // height, so reserve only the battle log's minimum.
+    const availableHeight = isMobile
+      ? window.innerHeight * 0.6
+      : containerRef.current.clientHeight - BATTLE_LOG_RESERVE
+    const nextScale = Math.min(
+      containerWidth / DESIGN_WIDTH,
+      availableHeight / DESIGN_HEIGHT,
+      1
+    )
+    setScale(Math.max(nextScale, MIN_SCENE_SCALE))
+  }, [isMobile])
+  React.useEffect(() => {
+    if (!containerRef.current) return
+    const resizeObserver = new ResizeObserver(() => recalcSize())
+    return (
+      resizeObserver.observe(containerRef.current),
+      recalcSize(),
+      () => resizeObserver.disconnect()
+    )
+  }, [recalcSize])
+  // The tabbed layout's cap comes from `window.innerHeight`, which a
+  // ResizeObserver on the container does not track (e.g. mobile browser chrome
+  // collapsing), so listen for window resizes too.
+  React.useEffect(() => {
+    window.addEventListener('resize', recalcSize)
+    return () => window.removeEventListener('resize', recalcSize)
+  }, [recalcSize])
+  if (!state.playerPokemon) return null
+  const scene = jsx('div', {
+    className: 'battle-scene-scaler',
+    style: {
+      height: DESIGN_HEIGHT * scale,
+    },
+    children: jsx('div', {
+      className: 'battle-scene-scaler-inner',
+      style: {
+        transform: `scale(${scale})`,
+      },
+      children: jsx(BattleScene, {}),
     }),
-    !state.playerPokemon)
-  )
-    return null
-  if (isMobile) {
-    const scaledHeight = contentHeight * scale
+  })
+  if (isMobile)
     return jsxs('div', {
       className: 'battle-screen',
       ref: containerRef,
-      style: {
-        height: scaledHeight,
-        overflow: 'hidden',
-      },
-      children: [
-        jsx('div', {
-          ref: contentRef,
-          style: {
-            transform: `scale(${scale})`,
-            transformOrigin: 'top left',
-            width: DESIGN_WIDTH,
-          },
-          children: jsx(BattleScene, {}),
-        }),
-        jsx(LevelUpNotification, {}),
-      ],
+      children: [scene, jsx(LevelUpNotification, {})],
     })
-  }
   return jsxs('div', {
     className: 'battle-screen',
-    children: [jsx(BattleScene, {}), jsx(BattleLog, {}), jsx(LevelUpNotification, {})],
+    ref: containerRef,
+    children: [scene, jsx(BattleLog, {}), jsx(LevelUpNotification, {})],
   })
 }

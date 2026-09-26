@@ -2,7 +2,7 @@
 // notifications). The game loop lives in game/use-game-loop.js.
 
 import React from 'react'
-import { MOBILE_BREAKPOINT } from './data/ui.js'
+import { MOBILE_BREAKPOINT, MOBILE_HEIGHT_BREAKPOINT } from './data/ui.js'
 import { mapData } from './data/gameData.js'
 import { useGame } from './game/context.js'
 import { playSfx, startMusic, stopMusic, unlockAudio } from './game/audio.js'
@@ -40,10 +40,16 @@ export function useTypewriter(text, speed = 30) {
 
 
 export function useIsMobile() {
-  const [isMobile, setIsMobile] = React.useState(() => window.innerWidth < MOBILE_BREAKPOINT)
+  const [isMobile, setIsMobile] = React.useState(
+      () =>
+        window.innerWidth < MOBILE_BREAKPOINT ||
+        window.innerHeight < MOBILE_HEIGHT_BREAKPOINT
+    )
   return (
     React.useEffect(() => {
-      const mediaQuery = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`),
+      const mediaQuery = window.matchMedia(
+          `(max-width: ${MOBILE_BREAKPOINT - 1}px), (max-height: ${MOBILE_HEIGHT_BREAKPOINT - 1}px)`
+        ),
         handleChange = /** @param {MediaQueryListEvent} event */ (event) => setIsMobile(event.matches)
       return (
         mediaQuery.addEventListener('change', handleChange),

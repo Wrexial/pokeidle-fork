@@ -136,6 +136,7 @@ export const CHANGELOG = [
             'The Pokemon summary\u2019s header is tidier: the name and level share a row, with nature, ability, held item and friendship in a chip strip beneath the types. A nature\u2019s stat effect now lives in its hover tooltip instead of inline arrows, colour-coded with the raised stat in green and the lowered one in red',
             'Catch Settings now start with every ball enabled (the Master Ball keeps its own battle button), so the auto-catcher uses your best available ball instead of only Poke Balls',
             'Switching or deleting a save slot no longer overwrites the slot you picked: the autosave pauses while a slot is being loaded, deleted or imported, so the running session cannot clobber it before the reload',
+            'Elite Four and Champion battles no longer flash the next Pokemon on screen before its trainer walks in \u2014 the incoming Pokemon stays hidden until the trainer actually sends it out',
           ],
         },
       ],

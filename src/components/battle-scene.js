@@ -108,17 +108,21 @@ export function BattleScene() {
       .filter((event) => event.type === 'damage' || event.type === 'recoil')
       .pop(),
     lastFaintEvent = battleEvents.filter((event) => event.type === 'faint').pop(),
-    pendingTrainerAppear =
-      activeTrainerBattle &&
-      battleEvents.length === 0 &&
-      state.pendingEvents.some((event) => event.type === 'trainerAppear'),
     hasTrainerAppeared = battleEvents.some((event) => event.type === 'trainerAppear'),
     showTrainerIntro =
       activeTrainerBattle && (currentEvent?.type === 'trainerAppear' || (currentEvent?.type === 'trainerSendOut' && hasTrainerAppeared)),
     trainerIntroSlideOut = currentEvent?.type === 'trainerSendOut' && hasTrainerAppeared,
     isTrainerSendOut = currentEvent?.type === 'trainerSendOut',
     isPlayerSwitch = currentEvent?.type === 'playerSwitch',
-    hideEnemySprite = currentEvent?.type === 'trainerAppear' || pendingTrainerAppear,
+    // Keep the foe hidden from the moment a send cycle begins (a walk-in is
+    // queued) until their Pokemon is actually thrown out. Watching the pending
+    // queue rather than `battleEvents.length` matters for the Elite Four /
+    // Champion gauntlet, where the prize message is consumed before the next
+    // trainer appears — otherwise their Pokemon flashes on screen first.
+    hideEnemySprite =
+      !!activeTrainerBattle &&
+      (currentEvent?.type === 'trainerAppear' ||
+        state.pendingEvents.some((event) => event.type === 'trainerAppear')),
     isLatestDamage = lastDamageEvent ? battleEvents.indexOf(lastDamageEvent) === battleEvents.length - 1 : !1,
     playerWasHit = lastDamageEvent?.data?.target === 'player' && isLatestDamage,
     enemyWasHit = lastDamageEvent?.data?.target === 'enemy' && isLatestDamage,

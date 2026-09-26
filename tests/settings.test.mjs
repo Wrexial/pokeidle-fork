@@ -45,6 +45,30 @@ test('audio defaults: music off, sound effects on', () => {
   assert.equal(initialGameState.sfxEnabled, true)
 })
 
+test('battle style defaults to Set and switches to Switch', () => {
+  assert.equal(initialGameState.battleStyle, 'set')
+  const switched = gameReducer(initialGameState, {
+    type: 'SET_BATTLE_STYLE',
+    payload: { style: 'switch' },
+  })
+  assert.equal(switched.battleStyle, 'switch')
+  assert.equal(
+    gameReducer(switched, { type: 'SET_BATTLE_STYLE', payload: { style: 'set' } }).battleStyle,
+    'set'
+  )
+  // Anything unrecognised falls back to Set.
+  assert.equal(
+    gameReducer(initialGameState, { type: 'SET_BATTLE_STYLE', payload: { style: 'nonsense' } })
+      .battleStyle,
+    'set'
+  )
+})
+
+test('PROMPT_SWITCH pauses in the chooseSwitch phase', () => {
+  const prompted = gameReducer(initialGameState, { type: 'PROMPT_SWITCH' })
+  assert.equal(prompted.phase, 'chooseSwitch')
+})
+
 test('the audio engine is a no-op without a browser AudioContext', () => {
   // The test helper sets window without AudioContext, so these must not throw.
   assert.doesNotThrow(() => {
@@ -85,4 +109,7 @@ test('repairSave defaults the accessibility settings off and keeps them on', () 
   assert.equal(defaults.sfxEnabled, true)
   assert.equal(repairSave(save({ musicEnabled: true, sfxEnabled: true })).musicEnabled, true)
   assert.equal(repairSave(save({ musicEnabled: true, sfxEnabled: false })).sfxEnabled, false)
+  assert.equal(defaults.battleStyle, 'set')
+  assert.equal(repairSave(save({ battleStyle: 'switch' })).battleStyle, 'switch')
+  assert.equal(repairSave(save({ battleStyle: 'garbage' })).battleStyle, 'set')
 })

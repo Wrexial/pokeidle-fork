@@ -207,6 +207,32 @@ export function SettingsModal({ onClose }) {
                     children: [
                       jsx('div', {
                         className: 'settings-section-title',
+                        children: 'Battles',
+                      }),
+                      jsx('p', {
+                        className: 'settings-hint',
+                        children:
+                          'Set sends your next party Pokemon out automatically when one faints; Switch pauses the battle so you can choose which one goes out.',
+                      }),
+                      jsx('button', {
+                        className: `settings-toggle-btn${state.battleStyle === 'switch' ? ' active' : ''}`,
+                        onClick: () =>
+                          dispatch({
+                            type: 'SET_BATTLE_STYLE',
+                            payload: { style: state.battleStyle === 'switch' ? 'set' : 'switch' },
+                          }),
+                        children:
+                          state.battleStyle === 'switch'
+                            ? 'Battle Style: Switch'
+                            : 'Battle Style: Set',
+                      }),
+                    ],
+                  }),
+                  jsxs('div', {
+                    className: 'settings-section',
+                    children: [
+                      jsx('div', {
+                        className: 'settings-section-title',
                         children: 'Notifications',
                       }),
                       jsx('p', {

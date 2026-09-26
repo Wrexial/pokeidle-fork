@@ -771,20 +771,30 @@ out without being asked) or **Switch** (the game prompts after a faint). An idle
 auto-battler currently always behaves like Set, silently pulling the next
 healthy party member in.
 
-- [ ] Add a `battleStyle` setting (`'set'` | `'switch'`) under gameplay (#18).
-- [ ] In Switch mode, when the active Pokemon faints, pause and prompt the
-      player to choose a replacement from the healthy party.
-- [ ] Ties into manual mode (#42) and the auto-switch behaviour — make sure the
-      two don't fight (manual mode should always allow a choice; auto-switch
-      health rules still apply to *when* the AI switches, not the faint prompt).
-- [ ] Default to Set so idle play is unchanged for existing saves.
+**Shipped:** `battleStyle` (`'set'` | `'switch'`, default `'set'`) is saved
+with the game and toggled in Settings → Battles. When Switch is on and the
+active Pokemon faints with a healthy party member available, the game loop
+dispatches `PROMPT_SWITCH`, pauses in the `chooseSwitch` phase, and
+`switch-prompt.js` asks which Pokemon goes out next. Auto-battle switching (the
+matchup-aware `chooseBestSwitch`) is unchanged.
 
-Likely touch points: `src/game/reducer/battle.js` (the faint/replacement path),
-`src/components/battle-scene.js` (the prompt), `src/data/ui.js` and
-`src/hooks.js` (settings plumbing).
+- [x] Add a `battleStyle` setting (`'set'` | `'switch'`).
+- [x] In Switch mode, pause and prompt for a replacement from the healthy party.
+- [ ] Tie the prompt into manual battle mode (#42) when that lands — it should
+      just reuse `SWITCH_PLAYER_POKEMON`.
+- [x] Default to Set so idle play is unchanged for existing saves.
 
-Effort: **small** (the replacement party selection already exists for manual
-switching; this is a prompt + preference).
+Noticed while testing: shared EXP that levels a *fainted* party member adds the
+HP gained by the level-up, reviving it (see `applySharedExp` in
+`src/game/progression/exp.js`). That is a pre-existing quirk, not introduced
+here, but it does undercut the point of choosing the replacement — worth a
+small follow-up fix (only apply `hpGain` when `currentHp > 0`).
+
+Likely touch points: `src/game/reducer/battle/events.js` (`promptSwitch`),
+`src/game/reducer/settings.js` (`setBattleStyle`), `src/game/use-game-loop.js`,
+`src/components/switch-prompt.js` and `settings-modal.js`.
+
+Effort: **small**.
 
 ## 45. Physical / special / status as images
 

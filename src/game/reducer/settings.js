@@ -17,6 +17,22 @@ export function setSpeed(state, action) {
 }
 
 /**
+ * Handle the `SET_BATTLE_STYLE` action. The mainline Set / Switch option:
+ * "set" sends the next party member out automatically after a faint, "switch"
+ * pauses the battle so the player can choose (see the `chooseSwitch` phase).
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function setBattleStyle(state, action) {
+  const style = action.payload?.style === 'switch' ? 'switch' : 'set'
+  return {
+    ...state,
+    battleStyle: style,
+  }
+}
+
+/**
  * Handle the `TOGGLE_PAUSE` action.
  * @param {GameState} state
  * @param {GameAction} action

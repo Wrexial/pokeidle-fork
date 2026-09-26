@@ -12999,3 +12999,84 @@ img {
     color: #1a1808;
     text-shadow: none
 }
+
+/* Switch battle style: the replacement picker shown after a faint. */
+.switch-prompt-overlay {
+    position: fixed;
+    inset: 0;
+    background: #0009;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 210;
+    padding: 12px
+}
+
+.switch-prompt {
+    background: url(/ui/parchment.png) repeat;
+    background-size: 64px 64px;
+    background-color: #e8dcc0;
+    color: var(--ink);
+    width: min(420px,100%);
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 14px;
+    box-shadow: inset 2px 2px #ffdca04d,inset -2px -2px #00000026,0 0 0 4px #5a3e20,0 0 0 6px #3a2810,0 0 0 8px #6a4e30,0 0 0 10px #8a6840,0 0 0 12px #6a4e30,0 0 0 14px #3a2810,4px 6px 0 14px #0006
+}
+
+.switch-prompt-title {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 4px
+}
+
+.switch-prompt-hint {
+    font-size: 8px;
+    color: #5a4010;
+    margin-bottom: 10px
+}
+
+.switch-prompt-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px
+}
+
+.switch-prompt-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    background: #d8c8a0;
+    border: 2px solid #a89870;
+    cursor: pointer;
+    text-align: left
+}
+
+.switch-prompt-option:hover {
+    border-color: #8a6820;
+    filter: brightness(1.05)
+}
+
+.switch-prompt-sprite {
+    width: 40px;
+    height: 40px;
+    image-rendering: pixelated
+}
+
+.switch-prompt-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    color: var(--ink)
+}
+
+.switch-prompt-name {
+    font-size: 9px;
+    font-weight: 700
+}
+
+.switch-prompt .hp-label {
+    color: var(--ink)
+}

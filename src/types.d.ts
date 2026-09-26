@@ -409,6 +409,8 @@ type GameState = {
   unlockedRegions: string[]
   speed: number
   paused: boolean
+  /** Mainline Set / Switch battle style ("switch" pauses after a faint). */
+  battleStyle: 'set' | 'switch'
   autoCatch: boolean
   autoProceed: boolean
   /** Raise browser notifications for key events while the tab is hidden. */

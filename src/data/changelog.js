@@ -69,6 +69,7 @@ export const CHANGELOG = [
             'The Champion and your own auto-battler also switch Pokemon now: when the active one is losing the type matchup and a teammate lines up much better, they bring the teammate in',
             'Every Pokemon that took part in a battle now shares its EXP, not just the one that landed the final blow',
             'Switching a Pokemon in or using an item during a battle now uses up that turn: the foe still acts, and your Pokemon does not attack',
+            'Set / Switch battle style: choose Set (the next party Pokemon goes out automatically when one faints, as before) or Switch (the battle pauses so you pick which one goes out) in Settings \u2192 Battles',
           ],
         },
         {

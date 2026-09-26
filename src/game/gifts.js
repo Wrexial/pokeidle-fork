@@ -48,7 +48,7 @@ export const GIFTS = [
     name: 'Weather Institute',
     description: 'The researchers give you the Castform they study.',
     pokemon: { speciesKey: 'castform', level: 25 },
-    requires: { badges: 3 },
+    requires: { badges: 4 },
   },
   {
     id: 'gift-sinnoh-eevee',

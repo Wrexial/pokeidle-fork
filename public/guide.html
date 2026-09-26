@@ -282,6 +282,7 @@
           <li>Moves are learned by levelling; open a Pokémon's stats and use the Manage Moves panel to re-learn its family's moves for free, or pay the <strong>Move Tutor</strong> ($4,000 per move) to teach a TM it can learn.</li>
           <li>Use the speed controls to fast-forward, and the catch selector to batch-apply Repel/Honey.</li>
           <li><strong>Mega Evolution</strong>: a Mega-capable Pokémon holding the <strong>Mega Stone</strong> transforms for the rest of the battle (attackers take the X forme, others the Y forme), then reverts afterwards.</li>
+          <li><strong>Auto-battle smarts</strong>: your team always takes its best action and may switch to a teammate when the matchup turns bad. Foes scale with the fight — wild Pokémon and route trainers attack at random, legendary wilds and gym leaders play the full move-picking game, and the Elite Four and Champion play at their best (and the Champion switches too).</li>
           <li>The <a href="/reference.html">Battle Reference</a> lists every move and ability and what the engine does with it.</li>
         </ul>
       </section>
@@ -294,8 +295,17 @@
           Beating a Champion is what opens the next region.
         </p>
         <p>
+          You challenge each of them <strong>where they stand</strong>: walk into a gym's
+          town and the location panel shows the leader with a <strong>FIGHT</strong>
+          button, and the Pokémon League itself shows the Elite Four and Champion with
+          <strong>BEGIN CHALLENGE</strong>. The <strong>League</strong> tab is the
+          overview — badges, team levels and a <strong>GO TO</strong> shortcut to travel
+          to a gym or the league you haven't reached yet.
+        </p>
+        <p>
           Leaders field much stronger rematch teams once you have every badge in their
-          region, and the league does the same once the Champion is beaten.
+          region, and the league does the same once the Champion is beaten. The Elite Four
+          and Champion are fought as one run, with your team healed before it starts.
         </p>
       </section>
 
@@ -306,6 +316,8 @@
           <li><strong>Victory Tokens</strong> — earned from gyms, Champions, Prestige and the Battle Tower — are spent in the <strong>Reward Shop</strong>.</li>
           <li>The Reward Shop stocks <strong>evolution items</strong>: elemental stones, King's Rock, Metal Coat, Protector, Upgrade, the <strong>Link Cable</strong> (trade evolutions) and more.</li>
           <li><strong>Held items</strong> (Leftovers, Choice items, Berries, type boosters…) are equipped from the Bag's Held Items tab. Their effects are listed in <a href="#status">What works &amp; what's WIP</a>.</li>
+          <li>Marts <strong>buy back only Valuables</strong> — Nuggets, Pearls, Stardust, Star Pieces, Big Nuggets and Comet Shards. Potions, balls, held items and other gear can't be sold.</li>
+          <li>Hover a move, ability or held item wherever it appears (battle bar, Move Manager, a Pokémon's summary, the party or the Box) for a plain-English explanation of what it does.</li>
           <li><strong>Repel</strong> halves a chosen species' encounter rate; <strong>Honey</strong> doubles it. <strong>Exp. Share</strong> levels the whole party.</li>
         </ul>
       </section>
@@ -376,6 +388,14 @@
           Reaching the right place opens that area's minigame in its location panel.
           Each one takes over the main screen and pauses the idle loop while it runs.
         </p>
+        <p>
+          Minigames cheer a good result and buzz a miss (with the Sound Effects setting
+          on). Recent polish: Puzzle League tiles are Pokémon faces that slide, pop and
+          drop as you play; Poké Radar's grass patches show the route's Pokémon; the Bug
+          Catching Contest only judges your <em>best</em> catch for the podium (you keep
+          everything you catch); and the Pokéathlon opens with a countdown and
+          instructions before the first event.
+        </p>
         <h3>Route activities</h3>
         <ul>
           <li><strong>Fishing</strong> on water routes — time the cast bar to hook a Water Pokémon; a perfect cast boosts the shiny odds and level of what you hook. Better rods unlock as you open regions: Old → Good → Super.</li>
@@ -388,7 +408,7 @@
           <li><strong>Kanto:</strong> Celadon City's Game Corner slots, Vermilion City's Whack-a-Diglett and the Safari Zone (four areas — Center, East, North and West — each carrying its own rare Pokémon, and Safari finds roll shiny at twice the usual odds).</li>
           <li><strong>Johto:</strong> Route 35's Bug Catching Contest, Ecruteak City's Pokéathlon, Goldenrod City's Puzzle League and Violet City's Ruins of Alph (slide the stone tiles back into order).</li>
           <li><strong>Hoenn:</strong> Route 111's Battle Tower, Lilycove City's Pokémon Contest, Slateport City's Pokémon Memory and Mauville City's Lights Out.</li>
-          <li><strong>Sinnoh:</strong> Eterna City's Underground, Sandgem Town's Poké Radar and Snowpoint City's Snowpoint Temple (an ice-slide maze — slide until a wall stops you).</li>
+          <li><strong>Sinnoh:</strong> Eterna City's Underground, Sandgem Town's Poké Radar and Snowpoint City's Snowpoint Temple (an ice-slide maze — slide until a wall stops you; the board sits beside the D-pad).</li>
           <li><strong>Unova:</strong> Nimbasa City's Voltorb Flip, Virbank City's Pokéstar Studios and Castelia City's Pokémon Musical.</li>
           <li><strong>Kalos:</strong> Lumiose City's Auction House and Laverre City's Poké Ball Factory.</li>
           <li><strong>Alola:</strong> Heahea City's Battle Royal and the Poké Pelago hub.</li>
@@ -514,8 +534,8 @@
           A move only works if its effect is one the engine understands. Any move whose
           effect falls outside the list below behaves like a plain attack (if it has
           power) or does nothing at all (if it is a status move). Of the 934 moves in
-          the data, about 385 have a recognised effect, 395 more are plain damaging
-          attacks, and the remaining ~154 status moves are still cosmetic — see the
+          the data, about 418 have a recognised effect, 356 more are plain damaging
+          attacks, and the remaining 160 status moves are still cosmetic — see the
           <a href="/reference.html#moves">move list</a>.
         </p>
         <ul>
@@ -550,13 +570,13 @@
         </ul>
         <div class="note">
           <strong>Not yet implemented:</strong> the large tail of one-off utility moves.
-          The ~154 status moves not listed above do little.
+          The ~160 status moves not listed above do little.
         </div>
 
         <h3>Abilities — the implemented set</h3>
         <p>
           Every Pokémon rolls one of its real abilities (there is a small chance of the
-          hidden one) and the stats panel shows it. <strong>250 of the 304 abilities</strong>
+          hidden one) and the stats panel shows it. <strong>250 of the 310 abilities</strong>
           now have an effect — entry and weather/terrain setters, type absorbers,
           offensive and defensive modifiers, speed abilities, status control, contact
           and on-hit reactions, on-KO rewards, stat protection, form changes and
@@ -590,7 +610,7 @@
             Shell Armor, Merciless.</li>
         </ul>
         <div class="note">
-          About 54 abilities are still inert — mostly ally/doubles abilities (Battery,
+          About 60 abilities are still inert — mostly ally/doubles abilities (Battery,
           Friend Guard, Telepathy), trapping (Arena Trap, Shadow Tag) and information
           abilities (Frisk, Forewarn). A few working ones are simplified: type absorbers
           heal 1/4 max HP instead of raising a stat, and Hustle skips its accuracy
@@ -646,7 +666,7 @@
 
         <h3>Still to come</h3>
         <ul>
-          <li>The remaining ~54 abilities and ~154 status moves.</li>
+          <li>The remaining ~60 abilities and ~160 status moves.</li>
           <li>Online sync / cloud saves.</li>
         </ul>
       </section>

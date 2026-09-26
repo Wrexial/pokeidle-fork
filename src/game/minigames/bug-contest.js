@@ -186,20 +186,27 @@ function contestBest(bugs) {
 }
 
 /**
- * Build the ranked results board: every bug the player caught, plus each fake
- * rival's single best find, strongest first (ties broken by level).
+ * Build the ranked results board: the player's single best catch, plus each
+ * fake rival's single best find, strongest first (ties broken by level). Every
+ * bug the player caught is kept, but only their best one is judged so a run
+ * cannot take more than one of the top three places.
  * @param {ReturnType<typeof rollContestBug>[]} playerBugs
  * @param {number} [baseLevel]
  * @param {number} [rivalCount]
  * @returns {{ owner: string, isPlayer: boolean, speciesKey: string, level: number, gender: 'male' | 'female' | 'genderless', score: number }[]}
  */
 export function buildContestResults(playerBugs, baseLevel = 20, rivalCount = 3) {
-  const board = playerBugs.map((bug) => ({
-    ...bug,
-    owner: 'You',
-    isPlayer: true,
-    score: contestScore(bug.speciesKey),
-  }))
+  const playerBest = contestBest(playerBugs),
+    board = playerBest
+      ? [
+          {
+            ...playerBest,
+            owner: 'You',
+            isPlayer: true,
+            score: contestScore(playerBest.speciesKey),
+          },
+        ]
+      : []
   for (const rival of rollContestRivals(baseLevel, rivalCount)) {
     const best = contestBest(rival.bugs)
     if (best)

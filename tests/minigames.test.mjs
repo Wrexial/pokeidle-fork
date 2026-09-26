@@ -161,6 +161,18 @@ test('contest results rank the player and fake rivals by score', () => {
   assert.equal(contestScore('volcarona'), 550)
 })
 
+test('only the player’s best bug is ranked, though all are kept', () => {
+  const caught = [
+      { speciesKey: 'caterpie', level: 10, gender: 'male', fleeChance: 0.1 },
+      { speciesKey: 'volcarona', level: 50, gender: 'male', fleeChance: 0.1 },
+      { speciesKey: 'scyther', level: 30, gender: 'male', fleeChance: 0.1 },
+    ],
+    board = buildContestResults(caught, 50, 3),
+    playerEntries = board.filter((entry) => entry.isPlayer)
+  assert.equal(playerEntries.length, 1, 'the player only places once')
+  assert.equal(playerEntries[0].speciesKey, 'volcarona', 'only the best bug is judged')
+})
+
 test('the top three contest placings pay prizes, with a participant fallback', () => {
   const first = bugContestPrize(1),
     second = bugContestPrize(2),

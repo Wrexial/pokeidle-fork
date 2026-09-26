@@ -11,7 +11,7 @@ export { AUCTION_LOTS, AUCTION_NPCS, rollAuctionLot, auctionAppraisal, auctionRa
 export { CONTEST_COST, CONTEST_ROUNDS, CONTEST_THEMES, CONTEST_RIVALS, rollContestTheme, contestTheme, moveBaseAppeal, contestAppeal, rollContestRivalRound, contestPlacement, contestRank, contestPrize } from './minigames/contest.js'
 export { POKEATHLON_COST, POKEATHLON_EVENT_MAX, POKEATHLON_SPRINT_MS, POKEATHLON_ATTEMPTS, sprintScore, accuracyScore, pokeathlonPrize } from './minigames/pokeathlon.js'
 export { GAUNTLET_MAX_TURNS, toBattlePokemon, createOpponent, simulateBattle } from './minigames/gauntlet.js'
-export { POKE_RADAR_COST, POKE_RADAR_SIZE, POKE_RADAR_START_LENGTH, POKE_RADAR_CHAIN_STEP, radarSequence, pickRadarTarget, radarChainPoints, pokeRadarPrize } from './minigames/poke-radar.js'
+export { POKE_RADAR_COST, POKE_RADAR_SIZE, POKE_RADAR_START_LENGTH, POKE_RADAR_CHAIN_STEP, radarSequence, radarFaces, pickRadarTarget, radarChainPoints, pokeRadarPrize } from './minigames/poke-radar.js'
 export { LIGHTS_OUT_COST, LIGHTS_OUT_SIZE, LIGHTS_OUT_SCRAMBLE, toggleLights, createLightsOut, lightsSolved, lightsOutPrize } from './minigames/lights-out.js'
 export { CURRY_COST, CURRY_COOK_MS, CURRY_ZONE, CURRY_FLAVORS, CURRY_INGREDIENTS, rollCurryRequest, curryScore, curryPrize } from './minigames/curry.js'
 export { POKESTAR_COST, POKESTAR_SHOT_COUNT, POKESTAR_TAKE_MAX, POKESTAR_SHOTS, pickPokestarShots, pokestarPrize } from './minigames/pokestar.js'

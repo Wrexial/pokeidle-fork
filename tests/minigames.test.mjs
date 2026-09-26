@@ -8,7 +8,9 @@ const gameData = installGameData()
 const { BATTLE_ROYAL_COST, BATTLE_ROYAL_POOL, BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL, BUG_CONTEST_RUSTLES, CONTEST_COST, CONTEST_THEMES, DYNAMAX_ADVENTURES_COST, DYNAMAX_STAGES, MINIGAME_LOCATIONS, MINIGAME_INFO, MINIGAME_AREAS, MINIGAME_REGIONS, MINIGAME_START_ACTION, minigameForLocation, minigamesInRegion, minigameNameForLocation, MINING_COST, POKEATHLON_COST, POKEATHLON_SPRINT_MS, POKE_RADAR_CHAIN_STEP, POKE_RADAR_COST, POKE_RADAR_SIZE, SLOT_JACKPOT, SLOT_PAYLINES, SLOT_REELS, SLOT_ROWS, SLOT_SPIN_COST, SLOT_SYMBOLS, VOLTORB_FLIP_COST, VOLTORB_MAX_LEVEL, VOLTORB_SIZE, AUCTION_LOTS, accuracyScore, auctionAppraisal, battleRoyalOpponent, battleRoyalPrize, boardCleared, boardExploded, boardHints, bugCatchChance, bugContestPrize, bugFleeChance, bugStays, buildContestResults, canAuctionBid, contestAppeal, contestPlacement, contestPlayerRank, contestPrize, contestRank, contestScore, contestTheme, createAuction, createOpponent, createVoltorbBoard, dynamaxBoss, dynamaxPaths, dynamaxPrize, flipVoltorbCell, healSquad, moveBaseAppeal, pickRadarTarget, placeAuctionBid, pokeathlonPrize, pokeRadarPrize, radarChainPoints, radarSequence, rewardItemName, rollContestBug, rollContestBugs, rollContestRivalRound, rollContestTheme, rollMiningReward, simulateBattle, spinSlots, sprintScore, throwNetBall, toBattlePokemon, toggleVoltorbMark, voltorbBoardCoins, voltorbCountForLevel, voltorbFlipPrize, LIGHTS_OUT_COST, LIGHTS_OUT_SCRAMBLE, LIGHTS_OUT_SIZE, CURRY_COST, CURRY_FLAVORS, CURRY_INGREDIENTS, CURRY_ZONE, POKESTAR_COST, POKESTAR_SHOT_COUNT, createLightsOut, toggleLights, lightsSolved, lightsOutPrize, rollCurryRequest, curryScore, curryPrize, pickPokestarShots, pokestarPrize, MATCH3_COST, MATCH3_MOVES, MATCH3_SIZE, MEMORY_COST, MEMORY_PAIRS, WHACK_COST, createMatch3Board, findMatches, tryMatch3Swap, resolveMatch3, match3Prize, createMemoryDeck, memoryPrize, rollWhackTarget, whackPrize, MUSICAL_COST, MUSICAL_NOTES, MUSICAL_MAX_SCORE, generateMusicalPattern, judgeMusicalHit, musicalPrize, musicalTotalMs, PICNIC_COST, PICNIC_PICKS, PICNIC_INGREDIENTS, PICNIC_SHINY_MULTIPLIER, ingredientById, sandwichTypes, rollSandwichType, picnicDropScore, picnicSpeciesPool, rollPicnicEncounter, POKEBALL_FACTORY_COST, FACTORY_SIZE, connectionsFor, createFactoryPuzzle, rotateFactoryTile, factoryPowered, factorySolved, factoryPrize, FACTORY_BALL_POOL, rollFactoryBalls, SLIDING_COST, SLIDING_SIZE, solvedSlidingBoard, canSlide, slideTile, isSlidingSolved, createSlidingPuzzle, slidingTileForDirection, slidingPrize, ICE_SLIDE_COST, ICE_SLIDE_ROOMS, ICE_SLIDE_TOTAL_PAR, iceSlidePosition, iceSlideSolved, iceSlidePrize } = await import(
   '../src/game/minigames.js'
 )
-const { match3SwapFrames, MATCH3_SPECIES, MATCH3_TYPES } = await import('../src/game/minigames.js')
+const { match3SwapFrames, MATCH3_SPECIES, MATCH3_TYPES, radarFaces } = await import(
+  '../src/game/minigames.js'
+)
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 const { consumableItems, evolutionItems, heldItems } = await import('../src/data/items.js')
 const { createPokemon } = await import('../src/game/pokemon.js')
@@ -342,6 +344,21 @@ test('the radar targets a real rare route species and pays a chain', () => {
   assert.equal(target.routeKey, 'route1')
   assert.equal(radarChainPoints(4), 4 * POKE_RADAR_CHAIN_STEP)
   assert.ok(pokeRadarPrize(10).money > pokeRadarPrize(1).money)
+})
+
+test('radar faces fill the field with real route species, or blank', () => {
+  const faces = radarFaces('route1')
+  assert.equal(faces.length, POKE_RADAR_SIZE * POKE_RADAR_SIZE)
+  assert.ok(
+    faces.every((face) => face === null || gameData.pokemonSpecies[face]),
+    'every face is a real species'
+  )
+  assert.ok(faces.some((face) => face !== null), 'a route with wilds has faces')
+  assert.deepEqual(
+    radarFaces('notARealRoute'),
+    Array(POKE_RADAR_SIZE * POKE_RADAR_SIZE).fill(null),
+    'a route with no wilds shows no faces'
+  )
 })
 
 test('UPDATE_SHINY_CHAIN can add a batch of chain points', () => {

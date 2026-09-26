@@ -10687,12 +10687,32 @@ img {
 }
 
 .radar-patch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     aspect-ratio: 1;
+    padding: 0;
+    overflow: hidden;
     background: linear-gradient(#6fae4a,#3f7a2c);
     border: 2px solid #4f7a35;
     border-radius: 6px;
     cursor: default;
     transition: box-shadow .1s, filter .1s
+}
+
+.radar-face {
+    width: 74%;
+    height: 74%;
+    object-fit: contain;
+    image-rendering: pixelated;
+    pointer-events: none;
+    opacity: .75;
+    transition: transform .12s ease, opacity .12s ease
+}
+
+.radar-patch.lit .radar-face {
+    opacity: 1;
+    transform: scale(1.18)
 }
 
 .radar-patch.active {

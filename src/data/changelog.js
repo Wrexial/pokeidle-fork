@@ -42,6 +42,7 @@ export const CHANGELOG = [
             'Puzzle League tiles are now Pokemon faces (Fire is Charmander, Water is Squirtle and so on) and the board animates: swapped tiles slide past each other, cleared tiles pop and then replacements drop in from above',
             'The Bug Catching Contest now judges only your single best catch for the podium \u2014 you still keep every bug you caught, but one run can no longer take all three places',
             'Pokeathlon now opens with a three-second countdown that explains the Sprint before it starts, so the first event no longer begins before you know what to do',
+            'Poke Radar is fixed and themed: the first patch of each sequence is no longer cut short by a leftover timer, each sequence gets a short lead-in, and every grass patch now shows a route Pokemon hiding in the grass',
           ],
         },
         {

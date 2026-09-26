@@ -35,6 +35,25 @@ export function radarSequence(length) {
 }
 
 /**
+ * A face for each grass patch: the route's wild species, repeated across the
+ * grid and shuffled so the repeats are not laid out in order. Returns nulls
+ * when the route has no encounters.
+ * @param {string} routeKey
+ * @param {number} [size]
+ * @returns {(string | null)[]}
+ */
+export function radarFaces(routeKey, size = POKE_RADAR_SIZE * POKE_RADAR_SIZE) {
+  const pool = (encounterData[routeKey]?.encounters ?? []).map((entry) => entry.speciesKey)
+  if (pool.length === 0) return Array.from({ length: size }, () => null)
+  const faces = Array.from({ length: size }, (_, index) => pool[index % pool.length])
+  for (let index = faces.length - 1; index > 0; index--) {
+    const swap = Math.floor(Math.random() * (index + 1))
+    ;[faces[index], faces[swap]] = [faces[swap], faces[index]]
+  }
+  return faces
+}
+
+/**
  * The species a radar chain should target: the rarest wild on the current
  * route, or the most recently unlocked route with encounters.
  * @param {{ currentRoute?: string, unlockedLocations?: string[] }} state

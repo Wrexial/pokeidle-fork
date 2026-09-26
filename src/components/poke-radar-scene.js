@@ -13,13 +13,16 @@ import {
   pickRadarTarget,
   pokeRadarPrize,
   radarChainPoints,
+  radarFaces,
   radarSequence,
 } from '../game/minigames.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
 import { MinigameRewardScreen, useMinigameClaim } from './minigame-reward.js'
 
 const SHOW_MS = 420,
-  GAP_MS = 180
+  GAP_MS = 180,
+  LEAD_MS = 450,
+  FLASH_MS = 160
 
 export function PokeRadarScene() {
   const { state, dispatch } = useGame(),
@@ -30,6 +33,7 @@ export function PokeRadarScene() {
       /** @type {'showing' | 'input' | 'done'} */ ('showing')
     ),
     [highlight, setHighlight] = React.useState(-1),
+    [flash, setFlash] = React.useState(-1),
     [inputIndex, setInputIndex] = React.useState(0),
     [message, setMessage] = React.useState('Watch closely\u2026'),
     [result, setResult] = React.useState(
@@ -39,9 +43,14 @@ export function PokeRadarScene() {
       () => /** @type {ReturnType<typeof pokeRadarPrize> | null} */ (null)
     ),
     collect = useMinigameClaim(dispatch),
-    settledRef = React.useRef(!1)
+    settledRef = React.useRef(!1),
+    flashRef = React.useRef(/** @type {ReturnType<typeof setTimeout> | undefined} */ (undefined)),
+    [faces] = React.useState(() => radarFaces(target?.routeKey ?? ''))
 
-  // Play the sequence back, one patch at a time.
+  // Play the sequence back, one patch at a time, after a short lead-in so the
+  // first patch never flashes past before the player has looked. The player's
+  // own tap feedback lives on a separate `flash` state so a lingering clear
+  // timer can no longer cut the next sequence's first patch short.
   React.useEffect(() => {
     if (phase !== 'showing') return
     const timers = /** @type {ReturnType<typeof setTimeout>[]} */ ([])
@@ -71,9 +80,11 @@ export function PokeRadarScene() {
         }, SHOW_MS)
       )
     }
-    play()
+    timers.push(setTimeout(play, LEAD_MS))
     return () => timers.forEach((timer) => clearTimeout(timer))
   }, [phase, sequence])
+
+  React.useEffect(() => () => clearTimeout(flashRef.current), [])
 
   /** @param {number} index */
   function tap(index) {
@@ -84,8 +95,9 @@ export function PokeRadarScene() {
       return
     }
     const next = inputIndex + 1
-    setHighlight(index)
-    setTimeout(() => setHighlight(-1), 140)
+    setFlash(index)
+    clearTimeout(flashRef.current)
+    flashRef.current = setTimeout(() => setFlash(-1), FLASH_MS)
     if (next >= sequence.length) {
       if (state.sfxEnabled) playSfx('great')
       const nextRound = round + 1
@@ -177,20 +189,32 @@ export function PokeRadarScene() {
           }),
           jsx('div', {
             className: 'radar-grid',
-            children: Array.from({ length: size }, (_, index) =>
-              jsx(
+            children: Array.from({ length: size }, (_, index) => {
+              const faceKey = faces[index],
+                faceSpecies = faceKey ? pokemonSpecies[faceKey] : null
+              return jsx(
                 'button',
                 {
-                  className: `radar-patch${highlight === index ? ' lit' : ''}${
-                    phase === 'input' ? ' active' : ''
-                  }`,
+                  className: `radar-patch${
+                    highlight === index || flash === index ? ' lit' : ''
+                  }${phase === 'input' ? ' active' : ''}`,
                   disabled: phase !== 'input',
                   onClick: () => tap(index),
                   'aria-label': `Grass patch ${index + 1}`,
+                  children: faceSpecies
+                    ? jsx('img', {
+                        className: 'radar-face',
+                        src: getPokemonSpriteUrl(faceSpecies.id),
+                        onError: /** @param {{ target: HTMLImageElement }} event */ (event) =>
+                          (event.target.src = getPokemonSpriteFallbackUrl(faceSpecies.id)),
+                        alt: '',
+                        draggable: false,
+                      })
+                    : null,
                 },
                 index
               )
-            ),
+            }),
           }),
           jsx('div', {
             className: 'minigame-scene-log',

@@ -11,6 +11,7 @@ import { MinigameCard } from './minigame-card.js'
 import { GiftPanel } from './gift-panel.js'
 import { BattleTowerPanel } from './battle-tower-panel.js'
 import { GymLocationPanel } from './gym-location-panel.js'
+import { LeagueLocationPanel } from './league-location-panel.js'
 import { RouteEncounterGrid } from './route-encounter-grid.js'
 import { ShopPanel } from './shop-panel.js'
 
@@ -620,6 +621,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
             ],
           }),
         jsx(GymLocationPanel, {}),
+        jsx(LeagueLocationPanel, {}),
         routeEncounters &&
           routeKey &&
           jsx(RouteEncounterGrid, {

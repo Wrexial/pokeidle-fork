@@ -5,7 +5,6 @@ import { jsx, jsxs } from 'react/jsx-runtime'
 import { championData, elite4Data, gymLeaderData, mapData, regions } from '../data/gameData.js'
 import { BATTLE_TOWER_LOCATION, BATTLE_TOWER_REGION } from '../data/config.js'
 import { useGame } from '../game/context.js'
-import { buildTrainerTeam } from '../game/progression.js'
 
 /**
  * "Lv.12-16" for a team, or an empty string when it has no members.
@@ -45,7 +44,6 @@ export function GymPanel({ onOpenShop }) {
       regionEliteFour.length > 0 &&
       regionEliteFour.every((member) => state.defeatedEliteFour.includes(member.id)),
     prestigeLevel = state.regionPrestige[regionId] ?? 0,
-    canFight = state.party.some((member) => member.currentHp > 0),
     isBusy =
       state.phase === 'evolving' ||
       state.phase === 'healing' ||
@@ -56,8 +54,7 @@ export function GymPanel({ onOpenShop }) {
       state.phase === 'mining' ||
       state.phase === 'gameCorner' ||
       state.phase === 'routeActivity' ||
-      state.phase === 'wonderTrade',
-    fightable = canFight && !isBusy
+      state.phase === 'wonderTrade'
 
   /**
    * Travel to a location from a gym/league shortcut. Mirrors the location
@@ -71,62 +68,12 @@ export function GymPanel({ onOpenShop }) {
     dispatch({ type: 'TRAVEL', payload: { locationId } })
   }
 
-  function startEliteChallenge() {
-    if (!fightable || !regionChampion) return
-    if (state.phase === 'battling' || state.phase === 'victory' || state.phase === 'defeat')
-      dispatch({
-        type: 'PHASE_IDLE',
-      })
-    dispatch({
-      type: 'RESET_ELITE_FOUR',
-    })
-    const leader = [
-        ...regionEliteFour.map((member) => ({
-          bossId: member.id,
-          bossType: 'e4',
-          trainerName: member.name,
-          trainerClass: 'ace',
-          trainerTeam: buildTrainerTeam(
-            isLeagueRematch && member.rematchTeam?.length ? member.rematchTeam : member.team
-          ),
-          spriteKey: member.spriteKey,
-          region: regionId,
-        })),
-        {
-          bossId: regionChampion.id,
-          bossType: 'champion',
-          trainerName: regionChampion.name,
-          trainerClass: 'ace',
-          trainerTeam: buildTrainerTeam(
-            isLeagueRematch && regionChampion.rematchTeam?.length
-              ? regionChampion.rematchTeam
-              : regionChampion.team
-          ),
-          spriteKey: regionChampion.spriteKey,
-          region: regionId,
-        },
-      ],
-      [firstFight, ...remainingFights] = leader
-    dispatch({
-      type: 'START_HEALING',
-      payload: {
-        pendingBossBattle: {
-          ...firstFight,
-          bossQueue: remainingFights,
-        },
-      },
-    })
-  }
-
   const leagueLocation = region?.leagueLocationKey ? mapData[region.leagueLocationKey] : null,
     leagueLocationName = leagueLocation?.name ?? 'the Pokémon League',
     leagueOpen =
       !!region?.leagueLocationKey && state.unlockedLocations.includes(region.leagueLocationKey),
     atLeague = !!region?.leagueLocationKey && state.currentLocation === region.leagueLocationKey,
-    leagueUnlocked = allBadgesEarned && atLeague,
-    inGauntlet =
-      state.bossBattle &&
-      (state.bossBattle.bossType === 'e4' || state.bossBattle.bossType === 'champion')
+    leagueUnlocked = allBadgesEarned && atLeague
 
   return jsxs('div', {
     className: 'gym-panel',
@@ -258,22 +205,21 @@ export function GymPanel({ onOpenShop }) {
               ],
             }),
             leagueUnlocked
-              ? jsx('button', {
-                  className: 'gym-fight-btn champion',
-                  disabled: !fightable || !!inGauntlet,
-                  onClick: startEliteChallenge,
-                  style: {
-                    width: '100%',
-                    marginBottom: '6px',
-                  },
-                  children: 'BEGIN CHALLENGE',
-                })
-              : jsx('div', {
+              ? jsx('div', {
                   className: 'gym-league-hint',
-                  children: leagueOpen
-                    ? `Travel to ${leagueLocationName} to challenge`
-                    : `${leagueLocationName} is not reachable yet`,
-                }),
+                  children: 'Challenge the Elite Four and Champion from the location panel.',
+                })
+              : leagueOpen
+                ? jsx('button', {
+                    className: 'gym-locked-label travel clickable',
+                    onClick: () => travelToLocation(region?.leagueLocationKey),
+                    title: `Travel to ${leagueLocationName}`,
+                    children: `GO TO ${leagueLocationName.toUpperCase()}`,
+                  })
+                : jsx('div', {
+                    className: 'gym-league-hint',
+                    children: `${leagueLocationName} is not reachable yet`,
+                  }),
             regionEliteFour.map((member) => {
               const defeated = state.defeatedEliteFour.includes(member.id),
                 isActive =

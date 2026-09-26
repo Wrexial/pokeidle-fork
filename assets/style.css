@@ -10612,6 +10612,44 @@ img {
     color: #e7dcc0
 }
 
+.athlon-ready {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    max-width: 380px;
+    padding: 16px 20px;
+    text-align: center;
+    background: rgba(20,14,6,.8);
+    border: 1px solid #8a7040;
+    border-radius: 6px
+}
+
+.athlon-ready-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gold)
+}
+
+.athlon-ready-how {
+    font-size: 9px;
+    line-height: 1.5;
+    color: #f0e6c8
+}
+
+.athlon-ready-count {
+    font-size: 40px;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 0 14px rgba(232,201,74,.7);
+    animation: athlonCount .9s ease-out
+}
+
+@keyframes athlonCount {
+  0% { transform: scale(1.5); opacity: .2 }
+  100% { transform: scale(1); opacity: 1 }
+}
+
 .radar-scene {
     background-image: url(/backgrounds/grassland.png)
 }

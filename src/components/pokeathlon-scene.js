@@ -18,6 +18,10 @@ import { MinigameRewardScreen, useMinigameClaim } from './minigame-reward.js'
 
 const EVENT_NAMES = ['Sprint', 'Hurdle', 'Target Throw']
 
+/** The "what to do" line shown on the countdown before the first event. */
+const SPRINT_INSTRUCTION =
+  'Tap MASH! as fast as you can \u2014 the bar drains over five seconds and every press counts.'
+
 /** A one-off "latest onFinish" ref so the child timers don't reset each render.
  * @template T
  * @param {T} value
@@ -148,13 +152,28 @@ export function PokeathlonScene() {
     [eventIndex, setEventIndex] = React.useState(0),
     [scores, setScores] = React.useState(() => /** @type {number[]} */ ([])),
     [phase, setPhase] = React.useState(
-      /** @type {'play' | 'between' | 'done'} */ ('play')
+      /** @type {'ready' | 'play' | 'between' | 'done'} */ ('ready')
     ),
+    [countdown, setCountdown] = React.useState(3),
     collect = useMinigameClaim(dispatch)
 
   const total = scores.reduce((sum, value) => sum + value, 0),
     prize = pokeathlonPrize(total),
     finished = scores.length >= EVENT_NAMES.length
+
+  // A three-second lead-in before the first event, showing what to do, so the
+  // Sprint never starts before the player knows the plan.
+  React.useEffect(() => {
+    if (phase !== 'ready') return
+    if (countdown <= 0) {
+      if (state.sfxEnabled) playSfx('good')
+      setPhase('play')
+      return
+    }
+    if (state.sfxEnabled) playSfx('tap')
+    const id = setTimeout(() => setCountdown(countdown - 1), 1000)
+    return () => clearTimeout(id)
+  }, [phase, countdown, state.sfxEnabled])
 
   /** @param {number} score */
   function finishEvent(score) {
@@ -239,6 +258,25 @@ export function PokeathlonScene() {
                     jsx('span', {
                       className: 'athlon-summary-score',
                       children: `${lastScore} / ${POKEATHLON_EVENT_MAX}`,
+                    }),
+                  ],
+                })
+              : phase === 'ready'
+              ? jsxs('div', {
+                  className: 'athlon-ready',
+                  children: [
+                    jsx('span', {
+                      className: 'athlon-ready-title',
+                      children: EVENT_NAMES[0],
+                    }),
+                    jsx('span', {
+                      className: 'athlon-ready-how',
+                      children: SPRINT_INSTRUCTION,
+                    }),
+                    jsx('span', {
+                      key: countdown,
+                      className: 'athlon-ready-count',
+                      children: countdown > 0 ? countdown : 'GO!',
                     }),
                   ],
                 })

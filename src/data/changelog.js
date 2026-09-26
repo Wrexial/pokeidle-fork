@@ -41,6 +41,7 @@ export const CHANGELOG = [
             'Minigames now react with sound: a soft tick for a tap, slide or rotation, a positive chime for a match, correct answer, good note or clean cast, a bigger fanfare for a perfect, combo or solved result, and a buzz for a miss or wrong answer (with the Sound Effects setting on)',
             'Puzzle League tiles are now Pokemon faces (Fire is Charmander, Water is Squirtle and so on) and the board animates: swapped tiles slide past each other, cleared tiles pop and then replacements drop in from above',
             'The Bug Catching Contest now judges only your single best catch for the podium \u2014 you still keep every bug you caught, but one run can no longer take all three places',
+            'Pokeathlon now opens with a three-second countdown that explains the Sprint before it starts, so the first event no longer begins before you know what to do',
           ],
         },
         {

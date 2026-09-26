@@ -1,7 +1,7 @@
 // // Encounter generation: shiny odds, active effects, swarms/roamers and species rolls. Split from game/progression.js.
 
 import { roamerEncounterChance, shinyCharmMinOddsChance, shinyFullOddsChance, shinyWithCharmChance } from '../../data/config.js'
-import { GENERATION_DEX_RANGES, isSpeciesCharmed, pokemonSpecies, regions } from '../../data/gameData.js'
+import { GENERATION_DEX_RANGES, evolutionData, isSpeciesCharmed, pokemonSpecies, regions } from '../../data/gameData.js'
 
 /**
  * Whether a species carries `type` (e.g. "Water"). Used by the Monotype
@@ -12,6 +12,53 @@ import { GENERATION_DEX_RANGES, isSpeciesCharmed, pokemonSpecies, regions } from
  */
 function speciesHasType(speciesKey, type) {
   return !!pokemonSpecies[speciesKey]?.types?.includes(type)
+}
+
+/** Cached fixpoint of the minimum level each species can exist at. @type {Map<string, number> | null} */
+let speciesLevelFloors = null
+
+/**
+ * The lowest level a species can legitimately exist at: 1 for a base form, or
+ * its evolution gate for an evolved form (a fixpoint over the evolution graph).
+ * Mirrors tools/lib/evolution-levels.cjs so a low-level route never rolls a
+ * fully evolved Pokemon. Computed once and cached.
+ * @returns {Map<string, number>}
+ */
+function evolutionFloors() {
+  if (speciesLevelFloors) return speciesLevelFloors
+  const floors = new Map(),
+    idOf = (/** @type {string} */ key) => Number(pokemonSpecies[key]?.id ?? 0)
+  for (const key of Object.keys(pokemonSpecies)) floors.set(key, 1)
+  for (let pass = 0; pass < 25; pass++) {
+    let changed = false
+    for (const [from, evolutions] of Object.entries(evolutionData)) {
+      // Only real base-species level evolutions matter here; form changes and
+      // their reverts would otherwise pull a base form's floor up.
+      if (!Array.isArray(evolutions) || idOf(from) > 1025) continue
+      for (const evolution of evolutions) {
+        const into = evolution?.into
+        if (!into || !floors.has(into) || evolution.form || idOf(into) > 1025) continue
+        const base = floors.get(from) ?? 1,
+          next = evolution.level ? Math.max(base, evolution.level) : base
+        if (next > (floors.get(into) ?? 1)) {
+          floors.set(into, next)
+          changed = true
+        }
+      }
+    }
+    if (!changed) break
+  }
+  speciesLevelFloors = floors
+  return floors
+}
+
+/**
+ * The lowest level `speciesKey` could legitimately be encountered at.
+ * @param {string} speciesKey
+ * @returns {number}
+ */
+export function minLevelForSpecies(speciesKey) {
+  return evolutionFloors().get(speciesKey) ?? 1
 }
 
 /**
@@ -213,16 +260,28 @@ const RANDOMIZER_SPECIES = Object.keys(pokemonSpecies).filter((key) => {
  * @param {number} levelOverride
  * @param {string | null} [monotype] Monotype challenge: only this type may appear.
  */
-function resolveRandomEncounter(encounterData, completedGenerationSet, shinyBonus, levelOverride, monotype = null) {
-  const monotypePool = monotype
+function resolveRandomEncounter(encounterData, completedGenerationSet, shinyBonus, levelOverride, monotype = null, plausible = !1) {
+  const minLevel = Math.min(...encounterData.encounters.map((encounter) => encounter.minLevel)),
+    maxLevel = Math.max(...encounterData.encounters.map((encounter) => encounter.maxLevel)),
+    level = levelOverride || minLevel + Math.floor(Math.random() * (maxLevel - minLevel + 1)),
+    typePool = monotype
       ? RANDOMIZER_SPECIES.filter((speciesKey) => speciesHasType(speciesKey, monotype))
       : RANDOMIZER_SPECIES,
-    pool = monotypePool.length > 0 ? monotypePool : RANDOMIZER_SPECIES,
+    // When filling a route that has none of the chosen type, only roll forms
+    // that could actually exist at the level we just rolled (no Charizard at
+    // Lv. 5).
+    monotypePool =
+      plausible && monotype
+        ? typePool.filter((speciesKey) => minLevelForSpecies(speciesKey) <= level)
+        : typePool,
+    pool =
+      monotypePool.length > 0
+        ? monotypePool
+        : typePool.length > 0
+          ? typePool
+          : RANDOMIZER_SPECIES,
     speciesKey =
-      pool[Math.floor(Math.random() * pool.length)] ?? encounterData.encounters[0].speciesKey,
-    minLevel = Math.min(...encounterData.encounters.map((encounter) => encounter.minLevel)),
-    maxLevel = Math.max(...encounterData.encounters.map((encounter) => encounter.maxLevel)),
-    level = levelOverride || minLevel + Math.floor(Math.random() * (maxLevel - minLevel + 1))
+      pool[Math.floor(Math.random() * pool.length)] ?? encounterData.encounters[0].speciesKey
   return {
     species: pokemonSpecies[speciesKey],
     speciesKey,
@@ -284,7 +343,8 @@ export function resolvePokemonEncounter(encounterData, modifiers, completedGener
       completedGenerationSet,
       shinyBonus,
       levelOverride,
-      monotype
+      monotype,
+      !0
     )
   const pool = monotypePool.length > 0 ? monotypePool : weightedEncounters,
     totalWeight = pool.reduce((accumulator, encounter) => accumulator + encounter.weight, 0)

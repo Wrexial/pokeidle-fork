@@ -108,7 +108,7 @@ export const CHANGELOG = [
           heading: 'Challenges',
           items: [
             'New games now open by asking Normal Mode or Challenge Mode: pick Challenge and you set the Randomizer, Level Scaling, Nuzlocke and Monotype rules before choosing a starter, and the same toggles stay in Settings for later changes',
-            'Monotype no longer leaks other types onto a route that has none of your chosen type: it now rolls a random Pokemon of that type at the route\u2019s level band instead',
+            'Monotype no longer leaks other types onto a route that has none of your chosen type: it now rolls a random Pokemon of that type that could actually exist at the route\u2019s level',
           ],
         },
         {

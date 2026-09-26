@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 installGameData()
 
-const { resolvePokemonEncounter } = await import('../src/game/progression.js')
+const { resolvePokemonEncounter, minLevelForSpecies } = await import('../src/game/progression.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 const { repairSave } = await import('../src/game/context.js')
 const { generateIVs } = await import('../src/game/pokemon.js')
@@ -108,9 +108,35 @@ test('Monotype rolls a random on-type Pokemon when the route has none', () => {
       `${encounter.speciesKey} should be Grass-type`
     )
     assert.equal(encounter.level, 5, 'keeps the route\u2019s level band')
+    assert.ok(
+      minLevelForSpecies(encounter.speciesKey) <= 5,
+      `${encounter.speciesKey} could exist at Lv. 5`
+    )
     seen.add(encounter.speciesKey)
   }
   assert.ok(seen.size > 1, 'rolls more than one Grass species')
+})
+
+test('minLevelForSpecies floors evolved forms at their evolution gate', () => {
+  assert.equal(minLevelForSpecies('charmander'), 1)
+  assert.ok(minLevelForSpecies('charmeleon') >= 16, 'Charmeleon needs its evolution level')
+  assert.ok(minLevelForSpecies('charizard') >= 36, 'Charizard needs the full chain')
+})
+
+test('Monotype fallbacks never sit below their form\u2019s floor, even on a wide band', () => {
+  /** @type {EncounterData} */
+  const data = {
+    name: 'test',
+    encounters: [{ speciesKey: 'squirtle', weight: 1, minLevel: 30, maxLevel: 40 }],
+  }
+  for (let i = 0; i < 200; i++) {
+    const encounter = resolvePokemonEncounter(data, [], new Set(), undefined, 1, false, 0, 'Fire')
+    assert.ok(pokemonSpecies[encounter.speciesKey].types.includes('Fire'))
+    assert.ok(
+      minLevelForSpecies(encounter.speciesKey) <= encounter.level,
+      `${encounter.speciesKey} (floor ${minLevelForSpecies(encounter.speciesKey)}) at Lv. ${encounter.level}`
+    )
+  }
 })
 
 test('Monotype constrains Randomizer rolls too', () => {

@@ -9,6 +9,7 @@ import { moveTooltip } from '../game/move-info.js'
 import { dailyEventByKey } from '../data/daily-events.js'
 import { hasClaimableQuests } from '../game/quests.js'
 import { biomeForLocation, BIOME_FILTERS, locationImages } from '../data/ui.js'
+import { shinyFullOddsChance } from '../data/config.js'
 import { getDexStatus, shouldOfferMasterBall } from '../game/catching.js'
 import { battleSpecies } from '../game/combat.js'
 import { isFemalePokemon } from '../game/breeding.js'
@@ -291,8 +292,8 @@ export function BattleScene() {
                         jsx('span', {
                           children:
                             completedGenerationSet.size > 0
-                              ? `Shiny odds: 1/8192, or 1/${shinyCharmOdds} for a completed generation (${completedGenerationSet.size}/${speciesKeysByGeneration.length} charms)`
-                              : 'Shiny odds: 1/8192 - complete a generation to unlock its Shiny Charm',
+                              ? `Shiny odds: 1/${shinyFullOddsChance}, or 1/${shinyCharmOdds} for a completed generation (${completedGenerationSet.size}/${speciesKeysByGeneration.length} charms)`
+                              : `Shiny odds: 1/${shinyFullOddsChance} - complete a generation to unlock its Shiny Charm`,
                         }),
                         jsx('div', {
                           className: 'info-shiny-generations',

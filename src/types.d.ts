@@ -409,7 +409,7 @@ type GameState = {
   unlockedRegions: string[]
   speed: number
   paused: boolean
-  /** Mainline Set / Switch battle style ("switch" pauses after a faint). */
+  /** Set never auto-switches; Switch lets the auto-battler pick a better matchup. */
   battleStyle: 'set' | 'switch'
   autoCatch: boolean
   autoProceed: boolean

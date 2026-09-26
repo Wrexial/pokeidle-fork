@@ -514,7 +514,7 @@ export function StatsPanel({
             title: pokemon.favourite
               ? 'Unfavourite this Pokemon before trading it'
               : linkCables <= 0
-                ? 'Buy a Link Cable in the Reward Shop'
+                ? 'Buy a Link Cable in the Kecleon Shop'
                 : 'Trade for a random Pokemon',
             onClick: () => setTradeConfirm(!0),
             children: `Wonder Trade (${linkCables})`,

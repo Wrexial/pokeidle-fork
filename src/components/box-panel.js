@@ -9,8 +9,6 @@ import { getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, poke
 import { isFemalePokemon } from '../game/breeding.js'
 import { itemTooltip } from '../game/progression.js'
 import { ItemIcon } from './item-icon.js'
-import { PokedexModal } from './pokedex-modal.js'
-import { RecordsModal } from './records-modal.js'
 
 /** @param {{ inspected: Inspected, setInspected: (value: Inspected) => void, setReleaseConfirm: (value: string | null) => void, dragSource?: 'party' | 'box' | null, boxDragOver?: boolean, boxDragFromIndex?: number | null, boxDropTargetIndex?: number | null, onBoxDragStart?: any, onBoxSlotDragOver?: any, onBoxDragOver?: any, onBoxDrop?: any, onBoxDragLeave?: any, onDrop?: any, onDragEnd?: any }} props */
 export function BoxPanel({
@@ -31,8 +29,6 @@ export function BoxPanel({
 }) {
   const { state, dispatch } = useGame(),
     [page, setPage] = React.useState(0),
-    [showPokedex, setShowPokedex] = React.useState(!1),
-    [showRecords, setShowRecords] = React.useState(!1),
     [query, setQuery] = React.useState(''),
     [filterMode, setFilterMode] = React.useState('all'),
     [confirmDupes, setConfirmDupes] = React.useState(!1),
@@ -84,16 +80,6 @@ export function BoxPanel({
               jsxs('div', {
                 className: 'box-header-actions',
                 children: [
-                  jsx('button', {
-                    className: 'box-pokedex-btn',
-                    onClick: () => setShowPokedex(!0),
-                    children: 'Pokedex',
-                  }),
-                  jsx('button', {
-                    className: 'box-pokedex-btn',
-                    onClick: () => setShowRecords(!0),
-                    children: 'Records',
-                  }),
                   jsx('button', {
                     className: 'box-pokedex-btn',
                     onClick: () => setConfirmDupes(!0),
@@ -325,14 +311,6 @@ export function BoxPanel({
           }),
         ],
       }),
-      showPokedex &&
-        jsx(PokedexModal, {
-          onClose: () => setShowPokedex(!1),
-        }),
-      showRecords &&
-        jsx(RecordsModal, {
-          onClose: () => setShowRecords(!1),
-        }),
     ],
   })
 }

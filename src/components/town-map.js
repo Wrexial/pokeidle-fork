@@ -94,6 +94,7 @@ export function TownMap() {
     [activeRegion, setActiveRegion] = React.useState(currentRegion),
     [pendingUnlock, setPendingUnlock] = React.useState(/** @type {string | null} */ (null)),
     [searchQuery, setSearchQuery] = React.useState(''),
+    [searchOpen, setSearchOpen] = React.useState(!1),
     [focusNonce, setFocusNonce] = React.useState(0),
     focusRef = React.useRef(/** @type {string | null} */ (null)),
     unlockTokens = getRegionUnlockTokens(state),
@@ -462,12 +463,24 @@ export function TownMap() {
             className: 'town-map-battles',
             children: [state.wildBattlesWon, 'W ', state.trainerBattlesWon, 'T'],
           }),
+          jsx('button', {
+            type: 'button',
+            className: `map-search-toggle${searchOpen ? ' active' : ''}`,
+            title: 'Search locations',
+            onClick: () => {
+              // Collapsing clears the query so the map isn't left filtered.
+              if (searchOpen) setSearchQuery('')
+              setSearchOpen(!searchOpen)
+            },
+            children: '\u{1f50d}',
+          }),
         ],
       }),
-      jsxs('div', {
-        className: 'map-search',
-        onPointerDown: stopDrag,
-        children: [
+      searchOpen &&
+        jsxs('div', {
+          className: 'map-search',
+          onPointerDown: stopDrag,
+          children: [
           jsx('input', {
             className: 'map-search-input',
             type: 'text',

@@ -277,6 +277,14 @@ export const MOBILE_TABS = [
     id: 'location',
     label: 'Location',
   },
+  {
+    id: 'backpack',
+    label: 'Backpack',
+  },
+  {
+    id: 'log',
+    label: 'Log',
+  },
 ]
 
 /**

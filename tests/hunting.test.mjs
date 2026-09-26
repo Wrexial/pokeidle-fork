@@ -106,7 +106,7 @@ test('a swarm entry rolls shiny four times as often', () => {
   const base = { speciesKey: 'pidgey', weight: 100, minLevel: 2, maxLevel: 2 },
     swarm = { ...base, shinyMultiplier: 4, shinyOddsFloor: 256 },
     data = (/** @type {any} */ entry) => ({ name: 'Test Route', encounters: [entry] }),
-    // 1/4096 is shiny under the boosted 1/2048 odds, but not under full 1/8192 odds.
+    // 1/4096 is shiny under the swarm's boosted 1/1024 odds, but not under full 1/4096 odds.
     roll = 1 / 4096
   const plain = withRandom(roll, () =>
       resolvePokemonEncounter(data(base), [], new Set(), undefined, 1, false, 2)

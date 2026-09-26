@@ -198,10 +198,10 @@ test('checkShinyOdds hits on a zero roll and misses otherwise', () => {
   const originalRandom = Math.random
   try {
     Math.random = () => 0
-    assert.equal(checkShinyOdds(8192), true)
+    assert.equal(checkShinyOdds(4096), true)
     assert.equal(checkShinyOdds(1), true)
     Math.random = () => 0.9999999
-    assert.equal(checkShinyOdds(8192), false)
+    assert.equal(checkShinyOdds(4096), false)
   } finally {
     Math.random = originalRandom
   }

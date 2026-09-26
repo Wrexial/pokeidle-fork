@@ -1,15 +1,28 @@
 // Split from a grouped component file — see tools/decompile/split-components.mjs
 
+import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { tokenShopItems } from '../data/items.js'
 import { useGame } from '../game/context.js'
 import { getItemInfo } from '../game/progression.js'
 import { ItemIcon } from './item-icon.js'
 
-/** @param {{ onClose: () => void }} props */
 /** @param {{ onClose?: () => void, inline?: boolean }} props */
 export function RewardShopModal({ onClose, inline = false }) {
-  const { state, dispatch } = useGame()
+  const { state, dispatch } = useGame(),
+    [searchOpen, setSearchOpen] = React.useState(!1),
+    [query, setQuery] = React.useState(''),
+    needle = query.trim().toLowerCase(),
+    visibleItems = needle
+      ? tokenShopItems.filter((rewardItem) => {
+          const info = getItemInfo(rewardItem.itemId)
+          return (
+            info.name.toLowerCase().includes(needle) ||
+            info.description.toLowerCase().includes(needle) ||
+            rewardItem.itemId.toLowerCase().includes(needle)
+          )
+        })
+      : tokenShopItems
   const panel = jsxs('div', {
     className: inline ? 'reward-shop-inline' : 'battle-info-modal',
     ...(inline
@@ -21,16 +34,51 @@ export function RewardShopModal({ onClose, inline = false }) {
           children: [
             jsx('span', {
               className: 'battle-info-title',
-              children: 'Reward Shop',
+              children: 'Kecleon Shop',
             }),
-            onClose &&
-              jsx('button', {
-                className: 'battle-info-close',
-                onClick: onClose,
-                children: 'X',
-              }),
+            jsxs('div', {
+              className: 'reward-shop-header-buttons',
+              children: [
+                jsx('button', {
+                  type: 'button',
+                  className: `reward-shop-search-btn${searchOpen ? ' active' : ''}`,
+                  onClick: () => {
+                    if (searchOpen) setQuery('')
+                    setSearchOpen(!searchOpen)
+                  },
+                  children: 'Search',
+                }),
+                onClose &&
+                  jsx('button', {
+                    className: 'battle-info-close',
+                    onClick: onClose,
+                    children: 'X',
+                  }),
+              ],
+            }),
           ],
         }),
+        searchOpen &&
+          jsxs('div', {
+            className: 'box-search',
+            children: [
+              jsx('input', {
+                className: 'box-search-input',
+                type: 'text',
+                placeholder: 'Search the shop\u2026',
+                value: query,
+                onChange: /** @param {React.ChangeEvent<HTMLInputElement>} event */ (event) =>
+                  setQuery(event.target.value),
+              }),
+              query
+                ? jsx('button', {
+                    className: 'box-filter-btn active',
+                    onClick: () => setQuery(''),
+                    children: 'Clear',
+                  })
+                : null,
+            ],
+          }),
         jsxs('div', {
           className: 'battle-info-content',
           children: [
@@ -45,7 +93,7 @@ export function RewardShopModal({ onClose, inline = false }) {
             }),
             jsx('div', {
               className: 'reward-shop-list',
-              children: tokenShopItems.map((rewardItem) => {
+              children: visibleItems.map((rewardItem) => {
                 const item = getItemInfo(rewardItem.itemId),
                   owned = state.inventory[rewardItem.itemId] ?? 0,
                   canAfford = state.victoryTokens >= rewardItem.tokenCost
@@ -117,6 +165,11 @@ export function RewardShopModal({ onClose, inline = false }) {
                 )
               }),
             }),
+            visibleItems.length === 0 &&
+              jsx('div', {
+                className: 'reward-shop-empty',
+                children: 'No items match.',
+              }),
           ],
         }),
       ],

@@ -135,10 +135,10 @@ export function clearSave(slot = getActiveSlot() || 1) {
   }
 }
 
-export const shinyFullOddsChance = 8192
+export const shinyFullOddsChance = 4096
 
 /** Shiny Charm rate with one completed generation (the original 2x charm). */
-export const shinyWithCharmChance = 4096
+export const shinyWithCharmChance = 2048
 
 /** Best Shiny Charm rate, reached once every generation's Pokedex is complete. */
 export const shinyCharmMinOddsChance = 256

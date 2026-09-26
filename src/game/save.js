@@ -570,7 +570,7 @@ export function repairSave(saved) {
     towerBest: repairedTowerBest,
     victoryTokens: saved.victoryTokens ?? 0,
     autoProceed: saved.autoProceed ?? false,
-    battleStyle: saved.battleStyle === 'switch' ? 'switch' : 'set',
+    battleStyle: saved.battleStyle === 'set' ? 'set' : 'switch',
     browserNotifications: !!saved.browserNotifications,
     reducedMotion: !!saved.reducedMotion,
     colourblindTypes: !!saved.colourblindTypes,

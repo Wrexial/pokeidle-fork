@@ -431,15 +431,18 @@ export function useGameLoop() {
             // Pokemon does not attack — only the foe acts.
             playerSkipMove = !!currentGameState.playerTurnSpent
           // The Champion and the player's auto-battler may switch to a better
-          // type matchup before the turn resolves.
-          const playerSwitch = playerSkipMove
-            ? -1
-            : chooseBestSwitch(
-                playerBattlePokemon,
-                currentGameState.party,
-                enemyBattlePokemon,
-                currentGameState.activePlayerPokemonIndex
-              )
+          // type matchup before the turn resolves. The player's switching is
+          // the Set / Switch battle-style option: Set never switches on its
+          // own, Switch (the default) does.
+          const playerSwitch =
+            playerSkipMove || currentGameState.battleStyle === 'set'
+              ? -1
+              : chooseBestSwitch(
+                  playerBattlePokemon,
+                  currentGameState.party,
+                  enemyBattlePokemon,
+                  currentGameState.activePlayerPokemonIndex
+                )
           if (playerSwitch >= 0) {
             dispatch({
               type: 'SWITCH_PLAYER_POKEMON',
@@ -701,18 +704,7 @@ export function useGameLoop() {
           const activeIndex = currentGameState.activePlayerPokemonIndex,
             switchIndex = currentGameState.party.findIndex(
               (member, index) => index > activeIndex && isBattleReady(member)
-            ),
-            canSwitchAny = currentGameState.party.some(
-              (member, index) => index !== activeIndex && isBattleReady(member)
             )
-          // Switch style: pause and let the player pick the replacement
-          // instead of automatically sending the next party member out.
-          if (canSwitchAny && currentGameState.battleStyle === 'switch') {
-            dispatch({
-              type: 'PROMPT_SWITCH',
-            })
-            return
-          }
           if (switchIndex !== -1) {
             dispatch({
               type: 'SWITCH_PLAYER_POKEMON',
@@ -763,8 +755,6 @@ export function useGameLoop() {
         }
         case 'healing':
           return
-        case 'chooseSwitch':
-          return
         case 'evolving':
           return
         case 'catching':
@@ -785,7 +775,6 @@ export function useGameLoop() {
     if (
       state.phase === 'starterSelect' ||
       state.phase === 'gameOver' ||
-      state.phase === 'chooseSwitch' ||
       state.phase === 'bugCatching' ||
       state.phase === 'safari' ||
       state.phase === 'academyQuiz' ||

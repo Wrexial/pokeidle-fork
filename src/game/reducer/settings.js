@@ -17,15 +17,15 @@ export function setSpeed(state, action) {
 }
 
 /**
- * Handle the `SET_BATTLE_STYLE` action. The mainline Set / Switch option:
- * "set" sends the next party member out automatically after a faint, "switch"
- * pauses the battle so the player can choose (see the `chooseSwitch` phase).
+ * Handle the `SET_BATTLE_STYLE` action. Switch (the default) lets the
+ * auto-battler switch to a better matchup on its own; Set never switches
+ * automatically.
  * @param {GameState} state
  * @param {GameAction} action
  * @returns {GameState}
  */
 export function setBattleStyle(state, action) {
-  const style = action.payload?.style === 'switch' ? 'switch' : 'set'
+  const style = action.payload?.style === 'set' ? 'set' : 'switch'
   return {
     ...state,
     battleStyle: style,

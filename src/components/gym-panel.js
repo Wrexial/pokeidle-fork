@@ -336,7 +336,7 @@ export function GymPanel({ onOpenShop }) {
                 jsx('button', {
                   className: 'reward-shop-open-btn',
                   onClick: onOpenShop,
-                  children: 'Reward Shop',
+                  children: 'Kecleon Shop',
                 }),
               ],
             }),

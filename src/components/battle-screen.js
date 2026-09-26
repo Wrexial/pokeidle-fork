@@ -9,7 +9,6 @@ import { useIsMobile } from '../hooks.js'
 import { BattleLog } from './battle-log.js'
 import { BattleScene } from './battle-scene.js'
 import { LevelUpNotification } from './level-up-notification.js'
-import { SwitchPrompt } from './switch-prompt.js'
 
 // Never shrink the battle scene past this — on an extremely short viewport the
 // bottom of the scene clips rather than the whole scene becoming unreadable.
@@ -76,11 +75,11 @@ export function BattleScreen() {
     return jsxs('div', {
       className: 'battle-screen',
       ref: containerRef,
-      children: [scene, jsx(LevelUpNotification, {}), jsx(SwitchPrompt, {})],
+      children: [scene, jsx(LevelUpNotification, {})],
     })
   return jsxs('div', {
     className: 'battle-screen',
     ref: containerRef,
-    children: [scene, jsx(BattleLog, {}), jsx(LevelUpNotification, {}), jsx(SwitchPrompt, {})],
+    children: [scene, jsx(BattleLog, {}), jsx(LevelUpNotification, {})],
   })
 }

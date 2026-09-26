@@ -45,28 +45,23 @@ test('audio defaults: music off, sound effects on', () => {
   assert.equal(initialGameState.sfxEnabled, true)
 })
 
-test('battle style defaults to Set and switches to Switch', () => {
-  assert.equal(initialGameState.battleStyle, 'set')
-  const switched = gameReducer(initialGameState, {
+test('battle style defaults to Switch and can be set to Set', () => {
+  assert.equal(initialGameState.battleStyle, 'switch')
+  const setStyle = gameReducer(initialGameState, {
     type: 'SET_BATTLE_STYLE',
-    payload: { style: 'switch' },
+    payload: { style: 'set' },
   })
-  assert.equal(switched.battleStyle, 'switch')
+  assert.equal(setStyle.battleStyle, 'set')
   assert.equal(
-    gameReducer(switched, { type: 'SET_BATTLE_STYLE', payload: { style: 'set' } }).battleStyle,
-    'set'
+    gameReducer(setStyle, { type: 'SET_BATTLE_STYLE', payload: { style: 'switch' } }).battleStyle,
+    'switch'
   )
-  // Anything unrecognised falls back to Set.
+  // Anything unrecognised falls back to Switch (the default).
   assert.equal(
     gameReducer(initialGameState, { type: 'SET_BATTLE_STYLE', payload: { style: 'nonsense' } })
       .battleStyle,
-    'set'
+    'switch'
   )
-})
-
-test('PROMPT_SWITCH pauses in the chooseSwitch phase', () => {
-  const prompted = gameReducer(initialGameState, { type: 'PROMPT_SWITCH' })
-  assert.equal(prompted.phase, 'chooseSwitch')
 })
 
 test('the audio engine is a no-op without a browser AudioContext', () => {
@@ -109,7 +104,7 @@ test('repairSave defaults the accessibility settings off and keeps them on', () 
   assert.equal(defaults.sfxEnabled, true)
   assert.equal(repairSave(save({ musicEnabled: true, sfxEnabled: true })).musicEnabled, true)
   assert.equal(repairSave(save({ musicEnabled: true, sfxEnabled: false })).sfxEnabled, false)
-  assert.equal(defaults.battleStyle, 'set')
-  assert.equal(repairSave(save({ battleStyle: 'switch' })).battleStyle, 'switch')
-  assert.equal(repairSave(save({ battleStyle: 'garbage' })).battleStyle, 'set')
+  assert.equal(defaults.battleStyle, 'switch')
+  assert.equal(repairSave(save({ battleStyle: 'set' })).battleStyle, 'set')
+  assert.equal(repairSave(save({ battleStyle: 'garbage' })).battleStyle, 'switch')
 })

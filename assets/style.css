@@ -2226,7 +2226,7 @@ img {
     padding: 6px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     background: radial-gradient(ellipse 40px 40px at 20% 30%,rgba(60,100,40,.25) 0%,transparent 70%),radial-gradient(ellipse 50px 35px at 70% 60%,rgba(50,90,35,.2) 0%,transparent 70%),radial-gradient(ellipse 35px 45px at 45% 80%,rgba(55,95,38,.22) 0%,transparent 70%),radial-gradient(ellipse 45px 30px at 85% 20%,rgba(60,100,40,.18) 0%,transparent 70%),linear-gradient(180deg,#2a4a1e,#264418,#223e14,#1e3810,#1a3210)
 }
 
@@ -2944,6 +2944,30 @@ img {
 .town-map-battles {
     font-size: 7px;
     color: #8a7a60
+}
+
+.map-search-toggle {
+    flex: 0 0 auto;
+    font-family: var(--font-pixel);
+    font-size: 9px;
+    line-height: 1;
+    padding: 2px 6px;
+    color: var(--gold);
+    background: #2a1e10;
+    border: 2px solid #5a3e20;
+    border-radius: 0;
+    cursor: pointer
+}
+
+.map-search-toggle:hover {
+    color: #1a1208;
+    background: var(--gold)
+}
+
+.map-search-toggle.active {
+    color: #1a1208;
+    background: var(--gold);
+    border-color: var(--gold-dark)
 }
 
 .map-search {
@@ -8516,6 +8540,39 @@ img {
     gap: 6px
 }
 
+.reward-shop-header-buttons {
+    display: flex;
+    align-items: center;
+    gap: 6px
+}
+
+.reward-shop-search-btn {
+    font-family: var(--font-pixel);
+    font-size: 8px;
+    padding: 2px 8px;
+    color: #3a2818;
+    background: #d8c8a0;
+    border: 2px solid #a89870;
+    border-radius: 0;
+    cursor: pointer
+}
+
+.reward-shop-search-btn:hover {
+    border-color: #8a6820
+}
+
+.reward-shop-search-btn.active {
+    background: var(--gold);
+    border-color: var(--gold-dark)
+}
+
+.reward-shop-empty {
+    padding: 12px 0;
+    text-align: center;
+    font-size: 8px;
+    color: #6a5838
+}
+
 .reward-shop-row {
     display: flex;
     align-items: center;
@@ -8930,9 +8987,9 @@ img {
 }
 
 .mobile-tabs .tab-btn {
-    font-size: 9px;
+    font-size: 8px;
     min-height: 44px;
-    padding: 10px 4px
+    padding: 10px 3px
 }
 
 .mobile-tabs .tab-btn:active {
@@ -8971,8 +9028,26 @@ img {
     flex: 1
 }
 
-.mobile-location-wrapper .backpack-panel {
-    height: clamp(280px,45vh,460px)
+.mobile-backpack-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%
+}
+
+.mobile-backpack-wrapper .backpack-panel {
+    flex: 1;
+    height: auto
+}
+
+.mobile-log-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%
+}
+
+.mobile-log-wrapper .battle-log {
+    flex: 1;
+    min-height: 0
 }
 
 .mobile-tab-content .town-map {
@@ -12954,89 +13029,8 @@ img {
     text-shadow: none
 }
 
-/* Switch battle style: the replacement picker shown after a faint. */
-.switch-prompt-overlay {
-    position: fixed;
-    inset: 0;
-    background: #0009;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 210;
-    padding: 12px
-}
-
-.switch-prompt {
-    background: url(/ui/parchment.png) repeat;
-    background-size: 64px 64px;
-    background-color: #e8dcc0;
-    color: var(--ink);
-    width: min(420px,100%);
-    max-height: 80vh;
-    overflow-y: auto;
-    padding: 14px;
-    box-shadow: inset 2px 2px #ffdca04d,inset -2px -2px #00000026,0 0 0 4px #5a3e20,0 0 0 6px #3a2810,0 0 0 8px #6a4e30,0 0 0 10px #8a6840,0 0 0 12px #6a4e30,0 0 0 14px #3a2810,4px 6px 0 14px #0006
-}
-
-.switch-prompt-title {
-    font-size: 12px;
-    font-weight: 700;
-    margin-bottom: 4px
-}
-
-.switch-prompt-hint {
-    font-size: 8px;
-    color: #5a4010;
-    margin-bottom: 10px
-}
-
-.switch-prompt-list {
-    display: flex;
-    flex-direction: column;
-    gap: 6px
-}
-
-.switch-prompt-option {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 8px;
-    background: #d8c8a0;
-    border: 2px solid #a89870;
-    cursor: pointer;
-    text-align: left
-}
-
-.switch-prompt-option:hover {
-    border-color: #8a6820;
-    filter: brightness(1.05)
-}
-
-.switch-prompt-sprite {
-    width: 40px;
-    height: 40px;
-    image-rendering: pixelated
-}
-
-.switch-prompt-info {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    color: var(--ink)
-}
-
-.switch-prompt-name {
-    font-size: 9px;
-    font-weight: 700
-}
-
-.switch-prompt .hp-label {
-    color: var(--ink)
-}
-
-/* Right panel: Location (Area / League) and the Backpack (Dex / Bank /
-   Items / Records) sub-tabs. */
+/* Right panel: Location and the Backpack (League / Dex / Kecleon Wares /
+   Items / Records) section. */
 .backpack-panel {
     flex: 0 0 auto;
     height: clamp(280px,40vh,520px);
@@ -13095,38 +13089,6 @@ img {
 .records-inline,
 .reward-shop-inline {
     overflow-y: auto
-}
-
-.backpack-bank {
-    flex: 1;
-    min-height: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 8px
-}
-
-.backpack-bank-balance {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    padding: 8px 10px;
-    background: linear-gradient(180deg,#6a4030,#5a3020);
-    border: 2px solid #3a1e10
-}
-
-.backpack-bank-label {
-    font-size: 8px;
-    color: var(--gold);
-    text-transform: uppercase;
-    letter-spacing: 1px
-}
-
-.backpack-bank-amount {
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--gold-bright)
 }
 
 .backpack-content .bag-container {

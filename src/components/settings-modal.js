@@ -212,7 +212,7 @@ export function SettingsModal({ onClose }) {
                       jsx('p', {
                         className: 'settings-hint',
                         children:
-                          'Set sends your next party Pokemon out automatically when one faints; Switch pauses the battle so you can choose which one goes out.',
+                          'Switch (the default) lets your auto-battler switch to a better type matchup on its own; Set never switches automatically. Your Pokemon still send the next one out after a faint either way.',
                       }),
                       jsx('button', {
                         className: `settings-toggle-btn${state.battleStyle === 'switch' ? ' active' : ''}`,

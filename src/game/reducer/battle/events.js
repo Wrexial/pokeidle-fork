@@ -355,17 +355,3 @@ export function consumeEvent(state, action) {
   }
   return syncedState
 }
-
-/**
- * Handle the `PROMPT_SWITCH` action: pause after a faint so the player can pick
- * the next party member (the Switch battle style). The game loop only offers
- * this when another party member is healthy.
- * @param {GameState} state
- * @returns {GameState}
- */
-export function promptSwitch(state) {
-  return {
-    ...state,
-    phase: 'chooseSwitch',
-  }
-}

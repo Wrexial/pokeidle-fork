@@ -1790,18 +1790,18 @@ img {
 
 .game-layout {
     display: grid;
-    grid-template-columns: 1fr 560px 1fr;
+    grid-template-columns: minmax(0,1fr) clamp(400px,min(58vh,46vw),760px) minmax(0,1fr);
     height: 100%;
     min-height: 0;
     background: var(--bg-dark)
 }
 
 .center-column {
-    width: 560px;
     border-left: 3px solid #483828;
     border-right: 3px solid #483828;
     display: flex;
     flex-direction: column;
+    min-width: 0;
     overflow: hidden
 }
 
@@ -1823,7 +1823,7 @@ img {
 }
 
 .center-column .town-map {
-    flex: 0 0 clamp(320px, 44vh, 540px)
+    flex: 0 0 clamp(240px,40vh,520px)
 }
 
 .side-panel {
@@ -1831,22 +1831,9 @@ img {
     background-image: repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(200,168,72,.03) 3px,rgba(200,168,72,.03) 4px);
     display: flex;
     flex-direction: column;
-    align-items: center;
     min-width: 0;
     min-height: 0;
     position: relative
-}
-
-/* On ultrawide screens keep each panel's content aligned with the centre
-   column instead of stretching HP bars and bag rows across the whole side. */
-.side-panel > .panel-header,
-.side-panel > .party-content,
-.side-panel > .box-container,
-.side-panel > .tab-bar,
-.side-panel > .panel-content,
-.side-panel > .bag-container {
-    width: 100%;
-    max-width: 560px
 }
 
 .panel-header {
@@ -1957,7 +1944,7 @@ img {
 }
 
 .party-content {
-    flex: 1;
+    flex: 0 0 auto;
     display: flex;
     flex-direction: column;
     padding: 8px;
@@ -2110,6 +2097,10 @@ img {
 }
 
 .box-container {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
     border-top: 2px solid #483828
 }
 
@@ -2197,10 +2188,11 @@ img {
 }
 
 .box-grid-wrapper {
+    flex: 1;
     padding: 6px;
     display: flex;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
     background: radial-gradient(ellipse 40px 40px at 20% 30%,rgba(60,100,40,.25) 0%,transparent 70%),radial-gradient(ellipse 50px 35px at 70% 60%,rgba(50,90,35,.2) 0%,transparent 70%),radial-gradient(ellipse 35px 45px at 45% 80%,rgba(55,95,38,.22) 0%,transparent 70%),radial-gradient(ellipse 45px 30px at 85% 20%,rgba(60,100,40,.18) 0%,transparent 70%),linear-gradient(180deg,#2a4a1e,#264418,#223e14,#1e3810,#1a3210)
 }
 
@@ -5491,7 +5483,7 @@ img {
     border-top: 2px solid #483828;
     display: flex;
     flex-direction: column;
-    height: 292px;
+    height: clamp(240px,32vh,420px);
     position: relative;
     z-index: 0
 }
@@ -8716,29 +8708,11 @@ img {
     }
 
     .bag-container {
-        height: 240px
-    }
-}
-
-@media(max-width: 1080px) {
-    .game-layout {
-        grid-template-columns:1fr 476px 1fr
-    }
-
-    .center-column {
-        width: 476px
+        height: clamp(220px,28vh,360px)
     }
 }
 
 @media(max-width: 900px) {
-    .game-layout {
-        grid-template-columns:1fr 420px 1fr
-    }
-
-    .center-column {
-        width: 420px
-    }
-
     .box-grid {
         grid-template-columns: repeat(6,36px);
         gap: 2px
@@ -8768,6 +8742,60 @@ img {
     }
 }
 
+/* On 21:9 / 32:9 the side panels are very wide, so split each into two columns
+   instead of one tall, stretched column with empty margins. */
+@media (min-aspect-ratio: 21/9) {
+    .side-panel.left-panel {
+        display: grid;
+        grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr);
+        grid-template-rows: auto minmax(0,1fr);
+        align-items: stretch
+    }
+
+    .side-panel.left-panel > .panel-header {
+        grid-column: 1;
+        grid-row: 1
+    }
+
+    .side-panel.left-panel > .party-content {
+        grid-column: 1;
+        grid-row: 2;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: #685040 #1a1208
+    }
+
+    .side-panel.left-panel > .box-container {
+        grid-column: 2;
+        grid-row: 1 / span 2
+    }
+
+    .side-panel.right-panel {
+        display: grid;
+        grid-template-columns: minmax(0,1fr) minmax(0,.85fr);
+        grid-template-rows: auto minmax(0,1fr);
+        align-items: stretch
+    }
+
+    .side-panel.right-panel > .tab-bar {
+        grid-column: 1 / -1;
+        grid-row: 1
+    }
+
+    .side-panel.right-panel > .panel-content {
+        grid-column: 1;
+        grid-row: 2
+    }
+
+    .side-panel.right-panel > .bag-container {
+        grid-column: 2;
+        grid-row: 2;
+        height: auto;
+        min-height: 0;
+        border-left: 2px solid #483828
+    }
+}
+
 /* --- Tabbed layout (phones, tablets and short viewports) --- */
 
 .game-layout.mobile {
@@ -8775,6 +8803,7 @@ img {
     flex-direction: column;
     height: 100dvh;
     height: 100vh;
+    padding: env(safe-area-inset-top,0) env(safe-area-inset-right,0) env(safe-area-inset-bottom,0) env(safe-area-inset-left,0);
     overflow: hidden
 }
 

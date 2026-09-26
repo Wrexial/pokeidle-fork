@@ -14,6 +14,10 @@ import { LevelUpNotification } from './level-up-notification.js'
 // bottom of the scene clips rather than the whole scene becoming unreadable.
 const MIN_SCENE_SCALE = 0.5
 
+// On a large monitor the scene can grow to use the space instead of sitting at
+// its design size in a sea of background.
+const MAX_SCENE_SCALE = 1.6
+
 export function BattleScreen() {
   const { state } = useGame(),
     isMobile = useIsMobile(),
@@ -33,7 +37,7 @@ export function BattleScreen() {
     const nextScale = Math.min(
       containerWidth / DESIGN_WIDTH,
       availableHeight / DESIGN_HEIGHT,
-      1
+      MAX_SCENE_SCALE
     )
     setScale(Math.max(nextScale, MIN_SCENE_SCALE))
   }, [isMobile])

@@ -14,9 +14,9 @@ import { blendBerries, careCompanion, harvestBerry, plantBerry, setCompanion } f
 import { assignPelago, collectPelago, dismissPelagoCollect, unassignPelago } from './reducer/pelago.js'
 import { claimGift, startStaticEncounter } from './reducer/gifts.js'
 import { claimMinigameReward, collectMining, endBugContest, endMinigame, endRouteActivity, endSafari, payMinigameFee, startAcademyQuiz, startAuctionHouse, startBattleRoyal, startBugContest, startContest, startCurry, startDynamaxAdventures, startGameCorner, startIceSlide, startLightsOut, startMemory, startMining, startMusical, startPelago, startPicnic, startPokeathlon, startPokeRadar, startPokeballFactory, startPokestar, startPuzzleLeague, startRouteActivity, startRuinsPuzzle, startSafari, startVoltorbFlip, startWhack } from './reducer/minigames.js'
-import { boxToParty, catchPokemon, clearHatchResult, completeEvolution, completeWonderTrade, depositDaycare, evolutionStep, hatchDaycareEgg, partyToBox, releaseDuplicates, releaseHatchling, releasePokemon, reorderBox, reorderParty, setBoxSort, setMoves, setNickname, startEvolution, swapParty, swapPartyBox, toggleFavourite, withdrawDaycare, wonderTrade } from './reducer/pokemon.js'
+import { boxToParty, catchPokemon, clearHatchResult, completeEvolution, completeWonderTrade, depositDaycare, evolutionStep, hatchDaycareEgg, partyToBox, releaseDuplicates, releaseFainted, releaseHatchling, releasePokemon, reorderBox, reorderParty, setBoxSort, setMoves, setNickname, startEvolution, swapParty, swapPartyBox, toggleFavourite, withdrawDaycare, wonderTrade } from './reducer/pokemon.js'
 import { completeHealing, heal, healParty, healingStep, startHealing } from './reducer/recovery.js'
-import { addLog, clearLevelUp, dismissNotification, pushNotification, setChallengeMonotype, setSpeed, toggleAutoProceed, toggleBrowserNotifications, toggleChallengeLevelScale, toggleChallengeNuzlocke, toggleChallengeRandomizer, toggleColourblindTypes, toggleLargeText, toggleMartCollapsed, toggleMusic, togglePause, toggleReducedMotion, toggleSfx } from './reducer/settings.js'
+import { addLog, clearLevelUp, dismissNotification, markCatchRoute, pushNotification, setChallengeMonotype, setSpeed, toggleAutoProceed, toggleBrowserNotifications, toggleChallengeLevelScale, toggleChallengeNuzlocke, toggleChallengeRandomizer, toggleChallengeRestrictCatches, toggleColourblindTypes, toggleLargeText, toggleMartCollapsed, toggleMusic, togglePause, toggleReducedMotion, toggleSfx } from './reducer/settings.js'
 import { loadSave, phaseIdle, prestigeRegion, resetEliteFour, selectStarter, travel, unlockRegion } from './reducer/world.js'
 
 /** @type {GameState} */
@@ -145,6 +145,10 @@ export const initialGameState = {
   challengeLevelScale: !1,
   /** Challenge: a fainted party Pokemon is released permanently. */
   challengeNuzlocke: !1,
+  /** Challenge: only the first wild Pokemon on each route can be caught. */
+  challengeRestrictCatches: !1,
+  /** Routes whose first wild encounter has already been used up. */
+  challengeCatchRoutes: [],
   /** Challenge: wild encounters are limited to this type (null = off). */
   challengeMonotype: null,
   raidCooldownEnd: null,
@@ -306,6 +310,8 @@ export function gameReducer(state, action) {
       return setBoxSort(state, action)
     case 'RELEASE_POKEMON':
       return releasePokemon(state, action)
+    case 'RELEASE_FAINTED':
+      return releaseFainted(state)
     case 'WONDER_TRADE':
       return wonderTrade(state, action)
     case 'COMPLETE_WONDER_TRADE':
@@ -344,6 +350,10 @@ export function gameReducer(state, action) {
       return toggleChallengeLevelScale(state, action)
     case 'TOGGLE_CHALLENGE_NUZLOCKE':
       return toggleChallengeNuzlocke(state, action)
+    case 'TOGGLE_CHALLENGE_RESTRICT_CATCHES':
+      return toggleChallengeRestrictCatches(state, action)
+    case 'MARK_CATCH_ROUTE':
+      return markCatchRoute(state, action)
     case 'SET_CHALLENGE_MONOTYPE':
       return setChallengeMonotype(state, action)
     case 'START_BUG_CONTEST':

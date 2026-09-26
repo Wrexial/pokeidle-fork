@@ -24,6 +24,7 @@ export function StarterSelect() {
     if (state.challengeRandomizer) dispatch({ type: 'TOGGLE_CHALLENGE_RANDOMIZER' })
     if (state.challengeLevelScale) dispatch({ type: 'TOGGLE_CHALLENGE_LEVEL_SCALE' })
     if (state.challengeNuzlocke) dispatch({ type: 'TOGGLE_CHALLENGE_NUZLOCKE' })
+    if (state.challengeRestrictCatches) dispatch({ type: 'TOGGLE_CHALLENGE_RESTRICT_CATCHES' })
     if (state.challengeMonotype)
       dispatch({ type: 'SET_CHALLENGE_MONOTYPE', payload: { monotype: null } })
   }
@@ -32,6 +33,7 @@ export function StarterSelect() {
     state.challengeRandomizer && 'Randomizer',
     state.challengeLevelScale && 'Level Scaling',
     state.challengeNuzlocke && 'Nuzlocke',
+    state.challengeRestrictCatches && 'One Catch per Route',
     state.challengeMonotype && `${state.challengeMonotype} Monotype`,
   ].filter(Boolean)
 
@@ -90,28 +92,82 @@ export function StarterSelect() {
         jsxs('div', {
           className: 'challenge-rules',
           children: [
-            jsx('button', {
-              className: `settings-toggle-btn${state.challengeRandomizer ? ' active' : ''}`,
-              onClick: () => dispatch({ type: 'TOGGLE_CHALLENGE_RANDOMIZER' }),
-              children: state.challengeRandomizer ? 'Randomizer: ON' : 'Randomizer: OFF',
+            jsxs('div', {
+              className: 'challenge-rule',
+              children: [
+                jsx('button', {
+                  className: `settings-toggle-btn${state.challengeRandomizer ? ' active' : ''}`,
+                  onClick: () => dispatch({ type: 'TOGGLE_CHALLENGE_RANDOMIZER' }),
+                  children: state.challengeRandomizer ? 'Randomizer: ON' : 'Randomizer: OFF',
+                }),
+                jsx('p', {
+                  className: 'challenge-rule-hint',
+                  children: 'Every wild encounter rolls a random species from the whole dex.',
+                }),
+              ],
             }),
-            jsx('button', {
-              className: `settings-toggle-btn${state.challengeLevelScale ? ' active' : ''}`,
-              onClick: () => dispatch({ type: 'TOGGLE_CHALLENGE_LEVEL_SCALE' }),
-              children: state.challengeLevelScale ? 'Level Scaling: ON' : 'Level Scaling: OFF',
+            jsxs('div', {
+              className: 'challenge-rule',
+              children: [
+                jsx('button', {
+                  className: `settings-toggle-btn${state.challengeLevelScale ? ' active' : ''}`,
+                  onClick: () => dispatch({ type: 'TOGGLE_CHALLENGE_LEVEL_SCALE' }),
+                  children: state.challengeLevelScale ? 'Level Scaling: ON' : 'Level Scaling: OFF',
+                }),
+                jsx('p', {
+                  className: 'challenge-rule-hint',
+                  children:
+                    'Wild Pokemon match your active Pokemon\u2019s level, so you cannot out-level content.',
+                }),
+              ],
             }),
-            jsx('button', {
-              className: `settings-toggle-btn${state.challengeNuzlocke ? ' active' : ''}`,
-              onClick: () => dispatch({ type: 'TOGGLE_CHALLENGE_NUZLOCKE' }),
-              children: state.challengeNuzlocke ? 'Nuzlocke: ON' : 'Nuzlocke: OFF',
+            jsxs('div', {
+              className: 'challenge-rule',
+              children: [
+                jsx('button', {
+                  className: `settings-toggle-btn${state.challengeNuzlocke ? ' active' : ''}`,
+                  onClick: () => dispatch({ type: 'TOGGLE_CHALLENGE_NUZLOCKE' }),
+                  children: state.challengeNuzlocke ? 'Nuzlocke: ON' : 'Nuzlocke: OFF',
+                }),
+                jsx('p', {
+                  className: 'challenge-rule-hint',
+                  children:
+                    'A party Pokemon is released the moment it faints \u2014 your last one is always spared.',
+                }),
+              ],
             }),
-            jsx(MonotypeSelect, {
-              value: state.challengeMonotype,
-              onChange: /** @param {string | null} monotype */ (monotype) =>
-                dispatch({ type: 'SET_CHALLENGE_MONOTYPE', payload: { monotype } }),
-              hint: state.challengeMonotype
-                ? `Wild encounters will be limited to ${state.challengeMonotype}-type Pokemon.`
-                : 'Optional: restrict wild encounters to a single type.',
+            jsxs('div', {
+              className: 'challenge-rule',
+              children: [
+                jsx('button', {
+                  className: `settings-toggle-btn${state.challengeRestrictCatches ? ' active' : ''}`,
+                  onClick: () => dispatch({ type: 'TOGGLE_CHALLENGE_RESTRICT_CATCHES' }),
+                  children: state.challengeRestrictCatches
+                    ? 'One Catch per Route: ON'
+                    : 'One Catch per Route: OFF',
+                }),
+                jsx('p', {
+                  className: 'challenge-rule-hint',
+                  children:
+                    'You may only catch the first wild Pokemon you meet on each route or area.',
+                }),
+              ],
+            }),
+            jsxs('div', {
+              className: 'challenge-rule',
+              children: [
+                jsx(MonotypeSelect, {
+                  value: state.challengeMonotype,
+                  onChange: /** @param {string | null} monotype */ (monotype) =>
+                    dispatch({ type: 'SET_CHALLENGE_MONOTYPE', payload: { monotype } }),
+                }),
+                jsx('p', {
+                  className: 'challenge-rule-hint',
+                  children: state.challengeMonotype
+                    ? `Wild encounters will be limited to ${state.challengeMonotype}-type Pokemon.`
+                    : 'Limits wild encounters to a single type you pick.',
+                }),
+              ],
             }),
           ],
         }),

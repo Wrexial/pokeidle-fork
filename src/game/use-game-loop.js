@@ -251,10 +251,28 @@ export function useGameLoop() {
                   : 0,
                 currentGameState.challengeMonotype
               ),
-            pokemonData = createBattlePokemon(spawningPokemonData.speciesKey, spawningPokemonData.level, {
-              isShiny: spawningPokemonData.isShiny,
-              isRoamer: spawningPokemonData.isRoamer ?? !1,
-              wild: !0,
+            catchRouteKey = currentGameState.currentRoute ?? '',
+            routeCatchUsed =
+              !!currentGameState.challengeRestrictCatches &&
+              (currentGameState.challengeCatchRoutes ?? []).includes(catchRouteKey),
+            pokemonData = {
+              ...createBattlePokemon(spawningPokemonData.speciesKey, spawningPokemonData.level, {
+                isShiny: spawningPokemonData.isShiny,
+                isRoamer: spawningPokemonData.isRoamer ?? !1,
+                wild: !0,
+              }),
+              // Restrict Catches: only the first wild on a route can be caught.
+              ...(currentGameState.challengeRestrictCatches
+                ? { noCatch: routeCatchUsed }
+                : {}),
+            }
+          // That first encounter is now used up, even if it gets away.
+          currentGameState.challengeRestrictCatches &&
+            !routeCatchUsed &&
+            catchRouteKey &&
+            dispatch({
+              type: 'MARK_CATCH_ROUTE',
+              payload: { routeKey: catchRouteKey },
             })
           ;(dispatch({
             type: 'START_ENCOUNTER',
@@ -489,30 +507,35 @@ export function useGameLoop() {
                 index !== currentGameState.activePlayerPokemonIndex &&
                 isBattleReady(member)
             )
-            ;(dispatch(
-              switchIndex !== -1
-                ? {
-                    type: 'SWITCH_PLAYER_POKEMON',
-                    payload: {
-                      newPokemonIndex: switchIndex,
-                    },
-                  }
-                : {
-                    type: 'START_HEALING',
-                  }
-            ),
-              awardExperience(
-                dispatch,
-                currentGameState.playerPokemon,
-                currentGameState.enemyPokemon,
-                (currentGameState.bossBattle ?? currentGameState.trainerBattle)
-                  ? 1.5
-                  : 1,
-                hasExpShare,
-                currentGameState.party,
-                currentGameState.activePlayerPokemonIndex,
-                expBonus
-              ))
+            // A fainted Pokemon that can be replaced is released right away
+            // under Nuzlocke; the last one is spared by the heal path.
+            if (switchIndex !== -1) {
+              dispatch({
+                type: 'SWITCH_PLAYER_POKEMON',
+                payload: {
+                  newPokemonIndex: switchIndex,
+                },
+              })
+              dispatch({
+                type: 'RELEASE_FAINTED',
+              })
+            } else {
+              dispatch({
+                type: 'START_HEALING',
+              })
+            }
+            awardExperience(
+              dispatch,
+              currentGameState.playerPokemon,
+              currentGameState.enemyPokemon,
+              (currentGameState.bossBattle ?? currentGameState.trainerBattle)
+                ? 1.5
+                : 1,
+              hasExpShare,
+              currentGameState.party,
+              currentGameState.activePlayerPokemonIndex,
+              expBonus
+            )
             return
           }
           const trainerBattle =
@@ -579,14 +602,15 @@ export function useGameLoop() {
           )
           const forceCatch = enemyPokemon.isShiny && currentGameState.alwaysCatchShinies
           if (
-            forceCatch ||
-            shouldAutoCatch(
-              currentGameState,
-              currentGameState.currentRoute,
-              enemyPokemon.speciesKey,
-              enemyPokemon.level,
-              enemyPokemon.isShiny
-            )
+            !enemyPokemon.noCatch &&
+            (forceCatch ||
+              shouldAutoCatch(
+                currentGameState,
+                currentGameState.currentRoute,
+                enemyPokemon.speciesKey,
+                enemyPokemon.level,
+                enemyPokemon.isShiny
+              ))
           ) {
             const ballId = forceCatch
               ? selectBestBall(
@@ -664,14 +688,17 @@ export function useGameLoop() {
             switchIndex = currentGameState.party.findIndex(
               (member, index) => index > activeIndex && isBattleReady(member)
             )
-          if (switchIndex !== -1)
+          if (switchIndex !== -1) {
             dispatch({
               type: 'SWITCH_PLAYER_POKEMON',
               payload: {
                 newPokemonIndex: switchIndex,
               },
             })
-          else {
+            dispatch({
+              type: 'RELEASE_FAINTED',
+            })
+          } else {
             if (currentGameState.bossBattle ?? currentGameState.trainerBattle) {
               const penalty = Math.min(
                 currentGameState.money,

@@ -171,9 +171,25 @@ img {
 }
 
 .challenge-rules {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     width: 100%;
-    max-width: 360px;
+    max-width: 420px;
     box-sizing: border-box
+}
+
+.challenge-rule {
+    display: flex;
+    flex-direction: column;
+    gap: 3px
+}
+
+.challenge-rule-hint {
+    margin: 0;
+    font-size: 8px;
+    line-height: 1.5;
+    color: var(--text-muted)
 }
 
 .choose-btn.secondary {

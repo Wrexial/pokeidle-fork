@@ -109,6 +109,9 @@ export const CHANGELOG = [
           items: [
             'New games now open by asking Normal Mode or Challenge Mode: pick Challenge and you set the Randomizer, Level Scaling, Nuzlocke and Monotype rules before choosing a starter, and the same toggles stay in Settings for later changes',
             'Monotype no longer leaks other types onto a route that has none of your chosen type: it now rolls a random Pokemon of that type that could actually exist at the route\u2019s level',
+            'The Challenge Mode setup screen now explains what each rule does, instead of leaving you to guess from the toggle names',
+            'Nuzlocke now releases a Pokemon the moment it faints rather than batching the releases at the end of a battle; your last one is still spared',
+            'New challenge: One Catch per Route \u2014 you may only catch the first wild Pokemon you meet on each route or area, and that first encounter uses the route up even if it gets away',
           ],
         },
         {

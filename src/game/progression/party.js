@@ -85,17 +85,27 @@ export function createIdleBattleState() {
  * @param {GameState} state
  * @returns {GameState}
  */
-function applyNuzlockeRelease(state) {
+export function releaseFaintedParty(state) {
   if (!state.challengeNuzlocke) return state
   const fainted = state.party.filter(
       (member) => !member.isEgg && (member.currentHp ?? 0) <= 0
     ),
     survivors = state.party.filter((member) => member.isEgg || (member.currentHp ?? 0) > 0)
   if (fainted.length === 0 || survivors.length === 0) return state
-  const lostIds = new Set(fainted.map((member) => member.id))
+  const lostIds = new Set(fainted.map((member) => member.id)),
+    party = state.party.filter((member) => !lostIds.has(member.id)),
+    // Keep pointing at the same Pokemon after the removals.
+    activeId = state.playerPokemon?.id,
+    found = activeId ? party.findIndex((member) => member.id === activeId) : -1,
+    activePlayerPokemonIndex =
+      found >= 0
+        ? found
+        : Math.min(state.activePlayerPokemonIndex, Math.max(0, party.length - 1))
   return {
     ...state,
-    party: state.party.filter((member) => !lostIds.has(member.id)),
+    party,
+    activePlayerPokemonIndex,
+    playerPokemon: party[activePlayerPokemonIndex] ?? state.playerPokemon,
     battleLog: [
       ...state.battleLog,
       ...fainted.map((member) => `Nuzlocke: ${member.name} fainted and was released.`),
@@ -108,7 +118,7 @@ function applyNuzlockeRelease(state) {
  * @returns {GameState}
  */
 export function prepareNextBattle(state) {
-  const released = applyNuzlockeRelease(syncActivePokemonIntoParty(state)),
+  const released = releaseFaintedParty(syncActivePokemonIntoParty(state)),
     firstAliveIndex = released.party.findIndex((member) => isBattleReady(member)),
     nextIndex = firstAliveIndex >= 0 ? firstAliveIndex : 0
   return {

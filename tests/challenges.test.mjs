@@ -188,4 +188,60 @@ test('repairSave defaults the challenge flags off and keeps them on', () => {
   assert.equal(defaults.challengeMonotype, null)
   assert.equal(repairSave(save({ challengeMonotype: 'Fire' })).challengeMonotype, 'Fire')
   assert.equal(repairSave(save({ challengeMonotype: 'Bogus' })).challengeMonotype, null)
+  assert.equal(defaults.challengeRestrictCatches, false)
+  assert.deepEqual(defaults.challengeCatchRoutes, [])
+  const restricted = repairSave(
+    save({ challengeRestrictCatches: true, challengeCatchRoutes: ['route1', 42, 'route2'] })
+  )
+  assert.equal(restricted.challengeRestrictCatches, true)
+  assert.deepEqual(restricted.challengeCatchRoutes, ['route1', 'route2'])
+})
+
+test('Restrict Catches remembers the first wild on each route', () => {
+  let state = gameReducer(initialGameState, { type: 'TOGGLE_CHALLENGE_RESTRICT_CATCHES' })
+  assert.equal(state.challengeRestrictCatches, true)
+  assert.deepEqual(state.challengeCatchRoutes, [])
+  state = gameReducer(state, { type: 'MARK_CATCH_ROUTE', payload: { routeKey: 'route1' } })
+  state = gameReducer(state, { type: 'MARK_CATCH_ROUTE', payload: { routeKey: 'route1' } })
+  assert.deepEqual(state.challengeCatchRoutes, ['route1'], 'a route is only recorded once')
+})
+
+test('Nuzlocke releases a fainted party member straight away', () => {
+  /** @param {string} id @param {number} currentHp @returns {any} */
+  const mon = (id, currentHp) => ({
+      id,
+      speciesKey: 'bulbasaur',
+      name: `Mon ${id}`,
+      types: ['Grass'],
+      level: 10,
+      currentHp,
+      maxHp: 20,
+      moves: ['tackle'],
+    }),
+    base = gameReducer(initialGameState, { type: 'TOGGLE_CHALLENGE_NUZLOCKE' }),
+    party = [mon('1', 0), mon('2', 10), mon('3', 10)],
+    state = { ...base, party, playerPokemon: { ...party[1] }, activePlayerPokemonIndex: 1 },
+    released = gameReducer(state, { type: 'RELEASE_FAINTED' })
+  assert.equal(released.party.length, 2, 'the fainted Pokemon is removed')
+  assert.ok(!released.party.some((member) => member.id === '1'))
+  assert.equal(released.playerPokemon.id, '2', 'the healthy active Pokemon stays active')
+  assert.equal(released.activePlayerPokemonIndex, 0)
+
+  // The last fighter is spared so a wipe cannot end the run.
+  const lastStand = {
+    ...released,
+    party: [mon('2', 0)],
+    playerPokemon: mon('2', 0),
+    activePlayerPokemonIndex: 0,
+  }
+  assert.equal(gameReducer(lastStand, { type: 'RELEASE_FAINTED' }).party.length, 1)
+
+  // Off by default: nothing is released.
+  const off = {
+    ...initialGameState,
+    party,
+    playerPokemon: { ...party[0] },
+    activePlayerPokemonIndex: 0,
+  }
+  assert.equal(gameReducer(off, { type: 'RELEASE_FAINTED' }).party.length, party.length)
 })

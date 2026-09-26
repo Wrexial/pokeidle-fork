@@ -48,7 +48,7 @@ export function usePokeball(state, action) {
  */
 export function attemptActivityCatch(state, action) {
   const enemy = state.enemyPokemon
-  if (state.phase !== 'battling' || !enemy || state.trainerBattle || state.bossBattle) return state
+  if (state.phase !== 'battling' || !enemy || enemy.noCatch || state.trainerBattle || state.bossBattle) return state
   // Don't let a manual throw resolve an enemy the current turn may have already
   // knocked out (its faint event is still queued). Ending the battle here would
   // let the loop's victory handler catch the same Pokemon a second time.
@@ -117,6 +117,7 @@ export function throwMasterBall(state, action) {
   if (
     state.phase !== 'battling' ||
     !state.enemyPokemon ||
+    state.enemyPokemon.noCatch ||
     state.trainerBattle ||
     state.bossBattle ||
     (state.inventory.masterball ?? 0) <= 0

@@ -581,6 +581,10 @@ export function repairSave(saved) {
     challengeRandomizer: !!saved.challengeRandomizer,
     challengeLevelScale: !!saved.challengeLevelScale,
     challengeNuzlocke: !!saved.challengeNuzlocke,
+    challengeRestrictCatches: !!saved.challengeRestrictCatches,
+    challengeCatchRoutes: Array.isArray(saved.challengeCatchRoutes)
+      ? saved.challengeCatchRoutes.filter((/** @type {any} */ key) => typeof key === 'string')
+      : [],
     challengeMonotype: POKEMON_TYPES.includes(saved.challengeMonotype)
       ? saved.challengeMonotype
       : null,
@@ -716,6 +720,8 @@ export const SAVED_STATE_KEYS = [
   'challengeRandomizer',
   'challengeLevelScale',
   'challengeNuzlocke',
+  'challengeRestrictCatches',
+  'challengeCatchRoutes',
   'challengeMonotype',
   'raidCooldownEnd',
   'raidLegendary',

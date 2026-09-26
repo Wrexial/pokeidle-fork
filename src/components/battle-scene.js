@@ -354,6 +354,7 @@ export function BattleScene() {
             !activeTrainerBattle &&
               state.phase === 'battling' &&
               (state.inventory.masterball ?? 0) > 0 &&
+              !enemyPokemon.noCatch &&
               shouldOfferMasterBall(state, enemyPokemon.speciesKey) &&
               jsxs('button', {
                 className: 'masterball-throw-btn',
@@ -380,6 +381,7 @@ export function BattleScene() {
             !activeTrainerBattle &&
               state.phase === 'battling' &&
               enemyPokemon.fromActivity &&
+              !enemyPokemon.noCatch &&
               jsxs('button', {
                 className: 'activity-catch-btn',
                 onClick: () => dispatch({ type: 'ATTEMPT_CATCH' }),

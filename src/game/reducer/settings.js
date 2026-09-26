@@ -225,6 +225,35 @@ export function toggleChallengeNuzlocke(state, action) {
 }
 
 /**
+ * Handle the `TOGGLE_CHALLENGE_RESTRICT_CATCHES` action.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function toggleChallengeRestrictCatches(state, action) {
+  return {
+    ...state,
+    challengeRestrictCatches: !state.challengeRestrictCatches,
+  }
+}
+
+/**
+ * Handle the `MARK_CATCH_ROUTE` action: remember that a route's first wild
+ * encounter has been used up under the Restrict Catches challenge.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function markCatchRoute(state, action) {
+  const routeKey = action.payload?.routeKey
+  if (!routeKey || (state.challengeCatchRoutes ?? []).includes(routeKey)) return state
+  return {
+    ...state,
+    challengeCatchRoutes: [...(state.challengeCatchRoutes ?? []), routeKey],
+  }
+}
+
+/**
  * Handle the `SET_CHALLENGE_MONOTYPE` action. The payload's `monotype` is a
  * type name, or null/anything unrecognised to turn the challenge off.
  * @param {GameState} state

@@ -3,7 +3,7 @@
 import { tutorMoveCost } from '../../../data/config.js'
 import { pokemonSpecies } from '../../../data/gameData.js'
 import { createPokemon, insertIntoBox, isTutorMove, judgeIVs } from '../../pokemon.js'
-import { formatReward, loadActivePokemonFromParty, prepareNextBattle, releaseReward } from '../../progression.js'
+import { formatReward, loadActivePokemonFromParty, prepareNextBattle, releaseFaintedParty, releaseReward, syncActivePokemonIntoParty } from '../../progression.js'
 import { advanceQuests } from '../../quests.js'
 import { withNotification } from '../../reducer-helpers.js'
 
@@ -310,6 +310,16 @@ export function catchPokemon(state, action) {
           -50
         ),
       }
+}
+
+/**
+ * Handle the `RELEASE_FAINTED` action: Nuzlocke releases a Pokemon as soon as
+ * it faints instead of batching the releases at the end of the battle.
+ * @param {GameState} state
+ * @returns {GameState}
+ */
+export function releaseFainted(state) {
+  return releaseFaintedParty(syncActivePokemonIntoParty(state))
 }
 
 /**

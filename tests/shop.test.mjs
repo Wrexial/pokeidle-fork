@@ -17,7 +17,7 @@ const {
   tokenShopItems,
 } = await import('../src/data/items.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
-const { isActiveEffectItem } = await import('../src/game/progression.js')
+const { getItemSellPrice, isActiveEffectItem } = await import('../src/game/progression.js')
 const { regionMartIds, regionalStockForMart } = await import('../src/game/shop.js')
 
 const allStandardItems = [
@@ -163,4 +163,42 @@ test('BUY_ITEM buys a held battle item into the bag', () => {
     })
   assert.equal(bought.money, 50)
   assert.equal(bought.inventory.leftovers, 1)
+})
+
+test('only valuables can be sold back to a mart', () => {
+  const valuables = Object.values(consumableItems).filter(
+    (item) => item.category === 'valuables'
+  )
+  assert.ok(valuables.length > 0, 'expected some valuables to sell')
+  for (const item of valuables)
+    assert.equal(getItemSellPrice(item.id), item.sellPrice, `${item.id} should be sellable`)
+
+  for (const item of Object.values(consumableItems).filter(
+    (candidate) => candidate.category !== 'valuables'
+  ))
+    assert.equal(getItemSellPrice(item.id), null, `${item.id} should not be sellable`)
+  for (const itemId of Object.keys(heldItems))
+    assert.equal(getItemSellPrice(itemId), null, `${itemId} should not be sellable`)
+
+  const valuable = valuables[0],
+    state = { ...initialGameState, money: 0, inventory: { [valuable.id]: 2, potion: 3 } },
+    soldValuable = gameReducer(state, {
+      type: 'SELL_ITEM',
+      payload: { itemId: valuable.id, quantity: 1 },
+    })
+  assert.equal(soldValuable.money, valuable.sellPrice)
+  assert.equal(soldValuable.inventory[valuable.id], 1)
+  assert.equal(soldValuable.inventory.potion, 3)
+
+  const soldPotion = gameReducer(state, {
+    type: 'SELL_ITEM',
+    payload: { itemId: 'potion', quantity: 1 },
+  })
+  assert.equal(soldPotion, state, 'selling a potion is a no-op')
+
+  const soldHeldItem = gameReducer(state, {
+    type: 'SELL_ITEM',
+    payload: { itemId: 'leftovers', quantity: 1 },
+  })
+  assert.equal(soldHeldItem, state, 'selling a held item is a no-op')
 })

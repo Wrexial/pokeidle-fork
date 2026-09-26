@@ -18,12 +18,15 @@ export function isHeldItem(itemId) {
 }
 
 /**
- * Sell price for an item, or null when it can't be sold.
+ * Sell price for an item, or null when a mart won't buy it. Only the
+ * `valuables` bag category (treasure such as Nuggets and Pearls) can be sold
+ * back; Poke Balls, medicine, candy, evolution items and held items cannot.
  * @param {string} itemId
  * @returns {number | null}
  */
 export function getItemSellPrice(itemId) {
-  return consumableItems[itemId]?.sellPrice ?? heldItems[itemId]?.sellPrice ?? null
+  const item = consumableItems[itemId]
+  return item?.category === 'valuables' ? item.sellPrice ?? null : null
 }
 
 /**

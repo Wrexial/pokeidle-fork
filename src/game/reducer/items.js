@@ -4,7 +4,7 @@ import { encounterData, pokemonSpecies } from '../../data/gameData.js'
 import { activeItems, consumableItems, heldItems, pokeBalls } from '../../data/items.js'
 import { natureName, randomNature } from '../../data/natures.js'
 import { MAX_FRIENDSHIP, calculatePokemonStats, calculateRequiredExperience, gainFriendship, getLevelUpResults } from '../pokemon.js'
-import { isActiveEffectItem } from '../progression.js'
+import { getItemSellPrice, isActiveEffectItem } from '../progression.js'
 
 /**
  * Handle the `BUY_ITEM` action.
@@ -99,10 +99,11 @@ export function buyItem(state, action) {
 export function sellItem(state, action) {
   const { itemId, quantity = 1 } = action.payload,
     item = consumableItems[itemId] ?? heldItems[itemId],
+    sellPrice = getItemSellPrice(itemId),
     owned = state.inventory[itemId] ?? 0
-  if (!item || !item.sellPrice || owned <= 0) return state
+  if (!item || sellPrice == null || owned <= 0) return state
   const sold = Math.min(quantity, owned),
-    earned = item.sellPrice * sold
+    earned = sellPrice * sold
   return {
     ...state,
     money: state.money + earned,

@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 installGameData()
 
-const { calculateDamage, chooseMoveForBattle, resolveBattleTurn } = await import('../src/game/combat.js')
+const { AI_SKILL, calculateDamage, chooseMoveForBattle, resolveBattleTurn } = await import('../src/game/combat.js')
 const { moveData } = await import('../src/data/gameData.js')
 const { genderForPokemon } = await import('../src/game/breeding.js')
 const { describeMove, moveTooltip } = await import('../src/game/move-info.js')
@@ -669,6 +669,35 @@ test('the AI stops setting up once it is boosted', () => {
       chosen = chooseMoveForBattle(attacker, defender)
     assert.equal(chosen.moveId, 'tackle')
   })
+})
+
+test('AI skill tiers change how a battler plays', () => {
+  const attacker = battler({
+      name: 'Foe',
+      moves: ['tackle', 'flamethrower', 'swordsDance'],
+      attack: 80,
+      spAttack: 220,
+      statStages: {},
+    }),
+    defender = battler({ name: 'Player', types: ['Grass'] })
+  // dumb throws out a random attacking move, never the best one
+  withFixedRandom(0, () =>
+    assert.equal(chooseMoveForBattle(attacker, defender, null, AI_SKILL.dumb).moveId, 'tackle')
+  )
+  // with the setup roll missed, smart just attacks with its best move
+  withFixedRandom(0.99, () =>
+    assert.equal(
+      chooseMoveForBattle(attacker, defender, null, AI_SKILL.smart).moveId,
+      'flamethrower'
+    )
+  )
+  // smartest never gambles: it sets up first
+  withFixedRandom(0.99, () =>
+    assert.equal(
+      chooseMoveForBattle(attacker, defender, null, AI_SKILL.smartest).moveId,
+      'swordsDance'
+    )
+  )
 })
 
 test('the AI only avoids a nullified move after it has failed once', () => {

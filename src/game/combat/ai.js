@@ -70,17 +70,30 @@ export function chooseBestMove(moves, attackerLevel, attack, spAttack, attackerT
 }
 
 /**
- * Pick a move for a battler that isn't a wild random picker: heal when low,
- * set up early, otherwise deal the most damage. Powers both the auto-battler
- * and the trainer AI.
+ * AI skill tiers, from weakest to strongest.
+ * - `dumb`: throws out a random damaging move (wild Pokemon, route trainers).
+ * - `smart`: heals when low and otherwise plays loose — a coin flip on setting
+ *   up or landing a status, then the best hit it can find (legendary wilds,
+ *   gym leaders).
+ * - `smartest`: never plays the lottery; always takes the best action the
+ *   heuristic can find (Elite Four, Champion, Battle Tower, the player).
+ */
+export const AI_SKILL = { dumb: 'dumb', smart: 'smart', smartest: 'smartest' }
+
+/**
+ * Pick a move for a battler: heal when low, set up early, otherwise deal the
+ * most damage. Powers both the auto-battler and the trainer AI. A `dumb`
+ * battler just throws out a random attacking move.
  * @param {BattlePokemon} attacker
  * @param {BattlePokemon} defender
  * @param {{ player: any, enemy: any } | null} [hazards]
- * @param {boolean} [deterministic] Drop the random setup/status gates (Battle Tower).
+ * @param {string} [skill] One of {@link AI_SKILL}.
  * @returns {{ moveId: string, move: Move }}
  */
-export function chooseMoveForBattle(attacker, defender, hazards, deterministic = !1) {
-  const usableMoves = attacker.moves.filter((moveId) => moveData[moveId]),
+export function chooseMoveForBattle(attacker, defender, hazards, skill = AI_SKILL.smart) {
+  if (skill === AI_SKILL.dumb) return chooseRandomMove(attacker.moves)
+  const deterministic = skill === AI_SKILL.smartest,
+    usableMoves = attacker.moves.filter((moveId) => moveData[moveId]),
     hpFraction = attacker.maxHp > 0 ? attacker.currentHp / attacker.maxHp : 1,
     healMove = usableMoves.find((moveId) => moveData[moveId].effect?.type === 'heal')
   if (hpFraction < 0.45 && healMove) return { moveId: healMove, move: moveData[healMove] }

@@ -65,6 +65,7 @@ export const CHANGELOG = [
             'A small item badge now marks any Pokemon holding an item in the party and in the Box',
             'A held item can now be taken back from a boxed Pokemon in its stats window \u2014 the Take button only searched the party before',
             'Auto-battling Pokemon now adapt to an ability that cancels an attack: once a move is absorbed or blocked (Water Absorb, Levitate, Flash Fire, Bulletproof, Wonder Guard and the rest) they switch to their next best move instead of repeating it \u2014 they are not told the ability up front, so the first attempt still goes through',
+            'Foes now have AI skill tiers: wild Pokemon and route trainers throw out random attacks, legendary wilds and gym leaders play the full move-picking heuristic, and the Elite Four, Champion, Battle Tower and your own auto-battler always take the best action',
           ],
         },
         {

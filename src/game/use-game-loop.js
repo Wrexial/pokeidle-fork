@@ -13,7 +13,7 @@ import { useGame } from './context.js'
 import { attemptCatch, isCaveLocation, isNightTime, isWaterLocation, selectAutoCatchBall, selectBestBall, shouldAutoCatch } from './catching.js'
 import { abilityOf } from './abilities.js'
 import { companionExpMultiplier } from './companion.js'
-import { applyBattleForm, createBattlePokemon, createVolatileState, resolveBattleTurn, volatileStateFromBattle } from './combat.js'
+import { applyBattleForm, createBattlePokemon, createVolatileState, resolveBattleTurn, volatileStateFromBattle, AI_SKILL } from './combat.js'
 import { isBattleReady } from './pokemon.js'
 import { awardExperience, checkShinyOdds, pokerusExpMultiplier, resolveActiveModifiers, resolvePokemonEncounter, resolveRoamer, shinyOddsForSpecies } from './progression.js'
 
@@ -388,7 +388,27 @@ export function useGameLoop() {
             isTrainerBattle =
               (currentGameState.trainerBattle ??
                 currentGameState.bossBattle) !== null,
-            isTowerBattle = currentGameState.bossBattle?.bossType === 'tower'
+            isTowerBattle = currentGameState.bossBattle?.bossType === 'tower',
+            // AI skill scales with the fight: wilds and route trainers toss out
+            // random moves, legendary wilds and gym leaders play the full
+            // heuristic, and the Elite Four, Champion, Battle Tower and the
+            // player's auto-battler always take the best action.
+            bossType = currentGameState.bossBattle?.bossType,
+            isLegendaryWild =
+              !bossType &&
+              !currentGameState.trainerBattle &&
+              !!pokemonSpecies[currentGameState.enemyPokemon.speciesKey]?.legendary,
+            enemySkill =
+              bossType === 'gym'
+                ? AI_SKILL.smart
+                : bossType
+                  ? AI_SKILL.smartest
+                  : currentGameState.trainerBattle
+                    ? AI_SKILL.dumb
+                    : isLegendaryWild
+                      ? AI_SKILL.smart
+                      : AI_SKILL.dumb,
+            playerSkill = AI_SKILL.smartest
           // Rebuild any mid-battle form before the turn resolves.
           ;(applyBattleForm(playerBattlePokemon), applyBattleForm(enemyBattlePokemon))
           const turnEvents = resolveBattleTurn(
@@ -399,7 +419,9 @@ export function useGameLoop() {
               currentGameState.weather ?? null,
               currentGameState.battleHazards ?? null,
               isTowerBattle,
-              currentGameState.terrain ?? null
+              currentGameState.terrain ?? null,
+              enemySkill,
+              playerSkill
             )
           dispatch({
             type: 'EXECUTE_TURN',

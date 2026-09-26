@@ -4,7 +4,7 @@ import { moveMakesContact } from '../../data/move-effects.js'
 import { moveData, moveLearnsets } from '../../data/gameData.js'
 import { heldItems } from '../../data/items.js'
 import { abilityAbsorbsType, abilityAttackMultiplier, abilityBlocksMove, abilityBlocksNonSuperEffective, abilityChangesMoveType, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityEffectivenessMultiplier, abilityHalvesSuperEffective, abilityHealsFromType, abilityOf, abilityPreventsStatDrop, abilitySurvivesAtFullHp, fieldAuraMultiplier, onHitStatBoost, onHpThresholdBoost, ruinDefenseMultiplier, ruinOffenseMultiplier } from '../abilities.js'
-import { chooseMoveForBattle, chooseRandomMove } from './ai.js'
+import { AI_SKILL, chooseMoveForBattle } from './ai.js'
 import { changeBattleForm } from './setup.js'
 import { calculateDamage, chance, isSelfTargetedMove, normalizeStatKey } from './damage.js'
 import { applyEndOfTurn, reportFieldEffects } from './end-of-turn.js'
@@ -160,9 +160,11 @@ function applyMoveLock(pokemon, moveId) {
  * @param {{ player: any, enemy: any } | null} [hazards]
  * @param {boolean} [deterministic] Battle Tower battles run without RNG.
  * @param {{ type: string, turns: number } | null} [terrain]
+ * @param {string | null} [enemySkill] AI skill for the foe (defaults from `isTrainerBattle`).
+ * @param {string | null} [playerSkill] AI skill for the player's auto-battler.
  * @returns {any[]}
  */
-export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn = !1, weather = null, hazards = null, deterministic = !1, terrain = null) {
+export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn = !1, weather = null, hazards = null, deterministic = !1, terrain = null, enemySkill = null, playerSkill = null) {
   const events = /** @type {any[]} */ ([])
   let activeWeather = weather ?? null,
     activeTerrain = terrain ?? null,
@@ -235,12 +237,17 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
   const playerMustRecharge = player.mustRecharge,
     enemyMustRecharge = enemy.mustRecharge
   ;(playerMustRecharge && (player.mustRecharge = !1), enemyMustRecharge && (enemy.mustRecharge = !1))
+  // Deterministic (Battle Tower) battles always use the top tier so their
+  // move choice matches their no-RNG damage rolls.
+  const enemyAiSkill =
+      enemySkill ?? (deterministic ? AI_SKILL.smartest : isTrainerBattle ? AI_SKILL.smart : AI_SKILL.dumb),
+    playerAiSkill = playerSkill ?? (deterministic ? AI_SKILL.smartest : AI_SKILL.smart)
   let playerMoveId, playerMove
   if (playerMustRecharge) ((playerMoveId = player.moves[0]), (playerMove = moveData[playerMoveId]))
   else if (player.chargingMove) ((playerMoveId = player.chargingMove), (playerMove = moveData[playerMoveId]))
   else if (player.lockedMove) ((playerMoveId = player.lockedMove), (playerMove = moveData[playerMoveId]))
   else {
-    const bestMove = chooseMoveForBattle(player, enemy, activeHazards, deterministic),
+    const bestMove = chooseMoveForBattle(player, enemy, activeHazards, playerAiSkill),
       lockedMove = applyMoveLock(player, bestMove.moveId)
     ;((playerMoveId = resolveCalledMove(lockedMove, enemy, activeTerrain)), (playerMove = moveData[playerMoveId]))
   }
@@ -249,9 +256,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
   else if (enemy.chargingMove) ((enemyMoveId = enemy.chargingMove), (enemyMove = moveData[enemyMoveId]))
   else if (enemy.lockedMove) ((enemyMoveId = enemy.lockedMove), (enemyMove = moveData[enemyMoveId]))
   else {
-    const bestMove = isTrainerBattle
-        ? chooseMoveForBattle(enemy, player, activeHazards, deterministic)
-        : chooseRandomMove(enemy.moves),
+    const bestMove = chooseMoveForBattle(enemy, player, activeHazards, enemyAiSkill),
       lockedMove = applyMoveLock(enemy, bestMove.moveId)
     ;((enemyMoveId = resolveCalledMove(lockedMove, player, activeTerrain)), (enemyMove = moveData[enemyMoveId]))
   }

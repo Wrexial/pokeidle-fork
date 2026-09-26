@@ -372,6 +372,7 @@ export function useGameLoop() {
               slowStartTurns: playerVolatile.slowStartTurns ?? 0,
               hangry: playerVolatile.hangry ?? !1,
               cudChewHeal: playerVolatile.cudChewHeal ?? 0,
+              nullifiedMoves: playerVolatile.nullifiedMoves ?? {},
               ivs: currentGameState.playerPokemon.ivs,
               nature: currentGameState.playerPokemon.nature,
             },

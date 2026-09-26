@@ -64,7 +64,7 @@ export const CHANGELOG = [
             'Wild Pokemon and trainers hold items far less often (8% / 30% down to 5% / 15%) and only from a sensible pool, so a random Pidgey no longer turns up with a Mega Stone or Choice Specs; type boosters match the holder, so a Water type never carries Charcoal',
             'A small item badge now marks any Pokemon holding an item in the party and in the Box',
             'A held item can now be taken back from a boxed Pokemon in its stats window \u2014 the Take button only searched the party before',
-            'Auto-battling Pokemon now check the foe\u2019s ability before committing to a move: they skip attacks the target absorbs or blocks (Water Absorb, Levitate, Flash Fire, Bulletproof, Wonder Guard and the rest) and use their next best move instead of repeating one that cannot land',
+            'Auto-battling Pokemon now adapt to an ability that cancels an attack: once a move is absorbed or blocked (Water Absorb, Levitate, Flash Fire, Bulletproof, Wonder Guard and the rest) they switch to their next best move instead of repeating it \u2014 they are not told the ability up front, so the first attempt still goes through',
           ],
         },
         {

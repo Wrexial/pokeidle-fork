@@ -308,6 +308,11 @@ type VolatileState = {
   hangry?: boolean
   /** Pending Cud Chew heal (the berry eaten last turn). */
   cudChewHeal?: number
+  /**
+   * Moves this battler has used that the foe's ability made do nothing, keyed
+   * by the foe's species. Lets the AI stop picking a dead move after it fails.
+   */
+  nullifiedMoves?: Record<string, string[]>
 }
 
 type GameAction = { type: string; payload?: any; [key: string]: any }

@@ -671,48 +671,52 @@ test('the AI stops setting up once it is boosted', () => {
   })
 })
 
-test('the AI skips damaging moves the target ability would nullify', () => {
+test('the AI only avoids a nullified move after it has failed once', () => {
   withFixedRandom(0.1, () => {
-    const attacker = (moves) =>
-      battler({ name: 'Player', isPlayer: true, moves, attack: 200, spAttack: 200 })
-    assert.equal(
-      chooseMoveForBattle(
-        attacker(['ember', 'waterGun']),
-        battler({ ability: 'flashFire', types: ['Normal'] })
-      ).moveId,
-      'waterGun',
-      'Flash Fire absorbs Ember, so Water Gun is the next best'
-    )
-    assert.equal(
-      chooseMoveForBattle(
-        attacker(['earthquake', 'tackle']),
-        battler({ ability: 'levitate', types: ['Normal'] })
-      ).moveId,
-      'tackle',
-      'Levitate makes the stronger Earthquake a no-op'
-    )
-    assert.equal(
-      chooseMoveForBattle(
-        attacker(['doubleEdge', 'ember']),
-        battler({ ability: 'wonderGuard', types: ['Bug'] })
-      ).moveId,
-      'ember',
-      'Wonder Guard refuses the non-super-effective Double-Edge'
-    )
+    const attacker = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['ember', 'waterGun'],
+        attack: 200,
+        spAttack: 200,
+      }),
+      defender = battler({ ability: 'flashFire', types: ['Normal'] })
+    // It is not told the ability up front, so it still leads with Ember.
+    assert.equal(chooseMoveForBattle(attacker, defender).moveId, 'ember')
+    // Once that failure is on record, Water Gun is the next best.
+    attacker.nullifiedMoves = { [defender.speciesKey]: ['ember'] }
+    assert.equal(chooseMoveForBattle(attacker, defender).moveId, 'waterGun')
   })
 })
 
-test('Mold Breaker still lets the AI punch through a nullifying ability', () => {
+test('a move an ability absorbs is remembered only after it fails', () => {
   withFixedRandom(0.1, () => {
-    const attacker = battler({
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['ember', 'waterGun'],
+        attack: 200,
+        spAttack: 200,
+      }),
+      enemy = battler({ ability: 'flashFire', types: ['Normal'] })
+    assert.equal(player.nullifiedMoves, undefined, 'no memory before the move fails')
+    resolveBattleTurn(player, enemy, false)
+    assert.deepEqual(player.nullifiedMoves?.[enemy.speciesKey], ['ember'])
+  })
+})
+
+test('Mold Breaker means a move is never remembered as nullified', () => {
+  withFixedRandom(0.1, () => {
+    const player = battler({
         name: 'Player',
         isPlayer: true,
         ability: 'moldBreaker',
         moves: ['earthquake', 'tackle'],
         attack: 200,
       }),
-      defender = battler({ ability: 'levitate', types: ['Normal'] })
-    assert.equal(chooseMoveForBattle(attacker, defender).moveId, 'earthquake')
+      enemy = battler({ ability: 'levitate', types: ['Normal'] })
+    resolveBattleTurn(player, enemy, false)
+    assert.equal(player.nullifiedMoves?.[enemy.speciesKey], undefined)
   })
 })
 

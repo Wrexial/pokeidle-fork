@@ -63,6 +63,7 @@ export function updateVolatile(state, action) {
         slowStartTurns: enemyVolatile.slowStartTurns ?? 0,
         hangry: enemyVolatile.hangry ?? !1,
         cudChewHeal: enemyVolatile.cudChewHeal ?? 0,
+        nullifiedMoves: enemyVolatile.nullifiedMoves ?? {},
       }),
     {
       ...state,

@@ -36,6 +36,21 @@ const NATURE_POWER_BY_TERRAIN = {
 /** @type {string[] | null} */
 let metronomePool = null
 
+/**
+ * Remember that a move did nothing to this foe, so the AI stops choosing it
+ * after it has actually failed. The AI is never told the foe's ability, so its
+ * first attempt is always allowed through.
+ * @param {{ attacker?: BattlePokemon, defender?: BattlePokemon, moveId?: string }} attack
+ */
+function rememberNullifiedMove(attack) {
+  const { attacker, defender, moveId } = attack
+  if (!attacker || !defender || !moveId) return
+  const key = defender.speciesKey ?? defender.name,
+    memory = attacker.nullifiedMoves ?? (attacker.nullifiedMoves = {}),
+    moves = memory[key] ?? (memory[key] = [])
+  if (!moves.includes(moveId)) moves.push(moveId)
+}
+
 /** Every move Metronome can call: a real learnset move, not another calling move. */
 function callableMoves() {
   if (metronomePool) return metronomePool
@@ -423,6 +438,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     }
     // Bulletproof / Soundproof / Damp / Overcoat block their move families.
     if (abilityBlocksMove(attack.defender, moveDef, attack.attacker)) {
+      rememberNullifiedMove(attack)
       events.push({
         type: 'miss',
         message: `${attack.defender.name}'s ability blocked the move!`,
@@ -1090,6 +1106,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     }
     // Levitate / type-absorbing abilities negate the move (and usually heal).
     if (abilityAbsorbsType(attack.defender, effectiveMove.type, attack.attacker)) {
+      rememberNullifiedMove(attack)
       if (abilityHealsFromType(attack.defender, effectiveMove.type, attack.attacker)) {
         const healed = Math.min(
             attack.defender.maxHp,
@@ -1322,6 +1339,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     )
       totalDamage = Math.max(1, Math.floor(totalDamage / damageResult.effectiveness))
     if (abilityBlocksNonSuperEffective(attack.defender, damageResult.effectiveness, attack.attacker)) {
+      rememberNullifiedMove(attack)
       events.push({
         type: 'miss',
         message: `${attack.defender.name}'s Wonder Guard blocked the move!`,

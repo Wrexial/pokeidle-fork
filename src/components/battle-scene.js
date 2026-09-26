@@ -3,7 +3,8 @@
 import React from 'react'
 import { createPortal } from 'react-dom'
 import { jsx, jsxs } from 'react/jsx-runtime'
-import { formatMoveAccuracy, moveCategoryIcons } from '../data/moves.js'
+import { formatMoveAccuracy } from '../data/moves.js'
+import { MoveCategoryIcon } from './move-category-icon.js'
 import { moveTooltip } from '../game/move-info.js'
 import { dailyEventByKey } from '../data/daily-events.js'
 import { hasClaimableQuests } from '../game/quests.js'
@@ -543,7 +544,9 @@ export function BattleScene() {
                               children: [
                                 jsx('span', {
                                   className: 'move-category-icon',
-                                  children: moveCategoryIcons[moveDef.category],
+                                  children: jsx(MoveCategoryIcon, {
+                                    category: moveDef.category,
+                                  }),
                                 }),
                                 jsx('span', {
                                   className: 'move-name',

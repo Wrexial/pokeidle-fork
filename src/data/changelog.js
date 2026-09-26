@@ -131,6 +131,7 @@ export const CHANGELOG = [
             'Save slots now say whether each run is Normal or Challenge and list the active rules',
             'Move-learning text is readable again: the tutor cost line in the move manager and its section labels use dark ink on the parchment panel, and the light move types (Electric, Ground, Ice, Steel) show dark text instead of white',
             'The stats-panel HP label now uses dark ink on the parchment background instead of low-contrast gold',
+            'Physical, special and status moves now show clean inline icons in the battle move buttons, the move manager and a Pokemon\u2019s summary, instead of the Unicode glyphs that rendered differently on every device',
             'Party order on phones: the mobile party panel now has up/down buttons on each Pokemon, since touch devices have no drag-and-drop',
             'The Town Map supports two-finger pinch-to-zoom on touch screens and its +/−/fit/centre buttons are touch-sized on phones',
             'Mobile layouts no longer run under the browser\u2019s address bar: the dynamic-viewport height override was declared before the old fallback, so the bottom of the Map and item tabs is reachable again',

@@ -1,12 +1,5 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-/** @type {Record<string, string>} */
-export const moveCategoryIcons = {
-  physical: '✴',
-  special: '◎',
-  status: '☯',
-}
-
 /**
  * Display an accuracy value. The data marks a move that never misses with an
  * accuracy above 100 (101), which the games show as an em dash rather than

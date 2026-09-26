@@ -2,10 +2,11 @@
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
-import { formatMoveAccuracy, moveCategoryIcons } from '../data/moves.js'
+import { formatMoveAccuracy } from '../data/moves.js'
 import { heldItems } from '../data/items.js'
 import { statBarColors } from '../data/ui.js'
 import { natureByKey, natureName } from '../data/natures.js'
+import { MoveCategoryIcon } from './move-category-icon.js'
 
 /** Full stat names for the nature tooltip. @type {Record<string, string>} */
 const NATURE_STAT_NAMES = {
@@ -463,7 +464,9 @@ export function StatsPanel({
                     children: [
                       jsx('span', {
                         className: 'stats-panel-move-icon',
-                        children: moveCategoryIcons[moveDef.category],
+                        children: jsx(MoveCategoryIcon, {
+                          category: moveDef.category,
+                        }),
                       }),
                       jsx('span', {
                         className: 'stats-panel-move-name',

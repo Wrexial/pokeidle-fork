@@ -2,12 +2,13 @@
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
-import { formatMoveAccuracy, moveCategoryIcons } from '../data/moves.js'
+import { formatMoveAccuracy } from '../data/moves.js'
 import { moveData } from '../data/gameData.js'
 import { tutorMoveCost } from '../data/config.js'
 import { useGame } from '../game/context.js'
 import { getFamilyLearnset, getTutorMoves, pokemonDisplayName } from '../game/pokemon.js'
 import { moveTooltip } from '../game/move-info.js'
+import { MoveCategoryIcon } from './move-category-icon.js'
 
 /** @param {{ pokemon: Pokemon, onClose: () => void }} props */
 export function MoveManagerPanel({ pokemon, onClose }) {
@@ -83,7 +84,9 @@ export function MoveManagerPanel({ pokemon, onClose }) {
                     children: [
                       jsx('span', {
                         className: 'move-panel-slot-icon',
-                        children: moveCategoryIcons[moveDef.category],
+                        children: jsx(MoveCategoryIcon, {
+                          category: moveDef.category,
+                        }),
                       }),
                       jsx('span', {
                         className: 'move-panel-slot-name',
@@ -122,7 +125,9 @@ export function MoveManagerPanel({ pokemon, onClose }) {
                 children: [
                   jsx('span', {
                     className: 'move-panel-item-icon',
-                    children: moveCategoryIcons[moveDef.category],
+                    children: jsx(MoveCategoryIcon, {
+                      category: moveDef.category,
+                    }),
                   }),
                   jsx('span', {
                     className: 'move-panel-item-name',

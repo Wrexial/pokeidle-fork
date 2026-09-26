@@ -794,20 +794,19 @@ status), drawn in `battle-scene.js`, `move-manager-panel.js` and `stats-panel.js
 The glyphs render inconsistently across platforms and fonts and read poorly at
 small sizes.
 
-- [ ] Add small category icons (physical/special/status) as image assets, e.g.
-      `public/sprites/moves/` or an inline SVG set, and export a helper that
-      returns the URL (mirroring `getPokemonSpriteUrl`).
-- [ ] Replace every `moveCategoryIcons[...]` call site with the image (an
-      `<img>` or a CSS background on the existing badge element).
-- [ ] Keep `moveCategoryIcons` as a text fallback if the image fails to load.
-- [ ] Check the move list, the battle move buttons and the stats panel at both
-      desktop and mobile sizes.
+**Shipped:** the glyphs are replaced by an inline SVG set in
+`src/components/move-category-icon.js` (`MoveCategoryIcon`), used by the battle
+move buttons, the move manager and the stats panel. `moveCategoryIcons` was
+removed from `src/data/moves.js`.
+
+- [x] Add small category icons (physical/special/status), as an inline SVG set.
+- [x] Replace every `moveCategoryIcons[...]` call site with the icon.
+- [x] Check the move list, the battle move buttons and the stats panel.
 
 Likely touch points: `src/data/moves.js`, `src/components/battle-scene.js`,
-`move-manager-panel.js`, `stats-panel.js`, and a new asset directory under
-`public/sprites/`.
+`move-manager-panel.js`, `stats-panel.js`, and `move-category-icon.js`.
 
-Effort: **small** (three assets plus call-site swaps), once the art exists.
+Effort: **small**.
 
 ## 46. Mobile UX fixes
 

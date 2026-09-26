@@ -93,6 +93,99 @@ img {
     margin: 8px 0 4px
 }
 
+.starter-mode-summary {
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--gold);
+    text-align: center;
+    margin: -8px 0 0
+}
+
+.starter-mode-change {
+    font-size: 8px;
+    padding: 0;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    text-decoration: underline dotted;
+    text-underline-offset: 3px;
+    cursor: pointer;
+    margin-top: -16px
+}
+
+.starter-mode-change:hover {
+    color: var(--gold)
+}
+
+.mode-choice {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
+    max-width: 520px
+}
+
+.mode-btn {
+    flex: 1 1 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 20px 16px;
+    text-align: center;
+    background: linear-gradient(#3a2818,#2a1e10);
+    color: var(--parchment);
+    border: 3px solid var(--wood-dark);
+    box-shadow: 2px 2px #0006,inset 2px 2px #ffffff14;
+    cursor: pointer
+}
+
+.mode-btn:hover {
+    border-color: var(--gold);
+    filter: brightness(1.08)
+}
+
+.mode-btn.challenge {
+    border-color: var(--gold-dark)
+}
+
+.mode-btn-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold-bright)
+}
+
+.mode-btn-hint {
+    font-size: 8px;
+    line-height: 1.5;
+    color: var(--text-muted)
+}
+
+.mode-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 8px
+}
+
+.challenge-rules {
+    width: 100%;
+    max-width: 360px;
+    box-sizing: border-box
+}
+
+.choose-btn.secondary {
+    background: #685040;
+    color: var(--parchment);
+    border-color: #483828
+}
+
+.choose-btn.secondary:hover {
+    background: #786050
+}
+
 .starter-region-tabs {
     justify-content: center;
     flex-wrap: wrap;

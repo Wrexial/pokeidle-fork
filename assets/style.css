@@ -11338,34 +11338,64 @@ img {
 }
 
 .match3-grid {
-    display: grid;
-    gap: 3px;
+    position: relative;
     width: 100%;
-    max-width: 360px
+    max-width: 360px;
+    aspect-ratio: 1;
+    margin: 0 auto;
+    overflow: hidden
 }
 
 .match3-tile {
-    aspect-ratio: 1;
-    border: 1px solid #00000055;
-    border-radius: 4px;
-    box-shadow: inset 0 -3px 0 #00000033;
-    cursor: pointer
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    width: calc(100% / var(--cols));
+    height: calc(100% / var(--cols));
+    padding: 2px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transform: translate(calc(var(--col) * 100%), calc(var(--row) * 100%));
+    transition: transform .18s ease
 }
 
-.match3-tile:hover:not(:disabled) {
+.match3-tile:hover:not(:disabled) .match3-tile-inner {
     filter: brightness(1.12)
 }
 
-.match3-tile.selected {
-    box-shadow: 0 0 0 3px var(--gold), inset 0 -3px 0 #00000033
+.match3-tile.selected .match3-tile-inner {
+    box-shadow: 0 0 0 3px var(--gold), inset 0 -3px 0 #00000033;
+    animation: match3Select .7s ease-in-out infinite
 }
 
-.match3-fire { background: #f08030 }
-.match3-water { background: #6890f0 }
-.match3-grass { background: #78c850 }
-.match3-electric { background: #f8d030 }
-.match3-psychic { background: #f85888 }
-.match3-normal { background: #a8a878 }
+.match3-tile-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #00000055;
+    border-radius: 4px;
+    box-shadow: inset 0 -3px 0 #00000033;
+    overflow: hidden
+}
+
+.match3-tile-inner img {
+    width: 88%;
+    height: 88%;
+    object-fit: contain;
+    image-rendering: pixelated;
+    pointer-events: none
+}
+
+.match3-fire .match3-tile-inner { background: #f08030 }
+.match3-water .match3-tile-inner { background: #6890f0 }
+.match3-grass .match3-tile-inner { background: #78c850 }
+.match3-electric .match3-tile-inner { background: #f8d030 }
+.match3-psychic .match3-tile-inner { background: #f85888 }
+.match3-normal .match3-tile-inner { background: #a8a878 }
 
 .memory-scene {
     background-image: url(/backgrounds/beach.png)
@@ -12243,10 +12273,15 @@ img {
 @keyframes pokestarScorePop { from { transform: scale(.6); opacity: 0 } to { transform: scale(1); opacity: 1 } }
 
 /* Puzzle League */
-.match3-tile { transition: transform .12s ease }
-.match3-tile:active:not(:disabled) { transform: scale(.92) }
-.match3-tile.selected { animation: match3Select .7s ease-in-out infinite }
+.match3-tile:active:not(:disabled) .match3-tile-inner { transform: scale(.92) }
+.match3-tile.new { animation: match3Drop .32s cubic-bezier(.3,1.35,.6,1) both }
+.match3-tile.clearing .match3-tile-inner { animation: match3Clear .2s ease-in forwards }
+@keyframes match3Drop {
+  from { transform: translate(calc(var(--col) * 100%), calc((var(--row) - 3) * 100%)) }
+  to { transform: translate(calc(var(--col) * 100%), calc(var(--row) * 100%)) }
+}
 @keyframes match3Select { 0%,100% { transform: scale(1) } 50% { transform: scale(1.08) } }
+@keyframes match3Clear { to { transform: scale(.15); opacity: 0 } }
 
 /* Pokemon Memory */
 .memory-card.up { animation: memoryFlip .34s ease both }

@@ -39,6 +39,7 @@ export const CHANGELOG = [
             'The Safari Zone\u2019s RUN button now darts straight back into the grass for the next Pokemon instead of stopping on a result screen',
             'The Safari Zone\u2019s area picker now has a LEAVE option, so a run can end without spending the rest of the Safari Balls',
             'Minigames now react with sound: a soft tick for a tap, slide or rotation, a positive chime for a match, correct answer, good note or clean cast, a bigger fanfare for a perfect, combo or solved result, and a buzz for a miss or wrong answer (with the Sound Effects setting on)',
+            'Puzzle League tiles are now Pokemon faces (Fire is Charmander, Water is Squirtle and so on) and the board animates: swapped tiles slide past each other, cleared tiles pop and then replacements drop in from above',
           ],
         },
         {

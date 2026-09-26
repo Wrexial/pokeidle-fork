@@ -18,6 +18,19 @@ export const MATCH3_MATCH_POINTS = 10
 export const MATCH3_TYPES = ['Fire', 'Water', 'Grass', 'Electric', 'Psychic', 'Normal']
 
 /**
+ * A representative Pokemon face for each tile type, drawn as its static sprite.
+ * @type {Record<string, string>}
+ */
+export const MATCH3_SPECIES = {
+  Fire: 'charmander',
+  Water: 'squirtle',
+  Grass: 'bulbasaur',
+  Electric: 'pikachu',
+  Psychic: 'mew',
+  Normal: 'eevee',
+}
+
+/**
  * A random tile type, optionally avoiding some (used to seed without matches).
  * @param {string[]} [types]
  * @param {string[]} [avoid]
@@ -84,23 +97,28 @@ export function findMatches(board, size = MATCH3_SIZE) {
 }
 
 /**
- * Clear every match, drop the tiles and refill from the top, repeating while
- * new matches form. Returns the settled board, score and cascade count.
+ * Resolve a board step by step: each cascade clears its matches, drops the
+ * survivors and refills the top. One frame per cascade, each carrying the
+ * board after gravity/refill and the indices it cleared (so a scene can
+ * animate the fall and the new tiles).
  * @param {(string | null)[]} board
- * @param {number} [size]
- * @param {string[]} [types]
- * @returns {{ board: string[], score: number, cascade: number }}
+ * @param {number} size
+ * @param {string[]} types
+ * @returns {{ frames: { board: string[], cleared: number[], cascade: number, score: number }[], score: number, cascade: number }}
  */
-export function resolveMatch3(board, size = MATCH3_SIZE, types = MATCH3_TYPES) {
+function resolveMatch3Steps(board, size, types) {
   const current = [...board]
+  /** @type {{ board: string[], cleared: number[], cascade: number, score: number }[]} */
+  const frames = []
   let score = 0,
     cascade = 0
   for (;;) {
     const matched = findMatches(current, size)
     if (matched.size === 0) break
     cascade++
-    score += matched.size * MATCH3_MATCH_POINTS * cascade
-    for (const index of matched) current[index] = null
+    const cleared = [...matched]
+    score += cleared.length * MATCH3_MATCH_POINTS * cascade
+    for (const index of cleared) current[index] = null
     for (let col = 0; col < size; col++) {
       const column = []
       for (let row = size - 1; row >= 0; row--) {
@@ -111,8 +129,26 @@ export function resolveMatch3(board, size = MATCH3_SIZE, types = MATCH3_TYPES) {
         current[row * size + col] =
           depth < column.length ? column[depth] : randomMatch3Type(types)
     }
+    frames.push({ board: /** @type {string[]} */ ([...current]), cleared, cascade, score })
   }
-  return { board: /** @type {string[]} */ (current), score, cascade }
+  return { frames, score, cascade }
+}
+
+/**
+ * Clear every match, drop the tiles and refill from the top, repeating while
+ * new matches form. Returns the settled board, score and cascade count.
+ * @param {(string | null)[]} board
+ * @param {number} [size]
+ * @param {string[]} [types]
+ * @returns {{ board: string[], score: number, cascade: number }}
+ */
+export function resolveMatch3(board, size = MATCH3_SIZE, types = MATCH3_TYPES) {
+  const { frames, score, cascade } = resolveMatch3Steps(board, size, types)
+  return {
+    board: frames.length ? frames[frames.length - 1].board : /** @type {string[]} */ ([...board]),
+    score,
+    cascade,
+  }
 }
 
 /**
@@ -132,6 +168,31 @@ export function tryMatch3Swap(board, a, b, size = MATCH3_SIZE, types = MATCH3_TY
     return { valid: false, board: /** @type {string[]} */ (board), score: 0, cascade: 0 }
   const resolved = resolveMatch3(swapped, size, types)
   return { valid: true, ...resolved }
+}
+
+/**
+ * Like `tryMatch3Swap`, but returns each cascade as a frame so a scene can
+ * animate the swap, the clearing, the fall and the new tiles.
+ * @param {(string | null)[]} board
+ * @param {number} a
+ * @param {number} b
+ * @param {number} [size]
+ * @param {string[]} [types]
+ * @returns {{ valid: boolean, frames: { board: string[], cleared: number[], cascade: number, score: number }[], board: string[], score: number, cascade: number }}
+ */
+export function match3SwapFrames(board, a, b, size = MATCH3_SIZE, types = MATCH3_TYPES) {
+  const swapped = [...board]
+  ;[swapped[a], swapped[b]] = [swapped[b], swapped[a]]
+  if (findMatches(swapped, size).size === 0)
+    return {
+      valid: false,
+      frames: [],
+      board: /** @type {string[]} */ (board),
+      score: 0,
+      cascade: 0,
+    }
+  const { frames, score, cascade } = resolveMatch3Steps(swapped, size, types)
+  return { valid: true, frames, board: frames[frames.length - 1].board, score, cascade }
 }
 
 /**

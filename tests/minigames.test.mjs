@@ -8,6 +8,7 @@ const gameData = installGameData()
 const { BATTLE_ROYAL_COST, BATTLE_ROYAL_POOL, BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL, BUG_CONTEST_RUSTLES, CONTEST_COST, CONTEST_THEMES, DYNAMAX_ADVENTURES_COST, DYNAMAX_STAGES, MINIGAME_LOCATIONS, MINIGAME_INFO, MINIGAME_AREAS, MINIGAME_REGIONS, MINIGAME_START_ACTION, minigameForLocation, minigamesInRegion, minigameNameForLocation, MINING_COST, POKEATHLON_COST, POKEATHLON_SPRINT_MS, POKE_RADAR_CHAIN_STEP, POKE_RADAR_COST, POKE_RADAR_SIZE, SLOT_JACKPOT, SLOT_PAYLINES, SLOT_REELS, SLOT_ROWS, SLOT_SPIN_COST, SLOT_SYMBOLS, VOLTORB_FLIP_COST, VOLTORB_MAX_LEVEL, VOLTORB_SIZE, AUCTION_LOTS, accuracyScore, auctionAppraisal, battleRoyalOpponent, battleRoyalPrize, boardCleared, boardExploded, boardHints, bugCatchChance, bugContestPrize, bugFleeChance, bugStays, buildContestResults, canAuctionBid, contestAppeal, contestPlacement, contestPlayerRank, contestPrize, contestRank, contestScore, contestTheme, createAuction, createOpponent, createVoltorbBoard, dynamaxBoss, dynamaxPaths, dynamaxPrize, flipVoltorbCell, healSquad, moveBaseAppeal, pickRadarTarget, placeAuctionBid, pokeathlonPrize, pokeRadarPrize, radarChainPoints, radarSequence, rewardItemName, rollContestBug, rollContestBugs, rollContestRivalRound, rollContestTheme, rollMiningReward, simulateBattle, spinSlots, sprintScore, throwNetBall, toBattlePokemon, toggleVoltorbMark, voltorbBoardCoins, voltorbCountForLevel, voltorbFlipPrize, LIGHTS_OUT_COST, LIGHTS_OUT_SCRAMBLE, LIGHTS_OUT_SIZE, CURRY_COST, CURRY_FLAVORS, CURRY_INGREDIENTS, CURRY_ZONE, POKESTAR_COST, POKESTAR_SHOT_COUNT, createLightsOut, toggleLights, lightsSolved, lightsOutPrize, rollCurryRequest, curryScore, curryPrize, pickPokestarShots, pokestarPrize, MATCH3_COST, MATCH3_MOVES, MATCH3_SIZE, MEMORY_COST, MEMORY_PAIRS, WHACK_COST, createMatch3Board, findMatches, tryMatch3Swap, resolveMatch3, match3Prize, createMemoryDeck, memoryPrize, rollWhackTarget, whackPrize, MUSICAL_COST, MUSICAL_NOTES, MUSICAL_MAX_SCORE, generateMusicalPattern, judgeMusicalHit, musicalPrize, musicalTotalMs, PICNIC_COST, PICNIC_PICKS, PICNIC_INGREDIENTS, PICNIC_SHINY_MULTIPLIER, ingredientById, sandwichTypes, rollSandwichType, picnicDropScore, picnicSpeciesPool, rollPicnicEncounter, POKEBALL_FACTORY_COST, FACTORY_SIZE, connectionsFor, createFactoryPuzzle, rotateFactoryTile, factoryPowered, factorySolved, factoryPrize, FACTORY_BALL_POOL, rollFactoryBalls, SLIDING_COST, SLIDING_SIZE, solvedSlidingBoard, canSlide, slideTile, isSlidingSolved, createSlidingPuzzle, slidingTileForDirection, slidingPrize, ICE_SLIDE_COST, ICE_SLIDE_ROOMS, ICE_SLIDE_TOTAL_PAR, iceSlidePosition, iceSlideSolved, iceSlidePrize } = await import(
   '../src/game/minigames.js'
 )
+const { match3SwapFrames, MATCH3_SPECIES, MATCH3_TYPES } = await import('../src/game/minigames.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 const { consumableItems, evolutionItems, heldItems } = await import('../src/data/items.js')
 const { createPokemon } = await import('../src/game/pokemon.js')
@@ -786,6 +787,43 @@ test('a swap only counts when it makes a match', () => {
   assert.ok(valid.score > 0)
   assert.equal(findMatches(valid.board, 3).size, 0, 'the board settles with no matches left')
   assert.ok(match3Prize(1600).money > match3Prize(100).money)
+})
+
+test('match-3 swap frames settle to the same board as a plain swap', () => {
+  const board = ['A', 'B', 'A', 'B', 'A', 'C', 'D', 'E', 'C'],
+    originalRandom = Math.random
+  // Both resolvers refill randomly, so pin the RNG (a seeded LCG, not a
+  // constant, which could cascade forever) to compare their output.
+  let seed = 1
+  Math.random = () => {
+    seed = (seed * 1664525 + 1013904223) % 4294967296
+    return seed / 4294967296
+  }
+  try {
+    const animated = match3SwapFrames(board, 1, 4, 3)
+    seed = 1
+    const plain = tryMatch3Swap(board, 1, 4, 3)
+    assert.equal(animated.valid, true)
+    assert.ok(animated.frames.length >= 1, 'at least one cascade frame')
+    assert.equal(animated.cascade, animated.frames.length)
+    assert.equal(animated.score, plain.score)
+    assert.deepEqual(animated.board, plain.board)
+    assert.deepEqual(animated.frames[animated.frames.length - 1].board, plain.board)
+    assert.equal(findMatches(animated.board, 3).size, 0)
+  } finally {
+    Math.random = originalRandom
+  }
+
+  const rejected = match3SwapFrames(board, 0, 1, 3)
+  assert.equal(rejected.valid, false)
+  assert.deepEqual(rejected.frames, [])
+})
+
+test('every match-3 tile type has a themed Pokemon face', () => {
+  for (const type of MATCH3_TYPES) {
+    assert.ok(MATCH3_SPECIES[type], `${type} needs a Pokemon face`)
+    assert.ok(gameData.pokemonSpecies[MATCH3_SPECIES[type]], `${MATCH3_SPECIES[type]} exists`)
+  }
 })
 
 test('START_PUZZLE_LEAGUE charges entry and END_MINIGAME returns to idle', () => {

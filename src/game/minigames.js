@@ -15,7 +15,7 @@ export { POKE_RADAR_COST, POKE_RADAR_SIZE, POKE_RADAR_START_LENGTH, POKE_RADAR_C
 export { LIGHTS_OUT_COST, LIGHTS_OUT_SIZE, LIGHTS_OUT_SCRAMBLE, toggleLights, createLightsOut, lightsSolved, lightsOutPrize } from './minigames/lights-out.js'
 export { CURRY_COST, CURRY_COOK_MS, CURRY_ZONE, CURRY_FLAVORS, CURRY_INGREDIENTS, rollCurryRequest, curryScore, curryPrize } from './minigames/curry.js'
 export { POKESTAR_COST, POKESTAR_SHOT_COUNT, POKESTAR_TAKE_MAX, POKESTAR_SHOTS, pickPokestarShots, pokestarPrize } from './minigames/pokestar.js'
-export { MATCH3_COST, MATCH3_SIZE, MATCH3_MOVES, MATCH3_MATCH_POINTS, MATCH3_TYPES, randomMatch3Type, createMatch3Board, findMatches, resolveMatch3, tryMatch3Swap, match3Prize } from './minigames/match3.js'
+export { MATCH3_COST, MATCH3_SIZE, MATCH3_MOVES, MATCH3_MATCH_POINTS, MATCH3_TYPES, MATCH3_SPECIES, randomMatch3Type, createMatch3Board, findMatches, resolveMatch3, tryMatch3Swap, match3SwapFrames, match3Prize } from './minigames/match3.js'
 export { MEMORY_COST, MEMORY_PAIRS, MEMORY_POOL, createMemoryDeck, memoryPrize } from './minigames/memory.js'
 export { WHACK_COST, WHACK_DURATION_MS, WHACK_CELLS, WHACK_POP_MS, WHACK_TARGETS, rollWhackTarget, whackPrize } from './minigames/whack.js'
 export { MUSICAL_COST, MUSICAL_LANES, MUSICAL_ARROWS, MUSICAL_NOTES, MUSICAL_BEAT_MS, MUSICAL_LEAD_MS, MUSICAL_VIEW_MS, MUSICAL_PERFECT_MS, MUSICAL_GOOD_MS, MUSICAL_OK_MS, MUSICAL_MAX_SCORE, generateMusicalPattern, musicalTotalMs, judgeMusicalHit, musicalPrize } from './minigames/musical.js'

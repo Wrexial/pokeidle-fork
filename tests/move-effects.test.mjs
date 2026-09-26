@@ -671,6 +671,51 @@ test('the AI stops setting up once it is boosted', () => {
   })
 })
 
+test('the AI skips damaging moves the target ability would nullify', () => {
+  withFixedRandom(0.1, () => {
+    const attacker = (moves) =>
+      battler({ name: 'Player', isPlayer: true, moves, attack: 200, spAttack: 200 })
+    assert.equal(
+      chooseMoveForBattle(
+        attacker(['ember', 'waterGun']),
+        battler({ ability: 'flashFire', types: ['Normal'] })
+      ).moveId,
+      'waterGun',
+      'Flash Fire absorbs Ember, so Water Gun is the next best'
+    )
+    assert.equal(
+      chooseMoveForBattle(
+        attacker(['earthquake', 'tackle']),
+        battler({ ability: 'levitate', types: ['Normal'] })
+      ).moveId,
+      'tackle',
+      'Levitate makes the stronger Earthquake a no-op'
+    )
+    assert.equal(
+      chooseMoveForBattle(
+        attacker(['doubleEdge', 'ember']),
+        battler({ ability: 'wonderGuard', types: ['Bug'] })
+      ).moveId,
+      'ember',
+      'Wonder Guard refuses the non-super-effective Double-Edge'
+    )
+  })
+})
+
+test('Mold Breaker still lets the AI punch through a nullifying ability', () => {
+  withFixedRandom(0.1, () => {
+    const attacker = battler({
+        name: 'Player',
+        isPlayer: true,
+        ability: 'moldBreaker',
+        moves: ['earthquake', 'tackle'],
+        attack: 200,
+      }),
+      defender = battler({ ability: 'levitate', types: ['Normal'] })
+    assert.equal(chooseMoveForBattle(attacker, defender).moveId, 'earthquake')
+  })
+})
+
 test('Aurora Veil raises both screens', () => {
   withFixedRandom(0.5, () => {
     const player = battler({

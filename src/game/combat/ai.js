@@ -1,8 +1,30 @@
 // Move-choice AI: pick the best damaging/setup/status move. Split from game/combat.js.
 
 import { moveData } from '../../data/gameData.js'
-import { estimateMoveDamage, normalizeStatKey } from './damage.js'
+import { abilityAbsorbsType, abilityBlocksMove, abilityBlocksNonSuperEffective, abilityPreventsStatus } from '../abilities.js'
+import { estimateMoveDamage, getTypeMultiplier, normalizeStatKey } from './damage.js'
 import { STATUS_IMMUNE_TYPES } from './status.js'
+
+/**
+ * Whether the target's ability makes a damaging move do nothing: it absorbs
+ * the type, blocks the move, or (Wonder Guard) refuses a non-super-effective
+ * hit. An attacker with Mold Breaker / Teravolt / Turboblaze bypasses these,
+ * which the helpers already account for.
+ * @param {BattlePokemon} attacker
+ * @param {BattlePokemon} defender
+ * @param {Move} moveDef
+ * @returns {boolean}
+ */
+function moveNullifiedByAbility(attacker, defender, moveDef) {
+  if (!attacker || !defender || !moveDef || moveDef.power <= 0) return false
+  if (abilityAbsorbsType(defender, moveDef.type, attacker)) return true
+  if (abilityBlocksMove(defender, moveDef, attacker)) return true
+  return abilityBlocksNonSuperEffective(
+    defender,
+    getTypeMultiplier(moveDef.type, defender.types),
+    attacker
+  )
+}
 
 /**
  * @param {string[]} moves
@@ -110,13 +132,23 @@ export function chooseMoveForBattle(attacker, defender, hazards, deterministic =
       if (effect?.type !== 'status' || effect.status === 'flinching') return false
       return (
         !defender.status &&
+        !moveNullifiedByAbility(attacker, defender, moveData[moveId]) &&
+        !abilityPreventsStatus(defender, effect.status) &&
         !(STATUS_IMMUNE_TYPES[effect.status] ?? []).some((type) => defender.types.includes(type))
       )
     })
     if (statusMove) return { moveId: statusMove, move: moveData[statusMove] }
   }
+  // A target's ability can nullify a damaging move outright. When the AI has
+  // anything else to use, drop the dead moves so it picks the next best one
+  // instead of repeating an attack that cannot land.
+  const counterableMoves = usableMoves.filter(
+      (moveId) =>
+        moveData[moveId].power > 0 && !moveNullifiedByAbility(attacker, defender, moveData[moveId])
+    ),
+    attackingMoves = counterableMoves.length > 0 ? counterableMoves : usableMoves
   return chooseBestMove(
-    attacker.moves,
+    attackingMoves,
     attacker.level,
     attacker.attack,
     attacker.spAttack,

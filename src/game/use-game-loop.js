@@ -546,46 +546,80 @@ export function useGameLoop() {
             (effect) => effect.type === 'expShare'
           )
           if (currentGameState.playerPokemon.currentHp <= 0) {
+            // A double knockout (Explosion, recoil or residual felled the user
+            // after the foe): the encounter is already won, so release the
+            // fainted Pokemon under Nuzlocke and award its EXP once, then move
+            // on. Sending a replacement out here would run the victory handler
+            // again against the fainted foe and pay the EXP twice.
             const switchIndex = currentGameState.party.findIndex(
-              (member, index) =>
-                index !== currentGameState.activePlayerPokemonIndex &&
-                isBattleReady(member)
-            )
-            // A fainted Pokemon that can be replaced is released right away
-            // under Nuzlocke; the last one is spared by the heal path.
-            if (switchIndex !== -1) {
-              dispatch({
-                type: 'SWITCH_PLAYER_POKEMON',
-                payload: {
-                  newPokemonIndex: switchIndex,
-                },
-              })
-              dispatch({
-                type: 'RELEASE_FAINTED',
-              })
-            } else if (
-              currentGameState.challengeNuzlocke &&
-              !currentGameState.party.some((member) => isBattleReady(member))
-            ) {
-              dispatch({ type: 'NUZLOCKE_GAME_OVER' })
-            } else {
-              dispatch({
-                type: 'START_HEALING',
-              })
-            }
+                (member, index) =>
+                  index !== currentGameState.activePlayerPokemonIndex &&
+                  isBattleReady(member)
+              ),
+              hasSurvivor = currentGameState.party.some((member) => isBattleReady(member)),
+              trainerBattle = currentGameState.bossBattle ?? currentGameState.trainerBattle
+            dispatch({ type: 'RELEASE_FAINTED' })
             awardExperience(
               dispatch,
               currentGameState.playerPokemon,
               currentGameState.enemyPokemon,
-              (currentGameState.bossBattle ?? currentGameState.trainerBattle)
-                ? 1.5
-                : 1,
+              trainerBattle ? 1.5 : 1,
               hasExpShare,
               currentGameState.party,
               currentGameState.activePlayerPokemonIndex,
               expBonus,
               currentGameState.battleParticipants
             )
+            if (trainerBattle) {
+              const nextIndex = trainerBattle.currentTrainerPokemonIndex + 1,
+                trainerHasNext = nextIndex < trainerBattle.trainerTeam.length
+              if (switchIndex === -1 && trainerHasNext) {
+                // No Pokemon left to carry on the fight.
+                if (currentGameState.challengeNuzlocke)
+                  dispatch({ type: 'NUZLOCKE_GAME_OVER' })
+                else dispatch({ type: 'START_HEALING' })
+              } else {
+                if (switchIndex !== -1)
+                  dispatch({
+                    type: 'SWITCH_PLAYER_POKEMON',
+                    payload: {
+                      newPokemonIndex: switchIndex,
+                    },
+                  })
+                if (trainerHasNext)
+                  dispatch({
+                    type: 'TRAINER_SEND_NEXT_POKEMON',
+                    payload: {
+                      newPokemonIndex: nextIndex,
+                    },
+                  })
+                else {
+                  const maxLevel = Math.max(
+                      ...trainerBattle.trainerTeam.map((member) => member.level)
+                    ),
+                    payout = trainerClassPayouts[trainerBattle.trainerClass] * maxLevel * dailyPrizeBonus
+                  currentGameState.bossBattle
+                    ? dispatch({
+                        type: 'BOSS_BATTLE_END',
+                        payload: {
+                          won: !0,
+                          moneyDelta: payout,
+                        },
+                      })
+                    : dispatch({
+                        type: 'TRAINER_BATTLE_END',
+                        payload: {
+                          won: !0,
+                          moneyDelta: payout,
+                        },
+                      })
+                }
+              }
+            } else if (!hasSurvivor) {
+              if (currentGameState.challengeNuzlocke)
+                dispatch({ type: 'NUZLOCKE_GAME_OVER' })
+              else dispatch({ type: 'START_HEALING' })
+            } else dispatch({ type: 'PHASE_IDLE' })
             return
           }
           const trainerBattle =

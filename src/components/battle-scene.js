@@ -19,7 +19,7 @@ import { completedGenerations, mapData, moveData, speciesKeysByGeneration } from
 import { megaEvolveReady } from '../data/mega-evolution.js'
 import { useGame } from '../game/context.js'
 import { shinyOddsForCompletedGenerations } from '../game/progression.js'
-import { getBossTrainerSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, getTrainerSpriteUrl } from '../game/pokemon.js'
+import { getBossTrainerSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, getTrainerSpriteUrl, isBattleReady } from '../game/pokemon.js'
 import { EnemyInfoBox } from './enemy-info-box.js'
 import { PlayerInfoBox } from './player-info-box.js'
 import { SettingsModal } from './settings-modal.js'
@@ -168,7 +168,14 @@ export function BattleScene() {
       state.pendingEvents.length === 0 &&
       !state.pendingPlayerMove &&
       !state.playerTurnSpent &&
-      !forcedAction
+      !forcedAction,
+    // A fainted active Pokemon in manual mode waits for the player to pick who
+    // comes out next (the loop stops there until they do).
+    faintReplacement =
+      manualMode &&
+      state.phase === 'defeat' &&
+      state.party.some((member) => isBattleReady(member)),
+    switchPickerOpen = showSwitch || faintReplacement
   return jsxs('div', {
     className: 'battle-scene',
     children: [
@@ -674,11 +681,13 @@ export function BattleScene() {
           }),
           document.body
         ),
-      showSwitch &&
+      switchPickerOpen &&
         createPortal(
           jsx('div', {
             className: 'battle-info-overlay',
-            onClick: () => setShowSwitch(!1),
+            onClick: () => {
+              if (!faintReplacement) setShowSwitch(!1)
+            },
             children: jsxs('div', {
               className: 'battle-info-modal switch-modal',
               onClick: /** @param {React.MouseEvent} event */ (event) => event.stopPropagation(),
@@ -688,20 +697,22 @@ export function BattleScene() {
                   children: [
                     jsx('span', {
                       className: 'battle-info-title',
-                      children: 'Switch Pokemon',
+                      children: faintReplacement ? 'Choose Your Next Pokemon' : 'Switch Pokemon',
                     }),
-                    jsx('button', {
-                      className: 'battle-info-close',
-                      onClick: () => setShowSwitch(!1),
-                      children: 'X',
-                    }),
+                    faintReplacement
+                      ? null
+                      : jsx('button', {
+                          className: 'battle-info-close',
+                          onClick: () => setShowSwitch(!1),
+                          children: 'X',
+                        }),
                   ],
                 }),
                 jsxs('div', {
                   className: 'switch-list',
                   children: state.party.map((member, index) => {
                     const spriteSpecies = battleSpecies(member.speciesKey),
-                      disabled = index === state.activePlayerPokemonIndex || member.currentHp <= 0
+                      disabled = index === state.activePlayerPokemonIndex || !isBattleReady(member)
                     return jsxs(
                       'button',
                       {
@@ -711,8 +722,9 @@ export function BattleScene() {
                           setShowSwitch(!1)
                           dispatch({
                             type: 'SWITCH_PLAYER_POKEMON',
-                            payload: { newPokemonIndex: index, costsTurn: true },
+                            payload: { newPokemonIndex: index, costsTurn: !faintReplacement },
                           })
+                          if (faintReplacement) dispatch({ type: 'RELEASE_FAINTED' })
                         },
                         children: [
                           jsx('img', {

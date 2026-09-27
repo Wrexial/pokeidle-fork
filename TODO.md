@@ -53,9 +53,9 @@ renumbered, so the gaps below are items that shipped.
 13. **#28 More region areas (caves, POIs, DLC land)** — L · ★★★★½ — real
     content; data-heavy. Pairs with #35/#36/#39.
 14. ~~**#4 In-battle Mega evolution**~~ — **shipped (0.19.0).**
-15. **#42 Manual battle mode** — **(done 0.21.0: an AUTO/MANUAL toggle,
-    hand-picked moves and a mid-battle switch picker; only a faint-replacement
-    picker remains.)**
+15. ~~**#42 Manual battle mode**~~ — **shipped (0.21.0: AUTO/MANUAL toggle,
+    hand-picked moves, a mid-battle switch picker and a faint-replacement
+    prompt).**
 16. **#44 Set / Switch toggle** — S · ★★★ — choose whether a faint asks for a
     replacement or keeps the next party member in automatically.
 17. **#45 Move-category icons** — S · ★★ — replace the ✴/◎/☯ glyphs with
@@ -740,8 +740,6 @@ forgotten fight can't stall the game.
 
 Still open:
 
-- [ ] A faint-replacement picker (manual mode currently sends the next party
-      member out automatically, as Set does).
 - [ ] Battle animations / damage numbers polish (shared with #25).
 
 Relevant code: `src/game/use-game-loop.js` (the manual gate + timeout),

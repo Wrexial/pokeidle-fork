@@ -159,3 +159,46 @@ test('switching back to auto clears a pending manual move', () => {
   assert.equal(autoState.battleMode, 'auto')
   assert.equal(autoState.pendingPlayerMove, null)
 })
+
+test('a forced faint replacement does not spend the turn', () => {
+  const fainted = {
+      id: '1',
+      speciesKey: 'pidgey',
+      name: 'Pidgey',
+      types: ['Normal'],
+      level: 5,
+      currentHp: 0,
+      maxHp: 20,
+      moves: ['tackle'],
+    },
+    healthy = {
+      id: '2',
+      speciesKey: 'rattata',
+      name: 'Rattata',
+      types: ['Normal'],
+      level: 5,
+      currentHp: 20,
+      maxHp: 20,
+      moves: ['tackle'],
+    },
+    state = {
+      ...manualBattlingState(),
+      phase: 'defeat',
+      playerPokemon: fainted,
+      party: [fainted, healthy],
+      activePlayerPokemonIndex: 0,
+      playerTurnSpent: false,
+    },
+    forced = gameReducer(state, {
+      type: 'SWITCH_PLAYER_POKEMON',
+      payload: { newPokemonIndex: 1 },
+    }),
+    deliberate = gameReducer(state, {
+      type: 'SWITCH_PLAYER_POKEMON',
+      payload: { newPokemonIndex: 1, costsTurn: true },
+    })
+  assert.equal(forced.phase, 'battling')
+  assert.equal(forced.activePlayerPokemonIndex, 1)
+  assert.equal(forced.playerTurnSpent, false, 'a faint replacement is free')
+  assert.equal(deliberate.playerTurnSpent, true, 'a chosen switch costs the turn')
+})

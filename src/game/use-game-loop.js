@@ -742,8 +742,20 @@ export function useGameLoop() {
         case 'defeat': {
           const activeIndex = currentGameState.activePlayerPokemonIndex,
             switchIndex = currentGameState.party.findIndex(
-              (member, index) => index > activeIndex && isBattleReady(member)
+              (member, index) => index !== activeIndex && isBattleReady(member)
             )
+          // Manual mode hands the choice of replacement to the player, falling
+          // back to the auto-switch if they never pick.
+          if (currentGameState.battleMode === 'manual' && switchIndex !== -1) {
+            if (!manualWaitRef.current) manualWaitRef.current = Date.now()
+            if (Date.now() - manualWaitRef.current < manualInputTimeoutMs) return
+            dispatch({ type: 'SET_BATTLE_MODE', payload: { mode: 'auto' } })
+            dispatch({
+              type: 'ADD_LOG',
+              payload: { message: 'No replacement chosen \u2014 auto-battling resumes.' },
+            })
+            return
+          }
           if (switchIndex !== -1) {
             dispatch({
               type: 'SWITCH_PLAYER_POKEMON',

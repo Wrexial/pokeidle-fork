@@ -202,3 +202,29 @@ test('a forced faint replacement does not spend the turn', () => {
   assert.equal(forced.playerTurnSpent, false, 'a faint replacement is free')
   assert.equal(deliberate.playerTurnSpent, true, 'a chosen switch costs the turn')
 })
+
+test('a self-destruct faint drops the user to 0 HP', () => {
+  const pokemon = {
+      id: '1',
+      speciesKey: 'pidgey',
+      name: 'Pidgey',
+      types: ['Normal'],
+      level: 5,
+      currentHp: 20,
+      maxHp: 20,
+      moves: ['tackle'],
+    },
+    state = {
+      ...initialGameState,
+      phase: 'battling',
+      playerPokemon: pokemon,
+      party: [pokemon],
+      enemyPokemon: { ...pokemon, id: '2' },
+      pendingEvents: [
+        { type: 'faint', message: 'Pidgey fainted!', data: { target: 'player' } },
+      ],
+    },
+    after = gameReducer(state, { type: 'CONSUME_EVENT' })
+  assert.equal(after.playerPokemon.currentHp, 0, 'the faint event syncs the HP down')
+  assert.equal(after.phase, 'defeat')
+})

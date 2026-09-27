@@ -49,10 +49,6 @@ export function useGameLoop() {
     manualWaitRef.current = 0
   }, [state.phase])
   const getTickDelay = React.useCallback(() => {
-      // A manual battle should feel responsive while it waits for the player,
-      // without speeding up idle progress elsewhere.
-      if (stateRef.current.battleMode === 'manual' && stateRef.current.phase === 'battling')
-        return 50
       const speed = stateRef.current.speed
       return speed === 25 ? 40 : speed === 5 ? 200 : speed === 2 ? 500 : 1e3
     }, []),
@@ -864,7 +860,18 @@ export function useGameLoop() {
         intervalRef.current && clearInterval(intervalRef.current)
       }
     )
-  }, [state.phase, state.speed, state.paused, state.battleMode, state.pendingEvents.length, tick, getTickDelay])
+  }, [state.phase, state.speed, state.paused, state.pendingEvents.length, tick, getTickDelay])
+  // Resolve a manual turn the moment the player acts, rather than waiting for
+  // the next idle tick. Event consumption stays on the interval above, so the
+  // battle text still plays out at the normal speed.
+  React.useEffect(() => {
+    if (
+      state.battleMode === 'manual' &&
+      state.phase === 'battling' &&
+      (state.pendingPlayerMove || state.playerTurnSpent)
+    )
+      tick()
+  }, [state.battleMode, state.phase, state.pendingPlayerMove, state.playerTurnSpent, tick])
   const unlockedRef = React.useRef(state.unlockedLocations),
     pendingTravelRef = React.useRef(/** @type {string | null} */ (null))
   ;(React.useEffect(() => {

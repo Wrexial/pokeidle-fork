@@ -132,18 +132,23 @@ export function consumeEvent(state, action) {
     event.data &&
     (terrain = event.data.terrain ?? terrain)
   event.type === 'flee' && (enemyPokemon = null)
-  ;(event.type === 'damage' || event.type === 'recoil' || event.type === 'heal') &&
+  ;(event.type === 'damage' || event.type === 'recoil' || event.type === 'heal' || event.type === 'faint') &&
     event.data &&
+    // A faint always drops the battler to 0. A self-destruct (Explosion,
+    // Memento, ...) sets the user's HP directly with no damage event to carry
+    // it, so the faint event itself has to sync it back.
     (event.data.target === 'player' && playerPokemon
       ? (playerPokemon = {
           ...playerPokemon,
-          currentHp: event.data.hpAfter ?? playerPokemon.currentHp,
+          currentHp:
+            event.type === 'faint' ? 0 : (event.data.hpAfter ?? playerPokemon.currentHp),
         })
       : event.data.target === 'enemy' &&
         enemyPokemon &&
         (enemyPokemon = {
           ...enemyPokemon,
-          currentHp: event.data.hpAfter ?? enemyPokemon.currentHp,
+          currentHp:
+            event.type === 'faint' ? 0 : (event.data.hpAfter ?? enemyPokemon.currentHp),
         }))
   let activeEffects = state.activeEffects,
     swarm = state.swarm,

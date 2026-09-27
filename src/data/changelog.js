@@ -62,6 +62,8 @@ export const CHANGELOG = [
             'Pokemon found through route activities (fishing, foraging, Rock Smash, Headbutt, Diving) now carry the same type-appropriate items as ordinary wild Pokemon \u2014 a berry or a booster of one of their own types \u2014 instead of a random shop item like a Choice Band or a mismatched type booster',
             'Voltorb Flip clears a level as soon as every 2 and 3 has been found, so the 1s can be left face down as the rules say (previously it demanded every non-Voltorb tile, so a solved board could refuse to clear). Every board is also guaranteed at least one 2 and one 3, and the board now explains what the two hint numbers mean',
             'Recoil moves (Double-Edge, Brave Bird, Flare Blitz, ...) now only hurt the user in proportion to the damage actually dealt: finishing off a nearly-fainted Pokemon no longer costs a huge chunk of HP from the overkill. Drain moves (Giga Drain, Drain Punch, ...) and Liquid Ooze scale the same way, and the damage number shown is the real damage dealt',
+            'Explosion, Self-Destruct, Misty Explosion and Memento now really faint the user in the party \u2014 the self-KO was only applied to the battle copy, so the Pokemon came back at full HP afterwards',
+            'Manual battle text plays at the normal speed again instead of flashing past: the player\u2019s picked move now resolves the turn immediately through a dedicated tick, rather than speeding up the whole loop (which had also rushed every event and battle line)',
           ],
         },
         {

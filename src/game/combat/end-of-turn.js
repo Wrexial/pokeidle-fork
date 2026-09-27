@@ -10,7 +10,7 @@ import { WEATHER_NAMES, weatherAbilityHeal, weatherResidualDamage } from '../wea
 import { chance } from './damage.js'
 import { changeBattleForm } from './setup.js'
 import { applyStatus } from './status.js'
-import { clampStatStage, getStatLabel } from './volatile.js'
+import { clampStatStage, getStatLabel, healBlocked } from './volatile.js'
 
 /**
  * End-of-turn residual damage (Leech Seed, Curse, poison/toxic/burn) and
@@ -40,7 +40,7 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
         other = isPlayerSide ? enemy : player,
         otherBefore = other.currentHp
       pokemon.currentHp = Math.max(0, pokemon.currentHp - drain)
-      other.currentHp = Math.min(other.maxHp, otherBefore + drain)
+      other.currentHp = healBlocked(other) ? otherBefore : Math.min(other.maxHp, otherBefore + drain)
       events.push({
         type: 'damage',
         message: `${pokemon.name}'s health is sapped by Leech Seed! (${drain} damage)`,
@@ -51,15 +51,16 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
           hpMax: pokemon.maxHp,
         },
       })
-      events.push({
-        type: 'heal',
-        message: `${other.name} drained health! (+${other.currentHp - otherBefore} HP)`,
-        data: {
-          target: isPlayerSide ? 'enemy' : 'player',
-          hpAfter: other.currentHp,
-          hpMax: other.maxHp,
-        },
-      })
+      if (other.currentHp > otherBefore)
+        events.push({
+          type: 'heal',
+          message: `${other.name} drained health! (+${other.currentHp - otherBefore} HP)`,
+          data: {
+            target: isPlayerSide ? 'enemy' : 'player',
+            hpAfter: other.currentHp,
+            hpMax: other.maxHp,
+          },
+        })
       if (pokemon.currentHp <= 0) {
         events.push({
           type: 'faint',
@@ -101,17 +102,19 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
       abilityOf(pokemon) === 'poisonHeal' &&
       (pokemon.status === 'poison' || pokemon.status === 'toxic')
     if (poisonHeal) {
-      const heal = Math.max(1, Math.floor(pokemon.maxHp / 8))
-      pokemon.currentHp = Math.min(pokemon.maxHp, pokemon.currentHp + heal)
-      events.push({
-        type: 'heal',
-        message: `${pokemon.name} restored HP with Poison Heal!`,
-        data: {
-          target: isPlayerSide ? 'player' : 'enemy',
-          hpAfter: pokemon.currentHp,
-          hpMax: pokemon.maxHp,
-        },
-      })
+      if (!healBlocked(pokemon)) {
+        const heal = Math.max(1, Math.floor(pokemon.maxHp / 8))
+        pokemon.currentHp = Math.min(pokemon.maxHp, pokemon.currentHp + heal)
+        events.push({
+          type: 'heal',
+          message: `${pokemon.name} restored HP with Poison Heal!`,
+          data: {
+            target: isPlayerSide ? 'player' : 'enemy',
+            hpAfter: pokemon.currentHp,
+            hpMax: pokemon.maxHp,
+          },
+        })
+      }
     } else if (pokemon.status === 'poison') residual = Math.max(1, Math.floor(pokemon.maxHp / 8))
     else if (pokemon.status === 'burn') residual = Math.max(1, Math.floor(pokemon.maxHp / 16))
     else if (pokemon.status === 'toxic') {
@@ -206,7 +209,7 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
     }
     // Held-item end-of-turn effects.
     const leftovers = heldLeftoversHeal(pokemon)
-    if (leftovers > 0 && pokemon.currentHp < pokemon.maxHp) {
+    if (leftovers > 0 && pokemon.currentHp < pokemon.maxHp && !healBlocked(pokemon)) {
       pokemon.currentHp = Math.min(pokemon.maxHp, pokemon.currentHp + leftovers)
       events.push({
         type: 'heal',
@@ -222,41 +225,11 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
     if ((pokemon.cudChewHeal ?? 0) > 0) {
       const chewHeal = pokemon.cudChewHeal
       pokemon.cudChewHeal = 0
-      pokemon.currentHp = Math.min(pokemon.maxHp, pokemon.currentHp + chewHeal)
-      events.push({
-        type: 'heal',
-        message: `${pokemon.name} chewed its cud! (+${chewHeal} HP)`,
-        data: {
-          target: isPlayerSide ? 'player' : 'enemy',
-          hpAfter: pokemon.currentHp,
-          hpMax: pokemon.maxHp,
-        },
-      })
-    }
-    // Ripen doubles a berry's healing; an opponent's Unnerve blocks it entirely.
-    const berryHeal =
-      abilityOf(isPlayerSide ? enemy : player) === 'unnerve'
-        ? 0
-        : heldBerryHeal(pokemon) * (abilityOf(pokemon) === 'ripen' ? 2 : 1)
-    if (berryHeal > 0) {
-      pokemon.currentHp = Math.min(pokemon.maxHp, pokemon.currentHp + berryHeal)
-      pokemon.heldItemUsed = !0
-      events.push({
-        type: 'heal',
-        message: `${pokemon.name}'s Sitrus Berry restored HP!`,
-        data: {
-          target: isPlayerSide ? 'player' : 'enemy',
-          hpAfter: pokemon.currentHp,
-          hpMax: pokemon.maxHp,
-        },
-      })
-      // Cheek Pouch heals extra when a berry is eaten.
-      if (abilityOf(pokemon) === 'cheekPouch' && pokemon.currentHp < pokemon.maxHp) {
-        const pouchHeal = Math.max(1, Math.floor(pokemon.maxHp / 3))
-        pokemon.currentHp = Math.min(pokemon.maxHp, pokemon.currentHp + pouchHeal)
+      if (!healBlocked(pokemon)) {
+        pokemon.currentHp = Math.min(pokemon.maxHp, pokemon.currentHp + chewHeal)
         events.push({
           type: 'heal',
-          message: `${pokemon.name}'s Cheek Pouch restored HP!`,
+          message: `${pokemon.name} chewed its cud! (+${chewHeal} HP)`,
           data: {
             target: isPlayerSide ? 'player' : 'enemy',
             hpAfter: pokemon.currentHp,
@@ -264,8 +237,43 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
           },
         })
       }
-      // Cud Chew schedules a second helping next turn.
-      if (abilityOf(pokemon) === 'cudChew') pokemon.cudChewHeal = berryHeal
+    }
+    // Ripen doubles a berry's healing; an opponent's Unnerve blocks it entirely.
+    const berryHeal =
+      abilityOf(isPlayerSide ? enemy : player) === 'unnerve'
+        ? 0
+        : heldBerryHeal(pokemon) * (abilityOf(pokemon) === 'ripen' ? 2 : 1)
+    if (berryHeal > 0) {
+      // The berry is still consumed under Heal Block, but restores no HP.
+      pokemon.heldItemUsed = !0
+      if (!healBlocked(pokemon)) {
+        pokemon.currentHp = Math.min(pokemon.maxHp, pokemon.currentHp + berryHeal)
+        events.push({
+          type: 'heal',
+          message: `${pokemon.name}'s Sitrus Berry restored HP!`,
+          data: {
+            target: isPlayerSide ? 'player' : 'enemy',
+            hpAfter: pokemon.currentHp,
+            hpMax: pokemon.maxHp,
+          },
+        })
+        // Cheek Pouch heals extra when a berry is eaten.
+        if (abilityOf(pokemon) === 'cheekPouch' && pokemon.currentHp < pokemon.maxHp) {
+          const pouchHeal = Math.max(1, Math.floor(pokemon.maxHp / 3))
+          pokemon.currentHp = Math.min(pokemon.maxHp, pokemon.currentHp + pouchHeal)
+          events.push({
+            type: 'heal',
+            message: `${pokemon.name}'s Cheek Pouch restored HP!`,
+            data: {
+              target: isPlayerSide ? 'player' : 'enemy',
+              hpAfter: pokemon.currentHp,
+              hpMax: pokemon.maxHp,
+            },
+          })
+        }
+        // Cud Chew schedules a second helping next turn.
+        if (abilityOf(pokemon) === 'cudChew') pokemon.cudChewHeal = berryHeal
+      }
     }
     // Harvest restores a consumed berry (always in sun, else 50%).
     if (
@@ -318,7 +326,7 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
         })
     }
     const weatherHeal = weatherAbilityHeal(activeWeather, pokemon)
-    if (weatherHeal > 0) {
+    if (weatherHeal > 0 && !healBlocked(pokemon)) {
       const healed = Math.min(pokemon.maxHp, pokemon.currentHp + weatherHeal)
       events.push({
         type: 'heal',
@@ -345,7 +353,7 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
     }
     // Grassy Terrain heals grounded Pokemon each turn.
     const terrainHealing = terrainHeal(activeTerrain, pokemon)
-    if (terrainHealing > 0 && pokemon.currentHp < pokemon.maxHp) {
+    if (terrainHealing > 0 && pokemon.currentHp < pokemon.maxHp && !healBlocked(pokemon)) {
       pokemon.currentHp = Math.min(pokemon.maxHp, pokemon.currentHp + terrainHealing)
       events.push({
         type: 'heal',
@@ -358,7 +366,7 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
       })
     }
     // Aqua Ring heals its holder a little each turn.
-    if (pokemon.aquaRing && pokemon.currentHp < pokemon.maxHp) {
+    if (pokemon.aquaRing && pokemon.currentHp < pokemon.maxHp && !healBlocked(pokemon)) {
       const aquaHeal = Math.max(1, Math.floor(pokemon.maxHp / 16))
       pokemon.currentHp = Math.min(pokemon.maxHp, pokemon.currentHp + aquaHeal)
       events.push({
@@ -372,7 +380,7 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
       })
     }
     // Ingrain heals its holder a little each turn.
-    if (pokemon.ingrained && pokemon.currentHp < pokemon.maxHp) {
+    if (pokemon.ingrained && pokemon.currentHp < pokemon.maxHp && !healBlocked(pokemon)) {
       const ingrainHeal = Math.max(1, Math.floor(pokemon.maxHp / 16))
       pokemon.currentHp = Math.min(pokemon.maxHp, pokemon.currentHp + ingrainHeal)
       events.push({
@@ -391,7 +399,7 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
       if (pokemon.wishTurns <= 0) {
         pokemon.wishTurns = 0
         const wishHeal = pokemon.wishHeal || Math.max(1, Math.floor(pokemon.maxHp / 2))
-        if (pokemon.currentHp > 0 && pokemon.currentHp < pokemon.maxHp) {
+        if (pokemon.currentHp > 0 && pokemon.currentHp < pokemon.maxHp && !healBlocked(pokemon)) {
           pokemon.currentHp = Math.min(pokemon.maxHp, pokemon.currentHp + wishHeal)
           events.push({
             type: 'heal',
@@ -427,6 +435,7 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
     if ((pokemon.safeguardTurns ?? 0) > 0) pokemon.safeguardTurns -= 1
     if ((pokemon.mistTurns ?? 0) > 0) pokemon.mistTurns -= 1
     if ((pokemon.tailwindTurns ?? 0) > 0) pokemon.tailwindTurns -= 1
+    if ((pokemon.healBlockTurns ?? 0) > 0) pokemon.healBlockTurns -= 1
     if ((pokemon.trickRoomTurns ?? 0) > 0) pokemon.trickRoomTurns -= 1
     if ((pokemon.destinyBondTurns ?? 0) > 0) pokemon.destinyBondTurns -= 1
     if ((pokemon.slowStartTurns ?? 0) > 0) pokemon.slowStartTurns -= 1

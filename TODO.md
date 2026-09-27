@@ -26,9 +26,10 @@ renumbered, so the gaps below are items that shipped.
 
 ### Tier 2 — High impact, worth the effort (medium–large)
 
-4. **#24 Move data pass** — **(largely done: 0.14.0 modelled the
-   remaining status/utility moves; only Heal Block, Speed/Power/Guard Swap-Split,
-   the charging moves and the dead Z/Max data remain.)**
+4. **#24 Move data pass** — **(largely done: the status/utility moves, the
+   two-turn charging moves, and 0.21.0's Heal Block, Speed Swap and
+   Power/Guard Split are in; only the ally/faint heals, move-calling, the
+   doubles-only moves and the dead Z/Max data remain.)**
 5. **#25 Battle engine pass** — **(largely done: 0.14.0 modelled the bulk of
    the ~300 abilities, the item hooks, the mid-battle form-change subsystem and
    the battle-only form species; only ally/doubles abilities, a few complex
@@ -179,14 +180,16 @@ Recycle, Trick / Switcheroo / Bestow / Corrosive Gas, and Metronome / Copycat /
 Mirror Move / Nature Power. Recoil was also added to the recoil moves
 (Double-Edge, Brave Bird, Flare Blitz, …).
 
+**Done (0.21.0):** Heal Block (blocks healing moves, drain moves, Aqua Ring,
+Ingrain, Wish, Poison Heal, Leftovers, berries and the rest for five turns),
+Speed Swap, Power Split and Guard Split. The two-turn / charging moves
+(Solar Beam, Fly, Dig, ...) are also modelled now.
+
 **Not done:**
 
-- [ ] Heal Block; Speed Swap; Power Split / Guard Split.
 - [ ] Ally-targeted heals (Heal Pulse, Floral Healing) and the faint-heals
       (Healing Wish, Lunar Dance).
 - [ ] Move-calling that needs more context (Sleep Talk, Assist, Me First).
-- [ ] Two-turn / charging moves (Solar Beam, Fly, Dig, Skull Bash, …) — only
-      the recharge moves (Hyper Beam) are modelled today.
 - [ ] The doubles-only moves (After You, Ally Switch, Follow Me, Helping Hand,
       Quick/Wide Guard, Rage Powder, …) — the game is singles only.
 - [ ] PP is stored but unused; decide whether to implement it or drop it.

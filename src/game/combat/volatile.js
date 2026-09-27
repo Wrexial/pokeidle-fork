@@ -29,6 +29,7 @@ export function createVolatileState() {
     leechSeeded: !1,
     heldItemUsed: !1,
     tauntTurns: 0,
+    healBlockTurns: 0,
     substituteHp: 0,
     infatuated: !1,
     cursed: !1,
@@ -89,6 +90,7 @@ export function volatileStateFromBattle(pokemon) {
     leechSeeded: pokemon.leechSeeded ?? !1,
     heldItemUsed: pokemon.heldItemUsed ?? !1,
     tauntTurns: pokemon.tauntTurns ?? 0,
+    healBlockTurns: pokemon.healBlockTurns ?? 0,
     substituteHp: pokemon.substituteHp ?? 0,
     infatuated: pokemon.infatuated ?? !1,
     cursed: pokemon.cursed ?? !1,
@@ -135,6 +137,15 @@ export function volatileStateFromBattle(pokemon) {
  */
 export function getStatStage(volatile, statKey) {
   return volatile.statStages?.[statKey] ?? 0
+}
+
+/**
+ * Whether a Pokemon is prevented from restoring HP by Heal Block.
+ * @param {BattlePokemon} pokemon
+ * @returns {boolean}
+ */
+export function healBlocked(pokemon) {
+  return (pokemon.healBlockTurns ?? 0) > 0
 }
 
 /**

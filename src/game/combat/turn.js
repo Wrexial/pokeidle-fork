@@ -15,7 +15,7 @@ import { VARIABLE_POWER_MOVES, withVariablePower } from './variable-power.js'
 import { CHARGE_MOVES, hitsSemiInvulnerable } from './charge-moves.js'
 import { applyConfusion, applyContactAbility, applyInfatuation, applyLeechSeed, applyStatus, handleConfusion, handleInfatuation, statusPreventsAction } from './status.js'
 import { TERRAIN_ABILITIES, TERRAIN_NAMES, TERRAIN_TURNS, terrainAbilityMultiplier, terrainDamageMultiplier, terrainPreventsPriority } from '../terrain.js'
-import { applyEntryAbility, applyIntimidate, clampStatStage, effectiveSpeed, getStatLabel, getStatStage, resetStatStages, screenApplies } from './volatile.js'
+import { applyEntryAbility, applyIntimidate, clampStatStage, effectiveSpeed, getStatLabel, getStatStage, healBlocked, resetStatStages, screenApplies } from './volatile.js'
 import { WEATHER_ABILITIES, WEATHER_NAMES, WEATHER_TURNS, applyWeatherToMove, weatherDamageMultiplier } from '../weather.js'
 
 /**
@@ -579,6 +579,14 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           ))
       )
         applyStatus(attack.defender, moveDef.effect.status, events, !attack.isPlayer, deterministic, activeTerrain, !0, attack.attacker)
+      else if (moveDef.effect?.type === 'heal' && healBlocked(attack.attacker))
+        events.push({
+          type: 'status',
+          message: `${attack.attacker.name} can't restore HP because of Heal Block!`,
+          data: {
+            target: attack.isPlayer ? 'player' : 'enemy',
+          },
+        })
       else if (moveDef.effect?.type === 'heal') {
         const healPercent = moveDef.effect.percentage ?? 50,
           healed = Math.min(
@@ -978,6 +986,44 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           message: `${attack.attacker.name} and ${attack.defender.name} swapped stat changes!`,
         })
       }
+      else if (moveDef.effect?.type === 'speedSwap') {
+        // Speed Swap trades the raw Speed stats (not the stat stages).
+        const attackerSpeed = attack.attacker.speed,
+          defenderSpeed = attack.defender.speed
+        attack.attacker.speed = defenderSpeed
+        attack.defender.speed = attackerSpeed
+        events.push({
+          type: 'statChange',
+          message: `${attack.attacker.name} swapped Speed with ${attack.defender.name}!`,
+        })
+      }
+      else if (moveDef.effect?.type === 'statSplit') {
+        // Power / Guard Split averages the raw stats (rounded down), ignoring
+        // stat stages, and gives both battlers the average.
+        for (const stat of moveDef.effect.stats) {
+          const average = Math.floor(
+            ((attack.attacker[stat] ?? 0) + (attack.defender[stat] ?? 0)) / 2
+          )
+          attack.attacker[stat] = average
+          attack.defender[stat] = average
+        }
+        events.push({
+          type: 'statChange',
+          message: `${attack.attacker.name} shared its stats with ${attack.defender.name}!`,
+        })
+      }
+      else if (moveDef.effect?.type === 'healBlock') {
+        if ((attack.defender.healBlockTurns ?? 0) <= 0) {
+          attack.defender.healBlockTurns = 5
+          events.push({
+            type: 'status',
+            message: `${attack.defender.name} was prevented from healing!`,
+            data: {
+              target: attack.isPlayer ? 'enemy' : 'player',
+            },
+          })
+        }
+      }
       else if (moveDef.effect?.type === 'recycle') {
         if (attack.attacker.heldItemUsed) {
           attack.attacker.heldItemUsed = !1
@@ -1125,7 +1171,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     // Levitate / type-absorbing abilities negate the move (and usually heal).
     if (abilityAbsorbsType(attack.defender, effectiveMove.type, attack.attacker)) {
       rememberNullifiedMove(attack)
-      if (abilityHealsFromType(attack.defender, effectiveMove.type, attack.attacker)) {
+      if (abilityHealsFromType(attack.defender, effectiveMove.type, attack.attacker) && !healBlocked(attack.defender)) {
         const healed = Math.min(
             attack.defender.maxHp,
             attack.defender.currentHp + Math.max(1, Math.floor(attack.defender.maxHp / 4))
@@ -1503,6 +1549,8 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
               })
             break
           }
+          // Heal Block suppresses the drain's recovery, but not the damage.
+          if (healBlocked(attack.attacker)) break
           const attackerHpBefore = attack.attacker.currentHp,
             healAmount = Math.max(
               1,

@@ -883,3 +883,99 @@ test('Rough Skin hurts a contact attacker, but not a non-contact move', () => {
     assert.equal(make('earthquake'), 400, 'Earthquake makes no contact')
   })
 })
+
+test('Power Split averages both battlers’ offensive stats', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['powerSplit'],
+        speed: 200,
+        attack: 150,
+        spAttack: 150,
+      }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], attack: 250, spAttack: 50 })
+    resolveBattleTurn(player, enemy, false)
+    assert.equal(player.attack, 200)
+    assert.equal(enemy.attack, 200)
+    assert.equal(player.spAttack, 100)
+    assert.equal(enemy.spAttack, 100)
+    // Power Split leaves the defences alone.
+    assert.equal(player.defense, 120)
+  })
+})
+
+test('Guard Split averages both battlers’ defensive stats', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['guardSplit'],
+        speed: 200,
+        defense: 120,
+        spDefense: 120,
+      }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], defense: 200, spDefense: 80 })
+    resolveBattleTurn(player, enemy, false)
+    assert.equal(player.defense, 160)
+    assert.equal(enemy.defense, 160)
+    assert.equal(player.spDefense, 100)
+    assert.equal(enemy.spDefense, 100)
+    // Guard Split leaves the offences alone.
+    assert.equal(player.attack, 150)
+  })
+})
+
+test('Speed Swap trades the raw Speed stats', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['speedSwap'],
+        speed: 80,
+      }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], speed: 200 })
+    resolveBattleTurn(player, enemy, false)
+    assert.equal(player.speed, 200)
+    assert.equal(enemy.speed, 80)
+  })
+})
+
+test('Heal Block prevents the target restoring HP', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({ name: 'Player', isPlayer: true, moves: ['healBlock'], speed: 200 }),
+      enemy = battler({
+        name: 'Foe',
+        moves: ['recover'],
+        currentHp: 100,
+        maxHp: 400,
+        speed: 10,
+      }),
+      events = resolveBattleTurn(player, enemy, false)
+    assert.equal(enemy.healBlockTurns, 4, 'set for five turns, then ticked down')
+    assert.equal(enemy.currentHp, 100, 'Recover is blocked')
+    assert.ok(
+      events.some((/** @type {any} */ event) => event.message?.includes('Heal Block')),
+      'the block is reported'
+    )
+  })
+})
+
+test('Heal Block also suppresses end-of-turn healing', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['splash'],
+        speed: 200,
+        currentHp: 200,
+        maxHp: 400,
+        aquaRing: true,
+        healBlockTurns: 3,
+      }),
+      enemy = battler({ name: 'Foe', moves: ['splash'] })
+    resolveBattleTurn(player, enemy, false)
+    assert.equal(player.currentHp, 200, 'Aqua Ring restores nothing while blocked')
+    assert.equal(player.healBlockTurns, 2)
+  })
+})

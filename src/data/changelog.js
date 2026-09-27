@@ -62,6 +62,13 @@ export const CHANGELOG = [
             'Pokemon found through route activities (fishing, foraging, Rock Smash, Headbutt, Diving) now carry the same type-appropriate items as ordinary wild Pokemon \u2014 a berry or a booster of one of their own types \u2014 instead of a random shop item like a Choice Band or a mismatched type booster',
           ],
         },
+        {
+          heading: 'Battles',
+          items: [
+            'Heal Block now works: for five turns the target cannot restore HP from any source \u2014 healing moves, drain moves, Aqua Ring, Ingrain, Wish, Poison Heal, Leftovers, berries and the rest',
+            'The leftover stat moves now work: Power Split averages both battlers\u2019 Attack and Sp. Atk, Guard Split averages their Defence and Sp. Def, and Speed Swap trades their raw Speed',
+          ],
+        },
       ],
     },
     {

@@ -238,6 +238,8 @@ type VolatileState = {
   heldItemUsed?: boolean
   /** Turns of Taunt left (0 when not taunted). */
   tauntTurns?: number
+  /** Turns of Heal Block left (0 when healing freely). */
+  healBlockTurns?: number
   /** Remaining hit points of a Substitute (0 when none). */
   substituteHp?: number
   /** Infatuation (Attract) is active. */

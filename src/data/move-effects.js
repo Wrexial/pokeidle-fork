@@ -162,6 +162,13 @@ const MOVE_OVERRIDES = {
   // Stat-stage swaps and Recycle.
   powerSwap: { effect: { type: 'statSwap', stats: ['attack', 'spAttack'] } },
   guardSwap: { effect: { type: 'statSwap', stats: ['defense', 'spDefense'] } },
+  // Speed Swap trades the raw Speed stats, while Power Split / Guard Split
+  // average the raw offensive / defensive stats of both battlers.
+  speedSwap: { effect: { type: 'speedSwap' } },
+  powerSplit: { effect: { type: 'statSplit', stats: ['attack', 'spAttack'] } },
+  guardSplit: { effect: { type: 'statSplit', stats: ['defense', 'spDefense'] } },
+  // Heal Block stops the target restoring HP for five turns.
+  healBlock: { effect: { type: 'healBlock' } },
   heartSwap: {
     effect: {
       type: 'statSwap',

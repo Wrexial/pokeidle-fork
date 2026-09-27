@@ -1951,13 +1951,16 @@ img {
 }
 
 .party-content {
-    flex: 0 0 auto;
+    flex: 1;
     display: flex;
     flex-direction: column;
     padding: 8px;
     gap: 6px;
     min-height: 0;
-    overflow: hidden
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: #685040 #1a1208
 }
 
 .party-list {
@@ -2131,8 +2134,7 @@ img {
 }
 
 .box-container {
-    flex: 1;
-    min-height: 0;
+    flex: 0 0 auto;
     display: flex;
     flex-direction: column;
     border-top: 2px solid #483828

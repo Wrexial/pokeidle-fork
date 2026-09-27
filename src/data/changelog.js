@@ -29,6 +29,7 @@ export const CHANGELOG = [
             'The Kecleon Shop and the Town Map search boxes can now be collapsed: the shop has a Search toggle, and the map hides its search behind a magnifier button',
             'On 21:9 and wider screens the party and box now stack vertically instead of splitting into two side-by-side columns',
             'Empty Box slots now show a recessed placeholder shadow, so it is obvious which slots are free',
+            'The Box keeps a fixed size instead of stretching to fill the left panel and shrinking as the party grows: the party panel now takes the spare space (and scrolls when a summary is open), so the Box grid no longer scales up and down as you catch or swap Pokemon',
           ],
         },
         {

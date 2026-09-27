@@ -1467,16 +1467,19 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       })
       continue
     }
+    // Recoil, drain and Liquid Ooze all scale off the damage actually dealt
+    // (capped at the target's remaining HP), not the attack's raw damage.
+    const dealtDamage = Math.min(totalDamage, defenderHpBefore)
     if (
       ((attack.defender.currentHp = Math.max(0, attack.defender.currentHp - totalDamage)),
       events.push({
         type: 'damage',
-        message: `${attack.defender.name} took ${totalDamage} damage!${
+        message: `${attack.defender.name} took ${dealtDamage} damage!${
           hitCount > 1 ? ` (${hitCount} hits)` : ''
         }`,
         data: {
           target: attack.isPlayer ? 'enemy' : 'player',
-          damage: totalDamage,
+          damage: dealtDamage,
           hpAfter: attack.defender.currentHp,
           hpMax: attack.defender.maxHp,
         },
@@ -1497,7 +1500,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         case 'recoil': {
           // Rock Head ignores recoil damage.
           if (abilityOf(attack.attacker) === 'rockHead') break
-          const recoilDamage = Math.max(1, Math.floor(totalDamage * moveDef.effect.fraction))
+          const recoilDamage = Math.max(1, Math.floor(dealtDamage * moveDef.effect.fraction))
           ;((attack.attacker.currentHp = Math.max(0, attack.attacker.currentHp - recoilDamage)),
             events.push({
               type: 'recoil',
@@ -1528,7 +1531,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           if (abilityOf(attack.defender) === 'liquidOoze') {
             const oozeDamage = Math.max(
               1,
-              Math.floor((totalDamage * (moveDef.effect.percentage ?? 50)) / 100)
+              Math.floor((dealtDamage * (moveDef.effect.percentage ?? 50)) / 100)
             )
             attack.attacker.currentHp = Math.max(0, attack.attacker.currentHp - oozeDamage)
             events.push({
@@ -1554,7 +1557,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           const attackerHpBefore = attack.attacker.currentHp,
             healAmount = Math.max(
               1,
-              Math.floor((totalDamage * (moveDef.effect.percentage ?? 50)) / 100)
+              Math.floor((dealtDamage * (moveDef.effect.percentage ?? 50)) / 100)
             ),
             healed = Math.min(attack.attacker.maxHp, attackerHpBefore + healAmount)
           attack.attacker.currentHp = healed

@@ -979,3 +979,57 @@ test('Heal Block also suppresses end-of-turn healing', () => {
     assert.equal(player.healBlockTurns, 2)
   })
 })
+
+test('recoil uses the damage actually dealt, not the overkill', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['doubleEdge'],
+        speed: 200,
+        attack: 500,
+        currentHp: 400,
+        maxHp: 400,
+      }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], currentHp: 10, maxHp: 9999, defense: 50 }),
+      events = resolveBattleTurn(player, enemy, false),
+      damage = events.find(
+        (/** @type {any} */ event) => event.type === 'damage' && event.data?.target === 'enemy'
+      ),
+      recoil = events.find(
+        (/** @type {any} */ event) => event.type === 'recoil' && /recoil/.test(event.message)
+      )
+    assert.equal(damage.data.damage, 10, 'only the remaining HP is dealt')
+    assert.equal(recoil.data.damage, Math.max(1, Math.floor(10 / 3)), 'recoil is a third of the 10 dealt')
+    assert.equal(player.currentHp, 400 - recoil.data.damage)
+  })
+})
+
+test('drain heals from the damage actually dealt, not the overkill', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['gigaDrain'],
+        speed: 200,
+        spAttack: 500,
+        currentHp: 200,
+        maxHp: 400,
+      }),
+      enemy = battler({
+        name: 'Foe',
+        moves: ['splash'],
+        currentHp: 10,
+        maxHp: 9999,
+        spDefense: 50,
+        types: ['Normal'],
+      }),
+      events = resolveBattleTurn(player, enemy, false),
+      heal = events.find(
+        (/** @type {any} */ event) => event.type === 'heal' && /drained/.test(event.message)
+      )
+    // Giga Drain restores half the damage dealt; only 10 was actually dealt.
+    assert.equal(heal.data.hpAfter, 205, 'heals 5, half of the 10 dealt')
+    assert.equal(player.currentHp, 205)
+  })
+})

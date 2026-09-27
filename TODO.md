@@ -46,8 +46,10 @@ renumbered, so the gaps below are items that shipped.
 10. **#35 More Galar areas** — M · ★★★½ — Galar is the thinnest region map.
 11. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of Armor,
     Crown Tundra, Kitakami and the Terarium to first-class regions.
-12. **#18 Better settings** — M · ★★★★ — centralise the QOL toggles and store
-    settings separately from the save.
+12. **#18 Better settings** — **(done 0.21.0: preferences now live in their
+    own `localStorage` key, the Settings modal gained a Gameplay section and
+    per-event notification toggles; only sprite-style options and the #19
+    account controls remain.)**
 13. **#28 More region areas (caves, POIs, DLC land)** — L · ★★★★½ — real
     content; data-heavy. Pairs with #35/#36/#39.
 14. ~~**#4 In-battle Mega evolution**~~ — **shipped (0.19.0).**
@@ -126,17 +128,25 @@ Effort: **done**.
 ## 18. Better settings
 
 `settings-modal.js` now exposes gameplay, notification, display and audio
-toggles; what remains is mostly restructuring:
+toggles, and the preferences are stored outside the save.
 
-- [ ] Gameplay: a single home for default catch rule, auto-catch / auto-heal /
-      auto-switch / auto-proceed toggles, battle speed and "auto-travel".
-- [ ] Notifications: which events raise browser notifications (shiny, rare, egg
-      ready, box full).
-- [ ] Display: sprite style and other cosmetic options.
-- [ ] Data: export/import (#15) and a confirmed reset in one place.
-- [ ] Account: sign in / sync controls (#19).
-- [ ] Store settings separately from the save (a `localStorage` settings key) so
-      they survive a save reset and sync independently.
+**Shipped (0.21.0):** the preference fields moved to their own
+`pokemon-idle-settings` localStorage key (`src/game/settings.js`), so they
+survive a save reset and are shared across slots; older saves migrate their
+settings in on first boot. The Settings modal gained a **Gameplay** section
+(auto-catch / always-catch-shinies / auto-proceed and a battle-speed picker),
+export/import and the confirmed reset now sit together under **Save Data**, and
+**Notifications** can filter browser alerts per event (shinies, raids &
+legendaries, egg hatches) on top of the master toggle.
+
+Still open:
+
+- [ ] **Display**: sprite style and other cosmetic options (no sprite-style
+      feature exists yet).
+- [ ] **Account**: sign in / sync controls — blocked on #19.
+- [ ] Gameplay still isn't a complete home: the default catch rule lives in
+      the Catch Settings modal, and auto-heal / auto-switch / auto-travel are
+      not modelled yet.
 
 Effort: **medium** (mostly UI plus a small settings slice).
 

@@ -137,6 +137,42 @@ export function toggleMartCollapsed(state, action) {
 }
 
 /**
+ * Handle the `TOGGLE_NOTIFY_SHINY` action.
+ * @param {GameState} state
+ * @returns {GameState}
+ */
+export function toggleNotifyShiny(state) {
+  return {
+    ...state,
+    notifyShiny: !state.notifyShiny,
+  }
+}
+
+/**
+ * Handle the `TOGGLE_NOTIFY_RARE` action (raids, roamers and legendaries).
+ * @param {GameState} state
+ * @returns {GameState}
+ */
+export function toggleNotifyRare(state) {
+  return {
+    ...state,
+    notifyRare: !state.notifyRare,
+  }
+}
+
+/**
+ * Handle the `TOGGLE_NOTIFY_EGG` action.
+ * @param {GameState} state
+ * @returns {GameState}
+ */
+export function toggleNotifyEgg(state) {
+  return {
+    ...state,
+    notifyEgg: !state.notifyEgg,
+  }
+}
+
+/**
  * Handle the `TOGGLE_REDUCED_MOTION` action.
  * @param {GameState} state
  * @param {GameAction} action

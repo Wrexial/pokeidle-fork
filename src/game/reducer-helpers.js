@@ -92,7 +92,7 @@ const NOTIFICATION_COOLDOWN_MS = 6000
  * Add a toast to the queue, collapsing repeats (same `dedupeKey`) inside the
  * cooldown so idle events can't spam the screen.
  * @param {GameState} state
- * @param {{ message: string, tone?: string, icon?: string | null, dedupeKey?: string, cooldown?: number }} notification
+ * @param {{ message: string, tone?: string, icon?: string | null, dedupeKey?: string, cooldown?: number, kind?: string | null }} notification
  * @returns {GameState}
  */
 export function withNotification(state, notification) {
@@ -117,6 +117,9 @@ export function withNotification(state, notification) {
         message: notification.message,
         tone: notification.tone ?? 'info',
         icon: notification.icon ?? null,
+        // The browser-notification filters key off this; shiny toasts are
+        // tagged from their tone so every shiny call site is covered.
+        kind: notification.kind ?? (notification.tone === 'shiny' ? 'shiny' : null),
         dedupeKey,
         createdAt: now,
       },

@@ -319,6 +319,7 @@ export function consumeEvent(state, action) {
         {
           message: `Your Egg hatched into ${hatched.name}!`,
           tone: hatched.isShiny ? 'shiny' : 'success',
+          kind: 'egg',
           icon: '\ud83d\udc23',
           dedupeKey: `hatch:${hatched.id}`,
         }

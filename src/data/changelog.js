@@ -69,6 +69,14 @@ export const CHANGELOG = [
             'The leftover stat moves now work: Power Split averages both battlers\u2019 Attack and Sp. Atk, Guard Split averages their Defence and Sp. Def, and Speed Swap trades their raw Speed',
           ],
         },
+        {
+          heading: 'Settings',
+          items: [
+            'Your preferences \u2014 battle speed and style, auto-catch, notifications, accessibility, audio and more \u2014 are now stored separately from your save, so they survive a save reset and are shared across every save slot (an older save migrates its settings in on first load)',
+            'Settings has a new Gameplay section that gathers auto-catch, always-catch-shinies and auto-proceed together with a battle-speed picker; exporting, importing and the confirmed reset now sit together under Save Data',
+            'Browser notifications can be filtered per event: choose whether shinies, raids & legendaries and egg hatches raise an alert, on top of the master toggle',
+          ],
+        },
       ],
     },
     {

@@ -147,9 +147,21 @@ export function useBrowserNotifications() {
     if (!state.browserNotifications || previousId === null) return
     if (!document.hidden) return
     if (typeof Notification === 'undefined' || Notification.permission !== 'granted') return
+    /** @param {string | null | undefined} kind */
+    const kindEnabled = (kind) =>
+      kind === 'shiny'
+        ? state.notifyShiny
+        : kind === 'rare'
+          ? state.notifyRare
+          : kind === 'egg'
+            ? state.notifyEgg
+            : true
     const fresh = state.notifications
       .filter(
-        (notification) => notification.id > previousId && notification.tone !== 'info'
+        (notification) =>
+          notification.id > previousId &&
+          notification.tone !== 'info' &&
+          kindEnabled(notification.kind)
       )
       .slice(-3)
     for (const notification of fresh)
@@ -157,7 +169,7 @@ export function useBrowserNotifications() {
         body: `${notification.icon ? `${notification.icon} ` : ''}${notification.message}`,
         tag: notification.dedupeKey ?? `pokemon-idle:${notification.id}`,
       })
-  }, [state.notifications, state.browserNotifications])
+  }, [state.notifications, state.browserNotifications, state.notifyShiny, state.notifyRare, state.notifyEgg])
 }
 
 /**

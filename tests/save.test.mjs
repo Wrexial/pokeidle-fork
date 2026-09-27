@@ -55,8 +55,14 @@ test('a serialized save round-trips through repairSave', () => {
   const state = startedGame(),
     repaired = repairSave(serializeSave(state))
   assert.ok(repaired, 'a freshly serialized save must repair')
-  for (const key of ['speed', 'autoCatch', 'money', 'inventory', 'wildBattlesWon', 'battlesWonByLocation'])
+  for (const key of ['money', 'inventory', 'wildBattlesWon', 'battlesWonByLocation'])
     assert.deepEqual(repaired[key], state[key], key)
+})
+
+test('preferences are not written into the save', () => {
+  const saved = serializeSave(startedGame())
+  for (const key of ['speed', 'autoCatch', 'battleStyle', 'browserNotifications', 'musicEnabled'])
+    assert.ok(!(key in saved), `preference "${key}" should live in the settings store, not the save`)
 })
 
 test('repairSave opens a zone region entry hub for a stuck save', () => {
@@ -79,8 +85,9 @@ test('repairSave opens a zone region entry hub for a stuck save', () => {
 
 test('the autosave tracks fields that are not covered by other slices', () => {
   // GameProvider derives its effect dependencies from this list, so these
-  // must be present for a change to them to trigger an autosave.
-  for (const key of ['speed', 'currentLocation', 'unlockedLocations', 'autoCatch', 'globalCatchDefaults', 'shinyChain', 'swarm', 'pokerus', 'daycare', 'dailyEvent'])
+  // must be present for a change to them to trigger an autosave. Preferences
+  // are tracked separately by the settings store instead.
+  for (const key of ['currentLocation', 'unlockedLocations', 'shinyChain', 'swarm', 'pokerus', 'daycare', 'dailyEvent'])
     assert.ok(SAVED_STATE_KEYS.includes(key), `${key} should be persisted and autosaved`)
 })
 

@@ -348,6 +348,8 @@ type GameNotification = {
   /** Visual tone: info | success | shiny | warn. */
   tone: string
   icon: string | null
+  /** Optional event category for the browser-notification filters (shiny | rare | egg). */
+  kind?: string | null
   /** Collapses repeat events (same key inside the cooldown is dropped). */
   dedupeKey: string
   createdAt: number
@@ -417,6 +419,10 @@ type GameState = {
   autoProceed: boolean
   /** Raise browser notifications for key events while the tab is hidden. */
   browserNotifications: boolean
+  /** Browser-notification categories (only used when notifications are on). */
+  notifyShiny: boolean
+  notifyRare: boolean
+  notifyEgg: boolean
   /** Force reduced-motion animations off, regardless of the OS setting. */
   reducedMotion: boolean
   /** Add type labels to moves so type is not conveyed by colour alone. */

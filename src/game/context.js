@@ -4,6 +4,7 @@ import React from 'react'
 import { jsx } from 'react/jsx-runtime'
 import { gameReducer, initialGameState } from './reducer.js'
 import { SAVED_STATE_KEYS, autosaveSave, loadSavedState, resolveBootSlot } from './save.js'
+import { SETTINGS_KEYS, mergeStoredSettings, storeSettings } from './settings.js'
 
 /** @type {React.Context<{ state: GameState, dispatch: (action: GameAction) => void } | null>} */
 const GameContext = React.createContext(
@@ -17,9 +18,16 @@ export function GameProvider({ children }) {
     initialGameState,
     /** @returns {GameState} */ () => {
       const slot = resolveBootSlot()
-      return (slot ? loadSavedState(slot) : null) ?? initialGameState
+      return mergeStoredSettings((slot ? loadSavedState(slot) : null) ?? initialGameState)
     }
   )
+  // Preferences live in their own storage key so they outlive a save reset.
+  // Writing on change (rather than every autosave) keeps it cheap. Skip the
+  // write while the slot-picker is up: the fresh defaults would otherwise
+  // override the settings the chosen save migrates in.
+  React.useEffect(() => {
+    if (resolveBootSlot() !== null) storeSettings(state)
+  }, SETTINGS_KEYS.map((key) => state[key]))
   return (
     React.useEffect(() => {
       if (state.playerPokemon && (state.phase === 'idle' || state.phase === 'victory')) {

@@ -572,6 +572,9 @@ export function repairSave(saved) {
     autoProceed: saved.autoProceed ?? false,
     battleStyle: saved.battleStyle === 'set' ? 'set' : 'switch',
     browserNotifications: !!saved.browserNotifications,
+    notifyShiny: saved.notifyShiny !== !1,
+    notifyRare: saved.notifyRare !== !1,
+    notifyEgg: saved.notifyEgg !== !1,
     reducedMotion: !!saved.reducedMotion,
     colourblindTypes: !!saved.colourblindTypes,
     largeText: !!saved.largeText,
@@ -664,6 +667,11 @@ export function loadSavedState(slot = getActiveSlot() || 1) {
  * The state fields that make up a save. `serializeSave` writes exactly these
  * (plus the version/timestamp envelope) and the provider autosaves when any of
  * them changes, so a new field only has to be declared in one place.
+ *
+ * Player preferences are deliberately not here: they live in their own
+ * localStorage key (see `settings.js`) so they survive a save reset and are
+ * shared across slots. The loader still reads them from older saves once, for
+ * migration.
  * @type {string[]}
  */
 export const SAVED_STATE_KEYS = [
@@ -671,21 +679,17 @@ export const SAVED_STATE_KEYS = [
   'startRegion',
   'starterSpeciesKey',
   'currentRoute',
-  'speed',
   'wildBattlesWon',
   'trainerBattlesWon',
   'battlesWonByLocation',
   'party',
   'box',
   'boxSort',
-  'autoCatch',
   'nextPokemonId',
   'currentLocation',
   'unlockedLocations',
   'unlockedRegions',
   'catchSettings',
-  'globalCatchDefaults',
-  'alwaysCatchShinies',
   'money',
   'inventory',
   'rods',
@@ -711,15 +715,6 @@ export const SAVED_STATE_KEYS = [
   'towerFloor',
   'towerBest',
   'victoryTokens',
-  'autoProceed',
-  'battleStyle',
-  'browserNotifications',
-  'reducedMotion',
-  'colourblindTypes',
-  'largeText',
-  'martCollapsed',
-  'musicEnabled',
-  'sfxEnabled',
   'challengeRandomizer',
   'challengeLevelScale',
   'challengeNuzlocke',

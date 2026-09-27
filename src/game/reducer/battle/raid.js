@@ -42,6 +42,7 @@ export function startRaid(state, action) {
       message: `Raid: ${pokemonSpecies[action.payload.legendary]?.name ?? 'a legendary Pokemon'} awaits!`,
       tone: 'warn',
       icon: '⚡',
+      kind: 'rare',
       dedupeKey: `raid:${action.payload.legendary}`,
     }
   )

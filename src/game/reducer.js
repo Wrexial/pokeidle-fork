@@ -16,7 +16,7 @@ import { claimGift, startStaticEncounter } from './reducer/gifts.js'
 import { claimMinigameReward, collectMining, endBugContest, endMinigame, endRouteActivity, endSafari, payMinigameFee, startAcademyQuiz, startAuctionHouse, startBattleRoyal, startBugContest, startContest, startCurry, startDynamaxAdventures, startGameCorner, startIceSlide, startLightsOut, startMemory, startMining, startMusical, startPelago, startPicnic, startPokeathlon, startPokeRadar, startPokeballFactory, startPokestar, startPuzzleLeague, startRouteActivity, startRuinsPuzzle, startSafari, startVoltorbFlip, startWhack } from './reducer/minigames.js'
 import { boxToParty, catchPokemon, clearHatchResult, completeEvolution, completeWonderTrade, depositDaycare, evolutionStep, hatchDaycareEgg, partyToBox, releaseDuplicates, releaseFainted, releaseHatchling, releasePokemon, reorderBox, reorderParty, setBoxSort, setMoves, setNickname, startEvolution, swapParty, swapPartyBox, toggleFavourite, withdrawDaycare, wonderTrade } from './reducer/pokemon.js'
 import { completeHealing, heal, healParty, healingStep, nuzlockeGameOver, startHealing } from './reducer/recovery.js'
-import { addLog, clearLevelUp, dismissNotification, markCatchRoute, pushNotification, setBattleStyle, setChallengeMonotype, setSpeed, toggleAutoProceed, toggleBrowserNotifications, toggleChallengeLevelScale, toggleChallengeNuzlocke, toggleChallengeRandomizer, toggleChallengeRestrictCatches, toggleColourblindTypes, toggleLargeText, toggleMartCollapsed, toggleMusic, togglePause, toggleReducedMotion, toggleSfx } from './reducer/settings.js'
+import { addLog, clearLevelUp, dismissNotification, markCatchRoute, pushNotification, setBattleStyle, setChallengeMonotype, setSpeed, toggleAutoProceed, toggleBrowserNotifications, toggleChallengeLevelScale, toggleChallengeNuzlocke, toggleChallengeRandomizer, toggleChallengeRestrictCatches, toggleColourblindTypes, toggleLargeText, toggleMartCollapsed, toggleMusic, toggleNotifyEgg, toggleNotifyRare, toggleNotifyShiny, togglePause, toggleReducedMotion, toggleSfx } from './reducer/settings.js'
 import { loadSave, phaseIdle, prestigeRegion, resetEliteFour, selectStarter, travel, unlockRegion } from './reducer/world.js'
 
 /** @type {GameState} */
@@ -129,6 +129,10 @@ export const initialGameState = {
   autoProceed: !1,
   /** Whether key events raise a browser notification while the tab is hidden. */
   browserNotifications: !1,
+  /** Which browser-notification events are allowed through (shiny, raid/legendary, egg). */
+  notifyShiny: !0,
+  notifyRare: !0,
+  notifyEgg: !0,
   /** Force reduced-motion animations off, regardless of the OS setting. */
   reducedMotion: !1,
   /** Add type labels to moves so type is not conveyed by colour alone. */
@@ -344,6 +348,12 @@ export function gameReducer(state, action) {
       return toggleAutoProceed(state, action)
     case 'TOGGLE_BROWSER_NOTIFICATIONS':
       return toggleBrowserNotifications(state, action)
+    case 'TOGGLE_NOTIFY_SHINY':
+      return toggleNotifyShiny(state)
+    case 'TOGGLE_NOTIFY_RARE':
+      return toggleNotifyRare(state)
+    case 'TOGGLE_NOTIFY_EGG':
+      return toggleNotifyEgg(state)
     case 'TOGGLE_REDUCED_MOTION':
       return toggleReducedMotion(state, action)
     case 'TOGGLE_COLOURBLIND_TYPES':

@@ -3,6 +3,7 @@
 import React from 'react'
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
 import { clearSave } from '../data/config.js'
+import { SPEED_OPTIONS } from '../data/ui.js'
 import { unlockAudio } from '../game/audio.js'
 import { useGame } from '../game/context.js'
 import { decodeShareCode, encodeShareCode, repairSave, serializeSave, suspendAutosave, writeImportedSave } from '../game/save.js'
@@ -207,6 +208,62 @@ export function SettingsModal({ onClose }) {
                     children: [
                       jsx('div', {
                         className: 'settings-section-title',
+                        children: 'Gameplay',
+                      }),
+                      jsx('p', {
+                        className: 'settings-hint',
+                        children:
+                          'Quality-of-life toggles. Auto-Catch throws a ball after a win; Always Catch Shinies overrides your catch rules for shinies; Auto-Proceed skips the continue prompt after battle events. Battle Speed sets how fast the idle loop runs.',
+                      }),
+                      jsx('button', {
+                        className: `settings-toggle-btn${state.autoCatch ? ' active' : ''}`,
+                        onClick: () => dispatch({ type: 'TOGGLE_AUTO_CATCH' }),
+                        children: state.autoCatch ? 'Auto-Catch: ON' : 'Auto-Catch: OFF',
+                      }),
+                      jsx('button', {
+                        className: `settings-toggle-btn${state.alwaysCatchShinies ? ' active' : ''}`,
+                        onClick: () =>
+                          dispatch({
+                            type: 'SET_ALWAYS_CATCH_SHINIES',
+                            payload: { value: !state.alwaysCatchShinies },
+                          }),
+                        children: state.alwaysCatchShinies
+                          ? 'Always Catch Shinies: ON'
+                          : 'Always Catch Shinies: OFF',
+                      }),
+                      jsx('button', {
+                        className: `settings-toggle-btn${state.autoProceed ? ' active' : ''}`,
+                        onClick: () => dispatch({ type: 'TOGGLE_AUTO_PROCEED' }),
+                        children: state.autoProceed ? 'Auto-Proceed: ON' : 'Auto-Proceed: OFF',
+                      }),
+                      jsxs('div', {
+                        className: 'settings-speed',
+                        children: [
+                          jsx('span', {
+                            className: 'settings-speed-label',
+                            children: 'Battle Speed',
+                          }),
+                          SPEED_OPTIONS.map((option) =>
+                            jsx(
+                              'button',
+                              {
+                                className: `settings-speed-btn${state.speed === option ? ' active' : ''}`,
+                                onClick: () =>
+                                  dispatch({ type: 'SET_SPEED', payload: { speed: option } }),
+                                children: `${option}x`,
+                              },
+                              option
+                            )
+                          ),
+                        ],
+                      }),
+                    ],
+                  }),
+                  jsxs('div', {
+                    className: 'settings-section',
+                    children: [
+                      jsx('div', {
+                        className: 'settings-section-title',
                         children: 'Battles',
                       }),
                       jsx('p', {
@@ -246,6 +303,28 @@ export function SettingsModal({ onClose }) {
                         children: state.browserNotifications
                           ? 'Browser Notifications: ON'
                           : 'Browser Notifications: OFF',
+                      }),
+                      jsx('p', {
+                        className: 'settings-hint',
+                        children:
+                          'Choose which events can raise a notification while the tab is in the background.',
+                      }),
+                      jsx('button', {
+                        className: `settings-toggle-btn${state.notifyShiny ? ' active' : ''}`,
+                        onClick: () => dispatch({ type: 'TOGGLE_NOTIFY_SHINY' }),
+                        children: state.notifyShiny ? 'Notify Shinies: ON' : 'Notify Shinies: OFF',
+                      }),
+                      jsx('button', {
+                        className: `settings-toggle-btn${state.notifyRare ? ' active' : ''}`,
+                        onClick: () => dispatch({ type: 'TOGGLE_NOTIFY_RARE' }),
+                        children: state.notifyRare
+                          ? 'Notify Raids & Legendaries: ON'
+                          : 'Notify Raids & Legendaries: OFF',
+                      }),
+                      jsx('button', {
+                        className: `settings-toggle-btn${state.notifyEgg ? ' active' : ''}`,
+                        onClick: () => dispatch({ type: 'TOGGLE_NOTIFY_EGG' }),
+                        children: state.notifyEgg ? 'Notify Egg Hatches: ON' : 'Notify Egg Hatches: OFF',
                       }),
                       notifyError
                         ? jsx('p', {
@@ -441,6 +520,11 @@ export function SettingsModal({ onClose }) {
                             : null,
                         ],
                       }),
+                      jsx('button', {
+                        className: 'settings-reset-btn',
+                        onClick: () => setConfirming(!0),
+                        children: 'Reset This Slot',
+                      }),
                     ],
                   }),
                   jsxs('div', {
@@ -457,11 +541,6 @@ export function SettingsModal({ onClose }) {
                       }),
                       jsx(SaveSlotsPanel, {}),
                     ],
-                  }),
-                  jsx('button', {
-                    className: 'settings-reset-btn',
-                    onClick: () => setConfirming(!0),
-                    children: 'Reset This Slot',
                   }),
                 ],
               }),

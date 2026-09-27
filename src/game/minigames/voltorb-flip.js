@@ -59,15 +59,26 @@ export function createVoltorbBoard(level) {
     voltorbCells = new Set()
   while (voltorbCells.size < voltorbs)
     voltorbCells.add(Math.floor(Math.random() * VOLTORB_SIZE * VOLTORB_SIZE))
+  const cells = Array.from({ length: VOLTORB_SIZE * VOLTORB_SIZE }, (_, index) => ({
+    kind: /** @type {VoltorbKind} */ (
+      voltorbCells.has(index) ? 'voltorb' : rollTileKind(level)
+    ),
+    flipped: false,
+    marked: false,
+  }))
+  // A board with no 2s or 3s would be "cleared" before it was played, so make
+  // sure there is always at least one of each (as in the real game).
+  const valueCells = cells.filter((cell) => cell.kind !== 'voltorb')
+  for (const kind of /** @type {VoltorbKind[]} */ (['two', 'three']))
+    if (!valueCells.some((cell) => cell.kind === kind)) {
+      const target =
+        valueCells.find((cell) => cell.kind === 'one') ??
+        valueCells.find((cell) => cell.kind !== kind)
+      if (target) target.kind = kind
+    }
   return {
     level,
-    cells: Array.from({ length: VOLTORB_SIZE * VOLTORB_SIZE }, (_, index) => ({
-      kind: /** @type {VoltorbKind} */ (
-        voltorbCells.has(index) ? 'voltorb' : rollTileKind(level)
-      ),
-      flipped: false,
-      marked: false,
-    })),
+    cells,
   }
 }
 
@@ -93,11 +104,17 @@ export function boardHints(board) {
   return { rows, cols }
 }
 
-/** True once every non-Voltorb tile is face up.
+/** True once every 2 and 3 tile is face up (1s may stay hidden).
  * @param {VoltorbBoard} board
  */
 export function boardCleared(board) {
-  return board.cells.every((cell) => cell.kind === 'voltorb' || cell.flipped)
+  let pointTiles = 0
+  for (const cell of board.cells)
+    if (cell.kind === 'two' || cell.kind === 'three') {
+      pointTiles += 1
+      if (!cell.flipped) return !1
+    }
+  return pointTiles > 0
 }
 
 /** True once a Voltorb has been flipped this board.

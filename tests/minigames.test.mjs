@@ -560,6 +560,9 @@ test('a Voltorb board has the level\u2019s Voltorbs and consistent hints', () =>
       { rows, cols } = boardHints(board)
     assert.equal(board.cells.length, VOLTORB_SIZE * VOLTORB_SIZE)
     assert.equal(voltorbs, voltorbCountForLevel(level))
+    // Every board has at least one 2 and one 3, so the clear rule is reachable.
+    assert.ok(board.cells.some((cell) => cell.kind === 'two'))
+    assert.ok(board.cells.some((cell) => cell.kind === 'three'))
     // The hint sums are the values of the non-Voltorb tiles, and the row and
     // column totals therefore agree.
     const rowSum = rows.reduce((sum, hint) => sum + hint.sum, 0),
@@ -587,6 +590,29 @@ test('flipping clears a board, and a Voltorb ends it', () => {
   const boom = flipVoltorbCell(board, explodedIndex)
   assert.ok(boardExploded(boom), 'flipping a Voltorb explodes')
   assert.ok(!boardCleared(boom))
+})
+
+test('a level clears once every 2 and 3 is found, even with 1s hidden', () => {
+  // A deterministic board: two point tiles, one 1 and the rest Voltorbs.
+  /** @param {string} kind */
+  const makeCell = (kind) => ({ kind, flipped: false, marked: false })
+  const cells = Array.from({ length: VOLTORB_SIZE * VOLTORB_SIZE }, (_, index) =>
+      makeCell(index === 0 ? 'two' : index === 1 ? 'three' : index === 2 ? 'one' : 'voltorb')
+    ),
+    board = { level: 1, cells }
+
+  // Leaving even one 2 or 3 face down keeps the level open.
+  const partial = flipVoltorbCell(board, 0)
+  assert.ok(!boardCleared(partial), 'an unfound 2 or 3 keeps the level open')
+
+  let cleared = flipVoltorbCell(partial, 1)
+  assert.ok(boardCleared(cleared), 'finding every 2 and 3 clears the level')
+  assert.equal(cleared.cells[2].flipped, false, 'the 1 can stay face down')
+  assert.ok(voltorbBoardCoins(cleared) > 0, 'a cleared board banks coins')
+
+  // A board with no point tiles is never "clear" (the generator prevents it).
+  const noPoints = { level: 1, cells: cells.map((cell) => makeCell(cell.kind === 'two' || cell.kind === 'three' ? 'one' : cell.kind)) }
+  assert.ok(!boardCleared(noPoints))
 })
 
 test('tiles can be marked and unmarked while hidden', () => {

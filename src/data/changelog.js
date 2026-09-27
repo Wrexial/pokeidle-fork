@@ -60,6 +60,7 @@ export const CHANGELOG = [
             'Switching or deleting a save slot no longer overwrites the slot you picked: the autosave pauses while a slot is being loaded, deleted or imported, so the running session cannot clobber it before the reload',
             'Elite Four and Champion battles no longer flash the next Pokemon on screen before its trainer walks in \u2014 the incoming Pokemon stays hidden until the trainer actually sends it out',
             'Pokemon found through route activities (fishing, foraging, Rock Smash, Headbutt, Diving) now carry the same type-appropriate items as ordinary wild Pokemon \u2014 a berry or a booster of one of their own types \u2014 instead of a random shop item like a Choice Band or a mismatched type booster',
+            'Voltorb Flip clears a level as soon as every 2 and 3 has been found, so the 1s can be left face down as the rules say (previously it demanded every non-Voltorb tile, so a solved board could refuse to clear). Every board is also guaranteed at least one 2 and one 3, and the board now explains what the two hint numbers mean',
           ],
         },
         {

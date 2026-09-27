@@ -222,7 +222,7 @@ export function VoltorbFlipScene() {
                 ? 'The run is over \u2014 every Voltorb is revealed. Collect your coins.'
                 : phase === 'cleared'
                   ? `Level ${board.level} cleared! $${voltorbBoardCoins(board).toLocaleString()} banked.`
-                  : 'Left-click a tile to flip it, right-click to mark a suspected Voltorb.',
+                  : '\u26a1 = Voltorbs in the line, the other number = its point total. Left-click to flip, right-click to mark a suspected Voltorb.',
           }),
         ],
       }),

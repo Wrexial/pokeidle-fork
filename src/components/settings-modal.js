@@ -283,6 +283,23 @@ export function SettingsModal({ onClose }) {
                             ? 'Battle Style: Switch'
                             : 'Battle Style: Set',
                       }),
+                      jsx('button', {
+                        className: `settings-toggle-btn${state.battleMode === 'manual' ? ' active' : ''}`,
+                        onClick: () =>
+                          dispatch({
+                            type: 'SET_BATTLE_MODE',
+                            payload: { mode: state.battleMode === 'manual' ? 'auto' : 'manual' },
+                          }),
+                        children:
+                          state.battleMode === 'manual'
+                            ? 'Battle Mode: Manual'
+                            : 'Battle Mode: Auto',
+                      }),
+                      jsx('p', {
+                        className: 'settings-hint',
+                        children:
+                          'Manual mode lets you pick each move and switch Pokemon yourself (use the AUTO/MANUAL button on the battle screen to swap at any time). A battle left alone falls back to auto after a minute.',
+                      }),
                     ],
                   }),
                   jsxs('div', {

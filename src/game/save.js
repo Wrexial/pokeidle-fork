@@ -571,6 +571,7 @@ export function repairSave(saved) {
     victoryTokens: saved.victoryTokens ?? 0,
     autoProceed: saved.autoProceed ?? false,
     battleStyle: saved.battleStyle === 'set' ? 'set' : 'switch',
+    battleMode: saved.battleMode === 'manual' ? 'manual' : 'auto',
     browserNotifications: !!saved.browserNotifications,
     notifyShiny: saved.notifyShiny !== !1,
     notifyRare: saved.notifyRare !== !1,

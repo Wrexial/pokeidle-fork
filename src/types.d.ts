@@ -415,6 +415,8 @@ type GameState = {
   paused: boolean
   /** Set never auto-switches; Switch lets the auto-battler pick a better matchup. */
   battleStyle: 'set' | 'switch'
+  /** Auto battles run by themselves; manual waits for the player to choose. */
+  battleMode: 'auto' | 'manual'
   autoCatch: boolean
   autoProceed: boolean
   /** Raise browser notifications for key events while the tab is hidden. */
@@ -506,6 +508,8 @@ type GameState = {
   battleParticipants?: string[]
   /** The player switched or used an item this turn, so only the foe acts. */
   playerTurnSpent?: boolean
+  /** The move chosen for the next manual turn (null when none). */
+  pendingPlayerMove?: string | null
   alwaysCatchShinies: boolean
   trainerBattle: TrainerBattle | null
   bossBattle: TrainerBattle | null

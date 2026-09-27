@@ -63,6 +63,7 @@ import { SpeedControls } from './speed-controls.js'
 export function BattleScene() {
   const [showInfo, setShowInfo] = React.useState(!1),
     [showSettings, setShowSettings] = React.useState(!1),
+    [showSwitch, setShowSwitch] = React.useState(!1),
     [showDaily, setShowDaily] = React.useState(!1),
     [showQuests, setShowQuests] = React.useState(!1),
     { state, dispatch } = useGame(),
@@ -153,6 +154,21 @@ export function BattleScene() {
         : mapData[state.currentLocation]?.background ||
           locationImages[state.currentRoute] ||
           locationImages.route1
+  // Manual battle mode: the loop waits for the player to pick a move or switch.
+  // Forced turns (recharge / charging / a locked move, or a switch already
+  // made this turn) resolve themselves.
+  const manualMode = state.battleMode === 'manual',
+    forcedAction =
+      !!state.playerVolatile?.mustRecharge ||
+      !!state.playerVolatile?.chargingMove ||
+      !!state.playerVolatile?.lockedMove,
+    awaitingManual =
+      manualMode &&
+      state.phase === 'battling' &&
+      state.pendingEvents.length === 0 &&
+      !state.pendingPlayerMove &&
+      !state.playerTurnSpent &&
+      !forcedAction
   return jsxs('div', {
     className: 'battle-scene',
     children: [
@@ -529,6 +545,43 @@ export function BattleScene() {
           jsxs('div', {
             className: 'bottom-right-panel',
             children: [
+              jsxs('div', {
+                className: 'move-actions',
+                children: [
+                  jsx('button', {
+                    className: `battle-mode-btn${manualMode ? ' active' : ''}`,
+                    onClick: () =>
+                      dispatch({
+                        type: 'SET_BATTLE_MODE',
+                        payload: { mode: manualMode ? 'auto' : 'manual' },
+                      }),
+                    title: manualMode
+                      ? 'Manual mode \u2014 you choose each move'
+                      : 'Auto mode \u2014 the game battles for you',
+                    children: manualMode ? 'MANUAL' : 'AUTO',
+                  }),
+                  manualMode &&
+                    state.phase === 'battling' &&
+                    jsx('button', {
+                      className: 'manual-switch-btn',
+                      disabled: !awaitingManual,
+                      onClick: () => setShowSwitch(!0),
+                      children: 'SWITCH',
+                    }),
+                  manualMode &&
+                    state.phase === 'battling' &&
+                    jsx('span', {
+                      className: `manual-status${awaitingManual ? ' your-turn' : ''}`,
+                      children: state.pendingPlayerMove
+                        ? 'Resolving...'
+                        : forcedAction || state.playerTurnSpent
+                          ? 'Resolving...'
+                          : awaitingManual
+                            ? 'YOUR MOVE'
+                            : 'Waiting...',
+                    }),
+                ],
+              }),
               jsx('div', {
                 className: 'move-grid',
                 children: playerPokemon.moves.map((moveId) => {
@@ -537,7 +590,16 @@ export function BattleScene() {
                     ? jsxs(
                         'div',
                         {
-                          className: `move-cell type-bg-${moveDef.type.toLowerCase()}`,
+                          className: `move-cell type-bg-${moveDef.type.toLowerCase()}${
+                            awaitingManual ? ' selectable' : ''
+                          }${state.pendingPlayerMove === moveId ? ' chosen' : ''}`,
+                          onClick: awaitingManual
+                            ? () =>
+                                dispatch({
+                                  type: 'CHOOSE_PLAYER_MOVE',
+                                  payload: { moveId },
+                                })
+                            : void 0,
                           'data-tooltip': moveTooltip(moveId, moveDef),
                           children: [
                             jsxs('div', {
@@ -609,6 +671,91 @@ export function BattleScene() {
         createPortal(
           jsx(QuestsModal, {
             onClose: () => setShowQuests(!1),
+          }),
+          document.body
+        ),
+      showSwitch &&
+        createPortal(
+          jsx('div', {
+            className: 'battle-info-overlay',
+            onClick: () => setShowSwitch(!1),
+            children: jsxs('div', {
+              className: 'battle-info-modal switch-modal',
+              onClick: /** @param {React.MouseEvent} event */ (event) => event.stopPropagation(),
+              children: [
+                jsxs('div', {
+                  className: 'battle-info-header',
+                  children: [
+                    jsx('span', {
+                      className: 'battle-info-title',
+                      children: 'Switch Pokemon',
+                    }),
+                    jsx('button', {
+                      className: 'battle-info-close',
+                      onClick: () => setShowSwitch(!1),
+                      children: 'X',
+                    }),
+                  ],
+                }),
+                jsxs('div', {
+                  className: 'switch-list',
+                  children: state.party.map((member, index) => {
+                    const spriteSpecies = battleSpecies(member.speciesKey),
+                      disabled = index === state.activePlayerPokemonIndex || member.currentHp <= 0
+                    return jsxs(
+                      'button',
+                      {
+                        className: `switch-option${index === state.activePlayerPokemonIndex ? ' active' : ''}`,
+                        disabled,
+                        onClick: () => {
+                          setShowSwitch(!1)
+                          dispatch({
+                            type: 'SWITCH_PLAYER_POKEMON',
+                            payload: { newPokemonIndex: index, costsTurn: true },
+                          })
+                        },
+                        children: [
+                          jsx('img', {
+                            className: 'switch-option-sprite',
+                            src: getPokemonSpriteUrl(
+                              spriteSpecies.id,
+                              !1,
+                              member.isShiny,
+                              isFemalePokemon(member)
+                            ),
+                            onError: /** @param {{ target: HTMLImageElement }} event */ (event) => (event.target.src = getPokemonSpriteFallbackUrl(
+                              spriteSpecies.id,
+                              !1,
+                              member.isShiny,
+                              isFemalePokemon(member)
+                            )),
+                            alt: member.name,
+                          }),
+                          jsxs('span', {
+                            className: 'switch-option-info',
+                            children: [
+                              jsx('span', {
+                                className: 'switch-option-name',
+                                children: member.name,
+                              }),
+                              jsxs('span', {
+                                className: 'switch-option-meta',
+                                children: [
+                                  `Lv.${member.level}`,
+                                  ' \u00b7 ',
+                                  `${member.currentHp}/${member.maxHp} HP`,
+                                ],
+                              }),
+                            ],
+                          }),
+                        ],
+                      },
+                      member.id
+                    )
+                  }),
+                }),
+              ],
+            }),
           }),
           document.body
         ),

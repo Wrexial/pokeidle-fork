@@ -66,7 +66,32 @@ export function executeTurn(state, action) {
     ...state,
     battleTurn: (state.battleTurn ?? 0) + 1,
     playerTurnSpent: !1,
+    // The manual choice has been spent on this turn.
+    pendingPlayerMove: null,
     pendingEvents: [...state.pendingEvents, ...action.payload.events],
+  }
+}
+
+/**
+ * Handle the `CHOOSE_PLAYER_MOVE` action: store the move the player picked for
+ * the next manual turn. Ignored unless a manual battle is in progress and the
+ * move is actually in the active Pokemon's moveset.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function choosePlayerMove(state, action) {
+  const moveId = action.payload?.moveId
+  if (
+    state.phase !== 'battling' ||
+    state.battleMode !== 'manual' ||
+    !moveId ||
+    !state.playerPokemon?.moves?.includes(moveId)
+  )
+    return state
+  return {
+    ...state,
+    pendingPlayerMove: moveId,
   }
 }
 

@@ -67,6 +67,7 @@ export const CHANGELOG = [
         {
           heading: 'Battles',
           items: [
+            'Manual battle mode: toggle AUTO / MANUAL on the battle screen (or in Settings \u2192 Battles) to pick each move yourself, and use SWITCH to change Pokemon mid-battle. A battle left alone falls back to auto after a minute',
             'Heal Block now works: for five turns the target cannot restore HP from any source \u2014 healing moves, drain moves, Aqua Ring, Ingrain, Wish, Poison Heal, Leftovers, berries and the rest',
             'The leftover stat moves now work: Power Split averages both battlers\u2019 Attack and Sp. Atk, Guard Split averages their Defence and Sp. Def, and Speed Swap trades their raw Speed',
           ],

@@ -33,6 +33,23 @@ export function setBattleStyle(state, action) {
 }
 
 /**
+ * Handle the `SET_BATTLE_MODE` action. Auto (the default) lets the idle loop
+ * resolve turns itself; manual waits for the player to choose a move or switch.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function setBattleMode(state, action) {
+  const mode = action.payload?.mode === 'manual' ? 'manual' : 'auto'
+  return {
+    ...state,
+    battleMode: mode,
+    // Leaving manual mode drops any half-made choice so the loop resumes clean.
+    pendingPlayerMove: mode === 'manual' ? state.pendingPlayerMove : null,
+  }
+}
+
+/**
  * Handle the `TOGGLE_PAUSE` action.
  * @param {GameState} state
  * @param {GameAction} action

@@ -53,8 +53,9 @@ renumbered, so the gaps below are items that shipped.
 13. **#28 More region areas (caves, POIs, DLC land)** — L · ★★★★½ — real
     content; data-heavy. Pairs with #35/#36/#39.
 14. ~~**#4 In-battle Mega evolution**~~ — **shipped (0.19.0).**
-15. **#42 Manual battle mode** — M · ★★★★ — let the player pick moves instead
-    of always auto-battling.
+15. **#42 Manual battle mode** — **(done 0.21.0: an AUTO/MANUAL toggle,
+    hand-picked moves and a mid-battle switch picker; only a faint-replacement
+    picker remains.)**
 16. **#44 Set / Switch toggle** — S · ★★★ — choose whether a faint asks for a
     replacement or keeps the next party member in automatically.
 17. **#45 Move-category icons** — S · ★★ — replace the ✴/◎/☯ glyphs with
@@ -722,29 +723,34 @@ Effort: **small–medium each**, **large as a full set** (one region at a time).
 
 The game is an idle auto-battler: `resolveBattleTurn` (`src/game/combat/turn.js`)
 resolves each turn with the AI (`src/game/combat/ai.js`) and the loop never waits
-for input. There is no way to choose a move.
+for input.
 
-Add a manual mode so the player can actually play a battle, at minimum while it
-is open, without abandoning the idle loop for normal play.
+**Shipped (0.21.0):** a `battleMode` preference (`auto` | `manual`, stored with
+the other settings) adds a **MANUAL** button on the battle screen and a toggle
+in Settings → Battles. In manual mode the idle loop waits for the player each
+turn instead of auto-resolving: the move grid becomes clickable (the chosen move
+is highlighted, with a "YOUR MOVE" prompt), and **SWITCH** opens a party picker
+so a switch can be made by hand (costing the turn, exactly as the auto-switch
+does). Forced turns (recharge, a charging two-turn move, a locked move, or a turn
+already spent) resolve on their own. The choice travels through a new
+`playerMoveChoice` parameter on `resolveBattleTurn`, and auto-switching is
+disabled while manual. The loop ticks at ~50ms during a manual battle so turns
+feel responsive, and a battle left alone for a minute falls back to auto so a
+forgotten fight can't stall the game.
 
-- [ ] Decide the scope: a global auto/manual toggle, or manual only for
-      trainer / gym / Elite Four / Champion / raid battles (where the choices
-      matter) with wild battles staying automatic.
-- [ ] Wire the battle scene to pause the tick while awaiting input and surface
-      the existing move buttons (they are rendered today but read-only).
-- [ ] Handle switching (the move picker needs a switch option) and the
-      faint-replacement prompt (see #44).
-- [ ] Decide what happens if the player never acts (idle timeout back to auto,
-      or a visible prompt), so a forgotten manual battle can't stall the game
-      forever.
-- [ ] Persist the preference in settings (#18), not the save.
+Still open:
 
-Likely touch points: `src/game/use-game-loop.js` (the tick state machine),
-`src/game/combat/turn.js` / `ai.js`, `src/game/reducer/battle.js`,
-`src/components/battle-scene.js`, and `src/data/ui.js` (settings toggles).
+- [ ] A faint-replacement picker (manual mode currently sends the next party
+      member out automatically, as Set does).
+- [ ] Battle animations / damage numbers polish (shared with #25).
 
-Effort: **medium** (the combat engine already exposes per-turn state; the work
-is the interactive phase and the reducer round-trip).
+Relevant code: `src/game/use-game-loop.js` (the manual gate + timeout),
+`src/game/combat/turn.js` (`playerMoveChoice`), `src/components/battle-scene.js`
+(move picker + switch overlay), `src/game/reducer/battle/events.js`
+(`CHOOSE_PLAYER_MOVE`), `src/game/reducer/settings.js` (`SET_BATTLE_MODE`) and
+`src/game/settings.js`.
+
+Effort: **done**.
 
 ## 43. Multi-battles (double / triple / rotation) as a minigame
 

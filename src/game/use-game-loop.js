@@ -3,7 +3,7 @@
 // hooks.js so the cross-cutting UI hooks stay small.
 
 import React from 'react'
-import { trainerClassPayouts, missingnoEncounterChance, mewUnderTruckChance, swarmShinyMultiplier, swarmShinyOddsFloor } from '../data/config.js'
+import { trainerClassPayouts, missingnoEncounterChance, mewUnderTruckChance, swarmShinyMultiplier, swarmShinyOddsFloor, manualInputTimeoutMs } from '../data/config.js'
 import { ballOrder } from '../data/items.js'
 import { completedGenerations, encounterData, mapData, pokemonSpecies, trainerData } from '../data/gameData.js'
 import { megaEvolveReady } from '../data/mega-evolution.js'
@@ -30,6 +30,9 @@ export function useGameLoop() {
     // second batch of EXP). Skipping while this is set serialises the loop with
     // React's commits.
     waitingForCommitRef = React.useRef(false),
+    // When a manual battle first starts waiting for the player, so a forgotten
+    // fight can fall back to auto-battling instead of stalling forever.
+    manualWaitRef = React.useRef(0),
     dispatch = React.useCallback(
       /** @param {GameAction} action */ (action) => {
         waitingForCommitRef.current = true
@@ -41,7 +44,15 @@ export function useGameLoop() {
     ;((phaseRef.current = state.phase), (stateRef.current = state))
     waitingForCommitRef.current = false
   }, [state])
+  // A fresh battle (or leaving one) starts the idle timer over.
+  React.useEffect(() => {
+    manualWaitRef.current = 0
+  }, [state.phase])
   const getTickDelay = React.useCallback(() => {
+      // A manual battle should feel responsive while it waits for the player,
+      // without speeding up idle progress elsewhere.
+      if (stateRef.current.battleMode === 'manual' && stateRef.current.phase === 'battling')
+        return 50
       const speed = stateRef.current.speed
       return speed === 25 ? 40 : speed === 5 ? 200 : speed === 2 ? 500 : 1e3
     }, []),
@@ -433,9 +444,12 @@ export function useGameLoop() {
           // The Champion and the player's auto-battler may switch to a better
           // type matchup before the turn resolves. The player's switching is
           // the Set / Switch battle-style option: Set never switches on its
-          // own, Switch (the default) does.
+          // own, Switch (the default) does. Manual mode never auto-switches —
+          // the player decides.
           const playerSwitch =
-            playerSkipMove || currentGameState.battleStyle === 'set'
+            playerSkipMove ||
+            currentGameState.battleMode === 'manual' ||
+            currentGameState.battleStyle === 'set'
               ? -1
               : chooseBestSwitch(
                   playerBattlePokemon,
@@ -467,6 +481,30 @@ export function useGameLoop() {
           }
           // Rebuild any mid-battle form before the turn resolves.
           ;(applyBattleForm(playerBattlePokemon), applyBattleForm(enemyBattlePokemon))
+          // In manual mode, wait for the player to pick a move. Forced turns
+          // (recharge / charging / locked) and a turn already spent on a
+          // switch resolve on their own.
+          const playerForced =
+            playerBattlePokemon.mustRecharge ||
+            playerBattlePokemon.chargingMove ||
+            playerBattlePokemon.lockedMove
+          if (
+            currentGameState.battleMode === 'manual' &&
+            !playerSkipMove &&
+            !playerForced &&
+            !currentGameState.pendingPlayerMove
+          ) {
+            if (!manualWaitRef.current) manualWaitRef.current = Date.now()
+            if (Date.now() - manualWaitRef.current < manualInputTimeoutMs) return
+            // Forgotten battle: hand it back to the auto-battler.
+            dispatch({ type: 'SET_BATTLE_MODE', payload: { mode: 'auto' } })
+            dispatch({
+              type: 'ADD_LOG',
+              payload: { message: 'No move chosen \u2014 auto-battling resumes.' },
+            })
+            return
+          }
+          manualWaitRef.current = 0
           const turnEvents = resolveBattleTurn(
               playerBattlePokemon,
               enemyBattlePokemon,
@@ -478,7 +516,8 @@ export function useGameLoop() {
               currentGameState.terrain ?? null,
               enemySkill,
               playerSkill,
-              playerSkipMove
+              playerSkipMove,
+              currentGameState.pendingPlayerMove ?? null
             )
           dispatch({
             type: 'EXECUTE_TURN',
@@ -813,7 +852,7 @@ export function useGameLoop() {
         intervalRef.current && clearInterval(intervalRef.current)
       }
     )
-  }, [state.phase, state.speed, state.paused, state.pendingEvents.length, tick, getTickDelay])
+  }, [state.phase, state.speed, state.paused, state.battleMode, state.pendingEvents.length, tick, getTickDelay])
   const unlockedRef = React.useRef(state.unlockedLocations),
     pendingTravelRef = React.useRef(/** @type {string | null} */ (null))
   ;(React.useEffect(() => {

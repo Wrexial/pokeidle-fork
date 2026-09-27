@@ -16,6 +16,7 @@ export const SETTINGS_STORAGE_KEY = 'pokemon-idle-settings'
 export const SETTINGS_KEYS = /** @type {const} */ ([
   'speed',
   'battleStyle',
+  'battleMode',
   'autoCatch',
   'alwaysCatchShinies',
   'globalCatchDefaults',

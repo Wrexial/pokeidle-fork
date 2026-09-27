@@ -7,7 +7,7 @@ import { createCompanionCare } from './companion.js'
 import { createGarden } from './garden.js'
 import { createPelago } from './pelago.js'
 import { DEFAULT_ROD } from './minigames.js'
-import { applyExp, applySharedExp, attemptActivityCatch, bossBattleEnd, completeMasterBall, consumeEvent, debugMaxLevel, endRaid, executeTurn, megaEvolve, startBossBattle, startEncounter, startRaid, startTower, startTrainerBattle, switchPlayerPokemon, throwMasterBall, trainerBattleEnd, trainerSendNextPokemon, updateVolatile, useEffectItem, usePokeball } from './reducer/battle.js'
+import { applyExp, applySharedExp, attemptActivityCatch, bossBattleEnd, choosePlayerMove, completeMasterBall, consumeEvent, debugMaxLevel, endRaid, executeTurn, megaEvolve, startBossBattle, startEncounter, startRaid, startTower, startTrainerBattle, switchPlayerPokemon, throwMasterBall, trainerBattleEnd, trainerSendNextPokemon, updateVolatile, useEffectItem, usePokeball } from './reducer/battle.js'
 import { claimAchievementRewards, claimDailyGift, claimDexRewards, claimQuest, clearOfflineReport, completeDexCelebration, markCaught, markSeen, markShinyCaught, markShinySeen, refreshDailyEvent, refreshQuests, startDexCelebration, updateShinyChain } from './reducer/collection.js'
 import { buyItem, buyRewardItem, clearHeldItem, sellItem, setAlwaysCatchShinies, setCatchRule, toggleAutoCatch, toggleRouteCatchAll, useItemOnPokemon } from './reducer/items.js'
 import { blendBerries, careCompanion, harvestBerry, plantBerry, setCompanion } from './reducer/care.js'
@@ -16,7 +16,7 @@ import { claimGift, startStaticEncounter } from './reducer/gifts.js'
 import { claimMinigameReward, collectMining, endBugContest, endMinigame, endRouteActivity, endSafari, payMinigameFee, startAcademyQuiz, startAuctionHouse, startBattleRoyal, startBugContest, startContest, startCurry, startDynamaxAdventures, startGameCorner, startIceSlide, startLightsOut, startMemory, startMining, startMusical, startPelago, startPicnic, startPokeathlon, startPokeRadar, startPokeballFactory, startPokestar, startPuzzleLeague, startRouteActivity, startRuinsPuzzle, startSafari, startVoltorbFlip, startWhack } from './reducer/minigames.js'
 import { boxToParty, catchPokemon, clearHatchResult, completeEvolution, completeWonderTrade, depositDaycare, evolutionStep, hatchDaycareEgg, partyToBox, releaseDuplicates, releaseFainted, releaseHatchling, releasePokemon, reorderBox, reorderParty, setBoxSort, setMoves, setNickname, startEvolution, swapParty, swapPartyBox, toggleFavourite, withdrawDaycare, wonderTrade } from './reducer/pokemon.js'
 import { completeHealing, heal, healParty, healingStep, nuzlockeGameOver, startHealing } from './reducer/recovery.js'
-import { addLog, clearLevelUp, dismissNotification, markCatchRoute, pushNotification, setBattleStyle, setChallengeMonotype, setSpeed, toggleAutoProceed, toggleBrowserNotifications, toggleChallengeLevelScale, toggleChallengeNuzlocke, toggleChallengeRandomizer, toggleChallengeRestrictCatches, toggleColourblindTypes, toggleLargeText, toggleMartCollapsed, toggleMusic, toggleNotifyEgg, toggleNotifyRare, toggleNotifyShiny, togglePause, toggleReducedMotion, toggleSfx } from './reducer/settings.js'
+import { addLog, clearLevelUp, dismissNotification, markCatchRoute, pushNotification, setBattleMode, setBattleStyle, setChallengeMonotype, setSpeed, toggleAutoProceed, toggleBrowserNotifications, toggleChallengeLevelScale, toggleChallengeNuzlocke, toggleChallengeRandomizer, toggleChallengeRestrictCatches, toggleColourblindTypes, toggleLargeText, toggleMartCollapsed, toggleMusic, toggleNotifyEgg, toggleNotifyRare, toggleNotifyShiny, togglePause, toggleReducedMotion, toggleSfx } from './reducer/settings.js'
 import { loadSave, phaseIdle, prestigeRegion, resetEliteFour, selectStarter, travel, unlockRegion } from './reducer/world.js'
 
 /** @type {GameState} */
@@ -43,6 +43,8 @@ export const initialGameState = {
   paused: !1,
   /** Mainline Set / Switch battle style: Switch lets the auto-battler pick a better matchup, Set never switches on its own. */
   battleStyle: 'switch',
+  /** Auto battles run by themselves; manual waits for the player to pick a move. */
+  battleMode: 'auto',
   battleLog: [],
   levelUpNotification: null,
   /** Transient toast queue (see NotificationStack). */
@@ -171,6 +173,8 @@ export const initialGameState = {
   battleParticipants: [],
   /** The player switched or used an item this turn, so only the foe acts. */
   playerTurnSpent: !1,
+  /** The move the player picked for the next manual turn (null when none). */
+  pendingPlayerMove: null,
 }
 
 /**
@@ -188,6 +192,8 @@ export function gameReducer(state, action) {
       return startEncounter(state, action)
     case 'EXECUTE_TURN':
       return executeTurn(state, action)
+    case 'CHOOSE_PLAYER_MOVE':
+      return choosePlayerMove(state, action)
     case 'CONSUME_EVENT':
       return consumeEvent(state, action)
     case 'APPLY_EXP':
@@ -200,6 +206,8 @@ export function gameReducer(state, action) {
       return setSpeed(state, action)
     case 'SET_BATTLE_STYLE':
       return setBattleStyle(state, action)
+    case 'SET_BATTLE_MODE':
+      return setBattleMode(state, action)
     case 'TOGGLE_PAUSE':
       return togglePause(state, action)
     case 'CLEAR_LEVEL_UP':

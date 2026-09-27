@@ -40,6 +40,8 @@ export const pokerusDurationBattles = 150
 /** Offline progress: minimum time away to award anything, and the cap. */
 export const offlineMinMs = 60_000
 export const offlineCapMs = 8 * 3_600_000
+/** How long a manual battle waits for the player before falling back to auto. */
+export const manualInputTimeoutMs = 60_000
 /** Money granted per hour away per level of your highest party Pokemon. */
 export const offlineMoneyPerHourPerLevel = 40
 

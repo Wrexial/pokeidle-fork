@@ -164,9 +164,11 @@ function applyMoveLock(pokemon, moveId) {
  * @param {string | null} [playerSkill] AI skill for the player's auto-battler.
  * @param {boolean} [playerSkipMove] The player switched or used an item this
  *   turn, so their Pokemon does not attack — only the foe acts.
+ * @param {string | null} [playerMoveChoice] The move the player picked in a
+ *   manual battle. Forced moves (recharge / charging / locked) still win.
  * @returns {any[]}
  */
-export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn = !1, weather = null, hazards = null, deterministic = !1, terrain = null, enemySkill = null, playerSkill = null, playerSkipMove = !1) {
+export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn = !1, weather = null, hazards = null, deterministic = !1, terrain = null, enemySkill = null, playerSkill = null, playerSkipMove = !1, playerMoveChoice = null) {
   const events = /** @type {any[]} */ ([])
   let activeWeather = weather ?? null,
     activeTerrain = terrain ?? null,
@@ -252,7 +254,11 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
   } else if (playerMustRecharge) ((playerMoveId = player.moves[0]), (playerMove = moveData[playerMoveId]))
   else if (player.chargingMove) ((playerMoveId = player.chargingMove), (playerMove = moveData[playerMoveId]))
   else if (player.lockedMove) ((playerMoveId = player.lockedMove), (playerMove = moveData[playerMoveId]))
-  else {
+  else if (playerMoveChoice && player.moves.includes(playerMoveChoice)) {
+    // The player picked this move by hand; Encore / Disable still apply.
+    const lockedMove = applyMoveLock(player, playerMoveChoice)
+    ;((playerMoveId = resolveCalledMove(lockedMove, enemy, activeTerrain)), (playerMove = moveData[playerMoveId]))
+  } else {
     const bestMove = chooseMoveForBattle(player, enemy, activeHazards, playerAiSkill),
       lockedMove = applyMoveLock(player, bestMove.moveId)
     ;((playerMoveId = resolveCalledMove(lockedMove, enemy, activeTerrain)), (playerMove = moveData[playerMoveId]))

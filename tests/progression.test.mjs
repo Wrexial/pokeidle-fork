@@ -194,6 +194,59 @@ test('Exp. Share gives the active 50% and each other member 25%', () => {
   )
 })
 
+test('a fainted participant earns no EXP and does not dilute the survivors', () => {
+  const fainted = { ...createPokemon('charmander', 50, 'a'), currentHp: 0 },
+    active = createPokemon('pidgey', 10, 'b'),
+    enemy = { speciesKey: 'rattata', level: 20 },
+    expected = calculateExpYield(pokemonSpecies.rattata, 20)
+  const actions = []
+  awardExperience(
+    (action) => actions.push(action),
+    active,
+    enemy,
+    1,
+    false,
+    [fainted, active],
+    1,
+    1,
+    [fainted.id, active.id]
+  )
+  assert.equal(
+    actions.find((action) => action.type === 'APPLY_EXP').payload.expGained,
+    expected,
+    'the survivor takes the whole share, not a split with the fainted Pokemon'
+  )
+  assert.ok(
+    !actions.some(
+      (action) =>
+        action.type === 'APPLY_SHARED_EXP' &&
+        action.payload.partyExp.some((entry) => entry.pokemonId === fainted.id)
+    ),
+    'the fainted participant gets no shared EXP entry'
+  )
+})
+
+test('a double knockout awards no EXP to the fainted active Pokemon', () => {
+  const active = { ...createPokemon('charmander', 50, 'a'), currentHp: 0 },
+    enemy = { speciesKey: 'rattata', level: 20 }
+  const actions = []
+  awardExperience(
+    (action) => actions.push(action),
+    active,
+    enemy,
+    1,
+    false,
+    [active],
+    0,
+    1,
+    [active.id]
+  )
+  assert.ok(
+    !actions.some((action) => action.type === 'APPLY_EXP'),
+    'no EXP is applied to a Pokemon that fainted to win'
+  )
+})
+
 test('checkShinyOdds hits on a zero roll and misses otherwise', () => {
   const originalRandom = Math.random
   try {

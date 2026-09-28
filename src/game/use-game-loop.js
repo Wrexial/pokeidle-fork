@@ -548,9 +548,10 @@ export function useGameLoop() {
           if (currentGameState.playerPokemon.currentHp <= 0) {
             // A double knockout (Explosion, recoil or residual felled the user
             // after the foe): the encounter is already won, so release the
-            // fainted Pokemon under Nuzlocke and award its EXP once, then move
-            // on. Sending a replacement out here would run the victory handler
-            // again against the fainted foe and pay the EXP twice.
+            // fainted Pokemon under Nuzlocke and award the surviving
+            // participants' EXP once, then move on. Sending a replacement out
+            // here would run the victory handler again against the fainted foe
+            // and pay the EXP twice.
             const switchIndex = currentGameState.party.findIndex(
                 (member, index) =>
                   index !== currentGameState.activePlayerPokemonIndex &&

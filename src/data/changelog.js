@@ -63,6 +63,7 @@ export const CHANGELOG = [
             'Voltorb Flip clears a level as soon as every 2 and 3 has been found, so the 1s can be left face down as the rules say (previously it demanded every non-Voltorb tile, so a solved board could refuse to clear). Every board is also guaranteed at least one 2 and one 3, and the board now explains what the two hint numbers mean',
             'Recoil moves (Double-Edge, Brave Bird, Flare Blitz, ...) now only hurt the user in proportion to the damage actually dealt: finishing off a nearly-fainted Pokemon no longer costs a huge chunk of HP from the overkill. Drain moves (Giga Drain, Drain Punch, ...) and Liquid Ooze scale the same way, and the damage number shown is the real damage dealt',
             'Explosion, Self-Destruct, Misty Explosion and Memento now really faint the user in the party \u2014 the self-KO was only applied to the battle copy, so the Pokemon came back at full HP afterwards (and a double knockout no longer pays the battle EXP twice)',
+            'A Pokemon that fainted no longer earns EXP from the battle it went down in, and no longer dilutes the share of the Pokemon still standing: a mid-battle faint used to leave it collecting a partial share of the winner\u2019s reward',
             'Manual battle text plays at the normal speed again instead of flashing past: the player\u2019s picked move now resolves the turn immediately through a dedicated tick, rather than speeding up the whole loop (which had also rushed every event and battle line)',
           ],
         },

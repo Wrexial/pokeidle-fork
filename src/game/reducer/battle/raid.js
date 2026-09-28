@@ -18,7 +18,15 @@ export function startRaid(state, action) {
     })),
     playerPokemon = healedParty[0] || state.playerPokemon,
     raidLevel = action.payload.level ?? 60,
-    raidLocation = action.payload.location ?? 'raidIsland'
+    raidLocation = action.payload.location ?? 'raidIsland',
+    // Jumping straight from one Raid Island to another must keep the original
+    // pre-raid location. If we recorded the current (raid) location here, then
+    // finishing the second raid would drop the player back onto the first
+    // island, whose wild table is the raid pool (random legendary spawns).
+    preRaidLocation =
+      mapData[state.currentLocation]?.type === 'raid'
+        ? state.preRaidLocation ?? state.currentLocation
+        : state.currentLocation
   return withNotification(
     {
       ...prepareNextBattle(state),
@@ -27,7 +35,7 @@ export function startRaid(state, action) {
       raidRegion: action.payload.region ?? 'kanto',
       inRaid: !0,
       raidLevel,
-      preRaidLocation: state.currentLocation,
+      preRaidLocation,
       currentLocation: raidLocation,
       currentRoute: raidLocation,
       party: healedParty,
@@ -49,19 +57,20 @@ export function startRaid(state, action) {
 }
 
 /**
- * Handle the `END_RAID` action.
+ * Handle the `END_RAID` action. Ends the legendary battle but leaves the player
+ * standing on the Raid Island (`inRaid: false`), so its ordinary wild table is
+ * reachable by idling there. `preRaidLocation` / `raidRegion` are kept so the
+ * raid panel's Leave button and a party wipe still return the player home.
  * @param {GameState} state
  * @param {GameAction} action
  * @returns {GameState}
  */
 export function endRaid(state, action) {
   return {
-    ...state,
+    ...prepareNextBattle(state),
     inRaid: !1,
     raidLegendary: null,
-    raidRegion: null,
     raidLevel: 0,
-    preRaidLocation: null,
   }
 }
 

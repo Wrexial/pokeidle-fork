@@ -5,10 +5,24 @@ import { installGameData } from './helpers/game-data.mjs'
 
 installGameData()
 
-const { pokemonSpecies, regions, raidLegendaryPoolFor, raidPoolFor } = await import(
+const { encounterData, pokemonSpecies, regions, raidLegendaryPoolFor, raidPoolFor } = await import(
   '../src/data/gameData.js'
 )
 const { pickRaidLegendary, resolveRoamer } = await import('../src/game/progression.js')
+const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
+
+/** @param {Record<string, any>} [overrides] */
+function baseState(overrides = {}) {
+  return {
+    ...initialGameState,
+    startRegion: 'kanto',
+    unlockedRegions: ['kanto'],
+    unlockedLocations: ['palletTown', 'route1'],
+    currentLocation: 'palletTown',
+    currentRoute: 'route1',
+    ...overrides,
+  }
+}
 
 test('each region splits its Raid Island into a legendary and an ordinary tier', () => {
   for (const region of regions) {
@@ -73,4 +87,63 @@ test('Monotype roamers stay on-type and off-type ones never appear', () => {
   } finally {
     Math.random = originalRandom
   }
+})
+
+test('starting a raid from a Raid Island keeps the original pre-raid location', () => {
+  const first = gameReducer(baseState(), {
+    type: 'START_RAID',
+    payload: { legendary: 'articuno', level: 70, region: 'kanto', location: 'raidIsland' },
+  })
+  assert.equal(first.currentLocation, 'raidIsland')
+  assert.equal(first.preRaidLocation, 'palletTown')
+
+  // Jump straight to a second raid while still on the first island.
+  const second = gameReducer(first, {
+    type: 'START_RAID',
+    payload: { legendary: 'zapdos', level: 70, region: 'johto', location: 'johto-raid' },
+  })
+  assert.equal(second.currentLocation, 'johto-raid')
+  assert.equal(second.raidLegendary, 'zapdos')
+  assert.equal(
+    second.preRaidLocation,
+    'palletTown',
+    'the original pre-raid location is preserved, not the first island'
+  )
+})
+
+test('leaving a raid returns to the pre-raid location and clears the raid state', () => {
+  const started = gameReducer(baseState(), {
+    type: 'START_RAID',
+    payload: { legendary: 'articuno', level: 70, region: 'kanto', location: 'raidIsland' },
+  })
+  const left = gameReducer(started, {
+    type: 'TRAVEL',
+    payload: { locationId: started.preRaidLocation },
+  })
+  assert.equal(left.currentLocation, 'palletTown')
+  assert.equal(left.inRaid, false)
+  assert.equal(left.raidLegendary, null)
+  assert.equal(left.raidRegion, null)
+  assert.equal(left.preRaidLocation, null)
+})
+
+test('ending a raid keeps the player on the island so its wild pool is reachable', () => {
+  const started = gameReducer(baseState(), {
+    type: 'START_RAID',
+    payload: { legendary: 'articuno', level: 70, region: 'kanto', location: 'raidIsland' },
+  })
+  const exploring = gameReducer(started, { type: 'END_RAID' })
+  assert.equal(exploring.inRaid, false)
+  assert.equal(exploring.raidLegendary, null)
+  assert.equal(exploring.currentLocation, 'raidIsland', 'stays on the island')
+  assert.equal(exploring.preRaidLocation, 'palletTown', 'the way home is kept')
+  // The island's encounter bucket feeds the wild spawns while exploring.
+  assert.ok(encounterData[exploring.currentRoute]?.encounters.length > 0)
+  // And the player can still leave from there.
+  const left = gameReducer(exploring, {
+    type: 'TRAVEL',
+    payload: { locationId: exploring.preRaidLocation },
+  })
+  assert.equal(left.currentLocation, 'palletTown')
+  assert.equal(left.inRaid, false)
 })

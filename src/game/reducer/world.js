@@ -145,6 +145,7 @@ export function travel(state, action) {
     battleLog: [...state.battleLog, `Traveled to ${location.name}!`].slice(-50),
     inRaid: !1,
     raidLegendary: null,
+    raidRegion: null,
     raidLevel: 0,
     preRaidLocation: null,
   }

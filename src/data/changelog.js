@@ -30,7 +30,6 @@ export const CHANGELOG = [
             'On 21:9 and wider screens the party and box now stack vertically instead of splitting into two side-by-side columns',
             'Empty Box slots now show a recessed placeholder shadow, so it is obvious which slots are free',
             'The Town Map now marks service stops: the Day-Care on each region’s breeding route shows an egg badge (with a tooltip and a Services tag in the location panel), so you can find it without guessing the route',
-            'Raid Islands can be explored: the raid panel has an Explore Island button that ends the legendary battle but leaves you on the island, where you can catch the ordinary Pokemon that have no route source (previously the island’s wild table was unreachable)',
             'The Grand Auction House is now the main source of battle held items: marts no longer sell type boosters or competitive items, and the auction’s lots are held-item bundles (Choice items, Leftovers, Life Orb, Eviolite, boosters, Mega Stones). You also pick how hard to raise (\u00d71/\u00d72/\u00d74) \u2014 a bigger jump can win the lot before a rival answers, but costs more \u2014 and the rivals\u2019 reactions are shown as they drop out',
             'Pokemon Musical can be played with the keyboard: the arrow keys hit the matching lane (left/down/up/right)',
             'Snowpoint Temple now opens with a Strength chamber: push the boulder onto the pressure plate to unseal the exit before the ice rooms',

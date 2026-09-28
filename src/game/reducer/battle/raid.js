@@ -57,20 +57,19 @@ export function startRaid(state, action) {
 }
 
 /**
- * Handle the `END_RAID` action. Ends the legendary battle but leaves the player
- * standing on the Raid Island (`inRaid: false`), so its ordinary wild table is
- * reachable by idling there. `preRaidLocation` / `raidRegion` are kept so the
- * raid panel's Leave button and a party wipe still return the player home.
+ * Handle the `END_RAID` action.
  * @param {GameState} state
  * @param {GameAction} action
  * @returns {GameState}
  */
 export function endRaid(state, action) {
   return {
-    ...prepareNextBattle(state),
+    ...state,
     inRaid: !1,
     raidLegendary: null,
+    raidRegion: null,
     raidLevel: 0,
+    preRaidLocation: null,
   }
 }
 

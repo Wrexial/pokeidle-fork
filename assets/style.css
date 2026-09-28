@@ -3758,29 +3758,6 @@ img {
     text-transform: capitalize
 }
 
-.raid-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    align-items: center
-}
-
-.raid-explore-btn {
-    margin-top: 8px;
-    padding: 6px 16px;
-    background: linear-gradient(180deg,#3f8a4a,#2c6b36);
-    color: #eaf7d8;
-    border: 2px solid #c8a860;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: 700;
-    font-size: 12px
-}
-
-.raid-explore-btn:hover {
-    background: linear-gradient(180deg,#4aa356,#3f8a4a)
-}
-
 .raid-leave-btn {
     margin-top: 8px;
     padding: 6px 16px;

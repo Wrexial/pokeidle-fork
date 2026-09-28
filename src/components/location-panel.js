@@ -452,30 +452,16 @@ export function LocationPanel({ onOpenCatchSettings }) {
             onOpenCatchSettings: onOpenCatchSettings ?? (() => {}),
             forceRarity: 'very_rare',
           }),
-          jsxs('div', {
-            className: 'raid-actions',
-            children: [
-              // End the legendary battle but stay on the island, so its
-              // ordinary wild table (the Pokemon with no route source) can be
-              // caught by idling here.
-              state.inRaid &&
-                jsx('button', {
-                  className: 'raid-explore-btn',
-                  onClick: () => dispatch({ type: 'END_RAID' }),
-                  children: 'Explore Island',
-                }),
-              jsx('button', {
-                className: 'raid-leave-btn',
-                onClick: () =>
-                  dispatch({
-                    type: 'TRAVEL',
-                    payload: {
-                      locationId: state.preRaidLocation || 'palletTown',
-                    },
-                  }),
-                children: 'Leave Raid',
+          jsx('button', {
+            className: 'raid-leave-btn',
+            onClick: () =>
+              dispatch({
+                type: 'TRAVEL',
+                payload: {
+                  locationId: state.preRaidLocation || 'palletTown',
+                },
               }),
-            ],
+            children: 'Leave Raid',
           }),
         ],
       }),

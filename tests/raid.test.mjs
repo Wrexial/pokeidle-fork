@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 installGameData()
 
-const { encounterData, pokemonSpecies, regions, raidLegendaryPoolFor, raidPoolFor } = await import(
+const { pokemonSpecies, regions, raidLegendaryPoolFor, raidPoolFor } = await import(
   '../src/data/gameData.js'
 )
 const { pickRaidLegendary, resolveRoamer } = await import('../src/game/progression.js')
@@ -125,25 +125,4 @@ test('leaving a raid returns to the pre-raid location and clears the raid state'
   assert.equal(left.raidLegendary, null)
   assert.equal(left.raidRegion, null)
   assert.equal(left.preRaidLocation, null)
-})
-
-test('ending a raid keeps the player on the island so its wild pool is reachable', () => {
-  const started = gameReducer(baseState(), {
-    type: 'START_RAID',
-    payload: { legendary: 'articuno', level: 70, region: 'kanto', location: 'raidIsland' },
-  })
-  const exploring = gameReducer(started, { type: 'END_RAID' })
-  assert.equal(exploring.inRaid, false)
-  assert.equal(exploring.raidLegendary, null)
-  assert.equal(exploring.currentLocation, 'raidIsland', 'stays on the island')
-  assert.equal(exploring.preRaidLocation, 'palletTown', 'the way home is kept')
-  // The island's encounter bucket feeds the wild spawns while exploring.
-  assert.ok(encounterData[exploring.currentRoute]?.encounters.length > 0)
-  // And the player can still leave from there.
-  const left = gameReducer(exploring, {
-    type: 'TRAVEL',
-    payload: { locationId: exploring.preRaidLocation },
-  })
-  assert.equal(left.currentLocation, 'palletTown')
-  assert.equal(left.inRaid, false)
 })

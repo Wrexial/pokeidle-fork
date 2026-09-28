@@ -12290,14 +12290,19 @@ img {
     box-shadow: 0 0 10px #ffd24a
 }
 
+.musical-arrow {
+    display: block;
+    fill: currentColor
+}
+
 .musical-note {
     position: absolute;
     left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 20px;
-    font-weight: 700;
+    width: 22px;
+    height: 22px;
     color: #fff;
-    text-shadow: 0 0 8px #6ac4ff
+    transform: translate(-50%, -50%);
+    filter: drop-shadow(0 0 6px #6ac4ff)
 }
 
 .musical-buttons {
@@ -12322,6 +12327,12 @@ img {
 
 .musical-btn:active {
     transform: scale(.96)
+}
+
+.musical-btn .musical-arrow {
+    width: 20px;
+    height: 20px;
+    margin: 0 auto
 }
 
 .musical-btn.hit {

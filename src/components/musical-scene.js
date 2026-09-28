@@ -7,7 +7,6 @@ import { jsx, jsxs } from 'react/jsx-runtime'
 import { useGame } from '../game/context.js'
 import { playSfx } from '../game/audio.js'
 import {
-  MUSICAL_ARROWS,
   MUSICAL_LANES,
   MUSICAL_OK_MS,
   MUSICAL_VIEW_MS,
@@ -28,6 +27,29 @@ const MUSICAL_GRADE_LABELS = {
 
 /** Weight each grade contributes to the accuracy readout. @type {Record<string, number>} */
 const MUSICAL_GRADE_WEIGHT = { perfect: 100, good: 66, ok: 33, miss: 0 }
+
+/** Degrees to rotate the base up-arrow so it points the lane's direction. @type {Record<string, number>} */
+const MUSICAL_ARROW_ROTATION = { up: 0, right: 90, down: 180, left: 270 }
+
+/**
+ * A lane's arrow, drawn as an inline SVG from a single path and rotated per
+ * lane. Unicode arrows can't be used: the pixel font only ships some of them,
+ * so the missing ones fall back to another font at a different size.
+ * @param {{ lane: string, className?: string, style?: object }} props
+ */
+function MusicalArrow({ lane, className = '', style }) {
+  return jsx('svg', {
+    className: `musical-arrow${className ? ` ${className}` : ''}`,
+    viewBox: '0 0 16 16',
+    style,
+    'aria-hidden': true,
+    focusable: false,
+    children: jsx('path', {
+      d: 'M8 0.8 L15.2 8 L10.6 8 L10.6 15.2 L5.4 15.2 L5.4 8 L0.8 8 Z',
+      transform: `rotate(${MUSICAL_ARROW_ROTATION[lane] ?? 0} 8 8)`,
+    }),
+  })
+}
 
 export function MusicalScene() {
   const { state, dispatch } = useGame(),
@@ -243,11 +265,11 @@ export function MusicalScene() {
                                 Math.min(1.06, 1 - remaining / MUSICAL_VIEW_MS)
                               )
                               return jsx(
-                                'span',
+                                MusicalArrow,
                                 {
+                                  lane: laneName,
                                   className: 'musical-note',
                                   style: { top: `${top * 100}%` },
-                                  children: MUSICAL_ARROWS[laneName],
                                 },
                                 note.id
                               )
@@ -270,7 +292,7 @@ export function MusicalScene() {
                         onPointerDown: () => hit(lane),
                         disabled: !!prize,
                         'aria-label': `Tap ${laneName}`,
-                        children: MUSICAL_ARROWS[laneName],
+                        children: jsx(MusicalArrow, { lane: laneName }),
                       },
                       laneName
                     )

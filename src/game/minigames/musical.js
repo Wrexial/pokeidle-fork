@@ -5,11 +5,8 @@
 /** Money spent to take the stage. */
 export const MUSICAL_COST = 300
 
-/** The four lanes, clockwise from the top. */
-export const MUSICAL_LANES = ['up', 'right', 'down', 'left']
-
-/** Arrow drawn on each lane. @type {Record<string, string>} */
-export const MUSICAL_ARROWS = { up: '\u2191', right: '\u2192', down: '\u2193', left: '\u2190' }
+/** The four lanes, in StepMania dance-pad order (left, down, up, right). */
+export const MUSICAL_LANES = ['left', 'down', 'up', 'right']
 
 /** Notes in a routine. */
 export const MUSICAL_NOTES = 24

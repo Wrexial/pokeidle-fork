@@ -166,9 +166,11 @@ function applyMoveLock(pokemon, moveId) {
  *   turn, so their Pokemon does not attack — only the foe acts.
  * @param {string | null} [playerMoveChoice] The move the player picked in a
  *   manual battle. Forced moves (recharge / charging / locked) still win.
+ * @param {boolean} [enemySkipMove] The foe spent its turn switching Pokemon,
+ *   so only the player acts.
  * @returns {any[]}
  */
-export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn = !1, weather = null, hazards = null, deterministic = !1, terrain = null, enemySkill = null, playerSkill = null, playerSkipMove = !1, playerMoveChoice = null) {
+export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn = !1, weather = null, hazards = null, deterministic = !1, terrain = null, enemySkill = null, playerSkill = null, playerSkipMove = !1, playerMoveChoice = null, enemySkipMove = !1) {
   const events = /** @type {any[]} */ ([])
   let activeWeather = weather ?? null,
     activeTerrain = terrain ?? null,
@@ -280,72 +282,82 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     attackOrder = [],
     playerPriority = playerMustRecharge ? -10 : effectivePriority(player, playerMove),
     enemyPriority = enemyMustRecharge ? -10 : effectivePriority(enemy, enemyMove)
-  playerSkipMove
-    ? attackOrder.push({
+  if (playerSkipMove && enemySkipMove) {
+    // Both sides spent the turn switching or using an item.
+  } else if (playerSkipMove)
+    attackOrder.push({
+      attacker: enemy,
+      defender: player,
+      moveId: enemyMoveId,
+      isPlayer: !1,
+    })
+  else if (enemySkipMove)
+    attackOrder.push({
+      attacker: player,
+      defender: enemy,
+      moveId: playerMoveId,
+      isPlayer: !0,
+    })
+  else if (playerPriority > enemyPriority)
+    attackOrder.push(
+      {
+        attacker: player,
+        defender: enemy,
+        moveId: playerMoveId,
+        isPlayer: !0,
+      },
+      {
         attacker: enemy,
         defender: player,
         moveId: enemyMoveId,
         isPlayer: !1,
-      })
-    : playerPriority > enemyPriority
-    ? attackOrder.push(
-        {
-          attacker: player,
-          defender: enemy,
-          moveId: playerMoveId,
-          isPlayer: !0,
-        },
-        {
-          attacker: enemy,
-          defender: player,
-          moveId: enemyMoveId,
-          isPlayer: !1,
-        }
-      )
-    : enemyPriority > playerPriority
-      ? attackOrder.push(
-          {
-            attacker: enemy,
-            defender: player,
-            moveId: enemyMoveId,
-            isPlayer: !1,
-          },
-          {
-            attacker: player,
-            defender: enemy,
-            moveId: playerMoveId,
-            isPlayer: !0,
-          }
-        )
-      : playerActsFirst
-        ? attackOrder.push(
-            {
-              attacker: player,
-              defender: enemy,
-              moveId: playerMoveId,
-              isPlayer: !0,
-            },
-            {
-              attacker: enemy,
-              defender: player,
-              moveId: enemyMoveId,
-              isPlayer: !1,
-            }
-          )
-        : attackOrder.push(
-            {
-              attacker: enemy,
-              defender: player,
-              moveId: enemyMoveId,
-              isPlayer: !1,
-            },
-            {
-              attacker: player,
-              defender: enemy,
-              moveId: playerMoveId,
-              isPlayer: !0,
-            }
-          )
+      }
+    )
+  else if (enemyPriority > playerPriority)
+    attackOrder.push(
+      {
+        attacker: enemy,
+        defender: player,
+        moveId: enemyMoveId,
+        isPlayer: !1,
+      },
+      {
+        attacker: player,
+        defender: enemy,
+        moveId: playerMoveId,
+        isPlayer: !0,
+      }
+    )
+  else if (playerActsFirst)
+    attackOrder.push(
+      {
+        attacker: player,
+        defender: enemy,
+        moveId: playerMoveId,
+        isPlayer: !0,
+      },
+      {
+        attacker: enemy,
+        defender: player,
+        moveId: enemyMoveId,
+        isPlayer: !1,
+      }
+    )
+  else
+    attackOrder.push(
+      {
+        attacker: enemy,
+        defender: player,
+        moveId: enemyMoveId,
+        isPlayer: !1,
+      },
+      {
+        attacker: player,
+        defender: enemy,
+        moveId: playerMoveId,
+        isPlayer: !0,
+      }
+    )
   for (const attack of attackOrder) {
     if (attack.attacker.currentHp <= 0) continue
     if (attack.isPlayer ? playerMustRecharge : enemyMustRecharge) {

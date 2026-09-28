@@ -44,6 +44,7 @@ export function startTrainerBattle(state, action) {
       ? [state.party[0]?.id ?? state.playerPokemon?.id]
       : [],
     playerTurnSpent: !1,
+    enemyTurnSpent: !1,
     trainerBattle: {
       trainerId,
       trainerName,
@@ -138,7 +139,7 @@ export function switchPlayerPokemon(state, action) {
  * @returns {GameState}
  */
 export function trainerSendNextPokemon(state, action) {
-  const { newPokemonIndex: newIndex } = action.payload,
+  const { newPokemonIndex: newIndex, championSwap } = action.payload,
     battle = state.bossBattle ?? state.trainerBattle
   if (!battle) return state
   const nextPokemon = battle.trainerTeam[newIndex]
@@ -154,6 +155,10 @@ export function trainerSendNextPokemon(state, action) {
     ...battle,
     trainerTeam: team,
     currentTrainerPokemonIndex: newIndex,
+    // The Champion gets a limited number of tactical switches per battle.
+    ...(championSwap
+      ? { championSwapsRemaining: Math.max(0, (battle.championSwapsRemaining ?? 0) - 1) }
+      : {}),
   }
   const enemyEntry = applyEntryHazards(state.battleHazards?.enemy, nextPokemon),
     switchedInEnemy =
@@ -173,6 +178,8 @@ export function trainerSendNextPokemon(state, action) {
     phase: 'battling',
     enemyPokemon: switchedInEnemy,
     battleEvents: [],
+    // A Champion swap costs its turn: the incoming Pokemon cannot attack.
+    ...(championSwap ? { enemyTurnSpent: !0 } : {}),
     trainerBattle: state.trainerBattle ? updatedBattle : null,
     bossBattle: state.bossBattle ? updatedBattle : null,
     pendingEvents: [

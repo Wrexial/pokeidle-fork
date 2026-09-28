@@ -78,6 +78,7 @@ export function createIdleBattleState() {
     playerVolatile: null,
     battleParticipants: [],
     playerTurnSpent: !1,
+    enemyTurnSpent: !1,
   }
 }
 

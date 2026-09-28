@@ -365,6 +365,8 @@ type TrainerBattle = {
   bossType?: string
   spriteKey?: string
   bossQueue?: any[]
+  /** Champion tactical switches left this battle (2 at the start). */
+  championSwapsRemaining?: number
   [key: string]: any
 }
 
@@ -508,6 +510,8 @@ type GameState = {
   battleParticipants?: string[]
   /** The player switched or used an item this turn, so only the foe acts. */
   playerTurnSpent?: boolean
+  /** The foe spent its turn switching (Champion swap), so only the player acts. */
+  enemyTurnSpent?: boolean
   /** The move chosen for the next manual turn (null when none). */
   pendingPlayerMove?: string | null
   alwaysCatchShinies: boolean

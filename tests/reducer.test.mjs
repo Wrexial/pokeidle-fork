@@ -235,3 +235,50 @@ test('the dex-completion celebration pauses and then resumes', () => {
     'an invalid generation is ignored'
   )
 })
+
+test('a Champion tactical swap costs its turn and is capped per battle', () => {
+  const base = startedGame(),
+    trainerTeam = [
+      createPokemon('charizard', 75, 'champion-1'),
+      createPokemon('blastoise', 75, 'champion-2'),
+    ],
+    state = {
+      ...base,
+      phase: 'battling',
+      enemyPokemon: trainerTeam[0],
+      bossBattle: {
+        bossId: 'champion-kanto',
+        bossType: 'champion',
+        trainerName: 'Blue',
+        trainerClass: 'ace',
+        trainerTeam,
+        currentTrainerPokemonIndex: 0,
+        championSwapsRemaining: 2,
+      },
+    }
+  const swapped = gameReducer(state, {
+    type: 'TRAINER_SEND_NEXT_POKEMON',
+    payload: { newPokemonIndex: 1, championSwap: true },
+  })
+  assert.equal(swapped.enemyPokemon.id, trainerTeam[1].id)
+  assert.equal(swapped.enemyTurnSpent, true, 'the swap spends the Champion turn')
+  assert.equal(swapped.bossBattle.championSwapsRemaining, 1)
+
+  // A regular faint replacement neither costs a turn nor spends a swap.
+  const normal = gameReducer(state, {
+    type: 'TRAINER_SEND_NEXT_POKEMON',
+    payload: { newPokemonIndex: 1 },
+  })
+  assert.notEqual(normal.enemyTurnSpent, true)
+  assert.equal(normal.bossBattle.championSwapsRemaining, 2)
+
+  // The counter never goes below zero.
+  const exhausted = gameReducer(
+    { ...state, bossBattle: { ...state.bossBattle, championSwapsRemaining: 0 } },
+    {
+      type: 'TRAINER_SEND_NEXT_POKEMON',
+      payload: { newPokemonIndex: 1, championSwap: true },
+    }
+  )
+  assert.equal(exhausted.bossBattle.championSwapsRemaining, 0)
+})

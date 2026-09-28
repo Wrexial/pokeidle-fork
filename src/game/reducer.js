@@ -173,6 +173,8 @@ export const initialGameState = {
   battleParticipants: [],
   /** The player switched or used an item this turn, so only the foe acts. */
   playerTurnSpent: !1,
+  /** The foe spent its turn switching (Champion swap), so only the player acts. */
+  enemyTurnSpent: !1,
   /** The move the player picked for the next manual turn (null when none). */
   pendingPlayerMove: null,
 }

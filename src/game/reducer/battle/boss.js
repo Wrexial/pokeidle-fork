@@ -50,6 +50,7 @@ export function startBossBattle(state, action) {
       ? [state.party[0]?.id ?? state.playerPokemon?.id]
       : [],
     playerTurnSpent: !1,
+    enemyTurnSpent: !1,
     bossBattle: {
       bossId,
       bossType,
@@ -59,6 +60,8 @@ export function startBossBattle(state, action) {
       currentTrainerPokemonIndex: 0,
       spriteKey,
       region,
+      // Only the Champion makes mid-battle tactical switches.
+      championSwapsRemaining: bossType === 'champion' ? 2 : 0,
     },
     bossQueue: bossQueue ?? [],
     playerVolatile: createVolatileState(),
@@ -203,6 +206,7 @@ export function bossBattleEnd(state, action) {
         weather: null,
         battleHazards: emptyBattleHazards(),
         terrain: null,
+        enemyTurnSpent: !1,
         bossBattle: {
           bossId: nextBoss.bossId,
           bossType: nextBoss.bossType,
@@ -212,6 +216,7 @@ export function bossBattleEnd(state, action) {
           currentTrainerPokemonIndex: 0,
           spriteKey: nextBoss.spriteKey,
           region: nextBoss.region,
+          championSwapsRemaining: nextBoss.bossType === 'champion' ? 2 : 0,
         },
         bossQueue: remainingQueue,
       }

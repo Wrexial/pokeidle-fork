@@ -71,6 +71,7 @@ export const CHANGELOG = [
           heading: 'Battles',
           items: [
             'Manual battle mode: toggle AUTO / MANUAL on the battle screen (or in Settings \u2192 Battles) to pick each move yourself, switch Pokemon with the SWITCH button, and choose who comes out when one faints. A battle left alone falls back to auto after a minute',
+            'In manual battle mode the Champion no longer auto-switches Pokemon either, so nothing changes type behind your back; in auto mode its tactical switches are capped at two per battle and each swap now costs it a turn, giving your Pokemon a free hit',
             'Heal Block now works: for five turns the target cannot restore HP from any source \u2014 healing moves, drain moves, Aqua Ring, Ingrain, Wish, Poison Heal, Leftovers, berries and the rest',
             'The leftover stat moves now work: Power Split averages both battlers\u2019 Attack and Sp. Atk, Guard Split averages their Defence and Sp. Def, and Speed Swap trades their raw Speed',
           ],

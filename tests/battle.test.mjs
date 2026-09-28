@@ -42,6 +42,28 @@ test('a guaranteed status move afflicts the target', () => {
   assert.equal(enemy.status, 'poison')
 })
 
+test('enemySkipMove lets the player strike without a reply', () => {
+  const player = battler({
+      name: 'Player',
+      isPlayer: true,
+      speciesKey: 'charizard',
+      types: ['Fire'],
+      moves: ['flamethrower'],
+      spAttack: 300,
+      speed: 20,
+    }),
+    enemy = battler({
+      name: 'Foe',
+      types: ['Grass'],
+      moves: ['tackle'],
+      attack: 300,
+      speed: 200,
+    })
+  resolveBattleTurn(player, enemy, false, false, null, null, true, null, null, null, false, null, true)
+  assert.ok(enemy.currentHp < enemy.maxHp, 'the player still lands its move')
+  assert.equal(player.currentHp, player.maxHp, 'the foe takes no action on its swap turn')
+})
+
 test('a drain move heals the attacker', () => {
   const player = battler({
       name: 'Player',

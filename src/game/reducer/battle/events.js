@@ -33,6 +33,7 @@ export function startEncounter(state, action) {
     activePlayerPokemonIndex: activeIndex,
     battleParticipants: activePokemon?.id ? [activePokemon.id] : [],
     playerTurnSpent: !1,
+    enemyTurnSpent: !1,
     battleEvents: [],
     pendingEvents: [
       {
@@ -66,6 +67,7 @@ export function executeTurn(state, action) {
     ...state,
     battleTurn: (state.battleTurn ?? 0) + 1,
     playerTurnSpent: !1,
+    enemyTurnSpent: !1,
     // The manual choice has been spent on this turn.
     pendingPlayerMove: null,
     pendingEvents: [...state.pendingEvents, ...action.payload.events],

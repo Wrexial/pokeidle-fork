@@ -460,7 +460,15 @@ export function useGameLoop() {
             })
             return
           }
-          if (bossType === 'champion' && currentGameState.bossBattle) {
+          if (
+            bossType === 'champion' &&
+            currentGameState.bossBattle &&
+            // Manual mode never auto-switches either side, and a swap already
+            // spent this turn.
+            currentGameState.battleMode !== 'manual' &&
+            !currentGameState.enemyTurnSpent &&
+            (currentGameState.bossBattle.championSwapsRemaining ?? 0) > 0
+          ) {
             const championSwitch = chooseBestSwitch(
               enemyBattlePokemon,
               currentGameState.bossBattle.trainerTeam,
@@ -468,9 +476,11 @@ export function useGameLoop() {
               currentGameState.bossBattle.currentTrainerPokemonIndex
             )
             if (championSwitch >= 0) {
+              // The swap costs the Champion its turn, and only two are allowed
+              // per battle.
               dispatch({
                 type: 'TRAINER_SEND_NEXT_POKEMON',
-                payload: { newPokemonIndex: championSwitch },
+                payload: { newPokemonIndex: championSwitch, championSwap: !0 },
               })
               return
             }
@@ -513,7 +523,8 @@ export function useGameLoop() {
               enemySkill,
               playerSkill,
               playerSkipMove,
-              currentGameState.pendingPlayerMove ?? null
+              currentGameState.pendingPlayerMove ?? null,
+              !!currentGameState.enemyTurnSpent
             )
           dispatch({
             type: 'EXECUTE_TURN',

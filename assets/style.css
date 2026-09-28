@@ -3538,10 +3538,17 @@ img {
     pointer-events: none
 }
 
-.map-node-poi {
+.map-node-pois {
     position: absolute;
     top: -11px;
     left: -11px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    pointer-events: none
+}
+
+.map-node-poi {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -3556,6 +3563,10 @@ img {
     border: 1.5px solid #f0d870;
     box-shadow: 0 0 4px 1px #4a90e280;
     pointer-events: none
+}
+
+.map-node-poi.service {
+    background: #b5762f
 }
 
 @keyframes swarmBob {
@@ -3729,6 +3740,29 @@ img {
     font-size: 8px;
     color: #b8a878;
     line-height: 1.4
+}
+
+.location-services {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px
+}
+
+.location-services-label {
+    font-size: 7px;
+    color: #8a7a60;
+    text-transform: uppercase;
+    letter-spacing: .5px
+}
+
+.location-service-tag {
+    padding: 2px 6px;
+    font-size: 8px;
+    color: #2a1808;
+    background: var(--gold);
+    border: 1px solid #8a6020;
+    border-radius: 999px
 }
 
 .location-status {

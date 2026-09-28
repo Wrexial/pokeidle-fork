@@ -4,6 +4,7 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { formatCooldown } from '../game/progression.js'
 import { POI_LOCATIONS, minigameNameForLocation } from '../game/minigames.js'
+import { servicePoisFor } from '../game/services.js'
 
 /** @param {{ location: MapLocation, isCurrent: boolean, isUnlocked: boolean, isClickable: boolean, onClick: () => void, cooldownEnd?: number, swarmLabel?: string | null }} props */
 export
@@ -23,6 +24,7 @@ function MapNode({
     isZone = location.type === 'zone',
     isPoi = isUnlocked && POI_LOCATIONS.has(location.id),
     minigameName = isUnlocked ? minigameNameForLocation(location.id) : null,
+    servicePois = isUnlocked ? servicePoisFor(location.id) : [],
     locationName = isUnlocked ? location.name : '???',
     timeNow = Date.now(),
     raidOnCooldown = isRaid && cooldownEnd != null && timeNow < cooldownEnd
@@ -53,6 +55,9 @@ function MapNode({
         ? [
             location.description,
             minigameName ? `Minigame: ${minigameName}` : null,
+            servicePois.length > 0
+              ? `Services: ${servicePois.map((poi) => poi.label).join(', ')}`
+              : null,
             swarmLabel ? `Swarm: ${swarmLabel}` : null,
           ]
             .filter(Boolean)
@@ -74,12 +79,30 @@ function MapNode({
             className: 'map-node-swarm',
             children: '\u{1f41d}',
           }),
-        isPoi &&
-          jsx('span', {
-            className: 'map-node-poi',
-            title: minigameName ?? 'Minigame',
-            children: '+',
-          }),
+        isPoi || servicePois.length > 0
+          ? jsxs('div', {
+              className: 'map-node-pois',
+              children: [
+                isPoi &&
+                  jsx('span', {
+                    className: 'map-node-poi',
+                    title: minigameName ?? 'Minigame',
+                    children: '+',
+                  }),
+                ...servicePois.map((poi) =>
+                  jsx(
+                    'span',
+                    {
+                      className: 'map-node-poi service',
+                      title: poi.label,
+                      children: poi.icon,
+                    },
+                    poi.kind
+                  )
+                ),
+              ],
+            })
+          : null,
         showLabel &&
           jsx('span', {
             className: 'map-node-label',

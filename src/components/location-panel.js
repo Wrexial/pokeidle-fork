@@ -7,6 +7,7 @@ import { encounterData, gymLeaderData, mapData, pokemonSpecies, regions, raidPoo
 import { MINIGAME_INFO, MINIGAME_LOCATIONS, MINIGAME_START_ACTION, ROUTE_ACTIVITIES, bestRodId, nextRod, rodForId, routeActivityIds } from '../game/minigames.js'
 import { useGame } from '../game/context.js'
 import { computeUnlockedLocations, regionProgressionGoal } from '../game/progression.js'
+import { servicePoisFor } from '../game/services.js'
 import { MinigameCard } from './minigame-card.js'
 import { GiftPanel } from './gift-panel.js'
 import { BattleTowerPanel } from './battle-tower-panel.js'
@@ -66,6 +67,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
         : null,
     routeKey = location?.routeKey,
     routeEncounters = routeKey ? encounterData[routeKey] : null,
+    servicePois = servicePoisFor(location?.id),
     // The "Next Unlocks" block is useful from a zone hub too, not just a
     // normal location, so it is built once and rendered by both branches.
     nextUnlocksSection = regionGoal
@@ -598,6 +600,27 @@ export function LocationPanel({ onOpenCatchSettings }) {
           className: 'location-description',
           children: location.description,
         }),
+        servicePois.length > 0 &&
+          jsxs('div', {
+            className: 'location-services',
+            children: [
+              jsx('span', {
+                className: 'location-services-label',
+                children: 'Services',
+              }),
+              ...servicePois.map((poi) =>
+                jsx(
+                  'span',
+                  {
+                    className: 'location-service-tag',
+                    title: poi.hint,
+                    children: `${poi.icon} ${poi.label}`,
+                  },
+                  poi.kind
+                )
+              ),
+            ],
+          }),
         location.hidden &&
           location.zone &&
           jsx('button', {

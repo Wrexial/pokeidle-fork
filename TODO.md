@@ -19,85 +19,54 @@ renumbered, so the gaps below are items that shipped.
 
 1. **#16 Performance pass** — S–M · ★★ — the idle loop dispatches a lot per
    tick; look at memoisation / batching if it ever gets heavy.
-2. **#46 Mobile UX fixes** — S–M · ★★★ — party drag/drop order, map pan/zoom
-   controls and the cut-off bottom of the Map/Items tabs on phones.
+2. **#46 Mobile UX follow-up** — S · ★★ — only the **Box** still has no touch
+   reorder (the party reorder buttons, map pinch-zoom and the tab viewport are
+   fixed).
 3. **#48 Colour-accessibility pass** — S · ★★ — yellow-on-yellow move-learning
-   text plus a broader contrast sweep.
+   text is fixed; the broader contrast sweep remains.
 
 ### Tier 2 — High impact, worth the effort (medium–large)
 
-4. **#24 Move data pass** — **(largely done: the status/utility moves, the
-   two-turn charging moves, and 0.21.0's Heal Block, Speed Swap and
-   Power/Guard Split are in; only the ally/faint heals, move-calling, the
-   doubles-only moves and the dead Z/Max data remain.)**
-5. **#25 Battle engine pass** — **(largely done: 0.14.0 modelled the bulk of
-   the ~300 abilities, the item hooks, the mid-battle form-change subsystem and
-   the battle-only form species; only ally/doubles abilities, a few complex
-   ones and the item nuances remain.)**
-6. **#36 Zones (route chunks)** — M–L · ★★★★ — lets Alola/Galar/Paldea map as
-   chunks of areas instead of a single-route-wide graph.
-7. **#40 Alola / Galar / Paldea league structures** — M · ★★★½ — trials, the
-   Champion Cup and any-order gyms don't fit the 8-gyms + E4 model. **(partial:
-   0.13.0 shipped the data-driven model; Alola's full 11-slot trial track and
-   Paldea's Titans / Team Star remain.)**
-8. ~~**#11 NPC gifts & static encounters**~~ — **shipped (0.20.0).**
-9. **#29 Fishing / companion minigames** — M–L · ★★★ — the rest of the
-   minigame menu, now that the scene + phase pattern exists.
-10. **#35 More Galar areas** — M · ★★★½ — Galar is the thinnest region map.
-11. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of Armor,
-    Crown Tundra, Kitakami and the Terarium to first-class regions.
-12. **#18 Better settings** — **(done 0.21.0: preferences now live in their
-    own `localStorage` key, the Settings modal gained a Gameplay section and
-    per-event notification toggles; only sprite-style options and the #19
-    account controls remain.)**
-13. **#28 More region areas (caves, POIs, DLC land)** — L · ★★★★½ — real
-    content; data-heavy. Pairs with #35/#36/#39.
-14. ~~**#4 In-battle Mega evolution**~~ — **shipped (0.19.0).**
-15. ~~**#42 Manual battle mode**~~ — **shipped (0.21.0: AUTO/MANUAL toggle,
-    hand-picked moves, a mid-battle switch picker and a faint-replacement
-    prompt).**
-16. **#44 Set / Switch toggle** — S · ★★★ — choose whether a faint asks for a
-    replacement or keeps the next party member in automatically.
-17. **#45 Move-category icons** — S · ★★ — replace the ✴/◎/☯ glyphs with
-    physical/special/status images.
-18. **#47 Backpack section** — M · ★★★ — rename the League tab and host the
-    Pokédex, Bank, Items and Records inside it.
-19. **#43 Multi-battles (double/triple/rotation)** — M–L · ★★½ — a
-    self-contained minigame that reuses the combat pipeline.
+4. **#28 More region areas (caves, POIs, DLC land)** — L · ★★★★½ — real
+   content; data-heavy. Started: the POI marker model shipped with the Day-Care
+   as the first POI (28c), and the DLC areas are in as zones (28a); ordinary
+   caves/forests (28b) and more POIs remain. Pairs with #36/#39.
+5. **#24 Move data pass** — M · ★★★ — ally/faint heals, context move-calling,
+   the doubles-only moves, and decisions on unused PP / dead Z-Max data.
+6. **#25 Battle engine pass** — M–L · ★★★ — ally/doubles abilities, a few
+   complex singles ones, item nuances and battle polish (animations / damage
+   numbers).
+7. **#36 Zones (route chunks)** — M–L · ★★★★ — the model is in; more
+   sub-areas, a distinct zone glyph and inline per-sub-area encounter grids.
+8. **#40 Alola / Galar / Paldea league structures** — M · ★★★½ — the
+   data-driven model is in; Alola's full trial track, Galar's post-game
+   tournament and Paldea's Titans / Team Star remain.
+9. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of Armor,
+   Crown Tundra, Kitakami and the Terarium to first-class regions.
+10. **#29 Companion minigame polish** — S · ★★ — an animated buddy panel /
+    petting scene (the last open minigame idea).
+11. **#18 Better settings** — M · ★★★ — sprite-style options, account controls
+    (blocked on #19) and finishing the Gameplay section.
+12. **#38 Clean up the Raid Islands** — M · ★★½ — weight / level-gate the
+    legendary pick and (optionally) shrink Unova's ordinary pool.
+13. **#43 Multi-battles (double / triple / rotation) as a minigame** — M–L ·
+    ★★½ — a self-contained minigame that reuses the combat pipeline.
+14. **#30 Caught / event QOL indicators** — S · ★ — flag the battle sprite;
+    decide whether raids show the caught badge.
 
 ### Tier 3 — Big / low-return, defer
 
-20. **#10 Weather & terrain leftovers** — M · ★★½ — **(partial: 0.14.0 shipped
-    Weather Ball, weather-perfect accuracy and the terrain synergy abilities;
-    terrain rocks and route-based field effects remain.)**
-21. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+15. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
+    route-based field effects.
+16. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
 ---
 
-## 4. In-battle Mega evolution
-
-**Shipped (0.19.0):** a Mega-capable Pokemon holding the new held **Mega Stone**
-transforms as the battle starts (or via the MEGA EVOLVE button in the battle
-scene). It stores the forme on `playerVolatile.formKey`, so it keeps the forme's
-stats, typing and ability for the rest of the battle and reverts when the battle
-ends \u2014 the saved Pokemon never changes. Charizard and Mewtwo (the only
-species with two Megas) take the physical X forme when Attack is higher, the
-special Y forme otherwise. The stone sits alongside the existing level-100 Mega
-evolutions rather than replacing them, and the idle loop auto-triggers it so
-idle play benefits.
-
-Effort: **done**.
-
 ## 10. Weather & terrain leftovers
 
-Weather and terrain shipped together in 0.11.0.
-
-**Shipped (0.14.0):** Weather Ball takes the weather's type (Water/Fire/Rock/
-Ice) with doubled power; Thunder and Hurricane never miss in rain and Blizzard
-never misses in snow/hail; and the terrain synergy abilities work — Grass Pelt
-raises Defense on Grassy Terrain, and Hadron Engine (which now also sets
-Electric Terrain on entry) and Quark Drive boost offence on Electric Terrain.
+Weather and terrain shipped in 0.11.0; Weather Ball, weather-perfect accuracy
+and the terrain synergy abilities shipped in 0.14.0.
 
 Still open:
 
@@ -106,39 +75,16 @@ Still open:
 
 Effort: **medium**.
 
-## 11. NPC gifts & static encounters
+## 16. Performance pass
 
-**Shipped (0.20.0):** a curated `GIFTS` / `STATIC_ENCOUNTERS` table
-(`src/game/gifts.js`) drives a new **People & Places** section in the location
-panel. Gifts hand over items, money or a Pokemon (Oak's parcel, Celadon's Eevee,
-Elm's Cyndaquil, the Weather Institute's Castform, Bebe's Eevee, a Nacrene
-Larvesta, Korrina's Riolu, an Alola/Paldea starter, a Galar Toxel); statics start
-a normal wild battle with a fixed species/level (Route 12/16 Snorlax, Route 36
-Sudowoodo, Route 119 Kecleon, Route 210 Munchlax, Route 7 Snorlax). Both are
-claimed once per save (`claimedGifts`); a static only counts as claimed when it
-is caught, so a failed catch can be retried. Requirements are region-local
-badge / champion / Pokedex gates, shown as a checklist.
-
-Effort: **done**.
-
-## 16. More ideas (unsorted)
-
-- [ ] **Performance pass** — the idle loop dispatches a lot per tick; look at
-      memoisation / batching if it ever gets heavy.
+- [ ] The idle loop dispatches a lot per tick; look at memoisation / batching
+      if it ever gets heavy.
 
 ## 18. Better settings
 
-`settings-modal.js` now exposes gameplay, notification, display and audio
-toggles, and the preferences are stored outside the save.
-
-**Shipped (0.21.0):** the preference fields moved to their own
-`pokemon-idle-settings` localStorage key (`src/game/settings.js`), so they
-survive a save reset and are shared across slots; older saves migrate their
-settings in on first boot. The Settings modal gained a **Gameplay** section
-(auto-catch / always-catch-shinies / auto-proceed and a battle-speed picker),
-export/import and the confirmed reset now sit together under **Save Data**, and
-**Notifications** can filter browser alerts per event (shinies, raids &
-legendaries, egg hatches) on top of the master toggle.
+`settings-modal.js` exposes gameplay, notification, display and audio toggles,
+and the preferences live outside the save (`pokemon-idle-settings`,
+`src/game/settings.js`) so they survive a save reset and are shared across slots.
 
 Still open:
 
@@ -154,13 +100,13 @@ Effort: **medium** (mostly UI plus a small settings slice).
 ## 19. Online sync (cloud saves via a database)
 
 This would be the project's **first backend** — the app is deliberately
-client-only today with one `localStorage` save. Worth a short design doc first.
+client-only today with `localStorage` saves. Worth a short design doc first.
 
 - [ ] Pick a backend: a managed BaaS (Supabase / Firebase — auth + Postgres /
       Firestore) vs a small custom API.
 - [ ] Auth: an anonymous device id that can later be linked to an account
       (email / OAuth) so a save can follow the player across devices.
-- [ ] Sync model: the save is a single JSON blob, so at minimum keep a
+- [ ] Sync model: a save is a single JSON blob, so at minimum keep a
       server-side revision + `savedAt` and never blindly overwrite a newer
       remote (last-write-wins is easy to lose a save with).
 - [ ] Offline-first: the game must keep working with no network; sync in the
@@ -178,25 +124,11 @@ Effort: **large** (auth + conflict handling + a new server to run).
 
 `possible-moves.json` carries `name / type / category / power / accuracy / pp /
 priority / effect`, and `src/data/move-effects.js` layers richer effects on top.
+Healing, multi-hit, crit stages, Protect, statuses, screens, entry hazards,
+Taunt/Substitute, weather setters, weather accuracy, terrain synergy, phazing,
+swaps and the two-turn/charging moves are all modelled (0.14.0 + 0.21.0).
 
-**Done (0.14.0):** healing, multi-hit, crit stages, Protect, statuses,
-screens, entry hazards, Taunt/Substitute, weather setters, Haze/Clear Smog,
-Weather Ball + weather accuracy, terrain synergy, Focus Energy, Aqua Ring /
-Ingrain, Wish, Yawn, Topsy-Turvy, Pain Split, Safeguard, Mist, Encore, Disable,
-Perish Song, Tailwind, Trick Room, Destiny Bond, Laser Focus, Lock-On / Mind
-Reader, Life Dew / Jungle Healing / Lunar Blessing, Gastro Acid / Worry Seed /
-Simple Beam / Role Play / Entrainment / Skill Swap, Soak / Magic Powder /
-Reflect Type / Forest's Curse / Trick-or-Treat, Power / Guard / Heart Swap,
-Recycle, Trick / Switcheroo / Bestow / Corrosive Gas, and Metronome / Copycat /
-Mirror Move / Nature Power. Recoil was also added to the recoil moves
-(Double-Edge, Brave Bird, Flare Blitz, …).
-
-**Done (0.21.0):** Heal Block (blocks healing moves, drain moves, Aqua Ring,
-Ingrain, Wish, Poison Heal, Leftovers, berries and the rest for five turns),
-Speed Swap, Power Split and Guard Split. The two-turn / charging moves
-(Solar Beam, Fly, Dig, ...) are also modelled now.
-
-**Not done:**
+Not done:
 
 - [ ] Ally-targeted heals (Heal Pulse, Floral Healing) and the faint-heals
       (Healing Wish, Lunar Dance).
@@ -213,21 +145,10 @@ Effort: **medium–large** (the effect set is now mostly done).
 `resolveBattleTurn` (`src/game/combat.js`) is fairly complete for damage +
 status + stat changes. Healing, multi-hit, Protect, hazards, accuracy/evasion
 stages, the extra statuses, weather/terrain, the crit-rate pass, the
-auto-battler AI and the contact abilities have shipped.
+auto-battler AI, the contact abilities, the mid-battle form-change subsystem and
+the battle-only synthetic-species table all shipped (0.14.0).
 
-**Done (0.14.0):** most of the ~300 abilities are now modelled; the coverage
-spans attacking modifiers, defensive
-modifiers, stat shaping, field & side effects, ability suppression, switch-in,
-contact / on-hit reactions, recovery & residual, speed / priority / accuracy,
-type changing, and the held-item hooks. The mid-battle form-change subsystem
-(Stance Change, Zero to Hero, Power Construct, Schooling, Imposter, Battle
-Bond, Disguise, Ice Face, Shields Down, Forecast, Hunger Switch, Zen Mode,
-Mimicry, Flower Gift) and the battle-only synthetic-species table
-(`src/data/form-species.js`) shipped too, along with the out-of-battle Pickup /
-Honey Gather / Ball Fetch. `abilityPreventsStatus` also now treats badly-poisoned
-as poison (Immunity / Pastel Veil).
-
-**Not done:**
+Not done:
 
 - [ ] Ally / doubles abilities: Battery, Power Spot, Friend Guard, Healer,
       Telepathy, Aroma/Flower Veil, Costar, Commander, Hospitality, Symbiosis,
@@ -237,7 +158,8 @@ as poison (Immunity / Pastel Veil).
 - [ ] Overworld-only abilities (no effect in an idle auto-battler): Illuminate,
       Run Away.
 - [ ] The remaining item nuances (Choice locking, more berries, Rocky Helmet).
-- [ ] Battle polish: move animations / damage numbers / hit feedback.
+- [ ] Battle polish: move animations / damage numbers / hit feedback
+      (also flagged under #42's shipped manual battle mode).
 
 *(Switching on a bad matchup is intentionally discarded: an auto-switching
 opponent is frustrating to play against.)*
@@ -252,21 +174,15 @@ into 21–52 locations per region. That leaves three gaps:
 
 ### 28a. DLC / expansion areas
 
-Later generations' DLC regions are missing, so those Pokemon have no native
-route and fall into a Raid Island pool instead:
+**Shipped (0.13.0):** the Galar (Isle of Armor, Crown Tundra) and Paldea
+(Kitakami, the Terarium / Blueberry Academy) DLC areas are in as post-game
+zones inside their parent region, gated on `championDefeated`. Promoting them to
+first-class regions is #39.
 
-- Galar — **Isle of Armor** and **Crown Tundra** (Sword/Shield Expansion Pass).
-- Paldea — **Kitakami** (Teal Mask) and **Blueberry Academy / Terarium**
-  (Indigo Disk). `paldea-mossui-town` is already scraped as a bare dead-end town.
-- (Optional earlier post-game islands: Kanto's Sevii Islands, Unova's Black/White
-  2 areas.)
+Still open:
 
-- [ ] Add the DLC areas to `tools/region-maps.json` (scraper or a committed
-      override) and give them encounter tables, or inject them with the
-      existing `EXTRA_MAP_AREAS` mechanism (`node` / `species` / `connect` /
-      `rank`).
-- [ ] Slot them into the level curve and unlock order so they read as post-game
-      (DLC areas need a forced `rank` or `unlockOrder`).
+- [ ] Optional earlier post-games: Kanto's Sevii Islands, Unova's Black/White 2
+      areas.
 - [ ] Re-check each region's `raidPool` after adding them — species that now
       have a native route must drop out.
 
@@ -279,6 +195,9 @@ Mt. Silver).
 
 - [ ] Grow `EXTRA_MAP_AREAS` (or scrape the remaining landmark locations) with
       their own species lists so they don't drag a whole generation slice in.
+      Note: the committed `public/data` isn't currently idempotent with the
+      generator, so a data-only pass needs an `apply-*.cjs` script (as the other
+      generators' follow-ups do) rather than a full re-run.
 - [ ] Consider a real `type` / `areaType` field (cave, forest, sea, ruins, …)
       instead of the current binary town-vs-route; `location-panel.js` labels
       everything non-town as "Route 🌿", and the battle background comes from
@@ -286,104 +205,46 @@ Mt. Silver).
 
 ### 28c. Points of interest (POIs)
 
-Non-route nodes that offer a service or flavour: a Daycare stop, a Move
-Tutor / TM vendor, a fishing spot, a berry patch, a raid den, a static
-encounter, a legendary shrine, a mart/café.
+**Shipped (0.21.0):** the model is the lightweight-marker one — a service POI is
+a flavour / utility stop overlaid on an existing location, held in
+`src/game/services.js` (`SERVICE_POIS` + `servicePoisFor`). `map-node.js` draws
+the markers beside the minigame badge and adds their labels to the node tooltip,
+and `location-panel.js` shows a **Services** tag row. The first POI is the
+**Day-Care** on every region's breeding route.
 
-- [ ] Decide the model: a new `type: 'poi'` location that is selectable but
-      doesn't spawn wild battles, vs. lightweight markers overlaid on existing
-      locations.
-- [ ] Handle rendering/copy in `map-node.js`, `town-map.js` and
-      `location-panel.js` (icon, label, no battle loop), reusing the existing
-      travel/unlock plumbing.
-- [ ] Choose a first POI that reuses existing systems (an on-map Daycare or
-      Move Tutor is the smallest win) so it isn't just decoration.
+Still open:
+
+- [ ] Add more POIs, each one entry in `SERVICE_POIS` plus (optionally) a panel
+      card: a Move Tutor / TM vendor, a café / mart, a berry patch, a raid den,
+      a legendary shrine.
+- [ ] Add a legend / filter to the Town Map once there is more than one marker
+      kind worth showing.
 
 Relevant code: `tools/scrape-region-maps.cjs` (`MANUAL_BRIDGES`),
 `tools/generate-regions.cjs` (`EXTRA_MAP_AREAS`, `levelRoutes`,
-`ROUTE_BACKGROUND_RULES`, raid pools), `public/data/map-data/*.json`, and the map
-UI (`src/components/map-node.js`, `town-map.js`, `location-panel.js`).
+`ROUTE_BACKGROUND_RULES`, raid pools), `public/data/map-data/*.json`,
+`src/game/services.js`, and the map UI (`src/components/map-node.js`,
+`town-map.js`, `location-panel.js`).
 
-Effort: **large** (data-heavy; 28a/28b mostly data, 28c a small feature).
+Effort: **large** (data-heavy; 28a/28b mostly data, 28c an ongoing small
+feature).
 
-## 29. Minigames (fishing, companion care, and more)
+## 29. Minigames (companion polish)
 
-**Shipped:** Sinnoh's Underground mining, Johto's Bug Catching Contest and
-Kanto's Game Corner slots all landed in 0.12.0 as full-stage, game-pausing
-scenes that unlock from a location rather than the region Champion; the contest
-also has a top-3 podium with prizes and now covers every Bug-type.
-
-**Shipped (0.16.0):** Fishing and Berry Foraging are route activities, attached
-by terrain (water routes / forests and gardens) rather than a fixed POI, and
-every minigame now launches from the location panel while you are standing there
-instead of from the League tab.
-
-**Shipped (0.16.0):** fishing rod tiers (Old / Good / Super) gate how deep into
-a route's water species a cast can reach, with a level bonus, and each better
-rod is found by opening another region.
-
-**Shipped (0.17.0):** a Companion (care decays per wild win, feed/play/rest with
-a one-per-win limit, +15% EXP while content) and a Berry Garden (plant Oran /
-Sitrus / Lum Berries, ripen over wild wins, harvest, and blend three into a
-Poffin for +30 friendship), both in the top bar.
-
-`src/game/minigames.js` holds `MINIGAME_LOCATIONS` (location → fixed minigame),
-`MINIGAME_INFO` (title/cost/action/hint), `ROUTE_ACTIVITIES` and `RODS` plus
-each game's config/reward table. Adding a fixed minigame is a scene component + a
-`START_*`/`END_MINIGAME` reducer pair + a `MINIGAME_LOCATIONS` entry; a route
-activity is an entry in `ROUTE_ACTIVITIES` and a terrain predicate. Covered by
-`tests/minigames.test.mjs`, `tests/route-activities.test.mjs` and
-`tests/rods.test.mjs`.
-
-### 29a. Fishing minigame
-
-**Shipped (0.16.0):** a timing-bar fishing activity that hooks a Water species
-from the route's own table and starts a normal wild battle, plus a Berry
-Foraging counterpart on forested routes.
-**Shipped (0.16.0):** rod tiers gate the rarity of what a cast reaches, fishing
-is limited to 30 curated water-rich routes (`FISHING_LOCATIONS`), and a cast only
-ever hooks a Water species.
-**Shipped (0.16.0):** each fishing route has an exclusive Water Pokemon that only
-appears on the tiny perfect-cast zone and is removed from the route's normal
-wild table (`fishingExclusiveFor`).
-
-Nothing left here; see #29b (companion care) and #29c (berry growing) for the
-remaining minigame ideas.
-
-### 29b. Companion / tamagotchi care
-
-**Shipped (0.17.0):** pin a party Pokémon and keep it fed, happy and rested;
-care decays per wild win, one action per win, and a content companion gives
-+15% EXP (see `src/game/companion.js`). Still open:
+Every region has its signature and extra minigames (see the changelog for the
+full set), plus the Companion and Berry Garden. The only open idea:
 
 - [ ] An animated buddy panel / petting scene using the existing sprite helpers
-      (it is a static modal today).
+      (companion care is a static modal today).
 
-### 29c. Other minigame ideas
+Relevant code: `src/game/companion.js`, the minigame scenes under
+`src/components/`, and `src/game/reducer/minigames.js`.
 
-- [x] **Berry growing** — plant / pick berries over a battle count
-      (`src/game/garden.js`).
-- [x] **Berry blending** — blend three berries into a Poffin (friendship +30).
-
-Both shipped in 0.17.0; nothing left here.
-
-Relevant code: the real-time loop and battle-count ticks (`src/hooks.js`
-`useGameLoop`, `tickBattleCounters` in `src/game/progression.js`), the reducer's
-`daycare` / `activeEffects` slices (`src/game/reducer.js`), the Daycare UI
-(`src/components/daycare-modal.js`) and the existing minigame scenes.
-
-Effort: **small per minigame, medium–large as a feature**.
+Effort: **small**.
 
 ## 30. Caught / event QOL indicators
 
-The notification queue shipped in 0.9.0.
-
-**Shipped (0.13.0):** the caught indicator is now a Pokéball badge that tells
-**seen** (grey ball) from **caught** (red ball) from **shiny caught** (gold
-ball). It replaces the old `✓` on the enemy name row (`enemy-info-box.js`,
-via the shared `dex-ball-badge.js` and `getDexStatus` in `src/game/catching.js`)
-and the shiny star on the encounter list / Pokédex tiles, and stays hidden for
-trainer battles.
+The Pokédex ball badge (seen / caught / shiny-caught) shipped in 0.13.0.
 
 Still open:
 
@@ -394,140 +255,40 @@ Still open:
 
 Effort: **small**.
 
-## 35. Go through the Galar map and add the missing areas
-
-Galar is currently the thinnest region map. The generator only keeps PokéAPI
-**towns + numbered routes**, so most of Galar is absent: the Wild Area is a
-single node, and **Isle of Armor** / **Crown Tundra** (Expansion Pass) don't
-exist. A large slice of the Galar dex has no native route and gets pushed into
-Galar's Raid Island pool. This is the focused Galar pass; #28a/#28b cover the
-same gaps generally and #36 proposes the zone model the Wild Area needs.
-
-- [ ] Audit `public/data/map-data/galar.json` and
-      `public/data/encounter-data/galar.json` against a real Galar map and
-      write down what's missing — the Wild Area sub-areas (Rolling Fields,
-      Dappled Grove, Giant's Mirror, Lake of Outrage, …), Slumbering Weald,
-      Galar Mine, Glimwood Tangle, and any towns/routes the scraper skipped.
-- [ ] Add what the scrapers can (`tools/scrape-region-maps.cjs` + cached
-      Bulbapedia connections, then `tools/scrape-route-encounters.cjs`); inject
-      the rest with `EXTRA_MAP_AREAS` in `tools/generate-regions.cjs`.
-- [ ] Model the Wild Area as a **zone** (#36) rather than one giant route, with
-      each named sub-area holding its own encounter table/background.
-- [ ] Re-run `tools/generate-regions.cjs` and re-check Galar's `raidPool`.
-- [ ] Keep progression sensible: mainland Galar stays on the 5–75 curve, and
-      the DLC is post-game (after the Champion) via a forced `rank` /
-      `unlockOrder`.
-
-Relevant code: `tools/scrape-region-maps.cjs` (`MANUAL_BRIDGES`, which already
-carries the Wild Area links), `tools/scrape-route-encounters.cjs`,
-`tools/generate-regions.cjs` (`EXTRA_MAP_AREAS`, `levelRoutes`, raid pools),
-`public/data/map-data/galar.json` and `public/data/encounter-data/galar.json`,
-and `raidPoolFor` in `src/data/gameData.js`.
-
-**Partial (0.13.0):** the Wild Area is now a zone (#36) with three sub-areas,
-and Slumbering Weald, Galar Mine and Glimwood Tangle are real wild areas too.
-The Expansion Pass is in as two more post-game zones (#39): the Isle of Armor
-and the Crown Tundra, gated on beating Galar's Champion. Those areas added
-galarian/hisuian and DLC species as wilds, which shrank Galar's `raidPool` from
-59 to 22. Galar is now content-complete; first-class DLC *regions* remain #39.
-
-Effort: **medium** (mostly data; the Wild Area zone work depends on #36).
-
 ## 36. Zones — route-like chunks of areas
 
-The map is a graph of single nodes joined pair-wise: a town or one route per
-node. That fits Kanto–Unova, but the later regions aren't a linear route chain
-and they map badly today:
+The map is a graph of single nodes joined pair-wise. The zone model shipped in
+0.13.0: `type: 'zone'` nodes group sub-areas that are hidden routes with their
+own encounter buckets, and existing routes can be grouped too (`GROUP_ZONES` —
+Alola's islands, Paldea's provinces). Galar's Wild Area and the Galar/Paldea
+DLC are zones.
 
-- **Alola** is four islands of trial areas — several islands read as separate
-  disconnected clusters.
-- **Galar**'s Wild Area is dozens of named sub-areas wrapped around the map; it
-  collapses to one node.
-- **Paldea** is open-world provinces of "<Dir> Province (Area N)" with no
-  numbered routes, so it falls back to BFS-depth ordering and trims each
-  province to 15 species.
+Still open:
 
-Introduce a **zone**: a map node that is a *chunk of areas* (like a route, but
-grouping several sub-areas) instead of a single encounter table.
+- [ ] More sub-areas (pairs with #28a/#28b).
+- [ ] A distinct zone glyph on the map.
+- [ ] Inline per-sub-area encounter grids (rather than the picker + a single
+      route grid).
 
-Design questions to settle first:
-
-- [ ] **Data shape**: a `type: 'zone'` location carrying
-      `subAreas: [{ id, name, routeKey/encounters, background, unlock? }]`, vs.
-      first-class locations tagged with a `zone`/`parentZone` id. The first keeps
-      the map graph small (one node per zone) and makes zones obvious; the
-      second reuses all the existing route plumbing.
-- [ ] **Travel & UI**: does a zone appear as one node that opens a sub-area
-      picker, or as a cluster of sub-area nodes shown/hidden together? Decide
-      how the active sub-area is chosen (player pick vs. rotation).
-- [ ] **Encounters**: resolve against the active/selected sub-area —
-      `resolvePokemonEncounter` and `encounterData[routeKey]` are keyed by a
-      single `routeKey` today, so the zone needs to feed the right one (or hold
-      its own bucket).
-- [ ] **Progress**: do zones unlock as a unit, or do sub-areas gate
-      individually? `computeUnlockedLocations` + each location's `unlock` seed
-      the fixpoint, and `unlockOrder` must stay stable when a zone is added
-      (currently `region generation * 100000 + route rank`).
-- [ ] **Level curve**: `levelRoutes()` spreads routes across the 5–75 curve by
-      route number / BFS depth — decide how a zone's sub-areas rank and how the
-      DLC/post-game zones slot in.
-
-Likely touch points: `src/components/map-node.js` (zone glyph / cluster),
-`town-map.js` (roads + tab), `location-panel.js` (the Wild Pokémon header),
-`route-encounter-grid.js` (sub-area tabs), `tools/generate-regions.cjs`
-(`EXTRA_MAP_AREAS`, `levelRoutes`, ordering), `tools/scrape-region-maps.cjs`,
-and the `map-data/` / `encounter-data/` region files.
-
-Good first candidate: **Galar's Wild Area** (one zone, many sub-areas) together
-with #35, then **Alola** (islands as zones) and **Paldea** (provinces as zones)
-to replace the proximity stitching / 15-species trim.
-
-**Partial (0.13.0):** the model shipped. Galar's Wild Area, the Galar/Paldea
-DLC and Paldea's Area Zero are `type: 'zone'` nodes with sub-area pickers, and
-existing routes can be grouped too (`GROUP_ZONES`): Alola's routes are grouped
-by island and Paldea's by province. Sub-areas are hidden routes with their own
-encounter buckets; they unlock via their own (unchanged) rules, so a locked
-area shows as ??? in the picker. Still open: more sub-areas, a distinct zone
-glyph on the map, and inline per-sub-area encounter grids.
-
-Effort: **medium–large** (a small data-model change plus map/encounter UI, but
-it unblocks the three regions that don't fit the route graph today).
+Effort: **medium–large** (a small data-model change plus map/encounter UI).
 
 ## 38. Clean up the Raid Islands (later generations are bloated)
 
 The raid scan gives each region its generation's species that appear on **no**
 region's wild routes and can't be reached by breeding/evolving a route species.
-Because later dexes are huge (and their DLC/regional forms have no native route),
-the pools balloon (before the Bug Catching Contest cleanup): Kanto 9, Johto 12,
-Hoenn 15, Sinnoh 20, Unova 27, Kalos 10, Alola **51**, Galar **59**, Paldea
-**58**. Trimming must not orphan anything — the raid pool is the safety net for
-otherwise-unobtainable species, and `npm run validate` checks every species is
-obtainable.
+Later dexes balloon (Alola 51, Galar 59, Paldea 58 pre-cleanup).
 
-**Shipped (0.13.0):** each region's island is now split into two tiers in
-`regions.json`:
-
-- `raidPool` — every legendary/mythical with no other source; these are the
-  raid bosses.
-- `raidOrdinaryPool` — the ordinary finals (fossils, regional forms, one-off
-  lines) with no other source, capped at 15.
-
-`raidLegendaryPoolFor` feeds `pickRaidLegendary`, so a raid always headlines a
-legendary (an ordinary final can no longer turn up as the "legendary" boss), and
-`resolveRoamer` rolls legendaries only. `raidPoolFor` still returns the island's
-full table (legendaries first) for the UI and the wild bucket, so the ordinary
-set stays obtainable by idling on the island; levels already tier the two
-(legendaries fight at 75, ordinary finals at 70). `validate-data.cjs` now checks
-the split (all legendaries in `raidPool`, none in `raidOrdinaryPool`, no overlap,
-ordinary ≤ 15), and the earlier regions were already within the cap, so nothing
-was trimmed and nothing is orphaned.
+**Shipped (0.13.0):** each island is split into `raidPool` (legendaries/mythicals
+with no other source — the bosses) and `raidOrdinaryPool` (ordinary finals with
+no other source, capped at 15). `validate-data.cjs` checks the split, and
+`raidPoolFor` still returns the full table for the UI and wild bucket.
 
 Still open:
 
 - [ ] Weight / level-gate the legendary pick by badges or prestige instead of a
       uniform "unseen first" pick.
 - [ ] If a smaller Unova (13 ordinary) pool is wanted, give a few of its finals a
-      real route or evolution source (part of #28/#35/#39).
+      real route or evolution source (part of #28/#39).
 
 Relevant code: `tools/generate-regions.cjs` (`raidCandidates`,
 `raidPoolSpecies`, `staysInRaidPool`, `FORM_RAID_REGION`, `paldeaExtrasFor`, the
@@ -540,8 +301,8 @@ Effort: **medium** (mostly balance/data plus the generator; game logic is small)
 
 ## 39. Introduce DLC regions from later games
 
-Later games shipped whole expansion areas that today are either folded into a
-parent region, trimmed, or pushed into a raid pool:
+Later games shipped whole expansion areas that today are folded into a parent
+region (as zones):
 
 - Galar — **Isle of Armor** and **Crown Tundra** (Sword/Shield Expansion Pass).
 - Paldea — **Kitakami** (Teal Mask) and **Blueberry Academy / Terarium**
@@ -549,26 +310,18 @@ parent region, trimmed, or pushed into a raid pool:
 - Optional older post-games: Kanto's **Sevii Islands** and Unova's Black/White 2
   areas.
 
-#28a covers adding these as *areas inside their parent region*. This item is
-about promoting them to **first-class regions** in `regions.json` — their own
-`entry`, level curve, unlock path, raid pool and map — so they can be opened
-with an Unlock Token like any other region.
-
-**Partial (0.13.0):** Galar's DLC shipped the first (smaller) way — Isle of
-Armor and Crown Tundra are post-game zones inside Galar (see #36), gated on
-`championDefeated: 'galar'`, with their own sub-areas and encounters. Paldea's
-Kitakami and Terarium shipped the same way (gated on `championDefeated:
-'paldea'`), which needed the 17 missing Gen 9 DLC species to be added first
-(`tools/add-gen9-dlc-species.cjs`). First-class-region promotion is still open.
+**Partial (0.13.0):** these shipped as post-game zones inside their parent
+region (`championDefeated`). This item is about promoting them to
+**first-class regions** — their own `entry`, level curve, unlock path, raid pool
+and map — so they can be opened with an Unlock Token like any other region.
 
 - [ ] Decide the model: a region whose `generation` points at its parent gen,
       vs. a new `parentRegion` / `isDlc` flag. Regions currently map 1:1 to
       generations (`generation`, `speciesForGen`, per-gen raid pools and the
       per-generation Shiny Charm), so DLC needs an explicit answer.
 - [ ] Add each area to `tools/region-maps.json` / `EXTRA_MAP_AREAS` with its own
-      locations + encounters (`tools/scrape-region-maps.cjs` +
-      `tools/scrape-route-encounters.cjs`, manual for Paldea-style provinces),
-      and a `REGION_MAP_LAYOUTS` override where the layout needs hand-measuring.
+      locations + encounters, and a `REGION_MAP_LAYOUTS` override where the
+      layout needs hand-measuring.
 - [ ] Give each a progression: post-game (after the parent Champion) or bought
       with an Unlock Token; decide whether it needs a league/Champion or just a
       raid/legendary endgame.
@@ -577,13 +330,12 @@ Kitakami and Terarium shipped the same way (gated on `championDefeated:
       key by national dex, so DLC mons already count toward their gen — decide
       whether DLC regions count toward region completion, Unlock Tokens and the
       World Tour achievement.
-- [ ] Register the new region files in `assets/gameDataInjector.js` (the region
-      list) and re-export in `src/data/gameData.js`.
+- [ ] Register the new region files in `assets/gameDataInjector.js` and re-export
+      in `src/data/gameData.js`.
 - [ ] Re-check raid pools (#38) afterwards.
 - [ ] Shape the maps with **zones** (#36) where they're open-world (the
       Terarium, Wild Area-style areas).
-- [ ] Suggested order: Galar DLC (fits Galar's thin map, #35) → Paldea DLC
-      (relieves Paldea's 15-species trim and its raid pool) → older post-games.
+- [ ] Suggested order: Galar DLC → Paldea DLC → older post-games.
 
 Relevant code: `public/data/regions.json`, `tools/generate-regions.cjs` (region
 construction, `speciesForGen`, `levelRoutes`, the raid scan),
@@ -591,46 +343,15 @@ construction, `speciesForGen`, `levelRoutes`, the raid scan),
 `src/game/progression.js` (`getRegionUnlockTokens`,
 `computeUnlockedLocations`), and the Town Map (`src/components/town-map.js`).
 
-Effort: **medium–large** (data-heavy, but shares groundwork with #28/#35/#36).
+Effort: **medium–large** (data-heavy, but shares groundwork with #28/#36).
 
 ## 40. Handle Alola, Galar and Paldea's league structures
 
-The league model assumes every region has **8 gym leaders in canonical order**,
-then a **4-member Elite Four** and a Champion at a `leagueLocationKey`, gated by
-`gymsRequired` / `badgesRequired` and unlocked along the route tree. That fits
-Gens 1–6, but it misrepresents three regions:
-
-- **Alola** has no gyms — 7 island trials (captain + totem Pokemon) award
-  Z-Crystals, plus 4 grand trials against the Kahunas. The data currently
-  fabricates **8** Z-Crystal "gyms" and spreads them across towns. Alola *does*
-  have a real E4 + Champion (Mount Lanakila), so only the badge track is wrong.
-- **Galar** has 8 gyms but **no Elite Four**: the Championship runs the Champion
-  Cup semifinals (Marnie / Hop / Bede / Raihan) then Champion Leon, with a
-  post-game rematch tournament. The data fakes an E4 from those rivals.
-- **Paldea** has 8 gyms challengeable **in any order** and no fixed badge
-  order — the generator imposes canonical order via `gymsRequired` gates.
-  Victory Road is also only one of three storylines, so a badge-count gate is a
-  poor fit.
-
-**Partial fix (0.12.0):** Paldea's Elite Four now uses its real roster and
-types (Rika, Poppy, Larry, Hassel) — the third/fourth slots were previously
-Hassel and Academy director Clavell.
-
-**Shipped (0.13.0):** the league is now **data-driven per region** via a
-`league` block in `regions.json` (`badgeOrder`, `badgeTrack`, `badgeName`,
-`eliteTrack`). The generator's `LEAGUES` table carries the shape and member
-titles; `gym-panel.js`, `records-modal.js`, `location-panel.js` and the
-achievements read the region's own wording. Specifically:
-
-- **Alola** is billed as the island trials and awards **Z-Crystals**; its gym
-  entries are titled "Trial Captain" with Hapu's grand trial as the
-  **Island Kahuna**, and they are placed across the islands via a `GYM_TOWNS`
-  map (Ilima no longer doubles up with Hapu in Iki Town).
-- **Galar** keeps its 8 gyms but the endgame is labelled the **Champion Cup**
-  (all four rivals show that title).
-- **Paldea** uses `badgeOrder: 'free'`: the generator lays **no** ordered badge
-  gates, and the league is gated by `badgesRequired` (a badge **count**) instead
-  of `gymsRequired`, so its gyms can be beaten in any order.
+The league model assumes **8 gyms in canonical order**, then a **4-member Elite
+Four** and a Champion. The data-driven league block (`badgeOrder`, `badgeTrack`,
+`badgeName`, `eliteTrack`) shipped in 0.13.0: Alola is billed as the island
+trials (Z-Crystals), Galar's endgame is the Champion Cup, and Paldea uses
+`badgeOrder: 'free'` with a badge-count gate.
 
 Still open:
 
@@ -644,8 +365,6 @@ Still open:
       wanted.
 - [ ] **Paldea side content**: Titans and Team Star are not modelled — decide
       whether they are optional side content or part of progression.
-- [ ] Save shape stayed fine — `defeatedGyms` / `defeatedEliteFour` /
-      `defeatedChampions` remain id lists, so no `SAVE_VERSION` bump was needed.
 
 Relevant code: `tools/generate-regions.cjs` (`LEAGUES`, gym placement,
 `gymsRequired` gates, league construction, `BADGE_NAMES` / `GYM_TOWNS`),
@@ -657,110 +376,14 @@ Relevant code: `tools/generate-regions.cjs` (`LEAGUES`, gym placement,
 Effort: **medium** (mostly data + panel copy; the Paldea any-order gate is the
 only real progression change).
 
-## 41. Region-filler minigames (ideas)
-
-Every region now has *something* (fishing / foraging / rock smash / headbutt /
-diving, plus the fixed Safari / Game Corner / Bug Contest / Underground / Battle
-Tower), but Unova, Kalos, Alola, Galar and Paldea have no **signature** minigame
-of their own. These are the candidate ideas — all mechanically distinct from the
-sets that already exist, roughly one per region. Add one the same way as the
-others: a scene component, a `START_*`/`END_MINIGAME` reducer pair, a
-`MINIGAME_LOCATIONS` + `MINIGAME_START_ACTION` + `MINIGAME_INFO` entry, the phase
-added to the pause/busy lists, and tests.
-
-**Shipped (0.16.0):** the Academy Quiz (Paldea), Voltorb Flip (Unova), the
-Grand Auction House (Kalos), the Pokemon Contest (Hoenn), the Pokeathlon
-(Johto), Poke Radar chaining (Sinnoh), the Battle Royal (Alola) and Dynamax
-Adventures (Galar). Every region now has its signature minigame.
-
-**Extra minigames (0.16.0):** Hoenn's **Lights Out** (Mauville City), Galar's
-**Curry Cooking** (Motostoke), Unova's **Pokestar Studios** (Virbank City),
-Johto's **Pokemon Puzzle League** (Goldenrod City), Hoenn's **Pokemon Memory**
-(Slateport City) and Kanto's **Whack-a-Diglett** (Vermilion City) were added on
-top of the one-per-region set.
-
-**More minigames (0.18.0):** Unova's **Pokemon Musical** (Castelia City, a
-four-lane rhythm game), Paldea's **Picnic** (Cortondo, stack ingredients on the
-sandwich) and Kalos's **Poke Ball Factory** (Laverre City, rotate the conveyor
-tiles to link the inlet and outlet) were added, so every region now has at least
-two signature minigames.
-
-- [x] **Poké Pelago (Alola)** — **shipped (0.17.0):** a new Alola island hub
-      (off Hau'oli City) hosting companion care (Pat/Brush/Wash +
-      Cleanliness), the Berry Garden, and three passive islands (Bean Farm,
-      Training Isle, Isle Caves) staffed with *boxed* Pokemon.
-- [x] **Voltorb Flip (Unova)** — **shipped (0.16.0):** a 5×5 deduction board
-      at Nimbasa City. Every row and column advertises its Voltorb count and
-      point total; flip the 2s and 3s to bank coins, clear a board to climb a
-      level, and a single Voltorb ends the run.
-- [x] **Poké Radar chaining (Sinnoh)** — **shipped (0.16.0):** Sandgem Town's
-      memory chain. Watch the grass, repeat the sequence, and bank a chain that
-      boosts a route's rarest species' shiny odds.
-- [x] **Dynamax Adventures (Galar)** — **shipped (0.16.0):** the Max Lair at
-      Hammerlocke. Pick a path through three encounters, then beat a Galar raid
-      legendary to catch it. Uses the real combat pipeline.
-- [x] **Auction House (Kalos)** — **shipped (0.16.0):** the Grand Auction House at
-      Lumiose City. Bid against hidden rival budgets for a lot of items; the
-      appraiser gives a value range, rivals drop out at their own ceilings, and
-      winning the hammer means paying whatever you bid.
-- [x] **Pokémon Contest (Hoenn)** — **shipped (0.16.0):** Lilycove City's stage.
-      Pick a move each round to appeal to the theme, chain the same type for a
-      combo and avoid repeats, then rank against the rivals.
-- [x] **Pokéathlon (Johto)** — **shipped (0.16.0):** Ecruteak City's three-event
-      meet (Sprint mash, Hurdle timing, Target throw) scored together for a
-      medal.
-- [x] **Battle Royal (Alola)** — **shipped (0.16.0):** Heahea City's endless
-      wave gauntlet for your party, resolved with the real combat pipeline.
-      Each win heals a little and the reward scales with depth.
-
-Relevant code: `src/game/minigames/` (one module per game), `registry.js`
-(`MINIGAME_LOCATIONS` / `MINIGAME_INFO`), `src/components/*-scene.js`,
-`src/game/reducer/minigames.js`, and the existing scenes to mirror.
-
-Effort: **small–medium each**, **large as a full set** (one region at a time).
-
-## 42. Manual battle mode
-
-The game is an idle auto-battler: `resolveBattleTurn` (`src/game/combat/turn.js`)
-resolves each turn with the AI (`src/game/combat/ai.js`) and the loop never waits
-for input.
-
-**Shipped (0.21.0):** a `battleMode` preference (`auto` | `manual`, stored with
-the other settings) adds a **MANUAL** button on the battle screen and a toggle
-in Settings → Battles. In manual mode the idle loop waits for the player each
-turn instead of auto-resolving: the move grid becomes clickable (the chosen move
-is highlighted, with a "YOUR MOVE" prompt), and **SWITCH** opens a party picker
-so a switch can be made by hand (costing the turn, exactly as the auto-switch
-does). Forced turns (recharge, a charging two-turn move, a locked move, or a turn
-already spent) resolve on their own. The choice travels through a new
-`playerMoveChoice` parameter on `resolveBattleTurn`, and auto-switching is
-disabled while manual. The loop ticks at ~50ms during a manual battle so turns
-feel responsive, and a battle left alone for a minute falls back to auto so a
-forgotten fight can't stall the game.
-
-Still open:
-
-- [ ] Battle animations / damage numbers polish (shared with #25).
-
-Relevant code: `src/game/use-game-loop.js` (the manual gate + timeout),
-`src/game/combat/turn.js` (`playerMoveChoice`), `src/components/battle-scene.js`
-(move picker + switch overlay), `src/game/reducer/battle/events.js`
-(`CHOOSE_PLAYER_MOVE`), `src/game/reducer/settings.js` (`SET_BATTLE_MODE`) and
-`src/game/settings.js`.
-
-Effort: **done**.
-
 ## 43. Multi-battles (double / triple / rotation) as a minigame
 
 The engine is **singles only** — the move data already flags the doubles-only
 moves (Follow Me, Helping Hand, Quick/Wide Guard, …) as unimplemented (see #24),
-and the ally/doubles abilities are on the #25 list. Building full multi-battle
-support into the main loop is a large change with little idle value.
-
-Instead, make multi-battles a **self-contained minigame** (a scene + a
-`START_*`/`END_MINIGAME` reducer pair + a `MINIGAME_LOCATIONS` entry, per the
-#29 pattern), so the main game stays singles and the extra modes stay fun and
-contained.
+and the ally/doubles abilities are on the #25 list. Make multi-battles a
+**self-contained minigame** (a scene + a `START_*`/`END_MINIGAME` reducer pair
++ a `MINIGAME_LOCATIONS` entry, per the #29 pattern), so the main game stays
+singles.
 
 - [ ] Pick the first mode: **double battle** (2v2) is the most legible and the
       most reusable; triple and rotation battles are stretch goals.
@@ -770,7 +393,7 @@ contained.
 - [ ] Minimal doubles rules: one target chosen per move, spread moves hit both,
       and the existing ally-targeted moves (#24) can finally do something.
 - [ ] Give it a home location per region (a Battle Maison / Battle Tower-style
-      node) and a reward table, mirroring the Battle Royal (#41).
+      node) and a reward table, mirroring the Battle Royal.
 - [ ] Consider a "3-way / 4-way" free-for-all variant as a separate mode if the
       2v2 version lands well.
 
@@ -781,126 +404,33 @@ resolver), `src/components/*-scene.js`, `src/game/reducer/minigames.js`, and
 Effort: **medium–large** (the shared math helps, but target/order handling is
 genuinely new).
 
-## 44. Toggleable Set / Switch battle style
+## 46. Mobile UX follow-up
 
-The mainline games let the player choose **Set** (the next party member is sent
-out without being asked) or **Switch** (the game prompts after a faint). An idle
-auto-battler currently always behaves like Set, silently pulling the next
-healthy party member in.
+The three concrete mobile issues (party drag/drop order, map pan/zoom controls,
+the cut-off Map/Items tab bottom) all shipped in 0.21.0. The one thing left:
 
-**Shipped:** `battleStyle` (`'set'` | `'switch'`, default `'switch'`) is saved
-with the game and toggled in Settings → Battles. It gates the auto-battler's
-matchup switching (`chooseBestSwitch` in `use-game-loop.js`): **Switch** (the
-default) lets the active Pokemon be swapped for a teammate that lines up better,
-while **Set** never switches on its own. The next party member is still sent out
-automatically after a faint either way. (An earlier version of this feature
-paused for a faint replacement picker; that was replaced by the matchup-switch
-meaning.)
+- [ ] The **Box** panel still has no touch reorder (the party now has up/down
+      buttons on touch; the Box does not).
 
-- [x] Add a `battleStyle` setting (`'set'` | `'switch'`).
-- [x] Gate the auto-battler's matchup switching on the setting.
-- [x] Default to Switch.
-
-Noticed while testing: shared EXP that levels a *fainted* party member adds the
-HP gained by the level-up, reviving it (see `applySharedExp` in
-`src/game/progression/exp.js`). That is a pre-existing quirk worth a small
-follow-up fix (only apply `hpGain` when `currentHp > 0`).
-
-Likely touch points: `src/game/reducer/settings.js` (`setBattleStyle`),
-`src/game/use-game-loop.js` and `settings-modal.js`.
+Likely touch points: `src/components/box-panel.js` (reorder), plus the party
+panel's reorder buttons as the model to copy.
 
 Effort: **small**.
-
-## 45. Physical / special / status as images
-
-Move categories are rendered from three Unicode glyphs in
-`src/data/moves.js` (`moveCategoryIcons`: `✴` physical, `◎` special, `☯`
-status), drawn in `battle-scene.js`, `move-manager-panel.js` and `stats-panel.js`.
-The glyphs render inconsistently across platforms and fonts and read poorly at
-small sizes.
-
-**Shipped:** the glyphs are replaced by an inline SVG set in
-`src/components/move-category-icon.js` (`MoveCategoryIcon`), used by the battle
-move buttons, the move manager and the stats panel. `moveCategoryIcons` was
-removed from `src/data/moves.js`.
-
-- [x] Add small category icons (physical/special/status), as an inline SVG set.
-- [x] Replace every `moveCategoryIcons[...]` call site with the icon.
-- [x] Check the move list, the battle move buttons and the stats panel.
-
-Likely touch points: `src/data/moves.js`, `src/components/battle-scene.js`,
-`move-manager-panel.js`, `stats-panel.js`, and `move-category-icon.js`.
-
-Effort: **small**.
-
-## 46. Mobile UX fixes
-
-Three concrete mobile issues found while playing on a phone:
-
-- [x] **Party drag/drop order doesn't work on touch.** *Done: the mobile party
-      panel now shows compact up/down reorder buttons (desktop keeps drag and
-      drop). The box panel still has no touch reorder.*
-- [x] **Map pan/zoom controls don't work on touch.** *Done: pan already used
-      pointer events; two-finger pinch-to-zoom was added and the on-screen
-      +/−/F/C buttons are now touch-sized on small screens.*
-- [x] **The bottom of the Map and Items tabs is cut off.** *Done: the `100dvh`
-      override was declared before the `100vh` fallback, so `100vh` always won
-      and the bottom sat under the mobile browser chrome (hiding the map's
-      bottom-corner zoom buttons too). The order is fixed.*
-
-Likely touch points: `src/components/party-panel.js` / `box-panel.js`
-(reorder), `src/components/town-map.js` (pan/zoom input), `mobile-tabs.js` and
-`assets/style.css` (viewport/scroll), plus `.party-*` / `.map-*` rules.
-
-Effort: **small–medium** (three separate, largely CSS/event fixes).
-
-## 47. Rename the League tab to Backpack
-
-The side panel has two tabs today (`SIDE_PANEL_TABS` in `src/data/ui.js`):
-**Location** and **League**. The League tab mixes the gym progress, records,
-Pokédex, bank and items, which the player reads as unrelated things bundled
-under a misleading name.
-
-**Shipped:** the Backpack is docked under the Location panel in the right column
-(like the bag used to be), its own titled section with sub-tabs **League / Dex /
-Bank / Items / Records** — the gym/league overview lives in the League tab
-(badges read as a trainer-card tab). The Pokédex, Records and Reward Shop
-components gained an `inline` mode so they render in a tab instead of a modal.
-The same section sits below the location panel on mobile. The party and box
-stack vertically on 21:9 as well (the old ultrawide two-column split is gone).
-
-- [x] Keep **Location** as its own section (the area, wilds and activities).
-- [x] Move the **Backpack** out of the Location tabs into its own section under
-      it, with the **Pokédex**, **Bank**, **Items**, **Records** and gym
-      **League** tabs.
-- [x] Re-tune the panel copy/labels and the old `'gym'` tab id.
-
-Likely touch points: `src/data/ui.js` (`SIDE_PANEL_TABS` / `MOBILE_TABS`),
-`src/components/right-panel.js`, `backpack-panel.js`, `mobile-tabs.js`,
-`pokedex-modal.js`, `records-modal.js` and `reward-shop-modal.js`.
-Effort: **medium**.
 
 ## 48. Colour-accessibility pass
 
-There is currently **yellow text on a yellow background** when learning a new
-move (the move-manager / level-up flow), which is close to unreadable. This is
-one instance of a broader problem: several theme colours (the parchment/gold
-palette in `assets/style.css`) are used for both text and surfaces without
-checking contrast.
+The specific yellow-on-yellow move-learning text shipped a fix in 0.21.0, and an
+`--ink` token was added for text on parchment (used by the stats-panel HP
+label).
 
-- [x] Fix the move-learning text first (give the text a darker ink colour or
-      the panel a non-yellow surface). *(Done: the tutor-cost line and the
-      section/species labels in the move manager now use a dark `--ink`, and
-      the light type colours (electric/ground/ice/steel) get dark text again in
-      the move list — the component `color:#fff` rules were overriding the
-      `.type-bg-*` ones.)*
+Still open:
+
 - [ ] Sweep the UI for other low-contrast pairs and check body text, badges,
       status tags and buttons at WCAG AA for their size. White on the lighter
       type colours (normal, rock, bug, fairy, grass, flying) is still below AA
       for the small move text; decide whether to darken those too.
 - [ ] Consider a slightly darker text token or a `--text-on-gold` variable
-      rather than fixing colours case by case. *(Started: `--ink` added for
-      text on parchment — the stats-panel HP label uses it now.)*
+      rather than fixing colours case by case.
 - [ ] Spot-check the shiny/gold, warning and error states, and the battle
       log / floating damage numbers.
 
@@ -919,8 +449,9 @@ All eight non-Kanto regions have hand-measured `REGION_MAP_LAYOUTS` overrides.
 reference image (`tools/map-compare/refs/`, fetched by `fetch-refs.cjs`) to
 check them. As of 0.12.0 the Sinnoh, Galar, Kalos and Unova nodes all land on
 their matching reference places, so there is no outstanding coordinate work for
-these four — the remaining Galar gap is the missing areas, not placement (see
-#35/#36). Re-run the overlay after moving or adding nodes.
+these four — the remaining Galar gap was the missing areas, now covered by the
+Wild Area/DLC zones (see #28/#36). Re-run the overlay after moving or adding
+nodes.
 
 Reference images kept for future checks:
 
@@ -936,14 +467,12 @@ Reference images kept for future checks:
 The generated maps are readable graphs; the next visual steps need art/design
 decisions:
 
-- [x] Draw a generated terrain layer under the Town Map (blue water, green/
-      brown land) from each location's biome and wild types. See `TERRAIN_COLORS`
-      and `terrainColorFor` in `town-map.js`.
 - [ ] Add more battle background art. There are only four base scenes
       (grassland, beach, mountain, cave) plus the biome colour grades; real
       forest/desert/swamp/volcano/tundra art would let `routeBackground` stop
       tinting a handful of images.
-- [ ] A zone glyph/label polish pass once the terrain layer exists.
+- [ ] A zone glyph/label polish pass once the terrain layer exists (pairs with
+      #36).
 
 ## Useful references when picking these up
 
@@ -966,6 +495,7 @@ decisions:
 - **Verifying:** `npm run typecheck`, `npm run build`, `npm run validate`, and a
   headless test (mock `window.gameDataInjector.data` with the JSON files and
   `import()` the module) works well for reducer/combat logic.
-- **Versioning:** add a `GAME_VERSION` bump + `CHANGELOG` entry when a batch of
-  work lands (secrets stay out of the changelog by convention).
+- **Versioning:** fold a change into the top `CHANGELOG` entry; cut a new
+  `GAME_VERSION` only at a milestone (secrets stay out of the changelog by
+  convention).
 - **Commit** each logical change; never `git push`.

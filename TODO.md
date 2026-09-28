@@ -23,41 +23,51 @@ renumbered, so the gaps below are items that shipped.
    text per type) and the shared muted label colour now meet WCAG AA; a
    residual sweep of the remaining hardcoded greys and the warning/error
    states remains.
+3. **#49 Companion care decays too fast** — S · ★★ — fullness / happiness /
+   energy / cleanliness fall too quickly between wild wins; retune the decay,
+   thresholds and costs so keeping a companion content is sustainable.
+4. **#51 Poke Ball Factory should give more (and better) balls** — S · ★★ —
+   hand out more balls per run and only the special, mart-unavailable kinds.
+5. **#52 Mega / Dynamax should not evolve** — S–M · ★★ — exclude Mega and
+   Gigantamax forms from evolution, and revert any saved in those forms.
 
 ### Tier 2 — High impact, worth the effort (medium–large)
 
-3. **#28 More region areas (caves, POIs, DLC land)** — L · ★★★★½ — real
+6. **#28 More region areas (caves, POIs, DLC land)** — L · ★★★★½ — real
    content; data-heavy. Started: the POI marker model shipped with the Day-Care
    as the first POI (28c), and the DLC areas are in as zones (28a); ordinary
    caves/forests (28b) and more POIs remain. Pairs with #36/#39.
-4. **#24 Move data pass** — M · ★★★ — ally/faint heals, context move-calling,
+7. **#24 Move data pass** — M · ★★★ — ally/faint heals, context move-calling,
    the doubles-only moves, and decisions on unused PP / dead Z-Max data.
-5. **#25 Battle engine pass** — M–L · ★★★ — ally/doubles abilities, a few
+8. **#25 Battle engine pass** — M–L · ★★★ — ally/doubles abilities, a few
    complex singles ones, item nuances and battle polish (animations / damage
    numbers).
-6. **#36 Zones (route chunks)** — M–L · ★★★★ — the model is in; more
-   sub-areas, a distinct zone glyph and inline per-sub-area encounter grids.
-7. **#40 Alola / Galar / Paldea league structures** — M · ★★★½ — the
-   data-driven model is in; Alola's full trial track, Galar's post-game
-   tournament and Paldea's Titans / Team Star remain.
-8. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of Armor,
-   Crown Tundra, Kitakami and the Terarium to first-class regions.
-9. **#29 Companion minigame polish** — S · ★★ — an animated buddy panel /
-   petting scene (the last open minigame idea).
-10. **#18 Better settings** — M · ★★★ — sprite-style options, account controls
+9. **#50 Fossil & fossil-revive system** — M · ★★★ — one fossil item per region
+   (handed out as a gift instead of the Pokemon), revived at Cinnabar Island,
+   with more fossils from the Sinnoh Underground.
+10. **#36 Zones (route chunks)** — M–L · ★★★★ — the model is in; more
+    sub-areas, a distinct zone glyph and inline per-sub-area encounter grids.
+11. **#40 Alola / Galar / Paldea league structures** — M · ★★★½ — the
+    data-driven model is in; Alola's full trial track, Galar's post-game
+    tournament and Paldea's Titans / Team Star remain.
+12. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of Armor,
+    Crown Tundra, Kitakami and the Terarium to first-class regions.
+13. **#29 Companion minigame polish** — S · ★★ — an animated buddy panel /
+    petting scene (the last open minigame idea).
+14. **#18 Better settings** — M · ★★★ — sprite-style options, account controls
     (blocked on #19) and finishing the Gameplay section.
-11. **#38 Clean up the Raid Islands** — M · ★★½ — weight / level-gate the
+15. **#38 Clean up the Raid Islands** — M · ★★½ — weight / level-gate the
     legendary pick and (optionally) shrink Unova's ordinary pool.
-12. **#43 Multi-battles (double / triple / rotation) as a minigame** — M–L ·
+16. **#43 Multi-battles (double / triple / rotation) as a minigame** — M–L ·
     ★★½ — a self-contained minigame that reuses the combat pipeline.
-13. **#30 Caught / event QOL indicators** — S · ★ — flag the battle sprite;
+17. **#30 Caught / event QOL indicators** — S · ★ — flag the battle sprite;
     decide whether raids show the caught badge.
 
 ### Tier 3 — Big / low-return, defer
 
-14. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
+18. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
     route-based field effects.
-15. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+19. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
 ---
@@ -429,6 +439,95 @@ Likely touch points: `assets/style.css` (the `:root` custom properties),
 `tests/type-contrast.test.mjs`, and any component with inline colours.
 
 Effort: **small** (mostly CSS; a residual sweep).
+
+## 49. Companion care decays too fast
+
+The Poke Pelago companion's fullness / happiness / energy / cleanliness fall
+faster than the one-care-action-per-win allows, so a companion is rarely
+content and the +15% EXP bonus is hard to keep.
+
+- [ ] Slow the decay in `tickCompanion` / `decay` (`src/game/companion.js`), or
+      make each care action restore more, so a full bar survives a sensible
+      number of wins.
+- [ ] Re-tune `COMPANION_CONTENT_THRESHOLD`, the care-action costs and the
+      one-action-per-win limit together (they were balanced independently).
+- [ ] Consider banking multiple care actions per win, or a passive top-up while
+      the companion is in the party.
+
+Likely touch points: `src/game/companion.js`, the `CARE_COMPANION` handler and
+companion tick in `src/game/reducer` / `src/game/use-game-loop.js`, and the
+panel copy in `src/components/companion-panel.js`.
+
+Effort: **small**.
+
+## 50. Fossil & fossil-revive system
+
+Fossil lines are currently handed out as one-off refuge statics (Omastar,
+Kabutops, Aerodactyl, Rampardos, Bastiodon, Carracosta, Archeops, Tyrantrum,
+Aurorus, the four Galar fossils). Replace that with a proper fossil loop.
+
+- [ ] Add one **fossil item** per region (Helix, Dome, Old Amber, Skull, Armor,
+      Cover, Plume, Jaw, Sail, ...) and hand the **item** out from the region
+      gift / refuge **instead of the Pokemon itself**.
+- [ ] Add a **revive** NPC at Kanto's Cinnabar Island lab that turns a fossil
+      item into its Pokemon (one revive per fossil, or paid). Making it the hub
+      for every region's fossils gives a reason to revisit Kanto.
+- [ ] Move the fossil species out of `raidOrdinaryPool` /
+      `RAID_REFUGE_LOCATIONS` (`src/game/gifts.js`) once the fossil loop covers
+      them, so they aren't double-sourced.
+- [ ] Make the **Sinnoh Underground** mining minigame drop fossils (its reward
+      table currently gives shards / evolution items) as the repeatable fossil
+      source.
+- [ ] Wire the fossil items into the bag with icons, and add the revive action
+      plus a small revive panel/animation.
+
+Likely touch points: `src/data/items.js`, `src/game/gifts.js`,
+`src/game/minigames/mining.js`, `src/components/location-panel.js` (a Cinnabar
+revive panel), and `tools/download-item-sprites.cjs` for the art.
+
+Effort: **medium**.
+
+## 51. Poke Ball Factory should give more (and better) balls
+
+The Poke Ball Factory (Laverre City) run pays out too few balls, and its reward
+pool can include the Poke / Great / Ultra Balls that marts already sell. Make it
+the way to stock up on the situational balls:
+
+- [ ] Raise the ball yield per successful run (and/or scale it with the puzzle
+      score / path length).
+- [ ] Restrict the reward pool to the **special** balls only (Quick, Timer,
+      Repeat, Net, Dive, Dusk, Nest) and never the mart-accessible Poke / Great
+      / Ultra Balls.
+- [ ] Check `FACTORY_BALL_POOL` / `rollFactoryBalls` and `factoryPrize` in
+      `src/game/minigames/pokeball-factory.js`.
+
+Likely touch points: `src/game/minigames/pokeball-factory.js` and its scene
+copy / tests.
+
+Effort: **small**.
+
+## 52. Mega / Dynamax forms should not evolve
+
+Mega and Gigantamax are terminal forms, but the evolution graph still offers (or
+the party/box UI can trigger) an evolution from them, and Gigantamax forms are
+saved as permanent level-100 evolutions.
+
+- [ ] Exclude Mega and Gigantamax forms from evolution: they can't evolve, and
+      they shouldn't be a valid evolution **base**. Filter them in
+      `getEvolutionOptions` (`src/game/breeding.js`) and the level/move paths.
+- [ ] Clean up saves: `repairSave` (`src/game/save.js`) should revert any
+      Pokemon saved in a Mega / Gigantamax form back to its base form (and drop
+      the stale battle form state). Bump `SAVE_VERSION` if the stored shape
+      changes.
+- [ ] Decide the acquisition path once they can't evolve (the Mega Stone / G-Max
+      item is the only way, or a one-off gift) and whether the level-100
+      Mega/G-Max evolutions are removed.
+
+Likely touch points: `src/game/pokemon/evolution.js`,
+`src/game/breeding.js` (`getEvolutionOptions`), `src/game/save.js`
+(`repairSave`), the party/box evolution UI, and `tools/add-gmax-evolutions.cjs`.
+
+Effort: **small–medium**.
 
 ---
 

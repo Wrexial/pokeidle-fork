@@ -14,6 +14,7 @@ import { buildTrainerTeam } from '../game/progression.js'
  * @property {string} badgeName
  * @property {string} spriteKey
  * @property {string} locationKey
+ * @property {number} [badgesRequired]
  * @property {{ level: number }[]} team
  * @property {{ level: number }[]} [rematchTeam]
  */
@@ -94,20 +95,23 @@ export function GymLocationPanel() {
         children: anyRematch ? 'Gym Leader \u00b7 Rematch' : 'Gym Leader',
       }),
       ...locationGyms.map(({ gym: leader, leaderIndex }) => {
-        // Kanto's gyms sit in cities reached long before their canonical turn
-        // (Giovanni's Viridian City is next to Pallet Town), so still reveal
-        // them in badge order. Generated regions level each gym to its town, so
-        // any gym the player can stand in is fair game there.
-        const revealed =
-          state.unlockedLocations.includes(leader.locationKey) &&
-          (regionId !== 'kanto' || defeatedRegionGyms >= leaderIndex)
+        // Kanto still reveals its gyms in badge order, and a leader can carry
+        // its own `badgesRequired` for a gym sitting in a town reached long
+        // before its canonical turn (Alola's Hapu fights in the entry town of
+        // Iki Town but is the region's eighth trial). Generated regions level
+        // each gym to its town, so any other unlocked gym is fair game.
+        const requiredBadges =
+            leader.badgesRequired ?? (regionId === 'kanto' ? leaderIndex : 0),
+          revealed =
+            state.unlockedLocations.includes(leader.locationKey) &&
+            defeatedRegionGyms >= requiredBadges
         if (!revealed)
           return jsx(
             'div',
             {
               className: 'tower-hint',
-              children: `This gym's challenge opens once you earn ${leaderIndex} badge${
-                leaderIndex === 1 ? '' : 's'
+              children: `This gym's challenge opens once you earn ${requiredBadges} badge${
+                requiredBadges === 1 ? '' : 's'
               }.`,
             },
             leader.id

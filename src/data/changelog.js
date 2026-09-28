@@ -52,6 +52,7 @@ export const CHANGELOG = [
             'Alola\u2019s Route 2 no longer asks for wins on the later, still-locked Route 3: it now opens from Route 1, so the island\u2019s early progression and the \u201cNext Unlocks\u201d list point somewhere you can actually reach',
             'The gym tab\u2019s "GO TO <town>" hint is now a button: click it to travel straight to that leader\u2019s town',
             'Alola\u2019s Mina is challengeable again: when a town hosts more than one Gym Leader (Hau\u2019oli City has both Ilima and Mina), the location panel now lists them all with their own FIGHT button instead of only the first',
+            'Alola\u2019s Hapu no longer lets you fight the region\u2019s eighth trial from the very first town: she stays locked until you hold seven Z-Crystals (her Iki Town node is the region\u2019s entry point)',
             'Candies can be applied in bulk: choose 1, 10 or All in the bag and use them in one go. A stack stops at Lv.100 and only spends the candies it actually needed',
             'Mossdeep City\u2019s Gym leaders are now correctly named Tate & Liza (they were shown as just "Tate")',
             'Self-Destruct, Explosion, Misty Explosion and Memento now actually faint their user once they resolve',

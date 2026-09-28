@@ -545,6 +545,11 @@ const GYM_TOWNS = {
   // Hapu reuse Iki Town / Hauoli City rather than both landing on Iki Town.
   alola: ['Hauoli City', 'Konikoni City', 'Paniola Town', 'Heahea City', 'Malie City', 'Po Town', 'Hauoli City', 'Iki Town'],
 }
+// A gym sitting in a town reached long before its canonical turn needs a badge
+// gate of its own, since the town is already unlocked. Alola's Hapu fights in
+// the entry town of Iki Town (Poni Island has no scraped town) but is the
+// region's eighth trial, so she stays locked until seven Z-Crystals.
+const GYM_BADGE_GATES = { 'alola-gym-8': 7 }
 const ELITE_FOUR = {
   johto: ['Will', 'Koga', 'Bruno', 'Karen'], hoenn: ['Sidney', 'Phoebe', 'Glacia', 'Drake'],
   sinnoh: ['Aaron', 'Bertha', 'Flint', 'Lucian'], unova: ['Shauntal', 'Grimsley', 'Caitlin', 'Marshal'],
@@ -1685,6 +1690,7 @@ for (const region of REGIONS) {
       badgeColor:
         TYPE_COLORS[GYM_TYPES[regionId]?.[index]?.[0]] ?? BADGE_COLORS[index % BADGE_COLORS.length],
       spriteKey: trainerSpriteKey(leaderName),
+      ...(GYM_BADGE_GATES[gymId] != null ? { badgesRequired: GYM_BADGE_GATES[gymId] } : {}),
       team: buildTeam(
         roster,
         GYM_TYPES[regionId]?.[index],

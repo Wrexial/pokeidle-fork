@@ -7,7 +7,7 @@ installGameData()
 
 const { awardExperience, computeUnlockedLocations, getRegionUnlockTokens, regionProgressionGoal, checkShinyOdds, shinyChainMultiplier, entryRoutePath } =
   await import('../src/game/progression.js')
-const { initialGameState } = await import('../src/game/reducer.js')
+const { initialGameState, gameReducer } = await import('../src/game/reducer.js')
 const { encounterData, gymLeaderData, mapData, pokemonSpecies, regions } = await import('../src/data/gameData.js')
 const { DAYCARE_LOCATIONS } = await import('../src/data/config.js')
 const { calculateExpYield, createPokemon } = await import('../src/game/pokemon.js')
@@ -244,6 +244,40 @@ test('a double knockout awards no EXP to the fainted active Pokemon', () => {
   assert.ok(
     !actions.some((action) => action.type === 'APPLY_EXP'),
     'no EXP is applied to a Pokemon that fainted to win'
+  )
+})
+
+test('a fainted party member does not revive when shared EXP levels it', () => {
+  const fainted = { ...createPokemon('charmander', 20, 'a'), currentHp: 0 },
+    healthy = createPokemon('charmander', 20, 'b')
+  // Only bump maxHp so the level-up HP top-up is isolated.
+  const newStatsFor =
+    /** @param {any} member */ (member) => ({
+      maxHp: member.maxHp + 5,
+      attack: member.attack + 1,
+      defense: member.defense,
+      spAttack: member.spAttack,
+      spDefense: member.spDefense,
+      speed: member.speed,
+    })
+  const next = gameReducer(
+    baseState({ party: [fainted, healthy], activePlayerPokemonIndex: 1, playerPokemon: healthy }),
+    {
+      type: 'APPLY_SHARED_EXP',
+      payload: {
+        partyExp: [
+          { pokemonId: fainted.id, partyIndex: 0, expGained: 10, newLevel: 21, newStats: newStatsFor(fainted) },
+          { pokemonId: healthy.id, partyIndex: 1, expGained: 10, newLevel: 21, newStats: newStatsFor(healthy) },
+        ],
+      },
+    }
+  )
+  assert.equal(next.party[0].currentHp, 0, 'the fainted member stays fainted')
+  assert.equal(next.party[0].level, 21, 'it still levels up')
+  assert.equal(
+    next.party[1].currentHp,
+    healthy.currentHp + 5,
+    'the healthy member is topped up by the HP gain'
   )
 })
 

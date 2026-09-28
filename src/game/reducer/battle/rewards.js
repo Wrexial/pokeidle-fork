@@ -26,10 +26,13 @@ export function applyExp(state, action) {
       level: action.payload.newLevel,
       friendship: gainFriendship(updatedPokemon, levelsGained * 8),
       maxHp: action.payload.newStats.maxHp ?? updatedPokemon.maxHp,
-      currentHp: Math.min(
-        updatedPokemon.currentHp + hpGain,
-        action.payload.newStats.maxHp ?? updatedPokemon.maxHp
-      ),
+      currentHp:
+        updatedPokemon.currentHp > 0
+          ? Math.min(
+              updatedPokemon.currentHp + hpGain,
+              action.payload.newStats.maxHp ?? updatedPokemon.maxHp
+            )
+          : 0,
       attack: action.payload.newStats.attack ?? updatedPokemon.attack,
       defense: action.payload.newStats.defense ?? updatedPokemon.defense,
       spAttack: action.payload.newStats.spAttack ?? updatedPokemon.spAttack,
@@ -90,7 +93,11 @@ export function applySharedExp(state, action) {
         ...member,
         level: entry.newLevel,
         maxHp: entry.newStats.maxHp ?? member.maxHp,
-        currentHp: Math.min(member.currentHp + hpGain, entry.newStats.maxHp ?? member.maxHp),
+        // A fainted Pokemon stays fainted: level-up HP is a top-up, not a revive.
+        currentHp:
+          member.currentHp > 0
+            ? Math.min(member.currentHp + hpGain, entry.newStats.maxHp ?? member.maxHp)
+            : 0,
         attack: entry.newStats.attack ?? member.attack,
         defense: entry.newStats.defense ?? member.defense,
         spAttack: entry.newStats.spAttack ?? member.spAttack,

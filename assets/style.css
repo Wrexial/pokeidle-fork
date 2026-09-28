@@ -1092,17 +1092,30 @@ img {
     border-top: 4px solid #483828
 }
 
-.battle-text-box {
+.battle-text-row {
+    display: flex;
+    align-items: stretch;
     height: 50px;
     flex-shrink: 0;
     background: url(/ui/parchment.png) repeat;
     background-size: 128px 128px;
     background-color: #e0d4b8;
-    padding: 8px 18px;
-    display: flex;
-    align-items: center;
     border-bottom: 4px solid #483828;
     box-shadow: inset 2px 2px #ffffff26,inset -2px -2px #00000014
+}
+
+.battle-text-box {
+    flex: 1;
+    min-width: 0;
+    padding: 8px 18px;
+    display: flex;
+    align-items: center
+}
+
+.battle-text-row .battle-mode-btn {
+    align-self: center;
+    flex-shrink: 0;
+    margin: 0 12px 0 8px
 }
 
 .text-box-inner {

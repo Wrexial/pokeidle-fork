@@ -537,46 +537,49 @@ export function BattleScene() {
       jsxs('div', {
         className: 'bottom-panel',
         children: [
-          jsx(BattleTextBox, {
-            event:
-              currentEvent ??
-              (state.pendingEvents.length > 0
-                ? {
-                    type: 'waiting',
-                    message: '',
-                  }
-                : null),
-            speed: state.speed,
-            isAtTown: mapData[state.currentLocation]?.type === 'town',
+          jsxs('div', {
+            className: 'battle-text-row',
+            children: [
+              jsx(BattleTextBox, {
+                event:
+                  currentEvent ??
+                  (state.pendingEvents.length > 0
+                    ? {
+                        type: 'waiting',
+                        message: '',
+                      }
+                    : null),
+                speed: state.speed,
+                isAtTown: mapData[state.currentLocation]?.type === 'town',
+              }),
+              jsx('button', {
+                className: `battle-mode-btn${manualMode ? ' active' : ''}`,
+                onClick: () =>
+                  dispatch({
+                    type: 'SET_BATTLE_MODE',
+                    payload: { mode: manualMode ? 'auto' : 'manual' },
+                  }),
+                title: manualMode
+                  ? 'Manual mode \u2014 you choose each move'
+                  : 'Auto mode \u2014 the game battles for you',
+                children: manualMode ? 'MANUAL' : 'AUTO',
+              }),
+            ],
           }),
           jsxs('div', {
             className: 'bottom-right-panel',
             children: [
-              jsxs('div', {
-                className: 'move-actions',
-                children: [
-                  jsx('button', {
-                    className: `battle-mode-btn${manualMode ? ' active' : ''}`,
-                    onClick: () =>
-                      dispatch({
-                        type: 'SET_BATTLE_MODE',
-                        payload: { mode: manualMode ? 'auto' : 'manual' },
-                      }),
-                    title: manualMode
-                      ? 'Manual mode \u2014 you choose each move'
-                      : 'Auto mode \u2014 the game battles for you',
-                    children: manualMode ? 'MANUAL' : 'AUTO',
-                  }),
-                  manualMode &&
-                    state.phase === 'battling' &&
+              manualMode &&
+                state.phase === 'battling' &&
+                jsxs('div', {
+                  className: 'move-actions',
+                  children: [
                     jsx('button', {
                       className: 'manual-switch-btn',
                       disabled: !awaitingManual,
                       onClick: () => setShowSwitch(!0),
                       children: 'SWITCH',
                     }),
-                  manualMode &&
-                    state.phase === 'battling' &&
                     jsx('span', {
                       className: `manual-status${awaitingManual ? ' your-turn' : ''}`,
                       children: state.pendingPlayerMove
@@ -587,8 +590,8 @@ export function BattleScene() {
                             ? 'YOUR MOVE'
                             : 'Waiting...',
                     }),
-                ],
-              }),
+                  ],
+                }),
               jsx('div', {
                 className: 'move-grid',
                 children: playerPokemon.moves.map((moveId) => {

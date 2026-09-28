@@ -7,10 +7,10 @@
 export const COMPANION_MAX_CARE = 100
 
 /** Care lost from each stat per wild win. */
-const COMPANION_DECAY_PER_WIN = 2
+const COMPANION_DECAY_PER_WIN = 1
 
 /** Every care stat must be at least this for the companion to count as content. */
-export const COMPANION_CONTENT_THRESHOLD = 50
+export const COMPANION_CONTENT_THRESHOLD = 40
 
 /** EXP multiplier while the companion is content. */
 export const COMPANION_EXP_MULTIPLIER = 1.15
@@ -39,7 +39,7 @@ export const COMPANION_CARE_ACTIONS = {
     label: 'Play',
     icon: '\u{1f3be}',
     cost: 0,
-    changes: { happiness: 30, energy: -10 },
+    changes: { happiness: 30, energy: -5 },
     friendship: 3,
     verb: 'played with',
   },
@@ -63,7 +63,7 @@ export const COMPANION_CARE_ACTIONS = {
     label: 'Wash',
     icon: '\u{1f6c1}',
     cost: COMPANION_WASH_COST,
-    changes: { cleanliness: 60, energy: -10 },
+    changes: { cleanliness: 60, energy: -5 },
     friendship: 4,
     verb: 'washed',
   },

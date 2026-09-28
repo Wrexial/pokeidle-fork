@@ -2,7 +2,7 @@
 
 import { breedingData, evolutionData, pokemonSpecies } from '../data/gameData.js'
 import { evolutionItems } from '../data/items.js'
-import { isMegaOrPrimalForm } from '../data/mega-evolution.js'
+import { isMegaOrPrimalForm, isTerminalForm } from '../data/mega-evolution.js'
 import { randomNature } from '../data/natures.js'
 import {
   IV_STAT_ORDER,
@@ -37,9 +37,14 @@ function isFormChange(evolution) {
  * @returns {{ targetName: string, canEvolve: boolean, requirementLabel: string, targetKey: string, itemId?: string, isForm: boolean }[]}
  */
 export function getEvolutionOptions(pokemon, inventory) {
+  // Mega / Primal / Gigantamax forms are terminal battle forms, not evolutions.
+  if (isTerminalForm(pokemon.speciesKey)) return []
   const evolutionChain = evolutionData[pokemon.speciesKey]
   if (!evolutionChain) return []
   return evolutionChain
+    // Gigantamax (`form: true`) and Mega/Primal forms are battle transforms, so
+    // they are never offered as evolutions.
+    .filter((evolution) => !evolution.form)
     .filter((evolution) => !isMegaOrPrimalForm(evolution.into))
     .filter((evolution) => !evolution.gender || evolution.gender === genderForPokemon(pokemon))
     .map((evolution) => {

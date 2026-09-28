@@ -84,6 +84,31 @@ export function isMegaOrPrimalForm(formKey) {
 }
 
 /**
+ * Every Gigantamax form key: the `gx-` targets of a `form: true` evolution.
+ * @type {Set<string>}
+ */
+export const GMAX_FORM_KEYS = new Set(
+  Object.values(evolutionData)
+    .flat()
+    .filter((evolution) => evolution?.form === true)
+    .map((evolution) => evolution.into)
+)
+
+/** Whether `speciesKey` is a Gigantamax (Dynamax) form. @param {string | null | undefined} speciesKey */
+export function isGmaxForm(speciesKey) {
+  return typeof speciesKey === 'string' && GMAX_FORM_KEYS.has(speciesKey)
+}
+
+/**
+ * Whether a species is a temporary / terminal battle form (Mega, Primal or
+ * Gigantamax). These never evolve and are reverted to their base on save load.
+ * @param {string | null | undefined} speciesKey
+ */
+export function isTerminalForm(speciesKey) {
+  return isMegaOrPrimalForm(speciesKey) || isGmaxForm(speciesKey)
+}
+
+/**
  * The Mega form a Pokemon would take. Species with two Megas (Charizard, Mewtwo)
  * use the physical X forme when their Attack is higher, the special Y otherwise.
  * @param {string} speciesKey

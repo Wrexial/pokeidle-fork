@@ -59,6 +59,29 @@ test('a serialized save round-trips through repairSave', () => {
     assert.deepEqual(repaired[key], state[key], key)
 })
 
+test('repairSave reverts a Pokemon saved in a Mega / Gigantamax form', () => {
+  const base = startedGame()
+  /** @param {string} speciesKey @param {string} name @param {string[]} types */
+  const savedAs = (speciesKey, name, types) => ({
+    ...base.party[0],
+    speciesKey,
+    name,
+    types,
+    level: 100,
+  })
+  for (const [formKey, baseKey, name, types] of [
+    ['gx-venusaur', 'venusaur', 'Venusaur', ['Grass', 'Poison']],
+    ['m-charizard x', 'charizard', 'Charizard', ['Fire', 'Flying']],
+    ['p-groudon', 'groudon', 'Groudon', ['Ground']],
+  ]) {
+    const pokemon = savedAs(formKey, name, types),
+      repaired = repairSave(serializeSave({ ...base, party: [pokemon], playerPokemon: pokemon }))
+    assert.ok(repaired, `${formKey} save repairs`)
+    assert.equal(repaired.party[0].speciesKey, baseKey, `${formKey} reverts to ${baseKey}`)
+    assert.equal(repaired.party[0].name, name)
+  }
+})
+
 test('preferences are not written into the save', () => {
   const saved = serializeSave(startedGame())
   for (const key of ['speed', 'autoCatch', 'battleStyle', 'browserNotifications', 'musicEnabled'])

@@ -9,6 +9,7 @@ import { elite4Data, encounterData, gymLeaderData, mapData, moveData, pokemonSpe
 import { BASE_FRIENDSHIP, generateIVs, calculatePokemonStats, resolvePokemonMoves, rollAbility } from './pokemon.js'
 import { ACHIEVEMENTS } from '../data/achievements.js'
 import { natureByKey, randomNature } from '../data/natures.js'
+import { isTerminalForm } from '../data/mega-evolution.js'
 import { POKEMON_TYPES } from '../data/moves.js'
 import { COMPANION_MAX_CARE, createCompanionCare } from './companion.js'
 import { GARDEN_BERRIES, createGarden } from './garden.js'
@@ -156,6 +157,41 @@ export function repairSave(saved) {
   party = party.filter((pokemon) => pokemon?.speciesKey && pokemonSpecies[pokemon.speciesKey])
   box = box.filter((pokemon) => pokemon?.speciesKey && pokemonSpecies[pokemon.speciesKey])
   if (party.length === 0) party = [playerPokemon]
+
+  // Mega / Primal / Gigantamax are temporary battle forms. A save that stored
+  // one (an old level-100 G-Max evolution, or a leaked battle form) is cleaned
+  // up by reverting the Pokemon to its base species and re-deriving its data.
+  /** @param {any} pokemon */
+  const revertTerminalForm = (pokemon) => {
+    if (!isTerminalForm(pokemon.speciesKey)) return pokemon
+    let base = pokemon.speciesKey,
+      guard = 0
+    while (isTerminalForm(base) && preEvolutionMap[base] && guard++ < 10)
+      base = preEvolutionMap[base]
+    const species = pokemonSpecies[base]
+    if (!species) return pokemon
+    const level = pokemon.level || 1,
+      nature = pokemon.nature && natureByKey[pokemon.nature] ? pokemon.nature : randomNature(),
+      stats = calculatePokemonStats(species, level, pokemon.ivs, nature)
+    return {
+      ...pokemon,
+      speciesKey: base,
+      name: species.name,
+      types: species.types,
+      nature,
+      maxHp: stats.hp,
+      currentHp: Math.min(pokemon.currentHp ?? stats.hp, stats.hp),
+      attack: stats.attack,
+      defense: stats.defense,
+      spAttack: stats.spAttack,
+      spDefense: stats.spDefense,
+      speed: stats.speed,
+      moves: resolvePokemonMoves(base, level),
+      ability: void 0,
+    }
+  }
+  party = party.map(revertTerminalForm)
+  box = box.map(revertTerminalForm)
 
   // Movesets change over time; drop moves that no longer exist and make sure
   // every Pokemon still has at least one usable move.

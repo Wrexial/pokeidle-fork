@@ -7,7 +7,7 @@ installGameData()
 
 const { getEvolutionOptions } = await import('../src/game/breeding.js')
 
-test('Gigantamax and form-item transforms are flagged as form changes', () => {
+test('form-item transforms are form changes, but G-Max and Mega are not offered', () => {
   const rotom = getEvolutionOptions({ speciesKey: 'rotom', level: 50 }, {})
   assert.ok(rotom.length > 0, 'Rotom has appliance forms')
   assert.ok(
@@ -21,8 +21,8 @@ test('Gigantamax and form-item transforms are flagged as form changes', () => {
 
   const charizard = getEvolutionOptions({ speciesKey: 'charizard', level: 100 }, {})
   assert.ok(
-    charizard.some((entry) => entry.targetKey === 'gx-charizard' && entry.isForm),
-    'Gigantamax Charizard is a form change'
+    !charizard.some((entry) => entry.targetKey === 'gx-charizard'),
+    'Gigantamax is not offered as an evolution'
   )
   assert.ok(
     !charizard.some((entry) => entry.targetKey.startsWith('m-')),
@@ -35,8 +35,8 @@ test('real evolutions and regional evolutions are not form changes', () => {
     raichu = pikachu.find((entry) => entry.targetKey === 'raichu')
   assert.ok(raichu && raichu.isForm === false, 'a stone evolution is a real evolution')
   assert.ok(
-    pikachu.some((entry) => entry.targetKey === 'gx-pikachu' && entry.isForm),
-    'Gigantamax Pikachu is still a form change'
+    !pikachu.some((entry) => entry.targetKey === 'gx-pikachu'),
+    'Gigantamax is not an evolution'
   )
 
   const rattata = getEvolutionOptions({ speciesKey: 'a-rattata', level: 20 }, {})
@@ -45,4 +45,10 @@ test('real evolutions and regional evolutions are not form changes', () => {
     rattata.every((entry) => !entry.isForm),
     'Alolan Raticate is a real evolution, not a form change'
   )
+})
+
+test('a Mega / Gigantamax / Primal form itself cannot evolve', () => {
+  assert.equal(getEvolutionOptions({ speciesKey: 'gx-charizard', level: 100 }, {}).length, 0)
+  assert.equal(getEvolutionOptions({ speciesKey: 'm-charizard x', level: 100 }, {}).length, 0)
+  assert.equal(getEvolutionOptions({ speciesKey: 'p-groudon', level: 100 }, {}).length, 0)
 })

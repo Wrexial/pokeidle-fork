@@ -1059,7 +1059,11 @@ test('the factory pays out special balls, more for a cleaner shift', () => {
     failed = factoryPrize(30, false, () => 0)
   assert.ok(count(flawless) > count(cleared))
   assert.ok(count(cleared) > count(patched))
+  assert.ok(count(flawless) >= 8, 'a flawless shift pays a healthy batch')
+  assert.ok(count(patched) >= 3, 'even a slow clear pays a few balls')
   assert.equal(count(failed), 0, 'a jammed line pays no balls')
+  for (const ballId of ['pokeball', 'greatball', 'ultraball', 'premierball', 'masterball'])
+    assert.ok(!FACTORY_BALL_POOL.includes(ballId), `${ballId} is not a factory reward`)
   for (const prize of [flawless, cleared, patched])
     for (const item of prize.items) {
       assert.ok(FACTORY_BALL_POOL.includes(item.itemId), `${item.itemId} is a factory ball`)

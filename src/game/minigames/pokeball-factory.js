@@ -279,8 +279,8 @@ export function rollFactoryBalls(count, rng = Math.random) {
 export function factoryPrize(moves, solved, rng = Math.random) {
   if (!solved) return { money: 0, items: [], label: 'The conveyor jammed' }
   if (moves <= FACTORY_SIZE + 2)
-    return { money: 0, items: rollFactoryBalls(4, rng), label: 'Flawless shift!' }
+    return { money: 0, items: rollFactoryBalls(8, rng), label: 'Flawless shift!' }
   if (moves <= 12)
-    return { money: 0, items: rollFactoryBalls(2, rng), label: 'Line cleared' }
-  return { money: 0, items: rollFactoryBalls(1, rng), label: 'Line patched up' }
+    return { money: 0, items: rollFactoryBalls(5, rng), label: 'Line cleared' }
+  return { money: 0, items: rollFactoryBalls(3, rng), label: 'Line patched up' }
 }

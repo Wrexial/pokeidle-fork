@@ -81,15 +81,16 @@ export let championData = /** @type {any[]} */ (loadedGameData.championData)
 export let regions = /** @type {Region[]} */ (loadedGameData.regions || [])
 
 /**
- * The Raid Island's encounter table for a region: its legendaries first, then
- * the ordinary finals that have no other source (empty if the region is
- * unknown). Used for the island's display and wild table.
+ * The Raid Island's displayed encounter table: its legendaries. The ordinary
+ * finals that used to sit here are relocated to a reachable refuge route on the
+ * region (see `RAID_REFUGE_LOCATIONS` in game/gifts.js), so the island stays
+ * legendary-only. Empty if the region is unknown.
  * @param {string} regionId
  * @returns {{ speciesKey: string, level: number }[]}
  */
 export function raidPoolFor(regionId) {
   const region = regions.find((candidate) => candidate.id === regionId)
-  return region ? [...(region.raidPool ?? []), ...(region.raidOrdinaryPool ?? [])] : []
+  return region ? [...(region.raidPool ?? [])] : []
 }
 
 /**

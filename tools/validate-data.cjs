@@ -108,6 +108,11 @@ for (const bucket of Object.values(encounterData))
 for (const [key, entry] of Object.entries(species))
   if (entry.id > 0 && entry.id <= 1025 && (entry.types ?? []).includes('Bug'))
     obtainable.add(key)
+// The ordinary Raid Island finals are relocated to reachable refuge static
+// encounters (RAID_REFUGE_LOCATIONS in src/game/gifts.js), so they stay
+// obtainable even though the island's own wild table is legendary-only.
+for (const region of regions)
+  for (const entry of region.raidOrdinaryPool ?? []) obtainable.add(entry.speciesKey)
 let expanded = true
 while (expanded) {
   expanded = false

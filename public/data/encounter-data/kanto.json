@@ -2949,30 +2949,6 @@
   "name": "Raid Island",
   "encounters": [
    {
-    "speciesKey": "jynx",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "omastar",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "kabutops",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "aerodactyl",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "articuno",
     "weight": 1,
     "minLevel": 75,

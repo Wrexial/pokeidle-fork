@@ -2518,10 +2518,11 @@ for (const pending of pendingRaids) {
     ordinaryPool = pool.filter((entry) => !entry.legendary).slice(0, RAID_ORDINARY_CAP),
     toEntry = (entry) => ({ speciesKey: entry.key, level: raidLevel(entry) })
   regionObj.raidPool = legendaryPool.map(toEntry)
+  // The ordinary finals are kept as a roster only: the game turns each into a
+  // static encounter on a reachable refuge route (RAID_REFUGE_LOCATIONS in
+  // src/game/gifts.js), so the island's own wild table stays legendary-only.
   regionObj.raidOrdinaryPool = ordinaryPool.map(toEntry)
-  // The island's wild table carries both tiers, in legendary-first order, so
-  // nothing is orphaned and idling on the island can surface the ordinary set.
-  const islandPool = [...legendaryPool, ...ordinaryPool]
+  const islandPool = [...legendaryPool]
   if (raidId)
     encounterData[raidId] = {
       name: raidNodeName,

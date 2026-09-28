@@ -1547,30 +1547,6 @@
   "name": "Galar Raid Island",
   "encounters": [
    {
-    "speciesKey": "dracozolt",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "arctozolt",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "dracovish",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "arctovish",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "zacian",
     "weight": 1,
     "minLevel": 70,
@@ -1641,30 +1617,6 @@
     "weight": 1,
     "minLevel": 75,
     "maxLevel": 75
-   },
-   {
-    "speciesKey": "g-articuno",
-    "weight": 1,
-    "minLevel": 75,
-    "maxLevel": 75
-   },
-   {
-    "speciesKey": "g-zapdos",
-    "weight": 1,
-    "minLevel": 75,
-    "maxLevel": 75
-   },
-   {
-    "speciesKey": "g-moltres",
-    "weight": 1,
-    "minLevel": 75,
-    "maxLevel": 75
-   },
-   {
-    "speciesKey": "indeedee-f",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
    }
   ]
  }

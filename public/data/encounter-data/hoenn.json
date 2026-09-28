@@ -1769,30 +1769,6 @@
   "name": "Hoenn Raid Island",
   "encounters": [
    {
-    "speciesKey": "slaking",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "mawile",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "cradily",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "metagross",
-    "weight": 1,
-    "minLevel": 75,
-    "maxLevel": 75
-   },
-   {
     "speciesKey": "regirock",
     "weight": 1,
     "minLevel": 75,

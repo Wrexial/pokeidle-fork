@@ -1517,30 +1517,6 @@
   "name": "Kalos Raid Island",
   "encounters": [
    {
-    "speciesKey": "tyrantrum",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "aurorus",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "carbink",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
-    "speciesKey": "gourgeist",
-    "weight": 1,
-    "minLevel": 70,
-    "maxLevel": 70
-   },
-   {
     "speciesKey": "xerneas",
     "weight": 1,
     "minLevel": 70,

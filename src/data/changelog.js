@@ -77,6 +77,7 @@ export const CHANGELOG = [
             'Manual battle text plays at the normal speed again instead of flashing past: the player\u2019s picked move now resolves the turn immediately through a dedicated tick, rather than speeding up the whole loop (which had also rushed every event and battle line)',
             'Shared EXP no longer revives a fainted party member: a level-up only tops up a Pokemon that is still standing, instead of adding the new max HP to a fainted member and bringing it back',
             'Finishing one raid and starting another no longer strands you on the first Raid Island: switching islands keeps your original pre-raid location, so leaving or wiping returns you home instead of dropping you onto an island whose wild table spawns random Raid Pool Pokemon',
+            'Raid Islands are legendary-only again: the ordinary finals they used to advertise (fossils and one-off lines such as Omastar, Kabutops, Aerodactyl, Metagross and the Galarian birds) now live as rare one-off refuge encounters on each region’s last route, so they can actually be caught instead of being stranded on an island that never spawned them',
             'Pokemon Musical arrows all match again: the left and right arrows were missing from the pixel font and fell back to a differently-sized font, so all four directions are now drawn as the same SVG arrow rotated to face the right way, and the lanes use the standard dance-pad order (left, down, up, right)',
           ],
         },

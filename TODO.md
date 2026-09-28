@@ -19,46 +19,45 @@ renumbered, so the gaps below are items that shipped.
 
 1. **#16 Performance pass** — S–M · ★★ — the idle loop dispatches a lot per
    tick; look at memoisation / batching if it ever gets heavy.
-2. **#46 Mobile UX follow-up** — S · ★★ — only the **Box** still has no touch
-   reorder (the party reorder buttons, map pinch-zoom and the tab viewport are
-   fixed).
-3. **#48 Colour-accessibility pass** — S · ★★ — yellow-on-yellow move-learning
-   text is fixed; the broader contrast sweep remains.
+2. **#48 Colour-accessibility pass** — S · ★ — the type chips (dark or white
+   text per type) and the shared muted label colour now meet WCAG AA; a
+   residual sweep of the remaining hardcoded greys and the warning/error
+   states remains.
 
 ### Tier 2 — High impact, worth the effort (medium–large)
 
-4. **#28 More region areas (caves, POIs, DLC land)** — L · ★★★★½ — real
+3. **#28 More region areas (caves, POIs, DLC land)** — L · ★★★★½ — real
    content; data-heavy. Started: the POI marker model shipped with the Day-Care
    as the first POI (28c), and the DLC areas are in as zones (28a); ordinary
    caves/forests (28b) and more POIs remain. Pairs with #36/#39.
-5. **#24 Move data pass** — M · ★★★ — ally/faint heals, context move-calling,
+4. **#24 Move data pass** — M · ★★★ — ally/faint heals, context move-calling,
    the doubles-only moves, and decisions on unused PP / dead Z-Max data.
-6. **#25 Battle engine pass** — M–L · ★★★ — ally/doubles abilities, a few
+5. **#25 Battle engine pass** — M–L · ★★★ — ally/doubles abilities, a few
    complex singles ones, item nuances and battle polish (animations / damage
    numbers).
-7. **#36 Zones (route chunks)** — M–L · ★★★★ — the model is in; more
+6. **#36 Zones (route chunks)** — M–L · ★★★★ — the model is in; more
    sub-areas, a distinct zone glyph and inline per-sub-area encounter grids.
-8. **#40 Alola / Galar / Paldea league structures** — M · ★★★½ — the
+7. **#40 Alola / Galar / Paldea league structures** — M · ★★★½ — the
    data-driven model is in; Alola's full trial track, Galar's post-game
    tournament and Paldea's Titans / Team Star remain.
-9. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of Armor,
+8. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of Armor,
    Crown Tundra, Kitakami and the Terarium to first-class regions.
-10. **#29 Companion minigame polish** — S · ★★ — an animated buddy panel /
-    petting scene (the last open minigame idea).
-11. **#18 Better settings** — M · ★★★ — sprite-style options, account controls
+9. **#29 Companion minigame polish** — S · ★★ — an animated buddy panel /
+   petting scene (the last open minigame idea).
+10. **#18 Better settings** — M · ★★★ — sprite-style options, account controls
     (blocked on #19) and finishing the Gameplay section.
-12. **#38 Clean up the Raid Islands** — M · ★★½ — weight / level-gate the
+11. **#38 Clean up the Raid Islands** — M · ★★½ — weight / level-gate the
     legendary pick and (optionally) shrink Unova's ordinary pool.
-13. **#43 Multi-battles (double / triple / rotation) as a minigame** — M–L ·
+12. **#43 Multi-battles (double / triple / rotation) as a minigame** — M–L ·
     ★★½ — a self-contained minigame that reuses the combat pipeline.
-14. **#30 Caught / event QOL indicators** — S · ★ — flag the battle sprite;
+13. **#30 Caught / event QOL indicators** — S · ★ — flag the battle sprite;
     decide whether raids show the caught badge.
 
 ### Tier 3 — Big / low-return, defer
 
-15. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
+14. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
     route-based field effects.
-16. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+15. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
 ---
@@ -404,41 +403,32 @@ resolver), `src/components/*-scene.js`, `src/game/reducer/minigames.js`, and
 Effort: **medium–large** (the shared math helps, but target/order handling is
 genuinely new).
 
-## 46. Mobile UX follow-up
-
-The three concrete mobile issues (party drag/drop order, map pan/zoom controls,
-the cut-off Map/Items tab bottom) all shipped in 0.21.0. The one thing left:
-
-- [ ] The **Box** panel still has no touch reorder (the party now has up/down
-      buttons on touch; the Box does not).
-
-Likely touch points: `src/components/box-panel.js` (reorder), plus the party
-panel's reorder buttons as the model to copy.
-
-Effort: **small**.
-
 ## 48. Colour-accessibility pass
 
-The specific yellow-on-yellow move-learning text shipped a fix in 0.21.0, and an
-`--ink` token was added for text on parchment (used by the stats-panel HP
-label).
+**Shipped (0.21.0):** the yellow-on-yellow move-learning text and the dark-ink
+`--ink` token for parchment; then the type palette — every `.type-*` badge and
+`.type-bg-*` move chip now picks dark ink or white text by its own background,
+with water and psychic darkened slightly so white text passes, via a new
+`--text-on-type` token. The shared `--text-muted` colour was lightened so the
+17 labels that use it meet AA on the dark panels, the hardcoded `color:
+#8a7a60` labels were folded onto that token, and the two labels that sit on
+light surfaces (`move-panel-slot.empty`, `stats-panel-name-edit`) now use
+`--ink`. A `tests/type-contrast.test.mjs` guard checks all 36 type chips stay at
+4.5:1.
 
 Still open:
 
-- [ ] Sweep the UI for other low-contrast pairs and check body text, badges,
-      status tags and buttons at WCAG AA for their size. White on the lighter
-      type colours (normal, rock, bug, fairy, grass, flying) is still below AA
-      for the small move text; decide whether to darken those too.
-- [ ] Consider a slightly darker text token or a `--text-on-gold` variable
-      rather than fixing colours case by case.
 - [ ] Spot-check the shiny/gold, warning and error states, and the battle
-      log / floating damage numbers.
+      log / floating damage numbers (the damage/crit colours and any inline
+      `color:` in components are not covered by the type-chip test).
+- [ ] The remaining hardcoded greys that are **not** text on a dark panel
+      (borders/backgrounds) were deliberately left alone; audit any inline
+      colours in components against their surfaces.
 
-Likely touch points: `assets/style.css` (the `:root` custom properties and the
-move-manager / learn-move rules), `src/components/move-manager-panel.js`, and
-any component with inline colours.
+Likely touch points: `assets/style.css` (the `:root` custom properties),
+`tests/type-contrast.test.mjs`, and any component with inline colours.
 
-Effort: **small** (mostly CSS; the sweep is the bulk of the work).
+Effort: **small** (mostly CSS; a residual sweep).
 
 ---
 

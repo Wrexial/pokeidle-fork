@@ -12,7 +12,7 @@
     --bg-panel-light: #3a2e18;
     --border-color: #685040;
     --text-color: #e8dcc0;
-    --text-muted: #8a7e68;
+    --text-muted: #a89c84;
     --accent: #c8a848;
     --stone-dark: #483828;
     --stone-mid: #685040;
@@ -20,6 +20,7 @@
     --parchment: #e8dcc0;
     --parchment-dark: #b8a878;
     --ink: #3a2818;
+    --text-on-type: #1a1808;
     --wood-dark: #4a3828;
     --wood-mid: #685038;
     --gold: #c8a848;
@@ -309,30 +310,36 @@ img {
 }
 
 .type-normal {
-    background: #908860
+    background: #908860;
+    color: var(--text-on-type);
+    text-shadow: none
 }
 
 .type-fire {
-    background: #c86828
+    background: #c86828;
+    color: var(--text-on-type);
+    text-shadow: none
 }
 
 .type-water {
-    background: #5878c8
+    background: #4a68b8
 }
 
 .type-electric {
     background: #c8a828;
-    color: #1a1808;
+    color: var(--text-on-type);
     text-shadow: none
 }
 
 .type-grass {
-    background: #60a040
+    background: #60a040;
+    color: var(--text-on-type);
+    text-shadow: none
 }
 
 .type-ice {
     background: #78b0b0;
-    color: #1a2828;
+    color: var(--text-on-type);
     text-shadow: none
 }
 
@@ -346,24 +353,30 @@ img {
 
 .type-ground {
     background: #c0a050;
-    color: #1a1808;
+    color: var(--text-on-type);
     text-shadow: none
 }
 
 .type-flying {
-    background: #9078c8
+    background: #9078c8;
+    color: var(--text-on-type);
+    text-shadow: none
 }
 
 .type-psychic {
-    background: #d04870
+    background: #c03a62
 }
 
 .type-bug {
-    background: #90a018
+    background: #90a018;
+    color: var(--text-on-type);
+    text-shadow: none
 }
 
 .type-rock {
-    background: #a08830
+    background: #a08830;
+    color: var(--text-on-type);
+    text-shadow: none
 }
 
 .type-ghost {
@@ -380,12 +393,14 @@ img {
 
 .type-steel {
     background: #9898b0;
-    color: #1a1a20;
+    color: var(--text-on-type);
     text-shadow: none
 }
 
 .type-fairy {
-    background: #c87890
+    background: #c87890;
+    color: var(--text-on-type);
+    text-shadow: none
 }
 
 .battle-screen {
@@ -1348,30 +1363,36 @@ img {
 }
 
 .type-bg-normal {
-    background: #908860
+    background: #908860;
+    color: var(--text-on-type);
+    text-shadow: none
 }
 
 .type-bg-fire {
-    background: #c86828
+    background: #c86828;
+    color: var(--text-on-type);
+    text-shadow: none
 }
 
 .type-bg-water {
-    background: #5878c8
+    background: #4a68b8
 }
 
 .type-bg-electric {
     background: #c8a828;
-    color: #1a1808;
+    color: var(--text-on-type);
     text-shadow: none
 }
 
 .type-bg-grass {
-    background: #60a040
+    background: #60a040;
+    color: var(--text-on-type);
+    text-shadow: none
 }
 
 .type-bg-ice {
     background: #78b0b0;
-    color: #1a2828;
+    color: var(--text-on-type);
     text-shadow: none
 }
 
@@ -1385,24 +1406,30 @@ img {
 
 .type-bg-ground {
     background: #c0a050;
-    color: #1a1808;
+    color: var(--text-on-type);
     text-shadow: none
 }
 
 .type-bg-flying {
-    background: #9078c8
+    background: #9078c8;
+    color: var(--text-on-type);
+    text-shadow: none
 }
 
 .type-bg-psychic {
-    background: #d04870
+    background: #c03a62
 }
 
 .type-bg-bug {
-    background: #90a018
+    background: #90a018;
+    color: var(--text-on-type);
+    text-shadow: none
 }
 
 .type-bg-rock {
-    background: #a08830
+    background: #a08830;
+    color: var(--text-on-type);
+    text-shadow: none
 }
 
 .type-bg-ghost {
@@ -1419,12 +1446,14 @@ img {
 
 .type-bg-steel {
     background: #9898b0;
-    color: #1a1a20;
+    color: var(--text-on-type);
     text-shadow: none
 }
 
 .type-bg-fairy {
-    background: #c87890
+    background: #c87890;
+    color: var(--text-on-type);
+    text-shadow: none
 }
 
 .move-panel-overlay {
@@ -1502,7 +1531,7 @@ img {
 
 .move-panel-slot.empty {
     background: #c8b898;
-    color: #8a7a60;
+    color: var(--ink);
     text-shadow: none;
     cursor: default
 }
@@ -2335,7 +2364,7 @@ img {
 .box-search-count {
     flex: 0 0 auto;
     font-size: 7px;
-    color: #8a7a60
+    color: var(--text-muted)
 }
 
 .box-header-arrow {
@@ -2531,7 +2560,7 @@ img {
     font-size: 9px;
     background: none;
     border: none;
-    color: #8a7a60;
+    color: var(--ink);
     cursor: pointer
 }
 
@@ -2877,6 +2906,46 @@ img {
     opacity: .7
 }
 
+.stats-panel-reorder {
+    display: flex;
+    align-items: center;
+    gap: 6px
+}
+
+.stats-panel-reorder-label {
+    font-size: 8px;
+    color: #6a5838;
+    text-transform: uppercase;
+    letter-spacing: .5px
+}
+
+.stats-panel-reorder-btn {
+    width: 34px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    line-height: 1;
+    padding: 0;
+    color: #2a1808;
+    background: var(--gold);
+    border: 2px solid var(--gold-dark);
+    cursor: pointer
+}
+
+.stats-panel-reorder-btn:hover:not(:disabled) {
+    background: var(--gold-bright)
+}
+
+.stats-panel-reorder-btn:disabled {
+    background: #685040;
+    color: #a89878;
+    border-color: #483828;
+    cursor: default;
+    opacity: .7
+}
+
 .party-slot[draggable=true] {
     cursor: grab
 }
@@ -3088,7 +3157,7 @@ img {
 
 .town-map-battles {
     font-size: 7px;
-    color: #8a7a60
+    color: var(--text-muted)
 }
 
 .map-search-toggle {
@@ -3136,7 +3205,7 @@ img {
 }
 
 .map-search-input::placeholder {
-    color: #8a7a60
+    color: var(--text-muted)
 }
 
 .map-search-results {
@@ -3751,7 +3820,7 @@ img {
 
 .location-services-label {
     font-size: 7px;
-    color: #8a7a60;
+    color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: .5px
 }
@@ -3773,7 +3842,7 @@ img {
 
 .location-status-label {
     font-size: 8px;
-    color: #8a7a60;
+    color: var(--text-muted);
     font-style: italic
 }
 
@@ -3929,7 +3998,7 @@ img {
 
 .location-enc-level {
     font-size: 7px;
-    color: #8a7a60
+    color: var(--text-muted)
 }
 
 .location-next-unlock {
@@ -4123,7 +4192,7 @@ img {
 
 .encounter-level {
     font-size: 6px;
-    color: #8a7a60;
+    color: var(--text-muted);
     white-space: nowrap
 }
 
@@ -4148,7 +4217,7 @@ img {
 }
 
 .rarity-text-common {
-    color: #8a7a60
+    color: var(--text-muted)
 }
 
 .rarity-text-uncommon {
@@ -4173,7 +4242,7 @@ img {
     padding: 2px 5px;
     border: 1px solid #483828;
     background: #584038;
-    color: #8a7a60;
+    color: var(--text-muted);
     cursor: pointer;
     flex-shrink: 0;
     text-transform: uppercase;
@@ -5163,12 +5232,12 @@ img {
 
 .shop-item-desc {
     font-size: 6px;
-    color: #8a7a60
+    color: var(--text-muted)
 }
 
 .shop-owned {
     font-size: 8px;
-    color: #8a7a60;
+    color: var(--text-muted);
     white-space: nowrap
 }
 
@@ -5769,7 +5838,7 @@ img {
     border-radius: 3px;
     padding: 3px 8px;
     font-size: 7px;
-    color: #8a7a60;
+    color: var(--text-muted);
     cursor: pointer;
     opacity: .4;
     font-weight: 700
@@ -6910,7 +6979,7 @@ img {
     align-items: baseline;
     gap: 5px;
     font-size: 9px;
-    color: #8a7a60;
+    color: var(--text-muted);
     opacity: .8
 }
 
@@ -6973,7 +7042,7 @@ img {
     border-radius: 4px;
     min-height: 80px;
     font-size: 9px;
-    color: #8a7a60
+    color: var(--text-muted)
 }
 
 .daycare-slot.filled {
@@ -7130,7 +7199,7 @@ img {
 
 .daycare-deposit-detail {
     font-size: 7px;
-    color: #8a7a60
+    color: var(--text-muted)
 }
 
 .battle-info-content p {
@@ -7666,7 +7735,7 @@ img {
 
 .gym-badge-label {
     font-size: 7px;
-    color: #8a7a60
+    color: var(--text-muted)
 }
 
 .gym-level-range {
@@ -10524,7 +10593,7 @@ img {
     align-items: center;
     justify-content: center;
     min-height: 44px;
-    color: #8a7a60
+    color: var(--text-muted)
 }
 
 .pelago-slot-sprite {
@@ -13245,12 +13314,20 @@ img {
 /* Light type colours need dark ink so the move text stays readable. These
    re-assert the intended colours after the components (.move-cell,
    .move-panel-slot, .move-panel-item, .stats-panel-move) that default to
-   white text, which otherwise override the .type-bg-* rules. */
+   white text, which otherwise override the .type-bg-* rules. Dark types
+   (water, fighting, poison, ghost, dragon, dark) keep white text. */
+.type-bg-normal,
+.type-bg-fire,
 .type-bg-electric,
-.type-bg-ground,
+.type-bg-grass,
 .type-bg-ice,
-.type-bg-steel {
-    color: #1a1808;
+.type-bg-ground,
+.type-bg-flying,
+.type-bg-bug,
+.type-bg-rock,
+.type-bg-steel,
+.type-bg-fairy {
+    color: var(--text-on-type);
     text-shadow: none
 }
 

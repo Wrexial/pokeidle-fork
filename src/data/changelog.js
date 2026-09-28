@@ -31,6 +31,8 @@ export const CHANGELOG = [
             'Empty Box slots now show a recessed placeholder shadow, so it is obvious which slots are free',
             'The Town Map now marks service stops: the Day-Care on each region’s breeding route shows an egg badge (with a tooltip and a Services tag in the location panel), so you can find it without guessing the route',
             'The battle text box now has the Manual / Auto battle-mode button at its right end instead of on a row of its own above the move buttons, so the moves keep their full height',
+            'The Box can be reordered by touch again: inspecting a Pokemon in the mobile Box shows up/down buttons (the party already had them), so reordering no longer needs drag-and-drop',
+            'Type chips are readable in every colour: each type now uses dark ink or white text depending on how light its background is, so Normal, Fire, Grass, Rock, Bug, Fairy, Flying and the rest no longer show white-on-light text in the move buttons, move manager, Pokedex or battle badges, and the muted grey label colour was lightened so it meets WCAG AA on the dark panels',
             'The Box keeps a fixed size instead of stretching to fill the left panel and shrinking as the party grows: the party panel now takes the spare space (and scrolls when a summary is open), so the Box grid no longer scales up and down as you catch or swap Pokemon',
           ],
         },

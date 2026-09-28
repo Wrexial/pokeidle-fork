@@ -37,6 +37,22 @@ export function MobileTabs() {
     routeEncounters = routeKey && !isRaid ? encounterData[routeKey] : null,
     encounters = isRaid ? raidEncounters : routeEncounters?.encounters,
     boxPokemon = boxInspected ? (state.box.find((memberId) => memberId.id === boxInspected.id) ?? null) : null,
+    boxIndex = boxPokemon ? state.box.findIndex((member) => member.id === boxPokemon.id) : -1,
+    // Touch layouts have no drag-and-drop, so the inspected panel carries
+    // explicit up/down reorder controls for the Box.
+    reorderBox = React.useCallback(
+      /** @param {number} toIndex */ (toIndex) => {
+        if (!boxPokemon) return
+        dispatch({
+          type: 'REORDER_BOX',
+          payload: {
+            pokemonId: boxPokemon.id,
+            toIndex,
+          },
+        })
+      },
+      [boxPokemon, dispatch]
+    ),
     moveBoxToParty = React.useCallback(() => {
       if (!boxInspected) return
       const boxIndex = state.box.findIndex((member) => member.id === boxInspected.id)
@@ -145,6 +161,14 @@ export function MobileTabs() {
                         onEvolve: handleEvolve,
                         onRelease: requestRelease,
                         canRelease: !boxReleaseConfirm,
+                        reorder:
+                          boxIndex >= 0
+                            ? {
+                                index: boxIndex,
+                                length: state.box.length,
+                                onMove: reorderBox,
+                              }
+                            : null,
                       }),
                       boxReleaseConfirm &&
                         releaseTarget &&

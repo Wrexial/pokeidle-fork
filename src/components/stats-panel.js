@@ -25,7 +25,7 @@ import { genderForPokemon, genderSymbol, isFemalePokemon } from '../game/breedin
 import { abilityDisplayName, getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, IV_STAT_LABELS, IV_STAT_ORDER, judgeIVs, pokemonDisplayName } from '../game/pokemon.js'
 import { MoveManagerPanel } from './move-manager-panel.js'
 
-/** @param {{ pokemon: Pokemon, source: 'party' | 'box', partyLength: number, onAction: () => void, onClose: () => void, evolutionInfo?: { entries: { targetName: string, canEvolve: boolean, requirementLabel: string, targetKey: string, itemId?: string, isForm: boolean }[] } | null, onEvolve?: (index: number) => void, onRelease?: () => void, canRelease?: boolean }} props */
+/** @param {{ pokemon: Pokemon, source: 'party' | 'box', partyLength: number, onAction: () => void, onClose: () => void, evolutionInfo?: { entries: { targetName: string, canEvolve: boolean, requirementLabel: string, targetKey: string, itemId?: string, isForm: boolean }[] } | null, onEvolve?: (index: number) => void, onRelease?: () => void, canRelease?: boolean, reorder?: { index: number, length: number, onMove: (toIndex: number) => void } | null }} props */
 export function StatsPanel({
   pokemon,
   source,
@@ -36,6 +36,7 @@ export function StatsPanel({
   onEvolve,
   onRelease,
   canRelease,
+  reorder,
 }) {
   const species = pokemonSpecies[pokemon.speciesKey]
   const { state, dispatch } = useGame(),
@@ -104,7 +105,37 @@ export function StatsPanel({
     ],
     statMax = 200,
     canMove = (source === 'party' && partyLength > 1) || (source === 'box' && partyLength < 6),
-    actionLabel = source === 'party' ? 'Send to Box' : 'Move to Party'
+    actionLabel = source === 'party' ? 'Send to Box' : 'Move to Party',
+    // Explicit up/down controls for touch layouts where drag-and-drop isn't
+    // available (the mobile box). `reorder` is only passed by those callers.
+    reorderControls =
+      reorder && reorder.length > 1
+        ? jsxs('div', {
+            className: 'stats-panel-reorder',
+            children: [
+              jsx('span', {
+                className: 'stats-panel-reorder-label',
+                children: 'Reorder',
+              }),
+              jsx('button', {
+                type: 'button',
+                className: 'stats-panel-reorder-btn',
+                disabled: reorder.index <= 0,
+                'aria-label': 'Move up',
+                onClick: () => reorder.onMove(reorder.index - 1),
+                children: '\u25b2',
+              }),
+              jsx('button', {
+                type: 'button',
+                className: 'stats-panel-reorder-btn',
+                disabled: reorder.index >= reorder.length - 1,
+                'aria-label': 'Move down',
+                onClick: () => reorder.onMove(reorder.index + 1),
+                children: '\u25bc',
+              }),
+            ],
+          })
+        : null
   if (pokemon.isEgg)
     return jsxs('div', {
       className: 'stats-panel',
@@ -154,6 +185,7 @@ export function StatsPanel({
               children: actionLabel,
             })
           : null,
+        reorderControls,
         canRelease &&
           jsx('button', {
             className: 'stats-panel-release-btn',
@@ -492,6 +524,7 @@ export function StatsPanel({
           }),
         ],
       }),
+      reorderControls,
       canMove
         ? jsx('button', {
             className: 'stats-panel-btn',

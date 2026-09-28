@@ -18,8 +18,8 @@ export function ShopPanel({ shopDef }) {
     [mode, setMode] = React.useState(/** @type {'buy' | 'sell'} */ ('buy')),
     open = !state.martCollapsed,
     regionId = mapData[state.currentLocation]?.region ?? 'kanto',
-    // This mart's slice of the region's advanced stock, so every town's shelves
-    // differ instead of all selling the whole regional list.
+    // Retired: the region's advanced held-item stock now lives in the Grand
+    // Auction House, so this is normally empty (kept for future flavour).
     regionalStock = React.useMemo(
       () => regionalStockForMart(regionId, state.currentLocation),
       [regionId, state.currentLocation]

@@ -272,7 +272,7 @@ export const MINIGAME_INFO = {
     title: 'Snowpoint Temple',
     cost: ICE_SLIDE_COST,
     action: 'ENTER THE TEMPLE',
-    hint: `Pick a direction and the hero slides until a wall or boulder stops them. Clear all ${ICE_SLIDE_LEVELS.length} ice rooms to reach the temple\u2019s heart; the fewer slides the better. Entry is $${ICE_SLIDE_COST.toLocaleString()}.`,
+    hint: `Open the Strength chamber \u2014 shove the boulder onto the pressure plate to unseal the exit \u2014 then slide through ${ICE_SLIDE_LEVELS.length} ice rooms to reach the temple\u2019s heart; the fewer moves the better. Entry is $${ICE_SLIDE_COST.toLocaleString()}.`,
   },
   pokePelago: {
     title: 'Poké Pelago',

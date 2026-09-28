@@ -17,8 +17,8 @@ const {
   tokenShopItems,
 } = await import('../src/data/items.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
+const { AUCTION_LOTS } = await import('../src/game/minigames.js')
 const { getItemSellPrice, isActiveEffectItem, itemTooltip } = await import('../src/game/progression.js')
-const { regionMartIds, regionalStockForMart } = await import('../src/game/shop.js')
 
 const allStandardItems = [
     ...coreMartItems,
@@ -48,49 +48,16 @@ test('every mart item has a row the shop panel can render', () => {
   }
 })
 
-test('regions sell distinct advanced stock', () => {
-  const seen = new Map()
-  for (const [region, entries] of Object.entries(regionalMartItems)) {
-    assert.ok(entries.length > 0, `${region} should have some advanced stock`)
-    for (const { itemId } of entries) {
-      assert.ok(!seen.has(itemId), `${itemId} is sold in both ${seen.get(itemId)} and ${region}`)
-      seen.set(itemId, region)
-      assert.ok(
-        !coreMartItems.some((entry) => entry.itemId === itemId),
-        `${itemId} is in both the core and ${region}`
-      )
-    }
-  }
-})
-
-test('every held battle item is sold by exactly one region', () => {
-  const sold = Object.values(regionalMartItems)
+test('battle held items come from the Grand Auction House, not marts', () => {
+  const martHeld = Object.values(regionalMartItems)
     .flat()
-    .map((entry) => entry.itemId)
-    .filter((itemId) => heldItems[itemId])
+    .filter((entry) => heldItems[entry.itemId])
+  assert.equal(martHeld.length, 0, 'marts no longer sell held battle items')
+  const auctioned = new Set(
+    AUCTION_LOTS.flatMap((lot) => lot.items.map((item) => item.itemId))
+  )
   for (const itemId of Object.keys(heldItems))
-    assert.ok(sold.includes(itemId), `${itemId} is sold by no region`)
-  assert.equal(new Set(sold).size, sold.length, 'a held item is sold by two regions')
-})
-
-test('marts split the region advanced stock instead of all selling it', () => {
-  for (const [region, entries] of Object.entries(regionalMartItems)) {
-    const marts = regionMartIds(region)
-    if (entries.length <= 1 || marts.length <= 1) continue
-    const stocks = marts.map((id) => regionalStockForMart(region, id).map((entry) => entry.itemId)),
-      full = entries.length
-    for (const stock of stocks)
-      assert.ok(stock.length < full, `${region} mart sells the whole regional list`)
-    assert.ok(
-      stocks.some(
-        (stock, index) => stock.join(',') !== stocks[(index + 1) % stocks.length].join(',')
-      ),
-      `${region} marts all sell the same shelves`
-    )
-    const covered = new Set(stocks.flat())
-    for (const { itemId } of entries)
-      assert.ok(covered.has(itemId), `${itemId} is sold by no ${region} mart`)
-  }
+    assert.ok(auctioned.has(itemId), `${itemId} is not in any auction lot`)
 })
 
 test('buying balls awards a free Premier Ball per 10', () => {

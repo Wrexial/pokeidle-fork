@@ -1,6 +1,8 @@
 // Kalos's Grand Auction House, played as a full-stage scene while the reducer
 // is in the `auctionHouse` phase. Bid against hidden rival budgets; win the
-// hammer and the lot is yours at your last bid.
+// hammer and the lot is yours at your last bid. The player can pick their raise
+// (a small step keeps the price down, a big jump can scare off a rival in one
+// go) and the rivals react as they drop out.
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
@@ -8,7 +10,9 @@ import { useGame } from '../game/context.js'
 import { playSfx } from '../game/audio.js'
 import { ItemIcon } from './item-icon.js'
 import {
+  AUCTION_BID_STEPS,
   auctionAppraisal,
+  auctionBidPrice,
   canAuctionBid,
   createAuction,
   placeAuctionBid,
@@ -21,20 +25,23 @@ export function AuctionHouseScene() {
     [auction, setAuction] = React.useState(() => createAuction(rollAuctionLot())),
     [result, setResult] = React.useState(
       /** @type {'won' | 'lost' | null} */ (null)
-    )
+    ),
+    [log, setLog] = React.useState(/** @type {string[]} */ ([]))
 
   const appraisal = auctionAppraisal(auction.lot),
-    canBid = result === null && canAuctionBid(auction, state.money),
     highBidder =
       auction.highest === 'player'
         ? 'You'
         : auction.highest ??
-          'No bids yet'
+          'No bids yet',
+    activeRivals = auction.bidders.filter((bidder) => bidder.active).length
 
-  function bid() {
-    if (result !== null || !canAuctionBid(auction, state.money)) return
-    const next = placeAuctionBid(auction)
+  /** @param {number} step */
+  function bid(step) {
+    if (result !== null || !canAuctionBid(auction, state.money, step)) return
+    const next = placeAuctionBid(auction, step)
     setAuction(next)
+    setLog((entries) => [`You raise to $${next.price.toLocaleString()}.`, ...entries].slice(0, 4))
     if (state.sfxEnabled) playSfx(next.won ? 'win' : 'tap')
     if (next.won) {
       dispatch({
@@ -42,6 +49,9 @@ export function AuctionHouseScene() {
         payload: { money: -next.price, items: next.lot.items },
       })
       setResult('won')
+    } else if (next.message) {
+      setLog((entries) => [next.message, ...entries].slice(0, 4))
+      if (state.sfxEnabled) playSfx('miss')
     }
   }
 
@@ -54,6 +64,7 @@ export function AuctionHouseScene() {
     if (state.sfxEnabled) playSfx('tap')
     setAuction(createAuction(rollAuctionLot()))
     setResult(null)
+    setLog([])
   }
 
   return jsxs('div', {
@@ -128,7 +139,11 @@ export function AuctionHouseScene() {
               }),
               jsx('span', {
                 className: 'auction-high-bidder',
-                children: result === 'won' ? 'Sold to you!' : `High bid: ${highBidder}`,
+                children: result === 'won'
+                  ? 'Sold to you!'
+                  : `High bid: ${highBidder} \u00b7 ${activeRivals} rival${
+                      activeRivals === 1 ? '' : 's'
+                    } left`,
               }),
             ],
           }),
@@ -147,6 +162,13 @@ export function AuctionHouseScene() {
               )
             ),
           }),
+          log.length > 0 &&
+            jsx('div', {
+              className: 'auction-log',
+              children: log.map((entry, index) =>
+                jsx('div', { className: 'auction-log-line', children: entry }, `${entry}-${index}`)
+              ),
+            }),
           jsx('div', {
             className: 'minigame-scene-log',
             children:
@@ -156,11 +178,7 @@ export function AuctionHouseScene() {
                   ? auction.highest
                     ? `Sold to ${highBidder} for $${auction.price.toLocaleString()}.`
                     : 'The lot was passed in \u2014 nobody bid.'
-                  : canBid
-                    ? 'Raise the bid or pass. The rivals will only go so far.'
-                    : `You cannot cover the next raise ($${(
-                        auction.price + auction.raise
-                      ).toLocaleString()}).`,
+                  : 'Raise the bid or pass. A bigger jump can end it sooner \u2014 but costs more.',
           }),
         ],
       }),
@@ -181,11 +199,19 @@ export function AuctionHouseScene() {
                     onClick: pass,
                     children: 'PASS',
                   }),
-                  jsx('button', {
-                    className: 'move-panel-btn confirm',
-                    disabled: !canBid,
-                    onClick: bid,
-                    children: `BID $${(auction.price + auction.raise).toLocaleString()}`,
+                  AUCTION_BID_STEPS.map((multiplier, step) => {
+                    const price = auctionBidPrice(auction, step),
+                      affordable = canAuctionBid(auction, state.money, step)
+                    return jsx(
+                      'button',
+                      {
+                        className: 'move-panel-btn confirm',
+                        disabled: !affordable,
+                        onClick: () => bid(step),
+                        children: `${multiplier > 1 ? `RAISE \u00d7${multiplier} ` : 'BID '}$${price.toLocaleString()}`,
+                      },
+                      step
+                    )
                   }),
                 ],
               })

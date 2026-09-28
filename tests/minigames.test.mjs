@@ -8,7 +8,7 @@ const gameData = installGameData()
 const { BATTLE_ROYAL_COST, BATTLE_ROYAL_POOL, BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL, BUG_CONTEST_RUSTLES, CONTEST_COST, CONTEST_THEMES, DYNAMAX_ADVENTURES_COST, DYNAMAX_STAGES, MINIGAME_LOCATIONS, MINIGAME_INFO, MINIGAME_AREAS, MINIGAME_REGIONS, MINIGAME_START_ACTION, minigameForLocation, minigamesInRegion, minigameNameForLocation, MINING_COST, POKEATHLON_COST, POKEATHLON_SPRINT_MS, POKE_RADAR_CHAIN_STEP, POKE_RADAR_COST, POKE_RADAR_SIZE, SLOT_JACKPOT, SLOT_PAYLINES, SLOT_REELS, SLOT_ROWS, SLOT_SPIN_COST, SLOT_SYMBOLS, VOLTORB_FLIP_COST, VOLTORB_MAX_LEVEL, VOLTORB_SIZE, AUCTION_LOTS, accuracyScore, auctionAppraisal, battleRoyalOpponent, battleRoyalPrize, boardCleared, boardExploded, boardHints, bugCatchChance, bugContestPrize, bugFleeChance, bugStays, buildContestResults, canAuctionBid, contestAppeal, contestPlacement, contestPlayerRank, contestPrize, contestRank, contestScore, contestTheme, createAuction, createOpponent, createVoltorbBoard, dynamaxBoss, dynamaxPaths, dynamaxPrize, flipVoltorbCell, healSquad, moveBaseAppeal, pickRadarTarget, placeAuctionBid, pokeathlonPrize, pokeRadarPrize, radarChainPoints, radarSequence, rewardItemName, rollContestBug, rollContestBugs, rollContestRivalRound, rollContestTheme, rollMiningReward, simulateBattle, spinSlots, sprintScore, throwNetBall, toBattlePokemon, toggleVoltorbMark, voltorbBoardCoins, voltorbCountForLevel, voltorbFlipPrize, LIGHTS_OUT_COST, LIGHTS_OUT_SCRAMBLE, LIGHTS_OUT_SIZE, CURRY_COST, CURRY_FLAVORS, CURRY_INGREDIENTS, CURRY_ZONE, POKESTAR_COST, POKESTAR_SHOT_COUNT, createLightsOut, toggleLights, lightsSolved, lightsOutPrize, rollCurryRequest, curryScore, curryPrize, pickPokestarShots, pokestarPrize, MATCH3_COST, MATCH3_MOVES, MATCH3_SIZE, MEMORY_COST, MEMORY_PAIRS, WHACK_COST, createMatch3Board, findMatches, tryMatch3Swap, resolveMatch3, match3Prize, createMemoryDeck, memoryPrize, rollWhackTarget, whackPrize, MUSICAL_COST, MUSICAL_NOTES, MUSICAL_MAX_SCORE, generateMusicalPattern, judgeMusicalHit, musicalPrize, musicalTotalMs, PICNIC_COST, PICNIC_PICKS, PICNIC_INGREDIENTS, PICNIC_SHINY_MULTIPLIER, ingredientById, sandwichTypes, rollSandwichType, picnicDropScore, picnicSpeciesPool, rollPicnicEncounter, POKEBALL_FACTORY_COST, FACTORY_SIZE, connectionsFor, createFactoryPuzzle, rotateFactoryTile, factoryPowered, factorySolved, factoryPrize, FACTORY_BALL_POOL, rollFactoryBalls, SLIDING_COST, SLIDING_SIZE, solvedSlidingBoard, canSlide, slideTile, isSlidingSolved, createSlidingPuzzle, slidingTileForDirection, slidingPrize, ICE_SLIDE_COST, ICE_SLIDE_ROOMS, ICE_SLIDE_TOTAL_PAR, iceSlidePosition, iceSlideSolved, iceSlidePrize } = await import(
   '../src/game/minigames.js'
 )
-const { match3SwapFrames, MATCH3_SPECIES, MATCH3_TYPES, radarFaces } = await import(
+const { match3SwapFrames, MATCH3_SPECIES, MATCH3_TYPES, radarFaces, STRENGTH_ROOMS, STRENGTH_TOTAL_PAR, createStrengthState, strengthMove, strengthSolved } = await import(
   '../src/game/minigames.js'
 )
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
@@ -693,6 +693,13 @@ test('auction bidding raises the price until the rivals drop out', () => {
   assert.equal(canAuctionBid(opening, opening.price + opening.raise), true)
 })
 
+test('a wide raise can win an auction before the rivals answer', () => {
+  const lot = AUCTION_LOTS.find((candidate) => candidate.id === 'choiceSet')
+  const one = placeAuctionBid(createAuction(lot, () => 0), 2)
+  assert.ok(one.won, 'the biggest raise jumps past every opening ceiling')
+  assert.equal(one.highest, 'player')
+})
+
 test('START_AUCTION_HOUSE enters the scene and charges nothing', () => {
   const started = gameReducer(
       { ...initialGameState, phase: 'idle', money: 777 },
@@ -1150,6 +1157,40 @@ test('ice slides stop at walls and boulders and never overshoot the exit', () =>
   assert.equal(room.rows[Math.floor(crossing / room.width)][crossing % room.width], 'E')
   assert.ok(iceSlidePrize(4, ICE_SLIDE_TOTAL_PAR, ICE_SLIDE_TOTAL_PAR, true).money > iceSlidePrize(4, 40, ICE_SLIDE_TOTAL_PAR, true).money)
   assert.equal(iceSlidePrize(0, 0, 0, false).money > 0, true)
+})
+
+test('a Strength room is solvable and its par route reaches the exit', () => {
+  assert.ok(STRENGTH_ROOMS.length > 0)
+  assert.ok(STRENGTH_TOTAL_PAR > 0)
+  for (const level of STRENGTH_ROOMS) {
+    assert.ok(level.blockStarts.length > 0, 'the room has a boulder')
+    assert.ok(level.plates.size > 0, 'the room has a plate')
+    assert.ok(Number.isFinite(level.par), 'the room is solvable')
+    assert.equal(strengthSolved(level, createStrengthState(level)), false)
+  }
+})
+
+test('pushing the boulder onto the plate unseals the exit', () => {
+  const level = STRENGTH_ROOMS[0]
+  // S(1,1) -> right, push down onto the plate, then walk to the exit.
+  const route = ['E', 'S', 'E', 'E', 'E', 'S', 'S']
+  let state = createStrengthState(level)
+  for (const direction of route) {
+    const moved = strengthMove(level, state, direction)
+    assert.ok(moved, `the ${direction} move is legal`)
+    state = moved
+  }
+  assert.ok(strengthSolved(level, state), 'the route solves the room')
+  assert.equal(level.par, route.length, 'the par is the shortest route')
+})
+
+test('the exit stays sealed until the boulder is on the plate', () => {
+  const level = STRENGTH_ROOMS[0]
+  // Walk to the cell above the exit without touching the boulder.
+  let state = createStrengthState(level)
+  for (const direction of ['E', 'E', 'E', 'E', 'S', 'S', 'S'])
+    state = strengthMove(level, state, direction) ?? state
+  assert.equal(strengthMove(level, state, 'S'), null, 'the sealed exit cannot be entered')
 })
 
 test('START_ICE_SLIDE charges entry and END_MINIGAME returns to idle', () => {

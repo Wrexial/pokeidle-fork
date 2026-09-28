@@ -17,6 +17,9 @@ import {
 } from '../game/minigames.js'
 import { MinigameRewardScreen, useMinigameClaim } from './minigame-reward.js'
 
+/** Arrow key -> lane name for keyboard play. @type {Record<string, string>} */
+const MUSICAL_KEY_LANES = { ArrowLeft: 'left', ArrowDown: 'down', ArrowUp: 'up', ArrowRight: 'right' }
+
 /** Callout shown for each timing grade. @type {Record<string, string>} */
 const MUSICAL_GRADE_LABELS = {
   perfect: 'PERFECT!',
@@ -128,6 +131,19 @@ export function MusicalScene() {
     }, 600)
     return () => clearTimeout(timer)
   }, [feedback])
+
+  // Keyboard play: the arrow keys hit the matching lane (left/down/up/right).
+  React.useEffect(() => {
+    /** @param {KeyboardEvent} event */
+    function onKeyDown(event) {
+      const laneName = MUSICAL_KEY_LANES[event.key]
+      if (!laneName) return
+      event.preventDefault()
+      hit(MUSICAL_LANES.indexOf(laneName))
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  })
 
   /** @param {number} lane */
   function hit(lane) {

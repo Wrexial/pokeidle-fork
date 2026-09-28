@@ -6668,8 +6668,17 @@ img {
     font-size: 13px
 }
 
-.daily-event-btn.claimable {
+.daily-event-btn.claimable,
+.companion-btn.claimable {
     animation: dailyPulse 1.6s ease-in-out infinite
+}
+
+.companion-modal {
+    width: min(460px, 100%)
+}
+
+.companion-modal-content {
+    padding: 4px 2px
 }
 
 @keyframes dailyPulse {
@@ -11069,7 +11078,23 @@ img {
 
 .auction-actions {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 8px
+}
+
+.auction-log {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: 100%;
+    max-width: 360px
+}
+
+.auction-log-line {
+    font-size: 8px;
+    color: #cbb890;
+    text-align: center
 }
 
 .contest-scene {
@@ -13301,6 +13326,36 @@ img {
 .ice-goal-mark {
     font-size: 14px;
     color: #7a5a10
+}
+
+.ice-cell.plate {
+    background: radial-gradient(#d8e8f0,#a8c0d0);
+    border-color: #6a8aa0
+}
+
+.ice-cell.block {
+    background: linear-gradient(#b8a078,#7a6440)
+}
+
+.ice-cell.exit.locked {
+    background: linear-gradient(#6a7480,#3a4450);
+    border-color: #2a3038
+}
+
+.ice-cell.exit.open {
+    background: radial-gradient(#fff6c0,#e8c94a);
+    border-color: var(--gold);
+    box-shadow: 0 0 10px #e8c94a
+}
+
+.ice-block-mark {
+    font-size: 15px;
+    color: #4a3820
+}
+
+.ice-plate-mark {
+    font-size: 14px;
+    color: #38506a
 }
 
 .ice-controls {

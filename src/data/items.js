@@ -505,61 +505,13 @@ export const coreMartItems = [
 ]
 
 /**
- * Advanced stock split by region: a handful of held battle items each, so every
- * region's marts have their own flavour. The situational Poke Balls are not sold
- * anywhere — the Poke Ball Factory is the only source. The Sinnoh Underground is
- * the universal fallback if a region is never opened.
+ * Advanced regional mart stock is retired: battle held items now come from the
+ * Grand Auction House (Kalos), so marts sell Poke Balls, healing and their
+ * location stock only. Kept as an (empty) table so the mart plumbing still
+ * works and regional flavour can be added back later.
  * @type {Record<string, { itemId: string, unlockWildBattlesWon?: number }[]>}
  */
-export const regionalMartItems = {
-  kanto: [
-    { itemId: 'silkScarf', unlockWildBattlesWon: 60 },
-    { itemId: 'charcoal', unlockWildBattlesWon: 60 },
-    { itemId: 'mysticWater', unlockWildBattlesWon: 60 },
-  ],
-  johto: [
-    { itemId: 'magnet', unlockWildBattlesWon: 60 },
-    { itemId: 'miracleSeed', unlockWildBattlesWon: 60 },
-    { itemId: 'neverMeltIce', unlockWildBattlesWon: 80 },
-  ],
-  hoenn: [
-    { itemId: 'blackBelt', unlockWildBattlesWon: 80 },
-    { itemId: 'poisonBarb', unlockWildBattlesWon: 80 },
-    { itemId: 'softSand', unlockWildBattlesWon: 80 },
-  ],
-  sinnoh: [
-    { itemId: 'sharpBeak', unlockWildBattlesWon: 80 },
-    { itemId: 'twistedSpoon', unlockWildBattlesWon: 100 },
-    { itemId: 'silverPowder', unlockWildBattlesWon: 100 },
-  ],
-  unova: [
-    { itemId: 'hardStone', unlockWildBattlesWon: 100 },
-    { itemId: 'spellTag', unlockWildBattlesWon: 100 },
-    { itemId: 'dragonFang', unlockWildBattlesWon: 150 },
-  ],
-  kalos: [
-    { itemId: 'blackGlasses', unlockWildBattlesWon: 150 },
-    { itemId: 'ironPlate', unlockWildBattlesWon: 150 },
-    { itemId: 'pixiePlate', unlockWildBattlesWon: 150 },
-    { itemId: 'megaStone', unlockWildBattlesWon: 250 },
-  ],
-  alola: [
-    { itemId: 'sitrusBerry', unlockWildBattlesWon: 60 },
-    { itemId: 'lumBerry', unlockWildBattlesWon: 100 },
-    { itemId: 'eviolite', unlockWildBattlesWon: 200 },
-  ],
-  galar: [
-    { itemId: 'focusSash', unlockWildBattlesWon: 150 },
-    { itemId: 'assaultVest', unlockWildBattlesWon: 300 },
-    { itemId: 'choiceBand', unlockWildBattlesWon: 300 },
-    { itemId: 'choiceSpecs', unlockWildBattlesWon: 300 },
-  ],
-  paldea: [
-    { itemId: 'choiceScarf', unlockWildBattlesWon: 300 },
-    { itemId: 'leftovers', unlockWildBattlesWon: 250 },
-    { itemId: 'lifeOrb', unlockWildBattlesWon: 400 },
-  ],
-}
+export const regionalMartItems = {}
 
 export const bagCategories = [
     {

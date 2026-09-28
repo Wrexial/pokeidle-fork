@@ -29,6 +29,7 @@ import { DailyEventModal } from './daily-event-modal.js'
 import { DexCompleteScene } from './dex-complete-scene.js'
 import { GameOverScene } from './game-over-scene.js'
 import { QuestsModal } from './quests-modal.js'
+import { CompanionCarePanel } from './companion-panel.js'
 import { HealingScene } from './healing-scene.js'
 import { MasterBallScene } from './master-ball-scene.js'
 import { BugContestScene } from './bug-contest-scene.js'
@@ -66,6 +67,7 @@ export function BattleScene() {
     [showSwitch, setShowSwitch] = React.useState(!1),
     [showDaily, setShowDaily] = React.useState(!1),
     [showQuests, setShowQuests] = React.useState(!1),
+    [showCompanion, setShowCompanion] = React.useState(!1),
     { state, dispatch } = useGame(),
     { playerPokemon, enemyPokemon, battleEvents } = state,
     completedGenerationSet = completedGenerations(state.pokedexCaught),
@@ -251,6 +253,19 @@ export function BattleScene() {
             title: 'Daily Quests',
             children: '📜',
           }),
+          // Companion care moves out of Poké Pelago once it is unlocked, so it
+          // sits with the dailies instead of hiding behind the Alola hub.
+          state.unlockedLocations?.includes('alola-poke-pelago') &&
+            jsx('button', {
+              className: `battle-info-btn companion-btn${
+                state.companion?.id && state.wildBattlesWon > state.companion.careBattle
+                  ? ' claimable'
+                  : ''
+              }`,
+              onClick: () => setShowCompanion(!0),
+              title: 'Companion',
+              children: '🐾',
+            }),
           jsx('button', {
             className: 'battle-info-btn',
             onClick: () => setShowSettings(!0),
@@ -681,6 +696,38 @@ export function BattleScene() {
         createPortal(
           jsx(QuestsModal, {
             onClose: () => setShowQuests(!1),
+          }),
+          document.body
+        ),
+      showCompanion &&
+        createPortal(
+          jsx('div', {
+            className: 'battle-info-overlay',
+            onClick: () => setShowCompanion(!1),
+            children: jsxs('div', {
+              className: 'battle-info-modal companion-modal',
+              onClick: /** @param {React.MouseEvent} event */ (event) => event.stopPropagation(),
+              children: [
+                jsxs('div', {
+                  className: 'battle-info-header',
+                  children: [
+                    jsx('span', {
+                      className: 'battle-info-title',
+                      children: 'Companion',
+                    }),
+                    jsx('button', {
+                      className: 'battle-info-close',
+                      onClick: () => setShowCompanion(!1),
+                      children: 'X',
+                    }),
+                  ],
+                }),
+                jsx('div', {
+                  className: 'battle-info-content companion-modal-content',
+                  children: jsx(CompanionCarePanel, {}),
+                }),
+              ],
+            }),
           }),
           document.body
         ),

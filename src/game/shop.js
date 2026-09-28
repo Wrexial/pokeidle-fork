@@ -26,7 +26,9 @@ export function regionMartIds(regionId) {
  * Each region's advanced items are dealt out across its marts as a rotating
  * window of roughly half the list, so neighbouring towns carry different
  * shelves instead of every mart selling the whole regional set. The basics in
- * `coreMartItems` stay common to every mart.
+ * `coreMartItems` stay common to every mart. `regionalMartItems` is currently
+ * empty (battle held items moved to the Grand Auction House), so this returns []
+ * and every mart shows its location stock plus the core basics.
  * @param {string} regionId
  * @param {string} locationId
  * @returns {{ itemId: string, unlockWildBattlesWon?: number }[]}

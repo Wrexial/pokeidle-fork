@@ -75,14 +75,17 @@ export function applyBattleForm(pokemon) {
   if (!pokemon?.formKey) return pokemon
   const form = battleSpecies(pokemon.formKey)
   if (!form) return pokemon
-  const stats = calculatePokemonStats(form, pokemon.level, pokemon.ivs ?? getPerfectIVs(), pokemon.nature),
-    hpRatio = pokemon.maxHp > 0 ? pokemon.currentHp / pokemon.maxHp : 1
+  const stats = calculatePokemonStats(form, pokemon.level, pokemon.ivs ?? getPerfectIVs(), pokemon.nature)
   pokemon.speciesKey = pokemon.formKey
   pokemon.name = form.name
   pokemon.types = form.types
   pokemon.typesOverride = null
-  pokemon.maxHp = stats.hp
-  pokemon.currentHp = Math.max(1, Math.round(stats.hp * hpRatio))
+  // The max HP stays the persistent (base form) value. The battler is rebuilt
+  // from the party member every turn, so adopting a form's own max HP (only
+  // Eternamax and Zygarde-Complete differ) re-scaled the HP against the base
+  // maximum each turn and compounded into effectively infinite HP. A battle
+  // form is cosmetic plus stat changes, like a Mega — not a Dynamax HP boost.
+  pokemon.currentHp = pokemon.currentHp <= 0 ? 0 : Math.min(pokemon.currentHp, pokemon.maxHp)
   pokemon.attack = stats.attack
   pokemon.defense = stats.defense
   pokemon.spAttack = stats.spAttack

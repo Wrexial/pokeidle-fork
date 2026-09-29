@@ -10,6 +10,7 @@ const { canGigantamax, gmaxFormFor, gmaxEvolveReady } = await import(
 )
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 const { createPokemon } = await import('../src/game/pokemon.js')
+const { applyBattleForm } = await import('../src/game/combat.js')
 
 /** A battling state with `pokemon` as the active Pokemon. */
 function battlingState(pokemon) {
@@ -73,4 +74,40 @@ test('an unmarked Pokemon cannot Gigantamax', () => {
     state = battlingState(charizard)
   assert.equal(gmaxEvolveReady(state), false)
   assert.equal(gameReducer(state, { type: 'GMAX_EVOLVE' }), state)
+})
+
+test('a battle form keeps the persistent max HP instead of compounding it', () => {
+  // Eternamax is the one G-Max form with a different max HP. Rebuilding the
+  // battler from the party member each turn used to re-apply the form's HP
+  // ratio against the base maximum, so Eternatus's HP grew every turn.
+  const eternatus = { ...createPokemon('eternatus', 70, 'e'), gmax: true },
+    baseMax = eternatus.maxHp,
+    battle = { ...eternatus, formKey: 'gx-eternatus' }
+  applyBattleForm(battle)
+  assert.equal(battle.maxHp, baseMax, 'the form keeps the base max HP')
+  assert.equal(battle.currentHp, baseMax)
+
+  // Rebuilding the battler from the party member each turn is idempotent.
+  for (let i = 0; i < 5; i++) {
+    const rebuilt = { ...eternatus, formKey: 'gx-eternatus', currentHp: baseMax - i * 10 }
+    applyBattleForm(rebuilt)
+    assert.equal(rebuilt.maxHp, baseMax)
+    assert.equal(rebuilt.currentHp, baseMax - i * 10)
+  }
+
+  // Zygarde-Complete has the same trap (108 -> 216 base HP).
+  const zygarde = { ...createPokemon('zygarde', 70, 'z'), formKey: 'zygarde-c' },
+    baseZygardeHp = zygarde.maxHp
+  applyBattleForm(zygarde)
+  assert.equal(zygarde.maxHp, baseZygardeHp)
+})
+
+test('a form change does not revive a fainted battler', () => {
+  const fainted = {
+    ...createPokemon('eternatus', 70, 'e'),
+    currentHp: 0,
+    formKey: 'gx-eternatus',
+  }
+  applyBattleForm(fainted)
+  assert.equal(fainted.currentHp, 0)
 })

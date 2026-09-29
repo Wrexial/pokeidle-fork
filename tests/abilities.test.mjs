@@ -1400,8 +1400,8 @@ test('Shields Down, Forecast and Hunger Switch swap the form species', () => {
         moves: ['splash'],
         ability: 'shieldsDown',
         speciesKey: 'minior',
-        currentHp: 300,
-        maxHp: 500,
+        currentHp: 80,
+        maxHp: 100,
         types: ['Rock', 'Flying'],
       })
     resolveBattleTurn(player, minior, false, !0)

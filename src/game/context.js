@@ -11,6 +11,15 @@ const GameContext = React.createContext(
   /** @type {{ state: GameState, dispatch: (action: GameAction) => void } | null} */ (null)
 )
 
+/**
+ * The background autosave writes the whole save through `JSON.stringify` +
+ * `localStorage.setItem`, which is synchronous. An idle loop finishing a battle
+ * every few hundred milliseconds used to trigger one of those on each phase
+ * change, so the write is throttled to at most once per second, with a trailing
+ * save so the latest state always lands.
+ */
+const AUTOSAVE_THROTTLE_MS = 1000
+
 /** @param {{ children: any }} props */
 export function GameProvider({ children }) {
   const [state, dispatch] = React.useReducer(
@@ -21,6 +30,21 @@ export function GameProvider({ children }) {
       return mergeStoredSettings((slot ? loadSavedState(slot) : null) ?? initialGameState)
     }
   )
+  // Latest committed state, so a trailing save writes the newest progress
+  // rather than the snapshot that scheduled it.
+  const latestStateRef = React.useRef(state)
+  React.useEffect(() => {
+    latestStateRef.current = state
+  })
+  const lastAutosaveRef = React.useRef(0),
+    autosaveTimerRef = React.useRef(/** @type {ReturnType<typeof setTimeout> | null} */ (null))
+  // Clear a pending trailing save if the provider ever unmounts.
+  React.useEffect(
+    () => () => {
+      autosaveTimerRef.current && clearTimeout(autosaveTimerRef.current)
+    },
+    []
+  )
   // Preferences live in their own storage key so they outlive a save reset.
   // Writing on change (rather than every autosave) keeps it cheap. Skip the
   // write while the slot-picker is up: the fresh defaults would otherwise
@@ -30,9 +54,22 @@ export function GameProvider({ children }) {
   }, SETTINGS_KEYS.map((key) => state[key]))
   return (
     React.useEffect(() => {
-      if (state.playerPokemon && (state.phase === 'idle' || state.phase === 'victory')) {
+      if (!(state.playerPokemon && (state.phase === 'idle' || state.phase === 'victory'))) return
+      const elapsed = Date.now() - lastAutosaveRef.current
+      if (elapsed >= AUTOSAVE_THROTTLE_MS) {
+        lastAutosaveRef.current = Date.now()
         autosaveSave(state)
+        return
       }
+      if (autosaveTimerRef.current) return
+      autosaveTimerRef.current = setTimeout(() => {
+        autosaveTimerRef.current = null
+        const latest = latestStateRef.current
+        if (latest.playerPokemon && (latest.phase === 'idle' || latest.phase === 'victory')) {
+          lastAutosaveRef.current = Date.now()
+          autosaveSave(latest)
+        }
+      }, AUTOSAVE_THROTTLE_MS - elapsed)
       // Autosave whenever the phase or any persisted slice changes. The field
       // list comes from SAVED_STATE_KEYS, so a new save field is tracked here
       // automatically instead of having to be added to a hand-written list.

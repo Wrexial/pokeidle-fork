@@ -313,3 +313,17 @@ test('every region has a Daycare on one of its real routes', () => {
     assert.equal(location.type, 'route', `${locationId} is a route`)
   }
 })
+
+test('completedGenerations is memoised per pokedexCaught array and recomputed for a new array', async () => {
+  const { completedGenerations, speciesKeysByGeneration } = await import('../src/data/gameData.js')
+  const empty = []
+  const first = completedGenerations(empty)
+  assert.equal(first, completedGenerations(empty), 'the same array returns the cached Set')
+  assert.equal(first.has(0), false, 'an empty dex completes nothing')
+  // Gen 1 complete: a brand-new array must not reuse the empty cache.
+  const genOne = [...speciesKeysByGeneration[0]]
+  const completed = completedGenerations(genOne)
+  assert.notEqual(completed, first)
+  assert.ok(completed.has(0), 'the completed generation is reported')
+  assert.equal(completed.has(1), false)
+})

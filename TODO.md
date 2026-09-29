@@ -15,69 +15,65 @@ renumbered, so the gaps below are items that shipped.
 **Effort**: S (small) < S–M < M < M–L < L. **Gain** is the player-facing value
 (★ = nice to have, ★★★★★ = core missing feature).
 
-### Tier 1 — Quick wins (small effort, high gain)
+### Tier 1 — High impact, worth the effort
 
-1. **#16 Performance pass** — S–M · ★★ — the idle loop dispatches a lot per
-   tick; look at memoisation / batching if it ever gets heavy.
-### Tier 2 — High impact, worth the effort (medium–large)
-
-2. **#28 More region areas (caves, POIs, DLC land)** — L · ★★★★½ — real
+1. **#28 More region areas (caves, POIs, DLC land)** — L · ★★★★½ — real
    content; data-heavy. Started: the POI marker model shipped with the Day-Care
    as the first POI (28c), and the DLC areas are in as zones (28a); ordinary
    caves/forests (28b) and more POIs remain. Pairs with #36/#39.
-3. **#24 Move data pass** — M · ★★★ — ally/faint heals, context move-calling,
+2. **#24 Move data pass** — M · ★★★ — ally/faint heals, context move-calling,
    the doubles-only moves, and decisions on unused PP / dead Z-Max data.
-4. **#56 Multi-effect move pass** — M · ★★★ — audit moves with more than one
+3. **#56 Multi-effect move pass** — M · ★★★ — audit moves with more than one
     effect (Hyper Beam / Giga Impact recharge, Bite / flinch moves, stat-drop
     secondaries, ...) and implement the missing half-effects; quite a few only
     do part of what they should.
-5. **#25 Battle engine pass** — M–L · ★★★ — ally/doubles abilities, a few
+4. **#25 Battle engine pass** — M–L · ★★★ — ally/doubles abilities, a few
     complex singles ones, item nuances and battle polish (animations / damage
     numbers).
-6. **#36 Zones (route chunks)** — M–L · ★★★★ — the model is in; more
+5. **#36 Zones (route chunks)** — M–L · ★★★★ — the model is in; more
     sub-areas, a distinct zone glyph and inline per-sub-area encounter grids.
-7. **#40 Alola / Galar / Paldea league structures** — M · ★★★½ — the
+6. **#40 Alola / Galar / Paldea league structures** — M · ★★★½ — the
     data-driven model is in; Alola's full trial track, Galar's post-game
     tournament and Paldea's Titans / Team Star remain.
-8. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of Armor,
+7. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of Armor,
     Crown Tundra, Kitakami and the Terarium to first-class regions.
-9. **#54 Improve Dynamax Adventures and Battle Royal** — M · ★★½ — both are
+8. **#54 Improve Dynamax Adventures and Battle Royal** — M · ★★½ — both are
     minimal loops today; make them feel like real modes with real rewards.
-10. **#29 Companion minigame polish** — S · ★★ — an animated buddy panel /
+9. **#29 Companion minigame polish** — S · ★★ — an animated buddy panel /
     petting scene (the last open minigame idea).
-11. **#18 Better settings** — M · ★★★ — sprite-style options, account controls
+10. **#18 Better settings** — M · ★★★ — sprite-style options, account controls
     (blocked on #19) and finishing the Gameplay section.
-12. **#38 Clean up the Raid Islands** — S · ★★ — weight / level-gate the
+11. **#38 Clean up the Raid Islands** — S · ★★ — weight / level-gate the
     legendary pick by badges or prestige instead of a uniform "unseen first"
     pick.
-13. **#43 Multi-battles (double / triple / rotation) as a minigame** — M–L ·
+12. **#43 Multi-battles (double / triple / rotation) as a minigame** — M–L ·
     ★★½ — a self-contained minigame that reuses the combat pipeline.
-14. **#60 Areas should have their own zoomed-in map** — M · ★★ — zones and
+13. **#60 Areas should have their own zoomed-in map** — M · ★★ — zones and
     large areas list their sub-areas in the panel only; give them a focused
     map view entered from the Town Map, with a back button to exit.
-15. **#65 Use minigames as unlock gates** — M · ★★ — let a route require
+14. **#65 Use minigames as unlock gates** — M · ★★ — let a route require
     clearing a minigame (or hitting a score) instead of only battles / badges /
     catches, so the minigames feed progression.
-16. **#66 Ruins of Alph should award an Unown (and all 28 forms)** — M · ★★ —
+15. **#66 Ruins of Alph should award an Unown (and all 28 forms)** — M · ★★ —
     the sliding puzzle never gives an Unown, and only one Unown form exists;
     award one and add the full letter / punctuation set.
-17. **#67 Baby Pokemon from breeding, not gifts** — M · ★★ — the Daycare can
+16. **#67 Baby Pokemon from breeding, not gifts** — M · ★★ — the Daycare can
     already hatch babies from their evolved forms; stop handing the babies out
     as gift/static rewards and give their evolved forms a real source.
-18. **#68 Trainer teams should use all level-appropriate Pokemon** — M · ★★ —
+17. **#68 Trainer teams should use all level-appropriate Pokemon** — M · ★★ —
     the strong type bias and narrow pools mean the same few species repeat; let
     trainers field every level-appropriate Pokemon so the Pokedex "seen" fills
     in.
-19. **#70 Day/night cycle on a 60-minute clock** — M · ★★ — a fixed
+18. **#70 Day/night cycle on a 60-minute clock** — M · ★★ — a fixed
     real-time cycle (full day = 60 min) replacing the wall-clock night flag,
     with a visual phase and time-gated effects.
-21. **#74 Snowpoint Temple variety** — S · ★ — the ice-slide rooms are a fixed
+19. **#74 Snowpoint Temple variety** — S · ★ — the ice-slide rooms are a fixed
     set, so every run is the same puzzle; add more / randomise them.
-### Tier 3 — Big / low-return, defer
+### Tier 2 — Big / low-return, defer
 
-22. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
+20. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
     route-based field effects.
-23. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+21. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
 ---
@@ -94,11 +90,6 @@ Still open:
 - [ ] A route-based or global day/night field — see #70.
 
 Effort: **medium**.
-
-## 16. Performance pass
-
-- [ ] The idle loop dispatches a lot per tick; look at memoisation / batching
-      if it ever gets heavy.
 
 ## 18. Better settings
 

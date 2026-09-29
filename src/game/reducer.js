@@ -188,6 +188,15 @@ export const initialGameState = {
  */
 export function gameReducer(state, action) {
   switch (action.type) {
+    case 'BATCH':
+      // Fold the actions a single idle tick dispatched into one state update
+      // (see the buffering in `useGameLoop`). Applying them in order keeps the
+      // exact same semantics as dispatching them one at a time.
+      return (action.payload?.actions ?? []).reduce(
+        /** @param {GameState} currentState @param {GameAction} batchedAction */
+        (currentState, batchedAction) => gameReducer(currentState, batchedAction),
+        state
+      )
     case 'SELECT_STARTER':
       return selectStarter(state, action)
     case 'UNLOCK_REGION':

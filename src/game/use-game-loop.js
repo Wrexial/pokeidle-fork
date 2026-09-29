@@ -33,10 +33,35 @@ export function useGameLoop() {
     // When a manual battle first starts waiting for the player, so a forgotten
     // fight can fall back to auto-battling instead of stalling forever.
     manualWaitRef = React.useRef(0),
+    // A single idle tick can dispatch several related actions (start an
+    // encounter and record it, resolve a turn and store its volatiles, award
+    // EXP and end the battle). They all run synchronously before the next
+    // macrotask, so buffer them and fold the whole group into one reducer pass
+    // on the next microtask (`BATCH`) instead of scheduling an update per
+    // action.
+    pendingActionsRef = React.useRef(/** @type {GameAction[]} */ ([])),
+    flushScheduledRef = React.useRef(false),
     dispatch = React.useCallback(
       /** @param {GameAction} action */ (action) => {
+        // Set before the (deferred) flush below so a fast tick can't act on
+        // the state this batch is about to replace.
         waitingForCommitRef.current = true
-        rawDispatch(action)
+        pendingActionsRef.current.push(action)
+        if (flushScheduledRef.current) return
+        flushScheduledRef.current = true
+        queueMicrotask(() => {
+          flushScheduledRef.current = false
+          const bufferedActions = pendingActionsRef.current
+          pendingActionsRef.current = []
+          if (bufferedActions.length === 1) rawDispatch(bufferedActions[0])
+          else if (bufferedActions.length > 1)
+            rawDispatch({
+              type: 'BATCH',
+              payload: {
+                actions: bufferedActions,
+              },
+            })
+        })
       },
       [rawDispatch]
     )
@@ -925,7 +950,7 @@ export function useGameLoop() {
         intervalRef.current && clearInterval(intervalRef.current)
       }
     )
-  }, [state.phase, state.speed, state.paused, state.pendingEvents.length, tick, getTickDelay])
+  }, [state.phase, state.speed, state.paused, tick, getTickDelay])
   // Resolve a manual turn the moment the player acts, rather than waiting for
   // the next idle tick. Event consumption stays on the interval above, so the
   // battle text still plays out at the normal speed.

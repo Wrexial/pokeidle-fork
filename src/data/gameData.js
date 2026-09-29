@@ -220,13 +220,24 @@ function generationIndexForSpecies(speciesKey) {
 }
 
 /**
+ * Most recently computed result, keyed by the `pokedexCaught` array reference.
+ * The reducer only ever replaces that array on a catch, so the whole-dex scan
+ * is skipped on the idle loop's non-catch ticks (and on every component render
+ * that reads the charm state).
+ * @type {{ input: string[] | null, result: Set<number> }}
+ */
+let completedGenerationsCache = { input: null, result: new Set() }
+
+/**
  * Generation indices whose entire national dex has been caught. The Shiny Charm
  * works per generation, so each collected generation boosts the odds for its
- * own species.
+ * own species. Memoised on the `pokedexCaught` reference, which the immutable
+ * reducer only replaces when a catch actually lands.
  * @param {string[]} pokedexCaught
  * @returns {Set<number>}
  */
 export function completedGenerations(pokedexCaught) {
+  if (completedGenerationsCache.input === pokedexCaught) return completedGenerationsCache.result
   const caught = new Set(pokedexCaught)
   /** @type {Set<number>} */
   const completed = new Set()
@@ -234,6 +245,7 @@ export function completedGenerations(pokedexCaught) {
     if (speciesKeys.length > 0 && speciesKeys.every((speciesKey) => caught.has(speciesKey)))
       completed.add(generationIndex)
   })
+  completedGenerationsCache = { input: pokedexCaught, result: completed }
   return completed
 }
 

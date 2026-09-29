@@ -388,3 +388,34 @@ test('healing into a boss rematch resets the player volatile state', () => {
     speed: 0,
   })
 })
+
+test('BATCH folds several actions into one state update in order', () => {
+  const state = startedGame(),
+    batched = gameReducer(state, {
+      type: 'BATCH',
+      payload: {
+        actions: [
+          { type: 'MARK_SEEN', payload: { speciesKey: 'pidgey' } },
+          { type: 'MARK_SEEN', payload: { speciesKey: 'rattata' } },
+          { type: 'ADD_LOG', payload: { message: 'batched' } },
+        ],
+      },
+    }),
+    sequential = gameReducer(
+      gameReducer(
+        gameReducer(state, { type: 'MARK_SEEN', payload: { speciesKey: 'pidgey' } }),
+        { type: 'MARK_SEEN', payload: { speciesKey: 'rattata' } }
+      ),
+      { type: 'ADD_LOG', payload: { message: 'batched' } }
+    )
+  assert.ok(batched.pokedexSeen.includes('pidgey'))
+  assert.ok(batched.pokedexSeen.includes('rattata'))
+  assert.deepEqual(batched.pokedexSeen, sequential.pokedexSeen)
+  assert.deepEqual(batched.battleLog, sequential.battleLog)
+})
+
+test('BATCH with no actions returns the state unchanged', () => {
+  const state = startedGame()
+  assert.equal(gameReducer(state, { type: 'BATCH', payload: { actions: [] } }), state)
+  assert.equal(gameReducer(state, { type: 'BATCH' }), state)
+})

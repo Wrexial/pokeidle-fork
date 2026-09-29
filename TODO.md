@@ -110,12 +110,14 @@ renumbered, so the gaps below are items that shipped.
     Beldum gift, matching the other regional one-off gifts.
 34. **#72 Slakoth on Route 102** — S · ★ — add the missing Slakoth base form to
     Hoenn Route 102's wild table.
+35. **#73 Clickable routes in Pokedex & notifications** — S–M · ★ — let the
+    route names the Pokedex and toasts show open the Town Map / travel there.
 
 ### Tier 3 — Big / low-return, defer
 
-35. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
+36. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
     route-based field effects.
-36. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+37. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
 ---
@@ -1031,6 +1033,35 @@ Relevant code: `public/data/encounter-data/hoenn.json`,
 (`raidOrdinaryPool`), and `tools/generate-encounter-index.cjs`.
 
 Effort: **small**.
+
+## 73. Route names in the Pokedex and notifications should be clickable
+
+The Pokedex species panel lists where a species lives (`pokedexData[selected]`
+in `pokedex-modal.js`) as plain text spans, and toast notifications
+(`notification-stack.js`) also name routes — but neither is interactive. Make
+those route names clickable so the player can jump to the area.
+
+- [ ] Pokedex: resolve each `pokedexData` name back to a `locationId` (or store
+      the id alongside the name in `src/data/gameData.js`) and render each as a
+      button instead of a span.
+- [ ] Clicking should take the player there — open the Town Map centred on that
+      node, or travel when it is unlocked; decide whether the Pokedex closes
+      first.
+- [ ] Notifications: add an optional `locationId` to `GameNotification`
+      (`withNotification` / `src/types.d.ts`) and make the toast a link when it
+      is set.
+- [ ] Decide the toast interaction — click-to-travel, click-to-open-Town-Map,
+      or a small "go" affordance (toasts currently dismiss on any click).
+- [ ] Update the `withNotification` call sites that mention a route (battle
+      rewards, unlocks, gifts, eggs) to pass the location id.
+
+Relevant code: `src/components/pokedex-modal.js` (`pokedex-modal-routes`),
+`src/components/pokedex-tile.js`, `src/components/notification-stack.js`,
+`src/game/reducer-helpers.js` (`withNotification`), `src/data/gameData.js`
+(`pokedexData`), `src/types.d.ts` (`GameNotification`), and the Town Map
+(`src/components/town-map.js`, `TRAVEL` / `UNLOCK_REGION`).
+
+Effort: **small–medium**.
 
 ---
 

@@ -358,6 +358,8 @@ type GameNotification = {
   kind?: string | null
   /** Collapses repeat events (same key inside the cooldown is dropped). */
   dedupeKey: string
+  /** When set, the toast offers a GO button that travels to this location. */
+  locationId?: string | null
   createdAt: number
 }
 

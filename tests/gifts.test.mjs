@@ -233,6 +233,32 @@ test('START_STATIC_ENCOUNTER begins a real battle with the fixed foe', () => {
   assert.ok(caught.claimedGifts.includes(entry.id))
 })
 
+test('the red Gyarados static is always shiny', () => {
+  const entry = STATIC_ENCOUNTERS.find((candidate) => candidate.shiny)
+  assert.ok(entry, 'a fixed-shiny static exists')
+  const active = createPokemon('cyndaquil', 60, 'static-shiny'),
+    regionId = mapData[entry.location]?.region ?? 'kanto',
+    badges = gymLeaderData
+      .filter((gym) => (gym.region ?? 'kanto') === regionId)
+      .slice(0, entry.requires?.badges ?? 0)
+      .map((gym) => gym.id),
+    started = gameReducer(
+      {
+        ...initialGameState,
+        phase: 'idle',
+        currentLocation: entry.location,
+        party: [active],
+        playerPokemon: active,
+        claimedGifts: [],
+        defeatedGyms: badges,
+      },
+      { type: 'START_STATIC_ENCOUNTER', payload: { staticId: entry.id } }
+    )
+  assert.equal(started.phase, 'battling')
+  assert.equal(started.enemyPokemon.speciesKey, entry.speciesKey)
+  assert.equal(started.enemyPokemon.isShiny, true, 'the static is forced shiny')
+})
+
 test('a claimed static cannot be started again', () => {
   const entry = STATIC_ENCOUNTERS.find((candidate) => !candidate.requires) ?? STATIC_ENCOUNTERS[0],
     active = createPokemon('cyndaquil', 20, 'static-test-2'),

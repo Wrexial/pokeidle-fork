@@ -10,7 +10,7 @@ import { PokedexTile } from './pokedex-tile.js'
 
 /** @param {{ onClose?: () => void, inline?: boolean }} props */
 export function PokedexModal({ onClose, inline = false }) {
-  const { state } = useGame(),
+  const { state, dispatch } = useGame(),
     [selected, setSelected] = React.useState(/** @type {string | null} */ (null)),
     [gen, setGen] = React.useState(0),
     getStatus = /** @param {string} speciesKey */ (speciesKey) =>
@@ -195,23 +195,33 @@ export function PokedexModal({ onClose, inline = false }) {
                   children: [
                     jsx('span', {
                       className: 'pokedex-modal-routes-label',
-                      children: 'Routes: ',
+                      children: 'Routes: ',
                     }),
-                    pokedexData[selected].map((statRow, percent) =>
-                      jsxs(
+                    pokedexData[selected].map((route, index) => {
+                      const unlocked = state.unlockedLocations.includes(route.id)
+                      return jsxs(
                         'span',
                         {
                           style: {
                             whiteSpace: 'nowrap',
                           },
                           children: [
-                            statRow,
-                            percent < pokedexData[selected].length - 1 ? ', ' : '',
+                            jsx('button', {
+                              className: `pokedex-route-link${unlocked ? '' : ' locked'}`,
+                              disabled: !unlocked,
+                              title: unlocked
+                                ? `Travel to ${route.name}`
+                                : `${route.name} \u2014 not unlocked yet`,
+                              onClick: () =>
+                                dispatch({ type: 'TRAVEL', payload: { locationId: route.id } }),
+                              children: route.name,
+                            }),
+                            index < pokedexData[selected].length - 1 ? ', ' : '',
                           ],
                         },
-                        statRow
+                        route.id
                       )
-                    ),
+                    }),
                   ],
                 }),
               selectedStatus !== 'unseen' &&

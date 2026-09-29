@@ -96,7 +96,11 @@ export function startStaticEncounter(state, action) {
   if (!entryRequirementStatus(state, entry).met) return state
   if (!STARTABLE_PHASES.includes(state.phase) || state.trainerBattle || state.bossBattle)
     return state
-  const enemy = createBattlePokemon(entry.speciesKey, entry.level, { wild: true })
+  const enemy = createBattlePokemon(entry.speciesKey, entry.level, {
+    wild: true,
+    // A fixed-shiny static (the red Gyarados) is always shiny.
+    isShiny: entry.shiny === !0,
+  })
   enemy.staticId = entry.id
   return startEncounter(state, { type: 'START_ENCOUNTER', payload: { enemy } })
 }

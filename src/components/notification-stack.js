@@ -8,8 +8,8 @@ import { useGame } from '../game/context.js'
 /** How long a toast stays on screen before it fades out. */
 const TOAST_DURATION_MS = 4500
 
-/** @param {{ notification: GameNotification, dismiss: (id: number) => void }} props */
-function NotificationToast({ notification, dismiss }) {
+/** @param {{ notification: GameNotification, dismiss: (id: number) => void, go: (notification: GameNotification) => void }} props */
+function NotificationToast({ notification, dismiss, go }) {
   return (
     React.useEffect(() => {
       const timeoutId = setTimeout(() => dismiss(notification.id), TOAST_DURATION_MS)
@@ -29,6 +29,15 @@ function NotificationToast({ notification, dismiss }) {
           className: 'notification-message',
           children: notification.message,
         }),
+        notification.locationId &&
+          jsx('button', {
+            className: 'notification-go',
+            onClick: /** @param {React.MouseEvent} event */ (event) => {
+              event.stopPropagation()
+              go(notification)
+            },
+            children: 'GO',
+          }),
       ],
     })
   )
@@ -46,6 +55,14 @@ export function NotificationStack() {
         }),
       [dispatch]
     ),
+    go = React.useCallback(
+      /** @param {GameNotification} notification */ (notification) => {
+        if (notification.locationId)
+          dispatch({ type: 'TRAVEL', payload: { locationId: notification.locationId } })
+        dispatch({ type: 'DISMISS_NOTIFICATION', payload: { id: notification.id } })
+      },
+      [dispatch]
+    ),
     notifications = state.notifications ?? []
   return notifications.length === 0
     ? null
@@ -57,6 +74,7 @@ export function NotificationStack() {
             {
               notification,
               dismiss,
+              go,
             },
             notification.id
           )

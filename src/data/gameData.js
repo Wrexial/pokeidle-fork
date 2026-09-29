@@ -143,13 +143,17 @@ while (formChainChanged) {
 }
 
 /** @type {Record<string, string[]>} */
+/** Where each species can be found, as `{ id, name }` route entries. @type {Record<string, { id: string, name: string }[]>} */
 export let pokedexData = {}
 
-for (const location of Object.values(encounterData))
-  for (const encounter of location.encounters)
-    (pokedexData[encounter.speciesKey] || (pokedexData[encounter.speciesKey] = []),
-      pokedexData[encounter.speciesKey].includes(location.name) ||
-        pokedexData[encounter.speciesKey].push(location.name))
+for (const [routeKey, location] of Object.entries(encounterData))
+  for (const encounter of location.encounters) {
+    const entries =
+      pokedexData[encounter.speciesKey] ?? (pokedexData[encounter.speciesKey] = [])
+    // Keep the location id so the Pokedex can travel to (or focus) the route.
+    if (!entries.some((entry) => entry.id === routeKey))
+      entries.push({ id: routeKey, name: mapData[routeKey]?.name ?? location.name })
+  }
 
 /**
  * Species that spawn on exactly one (non-raid) route, keyed by that route.

@@ -119,6 +119,7 @@ export const GIFTS = [
  * @typedef {{
  *   id: string, location: string, speciesKey: string, level: number,
  *   name: string, note: string,
+ *   shiny?: boolean,
  *   requires?: { badges?: number, champion?: string, caught?: number },
  * }} StaticEncounter
  */
@@ -150,6 +151,16 @@ const BASE_STATIC_ENCOUNTERS = [
     level: 20,
     name: 'Wiggling Tree',
     note: 'That is no ordinary tree.',
+  },
+  {
+    id: 'static-johto-red-gyarados',
+    location: 'johto-route-43',
+    speciesKey: 'gyarados',
+    level: 55,
+    name: 'Red Gyarados',
+    note: 'A furious red Gyarados is raging in the lake ahead.',
+    shiny: !0,
+    requires: { badges: 7 },
   },
   {
     id: 'static-hoenn-kecleon',

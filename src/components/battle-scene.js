@@ -21,6 +21,7 @@ import { useGame } from '../game/context.js'
 import { shinyOddsForCompletedGenerations } from '../game/progression.js'
 import { getBossTrainerSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, getTrainerSpriteUrl, isBattleReady } from '../game/pokemon.js'
 import { EnemyInfoBox } from './enemy-info-box.js'
+import { DexBallBadge } from './dex-ball-badge.js'
 import { PlayerInfoBox } from './player-info-box.js'
 import { SettingsModal } from './settings-modal.js'
 import { BattleTextBox } from './battle-text-box.js'
@@ -151,6 +152,10 @@ export function BattleScene() {
           }
         : null,
     enemyFainted = lastFaintEvent?.data?.target === 'enemy',
+    enemyDexStatus =
+      !activeTrainerBattle && enemyPokemon
+        ? getDexStatus(state, enemyPokemon.speciesKey)
+        : null,
     playerFainted = lastFaintEvent?.data?.target === 'player',
     isTown = mapData[state.currentLocation]?.type === 'town',
     townBackground =
@@ -398,9 +403,7 @@ export function BattleScene() {
               status: enemyPokemon.status ?? null,
               // Trainer teams aren't a catch reward, so only flag wilds with a
               // seen / caught / shiny-caught ball.
-              dexStatus: !activeTrainerBattle
-                ? getDexStatus(state, enemyPokemon.speciesKey)
-                : null,
+              dexStatus: enemyDexStatus,
             }),
             !activeTrainerBattle &&
               state.phase === 'battling' &&
@@ -533,6 +536,13 @@ export function BattleScene() {
                 isFemalePokemon(enemyPokemon)
               )),
               alt: enemyPokemon.name,
+            }),
+            // A caught / shiny-caught marker on the sprite itself, for a quick
+            // read without looking at the name row.
+            jsx(DexBallBadge, {
+              status: enemyDexStatus,
+              size: 14,
+              className: 'sprite-dex-badge',
             }),
           ],
         }),

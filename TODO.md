@@ -19,83 +19,72 @@ renumbered, so the gaps below are items that shipped.
 
 1. **#16 Performance pass** — S–M · ★★ — the idle loop dispatches a lot per
    tick; look at memoisation / batching if it ever gets heavy.
-2. **#48 Colour-accessibility pass** — S · ★ — the type chips (dark or white
-   text per type) and the shared muted label colour now meet WCAG AA; a
-   residual sweep of the remaining hardcoded greys and the warning/error
-   states remains.
-3. **#55 Poke Radar: a guaranteed shiny every 5 levels** — S · ★★★ — shinies on
+2. **#55 Poke Radar: a guaranteed shiny every 5 levels** — S · ★★★ — shinies on
    a schedule (5, 10, 15, ...) instead of only nudged odds.
-4. **#53 IV increment items** — S–M · ★★ — Bottle-Cap-style items that raise
+3. **#53 IV increment items** — S–M · ★★ — Bottle-Cap-style items that raise
    IVs, handed out as rewards somewhere.
 ### Tier 2 — High impact, worth the effort (medium–large)
 
-5. **#28 More region areas (caves, POIs, DLC land)** — L · ★★★★½ — real
+4. **#28 More region areas (caves, POIs, DLC land)** — L · ★★★★½ — real
    content; data-heavy. Started: the POI marker model shipped with the Day-Care
    as the first POI (28c), and the DLC areas are in as zones (28a); ordinary
    caves/forests (28b) and more POIs remain. Pairs with #36/#39.
-6. **#24 Move data pass** — M · ★★★ — ally/faint heals, context move-calling,
+5. **#24 Move data pass** — M · ★★★ — ally/faint heals, context move-calling,
    the doubles-only moves, and decisions on unused PP / dead Z-Max data.
-7. **#56 Multi-effect move pass** — M · ★★★ — audit moves with more than one
+6. **#56 Multi-effect move pass** — M · ★★★ — audit moves with more than one
     effect (Hyper Beam / Giga Impact recharge, Bite / flinch moves, stat-drop
     secondaries, ...) and implement the missing half-effects; quite a few only
     do part of what they should.
-8. **#25 Battle engine pass** — M–L · ★★★ — ally/doubles abilities, a few
+7. **#25 Battle engine pass** — M–L · ★★★ — ally/doubles abilities, a few
     complex singles ones, item nuances and battle polish (animations / damage
     numbers).
-9. **#50 Fossil & fossil-revive system** — M · ★★★ — one fossil item per region
+8. **#50 Fossil & fossil-revive system** — M · ★★★ — one fossil item per region
     (handed out as a gift instead of the Pokemon), revived at Cinnabar Island,
     with more fossils from the Sinnoh Underground.
-10. **#36 Zones (route chunks)** — M–L · ★★★★ — the model is in; more
+9. **#36 Zones (route chunks)** — M–L · ★★★★ — the model is in; more
     sub-areas, a distinct zone glyph and inline per-sub-area encounter grids.
-11. **#40 Alola / Galar / Paldea league structures** — M · ★★★½ — the
+10. **#40 Alola / Galar / Paldea league structures** — M · ★★★½ — the
     data-driven model is in; Alola's full trial track, Galar's post-game
     tournament and Paldea's Titans / Team Star remain.
-12. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of Armor,
+11. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of Armor,
     Crown Tundra, Kitakami and the Terarium to first-class regions.
-13. **#54 Improve Dynamax Adventures and Battle Royal** — M · ★★½ — both are
+12. **#54 Improve Dynamax Adventures and Battle Royal** — M · ★★½ — both are
     minimal loops today; make them feel like real modes with real rewards.
-14. **#29 Companion minigame polish** — S · ★★ — an animated buddy panel /
+13. **#29 Companion minigame polish** — S · ★★ — an animated buddy panel /
     petting scene (the last open minigame idea).
-15. **#18 Better settings** — M · ★★★ — sprite-style options, account controls
+14. **#18 Better settings** — M · ★★★ — sprite-style options, account controls
     (blocked on #19) and finishing the Gameplay section.
-16. **#38 Clean up the Raid Islands** — M · ★★½ — weight / level-gate the
+15. **#38 Clean up the Raid Islands** — M · ★★½ — weight / level-gate the
     legendary pick and (optionally) shrink Unova's ordinary pool.
-17. **#43 Multi-battles (double / triple / rotation) as a minigame** — M–L ·
+16. **#43 Multi-battles (double / triple / rotation) as a minigame** — M–L ·
     ★★½ — a self-contained minigame that reuses the combat pipeline.
-18. **#30 Caught / event QOL indicators** — S · ★ — flag the battle sprite;
-    decide whether raids show the caught badge.
-19. **#60 Areas should have their own zoomed-in map** — M · ★★ — zones and
+17. **#60 Areas should have their own zoomed-in map** — M · ★★ — zones and
     large areas list their sub-areas in the panel only; give them a focused
     map view entered from the Town Map, with a back button to exit.
-20. **#61 Former raid gifts onto real routes** — M · ★★ — the ordinary Raid
+18. **#61 Former raid gifts onto real routes** — M · ★★ — the ordinary Raid
     Island finals became one-off refuge statics on each region's last route;
     place them on routes that suit them as part of the encounter table.
-21. **#65 Use minigames as unlock gates** — M · ★★ — let a route require
+19. **#65 Use minigames as unlock gates** — M · ★★ — let a route require
     clearing a minigame (or hitting a score) instead of only battles / badges /
     catches, so the minigames feed progression.
-22. **#66 Ruins of Alph should award an Unown (and all 28 forms)** — M · ★★ —
+20. **#66 Ruins of Alph should award an Unown (and all 28 forms)** — M · ★★ —
     the sliding puzzle never gives an Unown, and only one Unown form exists;
     award one and add the full letter / punctuation set.
-23. **#67 Baby Pokemon from breeding, not gifts** — M · ★★ — the Daycare can
+21. **#67 Baby Pokemon from breeding, not gifts** — M · ★★ — the Daycare can
     already hatch babies from their evolved forms; stop handing the babies out
     as gift/static rewards and give their evolved forms a real source.
-24. **#68 Trainer teams should use all level-appropriate Pokemon** — M · ★★ —
+22. **#68 Trainer teams should use all level-appropriate Pokemon** — M · ★★ —
     the strong type bias and narrow pools mean the same few species repeat; let
     trainers field every level-appropriate Pokemon so the Pokedex "seen" fills
     in.
-25. **#69 Forced-shiny Gyarados at the Lake of Rage** — S–M · ★★ — the
-    canonical red Gyarados as a one-off guaranteed-shiny Johto static.
-26. **#70 Day/night cycle on a 60-minute clock** — M · ★★ — a fixed
+23. **#70 Day/night cycle on a 60-minute clock** — M · ★★ — a fixed
     real-time cycle (full day = 60 min) replacing the wall-clock night flag,
     with a visual phase and time-gated effects.
-27. **#73 Clickable routes in Pokedex & notifications** — S–M · ★ — let the
-    route names the Pokedex and toasts show open the Town Map / travel there.
-
 ### Tier 3 — Big / low-return, defer
 
-28. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
+24. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
     route-based field effects.
-29. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+25. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
 ---
@@ -282,20 +271,6 @@ Relevant code: `src/game/companion.js`, the minigame scenes under
 `src/components/`, and `src/game/reducer/minigames.js`.
 
 Effort: **small**.
-
-## 30. Caught / event QOL indicators
-
-The Pokédex ball badge (seen / caught / shiny-caught) shipped in 0.13.0.
-
-Still open:
-
-- [ ] Flag the battle **sprite** too (a small marker), if it adds value over the
-      name-row ball.
-- [ ] Decide whether raids should show the badge (they currently do, since the
-      raid boss is a catch reward).
-
-Effort: **small**.
-
 ## 36. Zones — route-like chunks of areas
 
 The map is a graph of single nodes joined pair-wise. The zone model shipped in
@@ -450,34 +425,6 @@ resolver), `src/components/*-scene.js`, `src/game/reducer/minigames.js`, and
 
 Effort: **medium–large** (the shared math helps, but target/order handling is
 genuinely new).
-
-## 48. Colour-accessibility pass
-
-**Shipped (0.21.0):** the yellow-on-yellow move-learning text and the dark-ink
-`--ink` token for parchment; then the type palette — every `.type-*` badge and
-`.type-bg-*` move chip now picks dark ink or white text by its own background,
-with water and psychic darkened slightly so white text passes, via a new
-`--text-on-type` token. The shared `--text-muted` colour was lightened so the
-17 labels that use it meet AA on the dark panels, the hardcoded `color:
-#8a7a60` labels were folded onto that token, and the two labels that sit on
-light surfaces (`move-panel-slot.empty`, `stats-panel-name-edit`) now use
-`--ink`. A `tests/type-contrast.test.mjs` guard checks all 36 type chips stay at
-4.5:1.
-
-Still open:
-
-- [ ] Spot-check the shiny/gold, warning and error states, and the battle
-      log / floating damage numbers (the damage/crit colours and any inline
-      `color:` in components are not covered by the type-chip test).
-- [ ] The remaining hardcoded greys that are **not** text on a dark panel
-      (borders/backgrounds) were deliberately left alone; audit any inline
-      colours in components against their surfaces.
-
-Likely touch points: `assets/style.css` (the `:root` custom properties),
-`tests/type-contrast.test.mjs`, and any component with inline colours.
-
-Effort: **small** (mostly CSS; a residual sweep).
-
 ## 50. Fossil & fossil-revive system
 
 Fossil lines are currently handed out as one-off refuge statics (Omastar,
@@ -767,36 +714,6 @@ Relevant code: `tools/generate-regions.cjs` (`buildTeam`,
 (`src/game/reducer/collection.js`).
 
 Effort: **medium** (generator tuning plus regenerating trainer data).
-
-## 69. Forced-shiny Gyarados at the Lake of Rage (Johto)
-
-Add the canonical red Gyarados: a one-off Johto static encounter that is
-**always shiny**. Today `StaticEncounter` has no shiny flag and
-`startStaticEncounter` builds the enemy with
-`createBattlePokemon(speciesKey, level, { wild: true })`, so every static rolls
-ordinary shiny odds.
-
-- [ ] Add the Lake of Rage location — it is not in the scraped Johto map
-      (`EXTRA_MAP_AREAS` / the map generator; see #28b) — or attach the
-      encounter to the nearest existing route.
-- [ ] Add an `isShiny` / `shiny: true` field to `StaticEncounter` and pass it
-      through `startStaticEncounter` into
-      `createBattlePokemon(..., { wild: true, isShiny: true })`.
-- [ ] Add the Gyarados static (~Lv.30), gated after the Lake of Rage / Team
-      Rocket event (or the Mahogany Town gym).
-- [ ] Confirm `shinySeen` / `shinyCaught` register — the catch path already
-      keys off `enemy.isShiny`, so no extra work beyond the flag.
-- [ ] Decide whether the encounter is truly one-off or reappears until caught,
-      and whether it should scale with region prestige.
-
-Relevant code: `src/game/gifts.js` (`STATIC_ENCOUNTERS` / `StaticEncounter`),
-`src/game/reducer/gifts.js` (`startStaticEncounter`),
-`src/game/combat/setup.js` (`createBattlePokemon`),
-`public/data/map-data/johto.json`, and `tools/generate-regions.cjs`
-(`EXTRA_MAP_AREAS`).
-
-Effort: **small–medium** (the static is small; the Lake of Rage area is data).
-
 ## 70. Day/night cycle on a 60-minute clock
 
 There is a night flag today, but it follows the player's real-world clock:
@@ -827,37 +744,6 @@ Relevant code: `src/game/catching.js` (`isNightTime`, `catchContext`),
 `src/data/ui.js` (backgrounds / tints).
 
 Effort: **medium** (the logic is small; the visual pass is the work).
-## 73. Route names in the Pokedex and notifications should be clickable
-
-The Pokedex species panel lists where a species lives (`pokedexData[selected]`
-in `pokedex-modal.js`) as plain text spans, and toast notifications
-(`notification-stack.js`) also name routes — but neither is interactive. Make
-those route names clickable so the player can jump to the area.
-
-- [ ] Pokedex: resolve each `pokedexData` name back to a `locationId` (or store
-      the id alongside the name in `src/data/gameData.js`) and render each as a
-      button instead of a span.
-- [ ] Clicking should take the player there — open the Town Map centred on that
-      node, or travel when it is unlocked; decide whether the Pokedex closes
-      first.
-- [ ] Notifications: add an optional `locationId` to `GameNotification`
-      (`withNotification` / `src/types.d.ts`) and make the toast a link when it
-      is set.
-- [ ] Decide the toast interaction — click-to-travel, click-to-open-Town-Map,
-      or a small "go" affordance (toasts currently dismiss on any click).
-- [ ] Update the `withNotification` call sites that mention a route (battle
-      rewards, unlocks, gifts, eggs) to pass the location id.
-
-Relevant code: `src/components/pokedex-modal.js` (`pokedex-modal-routes`),
-`src/components/pokedex-tile.js`, `src/components/notification-stack.js`,
-`src/game/reducer-helpers.js` (`withNotification`), `src/data/gameData.js`
-(`pokedexData`), `src/types.d.ts` (`GameNotification`), and the Town Map
-(`src/components/town-map.js`, `TRAVEL` / `UNLOCK_REGION`).
-
-Effort: **small–medium**.
-
----
-
 ## Map cleanup reference maps
 
 All eight non-Kanto regions have hand-measured `REGION_MAP_LAYOUTS` overrides.

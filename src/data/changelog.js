@@ -42,11 +42,14 @@ export const CHANGELOG = [
             'The Box can be reordered by touch again: inspecting a Pokemon in the mobile Box shows up/down buttons (the party already had them), so reordering no longer needs drag-and-drop',
             'Type chips are readable in every colour: each type now uses dark ink or white text depending on how light its background is, so Normal, Fire, Grass, Rock, Bug, Fairy, Flying and the rest no longer show white-on-light text in the move buttons, move manager, Pokedex or battle badges, and the muted grey label colour was lightened so it meets WCAG AA on the dark panels',
             'The Box keeps a fixed size instead of stretching to fill the left panel and shrinking as the party grows: the party panel now takes the spare space (and scrolls when a summary is open), so the Box grid no longer scales up and down as you catch or swap Pokemon',
+            'A wild Pokemon you have already caught now shows its Pokedex ball on its battle sprite as well as the name row, and the routes listed in the Pokedex are links that travel straight there (greyed out until the route is unlocked)',
+            'Unlock toasts (“Route X is now accessible!”) have a GO button that travels to the new area and dismisses the toast',
           ],
         },
         {
           heading: 'Fixes',
           items: [
+            'Battle info-box labels are readable again: the HP label, the level and the EXP label inside the parchment info box now use dark ink / darkened gold and blue instead of the low-contrast gold and pale blue borrowed from the dark panels (the HP label was only 1.7:1)',
             'Stat-changing moves work now: damaging moves that raise or lower a stat (Overheat, Superpower, Close Combat, Fire Lash, Shell Smash, Spin Out and the rest) actually apply it after the hit, instead of silently doing nothing. Several moves also had the wrong stats — Nasty Plot and Calm Mind no longer raise Attack as well, Howl, Autotomize, Power-Up Punch and Victory Dance buff the user rather than the foe, and Cotton Guard, Tail Glow, Lumina Crash and Shell Smash use their real amounts',
             'Stat boosts no longer carry between the Elite Four and Champion: each bout in the league gauntlet (and a rematch after healing) starts a fresh battle, so a Cosmic Power boost can no longer stack across the whole run and make the team nearly untouchable',
             'Gigantamax and other battle-only form changes no longer inflate HP: a form keeps the Pokemon\u2019s own maximum, so Eternatus (Eternamax) and Zygarde-Complete can no longer snowball into effectively infinite HP over the course of a battle',
@@ -114,6 +117,7 @@ export const CHANGELOG = [
             'The Galarian birds — Galarian Articuno, Zapdos and Moltres — are legendary Raid Island bosses again, instead of being filed among the ordinary one-off refuge encounters',
             'Steven’s post-Champion Beldum gift is available at his house in Mossdeep City once you have beaten the Hoenn Champion',
             'Mr. Pok\u00e9mon on Johto\u2019s Route 30 now hands over the canonical Togepi Egg once you have a Johto badge; carry it in the party and battle to hatch it',
+            'The Lake of Rage’s red Gyarados is a one-off guaranteed-shiny static on Johto Route 43 (after the seventh badge); it stays put until you catch it',
           ],
         },
         {

@@ -77,3 +77,27 @@ for (const type of TYPES) {
     })
   }
 }
+
+// The battle info box is on parchment while the party slots are dark, so the
+// shared HP / EXP labels need a per-surface colour (#48). The info-box
+// overrides were added because the shared gold / pale blue only pass on dark.
+const SURFACES = { infoBox: '#e8dcc0', partySlot: '#1a1208' }
+for (const [selector, surface] of [
+  ['.info-box .hp-label', 'infoBox'],
+  ['.info-box .info-pokemon-level', 'infoBox'],
+  ['.info-box .exp-label', 'infoBox'],
+  ['.hp-label', 'partySlot'],
+  ['.exp-label', 'partySlot'],
+]) {
+  test(`${selector} text meets WCAG AA on its ${surface}`, () => {
+    const body = ruleBody(selector)
+    assert.ok(body, `${selector} is defined`)
+    const declared = prop(body, 'color')
+    assert.ok(declared, `${selector} sets a colour`)
+    const ratio = contrast(resolve(declared), SURFACES[surface])
+    assert.ok(
+      ratio >= 4.5,
+      `${selector} ${declared} on ${SURFACES[surface]} is ${ratio.toFixed(2)}:1 (needs 4.5:1)`
+    )
+  })
+}

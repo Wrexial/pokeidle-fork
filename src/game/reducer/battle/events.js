@@ -384,6 +384,7 @@ export function consumeEvent(state, action) {
         message: `${location.name} is now accessible!`,
         tone: 'info',
         icon: '🚩',
+        locationId,
         dedupeKey: `unlock:${locationId}`,
       })
     }

@@ -88,12 +88,15 @@ renumbered, so the gaps below are items that shipped.
 26. **#64 Whack-a-Diglett difficulty ramp + Dugtrio** — S · ★½ — speed the
     round up as the timer runs down, and add a rare Dugtrio worth bonus
     points.
+27. **#65 Use minigames as unlock gates** — M · ★★ — let a route require
+    clearing a minigame (or hitting a score) instead of only battles / badges /
+    catches, so the minigames feed progression.
 
 ### Tier 3 — Big / low-return, defer
 
-27. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
+28. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
     route-based field effects.
-28. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+29. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
 ---
@@ -779,6 +782,40 @@ Relevant code: `src/game/minigames/whack.js` (`WHACK_POP_MS`,
 `src/game/minigames/registry.js`.
 
 Effort: **small**.
+
+## 65. Use minigames as unlock gates
+
+Location unlocks are built entirely from battles won, catches, badges, gyms,
+party level, champion and `requires` (`computeUnlockedLocations`). The
+minigames are side content today — nothing in progression ever asks the player
+to play one. Hook some of them in as gates so the minigames matter to the
+route/unlock graph.
+
+- [ ] Add a `minigame` unlock rule (e.g.
+      `unlock: { minigame: 'whack', minScore: 20 }` or a simple completion
+      flag) to `computeUnlockedLocations` and the `MapLocation` type.
+- [ ] Persist the result: `endMinigame` / `claimMinigameReward` currently throw
+      the outcome away, so record each minigame's completion and best score in
+      the save (`initialGameState`, `SAVED_STATE_KEYS`, `src/types.d.ts`).
+- [ ] Show the requirement in `location-panel.js` (`unlockRequirements`) with
+      the current / target score and a link to the minigame's home area.
+- [ ] Pick the gates thematically: e.g. a Vermilion-area route gated on
+      Whack-a-Diglett, a Johto route on the Bug-Catching Contest, a Paldea
+      route on the Academy Quiz. Keep them optional-ish so a player who dislikes
+      a minigame is never hard-stuck if it can be avoided.
+- [ ] Decide whether generated regions should emit these gates
+      (`tools/generate-regions.cjs`) or they are hand-placed on the committed
+      data with an `apply-*.cjs` script (the data isn't idempotent with the
+      generator).
+- [ ] Re-check `tools/validate-data.cjs` for the new rule shape.
+
+Relevant code: `src/game/progression/unlocks.js` (`computeUnlockedLocations`),
+`src/components/location-panel.js` (`unlockRequirements`),
+`src/game/reducer/minigames.js` (`endMinigame` / `claimMinigameReward`),
+`src/game/minigames/registry.js`, `public/data/map-data/*.json`, and the save
+shape.
+
+Effort: **medium** (state shape + one new rule + placement).
 
 ---
 

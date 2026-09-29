@@ -39,18 +39,6 @@
    {
     "speciesKey": "jynx",
     "level": 70
-   },
-   {
-    "speciesKey": "omastar",
-    "level": 70
-   },
-   {
-    "speciesKey": "kabutops",
-    "level": 70
-   },
-   {
-    "speciesKey": "aerodactyl",
-    "level": 70
    }
   ]
  },
@@ -270,14 +258,6 @@
   ],
   "raidOrdinaryPool": [
    {
-    "speciesKey": "rampardos",
-    "level": 70
-   },
-   {
-    "speciesKey": "bastiodon",
-    "level": 70
-   },
-   {
     "speciesKey": "ambipom",
     "level": 70
    },
@@ -397,14 +377,6 @@
     "level": 70
    },
    {
-    "speciesKey": "carracosta",
-    "level": 70
-   },
-   {
-    "speciesKey": "archeops",
-    "level": 70
-   },
-   {
     "speciesKey": "jellicent",
     "level": 70
    },
@@ -459,14 +431,6 @@
    }
   ],
   "raidOrdinaryPool": [
-   {
-    "speciesKey": "tyrantrum",
-    "level": 70
-   },
-   {
-    "speciesKey": "aurorus",
-    "level": 70
-   },
    {
     "speciesKey": "carbink",
     "level": 70
@@ -680,22 +644,6 @@
    }
   ],
   "raidOrdinaryPool": [
-   {
-    "speciesKey": "dracozolt",
-    "level": 70
-   },
-   {
-    "speciesKey": "arctozolt",
-    "level": 70
-   },
-   {
-    "speciesKey": "dracovish",
-    "level": 70
-   },
-   {
-    "speciesKey": "arctovish",
-    "level": 70
-   },
    {
     "speciesKey": "indeedee-f",
     "level": 70

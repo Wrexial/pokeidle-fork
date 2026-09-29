@@ -108,6 +108,18 @@ for (const bucket of Object.values(encounterData))
 for (const [key, entry] of Object.entries(species))
   if (entry.id > 0 && entry.id <= 1025 && (entry.types ?? []).includes('Bug'))
     obtainable.add(key)
+// Fossil items revive these species at Cinnabar Island (see fossilItems in
+// src/data/items.js). The fossils are handed out by the region gifts and
+// dropped by the Sinnoh Underground, and evolve into the finals that used to
+// sit in `raidOrdinaryPool`.
+const FOSSIL_SPECIES = [
+  'omanyte', 'kabuto', 'aerodactyl',
+  'cranidos', 'shieldon',
+  'tirtouga', 'archen',
+  'tyrunt', 'amaura',
+  'dracozolt', 'arctozolt', 'dracovish', 'arctovish',
+]
+for (const key of FOSSIL_SPECIES) obtainable.add(key)
 // The ordinary Raid Island finals are relocated to reachable refuge static
 // encounters (RAID_REFUGE_LOCATIONS in src/game/gifts.js), so they stay
 // obtainable even though the island's own wild table is legendary-only.

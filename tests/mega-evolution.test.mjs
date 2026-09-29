@@ -82,8 +82,11 @@ test('megaEvolveReady only allows a stone holder that can evolve', () => {
 })
 
 test('MEGA_EVOLVE transforms the active battler and its ability', () => {
-  const state = battlingState('charizard', 60, 'megaStone'),
-    next = gameReducer(state, { type: 'MEGA_EVOLVE' })
+  const state = battlingState('charizard', 60, 'megaStone')
+  // Force a special bias so a random nature/IV roll can't flip the chosen
+  // forme out from under the test.
+  state.playerPokemon = { ...state.playerPokemon, attack: 100, spAttack: 200 }
+  const next = gameReducer(state, { type: 'MEGA_EVOLVE' })
   // Charizard's Sp. Atk is higher, so it takes the special Y forme.
   assert.equal(next.playerVolatile.formKey, 'm-charizard y')
   assert.equal(next.playerVolatile.abilityOverride, 'drought')

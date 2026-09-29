@@ -127,6 +127,13 @@ export const CHANGELOG = [
             'The Game Corner slots have a prize track: every winning line fills a 20-step bar, and a full bar hands over a random Game Corner prize Pokemon — Scyther, Dratini or Porygon',
           ],
         },
+        {
+          heading: 'Items',
+          items: [
+            'Fossils are a proper loop now: each region hands out its fossil items (Kanto’s at Mt. Moon, the other regions on their late routes), the Sinnoh Underground can dig up more, and the Cinnabar Island lab revives a fossil into its Pokemon at Lv. 30',
+            'The revived fossils evolve into the finals that used to sit on the ordinary Raid Island — Omastar, Kabutops, Aerodactyl, Rampardos, Bastiodon, Carracosta, Archeops, Tyrantrum, Aurorus and the four Galar fossils',
+          ],
+        },
       ],
     },
     {

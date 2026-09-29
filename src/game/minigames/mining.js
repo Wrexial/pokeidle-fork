@@ -1,6 +1,6 @@
 // Sinnoh Underground mining runs. Split from game/minigames.js.
 
-import { consumableItems, evolutionItems, heldItems, pokeBalls } from '../../data/items.js'
+import { consumableItems, evolutionItems, fossilItems, heldItems, pokeBalls } from '../../data/items.js'
 
 /** Money spent to start a mining run. */
 export const MINING_COST = 1500
@@ -42,6 +42,20 @@ const MINING_REWARD_TABLE = [
   { itemId: 'kingsRock', weight: 2, min: 1, max: 1 },
   { itemId: 'protector', weight: 1, min: 1, max: 1 },
   { itemId: 'razorClaw', weight: 1, min: 1, max: 1 },
+  // Fossils: the repeatable source. They are revived at Cinnabar Island.
+  { itemId: 'helixFossil', weight: 2, min: 1, max: 1 },
+  { itemId: 'domeFossil', weight: 2, min: 1, max: 1 },
+  { itemId: 'oldAmber', weight: 2, min: 1, max: 1 },
+  { itemId: 'skullFossil', weight: 2, min: 1, max: 1 },
+  { itemId: 'armorFossil', weight: 2, min: 1, max: 1 },
+  { itemId: 'coverFossil', weight: 2, min: 1, max: 1 },
+  { itemId: 'plumeFossil', weight: 2, min: 1, max: 1 },
+  { itemId: 'jawFossil', weight: 2, min: 1, max: 1 },
+  { itemId: 'sailFossil', weight: 2, min: 1, max: 1 },
+  { itemId: 'fossilizedBird', weight: 2, min: 1, max: 1 },
+  { itemId: 'fossilizedDino', weight: 2, min: 1, max: 1 },
+  { itemId: 'fossilizedFish', weight: 2, min: 1, max: 1 },
+  { itemId: 'fossilizedDrake', weight: 2, min: 1, max: 1 },
   // Candies.
   { itemId: 'expCandyL', weight: 4, min: 1, max: 2 },
   { itemId: 'rareCandy', weight: 1, min: 1, max: 1 },
@@ -104,6 +118,7 @@ export function rewardItemName(itemId) {
     pokeBalls[itemId]?.name ??
     consumableItems[itemId]?.name ??
     evolutionItems[itemId]?.name ??
+    fossilItems[itemId]?.name ??
     heldItems[itemId]?.name ??
     itemId
   )

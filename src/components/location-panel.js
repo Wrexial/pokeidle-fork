@@ -10,6 +10,7 @@ import { computeUnlockedLocations, regionProgressionGoal } from '../game/progres
 import { servicePoisFor } from '../game/services.js'
 import { MinigameCard } from './minigame-card.js'
 import { GiftPanel } from './gift-panel.js'
+import { FossilPanel } from './fossil-panel.js'
 import { BattleTowerPanel } from './battle-tower-panel.js'
 import { GymLocationPanel } from './gym-location-panel.js'
 import { LeagueLocationPanel } from './league-location-panel.js'
@@ -702,6 +703,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
             ],
           }),
         location.id === BATTLE_TOWER_LOCATION && jsx(BattleTowerPanel, {}),
+        location.id === 'cinnabarIsland' && jsx(FossilPanel, {}),
         jsx(GiftPanel, { locationId: location.id }),
         nextUnlocksSection,
       ],

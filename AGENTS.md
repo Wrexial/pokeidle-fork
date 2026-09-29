@@ -629,6 +629,11 @@ One-off scripts used to build the data JSON (not run during dev/build):
   Galarian birds from Galar's `raidOrdinaryPool` into `raidPool` (plus the
   `galar-raid` encounter bucket) after flagging them `legendary`. Idempotent;
   re-run after regenerating encounters or raid pools.
+- `apply-fossil-loop.cjs` — data-only pass for the fossil loop (#50): drops the
+  fossil final evolutions (Omastar, Kabutops, Aerodactyl, Rampardos, ...) from
+  every region's `raidOrdinaryPool`, since the fossils are now gifted and dug up
+  and the finals come from reviving them at Cinnabar Island. Idempotent; their
+  refuge statics disappear automatically (those derive from `raidOrdinaryPool`).
 - `fix-impossible-encounters.cjs` / `fix-impossible-teams.cjs` — step wild
   encounters and trainer/gym/Elite Four/Champion Pokemon back to a form that
   could exist at their level (a Lv. 3 Chesnaught becomes a Chespin), merging

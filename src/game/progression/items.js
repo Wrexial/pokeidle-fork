@@ -1,6 +1,6 @@
 // // Item economy and effects: bag metadata, sell prices, drop rolls and reward formatting. Split from game/progression.js.
 
-import { activeItems, consumableItems, evolutionItems, heldItems, pokeBalls, valuableDropTable } from '../../data/items.js'
+import { activeItems, consumableItems, evolutionItems, fossilItems, heldItems, pokeBalls, valuableDropTable } from '../../data/items.js'
 
 /**
  * @param {string} itemId
@@ -9,6 +9,7 @@ import { activeItems, consumableItems, evolutionItems, heldItems, pokeBalls, val
 export function getItemCategory(itemId) {
   if (itemId in pokeBalls) return 'pokeballs'
   if (itemId in heldItems) return 'held'
+  if (itemId in fossilItems) return 'fossils'
   return consumableItems[itemId]?.category ?? 'items'
 }
 
@@ -95,6 +96,13 @@ export function getItemInfo(itemId) {
   }
   if (itemId in evolutionItems) {
     const item = evolutionItems[itemId]
+    return {
+      name: item.name,
+      description: item.description,
+    }
+  }
+  if (itemId in fossilItems) {
+    const item = fossilItems[itemId]
     return {
       name: item.name,
       description: item.description,

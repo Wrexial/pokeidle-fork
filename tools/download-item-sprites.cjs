@@ -71,6 +71,7 @@ function collectItemIds() {
     addTable(items.consumableItems)
     addTable(items.heldItems)
     addTable(items.evolutionItems)
+    addTable(items.fossilItems)
     addEntries(items.valuableDropTable)
     addEntries(items.coreMartItems)
     for (const stock of Object.values(items.regionalMartItems)) addEntries(stock)

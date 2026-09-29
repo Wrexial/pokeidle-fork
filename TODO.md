@@ -38,53 +38,50 @@ renumbered, so the gaps below are items that shipped.
 7. **#25 Battle engine pass** — M–L · ★★★ — ally/doubles abilities, a few
     complex singles ones, item nuances and battle polish (animations / damage
     numbers).
-8. **#50 Fossil & fossil-revive system** — M · ★★★ — one fossil item per region
-    (handed out as a gift instead of the Pokemon), revived at Cinnabar Island,
-    with more fossils from the Sinnoh Underground.
-9. **#36 Zones (route chunks)** — M–L · ★★★★ — the model is in; more
+8. **#36 Zones (route chunks)** — M–L · ★★★★ — the model is in; more
     sub-areas, a distinct zone glyph and inline per-sub-area encounter grids.
-10. **#40 Alola / Galar / Paldea league structures** — M · ★★★½ — the
+9. **#40 Alola / Galar / Paldea league structures** — M · ★★★½ — the
     data-driven model is in; Alola's full trial track, Galar's post-game
     tournament and Paldea's Titans / Team Star remain.
-11. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of Armor,
+10. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of Armor,
     Crown Tundra, Kitakami and the Terarium to first-class regions.
-12. **#54 Improve Dynamax Adventures and Battle Royal** — M · ★★½ — both are
+11. **#54 Improve Dynamax Adventures and Battle Royal** — M · ★★½ — both are
     minimal loops today; make them feel like real modes with real rewards.
-13. **#29 Companion minigame polish** — S · ★★ — an animated buddy panel /
+12. **#29 Companion minigame polish** — S · ★★ — an animated buddy panel /
     petting scene (the last open minigame idea).
-14. **#18 Better settings** — M · ★★★ — sprite-style options, account controls
+13. **#18 Better settings** — M · ★★★ — sprite-style options, account controls
     (blocked on #19) and finishing the Gameplay section.
-15. **#38 Clean up the Raid Islands** — M · ★★½ — weight / level-gate the
+14. **#38 Clean up the Raid Islands** — M · ★★½ — weight / level-gate the
     legendary pick and (optionally) shrink Unova's ordinary pool.
-16. **#43 Multi-battles (double / triple / rotation) as a minigame** — M–L ·
+15. **#43 Multi-battles (double / triple / rotation) as a minigame** — M–L ·
     ★★½ — a self-contained minigame that reuses the combat pipeline.
-17. **#60 Areas should have their own zoomed-in map** — M · ★★ — zones and
+16. **#60 Areas should have their own zoomed-in map** — M · ★★ — zones and
     large areas list their sub-areas in the panel only; give them a focused
     map view entered from the Town Map, with a back button to exit.
-18. **#61 Former raid gifts onto real routes** — M · ★★ — the ordinary Raid
+17. **#61 Former raid gifts onto real routes** — M · ★★ — the ordinary Raid
     Island finals became one-off refuge statics on each region's last route;
     place them on routes that suit them as part of the encounter table.
-19. **#65 Use minigames as unlock gates** — M · ★★ — let a route require
+18. **#65 Use minigames as unlock gates** — M · ★★ — let a route require
     clearing a minigame (or hitting a score) instead of only battles / badges /
     catches, so the minigames feed progression.
-20. **#66 Ruins of Alph should award an Unown (and all 28 forms)** — M · ★★ —
+19. **#66 Ruins of Alph should award an Unown (and all 28 forms)** — M · ★★ —
     the sliding puzzle never gives an Unown, and only one Unown form exists;
     award one and add the full letter / punctuation set.
-21. **#67 Baby Pokemon from breeding, not gifts** — M · ★★ — the Daycare can
+20. **#67 Baby Pokemon from breeding, not gifts** — M · ★★ — the Daycare can
     already hatch babies from their evolved forms; stop handing the babies out
     as gift/static rewards and give their evolved forms a real source.
-22. **#68 Trainer teams should use all level-appropriate Pokemon** — M · ★★ —
+21. **#68 Trainer teams should use all level-appropriate Pokemon** — M · ★★ —
     the strong type bias and narrow pools mean the same few species repeat; let
     trainers field every level-appropriate Pokemon so the Pokedex "seen" fills
     in.
-23. **#70 Day/night cycle on a 60-minute clock** — M · ★★ — a fixed
+22. **#70 Day/night cycle on a 60-minute clock** — M · ★★ — a fixed
     real-time cycle (full day = 60 min) replacing the wall-clock night flag,
     with a visual phase and time-gated effects.
 ### Tier 3 — Big / low-return, defer
 
-24. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
+23. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
     route-based field effects.
-25. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+24. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
 ---
@@ -425,33 +422,6 @@ resolver), `src/components/*-scene.js`, `src/game/reducer/minigames.js`, and
 
 Effort: **medium–large** (the shared math helps, but target/order handling is
 genuinely new).
-## 50. Fossil & fossil-revive system
-
-Fossil lines are currently handed out as one-off refuge statics (Omastar,
-Kabutops, Aerodactyl, Rampardos, Bastiodon, Carracosta, Archeops, Tyrantrum,
-Aurorus, the four Galar fossils). Replace that with a proper fossil loop.
-
-- [ ] Add one **fossil item** per region (Helix, Dome, Old Amber, Skull, Armor,
-      Cover, Plume, Jaw, Sail, ...) and hand the **item** out from the region
-      gift / refuge **instead of the Pokemon itself**.
-- [ ] Add a **revive** NPC at Kanto's Cinnabar Island lab that turns a fossil
-      item into its Pokemon (one revive per fossil, or paid). Making it the hub
-      for every region's fossils gives a reason to revisit Kanto.
-- [ ] Move the fossil species out of `raidOrdinaryPool` /
-      `RAID_REFUGE_LOCATIONS` (`src/game/gifts.js`) once the fossil loop covers
-      them, so they aren't double-sourced.
-- [ ] Make the **Sinnoh Underground** mining minigame drop fossils (its reward
-      table currently gives shards / evolution items) as the repeatable fossil
-      source.
-- [ ] Wire the fossil items into the bag with icons, and add the revive action
-      plus a small revive panel/animation.
-
-Likely touch points: `src/data/items.js`, `src/game/gifts.js`,
-`src/game/minigames/mining.js`, `src/components/location-panel.js` (a Cinnabar
-revive panel), and `tools/download-item-sprites.cjs` for the art.
-
-Effort: **medium**.
-
 ## 53. IV increment items
 
 Add items that permanently raise a Pokemon's IVs, handed out as rewards.

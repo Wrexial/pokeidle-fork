@@ -1,11 +1,60 @@
 // Reducer handlers for items actions. Split from game/reducer.js.
 
 import { encounterData, pokemonSpecies } from '../../data/gameData.js'
-import { activeItems, consumableItems, heldItems, pokeBalls } from '../../data/items.js'
+import { activeItems, consumableItems, fossilItems, heldItems, pokeBalls } from '../../data/items.js'
 import { canGigantamax } from '../../data/mega-evolution.js'
 import { natureName, randomNature } from '../../data/natures.js'
 import { MAX_FRIENDSHIP, calculatePokemonStats, calculateRequiredExperience, gainFriendship, getLevelUpResults } from '../pokemon.js'
 import { getItemSellPrice, isActiveEffectItem } from '../progression.js'
+import { withNotification } from '../reducer-helpers.js'
+import { markCaught } from './collection.js'
+import { catchPokemon } from './pokemon/management.js'
+
+/** The only place a fossil can be revived. */
+export const FOSSIL_REVIVE_LOCATION = 'cinnabarIsland'
+
+/**
+ * Handle the `REVIVE_FOSSIL` action: consume a fossil at Cinnabar Island and
+ * add the Pokemon it revives (one revive per fossil).
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function reviveFossil(state, action) {
+  const itemId = action.payload?.itemId,
+    fossil = fossilItems[itemId]
+  if (!fossil || state.currentLocation !== FOSSIL_REVIVE_LOCATION) return state
+  if ((state.inventory[itemId] ?? 0) <= 0) return state
+  const species = pokemonSpecies[fossil.speciesKey]
+  if (!species) return state
+  let next = {
+    ...state,
+    inventory: { ...state.inventory, [itemId]: state.inventory[itemId] - 1 },
+  }
+  next = catchPokemon(next, {
+    type: 'CATCH_POKEMON',
+    payload: { speciesKey: fossil.speciesKey, level: fossil.level },
+  })
+  next = markCaught(next, {
+    type: 'MARK_CAUGHT',
+    payload: { speciesKey: fossil.speciesKey },
+  })
+  return withNotification(
+    {
+      ...next,
+      battleLog: [
+        ...next.battleLog,
+        `Revived ${species.name} from the ${fossil.name}!`,
+      ].slice(-50),
+    },
+    {
+      message: `Revived ${species.name}!`,
+      tone: 'success',
+      icon: '\u{1f9b4}',
+      dedupeKey: `fossil:${fossil.speciesKey}`,
+    }
+  )
+}
 
 /**
  * Handle the `BUY_ITEM` action.

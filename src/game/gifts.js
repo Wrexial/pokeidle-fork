@@ -113,6 +113,48 @@ export const GIFTS = [
     description: 'The academy spares one of the Paldea starters.',
     randomStarter: 'paldea',
   },
+  // Fossil gifts: the item is revived at Cinnabar Island (#50). Mining is the
+  // repeatable source; these one-off gifts give each region its fossils.
+  {
+    id: 'gift-kanto-fossils',
+    location: 'mtMoon',
+    name: 'Mt. Moon Fossils',
+    description: 'Ancient fossils are embedded in the cave wall.',
+    items: { helixFossil: 1, domeFossil: 1, oldAmber: 1 },
+  },
+  {
+    id: 'gift-sinnoh-fossils',
+    location: 'sinnoh-sea-route-230',
+    name: 'Underground Fossils',
+    description: 'Fossils dug up from the Sinnoh Underground.',
+    items: { skullFossil: 1, armorFossil: 1 },
+  },
+  {
+    id: 'gift-unova-fossils',
+    location: 'unova-route-23',
+    name: 'Relic Fossils',
+    description: 'Fossils unearthed near the Relic Castle.',
+    items: { coverFossil: 1, plumeFossil: 1 },
+  },
+  {
+    id: 'gift-kalos-fossils',
+    location: 'kalos-route-22',
+    name: 'Glittering Fossils',
+    description: 'Fossils found in the Glittering Cave.',
+    items: { jawFossil: 1, sailFossil: 1 },
+  },
+  {
+    id: 'gift-galar-fossils',
+    location: 'galar-route-10',
+    name: 'Digging Duo Fossils',
+    description: 'The Digging Duo unearth a set of Galar fossils.',
+    items: {
+      fossilizedBird: 1,
+      fossilizedDino: 1,
+      fossilizedFish: 1,
+      fossilizedDrake: 1,
+    },
+  },
 ]
 
 /**

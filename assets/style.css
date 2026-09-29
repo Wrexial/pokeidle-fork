@@ -11975,6 +11975,13 @@ img {
     color: #cbbf9c
 }
 
+.fossil-lab-hint {
+    margin: 0 0 8px;
+    font-size: 8px;
+    line-height: 1.4;
+    color: #cbbf9c
+}
+
 .location-gift-reward {
     font-size: 8px;
     color: #e7dcc0

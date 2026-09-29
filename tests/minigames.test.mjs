@@ -12,7 +12,7 @@ const { match3SwapFrames, MATCH3_SPECIES, MATCH3_TYPES, radarFaces, STRENGTH_ROO
   '../src/game/minigames.js'
 )
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
-const { consumableItems, evolutionItems, heldItems } = await import('../src/data/items.js')
+const { consumableItems, evolutionItems, fossilItems, heldItems } = await import('../src/data/items.js')
 const { createPokemon } = await import('../src/game/pokemon.js')
 
 test('fixed minigames live at their in-game locations', () => {
@@ -29,6 +29,7 @@ test('mining rewards are real items with a positive quantity', () => {
     assert.ok(
       consumableItems[reward.itemId] ||
         evolutionItems[reward.itemId] ||
+        fossilItems[reward.itemId] ||
         heldItems[reward.itemId],
       `${reward.itemId} should be a real item`
     )

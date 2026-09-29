@@ -541,6 +541,10 @@ export const bagCategories = [
       label: 'Items',
     },
     {
+      id: 'fossils',
+      label: 'Fossils',
+    },
+    {
       id: 'held',
       label: 'Held Items',
     },
@@ -811,6 +815,105 @@ export const evolutionItems = {
       name: 'Reins of Unity',
       description: 'Changes Calyrex between its base and rider forms.',
       reusable: !0,
+    },
+  }
+
+/**
+ * Fossils revived at the Cinnabar Island lab. Each entry maps to the Pokemon it
+ * revives (the base form; the Galar fossils revive their combined forms).
+ * @type {Record<string, { id: string, name: string, description: string, speciesKey: string, level: number }>}
+ */
+export const fossilItems = {
+    helixFossil: {
+      id: 'helixFossil',
+      name: 'Helix Fossil',
+      description: 'An ancient spiral shell. Revives Omanyte at Cinnabar Island.',
+      speciesKey: 'omanyte',
+      level: 30,
+    },
+    domeFossil: {
+      id: 'domeFossil',
+      name: 'Dome Fossil',
+      description: 'An ancient dome shell. Revives Kabuto at Cinnabar Island.',
+      speciesKey: 'kabuto',
+      level: 30,
+    },
+    oldAmber: {
+      id: 'oldAmber',
+      name: 'Old Amber',
+      description: 'Amber that holds ancient DNA. Revives Aerodactyl at Cinnabar Island.',
+      speciesKey: 'aerodactyl',
+      level: 30,
+    },
+    skullFossil: {
+      id: 'skullFossil',
+      name: 'Skull Fossil',
+      description: 'A skull from a prehistoric Pokemon. Revives Cranidos at Cinnabar Island.',
+      speciesKey: 'cranidos',
+      level: 30,
+    },
+    armorFossil: {
+      id: 'armorFossil',
+      name: 'Armor Fossil',
+      description: 'An ancient piece of armor. Revives Shieldon at Cinnabar Island.',
+      speciesKey: 'shieldon',
+      level: 30,
+    },
+    coverFossil: {
+      id: 'coverFossil',
+      name: 'Cover Fossil',
+      description: 'An ancient shell plate. Revives Tirtouga at Cinnabar Island.',
+      speciesKey: 'tirtouga',
+      level: 30,
+    },
+    plumeFossil: {
+      id: 'plumeFossil',
+      name: 'Plume Fossil',
+      description: 'An ancient wing imprint. Revives Archen at Cinnabar Island.',
+      speciesKey: 'archen',
+      level: 30,
+    },
+    jawFossil: {
+      id: 'jawFossil',
+      name: 'Jaw Fossil',
+      description: 'A fossilized jaw with fangs. Revives Tyrunt at Cinnabar Island.',
+      speciesKey: 'tyrunt',
+      level: 30,
+    },
+    sailFossil: {
+      id: 'sailFossil',
+      name: 'Sail Fossil',
+      description: 'A fossil shaped like a sail. Revives Amaura at Cinnabar Island.',
+      speciesKey: 'amaura',
+      level: 30,
+    },
+    fossilizedBird: {
+      id: 'fossilizedBird',
+      name: 'Fossilized Bird',
+      description: 'A fossil of an ancient bird. Revives Dracozolt at Cinnabar Island.',
+      speciesKey: 'dracozolt',
+      level: 30,
+    },
+    fossilizedDino: {
+      id: 'fossilizedDino',
+      name: 'Fossilized Dino',
+      description: 'A fossil of an ancient dinosaur. Revives Arctozolt at Cinnabar Island.',
+      speciesKey: 'arctozolt',
+      level: 30,
+    },
+    fossilizedFish: {
+      id: 'fossilizedFish',
+      name: 'Fossilized Fish',
+      description: 'A fossil of an ancient fish. Revives Dracovish at Cinnabar Island.',
+      speciesKey: 'dracovish',
+      level: 30,
+    },
+    fossilizedDrake: {
+      id: 'fossilizedDrake',
+      name: 'Fossilized Drake',
+      description: 'A fossil of an ancient dragon. Revives Arctovish at Cinnabar Island.',
+      speciesKey: 'arctovish',
+      level: 30,
     },
   }
 

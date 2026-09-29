@@ -9,7 +9,7 @@ const { GIFTS, STATIC_ENCOUNTERS, entryRequirementStatus, findGift, findStatic, 
   await import('../src/game/gifts.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 const { createPokemon } = await import('../src/game/pokemon.js')
-const { consumableItems, evolutionItems, heldItems, pokeBalls } = await import('../src/data/items.js')
+const { consumableItems, evolutionItems, fossilItems, heldItems, pokeBalls } = await import('../src/data/items.js')
 const { regionalStarters } = await import('../src/data/config.js')
 
 const { mapData, pokemonSpecies, gymLeaderData } = gameData
@@ -29,7 +29,7 @@ test('every gift and static is real data on a real location', () => {
       )
     for (const itemId of Object.keys(gift.items ?? {}))
       assert.ok(
-        consumableItems[itemId] || heldItems[itemId] || evolutionItems[itemId] || pokeBalls[itemId],
+        consumableItems[itemId] || heldItems[itemId] || evolutionItems[itemId] || fossilItems[itemId] || pokeBalls[itemId],
         `${gift.id} item ${itemId}`
       )
     assert.ok(giftRewardLabel(gift).length > 0)

@@ -44,10 +44,13 @@ export function useGameLoop() {
     ;((phaseRef.current = state.phase), (stateRef.current = state))
     waitingForCommitRef.current = false
   }, [state])
-  // A fresh battle (or leaving one) starts the idle timer over.
+  // A fresh battle, leaving one, or toggling the battle mode starts the manual
+  // idle timer over. Without the mode dependency, turning Manual back on after
+  // the timeout has already fired reuses the stale timestamp and immediately
+  // falls back to auto-battling (which then auto-switches the active Pokemon).
   React.useEffect(() => {
     manualWaitRef.current = 0
-  }, [state.phase])
+  }, [state.phase, state.battleMode])
   const getTickDelay = React.useCallback(() => {
       const speed = stateRef.current.speed
       return speed === 25 ? 40 : speed === 5 ? 200 : speed === 2 ? 500 : 1e3

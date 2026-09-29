@@ -4,6 +4,7 @@ import { abilityOf } from '../../abilities.js'
 import { createVolatileState } from '../../combat.js'
 import { applyEntryHazards, emptyBattleHazards } from '../../hazards.js'
 import { computeUnlockedLocations, prepareNextBattle, tickBattleCounters } from '../../progression.js'
+import { recordSeenPokemon } from '../../reducer-helpers.js'
 
 /**
  * Handle the `START_TRAINER_BATTLE` action.
@@ -19,41 +20,44 @@ export function startTrainerBattle(state, action) {
       trainerTeam,
     } = action.payload,
     firstPokemon = trainerTeam[0]
-  return {
-    ...state,
-    phase: 'battling',
-    enemyPokemon: firstPokemon,
-    battleEvents: [],
-    pendingEvents: [
-      {
-        type: 'trainerAppear',
-        message: `${trainerName} wants to battle!`,
+  return recordSeenPokemon(
+    {
+      ...state,
+      phase: 'battling',
+      enemyPokemon: firstPokemon,
+      battleEvents: [],
+      pendingEvents: [
+        {
+          type: 'trainerAppear',
+          message: `${trainerName} wants to battle!`,
+        },
+        {
+          type: 'trainerSendOut',
+          message: `${trainerName} sent out ${firstPokemon.name}!`,
+        },
+      ],
+      currentEventIndex: 0,
+      battleTurn: 0,
+      weather: null,
+      battleHazards: emptyBattleHazards(),
+      terrain: null,
+      activePlayerPokemonIndex: 0,
+      battleParticipants: (state.party[0]?.id ?? state.playerPokemon?.id)
+        ? [state.party[0]?.id ?? state.playerPokemon?.id]
+        : [],
+      playerTurnSpent: !1,
+      enemyTurnSpent: !1,
+      trainerBattle: {
+        trainerId,
+        trainerName,
+        trainerClass,
+        trainerTeam,
+        currentTrainerPokemonIndex: 0,
       },
-      {
-        type: 'trainerSendOut',
-        message: `${trainerName} sent out ${firstPokemon.name}!`,
-      },
-    ],
-    currentEventIndex: 0,
-    battleTurn: 0,
-    weather: null,
-    battleHazards: emptyBattleHazards(),
-    terrain: null,
-    activePlayerPokemonIndex: 0,
-    battleParticipants: (state.party[0]?.id ?? state.playerPokemon?.id)
-      ? [state.party[0]?.id ?? state.playerPokemon?.id]
-      : [],
-    playerTurnSpent: !1,
-    enemyTurnSpent: !1,
-    trainerBattle: {
-      trainerId,
-      trainerName,
-      trainerClass,
-      trainerTeam,
-      currentTrainerPokemonIndex: 0,
+      playerVolatile: createVolatileState(),
     },
-    playerVolatile: createVolatileState(),
-  }
+    firstPokemon
+  )
 }
 
 /**
@@ -173,35 +177,38 @@ export function trainerSendNextPokemon(state, action) {
               : {}),
           }
         : nextPokemon
-  return {
-    ...state,
-    phase: 'battling',
-    enemyPokemon: switchedInEnemy,
-    battleEvents: [],
-    // A Champion swap costs its turn: the incoming Pokemon cannot attack.
-    ...(championSwap ? { enemyTurnSpent: !0 } : {}),
-    trainerBattle: state.trainerBattle ? updatedBattle : null,
-    bossBattle: state.bossBattle ? updatedBattle : null,
-    pendingEvents: [
-      ...state.pendingEvents,
-      {
-        type: 'trainerAppear',
-        message: `${battle.trainerName} is about to send out ${nextPokemon.name}!`,
-      },
-      ...(enemyEntry.damage > 0
-        ? [
-            {
-              type: 'hazard',
-              message: `${nextPokemon.name} was hurt by the entry hazards!`,
-            },
-          ]
-        : []),
-      {
-        type: 'trainerSendOut',
-        message: `${battle.trainerName} sent out ${nextPokemon.name}!`,
-      },
-    ],
-  }
+  return recordSeenPokemon(
+    {
+      ...state,
+      phase: 'battling',
+      enemyPokemon: switchedInEnemy,
+      battleEvents: [],
+      // A Champion swap costs its turn: the incoming Pokemon cannot attack.
+      ...(championSwap ? { enemyTurnSpent: !0 } : {}),
+      trainerBattle: state.trainerBattle ? updatedBattle : null,
+      bossBattle: state.bossBattle ? updatedBattle : null,
+      pendingEvents: [
+        ...state.pendingEvents,
+        {
+          type: 'trainerAppear',
+          message: `${battle.trainerName} is about to send out ${nextPokemon.name}!`,
+        },
+        ...(enemyEntry.damage > 0
+          ? [
+              {
+                type: 'hazard',
+                message: `${nextPokemon.name} was hurt by the entry hazards!`,
+              },
+            ]
+          : []),
+        {
+          type: 'trainerSendOut',
+          message: `${battle.trainerName} sent out ${nextPokemon.name}!`,
+        },
+      ],
+    },
+    switchedInEnemy
+  )
 }
 
 /**

@@ -2,7 +2,7 @@
 // leftover unlock tokens and swarm rolls). Split from game/reducer.js.
 
 import { swarmBattleCount } from '../data/config.js'
-import { encounterData, mapData, regions } from '../data/gameData.js'
+import { encounterData, mapData, pokemonSpecies, regions } from '../data/gameData.js'
 import { getRegionUnlockTokens, prepareNextBattle } from './progression.js'
 
 /**
@@ -128,6 +128,36 @@ export function withNotification(state, notification) {
     ].slice(-NOTIFICATION_CAP),
     nextNotificationId: nextId + 1,
   }
+}
+
+/**
+ * Record that the player has seen a battle Pokemon, so a trainer's team fills
+ * the Pokedex's "seen" (and "shiny seen") entries the same way a wild
+ * encounter does. Returns the unchanged state when nothing is new.
+ * @param {GameState} state
+ * @param {{ speciesKey?: string, isShiny?: boolean }} pokemon
+ * @returns {GameState}
+ */
+export function recordSeenPokemon(state, pokemon) {
+  const speciesKey = pokemon?.speciesKey
+  if (!speciesKey) return state
+  const pokedexSeen = state.pokedexSeen.includes(speciesKey)
+      ? state.pokedexSeen
+      : [...state.pokedexSeen, speciesKey],
+    shinySeen =
+      pokemon.isShiny && !state.shinySeen.includes(speciesKey)
+        ? [...state.shinySeen, speciesKey]
+        : state.shinySeen
+  if (pokedexSeen === state.pokedexSeen && shinySeen === state.shinySeen) return state
+  const next = { ...state, pokedexSeen, shinySeen }
+  return shinySeen !== state.shinySeen
+    ? withNotification(next, {
+        message: `A shiny ${pokemonSpecies[speciesKey]?.name ?? speciesKey} appeared!`,
+        tone: 'shiny',
+        icon: '✨',
+        dedupeKey: `shinyseen:${speciesKey}`,
+      })
+    : next
 }
 
 /**

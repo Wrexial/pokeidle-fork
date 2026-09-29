@@ -5,7 +5,7 @@ import { gymLeaderData, regions } from '../../../data/gameData.js'
 import { createVolatileState } from '../../combat.js'
 import { emptyBattleHazards } from '../../hazards.js'
 import { computeUnlockedLocations, prepareNextBattle, syncActivePokemonIntoParty, tickBattleCounters } from '../../progression.js'
-import { settleUnlockTokens, withNotification } from '../../reducer-helpers.js'
+import { settleUnlockTokens, recordSeenPokemon, withNotification } from '../../reducer-helpers.js'
 
 /**
  * Handle the `START_BOSS_BATTLE` action.
@@ -25,47 +25,50 @@ export function startBossBattle(state, action) {
       region,
     } = action.payload,
     firstPokemon = trainerTeam[0]
-  return {
-    ...state,
-    phase: 'battling',
-    enemyPokemon: firstPokemon,
-    battleEvents: [],
-    pendingEvents: [
-      {
-        type: 'trainerAppear',
-        message: `${trainerName} wants to battle!`,
+  return recordSeenPokemon(
+    {
+      ...state,
+      phase: 'battling',
+      enemyPokemon: firstPokemon,
+      battleEvents: [],
+      pendingEvents: [
+        {
+          type: 'trainerAppear',
+          message: `${trainerName} wants to battle!`,
+        },
+        {
+          type: 'trainerSendOut',
+          message: `${trainerName} sent out ${firstPokemon.name}!`,
+        },
+      ],
+      currentEventIndex: 0,
+      battleTurn: 0,
+      weather: null,
+      battleHazards: emptyBattleHazards(),
+      terrain: null,
+      activePlayerPokemonIndex: 0,
+      battleParticipants: (state.party[0]?.id ?? state.playerPokemon?.id)
+        ? [state.party[0]?.id ?? state.playerPokemon?.id]
+        : [],
+      playerTurnSpent: !1,
+      enemyTurnSpent: !1,
+      bossBattle: {
+        bossId,
+        bossType,
+        trainerName,
+        trainerClass,
+        trainerTeam,
+        currentTrainerPokemonIndex: 0,
+        spriteKey,
+        region,
+        // Only the Champion makes mid-battle tactical switches.
+        championSwapsRemaining: bossType === 'champion' ? 2 : 0,
       },
-      {
-        type: 'trainerSendOut',
-        message: `${trainerName} sent out ${firstPokemon.name}!`,
-      },
-    ],
-    currentEventIndex: 0,
-    battleTurn: 0,
-    weather: null,
-    battleHazards: emptyBattleHazards(),
-    terrain: null,
-    activePlayerPokemonIndex: 0,
-    battleParticipants: (state.party[0]?.id ?? state.playerPokemon?.id)
-      ? [state.party[0]?.id ?? state.playerPokemon?.id]
-      : [],
-    playerTurnSpent: !1,
-    enemyTurnSpent: !1,
-    bossBattle: {
-      bossId,
-      bossType,
-      trainerName,
-      trainerClass,
-      trainerTeam,
-      currentTrainerPokemonIndex: 0,
-      spriteKey,
-      region,
-      // Only the Champion makes mid-battle tactical switches.
-      championSwapsRemaining: bossType === 'champion' ? 2 : 0,
+      bossQueue: bossQueue ?? [],
+      playerVolatile: createVolatileState(),
     },
-    bossQueue: bossQueue ?? [],
-    playerVolatile: createVolatileState(),
-  }
+    firstPokemon
+  )
 }
 
 /**
@@ -224,7 +227,7 @@ export function bossBattleEnd(state, action) {
         bossQueue: remainingQueue,
       }
     let result = /** @type {GameState} */ ({
-      ...stateWithNextBoss,
+      ...recordSeenPokemon(stateWithNextBoss, firstPokemon),
       unlockedLocations: computeUnlockedLocations(stateWithNextBoss),
     })
     if (championJustDefeated) result = settleUnlockTokens(result)

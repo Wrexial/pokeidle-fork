@@ -13,7 +13,7 @@ import { emptyBattleHazards } from '../../hazards.js'
 import { gainFriendship, isBattleReady } from '../../pokemon.js'
 import { advanceShinyTarget, computeUnlockedLocations, rollCandyDrop, rollValuableDrop, syncActivePokemonIntoParty, tickBattleCounters, tickPartyEggs, tickPokerus } from '../../progression.js'
 import { advanceQuests } from '../../quests.js'
-import { rollSwarm, withNotification } from '../../reducer-helpers.js'
+import { rollSwarm, recordSeenPokemon, withNotification } from '../../reducer-helpers.js'
 
 /**
  * Handle the `START_ENCOUNTER` action.
@@ -25,31 +25,34 @@ export function startEncounter(state, action) {
   const firstAliveIndex = state.party.findIndex((member) => isBattleReady(member)),
     activeIndex = firstAliveIndex >= 0 ? firstAliveIndex : 0,
     activePokemon = state.party[activeIndex] || state.playerPokemon
-  return {
-    ...state,
-    phase: 'battling',
-    enemyPokemon: action.payload.enemy,
-    playerPokemon: activePokemon,
-    activePlayerPokemonIndex: activeIndex,
-    battleParticipants: activePokemon?.id ? [activePokemon.id] : [],
-    playerTurnSpent: !1,
-    enemyTurnSpent: !1,
-    battleEvents: [],
-    pendingEvents: [
-      {
-        type: 'encounter',
-        message: action.payload.enemy.isShiny
-          ? `A shiny wild ${action.payload.enemy.name} appeared!`
-          : `Wild ${action.payload.enemy.name} appeared!`,
-      },
-    ],
-    currentEventIndex: 0,
-    battleTurn: 0,
-    weather: null,
-    battleHazards: emptyBattleHazards(),
-    terrain: null,
-    playerVolatile: createVolatileState(),
-  }
+  return recordSeenPokemon(
+    {
+      ...state,
+      phase: 'battling',
+      enemyPokemon: action.payload.enemy,
+      playerPokemon: activePokemon,
+      activePlayerPokemonIndex: activeIndex,
+      battleParticipants: activePokemon?.id ? [activePokemon.id] : [],
+      playerTurnSpent: !1,
+      enemyTurnSpent: !1,
+      battleEvents: [],
+      pendingEvents: [
+        {
+          type: 'encounter',
+          message: action.payload.enemy.isShiny
+            ? `A shiny wild ${action.payload.enemy.name} appeared!`
+            : `Wild ${action.payload.enemy.name} appeared!`,
+        },
+      ],
+      currentEventIndex: 0,
+      battleTurn: 0,
+      weather: null,
+      battleHazards: emptyBattleHazards(),
+      terrain: null,
+      playerVolatile: createVolatileState(),
+    },
+    action.payload.enemy
+  )
 }
 
 /**

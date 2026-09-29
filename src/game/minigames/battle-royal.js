@@ -55,6 +55,15 @@ export function healSquad(squad, fraction = BATTLE_ROYAL_HEAL) {
  * @returns {{ money: number, items: { itemId: string, quantity: number }[], label: string }}
  */
 export function battleRoyalPrize(waves) {
+  if (waves >= 20)
+    return {
+      money: 20000,
+      items: [
+        { itemId: 'rareCandy', quantity: 2 },
+        { itemId: 'goldBottleCap', quantity: 1 },
+      ],
+      label: 'Royal legend!',
+    }
   if (waves >= 15)
     return {
       money: 12000,
@@ -62,10 +71,10 @@ export function battleRoyalPrize(waves) {
         { itemId: 'rareCandy', quantity: 2 },
         { itemId: 'bottleCap', quantity: 1 },
       ],
-      label: 'Royal legend!',
+      label: 'Royal champion',
     }
   if (waves >= 10)
-    return { money: 7000, items: [{ itemId: 'rareCandy', quantity: 1 }], label: 'Royal champion' }
+    return { money: 7000, items: [{ itemId: 'rareCandy', quantity: 1 }], label: 'Royal favourite' }
   if (waves >= 6)
     return { money: 3500, items: [{ itemId: 'expCandyL', quantity: 1 }], label: 'Crowd favourite' }
   if (waves >= 3)

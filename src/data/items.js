@@ -1116,8 +1116,6 @@ export const tokenShopItems = [
     { itemId: 'reinsOfUnity', tokenCost: 4 },
     { itemId: 'megaStone', tokenCost: 5 },
     { itemId: 'maxMushroom', tokenCost: 4 },
-    { itemId: 'bottleCap', tokenCost: 8 },
-    { itemId: 'goldBottleCap', tokenCost: 30 },
   ]
 
 /** @type {Record<string, { name: string, items: { itemId: string, unlockWildBattlesWon?: number }[] }>} */

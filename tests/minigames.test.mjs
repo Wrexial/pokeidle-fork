@@ -411,6 +411,19 @@ test('Battle Royal waves scale and heal the squad', () => {
   assert.equal(healed[0].currentHp, 60)
   assert.equal(healed[1].currentHp, 0, 'fainted Pokemon are not revived')
   assert.ok(battleRoyalPrize(15).money > battleRoyalPrize(1).money)
+  // The Bottle Caps are Battle Royal-only rewards: Bottle Cap at 15, Gold at 20.
+  assert.ok(
+    battleRoyalPrize(15).items.some((item) => item.itemId === 'bottleCap'),
+    'a 15-wave run awards a Bottle Cap'
+  )
+  assert.ok(
+    battleRoyalPrize(20).items.some((item) => item.itemId === 'goldBottleCap'),
+    'a 20-wave run awards a Gold Bottle Cap'
+  )
+  assert.ok(
+    !battleRoyalPrize(14).items.some((item) => /bottleCap$/i.test(item.itemId)),
+    'shorter runs do not award caps'
+  )
 })
 
 test('START_BATTLE_ROYAL charges entry and END_MINIGAME returns to idle', () => {

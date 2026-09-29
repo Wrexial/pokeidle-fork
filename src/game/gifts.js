@@ -51,6 +51,14 @@ export const GIFTS = [
     requires: { badges: 4 },
   },
   {
+    id: 'gift-hoenn-beldum',
+    location: 'hoenn-mossdeep-city',
+    name: "Steven's House",
+    description: 'The Hoenn Champion leaves a Beldum in his home for a rising trainer.',
+    pokemon: { speciesKey: 'beldum', level: 5 },
+    requires: { champion: 'hoenn' },
+  },
+  {
     id: 'gift-sinnoh-eevee',
     location: 'sinnoh-hearthome-city',
     name: "Bebe's House",

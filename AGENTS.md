@@ -624,6 +624,11 @@ One-off scripts used to build the data JSON (not run during dev/build):
 - `apply-starting-route-levels.cjs` — sets every region's opening route to
   Lv. 3-5 on the committed data (the generator's `FIRST_ROUTE_LEVEL_MIN/MAX`
   pass does it on regeneration). Idempotent (`--dry`).
+- `apply-route-and-raid-tweaks.cjs` — data-only pass for the small route/raid
+  follow-ups: adds Slakoth to Hoenn Route 102's wild table and moves the
+  Galarian birds from Galar's `raidOrdinaryPool` into `raidPool` (plus the
+  `galar-raid` encounter bucket) after flagging them `legendary`. Idempotent;
+  re-run after regenerating encounters or raid pools.
 - `fix-impossible-encounters.cjs` / `fix-impossible-teams.cjs` — step wild
   encounters and trainer/gym/Elite Four/Champion Pokemon back to a form that
   could exist at their level (a Lv. 3 Chesnaught becomes a Chespin), merging

@@ -30,94 +30,83 @@ renumbered, so the gaps below are items that shipped.
 5. **#57 Protection / immunity move visuals** — S · ★ — moves that grant
    immunity (Protect, Detect, King's Shield, Spiky Shield, Baneful Bunker, ...)
    should show a visible shield / "it protected itself" effect when they block.
-6. **#58 Companion care decays too fast** — S · ★½ — a pinned companion loses
-   a point from each of its four care stats on every wild win; make it lose a
-   single point, and only for a battle it actually fought in.
-7. **#59 Galarian birds back in the raid** — S · ★ — flag
-   `g-articuno` / `g-zapdos` / `g-moltres` as legendary so the raid scan puts
-   them in Galar's legendary `raidPool`, not the ordinary one.
-
 ### Tier 2 — High impact, worth the effort (medium–large)
 
-8. **#28 More region areas (caves, POIs, DLC land)** — L · ★★★★½ — real
+6. **#28 More region areas (caves, POIs, DLC land)** — L · ★★★★½ — real
    content; data-heavy. Started: the POI marker model shipped with the Day-Care
    as the first POI (28c), and the DLC areas are in as zones (28a); ordinary
    caves/forests (28b) and more POIs remain. Pairs with #36/#39.
-9. **#24 Move data pass** — M · ★★★ — ally/faint heals, context move-calling,
+7. **#24 Move data pass** — M · ★★★ — ally/faint heals, context move-calling,
    the doubles-only moves, and decisions on unused PP / dead Z-Max data.
-10. **#56 Multi-effect move pass** — M · ★★★ — audit moves with more than one
+8. **#56 Multi-effect move pass** — M · ★★★ — audit moves with more than one
     effect (Hyper Beam / Giga Impact recharge, Bite / flinch moves, stat-drop
     secondaries, ...) and implement the missing half-effects; quite a few only
     do part of what they should.
-11. **#25 Battle engine pass** — M–L · ★★★ — ally/doubles abilities, a few
+9. **#25 Battle engine pass** — M–L · ★★★ — ally/doubles abilities, a few
     complex singles ones, item nuances and battle polish (animations / damage
     numbers).
-12. **#50 Fossil & fossil-revive system** — M · ★★★ — one fossil item per region
+10. **#50 Fossil & fossil-revive system** — M · ★★★ — one fossil item per region
     (handed out as a gift instead of the Pokemon), revived at Cinnabar Island,
     with more fossils from the Sinnoh Underground.
-13. **#36 Zones (route chunks)** — M–L · ★★★★ — the model is in; more
+11. **#36 Zones (route chunks)** — M–L · ★★★★ — the model is in; more
     sub-areas, a distinct zone glyph and inline per-sub-area encounter grids.
-14. **#40 Alola / Galar / Paldea league structures** — M · ★★★½ — the
+12. **#40 Alola / Galar / Paldea league structures** — M · ★★★½ — the
     data-driven model is in; Alola's full trial track, Galar's post-game
     tournament and Paldea's Titans / Team Star remain.
-15. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of Armor,
+13. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of Armor,
     Crown Tundra, Kitakami and the Terarium to first-class regions.
-16. **#54 Improve Dynamax Adventures and Battle Royal** — M · ★★½ — both are
+14. **#54 Improve Dynamax Adventures and Battle Royal** — M · ★★½ — both are
     minimal loops today; make them feel like real modes with real rewards.
-17. **#29 Companion minigame polish** — S · ★★ — an animated buddy panel /
+15. **#29 Companion minigame polish** — S · ★★ — an animated buddy panel /
     petting scene (the last open minigame idea).
-18. **#18 Better settings** — M · ★★★ — sprite-style options, account controls
+16. **#18 Better settings** — M · ★★★ — sprite-style options, account controls
     (blocked on #19) and finishing the Gameplay section.
-19. **#38 Clean up the Raid Islands** — M · ★★½ — weight / level-gate the
+17. **#38 Clean up the Raid Islands** — M · ★★½ — weight / level-gate the
     legendary pick and (optionally) shrink Unova's ordinary pool.
-20. **#43 Multi-battles (double / triple / rotation) as a minigame** — M–L ·
+18. **#43 Multi-battles (double / triple / rotation) as a minigame** — M–L ·
     ★★½ — a self-contained minigame that reuses the combat pipeline.
-21. **#30 Caught / event QOL indicators** — S · ★ — flag the battle sprite;
+19. **#30 Caught / event QOL indicators** — S · ★ — flag the battle sprite;
     decide whether raids show the caught badge.
-22. **#60 Areas should have their own zoomed-in map** — M · ★★ — zones and
+20. **#60 Areas should have their own zoomed-in map** — M · ★★ — zones and
     large areas list their sub-areas in the panel only; give them a focused
     map view entered from the Town Map, with a back button to exit.
-23. **#61 Former raid gifts onto real routes** — M · ★★ — the ordinary Raid
+21. **#61 Former raid gifts onto real routes** — M · ★★ — the ordinary Raid
     Island finals became one-off refuge statics on each region's last route;
     place them on routes that suit them as part of the encounter table.
-24. **#62 Game Corner prize track (Scyther / Dratini / Porygon)** — S–M · ★★ —
+22. **#62 Game Corner prize track (Scyther / Dratini / Porygon)** — S–M · ★★ —
     a bar that fills per three-of-a-kind and hands out a random Game Corner
     prize Pokemon each time it completes.
-25. **#63 Johto Togepi egg gift** — S · ★ — hand the canonical Togepi egg from
+23. **#63 Johto Togepi egg gift** — S · ★ — hand the canonical Togepi egg from
     Mr. Pokémon on Route 30, not the Kanto Game Corner.
-26. **#64 Whack-a-Diglett difficulty ramp + Dugtrio** — S · ★½ — speed the
+24. **#64 Whack-a-Diglett difficulty ramp + Dugtrio** — S · ★½ — speed the
     round up as the timer runs down, and add a rare Dugtrio worth bonus
     points.
-27. **#65 Use minigames as unlock gates** — M · ★★ — let a route require
+25. **#65 Use minigames as unlock gates** — M · ★★ — let a route require
     clearing a minigame (or hitting a score) instead of only battles / badges /
     catches, so the minigames feed progression.
-28. **#66 Ruins of Alph should award an Unown (and all 28 forms)** — M · ★★ —
+26. **#66 Ruins of Alph should award an Unown (and all 28 forms)** — M · ★★ —
     the sliding puzzle never gives an Unown, and only one Unown form exists;
     award one and add the full letter / punctuation set.
-29. **#67 Baby Pokemon from breeding, not gifts** — M · ★★ — the Daycare can
+27. **#67 Baby Pokemon from breeding, not gifts** — M · ★★ — the Daycare can
     already hatch babies from their evolved forms; stop handing the babies out
     as gift/static rewards and give their evolved forms a real source.
-30. **#68 Trainer teams should use all level-appropriate Pokemon** — M · ★★ —
+28. **#68 Trainer teams should use all level-appropriate Pokemon** — M · ★★ —
     the strong type bias and narrow pools mean the same few species repeat; let
     trainers field every level-appropriate Pokemon so the Pokedex "seen" fills
     in.
-31. **#69 Forced-shiny Gyarados at the Lake of Rage** — S–M · ★★ — the
+29. **#69 Forced-shiny Gyarados at the Lake of Rage** — S–M · ★★ — the
     canonical red Gyarados as a one-off guaranteed-shiny Johto static.
-32. **#70 Day/night cycle on a 60-minute clock** — M · ★★ — a fixed
+30. **#70 Day/night cycle on a 60-minute clock** — M · ★★ — a fixed
     real-time cycle (full day = 60 min) replacing the wall-clock night flag,
     with a visual phase and time-gated effects.
-33. **#71 Beldum gift in Mossdeep City** — S · ★ — Steven's post-Champion
-    Beldum gift, matching the other regional one-off gifts.
-34. **#72 Slakoth on Route 102** — S · ★ — add the missing Slakoth base form to
-    Hoenn Route 102's wild table.
-35. **#73 Clickable routes in Pokedex & notifications** — S–M · ★ — let the
+31. **#73 Clickable routes in Pokedex & notifications** — S–M · ★ — let the
     route names the Pokedex and toasts show open the Town Map / travel there.
 
 ### Tier 3 — Big / low-return, defer
 
-36. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
+32. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
     route-based field effects.
-37. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+33. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
 ---
@@ -619,52 +608,6 @@ Likely touch points: `src/components/battle-scene.js` (overlay + callout),
 `assets/style.css`, and the `protected` volatile in the combat engine.
 
 Effort: **small**.
-
-## 58. Companion care decays too fast
-
-A pinned companion loses `COMPANION_DECAY_PER_WIN` (1) from **each** of its four
-care stats after every wild win, i.e. up to 4 care points per battle, so it
-falls out of the "content" range (and loses the EXP bonus) very quickly. Make it
-lose a single care point per battle, and only for a battle the companion
-actually took part in, rather than a flat loss from every stat on every win.
-
-- [ ] Reduce the per-win decay to **one point total** (not one per stat).
-- [ ] Only decay when the pinned companion was the active battler, not on every
-      wild win regardless.
-- [ ] Decide how the single point is applied (which stat, or a rotating / lowest
-      stat) and keep the design note that neglect only pauses the bonus, never
-      harms the Pokemon.
-- [ ] Re-check the care-action values and `COMPANION_CONTENT_THRESHOLD` — a
-      smaller drain may make the care loop trivial.
-
-Relevant code: `src/game/companion.js` (`COMPANION_DECAY_PER_WIN`,
-`tickCompanion`), `src/game/reducer/battle/events.js` (the wild-win handler that
-calls `tickCompanion`).
-
-Effort: **small**.
-
-## 59. Galarian birds should be raid legendaries
-
-`g-articuno`, `g-zapdos` and `g-moltres` are legendary Pokemon, but
-`pokemon-species.json` never sets their `legendary` flag, so the raid scan files
-them in Galar's `raidOrdinaryPool` (the ordinary, capped pool) instead of
-`raidPool` (the legendary bosses). Flag them and move them back.
-
-- [ ] Add `"legendary": true` to `g-articuno` / `g-zapdos` / `g-moltres` in
-      `public/data/pokemon-species.json`.
-- [ ] Re-run the raid scan, or patch `public/data/regions.json` (Galar) directly
-      with an `apply-*.cjs` script, since the committed data isn't idempotent
-      with the generator — moving them out of `raidOrdinaryPool` and into
-      `raidPool`.
-- [ ] Confirm `tools/validate-data.cjs` still passes and the ordinary-pool cap
-      isn't silently refilled by another species.
-
-Relevant code: `public/data/pokemon-species.json`, `public/data/regions.json`
-(Galar), `tools/generate-regions.cjs` (`raidCandidates`, `staysInRaidPool`,
-`raidPoolSpecies`), `tools/validate-data.cjs`.
-
-Effort: **small**.
-
 ## 60. Areas should have their own zoomed-in map
 
 Today a zone / large area (Galar's Wild Area, Alola's islands, Paldea's
@@ -989,51 +932,6 @@ Relevant code: `src/game/catching.js` (`isNightTime`, `catchContext`),
 `src/data/ui.js` (backgrounds / tints).
 
 Effort: **medium** (the logic is small; the visual pass is the work).
-
-## 71. Beldum gift in Mossdeep City (post-Champion)
-
-Add Steven's canonical gift: after beating the Hoenn Champion, his house in
-Mossdeep City hands over a Beldum. `hoenn-mossdeep-city` already exists in the
-map data and `GIFTS` already supports a `requires: { champion: <regionId> }`
-gate, so this is a straightforward entry — Beldum is otherwise reachable only by
-evolving the Metagross sitting in Hoenn's `raidOrdinaryPool` / refuge (#61).
-
-- [ ] Add a `GIFTS` entry at `hoenn-mossdeep-city` with
-      `pokemon: { speciesKey: 'beldum', level: 5 }` (canonical Lv. 5) and
-      `requires: { champion: 'hoenn' }`.
-- [ ] Write the name / description (Steven's house) and the reward label.
-- [ ] Decide whether Metagross stays as the refuge / raid source or this gift
-      becomes the line's entry point (reconcile with #61).
-- [ ] Optionally give it its own gift-panel flavour / sprite.
-
-Relevant code: `src/game/gifts.js` (`GIFTS`, `entryRequirementStatus`),
-`src/game/reducer/gifts.js` (`claimGift`), `src/components/gift-panel.js`, and
-`public/data/map-data/hoenn.json`.
-
-Effort: **small**.
-
-## 72. Slakoth on Route 102
-
-Add Slakoth to Hoenn Route 102's wild encounter table. The line has no wild base
-form today: Hoenn's `raidOrdinaryPool` carries the final evolution, Slaking (as a
-one-off refuge static — #61), while Route 102's bucket (`hoenn-route-102`) holds
-Magikarp, Corphish, Marill, Zigzagoon, Goldeen, Lotad, Seedot, Poochyena,
-Wurmple and Ralts, with no Slakoth.
-
-- [ ] Add a low-weight Slakoth entry to
-      `public/data/encounter-data/hoenn.json` → `hoenn-route-102`, using the
-      route's level band (Lv. 7–9).
-- [ ] Decide whether it is a rare (low weight) find and regenerate
-      `public/encounter-index.html` (`tools/generate-encounter-index.cjs`).
-- [ ] Reconcile with #61: once Slakoth is wild, the refuge Slaking is no longer
-      the line's only entry.
-
-Relevant code: `public/data/encounter-data/hoenn.json`,
-`public/data/map-data/hoenn.json`, `public/data/regions.json`
-(`raidOrdinaryPool`), and `tools/generate-encounter-index.cjs`.
-
-Effort: **small**.
-
 ## 73. Route names in the Pokedex and notifications should be clickable
 
 The Pokedex species panel lists where a species lives (`pokedexData[selected]`

@@ -34,7 +34,7 @@ export const CHANGELOG = [
             'Pokemon Musical can be played with the keyboard: the arrow keys hit the matching lane (left/down/up/right)',
             'Snowpoint Temple now opens with a Strength chamber: push the boulder onto the pressure plate to unseal the exit before the ice rooms',
             'Companion care is now a top-bar button beside the daily tasks once Poke Pelago is unlocked, instead of only being reachable inside the Pelago hub',
-            'Companion care is gentler: each care stat now loses 1 per wild win (was 2), the “content” bar is 40 (was 50), and Play / Wash no longer drain as much energy, so a companion can stay content with occasional care',
+            'Companion care is much gentler: a pinned companion now loses a single care point per wild win it actually took part in (on a rotating stat) instead of one point from every stat on every win, the “content” bar is 40 (was 50), and Play / Wash no longer drain as much energy, so a companion can stay content with occasional care',
             'The Poke Ball Factory pays out more balls per shift (3, 5 or 8 depending on the solve) and only ever the special balls marts don’t sell',
             'Mega, Primal and Gigantamax forms no longer evolve: Gigantamax is no longer offered as an evolution, those forms can’t evolve further, and a save that stored a Pokemon in one of them reverts it to its base form',
             'Gigantamax is now a battle form fed by the new Max Mushroom (Kecleon Shop, 4 Victory Tokens): only Pokemon with a Gigantamax form can eat it, it grants them the Gigantamax Factor, and they Gigantamax for the rest of the battle like a Mega (reverting when it ends)',
@@ -104,6 +104,14 @@ export const CHANGELOG = [
             'Your preferences \u2014 battle speed and style, auto-catch, notifications, accessibility, audio and more \u2014 are now stored separately from your save, so they survive a save reset and are shared across every save slot (an older save migrates its settings in on first load)',
             'Settings has a new Gameplay section that gathers auto-catch, always-catch-shinies and auto-proceed together with a battle-speed picker; exporting, importing and the confirmed reset now sit together under Save Data',
             'Browser notifications can be filtered per event: choose whether shinies, raids & legendaries and egg hatches raise an alert, on top of the master toggle',
+          ],
+        },
+        {
+          heading: 'Regions',
+          items: [
+            'Hoenn’s Route 102 now has the missing Slakoth base form as a rare wild encounter',
+            'The Galarian birds — Galarian Articuno, Zapdos and Moltres — are legendary Raid Island bosses again, instead of being filed among the ordinary one-off refuge encounters',
+            'Steven’s post-Champion Beldum gift is available at his house in Mossdeep City once you have beaten the Hoenn Champion',
           ],
         },
       ],

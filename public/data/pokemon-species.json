@@ -20688,7 +20688,8 @@
     "baseExpYield": 261,
     "growthRate": "slow",
     "catchRate": 3,
-    "weight": 50.9
+    "weight": 50.9,
+    "legendary": true
   },
   "g-zapdos": {
     "id": 10170,
@@ -20708,7 +20709,8 @@
     "baseExpYield": 261,
     "growthRate": "slow",
     "catchRate": 3,
-    "weight": 58.2
+    "weight": 58.2,
+    "legendary": true
   },
   "g-moltres": {
     "id": 10171,
@@ -20728,7 +20730,8 @@
     "baseExpYield": 261,
     "growthRate": "slow",
     "catchRate": 3,
-    "weight": 66
+    "weight": 66,
+    "legendary": true
   },
   "m-dragonite": {
     "id": 10281,

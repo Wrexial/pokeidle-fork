@@ -74,6 +74,30 @@ test('badge requirements gate and then open a gift', () => {
   assert.ok((unlocked.claimedGifts ?? []).includes(gift.id), 'the badge gate opens it')
 })
 
+test('a Champion gate opens the post-game gift', () => {
+  const gift = GIFTS.find((entry) => entry.requires?.champion)
+  if (!gift) return
+  const locked = gameReducer(
+      { ...initialGameState, phase: 'idle', currentLocation: gift.location },
+      { type: 'CLAIM_GIFT', payload: { giftId: gift.id } }
+    ),
+    unlocked = gameReducer(
+      {
+        ...initialGameState,
+        phase: 'idle',
+        currentLocation: gift.location,
+        defeatedChampions: [gift.requires.champion],
+      },
+      { type: 'CLAIM_GIFT', payload: { giftId: gift.id } }
+    ),
+    member = [...unlocked.party, ...unlocked.box].find(
+      (pokemon) => pokemon.speciesKey === gift.pokemon.speciesKey
+    )
+  assert.ok(!(locked.claimedGifts ?? []).includes(gift.id), 'locked before the Champion')
+  assert.ok((unlocked.claimedGifts ?? []).includes(gift.id), 'open after the Champion')
+  assert.ok(member, 'the gift Pokemon joins the squad')
+})
+
 test('CLAIM_GIFT hands over items once, at the right place', () => {
   const gift = GIFTS.find((entry) => entry.items) ?? GIFTS[0]
   if (!gift.items) return

@@ -35,13 +35,19 @@ test('companion care helpers', () => {
   assert.equal(isCompanionContent(createCompanionCare(null, 0)), false)
   assert.equal(companionExpMultiplier(createCompanionCare(null, 0)), 1)
 
-  // Decay never drops below zero.
-  let decayed = { ...care, fullness: 1, happiness: 0, energy: 3 }
-  for (let i = 0; i < 5; i++) decayed = tickCompanion(decayed)
-  assert.equal(decayed.fullness, 0)
-  assert.equal(decayed.happiness, 0)
-  assert.equal(decayed.energy, 0)
-  assert.equal(isCompanionContent(decayed), false)
+  // Decay is a single point on a rotating stat, only when the companion fought.
+  const afterOne = tickCompanion(care, true, 0)
+  assert.equal(afterOne.fullness, COMPANION_MAX_CARE - 1)
+  assert.equal(afterOne.happiness, COMPANION_MAX_CARE, 'only one stat drains per battle')
+  const afterTwo = tickCompanion(afterOne, true, 1)
+  assert.equal(afterTwo.happiness, COMPANION_MAX_CARE - 1)
+  assert.equal(afterTwo.fullness, COMPANION_MAX_CARE - 1, 'the drain rotates')
+  assert.equal(tickCompanion(care, false, 2), care, 'a battle it sat out does not decay it')
+
+  // Decay never drops a stat below zero.
+  const drained = tickCompanion({ ...care, energy: 0 }, true, 2)
+  assert.equal(drained.energy, 0)
+  assert.equal(isCompanionContent({ ...care, fullness: COMPANION_CONTENT_THRESHOLD - 1 }), false)
 
   // Care actions clamp at the cap.
   const fed = applyCareAction({ ...care, fullness: 90 }, 'feed')

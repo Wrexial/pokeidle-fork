@@ -224,8 +224,14 @@ export function consumeEvent(state, action) {
     pokerusResult.infected &&
       secretNotices.push('Your Pokemon caught Pokerus! EXP gain is doubled for a while.')
     pokerusResult.cured && secretNotices.push('Your Pokemon recovered from Pokerus.')
-    // A pinned companion's care fades, and garden berries ripen.
-    companion = tickCompanion(companion)
+    // A pinned companion's care fades if it took part in the battle, and garden
+    // berries ripen.
+    const companionId = companion?.id
+    companion = tickCompanion(
+      companion,
+      !!companionId && (state.battleParticipants ?? []).includes(companionId),
+      wildBattlesWon
+    )
     garden = tickGarden(garden)
     // Poké Pelago's passive islands tick down their cycles.
     pelago = tickPelago(pelago)

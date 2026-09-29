@@ -665,6 +665,18 @@
    {
     "speciesKey": "enamorus",
     "level": 75
+   },
+   {
+    "speciesKey": "g-articuno",
+    "level": 75
+   },
+   {
+    "speciesKey": "g-zapdos",
+    "level": 75
+   },
+   {
+    "speciesKey": "g-moltres",
+    "level": 75
    }
   ],
   "raidOrdinaryPool": [
@@ -683,18 +695,6 @@
    {
     "speciesKey": "arctovish",
     "level": 70
-   },
-   {
-    "speciesKey": "g-articuno",
-    "level": 75
-   },
-   {
-    "speciesKey": "g-zapdos",
-    "level": 75
-   },
-   {
-    "speciesKey": "g-moltres",
-    "level": 75
    },
    {
     "speciesKey": "indeedee-f",

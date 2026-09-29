@@ -108,6 +108,12 @@
     "weight": 1,
     "minLevel": 7,
     "maxLevel": 9
+   },
+   {
+    "speciesKey": "slakoth",
+    "weight": 3,
+    "minLevel": 7,
+    "maxLevel": 9
    }
   ]
  },

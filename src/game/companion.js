@@ -110,18 +110,22 @@ export function companionExpMultiplier(companion) {
   return isCompanionContent(companion) ? COMPANION_EXP_MULTIPLIER : 1
 }
 
-/** Decay every care stat after a wild win. Never drops below 0. @param {Companion} companion */
-export function tickCompanion(companion) {
-  if (!companion?.id) return companion
-  /** @param {number} value */
-  const decay = (value) => Math.max(0, value - COMPANION_DECAY_PER_WIN)
-  return {
-    ...companion,
-    fullness: decay(companion.fullness),
-    happiness: decay(companion.happiness),
-    energy: decay(companion.energy),
-    cleanliness: decay(companion.cleanliness),
-  }
+/**
+ * Decay the pinned companion's care after a wild win. Only a battle the
+ * companion actually took part in drains it, and only a single care point
+ * total — applied to a rotating stat so the four bars drain evenly rather
+ * than one dropping to zero first. Neglect only pauses the content EXP bonus;
+ * it never harms the Pokemon.
+ * @param {Companion} companion
+ * @param {boolean} [fought] Whether the companion was in the battle.
+ * @param {number} [battleIndex] A counter used to rotate which stat drains.
+ */
+export function tickCompanion(companion, fought = !0, battleIndex = 0) {
+  if (!companion?.id || !fought) return companion
+  /** @type {('fullness' | 'happiness' | 'energy' | 'cleanliness')[]} */
+  const stats = ['fullness', 'happiness', 'energy', 'cleanliness'],
+    stat = stats[Math.abs(Math.trunc(battleIndex)) % stats.length]
+  return { ...companion, [stat]: Math.max(0, companion[stat] - COMPANION_DECAY_PER_WIN) }
 }
 
 /**

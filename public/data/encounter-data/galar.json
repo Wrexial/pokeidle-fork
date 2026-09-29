@@ -1617,6 +1617,24 @@
     "weight": 1,
     "minLevel": 75,
     "maxLevel": 75
+   },
+   {
+    "speciesKey": "g-articuno",
+    "weight": 1,
+    "minLevel": 75,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "g-zapdos",
+    "weight": 1,
+    "minLevel": 75,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "g-moltres",
+    "weight": 1,
+    "minLevel": 75,
+    "maxLevel": 75
    }
   ]
  }

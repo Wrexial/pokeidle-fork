@@ -6239,17 +6239,6 @@ img {
     filter: drop-shadow(0 0 3px rgba(255,232,96,.9))
 }
 
-.sprite-container .sprite-dex-badge {
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    z-index: 12;
-    margin: 0;
-    padding: 2px;
-    background: rgba(0,0,0,.45);
-    border-radius: 50%
-}
-
 .pokedex-tile-ball {
     position: absolute;
     bottom: 1px;

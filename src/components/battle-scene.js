@@ -21,7 +21,6 @@ import { useGame } from '../game/context.js'
 import { shinyOddsForCompletedGenerations } from '../game/progression.js'
 import { getBossTrainerSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, getTrainerSpriteUrl, isBattleReady } from '../game/pokemon.js'
 import { EnemyInfoBox } from './enemy-info-box.js'
-import { DexBallBadge } from './dex-ball-badge.js'
 import { PlayerInfoBox } from './player-info-box.js'
 import { SettingsModal } from './settings-modal.js'
 import { BattleTextBox } from './battle-text-box.js'
@@ -536,13 +535,6 @@ export function BattleScene() {
                 isFemalePokemon(enemyPokemon)
               )),
               alt: enemyPokemon.name,
-            }),
-            // A caught / shiny-caught marker on the sprite itself, for a quick
-            // read without looking at the name row.
-            jsx(DexBallBadge, {
-              status: enemyDexStatus,
-              size: 14,
-              className: 'sprite-dex-badge',
             }),
           ],
         }),

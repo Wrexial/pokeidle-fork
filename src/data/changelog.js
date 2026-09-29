@@ -131,7 +131,7 @@ export const CHANGELOG = [
         {
           heading: 'Items',
           items: [
-            'Bottle Caps hyper-train a party Pokemon: a Bottle Cap caps its lowest IV at 31 and a Gold Bottle Cap caps every IV. Both are won from deep Battle Royal runs (a Bottle Cap at 15 waves, a Gold Bottle Cap at 20), and hyper-trained IVs are never passed down by breeding',
+            'Bottle Caps hyper-train a party Pokemon: a Bottle Cap caps its lowest IV at 31 and a Gold Bottle Cap caps every IV. Both are endgame-minigame rewards — a Bottle Cap at 15 Battle Royal waves, and a Gold Bottle Cap from a 20-wave Battle Royal or a Dynamax Adventures boss — and hyper-trained IVs are never passed down by breeding',
             'Fossils are a proper loop now: each region hands out its fossil items (Kanto at Mt. Moon, Hoenn in the Route 111 desert, the rest on their late routes), the Sinnoh Underground can dig up more, and the Cinnabar Island lab revives a fossil into its Pokemon at Lv. 30',
             'The revived fossils evolve into the finals that used to sit on the ordinary Raid Island — Omastar, Kabutops, Aerodactyl, Cradily, Armaldo, Rampardos, Bastiodon, Carracosta, Archeops, Tyrantrum, Aurorus and the four Galar fossils',
           ],

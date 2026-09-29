@@ -67,7 +67,10 @@ export function dynamaxPrize(stagesCleared, bossWon) {
   if (bossWon)
     return {
       money: 12000,
-      items: [{ itemId: 'rareCandy', quantity: 2 }],
+      items: [
+        { itemId: 'rareCandy', quantity: 2 },
+        { itemId: 'goldBottleCap', quantity: 1 },
+      ],
       label: 'Adventure complete!',
     }
   if (stagesCleared >= DYNAMAX_STAGES)

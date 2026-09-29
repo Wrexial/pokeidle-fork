@@ -2,6 +2,7 @@
 
 import { encounterData, pokemonSpecies } from '../../data/gameData.js'
 import { activeItems, consumableItems, heldItems, pokeBalls } from '../../data/items.js'
+import { canGigantamax } from '../../data/mega-evolution.js'
 import { natureName, randomNature } from '../../data/natures.js'
 import { MAX_FRIENDSHIP, calculatePokemonStats, calculateRequiredExperience, gainFriendship, getLevelUpResults } from '../pokemon.js'
 import { getItemSellPrice, isActiveEffectItem } from '../progression.js'
@@ -215,6 +216,10 @@ export function useItemOnPokemon(state, action) {
       speed: newStats.speed,
     }
     log.push(`${member.name}'s nature became ${natureName(nextNature)}!`)
+  } else if (item.grantsGmax) {
+    if (member.gmax || !canGigantamax(member.speciesKey)) return state
+    member = { ...member, gmax: true }
+    log.push(`${member.name} gained the Gigantamax Factor!`)
   } else if (item.category === 'medicine') {
     if (item.revive) {
       if (member.currentHp > 0) return state

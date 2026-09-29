@@ -3,6 +3,7 @@
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { bagCategories, consumableItems, heldItems } from '../data/items.js'
+import { canGigantamax } from '../data/mega-evolution.js'
 import { MAX_FRIENDSHIP } from '../game/pokemon.js'
 import { useGame } from '../game/context.js'
 import { ItemIcon } from './item-icon.js'
@@ -22,6 +23,7 @@ import {
  */
 function canUseOn(item, member) {
   if (heldItems[item.id]) return member.heldItem !== item.id
+  if (item.grantsGmax) return canGigantamax(member.speciesKey) && !member.gmax
   if (item.friendship) return (member.friendship ?? 0) < MAX_FRIENDSHIP
   if (item.natureMint) return true
   if (item.category === 'medicine')

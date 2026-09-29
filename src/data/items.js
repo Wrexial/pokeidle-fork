@@ -316,6 +316,16 @@ export const consumableItems = {
       sellPrice: 400,
       heal: 999,
     },
+    gmaxSoup: {
+      id: 'gmaxSoup',
+      name: 'Gmax Soup',
+      description:
+        'Feeds a Pokemon the Gigantamax Factor, letting it Gigantamax in battle. Only Pokemon with a Gigantamax form can drink it.',
+      category: 'items',
+      buyPrice: 3000,
+      sellPrice: null,
+      grantsGmax: true,
+    },
     superPotion: {
       id: 'superPotion',
       name: 'Super Potion',
@@ -968,6 +978,7 @@ export const tokenShopItems = [
     { itemId: 'rustedShield', tokenCost: 4 },
     { itemId: 'reinsOfUnity', tokenCost: 4 },
     { itemId: 'megaStone', tokenCost: 5 },
+    { itemId: 'gmaxSoup', tokenCost: 4 },
   ]
 
 /** @type {Record<string, { name: string, items: { itemId: string, unlockWildBattlesWon?: number }[] }>} */

@@ -16,7 +16,7 @@ import { isFemalePokemon } from '../game/breeding.js'
 import { WEATHER_ICONS, WEATHER_NAMES } from '../game/weather.js'
 import { TERRAIN_ICONS, TERRAIN_NAMES } from '../game/terrain.js'
 import { completedGenerations, mapData, moveData, speciesKeysByGeneration } from '../data/gameData.js'
-import { megaEvolveReady } from '../data/mega-evolution.js'
+import { gmaxEvolveReady, megaEvolveReady } from '../data/mega-evolution.js'
 import { useGame } from '../game/context.js'
 import { shinyOddsForCompletedGenerations } from '../game/progression.js'
 import { getBossTrainerSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, getTrainerSpriteUrl, isBattleReady } from '../game/pokemon.js'
@@ -418,6 +418,18 @@ export function BattleScene() {
                 children: [
                   jsx('span', { className: 'mega-evolve-icon', children: '\u2726' }),
                   jsx('span', { children: 'MEGA EVOLVE' }),
+                ],
+              }),
+            !activeTrainerBattle &&
+              state.phase === 'battling' &&
+              gmaxEvolveReady(state) &&
+              jsxs('button', {
+                className: 'mega-evolve-btn gmax-evolve-btn',
+                onClick: () => dispatch({ type: 'GMAX_EVOLVE' }),
+                title: 'Gigantamax for the rest of the battle',
+                children: [
+                  jsx('span', { className: 'mega-evolve-icon', children: '\u2601' }),
+                  jsx('span', { children: 'GIGANTAMAX' }),
                 ],
               }),
             !activeTrainerBattle &&

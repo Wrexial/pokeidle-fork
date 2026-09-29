@@ -107,6 +107,7 @@ export function createPokemon(speciesKey, level, id, isShiny = !1, inheritance) 
     ability: rollAbility(speciesKey),
     heldItem: null,
     isShiny,
+    gmax: false,
   }
 }
 

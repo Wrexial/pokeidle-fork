@@ -6,7 +6,7 @@ import React from 'react'
 import { trainerClassPayouts, missingnoEncounterChance, mewUnderTruckChance, swarmShinyMultiplier, swarmShinyOddsFloor, manualInputTimeoutMs } from '../data/config.js'
 import { ballOrder } from '../data/items.js'
 import { completedGenerations, encounterData, mapData, pokemonSpecies, trainerData } from '../data/gameData.js'
-import { megaEvolveReady } from '../data/mega-evolution.js'
+import { gmaxEvolveReady, megaEvolveReady } from '../data/mega-evolution.js'
 import { ACHIEVEMENTS } from '../data/achievements.js'
 import { dailyExpMultiplier, dailyPrizeMultiplier, dailyShinyMultiplier } from '../data/daily-events.js'
 import { useGame } from './context.js'
@@ -322,6 +322,13 @@ export function useGameLoop() {
           if (megaEvolveReady(currentGameState)) {
             dispatch({
               type: 'MEGA_EVOLVE',
+            })
+            return
+          }
+          // A Gmax Soup Pokemon transforms once the Mega chance has passed.
+          if (gmaxEvolveReady(currentGameState)) {
+            dispatch({
+              type: 'GMAX_EVOLVE',
             })
             return
           }

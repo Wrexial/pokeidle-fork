@@ -23,47 +23,50 @@ renumbered, so the gaps below are items that shipped.
    text per type) and the shared muted label colour now meet WCAG AA; a
    residual sweep of the remaining hardcoded greys and the warning/error
    states remains.
-3. **#52 Gigantamax acquisition path** — S · ★½ — Mega / Primal / Gigantamax
-   are terminal and cleaned from saves now; decide how G-Max is obtained (most
-   likely a G-Max item that transforms it in battle, like the Mega Stone).
+3. **#55 Poke Radar: a guaranteed shiny every 5 levels** — S · ★★★ — shinies on
+   a schedule (5, 10, 15, ...) instead of only nudged odds.
+4. **#53 IV increment items** — S–M · ★★ — Bottle-Cap-style items that raise
+   IVs, handed out as rewards somewhere.
 
 ### Tier 2 — High impact, worth the effort (medium–large)
 
-4. **#28 More region areas (caves, POIs, DLC land)** — L · ★★★★½ — real
+5. **#28 More region areas (caves, POIs, DLC land)** — L · ★★★★½ — real
    content; data-heavy. Started: the POI marker model shipped with the Day-Care
    as the first POI (28c), and the DLC areas are in as zones (28a); ordinary
    caves/forests (28b) and more POIs remain. Pairs with #36/#39.
-5. **#24 Move data pass** — M · ★★★ — ally/faint heals, context move-calling,
+6. **#24 Move data pass** — M · ★★★ — ally/faint heals, context move-calling,
    the doubles-only moves, and decisions on unused PP / dead Z-Max data.
-6. **#25 Battle engine pass** — M–L · ★★★ — ally/doubles abilities, a few
+7. **#25 Battle engine pass** — M–L · ★★★ — ally/doubles abilities, a few
    complex singles ones, item nuances and battle polish (animations / damage
    numbers).
-7. **#50 Fossil & fossil-revive system** — M · ★★★ — one fossil item per region
+8. **#50 Fossil & fossil-revive system** — M · ★★★ — one fossil item per region
    (handed out as a gift instead of the Pokemon), revived at Cinnabar Island,
    with more fossils from the Sinnoh Underground.
-8. **#36 Zones (route chunks)** — M–L · ★★★★ — the model is in; more
+9. **#36 Zones (route chunks)** — M–L · ★★★★ — the model is in; more
    sub-areas, a distinct zone glyph and inline per-sub-area encounter grids.
-9. **#40 Alola / Galar / Paldea league structures** — M · ★★★½ — the
-   data-driven model is in; Alola's full trial track, Galar's post-game
-   tournament and Paldea's Titans / Team Star remain.
-10. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of Armor,
+10. **#40 Alola / Galar / Paldea league structures** — M · ★★★½ — the
+    data-driven model is in; Alola's full trial track, Galar's post-game
+    tournament and Paldea's Titans / Team Star remain.
+11. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of Armor,
     Crown Tundra, Kitakami and the Terarium to first-class regions.
-11. **#29 Companion minigame polish** — S · ★★ — an animated buddy panel /
+12. **#54 Improve Dynamax Adventures and Battle Royal** — M · ★★½ — both are
+    minimal loops today; make them feel like real modes with real rewards.
+13. **#29 Companion minigame polish** — S · ★★ — an animated buddy panel /
     petting scene (the last open minigame idea).
-12. **#18 Better settings** — M · ★★★ — sprite-style options, account controls
+14. **#18 Better settings** — M · ★★★ — sprite-style options, account controls
     (blocked on #19) and finishing the Gameplay section.
-13. **#38 Clean up the Raid Islands** — M · ★★½ — weight / level-gate the
+15. **#38 Clean up the Raid Islands** — M · ★★½ — weight / level-gate the
     legendary pick and (optionally) shrink Unova's ordinary pool.
-14. **#43 Multi-battles (double / triple / rotation) as a minigame** — M–L ·
+16. **#43 Multi-battles (double / triple / rotation) as a minigame** — M–L ·
     ★★½ — a self-contained minigame that reuses the combat pipeline.
-15. **#30 Caught / event QOL indicators** — S · ★ — flag the battle sprite;
+17. **#30 Caught / event QOL indicators** — S · ★ — flag the battle sprite;
     decide whether raids show the caught badge.
 
 ### Tier 3 — Big / low-return, defer
 
-16. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
+18. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
     route-based field effects.
-17. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+19. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
 ---
@@ -463,28 +466,60 @@ revive panel), and `tools/download-item-sprites.cjs` for the art.
 
 Effort: **medium**.
 
-## 52. Gigantamax acquisition path
+## 53. IV increment items
 
-**Shipped:** Mega / Primal / Gigantamax are terminal forms now — a form can't
-evolve, Gigantamax is no longer offered as an evolution, and `repairSave`
-reverts any Pokemon saved in one of those forms back to its base.
+Add items that permanently raise a Pokemon's IVs, handed out as rewards.
+Bottle-Cap style (one stat, or all stats) or a smaller +1 IV increment item.
 
-Still open:
+- [ ] Add the item(s) and a bag use flow with a target-stat picker (or auto-pick
+      the best/lowest stat).
+- [ ] Decide the reward source: raids, the Battle Tower / Battle Royal / Dynamax
+      Adventures, the Game Corner, or the Auction House.
+- [ ] Mark the Pokemon as hyper-trained so the boost can't be bred down, and
+      make the IV cap 31.
 
-- [ ] Decide how Gigantamax is obtained now that it is no longer a level-100
-      evolution: a **G-Max item** that transforms it in battle (like the Mega
-      Stone), a one-off gift, or drop it. Until then the `gx-` forms are
-      data-only (`tools/add-gmax-evolutions.cjs` still adds the evolution edges
-      the validator uses, so they can be re-enabled or replaced with a battle
-      transform).
-- [ ] If a battle transform is added, decide whether one Mega Stone covers both
-      (Charizard and Mewtwo have Megas *and* a G-Max, so a separate item is
-      cleaner).
-
-Likely touch points: `src/data/mega-evolution.js`, `src/data/items.js` (a G-Max
-item), the battle transform hook, and `tools/add-gmax-evolutions.cjs`.
+Likely touch points: `src/data/items.js`, `src/game/reducer/items.js`
+(`USE_ITEM_ON_POKEMON`), `src/components/bag-panel.js`, the reward tables, and
+`tools/download-item-sprites.cjs` for the art.
 
 Effort: **small–medium**.
+
+## 54. Improve Dynamax Adventures and Battle Royal
+
+Both shipped as minimal loops (0.16.0): Dynamax Adventures is "pick a path of
+three encounters, then the boss"; the Battle Royal an endless wave gauntlet.
+Make them feel like real modes.
+
+- [ ] **Dynamax Adventures**: let the player choose (or re-roll) the legendary
+      they are hunting, add per-floor pick-ups / a KO limit, and use the real
+      Raid boss pool for the finale.
+- [ ] **Battle Royal**: clear per-round placement scoring (1st–4th), a real
+      opponent pool and AI, scaling rewards and a streak / rank track.
+- [ ] Both: better pacing / feedback and a unique reward worth replaying for
+      (not just money / EXP).
+
+Likely touch points: `src/game/minigames/dynamax-adventures.js`,
+`src/game/minigames/gauntlet.js`, their scenes, and the reward tables.
+
+Effort: **medium**.
+
+## 55. Poke Radar: a guaranteed shiny every 5 levels
+
+The Poke Radar is a memory-chain minigame whose chain only nudges shiny odds.
+Give it a schedule: the **nth shiny appears at chain level 5×n** — first at 5,
+then 10, then 15, and so on. Resolving the shiny (catching it, or winning the
+battle) resets the chain, and the next target is 5 higher again.
+
+- [ ] Track the chain level and the current shiny target (5, 10, 15, ...).
+- [ ] When the level hits the target, force the next encounter to be shiny.
+- [ ] On resolving the shiny, reset the chain and raise the next target by 5.
+- [ ] Decide whether a lost / fled shiny battle resets the chain or just leaves
+      the target unmet.
+
+Likely touch points: `src/game/minigames/poke-radar.js`,
+`src/components/poke-radar-scene.js`, and the reducer's radar handlers.
+
+Effort: **small**.
 
 ---
 

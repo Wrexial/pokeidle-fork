@@ -109,6 +109,48 @@ export function isTerminalForm(speciesKey) {
 }
 
 /**
+ * Base species key -> its Gigantamax form key, for the species that have one.
+ * @type {Record<string, string>}
+ */
+export const GMAX_FORMS = (() => {
+  const forms = /** @type {Record<string, string>} */ ({})
+  for (const [speciesKey, evolutions] of Object.entries(evolutionData)) {
+    if (!Array.isArray(evolutions)) continue
+    const gmax = evolutions.find((evolution) => evolution?.form === true)?.into
+    if (gmax && pokemonSpecies[gmax]) forms[speciesKey] = gmax
+  }
+  return forms
+})()
+
+/**
+ * The Gigantamax form of a species, or null when it cannot Gigantamax.
+ * @param {string | null | undefined} speciesKey
+ * @returns {string | null}
+ */
+export function gmaxFormFor(speciesKey) {
+  return (speciesKey && GMAX_FORMS[speciesKey]) || null
+}
+
+/** Whether a species can receive the Gigantamax Factor. @param {string | null | undefined} speciesKey */
+export function canGigantamax(speciesKey) {
+  return !!gmaxFormFor(speciesKey)
+}
+
+/**
+ * Whether the active Pokemon has the Gigantamax Factor and can still transform
+ * this battle. Mirrors `megaEvolveReady`. Used by the idle loop (to auto-trigger)
+ * and the reducer (to validate).
+ * @param {{ playerPokemon?: any, playerVolatile?: any } | null | undefined} state
+ * @returns {boolean}
+ */
+export function gmaxEvolveReady(state) {
+  const pokemon = state?.playerPokemon
+  if (!pokemon?.gmax) return false
+  if (isTerminalForm(state?.playerVolatile?.formKey)) return false
+  return canGigantamax(pokemon.speciesKey)
+}
+
+/**
  * The Mega form a Pokemon would take. Species with two Megas (Charizard, Mewtwo)
  * use the physical X forme when their Attack is higher, the special Y otherwise.
  * @param {string} speciesKey

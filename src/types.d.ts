@@ -81,6 +81,8 @@ type Pokemon = BattlePokemon & {
   heldItem?: string | null
   /** Favourited Pokemon are protected from Release and Wonder Trade. */
   favourite?: boolean
+  /** Gigantamax Factor (mark): set by the Gmax Soup, lets it Gigantamax in battle. */
+  gmax?: boolean
   /** Optional player-given nickname (max 12 characters). */
   nickname?: string
   /** Stored gender, e.g. rolled by the Bug Catching Contest. Falls back to a species-derived value. */
@@ -147,8 +149,8 @@ type ConsumableItem = {
   id: string
   name: string
   description: string
-  /** Bag tab: medicine and candy can be used, valuables are sold. */
-  category: 'medicine' | 'candy' | 'valuables'
+  /** Bag tab: medicine and candy can be used, items are used on a Pokemon, valuables are sold. */
+  category: 'medicine' | 'candy' | 'items' | 'valuables'
   buyPrice: number | null
   sellPrice: number | null
   /** HP restored by a healing item (omitted for a full heal). */
@@ -165,6 +167,8 @@ type ConsumableItem = {
   natureMint?: boolean
   /** Raises the target's friendship by this much (Poffin). */
   friendship?: number
+  /** Grants the Gigantamax Factor (mark) to a Pokemon that has a G-Max form. */
+  grantsGmax?: boolean
 }
 
 type PokeBall = {

@@ -46,6 +46,8 @@ const SEREBII_NAMES = {
   nSolarizer: 'n-solarizer',
   natureMint: 'seriousmint',
   megaStone: 'keystone',
+  // Max Soup is made from Max Mushrooms; Serebii has no soup sprite.
+  gmaxSoup: 'maxmushrooms',
   // No generic sprite exists for these minigame foods, so use a close item.
   curry: 'packagedcurry',
   pokebean: 'tinofbeans',

@@ -80,12 +80,15 @@ renumbered, so the gaps below are items that shipped.
 23. **#61 Former raid gifts onto real routes** — M · ★★ — the ordinary Raid
     Island finals became one-off refuge statics on each region's last route;
     place them on routes that suit them as part of the encounter table.
+24. **#62 Game Corner prize track (Togepi / Scyther / Dratini / Porygon)** —
+    S–M · ★★ — a bar that fills per three-of-a-kind and hands out a random
+    Game Corner prize Pokemon each time it completes.
 
 ### Tier 3 — Big / low-return, defer
 
-24. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
+25. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
     route-based field effects.
-25. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+26. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
 ---
@@ -693,6 +696,35 @@ Relevant code: `public/data/encounter-data/*.json`, `public/data/regions.json`,
 `tests/raid.test.mjs`, and the raid scan in `tools/generate-regions.cjs`.
 
 Effort: **medium** (data-heavy: one habitat decision per species).
+
+## 62. Game Corner prize track (Togepi egg / Scyther / Dratini / Porygon)
+
+The Kanto Game Corner slots only pay money today. Add a **prize track**
+beside the reels: a progress bar that fills whenever the player lands a
+three-of-a-kind (any symbol), granting a Pokemon reward each time it completes.
+
+- [ ] Count every winning line (any symbol) toward the bar, and persist the
+      counter in the save.
+- [ ] Fill the bar over **20** three-of-a-kinds, then reset it and grant one
+      random Game Corner prize.
+- [ ] Reward pool: a Togepi **egg**, or a Scyther / Dratini / Porygon at an
+      appropriate level (roughly Lv.15–25); decide the exact levels, and whether
+      Togepi is the egg path.
+- [ ] Draw the bar on the side of the slot scene with a small prize legend and
+      a "bar filled" callout.
+- [ ] Decide whether each prize can be won repeatedly and how duplicates are
+      handled (probably fine: extra copies go to the box).
+- [ ] Push the Pokemon/egg into the party or box with the existing creation
+      helpers (`createPokemon` / `createEgg`).
+- [ ] Add the counter to `initialGameState`, the save shape
+      (`SAVED_STATE_KEYS`) and `src/types.d.ts`.
+
+Relevant code: `src/game/minigames/game-corner.js`,
+`src/components/game-corner-scene.js`, `src/game/reducer/minigames.js` (the
+`gameCorner` phase handlers), `src/game/pokemon/creation.js`, and the
+save/state plumbing.
+
+Effort: **small–medium**.
 
 ---
 

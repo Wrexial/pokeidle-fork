@@ -2,8 +2,18 @@
 
 import { wonderTradeShinyOdds } from '../../../data/config.js'
 import { pokemonSpecies } from '../../../data/gameData.js'
+import { isTerminalForm } from '../../../data/mega-evolution.js'
 import { createPokemon } from '../../pokemon.js'
 import { checkShinyOdds, loadActivePokemonFromParty, prepareNextBattle } from '../../progression.js'
+
+/**
+ * Species a Wonder Trade can hand back: any real entry (including alternate
+ * regional forms) but never a battle-only Mega / Primal / Gigantamax form,
+ * which cannot be owned and would be reverted on the next save load.
+ */
+export const WONDER_TRADE_POOL = Object.keys(pokemonSpecies).filter(
+  (speciesKey) => pokemonSpecies[speciesKey].id > 0 && !isTerminalForm(speciesKey)
+)
 
 /**
  * Handle the `WONDER_TRADE` action.
@@ -30,8 +40,8 @@ export function wonderTrade(state, action) {
     : state.party.find((member) => member.id === pokemonId)
   if (!tradedPokemon) return state
   if (tradedPokemon.favourite) return state
-  const candidates = Object.keys(pokemonSpecies).filter((key) => pokemonSpecies[key].id > 0),
-    receivedSpeciesKey = candidates[Math.floor(Math.random() * candidates.length)],
+  const receivedSpeciesKey =
+      WONDER_TRADE_POOL[Math.floor(Math.random() * WONDER_TRADE_POOL.length)],
     // Undocumented perk: trading a shiny guarantees a shiny back.
     receivedIsShiny = tradedPokemon.isShiny || checkShinyOdds(wonderTradeShinyOdds),
     receivedPokemon = createPokemon(

@@ -223,3 +223,17 @@ test('only a newest-first box prepends a new member', () => {
     ['99', '100']
   )
 })
+
+test('Wonder Trade never hands back a battle-only form', async () => {
+  const { WONDER_TRADE_POOL } = await import('../src/game/reducer/pokemon/wonder-trade.js'),
+    { isTerminalForm } = await import('../src/data/mega-evolution.js')
+  assert.ok(WONDER_TRADE_POOL.length > 1000)
+  assert.ok(WONDER_TRADE_POOL.includes('froslass'))
+  assert.ok(WONDER_TRADE_POOL.includes('a-rattata'), 'real alternate forms stay tradeable')
+  assert.ok(!WONDER_TRADE_POOL.includes('m-froslass'), 'Mega forms are not tradeable')
+  assert.ok(!WONDER_TRADE_POOL.includes('missingno'), 'MissingNo is not tradeable')
+  assert.ok(
+    WONDER_TRADE_POOL.every((speciesKey) => !isTerminalForm(speciesKey)),
+    'no Mega / Primal / Gigantamax forms'
+  )
+})

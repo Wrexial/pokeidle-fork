@@ -69,7 +69,7 @@ export function dynamaxPrize(stagesCleared, bossWon) {
       money: 12000,
       items: [
         { itemId: 'rareCandy', quantity: 2 },
-        { itemId: 'goldBottleCap', quantity: 1 },
+        { itemId: 'bottleCap', quantity: 1 },
       ],
       label: 'Adventure complete!',
     }

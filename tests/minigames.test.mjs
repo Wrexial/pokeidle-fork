@@ -452,11 +452,11 @@ test('Dynamax Adventures offer paths and a real Galar legendary boss', () => {
   assert.ok(galarPool.has(boss.speciesKey), `${boss.speciesKey} should be a Galar raid legendary`)
   assert.ok(dynamaxPrize(3, !0).money > dynamaxPrize(1, !1).money)
   assert.ok(
-    dynamaxPrize(DYNAMAX_STAGES, !0).items.some((item) => item.itemId === 'goldBottleCap'),
-    'beating the legendary awards a Gold Bottle Cap'
+    dynamaxPrize(DYNAMAX_STAGES, !0).items.some((item) => item.itemId === 'bottleCap'),
+    'beating the legendary awards a Bottle Cap'
   )
   assert.ok(
-    !dynamaxPrize(DYNAMAX_STAGES, !1).items.some((item) => item.itemId === 'goldBottleCap'),
+    !dynamaxPrize(DYNAMAX_STAGES, !1).items.some((item) => item.itemId === 'bottleCap'),
     'losing to the legendary does not'
   )
 })

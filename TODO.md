@@ -94,12 +94,19 @@ renumbered, so the gaps below are items that shipped.
 28. **#66 Ruins of Alph should award an Unown (and all 28 forms)** — M · ★★ —
     the sliding puzzle never gives an Unown, and only one Unown form exists;
     award one and add the full letter / punctuation set.
+29. **#67 Baby Pokemon from breeding, not gifts** — M · ★★ — the Daycare can
+    already hatch babies from their evolved forms; stop handing the babies out
+    as gift/static rewards and give their evolved forms a real source.
+30. **#68 Trainer teams should use all level-appropriate Pokemon** — M · ★★ —
+    the strong type bias and narrow pools mean the same few species repeat; let
+    trainers field every level-appropriate Pokemon so the Pokedex "seen" fills
+    in.
 
 ### Tier 3 — Big / low-return, defer
 
-29. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
+31. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
     route-based field effects.
-30. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+32. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
 ---
@@ -848,6 +855,67 @@ Relevant code: `src/game/minigames/sliding-puzzle.js`,
 `tools/download_pokemon_sprites.cjs`, and `tools/validate-data.cjs`.
 
 Effort: **medium** (mostly the 28 form entries + art; the award itself is small).
+
+## 67. Baby Pokemon should come from breeding, not gift rewards
+
+Breeding already hatches the baby from its catchable evolved parent — verified
+Lucario→Riolu, Toxtricity→Toxel, Clefairy→Cleffa, Jynx→Smoochum, Magmar→Magby,
+Togetic→Togepi and Snorlax→Munchlax — because `eggSpeciesKey` walks the
+pre-evolution chain. But several baby Pokemon are instead handed out as one-off
+gift/static rewards, so the Daycare is never needed: Riolu (Tower of Mastery,
+Kalos), Toxel (Rose Tower Nursery, Galar), Johto's refuge statics Cleffa /
+Togepi / Smoochum / Magby, and the Sinnoh Munchlax static.
+
+- [ ] Confirm each baby's evolved form is actually obtainable (wild route, raid
+      or another gift) so breeding can start. Several are not: Lucario,
+      Toxtricity and Togetic appear on no route or raid table, so those lines
+      are gift-only today — give the evolved form a real source.
+- [ ] Remove (or repoint) the baby gift/static entries in `src/game/gifts.js`
+      once breeding covers them.
+- [ ] Decide the Incense question: canonically Snorlax→Munchlax,
+      Roselia→Budew, Chimecho→Chingling, Sudowoodo→Bonsly, Mr. Mime→Mime Jr.,
+      Chansey→Happiny, Mantine→Mantyke and Wobbuffet→Wynaut need a held Incense.
+      Either model the items or keep the current simplify (always hatch the
+      baby).
+- [ ] Re-check obtainability in `tools/validate-data.cjs` and reconcile with
+      the refuge/raid plumbing (#61) and the canonical Togepi egg (#63).
+
+Relevant code: `src/game/breeding.js` (`eggSpeciesKey`),
+`src/game/pokemon/evolution.js` (`getPreEvolutionChain`),
+`src/data/gameData.js` (`preEvolutionMap`), `src/game/gifts.js`,
+`public/data/breeding-data.json`, and `tools/validate-data.cjs`.
+
+Effort: **medium** (mostly sourcing the evolved forms and removing the gifts).
+
+## 68. Trainer teams should use all level-appropriate Pokemon
+
+Route trainers draw from a generation slice and are heavily type-biased by
+class (`TRAINER_CLASS_TYPES`), and `buildTeam` drops evolved-away, implausible
+and weak species. The result is that the same handful of Pokemon show up over
+and over, so a player's Pokedex **seen** log lags well behind what actually
+exists at that level. Do a pass so trainers can field every level-appropriate
+species, so battling through a region reveals most of its dex.
+
+- [ ] Audit `buildTeam` (`tools/generate-regions.cjs`): keep the type theme as a
+      *bias*, not a hard filter, and widen the fallback so a trainer can field
+      off-theme species when the themed pool is small.
+- [ ] Make sure the per-route / per-town pool reaching `buildTeam` is the full
+      generation slice (level-appropriate), not already narrowed upstream.
+- [ ] Spread species across trainers deterministically (offset by trainer /
+      town index) so neighbouring trainers don't all field the same team.
+- [ ] Keep the level-appropriate filter (no Pidgey at Lv.55) and still exclude
+      legendaries (and starters where intended).
+- [ ] Verify a region's dex can realistically be "seen" from trainers alone,
+      without every trainer becoming a mirror match.
+- [ ] Either regenerate the committed trainer data or add an `apply-*.cjs` pass
+      (the data isn't idempotent with the generator).
+
+Relevant code: `tools/generate-regions.cjs` (`buildTeam`,
+`TRAINER_CLASS_TYPES`, `speciesForGen`, the route-trainer generation),
+`public/data/trainer-data.json`, and the Pokedex seen tracking
+(`src/game/reducer/collection.js`).
+
+Effort: **medium** (generator tuning plus regenerating trainer data).
 
 ---
 

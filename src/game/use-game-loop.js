@@ -325,7 +325,7 @@ export function useGameLoop() {
             })
             return
           }
-          // A Gmax Soup Pokemon transforms once the Mega chance has passed.
+          // A Pokemon marked by the Max Mushroom transforms once the Mega chance has passed.
           if (gmaxEvolveReady(currentGameState)) {
             dispatch({
               type: 'GMAX_EVOLVE',

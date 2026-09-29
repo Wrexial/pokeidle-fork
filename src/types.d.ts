@@ -81,7 +81,7 @@ type Pokemon = BattlePokemon & {
   heldItem?: string | null
   /** Favourited Pokemon are protected from Release and Wonder Trade. */
   favourite?: boolean
-  /** Gigantamax Factor (mark): set by the Gmax Soup, lets it Gigantamax in battle. */
+  /** Gigantamax Factor (mark): set by the Max Mushroom, lets it Gigantamax in battle. */
   gmax?: boolean
   /** Optional player-given nickname (max 12 characters). */
   nickname?: string

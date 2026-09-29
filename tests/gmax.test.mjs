@@ -31,32 +31,32 @@ test('only species with a Gigantamax form can Gigantamax', () => {
   assert.equal(gmaxFormFor('rattata'), null)
 })
 
-test('the Gmax Soup grants the Gigantamax Factor to a valid Pokemon', () => {
+test('the Max Mushroom grants the Gigantamax Factor to a valid Pokemon', () => {
   const charizard = createPokemon('charizard', 50, 'a'),
-    state = { ...initialGameState, inventory: { gmaxSoup: 2 }, party: [charizard], playerPokemon: charizard },
+    state = { ...initialGameState, inventory: { maxMushroom: 2 }, party: [charizard], playerPokemon: charizard },
     used = gameReducer(state, {
       type: 'USE_ITEM_ON_POKEMON',
-      payload: { itemId: 'gmaxSoup', pokemonId: 'a', quantity: 1 },
+      payload: { itemId: 'maxMushroom', pokemonId: 'a', quantity: 1 },
     })
   assert.equal(used.party[0].gmax, true, 'the mark is gained')
-  assert.equal(used.inventory.gmaxSoup, 1, 'the soup is consumed')
+  assert.equal(used.inventory.maxMushroom, 1, 'the mushroom is consumed')
   // Feeding a second soup to the same Pokemon is refused.
   const again = gameReducer(used, {
     type: 'USE_ITEM_ON_POKEMON',
-    payload: { itemId: 'gmaxSoup', pokemonId: 'a', quantity: 1 },
+    payload: { itemId: 'maxMushroom', pokemonId: 'a', quantity: 1 },
   })
   assert.equal(again, used)
 })
 
-test('the Gmax Soup is refused for a Pokemon with no Gigantamax form', () => {
+test('the Max Mushroom is refused for a Pokemon with no Gigantamax form', () => {
   const rattata = createPokemon('rattata', 50, 'b'),
-    state = { ...initialGameState, inventory: { gmaxSoup: 1 }, party: [rattata], playerPokemon: rattata },
+    state = { ...initialGameState, inventory: { maxMushroom: 1 }, party: [rattata], playerPokemon: rattata },
     used = gameReducer(state, {
       type: 'USE_ITEM_ON_POKEMON',
-      payload: { itemId: 'gmaxSoup', pokemonId: 'b', quantity: 1 },
+      payload: { itemId: 'maxMushroom', pokemonId: 'b', quantity: 1 },
     })
   assert.equal(used, state, 'the use is a no-op')
-  assert.equal(used.inventory.gmaxSoup, 1, 'the soup is not consumed')
+  assert.equal(used.inventory.maxMushroom, 1, 'the mushroom is not consumed')
 })
 
 test('a marked Pokemon Gigantamaxes in battle, once', () => {

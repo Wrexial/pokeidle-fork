@@ -1,4 +1,4 @@
-// In-battle Gigantamax. A Pokemon that drank the Gmax Soup carries the
+// In-battle Gigantamax. A Pokemon that ate the Max Mushroom carries the
 // Gigantamax Factor (`pokemon.gmax`), and transforms as the battle starts. Like
 // Mega Evolution, the change lives on `playerVolatile.formKey`, so the battle
 // loop rebuilds the active Pokemon into its G-Max forme and it reverts when the

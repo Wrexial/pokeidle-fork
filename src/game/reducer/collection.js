@@ -348,18 +348,26 @@ export function claimDailyGift(state, action) {
  * @returns {GameState}
  */
 export function updateShinyChain(state, action) {
-  const { speciesKey, amount = 1 } = action.payload,
-    current = state.shinyChain ?? { speciesKey: null, count: 0 },
-    sameSpecies = current.speciesKey === speciesKey
-  return {
-    ...state,
-    shinyChain: sameSpecies
+  const { speciesKey, amount = 1, radar = false } = action.payload,
+    current = state.shinyChain ?? { speciesKey: null, count: 0, radar: 0 },
+    sameSpecies = current.speciesKey === speciesKey,
+    base = sameSpecies
       ? {
-          speciesKey,
-          count: current.count + amount,
+          count: current.count,
+          radar: current.radar ?? 0,
           target: current.target ?? SHINY_CHAIN_FIRST_TARGET,
         }
-      : { speciesKey, count: amount, target: SHINY_CHAIN_FIRST_TARGET },
+      : { count: 0, radar: 0, target: SHINY_CHAIN_FIRST_TARGET }
+  return {
+    ...state,
+    shinyChain: {
+      speciesKey,
+      count: base.count + amount,
+      // Only the Poke Radar banks levels toward the guaranteed shiny; an
+      // ordinary wild encounter still builds the odds multiplier (`count`).
+      radar: radar ? base.radar + amount : base.radar,
+      target: base.target,
+    },
   }
 }
 

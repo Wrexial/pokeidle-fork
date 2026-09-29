@@ -362,17 +362,25 @@ test('radar faces fill the field with real route species, or blank', () => {
   )
 })
 
-test('UPDATE_SHINY_CHAIN can add a batch of chain points', () => {
+test('UPDATE_SHINY_CHAIN can add a batch of radar chain points', () => {
   const next = gameReducer(
-    { ...initialGameState, shinyChain: { speciesKey: null, count: 0 } },
-    { type: 'UPDATE_SHINY_CHAIN', payload: { speciesKey: 'pikachu', amount: 40 } }
+    { ...initialGameState, shinyChain: { speciesKey: null, count: 0, radar: 0 } },
+    { type: 'UPDATE_SHINY_CHAIN', payload: { speciesKey: 'pikachu', amount: 40, radar: true } }
   )
-  assert.deepEqual(next.shinyChain, { speciesKey: 'pikachu', count: 40, target: 5 })
+  assert.deepEqual(next.shinyChain, { speciesKey: 'pikachu', count: 40, radar: 40, target: 5 })
   const extended = gameReducer(next, {
     type: 'UPDATE_SHINY_CHAIN',
-    payload: { speciesKey: 'pikachu', amount: 10 },
+    payload: { speciesKey: 'pikachu', amount: 10, radar: true },
   })
   assert.equal(extended.shinyChain.count, 50)
+  assert.equal(extended.shinyChain.radar, 50)
+  // A plain wild encounter only builds `count`, never the radar guarantee.
+  const wild = gameReducer(extended, {
+    type: 'UPDATE_SHINY_CHAIN',
+    payload: { speciesKey: 'pikachu', amount: 1 },
+  })
+  assert.equal(wild.shinyChain.count, 51)
+  assert.equal(wild.shinyChain.radar, 50)
 })
 
 test('START_POKE_RADAR charges entry and END_MINIGAME returns to idle', () => {

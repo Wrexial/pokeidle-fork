@@ -14,7 +14,12 @@ const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 test('a full radar chain forces the chained species shiny', () => {
   const bucket = encounterData.route1,
     speciesKey = bucket.encounters[0].speciesKey,
-    chain = { speciesKey, count: SHINY_CHAIN_FIRST_TARGET, target: SHINY_CHAIN_FIRST_TARGET },
+    chain = {
+      speciesKey,
+      count: SHINY_CHAIN_FIRST_TARGET,
+      radar: SHINY_CHAIN_FIRST_TARGET,
+      target: SHINY_CHAIN_FIRST_TARGET,
+    },
     originalRandom = Math.random
   try {
     Math.random = () => 0 // rolls the first pool entry
@@ -26,10 +31,15 @@ test('a full radar chain forces the chained species shiny', () => {
   }
 })
 
-test('an unfinished chain does not force a shiny', () => {
+test('an unfinished radar chain does not force a shiny', () => {
   const bucket = encounterData.route1,
     speciesKey = bucket.encounters[0].speciesKey,
-    chain = { speciesKey, count: SHINY_CHAIN_FIRST_TARGET - 1, target: SHINY_CHAIN_FIRST_TARGET },
+    chain = {
+      speciesKey,
+      count: SHINY_CHAIN_FIRST_TARGET - 1,
+      radar: SHINY_CHAIN_FIRST_TARGET - 1,
+      target: SHINY_CHAIN_FIRST_TARGET,
+    },
     originalRandom = Math.random
   try {
     // 0.99 both rolls the last pool entry and fails any shiny check.
@@ -41,20 +51,45 @@ test('an unfinished chain does not force a shiny', () => {
   }
 })
 
-test('resolving the chained shiny resets the chain and raises the target', () => {
-  const chain = { speciesKey: 'pidgey', count: 5, target: 5 },
+test('an ordinary wild chain never forces a shiny', () => {
+  // The guarantee is radar-only: a huge ordinary chain builds the odds
+  // multiplier (`count`) but must not hand out a guaranteed shiny.
+  const bucket = encounterData.route1,
+    speciesKey = bucket.encounters[0].speciesKey,
+    chain = { speciesKey, count: 500, radar: 0, target: SHINY_CHAIN_FIRST_TARGET },
+    originalRandom = Math.random
+  try {
+    Math.random = () => 0.99
+    const encounter = resolvePokemonEncounter(bucket, [], new Set(), chain)
+    assert.equal(encounter.isShiny, false)
+  } finally {
+    Math.random = originalRandom
+  }
+})
+
+test('resolving the radar-guaranteed shiny clears the chain and raises the target', () => {
+  const chain = { speciesKey: 'pidgey', count: 40, radar: 5, target: 5 },
     resolved = advanceShinyTarget(chain, { speciesKey: 'pidgey', isShiny: true })
   assert.equal(resolved.count, 0)
+  assert.equal(resolved.radar, 0)
   assert.equal(resolved.target, 10)
   // A non-shiny or a different species leaves the chain where it is.
-  assert.equal(advanceShinyTarget(chain, { speciesKey: 'pidgey', isShiny: false }).count, 5)
-  assert.equal(advanceShinyTarget(chain, { speciesKey: 'rattata', isShiny: true }).count, 5)
+  assert.equal(advanceShinyTarget(chain, { speciesKey: 'pidgey', isShiny: false }).count, 40)
+  assert.equal(advanceShinyTarget(chain, { speciesKey: 'rattata', isShiny: true }).count, 40)
+  // A lucky shiny on an ordinary chain clears it but does not raise the radar target.
+  const lucky = advanceShinyTarget(
+    { speciesKey: 'pidgey', count: 40, radar: 0, target: 5 },
+    { speciesKey: 'pidgey', isShiny: true }
+  )
+  assert.equal(lucky.count, 0)
+  assert.equal(lucky.radar, 0)
+  assert.equal(lucky.target, 5, 'the target only rises for the radar\u2019s own guarantee')
 })
 
 test('catching a chained shiny resets the radar chain', () => {
   const state = {
       ...initialGameState,
-      shinyChain: { speciesKey: 'pidgey', count: 5, target: 5 },
+      shinyChain: { speciesKey: 'pidgey', count: 40, radar: 5, target: 5 },
       enemyPokemon: { speciesKey: 'pidgey', isShiny: true },
     },
     caught = gameReducer(state, {
@@ -62,5 +97,6 @@ test('catching a chained shiny resets the radar chain', () => {
       payload: { speciesKey: 'pidgey', level: 5 },
     })
   assert.equal(caught.shinyChain.count, 0)
+  assert.equal(caught.shinyChain.radar, 0)
   assert.equal(caught.shinyChain.target, 10)
 })

@@ -320,11 +320,11 @@ test('shiny chain multiplier rises linearly and caps at 4x', () => {
   assert.equal(shinyChainMultiplier('pidgey', null), 1)
   assert.equal(shinyChainMultiplier('pidgey', { speciesKey: 'rattata', count: 120 }), 1)
   assert.equal(shinyChainMultiplier('pidgey', { speciesKey: 'pidgey', count: 0 }), 1)
-  // +1x every 4 consecutive encounters, capped at 4x.
-  assert.equal(shinyChainMultiplier('pidgey', { speciesKey: 'pidgey', count: 4 }), 2)
-  assert.equal(shinyChainMultiplier('pidgey', { speciesKey: 'pidgey', count: 8 }), 3)
-  assert.equal(shinyChainMultiplier('pidgey', { speciesKey: 'pidgey', count: 12 }), 4)
+  // +1x every 40 consecutive encounters, capped at 4x at 120.
+  assert.equal(shinyChainMultiplier('pidgey', { speciesKey: 'pidgey', count: 40 }), 2)
+  assert.equal(shinyChainMultiplier('pidgey', { speciesKey: 'pidgey', count: 80 }), 3)
   assert.equal(shinyChainMultiplier('pidgey', { speciesKey: 'pidgey', count: 120 }), 4)
+  assert.equal(shinyChainMultiplier('pidgey', { speciesKey: 'pidgey', count: 200 }), 4)
 })
 
 test('every region has a Daycare on one of its real routes', () => {

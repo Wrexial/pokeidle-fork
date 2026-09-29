@@ -182,3 +182,26 @@ test('decodeShareCode returns null for junk', () => {
   // Valid base64 JSON that is not a save still decodes; repairSave rejects it.
   assert.equal(repairSave(decodeShareCode(btoa('{"nope":true}'))), null)
 })
+
+test('repairSave treats a legacy shiny chain as having no banked radar levels', () => {
+  const state = startedGame(),
+    // An old save stored the combined chain count with no radar counter.
+    legacy = {
+      ...serializeSave(state),
+      shinyChain: { speciesKey: 'pidgey', count: 40, target: 5 },
+    },
+    repaired = repairSave(legacy)
+  assert.equal(repaired.shinyChain.count, 40, 'the ordinary chain is kept')
+  assert.equal(repaired.shinyChain.radar, 0, 'the legacy count is not read as radar progress')
+})
+
+test('repairSave keeps banked radar levels', () => {
+  const state = startedGame(),
+    save = {
+      ...serializeSave(state),
+      shinyChain: { speciesKey: 'pidgey', count: 12, radar: 5, target: 5 },
+    },
+    repaired = repairSave(save)
+  assert.equal(repaired.shinyChain.count, 12)
+  assert.equal(repaired.shinyChain.radar, 5)
+})

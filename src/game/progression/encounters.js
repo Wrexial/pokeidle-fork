@@ -166,8 +166,8 @@ export function resolveActiveModifiers(activeEffects, routeKey, shinyChain) {
   return modifiers
 }
 
-/** How many same-species encounters double the shiny odds. */
-const SHINY_CHAIN_STEP = 4
+/** How many same-species encounters add 1x to the shiny-odds multiplier. */
+const SHINY_CHAIN_STEP = 40
 
 /** The first guaranteed-shiny radar chain level, and how much it grows. */
 export const SHINY_CHAIN_FIRST_TARGET = 5
@@ -176,8 +176,7 @@ export const SHINY_CHAIN_TARGET_STEP = 5
 /**
  * Shiny-odds divisor from a DexNav-style chain: 1x at no chain, rising by 1x
  * every `SHINY_CHAIN_STEP` consecutive encounters of the species and capped at
- * 4x. The guaranteed-shiny target (see `shinyChainGuaranteed`) usually resets
- * the chain well before the cap is reached.
+ * 4x (1x / 2x / 3x / 4x at 0 / 40 / 80 / 120 encounters).
  * @param {string} speciesKey
  * @param {{ speciesKey: string | null, count: number } | undefined | null} chain
  * @returns {number}
@@ -188,31 +187,45 @@ export function shinyChainMultiplier(speciesKey, chain) {
 }
 
 /**
+ * Whether the Poke Radar has banked enough chain levels on `speciesKey` to
+ * guarantee the next encounter is shiny. Only radar levels count toward the
+ * guarantee, so an ordinary run of wild encounters never forces a shiny.
  * @param {string} speciesKey
- * @param {{ speciesKey: string | null, count: number, target?: number } | undefined | null} chain
+ * @param {{ speciesKey: string | null, radar?: number, target?: number } | undefined | null} chain
  * @returns {boolean}
  */
 function shinyChainGuaranteed(speciesKey, chain) {
   return (
     !!chain &&
     chain.speciesKey === speciesKey &&
-    chain.count >= (chain.target ?? SHINY_CHAIN_FIRST_TARGET)
+    (chain.radar ?? 0) >= (chain.target ?? SHINY_CHAIN_FIRST_TARGET)
   )
 }
 
 /**
- * A chained shiny has been resolved (caught or defeated): reset the chain and
- * raise the next guaranteed-shiny target by 5. Returns the chain unchanged when
- * the `enemy` is not a shiny of the chained species.
- * @param {{ speciesKey: string | null, count: number, target?: number }} chain
+ * A chained shiny has been resolved (caught or defeated): clear the chain and,
+ * when it was the radar's guaranteed shiny, raise the next target by 5.
+ * Returns the chain with the target otherwise unchanged.
+ * @param {{ speciesKey: string | null, count: number, radar?: number, target?: number } | undefined | null} chain
  * @param {{ speciesKey?: string, isShiny?: boolean } | null | undefined} enemy
- * @returns {{ speciesKey: string | null, count: number, target: number }}
+ * @returns {{ speciesKey: string | null, count: number, radar: number, target: number }}
  */
 export function advanceShinyTarget(chain, enemy) {
-  const target = chain?.target ?? SHINY_CHAIN_FIRST_TARGET
+  const target = chain?.target ?? SHINY_CHAIN_FIRST_TARGET,
+    radar = chain?.radar ?? 0
   if (!enemy?.isShiny || !chain?.speciesKey || enemy.speciesKey !== chain.speciesKey)
-    return { ...chain, target }
-  return { ...chain, count: 0, target: target + SHINY_CHAIN_TARGET_STEP }
+    return {
+      speciesKey: chain?.speciesKey ?? null,
+      count: chain?.count ?? 0,
+      radar,
+      target,
+    }
+  return {
+    ...chain,
+    count: 0,
+    radar: 0,
+    target: radar >= target ? target + SHINY_CHAIN_TARGET_STEP : target,
+  }
 }
 
 /**

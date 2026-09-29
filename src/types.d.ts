@@ -477,7 +477,7 @@ type GameState = {
   pokedexCaught: string[]
   shinySeen: string[]
   shinyCaught: string[]
-  shinyChain: { speciesKey: string | null; count: number; target?: number }
+  shinyChain: { speciesKey: string | null; count: number; radar?: number; target?: number }
   /** A route temporarily overrun by one species. */
   swarm: { routeKey: string; speciesKey: string; battlesRemaining: number } | null
   /** Rare party-wide 2x EXP boost with a wild-battle countdown. */

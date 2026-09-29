@@ -317,6 +317,13 @@ export function repairSave(saved) {
       ? {
           speciesKey: saved.shinyChain.speciesKey,
           count: saved.shinyChain.count,
+          // Older saves predate the radar-only counter, so their combined chain
+          // count must not be read as banked radar levels (that would hand out
+          // a guaranteed shiny on load).
+          radar:
+            typeof saved.shinyChain.radar === 'number' && saved.shinyChain.radar > 0
+              ? saved.shinyChain.radar
+              : 0,
           target:
             typeof saved.shinyChain.target === 'number' && saved.shinyChain.target > 0
               ? saved.shinyChain.target

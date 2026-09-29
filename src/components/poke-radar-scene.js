@@ -123,7 +123,7 @@ export function PokeRadarScene() {
     if (target && chainRounds > 0)
       dispatch({
         type: 'UPDATE_SHINY_CHAIN',
-        payload: { speciesKey: target.speciesKey, amount: radarChainPoints(chainRounds) },
+        payload: { speciesKey: target.speciesKey, amount: radarChainPoints(chainRounds), radar: true },
       })
   }
 
@@ -143,7 +143,7 @@ export function PokeRadarScene() {
         ? state.shinyChain.target ?? 5
         : 5,
     chainCount =
-      state.shinyChain?.speciesKey === target?.speciesKey ? state.shinyChain.count : 0
+      state.shinyChain?.speciesKey === target?.speciesKey ? state.shinyChain.radar ?? 0 : 0
 
   return jsxs('div', {
     className: 'minigame-scene radar-scene',

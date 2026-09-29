@@ -1,6 +1,6 @@
 // Party and box ordering/swapping. Split from game/reducer/pokemon.js.
 
-import { nextBoxSortMode, sortBoxMembers } from '../../pokemon.js'
+import { sortBoxMembers } from '../../pokemon.js'
 import { loadActivePokemonFromParty, prepareNextBattle } from '../../progression.js'
 
 /**
@@ -144,7 +144,7 @@ export function reorderBox(state, action) {
  * @returns {GameState}
  */
 export function setBoxSort(state, action) {
-  const boxSort = action.payload?.boxSort ?? nextBoxSortMode(state.boxSort)
+  const boxSort = action.payload?.boxSort ?? state.boxSort
   return {
     ...state,
     boxSort,

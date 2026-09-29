@@ -56,8 +56,8 @@ export const initialGameState = {
   battlesWonByLocation: {},
   party: [],
   box: [],
-  /** Chosen box sort mode (see BOX_SORT_OPTIONS). */
-  boxSort: 'dex',
+  /** Chosen box sort (see BOX_SORT_FIELDS / BOX_SORT_DIRECTIONS). */
+  boxSort: 'dex_asc',
   /** Newly hatched Pokemon shown in the hatch popup (null when dismissed). */
   hatchResult: null,
   autoCatch: !0,

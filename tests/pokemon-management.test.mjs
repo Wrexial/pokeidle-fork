@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 installGameData()
 
-const { createPokemon, ivStatLabel, ivVerdict, judgeIVs, pokemonDisplayName } = await import(
+const { createPokemon, ivStatLabel, ivVerdict, judgeIVs, pokemonDisplayName, sortBoxMembers, parseBoxSort, nextBoxSortField, toggleBoxSortDirection, insertIntoBox } = await import(
   '../src/game/pokemon.js'
 )
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
@@ -168,4 +168,58 @@ test('Wonder Trade swaps the Pokemon and stages a pausing animation', () => {
   const done = gameReducer(staged, { type: 'COMPLETE_WONDER_TRADE' })
   assert.equal(done.phase, 'idle')
   assert.equal(done.wonderTradeState, null)
+})
+
+test('box sort splits into a field and a direction', () => {
+  // Legacy field-only values fall back to that field's default direction.
+  assert.deepEqual(parseBoxSort('dex'), { field: 'dex', direction: 'asc' })
+  assert.deepEqual(parseBoxSort('level_asc'), { field: 'level', direction: 'asc' })
+  assert.deepEqual(parseBoxSort('shiny'), { field: 'shiny', direction: 'desc' })
+  assert.deepEqual(parseBoxSort('name_desc'), { field: 'name', direction: 'desc' })
+  assert.deepEqual(parseBoxSort('nonsense'), { field: 'dex', direction: 'asc' })
+})
+
+test('box sorts honour the field and direction', () => {
+  const box = [
+      createPokemon('pidgey', 10, '1'),
+      createPokemon('rattata', 20, '2'),
+      createPokemon('caterpie', 5, '3'),
+    ],
+    order = (/** @type {any[]} */ members) =>
+      members.map((member) => member.speciesKey).join(','),
+    levels = (/** @type {any[]} */ members) =>
+      members.map((member) => member.level).join(',')
+  assert.equal(order(sortBoxMembers(box, 'dex_asc')), 'caterpie,pidgey,rattata')
+  assert.equal(order(sortBoxMembers(box, 'dex_desc')), 'rattata,pidgey,caterpie')
+  assert.equal(levels(sortBoxMembers(box, 'level_desc')), '20,10,5')
+  assert.equal(levels(sortBoxMembers(box, 'level_asc')), '5,10,20')
+  assert.equal(order(sortBoxMembers(box, 'name_asc')), 'caterpie,pidgey,rattata')
+  assert.equal(order(sortBoxMembers(box, 'newest_desc')), 'caterpie,rattata,pidgey')
+  // The legacy field-only values keep working.
+  assert.equal(levels(sortBoxMembers(box, 'level_asc')), '5,10,20')
+  assert.equal(order(sortBoxMembers(box, 'newest')), 'caterpie,rattata,pidgey')
+})
+
+test('the sort button cycles the field and the mode button flips the direction', () => {
+  assert.equal(nextBoxSortField('dex_asc'), 'level_asc')
+  assert.equal(nextBoxSortField('level_desc'), 'name_desc')
+  assert.equal(toggleBoxSortDirection('dex_asc'), 'dex_desc')
+  assert.equal(toggleBoxSortDirection('level_desc'), 'level_asc')
+})
+
+test('only a newest-first box prepends a new member', () => {
+  const existing = createPokemon('caterpie', 5, '99'),
+    fresh = createPokemon('pidgey', 5, '100')
+  assert.deepEqual(
+    insertIntoBox([existing], fresh, 'newest_desc').map((/** @type {any} */ member) => member.id),
+    ['100', '99']
+  )
+  assert.deepEqual(
+    insertIntoBox([existing], fresh, 'newest_asc').map((/** @type {any} */ member) => member.id),
+    ['99', '100']
+  )
+  assert.deepEqual(
+    insertIntoBox([existing], fresh, 'dex_asc').map((/** @type {any} */ member) => member.id),
+    ['99', '100']
+  )
 })

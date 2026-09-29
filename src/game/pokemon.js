@@ -8,4 +8,4 @@ export { getPreEvolutionChain, getFamilyLearnset, resolvePokemonMoves, getTutorM
 export { speciesHasType, challengeEligibleSpecies, monotypeSpeciesPool, randomMonotypeSpecies } from './pokemon/monotype.js'
 export { BASE_FRIENDSHIP, MAX_FRIENDSHIP, gainFriendship } from './pokemon/friendship.js'
 export { calculateRequiredExperience, calculateExpYield, getLevelUpResults } from './pokemon/exp.js'
-export { pokemonDisplayName, isBattleReady, createEgg, createPokemon, rollAbility, abilityDisplayName, sortBoxMembers, insertIntoBox, nextBoxSortMode } from './pokemon/creation.js'
+export { pokemonDisplayName, isBattleReady, createEgg, createPokemon, rollAbility, abilityDisplayName, sortBoxMembers, insertIntoBox, parseBoxSort, formatBoxSort, nextBoxSortField, toggleBoxSortDirection } from './pokemon/creation.js'

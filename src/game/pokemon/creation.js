@@ -2,7 +2,7 @@
 
 import { abilityData, pokemonSpecies } from '../../data/gameData.js'
 import { randomNature } from '../../data/natures.js'
-import { BOX_SORT_OPTIONS } from '../../data/ui.js'
+import { BOX_SORT_FIELDS } from '../../data/ui.js'
 import { resolvePokemonMoves } from './evolution.js'
 import { calculateRequiredExperience } from './exp.js'
 import { BASE_FRIENDSHIP } from './friendship.js'
@@ -112,61 +112,109 @@ export function createPokemon(speciesKey, level, id, isShiny = !1, inheritance) 
 }
 
 /**
- * Sort a box by the chosen mode. Dex keeps the original order (dex number,
- * then highest level, then shiny first); the others lead with their own key.
+ * Parse a stored box-sort value into its field and direction. Accepts the
+ * legacy field-only values (`dex`, `name`, `shiny`, `newest`, and the old
+ * `level_asc` / `level_desc`) as well as the current `"<field>_<dir>"` form,
+ * falling back to a field's default direction.
+ * @param {string} [mode]
+ * @returns {{ field: string, direction: string }}
+ */
+export function parseBoxSort(mode = 'dex') {
+  const [rawField, rawDirection] = String(mode).split('_')
+  // `level_asc`/`level_desc` already split cleanly; a bare field is legacy.
+  const field = BOX_SORT_FIELDS.find((option) => option.value === rawField),
+    direction = rawDirection === 'asc' || rawDirection === 'desc' ? rawDirection : null
+  return {
+    field: field?.value ?? 'dex',
+    direction: direction ?? field?.defaultDirection ?? 'asc',
+  }
+}
+
+/**
+ * @param {string} field
+ * @param {string} direction
+ * @returns {string}
+ */
+export function formatBoxSort(field, direction) {
+  return `${field}_${direction}`
+}
+
+/**
+ * Sort a box by the chosen field and direction. Ties fall back to dex order,
+ * then highest level, then shiny first, so the list stays stable.
  * @param {Pokemon[]} box
  * @param {string} [mode]
  * @returns {Pokemon[]}
  */
 export function sortBoxMembers(box, mode = 'dex') {
-  /** @type {(pokemon: Pokemon) => number} */
-  const dexId = (pokemon) => pokemonSpecies[pokemon.speciesKey]?.id ?? 0
-  /** @type {(pokemon: Pokemon) => string} */
-  const speciesName = (pokemon) => pokemonSpecies[pokemon.speciesKey]?.name ?? pokemon.name
-  /** @type {(left: Pokemon, right: Pokemon) => number} */
-  const byDex = (left, right) => dexId(left) - dexId(right)
-  /** @type {(left: Pokemon, right: Pokemon) => number} */
-  const byLevelDesc = (left, right) => right.level - left.level
-  /** @type {(left: Pokemon, right: Pokemon) => number} */
-  const byLevelAsc = (left, right) => left.level - right.level
-  /** @type {(left: Pokemon, right: Pokemon) => number} */
-  const byName = (left, right) => speciesName(left).localeCompare(speciesName(right))
-  /** @type {(left: Pokemon, right: Pokemon) => number} */
-  const byShiny = (left, right) => (left.isShiny === right.isShiny ? 0 : left.isShiny ? -1 : 1)
-  /** @type {(left: Pokemon, right: Pokemon) => number} */
-  const byNewest = (left, right) => Number(right.id) - Number(left.id)
-  /** @type {Record<string, (left: Pokemon, right: Pokemon) => number>} */
-  const comparators = {
-    dex: (left, right) => byDex(left, right) || byLevelDesc(left, right) || byShiny(left, right),
-    level_desc: (left, right) => byLevelDesc(left, right) || byDex(left, right),
-    level_asc: (left, right) => byLevelAsc(left, right) || byDex(left, right),
-    name: (left, right) => byName(left, right) || byDex(left, right),
-    shiny: (left, right) => byShiny(left, right) || byDex(left, right),
-    newest: (left, right) => byNewest(left, right) || byDex(left, right),
-  }
-  return [...box].sort(comparators[mode] ?? comparators.dex)
+  const { field, direction } = parseBoxSort(mode),
+    /** @type {(pokemon: Pokemon) => number} */
+    dexId = (pokemon) => pokemonSpecies[pokemon.speciesKey]?.id ?? 0,
+    /** @type {(pokemon: Pokemon) => string} */
+    speciesName = (pokemon) => pokemonSpecies[pokemon.speciesKey]?.name ?? pokemon.name,
+    /** @type {(left: Pokemon, right: Pokemon) => number} */
+    byDex = (left, right) => dexId(left) - dexId(right),
+    /** @type {(left: Pokemon, right: Pokemon) => number} */
+    byLevelDesc = (left, right) => right.level - left.level,
+    /** @type {(left: Pokemon, right: Pokemon) => number} */
+    byLevelAsc = (left, right) => left.level - right.level,
+    /** @type {(left: Pokemon, right: Pokemon) => number} */
+    byName = (left, right) => speciesName(left).localeCompare(speciesName(right)),
+    /** @type {(left: Pokemon, right: Pokemon) => number} */
+    byShiny = (left, right) => (left.isShiny === right.isShiny ? 0 : left.isShiny ? -1 : 1),
+    // Ascending is normal-first; descending is shiny-first.
+    /** @type {(left: Pokemon, right: Pokemon) => number} */
+    byShinyAsc = (left, right) => Number(left.isShiny) - Number(right.isShiny),
+    /** @type {(left: Pokemon, right: Pokemon) => number} */
+    byNewest = (left, right) => Number(left.id) - Number(right.id),
+    /** @type {Record<string, (left: Pokemon, right: Pokemon) => number>} */
+    fields = {
+      dex: byDex,
+      level: byLevelAsc,
+      name: byName,
+      shiny: byShinyAsc,
+      newest: byNewest,
+    },
+    fieldComparator = fields[field] ?? byDex,
+    sign = direction === 'desc' ? -1 : 1,
+    /** @type {(left: Pokemon, right: Pokemon) => number} */
+    tieBreak = (left, right) => byDex(left, right) || byLevelDesc(left, right) || byShiny(left, right)
+  return [...box].sort(
+    (left, right) => sign * fieldComparator(left, right) || tieBreak(left, right)
+  )
 }
 
 /**
- * Add a newly obtained Pokemon to the box. With the "New" (newest) sort active
- * it is prepended so it shows up at the front of the list; every other sort
- * mode appends so a deliberate manual drag order survives new catches.
+ * Advance the sort field to the next one, keeping the current direction.
+ * @param {string} [mode]
+ * @returns {string}
+ */
+export function nextBoxSortField(mode = 'dex') {
+  const { field, direction } = parseBoxSort(mode),
+    index = BOX_SORT_FIELDS.findIndex((option) => option.value === field)
+  return formatBoxSort(BOX_SORT_FIELDS[(index + 1) % BOX_SORT_FIELDS.length].value, direction)
+}
+
+/**
+ * Flip the sort direction, keeping the current field.
+ * @param {string} [mode]
+ * @returns {string}
+ */
+export function toggleBoxSortDirection(mode = 'dex') {
+  const { field, direction } = parseBoxSort(mode)
+  return formatBoxSort(field, direction === 'asc' ? 'desc' : 'asc')
+}
+
+/**
+ * Add a newly obtained Pokemon to the box. With the "New" field sorted
+ * newest-first it is prepended so it shows up at the front; every other sort
+ * appends so a deliberate manual drag order survives new catches.
  * @param {Pokemon[]} box
  * @param {Pokemon} pokemon
  * @param {string} [boxSort]
  * @returns {Pokemon[]}
  */
 export function insertIntoBox(box, pokemon, boxSort = 'dex') {
-  return boxSort === 'newest' ? [pokemon, ...box] : [...box, pokemon]
-}
-
-/**
- * The next box sort mode in the cycle. `BOX_SORT_OPTIONS` is the source of
- * truth for the order; keep this tolerant of unknown values.
- * @param {string} [mode]
- * @returns {string}
- */
-export function nextBoxSortMode(mode = 'dex') {
-  const index = BOX_SORT_OPTIONS.findIndex((option) => option.value === mode)
-  return BOX_SORT_OPTIONS[(index + 1) % BOX_SORT_OPTIONS.length].value
+  const { field, direction } = parseBoxSort(boxSort)
+  return field === 'newest' && direction === 'desc' ? [pokemon, ...box] : [...box, pokemon]
 }

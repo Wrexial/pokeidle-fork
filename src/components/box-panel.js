@@ -2,10 +2,10 @@
 
 import React from 'react'
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
-import { BOX_PAGE_SIZE, BOX_SORT_OPTIONS } from '../data/ui.js'
+import { BOX_PAGE_SIZE, BOX_SORT_DIRECTIONS, BOX_SORT_FIELDS } from '../data/ui.js'
 import { pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
-import { getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, pokemonDisplayName } from '../game/pokemon.js'
+import { getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, nextBoxSortField, parseBoxSort, pokemonDisplayName, toggleBoxSortDirection } from '../game/pokemon.js'
 import { isFemalePokemon } from '../game/breeding.js'
 import { itemTooltip } from '../game/progression.js'
 import { ItemIcon } from './item-icon.js'
@@ -65,7 +65,13 @@ export function BoxPanel({
         ))
     },
     prevPage = () => setPage((currentPage - 1 + totalPages) % totalPages),
-    nextPage = () => setPage((currentPage + 1) % totalPages)
+    nextPage = () => setPage((currentPage + 1) % totalPages),
+    boxSort = parseBoxSort(state.boxSort),
+    boxSortFieldLabel =
+      BOX_SORT_FIELDS.find((option) => option.value === boxSort.field)?.label ?? 'Dex',
+    boxSortDirection =
+      BOX_SORT_DIRECTIONS.find((option) => option.value === boxSort.direction) ??
+      BOX_SORT_DIRECTIONS[0]
   return jsxs(Fragment, {
     children: [
       jsxs('div', {
@@ -120,18 +126,33 @@ export function BoxPanel({
                   }),
                 ],
               }),
-              jsx('button', {
-                className: 'box-sort-btn',
-                title: 'Cycle box sort mode',
-                onClick: () => {
-                  ;(dispatch({
-                    type: 'SET_BOX_SORT',
-                  }),
-                    setPage(0))
-                },
+              jsxs('div', {
+                className: 'box-sort-group',
                 children: [
-                  'Sort: ',
-                  BOX_SORT_OPTIONS.find((option) => option.value === state.boxSort)?.label ?? 'Dex',
+                  jsx('button', {
+                    className: 'box-sort-btn',
+                    title: 'Cycle the sort field',
+                    onClick: () => {
+                      ;(dispatch({
+                        type: 'SET_BOX_SORT',
+                        payload: { boxSort: nextBoxSortField(state.boxSort) },
+                      }),
+                        setPage(0))
+                    },
+                    children: `Sort: ${boxSortFieldLabel}`,
+                  }),
+                  jsx('button', {
+                    className: 'box-sort-btn box-sort-mode-btn',
+                    title: `Sort direction: ${boxSortDirection.title}`,
+                    onClick: () => {
+                      ;(dispatch({
+                        type: 'SET_BOX_SORT',
+                        payload: { boxSort: toggleBoxSortDirection(state.boxSort) },
+                      }),
+                        setPage(0))
+                    },
+                    children: `Mode: ${boxSortDirection.label}`,
+                  }),
                 ],
               }),
             ],

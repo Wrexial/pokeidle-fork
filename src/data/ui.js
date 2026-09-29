@@ -250,15 +250,23 @@ export const CATCH_MODE_OPTIONS = [
     },
   ]
 
-/** Box sort modes, in cycle order. */
-export const BOX_SORT_OPTIONS = [
-    { value: 'dex', label: 'Dex' },
-    { value: 'level_desc', label: 'Lv \u2193' },
-    { value: 'level_asc', label: 'Lv \u2191' },
-    { value: 'name', label: 'A-Z' },
-    { value: 'shiny', label: '\u2605' },
-    { value: 'newest', label: 'New' },
-  ]
+/**
+ * Box sort: the field to sort by (`Sort` button) and the direction (`Mode`
+ * button). A stored mode is `"<field>_<dir>"`; older saves that only stored a
+ * field (`dex`, `name`, ...) are read with that field's default direction.
+ */
+export const BOX_SORT_FIELDS = [
+  { value: 'dex', label: 'Dex', defaultDirection: 'asc' },
+  { value: 'level', label: 'Lv', defaultDirection: 'desc' },
+  { value: 'name', label: 'A-Z', defaultDirection: 'asc' },
+  { value: 'shiny', label: '\u2605', defaultDirection: 'desc' },
+  { value: 'newest', label: 'New', defaultDirection: 'desc' },
+]
+
+export const BOX_SORT_DIRECTIONS = [
+  { value: 'desc', label: '\u2193', title: 'Descending' },
+  { value: 'asc', label: '\u2191', title: 'Ascending' },
+]
 
 export const MOBILE_TABS = [
   {

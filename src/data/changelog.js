@@ -42,6 +42,7 @@ export const CHANGELOG = [
             'The Box can be reordered by touch again: inspecting a Pokemon in the mobile Box shows up/down buttons (the party already had them), so reordering no longer needs drag-and-drop',
             'Type chips are readable in every colour: each type now uses dark ink or white text depending on how light its background is, so Normal, Fire, Grass, Rock, Bug, Fairy, Flying and the rest no longer show white-on-light text in the move buttons, move manager, Pokedex or battle badges, and the muted grey label colour was lightened so it meets WCAG AA on the dark panels',
             'The Box keeps a fixed size instead of stretching to fill the left panel and shrinking as the party grows: the party panel now takes the spare space (and scrolls when a summary is open), so the Box grid no longer scales up and down as you catch or swap Pokemon',
+            'The Box sort control is split in two: the Sort button cycles the field (Dex, Lv, A-Z, shiny, New) and the Mode button flips the direction (ascending or descending), so you can now sort any field either way instead of only the level having both orders',
             'The routes listed in the Pokedex are links that travel straight there (greyed out until the route is unlocked)',
             'Unlock toasts (“Route X is now accessible!”) have a GO button that travels to the new area and dismisses the toast',
           ],

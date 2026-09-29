@@ -3078,6 +3078,12 @@ img {
     background: #c8a84826
 }
 
+.box-sort-group {
+    display: flex;
+    align-items: center;
+    gap: 4px
+}
+
 .box-sort-btn {
     font-size: 9px;
     padding: 1px 8px;

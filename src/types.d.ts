@@ -405,7 +405,7 @@ type GameState = {
   wonderTradeState?: WonderTradeState | null
   /** The route activity playing in the `routeActivity` phase, or null. */
   routeActivity?: string | null
-  /** Chosen box sort mode (see BOX_SORT_OPTIONS). */
+  /** Chosen box sort, stored as "<field>_<direction>" (see BOX_SORT_FIELDS / BOX_SORT_DIRECTIONS). */
   boxSort: string
   /** The most recently hatched egg, shown in the hatch popup until dismissed. */
   hatchResult: Pokemon | null

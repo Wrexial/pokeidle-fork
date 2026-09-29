@@ -28,27 +28,6 @@ export function reorderParty(state, action) {
 }
 
 /**
- * Handle the `SWAP_PARTY` action.
- * @param {GameState} state
- * @param {GameAction} action
- * @returns {GameState}
- */
-export function swapParty(state, action) {
-  const { indexA, indexB } = action.payload
-  if (indexA < 0 || indexA >= state.party.length || indexB < 0 || indexB >= state.party.length) return state
-  const baseState = state.phase === 'battling' ? prepareNextBattle(state) : state,
-    activeId = baseState.playerPokemon?.id,
-    party = [...baseState.party]
-  ;[party[indexA], party[indexB]] = [party[indexB], party[indexA]]
-  const newActiveIndex = activeId ? party.findIndex((member) => member.id === activeId) : 0
-  return loadActivePokemonFromParty({
-    ...baseState,
-    party,
-    activePlayerPokemonIndex: Math.max(0, newActiveIndex),
-  })
-}
-
-/**
  * Handle the `PARTY_TO_BOX` action.
  * @param {GameState} state
  * @param {GameAction} action

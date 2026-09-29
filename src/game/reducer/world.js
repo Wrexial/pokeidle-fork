@@ -275,16 +275,3 @@ export function phaseIdle(state, action) {
       }
     : nextState
 }
-
-/**
- * Handle the `LOAD_SAVE` action.
- * @param {GameState} state
- * @param {GameAction} action
- * @returns {GameState}
- */
-export function loadSave(state, action) {
-  return {
-    ...state,
-    ...action.payload.state,
-  }
-}

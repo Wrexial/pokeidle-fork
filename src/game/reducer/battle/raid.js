@@ -57,23 +57,6 @@ export function startRaid(state, action) {
 }
 
 /**
- * Handle the `END_RAID` action.
- * @param {GameState} state
- * @param {GameAction} action
- * @returns {GameState}
- */
-export function endRaid(state, action) {
-  return {
-    ...state,
-    inRaid: !1,
-    raidLegendary: null,
-    raidRegion: null,
-    raidLevel: 0,
-    preRaidLocation: null,
-  }
-}
-
-/**
  * Handle the `START_TOWER` action.
  * @param {GameState} state
  * @param {GameAction} action

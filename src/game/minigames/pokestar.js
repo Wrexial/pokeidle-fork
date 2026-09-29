@@ -9,7 +9,7 @@ export const POKESTAR_COST = 500
 export const POKESTAR_SHOT_COUNT = 3
 
 /** Every shot's best take is worth this. */
-export const POKESTAR_TAKE_MAX = 3
+const POKESTAR_TAKE_MAX = 3
 
 /**
  * @typedef {{ label: string, score: number }} PokestarTake

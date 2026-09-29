@@ -34,14 +34,3 @@ export const challengeEligibleSpecies = Object.keys(pokemonSpecies).filter((spec
 export function monotypeSpeciesPool(type) {
   return challengeEligibleSpecies.filter((speciesKey) => speciesHasType(speciesKey, type))
 }
-
-/**
- * A uniformly random challenge-eligible species of `type`, or null when the
- * type has none.
- * @param {string} type
- * @returns {string | null}
- */
-export function randomMonotypeSpecies(type) {
-  const pool = monotypeSpeciesPool(type)
-  return pool.length > 0 ? pool[Math.floor(Math.random() * pool.length)] : null
-}

@@ -12,9 +12,6 @@ export const SLIDING_SIZE = 3
 /** Random legal slides used to shuffle the solved board. */
 export const SLIDING_SCRAMBLE = 40
 
-/** Compass directions, in the order the arrow keys read. */
-export const SLIDING_DIRECTIONS = ['N', 'E', 'S', 'W']
-
 /** @type {Record<string, [number, number]>} */
 const DELTA = { N: [-1, 0], E: [0, 1], S: [1, 0], W: [0, -1] }
 

@@ -10,4 +10,4 @@ export { usePokeball, throwMasterBall, completeMasterBall, attemptActivityCatch 
 export { updateVolatile, useEffectItem } from './battle/effects.js'
 export { megaEvolve } from './battle/mega.js'
 export { gmaxEvolve } from './battle/gmax.js'
-export { startRaid, endRaid, startTower } from './battle/raid.js'
+export { startRaid, startTower } from './battle/raid.js'

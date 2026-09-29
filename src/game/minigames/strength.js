@@ -15,7 +15,7 @@ const DELTA = { N: [-1, 0], E: [0, 1], S: [1, 0], W: [0, -1] }
  * boulder, `*` pressure plate, `E` exit (sealed until every plate is covered).
  * @type {string[][]}
  */
-export const STRENGTH_LEVELS = [
+const STRENGTH_LEVELS = [
   ['#######', '#S....#', '#.B...#', '#.*...#', '#....E#', '#######'],
   ['#########', '#S......#', '#..##...#', '#..B....#', '#..##...#', '#...*...#', '#..##...#', '#......E#', '#########'],
 ]

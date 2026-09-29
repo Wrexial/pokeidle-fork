@@ -3,49 +3,7 @@
 import { mapData, regions } from '../../data/gameData.js'
 import { emptyBattleHazards } from '../hazards.js'
 import { createVolatileState } from '../combat.js'
-import { prepareNextBattle, syncActivePokemonIntoParty } from '../progression.js'
-
-/**
- * Handle the `HEAL` action.
- * @param {GameState} state
- * @param {GameAction} action
- * @returns {GameState}
- */
-export function heal(state, action) {
-  return state.playerPokemon
-    ? syncActivePokemonIntoParty({
-        ...state,
-        playerPokemon: {
-          ...state.playerPokemon,
-          currentHp: state.playerPokemon.maxHp,
-        },
-        battleLog: [
-          ...state.battleLog,
-          `${state.playerPokemon.name} was healed to full HP!`,
-        ].slice(-50),
-      })
-    : state
-}
-
-/**
- * Handle the `HEAL_PARTY` action.
- * @param {GameState} state
- * @param {GameAction} action
- * @returns {GameState}
- */
-export function healParty(state, action) {
-  const healedParty = state.party.map((member) => ({
-      ...member,
-      currentHp: member.maxHp,
-    })),
-    playerPokemon = healedParty[0] || state.playerPokemon
-  return {
-    ...state,
-    party: healedParty,
-    playerPokemon,
-    battleLog: [...state.battleLog, 'Your Pokemon were healed!'].slice(-50),
-  }
-}
+import { prepareNextBattle } from '../progression.js'
 
 /**
  * Handle the `START_HEALING` action.

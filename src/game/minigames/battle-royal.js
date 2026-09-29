@@ -8,7 +8,7 @@ import { pokemonSpecies } from '../../data/gameData.js'
 export const BATTLE_ROYAL_COST = 400
 
 /** Fraction of max HP the party recovers between waves. */
-export const BATTLE_ROYAL_HEAL = 0.25
+const BATTLE_ROYAL_HEAL = 0.25
 
 /** Opponents are drawn from the strongest non-legendary species. */
 export const BATTLE_ROYAL_POOL = Object.entries(pokemonSpecies)

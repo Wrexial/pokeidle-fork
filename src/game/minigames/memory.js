@@ -8,7 +8,7 @@ export const MEMORY_COST = 200
 export const MEMORY_PAIRS = 8
 
 /** Species used for the pairs. */
-export const MEMORY_POOL = [
+const MEMORY_POOL = [
   'bulbasaur',
   'charmander',
   'squirtle',

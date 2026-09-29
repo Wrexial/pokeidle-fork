@@ -19,69 +19,67 @@ renumbered, so the gaps below are items that shipped.
 
 1. **#16 Performance pass** — S–M · ★★ — the idle loop dispatches a lot per
    tick; look at memoisation / batching if it ever gets heavy.
-2. **#55 Poke Radar: a guaranteed shiny every 5 levels** — S · ★★★ — shinies on
-   a schedule (5, 10, 15, ...) instead of only nudged odds.
-3. **#53 IV increment items** — S–M · ★★ — Bottle-Cap-style items that raise
-   IVs, handed out as rewards somewhere.
 ### Tier 2 — High impact, worth the effort (medium–large)
 
-4. **#28 More region areas (caves, POIs, DLC land)** — L · ★★★★½ — real
+2. **#28 More region areas (caves, POIs, DLC land)** — L · ★★★★½ — real
    content; data-heavy. Started: the POI marker model shipped with the Day-Care
    as the first POI (28c), and the DLC areas are in as zones (28a); ordinary
    caves/forests (28b) and more POIs remain. Pairs with #36/#39.
-5. **#24 Move data pass** — M · ★★★ — ally/faint heals, context move-calling,
+3. **#24 Move data pass** — M · ★★★ — ally/faint heals, context move-calling,
    the doubles-only moves, and decisions on unused PP / dead Z-Max data.
-6. **#56 Multi-effect move pass** — M · ★★★ — audit moves with more than one
+4. **#56 Multi-effect move pass** — M · ★★★ — audit moves with more than one
     effect (Hyper Beam / Giga Impact recharge, Bite / flinch moves, stat-drop
     secondaries, ...) and implement the missing half-effects; quite a few only
     do part of what they should.
-7. **#25 Battle engine pass** — M–L · ★★★ — ally/doubles abilities, a few
+5. **#25 Battle engine pass** — M–L · ★★★ — ally/doubles abilities, a few
     complex singles ones, item nuances and battle polish (animations / damage
     numbers).
-8. **#36 Zones (route chunks)** — M–L · ★★★★ — the model is in; more
+6. **#36 Zones (route chunks)** — M–L · ★★★★ — the model is in; more
     sub-areas, a distinct zone glyph and inline per-sub-area encounter grids.
-9. **#40 Alola / Galar / Paldea league structures** — M · ★★★½ — the
+7. **#40 Alola / Galar / Paldea league structures** — M · ★★★½ — the
     data-driven model is in; Alola's full trial track, Galar's post-game
     tournament and Paldea's Titans / Team Star remain.
-10. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of Armor,
+8. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of Armor,
     Crown Tundra, Kitakami and the Terarium to first-class regions.
-11. **#54 Improve Dynamax Adventures and Battle Royal** — M · ★★½ — both are
+9. **#54 Improve Dynamax Adventures and Battle Royal** — M · ★★½ — both are
     minimal loops today; make them feel like real modes with real rewards.
-12. **#29 Companion minigame polish** — S · ★★ — an animated buddy panel /
+10. **#29 Companion minigame polish** — S · ★★ — an animated buddy panel /
     petting scene (the last open minigame idea).
-13. **#18 Better settings** — M · ★★★ — sprite-style options, account controls
+11. **#18 Better settings** — M · ★★★ — sprite-style options, account controls
     (blocked on #19) and finishing the Gameplay section.
-14. **#38 Clean up the Raid Islands** — M · ★★½ — weight / level-gate the
+12. **#38 Clean up the Raid Islands** — M · ★★½ — weight / level-gate the
     legendary pick and (optionally) shrink Unova's ordinary pool.
-15. **#43 Multi-battles (double / triple / rotation) as a minigame** — M–L ·
+13. **#43 Multi-battles (double / triple / rotation) as a minigame** — M–L ·
     ★★½ — a self-contained minigame that reuses the combat pipeline.
-16. **#60 Areas should have their own zoomed-in map** — M · ★★ — zones and
+14. **#60 Areas should have their own zoomed-in map** — M · ★★ — zones and
     large areas list their sub-areas in the panel only; give them a focused
     map view entered from the Town Map, with a back button to exit.
-17. **#61 Former raid gifts onto real routes** — M · ★★ — the ordinary Raid
+15. **#61 Former raid gifts onto real routes** — M · ★★ — the ordinary Raid
     Island finals became one-off refuge statics on each region's last route;
     place them on routes that suit them as part of the encounter table.
-18. **#65 Use minigames as unlock gates** — M · ★★ — let a route require
+16. **#65 Use minigames as unlock gates** — M · ★★ — let a route require
     clearing a minigame (or hitting a score) instead of only battles / badges /
     catches, so the minigames feed progression.
-19. **#66 Ruins of Alph should award an Unown (and all 28 forms)** — M · ★★ —
+17. **#66 Ruins of Alph should award an Unown (and all 28 forms)** — M · ★★ —
     the sliding puzzle never gives an Unown, and only one Unown form exists;
     award one and add the full letter / punctuation set.
-20. **#67 Baby Pokemon from breeding, not gifts** — M · ★★ — the Daycare can
+18. **#67 Baby Pokemon from breeding, not gifts** — M · ★★ — the Daycare can
     already hatch babies from their evolved forms; stop handing the babies out
     as gift/static rewards and give their evolved forms a real source.
-21. **#68 Trainer teams should use all level-appropriate Pokemon** — M · ★★ —
+19. **#68 Trainer teams should use all level-appropriate Pokemon** — M · ★★ —
     the strong type bias and narrow pools mean the same few species repeat; let
     trainers field every level-appropriate Pokemon so the Pokedex "seen" fills
     in.
-22. **#70 Day/night cycle on a 60-minute clock** — M · ★★ — a fixed
+20. **#70 Day/night cycle on a 60-minute clock** — M · ★★ — a fixed
     real-time cycle (full day = 60 min) replacing the wall-clock night flag,
     with a visual phase and time-gated effects.
+21. **#74 Snowpoint Temple variety** — S · ★ — the ice-slide rooms are a fixed
+    set, so every run is the same puzzle; add more / randomise them.
 ### Tier 3 — Big / low-return, defer
 
-23. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
+22. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
     route-based field effects.
-24. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+23. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
 ---
@@ -422,24 +420,6 @@ resolver), `src/components/*-scene.js`, `src/game/reducer/minigames.js`, and
 
 Effort: **medium–large** (the shared math helps, but target/order handling is
 genuinely new).
-## 53. IV increment items
-
-Add items that permanently raise a Pokemon's IVs, handed out as rewards.
-Bottle-Cap style (one stat, or all stats) or a smaller +1 IV increment item.
-
-- [ ] Add the item(s) and a bag use flow with a target-stat picker (or auto-pick
-      the best/lowest stat).
-- [ ] Decide the reward source: raids, the Battle Tower / Battle Royal / Dynamax
-      Adventures, the Game Corner, or the Auction House.
-- [ ] Mark the Pokemon as hyper-trained so the boost can't be bred down, and
-      make the IV cap 31.
-
-Likely touch points: `src/data/items.js`, `src/game/reducer/items.js`
-(`USE_ITEM_ON_POKEMON`), `src/components/bag-panel.js`, the reward tables, and
-`tools/download-item-sprites.cjs` for the art.
-
-Effort: **small–medium**.
-
 ## 54. Improve Dynamax Adventures and Battle Royal
 
 Both shipped as minimal loops (0.16.0): Dynamax Adventures is "pick a path of
@@ -458,25 +438,6 @@ Likely touch points: `src/game/minigames/dynamax-adventures.js`,
 `src/game/minigames/gauntlet.js`, their scenes, and the reward tables.
 
 Effort: **medium**.
-
-## 55. Poke Radar: a guaranteed shiny every 5 levels
-
-The Poke Radar is a memory-chain minigame whose chain only nudges shiny odds.
-Give it a schedule: the **nth shiny appears at chain level 5×n** — first at 5,
-then 10, then 15, and so on. Resolving the shiny (catching it, or winning the
-battle) resets the chain, and the next target is 5 higher again.
-
-- [ ] Track the chain level and the current shiny target (5, 10, 15, ...).
-- [ ] When the level hits the target, force the next encounter to be shiny.
-- [ ] On resolving the shiny, reset the chain and raise the next target by 5.
-- [ ] Decide whether a lost / fled shiny battle resets the chain or just leaves
-      the target unmet.
-
-Likely touch points: `src/game/minigames/poke-radar.js`,
-`src/components/poke-radar-scene.js`, and the reducer's radar handlers.
-
-Effort: **small**.
-
 ## 56. Multi-effect move pass
 
 Many moves have more than one effect, and quite a few only implement part of
@@ -714,6 +675,25 @@ Relevant code: `src/game/catching.js` (`isNightTime`, `catchContext`),
 `src/data/ui.js` (backgrounds / tints).
 
 Effort: **medium** (the logic is small; the visual pass is the work).
+
+## 74. Snowpoint Temple is too repetitive
+
+Snowpoint Temple (the opening Strength chamber plus the ice-slide rooms) is a
+fixed set of hand-designed puzzles, so every run is the same. Add some
+variety.
+
+- [ ] Pick a random subset of ice-slide rooms per run (and/or add more rooms).
+- [ ] Consider a seeded procedural generator, keeping the parser’s par /
+      solvability check so every room is fair.
+- [ ] Vary the Strength chamber layout too.
+- [ ] Scale the number of rooms with region prestige if it should get harder.
+
+Relevant code: `src/game/minigames/ice-slide.js` (`ICE_SLIDE_LEVELS`,
+`parseIceLevel`), `src/game/minigames/strength.js` (`STRENGTH_ROOMS`),
+`src/components/ice-slide-scene.js`, and the reducer’s `iceSlide` handlers.
+
+Effort: **small**.
+
 ## Map cleanup reference maps
 
 All eight non-Kanto regions have hand-measured `REGION_MAP_LAYOUTS` overrides.

@@ -125,11 +125,13 @@ export const CHANGELOG = [
           items: [
             'Whack-a-Diglett speeds up as the round runs down (targets stay up for less time) and adds a rare Dugtrio jackpot worth 5 points on top of the Diglett and Zubat',
             'The Game Corner slots have a prize track: every winning line fills a 20-step bar, and a full bar hands over a random Game Corner prize Pokemon — Scyther, Dratini or Porygon',
+            'The Poke Radar now guarantees shinies: each chain level counts toward a target that starts at 5, so the chained species is shiny at 5, then 10, then 15 levels. Catching (or beating) it banks the shiny, resets the chain and raises the next target by 5',
           ],
         },
         {
           heading: 'Items',
           items: [
+            'Bottle Caps hyper-train a party Pokemon: a Bottle Cap caps its lowest IV at 31 and a Gold Bottle Cap caps every IV. They are sold for Victory Tokens and won from a 15-wave Battle Royal, and hyper-trained IVs are never passed down by breeding',
             'Fossils are a proper loop now: each region hands out its fossil items (Kanto at Mt. Moon, Hoenn in the Route 111 desert, the rest on their late routes), the Sinnoh Underground can dig up more, and the Cinnabar Island lab revives a fossil into its Pokemon at Lv. 30',
             'The revived fossils evolve into the finals that used to sit on the ordinary Raid Island — Omastar, Kabutops, Aerodactyl, Cradily, Armaldo, Rampardos, Bastiodon, Carracosta, Archeops, Tyrantrum, Aurorus and the four Galar fossils',
           ],

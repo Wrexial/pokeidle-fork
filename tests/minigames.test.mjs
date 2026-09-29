@@ -367,7 +367,7 @@ test('UPDATE_SHINY_CHAIN can add a batch of chain points', () => {
     { ...initialGameState, shinyChain: { speciesKey: null, count: 0 } },
     { type: 'UPDATE_SHINY_CHAIN', payload: { speciesKey: 'pikachu', amount: 40 } }
   )
-  assert.deepEqual(next.shinyChain, { speciesKey: 'pikachu', count: 40 })
+  assert.deepEqual(next.shinyChain, { speciesKey: 'pikachu', count: 40, target: 5 })
   const extended = gameReducer(next, {
     type: 'UPDATE_SHINY_CHAIN',
     payload: { speciesKey: 'pikachu', amount: 10 },

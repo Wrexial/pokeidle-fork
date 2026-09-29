@@ -3,7 +3,7 @@
 import { tutorMoveCost } from '../../../data/config.js'
 import { pokemonSpecies } from '../../../data/gameData.js'
 import { createPokemon, insertIntoBox, isTutorMove, judgeIVs } from '../../pokemon.js'
-import { formatReward, loadActivePokemonFromParty, prepareNextBattle, releaseFaintedParty, releaseReward, syncActivePokemonIntoParty } from '../../progression.js'
+import { advanceShinyTarget, formatReward, loadActivePokemonFromParty, prepareNextBattle, releaseFaintedParty, releaseReward, syncActivePokemonIntoParty } from '../../progression.js'
 import { advanceQuests } from '../../quests.js'
 import { withNotification } from '../../reducer-helpers.js'
 
@@ -285,12 +285,15 @@ export function catchPokemon(state, action) {
     claimedGifts =
       staticId && !(state.claimedGifts ?? []).includes(staticId)
         ? [...(state.claimedGifts ?? []), staticId]
-        : state.claimedGifts
+        : state.claimedGifts,
+    // Catching a chained shiny resets the radar chain and raises the target.
+    shinyChain = advanceShinyTarget(state.shinyChain, state.enemyPokemon)
   return state.party.length < 6
     ? {
         ...state,
         party: [...state.party, newPokemon],
         claimedGifts,
+        shinyChain,
         nextPokemonId: state.nextPokemonId + 1,
         inventory,
         quests: advanceQuests(state.quests, { kind: 'catch', speciesKey, isShiny }),
@@ -303,6 +306,7 @@ export function catchPokemon(state, action) {
         ...state,
         box: insertIntoBox(state.box, newPokemon, state.boxSort),
         claimedGifts,
+        shinyChain,
         nextPokemonId: state.nextPokemonId + 1,
         inventory,
         quests: advanceQuests(state.quests, { kind: 'catch', speciesKey, isShiny }),

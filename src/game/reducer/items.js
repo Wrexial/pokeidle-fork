@@ -4,7 +4,7 @@ import { encounterData, pokemonSpecies } from '../../data/gameData.js'
 import { activeItems, consumableItems, fossilItems, heldItems, pokeBalls } from '../../data/items.js'
 import { canGigantamax } from '../../data/mega-evolution.js'
 import { natureName, randomNature } from '../../data/natures.js'
-import { MAX_FRIENDSHIP, calculatePokemonStats, calculateRequiredExperience, gainFriendship, getLevelUpResults } from '../pokemon.js'
+import { MAX_FRIENDSHIP, IV_STAT_ORDER, calculatePokemonStats, calculateRequiredExperience, gainFriendship, getLevelUpResults } from '../pokemon.js'
 import { getItemSellPrice, isActiveEffectItem } from '../progression.js'
 import { withNotification } from '../reducer-helpers.js'
 import { markCaught } from './collection.js'
@@ -12,6 +12,18 @@ import { catchPokemon } from './pokemon/management.js'
 
 /** The only place a fossil can be revived. */
 export const FOSSIL_REVIVE_LOCATION = 'cinnabarIsland'
+
+/**
+ * The party member's lowest IV stat, used by a Bottle Cap (ties keep the first).
+ * @param {Pokemon} member
+ * @returns {string}
+ */
+function lowestIvStat(member) {
+  return IV_STAT_ORDER.reduce(
+    (lowest, stat) => ((member.ivs?.[stat] ?? 0) < (member.ivs?.[lowest] ?? 0) ? stat : lowest),
+    IV_STAT_ORDER[0]
+  )
+}
 
 /**
  * Handle the `REVIVE_FOSSIL` action: consume a fossil at Cinnabar Island and
@@ -269,6 +281,37 @@ export function useItemOnPokemon(state, action) {
     if (member.gmax || !canGigantamax(member.speciesKey)) return state
     member = { ...member, gmax: true }
     log.push(`${member.name} gained the Gigantamax Factor!`)
+  } else if (item.ivTraining) {
+    const targets = item.ivTraining === 'all' ? IV_STAT_ORDER : [lowestIvStat(member)],
+      nextIvs = { ...member.ivs }
+    let changed = false
+    for (const stat of targets)
+      if ((nextIvs[stat] ?? 0) < 31) {
+        nextIvs[stat] = 31
+        changed = true
+      }
+    if (!changed) return state
+    const newStats = calculatePokemonStats(
+        pokemonSpecies[member.speciesKey],
+        member.level,
+        nextIvs,
+        member.nature
+      ),
+      hpGain = Math.max(0, newStats.hp - member.maxHp)
+    member = {
+      ...member,
+      // Keep the pre-training IVs so breeding can't pass the boost down.
+      naturalIvs: member.naturalIvs ?? { ...member.ivs },
+      ivs: nextIvs,
+      maxHp: newStats.hp,
+      currentHp: Math.min(newStats.hp, member.currentHp + hpGain),
+      attack: newStats.attack,
+      defense: newStats.defense,
+      spAttack: newStats.spAttack,
+      spDefense: newStats.spDefense,
+      speed: newStats.speed,
+    }
+    log.push(`${member.name} was hyper-trained!`)
   } else if (item.category === 'medicine') {
     if (item.revive) {
       if (member.currentHp > 0) return state

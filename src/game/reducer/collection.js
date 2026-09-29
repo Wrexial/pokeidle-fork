@@ -4,7 +4,7 @@ import { ACHIEVEMENTS } from '../../data/achievements.js'
 import { dexRewardVictoryTokens } from '../../data/config.js'
 import { dailyEventByKey, rollDailyEvent, todayKey } from '../../data/daily-events.js'
 import { pokemonSpecies } from '../../data/gameData.js'
-import { formatReward, prepareNextBattle } from '../progression.js'
+import { SHINY_CHAIN_FIRST_TARGET, formatReward, prepareNextBattle } from '../progression.js'
 import { questLabel, rollQuests } from '../quests.js'
 import { withNotification } from '../reducer-helpers.js'
 
@@ -348,13 +348,18 @@ export function claimDailyGift(state, action) {
  * @returns {GameState}
  */
 export function updateShinyChain(state, action) {
-  const { speciesKey, amount = 1 } = action.payload
+  const { speciesKey, amount = 1 } = action.payload,
+    current = state.shinyChain ?? { speciesKey: null, count: 0 },
+    sameSpecies = current.speciesKey === speciesKey
   return {
     ...state,
-    shinyChain:
-      state.shinyChain.speciesKey === speciesKey
-        ? { speciesKey, count: state.shinyChain.count + amount }
-        : { speciesKey, count: amount },
+    shinyChain: sameSpecies
+      ? {
+          speciesKey,
+          count: current.count + amount,
+          target: current.target ?? SHINY_CHAIN_FIRST_TARGET,
+        }
+      : { speciesKey, count: amount, target: SHINY_CHAIN_FIRST_TARGET },
   }
 }
 

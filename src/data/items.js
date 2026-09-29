@@ -482,6 +482,26 @@ export const consumableItems = {
       sellPrice: null,
       natureMint: true,
     },
+    bottleCap: {
+      id: 'bottleCap',
+      name: 'Bottle Cap',
+      description:
+        "Hyper-trains a party Pokemon, raising its lowest IV to 31 (the boost is not passed down by breeding).",
+      category: 'medicine',
+      buyPrice: null,
+      sellPrice: null,
+      ivTraining: 'lowest',
+    },
+    goldBottleCap: {
+      id: 'goldBottleCap',
+      name: 'Gold Bottle Cap',
+      description:
+        "Hyper-trains a party Pokemon, raising every IV to 31 (the boost is not passed down by breeding).",
+      category: 'medicine',
+      buyPrice: null,
+      sellPrice: null,
+      ivTraining: 'all',
+    },
   }
 
 /**
@@ -1096,6 +1116,8 @@ export const tokenShopItems = [
     { itemId: 'reinsOfUnity', tokenCost: 4 },
     { itemId: 'megaStone', tokenCost: 5 },
     { itemId: 'maxMushroom', tokenCost: 4 },
+    { itemId: 'bottleCap', tokenCost: 8 },
+    { itemId: 'goldBottleCap', tokenCost: 30 },
   ]
 
 /** @type {Record<string, { name: string, items: { itemId: string, unlockWildBattlesWon?: number }[] }>} */

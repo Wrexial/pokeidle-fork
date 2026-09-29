@@ -135,7 +135,15 @@ export function PokeRadarScene() {
   }
 
   const species = target ? pokemonSpecies[target.speciesKey] : null,
-    size = POKE_RADAR_SIZE * POKE_RADAR_SIZE
+    size = POKE_RADAR_SIZE * POKE_RADAR_SIZE,
+    // Progress toward the next guaranteed shiny (5, 10, 15, ...) for the
+    // currently chained species.
+    chainTarget =
+      state.shinyChain?.speciesKey === target?.speciesKey
+        ? state.shinyChain.target ?? 5
+        : 5,
+    chainCount =
+      state.shinyChain?.speciesKey === target?.speciesKey ? state.shinyChain.count : 0
 
   return jsxs('div', {
     className: 'minigame-scene radar-scene',
@@ -147,7 +155,11 @@ export function PokeRadarScene() {
           jsx('span', { className: 'minigame-scene-title', children: 'Pok\u00e9 Radar' }),
           jsxs('span', {
             className: 'minigame-scene-tally',
-            children: [`Chain ${round}`, ' \u00b7 ', `Sequence ${sequence.length}`],
+            children: [
+              `Chain ${round}`,
+              ' \u00b7 ',
+              `Shiny ${Math.min(chainCount, chainTarget)}/${chainTarget}`,
+            ],
           }),
         ],
       }),
@@ -159,7 +171,9 @@ export function PokeRadarScene() {
               onCollect: leave,
               summary: jsx('span', {
                 className: 'radar-target-chain',
-                children: result ? `Chain of ${result.chain} \u00b7 +${result.points} points` : '',
+                children: result
+                  ? `Chain of ${result.chain} \u00b7 +${result.points} chain level${result.points === 1 ? '' : 's'}`
+                  : '',
               }),
             })
           : [
@@ -183,7 +197,7 @@ export function PokeRadarScene() {
               result &&
                 jsx('span', {
                   className: 'radar-target-chain',
-                  children: `+${result.points} chain points`,
+                  children: `+${result.points} chain level${result.points === 1 ? '' : 's'}`,
                 }),
             ],
           }),

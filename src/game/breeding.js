@@ -239,7 +239,10 @@ function shuffle(items) {
 export function inheritIVs(parents) {
   const ivs = /** @type {Record<string, number>} */ (generateIVs())
   for (const stat of shuffle([...IV_STAT_ORDER]).slice(0, 3))
-    ivs[stat] = Math.max(...parents.map((parent) => parent.ivs?.[stat] ?? 0))
+    // Hyper-trained parents pass down their pre-training IVs, not the boost.
+    ivs[stat] = Math.max(
+      ...parents.map((parent) => (parent.naturalIvs ?? parent.ivs)?.[stat] ?? 0)
+    )
   return ivs
 }
 

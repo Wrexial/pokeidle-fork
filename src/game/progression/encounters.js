@@ -167,7 +167,11 @@ export function resolveActiveModifiers(activeEffects, routeKey, shinyChain) {
 }
 
 /** How many same-species encounters double the shiny odds. */
-const SHINY_CHAIN_STEP = 40
+const SHINY_CHAIN_STEP = 4
+
+/** The first guaranteed-shiny radar chain level, and how much it grows. */
+export const SHINY_CHAIN_FIRST_TARGET = 5
+export const SHINY_CHAIN_TARGET_STEP = 5
 
 /**
  * Shiny-odds divisor from a DexNav-style chain: 1x at no chain, up to 4x at
@@ -179,6 +183,34 @@ const SHINY_CHAIN_STEP = 40
 export function shinyChainMultiplier(speciesKey, chain) {
   if (!chain || chain.speciesKey !== speciesKey) return 1
   return Math.min(4, 1 + chain.count / SHINY_CHAIN_STEP)
+}
+
+/**
+ * @param {string} speciesKey
+ * @param {{ speciesKey: string | null, count: number, target?: number } | undefined | null} chain
+ * @returns {boolean}
+ */
+function shinyChainGuaranteed(speciesKey, chain) {
+  return (
+    !!chain &&
+    chain.speciesKey === speciesKey &&
+    chain.count >= (chain.target ?? SHINY_CHAIN_FIRST_TARGET)
+  )
+}
+
+/**
+ * A chained shiny has been resolved (caught or defeated): reset the chain and
+ * raise the next guaranteed-shiny target by 5. Returns the chain unchanged when
+ * the `enemy` is not a shiny of the chained species.
+ * @param {{ speciesKey: string | null, count: number, target?: number }} chain
+ * @param {{ speciesKey?: string, isShiny?: boolean } | null | undefined} enemy
+ * @returns {{ speciesKey: string | null, count: number, target: number }}
+ */
+export function advanceShinyTarget(chain, enemy) {
+  const target = chain?.target ?? SHINY_CHAIN_FIRST_TARGET
+  if (!enemy?.isShiny || !chain?.speciesKey || enemy.speciesKey !== chain.speciesKey)
+    return { ...chain, target }
+  return { ...chain, count: 0, target: target + SHINY_CHAIN_TARGET_STEP }
 }
 
 /**
@@ -346,9 +378,11 @@ export function resolvePokemonEncounter(encounterData, modifiers, completedGener
         species: pokemonSpecies[encounter.speciesKey],
         speciesKey: encounter.speciesKey,
         level,
-        isShiny: checkShinyOdds(
-          shinyOddsForEncounter(encounter, completedGenerationSet, chainMultiplier, shinyBonus)
-        ),
+        isShiny:
+          shinyChainGuaranteed(encounter.speciesKey, shinyChain) ||
+          checkShinyOdds(
+            shinyOddsForEncounter(encounter, completedGenerationSet, chainMultiplier, shinyBonus)
+          ),
       }
     }
   const fallback = pool[pool.length - 1]
@@ -356,13 +390,15 @@ export function resolvePokemonEncounter(encounterData, modifiers, completedGener
     species: pokemonSpecies[fallback.speciesKey],
     speciesKey: fallback.speciesKey,
     level: levelOverride || fallback.minLevel,
-    isShiny: checkShinyOdds(
-      shinyOddsForEncounter(
-        fallback,
-        completedGenerationSet,
-        shinyChainMultiplier(fallback.speciesKey, shinyChain),
-        shinyBonus
-      )
-    ),
+    isShiny:
+      shinyChainGuaranteed(fallback.speciesKey, shinyChain) ||
+      checkShinyOdds(
+        shinyOddsForEncounter(
+          fallback,
+          completedGenerationSet,
+          shinyChainMultiplier(fallback.speciesKey, shinyChain),
+          shinyBonus
+        )
+      ),
   }
 }

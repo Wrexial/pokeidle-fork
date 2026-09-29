@@ -11,7 +11,7 @@ import { tickGarden } from '../../garden.js'
 import { tickPelago } from '../../pelago.js'
 import { emptyBattleHazards } from '../../hazards.js'
 import { gainFriendship, isBattleReady } from '../../pokemon.js'
-import { computeUnlockedLocations, rollCandyDrop, rollValuableDrop, syncActivePokemonIntoParty, tickBattleCounters, tickPartyEggs, tickPokerus } from '../../progression.js'
+import { advanceShinyTarget, computeUnlockedLocations, rollCandyDrop, rollValuableDrop, syncActivePokemonIntoParty, tickBattleCounters, tickPartyEggs, tickPokerus } from '../../progression.js'
 import { advanceQuests } from '../../quests.js'
 import { rollSwarm, withNotification } from '../../reducer-helpers.js'
 
@@ -160,6 +160,7 @@ export function consumeEvent(state, action) {
     companion = state.companion,
     garden = state.garden,
     pelago = state.pelago,
+    shinyChain = state.shinyChain,
     party = state.party,
     hatchedEgg = /** @type {Pokemon[]} */ ([]),
     inventory = state.inventory,
@@ -233,6 +234,8 @@ export function consumeEvent(state, action) {
       wildBattlesWon
     )
     garden = tickGarden(garden)
+    // Winning against a chained shiny resolves the radar chain.
+    shinyChain = advanceShinyTarget(shinyChain, state.enemyPokemon)
     // Poké Pelago's passive islands tick down their cycles.
     pelago = tickPelago(pelago)
     // Daily quests track wild wins (and route-specific ones).
@@ -323,6 +326,7 @@ export function consumeEvent(state, action) {
     party,
     daycare,
     companion,
+    shinyChain,
     garden,
     pelago,
     inventory,

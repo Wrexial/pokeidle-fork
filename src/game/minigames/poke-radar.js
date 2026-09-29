@@ -14,8 +14,9 @@ export const POKE_RADAR_SIZE = 4
 /** The first round shows this many patches. */
 export const POKE_RADAR_START_LENGTH = 2
 
-/** Shiny-chain points added per successfully completed round. */
-export const POKE_RADAR_CHAIN_STEP = 10
+/** Chain levels added per successfully completed round (so `count` is the
+ * number of rounds banked toward the next guaranteed shiny). */
+export const POKE_RADAR_CHAIN_STEP = 1
 
 /**
  * A random sequence of distinct patch indexes.

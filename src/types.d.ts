@@ -71,6 +71,8 @@ type Pokemon = BattlePokemon & {
   id: string
   totalExp: number
   ivs: Record<string, number>
+  /** Pre-hyper-training IVs, so a bred egg can't inherit the boosts. */
+  naturalIvs?: Record<string, number>
   /** One of the 25 nature keys (see src/data/natures.js). */
   nature?: string
   /** Friendship (0-255), raised by battling and levelling; gates friendship evolutions. */
@@ -169,6 +171,8 @@ type ConsumableItem = {
   friendship?: number
   /** Grants the Gigantamax Factor (mark) to a Pokemon that has a G-Max form. */
   grantsGmax?: boolean
+  /** Hyper-trains the target: `lowest` caps its lowest IV at 31, `all` caps every IV. */
+  ivTraining?: 'lowest' | 'all'
 }
 
 type PokeBall = {
@@ -473,7 +477,7 @@ type GameState = {
   pokedexCaught: string[]
   shinySeen: string[]
   shinyCaught: string[]
-  shinyChain: { speciesKey: string | null; count: number }
+  shinyChain: { speciesKey: string | null; count: number; target?: number }
   /** A route temporarily overrun by one species. */
   swarm: { routeKey: string; speciesKey: string; battlesRemaining: number } | null
   /** Rare party-wide 2x EXP boost with a wild-battle countdown. */

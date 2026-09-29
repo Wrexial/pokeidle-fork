@@ -113,7 +113,7 @@ export const initialGameState = {
   /** Daycare: up to two deposited parents breeding eggs. */
   daycare: { parents: [], progress: 0 },
   /** Consecutive encounters of one species, boosting shiny odds (DexNav). */
-  shinyChain: { speciesKey: null, count: 0 },
+  shinyChain: { speciesKey: null, count: 0, target: 5 },
   shinySeen: [],
   defeatedGyms: [],
   defeatedEliteFour: [],

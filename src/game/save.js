@@ -18,7 +18,7 @@ import { PELAGO_MAX_READY, PELAGO_SLOTS, createPelago } from './pelago.js'
 import { RODS, rodsForRegionCount } from './minigames.js'
 import { GIFTS, STATIC_ENCOUNTERS } from './gifts.js'
 import { initialGameState } from './reducer.js'
-import { computeOfflineReward, entryRoutePath } from './progression.js'
+import { SHINY_CHAIN_FIRST_TARGET, computeOfflineReward, entryRoutePath } from './progression.js'
 
 const FALLBACK_CATCH_RULE = {
   enabled: true,
@@ -314,7 +314,14 @@ export function repairSave(saved) {
     typeof saved.shinyChain.count === 'number' &&
     saved.shinyChain.count > 0 &&
     pokemonSpecies[saved.shinyChain.speciesKey]
-      ? { speciesKey: saved.shinyChain.speciesKey, count: saved.shinyChain.count }
+      ? {
+          speciesKey: saved.shinyChain.speciesKey,
+          count: saved.shinyChain.count,
+          target:
+            typeof saved.shinyChain.target === 'number' && saved.shinyChain.target > 0
+              ? saved.shinyChain.target
+              : SHINY_CHAIN_FIRST_TARGET,
+        }
       : initialGameState.shinyChain
   const swarm =
     saved.swarm &&

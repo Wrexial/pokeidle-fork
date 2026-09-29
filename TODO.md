@@ -30,50 +30,56 @@ renumbered, so the gaps below are items that shipped.
 5. **#57 Protection / immunity move visuals** — S · ★ — moves that grant
    immunity (Protect, Detect, King's Shield, Spiky Shield, Baneful Bunker, ...)
    should show a visible shield / "it protected itself" effect when they block.
+6. **#58 Companion care decays too fast** — S · ★½ — a pinned companion loses
+   a point from each of its four care stats on every wild win; make it lose a
+   single point, and only for a battle it actually fought in.
+7. **#59 Galarian birds back in the raid** — S · ★ — flag
+   `g-articuno` / `g-zapdos` / `g-moltres` as legendary so the raid scan puts
+   them in Galar's legendary `raidPool`, not the ordinary one.
 
 ### Tier 2 — High impact, worth the effort (medium–large)
 
-6. **#28 More region areas (caves, POIs, DLC land)** — L · ★★★★½ — real
+8. **#28 More region areas (caves, POIs, DLC land)** — L · ★★★★½ — real
    content; data-heavy. Started: the POI marker model shipped with the Day-Care
    as the first POI (28c), and the DLC areas are in as zones (28a); ordinary
    caves/forests (28b) and more POIs remain. Pairs with #36/#39.
-7. **#24 Move data pass** — M · ★★★ — ally/faint heals, context move-calling,
+9. **#24 Move data pass** — M · ★★★ — ally/faint heals, context move-calling,
    the doubles-only moves, and decisions on unused PP / dead Z-Max data.
-8. **#56 Multi-effect move pass** — M · ★★★ — audit moves with more than one
-   effect (Hyper Beam / Giga Impact recharge, Bite / flinch moves, stat-drop
-   secondaries, ...) and implement the missing half-effects; quite a few only
-   do part of what they should.
-9. **#25 Battle engine pass** — M–L · ★★★ — ally/doubles abilities, a few
-   complex singles ones, item nuances and battle polish (animations / damage
-   numbers).
-10. **#50 Fossil & fossil-revive system** — M · ★★★ — one fossil item per region
+10. **#56 Multi-effect move pass** — M · ★★★ — audit moves with more than one
+    effect (Hyper Beam / Giga Impact recharge, Bite / flinch moves, stat-drop
+    secondaries, ...) and implement the missing half-effects; quite a few only
+    do part of what they should.
+11. **#25 Battle engine pass** — M–L · ★★★ — ally/doubles abilities, a few
+    complex singles ones, item nuances and battle polish (animations / damage
+    numbers).
+12. **#50 Fossil & fossil-revive system** — M · ★★★ — one fossil item per region
     (handed out as a gift instead of the Pokemon), revived at Cinnabar Island,
     with more fossils from the Sinnoh Underground.
-11. **#36 Zones (route chunks)** — M–L · ★★★★ — the model is in; more
+13. **#36 Zones (route chunks)** — M–L · ★★★★ — the model is in; more
     sub-areas, a distinct zone glyph and inline per-sub-area encounter grids.
-12. **#40 Alola / Galar / Paldea league structures** — M · ★★★½ — the
+14. **#40 Alola / Galar / Paldea league structures** — M · ★★★½ — the
     data-driven model is in; Alola's full trial track, Galar's post-game
     tournament and Paldea's Titans / Team Star remain.
-13. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of Armor,
+15. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of Armor,
     Crown Tundra, Kitakami and the Terarium to first-class regions.
-14. **#54 Improve Dynamax Adventures and Battle Royal** — M · ★★½ — both are
+16. **#54 Improve Dynamax Adventures and Battle Royal** — M · ★★½ — both are
     minimal loops today; make them feel like real modes with real rewards.
-15. **#29 Companion minigame polish** — S · ★★ — an animated buddy panel /
+17. **#29 Companion minigame polish** — S · ★★ — an animated buddy panel /
     petting scene (the last open minigame idea).
-16. **#18 Better settings** — M · ★★★ — sprite-style options, account controls
+18. **#18 Better settings** — M · ★★★ — sprite-style options, account controls
     (blocked on #19) and finishing the Gameplay section.
-17. **#38 Clean up the Raid Islands** — M · ★★½ — weight / level-gate the
+19. **#38 Clean up the Raid Islands** — M · ★★½ — weight / level-gate the
     legendary pick and (optionally) shrink Unova's ordinary pool.
-18. **#43 Multi-battles (double / triple / rotation) as a minigame** — M–L ·
+20. **#43 Multi-battles (double / triple / rotation) as a minigame** — M–L ·
     ★★½ — a self-contained minigame that reuses the combat pipeline.
-19. **#30 Caught / event QOL indicators** — S · ★ — flag the battle sprite;
+21. **#30 Caught / event QOL indicators** — S · ★ — flag the battle sprite;
     decide whether raids show the caught badge.
 
 ### Tier 3 — Big / low-return, defer
 
-20. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
+22. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
     route-based field effects.
-21. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+23. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
 ---
@@ -252,6 +258,8 @@ full set), plus the Companion and Berry Garden. The only open idea:
 - [ ] An animated buddy panel / petting scene using the existing sprite helpers
       (companion care is a static modal today).
 
+The care decay itself is also too harsh — see #58.
+
 Relevant code: `src/game/companion.js`, the minigame scenes under
 `src/components/`, and `src/game/reducer/minigames.js`.
 
@@ -302,6 +310,8 @@ Still open:
 
 - [ ] Weight / level-gate the legendary pick by badges or prestige instead of a
       uniform "unseen first" pick.
+- [ ] Move the Galarian birds (`g-articuno` / `g-zapdos` / `g-moltres`) back
+      into the legendary pool — they are mis-flagged as ordinary today (#59).
 - [ ] If a smaller Unova (13 ordinary) pool is wanted, give a few of its finals a
       real route or evolution source (part of #28/#39).
 
@@ -563,6 +573,51 @@ Guard, Wide Guard — currently block silently. Give them visual feedback:
 
 Likely touch points: `src/components/battle-scene.js` (overlay + callout),
 `assets/style.css`, and the `protected` volatile in the combat engine.
+
+Effort: **small**.
+
+## 58. Companion care decays too fast
+
+A pinned companion loses `COMPANION_DECAY_PER_WIN` (1) from **each** of its four
+care stats after every wild win, i.e. up to 4 care points per battle, so it
+falls out of the "content" range (and loses the EXP bonus) very quickly. Make it
+lose a single care point per battle, and only for a battle the companion
+actually took part in, rather than a flat loss from every stat on every win.
+
+- [ ] Reduce the per-win decay to **one point total** (not one per stat).
+- [ ] Only decay when the pinned companion was the active battler, not on every
+      wild win regardless.
+- [ ] Decide how the single point is applied (which stat, or a rotating / lowest
+      stat) and keep the design note that neglect only pauses the bonus, never
+      harms the Pokemon.
+- [ ] Re-check the care-action values and `COMPANION_CONTENT_THRESHOLD` — a
+      smaller drain may make the care loop trivial.
+
+Relevant code: `src/game/companion.js` (`COMPANION_DECAY_PER_WIN`,
+`tickCompanion`), `src/game/reducer/battle/events.js` (the wild-win handler that
+calls `tickCompanion`).
+
+Effort: **small**.
+
+## 59. Galarian birds should be raid legendaries
+
+`g-articuno`, `g-zapdos` and `g-moltres` are legendary Pokemon, but
+`pokemon-species.json` never sets their `legendary` flag, so the raid scan files
+them in Galar's `raidOrdinaryPool` (the ordinary, capped pool) instead of
+`raidPool` (the legendary bosses). Flag them and move them back.
+
+- [ ] Add `"legendary": true` to `g-articuno` / `g-zapdos` / `g-moltres` in
+      `public/data/pokemon-species.json`.
+- [ ] Re-run the raid scan, or patch `public/data/regions.json` (Galar) directly
+      with an `apply-*.cjs` script, since the committed data isn't idempotent
+      with the generator — moving them out of `raidOrdinaryPool` and into
+      `raidPool`.
+- [ ] Confirm `tools/validate-data.cjs` still passes and the ordinary-pool cap
+      isn't silently refilled by another species.
+
+Relevant code: `public/data/pokemon-species.json`, `public/data/regions.json`
+(Galar), `tools/generate-regions.cjs` (`raidCandidates`, `staysInRaidPool`,
+`raidPoolSpecies`), `tools/validate-data.cjs`.
 
 Effort: **small**.
 

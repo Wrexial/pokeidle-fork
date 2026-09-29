@@ -101,12 +101,14 @@ renumbered, so the gaps below are items that shipped.
     the strong type bias and narrow pools mean the same few species repeat; let
     trainers field every level-appropriate Pokemon so the Pokedex "seen" fills
     in.
+31. **#69 Forced-shiny Gyarados at the Lake of Rage** — S–M · ★★ — the
+    canonical red Gyarados as a one-off guaranteed-shiny Johto static.
 
 ### Tier 3 — Big / low-return, defer
 
-31. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
+32. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
     route-based field effects.
-32. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+33. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
 ---
@@ -245,7 +247,8 @@ Mt. Silver).
       their own species lists so they don't drag a whole generation slice in.
       Note: the committed `public/data` isn't currently idempotent with the
       generator, so a data-only pass needs an `apply-*.cjs` script (as the other
-      generators' follow-ups do) rather than a full re-run.
+      generators' follow-ups do) rather than a full re-run. (The Lake of Rage is
+      one such missing Johto area — see #69.)
 - [ ] Consider a real `type` / `areaType` field (cave, forest, sea, ruins, …)
       instead of the current binary town-vs-route; `location-panel.js` labels
       everything non-town as "Route 🌿", and the battle background comes from
@@ -916,6 +919,35 @@ Relevant code: `tools/generate-regions.cjs` (`buildTeam`,
 (`src/game/reducer/collection.js`).
 
 Effort: **medium** (generator tuning plus regenerating trainer data).
+
+## 69. Forced-shiny Gyarados at the Lake of Rage (Johto)
+
+Add the canonical red Gyarados: a one-off Johto static encounter that is
+**always shiny**. Today `StaticEncounter` has no shiny flag and
+`startStaticEncounter` builds the enemy with
+`createBattlePokemon(speciesKey, level, { wild: true })`, so every static rolls
+ordinary shiny odds.
+
+- [ ] Add the Lake of Rage location — it is not in the scraped Johto map
+      (`EXTRA_MAP_AREAS` / the map generator; see #28b) — or attach the
+      encounter to the nearest existing route.
+- [ ] Add an `isShiny` / `shiny: true` field to `StaticEncounter` and pass it
+      through `startStaticEncounter` into
+      `createBattlePokemon(..., { wild: true, isShiny: true })`.
+- [ ] Add the Gyarados static (~Lv.30), gated after the Lake of Rage / Team
+      Rocket event (or the Mahogany Town gym).
+- [ ] Confirm `shinySeen` / `shinyCaught` register — the catch path already
+      keys off `enemy.isShiny`, so no extra work beyond the flag.
+- [ ] Decide whether the encounter is truly one-off or reappears until caught,
+      and whether it should scale with region prestige.
+
+Relevant code: `src/game/gifts.js` (`STATIC_ENCOUNTERS` / `StaticEncounter`),
+`src/game/reducer/gifts.js` (`startStaticEncounter`),
+`src/game/combat/setup.js` (`createBattlePokemon`),
+`public/data/map-data/johto.json`, and `tools/generate-regions.cjs`
+(`EXTRA_MAP_AREAS`).
+
+Effort: **small–medium** (the static is small; the Lake of Rage area is data).
 
 ---
 

@@ -108,12 +108,14 @@ renumbered, so the gaps below are items that shipped.
     with a visual phase and time-gated effects.
 33. **#71 Beldum gift in Mossdeep City** — S · ★ — Steven's post-Champion
     Beldum gift, matching the other regional one-off gifts.
+34. **#72 Slakoth on Route 102** — S · ★ — add the missing Slakoth base form to
+    Hoenn Route 102's wild table.
 
 ### Tier 3 — Big / low-return, defer
 
-34. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
+35. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
     route-based field effects.
-35. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+36. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
 ---
@@ -1005,6 +1007,28 @@ evolving the Metagross sitting in Hoenn's `raidOrdinaryPool` / refuge (#61).
 Relevant code: `src/game/gifts.js` (`GIFTS`, `entryRequirementStatus`),
 `src/game/reducer/gifts.js` (`claimGift`), `src/components/gift-panel.js`, and
 `public/data/map-data/hoenn.json`.
+
+Effort: **small**.
+
+## 72. Slakoth on Route 102
+
+Add Slakoth to Hoenn Route 102's wild encounter table. The line has no wild base
+form today: Hoenn's `raidOrdinaryPool` carries the final evolution, Slaking (as a
+one-off refuge static — #61), while Route 102's bucket (`hoenn-route-102`) holds
+Magikarp, Corphish, Marill, Zigzagoon, Goldeen, Lotad, Seedot, Poochyena,
+Wurmple and Ralts, with no Slakoth.
+
+- [ ] Add a low-weight Slakoth entry to
+      `public/data/encounter-data/hoenn.json` → `hoenn-route-102`, using the
+      route's level band (Lv. 7–9).
+- [ ] Decide whether it is a rare (low weight) find and regenerate
+      `public/encounter-index.html` (`tools/generate-encounter-index.cjs`).
+- [ ] Reconcile with #61: once Slakoth is wild, the refuge Slaking is no longer
+      the line's only entry.
+
+Relevant code: `public/data/encounter-data/hoenn.json`,
+`public/data/map-data/hoenn.json`, `public/data/regions.json`
+(`raidOrdinaryPool`), and `tools/generate-encounter-index.cjs`.
 
 Effort: **small**.
 

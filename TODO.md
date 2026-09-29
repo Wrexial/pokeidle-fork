@@ -85,12 +85,15 @@ renumbered, so the gaps below are items that shipped.
     prize Pokemon each time it completes.
 25. **#63 Johto Togepi egg gift** — S · ★ — hand the canonical Togepi egg from
     Mr. Pokémon on Route 30, not the Kanto Game Corner.
+26. **#64 Whack-a-Diglett difficulty ramp + Dugtrio** — S · ★½ — speed the
+    round up as the timer runs down, and add a rare Dugtrio worth bonus
+    points.
 
 ### Tier 3 — Big / low-return, defer
 
-26. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
+27. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
     route-based field effects.
-27. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+28. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
 ---
@@ -749,6 +752,31 @@ source instead of the Kanto Game Corner.
 Relevant code: `src/game/gifts.js`, `src/game/reducer/gifts.js`,
 `src/game/reducer/pokemon/daycare.js` (`createEgg`),
 `src/components/gift-panel.js`, and `public/data/map-data/johto.json`.
+
+Effort: **small**.
+
+## 64. Whack-a-Diglett: difficulty ramp + Dugtrio jackpot
+
+The Kanto Whack-a-Diglett round is fixed difficulty today: targets stay up for
+`WHACK_POP_MS` (850ms) for the whole 20s, and the only targets are Diglett
+(+1) and Zubat (−1). Make it ramp over the round and add a rare Dugtrio bonus.
+
+- [ ] Ramp difficulty as the timer runs down — shrink the pop-up duration and /
+      or the spawn gap (e.g. a `whackPopupMs(elapsed)` helper), so it starts
+      easy and ends fast.
+- [ ] Add a rare **Dugtrio** target worth more points (e.g. +5) with its own
+      low spawn weight and sprite; consider making it stay up longer or award
+      a small combo.
+- [ ] Keep the existing prize thresholds (12 / 20 / 30) meaningful against the
+      ramp, or retune them.
+- [ ] Show the ramp / bonus in `whack-scene.js` (a Dugtrio sprite, maybe a
+      "speeding up" cue).
+- [ ] Keep the Zubat penalty meaningful as the targets get faster.
+
+Relevant code: `src/game/minigames/whack.js` (`WHACK_POP_MS`,
+`WHACK_TARGETS`, `rollWhackTarget`, `whackPrize`),
+`src/components/whack-scene.js` (`WHACK_SPECIES`), and
+`src/game/minigames/registry.js`.
 
 Effort: **small**.
 

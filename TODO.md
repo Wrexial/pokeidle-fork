@@ -106,12 +106,14 @@ renumbered, so the gaps below are items that shipped.
 32. **#70 Day/night cycle on a 60-minute clock** — M · ★★ — a fixed
     real-time cycle (full day = 60 min) replacing the wall-clock night flag,
     with a visual phase and time-gated effects.
+33. **#71 Beldum gift in Mossdeep City** — S · ★ — Steven's post-Champion
+    Beldum gift, matching the other regional one-off gifts.
 
 ### Tier 3 — Big / low-return, defer
 
-33. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
+34. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
     route-based field effects.
-34. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+35. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
 ---
@@ -983,6 +985,28 @@ Relevant code: `src/game/catching.js` (`isNightTime`, `catchContext`),
 `src/data/ui.js` (backgrounds / tints).
 
 Effort: **medium** (the logic is small; the visual pass is the work).
+
+## 71. Beldum gift in Mossdeep City (post-Champion)
+
+Add Steven's canonical gift: after beating the Hoenn Champion, his house in
+Mossdeep City hands over a Beldum. `hoenn-mossdeep-city` already exists in the
+map data and `GIFTS` already supports a `requires: { champion: <regionId> }`
+gate, so this is a straightforward entry — Beldum is otherwise reachable only by
+evolving the Metagross sitting in Hoenn's `raidOrdinaryPool` / refuge (#61).
+
+- [ ] Add a `GIFTS` entry at `hoenn-mossdeep-city` with
+      `pokemon: { speciesKey: 'beldum', level: 5 }` (canonical Lv. 5) and
+      `requires: { champion: 'hoenn' }`.
+- [ ] Write the name / description (Steven's house) and the reward label.
+- [ ] Decide whether Metagross stays as the refuge / raid source or this gift
+      becomes the line's entry point (reconcile with #61).
+- [ ] Optionally give it its own gift-panel flavour / sprite.
+
+Relevant code: `src/game/gifts.js` (`GIFTS`, `entryRequirementStatus`),
+`src/game/reducer/gifts.js` (`claimGift`), `src/components/gift-panel.js`, and
+`public/data/map-data/hoenn.json`.
+
+Effort: **small**.
 
 ---
 

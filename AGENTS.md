@@ -36,8 +36,10 @@ trust HMR — stop the server (Ctrl-C) and run `npm run kill-vite` (dry run with
 
 There is **no linter**. `npm run typecheck` runs the TypeScript compiler in
 JS-checking mode (`jsconfig.json` + `@types/react`) and should stay clean; fix
-it or add JSDoc rather than ignoring errors. `npm run validate` integrity-checks
-the generated JSON (every species has moves and is obtainable, teams/encounters
+it or add JSDoc rather than ignoring errors. `npm run validate`
+(`tools/validate-data.mjs`) integrity-checks the generated JSON (every species
+has moves and is obtainable — counting wild encounters, gifts, the Game Corner /
+Bug Catching Contest, fossil revives, breeding and evolutions — teams/encounters
 reference real species, the map graph is sound, etc.) and should stay clean
 after any data regeneration. `npm test` runs the lightweight `node --test`
 suite (see below). Verify behaviour by running the dev server and exercising
@@ -45,13 +47,14 @@ the game in the browser.
 
 **Tests (`tests/`):** `npm test` runs `node --test "tests/**/*.test.mjs"`.
 Files are plain `.mjs` using `node:test`, kept out of the TypeScript project.
-The shared `tests/helpers/game-data.mjs` loads `public/data` (merging the
+The shared loader `tools/lib/game-data.mjs` loads `public/data` (merging the
 split per-region files) into `window.gameDataInjector` so `src/` modules can be
-`import()`ed in Node. Because `src/data/gameData.js` reads those globals during
-its own top-level evaluation, a test must call `installGameData()` and then
-`await import(...)` the modules under test (never a static import). Cover
-reducer/combat/breeding/unlock invariants and keep them deterministic (stub
-`Math.random` where needed).
+`import()`ed in Node; `tests/helpers/game-data.mjs` re-exports it and
+`tools/validate-data.mjs` uses it for the gift / minigame source tables. Because
+`src/data/gameData.js` reads those globals during its own top-level evaluation,
+a test must call `installGameData()` and then `await import(...)` the modules
+under test (never a static import). Cover reducer/combat/breeding/unlock
+invariants and keep them deterministic (stub `Math.random` where needed).
 
 **Save recovery:** an incompatible/stuck save self-heals without DevTools.
 There are up to `SAVE_SLOT_COUNT` (3) independent save slots. Slot 1 uses the
@@ -201,7 +204,7 @@ in `GameLayout`) dispatches `DEBUG_MAX_LEVEL` when the Konami code
 | `public/heal-animation-web.mp4` | Healing animation. |
 | `ui/` | UI textures (parchment, wood button). |
 | `tools/` | One-off scrapers/converters for generating the data JSON, plus `tools/decompile/` (AST rename tool). Not part of the build. |
-| `tests/` | `node --test` suite (`npm test`); `tests/helpers/game-data.mjs` loads `public/data` for headless module tests. |
+| `tests/` | `node --test` suite (`npm test`); `tests/helpers/game-data.mjs` (re-exporting `tools/lib/game-data.mjs`) loads `public/data` for headless module tests. |
 | `dist/` | Build output. Gitignored — never edit or commit. |
 
 ## Data files (`public/data/`)
@@ -648,7 +651,7 @@ One-off scripts used to build the data JSON (not run during dev/build):
   transforms). Idempotent (`--dry`); obsolete once the generator's
   `plausibleEncounters` pass and `buildTeam` filter regenerate the data.
 - `lib/evolution-levels.cjs` — shared `buildEvolutionLevels` / `stageForLevel`
-  helpers (also used by `validate-data.cjs` and the impossible-levels test).
+  helpers (also used by `validate-data.mjs` and the impossible-levels test).
 - `enforce-zone-chains.cjs` — adds the `requires: [hub, previous sub-area]`
   chain to the committed zone sub-areas so they unlock in order behind the hub
   (the generator does it in its final pass). Idempotent (`--dry`).

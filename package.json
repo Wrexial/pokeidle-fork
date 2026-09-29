@@ -10,7 +10,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "typecheck": "tsc -p jsconfig.json",
-    "validate": "node tools/validate-data.cjs",
+    "validate": "node tools/validate-data.mjs",
     "test": "node --test \"tests/**/*.test.mjs\"",
     "kill-vite": "node tools/kill-vite.cjs"
   },

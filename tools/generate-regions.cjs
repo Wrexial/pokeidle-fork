@@ -2275,24 +2275,20 @@ for (const adds of Object.values(REGION_ROUTE_ADDS)) {
 // The ordinary finals the Raid Islands used to carry now appear as rare wild
 // entries on routes that suit them, so the island stays legendary-only without
 // stranding species on one-off refuge statics. The base stages are placed, not
-// the finals, so the whole evolution chain stays native and repeatable.
+// the finals, so the whole evolution chain stays native and repeatable. Baby
+// lines and species with a canonical gift / minigame source (Togepi, Cleffa,
+// Smoochum, Magby, Beldum, Porygon) are left to breeding and those sources.
 const RAID_FINAL_HABITATS = {
   kanto: { seafoamIslands: [['jynx', 2]] },
   johto: {
-    'johto-route-30': [['togepi', 2]],
     'johto-route-32': [['natu', 3], ['unown', 1]],
-    'johto-route-38': [['cleffa', 2]],
-    'johto-route-44': [['smoochum', 2]],
-    'johto-bell-tower': [['magby', 2]],
   },
   hoenn: {
     'hoenn-route-106': [['mawile', 3]],
-    'hoenn-route-131': [['beldum', 1]],
   },
   sinnoh: {
     'sinnoh-route-205': [['aipom', 2]],
     'sinnoh-route-209': [['spiritomb', 1]],
-    'sinnoh-route-214': [['porygon', 1]],
   },
   unova: {
     'unova-route-3': [['pansage', 2], ['pansear', 2], ['panpour', 2], ['woobat', 2]],

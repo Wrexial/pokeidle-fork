@@ -2,19 +2,35 @@
 /**
  * Data integrity checks for the generated game content.
  *
- * There is no test suite; this is the closest thing. It reads the committed
- * JSON under public/data/ and fails (non-zero exit) on anything that would
- * manifest as a broken Pokedex, encounter, team or map.
+ * This is the closest thing to an integrity test for the committed data. It
+ * reads public/data/ and fails (non-zero exit) on anything that would manifest
+ * as a broken Pokedex, encounter, team or map.
  *
- * Usage: node tools/validate-data.cjs   (or `npm run validate`)
+ * Obtainability is checked against every real source: wild encounters, gifts,
+ * Game Corner / Bug Contest rewards, fossil revives, breeding and evolutions.
+ * The gift / minigame sources are read from the live game modules, so they
+ * cannot drift from the game.
+ *
+ * Usage: node tools/validate-data.mjs   (or `npm run validate`)
  */
-const fs = require('fs')
-const path = require('path')
-const { readRegionDir } = require('./lib/region-data.cjs')
-const { buildEvolutionLevels, stageForLevel } = require('./lib/evolution-levels.cjs')
+import fs from 'node:fs'
+import path from 'node:path'
+import { readRegionDir } from './lib/region-data.cjs'
+import { buildEvolutionLevels } from './lib/evolution-levels.cjs'
+import { installGameData } from './lib/game-data.mjs'
 
-const DATA = path.join(__dirname, '../public/data')
+const DATA = path.join(import.meta.dirname, '../public/data')
 const read = (file) => JSON.parse(fs.readFileSync(path.join(DATA, file), 'utf8'))
+
+// Load the game modules that own the gift / minigame reward tables. The globals
+// must be installed before src/data/gameData.js is imported (it reads them
+// during its own top-level evaluation).
+installGameData()
+const { GIFTS, STATIC_ENCOUNTERS } = await import('../src/game/gifts.js')
+const { GAME_CORNER_PRIZE_POOL } = await import('../src/game/minigames/game-corner.js')
+const { BUG_CONTEST_POOL } = await import('../src/game/minigames/bug-contest.js')
+const { fossilItems } = await import('../src/data/items.js')
+const { regionalStarters } = await import('../src/data/config.js')
 
 const species = read('pokemon-species.json')
 const learnsets = read('possible-learnsets.json')
@@ -57,10 +73,11 @@ for (const [from, evolutions] of Object.entries(evolutionData)) {
 }
 
 // --- obtainability -----------------------------------------------------------
-// The generator seeds every region's first route with its starters, so the
-// encounter tables already contain them. Breeding a breedable species yields the
-// root of its evolution chain, so a species can also be obtained by breeding an
-// obtainable final form (this is why Raid Islands only hand out final stages).
+// A species is obtainable if it turns up in any source below; evolutions and
+// breeding then spread that reachability along the chain.
+//
+// Breeding: a breedable species yields the root of its evolution chain (its
+// baby form), so a baby can be obtained by breeding any obtainable parent.
 const isFormRevert = (from, into) =>
   Number(species[from]?.id) > 1025 &&
   (evolutionData[into] ?? []).some((evolution) => evolution.into === from)
@@ -102,24 +119,23 @@ for (const bucket of Object.values(encounterData))
     if (!speciesKeys.has(encounter.speciesKey)) fail(`encounter uses unknown species ${encounter.speciesKey}`)
     obtainable.add(encounter.speciesKey)
   }
-// Every Bug-type (legendaries included) turns up in the Bug Catching Contest,
-// so those species are obtainable without a Raid Island (as is anything they
-// evolve into). Mirrors the pool in src/game/minigames.js.
-for (const [key, entry] of Object.entries(species))
-  if (entry.id > 0 && entry.id <= 1025 && (entry.types ?? []).includes('Bug'))
-    obtainable.add(key)
+// Gifts and one-off static battles: a fixed Pokemon / Egg, any regional starter
+// a `randomStarter` gift can hand over, or a fixed wild battle
+// (see src/game/gifts.js).
+for (const gift of GIFTS) {
+  if (gift.pokemon) obtainable.add(gift.pokemon.speciesKey)
+  if (gift.egg) obtainable.add(gift.egg.speciesKey)
+  if (gift.randomStarter)
+    for (const key of regionalStarters[gift.randomStarter] ?? []) obtainable.add(key)
+}
+for (const entry of STATIC_ENCOUNTERS) obtainable.add(entry.speciesKey)
+// The Game Corner prize track hands over these Pokemon (game-corner.js).
+for (const prize of GAME_CORNER_PRIZE_POOL) obtainable.add(prize.speciesKey)
+// The Bug Catching Contest can hand out every Bug-type (bug-contest.js).
+for (const bug of BUG_CONTEST_POOL) obtainable.add(bug.speciesKey)
 // Fossil items revive these species at Cinnabar Island (see fossilItems in
-// src/data/items.js). The fossils are handed out by the region gifts and
-// dropped by the Sinnoh Underground, and evolve into their final forms.
-const FOSSIL_SPECIES = [
-  'omanyte', 'kabuto', 'aerodactyl',
-  'lileep', 'anorith',
-  'cranidos', 'shieldon',
-  'tirtouga', 'archen',
-  'tyrunt', 'amaura',
-  'dracozolt', 'arctozolt', 'dracovish', 'arctovish',
-]
-for (const key of FOSSIL_SPECIES) obtainable.add(key)
+// src/data/items.js).
+for (const fossil of Object.values(fossilItems)) obtainable.add(fossil.speciesKey)
 let expanded = true
 while (expanded) {
   expanded = false
@@ -178,7 +194,7 @@ for (const region of regions) {
 // The gendered manifest must match the files on disk, or a female Pokemon would
 // request a sprite that does not exist.
 const genderedSprites = read('gendered-sprites.json')
-const SPRITE_ROOT = path.join(__dirname, '../public/sprites/pokemon')
+const SPRITE_ROOT = path.join(import.meta.dirname, '../public/sprites/pokemon')
 const ANIMATED_ROOT = path.join(SPRITE_ROOT, 'versions/generation-v/black-white/animated')
 const femaleSpriteDirs = {
   front: path.join(SPRITE_ROOT, 'female'),
@@ -200,13 +216,13 @@ for (const [category, dir] of Object.entries(femaleSpriteDirs)) {
 // The shop / auction item sprite manifest must match the files on disk, or a
 // row would request an icon that does not exist.
 const itemIcons = read('item-icons.json')
-const ITEM_SPRITE_ROOT = path.join(__dirname, '../public/sprites/items')
+const ITEM_SPRITE_ROOT = path.join(import.meta.dirname, '../public/sprites/items')
 for (const [itemId, file] of Object.entries(itemIcons))
   if (!fs.existsSync(path.join(ITEM_SPRITE_ROOT, file)))
     fail(`item sprite manifest lists ${itemId} but ${file} is missing`)
 
 for (const [locationId, location] of Object.entries(mapData)) {
-  if (location.background && !fs.existsSync(path.join(__dirname, '../public', location.background)))
+  if (location.background && !fs.existsSync(path.join(import.meta.dirname, '../public', location.background)))
     fail(`location ${locationId} uses missing background ${location.background}`)
   for (const connection of location.connections)
     if (!mapData[connection]) fail(`location ${locationId} connects to unknown ${connection}`)

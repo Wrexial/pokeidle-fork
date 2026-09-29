@@ -8,6 +8,8 @@ installGameData()
 const { breedingCompatibility, canBreed, eggSpeciesKey, genderForPokemon, inheritBreedingTraits, inheritIVs, inheritMoves, inheritNature } = await import(
   '../src/game/breeding.js'
 )
+const { createPokemon } = await import('../src/game/pokemon.js')
+const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 
 /**
  * Minimal Pokemon shape — breeding only reads `speciesKey` and `id`.
@@ -61,6 +63,55 @@ test('eggSpeciesKey returns the mother\u2019s base form', () => {
   const mother = parent('ivysaur', findId('ivysaur', 'female'))
   const father = parent('bulbasaur', findId('bulbasaur', 'male'))
   assert.equal(eggSpeciesKey([mother, father]), 'bulbasaur')
+})
+
+// A baby line is obtained by breeding its evolved parent, so the babies do not
+// need wild encounter tables of their own. `eggSpeciesKey` walks the
+// pre-evolution chain back to the baby.
+test('breeding an evolved parent hatches its baby', () => {
+  const babyLines = {
+    clefairy: 'cleffa',
+    jigglypuff: 'igglybuff',
+    togetic: 'togepi',
+    togekiss: 'togepi',
+    jynx: 'smoochum',
+    magmar: 'magby',
+    marill: 'azurill',
+    wobbuffet: 'wynaut',
+    roselia: 'budew',
+    chimecho: 'chingling',
+    sudowoodo: 'bonsly',
+    chansey: 'happiny',
+    snorlax: 'munchlax',
+    lucario: 'riolu',
+    mantine: 'mantyke',
+    toxtricity: 'toxel',
+    pikachu: 'pichu',
+    electabuzz: 'elekid',
+    hitmonlee: 'tyrogue',
+  }
+  for (const [evolvedParent, baby] of Object.entries(babyLines))
+    assert.equal(
+      eggSpeciesKey([parent('ditto'), parent(evolvedParent)]),
+      baby,
+      `breeding ${evolvedParent} should hatch ${baby}`
+    )
+})
+
+test('the Daycare hatches a baby from an evolved parent', () => {
+  const mother = createPokemon('clefairy', 30, 'daycare-baby-1'),
+    ditto = createPokemon('ditto', 30, 'daycare-baby-2'),
+    state = {
+      ...initialGameState,
+      party: [],
+      box: [mother, ditto],
+      nextPokemonId: 500,
+      daycare: { parents: [mother, ditto], progress: 999 },
+    },
+    hatched = gameReducer(state, { type: 'HATCH_DAYCARE_EGG' }),
+    egg = [...hatched.party, ...hatched.box].find((member) => member.isEgg)
+  assert.ok(egg, 'an egg is produced')
+  assert.equal(egg.speciesKey, 'cleffa')
 })
 
 test('gender-form species have a fixed gender', () => {

@@ -18,7 +18,10 @@ const write = (p, data) => fs.writeFileSync(path.join(DATA, p), JSON.stringify(d
 
 // Where each former raid-only line belongs. Base stages are placed so the
 // evolution chain (and its learnset) stays native and the species is
-// repeatable; the finals then evolve from the route catch.
+// repeatable; the finals then evolve from the route catch. Baby lines and
+// Pokemon with a canonical gift / minigame source (Togepi, Cleffa, Smoochum,
+// Magby, Beldum, Porygon) are deliberately left out: they come from breeding or
+// their gift, so validate-data counts those sources instead.
 /** @type {Record<string, Record<string, [string, number][]>>} */
 const HABITATS = {
   kanto: {
@@ -31,28 +34,16 @@ const HABITATS = {
       ['natu', 3],
       ['unown', 1],
     ],
-    // Togepi near Mr. Pokemon's house, and Cleffa under the moon on the
-    // Miltank-farm plains.
-    'johto-route-30': [['togepi', 2]],
-    'johto-route-38': [['cleffa', 2]],
-    // Smoochum on the Ice Path approach.
-    'johto-route-44': [['smoochum', 2]],
-    // Magby by Ecruteak's towers, where Magmar smoulders.
-    'johto-bell-tower': [['magby', 2]],
   },
   hoenn: {
     // Mawile is a Granite Cave native, reached from Route 106.
     'hoenn-route-106': [['mawile', 3]],
-    // Beldum in the Mossdeep sea lanes (Steven's line stays native).
-    'hoenn-route-131': [['beldum', 1]],
   },
   sinnoh: {
     // Aipom drops out of the honey trees on Route 205.
     'sinnoh-route-205': [['aipom', 2]],
     // Spiritomb still haunts the Hallowed Tower on Route 209.
     'sinnoh-route-209': [['spiritomb', 1]],
-    // Porygon by Veilstone's Game Corner.
-    'sinnoh-route-214': [['porygon', 1]],
   },
   unova: {
     // The elemental monkey trio and Woobat belong to the Striaton / Pinwheel

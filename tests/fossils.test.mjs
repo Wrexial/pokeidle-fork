@@ -7,7 +7,7 @@ installGameData()
 
 const { bagCategories, fossilItems } = await import('../src/data/items.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
-const { mapEncounterData, pokemonSpecies } = await import('../src/data/gameData.js')
+const { encounterData, pokemonSpecies } = await import('../src/data/gameData.js')
 const { createPokemon } = await import('../src/game/pokemon.js')
 const { rewardItemName, rollMiningReward } = await import('../src/game/minigames.js')
 
@@ -40,7 +40,7 @@ test('every fossil maps to a real species and a bag category', () => {
 
 test('fossil finals come from reviving, not wild routes', () => {
   const wild = new Set()
-  for (const bucket of Object.values(mapEncounterData ?? {}))
+  for (const bucket of Object.values(encounterData ?? {}))
     for (const encounter of bucket.encounters ?? []) wild.add(encounter.speciesKey)
   for (const key of FOSSIL_FINALS)
     assert.ok(!wild.has(key), `${key} should be revived, not found in the wild`)

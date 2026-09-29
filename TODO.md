@@ -294,7 +294,7 @@ with no other source (the `raidPool`); the ordinary finals that used to share th
 roster now live on fitting region routes as wild encounters (#61), so the island
 is legendary-only. Any ordinary form still without a route or evolution source
 lands on the island's wild table (not the raid pool) as a safety net.
-`validate-data.cjs` checks that `raidPool` is legendary-only.
+`validate-data.mjs` checks that `raidPool` is legendary-only.
 
 Still open:
 
@@ -306,7 +306,7 @@ Relevant code: `tools/generate-regions.cjs` (`raidCandidates`,
 `RAID_FINAL_HABITATS`, the raid scan), `public/data/regions.json` (`raidPool`),
 `raidPoolFor` / `raidLegendaryPoolFor` (`src/data/gameData.js`),
 `pickRaidLegendary` / `resolveRoamer` (`src/game/progression.js`), the raid UI
-(`src/components/town-map.js`, `location-panel.js`) and `tools/validate-data.cjs`.
+(`src/components/town-map.js`, `location-panel.js`) and `tools/validate-data.mjs`.
 
 Effort: **medium** (mostly balance/data plus the generator; game logic is small).
 
@@ -382,7 +382,7 @@ Relevant code: `tools/generate-regions.cjs` (`LEAGUES`, gym placement,
 `public/data/regions.json` + `gym-leader-data.json` / `elite-4-data.json` /
 `champion-data.json`, `src/components/gym-panel.js`, `src/game/reducer.js`
 (`BOSS_BATTLE_END`, `RESET_ELITE_FOUR`), `src/data/achievements.js`,
-`tools/validate-data.cjs`.
+`tools/validate-data.mjs`.
 
 Effort: **medium** (mostly data + panel copy; the Paldea any-order gate is the
 only real progression change).
@@ -505,7 +505,7 @@ route/unlock graph.
       (`tools/generate-regions.cjs`) or they are hand-placed on the committed
       data with an `apply-*.cjs` script (the data isn't idempotent with the
       generator).
-- [ ] Re-check `tools/validate-data.cjs` for the new rule shape.
+- [ ] Re-check `tools/validate-data.mjs` for the new rule shape.
 
 Relevant code: `src/game/progression/unlocks.js` (`computeUnlockedLocations`),
 `src/components/location-panel.js` (`unlockRequirements`),
@@ -532,7 +532,7 @@ missing, so the set can't be completed.
       static / animated fallbacks (`animated-sprites.json`).
 - [ ] Decide how the forms read in the UI (names / dex entries) and whether the
       puzzle tracks which forms the player still needs.
-- [ ] Update `tools/validate-data.cjs` (every species obtainable) once the
+- [ ] Update `tools/validate-data.mjs` (every species obtainable) once the
       puzzle is their source, and make sure the raid-pool / form placement
       (`FORM_RAID_REGION`) doesn't strand or duplicate them.
 
@@ -540,7 +540,7 @@ Relevant code: `src/game/minigames/sliding-puzzle.js`,
 `src/components/ruins-puzzle-scene.js`, `src/game/reducer/minigames.js`
 (`slidingPrize` payout / `claimMinigameReward`),
 `public/data/pokemon-species.json`, `tools/fix_pokemon_ids.py`,
-`tools/download_pokemon_sprites.cjs`, and `tools/validate-data.cjs`.
+`tools/download_pokemon_sprites.cjs`, and `tools/validate-data.mjs`.
 
 Effort: **medium** (mostly the 28 form entries + art; the award itself is small).
 
@@ -549,29 +549,32 @@ Effort: **medium** (mostly the 28 form entries + art; the award itself is small)
 Breeding already hatches the baby from its catchable evolved parent — verified
 Lucario→Riolu, Toxtricity→Toxel, Clefairy→Cleffa, Jynx→Smoochum, Magmar→Magby,
 Togetic→Togepi and Snorlax→Munchlax — because `eggSpeciesKey` walks the
-pre-evolution chain. But several baby Pokemon are instead handed out as one-off
-gift/static rewards, so the Daycare is never needed: Riolu (Tower of Mastery,
-Kalos), Toxel (Rose Tower Nursery, Galar), Johto's refuge statics Cleffa /
-Togepi / Smoochum / Magby, and the Sinnoh Munchlax static.
+pre-evolution chain, and `tools/validate-data.mjs` now counts breeding as an
+obtainability source. The former raid-refugee babies (Cleffa / Smoochum / Magby)
+are no longer planted in the wild; they hatch from their wild evolved parents
+(Clefairy, Jynx, Magmar), and Togepi comes from Mr. Pokemon's canonical Egg.
 
-- [ ] Confirm each baby's evolved form is actually obtainable (wild route, raid
-      or another gift) so breeding can start. Several are not: Lucario,
-      Toxtricity and Togetic appear on no route or raid table, so those lines
-      are gift-only today — give the evolved form a real source.
-- [ ] Remove (or repoint) the baby gift/static entries in `src/game/gifts.js`
-      once breeding covers them.
+Remaining: a few babies are still handed out as one-off gift/static rewards
+(Riolu at the Tower of Mastery, Toxel at the Rose Tower Nursery, and the Sinnoh
+Munchlax static), and the Incense lines are simplified, not modelled.
+
+- [ ] Confirm each remaining baby's evolved form is actually obtainable (wild
+      route, raid or another gift) so breeding can start. Riolu and Toxel are
+      wild in Kalos/Galar already; Lucario and Toxtricity also appear on no
+      route or raid table, so those lines are gift-only today — give the evolved
+      form a real source.
+- [ ] Remove (or repoint) the remaining baby gift/static entries in
+      `src/game/gifts.js` once breeding covers them.
 - [ ] Decide the Incense question: canonically Snorlax→Munchlax,
       Roselia→Budew, Chimecho→Chingling, Sudowoodo→Bonsly, Mr. Mime→Mime Jr.,
       Chansey→Happiny, Mantine→Mantyke and Wobbuffet→Wynaut need a held Incense.
       Either model the items or keep the current simplify (always hatch the
       baby).
-- [ ] Re-check obtainability in `tools/validate-data.cjs` and reconcile with
-      the refuge/raid plumbing (#61) and the canonical Togepi egg (#63).
 
 Relevant code: `src/game/breeding.js` (`eggSpeciesKey`),
 `src/game/pokemon/evolution.js` (`getPreEvolutionChain`),
 `src/data/gameData.js` (`preEvolutionMap`), `src/game/gifts.js`,
-`public/data/breeding-data.json`, and `tools/validate-data.cjs`.
+`public/data/breeding-data.json`, and `tools/validate-data.mjs`.
 
 Effort: **medium** (mostly sourcing the evolved forms and removing the gifts).
 

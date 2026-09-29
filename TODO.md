@@ -27,86 +27,75 @@ renumbered, so the gaps below are items that shipped.
    a schedule (5, 10, 15, ...) instead of only nudged odds.
 4. **#53 IV increment items** — S–M · ★★ — Bottle-Cap-style items that raise
    IVs, handed out as rewards somewhere.
-5. **#57 Protection / immunity move visuals** — S · ★ — moves that grant
-   immunity (Protect, Detect, King's Shield, Spiky Shield, Baneful Bunker, ...)
-   should show a visible shield / "it protected itself" effect when they block.
 ### Tier 2 — High impact, worth the effort (medium–large)
 
-6. **#28 More region areas (caves, POIs, DLC land)** — L · ★★★★½ — real
+5. **#28 More region areas (caves, POIs, DLC land)** — L · ★★★★½ — real
    content; data-heavy. Started: the POI marker model shipped with the Day-Care
    as the first POI (28c), and the DLC areas are in as zones (28a); ordinary
    caves/forests (28b) and more POIs remain. Pairs with #36/#39.
-7. **#24 Move data pass** — M · ★★★ — ally/faint heals, context move-calling,
+6. **#24 Move data pass** — M · ★★★ — ally/faint heals, context move-calling,
    the doubles-only moves, and decisions on unused PP / dead Z-Max data.
-8. **#56 Multi-effect move pass** — M · ★★★ — audit moves with more than one
+7. **#56 Multi-effect move pass** — M · ★★★ — audit moves with more than one
     effect (Hyper Beam / Giga Impact recharge, Bite / flinch moves, stat-drop
     secondaries, ...) and implement the missing half-effects; quite a few only
     do part of what they should.
-9. **#25 Battle engine pass** — M–L · ★★★ — ally/doubles abilities, a few
+8. **#25 Battle engine pass** — M–L · ★★★ — ally/doubles abilities, a few
     complex singles ones, item nuances and battle polish (animations / damage
     numbers).
-10. **#50 Fossil & fossil-revive system** — M · ★★★ — one fossil item per region
+9. **#50 Fossil & fossil-revive system** — M · ★★★ — one fossil item per region
     (handed out as a gift instead of the Pokemon), revived at Cinnabar Island,
     with more fossils from the Sinnoh Underground.
-11. **#36 Zones (route chunks)** — M–L · ★★★★ — the model is in; more
+10. **#36 Zones (route chunks)** — M–L · ★★★★ — the model is in; more
     sub-areas, a distinct zone glyph and inline per-sub-area encounter grids.
-12. **#40 Alola / Galar / Paldea league structures** — M · ★★★½ — the
+11. **#40 Alola / Galar / Paldea league structures** — M · ★★★½ — the
     data-driven model is in; Alola's full trial track, Galar's post-game
     tournament and Paldea's Titans / Team Star remain.
-13. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of Armor,
+12. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of Armor,
     Crown Tundra, Kitakami and the Terarium to first-class regions.
-14. **#54 Improve Dynamax Adventures and Battle Royal** — M · ★★½ — both are
+13. **#54 Improve Dynamax Adventures and Battle Royal** — M · ★★½ — both are
     minimal loops today; make them feel like real modes with real rewards.
-15. **#29 Companion minigame polish** — S · ★★ — an animated buddy panel /
+14. **#29 Companion minigame polish** — S · ★★ — an animated buddy panel /
     petting scene (the last open minigame idea).
-16. **#18 Better settings** — M · ★★★ — sprite-style options, account controls
+15. **#18 Better settings** — M · ★★★ — sprite-style options, account controls
     (blocked on #19) and finishing the Gameplay section.
-17. **#38 Clean up the Raid Islands** — M · ★★½ — weight / level-gate the
+16. **#38 Clean up the Raid Islands** — M · ★★½ — weight / level-gate the
     legendary pick and (optionally) shrink Unova's ordinary pool.
-18. **#43 Multi-battles (double / triple / rotation) as a minigame** — M–L ·
+17. **#43 Multi-battles (double / triple / rotation) as a minigame** — M–L ·
     ★★½ — a self-contained minigame that reuses the combat pipeline.
-19. **#30 Caught / event QOL indicators** — S · ★ — flag the battle sprite;
+18. **#30 Caught / event QOL indicators** — S · ★ — flag the battle sprite;
     decide whether raids show the caught badge.
-20. **#60 Areas should have their own zoomed-in map** — M · ★★ — zones and
+19. **#60 Areas should have their own zoomed-in map** — M · ★★ — zones and
     large areas list their sub-areas in the panel only; give them a focused
     map view entered from the Town Map, with a back button to exit.
-21. **#61 Former raid gifts onto real routes** — M · ★★ — the ordinary Raid
+20. **#61 Former raid gifts onto real routes** — M · ★★ — the ordinary Raid
     Island finals became one-off refuge statics on each region's last route;
     place them on routes that suit them as part of the encounter table.
-22. **#62 Game Corner prize track (Scyther / Dratini / Porygon)** — S–M · ★★ —
-    a bar that fills per three-of-a-kind and hands out a random Game Corner
-    prize Pokemon each time it completes.
-23. **#63 Johto Togepi egg gift** — S · ★ — hand the canonical Togepi egg from
-    Mr. Pokémon on Route 30, not the Kanto Game Corner.
-24. **#64 Whack-a-Diglett difficulty ramp + Dugtrio** — S · ★½ — speed the
-    round up as the timer runs down, and add a rare Dugtrio worth bonus
-    points.
-25. **#65 Use minigames as unlock gates** — M · ★★ — let a route require
+21. **#65 Use minigames as unlock gates** — M · ★★ — let a route require
     clearing a minigame (or hitting a score) instead of only battles / badges /
     catches, so the minigames feed progression.
-26. **#66 Ruins of Alph should award an Unown (and all 28 forms)** — M · ★★ —
+22. **#66 Ruins of Alph should award an Unown (and all 28 forms)** — M · ★★ —
     the sliding puzzle never gives an Unown, and only one Unown form exists;
     award one and add the full letter / punctuation set.
-27. **#67 Baby Pokemon from breeding, not gifts** — M · ★★ — the Daycare can
+23. **#67 Baby Pokemon from breeding, not gifts** — M · ★★ — the Daycare can
     already hatch babies from their evolved forms; stop handing the babies out
     as gift/static rewards and give their evolved forms a real source.
-28. **#68 Trainer teams should use all level-appropriate Pokemon** — M · ★★ —
+24. **#68 Trainer teams should use all level-appropriate Pokemon** — M · ★★ —
     the strong type bias and narrow pools mean the same few species repeat; let
     trainers field every level-appropriate Pokemon so the Pokedex "seen" fills
     in.
-29. **#69 Forced-shiny Gyarados at the Lake of Rage** — S–M · ★★ — the
+25. **#69 Forced-shiny Gyarados at the Lake of Rage** — S–M · ★★ — the
     canonical red Gyarados as a one-off guaranteed-shiny Johto static.
-30. **#70 Day/night cycle on a 60-minute clock** — M · ★★ — a fixed
+26. **#70 Day/night cycle on a 60-minute clock** — M · ★★ — a fixed
     real-time cycle (full day = 60 min) replacing the wall-clock night flag,
     with a visual phase and time-gated effects.
-31. **#73 Clickable routes in Pokedex & notifications** — S–M · ★ — let the
+27. **#73 Clickable routes in Pokedex & notifications** — S–M · ★ — let the
     route names the Pokedex and toasts show open the Town Map / travel there.
 
 ### Tier 3 — Big / low-return, defer
 
-32. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
+28. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
     route-based field effects.
-33. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+29. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
 ---
@@ -593,21 +582,6 @@ Likely touch points: `src/data/move-effects.js`, `src/game/combat/` (`turn.js`,
 `status.js`, `effects`), and `public/reference.html` (regenerate).
 
 Effort: **medium**.
-
-## 57. Protection / immunity moves should show something
-
-Moves that grant immunity — Protect, Detect, King's Shield, Spiky Shield,
-Baneful Bunker, Obstruct, Silk Trap, Burning Bulwark, Crafty Shield, Quick
-Guard, Wide Guard — currently block silently. Give them visual feedback:
-
-- [ ] Draw a shield / barrier overlay on the protected battler while it is up.
-- [ ] Show a "blocked!" flash / callout when a move is stopped.
-- [ ] Distinguish a successful protect from a failed repeat ("But it failed!").
-
-Likely touch points: `src/components/battle-scene.js` (overlay + callout),
-`assets/style.css`, and the `protected` volatile in the combat engine.
-
-Effort: **small**.
 ## 60. Areas should have their own zoomed-in map
 
 Today a zone / large area (Galar's Wild Area, Alola's islands, Paldea's
@@ -670,85 +644,6 @@ Relevant code: `public/data/encounter-data/*.json`, `public/data/regions.json`,
 `tests/raid.test.mjs`, and the raid scan in `tools/generate-regions.cjs`.
 
 Effort: **medium** (data-heavy: one habitat decision per species).
-
-## 62. Game Corner prize track (Scyther / Dratini / Porygon)
-
-The Kanto Game Corner slots only pay money today. Add a **prize track**
-beside the reels: a progress bar that fills whenever the player lands a
-three-of-a-kind (any symbol), granting a Pokemon reward each time it completes.
-(The Johto Togepi egg is a separate gift — see #63.)
-
-- [ ] Count every winning line (any symbol) toward the bar, and persist the
-      counter in the save.
-- [ ] Fill the bar over **20** three-of-a-kinds, then reset it and grant one
-      random Game Corner prize.
-- [ ] Reward pool: Scyther / Dratini / Porygon at an appropriate level (roughly
-      Lv.15–25); decide the exact levels.
-- [ ] Draw the bar on the side of the slot scene with a small prize legend and
-      a "bar filled" callout.
-- [ ] Decide whether each prize can be won repeatedly and how duplicates are
-      handled (probably fine: extra copies go to the box).
-- [ ] Push the Pokemon into the party or box with the existing creation
-      helpers (`createPokemon`).
-- [ ] Add the counter to `initialGameState`, the save shape
-      (`SAVED_STATE_KEYS`) and `src/types.d.ts`.
-
-Relevant code: `src/game/minigames/game-corner.js`,
-`src/components/game-corner-scene.js`, `src/game/reducer/minigames.js` (the
-`gameCorner` phase handlers), `src/game/pokemon/creation.js`, and the
-save/state plumbing.
-
-Effort: **small–medium**.
-
-## 63. Johto Togepi egg gift (Mr. Pokémon)
-
-Canonically the player receives the Togepi egg in Johto, from Mr. Pokémon's
-house on Route 30. Add it as a one-off Johto gift so Togepi comes from its real
-source instead of the Kanto Game Corner.
-
-- [ ] Add a gift on `johto-route-30` (Mr. Pokémon) that hands over a Togepi
-      **egg**, gated appropriately (after the first Johto gym, or as a
-      follow-up to the starter errand).
-- [ ] `GIFTS` (`src/game/gifts.js`) only supports an immediate `pokemon` today;
-      add an `egg` gift field and route it through `createEgg` / the
-      egg-into-party-or-box path (`reducer/pokemon/daycare.js`) instead of
-      `catchPokemon`.
-- [ ] Teach `giftRewardLabel` and `gift-panel.js` to display the egg reward.
-- [ ] Decide whether the egg counts as caught immediately or only on hatch.
-- [ ] Reconcile with #61: Togepi is in Johto's `raidOrdinaryPool`, so this gift
-      (or a fitting Route 30 encounter) is its real source.
-
-Relevant code: `src/game/gifts.js`, `src/game/reducer/gifts.js`,
-`src/game/reducer/pokemon/daycare.js` (`createEgg`),
-`src/components/gift-panel.js`, and `public/data/map-data/johto.json`.
-
-Effort: **small**.
-
-## 64. Whack-a-Diglett: difficulty ramp + Dugtrio jackpot
-
-The Kanto Whack-a-Diglett round is fixed difficulty today: targets stay up for
-`WHACK_POP_MS` (850ms) for the whole 20s, and the only targets are Diglett
-(+1) and Zubat (−1). Make it ramp over the round and add a rare Dugtrio bonus.
-
-- [ ] Ramp difficulty as the timer runs down — shrink the pop-up duration and /
-      or the spawn gap (e.g. a `whackPopupMs(elapsed)` helper), so it starts
-      easy and ends fast.
-- [ ] Add a rare **Dugtrio** target worth more points (e.g. +5) with its own
-      low spawn weight and sprite; consider making it stay up longer or award
-      a small combo.
-- [ ] Keep the existing prize thresholds (12 / 20 / 30) meaningful against the
-      ramp, or retune them.
-- [ ] Show the ramp / bonus in `whack-scene.js` (a Dugtrio sprite, maybe a
-      "speeding up" cue).
-- [ ] Keep the Zubat penalty meaningful as the targets get faster.
-
-Relevant code: `src/game/minigames/whack.js` (`WHACK_POP_MS`,
-`WHACK_TARGETS`, `rollWhackTarget`, `whackPrize`),
-`src/components/whack-scene.js` (`WHACK_SPECIES`), and
-`src/game/minigames/registry.js`.
-
-Effort: **small**.
-
 ## 65. Use minigames as unlock gates
 
 Location unlocks are built entirely from battles won, catches, badges, gyms,

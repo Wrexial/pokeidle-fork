@@ -240,6 +240,8 @@ type VolatileState = {
   leechSeeded?: boolean
   /** Focus Sash / berry consumed for this battle. */
   heldItemUsed?: boolean
+  /** Consecutive turns the battler has used a Protect-style move. */
+  protectChain?: number
   /** Turns of Taunt left (0 when not taunted). */
   tauntTurns?: number
   /** Turns of Heal Block left (0 when healing freely). */
@@ -484,6 +486,8 @@ type GameState = {
   daycare: { parents: Pokemon[]; progress: number }
   /** The pinned companion and its care stats (see game/companion.js). */
   companion: Companion
+  /** Winning slot lines banked toward the Game Corner prize track. */
+  gameCornerProgress: number
   /** The Berry Garden plots (see game/garden.js). */
   garden: Garden
   /** Poké Pelago's passive islands (see game/pelago.js). */

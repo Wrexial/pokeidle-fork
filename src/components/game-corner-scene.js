@@ -9,6 +9,7 @@ import { pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { playSfx } from '../game/audio.js'
 import {
+  GAME_CORNER_PRIZE_GOAL,
   SLOT_PAYLINES,
   SLOT_REELS,
   SLOT_ROWS,
@@ -42,6 +43,7 @@ export function GameCornerScene() {
 
   const spinning = spinningReels.some(Boolean),
     canSpin = !spinning && state.money >= SLOT_SPIN_COST,
+    prizeProgress = state.gameCornerProgress ?? 0,
     winningCells = React.useMemo(() => {
       const cells = new Set()
       for (const lineIndex of winningLines)
@@ -111,6 +113,11 @@ export function GameCornerScene() {
             dispatch({
               type: 'CLAIM_MINIGAME_REWARD',
               payload: { money: result.payout, items: [] },
+            })
+          if (result.wins.length > 0)
+            dispatch({
+              type: 'RECORD_GAME_CORNER_WIN',
+              payload: { lines: result.wins.length },
             })
         },
         stopAt[stopAt.length - 1] + 120 / speed
@@ -189,6 +196,26 @@ export function GameCornerScene() {
           jsx('div', {
             className: 'game-corner-result',
             children: message,
+          }),
+          jsxs('div', {
+            className: 'game-corner-track',
+            title: `Win ${GAME_CORNER_PRIZE_GOAL} lines to win a prize Pokemon`,
+            children: [
+              jsx('span', { className: 'game-corner-track-label', children: 'PRIZE' }),
+              jsx('div', {
+                className: 'game-corner-track-bar',
+                children: jsx('div', {
+                  className: 'game-corner-track-fill',
+                  style: {
+                    width: `${Math.min(100, (prizeProgress / GAME_CORNER_PRIZE_GOAL) * 100)}%`,
+                  },
+                }),
+              }),
+              jsx('span', {
+                className: 'game-corner-track-count',
+                children: `${prizeProgress}/${GAME_CORNER_PRIZE_GOAL}`,
+              }),
+            ],
           }),
           jsx('div', {
             className: 'game-corner-table',

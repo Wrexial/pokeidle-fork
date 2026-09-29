@@ -54,7 +54,8 @@ export function GiftPanel({ locationId }) {
     children: [
       jsx('div', { className: 'location-section-title', children: 'People & Places' }),
       gifts.map((gift) => {
-        const reward = giftRewardLabel(gift)
+        const reward = giftRewardLabel(gift),
+          giftSpecies = gift.pokemon ?? gift.egg
         return jsxs(
           'div',
           {
@@ -77,11 +78,11 @@ export function GiftPanel({ locationId }) {
                           )
                         ),
                       })
-                    : gift.pokemon &&
+                    : giftSpecies &&
                       jsx(EntrySprite, {
-                        speciesKey: gift.pokemon.speciesKey,
+                        speciesKey: giftSpecies.speciesKey,
                         alt:
-                          pokemonSpecies[gift.pokemon.speciesKey]?.name ?? gift.pokemon.speciesKey,
+                          pokemonSpecies[giftSpecies.speciesKey]?.name ?? giftSpecies.speciesKey,
                       }),
                   jsxs('div', {
                     className: 'location-gift-text',

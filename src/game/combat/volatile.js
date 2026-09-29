@@ -28,6 +28,8 @@ export function createVolatileState() {
     confusionTurns: 0,
     leechSeeded: !1,
     heldItemUsed: !1,
+    /** Consecutive turns the battler has used a Protect-style move. */
+    protectChain: 0,
     tauntTurns: 0,
     healBlockTurns: 0,
     substituteHp: 0,
@@ -89,6 +91,7 @@ export function volatileStateFromBattle(pokemon) {
     confusionTurns: pokemon.confusionTurns ?? 0,
     leechSeeded: pokemon.leechSeeded ?? !1,
     heldItemUsed: pokemon.heldItemUsed ?? !1,
+    protectChain: pokemon.protectChain ?? 0,
     tauntTurns: pokemon.tauntTurns ?? 0,
     healBlockTurns: pokemon.healBlockTurns ?? 0,
     substituteHp: pokemon.substituteHp ?? 0,

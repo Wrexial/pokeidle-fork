@@ -21,6 +21,7 @@ test('every gift and static is real data on a real location', () => {
     ids.add(gift.id)
     assert.ok(mapData[gift.location], `${gift.id} is on a real location`)
     if (gift.pokemon) assert.ok(pokemonSpecies[gift.pokemon.speciesKey], `${gift.id} species`)
+    if (gift.egg) assert.ok(pokemonSpecies[gift.egg.speciesKey], `${gift.id} egg species`)
     if (gift.randomStarter)
       assert.ok(
         (regionalStarters[gift.randomStarter] ?? []).length > 0,
@@ -96,6 +97,32 @@ test('a Champion gate opens the post-game gift', () => {
   assert.ok(!(locked.claimedGifts ?? []).includes(gift.id), 'locked before the Champion')
   assert.ok((unlocked.claimedGifts ?? []).includes(gift.id), 'open after the Champion')
   assert.ok(member, 'the gift Pokemon joins the squad')
+})
+
+test('the Togepi egg gift adds an Egg to the squad', () => {
+  const gift = GIFTS.find((entry) => entry.egg)
+  if (!gift) return
+  const regionId = mapData[gift.location]?.region ?? 'kanto',
+    badges = gymLeaderData
+      .filter((gym) => (gym.region ?? 'kanto') === regionId)
+      .slice(0, gift.requires?.badges ?? 0)
+      .map((gym) => gym.id),
+    claimed = gameReducer(
+      {
+        ...initialGameState,
+        phase: 'idle',
+        currentLocation: gift.location,
+        party: [],
+        box: [],
+        defeatedGyms: badges,
+      },
+      { type: 'CLAIM_GIFT', payload: { giftId: gift.id } }
+    ),
+    egg = [...claimed.party, ...claimed.box].find((member) => member.isEgg)
+  assert.ok(egg, 'an Egg joins the squad')
+  assert.equal(egg.speciesKey, gift.egg.speciesKey)
+  assert.ok(egg.eggStepsRemaining > 0, 'the Egg still needs hatching')
+  assert.ok(!claimed.pokedexCaught.includes(gift.egg.speciesKey), 'not caught until it hatches')
 })
 
 test('CLAIM_GIFT hands over items once, at the right place', () => {

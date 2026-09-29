@@ -13,6 +13,7 @@ import { isTerminalForm } from '../data/mega-evolution.js'
 import { POKEMON_TYPES } from '../data/moves.js'
 import { COMPANION_MAX_CARE, createCompanionCare } from './companion.js'
 import { GARDEN_BERRIES, createGarden } from './garden.js'
+import { GAME_CORNER_PRIZE_GOAL } from './minigames/game-corner.js'
 import { PELAGO_MAX_READY, PELAGO_SLOTS, createPelago } from './pelago.js'
 import { RODS, rodsForRegionCount } from './minigames.js'
 import { GIFTS, STATIC_ENCOUNTERS } from './gifts.js'
@@ -603,6 +604,10 @@ export function repairSave(saved) {
     quests,
     daycare,
     companion,
+    gameCornerProgress: Math.max(
+      0,
+      Math.floor(Number(saved.gameCornerProgress) || 0) % GAME_CORNER_PRIZE_GOAL
+    ),
     garden,
     pelago,
     shinySeen,
@@ -758,6 +763,7 @@ export const SAVED_STATE_KEYS = [
   'quests',
   'daycare',
   'companion',
+  'gameCornerProgress',
   'garden',
   'pelago',
   'shinySeen',

@@ -376,6 +376,7 @@ export function useGameLoop() {
               confusionTurns: playerVolatile.confusionTurns ?? 0,
               leechSeeded: playerVolatile.leechSeeded ?? !1,
               heldItemUsed: playerVolatile.heldItemUsed ?? !1,
+              protectChain: playerVolatile.protectChain ?? 0,
               tauntTurns: playerVolatile.tauntTurns ?? 0,
               substituteHp: playerVolatile.substituteHp ?? 0,
               infatuated: playerVolatile.infatuated ?? !1,

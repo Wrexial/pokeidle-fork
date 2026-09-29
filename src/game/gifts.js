@@ -13,6 +13,7 @@ import { rewardItemName } from './minigames/mining.js'
  *   id: string, location: string, name: string, description: string,
  *   items?: Record<string, number>, money?: number,
  *   pokemon?: { speciesKey: string, level: number },
+ *   egg?: { speciesKey: string },
  *   randomStarter?: string,
  *   requires?: { badges?: number, champion?: string, caught?: number },
  * }} GiftEntry
@@ -41,6 +42,14 @@ export const GIFTS = [
     name: "Professor Elm's Lab",
     description: 'Elm has a spare Johto starter to give away.',
     randomStarter: 'johto',
+  },
+  {
+    id: 'gift-johto-togepi-egg',
+    location: 'johto-route-30',
+    name: "Mr. Pok\u00e9mon's House",
+    description: 'Mr. Pok\u00e9mon entrusts you with a strange Egg to carry.',
+    egg: { speciesKey: 'togepi' },
+    requires: { badges: 1 },
   },
   {
     id: 'gift-hoenn-castform',
@@ -320,6 +329,8 @@ export function giftRewardLabel(gift) {
   const parts = []
   if (gift.pokemon)
     parts.push(pokemonSpecies[gift.pokemon.speciesKey]?.name ?? gift.pokemon.speciesKey)
+  if (gift.egg)
+    parts.push(`${pokemonSpecies[gift.egg.speciesKey]?.name ?? gift.egg.speciesKey} Egg`)
   if (gift.randomStarter) {
     const regionName =
       regions.find((region) => region.id === gift.randomStarter)?.name ?? gift.randomStarter

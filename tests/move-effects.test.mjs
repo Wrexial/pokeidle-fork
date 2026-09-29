@@ -152,6 +152,47 @@ test('Protect blocks the opponent for the turn', () => {
   })
 })
 
+test('Protect fails on consecutive turns', () => {
+  withZeroRandom(() => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['protect'],
+        speed: 200,
+        currentHp: 400,
+      }),
+      enemy = battler({ name: 'Foe', moves: ['splash'] })
+    const first = resolveBattleTurn(player, enemy, false),
+      firstUse = first.find(
+        (/** @type {any} */ event) => event.type === 'protect' && !event.data?.failed
+      )
+    assert.ok(firstUse, 'the first Protect works')
+    assert.equal(firstUse.data.blocked, false, 'using Protect reports its own side')
+    assert.equal(player.protectChain, 1)
+
+    const second = resolveBattleTurn(player, enemy, false),
+      failed = second.find(
+        (/** @type {any} */ event) => event.type === 'protect' && event.data?.failed
+      )
+    assert.ok(failed, 'the repeat Protect fails')
+    assert.equal(player.protecting, false)
+  })
+})
+
+test('a blocked hit is reported as a block', () => {
+  withZeroRandom(() => {
+    // The foe Protects first, then the player attacks into it.
+    const player = battler({ name: 'Player', isPlayer: true, moves: ['tackle'], speed: 1 }),
+      enemy = battler({ name: 'Foe', moves: ['protect'], speed: 200 })
+    const events = resolveBattleTurn(player, enemy, false),
+      block = events.find(
+        (/** @type {any} */ event) => event.type === 'protect' && event.data?.blocked
+      )
+    assert.ok(block, 'the block is flagged')
+    assert.equal(block.data.target, 'enemy')
+  })
+})
+
 test('Calm Mind raises special stats, not attack and defense', () => {
   withZeroRandom(() => {
     const player = battler({

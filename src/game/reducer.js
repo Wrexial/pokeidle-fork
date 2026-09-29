@@ -13,7 +13,7 @@ import { buyItem, buyRewardItem, clearHeldItem, sellItem, setAlwaysCatchShinies,
 import { blendBerries, careCompanion, harvestBerry, plantBerry, setCompanion } from './reducer/care.js'
 import { assignPelago, collectPelago, dismissPelagoCollect, unassignPelago } from './reducer/pelago.js'
 import { claimGift, startStaticEncounter } from './reducer/gifts.js'
-import { claimMinigameReward, collectMining, endBugContest, endMinigame, endRouteActivity, endSafari, payMinigameFee, startAcademyQuiz, startAuctionHouse, startBattleRoyal, startBugContest, startContest, startCurry, startDynamaxAdventures, startGameCorner, startIceSlide, startLightsOut, startMemory, startMining, startMusical, startPelago, startPicnic, startPokeathlon, startPokeRadar, startPokeballFactory, startPokestar, startPuzzleLeague, startRouteActivity, startRuinsPuzzle, startSafari, startVoltorbFlip, startWhack } from './reducer/minigames.js'
+import { claimMinigameReward, collectMining, endBugContest, endMinigame, endRouteActivity, endSafari, payMinigameFee, recordGameCornerWin, startAcademyQuiz, startAuctionHouse, startBattleRoyal, startBugContest, startContest, startCurry, startDynamaxAdventures, startGameCorner, startIceSlide, startLightsOut, startMemory, startMining, startMusical, startPelago, startPicnic, startPokeathlon, startPokeRadar, startPokeballFactory, startPokestar, startPuzzleLeague, startRouteActivity, startRuinsPuzzle, startSafari, startVoltorbFlip, startWhack } from './reducer/minigames.js'
 import { boxToParty, catchPokemon, clearHatchResult, completeEvolution, completeWonderTrade, depositDaycare, evolutionStep, hatchDaycareEgg, partyToBox, releaseDuplicates, releaseFainted, releaseHatchling, releasePokemon, reorderBox, reorderParty, setBoxSort, setMoves, setNickname, startEvolution, swapParty, swapPartyBox, toggleFavourite, withdrawDaycare, wonderTrade } from './reducer/pokemon.js'
 import { completeHealing, heal, healParty, healingStep, nuzlockeGameOver, startHealing } from './reducer/recovery.js'
 import { addLog, clearLevelUp, dismissNotification, markCatchRoute, pushNotification, setBattleMode, setBattleStyle, setChallengeMonotype, setSpeed, toggleAutoProceed, toggleBrowserNotifications, toggleChallengeLevelScale, toggleChallengeNuzlocke, toggleChallengeRandomizer, toggleChallengeRestrictCatches, toggleColourblindTypes, toggleLargeText, toggleMartCollapsed, toggleMusic, toggleNotifyEgg, toggleNotifyRare, toggleNotifyShiny, togglePause, toggleReducedMotion, toggleSfx } from './reducer/settings.js'
@@ -80,6 +80,8 @@ export const initialGameState = {
   rods: [DEFAULT_ROD],
   /** The pinned companion and its care stats (see game/companion.js). */
   companion: createCompanionCare(null, 0),
+  /** Winning slot lines banked toward the Game Corner prize track. */
+  gameCornerProgress: 0,
   /** The Berry Garden plots (see game/garden.js). */
   garden: createGarden(),
   /** The Poké Pelago passive islands (see game/pelago.js). */
@@ -442,6 +444,8 @@ export function gameReducer(state, action) {
       return startMining(state, action)
     case 'START_GAME_CORNER':
       return startGameCorner(state, action)
+    case 'RECORD_GAME_CORNER_WIN':
+      return recordGameCornerWin(state, action)
     case 'END_MINIGAME':
       return endMinigame(state, action)
     case 'START_ROUTE_ACTIVITY':

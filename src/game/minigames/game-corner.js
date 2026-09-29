@@ -56,6 +56,29 @@ const SLOT_JACKPOT_SYMBOL = SLOT_SYMBOLS.reduce(
 /** The top slot multiplier. */
 export const SLOT_JACKPOT = SLOT_JACKPOT_SYMBOL.payout
 
+/** Winning lines needed to fill the Game Corner prize track. */
+export const GAME_CORNER_PRIZE_GOAL = 20
+
+/**
+ * The Pokemon handed out each time the prize track completes (the canonical
+ * Game Corner prizes; one is picked at random).
+ * @type {{ speciesKey: string, level: number }[]}
+ */
+export const GAME_CORNER_PRIZE_POOL = [
+  { speciesKey: 'scyther', level: 20 },
+  { speciesKey: 'dratini', level: 20 },
+  { speciesKey: 'porygon', level: 20 },
+]
+
+/** Pick a random Game Corner prize.
+ * @returns {{ speciesKey: string, level: number }}
+ */
+export function rollGameCornerPrize() {
+  return GAME_CORNER_PRIZE_POOL[
+    Math.floor(Math.random() * GAME_CORNER_PRIZE_POOL.length)
+  ]
+}
+
 /** Roll one symbol for a cell (also used for the fake-spin animation).
  * @returns {typeof SLOT_SYMBOLS[number]}
  */

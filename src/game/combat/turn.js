@@ -339,6 +339,12 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
   ;(player.flinch = !1, enemy.flinch = !1)
   // Protect only lasts the turn it is used; clear any left over.
   ;(player.protecting = !1, enemy.protecting = !1)
+  // Protect can't be used on consecutive turns: remember whether it was used
+  // last turn, then clear the chain (a use this turn sets it again).
+  ;(player.protectUsedLastTurn = (player.protectChain ?? 0) > 0,
+    enemy.protectUsedLastTurn = (enemy.protectChain ?? 0) > 0,
+    player.protectChain = 0,
+    enemy.protectChain = 0)
   const playerMustRecharge = player.mustRecharge,
     enemyMustRecharge = enemy.mustRecharge
   ;(playerMustRecharge && (player.mustRecharge = !1), enemyMustRecharge && (enemy.mustRecharge = !1))
@@ -552,6 +558,10 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       events.push({
         type: 'protect',
         message: `${attack.defender.name} protected itself!`,
+        data: {
+          target: attack.isPlayer ? 'enemy' : 'player',
+          blocked: !0,
+        },
       })
       continue
     }
@@ -600,11 +610,23 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         continue
       }
       if (moveDef.protect) {
-        attack.attacker.protecting = !0
-        events.push({
-          type: 'protect',
-          message: `${attack.attacker.name} protected itself!`,
-        })
+        const side = attack.isPlayer ? 'player' : 'enemy'
+        // A repeat on the next turn fails outright (Gen 6+ behaviour).
+        if (attack.attacker.protectUsedLastTurn) {
+          events.push({
+            type: 'protect',
+            message: `${attack.attacker.name}'s protection failed!`,
+            data: { target: side, failed: !0 },
+          })
+        } else {
+          attack.attacker.protecting = !0
+          attack.attacker.protectChain = 1
+          events.push({
+            type: 'protect',
+            message: `${attack.attacker.name} protected itself!`,
+            data: { target: side, blocked: !1 },
+          })
+        }
       }
       if (moveDef.screen) {
         const screens = attack.attacker.screens ??

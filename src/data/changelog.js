@@ -96,6 +96,7 @@ export const CHANGELOG = [
             'In manual battle mode the Champion no longer auto-switches Pokemon either, so nothing changes type behind your back; in auto mode its tactical switches are capped at two per battle and each swap now costs it a turn, giving your Pokemon a free hit',
             'Heal Block now works: for five turns the target cannot restore HP from any source \u2014 healing moves, drain moves, Aqua Ring, Ingrain, Wish, Poison Heal, Leftovers, berries and the rest',
             'The leftover stat moves now work: Power Split averages both battlers\u2019 Attack and Sp. Atk, Guard Split averages their Defence and Sp. Def, and Speed Swap trades their raw Speed',
+            'Protect-style moves now read at a glance: a successful Protect shows a shield over the battler and a "Blocked!" callout when it stops an attack, a repeat Protect on the very next turn fails with a "Failed!" callout instead of working forever, and the shield/callout is distinct per side',
           ],
         },
         {
@@ -112,6 +113,14 @@ export const CHANGELOG = [
             'Hoenn’s Route 102 now has the missing Slakoth base form as a rare wild encounter',
             'The Galarian birds — Galarian Articuno, Zapdos and Moltres — are legendary Raid Island bosses again, instead of being filed among the ordinary one-off refuge encounters',
             'Steven’s post-Champion Beldum gift is available at his house in Mossdeep City once you have beaten the Hoenn Champion',
+            'Mr. Pok\u00e9mon on Johto\u2019s Route 30 now hands over the canonical Togepi Egg once you have a Johto badge; carry it in the party and battle to hatch it',
+          ],
+        },
+        {
+          heading: 'Minigames',
+          items: [
+            'Whack-a-Diglett speeds up as the round runs down (targets stay up for less time) and adds a rare Dugtrio jackpot worth 5 points on top of the Diglett and Zubat',
+            'The Game Corner slots have a prize track: every winning line fills a 20-step bar, and a full bar hands over a random Game Corner prize Pokemon — Scyther, Dratini or Porygon',
           ],
         },
       ],

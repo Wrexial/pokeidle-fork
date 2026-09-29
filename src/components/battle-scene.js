@@ -141,6 +141,15 @@ export function BattleScene() {
             key: battleEvents.length,
           }
         : null,
+    lastProtectEvent = battleEvents.filter((event) => event.type === 'protect').pop(),
+    protectEffect =
+      lastProtectEvent && battleEvents.indexOf(lastProtectEvent) === battleEvents.length - 1
+        ? {
+            target: lastProtectEvent.data?.target === 'enemy' ? 'enemy' : 'player',
+            blocked: !!lastProtectEvent.data?.blocked,
+            failed: !!lastProtectEvent.data?.failed,
+          }
+        : null,
     enemyFainted = lastFaintEvent?.data?.target === 'enemy',
     playerFainted = lastFaintEvent?.data?.target === 'player',
     isTown = mapData[state.currentLocation]?.type === 'town',
@@ -503,6 +512,13 @@ export function BattleScene() {
                 key: `enemy-float-${damageFloat.key}`,
                 children: `-${damageFloat.amount}`,
               }),
+            protectEffect?.target === 'enemy' && !protectEffect.failed &&
+              jsx('div', { className: 'protect-shield' }),
+            protectEffect?.target === 'enemy' &&
+              jsx('span', {
+                className: `protect-callout${protectEffect.failed ? ' failed' : ''}`,
+                children: protectEffect.failed ? 'Failed!' : protectEffect.blocked ? 'Blocked!' : 'Shield',
+              }),
             jsx('img', {
               src: getPokemonSpriteUrl(
                 battleSpecies(enemyPokemon.formKey ?? enemyPokemon.speciesKey).id,
@@ -531,6 +547,13 @@ export function BattleScene() {
               className: 'damage-float',
               key: `player-float-${damageFloat.key}`,
               children: `-${damageFloat.amount}`,
+            }),
+          protectEffect?.target === 'player' && !protectEffect.failed &&
+            jsx('div', { className: 'protect-shield' }),
+          protectEffect?.target === 'player' &&
+            jsx('span', {
+              className: `protect-callout${protectEffect.failed ? ' failed' : ''}`,
+              children: protectEffect.failed ? 'Failed!' : protectEffect.blocked ? 'Blocked!' : 'Shield',
             }),
           jsx('img', {
             src: getPokemonSpriteUrl(

@@ -1079,6 +1079,48 @@ img {
 [data-colourblind-types=true] .type-bg-steel { --type-abbr: 'STE' }
 [data-colourblind-types=true] .type-bg-fairy { --type-abbr: 'FAI' }
 
+.protect-shield {
+    position: absolute;
+    inset: -6px;
+    z-index: 5;
+    border: 3px solid #78c8ff;
+    border-radius: 50%;
+    background: radial-gradient(circle,#78c8ff33,#78c8ff08);
+    box-shadow: 0 0 14px #78c8ffaa, inset 0 0 12px #78c8ff66;
+    pointer-events: none;
+    animation: protectPulse .5s ease-in-out infinite alternate
+}
+
+@keyframes protectPulse {
+    from { opacity: .55 }
+    to { opacity: 1 }
+}
+
+.protect-callout {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    z-index: 31;
+    font-family: var(--font-pixel);
+    font-size: 10px;
+    font-weight: 700;
+    color: #9fe0ff;
+    text-shadow: 1px 1px 0 #000,-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000;
+    pointer-events: none;
+    transform: translateX(-50%);
+    animation: protectCallout .9s ease-out forwards
+}
+
+.protect-callout.failed {
+    color: #ffb060
+}
+
+@keyframes protectCallout {
+    0% { opacity: 0; transform: translate(-50%,6px) }
+    25% { opacity: 1; transform: translate(-50%,-4px) }
+    to { opacity: 0; transform: translate(-50%,-18px) }
+}
+
 .faint-anim {
     animation: faint .8s steps(8) forwards
 }
@@ -8818,6 +8860,44 @@ img {
     image-rendering: pixelated
 }
 
+.game-corner-track {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    max-width: 260px;
+    margin-top: 10px
+}
+
+.game-corner-track-label {
+    font-size: 7px;
+    font-weight: 700;
+    color: #f0d060;
+    letter-spacing: .5px
+}
+
+.game-corner-track-bar {
+    flex: 1;
+    height: 8px;
+    background: rgba(0,0,0,.45);
+    border: 1px solid #5a4a2a;
+    border-radius: 4px;
+    overflow: hidden
+}
+
+.game-corner-track-fill {
+    height: 100%;
+    background: linear-gradient(90deg,#e0a020,#f8e070);
+    transition: width .3s ease
+}
+
+.game-corner-track-count {
+    font-size: 7px;
+    color: #cbbf9c;
+    min-width: 26px;
+    text-align: right
+}
+
 .reward-shop-token-display {
     text-align: center;
     padding: 6px 0 10px;
@@ -12271,6 +12351,16 @@ img {
 
 .whack-hole.zubat {
     background: radial-gradient(#4a3a6a,#241a3a)
+}
+
+.whack-hole.dugtrio {
+    background: radial-gradient(#c8962a,#7a5410);
+    border-color: #e0b040;
+    box-shadow: 0 0 12px #e0b04088
+}
+
+.whack-grid.whack-rush {
+    filter: drop-shadow(0 0 6px #e04038aa)
 }
 
 .whack-hole-dot {

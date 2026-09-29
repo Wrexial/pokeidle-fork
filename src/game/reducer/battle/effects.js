@@ -27,6 +27,7 @@ export function updateVolatile(state, action) {
         confusionTurns: enemyVolatile.confusionTurns ?? 0,
         leechSeeded: enemyVolatile.leechSeeded ?? !1,
         heldItemUsed: enemyVolatile.heldItemUsed ?? !1,
+        protectChain: enemyVolatile.protectChain ?? 0,
         tauntTurns: enemyVolatile.tauntTurns ?? 0,
         substituteHp: enemyVolatile.substituteHp ?? 0,
         infatuated: enemyVolatile.infatuated ?? !1,

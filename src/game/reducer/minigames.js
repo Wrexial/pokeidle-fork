@@ -1,9 +1,11 @@
 // Reducer handlers for minigames actions. Split from game/reducer.js.
 
-import { MATCH3_COST, MEMORY_COST, MUSICAL_COST, PICNIC_COST, POKEBALL_FACTORY_COST, WHACK_COST, BATTLE_ROYAL_COST, BUG_CONTEST_COST, CONTEST_COST, CURRY_COST, DYNAMAX_ADVENTURES_COST, LIGHTS_OUT_COST, MINING_COST, POKEATHLON_COST, POKE_RADAR_COST, POKESTAR_COST, QUIZ_COST, ROUTE_ACTIVITIES, SAFARI_COST, SLIDING_COST, ICE_SLIDE_COST, VOLTORB_FLIP_COST, routeActivityIds } from '../minigames.js'
-import { mapData } from '../../data/gameData.js'
+import { MATCH3_COST, MEMORY_COST, MUSICAL_COST, PICNIC_COST, POKEBALL_FACTORY_COST, WHACK_COST, BATTLE_ROYAL_COST, BUG_CONTEST_COST, CONTEST_COST, CURRY_COST, DYNAMAX_ADVENTURES_COST, LIGHTS_OUT_COST, MINING_COST, POKEATHLON_COST, POKE_RADAR_COST, POKESTAR_COST, QUIZ_COST, ROUTE_ACTIVITIES, SAFARI_COST, SLIDING_COST, ICE_SLIDE_COST, VOLTORB_FLIP_COST, GAME_CORNER_PRIZE_GOAL, rollGameCornerPrize, routeActivityIds } from '../minigames.js'
+import { mapData, pokemonSpecies } from '../../data/gameData.js'
 import { createIdleBattleState } from '../progression.js'
-import { enterMinigame } from '../reducer-helpers.js'
+import { enterMinigame, withNotification } from '../reducer-helpers.js'
+import { markCaught } from './collection.js'
+import { catchPokemon } from './pokemon/management.js'
 
 /**
  * Handle the `START_BUG_CONTEST` action.
@@ -93,6 +95,40 @@ export function startMining(state, action) {
  */
 export function startGameCorner(state, action) {
   return enterMinigame(state, 'gameCorner', 0, 'You stepped up to the Game Corner slots.')
+}
+
+/**
+ * Handle the `RECORD_GAME_CORNER_WIN` action: advance the slot prize track by
+ * the winning lines this spin, and hand out a Game Corner prize Pokemon each
+ * time the track fills (Scyther / Dratini / Porygon).
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function recordGameCornerWin(state, action) {
+  const lines = Math.max(0, Math.floor(action.payload?.lines ?? 0))
+  if (state.phase !== 'gameCorner' || lines <= 0) return state
+  let next = state,
+    progress = (state.gameCornerProgress ?? 0) + lines
+  if (progress >= GAME_CORNER_PRIZE_GOAL) {
+    progress -= GAME_CORNER_PRIZE_GOAL
+    const prize = rollGameCornerPrize()
+    next = catchPokemon(next, {
+      type: 'CATCH_POKEMON',
+      payload: { speciesKey: prize.speciesKey, level: prize.level },
+    })
+    next = markCaught(next, {
+      type: 'MARK_CAUGHT',
+      payload: { speciesKey: prize.speciesKey },
+    })
+    next = withNotification(next, {
+      message: `Game Corner prize: ${pokemonSpecies[prize.speciesKey]?.name ?? prize.speciesKey}!`,
+      tone: 'success',
+      icon: '\u{1f3b0}',
+      dedupeKey: `game-corner-prize:${prize.speciesKey}`,
+    })
+  }
+  return { ...next, gameCornerProgress: progress }
 }
 
 /**

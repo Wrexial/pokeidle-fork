@@ -6,6 +6,10 @@ import { markCaught } from './collection.js'
 import { catchPokemon } from './pokemon/management.js'
 import { startEncounter } from './battle/events.js'
 import { withNotification } from '../reducer-helpers.js'
+import { breedShinyOdds } from '../../data/config.js'
+import { eggHatchSteps } from '../breeding.js'
+import { createEgg, insertIntoBox } from '../pokemon.js'
+import { checkShinyOdds } from '../progression.js'
 
 /** Phases a static encounter can interrupt (normal play, not an animation). */
 const STARTABLE_PHASES = ['idle', 'victory', 'battling', 'defeat']
@@ -43,6 +47,24 @@ export function claimGift(state, action) {
         payload: { speciesKey },
       })
     }
+  }
+  // An egg gift carries an Egg instead of a hatched Pokemon; it registers in
+  // the Pokedex only when it hatches (the normal egg-hatch handler does that).
+  if (gift.egg) {
+    const egg = createEgg(
+      gift.egg.speciesKey,
+      next.nextPokemonId,
+      checkShinyOdds(breedShinyOdds),
+      eggHatchSteps(gift.egg.speciesKey)
+    )
+    next =
+      next.party.length < 6
+        ? { ...next, party: [...next.party, egg], nextPokemonId: next.nextPokemonId + 1 }
+        : {
+            ...next,
+            box: insertIntoBox(next.box, egg, next.boxSort),
+            nextPokemonId: next.nextPokemonId + 1,
+          }
   }
   const reward = giftRewardLabel(gift)
   return withNotification(

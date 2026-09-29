@@ -10,14 +10,16 @@ import {
   WHACK_CELLS,
   WHACK_DURATION_MS,
   WHACK_POP_MS,
+  WHACK_POP_MIN_MS,
   rollWhackTarget,
+  whackPopupMs,
   whackPrize,
 } from '../game/minigames.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
 import { MinigameRewardScreen, useMinigameClaim } from './minigame-reward.js'
 
 /** Which Pokemon each target kind shows. @type {Record<string, string>} */
-const WHACK_SPECIES = { diglett: 'diglett', zubat: 'zubat' }
+const WHACK_SPECIES = { diglett: 'diglett', dugtrio: 'dugtrio', zubat: 'zubat' }
 
 export function WhackScene() {
   const { state, dispatch } = useGame(),
@@ -46,7 +48,14 @@ export function WhackScene() {
         setActive(null)
       }
       if (!activeRef.current && remaining > 0) {
-        const spawn = { ...rollWhackTarget(), index: Math.floor(Math.random() * WHACK_CELLS), until: Date.now() + WHACK_POP_MS }
+        const target = rollWhackTarget(),
+          elapsed = Date.now() - startRef.current,
+          spawn = {
+            ...target,
+            index: Math.floor(Math.random() * WHACK_CELLS),
+            // Targets speed up as the round runs; the rare Dugtrio stays up longer.
+            until: Date.now() + Math.round(whackPopupMs(elapsed) * (target.popMultiplier ?? 1)),
+          }
         activeRef.current = spawn
         setActive(spawn)
       }
@@ -79,7 +88,9 @@ export function WhackScene() {
   }
 
   const speciesKey = active ? WHACK_SPECIES[active.kind] : null,
-    species = speciesKey ? pokemonSpecies[speciesKey] : null
+    species = speciesKey ? pokemonSpecies[speciesKey] : null,
+    // The round is "rushing" once targets are much quicker than at the start.
+    rushing = whackPopupMs(WHACK_DURATION_MS - timeLeft) <= (WHACK_POP_MS + WHACK_POP_MIN_MS) / 2
 
   return jsxs('div', {
     className: 'minigame-scene whack-scene',
@@ -93,6 +104,7 @@ export function WhackScene() {
             className: 'minigame-scene-tally',
             children: [
               `Score ${score}`,
+              rushing && !prize ? ' \u00b7 SPEEDING UP!' : '',
               ' \u00b7 ',
               prize ? (prize.label ?? '') : `${(timeLeft / 1000).toFixed(1)}s`,
             ],
@@ -111,13 +123,13 @@ export function WhackScene() {
               }),
             })
           : jsx('div', {
-          className: 'whack-grid',
+          className: `whack-grid${rushing ? ' whack-rush' : ''}`,
           children: Array.from({ length: WHACK_CELLS }, (_, index) => {
             const showTarget = active?.index === index
             return jsx(
               'button',
               {
-                className: `whack-hole${showTarget ? (active.kind === 'zubat' ? ' zubat' : ' diglett') : ''}`,
+                className: `whack-hole${showTarget ? ` ${active.kind}` : ''}`,
                 disabled: prize !== null,
                 onClick: () => whack(index),
                 'aria-label': showTarget ? `Whack ${active.kind}` : 'Empty hole',

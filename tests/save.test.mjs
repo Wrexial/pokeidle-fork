@@ -59,6 +59,11 @@ test('a serialized save round-trips through repairSave', () => {
     assert.deepEqual(repaired[key], state[key], key)
 })
 
+test('the Game Corner prize track survives a save round-trip', () => {
+  const repaired = repairSave(serializeSave({ ...startedGame(), gameCornerProgress: 13 }))
+  assert.equal(repaired.gameCornerProgress, 13)
+})
+
 test('repairSave reverts a Pokemon saved in a Mega / Gigantamax form', () => {
   const base = startedGame()
   /** @param {string} speciesKey @param {string} name @param {string[]} types */

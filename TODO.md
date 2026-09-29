@@ -74,12 +74,15 @@ renumbered, so the gaps below are items that shipped.
     ★★½ — a self-contained minigame that reuses the combat pipeline.
 21. **#30 Caught / event QOL indicators** — S · ★ — flag the battle sprite;
     decide whether raids show the caught badge.
+22. **#60 Areas should have their own zoomed-in map** — M · ★★ — zones and
+    large areas list their sub-areas in the panel only; give them a focused
+    map view entered from the Town Map, with a back button to exit.
 
 ### Tier 3 — Big / low-return, defer
 
-22. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
+23. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
     route-based field effects.
-23. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+24. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
 ---
@@ -292,6 +295,8 @@ Still open:
 - [ ] A distinct zone glyph on the map.
 - [ ] Inline per-sub-area encounter grids (rather than the picker + a single
       route grid).
+- [ ] Give each zone / area its own zoomed-in map view with a back button — see
+      #60.
 
 Effort: **medium–large** (a small data-model change plus map/encounter UI).
 
@@ -620,6 +625,33 @@ Relevant code: `public/data/pokemon-species.json`, `public/data/regions.json`
 `raidPoolSpecies`), `tools/validate-data.cjs`.
 
 Effort: **small**.
+
+## 60. Areas should have their own zoomed-in map
+
+Today a zone / large area (Galar's Wild Area, Alola's islands, Paldea's
+provinces, the DLC) is a single hub node whose sub-areas are only listed in the
+location panel, and a sub-area's own panel gets a `← Zone` back button — there
+is no dedicated in-area map. Give each area its own **zoomed-in map** view:
+entering the area from the Town Map focuses on just its sub-areas/nodes, with a
+back button to return to the region map.
+
+- [ ] Decide the scope: zones (#36), and/or every location's "area" (caves /
+      POIs from #28).
+- [ ] Render a focused map — reuse the `town-map.js` canvas with a filtered node
+      set (or a per-area layout) showing the area's sub-areas, their unlock
+      state and the player's current position.
+- [ ] Add the "zoom in" transition when entering the area and a back button to
+      exit to the region map (mirroring the existing zone back button in
+      `location-panel.js`).
+- [ ] Keep travel and encounters working off the existing `TRAVEL` /
+      sub-area plumbing.
+
+Relevant code: `src/components/town-map.js`, `src/components/location-panel.js`
+(zone hub + back button), `public/data/map-data/*.json` (`type: 'zone'`,
+`subAreas`), and `tools/generate-regions.cjs` (`ZONES`, `GROUP_ZONES`,
+`REGION_MAP_LAYOUTS`).
+
+Effort: **medium**.
 
 ---
 

@@ -77,12 +77,15 @@ renumbered, so the gaps below are items that shipped.
 22. **#60 Areas should have their own zoomed-in map** — M · ★★ — zones and
     large areas list their sub-areas in the panel only; give them a focused
     map view entered from the Town Map, with a back button to exit.
+23. **#61 Former raid gifts onto real routes** — M · ★★ — the ordinary Raid
+    Island finals became one-off refuge statics on each region's last route;
+    place them on routes that suit them as part of the encounter table.
 
 ### Tier 3 — Big / low-return, defer
 
-23. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
+24. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
     route-based field effects.
-24. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+25. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
 ---
@@ -317,6 +320,8 @@ Still open:
       uniform "unseen first" pick.
 - [ ] Move the Galarian birds (`g-articuno` / `g-zapdos` / `g-moltres`) back
       into the legendary pool — they are mis-flagged as ordinary today (#59).
+- [ ] Relocate the remaining ordinary finals from the one-off refuge statics
+      onto fitting routes as real encounters (#61), then drop the refuges.
 - [ ] If a smaller Unova (13 ordinary) pool is wanted, give a few of its finals a
       real route or evolution source (part of #28/#39).
 
@@ -652,6 +657,42 @@ Relevant code: `src/components/town-map.js`, `src/components/location-panel.js`
 `REGION_MAP_LAYOUTS`).
 
 Effort: **medium**.
+
+## 61. Move the former raid gifts onto real routes
+
+When the Raid Islands became legendary-only, each region's ordinary finals were
+relocated as one-off **refuge static encounters** on that region's last route
+(`RAID_REFUGE_LOCATIONS` / `refugeStatics` in `src/game/gifts.js`): Kanto's
+Jynx/Omastar/Kabutops/Aerodactyl, Johto's
+Cleffa/Togepi/Xatu/Unown/Smoochum/Magby, Hoenn's
+Slaking/Mawile/Cradily/Metagross, Sinnoh's
+Rampardos/Bastiodon/Ambipom/Spiritomb/Togekiss/Porygon-Z, Unova's 13 ordinary
+finals, Kalos's Tyrantrum/Aurorus/Carbink/Gourgeist, and Galar's fossil quartet +
+Indeedee-F. They should instead appear on routes that fit them, as ordinary (if
+rare) entries in the encounter table, so they are repeatable and feel native
+rather than bolted onto one late route as another Snorlax-style static.
+
+- [ ] For each region, pick thematically/canonically fitting route(s) and add
+      the species to `public/data/encounter-data/<region>.json` with that
+      route's level band and a low weight (so they stay rare).
+- [ ] Give fossils their canonical source (Sinnoh's Underground / a fossil-revive
+      system — #50) instead of a wild spawn where that is more faithful.
+- [ ] Leave the Galarian birds out — they belong back in `raidPool` (#59), not on
+      a route.
+- [ ] Retire the refuge statics once every species has a real encounter, and drop
+      the now-redundant `raidOrdinaryPool` / `RAID_REFUGE_LOCATIONS` plumbing
+      (keep it only if some species still need it for obtainability).
+- [ ] Update `src/game/gifts.js`, `tools/apply-raid-refugees.cjs`,
+      `public/data/regions.json#raidOrdinaryPool`, `tests/raid.test.mjs` and
+      `tools/validate-data.cjs` so the obtainability check no longer depends on
+      the refuges.
+- [ ] Regenerate `public/encounter-index.html` and re-check the raid pools (#38).
+
+Relevant code: `public/data/encounter-data/*.json`, `public/data/regions.json`,
+`src/game/gifts.js`, `tools/apply-raid-refugees.cjs`, `tools/validate-data.cjs`,
+`tests/raid.test.mjs`, and the raid scan in `tools/generate-regions.cjs`.
+
+Effort: **medium** (data-heavy: one habitat decision per species).
 
 ---
 

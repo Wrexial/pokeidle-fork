@@ -246,6 +246,25 @@ export function repairSave(saved) {
   party = party.map(withAbility)
   box = box.map(withAbility)
 
+  // A corrupted or stale save can carry a `currentHp` above `maxHp` (which
+  // sticks the HP bar at full and leaves the Pokemon almost unkillable, and
+  // survives every battle because it is only ever written back on damage) or a
+  // leftover `statStages` from a switch-in hazard, which is battle-only state
+  // that must not persist. Clamp the HP and drop the battle stages.
+  /** @param {any} pokemon */
+  const withSafeHp = (pokemon) => {
+    const maxHp = Math.max(1, Math.floor(Number(pokemon.maxHp) || 0)),
+      rawHp = Number(pokemon.currentHp),
+      { statStages, ...rest } = pokemon
+    return {
+      ...rest,
+      maxHp,
+      currentHp: Math.max(0, Math.min(Number.isFinite(rawHp) ? rawHp : maxHp, maxHp)),
+    }
+  }
+  party = party.map(withSafeHp)
+  box = box.map(withSafeHp)
+
   /** @type {Record<string, Record<string, CatchRule>>} */
   const catchSettings = {}
   for (const [speciesKey, rules] of Object.entries(saved.catchSettings || {})) {

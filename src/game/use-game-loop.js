@@ -340,8 +340,16 @@ export function useGameLoop() {
                 playerVolatile.typesOverride ??
                 pokemonSpecies[currentGameState.playerPokemon.speciesKey].types,
               level: currentGameState.playerPokemon.level,
-              currentHp: currentGameState.playerPokemon.currentHp,
+              // A stale or corrupted HP above the maximum would stick the bar
+              // at full, so clamp it when the battler is rebuilt each turn.
               maxHp: currentGameState.playerPokemon.maxHp,
+              currentHp: Math.max(
+                0,
+                Math.min(
+                  Number(currentGameState.playerPokemon.currentHp) || 0,
+                  currentGameState.playerPokemon.maxHp
+                )
+              ),
               attack: currentGameState.playerPokemon.attack,
               defense: currentGameState.playerPokemon.defense,
               spAttack: currentGameState.playerPokemon.spAttack,

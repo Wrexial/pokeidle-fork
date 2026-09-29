@@ -82,6 +82,36 @@ test('repairSave reverts a Pokemon saved in a Mega / Gigantamax form', () => {
   }
 })
 
+test('repairSave clamps an out-of-range HP and drops battle stat stages', () => {
+  const base = startedGame(),
+    // A stale save can carry currentHp above maxHp (the HP bar sticks at full
+    // and the Pokemon is nearly unkillable) and a leftover hazard statStages.
+    corrupt = {
+      ...base.party[0],
+      maxHp: 80,
+      currentHp: 999999,
+      statStages: { speed: -1 },
+    },
+    repaired = repairSave(
+      serializeSave({ ...base, party: [corrupt], playerPokemon: corrupt })
+    )
+  assert.ok(repaired, 'the corrupt save still repairs')
+  assert.equal(repaired.party[0].maxHp, 80)
+  assert.equal(repaired.party[0].currentHp, 80, 'currentHp is clamped to maxHp')
+  assert.equal(repaired.playerPokemon.currentHp, 80)
+  assert.equal('statStages' in repaired.party[0], false, 'battle stages are stripped')
+})
+
+test('repairSave leaves a healthy Pokemon HP untouched', () => {
+  const base = startedGame(),
+    wounded = { ...base.party[0], maxHp: base.party[0].maxHp, currentHp: 1 },
+    repaired = repairSave(
+      serializeSave({ ...base, party: [wounded], playerPokemon: wounded })
+    )
+  assert.equal(repaired.party[0].currentHp, 1)
+  assert.equal(repaired.party[0].maxHp, wounded.maxHp)
+})
+
 test('preferences are not written into the save', () => {
   const saved = serializeSave(startedGame())
   for (const key of ['speed', 'autoCatch', 'battleStyle', 'browserNotifications', 'musicEnabled'])

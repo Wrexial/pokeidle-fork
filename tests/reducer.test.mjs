@@ -6,6 +6,7 @@ import { installGameData } from './helpers/game-data.mjs'
 installGameData()
 
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
+const { createVolatileState } = await import('../src/game/combat.js')
 const { mapData } = await import('../src/data/gameData.js')
 const { createPokemon } = await import('../src/game/pokemon.js')
 
@@ -303,6 +304,83 @@ test('stat stages reset when a new battle starts', () => {
   state = gameReducer(state, { type: 'PHASE_IDLE' })
   state = gameReducer(state, { type: 'START_ENCOUNTER', payload: { enemy } })
   assert.deepEqual(state.playerVolatile.statStages, {
+    attack: 0,
+    defense: 0,
+    spAttack: 0,
+    spDefense: 0,
+    speed: 0,
+  })
+})
+
+const boostedVolatile = () => ({
+  ...createVolatileState(),
+  statStages: { attack: 0, defense: 4, spAttack: 0, spDefense: 4, speed: 0 },
+})
+
+test('chained Elite Four battles reset the player volatile state', () => {
+  // BOSS_BATTLE_END with a queued next member used to start the next bout
+  // without a fresh volatile, so a Cosmic Power boost carried through the
+  // whole Elite Four and Champion run.
+  const nextTeam = [createPokemon('lapras', 70, 'e4-2')],
+    state = {
+      ...startedGame(),
+      phase: 'battling',
+      enemyPokemon: createPokemon('exeggutor', 70, 'e4-1'),
+      playerVolatile: boostedVolatile(),
+      bossBattle: {
+        bossId: 'e4-1',
+        bossType: 'e4',
+        trainerName: 'Lorelei',
+        trainerClass: 'elite',
+        trainerTeam: [createPokemon('exeggutor', 70, 'e4-1')],
+        currentTrainerPokemonIndex: 0,
+        region: 'kanto',
+      },
+      bossQueue: [
+        {
+          bossId: 'e4-2',
+          bossType: 'e4',
+          trainerName: 'Bruno',
+          trainerClass: 'elite',
+          trainerTeam: nextTeam,
+          spriteKey: 'bruno',
+          region: 'kanto',
+        },
+      ],
+    }
+  const next = gameReducer(state, { type: 'BOSS_BATTLE_END', payload: { won: true, moneyDelta: 100 } })
+  assert.equal(next.phase, 'battling')
+  assert.equal(next.enemyPokemon.id, nextTeam[0].id, 'the next member is sent out')
+  assert.deepEqual(next.playerVolatile.statStages, {
+    attack: 0,
+    defense: 0,
+    spAttack: 0,
+    spDefense: 0,
+    speed: 0,
+  })
+})
+
+test('healing into a boss rematch resets the player volatile state', () => {
+  const team = [createPokemon('machamp', 70, 'boss-1')],
+    state = {
+      ...startedGame(),
+      phase: 'healing',
+      healingState: { step: 'place' },
+      playerVolatile: boostedVolatile(),
+      pendingBossBattle: {
+        bossId: 'e4-1',
+        bossType: 'e4',
+        trainerName: 'Lorelei',
+        trainerClass: 'elite',
+        trainerTeam: team,
+        spriteKey: 'lorelei',
+        region: 'kanto',
+      },
+    }
+  const next = gameReducer(state, { type: 'COMPLETE_HEALING' })
+  assert.equal(next.phase, 'battling')
+  assert.equal(next.enemyPokemon.id, team[0].id)
+  assert.deepEqual(next.playerVolatile.statStages, {
     attack: 0,
     defense: 0,
     spAttack: 0,

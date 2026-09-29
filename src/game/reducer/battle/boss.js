@@ -182,6 +182,9 @@ export function bossBattleEnd(state, action) {
         victoryTokens,
         phase: 'battling',
         enemyPokemon: firstPokemon,
+        // Each Elite Four / Champion bout is a fresh battle: reset the
+        // volatile state so stat boosts, status and screens don't carry over.
+        playerVolatile: createVolatileState(),
         battleEvents: [],
         pendingEvents: [
           {

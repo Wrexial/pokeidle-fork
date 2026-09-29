@@ -2,6 +2,7 @@
 
 import { mapData, regions } from '../../data/gameData.js'
 import { emptyBattleHazards } from '../hazards.js'
+import { createVolatileState } from '../combat.js'
 import { prepareNextBattle, syncActivePokemonIntoParty } from '../progression.js'
 
 /**
@@ -126,6 +127,9 @@ export function completeHealing(state, action) {
       pendingBossBattle: null,
       phase: 'battling',
       enemyPokemon: firstPokemon,
+      // Healing into a boss rematch starts a fresh battle, so drop any
+      // leftover stat stages / status from the previous attempt.
+      playerVolatile: createVolatileState(),
       battleEvents: [],
       pendingEvents: [
         {

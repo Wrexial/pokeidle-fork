@@ -626,14 +626,19 @@ One-off scripts used to build the data JSON (not run during dev/build):
   pass does it on regeneration). Idempotent (`--dry`).
 - `apply-route-and-raid-tweaks.cjs` — data-only pass for the small route/raid
   follow-ups: adds Slakoth to Hoenn Route 102's wild table and moves the
-  Galarian birds from Galar's `raidOrdinaryPool` into `raidPool` (plus the
-  `galar-raid` encounter bucket) after flagging them `legendary`. Idempotent;
-  re-run after regenerating encounters or raid pools.
+  Galarian birds into Galar's `raidPool` (plus the `galar-raid` encounter
+  bucket) after flagging them `legendary`. Idempotent; re-run after regenerating
+  encounters or raid pools.
+- `apply-raid-final-habitats.cjs` — data-only pass for #61: gives every line
+  that used to sit on the ordinary Raid Island roster a real wild home on a
+  thematically fitting route (base stages, so the evolution chain stays native)
+  and drops the now-redundant `raidOrdinaryPool` roster. The generator mirrors
+  the same `RAID_FINAL_HABITATS` table on regeneration. Idempotent (`--dry`).
 - `apply-fossil-loop.cjs` — data-only pass for the fossil loop (#50): drops the
   fossil final evolutions (Omastar, Kabutops, Aerodactyl, Rampardos, ...) from
-  every region's `raidOrdinaryPool`, since the fossils are now gifted and dug up
-  and the finals come from reviving them at Cinnabar Island. Idempotent; their
-  refuge statics disappear automatically (those derive from `raidOrdinaryPool`).
+  every region's (now retired) `raidOrdinaryPool`, since the fossils are now
+  gifted and dug up and the finals come from reviving them at Cinnabar Island.
+  Idempotent; it also no-ops once the ordinary pool is gone.
 - `fix-impossible-encounters.cjs` / `fix-impossible-teams.cjs` — step wild
   encounters and trainer/gym/Elite Four/Champion Pokemon back to a form that
   could exist at their level (a Lv. 3 Chesnaught becomes a Chespin), merging

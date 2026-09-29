@@ -266,6 +266,12 @@
     "weight": 10,
     "minLevel": 15,
     "maxLevel": 17
+   },
+   {
+    "speciesKey": "mawile",
+    "weight": 3,
+    "minLevel": 15,
+    "maxLevel": 17
    }
   ]
  },
@@ -1624,6 +1630,12 @@
    },
    {
     "speciesKey": "pelipper",
+    "weight": 1,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "beldum",
     "weight": 1,
     "minLevel": 67,
     "maxLevel": 69

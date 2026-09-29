@@ -562,8 +562,6 @@ type Region = {
   entry?: string
   startLevel?: number
   raidPool?: { speciesKey: string; level: number }[]
-  /** Non-legendary finals with no other source; a lower tier than `raidPool`. */
-  raidOrdinaryPool?: { speciesKey: string; level: number }[]
   /** Location of the region's Pokémon League; the Elite Four can only be
    * challenged while standing here. */
   leagueLocationKey?: string

@@ -179,6 +179,30 @@
     "weight": 5,
     "minLevel": 11,
     "maxLevel": 13
+   },
+   {
+    "speciesKey": "pansage",
+    "weight": 2,
+    "minLevel": 11,
+    "maxLevel": 13
+   },
+   {
+    "speciesKey": "pansear",
+    "weight": 2,
+    "minLevel": 11,
+    "maxLevel": 13
+   },
+   {
+    "speciesKey": "panpour",
+    "weight": 2,
+    "minLevel": 11,
+    "maxLevel": 13
+   },
+   {
+    "speciesKey": "woobat",
+    "weight": 2,
+    "minLevel": 11,
+    "maxLevel": 13
    }
   ]
  },
@@ -268,6 +292,18 @@
     "weight": 1,
     "minLevel": 14,
     "maxLevel": 16
+   },
+   {
+    "speciesKey": "drilbur",
+    "weight": 2,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "yamask",
+    "weight": 2,
+    "minLevel": 14,
+    "maxLevel": 16
    }
   ]
  },
@@ -319,6 +355,12 @@
    {
     "speciesKey": "cinccino",
     "weight": 1,
+    "minLevel": 17,
+    "maxLevel": 19
+   },
+   {
+    "speciesKey": "munna",
+    "weight": 2,
     "minLevel": 17,
     "maxLevel": 19
    }
@@ -414,6 +456,12 @@
    {
     "speciesKey": "leavanny",
     "weight": 1,
+    "minLevel": 20,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "cottonee",
+    "weight": 2,
     "minLevel": 20,
     "maxLevel": 22
    }
@@ -520,6 +568,12 @@
    {
     "speciesKey": "karrablast",
     "weight": 4,
+    "minLevel": 26,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "cryogonal",
+    "weight": 1,
     "minLevel": 26,
     "maxLevel": 28
    }
@@ -1223,6 +1277,12 @@
     "weight": 1,
     "minLevel": 46,
     "maxLevel": 48
+   },
+   {
+    "speciesKey": "druddigon",
+    "weight": 1,
+    "minLevel": 46,
+    "maxLevel": 48
    }
   ]
  },
@@ -1321,6 +1381,12 @@
    {
     "speciesKey": "kingdra",
     "weight": 1,
+    "minLevel": 52,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "frillish",
+    "weight": 2,
     "minLevel": 52,
     "maxLevel": 54
    }

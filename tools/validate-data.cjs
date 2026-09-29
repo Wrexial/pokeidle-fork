@@ -110,8 +110,7 @@ for (const [key, entry] of Object.entries(species))
     obtainable.add(key)
 // Fossil items revive these species at Cinnabar Island (see fossilItems in
 // src/data/items.js). The fossils are handed out by the region gifts and
-// dropped by the Sinnoh Underground, and evolve into the finals that used to
-// sit in `raidOrdinaryPool`.
+// dropped by the Sinnoh Underground, and evolve into their final forms.
 const FOSSIL_SPECIES = [
   'omanyte', 'kabuto', 'aerodactyl',
   'lileep', 'anorith',
@@ -121,11 +120,6 @@ const FOSSIL_SPECIES = [
   'dracozolt', 'arctozolt', 'dracovish', 'arctovish',
 ]
 for (const key of FOSSIL_SPECIES) obtainable.add(key)
-// The ordinary Raid Island finals are relocated to reachable refuge static
-// encounters (RAID_REFUGE_LOCATIONS in src/game/gifts.js), so they stay
-// obtainable even though the island's own wild table is legendary-only.
-for (const region of regions)
-  for (const entry of region.raidOrdinaryPool ?? []) obtainable.add(entry.speciesKey)
 let expanded = true
 while (expanded) {
   expanded = false
@@ -142,32 +136,20 @@ while (expanded) {
 for (const key of realSpecies) if (!obtainable.has(key)) fail(`species ${key} cannot be obtained`)
 
 // --- encounters and map ------------------------------------------------------
-const RAID_ORDINARY_CAP = 15
+// The Raid Island is legendary-only: the ordinary finals it used to carry now
+// live on fitting region routes as wild encounters.
 for (const region of regions) {
-  const seen = new Set(),
-    tiers = [
-      ['raidPool', region.raidPool ?? [], true],
-      ['raidOrdinaryPool', region.raidOrdinaryPool ?? [], false],
-    ]
-  for (const [tier, entries, expectLegendary] of tiers) {
-    for (const entry of entries) {
-      if (!speciesKeys.has(entry.speciesKey)) {
-        fail(`${tier} for ${region.id} has unknown species ${entry.speciesKey}`)
-        continue
-      }
-      if (seen.has(entry.speciesKey))
-        fail(`${region.id} lists ${entry.speciesKey} in both raid pools`)
-      seen.add(entry.speciesKey)
-      if (!!species[entry.speciesKey].legendary !== expectLegendary)
-        fail(
-          `${tier} for ${region.id} has ${expectLegendary ? 'non-' : ''}legendary ${entry.speciesKey}`
-        )
+  const seen = new Set()
+  for (const entry of region.raidPool ?? []) {
+    if (!speciesKeys.has(entry.speciesKey)) {
+      fail(`raidPool for ${region.id} has unknown species ${entry.speciesKey}`)
+      continue
     }
+    if (seen.has(entry.speciesKey)) fail(`${region.id} lists ${entry.speciesKey} twice in raidPool`)
+    seen.add(entry.speciesKey)
+    if (!species[entry.speciesKey].legendary)
+      fail(`raidPool for ${region.id} has non-legendary ${entry.speciesKey}`)
   }
-  if ((region.raidOrdinaryPool ?? []).length > RAID_ORDINARY_CAP)
-    fail(
-      `region ${region.id} has ${region.raidOrdinaryPool.length} ordinary raid Pokemon (cap ${RAID_ORDINARY_CAP})`
-    )
 }
 
 // --- league structure --------------------------------------------------------

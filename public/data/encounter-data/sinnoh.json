@@ -309,6 +309,12 @@
     "weight": 1,
     "minLevel": 14,
     "maxLevel": 16
+   },
+   {
+    "speciesKey": "aipom",
+    "weight": 2,
+    "minLevel": 14,
+    "maxLevel": 16
    }
   ]
  },
@@ -578,6 +584,12 @@
    },
    {
     "speciesKey": "chansey",
+    "weight": 1,
+    "minLevel": 24,
+    "maxLevel": 26
+   },
+   {
+    "speciesKey": "spiritomb",
     "weight": 1,
     "minLevel": 24,
     "maxLevel": 26
@@ -1120,6 +1132,12 @@
    {
     "speciesKey": "stunky",
     "weight": 3,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "porygon",
+    "weight": 1,
     "minLevel": 35,
     "maxLevel": 37
    }

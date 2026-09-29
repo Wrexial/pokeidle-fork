@@ -113,6 +113,7 @@ export const CHANGELOG = [
         {
           heading: 'Regions',
           items: [
+            'The former ordinary Raid Island finals now live as wild encounters on routes that suit them — Johto\'s Togepi, Natu, Unown, Cleffa, Smoochum and Magby, Hoenn\'s Mawile and Beldum, Sinnoh\'s Aipom, Spiritomb and Porygon, Unova\'s elemental monkeys and cave lines, Kalos\'s Carbink and Pumpkaboo, Galar\'s Indeedee-F, and Kanto\'s Jynx — instead of one-off "Rare Pokemon" statics bolted onto each region\'s last route',
             'Hoenn’s Route 102 now has the missing Slakoth base form as a rare wild encounter',
             'The Galarian birds — Galarian Articuno, Zapdos and Moltres — are legendary Raid Island bosses again, instead of being filed among the ordinary one-off refuge encounters',
             'Steven’s post-Champion Beldum gift is available at his house in Mossdeep City once you have beaten the Hoenn Champion',

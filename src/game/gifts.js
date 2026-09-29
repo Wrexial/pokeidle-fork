@@ -237,41 +237,8 @@ const BASE_STATIC_ENCOUNTERS = [
   },
 ]
 
-/** Where each region's ordinary Raid Island finals relocate: a late route in
- * the region, so they can be caught instead of being stranded on a raid-only
- * island. @type {Record<string, string>} */
-export const RAID_REFUGE_LOCATIONS = {
-  kanto: 'ceruleanCave',
-  johto: 'johto-mt-silver',
-  hoenn: 'hoenn-route-134',
-  sinnoh: 'sinnoh-sea-route-230',
-  unova: 'unova-route-23',
-  kalos: 'kalos-route-22',
-  galar: 'galar-route-10',
-}
-
-// One static per ordinary raid final, so the Raid Island itself can stay
-// legendary-only without orphaning the species it used to hold.
-const refugeStatics = []
-for (const region of regions) {
-  const location = RAID_REFUGE_LOCATIONS[region.id]
-  if (!location) continue
-  for (const entry of region.raidOrdinaryPool ?? []) {
-    const species = pokemonSpecies[entry.speciesKey]
-    if (!species) continue
-    refugeStatics.push({
-      id: `refuge-${region.id}-${entry.speciesKey}`,
-      location,
-      speciesKey: entry.speciesKey,
-      level: entry.level ?? 70,
-      name: `Rare ${species.name}`,
-      note: `A rare ${species.name} has taken up residence here.`,
-    })
-  }
-}
-
 /** @type {StaticEncounter[]} */
-export const STATIC_ENCOUNTERS = [...BASE_STATIC_ENCOUNTERS, ...refugeStatics]
+export const STATIC_ENCOUNTERS = [...BASE_STATIC_ENCOUNTERS]
 
 /**
  * @param {{ location: string }} entry

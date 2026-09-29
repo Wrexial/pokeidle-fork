@@ -5,10 +5,9 @@ import { installGameData } from './helpers/game-data.mjs'
 
 installGameData()
 
-const { mapData, pokemonSpecies, regions, raidLegendaryPoolFor, raidPoolFor } = await import(
+const { pokemonSpecies, regions, raidLegendaryPoolFor, raidPoolFor } = await import(
   '../src/data/gameData.js'
 )
-const { STATIC_ENCOUNTERS, RAID_REFUGE_LOCATIONS } = await import('../src/game/gifts.js')
 const { pickRaidLegendary, resolveRoamer } = await import('../src/game/progression.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 
@@ -25,10 +24,9 @@ function baseState(overrides = {}) {
   }
 }
 
-test('each region splits its Raid Island into a legendary and an ordinary tier', () => {
+test('every region keeps a legendary-only Raid Island', () => {
   for (const region of regions) {
-    const legendary = region.raidPool ?? [],
-      ordinary = region.raidOrdinaryPool ?? []
+    const legendary = region.raidPool ?? []
     assert.ok(legendary.length > 0, `${region.id} keeps its legendaries`)
     for (const entry of legendary)
       assert.equal(
@@ -36,39 +34,10 @@ test('each region splits its Raid Island into a legendary and an ordinary tier',
         true,
         `${region.id} lists non-legendary ${entry.speciesKey} in raidPool`
       )
-    for (const entry of ordinary)
-      assert.notEqual(
-        pokemonSpecies[entry.speciesKey]?.legendary,
-        true,
-        `${region.id} lists legendary ${entry.speciesKey} in raidOrdinaryPool`
-      )
-    assert.ok(
-      ordinary.length <= 15,
-      `${region.id} has ${ordinary.length} ordinary raid Pokemon`
-    )
-    const keys = [...legendary, ...ordinary].map((entry) => entry.speciesKey)
+    const keys = legendary.map((entry) => entry.speciesKey)
     assert.equal(new Set(keys).size, keys.length, `${region.id} lists a species twice`)
-    // The island is legendary-only; the ordinary finals live on a refuge route.
     assert.deepEqual(raidPoolFor(region.id), legendary)
     assert.deepEqual(raidLegendaryPoolFor(region.id), legendary)
-  }
-})
-
-test('ordinary raid finals are relocated to a reachable refuge static', () => {
-  const byLocation = new Set(
-    STATIC_ENCOUNTERS.map((entry) => `${entry.location}:${entry.speciesKey}`)
-  )
-  for (const region of regions) {
-    const ordinary = region.raidOrdinaryPool ?? []
-    if (ordinary.length === 0) continue
-    const location = RAID_REFUGE_LOCATIONS[region.id]
-    assert.ok(location && mapData[location], `${region.id} has a refuge location`)
-    assert.equal(mapData[location].type, 'route', `${location} is a route`)
-    for (const entry of ordinary)
-      assert.ok(
-        byLocation.has(`${location}:${entry.speciesKey}`),
-        `${entry.speciesKey} has a refuge static at ${location}`
-      )
   }
 })
 

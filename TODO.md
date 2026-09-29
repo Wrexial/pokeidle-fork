@@ -47,30 +47,28 @@ renumbered, so the gaps below are items that shipped.
     petting scene (the last open minigame idea).
 11. **#18 Better settings** — M · ★★★ — sprite-style options, account controls
     (blocked on #19) and finishing the Gameplay section.
-12. **#38 Clean up the Raid Islands** — M · ★★½ — weight / level-gate the
-    legendary pick and (optionally) shrink Unova's ordinary pool.
+12. **#38 Clean up the Raid Islands** — S · ★★ — weight / level-gate the
+    legendary pick by badges or prestige instead of a uniform "unseen first"
+    pick.
 13. **#43 Multi-battles (double / triple / rotation) as a minigame** — M–L ·
     ★★½ — a self-contained minigame that reuses the combat pipeline.
 14. **#60 Areas should have their own zoomed-in map** — M · ★★ — zones and
     large areas list their sub-areas in the panel only; give them a focused
     map view entered from the Town Map, with a back button to exit.
-15. **#61 Former raid gifts onto real routes** — M · ★★ — the ordinary Raid
-    Island finals became one-off refuge statics on each region's last route;
-    place them on routes that suit them as part of the encounter table.
-16. **#65 Use minigames as unlock gates** — M · ★★ — let a route require
+15. **#65 Use minigames as unlock gates** — M · ★★ — let a route require
     clearing a minigame (or hitting a score) instead of only battles / badges /
     catches, so the minigames feed progression.
-17. **#66 Ruins of Alph should award an Unown (and all 28 forms)** — M · ★★ —
+16. **#66 Ruins of Alph should award an Unown (and all 28 forms)** — M · ★★ —
     the sliding puzzle never gives an Unown, and only one Unown form exists;
     award one and add the full letter / punctuation set.
-18. **#67 Baby Pokemon from breeding, not gifts** — M · ★★ — the Daycare can
+17. **#67 Baby Pokemon from breeding, not gifts** — M · ★★ — the Daycare can
     already hatch babies from their evolved forms; stop handing the babies out
     as gift/static rewards and give their evolved forms a real source.
-19. **#68 Trainer teams should use all level-appropriate Pokemon** — M · ★★ —
+18. **#68 Trainer teams should use all level-appropriate Pokemon** — M · ★★ —
     the strong type bias and narrow pools mean the same few species repeat; let
     trainers field every level-appropriate Pokemon so the Pokedex "seen" fills
     in.
-20. **#70 Day/night cycle on a 60-minute clock** — M · ★★ — a fixed
+19. **#70 Day/night cycle on a 60-minute clock** — M · ★★ — a fixed
     real-time cycle (full day = 60 min) replacing the wall-clock night flag,
     with a visual phase and time-gated effects.
 21. **#74 Snowpoint Temple variety** — S · ★ — the ice-slide rooms are a fixed
@@ -291,25 +289,21 @@ The raid scan gives each region its generation's species that appear on **no**
 region's wild routes and can't be reached by breeding/evolving a route species.
 Later dexes balloon (Alola 51, Galar 59, Paldea 58 pre-cleanup).
 
-**Shipped (0.13.0):** each island is split into `raidPool` (legendaries/mythicals
-with no other source — the bosses) and `raidOrdinaryPool` (ordinary finals with
-no other source, capped at 15). `validate-data.cjs` checks the split, and
-`raidPoolFor` still returns the full table for the UI and wild bucket.
+**Shipped (0.13.0):** each island's raid bosses are its legendaries/mythicals
+with no other source (the `raidPool`); the ordinary finals that used to share the
+roster now live on fitting region routes as wild encounters (#61), so the island
+is legendary-only. Any ordinary form still without a route or evolution source
+lands on the island's wild table (not the raid pool) as a safety net.
+`validate-data.cjs` checks that `raidPool` is legendary-only.
 
 Still open:
 
 - [ ] Weight / level-gate the legendary pick by badges or prestige instead of a
       uniform "unseen first" pick.
-- [ ] Move the Galarian birds (`g-articuno` / `g-zapdos` / `g-moltres`) back
-      into the legendary pool — they are mis-flagged as ordinary today (#59).
-- [ ] Relocate the remaining ordinary finals from the one-off refuge statics
-      onto fitting routes as real encounters (#61), then drop the refuges.
-- [ ] If a smaller Unova (13 ordinary) pool is wanted, give a few of its finals a
-      real route or evolution source (part of #28/#39).
 
 Relevant code: `tools/generate-regions.cjs` (`raidCandidates`,
-`raidPoolSpecies`, `staysInRaidPool`, `FORM_RAID_REGION`, `paldeaExtrasFor`, the
-raid scan), `public/data/regions.json` (`raidPool` / `raidOrdinaryPool`),
+`raidPoolSpecies`, `staysInRaidPool`, `FORM_RAID_REGION`, `paldeaExtrasFor`,
+`RAID_FINAL_HABITATS`, the raid scan), `public/data/regions.json` (`raidPool`),
 `raidPoolFor` / `raidLegendaryPoolFor` (`src/data/gameData.js`),
 `pickRaidLegendary` / `resolveRoamer` (`src/game/progression.js`), the raid UI
 (`src/components/town-map.js`, `location-panel.js`) and `tools/validate-data.cjs`.
@@ -487,41 +481,6 @@ Relevant code: `src/components/town-map.js`, `src/components/location-panel.js`
 
 Effort: **medium**.
 
-## 61. Move the former raid gifts onto real routes
-
-When the Raid Islands became legendary-only, each region's ordinary finals were
-relocated as one-off **refuge static encounters** on that region's last route
-(`RAID_REFUGE_LOCATIONS` / `refugeStatics` in `src/game/gifts.js`): Kanto's
-Jynx/Omastar/Kabutops/Aerodactyl, Johto's
-Cleffa/Togepi/Xatu/Unown/Smoochum/Magby, Hoenn's
-Slaking/Mawile/Cradily/Metagross, Sinnoh's
-Rampardos/Bastiodon/Ambipom/Spiritomb/Togekiss/Porygon-Z, Unova's 13 ordinary
-finals, Kalos's Tyrantrum/Aurorus/Carbink/Gourgeist, and Galar's fossil quartet +
-Indeedee-F. They should instead appear on routes that fit them, as ordinary (if
-rare) entries in the encounter table, so they are repeatable and feel native
-rather than bolted onto one late route as another Snorlax-style static.
-
-- [ ] For each region, pick thematically/canonically fitting route(s) and add
-      the species to `public/data/encounter-data/<region>.json` with that
-      route's level band and a low weight (so they stay rare).
-- [ ] Give fossils their canonical source (Sinnoh's Underground / a fossil-revive
-      system — #50) instead of a wild spawn where that is more faithful.
-- [ ] Leave the Galarian birds out — they belong back in `raidPool` (#59), not on
-      a route.
-- [ ] Retire the refuge statics once every species has a real encounter, and drop
-      the now-redundant `raidOrdinaryPool` / `RAID_REFUGE_LOCATIONS` plumbing
-      (keep it only if some species still need it for obtainability).
-- [ ] Update `src/game/gifts.js`, `tools/apply-raid-refugees.cjs`,
-      `public/data/regions.json#raidOrdinaryPool`, `tests/raid.test.mjs` and
-      `tools/validate-data.cjs` so the obtainability check no longer depends on
-      the refuges.
-- [ ] Regenerate `public/encounter-index.html` and re-check the raid pools (#38).
-
-Relevant code: `public/data/encounter-data/*.json`, `public/data/regions.json`,
-`src/game/gifts.js`, `tools/apply-raid-refugees.cjs`, `tools/validate-data.cjs`,
-`tests/raid.test.mjs`, and the raid scan in `tools/generate-regions.cjs`.
-
-Effort: **medium** (data-heavy: one habitat decision per species).
 ## 65. Use minigames as unlock gates
 
 Location unlocks are built entirely from battles won, catches, badges, gyms,

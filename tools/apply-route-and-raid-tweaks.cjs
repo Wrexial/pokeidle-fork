@@ -31,15 +31,19 @@ write('public/data/pokemon-species.json', species, 2)
 
 const regions = read('public/data/regions.json')
 const galar = regions.find((region) => region.id === 'galar')
-const before = galar.raidOrdinaryPool.length
-galar.raidOrdinaryPool = galar.raidOrdinaryPool.filter(
-  (entry) => !birds.includes(entry.speciesKey)
-)
+// The old `raidOrdinaryPool` roster is gone (#61); the bird filter is kept as a
+// no-op guard so re-running this historical patch stays safe.
+if (Array.isArray(galar.raidOrdinaryPool)) {
+  const before = galar.raidOrdinaryPool.length
+  galar.raidOrdinaryPool = galar.raidOrdinaryPool.filter(
+    (entry) => !birds.includes(entry.speciesKey)
+  )
+  console.log(`galar ordinary pool ${before} -> ${galar.raidOrdinaryPool.length}`)
+}
 for (const key of birds) {
   if (!galar.raidPool.some((entry) => entry.speciesKey === key))
     galar.raidPool.push({ speciesKey: key, level: 75 })
 }
-console.log(`galar ordinary pool ${before} -> ${galar.raidOrdinaryPool.length}`)
 write('public/data/regions.json', regions, 1)
 
 const galarEncounters = read('public/data/encounter-data/galar.json')

@@ -132,6 +132,12 @@
     "weight": 1,
     "minLevel": 8,
     "maxLevel": 10
+   },
+   {
+    "speciesKey": "togepi",
+    "weight": 2,
+    "minLevel": 8,
+    "maxLevel": 10
    }
   ]
  },
@@ -301,6 +307,18 @@
    },
    {
     "speciesKey": "gastly",
+    "weight": 1,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "natu",
+    "weight": 3,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "unown",
     "weight": 1,
     "minLevel": 14,
     "maxLevel": 16
@@ -694,6 +712,12 @@
     "weight": 12,
     "minLevel": 33,
     "maxLevel": 35
+   },
+   {
+    "speciesKey": "magby",
+    "weight": 2,
+    "minLevel": 33,
+    "maxLevel": 35
    }
   ]
  },
@@ -757,6 +781,12 @@
    {
     "speciesKey": "miltank",
     "weight": 1,
+    "minLevel": 36,
+    "maxLevel": 38
+   },
+   {
+    "speciesKey": "cleffa",
+    "weight": 2,
     "minLevel": 36,
     "maxLevel": 38
    }
@@ -1200,6 +1230,12 @@
    {
     "speciesKey": "poliwhirl",
     "weight": 3,
+    "minLevel": 58,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "smoochum",
+    "weight": 2,
     "minLevel": 58,
     "maxLevel": 60
    }

@@ -675,6 +675,12 @@
     "weight": 1,
     "minLevel": 37,
     "maxLevel": 39
+   },
+   {
+    "speciesKey": "carbink",
+    "weight": 2,
+    "minLevel": 37,
+    "maxLevel": 39
    }
   ]
  },
@@ -1082,6 +1088,12 @@
    {
     "speciesKey": "phantump",
     "weight": 5,
+    "minLevel": 54,
+    "maxLevel": 56
+   },
+   {
+    "speciesKey": "pumpkaboo",
+    "weight": 2,
     "minLevel": 54,
     "maxLevel": 56
    }

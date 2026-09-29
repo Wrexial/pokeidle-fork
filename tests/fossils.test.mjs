@@ -7,7 +7,7 @@ installGameData()
 
 const { bagCategories, fossilItems } = await import('../src/data/items.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
-const { pokemonSpecies, regions } = await import('../src/data/gameData.js')
+const { mapEncounterData, pokemonSpecies } = await import('../src/data/gameData.js')
 const { createPokemon } = await import('../src/game/pokemon.js')
 const { rewardItemName, rollMiningReward } = await import('../src/game/minigames.js')
 
@@ -38,13 +38,12 @@ test('every fossil maps to a real species and a bag category', () => {
   }
 })
 
-test('fossil finals are no longer ordinary Raid Island finals', () => {
-  for (const region of regions)
-    for (const entry of region.raidOrdinaryPool ?? [])
-      assert.ok(
-        !FOSSIL_FINALS.includes(entry.speciesKey),
-        `${region.id} still lists fossil final ${entry.speciesKey}`
-      )
+test('fossil finals come from reviving, not wild routes', () => {
+  const wild = new Set()
+  for (const bucket of Object.values(mapEncounterData ?? {}))
+    for (const encounter of bucket.encounters ?? []) wild.add(encounter.speciesKey)
+  for (const key of FOSSIL_FINALS)
+    assert.ok(!wild.has(key), `${key} should be revived, not found in the wild`)
 })
 
 test('a fossil revives at Cinnabar Island and is consumed', () => {

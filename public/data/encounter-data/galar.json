@@ -1029,6 +1029,12 @@
     "weight": 12,
     "minLevel": 35,
     "maxLevel": 37
+   },
+   {
+    "speciesKey": "indeedee-f",
+    "weight": 2,
+    "minLevel": 35,
+    "maxLevel": 37
    }
   ]
  },

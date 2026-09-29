@@ -2271,6 +2271,56 @@ for (const adds of Object.values(REGION_ROUTE_ADDS)) {
   }
 }
 
+// --- former raid finals as native wilds (#61) --------------------------------
+// The ordinary finals the Raid Islands used to carry now appear as rare wild
+// entries on routes that suit them, so the island stays legendary-only without
+// stranding species on one-off refuge statics. The base stages are placed, not
+// the finals, so the whole evolution chain stays native and repeatable.
+const RAID_FINAL_HABITATS = {
+  kanto: { seafoamIslands: [['jynx', 2]] },
+  johto: {
+    'johto-route-30': [['togepi', 2]],
+    'johto-route-32': [['natu', 3], ['unown', 1]],
+    'johto-route-38': [['cleffa', 2]],
+    'johto-route-44': [['smoochum', 2]],
+    'johto-bell-tower': [['magby', 2]],
+  },
+  hoenn: {
+    'hoenn-route-106': [['mawile', 3]],
+    'hoenn-route-131': [['beldum', 1]],
+  },
+  sinnoh: {
+    'sinnoh-route-205': [['aipom', 2]],
+    'sinnoh-route-209': [['spiritomb', 1]],
+    'sinnoh-route-214': [['porygon', 1]],
+  },
+  unova: {
+    'unova-route-3': [['pansage', 2], ['pansear', 2], ['panpour', 2], ['woobat', 2]],
+    'unova-route-4': [['drilbur', 2], ['yamask', 2]],
+    'unova-route-5': [['munna', 2]],
+    'unova-route-6': [['cottonee', 2]],
+    'unova-route-8': [['cryogonal', 1]],
+    'unova-route-15': [['druddigon', 1]],
+    'unova-route-17': [['frillish', 2]],
+  },
+  kalos: {
+    'kalos-route-11': [['carbink', 2]],
+    'kalos-route-16': [['pumpkaboo', 2]],
+  },
+  galar: { 'galar-wild-area-rolling-fields': [['indeedee-f', 2]] },
+}
+for (const [regionId, routes] of Object.entries(RAID_FINAL_HABITATS)) {
+  for (const [locationId, entries] of Object.entries(routes)) {
+    const bucket = encounterData[locationId]
+    if (!bucket) continue
+    const level = bucket.encounters[0]?.minLevel ?? 5,
+      maxLevel = bucket.encounters[0]?.maxLevel ?? clampLevel(level + 2)
+    for (const [key, weight] of entries)
+      if (species[key] && !bucket.encounters.some((entry) => entry.speciesKey === key))
+        bucket.encounters.push({ speciesKey: key, weight, minLevel: level, maxLevel })
+  }
+}
+
 // --- group existing routes into zones ----------------------------------------
 // Alola's islands and Paldea's provinces read badly as long chains of single
 // route nodes, so wrap each group behind one `type: 'zone'` hub; the routes
@@ -2506,10 +2556,10 @@ while (breedGrew) {
 }
 
 // The legendary pool is every legendary/mythical with no other source, and is
-// kept in full. Ordinary finals (fossils, regional forms, one-off lines) are a
-// distinct lower tier: they still live on the island's wild table, but never
-// headline a raid. The cap is a safety rail — the route/breeding scan already
-// keeps the ordinary sets around a dozen.
+// kept in full. Any ordinary leftover (a regional form or one-off line no route
+// or evolution reaches) still lands on the island's wild table, but never
+// headlines a raid; the habitat pass above already routed the species that had
+// a fitting home. The cap is a safety rail.
 const RAID_ORDINARY_CAP = 15
 for (const pending of pendingRaids) {
   const { regionObj, raidId, raidNodeName } = pending,
@@ -2518,11 +2568,7 @@ for (const pending of pendingRaids) {
     ordinaryPool = pool.filter((entry) => !entry.legendary).slice(0, RAID_ORDINARY_CAP),
     toEntry = (entry) => ({ speciesKey: entry.key, level: raidLevel(entry) })
   regionObj.raidPool = legendaryPool.map(toEntry)
-  // The ordinary finals are kept as a roster only: the game turns each into a
-  // static encounter on a reachable refuge route (RAID_REFUGE_LOCATIONS in
-  // src/game/gifts.js), so the island's own wild table stays legendary-only.
-  regionObj.raidOrdinaryPool = ordinaryPool.map(toEntry)
-  const islandPool = [...legendaryPool]
+  const islandPool = [...legendaryPool, ...ordinaryPool]
   if (raidId)
     encounterData[raidId] = {
       name: raidNodeName,

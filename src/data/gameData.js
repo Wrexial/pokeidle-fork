@@ -82,9 +82,9 @@ export let regions = /** @type {Region[]} */ (loadedGameData.regions || [])
 
 /**
  * The Raid Island's displayed encounter table: its legendaries. The ordinary
- * finals that used to sit here are relocated to a reachable refuge route on the
- * region (see `RAID_REFUGE_LOCATIONS` in game/gifts.js), so the island stays
- * legendary-only. Empty if the region is unknown.
+ * finals the island used to carry now live on fitting region routes as wild
+ * encounters, so the island stays legendary-only. Empty if the region is
+ * unknown.
  * @param {string} regionId
  * @returns {{ speciesKey: string, level: number }[]}
  */
@@ -94,8 +94,7 @@ export function raidPoolFor(regionId) {
 }
 
 /**
- * The legendaries a region's Raid Island can headline a raid with. Raids are a
- * legendary hunt; the ordinary finals are a separate, lower tier.
+ * The legendaries a region's Raid Island can headline a raid with.
  * @param {string} regionId
  * @returns {{ speciesKey: string, level: number }[]}
  */

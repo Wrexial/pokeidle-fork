@@ -34,13 +34,7 @@
    "badgeTrack": "Gym Leaders",
    "badgeName": "Badge",
    "eliteTrack": "Elite Four & Champion"
-  },
-  "raidOrdinaryPool": [
-   {
-    "speciesKey": "jynx",
-    "level": 70
-   }
-  ]
+  }
  },
  {
   "id": "johto",
@@ -79,32 +73,6 @@
    },
    {
     "speciesKey": "celebi",
-    "level": 70
-   }
-  ],
-  "raidOrdinaryPool": [
-   {
-    "speciesKey": "cleffa",
-    "level": 70
-   },
-   {
-    "speciesKey": "togepi",
-    "level": 70
-   },
-   {
-    "speciesKey": "xatu",
-    "level": 70
-   },
-   {
-    "speciesKey": "unown",
-    "level": 70
-   },
-   {
-    "speciesKey": "smoochum",
-    "level": 70
-   },
-   {
-    "speciesKey": "magby",
     "level": 70
    }
   ]
@@ -162,20 +130,6 @@
    },
    {
     "speciesKey": "deoxys",
-    "level": 75
-   }
-  ],
-  "raidOrdinaryPool": [
-   {
-    "speciesKey": "slaking",
-    "level": 70
-   },
-   {
-    "speciesKey": "mawile",
-    "level": 70
-   },
-   {
-    "speciesKey": "metagross",
     "level": 75
    }
   ]
@@ -251,24 +205,6 @@
     "speciesKey": "arceus",
     "level": 75
    }
-  ],
-  "raidOrdinaryPool": [
-   {
-    "speciesKey": "ambipom",
-    "level": 70
-   },
-   {
-    "speciesKey": "spiritomb",
-    "level": 70
-   },
-   {
-    "speciesKey": "togekiss",
-    "level": 70
-   },
-   {
-    "speciesKey": "porygon-z",
-    "level": 70
-   }
   ]
  },
  {
@@ -338,52 +274,6 @@
     "speciesKey": "genesect",
     "level": 75
    }
-  ],
-  "raidOrdinaryPool": [
-   {
-    "speciesKey": "simisage",
-    "level": 70
-   },
-   {
-    "speciesKey": "simisear",
-    "level": 70
-   },
-   {
-    "speciesKey": "simipour",
-    "level": 70
-   },
-   {
-    "speciesKey": "musharna",
-    "level": 70
-   },
-   {
-    "speciesKey": "swoobat",
-    "level": 70
-   },
-   {
-    "speciesKey": "excadrill",
-    "level": 70
-   },
-   {
-    "speciesKey": "whimsicott",
-    "level": 70
-   },
-   {
-    "speciesKey": "cofagrigus",
-    "level": 70
-   },
-   {
-    "speciesKey": "jellicent",
-    "level": 70
-   },
-   {
-    "speciesKey": "cryogonal",
-    "level": 70
-   },
-   {
-    "speciesKey": "druddigon",
-    "level": 70
-   }
   ]
  },
  {
@@ -424,16 +314,6 @@
    {
     "speciesKey": "volcanion",
     "level": 75
-   }
-  ],
-  "raidOrdinaryPool": [
-   {
-    "speciesKey": "carbink",
-    "level": 70
-   },
-   {
-    "speciesKey": "gourgeist",
-    "level": 70
    }
   ]
  },
@@ -560,8 +440,7 @@
     "speciesKey": "melmetal",
     "level": 75
    }
-  ],
-  "raidOrdinaryPool": []
+  ]
  },
  {
   "id": "galar",
@@ -638,12 +517,6 @@
     "speciesKey": "g-moltres",
     "level": 75
    }
-  ],
-  "raidOrdinaryPool": [
-   {
-    "speciesKey": "indeedee-f",
-    "level": 70
-   }
   ]
  },
  {
@@ -709,7 +582,6 @@
     "speciesKey": "pecharunt",
     "level": 75
    }
-  ],
-  "raidOrdinaryPool": []
+  ]
  }
 ]

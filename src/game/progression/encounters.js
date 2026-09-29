@@ -174,8 +174,10 @@ export const SHINY_CHAIN_FIRST_TARGET = 5
 export const SHINY_CHAIN_TARGET_STEP = 5
 
 /**
- * Shiny-odds divisor from a DexNav-style chain: 1x at no chain, up to 4x at
- * 120+ consecutive encounters of the same species.
+ * Shiny-odds divisor from a DexNav-style chain: 1x at no chain, rising by 1x
+ * every `SHINY_CHAIN_STEP` consecutive encounters of the species and capped at
+ * 4x. The guaranteed-shiny target (see `shinyChainGuaranteed`) usually resets
+ * the chain well before the cap is reached.
  * @param {string} speciesKey
  * @param {{ speciesKey: string | null, count: number } | undefined | null} chain
  * @returns {number}

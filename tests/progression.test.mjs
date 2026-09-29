@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 installGameData()
 
-const { awardExperience, computeUnlockedLocations, getRegionUnlockTokens, regionProgressionGoal, checkShinyOdds, shinyChainMultiplier, entryRoutePath } =
+const { awardExperience, computeUnlockedLocations, getRegionUnlockTokens, regionProgressionGoal, checkShinyOdds, shinyChainMultiplier, shinyOddsForCompletedGenerations, shinyOddsForSpecies, entryRoutePath } =
   await import('../src/game/progression.js')
 const { initialGameState, gameReducer } = await import('../src/game/reducer.js')
 const { encounterData, gymLeaderData, mapData, pokemonSpecies, regions } = await import('../src/data/gameData.js')
@@ -294,13 +294,37 @@ test('checkShinyOdds hits on a zero roll and misses otherwise', () => {
   }
 })
 
-test('shiny chain multiplier only applies to the chained species and is capped', () => {
+test('the Shiny Charm curve runs from full odds to 1 in 256', () => {
+  assert.equal(shinyOddsForCompletedGenerations(0, 9), 4096)
+  assert.equal(shinyOddsForCompletedGenerations(1, 9), 2048)
+  assert.equal(shinyOddsForCompletedGenerations(9, 9), 256)
+  for (let completed = 1; completed <= 9; completed++)
+    assert.ok(
+      shinyOddsForCompletedGenerations(completed, 9) <
+        shinyOddsForCompletedGenerations(completed - 1, 9),
+      'each completed generation improves the odds'
+    )
+})
+
+test('the Shiny Charm only applies to a completed generation', () => {
+  assert.equal(shinyOddsForSpecies('bulbasaur', new Set()), 4096)
+  assert.equal(shinyOddsForSpecies('bulbasaur', new Set([0])), 2048)
+  assert.equal(
+    shinyOddsForSpecies('chikorita', new Set([0])),
+    4096,
+    'a Gen 2 species is not charmed by a completed Gen 1'
+  )
+})
+
+test('shiny chain multiplier rises linearly and caps at 4x', () => {
+  assert.equal(shinyChainMultiplier('pidgey', null), 1)
   assert.equal(shinyChainMultiplier('pidgey', { speciesKey: 'rattata', count: 120 }), 1)
   assert.equal(shinyChainMultiplier('pidgey', { speciesKey: 'pidgey', count: 0 }), 1)
-  const small = shinyChainMultiplier('pidgey', { speciesKey: 'pidgey', count: 10 }),
-    large = shinyChainMultiplier('pidgey', { speciesKey: 'pidgey', count: 120 })
-  assert.ok(large > small && large > 1)
-  assert.ok(large <= 4)
+  // +1x every 4 consecutive encounters, capped at 4x.
+  assert.equal(shinyChainMultiplier('pidgey', { speciesKey: 'pidgey', count: 4 }), 2)
+  assert.equal(shinyChainMultiplier('pidgey', { speciesKey: 'pidgey', count: 8 }), 3)
+  assert.equal(shinyChainMultiplier('pidgey', { speciesKey: 'pidgey', count: 12 }), 4)
+  assert.equal(shinyChainMultiplier('pidgey', { speciesKey: 'pidgey', count: 120 }), 4)
 })
 
 test('every region has a Daycare on one of its real routes', () => {

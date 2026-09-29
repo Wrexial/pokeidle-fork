@@ -37,6 +37,105 @@ const NATURE_POWER_BY_TERRAIN = {
 let metronomePool = null
 
 /**
+ * Apply a `statChange` effect to the move's user or target, honouring Contrary
+ * / Simple, Clear Body / Mist, and the Opportunist / Defiant / Competitive
+ * reactions. Shared by status moves (applied directly) and damaging moves
+ * (applied after the hit as an added effect).
+ * @param {any} attack
+ * @param {Move} moveDef
+ * @param {any[]} events
+ * @param {boolean} [deterministic]
+ * @param {boolean} [secondary] Damaging-move added effect: roll its chance and
+ *   let Shield Dust block it.
+ */
+function applyStatChange(attack, moveDef, events, deterministic = !1, secondary = !1) {
+  const effect = moveDef.effect
+  if (!effect) return
+  const fromOpponent = effect.target !== 'self'
+  // Shield Dust ignores a damaging move's added effects on its holder.
+  if (secondary && fromOpponent && abilityOf(attack.defender) === 'shieldDust') return
+  if (
+    secondary &&
+    effect.chance !== void 0 &&
+    !chance(
+      (effect.chance * (abilityOf(attack.attacker) === 'sereneGrace' ? 2 : 1)) / 100,
+      deterministic
+    )
+  )
+    return
+  const statTarget = fromOpponent ? attack.defender : attack.attacker,
+    side = statTarget === attack.attacker
+      ? attack.isPlayer
+        ? 'player'
+        : 'enemy'
+      : attack.isPlayer
+        ? 'enemy'
+        : 'player',
+    targetAbility = abilityOf(statTarget)
+  statTarget.statStages || (statTarget.statStages = {})
+  for (const [statKey, delta] of Object.entries(effect.changes)) {
+    const key = normalizeStatKey(statKey),
+      // Contrary flips the change, Simple doubles it.
+      appliedDelta =
+        targetAbility === 'contrary' ? -delta : targetAbility === 'simple' ? delta * 2 : delta,
+      currentStage = statTarget.statStages[key] ?? 0,
+      newStage = clampStatStage(currentStage + appliedDelta)
+    // Clear Body / Hyper Cutter / ... and Mist block opponent-inflicted drops.
+    if (
+      appliedDelta < 0 &&
+      (abilityPreventsStatDrop(statTarget, key) ||
+        (fromOpponent && (statTarget.mistTurns ?? 0) > 0))
+    )
+      continue
+    statTarget.statStages[key] = newStage
+    const verb = appliedDelta > 0 ? 'rose' : 'fell',
+      sharply = Math.abs(appliedDelta) >= 2 ? 'sharply ' : ''
+    events.push({
+      type: 'statChange',
+      message: `${statTarget.name}'s ${getStatLabel(key)} ${sharply}${verb}!`,
+      data: {
+        target: side,
+      },
+    })
+    // Opportunist copies a foe's self-boost onto the holder.
+    if (!fromOpponent && appliedDelta > 0 && abilityOf(attack.defender) === 'opportunist') {
+      const oppStages = attack.defender.statStages ?? (attack.defender.statStages = {}),
+        oppCurrent = oppStages[key] ?? 0,
+        oppNext = clampStatStage(oppCurrent + appliedDelta)
+      if (oppNext !== oppCurrent) {
+        oppStages[key] = oppNext
+        events.push({
+          type: 'statChange',
+          message: `${attack.defender.name} copied the boost!`,
+          data: { target: attack.isPlayer ? 'enemy' : 'player' },
+        })
+      }
+    }
+    // Defiant / Competitive punish an opponent's drop with a big boost.
+    if (delta < 0 && fromOpponent && targetAbility !== 'contrary') {
+      const boostKey =
+          targetAbility === 'defiant'
+            ? 'attack'
+            : targetAbility === 'competitive'
+              ? 'spAttack'
+              : null,
+        boostCurrent = boostKey ? (statTarget.statStages[boostKey] ?? 0) : 0,
+        boostNext = boostKey ? clampStatStage(boostCurrent + 2) : boostCurrent
+      if (boostKey && boostNext !== boostCurrent) {
+        statTarget.statStages[boostKey] = boostNext
+        events.push({
+          type: 'statChange',
+          message: `${statTarget.name}'s ${getStatLabel(boostKey)} sharply rose!`,
+          data: {
+            target: side,
+          },
+        })
+      }
+    }
+  }
+}
+
+/**
  * Remember that a move did nothing to this foe, so the AI stops choosing it
  * after it has actually failed. The AI is never told the foe's ability, so its
  * first attempt is always allowed through.
@@ -523,71 +622,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         })
       }
       if (moveDef.effect?.type === 'statChange') {
-        const statTarget = moveDef.effect.target === 'self' ? attack.attacker : attack.defender,
-          side = statTarget === player ? 'player' : 'enemy',
-          targetAbility = abilityOf(statTarget),
-          fromOpponent = moveDef.effect.target !== 'self'
-        statTarget.statStages || (statTarget.statStages = {})
-        for (const [statKey, delta] of Object.entries(moveDef.effect.changes)) {
-          const key = normalizeStatKey(statKey),
-            // Contrary flips the change, Simple doubles it.
-            appliedDelta =
-              targetAbility === 'contrary' ? -delta : targetAbility === 'simple' ? delta * 2 : delta,
-            currentStage = statTarget.statStages[key] ?? 0,
-            newStage = clampStatStage(currentStage + appliedDelta)
-          // Clear Body / Hyper Cutter / ... and Mist block opponent-inflicted drops.
-          if (
-            appliedDelta < 0 &&
-            (abilityPreventsStatDrop(statTarget, key) ||
-              (fromOpponent && (statTarget.mistTurns ?? 0) > 0))
-          )
-            continue
-          statTarget.statStages[key] = newStage
-          const verb = appliedDelta > 0 ? 'rose' : 'fell',
-            sharply = Math.abs(appliedDelta) >= 2 ? 'sharply ' : ''
-          events.push({
-            type: 'statChange',
-            message: `${statTarget.name}'s ${getStatLabel(key)} ${sharply}${verb}!`,
-            data: {
-              target: side,
-            },
-          })
-          // Opportunist copies a foe's self-boost onto the holder.
-          if (!fromOpponent && appliedDelta > 0 && abilityOf(attack.defender) === 'opportunist') {
-            const oppStages = attack.defender.statStages ?? (attack.defender.statStages = {}),
-              oppCurrent = oppStages[key] ?? 0,
-              oppNext = clampStatStage(oppCurrent + appliedDelta)
-            if (oppNext !== oppCurrent) {
-              oppStages[key] = oppNext
-              events.push({
-                type: 'statChange',
-                message: `${attack.defender.name} copied the boost!`,
-                data: { target: attack.isPlayer ? 'enemy' : 'player' },
-              })
-            }
-          }
-          // Defiant / Competitive punish an opponent's drop with a big boost.
-          if (delta < 0 && fromOpponent && targetAbility !== 'contrary') {
-            const boostKey =
-                targetAbility === 'defiant'
-                  ? 'attack'
-                  : targetAbility === 'competitive'
-                    ? 'spAttack'
-                    : null,
-              boostCurrent = boostKey ? (statTarget.statStages[boostKey] ?? 0) : 0,
-              boostNext = boostKey ? clampStatStage(boostCurrent + 2) : boostCurrent
-            if (boostKey && boostNext !== boostCurrent) {
-              statTarget.statStages[boostKey] = boostNext
-              events.push({
-                type: 'statChange',
-                message: `${statTarget.name}'s ${getStatLabel(boostKey)} sharply rose!`,
-                data: {
-                  target: side,
-                },
-              })
-            }
-          }
-        }
+        applyStatChange(attack, moveDef, events, deterministic)
       } else if (
         moveDef.effect?.type === 'status' &&
         (moveDef.effect.chance === void 0 ||
@@ -1602,6 +1637,12 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
             )
           )
             applyStatus(attack.defender, moveDef.effect.status, events, !attack.isPlayer, deterministic, activeTerrain, !0, attack.attacker)
+          break
+        }
+        case 'statChange': {
+          // A damaging move's stat change (Overheat's self-drop, Fire Lash's
+          // guaranteed Defense drop, ...) is an added effect after the hit.
+          applyStatChange(attack, moveDef, events, deterministic, !0)
           break
         }
         case 'statReset': {

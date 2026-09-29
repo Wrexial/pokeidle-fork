@@ -77,7 +77,6 @@
             "type": "statChange",
             "target": "opponent",
             "changes": {
-                "defense": -2,
                 "special-defense": -2
             },
             "chance": 100
@@ -207,7 +206,6 @@
             "type": "statChange",
             "target": "self",
             "changes": {
-                "defense": 2,
                 "special-defense": 2
             },
             "chance": 100
@@ -243,7 +241,6 @@
             "type": "statChange",
             "target": "opponent",
             "changes": {
-                "defense": -1,
                 "special-defense": -1
             },
             "chance": 100
@@ -348,9 +345,8 @@
         "priority": 0,
         "effect": {
             "type": "statChange",
-            "target": "opponent",
+            "target": "self",
             "changes": {
-                "defense": 1,
                 "special-defense": 1
             },
             "chance": 100
@@ -461,7 +457,7 @@
         "priority": 0,
         "effect": {
             "type": "statChange",
-            "target": "opponent",
+            "target": "self",
             "changes": {
                 "speed": 2
             },
@@ -624,9 +620,9 @@
         "priority": 0,
         "effect": {
             "type": "statChange",
-            "target": "opponent",
+            "target": "self",
             "changes": {
-                "attack": 1
+                "attack": 6
             },
             "chance": 100
         }
@@ -1118,8 +1114,6 @@
             "type": "statChange",
             "target": "self",
             "changes": {
-                "attack": 1,
-                "defense": 1,
                 "special-attack": 1,
                 "special-defense": 1
             },
@@ -1147,7 +1141,6 @@
             "type": "statChange",
             "target": "opponent",
             "changes": {
-                "attack": -2,
                 "special-attack": -2
             },
             "chance": 100
@@ -1192,7 +1185,6 @@
             "type": "statChange",
             "target": "self",
             "changes": {
-                "defense": 1,
                 "special-defense": 1
             },
             "chance": 100
@@ -1433,7 +1425,6 @@
             "type": "statChange",
             "target": "opponent",
             "changes": {
-                "attack": -1,
                 "special-attack": -1
             },
             "chance": 100
@@ -1559,7 +1550,7 @@
             "type": "statChange",
             "target": "self",
             "changes": {
-                "defense": 1
+                "defense": 3
             },
             "chance": 100
         }
@@ -2014,7 +2005,6 @@
             "type": "statChange",
             "target": "self",
             "changes": {
-                "attack": -2,
                 "special-attack": -2
             },
             "chance": 100
@@ -2296,7 +2286,6 @@
             "type": "statChange",
             "target": "opponent",
             "changes": {
-                "attack": -2,
                 "special-attack": -2
             },
             "chance": 100
@@ -2583,7 +2572,6 @@
             "type": "statChange",
             "target": "opponent",
             "changes": {
-                "defense": -2,
                 "special-defense": -2
             },
             "chance": 100
@@ -2654,7 +2642,7 @@
             "type": "statChange",
             "target": "self",
             "changes": {
-                "attack": 1
+                "attack": 3
             },
             "chance": 100
         }
@@ -2701,11 +2689,11 @@
         "priority": 0,
         "effect": {
             "type": "statChange",
-            "target": "opponent",
+            "target": "self",
             "changes": {
-                "attack": -1,
-                "special-attack": -1,
-                "speed": -1
+                "attack": 2,
+                "special-attack": 2,
+                "speed": 2
             },
             "chance": 100
         }
@@ -2938,7 +2926,6 @@
             "type": "statChange",
             "target": "opponent",
             "changes": {
-                "attack": 1,
                 "special-attack": 1
             },
             "chance": 100
@@ -2956,7 +2943,6 @@
             "type": "statChange",
             "target": "self",
             "changes": {
-                "attack": -2,
                 "special-attack": -2
             },
             "chance": 100
@@ -3013,9 +2999,9 @@
         "priority": 0,
         "effect": {
             "type": "statChange",
-            "target": "opponent",
+            "target": "self",
             "changes": {
-                "defense": 2
+                "defense": 1
             },
             "chance": 100
         }
@@ -3599,8 +3585,8 @@
             "type": "statChange",
             "target": "self",
             "changes": {
-                "attack": 2,
-                "defense": 2,
+                "special-attack": 2,
+                "special-defense": 2,
                 "speed": 2
             },
             "chance": 100
@@ -3996,7 +3982,8 @@
             "type": "statChange",
             "target": "self",
             "changes": {
-                "defense": -1
+                "defense": -1,
+                "special-defense": -1
             },
             "chance": 100
         }
@@ -4223,7 +4210,7 @@
         "priority": 0,
         "effect": {
             "type": "statChange",
-            "target": "opponent",
+            "target": "self",
             "changes": {
                 "attack": 1
             },
@@ -4807,7 +4794,6 @@
             "type": "statChange",
             "target": "self",
             "changes": {
-                "attack": -2,
                 "special-attack": -2
             },
             "chance": 100
@@ -4998,8 +4984,7 @@
             "type": "statChange",
             "target": "opponent",
             "changes": {
-                "defense": -1,
-                "special-defense": -1
+                "special-defense": -2
             },
             "chance": 100
         }
@@ -5139,9 +5124,10 @@
         "priority": 0,
         "effect": {
             "type": "statChange",
-            "target": "opponent",
+            "target": "self",
             "changes": {
-                "defense": 1
+                "defense": 1,
+                "special-defense": 1
             },
             "chance": 100
         }
@@ -5167,7 +5153,6 @@
             "type": "statChange",
             "target": "self",
             "changes": {
-                "attack": -1,
                 "special-attack": -1
             },
             "chance": 100
@@ -5228,7 +5213,7 @@
         "priority": 0,
         "effect": {
             "type": "statChange",
-            "target": "opponent",
+            "target": "self",
             "changes": {
                 "speed": 1
             },
@@ -5247,7 +5232,6 @@
             "type": "statChange",
             "target": "opponent",
             "changes": {
-                "defense": -1,
                 "special-defense": -1
             },
             "chance": 100
@@ -5274,7 +5258,6 @@
             "type": "statChange",
             "target": "opponent",
             "changes": {
-                "attack": -1,
                 "special-attack": -1
             },
             "chance": 100
@@ -5406,7 +5389,7 @@
         "priority": 0,
         "effect": {
             "type": "statChange",
-            "target": "opponent",
+            "target": "self",
             "changes": {
                 "defense": 1
             },
@@ -5579,7 +5562,6 @@
             "type": "statChange",
             "target": "opponent",
             "changes": {
-                "defense": -2,
                 "special-defense": -2
             },
             "chance": 100
@@ -5807,15 +5789,7 @@
         "power": 100,
         "accuracy": 85,
         "pp": 10,
-        "priority": 0,
-        "effect": {
-            "type": "statChange",
-            "target": "self",
-            "changes": {
-                "speed": -1
-            },
-            "chance": 100
-        }
+        "priority": 0
     },
     "mudBomb": {
         "name": "Mud Bomb",
@@ -5899,7 +5873,6 @@
             "type": "statChange",
             "target": "opponent",
             "changes": {
-                "attack": -1,
                 "special-attack": -1
             },
             "chance": 100
@@ -5917,7 +5890,6 @@
             "type": "statChange",
             "target": "self",
             "changes": {
-                "attack": 1,
                 "special-attack": 1
             },
             "chance": 100
@@ -5935,7 +5907,6 @@
             "type": "statChange",
             "target": "self",
             "changes": {
-                "attack": 2,
                 "special-attack": 2
             },
             "chance": 100
@@ -6196,7 +6167,6 @@
             "type": "statChange",
             "target": "self",
             "changes": {
-                "attack": -2,
                 "special-attack": -2
             },
             "chance": 100
@@ -6599,7 +6569,7 @@
         "priority": 0,
         "effect": {
             "type": "statChange",
-            "target": "opponent",
+            "target": "self",
             "changes": {
                 "attack": 1
             },
@@ -6717,7 +6687,6 @@
             "type": "statChange",
             "target": "self",
             "changes": {
-                "attack": -2,
                 "special-attack": -2
             },
             "chance": 100
@@ -6753,8 +6722,7 @@
             "type": "statChange",
             "target": "self",
             "changes": {
-                "defense": 1,
-                "special-defense": 1
+                "defense": 1
             },
             "chance": 100
         }
@@ -6875,8 +6843,6 @@
             "type": "statChange",
             "target": "self",
             "changes": {
-                "attack": 1,
-                "defense": 1,
                 "special-attack": 1,
                 "special-defense": 1,
                 "speed": 1
@@ -7283,7 +7249,7 @@
         "priority": 0,
         "effect": {
             "type": "statChange",
-            "target": "opponent",
+            "target": "self",
             "changes": {
                 "attack": 1,
                 "special-attack": 1
@@ -7443,7 +7409,7 @@
             "target": "self",
             "changes": {
                 "defense": -1,
-                "speed": -1
+                "speed": 1
             },
             "chance": 100
         }
@@ -7704,10 +7670,10 @@
             "type": "statChange",
             "target": "self",
             "changes": {
+                "defense": -1,
+                "special-defense": -1,
                 "attack": 2,
-                "defense": 2,
                 "special-attack": 2,
-                "special-defense": 2,
                 "speed": 2
             },
             "chance": 100
@@ -7734,7 +7700,7 @@
             "type": "statChange",
             "target": "self",
             "changes": {
-                "defense": 1
+                "defense": 2
             },
             "chance": 100
         }
@@ -7751,8 +7717,8 @@
             "type": "statChange",
             "target": "self",
             "changes": {
-                "attack": 2,
-                "speed": 2
+                "speed": 2,
+                "attack": 1
             },
             "chance": 100
         }
@@ -7876,7 +7842,7 @@
             "type": "statChange",
             "target": "opponent",
             "changes": {
-                "attack": -1
+                "special-attack": -1
             },
             "chance": 100
         }
@@ -7891,9 +7857,8 @@
         "priority": 0,
         "effect": {
             "type": "statChange",
-            "target": "opponent",
+            "target": "self",
             "changes": {
-                "attack": 1,
                 "defense": 1
             },
             "chance": 100
@@ -8097,7 +8062,6 @@
             "type": "statChange",
             "target": "opponent",
             "changes": {
-                "attack": -1,
                 "special-attack": -1
             },
             "chance": 100
@@ -8273,7 +8237,7 @@
             "target": "opponent",
             "changes": {
                 "attack": 2,
-                "defense": 2
+                "defense": -2
             },
             "chance": 100
         }
@@ -8324,9 +8288,9 @@
         "priority": 0,
         "effect": {
             "type": "statChange",
-            "target": "opponent",
+            "target": "self",
             "changes": {
-                "speed": -1
+                "speed": -2
             },
             "chance": 100
         }
@@ -8343,7 +8307,6 @@
             "type": "statChange",
             "target": "opponent",
             "changes": {
-                "attack": -1,
                 "special-attack": -1
             },
             "chance": 100
@@ -8661,7 +8624,6 @@
             "type": "statChange",
             "target": "opponent",
             "changes": {
-                "attack": -1,
                 "special-attack": -1
             },
             "chance": 100
@@ -8677,7 +8639,7 @@
         "priority": 0,
         "effect": {
             "type": "statChange",
-            "target": "opponent",
+            "target": "self",
             "changes": {
                 "defense": 2
             },
@@ -8866,7 +8828,7 @@
             "type": "statChange",
             "target": "opponent",
             "changes": {
-                "evasiveness": -1
+                "evasiveness": -2
             },
             "chance": 100
         }
@@ -8971,8 +8933,7 @@
             "type": "statChange",
             "target": "self",
             "changes": {
-                "attack": 1,
-                "special-attack": 1
+                "special-attack": 3
             },
             "chance": 100
         }
@@ -9068,7 +9029,8 @@
             "type": "statChange",
             "target": "opponent",
             "changes": {
-                "attack": -1
+                "attack": -1,
+                "special-attack": -1
             },
             "chance": 100
         }
@@ -9350,7 +9312,6 @@
             "type": "statChange",
             "target": "self",
             "changes": {
-                "attack": 1,
                 "special-attack": 1
             },
             "chance": 100
@@ -9651,7 +9612,6 @@
             "type": "statChange",
             "target": "opponent",
             "changes": {
-                "attack": -1,
                 "special-attack": -1,
                 "speed": -1
             },
@@ -9677,10 +9637,11 @@
         "priority": 0,
         "effect": {
             "type": "statChange",
-            "target": "opponent",
+            "target": "self",
             "changes": {
                 "attack": 1,
-                "defense": 1
+                "defense": 1,
+                "speed": 1
             },
             "chance": 100
         }

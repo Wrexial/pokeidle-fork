@@ -554,3 +554,104 @@ test('Nature Power becomes a terrain move', () => {
   assert.equal(run({ type: 'electric', turns: 5 }), 'thunderbolt')
   assert.equal(run({ type: 'grassy', turns: 5 }), 'energyBall')
 })
+
+test('damaging moves apply their stat change after the hit', () => {
+  withZeroRandom(() => {
+    // A self-drop: Overheat lowers the user's Special Attack.
+    const overheatUser = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['overheat'],
+        speed: 200,
+        spAttack: 300,
+      }),
+      overheatFoe = battler({ name: 'Foe', moves: ['splash'], currentHp: 9999, maxHp: 9999 }),
+      overheatEvents = turn(overheatUser, overheatFoe)
+    assert.ok(
+      overheatEvents.some((/** @type {any} */ event) => event.type === 'damage'),
+      'the move still deals damage'
+    )
+    assert.equal(overheatUser.statStages.spAttack, -2)
+
+    // An added effect on the target: Fire Lash lowers the foe's Defense.
+    const lashUser = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['fireLash'],
+        speed: 200,
+        attack: 300,
+      }),
+      lashFoe = battler({ name: 'Foe', moves: ['splash'], currentHp: 9999, maxHp: 9999 })
+    turn(lashUser, lashFoe)
+    assert.equal(lashFoe.statStages.defense, -1)
+    assert.equal(lashUser.statStages.defense ?? 0, 0)
+  })
+})
+
+test('Contrary flips and Simple doubles a damaging move stat change', () => {
+  withZeroRandom(() => {
+    const contraryUser = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['overheat'],
+        speed: 200,
+        spAttack: 300,
+        ability: 'contrary',
+      }),
+      foe = battler({ name: 'Foe', moves: ['splash'], currentHp: 9999, maxHp: 9999 })
+    turn(contraryUser, foe)
+    assert.equal(contraryUser.statStages.spAttack, 2, 'Contrary turns the drop into a boost')
+  })
+})
+
+test('Clear Body blocks a damaging move stat drop', () => {
+  withZeroRandom(() => {
+    const user = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['fireLash'],
+        speed: 200,
+        attack: 300,
+      }),
+      foe = battler({
+        name: 'Foe',
+        moves: ['splash'],
+        currentHp: 9999,
+        maxHp: 9999,
+        ability: 'clearBody',
+      })
+    turn(user, foe)
+    assert.equal(foe.statStages.defense ?? 0, 0)
+  })
+})
+
+test('stat-change data matches the real games', () => {
+  // Special moves only change the special stat (the substring bug added the
+  // physical one too), and self-buffs target the user rather than the foe.
+  assert.deepEqual(moveData.nastyPlot.effect.changes, { 'special-attack': 2 })
+  assert.equal(moveData.nastyPlot.effect.target, 'self')
+  assert.deepEqual(moveData.calmMind.effect.changes, {
+    spAttack: 1,
+    spDefense: 1,
+  })
+  assert.deepEqual(moveData.cottonGuard.effect.changes, { defense: 3 })
+  assert.deepEqual(moveData.tailGlow.effect.changes, { 'special-attack': 3 })
+  // Mixed magnitudes keep their signs (Shell Smash raises offences, lowers defences).
+  assert.deepEqual(moveData.shellSmash.effect.changes, {
+    attack: 2,
+    'special-attack': 2,
+    speed: 2,
+    defense: -1,
+    'special-defense': -1,
+  })
+  // Moves that buffed the opponent now buff the user.
+  assert.equal(moveData.howl.effect.target, 'self')
+  assert.equal(moveData.autotomize.effect.target, 'self')
+  assert.deepEqual(moveData.victoryDance.effect.changes, {
+    attack: 1,
+    defense: 1,
+    speed: 1,
+  })
+  // Mountain Gale has no stat change at all.
+  assert.equal(moveData.mountainGale.effect, undefined)
+})

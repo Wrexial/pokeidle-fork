@@ -47,6 +47,7 @@ export const CHANGELOG = [
         {
           heading: 'Fixes',
           items: [
+            'Stat-changing moves work now: damaging moves that raise or lower a stat (Overheat, Superpower, Close Combat, Fire Lash, Shell Smash, Spin Out and the rest) actually apply it after the hit, instead of silently doing nothing. Several moves also had the wrong stats — Nasty Plot and Calm Mind no longer raise Attack as well, Howl, Autotomize, Power-Up Punch and Victory Dance buff the user rather than the foe, and Cotton Guard, Tail Glow, Lumina Crash and Shell Smash use their real amounts',
             'Wild Pokemon can no longer be caught twice from one battle: the idle loop now waits for a turn / catch to commit before acting again, so a fast battle speed can not replay the same victory and duplicate the catch',
             'New species no longer raise a toast for every first encounter \u2014 the Pokedex still records the sighting quietly',
             'A queued turn can no longer resolve after the battle has already ended, and the ATTEMPT CATCH button is disabled while a turn is still resolving',

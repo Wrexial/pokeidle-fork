@@ -451,6 +451,14 @@ One-off scripts used to build the data JSON (not run during dev/build):
   predated the Gen 6/7 buffs and Gen 9 nerfs (Arbok, Shedinja, Lycanroc's
   forms, ...). Idempotent (`--dry` to preview); re-run after re-extracting
   species data.
+- `fix-stat-changes.cjs` — rewrites every `statChange` move effect's
+  `changes`/`target` in `possible-moves.json` from Pokemon Showdown's
+  `moves.json` (cached under `tools/cache/`). `convert_moves.py`
+  substring-matches the scraped description, so "Special Attack" also matched
+  "attack", a missing "user's" keyword defaulted the buff to the opponent, and
+  magnitudes/signs were flattened — this corrects ~58 moves (Nasty Plot, Calm
+  Mind, Howl, Victory Dance, Shell Smash, Tail Glow, ...). Idempotent (`--dry`);
+  re-run after any move re-extraction.
 - `fetch-breeding-data.cjs` — fetches each species' gender rate and egg groups
   from PokeAPI (form ids resolved to their base species) and writes
   `public/data/breeding-data.json`, which the Daycare's breeding rules use.

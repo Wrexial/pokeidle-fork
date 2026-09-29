@@ -282,3 +282,31 @@ test('a Champion tactical swap costs its turn and is capped per battle', () => {
   )
   assert.equal(exhausted.bossBattle.championSwapsRemaining, 0)
 })
+
+test('stat stages reset when a new battle starts', () => {
+  const enemy = { speciesKey: 'pidgey', name: 'Pidgey', currentHp: 10, maxHp: 10, moves: [] }
+  let state = gameReducer(startedGame(), { type: 'START_ENCOUNTER', payload: { enemy } })
+  state = gameReducer(state, {
+    type: 'UPDATE_VOLATILE',
+    payload: {
+      player: {
+        ...state.playerVolatile,
+        statStages: { attack: 0, defense: 2, spAttack: 0, spDefense: 2, speed: 0 },
+      },
+      enemy: state.playerVolatile,
+    },
+  })
+  assert.equal(state.playerVolatile.statStages.defense, 2, 'the boost is recorded for the turn')
+
+  // Leaving the battle and starting another begins from a clean slate, so a
+  // Cosmic Power boost cannot leak into the next encounter.
+  state = gameReducer(state, { type: 'PHASE_IDLE' })
+  state = gameReducer(state, { type: 'START_ENCOUNTER', payload: { enemy } })
+  assert.deepEqual(state.playerVolatile.statStages, {
+    attack: 0,
+    defense: 0,
+    spAttack: 0,
+    spDefense: 0,
+    speed: 0,
+  })
+})

@@ -123,6 +123,13 @@ export const GIFTS = [
     items: { helixFossil: 1, domeFossil: 1, oldAmber: 1 },
   },
   {
+    id: 'gift-hoenn-fossils',
+    location: 'hoenn-route-111',
+    name: 'Desert Fossils',
+    description: 'Fossils are baked into the desert sand.',
+    items: { rootFossil: 1, clawFossil: 1 },
+  },
+  {
     id: 'gift-sinnoh-fossils',
     location: 'sinnoh-sea-route-230',
     name: 'Underground Fossils',

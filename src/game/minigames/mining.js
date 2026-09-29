@@ -46,6 +46,8 @@ const MINING_REWARD_TABLE = [
   { itemId: 'helixFossil', weight: 2, min: 1, max: 1 },
   { itemId: 'domeFossil', weight: 2, min: 1, max: 1 },
   { itemId: 'oldAmber', weight: 2, min: 1, max: 1 },
+  { itemId: 'rootFossil', weight: 2, min: 1, max: 1 },
+  { itemId: 'clawFossil', weight: 2, min: 1, max: 1 },
   { itemId: 'skullFossil', weight: 2, min: 1, max: 1 },
   { itemId: 'armorFossil', weight: 2, min: 1, max: 1 },
   { itemId: 'coverFossil', weight: 2, min: 1, max: 1 },

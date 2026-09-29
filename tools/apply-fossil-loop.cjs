@@ -17,6 +17,8 @@ const FOSSIL_FINALS = [
   'omastar',
   'kabutops',
   'aerodactyl',
+  'cradily',
+  'armaldo',
   'rampardos',
   'bastiodon',
   'carracosta',

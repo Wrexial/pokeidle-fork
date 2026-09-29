@@ -845,6 +845,20 @@ export const fossilItems = {
       speciesKey: 'aerodactyl',
       level: 30,
     },
+    rootFossil: {
+      id: 'rootFossil',
+      name: 'Root Fossil',
+      description: 'A fossil root from a prehistoric plant. Revives Lileep at Cinnabar Island.',
+      speciesKey: 'lileep',
+      level: 30,
+    },
+    clawFossil: {
+      id: 'clawFossil',
+      name: 'Claw Fossil',
+      description: 'A fossilized claw. Revives Anorith at Cinnabar Island.',
+      speciesKey: 'anorith',
+      level: 30,
+    },
     skullFossil: {
       id: 'skullFossil',
       name: 'Skull Fossil',

@@ -114,6 +114,7 @@ for (const [key, entry] of Object.entries(species))
 // sit in `raidOrdinaryPool`.
 const FOSSIL_SPECIES = [
   'omanyte', 'kabuto', 'aerodactyl',
+  'lileep', 'anorith',
   'cranidos', 'shieldon',
   'tirtouga', 'archen',
   'tyrunt', 'amaura',

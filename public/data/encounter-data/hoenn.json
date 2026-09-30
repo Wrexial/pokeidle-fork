@@ -37,6 +37,34 @@
     "weight": 1,
     "minLevel": 3,
     "maxLevel": 5
+   },
+   {
+    "speciesKey": "surskit",
+    "weight": 8,
+    "minLevel": 3,
+    "maxLevel": 5,
+    "variety": true
+   },
+   {
+    "speciesKey": "slakoth",
+    "weight": 8,
+    "minLevel": 3,
+    "maxLevel": 5,
+    "variety": true
+   },
+   {
+    "speciesKey": "seedot",
+    "weight": 8,
+    "minLevel": 3,
+    "maxLevel": 5,
+    "variety": true
+   },
+   {
+    "speciesKey": "ralts",
+    "weight": 8,
+    "minLevel": 3,
+    "maxLevel": 5,
+    "variety": true
    }
   ]
  },
@@ -114,6 +142,34 @@
     "weight": 3,
     "minLevel": 7,
     "maxLevel": 9
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 8,
+    "minLevel": 7,
+    "maxLevel": 9,
+    "variety": true
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 8,
+    "minLevel": 7,
+    "maxLevel": 9,
+    "variety": true
+   },
+   {
+    "speciesKey": "carvanha",
+    "weight": 8,
+    "minLevel": 7,
+    "maxLevel": 9,
+    "variety": true
+   },
+   {
+    "speciesKey": "wailmer",
+    "weight": 8,
+    "minLevel": 7,
+    "maxLevel": 9,
+    "variety": true
    }
   ]
  },
@@ -161,6 +217,69 @@
     "weight": 2,
     "minLevel": 9,
     "maxLevel": 11
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 8,
+    "minLevel": 9,
+    "maxLevel": 11,
+    "variety": true
+   },
+   {
+    "speciesKey": "marill",
+    "weight": 8,
+    "minLevel": 9,
+    "maxLevel": 11,
+    "variety": true
+   },
+   {
+    "speciesKey": "lotad",
+    "weight": 8,
+    "minLevel": 9,
+    "maxLevel": 11,
+    "variety": true
+   },
+   {
+    "speciesKey": "surskit",
+    "weight": 8,
+    "minLevel": 9,
+    "maxLevel": 11,
+    "variety": true
+   },
+   {
+    "speciesKey": "corphish",
+    "weight": 8,
+    "minLevel": 9,
+    "maxLevel": 11,
+    "variety": true
+   },
+   {
+    "speciesKey": "wurmple",
+    "weight": 8,
+    "minLevel": 9,
+    "maxLevel": 11,
+    "variety": true
+   },
+   {
+    "speciesKey": "seedot",
+    "weight": 8,
+    "minLevel": 9,
+    "maxLevel": 11,
+    "variety": true
+   },
+   {
+    "speciesKey": "taillow",
+    "weight": 8,
+    "minLevel": 9,
+    "maxLevel": 11,
+    "variety": true
+   },
+   {
+    "speciesKey": "ralts",
+    "weight": 8,
+    "minLevel": 9,
+    "maxLevel": 11,
+    "variety": true
    }
   ]
  },
@@ -208,6 +327,69 @@
     "weight": 3,
     "minLevel": 11,
     "maxLevel": 13
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 8,
+    "minLevel": 11,
+    "maxLevel": 13,
+    "variety": true
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 8,
+    "minLevel": 11,
+    "maxLevel": 13,
+    "variety": true
+   },
+   {
+    "speciesKey": "lotad",
+    "weight": 8,
+    "minLevel": 11,
+    "maxLevel": 13,
+    "variety": true
+   },
+   {
+    "speciesKey": "surskit",
+    "weight": 8,
+    "minLevel": 11,
+    "maxLevel": 13,
+    "variety": true
+   },
+   {
+    "speciesKey": "carvanha",
+    "weight": 8,
+    "minLevel": 11,
+    "maxLevel": 13,
+    "variety": true
+   },
+   {
+    "speciesKey": "wailmer",
+    "weight": 8,
+    "minLevel": 11,
+    "maxLevel": 13,
+    "variety": true
+   },
+   {
+    "speciesKey": "corphish",
+    "weight": 8,
+    "minLevel": 11,
+    "maxLevel": 13,
+    "variety": true
+   },
+   {
+    "speciesKey": "seedot",
+    "weight": 8,
+    "minLevel": 11,
+    "maxLevel": 13,
+    "variety": true
+   },
+   {
+    "speciesKey": "ralts",
+    "weight": 8,
+    "minLevel": 11,
+    "maxLevel": 13,
+    "variety": true
    }
   ]
  },
@@ -237,6 +419,90 @@
     "weight": 10,
     "minLevel": 13,
     "maxLevel": 15
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 8,
+    "minLevel": 13,
+    "maxLevel": 15,
+    "variety": true
+   },
+   {
+    "speciesKey": "marill",
+    "weight": 8,
+    "minLevel": 13,
+    "maxLevel": 15,
+    "variety": true
+   },
+   {
+    "speciesKey": "lotad",
+    "weight": 8,
+    "minLevel": 13,
+    "maxLevel": 15,
+    "variety": true
+   },
+   {
+    "speciesKey": "surskit",
+    "weight": 8,
+    "minLevel": 13,
+    "maxLevel": 15,
+    "variety": true
+   },
+   {
+    "speciesKey": "carvanha",
+    "weight": 8,
+    "minLevel": 13,
+    "maxLevel": 15,
+    "variety": true
+   },
+   {
+    "speciesKey": "corphish",
+    "weight": 8,
+    "minLevel": 13,
+    "maxLevel": 15,
+    "variety": true
+   },
+   {
+    "speciesKey": "poochyena",
+    "weight": 8,
+    "minLevel": 13,
+    "maxLevel": 15,
+    "variety": true
+   },
+   {
+    "speciesKey": "zigzagoon",
+    "weight": 8,
+    "minLevel": 13,
+    "maxLevel": 15,
+    "variety": true
+   },
+   {
+    "speciesKey": "wurmple",
+    "weight": 8,
+    "minLevel": 13,
+    "maxLevel": 15,
+    "variety": true
+   },
+   {
+    "speciesKey": "seedot",
+    "weight": 8,
+    "minLevel": 13,
+    "maxLevel": 15,
+    "variety": true
+   },
+   {
+    "speciesKey": "taillow",
+    "weight": 8,
+    "minLevel": 13,
+    "maxLevel": 15,
+    "variety": true
+   },
+   {
+    "speciesKey": "ralts",
+    "weight": 8,
+    "minLevel": 13,
+    "maxLevel": 15,
+    "variety": true
    }
   ]
  },
@@ -272,6 +538,83 @@
     "weight": 3,
     "minLevel": 15,
     "maxLevel": 17
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 8,
+    "minLevel": 15,
+    "maxLevel": 17,
+    "variety": true
+   },
+   {
+    "speciesKey": "marill",
+    "weight": 8,
+    "minLevel": 15,
+    "maxLevel": 17,
+    "variety": true
+   },
+   {
+    "speciesKey": "lotad",
+    "weight": 8,
+    "minLevel": 15,
+    "maxLevel": 17,
+    "variety": true
+   },
+   {
+    "speciesKey": "surskit",
+    "weight": 8,
+    "minLevel": 15,
+    "maxLevel": 17,
+    "variety": true
+   },
+   {
+    "speciesKey": "carvanha",
+    "weight": 8,
+    "minLevel": 15,
+    "maxLevel": 17,
+    "variety": true
+   },
+   {
+    "speciesKey": "corphish",
+    "weight": 8,
+    "minLevel": 15,
+    "maxLevel": 17,
+    "variety": true
+   },
+   {
+    "speciesKey": "poochyena",
+    "weight": 8,
+    "minLevel": 15,
+    "maxLevel": 17,
+    "variety": true
+   },
+   {
+    "speciesKey": "zigzagoon",
+    "weight": 8,
+    "minLevel": 15,
+    "maxLevel": 17,
+    "variety": true
+   },
+   {
+    "speciesKey": "wurmple",
+    "weight": 8,
+    "minLevel": 15,
+    "maxLevel": 17,
+    "variety": true
+   },
+   {
+    "speciesKey": "seedot",
+    "weight": 8,
+    "minLevel": 15,
+    "maxLevel": 17,
+    "variety": true
+   },
+   {
+    "speciesKey": "taillow",
+    "weight": 8,
+    "minLevel": 15,
+    "maxLevel": 17,
+    "variety": true
    }
   ]
  },
@@ -301,6 +644,90 @@
     "weight": 10,
     "minLevel": 17,
     "maxLevel": 19
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 8,
+    "minLevel": 17,
+    "maxLevel": 19,
+    "variety": true
+   },
+   {
+    "speciesKey": "marill",
+    "weight": 8,
+    "minLevel": 17,
+    "maxLevel": 19,
+    "variety": true
+   },
+   {
+    "speciesKey": "lotad",
+    "weight": 8,
+    "minLevel": 17,
+    "maxLevel": 19,
+    "variety": true
+   },
+   {
+    "speciesKey": "surskit",
+    "weight": 8,
+    "minLevel": 17,
+    "maxLevel": 19,
+    "variety": true
+   },
+   {
+    "speciesKey": "carvanha",
+    "weight": 8,
+    "minLevel": 17,
+    "maxLevel": 19,
+    "variety": true
+   },
+   {
+    "speciesKey": "corphish",
+    "weight": 8,
+    "minLevel": 17,
+    "maxLevel": 19,
+    "variety": true
+   },
+   {
+    "speciesKey": "poochyena",
+    "weight": 8,
+    "minLevel": 17,
+    "maxLevel": 19,
+    "variety": true
+   },
+   {
+    "speciesKey": "zigzagoon",
+    "weight": 8,
+    "minLevel": 17,
+    "maxLevel": 19,
+    "variety": true
+   },
+   {
+    "speciesKey": "wurmple",
+    "weight": 8,
+    "minLevel": 17,
+    "maxLevel": 19,
+    "variety": true
+   },
+   {
+    "speciesKey": "seedot",
+    "weight": 8,
+    "minLevel": 17,
+    "maxLevel": 19,
+    "variety": true
+   },
+   {
+    "speciesKey": "taillow",
+    "weight": 8,
+    "minLevel": 17,
+    "maxLevel": 19,
+    "variety": true
+   },
+   {
+    "speciesKey": "mawile",
+    "weight": 8,
+    "minLevel": 17,
+    "maxLevel": 19,
+    "variety": true
    }
   ]
  },
@@ -330,6 +757,90 @@
     "weight": 10,
     "minLevel": 19,
     "maxLevel": 21
+   },
+   {
+    "speciesKey": "oddish",
+    "weight": 8,
+    "minLevel": 19,
+    "maxLevel": 21,
+    "variety": true
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 8,
+    "minLevel": 19,
+    "maxLevel": 21,
+    "variety": true
+   },
+   {
+    "speciesKey": "marill",
+    "weight": 8,
+    "minLevel": 19,
+    "maxLevel": 21,
+    "variety": true
+   },
+   {
+    "speciesKey": "lotad",
+    "weight": 8,
+    "minLevel": 19,
+    "maxLevel": 21,
+    "variety": true
+   },
+   {
+    "speciesKey": "surskit",
+    "weight": 8,
+    "minLevel": 19,
+    "maxLevel": 21,
+    "variety": true
+   },
+   {
+    "speciesKey": "gulpin",
+    "weight": 8,
+    "minLevel": 19,
+    "maxLevel": 21,
+    "variety": true
+   },
+   {
+    "speciesKey": "carvanha",
+    "weight": 8,
+    "minLevel": 19,
+    "maxLevel": 21,
+    "variety": true
+   },
+   {
+    "speciesKey": "corphish",
+    "weight": 8,
+    "minLevel": 19,
+    "maxLevel": 21,
+    "variety": true
+   },
+   {
+    "speciesKey": "magnemite",
+    "weight": 8,
+    "minLevel": 19,
+    "maxLevel": 21,
+    "variety": true
+   },
+   {
+    "speciesKey": "poochyena",
+    "weight": 8,
+    "minLevel": 19,
+    "maxLevel": 21,
+    "variety": true
+   },
+   {
+    "speciesKey": "zigzagoon",
+    "weight": 8,
+    "minLevel": 19,
+    "maxLevel": 21,
+    "variety": true
+   },
+   {
+    "speciesKey": "seedot",
+    "weight": 8,
+    "minLevel": 19,
+    "maxLevel": 21,
+    "variety": true
    }
   ]
  },
@@ -359,6 +870,90 @@
     "weight": 10,
     "minLevel": 21,
     "maxLevel": 23
+   },
+   {
+    "speciesKey": "oddish",
+    "weight": 8,
+    "minLevel": 21,
+    "maxLevel": 23,
+    "variety": true
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 8,
+    "minLevel": 21,
+    "maxLevel": 23,
+    "variety": true
+   },
+   {
+    "speciesKey": "marill",
+    "weight": 8,
+    "minLevel": 21,
+    "maxLevel": 23,
+    "variety": true
+   },
+   {
+    "speciesKey": "lotad",
+    "weight": 8,
+    "minLevel": 21,
+    "maxLevel": 23,
+    "variety": true
+   },
+   {
+    "speciesKey": "surskit",
+    "weight": 8,
+    "minLevel": 21,
+    "maxLevel": 23,
+    "variety": true
+   },
+   {
+    "speciesKey": "gulpin",
+    "weight": 8,
+    "minLevel": 21,
+    "maxLevel": 23,
+    "variety": true
+   },
+   {
+    "speciesKey": "carvanha",
+    "weight": 8,
+    "minLevel": 21,
+    "maxLevel": 23,
+    "variety": true
+   },
+   {
+    "speciesKey": "barboach",
+    "weight": 8,
+    "minLevel": 21,
+    "maxLevel": 23,
+    "variety": true
+   },
+   {
+    "speciesKey": "corphish",
+    "weight": 8,
+    "minLevel": 21,
+    "maxLevel": 23,
+    "variety": true
+   },
+   {
+    "speciesKey": "sandshrew",
+    "weight": 8,
+    "minLevel": 21,
+    "maxLevel": 23,
+    "variety": true
+   },
+   {
+    "speciesKey": "geodude",
+    "weight": 8,
+    "minLevel": 21,
+    "maxLevel": 23,
+    "variety": true
+   },
+   {
+    "speciesKey": "magnemite",
+    "weight": 8,
+    "minLevel": 21,
+    "maxLevel": 23,
+    "variety": true
    }
   ]
  },
@@ -436,6 +1031,34 @@
     "weight": 1,
     "minLevel": 24,
     "maxLevel": 26
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 8,
+    "minLevel": 24,
+    "maxLevel": 26,
+    "variety": true
+   },
+   {
+    "speciesKey": "marill",
+    "weight": 8,
+    "minLevel": 24,
+    "maxLevel": 26,
+    "variety": true
+   },
+   {
+    "speciesKey": "lotad",
+    "weight": 8,
+    "minLevel": 24,
+    "maxLevel": 26,
+    "variety": true
+   },
+   {
+    "speciesKey": "surskit",
+    "weight": 8,
+    "minLevel": 24,
+    "maxLevel": 26,
+    "variety": true
    }
   ]
  },
@@ -501,6 +1124,48 @@
     "weight": 1,
     "minLevel": 26,
     "maxLevel": 28
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 8,
+    "minLevel": 26,
+    "maxLevel": 28,
+    "variety": true
+   },
+   {
+    "speciesKey": "lotad",
+    "weight": 8,
+    "minLevel": 26,
+    "maxLevel": 28,
+    "variety": true
+   },
+   {
+    "speciesKey": "lombre",
+    "weight": 8,
+    "minLevel": 26,
+    "maxLevel": 28,
+    "variety": true
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 8,
+    "minLevel": 26,
+    "maxLevel": 28,
+    "variety": true
+   },
+   {
+    "speciesKey": "carvanha",
+    "weight": 8,
+    "minLevel": 26,
+    "maxLevel": 28,
+    "variety": true
+   },
+   {
+    "speciesKey": "wailmer",
+    "weight": 8,
+    "minLevel": 26,
+    "maxLevel": 28,
+    "variety": true
    }
   ]
  },
@@ -524,6 +1189,97 @@
     "weight": 6,
     "minLevel": 28,
     "maxLevel": 30
+   },
+   {
+    "speciesKey": "sandshrew",
+    "weight": 8,
+    "minLevel": 28,
+    "maxLevel": 30,
+    "variety": true
+   },
+   {
+    "speciesKey": "geodude",
+    "weight": 8,
+    "minLevel": 28,
+    "maxLevel": 30,
+    "variety": true
+   },
+   {
+    "speciesKey": "slugma",
+    "weight": 8,
+    "minLevel": 28,
+    "maxLevel": 30,
+    "variety": true
+   },
+   {
+    "speciesKey": "trapinch",
+    "weight": 8,
+    "minLevel": 28,
+    "maxLevel": 30,
+    "variety": true
+   },
+   {
+    "speciesKey": "barboach",
+    "weight": 8,
+    "minLevel": 28,
+    "maxLevel": 30,
+    "variety": true
+   },
+   {
+    "speciesKey": "jigglypuff",
+    "weight": 8,
+    "minLevel": 28,
+    "maxLevel": 30,
+    "variety": true
+   },
+   {
+    "speciesKey": "oddish",
+    "weight": 8,
+    "minLevel": 28,
+    "maxLevel": 30,
+    "variety": true
+   },
+   {
+    "speciesKey": "magnemite",
+    "weight": 8,
+    "minLevel": 28,
+    "maxLevel": 30,
+    "variety": true
+   },
+   {
+    "speciesKey": "poochyena",
+    "weight": 8,
+    "minLevel": 28,
+    "maxLevel": 30,
+    "variety": true
+   },
+   {
+    "speciesKey": "zigzagoon",
+    "weight": 8,
+    "minLevel": 28,
+    "maxLevel": 30,
+    "variety": true
+   },
+   {
+    "speciesKey": "seedot",
+    "weight": 8,
+    "minLevel": 28,
+    "maxLevel": 30,
+    "variety": true
+   },
+   {
+    "speciesKey": "nuzleaf",
+    "weight": 8,
+    "minLevel": 28,
+    "maxLevel": 30,
+    "variety": true
+   },
+   {
+    "speciesKey": "taillow",
+    "weight": 8,
+    "minLevel": 28,
+    "maxLevel": 30,
+    "variety": true
    }
   ]
  },
@@ -553,6 +1309,90 @@
     "weight": 1,
     "minLevel": 30,
     "maxLevel": 32
+   },
+   {
+    "speciesKey": "jigglypuff",
+    "weight": 8,
+    "minLevel": 30,
+    "maxLevel": 32,
+    "variety": true
+   },
+   {
+    "speciesKey": "geodude",
+    "weight": 8,
+    "minLevel": 30,
+    "maxLevel": 32,
+    "variety": true
+   },
+   {
+    "speciesKey": "zigzagoon",
+    "weight": 8,
+    "minLevel": 30,
+    "maxLevel": 32,
+    "variety": true
+   },
+   {
+    "speciesKey": "taillow",
+    "weight": 8,
+    "minLevel": 30,
+    "maxLevel": 32,
+    "variety": true
+   },
+   {
+    "speciesKey": "swellow",
+    "weight": 8,
+    "minLevel": 30,
+    "maxLevel": 32,
+    "variety": true
+   },
+   {
+    "speciesKey": "slakoth",
+    "weight": 8,
+    "minLevel": 30,
+    "maxLevel": 32,
+    "variety": true
+   },
+   {
+    "speciesKey": "nincada",
+    "weight": 8,
+    "minLevel": 30,
+    "maxLevel": 32,
+    "variety": true
+   },
+   {
+    "speciesKey": "skitty",
+    "weight": 8,
+    "minLevel": 30,
+    "maxLevel": 32,
+    "variety": true
+   },
+   {
+    "speciesKey": "numel",
+    "weight": 8,
+    "minLevel": 30,
+    "maxLevel": 32,
+    "variety": true
+   },
+   {
+    "speciesKey": "trapinch",
+    "weight": 8,
+    "minLevel": 30,
+    "maxLevel": 32,
+    "variety": true
+   },
+   {
+    "speciesKey": "swablu",
+    "weight": 8,
+    "minLevel": 30,
+    "maxLevel": 32,
+    "variety": true
+   },
+   {
+    "speciesKey": "zangoose",
+    "weight": 8,
+    "minLevel": 30,
+    "maxLevel": 32,
+    "variety": true
    }
   ]
  },
@@ -636,6 +1476,27 @@
     "weight": 1,
     "minLevel": 32,
     "maxLevel": 34
+   },
+   {
+    "speciesKey": "sandshrew",
+    "weight": 8,
+    "minLevel": 32,
+    "maxLevel": 34,
+    "variety": true
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 8,
+    "minLevel": 32,
+    "maxLevel": 34,
+    "variety": true
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 8,
+    "minLevel": 32,
+    "maxLevel": 34,
+    "variety": true
    }
   ]
  },
@@ -695,6 +1556,55 @@
     "weight": 1,
     "minLevel": 34,
     "maxLevel": 36
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 8,
+    "minLevel": 34,
+    "maxLevel": 36,
+    "variety": true
+   },
+   {
+    "speciesKey": "marill",
+    "weight": 8,
+    "minLevel": 34,
+    "maxLevel": 36,
+    "variety": true
+   },
+   {
+    "speciesKey": "skarmory",
+    "weight": 8,
+    "minLevel": 34,
+    "maxLevel": 36,
+    "variety": true
+   },
+   {
+    "speciesKey": "lotad",
+    "weight": 8,
+    "minLevel": 34,
+    "maxLevel": 36,
+    "variety": true
+   },
+   {
+    "speciesKey": "lombre",
+    "weight": 8,
+    "minLevel": 34,
+    "maxLevel": 36,
+    "variety": true
+   },
+   {
+    "speciesKey": "surskit",
+    "weight": 8,
+    "minLevel": 34,
+    "maxLevel": 36,
+    "variety": true
+   },
+   {
+    "speciesKey": "carvanha",
+    "weight": 8,
+    "minLevel": 34,
+    "maxLevel": 36,
+    "variety": true
    }
   ]
  },
@@ -742,6 +1652,69 @@
     "weight": 1,
     "minLevel": 36,
     "maxLevel": 38
+   },
+   {
+    "speciesKey": "jigglypuff",
+    "weight": 8,
+    "minLevel": 36,
+    "maxLevel": 38,
+    "variety": true
+   },
+   {
+    "speciesKey": "linoone",
+    "weight": 8,
+    "minLevel": 36,
+    "maxLevel": 38,
+    "variety": true
+   },
+   {
+    "speciesKey": "wurmple",
+    "weight": 8,
+    "minLevel": 36,
+    "maxLevel": 38,
+    "variety": true
+   },
+   {
+    "speciesKey": "swellow",
+    "weight": 8,
+    "minLevel": 36,
+    "maxLevel": 38,
+    "variety": true
+   },
+   {
+    "speciesKey": "surskit",
+    "weight": 8,
+    "minLevel": 36,
+    "maxLevel": 38,
+    "variety": true
+   },
+   {
+    "speciesKey": "slakoth",
+    "weight": 8,
+    "minLevel": 36,
+    "maxLevel": 38,
+    "variety": true
+   },
+   {
+    "speciesKey": "volbeat",
+    "weight": 8,
+    "minLevel": 36,
+    "maxLevel": 38,
+    "variety": true
+   },
+   {
+    "speciesKey": "illumise",
+    "weight": 8,
+    "minLevel": 36,
+    "maxLevel": 38,
+    "variety": true
+   },
+   {
+    "speciesKey": "spinda",
+    "weight": 8,
+    "minLevel": 36,
+    "maxLevel": 38,
+    "variety": true
    }
   ]
  },
@@ -819,6 +1792,34 @@
     "weight": 1,
     "minLevel": 38,
     "maxLevel": 40
+   },
+   {
+    "speciesKey": "lotad",
+    "weight": 8,
+    "minLevel": 38,
+    "maxLevel": 40,
+    "variety": true
+   },
+   {
+    "speciesKey": "lombre",
+    "weight": 8,
+    "minLevel": 38,
+    "maxLevel": 40,
+    "variety": true
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 8,
+    "minLevel": 38,
+    "maxLevel": 40,
+    "variety": true
+   },
+   {
+    "speciesKey": "nuzleaf",
+    "weight": 8,
+    "minLevel": 38,
+    "maxLevel": 40,
+    "variety": true
    }
   ]
  },
@@ -890,6 +1891,41 @@
     "weight": 1,
     "minLevel": 40,
     "maxLevel": 42
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 8,
+    "minLevel": 40,
+    "maxLevel": 42,
+    "variety": true
+   },
+   {
+    "speciesKey": "marill",
+    "weight": 8,
+    "minLevel": 40,
+    "maxLevel": 42,
+    "variety": true
+   },
+   {
+    "speciesKey": "poochyena",
+    "weight": 8,
+    "minLevel": 40,
+    "maxLevel": 42,
+    "variety": true
+   },
+   {
+    "speciesKey": "mightyena",
+    "weight": 8,
+    "minLevel": 40,
+    "maxLevel": 42,
+    "variety": true
+   },
+   {
+    "speciesKey": "lotad",
+    "weight": 8,
+    "minLevel": 40,
+    "maxLevel": 42,
+    "variety": true
    }
   ]
  },
@@ -949,6 +1985,55 @@
     "weight": 1,
     "minLevel": 42,
     "maxLevel": 44
+   },
+   {
+    "speciesKey": "gloom",
+    "weight": 8,
+    "minLevel": 42,
+    "maxLevel": 44,
+    "variety": true
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 8,
+    "minLevel": 42,
+    "maxLevel": 44,
+    "variety": true
+   },
+   {
+    "speciesKey": "marill",
+    "weight": 8,
+    "minLevel": 42,
+    "maxLevel": 44,
+    "variety": true
+   },
+   {
+    "speciesKey": "lotad",
+    "weight": 8,
+    "minLevel": 42,
+    "maxLevel": 44,
+    "variety": true
+   },
+   {
+    "speciesKey": "lombre",
+    "weight": 8,
+    "minLevel": 42,
+    "maxLevel": 44,
+    "variety": true
+   },
+   {
+    "speciesKey": "surskit",
+    "weight": 8,
+    "minLevel": 42,
+    "maxLevel": 44,
+    "variety": true
+   },
+   {
+    "speciesKey": "roselia",
+    "weight": 8,
+    "minLevel": 42,
+    "maxLevel": 44,
+    "variety": true
    }
   ]
  },
@@ -1032,6 +2117,27 @@
     "weight": 1,
     "minLevel": 44,
     "maxLevel": 46
+   },
+   {
+    "speciesKey": "sandshrew",
+    "weight": 8,
+    "minLevel": 44,
+    "maxLevel": 46,
+    "variety": true
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 8,
+    "minLevel": 44,
+    "maxLevel": 46,
+    "variety": true
+   },
+   {
+    "speciesKey": "geodude",
+    "weight": 8,
+    "minLevel": 44,
+    "maxLevel": 46,
+    "variety": true
    }
   ]
  },
@@ -1121,6 +2227,20 @@
     "weight": 1,
     "minLevel": 46,
     "maxLevel": 48
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 8,
+    "minLevel": 46,
+    "maxLevel": 48,
+    "variety": true
+   },
+   {
+    "speciesKey": "chinchou",
+    "weight": 8,
+    "minLevel": 46,
+    "maxLevel": 48,
+    "variety": true
    }
   ]
  },
@@ -1162,6 +2282,76 @@
     "weight": 1,
     "minLevel": 48,
     "maxLevel": 50
+   },
+   {
+    "speciesKey": "oddish",
+    "weight": 8,
+    "minLevel": 48,
+    "maxLevel": 50,
+    "variety": true
+   },
+   {
+    "speciesKey": "gloom",
+    "weight": 8,
+    "minLevel": 48,
+    "maxLevel": 50,
+    "variety": true
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 8,
+    "minLevel": 48,
+    "maxLevel": 50,
+    "variety": true
+   },
+   {
+    "speciesKey": "chinchou",
+    "weight": 8,
+    "minLevel": 48,
+    "maxLevel": 50,
+    "variety": true
+   },
+   {
+    "speciesKey": "marill",
+    "weight": 8,
+    "minLevel": 48,
+    "maxLevel": 50,
+    "variety": true
+   },
+   {
+    "speciesKey": "lotad",
+    "weight": 8,
+    "minLevel": 48,
+    "maxLevel": 50,
+    "variety": true
+   },
+   {
+    "speciesKey": "lombre",
+    "weight": 8,
+    "minLevel": 48,
+    "maxLevel": 50,
+    "variety": true
+   },
+   {
+    "speciesKey": "surskit",
+    "weight": 8,
+    "minLevel": 48,
+    "maxLevel": 50,
+    "variety": true
+   },
+   {
+    "speciesKey": "roselia",
+    "weight": 8,
+    "minLevel": 48,
+    "maxLevel": 50,
+    "variety": true
+   },
+   {
+    "speciesKey": "gulpin",
+    "weight": 8,
+    "minLevel": 48,
+    "maxLevel": 50,
+    "variety": true
    }
   ]
  },
@@ -1251,6 +2441,20 @@
     "weight": 1,
     "minLevel": 50,
     "maxLevel": 52
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 8,
+    "minLevel": 50,
+    "maxLevel": 52,
+    "variety": true
+   },
+   {
+    "speciesKey": "chinchou",
+    "weight": 8,
+    "minLevel": 50,
+    "maxLevel": 52,
+    "variety": true
    }
   ]
  },
@@ -1310,6 +2514,55 @@
     "weight": 1,
     "minLevel": 52,
     "maxLevel": 54
+   },
+   {
+    "speciesKey": "oddish",
+    "weight": 8,
+    "minLevel": 52,
+    "maxLevel": 54,
+    "variety": true
+   },
+   {
+    "speciesKey": "gloom",
+    "weight": 8,
+    "minLevel": 52,
+    "maxLevel": 54,
+    "variety": true
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 8,
+    "minLevel": 52,
+    "maxLevel": 54,
+    "variety": true
+   },
+   {
+    "speciesKey": "marill",
+    "weight": 8,
+    "minLevel": 52,
+    "maxLevel": 54,
+    "variety": true
+   },
+   {
+    "speciesKey": "lotad",
+    "weight": 8,
+    "minLevel": 52,
+    "maxLevel": 54,
+    "variety": true
+   },
+   {
+    "speciesKey": "lombre",
+    "weight": 8,
+    "minLevel": 52,
+    "maxLevel": 54,
+    "variety": true
+   },
+   {
+    "speciesKey": "surskit",
+    "weight": 8,
+    "minLevel": 52,
+    "maxLevel": 54,
+    "variety": true
    }
   ]
  },
@@ -1351,6 +2604,76 @@
     "weight": 1,
     "minLevel": 54,
     "maxLevel": 56
+   },
+   {
+    "speciesKey": "oddish",
+    "weight": 8,
+    "minLevel": 54,
+    "maxLevel": 56,
+    "variety": true
+   },
+   {
+    "speciesKey": "gloom",
+    "weight": 8,
+    "minLevel": 54,
+    "maxLevel": 56,
+    "variety": true
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 8,
+    "minLevel": 54,
+    "maxLevel": 56,
+    "variety": true
+   },
+   {
+    "speciesKey": "chinchou",
+    "weight": 8,
+    "minLevel": 54,
+    "maxLevel": 56,
+    "variety": true
+   },
+   {
+    "speciesKey": "marill",
+    "weight": 8,
+    "minLevel": 54,
+    "maxLevel": 56,
+    "variety": true
+   },
+   {
+    "speciesKey": "lotad",
+    "weight": 8,
+    "minLevel": 54,
+    "maxLevel": 56,
+    "variety": true
+   },
+   {
+    "speciesKey": "lombre",
+    "weight": 8,
+    "minLevel": 54,
+    "maxLevel": 56,
+    "variety": true
+   },
+   {
+    "speciesKey": "surskit",
+    "weight": 8,
+    "minLevel": 54,
+    "maxLevel": 56,
+    "variety": true
+   },
+   {
+    "speciesKey": "roselia",
+    "weight": 8,
+    "minLevel": 54,
+    "maxLevel": 56,
+    "variety": true
+   },
+   {
+    "speciesKey": "gulpin",
+    "weight": 8,
+    "minLevel": 54,
+    "maxLevel": 56,
+    "variety": true
    }
   ]
  },
@@ -1410,6 +2733,55 @@
     "weight": 1,
     "minLevel": 57,
     "maxLevel": 59
+   },
+   {
+    "speciesKey": "oddish",
+    "weight": 8,
+    "minLevel": 57,
+    "maxLevel": 59,
+    "variety": true
+   },
+   {
+    "speciesKey": "gloom",
+    "weight": 8,
+    "minLevel": 57,
+    "maxLevel": 59,
+    "variety": true
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 8,
+    "minLevel": 57,
+    "maxLevel": 59,
+    "variety": true
+   },
+   {
+    "speciesKey": "marill",
+    "weight": 8,
+    "minLevel": 57,
+    "maxLevel": 59,
+    "variety": true
+   },
+   {
+    "speciesKey": "corsola",
+    "weight": 8,
+    "minLevel": 57,
+    "maxLevel": 59,
+    "variety": true
+   },
+   {
+    "speciesKey": "lotad",
+    "weight": 8,
+    "minLevel": 57,
+    "maxLevel": 59,
+    "variety": true
+   },
+   {
+    "speciesKey": "lombre",
+    "weight": 8,
+    "minLevel": 57,
+    "maxLevel": 59,
+    "variety": true
    }
   ]
  },
@@ -1451,6 +2823,76 @@
     "weight": 1,
     "minLevel": 59,
     "maxLevel": 61
+   },
+   {
+    "speciesKey": "oddish",
+    "weight": 8,
+    "minLevel": 59,
+    "maxLevel": 61,
+    "variety": true
+   },
+   {
+    "speciesKey": "gloom",
+    "weight": 8,
+    "minLevel": 59,
+    "maxLevel": 61,
+    "variety": true
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 8,
+    "minLevel": 59,
+    "maxLevel": 61,
+    "variety": true
+   },
+   {
+    "speciesKey": "chinchou",
+    "weight": 8,
+    "minLevel": 59,
+    "maxLevel": 61,
+    "variety": true
+   },
+   {
+    "speciesKey": "marill",
+    "weight": 8,
+    "minLevel": 59,
+    "maxLevel": 61,
+    "variety": true
+   },
+   {
+    "speciesKey": "corsola",
+    "weight": 8,
+    "minLevel": 59,
+    "maxLevel": 61,
+    "variety": true
+   },
+   {
+    "speciesKey": "lotad",
+    "weight": 8,
+    "minLevel": 59,
+    "maxLevel": 61,
+    "variety": true
+   },
+   {
+    "speciesKey": "lombre",
+    "weight": 8,
+    "minLevel": 59,
+    "maxLevel": 61,
+    "variety": true
+   },
+   {
+    "speciesKey": "surskit",
+    "weight": 8,
+    "minLevel": 59,
+    "maxLevel": 61,
+    "variety": true
+   },
+   {
+    "speciesKey": "roselia",
+    "weight": 8,
+    "minLevel": 59,
+    "maxLevel": 61,
+    "variety": true
    }
   ]
  },
@@ -1498,6 +2940,69 @@
     "weight": 1,
     "minLevel": 61,
     "maxLevel": 63
+   },
+   {
+    "speciesKey": "oddish",
+    "weight": 8,
+    "minLevel": 61,
+    "maxLevel": 63,
+    "variety": true
+   },
+   {
+    "speciesKey": "gloom",
+    "weight": 8,
+    "minLevel": 61,
+    "maxLevel": 63,
+    "variety": true
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 8,
+    "minLevel": 61,
+    "maxLevel": 63,
+    "variety": true
+   },
+   {
+    "speciesKey": "chinchou",
+    "weight": 8,
+    "minLevel": 61,
+    "maxLevel": 63,
+    "variety": true
+   },
+   {
+    "speciesKey": "marill",
+    "weight": 8,
+    "minLevel": 61,
+    "maxLevel": 63,
+    "variety": true
+   },
+   {
+    "speciesKey": "lotad",
+    "weight": 8,
+    "minLevel": 61,
+    "maxLevel": 63,
+    "variety": true
+   },
+   {
+    "speciesKey": "lombre",
+    "weight": 8,
+    "minLevel": 61,
+    "maxLevel": 63,
+    "variety": true
+   },
+   {
+    "speciesKey": "surskit",
+    "weight": 8,
+    "minLevel": 61,
+    "maxLevel": 63,
+    "variety": true
+   },
+   {
+    "speciesKey": "roselia",
+    "weight": 8,
+    "minLevel": 61,
+    "maxLevel": 63,
+    "variety": true
    }
   ]
  },
@@ -1545,6 +3050,69 @@
     "weight": 1,
     "minLevel": 63,
     "maxLevel": 65
+   },
+   {
+    "speciesKey": "oddish",
+    "weight": 8,
+    "minLevel": 63,
+    "maxLevel": 65,
+    "variety": true
+   },
+   {
+    "speciesKey": "gloom",
+    "weight": 8,
+    "minLevel": 63,
+    "maxLevel": 65,
+    "variety": true
+   },
+   {
+    "speciesKey": "horsea",
+    "weight": 8,
+    "minLevel": 63,
+    "maxLevel": 65,
+    "variety": true
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 8,
+    "minLevel": 63,
+    "maxLevel": 65,
+    "variety": true
+   },
+   {
+    "speciesKey": "chinchou",
+    "weight": 8,
+    "minLevel": 63,
+    "maxLevel": 65,
+    "variety": true
+   },
+   {
+    "speciesKey": "marill",
+    "weight": 8,
+    "minLevel": 63,
+    "maxLevel": 65,
+    "variety": true
+   },
+   {
+    "speciesKey": "corsola",
+    "weight": 8,
+    "minLevel": 63,
+    "maxLevel": 65,
+    "variety": true
+   },
+   {
+    "speciesKey": "lotad",
+    "weight": 8,
+    "minLevel": 63,
+    "maxLevel": 65,
+    "variety": true
+   },
+   {
+    "speciesKey": "lombre",
+    "weight": 8,
+    "minLevel": 63,
+    "maxLevel": 65,
+    "variety": true
    }
   ]
  },
@@ -1592,6 +3160,69 @@
     "weight": 1,
     "minLevel": 65,
     "maxLevel": 67
+   },
+   {
+    "speciesKey": "oddish",
+    "weight": 8,
+    "minLevel": 65,
+    "maxLevel": 67,
+    "variety": true
+   },
+   {
+    "speciesKey": "gloom",
+    "weight": 8,
+    "minLevel": 65,
+    "maxLevel": 67,
+    "variety": true
+   },
+   {
+    "speciesKey": "horsea",
+    "weight": 8,
+    "minLevel": 65,
+    "maxLevel": 67,
+    "variety": true
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 8,
+    "minLevel": 65,
+    "maxLevel": 67,
+    "variety": true
+   },
+   {
+    "speciesKey": "chinchou",
+    "weight": 8,
+    "minLevel": 65,
+    "maxLevel": 67,
+    "variety": true
+   },
+   {
+    "speciesKey": "marill",
+    "weight": 8,
+    "minLevel": 65,
+    "maxLevel": 67,
+    "variety": true
+   },
+   {
+    "speciesKey": "corsola",
+    "weight": 8,
+    "minLevel": 65,
+    "maxLevel": 67,
+    "variety": true
+   },
+   {
+    "speciesKey": "lotad",
+    "weight": 8,
+    "minLevel": 65,
+    "maxLevel": 67,
+    "variety": true
+   },
+   {
+    "speciesKey": "lombre",
+    "weight": 8,
+    "minLevel": 65,
+    "maxLevel": 67,
+    "variety": true
    }
   ]
  },
@@ -1633,6 +3264,76 @@
     "weight": 1,
     "minLevel": 67,
     "maxLevel": 69
+   },
+   {
+    "speciesKey": "oddish",
+    "weight": 8,
+    "minLevel": 67,
+    "maxLevel": 69,
+    "variety": true
+   },
+   {
+    "speciesKey": "gloom",
+    "weight": 8,
+    "minLevel": 67,
+    "maxLevel": 69,
+    "variety": true
+   },
+   {
+    "speciesKey": "horsea",
+    "weight": 8,
+    "minLevel": 67,
+    "maxLevel": 69,
+    "variety": true
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 8,
+    "minLevel": 67,
+    "maxLevel": 69,
+    "variety": true
+   },
+   {
+    "speciesKey": "chinchou",
+    "weight": 8,
+    "minLevel": 67,
+    "maxLevel": 69,
+    "variety": true
+   },
+   {
+    "speciesKey": "marill",
+    "weight": 8,
+    "minLevel": 67,
+    "maxLevel": 69,
+    "variety": true
+   },
+   {
+    "speciesKey": "corsola",
+    "weight": 8,
+    "minLevel": 67,
+    "maxLevel": 69,
+    "variety": true
+   },
+   {
+    "speciesKey": "lotad",
+    "weight": 8,
+    "minLevel": 67,
+    "maxLevel": 69,
+    "variety": true
+   },
+   {
+    "speciesKey": "lombre",
+    "weight": 8,
+    "minLevel": 67,
+    "maxLevel": 69,
+    "variety": true
+   },
+   {
+    "speciesKey": "surskit",
+    "weight": 8,
+    "minLevel": 67,
+    "maxLevel": 69,
+    "variety": true
    }
   ]
  },
@@ -1680,6 +3381,69 @@
     "weight": 1,
     "minLevel": 69,
     "maxLevel": 71
+   },
+   {
+    "speciesKey": "oddish",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "gloom",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "chinchou",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "marill",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "corsola",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "lotad",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "lombre",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "surskit",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
    }
   ]
  },
@@ -1727,6 +3491,69 @@
     "weight": 1,
     "minLevel": 71,
     "maxLevel": 73
+   },
+   {
+    "speciesKey": "oddish",
+    "weight": 8,
+    "minLevel": 71,
+    "maxLevel": 73,
+    "variety": true
+   },
+   {
+    "speciesKey": "gloom",
+    "weight": 8,
+    "minLevel": 71,
+    "maxLevel": 73,
+    "variety": true
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 8,
+    "minLevel": 71,
+    "maxLevel": 73,
+    "variety": true
+   },
+   {
+    "speciesKey": "chinchou",
+    "weight": 8,
+    "minLevel": 71,
+    "maxLevel": 73,
+    "variety": true
+   },
+   {
+    "speciesKey": "marill",
+    "weight": 8,
+    "minLevel": 71,
+    "maxLevel": 73,
+    "variety": true
+   },
+   {
+    "speciesKey": "corsola",
+    "weight": 8,
+    "minLevel": 71,
+    "maxLevel": 73,
+    "variety": true
+   },
+   {
+    "speciesKey": "lotad",
+    "weight": 8,
+    "minLevel": 71,
+    "maxLevel": 73,
+    "variety": true
+   },
+   {
+    "speciesKey": "lombre",
+    "weight": 8,
+    "minLevel": 71,
+    "maxLevel": 73,
+    "variety": true
+   },
+   {
+    "speciesKey": "surskit",
+    "weight": 8,
+    "minLevel": 71,
+    "maxLevel": 73,
+    "variety": true
    }
   ]
  },
@@ -1774,6 +3601,69 @@
     "weight": 1,
     "minLevel": 73,
     "maxLevel": 75
+   },
+   {
+    "speciesKey": "oddish",
+    "weight": 8,
+    "minLevel": 73,
+    "maxLevel": 75,
+    "variety": true
+   },
+   {
+    "speciesKey": "gloom",
+    "weight": 8,
+    "minLevel": 73,
+    "maxLevel": 75,
+    "variety": true
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 8,
+    "minLevel": 73,
+    "maxLevel": 75,
+    "variety": true
+   },
+   {
+    "speciesKey": "chinchou",
+    "weight": 8,
+    "minLevel": 73,
+    "maxLevel": 75,
+    "variety": true
+   },
+   {
+    "speciesKey": "marill",
+    "weight": 8,
+    "minLevel": 73,
+    "maxLevel": 75,
+    "variety": true
+   },
+   {
+    "speciesKey": "corsola",
+    "weight": 8,
+    "minLevel": 73,
+    "maxLevel": 75,
+    "variety": true
+   },
+   {
+    "speciesKey": "lotad",
+    "weight": 8,
+    "minLevel": 73,
+    "maxLevel": 75,
+    "variety": true
+   },
+   {
+    "speciesKey": "lombre",
+    "weight": 8,
+    "minLevel": 73,
+    "maxLevel": 75,
+    "variety": true
+   },
+   {
+    "speciesKey": "surskit",
+    "weight": 8,
+    "minLevel": 73,
+    "maxLevel": 75,
+    "variety": true
    }
   ]
  },

@@ -22,6 +22,7 @@ const read = (f) => JSON.parse(fs.readFileSync(path.join(DATA, f), 'utf8'))
 const write = (f, v) => fs.writeFileSync(path.join(DATA, f), JSON.stringify(v, null, 1) + '\n')
 const { readRegionDir, writeRegionDir } = require('./lib/region-data.cjs')
 const { buildEvolutionLevels, stageForLevel } = require('./lib/evolution-levels.cjs')
+const { buildWildPool, collectProtectedSpecies, enrichEncounters } = require('./lib/route-variety.cjs')
 
 const GEN_RANGES = [
   [1, 151], [152, 251], [252, 386], [387, 493], [494, 649],
@@ -938,6 +939,13 @@ const speciesForGen = (gen) => {
 // regional dex, not just its new species) so themed teams have enough members:
 // Johto's Morty can field the Gastly line and Clair the Dratini line. Starter
 // lines and legendaries/mythicals are left out.
+// Every starter base form (all generations, plus Kanto's hand-curated trio).
+const STARTER_BASE_KEYS = [
+  ...Object.values(GEN_STARTERS).flat(),
+  'bulbasaur',
+  'charmander',
+  'squirtle',
+]
 const ALL_STARTERS = (() => {
   const lines = new Set()
   const addLine = (key) => {
@@ -945,13 +953,7 @@ const ALL_STARTERS = (() => {
     lines.add(key)
     for (const evolution of evolutionData[key] ?? []) addLine(evolution.into)
   }
-  for (const key of [
-    ...Object.values(GEN_STARTERS).flat(),
-    'bulbasaur',
-    'charmander',
-    'squirtle',
-  ])
-    addLine(key)
+  for (const key of STARTER_BASE_KEYS) addLine(key)
   return lines
 })()
 const teamPoolForGen = (gen) => {
@@ -2748,6 +2750,33 @@ for (const pending of pendingRaids) {
         maxLevel: raidLevel(entry),
       })),
     }
+}
+
+// --- route variety -----------------------------------------------------------
+// The scraped per-route tables are faithful but thin (Kanto Route 1 is just
+// Pidgey + Rattata), so a route feels repetitive once its few commons are
+// caught. Top each region's sparse routes up to MIN_ROUTE_SPECIES with species
+// already wild elsewhere in that same region, matched by level and type. Runs
+// after the raid scan, so the region's raid roster is available to exclude; it
+// only ever redistributes already-routable species, so the raid pools are
+// unaffected. See tools/lib/route-variety.cjs.
+const protectedVarietySpecies = collectProtectedSpecies(
+  evolutionData,
+  STARTER_BASE_KEYS,
+  mapData
+)
+for (const region of regions) {
+  const exclude = new Set(protectedVarietySpecies)
+  for (const entry of region.raidPool ?? []) exclude.add(entry.speciesKey)
+  const regionBuckets = {}
+  for (const [key, bucket] of Object.entries(encounterData))
+    if ((mapData[key]?.region ?? 'kanto') === region.id) regionBuckets[key] = bucket
+  const pool = buildWildPool(regionBuckets, mapData, exclude)
+  for (const [key, bucket] of Object.entries(regionBuckets)) {
+    if (mapData[key]?.type !== 'route') continue
+    const result = enrichEncounters(bucket.encounters, pool, species, evolutionLevels)
+    if (result.added.length) bucket.encounters = result.encounters
+  }
 }
 
 // De-overlap hand-measured layouts: reference maps put adjacent towns and

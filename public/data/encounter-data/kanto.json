@@ -13,6 +13,41 @@
     "weight": 13,
     "minLevel": 3,
     "maxLevel": 5
+   },
+   {
+    "speciesKey": "caterpie",
+    "weight": 8,
+    "minLevel": 3,
+    "maxLevel": 5,
+    "variety": true
+   },
+   {
+    "speciesKey": "weedle",
+    "weight": 8,
+    "minLevel": 3,
+    "maxLevel": 5,
+    "variety": true
+   },
+   {
+    "speciesKey": "pikachu",
+    "weight": 8,
+    "minLevel": 3,
+    "maxLevel": 5,
+    "variety": true
+   },
+   {
+    "speciesKey": "nidoranF",
+    "weight": 8,
+    "minLevel": 3,
+    "maxLevel": 5,
+    "variety": true
+   },
+   {
+    "speciesKey": "nidoranM",
+    "weight": 8,
+    "minLevel": 3,
+    "maxLevel": 5,
+    "variety": true
    }
   ]
  },
@@ -54,6 +89,76 @@
     "weight": 1,
     "minLevel": 7,
     "maxLevel": 9
+   },
+   {
+    "speciesKey": "spearow",
+    "weight": 8,
+    "minLevel": 7,
+    "maxLevel": 9,
+    "variety": true
+   },
+   {
+    "speciesKey": "jigglypuff",
+    "weight": 8,
+    "minLevel": 7,
+    "maxLevel": 9,
+    "variety": true
+   },
+   {
+    "speciesKey": "zubat",
+    "weight": 8,
+    "minLevel": 7,
+    "maxLevel": 9,
+    "variety": true
+   },
+   {
+    "speciesKey": "metapod",
+    "weight": 8,
+    "minLevel": 7,
+    "maxLevel": 9,
+    "variety": true
+   },
+   {
+    "speciesKey": "kakuna",
+    "weight": 8,
+    "minLevel": 7,
+    "maxLevel": 9,
+    "variety": true
+   },
+   {
+    "speciesKey": "pikachu",
+    "weight": 8,
+    "minLevel": 7,
+    "maxLevel": 9,
+    "variety": true
+   },
+   {
+    "speciesKey": "sandshrew",
+    "weight": 8,
+    "minLevel": 7,
+    "maxLevel": 9,
+    "variety": true
+   },
+   {
+    "speciesKey": "clefairy",
+    "weight": 8,
+    "minLevel": 7,
+    "maxLevel": 9,
+    "variety": true
+   },
+   {
+    "speciesKey": "paras",
+    "weight": 8,
+    "minLevel": 7,
+    "maxLevel": 9,
+    "variety": true
+   },
+   {
+    "speciesKey": "mankey",
+    "weight": 8,
+    "minLevel": 7,
+    "maxLevel": 9,
+    "variety": true
    }
   ]
  },
@@ -95,6 +200,76 @@
     "weight": 1,
     "minLevel": 9,
     "maxLevel": 11
+   },
+   {
+    "speciesKey": "ekans",
+    "weight": 8,
+    "minLevel": 9,
+    "maxLevel": 11,
+    "variety": true
+   },
+   {
+    "speciesKey": "nidoranF",
+    "weight": 8,
+    "minLevel": 9,
+    "maxLevel": 11,
+    "variety": true
+   },
+   {
+    "speciesKey": "nidoranM",
+    "weight": 8,
+    "minLevel": 9,
+    "maxLevel": 11,
+    "variety": true
+   },
+   {
+    "speciesKey": "zubat",
+    "weight": 8,
+    "minLevel": 9,
+    "maxLevel": 11,
+    "variety": true
+   },
+   {
+    "speciesKey": "paras",
+    "weight": 8,
+    "minLevel": 9,
+    "maxLevel": 11,
+    "variety": true
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 8,
+    "minLevel": 9,
+    "maxLevel": 11,
+    "variety": true
+   },
+   {
+    "speciesKey": "rattata",
+    "weight": 8,
+    "minLevel": 9,
+    "maxLevel": 11,
+    "variety": true
+   },
+   {
+    "speciesKey": "spearow",
+    "weight": 8,
+    "minLevel": 9,
+    "maxLevel": 11,
+    "variety": true
+   },
+   {
+    "speciesKey": "sandshrew",
+    "weight": 8,
+    "minLevel": 9,
+    "maxLevel": 11,
+    "variety": true
+   },
+   {
+    "speciesKey": "clefairy",
+    "weight": 8,
+    "minLevel": 9,
+    "maxLevel": 11,
+    "variety": true
    }
   ]
  },
@@ -148,6 +323,62 @@
     "weight": 1,
     "minLevel": 11,
     "maxLevel": 13
+   },
+   {
+    "speciesKey": "zubat",
+    "weight": 8,
+    "minLevel": 11,
+    "maxLevel": 13,
+    "variety": true
+   },
+   {
+    "speciesKey": "caterpie",
+    "weight": 8,
+    "minLevel": 11,
+    "maxLevel": 13,
+    "variety": true
+   },
+   {
+    "speciesKey": "metapod",
+    "weight": 8,
+    "minLevel": 11,
+    "maxLevel": 13,
+    "variety": true
+   },
+   {
+    "speciesKey": "weedle",
+    "weight": 8,
+    "minLevel": 11,
+    "maxLevel": 13,
+    "variety": true
+   },
+   {
+    "speciesKey": "kakuna",
+    "weight": 8,
+    "minLevel": 11,
+    "maxLevel": 13,
+    "variety": true
+   },
+   {
+    "speciesKey": "ekans",
+    "weight": 8,
+    "minLevel": 11,
+    "maxLevel": 13,
+    "variety": true
+   },
+   {
+    "speciesKey": "pikachu",
+    "weight": 8,
+    "minLevel": 11,
+    "maxLevel": 13,
+    "variety": true
+   },
+   {
+    "speciesKey": "clefairy",
+    "weight": 8,
+    "minLevel": 11,
+    "maxLevel": 13,
+    "variety": true
    }
   ]
  },
@@ -183,6 +414,83 @@
     "weight": 1,
     "minLevel": 13,
     "maxLevel": 15
+   },
+   {
+    "speciesKey": "caterpie",
+    "weight": 8,
+    "minLevel": 13,
+    "maxLevel": 15,
+    "variety": true
+   },
+   {
+    "speciesKey": "metapod",
+    "weight": 8,
+    "minLevel": 13,
+    "maxLevel": 15,
+    "variety": true
+   },
+   {
+    "speciesKey": "weedle",
+    "weight": 8,
+    "minLevel": 13,
+    "maxLevel": 15,
+    "variety": true
+   },
+   {
+    "speciesKey": "kakuna",
+    "weight": 8,
+    "minLevel": 13,
+    "maxLevel": 15,
+    "variety": true
+   },
+   {
+    "speciesKey": "oddish",
+    "weight": 8,
+    "minLevel": 13,
+    "maxLevel": 15,
+    "variety": true
+   },
+   {
+    "speciesKey": "venonat",
+    "weight": 8,
+    "minLevel": 13,
+    "maxLevel": 15,
+    "variety": true
+   },
+   {
+    "speciesKey": "bellsprout",
+    "weight": 8,
+    "minLevel": 13,
+    "maxLevel": 15,
+    "variety": true
+   },
+   {
+    "speciesKey": "pidgey",
+    "weight": 8,
+    "minLevel": 13,
+    "maxLevel": 15,
+    "variety": true
+   },
+   {
+    "speciesKey": "rattata",
+    "weight": 8,
+    "minLevel": 13,
+    "maxLevel": 15,
+    "variety": true
+   },
+   {
+    "speciesKey": "spearow",
+    "weight": 8,
+    "minLevel": 13,
+    "maxLevel": 15,
+    "variety": true
+   },
+   {
+    "speciesKey": "ekans",
+    "weight": 8,
+    "minLevel": 13,
+    "maxLevel": 15,
+    "variety": true
    }
   ]
  },
@@ -254,6 +562,41 @@
     "weight": 1,
     "minLevel": 14,
     "maxLevel": 16
+   },
+   {
+    "speciesKey": "weedle",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
+   },
+   {
+    "speciesKey": "kakuna",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
+   },
+   {
+    "speciesKey": "nidoranF",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
+   },
+   {
+    "speciesKey": "nidoranM",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
+   },
+   {
+    "speciesKey": "zubat",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
    }
   ]
  },
@@ -521,6 +864,55 @@
     "weight": 1,
     "minLevel": 20,
     "maxLevel": 22
+   },
+   {
+    "speciesKey": "raticate",
+    "weight": 8,
+    "minLevel": 20,
+    "maxLevel": 22,
+    "variety": true
+   },
+   {
+    "speciesKey": "spearow",
+    "weight": 8,
+    "minLevel": 20,
+    "maxLevel": 22,
+    "variety": true
+   },
+   {
+    "speciesKey": "fearow",
+    "weight": 8,
+    "minLevel": 20,
+    "maxLevel": 22,
+    "variety": true
+   },
+   {
+    "speciesKey": "paras",
+    "weight": 8,
+    "minLevel": 20,
+    "maxLevel": 22,
+    "variety": true
+   },
+   {
+    "speciesKey": "caterpie",
+    "weight": 8,
+    "minLevel": 20,
+    "maxLevel": 22,
+    "variety": true
+   },
+   {
+    "speciesKey": "metapod",
+    "weight": 8,
+    "minLevel": 20,
+    "maxLevel": 22,
+    "variety": true
+   },
+   {
+    "speciesKey": "weedle",
+    "weight": 8,
+    "minLevel": 20,
+    "maxLevel": 22,
+    "variety": true
    }
   ]
  },
@@ -693,6 +1085,48 @@
     "weight": 1,
     "minLevel": 26,
     "maxLevel": 28
+   },
+   {
+    "speciesKey": "weedle",
+    "weight": 8,
+    "minLevel": 26,
+    "maxLevel": 28,
+    "variety": true
+   },
+   {
+    "speciesKey": "kakuna",
+    "weight": 8,
+    "minLevel": 26,
+    "maxLevel": 28,
+    "variety": true
+   },
+   {
+    "speciesKey": "pidgey",
+    "weight": 8,
+    "minLevel": 26,
+    "maxLevel": 28,
+    "variety": true
+   },
+   {
+    "speciesKey": "pidgeotto",
+    "weight": 8,
+    "minLevel": 26,
+    "maxLevel": 28,
+    "variety": true
+   },
+   {
+    "speciesKey": "jigglypuff",
+    "weight": 8,
+    "minLevel": 26,
+    "maxLevel": 28,
+    "variety": true
+   },
+   {
+    "speciesKey": "zubat",
+    "weight": 8,
+    "minLevel": 26,
+    "maxLevel": 28,
+    "variety": true
    }
   ]
  },
@@ -853,6 +1287,83 @@
     "weight": 3,
     "minLevel": 28,
     "maxLevel": 30
+   },
+   {
+    "speciesKey": "sandshrew",
+    "weight": 8,
+    "minLevel": 28,
+    "maxLevel": 30,
+    "variety": true
+   },
+   {
+    "speciesKey": "pidgey",
+    "weight": 8,
+    "minLevel": 28,
+    "maxLevel": 30,
+    "variety": true
+   },
+   {
+    "speciesKey": "pidgeotto",
+    "weight": 8,
+    "minLevel": 28,
+    "maxLevel": 30,
+    "variety": true
+   },
+   {
+    "speciesKey": "rattata",
+    "weight": 8,
+    "minLevel": 28,
+    "maxLevel": 30,
+    "variety": true
+   },
+   {
+    "speciesKey": "raticate",
+    "weight": 8,
+    "minLevel": 28,
+    "maxLevel": 30,
+    "variety": true
+   },
+   {
+    "speciesKey": "spearow",
+    "weight": 8,
+    "minLevel": 28,
+    "maxLevel": 30,
+    "variety": true
+   },
+   {
+    "speciesKey": "ekans",
+    "weight": 8,
+    "minLevel": 28,
+    "maxLevel": 30,
+    "variety": true
+   },
+   {
+    "speciesKey": "pikachu",
+    "weight": 8,
+    "minLevel": 28,
+    "maxLevel": 30,
+    "variety": true
+   },
+   {
+    "speciesKey": "nidoranF",
+    "weight": 8,
+    "minLevel": 28,
+    "maxLevel": 30,
+    "variety": true
+   },
+   {
+    "speciesKey": "nidorina",
+    "weight": 8,
+    "minLevel": 28,
+    "maxLevel": 30,
+    "variety": true
+   },
+   {
+    "speciesKey": "nidoranM",
+    "weight": 8,
+    "minLevel": 28,
+    "maxLevel": 30,
+    "variety": true
    }
   ]
  },
@@ -876,6 +1387,97 @@
     "weight": 3,
     "minLevel": 35,
     "maxLevel": 37
+   },
+   {
+    "speciesKey": "weedle",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "kakuna",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "ekans",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "nidoranF",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "nidorina",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "nidoranM",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "nidorino",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "zubat",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "oddish",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "venonat",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "bellsprout",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "grimer",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
    }
   ]
  },
@@ -947,6 +1549,41 @@
     "weight": 3,
     "minLevel": 24,
     "maxLevel": 26
+   },
+   {
+    "speciesKey": "spearow",
+    "weight": 8,
+    "minLevel": 24,
+    "maxLevel": 26,
+    "variety": true
+   },
+   {
+    "speciesKey": "fearow",
+    "weight": 8,
+    "minLevel": 24,
+    "maxLevel": 26,
+    "variety": true
+   },
+   {
+    "speciesKey": "raticate",
+    "weight": 8,
+    "minLevel": 24,
+    "maxLevel": 26,
+    "variety": true
+   },
+   {
+    "speciesKey": "zubat",
+    "weight": 8,
+    "minLevel": 24,
+    "maxLevel": 26,
+    "variety": true
+   },
+   {
+    "speciesKey": "gyarados",
+    "weight": 8,
+    "minLevel": 24,
+    "maxLevel": 26,
+    "variety": true
    }
   ]
  },
@@ -1024,6 +1661,34 @@
     "weight": 1,
     "minLevel": 33,
     "maxLevel": 35
+   },
+   {
+    "speciesKey": "spearow",
+    "weight": 8,
+    "minLevel": 33,
+    "maxLevel": 35,
+    "variety": true
+   },
+   {
+    "speciesKey": "fearow",
+    "weight": 8,
+    "minLevel": 33,
+    "maxLevel": 35,
+    "variety": true
+   },
+   {
+    "speciesKey": "raticate",
+    "weight": 8,
+    "minLevel": 33,
+    "maxLevel": 35,
+    "variety": true
+   },
+   {
+    "speciesKey": "zubat",
+    "weight": 8,
+    "minLevel": 33,
+    "maxLevel": 35,
+    "variety": true
    }
   ]
  },
@@ -1440,6 +2105,55 @@
     "weight": 1,
     "minLevel": 50,
     "maxLevel": 52
+   },
+   {
+    "speciesKey": "weedle",
+    "weight": 8,
+    "minLevel": 50,
+    "maxLevel": 52,
+    "variety": true
+   },
+   {
+    "speciesKey": "kakuna",
+    "weight": 8,
+    "minLevel": 50,
+    "maxLevel": 52,
+    "variety": true
+   },
+   {
+    "speciesKey": "ekans",
+    "weight": 8,
+    "minLevel": 50,
+    "maxLevel": 52,
+    "variety": true
+   },
+   {
+    "speciesKey": "nidoranF",
+    "weight": 8,
+    "minLevel": 50,
+    "maxLevel": 52,
+    "variety": true
+   },
+   {
+    "speciesKey": "nidorina",
+    "weight": 8,
+    "minLevel": 50,
+    "maxLevel": 52,
+    "variety": true
+   },
+   {
+    "speciesKey": "nidoranM",
+    "weight": 8,
+    "minLevel": 50,
+    "maxLevel": 52,
+    "variety": true
+   },
+   {
+    "speciesKey": "nidorino",
+    "weight": 8,
+    "minLevel": 50,
+    "maxLevel": 52,
+    "variety": true
    }
   ]
  },
@@ -1499,6 +2213,55 @@
     "weight": 1,
     "minLevel": 52,
     "maxLevel": 54
+   },
+   {
+    "speciesKey": "weedle",
+    "weight": 8,
+    "minLevel": 52,
+    "maxLevel": 54,
+    "variety": true
+   },
+   {
+    "speciesKey": "kakuna",
+    "weight": 8,
+    "minLevel": 52,
+    "maxLevel": 54,
+    "variety": true
+   },
+   {
+    "speciesKey": "ekans",
+    "weight": 8,
+    "minLevel": 52,
+    "maxLevel": 54,
+    "variety": true
+   },
+   {
+    "speciesKey": "arbok",
+    "weight": 8,
+    "minLevel": 52,
+    "maxLevel": 54,
+    "variety": true
+   },
+   {
+    "speciesKey": "nidoranF",
+    "weight": 8,
+    "minLevel": 52,
+    "maxLevel": 54,
+    "variety": true
+   },
+   {
+    "speciesKey": "nidorina",
+    "weight": 8,
+    "minLevel": 52,
+    "maxLevel": 54,
+    "variety": true
+   },
+   {
+    "speciesKey": "nidoranM",
+    "weight": 8,
+    "minLevel": 52,
+    "maxLevel": 54,
+    "variety": true
    }
   ]
  },
@@ -1534,6 +2297,83 @@
     "weight": 1,
     "minLevel": 41,
     "maxLevel": 43
+   },
+   {
+    "speciesKey": "pidgey",
+    "weight": 8,
+    "minLevel": 41,
+    "maxLevel": 43,
+    "variety": true
+   },
+   {
+    "speciesKey": "pidgeotto",
+    "weight": 8,
+    "minLevel": 41,
+    "maxLevel": 43,
+    "variety": true
+   },
+   {
+    "speciesKey": "farfetchd",
+    "weight": 8,
+    "minLevel": 41,
+    "maxLevel": 43,
+    "variety": true
+   },
+   {
+    "speciesKey": "dodrio",
+    "weight": 8,
+    "minLevel": 41,
+    "maxLevel": 43,
+    "variety": true
+   },
+   {
+    "speciesKey": "jigglypuff",
+    "weight": 8,
+    "minLevel": 41,
+    "maxLevel": 43,
+    "variety": true
+   },
+   {
+    "speciesKey": "zubat",
+    "weight": 8,
+    "minLevel": 41,
+    "maxLevel": 43,
+    "variety": true
+   },
+   {
+    "speciesKey": "meowth",
+    "weight": 8,
+    "minLevel": 41,
+    "maxLevel": 43,
+    "variety": true
+   },
+   {
+    "speciesKey": "gyarados",
+    "weight": 8,
+    "minLevel": 41,
+    "maxLevel": 43,
+    "variety": true
+   },
+   {
+    "speciesKey": "ekans",
+    "weight": 8,
+    "minLevel": 41,
+    "maxLevel": 43,
+    "variety": true
+   },
+   {
+    "speciesKey": "sandshrew",
+    "weight": 8,
+    "minLevel": 41,
+    "maxLevel": 43,
+    "variety": true
+   },
+   {
+    "speciesKey": "nidoranF",
+    "weight": 8,
+    "minLevel": 41,
+    "maxLevel": 43,
+    "variety": true
    }
   ]
  },
@@ -1617,6 +2457,27 @@
     "weight": 1,
     "minLevel": 43,
     "maxLevel": 45
+   },
+   {
+    "speciesKey": "pidgey",
+    "weight": 8,
+    "minLevel": 43,
+    "maxLevel": 45,
+    "variety": true
+   },
+   {
+    "speciesKey": "pidgeotto",
+    "weight": 8,
+    "minLevel": 43,
+    "maxLevel": 45,
+    "variety": true
+   },
+   {
+    "speciesKey": "jigglypuff",
+    "weight": 8,
+    "minLevel": 43,
+    "maxLevel": 45,
+    "variety": true
    }
   ]
  },
@@ -1688,6 +2549,41 @@
     "weight": 1,
     "minLevel": 45,
     "maxLevel": 47
+   },
+   {
+    "speciesKey": "pidgey",
+    "weight": 8,
+    "minLevel": 45,
+    "maxLevel": 47,
+    "variety": true
+   },
+   {
+    "speciesKey": "pidgeotto",
+    "weight": 8,
+    "minLevel": 45,
+    "maxLevel": 47,
+    "variety": true
+   },
+   {
+    "speciesKey": "jigglypuff",
+    "weight": 8,
+    "minLevel": 45,
+    "maxLevel": 47,
+    "variety": true
+   },
+   {
+    "speciesKey": "meowth",
+    "weight": 8,
+    "minLevel": 45,
+    "maxLevel": 47,
+    "variety": true
+   },
+   {
+    "speciesKey": "psyduck",
+    "weight": 8,
+    "minLevel": 45,
+    "maxLevel": 47,
+    "variety": true
    }
   ]
  },
@@ -1896,6 +2792,104 @@
     "weight": 1,
     "minLevel": 39,
     "maxLevel": 41
+   },
+   {
+    "speciesKey": "sandshrew",
+    "weight": 8,
+    "minLevel": 39,
+    "maxLevel": 41,
+    "variety": true
+   },
+   {
+    "speciesKey": "geodude",
+    "weight": 8,
+    "minLevel": 39,
+    "maxLevel": 41,
+    "variety": true
+   },
+   {
+    "speciesKey": "onix",
+    "weight": 8,
+    "minLevel": 39,
+    "maxLevel": 41,
+    "variety": true
+   },
+   {
+    "speciesKey": "cubone",
+    "weight": 8,
+    "minLevel": 39,
+    "maxLevel": 41,
+    "variety": true
+   },
+   {
+    "speciesKey": "pidgey",
+    "weight": 8,
+    "minLevel": 39,
+    "maxLevel": 41,
+    "variety": true
+   },
+   {
+    "speciesKey": "pidgeotto",
+    "weight": 8,
+    "minLevel": 39,
+    "maxLevel": 41,
+    "variety": true
+   },
+   {
+    "speciesKey": "rattata",
+    "weight": 8,
+    "minLevel": 39,
+    "maxLevel": 41,
+    "variety": true
+   },
+   {
+    "speciesKey": "raticate",
+    "weight": 8,
+    "minLevel": 39,
+    "maxLevel": 41,
+    "variety": true
+   },
+   {
+    "speciesKey": "spearow",
+    "weight": 8,
+    "minLevel": 39,
+    "maxLevel": 41,
+    "variety": true
+   },
+   {
+    "speciesKey": "ekans",
+    "weight": 8,
+    "minLevel": 39,
+    "maxLevel": 41,
+    "variety": true
+   },
+   {
+    "speciesKey": "nidoranF",
+    "weight": 8,
+    "minLevel": 39,
+    "maxLevel": 41,
+    "variety": true
+   },
+   {
+    "speciesKey": "nidorina",
+    "weight": 8,
+    "minLevel": 39,
+    "maxLevel": 41,
+    "variety": true
+   },
+   {
+    "speciesKey": "nidoranM",
+    "weight": 8,
+    "minLevel": 39,
+    "maxLevel": 41,
+    "variety": true
+   },
+   {
+    "speciesKey": "nidorino",
+    "weight": 8,
+    "minLevel": 39,
+    "maxLevel": 41,
+    "variety": true
    }
   ]
  },
@@ -1985,6 +2979,20 @@
     "weight": 1,
     "minLevel": 60,
     "maxLevel": 62
+   },
+   {
+    "speciesKey": "weedle",
+    "weight": 8,
+    "minLevel": 60,
+    "maxLevel": 62,
+    "variety": true
+   },
+   {
+    "speciesKey": "kakuna",
+    "weight": 8,
+    "minLevel": 60,
+    "maxLevel": 62,
+    "variety": true
    }
   ]
  },
@@ -2074,6 +3082,20 @@
     "weight": 1,
     "minLevel": 62,
     "maxLevel": 64
+   },
+   {
+    "speciesKey": "weedle",
+    "weight": 8,
+    "minLevel": 62,
+    "maxLevel": 64,
+    "variety": true
+   },
+   {
+    "speciesKey": "kakuna",
+    "weight": 8,
+    "minLevel": 62,
+    "maxLevel": 64,
+    "variety": true
    }
   ]
  },
@@ -2270,6 +3292,41 @@
     "weight": 1,
     "minLevel": 65,
     "maxLevel": 67
+   },
+   {
+    "speciesKey": "pidgey",
+    "weight": 8,
+    "minLevel": 65,
+    "maxLevel": 67,
+    "variety": true
+   },
+   {
+    "speciesKey": "pidgeotto",
+    "weight": 8,
+    "minLevel": 65,
+    "maxLevel": 67,
+    "variety": true
+   },
+   {
+    "speciesKey": "spearow",
+    "weight": 8,
+    "minLevel": 65,
+    "maxLevel": 67,
+    "variety": true
+   },
+   {
+    "speciesKey": "fearow",
+    "weight": 8,
+    "minLevel": 65,
+    "maxLevel": 67,
+    "variety": true
+   },
+   {
+    "speciesKey": "jigglypuff",
+    "weight": 8,
+    "minLevel": 65,
+    "maxLevel": 67,
+    "variety": true
    }
   ]
  },
@@ -2466,6 +3523,34 @@
     "weight": 1,
     "minLevel": 56,
     "maxLevel": 58
+   },
+   {
+    "speciesKey": "slowbro",
+    "weight": 8,
+    "minLevel": 56,
+    "maxLevel": 58,
+    "variety": true
+   },
+   {
+    "speciesKey": "abra",
+    "weight": 8,
+    "minLevel": 56,
+    "maxLevel": 58,
+    "variety": true
+   },
+   {
+    "speciesKey": "kadabra",
+    "weight": 8,
+    "minLevel": 56,
+    "maxLevel": 58,
+    "variety": true
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 8,
+    "minLevel": 56,
+    "maxLevel": 58,
+    "variety": true
    }
   ]
  },
@@ -2644,6 +3729,76 @@
     "weight": 1,
     "minLevel": 31,
     "maxLevel": 33
+   },
+   {
+    "speciesKey": "pidgey",
+    "weight": 8,
+    "minLevel": 31,
+    "maxLevel": 33,
+    "variety": true
+   },
+   {
+    "speciesKey": "pidgeotto",
+    "weight": 8,
+    "minLevel": 31,
+    "maxLevel": 33,
+    "variety": true
+   },
+   {
+    "speciesKey": "rattata",
+    "weight": 8,
+    "minLevel": 31,
+    "maxLevel": 33,
+    "variety": true
+   },
+   {
+    "speciesKey": "raticate",
+    "weight": 8,
+    "minLevel": 31,
+    "maxLevel": 33,
+    "variety": true
+   },
+   {
+    "speciesKey": "spearow",
+    "weight": 8,
+    "minLevel": 31,
+    "maxLevel": 33,
+    "variety": true
+   },
+   {
+    "speciesKey": "ekans",
+    "weight": 8,
+    "minLevel": 31,
+    "maxLevel": 33,
+    "variety": true
+   },
+   {
+    "speciesKey": "sandshrew",
+    "weight": 8,
+    "minLevel": 31,
+    "maxLevel": 33,
+    "variety": true
+   },
+   {
+    "speciesKey": "nidoranF",
+    "weight": 8,
+    "minLevel": 31,
+    "maxLevel": 33,
+    "variety": true
+   },
+   {
+    "speciesKey": "nidorina",
+    "weight": 8,
+    "minLevel": 31,
+    "maxLevel": 33,
+    "variety": true
+   },
+   {
+    "speciesKey": "nidoranM",
+    "weight": 8,
+    "minLevel": 31,
+    "maxLevel": 33,
+    "variety": true
    }
   ]
  },
@@ -2721,6 +3876,34 @@
     "weight": 25,
     "minLevel": 69,
     "maxLevel": 71
+   },
+   {
+    "speciesKey": "sandshrew",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "sandslash",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "diglett",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "dugtrio",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
    }
   ]
  },

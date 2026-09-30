@@ -563,7 +563,11 @@ One-off scripts used to build the data JSON (not run during dev/build):
   player and doesn't trust the scraped real levels (which vary wildly between
   routes and game versions, e.g. Unova Route 1). The Elite Four occupy 68-75
   and the Champion 70-75; Kanto's hand-curated league/trainer levels are kept
-  in the committed JSON and normalised onto the same curve.
+  in the committed JSON and normalised onto the same curve. Sparse scraped
+  tables are then topped up with more of the region's own wild species
+  (`lib/route-variety.cjs`, mirrored on the committed data by
+  `apply-route-variety.cjs`), so a route offers more than its two or three
+  commons.
   Gym leaders are placed in their real city via `GYM_TOWNS` (matched against
   the region's town nodes by display name), falling back to spreading them
   across towns in BFS order — Alola has island trials, not gyms, so it always
@@ -651,6 +655,15 @@ One-off scripts used to build the data JSON (not run during dev/build):
   every region's (now retired) `raidOrdinaryPool`, since the fossils are now
   gifted and dug up and the finals come from reviving them at Cinnabar Island.
   Idempotent; it also no-ops once the ordinary pool is gone.
+- `apply-route-variety.cjs` — data-only pass that tops up every region's
+  sparse wild tables: a route with fewer than `MIN_ROUTE_SPECIES` (16) finds
+  gains level- and type-appropriate species already wild elsewhere in the same
+  region, at a modest weight. Starter lines, breed-only babies, raid rosters and
+  any species named by a route-exclusive `caughtOnRoute` gate are excluded, so
+  it never strands a route-exclusive species or makes a rare/gift find common.
+  The generator runs the same pass (`lib/route-variety.cjs`) on regeneration;
+  added entries carry a `variety: true` flag so the pass is idempotent.
+  Idempotent (`--dry`).
 - `fix-impossible-encounters.cjs` / `fix-impossible-teams.cjs` — step wild
   encounters and trainer/gym/Elite Four/Champion Pokemon back to a form that
   could exist at their level (a Lv. 3 Chesnaught becomes a Chespin), merging
@@ -661,6 +674,9 @@ One-off scripts used to build the data JSON (not run during dev/build):
   `plausibleEncounters` pass and `buildTeam` filter regenerate the data.
 - `lib/evolution-levels.cjs` — shared `buildEvolutionLevels` / `stageForLevel`
   helpers (also used by `validate-data.mjs` and the impossible-levels test).
+- `lib/route-variety.cjs` — shared route-variety helpers (`buildWildPool`,
+  `enrichEncounters`, `collectProtectedSpecies`) used by both
+  `generate-regions.cjs` and `apply-route-variety.cjs`.
 - `enforce-zone-chains.cjs` — adds the `requires: [hub, previous sub-area]`
   chain to the committed zone sub-areas so they unlock in order behind the hub
   (the generator does it in its final pass). Idempotent (`--dry`).

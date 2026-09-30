@@ -126,6 +126,7 @@ export const CHANGELOG = [
             'Steven’s post-Champion Beldum gift is available at his house in Mossdeep City once you have beaten the Hoenn Champion',
             'Mr. Pok\u00e9mon on Johto\u2019s Route 30 now hands over the canonical Togepi Egg once you have a Johto badge; carry it in the party and battle to hatch it',
             'The Lake of Rage’s red Gyarados is a one-off guaranteed-shiny static on Johto Route 43 (after the seventh badge); it stays put until you catch it',
+            'Routes feel less repetitive: every route that only had a handful of species now also rolls other Pokemon already wild elsewhere in the same region, matched to the route\u2019s level and dominant types, so most routes offer up to around sixteen different finds. Starter lines, breed-only babies, Raid Island rosters and route-exclusive catch targets are left alone',
           ],
         },
         {

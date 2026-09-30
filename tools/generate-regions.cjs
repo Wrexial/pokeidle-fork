@@ -435,7 +435,17 @@ const LEAGUE_ANCHOR = { hoenn: 'hoenn-route-128' }
 // Spread index i of `count` evenly across [min, max] (inclusive).
 const spread = (i, count, min, max) =>
   Math.round(min + (count <= 1 ? 0 : (i * (max - min)) / (count - 1)))
-const TRAINER_CLASSES = ['youngster', 'lass', 'bugCatcher', 'hiker', 'camper', 'beauty', 'coolTrainer', 'psychic', 'scientist', 'ace', 'blackbelt', 'swimmer']
+// Stable FNV-1a hash (mirrors src/game/rng.js) so the per-town trainer roster
+// is deterministic across regenerations.
+const hashString = (text) => {
+  let hash = 2166136261
+  for (let index = 0; index < text.length; index++) {
+    hash ^= text.charCodeAt(index)
+    hash = Math.imul(hash, 16777619)
+  }
+  return hash >>> 0
+}
+const TRAINER_CLASSES = ['youngster', 'lass', 'bugCatcher', 'hiker', 'camper', 'beauty', 'coolTrainer', 'psychic', 'scientist', 'ace', 'blackbelt', 'swimmer', 'sailor', 'gentleman', 'channeler', 'tamer', 'juggler', 'superNerd']
 // Display names for the generated route trainers, so battles read
 // "Youngster Joey" instead of "Route 2 Trainer 1".
 const TRAINER_CLASS_LABELS = {
@@ -451,14 +461,63 @@ const TRAINER_CLASS_LABELS = {
   ace: 'Ace Trainer',
   blackbelt: 'Blackbelt',
   swimmer: 'Swimmer',
+  sailor: 'Sailor',
+  gentleman: 'Gentleman',
+  channeler: 'Channeler',
+  tamer: 'Tamer',
+  juggler: 'Juggler',
+  superNerd: 'Super Nerd',
 }
-const TRAINER_NAMES = [
-  'Joey', 'Mikey', 'Sarah', 'Alex', 'Tara', 'Ben', 'Kira', 'Leo', 'Maya', 'Nate',
-  'Olivia', 'Paul', 'Rosa', 'Sam', 'Tina', 'Victor', 'Wendy', 'Xander', 'Yuki', 'Zoe',
-  'Aaron', 'Bianca', 'Caleb', 'Dana', 'Eli', 'Fiona', 'Gavin', 'Hana', 'Ivan', 'Jade',
-  'Kai', 'Lena', 'Marco', 'Nina', 'Owen', 'Pia', 'Quinn', 'Rex', 'Sofia', 'Theo',
-  'Uma', 'Vera', 'Wade', 'Xena', 'Yara', 'Zane', 'Aya', 'Bruno', 'Cleo', 'Dev',
+// First names for the generated trainers, split by the gender each class is
+// drawn as so a trainer reads naturally ("Beauty Rosa", "Hiker Bruno") instead
+// of pairing any name with any class. Mixed classes draw from both lists.
+const TRAINER_NAMES_MALE = [
+  'Aaron', 'Alex', 'Andre', 'Ben', 'Blake', 'Bruno', 'Caleb', 'Carlos', 'Cody', 'Cole',
+  'Dante', 'Dev', 'Eli', 'Elliot', 'Felix', 'Finn', 'Gavin', 'Hiro', 'Hugo', 'Ivan',
+  'Jack', 'Jasper', 'Joel', 'Kai', 'Kenji', 'Leo', 'Liam', 'Luca', 'Marco', 'Mason',
+  'Miles', 'Nate', 'Neil', 'Noah', 'Oscar', 'Owen', 'Paul', 'Quinn', 'Rex', 'Riley',
+  'Ryan', 'Sam', 'Seth', 'Silas', 'Theo', 'Toby', 'Victor', 'Wade', 'Wesley', 'Xander',
+  'Zane', 'Zeke',
 ]
+const TRAINER_NAMES_FEMALE = [
+  'Alice', 'Amber', 'Aria', 'Ava', 'Bella', 'Bianca', 'Cara', 'Chloe', 'Claire', 'Cleo',
+  'Daisy', 'Dana', 'Elena', 'Ella', 'Emma', 'Fiona', 'Freya', 'Grace', 'Hana', 'Hazel',
+  'Iris', 'Isla', 'Jade', 'Julia', 'Kira', 'Lara', 'Lena', 'Lily', 'Luna', 'Maya',
+  'Mia', 'Nina', 'Nora', 'Olivia', 'Paige', 'Pia', 'Rosa', 'Ruby', 'Sana', 'Sarah',
+  'Sofia', 'Tara', 'Tessa', 'Uma', 'Vera', 'Wendy', 'Yara', 'Yuki', 'Zoe', 'Zelda',
+]
+const TRAINER_NAMES_ANY = [...new Set([...TRAINER_NAMES_MALE, ...TRAINER_NAMES_FEMALE])]
+// Classes that field a specific gender; anything else can be either.
+const FEMALE_TRAINER_CLASSES = new Set(['lass', 'beauty', 'channeler'])
+const MALE_TRAINER_CLASSES = new Set([
+  'youngster', 'hiker', 'bugCatcher', 'camper', 'blackbelt', 'sailor', 'gentleman',
+  'tamer', 'juggler', 'superNerd',
+])
+/** @param {string} trainerClass */
+const trainerNamesForClass = (trainerClass) =>
+  FEMALE_TRAINER_CLASSES.has(trainerClass)
+    ? TRAINER_NAMES_FEMALE
+    : MALE_TRAINER_CLASSES.has(trainerClass)
+      ? TRAINER_NAMES_MALE
+      : TRAINER_NAMES_ANY
+/**
+ * Pick a name no other trainer of the same class in this region already has.
+ * @param {string} trainerClass
+ * @param {Set<string>} usedNames
+ * @param {number} seed
+ * @param {number} index
+ */
+const pickTrainerName = (trainerClass, usedNames, seed, index) => {
+  const pool = trainerNamesForClass(trainerClass)
+  let nameIndex = (seed + index * 31) % pool.length,
+    attempts = 0
+  while (usedNames.has(`${trainerClass}:${pool[nameIndex]}`) && attempts < pool.length) {
+    nameIndex = (nameIndex + 1) % pool.length
+    attempts++
+  }
+  usedNames.add(`${trainerClass}:${pool[nameIndex]}`)
+  return pool[nameIndex]
+}
 // Showdown trainer sprite keys are the leader's name slugified ("Crasher Wake"
 // -> "crasherwake"). A few characters only have a generation-suffixed or
 // alternate sprite. Kanto is hand-curated and keeps its own gen3 keys.
@@ -676,10 +735,16 @@ const TRAINER_CLASS_TYPES = {
   beauty: ['Normal', 'Fairy'],
   coolTrainer: [],
   psychic: ['Psychic'],
-  scientist: ['Electric'],
+  scientist: ['Electric', 'Steel'],
   ace: [],
   blackbelt: ['Fighting'],
   swimmer: ['Water'],
+  sailor: ['Water', 'Fighting'],
+  gentleman: ['Normal', 'Psychic'],
+  channeler: ['Ghost'],
+  tamer: ['Normal', 'Dragon'],
+  juggler: ['Electric', 'Fire'],
+  superNerd: ['Electric', 'Poison'],
 }
 // Kanto keeps its hand-curated initial teams; these types only drive the
 // post-game rematch rosters (see the Kanto rematch block near the end).
@@ -1450,6 +1515,14 @@ for (const region of REGIONS) {
     return clampLevel(Math.round(LEVEL_MIN + progress * regionSpan))
   }
 
+  // Names only need to be unique within a region (a class's name pool is large
+  // enough), so keep the used-name set here rather than per town. Trainer
+  // classes cycle through the full list in a region-wide order seeded from the
+  // region id, so every class sees play and no two nearby trainers repeat one.
+  const usedTrainerNames = new Set(),
+    regionClassOffset = hashString(`${regionId}:classes`) % TRAINER_CLASSES.length
+  let regionTrainerIndex = 0
+
   // map/town/route locations
   for (const node of order) {
     const id = locId(regionId, node)
@@ -1585,21 +1658,37 @@ for (const region of REGIONS) {
         },
       }
       const pool = teamPool.length ? teamPool : wild
-      if (pool.length)
-        trainerData[id] = [0, 1, 2].map((i) => {
-          // Vary the class by town (not just by region) so every town in a
-          // region isn't fielding the same three trainers.
+      if (pool.length) {
+        // Vary the roster per town: two trainers in the smallest settlements up
+        // to four in the larger cities. Seeded from the town id so the roster
+        // stays stable between regenerations.
+        const townSeed = hashString(`${regionId}:${node}:trainers`),
+          trainerCount = 2 + (townSeed % 3)
+        trainerData[id] = Array.from({ length: trainerCount }, (_, i) => {
+          // Classes cycle through the region-wide order, so a town's roster is
+          // spread across the full class list instead of a fixed trio.
           const trainerClass =
-              TRAINER_CLASSES[(townIndex + i * 4 + gen) % TRAINER_CLASSES.length],
+              TRAINER_CLASSES[(regionClassOffset + regionTrainerIndex++) % TRAINER_CLASSES.length],
             // Teams grow along the region's curve: one or two early, three or
             // four later, with the last trainer as the town's ace.
             baseSize = 1 + Math.floor(townT * 3),
-            teamSize = Math.min(4, baseSize + (i === 2 ? 1 : 0))
+            // Trainers with a full squad field one more Pokemon than the rest,
+            // so teams don't all grow in lockstep.
+            classBonus = ['ace', 'coolTrainer', 'scientist'].includes(trainerClass)
+              ? 1
+              : 0,
+            teamSize = Math.min(
+              4,
+              baseSize + classBonus + (i === trainerCount - 1 ? 1 : 0)
+            )
           return {
             id: `${id}_t${i + 1}`,
-            name: `${TRAINER_CLASS_LABELS[trainerClass] ?? trainerClass} ${
-              TRAINER_NAMES[(townIndex * 3 + i) % TRAINER_NAMES.length]
-            }`,
+            name: `${TRAINER_CLASS_LABELS[trainerClass] ?? trainerClass} ${pickTrainerName(
+              trainerClass,
+              usedTrainerNames,
+              townSeed,
+              i
+            )}`,
             trainerClass,
             team: buildTeam(
               pool,
@@ -1609,10 +1698,13 @@ for (const region of REGIONS) {
               // room below LEVEL_MAX instead of overflowing to 77.
               Math.min(townLevel + i, LEVEL_MAX - (teamSize - 1)),
               1,
-              i * 2
+              // A per-town offset keeps each town's teams from being the same
+              // species in the same order as its neighbours.
+              (townSeed + i * 7) % Math.max(1, pool.length)
             ),
           }
         })
+      }
     }
   }
 
@@ -1680,6 +1772,9 @@ for (const region of REGIONS) {
   // league: gyms spread across towns, then Elite Four + Champion
   const roster = teamPool.length ? teamPool : wild
   gymPlacements.forEach(({ id: gymId, leaderName, townNode, index }) => {
+    // Team size grows with the badge count (3 early, 5 at the league), so the
+    // gyms aren't all exactly three Pokemon deep.
+    const gymTeamSize = Math.min(5, 3 + Math.floor(index / 3))
     gymData.push({
       id: gymId,
       name: leaderName,
@@ -1694,7 +1789,7 @@ for (const region of REGIONS) {
       team: buildTeam(
         roster,
         GYM_TYPES[regionId]?.[index],
-        3,
+        gymTeamSize,
         clampLevel(spread(index, gymPlacements.length, GYM_LEVEL_MIN, GYM_LEVEL_MAX)),
         1,
         index * 3

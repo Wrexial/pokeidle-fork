@@ -104,15 +104,15 @@
     "level": 94
    },
    {
-    "speciesKey": "dragalge",
+    "speciesKey": "tyrantrum",
     "level": 95
    },
    {
-    "speciesKey": "tyrantrum",
+    "speciesKey": "goodra",
     "level": 96
    },
    {
-    "speciesKey": "goodra",
+    "speciesKey": "noivern",
     "level": 97
    }
   ]
@@ -151,27 +151,27 @@
   ],
   "rematchTeam": [
    {
-    "speciesKey": "bronzong",
+    "speciesKey": "magnezone",
     "level": 92
    },
    {
-    "speciesKey": "magnezone",
+    "speciesKey": "probopass",
     "level": 93
    },
    {
-    "speciesKey": "probopass",
+    "speciesKey": "escavalier",
     "level": 94
    },
    {
-    "speciesKey": "excadrill",
+    "speciesKey": "ferrothorn",
     "level": 95
    },
    {
-    "speciesKey": "escavalier",
+    "speciesKey": "klinklang",
     "level": 96
    },
    {
-    "speciesKey": "ferrothorn",
+    "speciesKey": "durant",
     "level": 97
    }
   ]
@@ -214,23 +214,23 @@
     "level": 92
    },
    {
-    "speciesKey": "dragalge",
+    "speciesKey": "tyrantrum",
     "level": 93
    },
    {
-    "speciesKey": "tyrantrum",
+    "speciesKey": "goodra",
     "level": 94
    },
    {
-    "speciesKey": "goodra",
+    "speciesKey": "noivern",
     "level": 95
    },
    {
-    "speciesKey": "noivern",
+    "speciesKey": "turtonator",
     "level": 96
    },
    {
-    "speciesKey": "turtonator",
+    "speciesKey": "kommo-o",
     "level": 97
    }
   ]
@@ -302,53 +302,53 @@
   "spriteKey": "diantha",
   "team": [
    {
-    "speciesKey": "whimsicott",
+    "speciesKey": "florges",
     "level": 70
    },
    {
-    "speciesKey": "florges",
+    "speciesKey": "aromatisse",
     "level": 71
    },
    {
-    "speciesKey": "aromatisse",
+    "speciesKey": "slurpuff",
     "level": 72
    },
    {
-    "speciesKey": "slurpuff",
+    "speciesKey": "sylveon",
     "level": 73
    },
    {
-    "speciesKey": "sylveon",
+    "speciesKey": "dedenne",
     "level": 74
    },
    {
-    "speciesKey": "dedenne",
+    "speciesKey": "carbink",
     "level": 75
    }
   ],
   "rematchTeam": [
    {
-    "speciesKey": "whimsicott",
+    "speciesKey": "florges",
     "level": 92
    },
    {
-    "speciesKey": "florges",
+    "speciesKey": "aromatisse",
     "level": 93
    },
    {
-    "speciesKey": "aromatisse",
+    "speciesKey": "slurpuff",
     "level": 94
    },
    {
-    "speciesKey": "slurpuff",
+    "speciesKey": "sylveon",
     "level": 95
    },
    {
-    "speciesKey": "sylveon",
+    "speciesKey": "dedenne",
     "level": 96
    },
    {
-    "speciesKey": "dedenne",
+    "speciesKey": "carbink",
     "level": 97
    }
   ]
@@ -420,53 +420,53 @@
   "spriteKey": "leon",
   "team": [
    {
-    "speciesKey": "chandelure",
+    "speciesKey": "heatmor",
     "level": 70
    },
    {
-    "speciesKey": "heatmor",
+    "speciesKey": "volcarona",
     "level": 71
    },
    {
-    "speciesKey": "volcarona",
+    "speciesKey": "talonflame",
     "level": 72
    },
    {
-    "speciesKey": "talonflame",
+    "speciesKey": "oricorio",
     "level": 73
    },
    {
-    "speciesKey": "pyroar",
+    "speciesKey": "salazzle",
     "level": 74
    },
    {
-    "speciesKey": "oricorio",
+    "speciesKey": "turtonator",
     "level": 75
    }
   ],
   "rematchTeam": [
    {
-    "speciesKey": "chandelure",
+    "speciesKey": "heatmor",
     "level": 92
    },
    {
-    "speciesKey": "heatmor",
+    "speciesKey": "volcarona",
     "level": 93
    },
    {
-    "speciesKey": "volcarona",
+    "speciesKey": "talonflame",
     "level": 94
    },
    {
-    "speciesKey": "talonflame",
+    "speciesKey": "oricorio",
     "level": 95
    },
    {
-    "speciesKey": "pyroar",
+    "speciesKey": "salazzle",
     "level": 96
    },
    {
-    "speciesKey": "oricorio",
+    "speciesKey": "turtonator",
     "level": 97
    }
   ]

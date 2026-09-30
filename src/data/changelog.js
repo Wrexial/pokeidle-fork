@@ -129,6 +129,13 @@ export const CHANGELOG = [
           ],
         },
         {
+          heading: 'Trainers',
+          items: [
+            'Town trainers are far more varied: 18 trainer classes instead of 12 (adding Sailor, Gentleman, Channeler, Tamer, Juggler and Super Nerd, each with their own type theme), class-appropriate names drawn from a much larger pool with no repeats inside a region, two to four trainers per town rather than always three, and Ace Trainers, Cooltrainers and Scientists fielding larger squads',
+            'Gym, Elite Four and Champion teams were rebuilt on the same pass with more distinct species instead of repeated copies, and gym teams grow from three members to five as the badges add up',
+          ],
+        },
+        {
           heading: 'Minigames',
           items: [
             'Whack-a-Diglett speeds up as the round runs down (targets stay up for less time) and adds a rare Dugtrio jackpot worth 5 points on top of the Diglett and Zubat',

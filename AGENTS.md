@@ -589,8 +589,12 @@ One-off scripts used to build the data JSON (not run during dev/build):
   from every generation up to the region's own, minus starter lines and
   legendaries), and each leader gets a unique Showdown sprite key derived from
   their name by `trainerSpriteKey`. Route trainers are themed by class via
-  `TRAINER_CLASS_TYPES` and named "Class Firstname" (`TRAINER_CLASS_LABELS` +
-  `TRAINER_NAMES`) rather than by location. `buildTeam` prefers levelled-appropriate Pokemon:
+  `TRAINER_CLASS_TYPES` and named "Class Firstname" — 18 classes, with names
+  drawn from gender-matched pools (`TRAINER_NAMES_MALE`/`_FEMALE`/`_ANY`,
+  picked through `pickTrainerName`) and kept unique within a region. Each town
+  fields two to four trainers whose classes cycle through the full list, and
+  Ace Trainers / Cooltrainers / Scientists carry an extra member. `buildTeam`
+  prefers levelled-appropriate Pokemon:
   it drops species that should already have evolved and, at Lv.55+, very weak
   final forms (Ditto), while keeping the type theme when a sparse type (Dragon)
   would otherwise run out. Kanto's hand-curated trainer/leader data and its gen3

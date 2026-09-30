@@ -897,48 +897,48 @@
  "johto-new-bark-town": [
   {
    "id": "johto-new-bark-town_t1",
-   "name": "Lass Hazel",
-   "trainerClass": "lass",
+   "name": "Tamer Noah",
+   "trainerClass": "tamer",
    "team": [
     {
-     "speciesKey": "lickitung",
+     "speciesKey": "tauros",
      "level": 5
     }
    ]
   },
   {
    "id": "johto-new-bark-town_t2",
-   "name": "Bug Catcher Eli",
-   "trainerClass": "bugCatcher",
+   "name": "Juggler Eli",
+   "trainerClass": "juggler",
    "team": [
     {
-     "speciesKey": "scizor",
+     "speciesKey": "pichu",
      "level": 6
     }
    ]
   },
   {
    "id": "johto-new-bark-town_t3",
-   "name": "Hiker Silas",
-   "trainerClass": "hiker",
+   "name": "Super Nerd Silas",
+   "trainerClass": "superNerd",
    "team": [
     {
-     "speciesKey": "shuckle",
+     "speciesKey": "koffing",
      "level": 7
     }
    ]
   },
   {
    "id": "johto-new-bark-town_t4",
-   "name": "Camper Joel",
-   "trainerClass": "camper",
+   "name": "Fisherman Joel",
+   "trainerClass": "fisherman",
    "team": [
     {
-     "speciesKey": "snorlax",
+     "speciesKey": "vaporeon",
      "level": 8
     },
     {
-     "speciesKey": "sentret",
+     "speciesKey": "omanyte",
      "level": 9
     }
    ]
@@ -947,31 +947,27 @@
  "johto-cherrygrove-city": [
   {
    "id": "johto-cherrygrove-city_t1",
-   "name": "Beauty Yuki",
-   "trainerClass": "beauty",
+   "name": "Picnicker Yuki",
+   "trainerClass": "picnicker",
    "team": [
     {
-     "speciesKey": "igglybuff",
+     "speciesKey": "snorlax",
      "level": 9
     }
    ]
   },
   {
    "id": "johto-cherrygrove-city_t2",
-   "name": "Cooltrainer Oscar",
-   "trainerClass": "coolTrainer",
+   "name": "Bird Keeper Jack",
+   "trainerClass": "birdKeeper",
    "team": [
     {
-     "speciesKey": "misdreavus",
+     "speciesKey": "togetic",
      "level": 10
     },
     {
-     "speciesKey": "gligar",
+     "speciesKey": "natu",
      "level": 11
-    },
-    {
-     "speciesKey": "koffing",
-     "level": 12
     }
    ]
   }
@@ -979,31 +975,27 @@
  "johto-violet-city": [
   {
    "id": "johto-violet-city_t1",
-   "name": "Psychic Vera",
-   "trainerClass": "psychic",
+   "name": "Burglar Gavin",
+   "trainerClass": "burglar",
    "team": [
     {
-     "speciesKey": "kadabra",
+     "speciesKey": "umbreon",
      "level": 16
     }
    ]
   },
   {
    "id": "johto-violet-city_t2",
-   "name": "Scientist Leo",
-   "trainerClass": "scientist",
+   "name": "Guitarist Leo",
+   "trainerClass": "guitarist",
    "team": [
     {
-     "speciesKey": "raichu",
+     "speciesKey": "jolteon",
      "level": 17
     },
     {
-     "speciesKey": "magnemite",
+     "speciesKey": "chinchou",
      "level": 18
-    },
-    {
-     "speciesKey": "voltorb",
-     "level": 19
     }
    ]
   }
@@ -1011,30 +1003,26 @@
  "johto-azalea-town": [
   {
    "id": "johto-azalea-town_t1",
-   "name": "Ace Trainer Seth",
-   "trainerClass": "ace",
+   "name": "Cowgirl Lena",
+   "trainerClass": "cowgirl",
    "team": [
     {
-     "speciesKey": "umbreon",
+     "speciesKey": "furret",
      "level": 22
-    },
-    {
-     "speciesKey": "aerodactyl",
-     "level": 23
     }
    ]
   },
   {
    "id": "johto-azalea-town_t2",
-   "name": "Blackbelt Xander",
-   "trainerClass": "blackbelt",
+   "name": "Cyclist Xander",
+   "trainerClass": "cyclist",
    "team": [
     {
-     "speciesKey": "machop",
+     "speciesKey": "jigglypuff",
      "level": 23
     },
     {
-     "speciesKey": "hitmonlee",
+     "speciesKey": "wigglytuff",
      "level": 24
     }
    ]
@@ -1043,26 +1031,26 @@
  "johto-goldenrod-city": [
   {
    "id": "johto-goldenrod-city_t1",
-   "name": "Swimmer Finn",
-   "trainerClass": "swimmer",
+   "name": "Lady Uma",
+   "trainerClass": "lady",
    "team": [
     {
-     "speciesKey": "shellder",
+     "speciesKey": "smeargle",
      "level": 26
     }
    ]
   },
   {
    "id": "johto-goldenrod-city_t2",
-   "name": "Sailor Oscar",
-   "trainerClass": "sailor",
+   "name": "Pilot Oscar",
+   "trainerClass": "pilot",
    "team": [
     {
-     "speciesKey": "seel",
+     "speciesKey": "mantine",
      "level": 27
     },
     {
-     "speciesKey": "shellder",
+     "speciesKey": "skarmory",
      "level": 28
     }
    ]
@@ -1071,49 +1059,49 @@
  "johto-ecruteak-city": [
   {
    "id": "johto-ecruteak-city_t1",
-   "name": "Gentleman Cole",
-   "trainerClass": "gentleman",
+   "name": "Skier Quinn",
+   "trainerClass": "skier",
    "team": [
     {
-     "speciesKey": "wigglytuff",
+     "speciesKey": "lapras",
      "level": 35
     },
     {
-     "speciesKey": "persian",
+     "speciesKey": "sneasel",
      "level": 36
     }
    ]
   },
   {
    "id": "johto-ecruteak-city_t2",
-   "name": "Channeler Emma",
-   "trainerClass": "channeler",
+   "name": "Waiter Ryan",
+   "trainerClass": "waiter",
    "team": [
     {
-     "speciesKey": "misdreavus",
+     "speciesKey": "dodrio",
      "level": 36
     },
     {
-     "speciesKey": "haunter",
+     "speciesKey": "chansey",
      "level": 37
     }
    ]
   },
   {
    "id": "johto-ecruteak-city_t3",
-   "name": "Tamer Ivan",
-   "trainerClass": "tamer",
+   "name": "Rich Boy Ivan",
+   "trainerClass": "richBoy",
    "team": [
     {
-     "speciesKey": "wigglytuff",
+     "speciesKey": "jynx",
      "level": 37
     },
     {
-     "speciesKey": "persian",
+     "speciesKey": "tauros",
      "level": 38
     },
     {
-     "speciesKey": "farfetchd",
+     "speciesKey": "ditto",
      "level": 39
     }
    ]
@@ -1122,34 +1110,34 @@
  "johto-olivine-city": [
   {
    "id": "johto-olivine-city_t1",
-   "name": "Juggler Luca",
-   "trainerClass": "juggler",
+   "name": "Worker Luca",
+   "trainerClass": "worker",
    "team": [
     {
-     "speciesKey": "ampharos",
+     "speciesKey": "magneton",
      "level": 43
     },
     {
-     "speciesKey": "magcargo",
+     "speciesKey": "hitmonlee",
      "level": 44
     }
    ]
   },
   {
    "id": "johto-olivine-city_t2",
-   "name": "Super Nerd Caleb",
-   "trainerClass": "superNerd",
+   "name": "Idol Sana",
+   "trainerClass": "idol",
    "team": [
     {
-     "speciesKey": "jolteon",
+     "speciesKey": "clefairy",
      "level": 44
     },
     {
-     "speciesKey": "ariados",
+     "speciesKey": "clefable",
      "level": 45
     },
     {
-     "speciesKey": "crobat",
+     "speciesKey": "jigglypuff",
      "level": 46
     }
    ]
@@ -1158,64 +1146,64 @@
  "johto-cianwood-city": [
   {
    "id": "johto-cianwood-city_t1",
-   "name": "Youngster Toby",
-   "trainerClass": "youngster",
+   "name": "Policeman Toby",
+   "trainerClass": "policeman",
    "team": [
     {
-     "speciesKey": "wigglytuff",
+     "speciesKey": "hitmontop",
      "level": 50
     },
     {
-     "speciesKey": "persian",
+     "speciesKey": "poliwrath",
      "level": 51
     }
    ]
   },
   {
    "id": "johto-cianwood-city_t2",
-   "name": "Lass Aria",
-   "trainerClass": "lass",
+   "name": "Aroma Lady Aria",
+   "trainerClass": "aromaLady",
    "team": [
     {
-     "speciesKey": "tauros",
+     "speciesKey": "mrMime",
      "level": 51
     },
     {
-     "speciesKey": "ditto",
+     "speciesKey": "bellossom",
      "level": 52
     }
    ]
   },
   {
    "id": "johto-cianwood-city_t3",
-   "name": "Bug Catcher Ben",
-   "trainerClass": "bugCatcher",
+   "name": "Chef Ben",
+   "trainerClass": "chef",
    "team": [
     {
-     "speciesKey": "shuckle",
+     "speciesKey": "dodrio",
      "level": 52
     },
     {
-     "speciesKey": "heracross",
+     "speciesKey": "kangaskhan",
      "level": 53
     }
    ]
   },
   {
    "id": "johto-cianwood-city_t4",
-   "name": "Hiker Oscar",
-   "trainerClass": "hiker",
+   "name": "Dancer Paige",
+   "trainerClass": "dancer",
    "team": [
     {
-     "speciesKey": "nidoking",
+     "speciesKey": "espeon",
      "level": 53
     },
     {
-     "speciesKey": "dugtrio",
+     "speciesKey": "slowking",
      "level": 54
     },
     {
-     "speciesKey": "golem",
+     "speciesKey": "unown",
      "level": 55
     }
    ]
@@ -1224,8 +1212,8 @@
  "johto-mahogany-town": [
   {
    "id": "johto-mahogany-town_t1",
-   "name": "Camper Paul",
-   "trainerClass": "camper",
+   "name": "Gambler Rosa",
+   "trainerClass": "gambler",
    "team": [
     {
      "speciesKey": "fearow",
@@ -1236,49 +1224,49 @@
      "level": 57
     },
     {
-     "speciesKey": "vileplume",
+     "speciesKey": "persian",
      "level": 58
     }
    ]
   },
   {
    "id": "johto-mahogany-town_t2",
-   "name": "Beauty Tara",
-   "trainerClass": "beauty",
+   "name": "Nurse Tara",
+   "trainerClass": "nurse",
    "team": [
     {
-     "speciesKey": "wigglytuff",
+     "speciesKey": "granbull",
      "level": 57
     },
     {
-     "speciesKey": "persian",
+     "speciesKey": "clefable",
      "level": 58
     },
     {
-     "speciesKey": "dodrio",
+     "speciesKey": "wigglytuff",
      "level": 59
     }
    ]
   },
   {
    "id": "johto-mahogany-town_t3",
-   "name": "Cooltrainer Wesley",
-   "trainerClass": "coolTrainer",
+   "name": "Biker Victor",
+   "trainerClass": "biker",
    "team": [
     {
-     "speciesKey": "machamp",
+     "speciesKey": "crobat",
      "level": 58
     },
     {
-     "speciesKey": "shuckle",
+     "speciesKey": "qwilfish",
      "level": 59
     },
     {
-     "speciesKey": "gengar",
+     "speciesKey": "beedrill",
      "level": 60
     },
     {
-     "speciesKey": "donphan",
+     "speciesKey": "arbok",
      "level": 61
     }
    ]
@@ -1287,65 +1275,61 @@
  "johto-blackthorn-city": [
   {
    "id": "johto-blackthorn-city_t1",
-   "name": "Psychic Ava",
-   "trainerClass": "psychic",
+   "name": "Schoolkid Ava",
+   "trainerClass": "schoolkid",
    "team": [
     {
-     "speciesKey": "slowbro",
+     "speciesKey": "wigglytuff",
      "level": 62
     },
     {
-     "speciesKey": "hypno",
+     "speciesKey": "persian",
      "level": 63
     },
     {
-     "speciesKey": "exeggutor",
+     "speciesKey": "dodrio",
      "level": 64
     }
    ]
   },
   {
    "id": "johto-blackthorn-city_t2",
-   "name": "Scientist Paige",
-   "trainerClass": "scientist",
+   "name": "Roughneck Seth",
+   "trainerClass": "roughneck",
    "team": [
     {
-     "speciesKey": "forretress",
+     "speciesKey": "hitmonlee",
      "level": 63
     },
     {
-     "speciesKey": "steelix",
+     "speciesKey": "hitmonchan",
      "level": 64
     },
     {
-     "speciesKey": "scizor",
+     "speciesKey": "heracross",
      "level": 65
-    },
-    {
-     "speciesKey": "skarmory",
-     "level": 66
     }
    ]
   },
   {
    "id": "johto-blackthorn-city_t3",
-   "name": "Ace Trainer Finn",
-   "trainerClass": "ace",
+   "name": "Parasol Lady Hazel",
+   "trainerClass": "parasolLady",
    "team": [
     {
-     "speciesKey": "machamp",
+     "speciesKey": "cloyster",
      "level": 64
     },
     {
-     "speciesKey": "shuckle",
+     "speciesKey": "kingler",
      "level": 65
     },
     {
-     "speciesKey": "gengar",
+     "speciesKey": "seaking",
      "level": 66
     },
     {
-     "speciesKey": "donphan",
+     "speciesKey": "starmie",
      "level": 67
     }
    ]
@@ -1354,26 +1338,26 @@
  "hoenn-littleroot-town": [
   {
    "id": "hoenn-littleroot-town_t1",
-   "name": "Hiker Liam",
-   "trainerClass": "hiker",
+   "name": "Nurse Cara",
+   "trainerClass": "nurse",
    "team": [
     {
-     "speciesKey": "aerodactyl",
+     "speciesKey": "clefable",
      "level": 5
     }
    ]
   },
   {
    "id": "hoenn-littleroot-town_t2",
-   "name": "Camper Bruno",
-   "trainerClass": "camper",
+   "name": "Biker Bruno",
+   "trainerClass": "biker",
    "team": [
     {
-     "speciesKey": "tauros",
+     "speciesKey": "oddish",
      "level": 6
     },
     {
-     "speciesKey": "ditto",
+     "speciesKey": "venonat",
      "level": 7
     }
    ]
@@ -1382,57 +1366,49 @@
  "hoenn-oldale-town": [
   {
    "id": "hoenn-oldale-town_t1",
-   "name": "Beauty Dana",
-   "trainerClass": "beauty",
+   "name": "Schoolkid Zelda",
+   "trainerClass": "schoolkid",
    "team": [
     {
-     "speciesKey": "ralts",
+     "speciesKey": "farfetchd",
      "level": 8
     }
    ]
   },
   {
    "id": "hoenn-oldale-town_t2",
-   "name": "Cooltrainer Miles",
-   "trainerClass": "coolTrainer",
+   "name": "Roughneck Neil",
+   "trainerClass": "roughneck",
    "team": [
     {
-     "speciesKey": "steelix",
+     "speciesKey": "tyrogue",
      "level": 9
-    },
-    {
-     "speciesKey": "shuckle",
-     "level": 10
     }
    ]
   },
   {
    "id": "hoenn-oldale-town_t3",
-   "name": "Psychic Cleo",
-   "trainerClass": "psychic",
+   "name": "Parasol Lady Julia",
+   "trainerClass": "parasolLady",
    "team": [
     {
-     "speciesKey": "abra",
+     "speciesKey": "clefairy",
      "level": 10
     }
    ]
   },
   {
    "id": "hoenn-oldale-town_t4",
-   "name": "Scientist Sofia",
-   "trainerClass": "scientist",
+   "name": "Musician Sofia",
+   "trainerClass": "musician",
    "team": [
     {
-     "speciesKey": "chinchou",
+     "speciesKey": "spoink",
      "level": 11
     },
     {
-     "speciesKey": "pichu",
+     "speciesKey": "spinda",
      "level": 12
-    },
-    {
-     "speciesKey": "mareep",
-     "level": 13
     }
    ]
   }
@@ -1440,41 +1416,37 @@
  "hoenn-petalburg-city": [
   {
    "id": "hoenn-petalburg-city_t1",
-   "name": "Ace Trainer Ava",
-   "trainerClass": "ace",
+   "name": "Preschooler Ava",
+   "trainerClass": "preschooler",
    "team": [
     {
-     "speciesKey": "lapras",
+     "speciesKey": "tauros",
      "level": 11
-    },
-    {
-     "speciesKey": "exeggutor",
-     "level": 12
     }
    ]
   },
   {
    "id": "hoenn-petalburg-city_t2",
-   "name": "Blackbelt Felix",
-   "trainerClass": "blackbelt",
+   "name": "Artist Paige",
+   "trainerClass": "artist",
    "team": [
     {
-     "speciesKey": "makuhita",
+     "speciesKey": "igglybuff",
      "level": 12
     }
    ]
   },
   {
    "id": "hoenn-petalburg-city_t3",
-   "name": "Swimmer Finn",
-   "trainerClass": "swimmer",
+   "name": "Backpacker Finn",
+   "trainerClass": "backpacker",
    "team": [
     {
-     "speciesKey": "poliwag",
+     "speciesKey": "porygon",
      "level": 13
     },
     {
-     "speciesKey": "tentacool",
+     "speciesKey": "snorlax",
      "level": 14
     }
    ]
@@ -1483,26 +1455,26 @@
  "hoenn-rustboro-city": [
   {
    "id": "hoenn-rustboro-city_t1",
-   "name": "Sailor Alex",
-   "trainerClass": "sailor",
+   "name": "Pokemon Ranger Toby",
+   "trainerClass": "pokemonRanger",
    "team": [
     {
-     "speciesKey": "wingull",
+     "speciesKey": "hoothoot",
      "level": 15
     }
    ]
   },
   {
    "id": "hoenn-rustboro-city_t2",
-   "name": "Gentleman Neil",
-   "trainerClass": "gentleman",
+   "name": "Doctor Kira",
+   "trainerClass": "doctor",
    "team": [
     {
-     "speciesKey": "mrMime",
+     "speciesKey": "baltoy",
      "level": 16
     },
     {
-     "speciesKey": "tauros",
+     "speciesKey": "chimecho",
      "level": 17
     }
    ]
@@ -1511,26 +1483,26 @@
  "hoenn-dewford-town": [
   {
    "id": "hoenn-dewford-town_t1",
-   "name": "Channeler Cleo",
-   "trainerClass": "channeler",
+   "name": "Veteran Bianca",
+   "trainerClass": "veteran",
    "team": [
     {
-     "speciesKey": "duskull",
+     "speciesKey": "exeggutor",
      "level": 19
     }
    ]
   },
   {
    "id": "hoenn-dewford-town_t2",
-   "name": "Tamer Eli",
-   "trainerClass": "tamer",
+   "name": "Medium Rosa",
+   "trainerClass": "medium",
    "team": [
     {
-     "speciesKey": "aipom",
+     "speciesKey": "shedinja",
      "level": 20
     },
     {
-     "speciesKey": "girafarig",
+     "speciesKey": "sableye",
      "level": 21
     }
    ]
@@ -1539,37 +1511,37 @@
  "hoenn-slateport-city": [
   {
    "id": "hoenn-slateport-city_t1",
-   "name": "Juggler Ben",
-   "trainerClass": "juggler",
+   "name": "Youngster Ben",
+   "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "plusle",
+     "speciesKey": "aipom",
      "level": 24
     }
    ]
   },
   {
    "id": "hoenn-slateport-city_t2",
-   "name": "Super Nerd Oscar",
-   "trainerClass": "superNerd",
+   "name": "Lass Daisy",
+   "trainerClass": "lass",
    "team": [
     {
-     "speciesKey": "flaaffy",
+     "speciesKey": "aipom",
      "level": 25
     }
    ]
   },
   {
    "id": "hoenn-slateport-city_t3",
-   "name": "Youngster Elliot",
-   "trainerClass": "youngster",
+   "name": "Bug Catcher Elliot",
+   "trainerClass": "bugCatcher",
    "team": [
     {
-     "speciesKey": "skitty",
+     "speciesKey": "heracross",
      "level": 26
     },
     {
-     "speciesKey": "delcatty",
+     "speciesKey": "beautifly",
      "level": 27
     }
    ]
@@ -1578,37 +1550,37 @@
  "hoenn-mauville-city": [
   {
    "id": "hoenn-mauville-city_t1",
-   "name": "Lass Daisy",
-   "trainerClass": "lass",
+   "name": "Hiker Paul",
+   "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "pidgeotto",
+     "speciesKey": "corsola",
      "level": 27
     }
    ]
   },
   {
    "id": "hoenn-mauville-city_t2",
-   "name": "Bug Catcher Finn",
-   "trainerClass": "bugCatcher",
+   "name": "Camper Finn",
+   "trainerClass": "camper",
    "team": [
     {
-     "speciesKey": "masquerain",
+     "speciesKey": "lileep",
      "level": 28
     }
    ]
   },
   {
    "id": "hoenn-mauville-city_t3",
-   "name": "Hiker Victor",
-   "trainerClass": "hiker",
+   "name": "Beauty Jade",
+   "trainerClass": "beauty",
    "team": [
     {
-     "speciesKey": "sandslash",
+     "speciesKey": "tauros",
      "level": 29
     },
     {
-     "speciesKey": "nidoqueen",
+     "speciesKey": "ditto",
      "level": 30
     }
    ]
@@ -1617,69 +1589,77 @@
  "hoenn-lavaridge-town": [
   {
    "id": "hoenn-lavaridge-town_t1",
-   "name": "Camper Caleb",
-   "trainerClass": "camper",
+   "name": "Cooltrainer Nina",
+   "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "fearow",
+     "speciesKey": "exeggutor",
      "level": 31
     },
     {
-     "speciesKey": "jigglypuff",
+     "speciesKey": "jolteon",
      "level": 32
+    },
+    {
+     "speciesKey": "espeon",
+     "level": 33
     }
    ]
   },
   {
    "id": "hoenn-lavaridge-town_t2",
-   "name": "Beauty Sana",
-   "trainerClass": "beauty",
+   "name": "Psychic Eli",
+   "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "furret",
+     "speciesKey": "solrock",
      "level": 32
     },
     {
-     "speciesKey": "noctowl",
+     "speciesKey": "baltoy",
      "level": 33
     }
    ]
   },
   {
    "id": "hoenn-lavaridge-town_t3",
-   "name": "Cooltrainer Silas",
-   "trainerClass": "coolTrainer",
+   "name": "Scientist Silas",
+   "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "gyarados",
+     "speciesKey": "electabuzz",
      "level": 33
     },
     {
-     "speciesKey": "snorlax",
+     "speciesKey": "jolteon",
      "level": 34
     },
     {
-     "speciesKey": "crobat",
+     "speciesKey": "lanturn",
      "level": 35
     }
    ]
   },
   {
    "id": "hoenn-lavaridge-town_t4",
-   "name": "Psychic Jade",
-   "trainerClass": "psychic",
+   "name": "Ace Trainer Jade",
+   "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "slowking",
+     "speciesKey": "aerodactyl",
      "level": 34
     },
     {
-     "speciesKey": "unown",
+     "speciesKey": "steelix",
      "level": 35
     },
     {
-     "speciesKey": "wobbuffet",
+     "speciesKey": "machamp",
      "level": 36
+    },
+    {
+     "speciesKey": "shuckle",
+     "level": 37
     }
    ]
   }
@@ -1687,72 +1667,64 @@
  "hoenn-fallarbor-town": [
   {
    "id": "hoenn-fallarbor-town_t1",
-   "name": "Scientist Wade",
-   "trainerClass": "scientist",
+   "name": "Blackbelt Jasper",
+   "trainerClass": "blackbelt",
    "team": [
     {
-     "speciesKey": "scizor",
+     "speciesKey": "primeape",
      "level": 34
     },
     {
-     "speciesKey": "skarmory",
+     "speciesKey": "poliwrath",
      "level": 35
-    },
-    {
-     "speciesKey": "mawile",
-     "level": 36
     }
    ]
   },
   {
    "id": "hoenn-fallarbor-town_t2",
-   "name": "Ace Trainer Lena",
-   "trainerClass": "ace",
+   "name": "Swimmer Lena",
+   "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "gengar",
+     "speciesKey": "shellder",
      "level": 35
     },
     {
-     "speciesKey": "donphan",
+     "speciesKey": "cloyster",
      "level": 36
-    },
-    {
-     "speciesKey": "altaria",
-     "level": 37
     }
    ]
   },
   {
    "id": "hoenn-fallarbor-town_t3",
-   "name": "Blackbelt Nate",
-   "trainerClass": "blackbelt",
+   "name": "Sailor Nate",
+   "trainerClass": "sailor",
    "team": [
     {
-     "speciesKey": "hitmonlee",
+     "speciesKey": "vaporeon",
      "level": 36
     },
     {
-     "speciesKey": "hitmonchan",
+     "speciesKey": "omanyte",
      "level": 37
     }
    ]
   },
   {
    "id": "hoenn-fallarbor-town_t4",
-   "name": "Swimmer Rex",
-   "trainerClass": "swimmer",
+   "name": "Gentleman Dante",
+   "trainerClass": "gentleman",
    "team": [
     {
-     "speciesKey": "politoed",
+     "speciesKey": "dodrio",
      "level": 37
     },
     {
-     "speciesKey": "quagsire",
+     "speciesKey": "hypno",
      "level": 38
     },
     {
-     "speciesKey": "slowking",
+     "speciesKey": "exeggcute",
      "level": 39
     }
    ]
@@ -1761,49 +1733,49 @@
  "hoenn-verdanturf-town": [
   {
    "id": "hoenn-verdanturf-town_t1",
-   "name": "Sailor Xander",
-   "trainerClass": "sailor",
+   "name": "Channeler Bianca",
+   "trainerClass": "channeler",
    "team": [
     {
-     "speciesKey": "machoke",
+     "speciesKey": "haunter",
      "level": 40
     },
     {
-     "speciesKey": "machamp",
+     "speciesKey": "gengar",
      "level": 41
     }
    ]
   },
   {
    "id": "hoenn-verdanturf-town_t2",
-   "name": "Gentleman Marco",
-   "trainerClass": "gentleman",
+   "name": "Tamer Marco",
+   "trainerClass": "tamer",
    "team": [
     {
-     "speciesKey": "fearow",
+     "speciesKey": "altaria",
      "level": 41
     },
     {
-     "speciesKey": "jigglypuff",
+     "speciesKey": "zangoose",
      "level": 42
     }
    ]
   },
   {
    "id": "hoenn-verdanturf-town_t3",
-   "name": "Channeler Grace",
-   "trainerClass": "channeler",
+   "name": "Juggler Carlos",
+   "trainerClass": "juggler",
    "team": [
     {
-     "speciesKey": "haunter",
+     "speciesKey": "growlithe",
      "level": 42
     },
     {
-     "speciesKey": "gengar",
+     "speciesKey": "arcanine",
      "level": 43
     },
     {
-     "speciesKey": "misdreavus",
+     "speciesKey": "rapidash",
      "level": 44
     }
    ]
@@ -1812,34 +1784,34 @@
  "hoenn-fortree-city": [
   {
    "id": "hoenn-fortree-city_t1",
-   "name": "Tamer Seth",
-   "trainerClass": "tamer",
+   "name": "Super Nerd Seth",
+   "trainerClass": "superNerd",
    "team": [
     {
-     "speciesKey": "wigglytuff",
+     "speciesKey": "plusle",
      "level": 45
     },
     {
-     "speciesKey": "persian",
+     "speciesKey": "minun",
      "level": 46
     }
    ]
   },
   {
    "id": "hoenn-fortree-city_t2",
-   "name": "Juggler Jasper",
-   "trainerClass": "juggler",
+   "name": "Fisherman Jasper",
+   "trainerClass": "fisherman",
    "team": [
     {
-     "speciesKey": "lanturn",
+     "speciesKey": "walrein",
      "level": 46
     },
     {
-     "speciesKey": "ampharos",
+     "speciesKey": "huntail",
      "level": 47
     },
     {
-     "speciesKey": "magcargo",
+     "speciesKey": "gorebyss",
      "level": 48
     }
    ]
@@ -1848,49 +1820,49 @@
  "hoenn-lilycove-city": [
   {
    "id": "hoenn-lilycove-city_t1",
-   "name": "Super Nerd Gavin",
-   "trainerClass": "superNerd",
+   "name": "Picnicker Freya",
+   "trainerClass": "picnicker",
    "team": [
     {
-     "speciesKey": "venomoth",
+     "speciesKey": "cacturne",
      "level": 49
     },
     {
-     "speciesKey": "victreebel",
+     "speciesKey": "zangoose",
      "level": 50
     }
    ]
   },
   {
    "id": "hoenn-lilycove-city_t2",
-   "name": "Youngster Wade",
-   "trainerClass": "youngster",
+   "name": "Bird Keeper Wade",
+   "trainerClass": "birdKeeper",
    "team": [
     {
-     "speciesKey": "smeargle",
+     "speciesKey": "skarmory",
      "level": 50
     },
     {
-     "speciesKey": "miltank",
+     "speciesKey": "beautifly",
      "level": 51
     }
    ]
   },
   {
    "id": "hoenn-lilycove-city_t3",
-   "name": "Lass Luna",
-   "trainerClass": "lass",
+   "name": "Burglar Liam",
+   "trainerClass": "burglar",
    "team": [
     {
-     "speciesKey": "tauros",
+     "speciesKey": "ninetales",
      "level": 51
     },
     {
-     "speciesKey": "ditto",
+     "speciesKey": "arcanine",
      "level": 52
     },
     {
-     "speciesKey": "snorlax",
+     "speciesKey": "rapidash",
      "level": 53
     }
    ]
@@ -1899,65 +1871,65 @@
  "hoenn-mossdeep-city": [
   {
    "id": "hoenn-mossdeep-city_t1",
-   "name": "Bug Catcher Owen",
-   "trainerClass": "bugCatcher",
+   "name": "Guitarist Owen",
+   "trainerClass": "guitarist",
    "team": [
     {
-     "speciesKey": "venomoth",
+     "speciesKey": "electrode",
      "level": 55
     },
     {
-     "speciesKey": "pinsir",
+     "speciesKey": "jolteon",
      "level": 56
     },
     {
-     "speciesKey": "ledian",
+     "speciesKey": "lanturn",
      "level": 57
     }
    ]
   },
   {
    "id": "hoenn-mossdeep-city_t2",
-   "name": "Hiker Felix",
-   "trainerClass": "hiker",
+   "name": "Cowgirl Nora",
+   "trainerClass": "cowgirl",
    "team": [
     {
-     "speciesKey": "flygon",
+     "speciesKey": "nidoqueen",
      "level": 56
     },
     {
-     "speciesKey": "lunatone",
+     "speciesKey": "nidoking",
      "level": 57
     },
     {
-     "speciesKey": "solrock",
+     "speciesKey": "wigglytuff",
      "level": 58
     }
    ]
   },
   {
    "id": "hoenn-mossdeep-city_t3",
-   "name": "Camper Toby",
-   "trainerClass": "camper",
+   "name": "Cyclist Toby",
+   "trainerClass": "cyclist",
    "team": [
     {
-     "speciesKey": "tauros",
+     "speciesKey": "dodrio",
      "level": 57
     },
     {
-     "speciesKey": "snorlax",
+     "speciesKey": "kangaskhan",
      "level": 58
     },
     {
-     "speciesKey": "furret",
+     "speciesKey": "tauros",
      "level": 59
     }
    ]
   },
   {
    "id": "hoenn-mossdeep-city_t4",
-   "name": "Beauty Vera",
-   "trainerClass": "beauty",
+   "name": "Lady Vera",
+   "trainerClass": "lady",
    "team": [
     {
      "speciesKey": "dodrio",
@@ -1981,65 +1953,61 @@
  "hoenn-sootopolis-city": [
   {
    "id": "hoenn-sootopolis-city_t1",
-   "name": "Cooltrainer Elena",
-   "trainerClass": "coolTrainer",
+   "name": "Pilot Zane",
+   "trainerClass": "pilot",
    "team": [
     {
-     "speciesKey": "arcanine",
+     "speciesKey": "noctowl",
      "level": 59
     },
     {
-     "speciesKey": "gyarados",
+     "speciesKey": "ledian",
      "level": 60
     },
     {
      "speciesKey": "crobat",
      "level": 61
-    },
-    {
-     "speciesKey": "exeggutor",
-     "level": 62
     }
    ]
   },
   {
    "id": "hoenn-sootopolis-city_t2",
-   "name": "Psychic Uma",
-   "trainerClass": "psychic",
+   "name": "Skier Uma",
+   "trainerClass": "skier",
    "team": [
     {
-     "speciesKey": "hypno",
+     "speciesKey": "jynx",
      "level": 60
     },
     {
-     "speciesKey": "exeggutor",
+     "speciesKey": "lapras",
      "level": 61
     },
     {
-     "speciesKey": "starmie",
+     "speciesKey": "glalie",
      "level": 62
     }
    ]
   },
   {
    "id": "hoenn-sootopolis-city_t3",
-   "name": "Scientist Kenji",
-   "trainerClass": "scientist",
+   "name": "Waiter Cody",
+   "trainerClass": "waiter",
    "team": [
     {
-     "speciesKey": "minun",
+     "speciesKey": "kangaskhan",
      "level": 61
     },
     {
-     "speciesKey": "raichu",
+     "speciesKey": "tauros",
      "level": 62
     },
     {
-     "speciesKey": "electrode",
+     "speciesKey": "snorlax",
      "level": 63
     },
     {
-     "speciesKey": "jolteon",
+     "speciesKey": "furret",
      "level": 64
     }
    ]
@@ -2048,42 +2016,38 @@
  "hoenn-ever-grande-city": [
   {
    "id": "hoenn-ever-grande-city_t1",
-   "name": "Ace Trainer Maya",
-   "trainerClass": "ace",
+   "name": "Rich Boy Owen",
+   "trainerClass": "richBoy",
    "team": [
     {
-     "speciesKey": "umbreon",
+     "speciesKey": "medicham",
      "level": 63
     },
     {
-     "speciesKey": "flygon",
+     "speciesKey": "grumpig",
      "level": 64
     },
     {
-     "speciesKey": "machamp",
+     "speciesKey": "zangoose",
      "level": 65
-    },
-    {
-     "speciesKey": "shuckle",
-     "level": 66
     }
    ]
   },
   {
    "id": "hoenn-ever-grande-city_t2",
-   "name": "Blackbelt Finn",
-   "trainerClass": "blackbelt",
+   "name": "Worker Felix",
+   "trainerClass": "worker",
    "team": [
     {
-     "speciesKey": "machamp",
+     "speciesKey": "forretress",
      "level": 64
     },
     {
-     "speciesKey": "hitmonlee",
+     "speciesKey": "steelix",
      "level": 65
     },
     {
-     "speciesKey": "hitmonchan",
+     "speciesKey": "scizor",
      "level": 66
     },
     {
@@ -2096,80 +2060,80 @@
  "hoenn-pacifidlog-town": [
   {
    "id": "hoenn-pacifidlog-town_t1",
-   "name": "Swimmer Yara",
-   "trainerClass": "swimmer",
+   "name": "Idol Claire",
+   "trainerClass": "idol",
    "team": [
     {
-     "speciesKey": "kingdra",
+     "speciesKey": "mrMime",
      "level": 69
     },
     {
-     "speciesKey": "ludicolo",
+     "speciesKey": "azumarill",
      "level": 70
     },
     {
-     "speciesKey": "pelipper",
+     "speciesKey": "granbull",
      "level": 71
     }
    ]
   },
   {
    "id": "hoenn-pacifidlog-town_t2",
-   "name": "Sailor Elliot",
-   "trainerClass": "sailor",
+   "name": "Policeman Elliot",
+   "trainerClass": "policeman",
    "team": [
     {
-     "speciesKey": "seaking",
+     "speciesKey": "machamp",
      "level": 70
     },
     {
-     "speciesKey": "lapras",
+     "speciesKey": "hitmonlee",
      "level": 71
     },
     {
-     "speciesKey": "vaporeon",
+     "speciesKey": "hitmonchan",
      "level": 72
     }
    ]
   },
   {
    "id": "hoenn-pacifidlog-town_t3",
-   "name": "Gentleman Theo",
-   "trainerClass": "gentleman",
+   "name": "Aroma Lady Iris",
+   "trainerClass": "aromaLady",
    "team": [
     {
-     "speciesKey": "persian",
+     "speciesKey": "tropius",
      "level": 71
     },
     {
-     "speciesKey": "dodrio",
+     "speciesKey": "wigglytuff",
      "level": 72
     },
     {
-     "speciesKey": "hypno",
+     "speciesKey": "vileplume",
      "level": 73
     }
    ]
   },
   {
    "id": "hoenn-pacifidlog-town_t4",
-   "name": "Channeler Amber",
-   "trainerClass": "channeler",
+   "name": "Chef Kai",
+   "trainerClass": "chef",
    "team": [
     {
-     "speciesKey": "banette",
+     "speciesKey": "flareon",
      "level": 72
     },
     {
-     "speciesKey": "gengar",
+     "speciesKey": "snorlax",
      "level": 73
     },
     {
-     "speciesKey": "sableye",
+     "speciesKey": "furret",
      "level": 74
     },
     {
-     "speciesKey": "banette",
+     "speciesKey": "noctowl",
      "level": 75
     }
    ]
@@ -2178,61 +2142,49 @@
  "sinnoh-twinleaf-town": [
   {
    "id": "sinnoh-twinleaf-town_t1",
-   "name": "Cooltrainer Owen",
-   "trainerClass": "coolTrainer",
+   "name": "Channeler Lily",
+   "trainerClass": "channeler",
    "team": [
     {
-     "speciesKey": "steelix",
+     "speciesKey": "rotom",
      "level": 5
-    },
-    {
-     "speciesKey": "gliscor",
-     "level": 6
     }
    ]
   },
   {
    "id": "sinnoh-twinleaf-town_t2",
-   "name": "Psychic Emma",
-   "trainerClass": "psychic",
+   "name": "Tamer Liam",
+   "trainerClass": "tamer",
    "team": [
     {
-     "speciesKey": "baltoy",
+     "speciesKey": "skitty",
      "level": 6
     }
    ]
   },
   {
    "id": "sinnoh-twinleaf-town_t3",
-   "name": "Scientist Wendy",
-   "trainerClass": "scientist",
+   "name": "Juggler Bruno",
+   "trainerClass": "juggler",
    "team": [
     {
-     "speciesKey": "raichu",
+     "speciesKey": "houndour",
      "level": 7
-    },
-    {
-     "speciesKey": "magnemite",
-     "level": 8
     }
    ]
   },
   {
    "id": "sinnoh-twinleaf-town_t4",
-   "name": "Ace Trainer Liam",
-   "trainerClass": "ace",
+   "name": "Super Nerd Paul",
+   "trainerClass": "superNerd",
    "team": [
     {
-     "speciesKey": "seviper",
+     "speciesKey": "roselia",
      "level": 8
     },
     {
-     "speciesKey": "dratini",
+     "speciesKey": "gulpin",
      "level": 9
-    },
-    {
-     "speciesKey": "arcanine",
-     "level": 10
     }
    ]
   }
@@ -2240,48 +2192,48 @@
  "sinnoh-sandgem-town": [
   {
    "id": "sinnoh-sandgem-town_t1",
-   "name": "Blackbelt Gavin",
-   "trainerClass": "blackbelt",
+   "name": "Fisherman Gavin",
+   "trainerClass": "fisherman",
    "team": [
     {
-     "speciesKey": "lucario",
+     "speciesKey": "luvdisc",
      "level": 8
     }
    ]
   },
   {
    "id": "sinnoh-sandgem-town_t2",
-   "name": "Swimmer Finn",
-   "trainerClass": "swimmer",
+   "name": "Picnicker Pia",
+   "trainerClass": "picnicker",
    "team": [
     {
-     "speciesKey": "tentacool",
+     "speciesKey": "tangela",
      "level": 9
     }
    ]
   },
   {
    "id": "sinnoh-sandgem-town_t3",
-   "name": "Sailor Liam",
-   "trainerClass": "sailor",
+   "name": "Bird Keeper Liam",
+   "trainerClass": "birdKeeper",
    "team": [
     {
-     "speciesKey": "relicanth",
+     "speciesKey": "butterfree",
      "level": 10
     }
    ]
   },
   {
    "id": "sinnoh-sandgem-town_t4",
-   "name": "Gentleman Bruno",
-   "trainerClass": "gentleman",
+   "name": "Burglar Bruno",
+   "trainerClass": "burglar",
    "team": [
     {
-     "speciesKey": "unown",
+     "speciesKey": "poochyena",
      "level": 11
     },
     {
-     "speciesKey": "girafarig",
+     "speciesKey": "sableye",
      "level": 12
     }
    ]
@@ -2290,37 +2242,37 @@
  "sinnoh-jubilife-city": [
   {
    "id": "sinnoh-jubilife-city_t1",
-   "name": "Channeler Tessa",
-   "trainerClass": "channeler",
+   "name": "Guitarist Gavin",
+   "trainerClass": "guitarist",
    "team": [
     {
-     "speciesKey": "froslass",
+     "speciesKey": "voltorb",
      "level": 11
     }
    ]
   },
   {
    "id": "sinnoh-jubilife-city_t2",
-   "name": "Tamer Noah",
-   "trainerClass": "tamer",
+   "name": "Cowgirl Julia",
+   "trainerClass": "cowgirl",
    "team": [
     {
-     "speciesKey": "miltank",
+     "speciesKey": "dunsparce",
      "level": 12
     }
    ]
   },
   {
    "id": "sinnoh-jubilife-city_t3",
-   "name": "Juggler Eli",
-   "trainerClass": "juggler",
+   "name": "Cyclist Eli",
+   "trainerClass": "cyclist",
    "team": [
     {
-     "speciesKey": "voltorb",
+     "speciesKey": "chatot",
      "level": 13
     },
     {
-     "speciesKey": "jolteon",
+     "speciesKey": "munchlax",
      "level": 14
     }
    ]
@@ -2329,48 +2281,48 @@
  "sinnoh-oreburgh-city": [
   {
    "id": "sinnoh-oreburgh-city_t1",
-   "name": "Super Nerd Felix",
-   "trainerClass": "superNerd",
+   "name": "Lady Cara",
+   "trainerClass": "lady",
    "team": [
     {
-     "speciesKey": "dustox",
+     "speciesKey": "rattata",
      "level": 14
     }
    ]
   },
   {
    "id": "sinnoh-oreburgh-city_t2",
-   "name": "Youngster Toby",
-   "trainerClass": "youngster",
+   "name": "Pilot Toby",
+   "trainerClass": "pilot",
    "team": [
     {
-     "speciesKey": "aipom",
+     "speciesKey": "scyther",
      "level": 15
     }
    ]
   },
   {
    "id": "sinnoh-oreburgh-city_t3",
-   "name": "Lass Hana",
-   "trainerClass": "lass",
+   "name": "Skier Elena",
+   "trainerClass": "skier",
    "team": [
     {
-     "speciesKey": "ditto",
+     "speciesKey": "swinub",
      "level": 16
     }
    ]
   },
   {
    "id": "sinnoh-oreburgh-city_t4",
-   "name": "Bug Catcher Ben",
-   "trainerClass": "bugCatcher",
+   "name": "Waiter Ben",
+   "trainerClass": "waiter",
    "team": [
     {
-     "speciesKey": "scizor",
+     "speciesKey": "skitty",
      "level": 17
     },
     {
-     "speciesKey": "shuckle",
+     "speciesKey": "delcatty",
      "level": 18
     }
    ]
@@ -2379,26 +2331,26 @@
  "sinnoh-floaroma-town": [
   {
    "id": "sinnoh-floaroma-town_t1",
-   "name": "Hiker Victor",
-   "trainerClass": "hiker",
+   "name": "Rich Boy Victor",
+   "trainerClass": "richBoy",
    "team": [
     {
-     "speciesKey": "baltoy",
+     "speciesKey": "slowking",
      "level": 18
     }
    ]
   },
   {
    "id": "sinnoh-floaroma-town_t2",
-   "name": "Camper Leo",
-   "trainerClass": "camper",
+   "name": "Worker Leo",
+   "trainerClass": "worker",
    "team": [
     {
-     "speciesKey": "blissey",
+     "speciesKey": "tyrogue",
      "level": 19
     },
     {
-     "speciesKey": "zigzagoon",
+     "speciesKey": "makuhita",
      "level": 20
     }
    ]
@@ -2407,41 +2359,37 @@
  "sinnoh-eterna-city": [
   {
    "id": "sinnoh-eterna-city_t1",
-   "name": "Beauty Bianca",
-   "trainerClass": "beauty",
+   "name": "Idol Bianca",
+   "trainerClass": "idol",
    "team": [
     {
-     "speciesKey": "miltank",
+     "speciesKey": "mrMime",
      "level": 21
     }
    ]
   },
   {
    "id": "sinnoh-eterna-city_t2",
-   "name": "Cooltrainer Neil",
-   "trainerClass": "coolTrainer",
+   "name": "Policeman Zane",
+   "trainerClass": "policeman",
    "team": [
     {
-     "speciesKey": "espeon",
+     "speciesKey": "hitmontop",
      "level": 22
-    },
-    {
-     "speciesKey": "umbreon",
-     "level": 23
     }
    ]
   },
   {
    "id": "sinnoh-eterna-city_t3",
-   "name": "Psychic Dana",
-   "trainerClass": "psychic",
+   "name": "Aroma Lady Grace",
+   "trainerClass": "aromaLady",
    "team": [
     {
-     "speciesKey": "bronzor",
+     "speciesKey": "vileplume",
      "level": 23
     },
     {
-     "speciesKey": "gallade",
+     "speciesKey": "paras",
      "level": 24
     }
    ]
@@ -2450,45 +2398,37 @@
  "sinnoh-hearthome-city": [
   {
    "id": "sinnoh-hearthome-city_t1",
-   "name": "Scientist Isla",
-   "trainerClass": "scientist",
+   "name": "Chef Owen",
+   "trainerClass": "chef",
    "team": [
     {
-     "speciesKey": "elekid",
+     "speciesKey": "happiny",
      "level": 27
-    },
-    {
-     "speciesKey": "mawile",
-     "level": 28
     }
    ]
   },
   {
    "id": "sinnoh-hearthome-city_t2",
-   "name": "Ace Trainer Andre",
-   "trainerClass": "ace",
+   "name": "Dancer Andre",
+   "trainerClass": "dancer",
    "team": [
     {
-     "speciesKey": "jolteon",
+     "speciesKey": "girafarig",
      "level": 28
-    },
-    {
-     "speciesKey": "espeon",
-     "level": 29
     }
    ]
   },
   {
    "id": "sinnoh-hearthome-city_t3",
-   "name": "Blackbelt Toby",
-   "trainerClass": "blackbelt",
+   "name": "Gambler Noah",
+   "trainerClass": "gambler",
    "team": [
     {
-     "speciesKey": "meditite",
+     "speciesKey": "glameow",
      "level": 29
     },
     {
-     "speciesKey": "riolu",
+     "speciesKey": "stunky",
      "level": 30
     }
    ]
@@ -2497,49 +2437,49 @@
  "sinnoh-solaceon-town": [
   {
    "id": "sinnoh-solaceon-town_t1",
-   "name": "Swimmer Leo",
-   "trainerClass": "swimmer",
+   "name": "Nurse Dana",
+   "trainerClass": "nurse",
    "team": [
     {
-     "speciesKey": "poliwhirl",
+     "speciesKey": "clefable",
      "level": 30
     },
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "jigglypuff",
      "level": 31
     }
    ]
   },
   {
    "id": "sinnoh-solaceon-town_t2",
-   "name": "Sailor Blake",
-   "trainerClass": "sailor",
+   "name": "Biker Blake",
+   "trainerClass": "biker",
    "team": [
     {
-     "speciesKey": "seel",
+     "speciesKey": "vileplume",
      "level": 31
     },
     {
-     "speciesKey": "shellder",
+     "speciesKey": "venomoth",
      "level": 32
     }
    ]
   },
   {
    "id": "sinnoh-solaceon-town_t3",
-   "name": "Gentleman Owen",
-   "trainerClass": "gentleman",
+   "name": "Schoolkid Pia",
+   "trainerClass": "schoolkid",
    "team": [
     {
-     "speciesKey": "chansey",
+     "speciesKey": "snorlax",
      "level": 32
     },
     {
-     "speciesKey": "kangaskhan",
+     "speciesKey": "furret",
      "level": 33
     },
     {
-     "speciesKey": "starmie",
+     "speciesKey": "noctowl",
      "level": 34
     }
    ]
@@ -2548,49 +2488,49 @@
  "sinnoh-celestic-town": [
   {
    "id": "sinnoh-celestic-town_t1",
-   "name": "Channeler Zelda",
-   "trainerClass": "channeler",
+   "name": "Roughneck Mason",
+   "trainerClass": "roughneck",
    "team": [
     {
-     "speciesKey": "spiritomb",
+     "speciesKey": "heracross",
      "level": 33
     },
     {
-     "speciesKey": "froslass",
+     "speciesKey": "hitmontop",
      "level": 34
     }
    ]
   },
   {
    "id": "sinnoh-celestic-town_t2",
-   "name": "Tamer Cody",
-   "trainerClass": "tamer",
+   "name": "Parasol Lady Mia",
+   "trainerClass": "parasolLady",
    "team": [
     {
-     "speciesKey": "lickilicky",
+     "speciesKey": "azumarill",
      "level": 34
     },
     {
-     "speciesKey": "porygon-z",
+     "speciesKey": "politoed",
      "level": 35
     }
    ]
   },
   {
    "id": "sinnoh-celestic-town_t3",
-   "name": "Juggler Riley",
-   "trainerClass": "juggler",
+   "name": "Musician Riley",
+   "trainerClass": "musician",
    "team": [
     {
-     "speciesKey": "ampharos",
+     "speciesKey": "mrMime",
      "level": 35
     },
     {
-     "speciesKey": "slugma",
+     "speciesKey": "jynx",
      "level": 36
     },
     {
-     "speciesKey": "houndoom",
+     "speciesKey": "tauros",
      "level": 37
     }
    ]
@@ -2599,23 +2539,23 @@
  "sinnoh-pastoria-city": [
   {
    "id": "sinnoh-pastoria-city_t1",
-   "name": "Super Nerd Silas",
-   "trainerClass": "superNerd",
+   "name": "Preschooler Kai",
+   "trainerClass": "preschooler",
    "team": [
     {
-     "speciesKey": "nidoking",
+     "speciesKey": "dodrio",
      "level": 38
     },
     {
-     "speciesKey": "golbat",
+     "speciesKey": "chansey",
      "level": 39
     }
    ]
   },
   {
    "id": "sinnoh-pastoria-city_t2",
-   "name": "Youngster Joel",
-   "trainerClass": "youngster",
+   "name": "Artist Aria",
+   "trainerClass": "artist",
    "team": [
     {
      "speciesKey": "snorlax",
@@ -2629,34 +2569,34 @@
   },
   {
    "id": "sinnoh-pastoria-city_t3",
-   "name": "Lass Olivia",
-   "trainerClass": "lass",
+   "name": "Backpacker Olivia",
+   "trainerClass": "backpacker",
    "team": [
     {
-     "speciesKey": "bibarel",
+     "speciesKey": "exploud",
      "level": 40
     },
     {
-     "speciesKey": "ambipom",
+     "speciesKey": "azurill",
      "level": 41
     }
    ]
   },
   {
    "id": "sinnoh-pastoria-city_t4",
-   "name": "Bug Catcher Neil",
-   "trainerClass": "bugCatcher",
+   "name": "Pokemon Ranger Felix",
+   "trainerClass": "pokemonRanger",
    "team": [
     {
-     "speciesKey": "dustox",
+     "speciesKey": "noctowl",
      "level": 41
     },
     {
-     "speciesKey": "masquerain",
+     "speciesKey": "igglybuff",
      "level": 42
     },
     {
-     "speciesKey": "ninjask",
+     "speciesKey": "bellossom",
      "level": 43
     }
    ]
@@ -2665,49 +2605,49 @@
  "sinnoh-veilstone-city": [
   {
    "id": "sinnoh-veilstone-city_t1",
-   "name": "Hiker Mason",
-   "trainerClass": "hiker",
+   "name": "Doctor Sarah",
+   "trainerClass": "doctor",
    "team": [
     {
-     "speciesKey": "aerodactyl",
+     "speciesKey": "hypno",
      "level": 43
     },
     {
-     "speciesKey": "sudowoodo",
+     "speciesKey": "exeggcute",
      "level": 44
     }
    ]
   },
   {
    "id": "sinnoh-veilstone-city_t2",
-   "name": "Camper Cody",
-   "trainerClass": "camper",
+   "name": "Veteran Jack",
+   "trainerClass": "veteran",
    "team": [
     {
-     "speciesKey": "wormadam",
+     "speciesKey": "tangrowth",
      "level": 44
     },
     {
-     "speciesKey": "cherrim",
+     "speciesKey": "aggron",
      "level": 45
     }
    ]
   },
   {
    "id": "sinnoh-veilstone-city_t3",
-   "name": "Beauty Julia",
-   "trainerClass": "beauty",
+   "name": "Medium Zeke",
+   "trainerClass": "medium",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "sableye",
      "level": 45
     },
     {
-     "speciesKey": "exploud",
+     "speciesKey": "banette",
      "level": 46
     },
     {
-     "speciesKey": "delcatty",
+     "speciesKey": "drifblim",
      "level": 47
     }
    ]
@@ -2716,58 +2656,50 @@
  "sinnoh-snowpoint-city": [
   {
    "id": "sinnoh-snowpoint-city_t1",
-   "name": "Cooltrainer Sarah",
-   "trainerClass": "coolTrainer",
+   "name": "Youngster Carlos",
+   "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "umbreon",
+     "speciesKey": "noctowl",
      "level": 49
     },
     {
-     "speciesKey": "lucario",
+     "speciesKey": "ursaring",
      "level": 50
-    },
-    {
-     "speciesKey": "probopass",
-     "level": 51
     }
    ]
   },
   {
    "id": "sinnoh-snowpoint-city_t2",
-   "name": "Psychic Jack",
-   "trainerClass": "psychic",
+   "name": "Lass Zoe",
+   "trainerClass": "lass",
    "team": [
     {
-     "speciesKey": "exeggutor",
+     "speciesKey": "dodrio",
      "level": 50
     },
     {
-     "speciesKey": "starmie",
+     "speciesKey": "kangaskhan",
      "level": 51
     }
    ]
   },
   {
    "id": "sinnoh-snowpoint-city_t3",
-   "name": "Scientist Zeke",
-   "trainerClass": "scientist",
+   "name": "Bug Catcher Hiro",
+   "trainerClass": "bugCatcher",
    "team": [
     {
-     "speciesKey": "steelix",
+     "speciesKey": "vespiquen",
      "level": 51
     },
     {
-     "speciesKey": "scizor",
+     "speciesKey": "yanmega",
      "level": 52
     },
     {
-     "speciesKey": "skarmory",
+     "speciesKey": "butterfree",
      "level": 53
-    },
-    {
-     "speciesKey": "mawile",
-     "level": 54
     }
    ]
   }
@@ -2775,65 +2707,61 @@
  "sinnoh-canalave-city": [
   {
    "id": "sinnoh-canalave-city_t1",
-   "name": "Ace Trainer Quinn",
-   "trainerClass": "ace",
+   "name": "Hiker Owen",
+   "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "donphan",
      "level": 52
     },
     {
-     "speciesKey": "salamence",
+     "speciesKey": "pupitar",
      "level": 53
     },
     {
-     "speciesKey": "arcanine",
+     "speciesKey": "aggron",
      "level": 54
-    },
-    {
-     "speciesKey": "togekiss",
-     "level": 55
     }
    ]
   },
   {
    "id": "sinnoh-canalave-city_t2",
-   "name": "Blackbelt Felix",
-   "trainerClass": "blackbelt",
+   "name": "Camper Felix",
+   "trainerClass": "camper",
    "team": [
     {
-     "speciesKey": "toxicroak",
+     "speciesKey": "parasect",
      "level": 53
     },
     {
-     "speciesKey": "gallade",
+     "speciesKey": "persian",
      "level": 54
     },
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "victreebel",
      "level": 55
     }
    ]
   },
   {
    "id": "sinnoh-canalave-city_t3",
-   "name": "Swimmer Yuki",
-   "trainerClass": "swimmer",
+   "name": "Beauty Lily",
+   "trainerClass": "beauty",
    "team": [
     {
-     "speciesKey": "pelipper",
+     "speciesKey": "delcatty",
      "level": 54
     },
     {
-     "speciesKey": "sharpedo",
+     "speciesKey": "mawile",
      "level": 55
     },
     {
-     "speciesKey": "wailord",
+     "speciesKey": "spinda",
      "level": 56
     },
     {
-     "speciesKey": "whiscash",
+     "speciesKey": "zangoose",
      "level": 57
     }
    ]
@@ -2842,42 +2770,46 @@
  "sinnoh-sunyshore-city": [
   {
    "id": "sinnoh-sunyshore-city_t1",
-   "name": "Sailor Miles",
-   "trainerClass": "sailor",
+   "name": "Cooltrainer Vera",
+   "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "walrein",
+     "speciesKey": "dusknoir",
      "level": 60
     },
     {
-     "speciesKey": "huntail",
+     "speciesKey": "yanmega",
      "level": 61
     },
     {
-     "speciesKey": "gorebyss",
+     "speciesKey": "slaking",
      "level": 62
+    },
+    {
+     "speciesKey": "dragonite",
+     "level": 63
     }
    ]
   },
   {
    "id": "sinnoh-sunyshore-city_t2",
-   "name": "Gentleman Cole",
-   "trainerClass": "gentleman",
+   "name": "Psychic Leo",
+   "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "persian",
+     "speciesKey": "claydol",
      "level": 61
     },
     {
-     "speciesKey": "alakazam",
+     "speciesKey": "chimecho",
      "level": 62
     },
     {
-     "speciesKey": "slowbro",
+     "speciesKey": "bronzong",
      "level": 63
     },
     {
-     "speciesKey": "dodrio",
+     "speciesKey": "gallade",
      "level": 64
     }
    ]
@@ -2886,26 +2818,26 @@
  "unova-nuvema-town": [
   {
    "id": "unova-nuvema-town_t1",
-   "name": "Blackbelt Zeke",
-   "trainerClass": "blackbelt",
+   "name": "Artist Bianca",
+   "trainerClass": "artist",
    "team": [
     {
-     "speciesKey": "makuhita",
+     "speciesKey": "porygon",
      "level": 5
     }
    ]
   },
   {
    "id": "unova-nuvema-town_t2",
-   "name": "Swimmer Rosa",
-   "trainerClass": "swimmer",
+   "name": "Backpacker Rosa",
+   "trainerClass": "backpacker",
    "team": [
     {
-     "speciesKey": "luvdisc",
+     "speciesKey": "castform",
      "level": 6
     },
     {
-     "speciesKey": "buizel",
+     "speciesKey": "kecleon",
      "level": 7
     }
    ]
@@ -2914,48 +2846,48 @@
  "unova-accumula-town": [
   {
    "id": "unova-accumula-town_t1",
-   "name": "Sailor Eli",
-   "trainerClass": "sailor",
+   "name": "Pokemon Ranger Bella",
+   "trainerClass": "pokemonRanger",
    "team": [
     {
-     "speciesKey": "lucario",
+     "speciesKey": "snorlax",
      "level": 8
     }
    ]
   },
   {
    "id": "unova-accumula-town_t2",
-   "name": "Gentleman Silas",
-   "trainerClass": "gentleman",
+   "name": "Doctor Pia",
+   "trainerClass": "doctor",
    "team": [
     {
-     "speciesKey": "girafarig",
+     "speciesKey": "woobat",
      "level": 9
     }
    ]
   },
   {
    "id": "unova-accumula-town_t3",
-   "name": "Channeler Vera",
-   "trainerClass": "channeler",
+   "name": "Veteran Gavin",
+   "trainerClass": "veteran",
    "team": [
     {
-     "speciesKey": "golett",
+     "speciesKey": "espeon",
      "level": 10
     }
    ]
   },
   {
    "id": "unova-accumula-town_t4",
-   "name": "Tamer Alex",
-   "trainerClass": "tamer",
+   "name": "Medium Wade",
+   "trainerClass": "medium",
    "team": [
     {
-     "speciesKey": "wigglytuff",
+     "speciesKey": "mismagius",
      "level": 11
     },
     {
-     "speciesKey": "meowth",
+     "speciesKey": "spiritomb",
      "level": 12
     }
    ]
@@ -2964,26 +2896,26 @@
  "unova-aspertia-city": [
   {
    "id": "unova-aspertia-city_t1",
-   "name": "Juggler Riley",
-   "trainerClass": "juggler",
+   "name": "Youngster Riley",
+   "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "arcanine",
+     "speciesKey": "buneary",
      "level": 10
     }
    ]
   },
   {
    "id": "unova-aspertia-city_t2",
-   "name": "Super Nerd Hugo",
-   "trainerClass": "superNerd",
+   "name": "Lass Elena",
+   "trainerClass": "lass",
    "team": [
     {
-     "speciesKey": "raichu",
+     "speciesKey": "starly",
      "level": 11
     },
     {
-     "speciesKey": "nidoranF",
+     "speciesKey": "bidoof",
      "level": 12
     }
    ]
@@ -2992,26 +2924,26 @@
  "unova-virbank-city": [
   {
    "id": "unova-virbank-city_t1",
-   "name": "Youngster Owen",
-   "trainerClass": "youngster",
+   "name": "Bug Catcher Owen",
+   "trainerClass": "bugCatcher",
    "team": [
     {
-     "speciesKey": "porygon-z",
+     "speciesKey": "dustox",
      "level": 13
     }
    ]
   },
   {
    "id": "unova-virbank-city_t2",
-   "name": "Lass Sana",
-   "trainerClass": "lass",
+   "name": "Hiker Felix",
+   "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "happiny",
+     "speciesKey": "shuckle",
      "level": 14
     },
     {
-     "speciesKey": "chatot",
+     "speciesKey": "swinub",
      "level": 15
     }
    ]
@@ -3020,26 +2952,26 @@
  "unova-floccesy-town": [
   {
    "id": "unova-floccesy-town_t1",
-   "name": "Bug Catcher Mason",
-   "trainerClass": "bugCatcher",
+   "name": "Camper Mason",
+   "trainerClass": "camper",
    "team": [
     {
-     "speciesKey": "beedrill",
+     "speciesKey": "cacnea",
      "level": 15
     }
    ]
   },
   {
    "id": "unova-floccesy-town_t2",
-   "name": "Hiker Cody",
-   "trainerClass": "hiker",
+   "name": "Beauty Sofia",
+   "trainerClass": "beauty",
    "team": [
     {
-     "speciesKey": "numel",
+     "speciesKey": "cleffa",
      "level": 16
     },
     {
-     "speciesKey": "trapinch",
+     "speciesKey": "igglybuff",
      "level": 17
     }
    ]
@@ -3048,26 +2980,30 @@
  "unova-striaton-city": [
   {
    "id": "unova-striaton-city_t1",
-   "name": "Camper Seth",
-   "trainerClass": "camper",
+   "name": "Cooltrainer Aria",
+   "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "lickitung",
+     "speciesKey": "aerodactyl",
      "level": 16
+    },
+    {
+     "speciesKey": "steelix",
+     "level": 17
     }
    ]
   },
   {
    "id": "unova-striaton-city_t2",
-   "name": "Beauty Yuki",
-   "trainerClass": "beauty",
+   "name": "Psychic Olivia",
+   "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "pidove",
+     "speciesKey": "wobbuffet",
      "level": 17
     },
     {
-     "speciesKey": "audino",
+     "speciesKey": "girafarig",
      "level": 18
     }
    ]
@@ -3076,46 +3012,46 @@
  "unova-nacrene-city": [
   {
    "id": "unova-nacrene-city_t1",
-   "name": "Cooltrainer Victor",
-   "trainerClass": "coolTrainer",
+   "name": "Scientist Victor",
+   "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "shuckle",
+     "speciesKey": "durant",
      "level": 20
     },
     {
-     "speciesKey": "mismagius",
+     "speciesKey": "pikachu",
      "level": 21
     }
    ]
   },
   {
    "id": "unova-nacrene-city_t2",
-   "name": "Psychic Lara",
-   "trainerClass": "psychic",
+   "name": "Ace Trainer Lara",
+   "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "starmie",
+     "speciesKey": "exeggutor",
      "level": 21
+    },
+    {
+     "speciesKey": "jolteon",
+     "level": 22
     }
    ]
   },
   {
    "id": "unova-nacrene-city_t3",
-   "name": "Scientist Caleb",
-   "trainerClass": "scientist",
+   "name": "Blackbelt Wesley",
+   "trainerClass": "blackbelt",
    "team": [
     {
-     "speciesKey": "aron",
+     "speciesKey": "gallade",
      "level": 22
     },
     {
-     "speciesKey": "electrike",
+     "speciesKey": "timburr",
      "level": 23
-    },
-    {
-     "speciesKey": "plusle",
-     "level": 24
     }
    ]
   }
@@ -3123,52 +3059,48 @@
  "unova-castelia-city": [
   {
    "id": "unova-castelia-city_t1",
-   "name": "Ace Trainer Paige",
-   "trainerClass": "ace",
+   "name": "Swimmer Paige",
+   "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "togekiss",
+     "speciesKey": "vaporeon",
      "level": 21
-    },
-    {
-     "speciesKey": "gyarados",
-     "level": 22
     }
    ]
   },
   {
    "id": "unova-castelia-city_t2",
-   "name": "Blackbelt Ivan",
-   "trainerClass": "blackbelt",
+   "name": "Sailor Ivan",
+   "trainerClass": "sailor",
    "team": [
     {
-     "speciesKey": "riolu",
+     "speciesKey": "qwilfish",
      "level": 22
     }
    ]
   },
   {
    "id": "unova-castelia-city_t3",
-   "name": "Swimmer Victor",
-   "trainerClass": "swimmer",
+   "name": "Gentleman Zane",
+   "trainerClass": "gentleman",
    "team": [
     {
-     "speciesKey": "feebas",
+     "speciesKey": "solrock",
      "level": 23
     }
    ]
   },
   {
    "id": "unova-castelia-city_t4",
-   "name": "Sailor Mason",
-   "trainerClass": "sailor",
+   "name": "Channeler Amber",
+   "trainerClass": "channeler",
    "team": [
     {
-     "speciesKey": "meditite",
+     "speciesKey": "sableye",
      "level": 24
     },
     {
-     "speciesKey": "carvanha",
+     "speciesKey": "shuppet",
      "level": 25
     }
    ]
@@ -3177,48 +3109,48 @@
  "unova-nimbasa-city": [
   {
    "id": "unova-nimbasa-city_t1",
-   "name": "Gentleman Noah",
-   "trainerClass": "gentleman",
+   "name": "Tamer Noah",
+   "trainerClass": "tamer",
    "team": [
     {
-     "speciesKey": "natu",
+     "speciesKey": "snorlax",
      "level": 24
     }
    ]
   },
   {
    "id": "unova-nimbasa-city_t2",
-   "name": "Channeler Alice",
-   "trainerClass": "channeler",
+   "name": "Juggler Eli",
+   "trainerClass": "juggler",
    "team": [
     {
-     "speciesKey": "duskull",
+     "speciesKey": "darumaka",
      "level": 25
     }
    ]
   },
   {
    "id": "unova-nimbasa-city_t3",
-   "name": "Tamer Silas",
-   "trainerClass": "tamer",
+   "name": "Super Nerd Silas",
+   "trainerClass": "superNerd",
    "team": [
     {
-     "speciesKey": "linoone",
+     "speciesKey": "victreebel",
      "level": 26
     }
    ]
   },
   {
    "id": "unova-nimbasa-city_t4",
-   "name": "Juggler Joel",
-   "trainerClass": "juggler",
+   "name": "Fisherman Joel",
+   "trainerClass": "fisherman",
    "team": [
     {
-     "speciesKey": "ponyta",
+     "speciesKey": "omanyte",
      "level": 27
     },
     {
-     "speciesKey": "magnemite",
+     "speciesKey": "kabuto",
      "level": 28
     }
    ]
@@ -3227,49 +3159,49 @@
  "unova-driftveil-city": [
   {
    "id": "unova-driftveil-city_t1",
-   "name": "Super Nerd Ivan",
-   "trainerClass": "superNerd",
+   "name": "Picnicker Zelda",
+   "trainerClass": "picnicker",
    "team": [
     {
-     "speciesKey": "zebstrika",
+     "speciesKey": "rufflet",
      "level": 28
     },
     {
-     "speciesKey": "whirlipede",
+     "speciesKey": "pidgeotto",
      "level": 29
     }
    ]
   },
   {
    "id": "unova-driftveil-city_t2",
-   "name": "Youngster Zane",
-   "trainerClass": "youngster",
+   "name": "Bird Keeper Zane",
+   "trainerClass": "birdKeeper",
    "team": [
     {
-     "speciesKey": "happiny",
+     "speciesKey": "xatu",
      "level": 29
     },
     {
-     "speciesKey": "chatot",
+     "speciesKey": "skiploom",
      "level": 30
     }
    ]
   },
   {
    "id": "unova-driftveil-city_t3",
-   "name": "Lass Dana",
-   "trainerClass": "lass",
+   "name": "Burglar Mason",
+   "trainerClass": "burglar",
    "team": [
     {
-     "speciesKey": "azurill",
+     "speciesKey": "zoroark",
      "level": 30
     },
     {
-     "speciesKey": "skitty",
+     "speciesKey": "litwick",
      "level": 31
     },
     {
-     "speciesKey": "delcatty",
+     "speciesKey": "pawniard",
      "level": 32
     }
    ]
@@ -3278,53 +3210,53 @@
  "unova-anville-town": [
   {
    "id": "unova-anville-town_t1",
-   "name": "Bug Catcher Paul",
-   "trainerClass": "bugCatcher",
+   "name": "Guitarist Andre",
+   "trainerClass": "guitarist",
    "team": [
     {
-     "speciesKey": "beautifly",
+     "speciesKey": "plusle",
      "level": 29
     },
     {
-     "speciesKey": "dustox",
+     "speciesKey": "minun",
      "level": 30
     }
    ]
   },
   {
    "id": "unova-anville-town_t2",
-   "name": "Hiker Finn",
-   "trainerClass": "hiker",
+   "name": "Cowgirl Ava",
+   "trainerClass": "cowgirl",
    "team": [
     {
-     "speciesKey": "omanyte",
+     "speciesKey": "kecleon",
      "level": 30
     },
     {
-     "speciesKey": "kabuto",
+     "speciesKey": "staravia",
      "level": 31
     }
    ]
   },
   {
    "id": "unova-anville-town_t3",
-   "name": "Camper Victor",
-   "trainerClass": "camper",
+   "name": "Cyclist Victor",
+   "trainerClass": "cyclist",
    "team": [
     {
-     "speciesKey": "wormadam",
+     "speciesKey": "dodrio",
      "level": 31
     },
     {
-     "speciesKey": "cherrim",
+     "speciesKey": "lickitung",
      "level": 32
     }
    ]
   },
   {
    "id": "unova-anville-town_t4",
-   "name": "Beauty Fiona",
-   "trainerClass": "beauty",
+   "name": "Lady Fiona",
+   "trainerClass": "lady",
    "team": [
     {
      "speciesKey": "clefairy",
@@ -3344,38 +3276,34 @@
  "unova-mistralton-city": [
   {
    "id": "unova-mistralton-city_t1",
-   "name": "Cooltrainer Cole",
-   "trainerClass": "coolTrainer",
+   "name": "Pilot Hiro",
+   "trainerClass": "pilot",
    "team": [
     {
-     "speciesKey": "espeon",
+     "speciesKey": "aerodactyl",
      "level": 33
     },
     {
-     "speciesKey": "umbreon",
+     "speciesKey": "noctowl",
      "level": 34
-    },
-    {
-     "speciesKey": "lucario",
-     "level": 35
     }
    ]
   },
   {
    "id": "unova-mistralton-city_t2",
-   "name": "Psychic Ryan",
-   "trainerClass": "psychic",
+   "name": "Skier Ryan",
+   "trainerClass": "skier",
    "team": [
     {
-     "speciesKey": "bronzong",
+     "speciesKey": "delibird",
      "level": 34
     },
     {
-     "speciesKey": "gallade",
+     "speciesKey": "snorunt",
      "level": 35
     },
     {
-     "speciesKey": "munna",
+     "speciesKey": "sealeo",
      "level": 36
     }
    ]
@@ -3384,43 +3312,35 @@
  "unova-icirrus-city": [
   {
    "id": "unova-icirrus-city_t1",
-   "name": "Scientist Grace",
-   "trainerClass": "scientist",
+   "name": "Waiter Carlos",
+   "trainerClass": "waiter",
    "team": [
     {
-     "speciesKey": "lanturn",
+     "speciesKey": "castform",
      "level": 36
     },
     {
-     "speciesKey": "pichu",
+     "speciesKey": "kecleon",
      "level": 37
-    },
-    {
-     "speciesKey": "ampharos",
-     "level": 38
     }
    ]
   },
   {
    "id": "unova-icirrus-city_t2",
-   "name": "Ace Trainer Zoe",
-   "trainerClass": "ace",
+   "name": "Rich Boy Rex",
+   "trainerClass": "richBoy",
    "team": [
     {
-     "speciesKey": "togekiss",
+     "speciesKey": "claydol",
      "level": 37
     },
     {
-     "speciesKey": "gyarados",
+     "speciesKey": "castform",
      "level": 38
     },
     {
-     "speciesKey": "electivire",
+     "speciesKey": "kecleon",
      "level": 39
-    },
-    {
-     "speciesKey": "crobat",
-     "level": 40
     }
    ]
   }
@@ -3428,34 +3348,34 @@
  "unova-opelucid-city": [
   {
    "id": "unova-opelucid-city_t1",
-   "name": "Blackbelt Carlos",
-   "trainerClass": "blackbelt",
+   "name": "Worker Carlos",
+   "trainerClass": "worker",
    "team": [
     {
-     "speciesKey": "medicham",
+     "speciesKey": "bastiodon",
      "level": 41
     },
     {
-     "speciesKey": "riolu",
+     "speciesKey": "bronzong",
      "level": 42
     }
    ]
   },
   {
    "id": "unova-opelucid-city_t2",
-   "name": "Swimmer Cara",
-   "trainerClass": "swimmer",
+   "name": "Idol Zoe",
+   "trainerClass": "idol",
    "team": [
     {
-     "speciesKey": "shellder",
+     "speciesKey": "mrMime",
      "level": 42
     },
     {
-     "speciesKey": "cloyster",
+     "speciesKey": "cleffa",
      "level": 43
     },
     {
-     "speciesKey": "kingler",
+     "speciesKey": "igglybuff",
      "level": 44
     }
    ]
@@ -3464,34 +3384,34 @@
  "unova-lacunosa-town": [
   {
    "id": "unova-lacunosa-town_t1",
-   "name": "Sailor Sam",
-   "trainerClass": "sailor",
+   "name": "Policeman Sam",
+   "trainerClass": "policeman",
    "team": [
     {
-     "speciesKey": "bibarel",
+     "speciesKey": "hitmontop",
      "level": 47
     },
     {
-     "speciesKey": "floatzel",
+     "speciesKey": "breloom",
      "level": 48
     }
    ]
   },
   {
    "id": "unova-lacunosa-town_t2",
-   "name": "Gentleman Jack",
-   "trainerClass": "gentleman",
+   "name": "Aroma Lady Lena",
+   "trainerClass": "aromaLady",
    "team": [
     {
-     "speciesKey": "staraptor",
+     "speciesKey": "mrMime",
      "level": 48
     },
     {
-     "speciesKey": "bibarel",
+     "speciesKey": "bellossom",
      "level": 49
     },
     {
-     "speciesKey": "ambipom",
+     "speciesKey": "azumarill",
      "level": 50
     }
    ]
@@ -3500,80 +3420,80 @@
  "unova-undella-town": [
   {
    "id": "unova-undella-town_t1",
-   "name": "Channeler Luna",
-   "trainerClass": "channeler",
+   "name": "Chef Victor",
+   "trainerClass": "chef",
    "team": [
     {
-     "speciesKey": "cofagrigus",
+     "speciesKey": "magmortar",
      "level": 50
     },
     {
-     "speciesKey": "jellicent",
+     "speciesKey": "porygon-z",
      "level": 51
     },
     {
-     "speciesKey": "chandelure",
+     "speciesKey": "watchog",
      "level": 52
     }
    ]
   },
   {
    "id": "unova-undella-town_t2",
-   "name": "Tamer Leo",
-   "trainerClass": "tamer",
+   "name": "Dancer Pia",
+   "trainerClass": "dancer",
    "team": [
     {
-     "speciesKey": "noctowl",
+     "speciesKey": "gallade",
      "level": 51
     },
     {
-     "speciesKey": "kingdra",
+     "speciesKey": "musharna",
      "level": 52
     },
     {
-     "speciesKey": "smeargle",
+     "speciesKey": "swoobat",
      "level": 53
     }
    ]
   },
   {
    "id": "unova-undella-town_t3",
-   "name": "Juggler Blake",
-   "trainerClass": "juggler",
+   "name": "Gambler Gavin",
+   "trainerClass": "gambler",
    "team": [
     {
-     "speciesKey": "raichu",
+     "speciesKey": "slaking",
      "level": 52
     },
     {
-     "speciesKey": "ninetales",
+     "speciesKey": "exploud",
      "level": 53
     },
     {
-     "speciesKey": "arcanine",
+     "speciesKey": "delcatty",
      "level": 54
     }
    ]
   },
   {
    "id": "unova-undella-town_t4",
-   "name": "Super Nerd Owen",
-   "trainerClass": "superNerd",
+   "name": "Nurse Isla",
+   "trainerClass": "nurse",
    "team": [
     {
-     "speciesKey": "magnezone",
+     "speciesKey": "togekiss",
      "level": 53
     },
     {
-     "speciesKey": "electivire",
+     "speciesKey": "whimsicott",
      "level": 54
     },
     {
-     "speciesKey": "zebstrika",
+     "speciesKey": "clefable",
      "level": 55
     },
     {
-     "speciesKey": "scolipede",
+     "speciesKey": "wigglytuff",
      "level": 56
     }
    ]
@@ -3582,27 +3502,27 @@
  "unova-humilau-city": [
   {
    "id": "unova-humilau-city_t1",
-   "name": "Youngster Jasper",
-   "trainerClass": "youngster",
+   "name": "Biker Jasper",
+   "trainerClass": "biker",
    "team": [
     {
-     "speciesKey": "bouffalant",
+     "speciesKey": "beedrill",
      "level": 54
     },
     {
-     "speciesKey": "braviary",
+     "speciesKey": "arbok",
      "level": 55
     },
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "nidoqueen",
      "level": 56
     }
    ]
   },
   {
    "id": "unova-humilau-city_t2",
-   "name": "Lass Luna",
-   "trainerClass": "lass",
+   "name": "Schoolkid Dante",
+   "trainerClass": "schoolkid",
    "team": [
     {
      "speciesKey": "snorlax",
@@ -3617,7 +3537,7 @@
      "level": 57
     },
     {
-     "speciesKey": "azumarill",
+     "speciesKey": "miltank",
      "level": 58
     }
    ]
@@ -3626,53 +3546,53 @@
  "unova-lentimas-town": [
   {
    "id": "unova-lentimas-town_t1",
-   "name": "Bug Catcher Felix",
-   "trainerClass": "bugCatcher",
+   "name": "Roughneck Felix",
+   "trainerClass": "roughneck",
    "team": [
     {
-     "speciesKey": "ariados",
+     "speciesKey": "hitmonlee",
      "level": 55
     },
     {
-     "speciesKey": "forretress",
+     "speciesKey": "hitmonchan",
      "level": 56
     },
     {
-     "speciesKey": "scizor",
+     "speciesKey": "heracross",
      "level": 57
     }
    ]
   },
   {
    "id": "unova-lentimas-town_t2",
-   "name": "Hiker Toby",
-   "trainerClass": "hiker",
+   "name": "Parasol Lady Uma",
+   "trainerClass": "parasolLady",
    "team": [
     {
-     "speciesKey": "stunfisk",
+     "speciesKey": "gastrodon",
      "level": 56
     },
     {
-     "speciesKey": "golurk",
+     "speciesKey": "lumineon",
      "level": 57
     },
     {
-     "speciesKey": "sandslash",
+     "speciesKey": "togekiss",
      "level": 58
     }
    ]
   },
   {
    "id": "unova-lentimas-town_t3",
-   "name": "Camper Kenji",
-   "trainerClass": "camper",
+   "name": "Musician Kira",
+   "trainerClass": "musician",
    "team": [
     {
      "speciesKey": "stoutland",
      "level": 57
     },
     {
-     "speciesKey": "simisage",
+     "speciesKey": "musharna",
      "level": 58
     },
     {
@@ -3683,23 +3603,23 @@
   },
   {
    "id": "unova-lentimas-town_t4",
-   "name": "Beauty Bianca",
-   "trainerClass": "beauty",
+   "name": "Preschooler Bruno",
+   "trainerClass": "preschooler",
    "team": [
     {
-     "speciesKey": "noctowl",
+     "speciesKey": "kecleon",
      "level": 58
     },
     {
-     "speciesKey": "azumarill",
+     "speciesKey": "staraptor",
      "level": 59
     },
     {
-     "speciesKey": "granbull",
+     "speciesKey": "bibarel",
      "level": 60
     },
     {
-     "speciesKey": "miltank",
+     "speciesKey": "ambipom",
      "level": 61
     }
    ]
@@ -3708,88 +3628,80 @@
  "unova-black-city": [
   {
    "id": "unova-black-city_t1",
-   "name": "Cooltrainer Mason",
-   "trainerClass": "coolTrainer",
+   "name": "Artist Mason",
+   "trainerClass": "artist",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "dodrio",
      "level": 57
     },
     {
-     "speciesKey": "dragonite",
+     "speciesKey": "kangaskhan",
      "level": 58
     },
     {
-     "speciesKey": "tyranitar",
+     "speciesKey": "tauros",
      "level": 59
-    },
-    {
-     "speciesKey": "arcanine",
-     "level": 60
     }
    ]
   },
   {
    "id": "unova-black-city_t2",
-   "name": "Psychic Claire",
-   "trainerClass": "psychic",
+   "name": "Backpacker Claire",
+   "trainerClass": "backpacker",
    "team": [
     {
-     "speciesKey": "starmie",
+     "speciesKey": "lopunny",
      "level": 58
     },
     {
-     "speciesKey": "mrMime",
+     "speciesKey": "purugly",
      "level": 59
     },
     {
-     "speciesKey": "jynx",
+     "speciesKey": "chatot",
      "level": 60
     }
    ]
   },
   {
    "id": "unova-black-city_t3",
-   "name": "Scientist Sarah",
-   "trainerClass": "scientist",
+   "name": "Pokemon Ranger Sarah",
+   "trainerClass": "pokemonRanger",
    "team": [
     {
-     "speciesKey": "jolteon",
+     "speciesKey": "ambipom",
      "level": 59
     },
     {
-     "speciesKey": "lanturn",
+     "speciesKey": "lopunny",
      "level": 60
     },
     {
-     "speciesKey": "ampharos",
+     "speciesKey": "purugly",
      "level": 61
-    },
-    {
-     "speciesKey": "forretress",
-     "level": 62
     }
    ]
   },
   {
    "id": "unova-black-city_t4",
-   "name": "Ace Trainer Jack",
-   "trainerClass": "ace",
+   "name": "Doctor Jack",
+   "trainerClass": "doctor",
    "team": [
     {
-     "speciesKey": "volcarona",
+     "speciesKey": "bronzong",
      "level": 60
     },
     {
-     "speciesKey": "togekiss",
+     "speciesKey": "gallade",
      "level": 61
     },
     {
-     "speciesKey": "gyarados",
+     "speciesKey": "musharna",
      "level": 62
     },
     {
-     "speciesKey": "electivire",
+     "speciesKey": "swoobat",
      "level": 63
     }
    ]
@@ -3798,31 +3710,27 @@
  "kalos-vaniville-town": [
   {
    "id": "kalos-vaniville-town_t1",
-   "name": "Psychic Vera",
-   "trainerClass": "psychic",
+   "name": "Tamer Zane",
+   "trainerClass": "tamer",
    "team": [
     {
-     "speciesKey": "meditite",
+     "speciesKey": "stantler",
      "level": 5
     }
    ]
   },
   {
    "id": "kalos-vaniville-town_t2",
-   "name": "Scientist Leo",
-   "trainerClass": "scientist",
+   "name": "Juggler Mason",
+   "trainerClass": "juggler",
    "team": [
     {
-     "speciesKey": "blitzle",
+     "speciesKey": "arcanine",
      "level": 6
     },
     {
-     "speciesKey": "emolga",
+     "speciesKey": "ponyta",
      "level": 7
-    },
-    {
-     "speciesKey": "escavalier",
-     "level": 8
     }
    ]
   }
@@ -3830,30 +3738,26 @@
  "kalos-aquacorde-town": [
   {
    "id": "kalos-aquacorde-town_t1",
-   "name": "Ace Trainer Jasper",
-   "trainerClass": "ace",
+   "name": "Super Nerd Alex",
+   "trainerClass": "superNerd",
    "team": [
     {
-     "speciesKey": "glaceon",
+     "speciesKey": "skorupi",
      "level": 9
-    },
-    {
-     "speciesKey": "aerodactyl",
-     "level": 10
     }
    ]
   },
   {
    "id": "kalos-aquacorde-town_t2",
-   "name": "Blackbelt Neil",
-   "trainerClass": "blackbelt",
+   "name": "Fisherman Neil",
+   "trainerClass": "fisherman",
    "team": [
     {
-     "speciesKey": "pancham",
+     "speciesKey": "qwilfish",
      "level": 10
     },
     {
-     "speciesKey": "hawlucha",
+     "speciesKey": "corsola",
      "level": 11
     }
    ]
@@ -3862,48 +3766,48 @@
  "kalos-santalune-city": [
   {
    "id": "kalos-santalune-city_t1",
-   "name": "Swimmer Theo",
-   "trainerClass": "swimmer",
+   "name": "Picnicker Emma",
+   "trainerClass": "picnicker",
    "team": [
     {
-     "speciesKey": "ducklett",
+     "speciesKey": "eevee",
      "level": 14
     }
    ]
   },
   {
    "id": "kalos-santalune-city_t2",
-   "name": "Sailor Ivan",
-   "trainerClass": "sailor",
+   "name": "Bird Keeper Ivan",
+   "trainerClass": "birdKeeper",
    "team": [
     {
-     "speciesKey": "luvdisc",
+     "speciesKey": "yanma",
      "level": 15
     }
    ]
   },
   {
    "id": "kalos-santalune-city_t3",
-   "name": "Gentleman Zane",
-   "trainerClass": "gentleman",
+   "name": "Burglar Zane",
+   "trainerClass": "burglar",
    "team": [
     {
-     "speciesKey": "buneary",
+     "speciesKey": "growlithe",
      "level": 16
     }
    ]
   },
   {
    "id": "kalos-santalune-city_t4",
-   "name": "Channeler Chloe",
-   "trainerClass": "channeler",
+   "name": "Guitarist Owen",
+   "trainerClass": "guitarist",
    "team": [
     {
-     "speciesKey": "duskull",
+     "speciesKey": "voltorb",
      "level": 17
     },
     {
-     "speciesKey": "drifloon",
+     "speciesKey": "jolteon",
      "level": 18
     }
    ]
@@ -3912,37 +3816,37 @@
  "kalos-lumiose-city": [
   {
    "id": "kalos-lumiose-city_t1",
-   "name": "Tamer Mason",
-   "trainerClass": "tamer",
+   "name": "Cowgirl Ruby",
+   "trainerClass": "cowgirl",
    "team": [
     {
-     "speciesKey": "audino",
+     "speciesKey": "zigzagoon",
      "level": 18
     }
    ]
   },
   {
    "id": "kalos-lumiose-city_t2",
-   "name": "Juggler Cody",
-   "trainerClass": "juggler",
+   "name": "Cyclist Cody",
+   "trainerClass": "cyclist",
    "team": [
     {
-     "speciesKey": "tynamo",
+     "speciesKey": "minccino",
      "level": 19
     }
    ]
   },
   {
    "id": "kalos-lumiose-city_t3",
-   "name": "Super Nerd Riley",
-   "trainerClass": "superNerd",
+   "name": "Lady Zelda",
+   "trainerClass": "lady",
    "team": [
     {
-     "speciesKey": "budew",
+     "speciesKey": "diggersby",
      "level": 20
     },
     {
-     "speciesKey": "roserade",
+     "speciesKey": "litleo",
      "level": 21
     }
    ]
@@ -3951,26 +3855,26 @@
  "kalos-camphrier-town": [
   {
    "id": "kalos-camphrier-town_t1",
-   "name": "Youngster Ben",
-   "trainerClass": "youngster",
+   "name": "Pilot Ben",
+   "trainerClass": "pilot",
    "team": [
     {
-     "speciesKey": "audino",
+     "speciesKey": "gligar",
      "level": 22
     }
    ]
   },
   {
    "id": "kalos-camphrier-town_t2",
-   "name": "Lass Lena",
-   "trainerClass": "lass",
+   "name": "Skier Dante",
+   "trainerClass": "skier",
    "team": [
     {
-     "speciesKey": "linoone",
+     "speciesKey": "swinub",
      "level": 23
     },
     {
-     "speciesKey": "swellow",
+     "speciesKey": "delibird",
      "level": 24
     }
    ]
@@ -3979,48 +3883,48 @@
  "kalos-cyllage-city": [
   {
    "id": "kalos-cyllage-city_t1",
-   "name": "Bug Catcher Aaron",
-   "trainerClass": "bugCatcher",
+   "name": "Waiter Aaron",
+   "trainerClass": "waiter",
    "team": [
     {
-     "speciesKey": "karrablast",
+     "speciesKey": "meowth",
      "level": 27
     }
    ]
   },
   {
    "id": "kalos-cyllage-city_t2",
-   "name": "Hiker Nate",
-   "trainerClass": "hiker",
+   "name": "Rich Boy Nate",
+   "trainerClass": "richBoy",
    "team": [
     {
-     "speciesKey": "numel",
+     "speciesKey": "munna",
      "level": 28
     }
    ]
   },
   {
    "id": "kalos-cyllage-city_t3",
-   "name": "Camper Dante",
-   "trainerClass": "camper",
+   "name": "Worker Dante",
+   "trainerClass": "worker",
    "team": [
     {
-     "speciesKey": "audino",
+     "speciesKey": "hitmonchan",
      "level": 29
     }
    ]
   },
   {
    "id": "kalos-cyllage-city_t4",
-   "name": "Beauty Amber",
-   "trainerClass": "beauty",
+   "name": "Idol Amber",
+   "trainerClass": "idol",
    "team": [
     {
-     "speciesKey": "clefable",
+     "speciesKey": "togetic",
      "level": 30
     },
     {
-     "speciesKey": "jigglypuff",
+     "speciesKey": "azumarill",
      "level": 31
     }
    ]
@@ -4029,58 +3933,50 @@
  "kalos-ambrette-town": [
   {
    "id": "kalos-ambrette-town_t1",
-   "name": "Cooltrainer Marco",
-   "trainerClass": "coolTrainer",
+   "name": "Policeman Theo",
+   "trainerClass": "policeman",
    "team": [
     {
-     "speciesKey": "exeggutor",
+     "speciesKey": "meditite",
      "level": 31
     },
     {
-     "speciesKey": "espeon",
+     "speciesKey": "riolu",
      "level": 32
-    },
-    {
-     "speciesKey": "umbreon",
-     "level": 33
     }
    ]
   },
   {
    "id": "kalos-ambrette-town_t2",
-   "name": "Psychic Chloe",
-   "trainerClass": "psychic",
+   "name": "Aroma Lady Amber",
+   "trainerClass": "aromaLady",
    "team": [
     {
-     "speciesKey": "xatu",
+     "speciesKey": "wormadam",
      "level": 32
     },
     {
-     "speciesKey": "espeon",
+     "speciesKey": "cherrim",
      "level": 33
     }
    ]
   },
   {
    "id": "kalos-ambrette-town_t3",
-   "name": "Scientist Sana",
-   "trainerClass": "scientist",
+   "name": "Chef Andre",
+   "trainerClass": "chef",
    "team": [
     {
-     "speciesKey": "ampharos",
+     "speciesKey": "ditto",
      "level": 33
     },
     {
-     "speciesKey": "forretress",
+     "speciesKey": "eevee",
      "level": 34
     },
     {
-     "speciesKey": "steelix",
+     "speciesKey": "flareon",
      "level": 35
-    },
-    {
-     "speciesKey": "scizor",
-     "level": 36
     }
    ]
   }
@@ -4088,53 +3984,49 @@
  "kalos-geosenge-town": [
   {
    "id": "kalos-geosenge-town_t1",
-   "name": "Ace Trainer Ava",
-   "trainerClass": "ace",
+   "name": "Dancer Ava",
+   "trainerClass": "dancer",
    "team": [
     {
-     "speciesKey": "espeon",
+     "speciesKey": "claydol",
      "level": 36
     },
     {
-     "speciesKey": "umbreon",
+     "speciesKey": "chimecho",
      "level": 37
-    },
-    {
-     "speciesKey": "lucario",
-     "level": 38
     }
    ]
   },
   {
    "id": "kalos-geosenge-town_t2",
-   "name": "Blackbelt Jack",
-   "trainerClass": "blackbelt",
+   "name": "Gambler Paige",
+   "trainerClass": "gambler",
    "team": [
     {
-     "speciesKey": "riolu",
+     "speciesKey": "stoutland",
      "level": 37
     },
     {
-     "speciesKey": "lucario",
+     "speciesKey": "liepard",
      "level": 38
     }
    ]
   },
   {
    "id": "kalos-geosenge-town_t3",
-   "name": "Swimmer Finn",
-   "trainerClass": "swimmer",
+   "name": "Nurse Bianca",
+   "trainerClass": "nurse",
    "team": [
     {
-     "speciesKey": "seadra",
+     "speciesKey": "swirlix",
      "level": 38
     },
     {
-     "speciesKey": "seaking",
+     "speciesKey": "slurpuff",
      "level": 39
     },
     {
-     "speciesKey": "staryu",
+     "speciesKey": "sylveon",
      "level": 40
     }
    ]
@@ -4143,64 +4035,64 @@
  "kalos-shalour-city": [
   {
    "id": "kalos-shalour-city_t1",
-   "name": "Sailor Jack",
-   "trainerClass": "sailor",
+   "name": "Biker Ivan",
+   "trainerClass": "biker",
    "team": [
     {
-     "speciesKey": "hitmontop",
+     "speciesKey": "nidoqueen",
      "level": 40
     },
     {
-     "speciesKey": "lombre",
+     "speciesKey": "nidorino",
      "level": 41
     }
    ]
   },
   {
    "id": "kalos-shalour-city_t2",
-   "name": "Gentleman Zeke",
-   "trainerClass": "gentleman",
+   "name": "Schoolkid Seth",
+   "trainerClass": "schoolkid",
    "team": [
     {
-     "speciesKey": "furfrou",
+     "speciesKey": "lopunny",
      "level": 41
     },
     {
-     "speciesKey": "meowstic",
+     "speciesKey": "purugly",
      "level": 42
     }
    ]
   },
   {
    "id": "kalos-shalour-city_t3",
-   "name": "Channeler Hazel",
-   "trainerClass": "channeler",
+   "name": "Roughneck Mason",
+   "trainerClass": "roughneck",
    "team": [
     {
-     "speciesKey": "golett",
+     "speciesKey": "sawk",
      "level": 42
     },
     {
-     "speciesKey": "doublade",
+     "speciesKey": "scrafty",
      "level": 43
     }
    ]
   },
   {
    "id": "kalos-shalour-city_t4",
-   "name": "Tamer Cody",
-   "trainerClass": "tamer",
+   "name": "Parasol Lady Alice",
+   "trainerClass": "parasolLady",
    "team": [
     {
-     "speciesKey": "wigglytuff",
+     "speciesKey": "ludicolo",
      "level": 43
     },
     {
-     "speciesKey": "persian",
+     "speciesKey": "pelipper",
      "level": 44
     },
     {
-     "speciesKey": "farfetchd",
+     "speciesKey": "gardevoir",
      "level": 45
     }
    ]
@@ -4209,38 +4101,38 @@
  "kalos-coumarine-city": [
   {
    "id": "kalos-coumarine-city_t1",
-   "name": "Juggler Theo",
-   "trainerClass": "juggler",
+   "name": "Musician Oscar",
+   "trainerClass": "musician",
    "team": [
     {
-     "speciesKey": "simisear",
+     "speciesKey": "gallade",
      "level": 44
     },
     {
-     "speciesKey": "zebstrika",
+     "speciesKey": "watchog",
      "level": 45
     }
    ]
   },
   {
    "id": "kalos-coumarine-city_t2",
-   "name": "Super Nerd Kai",
-   "trainerClass": "superNerd",
+   "name": "Preschooler Ella",
+   "trainerClass": "preschooler",
    "team": [
     {
-     "speciesKey": "skrelp",
+     "speciesKey": "chatot",
      "level": 45
     },
     {
-     "speciesKey": "heliolisk",
+     "speciesKey": "lickilicky",
      "level": 46
     }
    ]
   },
   {
    "id": "kalos-coumarine-city_t3",
-   "name": "Youngster Andre",
-   "trainerClass": "youngster",
+   "name": "Artist Vera",
+   "trainerClass": "artist",
    "team": [
     {
      "speciesKey": "cinccino",
@@ -4260,49 +4152,49 @@
  "kalos-laverre-city": [
   {
    "id": "kalos-laverre-city_t1",
-   "name": "Lass Vera",
-   "trainerClass": "lass",
+   "name": "Backpacker Kira",
+   "trainerClass": "backpacker",
    "team": [
     {
-     "speciesKey": "kangaskhan",
+     "speciesKey": "quagsire",
      "level": 49
     },
     {
-     "speciesKey": "mrMime",
+     "speciesKey": "steelix",
      "level": 50
     }
    ]
   },
   {
    "id": "kalos-laverre-city_t2",
-   "name": "Bug Catcher Toby",
-   "trainerClass": "bugCatcher",
+   "name": "Pokemon Ranger Bruno",
+   "trainerClass": "pokemonRanger",
    "team": [
     {
-     "speciesKey": "armaldo",
+     "speciesKey": "persian",
      "level": 50
     },
     {
-     "speciesKey": "kricketune",
+     "speciesKey": "victreebel",
      "level": 51
     }
    ]
   },
   {
    "id": "kalos-laverre-city_t3",
-   "name": "Hiker Kenji",
-   "trainerClass": "hiker",
+   "name": "Doctor Paul",
+   "trainerClass": "doctor",
    "team": [
     {
-     "speciesKey": "seismitoad",
+     "speciesKey": "wobbuffet",
      "level": 51
     },
     {
-     "speciesKey": "krookodile",
+     "speciesKey": "gardevoir",
      "level": 52
     },
     {
-     "speciesKey": "crustle",
+     "speciesKey": "medicham",
      "level": 53
     }
    ]
@@ -4311,61 +4203,61 @@
  "kalos-dendemille-town": [
   {
    "id": "kalos-dendemille-town_t1",
-   "name": "Camper Mason",
-   "trainerClass": "camper",
+   "name": "Veteran Silas",
+   "trainerClass": "veteran",
    "team": [
     {
-     "speciesKey": "roserade",
+     "speciesKey": "salamence",
      "level": 53
     },
     {
-     "speciesKey": "wormadam",
+     "speciesKey": "archeops",
      "level": 54
     },
     {
-     "speciesKey": "cherrim",
+     "speciesKey": "arcanine",
      "level": 55
     }
    ]
   },
   {
    "id": "kalos-dendemille-town_t2",
-   "name": "Beauty Lena",
-   "trainerClass": "beauty",
+   "name": "Medium Jade",
+   "trainerClass": "medium",
    "team": [
     {
-     "speciesKey": "fearow",
+     "speciesKey": "sableye",
      "level": 54
     },
     {
-     "speciesKey": "clefable",
+     "speciesKey": "banette",
      "level": 55
     },
     {
-     "speciesKey": "wigglytuff",
+     "speciesKey": "drifblim",
      "level": 56
     }
    ]
   },
   {
    "id": "kalos-dendemille-town_t3",
-   "name": "Cooltrainer Ben",
-   "trainerClass": "coolTrainer",
+   "name": "Youngster Riley",
+   "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "lucario",
+     "speciesKey": "castform",
      "level": 55
     },
     {
-     "speciesKey": "dusknoir",
+     "speciesKey": "kecleon",
      "level": 56
     },
     {
-     "speciesKey": "yanmega",
+     "speciesKey": "staraptor",
      "level": 57
     },
     {
-     "speciesKey": "slaking",
+     "speciesKey": "bibarel",
      "level": 58
     }
    ]
@@ -4374,88 +4266,80 @@
  "kalos-anistar-city": [
   {
    "id": "kalos-anistar-city_t1",
-   "name": "Psychic Lara",
-   "trainerClass": "psychic",
+   "name": "Lass Ava",
+   "trainerClass": "lass",
    "team": [
     {
-     "speciesKey": "gallade",
+     "speciesKey": "gardevoir",
      "level": 58
     },
     {
-     "speciesKey": "musharna",
+     "speciesKey": "slaking",
      "level": 59
     },
     {
-     "speciesKey": "swoobat",
+     "speciesKey": "exploud",
      "level": 60
     }
    ]
   },
   {
    "id": "kalos-anistar-city_t2",
-   "name": "Scientist Caleb",
-   "trainerClass": "scientist",
+   "name": "Bug Catcher Blake",
+   "trainerClass": "bugCatcher",
    "team": [
     {
-     "speciesKey": "dedenne",
+     "speciesKey": "escavalier",
      "level": 59
     },
     {
-     "speciesKey": "klefki",
+     "speciesKey": "galvantula",
      "level": 60
     },
     {
-     "speciesKey": "raichu",
+     "speciesKey": "accelgor",
      "level": 61
-    },
-    {
-     "speciesKey": "electrode",
-     "level": 62
     }
    ]
   },
   {
    "id": "kalos-anistar-city_t3",
-   "name": "Ace Trainer Quinn",
-   "trainerClass": "ace",
+   "name": "Hiker Owen",
+   "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "volcarona",
+     "speciesKey": "kabutops",
      "level": 60
     },
     {
-     "speciesKey": "gyarados",
+     "speciesKey": "aerodactyl",
      "level": 61
     },
     {
-     "speciesKey": "electivire",
+     "speciesKey": "sudowoodo",
      "level": 62
-    },
-    {
-     "speciesKey": "crobat",
-     "level": 63
     }
    ]
   },
   {
    "id": "kalos-anistar-city_t4",
-   "name": "Blackbelt Felix",
-   "trainerClass": "blackbelt",
+   "name": "Camper Felix",
+   "trainerClass": "camper",
    "team": [
     {
-     "speciesKey": "pangoro",
+     "speciesKey": "simisage",
      "level": 61
     },
     {
-     "speciesKey": "hawlucha",
+     "speciesKey": "unfezant",
      "level": 62
     },
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "audino",
      "level": 63
     },
     {
-     "speciesKey": "machamp",
+     "speciesKey": "leavanny",
      "level": 64
     }
    ]
@@ -4464,61 +4348,65 @@
  "kalos-couriway-town": [
   {
    "id": "kalos-couriway-town_t1",
-   "name": "Swimmer Elliot",
-   "trainerClass": "swimmer",
+   "name": "Beauty Ruby",
+   "trainerClass": "beauty",
    "team": [
     {
-     "speciesKey": "gyarados",
+     "speciesKey": "lickilicky",
      "level": 62
     },
     {
-     "speciesKey": "lapras",
+     "speciesKey": "togekiss",
      "level": 63
     },
     {
-     "speciesKey": "vaporeon",
+     "speciesKey": "porygon-z",
      "level": 64
     }
    ]
   },
   {
    "id": "kalos-couriway-town_t2",
-   "name": "Sailor Hugo",
-   "trainerClass": "sailor",
+   "name": "Cooltrainer Theo",
+   "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "kabutops",
+     "speciesKey": "florges",
      "level": 63
     },
     {
-     "speciesKey": "lanturn",
+     "speciesKey": "volcarona",
      "level": 64
     },
     {
-     "speciesKey": "azumarill",
+     "speciesKey": "gyarados",
      "level": 65
+    },
+    {
+     "speciesKey": "electivire",
+     "level": 66
     }
    ]
   },
   {
    "id": "kalos-couriway-town_t3",
-   "name": "Gentleman Xander",
-   "trainerClass": "gentleman",
+   "name": "Psychic Julia",
+   "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "heliolisk",
+     "speciesKey": "gallade",
      "level": 64
     },
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "musharna",
      "level": 65
     },
     {
-     "speciesKey": "raticate",
+     "speciesKey": "swoobat",
      "level": 66
     },
     {
-     "speciesKey": "fearow",
+     "speciesKey": "sigilyph",
      "level": 67
     }
    ]
@@ -4527,61 +4415,69 @@
  "kalos-snowbelle-city": [
   {
    "id": "kalos-snowbelle-city_t1",
-   "name": "Channeler Sofia",
-   "trainerClass": "channeler",
+   "name": "Scientist Oscar",
+   "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "trevenant",
+     "speciesKey": "dedenne",
      "level": 66
     },
     {
-     "speciesKey": "gourgeist",
+     "speciesKey": "klefki",
      "level": 67
     },
     {
-     "speciesKey": "drifblim",
+     "speciesKey": "electrode",
      "level": 68
+    },
+    {
+     "speciesKey": "jolteon",
+     "level": 69
     }
    ]
   },
   {
    "id": "kalos-snowbelle-city_t2",
-   "name": "Tamer Elliot",
-   "trainerClass": "tamer",
+   "name": "Ace Trainer Ella",
+   "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "furret",
+     "speciesKey": "florges",
      "level": 67
     },
     {
-     "speciesKey": "noctowl",
+     "speciesKey": "volcarona",
      "level": 68
     },
     {
      "speciesKey": "kingdra",
      "level": 69
+    },
+    {
+     "speciesKey": "electivire",
+     "level": 70
     }
    ]
   },
   {
    "id": "kalos-snowbelle-city_t3",
-   "name": "Juggler Toby",
-   "trainerClass": "juggler",
+   "name": "Blackbelt Theo",
+   "trainerClass": "blackbelt",
    "team": [
     {
-     "speciesKey": "rapidash",
+     "speciesKey": "hitmonlee",
      "level": 68
     },
     {
-     "speciesKey": "electrode",
+     "speciesKey": "hitmonchan",
      "level": 69
     },
     {
-     "speciesKey": "jolteon",
+     "speciesKey": "hitmontop",
      "level": 70
     },
     {
-     "speciesKey": "flareon",
+     "speciesKey": "breloom",
      "level": 71
     }
    ]
@@ -4590,42 +4486,42 @@
  "kalos-kiloude-city": [
   {
    "id": "kalos-kiloude-city_t1",
-   "name": "Super Nerd Ryan",
-   "trainerClass": "superNerd",
+   "name": "Swimmer Paul",
+   "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "drapion",
+     "speciesKey": "ludicolo",
      "level": 69
     },
     {
-     "speciesKey": "toxicroak",
+     "speciesKey": "pelipper",
      "level": 70
     },
     {
-     "speciesKey": "magnezone",
+     "speciesKey": "wailord",
      "level": 71
     }
    ]
   },
   {
    "id": "kalos-kiloude-city_t2",
-   "name": "Youngster Ivan",
-   "trainerClass": "youngster",
+   "name": "Sailor Ivan",
+   "trainerClass": "sailor",
    "team": [
     {
-     "speciesKey": "bouffalant",
+     "speciesKey": "whiscash",
      "level": 70
     },
     {
-     "speciesKey": "braviary",
+     "speciesKey": "crawdaunt",
      "level": 71
     },
     {
-     "speciesKey": "diggersby",
+     "speciesKey": "milotic",
      "level": 72
     },
     {
-     "speciesKey": "furfrou",
+     "speciesKey": "walrein",
      "level": 73
     }
    ]
@@ -4634,35 +4530,27 @@
  "alola-iki-town": [
   {
    "id": "alola-iki-town_t1",
-   "name": "Scientist Vera",
-   "trainerClass": "scientist",
+   "name": "Blackbelt Andre",
+   "trainerClass": "blackbelt",
    "team": [
     {
-     "speciesKey": "skarmory",
+     "speciesKey": "heracross",
      "level": 5
-    },
-    {
-     "speciesKey": "elekid",
-     "level": 6
     }
    ]
   },
   {
    "id": "alola-iki-town_t2",
-   "name": "Ace Trainer Leo",
-   "trainerClass": "ace",
+   "name": "Swimmer Leo",
+   "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "jolteon",
+     "speciesKey": "huntail",
      "level": 6
     },
     {
-     "speciesKey": "espeon",
+     "speciesKey": "gorebyss",
      "level": 7
-    },
-    {
-     "speciesKey": "umbreon",
-     "level": 8
     }
    ]
   }
@@ -4670,26 +4558,26 @@
  "alola-hauoli-city": [
   {
    "id": "alola-hauoli-city_t1",
-   "name": "Blackbelt Eli",
-   "trainerClass": "blackbelt",
+   "name": "Sailor Eli",
+   "trainerClass": "sailor",
    "team": [
     {
-     "speciesKey": "throh",
+     "speciesKey": "tyrogue",
      "level": 16
     }
    ]
   },
   {
    "id": "alola-hauoli-city_t2",
-   "name": "Swimmer Sarah",
-   "trainerClass": "swimmer",
+   "name": "Gentleman Silas",
+   "trainerClass": "gentleman",
    "team": [
     {
-     "speciesKey": "spheal",
+     "speciesKey": "porygon-z",
      "level": 17
     },
     {
-     "speciesKey": "clamperl",
+     "speciesKey": "patrat",
      "level": 18
     }
    ]
@@ -4698,37 +4586,37 @@
  "alola-po-town": [
   {
    "id": "alola-po-town_t1",
-   "name": "Sailor Jack",
-   "trainerClass": "sailor",
+   "name": "Channeler Cara",
+   "trainerClass": "channeler",
    "team": [
     {
-     "speciesKey": "chinchou",
+     "speciesKey": "litwick",
      "level": 19
     }
    ]
   },
   {
    "id": "alola-po-town_t2",
-   "name": "Gentleman Zeke",
-   "trainerClass": "gentleman",
+   "name": "Tamer Zeke",
+   "trainerClass": "tamer",
    "team": [
     {
-     "speciesKey": "jigglypuff",
+     "speciesKey": "miltank",
      "level": 20
     }
    ]
   },
   {
    "id": "alola-po-town_t3",
-   "name": "Channeler Hana",
-   "trainerClass": "channeler",
+   "name": "Juggler Miles",
+   "trainerClass": "juggler",
    "team": [
     {
-     "speciesKey": "dhelmise",
+     "speciesKey": "electrike",
      "level": 21
     },
     {
-     "speciesKey": "gastly",
+     "speciesKey": "plusle",
      "level": 22
     }
    ]
@@ -4737,48 +4625,48 @@
  "alola-paniola-town": [
   {
    "id": "alola-paniola-town_t1",
-   "name": "Tamer Jasper",
-   "trainerClass": "tamer",
+   "name": "Super Nerd Jasper",
+   "trainerClass": "superNerd",
    "team": [
     {
-     "speciesKey": "tauros",
+     "speciesKey": "nidoking",
      "level": 25
     }
    ]
   },
   {
    "id": "alola-paniola-town_t2",
-   "name": "Juggler Aaron",
-   "trainerClass": "juggler",
+   "name": "Fisherman Aaron",
+   "trainerClass": "fisherman",
    "team": [
     {
-     "speciesKey": "electrike",
+     "speciesKey": "lapras",
      "level": 26
     }
    ]
   },
   {
    "id": "alola-paniola-town_t3",
-   "name": "Super Nerd Nate",
-   "trainerClass": "superNerd",
+   "name": "Picnicker Amber",
+   "trainerClass": "picnicker",
    "team": [
     {
-     "speciesKey": "jolteon",
+     "speciesKey": "sunflora",
      "level": 27
     }
    ]
   },
   {
    "id": "alola-paniola-town_t4",
-   "name": "Youngster Dante",
-   "trainerClass": "youngster",
+   "name": "Bird Keeper Dante",
+   "trainerClass": "birdKeeper",
    "team": [
     {
-     "speciesKey": "bewear",
+     "speciesKey": "togetic",
      "level": 28
     },
     {
-     "speciesKey": "oranguru",
+     "speciesKey": "xatu",
      "level": 29
     }
    ]
@@ -4787,49 +4675,49 @@
  "alola-heahea-city": [
   {
    "id": "alola-heahea-city_t1",
-   "name": "Lass Luna",
-   "trainerClass": "lass",
+   "name": "Burglar Blake",
+   "trainerClass": "burglar",
    "team": [
     {
-     "speciesKey": "aipom",
+     "speciesKey": "heatmor",
      "level": 31
     },
     {
-     "speciesKey": "girafarig",
+     "speciesKey": "deino",
      "level": 32
     }
    ]
   },
   {
    "id": "alola-heahea-city_t2",
-   "name": "Bug Catcher Owen",
-   "trainerClass": "bugCatcher",
+   "name": "Guitarist Zelda",
+   "trainerClass": "guitarist",
    "team": [
     {
-     "speciesKey": "yanma",
+     "speciesKey": "pichu",
      "level": 32
     },
     {
-     "speciesKey": "forretress",
+     "speciesKey": "ampharos",
      "level": 33
     }
    ]
   },
   {
    "id": "alola-heahea-city_t3",
-   "name": "Hiker Felix",
-   "trainerClass": "hiker",
+   "name": "Cowgirl Sofia",
+   "trainerClass": "cowgirl",
    "team": [
     {
-     "speciesKey": "nidoking",
+     "speciesKey": "linoone",
      "level": 33
     },
     {
-     "speciesKey": "dugtrio",
+     "speciesKey": "swellow",
      "level": 34
     },
     {
-     "speciesKey": "graveler",
+     "speciesKey": "vigoroth",
      "level": 35
     }
    ]
@@ -4838,8 +4726,8 @@
  "alola-konikoni-city": [
   {
    "id": "alola-konikoni-city_t1",
-   "name": "Camper Blake",
-   "trainerClass": "camper",
+   "name": "Cyclist Blake",
+   "trainerClass": "cyclist",
    "team": [
     {
      "speciesKey": "tauros",
@@ -4853,8 +4741,8 @@
   },
   {
    "id": "alola-konikoni-city_t2",
-   "name": "Beauty Isla",
-   "trainerClass": "beauty",
+   "name": "Lady Isla",
+   "trainerClass": "lady",
    "team": [
     {
      "speciesKey": "lickilicky",
@@ -4874,46 +4762,42 @@
  "alola-malie-city": [
   {
    "id": "alola-malie-city_t1",
-   "name": "Cooltrainer Paul",
-   "trainerClass": "coolTrainer",
+   "name": "Pilot Cody",
+   "trainerClass": "pilot",
    "team": [
     {
-     "speciesKey": "aggron",
+     "speciesKey": "minior",
      "level": 53
     },
     {
-     "speciesKey": "golisopod",
+     "speciesKey": "butterfree",
      "level": 54
     },
     {
-     "speciesKey": "espeon",
+     "speciesKey": "pidgeot",
      "level": 55
-    },
-    {
-     "speciesKey": "umbreon",
-     "level": 56
     }
    ]
   },
   {
    "id": "alola-malie-city_t2",
-   "name": "Psychic Fiona",
-   "trainerClass": "psychic",
+   "name": "Skier Fiona",
+   "trainerClass": "skier",
    "team": [
     {
-     "speciesKey": "meowstic",
+     "speciesKey": "cloyster",
      "level": 54
     },
     {
-     "speciesKey": "malamar",
+     "speciesKey": "jynx",
      "level": 55
     },
     {
-     "speciesKey": "oranguru",
+     "speciesKey": "lapras",
      "level": 56
     },
     {
-     "speciesKey": "bruxish",
+     "speciesKey": "delibird",
      "level": 57
     }
    ]
@@ -4922,35 +4806,27 @@
  "galar-postwick": [
   {
    "id": "galar-postwick_t1",
-   "name": "Scientist Kenji",
-   "trainerClass": "scientist",
+   "name": "Policeman Felix",
+   "trainerClass": "policeman",
    "team": [
     {
-     "speciesKey": "togedemaru",
+     "speciesKey": "mankey",
      "level": 5
-    },
-    {
-     "speciesKey": "yamper",
-     "level": 6
     }
    ]
   },
   {
    "id": "galar-postwick_t2",
-   "name": "Ace Trainer Ava",
-   "trainerClass": "ace",
+   "name": "Aroma Lady Lily",
+   "trainerClass": "aromaLady",
    "team": [
     {
-     "speciesKey": "espeon",
+     "speciesKey": "whimsicott",
      "level": 6
     },
     {
-     "speciesKey": "umbreon",
+     "speciesKey": "petilil",
      "level": 7
-    },
-    {
-     "speciesKey": "lucario",
-     "level": 8
     }
    ]
   }
@@ -4958,26 +4834,26 @@
  "galar-wedgehurst": [
   {
    "id": "galar-wedgehurst_t1",
-   "name": "Blackbelt Liam",
-   "trainerClass": "blackbelt",
+   "name": "Chef Liam",
+   "trainerClass": "chef",
    "team": [
     {
-     "speciesKey": "hawlucha",
+     "speciesKey": "vulpix",
      "level": 12
     }
    ]
   },
   {
    "id": "galar-wedgehurst_t2",
-   "name": "Swimmer Ava",
-   "trainerClass": "swimmer",
+   "name": "Dancer Ava",
+   "trainerClass": "dancer",
    "team": [
     {
-     "speciesKey": "dracovish",
+     "speciesKey": "exeggutor",
      "level": 13
     },
     {
-     "speciesKey": "arctovish",
+     "speciesKey": "starmie",
      "level": 14
     }
    ]
@@ -4986,48 +4862,48 @@
  "galar-motostoke": [
   {
    "id": "galar-motostoke_t1",
-   "name": "Sailor Nate",
-   "trainerClass": "sailor",
+   "name": "Gambler Mason",
+   "trainerClass": "gambler",
    "team": [
     {
-     "speciesKey": "riolu",
+     "speciesKey": "sneasel",
      "level": 19
     }
    ]
   },
   {
    "id": "galar-motostoke_t2",
-   "name": "Gentleman Dante",
-   "trainerClass": "gentleman",
+   "name": "Nurse Emma",
+   "trainerClass": "nurse",
    "team": [
     {
-     "speciesKey": "skwovet",
+     "speciesKey": "whimsicott",
      "level": 20
     }
    ]
   },
   {
    "id": "galar-motostoke_t3",
-   "name": "Channeler Wendy",
-   "trainerClass": "channeler",
+   "name": "Biker Sam",
+   "trainerClass": "biker",
    "team": [
     {
-     "speciesKey": "trevenant",
+     "speciesKey": "gastly",
      "level": 21
     }
    ]
   },
   {
    "id": "galar-motostoke_t4",
-   "name": "Tamer Jack",
-   "trainerClass": "tamer",
+   "name": "Schoolkid Jack",
+   "trainerClass": "schoolkid",
    "team": [
     {
-     "speciesKey": "furfrou",
+     "speciesKey": "porygon-z",
      "level": 22
     },
     {
-     "speciesKey": "helioptile",
+     "speciesKey": "watchog",
      "level": 23
     }
    ]
@@ -5036,64 +4912,64 @@
  "galar-turffield": [
   {
    "id": "galar-turffield_t1",
-   "name": "Juggler Hiro",
-   "trainerClass": "juggler",
+   "name": "Roughneck Hiro",
+   "trainerClass": "roughneck",
    "team": [
     {
-     "speciesKey": "magby",
+     "speciesKey": "throh",
      "level": 29
     },
     {
-     "speciesKey": "electrike",
+     "speciesKey": "sawk",
      "level": 30
     }
    ]
   },
   {
    "id": "galar-turffield_t2",
-   "name": "Super Nerd Wesley",
-   "trainerClass": "superNerd",
+   "name": "Parasol Lady Rosa",
+   "trainerClass": "parasolLady",
    "team": [
     {
-     "speciesKey": "crobat",
+     "speciesKey": "cleffa",
      "level": 30
     },
     {
-     "speciesKey": "lanturn",
+     "speciesKey": "igglybuff",
      "level": 31
     }
    ]
   },
   {
    "id": "galar-turffield_t3",
-   "name": "Youngster Luca",
-   "trainerClass": "youngster",
+   "name": "Musician Olivia",
+   "trainerClass": "musician",
    "team": [
     {
-     "speciesKey": "azurill",
+     "speciesKey": "slowking",
      "level": 31
     },
     {
-     "speciesKey": "skitty",
+     "speciesKey": "unown",
      "level": 32
     }
    ]
   },
   {
    "id": "galar-turffield_t4",
-   "name": "Lass Zoe",
-   "trainerClass": "lass",
+   "name": "Preschooler Felix",
+   "trainerClass": "preschooler",
    "team": [
     {
-     "speciesKey": "skitty",
+     "speciesKey": "ambipom",
      "level": 32
     },
     {
-     "speciesKey": "delcatty",
+     "speciesKey": "buneary",
      "level": 33
     },
     {
-     "speciesKey": "mawile",
+     "speciesKey": "lopunny",
      "level": 34
     }
    ]
@@ -5102,38 +4978,38 @@
  "galar-hulbury": [
   {
    "id": "galar-hulbury_t1",
-   "name": "Bug Catcher Noah",
-   "trainerClass": "bugCatcher",
+   "name": "Artist Nate",
+   "trainerClass": "artist",
    "team": [
     {
-     "speciesKey": "pinsir",
+     "speciesKey": "spinda",
      "level": 36
     },
     {
-     "speciesKey": "ledian",
+     "speciesKey": "zangoose",
      "level": 37
     }
    ]
   },
   {
    "id": "galar-hulbury_t2",
-   "name": "Hiker Eli",
-   "trainerClass": "hiker",
+   "name": "Backpacker Daisy",
+   "trainerClass": "backpacker",
    "team": [
     {
-     "speciesKey": "stonjourner",
+     "speciesKey": "skitty",
      "level": 37
     },
     {
-     "speciesKey": "sandslash",
+     "speciesKey": "delcatty",
      "level": 38
     }
    ]
   },
   {
    "id": "galar-hulbury_t3",
-   "name": "Camper Silas",
-   "trainerClass": "camper",
+   "name": "Pokemon Ranger Tara",
+   "trainerClass": "pokemonRanger",
    "team": [
     {
      "speciesKey": "victreebel",
@@ -5153,23 +5029,23 @@
  "galar-hammerlocke": [
   {
    "id": "galar-hammerlocke_t1",
-   "name": "Beauty Luna",
-   "trainerClass": "beauty",
+   "name": "Doctor Victor",
+   "trainerClass": "doctor",
    "team": [
     {
-     "speciesKey": "cinccino",
+     "speciesKey": "wobbuffet",
      "level": 42
     },
     {
-     "speciesKey": "sawsbuck",
+     "speciesKey": "gardevoir",
      "level": 43
     }
    ]
   },
   {
    "id": "galar-hammerlocke_t2",
-   "name": "Cooltrainer Lara",
-   "trainerClass": "coolTrainer",
+   "name": "Veteran Lara",
+   "trainerClass": "veteran",
    "team": [
     {
      "speciesKey": "golisopod",
@@ -5178,28 +5054,24 @@
     {
      "speciesKey": "espeon",
      "level": 44
-    },
-    {
-     "speciesKey": "umbreon",
-     "level": 45
     }
    ]
   },
   {
    "id": "galar-hammerlocke_t3",
-   "name": "Psychic Caleb",
-   "trainerClass": "psychic",
+   "name": "Medium Caleb",
+   "trainerClass": "medium",
    "team": [
     {
-     "speciesKey": "swoobat",
+     "speciesKey": "froslass",
      "level": 44
     },
     {
-     "speciesKey": "sigilyph",
+     "speciesKey": "rotom",
      "level": 45
     },
     {
-     "speciesKey": "gothitelle",
+     "speciesKey": "cofagrigus",
      "level": 46
     }
    ]
@@ -5208,72 +5080,64 @@
  "galar-stow-on-side": [
   {
    "id": "galar-stow-on-side_t1",
-   "name": "Scientist Wade",
-   "trainerClass": "scientist",
+   "name": "Youngster Wade",
+   "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "durant",
+     "speciesKey": "linoone",
      "level": 46
     },
     {
-     "speciesKey": "aegislash",
+     "speciesKey": "swellow",
      "level": 47
-    },
-    {
-     "speciesKey": "heliolisk",
-     "level": 48
     }
    ]
   },
   {
    "id": "galar-stow-on-side_t2",
-   "name": "Ace Trainer Lena",
-   "trainerClass": "ace",
+   "name": "Lass Aria",
+   "trainerClass": "lass",
    "team": [
     {
-     "speciesKey": "golisopod",
+     "speciesKey": "farfetchd",
      "level": 47
     },
     {
-     "speciesKey": "espeon",
+     "speciesKey": "dodrio",
      "level": 48
-    },
-    {
-     "speciesKey": "umbreon",
-     "level": 49
     }
    ]
   },
   {
    "id": "galar-stow-on-side_t3",
-   "name": "Blackbelt Bruno",
-   "trainerClass": "blackbelt",
+   "name": "Bug Catcher Bruno",
+   "trainerClass": "bugCatcher",
    "team": [
     {
-     "speciesKey": "machamp",
+     "speciesKey": "golisopod",
      "level": 48
     },
     {
-     "speciesKey": "hitmonlee",
+     "speciesKey": "orbeetle",
      "level": 49
     }
    ]
   },
   {
    "id": "galar-stow-on-side_t4",
-   "name": "Swimmer Rex",
-   "trainerClass": "swimmer",
+   "name": "Hiker Paul",
+   "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "mantine",
+     "speciesKey": "piloswine",
      "level": 49
     },
     {
-     "speciesKey": "kingdra",
+     "speciesKey": "corsola",
      "level": 50
     },
     {
-     "speciesKey": "ludicolo",
+     "speciesKey": "donphan",
      "level": 51
     }
    ]
@@ -5282,80 +5146,84 @@
  "galar-circhester": [
   {
    "id": "galar-circhester_t1",
-   "name": "Sailor Joel",
-   "trainerClass": "sailor",
+   "name": "Camper Joel",
+   "trainerClass": "camper",
    "team": [
     {
-     "speciesKey": "quagsire",
+     "speciesKey": "dhelmise",
      "level": 56
     },
     {
-     "speciesKey": "slowking",
+     "speciesKey": "greedent",
      "level": 57
     },
     {
-     "speciesKey": "qwilfish",
+     "speciesKey": "eldegoss",
      "level": 58
     }
    ]
   },
   {
    "id": "galar-circhester_t2",
-   "name": "Gentleman Alex",
-   "trainerClass": "gentleman",
+   "name": "Beauty Bianca",
+   "trainerClass": "beauty",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "noctowl",
      "level": 57
     },
     {
-     "speciesKey": "exploud",
+     "speciesKey": "azumarill",
      "level": 58
     },
     {
-     "speciesKey": "delcatty",
+     "speciesKey": "granbull",
      "level": 59
     }
    ]
   },
   {
    "id": "galar-circhester_t3",
-   "name": "Channeler Rosa",
-   "trainerClass": "channeler",
+   "name": "Cooltrainer Zoe",
+   "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "dhelmise",
+     "speciesKey": "florges",
      "level": 58
     },
     {
-     "speciesKey": "polteageist",
+     "speciesKey": "ursaluna",
      "level": 59
     },
     {
-     "speciesKey": "cursola",
+     "speciesKey": "gyarados",
      "level": 60
+    },
+    {
+     "speciesKey": "electivire",
+     "level": 61
     }
    ]
   },
   {
    "id": "galar-circhester_t4",
-   "name": "Tamer Dev",
-   "trainerClass": "tamer",
+   "name": "Psychic Mason",
+   "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "lickilicky",
+     "speciesKey": "meowstic",
      "level": 59
     },
     {
-     "speciesKey": "porygon-z",
+     "speciesKey": "malamar",
      "level": 60
     },
     {
-     "speciesKey": "watchog",
+     "speciesKey": "oranguru",
      "level": 61
     },
     {
-     "speciesKey": "stoutland",
+     "speciesKey": "bruxish",
      "level": 62
     }
    ]
@@ -5364,80 +5232,88 @@
  "galar-spikemuth": [
   {
    "id": "galar-spikemuth_t1",
-   "name": "Juggler Oscar",
-   "trainerClass": "juggler",
+   "name": "Scientist Sofia",
+   "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "heatmor",
+     "speciesKey": "klinklang",
      "level": 63
     },
     {
-     "speciesKey": "volcarona",
+     "speciesKey": "eelektross",
      "level": 64
     },
     {
-     "speciesKey": "talonflame",
+     "speciesKey": "stunfisk",
      "level": 65
+    },
+    {
+     "speciesKey": "bisharp",
+     "level": 66
     }
    ]
   },
   {
    "id": "galar-spikemuth_t2",
-   "name": "Super Nerd Elliot",
-   "trainerClass": "superNerd",
+   "name": "Ace Trainer Jasper",
+   "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "salazzle",
+     "speciesKey": "slaking",
      "level": 64
     },
     {
-     "speciesKey": "togedemaru",
+     "speciesKey": "dragonite",
      "level": 65
     },
     {
-     "speciesKey": "boltund",
+     "speciesKey": "tyranitar",
      "level": 66
+    },
+    {
+     "speciesKey": "hydreigon",
+     "level": 67
     }
    ]
   },
   {
    "id": "galar-spikemuth_t3",
-   "name": "Youngster Theo",
-   "trainerClass": "youngster",
+   "name": "Blackbelt Theo",
+   "trainerClass": "blackbelt",
    "team": [
     {
-     "speciesKey": "fearow",
+     "speciesKey": "mienshao",
      "level": 65
     },
     {
-     "speciesKey": "wigglytuff",
+     "speciesKey": "pangoro",
      "level": 66
     },
     {
-     "speciesKey": "persian",
+     "speciesKey": "bewear",
      "level": 67
     }
    ]
   },
   {
    "id": "galar-spikemuth_t4",
-   "name": "Lass Ella",
-   "trainerClass": "lass",
+   "name": "Swimmer Nina",
+   "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "purugly",
+     "speciesKey": "mantine",
      "level": 66
     },
     {
-     "speciesKey": "chatot",
+     "speciesKey": "kingdra",
      "level": 67
     },
     {
-     "speciesKey": "lickilicky",
+     "speciesKey": "ludicolo",
      "level": 68
     },
     {
-     "speciesKey": "togekiss",
+     "speciesKey": "pelipper",
      "level": 69
     }
    ]
@@ -5446,80 +5322,80 @@
  "galar-wyndon": [
   {
    "id": "galar-wyndon_t1",
-   "name": "Bug Catcher Ben",
-   "trainerClass": "bugCatcher",
+   "name": "Sailor Ben",
+   "trainerClass": "sailor",
    "team": [
     {
-     "speciesKey": "centiskorch",
+     "speciesKey": "basculin",
      "level": 70
     },
     {
-     "speciesKey": "frosmoth",
+     "speciesKey": "carracosta",
      "level": 71
     },
     {
-     "speciesKey": "kleavor",
+     "speciesKey": "swanna",
      "level": 72
     }
    ]
   },
   {
    "id": "galar-wyndon_t2",
-   "name": "Hiker Oscar",
-   "trainerClass": "hiker",
+   "name": "Gentleman Oscar",
+   "trainerClass": "gentleman",
    "team": [
     {
-     "speciesKey": "corsola",
+     "speciesKey": "indeedee",
      "level": 71
     },
     {
-     "speciesKey": "donphan",
+     "speciesKey": "wyrdeer",
      "level": 72
     },
     {
-     "speciesKey": "flygon",
+     "speciesKey": "ursaluna",
      "level": 73
     }
    ]
   },
   {
    "id": "galar-wyndon_t3",
-   "name": "Camper Elliot",
-   "trainerClass": "camper",
+   "name": "Channeler Fiona",
+   "trainerClass": "channeler",
    "team": [
     {
-     "speciesKey": "fearow",
+     "speciesKey": "gourgeist",
      "level": 72
     },
     {
-     "speciesKey": "wigglytuff",
+     "speciesKey": "palossand",
      "level": 73
     },
     {
-     "speciesKey": "vileplume",
+     "speciesKey": "mimikyu",
      "level": 74
     }
    ]
   },
   {
    "id": "galar-wyndon_t4",
-   "name": "Beauty Yara",
-   "trainerClass": "beauty",
+   "name": "Tamer Theo",
+   "trainerClass": "tamer",
    "team": [
     {
-     "speciesKey": "furfrou",
+     "speciesKey": "snorlax",
      "level": 72
     },
     {
-     "speciesKey": "aromatisse",
+     "speciesKey": "furret",
      "level": 73
     },
     {
-     "speciesKey": "slurpuff",
+     "speciesKey": "noctowl",
      "level": 74
     },
     {
-     "speciesKey": "heliolisk",
+     "speciesKey": "kingdra",
      "level": 75
     }
    ]
@@ -5528,92 +5404,92 @@
  "galar-ballonlea": [
   {
    "id": "galar-ballonlea_t1",
-   "name": "Cooltrainer Andre",
-   "trainerClass": "coolTrainer",
+   "name": "Juggler Paul",
+   "trainerClass": "juggler",
    "team": [
     {
-     "speciesKey": "noivern",
+     "speciesKey": "magnezone",
      "level": 72
     },
     {
-     "speciesKey": "espeon",
+     "speciesKey": "electivire",
      "level": 73
     },
     {
-     "speciesKey": "dusknoir",
+     "speciesKey": "magmortar",
      "level": 74
     },
     {
-     "speciesKey": "klinklang",
+     "speciesKey": "simisear",
      "level": 75
     }
    ]
   },
   {
    "id": "galar-ballonlea_t2",
-   "name": "Psychic Noah",
-   "trainerClass": "psychic",
+   "name": "Super Nerd Finn",
+   "trainerClass": "superNerd",
    "team": [
     {
-     "speciesKey": "bruxish",
+     "speciesKey": "roserade",
      "level": 72
     },
     {
-     "speciesKey": "orbeetle",
+     "speciesKey": "pachirisu",
      "level": 73
     },
     {
-     "speciesKey": "hatterene",
+     "speciesKey": "skuntank",
      "level": 74
     },
     {
-     "speciesKey": "mr. rime",
+     "speciesKey": "drapion",
      "level": 75
     }
    ]
   },
   {
    "id": "galar-ballonlea_t3",
-   "name": "Scientist Elena",
-   "trainerClass": "scientist",
+   "name": "Fisherman Victor",
+   "trainerClass": "fisherman",
    "team": [
     {
-     "speciesKey": "boltund",
+     "speciesKey": "walrein",
      "level": 72
     },
     {
-     "speciesKey": "toxtricity",
+     "speciesKey": "huntail",
      "level": 73
     },
     {
-     "speciesKey": "perrserker",
+     "speciesKey": "gorebyss",
      "level": 74
     },
     {
-     "speciesKey": "pincurchin",
+     "speciesKey": "relicanth",
      "level": 75
     }
    ]
   },
   {
    "id": "galar-ballonlea_t4",
-   "name": "Ace Trainer Uma",
-   "trainerClass": "ace",
+   "name": "Picnicker Cleo",
+   "trainerClass": "picnicker",
    "team": [
     {
-     "speciesKey": "klinklang",
+     "speciesKey": "cherrim",
      "level": 72
     },
     {
-     "speciesKey": "mienshao",
+     "speciesKey": "ambipom",
      "level": 73
     },
     {
-     "speciesKey": "slaking",
+     "speciesKey": "purugly",
      "level": 74
     },
     {
-     "speciesKey": "hydreigon",
+     "speciesKey": "chatot",
      "level": 75
     }
    ]
@@ -5622,37 +5498,37 @@
  "paldea-los-platos": [
   {
    "id": "paldea-los-platos_t1",
-   "name": "Bug Catcher Kenji",
-   "trainerClass": "bugCatcher",
+   "name": "Pilot Kenji",
+   "trainerClass": "pilot",
    "team": [
     {
-     "speciesKey": "heracross",
+     "speciesKey": "rookidee",
      "level": 5
     }
    ]
   },
   {
    "id": "paldea-los-platos_t2",
-   "name": "Hiker Ben",
-   "trainerClass": "hiker",
+   "name": "Skier Mason",
+   "trainerClass": "skier",
    "team": [
     {
-     "speciesKey": "hippopotas",
+     "speciesKey": "cubchoo",
      "level": 6
     }
    ]
   },
   {
    "id": "paldea-los-platos_t3",
-   "name": "Camper Oscar",
-   "trainerClass": "camper",
+   "name": "Waiter Oscar",
+   "trainerClass": "waiter",
    "team": [
     {
-     "speciesKey": "porygon",
+     "speciesKey": "castform",
      "level": 7
     },
     {
-     "speciesKey": "snorlax",
+     "speciesKey": "kecleon",
      "level": 8
     }
    ]
@@ -5661,31 +5537,27 @@
  "paldea-cabo-poco": [
   {
    "id": "paldea-cabo-poco_t1",
-   "name": "Beauty Dana",
-   "trainerClass": "beauty",
+   "name": "Rich Boy Quinn",
+   "trainerClass": "richBoy",
    "team": [
     {
-     "speciesKey": "minccino",
+     "speciesKey": "slakoth",
      "level": 10
     }
    ]
   },
   {
    "id": "paldea-cabo-poco_t2",
-   "name": "Cooltrainer Ryan",
-   "trainerClass": "coolTrainer",
+   "name": "Worker Gavin",
+   "trainerClass": "worker",
    "team": [
     {
-     "speciesKey": "flamigo",
+     "speciesKey": "scizor",
      "level": 11
     },
     {
-     "speciesKey": "seviper",
+     "speciesKey": "heracross",
      "level": 12
-    },
-    {
-     "speciesKey": "roaring moon",
-     "level": 13
     }
    ]
   }
@@ -5693,31 +5565,27 @@
  "paldea-mesagoza": [
   {
    "id": "paldea-mesagoza_t1",
-   "name": "Psychic Finn",
-   "trainerClass": "psychic",
+   "name": "Idol Uma",
+   "trainerClass": "idol",
    "team": [
     {
-     "speciesKey": "woobat",
+     "speciesKey": "fidough",
      "level": 13
     }
    ]
   },
   {
    "id": "paldea-mesagoza_t2",
-   "name": "Scientist Victor",
-   "trainerClass": "scientist",
+   "name": "Policeman Marco",
+   "trainerClass": "policeman",
    "team": [
     {
-     "speciesKey": "pincurchin",
+     "speciesKey": "scraggy",
      "level": 14
     },
     {
-     "speciesKey": "morpeko",
+     "speciesKey": "mienfoo",
      "level": 15
-    },
-    {
-     "speciesKey": "cufant",
-     "level": 16
     }
    ]
   }
@@ -5725,30 +5593,26 @@
  "paldea-medali": [
   {
    "id": "paldea-medali_t1",
-   "name": "Ace Trainer Paul",
-   "trainerClass": "ace",
+   "name": "Aroma Lady Daisy",
+   "trainerClass": "aromaLady",
    "team": [
     {
-     "speciesKey": "iron hands",
+     "speciesKey": "foongus",
      "level": 15
-    },
-    {
-     "speciesKey": "iron jugulis",
-     "level": 16
     }
    ]
   },
   {
    "id": "paldea-medali_t2",
-   "name": "Blackbelt Wade",
-   "trainerClass": "blackbelt",
+   "name": "Chef Wade",
+   "trainerClass": "chef",
    "team": [
     {
-     "speciesKey": "flamigo",
+     "speciesKey": "ceruledge",
      "level": 16
     },
     {
-     "speciesKey": "great tusk",
+     "speciesKey": "shroodle",
      "level": 17
     }
    ]
@@ -5757,34 +5621,34 @@
  "paldea-alfornada": [
   {
    "id": "paldea-alfornada_t1",
-   "name": "Swimmer Nora",
-   "trainerClass": "swimmer",
+   "name": "Dancer Nora",
+   "trainerClass": "dancer",
    "team": [
     {
-     "speciesKey": "vaporeon",
+     "speciesKey": "flittle",
      "level": 28
     },
     {
-     "speciesKey": "omanyte",
+     "speciesKey": "veluza",
      "level": 29
     }
    ]
   },
   {
    "id": "paldea-alfornada_t2",
-   "name": "Sailor Dev",
-   "trainerClass": "sailor",
+   "name": "Gambler Elliot",
+   "trainerClass": "gambler",
    "team": [
     {
-     "speciesKey": "pawmo",
+     "speciesKey": "indeedee",
      "level": 29
     },
     {
-     "speciesKey": "wugtrio",
+     "speciesKey": "morpeko",
      "level": 30
     },
     {
-     "speciesKey": "finizen",
+     "speciesKey": "oinkologne",
      "level": 31
     }
    ]
@@ -5793,34 +5657,34 @@
  "paldea-artazon": [
   {
    "id": "paldea-artazon_t1",
-   "name": "Gentleman Dev",
-   "trainerClass": "gentleman",
+   "name": "Nurse Yuki",
+   "trainerClass": "nurse",
    "team": [
     {
-     "speciesKey": "gothita",
+     "speciesKey": "carbink",
      "level": 30
     },
     {
-     "speciesKey": "solosis",
+     "speciesKey": "klefki",
      "level": 31
     }
    ]
   },
   {
    "id": "paldea-artazon_t2",
-   "name": "Channeler Luna",
-   "trainerClass": "channeler",
+   "name": "Biker Seth",
+   "trainerClass": "biker",
    "team": [
     {
-     "speciesKey": "phantump",
+     "speciesKey": "skrelp",
      "level": 31
     },
     {
-     "speciesKey": "trevenant",
+     "speciesKey": "mareanie",
      "level": 32
     },
     {
-     "speciesKey": "pumpkaboo",
+     "speciesKey": "salandit",
      "level": 33
     }
    ]
@@ -5829,49 +5693,49 @@
  "paldea-cortondo": [
   {
    "id": "paldea-cortondo_t1",
-   "name": "Tamer Victor",
-   "trainerClass": "tamer",
+   "name": "Schoolkid Dante",
+   "trainerClass": "schoolkid",
    "team": [
     {
-     "speciesKey": "tauros",
+     "speciesKey": "rufflet",
      "level": 33
     },
     {
-     "speciesKey": "ditto",
+     "speciesKey": "diggersby",
      "level": 34
     }
    ]
   },
   {
    "id": "paldea-cortondo_t2",
-   "name": "Juggler Leo",
-   "trainerClass": "juggler",
+   "name": "Roughneck Leo",
+   "trainerClass": "roughneck",
    "team": [
     {
-     "speciesKey": "arcanine",
+     "speciesKey": "hitmonchan",
      "level": 34
     },
     {
-     "speciesKey": "ponyta",
+     "speciesKey": "heracross",
      "level": 35
     }
    ]
   },
   {
    "id": "paldea-cortondo_t3",
-   "name": "Super Nerd Blake",
-   "trainerClass": "superNerd",
+   "name": "Parasol Lady Rosa",
+   "trainerClass": "parasolLady",
    "team": [
     {
-     "speciesKey": "weepinbell",
+     "speciesKey": "kingler",
      "level": 35
     },
     {
-     "speciesKey": "victreebel",
+     "speciesKey": "seadra",
      "level": 36
     },
     {
-     "speciesKey": "tentacruel",
+     "speciesKey": "seaking",
      "level": 37
     }
    ]
@@ -5880,49 +5744,49 @@
  "paldea-montenevera": [
   {
    "id": "paldea-montenevera_t1",
-   "name": "Youngster Joel",
-   "trainerClass": "youngster",
+   "name": "Musician Hana",
+   "trainerClass": "musician",
    "team": [
     {
-     "speciesKey": "oinkologne",
+     "speciesKey": "obstagoon",
      "level": 35
     },
     {
-     "speciesKey": "maushold",
+     "speciesKey": "indeedee",
      "level": 36
     }
    ]
   },
   {
    "id": "paldea-montenevera_t2",
-   "name": "Lass Ava",
-   "trainerClass": "lass",
+   "name": "Preschooler Zelda",
+   "trainerClass": "preschooler",
    "team": [
     {
-     "speciesKey": "persian",
+     "speciesKey": "dudunsparce",
      "level": 36
     },
     {
-     "speciesKey": "farfetchd",
+     "speciesKey": "pidgeot",
      "level": 37
     }
    ]
   },
   {
    "id": "paldea-montenevera_t3",
-   "name": "Bug Catcher Neil",
-   "trainerClass": "bugCatcher",
+   "name": "Artist Miles",
+   "trainerClass": "artist",
    "team": [
     {
-     "speciesKey": "larvesta",
+     "speciesKey": "farfetchd",
      "level": 37
     },
     {
-     "speciesKey": "vivillon",
+     "speciesKey": "dodrio",
      "level": 38
     },
     {
-     "speciesKey": "charjabug",
+     "speciesKey": "chansey",
      "level": 39
     }
    ]
@@ -5931,23 +5795,23 @@
  "paldea-zapapico": [
   {
    "id": "paldea-zapapico_t1",
-   "name": "Hiker Carlos",
-   "trainerClass": "hiker",
+   "name": "Backpacker Lara",
+   "trainerClass": "backpacker",
    "team": [
     {
-     "speciesKey": "carbink",
+     "speciesKey": "komala",
      "level": 38
     },
     {
-     "speciesKey": "lycanroc",
+     "speciesKey": "drampa",
      "level": 39
     }
    ]
   },
   {
    "id": "paldea-zapapico_t2",
-   "name": "Camper Rex",
-   "trainerClass": "camper",
+   "name": "Pokemon Ranger Caleb",
+   "trainerClass": "pokemonRanger",
    "team": [
     {
      "speciesKey": "komala",
@@ -5961,23 +5825,23 @@
   },
   {
    "id": "paldea-zapapico_t3",
-   "name": "Beauty Isla",
-   "trainerClass": "beauty",
+   "name": "Doctor Quinn",
+   "trainerClass": "doctor",
    "team": [
     {
-     "speciesKey": "wigglytuff",
+     "speciesKey": "wobbuffet",
      "level": 40
     },
     {
-     "speciesKey": "persian",
+     "speciesKey": "gardevoir",
      "level": 41
     }
    ]
   },
   {
    "id": "paldea-zapapico_t4",
-   "name": "Cooltrainer Freya",
-   "trainerClass": "coolTrainer",
+   "name": "Veteran Freya",
+   "trainerClass": "veteran",
    "team": [
     {
      "speciesKey": "iron bundle",
@@ -5990,10 +5854,6 @@
     {
      "speciesKey": "iron jugulis",
      "level": 43
-    },
-    {
-     "speciesKey": "crobat",
-     "level": 44
     }
    ]
   }
@@ -6001,39 +5861,35 @@
  "paldea-cascarrafa": [
   {
    "id": "paldea-cascarrafa_t1",
-   "name": "Psychic Julia",
-   "trainerClass": "psychic",
+   "name": "Medium Julia",
+   "trainerClass": "medium",
    "team": [
     {
-     "speciesKey": "gothorita",
+     "speciesKey": "flutter mane",
      "level": 40
     },
     {
-     "speciesKey": "duosion",
+     "speciesKey": "gimmighoul",
      "level": 41
     }
    ]
   },
   {
    "id": "paldea-cascarrafa_t2",
-   "name": "Scientist Blake",
-   "trainerClass": "scientist",
+   "name": "Youngster Theo",
+   "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "rotom",
+     "speciesKey": "farigiraf",
      "level": 41
     },
     {
-     "speciesKey": "zebstrika",
+     "speciesKey": "dudunsparce",
      "level": 42
     },
     {
-     "speciesKey": "excadrill",
+     "speciesKey": "pidgeot",
      "level": 43
-    },
-    {
-     "speciesKey": "emolga",
-     "level": 44
     }
    ]
   }
@@ -6041,84 +5897,80 @@
  "paldea-levincia": [
   {
    "id": "paldea-levincia_t1",
-   "name": "Ace Trainer Lara",
-   "trainerClass": "ace",
+   "name": "Lass Grace",
+   "trainerClass": "lass",
    "team": [
     {
-     "speciesKey": "gougingFire",
+     "speciesKey": "mawile",
      "level": 60
     },
     {
-     "speciesKey": "ragingBolt",
+     "speciesKey": "zangoose",
      "level": 61
     },
     {
-     "speciesKey": "great tusk",
+     "speciesKey": "castform",
      "level": 62
-    },
-    {
-     "speciesKey": "flutter mane",
-     "level": 63
     }
    ]
   },
   {
    "id": "paldea-levincia_t2",
-   "name": "Blackbelt Andre",
-   "trainerClass": "blackbelt",
+   "name": "Bug Catcher Andre",
+   "trainerClass": "bugCatcher",
    "team": [
     {
-     "speciesKey": "bewear",
+     "speciesKey": "volcarona",
      "level": 61
     },
     {
-     "speciesKey": "passimian",
+     "speciesKey": "vivillon",
      "level": 62
     },
     {
-     "speciesKey": "kommo-o",
+     "speciesKey": "vikavolt",
      "level": 63
     }
    ]
   },
   {
    "id": "paldea-levincia_t3",
-   "name": "Swimmer Quinn",
-   "trainerClass": "swimmer",
+   "name": "Hiker Noah",
+   "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "sharpedo",
+     "speciesKey": "hippowdon",
      "level": 62
     },
     {
-     "speciesKey": "wailord",
+     "speciesKey": "rhyperior",
      "level": 63
     },
     {
-     "speciesKey": "whiscash",
+     "speciesKey": "gliscor",
      "level": 64
     }
    ]
   },
   {
    "id": "paldea-levincia_t4",
-   "name": "Sailor Eli",
-   "trainerClass": "sailor",
+   "name": "Camper Eli",
+   "trainerClass": "camper",
    "team": [
     {
-     "speciesKey": "pangoro",
+     "speciesKey": "furret",
      "level": 63
     },
     {
-     "speciesKey": "barbaracle",
+     "speciesKey": "noctowl",
      "level": 64
     },
     {
-     "speciesKey": "clawitzer",
+     "speciesKey": "bellossom",
      "level": 65
     },
     {
-     "speciesKey": "hawlucha",
+     "speciesKey": "jumpluff",
      "level": 66
     }
    ]
@@ -6127,42 +5979,42 @@
  "paldea-porto-marinada": [
   {
    "id": "paldea-porto-marinada_t1",
-   "name": "Gentleman Ryan",
-   "trainerClass": "gentleman",
+   "name": "Beauty Alice",
+   "trainerClass": "beauty",
    "team": [
     {
-     "speciesKey": "ambipom",
+     "speciesKey": "azumarill",
      "level": 65
     },
     {
-     "speciesKey": "purugly",
+     "speciesKey": "granbull",
      "level": 66
     },
     {
-     "speciesKey": "bronzong",
+     "speciesKey": "miltank",
      "level": 67
     }
    ]
   },
   {
    "id": "paldea-porto-marinada_t2",
-   "name": "Channeler Nina",
-   "trainerClass": "channeler",
+   "name": "Cooltrainer Lily",
+   "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "basculegion",
+     "speciesKey": "espeon",
      "level": 66
     },
     {
-     "speciesKey": "ceruledge",
+     "speciesKey": "slaking",
      "level": 67
     },
     {
-     "speciesKey": "brambleghast",
+     "speciesKey": "hydreigon",
      "level": 68
     },
     {
-     "speciesKey": "houndstone",
+     "speciesKey": "goodra",
      "level": 69
     }
    ]
@@ -6171,46 +6023,46 @@
  "paldea-mossui-town": [
   {
    "id": "paldea-mossui-town_t1",
-   "name": "Tamer Ivan",
-   "trainerClass": "tamer",
+   "name": "Psychic Riley",
+   "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "castform",
+     "speciesKey": "indeedee",
      "level": 72
     },
     {
-     "speciesKey": "kecleon",
+     "speciesKey": "wyrdeer",
      "level": 73
     },
     {
-     "speciesKey": "bibarel",
+     "speciesKey": "armarouge",
      "level": 74
     },
     {
-     "speciesKey": "ambipom",
+     "speciesKey": "rabsca",
      "level": 75
     }
    ]
   },
   {
    "id": "paldea-mossui-town_t2",
-   "name": "Juggler Zane",
-   "trainerClass": "juggler",
+   "name": "Scientist Hana",
+   "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "vikavolt",
+     "speciesKey": "corviknight",
      "level": 72
     },
     {
-     "speciesKey": "oricorio",
+     "speciesKey": "boltund",
      "level": 73
     },
     {
-     "speciesKey": "salazzle",
+     "speciesKey": "toxtricity",
      "level": 74
     },
     {
-     "speciesKey": "turtonator",
+     "speciesKey": "perrserker",
      "level": 75
     }
    ]

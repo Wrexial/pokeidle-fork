@@ -495,6 +495,11 @@ One-off scripts used to build the data JSON (not run during dev/build):
   evolution items, mints, key items). Item ids come from the live item tables
   (mart, Reward Shop, Auction lots, drops); add to `SEREBII_NAMES` if a filename
   differs from the lowercased item id. Idempotent (`--force`).
+- `download-trainer-sprites.cjs` — downloads the generic trainer-class sprites
+  referenced by `public/data/trainer-classes.json` from Pokemon Showdown's
+  trainer set into `public/sprites/trainers/<key>.png` (80x80, the same art the
+  existing classes use). Add a class to the table, then re-run this to fetch its
+  art. Idempotent (`--force`).
 - `scrape-region-maps.cjs` — scrapes real region maps: location lists from
   PokéAPI and route/town compass connections (`north/south/east/west`) from
   Bulbapedia's raw infoboxes, then computes a directional layout. Caches HTTP
@@ -589,7 +594,7 @@ One-off scripts used to build the data JSON (not run during dev/build):
   from every generation up to the region's own, minus starter lines and
   legendaries), and each leader gets a unique Showdown sprite key derived from
   their name by `trainerSpriteKey`. Route trainers are themed by class via
-  `TRAINER_CLASS_TYPES` and named "Class Firstname" — 18 classes, with names
+  `TRAINER_CLASS_TYPES` and named "Class Firstname" — 50 classes, with names
   drawn from gender-matched pools (`TRAINER_NAMES_MALE`/`_FEMALE`/`_ANY`,
   picked through `pickTrainerName`) and kept unique within a region. Each town
   fields two to four trainers whose classes cycle through the full list, and

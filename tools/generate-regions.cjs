@@ -445,7 +445,17 @@ const hashString = (text) => {
   }
   return hash >>> 0
 }
-const TRAINER_CLASSES = ['youngster', 'lass', 'bugCatcher', 'hiker', 'camper', 'beauty', 'coolTrainer', 'psychic', 'scientist', 'ace', 'blackbelt', 'swimmer', 'sailor', 'gentleman', 'channeler', 'tamer', 'juggler', 'superNerd']
+const TRAINER_CLASSES = [
+  'youngster', 'lass', 'bugCatcher', 'hiker', 'camper', 'beauty',
+  'coolTrainer', 'psychic', 'scientist', 'ace', 'blackbelt', 'swimmer',
+  'sailor', 'gentleman', 'channeler', 'tamer', 'juggler', 'superNerd',
+  'fisherman', 'picnicker', 'birdKeeper', 'burglar', 'guitarist', 'cowgirl',
+  'cyclist', 'lady', 'pilot', 'skier', 'waiter', 'richBoy',
+  'worker', 'idol', 'policeman', 'aromaLady', 'chef', 'dancer',
+  'gambler', 'nurse', 'biker', 'schoolkid', 'roughneck', 'parasolLady',
+  'musician', 'preschooler', 'artist', 'backpacker', 'pokemonRanger', 'doctor',
+  'veteran', 'medium',
+]
 // Display names for the generated route trainers, so battles read
 // "Youngster Joey" instead of "Route 2 Trainer 1".
 const TRAINER_CLASS_LABELS = {
@@ -467,6 +477,38 @@ const TRAINER_CLASS_LABELS = {
   tamer: 'Tamer',
   juggler: 'Juggler',
   superNerd: 'Super Nerd',
+  fisherman: 'Fisherman',
+  picnicker: 'Picnicker',
+  birdKeeper: 'Bird Keeper',
+  burglar: 'Burglar',
+  guitarist: 'Guitarist',
+  cowgirl: 'Cowgirl',
+  cyclist: 'Cyclist',
+  lady: 'Lady',
+  pilot: 'Pilot',
+  skier: 'Skier',
+  waiter: 'Waiter',
+  richBoy: 'Rich Boy',
+  worker: 'Worker',
+  idol: 'Idol',
+  policeman: 'Policeman',
+  aromaLady: 'Aroma Lady',
+  chef: 'Chef',
+  dancer: 'Dancer',
+  gambler: 'Gambler',
+  nurse: 'Nurse',
+  biker: 'Biker',
+  schoolkid: 'Schoolkid',
+  roughneck: 'Roughneck',
+  parasolLady: 'Parasol Lady',
+  musician: 'Musician',
+  preschooler: 'Preschooler',
+  artist: 'Artist',
+  backpacker: 'Backpacker',
+  pokemonRanger: 'Pokemon Ranger',
+  doctor: 'Doctor',
+  veteran: 'Veteran',
+  medium: 'Medium',
 }
 // First names for the generated trainers, split by the gender each class is
 // drawn as so a trainer reads naturally ("Beauty Rosa", "Hiker Bruno") instead
@@ -488,10 +530,14 @@ const TRAINER_NAMES_FEMALE = [
 ]
 const TRAINER_NAMES_ANY = [...new Set([...TRAINER_NAMES_MALE, ...TRAINER_NAMES_FEMALE])]
 // Classes that field a specific gender; anything else can be either.
-const FEMALE_TRAINER_CLASSES = new Set(['lass', 'beauty', 'channeler'])
+const FEMALE_TRAINER_CLASSES = new Set([
+  'lass', 'beauty', 'channeler', 'picnicker', 'cowgirl', 'lady', 'idol', 'aromaLady',
+  'parasolLady', 'nurse',
+])
 const MALE_TRAINER_CLASSES = new Set([
   'youngster', 'hiker', 'bugCatcher', 'camper', 'blackbelt', 'sailor', 'gentleman',
-  'tamer', 'juggler', 'superNerd',
+  'tamer', 'juggler', 'superNerd', 'fisherman', 'birdKeeper', 'burglar', 'cyclist',
+  'pilot', 'waiter', 'worker', 'richBoy', 'policeman', 'chef', 'biker', 'roughneck',
 ])
 /** @param {string} trainerClass */
 const trainerNamesForClass = (trainerClass) =>
@@ -745,6 +791,38 @@ const TRAINER_CLASS_TYPES = {
   tamer: ['Normal', 'Dragon'],
   juggler: ['Electric', 'Fire'],
   superNerd: ['Electric', 'Poison'],
+  fisherman: ['Water'],
+  picnicker: ['Normal', 'Grass'],
+  birdKeeper: ['Flying'],
+  burglar: ['Fire', 'Dark'],
+  guitarist: ['Electric'],
+  cowgirl: ['Normal', 'Ground'],
+  cyclist: ['Normal'],
+  lady: ['Normal', 'Fairy'],
+  pilot: ['Flying'],
+  skier: ['Ice'],
+  waiter: ['Normal'],
+  richBoy: ['Normal', 'Psychic'],
+  worker: ['Fighting', 'Steel'],
+  idol: ['Fairy'],
+  policeman: ['Fighting'],
+  aromaLady: ['Fairy', 'Grass'],
+  chef: ['Fire', 'Normal'],
+  dancer: ['Psychic'],
+  gambler: ['Dark', 'Normal'],
+  nurse: ['Fairy'],
+  biker: ['Poison'],
+  schoolkid: ['Normal'],
+  roughneck: ['Fighting'],
+  parasolLady: ['Water', 'Fairy'],
+  musician: ['Normal', 'Psychic'],
+  preschooler: ['Normal'],
+  artist: ['Normal'],
+  backpacker: ['Normal', 'Ground'],
+  pokemonRanger: ['Normal', 'Grass'],
+  doctor: ['Psychic'],
+  veteran: [],
+  medium: ['Ghost'],
 }
 // Kanto keeps its hand-curated initial teams; these types only drive the
 // post-game rematch rosters (see the Kanto rematch block near the end).

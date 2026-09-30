@@ -131,7 +131,7 @@ export const CHANGELOG = [
         {
           heading: 'Trainers',
           items: [
-            'Town trainers are far more varied: 18 trainer classes instead of 12 (adding Sailor, Gentleman, Channeler, Tamer, Juggler and Super Nerd, each with their own type theme), class-appropriate names drawn from a much larger pool with no repeats inside a region, two to four trainers per town rather than always three, and Ace Trainers, Cooltrainers and Scientists fielding larger squads',
+            'Town trainers are far more varied: 50 trainer classes instead of 12 — from Fisherman, Bird Keeper and Picnicker to Lady, Rich Boy, Nurse, Policeman, Musician and Medium — each with their own type theme, class-appropriate names drawn from a much larger pool with no repeats inside a region, two to four trainers per town rather than always three, and Ace Trainers, Cooltrainers and Scientists fielding larger squads',
             'Gym, Elite Four and Champion teams were rebuilt on the same pass with more distinct species instead of repeated copies, and gym teams grow from three members to five as the badges add up',
           ],
         },

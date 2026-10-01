@@ -5,6 +5,7 @@ import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
 import { BOX_PAGE_SIZE, BOX_SORT_DIRECTIONS, BOX_SORT_FIELDS } from '../data/ui.js'
 import { pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
+import { useUi } from '../game/ui-context.js'
 import { getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, nextBoxSortField, parseBoxSort, pokemonDisplayName, toggleBoxSortDirection } from '../game/pokemon.js'
 import { isFemalePokemon } from '../game/breeding.js'
 import { itemTooltip } from '../game/progression.js'
@@ -28,6 +29,7 @@ export function BoxPanel({
   onDragEnd,
 }) {
   const { state, dispatch } = useGame(),
+    { boxSearch, clearBoxSearch } = useUi(),
     [page, setPage] = React.useState(0),
     [query, setQuery] = React.useState(''),
     [filterMode, setFilterMode] = React.useState('all'),
@@ -72,6 +74,12 @@ export function BoxPanel({
     boxSortDirection =
       BOX_SORT_DIRECTIONS.find((option) => option.value === boxSort.direction) ??
       BOX_SORT_DIRECTIONS[0]
+  // The Pokédex can request a Box search; open the controls and fill the
+  // query, then clear the request so it isn't replayed on a later mount.
+  React.useEffect(() => {
+    if (boxSearch === null) return
+    ;(setSearchOpen(true), setQuery(boxSearch), setFilterMode('all'), setPage(0), clearBoxSearch())
+  }, [boxSearch, clearBoxSearch])
   return jsxs(Fragment, {
     children: [
       jsxs('div', {

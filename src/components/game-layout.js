@@ -2,6 +2,7 @@
 
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { useGame } from '../game/context.js'
+import { UiProvider } from '../game/ui-context.js'
 import { useIsMobile, useKonamiCode, useDailyEvent, useQuests, useBrowserNotifications, useAwayAlert, useAccessibilitySettings, useGameAudio } from '../hooks.js'
 import { BattleScreen } from './battle-screen.js'
 import { TownMap } from './town-map.js'
@@ -28,31 +29,33 @@ export function GameLayout() {
   useAccessibilitySettings()
   // Synthesized region music + event sound effects (opt-in).
   useGameAudio()
-  return useIsMobile()
-    ? jsxs('div', {
-        className: 'game-layout mobile',
-        children: [
-          jsx(BattleScreen, {}),
-          jsx(MobileTabs, {}),
-          jsx(HatchPopup, {}),
-          jsx(OfflineProgressModal, {}),
-          jsx(NotificationStack, {}),
-          jsx(GlobalTooltip, {}),
-        ],
-      })
-    : jsxs('div', {
-        className: 'game-layout',
-        children: [
-          jsx(PartyBoxPanel, {}),
-          jsxs('div', {
-            className: 'center-column',
-            children: [jsx(BattleScreen, {}), jsx(TownMap, {})],
-          }),
-          jsx(RightPanel, {}),
-          jsx(HatchPopup, {}),
-          jsx(OfflineProgressModal, {}),
-          jsx(NotificationStack, {}),
-          jsx(GlobalTooltip, {}),
-        ],
-      })
+  return jsx(UiProvider, {
+    children: useIsMobile()
+      ? jsxs('div', {
+          className: 'game-layout mobile',
+          children: [
+            jsx(BattleScreen, {}),
+            jsx(MobileTabs, {}),
+            jsx(HatchPopup, {}),
+            jsx(OfflineProgressModal, {}),
+            jsx(NotificationStack, {}),
+            jsx(GlobalTooltip, {}),
+          ],
+        })
+      : jsxs('div', {
+          className: 'game-layout',
+          children: [
+            jsx(PartyBoxPanel, {}),
+            jsxs('div', {
+              className: 'center-column',
+              children: [jsx(BattleScreen, {}), jsx(TownMap, {})],
+            }),
+            jsx(RightPanel, {}),
+            jsx(HatchPopup, {}),
+            jsx(OfflineProgressModal, {}),
+            jsx(NotificationStack, {}),
+            jsx(GlobalTooltip, {}),
+          ],
+        }),
+  })
 }

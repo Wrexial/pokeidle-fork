@@ -5,14 +5,14 @@ import { jsx, jsxs } from 'react/jsx-runtime'
 import { STAT_DISPLAY_MAX, statBarColors } from '../data/ui.js'
 import { GENERATION_DEX_RANGES, pokedexData, pokedexIndexes, pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
+import { useUi } from '../game/ui-context.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
 import { PokedexTile } from './pokedex-tile.js'
 
 /** @param {{ onClose?: () => void, inline?: boolean }} props */
 export function PokedexModal({ onClose, inline = false }) {
   const { state, dispatch } = useGame(),
-    [selected, setSelected] = React.useState(/** @type {string | null} */ (null)),
-    [gen, setGen] = React.useState(0),
+    { pokedexSelected: selected, setPokedexSelected: setSelected, pokedexGen: gen, setPokedexGen: setGen, openBoxSearch } = useUi(),
     getStatus = /** @param {string} speciesKey */ (speciesKey) =>
       state.pokedexCaught.includes(speciesKey)
         ? 'caught'
@@ -132,7 +132,7 @@ export function PokedexModal({ onClose, inline = false }) {
                   status,
                   rarity: 'common',
                   isSelected: selected === speciesKey,
-                  onClick: () => setSelected((next) => (next === speciesKey ? null : speciesKey)),
+                  onClick: () => setSelected(selected === speciesKey ? null : speciesKey),
                   isShinyCaught: state.shinyCaught.includes(speciesKey),
                 },
                 speciesKey
@@ -257,6 +257,13 @@ export function PokedexModal({ onClose, inline = false }) {
                       statRow.key
                     )
                   }),
+                }),
+              selectedStatus !== 'unseen' &&
+                jsx('button', {
+                  className: 'pokedex-search-box-btn',
+                  title: `Search your Box for ${selectedSpecies.name}`,
+                  onClick: () => openBoxSearch(selectedSpecies.name),
+                  children: 'Search Box',
                 }),
             ],
           }),

@@ -634,6 +634,16 @@ One-off scripts used to build the data JSON (not run during dev/build):
   members; the gym panel shows a `REMATCH` tag / "Rematch Lv.90" when active.
   Badges use their real in-game names (`BADGE_NAMES`) — Alola's trials award
   Z-Crystals and Galar/Paldea use type badges — coloured by the leader's type.
+  Alola runs the full 7 island trials + 4 grand trials (11 Z-Crystals) rather
+  than 8 slots: `GYM_LEADERS.alola` interleaves the captains and kahunas, the
+  grand trials sit on their island hubs (Mina/Hapu on Poni Island, so
+  `location-panel.js` shows `GymLocationPanel` on zone hubs too), and
+  `badgeGatesByIndex` forces the island order because Alola's towns unlock out
+  of trial order. `tools/apply-alola-trials.cjs` mirrors this on the committed
+  data. Galar has no separate post-game tournament model — the rematch teams
+  *are* the Champion Cup rematch, and the panel labels it as the post-game
+  tournament; Paldea's Titans / Team Star are unmodelled optional side content,
+  not part of progression.
   Raid Islands offer the region's generation of Pokémon that turn
   up on **no** region's wild routes and can't be reached by evolving one that
   does; that scan runs after every route is generated, so the pools are

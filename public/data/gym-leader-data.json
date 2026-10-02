@@ -2563,15 +2563,15 @@
   "team": [
    {
     "speciesKey": "pidgey",
-    "level": 12
+    "level": 11
    },
    {
     "speciesKey": "rattata",
-    "level": 13
+    "level": 12
    },
    {
     "speciesKey": "spearow",
-    "level": 14
+    "level": 13
    }
   ],
   "rematchTeam": [
@@ -2602,6 +2602,57 @@
   ]
  },
  {
+  "id": "alola-grand-hala",
+  "name": "Hala",
+  "title": "Alola Island Kahuna",
+  "region": "alola",
+  "locationKey": "alola-iki-town",
+  "badgeName": "Fightinium Z",
+  "badgeColor": "#c03028",
+  "spriteKey": "hala",
+  "badgesRequired": 1,
+  "team": [
+   {
+    "speciesKey": "monferno",
+    "level": 16
+   },
+   {
+    "speciesKey": "combusken",
+    "level": 17
+   },
+   {
+    "speciesKey": "pignite",
+    "level": 18
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "kommo-o",
+    "level": 78
+   },
+   {
+    "speciesKey": "iron valiant",
+    "level": 79
+   },
+   {
+    "speciesKey": "great tusk",
+    "level": 80
+   },
+   {
+    "speciesKey": "slither wing",
+    "level": 81
+   },
+   {
+    "speciesKey": "iron hands",
+    "level": 82
+   },
+   {
+    "speciesKey": "annihilape",
+    "level": 83
+   }
+  ]
+ },
+ {
   "id": "alola-gym-2",
   "name": "Lana",
   "title": "Alola Trial Captain",
@@ -2610,18 +2661,19 @@
   "badgeName": "Waterium Z",
   "badgeColor": "#6890f0",
   "spriteKey": "lana",
+  "badgesRequired": 2,
   "team": [
    {
     "speciesKey": "slowpoke",
-    "level": 19
+    "level": 21
    },
    {
     "speciesKey": "seel",
-    "level": 20
+    "level": 22
    },
    {
     "speciesKey": "shellder",
-    "level": 21
+    "level": 23
    }
   ],
   "rematchTeam": [
@@ -2660,18 +2712,19 @@
   "badgeName": "Firium Z",
   "badgeColor": "#f08030",
   "spriteKey": "kiawe",
+  "badgesRequired": 3,
   "team": [
    {
     "speciesKey": "slugma",
-    "level": 27
+    "level": 26
    },
    {
     "speciesKey": "houndoom",
-    "level": 28
+    "level": 27
    },
    {
     "speciesKey": "magby",
-    "level": 29
+    "level": 28
    }
   ],
   "rematchTeam": [
@@ -2710,22 +2763,23 @@
   "badgeName": "Grassium Z",
   "badgeColor": "#78c850",
   "spriteKey": "mallow",
+  "badgesRequired": 4,
   "team": [
    {
     "speciesKey": "jumpluff",
-    "level": 34
+    "level": 32
    },
    {
     "speciesKey": "sunkern",
-    "level": 35
+    "level": 33
    },
    {
     "speciesKey": "sunflora",
-    "level": 36
+    "level": 34
    },
    {
     "speciesKey": "lombre",
-    "level": 37
+    "level": 35
    }
   ],
   "rematchTeam": [
@@ -2756,6 +2810,61 @@
   ]
  },
  {
+  "id": "alola-grand-olivia",
+  "name": "Olivia",
+  "title": "Alola Island Kahuna",
+  "region": "alola",
+  "locationKey": "alola-konikoni-city",
+  "badgeName": "Rockium Z",
+  "badgeColor": "#b8a038",
+  "spriteKey": "olivia",
+  "badgesRequired": 5,
+  "team": [
+   {
+    "speciesKey": "pupitar",
+    "level": 37
+   },
+   {
+    "speciesKey": "archeops",
+    "level": 38
+   },
+   {
+    "speciesKey": "rhyhorn",
+    "level": 39
+   },
+   {
+    "speciesKey": "lairon",
+    "level": 40
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "tyranitar",
+    "level": 78
+   },
+   {
+    "speciesKey": "ironBoulder",
+    "level": 79
+   },
+   {
+    "speciesKey": "iron thorns",
+    "level": 80
+   },
+   {
+    "speciesKey": "archeops",
+    "level": 81
+   },
+   {
+    "speciesKey": "rhyperior",
+    "level": 82
+   },
+   {
+    "speciesKey": "aggron",
+    "level": 83
+   }
+  ]
+ },
+ {
   "id": "alola-gym-5",
   "name": "Sophocles",
   "title": "Alola Trial Captain",
@@ -2764,6 +2873,7 @@
   "badgeName": "Electrium Z",
   "badgeColor": "#f8d030",
   "spriteKey": "sophocles",
+  "badgesRequired": 6,
   "team": [
    {
     "speciesKey": "luxray",
@@ -2818,22 +2928,23 @@
   "badgeName": "Ghostium Z",
   "badgeColor": "#705898",
   "spriteKey": "acerola",
+  "badgesRequired": 7,
   "team": [
    {
     "speciesKey": "gourgeist",
-    "level": 49
+    "level": 47
    },
    {
     "speciesKey": "palossand",
-    "level": 50
+    "level": 48
    },
    {
     "speciesKey": "mimikyu",
-    "level": 51
+    "level": 49
    },
    {
     "speciesKey": "dhelmise",
-    "level": 52
+    "level": 50
    }
   ],
   "rematchTeam": [
@@ -2864,14 +2975,74 @@
   ]
  },
  {
+  "id": "alola-grand-nanu",
+  "name": "Nanu",
+  "title": "Alola Island Kahuna",
+  "region": "alola",
+  "locationKey": "alola-po-town",
+  "badgeName": "Darkinium Z",
+  "badgeColor": "#705848",
+  "spriteKey": "nanu",
+  "badgesRequired": 8,
+  "team": [
+   {
+    "speciesKey": "zweilous",
+    "level": 51
+   },
+   {
+    "speciesKey": "greninja",
+    "level": 52
+   },
+   {
+    "speciesKey": "incineroar",
+    "level": 53
+   },
+   {
+    "speciesKey": "umbreon",
+    "level": 54
+   },
+   {
+    "speciesKey": "krookodile",
+    "level": 55
+   }
+  ],
+  "rematchTeam": [
+   {
+    "speciesKey": "tyranitar",
+    "level": 78
+   },
+   {
+    "speciesKey": "hydreigon",
+    "level": 79
+   },
+   {
+    "speciesKey": "roaring moon",
+    "level": 80
+   },
+   {
+    "speciesKey": "brute bonnet",
+    "level": 81
+   },
+   {
+    "speciesKey": "iron jugulis",
+    "level": 82
+   },
+   {
+    "speciesKey": "kingambit",
+    "level": 83
+   }
+  ]
+ },
+ {
   "id": "alola-gym-7",
   "name": "Mina",
   "title": "Alola Trial Captain",
   "region": "alola",
-  "locationKey": "alola-hauoli-city",
+  "locationKey": "alola-poni-island",
   "badgeName": "Fairium Z",
   "badgeColor": "#ee99ac",
   "spriteKey": "mina",
+  "badgesRequired": 9,
   "team": [
    {
     "speciesKey": "comfey",
@@ -2926,31 +3097,31 @@
   "name": "Hapu",
   "title": "Alola Island Kahuna",
   "region": "alola",
-  "locationKey": "alola-iki-town",
+  "locationKey": "alola-poni-island",
   "badgeName": "Groundium Z",
   "badgeColor": "#e0c068",
   "spriteKey": "hapu",
-  "badgesRequired": 7,
+  "badgesRequired": 10,
   "team": [
    {
     "speciesKey": "krookodile",
-    "level": 64
+    "level": 62
    },
    {
     "speciesKey": "stunfisk",
-    "level": 65
+    "level": 63
    },
    {
     "speciesKey": "golurk",
-    "level": 66
+    "level": 64
    },
    {
     "speciesKey": "diggersby",
-    "level": 67
+    "level": 65
    },
    {
     "speciesKey": "mudsdale",
-    "level": 68
+    "level": 66
    }
   ],
   "rematchTeam": [

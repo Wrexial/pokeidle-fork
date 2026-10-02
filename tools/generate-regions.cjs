@@ -589,7 +589,7 @@ const BADGE_NAMES = {
   sinnoh: ['Coal Badge', 'Forest Badge', 'Cobble Badge', 'Fen Badge', 'Relic Badge', 'Mine Badge', 'Icicle Badge', 'Beacon Badge'],
   unova: ['Trio Badge', 'Basic Badge', 'Insect Badge', 'Bolt Badge', 'Quake Badge', 'Jet Badge', 'Freeze Badge', 'Legend Badge'],
   kalos: ['Bug Badge', 'Cliff Badge', 'Rumble Badge', 'Plant Badge', 'Voltage Badge', 'Fairy Badge', 'Psychic Badge', 'Iceberg Badge'],
-  alola: ['Normalium Z', 'Waterium Z', 'Firium Z', 'Grassium Z', 'Electrium Z', 'Ghostium Z', 'Fairium Z', 'Groundium Z'],
+  alola: ['Normalium Z', 'Fightinium Z', 'Waterium Z', 'Firium Z', 'Grassium Z', 'Rockium Z', 'Electrium Z', 'Ghostium Z', 'Darkinium Z', 'Fairium Z', 'Groundium Z'],
   galar: ['Grass Badge', 'Water Badge', 'Fire Badge', 'Fighting Badge', 'Fairy Badge', 'Rock Badge', 'Dark Badge', 'Dragon Badge'],
   paldea: ['Bug Badge', 'Grass Badge', 'Electric Badge', 'Water Badge', 'Normal Badge', 'Ghost Badge', 'Psychic Badge', 'Ice Badge'],
 }
@@ -627,7 +627,7 @@ const GYM_LEADERS = {
   sinnoh: ['Roark', 'Gardenia', 'Maylene', 'Crasher Wake', 'Fantina', 'Byron', 'Candice', 'Volkner'],
   unova: ['Cilan', 'Lenora', 'Burgh', 'Elesa', 'Clay', 'Skyla', 'Brycen', 'Drayden'],
   kalos: ['Viola', 'Grant', 'Korrina', 'Ramos', 'Clemont', 'Valerie', 'Olympia', 'Wulfric'],
-  alola: ['Ilima', 'Lana', 'Kiawe', 'Mallow', 'Sophocles', 'Acerola', 'Mina', 'Hapu'],
+  alola: ['Ilima', 'Hala', 'Lana', 'Kiawe', 'Mallow', 'Olivia', 'Sophocles', 'Acerola', 'Nanu', 'Mina', 'Hapu'],
   galar: ['Milo', 'Nessa', 'Kabu', 'Bea', 'Opal', 'Gordie', 'Piers', 'Raihan'],
   paldea: ['Katy', 'Brassius', 'Iono', 'Kofu', 'Larry', 'Ryme', 'Tulip', 'Grusha'],
 }
@@ -645,17 +645,25 @@ const GYM_TOWNS = {
   galar: ['Turffield', 'Hulbury', 'Motostoke', 'Stow On Side', 'Ballonlea', 'Circhester', 'Spikemuth', 'Hammerlocke'],
   // Grusha's gym is on Glaseado Mountain (not a town); Zapapico is the closest.
   paldea: ['Cortondo', 'Artazon', 'Levincia', 'Cascarrafa', 'Medali', 'Montenevera', 'Alfornada', 'Zapapico'],
-  // Alola isn't a town-per-trial map: Melemele's two sit in Iki Town / Hauoli
-  // City, the Akala trio plus Olivia around Heahea/Paniola/Konikoni, Ula'ula's
-  // around Malie City and Po Town. Poni Island has no scraped town, so Mina and
-  // Hapu reuse Iki Town / Hauoli City rather than both landing on Iki Town.
-  alola: ['Hauoli City', 'Konikoni City', 'Paniola Town', 'Heahea City', 'Malie City', 'Po Town', 'Hauoli City', 'Iki Town'],
+  alola: [
+    'Hauoli City',
+    'Iki Town',
+    'Konikoni City',
+    'Paniola Town',
+    'Heahea City',
+    'Konikoni City',
+    'Malie City',
+    'Po Town',
+    'Po Town',
+    'Poni Island',
+    'Poni Island',
+  ],
 }
 // A gym sitting in a town reached long before its canonical turn needs a badge
-// gate of its own, since the town is already unlocked. Alola's Hapu fights in
-// the entry town of Iki Town (Poni Island has no scraped town) but is the
-// region's eighth trial, so she stays locked until seven Z-Crystals.
-const GYM_BADGE_GATES = { 'alola-gym-8': 7 }
+// gate of its own (Kanto reveals its gyms by index anyway). Alola's islands
+// unlock out of trial order, so its whole track is index-gated via
+// `badgeGatesByIndex` above. Kept for any one-off exception.
+const GYM_BADGE_GATES = {}
 const ELITE_FOUR = {
   johto: ['Will', 'Koga', 'Bruno', 'Karen'], hoenn: ['Sidney', 'Phoebe', 'Glacia', 'Drake'],
   sinnoh: ['Aaron', 'Bertha', 'Flint', 'Lucian'], unova: ['Shauntal', 'Grimsley', 'Caitlin', 'Marshal'],
@@ -673,7 +681,7 @@ const GYM_TYPES = {
   sinnoh: [['Rock'], ['Grass'], ['Fighting'], ['Water'], ['Ghost'], ['Steel'], ['Ice'], ['Electric']],
   unova: [['Grass'], ['Normal'], ['Bug'], ['Electric'], ['Ground'], ['Flying'], ['Ice'], ['Dragon']],
   kalos: [['Bug'], ['Rock'], ['Fighting'], ['Grass'], ['Electric'], ['Fairy'], ['Psychic'], ['Ice']],
-  alola: [['Normal'], ['Water'], ['Fire'], ['Grass'], ['Electric'], ['Ghost'], ['Fairy'], ['Ground']],
+  alola: [['Normal'], ['Fighting'], ['Water'], ['Fire'], ['Grass'], ['Rock'], ['Electric'], ['Ghost'], ['Dark'], ['Fairy'], ['Ground']],
   galar: [['Grass'], ['Water'], ['Fire'], ['Fighting'], ['Fairy'], ['Rock'], ['Dark'], ['Dragon']],
   paldea: [['Bug'], ['Grass'], ['Electric'], ['Water'], ['Normal'], ['Ghost'], ['Psychic'], ['Ice']],
 }
@@ -728,17 +736,21 @@ const LEAGUES = {
   kalos: DEFAULT_LEAGUE,
   alola: {
     ...DEFAULT_LEAGUE,
-    // Alola has 7 island trials + 4 grand trials, not gyms. The scraped map has
-    // no Poni town, so the 7 trial captains + Hapu's grand trial are mapped to
-    // the region's 8 badge slots (the grand trial last). The copy calls the
-    // track "Island Trials" and the rewards Z-Crystals. See TODO #40.
+    // 7 island trials + 4 grand trials (11 Z-Crystals), interleaved by island.
+    // `badgeGatesByIndex` forces the canonical order because Alola's island
+    // hubs unlock out of trial order.
+    badgeOrder: 'ordered',
+    badgeGatesByIndex: true,
     badgeTitles: [
       'Trial Captain',
+      'Island Kahuna',
       'Trial Captain',
       'Trial Captain',
       'Trial Captain',
+      'Island Kahuna',
       'Trial Captain',
       'Trial Captain',
+      'Island Kahuna',
       'Trial Captain',
       'Island Kahuna',
     ],
@@ -1865,7 +1877,11 @@ for (const region of REGIONS) {
       badgeColor:
         TYPE_COLORS[GYM_TYPES[regionId]?.[index]?.[0]] ?? BADGE_COLORS[index % BADGE_COLORS.length],
       spriteKey: trainerSpriteKey(leaderName),
-      ...(GYM_BADGE_GATES[gymId] != null ? { badgesRequired: GYM_BADGE_GATES[gymId] } : {}),
+      ...(GYM_BADGE_GATES[gymId] != null
+        ? { badgesRequired: GYM_BADGE_GATES[gymId] }
+        : leagueConfig.badgeGatesByIndex && index > 0
+          ? { badgesRequired: index }
+          : {}),
       team: buildTeam(
         roster,
         GYM_TYPES[regionId]?.[index],

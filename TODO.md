@@ -28,28 +28,27 @@ renumbered, so the gaps below are items that shipped.
     numbers).
 4. **#36 Zones (route chunks)** — M–L · ★★★★ — the model is in; more
     sub-areas, a distinct zone glyph and inline per-sub-area encounter grids.
-5. **#40 Alola / Galar / Paldea league structures** — M · ★★★½ — the
     data-driven model is in; Alola's full trial track, Galar's post-game
     tournament and Paldea's Titans / Team Star remain.
-6. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of Armor,
+5. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of Armor,
     Crown Tundra, Kitakami and the Terarium to first-class regions.
     minimal loops today; make them feel like real modes with real rewards.
-7. **#18 Better settings** — M · ★★★ — sprite-style options, account controls
+6. **#18 Better settings** — M · ★★★ — sprite-style options, account controls
     (blocked on #19) and finishing the Gameplay section.
-8. **#43 Multi-battles (double / triple / rotation) as a minigame** — M–L ·
+7. **#43 Multi-battles (double / triple / rotation) as a minigame** — M–L ·
     ★★½ — a self-contained minigame that reuses the combat pipeline.
-9. **#60 Areas should have their own zoomed-in map** — M · ★★ — zones and
+8. **#60 Areas should have their own zoomed-in map** — M · ★★ — zones and
     large areas list their sub-areas in the panel only; give them a focused
     map view entered from the Town Map, with a back button to exit.
-10. **#68 Trainer teams should use all level-appropriate Pokemon** — M · ★★ —
+9. **#68 Trainer teams should use all level-appropriate Pokemon** — M · ★★ —
     the strong type bias and narrow pools mean the same few species repeat; let
     trainers field every level-appropriate Pokemon so the Pokedex "seen" fills
     in.
 ### Tier 2 — Big / low-return, defer
 
-11. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
+10. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
     route-based field effects.
-12. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+11. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
 ---
@@ -282,37 +281,6 @@ construction, `speciesForGen`, `levelRoutes`, the raid scan),
 `computeUnlockedLocations`), and the Town Map (`src/components/town-map.js`).
 
 Effort: **medium–large** (data-heavy, but shares groundwork with #28/#36).
-
-## 40. Handle Alola, Galar and Paldea's league structures
-
-The league model assumes **8 gyms in canonical order**, then a **4-member Elite
-Four** and a Champion. The data-driven league block (`badgeOrder`, `badgeTrack`,
-`badgeName`, `eliteTrack`) shipped in 0.13.0: Alola is billed as the island
-trials (Z-Crystals), Galar's endgame is the Champion Cup, and Paldea uses
-`badgeOrder: 'free'` with a badge-count gate.
-
-Still open:
-
-- [ ] **Alola full trial track**: the scraped map has no Poni town, so the
-      region is mapped to 8 slots (7 trial captains + Hapu's grand trial). Add
-      a Poni town / trial site and promote it to the real 7 trials + 4 grand
-      trials, deciding whether a trial is a captain battle, a totem battle, or
-      both.
-- [ ] **Galar post-game tournament**: the Champion Cup's rematch is currently
-      the generic Lv.90 rematch; model the post-game tournament separately if
-      wanted.
-- [ ] **Paldea side content**: Titans and Team Star are not modelled — decide
-      whether they are optional side content or part of progression.
-
-Relevant code: `tools/generate-regions.cjs` (`LEAGUES`, gym placement,
-`gymsRequired` gates, league construction, `BADGE_NAMES` / `GYM_TOWNS`),
-`public/data/regions.json` + `gym-leader-data.json` / `elite-4-data.json` /
-`champion-data.json`, `src/components/gym-panel.js`, `src/game/reducer.js`
-(`BOSS_BATTLE_END`, `RESET_ELITE_FOUR`), `src/data/achievements.js`,
-`tools/validate-data.mjs`.
-
-Effort: **medium** (mostly data + panel copy; the Paldea any-order gate is the
-only real progression change).
 
 ## 43. Multi-battles (double / triple / rotation) as a minigame
 

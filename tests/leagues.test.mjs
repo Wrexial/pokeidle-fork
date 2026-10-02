@@ -37,6 +37,22 @@ test('Alola re-labels its gyms as island trials and awards Z-Crystals', () => {
   for (const gym of alolaGyms) assert.match(gym.badgeName, /ium Z$/)
 })
 
+test('Alola runs the full 7 trials + 4 grand trials', () => {
+  const alolaGyms = gymLeaderData.filter((gym) => (gym.region ?? 'kanto') === 'alola')
+  assert.equal(alolaGyms.length, 11)
+  assert.equal(alolaGyms.filter((gym) => gym.title.endsWith('Island Kahuna')).length, 4)
+  assert.equal(alolaGyms.filter((gym) => gym.title.endsWith('Trial Captain')).length, 7)
+  // Every trial forces its badge index, so the island order can't be skipped.
+  alolaGyms.forEach((gym, index) =>
+    assert.equal(gym.badgesRequired ?? 0, index, `${gym.id} badge gate`)
+  )
+  // Mina and Hapu hold the Poni Island hub, and the league wants all 11.
+  assert.equal(alolaGyms.at(-2)?.locationKey, 'alola-poni-island')
+  assert.equal(alolaGyms.at(-1)?.locationKey, 'alola-poni-island')
+  const league = Object.values(mapData).find((location) => location.id === 'alola-league')
+  assert.deepEqual(league.unlock.gymsRequired, alolaGyms.map((gym) => gym.id))
+})
+
 test('Galar treats its endgame as the Champion Cup', () => {
   const galar = region('galar')
   assert.equal(galar.league.eliteTrack, 'Champion Cup')

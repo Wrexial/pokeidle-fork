@@ -564,6 +564,9 @@ export function LocationPanel({ onOpenCatchSettings }) {
               )
             }),
           }),
+          // A zone hub can host a gym / trial (Alola's Poni Island holds Mina
+          // and Hapu), so offer the challenge from the hub panel too.
+          jsx(GymLocationPanel, {}),
           nextUnlocksSection,
         ],
       }),

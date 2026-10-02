@@ -203,7 +203,11 @@ export function GymPanel({ onOpenShop }) {
               className: 'gym-section-title',
               children: [
                 eliteTrackLabel,
-                isLeagueRematch ? ' · Rematch Lv.90' : '',
+                isLeagueRematch
+                  ? regionId === 'galar'
+                    ? ' · Post-game Tournament'
+                    : ' · Rematch Lv.90'
+                  : '',
               ],
             }),
             leagueUnlocked

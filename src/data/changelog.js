@@ -18,6 +18,8 @@ export const CHANGELOG = [
             'Hoenn’s Route 102 now has the missing Slakoth base form as a rare wild encounter',
             'The Galarian birds — Galarian Articuno, Zapdos and Moltres — are legendary Raid Island bosses again, instead of being filed among the ordinary one-off refuge encounters',
             'Raid Islands hand out their legendaries as a ladder now: a fresh island leans toward the minor legendaries and a completed (or prestiged) one toward the box legendaries, weighted by the region\u2019s badges, Champion and prestige instead of a flat random pick',
+            'Alola runs its real league track now — 11 Z-Crystals (7 island trials + 4 grand trials) instead of 8. Hala, Olivia and Nanu join as grand-trial island kahunas, the trials are ordered by island (each needs the previous Z-Crystals), and Mina and Hapu hold Poni Island. The league wants all 11',
+            'Galar\u2019s post-game Champion Cup rematch is labelled as the post-game tournament on the league panel',
             'Steven’s post-Champion Beldum gift is available at his house in Mossdeep City once you have beaten the Hoenn Champion',
             'Mr. Pok\u00e9mon on Johto\u2019s Route 30 now hands over the canonical Togepi Egg once you have a Johto badge; carry it in the party and battle to hatch it',
             'The Lake of Rage’s red Gyarados is a one-off guaranteed-shiny static on Johto Route 43 (after the seventh badge); it stays put until you catch it',

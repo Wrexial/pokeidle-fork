@@ -49,7 +49,19 @@ let metronomePool = null
  *   let Shield Dust block it.
  */
 function applyStatChange(attack, moveDef, events, deterministic = !1, secondary = !1) {
-  const effect = moveDef.effect
+  applyStatChangeEffect(attack, moveDef.effect, events, deterministic, secondary)
+}
+
+/**
+ * The shared body of {@link applyStatChange}, taking the effect object directly
+ * so a move's `secondary` (which may carry a stat change) can reuse it.
+ * @param {any} attack
+ * @param {any} effect
+ * @param {any[]} events
+ * @param {boolean} [deterministic]
+ * @param {boolean} [secondary]
+ */
+function applyStatChangeEffect(attack, effect, events, deterministic = !1, secondary = !1) {
   if (!effect) return
   const fromOpponent = effect.target !== 'self'
   // Shield Dust ignores a damaging move's added effects on its holder.
@@ -133,6 +145,41 @@ function applyStatChange(attack, moveDef, events, deterministic = !1, secondary 
       }
     }
   }
+}
+
+/**
+ * Apply a damaging move's extra secondary effect (a status or stat change) on
+ * top of its primary one, so a move can both burn and recoil (Flare Blitz) or
+ * paralyse and recoil (Volt Tackle). Shield Dust and Serene Grace apply as for
+ * any added effect.
+ * @param {any} attack
+ * @param {Move} moveDef
+ * @param {any[]} events
+ * @param {boolean} deterministic
+ * @param {any} activeTerrain
+ */
+function applySecondaryEffect(attack, moveDef, events, deterministic, activeTerrain) {
+  const secondary = moveDef.secondary
+  if (!secondary) return
+  if (secondary.changes) {
+    applyStatChangeEffect(attack, secondary, events, deterministic, !0)
+    return
+  }
+  if (!secondary.status) return
+  if (abilityOf(attack.defender) === 'shieldDust') return
+  const odds =
+    (secondary.chance ?? 100) * (abilityOf(attack.attacker) === 'sereneGrace' ? 2 : 1)
+  if (!chance(odds / 100, deterministic)) return
+  applyStatus(
+    attack.defender,
+    secondary.status,
+    events,
+    !attack.isPlayer,
+    deterministic,
+    activeTerrain,
+    !0,
+    attack.attacker
+  )
 }
 
 /**
@@ -1650,6 +1697,8 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         case 'status': {
           // Shield Dust ignores secondary effects on its holder.
           if (abilityOf(attack.defender) === 'shieldDust') break
+          // Fake Out only flinches on the user's first turn on the field.
+          if (moveDef.effect.firstTurnOnly && !firstTurn) break
           if (
             moveDef.effect.chance === void 0 ||
             chance(
@@ -1729,6 +1778,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           break
         }
       }
+    applySecondaryEffect(attack, moveDef, events, deterministic, activeTerrain)
     // Life Orb costs the attacker some HP for each hit it lands.
     const orbRecoil = heldLifeOrbRecoil(attack.attacker, totalDamage)
     if (orbRecoil > 0) {

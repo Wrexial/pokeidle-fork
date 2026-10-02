@@ -24,10 +24,16 @@ const MOVE_OVERRIDES = {
   doubleEdge: { effect: { type: 'recoil', fraction: 1 / 3 } },
   takeDown: { effect: { type: 'recoil', fraction: 1 / 4 } },
   braveBird: { effect: { type: 'recoil', fraction: 1 / 3 } },
-  flareBlitz: { effect: { type: 'recoil', fraction: 1 / 3 } },
+  flareBlitz: {
+    effect: { type: 'recoil', fraction: 1 / 3 },
+    secondary: { status: 'burn', chance: 10 },
+  },
   woodHammer: { effect: { type: 'recoil', fraction: 1 / 3 } },
   wildCharge: { effect: { type: 'recoil', fraction: 1 / 4 } },
-  voltTackle: { effect: { type: 'recoil', fraction: 1 / 3 } },
+  voltTackle: {
+    effect: { type: 'recoil', fraction: 1 / 3 },
+    secondary: { status: 'paralysis', chance: 10 },
+  },
   headSmash: { effect: { type: 'recoil', fraction: 1 / 2 } },
   submission: { effect: { type: 'recoil', fraction: 1 / 4 } },
   headCharge: { effect: { type: 'recoil', fraction: 1 / 4 } },
@@ -99,6 +105,99 @@ const MOVE_OVERRIDES = {
   // These always land a critical hit.
   wickedBlow: { critStage: 3 },
   surgingStrikes: { critStage: 3, multiHit: [3, 3] },
+
+  // --- Recharge moves: unusable on the turn after they land ---
+  hyperBeam: { effect: { type: 'recharge' } },
+  gigaImpact: { effect: { type: 'recharge' } },
+  rockWrecker: { effect: { type: 'recharge' } },
+  roarOfTime: { effect: { type: 'recharge' } },
+  blastBurn: { effect: { type: 'recharge' } },
+  hydroCannon: { effect: { type: 'recharge' } },
+  frenzyPlant: { effect: { type: 'recharge' } },
+  prismaticLaser: { effect: { type: 'recharge' } },
+  eternabeam: { effect: { type: 'recharge' } },
+  meteorAssault: { effect: { type: 'recharge' } },
+
+  // --- Damaging-move secondaries the extraction missed ---
+  // Status secondaries.
+  thunder: { effect: { type: 'status', status: 'paralysis', chance: 30 } },
+  thunderPunch: { effect: { type: 'status', status: 'paralysis', chance: 10 } },
+  // The elemental fangs each carry a status and a separate flinch roll.
+  fireFang: {
+    effect: { type: 'status', status: 'burn', chance: 10 },
+    secondary: { status: 'flinching', chance: 10 },
+  },
+  iceFang: {
+    effect: { type: 'status', status: 'freeze', chance: 10 },
+    secondary: { status: 'flinching', chance: 10 },
+  },
+  thunderFang: {
+    effect: { type: 'status', status: 'paralysis', chance: 10 },
+    secondary: { status: 'flinching', chance: 10 },
+  },
+  // Poison Fang badly poisons (the extraction stored a plain poison).
+  poisonFang: { effect: { type: 'status', status: 'toxic', chance: 50 } },
+  // Fake Out only flinches on the user's first turn on the field.
+  fakeOut: {
+    effect: { type: 'status', status: 'flinching', chance: 100, firstTurnOnly: true },
+    priority: 3,
+  },
+  // Stat-drop secondaries.
+  psychic: { effect: { type: 'statChange', target: 'opponent', changes: { spDefense: -1 }, chance: 10 } },
+  crunch: { effect: { type: 'statChange', target: 'opponent', changes: { defense: -1 }, chance: 20 } },
+  bugBuzz: { effect: { type: 'statChange', target: 'opponent', changes: { spDefense: -1 }, chance: 10 } },
+  focusBlast: { effect: { type: 'statChange', target: 'opponent', changes: { spDefense: -1 }, chance: 10 } },
+  earthPower: { effect: { type: 'statChange', target: 'opponent', changes: { spDefense: -1 }, chance: 10 } },
+  energyBall: { effect: { type: 'statChange', target: 'opponent', changes: { spDefense: -1 }, chance: 10 } },
+  moonblast: { effect: { type: 'statChange', target: 'opponent', changes: { spAttack: -1 }, chance: 30 } },
+  playRough: { effect: { type: 'statChange', target: 'opponent', changes: { attack: -1 }, chance: 10 } },
+  ironTail: { effect: { type: 'statChange', target: 'opponent', changes: { defense: -1 }, chance: 30 } },
+  rockSmash: { effect: { type: 'statChange', target: 'opponent', changes: { defense: -1 }, chance: 50 } },
+  liquidation: { effect: { type: 'statChange', target: 'opponent', changes: { defense: -1 }, chance: 20 } },
+  auroraBeam: { effect: { type: 'statChange', target: 'opponent', changes: { attack: -1 }, chance: 10 } },
+  shadowBall: { effect: { type: 'statChange', target: 'opponent', changes: { spDefense: -1 }, chance: 20 } },
+  flashCannon: { effect: { type: 'statChange', target: 'opponent', changes: { spDefense: -1 }, chance: 10 } },
+  seedFlare: { effect: { type: 'statChange', target: 'opponent', changes: { spDefense: -2 }, chance: 40 } },
+  muddyWater: { effect: { type: 'statChange', target: 'opponent', changes: { accuracy: -1 }, chance: 30 } },
+  octazooka: { effect: { type: 'statChange', target: 'opponent', changes: { accuracy: -1 }, chance: 50 } },
+  mirrorShot: { effect: { type: 'statChange', target: 'opponent', changes: { accuracy: -1 }, chance: 30 } },
+  // Self-buff secondaries.
+  metalClaw: { effect: { type: 'statChange', target: 'self', changes: { attack: 1 }, chance: 10 } },
+  chargeBeam: { effect: { type: 'statChange', target: 'self', changes: { spAttack: 1 }, chance: 70 } },
+  meteorMash: { effect: { type: 'statChange', target: 'self', changes: { attack: 1 }, chance: 20 } },
+  fieryDance: { effect: { type: 'statChange', target: 'self', changes: { spAttack: 1 }, chance: 50 } },
+  diamondStorm: { effect: { type: 'statChange', target: 'self', changes: { defense: 2 }, chance: 50 } },
+  ancientPower: {
+    effect: {
+      type: 'statChange',
+      target: 'self',
+      changes: { attack: 1, defense: 1, spAttack: 1, spDefense: 1, speed: 1 },
+      chance: 10,
+    },
+  },
+  silverWind: {
+    effect: {
+      type: 'statChange',
+      target: 'self',
+      changes: { attack: 1, defense: 1, spAttack: 1, spDefense: 1, speed: 1 },
+      chance: 10,
+    },
+  },
+  ominousWind: {
+    effect: {
+      type: 'statChange',
+      target: 'self',
+      changes: { attack: 1, defense: 1, spAttack: 1, spDefense: 1, speed: 1 },
+      chance: 10,
+    },
+  },
+  // Esper Wing raises the user's Sp. Atk (the extraction copied Speed).
+  esperWing: { effect: { type: 'statChange', target: 'self', changes: { spAttack: 1 }, chance: 100 } },
+  // Triple Arrows lowers Defense and can flinch: two effects on one hit.
+  tripleArrows: {
+    effect: { type: 'statChange', target: 'opponent', changes: { defense: -1 }, chance: 50 },
+    secondary: { status: 'flinching', chance: 30 },
+  },
 
   // --- Utility ---
   leechSeed: { effect: { type: 'leechSeed' } },
@@ -254,7 +353,6 @@ const MOVE_OVERRIDES = {
   gMaxHydrosnipe: { category: 'special' },
   // Priority values the extraction missed.
   extremeSpeed: { priority: 2 },
-  fakeOut: { priority: 3 },
   feint: { priority: 2 },
 }
 

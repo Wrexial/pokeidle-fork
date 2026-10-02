@@ -191,14 +191,14 @@ export const handledMoveEffectTypes = new Set(Object.keys(moveEffectText))
  * @param {Move & { key?: string }} move
  * @returns {string | null}
  */
-export function describeMove(move) {
+function describeMoveBase(move) {
   const variableNote = variablePowerNotes[move.key ?? '']
   if (variableNote) return variableNote
   const chargeNote = chargeMoveNotes[move.key ?? '']
   if (chargeNote && !move.effect) return chargeNote
   // Memento keeps its stat drop but also faints the user.
   if (move.selfDestruct) {
-    const base = describeMove({ ...move, selfDestruct: false })
+    const base = describeMoveBase({ ...move, selfDestruct: false })
     return base ? `${base} The user faints.` : 'The user faints.'
   }
   const notes = moveNotes[move.key ?? '']
@@ -291,6 +291,35 @@ export function describeMove(move) {
     return `${text}${notes ? ' ' + notes : ''}`
   }
   return null
+}
+
+/**
+ * Describe a damaging move's extra `secondary` effect, which rides alongside
+ * its primary effect (Flare Blitz recoils and can burn, ...).
+ * @param {any} secondary
+ * @returns {string | null}
+ */
+function describeSecondaryEffect(secondary) {
+  if (!secondary) return null
+  if (secondary.status) {
+    const label = STATUS_LABELS[secondary.status] ?? secondary.status
+    return secondary.chance && secondary.chance < 100
+      ? `${secondary.chance}% chance to ${label} the target.`
+      : `Inflicts ${label} on the target.`
+  }
+  if (secondary.changes) return describeStatChange(secondary)
+  return null
+}
+
+/**
+ * A one-line description of a move's implemented effects, including any
+ * `secondary` that rides alongside its primary effect.
+ * @param {Move & { key?: string }} move
+ * @returns {string | null}
+ */
+export function describeMove(move) {
+  const parts = [describeMoveBase(move), describeSecondaryEffect(move.secondary)].filter(Boolean)
+  return parts.length > 0 ? parts.join(' ') : null
 }
 
 /**

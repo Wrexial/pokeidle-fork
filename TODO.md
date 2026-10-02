@@ -23,55 +23,51 @@ renumbered, so the gaps below are items that shipped.
    caves/forests (28b) and more POIs remain. Pairs with #36/#39.
 2. **#24 Move data pass** — M · ★★★ — ally/faint heals, context move-calling,
    the doubles-only moves, and decisions on unused PP / dead Z-Max data.
-3. **#56 Multi-effect move pass** — M · ★★★ — audit moves with more than one
-    effect (Hyper Beam / Giga Impact recharge, Bite / flinch moves, stat-drop
-    secondaries, ...) and implement the missing half-effects; quite a few only
-    do part of what they should.
-4. **#25 Battle engine pass** — M–L · ★★★ — ally/doubles abilities, a few
+3. **#25 Battle engine pass** — M–L · ★★★ — ally/doubles abilities, a few
     complex singles ones, item nuances and battle polish (animations / damage
     numbers).
-5. **#36 Zones (route chunks)** — M–L · ★★★★ — the model is in; more
+4. **#36 Zones (route chunks)** — M–L · ★★★★ — the model is in; more
     sub-areas, a distinct zone glyph and inline per-sub-area encounter grids.
-6. **#40 Alola / Galar / Paldea league structures** — M · ★★★½ — the
+5. **#40 Alola / Galar / Paldea league structures** — M · ★★★½ — the
     data-driven model is in; Alola's full trial track, Galar's post-game
     tournament and Paldea's Titans / Team Star remain.
-7. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of Armor,
+6. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of Armor,
     Crown Tundra, Kitakami and the Terarium to first-class regions.
-8. **#54 Improve Dynamax Adventures and Battle Royal** — M · ★★½ — both are
+7. **#54 Improve Dynamax Adventures and Battle Royal** — M · ★★½ — both are
     minimal loops today; make them feel like real modes with real rewards.
-9. **#29 Companion minigame polish** — S · ★★ — an animated buddy panel /
+8. **#29 Companion minigame polish** — S · ★★ — an animated buddy panel /
     petting scene (the last open minigame idea).
-10. **#18 Better settings** — M · ★★★ — sprite-style options, account controls
+9. **#18 Better settings** — M · ★★★ — sprite-style options, account controls
     (blocked on #19) and finishing the Gameplay section.
-11. **#38 Clean up the Raid Islands** — S · ★★ — weight / level-gate the
+10. **#38 Clean up the Raid Islands** — S · ★★ — weight / level-gate the
     legendary pick by badges or prestige instead of a uniform "unseen first"
     pick.
-12. **#43 Multi-battles (double / triple / rotation) as a minigame** — M–L ·
+11. **#43 Multi-battles (double / triple / rotation) as a minigame** — M–L ·
     ★★½ — a self-contained minigame that reuses the combat pipeline.
-13. **#60 Areas should have their own zoomed-in map** — M · ★★ — zones and
+12. **#60 Areas should have their own zoomed-in map** — M · ★★ — zones and
     large areas list their sub-areas in the panel only; give them a focused
     map view entered from the Town Map, with a back button to exit.
-14. **#65 Use minigames as unlock gates** — M · ★★ — let a route require
+13. **#65 Use minigames as unlock gates** — M · ★★ — let a route require
     clearing a minigame (or hitting a score) instead of only battles / badges /
     catches, so the minigames feed progression.
-15. **#66 Ruins of Alph should award an Unown (and all 28 forms)** — M · ★★ —
+14. **#66 Ruins of Alph should award an Unown (and all 28 forms)** — M · ★★ —
     the sliding puzzle never gives an Unown, and only one Unown form exists;
     award one and add the full letter / punctuation set.
-16. **#67 Baby Pokemon from breeding, not gifts** — M · ★★ — the Daycare can
+15. **#67 Baby Pokemon from breeding, not gifts** — M · ★★ — the Daycare can
     already hatch babies from their evolved forms; stop handing the babies out
     as gift/static rewards and give their evolved forms a real source.
-17. **#68 Trainer teams should use all level-appropriate Pokemon** — M · ★★ —
+16. **#68 Trainer teams should use all level-appropriate Pokemon** — M · ★★ —
     the strong type bias and narrow pools mean the same few species repeat; let
     trainers field every level-appropriate Pokemon so the Pokedex "seen" fills
     in.
-18. **#70 Day/night cycle on a 60-minute clock** — M · ★★ — a fixed
+17. **#70 Day/night cycle on a 60-minute clock** — M · ★★ — a fixed
     real-time cycle (full day = 60 min) replacing the wall-clock night flag,
     with a visual phase and time-gated effects.
 ### Tier 2 — Big / low-return, defer
 
-19. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
+18. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
     route-based field effects.
-20. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+19. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
 ---
@@ -421,28 +417,28 @@ Likely touch points: `src/game/minigames/dynamax-adventures.js`,
 `src/game/minigames/gauntlet.js`, their scenes, and the reward tables.
 
 Effort: **medium**.
-## 56. Multi-effect move pass
+## 56. Multi-effect move pass (mostly done)
 
-Many moves have more than one effect, and quite a few only implement part of
-their kit. Audit them and fill in the missing half:
+Shipped (0.23.0): the move data now supports a primary effect plus one
+`secondary` (a status or stat change), so recoil/drain/recharge moves no longer
+lose their added effect; the recharge flag is back on the ten recharge moves;
+a batch of missing stat-drop/status/self-buff secondaries was filled in; the
+elemental fangs carry both their status and flinch; Fake Out is first-turn-only;
+and `public/reference.html` is the live checklist of every move's implemented
+effects.
 
-- [ ] Recharge moves (Hyper Beam, Giga Impact, Rock Wrecker, Roar of Time, ...)
-      — the user should be unable to act the next turn.
-- [ ] Flinch secondaries (Bite, Iron Head, Rock Slide, Fake Out, ...) — verify
-      the flinch chance and that the target actually loses its turn.
-- [ ] Stat-drop / status secondaries (Psychic's Sp. Def drop, Ice Beam's freeze,
-      Sludge Bomb's poison, ...) and multi-hit + secondary combinations.
-- [ ] Recoil / drain moves that also carry a secondary (Brave Bird, Flare
-      Blitz, ...).
-- [ ] Two-turn moves that combine a charge with an effect (Sky Attack's flinch,
-      Solar Blade, ...).
-- [ ] Keep a checklist/table of every multi-effect move and whether each part
-      is implemented, so the gaps stay visible.
+Still open (edge cases):
 
-Likely touch points: `src/data/move-effects.js`, `src/game/combat/` (`turn.js`,
-`status.js`, `effects`), and `public/reference.html` (regenerate).
+- [ ] Moves that roll one status out of several (Tri Attack, Dire Claw) or
+      carry a third effect, which the single `secondary` slot cannot express.
+- [ ] A few signature moves with unusual conditionals outside the generic
+      effect set.
 
-Effort: **medium**.
+Relevant code: `src/data/move-effects.js`, `src/game/combat/turn.js`,
+`src/game/move-info.js`, and `public/reference.html` (regenerate with
+`node tools/generate-reference.cjs`).
+
+Effort: **small** (the remaining bits are one-offs).
 ## 60. Areas should have their own zoomed-in map
 
 Today a zone / large area (Galar's Wild Area, Alola's islands, Paldea's

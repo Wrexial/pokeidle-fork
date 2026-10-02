@@ -1074,3 +1074,121 @@ test('drain heals from the damage actually dealt, not the overkill', () => {
     assert.equal(player.currentHp, 205)
   })
 })
+
+test('recharge moves force the user to skip the next turn', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['hyperBeam'],
+        speed: 200,
+        spAttack: 500,
+      }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], currentHp: 9999, maxHp: 9999 })
+    resolveBattleTurn(player, enemy, false)
+    assert.equal(player.mustRecharge, true, 'Hyper Beam sets the recharge flag')
+    const next = resolveBattleTurn(player, enemy, false)
+    assert.ok(
+      next.some((event) => event.type === 'recharge'),
+      'the follow-up turn is spent recharging'
+    )
+    assert.equal(player.mustRecharge, false, 'the flag clears after the spent turn')
+  })
+})
+
+test('Flare Blitz recoils and can burn on the same hit', () => {
+  withZeroRandom(() => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['flareBlitz'],
+        speed: 200,
+        attack: 500,
+        types: ['Fire'],
+      }),
+      enemy = battler({
+        name: 'Foe',
+        moves: ['splash'],
+        currentHp: 9999,
+        maxHp: 9999,
+        types: ['Grass'],
+      }),
+      events = resolveBattleTurn(player, enemy, false)
+    assert.ok(
+      events.some((event) => event.type === 'recoil' && /recoil/.test(event.message)),
+      'the recoil still lands'
+    )
+    assert.equal(enemy.status, 'burn', 'the secondary burn still lands')
+  })
+})
+
+test('Psychic can lower the target Special Defense', () => {
+  withZeroRandom(() => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['psychic'],
+        speed: 200,
+        spAttack: 500,
+      }),
+      enemy = battler({
+        name: 'Foe',
+        moves: ['splash'],
+        currentHp: 9999,
+        maxHp: 9999,
+        types: ['Fighting'],
+      })
+    resolveBattleTurn(player, enemy, false)
+    assert.equal(enemy.statStages?.spDefense, -1, 'the Special Defense drop is applied')
+  })
+})
+
+test('Fake Out only flinches on the first turn', () => {
+  withZeroRandom(() => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['fakeOut'],
+        speed: 200,
+        attack: 100,
+      }),
+      enemy = battler({ name: 'Foe', moves: ['tackle'], currentHp: 9999, maxHp: 9999 })
+    const firstTurn = resolveBattleTurn(player, enemy, false, true)
+    assert.ok(
+      firstTurn.some((event) => event.type === 'status' && /flinched/.test(event.message)),
+      'the foe flinches on the opening turn'
+    )
+    // The flinch flag clears at the start of the next turn, and Fake Out no
+    // longer flinches because it is not the user's first turn.
+    const laterTurn = resolveBattleTurn(player, enemy, false, false)
+    assert.ok(
+      !laterTurn.some((event) => event.type === 'status' && /flinched/.test(event.message)),
+      'later turns do not flinch'
+    )
+  })
+})
+
+test('descriptions cover recharge and secondary effects', () => {
+  assert.match(describeMove({ ...moveData.hyperBeam, key: 'hyperBeam' }), /recharge/i)
+  const flare = describeMove({ ...moveData.flareBlitz, key: 'flareBlitz' })
+  assert.match(flare, /recoil/i)
+  assert.match(flare, /burn/i)
+  const arrows = describeMove({ ...moveData.tripleArrows, key: 'tripleArrows' })
+  assert.match(arrows, /Defense/i)
+  assert.match(arrows, /flinch/i)
+})
+
+test('the multi-effect overrides are present in the move table', () => {
+  assert.equal(moveData.hyperBeam.effect.type, 'recharge')
+  assert.equal(moveData.gigaImpact.effect.type, 'recharge')
+  assert.equal(moveData.flareBlitz.secondary.status, 'burn')
+  assert.equal(moveData.voltTackle.secondary.status, 'paralysis')
+  assert.equal(moveData.psychic.effect.changes.spDefense, -1)
+  assert.equal(moveData.thunder.effect.status, 'paralysis')
+  assert.equal(moveData.thunderFang.effect.status, 'paralysis')
+  assert.equal(moveData.thunderFang.secondary.status, 'flinching')
+  assert.equal(moveData.fireFang.secondary.status, 'flinching')
+  assert.equal(moveData.poisonFang.effect.status, 'toxic')
+  assert.equal(moveData.fakeOut.effect.firstTurnOnly, true)
+  assert.equal(moveData.tripleArrows.secondary.status, 'flinching')
+})

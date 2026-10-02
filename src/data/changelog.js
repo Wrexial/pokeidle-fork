@@ -31,6 +31,15 @@ export const CHANGELOG = [
           ],
         },
         {
+          heading: 'Battles',
+          items: [
+            'Damaging moves can now carry two effects at once: Flare Blitz still recoils and can burn, Volt Tackle recoils and can paralyse, the elemental fangs can inflict their status and flinch, and Triple Arrows can lower Defense and flinch on the same hit',
+            'Recharge moves force a lost turn again — Hyper Beam, Giga Impact, Rock Wrecker, Roar of Time, Blast Burn, Hydro Cannon, Frenzy Plant, Prismatic Laser, Eternabeam and Meteor Assault. The recharge flag had been lost when the move data was rebuilt',
+            'Many damaging moves regained the secondary effects the extraction missed: Thunder and Thunder Punch can paralyse, Psychic, Crunch, Bug Buzz, Focus Blast, Earth Power, Energy Ball, Moonblast, Play Rough, Iron Tail, Rock Smash, Liquidation, Aurora Beam, Shadow Ball, Flash Cannon and Seed Flare drop a stat, Muddy Water, Octazooka and Mirror Shot drop accuracy, and Metal Claw, Charge Beam, Meteor Mash, Fiery Dance, Diamond Storm, Ancient Power, Silver Wind and Ominous Wind can raise the user\u2019s own stats',
+            'Fake Out only flinches on the user\u2019s first turn on the field, so it can no longer lock a foe down every turn; Poison Fang now badly poisons instead of plain poisoning; and Esper Wing raises Sp. Atk rather than Speed',
+          ],
+        },
+        {
           heading: 'Minigames',
           items: [
             'Whack-a-Diglett speeds up as the round runs down (targets stay up for less time) and adds a rare Dugtrio jackpot worth 5 points on top of the Diglett and Zubat',

@@ -1,6 +1,6 @@
 # TODO
 
-Open ideas and follow-ups. Current game version: **0.21.0**
+Open ideas and follow-ups. Current game version: **0.23.0**
 (`src/data/changelog.js`). Finished work lives in the changelog, not here — this
 file only tracks what is **still open**. See `AGENTS.md` for architecture,
 commands and data conventions.
@@ -24,30 +24,28 @@ renumbered, so the gaps below are items that shipped.
 2. **#24 Move data pass** — M · ★★★ — ally/faint heals, context move-calling,
    the doubles-only moves, and decisions on unused PP / dead Z-Max data.
 3. **#25 Battle engine pass** — M–L · ★★★ — ally/doubles abilities, a few
-    complex singles ones, item nuances and battle polish (animations / damage
-    numbers).
+   complex singles ones, item nuances and battle polish (animations / damage
+   numbers).
 4. **#36 Zones (route chunks)** — M–L · ★★★★ — the model is in; more
-    sub-areas, a distinct zone glyph and inline per-sub-area encounter grids.
-    data-driven model is in; Alola's full trial track, Galar's post-game
-    tournament and Paldea's Titans / Team Star remain.
+   sub-areas, a distinct zone glyph and inline per-sub-area encounter grids.
 5. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of Armor,
-    Crown Tundra, Kitakami and the Terarium to first-class regions.
-    minimal loops today; make them feel like real modes with real rewards.
+   Crown Tundra, Kitakami and the Terarium to first-class regions.
 6. **#18 Better settings** — M · ★★★ — sprite-style options, account controls
-    (blocked on #19) and finishing the Gameplay section.
+   (blocked on #19) and finishing the Gameplay section.
 7. **#43 Multi-battles (double / triple / rotation) as a minigame** — M–L ·
-    ★★½ — a self-contained minigame that reuses the combat pipeline.
+   ★★½ — a self-contained minigame that reuses the combat pipeline.
 8. **#60 Areas should have their own zoomed-in map** — M · ★★ — zones and
-    large areas list their sub-areas in the panel only; give them a focused
-    map view entered from the Town Map, with a back button to exit.
-    the strong type bias and narrow pools mean the same few species repeat; let
-    trainers field every level-appropriate Pokemon so the Pokedex "seen" fills
-    in.
+   large areas list their sub-areas in the panel only; give them a focused
+   map view entered from the Town Map, with a back button to exit.
+
 ### Tier 2 — Big / low-return, defer
 
 9. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
-    route-based field effects.
-10. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+   route-based field effects.
+10. **#56 Multi-effect move pass (residual)** — S · ★★ — moves that roll one
+    status out of several (Tri Attack, Dire Claw) or carry a third effect,
+    which the single `secondary` slot cannot express.
+11. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
 ---
@@ -183,8 +181,7 @@ Mt. Silver).
       their own species lists so they don't drag a whole generation slice in.
       Note: the committed `public/data` isn't currently idempotent with the
       generator, so a data-only pass needs an `apply-*.cjs` script (as the other
-      generators' follow-ups do) rather than a full re-run. (The Lake of Rage is
-      one such missing Johto area — see #69.)
+      generators' follow-ups do) rather than a full re-run.
 - [ ] Consider a real `type` / `areaType` field (cave, forest, sea, ruins, …)
       instead of the current binary town-vs-route; `location-panel.js` labels
       everything non-town as "Route 🌿", and the battle background comes from

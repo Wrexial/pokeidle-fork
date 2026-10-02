@@ -5,10 +5,12 @@
  *
  * The committed `trainer-data.json` isn't idempotent with
  * `generate-regions.cjs`, so this is a data-only follow-up. It walks each
- * non-Kanto region's trainers in order and rebuilds every team with
+ * region's trainers in order and rebuilds every team with
  * `lib/trainer-teams.cjs`: level-appropriate, the class's type theme as a bias,
- * and a strong preference for species the region has not fielded yet. Team
- * sizes and levels are kept. Kanto's hand-curated trainers are left alone.
+ * and a queue over the region's evolution lines so every line is shown. It adds
+ * two extra trainers per town for headroom. This now covers Kanto too (the
+ * generator still doesn't regenerate Kanto's map/encounters; only its trainer
+ * teams are rebuilt here).
  *
  * Idempotent (the levels determine the teams). Usage: node
  * tools/apply-trainer-variety.cjs [--dry]
@@ -24,7 +26,7 @@ const {
   pickTrainerName,
 } = require('./lib/trainer-names.cjs')
 
-/** Extra trainers added to every non-Kanto town for dex headroom. */
+/** Extra trainers added to every town for dex headroom. */
 const EXTRA_PER_TOWN = 2
 const clampLevel = (level) => Math.max(5, Math.min(100, Math.round(level)))
 /** @param {string} text */
@@ -176,8 +178,6 @@ const dry = process.argv.includes('--dry')
 let changed = 0,
   trainersTouched = 0
 for (const region of regions) {
-  // Kanto's route trainers are hand-curated; leave them alone.
-  if (region.id === 'kanto') continue
   const pool = poolForGen(region.generation),
     natives = shuffle(
       pool.filter((candidate) => candidate.native),

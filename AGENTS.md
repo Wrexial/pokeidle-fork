@@ -627,10 +627,11 @@ One-off scripts used to build the data JSON (not run during dev/build):
   gym / Elite Four / Champion teams use the older `buildTeam`,
   which drops species that should already have evolved and, at Lv.55+, very
   weak final forms (Ditto), while keeping the type theme when a sparse type
-  (Dragon) would otherwise run out. Kanto's hand-curated trainer/leader data
-  and its gen3 sprites are left alone. `pokemon-species.json` carries a
-  `legendary` flag (set for legendaries, mythicals and Ultra Beasts) that keeps
-  them out of every trainer team.
+  (Dragon) would otherwise run out. Kanto's hand-curated map, encounters,
+  leaders and gen3 sprites are left alone, but its route trainers are run
+  through `apply-trainer-variety.cjs` like every other region.
+  `pokemon-species.json` carries a `legendary` flag (set for legendaries,
+  mythicals and Ultra Beasts) that keeps them out of every trainer team.
   Every leader also gets a `rematchTeam`: a gym fields six Lv.80 final
   evolutions once the player has every badge in that region, and the Elite Four
   / Champion field Lv.90/92 teams once the region's Champion has been beaten.
@@ -700,11 +701,10 @@ One-off scripts used to build the data JSON (not run during dev/build):
   Johto Route 36 on the Bug-Catching Contest, Paldea's South Province (Area
   Three) on the Academy Quiz. Idempotent (`--dry`).
 - `apply-trainer-variety.cjs` — data-only pass (#68) that rebuilds every
-  non-Kanto town's route trainers with `lib/trainer-teams.cjs`, adding two extra
-  trainers per town for headroom: level-appropriate teams, the class type as a
-  bias, and a queue over the region's evolution lines so **every line is shown
-  at least once**. Kanto's hand-curated trainers are left alone. Idempotent
-  (`--dry`).
+  region's (including Kanto's) town route trainers with `lib/trainer-teams.cjs`,
+  adding two extra trainers per town for headroom: level-appropriate teams, the
+  class type as a bias, and a queue over the region's evolution lines so
+  **every line is shown at least once**. Idempotent (`--dry`).
 - `fix-impossible-encounters.cjs` / `fix-impossible-teams.cjs` — step wild
   encounters and trainer/gym/Elite Four/Champion Pokemon back to a form that
   could exist at their level (a Lv. 3 Chesnaught becomes a Chespin), merging

@@ -8,8 +8,6 @@
 // the region's own-generation species), keeps the class type as a bias, and
 // fills the rest with level-appropriate forms and themed non-natives.
 
-const { stageForLevel } = require('./evolution-levels.cjs')
-
 /** How far ahead the cursor looks for an on-theme entry before taking the next. */
 const THEME_WINDOW = 20
 
@@ -22,17 +20,35 @@ function outgrown(form, level, evolvesAt) {
 }
 
 /** The line's representative form at `level` (Pikipek early, Toucannon late). */
-function stageFromLine(line, level, evolutionLevels) {
-  return stageForLevel(line.final, level, evolutionLevels)
+function stageFromLine(line, level, evolutionLevels, evolvesAt) {
+  return stageForm(line.final, level, evolutionLevels, evolvesAt)
+}
+
+/**
+ * The form a species should actually be fielded as at `level`: step back along
+ * the pre-evolution chain while the pre-evolution would not yet have evolved
+ * (this catches item / friendship evolutions, which have no level gate but get
+ * a nominal one via `evolvesAt`).
+ */
+function stageForm(key, level, evolutionLevels, evolvesAt) {
+  let current = key
+  const seen = new Set([key])
+  for (;;) {
+    const preEvolution = evolutionLevels.preEvolutionOf[current]
+    if (!preEvolution || seen.has(preEvolution)) break
+    if ((evolvesAt[preEvolution] ?? Infinity) <= level) break
+    current = preEvolution
+    seen.add(current)
+  }
+  return current
 }
 
 /**
  * The form a candidate would be fielded as at `level`, or null when it is not
- * allowed (too advanced, already on this team, or outgrown).
+ * allowed (already on this team, or outgrown).
  */
 function fieldableForm(candidate, level, usedInTeam, evolutionLevels, evolvesAt) {
-  if (candidate.minLevel > level) return null
-  const form = stageForLevel(candidate.key, level, evolutionLevels)
+  const form = stageForm(candidate.key, level, evolutionLevels, evolvesAt)
   if (usedInTeam.has(form) || outgrown(form, level, evolvesAt)) return null
   return form
 }
@@ -135,7 +151,7 @@ function buildVariedTeam({
       let pickIndex = -1,
         pickForm = null
       for (let i = 0; i < state.lineQueue.length && i < THEME_WINDOW; i++) {
-        const form = stageFromLine(state.lineQueue[i], level, evolutionLevels)
+        const form = stageFromLine(state.lineQueue[i], level, evolutionLevels, evolvesAt)
         if (usedInTeam.has(form) || outgrown(form, level, evolvesAt)) continue
         if (pickIndex === -1) (pickIndex = i), (pickForm = form)
         if (themed(speciesTypes[form] ?? state.lineQueue[i].types)) {

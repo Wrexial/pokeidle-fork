@@ -84,8 +84,6 @@ function teamsFor(regionId) {
 
 test('route trainers only field level-appropriate, non-legendary, non-starter Pokemon', () => {
   for (const [locationId, list] of Object.entries(trainers)) {
-    // Kanto's trainers are hand-curated and may field starter lines.
-    const isKanto = (mapData[locationId]?.region ?? 'kanto') === 'kanto'
     for (const trainer of list)
       for (const member of trainer.team ?? []) {
         const species = pokemonSpecies[member.speciesKey]
@@ -95,19 +93,16 @@ test('route trainers only field level-appropriate, non-legendary, non-starter Po
           `${trainer.id} fields ${member.speciesKey} at Lv.${member.level} (floor Lv.${minLevel[member.speciesKey]})`
         )
         assert.ok(!species.legendary, `${trainer.id} fields legendary ${member.speciesKey}`)
-        if (!isKanto)
-          assert.ok(
-            !ALL_STARTERS.has(member.speciesKey),
-            `${trainer.id} fields starter ${member.speciesKey}`
-          )
+        assert.ok(
+          !ALL_STARTERS.has(member.speciesKey),
+          `${trainer.id} fields starter ${member.speciesKey}`
+        )
       }
   }
 })
 
-test('route trainers reveal a large share of each generated region dex', () => {
+test('route trainers reveal a large share of each region dex', () => {
   for (const region of regions) {
-    // Kanto's trainers are hand-curated; the generated regions are the pass.
-    if (region.id === 'kanto') continue
     const [minId, maxId] = GEN_RANGES[region.generation - 1],
       nativePool = Object.entries(pokemonSpecies).filter(
         ([, species]) =>
@@ -137,7 +132,6 @@ test('every evolution line appears on some route trainer', () => {
       Object.entries(pokemonSpecies).map(([key, species]) => [key, species.types ?? []])
     )
   for (const region of regions) {
-    if (region.id === 'kanto') continue
     const [minId, maxId] = GEN_RANGES[region.generation - 1],
       natives = Object.entries(pokemonSpecies)
         .filter(

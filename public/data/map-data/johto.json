@@ -382,7 +382,8 @@
    "gymsRequired": [
     "johto-gym-3"
    ],
-   "partyLevel": 21
+   "partyLevel": 21,
+   "minigame": "bugContest"
   },
   "unlockOrder": 200036,
   "position": {

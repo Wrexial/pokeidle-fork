@@ -73,7 +73,7 @@ export function AcademyQuizScene() {
 
   function leave() {
     collect(
-      { type: 'END_MINIGAME' },
+      { type: 'END_MINIGAME', payload: { minigame: 'academyQuiz', score } },
       prize ? { type: 'CLAIM_MINIGAME_REWARD', payload: prize } : null
     )
   }

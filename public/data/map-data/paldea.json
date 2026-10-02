@@ -174,7 +174,9 @@
    "requires": [
     "paldea-south-province",
     "paldea-south-province-area-one"
-   ]
+   ],
+   "minigame": "academyQuiz",
+   "minScore": 4
   },
   "unlockOrder": 910002.5003,
   "position": {

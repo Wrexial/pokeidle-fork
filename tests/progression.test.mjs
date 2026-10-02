@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 installGameData()
 
-const { awardExperience, computeUnlockedLocations, getRegionUnlockTokens, regionProgressionGoal, checkShinyOdds, shinyChainMultiplier, shinyOddsForCompletedGenerations, shinyOddsForSpecies, entryRoutePath } =
+const { awardExperience, computeUnlockedLocations, getRegionUnlockTokens, regionProgressionGoal, checkShinyOdds, shinyChainMultiplier, shinyOddsForCompletedGenerations, shinyOddsForSpecies, entryRoutePath, minigameRequirementMet } =
   await import('../src/game/progression.js')
 const { initialGameState, gameReducer } = await import('../src/game/reducer.js')
 const { encounterData, gymLeaderData, mapData, pokemonSpecies, regions } = await import('../src/data/gameData.js')
@@ -44,6 +44,47 @@ test('getRegionUnlockTokens counts Champions minus opened regions', () => {
     2
   )
   assert.equal(getRegionUnlockTokens(baseState({ defeatedChampions: [], unlockedRegions: [] })), 0)
+})
+
+test('minigame gates unlock a route once the record is met', () => {
+  const kantoGyms = gymLeaderData
+    .filter((gym) => (gym.region ?? 'kanto') === 'kanto')
+    .map((gym) => gym.id)
+    .slice(0, 4)
+  const ready = baseState({
+    defeatedGyms: kantoGyms,
+    battlesWonByLocation: { pokemonTower: 15, lavenderTown: 8 },
+  })
+  assert.ok(!computeUnlockedLocations(ready).includes('route11'), 'the minigame gate holds')
+  assert.ok(
+    computeUnlockedLocations({
+      ...ready,
+      minigameRecords: { whack: { best: 15, completed: true } },
+    }).includes('route11'),
+    'clearing the gate opens the route'
+  )
+  // The helper covers both the score and the completion-flag shapes.
+  assert.equal(minigameRequirementMet(ready, { minigame: 'whack', minScore: 15 }), false)
+  assert.equal(
+    minigameRequirementMet(
+      baseState({ minigameRecords: { bugContest: { best: 0, completed: true } } }),
+      { minigame: 'bugContest' }
+    ),
+    true
+  )
+})
+
+test('END_MINIGAME records the best minigame score', () => {
+  const first = gameReducer(
+    { ...initialGameState, phase: 'whack' },
+    { type: 'END_MINIGAME', payload: { minigame: 'whack', score: 20 } }
+  )
+  assert.deepEqual(first.minigameRecords.whack, { best: 20, completed: true })
+  const lower = gameReducer(
+    { ...first, phase: 'whack' },
+    { type: 'END_MINIGAME', payload: { minigame: 'whack', score: 5 } }
+  )
+  assert.equal(lower.minigameRecords.whack.best, 20, 'a lower run keeps the best')
 })
 
 test('a finished region points at its Champion, then a banked token', () => {

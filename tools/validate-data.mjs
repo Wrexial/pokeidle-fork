@@ -30,6 +30,7 @@ const { GIFTS, STATIC_ENCOUNTERS } = await import('../src/game/gifts.js')
 const { GAME_CORNER_PRIZE_POOL } = await import('../src/game/minigames/game-corner.js')
 const { BUG_CONTEST_POOL } = await import('../src/game/minigames/bug-contest.js')
 const { UNOWN_FORMS } = await import('../src/game/minigames/sliding-puzzle.js')
+const { MINIGAME_INFO } = await import('../src/game/minigames/registry.js')
 const { fossilItems } = await import('../src/data/items.js')
 const { regionalStarters } = await import('../src/data/config.js')
 
@@ -233,6 +234,17 @@ for (const [locationId, location] of Object.entries(mapData)) {
       fail(`connection ${locationId} <-> ${connection} is not mutual`)
   for (const requirement of location.unlock?.battlesAtLocation ?? [])
     if (!mapData[requirement.locationId]) fail(`location ${locationId} gates on unknown ${requirement.locationId}`)
+  // `unlock.minigame` / `minScore` (#65): route gates that ask for a minigame.
+  const minigame = location.unlock?.minigame
+  if (minigame && !MINIGAME_INFO[minigame])
+    fail(`location ${locationId} gates on unknown minigame ${minigame}`)
+  if (
+    location.unlock?.minScore !== undefined &&
+    (!Number.isFinite(location.unlock.minScore) || location.unlock.minScore < 1)
+  )
+    fail(`location ${locationId} has an invalid minScore`)
+  if (location.unlock?.minScore !== undefined && !minigame)
+    fail(`location ${locationId} has minScore but no minigame`)
   if (location.type === 'route' && (!location.routeKey || !encounterData[location.routeKey]))
     fail(`route ${locationId} has no encounter bucket`)
   const caughtOnRoute = location.unlock?.caughtOnRoute

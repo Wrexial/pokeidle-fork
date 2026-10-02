@@ -279,7 +279,9 @@ Data conventions:
   harder variant of `caughtCount`), `partyLevel`
   (minimum level any party Pokemon must reach), `badgesRequired`, `gymsRequired`
   (specific gym ids), `championDefeated` (a region id, or `true` meaning Kanto),
-  and `requires` (locations that must already be unlocked) — all resolved to a
+  and `requires` (locations that must already be unlocked), plus `minigame` /
+  `minScore` (clear a fixed minigame, or score at least `minScore` in it — see
+  `state.minigameRecords` and `apply-minigame-gates.cjs`) — all resolved to a
   fixpoint in `computeUnlockedLocations`. Region
   **entry towns** use `{ entry: true }`: they open if the region is the player's
   `startRegion` or is listed in the player's `unlockedRegions`. Regions are no
@@ -671,6 +673,10 @@ One-off scripts used to build the data JSON (not run during dev/build):
   The generator runs the same pass (`lib/route-variety.cjs`) on regeneration;
   added entries carry a `variety: true` flag so the pass is idempotent.
   Idempotent (`--dry`).
+- `apply-minigame-gates.cjs` — data-only pass adding the `unlock.minigame` /
+  `minScore` gates to chosen routes (#65): Route 11 on a Whack-a-Diglett score,
+  Johto Route 36 on the Bug-Catching Contest, Paldea's South Province (Area
+  Three) on the Academy Quiz. Idempotent (`--dry`).
 - `fix-impossible-encounters.cjs` / `fix-impossible-teams.cjs` — step wild
   encounters and trainer/gym/Elite Four/Champion Pokemon back to a form that
   could exist at their level (a Lv. 3 Chesnaught becomes a Chespin), merging

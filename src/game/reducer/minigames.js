@@ -29,7 +29,9 @@ export function startBugContest(state, action) {
  * @returns {GameState}
  */
 export function endBugContest(state, action) {
-  return state.phase === 'bugCatching' ? { ...state, ...createIdleBattleState() } : state
+  return state.phase === 'bugCatching'
+    ? recordMinigame({ ...state, ...createIdleBattleState() }, action.payload)
+    : state
 }
 
 /**
@@ -357,7 +359,28 @@ export function startIceSlide(state, action) {
 }
 
 /**
- * Handle the `END_MINIGAME` action.
+ * Merge a minigame result into `state.minigameRecords`, keeping the best score.
+ * @param {GameState} state
+ * @param {{ minigame?: string, score?: number, completed?: boolean } | null | undefined} [result]
+ * @returns {GameState}
+ */
+function recordMinigame(state, result) {
+  if (!result?.minigame) return state
+  const previous = state.minigameRecords?.[result.minigame] ?? { best: 0, completed: false },
+    best = Math.max(previous.best ?? 0, Math.max(0, Math.floor(result.score ?? 0))),
+    completed = previous.completed || !!result.completed || best > 0
+  return {
+    ...state,
+    minigameRecords: {
+      ...(state.minigameRecords ?? {}),
+      [result.minigame]: { best, completed },
+    },
+  }
+}
+
+/**
+ * Handle the `END_MINIGAME` action, recording the run's result for the
+ * `unlock.minigame` route gates.
  * @param {GameState} state
  * @param {GameAction} action
  * @returns {GameState}
@@ -385,7 +408,7 @@ export function endMinigame(state, action) {
     state.phase === 'ruinsPuzzle' ||
     state.phase === 'iceSlide' ||
     state.phase === 'pelago'
-    ? { ...state, ...createIdleBattleState() }
+    ? recordMinigame({ ...state, ...createIdleBattleState() }, action.payload)
     : state
 }
 

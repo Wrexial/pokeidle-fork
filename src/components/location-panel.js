@@ -4,9 +4,9 @@ import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
 import { BATTLE_TOWER_LOCATION } from '../data/config.js'
 import { martShopItems } from '../data/items.js'
 import { encounterData, gymLeaderData, mapData, pokemonSpecies, regions, raidPoolFor } from '../data/gameData.js'
-import { MINIGAME_INFO, MINIGAME_LOCATIONS, MINIGAME_START_ACTION, ROUTE_ACTIVITIES, bestRodId, nextRod, rodForId, routeActivityIds } from '../game/minigames.js'
+import { MINIGAME_AREAS, MINIGAME_INFO, MINIGAME_LOCATIONS, MINIGAME_START_ACTION, ROUTE_ACTIVITIES, bestRodId, nextRod, rodForId, routeActivityIds } from '../game/minigames.js'
 import { useGame } from '../game/context.js'
-import { computeUnlockedLocations, regionProgressionGoal } from '../game/progression.js'
+import { computeUnlockedLocations, minigameRequirementMet, regionProgressionGoal } from '../game/progression.js'
 import { servicePoisFor } from '../game/services.js'
 import { MinigameCard } from './minigame-card.js'
 import { GiftPanel } from './gift-panel.js'
@@ -340,6 +340,18 @@ export function LocationPanel({ onOpenCatchSettings }) {
         current: highestLevel,
         required: unlockRule.partyLevel,
         met: highestLevel >= unlockRule.partyLevel,
+      })
+    }
+    if (unlockRule.minigame) {
+      const record = state.minigameRecords?.[unlockRule.minigame],
+        title = MINIGAME_INFO[unlockRule.minigame]?.title ?? unlockRule.minigame,
+        met = minigameRequirementMet(state, unlockRule)
+      requirements.push({
+        label: unlockRule.minScore ? `${title} best score` : `Clear ${title}`,
+        current: unlockRule.minScore ? (record?.best ?? 0) : met ? 1 : 0,
+        required: unlockRule.minScore ?? 1,
+        met,
+        locationId: MINIGAME_AREAS[unlockRule.minigame] ?? null,
       })
     }
     if (unlockRule.gymsRequired)

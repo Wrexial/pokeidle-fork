@@ -45,24 +45,21 @@ renumbered, so the gaps below are items that shipped.
 11. **#60 Areas should have their own zoomed-in map** — M · ★★ — zones and
     large areas list their sub-areas in the panel only; give them a focused
     map view entered from the Town Map, with a back button to exit.
-12. **#65 Use minigames as unlock gates** — M · ★★ — let a route require
-    clearing a minigame (or hitting a score) instead of only battles / badges /
-    catches, so the minigames feed progression.
-13. **#67 Baby Pokemon from breeding, not gifts** — M · ★★ — the Daycare can
+12. **#67 Baby Pokemon from breeding, not gifts** — M · ★★ — the Daycare can
     already hatch babies from their evolved forms; stop handing the babies out
     as gift/static rewards and give their evolved forms a real source.
-14. **#68 Trainer teams should use all level-appropriate Pokemon** — M · ★★ —
+13. **#68 Trainer teams should use all level-appropriate Pokemon** — M · ★★ —
     the strong type bias and narrow pools mean the same few species repeat; let
     trainers field every level-appropriate Pokemon so the Pokedex "seen" fills
     in.
-15. **#70 Day/night cycle on a 60-minute clock** — M · ★★ — a fixed
+14. **#70 Day/night cycle on a 60-minute clock** — M · ★★ — a fixed
     real-time cycle (full day = 60 min) replacing the wall-clock night flag,
     with a visual phase and time-gated effects.
 ### Tier 2 — Big / low-return, defer
 
-16. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
+15. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
     route-based field effects.
-17. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+16. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
 ---
@@ -446,40 +443,6 @@ Relevant code: `src/components/town-map.js`, `src/components/location-panel.js`
 `REGION_MAP_LAYOUTS`).
 
 Effort: **medium**.
-
-## 65. Use minigames as unlock gates
-
-Location unlocks are built entirely from battles won, catches, badges, gyms,
-party level, champion and `requires` (`computeUnlockedLocations`). The
-minigames are side content today — nothing in progression ever asks the player
-to play one. Hook some of them in as gates so the minigames matter to the
-route/unlock graph.
-
-- [ ] Add a `minigame` unlock rule (e.g.
-      `unlock: { minigame: 'whack', minScore: 20 }` or a simple completion
-      flag) to `computeUnlockedLocations` and the `MapLocation` type.
-- [ ] Persist the result: `endMinigame` / `claimMinigameReward` currently throw
-      the outcome away, so record each minigame's completion and best score in
-      the save (`initialGameState`, `SAVED_STATE_KEYS`, `src/types.d.ts`).
-- [ ] Show the requirement in `location-panel.js` (`unlockRequirements`) with
-      the current / target score and a link to the minigame's home area.
-- [ ] Pick the gates thematically: e.g. a Vermilion-area route gated on
-      Whack-a-Diglett, a Johto route on the Bug-Catching Contest, a Paldea
-      route on the Academy Quiz. Keep them optional-ish so a player who dislikes
-      a minigame is never hard-stuck if it can be avoided.
-- [ ] Decide whether generated regions should emit these gates
-      (`tools/generate-regions.cjs`) or they are hand-placed on the committed
-      data with an `apply-*.cjs` script (the data isn't idempotent with the
-      generator).
-- [ ] Re-check `tools/validate-data.mjs` for the new rule shape.
-
-Relevant code: `src/game/progression/unlocks.js` (`computeUnlockedLocations`),
-`src/components/location-panel.js` (`unlockRequirements`),
-`src/game/reducer/minigames.js` (`endMinigame` / `claimMinigameReward`),
-`src/game/minigames/registry.js`, `public/data/map-data/*.json`, and the save
-shape.
-
-Effort: **medium** (state shape + one new rule + placement).
 
 ## 67. Baby Pokemon should come from breeding, not gift rewards
 

@@ -125,6 +125,8 @@ export const initialGameState = {
   /** NPC gift / static-encounter ids already claimed this save. */
   claimedGifts: [],
   regionPrestige: {},
+  /** Best result per minigame, used by `unlock.minigame` route gates. */
+  minigameRecords: {},
   /** Next Battle Tower floor to attempt (0 = not in a run). Hoenn only. */
   towerFloor: 0,
   /** Best Tower floor cleared per region (only Hoenn is used). */

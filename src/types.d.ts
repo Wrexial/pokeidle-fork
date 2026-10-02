@@ -511,6 +511,8 @@ type GameState = {
   claimedGifts: string[]
   /** Times each region has been prestiged (map progress reset). */
   regionPrestige: Record<string, number>
+  /** Best result per minigame, for `unlock.minigame` gates (see endMinigame). */
+  minigameRecords: Record<string, { best: number; completed: boolean }>
   /** Next Battle Tower floor to attempt (0 = not in a run). Hoenn only. */
   towerFloor: number
   /** Best Battle Tower floor cleared, keyed by region (Hoenn only). */
@@ -611,6 +613,9 @@ type MapLocation = {
     caughtOnRoute?: { routeKey: string; species: string[]; count: number }
     /** minimum level any party Pokemon must reach */
     partyLevel?: number
+    /** clear (or score at least `minScore` in) a fixed minigame */
+    minigame?: string
+    minScore?: number
     /** region-entry gate: unlocked if it's the player's start region, or the
      * region has been opened with an Unlock Token (`state.unlockedRegions`) */
     entry?: boolean

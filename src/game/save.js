@@ -568,7 +568,24 @@ export function repairSave(saved) {
       saved.towerFloor > 0 &&
       saveTowerRegion === BATTLE_TOWER_REGION
         ? saved.towerFloor
-        : 0
+        : 0,
+    // Best minigame results (for `unlock.minigame` gates); keep only well-formed
+    // entries so a corrupt save can't wedge the route graph.
+    minigameRecords = Object.fromEntries(
+      Object.entries(saved.minigameRecords ?? {})
+        .filter(
+          ([id, record]) =>
+            typeof id === 'string' && record && typeof record === 'object'
+        )
+        .map(([id, record]) => [
+          id,
+          {
+            best:
+              typeof record.best === 'number' && record.best > 0 ? Math.floor(record.best) : 0,
+            completed: !!record.completed,
+          },
+        ])
+    )
 
   return {
     ...initialGameState,
@@ -642,6 +659,7 @@ export function repairSave(saved) {
     ),
     towerFloor: repairedTowerFloor,
     towerBest: repairedTowerBest,
+    minigameRecords,
     victoryTokens: saved.victoryTokens ?? 0,
     autoProceed: saved.autoProceed ?? false,
     battleStyle: saved.battleStyle === 'set' ? 'set' : 'switch',
@@ -788,6 +806,7 @@ export const SAVED_STATE_KEYS = [
   'rewardedAchievements',
   'claimedGifts',
   'regionPrestige',
+  'minigameRecords',
   'towerFloor',
   'towerBest',
   'victoryTokens',

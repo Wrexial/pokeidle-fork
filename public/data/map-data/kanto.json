@@ -953,7 +953,9 @@
      "count": 8
     }
    ],
-   "badgesRequired": 4
+   "badgesRequired": 4,
+   "minigame": "whack",
+   "minScore": 15
   },
   "unlockOrder": 24,
   "position": {

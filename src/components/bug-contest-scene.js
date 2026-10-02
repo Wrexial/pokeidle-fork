@@ -396,7 +396,11 @@ export function BugContestScene() {
                                 type: 'CLAIM_MINIGAME_REWARD',
                                 payload: { money: prize.money, items: prize.items },
                               })
-                            dispatch({ type: 'END_BUG_CONTEST' })
+                            dispatch({ type: 'END_BUG_CONTEST', payload: {
+                              minigame: 'bugContest',
+                              score: results.find((entry) => entry.isPlayer)?.score ?? 0,
+                              completed: caught.length > 0,
+                            } })
                           },
                           children: prize ? 'COLLECT PRIZE & LEAVE' : 'LEAVE THE PARK',
                         }),

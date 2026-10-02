@@ -49,6 +49,7 @@ export function computeUnlockedLocations(state) {
             unlockRule.championDefeated === true ? 'kanto' : unlockRule.championDefeated
           )) ||
         (unlockRule.requires && unlockRule.requires.some((id) => !unlocked.has(id))) ||
+        (unlockRule.minigame && !minigameRequirementMet(state, unlockRule)) ||
         (unlockRule.entry &&
           !(
             state.startRegion === (location.region ?? 'kanto') ||
@@ -61,6 +62,20 @@ export function computeUnlockedLocations(state) {
     }
   }
   return Array.from(unlocked)
+}
+
+/**
+ * Whether a location's `unlock.minigame` requirement is met: clear the minigame,
+ * or score at least `minScore` in it.
+ * @param {GameState} state
+ * @param {{ minigame?: string, minScore?: number }} rule
+ * @returns {boolean}
+ */
+export function minigameRequirementMet(state, rule) {
+  if (!rule.minigame) return true
+  const record = state.minigameRecords?.[rule.minigame]
+  if (rule.minScore) return (record?.best ?? 0) >= rule.minScore
+  return !!record?.completed
 }
 
 /**

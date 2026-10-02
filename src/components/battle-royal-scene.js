@@ -1,7 +1,8 @@
 // Alola's Battle Royal, played as a full-stage scene while the reducer is in
-// the `battleRoyal` phase. An endless wave gauntlet resolved with the real
-// combat pipeline: each win heals the squad a little, each faint benches a
-// Pokemon, and a full wipe ends the run.
+// the `battleRoyal` phase. A 4-way round: the active Pokemon faces the other
+// three participants one at a time, and the round is placed 1st (all three
+// beaten) down to 4th (beaten before any). Clearing the round heals the squad;
+// a faint benches that Pokemon and the next one starts a fresh round.
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
@@ -9,8 +10,11 @@ import { pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { playSfx } from '../game/audio.js'
 import {
+  BATTLE_ROYAL_ROUND_SIZE,
   battleRoyalOpponent,
+  battleRoyalPlacement,
   battleRoyalPrize,
+  battleRoyalRank,
   createOpponent,
   healSquad,
   simulateBattle,
@@ -18,6 +22,11 @@ import {
 } from '../game/minigames.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
 import { MinigameRewardScreen, useMinigameClaim } from './minigame-reward.js'
+
+/** @param {number} placement */
+function ordinal(placement) {
+  return placement === 1 ? '1st' : placement === 2 ? '2nd' : placement === 3 ? '3rd' : '4th'
+}
 
 /**
  * One fighter card: sprite, name, level and an HP bar. The active fighter and
@@ -66,13 +75,16 @@ export function BattleRoyalScene() {
     [activeIndex, setActiveIndex] = React.useState(() =>
       state.party.findIndex((member) => member.currentHp > 0)
     ),
-    [wave, setWave] = React.useState(0),
+    [wins, setWins] = React.useState(0),
+    [round, setRound] = React.useState(0),
+    [roundDefeated, setRoundDefeated] = React.useState(0),
+    [roundWon, setRoundWon] = React.useState(false),
     [phase, setPhase] = React.useState(
       /** @type {'ready' | 'between' | 'done'} */ ('ready')
     ),
-    [log, setLog] = React.useState('Ring the bell to face the first challenger.'),
+    [log, setLog] = React.useState('Ring the bell to face the first round.'),
     [lastBattle, setLastBattle] = React.useState(
-      /** @type {{ ally: any, enemy: any, won: boolean, turns: number } | null} */ (null)
+      /** @type {{ ally: any, enemy: any, won: boolean, turns: number, placement?: number } | null} */ (null)
     ),
     [hit, setHit] = React.useState(/** @type {'ally' | 'enemy' | null} */ (null)),
     [result, setResult] = React.useState(
@@ -84,6 +96,8 @@ export function BattleRoyalScene() {
   const baseLevel = Math.max(...squad.map((member) => member.level), 5),
     active = activeIndex >= 0 ? squad[activeIndex] : null,
     partyAlive = squad.some((member) => member.currentHp > 0),
+    bestWins = state.minigameRecords?.battleRoyal?.best ?? 0,
+    rank = battleRoyalRank(wins),
     // The arena keeps the pair that just fought until the next bell, so a
     // knockout is never wiped from the screen before the player reads it.
     arenaAlly = lastBattle?.ally ?? active,
@@ -93,7 +107,7 @@ export function BattleRoyalScene() {
     if (phase !== 'ready' || !active) return
     const nextSquad = squad.map((member) => ({ ...member })),
       ally = nextSquad[activeIndex],
-      info = battleRoyalOpponent(wave + 1, baseLevel),
+      info = battleRoyalOpponent(wins + 1, baseLevel),
       enemy = createOpponent(info.speciesKey, info.level),
       outcome = simulateBattle(ally, enemy),
       snapshot = /** @param {any} pokemon */ (pokemon) => ({
@@ -106,10 +120,17 @@ export function BattleRoyalScene() {
     setHit(outcome.won ? 'enemy' : 'ally')
     window.setTimeout(() => setHit(null), 550)
     if (outcome.won) {
-      const clearedWaves = wave + 1,
-        healed = healSquad(nextSquad)
+      const nextWins = wins + 1,
+        nextDefeated = roundDefeated + 1,
+        finishedRound = nextDefeated >= BATTLE_ROYAL_ROUND_SIZE,
+        healed = finishedRound ? healSquad(nextSquad) : nextSquad
       setSquad(healed)
-      setWave(clearedWaves)
+      setWins(nextWins)
+      if (finishedRound) {
+        setRound(round + 1)
+        setRoundDefeated(0)
+        setRoundWon(true)
+      } else setRoundDefeated(nextDefeated)
       setLastBattle({
         ally: snapshot(healed[activeIndex]),
         enemy: snapshot(enemy),
@@ -117,52 +138,66 @@ export function BattleRoyalScene() {
         turns: outcome.turns,
       })
       setLog(
-        `Wave ${clearedWaves} cleared in ${outcome.turns} turn${
-          outcome.turns === 1 ? '' : 's'
-        }! The party recovers a little.`
+        finishedRound
+          ? `Round ${round + 1} won \u2014 1st place! The party recovers a little.`
+          : `${info.name} defeated (${nextDefeated}/${BATTLE_ROYAL_ROUND_SIZE} this round).`
       )
       if (state.sfxEnabled) playSfx('good')
       setPhase('between')
       return
     }
-    // The active Pokemon fainted: send out the next one, or call it a run.
-    const nextIndex = nextSquad.findIndex(
-      (member, index) => index !== activeIndex && member.currentHp > 0
-    )
+    // The active Pokemon fainted: the round ends, placed by how many it beat.
+    const placement = battleRoyalPlacement(roundDefeated),
+      nextIndex = nextSquad.findIndex(
+        (member, index) => index !== activeIndex && member.currentHp > 0
+      )
     setSquad(nextSquad)
-    setLastBattle({ ally: snapshot(ally), enemy: snapshot(enemy), won: false, turns: outcome.turns })
+    setLastBattle({
+      ally: snapshot(ally),
+      enemy: snapshot(enemy),
+      won: false,
+      turns: outcome.turns,
+      placement,
+    })
+    setRound(round + 1)
+    setRoundDefeated(0)
     if (state.sfxEnabled) playSfx('miss')
-    if (nextIndex === -1) finish(wave)
+    if (nextIndex === -1) finish(wins, placement)
     else {
       setActiveIndex(nextIndex)
       setLog(
-        `${ally.name} was knocked out after ${outcome.turns} turn${
-          outcome.turns === 1 ? '' : 's'
-        }. ${nextSquad[nextIndex].name} steps into the ring!`
+        `${ally.name} was knocked out \u2014 ${ordinal(placement)} place. ${nextSquad[nextIndex].name} starts round ${
+          round + 2
+        }!`
       )
       setPhase('ready')
     }
   }
 
-  /** @param {number} waves */
-  function finish(waves) {
+  /** @param {number} totalWins @param {number} [placement] */
+  function finish(totalWins, placement) {
     if (settledRef.current) return
     settledRef.current = !0
     if (state.sfxEnabled) playSfx('coin')
-    const prize = battleRoyalPrize(waves)
+    const prize = battleRoyalPrize(totalWins)
     setResult(prize)
-    setLog(`${prize.label} \u2014 ${waves} wave${waves === 1 ? '' : 's'} cleared.`)
+    setLog(
+      `${prize.label} \u2014 ${totalWins} opponent${totalWins === 1 ? '' : 's'} beaten${
+        placement ? `, ${ordinal(placement)} in the last round` : ''
+      }.`
+    )
     setPhase('done')
   }
 
-  function nextWave() {
+  function nextRound() {
+    setRoundWon(false)
     setPhase('ready')
-    setLog(`Wave ${wave + 1} incoming!`)
+    setLog(`Round ${round + 1} \u2014 ${rank.label}. Here comes the first opponent!`)
   }
 
   function leave() {
     collect(
-      { type: 'END_MINIGAME' },
+      { type: 'END_MINIGAME', payload: { minigame: 'battleRoyal', score: wins } },
       result ? { type: 'CLAIM_MINIGAME_REWARD', payload: result } : null
     )
   }
@@ -177,7 +212,14 @@ export function BattleRoyalScene() {
           jsx('span', { className: 'minigame-scene-title', children: 'Battle Royal' }),
           jsxs('span', {
             className: 'minigame-scene-tally',
-            children: [`Wave ${wave + 1}`, ' \u00b7 ', `${wave} cleared`],
+            children: [
+              `Round ${round + 1}`,
+              ' \u00b7 ',
+              rank.label,
+              ' \u00b7 ',
+              `${roundDefeated}/${BATTLE_ROYAL_ROUND_SIZE}`,
+              bestWins > 0 ? ` \u00b7 Best ${bestWins}` : '',
+            ],
           }),
         ],
       }),
@@ -189,7 +231,7 @@ export function BattleRoyalScene() {
               onCollect: leave,
               summary: jsx('span', {
                 className: 'royal-wave-summary',
-                children: `${wave} wave${wave === 1 ? '' : 's'} cleared`,
+                children: `${wins} opponent${wins === 1 ? '' : 's'} beaten \u00b7 ${battleRoyalRank(wins).label}`,
               }),
             })
           : [
@@ -227,8 +269,10 @@ export function BattleRoyalScene() {
                     jsx('span', {
                       className: 'royal-result-title',
                       children: lastBattle.won
-                        ? `Wave ${wave} cleared!`
-                        : `${lastBattle.ally.name} was knocked out!`,
+                        ? roundWon
+                          ? `Round ${round} won \u2014 1st place!`
+                          : `Round ${round + 1}: ${roundDefeated}/${BATTLE_ROYAL_ROUND_SIZE} beaten`
+                        : `${lastBattle.ally.name} took ${ordinal(lastBattle.placement ?? 4)} place`,
                     }),
                     jsx('span', {
                       className: 'royal-result-sub',
@@ -317,13 +361,13 @@ export function BattleRoyalScene() {
               className: 'move-panel-btn confirm',
               disabled: !partyAlive,
               onClick: fight,
-              children: `FIGHT (WAVE ${wave + 1})`,
+              children: `FIGHT (ROUND ${round + 1} \u00b7 ${roundDefeated + 1}/${BATTLE_ROYAL_ROUND_SIZE})`,
             }),
           phase === 'between' &&
             jsx('button', {
               className: 'move-panel-btn confirm',
-              onClick: nextWave,
-              children: 'NEXT WAVE',
+              onClick: nextRound,
+              children: roundWon ? 'NEXT ROUND' : 'NEXT OPPONENT',
             }),
         ],
       }),

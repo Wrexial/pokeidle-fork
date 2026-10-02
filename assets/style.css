@@ -11543,6 +11543,53 @@ img {
     image-rendering: pixelated
 }
 
+.dynamax-scout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 100%
+}
+
+.dynamax-scout-hint {
+    margin: 0;
+    font-size: 8px;
+    color: #d8c8a8;
+    text-align: center
+}
+
+.dynamax-reroll {
+    font: inherit;
+    font-size: 8px;
+    padding: 5px 12px;
+    color: #e0d0a8;
+    background: rgba(20,14,6,.78);
+    border: 2px solid #8a7040;
+    border-radius: 6px;
+    cursor: pointer
+}
+
+.dynamax-reroll:hover {
+    border-color: var(--gold)
+}
+
+.dynamax-pickups {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 8px;
+    color: #d8c8a8
+}
+
+.dynamax-pickups-label {
+    opacity: .75
+}
+
+.dynamax-pickup-chip {
+    font-size: 13px;
+    line-height: 1
+}
+
 .mega-evolve-btn {
     display: flex;
     align-items: center;

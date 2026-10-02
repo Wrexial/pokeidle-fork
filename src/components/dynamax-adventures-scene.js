@@ -1,7 +1,8 @@
 // Galar's Dynamax Adventures, played as a full-stage scene while the reducer is
-// in the `dynamaxAdventures` phase. Pick a path through each stage's encounter,
-// then face a legendary from Galar's raid pool. Beat it to catch it; wipe and
-// the adventure is over.
+// in the `dynamaxAdventures` phase. Scout a legendary from the Max Lair's real
+// raid pool, pick a path through each stage's encounter (each clear drops a
+// pickup), then face the legendary. Beat it to catch it; wipe — or run out of
+// KOs — and the adventure is over.
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
@@ -10,9 +11,12 @@ import { useGame } from '../game/context.js'
 import { playSfx } from '../game/audio.js'
 import {
   DYNAMAX_STAGES,
+  applyDynamaxPickup,
   createOpponent,
-  dynamaxBoss,
+  dynamaxBossOptions,
+  dynamaxKoLimit,
   dynamaxPaths,
+  dynamaxPickup,
   dynamaxPrize,
   healSquad,
   simulateBattle,
@@ -38,11 +42,18 @@ export function DynamaxAdventuresScene() {
     [paths, setPaths] = React.useState(() =>
       dynamaxPaths(0, Math.max(...state.party.map((member) => member.level), 5))
     ),
-    [boss] = React.useState(() => dynamaxBoss('galar', state.challengeMonotype)),
-    [phase, setPhase] = React.useState(
-      /** @type {'choose' | 'boss' | 'done'} */ ('choose')
+    [bossOptions, setBossOptions] = React.useState(() =>
+      dynamaxBossOptions('galar', state.challengeMonotype)
     ),
-    [log, setLog] = React.useState('Choose a path through the Max Lair.'),
+    [boss, setBoss] = React.useState(/** @type {any} */ (null)),
+    [phase, setPhase] = React.useState(
+      /** @type {'scout' | 'choose' | 'boss' | 'done'} */ ('scout')
+    ),
+    [log, setLog] = React.useState('Scout the legendary you want to hunt.'),
+    [kos, setKos] = React.useState(0),
+    [pickups, setPickups] = React.useState(
+      /** @type {{ id: string, label: string, icon: string }[]} */ ([])
+    ),
     [caught, setCaught] = React.useState(
       /** @type {{ speciesKey: string } | null} */ (null)
     ),
@@ -53,7 +64,21 @@ export function DynamaxAdventuresScene() {
     settledRef = React.useRef(!1)
 
   const baseLevel = Math.max(...squad.map((member) => member.level), 5),
-    active = activeIndex >= 0 ? squad[activeIndex] : null
+    active = activeIndex >= 0 ? squad[activeIndex] : null,
+    koLimit = dynamaxKoLimit(state.party.length),
+    bestStages = state.minigameRecords?.dynamaxAdventures?.best ?? 0
+
+  function reRoll() {
+    setBossOptions(dynamaxBossOptions('galar', state.challengeMonotype))
+    setLog('The Max Lair scouts a fresh set of legends.')
+  }
+
+  /** @param {any} option */
+  function chooseBoss(option) {
+    setBoss(option)
+    setPhase('choose')
+    setLog(`Hunting ${option.name}! Choose the first path.`)
+  }
 
   /** @param {any} info */
   function fight(info) {
@@ -62,7 +87,6 @@ export function DynamaxAdventuresScene() {
       ally = nextSquad[activeIndex],
       enemy = createOpponent(info.speciesKey, info.level),
       outcome = simulateBattle(ally, enemy)
-    setSquad(nextSquad)
     if (outcome.won) {
       if (state.sfxEnabled) playSfx('good')
       const nextStage = stage + 1
@@ -71,28 +95,36 @@ export function DynamaxAdventuresScene() {
         setSquad(healSquad(nextSquad, 0.5))
         setStage(nextStage)
         setPhase('boss')
-        setLog(`${info.name} defeated! The legendary ${boss.name} awaits.`)
+        setLog(`${info.name} defeated! The legendary ${boss?.name ?? 'foe'} awaits.`)
       } else {
-        setSquad(healSquad(nextSquad, 0.3))
+        const pickup = dynamaxPickup()
+        setSquad(applyDynamaxPickup(pickup.id, nextSquad, activeIndex))
+        setPickups((current) => [...current, pickup])
         setStage(nextStage)
         setPaths(dynamaxPaths(nextStage, baseLevel))
-        setLog(`${info.name} defeated! Choose the next path.`)
+        setLog(`${info.name} defeated! Found a ${pickup.label} — pick the next path.`)
       }
       return
     }
-    const nextIndex = nextSquad.findIndex(
-      (member, index) => index !== activeIndex && member.currentHp > 0
-    )
-    if (nextIndex === -1) finish(stage, !1)
+    // The active Pokemon fainted: bench it, count the KO, and check the limit.
+    const nextKos = kos + 1,
+      nextIndex = nextSquad.findIndex(
+        (member, index) => index !== activeIndex && member.currentHp > 0
+      )
+    setSquad(nextSquad)
+    setKos(nextKos)
+    if (state.sfxEnabled) playSfx('miss')
+    if (nextIndex === -1 || nextKos >= koLimit) finish(stage, !1)
     else {
-      if (state.sfxEnabled) playSfx('miss')
       setActiveIndex(nextIndex)
-      setLog(`${ally.name} went down. ${nextSquad[nextIndex].name} takes over!`)
+      setLog(
+        `${ally.name} went down (${nextKos}/${koLimit} KOs). ${nextSquad[nextIndex].name} takes over!`
+      )
     }
   }
 
   function challengeBoss() {
-    if (!active) return
+    if (!active || !boss) return
     const nextSquad = squad.map((member) => ({ ...member })),
       ally = nextSquad[activeIndex],
       enemy = createOpponent(boss.speciesKey, boss.level),
@@ -109,13 +141,17 @@ export function DynamaxAdventuresScene() {
       finish(DYNAMAX_STAGES, !0)
     } else {
       if (state.sfxEnabled) playSfx('miss')
-      const nextIndex = nextSquad.findIndex(
-        (member, index) => index !== activeIndex && member.currentHp > 0
-      )
-      if (nextIndex === -1) finish(stage, !1)
+      const nextKos = kos + 1,
+        nextIndex = nextSquad.findIndex(
+          (member, index) => index !== activeIndex && member.currentHp > 0
+        )
+      setKos(nextKos)
+      if (nextIndex === -1 || nextKos >= koLimit) finish(stage, !1)
       else {
         setActiveIndex(nextIndex)
-        setLog(`${ally.name} went down. ${nextSquad[nextIndex].name} steps up!`)
+        setLog(
+          `${ally.name} went down (${nextKos}/${koLimit} KOs). ${nextSquad[nextIndex].name} steps up!`
+        )
       }
     }
   }
@@ -132,7 +168,7 @@ export function DynamaxAdventuresScene() {
 
   function leave() {
     collect(
-      { type: 'END_MINIGAME' },
+      { type: 'END_MINIGAME', payload: { minigame: 'dynamaxAdventures', score: stage } },
       result ? { type: 'CLAIM_MINIGAME_REWARD', payload: result } : null
     )
   }
@@ -148,9 +184,13 @@ export function DynamaxAdventuresScene() {
           jsxs('span', {
             className: 'minigame-scene-tally',
             children: [
-              `Stage ${Math.min(stage + 1, DYNAMAX_STAGES + 1)}/${DYNAMAX_STAGES + 1}`,
+              phase === 'scout'
+                ? 'Scouting'
+                : `Stage ${Math.min(stage + 1, DYNAMAX_STAGES + 1)}/${DYNAMAX_STAGES + 1}`,
               ' \u00b7 ',
               active ? active.name : 'Party down',
+              ` \u00b7 KOs ${kos}/${koLimit}`,
+              bestStages > 0 ? ` \u00b7 Best ${bestStages}` : '',
             ],
           }),
         ],
@@ -182,99 +222,168 @@ export function DynamaxAdventuresScene() {
                 : undefined,
             })
           : [
-          phase === 'choose'
-            ? jsx('div', {
-                className: 'dynamax-paths',
-                children: paths.map((path, index) =>
+              phase === 'scout'
+                ? jsxs('div', {
+                    className: 'dynamax-scout',
+                    children: [
+                      jsx('span', {
+                        className: 'dynamax-scout-hint',
+                        children: 'Scout the legendary you are hunting \u2014 re-roll for a fresh set.',
+                      }),
+                      jsx('div', {
+                        className: 'dynamax-paths',
+                        children: bossOptions.map((option, index) =>
+                          jsxs(
+                            'button',
+                            {
+                              className: 'dynamax-path',
+                              onClick: () => chooseBoss(option),
+                              children: [
+                                jsx('img', {
+                                  className: 'dynamax-path-sprite',
+                                  src: getPokemonSpriteUrl(spriteFor(option.speciesKey)),
+                                  onError: /** @param {{ target: HTMLImageElement }} event */ (
+                                    event
+                                  ) =>
+                                    (event.target.src = getPokemonSpriteFallbackUrl(
+                                      spriteFor(option.speciesKey)
+                                    )),
+                                  alt: option.name,
+                                }),
+                                jsxs('span', {
+                                  className: 'dynamax-path-info',
+                                  children: [
+                                    jsx('strong', { children: option.name }),
+                                    `Lv.${option.level}`,
+                                  ],
+                                }),
+                              ],
+                            },
+                            `${option.speciesKey}-${index}`
+                          )
+                        ),
+                      }),
+                      jsx('button', {
+                        className: 'dynamax-reroll',
+                        onClick: reRoll,
+                        children: '\u{1F504} RE-ROLL',
+                      }),
+                    ],
+                  })
+                : phase === 'choose'
+                  ? jsx('div', {
+                      className: 'dynamax-paths',
+                      children: paths.map((path, index) =>
+                        jsxs(
+                          'button',
+                          {
+                            className: 'dynamax-path',
+                            onClick: () => fight(path),
+                            children: [
+                              jsx('img', {
+                                className: 'dynamax-path-sprite',
+                                src: getPokemonSpriteUrl(spriteFor(path.speciesKey)),
+                                onError:
+                                  /** @param {{ target: HTMLImageElement }} event */ (event) =>
+                                    (event.target.src = getPokemonSpriteFallbackUrl(
+                                      spriteFor(path.speciesKey)
+                                    )),
+                                alt: path.name,
+                              }),
+                              jsxs('span', {
+                                className: 'dynamax-path-info',
+                                children: [
+                                  jsx('strong', { children: path.name }),
+                                  `Lv.${path.level}`,
+                                ],
+                              }),
+                            ],
+                          },
+                          `${path.speciesKey}-${index}`
+                        )
+                      ),
+                    })
+                  : phase === 'boss' && boss
+                    ? jsxs('div', {
+                        className: 'dynamax-boss',
+                        children: [
+                          jsx('span', { className: 'dynamax-boss-tag', children: 'LEGENDARY' }),
+                          jsx('img', {
+                            className: 'dynamax-boss-sprite',
+                            src: getPokemonSpriteUrl(spriteFor(boss.speciesKey)),
+                            onError: /** @param {{ target: HTMLImageElement }} event */ (event) =>
+                              (event.target.src = getPokemonSpriteFallbackUrl(
+                                spriteFor(boss.speciesKey)
+                              )),
+                            alt: boss.name,
+                          }),
+                          jsxs('span', {
+                            className: 'dynamax-path-info',
+                            children: [
+                              jsx('strong', { children: boss.name }),
+                              `Lv.${boss.level}`,
+                            ],
+                          }),
+                        ],
+                      })
+                    : jsxs('div', {
+                        className: 'dynamax-boss',
+                        children: [
+                          jsx('span', {
+                            className: 'dynamax-path-info',
+                            children: result?.label ?? '',
+                          }),
+                        ],
+                      }),
+              pickups.length > 0 &&
+                jsxs('div', {
+                  className: 'dynamax-pickups',
+                  children: [
+                    jsx('span', { className: 'dynamax-pickups-label', children: 'Found:' }),
+                    ...pickups.map((pickup, index) =>
+                      jsx(
+                        'span',
+                        {
+                          className: 'dynamax-pickup-chip',
+                          title: pickup.label,
+                          children: pickup.icon,
+                        },
+                        `${pickup.id}-${index}`
+                      )
+                    ),
+                  ],
+                }),
+              jsx('div', {
+                className: 'royal-party',
+                children: squad.map((member, index) =>
                   jsxs(
-                    'button',
+                    'div',
                     {
-                      className: 'dynamax-path',
-                      onClick: () => fight(path),
+                      className: `royal-member${member.currentHp <= 0 ? ' fainted' : ''}${
+                        index === activeIndex ? ' active' : ''
+                      }`,
                       children: [
-                        jsx('img', {
-                          className: 'dynamax-path-sprite',
-                          src: getPokemonSpriteUrl(spriteFor(path.speciesKey)),
-                          onError: /** @param {{ target: HTMLImageElement }} event */ (event) =>
-                            (event.target.src = getPokemonSpriteFallbackUrl(
-                              spriteFor(path.speciesKey)
-                            )),
-                          alt: path.name,
-                        }),
+                        jsx('span', { className: 'royal-member-name', children: member.name }),
                         jsxs('span', {
-                          className: 'dynamax-path-info',
+                          className: 'royal-member-hp',
                           children: [
-                            jsx('strong', { children: path.name }),
-                            `Lv.${path.level}`,
+                            jsx('span', {
+                              className: 'royal-hp-fill',
+                              style: {
+                                width: `${Math.max(0, (member.currentHp / member.maxHp) * 100)}%`,
+                              },
+                            }),
+                            `${Math.max(0, member.currentHp)}/${member.maxHp}`,
                           ],
                         }),
                       ],
                     },
-                    `${path.speciesKey}-${index}`
+                    `${member.name}-${index}`
                   )
                 ),
-              })
-            : phase === 'boss'
-              ? jsxs('div', {
-                  className: 'dynamax-boss',
-                  children: [
-                    jsx('span', { className: 'dynamax-boss-tag', children: 'LEGENDARY' }),
-                    jsx('img', {
-                      className: 'dynamax-boss-sprite',
-                      src: getPokemonSpriteUrl(spriteFor(boss.speciesKey)),
-                      onError: /** @param {{ target: HTMLImageElement }} event */ (event) =>
-                        (event.target.src = getPokemonSpriteFallbackUrl(spriteFor(boss.speciesKey))),
-                      alt: boss.name,
-                    }),
-                    jsxs('span', {
-                      className: 'dynamax-path-info',
-                      children: [
-                        jsx('strong', { children: boss.name }),
-                        `Lv.${boss.level}`,
-                      ],
-                    }),
-                  ],
-                })
-              : jsxs('div', {
-                  className: 'dynamax-boss',
-                  children: [
-                    jsx('span', {
-                      className: 'dynamax-path-info',
-                      children: result?.label ?? '',
-                    }),
-                  ],
-                }),
-          jsx('div', {
-            className: 'royal-party',
-            children: squad.map((member, index) =>
-              jsxs(
-                'div',
-                {
-                  className: `royal-member${member.currentHp <= 0 ? ' fainted' : ''}${
-                    index === activeIndex ? ' active' : ''
-                  }`,
-                  children: [
-                    jsx('span', { className: 'royal-member-name', children: member.name }),
-                    jsxs('span', {
-                      className: 'royal-member-hp',
-                      children: [
-                        jsx('span', {
-                          className: 'royal-hp-fill',
-                          style: {
-                            width: `${Math.max(0, (member.currentHp / member.maxHp) * 100)}%`,
-                          },
-                        }),
-                        `${Math.max(0, member.currentHp)}/${member.maxHp}`,
-                      ],
-                    }),
-                  ],
-                },
-                `${member.name}-${index}`
-              )
-            ),
-          }),
-          jsx('div', { className: 'minigame-scene-log', children: log }),
-        ],
+              }),
+              jsx('div', { className: 'minigame-scene-log', children: log }),
+            ],
       }),
       jsxs('div', {
         className: 'minigame-scene-footer',
@@ -286,6 +395,7 @@ export function DynamaxAdventuresScene() {
               children: 'RETREAT',
             }),
           phase === 'boss' &&
+            boss &&
             jsx('button', {
               className: 'move-panel-btn confirm',
               onClick: challengeBoss,

@@ -33,24 +33,23 @@ renumbered, so the gaps below are items that shipped.
     tournament and Paldea's Titans / Team Star remain.
 6. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of Armor,
     Crown Tundra, Kitakami and the Terarium to first-class regions.
-7. **#54 Improve Dynamax Adventures and Battle Royal** — M · ★★½ — both are
     minimal loops today; make them feel like real modes with real rewards.
-8. **#18 Better settings** — M · ★★★ — sprite-style options, account controls
+7. **#18 Better settings** — M · ★★★ — sprite-style options, account controls
     (blocked on #19) and finishing the Gameplay section.
-9. **#43 Multi-battles (double / triple / rotation) as a minigame** — M–L ·
+8. **#43 Multi-battles (double / triple / rotation) as a minigame** — M–L ·
     ★★½ — a self-contained minigame that reuses the combat pipeline.
-10. **#60 Areas should have their own zoomed-in map** — M · ★★ — zones and
+9. **#60 Areas should have their own zoomed-in map** — M · ★★ — zones and
     large areas list their sub-areas in the panel only; give them a focused
     map view entered from the Town Map, with a back button to exit.
-11. **#68 Trainer teams should use all level-appropriate Pokemon** — M · ★★ —
+10. **#68 Trainer teams should use all level-appropriate Pokemon** — M · ★★ —
     the strong type bias and narrow pools mean the same few species repeat; let
     trainers field every level-appropriate Pokemon so the Pokedex "seen" fills
     in.
 ### Tier 2 — Big / low-return, defer
 
-12. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
+11. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
     route-based field effects.
-13. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+12. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
 ---
@@ -342,24 +341,6 @@ resolver), `src/components/*-scene.js`, `src/game/reducer/minigames.js`, and
 
 Effort: **medium–large** (the shared math helps, but target/order handling is
 genuinely new).
-## 54. Improve Dynamax Adventures and Battle Royal
-
-Both shipped as minimal loops (0.16.0): Dynamax Adventures is "pick a path of
-three encounters, then the boss"; the Battle Royal an endless wave gauntlet.
-Make them feel like real modes.
-
-- [ ] **Dynamax Adventures**: let the player choose (or re-roll) the legendary
-      they are hunting, add per-floor pick-ups / a KO limit, and use the real
-      Raid boss pool for the finale.
-- [ ] **Battle Royal**: clear per-round placement scoring (1st–4th), a real
-      opponent pool and AI, scaling rewards and a streak / rank track.
-- [ ] Both: better pacing / feedback and a unique reward worth replaying for
-      (not just money / EXP).
-
-Likely touch points: `src/game/minigames/dynamax-adventures.js`,
-`src/game/minigames/gauntlet.js`, their scenes, and the reward tables.
-
-Effort: **medium**.
 ## 56. Multi-effect move pass (mostly done)
 
 Shipped (0.23.0): the move data now supports a primary effect plus one

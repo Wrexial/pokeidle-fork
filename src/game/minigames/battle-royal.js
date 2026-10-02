@@ -7,6 +7,9 @@ import { pokemonSpecies } from '../../data/gameData.js'
 /** Money spent to enter the Royal. */
 export const BATTLE_ROYAL_COST = 400
 
+/** Opponents faced in one 4-way round (the other three participants). */
+export const BATTLE_ROYAL_ROUND_SIZE = 3
+
 /** Fraction of max HP the party recovers between waves. */
 const BATTLE_ROYAL_HEAL = 0.25
 
@@ -35,6 +38,39 @@ export function battleRoyalOpponent(wave, baseLevel) {
 }
 
 /**
+ * Placement (1st-4th) from how many of the round's opponents were defeated:
+ * clearing all three wins the round.
+ * @param {number} opponentsDefeated
+ * @returns {number}
+ */
+export function battleRoyalPlacement(opponentsDefeated) {
+  return Math.max(1, Math.min(4, 4 - opponentsDefeated))
+}
+
+/**
+ * Rank ladder by total opponents defeated.
+ * @type {{ id: string, label: string, minWins: number }[]}
+ */
+export const BATTLE_ROYAL_RANKS = [
+  { id: 'normal', label: 'Normal Rank', minWins: 0 },
+  { id: 'great', label: 'Great Rank', minWins: 3 },
+  { id: 'ultra', label: 'Ultra Rank', minWins: 6 },
+  { id: 'master', label: 'Master Rank', minWins: 10 },
+  { id: 'royal', label: 'Royal Rank', minWins: 15 },
+]
+
+/**
+ * The rank for a number of opponents defeated.
+ * @param {number} wins
+ * @returns {{ id: string, label: string, minWins: number }}
+ */
+export function battleRoyalRank(wins) {
+  let rank = BATTLE_ROYAL_RANKS[0]
+  for (const candidate of BATTLE_ROYAL_RANKS) if (wins >= candidate.minWins) rank = candidate
+  return rank
+}
+
+/**
  * Heal a squad of battlers between waves (never above max, never revives a
  * fainted one).
  * @param {any[]} squad
@@ -55,6 +91,15 @@ export function healSquad(squad, fraction = BATTLE_ROYAL_HEAL) {
  * @returns {{ money: number, items: { itemId: string, quantity: number }[], label: string }}
  */
 export function battleRoyalPrize(waves) {
+  if (waves >= 25)
+    return {
+      money: 26000,
+      items: [
+        { itemId: 'natureMint', quantity: 1 },
+        { itemId: 'goldBottleCap', quantity: 1 },
+      ],
+      label: 'Royal legend!',
+    }
   if (waves >= 20)
     return {
       money: 20000,

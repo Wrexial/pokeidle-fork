@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 const gameData = installGameData()
 
-const { BATTLE_ROYAL_COST, BATTLE_ROYAL_POOL, BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL, BUG_CONTEST_RUSTLES, CONTEST_COST, CONTEST_THEMES, DYNAMAX_ADVENTURES_COST, DYNAMAX_STAGES, MINIGAME_LOCATIONS, MINIGAME_INFO, MINIGAME_AREAS, MINIGAME_REGIONS, MINIGAME_START_ACTION, minigameForLocation, minigamesInRegion, minigameNameForLocation, MINING_COST, POKEATHLON_COST, POKEATHLON_SPRINT_MS, POKE_RADAR_CHAIN_STEP, POKE_RADAR_COST, POKE_RADAR_SIZE, SLOT_JACKPOT, SLOT_PAYLINES, SLOT_REELS, SLOT_ROWS, SLOT_SPIN_COST, SLOT_SYMBOLS, VOLTORB_FLIP_COST, VOLTORB_MAX_LEVEL, VOLTORB_SIZE, AUCTION_LOTS, accuracyScore, auctionAppraisal, battleRoyalOpponent, battleRoyalPrize, boardCleared, boardExploded, boardHints, bugCatchChance, bugContestPrize, bugFleeChance, bugStays, buildContestResults, canAuctionBid, contestAppeal, contestPlacement, contestPlayerRank, contestPrize, contestRank, contestScore, contestTheme, createAuction, createOpponent, createVoltorbBoard, dynamaxBoss, dynamaxPaths, dynamaxPrize, flipVoltorbCell, healSquad, moveBaseAppeal, pickRadarTarget, placeAuctionBid, pokeathlonPrize, pokeRadarPrize, radarChainPoints, radarSequence, rewardItemName, rollContestBug, rollContestBugs, rollContestRivalRound, rollContestTheme, rollMiningReward, simulateBattle, spinSlots, sprintScore, throwNetBall, toBattlePokemon, toggleVoltorbMark, voltorbBoardCoins, voltorbCountForLevel, voltorbFlipPrize, LIGHTS_OUT_COST, LIGHTS_OUT_SCRAMBLE, LIGHTS_OUT_SIZE, CURRY_COST, CURRY_FLAVORS, CURRY_INGREDIENTS, CURRY_ZONE, POKESTAR_COST, POKESTAR_SHOT_COUNT, createLightsOut, toggleLights, lightsSolved, lightsOutPrize, rollCurryRequest, curryScore, curryPrize, pickPokestarShots, pokestarPrize, MATCH3_COST, MATCH3_MOVES, MATCH3_SIZE, MEMORY_COST, MEMORY_PAIRS, WHACK_COST, WHACK_DURATION_MS, WHACK_POP_MIN_MS, WHACK_TARGETS, whackPopupMs, GAME_CORNER_PRIZE_GOAL, GAME_CORNER_PRIZE_POOL, createMatch3Board, findMatches, tryMatch3Swap, resolveMatch3, match3Prize, createMemoryDeck, memoryPrize, rollWhackTarget, whackPrize, MUSICAL_COST, MUSICAL_NOTES, MUSICAL_MAX_SCORE, generateMusicalPattern, judgeMusicalHit, musicalPrize, musicalTotalMs, PICNIC_COST, PICNIC_PICKS, PICNIC_INGREDIENTS, PICNIC_SHINY_MULTIPLIER, ingredientById, sandwichTypes, rollSandwichType, picnicDropScore, picnicSpeciesPool, rollPicnicEncounter, POKEBALL_FACTORY_COST, FACTORY_SIZE, connectionsFor, createFactoryPuzzle, rotateFactoryTile, factoryPowered, factorySolved, factoryPrize, FACTORY_BALL_POOL, rollFactoryBalls, SLIDING_COST, SLIDING_SIZE, solvedSlidingBoard, canSlide, slideTile, isSlidingSolved, createSlidingPuzzle, slidingTileForDirection, slidingPrize, UNOWN_FORMS, randomUnownForm, ICE_SLIDE_COST, ICE_SLIDE_ROOMS, ICE_SLIDE_TOTAL_PAR, iceSlidePosition, iceSlideSolved, iceSlidePrize } = await import(
+const { BATTLE_ROYAL_COST, BATTLE_ROYAL_POOL, BATTLE_ROYAL_ROUND_SIZE, BATTLE_ROYAL_RANKS, BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL, BUG_CONTEST_RUSTLES, CONTEST_COST, CONTEST_THEMES, DYNAMAX_ADVENTURES_COST, DYNAMAX_STAGES, MINIGAME_LOCATIONS, MINIGAME_INFO, MINIGAME_AREAS, MINIGAME_REGIONS, MINIGAME_START_ACTION, minigameForLocation, minigamesInRegion, minigameNameForLocation, MINING_COST, POKEATHLON_COST, POKEATHLON_SPRINT_MS, POKE_RADAR_CHAIN_STEP, POKE_RADAR_COST, POKE_RADAR_SIZE, SLOT_JACKPOT, SLOT_PAYLINES, SLOT_REELS, SLOT_ROWS, SLOT_SPIN_COST, SLOT_SYMBOLS, VOLTORB_FLIP_COST, VOLTORB_MAX_LEVEL, VOLTORB_SIZE, AUCTION_LOTS, accuracyScore, auctionAppraisal, battleRoyalOpponent, battleRoyalPlacement, battleRoyalPrize, battleRoyalRank, boardCleared, boardExploded, boardHints, bugCatchChance, bugContestPrize, bugFleeChance, bugStays, buildContestResults, canAuctionBid, contestAppeal, contestPlacement, contestPlayerRank, contestPrize, contestRank, contestScore, contestTheme, createAuction, createOpponent, createVoltorbBoard, dynamaxBoss, dynamaxBossOptions, dynamaxPaths, dynamaxPickup, dynamaxPrize, dynamaxKoLimit, applyDynamaxPickup, DYNAMAX_PICKUPS, flipVoltorbCell, healSquad, moveBaseAppeal, pickRadarTarget, placeAuctionBid, pokeathlonPrize, pokeRadarPrize, radarChainPoints, radarSequence, rewardItemName, rollContestBug, rollContestBugs, rollContestRivalRound, rollContestTheme, rollMiningReward, simulateBattle, spinSlots, sprintScore, throwNetBall, toBattlePokemon, toggleVoltorbMark, voltorbBoardCoins, voltorbCountForLevel, voltorbFlipPrize, LIGHTS_OUT_COST, LIGHTS_OUT_SCRAMBLE, LIGHTS_OUT_SIZE, CURRY_COST, CURRY_FLAVORS, CURRY_INGREDIENTS, CURRY_ZONE, POKESTAR_COST, POKESTAR_SHOT_COUNT, createLightsOut, toggleLights, lightsSolved, lightsOutPrize, rollCurryRequest, curryScore, curryPrize, pickPokestarShots, pokestarPrize, MATCH3_COST, MATCH3_MOVES, MATCH3_SIZE, MEMORY_COST, MEMORY_PAIRS, WHACK_COST, WHACK_DURATION_MS, WHACK_POP_MIN_MS, WHACK_TARGETS, whackPopupMs, GAME_CORNER_PRIZE_GOAL, GAME_CORNER_PRIZE_POOL, createMatch3Board, findMatches, tryMatch3Swap, resolveMatch3, match3Prize, createMemoryDeck, memoryPrize, rollWhackTarget, whackPrize, MUSICAL_COST, MUSICAL_NOTES, MUSICAL_MAX_SCORE, generateMusicalPattern, judgeMusicalHit, musicalPrize, musicalTotalMs, PICNIC_COST, PICNIC_PICKS, PICNIC_INGREDIENTS, PICNIC_SHINY_MULTIPLIER, ingredientById, sandwichTypes, rollSandwichType, picnicDropScore, picnicSpeciesPool, rollPicnicEncounter, POKEBALL_FACTORY_COST, FACTORY_SIZE, connectionsFor, createFactoryPuzzle, rotateFactoryTile, factoryPowered, factorySolved, factoryPrize, FACTORY_BALL_POOL, rollFactoryBalls, SLIDING_COST, SLIDING_SIZE, solvedSlidingBoard, canSlide, slideTile, isSlidingSolved, createSlidingPuzzle, slidingTileForDirection, slidingPrize, UNOWN_FORMS, randomUnownForm, ICE_SLIDE_COST, ICE_SLIDE_ROOMS, ICE_SLIDE_TOTAL_PAR, iceSlidePosition, iceSlideSolved, iceSlidePrize } = await import(
   '../src/game/minigames.js'
 )
 const { match3SwapFrames, MATCH3_SPECIES, MATCH3_TYPES, radarFaces, STRENGTH_ROOMS, STRENGTH_TOTAL_PAR, createStrengthState, strengthMove, strengthSolved, buildIceTempleStages, buildIceTempleRoomPool, generateIceRoom, isIceRoomFair, iceTempleRunSize, ICE_GENERATOR_MIN_PAR, ICE_TEMPLE_ICE_STAGES, ICE_TEMPLE_PRESTIGE_MAX, ICE_TEMPLE_STRENGTH_STAGES, parseIceLevel } = await import(
@@ -435,6 +435,19 @@ test('Battle Royal waves scale and heal the squad', () => {
   )
 })
 
+test('Battle Royal places rounds 1st-4th and tracks ranks', () => {
+  assert.equal(BATTLE_ROYAL_ROUND_SIZE, 3)
+  assert.equal(battleRoyalPlacement(3), 1)
+  assert.equal(battleRoyalPlacement(2), 2)
+  assert.equal(battleRoyalPlacement(1), 3)
+  assert.equal(battleRoyalPlacement(0), 4)
+  assert.equal(battleRoyalRank(0).id, 'normal')
+  assert.equal(battleRoyalRank(15).id, 'royal')
+  assert.equal(BATTLE_ROYAL_RANKS.length, 5)
+  // The top tier awards a Nature Mint.
+  assert.ok(battleRoyalPrize(25).items.some((item) => item.itemId === 'natureMint'))
+})
+
 test('START_BATTLE_ROYAL charges entry and END_MINIGAME returns to idle', () => {
   const started = gameReducer(
       { ...initialGameState, phase: 'idle', money: BATTLE_ROYAL_COST + 5 },
@@ -468,6 +481,37 @@ test('Dynamax Adventures offer paths and a real Galar legendary boss', () => {
     !dynamaxPrize(DYNAMAX_STAGES, !1).items.some((item) => item.itemId === 'bottleCap'),
     'losing to the legendary does not'
   )
+  assert.ok(
+    dynamaxPrize(DYNAMAX_STAGES, !0).items.some((item) => item.itemId === 'natureMint'),
+    'beating the legendary awards a Nature Mint'
+  )
+})
+
+test('Dynamax Adventures scout distinct legends and drop pickups', () => {
+  const options = dynamaxBossOptions('galar', null, 3),
+    galarPool = new Set(
+      (gameData.regions.find((region) => region.id === 'galar')?.raidPool ?? []).map(
+        (entry) => entry.speciesKey
+      )
+    )
+  assert.ok(options.length >= 1)
+  for (const option of options) assert.ok(galarPool.has(option.speciesKey))
+  assert.equal(
+    new Set(options.map((option) => option.speciesKey)).size,
+    options.length,
+    'scouted legends are distinct'
+  )
+
+  const pickup = dynamaxPickup(() => 0)
+  assert.ok(DYNAMAX_PICKUPS.some((entry) => entry.id === pickup.id))
+  // A heal restores half the active Pokemon; a revive brings one back.
+  const squad = [
+    { currentHp: 20, maxHp: 100 },
+    { currentHp: 0, maxHp: 100 },
+  ]
+  assert.equal(applyDynamaxPickup('heal', squad, 0)[0].currentHp, 70)
+  assert.equal(applyDynamaxPickup('revive', squad, 0)[1].currentHp, 50)
+  assert.equal(dynamaxKoLimit(6), 3)
 })
 
 test('START_DYNAMAX_ADVENTURES charges entry and END_MINIGAME returns to idle', () => {

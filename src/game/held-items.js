@@ -189,3 +189,13 @@ export function heldLifeOrbRecoil(pokemon, damage) {
   const effect = heldItemEffect(pokemon)
   return effect?.type === 'lifeOrb' ? Math.max(1, Math.floor(pokemon.maxHp * effect.recoil)) : 0
 }
+
+/**
+ * Extra turns the holder's Terrain Extender adds to a terrain it sets (0 when
+ * not held). The base terrain lasts 5 turns, so this makes it 8.
+ * @param {BattlePokemon} pokemon
+ * @returns {number}
+ */
+export function heldTerrainExtenderTurns(pokemon) {
+  return heldItemEffect(pokemon)?.type === 'terrainExtender' ? 3 : 0
+}

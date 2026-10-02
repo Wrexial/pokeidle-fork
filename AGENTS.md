@@ -295,6 +295,11 @@ Data conventions:
   progress key** (`region generation * 100000 + route rank`), used only for
   ordering. It is computed, not counted, so adding a zone never renumbers its
   neighbours — or, importantly, any other region.
+- Locations may carry a permanent `weather` field (rain, sandstorm, snow, …)
+  that `fieldWeatherFor` (`src/game/weather.js`) turns into the starting field
+  weather of every battle there, and encounter entries may carry
+  `time: "day" | "night"` so `encountersForPhase` only spawns them in that
+  phase (see `apply-weather-time.cjs`).
 - **Zones** (`ZONES` in `generate-regions.cjs`) group several route-like
   sub-areas behind one map node. The hub is `type: 'zone'` with a `subAreas`
   list and a `routeKey` pointing at its first sub-area; each sub-area is a real
@@ -702,6 +707,13 @@ One-off scripts used to build the data JSON (not run during dev/build):
   `minScore` gates to chosen routes (#65): Route 11 on a Whack-a-Diglett score,
   Johto Route 36 on the Bug-Catching Contest, Paldea's South Province (Area
   Three) on the Academy Quiz. Idempotent (`--dry`).
+- `apply-weather-time.cjs` — data-only pass for #10: tags thematically
+  weather-struck routes with a permanent `weather` field (Hoenn Routes 111/119,
+  Sinnoh Routes 216/217, Unova Route 4, Galar Route 10, Kalos Route 17 — applied
+  by `fieldWeatherFor` at the start of a battle there) and marks clearly
+  nocturnal / diurnal species with a `time: "night"` / `"day"` tag on every
+  encounter bucket (`encountersForPhase` filters by the day/night cycle, falling
+  back to the full table when a phase would be empty). Idempotent (`--dry`).
 - `apply-trainer-variety.cjs` — data-only pass (#68) that rebuilds every
   region's (including Kanto's) town route trainers with `lib/trainer-teams.cjs`,
   adding two extra trainers per town for headroom: level-appropriate teams, the

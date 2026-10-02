@@ -184,6 +184,7 @@ export function RouteEncounterGrid({
               onClick: () => handleTileClick(encounter.speciesKey),
               isShinyCaught: state.shinyCaught.includes(encounter.speciesKey),
               isExclusive: exclusiveSpecies?.has(encounter.speciesKey) ?? false,
+              time: encounter.time,
               chainCount:
                 state.shinyChain.speciesKey === encounter.speciesKey
                   ? state.shinyChain.count

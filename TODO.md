@@ -40,29 +40,13 @@ renumbered, so the gaps below are items that shipped.
 
 ### Tier 2 — Big / low-return, defer
 
-9. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
-   route-based field effects.
-10. **#56 Multi-effect move pass (residual)** — S · ★★ — moves that roll one
+9. **#56 Multi-effect move pass (residual)** — S · ★★ — moves that roll one
     status out of several (Tri Attack, Dire Claw) or carry a third effect,
     which the single `secondary` slot cannot express.
-11. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+10. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
 ---
-
-## 10. Weather & terrain leftovers
-
-Weather and terrain shipped in 0.11.0; Weather Ball, weather-perfect accuracy
-and the terrain synergy abilities shipped in 0.14.0.
-
-Still open:
-
-- [ ] Terrain rocks (an item/ability that extends a terrain's duration), and
-      route-based field effects (a route that starts sunny/raining/etc.).
-- [ ] Night-only or day-only wild encounters that use the shipped day/night
-      cycle.
-
-Effort: **medium**.
 
 ## 18. Better settings
 

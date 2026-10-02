@@ -865,7 +865,8 @@
   "position": {
    "x": 43.8204706830164,
    "y": 42.718289248453
-  }
+  },
+  "weather": "snow"
  },
  "sinnoh-route-217": {
   "id": "sinnoh-route-217",
@@ -895,7 +896,8 @@
   "position": {
    "x": 35.23,
    "y": 25.09
-  }
+  },
+  "weather": "snow"
  },
  "sinnoh-snowpoint-city": {
   "id": "sinnoh-snowpoint-city",

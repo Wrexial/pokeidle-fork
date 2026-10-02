@@ -18,13 +18,15 @@
     "speciesKey": "hoppip",
     "weight": 30,
     "minLevel": 3,
-    "maxLevel": 5
+    "maxLevel": 5,
+    "time": "day"
    },
    {
     "speciesKey": "fletchling",
     "weight": 30,
     "minLevel": 3,
-    "maxLevel": 5
+    "maxLevel": 5,
+    "time": "day"
    },
    {
     "speciesKey": "scatterbug",
@@ -90,7 +92,8 @@
     "speciesKey": "sunkern",
     "weight": 30,
     "minLevel": 3,
-    "maxLevel": 5
+    "maxLevel": 5,
+    "time": "day"
    },
    {
     "speciesKey": "sprigatito",
@@ -131,13 +134,15 @@
     "speciesKey": "shuppet",
     "weight": 35,
     "minLevel": 10,
-    "maxLevel": 12
+    "maxLevel": 12,
+    "time": "night"
    },
    {
     "speciesKey": "murkrow",
     "weight": 30,
     "minLevel": 10,
-    "maxLevel": 12
+    "maxLevel": 12,
+    "time": "night"
    },
    {
     "speciesKey": "gulpin",
@@ -155,7 +160,8 @@
     "speciesKey": "shinx",
     "weight": 30,
     "minLevel": 10,
-    "maxLevel": 12
+    "maxLevel": 12,
+    "time": "night"
    },
    {
     "speciesKey": "nacli",
@@ -179,7 +185,8 @@
     "speciesKey": "drifloon",
     "weight": 20,
     "minLevel": 10,
-    "maxLevel": 12
+    "maxLevel": 12,
+    "time": "night"
    },
    {
     "speciesKey": "oricorio",
@@ -250,13 +257,15 @@
     "speciesKey": "hoppip",
     "weight": 30,
     "minLevel": 15,
-    "maxLevel": 17
+    "maxLevel": 17,
+    "time": "day"
    },
    {
     "speciesKey": "fletchling",
     "weight": 30,
     "minLevel": 15,
-    "maxLevel": 17
+    "maxLevel": 17,
+    "time": "day"
    },
    {
     "speciesKey": "bounsweet",
@@ -304,7 +313,8 @@
     "speciesKey": "sunkern",
     "weight": 30,
     "minLevel": 15,
-    "maxLevel": 17
+    "maxLevel": 17,
+    "time": "day"
    },
    {
     "speciesKey": "bronzor",
@@ -357,7 +367,8 @@
     "speciesKey": "murkrow",
     "weight": 30,
     "minLevel": 20,
-    "maxLevel": 22
+    "maxLevel": 22,
+    "time": "night"
    },
    {
     "speciesKey": "shroomish",
@@ -405,7 +416,8 @@
     "speciesKey": "misdreavus",
     "weight": 30,
     "minLevel": 20,
-    "maxLevel": 22
+    "maxLevel": 22,
+    "time": "night"
    },
    {
     "speciesKey": "barboach",
@@ -572,7 +584,8 @@
     "speciesKey": "shuppet",
     "weight": 35,
     "minLevel": 29,
-    "maxLevel": 31
+    "maxLevel": 31,
+    "time": "night"
    },
    {
     "speciesKey": "swablu",
@@ -584,7 +597,8 @@
     "speciesKey": "murkrow",
     "weight": 30,
     "minLevel": 29,
-    "maxLevel": 31
+    "maxLevel": 31,
+    "time": "night"
    },
    {
     "speciesKey": "gulpin",
@@ -673,7 +687,8 @@
     "speciesKey": "noibat",
     "weight": 30,
     "minLevel": 34,
-    "maxLevel": 36
+    "maxLevel": 36,
+    "time": "night"
    },
    {
     "speciesKey": "naclstack",
@@ -715,7 +730,8 @@
     "speciesKey": "drifblim",
     "weight": 15,
     "minLevel": 34,
-    "maxLevel": 36
+    "maxLevel": 36,
+    "time": "night"
    },
    {
     "speciesKey": "indeedee",
@@ -798,7 +814,8 @@
     "speciesKey": "misdreavus",
     "weight": 30,
     "minLevel": 39,
-    "maxLevel": 41
+    "maxLevel": 41,
+    "time": "night"
    },
    {
     "speciesKey": "meditite",
@@ -875,7 +892,8 @@
     "speciesKey": "shuppet",
     "weight": 35,
     "minLevel": 44,
-    "maxLevel": 46
+    "maxLevel": 46,
+    "time": "night"
    },
    {
     "speciesKey": "meowth",
@@ -887,7 +905,8 @@
     "speciesKey": "murkrow",
     "weight": 30,
     "minLevel": 44,
-    "maxLevel": 46
+    "maxLevel": 46,
+    "time": "night"
    },
    {
     "speciesKey": "psyduck",
@@ -905,7 +924,8 @@
     "speciesKey": "misdreavus",
     "weight": 30,
     "minLevel": 44,
-    "maxLevel": 46
+    "maxLevel": 46,
+    "time": "night"
    },
    {
     "speciesKey": "barboach",
@@ -976,13 +996,15 @@
     "speciesKey": "banette",
     "weight": 35,
     "minLevel": 49,
-    "maxLevel": 51
+    "maxLevel": 51,
+    "time": "night"
    },
    {
     "speciesKey": "murkrow",
     "weight": 30,
     "minLevel": 49,
-    "maxLevel": 51
+    "maxLevel": 51,
+    "time": "night"
    },
    {
     "speciesKey": "sinistea",
@@ -994,7 +1016,8 @@
     "speciesKey": "misdreavus",
     "weight": 30,
     "minLevel": 49,
-    "maxLevel": 51
+    "maxLevel": 51,
+    "time": "night"
    },
    {
     "speciesKey": "meditite",
@@ -1101,7 +1124,8 @@
     "speciesKey": "noibat",
     "weight": 35,
     "minLevel": 54,
-    "maxLevel": 56
+    "maxLevel": 56,
+    "time": "night"
    },
    {
     "speciesKey": "meowth",
@@ -1113,7 +1137,8 @@
     "speciesKey": "murkrow",
     "weight": 30,
     "minLevel": 54,
-    "maxLevel": 56
+    "maxLevel": 56,
+    "time": "night"
    },
    {
     "speciesKey": "psyduck",
@@ -1196,7 +1221,8 @@
     "speciesKey": "noibat",
     "weight": 30,
     "minLevel": 58,
-    "maxLevel": 60
+    "maxLevel": 60,
+    "time": "night"
    },
    {
     "speciesKey": "lokix",
@@ -1244,7 +1270,8 @@
     "speciesKey": "noivern",
     "weight": 15,
     "minLevel": 58,
-    "maxLevel": 60
+    "maxLevel": 60,
+    "time": "night"
    },
    {
     "speciesKey": "deino",
@@ -1281,7 +1308,8 @@
     "weight": 8,
     "minLevel": 58,
     "maxLevel": 60,
-    "variety": true
+    "variety": true,
+    "time": "day"
    }
   ]
  },
@@ -1334,7 +1362,8 @@
     "speciesKey": "misdreavus",
     "weight": 30,
     "minLevel": 63,
-    "maxLevel": 65
+    "maxLevel": 65,
+    "time": "night"
    },
    {
     "speciesKey": "axew",
@@ -1435,7 +1464,8 @@
     "speciesKey": "jumpluff",
     "weight": 15,
     "minLevel": 68,
-    "maxLevel": 70
+    "maxLevel": 70,
+    "time": "day"
    },
    {
     "speciesKey": "kilowattrel",
@@ -1465,7 +1495,8 @@
     "speciesKey": "sunflora",
     "weight": 15,
     "minLevel": 68,
-    "maxLevel": 70
+    "maxLevel": 70,
+    "time": "day"
    },
    {
     "speciesKey": "vivillon",
@@ -1490,7 +1521,8 @@
     "weight": 8,
     "minLevel": 68,
     "maxLevel": 70,
-    "variety": true
+    "variety": true,
+    "time": "day"
    }
   ]
  },
@@ -1531,13 +1563,15 @@
     "speciesKey": "shuppet",
     "weight": 35,
     "minLevel": 73,
-    "maxLevel": 75
+    "maxLevel": 75,
+    "time": "night"
    },
    {
     "speciesKey": "murkrow",
     "weight": 30,
     "minLevel": 73,
-    "maxLevel": 75
+    "maxLevel": 75,
+    "time": "night"
    },
    {
     "speciesKey": "pineco",
@@ -1639,28 +1673,32 @@
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "jumpluff",
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "sunkern",
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "sunflora",
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "shroomish",
@@ -1750,28 +1788,32 @@
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "jumpluff",
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "sunkern",
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "sunflora",
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "shroomish",
@@ -1875,35 +1917,40 @@
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "jumpluff",
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "sunkern",
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "sunflora",
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "misdreavus",
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "shroomish",
@@ -1924,7 +1971,8 @@
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "time": "night"
    }
   ]
  },
@@ -2000,7 +2048,8 @@
     "weight": 8,
     "minLevel": 78,
     "maxLevel": 80,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "applin",
@@ -2546,7 +2595,8 @@
     "weight": 8,
     "minLevel": 68,
     "maxLevel": 70,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "sableye",
@@ -2560,7 +2610,8 @@
     "weight": 8,
     "minLevel": 68,
     "maxLevel": 70,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "rotom",
@@ -2697,7 +2748,8 @@
     "weight": 8,
     "minLevel": 68,
     "maxLevel": 70,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "oranguru",

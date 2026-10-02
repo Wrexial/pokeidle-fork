@@ -1,8 +1,9 @@
 // // Boss battle lifecycle: start and end (badges, Elite Four, Champion). Split from game/reducer/battle.js.
 
 import { BATTLE_TOWER_REGION } from '../../../data/config.js'
-import { gymLeaderData, regions } from '../../../data/gameData.js'
+import { gymLeaderData, mapData, regions } from '../../../data/gameData.js'
 import { createVolatileState } from '../../combat.js'
+import { fieldWeatherFor } from '../../weather.js'
 import { emptyBattleHazards } from '../../hazards.js'
 import { computeUnlockedLocations, prepareNextBattle, syncActivePokemonIntoParty, tickBattleCounters } from '../../progression.js'
 import { settleUnlockTokens, recordSeenPokemon, withNotification } from '../../reducer-helpers.js'
@@ -43,7 +44,7 @@ export function startBossBattle(state, action) {
       ],
       currentEventIndex: 0,
       battleTurn: 0,
-      weather: null,
+      weather: fieldWeatherFor(mapData[state.currentLocation]),
       battleHazards: emptyBattleHazards(),
       terrain: null,
       activePlayerPokemonIndex: 0,
@@ -209,7 +210,7 @@ export function bossBattleEnd(state, action) {
         ],
         currentEventIndex: 0,
         battleTurn: 0,
-        weather: null,
+        weather: fieldWeatherFor(mapData[state.currentLocation]),
         battleHazards: emptyBattleHazards(),
         terrain: null,
         enemyTurnSpent: !1,

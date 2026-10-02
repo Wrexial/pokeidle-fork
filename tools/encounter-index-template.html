@@ -229,6 +229,11 @@
         border-color: #c8a8e6;
         color: #6f3ea3;
       }
+      .badge.weather {
+        background: #dcecfb;
+        border-color: #9cc4e8;
+        color: #245a86;
+      }
       .location-head .count {
         margin-left: auto;
         font-size: 11.5px;
@@ -285,6 +290,22 @@
         border-radius: 999px;
         background: var(--c, #888);
         text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+      }
+      .time {
+        font-size: 10px;
+        font-weight: 700;
+        padding: 1px 7px;
+        border-radius: 999px;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+      }
+      .time.night {
+        background: #2b2f52;
+        color: #d7dcff;
+      }
+      .time.day {
+        background: #f6e3a1;
+        color: #7a5b00;
       }
       .mon .lv {
         grid-area: lv;
@@ -368,7 +389,10 @@
       Generated from <code>public/data/map-data/*</code> and
       <code>public/data/encounter-data/*</code> on <span id="generatedAt"></span>.
       Levels are the game's tuned encounter band; rate is each species' share of
-      the location's encounter rolls. Raid Islands list their region's legendary
+      the location's encounter rolls. A <span class="time day">☀ day</span> or
+      <span class="time night">🌙 night</span> tag marks a species that only shows in
+      that phase, and a weather tag marks a route whose battles start under that
+      field weather. Raid Islands list their region's legendary
       pool. Regenerate with <code>node tools/generate-encounter-index.cjs</code>.
     </footer>
 
@@ -412,12 +436,17 @@
               ? 'Lv ' + entry.minLevel
               : 'Lv ' + entry.minLevel + '–' + entry.maxLevel
           var types = info.types.map(typeBadge).join('')
+          var timeBadge = entry.time
+            ? '<span class="time ' + esc(entry.time) + '">' +
+              esc(entry.time === 'night' ? '🌙 night' : '☀ day') +
+              '</span>'
+            : ''
           return (
             '<div class="mon">' +
             '<img class="sprite" loading="lazy" src="' + spriteUrl(info.id) + '" alt="' + esc(info.name) + '" ' +
             "onerror=\"this.onerror=null;this.src='" + fallbackUrl(info.id) + "'\">" +
             '<div class="info"><div class="mon-name">' + esc(info.name) + '</div>' +
-            '<div class="types">' + types + '</div></div>' +
+            '<div class="types">' + types + timeBadge + '</div></div>' +
             '<div class="lv">' + lv + '</div>' +
             '<div class="rate"><div class="bar-track"><div class="bar" style="width:' +
             Math.min(100, rate * 100).toFixed(1) + '%"></div></div><span>' + percent + '%</span></div>' +
@@ -436,11 +465,15 @@
             .toLowerCase()
           var classes = 'location' + (location.type === 'raid' ? ' raid' : '')
           var badge = location.type === 'raid' ? 'Raid Island' : location.type
+          var weatherBadge = location.weather
+            ? '<span class="badge weather">' + esc(location.weather) + '</span>'
+            : ''
           return (
             '<article class="' + classes + '" data-name="' + esc(location.name.toLowerCase()) +
             '" data-mons="' + esc(monNames) + '">' +
             '<div class="location-head"><span class="name">' + esc(location.name) + '</span>' +
             '<span class="badge ' + (location.type === 'raid' ? 'raid' : '') + '">' + esc(badge) + '</span>' +
+            weatherBadge +
             '<span class="count">' + mons.length + ' species</span></div>' +
             '<div class="mon-grid">' + mons.map(function (e) { return renderMon(e, total) }).join('') +
             '</div></article>'

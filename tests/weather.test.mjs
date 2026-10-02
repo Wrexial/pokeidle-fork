@@ -6,9 +6,15 @@ import { installGameData } from './helpers/game-data.mjs'
 installGameData()
 
 const { resolveBattleTurn } = await import('../src/game/combat.js')
-const { applyWeatherToMove, weatherDamageMultiplier, weatherResidualDamage } = await import(
-  '../src/game/weather.js'
-)
+const {
+  applyWeatherToMove,
+  FIELD_WEATHER_TURNS,
+  fieldWeatherFor,
+  weatherDamageMultiplier,
+  weatherResidualDamage,
+} = await import('../src/game/weather.js')
+const { encountersForPhase } = await import('../src/game/progression.js')
+const { mapData } = await import('../src/data/gameData.js')
 
 /**
  * @param {Record<string, any>} [overrides]
@@ -238,4 +244,33 @@ test('Delta Stream cancels Flying weaknesses', () => {
     }
     assert.ok(damage({ type: 'strongWinds', turns: 5 }) < damage(null), 'the Electric weakness is removed')
   })
+})
+
+test('a location field weather starts the battle under it', () => {
+  assert.equal(fieldWeatherFor(null), null, 'no location, no weather')
+  assert.equal(fieldWeatherFor({}), null, 'a location with no weather is clear')
+  assert.deepEqual(fieldWeatherFor({ weather: 'rain' }), {
+    type: 'rain',
+    turns: FIELD_WEATHER_TURNS,
+  })
+  assert.equal(mapData['hoenn-route-119'].weather, 'rain', 'Route 119 is permanently rainy')
+  assert.equal(mapData['hoenn-route-111'].weather, 'sandstorm')
+})
+
+test('time-gated encounters follow the day/night phase', () => {
+  const table = [
+    { speciesKey: 'hoothoot', time: 'night' },
+    { speciesKey: 'pidgey', time: 'day' },
+    { speciesKey: 'rattata' },
+  ]
+  assert.deepEqual(
+    encountersForPhase(table, true).map((entry) => entry.speciesKey),
+    ['hoothoot', 'rattata']
+  )
+  assert.deepEqual(
+    encountersForPhase(table, false).map((entry) => entry.speciesKey),
+    ['pidgey', 'rattata']
+  )
+  const nightOnly = [{ speciesKey: 'hoothoot', time: 'night' }]
+  assert.deepEqual(encountersForPhase(nightOnly, false), nightOnly, 'an empty phase falls back')
 })

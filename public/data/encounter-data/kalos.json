@@ -24,28 +24,32 @@
     "speciesKey": "bunnelby",
     "weight": 24,
     "minLevel": 3,
-    "maxLevel": 5
+    "maxLevel": 5,
+    "time": "day"
    },
    {
     "speciesKey": "caterpie",
     "weight": 8,
     "minLevel": 3,
     "maxLevel": 5,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "weedle",
     "weight": 8,
     "minLevel": 3,
     "maxLevel": 5,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "pidgey",
     "weight": 8,
     "minLevel": 3,
     "maxLevel": 5,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "zigzagoon",
@@ -59,7 +63,8 @@
     "weight": 8,
     "minLevel": 3,
     "maxLevel": 5,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "scatterbug",
@@ -77,13 +82,15 @@
     "speciesKey": "bunnelby",
     "weight": 5,
     "minLevel": 8,
-    "maxLevel": 10
+    "maxLevel": 10,
+    "time": "day"
    },
    {
     "speciesKey": "fletchling",
     "weight": 5,
     "minLevel": 8,
-    "maxLevel": 10
+    "maxLevel": 10,
+    "time": "day"
    },
    {
     "speciesKey": "scatterbug",
@@ -95,7 +102,8 @@
     "speciesKey": "pidgey",
     "weight": 4,
     "minLevel": 8,
-    "maxLevel": 10
+    "maxLevel": 10,
+    "time": "day"
    },
    {
     "speciesKey": "zigzagoon",
@@ -107,13 +115,15 @@
     "speciesKey": "caterpie",
     "weight": 3,
     "minLevel": 8,
-    "maxLevel": 10
+    "maxLevel": 10,
+    "time": "day"
    },
    {
     "speciesKey": "weedle",
     "weight": 3,
     "minLevel": 8,
-    "maxLevel": 10
+    "maxLevel": 10,
+    "time": "day"
    },
    {
     "speciesKey": "dunsparce",
@@ -141,7 +151,8 @@
     "weight": 8,
     "minLevel": 8,
     "maxLevel": 10,
-    "variety": true
+    "variety": true,
+    "time": "day"
    }
   ]
  },
@@ -188,19 +199,22 @@
     "speciesKey": "bunnelby",
     "weight": 5,
     "minLevel": 11,
-    "maxLevel": 13
+    "maxLevel": 13,
+    "time": "day"
    },
    {
     "speciesKey": "fletchling",
     "weight": 5,
     "minLevel": 11,
-    "maxLevel": 13
+    "maxLevel": 13,
+    "time": "day"
    },
    {
     "speciesKey": "pidgey",
     "weight": 3,
     "minLevel": 11,
-    "maxLevel": 13
+    "maxLevel": 13,
+    "time": "day"
    },
    {
     "speciesKey": "azurill",
@@ -218,7 +232,8 @@
     "speciesKey": "pikachu",
     "weight": 1,
     "minLevel": 11,
-    "maxLevel": 13
+    "maxLevel": 13,
+    "time": "day"
    },
    {
     "speciesKey": "dunsparce",
@@ -245,7 +260,8 @@
     "weight": 8,
     "minLevel": 11,
     "maxLevel": 13,
-    "variety": true
+    "variety": true,
+    "time": "day"
    }
   ]
  },
@@ -262,7 +278,8 @@
     "speciesKey": "ledyba",
     "weight": 10,
     "minLevel": 15,
-    "maxLevel": 17
+    "maxLevel": 17,
+    "time": "day"
    },
    {
     "speciesKey": "combee",
@@ -293,14 +310,16 @@
     "weight": 8,
     "minLevel": 15,
     "maxLevel": 17,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "weedle",
     "weight": 8,
     "minLevel": 15,
     "maxLevel": 17,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "marill",
@@ -335,21 +354,24 @@
     "weight": 8,
     "minLevel": 15,
     "maxLevel": 17,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "pikachu",
     "weight": 8,
     "minLevel": 15,
     "maxLevel": 17,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "oddish",
     "weight": 8,
     "minLevel": 15,
     "maxLevel": 17,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "abra",
@@ -373,7 +395,8 @@
     "speciesKey": "bunnelby",
     "weight": 10,
     "minLevel": 18,
-    "maxLevel": 20
+    "maxLevel": 20,
+    "time": "day"
    },
    {
     "speciesKey": "skiddo",
@@ -403,7 +426,8 @@
     "speciesKey": "doduo",
     "weight": 5,
     "minLevel": 18,
-    "maxLevel": 20
+    "maxLevel": 20,
+    "time": "day"
    },
    {
     "speciesKey": "plusle",
@@ -428,28 +452,32 @@
     "weight": 8,
     "minLevel": 18,
     "maxLevel": 20,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "pidgey",
     "weight": 8,
     "minLevel": 18,
     "maxLevel": 20,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "oddish",
     "weight": 8,
     "minLevel": 18,
     "maxLevel": 20,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "sentret",
     "weight": 8,
     "minLevel": 18,
     "maxLevel": 20,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "dunsparce",
@@ -474,13 +502,15 @@
     "speciesKey": "oddish",
     "weight": 8,
     "minLevel": 21,
-    "maxLevel": 23
+    "maxLevel": 23,
+    "time": "night"
    },
    {
     "speciesKey": "sentret",
     "weight": 5,
     "minLevel": 21,
-    "maxLevel": 23
+    "maxLevel": 23,
+    "time": "day"
    },
    {
     "speciesKey": "espurr",
@@ -518,14 +548,16 @@
     "weight": 8,
     "minLevel": 21,
     "maxLevel": 23,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "hoppip",
     "weight": 8,
     "minLevel": 21,
     "maxLevel": 23,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "gulpin",
@@ -560,14 +592,16 @@
     "weight": 8,
     "minLevel": 21,
     "maxLevel": 23,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "ledyba",
     "weight": 8,
     "minLevel": 21,
     "maxLevel": 23,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "dunsparce",
@@ -591,7 +625,8 @@
     "speciesKey": "hoppip",
     "weight": 15,
     "minLevel": 24,
-    "maxLevel": 26
+    "maxLevel": 26,
+    "time": "day"
    },
    {
     "speciesKey": "croagunk",
@@ -652,7 +687,8 @@
     "weight": 8,
     "minLevel": 24,
     "maxLevel": 26,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "marill",
@@ -739,7 +775,8 @@
     "speciesKey": "drifloon",
     "weight": 10,
     "minLevel": 28,
-    "maxLevel": 30
+    "maxLevel": 30,
+    "time": "night"
    },
    {
     "speciesKey": "mienfoo",
@@ -847,7 +884,8 @@
     "weight": 8,
     "minLevel": 31,
     "maxLevel": 33,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "nincada",
@@ -868,7 +906,8 @@
     "weight": 8,
     "minLevel": 31,
     "maxLevel": 33,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "scraggy",
@@ -966,7 +1005,8 @@
     "speciesKey": "houndour",
     "weight": 9,
     "minLevel": 34,
-    "maxLevel": 36
+    "maxLevel": 36,
+    "time": "night"
    },
    {
     "speciesKey": "electrike",
@@ -1003,28 +1043,32 @@
     "weight": 8,
     "minLevel": 34,
     "maxLevel": 36,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "doduo",
     "weight": 8,
     "minLevel": 34,
     "maxLevel": 36,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "ledyba",
     "weight": 8,
     "minLevel": 34,
     "maxLevel": 36,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "hoppip",
     "weight": 8,
     "minLevel": 34,
     "maxLevel": 36,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "taillow",
@@ -1061,7 +1105,8 @@
     "speciesKey": "stunky",
     "weight": 11,
     "minLevel": 37,
-    "maxLevel": 39
+    "maxLevel": 39,
+    "time": "night"
    },
    {
     "speciesKey": "hariyama",
@@ -1135,14 +1180,16 @@
     "weight": 8,
     "minLevel": 37,
     "maxLevel": 39,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "oddish",
     "weight": 8,
     "minLevel": 37,
     "maxLevel": 39,
-    "variety": true
+    "variety": true,
+    "time": "night"
    }
   ]
  },
@@ -1528,13 +1575,15 @@
     "speciesKey": "murkrow",
     "weight": 15,
     "minLevel": 50,
-    "maxLevel": 52
+    "maxLevel": 52,
+    "time": "night"
    },
    {
     "speciesKey": "mightyena",
     "weight": 10,
     "minLevel": 50,
-    "maxLevel": 52
+    "maxLevel": 52,
+    "time": "night"
    },
    {
     "speciesKey": "watchog",
@@ -1546,7 +1595,8 @@
     "speciesKey": "liepard",
     "weight": 10,
     "minLevel": 50,
-    "maxLevel": 52
+    "maxLevel": 52,
+    "time": "night"
    },
    {
     "speciesKey": "floatzel",
@@ -1633,7 +1683,8 @@
     "speciesKey": "murkrow",
     "weight": 15,
     "minLevel": 54,
-    "maxLevel": 56
+    "maxLevel": 56,
+    "time": "night"
    },
    {
     "speciesKey": "floatzel",
@@ -1663,20 +1714,23 @@
     "speciesKey": "phantump",
     "weight": 5,
     "minLevel": 54,
-    "maxLevel": 56
+    "maxLevel": 56,
+    "time": "night"
    },
    {
     "speciesKey": "pumpkaboo",
     "weight": 2,
     "minLevel": 54,
-    "maxLevel": 56
+    "maxLevel": 56,
+    "time": "night"
    },
    {
     "speciesKey": "oddish",
     "weight": 8,
     "minLevel": 54,
     "maxLevel": 56,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "psyduck",
@@ -1740,14 +1794,16 @@
     "weight": 8,
     "minLevel": 57,
     "maxLevel": 59,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "doduo",
     "weight": 8,
     "minLevel": 57,
     "maxLevel": 59,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "cloyster",
@@ -1768,14 +1824,16 @@
     "weight": 8,
     "minLevel": 57,
     "maxLevel": 59,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "hoppip",
     "weight": 8,
     "minLevel": 57,
     "maxLevel": 59,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "yanma",
@@ -1789,7 +1847,8 @@
     "weight": 8,
     "minLevel": 57,
     "maxLevel": 59,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "gligar",
@@ -2036,7 +2095,8 @@
     "speciesKey": "trevenant",
     "weight": 18,
     "minLevel": 67,
-    "maxLevel": 69
+    "maxLevel": 69,
+    "time": "night"
    },
    {
     "speciesKey": "foongus",
@@ -2054,7 +2114,8 @@
     "speciesKey": "noctowl",
     "weight": 10,
     "minLevel": 67,
-    "maxLevel": 69
+    "maxLevel": 69,
+    "time": "night"
    },
    {
     "speciesKey": "gothorita",
@@ -2085,7 +2146,8 @@
     "weight": 8,
     "minLevel": 67,
     "maxLevel": 69,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "bellsprout",
@@ -2113,7 +2175,8 @@
     "weight": 8,
     "minLevel": 67,
     "maxLevel": 69,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "ekans",
@@ -2219,7 +2282,8 @@
     "weight": 8,
     "minLevel": 70,
     "maxLevel": 72,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "jigglypuff",
@@ -2317,7 +2381,8 @@
     "speciesKey": "bunnelby",
     "weight": 5,
     "minLevel": 73,
-    "maxLevel": 75
+    "maxLevel": 75,
+    "time": "day"
    },
    {
     "speciesKey": "dunsparce",
@@ -2341,7 +2406,8 @@
     "speciesKey": "diggersby",
     "weight": 3,
     "minLevel": 73,
-    "maxLevel": 75
+    "maxLevel": 75,
+    "time": "day"
    },
    {
     "speciesKey": "sharpedo",

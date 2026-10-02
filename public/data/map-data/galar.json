@@ -676,7 +676,8 @@
   "position": {
    "x": 50.16,
    "y": 32.37
-  }
+  },
+  "weather": "snow"
  },
  "galar-wyndon": {
   "id": "galar-wyndon",

@@ -229,6 +229,21 @@ export function advanceShinyTarget(chain, enemy) {
 }
 
 /**
+ * Narrow a route's encounter table to the entries available in the current
+ * day/night phase, falling back to the whole table when the phase would be
+ * empty (so a fully time-gated route still spawns something).
+ * @template {{ time?: 'day' | 'night' }} T
+ * @param {T[]} encounters
+ * @param {boolean} isNight
+ * @returns {T[]}
+ */
+export function encountersForPhase(encounters, isNight) {
+  const phase = isNight ? 'night' : 'day',
+    filtered = encounters.filter((encounter) => !encounter.time || encounter.time === phase)
+  return filtered.length > 0 ? filtered : encounters
+}
+
+/**
  * A 0-12 progress score for a region's Raid Island: its badges (0-8), a bonus
  * for beating its Champion, and region prestige. Drives the legendary weight,
  * so a fresh island leans toward the minor legendaries.

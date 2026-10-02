@@ -80,7 +80,8 @@
     "weight": 8,
     "minLevel": 3,
     "maxLevel": 5,
-    "variety": true
+    "variety": true,
+    "time": "night"
    }
   ]
  },
@@ -109,7 +110,8 @@
     "speciesKey": "purrloin",
     "weight": 10,
     "minLevel": 8,
-    "maxLevel": 10
+    "maxLevel": 10,
+    "time": "night"
    },
    {
     "speciesKey": "jigglypuff",
@@ -189,7 +191,8 @@
     "weight": 8,
     "minLevel": 8,
     "maxLevel": 10,
-    "variety": true
+    "variety": true,
+    "time": "night"
    }
   ]
  },
@@ -248,7 +251,8 @@
     "speciesKey": "purrloin",
     "weight": 5,
     "minLevel": 11,
-    "maxLevel": 13
+    "maxLevel": 13,
+    "time": "night"
    },
    {
     "speciesKey": "pansage",
@@ -272,7 +276,8 @@
     "speciesKey": "woobat",
     "weight": 2,
     "minLevel": 11,
-    "maxLevel": 13
+    "maxLevel": 13,
+    "time": "night"
    },
    {
     "speciesKey": "jigglypuff",
@@ -429,7 +434,8 @@
     "speciesKey": "purrloin",
     "weight": 10,
     "minLevel": 17,
-    "maxLevel": 19
+    "maxLevel": 19,
+    "time": "night"
    },
    {
     "speciesKey": "trubbish",
@@ -867,7 +873,8 @@
     "speciesKey": "liepard",
     "weight": 5,
     "minLevel": 29,
-    "maxLevel": 31
+    "maxLevel": 31,
+    "time": "night"
    },
    {
     "speciesKey": "grimer",
@@ -1020,7 +1027,8 @@
     "weight": 8,
     "minLevel": 32,
     "maxLevel": 34,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "jigglypuff",
@@ -1182,7 +1190,8 @@
     "speciesKey": "sunkern",
     "weight": 10,
     "minLevel": 38,
-    "maxLevel": 40
+    "maxLevel": 40,
+    "time": "day"
    },
    {
     "speciesKey": "combee",
@@ -1212,13 +1221,15 @@
     "speciesKey": "metapod",
     "weight": 5,
     "minLevel": 38,
-    "maxLevel": 40
+    "maxLevel": 40,
+    "time": "day"
    },
    {
     "speciesKey": "kakuna",
     "weight": 5,
     "minLevel": 38,
-    "maxLevel": 40
+    "maxLevel": 40,
+    "time": "day"
    },
    {
     "speciesKey": "ponyta",
@@ -1248,19 +1259,22 @@
     "speciesKey": "butterfree",
     "weight": 1,
     "minLevel": 38,
-    "maxLevel": 40
+    "maxLevel": 40,
+    "time": "day"
    },
    {
     "speciesKey": "beedrill",
     "weight": 1,
     "minLevel": 38,
-    "maxLevel": 40
+    "maxLevel": 40,
+    "time": "day"
    },
    {
     "speciesKey": "sunflora",
     "weight": 1,
     "minLevel": 38,
-    "maxLevel": 40
+    "maxLevel": 40,
+    "time": "day"
    },
    {
     "speciesKey": "roserade",
@@ -1367,7 +1381,8 @@
     "speciesKey": "drifblim",
     "weight": 8,
     "minLevel": 40,
-    "maxLevel": 42
+    "maxLevel": 42,
+    "time": "night"
    },
    {
     "speciesKey": "lunatone",
@@ -1474,7 +1489,8 @@
     "speciesKey": "drifblim",
     "weight": 8,
     "minLevel": 43,
-    "maxLevel": 45
+    "maxLevel": 45,
+    "time": "night"
    },
    {
     "speciesKey": "seaking",
@@ -1539,7 +1555,8 @@
     "speciesKey": "fearow",
     "weight": 15,
     "minLevel": 46,
-    "maxLevel": 48
+    "maxLevel": 48,
+    "time": "day"
    },
    {
     "speciesKey": "sandslash",
@@ -1660,7 +1677,8 @@
     "speciesKey": "liepard",
     "weight": 10,
     "minLevel": 49,
-    "maxLevel": 51
+    "maxLevel": 51,
+    "time": "night"
    },
    {
     "speciesKey": "trubbish",
@@ -1685,7 +1703,8 @@
     "weight": 8,
     "minLevel": 49,
     "maxLevel": 51,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "jigglypuff",
@@ -1794,14 +1813,16 @@
     "weight": 8,
     "minLevel": 52,
     "maxLevel": 54,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "beedrill",
     "weight": 8,
     "minLevel": 52,
     "maxLevel": 54,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "golbat",
@@ -2063,7 +2084,8 @@
     "weight": 8,
     "minLevel": 58,
     "maxLevel": 60,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "gothita",
@@ -2106,7 +2128,8 @@
     "speciesKey": "purrloin",
     "weight": 13,
     "minLevel": 61,
-    "maxLevel": 63
+    "maxLevel": 63,
+    "time": "night"
    },
    {
     "speciesKey": "politoed",
@@ -2119,7 +2142,8 @@
     "weight": 8,
     "minLevel": 61,
     "maxLevel": 63,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "jigglypuff",
@@ -2212,7 +2236,8 @@
     "speciesKey": "sunkern",
     "weight": 19,
     "minLevel": 64,
-    "maxLevel": 66
+    "maxLevel": 66,
+    "time": "day"
    },
    {
     "speciesKey": "poliwag",
@@ -2242,7 +2267,8 @@
     "speciesKey": "purrloin",
     "weight": 9,
     "minLevel": 64,
-    "maxLevel": 66
+    "maxLevel": 66,
+    "time": "night"
    },
    {
     "speciesKey": "marill",
@@ -2260,7 +2286,8 @@
     "speciesKey": "venipede",
     "weight": 5,
     "minLevel": 64,
-    "maxLevel": 66
+    "maxLevel": 66,
+    "time": "night"
    },
    {
     "speciesKey": "dunsparce",
@@ -2285,7 +2312,8 @@
     "weight": 8,
     "minLevel": 64,
     "maxLevel": 66,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "jigglypuff",
@@ -2354,14 +2382,16 @@
     "weight": 8,
     "minLevel": 67,
     "maxLevel": 69,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "fearow",
     "weight": 8,
     "minLevel": 67,
     "maxLevel": 69,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "golbat",

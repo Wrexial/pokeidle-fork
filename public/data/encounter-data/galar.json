@@ -24,7 +24,8 @@
     "speciesKey": "caterpie",
     "weight": 4,
     "minLevel": 3,
-    "maxLevel": 5
+    "maxLevel": 5,
+    "time": "day"
    },
    {
     "speciesKey": "wooloo",
@@ -42,7 +43,8 @@
     "speciesKey": "hoothoot",
     "weight": 1,
     "minLevel": 3,
-    "maxLevel": 5
+    "maxLevel": 5,
+    "time": "night"
    },
    {
     "speciesKey": "nickit",
@@ -147,7 +149,8 @@
     "speciesKey": "purrloin",
     "weight": 8,
     "minLevel": 13,
-    "maxLevel": 15
+    "maxLevel": 15,
+    "time": "night"
    },
    {
     "speciesKey": "lotad",
@@ -171,7 +174,8 @@
     "speciesKey": "hoothoot",
     "weight": 1,
     "minLevel": 13,
-    "maxLevel": 15
+    "maxLevel": 15,
+    "time": "night"
    },
    {
     "speciesKey": "yamper",
@@ -249,7 +253,8 @@
     "speciesKey": "stunky",
     "weight": 3,
     "minLevel": 20,
-    "maxLevel": 22
+    "maxLevel": 22,
+    "time": "night"
    },
    {
     "speciesKey": "klink",
@@ -353,7 +358,8 @@
     "speciesKey": "pikachu",
     "weight": 1,
     "minLevel": 28,
-    "maxLevel": 30
+    "maxLevel": 30,
+    "time": "day"
    },
    {
     "speciesKey": "eevee",
@@ -493,7 +499,8 @@
     "speciesKey": "drifloon",
     "weight": 1,
     "minLevel": 35,
-    "maxLevel": 37
+    "maxLevel": 37,
+    "time": "night"
    },
    {
     "speciesKey": "dewpider",
@@ -534,7 +541,8 @@
     "speciesKey": "duskull",
     "weight": 5,
     "minLevel": 43,
-    "maxLevel": 45
+    "maxLevel": 45,
+    "time": "night"
    },
    {
     "speciesKey": "durant",
@@ -617,7 +625,8 @@
     "speciesKey": "liepard",
     "weight": 6,
     "minLevel": 50,
-    "maxLevel": 52
+    "maxLevel": 52,
+    "time": "night"
    },
    {
     "speciesKey": "karrablast",
@@ -679,14 +688,16 @@
     "weight": 8,
     "minLevel": 50,
     "maxLevel": 52,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "purrloin",
     "weight": 8,
     "minLevel": 50,
     "maxLevel": 52,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "ferroseed",
@@ -772,7 +783,8 @@
     "speciesKey": "dusclops",
     "weight": 4,
     "minLevel": 58,
-    "maxLevel": 60
+    "maxLevel": 60,
+    "time": "night"
    },
    {
     "speciesKey": "haunter",
@@ -957,7 +969,8 @@
     "speciesKey": "liepard",
     "weight": 6,
     "minLevel": 65,
-    "maxLevel": 67
+    "maxLevel": 67,
+    "time": "night"
    },
    {
     "speciesKey": "mantine",
@@ -1181,7 +1194,8 @@
     "weight": 8,
     "minLevel": 35,
     "maxLevel": 37,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "eevee",
@@ -1195,7 +1209,8 @@
     "weight": 8,
     "minLevel": 35,
     "maxLevel": 37,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "minccino",
@@ -1283,7 +1298,8 @@
     "weight": 8,
     "minLevel": 35,
     "maxLevel": 37,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "lotad",
@@ -1600,7 +1616,8 @@
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "wobbuffet",
@@ -1836,7 +1853,8 @@
     "weight": 8,
     "minLevel": 75,
     "maxLevel": 77,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "bronzong",
@@ -2167,7 +2185,8 @@
     "weight": 8,
     "minLevel": 3,
     "maxLevel": 5,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "wooloo",
@@ -2181,7 +2200,8 @@
     "weight": 8,
     "minLevel": 3,
     "maxLevel": 5,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "grubbin",
@@ -2276,7 +2296,8 @@
     "weight": 8,
     "minLevel": 24,
     "maxLevel": 26,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "vulpix",
@@ -2406,7 +2427,8 @@
     "weight": 8,
     "minLevel": 43,
     "maxLevel": 45,
-    "variety": true
+    "variety": true,
+    "time": "night"
    }
   ]
  },

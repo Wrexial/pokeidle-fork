@@ -18,7 +18,8 @@
     "speciesKey": "poochyena",
     "weight": 1,
     "minLevel": 3,
-    "maxLevel": 5
+    "maxLevel": 5,
+    "time": "night"
    },
    {
     "speciesKey": "treecko",
@@ -117,7 +118,8 @@
     "speciesKey": "poochyena",
     "weight": 8,
     "minLevel": 7,
-    "maxLevel": 9
+    "maxLevel": 9,
+    "time": "night"
    },
    {
     "speciesKey": "wurmple",
@@ -210,7 +212,8 @@
     "speciesKey": "poochyena",
     "weight": 9,
     "minLevel": 9,
-    "maxLevel": 11
+    "maxLevel": 11,
+    "time": "night"
    },
    {
     "speciesKey": "wingull",
@@ -308,7 +311,8 @@
     "speciesKey": "poochyena",
     "weight": 10,
     "minLevel": 11,
-    "maxLevel": 13
+    "maxLevel": 13,
+    "time": "night"
    },
    {
     "speciesKey": "marill",
@@ -467,7 +471,8 @@
     "weight": 8,
     "minLevel": 13,
     "maxLevel": 15,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "zigzagoon",
@@ -586,7 +591,8 @@
     "weight": 8,
     "minLevel": 15,
     "maxLevel": 17,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "zigzagoon",
@@ -692,7 +698,8 @@
     "weight": 8,
     "minLevel": 17,
     "maxLevel": 19,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "zigzagoon",
@@ -763,7 +770,8 @@
     "weight": 8,
     "minLevel": 19,
     "maxLevel": 21,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "goldeen",
@@ -826,7 +834,8 @@
     "weight": 8,
     "minLevel": 19,
     "maxLevel": 21,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "zigzagoon",
@@ -876,7 +885,8 @@
     "weight": 8,
     "minLevel": 21,
     "maxLevel": 23,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "goldeen",
@@ -1006,7 +1016,8 @@
     "speciesKey": "poochyena",
     "weight": 5,
     "minLevel": 24,
-    "maxLevel": 26
+    "maxLevel": 26,
+    "time": "night"
    },
    {
     "speciesKey": "zigzagoon",
@@ -1024,7 +1035,8 @@
     "speciesKey": "oddish",
     "weight": 3,
     "minLevel": 24,
-    "maxLevel": 26
+    "maxLevel": 26,
+    "time": "night"
    },
    {
     "speciesKey": "plusle",
@@ -1237,7 +1249,8 @@
     "weight": 8,
     "minLevel": 28,
     "maxLevel": 30,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "magnemite",
@@ -1251,7 +1264,8 @@
     "weight": 8,
     "minLevel": 28,
     "maxLevel": 30,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "zigzagoon",
@@ -1627,7 +1641,8 @@
     "speciesKey": "poochyena",
     "weight": 7,
     "minLevel": 36,
-    "maxLevel": 38
+    "maxLevel": 38,
+    "time": "night"
    },
    {
     "speciesKey": "taillow",
@@ -1737,7 +1752,8 @@
     "speciesKey": "oddish",
     "weight": 15,
     "minLevel": 38,
-    "maxLevel": 40
+    "maxLevel": 40,
+    "time": "night"
    },
    {
     "speciesKey": "zigzagoon",
@@ -1761,7 +1777,8 @@
     "speciesKey": "poochyena",
     "weight": 8,
     "minLevel": 38,
-    "maxLevel": 40
+    "maxLevel": 40,
+    "time": "night"
    },
    {
     "speciesKey": "illumise",
@@ -1911,14 +1928,16 @@
     "weight": 8,
     "minLevel": 40,
     "maxLevel": 42,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "mightyena",
     "weight": 8,
     "minLevel": 40,
     "maxLevel": 42,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "lotad",
@@ -1954,7 +1973,8 @@
     "speciesKey": "oddish",
     "weight": 25,
     "minLevel": 42,
-    "maxLevel": 44
+    "maxLevel": 44,
+    "time": "night"
    },
    {
     "speciesKey": "wingull",
@@ -1991,7 +2011,8 @@
     "weight": 8,
     "minLevel": 42,
     "maxLevel": 44,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "goldeen",
@@ -2056,7 +2077,8 @@
     "speciesKey": "oddish",
     "weight": 15,
     "minLevel": 44,
-    "maxLevel": 46
+    "maxLevel": 46,
+    "time": "night"
    },
    {
     "speciesKey": "goldeen",
@@ -2074,7 +2096,8 @@
     "speciesKey": "mightyena",
     "weight": 8,
     "minLevel": 44,
-    "maxLevel": 46
+    "maxLevel": 46,
+    "time": "night"
    },
    {
     "speciesKey": "linoone",
@@ -2086,7 +2109,8 @@
     "speciesKey": "poochyena",
     "weight": 5,
     "minLevel": 44,
-    "maxLevel": 46
+    "maxLevel": 46,
+    "time": "night"
    },
    {
     "speciesKey": "zigzagoon",
@@ -2166,7 +2190,8 @@
     "speciesKey": "shuppet",
     "weight": 15,
     "minLevel": 46,
-    "maxLevel": 48
+    "maxLevel": 48,
+    "time": "night"
    },
    {
     "speciesKey": "wingull",
@@ -2178,19 +2203,22 @@
     "speciesKey": "duskull",
     "weight": 8,
     "minLevel": 46,
-    "maxLevel": 48
+    "maxLevel": 48,
+    "time": "night"
    },
    {
     "speciesKey": "poochyena",
     "weight": 5,
     "minLevel": 46,
-    "maxLevel": 48
+    "maxLevel": 48,
+    "time": "night"
    },
    {
     "speciesKey": "mightyena",
     "weight": 5,
     "minLevel": 46,
-    "maxLevel": 48
+    "maxLevel": 48,
+    "time": "night"
    },
    {
     "speciesKey": "zigzagoon",
@@ -2208,13 +2236,15 @@
     "speciesKey": "oddish",
     "weight": 4,
     "minLevel": 46,
-    "maxLevel": 48
+    "maxLevel": 48,
+    "time": "night"
    },
    {
     "speciesKey": "gloom",
     "weight": 1,
     "minLevel": 46,
-    "maxLevel": 48
+    "maxLevel": 48,
+    "time": "night"
    },
    {
     "speciesKey": "pelipper",
@@ -2288,14 +2318,16 @@
     "weight": 8,
     "minLevel": 48,
     "maxLevel": 50,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "gloom",
     "weight": 8,
     "minLevel": 48,
     "maxLevel": 50,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "goldeen",
@@ -2380,7 +2412,8 @@
     "speciesKey": "shuppet",
     "weight": 15,
     "minLevel": 50,
-    "maxLevel": 52
+    "maxLevel": 52,
+    "time": "night"
    },
    {
     "speciesKey": "wingull",
@@ -2392,19 +2425,22 @@
     "speciesKey": "duskull",
     "weight": 8,
     "minLevel": 50,
-    "maxLevel": 52
+    "maxLevel": 52,
+    "time": "night"
    },
    {
     "speciesKey": "poochyena",
     "weight": 5,
     "minLevel": 50,
-    "maxLevel": 52
+    "maxLevel": 52,
+    "time": "night"
    },
    {
     "speciesKey": "mightyena",
     "weight": 5,
     "minLevel": 50,
-    "maxLevel": 52
+    "maxLevel": 52,
+    "time": "night"
    },
    {
     "speciesKey": "zigzagoon",
@@ -2422,13 +2458,15 @@
     "speciesKey": "oddish",
     "weight": 4,
     "minLevel": 50,
-    "maxLevel": 52
+    "maxLevel": 52,
+    "time": "night"
    },
    {
     "speciesKey": "gloom",
     "weight": 1,
     "minLevel": 50,
-    "maxLevel": 52
+    "maxLevel": 52,
+    "time": "night"
    },
    {
     "speciesKey": "pelipper",
@@ -2520,14 +2558,16 @@
     "weight": 8,
     "minLevel": 52,
     "maxLevel": 54,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "gloom",
     "weight": 8,
     "minLevel": 52,
     "maxLevel": 54,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "goldeen",
@@ -2610,14 +2650,16 @@
     "weight": 8,
     "minLevel": 54,
     "maxLevel": 56,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "gloom",
     "weight": 8,
     "minLevel": 54,
     "maxLevel": 56,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "goldeen",
@@ -2739,14 +2781,16 @@
     "weight": 8,
     "minLevel": 57,
     "maxLevel": 59,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "gloom",
     "weight": 8,
     "minLevel": 57,
     "maxLevel": 59,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "goldeen",
@@ -2829,14 +2873,16 @@
     "weight": 8,
     "minLevel": 59,
     "maxLevel": 61,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "gloom",
     "weight": 8,
     "minLevel": 59,
     "maxLevel": 61,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "goldeen",
@@ -2946,14 +2992,16 @@
     "weight": 8,
     "minLevel": 61,
     "maxLevel": 63,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "gloom",
     "weight": 8,
     "minLevel": 61,
     "maxLevel": 63,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "goldeen",
@@ -3056,14 +3104,16 @@
     "weight": 8,
     "minLevel": 63,
     "maxLevel": 65,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "gloom",
     "weight": 8,
     "minLevel": 63,
     "maxLevel": 65,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "horsea",
@@ -3166,14 +3216,16 @@
     "weight": 8,
     "minLevel": 65,
     "maxLevel": 67,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "gloom",
     "weight": 8,
     "minLevel": 65,
     "maxLevel": 67,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "horsea",
@@ -3270,14 +3322,16 @@
     "weight": 8,
     "minLevel": 67,
     "maxLevel": 69,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "gloom",
     "weight": 8,
     "minLevel": 67,
     "maxLevel": 69,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "horsea",
@@ -3387,14 +3441,16 @@
     "weight": 8,
     "minLevel": 69,
     "maxLevel": 71,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "gloom",
     "weight": 8,
     "minLevel": 69,
     "maxLevel": 71,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "goldeen",
@@ -3497,14 +3553,16 @@
     "weight": 8,
     "minLevel": 71,
     "maxLevel": 73,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "gloom",
     "weight": 8,
     "minLevel": 71,
     "maxLevel": 73,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "goldeen",
@@ -3607,14 +3665,16 @@
     "weight": 8,
     "minLevel": 73,
     "maxLevel": 75,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "gloom",
     "weight": 8,
     "minLevel": 73,
     "maxLevel": 75,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "goldeen",

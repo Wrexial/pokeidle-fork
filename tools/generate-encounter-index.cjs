@@ -63,6 +63,7 @@ for (const region of [...regionMeta].sort((a, b) => a.order - b.order)) {
         weight: entry.weight,
         minLevel: entry.minLevel,
         maxLevel: entry.maxLevel,
+        time: entry.time,
       })
     }
     if (entries.length === 0) continue
@@ -71,6 +72,7 @@ for (const region of [...regionMeta].sort((a, b) => a.order - b.order)) {
       id: location.id,
       name: location.name,
       type: location.type ?? 'route',
+      weather: location.weather,
       encounters: entries,
     })
   }

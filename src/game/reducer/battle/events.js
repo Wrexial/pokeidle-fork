@@ -7,6 +7,7 @@ import { consumableItems } from '../../../data/items.js'
 import { canBreed } from '../../breeding.js'
 import { tickCompanion } from '../../companion.js'
 import { createVolatileState } from '../../combat.js'
+import { fieldWeatherFor } from '../../weather.js'
 import { tickGarden } from '../../garden.js'
 import { tickPelago } from '../../pelago.js'
 import { emptyBattleHazards } from '../../hazards.js'
@@ -46,7 +47,7 @@ export function startEncounter(state, action) {
       ],
       currentEventIndex: 0,
       battleTurn: 0,
-      weather: null,
+      weather: fieldWeatherFor(mapData[state.currentLocation]),
       battleHazards: emptyBattleHazards(),
       terrain: null,
       playerVolatile: createVolatileState(),

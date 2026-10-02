@@ -9,7 +9,7 @@ import { changeBattleForm } from './setup.js'
 import { calculateDamage, chance, isSelfTargetedMove, normalizeStatKey } from './damage.js'
 import { applyEndOfTurn, reportFieldEffects } from './end-of-turn.js'
 import { emptyBattleHazards } from '../hazards.js'
-import { heldDamageMultiplier, heldLifeOrbRecoil, heldStatMultiplier, heldSurvivesAtFullHp } from '../held-items.js'
+import { heldDamageMultiplier, heldLifeOrbRecoil, heldStatMultiplier, heldSurvivesAtFullHp, heldTerrainExtenderTurns } from '../held-items.js'
 import { canEvolveFurther } from '../pokemon.js'
 import { VARIABLE_POWER_MOVES, withVariablePower } from './variable-power.js'
 import { CHARGE_MOVES, hitsSemiInvulnerable } from './charge-moves.js'
@@ -346,10 +346,14 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       WEATHER_ABILITIES[abilityOf(player) ?? ''] ?? WEATHER_ABILITIES[abilityOf(enemy) ?? '']
     if (weatherSetter)
       activeWeather = { type: weatherSetter, turns: WEATHER_TURNS }
-    const terrainSetter =
-      TERRAIN_ABILITIES[abilityOf(player) ?? ''] ?? TERRAIN_ABILITIES[abilityOf(enemy) ?? '']
+    const playerTerrain = TERRAIN_ABILITIES[abilityOf(player) ?? ''],
+      enemyTerrain = TERRAIN_ABILITIES[abilityOf(enemy) ?? ''],
+      terrainSetter = playerTerrain ?? enemyTerrain
     if (terrainSetter)
-      activeTerrain = { type: terrainSetter, turns: TERRAIN_TURNS }
+      activeTerrain = {
+        type: terrainSetter,
+        turns: TERRAIN_TURNS + heldTerrainExtenderTurns(playerTerrain ? player : enemy),
+      }
   }
   // Air Lock / Cloud Nine suppress the weather's effects entirely.
   const weatherSuppressed =
@@ -1235,7 +1239,10 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           message: `The weather became ${WEATHER_NAMES[moveDef.effect.weather] ?? moveDef.effect.weather}!`,
         })
       } else if (moveDef.effect?.type === 'terrain') {
-        activeTerrain = { type: moveDef.effect.terrain, turns: TERRAIN_TURNS }
+        activeTerrain = {
+          type: moveDef.effect.terrain,
+          turns: TERRAIN_TURNS + heldTerrainExtenderTurns(attack.attacker),
+        }
         events.push({
           type: 'terrain',
           message: `The battlefield became ${TERRAIN_NAMES[moveDef.effect.terrain] ?? moveDef.effect.terrain}!`,
@@ -1947,7 +1954,11 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       }
     }
     if (defenderAbilityOnHit === 'sandSpit') activeWeather = { type: 'sandstorm', turns: WEATHER_TURNS }
-    if (defenderAbilityOnHit === 'seedSower') activeTerrain = { type: 'grassy', turns: TERRAIN_TURNS }
+    if (defenderAbilityOnHit === 'seedSower')
+      activeTerrain = {
+        type: 'grassy',
+        turns: TERRAIN_TURNS + heldTerrainExtenderTurns(attack.defender),
+      }
     if (defenderAbilityOnHit === 'toxicDebris' && effectiveMove.category === 'physical') {
       const side = attack.isPlayer ? activeHazards.player : activeHazards.enemy
       side.toxicSpikes = Math.min(2, side.toxicSpikes + 1)

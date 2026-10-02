@@ -134,6 +134,17 @@ export const AUCTION_LOTS = [
     ],
   },
   {
+    id: 'terrainKit',
+    kind: 'held',
+    name: 'Terrain Kit',
+    blurb: 'A Terrain Extender and field supplies for battlefield control.',
+    value: 6000,
+    items: [
+      { itemId: 'terrainExtender', quantity: 1 },
+      { itemId: 'sitrusBerry', quantity: 2 },
+    ],
+  },
+  {
     id: 'stoneCrate',
     kind: 'utility',
     name: 'Evolution Stone Crate',

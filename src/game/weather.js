@@ -8,6 +8,22 @@ import { abilityOf } from './abilities.js'
 /** How many turns a weather effect lasts when set by a move. */
 export const WEATHER_TURNS = 5
 
+/**
+ * How long a route's field weather lasts. Long enough to cover a whole idle
+ * battle (the weather badge still shows it), and refreshed on each encounter.
+ */
+export const FIELD_WEATHER_TURNS = 99
+
+/**
+ * The weather a battle at `location` starts under, or null. A route can carry a
+ * permanent `weather` field (a permanently raining route, a sandstorm desert).
+ * @param {MapLocation | undefined | null} location
+ * @returns {{ type: string, turns: number } | null}
+ */
+export function fieldWeatherFor(location) {
+  return location?.weather ? { type: location.weather, turns: FIELD_WEATHER_TURNS } : null
+}
+
 /** Abilities that set weather on entry. @type {Record<string, string>} */
 export const WEATHER_ABILITIES = {
   drizzle: 'rain',

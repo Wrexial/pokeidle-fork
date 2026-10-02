@@ -177,3 +177,26 @@ test('Psychic Terrain blocks priority moves', () => {
     assert.ok(events.some((/** @type {any} */ event) => event.message?.includes('protected by the terrain')))
   })
 })
+
+test('a Terrain Extender stretches the terrain from 5 turns to 8', () => {
+  withFixedRandom(0.9, () => {
+    const run = (/** @type {{ move?: string, ability?: string, heldItem?: string }} */ setter) => {
+      const player = battler({
+          name: 'Player',
+          isPlayer: true,
+          moves: [setter.move ?? 'splash'],
+          speed: 200,
+          ability: setter.ability,
+          heldItem: setter.heldItem,
+        }),
+        enemy = battler({ name: 'Foe', moves: ['splash'] }),
+        events = resolveBattleTurn(player, enemy, false, !setter.move, null, null, !1, null),
+        terrain = terrainEvent(events)
+      return terrain.data.terrain.turns
+    }
+    assert.equal(run({ move: 'grassyTerrain' }), 4, 'a plain terrain is 5 turns (4 after the tick)')
+    assert.equal(run({ move: 'grassyTerrain', heldItem: 'terrainExtender' }), 7, '8 turns after the tick')
+    assert.equal(run({ ability: 'electricSurge' }), 4)
+    assert.equal(run({ ability: 'electricSurge', heldItem: 'terrainExtender' }), 7)
+  })
+})

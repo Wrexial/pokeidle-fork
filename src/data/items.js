@@ -262,6 +262,14 @@ export const heldItems = {
     sellPrice: 2500,
     effect: { type: 'megaEvolve' },
   },
+  terrainExtender: {
+    id: 'terrainExtender',
+    name: 'Terrain Extender',
+    description: 'The terrain the holder sets lasts 8 turns instead of 5.',
+    buyPrice: null,
+    sellPrice: 4000,
+    effect: { type: 'terrainExtender' },
+  },
 }
 
 /**
@@ -1116,6 +1124,7 @@ export const tokenShopItems = [
     { itemId: 'reinsOfUnity', tokenCost: 4 },
     { itemId: 'megaStone', tokenCost: 5 },
     { itemId: 'maxMushroom', tokenCost: 4 },
+    { itemId: 'terrainExtender', tokenCost: 3 },
   ]
 
 /** @type {Record<string, { name: string, items: { itemId: string, unlockWildBattlesWon?: number }[] }>} */

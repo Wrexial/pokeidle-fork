@@ -552,6 +552,8 @@ type EncounterEntry = {
   shinyMultiplier?: number
   /** Best shiny odds this entry can reach (a divisor floor, e.g. 256 during a swarm). */
   shinyOddsFloor?: number
+  /** Only active during this day/night phase ("night" or "day"); unset = any time. */
+  time?: 'day' | 'night'
 }
 
 type EncounterData = { name: string; encounters: EncounterEntry[]; [key: string]: any }
@@ -597,6 +599,8 @@ type MapLocation = {
   routeKey?: string
   /** battle background for wild encounters here (defaults handled in the UI) */
   background?: string
+  /** a permanent field weather this location's battles start under ("rain", "sun", ...) */
+  weather?: string
   mart?: Mart
   trainerCount?: number
   unlock: {

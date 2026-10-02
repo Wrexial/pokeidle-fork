@@ -6,34 +6,39 @@
     "speciesKey": "pidgey",
     "weight": 13,
     "minLevel": 3,
-    "maxLevel": 5
+    "maxLevel": 5,
+    "time": "day"
    },
    {
     "speciesKey": "rattata",
     "weight": 13,
     "minLevel": 3,
-    "maxLevel": 5
+    "maxLevel": 5,
+    "time": "night"
    },
    {
     "speciesKey": "caterpie",
     "weight": 8,
     "minLevel": 3,
     "maxLevel": 5,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "weedle",
     "weight": 8,
     "minLevel": 3,
     "maxLevel": 5,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "pikachu",
     "weight": 8,
     "minLevel": 3,
     "maxLevel": 5,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "nidoranF",
@@ -58,13 +63,15 @@
     "speciesKey": "pidgey",
     "weight": 11,
     "minLevel": 7,
-    "maxLevel": 9
+    "maxLevel": 9,
+    "time": "day"
    },
    {
     "speciesKey": "rattata",
     "weight": 11,
     "minLevel": 7,
-    "maxLevel": 9
+    "maxLevel": 9,
+    "time": "night"
    },
    {
     "speciesKey": "nidoranF",
@@ -82,20 +89,23 @@
     "speciesKey": "caterpie",
     "weight": 1,
     "minLevel": 7,
-    "maxLevel": 9
+    "maxLevel": 9,
+    "time": "day"
    },
    {
     "speciesKey": "weedle",
     "weight": 1,
     "minLevel": 7,
-    "maxLevel": 9
+    "maxLevel": 9,
+    "time": "day"
    },
    {
     "speciesKey": "spearow",
     "weight": 8,
     "minLevel": 7,
     "maxLevel": 9,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "jigglypuff",
@@ -116,21 +126,24 @@
     "weight": 8,
     "minLevel": 7,
     "maxLevel": 9,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "kakuna",
     "weight": 8,
     "minLevel": 7,
     "maxLevel": 9,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "pikachu",
     "weight": 8,
     "minLevel": 7,
     "maxLevel": 9,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "sandshrew",
@@ -169,37 +182,43 @@
     "speciesKey": "caterpie",
     "weight": 10,
     "minLevel": 9,
-    "maxLevel": 11
+    "maxLevel": 11,
+    "time": "day"
    },
    {
     "speciesKey": "weedle",
     "weight": 10,
     "minLevel": 9,
-    "maxLevel": 11
+    "maxLevel": 11,
+    "time": "day"
    },
    {
     "speciesKey": "pidgey",
     "weight": 7,
     "minLevel": 9,
-    "maxLevel": 11
+    "maxLevel": 11,
+    "time": "day"
    },
    {
     "speciesKey": "kakuna",
     "weight": 3,
     "minLevel": 9,
-    "maxLevel": 11
+    "maxLevel": 11,
+    "time": "day"
    },
    {
     "speciesKey": "metapod",
     "weight": 1,
     "minLevel": 9,
-    "maxLevel": 11
+    "maxLevel": 11,
+    "time": "day"
    },
    {
     "speciesKey": "pikachu",
     "weight": 1,
     "minLevel": 9,
-    "maxLevel": 11
+    "maxLevel": 11,
+    "time": "day"
    },
    {
     "speciesKey": "ekans",
@@ -248,14 +267,16 @@
     "weight": 8,
     "minLevel": 9,
     "maxLevel": 11,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "spearow",
     "weight": 8,
     "minLevel": 9,
     "maxLevel": 11,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "sandshrew",
@@ -280,19 +301,22 @@
     "speciesKey": "spearow",
     "weight": 9,
     "minLevel": 11,
-    "maxLevel": 13
+    "maxLevel": 13,
+    "time": "day"
    },
    {
     "speciesKey": "pidgey",
     "weight": 8,
     "minLevel": 11,
-    "maxLevel": 13
+    "maxLevel": 13,
+    "time": "day"
    },
    {
     "speciesKey": "rattata",
     "weight": 4,
     "minLevel": 11,
-    "maxLevel": 13
+    "maxLevel": 13,
+    "time": "night"
    },
    {
     "speciesKey": "sandshrew",
@@ -336,28 +360,32 @@
     "weight": 8,
     "minLevel": 11,
     "maxLevel": 13,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "metapod",
     "weight": 8,
     "minLevel": 11,
     "maxLevel": 13,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "weedle",
     "weight": 8,
     "minLevel": 11,
     "maxLevel": 13,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "kakuna",
     "weight": 8,
     "minLevel": 11,
     "maxLevel": 13,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "ekans",
@@ -371,7 +399,8 @@
     "weight": 8,
     "minLevel": 11,
     "maxLevel": 13,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "clefairy",
@@ -420,35 +449,40 @@
     "weight": 8,
     "minLevel": 13,
     "maxLevel": 15,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "metapod",
     "weight": 8,
     "minLevel": 13,
     "maxLevel": 15,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "weedle",
     "weight": 8,
     "minLevel": 13,
     "maxLevel": 15,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "kakuna",
     "weight": 8,
     "minLevel": 13,
     "maxLevel": 15,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "oddish",
     "weight": 8,
     "minLevel": 13,
     "maxLevel": 15,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "venonat",
@@ -469,21 +503,24 @@
     "weight": 8,
     "minLevel": 13,
     "maxLevel": 15,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "rattata",
     "weight": 8,
     "minLevel": 13,
     "maxLevel": 15,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "spearow",
     "weight": 8,
     "minLevel": 13,
     "maxLevel": 15,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "ekans",
@@ -519,13 +556,15 @@
     "speciesKey": "rattata",
     "weight": 9,
     "minLevel": 15,
-    "maxLevel": 17
+    "maxLevel": 17,
+    "time": "night"
    },
    {
     "speciesKey": "spearow",
     "weight": 9,
     "minLevel": 15,
-    "maxLevel": 17
+    "maxLevel": 17,
+    "time": "day"
    },
    {
     "speciesKey": "ekans",
@@ -568,14 +607,16 @@
     "weight": 8,
     "minLevel": 15,
     "maxLevel": 17,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "kakuna",
     "weight": 8,
     "minLevel": 15,
     "maxLevel": 17,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "nidoranF",
@@ -637,7 +678,8 @@
     "speciesKey": "oddish",
     "weight": 6,
     "minLevel": 17,
-    "maxLevel": 19
+    "maxLevel": 19,
+    "time": "night"
    },
    {
     "speciesKey": "bellsprout",
@@ -649,13 +691,15 @@
     "speciesKey": "caterpie",
     "weight": 5,
     "minLevel": 17,
-    "maxLevel": 19
+    "maxLevel": 19,
+    "time": "day"
    },
    {
     "speciesKey": "weedle",
     "weight": 5,
     "minLevel": 17,
-    "maxLevel": 19
+    "maxLevel": 19,
+    "time": "day"
    },
    {
     "speciesKey": "krabby",
@@ -667,7 +711,8 @@
     "speciesKey": "pidgey",
     "weight": 5,
     "minLevel": 17,
-    "maxLevel": 19
+    "maxLevel": 19,
+    "time": "day"
    },
    {
     "speciesKey": "abra",
@@ -685,13 +730,15 @@
     "speciesKey": "metapod",
     "weight": 1,
     "minLevel": 17,
-    "maxLevel": 19
+    "maxLevel": 19,
+    "time": "day"
    },
    {
     "speciesKey": "kakuna",
     "weight": 1,
     "minLevel": 17,
-    "maxLevel": 19
+    "maxLevel": 19,
+    "time": "day"
    },
    {
     "speciesKey": "psyduck",
@@ -744,7 +791,8 @@
     "speciesKey": "oddish",
     "weight": 6,
     "minLevel": 19,
-    "maxLevel": 21
+    "maxLevel": 21,
+    "time": "night"
    },
    {
     "speciesKey": "bellsprout",
@@ -756,13 +804,15 @@
     "speciesKey": "caterpie",
     "weight": 5,
     "minLevel": 19,
-    "maxLevel": 21
+    "maxLevel": 21,
+    "time": "day"
    },
    {
     "speciesKey": "weedle",
     "weight": 5,
     "minLevel": 19,
-    "maxLevel": 21
+    "maxLevel": 21,
+    "time": "day"
    },
    {
     "speciesKey": "goldeen",
@@ -774,7 +824,8 @@
     "speciesKey": "pidgey",
     "weight": 4,
     "minLevel": 19,
-    "maxLevel": 21
+    "maxLevel": 21,
+    "time": "day"
    },
    {
     "speciesKey": "abra",
@@ -792,19 +843,22 @@
     "speciesKey": "metapod",
     "weight": 1,
     "minLevel": 19,
-    "maxLevel": 21
+    "maxLevel": 21,
+    "time": "day"
    },
    {
     "speciesKey": "kakuna",
     "weight": 1,
     "minLevel": 19,
-    "maxLevel": 21
+    "maxLevel": 21,
+    "time": "day"
    },
    {
     "speciesKey": "pidgeotto",
     "weight": 1,
     "minLevel": 19,
-    "maxLevel": 21
+    "maxLevel": 21,
+    "time": "day"
    }
   ]
  },
@@ -815,7 +869,8 @@
     "speciesKey": "pidgey",
     "weight": 10,
     "minLevel": 21,
-    "maxLevel": 23
+    "maxLevel": 23,
+    "time": "day"
    },
    {
     "speciesKey": "meowth",
@@ -827,13 +882,15 @@
     "speciesKey": "rattata",
     "weight": 8,
     "minLevel": 21,
-    "maxLevel": 23
+    "maxLevel": 23,
+    "time": "night"
    },
    {
     "speciesKey": "oddish",
     "weight": 6,
     "minLevel": 21,
-    "maxLevel": 23
+    "maxLevel": 23,
+    "time": "night"
    },
    {
     "speciesKey": "mankey",
@@ -863,28 +920,32 @@
     "speciesKey": "pidgeotto",
     "weight": 1,
     "minLevel": 21,
-    "maxLevel": 23
+    "maxLevel": 23,
+    "time": "day"
    },
    {
     "speciesKey": "raticate",
     "weight": 8,
     "minLevel": 21,
     "maxLevel": 23,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "spearow",
     "weight": 8,
     "minLevel": 21,
     "maxLevel": 23,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "fearow",
     "weight": 8,
     "minLevel": 21,
     "maxLevel": 23,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "paras",
@@ -898,21 +959,24 @@
     "weight": 8,
     "minLevel": 21,
     "maxLevel": 23,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "metapod",
     "weight": 8,
     "minLevel": 21,
     "maxLevel": 23,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "weedle",
     "weight": 8,
     "minLevel": 21,
     "maxLevel": 23,
-    "variety": true
+    "variety": true,
+    "time": "day"
    }
   ]
  },
@@ -959,7 +1023,8 @@
     "speciesKey": "pidgey",
     "weight": 10,
     "minLevel": 22,
-    "maxLevel": 24
+    "maxLevel": 24,
+    "time": "day"
    },
    {
     "speciesKey": "meowth",
@@ -971,13 +1036,15 @@
     "speciesKey": "rattata",
     "weight": 8,
     "minLevel": 22,
-    "maxLevel": 24
+    "maxLevel": 24,
+    "time": "night"
    },
    {
     "speciesKey": "oddish",
     "weight": 6,
     "minLevel": 22,
-    "maxLevel": 24
+    "maxLevel": 24,
+    "time": "night"
    },
    {
     "speciesKey": "mankey",
@@ -1019,7 +1086,8 @@
     "speciesKey": "pidgeotto",
     "weight": 1,
     "minLevel": 22,
-    "maxLevel": 24
+    "maxLevel": 24,
+    "time": "day"
    }
   ]
  },
@@ -1030,13 +1098,15 @@
     "speciesKey": "rattata",
     "weight": 10,
     "minLevel": 26,
-    "maxLevel": 28
+    "maxLevel": 28,
+    "time": "night"
    },
    {
     "speciesKey": "spearow",
     "weight": 9,
     "minLevel": 26,
-    "maxLevel": 28
+    "maxLevel": 28,
+    "time": "day"
    },
    {
     "speciesKey": "nidoranF",
@@ -1066,13 +1136,15 @@
     "speciesKey": "raticate",
     "weight": 1,
     "minLevel": 26,
-    "maxLevel": 28
+    "maxLevel": 28,
+    "time": "night"
    },
    {
     "speciesKey": "fearow",
     "weight": 1,
     "minLevel": 26,
-    "maxLevel": 28
+    "maxLevel": 28,
+    "time": "day"
    },
    {
     "speciesKey": "nidorina",
@@ -1091,28 +1163,32 @@
     "weight": 8,
     "minLevel": 26,
     "maxLevel": 28,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "kakuna",
     "weight": 8,
     "minLevel": 26,
     "maxLevel": 28,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "pidgey",
     "weight": 8,
     "minLevel": 26,
     "maxLevel": 28,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "pidgeotto",
     "weight": 8,
     "minLevel": 26,
     "maxLevel": 28,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "jigglypuff",
@@ -1185,7 +1261,8 @@
     "speciesKey": "spearow",
     "weight": 9,
     "minLevel": 30,
-    "maxLevel": 32
+    "maxLevel": 32,
+    "time": "day"
    },
    {
     "speciesKey": "ekans",
@@ -1203,7 +1280,8 @@
     "speciesKey": "rattata",
     "weight": 5,
     "minLevel": 30,
-    "maxLevel": 32
+    "maxLevel": 32,
+    "time": "night"
    },
    {
     "speciesKey": "krabby",
@@ -1239,7 +1317,8 @@
     "speciesKey": "raticate",
     "weight": 1,
     "minLevel": 30,
-    "maxLevel": 32
+    "maxLevel": 32,
+    "time": "night"
    },
    {
     "speciesKey": "psyduck",
@@ -1312,35 +1391,40 @@
     "weight": 8,
     "minLevel": 28,
     "maxLevel": 30,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "pidgeotto",
     "weight": 8,
     "minLevel": 28,
     "maxLevel": 30,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "rattata",
     "weight": 8,
     "minLevel": 28,
     "maxLevel": 30,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "raticate",
     "weight": 8,
     "minLevel": 28,
     "maxLevel": 30,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "spearow",
     "weight": 8,
     "minLevel": 28,
     "maxLevel": 30,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "ekans",
@@ -1354,7 +1438,8 @@
     "weight": 8,
     "minLevel": 28,
     "maxLevel": 30,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "nidoranF",
@@ -1398,14 +1483,16 @@
     "weight": 8,
     "minLevel": 36,
     "maxLevel": 38,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "kakuna",
     "weight": 8,
     "minLevel": 36,
     "maxLevel": 38,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "ekans",
@@ -1454,7 +1541,8 @@
     "weight": 8,
     "minLevel": 36,
     "maxLevel": 38,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "venonat",
@@ -1499,7 +1587,8 @@
     "speciesKey": "pidgey",
     "weight": 8,
     "minLevel": 24,
-    "maxLevel": 26
+    "maxLevel": 26,
+    "time": "day"
    },
    {
     "speciesKey": "mankey",
@@ -1517,7 +1606,8 @@
     "speciesKey": "oddish",
     "weight": 5,
     "minLevel": 24,
-    "maxLevel": 26
+    "maxLevel": 26,
+    "time": "night"
    },
    {
     "speciesKey": "bellsprout",
@@ -1529,13 +1619,15 @@
     "speciesKey": "rattata",
     "weight": 4,
     "minLevel": 24,
-    "maxLevel": 26
+    "maxLevel": 26,
+    "time": "night"
    },
    {
     "speciesKey": "pidgeotto",
     "weight": 3,
     "minLevel": 24,
-    "maxLevel": 26
+    "maxLevel": 26,
+    "time": "day"
    },
    {
     "speciesKey": "vulpix",
@@ -1560,21 +1652,24 @@
     "weight": 8,
     "minLevel": 24,
     "maxLevel": 26,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "fearow",
     "weight": 8,
     "minLevel": 24,
     "maxLevel": 26,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "raticate",
     "weight": 8,
     "minLevel": 24,
     "maxLevel": 26,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "zubat",
@@ -1599,7 +1694,8 @@
     "speciesKey": "pidgey",
     "weight": 8,
     "minLevel": 34,
-    "maxLevel": 36
+    "maxLevel": 36,
+    "time": "day"
    },
    {
     "speciesKey": "meowth",
@@ -1647,13 +1743,15 @@
     "speciesKey": "rattata",
     "weight": 4,
     "minLevel": 34,
-    "maxLevel": 36
+    "maxLevel": 36,
+    "time": "night"
    },
    {
     "speciesKey": "pidgeotto",
     "weight": 3,
     "minLevel": 34,
-    "maxLevel": 36
+    "maxLevel": 36,
+    "time": "day"
    },
    {
     "speciesKey": "jigglypuff",
@@ -1672,21 +1770,24 @@
     "weight": 8,
     "minLevel": 34,
     "maxLevel": 36,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "fearow",
     "weight": 8,
     "minLevel": 34,
     "maxLevel": 36,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "raticate",
     "weight": 8,
     "minLevel": 34,
     "maxLevel": 36,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "zubat",
@@ -1752,19 +1853,22 @@
     "speciesKey": "pidgey",
     "weight": 9,
     "minLevel": 38,
-    "maxLevel": 40
+    "maxLevel": 40,
+    "time": "day"
    },
    {
     "speciesKey": "spearow",
     "weight": 9,
     "minLevel": 38,
-    "maxLevel": 40
+    "maxLevel": 40,
+    "time": "day"
    },
    {
     "speciesKey": "rattata",
     "weight": 8,
     "minLevel": 38,
-    "maxLevel": 40
+    "maxLevel": 40,
+    "time": "night"
    },
    {
     "speciesKey": "drowzee",
@@ -1788,13 +1892,15 @@
     "speciesKey": "pidgeotto",
     "weight": 3,
     "minLevel": 38,
-    "maxLevel": 40
+    "maxLevel": 40,
+    "time": "day"
    },
    {
     "speciesKey": "raticate",
     "weight": 1,
     "minLevel": 38,
-    "maxLevel": 40
+    "maxLevel": 40,
+    "time": "night"
    },
    {
     "speciesKey": "psyduck",
@@ -1847,7 +1953,8 @@
     "speciesKey": "oddish",
     "weight": 9,
     "minLevel": 48,
-    "maxLevel": 50
+    "maxLevel": 50,
+    "time": "night"
    },
    {
     "speciesKey": "bellsprout",
@@ -1859,7 +1966,8 @@
     "speciesKey": "pidgey",
     "weight": 8,
     "minLevel": 48,
-    "maxLevel": 50
+    "maxLevel": 50,
+    "time": "day"
    },
    {
     "speciesKey": "venonat",
@@ -1889,13 +1997,15 @@
     "speciesKey": "pidgeotto",
     "weight": 3,
     "minLevel": 48,
-    "maxLevel": 50
+    "maxLevel": 50,
+    "time": "day"
    },
    {
     "speciesKey": "gloom",
     "weight": 1,
     "minLevel": 48,
-    "maxLevel": 50
+    "maxLevel": 50,
+    "time": "night"
    },
    {
     "speciesKey": "psyduck",
@@ -1966,7 +2076,8 @@
     "speciesKey": "oddish",
     "weight": 9,
     "minLevel": 50,
-    "maxLevel": 52
+    "maxLevel": 52,
+    "time": "night"
    },
    {
     "speciesKey": "bellsprout",
@@ -1984,7 +2095,8 @@
     "speciesKey": "pidgey",
     "weight": 5,
     "minLevel": 50,
-    "maxLevel": 52
+    "maxLevel": 52,
+    "time": "day"
    },
    {
     "speciesKey": "krabby",
@@ -2008,13 +2120,15 @@
     "speciesKey": "pidgeotto",
     "weight": 1,
     "minLevel": 50,
-    "maxLevel": 52
+    "maxLevel": 52,
+    "time": "day"
    },
    {
     "speciesKey": "gloom",
     "weight": 1,
     "minLevel": 50,
-    "maxLevel": 52
+    "maxLevel": 52,
+    "time": "night"
    },
    {
     "speciesKey": "psyduck",
@@ -2061,7 +2175,8 @@
     "speciesKey": "oddish",
     "weight": 9,
     "minLevel": 52,
-    "maxLevel": 54
+    "maxLevel": 54,
+    "time": "night"
    },
    {
     "speciesKey": "bellsprout",
@@ -2085,19 +2200,22 @@
     "speciesKey": "pidgey",
     "weight": 3,
     "minLevel": 52,
-    "maxLevel": 54
+    "maxLevel": 54,
+    "time": "day"
    },
    {
     "speciesKey": "pidgeotto",
     "weight": 1,
     "minLevel": 52,
-    "maxLevel": 54
+    "maxLevel": 54,
+    "time": "day"
    },
    {
     "speciesKey": "gloom",
     "weight": 1,
     "minLevel": 52,
-    "maxLevel": 54
+    "maxLevel": 54,
+    "time": "night"
    },
    {
     "speciesKey": "venomoth",
@@ -2116,14 +2234,16 @@
     "weight": 8,
     "minLevel": 52,
     "maxLevel": 54,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "kakuna",
     "weight": 8,
     "minLevel": 52,
     "maxLevel": 54,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "ekans",
@@ -2169,7 +2289,8 @@
     "speciesKey": "oddish",
     "weight": 9,
     "minLevel": 54,
-    "maxLevel": 56
+    "maxLevel": 56,
+    "time": "night"
    },
    {
     "speciesKey": "bellsprout",
@@ -2187,19 +2308,22 @@
     "speciesKey": "pidgey",
     "weight": 5,
     "minLevel": 54,
-    "maxLevel": 56
+    "maxLevel": 56,
+    "time": "day"
    },
    {
     "speciesKey": "pidgeotto",
     "weight": 1,
     "minLevel": 54,
-    "maxLevel": 56
+    "maxLevel": 56,
+    "time": "day"
    },
    {
     "speciesKey": "gloom",
     "weight": 1,
     "minLevel": 54,
-    "maxLevel": 56
+    "maxLevel": 56,
+    "time": "night"
    },
    {
     "speciesKey": "venomoth",
@@ -2224,14 +2348,16 @@
     "weight": 8,
     "minLevel": 54,
     "maxLevel": 56,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "kakuna",
     "weight": 8,
     "minLevel": 54,
     "maxLevel": 56,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "ekans",
@@ -2277,45 +2403,52 @@
     "speciesKey": "doduo",
     "weight": 9,
     "minLevel": 42,
-    "maxLevel": 44
+    "maxLevel": 44,
+    "time": "day"
    },
    {
     "speciesKey": "rattata",
     "weight": 8,
     "minLevel": 42,
-    "maxLevel": 44
+    "maxLevel": 44,
+    "time": "night"
    },
    {
     "speciesKey": "spearow",
     "weight": 8,
     "minLevel": 42,
-    "maxLevel": 44
+    "maxLevel": 44,
+    "time": "day"
    },
    {
     "speciesKey": "raticate",
     "weight": 1,
     "minLevel": 42,
-    "maxLevel": 44
+    "maxLevel": 44,
+    "time": "night"
    },
    {
     "speciesKey": "fearow",
     "weight": 1,
     "minLevel": 42,
-    "maxLevel": 44
+    "maxLevel": 44,
+    "time": "day"
    },
    {
     "speciesKey": "pidgey",
     "weight": 8,
     "minLevel": 42,
     "maxLevel": 44,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "pidgeotto",
     "weight": 8,
     "minLevel": 42,
     "maxLevel": 44,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "farfetchd",
@@ -2329,7 +2462,8 @@
     "weight": 8,
     "minLevel": 42,
     "maxLevel": 44,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "jigglypuff",
@@ -2407,13 +2541,15 @@
     "speciesKey": "doduo",
     "weight": 9,
     "minLevel": 44,
-    "maxLevel": 46
+    "maxLevel": 46,
+    "time": "day"
    },
    {
     "speciesKey": "spearow",
     "weight": 8,
     "minLevel": 44,
-    "maxLevel": 46
+    "maxLevel": 46,
+    "time": "day"
    },
    {
     "speciesKey": "shellder",
@@ -2425,7 +2561,8 @@
     "speciesKey": "raticate",
     "weight": 6,
     "minLevel": 44,
-    "maxLevel": 46
+    "maxLevel": 46,
+    "time": "night"
    },
    {
     "speciesKey": "tentacool",
@@ -2449,33 +2586,38 @@
     "speciesKey": "rattata",
     "weight": 1,
     "minLevel": 44,
-    "maxLevel": 46
+    "maxLevel": 46,
+    "time": "night"
    },
    {
     "speciesKey": "fearow",
     "weight": 1,
     "minLevel": 44,
-    "maxLevel": 46
+    "maxLevel": 46,
+    "time": "day"
    },
    {
     "speciesKey": "dodrio",
     "weight": 1,
     "minLevel": 44,
-    "maxLevel": 46
+    "maxLevel": 46,
+    "time": "day"
    },
    {
     "speciesKey": "pidgey",
     "weight": 8,
     "minLevel": 44,
     "maxLevel": 46,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "pidgeotto",
     "weight": 8,
     "minLevel": 44,
     "maxLevel": 46,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "jigglypuff",
@@ -2517,13 +2659,15 @@
     "speciesKey": "doduo",
     "weight": 9,
     "minLevel": 46,
-    "maxLevel": 48
+    "maxLevel": 48,
+    "time": "day"
    },
    {
     "speciesKey": "spearow",
     "weight": 8,
     "minLevel": 46,
-    "maxLevel": 48
+    "maxLevel": 48,
+    "time": "day"
    },
    {
     "speciesKey": "tentacool",
@@ -2541,33 +2685,38 @@
     "speciesKey": "raticate",
     "weight": 4,
     "minLevel": 46,
-    "maxLevel": 48
+    "maxLevel": 48,
+    "time": "night"
    },
    {
     "speciesKey": "fearow",
     "weight": 4,
     "minLevel": 46,
-    "maxLevel": 48
+    "maxLevel": 48,
+    "time": "day"
    },
    {
     "speciesKey": "rattata",
     "weight": 1,
     "minLevel": 46,
-    "maxLevel": 48
+    "maxLevel": 48,
+    "time": "night"
    },
    {
     "speciesKey": "pidgey",
     "weight": 8,
     "minLevel": 46,
     "maxLevel": 48,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "pidgeotto",
     "weight": 8,
     "minLevel": 46,
     "maxLevel": 48,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "jigglypuff",
@@ -2665,7 +2814,8 @@
     "speciesKey": "doduo",
     "weight": 5,
     "minLevel": 56,
-    "maxLevel": 58
+    "maxLevel": 58,
+    "time": "day"
    },
    {
     "speciesKey": "paras",
@@ -2838,35 +2988,40 @@
     "weight": 8,
     "minLevel": 40,
     "maxLevel": 42,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "pidgeotto",
     "weight": 8,
     "minLevel": 40,
     "maxLevel": 42,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "rattata",
     "weight": 8,
     "minLevel": 40,
     "maxLevel": 42,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "raticate",
     "weight": 8,
     "minLevel": 40,
     "maxLevel": 42,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "spearow",
     "weight": 8,
     "minLevel": 40,
     "maxLevel": 42,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "ekans",
@@ -2990,14 +3145,16 @@
     "weight": 8,
     "minLevel": 61,
     "maxLevel": 63,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "kakuna",
     "weight": 8,
     "minLevel": 61,
     "maxLevel": 63,
-    "variety": true
+    "variety": true,
+    "time": "day"
    }
   ]
  },
@@ -3093,14 +3250,16 @@
     "weight": 8,
     "minLevel": 63,
     "maxLevel": 65,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "kakuna",
     "weight": 8,
     "minLevel": 63,
     "maxLevel": 65,
-    "variety": true
+    "variety": true,
+    "time": "day"
    }
   ]
  },
@@ -3242,7 +3401,8 @@
     "speciesKey": "raticate",
     "weight": 8,
     "minLevel": 67,
-    "maxLevel": 69
+    "maxLevel": 69,
+    "time": "night"
    },
    {
     "speciesKey": "koffing",
@@ -3254,7 +3414,8 @@
     "speciesKey": "rattata",
     "weight": 4,
     "minLevel": 67,
-    "maxLevel": 69
+    "maxLevel": 69,
+    "time": "night"
    },
    {
     "speciesKey": "vulpix",
@@ -3303,28 +3464,32 @@
     "weight": 8,
     "minLevel": 67,
     "maxLevel": 69,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "pidgeotto",
     "weight": 8,
     "minLevel": 67,
     "maxLevel": 69,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "spearow",
     "weight": 8,
     "minLevel": 67,
     "maxLevel": 69,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "fearow",
     "weight": 8,
     "minLevel": 67,
     "maxLevel": 69,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "jigglypuff",
@@ -3378,13 +3543,15 @@
     "speciesKey": "pidgey",
     "weight": 8,
     "minLevel": 69,
-    "maxLevel": 71
+    "maxLevel": 71,
+    "time": "day"
    },
    {
     "speciesKey": "rattata",
     "weight": 8,
     "minLevel": 69,
-    "maxLevel": 71
+    "maxLevel": 71,
+    "time": "night"
    },
    {
     "speciesKey": "shellder",
@@ -3408,13 +3575,15 @@
     "speciesKey": "pidgeotto",
     "weight": 4,
     "minLevel": 69,
-    "maxLevel": 71
+    "maxLevel": 71,
+    "time": "day"
    },
    {
     "speciesKey": "raticate",
     "weight": 4,
     "minLevel": 69,
-    "maxLevel": 71
+    "maxLevel": 71,
+    "time": "night"
    },
    {
     "speciesKey": "gyarados",
@@ -3485,7 +3654,8 @@
     "speciesKey": "rattata",
     "weight": 11,
     "minLevel": 57,
-    "maxLevel": 59
+    "maxLevel": 59,
+    "time": "night"
    },
    {
     "speciesKey": "mankey",
@@ -3521,7 +3691,8 @@
     "speciesKey": "spearow",
     "weight": 3,
     "minLevel": 57,
-    "maxLevel": 59
+    "maxLevel": 59,
+    "time": "day"
    },
    {
     "speciesKey": "nidoranF",
@@ -3620,7 +3791,8 @@
     "speciesKey": "fearow",
     "weight": 6,
     "minLevel": 59,
-    "maxLevel": 61
+    "maxLevel": 61,
+    "time": "day"
    },
    {
     "speciesKey": "slowbro",
@@ -3668,7 +3840,8 @@
     "speciesKey": "spearow",
     "weight": 4,
     "minLevel": 59,
-    "maxLevel": 61
+    "maxLevel": 61,
+    "time": "day"
    },
    {
     "speciesKey": "gyarados",
@@ -3715,7 +3888,8 @@
     "speciesKey": "pikachu",
     "weight": 6,
     "minLevel": 32,
-    "maxLevel": 34
+    "maxLevel": 34,
+    "time": "day"
    },
    {
     "speciesKey": "grimer",
@@ -3746,35 +3920,40 @@
     "weight": 8,
     "minLevel": 32,
     "maxLevel": 34,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "pidgeotto",
     "weight": 8,
     "minLevel": 32,
     "maxLevel": 34,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "rattata",
     "weight": 8,
     "minLevel": 32,
     "maxLevel": 34,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "raticate",
     "weight": 8,
     "minLevel": 32,
     "maxLevel": 34,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "spearow",
     "weight": 8,
     "minLevel": 32,
     "maxLevel": 34,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "ekans",
@@ -4032,7 +4211,8 @@
     "speciesKey": "dodrio",
     "weight": 5,
     "minLevel": 73,
-    "maxLevel": 75
+    "maxLevel": 75,
+    "time": "day"
    },
    {
     "speciesKey": "hypno",
@@ -4086,7 +4266,8 @@
     "speciesKey": "gloom",
     "weight": 3,
     "minLevel": 73,
-    "maxLevel": 75
+    "maxLevel": 75,
+    "time": "night"
    },
    {
     "speciesKey": "primeape",

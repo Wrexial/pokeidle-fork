@@ -30,7 +30,8 @@
     "speciesKey": "caterpie",
     "weight": 12,
     "minLevel": 3,
-    "maxLevel": 5
+    "maxLevel": 5,
+    "time": "day"
    },
    {
     "speciesKey": "yungoos",
@@ -42,7 +43,8 @@
     "speciesKey": "buneary",
     "weight": 8,
     "minLevel": 3,
-    "maxLevel": 5
+    "maxLevel": 5,
+    "time": "day"
    },
    {
     "speciesKey": "happiny",
@@ -72,13 +74,15 @@
     "speciesKey": "ledyba",
     "weight": 5,
     "minLevel": 3,
-    "maxLevel": 5
+    "maxLevel": 5,
+    "time": "day"
    },
    {
     "speciesKey": "spinarak",
     "weight": 5,
     "minLevel": 3,
-    "maxLevel": 5
+    "maxLevel": 5,
+    "time": "night"
    },
    {
     "speciesKey": "pikipek",
@@ -102,7 +106,8 @@
     "speciesKey": "pikachu",
     "weight": 4,
     "minLevel": 3,
-    "maxLevel": 5
+    "maxLevel": 5,
+    "time": "day"
    },
    {
     "speciesKey": "grubbin",
@@ -126,7 +131,8 @@
     "speciesKey": "pichu",
     "weight": 1,
     "minLevel": 3,
-    "maxLevel": 5
+    "maxLevel": 5,
+    "time": "day"
    },
    {
     "speciesKey": "rowlet",
@@ -216,14 +222,16 @@
     "weight": 8,
     "minLevel": 9,
     "maxLevel": 11,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "ledyba",
     "weight": 8,
     "minLevel": 9,
     "maxLevel": 11,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "dunsparce",
@@ -258,7 +266,8 @@
     "weight": 8,
     "minLevel": 9,
     "maxLevel": 11,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "ekans",
@@ -272,7 +281,8 @@
     "weight": 8,
     "minLevel": 9,
     "maxLevel": 11,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "growlithe",
@@ -314,7 +324,8 @@
     "speciesKey": "spearow",
     "weight": 3,
     "minLevel": 13,
-    "maxLevel": 15
+    "maxLevel": 15,
+    "time": "day"
    },
    {
     "speciesKey": "growlithe",
@@ -382,7 +393,8 @@
     "weight": 8,
     "minLevel": 13,
     "maxLevel": 15,
-    "variety": true
+    "variety": true,
+    "time": "night"
    }
   ]
  },
@@ -393,7 +405,8 @@
     "speciesKey": "spearow",
     "weight": 25,
     "minLevel": 17,
-    "maxLevel": 19
+    "maxLevel": 19,
+    "time": "day"
    },
    {
     "speciesKey": "mankey",
@@ -487,7 +500,8 @@
     "weight": 8,
     "minLevel": 17,
     "maxLevel": 19,
-    "variety": true
+    "variety": true,
+    "time": "day"
    }
   ]
  },
@@ -571,7 +585,8 @@
     "weight": 8,
     "minLevel": 21,
     "maxLevel": 23,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "mankey",
@@ -603,13 +618,15 @@
     "speciesKey": "butterfree",
     "weight": 8,
     "minLevel": 25,
-    "maxLevel": 27
+    "maxLevel": 27,
+    "time": "day"
    },
    {
     "speciesKey": "caterpie",
     "weight": 6,
     "minLevel": 25,
-    "maxLevel": 27
+    "maxLevel": 27,
+    "time": "day"
    },
    {
     "speciesKey": "lillipup",
@@ -639,7 +656,8 @@
     "speciesKey": "metapod",
     "weight": 2,
     "minLevel": 25,
-    "maxLevel": 27
+    "maxLevel": 27,
+    "time": "day"
    },
    {
     "speciesKey": "comfey",
@@ -652,21 +670,24 @@
     "weight": 8,
     "minLevel": 25,
     "maxLevel": 27,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "spearow",
     "weight": 8,
     "minLevel": 25,
     "maxLevel": 27,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "spinarak",
     "weight": 8,
     "minLevel": 25,
     "maxLevel": 27,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "delibird",
@@ -785,7 +806,8 @@
     "weight": 8,
     "minLevel": 29,
     "maxLevel": 31,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "tentacool",
@@ -872,14 +894,16 @@
     "weight": 8,
     "minLevel": 33,
     "maxLevel": 35,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "spearow",
     "weight": 8,
     "minLevel": 33,
     "maxLevel": 35,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "slowpoke",
@@ -893,7 +917,8 @@
     "weight": 8,
     "minLevel": 33,
     "maxLevel": 35,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "chinchou",
@@ -973,13 +998,15 @@
     "speciesKey": "fletchling",
     "weight": 4,
     "minLevel": 37,
-    "maxLevel": 39
+    "maxLevel": 39,
+    "time": "day"
    },
    {
     "speciesKey": "fletchinder",
     "weight": 4,
     "minLevel": 37,
-    "maxLevel": 39
+    "maxLevel": 39,
+    "time": "day"
    },
    {
     "speciesKey": "pikipek",
@@ -1137,7 +1164,8 @@
     "speciesKey": "fearow",
     "weight": 20,
     "minLevel": 45,
-    "maxLevel": 47
+    "maxLevel": 47,
+    "time": "day"
    },
    {
     "speciesKey": "pineco",
@@ -1161,13 +1189,15 @@
     "speciesKey": "ledian",
     "weight": 5,
     "minLevel": 45,
-    "maxLevel": 47
+    "maxLevel": 47,
+    "time": "day"
    },
    {
     "speciesKey": "ariados",
     "weight": 5,
     "minLevel": 45,
-    "maxLevel": 47
+    "maxLevel": 47,
+    "time": "night"
    },
    {
     "speciesKey": "pangoro",
@@ -1192,14 +1222,16 @@
     "weight": 8,
     "minLevel": 45,
     "maxLevel": 47,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "fletchling",
     "weight": 8,
     "minLevel": 45,
     "maxLevel": 47,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "pikipek",
@@ -1227,7 +1259,8 @@
     "weight": 8,
     "minLevel": 45,
     "maxLevel": 47,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "jigglypuff",
@@ -1251,13 +1284,15 @@
     "speciesKey": "ledian",
     "weight": 5,
     "minLevel": 49,
-    "maxLevel": 51
+    "maxLevel": 51,
+    "time": "day"
    },
    {
     "speciesKey": "ariados",
     "weight": 5,
     "minLevel": 49,
-    "maxLevel": 51
+    "maxLevel": 51,
+    "time": "night"
    },
    {
     "speciesKey": "pancham",
@@ -1318,28 +1353,32 @@
     "weight": 8,
     "minLevel": 49,
     "maxLevel": 51,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "metapod",
     "weight": 8,
     "minLevel": 49,
     "maxLevel": 51,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "butterfree",
     "weight": 8,
     "minLevel": 49,
     "maxLevel": 51,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "spearow",
     "weight": 8,
     "minLevel": 49,
     "maxLevel": 51,
-    "variety": true
+    "variety": true,
+    "time": "day"
    }
   ]
  },
@@ -1356,7 +1395,8 @@
     "speciesKey": "houndoom",
     "weight": 5,
     "minLevel": 53,
-    "maxLevel": 55
+    "maxLevel": 55,
+    "time": "night"
    },
    {
     "speciesKey": "manectric",
@@ -1399,7 +1439,8 @@
     "weight": 8,
     "minLevel": 53,
     "maxLevel": 55,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "magnemite",
@@ -1492,21 +1533,24 @@
     "weight": 8,
     "minLevel": 57,
     "maxLevel": 59,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "spearow",
     "weight": 8,
     "minLevel": 57,
     "maxLevel": 59,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "fearow",
     "weight": 8,
     "minLevel": 57,
     "maxLevel": 59,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "tentacool",
@@ -1548,14 +1592,16 @@
     "weight": 8,
     "minLevel": 57,
     "maxLevel": 59,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "ledian",
     "weight": 8,
     "minLevel": 57,
     "maxLevel": 59,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "chinchou",
@@ -1641,21 +1687,24 @@
     "weight": 8,
     "minLevel": 61,
     "maxLevel": 63,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "spearow",
     "weight": 8,
     "minLevel": 61,
     "maxLevel": 63,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "fearow",
     "weight": 8,
     "minLevel": 61,
     "maxLevel": 63,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "slowpoke",
@@ -1766,14 +1815,16 @@
     "weight": 8,
     "minLevel": 65,
     "maxLevel": 67,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "spearow",
     "weight": 8,
     "minLevel": 65,
     "maxLevel": 67,
-    "variety": true
+    "variety": true,
+    "time": "day"
    }
   ]
  },
@@ -1823,21 +1874,24 @@
     "weight": 8,
     "minLevel": 69,
     "maxLevel": 71,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "spearow",
     "weight": 8,
     "minLevel": 69,
     "maxLevel": 71,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "fearow",
     "weight": 8,
     "minLevel": 69,
     "maxLevel": 71,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "tentacool",
@@ -1879,14 +1933,16 @@
     "weight": 8,
     "minLevel": 69,
     "maxLevel": 71,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "ledian",
     "weight": 8,
     "minLevel": 69,
     "maxLevel": 71,
-    "variety": true
+    "variety": true,
+    "time": "day"
    }
   ]
  },
@@ -1909,13 +1965,15 @@
     "speciesKey": "fearow",
     "weight": 9,
     "minLevel": 73,
-    "maxLevel": 75
+    "maxLevel": 75,
+    "time": "day"
    },
    {
     "speciesKey": "ariados",
     "weight": 9,
     "minLevel": 73,
-    "maxLevel": 75
+    "maxLevel": 75,
+    "time": "night"
    },
    {
     "speciesKey": "pancham",
@@ -1933,7 +1991,8 @@
     "speciesKey": "ledian",
     "weight": 5,
     "minLevel": 73,
-    "maxLevel": 75
+    "maxLevel": 75,
+    "time": "day"
    },
    {
     "speciesKey": "skarmory",
@@ -1970,7 +2029,8 @@
     "weight": 8,
     "minLevel": 73,
     "maxLevel": 75,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "jigglypuff",

@@ -2,6 +2,8 @@
 
 import { abilityOf } from '../../abilities.js'
 import { createVolatileState } from '../../combat.js'
+import { mapData } from '../../../data/gameData.js'
+import { fieldWeatherFor } from '../../weather.js'
 import { applyEntryHazards, emptyBattleHazards } from '../../hazards.js'
 import { computeUnlockedLocations, prepareNextBattle, tickBattleCounters } from '../../progression.js'
 import { recordSeenPokemon } from '../../reducer-helpers.js'
@@ -38,7 +40,7 @@ export function startTrainerBattle(state, action) {
       ],
       currentEventIndex: 0,
       battleTurn: 0,
-      weather: null,
+      weather: fieldWeatherFor(mapData[state.currentLocation]),
       battleHazards: emptyBattleHazards(),
       terrain: null,
       activePlayerPokemonIndex: 0,

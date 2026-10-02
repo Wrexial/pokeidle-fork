@@ -43,7 +43,8 @@
     "weight": 8,
     "minLevel": 3,
     "maxLevel": 5,
-    "variety": true
+    "variety": true,
+    "time": "night"
    }
   ]
  },
@@ -60,7 +61,8 @@
     "speciesKey": "shinx",
     "weight": 8,
     "minLevel": 7,
-    "maxLevel": 9
+    "maxLevel": 9,
+    "time": "night"
    },
    {
     "speciesKey": "starly",
@@ -128,7 +130,8 @@
     "speciesKey": "shinx",
     "weight": 6,
     "minLevel": 10,
-    "maxLevel": 12
+    "maxLevel": 12,
+    "time": "night"
    },
    {
     "speciesKey": "bidoof",
@@ -173,7 +176,8 @@
     "weight": 8,
     "minLevel": 10,
     "maxLevel": 12,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "aipom",
@@ -260,7 +264,8 @@
     "speciesKey": "shinx",
     "weight": 4,
     "minLevel": 12,
-    "maxLevel": 14
+    "maxLevel": 14,
+    "time": "night"
    },
    {
     "speciesKey": "zubat",
@@ -403,7 +408,8 @@
     "speciesKey": "hoothoot",
     "weight": 3,
     "minLevel": 14,
-    "maxLevel": 16
+    "maxLevel": 16,
+    "time": "night"
    },
    {
     "speciesKey": "silcoon",
@@ -474,7 +480,8 @@
     "speciesKey": "stunky",
     "weight": 5,
     "minLevel": 17,
-    "maxLevel": 19
+    "maxLevel": 19,
+    "time": "night"
    },
    {
     "speciesKey": "zubat",
@@ -499,7 +506,8 @@
     "weight": 8,
     "minLevel": 17,
     "maxLevel": 19,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "beautifly",
@@ -604,7 +612,8 @@
     "weight": 8,
     "minLevel": 19,
     "maxLevel": 21,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "aipom",
@@ -653,7 +662,8 @@
     "weight": 8,
     "minLevel": 19,
     "maxLevel": 21,
-    "variety": true
+    "variety": true,
+    "time": "night"
    }
   ]
  },
@@ -846,7 +856,8 @@
     "speciesKey": "duskull",
     "weight": 3,
     "minLevel": 24,
-    "maxLevel": 26
+    "maxLevel": 26,
+    "time": "night"
    },
    {
     "speciesKey": "chansey",
@@ -959,13 +970,15 @@
     "speciesKey": "hoothoot",
     "weight": 3,
     "minLevel": 26,
-    "maxLevel": 28
+    "maxLevel": 28,
+    "time": "night"
    },
    {
     "speciesKey": "noctowl",
     "weight": 3,
     "minLevel": 26,
-    "maxLevel": 28
+    "maxLevel": 28,
+    "time": "night"
    },
    {
     "speciesKey": "machop",
@@ -1042,7 +1055,8 @@
     "speciesKey": "hoothoot",
     "weight": 3,
     "minLevel": 28,
-    "maxLevel": 30
+    "maxLevel": 30,
+    "time": "night"
    },
    {
     "speciesKey": "bronzor",
@@ -1054,7 +1068,8 @@
     "speciesKey": "noctowl",
     "weight": 3,
     "minLevel": 28,
-    "maxLevel": 30
+    "maxLevel": 30,
+    "time": "night"
    },
    {
     "speciesKey": "abra",
@@ -1411,7 +1426,8 @@
     "speciesKey": "houndour",
     "weight": 5,
     "minLevel": 35,
-    "maxLevel": 37
+    "maxLevel": 37,
+    "time": "night"
    },
    {
     "speciesKey": "zubat",
@@ -1441,7 +1457,8 @@
     "speciesKey": "stunky",
     "weight": 3,
     "minLevel": 35,
-    "maxLevel": 37
+    "maxLevel": 37,
+    "time": "night"
    }
   ]
  },
@@ -1507,14 +1524,16 @@
     "weight": 8,
     "minLevel": 38,
     "maxLevel": 40,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "noctowl",
     "weight": 8,
     "minLevel": 38,
     "maxLevel": 40,
-    "variety": true
+    "variety": true,
+    "time": "night"
    },
    {
     "speciesKey": "swablu",
@@ -1590,7 +1609,8 @@
     "speciesKey": "noctowl",
     "weight": 3,
     "minLevel": 40,
-    "maxLevel": 42
+    "maxLevel": 42,
+    "time": "night"
    },
    {
     "speciesKey": "snorunt",
@@ -1711,7 +1731,8 @@
     "speciesKey": "noctowl",
     "weight": 3,
     "minLevel": 43,
-    "maxLevel": 45
+    "maxLevel": 45,
+    "time": "night"
    },
    {
     "speciesKey": "medicham",
@@ -2155,7 +2176,8 @@
     "speciesKey": "stunky",
     "weight": 5,
     "minLevel": 52,
-    "maxLevel": 54
+    "maxLevel": 54,
+    "time": "night"
    },
    {
     "speciesKey": "clamperl",
@@ -2167,7 +2189,8 @@
     "speciesKey": "skuntank",
     "weight": 4,
     "minLevel": 52,
-    "maxLevel": 54
+    "maxLevel": 54,
+    "time": "night"
    },
    {
     "speciesKey": "shellos",
@@ -2292,7 +2315,8 @@
     "speciesKey": "luxio",
     "weight": 3,
     "minLevel": 54,
-    "maxLevel": 56
+    "maxLevel": 56,
+    "time": "night"
    },
    {
     "speciesKey": "tentacruel",
@@ -2383,14 +2407,16 @@
     "weight": 8,
     "minLevel": 57,
     "maxLevel": 59,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "fearow",
     "weight": 8,
     "minLevel": 57,
     "maxLevel": 59,
-    "variety": true
+    "variety": true,
+    "time": "day"
    },
    {
     "speciesKey": "zubat",
@@ -2477,7 +2503,8 @@
     "speciesKey": "oddish",
     "weight": 5,
     "minLevel": 59,
-    "maxLevel": 61
+    "maxLevel": 61,
+    "time": "night"
    },
    {
     "speciesKey": "roselia",
@@ -2507,7 +2534,8 @@
     "speciesKey": "gloom",
     "weight": 1,
     "minLevel": 59,
-    "maxLevel": 61
+    "maxLevel": 61,
+    "time": "night"
    },
    {
     "speciesKey": "weepinbell",
@@ -2566,7 +2594,8 @@
     "speciesKey": "fearow",
     "weight": 13,
     "minLevel": 61,
-    "maxLevel": 63
+    "maxLevel": 63,
+    "time": "day"
    },
    {
     "speciesKey": "poliwag",
@@ -2602,13 +2631,15 @@
     "speciesKey": "banette",
     "weight": 5,
     "minLevel": 61,
-    "maxLevel": 63
+    "maxLevel": 63,
+    "time": "night"
    },
    {
     "speciesKey": "raticate",
     "weight": 4,
     "minLevel": 61,
-    "maxLevel": 63
+    "maxLevel": 63,
+    "time": "night"
    },
    {
     "speciesKey": "psyduck",
@@ -2620,19 +2651,22 @@
     "speciesKey": "skuntank",
     "weight": 3,
     "minLevel": 61,
-    "maxLevel": 63
+    "maxLevel": 63,
+    "time": "night"
    },
    {
     "speciesKey": "rattata",
     "weight": 1,
     "minLevel": 61,
-    "maxLevel": 63
+    "maxLevel": 63,
+    "time": "night"
    },
    {
     "speciesKey": "spearow",
     "weight": 1,
     "minLevel": 61,
-    "maxLevel": 63
+    "maxLevel": 63,
+    "time": "day"
    },
    {
     "speciesKey": "roselia",
@@ -2673,7 +2707,8 @@
     "speciesKey": "fearow",
     "weight": 10,
     "minLevel": 64,
-    "maxLevel": 66
+    "maxLevel": 66,
+    "time": "day"
    },
    {
     "speciesKey": "gyarados",
@@ -2715,13 +2750,15 @@
     "speciesKey": "banette",
     "weight": 5,
     "minLevel": 64,
-    "maxLevel": 66
+    "maxLevel": 66,
+    "time": "night"
    },
    {
     "speciesKey": "raticate",
     "weight": 4,
     "minLevel": 64,
-    "maxLevel": 66
+    "maxLevel": 66,
+    "time": "night"
    },
    {
     "speciesKey": "relicanth",
@@ -2745,13 +2782,15 @@
     "speciesKey": "rattata",
     "weight": 1,
     "minLevel": 64,
-    "maxLevel": 66
+    "maxLevel": 66,
+    "time": "night"
    },
    {
     "speciesKey": "spearow",
     "weight": 1,
     "minLevel": 64,
-    "maxLevel": 66
+    "maxLevel": 66,
+    "time": "day"
    },
    {
     "speciesKey": "dewgong",
@@ -2804,7 +2843,8 @@
     "speciesKey": "fearow",
     "weight": 8,
     "minLevel": 66,
-    "maxLevel": 68
+    "maxLevel": 68,
+    "time": "day"
    },
    {
     "speciesKey": "poliwag",
@@ -2846,7 +2886,8 @@
     "speciesKey": "banette",
     "weight": 3,
     "minLevel": 66,
-    "maxLevel": 68
+    "maxLevel": 68,
+    "time": "night"
    },
    {
     "speciesKey": "rhyhorn",
@@ -3022,7 +3063,8 @@
     "speciesKey": "gloom",
     "weight": 8,
     "minLevel": 71,
-    "maxLevel": 73
+    "maxLevel": 73,
+    "time": "night"
    },
    {
     "speciesKey": "weepinbell",
@@ -3040,19 +3082,22 @@
     "speciesKey": "pidgey",
     "weight": 6,
     "minLevel": 71,
-    "maxLevel": 73
+    "maxLevel": 73,
+    "time": "day"
    },
    {
     "speciesKey": "ledian",
     "weight": 5,
     "minLevel": 71,
-    "maxLevel": 73
+    "maxLevel": 73,
+    "time": "day"
    },
    {
     "speciesKey": "ariados",
     "weight": 5,
     "minLevel": 71,
-    "maxLevel": 73
+    "maxLevel": 73,
+    "time": "night"
    },
    {
     "speciesKey": "volbeat",
@@ -3076,7 +3121,8 @@
     "speciesKey": "oddish",
     "weight": 1,
     "minLevel": 71,
-    "maxLevel": 73
+    "maxLevel": 73,
+    "time": "night"
    },
    {
     "speciesKey": "bellsprout",
@@ -3177,7 +3223,8 @@
     "speciesKey": "oddish",
     "weight": 5,
     "minLevel": 73,
-    "maxLevel": 75
+    "maxLevel": 75,
+    "time": "night"
    },
    {
     "speciesKey": "octillery",
@@ -3219,7 +3266,8 @@
     "speciesKey": "gloom",
     "weight": 1,
     "minLevel": 73,
-    "maxLevel": 75
+    "maxLevel": 75,
+    "time": "night"
    },
    {
     "speciesKey": "weepinbell",

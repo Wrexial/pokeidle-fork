@@ -15,7 +15,7 @@ import { abilityOf } from './abilities.js'
 import { companionExpMultiplier } from './companion.js'
 import { applyBattleForm, createBattlePokemon, createVolatileState, resolveBattleTurn, volatileStateFromBattle, AI_SKILL, chooseBestSwitch } from './combat.js'
 import { isBattleReady } from './pokemon.js'
-import { awardExperience, checkShinyOdds, pokerusExpMultiplier, raidProgressFor, resolveActiveModifiers, resolvePokemonEncounter, resolveRoamer, shinyOddsForSpecies } from './progression.js'
+import { awardExperience, checkShinyOdds, encountersForPhase, pokerusExpMultiplier, raidProgressFor, resolveActiveModifiers, resolvePokemonEncounter, resolveRoamer, shinyOddsForSpecies } from './progression.js'
 
 export function useGameLoop() {
   const { state, dispatch: rawDispatch } = useGame(),
@@ -227,7 +227,13 @@ export function useGameLoop() {
           const currentEncounterData =
             encounterData[currentGameState.currentRoute]
           if (!currentEncounterData) return
-          const wildEncounterData = currentEncounterData,
+          // Time-gated finds (a Hoothoot that only shows at night, ...): keep the
+          // phase-matching entries, falling back to the full table when a route
+          // would otherwise be empty (see encountersForPhase).
+          const wildEncounterData = {
+            ...currentEncounterData,
+            encounters: encountersForPhase(currentEncounterData.encounters, isNightTime()),
+          },
             regionId = mapData[currentGameState.currentLocation]?.region ?? 'kanto',
             activeSwarm =
               currentGameState.swarm?.routeKey === currentGameState.currentRoute

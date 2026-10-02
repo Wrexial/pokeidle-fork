@@ -96,6 +96,7 @@ export function TownMap() {
     [pendingUnlock, setPendingUnlock] = React.useState(/** @type {string | null} */ (null)),
     [searchQuery, setSearchQuery] = React.useState(''),
     [searchOpen, setSearchOpen] = React.useState(!1),
+    [legendOpen, setLegendOpen] = React.useState(!1),
     [focusNonce, setFocusNonce] = React.useState(0),
     focusRef = React.useRef(/** @type {string | null} */ (null)),
     unlockTokens = getRegionUnlockTokens(state),
@@ -481,6 +482,13 @@ export function TownMap() {
             },
             children: '\u{1f50d}',
           }),
+          jsx('button', {
+            type: 'button',
+            className: `map-legend-toggle${legendOpen ? ' active' : ''}`,
+            title: 'Map legend',
+            onClick: () => setLegendOpen(!legendOpen),
+            children: '\u2139',
+          }),
         ],
       }),
       searchOpen &&
@@ -794,6 +802,42 @@ export function TownMap() {
               }),
             ],
           }),
+          legendOpen &&
+            jsxs('div', {
+              className: 'map-legend',
+              onPointerDown: stopDrag,
+              children: [
+                jsx('div', {
+                  className: 'map-legend-title',
+                  children: 'Legend',
+                }),
+                jsxs('div', {
+                  className: 'map-legend-items',
+                  children: [
+                    ['legend-town', 'Town'],
+                    ['legend-route', 'Route'],
+                    ['legend-zone', 'Area / zone hub'],
+                    ['legend-raid', 'Raid Island'],
+                    ['legend-current', 'You are here'],
+                    ['legend-poi', 'Minigame / service'],
+                  ].map(([swatch, label]) =>
+                    jsxs(
+                      'div',
+                      {
+                        className: 'map-legend-item',
+                        children: [
+                          jsx('span', {
+                            className: `map-legend-swatch ${swatch}`,
+                          }),
+                          label,
+                        ],
+                      },
+                      swatch
+                    )
+                  ),
+                }),
+              ],
+            }),
           jsx('div', {
             className: 'map-pan-hint',
             children: 'Drag to pan · pinch or +/\u2212 to zoom',

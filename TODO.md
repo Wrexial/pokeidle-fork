@@ -208,7 +208,6 @@ DLC are zones.
 Still open:
 
 - [ ] More sub-areas (pairs with #28a/#28b).
-- [ ] A distinct zone glyph on the map.
 - [ ] Inline per-sub-area encounter grids (rather than the picker + a single
       route grid).
 - [ ] Give each zone / area its own zoomed-in map view with a back button — see
@@ -360,15 +359,14 @@ Reference images kept for future checks:
 
 ## Map polish (visual)
 
-The generated maps are readable graphs; the next visual steps need art/design
-decisions:
+The generated maps are readable graphs. The zone marker now shows its sub-area
+count, town and area/zone labels stay on screen, and a legend explains the node
+types, so what is left here is **art**:
 
 - [ ] Add more battle background art. There are only four base scenes
       (grassland, beach, mountain, cave) plus the biome colour grades; real
       forest/desert/swamp/volcano/tundra art would let `routeBackground` stop
       tinting a handful of images.
-- [ ] A zone glyph/label polish pass once the terrain layer exists (pairs with
-      #36).
 
 ## Useful references when picking these up
 

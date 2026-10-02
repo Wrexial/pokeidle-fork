@@ -22,6 +22,7 @@ function MapNode({
     isTown = location.type === 'town',
     isRaid = location.type === 'raid',
     isZone = location.type === 'zone',
+    zoneCount = isZone ? (location.subAreas?.length ?? 0) : 0,
     isPoi = isUnlocked && POI_LOCATIONS.has(location.id),
     minigameName = isUnlocked ? minigameNameForLocation(location.id) : null,
     servicePois = isUnlocked ? servicePoisFor(location.id) : [],
@@ -33,7 +34,7 @@ function MapNode({
     const intervalId = setInterval(() => tick((tickCount) => tickCount + 1), 1e3)
     return () => clearInterval(intervalId)
   }, [raidOnCooldown])
-  const showLabel = isCurrent || hovering
+  const showLabel = isCurrent || hovering || (isUnlocked && (isTown || isZone))
   let className = 'map-node'
   return (
     isRaid ? (className += ' raid') : isTown ? (className += ' town') : isZone ? (className += ' zone') : (className += ' route'),
@@ -54,6 +55,7 @@ function MapNode({
       title: isUnlocked
         ? [
             location.description,
+            isZone && zoneCount > 0 ? `Zone hub \u2014 ${zoneCount} areas` : null,
             minigameName ? `Minigame: ${minigameName}` : null,
             servicePois.length > 0
               ? `Services: ${servicePois.map((poi) => poi.label).join(', ')}`
@@ -78,6 +80,12 @@ function MapNode({
           jsx('span', {
             className: 'map-node-swarm',
             children: '\u{1f41d}',
+          }),
+        zoneCount > 0 &&
+          jsx('span', {
+            className: 'map-node-zone-count',
+            title: `${zoneCount} areas`,
+            children: zoneCount,
           }),
         isPoi || servicePois.length > 0
           ? jsxs('div', {

@@ -601,6 +601,8 @@ type MapLocation = {
   background?: string
   /** a permanent field weather this location's battles start under ("rain", "sun", ...) */
   weather?: string
+  /** zone sub-areas shown in the location panel (hub nodes only) */
+  subAreas?: { id: string, name: string }[]
   mart?: Mart
   trainerCount?: number
   unlock: {

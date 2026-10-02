@@ -22,6 +22,7 @@ const read = (f) => JSON.parse(fs.readFileSync(path.join(DATA, f), 'utf8'))
 const write = (f, v) => fs.writeFileSync(path.join(DATA, f), JSON.stringify(v, null, 1) + '\n')
 const { readRegionDir, writeRegionDir } = require('./lib/region-data.cjs')
 const { buildEvolutionLevels, stageForLevel } = require('./lib/evolution-levels.cjs')
+const { buildVariedTeam } = require('./lib/trainer-teams.cjs')
 const { buildWildPool, collectProtectedSpecies, enrichEncounters } = require('./lib/route-variety.cjs')
 
 const GEN_RANGES = [
@@ -446,6 +447,28 @@ const hashString = (text) => {
   }
   return hash >>> 0
 }
+
+// Deterministic shuffle so a region's native trainer species aren't fielded in
+// dex order (see lib/trainer-teams.cjs).
+const mulberry32 = (seed) => {
+  let state = seed >>> 0
+  return () => {
+    state = (state + 0x6d2b79f5) >>> 0
+    let value = state
+    value = Math.imul(value ^ (value >>> 15), value | 1)
+    value ^= value + Math.imul(value ^ (value >>> 7), value | 61)
+    return ((value ^ (value >>> 14)) >>> 0) / 4294967296
+  }
+}
+const shuffleCandidates = (list, seed) => {
+  const rng = mulberry32(hashString(seed)),
+    copy = [...list]
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(rng() * (i + 1))
+    ;[copy[i], copy[j]] = [copy[j], copy[i]]
+  }
+  return copy
+}
 const TRAINER_CLASSES = [
   'youngster', 'lass', 'bugCatcher', 'hiker', 'camper', 'beauty',
   'coolTrainer', 'psychic', 'scientist', 'ace', 'blackbelt', 'swimmer',
@@ -785,58 +808,7 @@ const leagueFor = (regionId) => {
   }
 }
 // Route trainers are themed by class so a Bug Catcher isn't fielding starters.
-const TRAINER_CLASS_TYPES = {
-  youngster: ['Normal'],
-  lass: ['Normal', 'Fairy'],
-  bugCatcher: ['Bug'],
-  hiker: ['Rock', 'Ground'],
-  camper: ['Normal', 'Grass'],
-  beauty: ['Normal', 'Fairy'],
-  coolTrainer: [],
-  psychic: ['Psychic'],
-  scientist: ['Electric', 'Steel'],
-  ace: [],
-  blackbelt: ['Fighting'],
-  swimmer: ['Water'],
-  sailor: ['Water', 'Fighting'],
-  gentleman: ['Normal', 'Psychic'],
-  channeler: ['Ghost'],
-  tamer: ['Normal', 'Dragon'],
-  juggler: ['Electric', 'Fire'],
-  superNerd: ['Electric', 'Poison'],
-  fisherman: ['Water'],
-  picnicker: ['Normal', 'Grass'],
-  birdKeeper: ['Flying'],
-  burglar: ['Fire', 'Dark'],
-  guitarist: ['Electric'],
-  cowgirl: ['Normal', 'Ground'],
-  cyclist: ['Normal'],
-  lady: ['Normal', 'Fairy'],
-  pilot: ['Flying'],
-  skier: ['Ice'],
-  waiter: ['Normal'],
-  richBoy: ['Normal', 'Psychic'],
-  worker: ['Fighting', 'Steel'],
-  idol: ['Fairy'],
-  policeman: ['Fighting'],
-  aromaLady: ['Fairy', 'Grass'],
-  chef: ['Fire', 'Normal'],
-  dancer: ['Psychic'],
-  gambler: ['Dark', 'Normal'],
-  nurse: ['Fairy'],
-  biker: ['Poison'],
-  schoolkid: ['Normal'],
-  roughneck: ['Fighting'],
-  parasolLady: ['Water', 'Fairy'],
-  musician: ['Normal', 'Psychic'],
-  preschooler: ['Normal'],
-  artist: ['Normal'],
-  backpacker: ['Normal', 'Ground'],
-  pokemonRanger: ['Normal', 'Grass'],
-  doctor: ['Psychic'],
-  veteran: [],
-  medium: ['Ghost'],
-}
+const TRAINER_CLASS_TYPES = require('./lib/trainer-class-types.cjs')
 // Kanto keeps its hand-curated initial teams; these types only drive the
 // post-game rematch rosters (see the Kanto rematch block near the end).
 const KANTO_GYM_TYPES = {
@@ -863,6 +835,22 @@ const realEncounters = fs.existsSync(path.join(__dirname, 'route-encounters.json
 const species = read('pokemon-species.json')
 const evolutionData = read('evolution-data.json')
 const evolutionLevels = buildEvolutionLevels(evolutionData, species)
+// The level at which a species evolves away from its current form, so a route
+// trainer doesn't field a Lv. 40 Caterpie (see lib/trainer-teams.cjs).
+const evolvesAt = (() => {
+  const map = {}
+  for (const [key, evolutions] of Object.entries(evolutionData)) {
+    if (!Array.isArray(evolutions)) continue
+    for (const evolution of evolutions) {
+      if (evolution?.form || !evolution?.into) continue
+      const gate =
+        evolution.level ??
+        (evolution.item || evolution.friendship ? ITEM_EVOLUTION_LEVEL : null)
+      if (gate && (map[key] === undefined || gate < map[key])) map[key] = gate
+    }
+  }
+  return map
+})()
 const breedingData = read('breeding-data.json')
 const mapData = readRegionDir(path.join(DATA, 'map-data'))
 const encounterData = readRegionDir(path.join(DATA, 'encounter-data'))
@@ -1411,6 +1399,20 @@ for (const region of REGIONS) {
   const all = speciesForGen(gen)
   const wild = all.filter((s) => s.catchRate > 3 && !starters.includes(s.key))
   const teamPool = teamPoolForGen(gen)
+  // Route trainers draw from the whole up-to-this-gen pool, but the region's
+  // own-generation natives are walked first so the dex is actually revealed.
+  const trainerCandidates = teamPool.map((entry) => ({
+      key: entry.key,
+      types: entry.types ?? [],
+      minLevel: evolutionLevels.minLevel[entry.key] ?? 1,
+      native: entry.id >= GEN_RANGES[gen - 1][0],
+    })),
+    trainerNatives = shuffleCandidates(
+      trainerCandidates.filter((candidate) => candidate.native),
+      `${regionId}:trainer-natives`
+    ),
+    trainerOthers = trainerCandidates.filter((candidate) => !candidate.native),
+    trainerTeamState = { cursor: 0 }
 
   // Resolve each gym to its town up-front so gate placement, the badge/team
   // data below and the league requirement all agree.
@@ -1782,18 +1784,17 @@ for (const region of REGIONS) {
               i
             )}`,
             trainerClass,
-            team: buildTeam(
-              pool,
-              TRAINER_CLASS_TYPES[trainerClass],
-              teamSize,
-              // The last team member sits at baseLevel + teamSize - 1, so leave
-              // room below LEVEL_MAX instead of overflowing to 77.
-              Math.min(townLevel + i, LEVEL_MAX - (teamSize - 1)),
-              1,
-              // A per-town offset keeps each town's teams from being the same
-              // species in the same order as its neighbours.
-              (townSeed + i * 7) % Math.max(1, pool.length)
-            ),
+            team: buildVariedTeam({
+              natives: trainerNatives,
+              others: trainerOthers,
+              theme: TRAINER_CLASS_TYPES[trainerClass],
+              levels: Array.from({ length: teamSize }, (_, index) =>
+                clampLevel(Math.min(townLevel + i, LEVEL_MAX - (teamSize - 1)) + index)
+              ),
+              state: trainerTeamState,
+              evolutionLevels,
+              evolvesAt,
+            }),
           }
         })
       }

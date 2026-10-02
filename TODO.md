@@ -40,15 +40,14 @@ renumbered, so the gaps below are items that shipped.
 8. **#60 Areas should have their own zoomed-in map** — M · ★★ — zones and
     large areas list their sub-areas in the panel only; give them a focused
     map view entered from the Town Map, with a back button to exit.
-9. **#68 Trainer teams should use all level-appropriate Pokemon** — M · ★★ —
     the strong type bias and narrow pools mean the same few species repeat; let
     trainers field every level-appropriate Pokemon so the Pokedex "seen" fills
     in.
 ### Tier 2 — Big / low-return, defer
 
-10. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
+9. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
     route-based field effects.
-11. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+10. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
 ---
@@ -358,35 +357,6 @@ Relevant code: `src/components/town-map.js`, `src/components/location-panel.js`
 
 Effort: **medium**.
 
-## 68. Trainer teams should use all level-appropriate Pokemon
-
-Route trainers draw from a generation slice and are heavily type-biased by
-class (`TRAINER_CLASS_TYPES`), and `buildTeam` drops evolved-away, implausible
-and weak species. The result is that the same handful of Pokemon show up over
-and over, so a player's Pokedex **seen** log lags well behind what actually
-exists at that level. Do a pass so trainers can field every level-appropriate
-species, so battling through a region reveals most of its dex.
-
-- [ ] Audit `buildTeam` (`tools/generate-regions.cjs`): keep the type theme as a
-      *bias*, not a hard filter, and widen the fallback so a trainer can field
-      off-theme species when the themed pool is small.
-- [ ] Make sure the per-route / per-town pool reaching `buildTeam` is the full
-      generation slice (level-appropriate), not already narrowed upstream.
-- [ ] Spread species across trainers deterministically (offset by trainer /
-      town index) so neighbouring trainers don't all field the same team.
-- [ ] Keep the level-appropriate filter (no Pidgey at Lv.55) and still exclude
-      legendaries (and starters where intended).
-- [ ] Verify a region's dex can realistically be "seen" from trainers alone,
-      without every trainer becoming a mirror match.
-- [ ] Either regenerate the committed trainer data or add an `apply-*.cjs` pass
-      (the data isn't idempotent with the generator).
-
-Relevant code: `tools/generate-regions.cjs` (`buildTeam`,
-`TRAINER_CLASS_TYPES`, `speciesForGen`, the route-trainer generation),
-`public/data/trainer-data.json`, and the Pokedex seen tracking
-(`src/game/reducer/collection.js`).
-
-Effort: **medium** (generator tuning plus regenerating trainer data).
 ## Map cleanup reference maps
 
 All eight non-Kanto regions have hand-measured `REGION_MAP_LAYOUTS` overrides.

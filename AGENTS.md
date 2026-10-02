@@ -619,14 +619,17 @@ One-off scripts used to build the data JSON (not run during dev/build):
   drawn from gender-matched pools (`TRAINER_NAMES_MALE`/`_FEMALE`/`_ANY`,
   picked through `pickTrainerName`) and kept unique within a region. Each town
   fields two to four trainers whose classes cycle through the full list, and
-  Ace Trainers / Cooltrainers / Scientists carry an extra member. `buildTeam`
-  prefers levelled-appropriate Pokemon:
-  it drops species that should already have evolved and, at Lv.55+, very weak
-  final forms (Ditto), while keeping the type theme when a sparse type (Dragon)
-  would otherwise run out. Kanto's hand-curated trainer/leader data and its gen3
-  sprites are left alone. `pokemon-species.json` carries a `legendary` flag
-  (set for legendaries, mythicals and Ultra Beasts) that keeps them out of
-  every trainer team.
+  Ace Trainers / Cooltrainers / Scientists carry an extra member. Route teams
+  use `lib/trainer-teams.cjs` (`buildVariedTeam`), which walks a per-region
+  cursor over the region's own-generation species so its dex is revealed, keeps
+  the class type as a bias, and steps each member to the form that could exist
+  at its level; gym / Elite Four / Champion teams use the older `buildTeam`,
+  which drops species that should already have evolved and, at Lv.55+, very
+  weak final forms (Ditto), while keeping the type theme when a sparse type
+  (Dragon) would otherwise run out. Kanto's hand-curated trainer/leader data
+  and its gen3 sprites are left alone. `pokemon-species.json` carries a
+  `legendary` flag (set for legendaries, mythicals and Ultra Beasts) that keeps
+  them out of every trainer team.
   Every leader also gets a `rematchTeam`: a gym fields six Lv.80 final
   evolutions once the player has every badge in that region, and the Elite Four
   / Champion field Lv.90/92 teams once the region's Champion has been beaten.
@@ -695,6 +698,12 @@ One-off scripts used to build the data JSON (not run during dev/build):
   `minScore` gates to chosen routes (#65): Route 11 on a Whack-a-Diglett score,
   Johto Route 36 on the Bug-Catching Contest, Paldea's South Province (Area
   Three) on the Academy Quiz. Idempotent (`--dry`).
+- `apply-trainer-variety.cjs` — data-only pass (#68) that rebuilds every
+  non-Kanto route-trainer team with `lib/trainer-teams.cjs`: level-appropriate,
+  the class type as a bias, and a per-region cursor over the region's own
+  generation so its dex is revealed rather than the same handful repeating.
+  Kanto's hand-curated trainers are left alone; team sizes/levels are kept.
+  Idempotent (`--dry`).
 - `fix-impossible-encounters.cjs` / `fix-impossible-teams.cjs` — step wild
   encounters and trainer/gym/Elite Four/Champion Pokemon back to a form that
   could exist at their level (a Lv. 3 Chesnaught becomes a Chespin), merging
@@ -705,6 +714,12 @@ One-off scripts used to build the data JSON (not run during dev/build):
   `plausibleEncounters` pass and `buildTeam` filter regenerate the data.
 - `lib/evolution-levels.cjs` — shared `buildEvolutionLevels` / `stageForLevel`
   helpers (also used by `validate-data.mjs` and the impossible-levels test).
+- `lib/trainer-teams.cjs` — shared `buildVariedTeam` for route trainers (#68): a
+  per-region cursor over the region's own-generation species (so its dex is
+  revealed), level-appropriate forms, and the class type as a bias. Used by
+  `generate-regions.cjs` and `apply-trainer-variety.cjs`.
+- `lib/trainer-class-types.cjs` — the route-trainer class type themes, shared by
+  `generate-regions.cjs` and `apply-trainer-variety.cjs`.
 - `lib/route-variety.cjs` — shared route-variety helpers (`buildWildPool`,
   `enrichEncounters`, `collectProtectedSpecies`) used by both
   `generate-regions.cjs` and `apply-route-variety.cjs`.

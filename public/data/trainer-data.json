@@ -901,7 +901,7 @@
    "trainerClass": "tamer",
    "team": [
     {
-     "speciesKey": "tauros",
+     "speciesKey": "misdreavus",
      "level": 5
     }
    ]
@@ -912,7 +912,7 @@
    "trainerClass": "juggler",
    "team": [
     {
-     "speciesKey": "pichu",
+     "speciesKey": "phanpy",
      "level": 6
     }
    ]
@@ -923,7 +923,7 @@
    "trainerClass": "superNerd",
    "team": [
     {
-     "speciesKey": "koffing",
+     "speciesKey": "espeon",
      "level": 7
     }
    ]
@@ -934,11 +934,11 @@
    "trainerClass": "fisherman",
    "team": [
     {
-     "speciesKey": "vaporeon",
+     "speciesKey": "corsola",
      "level": 8
     },
     {
-     "speciesKey": "omanyte",
+     "speciesKey": "marill",
      "level": 9
     }
    ]
@@ -951,7 +951,7 @@
    "trainerClass": "picnicker",
    "team": [
     {
-     "speciesKey": "snorlax",
+     "speciesKey": "aipom",
      "level": 9
     }
    ]
@@ -962,11 +962,11 @@
    "trainerClass": "birdKeeper",
    "team": [
     {
-     "speciesKey": "togetic",
+     "speciesKey": "natu",
      "level": 10
     },
     {
-     "speciesKey": "natu",
+     "speciesKey": "murkrow",
      "level": 11
     }
    ]
@@ -979,7 +979,7 @@
    "trainerClass": "burglar",
    "team": [
     {
-     "speciesKey": "umbreon",
+     "speciesKey": "chinchou",
      "level": 16
     }
    ]
@@ -990,11 +990,11 @@
    "trainerClass": "guitarist",
    "team": [
     {
-     "speciesKey": "jolteon",
+     "speciesKey": "flaaffy",
      "level": 17
     },
     {
-     "speciesKey": "chinchou",
+     "speciesKey": "pichu",
      "level": 18
     }
    ]
@@ -1007,7 +1007,7 @@
    "trainerClass": "cowgirl",
    "team": [
     {
-     "speciesKey": "furret",
+     "speciesKey": "smeargle",
      "level": 22
     }
    ]
@@ -1018,11 +1018,11 @@
    "trainerClass": "cyclist",
    "team": [
     {
-     "speciesKey": "jigglypuff",
+     "speciesKey": "furret",
      "level": 23
     },
     {
-     "speciesKey": "wigglytuff",
+     "speciesKey": "teddiursa",
      "level": 24
     }
    ]
@@ -1035,7 +1035,7 @@
    "trainerClass": "lady",
    "team": [
     {
-     "speciesKey": "smeargle",
+     "speciesKey": "umbreon",
      "level": 26
     }
    ]
@@ -1046,11 +1046,11 @@
    "trainerClass": "pilot",
    "team": [
     {
-     "speciesKey": "mantine",
+     "speciesKey": "skiploom",
      "level": 27
     },
     {
-     "speciesKey": "skarmory",
+     "speciesKey": "yanma",
      "level": 28
     }
    ]
@@ -1063,11 +1063,11 @@
    "trainerClass": "skier",
    "team": [
     {
-     "speciesKey": "lapras",
+     "speciesKey": "sneasel",
      "level": 35
     },
     {
-     "speciesKey": "sneasel",
+     "speciesKey": "delibird",
      "level": 36
     }
    ]
@@ -1078,11 +1078,11 @@
    "trainerClass": "waiter",
    "team": [
     {
-     "speciesKey": "dodrio",
+     "speciesKey": "blissey",
      "level": 36
     },
     {
-     "speciesKey": "chansey",
+     "speciesKey": "igglybuff",
      "level": 37
     }
    ]
@@ -1093,15 +1093,15 @@
    "trainerClass": "richBoy",
    "team": [
     {
-     "speciesKey": "jynx",
+     "speciesKey": "ursaring",
      "level": 37
     },
     {
-     "speciesKey": "tauros",
+     "speciesKey": "unown",
      "level": 38
     },
     {
-     "speciesKey": "ditto",
+     "speciesKey": "porygon2",
      "level": 39
     }
    ]
@@ -1114,11 +1114,11 @@
    "trainerClass": "worker",
    "team": [
     {
-     "speciesKey": "magneton",
+     "speciesKey": "sudowoodo",
      "level": 43
     },
     {
-     "speciesKey": "hitmonlee",
+     "speciesKey": "steelix",
      "level": 44
     }
    ]
@@ -1129,15 +1129,15 @@
    "trainerClass": "idol",
    "team": [
     {
-     "speciesKey": "clefairy",
+     "speciesKey": "granbull",
      "level": 44
     },
     {
-     "speciesKey": "clefable",
+     "speciesKey": "houndoom",
      "level": 45
     },
     {
-     "speciesKey": "jigglypuff",
+     "speciesKey": "xatu",
      "level": 46
     }
    ]
@@ -1150,11 +1150,11 @@
    "trainerClass": "policeman",
    "team": [
     {
-     "speciesKey": "hitmontop",
+     "speciesKey": "heracross",
      "level": 50
     },
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "hitmontop",
      "level": 51
     }
    ]
@@ -1165,11 +1165,11 @@
    "trainerClass": "aromaLady",
    "team": [
     {
-     "speciesKey": "mrMime",
+     "speciesKey": "azumarill",
      "level": 51
     },
     {
-     "speciesKey": "bellossom",
+     "speciesKey": "skarmory",
      "level": 52
     }
    ]
@@ -1180,11 +1180,11 @@
    "trainerClass": "chef",
    "team": [
     {
-     "speciesKey": "dodrio",
+     "speciesKey": "scizor",
      "level": 52
     },
     {
-     "speciesKey": "kangaskhan",
+     "speciesKey": "smeargle",
      "level": 53
     }
    ]
@@ -1195,15 +1195,15 @@
    "trainerClass": "dancer",
    "team": [
     {
-     "speciesKey": "espeon",
+     "speciesKey": "xatu",
      "level": 53
     },
     {
-     "speciesKey": "slowking",
+     "speciesKey": "wobbuffet",
      "level": 54
     },
     {
-     "speciesKey": "unown",
+     "speciesKey": "espeon",
      "level": 55
     }
    ]
@@ -1216,15 +1216,15 @@
    "trainerClass": "gambler",
    "team": [
     {
-     "speciesKey": "fearow",
+     "speciesKey": "noctowl",
      "level": 56
     },
     {
-     "speciesKey": "wigglytuff",
+     "speciesKey": "miltank",
      "level": 57
     },
     {
-     "speciesKey": "persian",
+     "speciesKey": "blissey",
      "level": 58
     }
    ]
@@ -1235,15 +1235,15 @@
    "trainerClass": "nurse",
    "team": [
     {
-     "speciesKey": "granbull",
+     "speciesKey": "azumarill",
      "level": 57
     },
     {
-     "speciesKey": "clefable",
+     "speciesKey": "skarmory",
      "level": 58
     },
     {
-     "speciesKey": "wigglytuff",
+     "speciesKey": "scizor",
      "level": 59
     }
    ]
@@ -1258,15 +1258,15 @@
      "level": 58
     },
     {
-     "speciesKey": "qwilfish",
+     "speciesKey": "politoed",
      "level": 59
     },
     {
-     "speciesKey": "beedrill",
+     "speciesKey": "slowking",
      "level": 60
     },
     {
-     "speciesKey": "arbok",
+     "speciesKey": "smeargle",
      "level": 61
     }
    ]
@@ -1279,15 +1279,15 @@
    "trainerClass": "schoolkid",
    "team": [
     {
-     "speciesKey": "wigglytuff",
+     "speciesKey": "sunflora",
      "level": 62
     },
     {
-     "speciesKey": "persian",
+     "speciesKey": "furret",
      "level": 63
     },
     {
-     "speciesKey": "dodrio",
+     "speciesKey": "noctowl",
      "level": 64
     }
    ]
@@ -1298,15 +1298,15 @@
    "trainerClass": "roughneck",
    "team": [
     {
-     "speciesKey": "hitmonlee",
+     "speciesKey": "hitmontop",
      "level": 63
     },
     {
-     "speciesKey": "hitmonchan",
+     "speciesKey": "octillery",
      "level": 64
     },
     {
-     "speciesKey": "heracross",
+     "speciesKey": "unown",
      "level": 65
     }
    ]
@@ -1317,19 +1317,19 @@
    "trainerClass": "parasolLady",
    "team": [
     {
-     "speciesKey": "cloyster",
+     "speciesKey": "azumarill",
      "level": 64
     },
     {
-     "speciesKey": "kingler",
+     "speciesKey": "mantine",
      "level": 65
     },
     {
-     "speciesKey": "seaking",
+     "speciesKey": "quagsire",
      "level": 66
     },
     {
-     "speciesKey": "starmie",
+     "speciesKey": "kingdra",
      "level": 67
     }
    ]
@@ -1342,7 +1342,7 @@
    "trainerClass": "nurse",
    "team": [
     {
-     "speciesKey": "clefable",
+     "speciesKey": "aron",
      "level": 5
     }
    ]
@@ -1353,11 +1353,11 @@
    "trainerClass": "biker",
    "team": [
     {
-     "speciesKey": "oddish",
+     "speciesKey": "meditite",
      "level": 6
     },
     {
-     "speciesKey": "venonat",
+     "speciesKey": "corphish",
      "level": 7
     }
    ]
@@ -1370,7 +1370,7 @@
    "trainerClass": "schoolkid",
    "team": [
     {
-     "speciesKey": "farfetchd",
+     "speciesKey": "castform",
      "level": 8
     }
    ]
@@ -1381,7 +1381,7 @@
    "trainerClass": "roughneck",
    "team": [
     {
-     "speciesKey": "tyrogue",
+     "speciesKey": "anorith",
      "level": 9
     }
    ]
@@ -1392,7 +1392,7 @@
    "trainerClass": "parasolLady",
    "team": [
     {
-     "speciesKey": "clefairy",
+     "speciesKey": "huntail",
      "level": 10
     }
    ]
@@ -1403,11 +1403,11 @@
    "trainerClass": "musician",
    "team": [
     {
-     "speciesKey": "spoink",
+     "speciesKey": "lunatone",
      "level": 11
     },
     {
-     "speciesKey": "spinda",
+     "speciesKey": "zangoose",
      "level": 12
     }
    ]
@@ -1420,7 +1420,7 @@
    "trainerClass": "preschooler",
    "team": [
     {
-     "speciesKey": "tauros",
+     "speciesKey": "spinda",
      "level": 11
     }
    ]
@@ -1431,7 +1431,7 @@
    "trainerClass": "artist",
    "team": [
     {
-     "speciesKey": "igglybuff",
+     "speciesKey": "whismur",
      "level": 12
     }
    ]
@@ -1442,11 +1442,11 @@
    "trainerClass": "backpacker",
    "team": [
     {
-     "speciesKey": "porygon",
+     "speciesKey": "swablu",
      "level": 13
     },
     {
-     "speciesKey": "snorlax",
+     "speciesKey": "skitty",
      "level": 14
     }
    ]
@@ -1459,7 +1459,7 @@
    "trainerClass": "pokemonRanger",
    "team": [
     {
-     "speciesKey": "hoothoot",
+     "speciesKey": "azurill",
      "level": 15
     }
    ]
@@ -1487,7 +1487,7 @@
    "trainerClass": "veteran",
    "team": [
     {
-     "speciesKey": "exeggutor",
+     "speciesKey": "volbeat",
      "level": 19
     }
    ]
@@ -1498,7 +1498,7 @@
    "trainerClass": "medium",
    "team": [
     {
-     "speciesKey": "shedinja",
+     "speciesKey": "duskull",
      "level": 20
     },
     {
@@ -1515,7 +1515,7 @@
    "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "aipom",
+     "speciesKey": "delcatty",
      "level": 24
     }
    ]
@@ -1526,7 +1526,7 @@
    "trainerClass": "lass",
    "team": [
     {
-     "speciesKey": "aipom",
+     "speciesKey": "mawile",
      "level": 25
     }
    ]
@@ -1537,11 +1537,11 @@
    "trainerClass": "bugCatcher",
    "team": [
     {
-     "speciesKey": "heracross",
+     "speciesKey": "electrike",
      "level": 26
     },
     {
-     "speciesKey": "beautifly",
+     "speciesKey": "kecleon",
      "level": 27
     }
    ]
@@ -1554,7 +1554,7 @@
    "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "corsola",
+     "speciesKey": "aron",
      "level": 27
     }
    ]
@@ -1565,7 +1565,7 @@
    "trainerClass": "camper",
    "team": [
     {
-     "speciesKey": "lileep",
+     "speciesKey": "nuzleaf",
      "level": 28
     }
    ]
@@ -1576,11 +1576,11 @@
    "trainerClass": "beauty",
    "team": [
     {
-     "speciesKey": "tauros",
+     "speciesKey": "castform",
      "level": 29
     },
     {
-     "speciesKey": "ditto",
+     "speciesKey": "gardevoir",
      "level": 30
     }
    ]
@@ -1593,15 +1593,15 @@
    "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "exeggutor",
+     "speciesKey": "torkoal",
      "level": 31
     },
     {
-     "speciesKey": "jolteon",
+     "speciesKey": "snorunt",
      "level": 32
     },
     {
-     "speciesKey": "espeon",
+     "speciesKey": "shedinja",
      "level": 33
     }
    ]
@@ -1612,11 +1612,11 @@
    "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "solrock",
+     "speciesKey": "lunatone",
      "level": 32
     },
     {
-     "speciesKey": "baltoy",
+     "speciesKey": "solrock",
      "level": 33
     }
    ]
@@ -1627,15 +1627,15 @@
    "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "electabuzz",
+     "speciesKey": "swalot",
      "level": 33
     },
     {
-     "speciesKey": "jolteon",
+     "speciesKey": "swablu",
      "level": 34
     },
     {
-     "speciesKey": "lanturn",
+     "speciesKey": "swellow",
      "level": 35
     }
    ]
@@ -1646,19 +1646,19 @@
    "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "aerodactyl",
+     "speciesKey": "relicanth",
      "level": 34
     },
     {
-     "speciesKey": "steelix",
+     "speciesKey": "roselia",
      "level": 35
     },
     {
-     "speciesKey": "machamp",
+     "speciesKey": "skitty",
      "level": 36
     },
     {
-     "speciesKey": "shuckle",
+     "speciesKey": "sealeo",
      "level": 37
     }
    ]
@@ -1671,11 +1671,11 @@
    "trainerClass": "blackbelt",
    "team": [
     {
-     "speciesKey": "primeape",
+     "speciesKey": "camerupt",
      "level": 34
     },
     {
-     "speciesKey": "poliwrath",
+     "speciesKey": "grumpig",
      "level": 35
     }
    ]
@@ -1686,11 +1686,11 @@
    "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "shellder",
+     "speciesKey": "azurill",
      "level": 35
     },
     {
-     "speciesKey": "cloyster",
+     "speciesKey": "wailmer",
      "level": 36
     }
    ]
@@ -1701,11 +1701,11 @@
    "trainerClass": "sailor",
    "team": [
     {
-     "speciesKey": "vaporeon",
+     "speciesKey": "clamperl",
      "level": 36
     },
     {
-     "speciesKey": "omanyte",
+     "speciesKey": "sharpedo",
      "level": 37
     }
    ]
@@ -1716,15 +1716,15 @@
    "trainerClass": "gentleman",
    "team": [
     {
-     "speciesKey": "dodrio",
+     "speciesKey": "delcatty",
      "level": 37
     },
     {
-     "speciesKey": "hypno",
+     "speciesKey": "kecleon",
      "level": 38
     },
     {
-     "speciesKey": "exeggcute",
+     "speciesKey": "slaking",
      "level": 39
     }
    ]
@@ -1737,11 +1737,11 @@
    "trainerClass": "channeler",
    "team": [
     {
-     "speciesKey": "haunter",
+     "speciesKey": "crawdaunt",
      "level": 40
     },
     {
-     "speciesKey": "gengar",
+     "speciesKey": "manectric",
      "level": 41
     }
    ]
@@ -1752,11 +1752,11 @@
    "trainerClass": "tamer",
    "team": [
     {
-     "speciesKey": "altaria",
+     "speciesKey": "castform",
      "level": 41
     },
     {
-     "speciesKey": "zangoose",
+     "speciesKey": "pelipper",
      "level": 42
     }
    ]
@@ -1767,15 +1767,15 @@
    "trainerClass": "juggler",
    "team": [
     {
-     "speciesKey": "growlithe",
+     "speciesKey": "torkoal",
      "level": 42
     },
     {
-     "speciesKey": "arcanine",
+     "speciesKey": "minun",
      "level": 43
     },
     {
-     "speciesKey": "rapidash",
+     "speciesKey": "lunatone",
      "level": 44
     }
    ]
@@ -1788,11 +1788,11 @@
    "trainerClass": "superNerd",
    "team": [
     {
-     "speciesKey": "plusle",
+     "speciesKey": "swalot",
      "level": 45
     },
     {
-     "speciesKey": "minun",
+     "speciesKey": "swellow",
      "level": 46
     }
    ]
@@ -1803,15 +1803,15 @@
    "trainerClass": "fisherman",
    "team": [
     {
-     "speciesKey": "walrein",
+     "speciesKey": "relicanth",
      "level": 46
     },
     {
-     "speciesKey": "huntail",
+     "speciesKey": "milotic",
      "level": 47
     },
     {
-     "speciesKey": "gorebyss",
+     "speciesKey": "masquerain",
      "level": 48
     }
    ]
@@ -1824,11 +1824,11 @@
    "trainerClass": "picnicker",
    "team": [
     {
-     "speciesKey": "cacturne",
+     "speciesKey": "breloom",
      "level": 49
     },
     {
-     "speciesKey": "zangoose",
+     "speciesKey": "exploud",
      "level": 50
     }
    ]
@@ -1839,11 +1839,11 @@
    "trainerClass": "birdKeeper",
    "team": [
     {
-     "speciesKey": "skarmory",
+     "speciesKey": "salamence",
      "level": 50
     },
     {
-     "speciesKey": "beautifly",
+     "speciesKey": "ninjask",
      "level": 51
     }
    ]
@@ -1854,15 +1854,15 @@
    "trainerClass": "burglar",
    "team": [
     {
-     "speciesKey": "ninetales",
+     "speciesKey": "crawdaunt",
      "level": 51
     },
     {
-     "speciesKey": "arcanine",
+     "speciesKey": "torkoal",
      "level": 52
     },
     {
-     "speciesKey": "rapidash",
+     "speciesKey": "shedinja",
      "level": 53
     }
    ]
@@ -1875,15 +1875,15 @@
    "trainerClass": "guitarist",
    "team": [
     {
-     "speciesKey": "electrode",
+     "speciesKey": "minun",
      "level": 55
     },
     {
-     "speciesKey": "jolteon",
+     "speciesKey": "lunatone",
      "level": 56
     },
     {
-     "speciesKey": "lanturn",
+     "speciesKey": "banette",
      "level": 57
     }
    ]
@@ -1894,15 +1894,15 @@
    "trainerClass": "cowgirl",
    "team": [
     {
-     "speciesKey": "nidoqueen",
+     "speciesKey": "zangoose",
      "level": 56
     },
     {
-     "speciesKey": "nidoking",
+     "speciesKey": "spinda",
      "level": 57
     },
     {
-     "speciesKey": "wigglytuff",
+     "speciesKey": "swellow",
      "level": 58
     }
    ]
@@ -1913,15 +1913,15 @@
    "trainerClass": "cyclist",
    "team": [
     {
-     "speciesKey": "dodrio",
+     "speciesKey": "relicanth",
      "level": 57
     },
     {
-     "speciesKey": "kangaskhan",
+     "speciesKey": "claydol",
      "level": 58
     },
     {
-     "speciesKey": "tauros",
+     "speciesKey": "camerupt",
      "level": 59
     }
    ]
@@ -1932,19 +1932,19 @@
    "trainerClass": "lady",
    "team": [
     {
-     "speciesKey": "dodrio",
+     "speciesKey": "grumpig",
      "level": 58
     },
     {
-     "speciesKey": "kangaskhan",
+     "speciesKey": "exploud",
      "level": 59
     },
     {
-     "speciesKey": "mrMime",
+     "speciesKey": "delcatty",
      "level": 60
     },
     {
-     "speciesKey": "tauros",
+     "speciesKey": "mawile",
      "level": 61
     }
    ]
@@ -1957,15 +1957,15 @@
    "trainerClass": "pilot",
    "team": [
     {
-     "speciesKey": "noctowl",
+     "speciesKey": "pelipper",
      "level": 59
     },
     {
-     "speciesKey": "ledian",
+     "speciesKey": "beautifly",
      "level": 60
     },
     {
-     "speciesKey": "crobat",
+     "speciesKey": "altaria",
      "level": 61
     }
    ]
@@ -1976,15 +1976,15 @@
    "trainerClass": "skier",
    "team": [
     {
-     "speciesKey": "jynx",
+     "speciesKey": "huntail",
      "level": 60
     },
     {
-     "speciesKey": "lapras",
+     "speciesKey": "armaldo",
      "level": 61
     },
     {
-     "speciesKey": "glalie",
+     "speciesKey": "minun",
      "level": 62
     }
    ]
@@ -1995,19 +1995,19 @@
    "trainerClass": "waiter",
    "team": [
     {
-     "speciesKey": "kangaskhan",
+     "speciesKey": "zangoose",
      "level": 61
     },
     {
-     "speciesKey": "tauros",
+     "speciesKey": "spinda",
      "level": 62
     },
     {
-     "speciesKey": "snorlax",
+     "speciesKey": "swellow",
      "level": 63
     },
     {
-     "speciesKey": "furret",
+     "speciesKey": "relicanth",
      "level": 64
     }
    ]
@@ -2020,7 +2020,7 @@
    "trainerClass": "richBoy",
    "team": [
     {
-     "speciesKey": "medicham",
+     "speciesKey": "claydol",
      "level": 63
     },
     {
@@ -2028,7 +2028,7 @@
      "level": 64
     },
     {
-     "speciesKey": "zangoose",
+     "speciesKey": "chimecho",
      "level": 65
     }
    ]
@@ -2039,19 +2039,19 @@
    "trainerClass": "worker",
    "team": [
     {
-     "speciesKey": "forretress",
+     "speciesKey": "breloom",
      "level": 64
     },
     {
-     "speciesKey": "steelix",
+     "speciesKey": "exploud",
      "level": 65
     },
     {
-     "speciesKey": "scizor",
+     "speciesKey": "glalie",
      "level": 66
     },
     {
-     "speciesKey": "heracross",
+     "speciesKey": "plusle",
      "level": 67
     }
    ]
@@ -2064,15 +2064,15 @@
    "trainerClass": "idol",
    "team": [
     {
-     "speciesKey": "mrMime",
+     "speciesKey": "mawile",
      "level": 69
     },
     {
-     "speciesKey": "azumarill",
+     "speciesKey": "kecleon",
      "level": 70
     },
     {
-     "speciesKey": "granbull",
+     "speciesKey": "wailord",
      "level": 71
     }
    ]
@@ -2083,15 +2083,15 @@
    "trainerClass": "policeman",
    "team": [
     {
-     "speciesKey": "machamp",
+     "speciesKey": "hariyama",
      "level": 70
     },
     {
-     "speciesKey": "hitmonlee",
+     "speciesKey": "whiscash",
      "level": 71
     },
     {
-     "speciesKey": "hitmonchan",
+     "speciesKey": "gardevoir",
      "level": 72
     }
    ]
@@ -2102,15 +2102,15 @@
    "trainerClass": "aromaLady",
    "team": [
     {
-     "speciesKey": "tropius",
+     "speciesKey": "torkoal",
      "level": 71
     },
     {
-     "speciesKey": "wigglytuff",
+     "speciesKey": "shedinja",
      "level": 72
     },
     {
-     "speciesKey": "vileplume",
+     "speciesKey": "aggron",
      "level": 73
     }
    ]
@@ -2121,19 +2121,19 @@
    "trainerClass": "chef",
    "team": [
     {
-     "speciesKey": "flareon",
+     "speciesKey": "linoone",
      "level": 72
     },
     {
-     "speciesKey": "snorlax",
+     "speciesKey": "zangoose",
      "level": 73
     },
     {
-     "speciesKey": "furret",
+     "speciesKey": "spinda",
      "level": 74
     },
     {
-     "speciesKey": "noctowl",
+     "speciesKey": "swellow",
      "level": 75
     }
    ]
@@ -2146,7 +2146,7 @@
    "trainerClass": "channeler",
    "team": [
     {
-     "speciesKey": "rotom",
+     "speciesKey": "spiritomb",
      "level": 5
     }
    ]
@@ -2157,7 +2157,7 @@
    "trainerClass": "tamer",
    "team": [
     {
-     "speciesKey": "skitty",
+     "speciesKey": "chatot",
      "level": 6
     }
    ]
@@ -2168,7 +2168,7 @@
    "trainerClass": "juggler",
    "team": [
     {
-     "speciesKey": "houndour",
+     "speciesKey": "pachirisu",
      "level": 7
     }
    ]
@@ -2179,11 +2179,11 @@
    "trainerClass": "superNerd",
    "team": [
     {
-     "speciesKey": "roselia",
+     "speciesKey": "shinx",
      "level": 8
     },
     {
-     "speciesKey": "gulpin",
+     "speciesKey": "skorupi",
      "level": 9
     }
    ]
@@ -2196,7 +2196,7 @@
    "trainerClass": "fisherman",
    "team": [
     {
-     "speciesKey": "luvdisc",
+     "speciesKey": "finneon",
      "level": 8
     }
    ]
@@ -2207,7 +2207,7 @@
    "trainerClass": "picnicker",
    "team": [
     {
-     "speciesKey": "tangela",
+     "speciesKey": "budew",
      "level": 9
     }
    ]
@@ -2218,7 +2218,7 @@
    "trainerClass": "birdKeeper",
    "team": [
     {
-     "speciesKey": "butterfree",
+     "speciesKey": "mantyke",
      "level": 10
     }
    ]
@@ -2229,11 +2229,11 @@
    "trainerClass": "burglar",
    "team": [
     {
-     "speciesKey": "poochyena",
+     "speciesKey": "stunky",
      "level": 11
     },
     {
-     "speciesKey": "sableye",
+     "speciesKey": "gible",
      "level": 12
     }
    ]
@@ -2246,7 +2246,7 @@
    "trainerClass": "guitarist",
    "team": [
     {
-     "speciesKey": "voltorb",
+     "speciesKey": "starly",
      "level": 11
     }
    ]
@@ -2257,7 +2257,7 @@
    "trainerClass": "cowgirl",
    "team": [
     {
-     "speciesKey": "dunsparce",
+     "speciesKey": "gliscor",
      "level": 12
     }
    ]
@@ -2268,11 +2268,11 @@
    "trainerClass": "cyclist",
    "team": [
     {
-     "speciesKey": "chatot",
+     "speciesKey": "porygon-z",
      "level": 13
     },
     {
-     "speciesKey": "munchlax",
+     "speciesKey": "bidoof",
      "level": 14
     }
    ]
@@ -2285,7 +2285,7 @@
    "trainerClass": "lady",
    "team": [
     {
-     "speciesKey": "rattata",
+     "speciesKey": "togekiss",
      "level": 14
     }
    ]
@@ -2296,7 +2296,7 @@
    "trainerClass": "pilot",
    "team": [
     {
-     "speciesKey": "scyther",
+     "speciesKey": "chatot",
      "level": 15
     }
    ]
@@ -2307,7 +2307,7 @@
    "trainerClass": "skier",
    "team": [
     {
-     "speciesKey": "swinub",
+     "speciesKey": "croagunk",
      "level": 16
     }
    ]
@@ -2318,11 +2318,11 @@
    "trainerClass": "waiter",
    "team": [
     {
-     "speciesKey": "skitty",
+     "speciesKey": "staravia",
      "level": 17
     },
     {
-     "speciesKey": "delcatty",
+     "speciesKey": "buneary",
      "level": 18
     }
    ]
@@ -2335,7 +2335,7 @@
    "trainerClass": "richBoy",
    "team": [
     {
-     "speciesKey": "slowking",
+     "speciesKey": "lopunny",
      "level": 18
     }
    ]
@@ -2346,11 +2346,11 @@
    "trainerClass": "worker",
    "team": [
     {
-     "speciesKey": "tyrogue",
+     "speciesKey": "shieldon",
      "level": 19
     },
     {
-     "speciesKey": "makuhita",
+     "speciesKey": "lucario",
      "level": 20
     }
    ]
@@ -2363,7 +2363,7 @@
    "trainerClass": "idol",
    "team": [
     {
-     "speciesKey": "mrMime",
+     "speciesKey": "cherubi",
      "level": 21
     }
    ]
@@ -2374,7 +2374,7 @@
    "trainerClass": "policeman",
    "team": [
     {
-     "speciesKey": "hitmontop",
+     "speciesKey": "glameow",
      "level": 22
     }
    ]
@@ -2385,11 +2385,11 @@
    "trainerClass": "aromaLady",
    "team": [
     {
-     "speciesKey": "vileplume",
+     "speciesKey": "carnivine",
      "level": 23
     },
     {
-     "speciesKey": "paras",
+     "speciesKey": "snover",
      "level": 24
     }
    ]
@@ -2402,7 +2402,7 @@
    "trainerClass": "chef",
    "team": [
     {
-     "speciesKey": "happiny",
+     "speciesKey": "porygon-z",
      "level": 27
     }
    ]
@@ -2413,7 +2413,7 @@
    "trainerClass": "dancer",
    "team": [
     {
-     "speciesKey": "girafarig",
+     "speciesKey": "gallade",
      "level": 28
     }
    ]
@@ -2424,11 +2424,11 @@
    "trainerClass": "gambler",
    "team": [
     {
-     "speciesKey": "glameow",
+     "speciesKey": "munchlax",
      "level": 29
     },
     {
-     "speciesKey": "stunky",
+     "speciesKey": "spiritomb",
      "level": 30
     }
    ]
@@ -2441,11 +2441,11 @@
    "trainerClass": "nurse",
    "team": [
     {
-     "speciesKey": "clefable",
+     "speciesKey": "bastiodon",
      "level": 30
     },
     {
-     "speciesKey": "jigglypuff",
+     "speciesKey": "chatot",
      "level": 31
     }
    ]
@@ -2456,11 +2456,11 @@
    "trainerClass": "biker",
    "team": [
     {
-     "speciesKey": "vileplume",
+     "speciesKey": "croagunk",
      "level": 31
     },
     {
-     "speciesKey": "venomoth",
+     "speciesKey": "staravia",
      "level": 32
     }
    ]
@@ -2471,15 +2471,15 @@
    "trainerClass": "schoolkid",
    "team": [
     {
-     "speciesKey": "snorlax",
+     "speciesKey": "buneary",
      "level": 32
     },
     {
-     "speciesKey": "furret",
+     "speciesKey": "lopunny",
      "level": 33
     },
     {
-     "speciesKey": "noctowl",
+     "speciesKey": "happiny",
      "level": 34
     }
    ]
@@ -2492,11 +2492,11 @@
    "trainerClass": "roughneck",
    "team": [
     {
-     "speciesKey": "heracross",
+     "speciesKey": "lucario",
      "level": 33
     },
     {
-     "speciesKey": "hitmontop",
+     "speciesKey": "glameow",
      "level": 34
     }
    ]
@@ -2507,11 +2507,11 @@
    "trainerClass": "parasolLady",
    "team": [
     {
-     "speciesKey": "azumarill",
+     "speciesKey": "bibarel",
      "level": 34
     },
     {
-     "speciesKey": "politoed",
+     "speciesKey": "floatzel",
      "level": 35
     }
    ]
@@ -2522,15 +2522,15 @@
    "trainerClass": "musician",
    "team": [
     {
-     "speciesKey": "mrMime",
+     "speciesKey": "roserade",
      "level": 35
     },
     {
-     "speciesKey": "jynx",
+     "speciesKey": "gallade",
      "level": 36
     },
     {
-     "speciesKey": "tauros",
+     "speciesKey": "munchlax",
      "level": 37
     }
    ]
@@ -2543,11 +2543,11 @@
    "trainerClass": "preschooler",
    "team": [
     {
-     "speciesKey": "dodrio",
+     "speciesKey": "purugly",
      "level": 38
     },
     {
-     "speciesKey": "chansey",
+     "speciesKey": "chatot",
      "level": 39
     }
    ]
@@ -2558,11 +2558,11 @@
    "trainerClass": "artist",
    "team": [
     {
-     "speciesKey": "snorlax",
+     "speciesKey": "buneary",
      "level": 39
     },
     {
-     "speciesKey": "furret",
+     "speciesKey": "lopunny",
      "level": 40
     }
    ]
@@ -2573,11 +2573,11 @@
    "trainerClass": "backpacker",
    "team": [
     {
-     "speciesKey": "exploud",
+     "speciesKey": "happiny",
      "level": 40
     },
     {
-     "speciesKey": "azurill",
+     "speciesKey": "ambipom",
      "level": 41
     }
    ]
@@ -2588,15 +2588,15 @@
    "trainerClass": "pokemonRanger",
    "team": [
     {
-     "speciesKey": "noctowl",
+     "speciesKey": "staraptor",
      "level": 41
     },
     {
-     "speciesKey": "igglybuff",
+     "speciesKey": "tangrowth",
      "level": 42
     },
     {
-     "speciesKey": "bellossom",
+     "speciesKey": "budew",
      "level": 43
     }
    ]
@@ -2609,11 +2609,11 @@
    "trainerClass": "doctor",
    "team": [
     {
-     "speciesKey": "hypno",
+     "speciesKey": "chingling",
      "level": 43
     },
     {
-     "speciesKey": "exeggcute",
+     "speciesKey": "carnivine",
      "level": 44
     }
    ]
@@ -2624,11 +2624,11 @@
    "trainerClass": "veteran",
    "team": [
     {
-     "speciesKey": "tangrowth",
+     "speciesKey": "electivire",
      "level": 44
     },
     {
-     "speciesKey": "aggron",
+     "speciesKey": "froslass",
      "level": 45
     }
    ]
@@ -2639,15 +2639,15 @@
    "trainerClass": "medium",
    "team": [
     {
-     "speciesKey": "sableye",
+     "speciesKey": "bibarel",
      "level": 45
     },
     {
-     "speciesKey": "banette",
+     "speciesKey": "gliscor",
      "level": 46
     },
     {
-     "speciesKey": "drifblim",
+     "speciesKey": "porygon-z",
      "level": 47
     }
    ]
@@ -2660,11 +2660,11 @@
    "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "noctowl",
+     "speciesKey": "floatzel",
      "level": 49
     },
     {
-     "speciesKey": "ursaring",
+     "speciesKey": "roserade",
      "level": 50
     }
    ]
@@ -2675,11 +2675,11 @@
    "trainerClass": "lass",
    "team": [
     {
-     "speciesKey": "dodrio",
+     "speciesKey": "togekiss",
      "level": 50
     },
     {
-     "speciesKey": "kangaskhan",
+     "speciesKey": "purugly",
      "level": 51
     }
    ]
@@ -2690,15 +2690,15 @@
    "trainerClass": "bugCatcher",
    "team": [
     {
-     "speciesKey": "vespiquen",
+     "speciesKey": "kricketune",
      "level": 51
     },
     {
-     "speciesKey": "yanmega",
+     "speciesKey": "vespiquen",
      "level": 52
     },
     {
-     "speciesKey": "butterfree",
+     "speciesKey": "wormadam",
      "level": 53
     }
    ]
@@ -2711,15 +2711,15 @@
    "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "donphan",
+     "speciesKey": "garchomp",
      "level": 52
     },
     {
-     "speciesKey": "pupitar",
+     "speciesKey": "mamoswine",
      "level": 53
     },
     {
-     "speciesKey": "aggron",
+     "speciesKey": "ambipom",
      "level": 54
     }
    ]
@@ -2730,15 +2730,15 @@
    "trainerClass": "camper",
    "team": [
     {
-     "speciesKey": "parasect",
+     "speciesKey": "staraptor",
      "level": 53
     },
     {
-     "speciesKey": "persian",
+     "speciesKey": "tangrowth",
      "level": 54
     },
     {
-     "speciesKey": "victreebel",
+     "speciesKey": "abomasnow",
      "level": 55
     }
    ]
@@ -2749,19 +2749,19 @@
    "trainerClass": "beauty",
    "team": [
     {
-     "speciesKey": "delcatty",
+     "speciesKey": "lickilicky",
      "level": 54
     },
     {
-     "speciesKey": "mawile",
+     "speciesKey": "bibarel",
      "level": 55
     },
     {
-     "speciesKey": "spinda",
+     "speciesKey": "porygon-z",
      "level": 56
     },
     {
-     "speciesKey": "zangoose",
+     "speciesKey": "floatzel",
      "level": 57
     }
    ]
@@ -2774,19 +2774,19 @@
    "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "dusknoir",
+     "speciesKey": "roserade",
      "level": 60
     },
     {
-     "speciesKey": "yanmega",
+     "speciesKey": "honchkrow",
      "level": 61
     },
     {
-     "speciesKey": "slaking",
+     "speciesKey": "rhyperior",
      "level": 62
     },
     {
-     "speciesKey": "dragonite",
+     "speciesKey": "yanmega",
      "level": 63
     }
    ]
@@ -2797,19 +2797,19 @@
    "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "claydol",
+     "speciesKey": "gallade",
      "level": 61
     },
     {
-     "speciesKey": "chimecho",
+     "speciesKey": "purugly",
      "level": 62
     },
     {
-     "speciesKey": "bronzong",
+     "speciesKey": "rampardos",
      "level": 63
     },
     {
-     "speciesKey": "gallade",
+     "speciesKey": "lumineon",
      "level": 64
     }
    ]
@@ -2822,7 +2822,7 @@
    "trainerClass": "artist",
    "team": [
     {
-     "speciesKey": "porygon",
+     "speciesKey": "simipour",
      "level": 5
     }
    ]
@@ -2833,11 +2833,11 @@
    "trainerClass": "backpacker",
    "team": [
     {
-     "speciesKey": "castform",
+     "speciesKey": "stunfisk",
      "level": 6
     },
     {
-     "speciesKey": "kecleon",
+     "speciesKey": "cinccino",
      "level": 7
     }
    ]
@@ -2850,7 +2850,7 @@
    "trainerClass": "pokemonRanger",
    "team": [
     {
-     "speciesKey": "snorlax",
+     "speciesKey": "deerling",
      "level": 8
     }
    ]
@@ -2861,7 +2861,7 @@
    "trainerClass": "doctor",
    "team": [
     {
-     "speciesKey": "woobat",
+     "speciesKey": "elgyem",
      "level": 9
     }
    ]
@@ -2872,7 +2872,7 @@
    "trainerClass": "veteran",
    "team": [
     {
-     "speciesKey": "espeon",
+     "speciesKey": "drilbur",
      "level": 10
     }
    ]
@@ -2883,11 +2883,11 @@
    "trainerClass": "medium",
    "team": [
     {
-     "speciesKey": "mismagius",
+     "speciesKey": "frillish",
      "level": 11
     },
     {
-     "speciesKey": "spiritomb",
+     "speciesKey": "litwick",
      "level": 12
     }
    ]
@@ -2900,7 +2900,7 @@
    "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "buneary",
+     "speciesKey": "lillipup",
      "level": 10
     }
    ]
@@ -2911,11 +2911,11 @@
    "trainerClass": "lass",
    "team": [
     {
-     "speciesKey": "starly",
+     "speciesKey": "cottonee",
      "level": 11
     },
     {
-     "speciesKey": "bidoof",
+     "speciesKey": "minccino",
      "level": 12
     }
    ]
@@ -2928,7 +2928,7 @@
    "trainerClass": "bugCatcher",
    "team": [
     {
-     "speciesKey": "dustox",
+     "speciesKey": "joltik",
      "level": 13
     }
    ]
@@ -2939,11 +2939,11 @@
    "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "shuckle",
+     "speciesKey": "venipede",
      "level": 14
     },
     {
-     "speciesKey": "swinub",
+     "speciesKey": "lilligant",
      "level": 15
     }
    ]
@@ -2956,7 +2956,7 @@
    "trainerClass": "camper",
    "team": [
     {
-     "speciesKey": "cacnea",
+     "speciesKey": "ferroseed",
      "level": 15
     }
    ]
@@ -2967,11 +2967,11 @@
    "trainerClass": "beauty",
    "team": [
     {
-     "speciesKey": "cleffa",
+     "speciesKey": "herdier",
      "level": 16
     },
     {
-     "speciesKey": "igglybuff",
+     "speciesKey": "bouffalant",
      "level": 17
     }
    ]
@@ -2984,11 +2984,11 @@
    "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "aerodactyl",
+     "speciesKey": "trubbish",
      "level": 16
     },
     {
-     "speciesKey": "steelix",
+     "speciesKey": "patrat",
      "level": 17
     }
    ]
@@ -2999,11 +2999,11 @@
    "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "wobbuffet",
+     "speciesKey": "sigilyph",
      "level": 17
     },
     {
-     "speciesKey": "girafarig",
+     "speciesKey": "munna",
      "level": 18
     }
    ]
@@ -3016,11 +3016,11 @@
    "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "durant",
+     "speciesKey": "stunfisk",
      "level": 20
     },
     {
-     "speciesKey": "pikachu",
+     "speciesKey": "zorua",
      "level": 21
     }
    ]
@@ -3031,11 +3031,11 @@
    "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "exeggutor",
+     "speciesKey": "timburr",
      "level": 21
     },
     {
-     "speciesKey": "jolteon",
+     "speciesKey": "throh",
      "level": 22
     }
    ]
@@ -3046,11 +3046,11 @@
    "trainerClass": "blackbelt",
    "team": [
     {
-     "speciesKey": "gallade",
+     "speciesKey": "panpour",
      "level": 22
     },
     {
-     "speciesKey": "timburr",
+     "speciesKey": "dwebble",
      "level": 23
     }
    ]
@@ -3063,7 +3063,7 @@
    "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "vaporeon",
+     "speciesKey": "ducklett",
      "level": 21
     }
    ]
@@ -3074,7 +3074,7 @@
    "trainerClass": "sailor",
    "team": [
     {
-     "speciesKey": "qwilfish",
+     "speciesKey": "tirtouga",
      "level": 22
     }
    ]
@@ -3085,7 +3085,7 @@
    "trainerClass": "gentleman",
    "team": [
     {
-     "speciesKey": "solrock",
+     "speciesKey": "musharna",
      "level": 23
     }
    ]
@@ -3096,11 +3096,11 @@
    "trainerClass": "channeler",
    "team": [
     {
-     "speciesKey": "sableye",
+     "speciesKey": "litwick",
      "level": 24
     },
     {
-     "speciesKey": "shuppet",
+     "speciesKey": "golett",
      "level": 25
     }
    ]
@@ -3113,7 +3113,7 @@
    "trainerClass": "tamer",
    "team": [
     {
-     "speciesKey": "snorlax",
+     "speciesKey": "deino",
      "level": 24
     }
    ]
@@ -3124,7 +3124,7 @@
    "trainerClass": "juggler",
    "team": [
     {
-     "speciesKey": "darumaka",
+     "speciesKey": "joltik",
      "level": 25
     }
    ]
@@ -3135,7 +3135,7 @@
    "trainerClass": "superNerd",
    "team": [
     {
-     "speciesKey": "victreebel",
+     "speciesKey": "lilligant",
      "level": 26
     }
    ]
@@ -3146,11 +3146,11 @@
    "trainerClass": "fisherman",
    "team": [
     {
-     "speciesKey": "omanyte",
+     "speciesKey": "alomomola",
      "level": 27
     },
     {
-     "speciesKey": "kabuto",
+     "speciesKey": "liepard",
      "level": 28
     }
    ]
@@ -3163,11 +3163,11 @@
    "trainerClass": "picnicker",
    "team": [
     {
-     "speciesKey": "rufflet",
+     "speciesKey": "ferroseed",
      "level": 28
     },
     {
-     "speciesKey": "pidgeotto",
+     "speciesKey": "herdier",
      "level": 29
     }
    ]
@@ -3178,11 +3178,11 @@
    "trainerClass": "birdKeeper",
    "team": [
     {
-     "speciesKey": "xatu",
+     "speciesKey": "vullaby",
      "level": 29
     },
     {
-     "speciesKey": "skiploom",
+     "speciesKey": "rufflet",
      "level": 30
     }
    ]
@@ -3193,15 +3193,15 @@
    "trainerClass": "burglar",
    "team": [
     {
-     "speciesKey": "zoroark",
+     "speciesKey": "sigilyph",
      "level": 30
     },
     {
-     "speciesKey": "litwick",
+     "speciesKey": "durant",
      "level": 31
     },
     {
-     "speciesKey": "pawniard",
+     "speciesKey": "simipour",
      "level": 32
     }
    ]
@@ -3214,11 +3214,11 @@
    "trainerClass": "guitarist",
    "team": [
     {
-     "speciesKey": "plusle",
+     "speciesKey": "stunfisk",
      "level": 29
     },
     {
-     "speciesKey": "minun",
+     "speciesKey": "scolipede",
      "level": 30
     }
    ]
@@ -3229,11 +3229,11 @@
    "trainerClass": "cowgirl",
    "team": [
     {
-     "speciesKey": "kecleon",
+     "speciesKey": "cinccino",
      "level": 30
     },
     {
-     "speciesKey": "staravia",
+     "speciesKey": "deerling",
      "level": 31
     }
    ]
@@ -3244,11 +3244,11 @@
    "trainerClass": "cyclist",
    "team": [
     {
-     "speciesKey": "dodrio",
+     "speciesKey": "audino",
      "level": 31
     },
     {
-     "speciesKey": "lickitung",
+     "speciesKey": "tirtouga",
      "level": 32
     }
    ]
@@ -3259,15 +3259,15 @@
    "trainerClass": "lady",
    "team": [
     {
-     "speciesKey": "clefairy",
+     "speciesKey": "axew",
      "level": 32
     },
     {
-     "speciesKey": "clefable",
+     "speciesKey": "basculin",
      "level": 33
     },
     {
-     "speciesKey": "jigglypuff",
+     "speciesKey": "frillish",
      "level": 34
     }
    ]
@@ -3280,11 +3280,11 @@
    "trainerClass": "pilot",
    "team": [
     {
-     "speciesKey": "aerodactyl",
+     "speciesKey": "woobat",
      "level": 33
     },
     {
-     "speciesKey": "noctowl",
+     "speciesKey": "emolga",
      "level": 34
     }
    ]
@@ -3295,15 +3295,15 @@
    "trainerClass": "skier",
    "team": [
     {
-     "speciesKey": "delibird",
+     "speciesKey": "swadloon",
      "level": 34
     },
     {
-     "speciesKey": "snorunt",
+     "speciesKey": "krokorok",
      "level": 35
     },
     {
-     "speciesKey": "sealeo",
+     "speciesKey": "larvesta",
      "level": 36
     }
    ]
@@ -3316,11 +3316,11 @@
    "trainerClass": "waiter",
    "team": [
     {
-     "speciesKey": "castform",
+     "speciesKey": "unfezant",
      "level": 36
     },
     {
-     "speciesKey": "kecleon",
+     "speciesKey": "gurdurr",
      "level": 37
     }
    ]
@@ -3331,15 +3331,15 @@
    "trainerClass": "richBoy",
    "team": [
     {
-     "speciesKey": "claydol",
+     "speciesKey": "minccino",
      "level": 37
     },
     {
-     "speciesKey": "castform",
+     "speciesKey": "swoobat",
      "level": 38
     },
     {
-     "speciesKey": "kecleon",
+     "speciesKey": "sawsbuck",
      "level": 39
     }
    ]
@@ -3352,11 +3352,11 @@
    "trainerClass": "worker",
    "team": [
     {
-     "speciesKey": "bastiodon",
+     "speciesKey": "sawk",
      "level": 41
     },
     {
-     "speciesKey": "bronzong",
+     "speciesKey": "mienfoo",
      "level": 42
     }
    ]
@@ -3367,15 +3367,15 @@
    "trainerClass": "idol",
    "team": [
     {
-     "speciesKey": "mrMime",
+     "speciesKey": "conkeldurr",
      "level": 42
     },
     {
-     "speciesKey": "cleffa",
+     "speciesKey": "simisear",
      "level": 43
     },
     {
-     "speciesKey": "igglybuff",
+     "speciesKey": "rufflet",
      "level": 44
     }
    ]
@@ -3388,11 +3388,11 @@
    "trainerClass": "policeman",
    "team": [
     {
-     "speciesKey": "hitmontop",
+     "speciesKey": "crustle",
      "level": 47
     },
     {
-     "speciesKey": "breloom",
+     "speciesKey": "sigilyph",
      "level": 48
     }
    ]
@@ -3403,15 +3403,15 @@
    "trainerClass": "aromaLady",
    "team": [
     {
-     "speciesKey": "mrMime",
+     "speciesKey": "whimsicott",
      "level": 48
     },
     {
-     "speciesKey": "bellossom",
+     "speciesKey": "stunfisk",
      "level": 49
     },
     {
-     "speciesKey": "azumarill",
+     "speciesKey": "galvantula",
      "level": 50
     }
    ]
@@ -3424,15 +3424,15 @@
    "trainerClass": "chef",
    "team": [
     {
-     "speciesKey": "magmortar",
+     "speciesKey": "stoutland",
      "level": 50
     },
     {
-     "speciesKey": "porygon-z",
+     "speciesKey": "cinccino",
      "level": 51
     },
     {
-     "speciesKey": "watchog",
+     "speciesKey": "chandelure",
      "level": 52
     }
    ]
@@ -3443,15 +3443,15 @@
    "trainerClass": "dancer",
    "team": [
     {
-     "speciesKey": "gallade",
+     "speciesKey": "musharna",
      "level": 51
     },
     {
-     "speciesKey": "musharna",
+     "speciesKey": "emolga",
      "level": 52
     },
     {
-     "speciesKey": "swoobat",
+     "speciesKey": "larvesta",
      "level": 53
     }
    ]
@@ -3462,15 +3462,15 @@
    "trainerClass": "gambler",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "unfezant",
      "level": 52
     },
     {
-     "speciesKey": "exploud",
+     "speciesKey": "scrafty",
      "level": 53
     },
     {
-     "speciesKey": "delcatty",
+     "speciesKey": "braviary",
      "level": 54
     }
    ]
@@ -3481,19 +3481,19 @@
    "trainerClass": "nurse",
    "team": [
     {
-     "speciesKey": "togekiss",
+     "speciesKey": "swanna",
      "level": 53
     },
     {
-     "speciesKey": "whimsicott",
+     "speciesKey": "simisage",
      "level": 54
     },
     {
-     "speciesKey": "clefable",
+     "speciesKey": "ferrothorn",
      "level": 55
     },
     {
-     "speciesKey": "wigglytuff",
+     "speciesKey": "cofagrigus",
      "level": 56
     }
    ]
@@ -3506,15 +3506,15 @@
    "trainerClass": "biker",
    "team": [
     {
-     "speciesKey": "beedrill",
+     "speciesKey": "swoobat",
      "level": 54
     },
     {
-     "speciesKey": "arbok",
+     "speciesKey": "golurk",
      "level": 55
     },
     {
-     "speciesKey": "nidoqueen",
+     "speciesKey": "vanilluxe",
      "level": 56
     }
    ]
@@ -3525,19 +3525,19 @@
    "trainerClass": "schoolkid",
    "team": [
     {
-     "speciesKey": "snorlax",
+     "speciesKey": "sawsbuck",
      "level": 55
     },
     {
-     "speciesKey": "furret",
+     "speciesKey": "bouffalant",
      "level": 56
     },
     {
-     "speciesKey": "noctowl",
+     "speciesKey": "watchog",
      "level": 57
     },
     {
-     "speciesKey": "miltank",
+     "speciesKey": "carracosta",
      "level": 58
     }
    ]
@@ -3550,15 +3550,15 @@
    "trainerClass": "roughneck",
    "team": [
     {
-     "speciesKey": "hitmonlee",
+     "speciesKey": "conkeldurr",
      "level": 55
     },
     {
-     "speciesKey": "hitmonchan",
+     "speciesKey": "simisear",
      "level": 56
     },
     {
-     "speciesKey": "heracross",
+     "speciesKey": "crustle",
      "level": 57
     }
    ]
@@ -3569,15 +3569,15 @@
    "trainerClass": "parasolLady",
    "team": [
     {
-     "speciesKey": "gastrodon",
+     "speciesKey": "simipour",
      "level": 56
     },
     {
-     "speciesKey": "lumineon",
+     "speciesKey": "jellicent",
      "level": 57
     },
     {
-     "speciesKey": "togekiss",
+     "speciesKey": "whimsicott",
      "level": 58
     }
    ]
@@ -3588,15 +3588,15 @@
    "trainerClass": "musician",
    "team": [
     {
-     "speciesKey": "stoutland",
+     "speciesKey": "reuniclus",
      "level": 57
     },
     {
-     "speciesKey": "musharna",
+     "speciesKey": "stoutland",
      "level": 58
     },
     {
-     "speciesKey": "unfezant",
+     "speciesKey": "cinccino",
      "level": 59
     }
    ]
@@ -3607,19 +3607,19 @@
    "trainerClass": "preschooler",
    "team": [
     {
-     "speciesKey": "kecleon",
+     "speciesKey": "escavalier",
      "level": 58
     },
     {
-     "speciesKey": "staraptor",
+     "speciesKey": "seismitoad",
      "level": 59
     },
     {
-     "speciesKey": "bibarel",
+     "speciesKey": "amoonguss",
      "level": 60
     },
     {
-     "speciesKey": "ambipom",
+     "speciesKey": "gothitelle",
      "level": 61
     }
    ]
@@ -3632,15 +3632,15 @@
    "trainerClass": "artist",
    "team": [
     {
-     "speciesKey": "dodrio",
+     "speciesKey": "audino",
      "level": 57
     },
     {
-     "speciesKey": "kangaskhan",
+     "speciesKey": "unfezant",
      "level": 58
     },
     {
-     "speciesKey": "tauros",
+     "speciesKey": "braviary",
      "level": 59
     }
    ]
@@ -3651,15 +3651,15 @@
    "trainerClass": "backpacker",
    "team": [
     {
-     "speciesKey": "lopunny",
+     "speciesKey": "golurk",
      "level": 58
     },
     {
-     "speciesKey": "purugly",
+     "speciesKey": "sawsbuck",
      "level": 59
     },
     {
-     "speciesKey": "chatot",
+     "speciesKey": "bouffalant",
      "level": 60
     }
    ]
@@ -3670,15 +3670,15 @@
    "trainerClass": "pokemonRanger",
    "team": [
     {
-     "speciesKey": "ambipom",
+     "speciesKey": "watchog",
      "level": 59
     },
     {
-     "speciesKey": "lopunny",
+     "speciesKey": "carracosta",
      "level": 60
     },
     {
-     "speciesKey": "purugly",
+     "speciesKey": "beheeyem",
      "level": 61
     }
    ]
@@ -3689,19 +3689,19 @@
    "trainerClass": "doctor",
    "team": [
     {
-     "speciesKey": "bronzong",
+     "speciesKey": "sigilyph",
      "level": 60
     },
     {
-     "speciesKey": "gallade",
+     "speciesKey": "durant",
      "level": 61
     },
     {
-     "speciesKey": "musharna",
+     "speciesKey": "reuniclus",
      "level": 62
     },
     {
-     "speciesKey": "swoobat",
+     "speciesKey": "gothitelle",
      "level": 63
     }
    ]
@@ -3714,7 +3714,7 @@
    "trainerClass": "tamer",
    "team": [
     {
-     "speciesKey": "stantler",
+     "speciesKey": "tyrunt",
      "level": 5
     }
    ]
@@ -3725,11 +3725,11 @@
    "trainerClass": "juggler",
    "team": [
     {
-     "speciesKey": "arcanine",
+     "speciesKey": "heliolisk",
      "level": 6
     },
     {
-     "speciesKey": "ponyta",
+     "speciesKey": "dedenne",
      "level": 7
     }
    ]
@@ -3742,7 +3742,7 @@
    "trainerClass": "superNerd",
    "team": [
     {
-     "speciesKey": "skorupi",
+     "speciesKey": "helioptile",
      "level": 9
     }
    ]
@@ -3753,11 +3753,11 @@
    "trainerClass": "fisherman",
    "team": [
     {
-     "speciesKey": "qwilfish",
+     "speciesKey": "honedge",
      "level": 10
     },
     {
-     "speciesKey": "corsola",
+     "speciesKey": "slurpuff",
      "level": 11
     }
    ]
@@ -3770,7 +3770,7 @@
    "trainerClass": "picnicker",
    "team": [
     {
-     "speciesKey": "eevee",
+     "speciesKey": "litleo",
      "level": 14
     }
    ]
@@ -3781,7 +3781,7 @@
    "trainerClass": "birdKeeper",
    "team": [
     {
-     "speciesKey": "yanma",
+     "speciesKey": "hawlucha",
      "level": 15
     }
    ]
@@ -3792,7 +3792,7 @@
    "trainerClass": "burglar",
    "team": [
     {
-     "speciesKey": "growlithe",
+     "speciesKey": "spritzee",
      "level": 16
     }
    ]
@@ -3803,11 +3803,11 @@
    "trainerClass": "guitarist",
    "team": [
     {
-     "speciesKey": "voltorb",
+     "speciesKey": "heliolisk",
      "level": 17
     },
     {
-     "speciesKey": "jolteon",
+     "speciesKey": "dedenne",
      "level": 18
     }
    ]
@@ -3820,7 +3820,7 @@
    "trainerClass": "cowgirl",
    "team": [
     {
-     "speciesKey": "zigzagoon",
+     "speciesKey": "helioptile",
      "level": 18
     }
    ]
@@ -3831,7 +3831,7 @@
    "trainerClass": "cyclist",
    "team": [
     {
-     "speciesKey": "minccino",
+     "speciesKey": "litleo",
      "level": 19
     }
    ]
@@ -3842,11 +3842,11 @@
    "trainerClass": "lady",
    "team": [
     {
-     "speciesKey": "diggersby",
+     "speciesKey": "carbink",
      "level": 20
     },
     {
-     "speciesKey": "litleo",
+     "speciesKey": "spritzee",
      "level": 21
     }
    ]
@@ -3859,7 +3859,7 @@
    "trainerClass": "pilot",
    "team": [
     {
-     "speciesKey": "gligar",
+     "speciesKey": "vivillon",
      "level": 22
     }
    ]
@@ -3870,11 +3870,11 @@
    "trainerClass": "skier",
    "team": [
     {
-     "speciesKey": "swinub",
+     "speciesKey": "tyrunt",
      "level": 23
     },
     {
-     "speciesKey": "delibird",
+     "speciesKey": "gourgeist",
      "level": 24
     }
    ]
@@ -3887,7 +3887,7 @@
    "trainerClass": "waiter",
    "team": [
     {
-     "speciesKey": "meowth",
+     "speciesKey": "heliolisk",
      "level": 27
     }
    ]
@@ -3898,7 +3898,7 @@
    "trainerClass": "richBoy",
    "team": [
     {
-     "speciesKey": "munna",
+     "speciesKey": "inkay",
      "level": 28
     }
    ]
@@ -3909,7 +3909,7 @@
    "trainerClass": "worker",
    "team": [
     {
-     "speciesKey": "hitmonchan",
+     "speciesKey": "honedge",
      "level": 29
     }
    ]
@@ -3920,11 +3920,11 @@
    "trainerClass": "idol",
    "team": [
     {
-     "speciesKey": "togetic",
+     "speciesKey": "slurpuff",
      "level": 30
     },
     {
-     "speciesKey": "azumarill",
+     "speciesKey": "klefki",
      "level": 31
     }
    ]
@@ -3937,11 +3937,11 @@
    "trainerClass": "policeman",
    "team": [
     {
-     "speciesKey": "meditite",
+     "speciesKey": "hawlucha",
      "level": 31
     },
     {
-     "speciesKey": "riolu",
+     "speciesKey": "malamar",
      "level": 32
     }
    ]
@@ -3952,11 +3952,11 @@
    "trainerClass": "aromaLady",
    "team": [
     {
-     "speciesKey": "wormadam",
+     "speciesKey": "spritzee",
      "level": 32
     },
     {
-     "speciesKey": "cherrim",
+     "speciesKey": "florges",
      "level": 33
     }
    ]
@@ -3967,15 +3967,15 @@
    "trainerClass": "chef",
    "team": [
     {
-     "speciesKey": "ditto",
+     "speciesKey": "heliolisk",
      "level": 33
     },
     {
-     "speciesKey": "eevee",
+     "speciesKey": "furfrou",
      "level": 34
     },
     {
-     "speciesKey": "flareon",
+     "speciesKey": "helioptile",
      "level": 35
     }
    ]
@@ -3988,11 +3988,11 @@
    "trainerClass": "dancer",
    "team": [
     {
-     "speciesKey": "claydol",
+     "speciesKey": "diggersby",
      "level": 36
     },
     {
-     "speciesKey": "chimecho",
+     "speciesKey": "slurpuff",
      "level": 37
     }
    ]
@@ -4003,11 +4003,11 @@
    "trainerClass": "gambler",
    "team": [
     {
-     "speciesKey": "stoutland",
+     "speciesKey": "klefki",
      "level": 37
     },
     {
-     "speciesKey": "liepard",
+     "speciesKey": "malamar",
      "level": 38
     }
    ]
@@ -4018,11 +4018,11 @@
    "trainerClass": "nurse",
    "team": [
     {
-     "speciesKey": "swirlix",
+     "speciesKey": "spritzee",
      "level": 38
     },
     {
-     "speciesKey": "slurpuff",
+     "speciesKey": "florges",
      "level": 39
     },
     {
@@ -4039,11 +4039,11 @@
    "trainerClass": "biker",
    "team": [
     {
-     "speciesKey": "nidoqueen",
+     "speciesKey": "skrelp",
      "level": 40
     },
     {
-     "speciesKey": "nidorino",
+     "speciesKey": "meowstic",
      "level": 41
     }
    ]
@@ -4054,11 +4054,11 @@
    "trainerClass": "schoolkid",
    "team": [
     {
-     "speciesKey": "lopunny",
+     "speciesKey": "furfrou",
      "level": 41
     },
     {
-     "speciesKey": "purugly",
+     "speciesKey": "helioptile",
      "level": 42
     }
    ]
@@ -4069,11 +4069,11 @@
    "trainerClass": "roughneck",
    "team": [
     {
-     "speciesKey": "sawk",
+     "speciesKey": "sliggoo",
      "level": 42
     },
     {
-     "speciesKey": "scrafty",
+     "speciesKey": "diggersby",
      "level": 43
     }
    ]
@@ -4084,15 +4084,15 @@
    "trainerClass": "parasolLady",
    "team": [
     {
-     "speciesKey": "ludicolo",
+     "speciesKey": "slurpuff",
      "level": 43
     },
     {
-     "speciesKey": "pelipper",
+     "speciesKey": "klefki",
      "level": 44
     },
     {
-     "speciesKey": "gardevoir",
+     "speciesKey": "aromatisse",
      "level": 45
     }
    ]
@@ -4105,11 +4105,11 @@
    "trainerClass": "musician",
    "team": [
     {
-     "speciesKey": "gallade",
+     "speciesKey": "malamar",
      "level": 44
     },
     {
-     "speciesKey": "watchog",
+     "speciesKey": "pyroar",
      "level": 45
     }
    ]
@@ -4120,11 +4120,11 @@
    "trainerClass": "preschooler",
    "team": [
     {
-     "speciesKey": "chatot",
+     "speciesKey": "heliolisk",
      "level": 45
     },
     {
-     "speciesKey": "lickilicky",
+     "speciesKey": "furfrou",
      "level": 46
     }
    ]
@@ -4135,15 +4135,15 @@
    "trainerClass": "artist",
    "team": [
     {
-     "speciesKey": "cinccino",
+     "speciesKey": "diggersby",
      "level": 46
     },
     {
-     "speciesKey": "sawsbuck",
+     "speciesKey": "slurpuff",
      "level": 47
     },
     {
-     "speciesKey": "bouffalant",
+     "speciesKey": "klefki",
      "level": 48
     }
    ]
@@ -4156,11 +4156,11 @@
    "trainerClass": "backpacker",
    "team": [
     {
-     "speciesKey": "quagsire",
+     "speciesKey": "aromatisse",
      "level": 49
     },
     {
-     "speciesKey": "steelix",
+     "speciesKey": "tyrantrum",
      "level": 50
     }
    ]
@@ -4171,11 +4171,11 @@
    "trainerClass": "pokemonRanger",
    "team": [
     {
-     "speciesKey": "persian",
+     "speciesKey": "gogoat",
      "level": 50
     },
     {
-     "speciesKey": "victreebel",
+     "speciesKey": "trevenant",
      "level": 51
     }
    ]
@@ -4186,15 +4186,15 @@
    "trainerClass": "doctor",
    "team": [
     {
-     "speciesKey": "wobbuffet",
+     "speciesKey": "malamar",
      "level": 51
     },
     {
-     "speciesKey": "gardevoir",
+     "speciesKey": "florges",
      "level": 52
     },
     {
-     "speciesKey": "medicham",
+     "speciesKey": "meowstic",
      "level": 53
     }
    ]
@@ -4207,15 +4207,15 @@
    "trainerClass": "veteran",
    "team": [
     {
-     "speciesKey": "salamence",
+     "speciesKey": "aurorus",
      "level": 53
     },
     {
-     "speciesKey": "archeops",
+     "speciesKey": "barbaracle",
      "level": 54
     },
     {
-     "speciesKey": "arcanine",
+     "speciesKey": "pangoro",
      "level": 55
     }
    ]
@@ -4226,15 +4226,15 @@
    "trainerClass": "medium",
    "team": [
     {
-     "speciesKey": "sableye",
+     "speciesKey": "furfrou",
      "level": 54
     },
     {
-     "speciesKey": "banette",
+     "speciesKey": "dragalge",
      "level": 55
     },
     {
-     "speciesKey": "drifblim",
+     "speciesKey": "trevenant",
      "level": 56
     }
    ]
@@ -4245,19 +4245,19 @@
    "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "castform",
+     "speciesKey": "pyroar",
      "level": 55
     },
     {
-     "speciesKey": "kecleon",
+     "speciesKey": "heliolisk",
      "level": 56
     },
     {
-     "speciesKey": "staraptor",
+     "speciesKey": "furfrou",
      "level": 57
     },
     {
-     "speciesKey": "bibarel",
+     "speciesKey": "diggersby",
      "level": 58
     }
    ]
@@ -4270,15 +4270,15 @@
    "trainerClass": "lass",
    "team": [
     {
-     "speciesKey": "gardevoir",
+     "speciesKey": "slurpuff",
      "level": 58
     },
     {
-     "speciesKey": "slaking",
+     "speciesKey": "klefki",
      "level": 59
     },
     {
-     "speciesKey": "exploud",
+     "speciesKey": "aromatisse",
      "level": 60
     }
    ]
@@ -4289,15 +4289,15 @@
    "trainerClass": "bugCatcher",
    "team": [
     {
-     "speciesKey": "escavalier",
+     "speciesKey": "vivillon",
      "level": 59
     },
     {
-     "speciesKey": "galvantula",
+     "speciesKey": "pyroar",
      "level": 60
     },
     {
-     "speciesKey": "accelgor",
+     "speciesKey": "avalugg",
      "level": 61
     }
    ]
@@ -4308,15 +4308,15 @@
    "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "kabutops",
+     "speciesKey": "aurorus",
      "level": 60
     },
     {
-     "speciesKey": "aerodactyl",
+     "speciesKey": "barbaracle",
      "level": 61
     },
     {
-     "speciesKey": "sudowoodo",
+     "speciesKey": "diggersby",
      "level": 62
     }
    ]
@@ -4327,19 +4327,19 @@
    "trainerClass": "camper",
    "team": [
     {
-     "speciesKey": "simisage",
+     "speciesKey": "gogoat",
      "level": 61
     },
     {
-     "speciesKey": "unfezant",
+     "speciesKey": "trevenant",
      "level": 62
     },
     {
-     "speciesKey": "audino",
+     "speciesKey": "pyroar",
      "level": 63
     },
     {
-     "speciesKey": "leavanny",
+     "speciesKey": "gourgeist",
      "level": 64
     }
    ]
@@ -4352,15 +4352,15 @@
    "trainerClass": "beauty",
    "team": [
     {
-     "speciesKey": "lickilicky",
+     "speciesKey": "heliolisk",
      "level": 62
     },
     {
-     "speciesKey": "togekiss",
+     "speciesKey": "sylveon",
      "level": 63
     },
     {
-     "speciesKey": "porygon-z",
+     "speciesKey": "furfrou",
      "level": 64
     }
    ]
@@ -4371,19 +4371,19 @@
    "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "florges",
+     "speciesKey": "dragalge",
      "level": 63
     },
     {
-     "speciesKey": "volcarona",
+     "speciesKey": "dedenne",
      "level": 64
     },
     {
-     "speciesKey": "gyarados",
+     "speciesKey": "diggersby",
      "level": 65
     },
     {
-     "speciesKey": "electivire",
+     "speciesKey": "slurpuff",
      "level": 66
     }
    ]
@@ -4394,19 +4394,19 @@
    "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "gallade",
+     "speciesKey": "malamar",
      "level": 64
     },
     {
-     "speciesKey": "musharna",
+     "speciesKey": "florges",
      "level": 65
     },
     {
-     "speciesKey": "swoobat",
+     "speciesKey": "meowstic",
      "level": 66
     },
     {
-     "speciesKey": "sigilyph",
+     "speciesKey": "aurorus",
      "level": 67
     }
    ]
@@ -4427,11 +4427,11 @@
      "level": 67
     },
     {
-     "speciesKey": "electrode",
+     "speciesKey": "aromatisse",
      "level": 68
     },
     {
-     "speciesKey": "jolteon",
+     "speciesKey": "tyrantrum",
      "level": 69
     }
    ]
@@ -4442,19 +4442,19 @@
    "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "florges",
+     "speciesKey": "carbink",
      "level": 67
     },
     {
-     "speciesKey": "volcarona",
+     "speciesKey": "gogoat",
      "level": 68
     },
     {
-     "speciesKey": "kingdra",
+     "speciesKey": "goodra",
      "level": 69
     },
     {
-     "speciesKey": "electivire",
+     "speciesKey": "trevenant",
      "level": 70
     }
    ]
@@ -4465,19 +4465,19 @@
    "trainerClass": "blackbelt",
    "team": [
     {
-     "speciesKey": "hitmonlee",
+     "speciesKey": "hawlucha",
      "level": 68
     },
     {
-     "speciesKey": "hitmonchan",
+     "speciesKey": "malamar",
      "level": 69
     },
     {
-     "speciesKey": "hitmontop",
+     "speciesKey": "florges",
      "level": 70
     },
     {
-     "speciesKey": "breloom",
+     "speciesKey": "noivern",
      "level": 71
     }
    ]
@@ -4490,15 +4490,15 @@
    "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "ludicolo",
+     "speciesKey": "clawitzer",
      "level": 69
     },
     {
-     "speciesKey": "pelipper",
+     "speciesKey": "barbaracle",
      "level": 70
     },
     {
-     "speciesKey": "wailord",
+     "speciesKey": "pangoro",
      "level": 71
     }
    ]
@@ -4509,19 +4509,19 @@
    "trainerClass": "sailor",
    "team": [
     {
-     "speciesKey": "whiscash",
+     "speciesKey": "furfrou",
      "level": 70
     },
     {
-     "speciesKey": "crawdaunt",
+     "speciesKey": "dragalge",
      "level": 71
     },
     {
-     "speciesKey": "milotic",
+     "speciesKey": "dedenne",
      "level": 72
     },
     {
-     "speciesKey": "walrein",
+     "speciesKey": "hawlucha",
      "level": 73
     }
    ]
@@ -4534,7 +4534,7 @@
    "trainerClass": "blackbelt",
    "team": [
     {
-     "speciesKey": "heracross",
+     "speciesKey": "stufful",
      "level": 5
     }
    ]
@@ -4545,11 +4545,11 @@
    "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "huntail",
+     "speciesKey": "bruxish",
      "level": 6
     },
     {
-     "speciesKey": "gorebyss",
+     "speciesKey": "pyukumuku",
      "level": 7
     }
    ]
@@ -4562,7 +4562,7 @@
    "trainerClass": "sailor",
    "team": [
     {
-     "speciesKey": "tyrogue",
+     "speciesKey": "wimpod",
      "level": 16
     }
    ]
@@ -4573,11 +4573,11 @@
    "trainerClass": "gentleman",
    "team": [
     {
-     "speciesKey": "porygon-z",
+     "speciesKey": "komala",
      "level": 17
     },
     {
-     "speciesKey": "patrat",
+     "speciesKey": "drampa",
      "level": 18
     }
    ]
@@ -4590,7 +4590,7 @@
    "trainerClass": "channeler",
    "team": [
     {
-     "speciesKey": "litwick",
+     "speciesKey": "dhelmise",
      "level": 19
     }
    ]
@@ -4601,7 +4601,7 @@
    "trainerClass": "tamer",
    "team": [
     {
-     "speciesKey": "miltank",
+     "speciesKey": "mudbray",
      "level": 20
     }
    ]
@@ -4612,11 +4612,11 @@
    "trainerClass": "juggler",
    "team": [
     {
-     "speciesKey": "electrike",
+     "speciesKey": "charjabug",
      "level": 21
     },
     {
-     "speciesKey": "plusle",
+     "speciesKey": "oricorio",
      "level": 22
     }
    ]
@@ -4629,7 +4629,7 @@
    "trainerClass": "superNerd",
    "team": [
     {
-     "speciesKey": "nidoking",
+     "speciesKey": "salandit",
      "level": 25
     }
    ]
@@ -4640,7 +4640,7 @@
    "trainerClass": "fisherman",
    "team": [
     {
-     "speciesKey": "lapras",
+     "speciesKey": "wimpod",
      "level": 26
     }
    ]
@@ -4651,7 +4651,7 @@
    "trainerClass": "picnicker",
    "team": [
     {
-     "speciesKey": "sunflora",
+     "speciesKey": "shiinotic",
      "level": 27
     }
    ]
@@ -4662,11 +4662,11 @@
    "trainerClass": "birdKeeper",
    "team": [
     {
-     "speciesKey": "togetic",
+     "speciesKey": "minior",
      "level": 28
     },
     {
-     "speciesKey": "xatu",
+     "speciesKey": "toucannon",
      "level": 29
     }
    ]
@@ -4679,11 +4679,11 @@
    "trainerClass": "burglar",
    "team": [
     {
-     "speciesKey": "heatmor",
+     "speciesKey": "oricorio",
      "level": 31
     },
     {
-     "speciesKey": "deino",
+     "speciesKey": "salandit",
      "level": 32
     }
    ]
@@ -4694,11 +4694,11 @@
    "trainerClass": "guitarist",
    "team": [
     {
-     "speciesKey": "pichu",
+     "speciesKey": "togedemaru",
      "level": 32
     },
     {
-     "speciesKey": "ampharos",
+     "speciesKey": "vikavolt",
      "level": 33
     }
    ]
@@ -4709,15 +4709,15 @@
    "trainerClass": "cowgirl",
    "team": [
     {
-     "speciesKey": "linoone",
+     "speciesKey": "komala",
      "level": 33
     },
     {
-     "speciesKey": "swellow",
+     "speciesKey": "drampa",
      "level": 34
     },
     {
-     "speciesKey": "vigoroth",
+     "speciesKey": "oranguru",
      "level": 35
     }
    ]
@@ -4730,11 +4730,11 @@
    "trainerClass": "cyclist",
    "team": [
     {
-     "speciesKey": "tauros",
+     "speciesKey": "toucannon",
      "level": 48
     },
     {
-     "speciesKey": "ditto",
+     "speciesKey": "passimian",
      "level": 49
     }
    ]
@@ -4745,15 +4745,15 @@
    "trainerClass": "lady",
    "team": [
     {
-     "speciesKey": "lickilicky",
+     "speciesKey": "ribombee",
      "level": 49
     },
     {
-     "speciesKey": "togekiss",
+     "speciesKey": "mimikyu",
      "level": 50
     },
     {
-     "speciesKey": "porygon-z",
+     "speciesKey": "shiinotic",
      "level": 51
     }
    ]
@@ -4770,11 +4770,11 @@
      "level": 53
     },
     {
-     "speciesKey": "butterfree",
+     "speciesKey": "toucannon",
      "level": 54
     },
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "oricorio",
      "level": 55
     }
    ]
@@ -4785,19 +4785,19 @@
    "trainerClass": "skier",
    "team": [
     {
-     "speciesKey": "cloyster",
+     "speciesKey": "crabominable",
      "level": 54
     },
     {
-     "speciesKey": "jynx",
+     "speciesKey": "bewear",
      "level": 55
     },
     {
-     "speciesKey": "lapras",
+     "speciesKey": "gumshoos",
      "level": 56
     },
     {
-     "speciesKey": "delibird",
+     "speciesKey": "vikavolt",
      "level": 57
     }
    ]
@@ -4810,7 +4810,7 @@
    "trainerClass": "policeman",
    "team": [
     {
-     "speciesKey": "mankey",
+     "speciesKey": "clobbopus",
      "level": 5
     }
    ]
@@ -4821,11 +4821,11 @@
    "trainerClass": "aromaLady",
    "team": [
     {
-     "speciesKey": "whimsicott",
+     "speciesKey": "applin",
      "level": 6
     },
     {
-     "speciesKey": "petilil",
+     "speciesKey": "alcremie",
      "level": 7
     }
    ]
@@ -4838,7 +4838,7 @@
    "trainerClass": "chef",
    "team": [
     {
-     "speciesKey": "vulpix",
+     "speciesKey": "indeedee",
      "level": 12
     }
    ]
@@ -4849,11 +4849,11 @@
    "trainerClass": "dancer",
    "team": [
     {
-     "speciesKey": "exeggutor",
+     "speciesKey": "snom",
      "level": 13
     },
     {
-     "speciesKey": "starmie",
+     "speciesKey": "dracovish",
      "level": 14
     }
    ]
@@ -4866,7 +4866,7 @@
    "trainerClass": "gambler",
    "team": [
     {
-     "speciesKey": "sneasel",
+     "speciesKey": "morpeko",
      "level": 19
     }
    ]
@@ -4877,7 +4877,7 @@
    "trainerClass": "nurse",
    "team": [
     {
-     "speciesKey": "whimsicott",
+     "speciesKey": "dreepy",
      "level": 20
     }
    ]
@@ -4888,7 +4888,7 @@
    "trainerClass": "biker",
    "team": [
     {
-     "speciesKey": "gastly",
+     "speciesKey": "appletun",
      "level": 21
     }
    ]
@@ -4899,11 +4899,11 @@
    "trainerClass": "schoolkid",
    "team": [
     {
-     "speciesKey": "porygon-z",
+     "speciesKey": "skwovet",
      "level": 22
     },
     {
-     "speciesKey": "watchog",
+     "speciesKey": "wooloo",
      "level": 23
     }
    ]
@@ -4916,11 +4916,11 @@
    "trainerClass": "roughneck",
    "team": [
     {
-     "speciesKey": "throh",
+     "speciesKey": "cramorant",
      "level": 29
     },
     {
-     "speciesKey": "sawk",
+     "speciesKey": "arctovish",
      "level": 30
     }
    ]
@@ -4931,11 +4931,11 @@
    "trainerClass": "parasolLady",
    "team": [
     {
-     "speciesKey": "cleffa",
+     "speciesKey": "wyrdeer",
      "level": 30
     },
     {
-     "speciesKey": "igglybuff",
+     "speciesKey": "barraskewda",
      "level": 31
     }
    ]
@@ -4946,11 +4946,11 @@
    "trainerClass": "musician",
    "team": [
     {
-     "speciesKey": "slowking",
+     "speciesKey": "greedent",
      "level": 31
     },
     {
-     "speciesKey": "unown",
+     "speciesKey": "indeedee",
      "level": 32
     }
    ]
@@ -4961,15 +4961,15 @@
    "trainerClass": "preschooler",
    "team": [
     {
-     "speciesKey": "ambipom",
+     "speciesKey": "carkol",
      "level": 32
     },
     {
-     "speciesKey": "buneary",
+     "speciesKey": "thievul",
      "level": 33
     },
     {
-     "speciesKey": "lopunny",
+     "speciesKey": "snom",
      "level": 34
     }
    ]
@@ -4982,11 +4982,11 @@
    "trainerClass": "artist",
    "team": [
     {
-     "speciesKey": "spinda",
+     "speciesKey": "dracovish",
      "level": 36
     },
     {
-     "speciesKey": "zangoose",
+     "speciesKey": "copperajah",
      "level": 37
     }
    ]
@@ -4997,11 +4997,11 @@
    "trainerClass": "backpacker",
    "team": [
     {
-     "speciesKey": "skitty",
+     "speciesKey": "sandaconda",
      "level": 37
     },
     {
-     "speciesKey": "delcatty",
+     "speciesKey": "wyrdeer",
      "level": 38
     }
    ]
@@ -5012,15 +5012,15 @@
    "trainerClass": "pokemonRanger",
    "team": [
     {
-     "speciesKey": "victreebel",
+     "speciesKey": "dubwool",
      "level": 38
     },
     {
-     "speciesKey": "farfetchd",
+     "speciesKey": "flapple",
      "level": 39
     },
     {
-     "speciesKey": "dodrio",
+     "speciesKey": "eldegoss",
      "level": 40
     }
    ]
@@ -5033,11 +5033,11 @@
    "trainerClass": "doctor",
    "team": [
     {
-     "speciesKey": "wobbuffet",
+     "speciesKey": "mr. rime",
      "level": 42
     },
     {
-     "speciesKey": "gardevoir",
+     "speciesKey": "greedent",
      "level": 43
     }
    ]
@@ -5048,11 +5048,11 @@
    "trainerClass": "veteran",
    "team": [
     {
-     "speciesKey": "golisopod",
+     "speciesKey": "sneasler",
      "level": 43
     },
     {
-     "speciesKey": "espeon",
+     "speciesKey": "alcremie",
      "level": 44
     }
    ]
@@ -5063,15 +5063,15 @@
    "trainerClass": "medium",
    "team": [
     {
-     "speciesKey": "froslass",
+     "speciesKey": "polteageist",
      "level": 44
     },
     {
-     "speciesKey": "rotom",
+     "speciesKey": "runerigus",
      "level": 45
     },
     {
-     "speciesKey": "cofagrigus",
+     "speciesKey": "cursola",
      "level": 46
     }
    ]
@@ -5084,11 +5084,11 @@
    "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "linoone",
+     "speciesKey": "hatterene",
      "level": 46
     },
     {
-     "speciesKey": "swellow",
+     "speciesKey": "sirfetch'd",
      "level": 47
     }
    ]
@@ -5099,11 +5099,11 @@
    "trainerClass": "lass",
    "team": [
     {
-     "speciesKey": "farfetchd",
+     "speciesKey": "thievul",
      "level": 47
     },
     {
-     "speciesKey": "dodrio",
+     "speciesKey": "dracovish",
      "level": 48
     }
    ]
@@ -5114,11 +5114,11 @@
    "trainerClass": "bugCatcher",
    "team": [
     {
-     "speciesKey": "golisopod",
+     "speciesKey": "copperajah",
      "level": 48
     },
     {
-     "speciesKey": "orbeetle",
+     "speciesKey": "boltund",
      "level": 49
     }
    ]
@@ -5129,15 +5129,15 @@
    "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "piloswine",
+     "speciesKey": "coalossal",
      "level": 49
     },
     {
-     "speciesKey": "corsola",
+     "speciesKey": "sandaconda",
      "level": 50
     },
     {
-     "speciesKey": "donphan",
+     "speciesKey": "morpeko",
      "level": 51
     }
    ]
@@ -5150,15 +5150,15 @@
    "trainerClass": "camper",
    "team": [
     {
-     "speciesKey": "dhelmise",
+     "speciesKey": "appletun",
      "level": 56
     },
     {
-     "speciesKey": "greedent",
+     "speciesKey": "wyrdeer",
      "level": 57
     },
     {
-     "speciesKey": "eldegoss",
+     "speciesKey": "dubwool",
      "level": 58
     }
    ]
@@ -5169,15 +5169,15 @@
    "trainerClass": "beauty",
    "team": [
     {
-     "speciesKey": "noctowl",
+     "speciesKey": "flapple",
      "level": 57
     },
     {
-     "speciesKey": "azumarill",
+     "speciesKey": "orbeetle",
      "level": 58
     },
     {
-     "speciesKey": "granbull",
+     "speciesKey": "ursaluna",
      "level": 59
     }
    ]
@@ -5188,19 +5188,19 @@
    "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "florges",
+     "speciesKey": "mr. rime",
      "level": 58
     },
     {
-     "speciesKey": "ursaluna",
+     "speciesKey": "greedent",
      "level": 59
     },
     {
-     "speciesKey": "gyarados",
+     "speciesKey": "kleavor",
      "level": 60
     },
     {
-     "speciesKey": "electivire",
+     "speciesKey": "sneasler",
      "level": 61
     }
    ]
@@ -5211,19 +5211,19 @@
    "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "meowstic",
+     "speciesKey": "basculegion",
      "level": 59
     },
     {
-     "speciesKey": "malamar",
+     "speciesKey": "indeedee",
      "level": 60
     },
     {
-     "speciesKey": "oranguru",
+     "speciesKey": "hatterene",
      "level": 61
     },
     {
-     "speciesKey": "bruxish",
+     "speciesKey": "sirfetch'd",
      "level": 62
     }
    ]
@@ -5236,19 +5236,19 @@
    "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "klinklang",
+     "speciesKey": "copperajah",
      "level": 63
     },
     {
-     "speciesKey": "eelektross",
+     "speciesKey": "boltund",
      "level": 64
     },
     {
-     "speciesKey": "stunfisk",
+     "speciesKey": "morpeko",
      "level": 65
     },
     {
-     "speciesKey": "bisharp",
+     "speciesKey": "perrserker",
      "level": 66
     }
    ]
@@ -5259,19 +5259,19 @@
    "trainerClass": "ace",
    "team": [
     {
-     "speciesKey": "slaking",
+     "speciesKey": "appletun",
      "level": 64
     },
     {
-     "speciesKey": "dragonite",
+     "speciesKey": "falinks",
      "level": 65
     },
     {
-     "speciesKey": "tyranitar",
+     "speciesKey": "corviknight",
      "level": 66
     },
     {
-     "speciesKey": "hydreigon",
+     "speciesKey": "cramorant",
      "level": 67
     }
    ]
@@ -5282,15 +5282,15 @@
    "trainerClass": "blackbelt",
    "team": [
     {
-     "speciesKey": "mienshao",
+     "speciesKey": "arctovish",
      "level": 65
     },
     {
-     "speciesKey": "pangoro",
+     "speciesKey": "wyrdeer",
      "level": 66
     },
     {
-     "speciesKey": "bewear",
+     "speciesKey": "dubwool",
      "level": 67
     }
    ]
@@ -5301,19 +5301,19 @@
    "trainerClass": "swimmer",
    "team": [
     {
-     "speciesKey": "mantine",
+     "speciesKey": "barraskewda",
      "level": 66
     },
     {
-     "speciesKey": "kingdra",
+     "speciesKey": "basculegion",
      "level": 67
     },
     {
-     "speciesKey": "ludicolo",
+     "speciesKey": "drednaw",
      "level": 68
     },
     {
-     "speciesKey": "pelipper",
+     "speciesKey": "dracovish",
      "level": 69
     }
    ]
@@ -5326,15 +5326,15 @@
    "trainerClass": "sailor",
    "team": [
     {
-     "speciesKey": "basculin",
+     "speciesKey": "falinks",
      "level": 70
     },
     {
-     "speciesKey": "carracosta",
+     "speciesKey": "cramorant",
      "level": 71
     },
     {
-     "speciesKey": "swanna",
+     "speciesKey": "arctovish",
      "level": 72
     }
    ]
@@ -5345,15 +5345,15 @@
    "trainerClass": "gentleman",
    "team": [
     {
-     "speciesKey": "indeedee",
+     "speciesKey": "wyrdeer",
      "level": 71
     },
     {
-     "speciesKey": "wyrdeer",
+     "speciesKey": "dubwool",
      "level": 72
     },
     {
-     "speciesKey": "ursaluna",
+     "speciesKey": "orbeetle",
      "level": 73
     }
    ]
@@ -5364,15 +5364,15 @@
    "trainerClass": "channeler",
    "team": [
     {
-     "speciesKey": "gourgeist",
+     "speciesKey": "dragapult",
      "level": 72
     },
     {
-     "speciesKey": "palossand",
+     "speciesKey": "basculegion",
      "level": 73
     },
     {
-     "speciesKey": "mimikyu",
+     "speciesKey": "polteageist",
      "level": 74
     }
    ]
@@ -5383,19 +5383,19 @@
    "trainerClass": "tamer",
    "team": [
     {
-     "speciesKey": "snorlax",
+     "speciesKey": "dracozolt",
      "level": 72
     },
     {
-     "speciesKey": "furret",
+     "speciesKey": "indeedee",
      "level": 73
     },
     {
-     "speciesKey": "noctowl",
+     "speciesKey": "dracovish",
      "level": 74
     },
     {
-     "speciesKey": "kingdra",
+     "speciesKey": "appletun",
      "level": 75
     }
    ]
@@ -5408,19 +5408,19 @@
    "trainerClass": "juggler",
    "team": [
     {
-     "speciesKey": "magnezone",
+     "speciesKey": "pincurchin",
      "level": 72
     },
     {
-     "speciesKey": "electivire",
+     "speciesKey": "centiskorch",
      "level": 73
     },
     {
-     "speciesKey": "magmortar",
+     "speciesKey": "arctozolt",
      "level": 74
     },
     {
-     "speciesKey": "simisear",
+     "speciesKey": "toxtricity",
      "level": 75
     }
    ]
@@ -5431,19 +5431,19 @@
    "trainerClass": "superNerd",
    "team": [
     {
-     "speciesKey": "roserade",
+     "speciesKey": "sneasler",
      "level": 72
     },
     {
-     "speciesKey": "pachirisu",
+     "speciesKey": "dracozolt",
      "level": 73
     },
     {
-     "speciesKey": "skuntank",
+     "speciesKey": "overqwil",
      "level": 74
     },
     {
-     "speciesKey": "drapion",
+     "speciesKey": "boltund",
      "level": 75
     }
    ]
@@ -5454,19 +5454,19 @@
    "trainerClass": "fisherman",
    "team": [
     {
-     "speciesKey": "walrein",
+     "speciesKey": "cramorant",
      "level": 72
     },
     {
-     "speciesKey": "huntail",
+     "speciesKey": "arctovish",
      "level": 73
     },
     {
-     "speciesKey": "gorebyss",
+     "speciesKey": "barraskewda",
      "level": 74
     },
     {
-     "speciesKey": "relicanth",
+     "speciesKey": "basculegion",
      "level": 75
     }
    ]
@@ -5477,19 +5477,19 @@
    "trainerClass": "picnicker",
    "team": [
     {
-     "speciesKey": "cherrim",
+     "speciesKey": "obstagoon",
      "level": 72
     },
     {
-     "speciesKey": "ambipom",
+     "speciesKey": "indeedee",
      "level": 73
     },
     {
-     "speciesKey": "purugly",
+     "speciesKey": "overqwil",
      "level": 74
     },
     {
-     "speciesKey": "chatot",
+     "speciesKey": "cursola",
      "level": 75
     }
    ]
@@ -5502,7 +5502,7 @@
    "trainerClass": "pilot",
    "team": [
     {
-     "speciesKey": "rookidee",
+     "speciesKey": "flamigo",
      "level": 5
     }
    ]
@@ -5513,7 +5513,7 @@
    "trainerClass": "skier",
    "team": [
     {
-     "speciesKey": "cubchoo",
+     "speciesKey": "frigibax",
      "level": 6
     }
    ]
@@ -5524,11 +5524,11 @@
    "trainerClass": "waiter",
    "team": [
     {
-     "speciesKey": "castform",
+     "speciesKey": "ironBoulder",
      "level": 7
     },
     {
-     "speciesKey": "kecleon",
+     "speciesKey": "cetoddle",
      "level": 8
     }
    ]
@@ -5541,7 +5541,7 @@
    "trainerClass": "richBoy",
    "team": [
     {
-     "speciesKey": "slakoth",
+     "speciesKey": "armarouge",
      "level": 10
     }
    ]
@@ -5552,11 +5552,11 @@
    "trainerClass": "worker",
    "team": [
     {
-     "speciesKey": "scizor",
+     "speciesKey": "bombirdier",
      "level": 11
     },
     {
-     "speciesKey": "heracross",
+     "speciesKey": "great tusk",
      "level": 12
     }
    ]
@@ -5569,7 +5569,7 @@
    "trainerClass": "idol",
    "team": [
     {
-     "speciesKey": "fidough",
+     "speciesKey": "tinkatink",
      "level": 13
     }
    ]
@@ -5580,11 +5580,11 @@
    "trainerClass": "policeman",
    "team": [
     {
-     "speciesKey": "scraggy",
+     "speciesKey": "iron valiant",
      "level": 14
     },
     {
-     "speciesKey": "mienfoo",
+     "speciesKey": "brute bonnet",
      "level": 15
     }
    ]
@@ -5597,7 +5597,7 @@
    "trainerClass": "aromaLady",
    "team": [
     {
-     "speciesKey": "foongus",
+     "speciesKey": "ironLeaves",
      "level": 15
     }
    ]
@@ -5608,11 +5608,11 @@
    "trainerClass": "chef",
    "team": [
     {
-     "speciesKey": "ceruledge",
+     "speciesKey": "lechonk",
      "level": 16
     },
     {
-     "speciesKey": "shroodle",
+     "speciesKey": "cyclizar",
      "level": 17
     }
    ]
@@ -5625,11 +5625,11 @@
    "trainerClass": "dancer",
    "team": [
     {
-     "speciesKey": "flittle",
+     "speciesKey": "capsakid",
      "level": 28
     },
     {
-     "speciesKey": "veluza",
+     "speciesKey": "iron treads",
      "level": 29
     }
    ]
@@ -5640,15 +5640,15 @@
    "trainerClass": "gambler",
    "team": [
     {
-     "speciesKey": "indeedee",
+     "speciesKey": "oinkologne",
      "level": 29
     },
     {
-     "speciesKey": "morpeko",
+     "speciesKey": "roaring moon",
      "level": 30
     },
     {
-     "speciesKey": "oinkologne",
+     "speciesKey": "squawkabilly",
      "level": 31
     }
    ]
@@ -5661,11 +5661,11 @@
    "trainerClass": "nurse",
    "team": [
     {
-     "speciesKey": "carbink",
+     "speciesKey": "dachsbun",
      "level": 30
     },
     {
-     "speciesKey": "klefki",
+     "speciesKey": "frigibax",
      "level": 31
     }
    ]
@@ -5676,15 +5676,15 @@
    "trainerClass": "biker",
    "team": [
     {
-     "speciesKey": "skrelp",
+     "speciesKey": "scovillain",
      "level": 31
     },
     {
-     "speciesKey": "mareanie",
+     "speciesKey": "spidops",
      "level": 32
     },
     {
-     "speciesKey": "salandit",
+     "speciesKey": "ironBoulder",
      "level": 33
     }
    ]
@@ -5697,11 +5697,11 @@
    "trainerClass": "schoolkid",
    "team": [
     {
-     "speciesKey": "rufflet",
+     "speciesKey": "dudunsparce",
      "level": 33
     },
     {
-     "speciesKey": "diggersby",
+     "speciesKey": "farigiraf",
      "level": 34
     }
    ]
@@ -5712,11 +5712,11 @@
    "trainerClass": "roughneck",
    "team": [
     {
-     "speciesKey": "hitmonchan",
+     "speciesKey": "tinkatuff",
      "level": 34
     },
     {
-     "speciesKey": "heracross",
+     "speciesKey": "great tusk",
      "level": 35
     }
    ]
@@ -5727,15 +5727,15 @@
    "trainerClass": "parasolLady",
    "team": [
     {
-     "speciesKey": "kingler",
+     "speciesKey": "wugtrio",
      "level": 35
     },
     {
-     "speciesKey": "seadra",
+     "speciesKey": "finizen",
      "level": 36
     },
     {
-     "speciesKey": "seaking",
+     "speciesKey": "iron valiant",
      "level": 37
     }
    ]
@@ -5748,11 +5748,11 @@
    "trainerClass": "musician",
    "team": [
     {
-     "speciesKey": "obstagoon",
+     "speciesKey": "ironLeaves",
      "level": 35
     },
     {
-     "speciesKey": "indeedee",
+     "speciesKey": "maushold",
      "level": 36
     }
    ]
@@ -5763,11 +5763,11 @@
    "trainerClass": "preschooler",
    "team": [
     {
-     "speciesKey": "dudunsparce",
+     "speciesKey": "cyclizar",
      "level": 36
     },
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "oinkologne",
      "level": 37
     }
    ]
@@ -5778,15 +5778,15 @@
    "trainerClass": "artist",
    "team": [
     {
-     "speciesKey": "farfetchd",
+     "speciesKey": "squawkabilly",
      "level": 37
     },
     {
-     "speciesKey": "dodrio",
+     "speciesKey": "veluza",
      "level": 38
     },
     {
-     "speciesKey": "chansey",
+     "speciesKey": "pawmo",
      "level": 39
     }
    ]
@@ -5799,11 +5799,11 @@
    "trainerClass": "backpacker",
    "team": [
     {
-     "speciesKey": "komala",
+     "speciesKey": "sandy shocks",
      "level": 38
     },
     {
-     "speciesKey": "drampa",
+     "speciesKey": "dachsbun",
      "level": 39
     }
    ]
@@ -5814,11 +5814,11 @@
    "trainerClass": "pokemonRanger",
    "team": [
     {
-     "speciesKey": "komala",
+     "speciesKey": "scovillain",
      "level": 39
     },
     {
-     "speciesKey": "drampa",
+     "speciesKey": "arboliva",
      "level": 40
     }
    ]
@@ -5829,11 +5829,11 @@
    "trainerClass": "doctor",
    "team": [
     {
-     "speciesKey": "wobbuffet",
+     "speciesKey": "farigiraf",
      "level": 40
     },
     {
-     "speciesKey": "gardevoir",
+     "speciesKey": "scream tail",
      "level": 41
     }
    ]
@@ -5844,15 +5844,15 @@
    "trainerClass": "veteran",
    "team": [
     {
-     "speciesKey": "iron bundle",
+     "speciesKey": "great tusk",
      "level": 41
     },
     {
-     "speciesKey": "iron hands",
+     "speciesKey": "slither wing",
      "level": 42
     },
     {
-     "speciesKey": "iron jugulis",
+     "speciesKey": "gougingFire",
      "level": 43
     }
    ]
@@ -5865,11 +5865,11 @@
    "trainerClass": "medium",
    "team": [
     {
-     "speciesKey": "flutter mane",
+     "speciesKey": "annihilape",
      "level": 40
     },
     {
-     "speciesKey": "gimmighoul",
+     "speciesKey": "ceruledge",
      "level": 41
     }
    ]
@@ -5880,15 +5880,15 @@
    "trainerClass": "youngster",
    "team": [
     {
-     "speciesKey": "farigiraf",
+     "speciesKey": "maushold",
      "level": 41
     },
     {
-     "speciesKey": "dudunsparce",
+     "speciesKey": "cyclizar",
      "level": 42
     },
     {
-     "speciesKey": "pidgeot",
+     "speciesKey": "oinkologne",
      "level": 43
     }
    ]
@@ -5901,15 +5901,15 @@
    "trainerClass": "lass",
    "team": [
     {
-     "speciesKey": "mawile",
+     "speciesKey": "flutter mane",
      "level": 60
     },
     {
-     "speciesKey": "zangoose",
+     "speciesKey": "squawkabilly",
      "level": 61
     },
     {
-     "speciesKey": "castform",
+     "speciesKey": "dachsbun",
      "level": 62
     }
    ]
@@ -5920,15 +5920,15 @@
    "trainerClass": "bugCatcher",
    "team": [
     {
-     "speciesKey": "volcarona",
+     "speciesKey": "spidops",
      "level": 61
     },
     {
-     "speciesKey": "vivillon",
+     "speciesKey": "ironBoulder",
      "level": 62
     },
     {
-     "speciesKey": "vikavolt",
+     "speciesKey": "orthworm",
      "level": 63
     }
    ]
@@ -5939,15 +5939,15 @@
    "trainerClass": "hiker",
    "team": [
     {
-     "speciesKey": "hippowdon",
+     "speciesKey": "iron thorns",
      "level": 62
     },
     {
-     "speciesKey": "rhyperior",
+     "speciesKey": "armarouge",
      "level": 63
     },
     {
-     "speciesKey": "gliscor",
+     "speciesKey": "bombirdier",
      "level": 64
     }
    ]
@@ -5958,19 +5958,19 @@
    "trainerClass": "camper",
    "team": [
     {
-     "speciesKey": "furret",
+     "speciesKey": "arboliva",
      "level": 63
     },
     {
-     "speciesKey": "noctowl",
+     "speciesKey": "dudunsparce",
      "level": 64
     },
     {
-     "speciesKey": "bellossom",
+     "speciesKey": "farigiraf",
      "level": 65
     },
     {
-     "speciesKey": "jumpluff",
+     "speciesKey": "sinistcha",
      "level": 66
     }
    ]
@@ -5983,15 +5983,15 @@
    "trainerClass": "beauty",
    "team": [
     {
-     "speciesKey": "azumarill",
+     "speciesKey": "grafaiai",
      "level": 65
     },
     {
-     "speciesKey": "granbull",
+     "speciesKey": "scream tail",
      "level": 66
     },
     {
-     "speciesKey": "miltank",
+     "speciesKey": "tinkaton",
      "level": 67
     }
    ]
@@ -6002,19 +6002,19 @@
    "trainerClass": "coolTrainer",
    "team": [
     {
-     "speciesKey": "espeon",
+     "speciesKey": "hydrapple",
      "level": 66
     },
     {
-     "speciesKey": "slaking",
+     "speciesKey": "wugtrio",
      "level": 67
     },
     {
-     "speciesKey": "hydreigon",
+     "speciesKey": "iron moth",
      "level": 68
     },
     {
-     "speciesKey": "goodra",
+     "speciesKey": "pawmot",
      "level": 69
     }
    ]
@@ -6027,19 +6027,19 @@
    "trainerClass": "psychic",
    "team": [
     {
-     "speciesKey": "indeedee",
+     "speciesKey": "ironLeaves",
      "level": 72
     },
     {
-     "speciesKey": "wyrdeer",
+     "speciesKey": "rabsca",
      "level": 73
     },
     {
-     "speciesKey": "armarouge",
+     "speciesKey": "mabosstiff",
      "level": 74
     },
     {
-     "speciesKey": "rabsca",
+     "speciesKey": "veluza",
      "level": 75
     }
    ]
@@ -6050,19 +6050,19 @@
    "trainerClass": "scientist",
    "team": [
     {
-     "speciesKey": "corviknight",
+     "speciesKey": "sandy shocks",
      "level": 72
     },
     {
-     "speciesKey": "boltund",
+     "speciesKey": "orthworm",
      "level": 73
     },
     {
-     "speciesKey": "toxtricity",
+     "speciesKey": "kingambit",
      "level": 74
     },
     {
-     "speciesKey": "perrserker",
+     "speciesKey": "iron thorns",
      "level": 75
     }
    ]

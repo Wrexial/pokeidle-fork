@@ -6,10 +6,12 @@ import { installGameData } from './helpers/game-data.mjs'
 
 const require = createRequire(import.meta.url)
 const { buildEvolutionLevels } = require('../tools/lib/evolution-levels.cjs')
+const { buildEvolutionLines } = require('../tools/lib/trainer-teams.cjs')
 
 const gameData = installGameData()
 const { evolutionData, mapData, pokemonSpecies, regions } = gameData
-const { minLevel } = buildEvolutionLevels(evolutionData, pokemonSpecies)
+const evolutionLevels = buildEvolutionLevels(evolutionData, pokemonSpecies)
+const { minLevel } = evolutionLevels
 
 const { readFileSync } = await import('node:fs')
 const { fileURLToPath } = await import('node:url')
@@ -120,6 +122,58 @@ test('route trainers reveal a large share of each generated region dex', () => {
     assert.ok(
       ratio >= 0.3,
       `${region.id} trainers cover only ${Math.round(ratio * 100)}% of their dex`
+    )
+  }
+})
+
+test('every evolution line appears on some route trainer', () => {
+  const speciesBst = Object.fromEntries(
+      Object.entries(pokemonSpecies).map(([key, species]) => [
+        key,
+        Object.values(species.baseStats ?? {}).reduce((sum, stat) => sum + stat, 0),
+      ])
+    ),
+    speciesTypes = Object.fromEntries(
+      Object.entries(pokemonSpecies).map(([key, species]) => [key, species.types ?? []])
+    )
+  for (const region of regions) {
+    if (region.id === 'kanto') continue
+    const [minId, maxId] = GEN_RANGES[region.generation - 1],
+      natives = Object.entries(pokemonSpecies)
+        .filter(
+          ([, species]) =>
+            species.id >= minId &&
+            species.id <= maxId &&
+            species.catchRate > 3 &&
+            !species.legendary
+        )
+        .map(([key, species]) => ({ key, types: species.types ?? [] })),
+      lines = buildEvolutionLines(natives, {
+        preEvolutionOf: evolutionLevels.preEvolutionOf,
+        evolutionData,
+        speciesBst,
+        speciesTypes,
+        isStarter: (key) => ALL_STARTERS.has(key),
+      }),
+      used = new Set(teamsFor(region.id).flat().map((member) => member.speciesKey)),
+      missing = lines.filter((line) => {
+        // Any member of the line counts as shown.
+        const members = [line.root],
+          queue = [line.root]
+        while (queue.length > 0) {
+          const key = queue.shift()
+          for (const evolution of evolutionData[key] ?? []) {
+            if (!evolution?.into || members.includes(evolution.into)) continue
+            members.push(evolution.into)
+            queue.push(evolution.into)
+          }
+        }
+        return !members.some((key) => used.has(key))
+      })
+    assert.deepEqual(
+      missing.map((line) => line.root),
+      [],
+      `${region.id} trainers never show these evolution lines`
     )
   }
 })

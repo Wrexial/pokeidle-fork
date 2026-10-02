@@ -33,7 +33,7 @@ export const CHANGELOG = [
           heading: 'Trainers',
           items: [
             'Town trainers are far more varied: 50 trainer classes instead of 12 — from Fisherman, Bird Keeper and Picnicker to Lady, Rich Boy, Nurse, Policeman, Musician and Medium — each with their own type theme, class-appropriate names drawn from a much larger pool with no repeats inside a region, two to four trainers per town rather than always three, and Ace Trainers, Cooltrainers and Scientists fielding larger squads',
-            'Route trainers field a much wider slice of each region\u2019s own Pokemon now: the class\u2019s type is a bias rather than a filter, teams are stepped to the form that could exist at their level, and they are walked through the region\u2019s dex so the Pokedex \u201cseen\u201d log fills in as you battle (generated regions roughly tripled their trainer dex coverage)',
+            'Route trainers field a much wider slice of each region\u2019s own Pokemon now: the class\u2019s type is a bias rather than a filter, teams are stepped to the form that could exist at their level, and every evolution line turns up on at least one trainer (each town also fields a couple of extra trainers for headroom), so the Pokedex \u201cseen\u201d log fills in as you battle',
             'Gym, Elite Four and Champion teams were rebuilt on the same pass with more distinct species instead of repeated copies, and gym teams grow from three members to five as the badges add up',
           ],
         },

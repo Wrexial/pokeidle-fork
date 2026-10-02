@@ -618,12 +618,13 @@ One-off scripts used to build the data JSON (not run during dev/build):
   `TRAINER_CLASS_TYPES` and named "Class Firstname" — 50 classes, with names
   drawn from gender-matched pools (`TRAINER_NAMES_MALE`/`_FEMALE`/`_ANY`,
   picked through `pickTrainerName`) and kept unique within a region. Each town
-  fields two to four trainers whose classes cycle through the full list, and
-  Ace Trainers / Cooltrainers / Scientists carry an extra member. Route teams
-  use `lib/trainer-teams.cjs` (`buildVariedTeam`), which walks a per-region
-  cursor over the region's own-generation species so its dex is revealed, keeps
-  the class type as a bias, and steps each member to the form that could exist
-  at its level; gym / Elite Four / Champion teams use the older `buildTeam`,
+  fields four to six trainers whose classes cycle (and repeat) through the full
+  list, and Ace Trainers / Cooltrainers / Scientists carry an extra member.
+  Route teams use `lib/trainer-teams.cjs` (`buildVariedTeam` + `buildEvolutionLines`),
+  which queues the region's evolution lines so **every line appears on at least
+  one trainer** (drawn at the form that could exist at that level), keeps the
+  class type as a bias, and fills the remaining slots from the native pool;
+  gym / Elite Four / Champion teams use the older `buildTeam`,
   which drops species that should already have evolved and, at Lv.55+, very
   weak final forms (Ditto), while keeping the type theme when a sparse type
   (Dragon) would otherwise run out. Kanto's hand-curated trainer/leader data
@@ -699,11 +700,11 @@ One-off scripts used to build the data JSON (not run during dev/build):
   Johto Route 36 on the Bug-Catching Contest, Paldea's South Province (Area
   Three) on the Academy Quiz. Idempotent (`--dry`).
 - `apply-trainer-variety.cjs` — data-only pass (#68) that rebuilds every
-  non-Kanto route-trainer team with `lib/trainer-teams.cjs`: level-appropriate,
-  the class type as a bias, and a per-region cursor over the region's own
-  generation so its dex is revealed rather than the same handful repeating.
-  Kanto's hand-curated trainers are left alone; team sizes/levels are kept.
-  Idempotent (`--dry`).
+  non-Kanto town's route trainers with `lib/trainer-teams.cjs`, adding two extra
+  trainers per town for headroom: level-appropriate teams, the class type as a
+  bias, and a queue over the region's evolution lines so **every line is shown
+  at least once**. Kanto's hand-curated trainers are left alone. Idempotent
+  (`--dry`).
 - `fix-impossible-encounters.cjs` / `fix-impossible-teams.cjs` — step wild
   encounters and trainer/gym/Elite Four/Champion Pokemon back to a form that
   could exist at their level (a Lv. 3 Chesnaught becomes a Chespin), merging
@@ -714,12 +715,16 @@ One-off scripts used to build the data JSON (not run during dev/build):
   `plausibleEncounters` pass and `buildTeam` filter regenerate the data.
 - `lib/evolution-levels.cjs` — shared `buildEvolutionLevels` / `stageForLevel`
   helpers (also used by `validate-data.mjs` and the impossible-levels test).
-- `lib/trainer-teams.cjs` — shared `buildVariedTeam` for route trainers (#68): a
-  per-region cursor over the region's own-generation species (so its dex is
-  revealed), level-appropriate forms, and the class type as a bias. Used by
-  `generate-regions.cjs` and `apply-trainer-variety.cjs`.
+- `lib/trainer-teams.cjs` — shared `buildVariedTeam` / `buildEvolutionLines`
+  for route trainers (#68): queues the region's evolution lines so every line is
+  shown (at a level-appropriate form), keeps the class type as a bias, then
+  fills from the native pool. Used by `generate-regions.cjs` and
+  `apply-trainer-variety.cjs`.
 - `lib/trainer-class-types.cjs` — the route-trainer class type themes, shared by
   `generate-regions.cjs` and `apply-trainer-variety.cjs`.
+- `lib/trainer-names.cjs` — route-trainer classes, labels and gendered name
+  pools (`pickTrainerName`), shared by `generate-regions.cjs` and
+  `apply-trainer-variety.cjs`.
 - `lib/route-variety.cjs` — shared route-variety helpers (`buildWildPool`,
   `enrichEncounters`, `collectProtectedSpecies`) used by both
   `generate-regions.cjs` and `apply-route-variety.cjs`.

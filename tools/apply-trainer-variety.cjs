@@ -16,8 +16,26 @@
 const fs = require('fs')
 const path = require('path')
 const { buildEvolutionLevels } = require('./lib/evolution-levels.cjs')
-const { buildVariedTeam } = require('./lib/trainer-teams.cjs')
+const { buildEvolutionLines, buildVariedTeam } = require('./lib/trainer-teams.cjs')
 const TRAINER_CLASS_TYPES = require('./lib/trainer-class-types.cjs')
+const {
+  TRAINER_CLASSES,
+  TRAINER_CLASS_LABELS,
+  pickTrainerName,
+} = require('./lib/trainer-names.cjs')
+
+/** Extra trainers added to every non-Kanto town for dex headroom. */
+const EXTRA_PER_TOWN = 2
+const clampLevel = (level) => Math.max(5, Math.min(100, Math.round(level)))
+/** @param {string} text */
+function hashString(text) {
+  let hash = 2166136261
+  for (let index = 0; index < text.length; index++) {
+    hash ^= text.charCodeAt(index)
+    hash = Math.imul(hash, 16777619)
+  }
+  return hash >>> 0
+}
 
 const DATA = path.join(__dirname, '../public/data')
 const read = (file) => JSON.parse(fs.readFileSync(path.join(DATA, file), 'utf8'))
@@ -78,6 +96,17 @@ const ALL_STARTERS = (() => {
 const byId = Object.entries(species)
   .filter(([, entry]) => entry.id > 0)
   .map(([key, entry]) => ({ key, ...entry }))
+
+const speciesTypes = Object.fromEntries(
+    Object.entries(species).map(([key, entry]) => [key, entry.types ?? []])
+  ),
+  speciesBst = Object.fromEntries(
+    Object.entries(species).map(([key, entry]) => [
+      key,
+      Object.values(entry.baseStats ?? {}).reduce((sum, stat) => sum + stat, 0),
+    ])
+  ),
+  isStarter = (key) => ALL_STARTERS.has(key)
 
 /** @param {number} gen */
 const poolForGen = (gen) => {
@@ -155,24 +184,72 @@ for (const region of regions) {
       makeRng(`${region.id}:natives`)
     ),
     others = pool.filter((candidate) => !candidate.native),
-    state = { cursor: 0 }
-  for (const [locationId, list] of Object.entries(trainers)) {
-    if ((mapData[locationId]?.region ?? 'kanto') !== region.id) continue
+    lines = shuffle(
+      buildEvolutionLines(natives, {
+        preEvolutionOf: evolutionLevels.preEvolutionOf,
+        evolutionData,
+        speciesBst,
+        speciesTypes,
+        isStarter,
+      }),
+      makeRng(`${region.id}:lines`)
+    ),
+    state = { cursor: 0 },
+    locations = Object.entries(trainers).filter(
+      ([locationId]) => (mapData[locationId]?.region ?? 'kanto') === region.id
+    )
+  // Drop the previous run's extra trainers so re-running is idempotent.
+  for (const [, list] of locations)
+    for (let index = list.length - 1; index >= 0; index--)
+      if (/_x\d+$/.test(list[index].id)) list.splice(index, 1)
+  // Names the hand-authored trainers already use.
+  const usedNames = new Set()
+  for (const [, list] of locations)
     for (const trainer of list) {
-      if (!trainer.team?.length) continue
-      const levels = trainer.team.map((member) => member.level),
-        before = trainer.team.map((member) => member.speciesKey).join(','),
-        team = buildVariedTeam({
+      const first = trainer.name.split(' ').slice(-1)[0]
+      usedNames.add(`${trainer.trainerClass}:${first}`)
+    }
+  // Add a couple of trainers per town, reusing classes for variety, and give
+  // them their levels so the shared builder can fill them below.
+  for (const [locationId, list] of locations) {
+    const townSeed = hashString(`${region.id}:${locationId}:extras`),
+      baseLevel = Math.max(...list.flatMap((trainer) => trainer.team.map((m) => m.level)), 5)
+    for (let index = 0; index < EXTRA_PER_TOWN; index++) {
+      const trainerClass = TRAINER_CLASSES[(townSeed + index * 7) % TRAINER_CLASSES.length],
+        name = pickTrainerName(trainerClass, usedNames, townSeed, index),
+        size = 2 + ((townSeed + index) % 2),
+        levels = Array.from({ length: size }, (_, step) => clampLevel(baseLevel + step))
+      list.push({
+        id: `${locationId}_x${index + 1}`,
+        name: `${TRAINER_CLASS_LABELS[trainerClass] ?? trainerClass} ${name}`,
+        trainerClass,
+        _levels: levels,
+        _new: true,
+        team: [],
+      })
+    }
+  }
+  for (const [, list] of locations) {
+    for (const trainer of list) {
+      const levels = trainer._levels ?? trainer.team?.map((member) => member.level)
+      if (!levels?.length) continue
+      delete trainer._levels
+      const before = trainer.team.map((member) => member.speciesKey).join(','),
+        isNew = !!trainer._new
+      delete trainer._new
+      const team = buildVariedTeam({
           natives,
           others,
+          lines,
           theme: TRAINER_CLASS_TYPES[trainer.trainerClass],
           levels,
           state,
           evolutionLevels,
           evolvesAt,
+          speciesTypes,
         }),
         after = team.map((member) => member.speciesKey).join(',')
-      if (before !== after) changed++
+      if (!isNew && before !== after) changed++
       trainer.team = team
       trainersTouched++
     }

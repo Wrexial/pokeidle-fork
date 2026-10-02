@@ -1,7 +1,7 @@
 // // Encounter generation: shiny odds, active effects, swarms/roamers and species rolls. Split from game/progression.js.
 
 import { roamerEncounterChance, shinyCharmMinOddsChance, shinyFullOddsChance, shinyWithCharmChance } from '../../data/config.js'
-import { GENERATION_DEX_RANGES, evolutionData, isSpeciesCharmed, pokemonSpecies, regions } from '../../data/gameData.js'
+import { GENERATION_DEX_RANGES, evolutionData, gymLeaderData, isSpeciesCharmed, pokemonSpecies, regions } from '../../data/gameData.js'
 import { challengeEligibleSpecies, speciesHasType } from '../pokemon.js'
 
 /** Cached fixpoint of the minimum level each species can exist at. @type {Map<string, number> | null} */
@@ -229,22 +229,79 @@ export function advanceShinyTarget(chain, enemy) {
 }
 
 /**
+ * A 0-12 progress score for a region's Raid Island: its badges (0-8), a bonus
+ * for beating its Champion, and region prestige. Drives the legendary weight,
+ * so a fresh island leans toward the minor legendaries.
+ * @param {GameState} state
+ * @param {string} regionId
+ * @returns {number}
+ */
+export function raidProgressFor(state, regionId) {
+  const gymIds = gymLeaderData
+      .filter((gym) => (gym.region ?? 'kanto') === regionId)
+      .map((gym) => gym.id),
+    badges = gymIds.filter((id) => state.defeatedGyms.includes(id)).length,
+    champion = state.defeatedChampions.includes(regionId) ? 3 : 0,
+    prestige = Math.min(3, state.regionPrestige?.[regionId] ?? 0) * 3
+  return Math.min(12, badges + champion + prestige)
+}
+
+/** Highest Raid Island progress score (see raidProgressFor). */
+const RAID_PROGRESS_MAX = 12
+
+/**
+ * Base-stat bands for raid legendaries: 0 = minor, 1 = major, 2 = box/cover.
+ * @param {string} speciesKey
+ * @returns {number}
+ */
+function raidTier(speciesKey) {
+  const base = pokemonSpecies[speciesKey]?.baseStats
+  if (!base) return 0
+  const total =
+    base.hp + base.attack + base.defense + base.spAttack + base.spDefense + base.speed
+  return total >= 670 ? 2 : total >= 580 ? 1 : 0
+}
+
+/**
+ * Pick weight for a raid legendary: minor forms are favoured at low progress,
+ * box legendaries once the region (and its prestige) is done.
+ * @param {{ speciesKey: string }} entry
+ * @param {number} progress 0-12 (see raidProgressFor)
+ * @returns {number}
+ */
+export function raidLegendaryWeight(entry, progress) {
+  const tier = raidTier(entry.speciesKey),
+    remaining = Math.max(0, RAID_PROGRESS_MAX - Math.min(RAID_PROGRESS_MAX, progress))
+  return 1 + (2 - tier) * remaining + tier * progress
+}
+
+/**
  * Pick a raid legendary from a region's pool, preferring species the player has
  * not seen yet, then ones they have not caught, and finally the whole pool — so
  * a seen/caught species is never impossible to raid again (shiny hunting).
+ * Within the candidates, a progress-weighted roll biases a fresh island toward
+ * minor legendaries and a finished one toward the box legendaries.
  * @param {{ speciesKey: string, level: number }[]} pool
  * @param {string[]} pokedexSeen
  * @param {string[]} pokedexCaught
+ * @param {number} [progress]
  * @returns {{ speciesKey: string, level: number } | null}
  */
-export function pickRaidLegendary(pool, pokedexSeen, pokedexCaught) {
+export function pickRaidLegendary(pool, pokedexSeen, pokedexCaught, progress = 0) {
   if (pool.length === 0) return null
   const seen = new Set(pokedexSeen),
     caught = new Set(pokedexCaught),
     unseen = pool.filter((entry) => !seen.has(entry.speciesKey)),
     uncaught = pool.filter((entry) => !caught.has(entry.speciesKey)),
-    candidates = unseen.length > 0 ? unseen : uncaught.length > 0 ? uncaught : pool
-  return candidates[Math.floor(Math.random() * candidates.length)]
+    candidates = unseen.length > 0 ? unseen : uncaught.length > 0 ? uncaught : pool,
+    weights = candidates.map((entry) => raidLegendaryWeight(entry, progress)),
+    total = weights.reduce((sum, weight) => sum + weight, 0)
+  let roll = Math.random() * total
+  for (let index = 0; index < candidates.length; index++) {
+    roll -= weights[index]
+    if (roll < 0) return candidates[index]
+  }
+  return candidates[candidates.length - 1]
 }
 
 /**
@@ -256,9 +313,10 @@ export function pickRaidLegendary(pool, pokedexSeen, pokedexCaught) {
  * @param {Set<number>} completedGenerationSet
  * @param {number} [shinyBonus] Multiplier on shiny odds from a daily event.
  * @param {string | null} [monotype] Monotype challenge: only this type may appear.
+ * @param {number} [progress] Raid progress, for the legendary weighting.
  * @returns {{ species: Species, speciesKey: string, level: number, isShiny: boolean, isRoamer: boolean } | null}
  */
-export function resolveRoamer(regionId, pokedexSeen, pokedexCaught, completedGenerationSet, shinyBonus = 1, monotype = null) {
+export function resolveRoamer(regionId, pokedexSeen, pokedexCaught, completedGenerationSet, shinyBonus = 1, monotype = null, progress = 0) {
   const region = regions.find((candidate) => candidate.id === regionId),
     candidates = (region?.raidPool ?? []).filter(
       (entry) =>
@@ -267,7 +325,7 @@ export function resolveRoamer(regionId, pokedexSeen, pokedexCaught, completedGen
         (!monotype || speciesHasType(entry.speciesKey, monotype))
     )
   if (candidates.length === 0 || Math.random() >= roamerEncounterChance) return null
-  const entry = pickRaidLegendary(candidates, pokedexSeen, pokedexCaught)
+  const entry = pickRaidLegendary(candidates, pokedexSeen, pokedexCaught, progress)
   if (!entry) return null
   return {
     species: pokemonSpecies[entry.speciesKey],

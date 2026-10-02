@@ -37,29 +37,26 @@ renumbered, so the gaps below are items that shipped.
     minimal loops today; make them feel like real modes with real rewards.
 8. **#18 Better settings** — M · ★★★ — sprite-style options, account controls
     (blocked on #19) and finishing the Gameplay section.
-9. **#38 Clean up the Raid Islands** — S · ★★ — weight / level-gate the
-    legendary pick by badges or prestige instead of a uniform "unseen first"
-    pick.
-10. **#43 Multi-battles (double / triple / rotation) as a minigame** — M–L ·
+9. **#43 Multi-battles (double / triple / rotation) as a minigame** — M–L ·
     ★★½ — a self-contained minigame that reuses the combat pipeline.
-11. **#60 Areas should have their own zoomed-in map** — M · ★★ — zones and
+10. **#60 Areas should have their own zoomed-in map** — M · ★★ — zones and
     large areas list their sub-areas in the panel only; give them a focused
     map view entered from the Town Map, with a back button to exit.
-12. **#67 Baby Pokemon from breeding, not gifts** — M · ★★ — the Daycare can
+11. **#67 Baby Pokemon from breeding, not gifts** — M · ★★ — the Daycare can
     already hatch babies from their evolved forms; stop handing the babies out
     as gift/static rewards and give their evolved forms a real source.
-13. **#68 Trainer teams should use all level-appropriate Pokemon** — M · ★★ —
+12. **#68 Trainer teams should use all level-appropriate Pokemon** — M · ★★ —
     the strong type bias and narrow pools mean the same few species repeat; let
     trainers field every level-appropriate Pokemon so the Pokedex "seen" fills
     in.
-14. **#70 Day/night cycle on a 60-minute clock** — M · ★★ — a fixed
+13. **#70 Day/night cycle on a 60-minute clock** — M · ★★ — a fixed
     real-time cycle (full day = 60 min) replacing the wall-clock night flag,
     with a visual phase and time-gated effects.
 ### Tier 2 — Big / low-return, defer
 
-15. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
+14. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
     route-based field effects.
-16. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+15. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
 ---
@@ -246,33 +243,6 @@ Still open:
 
 Effort: **medium–large** (a small data-model change plus map/encounter UI).
 
-## 38. Clean up the Raid Islands (later generations are bloated)
-
-The raid scan gives each region its generation's species that appear on **no**
-region's wild routes and can't be reached by breeding/evolving a route species.
-Later dexes balloon (Alola 51, Galar 59, Paldea 58 pre-cleanup).
-
-**Shipped (0.13.0):** each island's raid bosses are its legendaries/mythicals
-with no other source (the `raidPool`); the ordinary finals that used to share the
-roster now live on fitting region routes as wild encounters (#61), so the island
-is legendary-only. Any ordinary form still without a route or evolution source
-lands on the island's wild table (not the raid pool) as a safety net.
-`validate-data.mjs` checks that `raidPool` is legendary-only.
-
-Still open:
-
-- [ ] Weight / level-gate the legendary pick by badges or prestige instead of a
-      uniform "unseen first" pick.
-
-Relevant code: `tools/generate-regions.cjs` (`raidCandidates`,
-`raidPoolSpecies`, `staysInRaidPool`, `FORM_RAID_REGION`, `paldeaExtrasFor`,
-`RAID_FINAL_HABITATS`, the raid scan), `public/data/regions.json` (`raidPool`),
-`raidPoolFor` / `raidLegendaryPoolFor` (`src/data/gameData.js`),
-`pickRaidLegendary` / `resolveRoamer` (`src/game/progression.js`), the raid UI
-(`src/components/town-map.js`, `location-panel.js`) and `tools/validate-data.mjs`.
-
-Effort: **medium** (mostly balance/data plus the generator; game logic is small).
-
 ## 39. Introduce DLC regions from later games
 
 Later games shipped whole expansion areas that today are folded into a parent
@@ -306,7 +276,7 @@ and map — so they can be opened with an Unlock Token like any other region.
       World Tour achievement.
 - [ ] Register the new region files in `assets/gameDataInjector.js` and re-export
       in `src/data/gameData.js`.
-- [ ] Re-check raid pools (#38) afterwards.
+- [ ] Re-check the raid pools afterwards.
 - [ ] Shape the maps with **zones** (#36) where they're open-world (the
       Terarium, Wild Area-style areas).
 - [ ] Suggested order: Galar DLC → Paldea DLC → older post-games.

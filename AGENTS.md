@@ -337,7 +337,11 @@ Data conventions:
   Alolan forms to Alola, Galarian/Hisuian forms to Galar, Paldean forms to
   Paldea. Gigantamax forms instead become level-100 evolutions (see below),
   matching how the original data models Megas. Every species in
-  `pokemon-species.json` is now obtainable.
+  `pokemon-species.json` is now obtainable. Raid legendaries are picked by
+  `pickRaidLegendary` (`src/game/progression/encounters.js`), weighted by
+  base-stat tier and the region's progress (`raidProgressFor` = badges +
+  Champion + prestige), so a fresh island leans toward minor legendaries and a
+  finished one toward the box legendaries.
 - Sprites are referenced by that `id`. The animated directory is a merged set:
   the official Gen V Black/White animated gifs for national dex ids 1-649, plus
   Pokémon Showdown's animated sprites for everything else (PokeAPI has no

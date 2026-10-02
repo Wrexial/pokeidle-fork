@@ -5,7 +5,7 @@ import { jsx, jsxs } from 'react/jsx-runtime'
 import { encounterData, raidLegendaryPoolFor, mapAreas, mapData, pokemonSpecies, regions } from '../data/gameData.js'
 import { biomeForLocation } from '../data/ui.js'
 import { useGame } from '../game/context.js'
-import { createRoads, getRegionUnlockTokens, pickRaidLegendary } from '../game/progression.js'
+import { createRoads, getRegionUnlockTokens, pickRaidLegendary, raidProgressFor } from '../game/progression.js'
 import { MapNode } from './map-node.js'
 
 // Nodes are positioned as percentages, so the layout doesn't change here — this
@@ -128,7 +128,12 @@ export function TownMap() {
     if (locationData?.type === 'raid') {
       if (state.raidCooldownEnd && Date.now() < state.raidCooldownEnd) return
       const pool = raidLegendaryPoolFor(locationData.region ?? 'kanto'),
-        legendary = pickRaidLegendary(pool, state.pokedexSeen, state.pokedexCaught)
+        legendary = pickRaidLegendary(
+          pool,
+          state.pokedexSeen,
+          state.pokedexCaught,
+          raidProgressFor(state, locationData.region ?? 'kanto')
+        )
       if (!legendary) return
       dispatch({
         type: 'START_RAID',

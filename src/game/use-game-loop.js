@@ -15,7 +15,7 @@ import { abilityOf } from './abilities.js'
 import { companionExpMultiplier } from './companion.js'
 import { applyBattleForm, createBattlePokemon, createVolatileState, resolveBattleTurn, volatileStateFromBattle, AI_SKILL, chooseBestSwitch } from './combat.js'
 import { isBattleReady } from './pokemon.js'
-import { awardExperience, checkShinyOdds, pokerusExpMultiplier, resolveActiveModifiers, resolvePokemonEncounter, resolveRoamer, shinyOddsForSpecies } from './progression.js'
+import { awardExperience, checkShinyOdds, pokerusExpMultiplier, raidProgressFor, resolveActiveModifiers, resolvePokemonEncounter, resolveRoamer, shinyOddsForSpecies } from './progression.js'
 
 export function useGameLoop() {
   const { state, dispatch: rawDispatch } = useGame(),
@@ -272,7 +272,8 @@ export function useGameLoop() {
                 currentGameState.pokedexCaught,
                 completedGenerationSet,
                 dailyShinyBonus,
-                currentGameState.challengeMonotype
+                currentGameState.challengeMonotype,
+                raidProgressFor(currentGameState, regionId)
               ) ??
               resolvePokemonEncounter(
                 routeEncounterData,

@@ -6,7 +6,7 @@ export { getItemCategory, isHeldItem, getItemSellPrice, isUsableConsumable, roll
 export { awaySummary, computeOfflineReward, formatAwayDuration } from './progression/offline.js'
 export { tickPokerus, pokerusExpMultiplier, tickPartyEggs, getActivePartyIndex, syncActivePokemonIntoParty, loadActivePokemonFromParty, createIdleBattleState, prepareNextBattle, releaseFaintedParty, tickBattleCounters } from './progression/party.js'
 export { computeUnlockedLocations, getRegionUnlockTokens, regionProgressionGoal, entryRoutePath, minigameRequirementMet } from './progression/unlocks.js'
-export { getCatchRule, checkShinyOdds, shinyOddsForCompletedGenerations, shinyOddsForSpecies, HONEY_CHAIN_THRESHOLD, SHINY_CHAIN_FIRST_TARGET, SHINY_CHAIN_TARGET_STEP, applyEncounterModifiers, advanceShinyTarget, resolveActiveModifiers, shinyChainMultiplier, pickRaidLegendary, resolveRoamer, resolvePokemonEncounter, minLevelForSpecies } from './progression/encounters.js'
+export { getCatchRule, checkShinyOdds, shinyOddsForCompletedGenerations, shinyOddsForSpecies, HONEY_CHAIN_THRESHOLD, SHINY_CHAIN_FIRST_TARGET, SHINY_CHAIN_TARGET_STEP, applyEncounterModifiers, advanceShinyTarget, resolveActiveModifiers, shinyChainMultiplier, pickRaidLegendary, raidProgressFor, raidLegendaryWeight, resolveRoamer, resolvePokemonEncounter, minLevelForSpecies } from './progression/encounters.js'
 export { buildTrainerTeam, buildTowerTeam, buildTowerFloor } from './progression/teams.js'
 export { awardExperience } from './progression/exp.js'
 export { formatCooldown, createRoads } from './progression/roads.js'

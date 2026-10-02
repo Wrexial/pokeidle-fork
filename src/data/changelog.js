@@ -16,6 +16,7 @@ export const CHANGELOG = [
             'Baby Pokemon are no longer planted in the wild to fill out the former raid roster: Cleffa, Smoochum and Magby are hatched by breeding their evolved forms, and Togepi still comes from Mr. Pok\u00e9mon\'s egg. Beldum and Porygon likewise come from Steven\'s gift and the Game Corner',
             'Hoenn’s Route 102 now has the missing Slakoth base form as a rare wild encounter',
             'The Galarian birds — Galarian Articuno, Zapdos and Moltres — are legendary Raid Island bosses again, instead of being filed among the ordinary one-off refuge encounters',
+            'Raid Islands hand out their legendaries as a ladder now: a fresh island leans toward the minor legendaries and a completed (or prestiged) one toward the box legendaries, weighted by the region\u2019s badges, Champion and prestige instead of a flat random pick',
             'Steven’s post-Champion Beldum gift is available at his house in Mossdeep City once you have beaten the Hoenn Champion',
             'Mr. Pok\u00e9mon on Johto\u2019s Route 30 now hands over the canonical Togepi Egg once you have a Johto badge; carry it in the party and battle to hatch it',
             'The Lake of Rage’s red Gyarados is a one-off guaranteed-shiny static on Johto Route 43 (after the seventh badge); it stays put until you catch it',

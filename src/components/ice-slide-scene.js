@@ -15,6 +15,7 @@ import {
   iceSlidePosition,
   iceSlidePrize,
   iceSlideSolved,
+  iceTempleRunSize,
   strengthMove,
   strengthSolved,
 } from '../game/minigames.js'
@@ -33,12 +34,15 @@ const ARROWS = [
 const ARROW_DIRECTIONS = { ArrowUp: 'N', ArrowDown: 'S', ArrowLeft: 'W', ArrowRight: 'E' }
 
 // Each visit rolls its own run: the Strength gates first, then the ice rooms,
-// drawn at random from the pools in `ice-temple.js`. The scene only stores the
-// rolled run (plus the run's own par), so two runs rarely play the same.
+// drawn at random from the hand-designed pool plus fresh generated rooms (see
+// `ice-temple.js`). The scene only stores the rolled run (plus the run's own
+// par), so two runs rarely play the same. Prestige adds an extra ice room.
 
 export function IceSlideScene() {
   const { state, dispatch } = useGame(),
-    [templeRun] = React.useState(() => buildIceTempleStages()),
+    [templeRun] = React.useState(() =>
+      buildIceTempleStages(Math.random, iceTempleRunSize(state.regionPrestige.sinnoh ?? 0))
+    ),
     stages = templeRun.stages,
     templePar = templeRun.par,
     [stageIndex, setStageIndex] = React.useState(0),

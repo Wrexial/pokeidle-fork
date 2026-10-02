@@ -67,13 +67,11 @@ renumbered, so the gaps below are items that shipped.
 18. **#70 Day/night cycle on a 60-minute clock** — M · ★★ — a fixed
     real-time cycle (full day = 60 min) replacing the wall-clock night flag,
     with a visual phase and time-gated effects.
-19. **#74 Snowpoint Temple variety** — S · ★ — the ice-slide rooms are a fixed
-    set, so every run is the same puzzle; add more / randomise them.
 ### Tier 2 — Big / low-return, defer
 
-20. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
+19. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
     route-based field effects.
-21. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+20. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
 ---
@@ -628,29 +626,6 @@ Relevant code: `src/game/catching.js` (`isNightTime`, `catchContext`),
 `src/data/ui.js` (backgrounds / tints).
 
 Effort: **medium** (the logic is small; the visual pass is the work).
-
-## 74. Snowpoint Temple is too repetitive
-
-Snowpoint Temple (the opening Strength chamber plus the ice-slide rooms) used to
-be a fixed set of hand-designed puzzles, so every run was the same.
-
-Shipped (0.23.0): each visit rolls its own run (`buildIceTempleStages` in
-`src/game/minigames/ice-temple.js`) — 2 of 4 Strength chambers and 4 of 8 ice
-rooms at random — and the flawless-move bonus uses the drawn run's par, not the
-pool total. The room pools were widened to four chambers and eight rooms.
-
-Still open:
-
-- [ ] Consider a seeded procedural generator, keeping the parser’s par /
-      solvability check so every room is fair.
-- [ ] Scale the number of rooms with region prestige if it should get harder.
-
-Relevant code: `src/game/minigames/ice-temple.js` (`buildIceTempleStages`),
-`src/game/minigames/ice-slide.js` (`ICE_SLIDE_LEVELS`, `parseIceLevel`),
-`src/game/minigames/strength.js` (`STRENGTH_LEVELS`),
-`src/components/ice-slide-scene.js`, and the reducer’s `iceSlide` handlers.
-
-Effort: **small**.
 
 ## Map cleanup reference maps
 

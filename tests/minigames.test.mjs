@@ -8,9 +8,10 @@ const gameData = installGameData()
 const { BATTLE_ROYAL_COST, BATTLE_ROYAL_POOL, BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL, BUG_CONTEST_RUSTLES, CONTEST_COST, CONTEST_THEMES, DYNAMAX_ADVENTURES_COST, DYNAMAX_STAGES, MINIGAME_LOCATIONS, MINIGAME_INFO, MINIGAME_AREAS, MINIGAME_REGIONS, MINIGAME_START_ACTION, minigameForLocation, minigamesInRegion, minigameNameForLocation, MINING_COST, POKEATHLON_COST, POKEATHLON_SPRINT_MS, POKE_RADAR_CHAIN_STEP, POKE_RADAR_COST, POKE_RADAR_SIZE, SLOT_JACKPOT, SLOT_PAYLINES, SLOT_REELS, SLOT_ROWS, SLOT_SPIN_COST, SLOT_SYMBOLS, VOLTORB_FLIP_COST, VOLTORB_MAX_LEVEL, VOLTORB_SIZE, AUCTION_LOTS, accuracyScore, auctionAppraisal, battleRoyalOpponent, battleRoyalPrize, boardCleared, boardExploded, boardHints, bugCatchChance, bugContestPrize, bugFleeChance, bugStays, buildContestResults, canAuctionBid, contestAppeal, contestPlacement, contestPlayerRank, contestPrize, contestRank, contestScore, contestTheme, createAuction, createOpponent, createVoltorbBoard, dynamaxBoss, dynamaxPaths, dynamaxPrize, flipVoltorbCell, healSquad, moveBaseAppeal, pickRadarTarget, placeAuctionBid, pokeathlonPrize, pokeRadarPrize, radarChainPoints, radarSequence, rewardItemName, rollContestBug, rollContestBugs, rollContestRivalRound, rollContestTheme, rollMiningReward, simulateBattle, spinSlots, sprintScore, throwNetBall, toBattlePokemon, toggleVoltorbMark, voltorbBoardCoins, voltorbCountForLevel, voltorbFlipPrize, LIGHTS_OUT_COST, LIGHTS_OUT_SCRAMBLE, LIGHTS_OUT_SIZE, CURRY_COST, CURRY_FLAVORS, CURRY_INGREDIENTS, CURRY_ZONE, POKESTAR_COST, POKESTAR_SHOT_COUNT, createLightsOut, toggleLights, lightsSolved, lightsOutPrize, rollCurryRequest, curryScore, curryPrize, pickPokestarShots, pokestarPrize, MATCH3_COST, MATCH3_MOVES, MATCH3_SIZE, MEMORY_COST, MEMORY_PAIRS, WHACK_COST, WHACK_DURATION_MS, WHACK_POP_MIN_MS, WHACK_TARGETS, whackPopupMs, GAME_CORNER_PRIZE_GOAL, GAME_CORNER_PRIZE_POOL, createMatch3Board, findMatches, tryMatch3Swap, resolveMatch3, match3Prize, createMemoryDeck, memoryPrize, rollWhackTarget, whackPrize, MUSICAL_COST, MUSICAL_NOTES, MUSICAL_MAX_SCORE, generateMusicalPattern, judgeMusicalHit, musicalPrize, musicalTotalMs, PICNIC_COST, PICNIC_PICKS, PICNIC_INGREDIENTS, PICNIC_SHINY_MULTIPLIER, ingredientById, sandwichTypes, rollSandwichType, picnicDropScore, picnicSpeciesPool, rollPicnicEncounter, POKEBALL_FACTORY_COST, FACTORY_SIZE, connectionsFor, createFactoryPuzzle, rotateFactoryTile, factoryPowered, factorySolved, factoryPrize, FACTORY_BALL_POOL, rollFactoryBalls, SLIDING_COST, SLIDING_SIZE, solvedSlidingBoard, canSlide, slideTile, isSlidingSolved, createSlidingPuzzle, slidingTileForDirection, slidingPrize, ICE_SLIDE_COST, ICE_SLIDE_ROOMS, ICE_SLIDE_TOTAL_PAR, iceSlidePosition, iceSlideSolved, iceSlidePrize } = await import(
   '../src/game/minigames.js'
 )
-const { match3SwapFrames, MATCH3_SPECIES, MATCH3_TYPES, radarFaces, STRENGTH_ROOMS, STRENGTH_TOTAL_PAR, createStrengthState, strengthMove, strengthSolved, buildIceTempleStages, ICE_TEMPLE_ICE_STAGES, ICE_TEMPLE_STRENGTH_STAGES } = await import(
+const { match3SwapFrames, MATCH3_SPECIES, MATCH3_TYPES, radarFaces, STRENGTH_ROOMS, STRENGTH_TOTAL_PAR, createStrengthState, strengthMove, strengthSolved, buildIceTempleStages, buildIceTempleRoomPool, generateIceRoom, isIceRoomFair, iceTempleRunSize, ICE_GENERATOR_MIN_PAR, ICE_TEMPLE_ICE_STAGES, ICE_TEMPLE_PRESTIGE_MAX, ICE_TEMPLE_STRENGTH_STAGES, parseIceLevel } = await import(
   '../src/game/minigames.js'
 )
+const { mulberry32 } = await import('../src/game/rng.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 const { consumableItems, evolutionItems, fossilItems, heldItems } = await import('../src/data/items.js')
 const { createPokemon } = await import('../src/game/pokemon.js')
@@ -1274,11 +1275,63 @@ test('a temple run rolls a fair, varied set of rooms', () => {
     run.iceRooms.reduce((sum, room) => sum + room.par, 0)
   assert.equal(run.par, expectedPar)
   assert.ok(Number.isFinite(run.par) && run.par > 0)
+  for (const room of run.iceRooms) assert.ok(isIceRoomFair(room), 'every drawn room is fair')
   // Repeated visits roll different rooms.
   const rolls = new Set(
     Array.from({ length: 10 }, () => buildIceTempleStages(random).iceRooms.map((room) => room.par).join(','))
   )
   assert.ok(rolls.size > 1, 'runs vary')
+})
+
+test('hand-designed rooms are fair and a known trap room is not', () => {
+  for (const room of ICE_SLIDE_ROOMS) assert.ok(isIceRoomFair(room), 'a curated room is fair')
+  // This room is solvable from the start, but some slide can strand the hero
+  // where the exit is unreachable.
+  const trap = parseIceLevel([
+    '#######',
+    '#....##',
+    '##..#.#',
+    '#....##',
+    '#..#..#',
+    '#S.#.E#',
+    '#######',
+  ])
+  assert.ok(Number.isFinite(trap.par), 'the trap room is still solvable from the start')
+  assert.equal(isIceRoomFair(trap), false)
+})
+
+test('the procedural generator emits fair, seeded, solvable rooms', () => {
+  const first = generateIceRoom(mulberry32(1234)),
+    second = generateIceRoom(mulberry32(1234))
+  assert.ok(first, 'the generator finds a room')
+  assert.deepEqual(first.rows, second.rows, 'the same seed rolls the same room')
+  assert.ok(Number.isFinite(first.par) && first.par >= ICE_GENERATOR_MIN_PAR)
+  assert.ok(isIceRoomFair(first))
+  assert.notEqual(first.start, first.goal)
+  // A run of seeds all produce fair rooms.
+  for (let seed = 1; seed <= 25; seed++) {
+    const room = generateIceRoom(mulberry32(seed))
+    assert.ok(room && isIceRoomFair(room), `seed ${seed} yields a fair room`)
+  }
+})
+
+test('the temple ice pool mixes curated and generated rooms', () => {
+  const pool = buildIceTempleRoomPool(mulberry32(42))
+  assert.ok(pool.length > ICE_SLIDE_ROOMS.length, 'at least one room was generated')
+  assert.equal(new Set(pool.map((room) => room.rows.join('\n'))).size, pool.length, 'the pool is de-duplicated')
+  for (const room of pool) assert.ok(isIceRoomFair(room))
+})
+
+test('Sinnoh prestige lengthens temple runs, but not without bound', () => {
+  const base = iceTempleRunSize(0)
+  assert.equal(base.iceStages, ICE_TEMPLE_ICE_STAGES)
+  assert.equal(base.strengthStages, ICE_TEMPLE_STRENGTH_STAGES)
+  assert.ok(iceTempleRunSize(1).iceStages > base.iceStages, 'prestige adds a room')
+  assert.equal(
+    iceTempleRunSize(99).iceStages,
+    ICE_TEMPLE_ICE_STAGES + ICE_TEMPLE_PRESTIGE_MAX,
+    'the bonus is capped'
+  )
 })
 
 test('START_ICE_SLIDE charges entry and END_MINIGAME returns to idle', () => {

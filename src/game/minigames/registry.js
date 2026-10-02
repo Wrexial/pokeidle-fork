@@ -18,8 +18,7 @@ import { MUSICAL_COST, MUSICAL_NOTES } from './musical.js'
 import { PICNIC_COST, PICNIC_PICKS } from './picnic.js'
 import { POKEBALL_FACTORY_COST, FACTORY_SIZE } from './pokeball-factory.js'
 import { SLIDING_COST, SLIDING_SIZE } from './sliding-puzzle.js'
-import { ICE_SLIDE_COST, ICE_SLIDE_ROOMS } from './ice-slide.js'
-import { ICE_TEMPLE_ICE_STAGES } from './ice-temple.js'
+import { ICE_SLIDE_COST } from './ice-slide.js'
 import { mapData } from '../../data/gameData.js'
 import { VOLTORB_FLIP_COST } from './voltorb-flip.js'
 import { BATTLE_TOWER_LOCATION } from '../../data/config.js'
@@ -273,7 +272,7 @@ export const MINIGAME_INFO = {
     title: 'Snowpoint Temple',
     cost: ICE_SLIDE_COST,
     action: 'ENTER THE TEMPLE',
-    hint: `Open the Strength chambers \u2014 shove each boulder onto its pressure plate to unseal the exit \u2014 then slide through ${ICE_TEMPLE_ICE_STAGES} of ${ICE_SLIDE_ROOMS.length} ice rooms to reach the temple\u2019s heart; the rooms are rolled fresh each visit, and the fewer moves the better. Entry is $${ICE_SLIDE_COST.toLocaleString()}.`,
+    hint: `Open the Strength chambers \u2014 shove each boulder onto its pressure plate to unseal the exit \u2014 then slide through a fresh run of ice rooms to reach the temple\u2019s heart; every visit rolls new rooms (higher Sinnoh prestige adds more), and the fewer moves the better. Entry is $${ICE_SLIDE_COST.toLocaleString()}.`,
   },
   pokePelago: {
     title: 'Poké Pelago',

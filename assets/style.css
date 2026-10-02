@@ -9347,6 +9347,71 @@ img {
     cursor: pointer
 }
 
+.companion-buddy {
+    position: relative;
+    width: 86px;
+    height: 86px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 2px solid #b89a68;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 68%, #fff6d8, #f0e0b8 70%, #e0cc9c);
+    cursor: pointer;
+    animation: companionBob 2.6s ease-in-out infinite
+}
+
+.companion-portrait[data-mood="low"] .companion-buddy {
+    filter: saturate(.75)
+}
+
+.companion-sprite.pet {
+    animation: companionPet .5s ease
+}
+
+.companion-heart {
+    position: absolute;
+    bottom: 58%;
+    transform: translateX(-50%);
+    font-size: 15px;
+    pointer-events: none;
+    animation: companionHeart 1s ease-out forwards
+}
+
+.companion-mood {
+    font-size: 8px;
+    color: #5a4838;
+    padding: 1px 7px;
+    background: #00000012;
+    border-radius: 7px
+}
+
+.companion-pet-hint {
+    margin: 0;
+    font-size: 8px;
+    color: #5a4838;
+    text-align: center
+}
+
+@keyframes companionBob {
+    0%, 100% { transform: translateY(0) }
+    50% { transform: translateY(-4px) }
+}
+
+@keyframes companionPet {
+    0% { transform: scale(1) rotate(0) }
+    30% { transform: scale(1.14) rotate(-5deg) }
+    60% { transform: scale(.95) rotate(4deg) }
+    100% { transform: scale(1) rotate(0) }
+}
+
+@keyframes companionHeart {
+    0% { opacity: 0; transform: translate(-50%, 0) scale(.6) }
+    20% { opacity: 1 }
+    100% { opacity: 0; transform: translate(-50%, -46px) scale(1.15) }
+}
+
 .garden-plots {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

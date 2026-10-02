@@ -13,12 +13,24 @@ const {
   COMPANION_MAX_CARE,
   applyCareAction,
   companionExpMultiplier,
+  companionMood,
   createCompanionCare,
   isCompanionContent,
   tickCompanion,
 } = await import('../src/game/companion.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 const { createPokemon } = await import('../src/game/pokemon.js')
+
+test('companion mood reflects the lowest care stat', () => {
+  assert.equal(companionMood(createCompanionCare(null, 0)), null)
+  const happy = createCompanionCare('a', 0),
+    hungry = { ...happy, fullness: 10 },
+    sleepy = { ...happy, energy: 5, happiness: 30 }
+  assert.equal(companionMood(happy).label, 'Happy')
+  assert.ok(companionMood(happy).icon)
+  assert.equal(companionMood(hungry).label, 'Hungry')
+  assert.equal(companionMood(sleepy).label, 'Sleepy')
+})
 
 test('companion care helpers', () => {
   const care = createCompanionCare('a', 5)

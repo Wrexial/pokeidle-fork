@@ -105,6 +105,31 @@ export function isCompanionContent(companion) {
   )
 }
 
+/**
+ * A care stat and the mood it suggests when it is the lowest one.
+ * @type {{ stat: 'fullness' | 'happiness' | 'energy' | 'cleanliness', label: string, icon: string }[]}
+ */
+export const COMPANION_MOODS = [
+  { stat: 'fullness', label: 'Hungry', icon: '\u{1F35C}' },
+  { stat: 'happiness', label: 'Bored', icon: '\u{1F614}' },
+  { stat: 'energy', label: 'Sleepy', icon: '\u{1F4A4}' },
+  { stat: 'cleanliness', label: 'Mucky', icon: '\u{1FAE7}' },
+]
+
+/**
+ * The companion's mood for the buddy panel: happy while content, otherwise the
+ * lowest care stat. Null when nothing is pinned.
+ * @param {Companion} companion
+ * @returns {{ label: string, icon: string } | null}
+ */
+export function companionMood(companion) {
+  if (!companion?.id) return null
+  if (isCompanionContent(companion)) return { label: 'Happy', icon: '\u{1F60A}' }
+  return COMPANION_MOODS.reduce((worst, entry) =>
+    companion[entry.stat] < companion[worst.stat] ? entry : worst
+  )
+}
+
 /** EXP multiplier from the companion's care (1x when there is no content companion). @param {Companion} companion */
 export function companionExpMultiplier(companion) {
   return isCompanionContent(companion) ? COMPANION_EXP_MULTIPLIER : 1

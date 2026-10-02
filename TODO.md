@@ -35,39 +35,37 @@ renumbered, so the gaps below are items that shipped.
     Crown Tundra, Kitakami and the Terarium to first-class regions.
 7. **#54 Improve Dynamax Adventures and Battle Royal** — M · ★★½ — both are
     minimal loops today; make them feel like real modes with real rewards.
-8. **#29 Companion minigame polish** — S · ★★ — an animated buddy panel /
-    petting scene (the last open minigame idea).
-9. **#18 Better settings** — M · ★★★ — sprite-style options, account controls
+8. **#18 Better settings** — M · ★★★ — sprite-style options, account controls
     (blocked on #19) and finishing the Gameplay section.
-10. **#38 Clean up the Raid Islands** — S · ★★ — weight / level-gate the
+9. **#38 Clean up the Raid Islands** — S · ★★ — weight / level-gate the
     legendary pick by badges or prestige instead of a uniform "unseen first"
     pick.
-11. **#43 Multi-battles (double / triple / rotation) as a minigame** — M–L ·
+10. **#43 Multi-battles (double / triple / rotation) as a minigame** — M–L ·
     ★★½ — a self-contained minigame that reuses the combat pipeline.
-12. **#60 Areas should have their own zoomed-in map** — M · ★★ — zones and
+11. **#60 Areas should have their own zoomed-in map** — M · ★★ — zones and
     large areas list their sub-areas in the panel only; give them a focused
     map view entered from the Town Map, with a back button to exit.
-13. **#65 Use minigames as unlock gates** — M · ★★ — let a route require
+12. **#65 Use minigames as unlock gates** — M · ★★ — let a route require
     clearing a minigame (or hitting a score) instead of only battles / badges /
     catches, so the minigames feed progression.
-14. **#66 Ruins of Alph should award an Unown (and all 28 forms)** — M · ★★ —
+13. **#66 Ruins of Alph should award an Unown (and all 28 forms)** — M · ★★ —
     the sliding puzzle never gives an Unown, and only one Unown form exists;
     award one and add the full letter / punctuation set.
-15. **#67 Baby Pokemon from breeding, not gifts** — M · ★★ — the Daycare can
+14. **#67 Baby Pokemon from breeding, not gifts** — M · ★★ — the Daycare can
     already hatch babies from their evolved forms; stop handing the babies out
     as gift/static rewards and give their evolved forms a real source.
-16. **#68 Trainer teams should use all level-appropriate Pokemon** — M · ★★ —
+15. **#68 Trainer teams should use all level-appropriate Pokemon** — M · ★★ —
     the strong type bias and narrow pools mean the same few species repeat; let
     trainers field every level-appropriate Pokemon so the Pokedex "seen" fills
     in.
-17. **#70 Day/night cycle on a 60-minute clock** — M · ★★ — a fixed
+16. **#70 Day/night cycle on a 60-minute clock** — M · ★★ — a fixed
     real-time cycle (full day = 60 min) replacing the wall-clock night flag,
     with a visual phase and time-gated effects.
 ### Tier 2 — Big / low-return, defer
 
-18. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
+17. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
     route-based field effects.
-19. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+18. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
 ---
@@ -235,20 +233,6 @@ Relevant code: `tools/scrape-region-maps.cjs` (`MANUAL_BRIDGES`),
 Effort: **large** (data-heavy; 28a/28b mostly data, 28c an ongoing small
 feature).
 
-## 29. Minigames (companion polish)
-
-Every region has its signature and extra minigames (see the changelog for the
-full set), plus the Companion and Berry Garden. The only open idea:
-
-- [ ] An animated buddy panel / petting scene using the existing sprite helpers
-      (companion care is a static modal today).
-
-The care decay itself is also too harsh — see #58.
-
-Relevant code: `src/game/companion.js`, the minigame scenes under
-`src/components/`, and `src/game/reducer/minigames.js`.
-
-Effort: **small**.
 ## 36. Zones — route-like chunks of areas
 
 The map is a graph of single nodes joined pair-wise. The zone model shipped in
@@ -378,8 +362,8 @@ The engine is **singles only** — the move data already flags the doubles-only
 moves (Follow Me, Helping Hand, Quick/Wide Guard, …) as unimplemented (see #24),
 and the ally/doubles abilities are on the #25 list. Make multi-battles a
 **self-contained minigame** (a scene + a `START_*`/`END_MINIGAME` reducer pair
-+ a `MINIGAME_LOCATIONS` entry, per the #29 pattern), so the main game stays
-singles.
++ a `MINIGAME_LOCATIONS` entry, following the other minigames), so the main game
+stays singles.
 
 - [ ] Pick the first mode: **double battle** (2v2) is the most legible and the
       most reusable; triple and rotation battles are stretch goals.

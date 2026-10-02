@@ -1,16 +1,34 @@
 // Companion care panel, shown inside Poké Pelago. Split from the old
-// standalone modal so Pelago can host it alongside the Berry Garden.
+// standalone modal so Pelago can host it alongside the Berry Garden. The
+// portrait is an interactive "buddy stage": the companion bobs on the mat, and
+// tapping it (or using a care action) throws up a reaction.
 
+import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
+import { playSfx } from '../game/audio.js'
 import {
   COMPANION_CARE_ACTIONS,
   COMPANION_CONTENT_THRESHOLD,
   COMPANION_EXP_MULTIPLIER,
+  companionMood,
   isCompanionContent,
 } from '../game/companion.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, pokemonDisplayName } from '../game/pokemon.js'
+
+/** Emoji thrown up when the buddy is petted. */
+const PET_HEARTS = ['\u{1F497}', '\u{1F495}', '\u{2728}', '\u{1F3B5}', '\u{1F496}']
+
+/** The icon a care action throws up on the stage. @type {Record<string, string>} */
+const CARE_FEEDBACK = {
+  feed: '\u{1F356}',
+  play: '\u{1F3BE}',
+  pat: '\u{1F497}',
+  brush: '\u{2728}',
+  wash: '\u{1FAE7}',
+  rest: '\u{1F4A4}',
+}
 
 /** @param {{ label: string, value: number }} props */
 function CareBar({ label, value }) {
@@ -37,7 +55,43 @@ export function CompanionCarePanel() {
     member = [...state.party, ...state.box].find((candidate) => candidate.id === companion?.id),
     content = isCompanionContent(companion),
     canCare = !!companion?.id && state.wildBattlesWon > companion.careBattle,
-    speciesId = member ? pokemonSpecies[member.speciesKey].id : 0
+    speciesId = member ? pokemonSpecies[member.speciesKey].id : 0,
+    [hearts, setHearts] = React.useState(
+      /** @type {{ id: number, x: number, emoji: string }[]} */ ([])
+    ),
+    [petting, setPetting] = React.useState(false),
+    nextHeartId = React.useRef(1),
+    mood = companionMood(companion)
+
+  /** Throw a reaction up from the companion. @param {string} emoji */
+  function spawnReaction(emoji) {
+    const id = nextHeartId.current++
+    setHearts((current) => [
+      ...current,
+      { id, x: 12 + Math.random() * 76, emoji },
+    ])
+  }
+
+  /** @param {number} id */
+  function clearReaction(id) {
+    setHearts((current) => current.filter((heart) => heart.id !== id))
+  }
+
+  function petBuddy() {
+    if (!member) return
+    if (state.sfxEnabled) playSfx('tap')
+    setPetting(true)
+    spawnReaction(PET_HEARTS[Math.floor(Math.random() * PET_HEARTS.length)])
+  }
+
+  /** @param {string} actionId */
+  function care(actionId) {
+    if (state.sfxEnabled) playSfx('good')
+    setPetting(true)
+    spawnReaction(CARE_FEEDBACK[actionId] ?? '\u{1F497}')
+    dispatch({ type: 'CARE_COMPANION', payload: { action: actionId } })
+  }
+
   return jsxs('div', {
     className: 'companion-content',
     children: [
@@ -47,17 +101,38 @@ export function CompanionCarePanel() {
             children: [
               jsxs('div', {
                 className: 'companion-portrait',
+                'data-mood': content ? 'happy' : 'low',
                 children: [
-                  jsx('img', {
-                    className: 'companion-sprite',
-                    src: getPokemonSpriteUrl(speciesId, !1, member.isShiny),
-                    onError: /** @param {{ target: HTMLImageElement }} event */ (event) =>
-                      (event.target.src = getPokemonSpriteFallbackUrl(
-                        speciesId,
-                        !1,
-                        member.isShiny
-                      )),
-                    alt: member.name,
+                  jsxs('button', {
+                    className: 'companion-buddy',
+                    onClick: petBuddy,
+                    'aria-label': `Pet ${pokemonDisplayName(member)}`,
+                    children: [
+                      jsx('img', {
+                        className: `companion-sprite${petting ? ' pet' : ''}`,
+                        src: getPokemonSpriteUrl(speciesId, !1, member.isShiny),
+                        onAnimationEnd: () => setPetting(false),
+                        onError: /** @param {{ target: HTMLImageElement }} event */ (event) =>
+                          (event.target.src = getPokemonSpriteFallbackUrl(
+                            speciesId,
+                            !1,
+                            member.isShiny
+                          )),
+                        alt: member.name,
+                      }),
+                      hearts.map((heart) =>
+                        jsx(
+                          'span',
+                          {
+                            className: 'companion-heart',
+                            style: { left: `${heart.x}%` },
+                            onAnimationEnd: () => clearReaction(heart.id),
+                            children: heart.emoji,
+                          },
+                          heart.id
+                        )
+                      ),
+                    ],
                   }),
                   jsxs('span', {
                     className: 'companion-name',
@@ -70,6 +145,11 @@ export function CompanionCarePanel() {
                     className: 'companion-level',
                     children: `Lv.${member.level}`,
                   }),
+                  mood &&
+                    jsxs('span', {
+                      className: 'companion-mood',
+                      children: [mood.icon, ' ', mood.label],
+                    }),
                 ],
               }),
               jsxs('div', {
@@ -89,6 +169,11 @@ export function CompanionCarePanel() {
               'Choose a companion below and keep it fed, happy, rested and clean. Care fades as you win battles.',
           }),
       member &&
+        jsxs('p', {
+          className: 'companion-pet-hint',
+          children: ['Tap your buddy to pet it \u2014 ', mood ? `${mood.label.toLowerCase()} right now.` : ''],
+        }),
+      member &&
         jsx('div', {
           className: `companion-bonus${content ? ' active' : ''}`,
           children: content
@@ -106,7 +191,7 @@ export function CompanionCarePanel() {
               {
                 className: 'companion-action-btn',
                 disabled,
-                onClick: () => dispatch({ type: 'CARE_COMPANION', payload: { action: actionId } }),
+                onClick: () => care(actionId),
                 children: jsxs('span', {
                   children: [action.icon, ' ', action.label, price],
                 }),

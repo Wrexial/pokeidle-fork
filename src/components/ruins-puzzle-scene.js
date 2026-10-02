@@ -10,7 +10,7 @@ import {
   canSlide,
   createSlidingPuzzle,
   isSlidingSolved,
-  nextUnownForm,
+  randomUnownForm,
   slideTile,
   slidingPrize,
   slidingTileForDirection,
@@ -47,8 +47,8 @@ export function RuinsPuzzleScene() {
       if (state.sfxEnabled) playSfx('win')
       setPrize({
         ...slidingPrize(moves, true),
-        // Every solve hands over the next Unown form the player is missing.
-        pokemon: { speciesKey: nextUnownForm(state.pokedexCaught), level: 5 },
+        // Every solve hands over a random Unown form the player is missing.
+        pokemon: { speciesKey: randomUnownForm(state.pokedexCaught), level: 5 },
       })
     }
   }, [board, prize, moves])

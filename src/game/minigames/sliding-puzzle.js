@@ -129,13 +129,13 @@ export const UNOWN_FORMS = [
 ]
 
 /**
- * The next Unown form the player has not caught, or a random form once the set
- * is complete, so repeats still turn up.
+ * A random Unown form the player has not caught yet, or a random form once the
+ * set is complete, so repeats still turn up.
  * @param {string[]} caught Species keys the player has caught.
  * @param {() => number} [random]
  * @returns {string}
  */
-export function nextUnownForm(caught, random = Math.random) {
+export function randomUnownForm(caught, random = Math.random) {
   const caughtSet = new Set(caught),
     missing = UNOWN_FORMS.filter((key) => !caughtSet.has(key)),
     pool = missing.length > 0 ? missing : UNOWN_FORMS

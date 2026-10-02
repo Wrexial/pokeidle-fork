@@ -7,6 +7,29 @@ import { mapData } from './data/gameData.js'
 import { useGame } from './game/context.js'
 import { playSfx, startMusic, stopMusic, unlockAudio } from './game/audio.js'
 import { awaySummary } from './game/progression.js'
+import { dayPhaseAt, msUntilPhaseChange } from './game/day-night.js'
+
+/**
+ * The current day/night phase, re-rendering only when the phase changes.
+ * @returns {ReturnType<typeof dayPhaseAt>}
+ */
+export function useDayPhase() {
+  const [phase, setPhase] = React.useState(() => dayPhaseAt())
+  React.useEffect(() => {
+    /** @type {ReturnType<typeof setTimeout> | undefined} */
+    let timer
+    const schedule = () => {
+      const next = dayPhaseAt()
+      // Only re-render when the phase actually changes.
+      setPhase((current) => (current.id === next.id ? current : next))
+      // A small guard so the timer never fires just before the boundary.
+      timer = setTimeout(schedule, msUntilPhaseChange() + 50)
+    }
+    schedule()
+    return () => clearTimeout(timer)
+  }, [])
+  return phase
+}
 
 /**
  * @param {string} text

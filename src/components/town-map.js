@@ -7,6 +7,7 @@ import { biomeForLocation } from '../data/ui.js'
 import { useGame } from '../game/context.js'
 import { createRoads, getRegionUnlockTokens, pickRaidLegendary, raidProgressFor } from '../game/progression.js'
 import { MapNode } from './map-node.js'
+import { DayPhaseChip } from './day-phase-chip.js'
 
 // Nodes are positioned as percentages, so the layout doesn't change here — this
 // only sets the pixel size of the virtual canvas the map is drawn on. It's
@@ -468,6 +469,7 @@ export function TownMap() {
             className: 'town-map-battles',
             children: [state.wildBattlesWon, 'W ', state.trainerBattlesWon, 'T'],
           }),
+          jsx(DayPhaseChip, {}),
           jsx('button', {
             type: 'button',
             className: `map-search-toggle${searchOpen ? ' active' : ''}`,

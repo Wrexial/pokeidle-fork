@@ -3,6 +3,9 @@
 import { ballOrder, pokeBalls } from '../data/items.js'
 import { pokemonSpecies } from '../data/gameData.js'
 import { getCatchRule } from './progression.js'
+import { isNightTime } from './day-night.js'
+
+export { isNightTime }
 
 /**
  * @param {string} speciesKey
@@ -107,12 +110,6 @@ export function isCaveLocation(location) {
   if (!location) return !1
   const text = `${location.name ?? ''} ${location.description ?? ''}`.toLowerCase()
   return location.background === '/backgrounds/cave.png' || /cave|tunnel|mine|cavern|grotto/.test(text)
-}
-
-/** Whether the local time is night (20:00-03:59). @param {Date} [date] */
-export function isNightTime(date = new Date()) {
-  const hour = date.getHours()
-  return hour >= 20 || hour < 4
 }
 
 /**

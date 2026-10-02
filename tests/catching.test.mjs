@@ -107,6 +107,8 @@ test('location helpers classify water, caves and night', () => {
   assert.equal(isWaterLocation({ name: 'Route 1', description: 'A grassy path.' }), false)
   assert.equal(isCaveLocation({ name: 'Mt. Moon', description: 'A cave through the mountain.' }), true)
   assert.equal(isCaveLocation({ name: 'Route 2', description: 'A path.' }), false)
-  assert.equal(isNightTime(new Date(2024, 0, 1, 22, 0)), true)
-  assert.equal(isNightTime(new Date(2024, 0, 1, 12, 0)), false)
+  // isNightTime follows the game's 60-minute day/night cycle, not the wall
+  // clock (see tests/day-night.test.mjs for the cycle itself).
+  assert.equal(isNightTime(3_600_000 * 0.8), true)
+  assert.equal(isNightTime(3_600_000 * 0.2), false)
 })

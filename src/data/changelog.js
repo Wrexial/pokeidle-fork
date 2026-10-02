@@ -22,6 +22,7 @@ export const CHANGELOG = [
             'Mr. Pok\u00e9mon on Johto\u2019s Route 30 now hands over the canonical Togepi Egg once you have a Johto badge; carry it in the party and battle to hatch it',
             'The Lake of Rage’s red Gyarados is a one-off guaranteed-shiny static on Johto Route 43 (after the seventh badge); it stays put until you catch it',
             'Minigames can gate routes now: Kanto’s Route 11 opens after a Whack-a-Diglett score of 15, Johto’s Route 36 after clearing the Bug-Catching Contest, and Paldea’s South Province (Area Three) after scoring 4 in the Academy Quiz. A locked route lists the current / best score and links to the minigame’s home area',
+            'The world runs on a fixed day/night cycle now: one full day every 60 real minutes (dawn, day, dusk, night), independent of the wall clock. The Town Map header shows the current phase, the battle background is tinted to match, and the Dusk Ball keeps its night bonus',
             'Routes feel less repetitive: every route that only had a handful of species now also rolls other Pokemon already wild elsewhere in the same region, matched to the route\u2019s level and dominant types, so most routes offer up to around sixteen different finds. Starter lines, breed-only babies, Raid Island rosters and route-exclusive catch targets are left alone',
             'Snowpoint Temple now opens with a Strength chamber: push the boulder onto the pressure plate to unseal the exit before the ice rooms',
           ],

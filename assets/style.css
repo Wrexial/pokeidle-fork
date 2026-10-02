@@ -3120,6 +3120,13 @@ img {
     color: var(--text-muted)
 }
 
+.day-phase-chip {
+    flex: 0 0 auto;
+    font-size: 7px;
+    color: var(--gold);
+    white-space: nowrap
+}
+
 .map-search-toggle {
     flex: 0 0 auto;
     font-family: var(--font-pixel);

@@ -46,14 +46,11 @@ renumbered, so the gaps below are items that shipped.
     the strong type bias and narrow pools mean the same few species repeat; let
     trainers field every level-appropriate Pokemon so the Pokedex "seen" fills
     in.
-12. **#70 Day/night cycle on a 60-minute clock** — M · ★★ — a fixed
-    real-time cycle (full day = 60 min) replacing the wall-clock night flag,
-    with a visual phase and time-gated effects.
 ### Tier 2 — Big / low-return, defer
 
-13. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
+12. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
     route-based field effects.
-14. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+13. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
 ---
@@ -67,7 +64,8 @@ Still open:
 
 - [ ] Terrain rocks (an item/ability that extends a terrain's duration), and
       route-based field effects (a route that starts sunny/raining/etc.).
-- [ ] A route-based or global day/night field — see #70.
+- [ ] Night-only or day-only wild encounters that use the shipped day/night
+      cycle.
 
 Effort: **medium**.
 
@@ -440,37 +438,6 @@ Relevant code: `tools/generate-regions.cjs` (`buildTeam`,
 (`src/game/reducer/collection.js`).
 
 Effort: **medium** (generator tuning plus regenerating trainer data).
-## 70. Day/night cycle on a 60-minute clock
-
-There is a night flag today, but it follows the player's real-world clock:
-`isNightTime()` (`src/game/catching.js`) returns true 20:00–03:59 local time and
-feeds the Dusk Ball's x3 rate via `catchContext.isNight`. Add a proper game
-**day/night cycle** that runs on a fixed real-time period — one full day = 60
-real minutes (e.g. 30 min day, 30 min night) — independent of the wall clock.
-
-- [ ] Define the cycle: a full loop every **60 minutes**, with day/night (and
-      ideally dawn/dusk) fractions. Derive the phase from
-      `Date.now() % 3_600_000` or a persisted cycle anchor so it is identical
-      across slots and reloads.
-- [ ] Replace `isNightTime()`'s real-clock hour check with the cycle, keeping
-      the Dusk Ball (and any future time-gated catch/encounter rules) working.
-- [ ] Surface it: a day/night tint / sky over the battle and location scenes,
-      plus a small clock / phase indicator (a visual pass that could pair with
-      the battle polish in #25).
-- [ ] Decide what else it gates: night-only or day-only wild encounters,
-      Sun/Moon evolution items, daily events, etc.
-- [ ] Keep it cheap in the idle loop — recompute the phase on a boundary, not
-      on every render, if it drives visuals.
-- [ ] Note the save shape: a pure `Date.now()` derivation needs no new field,
-      but a persisted anchor would (if the cycle must not shift on reload).
-
-Relevant code: `src/game/catching.js` (`isNightTime`, `catchContext`),
-`src/game/use-game-loop.js` (`isNight` in the catch context),
-`src/components/battle-scene.js` / `location-panel.js` for the visuals, and
-`src/data/ui.js` (backgrounds / tints).
-
-Effort: **medium** (the logic is small; the visual pass is the work).
-
 ## Map cleanup reference maps
 
 All eight non-Kanto regions have hand-measured `REGION_MAP_LAYOUTS` overrides.

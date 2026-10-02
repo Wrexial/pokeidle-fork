@@ -317,6 +317,18 @@ export const BIOME_FILTERS = {
 }
 
 /**
+ * Extra filter layered over the biome tint for the current day/night phase
+ * (see src/game/day-night.js). Purely visual.
+ * @type {Record<string, string>}
+ */
+export const DAY_NIGHT_FILTERS = {
+  dawn: 'sepia(.18) saturate(1.08) brightness(1.02)',
+  day: 'none',
+  dusk: 'sepia(.3) hue-rotate(-12deg) saturate(1.1) brightness(.86)',
+  night: 'saturate(.8) brightness(.68) hue-rotate(-10deg)',
+}
+
+/**
  * Pick a biome tint for a location from its name, falling back to its
  * background image. Purely visual — the battle background image is unchanged.
  * @param {MapLocation | undefined} location

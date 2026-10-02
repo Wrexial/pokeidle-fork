@@ -3,7 +3,7 @@
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { useGame } from '../game/context.js'
 import { UiProvider } from '../game/ui-context.js'
-import { useIsMobile, useKonamiCode, useDailyEvent, useQuests, useBrowserNotifications, useAwayAlert, useAccessibilitySettings, useGameAudio } from '../hooks.js'
+import { useIsMobile, useKonamiCode, useDailyEvent, useQuests, useBrowserNotifications, useAwayAlert, useAccessibilitySettings, useGameAudio, useDayPhase } from '../hooks.js'
 import { BattleScreen } from './battle-screen.js'
 import { TownMap } from './town-map.js'
 import { PartyBoxPanel } from './party-box-panel.js'
@@ -15,7 +15,8 @@ import { NotificationStack } from './notification-stack.js'
 import { GlobalTooltip } from './global-tooltip.js'
 
 export function GameLayout() {
-  const { dispatch } = useGame()
+  const { dispatch } = useGame(),
+    dayPhase = useDayPhase()
   // Debug cheat: enter the Konami code to max the active Pokemon to level 100.
   useKonamiCode(() => dispatch({ type: 'DEBUG_MAX_LEVEL' }))
   // Rolls today's daily event and refreshes it at local midnight.
@@ -33,6 +34,7 @@ export function GameLayout() {
     children: useIsMobile()
       ? jsxs('div', {
           className: 'game-layout mobile',
+          'data-day-phase': dayPhase.id,
           children: [
             jsx(BattleScreen, {}),
             jsx(MobileTabs, {}),
@@ -44,6 +46,7 @@ export function GameLayout() {
         })
       : jsxs('div', {
           className: 'game-layout',
+          'data-day-phase': dayPhase.id,
           children: [
             jsx(PartyBoxPanel, {}),
             jsxs('div', {

@@ -8,7 +8,8 @@ import { MoveCategoryIcon } from './move-category-icon.js'
 import { moveTooltip } from '../game/move-info.js'
 import { dailyEventByKey } from '../data/daily-events.js'
 import { hasClaimableQuests } from '../game/quests.js'
-import { biomeForLocation, BIOME_FILTERS, locationImages } from '../data/ui.js'
+import { biomeForLocation, BIOME_FILTERS, DAY_NIGHT_FILTERS, locationImages } from '../data/ui.js'
+import { useDayPhase } from '../hooks.js'
 import { shinyFullOddsChance } from '../data/config.js'
 import { getDexStatus, shouldOfferMasterBall } from '../game/catching.js'
 import { battleSpecies } from '../game/combat.js'
@@ -69,6 +70,7 @@ export function BattleScene() {
     [showQuests, setShowQuests] = React.useState(!1),
     [showCompanion, setShowCompanion] = React.useState(!1),
     { state, dispatch } = useGame(),
+    dayPhase = useDayPhase(),
     { playerPokemon, enemyPokemon, battleEvents } = state,
     completedGenerationSet = completedGenerations(state.pokedexCaught),
     caughtSpeciesSet = new Set(state.pokedexCaught),
@@ -198,9 +200,17 @@ export function BattleScene() {
         className: 'battle-scene-bg',
         style: {
           backgroundImage: `url('${battleBackground}')`,
-          filter: BIOME_FILTERS[
-            activeTrainerBattle || isTown ? 'town' : biomeForLocation(mapData[state.currentLocation])
-          ],
+          filter:
+            [
+              BIOME_FILTERS[
+                activeTrainerBattle || isTown
+                  ? 'town'
+                  : biomeForLocation(mapData[state.currentLocation])
+              ],
+              DAY_NIGHT_FILTERS[dayPhase.id],
+            ]
+              .filter((part) => part && part !== 'none')
+              .join(' ') || 'none',
         },
       }),
       (state.weather || state.terrain) &&

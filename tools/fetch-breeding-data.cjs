@@ -100,11 +100,18 @@ async function breedingForId(id) {
   await Promise.all(Array.from({ length: 4 }, worker))
 
   /** @type {Record<string, any>} */
-  const byKey = {}
+  const byKey = {},
+    // Ids with no PokeAPI pokemon entry (the Unown letters) keep their
+    // hand-written rows (see add-unown-forms.cjs) instead of being dropped.
+    breedingPath = path.join(DATA, 'breeding-data.json'),
+    previous = fs.existsSync(breedingPath)
+      ? JSON.parse(fs.readFileSync(breedingPath, 'utf8'))
+      : {}
   for (const [key, entry] of Object.entries(species)) {
     if (byId[entry.id]) byKey[key] = byId[entry.id]
+    else if (previous[key]) byKey[key] = previous[key]
   }
-  fs.writeFileSync(path.join(DATA, 'breeding-data.json'), JSON.stringify(byKey, null, 1) + '\n')
+  fs.writeFileSync(breedingPath, JSON.stringify(byKey, null, 1) + '\n')
   console.log(`wrote breeding data for ${Object.keys(byKey).length} species (${ids.length} ids)`)
 })().catch((error) => {
   console.error(error.stack || error.message)

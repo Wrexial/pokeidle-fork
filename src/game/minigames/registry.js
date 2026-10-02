@@ -266,7 +266,7 @@ export const MINIGAME_INFO = {
     title: 'Ruins of Alph',
     cost: SLIDING_COST,
     action: 'SOLVE THE RUINS',
-    hint: `Slide the stone tiles back into order against the single empty slot \u2014 tap a tile beside the gap to move it, or use the arrow keys. The ${SLIDING_SIZE}\u00d7${SLIDING_SIZE} picture is scrambled every visit, and a quicker solve pays better. Entry is $${SLIDING_COST.toLocaleString()}.`,
+    hint: `Slide the stone tiles back into order against the single empty slot \u2014 tap a tile beside the gap to move it, or use the arrow keys. The ${SLIDING_SIZE}\u00d7${SLIDING_SIZE} picture is scrambled every visit, a quicker solve pays better, and every solve unearths the next Unown form you are missing. Entry is $${SLIDING_COST.toLocaleString()}.`,
   },
   iceSlide: {
     title: 'Snowpoint Temple',

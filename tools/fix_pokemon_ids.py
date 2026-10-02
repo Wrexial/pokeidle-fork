@@ -80,6 +80,11 @@ def get_pokeapi_name(json_key):
     if name in SPECIAL_CASES:
         return SPECIAL_CASES[name]
 
+    # Unown's letters/!/? are PokeAPI *forms* of pokemon 201, not pokemon with
+    # their own id; add-unown-forms.cjs assigns their bespoke ids.
+    if name.startswith("unown-"):
+        return None
+
     # PokeAPI drops spaces, periods and apostrophes from species names.
     name = name.replace(" ", "-").replace(".", "").replace("'", "")
 

@@ -12777,6 +12777,18 @@ img {
     font-size: 13px
 }
 
+.minigame-reward-row.pokemon {
+    background: rgba(120,200,255,.12);
+    border-color: rgba(120,200,255,.5)
+}
+
+.minigame-reward-pokemon {
+    display: block;
+    width: 28px;
+    height: 28px;
+    image-rendering: pixelated
+}
+
 .minigame-reward-name {
     flex: 1
 }

@@ -84,11 +84,19 @@ async function abilitiesForId(id) {
   await Promise.all(Array.from({ length: 5 }, worker))
 
   /** @type {Record<string, any>} */
-  const byKey = {}
+  const byKey = {},
+    // Ids with no PokeAPI pokemon entry (the Unown letters/!/?, which PokeAPI
+    // models as *forms* of 201) are owned by add-unown-forms.cjs; keep their
+    // hand-written rows instead of dropping them.
+    abilityPath = path.join(DATA, 'ability-data.json'),
+    previous = fs.existsSync(abilityPath)
+      ? JSON.parse(fs.readFileSync(abilityPath, 'utf8'))
+      : {}
   for (const [key, entry] of Object.entries(species)) {
     if (byId[entry.id]) byKey[key] = byId[entry.id]
+    else if (previous[key]) byKey[key] = previous[key]
   }
-  fs.writeFileSync(path.join(DATA, 'ability-data.json'), JSON.stringify(byKey, null, 1) + '\n')
+  fs.writeFileSync(abilityPath, JSON.stringify(byKey, null, 2) + '\n')
   console.log(`wrote abilities for ${Object.keys(byKey).length} species (${ids.length} ids)`)
 })().catch((error) => {
   console.error(error.stack || error.message)

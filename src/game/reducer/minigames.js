@@ -444,17 +444,27 @@ export function payMinigameFee(state, action) {
  * @returns {GameState}
  */
 export function claimMinigameReward(state, action) {
-  const { money = 0, items = [] } = action.payload ?? {},
+  const { money = 0, items = [], pokemon = null } = action.payload ?? {},
     inventory = { ...state.inventory }
   for (const item of items)
     if (item?.itemId && item.quantity > 0)
       inventory[item.itemId] = (inventory[item.itemId] ?? 0) + item.quantity
-  return {
+  let next = {
     ...state,
     money: state.money + money,
     inventory,
     battleLog: [...state.battleLog, 'Minigame reward claimed.'].slice(-50),
   }
+  // Some minigames hand over a fixed Pokemon (the Ruins of Alph's Unown).
+  if (pokemon?.speciesKey && pokemonSpecies[pokemon.speciesKey]) {
+    const speciesKey = pokemon.speciesKey
+    next = catchPokemon(next, {
+      type: 'CATCH_POKEMON',
+      payload: { speciesKey, level: pokemon.level ?? 5 },
+    })
+    next = markCaught(next, { type: 'MARK_CAUGHT', payload: { speciesKey } })
+  }
+  return next
 }
 
 /**

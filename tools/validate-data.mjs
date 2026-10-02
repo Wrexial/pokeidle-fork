@@ -29,6 +29,7 @@ installGameData()
 const { GIFTS, STATIC_ENCOUNTERS } = await import('../src/game/gifts.js')
 const { GAME_CORNER_PRIZE_POOL } = await import('../src/game/minigames/game-corner.js')
 const { BUG_CONTEST_POOL } = await import('../src/game/minigames/bug-contest.js')
+const { UNOWN_FORMS } = await import('../src/game/minigames/sliding-puzzle.js')
 const { fossilItems } = await import('../src/data/items.js')
 const { regionalStarters } = await import('../src/data/config.js')
 
@@ -136,6 +137,8 @@ for (const bug of BUG_CONTEST_POOL) obtainable.add(bug.speciesKey)
 // Fossil items revive these species at Cinnabar Island (see fossilItems in
 // src/data/items.js).
 for (const fossil of Object.values(fossilItems)) obtainable.add(fossil.speciesKey)
+// The Ruins of Alph puzzle hands over the whole Unown set (sliding-puzzle.js).
+for (const key of UNOWN_FORMS) obtainable.add(key)
 let expanded = true
 while (expanded) {
   expanded = false

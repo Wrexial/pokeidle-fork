@@ -48,24 +48,21 @@ renumbered, so the gaps below are items that shipped.
 12. **#65 Use minigames as unlock gates** — M · ★★ — let a route require
     clearing a minigame (or hitting a score) instead of only battles / badges /
     catches, so the minigames feed progression.
-13. **#66 Ruins of Alph should award an Unown (and all 28 forms)** — M · ★★ —
-    the sliding puzzle never gives an Unown, and only one Unown form exists;
-    award one and add the full letter / punctuation set.
-14. **#67 Baby Pokemon from breeding, not gifts** — M · ★★ — the Daycare can
+13. **#67 Baby Pokemon from breeding, not gifts** — M · ★★ — the Daycare can
     already hatch babies from their evolved forms; stop handing the babies out
     as gift/static rewards and give their evolved forms a real source.
-15. **#68 Trainer teams should use all level-appropriate Pokemon** — M · ★★ —
+14. **#68 Trainer teams should use all level-appropriate Pokemon** — M · ★★ —
     the strong type bias and narrow pools mean the same few species repeat; let
     trainers field every level-appropriate Pokemon so the Pokedex "seen" fills
     in.
-16. **#70 Day/night cycle on a 60-minute clock** — M · ★★ — a fixed
+15. **#70 Day/night cycle on a 60-minute clock** — M · ★★ — a fixed
     real-time cycle (full day = 60 min) replacing the wall-clock night flag,
     with a visual phase and time-gated effects.
 ### Tier 2 — Big / low-return, defer
 
-17. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
+16. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
     route-based field effects.
-18. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+17. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
 ---
@@ -483,35 +480,6 @@ Relevant code: `src/game/progression/unlocks.js` (`computeUnlockedLocations`),
 shape.
 
 Effort: **medium** (state shape + one new rule + placement).
-
-## 66. Ruins of Alph should award an Unown (and all 28 forms)
-
-The Ruins of Alph sliding-picture puzzle (`sliding-puzzle.js`) pays only money
-and items — its top prize is even labelled "Unown unlocked!" but it never
-hands over an Unown. Worse, only a single `unown` species exists in
-`pokemon-species.json`; the other 27 letter / punctuation forms (A–Z, !, ?) are
-missing, so the set can't be completed.
-
-- [ ] Award an Unown on solving the puzzle — likely a random form, or the next
-      one the player is missing, so repeats help complete the set.
-- [ ] Add all 28 Unown forms to `pokemon-species.json` (PokeAPI form ids
-      reconciled with `tools/fix_pokemon_ids.py`), each with its abilities
-      (`fetch-abilities.cjs`) and learnset (`fix-missing-learnsets.cjs`).
-- [ ] Download the form sprites (`download_pokemon_sprites.cjs`) and check the
-      static / animated fallbacks (`animated-sprites.json`).
-- [ ] Decide how the forms read in the UI (names / dex entries) and whether the
-      puzzle tracks which forms the player still needs.
-- [ ] Update `tools/validate-data.mjs` (every species obtainable) once the
-      puzzle is their source, and make sure the raid-pool / form placement
-      (`FORM_RAID_REGION`) doesn't strand or duplicate them.
-
-Relevant code: `src/game/minigames/sliding-puzzle.js`,
-`src/components/ruins-puzzle-scene.js`, `src/game/reducer/minigames.js`
-(`slidingPrize` payout / `claimMinigameReward`),
-`public/data/pokemon-species.json`, `tools/fix_pokemon_ids.py`,
-`tools/download_pokemon_sprites.cjs`, and `tools/validate-data.mjs`.
-
-Effort: **medium** (mostly the 28 form entries + art; the award itself is small).
 
 ## 67. Baby Pokemon should come from breeding, not gift rewards
 

@@ -75,17 +75,22 @@ function machineMovesForId(id) {
 /** @type {Record<string, string[]>} */
 const byKey = {}
 let missingCache = 0
+// Ids with no PokeAPI pokemon entry (the Unown letters) keep their hand-written
+// rows (see add-unown-forms.cjs) instead of being dropped.
+const tmPath = path.join(DATA, 'tm-learnsets.json')
+const previous = fs.existsSync(tmPath) ? JSON.parse(fs.readFileSync(tmPath, 'utf8')) : {}
 for (const [key, entry] of Object.entries(species)) {
   if (!entry.id) continue
   const moves = machineMovesForId(entry.id)
   if (moves === null) {
     missingCache++
+    if (previous[key]) byKey[key] = previous[key]
     continue
   }
   if (moves.length > 0) byKey[key] = moves.sort()
 }
 
-fs.writeFileSync(path.join(DATA, 'tm-learnsets.json'), JSON.stringify(byKey, null, 1) + '\n')
+fs.writeFileSync(tmPath, JSON.stringify(byKey, null, 1) + '\n')
 console.log(
   `wrote TM learnsets for ${Object.keys(byKey).length} species` +
     (missingCache ? ` (${missingCache} ids had no cached /pokemon response)` : '')

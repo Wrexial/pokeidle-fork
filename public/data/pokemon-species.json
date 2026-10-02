@@ -24729,5 +24729,518 @@
     "growthRate": "mediumFast",
     "catchRate": 75,
     "weight": 10.1
+  },
+  "unown-b": {
+    "id": 20101,
+    "name": "Unown-B",
+    "types": [
+      "Psychic"
+    ],
+    "baseStats": {
+      "hp": 48,
+      "attack": 72,
+      "defense": 48,
+      "spAttack": 72,
+      "spDefense": 48,
+      "speed": 48
+    },
+    "baseExpYield": 118,
+    "growthRate": "mediumFast",
+    "catchRate": 225,
+    "weight": 5
+  },
+  "unown-c": {
+    "id": 20102,
+    "name": "Unown-C",
+    "types": [
+      "Psychic"
+    ],
+    "baseStats": {
+      "hp": 48,
+      "attack": 72,
+      "defense": 48,
+      "spAttack": 72,
+      "spDefense": 48,
+      "speed": 48
+    },
+    "baseExpYield": 118,
+    "growthRate": "mediumFast",
+    "catchRate": 225,
+    "weight": 5
+  },
+  "unown-d": {
+    "id": 20103,
+    "name": "Unown-D",
+    "types": [
+      "Psychic"
+    ],
+    "baseStats": {
+      "hp": 48,
+      "attack": 72,
+      "defense": 48,
+      "spAttack": 72,
+      "spDefense": 48,
+      "speed": 48
+    },
+    "baseExpYield": 118,
+    "growthRate": "mediumFast",
+    "catchRate": 225,
+    "weight": 5
+  },
+  "unown-e": {
+    "id": 20104,
+    "name": "Unown-E",
+    "types": [
+      "Psychic"
+    ],
+    "baseStats": {
+      "hp": 48,
+      "attack": 72,
+      "defense": 48,
+      "spAttack": 72,
+      "spDefense": 48,
+      "speed": 48
+    },
+    "baseExpYield": 118,
+    "growthRate": "mediumFast",
+    "catchRate": 225,
+    "weight": 5
+  },
+  "unown-f": {
+    "id": 20105,
+    "name": "Unown-F",
+    "types": [
+      "Psychic"
+    ],
+    "baseStats": {
+      "hp": 48,
+      "attack": 72,
+      "defense": 48,
+      "spAttack": 72,
+      "spDefense": 48,
+      "speed": 48
+    },
+    "baseExpYield": 118,
+    "growthRate": "mediumFast",
+    "catchRate": 225,
+    "weight": 5
+  },
+  "unown-g": {
+    "id": 20106,
+    "name": "Unown-G",
+    "types": [
+      "Psychic"
+    ],
+    "baseStats": {
+      "hp": 48,
+      "attack": 72,
+      "defense": 48,
+      "spAttack": 72,
+      "spDefense": 48,
+      "speed": 48
+    },
+    "baseExpYield": 118,
+    "growthRate": "mediumFast",
+    "catchRate": 225,
+    "weight": 5
+  },
+  "unown-h": {
+    "id": 20107,
+    "name": "Unown-H",
+    "types": [
+      "Psychic"
+    ],
+    "baseStats": {
+      "hp": 48,
+      "attack": 72,
+      "defense": 48,
+      "spAttack": 72,
+      "spDefense": 48,
+      "speed": 48
+    },
+    "baseExpYield": 118,
+    "growthRate": "mediumFast",
+    "catchRate": 225,
+    "weight": 5
+  },
+  "unown-i": {
+    "id": 20108,
+    "name": "Unown-I",
+    "types": [
+      "Psychic"
+    ],
+    "baseStats": {
+      "hp": 48,
+      "attack": 72,
+      "defense": 48,
+      "spAttack": 72,
+      "spDefense": 48,
+      "speed": 48
+    },
+    "baseExpYield": 118,
+    "growthRate": "mediumFast",
+    "catchRate": 225,
+    "weight": 5
+  },
+  "unown-j": {
+    "id": 20109,
+    "name": "Unown-J",
+    "types": [
+      "Psychic"
+    ],
+    "baseStats": {
+      "hp": 48,
+      "attack": 72,
+      "defense": 48,
+      "spAttack": 72,
+      "spDefense": 48,
+      "speed": 48
+    },
+    "baseExpYield": 118,
+    "growthRate": "mediumFast",
+    "catchRate": 225,
+    "weight": 5
+  },
+  "unown-k": {
+    "id": 20110,
+    "name": "Unown-K",
+    "types": [
+      "Psychic"
+    ],
+    "baseStats": {
+      "hp": 48,
+      "attack": 72,
+      "defense": 48,
+      "spAttack": 72,
+      "spDefense": 48,
+      "speed": 48
+    },
+    "baseExpYield": 118,
+    "growthRate": "mediumFast",
+    "catchRate": 225,
+    "weight": 5
+  },
+  "unown-l": {
+    "id": 20111,
+    "name": "Unown-L",
+    "types": [
+      "Psychic"
+    ],
+    "baseStats": {
+      "hp": 48,
+      "attack": 72,
+      "defense": 48,
+      "spAttack": 72,
+      "spDefense": 48,
+      "speed": 48
+    },
+    "baseExpYield": 118,
+    "growthRate": "mediumFast",
+    "catchRate": 225,
+    "weight": 5
+  },
+  "unown-m": {
+    "id": 20112,
+    "name": "Unown-M",
+    "types": [
+      "Psychic"
+    ],
+    "baseStats": {
+      "hp": 48,
+      "attack": 72,
+      "defense": 48,
+      "spAttack": 72,
+      "spDefense": 48,
+      "speed": 48
+    },
+    "baseExpYield": 118,
+    "growthRate": "mediumFast",
+    "catchRate": 225,
+    "weight": 5
+  },
+  "unown-n": {
+    "id": 20113,
+    "name": "Unown-N",
+    "types": [
+      "Psychic"
+    ],
+    "baseStats": {
+      "hp": 48,
+      "attack": 72,
+      "defense": 48,
+      "spAttack": 72,
+      "spDefense": 48,
+      "speed": 48
+    },
+    "baseExpYield": 118,
+    "growthRate": "mediumFast",
+    "catchRate": 225,
+    "weight": 5
+  },
+  "unown-o": {
+    "id": 20114,
+    "name": "Unown-O",
+    "types": [
+      "Psychic"
+    ],
+    "baseStats": {
+      "hp": 48,
+      "attack": 72,
+      "defense": 48,
+      "spAttack": 72,
+      "spDefense": 48,
+      "speed": 48
+    },
+    "baseExpYield": 118,
+    "growthRate": "mediumFast",
+    "catchRate": 225,
+    "weight": 5
+  },
+  "unown-p": {
+    "id": 20115,
+    "name": "Unown-P",
+    "types": [
+      "Psychic"
+    ],
+    "baseStats": {
+      "hp": 48,
+      "attack": 72,
+      "defense": 48,
+      "spAttack": 72,
+      "spDefense": 48,
+      "speed": 48
+    },
+    "baseExpYield": 118,
+    "growthRate": "mediumFast",
+    "catchRate": 225,
+    "weight": 5
+  },
+  "unown-q": {
+    "id": 20116,
+    "name": "Unown-Q",
+    "types": [
+      "Psychic"
+    ],
+    "baseStats": {
+      "hp": 48,
+      "attack": 72,
+      "defense": 48,
+      "spAttack": 72,
+      "spDefense": 48,
+      "speed": 48
+    },
+    "baseExpYield": 118,
+    "growthRate": "mediumFast",
+    "catchRate": 225,
+    "weight": 5
+  },
+  "unown-r": {
+    "id": 20117,
+    "name": "Unown-R",
+    "types": [
+      "Psychic"
+    ],
+    "baseStats": {
+      "hp": 48,
+      "attack": 72,
+      "defense": 48,
+      "spAttack": 72,
+      "spDefense": 48,
+      "speed": 48
+    },
+    "baseExpYield": 118,
+    "growthRate": "mediumFast",
+    "catchRate": 225,
+    "weight": 5
+  },
+  "unown-s": {
+    "id": 20118,
+    "name": "Unown-S",
+    "types": [
+      "Psychic"
+    ],
+    "baseStats": {
+      "hp": 48,
+      "attack": 72,
+      "defense": 48,
+      "spAttack": 72,
+      "spDefense": 48,
+      "speed": 48
+    },
+    "baseExpYield": 118,
+    "growthRate": "mediumFast",
+    "catchRate": 225,
+    "weight": 5
+  },
+  "unown-t": {
+    "id": 20119,
+    "name": "Unown-T",
+    "types": [
+      "Psychic"
+    ],
+    "baseStats": {
+      "hp": 48,
+      "attack": 72,
+      "defense": 48,
+      "spAttack": 72,
+      "spDefense": 48,
+      "speed": 48
+    },
+    "baseExpYield": 118,
+    "growthRate": "mediumFast",
+    "catchRate": 225,
+    "weight": 5
+  },
+  "unown-u": {
+    "id": 20120,
+    "name": "Unown-U",
+    "types": [
+      "Psychic"
+    ],
+    "baseStats": {
+      "hp": 48,
+      "attack": 72,
+      "defense": 48,
+      "spAttack": 72,
+      "spDefense": 48,
+      "speed": 48
+    },
+    "baseExpYield": 118,
+    "growthRate": "mediumFast",
+    "catchRate": 225,
+    "weight": 5
+  },
+  "unown-v": {
+    "id": 20121,
+    "name": "Unown-V",
+    "types": [
+      "Psychic"
+    ],
+    "baseStats": {
+      "hp": 48,
+      "attack": 72,
+      "defense": 48,
+      "spAttack": 72,
+      "spDefense": 48,
+      "speed": 48
+    },
+    "baseExpYield": 118,
+    "growthRate": "mediumFast",
+    "catchRate": 225,
+    "weight": 5
+  },
+  "unown-w": {
+    "id": 20122,
+    "name": "Unown-W",
+    "types": [
+      "Psychic"
+    ],
+    "baseStats": {
+      "hp": 48,
+      "attack": 72,
+      "defense": 48,
+      "spAttack": 72,
+      "spDefense": 48,
+      "speed": 48
+    },
+    "baseExpYield": 118,
+    "growthRate": "mediumFast",
+    "catchRate": 225,
+    "weight": 5
+  },
+  "unown-x": {
+    "id": 20123,
+    "name": "Unown-X",
+    "types": [
+      "Psychic"
+    ],
+    "baseStats": {
+      "hp": 48,
+      "attack": 72,
+      "defense": 48,
+      "spAttack": 72,
+      "spDefense": 48,
+      "speed": 48
+    },
+    "baseExpYield": 118,
+    "growthRate": "mediumFast",
+    "catchRate": 225,
+    "weight": 5
+  },
+  "unown-y": {
+    "id": 20124,
+    "name": "Unown-Y",
+    "types": [
+      "Psychic"
+    ],
+    "baseStats": {
+      "hp": 48,
+      "attack": 72,
+      "defense": 48,
+      "spAttack": 72,
+      "spDefense": 48,
+      "speed": 48
+    },
+    "baseExpYield": 118,
+    "growthRate": "mediumFast",
+    "catchRate": 225,
+    "weight": 5
+  },
+  "unown-z": {
+    "id": 20125,
+    "name": "Unown-Z",
+    "types": [
+      "Psychic"
+    ],
+    "baseStats": {
+      "hp": 48,
+      "attack": 72,
+      "defense": 48,
+      "spAttack": 72,
+      "spDefense": 48,
+      "speed": 48
+    },
+    "baseExpYield": 118,
+    "growthRate": "mediumFast",
+    "catchRate": 225,
+    "weight": 5
+  },
+  "unown-exclamation": {
+    "id": 20126,
+    "name": "Unown-!",
+    "types": [
+      "Psychic"
+    ],
+    "baseStats": {
+      "hp": 48,
+      "attack": 72,
+      "defense": 48,
+      "spAttack": 72,
+      "spDefense": 48,
+      "speed": 48
+    },
+    "baseExpYield": 118,
+    "growthRate": "mediumFast",
+    "catchRate": 225,
+    "weight": 5
+  },
+  "unown-question": {
+    "id": 20127,
+    "name": "Unown-?",
+    "types": [
+      "Psychic"
+    ],
+    "baseStats": {
+      "hp": 48,
+      "attack": 72,
+      "defense": 48,
+      "spAttack": 72,
+      "spDefense": 48,
+      "speed": 48
+    },
+    "baseExpYield": 118,
+    "growthRate": "mediumFast",
+    "catchRate": 225,
+    "weight": 5
   }
 }

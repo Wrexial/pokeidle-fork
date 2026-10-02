@@ -42,6 +42,16 @@ const SHOWDOWN_GEN5ANI = {
   1006: 'ironvaliant',
   1008: 'miraidon',
 }
+// Unown letters/!/? have no PokeAPI pokemon id: their sprites live under the
+// base id as `201-<form>` (A is the plain `201.png`), so the bespoke ids above
+// carry an explicit PokeAPI sprite name. Keep in sync with add-unown-forms.cjs.
+const UNOWN_LETTERS = 'bcdefghijklmnopqrstuvwxyz'.split('')
+const FORM_SPRITE_NAMES = Object.fromEntries([
+  ...UNOWN_LETTERS.map((letter, index) => [20101 + index, `201-${letter}`]),
+  [20126, '201-exclamation'],
+  [20127, '201-question'],
+])
+const spriteName = (id) => FORM_SPRITE_NAMES[id] ?? id
 
 const onlyArg = process.argv.find((arg) => arg.startsWith('--only='))
 const ONLY = onlyArg ? onlyArg.split('=')[1] : null
@@ -83,13 +93,13 @@ function downloadFile(url, filepath, redirectsLeft = 5) {
 
 /** Static variants: destination path builder + PokeAPI source. */
 const STATIC_VARIANTS = [
-  { name: 'front', dest: (id) => path.join(STATIC_DIR, `${id}.png`), url: (id) => `${POKEAPI}/${id}.png` },
-  { name: 'back', dest: (id) => path.join(STATIC_DIR, 'back', `${id}.png`), url: (id) => `${POKEAPI}/back/${id}.png` },
-  { name: 'shiny', dest: (id) => path.join(STATIC_DIR, 'shiny', `${id}.png`), url: (id) => `${POKEAPI}/shiny/${id}.png` },
+  { name: 'front', dest: (id) => path.join(STATIC_DIR, `${id}.png`), url: (id) => `${POKEAPI}/${spriteName(id)}.png` },
+  { name: 'back', dest: (id) => path.join(STATIC_DIR, 'back', `${id}.png`), url: (id) => `${POKEAPI}/back/${spriteName(id)}.png` },
+  { name: 'shiny', dest: (id) => path.join(STATIC_DIR, 'shiny', `${id}.png`), url: (id) => `${POKEAPI}/shiny/${spriteName(id)}.png` },
   {
     name: 'back-shiny',
     dest: (id) => path.join(STATIC_DIR, 'back', 'shiny', `${id}.png`),
-    url: (id) => `${POKEAPI}/back/shiny/${id}.png`,
+    url: (id) => `${POKEAPI}/back/shiny/${spriteName(id)}.png`,
   },
   // Female variants only exist for the ~100 species with a gender difference;
   // the rest 404 and are left out of the manifest below.
@@ -137,6 +147,14 @@ const ANIMATED_VARIANTS = [
   sources: (id) => {
     if (variant.female)
       return [`${POKEAPI}/versions/generation-v/black-white/animated/${variant.sub}/${id}.gif`]
+    // Form sprites with no PokeAPI pokemon id use the base id's form tree.
+    const formName = FORM_SPRITE_NAMES[id]
+    if (formName)
+      return [
+        `${POKEAPI}/versions/generation-v/black-white/animated/${
+          variant.sub ? variant.sub + '/' : ''
+        }${formName}.gif`,
+      ]
     const showdown = `${SHOWDOWN}/${variant.sdSub ? variant.sdSub + '/' : ''}${id}.gif`
     // Gen V animated only exists for the national dex ids 1-649.
     if (id > 649) {

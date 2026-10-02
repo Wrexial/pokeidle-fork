@@ -98,7 +98,7 @@ export function createSlidingPuzzle(size = SLIDING_SIZE, rng = Math.random) {
  * Prize for restoring the picture.
  * @param {number} moves
  * @param {boolean} solved
- * @returns {{ money: number, items: { itemId: string, quantity: number }[], label: string }}
+ * @returns {{ money: number, items: { itemId: string, quantity: number }[], label: string, pokemon?: { speciesKey: string, level: number } }}
  */
 export function slidingPrize(moves, solved) {
   if (!solved) return { money: 150, items: [], label: 'The ruins stay sealed' }
@@ -114,6 +114,32 @@ export function slidingPrize(moves, solved) {
   if (moves <= 24)
     return { money: 1800, items: [{ itemId: 'expCandyM', quantity: 1 }], label: 'Picture restored' }
   return { money: 700, items: [{ itemId: 'expCandyS', quantity: 1 }], label: 'Solved at last' }
+}
+
+/**
+ * The 28 Unown forms in Pokédex order (A is the base `unown`). The Ruins of
+ * Alph puzzle hands out the next one the player is missing.
+ * @type {string[]}
+ */
+export const UNOWN_FORMS = [
+  'unown',
+  ...'bcdefghijklmnopqrstuvwxyz'.split('').map((letter) => `unown-${letter}`),
+  'unown-exclamation',
+  'unown-question',
+]
+
+/**
+ * The next Unown form the player has not caught, or a random form once the set
+ * is complete, so repeats still turn up.
+ * @param {string[]} caught Species keys the player has caught.
+ * @param {() => number} [random]
+ * @returns {string}
+ */
+export function nextUnownForm(caught, random = Math.random) {
+  const caughtSet = new Set(caught),
+    missing = UNOWN_FORMS.filter((key) => !caughtSet.has(key)),
+    pool = missing.length > 0 ? missing : UNOWN_FORMS
+  return pool[Math.floor(random() * pool.length)]
 }
 
 /**

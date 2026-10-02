@@ -6,12 +6,14 @@
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
+import { pokemonSpecies } from '../data/gameData.js'
 import { rewardItemName } from '../game/minigames.js'
+import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
 import { ItemIcon, hasItemIcon } from './item-icon.js'
 
 /**
  * @param {{
- *   prize?: { money?: number, items?: { itemId: string, quantity: number }[], label?: string } | null,
+ *   prize?: { money?: number, items?: { itemId: string, quantity: number }[], label?: string, pokemon?: { speciesKey: string, level?: number } | null } | null,
  *   summary?: React.ReactNode,
  *   itemName?: (itemId: string) => string,
  *   onCollect: () => void,
@@ -27,7 +29,8 @@ export function MinigameRewardScreen({
 }) {
   const money = prize?.money ?? 0,
     items = prize?.items ?? [],
-    hasReward = money !== 0 || items.length > 0
+    pokemon = prize?.pokemon && pokemonSpecies[prize.pokemon.speciesKey] ? prize.pokemon : null,
+    hasReward = money !== 0 || items.length > 0 || !!pokemon
   return jsxs('div', {
     className: 'minigame-reward',
     children: [
@@ -93,6 +96,37 @@ export function MinigameRewardScreen({
                   `${item.itemId}-${index}`
                 )
               ),
+              pokemon &&
+                jsxs(
+                  'div',
+                  {
+                    className: 'minigame-reward-row pokemon',
+                    style: { animationDelay: `${0.12 + items.length * 0.1}s` },
+                    children: [
+                      jsx('span', {
+                        className: 'minigame-reward-icon',
+                        children: jsx('img', {
+                          className: 'minigame-reward-pokemon',
+                          src: getPokemonSpriteUrl(pokemonSpecies[pokemon.speciesKey].id),
+                          onError: /** @param {{ target: HTMLImageElement }} event */ (event) =>
+                            (event.target.src = getPokemonSpriteFallbackUrl(
+                              pokemonSpecies[pokemon.speciesKey].id
+                            )),
+                          alt: pokemonSpecies[pokemon.speciesKey].name,
+                        }),
+                      }),
+                      jsx('span', {
+                        className: 'minigame-reward-name',
+                        children: pokemonSpecies[pokemon.speciesKey].name,
+                      }),
+                      jsx('span', {
+                        className: 'minigame-reward-qty',
+                        children: `Lv.${pokemon.level ?? 5}`,
+                      }),
+                    ],
+                  },
+                  'pokemon'
+                ),
               !hasReward &&
                 jsx('span', {
                   className: 'minigame-reward-empty',

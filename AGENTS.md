@@ -396,6 +396,13 @@ One-off scripts used to build the data JSON (not run during dev/build):
   Megas already do. The added entries carry `form: true`, which
   `generate-regions.cjs`'s `isFinalEvolution` ignores so team generation is
   unchanged. Re-run after any re-extraction of `evolution-data.json`.
+- `add-unown-forms.cjs` — adds the 27 non-A Unown forms (B–Z, !, ?). PokeAPI
+  models them as *forms* of pokemon 201 rather than separate pokemon, so they
+  get bespoke ids (20101+) and `download_pokemon_sprites.cjs` maps those to
+  PokeAPI's `201-<form>` sprites; the Levitate / Hidden Power / genderless rows
+  are hand-written rather than fetched. Idempotent; re-run after
+  `fetch-abilities.cjs` / `fetch-breeding-data.cjs` / `fetch-tm-learnsets.cjs`
+  (those now preserve ids with no PokeAPI source).
 - `add-mega-forms.cjs` — adds the Legends: Z-A Mega Evolutions PokeAPI has but
   the extracted bundle predates (pokemon ids 10278-10326) to
   `pokemon-species.json`, `ability-data.json`, `evolution-data.json` and

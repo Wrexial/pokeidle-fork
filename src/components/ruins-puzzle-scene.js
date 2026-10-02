@@ -10,9 +10,11 @@ import {
   canSlide,
   createSlidingPuzzle,
   isSlidingSolved,
+  nextUnownForm,
   slideTile,
   slidingPrize,
   slidingTileForDirection,
+  UNOWN_FORMS,
 } from '../game/minigames.js'
 import { MinigameRewardScreen, useMinigameClaim } from './minigame-reward.js'
 
@@ -27,7 +29,8 @@ export function RuinsPuzzleScene() {
       () => /** @type {ReturnType<typeof slidingPrize> | null} */ (null)
     ),
     collect = useMinigameClaim(dispatch),
-    size = Math.round(Math.sqrt(board.length))
+    size = Math.round(Math.sqrt(board.length)),
+    caughtUnown = UNOWN_FORMS.filter((key) => state.pokedexCaught.includes(key)).length
 
   /** @param {number} index */
   function slideAt(index) {
@@ -42,7 +45,11 @@ export function RuinsPuzzleScene() {
   React.useEffect(() => {
     if (!prize && isSlidingSolved(board)) {
       if (state.sfxEnabled) playSfx('win')
-      setPrize(slidingPrize(moves, true))
+      setPrize({
+        ...slidingPrize(moves, true),
+        // Every solve hands over the next Unown form the player is missing.
+        pokemon: { speciesKey: nextUnownForm(state.pokedexCaught), level: 5 },
+      })
     }
   }, [board, prize, moves])
 
@@ -93,7 +100,10 @@ export function RuinsPuzzleScene() {
               onCollect: leave,
               summary: jsx('span', {
                 className: 'ruins-summary',
-                children: `Picture restored in ${moves} moves`,
+                children: `Picture restored in ${moves} moves \u00b7 Unown ${Math.min(
+                  caughtUnown + 1,
+                  UNOWN_FORMS.length
+                )}/${UNOWN_FORMS.length}`,
               }),
             })
           : jsxs('div', {

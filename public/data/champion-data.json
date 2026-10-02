@@ -3,30 +3,30 @@
   "id": "blue",
   "name": "Blue",
   "title": "Pokemon League Champion",
-  "spriteKey": "blue-gen3",
+  "spriteKey": "blue",
   "team": [
    {
-    "speciesKey": "pidgeot",
-    "level": 72
-   },
-   {
-    "speciesKey": "alakazam",
+    "speciesKey": "snorlax",
     "level": 70
    },
    {
-    "speciesKey": "rhydon",
+    "speciesKey": "lapras",
     "level": 72
    },
    {
-    "speciesKey": "gyarados",
+    "speciesKey": "exeggutor",
+    "level": 72
+   },
+   {
+    "speciesKey": "jolteon",
     "level": 73
    },
    {
-    "speciesKey": "arcanine",
+    "speciesKey": "nidoqueen",
     "level": 73
    },
    {
-    "speciesKey": "venusaur",
+    "speciesKey": "machamp",
     "level": 75
    }
   ],

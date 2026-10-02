@@ -6,7 +6,7 @@
   "locationKey": "pewterCity",
   "badgeName": "Boulder Badge",
   "badgeColor": "#a0a0a0",
-  "spriteKey": "brock-gen3",
+  "spriteKey": "brock",
   "team": [
    {
     "speciesKey": "geodude",
@@ -52,14 +52,14 @@
   "locationKey": "ceruleanCity",
   "badgeName": "Cascade Badge",
   "badgeColor": "#4a90d9",
-  "spriteKey": "misty-gen3",
+  "spriteKey": "misty",
   "team": [
    {
-    "speciesKey": "staryu",
+    "speciesKey": "slowpoke",
     "level": 19
    },
    {
-    "speciesKey": "starmie",
+    "speciesKey": "seel",
     "level": 23
    }
   ],
@@ -98,18 +98,18 @@
   "locationKey": "vermilionCity",
   "badgeName": "Thunder Badge",
   "badgeColor": "#f0c030",
-  "spriteKey": "ltsurge-gen3",
+  "spriteKey": "ltsurge",
   "team": [
    {
-    "speciesKey": "voltorb",
-    "level": 26
-   },
-   {
-    "speciesKey": "pikachu",
+    "speciesKey": "raichu",
     "level": 25
    },
    {
-    "speciesKey": "raichu",
+    "speciesKey": "magnemite",
+    "level": 26
+   },
+   {
+    "speciesKey": "voltorb",
     "level": 28
    }
   ],
@@ -148,18 +148,18 @@
   "locationKey": "celadonCity",
   "badgeName": "Rainbow Badge",
   "badgeColor": "#78c850",
-  "spriteKey": "erika-gen3",
+  "spriteKey": "erika",
   "team": [
    {
-    "speciesKey": "victreebel",
-    "level": 38
-   },
-   {
-    "speciesKey": "tangela",
+    "speciesKey": "vileplume",
     "level": 34
    },
    {
-    "speciesKey": "vileplume",
+    "speciesKey": "parasect",
+    "level": 38
+   },
+   {
+    "speciesKey": "weepinbell",
     "level": 38
    }
   ],
@@ -198,22 +198,22 @@
   "locationKey": "fuchsiaCity",
   "badgeName": "Soul Badge",
   "badgeColor": "#a040a0",
-  "spriteKey": "koga-gen3",
+  "spriteKey": "koga",
   "team": [
    {
-    "speciesKey": "koffing",
+    "speciesKey": "tentacruel",
     "level": 42
    },
    {
     "speciesKey": "muk",
-    "level": 43
-   },
-   {
-    "speciesKey": "koffing",
     "level": 42
    },
    {
-    "speciesKey": "weezing",
+    "speciesKey": "haunter",
+    "level": 43
+   },
+   {
+    "speciesKey": "gengar",
     "level": 46
    }
   ],
@@ -252,22 +252,22 @@
   "locationKey": "saffronCity",
   "badgeName": "Marsh Badge",
   "badgeColor": "#e868a8",
-  "spriteKey": "sabrina-gen3",
+  "spriteKey": "sabrina",
   "team": [
    {
-    "speciesKey": "kadabra",
-    "level": 50
-   },
-   {
-    "speciesKey": "mrMime",
+    "speciesKey": "slowbro",
     "level": 49
    },
    {
-    "speciesKey": "venomoth",
+    "speciesKey": "hypno",
     "level": 50
    },
    {
-    "speciesKey": "alakazam",
+    "speciesKey": "exeggutor",
+    "level": 50
+   },
+   {
+    "speciesKey": "starmie",
     "level": 53
    }
   ],
@@ -306,18 +306,18 @@
   "locationKey": "cinnabarIsland",
   "badgeName": "Volcano Badge",
   "badgeColor": "#f08030",
-  "spriteKey": "blaine-gen3",
+  "spriteKey": "blaine",
   "team": [
    {
-    "speciesKey": "growlithe",
-    "level": 58
-   },
-   {
-    "speciesKey": "ponyta",
+    "speciesKey": "rapidash",
     "level": 57
    },
    {
-    "speciesKey": "rapidash",
+    "speciesKey": "flareon",
+    "level": 58
+   },
+   {
+    "speciesKey": "ninetales",
     "level": 58
    },
    {
@@ -360,26 +360,26 @@
   "locationKey": "viridianCity",
   "badgeName": "Earth Badge",
   "badgeColor": "#e0c068",
-  "spriteKey": "giovanni-gen3",
+  "spriteKey": "giovanni",
   "team": [
-   {
-    "speciesKey": "rhyhorn",
-    "level": 66
-   },
    {
     "speciesKey": "dugtrio",
     "level": 64
    },
    {
-    "speciesKey": "nidoqueen",
+    "speciesKey": "golem",
     "level": 65
    },
    {
-    "speciesKey": "nidoking",
+    "speciesKey": "marowak",
     "level": 66
    },
    {
-    "speciesKey": "rhydon",
+    "speciesKey": "sandslash",
+    "level": 66
+   },
+   {
+    "speciesKey": "nidoqueen",
     "level": 68
    }
   ],

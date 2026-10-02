@@ -579,8 +579,9 @@ One-off scripts used to build the data JSON (not run during dev/build):
   they unlock (route number / BFS depth), so the curve ramps smoothly for the
   player and doesn't trust the scraped real levels (which vary wildly between
   routes and game versions, e.g. Unova Route 1). The Elite Four occupy 68-75
-  and the Champion 70-75; Kanto's hand-curated league/trainer levels are kept
-  in the committed JSON and normalised onto the same curve. Sparse scraped
+  and the Champion 70-75. Kanto's encounter levels are rebuilt by
+  `apply-kanto.cjs` onto the same curve, but its gym / league levels stay the
+  canonical ones. Sparse scraped
   tables are then topped up with more of the region's own wild species
   (`lib/route-variety.cjs`, mirrored on the committed data by
   `apply-route-variety.cjs`), so a route offers more than its two or three
@@ -624,12 +625,13 @@ One-off scripts used to build the data JSON (not run during dev/build):
   which queues the region's evolution lines so **every line appears on at least
   one trainer** (drawn at the form that could exist at that level), keeps the
   class type as a bias, and fills the remaining slots from the native pool;
-  gym / Elite Four / Champion teams use the older `buildTeam`,
+  gym / Elite Four / Champion teams use `lib/team-builder.cjs` (`buildTeam`),
   which drops species that should already have evolved and, at Lv.55+, very
-  weak final forms (Ditto), while keeping the type theme when a sparse type
-  (Dragon) would otherwise run out. Kanto's hand-curated map, encounters,
-  leaders and gen3 sprites are left alone, but its route trainers are run
-  through `apply-trainer-variety.cjs` like every other region.
+  weak final forms (Ditto), keeps the type theme, and fills a sparse type with a
+  strong off-theme ace rather than repeating a Pokemon. Kanto's hand-curated
+  map, location/gym ids and badges are left alone, but its encounters,
+  gym/league teams and leader sprites are rebuilt by `apply-kanto.cjs`, and its
+  route trainers by `apply-trainer-variety.cjs`, like every other region.
   `pokemon-species.json` carries a `legendary` flag (set for legendaries,
   mythicals and Ultra Beasts) that keeps them out of every trainer team.
   Every leader also gets a `rematchTeam`: a gym fields six Lv.80 final
@@ -705,6 +707,13 @@ One-off scripts used to build the data JSON (not run during dev/build):
   adding two extra trainers per town for headroom: level-appropriate teams, the
   class type as a bias, and a queue over the region's evolution lines so
   **every line is shown at least once**. Idempotent (`--dry`).
+- `apply-kanto.cjs` — data-only pass that brings Kanto onto the generated
+  pipeline without renaming its hand-curated map / location / gym ids: rebuilds
+  its encounter tables from `route-encounters.json` (re-levelled, plausible,
+  Safari starters + Seafoam Jynx, route variety), rebuilds the gym / Elite Four
+  / Champion initial teams with `lib/team-builder.cjs` (keeping canonical
+  levels), and swaps the leader gen3 sprites for current-gen art (Lorelei and
+  Agatha keep gen3, the only art available). Idempotent (`--dry`).
 - `fix-impossible-encounters.cjs` / `fix-impossible-teams.cjs` — step wild
   encounters and trainer/gym/Elite Four/Champion Pokemon back to a form that
   could exist at their level (a Lv. 3 Chesnaught becomes a Chespin), merging
@@ -725,6 +734,9 @@ One-off scripts used to build the data JSON (not run during dev/build):
 - `lib/trainer-names.cjs` — route-trainer classes, labels and gendered name
   pools (`pickTrainerName`), shared by `generate-regions.cjs` and
   `apply-trainer-variety.cjs`.
+- `lib/team-builder.cjs` — shared `buildTeam` for gym / Elite Four / Champion
+  teams (type-themed, level-appropriate, off-theme ace fallback), used by
+  `generate-regions.cjs` and `apply-kanto.cjs`.
 - `lib/route-variety.cjs` — shared route-variety helpers (`buildWildPool`,
   `enrichEncounters`, `collectProtectedSpecies`) used by both
   `generate-regions.cjs` and `apply-route-variety.cjs`.

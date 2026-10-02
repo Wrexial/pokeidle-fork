@@ -7,22 +7,22 @@
   "team": [
    {
     "speciesKey": "dewgong",
-    "level": 69
-   },
-   {
-    "speciesKey": "cloyster",
     "level": 68
    },
    {
-    "speciesKey": "slowbro",
+    "speciesKey": "cloyster",
     "level": 69
    },
    {
     "speciesKey": "jynx",
-    "level": 72
+    "level": 69
    },
    {
     "speciesKey": "lapras",
+    "level": 72
+   },
+   {
+    "speciesKey": "exeggutor",
     "level": 72
    }
   ],
@@ -58,10 +58,10 @@
   "id": "bruno",
   "name": "Bruno",
   "title": "Elite Four",
-  "spriteKey": "bruno-gen3",
+  "spriteKey": "bruno",
   "team": [
    {
-    "speciesKey": "onix",
+    "speciesKey": "hitmonlee",
     "level": 69
    },
    {
@@ -69,15 +69,15 @@
     "level": 71
    },
    {
-    "speciesKey": "hitmonlee",
-    "level": 71
-   },
-   {
-    "speciesKey": "onix",
+    "speciesKey": "poliwrath",
     "level": 71
    },
    {
     "speciesKey": "machamp",
+    "level": 71
+   },
+   {
+    "speciesKey": "cloyster",
     "level": 73
    }
   ],
@@ -116,23 +116,23 @@
   "spriteKey": "agatha-gen3",
   "team": [
    {
-    "speciesKey": "gengar",
-    "level": 71
-   },
-   {
-    "speciesKey": "golbat",
-    "level": 71
-   },
-   {
     "speciesKey": "haunter",
     "level": 70
    },
    {
-    "speciesKey": "arbok",
+    "speciesKey": "gengar",
+    "level": 71
+   },
+   {
+    "speciesKey": "gastly",
+    "level": 71
+   },
+   {
+    "speciesKey": "vaporeon",
     "level": 72
    },
    {
-    "speciesKey": "gengar",
+    "speciesKey": "dragonite",
     "level": 74
    }
   ],
@@ -168,26 +168,26 @@
   "id": "lance",
   "name": "Lance",
   "title": "Elite Four",
-  "spriteKey": "lance-gen3",
+  "spriteKey": "lance",
   "team": [
    {
-    "speciesKey": "gyarados",
-    "level": 72
-   },
-   {
-    "speciesKey": "dragonair",
+    "speciesKey": "dratini",
     "level": 71
    },
    {
     "speciesKey": "dragonair",
     "level": 71
-   },
-   {
-    "speciesKey": "aerodactyl",
-    "level": 74
    },
    {
     "speciesKey": "dragonite",
+    "level": 72
+   },
+   {
+    "speciesKey": "arcanine",
+    "level": 74
+   },
+   {
+    "speciesKey": "gyarados",
     "level": 75
    }
   ],

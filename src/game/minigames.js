@@ -24,6 +24,7 @@ export { POKEBALL_FACTORY_COST, FACTORY_SIZE, FACTORY_DIRECTIONS, FACTORY_BALL_P
 export { SLIDING_COST, SLIDING_SIZE, SLIDING_SCRAMBLE, solvedSlidingBoard, canSlide, slideTile, isSlidingSolved, createSlidingPuzzle, slidingTileForDirection, slidingPrize } from './minigames/sliding-puzzle.js'
 export { ICE_SLIDE_COST, ICE_SLIDE_DIRECTIONS, ICE_SLIDE_LEVELS, ICE_SLIDE_ROOMS, ICE_SLIDE_TOTAL_PAR, parseIceLevel, iceSlidePosition, iceSlideSolved, icePar, iceSlidePrize } from './minigames/ice-slide.js'
 export { STRENGTH_ROOMS, STRENGTH_TOTAL_PAR, parseStrengthLevel, createStrengthState, strengthMove, strengthSolved, strengthPar } from './minigames/strength.js'
+export { ICE_TEMPLE_STRENGTH_STAGES, ICE_TEMPLE_ICE_STAGES, pickIceTempleRooms, buildIceTempleStages } from './minigames/ice-temple.js'
 export { BATTLE_ROYAL_COST, BATTLE_ROYAL_POOL, battleRoyalOpponent, healSquad, battleRoyalPrize } from './minigames/battle-royal.js'
 export { DYNAMAX_ADVENTURES_COST, DYNAMAX_STAGES, DYNAMAX_BOSS_LEVEL, dynamaxPaths, dynamaxBoss, dynamaxPrize } from './minigames/dynamax-adventures.js'
 export { SLOT_SPIN_COST, SLOT_REELS, SLOT_ROWS, SLOT_PAYLINES, SLOT_SYMBOLS, SLOT_JACKPOT, GAME_CORNER_PRIZE_GOAL, GAME_CORNER_PRIZE_POOL, rollGameCornerPrize, rollSlotSymbol, spinSlots } from './minigames/game-corner.js'

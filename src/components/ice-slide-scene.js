@@ -10,10 +10,7 @@ import { pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { playSfx } from '../game/audio.js'
 import {
-  ICE_SLIDE_ROOMS,
-  ICE_SLIDE_TOTAL_PAR,
-  STRENGTH_ROOMS,
-  STRENGTH_TOTAL_PAR,
+  buildIceTempleStages,
   createStrengthState,
   iceSlidePosition,
   iceSlidePrize,
@@ -35,19 +32,18 @@ const ARROWS = [
 /** Arrow key -> move direction. @type {Record<string, string>} */
 const ARROW_DIRECTIONS = { ArrowUp: 'N', ArrowDown: 'S', ArrowLeft: 'W', ArrowRight: 'E' }
 
-// The Strength gate comes first, then the ice rooms. Each stage carries the
-// parsed room and a mode so the scene knows how the hero moves through it.
-const STAGES = [
-  ...STRENGTH_ROOMS.map((level) => ({ mode: /** @type {const} */ ('strength'), level })),
-  ...ICE_SLIDE_ROOMS.map((room) => ({ mode: /** @type {const} */ ('ice'), room })),
-]
-const TEMPLE_TOTAL_PAR = STRENGTH_TOTAL_PAR + ICE_SLIDE_TOTAL_PAR
+// Each visit rolls its own run: the Strength gates first, then the ice rooms,
+// drawn at random from the pools in `ice-temple.js`. The scene only stores the
+// rolled run (plus the run's own par), so two runs rarely play the same.
 
 export function IceSlideScene() {
   const { state, dispatch } = useGame(),
+    [templeRun] = React.useState(() => buildIceTempleStages()),
+    stages = templeRun.stages,
+    templePar = templeRun.par,
     [stageIndex, setStageIndex] = React.useState(0),
-    [position, setPosition] = React.useState(() => ICE_SLIDE_ROOMS[0].start),
-    [strength, setStrength] = React.useState(() => createStrengthState(STRENGTH_ROOMS[0])),
+    [position, setPosition] = React.useState(() => templeRun.iceRooms[0].start),
+    [strength, setStrength] = React.useState(() => createStrengthState(templeRun.strengthRooms[0])),
     [stageMoves, setStageMoves] = React.useState(0),
     [totalMoves, setTotalMoves] = React.useState(0),
     [cleared, setCleared] = React.useState(0),
@@ -55,7 +51,7 @@ export function IceSlideScene() {
       () => /** @type {ReturnType<typeof iceSlidePrize> | null} */ (null)
     ),
     collect = useMinigameClaim(dispatch),
-    stage = STAGES[stageIndex],
+    stage = stages[stageIndex],
     isStrength = stage.mode === 'strength',
     rows = isStrength ? stage.level.rows : stage.room.rows,
     width = isStrength ? stage.level.width : stage.room.width,
@@ -71,14 +67,14 @@ export function IceSlideScene() {
    */
   function finishStage(nextMoves) {
     const nextCleared = cleared + 1
-    if (stageIndex >= STAGES.length - 1) {
+    if (stageIndex >= stages.length - 1) {
       if (state.sfxEnabled) playSfx('win')
       setCleared(nextCleared)
-      setPrize(iceSlidePrize(nextCleared, nextMoves, TEMPLE_TOTAL_PAR, true))
+      setPrize(iceSlidePrize(nextCleared, nextMoves, templePar, true))
       return
     }
     if (state.sfxEnabled) playSfx('good')
-    const next = STAGES[stageIndex + 1]
+    const next = stages[stageIndex + 1]
     setCleared(nextCleared)
     setStageIndex(stageIndex + 1)
     setStageMoves(0)
@@ -124,7 +120,7 @@ export function IceSlideScene() {
 
   function leave() {
     if (!prize) {
-      setPrize(iceSlidePrize(cleared, totalMoves, TEMPLE_TOTAL_PAR, false))
+      setPrize(iceSlidePrize(cleared, totalMoves, templePar, false))
       return
     }
     collect({ type: 'END_MINIGAME' }, { type: 'CLAIM_MINIGAME_REWARD', payload: prize })
@@ -144,7 +140,7 @@ export function IceSlideScene() {
           jsxs('span', {
             className: 'minigame-scene-tally',
             children: [
-              `Room ${stageIndex + 1}/${STAGES.length}`,
+              `Room ${stageIndex + 1}/${stages.length}`,
               ' \u00b7 ',
               prize
                 ? (prize.label ?? '')
@@ -161,7 +157,7 @@ export function IceSlideScene() {
               onCollect: leave,
               summary: jsx('span', {
                 className: 'ice-summary',
-                children: `Cleared ${cleared} of ${STAGES.length} rooms in ${totalMoves} moves`,
+                children: `Cleared ${cleared} of ${stages.length} rooms in ${totalMoves} moves`,
               }),
             })
           : jsxs('div', {

@@ -36,6 +36,7 @@ export const CHANGELOG = [
             'Whack-a-Diglett speeds up as the round runs down (targets stay up for less time) and adds a rare Dugtrio jackpot worth 5 points on top of the Diglett and Zubat',
             'The Game Corner slots have a prize track: every winning line fills a 20-step bar, and a full bar hands over a random Game Corner prize Pokemon — Scyther, Dratini or Porygon',
             'The Poke Radar now guarantees shinies: each chain level counts toward a target that starts at 5, so the chained species is shiny at 5, then 10, then 15 levels. Catching (or beating) it banks the shiny, resets the chain and raises the next target by 5',
+            'Snowpoint Temple is different every visit: each run rolls a random set of Strength chambers and ice rooms from a wider pool (four chambers, eight rooms), and the flawless-move bonus scales to the rooms you actually drew',
             'Pokemon Musical can be played with the keyboard: the arrow keys hit the matching lane (left/down/up/right)',
           ],
         },

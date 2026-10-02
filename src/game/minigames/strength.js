@@ -13,11 +13,15 @@ const DELTA = { N: [-1, 0], E: [0, 1], S: [1, 0], W: [0, -1] }
 /**
  * Hand-designed strength rooms. `#` wall, `.` floor, `S` start, `B` pushable
  * boulder, `*` pressure plate, `E` exit (sealed until every plate is covered).
+ * A run plays a random subset of these (see `ice-temple.js`), so the pool is
+ * wider than any single run.
  * @type {string[][]}
  */
 const STRENGTH_LEVELS = [
   ['#######', '#S....#', '#.B...#', '#.*...#', '#....E#', '#######'],
   ['#########', '#S......#', '#..##...#', '#..B....#', '#..##...#', '#...*...#', '#..##...#', '#......E#', '#########'],
+  ['#########', '#S......#', '#.B...B.#', '#.*...*.#', '#.......#', '#....E..#', '#########'],
+  ['#########', '#S......#', '#..###..#', '#.B.*...#', '#..###..#', '#....E..#', '#########'],
 ]
 
 /**

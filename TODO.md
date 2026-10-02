@@ -631,18 +631,23 @@ Effort: **medium** (the logic is small; the visual pass is the work).
 
 ## 74. Snowpoint Temple is too repetitive
 
-Snowpoint Temple (the opening Strength chamber plus the ice-slide rooms) is a
-fixed set of hand-designed puzzles, so every run is the same. Add some
-variety.
+Snowpoint Temple (the opening Strength chamber plus the ice-slide rooms) used to
+be a fixed set of hand-designed puzzles, so every run was the same.
 
-- [ ] Pick a random subset of ice-slide rooms per run (and/or add more rooms).
+Shipped (0.23.0): each visit rolls its own run (`buildIceTempleStages` in
+`src/game/minigames/ice-temple.js`) — 2 of 4 Strength chambers and 4 of 8 ice
+rooms at random — and the flawless-move bonus uses the drawn run's par, not the
+pool total. The room pools were widened to four chambers and eight rooms.
+
+Still open:
+
 - [ ] Consider a seeded procedural generator, keeping the parser’s par /
       solvability check so every room is fair.
-- [ ] Vary the Strength chamber layout too.
 - [ ] Scale the number of rooms with region prestige if it should get harder.
 
-Relevant code: `src/game/minigames/ice-slide.js` (`ICE_SLIDE_LEVELS`,
-`parseIceLevel`), `src/game/minigames/strength.js` (`STRENGTH_ROOMS`),
+Relevant code: `src/game/minigames/ice-temple.js` (`buildIceTempleStages`),
+`src/game/minigames/ice-slide.js` (`ICE_SLIDE_LEVELS`, `parseIceLevel`),
+`src/game/minigames/strength.js` (`STRENGTH_LEVELS`),
 `src/components/ice-slide-scene.js`, and the reducer’s `iceSlide` handlers.
 
 Effort: **small**.

@@ -8,7 +8,7 @@ const gameData = installGameData()
 const { BATTLE_ROYAL_COST, BATTLE_ROYAL_POOL, BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL, BUG_CONTEST_RUSTLES, CONTEST_COST, CONTEST_THEMES, DYNAMAX_ADVENTURES_COST, DYNAMAX_STAGES, MINIGAME_LOCATIONS, MINIGAME_INFO, MINIGAME_AREAS, MINIGAME_REGIONS, MINIGAME_START_ACTION, minigameForLocation, minigamesInRegion, minigameNameForLocation, MINING_COST, POKEATHLON_COST, POKEATHLON_SPRINT_MS, POKE_RADAR_CHAIN_STEP, POKE_RADAR_COST, POKE_RADAR_SIZE, SLOT_JACKPOT, SLOT_PAYLINES, SLOT_REELS, SLOT_ROWS, SLOT_SPIN_COST, SLOT_SYMBOLS, VOLTORB_FLIP_COST, VOLTORB_MAX_LEVEL, VOLTORB_SIZE, AUCTION_LOTS, accuracyScore, auctionAppraisal, battleRoyalOpponent, battleRoyalPrize, boardCleared, boardExploded, boardHints, bugCatchChance, bugContestPrize, bugFleeChance, bugStays, buildContestResults, canAuctionBid, contestAppeal, contestPlacement, contestPlayerRank, contestPrize, contestRank, contestScore, contestTheme, createAuction, createOpponent, createVoltorbBoard, dynamaxBoss, dynamaxPaths, dynamaxPrize, flipVoltorbCell, healSquad, moveBaseAppeal, pickRadarTarget, placeAuctionBid, pokeathlonPrize, pokeRadarPrize, radarChainPoints, radarSequence, rewardItemName, rollContestBug, rollContestBugs, rollContestRivalRound, rollContestTheme, rollMiningReward, simulateBattle, spinSlots, sprintScore, throwNetBall, toBattlePokemon, toggleVoltorbMark, voltorbBoardCoins, voltorbCountForLevel, voltorbFlipPrize, LIGHTS_OUT_COST, LIGHTS_OUT_SCRAMBLE, LIGHTS_OUT_SIZE, CURRY_COST, CURRY_FLAVORS, CURRY_INGREDIENTS, CURRY_ZONE, POKESTAR_COST, POKESTAR_SHOT_COUNT, createLightsOut, toggleLights, lightsSolved, lightsOutPrize, rollCurryRequest, curryScore, curryPrize, pickPokestarShots, pokestarPrize, MATCH3_COST, MATCH3_MOVES, MATCH3_SIZE, MEMORY_COST, MEMORY_PAIRS, WHACK_COST, WHACK_DURATION_MS, WHACK_POP_MIN_MS, WHACK_TARGETS, whackPopupMs, GAME_CORNER_PRIZE_GOAL, GAME_CORNER_PRIZE_POOL, createMatch3Board, findMatches, tryMatch3Swap, resolveMatch3, match3Prize, createMemoryDeck, memoryPrize, rollWhackTarget, whackPrize, MUSICAL_COST, MUSICAL_NOTES, MUSICAL_MAX_SCORE, generateMusicalPattern, judgeMusicalHit, musicalPrize, musicalTotalMs, PICNIC_COST, PICNIC_PICKS, PICNIC_INGREDIENTS, PICNIC_SHINY_MULTIPLIER, ingredientById, sandwichTypes, rollSandwichType, picnicDropScore, picnicSpeciesPool, rollPicnicEncounter, POKEBALL_FACTORY_COST, FACTORY_SIZE, connectionsFor, createFactoryPuzzle, rotateFactoryTile, factoryPowered, factorySolved, factoryPrize, FACTORY_BALL_POOL, rollFactoryBalls, SLIDING_COST, SLIDING_SIZE, solvedSlidingBoard, canSlide, slideTile, isSlidingSolved, createSlidingPuzzle, slidingTileForDirection, slidingPrize, ICE_SLIDE_COST, ICE_SLIDE_ROOMS, ICE_SLIDE_TOTAL_PAR, iceSlidePosition, iceSlideSolved, iceSlidePrize } = await import(
   '../src/game/minigames.js'
 )
-const { match3SwapFrames, MATCH3_SPECIES, MATCH3_TYPES, radarFaces, STRENGTH_ROOMS, STRENGTH_TOTAL_PAR, createStrengthState, strengthMove, strengthSolved } = await import(
+const { match3SwapFrames, MATCH3_SPECIES, MATCH3_TYPES, radarFaces, STRENGTH_ROOMS, STRENGTH_TOTAL_PAR, createStrengthState, strengthMove, strengthSolved, buildIceTempleStages, ICE_TEMPLE_ICE_STAGES, ICE_TEMPLE_STRENGTH_STAGES } = await import(
   '../src/game/minigames.js'
 )
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
@@ -1191,7 +1191,7 @@ test('START_RUINS_PUZZLE charges entry and END_MINIGAME returns to idle', () => 
 })
 
 test('every ice room has a finite par and its exit lands', () => {
-  assert.equal(ICE_SLIDE_ROOMS.length, 4)
+  assert.ok(ICE_SLIDE_ROOMS.length >= 6, 'the pool is wider than a single run')
   assert.ok(ICE_SLIDE_TOTAL_PAR > 0)
   for (const room of ICE_SLIDE_ROOMS) {
     assert.ok(Number.isFinite(room.par) && room.par > 0, 'each room is solvable')
@@ -1216,7 +1216,7 @@ test('ice slides stop at walls and boulders and never overshoot the exit', () =>
   // A slide that reaches the exit lands on it rather than sliding past.
   const crossing = iceSlidePosition(room, east, 'S')
   assert.equal(room.rows[Math.floor(crossing / room.width)][crossing % room.width], 'E')
-  assert.ok(iceSlidePrize(4, ICE_SLIDE_TOTAL_PAR, ICE_SLIDE_TOTAL_PAR, true).money > iceSlidePrize(4, 40, ICE_SLIDE_TOTAL_PAR, true).money)
+  assert.ok(iceSlidePrize(4, ICE_SLIDE_TOTAL_PAR, ICE_SLIDE_TOTAL_PAR, true).money > iceSlidePrize(4, ICE_SLIDE_TOTAL_PAR + 10, ICE_SLIDE_TOTAL_PAR, true).money)
   assert.equal(iceSlidePrize(0, 0, 0, false).money > 0, true)
 })
 
@@ -1252,6 +1252,33 @@ test('the exit stays sealed until the boulder is on the plate', () => {
   for (const direction of ['E', 'E', 'E', 'E', 'S', 'S', 'S'])
     state = strengthMove(level, state, direction) ?? state
   assert.equal(strengthMove(level, state, 'S'), null, 'the sealed exit cannot be entered')
+})
+
+test('a temple run rolls a fair, varied set of rooms', () => {
+  // A deterministic RNG keeps the roll reproducible.
+  let seed = 1
+  const random = () => {
+    seed = (seed * 1103515245 + 12345) % 2147483648
+    return seed / 2147483648
+  }
+  const run = buildIceTempleStages(random)
+  assert.equal(run.stages.length, ICE_TEMPLE_STRENGTH_STAGES + ICE_TEMPLE_ICE_STAGES)
+  assert.equal(run.strengthRooms.length, ICE_TEMPLE_STRENGTH_STAGES)
+  assert.equal(run.iceRooms.length, ICE_TEMPLE_ICE_STAGES)
+  assert.equal(new Set(run.strengthRooms).size, ICE_TEMPLE_STRENGTH_STAGES, 'strength rooms are distinct')
+  assert.equal(new Set(run.iceRooms).size, ICE_TEMPLE_ICE_STAGES, 'ice rooms are distinct')
+  assert.equal(run.stages[0].mode, 'strength')
+  assert.equal(run.stages[run.stages.length - 1].mode, 'ice')
+  const expectedPar =
+    run.strengthRooms.reduce((sum, room) => sum + room.par, 0) +
+    run.iceRooms.reduce((sum, room) => sum + room.par, 0)
+  assert.equal(run.par, expectedPar)
+  assert.ok(Number.isFinite(run.par) && run.par > 0)
+  // Repeated visits roll different rooms.
+  const rolls = new Set(
+    Array.from({ length: 10 }, () => buildIceTempleStages(random).iceRooms.map((room) => room.par).join(','))
+  )
+  assert.ok(rolls.size > 1, 'runs vary')
 })
 
 test('START_ICE_SLIDE charges entry and END_MINIGAME returns to idle', () => {

@@ -43,6 +43,14 @@ test('every gift and static is real data on a real location', () => {
   }
 })
 
+test('baby Pokemon are caught or bred, never gifted', () => {
+  const babies = ['riolu', 'toxel', 'munchlax']
+  for (const gift of GIFTS)
+    assert.ok(!babies.includes(gift.pokemon?.speciesKey ?? ''), `${gift.id} is a baby gift`)
+  for (const entry of STATIC_ENCOUNTERS)
+    assert.ok(!babies.includes(entry.speciesKey), `${entry.id} is a baby static`)
+})
+
 test('find helpers resolve entries', () => {
   assert.equal(findGift(GIFTS[0].id)?.id, GIFTS[0].id)
   assert.equal(findGift('nope'), null)

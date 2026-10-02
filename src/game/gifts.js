@@ -84,27 +84,11 @@ export const GIFTS = [
     requires: { badges: 2 },
   },
   {
-    id: 'gift-kalos-riolu',
-    location: 'kalos-shalour-city',
-    name: 'Tower of Mastery',
-    description: 'A Lucario trainer leaves you a Riolu.',
-    pokemon: { speciesKey: 'riolu', level: 25 },
-    requires: { badges: 3 },
-  },
-  {
     id: 'gift-alola-starter',
     location: 'alola-iki-town',
     name: 'Iki Town Festival',
     description: 'A trial-goer shares one of the Alola starters.',
     randomStarter: 'alola',
-  },
-  {
-    id: 'gift-galar-toxel',
-    location: 'galar-motostoke',
-    name: 'Rose Tower Nursery',
-    description: 'The nursery lets you take home a Toxel.',
-    pokemon: { speciesKey: 'toxel', level: 1 },
-    requires: { badges: 2 },
   },
   {
     id: 'gift-paldea-starter',
@@ -218,14 +202,6 @@ const BASE_STATIC_ENCOUNTERS = [
     level: 25,
     name: 'Invisible Pokemon',
     note: 'Something unseen rustles in the tall grass.',
-  },
-  {
-    id: 'static-sinnoh-munchlax',
-    location: 'sinnoh-route-210',
-    speciesKey: 'munchlax',
-    level: 20,
-    name: 'Honey-tree Munchlax',
-    note: 'A very full Munchlax waddles out of the trees.',
   },
   {
     id: 'static-kalos-snorlax',

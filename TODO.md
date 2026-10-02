@@ -42,21 +42,18 @@ renumbered, so the gaps below are items that shipped.
 10. **#60 Areas should have their own zoomed-in map** — M · ★★ — zones and
     large areas list their sub-areas in the panel only; give them a focused
     map view entered from the Town Map, with a back button to exit.
-11. **#67 Baby Pokemon from breeding, not gifts** — M · ★★ — the Daycare can
-    already hatch babies from their evolved forms; stop handing the babies out
-    as gift/static rewards and give their evolved forms a real source.
-12. **#68 Trainer teams should use all level-appropriate Pokemon** — M · ★★ —
+11. **#68 Trainer teams should use all level-appropriate Pokemon** — M · ★★ —
     the strong type bias and narrow pools mean the same few species repeat; let
     trainers field every level-appropriate Pokemon so the Pokedex "seen" fills
     in.
-13. **#70 Day/night cycle on a 60-minute clock** — M · ★★ — a fixed
+12. **#70 Day/night cycle on a 60-minute clock** — M · ★★ — a fixed
     real-time cycle (full day = 60 min) replacing the wall-clock night flag,
     with a visual phase and time-gated effects.
 ### Tier 2 — Big / low-return, defer
 
-14. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
+13. **#10 Weather & terrain leftovers** — M · ★★½ — terrain rocks and
     route-based field effects.
-15. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+14. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
     doc and real ops for modest player value today.
 
 ---
@@ -413,40 +410,6 @@ Relevant code: `src/components/town-map.js`, `src/components/location-panel.js`
 `REGION_MAP_LAYOUTS`).
 
 Effort: **medium**.
-
-## 67. Baby Pokemon should come from breeding, not gift rewards
-
-Breeding already hatches the baby from its catchable evolved parent — verified
-Lucario→Riolu, Toxtricity→Toxel, Clefairy→Cleffa, Jynx→Smoochum, Magmar→Magby,
-Togetic→Togepi and Snorlax→Munchlax — because `eggSpeciesKey` walks the
-pre-evolution chain, and `tools/validate-data.mjs` now counts breeding as an
-obtainability source. The former raid-refugee babies (Cleffa / Smoochum / Magby)
-are no longer planted in the wild; they hatch from their wild evolved parents
-(Clefairy, Jynx, Magmar), and Togepi comes from Mr. Pokemon's canonical Egg.
-
-Remaining: a few babies are still handed out as one-off gift/static rewards
-(Riolu at the Tower of Mastery, Toxel at the Rose Tower Nursery, and the Sinnoh
-Munchlax static), and the Incense lines are simplified, not modelled.
-
-- [ ] Confirm each remaining baby's evolved form is actually obtainable (wild
-      route, raid or another gift) so breeding can start. Riolu and Toxel are
-      wild in Kalos/Galar already; Lucario and Toxtricity also appear on no
-      route or raid table, so those lines are gift-only today — give the evolved
-      form a real source.
-- [ ] Remove (or repoint) the remaining baby gift/static entries in
-      `src/game/gifts.js` once breeding covers them.
-- [ ] Decide the Incense question: canonically Snorlax→Munchlax,
-      Roselia→Budew, Chimecho→Chingling, Sudowoodo→Bonsly, Mr. Mime→Mime Jr.,
-      Chansey→Happiny, Mantine→Mantyke and Wobbuffet→Wynaut need a held Incense.
-      Either model the items or keep the current simplify (always hatch the
-      baby).
-
-Relevant code: `src/game/breeding.js` (`eggSpeciesKey`),
-`src/game/pokemon/evolution.js` (`getPreEvolutionChain`),
-`src/data/gameData.js` (`preEvolutionMap`), `src/game/gifts.js`,
-`public/data/breeding-data.json`, and `tools/validate-data.mjs`.
-
-Effort: **medium** (mostly sourcing the evolved forms and removing the gifts).
 
 ## 68. Trainer teams should use all level-appropriate Pokemon
 

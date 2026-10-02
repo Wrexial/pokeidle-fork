@@ -479,7 +479,10 @@ One-off scripts used to build the data JSON (not run during dev/build):
   from PokeAPI (form ids resolved to their base species) and writes
   `public/data/breeding-data.json`, which the Daycare's breeding rules use.
   Responses are cached under `tools/cache/`, so it's resumable and only hits
-  the network once per id.
+  the network once per id. The Daycare deliberately drops the Incense
+  requirement: Incense-only babies (Munchlax, Budew, Chingling, Bonsly,
+  Mime Jr., Happiny, Mantyke, Wynaut) hatch from their evolved parent without
+  the held item.
 - `fetch-abilities.cjs` — fetches each species' normal and hidden abilities from
   PokeAPI and writes `public/data/ability-data.json` (keyed by species, camelCase
   ability keys). Cached alongside the breeding data; `rollAbility`

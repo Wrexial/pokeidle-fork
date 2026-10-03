@@ -1160,8 +1160,7 @@
   "connections": [
    "kalos-route-19",
    "kalos-route-20",
-   "kalos-route-21",
-   "kalos-kiloude-city"
+   "kalos-route-21"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1242,7 +1241,6 @@
   "region": "kalos",
   "description": "A town in the Kalos region.",
   "connections": [
-   "kalos-snowbelle-city",
    "kalos-sea-spirits-den"
   ],
   "unlock": {

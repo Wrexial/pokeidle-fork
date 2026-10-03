@@ -353,7 +353,6 @@
   "region": "paldea",
   "description": "A town in the Paldea region, home to Brassius's Grass Gym.",
   "connections": [
-   "paldea-cascarrafa",
    "paldea-east-province"
   ],
   "unlock": {
@@ -537,7 +536,6 @@
   "region": "paldea",
   "description": "A town in the Paldea region, home to Kofu's Water Gym.",
   "connections": [
-   "paldea-artazon",
    "paldea-casseroya-lake",
    "paldea-socarrat-trail"
   ],

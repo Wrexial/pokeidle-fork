@@ -710,7 +710,6 @@
   "connections": [
    "sinnoh-route-213",
    "sinnoh-route-212",
-   "sinnoh-route-225",
    "sinnoh-lake-valor",
    "sinnoh-pokemon-mansion"
   ],
@@ -765,8 +764,6 @@
   "connections": [
    "sinnoh-pastoria-city",
    "sinnoh-route-222",
-   "sinnoh-sea-route-226",
-   "sinnoh-sea-route-230",
    "sinnoh-lake-valor"
   ],
   "unlock": {
@@ -1186,7 +1183,6 @@
    "sinnoh-sunyshore-city",
    "sinnoh-route-214",
    "sinnoh-route-213",
-   "sinnoh-route-227",
    "sinnoh-route-228"
   ],
   "unlock": {
@@ -1323,8 +1319,7 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "sinnoh-sea-route-230",
-   "sinnoh-sea-route-226",
-   "sinnoh-pastoria-city"
+   "sinnoh-sea-route-226"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1356,8 +1351,7 @@
   "connections": [
    "sinnoh-route-227",
    "sinnoh-route-228",
-   "sinnoh-route-225",
-   "sinnoh-route-213"
+   "sinnoh-route-225"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1388,7 +1382,6 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "sinnoh-sea-route-226",
-   "sinnoh-route-222",
    "sinnoh-stark-mountain"
   ],
   "unlock": {
@@ -1501,7 +1494,6 @@
   "connections": [
    "sinnoh-route-229",
    "sinnoh-route-225",
-   "sinnoh-route-213",
    "sinnoh-raid",
    "sinnoh-league"
   ],

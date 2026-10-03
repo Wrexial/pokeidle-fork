@@ -371,8 +371,9 @@ Data conventions:
   sub-areas are travelable from the focused canvas. Roads stay
   on the right-angle grid: `createRoadPaths` (`src/game/progression/roads.js`)
   greedily gives each edge the elbow that overlaps the fewest already-placed
-  roads, and `apply-road-cleanup.cjs` drops the redundant side of every
-  triangle so two roads no longer run along the same line.
+  roads, `apply-road-cleanup.cjs` drops the redundant side of every triangle,
+  and `apply-road-reference.cjs` removes non-reference links that don't split a
+  component, so two roads no longer run along the same line.
 - Some regions' scraped force-directed layout doesn't match the real map, so
   `REGION_MAP_LAYOUTS` in `generate-regions.cjs` overrides it with
   hand-measured coordinates from a labelled reference map. Every region except
@@ -837,6 +838,10 @@ One-off scripts used to build the data JSON (not run during dev/build):
 - `apply-road-cleanup.cjs` — data-only pass that removes the redundant side of
   each road triangle (a through-area becomes the road, a side-area a stub) so
   the Town Map stops drawing overlapping connectors. Idempotent (`--dry`).
+- `apply-road-reference.cjs` — data-only pass that drops a visible town/route
+  edge the scraped `region-maps.json` doesn't list, as long as its two ends stay
+  connected another way (no isolated node, no split component). Clears
+  town-to-town shortcuts the generator added. Idempotent (`--dry`).
 - `lib/zone-layout.cjs` — shared `spreadSubAreaPositions` ring layout for a
   zone hub's hidden sub-areas; used by `generate-regions.cjs` and
   `apply-zone-layout.cjs`.

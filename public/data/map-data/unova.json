@@ -60,9 +60,7 @@
   "description": "A town in the Unova region.",
   "connections": [
    "unova-route-1",
-   "unova-route-2",
-   "unova-aspertia-city",
-   "unova-virbank-city"
+   "unova-route-2"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -94,9 +92,7 @@
   "region": "unova",
   "description": "A town in the Unova region.",
   "connections": [
-   "unova-route-19",
-   "unova-accumula-town",
-   "unova-floccesy-town"
+   "unova-route-19"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -156,8 +152,7 @@
   "region": "unova",
   "description": "A town in the Unova region.",
   "connections": [
-   "unova-route-20",
-   "unova-accumula-town"
+   "unova-route-20"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -191,8 +186,7 @@
   "description": "A town in the Unova region.",
   "connections": [
    "unova-route-20",
-   "unova-route-19",
-   "unova-aspertia-city"
+   "unova-route-19"
   ],
   "unlock": {
    "battlesAtLocation": [

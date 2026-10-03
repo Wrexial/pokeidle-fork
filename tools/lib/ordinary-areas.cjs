@@ -89,6 +89,27 @@ module.exports = {
         position: { x: 45.6, y: 43.9 },
         species: ['caterpie', 'weedle', 'metapod', 'kakuna', 'nidoranF', 'nidoranM', 'sunkern'],
       },
+      {
+        node: 'tohjo-falls',
+        name: 'Tohjo Falls',
+        connects: ['johto-new-bark-town', 'johto-route-29'],
+        position: { x: 75.9, y: 61.5 },
+        species: ['zubat', 'magikarp', 'goldeen', 'wooper', 'rattata'],
+      },
+      {
+        node: 'safari-zone',
+        name: 'Johto Safari Zone',
+        connects: ['johto-route-48'],
+        position: { x: 7.6, y: 56.1 },
+        species: ['kangaskhan', 'rhyhorn', 'doduo', 'pidgey', 'sunkern'],
+      },
+      {
+        node: 'cliff-cave',
+        name: 'Cliff Cave',
+        connects: ['johto-route-47', 'johto-route-48'],
+        position: { x: 7.7, y: 69.7 },
+        species: ['zubat', 'geodude', 'onix', 'machop'],
+      },
     ],
     hoenn: [
       {
@@ -160,6 +181,13 @@ module.exports = {
         connects: ['hoenn-sootopolis-city'],
         position: { x: 72.5, y: 48.1 },
         species: ['zubat', 'geodude', 'sableye', 'mawile'],
+      },
+      {
+        node: 'safari-zone',
+        name: 'Hoenn Safari Zone',
+        connects: ['hoenn-route-121'],
+        position: { x: 65.5, y: 28.7 },
+        species: ['pikachu', 'oddish', 'doduo', 'girafarig', 'heracross', 'pinsir', 'wobbuffet'],
       },
     ],
     sinnoh: [
@@ -254,6 +282,34 @@ module.exports = {
         position: { x: 80.1, y: 40.5 },
         species: ['golbat', 'chimecho', 'bronzor', 'duskull', 'dusclops'],
       },
+      {
+        node: 'ravaged-path',
+        name: 'Ravaged Path',
+        connects: ['sinnoh-route-204', 'sinnoh-route-203'],
+        position: { x: 10.1, y: 52.6 },
+        species: ['zubat', 'geodude', 'psyduck', 'bidoof'],
+      },
+      {
+        node: 'fuego-ironworks',
+        name: 'Fuego Ironworks',
+        connects: ['sinnoh-route-205', 'sinnoh-floaroma-town'],
+        position: { x: 16, y: 41.1 },
+        species: ['magnemite', 'slugma', 'geodude'],
+      },
+      {
+        node: 'pokemon-mansion',
+        name: 'Pokemon Mansion',
+        connects: ['sinnoh-route-212', 'sinnoh-pastoria-city'],
+        position: { x: 59.9, y: 56.5 },
+        species: ['gastly', 'murkrow', 'misdreavus'],
+      },
+      {
+        node: 'sendoff-spring',
+        name: 'Sendoff Spring',
+        connects: ['sinnoh-route-214', 'sinnoh-sea-route-223'],
+        position: { x: 90.6, y: 44.9 },
+        species: ['psyduck', 'goldeen', 'bronzor'],
+      },
     ],
     unova: [
       {
@@ -326,6 +382,20 @@ module.exports = {
         position: { x: 78, y: 5 },
         species: ['woobat', 'deino', 'gothita', 'solosis', 'klink'],
       },
+      {
+        node: 'desert-resort',
+        name: 'Desert Resort',
+        connects: ['unova-route-4', 'unova-nimbasa-city'],
+        position: { x: 58.5, y: 58.7 },
+        species: ['sandile', 'darumaka', 'scraggy', 'sigilyph'],
+      },
+      {
+        node: 'reversal-mountain',
+        name: 'Reversal Mountain',
+        connects: ['unova-route-7', 'unova-icirrus-city'],
+        position: { x: 20.2, y: 32.5 },
+        species: ['woobat', 'roggenrola', 'trapinch', 'numel'],
+      },
     ],
     kalos: [
       {
@@ -390,6 +460,13 @@ module.exports = {
         connects: ['kalos-route-20'],
         position: { x: 79.2, y: 46.6 },
         species: ['jigglypuff', 'foongus', 'golett', 'ditto'],
+      },
+      {
+        node: 'azure-bay',
+        name: 'Azure Bay',
+        connects: ['kalos-route-12', 'kalos-ambrette-town'],
+        position: { x: 23.2, y: 49.9 },
+        species: ['tentacool', 'magikarp', 'wingull', 'frillish'],
       },
     ],
     alola: [

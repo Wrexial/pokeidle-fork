@@ -3068,5 +3068,104 @@
     "maxLevel": 28
    }
   ]
+ },
+ "johto-tohjo-falls": {
+  "name": "Tohjo Falls",
+  "encounters": [
+   {
+    "speciesKey": "zubat",
+    "weight": 20,
+    "minLevel": 3,
+    "maxLevel": 5
+   },
+   {
+    "speciesKey": "magikarp",
+    "weight": 20,
+    "minLevel": 3,
+    "maxLevel": 5
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 20,
+    "minLevel": 3,
+    "maxLevel": 5
+   },
+   {
+    "speciesKey": "wooper",
+    "weight": 12,
+    "minLevel": 3,
+    "maxLevel": 5
+   },
+   {
+    "speciesKey": "rattata",
+    "weight": 12,
+    "minLevel": 3,
+    "maxLevel": 5
+   }
+  ]
+ },
+ "johto-safari-zone": {
+  "name": "Johto Safari Zone",
+  "encounters": [
+   {
+    "speciesKey": "kangaskhan",
+    "weight": 20,
+    "minLevel": 70,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "rhyhorn",
+    "weight": 20,
+    "minLevel": 70,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "doduo",
+    "weight": 20,
+    "minLevel": 70,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "pidgey",
+    "weight": 12,
+    "minLevel": 70,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "sunkern",
+    "weight": 12,
+    "minLevel": 70,
+    "maxLevel": 72
+   }
+  ]
+ },
+ "johto-cliff-cave": {
+  "name": "Cliff Cave",
+  "encounters": [
+   {
+    "speciesKey": "zubat",
+    "weight": 20,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "geodude",
+    "weight": 20,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "onix",
+    "weight": 20,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "machop",
+    "weight": 12,
+    "minLevel": 69,
+    "maxLevel": 71
+   }
+  ]
  }
 }

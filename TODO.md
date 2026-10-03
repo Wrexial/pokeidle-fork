@@ -161,18 +161,17 @@ the shared table `tools/lib/ordinary-areas.cjs`, consumed by both
 `generate-regions.cjs` (merged into `POST_AREAS`) and the idempotent
 `tools/apply-ordinary-areas.cjs` data pass, which wires each area between its
 connect locations with a curated species list, a neighbour-averaged level band
-and a derived biome. Sixty-five landmark areas have shipped across eight
-regions (caves, forests, ruins, towers and lakes from Ilex Forest to Gracia
-Stones). Battle gates on a zone-hub connect resolve to the hub's first
-sub-area, since a zone hub never spawns wilds.
+and a derived biome. Seventy-six landmark areas have shipped across eight
+regions (caves, forests, ruins, towers, lakes and the Safari Zones, from Ilex
+Forest to Gracia Stones). Battle gates on a zone-hub connect resolve to the
+hub's first sub-area, since a zone hub never spawns wilds.
 
 Still open:
 
 - [ ] Grow the table (or scrape the remaining landmark locations) with more
-      areas — Johto's Tohjo Falls / Safari Zone, Sinnoh's Fuego Ironworks /
-      Pokemon Mansion / Sendoff Spring, Unova's Desert Resort, Kalos's Azure
-      Bay / Chamber of Emptiness, Paldea's Zero Gate, and the other safari
-      zones.
+      areas — Johto's Whirl Islands side rooms, Sinnoh's Ramanas Park / Trophy
+      Garden, Unova's Black City / White Forest, Kalos's Chamber of Emptiness /
+      Kalos Power Plant, Paldea's Zero Gate and Glaseado's side caves.
 - [ ] Galar's Wild Area sub-areas (Stony Wilderness, Dusty Bowl, Lake of
       Outrage, ...) belong inside the Wild Area zone, not as standalone routes
       — see #36.

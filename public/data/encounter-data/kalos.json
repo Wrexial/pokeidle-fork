@@ -2766,5 +2766,34 @@
     "maxLevel": 69
    }
   ]
+ },
+ "kalos-azure-bay": {
+  "name": "Azure Bay",
+  "encounters": [
+   {
+    "speciesKey": "tentacool",
+    "weight": 20,
+    "minLevel": 41,
+    "maxLevel": 43
+   },
+   {
+    "speciesKey": "magikarp",
+    "weight": 20,
+    "minLevel": 41,
+    "maxLevel": 43
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 20,
+    "minLevel": 41,
+    "maxLevel": 43
+   },
+   {
+    "speciesKey": "frillish",
+    "weight": 12,
+    "minLevel": 41,
+    "maxLevel": 43
+   }
+  ]
  }
 }

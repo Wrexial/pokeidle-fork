@@ -160,7 +160,8 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "sinnoh-jubilife-city",
-   "sinnoh-oreburgh-city"
+   "sinnoh-oreburgh-city",
+   "sinnoh-ravaged-path"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -222,7 +223,8 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "sinnoh-floaroma-town",
-   "sinnoh-jubilife-city"
+   "sinnoh-jubilife-city",
+   "sinnoh-ravaged-path"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -251,7 +253,8 @@
   "description": "A town in the Sinnoh region.",
   "connections": [
    "sinnoh-route-204",
-   "sinnoh-route-205"
+   "sinnoh-route-205",
+   "sinnoh-fuego-ironworks"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -292,7 +295,8 @@
    "sinnoh-eterna-city",
    "sinnoh-floaroma-town",
    "sinnoh-eterna-forest",
-   "sinnoh-old-chateau"
+   "sinnoh-old-chateau",
+   "sinnoh-fuego-ironworks"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -680,7 +684,8 @@
   "background": "/backgrounds/beach.png",
   "connections": [
    "sinnoh-pastoria-city",
-   "sinnoh-hearthome-city"
+   "sinnoh-hearthome-city",
+   "sinnoh-pokemon-mansion"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -707,7 +712,8 @@
    "sinnoh-route-213",
    "sinnoh-route-212",
    "sinnoh-route-225",
-   "sinnoh-lake-valor"
+   "sinnoh-lake-valor",
+   "sinnoh-pokemon-mansion"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -790,7 +796,8 @@
   "connections": [
    "sinnoh-veilstone-city",
    "sinnoh-route-222",
-   "sinnoh-turnback-cave"
+   "sinnoh-turnback-cave",
+   "sinnoh-sendoff-spring"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1260,7 +1267,8 @@
   "connections": [
    "sinnoh-sunyshore-city",
    "sinnoh-route-224",
-   "sinnoh-turnback-cave"
+   "sinnoh-turnback-cave",
+   "sinnoh-sendoff-spring"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1928,5 +1936,113 @@
   },
   "biome": "cave",
   "background": "/backgrounds/cave.png"
+ },
+ "sinnoh-ravaged-path": {
+  "id": "sinnoh-ravaged-path",
+  "name": "Ravaged Path",
+  "type": "route",
+  "region": "sinnoh",
+  "description": "A wild area in the Sinnoh region.",
+  "routeKey": "sinnoh-ravaged-path",
+  "connections": [
+   "sinnoh-route-204",
+   "sinnoh-route-203"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-204",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 400203.25,
+  "position": {
+   "x": 10.1,
+   "y": 52.6
+  },
+  "biome": "grassland",
+  "background": "/backgrounds/grassland.png"
+ },
+ "sinnoh-fuego-ironworks": {
+  "id": "sinnoh-fuego-ironworks",
+  "name": "Fuego Ironworks",
+  "type": "route",
+  "region": "sinnoh",
+  "description": "A wild area in the Sinnoh region.",
+  "routeKey": "sinnoh-fuego-ironworks",
+  "connections": [
+   "sinnoh-route-205",
+   "sinnoh-floaroma-town"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-205",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 400204.75,
+  "position": {
+   "x": 16,
+   "y": 41.1
+  },
+  "biome": "grassland",
+  "background": "/backgrounds/grassland.png"
+ },
+ "sinnoh-pokemon-mansion": {
+  "id": "sinnoh-pokemon-mansion",
+  "name": "Pokemon Mansion",
+  "type": "route",
+  "region": "sinnoh",
+  "description": "A wild area in the Sinnoh region.",
+  "routeKey": "sinnoh-pokemon-mansion",
+  "connections": [
+   "sinnoh-route-212",
+   "sinnoh-pastoria-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-212",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 400212.25,
+  "position": {
+   "x": 59.9,
+   "y": 56.5
+  },
+  "biome": "grassland",
+  "background": "/backgrounds/grassland.png"
+ },
+ "sinnoh-sendoff-spring": {
+  "id": "sinnoh-sendoff-spring",
+  "name": "Sendoff Spring",
+  "type": "route",
+  "region": "sinnoh",
+  "description": "A wild area in the Sinnoh region.",
+  "routeKey": "sinnoh-sendoff-spring",
+  "connections": [
+   "sinnoh-route-214",
+   "sinnoh-sea-route-223"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-214",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 400214.25,
+  "position": {
+   "x": 90.6,
+   "y": 44.9
+  },
+  "biome": "coast",
+  "background": "/backgrounds/beach.png"
  }
 }

@@ -3110,5 +3110,63 @@
     "maxLevel": 7
    }
   ]
+ },
+ "unova-desert-resort": {
+  "name": "Desert Resort",
+  "encounters": [
+   {
+    "speciesKey": "sandile",
+    "weight": 20,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "darumaka",
+    "weight": 20,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "scraggy",
+    "weight": 20,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "sigilyph",
+    "weight": 12,
+    "minLevel": 14,
+    "maxLevel": 16
+   }
+  ]
+ },
+ "unova-reversal-mountain": {
+  "name": "Reversal Mountain",
+  "encounters": [
+   {
+    "speciesKey": "woobat",
+    "weight": 20,
+    "minLevel": 23,
+    "maxLevel": 25
+   },
+   {
+    "speciesKey": "roggenrola",
+    "weight": 20,
+    "minLevel": 23,
+    "maxLevel": 25
+   },
+   {
+    "speciesKey": "trapinch",
+    "weight": 20,
+    "minLevel": 23,
+    "maxLevel": 25
+   },
+   {
+    "speciesKey": "numel",
+    "weight": 12,
+    "minLevel": 23,
+    "maxLevel": 25
+   }
+  ]
  }
 }

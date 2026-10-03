@@ -1042,7 +1042,8 @@
   "connections": [
    "hoenn-lilycove-city",
    "hoenn-route-120",
-   "hoenn-route-122"
+   "hoenn-route-122",
+   "hoenn-safari-zone"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -2002,5 +2003,31 @@
   },
   "biome": "cave",
   "background": "/backgrounds/cave.png"
+ },
+ "hoenn-safari-zone": {
+  "id": "hoenn-safari-zone",
+  "name": "Hoenn Safari Zone",
+  "type": "route",
+  "region": "hoenn",
+  "description": "A wild area in the Hoenn region.",
+  "routeKey": "hoenn-safari-zone",
+  "connections": [
+   "hoenn-route-121"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-121",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 300121.25,
+  "position": {
+   "x": 65.5,
+   "y": 28.7
+  },
+  "biome": "grassland",
+  "background": "/backgrounds/grassland.png"
  }
 }

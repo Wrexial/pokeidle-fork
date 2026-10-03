@@ -7,7 +7,8 @@
   "description": "A town in the Johto region.",
   "connections": [
    "johto-route-29",
-   "johto-mt-silver"
+   "johto-mt-silver",
+   "johto-tohjo-falls"
   ],
   "unlock": {
    "entry": true
@@ -38,7 +39,8 @@
   "connections": [
    "johto-cherrygrove-city",
    "johto-new-bark-town",
-   "johto-route-46"
+   "johto-route-46",
+   "johto-tohjo-falls"
   ],
   "unlock": {
    "requires": [
@@ -1014,7 +1016,8 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "johto-route-48",
-   "johto-cianwood-city"
+   "johto-cianwood-city",
+   "johto-cliff-cave"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1044,7 +1047,9 @@
   "routeKey": "johto-route-48",
   "background": "/backgrounds/grassland.png",
   "connections": [
-   "johto-route-47"
+   "johto-route-47",
+   "johto-safari-zone",
+   "johto-cliff-cave"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1419,5 +1424,85 @@
   },
   "biome": "forest",
   "background": "/backgrounds/grassland.png"
+ },
+ "johto-tohjo-falls": {
+  "id": "johto-tohjo-falls",
+  "name": "Tohjo Falls",
+  "type": "route",
+  "region": "johto",
+  "description": "A wild area in the Johto region.",
+  "routeKey": "johto-tohjo-falls",
+  "connections": [
+   "johto-new-bark-town",
+   "johto-route-29"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-new-bark-town",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 199999.25,
+  "position": {
+   "x": 75.9,
+   "y": 61.5
+  },
+  "biome": "coast",
+  "background": "/backgrounds/beach.png"
+ },
+ "johto-safari-zone": {
+  "id": "johto-safari-zone",
+  "name": "Johto Safari Zone",
+  "type": "route",
+  "region": "johto",
+  "description": "A wild area in the Johto region.",
+  "routeKey": "johto-safari-zone",
+  "connections": [
+   "johto-route-48"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-route-48",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 200048.25,
+  "position": {
+   "x": 7.6,
+   "y": 56.1
+  },
+  "biome": "grassland",
+  "background": "/backgrounds/grassland.png"
+ },
+ "johto-cliff-cave": {
+  "id": "johto-cliff-cave",
+  "name": "Cliff Cave",
+  "type": "route",
+  "region": "johto",
+  "description": "A wild area in the Johto region.",
+  "routeKey": "johto-cliff-cave",
+  "connections": [
+   "johto-route-47",
+   "johto-route-48"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-route-47",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 200047.25,
+  "position": {
+   "x": 7.7,
+   "y": 69.7
+  },
+  "biome": "cave",
+  "background": "/backgrounds/cave.png"
  }
 }

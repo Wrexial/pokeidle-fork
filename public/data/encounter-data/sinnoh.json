@@ -3832,5 +3832,103 @@
     "maxLevel": 48
    }
   ]
+ },
+ "sinnoh-ravaged-path": {
+  "name": "Ravaged Path",
+  "encounters": [
+   {
+    "speciesKey": "zubat",
+    "weight": 20,
+    "minLevel": 11,
+    "maxLevel": 13
+   },
+   {
+    "speciesKey": "geodude",
+    "weight": 20,
+    "minLevel": 11,
+    "maxLevel": 13
+   },
+   {
+    "speciesKey": "psyduck",
+    "weight": 20,
+    "minLevel": 11,
+    "maxLevel": 13
+   },
+   {
+    "speciesKey": "bidoof",
+    "weight": 12,
+    "minLevel": 11,
+    "maxLevel": 13
+   }
+  ]
+ },
+ "sinnoh-fuego-ironworks": {
+  "name": "Fuego Ironworks",
+  "encounters": [
+   {
+    "speciesKey": "magnemite",
+    "weight": 20,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "slugma",
+    "weight": 20,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "geodude",
+    "weight": 20,
+    "minLevel": 14,
+    "maxLevel": 16
+   }
+  ]
+ },
+ "sinnoh-pokemon-mansion": {
+  "name": "Pokemon Mansion",
+  "encounters": [
+   {
+    "speciesKey": "gastly",
+    "weight": 20,
+    "minLevel": 31,
+    "maxLevel": 33
+   },
+   {
+    "speciesKey": "murkrow",
+    "weight": 20,
+    "minLevel": 31,
+    "maxLevel": 33
+   },
+   {
+    "speciesKey": "misdreavus",
+    "weight": 20,
+    "minLevel": 31,
+    "maxLevel": 33
+   }
+  ]
+ },
+ "sinnoh-sendoff-spring": {
+  "name": "Sendoff Spring",
+  "encounters": [
+   {
+    "speciesKey": "psyduck",
+    "weight": 20,
+    "minLevel": 46,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 20,
+    "minLevel": 46,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "bronzor",
+    "weight": 20,
+    "minLevel": 46,
+    "maxLevel": 48
+   }
+  ]
  }
 }

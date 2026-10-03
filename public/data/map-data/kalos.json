@@ -472,7 +472,8 @@
   "connections": [
    "kalos-route-8",
    "kalos-route-9",
-   "kalos-glittering-cave"
+   "kalos-glittering-cave",
+   "kalos-azure-bay"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -695,7 +696,8 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "kalos-shalour-city",
-   "kalos-coumarine-city"
+   "kalos-coumarine-city",
+   "kalos-azure-bay"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1652,5 +1654,32 @@
   },
   "biome": "grassland",
   "background": "/backgrounds/grassland.png"
+ },
+ "kalos-azure-bay": {
+  "id": "kalos-azure-bay",
+  "name": "Azure Bay",
+  "type": "route",
+  "region": "kalos",
+  "description": "A wild area in the Kalos region.",
+  "routeKey": "kalos-azure-bay",
+  "connections": [
+   "kalos-route-12",
+   "kalos-ambrette-town"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-12",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 600008.75,
+  "position": {
+   "x": 23.2,
+   "y": 49.9
+  },
+  "biome": "coast",
+  "background": "/backgrounds/beach.png"
  }
 }

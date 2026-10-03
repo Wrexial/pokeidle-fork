@@ -34,7 +34,7 @@ export const CHANGELOG = [
             'Snowpoint Temple now opens with a Strength chamber: push the boulder onto the pressure plate to unseal the exit before the ice rooms',
             'Locations are labelled by their real kind now — Cave, Forest, Sea Route, Mountain, Desert, Volcanic, Tundra, Ruins — instead of calling every wild stop a \u201cRoute\u201d, and a zone hub lists each open sub-area\u2019s wild Pokemon inline so its habitats can be compared without travelling into each one',
             'The DLC areas are their own regions now: the Galar Expansion Pass (Isle of Armor, Crown Tundra) and the Paldea DLC (Kitakami, the Terarium) each get a Town Map tab, their own map and level band, and a legendary Raid Island, and open automatically once their parent region\u2019s Champion is beaten — no Unlock Token needed. Their legendaries moved off the base region\u2019s Raid Island onto their own',
-            'Sixty-five landmarks the map scraper used to drop are real wild areas now, each with its own wild table — caves, forests, ruins, towers and lakes across Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar and Paldea, from Ilex Forest and the Ruins of Alph to Stark Mountain, Dragonspiral Tower, Lush Jungle and Casseroya Lake',
+            'Seventy-six landmarks the map scraper used to drop are real wild areas now, each with its own wild table — caves, forests, ruins, towers and lakes across Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar and Paldea, from Ilex Forest and the Ruins of Alph to the Safari Zones, Stark Mountain, Dragonspiral Tower, Lush Jungle and Casseroya Lake',
           ],
         },
         {

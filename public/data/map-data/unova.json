@@ -385,7 +385,8 @@
   "connections": [
    "unova-castelia-city",
    "unova-nimbasa-city",
-   "unova-relic-castle"
+   "unova-relic-castle",
+   "unova-desert-resort"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -417,7 +418,8 @@
    "unova-route-4",
    "unova-route-16",
    "unova-route-5",
-   "unova-relic-castle"
+   "unova-relic-castle",
+   "unova-desert-resort"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -668,7 +670,8 @@
   "connections": [
    "unova-mistralton-city",
    "unova-icirrus-city",
-   "unova-twist-mountain"
+   "unova-twist-mountain",
+   "unova-reversal-mountain"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -699,7 +702,8 @@
    "unova-route-7",
    "unova-twist-mountain",
    "unova-dragonspiral-tower",
-   "unova-moor-of-icirrus"
+   "unova-moor-of-icirrus",
+   "unova-reversal-mountain"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1879,5 +1883,59 @@
   },
   "biome": "grassland",
   "background": "/backgrounds/grassland.png"
+ },
+ "unova-desert-resort": {
+  "id": "unova-desert-resort",
+  "name": "Desert Resort",
+  "type": "route",
+  "region": "unova",
+  "description": "A wild area in the Unova region.",
+  "routeKey": "unova-desert-resort",
+  "connections": [
+   "unova-route-4",
+   "unova-nimbasa-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-4",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 500004.2502,
+  "position": {
+   "x": 58.5,
+   "y": 58.7
+  },
+  "biome": "desert",
+  "background": "/backgrounds/grassland.png"
+ },
+ "unova-reversal-mountain": {
+  "id": "unova-reversal-mountain",
+  "name": "Reversal Mountain",
+  "type": "route",
+  "region": "unova",
+  "description": "A wild area in the Unova region.",
+  "routeKey": "unova-reversal-mountain",
+  "connections": [
+   "unova-route-7",
+   "unova-icirrus-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-7",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 500007.25,
+  "position": {
+   "x": 20.2,
+   "y": 32.5
+  },
+  "biome": "mountain",
+  "background": "/backgrounds/mountain.png"
  }
 }

@@ -98,6 +98,9 @@ export function selectBestBall(speciesKey, enabledBalls, inventory, context) {
 /** Whether a route's location reads as water (for the Dive Ball). @param {MapLocation | undefined} location */
 export function isWaterLocation(location) {
   if (!location) return !1
+  // The committed biome is authoritative once apply-biomes.cjs has run; the
+  // name/description heuristic keeps hand-authored data working.
+  if (location.biome === 'coast') return !0
   const text = `${location.name ?? ''} ${location.description ?? ''}`.toLowerCase()
   return (
     location.background === '/backgrounds/beach.png' ||
@@ -108,6 +111,8 @@ export function isWaterLocation(location) {
 /** Whether a route's location reads as a cave (for the Dusk Ball). @param {MapLocation | undefined} location */
 export function isCaveLocation(location) {
   if (!location) return !1
+  // Ruins and towers are dark, enclosed spaces too, so the Dusk Ball boosts there.
+  if (location.biome === 'cave' || location.biome === 'ruins') return !0
   const text = `${location.name ?? ''} ${location.description ?? ''}`.toLowerCase()
   return location.background === '/backgrounds/cave.png' || /cave|tunnel|mine|cavern|grotto/.test(text)
 }

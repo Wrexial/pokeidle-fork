@@ -82,6 +82,7 @@ const BIOME_OVERRIDES = {
   route14: 'grassland',
   route15: 'grassland',
   victoryRoad: 'cave',
+  mtMoon: 'cave',
   safariZone: 'grassland',
   seafoamIslands: 'cave',
   pokemonMansion: 'cave',

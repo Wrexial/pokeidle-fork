@@ -287,7 +287,10 @@ Data conventions:
   swaps in a dedicated `/backgrounds/<biome>` (any web image format) when that
   biome is listed in `BIOME_SCENE_IMAGES` (`src/data/ui.js`) — drop the painted
   art in and add the line to install it. The forest, autumn, desert, swamp,
-  volcanic, tundra and ruins art is wired in.
+  volcanic, tundra and ruins art is wired in. `isWaterLocation` /
+  `isCaveLocation` (`src/game/catching.js`, for the Dive / Dusk Ball bonuses)
+  and the forage check in `route-activities.js` also read the biome (coast is
+  water, cave and ruins are cave), falling back to the old name/background regex.
   The battle scene also layers `BattleWeatherOverlay` (`battle-weather-overlay.js`):
   CSS rain/sand/snow/sun/wind particles behind the combatants, hidden under
   reduced motion. Unlock rules support

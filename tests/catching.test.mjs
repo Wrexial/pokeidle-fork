@@ -107,6 +107,14 @@ test('location helpers classify water, caves and night', () => {
   assert.equal(isWaterLocation({ name: 'Route 1', description: 'A grassy path.' }), false)
   assert.equal(isCaveLocation({ name: 'Mt. Moon', description: 'A cave through the mountain.' }), true)
   assert.equal(isCaveLocation({ name: 'Route 2', description: 'A path.' }), false)
+  // The committed biome wins once apply-biomes.cjs has run, so a sea route with
+  // a placeholder name still gets the Dive Ball bonus and a ruin counts as a
+  // cave for the Dusk Ball.
+  assert.equal(isWaterLocation({ name: 'Route 999', biome: 'coast' }), true)
+  assert.equal(isWaterLocation({ name: 'Route 999', biome: 'forest' }), false)
+  assert.equal(isCaveLocation({ name: 'Route 999', biome: 'cave' }), true)
+  assert.equal(isCaveLocation({ name: 'Bell Tower', biome: 'ruins' }), true)
+  assert.equal(isCaveLocation({ name: 'Route 999', biome: 'grassland' }), false)
   // isNightTime follows the game's 60-minute day/night cycle, not the wall
   // clock (see tests/day-night.test.mjs for the cycle itself).
   assert.equal(isNightTime(3_600_000 * 0.8), true)

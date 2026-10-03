@@ -113,6 +113,9 @@ function routeHasType(routeKey, types) {
   )
 }
 
+/** Biomes that are overgrown enough to forage for berries and supplies. */
+const FORAGE_BIOMES = new Set(['grassland', 'forest', 'autumn', 'swamp'])
+
 /**
  * Whether a location is overgrown enough to forage.
  * @param {MapLocation | undefined} location
@@ -120,9 +123,9 @@ function routeHasType(routeKey, types) {
  */
 function isForageLocation(location) {
   if (!location || isWaterLocation(location) || isCaveLocation(location)) return false
+  if (location.biome && FORAGE_BIOMES.has(location.biome)) return true
   const name = location.name ?? ''
   return (
-    location.background === '/backgrounds/forest.png' ||
     location.background === '/backgrounds/grassland.png' ||
     /forest|woods|grove|park|meadow|garden|tangle|jungle|safari|plain|prairie|field/i.test(name)
   )

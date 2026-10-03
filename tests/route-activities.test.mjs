@@ -41,6 +41,22 @@ test('route activities are offered by terrain', () => {
   assert.deepEqual(routeActivityIds(undefined), [])
 })
 
+test('foraging follows the location biome', () => {
+  const withEncounters = (/** @type {string} */ biome) =>
+    locations.find(
+      (location) => location.biome === biome && encounterData[location.routeKey]?.encounters?.length
+    )
+  const forest = withEncounters('forest')
+  assert.ok(forest, 'a forest route exists')
+  assert.ok(routeActivityIds(forest).includes('forage'), 'woods are forageable')
+  const coast = withEncounters('coast')
+  assert.ok(coast, 'a coastal route exists')
+  assert.ok(!routeActivityIds(coast).includes('forage'), 'beaches are not forageable')
+  const ruins = withEncounters('ruins')
+  assert.ok(ruins, 'a ruins route exists')
+  assert.ok(!routeActivityIds(ruins).includes('forage'), 'ruins are not forageable')
+})
+
 test('fishing is only offered on the curated water-rich routes', () => {
   assert.ok(FISHING_LOCATIONS.size > 0)
   for (const locationId of FISHING_LOCATIONS) {

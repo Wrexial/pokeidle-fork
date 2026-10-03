@@ -267,8 +267,7 @@
   "connections": [
    "unova-striaton-city",
    "unova-nacrene-city",
-   "unova-pinwheel-forest",
-   "unova-wellspring-cave"
+   "unova-pinwheel-forest"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -669,7 +668,6 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "unova-mistralton-city",
-   "unova-icirrus-city",
    "unova-twist-mountain",
    "unova-reversal-mountain"
   ],
@@ -699,7 +697,6 @@
   "description": "A town in the Unova region, home to Brycen's Ice Gym.",
   "connections": [
    "unova-route-8",
-   "unova-route-7",
    "unova-twist-mountain",
    "unova-dragonspiral-tower",
    "unova-moor-of-icirrus",
@@ -1017,8 +1014,7 @@
   "connections": [
    "unova-undella-town",
    "unova-lacunosa-town",
-   "unova-route-22",
-   "unova-giant-chasm"
+   "unova-route-22"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1047,9 +1043,7 @@
    "unova-route-14",
    "unova-route-21",
    "unova-lentimas-town",
-   "unova-humilau-city",
-   "unova-giant-chasm",
-   "unova-challengers-cave"
+   "unova-giant-chasm"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1123,8 +1117,7 @@
   "description": "A town in the Unova region.",
   "connections": [
    "unova-route-21",
-   "unova-route-22",
-   "unova-undella-town"
+   "unova-route-22"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1677,7 +1670,6 @@
   "description": "A wild area in the Unova region.",
   "routeKey": "unova-wellspring-cave",
   "connections": [
-   "unova-route-3",
    "unova-nacrene-city"
   ],
   "unlock": {
@@ -1785,7 +1777,6 @@
   "description": "A wild area in the Unova region.",
   "routeKey": "unova-giant-chasm",
   "connections": [
-   "unova-route-13",
    "unova-undella-town"
   ],
   "unlock": {
@@ -1812,8 +1803,7 @@
   "description": "A wild area in the Unova region.",
   "routeKey": "unova-challengers-cave",
   "connections": [
-   "unova-route-14",
-   "unova-undella-town"
+   "unova-route-14"
   ],
   "unlock": {
    "battlesAtLocation": [

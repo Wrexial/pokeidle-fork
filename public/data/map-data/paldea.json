@@ -47,8 +47,8 @@
   },
   "unlockOrder": 910000.5,
   "position": {
-   "x": 48.409243714112534,
-   "y": 80.83999291966833
+   "x": 40.68,
+   "y": 68.86
   },
   "hidden": true,
   "zone": "paldea-south-province",
@@ -186,8 +186,8 @@
   },
   "unlockOrder": 910002.5003,
   "position": {
-   "x": 62.43,
-   "y": 69.08
+   "x": 48.47,
+   "y": 72.46
   },
   "hidden": true,
   "zone": "paldea-south-province",
@@ -218,8 +218,8 @@
   },
   "unlockOrder": 910002.5004,
   "position": {
-   "x": 37.57,
-   "y": 71.27
+   "x": 48.47,
+   "y": 79.66
   },
   "hidden": true,
   "zone": "paldea-south-province",
@@ -250,8 +250,8 @@
   },
   "unlockOrder": 910002.5005,
   "position": {
-   "x": 36.709554069442525,
-   "y": 40.808798253342204
+   "x": 24.49,
+   "y": 34.79
   },
   "hidden": true,
   "zone": "paldea-west-province",
@@ -292,8 +292,8 @@
   },
   "unlockOrder": 910003,
   "position": {
-   "x": 30.99,
-   "y": 42.935
+   "x": 31.42,
+   "y": 44.39
   },
   "hidden": true,
   "zone": "paldea-west-province",
@@ -601,8 +601,8 @@
   },
   "unlockOrder": 910004.5002,
   "position": {
-   "x": 79.7940934359101,
-   "y": 67.37657235649185
+   "x": 76.25,
+   "y": 50.55
   },
   "hidden": true,
   "zone": "paldea-east-province",
@@ -633,8 +633,8 @@
   },
   "unlockOrder": 910004.5004,
   "position": {
-   "x": 75.58,
-   "y": 19.37
+   "x": 62.61,
+   "y": 13.51
   },
   "hidden": true,
   "zone": "paldea-north-province",
@@ -667,8 +667,8 @@
   },
   "unlockOrder": 910004.5005,
   "position": {
-   "x": 35.38,
-   "y": 81.87
+   "x": 40.68,
+   "y": 83.26
   },
   "hidden": true,
   "zone": "paldea-south-province",
@@ -700,8 +700,8 @@
   },
   "unlockOrder": 910004.5003,
   "position": {
-   "x": 67.68044593055747,
-   "y": 46.5412017466578
+   "x": 83.17,
+   "y": 60.15
   },
   "hidden": true,
   "zone": "paldea-east-province",
@@ -733,8 +733,8 @@
   },
   "unlockOrder": 910004.5006,
   "position": {
-   "x": 15.28,
-   "y": 82.775
+   "x": 32.89,
+   "y": 79.66
   },
   "hidden": true,
   "zone": "paldea-south-province",
@@ -765,8 +765,8 @@
   },
   "unlockOrder": 910005,
   "position": {
-   "x": 11.99,
-   "y": 38.915
+   "x": 17.56,
+   "y": 44.39
   },
   "hidden": true,
   "zone": "paldea-west-province",
@@ -798,8 +798,8 @@
   },
   "unlockOrder": 910005.5,
   "position": {
-   "x": 81.43,
-   "y": 32.89
+   "x": 69.54,
+   "y": 23.11
   },
   "hidden": true,
   "zone": "paldea-north-province",
@@ -875,8 +875,8 @@
   },
   "unlockOrder": 910006.0004,
   "position": {
-   "x": 66.08,
-   "y": 78.95
+   "x": 32.89,
+   "y": 72.46
   },
   "hidden": true,
   "zone": "paldea-south-province",
@@ -961,8 +961,8 @@
   },
   "unlockOrder": 910006.0002,
   "position": {
-   "x": 43.79,
-   "y": 6.94
+   "x": 55.68,
+   "y": 23.12
   },
   "hidden": true,
   "zone": "paldea-north-province",
@@ -994,8 +994,8 @@
   },
   "unlockOrder": 910006.5001,
   "position": {
-   "x": 85.09,
-   "y": 47.32
+   "x": 69.32,
+   "y": 60.15
   },
   "hidden": true,
   "zone": "paldea-east-province",
@@ -1118,8 +1118,8 @@
   },
   "unlockOrder": 910002.5001,
   "position": {
-   "x": 50.8747159066519,
-   "y": 63.14562044441027
+   "x": 51.28,
+   "y": 57.75
   },
   "biome": "ruins"
  },
@@ -1144,8 +1144,8 @@
   },
   "unlockOrder": 910002.501,
   "position": {
-   "x": 55.12805167143751,
-   "y": 58.881257510917884
+   "x": 59.28,
+   "y": 64.15
   },
   "biome": "ruins"
  },
@@ -1170,8 +1170,8 @@
   },
   "unlockOrder": 910002.502,
   "position": {
-   "x": 50.87617818454376,
-   "y": 58.85545230834547
+   "x": 51.28,
+   "y": 70.55
   },
   "biome": "ruins"
  },
@@ -1196,8 +1196,8 @@
   },
   "unlockOrder": 910002.503,
   "position": {
-   "x": 55.141101029544274,
-   "y": 63.11366094685157
+   "x": 43.28,
+   "y": 64.15
   },
   "biome": "cave"
  },

@@ -407,8 +407,7 @@
    "sinnoh-oreburgh-city",
    "sinnoh-route-208",
    "sinnoh-mt-coronet",
-   "sinnoh-oreburgh-gate",
-   "sinnoh-wayward-cave"
+   "sinnoh-oreburgh-gate"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -930,7 +929,6 @@
   "connections": [
    "sinnoh-route-216",
    "sinnoh-snowpoint-city",
-   "sinnoh-snowpoint-temple",
    "sinnoh-lake-acuity"
   ],
   "unlock": {
@@ -1675,8 +1673,7 @@
   "description": "A wild area in the Sinnoh region.",
   "routeKey": "sinnoh-wayward-cave",
   "connections": [
-   "sinnoh-route-206",
-   "sinnoh-route-207"
+   "sinnoh-route-206"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1756,8 +1753,7 @@
   "description": "A wild area in the Sinnoh region.",
   "routeKey": "sinnoh-snowpoint-temple",
   "connections": [
-   "sinnoh-snowpoint-city",
-   "sinnoh-route-217"
+   "sinnoh-snowpoint-city"
   ],
   "unlock": {
    "battlesAtLocation": [

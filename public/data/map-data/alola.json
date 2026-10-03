@@ -46,7 +46,7 @@
   "unlockOrder": 700001.0001,
   "position": {
    "x": 22,
-   "y": 16.99
+   "y": 10.41
   },
   "hidden": true,
   "zone": "alola-melemele-island",
@@ -78,8 +78,8 @@
   },
   "unlockOrder": 700001.0002,
   "position": {
-   "x": 16,
-   "y": 12
+   "x": 30.49,
+   "y": 13.22
   },
   "hidden": true,
   "zone": "alola-melemele-island",
@@ -111,8 +111,8 @@
   },
   "unlockOrder": 700002,
   "position": {
-   "x": 28,
-   "y": 22
+   "x": 34,
+   "y": 20.01
   },
   "hidden": true,
   "zone": "alola-melemele-island",
@@ -237,8 +237,8 @@
   },
   "unlockOrder": 700003,
   "position": {
-   "x": 16,
-   "y": 26
+   "x": 30.49,
+   "y": 26.8
   },
   "hidden": true,
   "zone": "alola-melemele-island",
@@ -308,8 +308,8 @@
   },
   "unlockOrder": 700004,
   "position": {
-   "x": 68,
-   "y": 18
+   "x": 79.07,
+   "y": 10.27
   },
   "hidden": true,
   "zone": "alola-akala-island",
@@ -390,8 +390,8 @@
   },
   "unlockOrder": 700005,
   "position": {
-   "x": 88,
-   "y": 26
+   "x": 87.75,
+   "y": 12.79
   },
   "hidden": true,
   "zone": "alola-akala-island",
@@ -424,8 +424,8 @@
   },
   "unlockOrder": 700006,
   "position": {
-   "x": 74,
-   "y": 14
+   "x": 92.36,
+   "y": 19.19
   },
   "hidden": true,
   "zone": "alola-akala-island",
@@ -457,8 +457,8 @@
   },
   "unlockOrder": 700007,
   "position": {
-   "x": 84,
-   "y": 18
+   "x": 90.76,
+   "y": 26.47
   },
   "hidden": true,
   "zone": "alola-akala-island",
@@ -489,8 +489,8 @@
   },
   "unlockOrder": 700008,
   "position": {
-   "x": 76.93226876040832,
-   "y": 18.932268760408313
+   "x": 83.69,
+   "y": 31.22
   },
   "hidden": true,
   "zone": "alola-akala-island",
@@ -514,8 +514,8 @@
   },
   "unlockOrder": 700009,
   "position": {
-   "x": 64,
-   "y": 66
+   "x": 71,
+   "y": 60.8
   },
   "hidden": true,
   "zone": "alola-ulaula-island",
@@ -597,8 +597,8 @@
   },
   "unlockOrder": 700010,
   "position": {
-   "x": 72,
-   "y": 64
+   "x": 79.92,
+   "y": 62.9
   },
   "hidden": true,
   "zone": "alola-ulaula-island",
@@ -684,8 +684,8 @@
   },
   "unlockOrder": 700011,
   "position": {
-   "x": 78,
-   "y": 68
+   "x": 86.01,
+   "y": 68.52
   },
   "hidden": true,
   "zone": "alola-ulaula-island",
@@ -720,8 +720,8 @@
   },
   "unlockOrder": 700012,
   "position": {
-   "x": 74,
-   "y": 76
+   "x": 87.33,
+   "y": 75.88
   },
   "hidden": true,
   "zone": "alola-ulaula-island",
@@ -756,8 +756,8 @@
   },
   "unlockOrder": 700013,
   "position": {
-   "x": 66,
-   "y": 82
+   "x": 83.47,
+   "y": 82.64
   },
   "hidden": true,
   "zone": "alola-ulaula-island",
@@ -787,8 +787,8 @@
   },
   "unlockOrder": 700014,
   "position": {
-   "x": 68,
-   "y": 72
+   "x": 75.65,
+   "y": 86.67
   },
   "hidden": true,
   "zone": "alola-ulaula-island",
@@ -822,8 +822,8 @@
   },
   "unlockOrder": 700015,
   "position": {
-   "x": 78,
-   "y": 84
+   "x": 66.35,
+   "y": 86.67
   },
   "hidden": true,
   "zone": "alola-ulaula-island",
@@ -847,8 +847,8 @@
   },
   "unlockOrder": 700016,
   "position": {
-   "x": 20,
-   "y": 70
+   "x": 22,
+   "y": 66.8
   },
   "hidden": true,
   "zone": "alola-poni-island",
@@ -883,8 +883,8 @@
   },
   "unlockOrder": 700017,
   "position": {
-   "x": 26,
-   "y": 78
+   "x": 29.79,
+   "y": 70.4
   },
   "hidden": true,
   "zone": "alola-poni-island",
@@ -1447,8 +1447,8 @@
   },
   "unlockOrder": 700003.001,
   "position": {
-   "x": 18,
-   "y": 18
+   "x": 22,
+   "y": 29.61
   },
   "biome": "mountain",
   "background": "/backgrounds/mountain.png"
@@ -1473,8 +1473,8 @@
   },
   "unlockOrder": 700003.002,
   "position": {
-   "x": 14,
-   "y": 20
+   "x": 13.51,
+   "y": 26.8
   },
   "biome": "ruins",
   "background": "/backgrounds/grassland.png"
@@ -1499,8 +1499,8 @@
   },
   "unlockOrder": 700003.003,
   "position": {
-   "x": 26,
-   "y": 26
+   "x": 10,
+   "y": 20.01
   },
   "biome": "coast",
   "background": "/backgrounds/beach.png"
@@ -1525,8 +1525,8 @@
   },
   "unlockOrder": 700003.004,
   "position": {
-   "x": 30,
-   "y": 18
+   "x": 13.51,
+   "y": 13.22
   },
   "biome": "coast",
   "background": "/backgrounds/beach.png"
@@ -1551,8 +1551,8 @@
   },
   "unlockOrder": 700008.005,
   "position": {
-   "x": 70,
-   "y": 22
+   "x": 74.45,
+   "y": 31.22
   },
   "biome": "coast",
   "background": "/backgrounds/beach.png"
@@ -1577,8 +1577,8 @@
   },
   "unlockOrder": 700008.006,
   "position": {
-   "x": 72,
-   "y": 26
+   "x": 67.38,
+   "y": 26.47
   },
   "biome": "ruins",
   "background": "/backgrounds/grassland.png"
@@ -1603,8 +1603,8 @@
   },
   "unlockOrder": 700008.007,
   "position": {
-   "x": 86,
-   "y": 22
+   "x": 65.77,
+   "y": 19.19
   },
   "biome": "cave",
   "background": "/backgrounds/cave.png"
@@ -1629,8 +1629,8 @@
   },
   "unlockOrder": 700008.008,
   "position": {
-   "x": 82,
-   "y": 26
+   "x": 70.39,
+   "y": 12.79
   },
   "biome": "volcanic",
   "background": "/backgrounds/grassland.png"
@@ -1655,8 +1655,8 @@
   },
   "unlockOrder": 700015.009,
   "position": {
-   "x": 60,
-   "y": 70
+   "x": 58.53,
+   "y": 82.64
   },
   "biome": "mountain",
   "background": "/backgrounds/mountain.png"
@@ -1681,8 +1681,8 @@
   },
   "unlockOrder": 700015.01,
   "position": {
-   "x": 80,
-   "y": 74
+   "x": 54.67,
+   "y": 75.88
   },
   "biome": "ruins",
   "background": "/backgrounds/grassland.png"
@@ -1707,8 +1707,8 @@
   },
   "unlockOrder": 700015.011,
   "position": {
-   "x": 60,
-   "y": 78
+   "x": 55.99,
+   "y": 68.52
   },
   "biome": "coast",
   "background": "/backgrounds/beach.png"
@@ -1733,8 +1733,8 @@
   },
   "unlockOrder": 700015.012,
   "position": {
-   "x": 74,
-   "y": 80
+   "x": 62.08,
+   "y": 62.9
   },
   "biome": "coast",
   "background": "/backgrounds/beach.png"
@@ -1759,8 +1759,8 @@
   },
   "unlockOrder": 700017.013,
   "position": {
-   "x": 18,
-   "y": 78
+   "x": 29.79,
+   "y": 77.6
   },
   "biome": "mountain",
   "background": "/backgrounds/mountain.png"
@@ -1785,8 +1785,8 @@
   },
   "unlockOrder": 700017.014,
   "position": {
-   "x": 14,
-   "y": 72
+   "x": 22,
+   "y": 81.2
   },
   "biome": "desert",
   "background": "/backgrounds/grassland.png"
@@ -1811,8 +1811,8 @@
   },
   "unlockOrder": 700017.015,
   "position": {
-   "x": 16,
-   "y": 66
+   "x": 14.21,
+   "y": 77.6
   },
   "biome": "mountain",
   "background": "/backgrounds/mountain.png"
@@ -1837,8 +1837,8 @@
   },
   "unlockOrder": 700017.016,
   "position": {
-   "x": 30,
-   "y": 72
+   "x": 14.21,
+   "y": 70.4
   },
   "biome": "coast",
   "background": "/backgrounds/beach.png"

@@ -367,10 +367,11 @@ Data conventions:
   the expand button on an unlocked zone/DLC hub sets `focusZone`, which swaps
   `activeLocationIds` for the hub plus its (hidden) sub-areas, fits their
   bounding box and shows a “← Region map” bar. Region tabs are hidden while
-  focused; hidden sub-areas are travelable from the focused canvas. Roads are
-  quadratic curves with a deterministic per-edge bow (`createRoads` in
-  `src/game/progression/roads.js`) rather than right-angle elbows, so parallel
-  connectors between nearby nodes no longer overlap.
+  focused; hidden sub-areas are travelable from the focused canvas. Roads stay
+  on the right-angle grid: `createRoadPaths` (`src/game/progression/roads.js`)
+  greedily gives each edge the elbow that overlaps the fewest already-placed
+  roads, and `apply-road-cleanup.cjs` drops the redundant side of every
+  triangle so two roads no longer run along the same line.
 - Some regions' scraped force-directed layout doesn't match the real map, so
   `REGION_MAP_LAYOUTS` in `generate-regions.cjs` overrides it with
   hand-measured coordinates from a labelled reference map. Every region except
@@ -828,6 +829,16 @@ One-off scripts used to build the data JSON (not run during dev/build):
 - `lib/team-builder.cjs` — shared `buildTeam` for gym / Elite Four / Champion
   teams (type-themed, level-appropriate, off-theme ace fallback), used by
   `generate-regions.cjs` and `apply-kanto.cjs`.
+- `apply-zone-layout.cjs` — data-only pass that re-spaces every zone hub's
+  sub-areas into a ring around it (via `lib/zone-layout.cjs`; the generator runs
+  the same layout after building the zones) so the focused area view is
+  readable. Idempotent (`--dry`).
+- `apply-road-cleanup.cjs` — data-only pass that removes the redundant side of
+  each road triangle (a through-area becomes the road, a side-area a stub) so
+  the Town Map stops drawing overlapping connectors. Idempotent (`--dry`).
+- `lib/zone-layout.cjs` — shared `spreadSubAreaPositions` ring layout for a
+  zone hub's hidden sub-areas; used by `generate-regions.cjs` and
+  `apply-zone-layout.cjs`.
 - `lib/route-variety.cjs` — shared route-variety helpers (`buildWildPool`,
   `enrichEncounters`, `collectProtectedSpecies`) used by both
   `generate-regions.cjs` and `apply-route-variety.cjs`.

@@ -5,7 +5,7 @@ import { jsx, jsxs } from 'react/jsx-runtime'
 import { baseRegions, encounterData, raidLegendaryPoolFor, mapAreas, mapData, pokemonSpecies, regions } from '../data/gameData.js'
 import { biomeForLocation } from '../data/ui.js'
 import { useGame } from '../game/context.js'
-import { createRoads, getRegionUnlockTokens, pickRaidLegendary, raidProgressFor } from '../game/progression.js'
+import { createRoadPaths, getRegionUnlockTokens, pickRaidLegendary, raidProgressFor } from '../game/progression.js'
 import { MapNode } from './map-node.js'
 import { DayPhaseChip } from './day-phase-chip.js'
 
@@ -231,21 +231,13 @@ export function TownMap() {
     return { waterBlobs, landBlobs }
   }, [activeLocationIds])
 
-  const roads = [],
-    roadSet = new Set()
-  for (const locationId of activeLocationIds) {
-    const location = mapData[locationId]
-    for (const connectionId of location.connections) {
-      if (!activeLocationSet.has(connectionId)) continue
-      const roadKey = [location.id, connectionId].sort().join('-')
-      roadSet.has(roadKey) ||
-        (roadSet.add(roadKey),
-        roads.push({
-          from: location.id,
-          to: connectionId,
-        }))
-    }
-  }
+  // Roads are laid out with the least-overlapping elbow per edge, in a stable
+  // order so the map draws the same way every tick.
+  const roadPaths = React.useMemo(
+    () => createRoadPaths(activeLocationIds),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [activeLocationIds.join('|')]
+  )
 
   // Centre of the active region (used when the player isn't in it).
   const regionCentre = React.useMemo(() => {
@@ -781,31 +773,13 @@ export function TownMap() {
                 viewBox: '0 0 100 100',
                 preserveAspectRatio: 'none',
                 children: [
-                  roads.map(({ from: fromId, to: toId }) => {
+                  roadPaths.map(({ from: fromId, to: toId, key, d }) => {
                     const roadClass = `map-road-border${unlockedLocations.includes(fromId) && unlockedLocations.includes(toId) ? ' unlocked' : ' locked'}`
-                    return createRoads(fromId, toId).map((segment) =>
-                      jsx(
-                        'path',
-                        {
-                          d: segment.d,
-                          className: roadClass,
-                        },
-                        `border-${fromId}-${toId}`
-                      )
-                    )
+                    return jsx('path', { d, className: roadClass }, `border-${key}`)
                   }),
-                  roads.map(({ from: fromId, to: toId }) => {
+                  roadPaths.map(({ from: fromId, to: toId, key, d }) => {
                     const roadClass = `map-road-fill${unlockedLocations.includes(fromId) && unlockedLocations.includes(toId) ? ' unlocked' : ' locked'}`
-                    return createRoads(fromId, toId).map((segment) =>
-                      jsx(
-                        'path',
-                        {
-                          d: segment.d,
-                          className: roadClass,
-                        },
-                        `fill-${fromId}-${toId}`
-                      )
-                    )
+                    return jsx('path', { d, className: roadClass }, `fill-${key}`)
                   }),
                 ],
               }),

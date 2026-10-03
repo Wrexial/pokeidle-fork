@@ -359,7 +359,6 @@
    "kalos-camphrier-town",
    "kalos-route-6",
    "kalos-cyllage-city",
-   "kalos-route-8",
    "kalos-connecting-cave"
   ],
   "unlock": {
@@ -434,7 +433,6 @@
   "connections": [
    "kalos-cyllage-city",
    "kalos-ambrette-town",
-   "kalos-route-7",
    "kalos-connecting-cave",
    "kalos-glittering-cave"
   ],
@@ -953,8 +951,7 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "kalos-lumiose-city",
-   "kalos-route-15",
-   "kalos-lost-hotel"
+   "kalos-route-15"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1061,8 +1058,7 @@
   "background": "/backgrounds/mountain.png",
   "connections": [
    "kalos-anistar-city",
-   "kalos-couriway-town",
-   "kalos-terminus-cave"
+   "kalos-couriway-town"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1529,7 +1525,6 @@
   "description": "A wild area in the Kalos region.",
   "routeKey": "kalos-terminus-cave",
   "connections": [
-   "kalos-route-18",
    "kalos-anistar-city"
   ],
   "unlock": {
@@ -1583,8 +1578,7 @@
   "description": "A wild area in the Kalos region.",
   "routeKey": "kalos-lost-hotel",
   "connections": [
-   "kalos-route-15",
-   "kalos-route-16"
+   "kalos-route-15"
   ],
   "unlock": {
    "battlesAtLocation": [

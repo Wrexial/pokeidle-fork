@@ -164,7 +164,6 @@
   "background": "/backgrounds/mountain.png",
   "connections": [
    "galar-motostoke",
-   "galar-route-4",
    "galar-mine"
   ],
   "unlock": {
@@ -193,7 +192,6 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "galar-turffield",
-   "galar-route-3",
    "galar-mine"
   ],
   "unlock": {
@@ -334,7 +332,6 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "galar-hammerlocke",
-   "galar-stow-on-side",
    "galar-motostoke",
    "galar-wild-area",
    "galar-mine-no-2"
@@ -413,7 +410,6 @@
   "region": "galar",
   "description": "A town in the Galar region, home to Bea's Fighting Gym.",
   "connections": [
-   "galar-route-6",
    "galar-ballonlea",
    "galar-glimwood-tangle",
    "galar-mine-no-2"
@@ -877,8 +873,8 @@
   },
   "unlockOrder": 800005.5002,
   "position": {
-   "x": 52,
-   "y": 61
+   "x": 53.47,
+   "y": 39.7
   },
   "biome": "grassland"
  },
@@ -903,8 +899,8 @@
   },
   "unlockOrder": 800005.501,
   "position": {
-   "x": 47,
-   "y": 56
+   "x": 62.39,
+   "y": 41.8
   },
   "biome": "forest"
  },
@@ -929,8 +925,8 @@
   },
   "unlockOrder": 800005.502,
   "position": {
-   "x": 53,
-   "y": 55
+   "x": 68.48,
+   "y": 47.42
   },
   "biome": "grassland"
  },
@@ -1172,8 +1168,8 @@
   },
   "unlockOrder": 800005.503,
   "position": {
-   "x": 48,
-   "y": 60
+   "x": 69.8,
+   "y": 54.78
   },
   "biome": "desert",
   "background": "/backgrounds/grassland.png"
@@ -1198,8 +1194,8 @@
   },
   "unlockOrder": 800005.504,
   "position": {
-   "x": 49,
-   "y": 54
+   "x": 65.94,
+   "y": 61.55
   },
   "biome": "coast",
   "background": "/backgrounds/beach.png"
@@ -1224,8 +1220,8 @@
   },
   "unlockOrder": 800005.505,
   "position": {
-   "x": 50,
-   "y": 58
+   "x": 58.12,
+   "y": 65.57
   },
   "biome": "mountain",
   "background": "/backgrounds/mountain.png"
@@ -1250,8 +1246,8 @@
   },
   "unlockOrder": 800005.506,
   "position": {
-   "x": 44,
-   "y": 52
+   "x": 48.82,
+   "y": 65.57
   },
   "biome": "desert",
   "background": "/backgrounds/grassland.png"
@@ -1276,8 +1272,8 @@
   },
   "unlockOrder": 800005.507,
   "position": {
-   "x": 56,
-   "y": 57
+   "x": 41,
+   "y": 61.55
   },
   "biome": "coast",
   "background": "/backgrounds/beach.png"
@@ -1302,8 +1298,8 @@
   },
   "unlockOrder": 800005.508,
   "position": {
-   "x": 55,
-   "y": 52
+   "x": 37.14,
+   "y": 54.78
   },
   "biome": "mountain",
   "background": "/backgrounds/mountain.png"
@@ -1328,8 +1324,8 @@
   },
   "unlockOrder": 800005.509,
   "position": {
-   "x": 57,
-   "y": 50
+   "x": 38.46,
+   "y": 47.42
   },
   "biome": "coast",
   "background": "/backgrounds/beach.png"
@@ -1354,8 +1350,8 @@
   },
   "unlockOrder": 800005.51,
   "position": {
-   "x": 54,
-   "y": 60
+   "x": 44.55,
+   "y": 41.8
   },
   "biome": "cave",
   "background": "/backgrounds/cave.png"

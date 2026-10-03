@@ -28,6 +28,7 @@ const { createTeamBuilder } = require('./lib/team-builder.cjs')
 const { deriveBiome } = require('./lib/biomes.cjs')
 const { ORDINARY_AREAS } = require('./lib/ordinary-areas.cjs')
 const { ZONE_AREAS } = require('./lib/zone-areas.cjs')
+const { spreadSubAreaPositions } = require('./lib/zone-layout.cjs')
 
 const GEN_RANGES = [
   [1, 151], [152, 251], [252, 386], [387, 493], [494, 649],
@@ -2558,6 +2559,17 @@ for (const [hubId, extras] of Object.entries(ZONE_AREAS)) {
     if (!hub.connections.includes(id)) hub.connections.push(id)
     maxOrder += 0.001
   }
+}
+
+// Space every zone hub's sub-areas into a tidy grid around it, so the focused
+// area view stays readable. Mirrors tools/apply-zone-layout.cjs.
+for (const hub of Object.values(mapData)) {
+  if (hub.type !== 'zone' || !Array.isArray(hub.subAreas)) continue
+  const ids = hub.subAreas.map((subArea) => subArea.id),
+    positions = spreadSubAreaPositions(hub.position, ids.length)
+  ids.forEach((id, index) => {
+    if (mapData[id] && positions[index]) mapData[id].position = positions[index]
+  })
 }
 
 // Zone hubs that were created *after* the ordinary areas (Alola's islands via

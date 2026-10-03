@@ -403,8 +403,7 @@
   "background": "/backgrounds/beach.png",
   "connections": [
    "hoenn-slateport-city",
-   "hoenn-route-108",
-   "hoenn-abandoned-ship"
+   "hoenn-route-108"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1551,8 +1550,7 @@
   "description": "A town in the Hoenn region.",
   "connections": [
    "hoenn-route-131",
-   "hoenn-route-132",
-   "hoenn-sky-pillar"
+   "hoenn-route-132"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1851,7 +1849,6 @@
   "description": "A wild area in the Hoenn region.",
   "routeKey": "hoenn-sky-pillar",
   "connections": [
-   "hoenn-pacifidlog-town",
    "hoenn-route-131"
   ],
   "unlock": {
@@ -1959,8 +1956,7 @@
   "description": "A wild area in the Hoenn region.",
   "routeKey": "hoenn-abandoned-ship",
   "connections": [
-   "hoenn-route-108",
-   "hoenn-route-109"
+   "hoenn-route-108"
   ],
   "unlock": {
    "battlesAtLocation": [

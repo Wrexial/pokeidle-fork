@@ -19,8 +19,8 @@
   },
   "unlockOrder": 800006.0001,
   "position": {
-   "x": 69,
-   "y": 62.51
+   "x": 62.24,
+   "y": 48.32
   },
   "biome": "grassland"
  },
@@ -45,8 +45,8 @@
   },
   "unlockOrder": 800006.001,
   "position": {
-   "x": 71.59455458234684,
-   "y": 59.32371446796515
+   "x": 70.92,
+   "y": 50.85
   },
   "biome": "swamp"
  },
@@ -71,8 +71,8 @@
   },
   "unlockOrder": 800006.002,
   "position": {
-   "x": 69.82470747079506,
-   "y": 56.64941494159013
+   "x": 75.53,
+   "y": 57.25
   },
   "biome": "cave"
  },
@@ -194,8 +194,8 @@
   },
   "unlockOrder": 800006.003,
   "position": {
-   "x": 68,
-   "y": 63
+   "x": 73.93,
+   "y": 64.52
   },
   "biome": "forest",
   "background": "/backgrounds/grassland.png"
@@ -220,8 +220,8 @@
   },
   "unlockOrder": 800006.004,
   "position": {
-   "x": 72,
-   "y": 61
+   "x": 66.86,
+   "y": 69.27
   },
   "biome": "coast",
   "background": "/backgrounds/beach.png"
@@ -246,8 +246,8 @@
   },
   "unlockOrder": 800006.005,
   "position": {
-   "x": 67,
-   "y": 58
+   "x": 57.62,
+   "y": 69.27
   },
   "biome": "grassland",
   "background": "/backgrounds/grassland.png"
@@ -272,8 +272,8 @@
   },
   "unlockOrder": 800006.006,
   "position": {
-   "x": 71,
-   "y": 64
+   "x": 50.55,
+   "y": 64.52
   },
   "biome": "desert",
   "background": "/backgrounds/grassland.png"
@@ -298,8 +298,8 @@
   },
   "unlockOrder": 800006.007,
   "position": {
-   "x": 73,
-   "y": 60
+   "x": 48.94,
+   "y": 57.25
   },
   "biome": "grassland",
   "background": "/backgrounds/grassland.png"
@@ -324,8 +324,8 @@
   },
   "unlockOrder": 800006.008,
   "position": {
-   "x": 66,
-   "y": 60
+   "x": 53.56,
+   "y": 50.85
   },
   "biome": "coast",
   "background": "/backgrounds/beach.png"

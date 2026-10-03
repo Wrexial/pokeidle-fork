@@ -9,4 +9,4 @@ export { computeUnlockedLocations, getRegionUnlockTokens, regionProgressionGoal,
 export { getCatchRule, checkShinyOdds, shinyOddsForCompletedGenerations, shinyOddsForSpecies, HONEY_CHAIN_THRESHOLD, SHINY_CHAIN_FIRST_TARGET, SHINY_CHAIN_TARGET_STEP, applyEncounterModifiers, advanceShinyTarget, resolveActiveModifiers, shinyChainMultiplier, pickRaidLegendary, raidProgressFor, raidLegendaryWeight, resolveRoamer, resolvePokemonEncounter, encountersForPhase, minLevelForSpecies } from './progression/encounters.js'
 export { buildTrainerTeam, buildTowerTeam, buildTowerFloor } from './progression/teams.js'
 export { awardExperience } from './progression/exp.js'
-export { formatCooldown, createRoads } from './progression/roads.js'
+export { formatCooldown, createRoadPaths } from './progression/roads.js'

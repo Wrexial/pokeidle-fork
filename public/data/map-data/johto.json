@@ -39,8 +39,7 @@
   "connections": [
    "johto-cherrygrove-city",
    "johto-new-bark-town",
-   "johto-route-46",
-   "johto-tohjo-falls"
+   "johto-route-46"
   ],
   "unlock": {
    "requires": [
@@ -191,7 +190,6 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "johto-violet-city",
-   "johto-route-33",
    "johto-union-cave",
    "johto-ruins-of-alph"
   ],
@@ -223,9 +221,7 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "johto-azalea-town",
-   "johto-route-32",
-   "johto-union-cave",
-   "johto-slowpoke-well"
+   "johto-union-cave"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -361,7 +357,6 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "johto-goldenrod-city",
-   "johto-route-36",
    "johto-national-park"
   ],
   "unlock": {
@@ -393,7 +388,6 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "johto-route-37",
-   "johto-route-35",
    "johto-violet-city",
    "johto-national-park"
   ],
@@ -1015,7 +1009,6 @@
   "routeKey": "johto-route-47",
   "background": "/backgrounds/grassland.png",
   "connections": [
-   "johto-route-48",
    "johto-cianwood-city",
    "johto-cliff-cave"
   ],
@@ -1047,7 +1040,6 @@
   "routeKey": "johto-route-48",
   "background": "/backgrounds/grassland.png",
   "connections": [
-   "johto-route-47",
    "johto-safari-zone",
    "johto-cliff-cave"
   ],
@@ -1272,8 +1264,7 @@
   "description": "A wild area in the Johto region.",
   "routeKey": "johto-slowpoke-well",
   "connections": [
-   "johto-azalea-town",
-   "johto-route-33"
+   "johto-azalea-town"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1433,8 +1424,7 @@
   "description": "A wild area in the Johto region.",
   "routeKey": "johto-tohjo-falls",
   "connections": [
-   "johto-new-bark-town",
-   "johto-route-29"
+   "johto-new-bark-town"
   ],
   "unlock": {
    "battlesAtLocation": [

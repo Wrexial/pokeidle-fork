@@ -23,6 +23,7 @@ const write = (f, v) => fs.writeFileSync(path.join(DATA, f), JSON.stringify(v, n
 const { readRegionDir, writeRegionDir } = require('./lib/region-data.cjs')
 const { deriveBiome } = require('./lib/biomes.cjs')
 const { ZONE_AREAS } = require('./lib/zone-areas.cjs')
+const { spreadSubAreaPositions } = require('./lib/zone-layout.cjs')
 const { buildEvolutionLevels } = require('./lib/evolution-levels.cjs')
 const { buildWildPool, collectProtectedSpecies, enrichEncounters } = require('./lib/route-variety.cjs')
 
@@ -123,6 +124,23 @@ if (DRY) {
   process.exit(0)
 }
 
+// Space every hub's sub-areas into a tidy ring around it (see zone-layout.cjs),
+// so a newly added batch doesn't pile up with its neighbours.
+let spaced = 0
+for (const hub of Object.values(mapData)) {
+  if (hub.type !== 'zone' || !Array.isArray(hub.subAreas)) continue
+  const ids = hub.subAreas.map((subArea) => subArea.id),
+    positions = spreadSubAreaPositions(hub.position, ids.length)
+  ids.forEach((id, index) => {
+    const location = mapData[id]
+    if (!location || !positions[index]) return
+    if (location.position.x !== positions[index].x || location.position.y !== positions[index].y) {
+      location.position = positions[index]
+      spaced++
+    }
+  })
+}
+
 // Top the new tables up with the region's wider pool, mirroring the
 // route-variety pass generate-regions.cjs runs after every route exists.
 const protectedSpecies = collectProtectedSpecies(
@@ -152,4 +170,4 @@ writeRegionDir(
   encounterData,
   (key) => mapData[key]?.region ?? 'kanto'
 )
-console.log(`Added ${added} zone sub-area(s).`)
+console.log(`Added ${added} zone sub-area(s), spaced ${spaced}.`)

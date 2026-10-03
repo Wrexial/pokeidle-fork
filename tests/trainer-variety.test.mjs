@@ -103,6 +103,8 @@ test('route trainers only field level-appropriate, non-legendary, non-starter Po
 
 test('route trainers reveal a large share of each region dex', () => {
   for (const region of regions) {
+    // DLC expansions have no town/route trainers.
+    if (region.isDlc) continue
     const [minId, maxId] = GEN_RANGES[region.generation - 1],
       nativePool = Object.entries(pokemonSpecies).filter(
         ([, species]) =>
@@ -132,6 +134,8 @@ test('every evolution line appears on some route trainer', () => {
       Object.entries(pokemonSpecies).map(([key, species]) => [key, species.types ?? []])
     )
   for (const region of regions) {
+    // DLC expansions have no town/route trainers.
+    if (region.isDlc) continue
     const [minId, maxId] = GEN_RANGES[region.generation - 1],
       natives = Object.entries(pokemonSpecies)
         .filter(

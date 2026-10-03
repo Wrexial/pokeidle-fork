@@ -13,6 +13,8 @@ const region = (regionId) => /** @type {any} */ (regions.find((entry) => entry.i
 
 test('every region describes its own league track', () => {
   for (const entry of regions) {
+    // DLC expansions have no gym/league track; their endgame is the raid island.
+    if (entry.isDlc) continue
     assert.ok(entry.league, `${entry.id} has a league block`)
     assert.ok(['ordered', 'free'].includes(entry.league.badgeOrder), `${entry.id} badgeOrder is valid`)
     for (const field of ['badgeTrack', 'badgeName', 'eliteTrack']) {

@@ -470,51 +470,7 @@
     "level": 70
    },
    {
-    "speciesKey": "kubfu",
-    "level": 75
-   },
-   {
-    "speciesKey": "urshifu-sss",
-    "level": 75
-   },
-   {
     "speciesKey": "zarude",
-    "level": 75
-   },
-   {
-    "speciesKey": "regieleki",
-    "level": 75
-   },
-   {
-    "speciesKey": "regidrago",
-    "level": 75
-   },
-   {
-    "speciesKey": "glastrier",
-    "level": 75
-   },
-   {
-    "speciesKey": "spectrier",
-    "level": 75
-   },
-   {
-    "speciesKey": "calyrex",
-    "level": 75
-   },
-   {
-    "speciesKey": "enamorus",
-    "level": 75
-   },
-   {
-    "speciesKey": "g-articuno",
-    "level": 75
-   },
-   {
-    "speciesKey": "g-zapdos",
-    "level": 75
-   },
-   {
-    "speciesKey": "g-moltres",
     "level": 75
    }
   ]
@@ -557,7 +513,87 @@
    {
     "speciesKey": "miraidon",
     "level": 75
+   }
+  ]
+ },
+ {
+  "id": "isle-of-armor",
+  "name": "Isle of Armor",
+  "generation": 8,
+  "order": 8.1,
+  "entry": "galar-isle-of-armor",
+  "startLevel": 72,
+  "isDlc": true,
+  "parentRegion": "galar",
+  "raidPool": [
+   {
+    "speciesKey": "kubfu",
+    "level": 75
    },
+   {
+    "speciesKey": "urshifu-sss",
+    "level": 75
+   }
+  ]
+ },
+ {
+  "id": "crown-tundra",
+  "name": "Crown Tundra",
+  "generation": 8,
+  "order": 8.2,
+  "entry": "galar-crown-tundra",
+  "startLevel": 75,
+  "isDlc": true,
+  "parentRegion": "galar",
+  "raidPool": [
+   {
+    "speciesKey": "regieleki",
+    "level": 75
+   },
+   {
+    "speciesKey": "regidrago",
+    "level": 75
+   },
+   {
+    "speciesKey": "glastrier",
+    "level": 75
+   },
+   {
+    "speciesKey": "spectrier",
+    "level": 75
+   },
+   {
+    "speciesKey": "calyrex",
+    "level": 75
+   },
+   {
+    "speciesKey": "enamorus",
+    "level": 75
+   },
+   {
+    "speciesKey": "g-articuno",
+    "level": 75
+   },
+   {
+    "speciesKey": "g-zapdos",
+    "level": 75
+   },
+   {
+    "speciesKey": "g-moltres",
+    "level": 75
+   }
+  ]
+ },
+ {
+  "id": "kitakami",
+  "name": "Kitakami",
+  "generation": 9,
+  "order": 9.1,
+  "entry": "paldea-kitakami",
+  "startLevel": 72,
+  "isDlc": true,
+  "parentRegion": "paldea",
+  "raidPool": [
    {
     "speciesKey": "okidogi",
     "level": 75
@@ -573,7 +609,19 @@
    {
     "speciesKey": "ogerpon",
     "level": 70
-   },
+   }
+  ]
+ },
+ {
+  "id": "terarium",
+  "name": "Terarium",
+  "generation": 9,
+  "order": 9.2,
+  "entry": "paldea-terarium",
+  "startLevel": 78,
+  "isDlc": true,
+  "parentRegion": "paldea",
+  "raidPool": [
    {
     "speciesKey": "terapagos",
     "level": 70

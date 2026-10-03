@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
-import { encounterData, raidLegendaryPoolFor, mapAreas, mapData, pokemonSpecies, regions } from '../data/gameData.js'
+import { baseRegions, encounterData, raidLegendaryPoolFor, mapAreas, mapData, pokemonSpecies, regions } from '../data/gameData.js'
 import { biomeForLocation } from '../data/ui.js'
 import { useGame } from '../game/context.js'
 import { createRoads, getRegionUnlockTokens, pickRaidLegendary, raidProgressFor } from '../game/progression.js'
@@ -101,7 +101,7 @@ export function TownMap() {
     focusRef = React.useRef(/** @type {string | null} */ (null)),
     unlockTokens = getRegionUnlockTokens(state),
     allRegionsUnlocked =
-      regions.length > 0 && (state.unlockedRegions ?? []).length >= regions.length,
+      baseRegions.length > 0 && (state.unlockedRegions ?? []).length >= baseRegions.length,
     canvasRef = React.useRef(/** @type {HTMLDivElement | null} */ (null)),
     [view, setView] = React.useState(
       /** @type {MapView} */ ({ x: 0, y: 0, scale: 1 })
@@ -554,7 +554,14 @@ export function TownMap() {
         children: regionOrder.map((region) => {
           const ids = locationsByRegion[region.id] ?? [],
             available = ids.some((id) => unlockedLocations.includes(id)),
-            unlockable = !available && unlockTokens > 0,
+            // DLC expansions are opened by beating their parent region's
+            // Champion, never with an Unlock Token.
+            unlockable = !available && unlockTokens > 0 && !region.isDlc,
+            parentName =
+              region.isDlc && region.parentRegion
+                ? (regions.find((candidate) => candidate.id === region.parentRegion)?.name ??
+                  region.parentRegion)
+                : null,
             pending = pendingUnlock === region.id
           return jsx(
             'button',
@@ -571,9 +578,11 @@ export function TownMap() {
               disabled: !available && !unlockable,
               title: available
                 ? region.name
-                : unlockable
-                  ? `Spend an Unlock Token to open ${region.name}`
-                  : 'Locked — beat a region Champion to earn an Unlock Token',
+                : region.isDlc
+                  ? `Locked — beat the ${parentName} Champion to open`
+                  : unlockable
+                    ? `Spend an Unlock Token to open ${region.name}`
+                    : 'Locked — beat a region Champion to earn an Unlock Token',
               children: available ? region.name : unlockable ? `${region.name} 🔓` : region.name,
             },
             region.id

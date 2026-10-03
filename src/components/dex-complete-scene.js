@@ -3,7 +3,7 @@
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { dexRewardVictoryTokens } from '../data/config.js'
-import { regions } from '../data/gameData.js'
+import { baseRegions } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 
 const SPARKS = Array.from({ length: 16 }, (_, index) => index)
@@ -31,7 +31,7 @@ export function DexCompleteScene() {
     return () => clearTimeout(timer)
   }, [dispatch, state.speed, celebration])
   if (!celebration) return null
-  const orderedRegions = [...regions].sort((left, right) => left.order - right.order),
+  const orderedRegions = [...baseRegions].sort((left, right) => left.order - right.order),
     region = orderedRegions[celebration.generation],
     generation = celebration.generation + 1
   return jsxs('div', {

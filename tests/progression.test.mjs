@@ -163,6 +163,8 @@ test('badge gates open with the right badges and re-lock after prestige', () => 
 
 test('every region opens on a gentle Lv. 3-5 first route', () => {
   for (const region of [...regions].sort((a, b) => a.order - b.order)) {
+    // DLC regions start at their post-game level, not a fresh Lv. 3-5 route.
+    if (region.isDlc) continue
     const { route } = entryRoutePath(region.entry),
       location = route ? mapData[route] : null,
       entries = location?.routeKey ? (encounterData[location.routeKey]?.encounters ?? []) : []
@@ -370,6 +372,8 @@ test('shiny chain multiplier rises linearly and caps at 4x', () => {
 
 test('every region has a Daycare on one of its real routes', () => {
   for (const region of regions) {
+    // DLC expansions reuse their parent region's Day-Care.
+    if (region.isDlc) continue
     const locationId = DAYCARE_LOCATIONS[region.id]
     assert.ok(locationId, `${region.id} has a Daycare route`)
     const location = mapData[locationId]

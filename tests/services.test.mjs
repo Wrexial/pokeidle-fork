@@ -11,6 +11,8 @@ const { mapData, regions } = await import('../src/data/gameData.js')
 
 test('every Day-Care route carries a service POI marker', () => {
   for (const region of regions) {
+    // DLC expansions reuse their parent region's Day-Care.
+    if (region.isDlc) continue
     const locationId = DAYCARE_LOCATIONS[region.id]
     assert.ok(locationId, `${region.id} has a Day-Care route`)
     assert.ok(mapData[locationId], `${locationId} exists on the map`)

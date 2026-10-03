@@ -1,6 +1,6 @@
 // // Location unlocking: resolve the unlock graph and spend Region Unlock Tokens. Split from game/progression.js.
 
-import { gymLeaderData, mapData, regions } from '../../data/gameData.js'
+import { baseRegions, gymLeaderData, mapData, regions } from '../../data/gameData.js'
 
 /** @type {Record<string, string[]>} */
 const gymIdsByRegion = {}
@@ -126,7 +126,17 @@ export function getRegionUnlockTokens(state) {
  */
 export function regionProgressionGoal(state, regionId) {
   const region = regions.find((candidate) => candidate.id === regionId)
-  if ((state.unlockedRegions ?? []).length >= regions.length)
+  // A DLC expansion has no Champion to beat: once every area is open, point at
+  // its Raid Island (the endgame), not a nonexistent league.
+  if (region?.isDlc) {
+    const raidId = `${region.id}-raid`
+    return {
+      title: `${region.name} cleared`,
+      detail: 'Every area is open \u2014 explore at your own pace.',
+      locationId: mapData[raidId] ? raidId : null,
+    }
+  }
+  if ((state.unlockedRegions ?? []).length >= baseRegions.length)
     return {
       title: 'Every region is open',
       detail: 'The whole world is yours to explore.',

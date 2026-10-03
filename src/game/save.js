@@ -499,7 +499,7 @@ export function repairSave(saved) {
     ...new Set([
       fallbackRegion,
       ...regions
-        .filter((region) => region.entry && safeUnlocked.includes(region.entry))
+        .filter((region) => !region.isDlc && region.entry && safeUnlocked.includes(region.entry))
         .map((region) => region.id),
     ]),
   ]

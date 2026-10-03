@@ -81,6 +81,23 @@ export let championData = /** @type {any[]} */ (loadedGameData.championData)
 export let regions = /** @type {Region[]} */ (loadedGameData.regions || [])
 
 /**
+ * The regions that advance the Unlock Token, World Tour and per-generation
+ * tracks. DLC expansions (`isDlc`) are post-game and open by beating their
+ * parent region's Champion, so they are excluded from those counts.
+ */
+export let baseRegions = regions.filter((region) => !region.isDlc)
+
+/**
+ * The parent region id when `regionId` is a DLC expansion, else null.
+ * @param {string} regionId
+ * @returns {string | null}
+ */
+export function dlcParentRegion(regionId) {
+  const region = regions.find((candidate) => candidate.id === regionId)
+  return region?.isDlc ? region.parentRegion ?? null : null
+}
+
+/**
  * The Raid Island's displayed encounter table: its legendaries. The ordinary
  * finals the island used to carry now live on fitting region routes as wild
  * encounters, so the island stays legendary-only. Empty if the region is

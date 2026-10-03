@@ -1,0 +1,146 @@
+{
+ "galar-isle-of-armor-fields-of-honor": {
+  "id": "galar-isle-of-armor-fields-of-honor",
+  "name": "Fields of Honor",
+  "type": "route",
+  "region": "isle-of-armor",
+  "description": "A sub-area of the Isle of Armor.",
+  "routeKey": "galar-isle-of-armor-fields-of-honor",
+  "background": "/backgrounds/grassland.png",
+  "connections": [
+   "galar-isle-of-armor"
+  ],
+  "hidden": true,
+  "zone": "galar-isle-of-armor",
+  "unlock": {
+   "requires": [
+    "galar-isle-of-armor"
+   ]
+  },
+  "unlockOrder": 800006.0001,
+  "position": {
+   "x": 69,
+   "y": 62.51
+  },
+  "biome": "grassland"
+ },
+ "galar-isle-of-armor-soothing-wetlands": {
+  "id": "galar-isle-of-armor-soothing-wetlands",
+  "name": "Soothing Wetlands",
+  "type": "route",
+  "region": "isle-of-armor",
+  "description": "A sub-area of the Isle of Armor.",
+  "routeKey": "galar-isle-of-armor-soothing-wetlands",
+  "background": "/backgrounds/beach.png",
+  "connections": [
+   "galar-isle-of-armor"
+  ],
+  "hidden": true,
+  "zone": "galar-isle-of-armor",
+  "unlock": {
+   "requires": [
+    "galar-isle-of-armor",
+    "galar-isle-of-armor-fields-of-honor"
+   ]
+  },
+  "unlockOrder": 800006.001,
+  "position": {
+   "x": 71.59455458234684,
+   "y": 59.32371446796515
+  },
+  "biome": "swamp"
+ },
+ "galar-isle-of-armor-brawlers-cave": {
+  "id": "galar-isle-of-armor-brawlers-cave",
+  "name": "Brawlers' Cave",
+  "type": "route",
+  "region": "isle-of-armor",
+  "description": "A sub-area of the Isle of Armor.",
+  "routeKey": "galar-isle-of-armor-brawlers-cave",
+  "background": "/backgrounds/cave.png",
+  "connections": [
+   "galar-isle-of-armor"
+  ],
+  "hidden": true,
+  "zone": "galar-isle-of-armor",
+  "unlock": {
+   "requires": [
+    "galar-isle-of-armor",
+    "galar-isle-of-armor-soothing-wetlands"
+   ]
+  },
+  "unlockOrder": 800006.002,
+  "position": {
+   "x": 69.82470747079506,
+   "y": 56.64941494159013
+  },
+  "biome": "cave"
+ },
+ "galar-isle-of-armor": {
+  "id": "galar-isle-of-armor",
+  "name": "Isle of Armor",
+  "type": "zone",
+  "region": "isle-of-armor",
+  "description": "The Isle of Armor is a wide-open stretch with several distinct habitats.",
+  "routeKey": "galar-isle-of-armor-fields-of-honor",
+  "background": "/backgrounds/beach.png",
+  "connections": [
+   "galar-isle-of-armor-fields-of-honor",
+   "galar-isle-of-armor-soothing-wetlands",
+   "galar-isle-of-armor-brawlers-cave",
+   "isle-of-armor-raid"
+  ],
+  "subAreas": [
+   {
+    "id": "galar-isle-of-armor-fields-of-honor",
+    "name": "Fields of Honor"
+   },
+   {
+    "id": "galar-isle-of-armor-soothing-wetlands",
+    "name": "Soothing Wetlands"
+   },
+   {
+    "id": "galar-isle-of-armor-brawlers-cave",
+    "name": "Brawlers' Cave"
+   }
+  ],
+  "unlock": {
+   "championDefeated": "galar"
+  },
+  "unlockOrder": 800005.9,
+  "position": {
+   "x": 62.23866952184723,
+   "y": 59.12197207444398
+  },
+  "biome": "grassland"
+ },
+ "isle-of-armor-raid": {
+  "id": "isle-of-armor-raid",
+  "name": "Isle of Armor Raid Island",
+  "type": "raid",
+  "region": "isle-of-armor",
+  "description": "A mysterious island where Isle of Armor's rarest Pokemon dwell.",
+  "routeKey": "isle-of-armor-raid",
+  "background": "/backgrounds/cave.png",
+  "connections": [
+   "galar-isle-of-armor"
+  ],
+  "unlock": {
+   "requires": [
+    "galar-isle-of-armor"
+   ],
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-isle-of-armor-brawlers-cave",
+     "count": 10
+    }
+   ]
+  },
+  "unlockOrder": 800007.002,
+  "position": {
+   "x": 70.23866952184723,
+   "y": 49.12197207444398
+  },
+  "biome": "cave"
+ }
+}

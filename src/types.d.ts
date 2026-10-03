@@ -565,6 +565,11 @@ type Region = {
   order: number
   entry?: string
   startLevel?: number
+  /** DLC expansions are post-game regions opened by beating their parent
+   * region's Champion; they are excluded from Unlock Token / World Tour counts. */
+  isDlc?: boolean
+  /** For a DLC region, the base region whose Champion opens it. */
+  parentRegion?: string
   raidPool?: { speciesKey: string; level: number }[]
   /** Location of the region's Pokémon League; the Elite Four can only be
    * challenged while standing here. */

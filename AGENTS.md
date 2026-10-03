@@ -270,6 +270,19 @@ Data conventions:
   `SELECT_STARTER` uses `entry` to place the player: choosing a
   region's starter starts the run on that region's first route. Regional
   starters live in `regionalStarters` in `src/data/config.js`.
+- **DLC regions** (`isDlc: true` + `parentRegion`) are post-game expansions
+  promoted out of their parent region's zones by
+  `tools/apply-dlc-regions.cjs`: Galar's Isle of Armor and Crown Tundra, and
+  Paldea's Kitakami and the Terarium. They share their parent's `generation`
+  (so raid pools / dex / Shiny Charm still group correctly), have no league or
+  Champion, and keep a legendary Raid Island as their endgame. Their hub keeps
+  a `championDefeated` gate, so they open when the parent Champion is beaten
+  and never cost an Unlock Token: `baseRegions` / `dlcParentRegion`
+  (`src/data/gameData.js`) exclude them from token, World Tour and
+  per-generation counts, `save.js` never adds them to `unlockedRegions`, and
+  the Town Map shows them as locked-but-not-token-openable. The generator still
+  creates the DLC as `ZONES`; re-run `apply-dlc-regions.cjs` after any
+  regeneration.
 - `map-data/<region>.json` locations carry a `region` id; wild routes also
   reference an `encounter-data/<region>.json` bucket via `routeKey`. Generated
   routes carry a `background` (a coarse base scene — grassland / beach /
@@ -754,6 +767,12 @@ One-off scripts used to build the data JSON (not run during dev/build):
   / Champion initial teams with `lib/team-builder.cjs` (keeping canonical
   levels), and swaps the leader gen3 sprites for current-gen art (Lorelei and
   Agatha keep gen3, the only art available). Idempotent (`--dry`).
+- `apply-dlc-regions.cjs` — data-only pass (#39) that lifts the Galar / Paldea
+  DLC zones out into first-class `isDlc` regions (own region file, Town Map
+  tab, entry and legendary Raid Island), re-homing their locations under the
+  new region id and moving their legendaries off the parent region's raid
+  pool. Keeps the hub's `championDefeated` gate. Idempotent (`--dry`); safe to
+  re-run after a regeneration (which recreates the zones).
 - `fix-impossible-encounters.cjs` / `fix-impossible-teams.cjs` — step wild
   encounters and trainer/gym/Elite Four/Champion Pokemon back to a form that
   could exist at their level (a Lv. 3 Chesnaught becomes a Chespin), merging

@@ -73,7 +73,7 @@ export function selectStarter(state, action) {
 export function unlockRegion(state, action) {
   const regionId = action.payload.regionId,
     region = regions.find((candidate) => candidate.id === regionId)
-  if (!region || state.unlockedRegions.includes(regionId)) return state
+  if (!region || region.isDlc || state.unlockedRegions.includes(regionId)) return state
   if (getRegionUnlockTokens(state) <= 0) return state
   const entryId = region.entry,
     entryPath = entryRoutePath(entryId),

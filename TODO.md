@@ -17,34 +17,33 @@ renumbered, so the gaps below are items that shipped.
 
 ### Tier 1 — High impact, worth the effort
 
-1. **#28 More region areas (caves, POIs, DLC land)** — L · ★★★★½ — real
-   content; data-heavy. Started: the POI marker model shipped with the Day-Care
-   as the first POI (28c), and the DLC areas are in as zones (28a); ordinary
-   caves/forests (28b) and more POIs remain. Pairs with #36/#39.
+1. **#28 More region areas (caves, POIs)** — L · ★★★★½ — real content;
+   data-heavy. Started: the POI marker model shipped with the Day-Care as the
+   first POI (28c), and the DLC areas are now first-class regions (#39);
+   ordinary caves/forests (28b) and more POIs remain. Pairs with #36.
 2. **#24 Move data pass** — M · ★★★ — ally/faint heals, context move-calling,
    the doubles-only moves, and decisions on unused PP / dead Z-Max data.
 3. **#25 Battle engine pass** — M–L · ★★★ — ally/doubles abilities, a few
    complex singles ones, item nuances and battle polish (animations / damage
    numbers).
-4. **#36 Zones (route chunks)** — M–L · ★★★★ — the model is in; more
-   sub-areas, a distinct zone glyph and inline per-sub-area encounter grids.
-5. **#39 DLC regions from later games** — M–L · ★★★★ — promote Isle of Armor,
-   Crown Tundra, Kitakami and the Terarium to first-class regions.
-6. **#18 Better settings** — M · ★★★ — sprite-style options, account controls
+4. **#36 Zones (route chunks)** — M–L · ★★★★ — the model is in and zone hubs
+   list each open sub-area's wild table inline; more sub-areas and a distinct
+   zone glyph remain.
+5. **#18 Better settings** — M · ★★★ — sprite-style options, account controls
    (blocked on #19) and finishing the Gameplay section.
-7. **#43 Multi-battles (double / triple / rotation) as a minigame** — M–L ·
+6. **#43 Multi-battles (double / triple / rotation) as a minigame** — M–L ·
    ★★½ — a self-contained minigame that reuses the combat pipeline.
-8. **#60 Areas should have their own zoomed-in map** — M · ★★ — zones and
+7. **#60 Areas should have their own zoomed-in map** — M · ★★ — zones and
    large areas list their sub-areas in the panel only; give them a focused
    map view entered from the Town Map, with a back button to exit.
 
 ### Tier 2 — Big / low-return, defer
 
-9. **#56 Multi-effect move pass (residual)** — S · ★★ — moves that roll one
-    status out of several (Tri Attack, Dire Claw) or carry a third effect,
-    which the single `secondary` slot cannot express.
-10. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
-    doc and real ops for modest player value today.
+8. **#56 Multi-effect move pass (residual)** — S · ★★ — moves that roll one
+   status out of several (Tri Attack, Dire Claw) or carry a third effect,
+   which the single `secondary` slot cannot express.
+9. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+   doc and real ops for modest player value today.
 
 ---
 
@@ -142,17 +141,17 @@ into 21–52 locations per region. That leaves three gaps:
 
 ### 28a. DLC / expansion areas
 
-**Shipped (0.13.0):** the Galar (Isle of Armor, Crown Tundra) and Paldea
-(Kitakami, the Terarium / Blueberry Academy) DLC areas are in as post-game
-zones inside their parent region, gated on `championDefeated`. Promoting them to
-first-class regions is #39.
+**Shipped:** the Galar (Isle of Armor, Crown Tundra) and Paldea (Kitakami, the
+Terarium / Blueberry Academy) DLC areas are now **first-class regions** (#39):
+they have their own Town Map tab, map, level band and legendary Raid Island,
+and open once their parent region's Champion is beaten. `tools/apply-dlc-regions.cjs`
+lifts them out of the parent region's `ZONES` (which the generator still
+creates) so a regeneration can re-run it.
 
 Still open:
 
 - [ ] Optional earlier post-games: Kanto's Sevii Islands, Unova's Black/White 2
       areas.
-- [ ] Re-check each region's `raidPool` after adding them — species that now
-      have a native route must drop out.
 
 ### 28b. More ordinary areas
 
@@ -166,10 +165,12 @@ Mt. Silver).
       Note: the committed `public/data` isn't currently idempotent with the
       generator, so a data-only pass needs an `apply-*.cjs` script (as the other
       generators' follow-ups do) rather than a full re-run.
-- [ ] Consider a real `type` / `areaType` field (cave, forest, sea, ruins, …)
-      instead of the current binary town-vs-route; `location-panel.js` labels
-      everything non-town as "Route 🌿", and the battle background comes from
-      the `ROUTE_BACKGROUND_RULES` / dominant-type heuristic.
+- [ ] Consider surfacing a real terrain `areaType` on the map node / battle
+      background too. The location panel already labels caves, forests, sea
+      routes, mountains, deserts, volcanic fields, tundra and ruins from the
+      committed `biome` (`areaInfoFor` in `src/data/ui.js`), but the battle
+      background still comes from the `ROUTE_BACKGROUND_RULES` / dominant-type
+      heuristic.
 
 ### 28c. Points of interest (POIs)
 
@@ -202,64 +203,16 @@ feature).
 The map is a graph of single nodes joined pair-wise. The zone model shipped in
 0.13.0: `type: 'zone'` nodes group sub-areas that are hidden routes with their
 own encounter buckets, and existing routes can be grouped too (`GROUP_ZONES` —
-Alola's islands, Paldea's provinces). Galar's Wild Area and the Galar/Paldea
-DLC are zones.
+Alola's islands, Paldea's provinces). Galar's Wild Area is a zone; the Galar
+and Paldea DLC started as zones and are now their own regions (#39).
 
 Still open:
 
 - [ ] More sub-areas (pairs with #28a/#28b).
-- [ ] Inline per-sub-area encounter grids (rather than the picker + a single
-      route grid).
 - [ ] Give each zone / area its own zoomed-in map view with a back button — see
       #60.
 
 Effort: **medium–large** (a small data-model change plus map/encounter UI).
-
-## 39. Introduce DLC regions from later games
-
-Later games shipped whole expansion areas that today are folded into a parent
-region (as zones):
-
-- Galar — **Isle of Armor** and **Crown Tundra** (Sword/Shield Expansion Pass).
-- Paldea — **Kitakami** (Teal Mask) and **Blueberry Academy / Terarium**
-  (Indigo Disk). `paldea-mossui-town` is already scraped as a bare dead-end town.
-- Optional older post-games: Kanto's **Sevii Islands** and Unova's Black/White 2
-  areas.
-
-**Partial (0.13.0):** these shipped as post-game zones inside their parent
-region (`championDefeated`). This item is about promoting them to
-**first-class regions** — their own `entry`, level curve, unlock path, raid pool
-and map — so they can be opened with an Unlock Token like any other region.
-
-- [ ] Decide the model: a region whose `generation` points at its parent gen,
-      vs. a new `parentRegion` / `isDlc` flag. Regions currently map 1:1 to
-      generations (`generation`, `speciesForGen`, per-gen raid pools and the
-      per-generation Shiny Charm), so DLC needs an explicit answer.
-- [ ] Add each area to `tools/region-maps.json` / `EXTRA_MAP_AREAS` with its own
-      locations + encounters, and a `REGION_MAP_LAYOUTS` override where the
-      layout needs hand-measuring.
-- [ ] Give each a progression: post-game (after the parent Champion) or bought
-      with an Unlock Token; decide whether it needs a league/Champion or just a
-      raid/legendary endgame.
-- [ ] Reconcile the dex/shininess/achievement structures:
-      `GENERATION_DEX_RANGES` / `speciesKeysByGeneration` / `completedGenerations`
-      key by national dex, so DLC mons already count toward their gen — decide
-      whether DLC regions count toward region completion, Unlock Tokens and the
-      World Tour achievement.
-- [ ] Register the new region files in `assets/gameDataInjector.js` and re-export
-      in `src/data/gameData.js`.
-- [ ] Re-check the raid pools afterwards.
-- [ ] Shape the maps with **zones** (#36) where they're open-world (the
-      Terarium, Wild Area-style areas).
-- [ ] Suggested order: Galar DLC → Paldea DLC → older post-games.
-
-Relevant code: `public/data/regions.json`, `tools/generate-regions.cjs` (region
-construction, `speciesForGen`, `levelRoutes`, the raid scan),
-`tools/scrape-region-maps.cjs`, `assets/gameDataInjector.js` (region file list),
-`src/game/progression.js` (`getRegionUnlockTokens`,
-`computeUnlockedLocations`), and the Town Map (`src/components/town-map.js`).
-
-Effort: **medium–large** (data-heavy, but shares groundwork with #28/#36).
 
 ## 43. Multi-battles (double / triple / rotation) as a minigame
 

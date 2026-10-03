@@ -3,7 +3,7 @@
 // Claimed rewards are tracked in `state.rewardedAchievements` (see
 // CLAIM_ACHIEVEMENT_REWARDS in the reducer).
 
-import { completedGenerations, gymLeaderData, pokedexIndexes, pokemonSpecies, regions } from './gameData.js'
+import { baseRegions, completedGenerations, gymLeaderData, pokedexIndexes, pokemonSpecies, regions } from './gameData.js'
 
 const nationalDexSize = pokedexIndexes.filter((entry) => entry[1].id > 0 && entry[1].id <= 1025).length
 
@@ -55,7 +55,7 @@ export const ACHIEVEMENTS = [
   { id: 'badgeFirst', name: 'First Badge', description: 'Earn a gym badge', reward: { money: 1000 }, check: (state) => state.defeatedGyms.length >= 1 },
   { id: 'badgeFull', name: 'Gym Challenger', description: 'Earn every badge of a region', reward: { victoryTokens: 2 }, check: allBadgesOfARegion },
   { id: 'championFirst', name: 'Champion', description: 'Beat a region Champion', reward: { victoryTokens: 2 }, check: (state) => state.defeatedChampions.length >= 1 },
-  { id: 'championAll', name: 'World Tour', description: `Conquer all ${regions.length} regions`, reward: { victoryTokens: 3, items: { masterball: 1 } }, check: (state) => state.defeatedChampions.length >= regions.length },
+  { id: 'championAll', name: 'World Tour', description: `Conquer all ${baseRegions.length} regions`, reward: { victoryTokens: 3, items: { masterball: 1 } }, check: (state) => state.defeatedChampions.length >= baseRegions.length },
   // Prestige & Tower
   { id: 'prestigeFirst', name: 'New Game+', description: 'Prestige a region', reward: { victoryTokens: 2 }, check: (state) => totalPrestige(state) >= 1 },
   { id: 'prestige10', name: 'Serial Prestiger', description: 'Prestige regions 10 times', reward: { victoryTokens: 3 }, check: (state) => totalPrestige(state) >= 10 },

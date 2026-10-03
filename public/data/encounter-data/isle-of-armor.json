@@ -1,0 +1,353 @@
+{
+ "galar-isle-of-armor-fields-of-honor": {
+  "name": "Fields of Honor",
+  "encounters": [
+   {
+    "speciesKey": "g-slowpoke",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "g-mr. mime",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "gossifleur",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "blipbug",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "skwovet",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "chewtle",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "lapras",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "wobbuffet",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "sneasel",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "delibird",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "lunatone",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "solrock",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "snorunt",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "glalie",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "bronzong",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "snover",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   }
+  ]
+ },
+ "galar-isle-of-armor-soothing-wetlands": {
+  "name": "Soothing Wetlands",
+  "encounters": [
+   {
+    "speciesKey": "g-slowpoke",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "chewtle",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "gossifleur",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "toxel",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "pincurchin",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "clobbopus",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "pikachu",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true,
+    "time": "day"
+   },
+   {
+    "speciesKey": "wobbuffet",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "electrike",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "lunatone",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "solrock",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "bronzong",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "joltik",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "espurr",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "inkay",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "helioptile",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   }
+  ]
+ },
+ "galar-isle-of-armor-brawlers-cave": {
+  "name": "Brawlers' Cave",
+  "encounters": [
+   {
+    "speciesKey": "g-farfetch'd",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "clobbopus",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "falinks",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "rolycoly",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "g-meowth",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "g-darumaka",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "machop",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "rhyhorn",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "rhydon",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "lunatone",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "solrock",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "boldore",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "gurdurr",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "throh",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "sawk",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "pancham",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   }
+  ]
+ },
+ "isle-of-armor-raid": {
+  "name": "Isle of Armor Raid Island",
+  "encounters": [
+   {
+    "speciesKey": "kubfu",
+    "weight": 1,
+    "minLevel": 75,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "urshifu-sss",
+    "weight": 1,
+    "minLevel": 75,
+    "maxLevel": 75
+   }
+  ]
+ }
+}

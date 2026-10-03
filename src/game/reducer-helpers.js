@@ -2,7 +2,7 @@
 // leftover unlock tokens and swarm rolls). Split from game/reducer.js.
 
 import { swarmBattleCount } from '../data/config.js'
-import { encounterData, mapData, pokemonSpecies, regions } from '../data/gameData.js'
+import { encounterData, mapData, pokemonSpecies, baseRegions } from '../data/gameData.js'
 import { getRegionUnlockTokens, prepareNextBattle } from './progression.js'
 
 /**
@@ -14,7 +14,7 @@ import { getRegionUnlockTokens, prepareNextBattle } from './progression.js'
  * @returns {GameState}
  */
 export function settleUnlockTokens(state) {
-  if ((state.unlockedRegions ?? []).length < regions.length) return state
+  if ((state.unlockedRegions ?? []).length < baseRegions.length) return state
   const leftover = getRegionUnlockTokens(state)
   if (leftover <= 0) return state
   return {

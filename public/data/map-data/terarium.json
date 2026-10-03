@@ -1,0 +1,146 @@
+{
+ "paldea-terarium-savanna-biome": {
+  "id": "paldea-terarium-savanna-biome",
+  "name": "Savanna Biome",
+  "type": "route",
+  "region": "terarium",
+  "description": "A sub-area of the Terarium.",
+  "routeKey": "paldea-terarium-savanna-biome",
+  "background": "/backgrounds/mountain.png",
+  "connections": [
+   "paldea-terarium"
+  ],
+  "hidden": true,
+  "zone": "paldea-terarium",
+  "unlock": {
+   "requires": [
+    "paldea-terarium"
+   ]
+  },
+  "unlockOrder": 910009,
+  "position": {
+   "x": 93.99811372274266,
+   "y": 22.428301572745625
+  },
+  "biome": "grassland"
+ },
+ "paldea-terarium-coastal-biome": {
+  "id": "paldea-terarium-coastal-biome",
+  "name": "Coastal Biome",
+  "type": "route",
+  "region": "terarium",
+  "description": "A sub-area of the Terarium.",
+  "routeKey": "paldea-terarium-coastal-biome",
+  "background": "/backgrounds/beach.png",
+  "connections": [
+   "paldea-terarium"
+  ],
+  "hidden": true,
+  "zone": "paldea-terarium",
+  "unlock": {
+   "requires": [
+    "paldea-terarium",
+    "paldea-terarium-savanna-biome"
+   ]
+  },
+  "unlockOrder": 910009.001,
+  "position": {
+   "x": 98,
+   "y": 18.07335602995268
+  },
+  "biome": "coast"
+ },
+ "paldea-terarium-polar-biome": {
+  "id": "paldea-terarium-polar-biome",
+  "name": "Polar Biome",
+  "type": "route",
+  "region": "terarium",
+  "description": "A sub-area of the Terarium.",
+  "routeKey": "paldea-terarium-polar-biome",
+  "background": "/backgrounds/mountain.png",
+  "connections": [
+   "paldea-terarium"
+  ],
+  "hidden": true,
+  "zone": "paldea-terarium",
+  "unlock": {
+   "requires": [
+    "paldea-terarium",
+    "paldea-terarium-coastal-biome"
+   ]
+  },
+  "unlockOrder": 910009.002,
+  "position": {
+   "x": 97.35058505840988,
+   "y": 23.175292529204935
+  },
+  "biome": "tundra"
+ },
+ "paldea-terarium": {
+  "id": "paldea-terarium",
+  "name": "Terarium",
+  "type": "zone",
+  "region": "terarium",
+  "description": "The Terarium is a wide-open stretch with several distinct habitats.",
+  "routeKey": "paldea-terarium-savanna-biome",
+  "background": "/backgrounds/grassland.png",
+  "connections": [
+   "paldea-terarium-savanna-biome",
+   "paldea-terarium-coastal-biome",
+   "paldea-terarium-polar-biome",
+   "terarium-raid"
+  ],
+  "subAreas": [
+   {
+    "id": "paldea-terarium-savanna-biome",
+    "name": "Savanna Biome"
+   },
+   {
+    "id": "paldea-terarium-coastal-biome",
+    "name": "Coastal Biome"
+   },
+   {
+    "id": "paldea-terarium-polar-biome",
+    "name": "Polar Biome"
+   }
+  ],
+  "unlock": {
+   "championDefeated": "paldea"
+  },
+  "unlockOrder": 910008.9,
+  "position": {
+   "x": 98,
+   "y": 20.40804594294962
+  },
+  "biome": "grassland"
+ },
+ "terarium-raid": {
+  "id": "terarium-raid",
+  "name": "Terarium Raid Island",
+  "type": "raid",
+  "region": "terarium",
+  "description": "A mysterious island where Terarium's rarest Pokemon dwell.",
+  "routeKey": "terarium-raid",
+  "background": "/backgrounds/cave.png",
+  "connections": [
+   "paldea-terarium"
+  ],
+  "unlock": {
+   "requires": [
+    "paldea-terarium"
+   ],
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-terarium-polar-biome",
+     "count": 10
+    }
+   ]
+  },
+  "unlockOrder": 910010.002,
+  "position": {
+   "x": 100,
+   "y": 10.40804594294962
+  },
+  "biome": "cave"
+ }
+}

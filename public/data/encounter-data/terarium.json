@@ -1,0 +1,353 @@
+{
+ "paldea-terarium-savanna-biome": {
+  "name": "Savanna Biome",
+  "encounters": [
+   {
+    "speciesKey": "frigibax",
+    "weight": 20,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "cetoddle",
+    "weight": 20,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "pawmi",
+    "weight": 20,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "nacli",
+    "weight": 12,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "tatsugiri",
+    "weight": 12,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "veluza",
+    "weight": 12,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "glalie",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "axew",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "deino",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "goomy",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "noibat",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true,
+    "time": "night"
+   },
+   {
+    "speciesKey": "applin",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "eiscue",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "cyclizar",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "iron bundle",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "roaring moon",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   }
+  ]
+ },
+ "paldea-terarium-coastal-biome": {
+  "name": "Coastal Biome",
+  "encounters": [
+   {
+    "speciesKey": "veluza",
+    "weight": 20,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "dondozo",
+    "weight": 20,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "tatsugiri",
+    "weight": 20,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "wiglett",
+    "weight": 12,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "finizen",
+    "weight": 12,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "cetoddle",
+    "weight": 12,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "psyduck",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "shellder",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "drowzee",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "magikarp",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "marill",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "wooper",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "surskit",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "meditite",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "barboach",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   }
+  ]
+ },
+ "paldea-terarium-polar-biome": {
+  "name": "Polar Biome",
+  "encounters": [
+   {
+    "speciesKey": "cetoddle",
+    "weight": 20,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "frigibax",
+    "weight": 20,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "nacli",
+    "weight": 20,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "pawmi",
+    "weight": 12,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "dondozo",
+    "weight": 12,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "veluza",
+    "weight": 12,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "iron bundle",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "psyduck",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "shellder",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "magikarp",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "marill",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "wooper",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "surskit",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "barboach",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "glalie",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   }
+  ]
+ },
+ "terarium-raid": {
+  "name": "Terarium Raid Island",
+  "encounters": [
+   {
+    "speciesKey": "terapagos",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "pecharunt",
+    "weight": 1,
+    "minLevel": 75,
+    "maxLevel": 75
+   }
+  ]
+ }
+}

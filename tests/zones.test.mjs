@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 installGameData()
 
-const { encounterData, mapData, pokemonSpecies, regions } = await import('../src/data/gameData.js')
+const { encounterData, mapData, pokemonSpecies, regions, baseRegions } = await import('../src/data/gameData.js')
 const { computeUnlockedLocations } = await import('../src/game/progression.js')
 
 /** Minimal GameState for computeUnlockedLocations. */
@@ -62,16 +62,28 @@ test('the extra Galar wild areas exist with their own encounters', () => {
   }
 })
 
-test('the DLC zones are post-game and gated on the Galar Champion', () => {  for (const id of ['galar-isle-of-armor', 'galar-crown-tundra']) {
+test('the Galar DLC areas are post-game regions gated on the Galar Champion', () => {
+  for (const [id, regionId] of [
+    ['galar-isle-of-armor', 'isle-of-armor'],
+    ['galar-crown-tundra', 'crown-tundra'],
+  ]) {
     const hub = mapData[id]
     assert.ok(hub, `${id} exists`)
     assert.equal(hub.type, 'zone')
+    assert.equal(hub.region, regionId, `${id} belongs to its DLC region`)
     assert.deepEqual(hub.unlock, { championDefeated: 'galar' })
     assert.ok(hub.subAreas.length >= 2, `${id} has sub-areas`)
     for (const subArea of hub.subAreas) {
       assert.equal(mapData[subArea.id].hidden, true)
+      assert.equal(mapData[subArea.id].region, regionId)
       assert.ok(encounterData[subArea.id]?.encounters?.length, `${subArea.id} has encounters`)
     }
+    const region = regions.find((candidate) => candidate.id === regionId)
+    assert.ok(region?.isDlc, `${regionId} is a DLC region`)
+    assert.equal(region.parentRegion, 'galar')
+    assert.ok(!region.league, `${regionId} has no gym league`)
+    assert.ok(region.raidPool.length > 0, `${regionId} keeps a legendary raid island`)
+    assert.ok(mapData[`${regionId}-raid`], `${regionId} has a Raid Island location`)
   }
 
   const locked = computeUnlockedLocations(stateWith(['galar-hulbury', 'galar-wyndon']))
@@ -82,6 +94,12 @@ test('the DLC zones are post-game and gated on the Galar Champion', () => {  for
   })
   assert.ok(unlocked.includes('galar-isle-of-armor'), 'opens after the Champion')
   assert.ok(unlocked.includes('galar-crown-tundra'), 'opens after the Champion')
+})
+
+test('DLC regions never cost an Unlock Token', () => {
+  const dlcIds = regions.filter((region) => region.isDlc).map((region) => region.id)
+  assert.deepEqual(dlcIds, ['isle-of-armor', 'crown-tundra', 'kitakami', 'terarium'])
+  for (const id of dlcIds) assert.ok(!baseRegions.some((region) => region.id === id))
 })
 
 test('the Alolan forms are wild in Alola and its raid pool is legendaries only', () => {
@@ -99,14 +117,26 @@ test('the Alolan forms are wild in Alola and its raid pool is legendaries only',
   assert.deepEqual(ordinary, [], 'Alola raid pool holds only legendaries')
 })
 
-test('Paldea has its DLC and Area Zero zones, and a legendary-only pool', () => {
-  for (const id of ['paldea-kitakami', 'paldea-terarium', 'paldea-area-zero']) {
+test('Paldea’s DLC areas are regions, and Area Zero stays a zone', () => {
+  for (const [id, regionId] of [
+    ['paldea-kitakami', 'kitakami'],
+    ['paldea-terarium', 'terarium'],
+  ]) {
     const hub = mapData[id]
     assert.ok(hub, `${id} exists`)
     assert.equal(hub.type, 'zone')
+    assert.equal(hub.region, regionId)
     assert.deepEqual(hub.unlock, { championDefeated: 'paldea' })
     assert.ok(hub.subAreas.length >= 2, `${id} has sub-areas`)
+    const region = regions.find((candidate) => candidate.id === regionId)
+    assert.ok(region?.isDlc, `${regionId} is a DLC region`)
+    assert.equal(region.parentRegion, 'paldea')
+    assert.ok(region.raidPool.length > 0, `${regionId} keeps a legendary raid island`)
   }
+  const areaZero = mapData['paldea-area-zero']
+  assert.ok(areaZero, 'Area Zero still exists')
+  assert.equal(areaZero.region, 'paldea', 'Area Zero is base-game Paldea')
+
   const paldea = regions.find((region) => region.id === 'paldea'),
     ordinary = paldea.raidPool.filter((entry) => !pokemonSpecies[entry.speciesKey]?.legendary)
   assert.deepEqual(ordinary, [], 'Paldea raid pool holds only legendaries')

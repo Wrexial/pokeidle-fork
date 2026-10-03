@@ -1,0 +1,378 @@
+{
+ "paldea-kitakami-revelers-road": {
+  "name": "Reveler's Road",
+  "encounters": [
+   {
+    "speciesKey": "poltchageist",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "dipplin",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "applin",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "nymble",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "tarountula",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "fidough",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "hoppip",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true,
+    "time": "day"
+   },
+   {
+    "speciesKey": "jumpluff",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true,
+    "time": "day"
+   },
+   {
+    "speciesKey": "sunkern",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true,
+    "time": "day"
+   },
+   {
+    "speciesKey": "sunflora",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true,
+    "time": "day"
+   },
+   {
+    "speciesKey": "shroomish",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "petilil",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "deerling",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "sawsbuck",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "foongus",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "axew",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   }
+  ]
+ },
+ "paldea-kitakami-apple-hills": {
+  "name": "Apple Hills",
+  "encounters": [
+   {
+    "speciesKey": "applin",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "dipplin",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "smoliv",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "nymble",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "tadbulb",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "tarountula",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "hoppip",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true,
+    "time": "day"
+   },
+   {
+    "speciesKey": "jumpluff",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true,
+    "time": "day"
+   },
+   {
+    "speciesKey": "sunkern",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true,
+    "time": "day"
+   },
+   {
+    "speciesKey": "sunflora",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true,
+    "time": "day"
+   },
+   {
+    "speciesKey": "shroomish",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "petilil",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "deerling",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "sawsbuck",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "foongus",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "axew",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   }
+  ]
+ },
+ "paldea-kitakami-oni-mountain": {
+  "name": "Oni Mountain",
+  "encounters": [
+   {
+    "speciesKey": "poltchageist",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "charcadet",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "nacli",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "frigibax",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "tadbulb",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "smoliv",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "bramblin",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "haunter",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "hoppip",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true,
+    "time": "day"
+   },
+   {
+    "speciesKey": "jumpluff",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true,
+    "time": "day"
+   },
+   {
+    "speciesKey": "sunkern",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true,
+    "time": "day"
+   },
+   {
+    "speciesKey": "sunflora",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true,
+    "time": "day"
+   },
+   {
+    "speciesKey": "misdreavus",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true,
+    "time": "night"
+   },
+   {
+    "speciesKey": "shroomish",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "sableye",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "shuppet",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true,
+    "time": "night"
+   }
+  ]
+ },
+ "kitakami-raid": {
+  "name": "Kitakami Raid Island",
+  "encounters": [
+   {
+    "speciesKey": "okidogi",
+    "weight": 1,
+    "minLevel": 75,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "munkidori",
+    "weight": 1,
+    "minLevel": 75,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "fezandipiti",
+    "weight": 1,
+    "minLevel": 75,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "ogerpon",
+    "weight": 1,
+    "minLevel": 70,
+    "maxLevel": 70
+   }
+  ]
+ }
+}

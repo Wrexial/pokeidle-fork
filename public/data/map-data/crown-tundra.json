@@ -1,0 +1,146 @@
+{
+ "galar-crown-tundra-snowslide-slope": {
+  "id": "galar-crown-tundra-snowslide-slope",
+  "name": "Snowslide Slope",
+  "type": "route",
+  "region": "crown-tundra",
+  "description": "A sub-area of the Crown Tundra.",
+  "routeKey": "galar-crown-tundra-snowslide-slope",
+  "background": "/backgrounds/grassland.png",
+  "connections": [
+   "galar-crown-tundra"
+  ],
+  "hidden": true,
+  "zone": "galar-crown-tundra",
+  "unlock": {
+   "requires": [
+    "galar-crown-tundra"
+   ]
+  },
+  "unlockOrder": 800011,
+  "position": {
+   "x": 58.69591236794558,
+   "y": 9.35580953380847
+  },
+  "biome": "tundra"
+ },
+ "galar-crown-tundra-frigid-sea": {
+  "id": "galar-crown-tundra-frigid-sea",
+  "name": "Frigid Sea",
+  "type": "route",
+  "region": "crown-tundra",
+  "description": "A sub-area of the Crown Tundra.",
+  "routeKey": "galar-crown-tundra-frigid-sea",
+  "background": "/backgrounds/beach.png",
+  "connections": [
+   "galar-crown-tundra"
+  ],
+  "hidden": true,
+  "zone": "galar-crown-tundra",
+  "unlock": {
+   "requires": [
+    "galar-crown-tundra",
+    "galar-crown-tundra-snowslide-slope"
+   ]
+  },
+  "unlockOrder": 800011.001,
+  "position": {
+   "x": 62.669903975427374,
+   "y": 13.243673970695541
+  },
+  "biome": "coast"
+ },
+ "galar-crown-tundra-giants-bed": {
+  "id": "galar-crown-tundra-giants-bed",
+  "name": "Giant's Bed",
+  "type": "route",
+  "region": "crown-tundra",
+  "description": "A sub-area of the Crown Tundra.",
+  "routeKey": "galar-crown-tundra-giants-bed",
+  "background": "/backgrounds/mountain.png",
+  "connections": [
+   "galar-crown-tundra"
+  ],
+  "hidden": true,
+  "zone": "galar-crown-tundra",
+  "unlock": {
+   "requires": [
+    "galar-crown-tundra",
+    "galar-crown-tundra-frigid-sea"
+   ]
+  },
+  "unlockOrder": 800011.002,
+  "position": {
+   "x": 57.75277274265659,
+   "y": 14.267119303777706
+  },
+  "biome": "mountain"
+ },
+ "galar-crown-tundra": {
+  "id": "galar-crown-tundra",
+  "name": "Crown Tundra",
+  "type": "zone",
+  "region": "crown-tundra",
+  "description": "The Crown Tundra is a wide-open stretch with several distinct habitats.",
+  "routeKey": "galar-crown-tundra-snowslide-slope",
+  "background": "/backgrounds/mountain.png",
+  "connections": [
+   "galar-crown-tundra-snowslide-slope",
+   "galar-crown-tundra-frigid-sea",
+   "galar-crown-tundra-giants-bed",
+   "crown-tundra-raid"
+  ],
+  "subAreas": [
+   {
+    "id": "galar-crown-tundra-snowslide-slope",
+    "name": "Snowslide Slope"
+   },
+   {
+    "id": "galar-crown-tundra-frigid-sea",
+    "name": "Frigid Sea"
+   },
+   {
+    "id": "galar-crown-tundra-giants-bed",
+    "name": "Giant's Bed"
+   }
+  ],
+  "unlock": {
+   "championDefeated": "galar"
+  },
+  "unlockOrder": 800010.9,
+  "position": {
+   "x": 56.81493093133369,
+   "y": 13.907692139150027
+  },
+  "biome": "tundra"
+ },
+ "crown-tundra-raid": {
+  "id": "crown-tundra-raid",
+  "name": "Crown Tundra Raid Island",
+  "type": "raid",
+  "region": "crown-tundra",
+  "description": "A mysterious island where Crown Tundra's rarest Pokemon dwell.",
+  "routeKey": "crown-tundra-raid",
+  "background": "/backgrounds/cave.png",
+  "connections": [
+   "galar-crown-tundra"
+  ],
+  "unlock": {
+   "requires": [
+    "galar-crown-tundra"
+   ],
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-crown-tundra-giants-bed",
+     "count": 10
+    }
+   ]
+  },
+  "unlockOrder": 800012.002,
+  "position": {
+   "x": 64.81493093133369,
+   "y": 3.9076921391500274
+  },
+  "biome": "cave"
+ }
+}

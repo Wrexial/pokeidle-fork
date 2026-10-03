@@ -435,7 +435,8 @@
    "kalos-cyllage-city",
    "kalos-ambrette-town",
    "kalos-route-7",
-   "kalos-connecting-cave"
+   "kalos-connecting-cave",
+   "kalos-glittering-cave"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -470,7 +471,8 @@
   "description": "A town in the Kalos region.",
   "connections": [
    "kalos-route-8",
-   "kalos-route-9"
+   "kalos-route-9",
+   "kalos-glittering-cave"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -545,7 +547,8 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "kalos-cyllage-city",
-   "kalos-geosenge-town"
+   "kalos-geosenge-town",
+   "kalos-reflection-cave"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -573,7 +576,8 @@
   "description": "A town in the Kalos region.",
   "connections": [
    "kalos-route-10",
-   "kalos-route-11"
+   "kalos-route-11",
+   "kalos-reflection-cave"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -900,7 +904,8 @@
   "description": "A town in the Kalos region.",
   "connections": [
    "kalos-route-15",
-   "kalos-route-17"
+   "kalos-route-17",
+   "kalos-frost-cavern"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -976,7 +981,8 @@
   "background": "/backgrounds/mountain.png",
   "connections": [
    "kalos-dendemille-town",
-   "kalos-anistar-city"
+   "kalos-anistar-city",
+   "kalos-frost-cavern"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1002,7 +1008,8 @@
   "description": "A town in the Kalos region, home to Olympia's Psychic Gym.",
   "connections": [
    "kalos-route-17",
-   "kalos-route-18"
+   "kalos-route-18",
+   "kalos-terminus-cave"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1050,7 +1057,8 @@
   "background": "/backgrounds/mountain.png",
   "connections": [
    "kalos-anistar-city",
-   "kalos-couriway-town"
+   "kalos-couriway-town",
+   "kalos-terminus-cave"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1451,5 +1459,113 @@
   },
   "biome": "cave",
   "background": "/backgrounds/cave.png"
+ },
+ "kalos-glittering-cave": {
+  "id": "kalos-glittering-cave",
+  "name": "Glittering Cave",
+  "type": "route",
+  "region": "kalos",
+  "description": "A wild area in the Kalos region.",
+  "routeKey": "kalos-glittering-cave",
+  "connections": [
+   "kalos-route-8",
+   "kalos-ambrette-town"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-8",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 600008.25,
+  "position": {
+   "x": 14.6,
+   "y": 62.8
+  },
+  "biome": "cave",
+  "background": "/backgrounds/cave.png"
+ },
+ "kalos-reflection-cave": {
+  "id": "kalos-reflection-cave",
+  "name": "Reflection Cave",
+  "type": "route",
+  "region": "kalos",
+  "description": "A wild area in the Kalos region.",
+  "routeKey": "kalos-reflection-cave",
+  "connections": [
+   "kalos-route-10",
+   "kalos-geosenge-town"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-10",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 600010.25,
+  "position": {
+   "x": 5.5,
+   "y": 56
+  },
+  "biome": "cave",
+  "background": "/backgrounds/cave.png"
+ },
+ "kalos-terminus-cave": {
+  "id": "kalos-terminus-cave",
+  "name": "Terminus Cave",
+  "type": "route",
+  "region": "kalos",
+  "description": "A wild area in the Kalos region.",
+  "routeKey": "kalos-terminus-cave",
+  "connections": [
+   "kalos-route-18",
+   "kalos-anistar-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-18",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 600017.75,
+  "position": {
+   "x": 83.6,
+   "y": 33.9
+  },
+  "biome": "cave",
+  "background": "/backgrounds/cave.png"
+ },
+ "kalos-frost-cavern": {
+  "id": "kalos-frost-cavern",
+  "name": "Frost Cavern",
+  "type": "route",
+  "region": "kalos",
+  "description": "A wild area in the Kalos region.",
+  "routeKey": "kalos-frost-cavern",
+  "connections": [
+   "kalos-route-17",
+   "kalos-dendemille-town"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-17",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 600015.75,
+  "position": {
+   "x": 73.9,
+   "y": 42.6
+  },
+  "biome": "tundra",
+  "background": "/backgrounds/grassland.png"
  }
 }

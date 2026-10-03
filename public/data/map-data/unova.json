@@ -267,7 +267,8 @@
   "connections": [
    "unova-striaton-city",
    "unova-nacrene-city",
-   "unova-pinwheel-forest"
+   "unova-pinwheel-forest",
+   "unova-wellspring-cave"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -296,7 +297,8 @@
   "connections": [
    "unova-route-3",
    "unova-castelia-city",
-   "unova-pinwheel-forest"
+   "unova-pinwheel-forest",
+   "unova-wellspring-cave"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -382,7 +384,8 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "unova-castelia-city",
-   "unova-nimbasa-city"
+   "unova-nimbasa-city",
+   "unova-relic-castle"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -413,7 +416,8 @@
   "connections": [
    "unova-route-4",
    "unova-route-16",
-   "unova-route-5"
+   "unova-route-5",
+   "unova-relic-castle"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -663,7 +667,8 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "unova-mistralton-city",
-   "unova-icirrus-city"
+   "unova-icirrus-city",
+   "unova-twist-mountain"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -691,7 +696,9 @@
   "description": "A town in the Unova region, home to Brycen's Ice Gym.",
   "connections": [
    "unova-route-8",
-   "unova-route-7"
+   "unova-route-7",
+   "unova-twist-mountain",
+   "unova-dragonspiral-tower"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -737,7 +744,8 @@
   "background": "/backgrounds/mountain.png",
   "connections": [
    "unova-icirrus-city",
-   "unova-route-9"
+   "unova-route-9",
+   "unova-dragonspiral-tower"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1003,7 +1011,8 @@
   "connections": [
    "unova-undella-town",
    "unova-lacunosa-town",
-   "unova-route-22"
+   "unova-route-22",
+   "unova-giant-chasm"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1032,7 +1041,8 @@
    "unova-route-14",
    "unova-route-21",
    "unova-lentimas-town",
-   "unova-humilau-city"
+   "unova-humilau-city",
+   "unova-giant-chasm"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1649,5 +1659,140 @@
   },
   "biome": "cave",
   "background": "/backgrounds/cave.png"
+ },
+ "unova-wellspring-cave": {
+  "id": "unova-wellspring-cave",
+  "name": "Wellspring Cave",
+  "type": "route",
+  "region": "unova",
+  "description": "A wild area in the Unova region.",
+  "routeKey": "unova-wellspring-cave",
+  "connections": [
+   "unova-route-3",
+   "unova-nacrene-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-3",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 500003.25,
+  "position": {
+   "x": 80.8,
+   "y": 57.4
+  },
+  "biome": "cave",
+  "background": "/backgrounds/cave.png"
+ },
+ "unova-twist-mountain": {
+  "id": "unova-twist-mountain",
+  "name": "Twist Mountain",
+  "type": "route",
+  "region": "unova",
+  "description": "A wild area in the Unova region.",
+  "routeKey": "unova-twist-mountain",
+  "connections": [
+   "unova-icirrus-city",
+   "unova-route-7"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-icirrus-city",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 500007.25,
+  "position": {
+   "x": 26.7,
+   "y": 42.3
+  },
+  "biome": "mountain",
+  "background": "/backgrounds/mountain.png"
+ },
+ "unova-dragonspiral-tower": {
+  "id": "unova-dragonspiral-tower",
+  "name": "Dragonspiral Tower",
+  "type": "route",
+  "region": "unova",
+  "description": "A wild area in the Unova region.",
+  "routeKey": "unova-dragonspiral-tower",
+  "connections": [
+   "unova-route-8",
+   "unova-icirrus-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-8",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 500007.75,
+  "position": {
+   "x": 33.9,
+   "y": 37.1
+  },
+  "biome": "ruins",
+  "background": "/backgrounds/grassland.png"
+ },
+ "unova-relic-castle": {
+  "id": "unova-relic-castle",
+  "name": "Relic Castle",
+  "type": "route",
+  "region": "unova",
+  "description": "A wild area in the Unova region.",
+  "routeKey": "unova-relic-castle",
+  "connections": [
+   "unova-route-4",
+   "unova-nimbasa-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-4",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 500004.2502,
+  "position": {
+   "x": 45.1,
+   "y": 55.7
+  },
+  "biome": "grassland",
+  "background": "/backgrounds/grassland.png"
+ },
+ "unova-giant-chasm": {
+  "id": "unova-giant-chasm",
+  "name": "Giant Chasm",
+  "type": "route",
+  "region": "unova",
+  "description": "A wild area in the Unova region.",
+  "routeKey": "unova-giant-chasm",
+  "connections": [
+   "unova-route-13",
+   "unova-undella-town"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-13",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 500013.25,
+  "position": {
+   "x": 94.8,
+   "y": 41.8
+  },
+  "biome": "grassland",
+  "background": "/backgrounds/grassland.png"
  }
 }

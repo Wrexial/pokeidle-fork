@@ -128,7 +128,8 @@
   "description": "A town in the Paldea region, home to Larry's Normal Gym.",
   "connections": [
    "paldea-zapapico",
-   "paldea-mesagoza"
+   "paldea-mesagoza",
+   "paldea-casseroya-lake"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -440,7 +441,8 @@
   "region": "paldea",
   "description": "A town in the Paldea region, home to Ryme's Ghost Gym.",
   "connections": [
-   "paldea-north-province"
+   "paldea-north-province",
+   "paldea-glaseado-mountain"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -489,7 +491,8 @@
   "region": "paldea",
   "description": "A town in the Paldea region, home to Grusha's Ice Gym.",
   "connections": [
-   "paldea-medali"
+   "paldea-medali",
+   "paldea-glaseado-mountain"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -532,7 +535,9 @@
   "region": "paldea",
   "description": "A town in the Paldea region, home to Kofu's Water Gym.",
   "connections": [
-   "paldea-artazon"
+   "paldea-artazon",
+   "paldea-casseroya-lake",
+   "paldea-socarrat-trail"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -882,7 +887,8 @@
   "region": "paldea",
   "description": "A town in the Paldea region.",
   "connections": [
-   "paldea-west-province"
+   "paldea-west-province",
+   "paldea-socarrat-trail"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1493,5 +1499,86 @@
   },
   "biome": "cave",
   "background": "/backgrounds/cave.png"
+ },
+ "paldea-casseroya-lake": {
+  "id": "paldea-casseroya-lake",
+  "name": "Casseroya Lake",
+  "type": "route",
+  "region": "paldea",
+  "description": "A wild area in the Paldea region.",
+  "routeKey": "paldea-casseroya-lake",
+  "connections": [
+   "paldea-cascarrafa",
+   "paldea-medali"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-cascarrafa",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 910002.7502,
+  "position": {
+   "x": 36.9,
+   "y": 47.3
+  },
+  "biome": "coast",
+  "background": "/backgrounds/beach.png"
+ },
+ "paldea-glaseado-mountain": {
+  "id": "paldea-glaseado-mountain",
+  "name": "Glaseado Mountain",
+  "type": "route",
+  "region": "paldea",
+  "description": "A wild area in the Paldea region.",
+  "routeKey": "paldea-glaseado-mountain",
+  "connections": [
+   "paldea-montenevera",
+   "paldea-zapapico"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-montenevera",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 910004.2505,
+  "position": {
+   "x": 58.1,
+   "y": 32
+  },
+  "biome": "coast",
+  "background": "/backgrounds/beach.png"
+ },
+ "paldea-socarrat-trail": {
+  "id": "paldea-socarrat-trail",
+  "name": "Socarrat Trail",
+  "type": "route",
+  "region": "paldea",
+  "description": "A wild area in the Paldea region.",
+  "routeKey": "paldea-socarrat-trail",
+  "connections": [
+   "paldea-cascarrafa",
+   "paldea-porto-marinada"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-cascarrafa",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 910004.7501,
+  "position": {
+   "x": 20.1,
+   "y": 45.4
+  },
+  "biome": "grassland",
+  "background": "/backgrounds/grassland.png"
  }
 }

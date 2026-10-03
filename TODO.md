@@ -161,18 +161,20 @@ the shared table `tools/lib/ordinary-areas.cjs`, consumed by both
 `generate-regions.cjs` (merged into `POST_AREAS`) and the idempotent
 `tools/apply-ordinary-areas.cjs` data pass, which wires each area between its
 connect locations with a curated species list, a neighbour-averaged level band
-and a derived biome. Fourteen landmark areas shipped (Ilex Forest, Union Cave,
-Granite Cave, Meteor Falls, Eterna Forest, Mt. Coronet, Pinwheel Forest,
-Chargestone Cave, Santalune Forest, Connecting Cave, Galar Mine No. 2,
-Watchtower Ruins, Inlet Grotto, Alfornada Cavern).
+and a derived biome. Forty-six landmark areas have shipped across seven regions
+(caves, forests, ruins, towers and lakes from Ilex Forest to Glaseado
+Mountain).
 
 Still open:
 
 - [ ] Grow the table (or scrape the remaining landmark locations) with more
-      areas — Johto's Dark Cave / Ice Path / Dragon's Den, Sinnoh's Iron Island
-      / Wayward Cave / the lakes, Unova's Relic Castle / Giant Chasm, Kalos's
-      Glittering Cave / Reflection Cave, Alola's Verdant Cavern / Wela Volcano
-      Park, Paldea's Casseroya Lake, safari zones.
+      areas — Johto's Mt. Mortar / Tohjo Falls, Sinnoh's Lake Verity / Acuity /
+      Valor and Old Chateau, Unova's Challenger's Cave / N's Castle, Kalos's
+      Lost Hotel / Sea Spirit's Den / Pokemon Village, Paldea's Gracia Stones,
+      and the safari zones.
+- [ ] Galar's Wild Area sub-areas (Stony Wilderness, Dusty Bowl, Lake of
+      Outrage, ...) belong inside the Wild Area zone, not as standalone routes
+      — see #36.
 - [ ] Consider surfacing a real terrain `areaType` on the map node / battle
       background too. The location panel already labels caves, forests, sea
       routes, mountains, deserts, volcanic fields, tundra and ruins from the

@@ -974,7 +974,8 @@
    "alola-route-1",
    "alola-route-1--hauoli-outskirts",
    "alola-route-2",
-   "alola-route-3"
+   "alola-route-3",
+   "alola-verdant-cavern"
   ],
   "subAreas": [
    {
@@ -1023,7 +1024,9 @@
    "alola-route-5",
    "alola-route-6",
    "alola-route-7",
-   "alola-route-8"
+   "alola-route-8",
+   "alola-wela-volcano-park",
+   "alola-lush-jungle"
   ],
   "subAreas": [
    {
@@ -1089,7 +1092,8 @@
    "alola-route-12",
    "alola-route-13",
    "alola-route-14",
-   "alola-route-15"
+   "alola-route-15",
+   "alola-mount-lanakila"
   ],
   "subAreas": [
    {
@@ -1152,7 +1156,8 @@
    "alola-raid",
    "alola-league",
    "alola-route-16",
-   "alola-route-17"
+   "alola-route-17",
+   "alola-vast-poni-canyon"
   ],
   "subAreas": [
    {
@@ -1211,5 +1216,135 @@
   },
   "background": "/backgrounds/beach.png",
   "biome": "coast"
+ },
+ "alola-verdant-cavern": {
+  "id": "alola-verdant-cavern",
+  "name": "Verdant Cavern",
+  "type": "route",
+  "region": "alola",
+  "description": "A wild area in the Alola region.",
+  "routeKey": "alola-verdant-cavern",
+  "connections": [
+   "alola-melemele-island"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-melemele-island",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 700000.75,
+  "position": {
+   "x": 27.5,
+   "y": 10.3
+  },
+  "biome": "cave",
+  "background": "/backgrounds/cave.png"
+ },
+ "alola-wela-volcano-park": {
+  "id": "alola-wela-volcano-park",
+  "name": "Wela Volcano Park",
+  "type": "route",
+  "region": "alola",
+  "description": "A wild area in the Alola region.",
+  "routeKey": "alola-wela-volcano-park",
+  "connections": [
+   "alola-akala-island"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-akala-island",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 700003.7501,
+  "position": {
+   "x": 86.1,
+   "y": 15.1
+  },
+  "biome": "volcanic",
+  "background": "/backgrounds/grassland.png"
+ },
+ "alola-lush-jungle": {
+  "id": "alola-lush-jungle",
+  "name": "Lush Jungle",
+  "type": "route",
+  "region": "alola",
+  "description": "A wild area in the Alola region.",
+  "routeKey": "alola-lush-jungle",
+  "connections": [
+   "alola-akala-island"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-akala-island",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 700003.7501,
+  "position": {
+   "x": 92.1,
+   "y": 15.1
+  },
+  "biome": "forest",
+  "background": "/backgrounds/grassland.png"
+ },
+ "alola-vast-poni-canyon": {
+  "id": "alola-vast-poni-canyon",
+  "name": "Vast Poni Canyon",
+  "type": "route",
+  "region": "alola",
+  "description": "A wild area in the Alola region.",
+  "routeKey": "alola-vast-poni-canyon",
+  "connections": [
+   "alola-poni-island"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-poni-island",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 700015.75,
+  "position": {
+   "x": 29,
+   "y": 68
+  },
+  "biome": "mountain",
+  "background": "/backgrounds/mountain.png"
+ },
+ "alola-mount-lanakila": {
+  "id": "alola-mount-lanakila",
+  "name": "Mount Lanakila",
+  "type": "route",
+  "region": "alola",
+  "description": "A wild area in the Alola region.",
+  "routeKey": "alola-mount-lanakila",
+  "connections": [
+   "alola-ulaula-island"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-ulaula-island",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 700008.75,
+  "position": {
+   "x": 78,
+   "y": 68
+  },
+  "biome": "mountain",
+  "background": "/backgrounds/mountain.png"
  }
 }

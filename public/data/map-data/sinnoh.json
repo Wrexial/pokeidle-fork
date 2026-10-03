@@ -184,7 +184,8 @@
   "description": "A town in the Sinnoh region, home to Roark's Rock Gym.",
   "connections": [
    "sinnoh-route-207",
-   "sinnoh-route-203"
+   "sinnoh-route-203",
+   "sinnoh-oreburgh-gate"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -363,7 +364,8 @@
   "background": "/backgrounds/mountain.png",
   "connections": [
    "sinnoh-eterna-city",
-   "sinnoh-route-207"
+   "sinnoh-route-207",
+   "sinnoh-wayward-cave"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -396,7 +398,9 @@
    "sinnoh-route-206",
    "sinnoh-oreburgh-city",
    "sinnoh-route-208",
-   "sinnoh-mt-coronet"
+   "sinnoh-mt-coronet",
+   "sinnoh-oreburgh-gate",
+   "sinnoh-wayward-cave"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -519,7 +523,8 @@
   "description": "A town in the Sinnoh region.",
   "connections": [
    "sinnoh-route-209",
-   "sinnoh-route-210"
+   "sinnoh-route-210",
+   "sinnoh-solaceon-ruins"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -565,7 +570,8 @@
   "connections": [
    "sinnoh-solaceon-town",
    "sinnoh-route-215",
-   "sinnoh-celestic-town"
+   "sinnoh-celestic-town",
+   "sinnoh-solaceon-ruins"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -909,7 +915,8 @@
   "background": "/backgrounds/mountain.png",
   "connections": [
    "sinnoh-route-216",
-   "sinnoh-snowpoint-city"
+   "sinnoh-snowpoint-city",
+   "sinnoh-snowpoint-temple"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -938,7 +945,8 @@
   "region": "sinnoh",
   "description": "A town in the Sinnoh region, home to Candice's Ice Gym.",
   "connections": [
-   "sinnoh-route-217"
+   "sinnoh-route-217",
+   "sinnoh-snowpoint-temple"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -996,7 +1004,8 @@
   "background": "/backgrounds/beach.png",
   "connections": [
    "sinnoh-canalave-city",
-   "sinnoh-jubilife-city"
+   "sinnoh-jubilife-city",
+   "sinnoh-iron-island"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1025,7 +1034,8 @@
   "region": "sinnoh",
   "description": "A town in the Sinnoh region, home to Byron's Steel Gym.",
   "connections": [
-   "sinnoh-route-218"
+   "sinnoh-route-218",
+   "sinnoh-iron-island"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1362,7 +1372,8 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "sinnoh-sea-route-226",
-   "sinnoh-route-222"
+   "sinnoh-route-222",
+   "sinnoh-stark-mountain"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1400,7 +1411,8 @@
   "connections": [
    "sinnoh-route-229",
    "sinnoh-sea-route-226",
-   "sinnoh-route-222"
+   "sinnoh-route-222",
+   "sinnoh-stark-mountain"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1606,6 +1618,168 @@
   "position": {
    "x": 35.3,
    "y": 55.4
+  },
+  "biome": "mountain",
+  "background": "/backgrounds/mountain.png"
+ },
+ "sinnoh-oreburgh-gate": {
+  "id": "sinnoh-oreburgh-gate",
+  "name": "Oreburgh Gate",
+  "type": "route",
+  "region": "sinnoh",
+  "description": "A wild area in the Sinnoh region.",
+  "routeKey": "sinnoh-oreburgh-gate",
+  "connections": [
+   "sinnoh-oreburgh-city",
+   "sinnoh-route-207"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-oreburgh-city",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 400203.75,
+  "position": {
+   "x": 28.3,
+   "y": 54
+  },
+  "biome": "grassland",
+  "background": "/backgrounds/grassland.png"
+ },
+ "sinnoh-wayward-cave": {
+  "id": "sinnoh-wayward-cave",
+  "name": "Wayward Cave",
+  "type": "route",
+  "region": "sinnoh",
+  "description": "A wild area in the Sinnoh region.",
+  "routeKey": "sinnoh-wayward-cave",
+  "connections": [
+   "sinnoh-route-206",
+   "sinnoh-route-207"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-206",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 400206.25,
+  "position": {
+   "x": 31.1,
+   "y": 32.6
+  },
+  "biome": "cave",
+  "background": "/backgrounds/cave.png"
+ },
+ "sinnoh-solaceon-ruins": {
+  "id": "sinnoh-solaceon-ruins",
+  "name": "Solaceon Ruins",
+  "type": "route",
+  "region": "sinnoh",
+  "description": "A wild area in the Sinnoh region.",
+  "routeKey": "sinnoh-solaceon-ruins",
+  "connections": [
+   "sinnoh-solaceon-town",
+   "sinnoh-route-210"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-solaceon-town",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 400209.75,
+  "position": {
+   "x": 58.5,
+   "y": 39.7
+  },
+  "biome": "ruins",
+  "background": "/backgrounds/grassland.png"
+ },
+ "sinnoh-iron-island": {
+  "id": "sinnoh-iron-island",
+  "name": "Iron Island",
+  "type": "route",
+  "region": "sinnoh",
+  "description": "A wild area in the Sinnoh region.",
+  "routeKey": "sinnoh-iron-island",
+  "connections": [
+   "sinnoh-canalave-city",
+   "sinnoh-route-218"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-canalave-city",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 400218.25,
+  "position": {
+   "x": 5.9,
+   "y": 63.6
+  },
+  "biome": "coast",
+  "background": "/backgrounds/beach.png"
+ },
+ "sinnoh-snowpoint-temple": {
+  "id": "sinnoh-snowpoint-temple",
+  "name": "Snowpoint Temple",
+  "type": "route",
+  "region": "sinnoh",
+  "description": "A wild area in the Sinnoh region.",
+  "routeKey": "sinnoh-snowpoint-temple",
+  "connections": [
+   "sinnoh-snowpoint-city",
+   "sinnoh-route-217"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-snowpoint-city",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 400217.25,
+  "position": {
+   "x": 32.6,
+   "y": 16.3
+  },
+  "biome": "tundra",
+  "background": "/backgrounds/grassland.png"
+ },
+ "sinnoh-stark-mountain": {
+  "id": "sinnoh-stark-mountain",
+  "name": "Stark Mountain",
+  "type": "route",
+  "region": "sinnoh",
+  "description": "A wild area in the Sinnoh region.",
+  "routeKey": "sinnoh-stark-mountain",
+  "connections": [
+   "sinnoh-route-227",
+   "sinnoh-route-228"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-227",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 400227.25,
+  "position": {
+   "x": 84,
+   "y": 13.3
   },
   "biome": "mountain",
   "background": "/backgrounds/mountain.png"

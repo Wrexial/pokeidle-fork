@@ -2221,5 +2221,192 @@
     "maxLevel": 75
    }
   ]
+ },
+ "alola-verdant-cavern": {
+  "name": "Verdant Cavern",
+  "encounters": [
+   {
+    "speciesKey": "caterpie",
+    "weight": 20,
+    "minLevel": 3,
+    "maxLevel": 5
+   },
+   {
+    "speciesKey": "grubbin",
+    "weight": 20,
+    "minLevel": 3,
+    "maxLevel": 5
+   },
+   {
+    "speciesKey": "rattata",
+    "weight": 20,
+    "minLevel": 3,
+    "maxLevel": 5
+   },
+   {
+    "speciesKey": "zubat",
+    "weight": 12,
+    "minLevel": 3,
+    "maxLevel": 5
+   },
+   {
+    "speciesKey": "diglett",
+    "weight": 12,
+    "minLevel": 3,
+    "maxLevel": 5
+   },
+   {
+    "speciesKey": "a-rattata",
+    "weight": 12,
+    "minLevel": 3,
+    "maxLevel": 5
+   },
+   {
+    "speciesKey": "a-diglett",
+    "weight": 12,
+    "minLevel": 3,
+    "maxLevel": 5
+   }
+  ]
+ },
+ "alola-wela-volcano-park": {
+  "name": "Wela Volcano Park",
+  "encounters": [
+   {
+    "speciesKey": "cubone",
+    "weight": 20,
+    "minLevel": 21,
+    "maxLevel": 23
+   },
+   {
+    "speciesKey": "salandit",
+    "weight": 20,
+    "minLevel": 21,
+    "maxLevel": 23
+   },
+   {
+    "speciesKey": "kangaskhan",
+    "weight": 20,
+    "minLevel": 21,
+    "maxLevel": 23
+   },
+   {
+    "speciesKey": "fletchling",
+    "weight": 12,
+    "minLevel": 21,
+    "maxLevel": 23
+   },
+   {
+    "speciesKey": "growlithe",
+    "weight": 12,
+    "minLevel": 21,
+    "maxLevel": 23
+   }
+  ]
+ },
+ "alola-lush-jungle": {
+  "name": "Lush Jungle",
+  "encounters": [
+   {
+    "speciesKey": "caterpie",
+    "weight": 20,
+    "minLevel": 21,
+    "maxLevel": 23
+   },
+   {
+    "speciesKey": "comfey",
+    "weight": 20,
+    "minLevel": 21,
+    "maxLevel": 23
+   },
+   {
+    "speciesKey": "fomantis",
+    "weight": 20,
+    "minLevel": 21,
+    "maxLevel": 23
+   },
+   {
+    "speciesKey": "oranguru",
+    "weight": 12,
+    "minLevel": 21,
+    "maxLevel": 23
+   },
+   {
+    "speciesKey": "passimian",
+    "weight": 12,
+    "minLevel": 21,
+    "maxLevel": 23
+   },
+   {
+    "speciesKey": "pikipek",
+    "weight": 12,
+    "minLevel": 21,
+    "maxLevel": 23
+   }
+  ]
+ },
+ "alola-vast-poni-canyon": {
+  "name": "Vast Poni Canyon",
+  "encounters": [
+   {
+    "speciesKey": "mudbray",
+    "weight": 20,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "rockruff",
+    "weight": 20,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "boldore",
+    "weight": 20,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "gible",
+    "weight": 12,
+    "minLevel": 69,
+    "maxLevel": 71
+   }
+  ]
+ },
+ "alola-mount-lanakila": {
+  "name": "Mount Lanakila",
+  "encounters": [
+   {
+    "speciesKey": "sneasel",
+    "weight": 20,
+    "minLevel": 41,
+    "maxLevel": 43
+   },
+   {
+    "speciesKey": "snorunt",
+    "weight": 20,
+    "minLevel": 41,
+    "maxLevel": 43
+   },
+   {
+    "speciesKey": "absol",
+    "weight": 20,
+    "minLevel": 41,
+    "maxLevel": 43
+   },
+   {
+    "speciesKey": "golbat",
+    "weight": 12,
+    "minLevel": 41,
+    "maxLevel": 43
+   },
+   {
+    "speciesKey": "sandshrew",
+    "weight": 12,
+    "minLevel": 41,
+    "maxLevel": 43
+   }
+  ]
  }
 }

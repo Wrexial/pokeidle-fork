@@ -2788,5 +2788,168 @@
     "maxLevel": 18
    }
   ]
+ },
+ "johto-ruins-of-alph": {
+  "name": "Ruins of Alph",
+  "encounters": [
+   {
+    "speciesKey": "unown",
+    "weight": 20,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "natu",
+    "weight": 20,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "wooper",
+    "weight": 20,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "smeargle",
+    "weight": 12,
+    "minLevel": 14,
+    "maxLevel": 16
+   }
+  ]
+ },
+ "johto-dark-cave": {
+  "name": "Dark Cave",
+  "encounters": [
+   {
+    "speciesKey": "zubat",
+    "weight": 20,
+    "minLevel": 36,
+    "maxLevel": 38
+   },
+   {
+    "speciesKey": "geodude",
+    "weight": 20,
+    "minLevel": 36,
+    "maxLevel": 38
+   },
+   {
+    "speciesKey": "machop",
+    "weight": 20,
+    "minLevel": 36,
+    "maxLevel": 38
+   },
+   {
+    "speciesKey": "teddiursa",
+    "weight": 12,
+    "minLevel": 36,
+    "maxLevel": 38
+   },
+   {
+    "speciesKey": "wobbuffet",
+    "weight": 12,
+    "minLevel": 36,
+    "maxLevel": 38
+   }
+  ]
+ },
+ "johto-slowpoke-well": {
+  "name": "Slowpoke Well",
+  "encounters": [
+   {
+    "speciesKey": "slowpoke",
+    "weight": 20,
+    "minLevel": 17,
+    "maxLevel": 19
+   },
+   {
+    "speciesKey": "zubat",
+    "weight": 20,
+    "minLevel": 17,
+    "maxLevel": 19
+   },
+   {
+    "speciesKey": "rattata",
+    "weight": 20,
+    "minLevel": 17,
+    "maxLevel": 19
+   },
+   {
+    "speciesKey": "geodude",
+    "weight": 12,
+    "minLevel": 17,
+    "maxLevel": 19
+   }
+  ]
+ },
+ "johto-ice-path": {
+  "name": "Ice Path",
+  "encounters": [
+   {
+    "speciesKey": "swinub",
+    "weight": 20,
+    "minLevel": 58,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "piloswine",
+    "weight": 20,
+    "minLevel": 58,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "delibird",
+    "weight": 20,
+    "minLevel": 58,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "sneasel",
+    "weight": 12,
+    "minLevel": 58,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "zubat",
+    "weight": 12,
+    "minLevel": 58,
+    "maxLevel": 60
+   },
+   {
+    "speciesKey": "golbat",
+    "weight": 12,
+    "minLevel": 58,
+    "maxLevel": 60
+   }
+  ]
+ },
+ "johto-dragons-den": {
+  "name": "Dragon's Den",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 20,
+    "minLevel": 61,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "dratini",
+    "weight": 20,
+    "minLevel": 61,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "dragonair",
+    "weight": 20,
+    "minLevel": 61,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "wooper",
+    "weight": 12,
+    "minLevel": 61,
+    "maxLevel": 63
+   }
+  ]
  }
 }

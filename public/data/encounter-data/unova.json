@@ -2842,5 +2842,174 @@
     "maxLevel": 22
    }
   ]
+ },
+ "unova-wellspring-cave": {
+  "name": "Wellspring Cave",
+  "encounters": [
+   {
+    "speciesKey": "roggenrola",
+    "weight": 20,
+    "minLevel": 11,
+    "maxLevel": 13
+   },
+   {
+    "speciesKey": "woobat",
+    "weight": 20,
+    "minLevel": 11,
+    "maxLevel": 13
+   },
+   {
+    "speciesKey": "drilbur",
+    "weight": 20,
+    "minLevel": 11,
+    "maxLevel": 13
+   },
+   {
+    "speciesKey": "tympole",
+    "weight": 12,
+    "minLevel": 11,
+    "maxLevel": 13
+   }
+  ]
+ },
+ "unova-twist-mountain": {
+  "name": "Twist Mountain",
+  "encounters": [
+   {
+    "speciesKey": "roggenrola",
+    "weight": 20,
+    "minLevel": 23,
+    "maxLevel": 25
+   },
+   {
+    "speciesKey": "woobat",
+    "weight": 20,
+    "minLevel": 23,
+    "maxLevel": 25
+   },
+   {
+    "speciesKey": "timburr",
+    "weight": 20,
+    "minLevel": 23,
+    "maxLevel": 25
+   },
+   {
+    "speciesKey": "drilbur",
+    "weight": 12,
+    "minLevel": 23,
+    "maxLevel": 25
+   },
+   {
+    "speciesKey": "cubchoo",
+    "weight": 12,
+    "minLevel": 23,
+    "maxLevel": 25
+   }
+  ]
+ },
+ "unova-dragonspiral-tower": {
+  "name": "Dragonspiral Tower",
+  "encounters": [
+   {
+    "speciesKey": "gothita",
+    "weight": 20,
+    "minLevel": 26,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "solosis",
+    "weight": 20,
+    "minLevel": 26,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "deino",
+    "weight": 20,
+    "minLevel": 26,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "golett",
+    "weight": 12,
+    "minLevel": 26,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "litwick",
+    "weight": 12,
+    "minLevel": 26,
+    "maxLevel": 28
+   }
+  ]
+ },
+ "unova-relic-castle": {
+  "name": "Relic Castle",
+  "encounters": [
+   {
+    "speciesKey": "sandile",
+    "weight": 20,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "darumaka",
+    "weight": 20,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "yamask",
+    "weight": 20,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "sigilyph",
+    "weight": 12,
+    "minLevel": 14,
+    "maxLevel": 16
+   }
+  ]
+ },
+ "unova-giant-chasm": {
+  "name": "Giant Chasm",
+  "encounters": [
+   {
+    "speciesKey": "woobat",
+    "weight": 20,
+    "minLevel": 40,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "boldore",
+    "weight": 20,
+    "minLevel": 40,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "piloswine",
+    "weight": 20,
+    "minLevel": 40,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "vanillish",
+    "weight": 12,
+    "minLevel": 40,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "metang",
+    "weight": 12,
+    "minLevel": 40,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "absol",
+    "weight": 12,
+    "minLevel": 40,
+    "maxLevel": 42
+   }
+  ]
  }
 }

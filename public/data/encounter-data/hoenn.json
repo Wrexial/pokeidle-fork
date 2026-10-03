@@ -3885,5 +3885,127 @@
     "maxLevel": 34
    }
   ]
+ },
+ "hoenn-shoal-cave": {
+  "name": "Shoal Cave",
+  "encounters": [
+   {
+    "speciesKey": "spheal",
+    "weight": 20,
+    "minLevel": 57,
+    "maxLevel": 59
+   },
+   {
+    "speciesKey": "snorunt",
+    "weight": 20,
+    "minLevel": 57,
+    "maxLevel": 59
+   },
+   {
+    "speciesKey": "sealeo",
+    "weight": 20,
+    "minLevel": 57,
+    "maxLevel": 59
+   },
+   {
+    "speciesKey": "zubat",
+    "weight": 12,
+    "minLevel": 57,
+    "maxLevel": 59
+   },
+   {
+    "speciesKey": "golbat",
+    "weight": 12,
+    "minLevel": 57,
+    "maxLevel": 59
+   }
+  ]
+ },
+ "hoenn-seafloor-cavern": {
+  "name": "Seafloor Cavern",
+  "encounters": [
+   {
+    "speciesKey": "zubat",
+    "weight": 20,
+    "minLevel": 61,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "golbat",
+    "weight": 20,
+    "minLevel": 61,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "magikarp",
+    "weight": 20,
+    "minLevel": 61,
+    "maxLevel": 63
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 12,
+    "minLevel": 61,
+    "maxLevel": 63
+   }
+  ]
+ },
+ "hoenn-sky-pillar": {
+  "name": "Sky Pillar",
+  "encounters": [
+   {
+    "speciesKey": "golbat",
+    "weight": 20,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "sableye",
+    "weight": 20,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "duskull",
+    "weight": 20,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "dusclops",
+    "weight": 12,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "chimecho",
+    "weight": 12,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "claydol",
+    "weight": 12,
+    "minLevel": 67,
+    "maxLevel": 69
+   }
+  ]
+ },
+ "hoenn-new-mauville": {
+  "name": "New Mauville",
+  "encounters": [
+   {
+    "speciesKey": "voltorb",
+    "weight": 20,
+    "minLevel": 24,
+    "maxLevel": 26
+   },
+   {
+    "speciesKey": "magnemite",
+    "weight": 20,
+    "minLevel": 24,
+    "maxLevel": 26
+   }
+  ]
  }
 }

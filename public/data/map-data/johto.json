@@ -125,7 +125,8 @@
   "connections": [
    "johto-route-30",
    "johto-violet-city",
-   "johto-route-46"
+   "johto-route-46",
+   "johto-dark-cave"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -151,7 +152,8 @@
   "connections": [
    "johto-route-31",
    "johto-route-32",
-   "johto-route-36"
+   "johto-route-36",
+   "johto-ruins-of-alph"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -188,7 +190,8 @@
   "connections": [
    "johto-violet-city",
    "johto-route-33",
-   "johto-union-cave"
+   "johto-union-cave",
+   "johto-ruins-of-alph"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -219,7 +222,8 @@
   "connections": [
    "johto-azalea-town",
    "johto-route-32",
-   "johto-union-cave"
+   "johto-union-cave",
+   "johto-slowpoke-well"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -246,7 +250,8 @@
   "connections": [
    "johto-route-33",
    "johto-route-34",
-   "johto-ilex-forest"
+   "johto-ilex-forest",
+   "johto-slowpoke-well"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -860,7 +865,8 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "johto-mahogany-town",
-   "johto-blackthorn-city"
+   "johto-blackthorn-city",
+   "johto-ice-path"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -888,7 +894,9 @@
   "description": "A town in the Johto region, home to Clair's Dragon Gym.",
   "connections": [
    "johto-route-45",
-   "johto-route-44"
+   "johto-route-44",
+   "johto-ice-path",
+   "johto-dragons-den"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -936,7 +944,9 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "johto-blackthorn-city",
-   "johto-route-46"
+   "johto-route-46",
+   "johto-dark-cave",
+   "johto-dragons-den"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1189,5 +1199,140 @@
   },
   "biome": "cave",
   "background": "/backgrounds/cave.png"
+ },
+ "johto-ruins-of-alph": {
+  "id": "johto-ruins-of-alph",
+  "name": "Ruins of Alph",
+  "type": "route",
+  "region": "johto",
+  "description": "A wild area in the Johto region.",
+  "routeKey": "johto-ruins-of-alph",
+  "connections": [
+   "johto-route-32",
+   "johto-violet-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-route-32",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 200031.75,
+  "position": {
+   "x": 53.1,
+   "y": 52.6
+  },
+  "biome": "ruins",
+  "background": "/backgrounds/grassland.png"
+ },
+ "johto-dark-cave": {
+  "id": "johto-dark-cave",
+  "name": "Dark Cave",
+  "type": "route",
+  "region": "johto",
+  "description": "A wild area in the Johto region.",
+  "routeKey": "johto-dark-cave",
+  "connections": [
+   "johto-route-31",
+   "johto-route-45"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-route-31",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 200031.25,
+  "position": {
+   "x": 59.6,
+   "y": 41
+  },
+  "biome": "cave",
+  "background": "/backgrounds/cave.png"
+ },
+ "johto-slowpoke-well": {
+  "id": "johto-slowpoke-well",
+  "name": "Slowpoke Well",
+  "type": "route",
+  "region": "johto",
+  "description": "A wild area in the Johto region.",
+  "routeKey": "johto-slowpoke-well",
+  "connections": [
+   "johto-azalea-town",
+   "johto-route-33"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-azalea-town",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 200033.25,
+  "position": {
+   "x": 39.1,
+   "y": 78.6
+  },
+  "biome": "cave",
+  "background": "/backgrounds/cave.png"
+ },
+ "johto-ice-path": {
+  "id": "johto-ice-path",
+  "name": "Ice Path",
+  "type": "route",
+  "region": "johto",
+  "description": "A wild area in the Johto region.",
+  "routeKey": "johto-ice-path",
+  "connections": [
+   "johto-route-44",
+   "johto-blackthorn-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-route-44",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 200044.25,
+  "position": {
+   "x": 73.9,
+   "y": 21.6
+  },
+  "biome": "tundra",
+  "background": "/backgrounds/grassland.png"
+ },
+ "johto-dragons-den": {
+  "id": "johto-dragons-den",
+  "name": "Dragon's Den",
+  "type": "route",
+  "region": "johto",
+  "description": "A wild area in the Johto region.",
+  "routeKey": "johto-dragons-den",
+  "connections": [
+   "johto-blackthorn-city",
+   "johto-route-45"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-blackthorn-city",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 200044.75,
+  "position": {
+   "x": 74.1,
+   "y": 32.8
+  },
+  "biome": "grassland",
+  "background": "/backgrounds/grassland.png"
  }
 }

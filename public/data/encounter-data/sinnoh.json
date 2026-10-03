@@ -3501,5 +3501,203 @@
     "maxLevel": 26
    }
   ]
+ },
+ "sinnoh-oreburgh-gate": {
+  "name": "Oreburgh Gate",
+  "encounters": [
+   {
+    "speciesKey": "zubat",
+    "weight": 20,
+    "minLevel": 19,
+    "maxLevel": 21
+   },
+   {
+    "speciesKey": "geodude",
+    "weight": 20,
+    "minLevel": 19,
+    "maxLevel": 21
+   },
+   {
+    "speciesKey": "machop",
+    "weight": 20,
+    "minLevel": 19,
+    "maxLevel": 21
+   },
+   {
+    "speciesKey": "psyduck",
+    "weight": 12,
+    "minLevel": 19,
+    "maxLevel": 21
+   }
+  ]
+ },
+ "sinnoh-wayward-cave": {
+  "name": "Wayward Cave",
+  "encounters": [
+   {
+    "speciesKey": "zubat",
+    "weight": 20,
+    "minLevel": 18,
+    "maxLevel": 20
+   },
+   {
+    "speciesKey": "geodude",
+    "weight": 20,
+    "minLevel": 18,
+    "maxLevel": 20
+   },
+   {
+    "speciesKey": "machop",
+    "weight": 20,
+    "minLevel": 18,
+    "maxLevel": 20
+   },
+   {
+    "speciesKey": "bronzor",
+    "weight": 12,
+    "minLevel": 18,
+    "maxLevel": 20
+   },
+   {
+    "speciesKey": "gible",
+    "weight": 12,
+    "minLevel": 18,
+    "maxLevel": 20
+   }
+  ]
+ },
+ "sinnoh-solaceon-ruins": {
+  "name": "Solaceon Ruins",
+  "encounters": [
+   {
+    "speciesKey": "unown",
+    "weight": 20,
+    "minLevel": 26,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "geodude",
+    "weight": 20,
+    "minLevel": 26,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "bronzor",
+    "weight": 20,
+    "minLevel": 26,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "meditite",
+    "weight": 12,
+    "minLevel": 26,
+    "maxLevel": 28
+   }
+  ]
+ },
+ "sinnoh-iron-island": {
+  "name": "Iron Island",
+  "encounters": [
+   {
+    "speciesKey": "zubat",
+    "weight": 20,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "geodude",
+    "weight": 20,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "onix",
+    "weight": 20,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "machop",
+    "weight": 12,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "sneasel",
+    "weight": 12,
+    "minLevel": 45,
+    "maxLevel": 47
+   }
+  ]
+ },
+ "sinnoh-snowpoint-temple": {
+  "name": "Snowpoint Temple",
+  "encounters": [
+   {
+    "speciesKey": "sneasel",
+    "weight": 20,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "snorunt",
+    "weight": 20,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "snover",
+    "weight": 20,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "golbat",
+    "weight": 12,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "bronzor",
+    "weight": 12,
+    "minLevel": 43,
+    "maxLevel": 45
+   }
+  ]
+ },
+ "sinnoh-stark-mountain": {
+  "name": "Stark Mountain",
+  "encounters": [
+   {
+    "speciesKey": "numel",
+    "weight": 20,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "slugma",
+    "weight": 20,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "magcargo",
+    "weight": 20,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "rhyhorn",
+    "weight": 12,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "skarmory",
+    "weight": 12,
+    "minLevel": 67,
+    "maxLevel": 69
+   }
+  ]
  }
 }

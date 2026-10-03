@@ -2551,5 +2551,133 @@
     "maxLevel": 28
    }
   ]
+ },
+ "kalos-glittering-cave": {
+  "name": "Glittering Cave",
+  "encounters": [
+   {
+    "speciesKey": "zubat",
+    "weight": 20,
+    "minLevel": 28,
+    "maxLevel": 30
+   },
+   {
+    "speciesKey": "roggenrola",
+    "weight": 20,
+    "minLevel": 28,
+    "maxLevel": 30
+   },
+   {
+    "speciesKey": "machop",
+    "weight": 20,
+    "minLevel": 28,
+    "maxLevel": 30
+   },
+   {
+    "speciesKey": "meditite",
+    "weight": 12,
+    "minLevel": 28,
+    "maxLevel": 30
+   },
+   {
+    "speciesKey": "onix",
+    "weight": 12,
+    "minLevel": 28,
+    "maxLevel": 30
+   }
+  ]
+ },
+ "kalos-reflection-cave": {
+  "name": "Reflection Cave",
+  "encounters": [
+   {
+    "speciesKey": "zubat",
+    "weight": 20,
+    "minLevel": 34,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "roggenrola",
+    "weight": 20,
+    "minLevel": 34,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "meditite",
+    "weight": 20,
+    "minLevel": 34,
+    "maxLevel": 36
+   },
+   {
+    "speciesKey": "carbink",
+    "weight": 12,
+    "minLevel": 34,
+    "maxLevel": 36
+   }
+  ]
+ },
+ "kalos-terminus-cave": {
+  "name": "Terminus Cave",
+  "encounters": [
+   {
+    "speciesKey": "geodude",
+    "weight": 20,
+    "minLevel": 60,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "graveler",
+    "weight": 20,
+    "minLevel": 60,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "durant",
+    "weight": 20,
+    "minLevel": 60,
+    "maxLevel": 62
+   },
+   {
+    "speciesKey": "linoone",
+    "weight": 12,
+    "minLevel": 60,
+    "maxLevel": 62
+   }
+  ]
+ },
+ "kalos-frost-cavern": {
+  "name": "Frost Cavern",
+  "encounters": [
+   {
+    "speciesKey": "snover",
+    "weight": 20,
+    "minLevel": 57,
+    "maxLevel": 59
+   },
+   {
+    "speciesKey": "sneasel",
+    "weight": 20,
+    "minLevel": 57,
+    "maxLevel": 59
+   },
+   {
+    "speciesKey": "vanillite",
+    "weight": 20,
+    "minLevel": 57,
+    "maxLevel": 59
+   },
+   {
+    "speciesKey": "bergmite",
+    "weight": 12,
+    "minLevel": 57,
+    "maxLevel": 59
+   },
+   {
+    "speciesKey": "cubchoo",
+    "weight": 12,
+    "minLevel": 57,
+    "maxLevel": 59
+   }
+  ]
  }
 }

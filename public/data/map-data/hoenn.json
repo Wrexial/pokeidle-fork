@@ -469,7 +469,8 @@
   "connections": [
    "hoenn-slateport-city",
    "hoenn-route-103",
-   "hoenn-mauville-city"
+   "hoenn-mauville-city",
+   "hoenn-new-mauville"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -500,7 +501,8 @@
    "hoenn-route-110",
    "hoenn-route-111",
    "hoenn-route-117",
-   "hoenn-route-118"
+   "hoenn-route-118",
+   "hoenn-new-mauville"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1237,7 +1239,8 @@
   "routeKey": "hoenn-route-125",
   "background": "/backgrounds/beach.png",
   "connections": [
-   "hoenn-mossdeep-city"
+   "hoenn-mossdeep-city",
+   "hoenn-shoal-cave"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1345,7 +1348,8 @@
   "connections": [
    "hoenn-mossdeep-city",
    "hoenn-route-126",
-   "hoenn-route-128"
+   "hoenn-route-128",
+   "hoenn-shoal-cave"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1378,7 +1382,8 @@
    "hoenn-route-127",
    "hoenn-route-129",
    "hoenn-raid",
-   "hoenn-league"
+   "hoenn-league",
+   "hoenn-seafloor-cavern"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1505,7 +1510,8 @@
   "background": "/backgrounds/beach.png",
   "connections": [
    "hoenn-route-130",
-   "hoenn-pacifidlog-town"
+   "hoenn-pacifidlog-town",
+   "hoenn-sky-pillar"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1537,7 +1543,8 @@
   "description": "A town in the Hoenn region.",
   "connections": [
    "hoenn-route-131",
-   "hoenn-route-132"
+   "hoenn-route-132",
+   "hoenn-sky-pillar"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1774,5 +1781,112 @@
   },
   "biome": "coast",
   "background": "/backgrounds/beach.png"
+ },
+ "hoenn-shoal-cave": {
+  "id": "hoenn-shoal-cave",
+  "name": "Shoal Cave",
+  "type": "route",
+  "region": "hoenn",
+  "description": "A wild area in the Hoenn region.",
+  "routeKey": "hoenn-shoal-cave",
+  "connections": [
+   "hoenn-route-125",
+   "hoenn-route-127"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-125",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 300125.25,
+  "position": {
+   "x": 95.3,
+   "y": 44.1
+  },
+  "biome": "cave",
+  "background": "/backgrounds/cave.png"
+ },
+ "hoenn-seafloor-cavern": {
+  "id": "hoenn-seafloor-cavern",
+  "name": "Seafloor Cavern",
+  "type": "route",
+  "region": "hoenn",
+  "description": "A wild area in the Hoenn region.",
+  "routeKey": "hoenn-seafloor-cavern",
+  "connections": [
+   "hoenn-route-128"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-128",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 300128.25,
+  "position": {
+   "x": 84,
+   "y": 51.6
+  },
+  "biome": "cave",
+  "background": "/backgrounds/cave.png"
+ },
+ "hoenn-sky-pillar": {
+  "id": "hoenn-sky-pillar",
+  "name": "Sky Pillar",
+  "type": "route",
+  "region": "hoenn",
+  "description": "A wild area in the Hoenn region.",
+  "routeKey": "hoenn-sky-pillar",
+  "connections": [
+   "hoenn-pacifidlog-town",
+   "hoenn-route-131"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-pacifidlog-town",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 300131.25,
+  "position": {
+   "x": 68.2,
+   "y": 68.6
+  },
+  "biome": "ruins",
+  "background": "/backgrounds/grassland.png"
+ },
+ "hoenn-new-mauville": {
+  "id": "hoenn-new-mauville",
+  "name": "New Mauville",
+  "type": "route",
+  "region": "hoenn",
+  "description": "A wild area in the Hoenn region.",
+  "routeKey": "hoenn-new-mauville",
+  "connections": [
+   "hoenn-mauville-city",
+   "hoenn-route-110"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-mauville-city",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 300110.25,
+  "position": {
+   "x": 36.1,
+   "y": 51.9
+  },
+  "biome": "grassland",
+  "background": "/backgrounds/grassland.png"
  }
 }

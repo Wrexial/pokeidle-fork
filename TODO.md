@@ -218,10 +218,11 @@ and Paldea DLC started as zones and are now their own regions (#39).
 
 Still open:
 
-- [ ] More sub-areas (pairs with #28a/#28b). Galar's Wild Area is now complete
-      (11 habitats) via `tools/lib/zone-areas.cjs` + `apply-zone-areas.cjs`, and
-      sub-area wild tables are behind a Show/Hide toggle on the hub; other
-      zones (the DLC areas, Alola's islands) could use the same treatment.
+- [ ] More sub-areas (pairs with #28a/#28b). Galar's Wild Area (11 habitats)
+      and the four DLC zones (Isle of Armor 9, Crown Tundra 10, Kitakami 9,
+      Terarium 7) are filled out via `tools/lib/zone-areas.cjs` +
+      `apply-zone-areas.cjs`, and sub-area wild tables are behind a Show/Hide
+      toggle on the hub; Alola's islands are the remaining candidates.
 - [ ] Give each zone / area its own zoomed-in map view with a back button — see
       #60.
 

@@ -89,7 +89,13 @@
    "paldea-kitakami-apple-hills",
    "paldea-kitakami-oni-mountain",
    "kitakami-raid",
-   "paldea-mossui-town"
+   "paldea-mossui-town",
+   "kitakami-wistful-fields",
+   "kitakami-fellhorn-gorge",
+   "kitakami-crystal-pool",
+   "kitakami-timeless-woods",
+   "kitakami-paradise-barrens",
+   "kitakami-infernal-pass"
   ],
   "subAreas": [
    {
@@ -103,6 +109,30 @@
    {
     "id": "paldea-kitakami-oni-mountain",
     "name": "Oni Mountain"
+   },
+   {
+    "id": "kitakami-wistful-fields",
+    "name": "Wistful Fields"
+   },
+   {
+    "id": "kitakami-fellhorn-gorge",
+    "name": "Fellhorn Gorge"
+   },
+   {
+    "id": "kitakami-crystal-pool",
+    "name": "Crystal Pool"
+   },
+   {
+    "id": "kitakami-timeless-woods",
+    "name": "Timeless Woods"
+   },
+   {
+    "id": "kitakami-paradise-barrens",
+    "name": "Paradise Barrens"
+   },
+   {
+    "id": "kitakami-infernal-pass",
+    "name": "Infernal Pass"
    }
   ],
   "unlock": {
@@ -143,5 +173,161 @@
    "y": 2
   },
   "biome": "cave"
+ },
+ "kitakami-wistful-fields": {
+  "id": "kitakami-wistful-fields",
+  "name": "Wistful Fields",
+  "type": "route",
+  "region": "kitakami",
+  "description": "A sub-area of the Kitakami.",
+  "routeKey": "kitakami-wistful-fields",
+  "connections": [
+   "paldea-kitakami"
+  ],
+  "hidden": true,
+  "zone": "paldea-kitakami",
+  "unlock": {
+   "requires": [
+    "paldea-kitakami",
+    "paldea-kitakami-oni-mountain"
+   ]
+  },
+  "unlockOrder": 910007.016,
+  "position": {
+   "x": 4,
+   "y": 2
+  },
+  "biome": "forest",
+  "background": "/backgrounds/grassland.png"
+ },
+ "kitakami-fellhorn-gorge": {
+  "id": "kitakami-fellhorn-gorge",
+  "name": "Fellhorn Gorge",
+  "type": "route",
+  "region": "kitakami",
+  "description": "A sub-area of the Kitakami.",
+  "routeKey": "kitakami-fellhorn-gorge",
+  "connections": [
+   "paldea-kitakami"
+  ],
+  "hidden": true,
+  "zone": "paldea-kitakami",
+  "unlock": {
+   "requires": [
+    "paldea-kitakami",
+    "kitakami-wistful-fields"
+   ]
+  },
+  "unlockOrder": 910007.017,
+  "position": {
+   "x": 7,
+   "y": 5
+  },
+  "biome": "mountain",
+  "background": "/backgrounds/mountain.png"
+ },
+ "kitakami-crystal-pool": {
+  "id": "kitakami-crystal-pool",
+  "name": "Crystal Pool",
+  "type": "route",
+  "region": "kitakami",
+  "description": "A sub-area of the Kitakami.",
+  "routeKey": "kitakami-crystal-pool",
+  "connections": [
+   "paldea-kitakami"
+  ],
+  "hidden": true,
+  "zone": "paldea-kitakami",
+  "unlock": {
+   "requires": [
+    "paldea-kitakami",
+    "kitakami-fellhorn-gorge"
+   ]
+  },
+  "unlockOrder": 910007.018,
+  "position": {
+   "x": 8,
+   "y": 6
+  },
+  "biome": "forest",
+  "background": "/backgrounds/grassland.png"
+ },
+ "kitakami-timeless-woods": {
+  "id": "kitakami-timeless-woods",
+  "name": "Timeless Woods",
+  "type": "route",
+  "region": "kitakami",
+  "description": "A sub-area of the Kitakami.",
+  "routeKey": "kitakami-timeless-woods",
+  "connections": [
+   "paldea-kitakami"
+  ],
+  "hidden": true,
+  "zone": "paldea-kitakami",
+  "unlock": {
+   "requires": [
+    "paldea-kitakami",
+    "kitakami-crystal-pool"
+   ]
+  },
+  "unlockOrder": 910007.019,
+  "position": {
+   "x": 4,
+   "y": 7
+  },
+  "biome": "forest",
+  "background": "/backgrounds/grassland.png"
+ },
+ "kitakami-paradise-barrens": {
+  "id": "kitakami-paradise-barrens",
+  "name": "Paradise Barrens",
+  "type": "route",
+  "region": "kitakami",
+  "description": "A sub-area of the Kitakami.",
+  "routeKey": "kitakami-paradise-barrens",
+  "connections": [
+   "paldea-kitakami"
+  ],
+  "hidden": true,
+  "zone": "paldea-kitakami",
+  "unlock": {
+   "requires": [
+    "paldea-kitakami",
+    "kitakami-timeless-woods"
+   ]
+  },
+  "unlockOrder": 910007.02,
+  "position": {
+   "x": 10,
+   "y": 4
+  },
+  "biome": "volcanic",
+  "background": "/backgrounds/grassland.png"
+ },
+ "kitakami-infernal-pass": {
+  "id": "kitakami-infernal-pass",
+  "name": "Infernal Pass",
+  "type": "route",
+  "region": "kitakami",
+  "description": "A sub-area of the Kitakami.",
+  "routeKey": "kitakami-infernal-pass",
+  "connections": [
+   "paldea-kitakami"
+  ],
+  "hidden": true,
+  "zone": "paldea-kitakami",
+  "unlock": {
+   "requires": [
+    "paldea-kitakami",
+    "kitakami-paradise-barrens"
+   ]
+  },
+  "unlockOrder": 910007.021,
+  "position": {
+   "x": 6,
+   "y": 8
+  },
+  "biome": "grassland",
+  "background": "/backgrounds/grassland.png"
  }
 }

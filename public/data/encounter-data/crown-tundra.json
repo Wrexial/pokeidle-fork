@@ -391,5 +391,679 @@
     "maxLevel": 75
    }
   ]
+ },
+ "crown-tundra-slippery-slope": {
+  "name": "Slippery Slope",
+  "encounters": [
+   {
+    "speciesKey": "snom",
+    "weight": 20,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "h-sneasel",
+    "weight": 20,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "snover",
+    "weight": 20,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "swinub",
+    "weight": 12,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "g-darumaka",
+    "weight": 12,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "gastly",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "duskull",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "drifloon",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "rolycoly",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "cufant",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "g-slowpoke",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "g-corsola",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "g-yamask",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   }
+  ]
+ },
+ "crown-tundra-frostpoint-field": {
+  "name": "Frostpoint Field",
+  "encounters": [
+   {
+    "speciesKey": "snom",
+    "weight": 20,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "g-darumaka",
+    "weight": 20,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "g-stunfisk",
+    "weight": 20,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "swinub",
+    "weight": 12,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "morpeko",
+    "weight": 12,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "snover",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "g-yamask",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "gastly",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "duskull",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "drifloon",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "rolycoly",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "cufant",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "g-slowpoke",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "g-corsola",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   }
+  ]
+ },
+ "crown-tundra-old-cemetery": {
+  "name": "Old Cemetery",
+  "encounters": [
+   {
+    "speciesKey": "gastly",
+    "weight": 20,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "g-yamask",
+    "weight": 20,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "drifloon",
+    "weight": 20,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "duskull",
+    "weight": 12,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "g-corsola",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "h-qwilfish",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "h-sneasel",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "snover",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "rolycoly",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "snom",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "cufant",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "g-slowpoke",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "g-darumaka",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   }
+  ]
+ },
+ "crown-tundra-giants-foot": {
+  "name": "Giant's Foot",
+  "encounters": [
+   {
+    "speciesKey": "stonjourner",
+    "weight": 20,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "cufant",
+    "weight": 20,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "rolycoly",
+    "weight": 20,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "g-stunfisk",
+    "weight": 12,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "h-sneasel",
+    "weight": 12,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "gastly",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "duskull",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "drifloon",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "snover",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "snom",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "g-slowpoke",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "g-corsola",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "g-darumaka",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "g-yamask",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   }
+  ]
+ },
+ "crown-tundra-roaring-sea-caves": {
+  "name": "Roaring-Sea Caves",
+  "encounters": [
+   {
+    "speciesKey": "h-sneasel",
+    "weight": 20,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "g-stunfisk",
+    "weight": 20,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "rolycoly",
+    "weight": 20,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "cufant",
+    "weight": 12,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "gastly",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "duskull",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "drifloon",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "snover",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "snom",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "g-slowpoke",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "g-corsola",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "g-darumaka",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "g-yamask",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   }
+  ]
+ },
+ "crown-tundra-ballimere-lake": {
+  "name": "Ballimere Lake",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 20,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "g-slowpoke",
+    "weight": 20,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "basculin-w",
+    "weight": 20,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "arrokuda",
+    "weight": 12,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "g-corsola",
+    "weight": 12,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "chewtle",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "gastly",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "duskull",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "drifloon",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "snover",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "rolycoly",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "snom",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "cufant",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "g-darumaka",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "g-yamask",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   }
+  ]
+ },
+ "crown-tundra-three-point-pass": {
+  "name": "Three-Point Pass",
+  "encounters": [
+   {
+    "speciesKey": "stonjourner",
+    "weight": 20,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "cufant",
+    "weight": 20,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "rolycoly",
+    "weight": 20,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "g-stunfisk",
+    "weight": 12,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "h-sneasel",
+    "weight": 12,
+    "minLevel": 75,
+    "maxLevel": 77
+   },
+   {
+    "speciesKey": "gastly",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "duskull",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "drifloon",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "snover",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "snom",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "g-slowpoke",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "g-corsola",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "g-darumaka",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   },
+   {
+    "speciesKey": "g-yamask",
+    "weight": 8,
+    "minLevel": 75,
+    "maxLevel": 77,
+    "variety": true
+   }
+  ]
  }
 }

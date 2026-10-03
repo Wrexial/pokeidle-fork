@@ -89,7 +89,11 @@
    "paldea-terarium-coastal-biome",
    "paldea-terarium-polar-biome",
    "terarium-raid",
-   "paldea-league"
+   "paldea-league",
+   "terarium-canyon-biome",
+   "terarium-chargestone-cavern",
+   "terarium-torchlit-labyrinth",
+   "terarium-central-plaza"
   ],
   "subAreas": [
    {
@@ -103,6 +107,22 @@
    {
     "id": "paldea-terarium-polar-biome",
     "name": "Polar Biome"
+   },
+   {
+    "id": "terarium-canyon-biome",
+    "name": "Canyon Biome"
+   },
+   {
+    "id": "terarium-chargestone-cavern",
+    "name": "Chargestone Cavern"
+   },
+   {
+    "id": "terarium-torchlit-labyrinth",
+    "name": "Torchlit Labyrinth"
+   },
+   {
+    "id": "terarium-central-plaza",
+    "name": "Central Plaza"
    }
   ],
   "unlock": {
@@ -143,5 +163,109 @@
    "y": 10.40804594294962
   },
   "biome": "cave"
+ },
+ "terarium-canyon-biome": {
+  "id": "terarium-canyon-biome",
+  "name": "Canyon Biome",
+  "type": "route",
+  "region": "terarium",
+  "description": "A sub-area of the Terarium.",
+  "routeKey": "terarium-canyon-biome",
+  "connections": [
+   "paldea-terarium"
+  ],
+  "hidden": true,
+  "zone": "paldea-terarium",
+  "unlock": {
+   "requires": [
+    "paldea-terarium",
+    "paldea-terarium-polar-biome"
+   ]
+  },
+  "unlockOrder": 910009.022,
+  "position": {
+   "x": 94,
+   "y": 25
+  },
+  "biome": "mountain",
+  "background": "/backgrounds/mountain.png"
+ },
+ "terarium-chargestone-cavern": {
+  "id": "terarium-chargestone-cavern",
+  "name": "Chargestone Cavern",
+  "type": "route",
+  "region": "terarium",
+  "description": "A sub-area of the Terarium.",
+  "routeKey": "terarium-chargestone-cavern",
+  "connections": [
+   "paldea-terarium"
+  ],
+  "hidden": true,
+  "zone": "paldea-terarium",
+  "unlock": {
+   "requires": [
+    "paldea-terarium",
+    "terarium-canyon-biome"
+   ]
+  },
+  "unlockOrder": 910009.023,
+  "position": {
+   "x": 98,
+   "y": 21
+  },
+  "biome": "cave",
+  "background": "/backgrounds/cave.png"
+ },
+ "terarium-torchlit-labyrinth": {
+  "id": "terarium-torchlit-labyrinth",
+  "name": "Torchlit Labyrinth",
+  "type": "route",
+  "region": "terarium",
+  "description": "A sub-area of the Terarium.",
+  "routeKey": "terarium-torchlit-labyrinth",
+  "connections": [
+   "paldea-terarium"
+  ],
+  "hidden": true,
+  "zone": "paldea-terarium",
+  "unlock": {
+   "requires": [
+    "paldea-terarium",
+    "terarium-chargestone-cavern"
+   ]
+  },
+  "unlockOrder": 910009.024,
+  "position": {
+   "x": 98,
+   "y": 24
+  },
+  "biome": "volcanic",
+  "background": "/backgrounds/grassland.png"
+ },
+ "terarium-central-plaza": {
+  "id": "terarium-central-plaza",
+  "name": "Central Plaza",
+  "type": "route",
+  "region": "terarium",
+  "description": "A sub-area of the Terarium.",
+  "routeKey": "terarium-central-plaza",
+  "connections": [
+   "paldea-terarium"
+  ],
+  "hidden": true,
+  "zone": "paldea-terarium",
+  "unlock": {
+   "requires": [
+    "paldea-terarium",
+    "terarium-torchlit-labyrinth"
+   ]
+  },
+  "unlockOrder": 910009.025,
+  "position": {
+   "x": 96,
+   "y": 21
+  },
+  "biome": "grassland",
+  "background": "/backgrounds/grassland.png"
  }
 }

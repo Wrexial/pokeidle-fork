@@ -349,5 +349,457 @@
     "maxLevel": 75
    }
   ]
+ },
+ "terarium-canyon-biome": {
+  "name": "Canyon Biome",
+  "encounters": [
+   {
+    "speciesKey": "nacli",
+    "weight": 20,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "meditite",
+    "weight": 20,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "gible",
+    "weight": 20,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "rolycoly",
+    "weight": 12,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "rockruff",
+    "weight": 12,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "zubat",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "magnemite",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "eevee",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "houndour",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "pachirisu",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "minccino",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "joltik",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "klink",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "tynamo",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "litwick",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "golett",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   }
+  ]
+ },
+ "terarium-chargestone-cavern": {
+  "name": "Chargestone Cavern",
+  "encounters": [
+   {
+    "speciesKey": "joltik",
+    "weight": 20,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "tynamo",
+    "weight": 20,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "magnemite",
+    "weight": 20,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "klink",
+    "weight": 12,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "pachirisu",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "pawmi",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "zubat",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "eevee",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "houndour",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "meditite",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "gible",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "minccino",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "litwick",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "golett",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "rolycoly",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "nacli",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   }
+  ]
+ },
+ "terarium-torchlit-labyrinth": {
+  "name": "Torchlit Labyrinth",
+  "encounters": [
+   {
+    "speciesKey": "zubat",
+    "weight": 20,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "houndour",
+    "weight": 20,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "litwick",
+    "weight": 20,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "golett",
+    "weight": 12,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "magnemite",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "eevee",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "meditite",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "pachirisu",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "gible",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "minccino",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "joltik",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "klink",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "tynamo",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "rolycoly",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "pawmi",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "nacli",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   }
+  ]
+ },
+ "terarium-central-plaza": {
+  "name": "Central Plaza",
+  "encounters": [
+   {
+    "speciesKey": "eevee",
+    "weight": 20,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "minccino",
+    "weight": 20,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "pachirisu",
+    "weight": 20,
+    "minLevel": 78,
+    "maxLevel": 80
+   },
+   {
+    "speciesKey": "magnemite",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "joltik",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "tynamo",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "pawmi",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "zubat",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "houndour",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "meditite",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "gible",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "klink",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "litwick",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "golett",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "rolycoly",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   },
+   {
+    "speciesKey": "nacli",
+    "weight": 8,
+    "minLevel": 78,
+    "maxLevel": 80,
+    "variety": true
+   }
+  ]
  }
 }

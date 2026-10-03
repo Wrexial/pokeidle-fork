@@ -374,5 +374,583 @@
     "maxLevel": 70
    }
   ]
+ },
+ "kitakami-wistful-fields": {
+  "name": "Wistful Fields",
+  "encounters": [
+   {
+    "speciesKey": "nymble",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "tarountula",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "fidough",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "applin",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "poltchageist",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "seedot",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "shroomish",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "smoliv",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "dipplin",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "numel",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "nacli",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "charcadet",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "tadbulb",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "frigibax",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   }
+  ]
+ },
+ "kitakami-fellhorn-gorge": {
+  "name": "Fellhorn Gorge",
+  "encounters": [
+   {
+    "speciesKey": "nacli",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "charcadet",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "frigibax",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "tadbulb",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "nymble",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "numel",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "seedot",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "shroomish",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "applin",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "tarountula",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "fidough",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "smoliv",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "poltchageist",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   }
+  ]
+ },
+ "kitakami-crystal-pool": {
+  "name": "Crystal Pool",
+  "encounters": [
+   {
+    "speciesKey": "poltchageist",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "applin",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "tadbulb",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "magikarp",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "seedot",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "shroomish",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "smoliv",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "dipplin",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "numel",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "tarountula",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "nymble",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "fidough",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "nacli",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "charcadet",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "frigibax",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   }
+  ]
+ },
+ "kitakami-timeless-woods": {
+  "name": "Timeless Woods",
+  "encounters": [
+   {
+    "speciesKey": "applin",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "poltchageist",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "seedot",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "shroomish",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "dipplin",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "smoliv",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "frigibax",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "numel",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "tarountula",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "nymble",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "fidough",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "nacli",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "charcadet",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "tadbulb",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   }
+  ]
+ },
+ "kitakami-paradise-barrens": {
+  "name": "Paradise Barrens",
+  "encounters": [
+   {
+    "speciesKey": "nacli",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "charcadet",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "tadbulb",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "numel",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "seedot",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "shroomish",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "applin",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "tarountula",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "nymble",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "fidough",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "smoliv",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "frigibax",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "poltchageist",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   }
+  ]
+ },
+ "kitakami-infernal-pass": {
+  "name": "Infernal Pass",
+  "encounters": [
+   {
+    "speciesKey": "charcadet",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "nacli",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "frigibax",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "tadbulb",
+    "weight": 12,
+    "minLevel": 72,
+    "maxLevel": 74
+   },
+   {
+    "speciesKey": "numel",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "seedot",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "shroomish",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "applin",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "tarountula",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "nymble",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "fidough",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "smoliv",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   },
+   {
+    "speciesKey": "poltchageist",
+    "weight": 8,
+    "minLevel": 72,
+    "maxLevel": 74,
+    "variety": true
+   }
+  ]
  }
 }

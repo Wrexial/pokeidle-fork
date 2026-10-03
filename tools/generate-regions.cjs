@@ -735,13 +735,6 @@ const evolvesAt = (() => {
   }
   return map
 })()
-// Type / base-stat maps for the route-trainer line builder.
-const speciesTypes = Object.fromEntries(
-  Object.entries(species).map(([key, entry]) => [key, entry.types ?? []])
-)
-const speciesBstByKey = Object.fromEntries(
-  Object.entries(species).map(([key, entry]) => [key, totalBaseStats(entry)])
-)
 const breedingData = read('breeding-data.json')
 const mapData = readRegionDir(path.join(DATA, 'map-data'))
 const encounterData = readRegionDir(path.join(DATA, 'encounter-data'))
@@ -859,6 +852,13 @@ const encounterWeight = (s, idx) => (idx < 3 ? 20 : idx < 8 ? 12 : 6)
 const REMATCH_TEAM_POOL = teamPoolForGen(9)
 const totalBaseStats = (species) =>
   Object.values(species.baseStats ?? {}).reduce((sum, stat) => sum + stat, 0)
+// Type / base-stat maps for the route-trainer line builder.
+const speciesTypes = Object.fromEntries(
+  Object.entries(species).map(([key, entry]) => [key, entry.types ?? []])
+)
+const speciesBstByKey = Object.fromEntries(
+  Object.entries(species).map(([key, entry]) => [key, totalBaseStats(entry)])
+)
 // Battle-only forms (Gigantamax, marked `form`) are stored as level-100
 // evolutions but a species that only "evolves" into one of those is still a
 // final evolution. Megas predate this flag and are left as-is so league/team

@@ -359,7 +359,8 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "johto-goldenrod-city",
-   "johto-route-36"
+   "johto-route-36",
+   "johto-national-park"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -391,7 +392,8 @@
   "connections": [
    "johto-route-37",
    "johto-route-35",
-   "johto-violet-city"
+   "johto-violet-city",
+   "johto-national-park"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -451,7 +453,9 @@
    "johto-route-37",
    "johto-route-42",
    "johto-route-38",
-   "johto-bell-tower"
+   "johto-bell-tower",
+   "johto-mt-mortar",
+   "johto-burned-tower"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -758,7 +762,8 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "johto-ecruteak-city",
-   "johto-mahogany-town"
+   "johto-mahogany-town",
+   "johto-mt-mortar"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1333,6 +1338,86 @@
    "y": 32.8
   },
   "biome": "grassland",
+  "background": "/backgrounds/grassland.png"
+ },
+ "johto-mt-mortar": {
+  "id": "johto-mt-mortar",
+  "name": "Mt. Mortar",
+  "type": "route",
+  "region": "johto",
+  "description": "A wild area in the Johto region.",
+  "routeKey": "johto-mt-mortar",
+  "connections": [
+   "johto-route-42",
+   "johto-ecruteak-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-route-42",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 200037.75,
+  "position": {
+   "x": 46,
+   "y": 35.3
+  },
+  "biome": "mountain",
+  "background": "/backgrounds/mountain.png"
+ },
+ "johto-burned-tower": {
+  "id": "johto-burned-tower",
+  "name": "Burned Tower",
+  "type": "route",
+  "region": "johto",
+  "description": "A wild area in the Johto region.",
+  "routeKey": "johto-burned-tower",
+  "connections": [
+   "johto-ecruteak-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-ecruteak-city",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 200037.75,
+  "position": {
+   "x": 49.7,
+   "y": 23.1
+  },
+  "biome": "ruins",
+  "background": "/backgrounds/grassland.png"
+ },
+ "johto-national-park": {
+  "id": "johto-national-park",
+  "name": "National Park",
+  "type": "route",
+  "region": "johto",
+  "description": "A wild area in the Johto region.",
+  "routeKey": "johto-national-park",
+  "connections": [
+   "johto-route-35",
+   "johto-route-36"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-route-35",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 200035.25,
+  "position": {
+   "x": 45.6,
+   "y": 43.9
+  },
+  "biome": "forest",
   "background": "/backgrounds/grassland.png"
  }
 }

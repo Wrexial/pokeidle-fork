@@ -2336,5 +2336,34 @@
     "maxLevel": 7
    }
   ]
+ },
+ "paldea-gracia-stones": {
+  "name": "Gracia Stones",
+  "encounters": [
+   {
+    "speciesKey": "nacli",
+    "weight": 20,
+    "minLevel": 5,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "meditite",
+    "weight": 20,
+    "minLevel": 5,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "rolycoly",
+    "weight": 20,
+    "minLevel": 5,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "rockruff",
+    "weight": 12,
+    "minLevel": 5,
+    "maxLevel": 7
+   }
+  ]
  }
 }

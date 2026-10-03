@@ -348,7 +348,9 @@ Data conventions:
   with a level band averaged from the routes they connect to so adding one
   never re-levels the region. The shared `lib/ordinary-areas.cjs` table (caves,
   forests and other landmarks the scraper drops) is merged into `POST_AREAS` at
-  generation and written onto the committed data by `apply-ordinary-areas.cjs`.
+  generation and written onto the committed data by `apply-ordinary-areas.cjs`;
+  a battle gate that names a zone hub (which spawns no wilds) is re-pointed at
+  the hub's first sub-area, both in the generator and on the committed data.
   The Galar/Paldea DLC uses zones too, but is promoted to first-class regions
   by `apply-dlc-regions.cjs` (#39). `GROUP_ZONES` wraps *existing* route nodes
   in a hub (Alola's islands, Paldea's provinces): the routes become hidden
@@ -780,8 +782,10 @@ One-off scripts used to build the data JSON (not run during dev/build):
 - `apply-ordinary-areas.cjs` — data-only pass (#28b) that inserts the ordinary
   wild areas from `lib/ordinary-areas.cjs` onto the committed data as
   `type: 'route'` nodes (own wild table, neighbour-averaged level band, derived
-  biome), wiring them between their connect locations. Idempotent (`--dry`);
-  re-run `generate-encounter-index.cjs` afterwards.
+  biome), wiring them between their connect locations. A `battlesAtLocation`
+  gate never names a zone hub (which spawns no wilds): a hub connect resolves
+  to its first sub-area, and existing gates are repaired in place. Idempotent
+  (`--dry`); re-run `generate-encounter-index.cjs` afterwards.
 - `fix-impossible-encounters.cjs` / `fix-impossible-teams.cjs` — step wild
   encounters and trainer/gym/Elite Four/Champion Pokemon back to a form that
   could exist at their level (a Lv. 3 Chesnaught becomes a Chespin), merging

@@ -1097,7 +1097,7 @@
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "galar-wild-area",
+     "locationId": "galar-wild-area-rolling-fields",
      "count": 5
     }
    ]

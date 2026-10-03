@@ -698,7 +698,8 @@
    "unova-route-8",
    "unova-route-7",
    "unova-twist-mountain",
-   "unova-dragonspiral-tower"
+   "unova-dragonspiral-tower",
+   "unova-moor-of-icirrus"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -745,7 +746,8 @@
   "connections": [
    "unova-icirrus-city",
    "unova-route-9",
-   "unova-dragonspiral-tower"
+   "unova-dragonspiral-tower",
+   "unova-moor-of-icirrus"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1042,7 +1044,8 @@
    "unova-route-21",
    "unova-lentimas-town",
    "unova-humilau-city",
-   "unova-giant-chasm"
+   "unova-giant-chasm",
+   "unova-challengers-cave"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1089,7 +1092,8 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "unova-undella-town",
-   "unova-black-city"
+   "unova-black-city",
+   "unova-challengers-cave"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1579,7 +1583,8 @@
   "region": "unova",
   "description": "The Unova Pokémon League.",
   "connections": [
-   "unova-route-23"
+   "unova-route-23",
+   "unova-ns-castle"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1791,6 +1796,86 @@
   "position": {
    "x": 94.8,
    "y": 41.8
+  },
+  "biome": "grassland",
+  "background": "/backgrounds/grassland.png"
+ },
+ "unova-challengers-cave": {
+  "id": "unova-challengers-cave",
+  "name": "Challenger's Cave",
+  "type": "route",
+  "region": "unova",
+  "description": "A wild area in the Unova region.",
+  "routeKey": "unova-challengers-cave",
+  "connections": [
+   "unova-route-14",
+   "unova-undella-town"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-14",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 500013.75,
+  "position": {
+   "x": 86.5,
+   "y": 51.1
+  },
+  "biome": "cave",
+  "background": "/backgrounds/cave.png"
+ },
+ "unova-moor-of-icirrus": {
+  "id": "unova-moor-of-icirrus",
+  "name": "Moor of Icirrus",
+  "type": "route",
+  "region": "unova",
+  "description": "A wild area in the Unova region.",
+  "routeKey": "unova-moor-of-icirrus",
+  "connections": [
+   "unova-icirrus-city",
+   "unova-route-8"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-icirrus-city",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 500007.75,
+  "position": {
+   "x": 25.4,
+   "y": 28.6
+  },
+  "biome": "swamp",
+  "background": "/backgrounds/grassland.png"
+ },
+ "unova-ns-castle": {
+  "id": "unova-ns-castle",
+  "name": "N's Castle",
+  "type": "route",
+  "region": "unova",
+  "description": "A wild area in the Unova region.",
+  "routeKey": "unova-ns-castle",
+  "connections": [
+   "unova-league"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-league",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 500025.25,
+  "position": {
+   "x": 78,
+   "y": 5
   },
   "biome": "grassland",
   "background": "/backgrounds/grassland.png"

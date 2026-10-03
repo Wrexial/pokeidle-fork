@@ -875,7 +875,8 @@
   "connections": [
    "kalos-laverre-city",
    "kalos-route-16",
-   "kalos-dendemille-town"
+   "kalos-dendemille-town",
+   "kalos-lost-hotel"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -950,7 +951,8 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "kalos-lumiose-city",
-   "kalos-route-15"
+   "kalos-route-15",
+   "kalos-lost-hotel"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1214,7 +1216,8 @@
   "routeKey": "kalos-route-20",
   "background": "/backgrounds/grassland.png",
   "connections": [
-   "kalos-snowbelle-city"
+   "kalos-snowbelle-city",
+   "kalos-pokemon-village"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1241,7 +1244,8 @@
   "region": "kalos",
   "description": "A town in the Kalos region.",
   "connections": [
-   "kalos-snowbelle-city"
+   "kalos-snowbelle-city",
+   "kalos-sea-spirits-den"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1292,7 +1296,8 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "kalos-snowbelle-city",
-   "kalos-route-22"
+   "kalos-route-22",
+   "kalos-sea-spirits-den"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1566,6 +1571,86 @@
    "y": 42.6
   },
   "biome": "tundra",
+  "background": "/backgrounds/grassland.png"
+ },
+ "kalos-lost-hotel": {
+  "id": "kalos-lost-hotel",
+  "name": "Lost Hotel",
+  "type": "route",
+  "region": "kalos",
+  "description": "A wild area in the Kalos region.",
+  "routeKey": "kalos-lost-hotel",
+  "connections": [
+   "kalos-route-15",
+   "kalos-route-16"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-15",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 600015.25,
+  "position": {
+   "x": 62.9,
+   "y": 42.4
+  },
+  "biome": "grassland",
+  "background": "/backgrounds/grassland.png"
+ },
+ "kalos-sea-spirits-den": {
+  "id": "kalos-sea-spirits-den",
+  "name": "Sea Spirit's Den",
+  "type": "route",
+  "region": "kalos",
+  "description": "A wild area in the Kalos region.",
+  "routeKey": "kalos-sea-spirits-den",
+  "connections": [
+   "kalos-kiloude-city",
+   "kalos-route-21"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-kiloude-city",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 600020.2501,
+  "position": {
+   "x": 96,
+   "y": 56.2
+  },
+  "biome": "coast",
+  "background": "/backgrounds/beach.png"
+ },
+ "kalos-pokemon-village": {
+  "id": "kalos-pokemon-village",
+  "name": "Pokemon Village",
+  "type": "route",
+  "region": "kalos",
+  "description": "A wild area in the Kalos region.",
+  "routeKey": "kalos-pokemon-village",
+  "connections": [
+   "kalos-route-20"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-20",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 600020.2502,
+  "position": {
+   "x": 79.2,
+   "y": 46.6
+  },
+  "biome": "grassland",
   "background": "/backgrounds/grassland.png"
  }
 }

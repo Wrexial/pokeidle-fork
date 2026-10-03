@@ -3699,5 +3699,138 @@
     "maxLevel": 69
    }
   ]
+ },
+ "sinnoh-lake-verity": {
+  "name": "Lake Verity",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 20,
+    "minLevel": 7,
+    "maxLevel": 9
+   },
+   {
+    "speciesKey": "starly",
+    "weight": 20,
+    "minLevel": 7,
+    "maxLevel": 9
+   },
+   {
+    "speciesKey": "bidoof",
+    "weight": 20,
+    "minLevel": 7,
+    "maxLevel": 9
+   },
+   {
+    "speciesKey": "psyduck",
+    "weight": 12,
+    "minLevel": 7,
+    "maxLevel": 9
+   }
+  ]
+ },
+ "sinnoh-lake-acuity": {
+  "name": "Lake Acuity",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 20,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "snover",
+    "weight": 20,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "sneasel",
+    "weight": 20,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "psyduck",
+    "weight": 12,
+    "minLevel": 43,
+    "maxLevel": 45
+   }
+  ]
+ },
+ "sinnoh-lake-valor": {
+  "name": "Lake Valor",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 20,
+    "minLevel": 33,
+    "maxLevel": 35
+   },
+   {
+    "speciesKey": "psyduck",
+    "weight": 20,
+    "minLevel": 33,
+    "maxLevel": 35
+   },
+   {
+    "speciesKey": "bidoof",
+    "weight": 20,
+    "minLevel": 33,
+    "maxLevel": 35
+   }
+  ]
+ },
+ "sinnoh-old-chateau": {
+  "name": "Old Chateau",
+  "encounters": [
+   {
+    "speciesKey": "gastly",
+    "weight": 20,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "misdreavus",
+    "weight": 20,
+    "minLevel": 14,
+    "maxLevel": 16
+   }
+  ]
+ },
+ "sinnoh-turnback-cave": {
+  "name": "Turnback Cave",
+  "encounters": [
+   {
+    "speciesKey": "golbat",
+    "weight": 20,
+    "minLevel": 46,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "chimecho",
+    "weight": 20,
+    "minLevel": 46,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "bronzor",
+    "weight": 20,
+    "minLevel": 46,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "duskull",
+    "weight": 12,
+    "minLevel": 46,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "dusclops",
+    "weight": 12,
+    "minLevel": 46,
+    "maxLevel": 48
+   }
+  ]
  }
 }

@@ -1230,7 +1230,7 @@
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "alola-melemele-island",
+     "locationId": "alola-route-1",
      "count": 5
     }
    ]
@@ -1256,7 +1256,7 @@
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "alola-akala-island",
+     "locationId": "alola-route-4",
      "count": 5
     }
    ]
@@ -1282,7 +1282,7 @@
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "alola-akala-island",
+     "locationId": "alola-route-4",
      "count": 5
     }
    ]
@@ -1308,7 +1308,7 @@
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "alola-poni-island",
+     "locationId": "alola-route-16",
      "count": 5
     }
    ]
@@ -1334,7 +1334,7 @@
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "alola-ulaula-island",
+     "locationId": "alola-route-9",
      "count": 5
     }
    ]

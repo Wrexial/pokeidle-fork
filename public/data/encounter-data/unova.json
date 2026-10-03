@@ -3011,5 +3011,104 @@
     "maxLevel": 42
    }
   ]
+ },
+ "unova-challengers-cave": {
+  "name": "Challenger's Cave",
+  "encounters": [
+   {
+    "speciesKey": "woobat",
+    "weight": 20,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "timburr",
+    "weight": 20,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "roggenrola",
+    "weight": 20,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "onix",
+    "weight": 12,
+    "minLevel": 43,
+    "maxLevel": 45
+   }
+  ]
+ },
+ "unova-moor-of-icirrus": {
+  "name": "Moor of Icirrus",
+  "encounters": [
+   {
+    "speciesKey": "croagunk",
+    "weight": 20,
+    "minLevel": 26,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "stunfisk",
+    "weight": 20,
+    "minLevel": 26,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "tympole",
+    "weight": 20,
+    "minLevel": 26,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "shelmet",
+    "weight": 12,
+    "minLevel": 26,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "karrablast",
+    "weight": 12,
+    "minLevel": 26,
+    "maxLevel": 28
+   }
+  ]
+ },
+ "unova-ns-castle": {
+  "name": "N's Castle",
+  "encounters": [
+   {
+    "speciesKey": "woobat",
+    "weight": 20,
+    "minLevel": 5,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "deino",
+    "weight": 20,
+    "minLevel": 5,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "gothita",
+    "weight": 20,
+    "minLevel": 5,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "solosis",
+    "weight": 12,
+    "minLevel": 5,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "klink",
+    "weight": 12,
+    "minLevel": 5,
+    "maxLevel": 7
+   }
+  ]
  }
 }

@@ -2140,6 +2140,12 @@ const POST_AREAS = {
 }
 for (const [regionId, areas] of Object.entries(ORDINARY_AREAS))
   POST_AREAS[regionId] = [...(POST_AREAS[regionId] ?? []), ...areas]
+// A battle-count gate must name somewhere wilds actually spawn; a zone hub
+// never does, so resolve it to the hub's first sub-area.
+const battleTargetFor = (node) => {
+  const target = mapData[node]
+  return target?.type === 'zone' && target.routeKey ? target.routeKey : node
+}
 for (const [regionId, areas] of Object.entries(POST_AREAS)) {
   const region = regions.find((candidate) => candidate.id === regionId)
   if (!region) continue
@@ -2171,7 +2177,7 @@ for (const [regionId, areas] of Object.entries(POST_AREAS)) {
       routeKey: id,
       background: area.background ?? routeBackground(area.name, encounters),
       connections: [...area.connects],
-      unlock: { battlesAtLocation: [{ locationId: area.gate ?? area.connects[0], count: 5 }] },
+      unlock: { battlesAtLocation: [{ locationId: battleTargetFor(area.gate ?? area.connects[0]), count: 5 }] },
       unlockOrder: anchor + 0.25,
       position: area.position,
     }
@@ -2497,6 +2503,19 @@ for (const [regionId, groups] of Object.entries(GROUP_ZONES)) {
     }
   })
 }
+
+// Zone hubs that were created *after* the ordinary areas (Alola's islands via
+// GROUP_ZONES, Paldea's provinces) leave those areas gated on the hub itself,
+// where no wilds ever spawn. Re-point each battle gate at the hub's first
+// sub-area now that every hub exists.
+for (const [regionId, areas] of Object.entries(ORDINARY_AREAS))
+  for (const area of areas) {
+    const location = mapData[locId(regionId, area.node)]
+    for (const rule of location?.unlock?.battlesAtLocation ?? []) {
+      const target = mapData[rule.locationId]
+      if (target?.type === 'zone' && target.routeKey) rule.locationId = target.routeKey
+    }
+  }
 
 // --- raid pools --------------------------------------------------------------
 // A species belongs on a Raid Island only if it turns up on no region's wild

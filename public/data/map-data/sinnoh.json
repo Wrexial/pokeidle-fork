@@ -60,7 +60,8 @@
   "connections": [
    "sinnoh-route-201",
    "sinnoh-route-202",
-   "sinnoh-route-219"
+   "sinnoh-route-219",
+   "sinnoh-lake-verity"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -95,7 +96,8 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "sinnoh-jubilife-city",
-   "sinnoh-sandgem-town"
+   "sinnoh-sandgem-town",
+   "sinnoh-lake-verity"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -289,7 +291,8 @@
   "connections": [
    "sinnoh-eterna-city",
    "sinnoh-floaroma-town",
-   "sinnoh-eterna-forest"
+   "sinnoh-eterna-forest",
+   "sinnoh-old-chateau"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -317,7 +320,8 @@
    "sinnoh-route-206",
    "sinnoh-route-211",
    "sinnoh-route-205",
-   "sinnoh-eterna-forest"
+   "sinnoh-eterna-forest",
+   "sinnoh-old-chateau"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -702,7 +706,8 @@
   "connections": [
    "sinnoh-route-213",
    "sinnoh-route-212",
-   "sinnoh-route-225"
+   "sinnoh-route-225",
+   "sinnoh-lake-valor"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -756,7 +761,8 @@
    "sinnoh-pastoria-city",
    "sinnoh-route-222",
    "sinnoh-sea-route-226",
-   "sinnoh-sea-route-230"
+   "sinnoh-sea-route-230",
+   "sinnoh-lake-valor"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -783,7 +789,8 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "sinnoh-veilstone-city",
-   "sinnoh-route-222"
+   "sinnoh-route-222",
+   "sinnoh-turnback-cave"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -916,7 +923,8 @@
   "connections": [
    "sinnoh-route-216",
    "sinnoh-snowpoint-city",
-   "sinnoh-snowpoint-temple"
+   "sinnoh-snowpoint-temple",
+   "sinnoh-lake-acuity"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -946,7 +954,8 @@
   "description": "A town in the Sinnoh region, home to Candice's Ice Gym.",
   "connections": [
    "sinnoh-route-217",
-   "sinnoh-snowpoint-temple"
+   "sinnoh-snowpoint-temple",
+   "sinnoh-lake-acuity"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1250,7 +1259,8 @@
   "background": "/backgrounds/beach.png",
   "connections": [
    "sinnoh-sunyshore-city",
-   "sinnoh-route-224"
+   "sinnoh-route-224",
+   "sinnoh-turnback-cave"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1783,5 +1793,140 @@
   },
   "biome": "mountain",
   "background": "/backgrounds/mountain.png"
+ },
+ "sinnoh-lake-verity": {
+  "id": "sinnoh-lake-verity",
+  "name": "Lake Verity",
+  "type": "route",
+  "region": "sinnoh",
+  "description": "A wild area in the Sinnoh region.",
+  "routeKey": "sinnoh-lake-verity",
+  "connections": [
+   "sinnoh-sandgem-town",
+   "sinnoh-route-202"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-sandgem-town",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 400201.75,
+  "position": {
+   "x": 27.1,
+   "y": 67.7
+  },
+  "biome": "coast",
+  "background": "/backgrounds/beach.png"
+ },
+ "sinnoh-lake-acuity": {
+  "id": "sinnoh-lake-acuity",
+  "name": "Lake Acuity",
+  "type": "route",
+  "region": "sinnoh",
+  "description": "A wild area in the Sinnoh region.",
+  "routeKey": "sinnoh-lake-acuity",
+  "connections": [
+   "sinnoh-snowpoint-city",
+   "sinnoh-route-217"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-snowpoint-city",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 400217.25,
+  "position": {
+   "x": 28.3,
+   "y": 20.5
+  },
+  "biome": "coast",
+  "background": "/backgrounds/beach.png"
+ },
+ "sinnoh-lake-valor": {
+  "id": "sinnoh-lake-valor",
+  "name": "Lake Valor",
+  "type": "route",
+  "region": "sinnoh",
+  "description": "A wild area in the Sinnoh region.",
+  "routeKey": "sinnoh-lake-valor",
+  "connections": [
+   "sinnoh-route-213",
+   "sinnoh-pastoria-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-213",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 400212.75,
+  "position": {
+   "x": 55.8,
+   "y": 69.8
+  },
+  "biome": "coast",
+  "background": "/backgrounds/beach.png"
+ },
+ "sinnoh-old-chateau": {
+  "id": "sinnoh-old-chateau",
+  "name": "Old Chateau",
+  "type": "route",
+  "region": "sinnoh",
+  "description": "A wild area in the Sinnoh region.",
+  "routeKey": "sinnoh-old-chateau",
+  "connections": [
+   "sinnoh-eterna-city",
+   "sinnoh-route-205"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-eterna-city",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 400205.25,
+  "position": {
+   "x": 24.5,
+   "y": 33.3
+  },
+  "biome": "ruins",
+  "background": "/backgrounds/grassland.png"
+ },
+ "sinnoh-turnback-cave": {
+  "id": "sinnoh-turnback-cave",
+  "name": "Turnback Cave",
+  "type": "route",
+  "region": "sinnoh",
+  "description": "A wild area in the Sinnoh region.",
+  "routeKey": "sinnoh-turnback-cave",
+  "connections": [
+   "sinnoh-route-214",
+   "sinnoh-sea-route-223"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-214",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 400214.25,
+  "position": {
+   "x": 80.1,
+   "y": 40.5
+  },
+  "biome": "cave",
+  "background": "/backgrounds/cave.png"
  }
 }

@@ -4007,5 +4007,127 @@
     "maxLevel": 26
    }
   ]
+ },
+ "hoenn-fiery-path": {
+  "name": "Fiery Path",
+  "encounters": [
+   {
+    "speciesKey": "numel",
+    "weight": 20,
+    "minLevel": 29,
+    "maxLevel": 31
+   },
+   {
+    "speciesKey": "machop",
+    "weight": 20,
+    "minLevel": 29,
+    "maxLevel": 31
+   },
+   {
+    "speciesKey": "torkoal",
+    "weight": 20,
+    "minLevel": 29,
+    "maxLevel": 31
+   },
+   {
+    "speciesKey": "grimer",
+    "weight": 12,
+    "minLevel": 29,
+    "maxLevel": 31
+   },
+   {
+    "speciesKey": "slugma",
+    "weight": 12,
+    "minLevel": 29,
+    "maxLevel": 31
+   }
+  ]
+ },
+ "hoenn-desert-underpass": {
+  "name": "Desert Underpass",
+  "encounters": [
+   {
+    "speciesKey": "whismur",
+    "weight": 20,
+    "minLevel": 26,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "makuhita",
+    "weight": 20,
+    "minLevel": 26,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "aron",
+    "weight": 20,
+    "minLevel": 26,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "geodude",
+    "weight": 12,
+    "minLevel": 26,
+    "maxLevel": 28
+   }
+  ]
+ },
+ "hoenn-abandoned-ship": {
+  "name": "Abandoned Ship",
+  "encounters": [
+   {
+    "speciesKey": "tentacool",
+    "weight": 20,
+    "minLevel": 20,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "magikarp",
+    "weight": 20,
+    "minLevel": 20,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 20,
+    "minLevel": 20,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 12,
+    "minLevel": 20,
+    "maxLevel": 22
+   }
+  ]
+ },
+ "hoenn-cave-of-origin": {
+  "name": "Cave of Origin",
+  "encounters": [
+   {
+    "speciesKey": "zubat",
+    "weight": 20,
+    "minLevel": 5,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "geodude",
+    "weight": 20,
+    "minLevel": 5,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "sableye",
+    "weight": 20,
+    "minLevel": 5,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "mawile",
+    "weight": 12,
+    "minLevel": 5,
+    "maxLevel": 7
+   }
+  ]
  }
 }

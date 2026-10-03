@@ -2951,5 +2951,122 @@
     "maxLevel": 63
    }
   ]
+ },
+ "johto-mt-mortar": {
+  "name": "Mt. Mortar",
+  "encounters": [
+   {
+    "speciesKey": "machop",
+    "weight": 20,
+    "minLevel": 51,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "geodude",
+    "weight": 20,
+    "minLevel": 51,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "zubat",
+    "weight": 20,
+    "minLevel": 51,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "marill",
+    "weight": 12,
+    "minLevel": 51,
+    "maxLevel": 53
+   },
+   {
+    "speciesKey": "rhyhorn",
+    "weight": 12,
+    "minLevel": 51,
+    "maxLevel": 53
+   }
+  ]
+ },
+ "johto-burned-tower": {
+  "name": "Burned Tower",
+  "encounters": [
+   {
+    "speciesKey": "rattata",
+    "weight": 20,
+    "minLevel": 5,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "zubat",
+    "weight": 20,
+    "minLevel": 5,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "koffing",
+    "weight": 20,
+    "minLevel": 5,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "gastly",
+    "weight": 12,
+    "minLevel": 5,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "misdreavus",
+    "weight": 12,
+    "minLevel": 5,
+    "maxLevel": 7
+   }
+  ]
+ },
+ "johto-national-park": {
+  "name": "National Park",
+  "encounters": [
+   {
+    "speciesKey": "caterpie",
+    "weight": 20,
+    "minLevel": 26,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "weedle",
+    "weight": 20,
+    "minLevel": 26,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "metapod",
+    "weight": 20,
+    "minLevel": 26,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "kakuna",
+    "weight": 12,
+    "minLevel": 26,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "nidoranF",
+    "weight": 12,
+    "minLevel": 26,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "nidoranM",
+    "weight": 12,
+    "minLevel": 26,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "sunkern",
+    "weight": 12,
+    "minLevel": 26,
+    "maxLevel": 28
+   }
+  ]
  }
 }

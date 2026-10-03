@@ -40,12 +40,45 @@ const regions = read('regions.json')
 const mapData = readRegionDir(path.join(DATA, 'map-data'))
 const encounterData = readRegionDir(path.join(DATA, 'encounter-data'))
 
-let added = 0
+/**
+ * A battle-count gate has to name somewhere wilds actually spawn. A zone hub
+ * never spawns wilds (the idle loop skips it), so a connect to a zone resolves
+ * to that hub's first sub-area instead of the hub itself.
+ * @param {string} node
+ * @returns {string}
+ */
+function resolveBattlesTarget(node) {
+  const location = mapData[node]
+  return location?.type === 'zone' && location.routeKey ? location.routeKey : node
+}
+
+/**
+ * Repair a gate that points at a zone hub (created before this rule existed).
+ * @param {MapLocation} location
+ * @returns {boolean} whether anything changed
+ */
+function repairGate(location) {
+  let changed = false
+  for (const rule of location.unlock?.battlesAtLocation ?? []) {
+    const target = mapData[rule.locationId]
+    if (target?.type === 'zone' && target.routeKey && rule.locationId !== target.routeKey) {
+      rule.locationId = target.routeKey
+      changed = true
+    }
+  }
+  return changed
+}
+
+let added = 0,
+  repaired = 0
 for (const [regionId, areas] of Object.entries(ORDINARY_AREAS)) {
   const region = regions.find((candidate) => candidate.id === regionId)
   for (const area of areas) {
     const id = area.node.startsWith(`${regionId}-`) ? area.node : `${regionId}-${area.node}`
-    if (mapData[id]) continue
+    if (mapData[id]) {
+      if (repairGate(mapData[id])) repaired++
+      continue
+    }
     const connects = area.connects.filter((node) => mapData[node])
     if (connects.length === 0) {
       console.warn(`skip ${id}: none of its connects exist`)
@@ -77,7 +110,7 @@ for (const [regionId, areas] of Object.entries(ORDINARY_AREAS)) {
       description: area.description ?? `A wild area in the ${region?.name ?? regionId} region.`,
       routeKey: id,
       connections: [...connects],
-      unlock: { battlesAtLocation: [{ locationId: connects[0], count: 5 }] },
+      unlock: { battlesAtLocation: [{ locationId: resolveBattlesTarget(connects[0]), count: 5 }] },
       unlockOrder: anchor + 0.25,
       position: area.position,
     }
@@ -89,12 +122,12 @@ for (const [regionId, areas] of Object.entries(ORDINARY_AREAS)) {
   }
 }
 
-if (added === 0) {
+if (added === 0 && repaired === 0) {
   console.log('Ordinary areas already present; nothing to do.')
   process.exit(0)
 }
 if (DRY) {
-  console.log(`Would add ${added} ordinary area(s).`)
+  console.log(`Would add ${added} ordinary area(s) and repair ${repaired} gate(s).`)
   process.exit(0)
 }
 
@@ -104,4 +137,4 @@ writeRegionDir(
   encounterData,
   (key) => mapData[key]?.region ?? 'kanto'
 )
-console.log(`Added ${added} ordinary area(s).`)
+console.log(`Added ${added} ordinary area(s), repaired ${repaired} gate(s).`)

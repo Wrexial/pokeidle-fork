@@ -307,7 +307,8 @@
   "description": "A town in the Paldea region, home to Tulip's Psychic Gym.",
   "connections": [
    "paldea-north-province",
-   "paldea-alfornada-cavern"
+   "paldea-alfornada-cavern",
+   "paldea-gracia-stones"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -492,7 +493,8 @@
   "description": "A town in the Paldea region, home to Grusha's Ice Gym.",
   "connections": [
    "paldea-medali",
-   "paldea-glaseado-mountain"
+   "paldea-glaseado-mountain",
+   "paldea-gracia-stones"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1461,7 +1463,7 @@
   "unlock": {
    "battlesAtLocation": [
     {
-     "locationId": "paldea-south-province",
+     "locationId": "paldea-south-province-area-one",
      "count": 5
     }
    ]
@@ -1580,5 +1582,32 @@
   },
   "biome": "grassland",
   "background": "/backgrounds/grassland.png"
+ },
+ "paldea-gracia-stones": {
+  "id": "paldea-gracia-stones",
+  "name": "Gracia Stones",
+  "type": "route",
+  "region": "paldea",
+  "description": "A wild area in the Paldea region.",
+  "routeKey": "paldea-gracia-stones",
+  "connections": [
+   "paldea-alfornada",
+   "paldea-zapapico"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-alfornada",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 910004.2501,
+  "position": {
+   "x": 40,
+   "y": 65.9
+  },
+  "biome": "mountain",
+  "background": "/backgrounds/mountain.png"
  }
 }

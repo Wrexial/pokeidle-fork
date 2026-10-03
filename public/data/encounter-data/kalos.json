@@ -2679,5 +2679,92 @@
     "maxLevel": 59
    }
   ]
+ },
+ "kalos-lost-hotel": {
+  "name": "Lost Hotel",
+  "encounters": [
+   {
+    "speciesKey": "litwick",
+    "weight": 20,
+    "minLevel": 52,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "trubbish",
+    "weight": 20,
+    "minLevel": 52,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "gothita",
+    "weight": 20,
+    "minLevel": 52,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "magnemite",
+    "weight": 12,
+    "minLevel": 52,
+    "maxLevel": 54
+   }
+  ]
+ },
+ "kalos-sea-spirits-den": {
+  "name": "Sea Spirit's Den",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 20,
+    "minLevel": 70,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "psyduck",
+    "weight": 20,
+    "minLevel": 70,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 20,
+    "minLevel": 70,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "basculin",
+    "weight": 12,
+    "minLevel": 70,
+    "maxLevel": 72
+   }
+  ]
+ },
+ "kalos-pokemon-village": {
+  "name": "Pokemon Village",
+  "encounters": [
+   {
+    "speciesKey": "jigglypuff",
+    "weight": 20,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "foongus",
+    "weight": 20,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "golett",
+    "weight": 20,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "ditto",
+    "weight": 12,
+    "minLevel": 67,
+    "maxLevel": 69
+   }
+  ]
  }
 }

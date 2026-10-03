@@ -375,7 +375,8 @@
   "background": "/backgrounds/beach.png",
   "connections": [
    "hoenn-route-107",
-   "hoenn-route-109"
+   "hoenn-route-109",
+   "hoenn-abandoned-ship"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -402,7 +403,8 @@
   "background": "/backgrounds/beach.png",
   "connections": [
    "hoenn-slateport-city",
-   "hoenn-route-108"
+   "hoenn-route-108",
+   "hoenn-abandoned-ship"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -502,7 +504,8 @@
    "hoenn-route-111",
    "hoenn-route-117",
    "hoenn-route-118",
-   "hoenn-new-mauville"
+   "hoenn-new-mauville",
+   "hoenn-desert-underpass"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -542,7 +545,8 @@
   "connections": [
    "hoenn-mauville-city",
    "hoenn-route-113",
-   "hoenn-route-112"
+   "hoenn-route-112",
+   "hoenn-desert-underpass"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -574,7 +578,8 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "hoenn-route-111",
-   "hoenn-lavaridge-town"
+   "hoenn-lavaridge-town",
+   "hoenn-fiery-path"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -645,7 +650,8 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "hoenn-route-111",
-   "hoenn-fallarbor-town"
+   "hoenn-fallarbor-town",
+   "hoenn-fiery-path"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1299,7 +1305,8 @@
   "region": "hoenn",
   "description": "A town in the Hoenn region, home to Juan's Water Gym.",
   "connections": [
-   "hoenn-route-126"
+   "hoenn-route-126",
+   "hoenn-cave-of-origin"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1888,5 +1895,112 @@
   },
   "biome": "grassland",
   "background": "/backgrounds/grassland.png"
+ },
+ "hoenn-fiery-path": {
+  "id": "hoenn-fiery-path",
+  "name": "Fiery Path",
+  "type": "route",
+  "region": "hoenn",
+  "description": "A wild area in the Hoenn region.",
+  "routeKey": "hoenn-fiery-path",
+  "connections": [
+   "hoenn-route-112",
+   "hoenn-route-113"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-112",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 300112.25,
+  "position": {
+   "x": 23.8,
+   "y": 31.6
+  },
+  "biome": "volcanic",
+  "background": "/backgrounds/grassland.png"
+ },
+ "hoenn-desert-underpass": {
+  "id": "hoenn-desert-underpass",
+  "name": "Desert Underpass",
+  "type": "route",
+  "region": "hoenn",
+  "description": "A wild area in the Hoenn region.",
+  "routeKey": "hoenn-desert-underpass",
+  "connections": [
+   "hoenn-route-111",
+   "hoenn-mauville-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-111",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 300110.75,
+  "position": {
+   "x": 32.6,
+   "y": 39.4
+  },
+  "biome": "desert",
+  "background": "/backgrounds/grassland.png"
+ },
+ "hoenn-abandoned-ship": {
+  "id": "hoenn-abandoned-ship",
+  "name": "Abandoned Ship",
+  "type": "route",
+  "region": "hoenn",
+  "description": "A wild area in the Hoenn region.",
+  "routeKey": "hoenn-abandoned-ship",
+  "connections": [
+   "hoenn-route-108",
+   "hoenn-route-109"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-108",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 300108.25,
+  "position": {
+   "x": 30.1,
+   "y": 80.5
+  },
+  "biome": "coast",
+  "background": "/backgrounds/beach.png"
+ },
+ "hoenn-cave-of-origin": {
+  "id": "hoenn-cave-of-origin",
+  "name": "Cave of Origin",
+  "type": "route",
+  "region": "hoenn",
+  "description": "A wild area in the Hoenn region.",
+  "routeKey": "hoenn-cave-of-origin",
+  "connections": [
+   "hoenn-sootopolis-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-sootopolis-city",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 300126.75,
+  "position": {
+   "x": 72.5,
+   "y": 48.1
+  },
+  "biome": "cave",
+  "background": "/backgrounds/cave.png"
  }
 }

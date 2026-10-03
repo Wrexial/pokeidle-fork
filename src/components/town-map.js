@@ -792,7 +792,10 @@ export function TownMap() {
                     location.type === 'raid' &&
                     state.raidCooldownEnd != null &&
                     Date.now() < state.raidCooldownEnd,
-                  isClickable = isUnlocked && !isCurrent && !onCooldown
+                  // A zone/DLC hub is clickable even while you stand on it, since
+                  // clicking opens its focused area map rather than travelling.
+                  isClickable =
+                    isUnlocked && (!isCurrent || location.type === 'zone') && !onCooldown
                 return jsx(
                   MapNode,
                   {
@@ -800,12 +803,16 @@ export function TownMap() {
                     isCurrent,
                     isUnlocked,
                     isClickable,
-                    onClick: () => travelTo(locationId),
+                    onClick: () => {
+                      // Clicking an area opens its zoomed-in map (#60); inside
+                      // that map the hub itself travels to the hub panel.
+                      if (location.type === 'zone' && locationId !== focusZone) {
+                        setFocusZone(locationId)
+                        return
+                      }
+                      travelTo(locationId)
+                    },
                     cooldownEnd: location.type === 'raid' ? state.raidCooldownEnd : void 0,
-                    onExpand:
-                      location.type === 'zone' && locationId !== focusZone
-                        ? () => setFocusZone(locationId)
-                        : void 0,
                     forceLabel: Boolean(focusZone),
                     // Deliberately omits the species: the Town Map should only
                     // say a swarm is active here, not spoil which Pokemon.

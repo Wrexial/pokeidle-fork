@@ -364,10 +364,11 @@ Data conventions:
   Paldea's provinces): the routes become hidden sub-areas that keep their own
   unlock rules, so a locked area shows as ??? in the picker.
 - The Town Map (`src/components/town-map.js`) can zoom into one area (#60):
-  the expand button on an unlocked zone/DLC hub sets `focusZone`, which swaps
+  clicking an unlocked zone/DLC hub sets `focusZone`, which swaps
   `activeLocationIds` for the hub plus its (hidden) sub-areas, fits their
-  bounding box and shows a “← Region map” bar. Region tabs are hidden while
-  focused; hidden sub-areas are travelable from the focused canvas. Roads stay
+  bounding box and shows a “← Region map” bar (clicking the hub inside that view
+  travels to the hub panel). Region tabs are hidden while focused; hidden
+  sub-areas are travelable from the focused canvas. Roads stay
   on the right-angle grid: `createRoadPaths` (`src/game/progression/roads.js`)
   greedily gives each edge the elbow that overlaps the fewest already-placed
   roads, and `apply-road-cleanup.cjs` drops the redundant side of every

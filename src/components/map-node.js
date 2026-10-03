@@ -6,7 +6,7 @@ import { formatCooldown } from '../game/progression.js'
 import { POI_LOCATIONS, minigameNameForLocation } from '../game/minigames.js'
 import { servicePoisFor } from '../game/services.js'
 
-/** @param {{ location: MapLocation, isCurrent: boolean, isUnlocked: boolean, isClickable: boolean, onClick: () => void, cooldownEnd?: number, swarmLabel?: string | null, onExpand?: () => void, forceLabel?: boolean }} props */
+/** @param {{ location: MapLocation, isCurrent: boolean, isUnlocked: boolean, isClickable: boolean, onClick: () => void, cooldownEnd?: number, swarmLabel?: string | null, forceLabel?: boolean }} props */
 export
 function MapNode({
   location,
@@ -16,7 +16,6 @@ function MapNode({
   onClick,
   cooldownEnd,
   swarmLabel,
-  onExpand,
   forceLabel,
 }) {
   const [hovering, setHovering] = React.useState(!1),
@@ -57,7 +56,7 @@ function MapNode({
       title: isUnlocked
         ? [
             location.description,
-            isZone && zoneCount > 0 ? `Zone hub \u2014 ${zoneCount} areas` : null,
+            isZone && zoneCount > 0 ? `Zone hub \u2014 ${zoneCount} areas (click to open the area map)` : null,
             minigameName ? `Minigame: ${minigameName}` : null,
             servicePois.length > 0
               ? `Services: ${servicePois.map((poi) => poi.label).join(', ')}`
@@ -89,18 +88,6 @@ function MapNode({
             title: `${zoneCount} areas`,
             children: zoneCount,
           }),
-        isZone && isUnlocked && onExpand
-          ? jsx('button', {
-              type: 'button',
-              className: 'map-node-expand',
-              title: 'Open area map',
-              onClick: /** @param {React.MouseEvent} event */ (event) => {
-                event.stopPropagation()
-                onExpand()
-              },
-              children: '\u2922',
-            })
-          : null,
         isPoi || servicePois.length > 0
           ? jsxs('div', {
               className: 'map-node-pois',

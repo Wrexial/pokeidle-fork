@@ -362,10 +362,9 @@ async function main() {
     )
     await cdp.screenshot(path.join(OUT, '01-main.png'))
 
-    // #60: zoom into an unlocked zone from the Town Map and capture the
-    // focused area view.
+    // #60: clicking an area (zone hub) opens its zoomed-in map.
     const expanded = await cdp.eval(
-      `(() => { const b = document.querySelector('.map-node-expand'); if (!b) return false; b.click(); return true })()`
+      `(() => { const b = document.querySelector('.map-node.zone.clickable') || document.querySelector('.map-node.zone'); if (!b) return false; b.click(); return true })()`
     )
     if (expanded) {
       await sleep(500)

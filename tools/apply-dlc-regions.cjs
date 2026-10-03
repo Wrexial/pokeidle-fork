@@ -41,6 +41,7 @@ const DLC_REGIONS = [
     parentRegion: 'galar',
     order: 8.1,
     hub: 'galar-isle-of-armor',
+    parentConnect: 'galar-hulbury',
     raidPool: ['kubfu', 'urshifu-sss'],
   },
   {
@@ -50,6 +51,7 @@ const DLC_REGIONS = [
     parentRegion: 'galar',
     order: 8.2,
     hub: 'galar-crown-tundra',
+    parentConnect: 'galar-wyndon',
     raidPool: [
       'regieleki',
       'regidrago',
@@ -69,6 +71,7 @@ const DLC_REGIONS = [
     parentRegion: 'paldea',
     order: 9.1,
     hub: 'paldea-kitakami',
+    parentConnect: 'paldea-mossui-town',
     raidPool: ['okidogi', 'munkidori', 'fezandipiti', 'ogerpon'],
   },
   {
@@ -78,6 +81,7 @@ const DLC_REGIONS = [
     parentRegion: 'paldea',
     order: 9.2,
     hub: 'paldea-terarium',
+    parentConnect: 'paldea-league',
     raidPool: ['terapagos', 'pecharunt'],
   },
 ]
@@ -87,9 +91,27 @@ const regions = read('regions.json')
 const mapData = readRegionDir(path.join(DATA, 'map-data'))
 const encounterData = readRegionDir(path.join(DATA, 'encounter-data'))
 
-let promoted = 0
+let promoted = 0,
+  repaired = 0
 for (const config of DLC_REGIONS) {
-  if (regions.some((region) => region.id === config.id)) continue
+  // A promoted region is shown as a subregion on its parent's map, so it needs
+  // a road back into the parent for travel (and for the Town Map to draw it).
+  const alreadyPromoted = regions.some((region) => region.id === config.id)
+  if (alreadyPromoted) {
+    const hub = mapData[config.hub],
+      anchor = config.parentConnect ? mapData[config.parentConnect] : null
+    if (hub && anchor) {
+      if (!hub.connections.includes(config.parentConnect)) {
+        hub.connections.push(config.parentConnect)
+        repaired++
+      }
+      if (!anchor.connections.includes(config.hub)) {
+        anchor.connections.push(config.hub)
+        repaired++
+      }
+    }
+    continue
+  }
   const hub = mapData[config.hub]
   if (!hub) {
     console.warn(`skip ${config.id}: hub ${config.hub} not found`)
@@ -121,12 +143,18 @@ for (const config of DLC_REGIONS) {
     mapData[id].region = config.id
     mapData[id].connections = [config.hub]
   }
-  // Drop any parent-region road that still pointed at the hub/sub-areas.
+  // Drop any parent-region road that still pointed at the hub/sub-areas, then
+  // link the hub back to the parent so the subregion sits on the parent map.
   for (const location of Object.values(mapData)) {
     if ((location.region ?? 'kanto') === config.id) continue
     location.connections = location.connections.filter(
       (id) => id !== config.hub && !subAreaIds.includes(id)
     )
+  }
+  if (config.parentConnect && mapData[config.parentConnect]) {
+    hub.connections.push(config.parentConnect)
+    if (!mapData[config.parentConnect].connections.includes(config.hub))
+      mapData[config.parentConnect].connections.push(config.hub)
   }
 
   // Each DLC region gets a legendary Raid Island hanging off its last area.
@@ -181,13 +209,13 @@ for (const config of DLC_REGIONS) {
   promoted++
 }
 
-if (promoted === 0) {
+if (promoted === 0 && repaired === 0) {
   console.log('DLC regions already promoted; nothing to do.')
   process.exit(0)
 }
 
 if (DRY) {
-  console.log(`Would promote ${promoted} DLC region(s).`)
+  console.log(`Would promote ${promoted} DLC region(s) and repair ${repaired} link(s).`)
   process.exit(0)
 }
 
@@ -198,4 +226,4 @@ writeRegionDir(
   encounterData,
   (key) => mapData[key]?.region ?? 'kanto'
 )
-console.log(`Promoted ${promoted} DLC region(s).`)
+console.log(`Promoted ${promoted} DLC region(s), repaired ${repaired} link(s).`)

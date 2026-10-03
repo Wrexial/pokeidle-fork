@@ -102,6 +102,24 @@ test('DLC regions never cost an Unlock Token', () => {
   for (const id of dlcIds) assert.ok(!baseRegions.some((region) => region.id === id))
 })
 
+test('DLC subregions group under their parent and link onto its map', () => {
+  for (const region of regions.filter((candidate) => candidate.isDlc)) {
+    assert.ok(
+      baseRegions.some((candidate) => candidate.id === region.parentRegion),
+      `${region.id} names a base-region parent`
+    )
+    const hub = mapData[region.entry]
+    assert.ok(hub, `${region.id} has an entry hub`)
+    assert.equal(hub.region, region.id)
+    // The hub links back to a location in the parent region, so the Town Map
+    // draws it on the parent map (and travel works) instead of its own tab.
+    assert.ok(
+      hub.connections.some((id) => (mapData[id]?.region ?? 'kanto') === region.parentRegion),
+      `${region.id}'s hub links onto the ${region.parentRegion} map`
+    )
+  }
+})
+
 test('the Alolan forms are wild in Alola and its raid pool is legendaries only', () => {
   const wild = new Set()
   for (const [key, bucket] of Object.entries(encounterData)) {

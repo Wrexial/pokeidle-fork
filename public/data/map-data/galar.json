@@ -287,7 +287,8 @@
   "region": "galar",
   "description": "A town in the Galar region, home to Nessa's Water Gym.",
   "connections": [
-   "galar-route-5"
+   "galar-route-5",
+   "galar-isle-of-armor"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -706,7 +707,8 @@
   "region": "galar",
   "description": "A town in the Galar region.",
   "connections": [
-   "galar-route-10"
+   "galar-route-10",
+   "galar-crown-tundra"
   ],
   "unlock": {
    "battlesAtLocation": [

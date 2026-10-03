@@ -1007,7 +1007,9 @@
   "type": "town",
   "region": "paldea",
   "description": "A town in the Paldea region.",
-  "connections": [],
+  "connections": [
+   "paldea-kitakami"
+  ],
   "unlock": {
    "battlesAtLocation": [
     {
@@ -1077,7 +1079,8 @@
   "region": "paldea",
   "description": "The Paldea Pokémon League.",
   "connections": [
-   "paldea-east-province"
+   "paldea-east-province",
+   "paldea-terarium"
   ],
   "unlock": {
    "battlesAtLocation": [

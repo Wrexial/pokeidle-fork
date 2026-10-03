@@ -20,6 +20,17 @@ const ZOOM_STEP = 1.35
 const DRAG_THRESHOLD = 4
 
 /**
+ * A DLC subregion is drawn on its parent region's map and has no tab of its
+ * own, so map/labels resolve a subregion id to its parent.
+ * @param {string} regionId
+ * @returns {string}
+ */
+function displayRegionFor(regionId) {
+  const region = regions.find((candidate) => candidate.id === regionId)
+  return region?.isDlc && region.parentRegion ? region.parentRegion : regionId
+}
+
+/**
  * Colours for the generated terrain layer: oceans, a sandy shore and one shade
  * per land biome. Deliberately saturated so land and water read apart even when
  * the map is zoomed out.
@@ -91,7 +102,7 @@ export function TownMap() {
   const { state, dispatch } = useGame(),
     { currentLocation, unlockedLocations } = state,
     currentLocationData = mapData[currentLocation],
-    currentRegion = currentLocationData?.region ?? 'kanto',
+    currentRegion = displayRegionFor(currentLocationData?.region ?? 'kanto'),
     [activeRegion, setActiveRegion] = React.useState(currentRegion),
     [pendingUnlock, setPendingUnlock] = React.useState(/** @type {string | null} */ (null)),
     [searchQuery, setSearchQuery] = React.useState(''),
@@ -156,13 +167,18 @@ export function TownMap() {
     })
   }
 
-  const regionOrder = React.useMemo(() => [...regions].sort((a, b) => a.order - b.order), []),
+  const regionOrder = React.useMemo(
+      () => [...baseRegions].sort((a, b) => a.order - b.order),
+      []
+    ),
     locationsByRegion = React.useMemo(() => {
       /** @type {Record<string, string[]>} */
       const map = {}
       for (const id of mapAreas) {
         if (mapData[id].hidden) continue
-        const region = mapData[id].region ?? 'kanto'
+        // DLC subregions share their parent's map, so they get no tab but do
+        // render (and are travelable) from the parent.
+        const region = displayRegionFor(mapData[id].region ?? 'kanto')
         ;(map[region] || (map[region] = [])).push(id)
       }
       return map
@@ -280,7 +296,7 @@ export function TownMap() {
     // instead used to land between nodes and leave the map looking blank.
     const hiddenZone = mapData[currentLocation]?.zone,
       focusId =
-        requested && mapData[requested]?.region === activeRegion
+        requested && displayRegionFor(mapData[requested]?.region ?? 'kanto') === activeRegion
           ? requested
           : activeLocationSet.has(currentLocation)
             ? currentLocation
@@ -434,7 +450,7 @@ export function TownMap() {
     if (!location) return
     setSearchQuery('')
     focusRef.current = locationId
-    setActiveRegion(location.region ?? 'kanto')
+    setActiveRegion(displayRegionFor(location.region ?? 'kanto'))
     setFocusNonce((nonce) => nonce + 1)
     if (location.type !== 'raid' && locationId !== currentLocation)
       dispatch({ type: 'TRAVEL', payload: { locationId } })

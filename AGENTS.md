@@ -280,9 +280,13 @@ Data conventions:
   and never cost an Unlock Token: `baseRegions` / `dlcParentRegion`
   (`src/data/gameData.js`) exclude them from token, World Tour and
   per-generation counts, `save.js` never adds them to `unlockedRegions`, and
-  the Town Map shows them as locked-but-not-token-openable. The generator still
-  creates the DLC as `ZONES`; re-run `apply-dlc-regions.cjs` after any
-  regeneration.
+  the Town Map draws them as **subregions on the parent map** rather than a
+  separate tab: `apply-dlc-regions.cjs` links each hub back to a parent town
+  (`parentConnect`), and the Town Map groups a subregion's locations under its
+  parent (`displayRegionFor`) while `regionOrder` uses `baseRegions`. Their
+  nodes are therefore travelable from the parent map and appear locked until
+  the parent Champion is beaten. The generator still creates the DLC as
+  `ZONES`; re-run `apply-dlc-regions.cjs` after any regeneration.
 - `map-data/<region>.json` locations carry a `region` id; wild routes also
   reference an `encounter-data/<region>.json` bucket via `routeKey`. Generated
   routes carry a `background` (a coarse base scene — grassland / beach /

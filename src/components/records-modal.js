@@ -185,6 +185,7 @@ export function RecordsModal({ onClose, inline = false }) {
                   children: 'Regions',
                 }),
                 regions
+                  .filter((region) => !region.isDlc)
                   .slice()
                   .sort((left, right) => left.order - right.order)
                   .map((region) => {

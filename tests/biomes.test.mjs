@@ -29,16 +29,15 @@ test('biomeForLocation no longer mistakes "fall" for autumn', () => {
 })
 
 test('dedicated biome scenes take over once the art is installed', () => {
-  const scenes = { forest: '/backgrounds/forest.png' }
+  const scenes = { forest: '/backgrounds/forest.jpeg' }
   assert.deepEqual(biomeBackgroundFor({ name: 'Glimwood Tangle' }, scenes), {
-    image: '/backgrounds/forest.png',
+    image: '/backgrounds/forest.jpeg',
     biome: 'forest',
   })
-  assert.equal(
-    biomeBackgroundFor({ name: 'Glimwood Tangle' }),
-    null,
-    'no painted forest scene installed yet'
-  )
+  assert.deepEqual(biomeBackgroundFor({ name: 'Glimwood Tangle' }), {
+    image: '/backgrounds/forest.jpeg',
+    biome: 'forest',
+  })
   assert.equal(
     biomeBackgroundFor({ name: 'Route 1' }, scenes),
     null,
@@ -49,7 +48,7 @@ test('dedicated biome scenes take over once the art is installed', () => {
 test('every installed biome scene has a filter fallback and a background path', () => {
   for (const [biome, image] of Object.entries(BIOME_SCENE_IMAGES)) {
     assert.equal(typeof BIOME_FILTERS[biome], 'string', `${biome} needs a filter fallback`)
-    assert.match(image, /^\/backgrounds\/.+\.png$/)
+    assert.match(image, /^\/backgrounds\/.+\.(png|jpe?g)$/)
   }
 })
 

@@ -320,18 +320,19 @@ export const BIOME_FILTERS = {
 /**
  * Dedicated painted battle scenes, by biome. A biome with an entry here uses
  * that image untouched instead of a base scene plus its colour grade, so
- * dropping `public/backgrounds/<file>.png` in and un-commenting the line is all
- * it takes — see `biomeBackgroundFor`. The tinted biomes still have no art yet,
- * so their `BIOME_FILTERS` grades stand in.
+ * dropping `public/backgrounds/<file>` in and adding the line is all it takes —
+ * see `biomeBackgroundFor`. The base scenes (grassland, beach, mountain, cave,
+ * town) are already dedicated art, so only the tinted biomes are listed here.
  * @type {Record<string, string>}
  */
 export const BIOME_SCENE_IMAGES = {
-  // forest: '/backgrounds/forest.png',
-  // autumn: '/backgrounds/autumn.png',
-  // desert: '/backgrounds/desert.png',
-  // swamp: '/backgrounds/swamp.png',
-  // volcanic: '/backgrounds/volcano.png',
-  // tundra: '/backgrounds/tundra.png',
+  forest: '/backgrounds/forest.jpeg',
+  autumn: '/backgrounds/autumn.jpeg',
+  desert: '/backgrounds/desert.jpeg',
+  swamp: '/backgrounds/swamp.jpeg',
+  volcanic: '/backgrounds/volcano.jpeg',
+  tundra: '/backgrounds/tundra.jpeg',
+  ruins: '/backgrounds/ruins.jpeg',
 }
 
 /**

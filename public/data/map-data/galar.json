@@ -946,7 +946,15 @@
    "galar-wild-area-rolling-fields",
    "galar-wild-area-dappled-grove",
    "galar-wild-area-giants-mirror",
-   "galar-watchtower-ruins"
+   "galar-watchtower-ruins",
+   "galar-wild-area-stony-wilderness",
+   "galar-wild-area-north-lake-miloch",
+   "galar-wild-area-bridge-field",
+   "galar-wild-area-dusty-bowl",
+   "galar-wild-area-giants-seat",
+   "galar-wild-area-hammerlocke-hills",
+   "galar-wild-area-lake-of-outrage",
+   "galar-wild-area-east-lake-axewell"
   ],
   "subAreas": [
    {
@@ -960,6 +968,38 @@
    {
     "id": "galar-wild-area-giants-mirror",
     "name": "Giant's Mirror"
+   },
+   {
+    "id": "galar-wild-area-stony-wilderness",
+    "name": "Stony Wilderness"
+   },
+   {
+    "id": "galar-wild-area-north-lake-miloch",
+    "name": "North Lake Miloch"
+   },
+   {
+    "id": "galar-wild-area-bridge-field",
+    "name": "Bridge Field"
+   },
+   {
+    "id": "galar-wild-area-dusty-bowl",
+    "name": "Dusty Bowl"
+   },
+   {
+    "id": "galar-wild-area-giants-seat",
+    "name": "Giant's Seat"
+   },
+   {
+    "id": "galar-wild-area-hammerlocke-hills",
+    "name": "Hammerlocke Hills"
+   },
+   {
+    "id": "galar-wild-area-lake-of-outrage",
+    "name": "Lake of Outrage"
+   },
+   {
+    "id": "galar-wild-area-east-lake-axewell",
+    "name": "East Lake Axewell"
    }
   ],
   "unlock": {
@@ -1109,5 +1149,213 @@
   },
   "biome": "ruins",
   "background": "/backgrounds/grassland.png"
+ },
+ "galar-wild-area-stony-wilderness": {
+  "id": "galar-wild-area-stony-wilderness",
+  "name": "Stony Wilderness",
+  "type": "route",
+  "region": "galar",
+  "description": "A sub-area of the Wild Area.",
+  "routeKey": "galar-wild-area-stony-wilderness",
+  "connections": [
+   "galar-wild-area"
+  ],
+  "hidden": true,
+  "zone": "galar-wild-area",
+  "unlock": {
+   "requires": [
+    "galar-wild-area",
+    "galar-wild-area-giants-mirror"
+   ]
+  },
+  "unlockOrder": 800005.503,
+  "position": {
+   "x": 48,
+   "y": 60
+  },
+  "biome": "desert",
+  "background": "/backgrounds/grassland.png"
+ },
+ "galar-wild-area-north-lake-miloch": {
+  "id": "galar-wild-area-north-lake-miloch",
+  "name": "North Lake Miloch",
+  "type": "route",
+  "region": "galar",
+  "description": "A sub-area of the Wild Area.",
+  "routeKey": "galar-wild-area-north-lake-miloch",
+  "connections": [
+   "galar-wild-area"
+  ],
+  "hidden": true,
+  "zone": "galar-wild-area",
+  "unlock": {
+   "requires": [
+    "galar-wild-area",
+    "galar-wild-area-stony-wilderness"
+   ]
+  },
+  "unlockOrder": 800005.504,
+  "position": {
+   "x": 49,
+   "y": 54
+  },
+  "biome": "coast",
+  "background": "/backgrounds/beach.png"
+ },
+ "galar-wild-area-bridge-field": {
+  "id": "galar-wild-area-bridge-field",
+  "name": "Bridge Field",
+  "type": "route",
+  "region": "galar",
+  "description": "A sub-area of the Wild Area.",
+  "routeKey": "galar-wild-area-bridge-field",
+  "connections": [
+   "galar-wild-area"
+  ],
+  "hidden": true,
+  "zone": "galar-wild-area",
+  "unlock": {
+   "requires": [
+    "galar-wild-area",
+    "galar-wild-area-north-lake-miloch"
+   ]
+  },
+  "unlockOrder": 800005.505,
+  "position": {
+   "x": 50,
+   "y": 58
+  },
+  "biome": "mountain",
+  "background": "/backgrounds/mountain.png"
+ },
+ "galar-wild-area-dusty-bowl": {
+  "id": "galar-wild-area-dusty-bowl",
+  "name": "Dusty Bowl",
+  "type": "route",
+  "region": "galar",
+  "description": "A sub-area of the Wild Area.",
+  "routeKey": "galar-wild-area-dusty-bowl",
+  "connections": [
+   "galar-wild-area"
+  ],
+  "hidden": true,
+  "zone": "galar-wild-area",
+  "unlock": {
+   "requires": [
+    "galar-wild-area",
+    "galar-wild-area-bridge-field"
+   ]
+  },
+  "unlockOrder": 800005.506,
+  "position": {
+   "x": 44,
+   "y": 52
+  },
+  "biome": "desert",
+  "background": "/backgrounds/grassland.png"
+ },
+ "galar-wild-area-giants-seat": {
+  "id": "galar-wild-area-giants-seat",
+  "name": "Giant's Seat",
+  "type": "route",
+  "region": "galar",
+  "description": "A sub-area of the Wild Area.",
+  "routeKey": "galar-wild-area-giants-seat",
+  "connections": [
+   "galar-wild-area"
+  ],
+  "hidden": true,
+  "zone": "galar-wild-area",
+  "unlock": {
+   "requires": [
+    "galar-wild-area",
+    "galar-wild-area-dusty-bowl"
+   ]
+  },
+  "unlockOrder": 800005.507,
+  "position": {
+   "x": 56,
+   "y": 57
+  },
+  "biome": "coast",
+  "background": "/backgrounds/beach.png"
+ },
+ "galar-wild-area-hammerlocke-hills": {
+  "id": "galar-wild-area-hammerlocke-hills",
+  "name": "Hammerlocke Hills",
+  "type": "route",
+  "region": "galar",
+  "description": "A sub-area of the Wild Area.",
+  "routeKey": "galar-wild-area-hammerlocke-hills",
+  "connections": [
+   "galar-wild-area"
+  ],
+  "hidden": true,
+  "zone": "galar-wild-area",
+  "unlock": {
+   "requires": [
+    "galar-wild-area",
+    "galar-wild-area-giants-seat"
+   ]
+  },
+  "unlockOrder": 800005.508,
+  "position": {
+   "x": 55,
+   "y": 52
+  },
+  "biome": "mountain",
+  "background": "/backgrounds/mountain.png"
+ },
+ "galar-wild-area-lake-of-outrage": {
+  "id": "galar-wild-area-lake-of-outrage",
+  "name": "Lake of Outrage",
+  "type": "route",
+  "region": "galar",
+  "description": "A sub-area of the Wild Area.",
+  "routeKey": "galar-wild-area-lake-of-outrage",
+  "connections": [
+   "galar-wild-area"
+  ],
+  "hidden": true,
+  "zone": "galar-wild-area",
+  "unlock": {
+   "requires": [
+    "galar-wild-area",
+    "galar-wild-area-hammerlocke-hills"
+   ]
+  },
+  "unlockOrder": 800005.509,
+  "position": {
+   "x": 57,
+   "y": 50
+  },
+  "biome": "coast",
+  "background": "/backgrounds/beach.png"
+ },
+ "galar-wild-area-east-lake-axewell": {
+  "id": "galar-wild-area-east-lake-axewell",
+  "name": "East Lake Axewell",
+  "type": "route",
+  "region": "galar",
+  "description": "A sub-area of the Wild Area.",
+  "routeKey": "galar-wild-area-east-lake-axewell",
+  "connections": [
+   "galar-wild-area"
+  ],
+  "hidden": true,
+  "zone": "galar-wild-area",
+  "unlock": {
+   "requires": [
+    "galar-wild-area",
+    "galar-wild-area-lake-of-outrage"
+   ]
+  },
+  "unlockOrder": 800005.51,
+  "position": {
+   "x": 54,
+   "y": 60
+  },
+  "biome": "cave",
+  "background": "/backgrounds/cave.png"
  }
 }

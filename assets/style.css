@@ -4034,6 +4034,25 @@ img {
     flex-direction: column
 }
 
+.zone-area-toggle {
+    align-self: flex-start;
+    margin: 2px 0 0;
+    padding: 2px 6px;
+    font: inherit;
+    font-size: 7px;
+    color: var(--parchment);
+    background: none;
+    border: none;
+    cursor: pointer;
+    opacity: .85
+}
+
+.zone-area-toggle:hover,
+.zone-area-toggle.open {
+    color: var(--gold);
+    opacity: 1
+}
+
 /* The inline wild table for an open sub-area, tucked directly under its
    travel button so a zone hub reads as one continuous list. */
 .zone-area-grid {

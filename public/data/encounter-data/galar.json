@@ -1958,5 +1958,891 @@
     "maxLevel": 37
    }
   ]
+ },
+ "galar-wild-area-stony-wilderness": {
+  "name": "Stony Wilderness",
+  "encounters": [
+   {
+    "speciesKey": "rolycoly",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "silicobra",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "cufant",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "stonjourner",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "g-meowth",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "g-farfetch'd",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "hippopotas",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "rhyhorn",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "larvitar",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "nincada",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "mudbray",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "g-yamask",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "g-stunfisk",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "wobbuffet",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "nuzleaf",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "drifloon",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   }
+  ]
+ },
+ "galar-wild-area-north-lake-miloch": {
+  "name": "North Lake Miloch",
+  "encounters": [
+   {
+    "speciesKey": "wooloo",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "skwovet",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "nickit",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "g-zigzagoon",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "gossifleur",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "blipbug",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "eevee",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "hoothoot",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "nuzleaf",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "stunky",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "purrloin",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "minccino",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "deino",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "stufful",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "impidimp",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "indeedee-f",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   }
+  ]
+ },
+ "galar-wild-area-bridge-field": {
+  "name": "Bridge Field",
+  "encounters": [
+   {
+    "speciesKey": "rolycoly",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "g-yamask",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "g-corsola",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "g-darumaka",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "g-stunfisk",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "hippopotas",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "rhyhorn",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "larvitar",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "nincada",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "drifloon",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "mudbray",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "silicobra",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "sinistea",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "dreepy",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "h-zorua",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "wobbuffet",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   }
+  ]
+ },
+ "galar-wild-area-dusty-bowl": {
+  "name": "Dusty Bowl",
+  "encounters": [
+   {
+    "speciesKey": "hippopotas",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "rhyhorn",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "g-darumaka",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "g-stunfisk",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "g-ponyta",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "swinub",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "larvitar",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "nincada",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "mudbray",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "silicobra",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "snom",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "g-yamask",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "wobbuffet",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "nuzleaf",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "drifloon",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "minccino",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   }
+  ]
+ },
+ "galar-wild-area-giants-seat": {
+  "name": "Giant's Seat",
+  "encounters": [
+   {
+    "speciesKey": "rolycoly",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "cufant",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "stonjourner",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "g-meowth",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "g-corsola",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "g-yamask",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "silicobra",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "rhyhorn",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "larvitar",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "ferroseed",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "klink",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "g-stunfisk",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "wobbuffet",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "nuzleaf",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "nincada",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "drifloon",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   }
+  ]
+ },
+ "galar-wild-area-hammerlocke-hills": {
+  "name": "Hammerlocke Hills",
+  "encounters": [
+   {
+    "speciesKey": "rolycoly",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "g-meowth",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "g-ponyta",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "hippopotas",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "rhyhorn",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "cufant",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "larvitar",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "ferroseed",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "klink",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "stonjourner",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "g-stunfisk",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "wobbuffet",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "nuzleaf",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "nincada",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "drifloon",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "minccino",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   }
+  ]
+ },
+ "galar-wild-area-lake-of-outrage": {
+  "name": "Lake of Outrage",
+  "encounters": [
+   {
+    "speciesKey": "deino",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "goomy",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "jangmo-o",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "dreepy",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "larvitar",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "nuzleaf",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "stunky",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "purrloin",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "nickit",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "applin",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "impidimp",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "g-zigzagoon",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "rhyhorn",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "wobbuffet",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "nincada",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "drifloon",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   }
+  ]
+ },
+ "galar-wild-area-east-lake-axewell": {
+  "name": "East Lake Axewell",
+  "encounters": [
+   {
+    "speciesKey": "blipbug",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "rolycoly",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "gossifleur",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "g-zigzagoon",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "nickit",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "skwovet",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "eevee",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "hoothoot",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "nuzleaf",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "stunky",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "purrloin",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "minccino",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "deino",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "stufful",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "wooloo",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "impidimp",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   }
+  ]
  }
 }

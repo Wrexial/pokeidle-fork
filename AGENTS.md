@@ -786,6 +786,10 @@ One-off scripts used to build the data JSON (not run during dev/build):
   gate never names a zone hub (which spawns no wilds): a hub connect resolves
   to its first sub-area, and existing gates are repaired in place. Idempotent
   (`--dry`); re-run `generate-encounter-index.cjs` afterwards.
+- `apply-zone-areas.cjs` — data-only pass (#36) that appends the extra sub-areas
+  from `lib/zone-areas.cjs` to an existing `type: 'zone'` hub (chained behind
+  its current sub-areas) and tops their wild tables up with the region's wider
+  pool. Idempotent (`--dry`); re-run `generate-encounter-index.cjs` afterwards.
 - `fix-impossible-encounters.cjs` / `fix-impossible-teams.cjs` — step wild
   encounters and trainer/gym/Elite Four/Champion Pokemon back to a form that
   could exist at their level (a Lv. 3 Chesnaught becomes a Chespin), merging
@@ -816,6 +820,9 @@ One-off scripts used to build the data JSON (not run during dev/build):
   forests, ...) the scraper drops, keyed by region with `node` / `name` /
   `connects` / `position` / `species`. Used by `generate-regions.cjs` (merged
   into `POST_AREAS`) and `apply-ordinary-areas.cjs`.
+- `lib/zone-areas.cjs` — extra sub-areas for an existing zone hub, keyed by the
+  fully-qualified hub id with `node` / `name` / `position` / `species`. Used by
+  `generate-regions.cjs` (merged into `ZONES`) and `apply-zone-areas.cjs`.
 - `lib/biomes.cjs` — shared `deriveBiome` battle/town-map biome classifier
   (name keywords + wild-table land types + curated route overrides) used by
   `generate-regions.cjs` and `apply-biomes.cjs`; mirrored at runtime by

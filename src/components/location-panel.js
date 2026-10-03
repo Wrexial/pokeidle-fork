@@ -1,5 +1,6 @@
 // Split from a grouped component file — see tools/decompile/split-components.mjs
 
+import React from 'react'
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
 import { BATTLE_TOWER_LOCATION } from '../data/config.js'
 import { martShopItems } from '../data/items.js'
@@ -28,6 +29,11 @@ const NEXT_UNLOCK_LIMIT = 5
 /** @param {{ onOpenCatchSettings: () => void }} props */
 export function LocationPanel({ onOpenCatchSettings }) {
   const { state, dispatch } = useGame(),
+    // Which zone sub-area's wild table is expanded on the hub panel (only one
+    // at a time, so a 10+ area zone stays readable).
+    [expandedZoneArea, setExpandedZoneArea] = React.useState(
+      /** @type {string | null} */ (null)
+    ),
     unlockedNow = computeUnlockedLocations(state),
     unlockedNowSet = new Set(unlockedNow),
     location = mapData[state.currentLocation],
@@ -542,7 +548,8 @@ export function LocationPanel({ onOpenCatchSettings }) {
                           : requirement.label
                       )
                       .join(' \u00b7 '),
-                subAreaEncounters = encounterData[subArea.id]?.encounters
+                subAreaEncounters = encounterData[subArea.id]?.encounters,
+                expanded = expandedZoneArea === subArea.id
               return jsx(
                 'div',
                 {
@@ -565,10 +572,19 @@ export function LocationPanel({ onOpenCatchSettings }) {
                           : null,
                       ],
                     }),
-                    // Inline each open area's wild table on the hub, so the
-                    // player can compare habitats without travelling into
-                    // each one first.
+                    // Each open area's wild table can be expanded on the hub, so
+                    // its habitats can be compared without travelling into each
+                    // one first. Only one opens at a time.
                     subArea.unlocked && subAreaEncounters?.length
+                      ? jsx('button', {
+                          type: 'button',
+                          className: `zone-area-toggle${expanded ? ' open' : ''}`,
+                          'aria-expanded': expanded,
+                          onClick: () => setExpandedZoneArea(expanded ? null : subArea.id),
+                          children: expanded ? '▾ Hide wild Pokemon' : '▸ Show wild Pokemon',
+                        })
+                      : null,
+                    expanded && subArea.unlocked && subAreaEncounters?.length
                       ? jsx('div', {
                           className: 'zone-area-grid',
                           children: jsx(RouteEncounterGrid, {

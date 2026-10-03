@@ -218,7 +218,10 @@ and Paldea DLC started as zones and are now their own regions (#39).
 
 Still open:
 
-- [ ] More sub-areas (pairs with #28a/#28b).
+- [ ] More sub-areas (pairs with #28a/#28b). Galar's Wild Area is now complete
+      (11 habitats) via `tools/lib/zone-areas.cjs` + `apply-zone-areas.cjs`, and
+      sub-area wild tables are behind a Show/Hide toggle on the hub; other
+      zones (the DLC areas, Alola's islands) could use the same treatment.
 - [ ] Give each zone / area its own zoomed-in map view with a back button — see
       #60.
 

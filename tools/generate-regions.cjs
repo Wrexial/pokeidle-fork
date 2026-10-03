@@ -27,6 +27,7 @@ const { buildWildPool, collectProtectedSpecies, enrichEncounters } = require('./
 const { createTeamBuilder } = require('./lib/team-builder.cjs')
 const { deriveBiome } = require('./lib/biomes.cjs')
 const { ORDINARY_AREAS } = require('./lib/ordinary-areas.cjs')
+const { ZONE_AREAS } = require('./lib/zone-areas.cjs')
 
 const GEN_RANGES = [
   [1, 151], [152, 251], [252, 386], [387, 493], [494, 649],
@@ -2030,6 +2031,13 @@ const ZONES = {
     },
   ],
 }
+// Merge the shared extra-sub-area table (#36) into each zone before it is
+// created, so a fresh generation includes Galar's full Wild Area.
+for (const [regionId, zones] of Object.entries(ZONES))
+  for (const zone of zones) {
+    const extras = ZONE_AREAS[locId(regionId, zone.node)]
+    if (extras) zone.subAreas = [...zone.subAreas, ...extras]
+  }
 for (const [regionId, zones] of Object.entries(ZONES)) {
   const region = regions.find((candidate) => candidate.id === regionId)
   if (!region) continue

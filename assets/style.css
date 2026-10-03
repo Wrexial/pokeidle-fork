@@ -6529,6 +6529,105 @@ img {
 .battle-weather-badge.weather-snow,
 .battle-weather-badge.weather-hail { border-color: #a0e0ff }
 
+/* Battle-scene weather particles. One element, two pseudo-layers per weather
+   family; painted behind the combatants (sprites are z-index 10). */
+.battle-weather-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    overflow: hidden;
+    pointer-events: none
+}
+
+.battle-weather-overlay:before,.battle-weather-overlay:after {
+    content: "";
+    position: absolute;
+    inset: -25%
+}
+
+/* Rain: two diagonal streak layers drifting down and to the left. */
+.battle-weather-overlay.weather-rain:before,
+.battle-weather-overlay.weather-heavyRain:before {
+    background-image: repeating-linear-gradient(102deg,transparent 0 9px,rgba(190,220,255,.42) 9px 10px);
+    animation: weatherRain .55s linear infinite
+}
+
+.battle-weather-overlay.weather-rain:after,
+.battle-weather-overlay.weather-heavyRain:after {
+    background-image: repeating-linear-gradient(102deg,transparent 0 17px,rgba(215,238,255,.24) 17px 18px);
+    animation: weatherRain .85s linear infinite
+}
+
+.battle-weather-overlay.weather-heavyRain:before { animation-duration: .38s }
+
+@keyframes weatherRain {
+    from { background-position: 0 0 }
+    to { background-position: -54px 320px }
+}
+
+/* Snow / hail: two tiled radial-dot layers falling. */
+.battle-weather-overlay.weather-snow:before,
+.battle-weather-overlay.weather-hail:before {
+    background-image: radial-gradient(circle at 20% 0%,#fff 1.6px,transparent 2.2px),radial-gradient(circle at 70% 40%,#fff 1.2px,transparent 1.8px);
+    background-size: 110px 110px;
+    animation: weatherSnow 3s linear infinite
+}
+
+.battle-weather-overlay.weather-hail:before {
+    animation-duration: 1.3s;
+    opacity: .9
+}
+
+@keyframes weatherSnow {
+    from { background-position: 0 -110px }
+    to { background-position: 24px 110px }
+}
+
+/* Sandstorm: a drifting tan haze plus a fast streak layer. */
+.battle-weather-overlay.weather-sandstorm:before {
+    background: linear-gradient(90deg,rgba(214,188,120,.3),rgba(214,188,120,.06) 45%,rgba(214,188,120,.3));
+    animation: weatherSand 1.1s linear infinite
+}
+
+.battle-weather-overlay.weather-sandstorm:after {
+    background-image: repeating-linear-gradient(96deg,transparent 0 12px,rgba(232,212,150,.32) 12px 13px);
+    animation: weatherSand 1.7s linear infinite reverse
+}
+
+@keyframes weatherSand {
+    from { transform: translateX(-5%) }
+    to { transform: translateX(5%) }
+}
+
+/* Sun / harsh sunlight: a warm glow in the top-right that gently pulses. */
+.battle-weather-overlay.weather-sun:before,
+.battle-weather-overlay.weather-harshSunlight:before {
+    background: radial-gradient(circle at 78% 6%,rgba(255,240,160,.55),rgba(255,220,120,.14) 20%,transparent 46%);
+    animation: weatherSun 5s ease-in-out infinite
+}
+
+@keyframes weatherSun {
+    0%,to { opacity: .75 }
+    50% { opacity: 1 }
+}
+
+/* Strong winds: faint horizontal streaks sweeping across. */
+.battle-weather-overlay.weather-strongWinds:before {
+    background-image: repeating-linear-gradient(86deg,transparent 0 46px,rgba(220,240,255,.18) 46px 48px);
+    animation: weatherWind .6s linear infinite
+}
+
+@keyframes weatherWind {
+    from { transform: translateX(0) }
+    to { transform: translateX(76px) }
+}
+
+[data-reduced-motion=true] .battle-weather-overlay { display: none }
+
+@media (prefers-reduced-motion: reduce) {
+    .battle-weather-overlay { display: none }
+}
+
 .battle-top-buttons .battle-info-btn {
     position: static
 }

@@ -274,7 +274,14 @@ Data conventions:
   reference an `encounter-data/<region>.json` bucket via `routeKey`. Generated
   routes carry a `background` (biome, from the route name and its dominant
   wild type) that `battle-scene.js` uses for the wild battle scene; Kanto's
-  routes fall back to the hand-curated `locationImages` map in `ui.js`. Unlock rules support
+  routes fall back to the hand-curated `locationImages` map in `ui.js`.
+  `biomeForLocation` derives a biome from the name for a colour grade
+  (`BIOME_FILTERS`), and `biomeBackgroundFor` swaps in a dedicated
+  `/backgrounds/<biome>.png` when that biome is listed in `BIOME_SCENE_IMAGES`
+  (`src/data/ui.js`) — drop the painted art in and add the line to install it.
+  The battle scene also layers `BattleWeatherOverlay` (`battle-weather-overlay.js`):
+  CSS rain/sand/snow/sun/wind particles behind the combatants, hidden under
+  reduced motion. Unlock rules support
   `battlesAtLocation`, `caughtCount` (minimum Pokedex size), `caughtOnRoute`
   (catch some of the `species` that spawn only on `routeKey`, a route-specific,
   harder variant of `caughtCount`), `partyLevel`

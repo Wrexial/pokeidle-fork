@@ -8,11 +8,12 @@ import { MoveCategoryIcon } from './move-category-icon.js'
 import { moveTooltip } from '../game/move-info.js'
 import { dailyEventByKey } from '../data/daily-events.js'
 import { hasClaimableQuests } from '../game/quests.js'
-import { biomeForLocation, BIOME_FILTERS, DAY_NIGHT_FILTERS, locationImages } from '../data/ui.js'
+import { biomeBackgroundFor, biomeForLocation, BIOME_FILTERS, DAY_NIGHT_FILTERS, locationImages } from '../data/ui.js'
 import { useDayPhase } from '../hooks.js'
 import { shinyFullOddsChance } from '../data/config.js'
 import { getDexStatus, shouldOfferMasterBall } from '../game/catching.js'
 import { battleSpecies } from '../game/combat.js'
+import { BattleWeatherOverlay } from './battle-weather-overlay.js'
 import { isFemalePokemon } from '../game/breeding.js'
 import { WEATHER_ICONS, WEATHER_NAMES } from '../game/weather.js'
 import { TERRAIN_ICONS, TERRAIN_NAMES } from '../game/terrain.js'
@@ -159,16 +160,22 @@ export function BattleScene() {
         : null,
     playerFainted = lastFaintEvent?.data?.target === 'player',
     isTown = mapData[state.currentLocation]?.type === 'town',
+    townBattle = activeTrainerBattle || isTown,
     townBackground =
       {
         vermilionCity: '/backgrounds/town_port.png',
         cinnabarIsland: '/backgrounds/town_port.png',
         fuchsiaCity: '/backgrounds/town_port.png',
       }[state.currentLocation] || '/backgrounds/town.png',
+    // Wild routes can use dedicated biome art when it exists, otherwise their
+    // base scene plus the biome grade (see src/data/ui.js).
+    biomeScene = townBattle ? null : biomeBackgroundFor(mapData[state.currentLocation]),
+    battleBiome = townBattle ? 'town' : biomeForLocation(mapData[state.currentLocation]),
     battleBackground =
-      activeTrainerBattle || isTown
+      townBattle
         ? townBackground
-        : mapData[state.currentLocation]?.background ||
+        : biomeScene?.image ||
+          mapData[state.currentLocation]?.background ||
           locationImages[state.currentRoute] ||
           locationImages.route1
   // Manual battle mode: the loop waits for the player to pick a move or switch.
@@ -202,16 +209,15 @@ export function BattleScene() {
           backgroundImage: `url('${battleBackground}')`,
           filter:
             [
-              BIOME_FILTERS[
-                activeTrainerBattle || isTown
-                  ? 'town'
-                  : biomeForLocation(mapData[state.currentLocation])
-              ],
+              biomeScene ? 'none' : BIOME_FILTERS[battleBiome],
               DAY_NIGHT_FILTERS[dayPhase.id],
             ]
               .filter((part) => part && part !== 'none')
               .join(' ') || 'none',
         },
+      }),
+      jsx(BattleWeatherOverlay, {
+        weather: state.weather?.type,
       }),
       (state.weather || state.terrain) &&
         jsxs('div', {

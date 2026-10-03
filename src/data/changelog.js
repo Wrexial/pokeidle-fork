@@ -48,6 +48,7 @@ export const CHANGELOG = [
             'Recharge moves force a lost turn again — Hyper Beam, Giga Impact, Rock Wrecker, Roar of Time, Blast Burn, Hydro Cannon, Frenzy Plant, Prismatic Laser, Eternabeam and Meteor Assault. The recharge flag had been lost when the move data was rebuilt',
             'Many damaging moves regained the secondary effects the extraction missed: Thunder and Thunder Punch can paralyse, Psychic, Crunch, Bug Buzz, Focus Blast, Earth Power, Energy Ball, Moonblast, Play Rough, Iron Tail, Rock Smash, Liquidation, Aurora Beam, Shadow Ball, Flash Cannon and Seed Flare drop a stat, Muddy Water, Octazooka and Mirror Shot drop accuracy, and Metal Claw, Charge Beam, Meteor Mash, Fiery Dance, Diamond Storm, Ancient Power, Silver Wind and Ominous Wind can raise the user\u2019s own stats',
             'Fake Out only flinches on the user\u2019s first turn on the field, so it can no longer lock a foe down every turn; Poison Fang now badly poisons instead of plain poisoning; and Esper Wing raises Sp. Atk rather than Speed',
+            'Weather now plays out on the battlefield itself: rain streaks, a drifting sandstorm, falling snow or hail, a pulsing sun glare and sweeping strong winds move across the scene behind the combatants (they disappear when reduced motion is on)',
           ],
         },
         {
@@ -79,6 +80,7 @@ export const CHANGELOG = [
           heading: 'Fixes',
           items: [
             'The player guide now lists the correct shiny odds: base odds are 1 in 4,096 and the per-generation Shiny Charm runs from 1 in 2,048 for the first completed generation to 1 in 256 when all nine are done (it still said 1 in 8,192), and swarms last 256 battles rather than 50',
+            'A location whose name contains "fall" \u2014 a waterfall route, or Fallarbor Town \u2014 no longer makes the battle background tint as if it were autumn',
             'The guaranteed shiny is now Poke Radar-only: a run of ordinary wild encounters builds the odds multiplier again (1\u00d7 / 2\u00d7 / 3\u00d7 / 4\u00d7 at 40 / 80 / 120 in a row) but no longer forces a shiny, and a lucky ordinary shiny no longer raises the radar\u2019s next guaranteed-shiny target',
             'Alola and Paldea are playable again: starting in one (or opening it with an Unlock Token) now unlocks the entry island/province hub and its first area, instead of stranding the player because the hub asked for a Pokedex count they had no route to reach',
             'The Town Map no longer renders blank when you stand on a hidden zone sub-area (starting in Alola or Paldea): the camera focuses the entry island/province hub instead of empty space between nodes, so the map stays navigable',

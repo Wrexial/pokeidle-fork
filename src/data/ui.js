@@ -298,7 +298,8 @@ export const MOBILE_TABS = [
 /**
  * Per-biome colour grades applied over the battle background image, so the four
  * base scenes (grassland, beach, mountain, cave) read as forest, autumn, desert,
- * swamp, volcanic, tundra and so on. `none` keeps the image untouched.
+ * swamp, volcanic, tundra and so on. `none` keeps the image untouched. A biome
+ * with dedicated art in `BIOME_SCENE_IMAGES` skips its grade entirely.
  * @type {Record<string, string>}
  */
 export const BIOME_FILTERS = {
@@ -314,6 +315,37 @@ export const BIOME_FILTERS = {
   ruins: 'sepia(.5) brightness(.85)',
   mountain: 'saturate(.95) brightness(.95)',
   town: 'none',
+}
+
+/**
+ * Dedicated painted battle scenes, by biome. A biome with an entry here uses
+ * that image untouched instead of a base scene plus its colour grade, so
+ * dropping `public/backgrounds/<file>.png` in and un-commenting the line is all
+ * it takes — see `biomeBackgroundFor`. The tinted biomes still have no art yet,
+ * so their `BIOME_FILTERS` grades stand in.
+ * @type {Record<string, string>}
+ */
+export const BIOME_SCENE_IMAGES = {
+  // forest: '/backgrounds/forest.png',
+  // autumn: '/backgrounds/autumn.png',
+  // desert: '/backgrounds/desert.png',
+  // swamp: '/backgrounds/swamp.png',
+  // volcanic: '/backgrounds/volcano.png',
+  // tundra: '/backgrounds/tundra.png',
+}
+
+/**
+ * The dedicated scene for a location's biome, or null when it should fall back
+ * to its base scene plus the biome tint. `scenes` is injectable so the installed
+ * art set can be swapped (and tested) without touching the module constant.
+ * @param {MapLocation | undefined | null} location
+ * @param {Record<string, string>} [scenes]
+ * @returns {{ image: string, biome: string } | null}
+ */
+export function biomeBackgroundFor(location, scenes = BIOME_SCENE_IMAGES) {
+  const biome = biomeForLocation(location ?? void 0),
+    image = scenes[biome]
+  return image ? { image, biome } : null
 }
 
 /**
@@ -336,15 +368,15 @@ export const DAY_NIGHT_FILTERS = {
  */
 export function biomeForLocation(location) {
   const name = location?.name ?? ''
-  if (/forest|woods|grove|tangle|jungle/i.test(name)) return 'forest'
-  if (/autumn|fall/i.test(name)) return 'autumn'
-  if (/desert|sand|dune|wasteland/i.test(name)) return 'desert'
+  if (/forest|woods|wood|grove|tangle|thicket|jungle/i.test(name)) return 'forest'
+  if (/autumn/i.test(name)) return 'autumn'
+  if (/desert|sand|dune|wasteland|badlands/i.test(name)) return 'desert'
   if (/swamp|marsh|fen|bog|moor|wetland/i.test(name)) return 'swamp'
-  if (/volcan|ember|blaze|magma|cinder/i.test(name)) return 'volcanic'
-  if (/snow|ice|frost|glacier|tundra/i.test(name)) return 'tundra'
+  if (/volcan|ember|blaze|magma|cinder|lava/i.test(name)) return 'volcanic'
+  if (/snow|ice|frost|glacier|tundra|blizzard/i.test(name)) return 'tundra'
   if (/ruins|tower|temple|shrine|catacomb/i.test(name)) return 'ruins'
   if (/cave|cavern|tunnel|mine|grotto|depths|underground|well|sewer/i.test(name)) return 'cave'
-  if (/sea|ocean|beach|shore|bay|harbor|harbour|port|island|marine|coast|river|lake|pond|fall|rapid|strait|channel|dock/i.test(name))
+  if (/sea|ocean|beach|shore|bay|harbor|harbour|port|island|marine|coast|river|lake|pond|waterfall|falls|rapid|strait|channel|dock/i.test(name))
     return 'coast'
   if (/\bmt\b|mt\.|mount|peak|summit|highland|ridge|cliff|gorge|canyon|quarry|spire/i.test(name))
     return 'mountain'

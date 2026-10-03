@@ -18,7 +18,7 @@ const { createPokemon } = await import('../src/game/pokemon.js')
 
 test('fixed minigames live at their in-game locations', () => {
   assert.equal(MINIGAME_LOCATIONS.celadonCity, 'gameCorner')
-  assert.equal(MINIGAME_LOCATIONS['johto-route-35'], 'bugContest')
+  assert.equal(MINIGAME_LOCATIONS['johto-national-park'], 'bugContest')
   assert.equal(MINIGAME_LOCATIONS['sinnoh-eterna-city'], 'mining')
   for (const locationId of Object.keys(MINIGAME_LOCATIONS))
     assert.ok(gameData.mapData[locationId], `${locationId} should be a real location`)

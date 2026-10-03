@@ -96,6 +96,13 @@
     "minLevel": 7,
     "maxLevel": 9,
     "variety": true
+   },
+   {
+    "speciesKey": "geodude",
+    "weight": 8,
+    "minLevel": 7,
+    "maxLevel": 9,
+    "variety": true
    }
   ]
  },
@@ -3446,6 +3453,55 @@
     "weight": 6,
     "minLevel": 14,
     "maxLevel": 16
+   },
+   {
+    "speciesKey": "hoothoot",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
+   },
+   {
+    "speciesKey": "aipom",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
+   },
+   {
+    "speciesKey": "beautifly",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
+   },
+   {
+    "speciesKey": "dustox",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
+   },
+   {
+    "speciesKey": "starly",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
+   },
+   {
+    "speciesKey": "kricketot",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
+   },
+   {
+    "speciesKey": "kricketune",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
    }
   ]
  },
@@ -3499,6 +3555,62 @@
     "weight": 12,
     "minLevel": 24,
     "maxLevel": 26
+   },
+   {
+    "speciesKey": "unown",
+    "weight": 8,
+    "minLevel": 24,
+    "maxLevel": 26,
+    "variety": true
+   },
+   {
+    "speciesKey": "ralts",
+    "weight": 8,
+    "minLevel": 24,
+    "maxLevel": 26,
+    "variety": true
+   },
+   {
+    "speciesKey": "mimeJR",
+    "weight": 8,
+    "minLevel": 24,
+    "maxLevel": 26,
+    "variety": true
+   },
+   {
+    "speciesKey": "magnemite",
+    "weight": 8,
+    "minLevel": 24,
+    "maxLevel": 26,
+    "variety": true
+   },
+   {
+    "speciesKey": "gastly",
+    "weight": 8,
+    "minLevel": 24,
+    "maxLevel": 26,
+    "variety": true
+   },
+   {
+    "speciesKey": "hoothoot",
+    "weight": 8,
+    "minLevel": 24,
+    "maxLevel": 26,
+    "variety": true
+   },
+   {
+    "speciesKey": "murkrow",
+    "weight": 8,
+    "minLevel": 24,
+    "maxLevel": 26,
+    "variety": true
+   },
+   {
+    "speciesKey": "slugma",
+    "weight": 8,
+    "minLevel": 24,
+    "maxLevel": 26,
+    "variety": true
    }
   ]
  },
@@ -3528,6 +3640,90 @@
     "weight": 12,
     "minLevel": 19,
     "maxLevel": 21
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 8,
+    "minLevel": 19,
+    "maxLevel": 21,
+    "variety": true
+   },
+   {
+    "speciesKey": "gastly",
+    "weight": 8,
+    "minLevel": 19,
+    "maxLevel": 21,
+    "variety": true
+   },
+   {
+    "speciesKey": "hoothoot",
+    "weight": 8,
+    "minLevel": 19,
+    "maxLevel": 21,
+    "variety": true
+   },
+   {
+    "speciesKey": "murkrow",
+    "weight": 8,
+    "minLevel": 19,
+    "maxLevel": 21,
+    "variety": true
+   },
+   {
+    "speciesKey": "gligar",
+    "weight": 8,
+    "minLevel": 19,
+    "maxLevel": 21,
+    "variety": true
+   },
+   {
+    "speciesKey": "beautifly",
+    "weight": 8,
+    "minLevel": 19,
+    "maxLevel": 21,
+    "variety": true
+   },
+   {
+    "speciesKey": "dustox",
+    "weight": 8,
+    "minLevel": 19,
+    "maxLevel": 21,
+    "variety": true
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 8,
+    "minLevel": 19,
+    "maxLevel": 21,
+    "variety": true
+   },
+   {
+    "speciesKey": "roselia",
+    "weight": 8,
+    "minLevel": 19,
+    "maxLevel": 21,
+    "variety": true
+   },
+   {
+    "speciesKey": "starly",
+    "weight": 8,
+    "minLevel": 19,
+    "maxLevel": 21,
+    "variety": true
+   },
+   {
+    "speciesKey": "staravia",
+    "weight": 8,
+    "minLevel": 19,
+    "maxLevel": 21,
+    "variety": true
+   },
+   {
+    "speciesKey": "stunky",
+    "weight": 8,
+    "minLevel": 19,
+    "maxLevel": 21,
+    "variety": true
    }
   ]
  },
@@ -3563,6 +3759,83 @@
     "weight": 12,
     "minLevel": 18,
     "maxLevel": 20
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 8,
+    "minLevel": 18,
+    "maxLevel": 20,
+    "variety": true
+   },
+   {
+    "speciesKey": "gastly",
+    "weight": 8,
+    "minLevel": 18,
+    "maxLevel": 20,
+    "variety": true
+   },
+   {
+    "speciesKey": "gligar",
+    "weight": 8,
+    "minLevel": 18,
+    "maxLevel": 20,
+    "variety": true
+   },
+   {
+    "speciesKey": "dustox",
+    "weight": 8,
+    "minLevel": 18,
+    "maxLevel": 20,
+    "variety": true
+   },
+   {
+    "speciesKey": "roselia",
+    "weight": 8,
+    "minLevel": 18,
+    "maxLevel": 20,
+    "variety": true
+   },
+   {
+    "speciesKey": "barboach",
+    "weight": 8,
+    "minLevel": 18,
+    "maxLevel": 20,
+    "variety": true
+   },
+   {
+    "speciesKey": "stunky",
+    "weight": 8,
+    "minLevel": 18,
+    "maxLevel": 20,
+    "variety": true
+   },
+   {
+    "speciesKey": "abra",
+    "weight": 8,
+    "minLevel": 18,
+    "maxLevel": 20,
+    "variety": true
+   },
+   {
+    "speciesKey": "magnemite",
+    "weight": 8,
+    "minLevel": 18,
+    "maxLevel": 20,
+    "variety": true
+   },
+   {
+    "speciesKey": "hoothoot",
+    "weight": 8,
+    "minLevel": 18,
+    "maxLevel": 20,
+    "variety": true
+   },
+   {
+    "speciesKey": "aipom",
+    "weight": 8,
+    "minLevel": 18,
+    "maxLevel": 20,
+    "variety": true
    }
   ]
  },
@@ -3592,6 +3865,90 @@
     "weight": 12,
     "minLevel": 26,
     "maxLevel": 28
+   },
+   {
+    "speciesKey": "abra",
+    "weight": 8,
+    "minLevel": 26,
+    "maxLevel": 28,
+    "variety": true
+   },
+   {
+    "speciesKey": "graveler",
+    "weight": 8,
+    "minLevel": 26,
+    "maxLevel": 28,
+    "variety": true
+   },
+   {
+    "speciesKey": "ralts",
+    "weight": 8,
+    "minLevel": 26,
+    "maxLevel": 28,
+    "variety": true
+   },
+   {
+    "speciesKey": "mimeJR",
+    "weight": 8,
+    "minLevel": 26,
+    "maxLevel": 28,
+    "variety": true
+   },
+   {
+    "speciesKey": "zubat",
+    "weight": 8,
+    "minLevel": 26,
+    "maxLevel": 28,
+    "variety": true
+   },
+   {
+    "speciesKey": "machop",
+    "weight": 8,
+    "minLevel": 26,
+    "maxLevel": 28,
+    "variety": true
+   },
+   {
+    "speciesKey": "magnemite",
+    "weight": 8,
+    "minLevel": 26,
+    "maxLevel": 28,
+    "variety": true
+   },
+   {
+    "speciesKey": "gastly",
+    "weight": 8,
+    "minLevel": 26,
+    "maxLevel": 28,
+    "variety": true
+   },
+   {
+    "speciesKey": "hoothoot",
+    "weight": 8,
+    "minLevel": 26,
+    "maxLevel": 28,
+    "variety": true
+   },
+   {
+    "speciesKey": "murkrow",
+    "weight": 8,
+    "minLevel": 26,
+    "maxLevel": 28,
+    "variety": true
+   },
+   {
+    "speciesKey": "slugma",
+    "weight": 8,
+    "minLevel": 26,
+    "maxLevel": 28,
+    "variety": true
+   },
+   {
+    "speciesKey": "beautifly",
+    "weight": 8,
+    "minLevel": 26,
+    "maxLevel": 28,
+    "variety": true
    }
   ]
  },
@@ -3627,6 +3984,83 @@
     "weight": 12,
     "minLevel": 45,
     "maxLevel": 47
+   },
+   {
+    "speciesKey": "graveler",
+    "weight": 8,
+    "minLevel": 45,
+    "maxLevel": 47,
+    "variety": true
+   },
+   {
+    "speciesKey": "rhyhorn",
+    "weight": 8,
+    "minLevel": 45,
+    "maxLevel": 47,
+    "variety": true
+   },
+   {
+    "speciesKey": "sudowoodo",
+    "weight": 8,
+    "minLevel": 45,
+    "maxLevel": 47,
+    "variety": true
+   },
+   {
+    "speciesKey": "wooper",
+    "weight": 8,
+    "minLevel": 45,
+    "maxLevel": 47,
+    "variety": true
+   },
+   {
+    "speciesKey": "quagsire",
+    "weight": 8,
+    "minLevel": 45,
+    "maxLevel": 47,
+    "variety": true
+   },
+   {
+    "speciesKey": "gligar",
+    "weight": 8,
+    "minLevel": 45,
+    "maxLevel": 47,
+    "variety": true
+   },
+   {
+    "speciesKey": "barboach",
+    "weight": 8,
+    "minLevel": 45,
+    "maxLevel": 47,
+    "variety": true
+   },
+   {
+    "speciesKey": "whiscash",
+    "weight": 8,
+    "minLevel": 45,
+    "maxLevel": 47,
+    "variety": true
+   },
+   {
+    "speciesKey": "gastrodon",
+    "weight": 8,
+    "minLevel": 45,
+    "maxLevel": 47,
+    "variety": true
+   },
+   {
+    "speciesKey": "gible",
+    "weight": 8,
+    "minLevel": 45,
+    "maxLevel": 47,
+    "variety": true
+   },
+   {
+    "speciesKey": "machoke",
+    "weight": 8,
+    "minLevel": 45,
+    "maxLevel": 47,
+    "variety": true
    }
   ]
  },
@@ -3662,6 +4096,83 @@
     "weight": 12,
     "minLevel": 43,
     "maxLevel": 45
+   },
+   {
+    "speciesKey": "murkrow",
+    "weight": 8,
+    "minLevel": 43,
+    "maxLevel": 45,
+    "variety": true
+   },
+   {
+    "speciesKey": "houndour",
+    "weight": 8,
+    "minLevel": 43,
+    "maxLevel": 45,
+    "variety": true
+   },
+   {
+    "speciesKey": "sharpedo",
+    "weight": 8,
+    "minLevel": 43,
+    "maxLevel": 45,
+    "variety": true
+   },
+   {
+    "speciesKey": "stunky",
+    "weight": 8,
+    "minLevel": 43,
+    "maxLevel": 45,
+    "variety": true
+   },
+   {
+    "speciesKey": "spiritomb",
+    "weight": 8,
+    "minLevel": 43,
+    "maxLevel": 45,
+    "variety": true
+   },
+   {
+    "speciesKey": "zubat",
+    "weight": 8,
+    "minLevel": 43,
+    "maxLevel": 45,
+    "variety": true
+   },
+   {
+    "speciesKey": "abra",
+    "weight": 8,
+    "minLevel": 43,
+    "maxLevel": 45,
+    "variety": true
+   },
+   {
+    "speciesKey": "kadabra",
+    "weight": 8,
+    "minLevel": 43,
+    "maxLevel": 45,
+    "variety": true
+   },
+   {
+    "speciesKey": "machop",
+    "weight": 8,
+    "minLevel": 43,
+    "maxLevel": 45,
+    "variety": true
+   },
+   {
+    "speciesKey": "machoke",
+    "weight": 8,
+    "minLevel": 43,
+    "maxLevel": 45,
+    "variety": true
+   },
+   {
+    "speciesKey": "geodude",
+    "weight": 8,
+    "minLevel": 43,
+    "maxLevel": 45,
+    "variety": true
    }
   ]
  },
@@ -3697,6 +4208,83 @@
     "weight": 12,
     "minLevel": 67,
     "maxLevel": 69
+   },
+   {
+    "speciesKey": "camerupt",
+    "weight": 8,
+    "minLevel": 67,
+    "maxLevel": 69,
+    "variety": true
+   },
+   {
+    "speciesKey": "diglett",
+    "weight": 8,
+    "minLevel": 67,
+    "maxLevel": 69,
+    "variety": true
+   },
+   {
+    "speciesKey": "dugtrio",
+    "weight": 8,
+    "minLevel": 67,
+    "maxLevel": 69,
+    "variety": true
+   },
+   {
+    "speciesKey": "geodude",
+    "weight": 8,
+    "minLevel": 67,
+    "maxLevel": 69,
+    "variety": true
+   },
+   {
+    "speciesKey": "graveler",
+    "weight": 8,
+    "minLevel": 67,
+    "maxLevel": 69,
+    "variety": true
+   },
+   {
+    "speciesKey": "onix",
+    "weight": 8,
+    "minLevel": 67,
+    "maxLevel": 69,
+    "variety": true
+   },
+   {
+    "speciesKey": "rhydon",
+    "weight": 8,
+    "minLevel": 67,
+    "maxLevel": 69,
+    "variety": true
+   },
+   {
+    "speciesKey": "wooper",
+    "weight": 8,
+    "minLevel": 67,
+    "maxLevel": 69,
+    "variety": true
+   },
+   {
+    "speciesKey": "quagsire",
+    "weight": 8,
+    "minLevel": 67,
+    "maxLevel": 69,
+    "variety": true
+   },
+   {
+    "speciesKey": "gligar",
+    "weight": 8,
+    "minLevel": 67,
+    "maxLevel": 69,
+    "variety": true
+   },
+   {
+    "speciesKey": "houndour",
+    "weight": 8,
+    "minLevel": 67,
+    "maxLevel": 69,
+    "variety": true
    }
   ]
  },
@@ -3726,6 +4314,55 @@
     "weight": 12,
     "minLevel": 7,
     "maxLevel": 9
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 8,
+    "minLevel": 7,
+    "maxLevel": 9,
+    "variety": true
+   },
+   {
+    "speciesKey": "zubat",
+    "weight": 8,
+    "minLevel": 7,
+    "maxLevel": 9,
+    "variety": true
+   },
+   {
+    "speciesKey": "abra",
+    "weight": 8,
+    "minLevel": 7,
+    "maxLevel": 9,
+    "variety": true
+   },
+   {
+    "speciesKey": "geodude",
+    "weight": 8,
+    "minLevel": 7,
+    "maxLevel": 9,
+    "variety": true
+   },
+   {
+    "speciesKey": "wurmple",
+    "weight": 8,
+    "minLevel": 7,
+    "maxLevel": 9,
+    "variety": true
+   },
+   {
+    "speciesKey": "kricketot",
+    "weight": 8,
+    "minLevel": 7,
+    "maxLevel": 9,
+    "variety": true
+   },
+   {
+    "speciesKey": "shinx",
+    "weight": 8,
+    "minLevel": 7,
+    "maxLevel": 9,
+    "variety": true
    }
   ]
  },
@@ -3755,6 +4392,90 @@
     "weight": 12,
     "minLevel": 43,
     "maxLevel": 45
+   },
+   {
+    "speciesKey": "golduck",
+    "weight": 8,
+    "minLevel": 43,
+    "maxLevel": 45,
+    "variety": true
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 8,
+    "minLevel": 43,
+    "maxLevel": 45,
+    "variety": true
+   },
+   {
+    "speciesKey": "tentacruel",
+    "weight": 8,
+    "minLevel": 43,
+    "maxLevel": 45,
+    "variety": true
+   },
+   {
+    "speciesKey": "shellder",
+    "weight": 8,
+    "minLevel": 43,
+    "maxLevel": 45,
+    "variety": true
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 8,
+    "minLevel": 43,
+    "maxLevel": 45,
+    "variety": true
+   },
+   {
+    "speciesKey": "seaking",
+    "weight": 8,
+    "minLevel": 43,
+    "maxLevel": 45,
+    "variety": true
+   },
+   {
+    "speciesKey": "gyarados",
+    "weight": 8,
+    "minLevel": 43,
+    "maxLevel": 45,
+    "variety": true
+   },
+   {
+    "speciesKey": "marill",
+    "weight": 8,
+    "minLevel": 43,
+    "maxLevel": 45,
+    "variety": true
+   },
+   {
+    "speciesKey": "wooper",
+    "weight": 8,
+    "minLevel": 43,
+    "maxLevel": 45,
+    "variety": true
+   },
+   {
+    "speciesKey": "quagsire",
+    "weight": 8,
+    "minLevel": 43,
+    "maxLevel": 45,
+    "variety": true
+   },
+   {
+    "speciesKey": "remoraid",
+    "weight": 8,
+    "minLevel": 43,
+    "maxLevel": 45,
+    "variety": true
+   },
+   {
+    "speciesKey": "octillery",
+    "weight": 8,
+    "minLevel": 43,
+    "maxLevel": 45,
+    "variety": true
    }
   ]
  },
@@ -3778,6 +4499,97 @@
     "weight": 20,
     "minLevel": 33,
     "maxLevel": 35
+   },
+   {
+    "speciesKey": "bibarel",
+    "weight": 8,
+    "minLevel": 33,
+    "maxLevel": 35,
+    "variety": true
+   },
+   {
+    "speciesKey": "golduck",
+    "weight": 8,
+    "minLevel": 33,
+    "maxLevel": 35,
+    "variety": true
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 8,
+    "minLevel": 33,
+    "maxLevel": 35,
+    "variety": true
+   },
+   {
+    "speciesKey": "tentacruel",
+    "weight": 8,
+    "minLevel": 33,
+    "maxLevel": 35,
+    "variety": true
+   },
+   {
+    "speciesKey": "shellder",
+    "weight": 8,
+    "minLevel": 33,
+    "maxLevel": 35,
+    "variety": true
+   },
+   {
+    "speciesKey": "lickitung",
+    "weight": 8,
+    "minLevel": 33,
+    "maxLevel": 35,
+    "variety": true
+   },
+   {
+    "speciesKey": "chansey",
+    "weight": 8,
+    "minLevel": 33,
+    "maxLevel": 35,
+    "variety": true
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 8,
+    "minLevel": 33,
+    "maxLevel": 35,
+    "variety": true
+   },
+   {
+    "speciesKey": "seaking",
+    "weight": 8,
+    "minLevel": 33,
+    "maxLevel": 35,
+    "variety": true
+   },
+   {
+    "speciesKey": "gyarados",
+    "weight": 8,
+    "minLevel": 33,
+    "maxLevel": 35,
+    "variety": true
+   },
+   {
+    "speciesKey": "hoothoot",
+    "weight": 8,
+    "minLevel": 33,
+    "maxLevel": 35,
+    "variety": true
+   },
+   {
+    "speciesKey": "noctowl",
+    "weight": 8,
+    "minLevel": 33,
+    "maxLevel": 35,
+    "variety": true
+   },
+   {
+    "speciesKey": "marill",
+    "weight": 8,
+    "minLevel": 33,
+    "maxLevel": 35,
+    "variety": true
    }
   ]
  },
@@ -3795,6 +4607,104 @@
     "weight": 20,
     "minLevel": 14,
     "maxLevel": 16
+   },
+   {
+    "speciesKey": "zubat",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
+   },
+   {
+    "speciesKey": "dustox",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
+   },
+   {
+    "speciesKey": "stunky",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
+   },
+   {
+    "speciesKey": "abra",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
+   },
+   {
+    "speciesKey": "machop",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
+   },
+   {
+    "speciesKey": "geodude",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
+   },
+   {
+    "speciesKey": "magnemite",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
+   },
+   {
+    "speciesKey": "hoothoot",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
+   },
+   {
+    "speciesKey": "aipom",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
+   },
+   {
+    "speciesKey": "murkrow",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
+   },
+   {
+    "speciesKey": "slugma",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
+   },
+   {
+    "speciesKey": "wurmple",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
+   },
+   {
+    "speciesKey": "beautifly",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
    }
   ]
  },
@@ -3830,6 +4740,83 @@
     "weight": 12,
     "minLevel": 46,
     "maxLevel": 48
+   },
+   {
+    "speciesKey": "abra",
+    "weight": 8,
+    "minLevel": 46,
+    "maxLevel": 48,
+    "variety": true
+   },
+   {
+    "speciesKey": "kadabra",
+    "weight": 8,
+    "minLevel": 46,
+    "maxLevel": 48,
+    "variety": true
+   },
+   {
+    "speciesKey": "gastly",
+    "weight": 8,
+    "minLevel": 46,
+    "maxLevel": 48,
+    "variety": true
+   },
+   {
+    "speciesKey": "mrMime",
+    "weight": 8,
+    "minLevel": 46,
+    "maxLevel": 48,
+    "variety": true
+   },
+   {
+    "speciesKey": "misdreavus",
+    "weight": 8,
+    "minLevel": 46,
+    "maxLevel": 48,
+    "variety": true
+   },
+   {
+    "speciesKey": "unown",
+    "weight": 8,
+    "minLevel": 46,
+    "maxLevel": 48,
+    "variety": true
+   },
+   {
+    "speciesKey": "girafarig",
+    "weight": 8,
+    "minLevel": 46,
+    "maxLevel": 48,
+    "variety": true
+   },
+   {
+    "speciesKey": "ralts",
+    "weight": 8,
+    "minLevel": 46,
+    "maxLevel": 48,
+    "variety": true
+   },
+   {
+    "speciesKey": "meditite",
+    "weight": 8,
+    "minLevel": 46,
+    "maxLevel": 48,
+    "variety": true
+   },
+   {
+    "speciesKey": "mimeJR",
+    "weight": 8,
+    "minLevel": 46,
+    "maxLevel": 48,
+    "variety": true
+   },
+   {
+    "speciesKey": "spiritomb",
+    "weight": 8,
+    "minLevel": 46,
+    "maxLevel": 48,
+    "variety": true
    }
   ]
  },
@@ -3859,6 +4846,90 @@
     "weight": 12,
     "minLevel": 11,
     "maxLevel": 13
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 8,
+    "minLevel": 11,
+    "maxLevel": 13,
+    "variety": true
+   },
+   {
+    "speciesKey": "gastly",
+    "weight": 8,
+    "minLevel": 11,
+    "maxLevel": 13,
+    "variety": true
+   },
+   {
+    "speciesKey": "hoothoot",
+    "weight": 8,
+    "minLevel": 11,
+    "maxLevel": 13,
+    "variety": true
+   },
+   {
+    "speciesKey": "murkrow",
+    "weight": 8,
+    "minLevel": 11,
+    "maxLevel": 13,
+    "variety": true
+   },
+   {
+    "speciesKey": "gligar",
+    "weight": 8,
+    "minLevel": 11,
+    "maxLevel": 13,
+    "variety": true
+   },
+   {
+    "speciesKey": "beautifly",
+    "weight": 8,
+    "minLevel": 11,
+    "maxLevel": 13,
+    "variety": true
+   },
+   {
+    "speciesKey": "dustox",
+    "weight": 8,
+    "minLevel": 11,
+    "maxLevel": 13,
+    "variety": true
+   },
+   {
+    "speciesKey": "wingull",
+    "weight": 8,
+    "minLevel": 11,
+    "maxLevel": 13,
+    "variety": true
+   },
+   {
+    "speciesKey": "starly",
+    "weight": 8,
+    "minLevel": 11,
+    "maxLevel": 13,
+    "variety": true
+   },
+   {
+    "speciesKey": "stunky",
+    "weight": 8,
+    "minLevel": 11,
+    "maxLevel": 13,
+    "variety": true
+   },
+   {
+    "speciesKey": "abra",
+    "weight": 8,
+    "minLevel": 11,
+    "maxLevel": 13,
+    "variety": true
+   },
+   {
+    "speciesKey": "machop",
+    "weight": 8,
+    "minLevel": 11,
+    "maxLevel": 13,
+    "variety": true
    }
   ]
  },
@@ -3882,6 +4953,97 @@
     "weight": 20,
     "minLevel": 14,
     "maxLevel": 16
+   },
+   {
+    "speciesKey": "shinx",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
+   },
+   {
+    "speciesKey": "pachirisu",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
+   },
+   {
+    "speciesKey": "bronzor",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
+   },
+   {
+    "speciesKey": "zubat",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
+   },
+   {
+    "speciesKey": "abra",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
+   },
+   {
+    "speciesKey": "machop",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
+   },
+   {
+    "speciesKey": "gastly",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
+   },
+   {
+    "speciesKey": "hoothoot",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
+   },
+   {
+    "speciesKey": "aipom",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
+   },
+   {
+    "speciesKey": "murkrow",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
+   },
+   {
+    "speciesKey": "wurmple",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
+   },
+   {
+    "speciesKey": "beautifly",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
+   },
+   {
+    "speciesKey": "dustox",
+    "weight": 8,
+    "minLevel": 14,
+    "maxLevel": 16,
+    "variety": true
    }
   ]
  },
@@ -3905,6 +5067,97 @@
     "weight": 20,
     "minLevel": 31,
     "maxLevel": 33
+   },
+   {
+    "speciesKey": "zubat",
+    "weight": 8,
+    "minLevel": 31,
+    "maxLevel": 33,
+    "variety": true
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 8,
+    "minLevel": 31,
+    "maxLevel": 33,
+    "variety": true
+   },
+   {
+    "speciesKey": "tentacruel",
+    "weight": 8,
+    "minLevel": 31,
+    "maxLevel": 33,
+    "variety": true
+   },
+   {
+    "speciesKey": "dustox",
+    "weight": 8,
+    "minLevel": 31,
+    "maxLevel": 33,
+    "variety": true
+   },
+   {
+    "speciesKey": "roselia",
+    "weight": 8,
+    "minLevel": 31,
+    "maxLevel": 33,
+    "variety": true
+   },
+   {
+    "speciesKey": "duskull",
+    "weight": 8,
+    "minLevel": 31,
+    "maxLevel": 33,
+    "variety": true
+   },
+   {
+    "speciesKey": "stunky",
+    "weight": 8,
+    "minLevel": 31,
+    "maxLevel": 33,
+    "variety": true
+   },
+   {
+    "speciesKey": "spiritomb",
+    "weight": 8,
+    "minLevel": 31,
+    "maxLevel": 33,
+    "variety": true
+   },
+   {
+    "speciesKey": "croagunk",
+    "weight": 8,
+    "minLevel": 31,
+    "maxLevel": 33,
+    "variety": true
+   },
+   {
+    "speciesKey": "abra",
+    "weight": 8,
+    "minLevel": 31,
+    "maxLevel": 33,
+    "variety": true
+   },
+   {
+    "speciesKey": "machop",
+    "weight": 8,
+    "minLevel": 31,
+    "maxLevel": 33,
+    "variety": true
+   },
+   {
+    "speciesKey": "machoke",
+    "weight": 8,
+    "minLevel": 31,
+    "maxLevel": 33,
+    "variety": true
+   },
+   {
+    "speciesKey": "geodude",
+    "weight": 8,
+    "minLevel": 31,
+    "maxLevel": 33,
+    "variety": true
    }
   ]
  },
@@ -3928,6 +5181,97 @@
     "weight": 20,
     "minLevel": 46,
     "maxLevel": 48
+   },
+   {
+    "speciesKey": "golduck",
+    "weight": 8,
+    "minLevel": 46,
+    "maxLevel": 48,
+    "variety": true
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 8,
+    "minLevel": 46,
+    "maxLevel": 48,
+    "variety": true
+   },
+   {
+    "speciesKey": "tentacruel",
+    "weight": 8,
+    "minLevel": 46,
+    "maxLevel": 48,
+    "variety": true
+   },
+   {
+    "speciesKey": "magnemite",
+    "weight": 8,
+    "minLevel": 46,
+    "maxLevel": 48,
+    "variety": true
+   },
+   {
+    "speciesKey": "shellder",
+    "weight": 8,
+    "minLevel": 46,
+    "maxLevel": 48,
+    "variety": true
+   },
+   {
+    "speciesKey": "seaking",
+    "weight": 8,
+    "minLevel": 46,
+    "maxLevel": 48,
+    "variety": true
+   },
+   {
+    "speciesKey": "magikarp",
+    "weight": 8,
+    "minLevel": 46,
+    "maxLevel": 48,
+    "variety": true
+   },
+   {
+    "speciesKey": "gyarados",
+    "weight": 8,
+    "minLevel": 46,
+    "maxLevel": 48,
+    "variety": true
+   },
+   {
+    "speciesKey": "chinchou",
+    "weight": 8,
+    "minLevel": 46,
+    "maxLevel": 48,
+    "variety": true
+   },
+   {
+    "speciesKey": "lanturn",
+    "weight": 8,
+    "minLevel": 46,
+    "maxLevel": 48,
+    "variety": true
+   },
+   {
+    "speciesKey": "marill",
+    "weight": 8,
+    "minLevel": 46,
+    "maxLevel": 48,
+    "variety": true
+   },
+   {
+    "speciesKey": "wooper",
+    "weight": 8,
+    "minLevel": 46,
+    "maxLevel": 48,
+    "variety": true
+   },
+   {
+    "speciesKey": "quagsire",
+    "weight": 8,
+    "minLevel": 46,
+    "maxLevel": 48,
+    "variety": true
    }
   ]
  }

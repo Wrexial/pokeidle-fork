@@ -778,36 +778,32 @@ export function TownMap() {
               }),
               jsxs('svg', {
                 className: 'town-map-svg',
+                viewBox: '0 0 100 100',
+                preserveAspectRatio: 'none',
                 children: [
                   roads.map(({ from: fromId, to: toId }) => {
                     const roadClass = `map-road-border${unlockedLocations.includes(fromId) && unlockedLocations.includes(toId) ? ' unlocked' : ' locked'}`
-                    return createRoads(fromId, toId).map((segment, segmentIndex) =>
+                    return createRoads(fromId, toId).map((segment) =>
                       jsx(
-                        'line',
+                        'path',
                         {
-                          x1: `${segment.x1}%`,
-                          y1: `${segment.y1}%`,
-                          x2: `${segment.x2}%`,
-                          y2: `${segment.y2}%`,
+                          d: segment.d,
                           className: roadClass,
                         },
-                        `border-${fromId}-${toId}-${segmentIndex}`
+                        `border-${fromId}-${toId}`
                       )
                     )
                   }),
                   roads.map(({ from: fromId, to: toId }) => {
                     const roadClass = `map-road-fill${unlockedLocations.includes(fromId) && unlockedLocations.includes(toId) ? ' unlocked' : ' locked'}`
-                    return createRoads(fromId, toId).map((segment, segmentIndex) =>
+                    return createRoads(fromId, toId).map((segment) =>
                       jsx(
-                        'line',
+                        'path',
                         {
-                          x1: `${segment.x1}%`,
-                          y1: `${segment.y1}%`,
-                          x2: `${segment.x2}%`,
-                          y2: `${segment.y2}%`,
+                          d: segment.d,
                           className: roadClass,
                         },
-                        `fill-${fromId}-${toId}-${segmentIndex}`
+                        `fill-${fromId}-${toId}`
                       )
                     )
                   }),

@@ -3525,28 +3525,32 @@ img {
 
 .map-road-border.unlocked {
     stroke: #7a5a30;
-    stroke-width: 10;
-    stroke-linecap: round
+    stroke-width: .833;
+    stroke-linecap: round;
+    fill: none
 }
 
 .map-road-border.locked {
     stroke: #a09070;
-    stroke-width: 5;
+    stroke-width: .417;
     stroke-linecap: round;
+    fill: none;
     opacity: .15
 }
 
 .map-road-fill.unlocked {
     stroke: #a08040;
-    stroke-width: 5;
-    stroke-linecap: round
+    stroke-width: .417;
+    stroke-linecap: round;
+    fill: none
 }
 
 .map-road-fill.locked {
     stroke: #b0a080;
-    stroke-width: 2.5;
+    stroke-width: .208;
     stroke-linecap: round;
-    stroke-dasharray: 4,8;
+    fill: none;
+    stroke-dasharray: .333,.667;
     opacity: .15
 }
 

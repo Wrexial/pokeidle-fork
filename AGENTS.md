@@ -367,7 +367,10 @@ Data conventions:
   the expand button on an unlocked zone/DLC hub sets `focusZone`, which swaps
   `activeLocationIds` for the hub plus its (hidden) sub-areas, fits their
   bounding box and shows a “← Region map” bar. Region tabs are hidden while
-  focused; hidden sub-areas are travelable from the focused canvas.
+  focused; hidden sub-areas are travelable from the focused canvas. Roads are
+  quadratic curves with a deterministic per-edge bow (`createRoads` in
+  `src/game/progression/roads.js`) rather than right-angle elbows, so parallel
+  connectors between nearby nodes no longer overlap.
 - Some regions' scraped force-directed layout doesn't match the real map, so
   `REGION_MAP_LAYOUTS` in `generate-regions.cjs` overrides it with
   hand-measured coordinates from a labelled reference map. Every region except

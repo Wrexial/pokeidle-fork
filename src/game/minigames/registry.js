@@ -32,7 +32,7 @@ import { MINING_COST, MINING_DIGS } from './mining.js'
  */
 export const MINIGAME_LOCATIONS = {
   celadonCity: 'gameCorner',
-  'johto-route-35': 'bugContest',
+  'johto-national-park': 'bugContest',
   'sinnoh-eterna-city': 'mining',
   safariZone: 'safari',
   'paldea-mesagoza': 'academyQuiz',

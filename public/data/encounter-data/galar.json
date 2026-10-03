@@ -195,6 +195,13 @@
     "minLevel": 13,
     "maxLevel": 15,
     "variety": true
+   },
+   {
+    "speciesKey": "g-zigzagoon",
+    "weight": 8,
+    "minLevel": 13,
+    "maxLevel": 15,
+    "variety": true
    }
   ]
  },
@@ -1915,6 +1922,55 @@
     "weight": 6,
     "minLevel": 43,
     "maxLevel": 45
+   },
+   {
+    "speciesKey": "machop",
+    "weight": 8,
+    "minLevel": 43,
+    "maxLevel": 45,
+    "variety": true
+   },
+   {
+    "speciesKey": "ferroseed",
+    "weight": 8,
+    "minLevel": 43,
+    "maxLevel": 45,
+    "variety": true
+   },
+   {
+    "speciesKey": "klink",
+    "weight": 8,
+    "minLevel": 43,
+    "maxLevel": 45,
+    "variety": true
+   },
+   {
+    "speciesKey": "durant",
+    "weight": 8,
+    "minLevel": 43,
+    "maxLevel": 45,
+    "variety": true
+   },
+   {
+    "speciesKey": "pancham",
+    "weight": 8,
+    "minLevel": 43,
+    "maxLevel": 45,
+    "variety": true
+   },
+   {
+    "speciesKey": "hawlucha",
+    "weight": 8,
+    "minLevel": 43,
+    "maxLevel": 45,
+    "variety": true
+   },
+   {
+    "speciesKey": "stufful",
+    "weight": 8,
+    "minLevel": 43,
+    "maxLevel": 45,
+    "variety": true
    }
   ]
  },
@@ -1956,6 +2012,76 @@
     "weight": 12,
     "minLevel": 35,
     "maxLevel": 37
+   },
+   {
+    "speciesKey": "eevee",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "hoothoot",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "nuzleaf",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "stunky",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "purrloin",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "minccino",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "deino",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "stufful",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "wooloo",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "impidimp",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
    }
   ]
  },

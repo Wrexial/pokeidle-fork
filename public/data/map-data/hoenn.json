@@ -277,7 +277,8 @@
   "background": "/backgrounds/beach.png",
   "connections": [
    "hoenn-route-105",
-   "hoenn-dewford-town"
+   "hoenn-dewford-town",
+   "hoenn-granite-cave"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -303,7 +304,8 @@
   "description": "A town in the Hoenn region, home to Brawly's Fighting Gym.",
   "connections": [
    "hoenn-route-106",
-   "hoenn-route-107"
+   "hoenn-route-107",
+   "hoenn-granite-cave"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -676,7 +678,8 @@
   "description": "A town in the Hoenn region.",
   "connections": [
    "hoenn-route-113",
-   "hoenn-route-114"
+   "hoenn-route-114",
+   "hoenn-meteor-falls"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -725,7 +728,8 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "hoenn-fallarbor-town",
-   "hoenn-route-115"
+   "hoenn-route-115",
+   "hoenn-meteor-falls"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1716,5 +1720,59 @@
    "y": 51.44
   },
   "biome": "grassland"
+ },
+ "hoenn-granite-cave": {
+  "id": "hoenn-granite-cave",
+  "name": "Granite Cave",
+  "type": "route",
+  "region": "hoenn",
+  "description": "A wild area in the Hoenn region.",
+  "routeKey": "hoenn-granite-cave",
+  "connections": [
+   "hoenn-dewford-town",
+   "hoenn-route-106"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-dewford-town",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 300106.25,
+  "position": {
+   "x": 4.8,
+   "y": 80.1
+  },
+  "biome": "cave",
+  "background": "/backgrounds/cave.png"
+ },
+ "hoenn-meteor-falls": {
+  "id": "hoenn-meteor-falls",
+  "name": "Meteor Falls",
+  "type": "route",
+  "region": "hoenn",
+  "description": "A wild area in the Hoenn region.",
+  "routeKey": "hoenn-meteor-falls",
+  "connections": [
+   "hoenn-fallarbor-town",
+   "hoenn-route-114"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-fallarbor-town",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 300113.75,
+  "position": {
+   "x": 13.8,
+   "y": 31.6
+  },
+  "biome": "coast",
+  "background": "/backgrounds/beach.png"
  }
 }

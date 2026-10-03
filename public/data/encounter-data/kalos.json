@@ -2457,5 +2457,99 @@
     "maxLevel": 75
    }
   ]
+ },
+ "kalos-santalune-forest": {
+  "name": "Santalune Forest",
+  "encounters": [
+   {
+    "speciesKey": "scatterbug",
+    "weight": 20,
+    "minLevel": 8,
+    "maxLevel": 10
+   },
+   {
+    "speciesKey": "pikachu",
+    "weight": 20,
+    "minLevel": 8,
+    "maxLevel": 10
+   },
+   {
+    "speciesKey": "caterpie",
+    "weight": 20,
+    "minLevel": 8,
+    "maxLevel": 10
+   },
+   {
+    "speciesKey": "weedle",
+    "weight": 12,
+    "minLevel": 8,
+    "maxLevel": 10
+   },
+   {
+    "speciesKey": "pansage",
+    "weight": 12,
+    "minLevel": 8,
+    "maxLevel": 10
+   },
+   {
+    "speciesKey": "pansear",
+    "weight": 12,
+    "minLevel": 8,
+    "maxLevel": 10
+   },
+   {
+    "speciesKey": "panpour",
+    "weight": 12,
+    "minLevel": 8,
+    "maxLevel": 10
+   },
+   {
+    "speciesKey": "fletchling",
+    "weight": 12,
+    "minLevel": 8,
+    "maxLevel": 10
+   }
+  ]
+ },
+ "kalos-connecting-cave": {
+  "name": "Connecting Cave",
+  "encounters": [
+   {
+    "speciesKey": "zubat",
+    "weight": 20,
+    "minLevel": 26,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "roselia",
+    "weight": 20,
+    "minLevel": 26,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "meditite",
+    "weight": 20,
+    "minLevel": 26,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "whismur",
+    "weight": 12,
+    "minLevel": 26,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "axew",
+    "weight": 12,
+    "minLevel": 26,
+    "maxLevel": 28
+   },
+   {
+    "speciesKey": "litleo",
+    "weight": 12,
+    "minLevel": 26,
+    "maxLevel": 28
+   }
+  ]
  }
 }

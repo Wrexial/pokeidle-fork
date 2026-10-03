@@ -1858,5 +1858,105 @@
     "maxLevel": 75
    }
   ]
+ },
+ "galar-mine-no-2": {
+  "name": "Galar Mine No. 2",
+  "encounters": [
+   {
+    "speciesKey": "g-meowth",
+    "weight": 20,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "g-corsola",
+    "weight": 20,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "chewtle",
+    "weight": 20,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "croagunk",
+    "weight": 12,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "scraggy",
+    "weight": 12,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "noibat",
+    "weight": 12,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "rolycoly",
+    "weight": 12,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "silicobra",
+    "weight": 12,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "g-stunfisk",
+    "weight": 6,
+    "minLevel": 43,
+    "maxLevel": 45
+   }
+  ]
+ },
+ "galar-watchtower-ruins": {
+  "name": "Watchtower Ruins",
+  "encounters": [
+   {
+    "speciesKey": "rookidee",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "skwovet",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "g-zigzagoon",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "nickit",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "gossifleur",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "g-yamask",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   }
+  ]
  }
 }

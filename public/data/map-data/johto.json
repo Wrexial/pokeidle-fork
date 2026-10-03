@@ -187,7 +187,8 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "johto-violet-city",
-   "johto-route-33"
+   "johto-route-33",
+   "johto-union-cave"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -217,7 +218,8 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "johto-azalea-town",
-   "johto-route-32"
+   "johto-route-32",
+   "johto-union-cave"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -243,7 +245,8 @@
   "description": "A town in the Johto region, home to Bugsy's Bug Gym.",
   "connections": [
    "johto-route-33",
-   "johto-route-34"
+   "johto-route-34",
+   "johto-ilex-forest"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -282,7 +285,8 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "johto-goldenrod-city",
-   "johto-azalea-town"
+   "johto-azalea-town",
+   "johto-ilex-forest"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1131,5 +1135,59 @@
    "y": 30.6
   },
   "biome": "grassland"
+ },
+ "johto-ilex-forest": {
+  "id": "johto-ilex-forest",
+  "name": "Ilex Forest",
+  "type": "route",
+  "region": "johto",
+  "description": "A wild area in the Johto region.",
+  "routeKey": "johto-ilex-forest",
+  "connections": [
+   "johto-azalea-town",
+   "johto-route-34"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-azalea-town",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 200033.75,
+  "position": {
+   "x": 31.9,
+   "y": 66.8
+  },
+  "biome": "forest",
+  "background": "/backgrounds/grassland.png"
+ },
+ "johto-union-cave": {
+  "id": "johto-union-cave",
+  "name": "Union Cave",
+  "type": "route",
+  "region": "johto",
+  "description": "A wild area in the Johto region.",
+  "routeKey": "johto-union-cave",
+  "connections": [
+   "johto-route-32",
+   "johto-route-33"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-route-32",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 200032.25,
+  "position": {
+   "x": 46.2,
+   "y": 67.3
+  },
+  "biome": "cave",
+  "background": "/backgrounds/cave.png"
  }
 }

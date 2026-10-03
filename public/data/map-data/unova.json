@@ -266,7 +266,8 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "unova-striaton-city",
-   "unova-nacrene-city"
+   "unova-nacrene-city",
+   "unova-pinwheel-forest"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -294,7 +295,8 @@
   "description": "A town in the Unova region, home to Lenora's Normal Gym.",
   "connections": [
    "unova-route-3",
-   "unova-castelia-city"
+   "unova-castelia-city",
+   "unova-pinwheel-forest"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -578,7 +580,8 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "unova-driftveil-city",
-   "unova-mistralton-city"
+   "unova-mistralton-city",
+   "unova-chargestone-cave"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -606,7 +609,8 @@
   "description": "A town in the Unova region, home to Skyla's Flying Gym.",
   "connections": [
    "unova-route-7",
-   "unova-route-6"
+   "unova-route-6",
+   "unova-chargestone-cave"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1591,5 +1595,59 @@
    "y": 11
   },
   "biome": "grassland"
+ },
+ "unova-pinwheel-forest": {
+  "id": "unova-pinwheel-forest",
+  "name": "Pinwheel Forest",
+  "type": "route",
+  "region": "unova",
+  "description": "A wild area in the Unova region.",
+  "routeKey": "unova-pinwheel-forest",
+  "connections": [
+   "unova-nacrene-city",
+   "unova-route-3"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-nacrene-city",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 500003.25,
+  "position": {
+   "x": 80.8,
+   "y": 69.4
+  },
+  "biome": "forest",
+  "background": "/backgrounds/grassland.png"
+ },
+ "unova-chargestone-cave": {
+  "id": "unova-chargestone-cave",
+  "name": "Chargestone Cave",
+  "type": "route",
+  "region": "unova",
+  "description": "A wild area in the Unova region.",
+  "routeKey": "unova-chargestone-cave",
+  "connections": [
+   "unova-route-6",
+   "unova-mistralton-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-6",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 500006.2502,
+  "position": {
+   "x": 16,
+   "y": 50.7
+  },
+  "biome": "cave",
+  "background": "/backgrounds/cave.png"
  }
 }

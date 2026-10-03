@@ -2688,5 +2688,105 @@
     "maxLevel": 70
    }
   ]
+ },
+ "johto-ilex-forest": {
+  "name": "Ilex Forest",
+  "encounters": [
+   {
+    "speciesKey": "caterpie",
+    "weight": 20,
+    "minLevel": 20,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "metapod",
+    "weight": 20,
+    "minLevel": 20,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "weedle",
+    "weight": 20,
+    "minLevel": 20,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "kakuna",
+    "weight": 12,
+    "minLevel": 20,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "paras",
+    "weight": 12,
+    "minLevel": 20,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "oddish",
+    "weight": 12,
+    "minLevel": 20,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "pineco",
+    "weight": 12,
+    "minLevel": 20,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "heracross",
+    "weight": 12,
+    "minLevel": 20,
+    "maxLevel": 22
+   }
+  ]
+ },
+ "johto-union-cave": {
+  "name": "Union Cave",
+  "encounters": [
+   {
+    "speciesKey": "zubat",
+    "weight": 20,
+    "minLevel": 16,
+    "maxLevel": 18
+   },
+   {
+    "speciesKey": "geodude",
+    "weight": 20,
+    "minLevel": 16,
+    "maxLevel": 18
+   },
+   {
+    "speciesKey": "sandshrew",
+    "weight": 20,
+    "minLevel": 16,
+    "maxLevel": 18
+   },
+   {
+    "speciesKey": "rattata",
+    "weight": 12,
+    "minLevel": 16,
+    "maxLevel": 18
+   },
+   {
+    "speciesKey": "onix",
+    "weight": 12,
+    "minLevel": 16,
+    "maxLevel": 18
+   },
+   {
+    "speciesKey": "wooper",
+    "weight": 12,
+    "minLevel": 16,
+    "maxLevel": 18
+   },
+   {
+    "speciesKey": "lapras",
+    "weight": 12,
+    "minLevel": 16,
+    "maxLevel": 18
+   }
+  ]
  }
 }

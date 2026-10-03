@@ -26,6 +26,7 @@ const { buildEvolutionLines, buildVariedTeam } = require('./lib/trainer-teams.cj
 const { buildWildPool, collectProtectedSpecies, enrichEncounters } = require('./lib/route-variety.cjs')
 const { createTeamBuilder } = require('./lib/team-builder.cjs')
 const { deriveBiome } = require('./lib/biomes.cjs')
+const { ORDINARY_AREAS } = require('./lib/ordinary-areas.cjs')
 
 const GEN_RANGES = [
   [1, 151], [152, 251], [252, 386], [387, 493], [494, 649],
@@ -2137,6 +2138,8 @@ const POST_AREAS = {
     },
   ],
 }
+for (const [regionId, areas] of Object.entries(ORDINARY_AREAS))
+  POST_AREAS[regionId] = [...(POST_AREAS[regionId] ?? []), ...areas]
 for (const [regionId, areas] of Object.entries(POST_AREAS)) {
   const region = regions.find((candidate) => candidate.id === regionId)
   if (!region) continue

@@ -84,5 +84,9 @@ test('the Alola Route 3 gate lists every Route 1 exclusive but only asks for 3',
     return routes.size === 1 && routes.has('alola-route-1')
   })
   assert.ok(exclusives.length > 3, 'Route 1 has more than three exclusives to choose from')
-  assert.deepEqual([...gate.species].sort(), [...exclusives].sort())
+  // The gate was built from the exclusives at generation time. A later area
+  // pass can give one of them a home elsewhere (Inlet Grotto's Zorua, Eterna
+  // Forest's Buneary), so only require the gate to cover today's exclusives.
+  for (const key of exclusives)
+    assert.ok(gate.species.includes(key), `${key} is offered by the Route 3 gate`)
 })

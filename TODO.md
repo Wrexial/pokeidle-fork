@@ -156,15 +156,23 @@ Still open:
 ### 28b. More ordinary areas
 
 The scraper only keeps towns and routes, so caves, forests, tunnels, ruins,
-towers, lakes/seas and safari zones are absent unless hand-added
-(`EXTRA_MAP_AREAS` currently carries only Johto's Bell Tower / Whirl Islands /
-Mt. Silver).
+towers, lakes/seas and safari zones are absent unless hand-added. The model is
+the shared table `tools/lib/ordinary-areas.cjs`, consumed by both
+`generate-regions.cjs` (merged into `POST_AREAS`) and the idempotent
+`tools/apply-ordinary-areas.cjs` data pass, which wires each area between its
+connect locations with a curated species list, a neighbour-averaged level band
+and a derived biome. Fourteen landmark areas shipped (Ilex Forest, Union Cave,
+Granite Cave, Meteor Falls, Eterna Forest, Mt. Coronet, Pinwheel Forest,
+Chargestone Cave, Santalune Forest, Connecting Cave, Galar Mine No. 2,
+Watchtower Ruins, Inlet Grotto, Alfornada Cavern).
 
-- [ ] Grow `EXTRA_MAP_AREAS` (or scrape the remaining landmark locations) with
-      their own species lists so they don't drag a whole generation slice in.
-      Note: the committed `public/data` isn't currently idempotent with the
-      generator, so a data-only pass needs an `apply-*.cjs` script (as the other
-      generators' follow-ups do) rather than a full re-run.
+Still open:
+
+- [ ] Grow the table (or scrape the remaining landmark locations) with more
+      areas — Johto's Dark Cave / Ice Path / Dragon's Den, Sinnoh's Iron Island
+      / Wayward Cave / the lakes, Unova's Relic Castle / Giant Chasm, Kalos's
+      Glittering Cave / Reflection Cave, Alola's Verdant Cavern / Wela Volcano
+      Park, Paldea's Casseroya Lake, safari zones.
 - [ ] Consider surfacing a real terrain `areaType` on the map node / battle
       background too. The location panel already labels caves, forests, sea
       routes, mountains, deserts, volcanic fields, tundra and ruins from the

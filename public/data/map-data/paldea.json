@@ -305,7 +305,8 @@
   "region": "paldea",
   "description": "A town in the Paldea region, home to Tulip's Psychic Gym.",
   "connections": [
-   "paldea-north-province"
+   "paldea-north-province",
+   "paldea-alfornada-cavern"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1250,7 +1251,8 @@
    "paldea-south-province-area-three",
    "paldea-south-province-area-four",
    "paldea-south-province-area-five",
-   "paldea-south-province-area-six"
+   "paldea-south-province-area-six",
+   "paldea-inlet-grotto"
   ],
   "subAreas": [
    {
@@ -1439,5 +1441,57 @@
    "y": 19.915
   },
   "biome": "grassland"
+ },
+ "paldea-inlet-grotto": {
+  "id": "paldea-inlet-grotto",
+  "name": "Inlet Grotto",
+  "type": "route",
+  "region": "paldea",
+  "description": "A wild area in the Paldea region.",
+  "routeKey": "paldea-inlet-grotto",
+  "connections": [
+   "paldea-south-province"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-south-province",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 910000.25,
+  "position": {
+   "x": 33.5,
+   "y": 87.5
+  },
+  "biome": "cave",
+  "background": "/backgrounds/cave.png"
+ },
+ "paldea-alfornada-cavern": {
+  "id": "paldea-alfornada-cavern",
+  "name": "Alfornada Cavern",
+  "type": "route",
+  "region": "paldea",
+  "description": "A wild area in the Paldea region.",
+  "routeKey": "paldea-alfornada-cavern",
+  "connections": [
+   "paldea-alfornada"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-alfornada",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 910004.2501,
+  "position": {
+   "x": 22.3,
+   "y": 79.8
+  },
+  "biome": "cave",
+  "background": "/backgrounds/cave.png"
  }
 }

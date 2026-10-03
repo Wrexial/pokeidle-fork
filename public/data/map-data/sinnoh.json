@@ -287,7 +287,8 @@
   "background": "/backgrounds/beach.png",
   "connections": [
    "sinnoh-eterna-city",
-   "sinnoh-floaroma-town"
+   "sinnoh-floaroma-town",
+   "sinnoh-eterna-forest"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -314,7 +315,8 @@
   "connections": [
    "sinnoh-route-206",
    "sinnoh-route-211",
-   "sinnoh-route-205"
+   "sinnoh-route-205",
+   "sinnoh-eterna-forest"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -393,7 +395,8 @@
   "connections": [
    "sinnoh-route-206",
    "sinnoh-oreburgh-city",
-   "sinnoh-route-208"
+   "sinnoh-route-208",
+   "sinnoh-mt-coronet"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -635,7 +638,8 @@
    "sinnoh-eterna-city",
    "sinnoh-celestic-town",
    "sinnoh-route-216",
-   "sinnoh-route-208"
+   "sinnoh-route-208",
+   "sinnoh-mt-coronet"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1551,5 +1555,59 @@
    "y": 51.703071869818324
   },
   "biome": "grassland"
+ },
+ "sinnoh-eterna-forest": {
+  "id": "sinnoh-eterna-forest",
+  "name": "Eterna Forest",
+  "type": "route",
+  "region": "sinnoh",
+  "description": "A wild area in the Sinnoh region.",
+  "routeKey": "sinnoh-eterna-forest",
+  "connections": [
+   "sinnoh-eterna-city",
+   "sinnoh-route-205"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-eterna-city",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 400205.25,
+  "position": {
+   "x": 23.1,
+   "y": 39.6
+  },
+  "biome": "forest",
+  "background": "/backgrounds/grassland.png"
+ },
+ "sinnoh-mt-coronet": {
+  "id": "sinnoh-mt-coronet",
+  "name": "Mt. Coronet",
+  "type": "route",
+  "region": "sinnoh",
+  "description": "A wild area in the Sinnoh region.",
+  "routeKey": "sinnoh-mt-coronet",
+  "connections": [
+   "sinnoh-route-207",
+   "sinnoh-route-211"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-207",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 400207.25,
+  "position": {
+   "x": 35.3,
+   "y": 55.4
+  },
+  "biome": "mountain",
+  "background": "/backgrounds/mountain.png"
  }
 }

@@ -346,11 +346,14 @@ Data conventions:
   wilds, so they drop out of the Raid Islands. `POST_AREAS` injects standalone
   wild areas (Slumbering Weald, Galar Mine, Glimwood Tangle) the same way,
   with a level band averaged from the routes they connect to so adding one
-  never re-levels the region. Galar's DLC uses zones too: the Isle of Armor and
-  Crown Tundra are post-game hubs gated on `championDefeated` with fixed high
-  levels (`zone.level`). `GROUP_ZONES` wraps *existing* route nodes in a hub
-  (Alola's islands, Paldea's provinces): the routes become hidden sub-areas that
-  keep their own unlock rules, so a locked area shows as ??? in the picker.
+  never re-levels the region. The shared `lib/ordinary-areas.cjs` table (caves,
+  forests and other landmarks the scraper drops) is merged into `POST_AREAS` at
+  generation and written onto the committed data by `apply-ordinary-areas.cjs`.
+  The Galar/Paldea DLC uses zones too, but is promoted to first-class regions
+  by `apply-dlc-regions.cjs` (#39). `GROUP_ZONES` wraps *existing* route nodes
+  in a hub (Alola's islands, Paldea's provinces): the routes become hidden
+  sub-areas that keep their own unlock rules, so a locked area shows as ??? in
+  the picker.
 - Some regions' scraped force-directed layout doesn't match the real map, so
   `REGION_MAP_LAYOUTS` in `generate-regions.cjs` overrides it with
   hand-measured coordinates from a labelled reference map. Every region except
@@ -608,7 +611,8 @@ One-off scripts used to build the data JSON (not run during dev/build):
   are missing from `region-maps.json` because PokéAPI files them outside the
   town/route set, so `EXTRA_MAP_AREAS` injects them into the graph with an
   explicit position/connection — currently Johto's Bell Tower, Whirl Islands and
-  Mt. Silver. Mt. Silver carries a forced `rank` so it is Johto's last route,
+  Mt. Silver — while `POST_AREAS` + `lib/ordinary-areas.cjs` add standalone wild
+  areas. Mt. Silver carries a forced `rank` so it is Johto's last route,
   and the league/Raid Island hang off it (which is what puts Johto's ending on
   the map's right side). Encounter levels are
   reassigned by `levelRoutes()`: every region runs its own 5-75 curve
@@ -773,6 +777,11 @@ One-off scripts used to build the data JSON (not run during dev/build):
   new region id and moving their legendaries off the parent region's raid
   pool. Keeps the hub's `championDefeated` gate. Idempotent (`--dry`); safe to
   re-run after a regeneration (which recreates the zones).
+- `apply-ordinary-areas.cjs` — data-only pass (#28b) that inserts the ordinary
+  wild areas from `lib/ordinary-areas.cjs` onto the committed data as
+  `type: 'route'` nodes (own wild table, neighbour-averaged level band, derived
+  biome), wiring them between their connect locations. Idempotent (`--dry`);
+  re-run `generate-encounter-index.cjs` afterwards.
 - `fix-impossible-encounters.cjs` / `fix-impossible-teams.cjs` — step wild
   encounters and trainer/gym/Elite Four/Champion Pokemon back to a form that
   could exist at their level (a Lv. 3 Chesnaught becomes a Chespin), merging
@@ -799,6 +808,10 @@ One-off scripts used to build the data JSON (not run during dev/build):
 - `lib/route-variety.cjs` — shared route-variety helpers (`buildWildPool`,
   `enrichEncounters`, `collectProtectedSpecies`) used by both
   `generate-regions.cjs` and `apply-route-variety.cjs`.
+- `lib/ordinary-areas.cjs` — the curated table of ordinary wild areas (caves,
+  forests, ...) the scraper drops, keyed by region with `node` / `name` /
+  `connects` / `position` / `species`. Used by `generate-regions.cjs` (merged
+  into `POST_AREAS`) and `apply-ordinary-areas.cjs`.
 - `lib/biomes.cjs` — shared `deriveBiome` battle/town-map biome classifier
   (name keywords + wild-table land types + curated route overrides) used by
   `generate-regions.cjs` and `apply-biomes.cjs`; mirrored at runtime by

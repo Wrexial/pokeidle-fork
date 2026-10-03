@@ -3389,5 +3389,117 @@
     "maxLevel": 75
    }
   ]
+ },
+ "sinnoh-eterna-forest": {
+  "name": "Eterna Forest",
+  "encounters": [
+   {
+    "speciesKey": "buneary",
+    "weight": 20,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "budew",
+    "weight": 20,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "wurmple",
+    "weight": 20,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "silcoon",
+    "weight": 12,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "cascoon",
+    "weight": 12,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "bidoof",
+    "weight": 12,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "murkrow",
+    "weight": 12,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "misdreavus",
+    "weight": 12,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "abra",
+    "weight": 6,
+    "minLevel": 14,
+    "maxLevel": 16
+   }
+  ]
+ },
+ "sinnoh-mt-coronet": {
+  "name": "Mt. Coronet",
+  "encounters": [
+   {
+    "speciesKey": "zubat",
+    "weight": 20,
+    "minLevel": 24,
+    "maxLevel": 26
+   },
+   {
+    "speciesKey": "geodude",
+    "weight": 20,
+    "minLevel": 24,
+    "maxLevel": 26
+   },
+   {
+    "speciesKey": "machop",
+    "weight": 20,
+    "minLevel": 24,
+    "maxLevel": 26
+   },
+   {
+    "speciesKey": "meditite",
+    "weight": 12,
+    "minLevel": 24,
+    "maxLevel": 26
+   },
+   {
+    "speciesKey": "chingling",
+    "weight": 12,
+    "minLevel": 24,
+    "maxLevel": 26
+   },
+   {
+    "speciesKey": "bronzor",
+    "weight": 12,
+    "minLevel": 24,
+    "maxLevel": 26
+   },
+   {
+    "speciesKey": "sneasel",
+    "weight": 12,
+    "minLevel": 24,
+    "maxLevel": 26
+   },
+   {
+    "speciesKey": "abra",
+    "weight": 12,
+    "minLevel": 24,
+    "maxLevel": 26
+   }
+  ]
  }
 }

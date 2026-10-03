@@ -335,7 +335,8 @@
    "galar-hammerlocke",
    "galar-stow-on-side",
    "galar-motostoke",
-   "galar-wild-area"
+   "galar-wild-area",
+   "galar-mine-no-2"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -413,7 +414,8 @@
   "connections": [
    "galar-route-6",
    "galar-ballonlea",
-   "galar-glimwood-tangle"
+   "galar-glimwood-tangle",
+   "galar-mine-no-2"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -943,7 +945,8 @@
    "galar-route-6",
    "galar-wild-area-rolling-fields",
    "galar-wild-area-dappled-grove",
-   "galar-wild-area-giants-mirror"
+   "galar-wild-area-giants-mirror",
+   "galar-watchtower-ruins"
   ],
   "subAreas": [
    {
@@ -1053,5 +1056,58 @@
    "y": 41.783475019432984
   },
   "biome": "forest"
+ },
+ "galar-mine-no-2": {
+  "id": "galar-mine-no-2",
+  "name": "Galar Mine No. 2",
+  "type": "route",
+  "region": "galar",
+  "description": "A wild area in the Galar region.",
+  "routeKey": "galar-mine-no-2",
+  "connections": [
+   "galar-route-6",
+   "galar-stow-on-side"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-route-6",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 800006.2502,
+  "position": {
+   "x": 32.1,
+   "y": 55.8
+  },
+  "biome": "cave",
+  "background": "/backgrounds/cave.png"
+ },
+ "galar-watchtower-ruins": {
+  "id": "galar-watchtower-ruins",
+  "name": "Watchtower Ruins",
+  "type": "route",
+  "region": "galar",
+  "description": "A wild area in the Galar region.",
+  "routeKey": "galar-watchtower-ruins",
+  "connections": [
+   "galar-wild-area"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "galar-wild-area",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 800005.65,
+  "position": {
+   "x": 60.5,
+   "y": 52.9
+  },
+  "biome": "ruins",
+  "background": "/backgrounds/grassland.png"
  }
 }

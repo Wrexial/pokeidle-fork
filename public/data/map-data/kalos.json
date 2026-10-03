@@ -94,7 +94,8 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "kalos-aquacorde-town",
-   "kalos-route-3"
+   "kalos-route-3",
+   "kalos-santalune-forest"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -148,7 +149,8 @@
   "connections": [
    "kalos-route-3",
    "kalos-route-4",
-   "kalos-route-22"
+   "kalos-route-22",
+   "kalos-santalune-forest"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -357,7 +359,8 @@
    "kalos-camphrier-town",
    "kalos-route-6",
    "kalos-cyllage-city",
-   "kalos-route-8"
+   "kalos-route-8",
+   "kalos-connecting-cave"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -431,7 +434,8 @@
   "connections": [
    "kalos-cyllage-city",
    "kalos-ambrette-town",
-   "kalos-route-7"
+   "kalos-route-7",
+   "kalos-connecting-cave"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1393,5 +1397,59 @@
    "y": 37.30934946710613
   },
   "biome": "grassland"
+ },
+ "kalos-santalune-forest": {
+  "id": "kalos-santalune-forest",
+  "name": "Santalune Forest",
+  "type": "route",
+  "region": "kalos",
+  "description": "A wild area in the Kalos region.",
+  "routeKey": "kalos-santalune-forest",
+  "connections": [
+   "kalos-santalune-city",
+   "kalos-route-2"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-santalune-city",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 600002.25,
+  "position": {
+   "x": 65.7,
+   "y": 48.4
+  },
+  "biome": "forest",
+  "background": "/backgrounds/grassland.png"
+ },
+ "kalos-connecting-cave": {
+  "id": "kalos-connecting-cave",
+  "name": "Connecting Cave",
+  "type": "route",
+  "region": "kalos",
+  "description": "A wild area in the Kalos region.",
+  "routeKey": "kalos-connecting-cave",
+  "connections": [
+   "kalos-route-7",
+   "kalos-route-8"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-7",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 600007.25,
+  "position": {
+   "x": 28.9,
+   "y": 60.5
+  },
+  "biome": "cave",
+  "background": "/backgrounds/cave.png"
  }
 }

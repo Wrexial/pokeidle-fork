@@ -2736,5 +2736,111 @@
     "maxLevel": 75
    }
   ]
+ },
+ "unova-pinwheel-forest": {
+  "name": "Pinwheel Forest",
+  "encounters": [
+   {
+    "speciesKey": "sewaddle",
+    "weight": 20,
+    "minLevel": 11,
+    "maxLevel": 13
+   },
+   {
+    "speciesKey": "pidove",
+    "weight": 20,
+    "minLevel": 11,
+    "maxLevel": 13
+   },
+   {
+    "speciesKey": "tympole",
+    "weight": 20,
+    "minLevel": 11,
+    "maxLevel": 13
+   },
+   {
+    "speciesKey": "venipede",
+    "weight": 12,
+    "minLevel": 11,
+    "maxLevel": 13
+   },
+   {
+    "speciesKey": "cottonee",
+    "weight": 12,
+    "minLevel": 11,
+    "maxLevel": 13
+   },
+   {
+    "speciesKey": "petilil",
+    "weight": 12,
+    "minLevel": 11,
+    "maxLevel": 13
+   },
+   {
+    "speciesKey": "pansage",
+    "weight": 12,
+    "minLevel": 11,
+    "maxLevel": 13
+   },
+   {
+    "speciesKey": "pansear",
+    "weight": 12,
+    "minLevel": 11,
+    "maxLevel": 13
+   },
+   {
+    "speciesKey": "panpour",
+    "weight": 6,
+    "minLevel": 11,
+    "maxLevel": 13
+   }
+  ]
+ },
+ "unova-chargestone-cave": {
+  "name": "Chargestone Cave",
+  "encounters": [
+   {
+    "speciesKey": "joltik",
+    "weight": 20,
+    "minLevel": 20,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "ferroseed",
+    "weight": 20,
+    "minLevel": 20,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "klink",
+    "weight": 20,
+    "minLevel": 20,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "drilbur",
+    "weight": 12,
+    "minLevel": 20,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "roggenrola",
+    "weight": 12,
+    "minLevel": 20,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "nosepass",
+    "weight": 12,
+    "minLevel": 20,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "tynamo",
+    "weight": 12,
+    "minLevel": 20,
+    "maxLevel": 22
+   }
+  ]
  }
 }

@@ -2155,5 +2155,87 @@
     "maxLevel": 75
    }
   ]
+ },
+ "paldea-inlet-grotto": {
+  "name": "Inlet Grotto",
+  "encounters": [
+   {
+    "speciesKey": "lechonk",
+    "weight": 20,
+    "minLevel": 3,
+    "maxLevel": 5
+   },
+   {
+    "speciesKey": "pawmi",
+    "weight": 20,
+    "minLevel": 3,
+    "maxLevel": 5
+   },
+   {
+    "speciesKey": "tarountula",
+    "weight": 20,
+    "minLevel": 3,
+    "maxLevel": 5
+   },
+   {
+    "speciesKey": "nymble",
+    "weight": 12,
+    "minLevel": 3,
+    "maxLevel": 5
+   },
+   {
+    "speciesKey": "flamigo",
+    "weight": 12,
+    "minLevel": 3,
+    "maxLevel": 5
+   },
+   {
+    "speciesKey": "scatterbug",
+    "weight": 12,
+    "minLevel": 3,
+    "maxLevel": 5
+   }
+  ]
+ },
+ "paldea-alfornada-cavern": {
+  "name": "Alfornada Cavern",
+  "encounters": [
+   {
+    "speciesKey": "nacli",
+    "weight": 20,
+    "minLevel": 5,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "meditite",
+    "weight": 20,
+    "minLevel": 5,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "gible",
+    "weight": 20,
+    "minLevel": 5,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "dunsparce",
+    "weight": 12,
+    "minLevel": 5,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "teddiursa",
+    "weight": 12,
+    "minLevel": 5,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "zorua",
+    "weight": 12,
+    "minLevel": 5,
+    "maxLevel": 7
+   }
+  ]
  }
 }

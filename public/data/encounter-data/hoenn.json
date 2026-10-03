@@ -3791,5 +3791,99 @@
     "maxLevel": 75
    }
   ]
+ },
+ "hoenn-granite-cave": {
+  "name": "Granite Cave",
+  "encounters": [
+   {
+    "speciesKey": "zubat",
+    "weight": 20,
+    "minLevel": 15,
+    "maxLevel": 17
+   },
+   {
+    "speciesKey": "geodude",
+    "weight": 20,
+    "minLevel": 15,
+    "maxLevel": 17
+   },
+   {
+    "speciesKey": "makuhita",
+    "weight": 20,
+    "minLevel": 15,
+    "maxLevel": 17
+   },
+   {
+    "speciesKey": "aron",
+    "weight": 12,
+    "minLevel": 15,
+    "maxLevel": 17
+   },
+   {
+    "speciesKey": "abra",
+    "weight": 12,
+    "minLevel": 15,
+    "maxLevel": 17
+   },
+   {
+    "speciesKey": "sableye",
+    "weight": 12,
+    "minLevel": 15,
+    "maxLevel": 17
+   },
+   {
+    "speciesKey": "nosepass",
+    "weight": 12,
+    "minLevel": 15,
+    "maxLevel": 17
+   }
+  ]
+ },
+ "hoenn-meteor-falls": {
+  "name": "Meteor Falls",
+  "encounters": [
+   {
+    "speciesKey": "zubat",
+    "weight": 20,
+    "minLevel": 32,
+    "maxLevel": 34
+   },
+   {
+    "speciesKey": "golbat",
+    "weight": 20,
+    "minLevel": 32,
+    "maxLevel": 34
+   },
+   {
+    "speciesKey": "solrock",
+    "weight": 20,
+    "minLevel": 32,
+    "maxLevel": 34
+   },
+   {
+    "speciesKey": "lunatone",
+    "weight": 12,
+    "minLevel": 32,
+    "maxLevel": 34
+   },
+   {
+    "speciesKey": "bagon",
+    "weight": 12,
+    "minLevel": 32,
+    "maxLevel": 34
+   },
+   {
+    "speciesKey": "clefairy",
+    "weight": 12,
+    "minLevel": 32,
+    "maxLevel": 34
+   },
+   {
+    "speciesKey": "machop",
+    "weight": 12,
+    "minLevel": 32,
+    "maxLevel": 34
+   }
+  ]
  }
 }

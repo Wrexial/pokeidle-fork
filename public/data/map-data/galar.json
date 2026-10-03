@@ -23,7 +23,8 @@
      "itemId": "pokeball"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "galar-route-1": {
   "id": "galar-route-1",
@@ -48,7 +49,8 @@
   "position": {
    "x": 53.105407991426674,
    "y": 92.46155560943203
-  }
+  },
+  "biome": "grassland"
  },
  "galar-wedgehurst": {
   "id": "galar-wedgehurst",
@@ -80,7 +82,8 @@
      "itemId": "pokeball"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "galar-route-2": {
   "id": "galar-route-2",
@@ -107,7 +110,8 @@
   "position": {
    "x": 48.59,
    "y": 78.73
-  }
+  },
+  "biome": "forest"
  },
  "galar-motostoke": {
   "id": "galar-motostoke",
@@ -147,7 +151,8 @@
      "itemId": "pokeball"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "galar-route-3": {
   "id": "galar-route-3",
@@ -175,7 +180,8 @@
   "position": {
    "x": 48.146811257486284,
    "y": 65.0703912580902
-  }
+  },
+  "biome": "mountain"
  },
  "galar-route-4": {
   "id": "galar-route-4",
@@ -202,7 +208,8 @@
   "position": {
    "x": 41.77700587953382,
    "y": 63.71659393876167
-  }
+  },
+  "biome": "coast"
  },
  "galar-turffield": {
   "id": "galar-turffield",
@@ -239,7 +246,8 @@
      "unlockWildBattlesWon": 50
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "galar-route-5": {
   "id": "galar-route-5",
@@ -269,7 +277,8 @@
   "position": {
    "x": 48.02721289332821,
    "y": 58.5606409119606
-  }
+  },
+  "biome": "grassland"
  },
  "galar-hulbury": {
   "id": "galar-hulbury",
@@ -312,7 +321,8 @@
      "unlockWildBattlesWon": 50
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "galar-route-6": {
   "id": "galar-route-6",
@@ -344,7 +354,8 @@
   "position": {
    "x": 43.95814233971725,
    "y": 53.473775393853515
-  }
+  },
+  "biome": "grassland"
  },
  "galar-hammerlocke": {
   "id": "galar-hammerlocke",
@@ -391,7 +402,8 @@
      "itemId": "repel"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "galar-stow-on-side": {
   "id": "galar-stow-on-side",
@@ -445,7 +457,8 @@
      "itemId": "repel"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "galar-route-7": {
   "id": "galar-route-7",
@@ -476,7 +489,8 @@
   "position": {
    "x": 51.93555421229771,
    "y": 43.25335759046119
-  }
+  },
+  "biome": "cave"
  },
  "galar-route-8": {
   "id": "galar-route-8",
@@ -510,7 +524,8 @@
   "position": {
    "x": 57.87064413429948,
    "y": 40.575677947399846
-  }
+  },
+  "biome": "tundra"
  },
  "galar-circhester": {
   "id": "galar-circhester",
@@ -553,7 +568,8 @@
      "itemId": "repel"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "galar-route-9": {
   "id": "galar-route-9",
@@ -592,7 +608,8 @@
   "position": {
    "x": 61.64499073430643,
    "y": 45.869333949504835
-  }
+  },
+  "biome": "coast"
  },
  "galar-spikemuth": {
   "id": "galar-spikemuth",
@@ -644,7 +661,8 @@
      "itemId": "honey"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "galar-route-10": {
   "id": "galar-route-10",
@@ -677,7 +695,8 @@
    "x": 50.16,
    "y": 32.37
   },
-  "weather": "snow"
+  "weather": "snow",
+  "biome": "tundra"
  },
  "galar-wyndon": {
   "id": "galar-wyndon",
@@ -725,7 +744,8 @@
      "itemId": "honey"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "galar-ballonlea": {
   "id": "galar-ballonlea",
@@ -772,7 +792,8 @@
      "itemId": "honey"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "galar-raid": {
   "id": "galar-raid",
@@ -797,7 +818,8 @@
   "position": {
    "x": 58.96909748278511,
    "y": 26.907292448355324
-  }
+  },
+  "biome": "coast"
  },
  "galar-league": {
   "id": "galar-league",
@@ -830,7 +852,8 @@
   "position": {
    "x": 61.03090251721489,
    "y": 33.09270755164467
-  }
+  },
+  "biome": "grassland"
  },
  "galar-wild-area-rolling-fields": {
   "id": "galar-wild-area-rolling-fields",
@@ -854,7 +877,8 @@
   "position": {
    "x": 52,
    "y": 61
-  }
+  },
+  "biome": "grassland"
  },
  "galar-wild-area-dappled-grove": {
   "id": "galar-wild-area-dappled-grove",
@@ -879,7 +903,8 @@
   "position": {
    "x": 47,
    "y": 56
-  }
+  },
+  "biome": "forest"
  },
  "galar-wild-area-giants-mirror": {
   "id": "galar-wild-area-giants-mirror",
@@ -904,7 +929,8 @@
   "position": {
    "x": 53,
    "y": 55
-  }
+  },
+  "biome": "grassland"
  },
  "galar-wild-area": {
   "id": "galar-wild-area",
@@ -947,7 +973,8 @@
   "position": {
    "x": 53.4689548279438,
    "y": 52.90126904499576
-  }
+  },
+  "biome": "grassland"
  },
  "galar-isle-of-armor-fields-of-honor": {
   "id": "galar-isle-of-armor-fields-of-honor",
@@ -971,7 +998,8 @@
   "position": {
    "x": 69,
    "y": 62.51
-  }
+  },
+  "biome": "grassland"
  },
  "galar-isle-of-armor-soothing-wetlands": {
   "id": "galar-isle-of-armor-soothing-wetlands",
@@ -996,7 +1024,8 @@
   "position": {
    "x": 71.59455458234684,
    "y": 59.32371446796515
-  }
+  },
+  "biome": "swamp"
  },
  "galar-isle-of-armor-brawlers-cave": {
   "id": "galar-isle-of-armor-brawlers-cave",
@@ -1021,7 +1050,8 @@
   "position": {
    "x": 69.82470747079506,
    "y": 56.64941494159013
-  }
+  },
+  "biome": "cave"
  },
  "galar-isle-of-armor": {
   "id": "galar-isle-of-armor",
@@ -1058,7 +1088,8 @@
   "position": {
    "x": 62.23866952184723,
    "y": 59.12197207444398
-  }
+  },
+  "biome": "grassland"
  },
  "galar-crown-tundra-snowslide-slope": {
   "id": "galar-crown-tundra-snowslide-slope",
@@ -1082,7 +1113,8 @@
   "position": {
    "x": 58.69591236794558,
    "y": 9.35580953380847
-  }
+  },
+  "biome": "tundra"
  },
  "galar-crown-tundra-frigid-sea": {
   "id": "galar-crown-tundra-frigid-sea",
@@ -1107,7 +1139,8 @@
   "position": {
    "x": 62.669903975427374,
    "y": 13.243673970695541
-  }
+  },
+  "biome": "coast"
  },
  "galar-crown-tundra-giants-bed": {
   "id": "galar-crown-tundra-giants-bed",
@@ -1132,7 +1165,8 @@
   "position": {
    "x": 57.75277274265659,
    "y": 14.267119303777706
-  }
+  },
+  "biome": "mountain"
  },
  "galar-crown-tundra": {
   "id": "galar-crown-tundra",
@@ -1169,7 +1203,8 @@
   "position": {
    "x": 56.81493093133369,
    "y": 13.907692139150027
-  }
+  },
+  "biome": "tundra"
  },
  "galar-slumbering-weald": {
   "id": "galar-slumbering-weald",
@@ -1194,7 +1229,8 @@
   "position": {
    "x": 44.380995948924834,
    "y": 92.26315643639109
-  }
+  },
+  "biome": "forest"
  },
  "galar-mine": {
   "id": "galar-mine",
@@ -1220,7 +1256,8 @@
   "position": {
    "x": 37.012750300832984,
    "y": 51.70468433649962
-  }
+  },
+  "biome": "cave"
  },
  "galar-glimwood-tangle": {
   "id": "galar-glimwood-tangle",
@@ -1246,6 +1283,7 @@
   "position": {
    "x": 34.81347599974704,
    "y": 41.783475019432984
-  }
+  },
+  "biome": "forest"
  }
 }

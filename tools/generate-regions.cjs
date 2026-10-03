@@ -25,6 +25,7 @@ const { buildEvolutionLevels, stageForLevel } = require('./lib/evolution-levels.
 const { buildEvolutionLines, buildVariedTeam } = require('./lib/trainer-teams.cjs')
 const { buildWildPool, collectProtectedSpecies, enrichEncounters } = require('./lib/route-variety.cjs')
 const { createTeamBuilder } = require('./lib/team-builder.cjs')
+const { deriveBiome } = require('./lib/biomes.cjs')
 
 const GEN_RANGES = [
   [1, 151], [152, 251], [252, 386], [387, 493], [494, 649],
@@ -2916,6 +2917,10 @@ for (const hub of Object.values(mapData)) {
 }
 
 write('regions.json', regions)
+// Battle / Town Map biome per location (mirrors tools/apply-biomes.cjs).
+for (const location of Object.values(mapData)) {
+  location.biome = deriveBiome(location, encounterData[location.routeKey]?.encounters, species)
+}
 writeRegionDir(path.join(DATA, 'map-data'), mapData)
 writeRegionDir(
   path.join(DATA, 'encounter-data'),

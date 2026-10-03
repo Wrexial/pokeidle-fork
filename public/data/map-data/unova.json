@@ -23,7 +23,8 @@
      "itemId": "pokeball"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "unova-route-1": {
   "id": "unova-route-1",
@@ -48,7 +49,8 @@
   "position": {
    "x": 84.46618681412552,
    "y": 75.40657085530017
-  }
+  },
+  "biome": "grassland"
  },
  "unova-accumula-town": {
   "id": "unova-accumula-town",
@@ -82,7 +84,8 @@
      "itemId": "pokeball"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "unova-aspertia-city": {
   "id": "unova-aspertia-city",
@@ -116,7 +119,8 @@
      "itemId": "pokeball"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "unova-route-2": {
   "id": "unova-route-2",
@@ -142,7 +146,8 @@
   "position": {
    "x": 90.81155517663755,
    "y": 64.41965729574969
-  }
+  },
+  "biome": "grassland"
  },
  "unova-virbank-city": {
   "id": "unova-virbank-city",
@@ -175,7 +180,8 @@
      "itemId": "pokeball"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "unova-floccesy-town": {
   "id": "unova-floccesy-town",
@@ -208,7 +214,8 @@
      "itemId": "pokeball"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "unova-striaton-city": {
   "id": "unova-striaton-city",
@@ -246,7 +253,8 @@
      "unlockWildBattlesWon": 50
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "unova-route-3": {
   "id": "unova-route-3",
@@ -275,7 +283,8 @@
   "position": {
    "x": 84.09221979289633,
    "y": 63.336107344031475
-  }
+  },
+  "biome": "grassland"
  },
  "unova-nacrene-city": {
   "id": "unova-nacrene-city",
@@ -318,7 +327,8 @@
      "unlockWildBattlesWon": 50
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "unova-castelia-city": {
   "id": "unova-castelia-city",
@@ -357,7 +367,8 @@
      "unlockWildBattlesWon": 50
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "unova-route-4": {
   "id": "unova-route-4",
@@ -388,7 +399,8 @@
    "x": 51.15,
    "y": 58.934999999999995
   },
-  "weather": "sandstorm"
+  "weather": "sandstorm",
+  "biome": "desert"
  },
  "unova-nimbasa-city": {
   "id": "unova-nimbasa-city",
@@ -432,7 +444,8 @@
      "unlockWildBattlesWon": 50
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "unova-route-5": {
   "id": "unova-route-5",
@@ -462,7 +475,8 @@
   "position": {
    "x": 39.85,
    "y": 52.58
-  }
+  },
+  "biome": "grassland"
  },
  "unova-driftveil-city": {
   "id": "unova-driftveil-city",
@@ -505,7 +519,8 @@
      "itemId": "repel"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "unova-anville-town": {
   "id": "unova-anville-town",
@@ -550,7 +565,8 @@
      "itemId": "repel"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "unova-route-6": {
   "id": "unova-route-6",
@@ -579,7 +595,8 @@
   "position": {
    "x": 22.15,
    "y": 47.88
-  }
+  },
+  "biome": "forest"
  },
  "unova-mistralton-city": {
   "id": "unova-mistralton-city",
@@ -629,7 +646,8 @@
      "itemId": "repel"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "unova-route-7": {
   "id": "unova-route-7",
@@ -658,7 +676,8 @@
   "position": {
    "x": 21.849361121864913,
    "y": 38.72886557424919
-  }
+  },
+  "biome": "grassland"
  },
  "unova-icirrus-city": {
   "id": "unova-icirrus-city",
@@ -701,7 +720,8 @@
      "itemId": "repel"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "unova-route-8": {
   "id": "unova-route-8",
@@ -730,7 +750,8 @@
   "position": {
    "x": 32.26470428648967,
    "y": 30.913199835784813
-  }
+  },
+  "biome": "coast"
  },
  "unova-route-9": {
   "id": "unova-route-9",
@@ -763,7 +784,8 @@
   "position": {
    "x": 40.85,
    "y": 32.96
-  }
+  },
+  "biome": "grassland"
  },
  "unova-opelucid-city": {
   "id": "unova-opelucid-city",
@@ -815,7 +837,8 @@
      "itemId": "repel"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "unova-route-10": {
   "id": "unova-route-10",
@@ -844,7 +867,8 @@
   "position": {
    "x": 52.6721404280317,
    "y": 36.98429711287715
-  }
+  },
+  "biome": "grassland"
  },
  "unova-route-11": {
   "id": "unova-route-11",
@@ -873,7 +897,8 @@
   "position": {
    "x": 57.48656017521561,
    "y": 32.59662235073198
-  }
+  },
+  "biome": "grassland"
  },
  "unova-route-12": {
   "id": "unova-route-12",
@@ -907,7 +932,8 @@
   "position": {
    "x": 63.888380429791106,
    "y": 33.83238018627538
-  }
+  },
+  "biome": "forest"
  },
  "unova-lacunosa-town": {
   "id": "unova-lacunosa-town",
@@ -959,7 +985,8 @@
      "itemId": "honey"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "unova-route-13": {
   "id": "unova-route-13",
@@ -987,7 +1014,8 @@
   "position": {
    "x": 81.94476215230652,
    "y": 40.28357150540833
-  }
+  },
+  "biome": "coast"
  },
  "unova-undella-town": {
   "id": "unova-undella-town",
@@ -1034,7 +1062,8 @@
      "itemId": "honey"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "unova-route-14": {
   "id": "unova-route-14",
@@ -1061,7 +1090,8 @@
   "position": {
    "x": 80.74015844211795,
    "y": 47.795883183097665
-  }
+  },
+  "biome": "grassland"
  },
  "unova-humilau-city": {
   "id": "unova-humilau-city",
@@ -1106,7 +1136,8 @@
      "itemId": "honey"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "unova-lentimas-town": {
   "id": "unova-lentimas-town",
@@ -1150,7 +1181,8 @@
      "itemId": "honey"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "unova-black-city": {
   "id": "unova-black-city",
@@ -1194,7 +1226,8 @@
      "itemId": "honey"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "unova-route-15": {
   "id": "unova-route-15",
@@ -1221,7 +1254,8 @@
   "position": {
    "x": 70.00834917839346,
    "y": 55.17664353584722
-  }
+  },
+  "biome": "mountain"
  },
  "unova-route-16": {
   "id": "unova-route-16",
@@ -1251,7 +1285,8 @@
   "position": {
    "x": 61.46,
    "y": 53.35
-  }
+  },
+  "biome": "grassland"
  },
  "unova-route-17": {
   "id": "unova-route-17",
@@ -1281,7 +1316,8 @@
   "position": {
    "x": 98,
    "y": 73.75559299651349
-  }
+  },
+  "biome": "coast"
  },
  "unova-route-18": {
   "id": "unova-route-18",
@@ -1307,7 +1343,8 @@
   "position": {
    "x": 92.03554251076996,
    "y": 76.35835323924168
-  }
+  },
+  "biome": "coast"
  },
  "unova-route-gate": {
   "id": "unova-route-gate",
@@ -1339,7 +1376,8 @@
   "position": {
    "x": 51.15,
    "y": 65.455
-  }
+  },
+  "biome": "grassland"
  },
  "unova-route-19": {
   "id": "unova-route-19",
@@ -1370,7 +1408,8 @@
   "position": {
    "x": 8.863876821802545,
    "y": 71.6318726898046
-  }
+  },
+  "biome": "grassland"
  },
  "unova-route-20": {
   "id": "unova-route-20",
@@ -1400,7 +1439,8 @@
   "position": {
    "x": 19.23,
    "y": 66.42
-  }
+  },
+  "biome": "grassland"
  },
  "unova-route-21": {
   "id": "unova-route-21",
@@ -1431,7 +1471,8 @@
   "position": {
    "x": 76.73647772480427,
    "y": 36.36130515516672
-  }
+  },
+  "biome": "coast"
  },
  "unova-route-22": {
   "id": "unova-route-22",
@@ -1460,7 +1501,8 @@
   "position": {
    "x": 82.88606738158408,
    "y": 33.53819564346288
-  }
+  },
+  "biome": "coast"
  },
  "unova-route-23": {
   "id": "unova-route-23",
@@ -1487,7 +1529,8 @@
   "position": {
    "x": 88.94340105774553,
    "y": 35.950478532271816
-  }
+  },
+  "biome": "grassland"
  },
  "unova-raid": {
   "id": "unova-raid",
@@ -1512,7 +1555,8 @@
   "position": {
    "x": 64,
    "y": 6
-  }
+  },
+  "biome": "coast"
  },
  "unova-league": {
   "id": "unova-league",
@@ -1545,6 +1589,7 @@
   "position": {
    "x": 71,
    "y": 11
-  }
+  },
+  "biome": "grassland"
  }
 }

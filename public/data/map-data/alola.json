@@ -23,7 +23,8 @@
      "itemId": "pokeball"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "alola-route-1": {
   "id": "alola-route-1",
@@ -48,7 +49,8 @@
    "y": 16.99
   },
   "hidden": true,
-  "zone": "alola-melemele-island"
+  "zone": "alola-melemele-island",
+  "biome": "grassland"
  },
  "alola-route-1--hauoli-outskirts": {
   "id": "alola-route-1--hauoli-outskirts",
@@ -80,7 +82,8 @@
    "y": 12
   },
   "hidden": true,
-  "zone": "alola-melemele-island"
+  "zone": "alola-melemele-island",
+  "biome": "grassland"
  },
  "alola-route-2": {
   "id": "alola-route-2",
@@ -112,7 +115,8 @@
    "y": 22
   },
   "hidden": true,
-  "zone": "alola-melemele-island"
+  "zone": "alola-melemele-island",
+  "biome": "grassland"
  },
  "alola-hauoli-city": {
   "id": "alola-hauoli-city",
@@ -147,7 +151,8 @@
      "itemId": "pokeball"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "alola-po-town": {
   "id": "alola-po-town",
@@ -189,7 +194,8 @@
      "unlockWildBattlesWon": 50
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "alola-route-3": {
   "id": "alola-route-3",
@@ -235,7 +241,8 @@
    "y": 26
   },
   "hidden": true,
-  "zone": "alola-melemele-island"
+  "zone": "alola-melemele-island",
+  "biome": "grassland"
  },
  "alola-paniola-town": {
   "id": "alola-paniola-town",
@@ -280,7 +287,8 @@
      "itemId": "repel"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "alola-route-4": {
   "id": "alola-route-4",
@@ -304,7 +312,8 @@
    "y": 18
   },
   "hidden": true,
-  "zone": "alola-akala-island"
+  "zone": "alola-akala-island",
+  "biome": "grassland"
  },
  "alola-heahea-city": {
   "id": "alola-heahea-city",
@@ -349,7 +358,8 @@
      "itemId": "repel"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "alola-route-5": {
   "id": "alola-route-5",
@@ -384,7 +394,8 @@
    "y": 26
   },
   "hidden": true,
-  "zone": "alola-akala-island"
+  "zone": "alola-akala-island",
+  "biome": "grassland"
  },
  "alola-route-6": {
   "id": "alola-route-6",
@@ -417,7 +428,8 @@
    "y": 14
   },
   "hidden": true,
-  "zone": "alola-akala-island"
+  "zone": "alola-akala-island",
+  "biome": "grassland"
  },
  "alola-route-7": {
   "id": "alola-route-7",
@@ -449,7 +461,8 @@
    "y": 18
   },
   "hidden": true,
-  "zone": "alola-akala-island"
+  "zone": "alola-akala-island",
+  "biome": "coast"
  },
  "alola-route-8": {
   "id": "alola-route-8",
@@ -480,7 +493,8 @@
    "y": 18.932268760408313
   },
   "hidden": true,
-  "zone": "alola-akala-island"
+  "zone": "alola-akala-island",
+  "biome": "grassland"
  },
  "alola-route-9": {
   "id": "alola-route-9",
@@ -504,7 +518,8 @@
    "y": 66
   },
   "hidden": true,
-  "zone": "alola-ulaula-island"
+  "zone": "alola-ulaula-island",
+  "biome": "coast"
  },
  "alola-konikoni-city": {
   "id": "alola-konikoni-city",
@@ -551,7 +566,8 @@
      "itemId": "honey"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "alola-route-10": {
   "id": "alola-route-10",
@@ -585,7 +601,8 @@
    "y": 64
   },
   "hidden": true,
-  "zone": "alola-ulaula-island"
+  "zone": "alola-ulaula-island",
+  "biome": "grassland"
  },
  "alola-malie-city": {
   "id": "alola-malie-city",
@@ -635,7 +652,8 @@
      "itemId": "honey"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "alola-route-11": {
   "id": "alola-route-11",
@@ -670,7 +688,8 @@
    "y": 68
   },
   "hidden": true,
-  "zone": "alola-ulaula-island"
+  "zone": "alola-ulaula-island",
+  "biome": "forest"
  },
  "alola-route-12": {
   "id": "alola-route-12",
@@ -705,7 +724,8 @@
    "y": 76
   },
   "hidden": true,
-  "zone": "alola-ulaula-island"
+  "zone": "alola-ulaula-island",
+  "biome": "mountain"
  },
  "alola-route-13": {
   "id": "alola-route-13",
@@ -740,7 +760,8 @@
    "y": 82
   },
   "hidden": true,
-  "zone": "alola-ulaula-island"
+  "zone": "alola-ulaula-island",
+  "biome": "coast"
  },
  "alola-route-14": {
   "id": "alola-route-14",
@@ -770,7 +791,8 @@
    "y": 72
   },
   "hidden": true,
-  "zone": "alola-ulaula-island"
+  "zone": "alola-ulaula-island",
+  "biome": "coast"
  },
  "alola-route-15": {
   "id": "alola-route-15",
@@ -804,7 +826,8 @@
    "y": 84
   },
   "hidden": true,
-  "zone": "alola-ulaula-island"
+  "zone": "alola-ulaula-island",
+  "biome": "coast"
  },
  "alola-route-16": {
   "id": "alola-route-16",
@@ -828,7 +851,8 @@
    "y": 70
   },
   "hidden": true,
-  "zone": "alola-poni-island"
+  "zone": "alola-poni-island",
+  "biome": "coast"
  },
  "alola-route-17": {
   "id": "alola-route-17",
@@ -863,7 +887,8 @@
    "y": 78
   },
   "hidden": true,
-  "zone": "alola-poni-island"
+  "zone": "alola-poni-island",
+  "biome": "grassland"
  },
  "alola-raid": {
   "id": "alola-raid",
@@ -891,7 +916,8 @@
   "position": {
    "x": 8,
    "y": 90
-  }
+  },
+  "biome": "coast"
  },
  "alola-league": {
   "id": "alola-league",
@@ -930,7 +956,8 @@
   "position": {
    "x": 52,
    "y": 52
-  }
+  },
+  "biome": "grassland"
  },
  "alola-melemele-island": {
   "id": "alola-melemele-island",
@@ -977,7 +1004,8 @@
   "position": {
    "x": 22,
    "y": 20.01
-  }
+  },
+  "biome": "coast"
  },
  "alola-akala-island": {
   "id": "alola-akala-island",
@@ -1039,7 +1067,8 @@
   "position": {
    "x": 79.06773123959168,
    "y": 21.067731239591687
-  }
+  },
+  "biome": "coast"
  },
  "alola-ulaula-island": {
   "id": "alola-ulaula-island",
@@ -1105,7 +1134,8 @@
   "position": {
    "x": 71,
    "y": 74
-  }
+  },
+  "biome": "coast"
  },
  "alola-poni-island": {
   "id": "alola-poni-island",
@@ -1150,7 +1180,8 @@
   "position": {
    "x": 22,
    "y": 74
-  }
+  },
+  "biome": "coast"
  },
  "alola-poke-pelago": {
   "id": "alola-poke-pelago",
@@ -1178,6 +1209,7 @@
    "x": 14,
    "y": 10
   },
-  "background": "/backgrounds/beach.png"
+  "background": "/backgrounds/beach.png",
+  "biome": "coast"
  }
 }

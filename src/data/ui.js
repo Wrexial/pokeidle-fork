@@ -362,20 +362,26 @@ export const DAY_NIGHT_FILTERS = {
 }
 
 /**
- * Pick a biome tint for a location from its name, falling back to its
- * background image. Purely visual — the battle background image is unchanged.
+ * Pick a biome tint for a location. The committed `biome` field wins (see
+ * tools/apply-biomes.cjs); otherwise it falls back to the name, then the
+ * location's base background image. Purely visual — the battle background image
+ * is unchanged.
  * @param {MapLocation | undefined} location
  * @returns {string}
  */
 export function biomeForLocation(location) {
+  const declared = location?.biome
+  if (declared && declared in BIOME_FILTERS) return declared
   const name = location?.name ?? ''
-  if (/forest|woods|wood|grove|tangle|thicket|jungle/i.test(name)) return 'forest'
-  if (/autumn/i.test(name)) return 'autumn'
+  if (/volcan|magma|lava|cinder|ember|blaze/i.test(name)) return 'volcanic'
+  if (/snow|ice|frost|glacier|tundra|blizzard/i.test(name)) return 'tundra'
   if (/desert|sand|dune|wasteland|badlands/i.test(name)) return 'desert'
   if (/swamp|marsh|fen|bog|moor|wetland/i.test(name)) return 'swamp'
-  if (/volcan|ember|blaze|magma|cinder|lava/i.test(name)) return 'volcanic'
-  if (/snow|ice|frost|glacier|tundra|blizzard/i.test(name)) return 'tundra'
   if (/ruins|tower|temple|shrine|catacomb/i.test(name)) return 'ruins'
+  if (/forest|tangle|thicket|jungle|weald/i.test(name)) return 'forest'
+  // Grove/wood only standalone, so Cianwood and Cherrygrove don't match.
+  if (/\bgrove\b|\bwoods?\b/i.test(name)) return 'forest'
+  if (/autumn/i.test(name)) return 'autumn'
   if (/cave|cavern|tunnel|mine|grotto|depths|underground|well|sewer/i.test(name)) return 'cave'
   if (/sea|ocean|beach|shore|bay|harbor|harbour|port|island|marine|coast|river|lake|pond|waterfall|falls|rapid|strait|channel|dock/i.test(name))
     return 'coast'

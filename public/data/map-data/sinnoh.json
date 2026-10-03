@@ -23,7 +23,8 @@
      "itemId": "pokeball"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "sinnoh-route-201": {
   "id": "sinnoh-route-201",
@@ -47,7 +48,8 @@
   "position": {
    "x": 12.776510584954874,
    "y": 72.93619477109758
-  }
+  },
+  "biome": "grassland"
  },
  "sinnoh-sandgem-town": {
   "id": "sinnoh-sandgem-town",
@@ -80,7 +82,8 @@
      "itemId": "pokeball"
     }
    ]
-  }
+  },
+  "biome": "desert"
  },
  "sinnoh-route-202": {
   "id": "sinnoh-route-202",
@@ -107,7 +110,8 @@
   "position": {
    "x": 14.242533711440366,
    "y": 66.11219204667121
-  }
+  },
+  "biome": "grassland"
  },
  "sinnoh-jubilife-city": {
   "id": "sinnoh-jubilife-city",
@@ -141,7 +145,8 @@
      "itemId": "pokeball"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "sinnoh-route-203": {
   "id": "sinnoh-route-203",
@@ -168,7 +173,8 @@
   "position": {
    "x": 24.75638515074666,
    "y": 59.808475434940995
-  }
+  },
+  "biome": "coast"
  },
  "sinnoh-oreburgh-city": {
   "id": "sinnoh-oreburgh-city",
@@ -200,7 +206,8 @@
      "itemId": "pokeball"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "sinnoh-route-204": {
   "id": "sinnoh-route-204",
@@ -230,7 +237,8 @@
   "position": {
    "x": 17.664399644318834,
    "y": 54.62812266198009
-  }
+  },
+  "biome": "coast"
  },
  "sinnoh-floaroma-town": {
   "id": "sinnoh-floaroma-town",
@@ -266,7 +274,8 @@
      "unlockWildBattlesWon": 50
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "sinnoh-route-205": {
   "id": "sinnoh-route-205",
@@ -293,7 +302,8 @@
   "position": {
    "x": 25.26,
    "y": 45.37
-  }
+  },
+  "biome": "coast"
  },
  "sinnoh-eterna-city": {
   "id": "sinnoh-eterna-city",
@@ -338,7 +348,8 @@
      "unlockWildBattlesWon": 50
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "sinnoh-route-206": {
   "id": "sinnoh-route-206",
@@ -368,7 +379,8 @@
   "position": {
    "x": 36.440827870848565,
    "y": 35.61181752627025
-  }
+  },
+  "biome": "mountain"
  },
  "sinnoh-route-207": {
   "id": "sinnoh-route-207",
@@ -398,7 +410,8 @@
   "position": {
    "x": 33.37,
    "y": 48.15
-  }
+  },
+  "biome": "grassland"
  },
  "sinnoh-route-208": {
   "id": "sinnoh-route-208",
@@ -426,7 +439,8 @@
   "position": {
    "x": 41.25,
    "y": 50.81
-  }
+  },
+  "biome": "coast"
  },
  "sinnoh-hearthome-city": {
   "id": "sinnoh-hearthome-city",
@@ -463,7 +477,8 @@
      "unlockWildBattlesWon": 50
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "sinnoh-route-209": {
   "id": "sinnoh-route-209",
@@ -490,7 +505,8 @@
   "position": {
    "x": 53.54899955340659,
    "y": 50.75581162175973
-  }
+  },
+  "biome": "coast"
  },
  "sinnoh-solaceon-town": {
   "id": "sinnoh-solaceon-town",
@@ -532,7 +548,8 @@
      "itemId": "repel"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "sinnoh-route-210": {
   "id": "sinnoh-route-210",
@@ -560,7 +577,8 @@
   "position": {
    "x": 53.3,
    "y": 42.93
-  }
+  },
+  "biome": "coast"
  },
  "sinnoh-celestic-town": {
   "id": "sinnoh-celestic-town",
@@ -602,7 +620,8 @@
      "itemId": "repel"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "sinnoh-route-211": {
   "id": "sinnoh-route-211",
@@ -634,7 +653,8 @@
   "position": {
    "x": 37.30168317320405,
    "y": 42.59255380430771
-  }
+  },
+  "biome": "grassland"
  },
  "sinnoh-route-212": {
   "id": "sinnoh-route-212",
@@ -660,7 +680,8 @@
   "position": {
    "x": 53.51677408984054,
    "y": 58.27927372733503
-  }
+  },
+  "biome": "coast"
  },
  "sinnoh-pastoria-city": {
   "id": "sinnoh-pastoria-city",
@@ -710,7 +731,8 @@
      "itemId": "repel"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "sinnoh-route-213": {
   "id": "sinnoh-route-213",
@@ -738,7 +760,8 @@
   "position": {
    "x": 62.23915602080295,
    "y": 67.95418651727935
-  }
+  },
+  "biome": "coast"
  },
  "sinnoh-route-214": {
   "id": "sinnoh-route-214",
@@ -765,7 +788,8 @@
   "position": {
    "x": 73,
    "y": 39.56
-  }
+  },
+  "biome": "coast"
  },
  "sinnoh-veilstone-city": {
   "id": "sinnoh-veilstone-city",
@@ -809,7 +833,8 @@
      "itemId": "honey"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "sinnoh-route-215": {
   "id": "sinnoh-route-215",
@@ -836,7 +861,8 @@
   "position": {
    "x": 64.00406363323283,
    "y": 43.11420664806333
-  }
+  },
+  "biome": "grassland"
  },
  "sinnoh-route-216": {
   "id": "sinnoh-route-216",
@@ -866,7 +892,8 @@
    "x": 43.8204706830164,
    "y": 42.718289248453
   },
-  "weather": "snow"
+  "weather": "snow",
+  "biome": "tundra"
  },
  "sinnoh-route-217": {
   "id": "sinnoh-route-217",
@@ -897,7 +924,8 @@
    "x": 35.23,
    "y": 25.09
   },
-  "weather": "snow"
+  "weather": "snow",
+  "biome": "tundra"
  },
  "sinnoh-snowpoint-city": {
   "id": "sinnoh-snowpoint-city",
@@ -951,7 +979,8 @@
      "itemId": "honey"
     }
    ]
-  }
+  },
+  "biome": "tundra"
  },
  "sinnoh-route-218": {
   "id": "sinnoh-route-218",
@@ -982,7 +1011,8 @@
   "position": {
    "x": 11.421838917673805,
    "y": 58.681958707563844
-  }
+  },
+  "biome": "coast"
  },
  "sinnoh-canalave-city": {
   "id": "sinnoh-canalave-city",
@@ -1025,7 +1055,8 @@
      "itemId": "honey"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "sinnoh-route-219": {
   "id": "sinnoh-route-219",
@@ -1055,7 +1086,8 @@
   "position": {
    "x": 18.688330964420814,
    "y": 75.68588198984287
-  }
+  },
+  "biome": "coast"
  },
  "sinnoh-sea-route-220": {
   "id": "sinnoh-sea-route-220",
@@ -1084,7 +1116,8 @@
   "position": {
    "x": 25.153361876575115,
    "y": 76.37443818575328
-  }
+  },
+  "biome": "coast"
  },
  "sinnoh-route-221": {
   "id": "sinnoh-route-221",
@@ -1110,7 +1143,8 @@
   "position": {
    "x": 27.500618737256225,
    "y": 82.43695921038214
-  }
+  },
+  "biome": "coast"
  },
  "sinnoh-route-222": {
   "id": "sinnoh-route-222",
@@ -1143,7 +1177,8 @@
   "position": {
    "x": 75.09,
    "y": 55.1
-  }
+  },
+  "biome": "coast"
  },
  "sinnoh-sunyshore-city": {
   "id": "sinnoh-sunyshore-city",
@@ -1188,7 +1223,8 @@
      "itemId": "honey"
     }
    ]
-  }
+  },
+  "biome": "coast"
  },
  "sinnoh-sea-route-223": {
   "id": "sinnoh-sea-route-223",
@@ -1217,7 +1253,8 @@
   "position": {
    "x": 93.35705852822676,
    "y": 56.30882642417882
-  }
+  },
+  "biome": "coast"
  },
  "sinnoh-route-224": {
   "id": "sinnoh-route-224",
@@ -1243,7 +1280,8 @@
   "position": {
    "x": 98,
    "y": 60.86100838718046
-  }
+  },
+  "biome": "coast"
  },
  "sinnoh-route-225": {
   "id": "sinnoh-route-225",
@@ -1274,7 +1312,8 @@
   "position": {
    "x": 64.31,
    "y": 19.29
-  }
+  },
+  "biome": "coast"
  },
  "sinnoh-sea-route-226": {
   "id": "sinnoh-sea-route-226",
@@ -1306,7 +1345,8 @@
   "position": {
    "x": 70.1,
    "y": 16.05
-  }
+  },
+  "biome": "coast"
  },
  "sinnoh-route-227": {
   "id": "sinnoh-route-227",
@@ -1342,7 +1382,8 @@
   "position": {
    "x": 77.06,
    "y": 12.34
-  }
+  },
+  "biome": "volcanic"
  },
  "sinnoh-route-228": {
   "id": "sinnoh-route-228",
@@ -1380,7 +1421,8 @@
   "position": {
    "x": 79.8331335866651,
    "y": 18.78546467557102
-  }
+  },
+  "biome": "desert"
  },
  "sinnoh-route-229": {
   "id": "sinnoh-route-229",
@@ -1413,7 +1455,8 @@
   "position": {
    "x": 82.3868664133349,
    "y": 24.78453532442898
-  }
+  },
+  "biome": "coast"
  },
  "sinnoh-sea-route-230": {
   "id": "sinnoh-sea-route-230",
@@ -1446,7 +1489,8 @@
   "position": {
    "x": 73,
    "y": 24.51
-  }
+  },
+  "biome": "coast"
  },
  "sinnoh-raid": {
   "id": "sinnoh-raid",
@@ -1471,7 +1515,8 @@
   "position": {
    "x": 83.83674109222618,
    "y": 45.49241720484085
-  }
+  },
+  "biome": "coast"
  },
  "sinnoh-league": {
   "id": "sinnoh-league",
@@ -1504,6 +1549,7 @@
   "position": {
    "x": 85.82122304789964,
    "y": 51.703071869818324
-  }
+  },
+  "biome": "grassland"
  }
 }

@@ -24,7 +24,8 @@
      "itemId": "pokeball"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "paldea-south-province-area-one": {
   "id": "paldea-south-province-area-one",
@@ -50,7 +51,8 @@
    "y": 80.83999291966833
   },
   "hidden": true,
-  "zone": "paldea-south-province"
+  "zone": "paldea-south-province",
+  "biome": "forest"
  },
  "paldea-cabo-poco": {
   "id": "paldea-cabo-poco",
@@ -81,7 +83,8 @@
      "itemId": "pokeball"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "paldea-mesagoza": {
   "id": "paldea-mesagoza",
@@ -114,7 +117,8 @@
      "itemId": "pokeball"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "paldea-medali": {
   "id": "paldea-medali",
@@ -150,7 +154,8 @@
      "unlockWildBattlesWon": 50
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "paldea-south-province-area-three": {
   "id": "paldea-south-province-area-three",
@@ -184,7 +189,8 @@
    "y": 69.08
   },
   "hidden": true,
-  "zone": "paldea-south-province"
+  "zone": "paldea-south-province",
+  "biome": "grassland"
  },
  "paldea-south-province-area-two": {
   "id": "paldea-south-province-area-two",
@@ -215,7 +221,8 @@
    "y": 71.27
   },
   "hidden": true,
-  "zone": "paldea-south-province"
+  "zone": "paldea-south-province",
+  "biome": "grassland"
  },
  "paldea-west-province-area-three": {
   "id": "paldea-west-province-area-three",
@@ -246,7 +253,8 @@
    "y": 40.808798253342204
   },
   "hidden": true,
-  "zone": "paldea-west-province"
+  "zone": "paldea-west-province",
+  "biome": "grassland"
  },
  "paldea-west-province-area-one": {
   "id": "paldea-west-province-area-one",
@@ -287,7 +295,8 @@
    "y": 42.935
   },
   "hidden": true,
-  "zone": "paldea-west-province"
+  "zone": "paldea-west-province",
+  "biome": "grassland"
  },
  "paldea-alfornada": {
   "id": "paldea-alfornada",
@@ -331,7 +340,8 @@
      "unlockWildBattlesWon": 50
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "paldea-artazon": {
   "id": "paldea-artazon",
@@ -376,7 +386,8 @@
      "unlockWildBattlesWon": 50
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "paldea-cortondo": {
   "id": "paldea-cortondo",
@@ -418,7 +429,8 @@
      "itemId": "repel"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "paldea-montenevera": {
   "id": "paldea-montenevera",
@@ -466,7 +478,8 @@
      "itemId": "repel"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "paldea-zapapico": {
   "id": "paldea-zapapico",
@@ -508,7 +521,8 @@
      "itemId": "repel"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "paldea-cascarrafa": {
   "id": "paldea-cascarrafa",
@@ -551,7 +565,8 @@
      "itemId": "honey"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "paldea-east-province-area-one": {
   "id": "paldea-east-province-area-one",
@@ -582,7 +597,8 @@
    "y": 67.37657235649185
   },
   "hidden": true,
-  "zone": "paldea-east-province"
+  "zone": "paldea-east-province",
+  "biome": "grassland"
  },
  "paldea-north-province-area-one": {
   "id": "paldea-north-province-area-one",
@@ -613,7 +629,8 @@
    "y": 19.37
   },
   "hidden": true,
-  "zone": "paldea-north-province"
+  "zone": "paldea-north-province",
+  "biome": "grassland"
  },
  "paldea-south-province-area-four": {
   "id": "paldea-south-province-area-four",
@@ -646,7 +663,8 @@
    "y": 81.87
   },
   "hidden": true,
-  "zone": "paldea-south-province"
+  "zone": "paldea-south-province",
+  "biome": "grassland"
  },
  "paldea-east-province-area-three": {
   "id": "paldea-east-province-area-three",
@@ -678,7 +696,8 @@
    "y": 46.5412017466578
   },
   "hidden": true,
-  "zone": "paldea-east-province"
+  "zone": "paldea-east-province",
+  "biome": "coast"
  },
  "paldea-south-province-area-six": {
   "id": "paldea-south-province-area-six",
@@ -710,7 +729,8 @@
    "y": 82.775
   },
   "hidden": true,
-  "zone": "paldea-south-province"
+  "zone": "paldea-south-province",
+  "biome": "grassland"
  },
  "paldea-west-province-area-two": {
   "id": "paldea-west-province-area-two",
@@ -741,7 +761,8 @@
    "y": 38.915
   },
   "hidden": true,
-  "zone": "paldea-west-province"
+  "zone": "paldea-west-province",
+  "biome": "grassland"
  },
  "paldea-north-province-area-two": {
   "id": "paldea-north-province-area-two",
@@ -773,7 +794,8 @@
    "y": 32.89
   },
   "hidden": true,
-  "zone": "paldea-north-province"
+  "zone": "paldea-north-province",
+  "biome": "grassland"
  },
  "paldea-levincia": {
   "id": "paldea-levincia",
@@ -816,7 +838,8 @@
      "itemId": "honey"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "paldea-south-province-area-five": {
   "id": "paldea-south-province-area-five",
@@ -848,7 +871,8 @@
    "y": 78.95
   },
   "hidden": true,
-  "zone": "paldea-south-province"
+  "zone": "paldea-south-province",
+  "biome": "grassland"
  },
  "paldea-porto-marinada": {
   "id": "paldea-porto-marinada",
@@ -891,7 +915,8 @@
      "itemId": "honey"
     }
    ]
-  }
+  },
+  "biome": "coast"
  },
  "paldea-north-province-area-three": {
   "id": "paldea-north-province-area-three",
@@ -931,7 +956,8 @@
    "y": 6.94
   },
   "hidden": true,
-  "zone": "paldea-north-province"
+  "zone": "paldea-north-province",
+  "biome": "grassland"
  },
  "paldea-east-province-area-two": {
   "id": "paldea-east-province-area-two",
@@ -963,7 +989,8 @@
    "y": 47.32
   },
   "hidden": true,
-  "zone": "paldea-east-province"
+  "zone": "paldea-east-province",
+  "biome": "coast"
  },
  "paldea-mossui-town": {
   "id": "paldea-mossui-town",
@@ -1007,7 +1034,8 @@
      "itemId": "honey"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "paldea-raid": {
   "id": "paldea-raid",
@@ -1032,7 +1060,8 @@
   "position": {
    "x": 93.56274077356505,
    "y": 25.174600830259873
-  }
+  },
+  "biome": "coast"
  },
  "paldea-league": {
   "id": "paldea-league",
@@ -1057,7 +1086,8 @@
   "position": {
    "x": 94.01246488577091,
    "y": 31.667659900965823
-  }
+  },
+  "biome": "grassland"
  },
  "paldea-kitakami-revelers-road": {
   "id": "paldea-kitakami-revelers-road",
@@ -1081,7 +1111,8 @@
   "position": {
    "x": 5.350599463558225,
    "y": 2.3382932874226787
-  }
+  },
+  "biome": "autumn"
  },
  "paldea-kitakami-apple-hills": {
   "id": "paldea-kitakami-apple-hills",
@@ -1106,7 +1137,8 @@
   "position": {
    "x": 9.43098037209967,
    "y": 2.54067158346724
-  }
+  },
+  "biome": "autumn"
  },
  "paldea-kitakami-oni-mountain": {
   "id": "paldea-kitakami-oni-mountain",
@@ -1131,7 +1163,8 @@
   "position": {
    "x": 4.677467672063965,
    "y": 6.164311719765116
-  }
+  },
+  "biome": "mountain"
  },
  "paldea-kitakami": {
   "id": "paldea-kitakami",
@@ -1168,7 +1201,8 @@
   "position": {
    "x": 3.92990188513551,
    "y": 2
-  }
+  },
+  "biome": "autumn"
  },
  "paldea-terarium-savanna-biome": {
   "id": "paldea-terarium-savanna-biome",
@@ -1192,7 +1226,8 @@
   "position": {
    "x": 93.99811372274266,
    "y": 22.428301572745625
-  }
+  },
+  "biome": "grassland"
  },
  "paldea-terarium-coastal-biome": {
   "id": "paldea-terarium-coastal-biome",
@@ -1217,7 +1252,8 @@
   "position": {
    "x": 98,
    "y": 18.07335602995268
-  }
+  },
+  "biome": "coast"
  },
  "paldea-terarium-polar-biome": {
   "id": "paldea-terarium-polar-biome",
@@ -1242,7 +1278,8 @@
   "position": {
    "x": 97.35058505840988,
    "y": 23.175292529204935
-  }
+  },
+  "biome": "tundra"
  },
  "paldea-terarium": {
   "id": "paldea-terarium",
@@ -1279,7 +1316,8 @@
   "position": {
    "x": 98,
    "y": 20.40804594294962
-  }
+  },
+  "biome": "grassland"
  },
  "paldea-area-zero-gate": {
   "id": "paldea-area-zero-gate",
@@ -1303,7 +1341,8 @@
   "position": {
    "x": 50.8747159066519,
    "y": 63.14562044441027
-  }
+  },
+  "biome": "ruins"
  },
  "paldea-area-zero-station-two": {
   "id": "paldea-area-zero-station-two",
@@ -1328,7 +1367,8 @@
   "position": {
    "x": 55.12805167143751,
    "y": 58.881257510917884
-  }
+  },
+  "biome": "ruins"
  },
  "paldea-area-zero-station-four": {
   "id": "paldea-area-zero-station-four",
@@ -1353,7 +1393,8 @@
   "position": {
    "x": 50.87617818454376,
    "y": 58.85545230834547
-  }
+  },
+  "biome": "ruins"
  },
  "paldea-area-zero-depths": {
   "id": "paldea-area-zero-depths",
@@ -1378,7 +1419,8 @@
   "position": {
    "x": 55.141101029544274,
    "y": 63.11366094685157
-  }
+  },
+  "biome": "cave"
  },
  "paldea-area-zero": {
   "id": "paldea-area-zero",
@@ -1420,7 +1462,8 @@
   "position": {
    "x": 51.27627448766477,
    "y": 64.14644831414999
-  }
+  },
+  "biome": "ruins"
  },
  "paldea-south-province": {
   "id": "paldea-south-province",
@@ -1478,7 +1521,8 @@
   "position": {
    "x": 40.68,
    "y": 76.06
-  }
+  },
+  "biome": "forest"
  },
  "paldea-west-province": {
   "id": "paldea-west-province",
@@ -1532,7 +1576,8 @@
   "position": {
    "x": 24.490000000000002,
    "y": 41.19
-  }
+  },
+  "biome": "grassland"
  },
  "paldea-east-province": {
   "id": "paldea-east-province",
@@ -1579,7 +1624,8 @@
   "position": {
    "x": 76.245,
    "y": 56.94500000000001
-  }
+  },
+  "biome": "grassland"
  },
  "paldea-north-province": {
   "id": "paldea-north-province",
@@ -1624,6 +1670,7 @@
   "position": {
    "x": 62.61,
    "y": 19.915
-  }
+  },
+  "biome": "grassland"
  }
 }

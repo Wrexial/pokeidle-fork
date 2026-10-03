@@ -25,7 +25,8 @@
    "x": 12,
    "y": 8
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "grassland"
  },
  "victoryRoad": {
   "id": "victoryRoad",
@@ -55,7 +56,8 @@
    "x": 12,
    "y": 16
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "cave"
  },
  "route23": {
   "id": "route23",
@@ -85,7 +87,8 @@
    "x": 12,
    "y": 28
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "coast"
  },
  "route22": {
   "id": "route22",
@@ -115,7 +118,8 @@
    "x": 12,
    "y": 40
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "coast"
  },
  "pewterCity": {
   "id": "pewterCity",
@@ -143,7 +147,8 @@
    "x": 22,
    "y": 14
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "grassland"
  },
  "viridianForest": {
   "id": "viridianForest",
@@ -172,7 +177,8 @@
    "x": 22,
    "y": 22
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "forest"
  },
  "route2": {
   "id": "route2",
@@ -202,7 +208,8 @@
    "x": 22,
    "y": 30
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "grassland"
  },
  "viridianCity": {
   "id": "viridianCity",
@@ -227,7 +234,8 @@
    "x": 22,
    "y": 40
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "grassland"
  },
  "route1": {
   "id": "route1",
@@ -249,7 +257,8 @@
    "x": 22,
    "y": 52
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "grassland"
  },
  "palletTown": {
   "id": "palletTown",
@@ -268,7 +277,8 @@
    "x": 22,
    "y": 64
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "grassland"
  },
  "route21": {
   "id": "route21",
@@ -298,7 +308,8 @@
    "x": 22,
    "y": 76
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "coast"
  },
  "cinnabarIsland": {
   "id": "cinnabarIsland",
@@ -328,7 +339,8 @@
    "x": 21.74,
    "y": 88
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "coast"
  },
  "route3": {
   "id": "route3",
@@ -358,7 +370,8 @@
    "x": 30,
    "y": 14
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "grassland"
  },
  "mtMoon": {
   "id": "mtMoon",
@@ -388,7 +401,8 @@
    "x": 38,
    "y": 14
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "mountain"
  },
  "route4": {
   "id": "route4",
@@ -418,7 +432,8 @@
    "x": 46,
    "y": 14.26
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "coast"
  },
  "ceruleanCity": {
   "id": "ceruleanCity",
@@ -450,7 +465,8 @@
    "x": 54,
    "y": 14.26
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "grassland"
  },
  "route9": {
   "id": "route9",
@@ -480,7 +496,8 @@
    "x": 64,
    "y": 14.26
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "grassland"
  },
  "rockTunnel": {
   "id": "rockTunnel",
@@ -510,7 +527,8 @@
    "x": 74,
    "y": 14
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "cave"
  },
  "route24": {
   "id": "route24",
@@ -540,7 +558,8 @@
    "x": 54,
    "y": 7.74
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "coast"
  },
  "route25": {
   "id": "route25",
@@ -569,7 +588,8 @@
    "x": 64,
    "y": 7.74
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "coast"
  },
  "ceruleanCave": {
   "id": "ceruleanCave",
@@ -599,7 +619,8 @@
    "x": 46,
    "y": 7.74
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "cave"
  },
  "route10": {
   "id": "route10",
@@ -630,7 +651,8 @@
    "x": 74,
    "y": 27
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "coast"
  },
  "powerPlant": {
   "id": "powerPlant",
@@ -660,7 +682,8 @@
    "x": 84,
    "y": 27
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "cave"
  },
  "route5": {
   "id": "route5",
@@ -690,7 +713,8 @@
    "x": 54,
    "y": 27
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "grassland"
  },
  "saffronCity": {
   "id": "saffronCity",
@@ -721,7 +745,8 @@
    "x": 54,
    "y": 40
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "grassland"
  },
  "route6": {
   "id": "route6",
@@ -751,7 +776,8 @@
    "x": 54,
    "y": 50
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "coast"
  },
  "vermilionCity": {
   "id": "vermilionCity",
@@ -780,7 +806,8 @@
    "x": 54,
    "y": 58
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "grassland"
  },
  "route7": {
   "id": "route7",
@@ -810,7 +837,8 @@
    "x": 46.042042875900364,
    "y": 39.872013260185085
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "grassland"
  },
  "celadonCity": {
   "id": "celadonCity",
@@ -839,7 +867,8 @@
    "x": 38,
    "y": 40
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "grassland"
  },
  "route8": {
   "id": "route8",
@@ -869,7 +898,8 @@
    "x": 64,
    "y": 40
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "grassland"
  },
  "lavenderTown": {
   "id": "lavenderTown",
@@ -900,7 +930,8 @@
    "x": 74,
    "y": 40
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "grassland"
  },
  "pokemonTower": {
   "id": "pokemonTower",
@@ -929,7 +960,8 @@
    "x": 82,
    "y": 40
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "ruins"
  },
  "route11": {
   "id": "route11",
@@ -962,7 +994,8 @@
    "x": 64,
    "y": 58
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "coast"
  },
  "diglettsCave": {
   "id": "diglettsCave",
@@ -992,7 +1025,8 @@
    "x": 44.08888632509771,
    "y": 46.0862031545062
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "cave"
  },
  "route16": {
   "id": "route16",
@@ -1022,7 +1056,8 @@
    "x": 37.869070799001925,
    "y": 48.041783585308714
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "grassland"
  },
  "route17": {
   "id": "route17",
@@ -1052,7 +1087,8 @@
    "x": 38,
    "y": 60
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "coast"
  },
  "route18": {
   "id": "route18",
@@ -1082,7 +1118,8 @@
    "x": 38,
    "y": 72
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "coast"
  },
  "route12": {
   "id": "route12",
@@ -1113,7 +1150,8 @@
    "x": 74,
    "y": 50
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "coast"
  },
  "route13": {
   "id": "route13",
@@ -1143,7 +1181,8 @@
    "x": 74,
    "y": 60
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "coast"
  },
  "route14": {
   "id": "route14",
@@ -1173,7 +1212,8 @@
    "x": 74,
    "y": 72
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "grassland"
  },
  "route15": {
   "id": "route15",
@@ -1203,7 +1243,8 @@
    "x": 54,
    "y": 72
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "grassland"
  },
  "fuchsiaCity": {
   "id": "fuchsiaCity",
@@ -1234,7 +1275,8 @@
    "x": 46,
    "y": 72.26
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "grassland"
  },
  "safariZone": {
   "id": "safariZone",
@@ -1263,7 +1305,8 @@
    "x": 46,
    "y": 65.74
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "grassland"
  },
  "route19": {
   "id": "route19",
@@ -1293,7 +1336,8 @@
    "x": 46,
    "y": 80
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "coast"
  },
  "route20": {
   "id": "route20",
@@ -1323,7 +1367,8 @@
    "x": 40,
    "y": 88
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "coast"
  },
  "seafoamIslands": {
   "id": "seafoamIslands",
@@ -1353,7 +1398,8 @@
    "x": 28.26,
    "y": 88
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "cave"
  },
  "pokemonMansion": {
   "id": "pokemonMansion",
@@ -1382,7 +1428,8 @@
    "x": 16,
    "y": 84
   },
-  "region": "kanto"
+  "region": "kanto",
+  "biome": "cave"
  },
  "raidIsland": {
   "id": "raidIsland",
@@ -1401,6 +1448,7 @@
    "y": 14
   },
   "region": "kanto",
-  "routeKey": "raidIsland"
+  "routeKey": "raidIsland",
+  "biome": "coast"
  }
 }

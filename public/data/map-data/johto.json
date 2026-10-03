@@ -24,7 +24,8 @@
      "itemId": "pokeball"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "johto-route-29": {
   "id": "johto-route-29",
@@ -49,7 +50,8 @@
   "position": {
    "x": 70.77526786171843,
    "y": 57.587417692837114
-  }
+  },
+  "biome": "grassland"
  },
  "johto-cherrygrove-city": {
   "id": "johto-cherrygrove-city",
@@ -81,7 +83,8 @@
      "itemId": "pokeball"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "johto-route-30": {
   "id": "johto-route-30",
@@ -108,7 +111,8 @@
   "position": {
    "x": 60.22,
    "y": 47.63
-  }
+  },
+  "biome": "coast"
  },
  "johto-route-31": {
   "id": "johto-route-31",
@@ -135,7 +139,8 @@
   "position": {
    "x": 51.64434431154539,
    "y": 46.669988807756184
-  }
+  },
+  "biome": "coast"
  },
  "johto-violet-city": {
   "id": "johto-violet-city",
@@ -169,7 +174,8 @@
      "itemId": "pokeball"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "johto-route-32": {
   "id": "johto-route-32",
@@ -198,7 +204,8 @@
   "position": {
    "x": 51.09,
    "y": 62.23
-  }
+  },
+  "biome": "coast"
  },
  "johto-route-33": {
   "id": "johto-route-33",
@@ -225,7 +232,8 @@
   "position": {
    "x": 41.36,
    "y": 72.32
-  }
+  },
+  "biome": "grassland"
  },
  "johto-azalea-town": {
   "id": "johto-azalea-town",
@@ -261,7 +269,8 @@
      "unlockWildBattlesWon": 50
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "johto-route-34": {
   "id": "johto-route-34",
@@ -291,7 +300,8 @@
   "position": {
    "x": 31.63,
    "y": 59.79
-  }
+  },
+  "biome": "coast"
  },
  "johto-goldenrod-city": {
   "id": "johto-goldenrod-city",
@@ -327,7 +337,8 @@
      "unlockWildBattlesWon": 50
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "johto-route-35": {
   "id": "johto-route-35",
@@ -357,7 +368,8 @@
   "position": {
    "x": 31.39,
    "y": 41.18
-  }
+  },
+  "biome": "coast"
  },
  "johto-route-36": {
   "id": "johto-route-36",
@@ -389,7 +401,8 @@
   "position": {
    "x": 41.308736839146036,
    "y": 39.03519906322131
-  }
+  },
+  "biome": "grassland"
  },
  "johto-route-37": {
   "id": "johto-route-37",
@@ -416,7 +429,8 @@
   "position": {
    "x": 37.88440428591541,
    "y": 33.498385143245685
-  }
+  },
+  "biome": "grassland"
  },
  "johto-ecruteak-city": {
   "id": "johto-ecruteak-city",
@@ -460,7 +474,8 @@
      "itemId": "repel"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "johto-bell-tower": {
   "id": "johto-bell-tower",
@@ -489,7 +504,8 @@
   "position": {
    "x": 39.91500512488523,
    "y": 23.25718602875471
-  }
+  },
+  "biome": "ruins"
  },
  "johto-route-38": {
   "id": "johto-route-38",
@@ -518,7 +534,8 @@
   "position": {
    "x": 30.41,
    "y": 29.01
-  }
+  },
+  "biome": "grassland"
  },
  "johto-route-39": {
   "id": "johto-route-39",
@@ -545,7 +562,8 @@
   "position": {
    "x": 21.29,
    "y": 31.81
-  }
+  },
+  "biome": "grassland"
  },
  "johto-olivine-city": {
   "id": "johto-olivine-city",
@@ -587,7 +605,8 @@
      "itemId": "repel"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "johto-sea-route-40": {
   "id": "johto-sea-route-40",
@@ -614,7 +633,8 @@
   "position": {
    "x": 4.87,
    "y": 41.55
-  }
+  },
+  "biome": "coast"
  },
  "johto-sea-route-41": {
   "id": "johto-sea-route-41",
@@ -641,7 +661,8 @@
   "position": {
    "x": 15.82,
    "y": 57.97
-  }
+  },
+  "biome": "coast"
  },
  "johto-cianwood-city": {
   "id": "johto-cianwood-city",
@@ -686,7 +707,8 @@
      "itemId": "honey"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "johto-whirl-islands": {
   "id": "johto-whirl-islands",
@@ -714,7 +736,8 @@
   "position": {
    "x": 8.52,
    "y": 49.7
-  }
+  },
+  "biome": "coast"
  },
  "johto-route-42": {
   "id": "johto-route-42",
@@ -744,7 +767,8 @@
   "position": {
    "x": 49.22937950179028,
    "y": 29.39159730721838
-  }
+  },
+  "biome": "grassland"
  },
  "johto-mahogany-town": {
   "id": "johto-mahogany-town",
@@ -789,7 +813,8 @@
      "itemId": "honey"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "johto-route-43": {
   "id": "johto-route-43",
@@ -818,7 +843,8 @@
   "position": {
    "x": 60.83,
    "y": 25.97
-  }
+  },
+  "biome": "grassland"
  },
  "johto-route-44": {
   "id": "johto-route-44",
@@ -847,7 +873,8 @@
   "position": {
    "x": 69.95,
    "y": 27.8
-  }
+  },
+  "biome": "coast"
  },
  "johto-blackthorn-city": {
   "id": "johto-blackthorn-city",
@@ -892,7 +919,8 @@
      "itemId": "honey"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "johto-route-45": {
   "id": "johto-route-45",
@@ -921,7 +949,8 @@
   "position": {
    "x": 70.39856573020815,
    "y": 38.20402788380774
-  }
+  },
+  "biome": "coast"
  },
  "johto-route-46": {
   "id": "johto-route-46",
@@ -953,7 +982,8 @@
   "position": {
    "x": 68.13,
    "y": 48.84
-  }
+  },
+  "biome": "grassland"
  },
  "johto-route-47": {
   "id": "johto-route-47",
@@ -983,7 +1013,8 @@
   "position": {
    "x": 2.0136319223516765,
    "y": 67.33911650101612
-  }
+  },
+  "biome": "coast"
  },
  "johto-route-48": {
   "id": "johto-route-48",
@@ -1009,7 +1040,8 @@
   "position": {
    "x": 2,
    "y": 60.64967253130122
-  }
+  },
+  "biome": "grassland"
  },
  "johto-mt-silver": {
   "id": "johto-mt-silver",
@@ -1037,7 +1069,8 @@
   "position": {
    "x": 85.16,
    "y": 48.24
-  }
+  },
+  "biome": "mountain"
  },
  "johto-raid": {
   "id": "johto-raid",
@@ -1062,7 +1095,8 @@
   "position": {
    "x": 75.43,
    "y": 76.22
-  }
+  },
+  "biome": "coast"
  },
  "johto-league": {
   "id": "johto-league",
@@ -1095,6 +1129,7 @@
   "position": {
    "x": 93.67,
    "y": 30.6
-  }
+  },
+  "biome": "grassland"
  }
 }

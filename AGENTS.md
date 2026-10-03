@@ -272,15 +272,22 @@ Data conventions:
   starters live in `regionalStarters` in `src/data/config.js`.
 - `map-data/<region>.json` locations carry a `region` id; wild routes also
   reference an `encounter-data/<region>.json` bucket via `routeKey`. Generated
-  routes carry a `background` (biome, from the route name and its dominant
-  wild type) that `battle-scene.js` uses for the wild battle scene; Kanto's
-  routes fall back to the hand-curated `locationImages` map in `ui.js`.
-  `biomeForLocation` derives a biome from the name for a colour grade
-  (`BIOME_FILTERS`), and `biomeBackgroundFor` swaps in a dedicated
-  `/backgrounds/<biome>` (any web image format) when that biome is listed in
-  `BIOME_SCENE_IMAGES`
-  (`src/data/ui.js`) — drop the painted art in and add the line to install it.
-  The forest, autumn, desert, swamp, volcanic, tundra and ruins art is wired in.
+  routes carry a `background` (a coarse base scene — grassland / beach /
+  mountain / cave — from the route name and its dominant wild type) that
+  `battle-scene.js` uses for the wild battle scene; Kanto's routes fall back to
+  the hand-curated `locationImages` map in `ui.js`.
+  Every location also carries a `biome` (forest, autumn, desert, swamp,
+  volcanic, tundra, ruins, or the base grassland / coast / mountain / cave),
+  classified from its name, its wild table's land types and a small curated
+  table for iconic routes (`deriveBiome` in `tools/lib/biomes.cjs`).
+  `tools/apply-biomes.cjs` writes it onto the committed map data (the generator
+  runs the same pass), and `biomeForLocation` (`src/data/ui.js`) prefers it and
+  falls back to the name / background heuristics for hand-authored data. The
+  `biome` feeds the Town Map terrain shading and `biomeBackgroundFor`, which
+  swaps in a dedicated `/backgrounds/<biome>` (any web image format) when that
+  biome is listed in `BIOME_SCENE_IMAGES` (`src/data/ui.js`) — drop the painted
+  art in and add the line to install it. The forest, autumn, desert, swamp,
+  volcanic, tundra and ruins art is wired in.
   The battle scene also layers `BattleWeatherOverlay` (`battle-weather-overlay.js`):
   CSS rain/sand/snow/sun/wind particles behind the combatants, hidden under
   reduced motion. Unlock rules support
@@ -723,6 +730,15 @@ One-off scripts used to build the data JSON (not run during dev/build):
   nocturnal / diurnal species with a `time: "night"` / `"day"` tag on every
   encounter bucket (`encountersForPhase` filters by the day/night cycle, falling
   back to the full table when a phase would be empty). Idempotent (`--dry`).
+- `apply-biomes.cjs` — data-only pass that writes a `biome` onto every location
+  in `map-data/<region>.json` (forest, autumn, desert, swamp, volcanic, tundra,
+  ruins, or the base grassland / coast / mountain / cave) using
+  `lib/biomes.cjs` (`deriveBiome`): name keywords first, then the wild table's
+  land types, with a small curated override table for iconic routes (Hoenn's
+  sea lanes, Sinnoh's Stark Mountain, Paldea's Kitakami / Area Zero, Kanto's
+  hand-curated `locationImages`). Feeds the painted battle scenes (via
+  `biomeBackgroundFor`) and the Town Map terrain. The generator runs the same
+  pass on regeneration. Idempotent (`--dry`).
 - `apply-trainer-variety.cjs` — data-only pass (#68) that rebuilds every
   region's (including Kanto's) town route trainers with `lib/trainer-teams.cjs`,
   adding two extra trainers per town for headroom: level-appropriate teams, the
@@ -761,6 +777,10 @@ One-off scripts used to build the data JSON (not run during dev/build):
 - `lib/route-variety.cjs` — shared route-variety helpers (`buildWildPool`,
   `enrichEncounters`, `collectProtectedSpecies`) used by both
   `generate-regions.cjs` and `apply-route-variety.cjs`.
+- `lib/biomes.cjs` — shared `deriveBiome` battle/town-map biome classifier
+  (name keywords + wild-table land types + curated route overrides) used by
+  `generate-regions.cjs` and `apply-biomes.cjs`; mirrored at runtime by
+  `biomeForLocation` (`src/data/ui.js`).
 - `enforce-zone-chains.cjs` — adds the `requires: [hub, previous sub-area]`
   chain to the committed zone sub-areas so they unlock in order behind the hub
   (the generator does it in its final pass). Idempotent (`--dry`).

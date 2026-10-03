@@ -23,7 +23,8 @@
      "itemId": "pokeball"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "hoenn-route-101": {
   "id": "hoenn-route-101",
@@ -47,7 +48,8 @@
   "position": {
    "x": 15.902962368858665,
    "y": 63.41179479127338
-  }
+  },
+  "biome": "forest"
  },
  "hoenn-oldale-town": {
   "id": "hoenn-oldale-town",
@@ -80,7 +82,8 @@
      "itemId": "pokeball"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "hoenn-route-102": {
   "id": "hoenn-route-102",
@@ -107,7 +110,8 @@
   "position": {
    "x": 11.147147550904759,
    "y": 58.83333161680326
-  }
+  },
+  "biome": "coast"
  },
  "hoenn-petalburg-city": {
   "id": "hoenn-petalburg-city",
@@ -139,7 +143,8 @@
      "itemId": "pokeball"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "hoenn-route-103": {
   "id": "hoenn-route-103",
@@ -166,7 +171,8 @@
   "position": {
    "x": 23.503067592597134,
    "y": 54.716068955626156
-  }
+  },
+  "biome": "coast"
  },
  "hoenn-route-104": {
   "id": "hoenn-route-104",
@@ -193,7 +199,8 @@
   "position": {
    "x": 2.9895337123153882,
    "y": 54.06727292245614
-  }
+  },
+  "biome": "forest"
  },
  "hoenn-rustboro-city": {
   "id": "hoenn-rustboro-city",
@@ -227,7 +234,8 @@
      "itemId": "pokeball"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "hoenn-route-105": {
   "id": "hoenn-route-105",
@@ -256,7 +264,8 @@
   "position": {
    "x": 2.63,
    "y": 66.69
-  }
+  },
+  "biome": "coast"
  },
  "hoenn-route-106": {
   "id": "hoenn-route-106",
@@ -283,7 +292,8 @@
   "position": {
    "x": 5.46730121157177,
    "y": 72.65165865283994
-  }
+  },
+  "biome": "coast"
  },
  "hoenn-dewford-town": {
   "id": "hoenn-dewford-town",
@@ -319,7 +329,8 @@
      "unlockWildBattlesWon": 50
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "hoenn-route-107": {
   "id": "hoenn-route-107",
@@ -349,7 +360,8 @@
   "position": {
    "x": 16.605422417086135,
    "y": 76.6863292054181
-  }
+  },
+  "biome": "coast"
  },
  "hoenn-route-108": {
   "id": "hoenn-route-108",
@@ -375,7 +387,8 @@
   "position": {
    "x": 25.048969379683374,
    "y": 76.74249441316181
-  }
+  },
+  "biome": "coast"
  },
  "hoenn-route-109": {
   "id": "hoenn-route-109",
@@ -402,7 +415,8 @@
   "position": {
    "x": 30.521030620316626,
    "y": 73.19750558683819
-  }
+  },
+  "biome": "coast"
  },
  "hoenn-slateport-city": {
   "id": "hoenn-slateport-city",
@@ -439,7 +453,8 @@
      "unlockWildBattlesWon": 50
     }
    ]
-  }
+  },
+  "biome": "coast"
  },
  "hoenn-route-110": {
   "id": "hoenn-route-110",
@@ -470,7 +485,8 @@
   "position": {
    "x": 30.13,
    "y": 53.75
-  }
+  },
+  "biome": "coast"
  },
  "hoenn-mauville-city": {
   "id": "hoenn-mauville-city",
@@ -508,7 +524,8 @@
      "unlockWildBattlesWon": 50
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "hoenn-route-111": {
   "id": "hoenn-route-111",
@@ -540,7 +557,8 @@
    "x": 30.074252246845592,
    "y": 33.29532303400799
   },
-  "weather": "sandstorm"
+  "weather": "sandstorm",
+  "biome": "desert"
  },
  "hoenn-route-112": {
   "id": "hoenn-route-112",
@@ -573,7 +591,8 @@
   "position": {
    "x": 26.271781784043792,
    "y": 38.591700888685644
-  }
+  },
+  "biome": "volcanic"
  },
  "hoenn-lavaridge-town": {
   "id": "hoenn-lavaridge-town",
@@ -609,7 +628,8 @@
      "unlockWildBattlesWon": 50
     }
    ]
-  }
+  },
+  "biome": "volcanic"
  },
  "hoenn-route-113": {
   "id": "hoenn-route-113",
@@ -645,7 +665,8 @@
   "position": {
    "x": 21.25,
    "y": 24.56
-  }
+  },
+  "biome": "grassland"
  },
  "hoenn-fallarbor-town": {
   "id": "hoenn-fallarbor-town",
@@ -691,7 +712,8 @@
      "itemId": "repel"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "hoenn-route-114": {
   "id": "hoenn-route-114",
@@ -717,7 +739,8 @@
   "position": {
    "x": 8.27362659077753,
    "y": 28.5551827133754
-  }
+  },
+  "biome": "coast"
  },
  "hoenn-route-115": {
   "id": "hoenn-route-115",
@@ -747,7 +770,8 @@
   "position": {
    "x": 2.31,
    "y": 35.81
-  }
+  },
+  "biome": "coast"
  },
  "hoenn-route-116": {
   "id": "hoenn-route-116",
@@ -777,7 +801,8 @@
   "position": {
    "x": 10,
    "y": 41.56
-  }
+  },
+  "biome": "forest"
  },
  "hoenn-verdanturf-town": {
   "id": "hoenn-verdanturf-town",
@@ -826,7 +851,8 @@
      "itemId": "repel"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "hoenn-route-117": {
   "id": "hoenn-route-117",
@@ -856,7 +882,8 @@
   "position": {
    "x": 23.13,
    "y": 45.44
-  }
+  },
+  "biome": "forest"
  },
  "hoenn-route-118": {
   "id": "hoenn-route-118",
@@ -887,7 +914,8 @@
   "position": {
    "x": 38.75,
    "y": 45.31
-  }
+  },
+  "biome": "coast"
  },
  "hoenn-route-119": {
   "id": "hoenn-route-119",
@@ -914,7 +942,8 @@
    "x": 40.31,
    "y": 33.56
   },
-  "weather": "rain"
+  "weather": "rain",
+  "biome": "forest"
  },
  "hoenn-fortree-city": {
   "id": "hoenn-fortree-city",
@@ -957,7 +986,8 @@
      "itemId": "repel"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "hoenn-route-120": {
   "id": "hoenn-route-120",
@@ -986,7 +1016,8 @@
   "position": {
    "x": 47.53588330686691,
    "y": 29.967667140356667
-  }
+  },
+  "biome": "coast"
  },
  "hoenn-route-121": {
   "id": "hoenn-route-121",
@@ -1014,7 +1045,8 @@
   "position": {
    "x": 58.53050420458977,
    "y": 34.67337264625616
-  }
+  },
+  "biome": "coast"
  },
  "hoenn-lilycove-city": {
   "id": "hoenn-lilycove-city",
@@ -1056,7 +1088,8 @@
      "itemId": "repel"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "hoenn-route-122": {
   "id": "hoenn-route-122",
@@ -1083,7 +1116,8 @@
   "position": {
    "x": 56.78949579541023,
    "y": 40.95662735374384
-  }
+  },
+  "biome": "coast"
  },
  "hoenn-route-123": {
   "id": "hoenn-route-123",
@@ -1112,7 +1146,8 @@
   "position": {
    "x": 50.63,
    "y": 46.25
-  }
+  },
+  "biome": "coast"
  },
  "hoenn-route-124": {
   "id": "hoenn-route-124",
@@ -1140,7 +1175,8 @@
   "position": {
    "x": 78.44,
    "y": 36.88
-  }
+  },
+  "biome": "coast"
  },
  "hoenn-mossdeep-city": {
   "id": "hoenn-mossdeep-city",
@@ -1185,7 +1221,8 @@
      "itemId": "honey"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "hoenn-route-125": {
   "id": "hoenn-route-125",
@@ -1214,7 +1251,8 @@
   "position": {
    "x": 89.88904415170107,
    "y": 35.5107733094923
-  }
+  },
+  "biome": "coast"
  },
  "hoenn-route-126": {
   "id": "hoenn-route-126",
@@ -1244,7 +1282,8 @@
   "position": {
    "x": 79.06947531940625,
    "y": 47.77203798314802
-  }
+  },
+  "biome": "coast"
  },
  "hoenn-sootopolis-city": {
   "id": "hoenn-sootopolis-city",
@@ -1288,7 +1327,8 @@
      "itemId": "honey"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "hoenn-route-127": {
   "id": "hoenn-route-127",
@@ -1318,7 +1358,8 @@
   "position": {
    "x": 89.56039143048675,
    "y": 48.060971942164215
-  }
+  },
+  "biome": "coast"
  },
  "hoenn-route-128": {
   "id": "hoenn-route-128",
@@ -1348,7 +1389,8 @@
   "position": {
    "x": 89.00110101283248,
    "y": 57.56912127585571
-  }
+  },
+  "biome": "coast"
  },
  "hoenn-ever-grande-city": {
   "id": "hoenn-ever-grande-city",
@@ -1391,7 +1433,8 @@
      "itemId": "honey"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "hoenn-route-129": {
   "id": "hoenn-route-129",
@@ -1418,7 +1461,8 @@
   "position": {
    "x": 90.67389898716752,
    "y": 63.87087872414429
-  }
+  },
+  "biome": "coast"
  },
  "hoenn-route-130": {
   "id": "hoenn-route-130",
@@ -1444,7 +1488,8 @@
   "position": {
    "x": 81.56,
    "y": 62.5
-  }
+  },
+  "biome": "coast"
  },
  "hoenn-route-131": {
   "id": "hoenn-route-131",
@@ -1477,7 +1522,8 @@
   "position": {
    "x": 71.56,
    "y": 62.5
-  }
+  },
+  "biome": "coast"
  },
  "hoenn-pacifidlog-town": {
   "id": "hoenn-pacifidlog-town",
@@ -1521,7 +1567,8 @@
      "itemId": "honey"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "hoenn-route-132": {
   "id": "hoenn-route-132",
@@ -1548,7 +1595,8 @@
   "position": {
    "x": 58.13,
    "y": 62.5
-  }
+  },
+  "biome": "coast"
  },
  "hoenn-route-133": {
   "id": "hoenn-route-133",
@@ -1574,7 +1622,8 @@
   "position": {
    "x": 47.5,
    "y": 62.31
-  }
+  },
+  "biome": "coast"
  },
  "hoenn-route-134": {
   "id": "hoenn-route-134",
@@ -1605,7 +1654,8 @@
   "position": {
    "x": 37.19,
    "y": 62.31
-  }
+  },
+  "biome": "coast"
  },
  "hoenn-raid": {
   "id": "hoenn-raid",
@@ -1630,7 +1680,8 @@
   "position": {
    "x": 81.25,
    "y": 74.69
-  }
+  },
+  "biome": "coast"
  },
  "hoenn-league": {
   "id": "hoenn-league",
@@ -1663,6 +1714,7 @@
   "position": {
    "x": 96.25,
    "y": 51.44
-  }
+  },
+  "biome": "grassland"
  }
 }

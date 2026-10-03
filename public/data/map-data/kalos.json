@@ -23,7 +23,8 @@
      "itemId": "pokeball"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "kalos-route-1": {
   "id": "kalos-route-1",
@@ -47,7 +48,8 @@
   "position": {
    "x": 66.38985607884018,
    "y": 65.51131799298459
-  }
+  },
+  "biome": "forest"
  },
  "kalos-aquacorde-town": {
   "id": "kalos-aquacorde-town",
@@ -79,7 +81,8 @@
      "itemId": "pokeball"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "kalos-route-2": {
   "id": "kalos-route-2",
@@ -106,7 +109,8 @@
   "position": {
    "x": 63.83840400117754,
    "y": 59.07520539683034
-  }
+  },
+  "biome": "grassland"
  },
  "kalos-route-3": {
   "id": "kalos-route-3",
@@ -132,7 +136,8 @@
   "position": {
    "x": 57.439289037808734,
    "y": 57.73237089201022
-  }
+  },
+  "biome": "coast"
  },
  "kalos-santalune-city": {
   "id": "kalos-santalune-city",
@@ -172,7 +177,8 @@
      "itemId": "pokeball"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "kalos-route-4": {
   "id": "kalos-route-4",
@@ -201,7 +207,8 @@
   "position": {
    "x": 55.757473973144194,
    "y": 46.316479721943765
-  }
+  },
+  "biome": "forest"
  },
  "kalos-lumiose-city": {
   "id": "kalos-lumiose-city",
@@ -237,7 +244,8 @@
      "itemId": "pokeball"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "kalos-route-5": {
   "id": "kalos-route-5",
@@ -263,7 +271,8 @@
   "position": {
    "x": 49.29818363953156,
    "y": 47.204155555848416
-  }
+  },
+  "biome": "grassland"
  },
  "kalos-camphrier-town": {
   "id": "kalos-camphrier-town",
@@ -300,7 +309,8 @@
      "unlockWildBattlesWon": 50
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "kalos-route-6": {
   "id": "kalos-route-6",
@@ -332,7 +342,8 @@
   "position": {
    "x": 34.74664568647636,
    "y": 51.29469413665511
-  }
+  },
+  "biome": "grassland"
  },
  "kalos-route-7": {
   "id": "kalos-route-7",
@@ -361,7 +372,8 @@
   "position": {
    "x": 28.875641205489543,
    "y": 54.10598162364543
-  }
+  },
+  "biome": "grassland"
  },
  "kalos-cyllage-city": {
   "id": "kalos-cyllage-city",
@@ -405,7 +417,8 @@
      "unlockWildBattlesWon": 50
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "kalos-route-8": {
   "id": "kalos-route-8",
@@ -442,7 +455,8 @@
   "position": {
    "x": 22.85657514861529,
    "y": 56.59458351330628
-  }
+  },
+  "biome": "coast"
  },
  "kalos-ambrette-town": {
   "id": "kalos-ambrette-town",
@@ -487,7 +501,8 @@
      "unlockWildBattlesWon": 50
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "kalos-route-9": {
   "id": "kalos-route-9",
@@ -513,7 +528,8 @@
   "position": {
    "x": 19.55171300360158,
    "y": 69.19044426602187
-  }
+  },
+  "biome": "mountain"
  },
  "kalos-route-10": {
   "id": "kalos-route-10",
@@ -542,7 +558,8 @@
   "position": {
    "x": 10.990288046850813,
    "y": 51.24922392203059
-  }
+  },
+  "biome": "grassland"
  },
  "kalos-geosenge-town": {
   "id": "kalos-geosenge-town",
@@ -586,7 +603,8 @@
      "unlockWildBattlesWon": 50
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "kalos-route-11": {
   "id": "kalos-route-11",
@@ -612,7 +630,8 @@
   "position": {
    "x": 9.049416430218034,
    "y": 44.74059143569558
-  }
+  },
+  "biome": "swamp"
  },
  "kalos-shalour-city": {
   "id": "kalos-shalour-city",
@@ -655,7 +674,8 @@
      "itemId": "repel"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "kalos-route-12": {
   "id": "kalos-route-12",
@@ -684,7 +704,8 @@
   "position": {
    "x": 25.36,
    "y": 36.96
-  }
+  },
+  "biome": "coast"
  },
  "kalos-coumarine-city": {
   "id": "kalos-coumarine-city",
@@ -727,7 +748,8 @@
      "itemId": "repel"
     }
    ]
-  }
+  },
+  "biome": "coast"
  },
  "kalos-route-13": {
   "id": "kalos-route-13",
@@ -757,7 +779,8 @@
   "position": {
    "x": 46.55950314868646,
    "y": 37.67214356921405
-  }
+  },
+  "biome": "desert"
  },
  "kalos-route-14": {
   "id": "kalos-route-14",
@@ -787,7 +810,8 @@
   "position": {
    "x": 51.72049685131354,
    "y": 33.68785643078595
-  }
+  },
+  "biome": "coast"
  },
  "kalos-laverre-city": {
   "id": "kalos-laverre-city",
@@ -829,7 +853,8 @@
      "itemId": "repel"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "kalos-route-15": {
   "id": "kalos-route-15",
@@ -860,7 +885,8 @@
   "position": {
    "x": 60.084694182120245,
    "y": 30.10541828109001
-  }
+  },
+  "biome": "coast"
  },
  "kalos-dendemille-town": {
   "id": "kalos-dendemille-town",
@@ -902,7 +928,8 @@
      "itemId": "repel"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "kalos-route-16": {
   "id": "kalos-route-16",
@@ -932,7 +959,8 @@
   "position": {
    "x": 58.10617271189277,
    "y": 36.304455996909546
-  }
+  },
+  "biome": "coast"
  },
  "kalos-route-17": {
   "id": "kalos-route-17",
@@ -959,7 +987,8 @@
    "x": 79.18385669811387,
    "y": 38.43434150157041
   },
-  "weather": "snow"
+  "weather": "snow",
+  "biome": "mountain"
  },
  "kalos-anistar-city": {
   "id": "kalos-anistar-city",
@@ -1004,7 +1033,8 @@
      "itemId": "honey"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "kalos-route-18": {
   "id": "kalos-route-18",
@@ -1033,7 +1063,8 @@
   "position": {
    "x": 89.56670105497807,
    "y": 45.595721755787
-  }
+  },
+  "biome": "desert"
  },
  "kalos-couriway-town": {
   "id": "kalos-couriway-town",
@@ -1078,7 +1109,8 @@
      "itemId": "honey"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "kalos-route-19": {
   "id": "kalos-route-19",
@@ -1104,7 +1136,8 @@
   "position": {
    "x": 90.35928731854284,
    "y": 52.716171238683884
-  }
+  },
+  "biome": "coast"
  },
  "kalos-snowbelle-city": {
   "id": "kalos-snowbelle-city",
@@ -1157,7 +1190,8 @@
      "itemId": "honey"
     }
    ]
-  }
+  },
+  "biome": "tundra"
  },
  "kalos-route-20": {
   "id": "kalos-route-20",
@@ -1185,7 +1219,8 @@
   "position": {
    "x": 79.63358925547125,
    "y": 55.70498028974028
-  }
+  },
+  "biome": "forest"
  },
  "kalos-kiloude-city": {
   "id": "kalos-kiloude-city",
@@ -1232,7 +1267,8 @@
      "itemId": "honey"
     }
    ]
-  }
+  },
+  "biome": "grassland"
  },
  "kalos-route-21": {
   "id": "kalos-route-21",
@@ -1261,7 +1297,8 @@
   "position": {
    "x": 85.89831650208092,
    "y": 57.44652300026148
-  }
+  },
+  "biome": "coast"
  },
  "kalos-route-22": {
   "id": "kalos-route-22",
@@ -1294,7 +1331,8 @@
   "position": {
    "x": 70.86,
    "y": 53.68
-  }
+  },
+  "biome": "coast"
  },
  "kalos-raid": {
   "id": "kalos-raid",
@@ -1319,7 +1357,8 @@
   "position": {
    "x": 66.56079140221101,
    "y": 30.814440648168365
-  }
+  },
+  "biome": "coast"
  },
  "kalos-league": {
   "id": "kalos-league",
@@ -1352,6 +1391,7 @@
   "position": {
    "x": 66.99797193903514,
    "y": 37.30934946710613
-  }
+  },
+  "biome": "grassland"
  }
 }

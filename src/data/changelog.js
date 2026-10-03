@@ -32,6 +32,7 @@ export const CHANGELOG = [
             'The Town Map got a readability pass: town and area/zone names stay on screen instead of appearing only on hover, a zone hub shows how many sub-areas it holds on its marker, and a legend (the ⓘ button) explains every node type',
             'Routes feel less repetitive: every route that only had a handful of species now also rolls other Pokemon already wild elsewhere in the same region, matched to the route\u2019s level and dominant types, so most routes offer up to around sixteen different finds. Starter lines, breed-only babies, Raid Island rosters and route-exclusive catch targets are left alone',
             'Snowpoint Temple now opens with a Strength chamber: push the boulder onto the pressure plate to unseal the exit before the ice rooms',
+            'Locations are labelled by their real kind now — Cave, Forest, Sea Route, Mountain, Desert, Volcanic, Tundra, Ruins — instead of calling every wild stop a \u201cRoute\u201d, and a zone hub lists each open sub-area\u2019s wild Pokemon inline so its habitats can be compared without travelling into each one',
           ],
         },
         {

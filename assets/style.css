@@ -4029,6 +4029,28 @@ img {
     border-color: #483828
 }
 
+.zone-area {
+    display: flex;
+    flex-direction: column
+}
+
+/* The inline wild table for an open sub-area, tucked directly under its
+   travel button so a zone hub reads as one continuous list. */
+.zone-area-grid {
+    padding: 4px 6px 6px;
+    background: #0000001a;
+    border: 2px solid #483828;
+    border-top: none
+}
+
+.zone-area-grid .pokedex-grid-container {
+    margin: 0
+}
+
+.zone-area-grid .pokedex-grid-header {
+    margin-bottom: 4px
+}
+
 .zone-back-btn {
     align-self: flex-start;
     margin: 4px 0 6px;

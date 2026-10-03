@@ -4,6 +4,7 @@ import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
 import { BATTLE_TOWER_LOCATION } from '../data/config.js'
 import { martShopItems } from '../data/items.js'
 import { encounterData, gymLeaderData, mapData, pokemonSpecies, regions, raidPoolFor } from '../data/gameData.js'
+import { areaInfoFor } from '../data/ui.js'
 import { MINIGAME_AREAS, MINIGAME_INFO, MINIGAME_LOCATIONS, MINIGAME_START_ACTION, ROUTE_ACTIVITIES, bestRodId, nextRod, rodForId, routeActivityIds } from '../game/minigames.js'
 import { useGame } from '../game/context.js'
 import { computeUnlockedLocations, minigameRequirementMet, regionProgressionGoal } from '../game/progression.js'
@@ -522,7 +523,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
             className: 'location-section-title',
             children: 'Areas',
           }),
-          jsx('p', {
+          jsxs('p', {
             className: 'settings-hint',
             children: 'Pick an area to travel there and battle the Pokemon that live in it.',
           }),
@@ -540,22 +541,41 @@ export function LocationPanel({ onOpenCatchSettings }) {
                           ? `${requirement.current}/${requirement.required} ${requirement.label}`
                           : requirement.label
                       )
-                      .join(' \u00b7 ')
+                      .join(' \u00b7 '),
+                subAreaEncounters = encounterData[subArea.id]?.encounters
               return jsx(
-                'button',
+                'div',
                 {
-                  className: `zone-area-btn${subArea.id === activeSubArea ? ' active' : ''}${subArea.unlocked ? '' : ' locked'}`,
-                  onClick: subArea.unlocked ? () => travelToTarget(subArea.id) : void 0,
-                  title: subArea.unlocked ? void 0 : requirementText || 'Not available yet',
+                  className: `zone-area${subArea.id === activeSubArea ? ' active' : ''}`,
                   children: [
-                    jsx('span', {
-                      className: 'zone-area-name',
-                      children: subArea.unlocked ? subArea.name : '???',
+                    jsx('button', {
+                      className: `zone-area-btn${subArea.id === activeSubArea ? ' active' : ''}${subArea.unlocked ? '' : ' locked'}`,
+                      onClick: subArea.unlocked ? () => travelToTarget(subArea.id) : void 0,
+                      title: subArea.unlocked ? void 0 : requirementText || 'Not available yet',
+                      children: [
+                        jsx('span', {
+                          className: 'zone-area-name',
+                          children: subArea.unlocked ? subArea.name : '???',
+                        }),
+                        !subArea.unlocked && requirementText
+                          ? jsx('span', {
+                              className: 'zone-area-req',
+                              children: requirementText,
+                            })
+                          : null,
+                      ],
                     }),
-                    !subArea.unlocked && requirementText
-                      ? jsx('span', {
-                          className: 'zone-area-req',
-                          children: requirementText,
+                    // Inline each open area's wild table on the hub, so the
+                    // player can compare habitats without travelling into
+                    // each one first.
+                    subArea.unlocked && subAreaEncounters?.length
+                      ? jsx('div', {
+                          className: 'zone-area-grid',
+                          children: jsx(RouteEncounterGrid, {
+                            routeKey: subArea.id,
+                            encounters: subAreaEncounters,
+                            onOpenCatchSettings: onOpenCatchSettings ?? (() => {}),
+                          }),
                         })
                       : null,
                   ],
@@ -582,14 +602,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
           children: [
             jsx('span', {
               className: 'location-type-icon',
-              children:
-                location.type === 'town'
-                  ? '🏠'
-                  : location.type === 'facility'
-                    ? '🏝️'
-                    : location.hidden
-                      ? '🗺️'
-                      : '🌿',
+              children: areaInfoFor(location).icon,
             }),
             jsxs('div', {
               children: [
@@ -599,14 +612,11 @@ export function LocationPanel({ onOpenCatchSettings }) {
                 }),
                 jsx('div', {
                   className: 'location-type-label',
-                  children:
-                    location.type === 'town'
-                      ? 'Town'
-                      : location.type === 'facility'
-                        ? 'Island'
-                        : location.hidden
-                          ? (mapData[location.zone]?.name ?? 'Zone')
-                          : 'Route',
+                  children: location.hidden
+                    ? `${areaInfoFor(location).label} · ${
+                        mapData[location.zone]?.name ?? 'Zone'
+                      }`
+                    : areaInfoFor(location).label,
                 }),
               ],
             }),

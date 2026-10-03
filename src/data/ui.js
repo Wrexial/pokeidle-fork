@@ -391,3 +391,46 @@ export function biomeForLocation(location) {
   if (!background) return 'grassland'
   return { beach: 'coast', town_port: 'town' }[background] ?? background
 }
+
+/**
+ * Player-facing kind labels for the special (non-terrain) location types.
+ * @type {Record<string, { label: string, icon: string }>}
+ */
+export const AREA_INFO = {
+  town: { label: 'Town', icon: '🏠' },
+  facility: { label: 'Facility', icon: '🏝️' },
+  zone: { label: 'Zone', icon: '🗺️' },
+  raid: { label: 'Legendary Raid', icon: '⚔️' },
+}
+
+// Terrain label + icon per biome, so a cave or forest reads as one instead of
+// every wild location being a generic "Route".
+/** @type {Record<string, { label: string, icon: string }>} */
+const BIOME_AREA_INFO = {
+  grassland: { label: 'Route', icon: '🌿' },
+  forest: { label: 'Forest', icon: '🌲' },
+  autumn: { label: 'Forest', icon: '🍂' },
+  cave: { label: 'Cave', icon: '🕳️' },
+  coast: { label: 'Sea Route', icon: '🌊' },
+  mountain: { label: 'Mountain', icon: '⛰️' },
+  desert: { label: 'Desert', icon: '🏜️' },
+  volcanic: { label: 'Volcanic', icon: '🌋' },
+  tundra: { label: 'Tundra', icon: '❄️' },
+  swamp: { label: 'Swamp', icon: '🥾' },
+  ruins: { label: 'Ruins', icon: '🏛️' },
+  town: { label: 'Town', icon: '🏠' },
+}
+
+/**
+ * The label and icon shown under a location's name in the panel. Special types
+ * (town / zone / facility / raid) win, then the terrain from the committed
+ * `biome` (falling back to the name / background heuristics).
+ * @param {MapLocation | undefined | null} location
+ * @returns {{ label: string, icon: string }}
+ */
+export function areaInfoFor(location) {
+  if (!location) return BIOME_AREA_INFO.grassland
+  const special = AREA_INFO[location.type]
+  if (special) return special
+  return BIOME_AREA_INFO[biomeForLocation(location)] ?? BIOME_AREA_INFO.grassland
+}

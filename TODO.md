@@ -33,16 +33,13 @@ renumbered, so the gaps below are items that shipped.
    (blocked on #19) and finishing the Gameplay section.
 6. **#43 Multi-battles (double / triple / rotation) as a minigame** — M–L ·
    ★★½ — a self-contained minigame that reuses the combat pipeline.
-7. **#60 Areas should have their own zoomed-in map** — M · ★★ — zones and
-   large areas list their sub-areas in the panel only; give them a focused
-   map view entered from the Town Map, with a back button to exit.
 
 ### Tier 2 — Big / low-return, defer
 
-8. **#56 Multi-effect move pass (residual)** — S · ★★ — moves that roll one
+7. **#56 Multi-effect move pass (residual)** — S · ★★ — moves that roll one
    status out of several (Tri Attack, Dire Claw) or carry a third effect,
    which the single `secondary` slot cannot express.
-9. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+8. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
    doc and real ops for modest player value today.
 
 ---
@@ -218,11 +215,11 @@ and Paldea DLC started as zones and are now their own regions (#39).
 
 Still open:
 
-- [ ] More sub-areas (pairs with #28a/#28b). Galar's Wild Area (11 habitats)
-      and the four DLC zones (Isle of Armor 9, Crown Tundra 10, Kitakami 9,
-      Terarium 7) are filled out via `tools/lib/zone-areas.cjs` +
-      `apply-zone-areas.cjs`, and sub-area wild tables are behind a Show/Hide
-      toggle on the hub; Alola's islands are the remaining candidates.
+- [ ] More sub-areas (pairs with #28a/#28b). Galar's Wild Area (11 habitats),
+      the four DLC zones (Isle of Armor 9, Crown Tundra 10, Kitakami 9,
+      Terarium 7) and Alola's islands (Melemele 8, Akala 9, Ula'ula 11, Poni 6)
+      are filled out via `tools/lib/zone-areas.cjs` + `apply-zone-areas.cjs`,
+      and sub-area wild tables are behind a Show/Hide toggle on the hub.
 - [ ] Give each zone / area its own zoomed-in map view with a back button — see
       #60.
 
@@ -277,32 +274,6 @@ Relevant code: `src/data/move-effects.js`, `src/game/combat/turn.js`,
 `node tools/generate-reference.cjs`).
 
 Effort: **small** (the remaining bits are one-offs).
-## 60. Areas should have their own zoomed-in map
-
-Today a zone / large area (Galar's Wild Area, Alola's islands, Paldea's
-provinces, the DLC) is a single hub node whose sub-areas are only listed in the
-location panel, and a sub-area's own panel gets a `← Zone` back button — there
-is no dedicated in-area map. Give each area its own **zoomed-in map** view:
-entering the area from the Town Map focuses on just its sub-areas/nodes, with a
-back button to return to the region map.
-
-- [ ] Decide the scope: zones (#36), and/or every location's "area" (caves /
-      POIs from #28).
-- [ ] Render a focused map — reuse the `town-map.js` canvas with a filtered node
-      set (or a per-area layout) showing the area's sub-areas, their unlock
-      state and the player's current position.
-- [ ] Add the "zoom in" transition when entering the area and a back button to
-      exit to the region map (mirroring the existing zone back button in
-      `location-panel.js`).
-- [ ] Keep travel and encounters working off the existing `TRAVEL` /
-      sub-area plumbing.
-
-Relevant code: `src/components/town-map.js`, `src/components/location-panel.js`
-(zone hub + back button), `public/data/map-data/*.json` (`type: 'zone'`,
-`subAreas`), and `tools/generate-regions.cjs` (`ZONES`, `GROUP_ZONES`,
-`REGION_MAP_LAYOUTS`).
-
-Effort: **medium**.
 
 ## Map cleanup reference maps
 

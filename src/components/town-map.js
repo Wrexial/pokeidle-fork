@@ -104,6 +104,9 @@ export function TownMap() {
     currentLocationData = mapData[currentLocation],
     currentRegion = displayRegionFor(currentLocationData?.region ?? 'kanto'),
     [activeRegion, setActiveRegion] = React.useState(currentRegion),
+    // A zone/area the map is zoomed into (#60). When set, the canvas draws
+    // just that hub and its sub-areas (hidden routes included) with a back bar.
+    [focusZone, setFocusZone] = React.useState(/** @type {string | null} */ (null)),
     [pendingUnlock, setPendingUnlock] = React.useState(/** @type {string | null} */ (null)),
     [searchQuery, setSearchQuery] = React.useState(''),
     [searchOpen, setSearchOpen] = React.useState(!1),
@@ -183,7 +186,14 @@ export function TownMap() {
       }
       return map
     }, []),
-    activeLocationIds = locationsByRegion[activeRegion] ?? [],
+    focusedHub = focusZone ? mapData[focusZone] : null,
+    activeLocationIds = /** @type {string[]} */ (
+      focusedHub
+        ? [focusZone, ...(focusedHub.subAreas ?? []).map((subArea) => subArea.id)].filter(
+            (id) => typeof id === 'string' && Boolean(mapData[id])
+          )
+        : (locationsByRegion[activeRegion] ?? [])
+    ),
     activeLocationSet = new Set(activeLocationIds)
 
   // Terrain blobs, one per visible location, split into water and land so the
@@ -289,6 +299,25 @@ export function TownMap() {
     const rect = canvasRect()
     if (!rect) return
     const fitScale = Math.min(rect.width, rect.height) / WORLD_SIZE
+    // Focused area view: fit the hub and all its sub-areas (hidden included).
+    if (focusZone) {
+      const ids = activeLocationIds.filter((id) => mapData[id])
+      if (ids.length) {
+        const xs = ids.map((id) => mapData[id].position.x),
+          ys = ids.map((id) => mapData[id].position.y),
+          cx = (Math.min(...xs) + Math.max(...xs)) / 2,
+          cy = (Math.min(...ys) + Math.max(...ys)) / 2,
+          span = Math.max(Math.max(...xs) - Math.min(...xs), Math.max(...ys) - Math.min(...ys), 1),
+          boxPx = Math.max((span / 100) * WORLD_SIZE, 1),
+          // Fit the area's bounding box into ~85% of the smaller canvas side.
+          scale = Math.min(
+            MAX_SCALE,
+            Math.max(MIN_SCALE, (Math.min(rect.width, rect.height) * 0.85) / boxPx)
+          )
+        centreOn((cx / 100) * WORLD_SIZE, (cy / 100) * WORLD_SIZE, scale)
+      }
+      return
+    }
     const requested = focusRef.current
     focusRef.current = null
     // A hidden sub-area (Alola's islands, Paldea's provinces) is not drawn on
@@ -313,7 +342,7 @@ export function TownMap() {
         : { x: (regionCentre.x / WORLD_SIZE) * 100, y: (regionCentre.y / WORLD_SIZE) * 100 }
     centreOn((focus.x / 100) * WORLD_SIZE, (focus.y / 100) * WORLD_SIZE, scale)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeRegion, focusNonce])
+  }, [activeRegion, focusNonce, focusZone])
 
   const zoomAt = React.useCallback(
     /** @param {number} clientX @param {number} clientY @param {number} factor */
@@ -450,6 +479,7 @@ export function TownMap() {
     if (!location) return
     setSearchQuery('')
     focusRef.current = locationId
+    setFocusZone(null)
     setActiveRegion(displayRegionFor(location.region ?? 'kanto'))
     setFocusNonce((nonce) => nonce + 1)
     if (location.type !== 'raid' && locationId !== currentLocation)
@@ -555,6 +585,7 @@ export function TownMap() {
       }),
       unlockTokens > 0 &&
         !allRegionsUnlocked &&
+        !focusZone &&
         jsxs('div', {
           className: 'map-unlock-tokens',
           children: [
@@ -565,8 +596,9 @@ export function TownMap() {
             `${unlockTokens} Region Unlock Token${unlockTokens > 1 ? 's' : ''} — pick a locked region to open it`,
           ],
         }),
-      jsx('div', {
-        className: 'map-region-tabs',
+      !focusZone &&
+        jsx('div', {
+          className: 'map-region-tabs',
         children: regionOrder.map((region) => {
           const ids = locationsByRegion[region.id] ?? [],
             available = ids.some((id) => unlockedLocations.includes(id)),
@@ -587,6 +619,7 @@ export function TownMap() {
                 ? () => {
                     setActiveRegion(region.id)
                     setPendingUnlock(null)
+                    setFocusZone(null)
                   }
                 : unlockable
                   ? () => setPendingUnlock(pending ? null : region.id)
@@ -606,6 +639,7 @@ export function TownMap() {
         }),
       }),
       pendingUnlock &&
+        !focusZone &&
         jsxs('div', {
           className: 'map-unlock-bar',
           children: [
@@ -637,6 +671,29 @@ export function TownMap() {
                   children: 'Cancel',
                 }),
               ],
+            }),
+          ],
+        }),
+      focusZone &&
+        jsxs('div', {
+          className: 'map-focus-bar',
+          children: [
+            jsx('button', {
+              type: 'button',
+              className: 'map-focus-back',
+              onClick: () => {
+                setFocusZone(null)
+                setFocusNonce((nonce) => nonce + 1)
+              },
+              children: '\u2190 Region map',
+            }),
+            jsx('span', {
+              className: 'map-focus-title',
+              children: focusedHub?.name ?? 'Area',
+            }),
+            jsx('span', {
+              className: 'map-focus-hint',
+              children: `${Math.max(0, activeLocationIds.length - 1)} areas`,
             }),
           ],
         }),
@@ -775,6 +832,11 @@ export function TownMap() {
                     isClickable,
                     onClick: () => travelTo(locationId),
                     cooldownEnd: location.type === 'raid' ? state.raidCooldownEnd : void 0,
+                    onExpand:
+                      location.type === 'zone' && locationId !== focusZone
+                        ? () => setFocusZone(locationId)
+                        : void 0,
+                    forceLabel: Boolean(focusZone),
                     // Deliberately omits the species: the Town Map should only
                     // say a swarm is active here, not spoil which Pokemon.
                     swarmLabel:

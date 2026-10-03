@@ -6,7 +6,7 @@ import { formatCooldown } from '../game/progression.js'
 import { POI_LOCATIONS, minigameNameForLocation } from '../game/minigames.js'
 import { servicePoisFor } from '../game/services.js'
 
-/** @param {{ location: MapLocation, isCurrent: boolean, isUnlocked: boolean, isClickable: boolean, onClick: () => void, cooldownEnd?: number, swarmLabel?: string | null }} props */
+/** @param {{ location: MapLocation, isCurrent: boolean, isUnlocked: boolean, isClickable: boolean, onClick: () => void, cooldownEnd?: number, swarmLabel?: string | null, onExpand?: () => void, forceLabel?: boolean }} props */
 export
 function MapNode({
   location,
@@ -16,6 +16,8 @@ function MapNode({
   onClick,
   cooldownEnd,
   swarmLabel,
+  onExpand,
+  forceLabel,
 }) {
   const [hovering, setHovering] = React.useState(!1),
     [, tick] = React.useState(0),
@@ -34,7 +36,7 @@ function MapNode({
     const intervalId = setInterval(() => tick((tickCount) => tickCount + 1), 1e3)
     return () => clearInterval(intervalId)
   }, [raidOnCooldown])
-  const showLabel = isCurrent || hovering || (isUnlocked && (isTown || isZone))
+  const showLabel = isCurrent || hovering || forceLabel || (isUnlocked && (isTown || isZone))
   let className = 'map-node'
   return (
     isRaid ? (className += ' raid') : isTown ? (className += ' town') : isZone ? (className += ' zone') : (className += ' route'),
@@ -87,6 +89,18 @@ function MapNode({
             title: `${zoneCount} areas`,
             children: zoneCount,
           }),
+        isZone && isUnlocked && onExpand
+          ? jsx('button', {
+              type: 'button',
+              className: 'map-node-expand',
+              title: 'Open area map',
+              onClick: /** @param {React.MouseEvent} event */ (event) => {
+                event.stopPropagation()
+                onExpand()
+              },
+              children: '\u2922',
+            })
+          : null,
         isPoi || servicePois.length > 0
           ? jsxs('div', {
               className: 'map-node-pois',

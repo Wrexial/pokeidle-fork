@@ -355,11 +355,19 @@ Data conventions:
   generation and written onto the committed data by `apply-ordinary-areas.cjs`;
   a battle gate that names a zone hub (which spawns no wilds) is re-pointed at
   the hub's first sub-area, both in the generator and on the committed data.
-  The Galar/Paldea DLC uses zones too, but is promoted to first-class regions
-  by `apply-dlc-regions.cjs` (#39). `GROUP_ZONES` wraps *existing* route nodes
-  in a hub (Alola's islands, Paldea's provinces): the routes become hidden
-  sub-areas that keep their own unlock rules, so a locked area shows as ??? in
-  the picker.
+  Extra habitats for any hub come from `lib/zone-areas.cjs` (merged into
+  `ZONES` / created after `GROUP_ZONES`, and written by `apply-zone-areas.cjs`),
+  and a zone hub's sub-area wild tables show behind a Show/Hide toggle in
+  `location-panel.js`. The Galar/Paldea DLC uses zones too, but is promoted to
+  **subregions** by `apply-dlc-regions.cjs` (#39; see the DLC-regions bullet
+  below). `GROUP_ZONES` wraps *existing* route nodes in a hub (Alola's islands,
+  Paldea's provinces): the routes become hidden sub-areas that keep their own
+  unlock rules, so a locked area shows as ??? in the picker.
+- The Town Map (`src/components/town-map.js`) can zoom into one area (#60):
+  the expand button on an unlocked zone/DLC hub sets `focusZone`, which swaps
+  `activeLocationIds` for the hub plus its (hidden) sub-areas, fits their
+  bounding box and shows a “← Region map” bar. Region tabs are hidden while
+  focused; hidden sub-areas are travelable from the focused canvas.
 - Some regions' scraped force-directed layout doesn't match the real map, so
   `REGION_MAP_LAYOUTS` in `generate-regions.cjs` overrides it with
   hand-measured coordinates from a labelled reference map. Every region except
@@ -936,5 +944,6 @@ These scripts hit external sites (Serebii, PokémonDB) and may write large files
 For layout/UI work, `node tools/screenshot.cjs` (with `npm run dev` running)
 drives headless Chrome over the DevTools Protocol and writes PNGs to
 `screenshots/` (gitignored) — handy for eyeballing the battle screen, the Box
-header or a modal without a browser. It seeds an Alola save and captures the
-Poké Pelago tabs and Settings; edit the sequence for the screen you need.
+header or a modal without a browser. It seeds an Alola save (with Melemele
+Island unlocked) and captures the Town Map, the zoomed-in area view, the Poké
+Pelago tabs and Settings; edit the sequence for the screen you need.

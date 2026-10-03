@@ -212,5 +212,109 @@ module.exports = {
         species: ['eevee', 'minccino', 'pachirisu'],
       },
     ],
+    'alola-melemele-island': [
+      {
+        node: 'ten-carat-hill',
+        name: 'Ten Carat Hill',
+        position: { x: 18, y: 18 },
+        species: ['rockruff', 'machop', 'zubat', 'diglett', 'roggenrola', 'carbink'],
+      },
+      {
+        node: 'hauoli-cemetery',
+        name: "Hau'oli Cemetery",
+        position: { x: 14, y: 20 },
+        species: ['gastly', 'misdreavus', 'drifloon'],
+      },
+      {
+        node: 'kalae-bay',
+        name: "Kala'e Bay",
+        position: { x: 26, y: 26 },
+        species: ['magikarp', 'wishiwashi', 'wingull', 'finneon'],
+      },
+      {
+        node: 'melemele-sea',
+        name: 'Melemele Sea',
+        position: { x: 30, y: 18 },
+        species: ['magikarp', 'wishiwashi', 'wingull', 'tentacool'],
+      },
+    ],
+    'alola-akala-island': [
+      {
+        node: 'brooklet-hill',
+        name: 'Brooklet Hill',
+        position: { x: 70, y: 22 },
+        species: ['wishiwashi', 'psyduck', 'magikarp', 'dewpider', 'poliwag'],
+      },
+      {
+        node: 'memorial-hill',
+        name: 'Memorial Hill',
+        position: { x: 72, y: 26 },
+        species: ['phantump', 'misdreavus', 'gastly'],
+      },
+      {
+        node: 'digletts-tunnel',
+        name: "Diglett's Tunnel",
+        position: { x: 86, y: 22 },
+        species: ['diglett', 'zubat', 'larvitar'],
+      },
+      {
+        node: 'akala-outskirts',
+        name: 'Akala Outskirts',
+        position: { x: 82, y: 26 },
+        species: ['mudbray', 'mankey', 'growlithe'],
+      },
+    ],
+    'alola-ulaula-island': [
+      {
+        node: 'blush-mountain',
+        name: 'Blush Mountain',
+        position: { x: 60, y: 70 },
+        species: ['torkoal', 'mudbray', 'salandit'],
+      },
+      {
+        node: 'thrifty-megamart',
+        name: 'Thrifty Megamart',
+        position: { x: 80, y: 74 },
+        species: ['gastly', 'drifloon', 'misdreavus'],
+      },
+      {
+        node: 'hano-beach',
+        name: 'Hano Beach',
+        position: { x: 60, y: 78 },
+        species: ['sandygast', 'pyukumuku', 'wingull'],
+      },
+      {
+        node: 'ulaula-beach',
+        name: "Ula'ula Beach",
+        position: { x: 74, y: 80 },
+        species: ['sandygast', 'wingull'],
+      },
+    ],
+    'alola-poni-island': [
+      {
+        node: 'ancient-poni-path',
+        name: 'Ancient Poni Path',
+        position: { x: 18, y: 78 },
+        species: ['mudbray', 'rockruff', 'roggenrola'],
+      },
+      {
+        node: 'poni-wilds',
+        name: 'Poni Wilds',
+        position: { x: 14, y: 72 },
+        species: ['mudbray', 'rockruff', 'gible'],
+      },
+      {
+        node: 'poni-plains',
+        name: 'Poni Plains',
+        position: { x: 16, y: 66 },
+        species: ['mudbray', 'rockruff', 'roggenrola'],
+      },
+      {
+        node: 'exeggutor-island',
+        name: 'Exeggutor Island',
+        position: { x: 30, y: 72 },
+        species: ['exeggcute', 'magikarp', 'wingull'],
+      },
+    ],
   },
 }

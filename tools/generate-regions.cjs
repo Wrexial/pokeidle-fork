@@ -2512,6 +2512,54 @@ for (const [regionId, groups] of Object.entries(GROUP_ZONES)) {
   })
 }
 
+// Extra sub-areas for any zone hub that didn't come from `ZONES` (Alola's
+// islands are built by `GROUP_ZONES`). Hidden sub-areas with their own
+// encounter bucket, appended behind the hub's current ones and chained by the
+// final zone pass. Mirrors tools/apply-zone-areas.cjs.
+for (const [hubId, extras] of Object.entries(ZONE_AREAS)) {
+  const hub = mapData[hubId]
+  if (!hub || hub.type !== 'zone') continue
+  const regionId = hub.region ?? 'kanto',
+    baseEncounters = hub.routeKey ? encounterData[hub.routeKey]?.encounters : null,
+    level = clampLevel(baseEncounters?.[0]?.minLevel ?? 5),
+    maxLevel = clampLevel(level + 2)
+  let maxOrder = Math.max(
+    hub.unlockOrder ?? 0,
+    ...(hub.subAreas ?? []).map((subArea) => mapData[subArea.id]?.unlockOrder ?? 0)
+  )
+  for (const extra of extras) {
+    const id = locId(regionId, extra.node)
+    if (mapData[id]) continue
+    const encounters = extra.species
+      .filter((key) => species[key])
+      .map((key, index) => ({
+        speciesKey: key,
+        weight: encounterWeight(null, index),
+        minLevel: level,
+        maxLevel,
+      }))
+    encounterData[id] = { name: extra.name, encounters }
+    mapData[id] = {
+      id,
+      name: extra.name,
+      type: 'route',
+      region: regionId,
+      description: `A sub-area of the ${hub.name}.`,
+      routeKey: id,
+      background: routeBackground(extra.name, encounters),
+      connections: [hubId],
+      hidden: true,
+      zone: hubId,
+      unlock: { requires: [hubId] },
+      unlockOrder: +(maxOrder + 0.001).toFixed(4),
+      position: extra.position,
+    }
+    ;(hub.subAreas ??= []).push({ id, name: extra.name })
+    if (!hub.connections.includes(id)) hub.connections.push(id)
+    maxOrder += 0.001
+  }
+}
+
 // Zone hubs that were created *after* the ordinary areas (Alola's islands via
 // GROUP_ZONES, Paldea's provinces) leave those areas gated on the hub itself,
 // where no wilds ever spawn. Re-point each battle gate at the hub's first

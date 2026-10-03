@@ -166,7 +166,7 @@ function alolaSave() {
     },
     currentLocation: 'alola-poke-pelago',
     currentRoute: 'alola-route-1',
-    unlockedLocations: ['alola-iki-town', 'alola-poke-pelago', 'alola-route-1', 'alola-hauoli-city'],
+    unlockedLocations: ['alola-iki-town', 'alola-poke-pelago', 'alola-route-1', 'alola-hauoli-city', 'alola-melemele-island'],
     unlockedRegions: ['alola'],
     inventory: { pokeball: 20, oranBerry: 5, sitrusBerry: 3, lumBerry: 2, superPotion: 3, greatball: 5 },
     money: 50000,
@@ -361,6 +361,19 @@ async function main() {
       await cdp.eval('({ w: window.innerWidth, h: window.innerHeight })')
     )
     await cdp.screenshot(path.join(OUT, '01-main.png'))
+
+    // #60: zoom into an unlocked zone from the Town Map and capture the
+    // focused area view.
+    const expanded = await cdp.eval(
+      `(() => { const b = document.querySelector('.map-node-expand'); if (!b) return false; b.click(); return true })()`
+    )
+    if (expanded) {
+      await sleep(500)
+      await cdp.screenshot(path.join(OUT, '01b-area-map.png'))
+      console.log('Area map view ok')
+    } else {
+      console.log('WARNING: no zone expand button captured')
+    }
 
     // Poké Pelago modal (opened from the location panel card).
     await cdp.click('.location-minigame-start')

@@ -3756,6 +3756,70 @@ img {
     background: none
 }
 
+.map-node-expand {
+    position: absolute;
+    bottom: -12px;
+    right: -10px;
+    width: 15px;
+    height: 15px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    line-height: 1;
+    color: #f0d870;
+    background: #221910;
+    border: 1.5px solid #8a6020;
+    border-radius: 4px;
+    cursor: pointer;
+    z-index: 7
+}
+
+.map-node-expand:hover {
+    background: #3a2810;
+    color: #fff
+}
+
+/* The breadcrumb bar shown while the map is zoomed into one area (#60). */
+.map-focus-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 8px;
+    background: #221910;
+    border-bottom: 2px solid #3a2810
+}
+
+.map-focus-back {
+    font: inherit;
+    font-family: var(--font-pixel);
+    font-size: 7px;
+    padding: 3px 8px;
+    color: #f0d870;
+    background: #00000040;
+    border: 2px solid #483828;
+    cursor: pointer
+}
+
+.map-focus-back:hover {
+    color: #fff;
+    border-color: #f0d870
+}
+
+.map-focus-title {
+    font-family: var(--font-pixel);
+    font-size: 8px;
+    color: var(--parchment)
+}
+
+.map-focus-hint {
+    margin-left: auto;
+    font-family: var(--font-pixel);
+    font-size: 6px;
+    color: #c8a848c0
+}
+
 .map-node.raid .map-node-dot {
     width: 32px;
     height: 32px;

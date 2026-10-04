@@ -447,6 +447,34 @@ export function TownMap() {
     }
   }
 
+  // The marker labels are `pointer-events: none` so they never swallow a click
+  // meant for a marker behind them. That also means a click on a label falls
+  // through to the canvas, so recover it: when the click did not land on any
+  // marker (its dot), and a visible label sits under the pointer, treat it as a
+  // click on that marker. A dot under a label still wins, because then the
+  // click target is the dot and this is skipped.
+  /** @param {React.MouseEvent<HTMLDivElement>} event */
+  function handleCanvasClick(event) {
+    const target = event.target
+    if (!(target instanceof Element) || target.closest('.map-node, button, input, select, textarea, .map-legend, .map-search'))
+      return
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const x = event.clientX,
+      y = event.clientY
+    /** @type {HTMLElement | null} */
+    let matchedLabel = null
+    for (const node of canvas.querySelectorAll('.map-node')) {
+      const label = node.querySelector('.map-node-label')
+      if (!(label instanceof HTMLElement)) continue
+      const rect = label.getBoundingClientRect()
+      if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom)
+        // Later nodes are painted on top, so the last hit wins.
+        matchedLabel = label
+    }
+    matchedLabel?.click()
+  }
+
   /** @param {React.PointerEvent<HTMLButtonElement>} event */
   function stopDrag(event) {
     event.stopPropagation()
@@ -694,6 +722,7 @@ export function TownMap() {
         ref: canvasRef,
         onPointerDown: handlePointerDown,
         onClickCapture: handleClickCapture,
+        onClick: handleCanvasClick,
         children: [
           jsxs('div', {
             className: 'town-map-world',

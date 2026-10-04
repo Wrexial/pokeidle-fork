@@ -3728,6 +3728,14 @@ img {
 }
 
 .map-node-label {
+    /* Out of flow so showing it on hover can't change the marker's height:
+       an in-flow label shifted the centred dot out from under the cursor and
+       made hovering flicker. */
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 2px;
     font-size: 6px;
     color: #3a2810;
     font-weight: 700;

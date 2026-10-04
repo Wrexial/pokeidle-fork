@@ -59,7 +59,6 @@
   "description": "A town in the Sinnoh region.",
   "connections": [
    "sinnoh-route-201",
-   "sinnoh-route-202",
    "sinnoh-route-219",
    "sinnoh-lake-verity"
   ],
@@ -96,7 +95,6 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "sinnoh-jubilife-city",
-   "sinnoh-sandgem-town",
    "sinnoh-lake-verity"
   ],
   "unlock": {
@@ -186,7 +184,6 @@
   "region": "sinnoh",
   "description": "A town in the Sinnoh region, home to Roark's Rock Gym.",
   "connections": [
-   "sinnoh-route-207",
    "sinnoh-route-203",
    "sinnoh-oreburgh-gate"
   ],
@@ -253,7 +250,6 @@
   "description": "A town in the Sinnoh region.",
   "connections": [
    "sinnoh-route-204",
-   "sinnoh-route-205",
    "sinnoh-fuego-ironworks"
   ],
   "unlock": {
@@ -292,8 +288,6 @@
   "routeKey": "sinnoh-route-205",
   "background": "/backgrounds/beach.png",
   "connections": [
-   "sinnoh-eterna-city",
-   "sinnoh-floaroma-town",
    "sinnoh-eterna-forest",
    "sinnoh-old-chateau",
    "sinnoh-fuego-ironworks"
@@ -323,7 +317,6 @@
   "connections": [
    "sinnoh-route-206",
    "sinnoh-route-211",
-   "sinnoh-route-205",
    "sinnoh-eterna-forest",
    "sinnoh-old-chateau"
   ],
@@ -404,7 +397,6 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "sinnoh-route-206",
-   "sinnoh-oreburgh-city",
    "sinnoh-route-208",
    "sinnoh-mt-coronet",
    "sinnoh-oreburgh-gate"
@@ -530,7 +522,6 @@
   "description": "A town in the Sinnoh region.",
   "connections": [
    "sinnoh-route-209",
-   "sinnoh-route-210",
    "sinnoh-solaceon-ruins"
   ],
   "unlock": {
@@ -575,7 +566,6 @@
   "routeKey": "sinnoh-route-210",
   "background": "/backgrounds/grassland.png",
   "connections": [
-   "sinnoh-solaceon-town",
    "sinnoh-route-215",
    "sinnoh-celestic-town",
    "sinnoh-solaceon-ruins"
@@ -682,7 +672,6 @@
   "routeKey": "sinnoh-route-212",
   "background": "/backgrounds/beach.png",
   "connections": [
-   "sinnoh-pastoria-city",
    "sinnoh-hearthome-city",
    "sinnoh-pokemon-mansion"
   ],
@@ -708,8 +697,6 @@
   "region": "sinnoh",
   "description": "A town in the Sinnoh region, home to Crasher Wake's Water Gym.",
   "connections": [
-   "sinnoh-route-213",
-   "sinnoh-route-212",
    "sinnoh-lake-valor",
    "sinnoh-pokemon-mansion"
   ],
@@ -762,7 +749,6 @@
   "routeKey": "sinnoh-route-213",
   "background": "/backgrounds/beach.png",
   "connections": [
-   "sinnoh-pastoria-city",
    "sinnoh-route-222",
    "sinnoh-lake-valor"
   ],
@@ -925,7 +911,6 @@
   "background": "/backgrounds/mountain.png",
   "connections": [
    "sinnoh-route-216",
-   "sinnoh-snowpoint-city",
    "sinnoh-lake-acuity"
   ],
   "unlock": {
@@ -955,7 +940,6 @@
   "region": "sinnoh",
   "description": "A town in the Sinnoh region, home to Candice's Ice Gym.",
   "connections": [
-   "sinnoh-route-217",
    "sinnoh-snowpoint-temple",
    "sinnoh-lake-acuity"
   ],
@@ -1014,7 +998,6 @@
   "routeKey": "sinnoh-route-218",
   "background": "/backgrounds/beach.png",
   "connections": [
-   "sinnoh-canalave-city",
    "sinnoh-jubilife-city",
    "sinnoh-iron-island"
   ],
@@ -1045,7 +1028,6 @@
   "region": "sinnoh",
   "description": "A town in the Sinnoh region, home to Byron's Steel Gym.",
   "connections": [
-   "sinnoh-route-218",
    "sinnoh-iron-island"
   ],
   "unlock": {

@@ -55,6 +55,28 @@ const REDUNDANT = [
   // Galar
   ['galar-route-3', 'galar-route-4'],
   ['galar-route-6', 'galar-stow-on-side'],
+  // Triangles where a named landmark (cave / forest / ruins / lake / mansion, ...)
+  // sits between the other two nodes, so the direct edge between them is the
+  // redundant one:
+  ['johto-route-32', 'johto-violet-city'],
+  ['hoenn-fallarbor-town', 'hoenn-route-114'],
+  ['sinnoh-oreburgh-city', 'sinnoh-route-207'],
+  ['sinnoh-floaroma-town', 'sinnoh-route-205'],
+  ['sinnoh-eterna-city', 'sinnoh-route-205'],
+  ['sinnoh-route-210', 'sinnoh-solaceon-town'],
+  ['sinnoh-pastoria-city', 'sinnoh-route-212'],
+  ['sinnoh-canalave-city', 'sinnoh-route-218'],
+  ['sinnoh-route-202', 'sinnoh-sandgem-town'],
+  ['sinnoh-route-217', 'sinnoh-snowpoint-city'],
+  ['sinnoh-pastoria-city', 'sinnoh-route-213'],
+  ['unova-nacrene-city', 'unova-route-3'],
+  ['unova-nimbasa-city', 'unova-route-4'],
+  ['unova-icirrus-city', 'unova-route-8'],
+  ['unova-mistralton-city', 'unova-route-6'],
+  ['kalos-ambrette-town', 'kalos-route-8'],
+  ['kalos-geosenge-town', 'kalos-route-10'],
+  ['kalos-dendemille-town', 'kalos-route-17'],
+  ['galar-ballonlea', 'galar-stow-on-side'],
 ]
 
 const mapData = readRegionDir(path.join(DATA, 'map-data'))

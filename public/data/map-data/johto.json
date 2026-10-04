@@ -151,7 +151,6 @@
   "description": "A town in the Johto region, home to Falkner's Flying Gym.",
   "connections": [
    "johto-route-31",
-   "johto-route-32",
    "johto-route-36",
    "johto-ruins-of-alph"
   ],
@@ -188,7 +187,6 @@
   "routeKey": "johto-route-32",
   "background": "/backgrounds/grassland.png",
   "connections": [
-   "johto-violet-city",
    "johto-union-cave",
    "johto-ruins-of-alph"
   ],

@@ -410,7 +410,6 @@
   "region": "galar",
   "description": "A town in the Galar region, home to Bea's Fighting Gym.",
   "connections": [
-   "galar-ballonlea",
    "galar-glimwood-tangle",
    "galar-mine-no-2"
   ],
@@ -752,7 +751,6 @@
   "region": "galar",
   "description": "A town in the Galar region, home to Opal's Fairy Gym.",
   "connections": [
-   "galar-stow-on-side",
    "galar-glimwood-tangle"
   ],
   "unlock": {

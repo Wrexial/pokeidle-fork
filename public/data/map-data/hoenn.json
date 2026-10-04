@@ -681,7 +681,6 @@
   "description": "A town in the Hoenn region.",
   "connections": [
    "hoenn-route-113",
-   "hoenn-route-114",
    "hoenn-meteor-falls"
   ],
   "unlock": {
@@ -730,7 +729,6 @@
   "routeKey": "hoenn-route-114",
   "background": "/backgrounds/grassland.png",
   "connections": [
-   "hoenn-fallarbor-town",
    "hoenn-route-115",
    "hoenn-meteor-falls"
   ],

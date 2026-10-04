@@ -432,7 +432,6 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "kalos-cyllage-city",
-   "kalos-ambrette-town",
    "kalos-connecting-cave",
    "kalos-glittering-cave"
   ],
@@ -468,7 +467,6 @@
   "region": "kalos",
   "description": "A town in the Kalos region.",
   "connections": [
-   "kalos-route-8",
    "kalos-route-9",
    "kalos-glittering-cave",
    "kalos-azure-bay"
@@ -546,7 +544,6 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "kalos-cyllage-city",
-   "kalos-geosenge-town",
    "kalos-reflection-cave"
   ],
   "unlock": {
@@ -574,7 +571,6 @@
   "region": "kalos",
   "description": "A town in the Kalos region.",
   "connections": [
-   "kalos-route-10",
    "kalos-route-11",
    "kalos-reflection-cave"
   ],
@@ -905,7 +901,6 @@
   "description": "A town in the Kalos region.",
   "connections": [
    "kalos-route-15",
-   "kalos-route-17",
    "kalos-frost-cavern"
   ],
   "unlock": {
@@ -981,7 +976,6 @@
   "routeKey": "kalos-route-17",
   "background": "/backgrounds/mountain.png",
   "connections": [
-   "kalos-dendemille-town",
    "kalos-anistar-city",
    "kalos-frost-cavern"
   ],

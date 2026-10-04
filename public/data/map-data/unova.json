@@ -259,7 +259,6 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "unova-striaton-city",
-   "unova-nacrene-city",
    "unova-pinwheel-forest"
   ],
   "unlock": {
@@ -287,7 +286,6 @@
   "region": "unova",
   "description": "A town in the Unova region, home to Lenora's Normal Gym.",
   "connections": [
-   "unova-route-3",
    "unova-castelia-city",
    "unova-pinwheel-forest",
    "unova-wellspring-cave"
@@ -377,7 +375,6 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "unova-castelia-city",
-   "unova-nimbasa-city",
    "unova-relic-castle",
    "unova-desert-resort"
   ],
@@ -408,7 +405,6 @@
   "region": "unova",
   "description": "A town in the Unova region, home to Elesa's Electric Gym.",
   "connections": [
-   "unova-route-4",
    "unova-route-16",
    "unova-route-5",
    "unova-relic-castle",
@@ -578,7 +574,6 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "unova-driftveil-city",
-   "unova-mistralton-city",
    "unova-chargestone-cave"
   ],
   "unlock": {
@@ -607,7 +602,6 @@
   "description": "A town in the Unova region, home to Skyla's Flying Gym.",
   "connections": [
    "unova-route-7",
-   "unova-route-6",
    "unova-chargestone-cave"
   ],
   "unlock": {
@@ -689,7 +683,6 @@
   "region": "unova",
   "description": "A town in the Unova region, home to Brycen's Ice Gym.",
   "connections": [
-   "unova-route-8",
    "unova-twist-mountain",
    "unova-dragonspiral-tower",
    "unova-moor-of-icirrus",
@@ -738,7 +731,6 @@
   "routeKey": "unova-route-8",
   "background": "/backgrounds/mountain.png",
   "connections": [
-   "unova-icirrus-city",
    "unova-route-9",
    "unova-dragonspiral-tower",
    "unova-moor-of-icirrus"

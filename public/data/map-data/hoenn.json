@@ -13,8 +13,8 @@
   },
   "unlockOrder": 299999,
   "position": {
-   "x": 17.382310673052505,
-   "y": 69.76174979858476
+   "x": 21.33,
+   "y": 72.04
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -46,8 +46,8 @@
   },
   "unlockOrder": 300101,
   "position": {
-   "x": 15.902962368858665,
-   "y": 63.41179479127338
+   "x": 21.34,
+   "y": 66.39
   },
   "biome": "forest"
  },
@@ -72,8 +72,8 @@
   },
   "unlockOrder": 300101.5,
   "position": {
-   "x": 17.342341160030674,
-   "y": 56.801097342551046
+   "x": 21.46,
+   "y": 61.54
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -108,8 +108,8 @@
   },
   "unlockOrder": 300102,
   "position": {
-   "x": 11.147147550904759,
-   "y": 58.83333161680326
+   "x": 15.53,
+   "y": 61.55
   },
   "biome": "coast"
  },
@@ -133,8 +133,8 @@
   },
   "unlockOrder": 300102.5,
   "position": {
-   "x": 4.812636942240866,
-   "y": 60.30868457270524
+   "x": 9.9,
+   "y": 61.53
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -169,8 +169,8 @@
   },
   "unlockOrder": 300103,
   "position": {
-   "x": 23.503067592597134,
-   "y": 54.716068955626156
+   "x": 21.92,
+   "y": 52.87
   },
   "biome": "coast"
  },
@@ -197,8 +197,8 @@
   },
   "unlockOrder": 300104,
   "position": {
-   "x": 2.9895337123153882,
-   "y": 54.06727292245614
+   "x": 3.43,
+   "y": 55.91
   },
   "biome": "forest"
  },
@@ -224,8 +224,8 @@
   },
   "unlockOrder": 300104.5,
   "position": {
-   "x": 3,
-   "y": 43.75
+   "x": 3.44,
+   "y": 44.98
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -262,8 +262,8 @@
   },
   "unlockOrder": 300105,
   "position": {
-   "x": 2.63,
-   "y": 66.69
+   "x": 2.89,
+   "y": 73.44
   },
   "biome": "coast"
  },
@@ -277,7 +277,6 @@
   "background": "/backgrounds/beach.png",
   "connections": [
    "hoenn-route-105",
-   "hoenn-dewford-town",
    "hoenn-granite-cave"
   ],
   "unlock": {
@@ -291,8 +290,8 @@
   },
   "unlockOrder": 300106,
   "position": {
-   "x": 5.46730121157177,
-   "y": 72.65165865283994
+   "x": 5.73,
+   "y": 81.16
   },
   "biome": "coast"
  },
@@ -303,7 +302,6 @@
   "region": "hoenn",
   "description": "A town in the Hoenn region, home to Brawly's Fighting Gym.",
   "connections": [
-   "hoenn-route-106",
    "hoenn-route-107",
    "hoenn-granite-cave"
   ],
@@ -317,8 +315,8 @@
   },
   "unlockOrder": 300106.5,
   "position": {
-   "x": 10.117276371342095,
-   "y": 77.22201214174196
+   "x": 11.34,
+   "y": 88.36
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -360,8 +358,8 @@
   },
   "unlockOrder": 300107,
   "position": {
-   "x": 16.605422417086135,
-   "y": 76.6863292054181
+   "x": 20.9,
+   "y": 88.35
   },
   "biome": "coast"
  },
@@ -388,8 +386,8 @@
   },
   "unlockOrder": 300108,
   "position": {
-   "x": 25.048969379683374,
-   "y": 76.74249441316181
+   "x": 30.4,
+   "y": 82.53
   },
   "biome": "coast"
  },
@@ -442,8 +440,8 @@
   },
   "unlockOrder": 300109.5,
   "position": {
-   "x": 30.63,
-   "y": 64.69
+   "x": 30.72,
+   "y": 62.23
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -487,8 +485,8 @@
   },
   "unlockOrder": 300110,
   "position": {
-   "x": 30.13,
-   "y": 53.75
+   "x": 30.39,
+   "y": 52.87
   },
   "biome": "coast"
  },
@@ -502,9 +500,7 @@
    "hoenn-route-110",
    "hoenn-route-111",
    "hoenn-route-117",
-   "hoenn-route-118",
-   "hoenn-new-mauville",
-   "hoenn-desert-underpass"
+   "hoenn-route-118"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -516,8 +512,8 @@
   },
   "unlockOrder": 300110.5,
   "position": {
-   "x": 31.06,
-   "y": 45.44
+   "x": 30.36,
+   "y": 45.18
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -561,8 +557,8 @@
   },
   "unlockOrder": 300111,
   "position": {
-   "x": 30.074252246845592,
-   "y": 33.29532303400799
+   "x": 30.6,
+   "y": 30.23
   },
   "weather": "sandstorm",
   "biome": "desert"
@@ -597,8 +593,8 @@
   },
   "unlockOrder": 300112,
   "position": {
-   "x": 26.271781784043792,
-   "y": 38.591700888685644
+   "x": 25.04,
+   "y": 29.99
   },
   "biome": "volcanic"
  },
@@ -622,8 +618,8 @@
   },
   "unlockOrder": 300112.5,
   "position": {
-   "x": 19.783965969110614,
-   "y": 38.992976077306366
+   "x": 16.36,
+   "y": 30.05
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -672,8 +668,8 @@
   },
   "unlockOrder": 300113,
   "position": {
-   "x": 21.25,
-   "y": 24.56
+   "x": 25.03,
+   "y": 14.13
   },
   "biome": "grassland"
  },
@@ -702,8 +698,8 @@
   },
   "unlockOrder": 300113.5,
   "position": {
-   "x": 13.22637340922247,
-   "y": 24.314817286624596
+   "x": 15.16,
+   "y": 13.97
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -748,8 +744,8 @@
   },
   "unlockOrder": 300114,
   "position": {
-   "x": 8.27362659077753,
-   "y": 28.5551827133754
+   "x": 8.98,
+   "y": 14
   },
   "biome": "coast"
  },
@@ -779,8 +775,8 @@
   },
   "unlockOrder": 300115,
   "position": {
-   "x": 2.31,
-   "y": 35.81
+   "x": 3.27,
+   "y": 27.65
   },
   "biome": "coast"
  },
@@ -810,8 +806,8 @@
   },
   "unlockOrder": 300116,
   "position": {
-   "x": 10,
-   "y": 41.56
+   "x": 10.09,
+   "y": 44.89
   },
   "biome": "forest"
  },
@@ -842,8 +838,8 @@
   },
   "unlockOrder": 300116.5,
   "position": {
-   "x": 15.44,
-   "y": 45.44
+   "x": 18.33,
+   "y": 45
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -891,8 +887,8 @@
   },
   "unlockOrder": 300117,
   "position": {
-   "x": 23.13,
-   "y": 45.44
+   "x": 24.71,
+   "y": 44.91
   },
   "biome": "forest"
  },
@@ -923,8 +919,8 @@
   },
   "unlockOrder": 300118,
   "position": {
-   "x": 38.75,
-   "y": 45.31
+   "x": 37.43,
+   "y": 45.05
   },
   "biome": "coast"
  },
@@ -950,8 +946,8 @@
   },
   "unlockOrder": 300119,
   "position": {
-   "x": 40.31,
-   "y": 33.56
+   "x": 37.59,
+   "y": 23.12
   },
   "weather": "rain",
   "biome": "forest"
@@ -977,8 +973,8 @@
   },
   "unlockOrder": 300119.5,
   "position": {
-   "x": 44.344116693133095,
-   "y": 24.282332859643333
+   "x": 46.27,
+   "y": 14.72
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -1025,8 +1021,8 @@
   },
   "unlockOrder": 300120,
   "position": {
-   "x": 47.53588330686691,
-   "y": 29.967667140356667
+   "x": 55.43,
+   "y": 22.69
   },
   "biome": "coast"
  },
@@ -1055,8 +1051,8 @@
   },
   "unlockOrder": 300121,
   "position": {
-   "x": 58.53050420458977,
-   "y": 34.67337264625616
+   "x": 55.73,
+   "y": 34.59
   },
   "biome": "coast"
  },
@@ -1080,8 +1076,8 @@
   },
   "unlockOrder": 300121.5,
   "position": {
-   "x": 70.13,
-   "y": 34.69
+   "x": 69.95,
+   "y": 34.6
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -1126,8 +1122,8 @@
   },
   "unlockOrder": 300122,
   "position": {
-   "x": 56.78949579541023,
-   "y": 40.95662735374384
+   "x": 55.57,
+   "y": 45.25
   },
   "biome": "coast"
  },
@@ -1156,8 +1152,8 @@
   },
   "unlockOrder": 300123,
   "position": {
-   "x": 50.63,
-   "y": 46.25
+   "x": 46.95,
+   "y": 45.2
   },
   "biome": "coast"
  },
@@ -1185,8 +1181,8 @@
   },
   "unlockOrder": 300124,
   "position": {
-   "x": 78.44,
-   "y": 36.88
+   "x": 78.09,
+   "y": 34.16
   },
   "biome": "coast"
  },
@@ -1211,8 +1207,8 @@
   },
   "unlockOrder": 300124.5,
   "position": {
-   "x": 87.99056441781218,
-   "y": 41.74825474834349
+   "x": 89.93,
+   "y": 34.2
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -1262,8 +1258,8 @@
   },
   "unlockOrder": 300125,
   "position": {
-   "x": 89.88904415170107,
-   "y": 35.5107733094923
+   "x": 86.12,
+   "y": 27.7
   },
   "biome": "coast"
  },
@@ -1293,8 +1289,8 @@
   },
   "unlockOrder": 300126,
   "position": {
-   "x": 79.06947531940625,
-   "y": 47.77203798314802
+   "x": 78.36,
+   "y": 48.34
   },
   "biome": "coast"
  },
@@ -1319,8 +1315,8 @@
   },
   "unlockOrder": 300126.5,
   "position": {
-   "x": 77.49052468059375,
-   "y": 54.09796201685199
+   "x": 66.6,
+   "y": 48.27
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -1355,8 +1351,7 @@
   "connections": [
    "hoenn-mossdeep-city",
    "hoenn-route-126",
-   "hoenn-route-128",
-   "hoenn-shoal-cave"
+   "hoenn-route-128"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1371,8 +1366,8 @@
   },
   "unlockOrder": 300127,
   "position": {
-   "x": 89.56039143048675,
-   "y": 48.060971942164215
+   "x": 90.08,
+   "y": 41.92
   },
   "biome": "coast"
  },
@@ -1403,8 +1398,8 @@
   },
   "unlockOrder": 300128,
   "position": {
-   "x": 89.00110101283248,
-   "y": 57.56912127585571
+   "x": 89.88,
+   "y": 55.54
   },
   "biome": "coast"
  },
@@ -1427,8 +1422,8 @@
   },
   "unlockOrder": 300128.5,
   "position": {
-   "x": 95.885,
-   "y": 58.94
+   "x": 97.03,
+   "y": 55.52
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -1475,8 +1470,8 @@
   },
   "unlockOrder": 300129,
   "position": {
-   "x": 90.67389898716752,
-   "y": 63.87087872414429
+   "x": 89.44,
+   "y": 62.73
   },
   "biome": "coast"
  },
@@ -1695,8 +1690,8 @@
   },
   "unlockOrder": 300135,
   "position": {
-   "x": 81.25,
-   "y": 74.69
+   "x": 78.71,
+   "y": 54.35
   },
   "biome": "coast"
  },
@@ -1729,8 +1724,8 @@
   },
   "unlockOrder": 300136,
   "position": {
-   "x": 96.25,
-   "y": 51.44
+   "x": 97.12,
+   "y": 44.6
   },
   "biome": "grassland"
  },
@@ -1755,8 +1750,8 @@
   },
   "unlockOrder": 300106.25,
   "position": {
-   "x": 4.8,
-   "y": 80.1
+   "x": 7.08,
+   "y": 88.61
   },
   "biome": "cave",
   "background": "/backgrounds/cave.png"
@@ -1782,8 +1777,8 @@
   },
   "unlockOrder": 300113.75,
   "position": {
-   "x": 13.8,
-   "y": 31.6
+   "x": 4.6,
+   "y": 7.4
   },
   "biome": "coast",
   "background": "/backgrounds/beach.png"
@@ -1796,8 +1791,7 @@
   "description": "A wild area in the Hoenn region.",
   "routeKey": "hoenn-shoal-cave",
   "connections": [
-   "hoenn-route-125",
-   "hoenn-route-127"
+   "hoenn-route-125"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1809,8 +1803,8 @@
   },
   "unlockOrder": 300125.25,
   "position": {
-   "x": 95.3,
-   "y": 44.1
+   "x": 86.54,
+   "y": 21.56
   },
   "biome": "cave",
   "background": "/backgrounds/cave.png"
@@ -1835,8 +1829,8 @@
   },
   "unlockOrder": 300128.25,
   "position": {
-   "x": 84,
-   "y": 51.6
+   "x": 89.77,
+   "y": 48.05
   },
   "biome": "cave",
   "background": "/backgrounds/cave.png"
@@ -1861,8 +1855,8 @@
   },
   "unlockOrder": 300131.25,
   "position": {
-   "x": 68.2,
-   "y": 68.6
+   "x": 71.71,
+   "y": 56.85
   },
   "biome": "ruins",
   "background": "/backgrounds/grassland.png"
@@ -1875,7 +1869,6 @@
   "description": "A wild area in the Hoenn region.",
   "routeKey": "hoenn-new-mauville",
   "connections": [
-   "hoenn-mauville-city",
    "hoenn-route-110"
   ],
   "unlock": {
@@ -1888,8 +1881,8 @@
   },
   "unlockOrder": 300110.25,
   "position": {
-   "x": 36.1,
-   "y": 51.9
+   "x": 37.33,
+   "y": 51.11
   },
   "biome": "grassland",
   "background": "/backgrounds/grassland.png"
@@ -1915,8 +1908,8 @@
   },
   "unlockOrder": 300112.25,
   "position": {
-   "x": 23.8,
-   "y": 31.6
+   "x": 22.4,
+   "y": 22.65
   },
   "biome": "volcanic",
   "background": "/backgrounds/grassland.png"
@@ -1929,8 +1922,7 @@
   "description": "A wild area in the Hoenn region.",
   "routeKey": "hoenn-desert-underpass",
   "connections": [
-   "hoenn-route-111",
-   "hoenn-mauville-city"
+   "hoenn-route-111"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1942,8 +1934,8 @@
   },
   "unlockOrder": 300110.75,
   "position": {
-   "x": 32.6,
-   "y": 39.4
+   "x": 30.49,
+   "y": 20.63
   },
   "biome": "desert",
   "background": "/backgrounds/grassland.png"
@@ -1968,8 +1960,8 @@
   },
   "unlockOrder": 300108.25,
   "position": {
-   "x": 30.1,
-   "y": 80.5
+   "x": 21.41,
+   "y": 82
   },
   "biome": "coast",
   "background": "/backgrounds/beach.png"
@@ -1994,8 +1986,8 @@
   },
   "unlockOrder": 300126.75,
   "position": {
-   "x": 72.5,
-   "y": 48.1
+   "x": 66.35,
+   "y": 44.03
   },
   "biome": "cave",
   "background": "/backgrounds/cave.png"
@@ -2020,8 +2012,8 @@
   },
   "unlockOrder": 300121.25,
   "position": {
-   "x": 65.5,
-   "y": 28.7
+   "x": 62.43,
+   "y": 28.44
   },
   "biome": "grassland",
   "background": "/backgrounds/grassland.png"

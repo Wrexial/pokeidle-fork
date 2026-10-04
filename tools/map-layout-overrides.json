@@ -1,4 +1,241 @@
 {
+  "hoenn": {
+    "positions": {
+      "hoenn-granite-cave": {
+        "x": 7.08,
+        "y": 88.61
+      },
+      "hoenn-abandoned-ship": {
+        "x": 21.41,
+        "y": 82
+      },
+      "hoenn-dewford-town": {
+        "x": 11.34,
+        "y": 88.36
+      },
+      "hoenn-route-107": {
+        "x": 20.9,
+        "y": 88.35
+      },
+      "hoenn-route-108": {
+        "x": 30.4,
+        "y": 82.53
+      },
+      "hoenn-route-106": {
+        "x": 5.73,
+        "y": 81.16
+      },
+      "hoenn-route-105": {
+        "x": 2.89,
+        "y": 73.44
+      },
+      "hoenn-petalburg-city": {
+        "x": 9.9,
+        "y": 61.53
+      },
+      "hoenn-littleroot-town": {
+        "x": 21.33,
+        "y": 72.04
+      },
+      "hoenn-route-101": {
+        "x": 21.34,
+        "y": 66.39
+      },
+      "hoenn-oldale-town": {
+        "x": 21.46,
+        "y": 61.54
+      },
+      "hoenn-route-102": {
+        "x": 15.53,
+        "y": 61.55
+      },
+      "hoenn-route-103": {
+        "x": 21.92,
+        "y": 52.87
+      },
+      "hoenn-route-104": {
+        "x": 3.43,
+        "y": 55.91
+      },
+      "hoenn-rustboro-city": {
+        "x": 3.44,
+        "y": 44.98
+      },
+      "hoenn-route-115": {
+        "x": 3.27,
+        "y": 27.65
+      },
+      "hoenn-route-116": {
+        "x": 10.09,
+        "y": 44.89
+      },
+      "hoenn-verdanturf-town": {
+        "x": 18.33,
+        "y": 45
+      },
+      "hoenn-route-117": {
+        "x": 24.71,
+        "y": 44.91
+      },
+      "hoenn-mauville-city": {
+        "x": 30.36,
+        "y": 45.18
+      },
+      "hoenn-fiery-path": {
+        "x": 22.4,
+        "y": 22.65
+      },
+      "hoenn-route-113": {
+        "x": 25.03,
+        "y": 14.13
+      },
+      "hoenn-fallarbor-town": {
+        "x": 15.16,
+        "y": 13.97
+      },
+      "hoenn-route-114": {
+        "x": 8.98,
+        "y": 14
+      },
+      "hoenn-meteor-falls": {
+        "x": 4.6,
+        "y": 7.4
+      },
+      "hoenn-lavaridge-town": {
+        "x": 16.36,
+        "y": 30.05
+      },
+      "hoenn-route-112": {
+        "x": 25.04,
+        "y": 29.99
+      },
+      "hoenn-desert-underpass": {
+        "x": 30.49,
+        "y": 20.63
+      },
+      "hoenn-route-111": {
+        "x": 30.6,
+        "y": 30.23
+      },
+      "hoenn-new-mauville": {
+        "x": 37.33,
+        "y": 51.11
+      },
+      "hoenn-route-110": {
+        "x": 30.39,
+        "y": 52.87
+      },
+      "hoenn-slateport-city": {
+        "x": 30.72,
+        "y": 62.23
+      },
+      "hoenn-route-118": {
+        "x": 37.43,
+        "y": 45.05
+      },
+      "hoenn-route-119": {
+        "x": 37.59,
+        "y": 23.12
+      },
+      "hoenn-fortree-city": {
+        "x": 46.27,
+        "y": 14.72
+      },
+      "hoenn-route-120": {
+        "x": 55.43,
+        "y": 22.69
+      },
+      "hoenn-route-121": {
+        "x": 55.73,
+        "y": 34.59
+      },
+      "hoenn-route-122": {
+        "x": 55.57,
+        "y": 45.25
+      },
+      "hoenn-route-123": {
+        "x": 46.95,
+        "y": 45.2
+      },
+      "hoenn-safari-zone": {
+        "x": 62.43,
+        "y": 28.44
+      },
+      "hoenn-lilycove-city": {
+        "x": 69.95,
+        "y": 34.6
+      },
+      "hoenn-route-124": {
+        "x": 78.09,
+        "y": 34.16
+      },
+      "hoenn-cave-of-origin": {
+        "x": 66.35,
+        "y": 44.03
+      },
+      "hoenn-sootopolis-city": {
+        "x": 66.6,
+        "y": 48.27
+      },
+      "hoenn-route-126": {
+        "x": 78.36,
+        "y": 48.34
+      },
+      "hoenn-seafloor-cavern": {
+        "x": 89.77,
+        "y": 48.05
+      },
+      "hoenn-mossdeep-city": {
+        "x": 89.93,
+        "y": 34.2
+      },
+      "hoenn-route-125": {
+        "x": 86.12,
+        "y": 27.7
+      },
+      "hoenn-shoal-cave": {
+        "x": 86.54,
+        "y": 21.56
+      },
+      "hoenn-route-127": {
+        "x": 90.08,
+        "y": 41.92
+      },
+      "hoenn-league": {
+        "x": 97.12,
+        "y": 44.6
+      },
+      "hoenn-route-128": {
+        "x": 89.88,
+        "y": 55.54
+      },
+      "hoenn-route-129": {
+        "x": 89.44,
+        "y": 62.73
+      },
+      "hoenn-raid": {
+        "x": 78.71,
+        "y": 54.35
+      },
+      "hoenn-sky-pillar": {
+        "x": 71.71,
+        "y": 56.85
+      },
+      "hoenn-ever-grande-city": {
+        "x": 97.03,
+        "y": 55.52
+      }
+    },
+    "roads": {
+      "remove": [
+        ["hoenn-dewford-town", "hoenn-route-106"],
+        ["hoenn-desert-underpass", "hoenn-mauville-city"],
+        ["hoenn-mauville-city", "hoenn-new-mauville"],
+        ["hoenn-route-127", "hoenn-shoal-cave"]
+      ],
+      "add": []
+    }
+  },
   "johto": {
     "positions": {
       "johto-whirl-islands": {

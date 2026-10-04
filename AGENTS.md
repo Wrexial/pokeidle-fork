@@ -375,7 +375,9 @@ Data conventions:
   circuit board. `apply-road-cleanup.cjs` drops the redundant side of every
   triangle, `apply-road-reference.cjs` removes non-reference links (and moves a
   scraped orphan off a long road), and `apply-zone-road-cleanup.cjs` trims a zone
-  hub's cross-map links, so two roads no longer run along the same line.
+  hub's cross-map links, so two roads no longer run along the same line. Hand
+  tuning on top of all of that lives in `tools/map-layout-overrides.json` and is
+  applied last by `apply-map-layout.cjs` (re-run it after a regeneration).
 - Some regions' scraped force-directed layout doesn't match the real map, so
   `REGION_MAP_LAYOUTS` in `generate-regions.cjs` overrides it with
   hand-measured coordinates from a labelled reference map. Every region except
@@ -852,17 +854,27 @@ One-off scripts used to build the data JSON (not run during dev/build):
   and any visible link longer than 25 units, as long as neither end loses its
   last connection. Hidden sub-area links are untouched, and a league or Raid
   Island keeps its one road. Idempotent (`--dry`).
+- `apply-map-layout.cjs` — data-only pass that writes the hand-tuned node
+  positions and extra road removals/additions from
+  `tools/map-layout-overrides.json` onto the committed map data (via
+  `lib/map-overrides.cjs`). Run it **last**, after a regeneration and the
+  automatic road passes, so it wins. Idempotent (`--dry`).
+- `map-layout-overrides.json` — the hand-tuning record for the Town Map, in the
+  map editor's export shape:
+  `{ region: { positions: { id: { x, y } }, roads: { remove: [[a,b]], add: [[a,b]] } } }`.
+  Kept cumulative (the editor's `localStorage` export already is); merge a new
+  pass into the region entry rather than replacing it. Applied by
+  `apply-map-layout.cjs`.
 - `map-editor.html` — a hand-written dev page (not in the build) for eyeballing
   and nudging the Town Map layouts: it lists every region, draws the fully
   unlocked map with the same elbow roads as the game, and lets you drag nodes
   (click + arrow keys to nudge, Shift for whole units). Tick "Edit roads" (or
   add `?roads=1` to the URL) to click a road and remove it, or click two nodes
   to add one; removed roads show red/dashed and added ones cyan. Changes persist
-  in `localStorage` and copy out as
-  `{ region: { positions: { id: { x, y } }, roads: { remove: [[a,b]], add: [[a,b]] } } }`
-  to paste back, so a layout tweak can be requested in words or as data. Open it
-  from the dev server at `/tools/map-editor.html` (it fetches
-  `/data/map-data/<region>.json`). Not part of the build; no generator needed.
+  in `localStorage` and copy out as the block above, which is saved into
+  `map-layout-overrides.json`. Open it from the dev server at
+  `/tools/map-editor.html` (it fetches `/data/map-data/<region>.json`). Not part
+  of the build; no generator needed.
 - `lib/zone-layout.cjs` — shared `spreadSubAreaPositions` ring layout for a
   zone hub's hidden sub-areas; used by `generate-regions.cjs` and
   `apply-zone-layout.cjs`.

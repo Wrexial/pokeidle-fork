@@ -1,0 +1,216 @@
+{
+  "johto": {
+    "positions": {
+      "johto-whirl-islands": {
+        "x": 21.5,
+        "y": 49.5
+      },
+      "johto-route-30": {
+        "x": 61.46,
+        "y": 46.31
+      },
+      "johto-route-46": {
+        "x": 70.5,
+        "y": 45.5
+      },
+      "johto-tohjo-falls": {
+        "x": 87.5,
+        "y": 57
+      },
+      "johto-mt-silver": {
+        "x": 87.5,
+        "y": 44
+      },
+      "johto-league": {
+        "x": 98,
+        "y": 44
+      },
+      "johto-dragons-den": {
+        "x": 93.46,
+        "y": 17
+      },
+      "johto-cianwood-city": {
+        "x": 12.95,
+        "y": 60.73
+      },
+      "johto-safari-zone": {
+        "x": -5,
+        "y": 51.5
+      },
+      "johto-cliff-cave": {
+        "x": 3,
+        "y": 69
+      },
+      "johto-route-47": {
+        "x": 13,
+        "y": 69
+      },
+      "johto-route-48": {
+        "x": -5,
+        "y": 68.5
+      },
+      "johto-olivine-city": {
+        "x": 20.5,
+        "y": 36.5
+      },
+      "johto-sea-route-40": {
+        "x": 13,
+        "y": 36.5
+      },
+      "johto-sea-route-41": {
+        "x": 13.17,
+        "y": 49.45
+      },
+      "johto-ruins-of-alph": {
+        "x": 49,
+        "y": 45.5
+      },
+      "johto-route-32": {
+        "x": 54,
+        "y": 54.25
+      },
+      "johto-union-cave": {
+        "x": 54,
+        "y": 63
+      },
+      "johto-azalea-town": {
+        "x": 39.52,
+        "y": 72.21
+      },
+      "johto-route-33": {
+        "x": 54,
+        "y": 72
+      },
+      "johto-slowpoke-well": {
+        "x": 46,
+        "y": 66
+      },
+      "johto-route-34": {
+        "x": 31.63,
+        "y": 59.21
+      },
+      "johto-ice-path": {
+        "x": 83,
+        "y": 16.54
+      },
+      "johto-route-44": {
+        "x": 74.25,
+        "y": 21.18
+      },
+      "johto-blackthorn-city": {
+        "x": 86.96,
+        "y": 21.19
+      },
+      "johto-route-39": {
+        "x": 20.5,
+        "y": 29
+      },
+      "johto-route-38": {
+        "x": 29.5,
+        "y": 21
+      },
+      "johto-ecruteak-city": {
+        "x": 44.71,
+        "y": 21.1
+      },
+      "johto-bell-tower": {
+        "x": 45.5,
+        "y": 14.5
+      },
+      "johto-burned-tower": {
+        "x": 49.5,
+        "y": 15
+      },
+      "johto-route-42": {
+        "x": 57.75,
+        "y": 20.87
+      },
+      "johto-route-43": {
+        "x": 66.62,
+        "y": 12.81
+      },
+      "johto-mahogany-town": {
+        "x": 66.24,
+        "y": 21.23
+      },
+      "johto-mt-mortar": {
+        "x": 54.5,
+        "y": 9
+      },
+      "johto-route-37": {
+        "x": 44.67,
+        "y": 31.84
+      },
+      "johto-route-36": {
+        "x": 44.79,
+        "y": 36.88
+      },
+      "johto-national-park": {
+        "x": 31.62,
+        "y": 37.03
+      },
+      "johto-violet-city": {
+        "x": 53.77,
+        "y": 37.13
+      },
+      "johto-route-31": {
+        "x": 61.66,
+        "y": 36.91
+      },
+      "johto-dark-cave": {
+        "x": 66.47,
+        "y": 30.91
+      },
+      "johto-route-45": {
+        "x": 78.26,
+        "y": 31.17
+      },
+      "johto-cherrygrove-city": {
+        "x": 61.96,
+        "y": 57.22
+      },
+      "johto-route-29": {
+        "x": 70.36,
+        "y": 57.26
+      },
+      "johto-new-bark-town": {
+        "x": 80.48,
+        "y": 56.9
+      },
+      "johto-goldenrod-city": {
+        "x": 31.5,
+        "y": 53
+      },
+      "johto-ilex-forest": {
+        "x": 31.75,
+        "y": 67
+      }
+    },
+    "roads": {
+      "remove": [
+        ["johto-blackthorn-city", "johto-route-44"],
+        ["johto-azalea-town", "johto-route-34"],
+        ["johto-route-31", "johto-route-46"],
+        ["johto-dragons-den", "johto-route-45"],
+        ["johto-ecruteak-city", "johto-mt-mortar"]
+      ],
+      "add": []
+    }
+  },
+  "kanto": {
+    "positions": {
+      "pokemonMansion": {
+        "x": 13.1,
+        "y": 84.08
+      },
+      "seafoamIslands": {
+        "x": 29,
+        "y": 88
+      },
+      "ceruleanCave": {
+        "x": 46.08,
+        "y": 7.74
+      }
+    }
+  }
+}

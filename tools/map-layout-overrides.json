@@ -512,5 +512,345 @@
         "y": 7.74
       }
     }
+  },
+  "unova": {
+    "positions": {
+      "unova-nuvema-town": {
+        "x": 90.5,
+        "y": 82.5
+      },
+      "unova-route-1": {
+        "x": 84.5,
+        "y": 75.5
+      },
+      "unova-accumula-town": {
+        "x": 89,
+        "y": 70.5
+      },
+      "unova-aspertia-city": {
+        "x": 5,
+        "y": 77
+      },
+      "unova-route-2": {
+        "x": 90.5,
+        "y": 64.5
+      },
+      "unova-virbank-city": {
+        "x": 25.5,
+        "y": 66.5
+      },
+      "unova-floccesy-town": {
+        "x": 12.5,
+        "y": 66.5
+      },
+      "unova-striaton-city": {
+        "x": 89,
+        "y": 58
+      },
+      "unova-route-3": {
+        "x": 84.5,
+        "y": 63.5
+      },
+      "unova-nacrene-city": {
+        "x": 77.5,
+        "y": 63.5
+      },
+      "unova-castelia-city": {
+        "x": 51,
+        "y": 72
+      },
+      "unova-route-4": {
+        "x": 51,
+        "y": 59
+      },
+      "unova-nimbasa-city": {
+        "x": 51,
+        "y": 52.5
+      },
+      "unova-route-5": {
+        "x": 40,
+        "y": 52.5
+      },
+      "unova-driftveil-city": {
+        "x": 28.5,
+        "y": 52.5
+      },
+      "unova-anville-town": {
+        "x": 3,
+        "y": 28.5
+      },
+      "unova-route-6": {
+        "x": 22,
+        "y": 48
+      },
+      "unova-mistralton-city": {
+        "x": 16,
+        "y": 43.5
+      },
+      "unova-route-7": {
+        "x": 22,
+        "y": 38.5
+      },
+      "unova-icirrus-city": {
+        "x": 27,
+        "y": 35
+      },
+      "unova-route-8": {
+        "x": 32.5,
+        "y": 31
+      },
+      "unova-route-9": {
+        "x": 41,
+        "y": 33
+      },
+      "unova-opelucid-city": {
+        "x": 48.5,
+        "y": 32
+      },
+      "unova-route-10": {
+        "x": 52.5,
+        "y": 37
+      },
+      "unova-route-11": {
+        "x": 57.5,
+        "y": 32.5
+      },
+      "unova-route-12": {
+        "x": 64,
+        "y": 33.5
+      },
+      "unova-lacunosa-town": {
+        "x": 72,
+        "y": 32
+      },
+      "unova-route-13": {
+        "x": 82,
+        "y": 40.5
+      },
+      "unova-undella-town": {
+        "x": 87.5,
+        "y": 43.5
+      },
+      "unova-route-14": {
+        "x": 81,
+        "y": 48
+      },
+      "unova-humilau-city": {
+        "x": 92,
+        "y": 30.5
+      },
+      "unova-lentimas-town": {
+        "x": 73.5,
+        "y": 43.5
+      },
+      "unova-black-city": {
+        "x": 75.5,
+        "y": 51.5
+      },
+      "unova-route-15": {
+        "x": 70,
+        "y": 55
+      },
+      "unova-route-16": {
+        "x": 61.5,
+        "y": 53.5
+      },
+      "unova-route-17": {
+        "x": 98,
+        "y": 74
+      },
+      "unova-route-18": {
+        "x": 92,
+        "y": 76.5
+      },
+      "unova-route-gate": {
+        "x": 51,
+        "y": 65.5
+      },
+      "unova-route-19": {
+        "x": 9,
+        "y": 72
+      },
+      "unova-route-20": {
+        "x": 19,
+        "y": 66.5
+      },
+      "unova-route-21": {
+        "x": 76.5,
+        "y": 36.5
+      },
+      "unova-route-22": {
+        "x": 83,
+        "y": 33.5
+      },
+      "unova-route-23": {
+        "x": 89,
+        "y": 36
+      },
+      "unova-pinwheel-forest": {
+        "x": 81,
+        "y": 69.5
+      },
+      "unova-chargestone-cave": {
+        "x": 16,
+        "y": 51
+      },
+      "unova-wellspring-cave": {
+        "x": 81,
+        "y": 57.5
+      },
+      "unova-twist-mountain": {
+        "x": 27,
+        "y": 42.5
+      },
+      "unova-dragonspiral-tower": {
+        "x": 34,
+        "y": 37
+      },
+      "unova-relic-castle": {
+        "x": 45,
+        "y": 55.5
+      },
+      "unova-giant-chasm": {
+        "x": 95,
+        "y": 42
+      },
+      "unova-challengers-cave": {
+        "x": 86.5,
+        "y": 51
+      },
+      "unova-moor-of-icirrus": {
+        "x": 25.5,
+        "y": 28.5
+      },
+      "unova-desert-resort": {
+        "x": 58.5,
+        "y": 59
+      },
+      "unova-reversal-mountain": {
+        "x": 20,
+        "y": 32.5
+      }
+    }
+  },
+  "galar": {
+    "positions": {
+      "galar-postwick": {
+        "x": 49.5,
+        "y": 98
+      },
+      "galar-route-1": {
+        "x": 53.5,
+        "y": 92.5
+      },
+      "galar-wedgehurst": {
+        "x": 52.5,
+        "y": 86
+      },
+      "galar-route-2": {
+        "x": 48.5,
+        "y": 78.5
+      },
+      "galar-motostoke": {
+        "x": 44,
+        "y": 70
+      },
+      "galar-route-3": {
+        "x": 48.5,
+        "y": 65
+      },
+      "galar-route-4": {
+        "x": 42,
+        "y": 63.5
+      },
+      "galar-turffield": {
+        "x": 38.5,
+        "y": 58
+      },
+      "galar-route-5": {
+        "x": 48.5,
+        "y": 58.5
+      },
+      "galar-hulbury": {
+        "x": 55,
+        "y": 59
+      },
+      "galar-route-6": {
+        "x": 44,
+        "y": 53.5
+      },
+      "galar-hammerlocke": {
+        "x": 48.5,
+        "y": 49
+      },
+      "galar-stow-on-side": {
+        "x": 41,
+        "y": 46
+      },
+      "galar-route-7": {
+        "x": 52,
+        "y": 43.5
+      },
+      "galar-route-8": {
+        "x": 58,
+        "y": 40.5
+      },
+      "galar-circhester": {
+        "x": 65,
+        "y": 38
+      },
+      "galar-route-9": {
+        "x": 61.5,
+        "y": 46
+      },
+      "galar-spikemuth": {
+        "x": 66,
+        "y": 50.5
+      },
+      "galar-route-10": {
+        "x": 50.5,
+        "y": 32.5
+      },
+      "galar-wyndon": {
+        "x": 50.5,
+        "y": 17.5
+      },
+      "galar-ballonlea": {
+        "x": 39.5,
+        "y": 35.5
+      },
+      "galar-raid": {
+        "x": 59,
+        "y": 27
+      },
+      "galar-league": {
+        "x": 61,
+        "y": 33
+      },
+      "galar-wild-area": {
+        "x": 53.5,
+        "y": 53
+      },
+      "galar-slumbering-weald": {
+        "x": 44,
+        "y": 92.5
+      },
+      "galar-mine": {
+        "x": 37,
+        "y": 51.5
+      },
+      "galar-glimwood-tangle": {
+        "x": 35,
+        "y": 42
+      },
+      "galar-mine-no-2": {
+        "x": 32,
+        "y": 56
+      },
+      "galar-watchtower-ruins": {
+        "x": 60.5,
+        "y": 53
+      }
+    }
   }
 }

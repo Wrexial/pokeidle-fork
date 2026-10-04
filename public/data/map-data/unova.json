@@ -13,8 +13,8 @@
   },
   "unlockOrder": 499999,
   "position": {
-   "x": 90.6479413417544,
-   "y": 82.7201493694689
+   "x": 90.5,
+   "y": 82.5
   },
   "mart": {
    "name": "Unova Mart",
@@ -47,8 +47,8 @@
   },
   "unlockOrder": 500001,
   "position": {
-   "x": 84.46618681412552,
-   "y": 75.40657085530017
+   "x": 84.5,
+   "y": 75.5
   },
   "biome": "grassland"
  },
@@ -72,8 +72,8 @@
   },
   "unlockOrder": 500001.5,
   "position": {
-   "x": 88.92377591683015,
-   "y": 70.64838849315296
+   "x": 89,
+   "y": 70.5
   },
   "mart": {
    "name": "Unova Mart",
@@ -105,8 +105,8 @@
   },
   "unlockOrder": 500002.0001,
   "position": {
-   "x": 4.96462540526635,
-   "y": 76.85740982876366
+   "x": 5,
+   "y": 77
   },
   "mart": {
    "name": "Unova Mart",
@@ -140,8 +140,8 @@
   },
   "unlockOrder": 500002.0002,
   "position": {
-   "x": 90.81155517663755,
-   "y": 64.41965729574969
+   "x": 90.5,
+   "y": 64.5
   },
   "biome": "grassland"
  },
@@ -165,8 +165,8 @@
   },
   "unlockOrder": 500002.0003,
   "position": {
-   "x": 25.77,
-   "y": 66.42
+   "x": 25.5,
+   "y": 66.5
   },
   "mart": {
    "name": "Unova Mart",
@@ -198,8 +198,8 @@
   },
   "unlockOrder": 500002.5001,
   "position": {
-   "x": 12.711497772931104,
-   "y": 66.39071748143175
+   "x": 12.5,
+   "y": 66.5
   },
   "mart": {
    "name": "Unova Mart",
@@ -232,8 +232,8 @@
   },
   "unlockOrder": 500002.5002,
   "position": {
-   "x": 88.95025991432821,
-   "y": 58.17981570343522
+   "x": 89,
+   "y": 58
   },
   "mart": {
    "name": "Unova Mart",
@@ -275,8 +275,8 @@
   },
   "unlockOrder": 500003,
   "position": {
-   "x": 84.09221979289633,
-   "y": 63.336107344031475
+   "x": 84.5,
+   "y": 63.5
   },
   "biome": "grassland"
  },
@@ -309,8 +309,8 @@
   },
   "unlockOrder": 500003.5,
   "position": {
-   "x": 77.57233797956886,
-   "y": 63.37536470310642
+   "x": 77.5,
+   "y": 63.5
   },
   "mart": {
    "name": "Unova Mart",
@@ -350,8 +350,8 @@
   },
   "unlockOrder": 500004.0001,
   "position": {
-   "x": 51.15,
-   "y": 71.96125
+   "x": 51,
+   "y": 72
   },
   "mart": {
    "name": "Unova Mart",
@@ -395,8 +395,8 @@
   },
   "unlockOrder": 500004.0002,
   "position": {
-   "x": 51.15,
-   "y": 58.934999999999995
+   "x": 51,
+   "y": 59
   },
   "weather": "sandstorm",
   "biome": "desert"
@@ -431,8 +431,8 @@
   },
   "unlockOrder": 500004.5,
   "position": {
-   "x": 51.15,
-   "y": 52.42875
+   "x": 51,
+   "y": 52.5
   },
   "mart": {
    "name": "Unova Mart",
@@ -474,8 +474,8 @@
   },
   "unlockOrder": 500005,
   "position": {
-   "x": 39.85,
-   "y": 52.58
+   "x": 40,
+   "y": 52.5
   },
   "biome": "grassland"
  },
@@ -499,8 +499,8 @@
   },
   "unlockOrder": 500005.5,
   "position": {
-   "x": 28.46,
-   "y": 52.58
+   "x": 28.5,
+   "y": 52.5
   },
   "mart": {
    "name": "Unova Mart",
@@ -545,8 +545,8 @@
   },
   "unlockOrder": 500006.0001,
   "position": {
-   "x": 3.08,
-   "y": 28.73
+   "x": 3,
+   "y": 28.5
   },
   "mart": {
    "name": "Unova Mart",
@@ -594,8 +594,8 @@
   },
   "unlockOrder": 500006.0002,
   "position": {
-   "x": 22.15,
-   "y": 47.88
+   "x": 22,
+   "y": 48
   },
   "biome": "forest"
  },
@@ -628,8 +628,8 @@
   },
   "unlockOrder": 500006.5,
   "position": {
-   "x": 15.77,
-   "y": 43.19
+   "x": 16,
+   "y": 43.5
   },
   "mart": {
    "name": "Unova Mart",
@@ -677,8 +677,8 @@
   },
   "unlockOrder": 500007,
   "position": {
-   "x": 21.849361121864913,
-   "y": 38.72886557424919
+   "x": 22,
+   "y": 38.5
   },
   "biome": "grassland"
  },
@@ -706,8 +706,8 @@
   },
   "unlockOrder": 500007.5,
   "position": {
-   "x": 27.035934591645418,
-   "y": 34.777934589965994
+   "x": 27,
+   "y": 35
   },
   "mart": {
    "name": "Unova Mart",
@@ -756,8 +756,8 @@
   },
   "unlockOrder": 500008,
   "position": {
-   "x": 32.26470428648967,
-   "y": 30.913199835784813
+   "x": 32.5,
+   "y": 31
   },
   "biome": "coast"
  },
@@ -790,8 +790,8 @@
   },
   "unlockOrder": 500009,
   "position": {
-   "x": 40.85,
-   "y": 32.96
+   "x": 41,
+   "y": 33
   },
   "biome": "grassland"
  },
@@ -825,8 +825,8 @@
   },
   "unlockOrder": 500009.5,
   "position": {
-   "x": 48.412918966961584,
-   "y": 32.04670035011549
+   "x": 48.5,
+   "y": 32
   },
   "mart": {
    "name": "Unova Mart",
@@ -873,8 +873,8 @@
   },
   "unlockOrder": 500010,
   "position": {
-   "x": 52.6721404280317,
-   "y": 36.98429711287715
+   "x": 52.5,
+   "y": 37
   },
   "biome": "grassland"
  },
@@ -903,8 +903,8 @@
   },
   "unlockOrder": 500011,
   "position": {
-   "x": 57.48656017521561,
-   "y": 32.59662235073198
+   "x": 57.5,
+   "y": 32.5
   },
   "biome": "grassland"
  },
@@ -938,8 +938,8 @@
   },
   "unlockOrder": 500012,
   "position": {
-   "x": 63.888380429791106,
-   "y": 33.83238018627538
+   "x": 64,
+   "y": 33.5
   },
   "biome": "forest"
  },
@@ -971,8 +971,8 @@
   },
   "unlockOrder": 500012.5,
   "position": {
-   "x": 71.83357296689192,
-   "y": 32.0791881406024
+   "x": 72,
+   "y": 32
   },
   "mart": {
    "name": "Unova Mart",
@@ -1020,8 +1020,8 @@
   },
   "unlockOrder": 500013,
   "position": {
-   "x": 81.94476215230652,
-   "y": 40.28357150540833
+   "x": 82,
+   "y": 40.5
   },
   "biome": "coast"
  },
@@ -1048,8 +1048,8 @@
   },
   "unlockOrder": 500013.5,
   "position": {
-   "x": 87.66716432244306,
-   "y": 43.38683608954985
+   "x": 87.5,
+   "y": 43.5
   },
   "mart": {
    "name": "Unova Mart",
@@ -1097,8 +1097,8 @@
   },
   "unlockOrder": 500014.0003,
   "position": {
-   "x": 80.74015844211795,
-   "y": 47.795883183097665
+   "x": 81,
+   "y": 48
   },
   "biome": "grassland"
  },
@@ -1122,8 +1122,8 @@
   },
   "unlockOrder": 500014.0001,
   "position": {
-   "x": 92.15855439422461,
-   "y": 30.28042493353799
+   "x": 92,
+   "y": 30.5
   },
   "mart": {
    "name": "Unova Mart",
@@ -1167,8 +1167,8 @@
   },
   "unlockOrder": 500014.0002,
   "position": {
-   "x": 73.46,
-   "y": 43.19
+   "x": 73.5,
+   "y": 43.5
   },
   "mart": {
    "name": "Unova Mart",
@@ -1212,8 +1212,8 @@
   },
   "unlockOrder": 500014.5,
   "position": {
-   "x": 75.41149237948859,
-   "y": 51.527473281055116
+   "x": 75.5,
+   "y": 51.5
   },
   "mart": {
    "name": "Unova Mart",
@@ -1260,8 +1260,8 @@
   },
   "unlockOrder": 500015,
   "position": {
-   "x": 70.00834917839346,
-   "y": 55.17664353584722
+   "x": 70,
+   "y": 55
   },
   "biome": "mountain"
  },
@@ -1291,8 +1291,8 @@
   },
   "unlockOrder": 500016,
   "position": {
-   "x": 61.46,
-   "y": 53.35
+   "x": 61.5,
+   "y": 53.5
   },
   "biome": "grassland"
  },
@@ -1323,7 +1323,7 @@
   "unlockOrder": 500017,
   "position": {
    "x": 98,
-   "y": 73.75559299651349
+   "y": 74
   },
   "biome": "coast"
  },
@@ -1348,8 +1348,8 @@
   },
   "unlockOrder": 500018,
   "position": {
-   "x": 92.03554251076996,
-   "y": 76.35835323924168
+   "x": 92,
+   "y": 76.5
   },
   "biome": "coast"
  },
@@ -1381,8 +1381,8 @@
   },
   "unlockOrder": 500018.5,
   "position": {
-   "x": 51.15,
-   "y": 65.455
+   "x": 51,
+   "y": 65.5
   },
   "biome": "grassland"
  },
@@ -1412,8 +1412,8 @@
   },
   "unlockOrder": 500019,
   "position": {
-   "x": 8.863876821802545,
-   "y": 71.6318726898046
+   "x": 9,
+   "y": 72
   },
   "biome": "grassland"
  },
@@ -1443,8 +1443,8 @@
   },
   "unlockOrder": 500020,
   "position": {
-   "x": 19.23,
-   "y": 66.42
+   "x": 19,
+   "y": 66.5
   },
   "biome": "grassland"
  },
@@ -1475,8 +1475,8 @@
   },
   "unlockOrder": 500021,
   "position": {
-   "x": 76.73647772480427,
-   "y": 36.36130515516672
+   "x": 76.5,
+   "y": 36.5
   },
   "biome": "coast"
  },
@@ -1505,8 +1505,8 @@
   },
   "unlockOrder": 500022,
   "position": {
-   "x": 82.88606738158408,
-   "y": 33.53819564346288
+   "x": 83,
+   "y": 33.5
   },
   "biome": "coast"
  },
@@ -1533,8 +1533,8 @@
   },
   "unlockOrder": 500023,
   "position": {
-   "x": 88.94340105774553,
-   "y": 35.950478532271816
+   "x": 89,
+   "y": 36
   },
   "biome": "grassland"
  },
@@ -1620,8 +1620,8 @@
   },
   "unlockOrder": 500003.25,
   "position": {
-   "x": 80.8,
-   "y": 69.4
+   "x": 81,
+   "y": 69.5
   },
   "biome": "forest",
   "background": "/backgrounds/grassland.png"
@@ -1648,7 +1648,7 @@
   "unlockOrder": 500006.2502,
   "position": {
    "x": 16,
-   "y": 50.7
+   "y": 51
   },
   "biome": "cave",
   "background": "/backgrounds/cave.png"
@@ -1673,8 +1673,8 @@
   },
   "unlockOrder": 500003.25,
   "position": {
-   "x": 80.8,
-   "y": 57.4
+   "x": 81,
+   "y": 57.5
   },
   "biome": "cave",
   "background": "/backgrounds/cave.png"
@@ -1700,8 +1700,8 @@
   },
   "unlockOrder": 500007.25,
   "position": {
-   "x": 26.7,
-   "y": 42.3
+   "x": 27,
+   "y": 42.5
   },
   "biome": "mountain",
   "background": "/backgrounds/mountain.png"
@@ -1727,8 +1727,8 @@
   },
   "unlockOrder": 500007.75,
   "position": {
-   "x": 33.9,
-   "y": 37.1
+   "x": 34,
+   "y": 37
   },
   "biome": "ruins",
   "background": "/backgrounds/grassland.png"
@@ -1754,8 +1754,8 @@
   },
   "unlockOrder": 500004.2502,
   "position": {
-   "x": 45.1,
-   "y": 55.7
+   "x": 45,
+   "y": 55.5
   },
   "biome": "grassland",
   "background": "/backgrounds/grassland.png"
@@ -1780,8 +1780,8 @@
   },
   "unlockOrder": 500013.25,
   "position": {
-   "x": 94.8,
-   "y": 41.8
+   "x": 95,
+   "y": 42
   },
   "biome": "grassland",
   "background": "/backgrounds/grassland.png"
@@ -1807,7 +1807,7 @@
   "unlockOrder": 500013.75,
   "position": {
    "x": 86.5,
-   "y": 51.1
+   "y": 51
   },
   "biome": "cave",
   "background": "/backgrounds/cave.png"
@@ -1833,8 +1833,8 @@
   },
   "unlockOrder": 500007.75,
   "position": {
-   "x": 25.4,
-   "y": 28.6
+   "x": 25.5,
+   "y": 28.5
   },
   "biome": "swamp",
   "background": "/backgrounds/grassland.png"
@@ -1887,7 +1887,7 @@
   "unlockOrder": 500004.2502,
   "position": {
    "x": 58.5,
-   "y": 58.7
+   "y": 59
   },
   "biome": "desert",
   "background": "/backgrounds/grassland.png"
@@ -1914,7 +1914,7 @@
   },
   "unlockOrder": 500007.25,
   "position": {
-   "x": 20.2,
+   "x": 20,
    "y": 32.5
   },
   "biome": "mountain",

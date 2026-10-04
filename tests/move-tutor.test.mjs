@@ -10,6 +10,7 @@ const { createPokemon, getFamilyLearnset, getTutorMoves, isTutorMove } = await i
 )
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 const { tmItemId } = await import('../src/data/tms.js')
+const { tmTeachCost } = await import('../src/data/config.js')
 
 test('tutor moves are TM moves outside the level-up learnset', () => {
   const tutorMoves = getTutorMoves('pikachu'),
@@ -41,7 +42,7 @@ test('the Move Tutor refuses a TM the player has not found', () => {
   assert.equal(next.money, 100000)
 })
 
-test('an owned TM teaches its move for free', () => {
+test('an owned TM teaches its move for the TM fee', () => {
   const pokemon = createPokemon('pikachu', 50, 'a'),
     tutorMove = getTutorMoves('pikachu')[0],
     state = {
@@ -49,15 +50,33 @@ test('an owned TM teaches its move for free', () => {
       party: [pokemon],
       playerPokemon: pokemon,
       inventory: { [tmItemId(tutorMove)]: 1 },
-      money: 0,
+      money: tmTeachCost * 2,
     },
     next = gameReducer(state, {
       type: 'SET_MOVES',
       payload: { pokemonId: 'a', moves: [tutorMove] },
     })
   assert.deepEqual(next.party[0].moves, [tutorMove])
-  assert.equal(next.money, 0, 'teaching from a TM is free')
+  assert.equal(next.money, tmTeachCost, 'the TM fee was charged')
   assert.equal(next.inventory[tmItemId(tutorMove)], 1, 'TMs are reusable')
+})
+
+test('the Move Tutor refuses when you cannot afford the TM fee', () => {
+  const pokemon = createPokemon('pikachu', 50, 'a'),
+    tutorMove = getTutorMoves('pikachu')[0],
+    state = {
+      ...initialGameState,
+      party: [pokemon],
+      playerPokemon: pokemon,
+      inventory: { [tmItemId(tutorMove)]: 1 },
+      money: tmTeachCost - 1,
+    },
+    next = gameReducer(state, {
+      type: 'SET_MOVES',
+      payload: { pokemonId: 'a', moves: [tutorMove] },
+    })
+  assert.deepEqual(next.party[0].moves, pokemon.moves, 'the change was rejected')
+  assert.equal(next.money, tmTeachCost - 1)
 })
 
 test('re-learning a level-up move is free', () => {

@@ -54,6 +54,8 @@ export const wildTmDropChance = 1 / 200
 export const minigameTmChance = 0.18
 /** TMs a gym leader awards when the player first earns its badge. */
 export const gymTmRewardCount = 2
+/** Small fee a reusable TM charges each time it is taught to a Pokemon. */
+export const tmTeachCost = 500
 /** Shiny odds for a bred egg (1 in 4096), improved if a parent is shiny. */
 export const breedShinyOdds = 4096
 export const breedShinyParentOdds = 512

@@ -5,6 +5,7 @@ import { jsx, jsxs } from 'react/jsx-runtime'
 import { formatMoveAccuracy } from '../data/moves.js'
 import { moveData } from '../data/gameData.js'
 import { tmItemId } from '../data/tms.js'
+import { tmTeachCost } from '../data/config.js'
 import { useGame } from '../game/context.js'
 import { getFamilyLearnset, getTutorMoves, pokemonDisplayName } from '../game/pokemon.js'
 import { moveTooltip } from '../game/move-info.js'
@@ -30,7 +31,12 @@ export function MoveManagerPanel({ pokemon, onClose }) {
     allMoves = [
       ...availableMoves.map(({ moveId, learnLevel }) => ({ moveId, learnLevel })),
       ...tutorMoves.map((moveId) => ({ moveId, learnLevel: -1 })),
-    ]
+    ],
+    pendingTutorCost =
+      moves.filter(
+        (moveId) =>
+          tutorSet.has(moveId) && ownedTutorSet.has(moveId) && !target.moves.includes(moveId)
+      ).length * tmTeachCost
   /** @param {string} moveId */
   function toggleMove(moveId) {
     if (tutorSet.has(moveId) && !ownedTutorSet.has(moveId)) return
@@ -156,6 +162,11 @@ export function MoveManagerPanel({ pokemon, onClose }) {
             )
           }),
         }),
+        pendingTutorCost > 0 &&
+          jsx('div', {
+            className: 'move-panel-tutor-cost',
+            children: `TM fee: $${pendingTutorCost.toLocaleString()} \u00b7 you have $${state.money.toLocaleString()}`,
+          }),
         jsxs('div', {
           className: 'move-panel-buttons',
           children: [

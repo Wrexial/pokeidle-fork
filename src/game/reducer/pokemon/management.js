@@ -2,6 +2,7 @@
 
 import { pokemonSpecies } from '../../../data/gameData.js'
 import { tmItemId } from '../../../data/tms.js'
+import { tmTeachCost } from '../../../data/config.js'
 import { createPokemon, insertIntoBox, isTutorMove, judgeIVs } from '../../pokemon.js'
 import { advanceShinyTarget, formatReward, loadActivePokemonFromParty, prepareNextBattle, releaseFaintedParty, releaseReward, syncActivePokemonIntoParty } from '../../progression.js'
 import { advanceQuests } from '../../quests.js'
@@ -158,24 +159,27 @@ export function setMoves(state, action) {
       state.party.find((member) => member.id === targetId) ??
       state.box.find((member) => member.id === targetId)
   if (!target) return state
-  // Move Tutor TM moves are gated on owning the reusable TM, but teaching one
-  // costs nothing once it has been found.
+  // Move Tutor TM moves are gated on owning the reusable TM, and teaching one
+  // charges a small fee.
   const knownMoves = new Set(target.moves ?? []),
     newTutorMoves = moves.filter(
       (moveId) => !knownMoves.has(moveId) && isTutorMove(target.speciesKey, moveId)
     ),
     missingTm = newTutorMoves.some((moveId) => (state.inventory[tmItemId(moveId)] ?? 0) <= 0)
   if (missingTm) return state
+  const tutorCost = newTutorMoves.length * tmTeachCost
+  if (tutorCost > state.money) return state
   const playerPokemon =
     state.playerPokemon && state.playerPokemon.id === targetId
       ? { ...state.playerPokemon, moves }
       : state.playerPokemon
   return {
     ...state,
-    battleLog: newTutorMoves.length
+    money: state.money - tutorCost,
+    battleLog: tutorCost
       ? [
           ...state.battleLog,
-          `Taught ${newTutorMoves.length} move${newTutorMoves.length > 1 ? 's' : ''} from a TM.`,
+          `Taught ${newTutorMoves.length} move${newTutorMoves.length > 1 ? 's' : ''} from a TM for $${tutorCost.toLocaleString()}.`,
         ].slice(-50)
       : state.battleLog,
     party: state.party.map(updateMoves),

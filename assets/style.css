@@ -1613,6 +1613,14 @@ img {
     filter: none
 }
 
+.move-panel-tutor-cost {
+    font-size: 8px;
+    font-weight: 700;
+    color: var(--ink);
+    padding: 4px 14px 0;
+    text-align: right
+}
+
 .move-panel-buttons {
     display: flex;
     flex-wrap: wrap;

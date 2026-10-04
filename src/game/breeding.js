@@ -1,6 +1,6 @@
 // Breeding rules: gender and egg-group compatibility for the Daycare.
 
-import { breedingData, evolutionData, pokemonSpecies } from '../data/gameData.js'
+import { breedingData, eggMoves, evolutionData, pokemonSpecies } from '../data/gameData.js'
 import { evolutionItems } from '../data/items.js'
 import { isMegaOrPrimalForm, isTerminalForm } from '../data/mega-evolution.js'
 import { randomNature } from '../data/natures.js'
@@ -262,9 +262,27 @@ export function inheritNature(parents) {
 }
 
 /**
- * The egg's starting moves: its level-1 learnset, padded up to four moves with
- * any moves its parents know that are also in the family's learnset (so a
- * parent's hard-earned moves can be passed down as an early head start).
+ * The egg moves an egg inherits: any move a parent knows that is one of the
+ * hatching species' breed-only moves (see egg-moves.json). These are kept on
+ * the hatched Pokemon so it can always re-learn them.
+ * @param {Pokemon[]} parents
+ * @param {string} speciesKey
+ * @returns {string[]}
+ */
+export function inheritEggMoves(parents, speciesKey) {
+  const eggMoveSet = new Set(eggMoves[speciesKey] ?? []),
+    inherited = /** @type {string[]} */ ([])
+  for (const parent of parents)
+    for (const moveId of parent.moves ?? [])
+      if (eggMoveSet.has(moveId) && !inherited.includes(moveId)) inherited.push(moveId)
+  return inherited
+}
+
+/**
+ * The egg's starting moves: its level-1 learnset, then any egg moves a parent
+ * passed down (otherwise unobtainable), padded up to four moves with any moves
+ * its parents know that are also in the family's learnset (so a parent's
+ * hard-earned moves can be passed down as an early head start).
  * @param {Pokemon[]} parents
  * @param {string} speciesKey
  * @returns {string[]}
@@ -272,6 +290,8 @@ export function inheritNature(parents) {
 export function inheritMoves(parents, speciesKey) {
   const inherited = resolvePokemonMoves(speciesKey, 1),
     familyMoves = new Set(getFamilyLearnset(speciesKey, 1000).map((entry) => entry.moveId))
+  for (const moveId of inheritEggMoves(parents, speciesKey))
+    if (inherited.length < 4 && !inherited.includes(moveId)) inherited.push(moveId)
   for (const parent of parents)
     for (const moveId of parent.moves ?? []) {
       if (inherited.length >= 4) break
@@ -282,7 +302,7 @@ export function inheritMoves(parents, speciesKey) {
 
 /**
  * All the traits a Daycare egg inherits from its parents at once: IVs, nature
- * and starting moves.
+ * and starting moves (including breed-only egg moves).
  * @param {Pokemon[]} parents
  * @param {string} speciesKey
  * @returns {BreedingInheritance}
@@ -292,5 +312,6 @@ export function inheritBreedingTraits(parents, speciesKey) {
     ivs: inheritIVs(parents),
     nature: inheritNature(parents),
     moves: inheritMoves(parents, speciesKey),
+    eggMoves: inheritEggMoves(parents, speciesKey),
   }
 }

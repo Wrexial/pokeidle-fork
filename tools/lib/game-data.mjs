@@ -50,6 +50,7 @@ export function installGameData() {
       evolutionData: readJSON('public/data/evolution-data.json'),
       moveLearnsets: readJSON('public/data/possible-learnsets.json'),
       tmLearnsets: readJSON('public/data/tm-learnsets.json'),
+      eggMoves: readJSON('public/data/egg-moves.json'),
       trainerClasses: readJSON('public/data/trainer-classes.json'),
       moveData: readJSON('public/data/possible-moves.json'),
       mapData: mergeRegionDir('public/data/map-data', regionIds),

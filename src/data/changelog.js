@@ -88,6 +88,13 @@ export const CHANGELOG = [
           ],
         },
         {
+          heading: 'Breeding',
+          items: [
+            'Egg moves exist now: each species has its real breed-only move list, and an egg inherits any of them that a parent knows. A hatched Pokemon keeps its egg moves and can re-learn them for free from the Manage Moves panel (tagged “Egg”), so a deliberately bred move is never lost',
+            'Egg moves are protected from level-up replacement just like TMs, and a hatched egg keeps the moves it was bred with instead of resetting to its bare Lv. 1 set',
+          ],
+        },
+        {
           heading: 'Items',
           items: [
             'Bottle Caps hyper-train a party Pokemon: a Bottle Cap caps its lowest IV at 31 and a Gold Bottle Cap caps every IV. Both are endgame-minigame rewards — a Bottle Cap at 15 Battle Royal waves or a Dynamax Adventures boss, and a Gold Bottle Cap from a 20-wave Battle Royal — and hyper-trained IVs are never passed down by breeding',

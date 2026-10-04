@@ -92,6 +92,8 @@ type Pokemon = BattlePokemon & {
   /** An unhatched egg: it cannot battle and hatches after `eggStepsRemaining` wild wins while in the party. */
   isEgg?: boolean
   eggStepsRemaining?: number
+  /** Egg moves this Pokemon inherited by breeding; re-learnable for this individual. */
+  eggMoves?: string[]
   isShiny: boolean
 }
 
@@ -135,6 +137,8 @@ type BreedingInheritance = {
   nature?: string
   /** Start moves, including any moves the parents passed down. */
   moves?: string[]
+  /** Egg moves inherited from a parent (see egg-moves.json). */
+  eggMoves?: string[]
 }
 
 type Inspected = { source: string; id: string } | null

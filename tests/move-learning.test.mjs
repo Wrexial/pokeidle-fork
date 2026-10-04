@@ -73,3 +73,15 @@ test('APPLY_EXP keeps a taught TM when a level-up move fills the set', () => {
   assert.equal(next.playerPokemon.moves.includes(levelMoves[3]), true, 'the new move was learned')
   assert.equal(next.playerPokemon.moves.includes(levelMoves[0]), false, 'the oldest level move made room')
 })
+
+test('an inherited egg move is never forgotten', () => {
+  const bulbasaurLevelMoves = getFamilyLearnset('bulbasaur', 50).map((entry) => entry.moveId),
+    { moves, forgotten } = applyMoveLearning(
+      'bulbasaur',
+      ['charm', bulbasaurLevelMoves[0], bulbasaurLevelMoves[1], bulbasaurLevelMoves[2]],
+      [bulbasaurLevelMoves[3]],
+      ['charm']
+    )
+  assert.equal(moves.includes('charm'), true, 'the egg move was kept')
+  assert.deepEqual(forgotten, [bulbasaurLevelMoves[0]])
+})

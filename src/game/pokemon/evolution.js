@@ -86,10 +86,10 @@ export function isTutorMove(speciesKey, moveId) {
  * throws away a move the player deliberately taught:
  *
  * - A free slot just takes the move.
- * - With four moves, the oldest move that is not a TM for the species (i.e. a
- *   level-up move) is forgotten to make room.
- * - When all four slots are TMs, the new move is left `pending` — it stays
- *   available in the Manage Moves panel, so nothing is lost.
+ * - With four moves, the oldest move that is neither a TM for the species nor
+ *   in `protectedMoveIds` (the individual's egg moves) is forgotten.
+ * - When every slot is a TM or egg move, the new move is left `pending` — it
+ *   stays available in the Manage Moves panel, so nothing is lost.
  *
  * A move learned earlier in the same call is protected, so a multi-level
  * gain can't immediately forget the move it just taught.
@@ -97,14 +97,16 @@ export function isTutorMove(speciesKey, moveId) {
  * @param {string} speciesKey
  * @param {string[] | null | undefined} currentMoves
  * @param {string[] | null | undefined} newMoveIds
+ * @param {string[] | null | undefined} [protectedMoveIds] Moves to never forget
+ *   (a Pokemon's inherited egg moves).
  * @returns {{ moves: string[], learned: string[], forgotten: string[], pending: string[] }}
  */
-export function applyMoveLearning(speciesKey, currentMoves, newMoveIds) {
+export function applyMoveLearning(speciesKey, currentMoves, newMoveIds, protectedMoveIds) {
   const moves = [...(currentMoves ?? [])],
     learned = [],
     forgotten = [],
     pending = [],
-    protectedMoves = new Set()
+    protectedMoves = new Set(protectedMoveIds ?? [])
   for (const moveId of newMoveIds ?? []) {
     if (!moveId || moves.includes(moveId)) continue
     if (moves.length < 4) {

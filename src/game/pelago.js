@@ -105,7 +105,8 @@ export function grantExperience(pokemon, expGained) {
     { moves } = applyMoveLearning(
       pokemon.speciesKey,
       pokemon.moves,
-      levelUps.flatMap((levelUp) => levelUp.newMoves)
+      levelUps.flatMap((levelUp) => levelUp.newMoves),
+      pokemon.eggMoves
     )
   return {
     ...pokemon,

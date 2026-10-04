@@ -163,7 +163,13 @@ export function tickPartyEggs(party) {
       ...member,
       isEgg: false,
       eggStepsRemaining: 0,
-      moves: resolvePokemonMoves(member.speciesKey, member.level || 1),
+      // Keep the moves the egg was created with (its level-1 set plus any
+      // inherited family/egg moves); only fall back to the bare learnset for a
+      // legacy egg that somehow has none.
+      moves:
+        member.moves && member.moves.length > 0
+          ? member.moves
+          : resolvePokemonMoves(member.speciesKey, member.level || 1),
     }
     hatched.push(hatchedMember)
     return hatchedMember

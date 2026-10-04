@@ -21,16 +21,24 @@ export function MoveManagerPanel({ pokemon, onClose }) {
     targetId = target.id,
     [moves, setMoves] = React.useState(() => [...target.moves]),
     availableMoves = getFamilyLearnset(target.speciesKey, target.level),
-    tutorMoves = getTutorMoves(target.speciesKey),
+    levelMoveSet = new Set(availableMoves.map(({ moveId }) => moveId)),
+    // Egg moves belong to this individual (inherited at hatch), so they can be
+    // re-learned for free even when the species could also get them from a TM.
+    eggMoveIds = (target.eggMoves ?? []).filter((moveId) => moveData[moveId]),
+    eggMoveSet = new Set(eggMoveIds),
     // TMs are reusable unlocks: a tutor move is only selectable once its TM has
-    // been found, and teaching it costs nothing.
+    // been found, and teaching it costs a small fee.
+    tutorMoves = getTutorMoves(target.speciesKey).filter((moveId) => !eggMoveSet.has(moveId)),
     ownedTutorSet = new Set(
       tutorMoves.filter((moveId) => (state.inventory[tmItemId(moveId)] ?? 0) > 0)
     ),
     tutorSet = new Set(tutorMoves),
     allMoves = [
-      ...availableMoves.map(({ moveId, learnLevel }) => ({ moveId, learnLevel })),
-      ...tutorMoves.map((moveId) => ({ moveId, learnLevel: -1 })),
+      ...availableMoves.map(({ moveId, learnLevel }) => ({ moveId, learnLevel, kind: 'level' })),
+      ...eggMoveIds
+        .filter((moveId) => !levelMoveSet.has(moveId))
+        .map((moveId) => ({ moveId, learnLevel: -2, kind: 'egg' })),
+      ...tutorMoves.map((moveId) => ({ moveId, learnLevel: -1, kind: 'tm' })),
     ],
     pendingTutorCost =
       moves.filter(
@@ -121,12 +129,12 @@ export function MoveManagerPanel({ pokemon, onClose }) {
         }),
         jsx('div', {
           className: 'move-panel-list',
-          children: allMoves.map(({ moveId, learnLevel }) => {
+          children: allMoves.map(({ moveId, learnLevel, kind }) => {
             const moveDef = moveData[moveId]
             if (!moveDef) return null
             const isSelected = moves.includes(moveId),
-              isTutor = learnLevel < 0,
-              locked = isTutor && !ownedTutorSet.has(moveId)
+              isTm = kind === 'tm',
+              locked = isTm && !ownedTutorSet.has(moveId)
             return jsxs(
               'div',
               {
@@ -154,7 +162,13 @@ export function MoveManagerPanel({ pokemon, onClose }) {
                   }),
                   jsxs('span', {
                     className: 'move-panel-item-level',
-                    children: isTutor ? (locked ? 'No TM' : 'TM') : `Lv.${learnLevel}`,
+                    children: isTm
+                      ? locked
+                        ? 'No TM'
+                        : 'TM'
+                      : kind === 'egg'
+                        ? 'Egg'
+                        : `Lv.${learnLevel}`,
                   }),
                 ],
               },

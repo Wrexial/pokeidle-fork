@@ -85,7 +85,8 @@ export function createPokemon(speciesKey, level, id, isShiny = !1, inheritance) 
     moves =
       inheritance?.moves && inheritance.moves.length > 0
         ? inheritance.moves
-        : resolvePokemonMoves(speciesKey, level)
+        : resolvePokemonMoves(speciesKey, level),
+    inheritedEggMoves = inheritance?.eggMoves?.filter((moveId) => !!moveId) ?? []
   return {
     id: String(id),
     speciesKey,
@@ -108,6 +109,7 @@ export function createPokemon(speciesKey, level, id, isShiny = !1, inheritance) 
     heldItem: null,
     isShiny,
     gmax: false,
+    ...(inheritedEggMoves.length > 0 ? { eggMoves: [...new Set(inheritedEggMoves)] } : {}),
   }
 }
 

@@ -45,7 +45,8 @@ export function applyExp(state, action) {
     const { moves, learned, forgotten, pending } = applyMoveLearning(
       updatedPokemon.speciesKey,
       updatedPokemon.moves,
-      action.payload.newMoves
+      action.payload.newMoves,
+      updatedPokemon.eggMoves
     )
     updatedPokemon = {
       ...updatedPokemon,
@@ -120,7 +121,8 @@ export function applySharedExp(state, action) {
       const { moves, learned, forgotten, pending } = applyMoveLearning(
         member.speciesKey,
         member.moves,
-        entry.newMoves
+        entry.newMoves,
+        member.eggMoves
       )
       member = {
         ...member,

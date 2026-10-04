@@ -160,10 +160,12 @@ export function setMoves(state, action) {
       state.box.find((member) => member.id === targetId)
   if (!target) return state
   // Move Tutor TM moves are gated on owning the reusable TM, and teaching one
-  // charges a small fee.
+  // charges a small fee. A Pokemon's inherited egg moves are free to re-learn.
   const knownMoves = new Set(target.moves ?? []),
+    eggMoves = new Set(target.eggMoves ?? []),
     newTutorMoves = moves.filter(
-      (moveId) => !knownMoves.has(moveId) && isTutorMove(target.speciesKey, moveId)
+      (moveId) =>
+        !knownMoves.has(moveId) && isTutorMove(target.speciesKey, moveId) && !eggMoves.has(moveId)
     ),
     missingTm = newTutorMoves.some((moveId) => (state.inventory[tmItemId(moveId)] ?? 0) <= 0)
   if (missingTm) return state

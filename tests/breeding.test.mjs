@@ -5,10 +5,11 @@ import { installGameData } from './helpers/game-data.mjs'
 
 installGameData()
 
-const { breedingCompatibility, canBreed, eggSpeciesKey, genderForPokemon, inheritBreedingTraits, inheritIVs, inheritMoves, inheritNature } = await import(
+const { breedingCompatibility, canBreed, eggSpeciesKey, genderForPokemon, inheritBreedingTraits, inheritEggMoves, inheritIVs, inheritMoves, inheritNature } = await import(
   '../src/game/breeding.js'
 )
-const { createPokemon } = await import('../src/game/pokemon.js')
+const { createEgg, createPokemon } = await import('../src/game/pokemon.js')
+const { eggMoves, moveData, pokemonSpecies } = await import('../src/data/gameData.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 
 /**
@@ -202,6 +203,64 @@ test('inheritMoves ignores moves outside the family learnset', () => {
     'bulbasaur'
   )
   assert.ok(!egg.includes('flamethrower'))
+})
+
+test('inheritEggMoves passes down a breed-only move', () => {
+  const egg = inheritEggMoves(
+    [
+      { speciesKey: 'bulbasaur', id: '1', moves: ['charm', 'tackle'] },
+      { speciesKey: 'bulbasaur', id: '2', moves: ['curse'] },
+    ],
+    'bulbasaur'
+  )
+  assert.ok(egg.includes('charm'))
+  assert.ok(egg.includes('curse'))
+  assert.ok(!egg.includes('tackle'), 'ordinary moves are not egg moves')
+})
+
+test('inheritEggMoves ignores a non-egg move and a move the species cannot breed', () => {
+  assert.deepEqual(
+    inheritEggMoves([{ speciesKey: 'bulbasaur', id: '1', moves: ['flamethrower'] }], 'bulbasaur'),
+    []
+  )
+  // Pikachu has no egg moves of its own (Pichu does).
+  assert.deepEqual(
+    inheritEggMoves([{ speciesKey: 'pikachu', id: '1', moves: ['charm'] }], 'pikachu'),
+    []
+  )
+})
+
+test('inheritMoves folds an egg move into the starting moveset', () => {
+  const egg = inheritMoves([{ speciesKey: 'bulbasaur', id: '1', moves: ['charm'] }], 'bulbasaur')
+  assert.ok(egg.includes('charm'))
+  assert.ok(egg.length <= 4)
+})
+
+test('inheritBreedingTraits records the inherited egg moves', () => {
+  const traits = inheritBreedingTraits(
+    [{ speciesKey: 'bulbasaur', id: '1', moves: ['charm', 'tackle'] }],
+    'bulbasaur'
+  )
+  assert.deepEqual(traits.eggMoves, ['charm'])
+})
+
+test('egg-move data only names real species and moves', () => {
+  const keys = Object.keys(eggMoves)
+  assert.ok(keys.length > 300, 'a broad egg-move table')
+  for (const [speciesKey, moves] of Object.entries(eggMoves)) {
+    assert.ok(pokemonSpecies[speciesKey], `${speciesKey} is a real species`)
+    for (const moveId of moves) assert.ok(moveData[moveId], `${moveId} is a real move`)
+  }
+})
+
+test('an egg records its inherited egg moves', () => {
+  const parents = [
+      { speciesKey: 'bulbasaur', id: '1', moves: ['charm'], ivs: createPokemon('bulbasaur', 5, 'p1').ivs, nature: 'jolly' },
+    ],
+    traits = inheritBreedingTraits(parents, 'bulbasaur'),
+    egg = createEgg('bulbasaur', 'e1', false, 30, traits)
+  assert.ok(egg.eggMoves.includes('charm'))
+  assert.ok(egg.moves.includes('charm'))
 })
 
 test('inheritBreedingTraits bundles IVs, nature and moves', () => {

@@ -370,7 +370,8 @@ export function useItemOnPokemon(state, action) {
         const learning = applyMoveLearning(
           member.speciesKey,
           member.moves,
-          levelUps.flatMap((levelUp) => levelUp.newMoves)
+          levelUps.flatMap((levelUp) => levelUp.newMoves),
+          member.eggMoves
         )
         member.moves = learning.moves
         for (const moveId of learning.learned)

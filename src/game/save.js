@@ -209,6 +209,22 @@ export function repairSave(saved) {
   party = party.map(repairMoves)
   box = box.map(repairMoves)
 
+  // Egg moves are per-individual; drop any that no longer exist in the move data.
+  /** @param {any} pokemon */
+  const repairEggMoves = (pokemon) =>
+    Array.isArray(pokemon.eggMoves)
+      ? {
+          ...pokemon,
+          eggMoves: [
+            ...new Set(
+              pokemon.eggMoves.filter((/** @type {string} */ moveId) => moveData[moveId])
+            ),
+          ],
+        }
+      : pokemon
+  party = party.map(repairEggMoves)
+  box = box.map(repairEggMoves)
+
   // Older saves predate natures. Roll one for any Pokemon missing it and
   // recompute the stored stats so they reflect the new nature (HP is never
   // changed by a nature, so maxHp is stable aside from rounding).

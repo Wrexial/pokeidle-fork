@@ -104,7 +104,8 @@ export function completeEvolution(state, action) {
           member.moves,
           (moveLearnsets[toSpeciesKey] || [])
             .filter(([learnLevel]) => learnLevel <= member.level)
-            .map(([, moveId]) => moveId)
+            .map(([, moveId]) => moveId),
+          member.eggMoves
         )
       return {
         ...member,

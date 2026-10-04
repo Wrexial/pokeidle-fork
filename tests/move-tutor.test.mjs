@@ -95,3 +95,25 @@ test('re-learning a level-up move is free', () => {
   assert.equal(next.money, 1000)
   assert.deepEqual(next.party[0].moves, [levelMove])
 })
+
+test('an inherited egg move is free to re-learn without its TM', () => {
+  // Charm is both a TM and a Bulbasaur egg move; the egg move wins.
+  const pokemon = {
+      ...createPokemon('bulbasaur', 20, 'a'),
+      moves: ['tackle'],
+      eggMoves: ['charm'],
+    },
+    state = {
+      ...initialGameState,
+      party: [pokemon],
+      playerPokemon: pokemon,
+      inventory: {},
+      money: 0,
+    },
+    next = gameReducer(state, {
+      type: 'SET_MOVES',
+      payload: { pokemonId: 'a', moves: ['tackle', 'charm'] },
+    })
+  assert.ok(next.party[0].moves.includes('charm'))
+  assert.equal(next.money, 0, 'an egg move does not charge the TM fee')
+})

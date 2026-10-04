@@ -223,6 +223,7 @@ These are loaded by `assets/gameDataInjector.js` (`key` → file):
 | `evolutionData` | `evolution-data.json` |
 | `moveLearnsets` | **`possible-learnsets.json`** |
 | `tmLearnsets` | `tm-learnsets.json` (machine/TM moves per species) |
+| `eggMoves` | `egg-moves.json` (breed-only moves per species) |
 | `moveData` | **`possible-moves.json`** |
 | `mapEncounterData` | `encounter-data/<region>.json` (merged) |
 | `mapData` | `map-data/<region>.json` (merged) |
@@ -563,6 +564,12 @@ One-off scripts used to build the data JSON (not run during dev/build):
   in its newest game. Feeds the Move Tutor (`getTutorMoves` in
   `src/game/pokemon.js`); normally needs no network (the responses are cached by
   fetch-abilities.cjs). Re-run after adding species/form ids.
+- `fetch-egg-moves.cjs` — reads the same cached responses and writes
+  `public/data/egg-moves.json`, the moves marked with the `egg` learn method
+  (a species' breed-only moves). `inheritEggMoves` (`src/game/breeding.js`)
+  passes a parent's egg moves to the hatchling and the individual keeps them to
+  re-learn in the Move Manager. Normally needs no network; re-run after adding
+  species/form ids.
 - `download_pokemon_sprites.cjs` — fills the local sprite tree for every id in
   `pokemon-species.json`: static front/back/shiny from PokeAPI, and animated
   front/back/shiny from Gen V for dex ids 1-649 falling back to Pokémon

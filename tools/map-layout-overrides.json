@@ -2,236 +2,276 @@
   "hoenn": {
     "positions": {
       "hoenn-granite-cave": {
-        "x": 7.08,
-        "y": 88.61
+        "x": 7,
+        "y": 88.5
       },
       "hoenn-abandoned-ship": {
-        "x": 21.41,
+        "x": 21.5,
         "y": 82
       },
       "hoenn-dewford-town": {
-        "x": 11.34,
-        "y": 88.36
+        "x": 11.5,
+        "y": 88.5
       },
       "hoenn-route-107": {
-        "x": 20.9,
-        "y": 88.35
+        "x": 21,
+        "y": 88.5
       },
       "hoenn-route-108": {
-        "x": 30.4,
-        "y": 82.53
+        "x": 30.5,
+        "y": 82.5
       },
       "hoenn-route-106": {
-        "x": 5.73,
-        "y": 81.16
+        "x": 5.5,
+        "y": 81
       },
       "hoenn-route-105": {
-        "x": 2.89,
-        "y": 73.44
+        "x": 3.5,
+        "y": 73.5
       },
       "hoenn-petalburg-city": {
-        "x": 9.9,
-        "y": 61.53
+        "x": 10,
+        "y": 61.5
       },
       "hoenn-littleroot-town": {
-        "x": 21.33,
-        "y": 72.04
+        "x": 21.5,
+        "y": 72
       },
       "hoenn-route-101": {
-        "x": 21.34,
-        "y": 66.39
+        "x": 21.5,
+        "y": 66.5
       },
       "hoenn-oldale-town": {
-        "x": 21.46,
-        "y": 61.54
+        "x": 21.5,
+        "y": 61.5
       },
       "hoenn-route-102": {
-        "x": 15.53,
-        "y": 61.55
+        "x": 15.5,
+        "y": 61.5
       },
       "hoenn-route-103": {
-        "x": 21.92,
-        "y": 52.87
+        "x": 22,
+        "y": 53
       },
       "hoenn-route-104": {
-        "x": 3.43,
-        "y": 55.91
+        "x": 3.5,
+        "y": 55.5
       },
       "hoenn-rustboro-city": {
-        "x": 3.44,
-        "y": 44.98
+        "x": 3.5,
+        "y": 45
       },
       "hoenn-route-115": {
-        "x": 3.27,
-        "y": 27.65
+        "x": 3.5,
+        "y": 27.5
       },
       "hoenn-route-116": {
-        "x": 10.09,
-        "y": 44.89
+        "x": 10,
+        "y": 45
       },
       "hoenn-verdanturf-town": {
-        "x": 18.33,
+        "x": 18.5,
         "y": 45
       },
       "hoenn-route-117": {
-        "x": 24.71,
-        "y": 44.91
+        "x": 25,
+        "y": 45
       },
       "hoenn-mauville-city": {
-        "x": 30.36,
-        "y": 45.18
+        "x": 30.5,
+        "y": 45
       },
       "hoenn-fiery-path": {
-        "x": 22.4,
-        "y": 22.65
+        "x": 22.5,
+        "y": 22.5
       },
       "hoenn-route-113": {
-        "x": 25.03,
-        "y": 14.13
+        "x": 25,
+        "y": 14
       },
       "hoenn-fallarbor-town": {
-        "x": 15.16,
-        "y": 13.97
+        "x": 15.5,
+        "y": 14
       },
       "hoenn-route-114": {
-        "x": 8.98,
+        "x": 9,
         "y": 14
       },
       "hoenn-meteor-falls": {
-        "x": 4.6,
-        "y": 7.4
+        "x": 4.5,
+        "y": 7.5
       },
       "hoenn-lavaridge-town": {
-        "x": 16.36,
-        "y": 30.05
+        "x": 16.5,
+        "y": 30
       },
       "hoenn-route-112": {
-        "x": 25.04,
-        "y": 29.99
+        "x": 25,
+        "y": 30
       },
       "hoenn-desert-underpass": {
-        "x": 30.49,
-        "y": 20.63
+        "x": 30.5,
+        "y": 20.5
       },
       "hoenn-route-111": {
-        "x": 30.6,
-        "y": 30.23
+        "x": 30.5,
+        "y": 30
       },
       "hoenn-new-mauville": {
-        "x": 37.33,
-        "y": 51.11
+        "x": 37.5,
+        "y": 51
       },
       "hoenn-route-110": {
-        "x": 30.39,
-        "y": 52.87
+        "x": 30.5,
+        "y": 53
       },
       "hoenn-slateport-city": {
-        "x": 30.72,
-        "y": 62.23
+        "x": 30.5,
+        "y": 62.5
       },
       "hoenn-route-118": {
-        "x": 37.43,
-        "y": 45.05
+        "x": 37.5,
+        "y": 45
       },
       "hoenn-route-119": {
-        "x": 37.59,
-        "y": 23.12
+        "x": 37.5,
+        "y": 23
       },
       "hoenn-fortree-city": {
-        "x": 46.27,
-        "y": 14.72
+        "x": 46.5,
+        "y": 14.5
       },
       "hoenn-route-120": {
-        "x": 55.43,
-        "y": 22.69
+        "x": 55.5,
+        "y": 22.5
       },
       "hoenn-route-121": {
-        "x": 55.73,
-        "y": 34.59
+        "x": 55.5,
+        "y": 34.5
       },
       "hoenn-route-122": {
-        "x": 55.57,
-        "y": 45.25
+        "x": 55.5,
+        "y": 45
       },
       "hoenn-route-123": {
-        "x": 46.95,
-        "y": 45.2
+        "x": 47,
+        "y": 45
       },
       "hoenn-safari-zone": {
-        "x": 62.43,
-        "y": 28.44
+        "x": 62.5,
+        "y": 28.5
       },
       "hoenn-lilycove-city": {
-        "x": 69.95,
-        "y": 34.6
+        "x": 70,
+        "y": 34.5
       },
       "hoenn-route-124": {
-        "x": 78.09,
-        "y": 34.16
+        "x": 78,
+        "y": 34
       },
       "hoenn-cave-of-origin": {
-        "x": 66.35,
-        "y": 44.03
+        "x": 66.5,
+        "y": 44
       },
       "hoenn-sootopolis-city": {
-        "x": 66.6,
-        "y": 48.27
+        "x": 66.5,
+        "y": 48
       },
       "hoenn-route-126": {
-        "x": 78.36,
-        "y": 48.34
+        "x": 78,
+        "y": 48
       },
       "hoenn-seafloor-cavern": {
-        "x": 89.77,
-        "y": 48.05
+        "x": 90,
+        "y": 48
       },
       "hoenn-mossdeep-city": {
-        "x": 89.93,
-        "y": 34.2
+        "x": 90,
+        "y": 34
       },
       "hoenn-route-125": {
-        "x": 86.12,
-        "y": 27.7
+        "x": 86,
+        "y": 27.5
       },
       "hoenn-shoal-cave": {
-        "x": 86.54,
-        "y": 21.56
+        "x": 86.5,
+        "y": 21.5
       },
       "hoenn-route-127": {
-        "x": 90.08,
-        "y": 41.92
+        "x": 90,
+        "y": 42
       },
       "hoenn-league": {
-        "x": 97.12,
-        "y": 44.6
+        "x": 97,
+        "y": 45
       },
       "hoenn-route-128": {
-        "x": 89.88,
-        "y": 55.54
+        "x": 90,
+        "y": 55.5
       },
       "hoenn-route-129": {
-        "x": 89.44,
-        "y": 62.73
+        "x": 90,
+        "y": 62.5
       },
       "hoenn-raid": {
-        "x": 78.71,
-        "y": 54.35
+        "x": 78.5,
+        "y": 54.5
       },
       "hoenn-sky-pillar": {
-        "x": 71.71,
-        "y": 56.85
+        "x": 71.5,
+        "y": 57
       },
       "hoenn-ever-grande-city": {
-        "x": 97.03,
-        "y": 55.52
+        "x": 97,
+        "y": 55.5
+      },
+      "hoenn-route-109": {
+        "x": 30.5,
+        "y": 73.5
+      },
+      "hoenn-route-130": {
+        "x": 81.5,
+        "y": 62.5
+      },
+      "hoenn-route-131": {
+        "x": 71.5,
+        "y": 62.5
+      },
+      "hoenn-pacifidlog-town": {
+        "x": 65,
+        "y": 62.5
+      },
+      "hoenn-route-132": {
+        "x": 58,
+        "y": 62.5
+      },
+      "hoenn-route-133": {
+        "x": 47.5,
+        "y": 62.5
+      },
+      "hoenn-route-134": {
+        "x": 37.5,
+        "y": 62.5
       }
     },
     "roads": {
       "remove": [
-        ["hoenn-dewford-town", "hoenn-route-106"],
-        ["hoenn-desert-underpass", "hoenn-mauville-city"],
-        ["hoenn-mauville-city", "hoenn-new-mauville"],
-        ["hoenn-route-127", "hoenn-shoal-cave"]
+        [
+          "hoenn-dewford-town",
+          "hoenn-route-106"
+        ],
+        [
+          "hoenn-desert-underpass",
+          "hoenn-mauville-city"
+        ],
+        [
+          "hoenn-mauville-city",
+          "hoenn-new-mauville"
+        ],
+        [
+          "hoenn-route-127",
+          "hoenn-shoal-cave"
+        ]
       ],
       "add": []
     }
@@ -243,8 +283,8 @@
         "y": 49.5
       },
       "johto-route-30": {
-        "x": 61.46,
-        "y": 46.31
+        "x": 61.5,
+        "y": 46.5
       },
       "johto-route-46": {
         "x": 70.5,
@@ -259,24 +299,24 @@
         "y": 44
       },
       "johto-league": {
-        "x": 96.51,
+        "x": 96.5,
         "y": 44
       },
       "johto-dragons-den": {
-        "x": 93.46,
+        "x": 93.5,
         "y": 17
       },
       "johto-safari-zone": {
-        "x": 3.77,
-        "y": 53.6
+        "x": 4,
+        "y": 53.5
       },
       "johto-cliff-cave": {
-        "x": 12.81,
-        "y": 75.93
+        "x": 13,
+        "y": 76
       },
       "johto-route-48": {
-        "x": 3.77,
-        "y": 70.6
+        "x": 4,
+        "y": 70.5
       },
       "johto-ruins-of-alph": {
         "x": 49,
@@ -284,15 +324,15 @@
       },
       "johto-route-32": {
         "x": 54,
-        "y": 54.25
+        "y": 54.5
       },
       "johto-union-cave": {
         "x": 54,
         "y": 63
       },
       "johto-azalea-town": {
-        "x": 39.52,
-        "y": 72.21
+        "x": 39.5,
+        "y": 72
       },
       "johto-route-33": {
         "x": 54,
@@ -303,20 +343,20 @@
         "y": 66
       },
       "johto-route-34": {
-        "x": 31.63,
-        "y": 59.21
+        "x": 31.5,
+        "y": 59
       },
       "johto-ice-path": {
         "x": 83,
-        "y": 16.54
+        "y": 16.5
       },
       "johto-route-44": {
-        "x": 74.25,
-        "y": 21.18
+        "x": 74.5,
+        "y": 21
       },
       "johto-blackthorn-city": {
-        "x": 86.96,
-        "y": 21.19
+        "x": 87,
+        "y": 21
       },
       "johto-route-39": {
         "x": 20.5,
@@ -327,8 +367,8 @@
         "y": 21
       },
       "johto-ecruteak-city": {
-        "x": 44.71,
-        "y": 21.1
+        "x": 44.5,
+        "y": 21
       },
       "johto-bell-tower": {
         "x": 45.5,
@@ -339,92 +379,96 @@
         "y": 15
       },
       "johto-route-42": {
-        "x": 54.68,
-        "y": 21.05
+        "x": 54.5,
+        "y": 21
       },
       "johto-route-43": {
-        "x": 66.62,
-        "y": 12.81
+        "x": 66.5,
+        "y": 13
       },
       "johto-mahogany-town": {
-        "x": 66.24,
-        "y": 21.23
+        "x": 66.5,
+        "y": 21
       },
       "johto-mt-mortar": {
         "x": 54.5,
         "y": 9
       },
       "johto-route-37": {
-        "x": 44.67,
-        "y": 31.84
+        "x": 44.5,
+        "y": 32
       },
       "johto-route-36": {
-        "x": 44.79,
-        "y": 36.88
+        "x": 44.5,
+        "y": 37
       },
       "johto-national-park": {
-        "x": 31.62,
-        "y": 37.03
+        "x": 31.5,
+        "y": 37
       },
       "johto-violet-city": {
-        "x": 53.77,
-        "y": 37.13
+        "x": 54,
+        "y": 37
       },
       "johto-route-31": {
-        "x": 61.66,
-        "y": 36.91
+        "x": 61.5,
+        "y": 37
       },
       "johto-dark-cave": {
-        "x": 66.47,
-        "y": 30.91
+        "x": 66.5,
+        "y": 31
       },
       "johto-route-45": {
-        "x": 78.26,
-        "y": 31.17
+        "x": 78.5,
+        "y": 31
       },
       "johto-cherrygrove-city": {
-        "x": 61.96,
-        "y": 57.22
+        "x": 61.5,
+        "y": 57
       },
       "johto-route-29": {
-        "x": 70.36,
-        "y": 57.26
+        "x": 70.5,
+        "y": 57
       },
       "johto-new-bark-town": {
-        "x": 80.48,
-        "y": 56.9
+        "x": 80.5,
+        "y": 57
       },
       "johto-goldenrod-city": {
         "x": 31.5,
-        "y": 50.11
+        "y": 50
       },
       "johto-ilex-forest": {
-        "x": 31.75,
+        "x": 31.5,
         "y": 67
       },
       "johto-route-47": {
-        "x": 12.75,
+        "x": 13,
         "y": 69
       },
       "johto-sea-route-41": {
-        "x": 12.74,
-        "y": 49.44
+        "x": 13,
+        "y": 49.5
       },
       "johto-sea-route-40": {
-        "x": 12.75,
-        "y": 36.5
+        "x": 13,
+        "y": 37
       },
       "johto-cianwood-city": {
-        "x": 12.7,
-        "y": 60.73
+        "x": 13,
+        "y": 60.5
       },
       "johto-route-35": {
-        "x": 31.65,
-        "y": 44.34
+        "x": 31.5,
+        "y": 44
       },
       "johto-olivine-city": {
         "x": 20.5,
-        "y": 36.5
+        "y": 37
+      },
+      "johto-raid": {
+        "x": 75.5,
+        "y": 76
       }
     },
     "roads": {

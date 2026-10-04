@@ -13,8 +13,8 @@
   },
   "unlockOrder": 299999,
   "position": {
-   "x": 21.33,
-   "y": 72.04
+   "x": 21.5,
+   "y": 72
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -46,8 +46,8 @@
   },
   "unlockOrder": 300101,
   "position": {
-   "x": 21.34,
-   "y": 66.39
+   "x": 21.5,
+   "y": 66.5
   },
   "biome": "forest"
  },
@@ -72,8 +72,8 @@
   },
   "unlockOrder": 300101.5,
   "position": {
-   "x": 21.46,
-   "y": 61.54
+   "x": 21.5,
+   "y": 61.5
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -108,8 +108,8 @@
   },
   "unlockOrder": 300102,
   "position": {
-   "x": 15.53,
-   "y": 61.55
+   "x": 15.5,
+   "y": 61.5
   },
   "biome": "coast"
  },
@@ -133,8 +133,8 @@
   },
   "unlockOrder": 300102.5,
   "position": {
-   "x": 9.9,
-   "y": 61.53
+   "x": 10,
+   "y": 61.5
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -169,8 +169,8 @@
   },
   "unlockOrder": 300103,
   "position": {
-   "x": 21.92,
-   "y": 52.87
+   "x": 22,
+   "y": 53
   },
   "biome": "coast"
  },
@@ -197,8 +197,8 @@
   },
   "unlockOrder": 300104,
   "position": {
-   "x": 3.43,
-   "y": 55.91
+   "x": 3.5,
+   "y": 55.5
   },
   "biome": "forest"
  },
@@ -224,8 +224,8 @@
   },
   "unlockOrder": 300104.5,
   "position": {
-   "x": 3.44,
-   "y": 44.98
+   "x": 3.5,
+   "y": 45
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -262,8 +262,8 @@
   },
   "unlockOrder": 300105,
   "position": {
-   "x": 2.89,
-   "y": 73.44
+   "x": 3.5,
+   "y": 73.5
   },
   "biome": "coast"
  },
@@ -290,8 +290,8 @@
   },
   "unlockOrder": 300106,
   "position": {
-   "x": 5.73,
-   "y": 81.16
+   "x": 5.5,
+   "y": 81
   },
   "biome": "coast"
  },
@@ -315,8 +315,8 @@
   },
   "unlockOrder": 300106.5,
   "position": {
-   "x": 11.34,
-   "y": 88.36
+   "x": 11.5,
+   "y": 88.5
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -358,8 +358,8 @@
   },
   "unlockOrder": 300107,
   "position": {
-   "x": 20.9,
-   "y": 88.35
+   "x": 21,
+   "y": 88.5
   },
   "biome": "coast"
  },
@@ -386,8 +386,8 @@
   },
   "unlockOrder": 300108,
   "position": {
-   "x": 30.4,
-   "y": 82.53
+   "x": 30.5,
+   "y": 82.5
   },
   "biome": "coast"
  },
@@ -414,8 +414,8 @@
   },
   "unlockOrder": 300109,
   "position": {
-   "x": 30.521030620316626,
-   "y": 73.19750558683819
+   "x": 30.5,
+   "y": 73.5
   },
   "biome": "coast"
  },
@@ -440,8 +440,8 @@
   },
   "unlockOrder": 300109.5,
   "position": {
-   "x": 30.72,
-   "y": 62.23
+   "x": 30.5,
+   "y": 62.5
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -485,8 +485,8 @@
   },
   "unlockOrder": 300110,
   "position": {
-   "x": 30.39,
-   "y": 52.87
+   "x": 30.5,
+   "y": 53
   },
   "biome": "coast"
  },
@@ -512,8 +512,8 @@
   },
   "unlockOrder": 300110.5,
   "position": {
-   "x": 30.36,
-   "y": 45.18
+   "x": 30.5,
+   "y": 45
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -557,8 +557,8 @@
   },
   "unlockOrder": 300111,
   "position": {
-   "x": 30.6,
-   "y": 30.23
+   "x": 30.5,
+   "y": 30
   },
   "weather": "sandstorm",
   "biome": "desert"
@@ -593,8 +593,8 @@
   },
   "unlockOrder": 300112,
   "position": {
-   "x": 25.04,
-   "y": 29.99
+   "x": 25,
+   "y": 30
   },
   "biome": "volcanic"
  },
@@ -618,8 +618,8 @@
   },
   "unlockOrder": 300112.5,
   "position": {
-   "x": 16.36,
-   "y": 30.05
+   "x": 16.5,
+   "y": 30
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -668,8 +668,8 @@
   },
   "unlockOrder": 300113,
   "position": {
-   "x": 25.03,
-   "y": 14.13
+   "x": 25,
+   "y": 14
   },
   "biome": "grassland"
  },
@@ -698,8 +698,8 @@
   },
   "unlockOrder": 300113.5,
   "position": {
-   "x": 15.16,
-   "y": 13.97
+   "x": 15.5,
+   "y": 14
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -744,7 +744,7 @@
   },
   "unlockOrder": 300114,
   "position": {
-   "x": 8.98,
+   "x": 9,
    "y": 14
   },
   "biome": "coast"
@@ -775,8 +775,8 @@
   },
   "unlockOrder": 300115,
   "position": {
-   "x": 3.27,
-   "y": 27.65
+   "x": 3.5,
+   "y": 27.5
   },
   "biome": "coast"
  },
@@ -806,8 +806,8 @@
   },
   "unlockOrder": 300116,
   "position": {
-   "x": 10.09,
-   "y": 44.89
+   "x": 10,
+   "y": 45
   },
   "biome": "forest"
  },
@@ -838,7 +838,7 @@
   },
   "unlockOrder": 300116.5,
   "position": {
-   "x": 18.33,
+   "x": 18.5,
    "y": 45
   },
   "mart": {
@@ -887,8 +887,8 @@
   },
   "unlockOrder": 300117,
   "position": {
-   "x": 24.71,
-   "y": 44.91
+   "x": 25,
+   "y": 45
   },
   "biome": "forest"
  },
@@ -919,8 +919,8 @@
   },
   "unlockOrder": 300118,
   "position": {
-   "x": 37.43,
-   "y": 45.05
+   "x": 37.5,
+   "y": 45
   },
   "biome": "coast"
  },
@@ -946,8 +946,8 @@
   },
   "unlockOrder": 300119,
   "position": {
-   "x": 37.59,
-   "y": 23.12
+   "x": 37.5,
+   "y": 23
   },
   "weather": "rain",
   "biome": "forest"
@@ -973,8 +973,8 @@
   },
   "unlockOrder": 300119.5,
   "position": {
-   "x": 46.27,
-   "y": 14.72
+   "x": 46.5,
+   "y": 14.5
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -1021,8 +1021,8 @@
   },
   "unlockOrder": 300120,
   "position": {
-   "x": 55.43,
-   "y": 22.69
+   "x": 55.5,
+   "y": 22.5
   },
   "biome": "coast"
  },
@@ -1051,8 +1051,8 @@
   },
   "unlockOrder": 300121,
   "position": {
-   "x": 55.73,
-   "y": 34.59
+   "x": 55.5,
+   "y": 34.5
   },
   "biome": "coast"
  },
@@ -1076,8 +1076,8 @@
   },
   "unlockOrder": 300121.5,
   "position": {
-   "x": 69.95,
-   "y": 34.6
+   "x": 70,
+   "y": 34.5
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -1122,8 +1122,8 @@
   },
   "unlockOrder": 300122,
   "position": {
-   "x": 55.57,
-   "y": 45.25
+   "x": 55.5,
+   "y": 45
   },
   "biome": "coast"
  },
@@ -1152,8 +1152,8 @@
   },
   "unlockOrder": 300123,
   "position": {
-   "x": 46.95,
-   "y": 45.2
+   "x": 47,
+   "y": 45
   },
   "biome": "coast"
  },
@@ -1181,8 +1181,8 @@
   },
   "unlockOrder": 300124,
   "position": {
-   "x": 78.09,
-   "y": 34.16
+   "x": 78,
+   "y": 34
   },
   "biome": "coast"
  },
@@ -1207,8 +1207,8 @@
   },
   "unlockOrder": 300124.5,
   "position": {
-   "x": 89.93,
-   "y": 34.2
+   "x": 90,
+   "y": 34
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -1258,8 +1258,8 @@
   },
   "unlockOrder": 300125,
   "position": {
-   "x": 86.12,
-   "y": 27.7
+   "x": 86,
+   "y": 27.5
   },
   "biome": "coast"
  },
@@ -1289,8 +1289,8 @@
   },
   "unlockOrder": 300126,
   "position": {
-   "x": 78.36,
-   "y": 48.34
+   "x": 78,
+   "y": 48
   },
   "biome": "coast"
  },
@@ -1315,8 +1315,8 @@
   },
   "unlockOrder": 300126.5,
   "position": {
-   "x": 66.6,
-   "y": 48.27
+   "x": 66.5,
+   "y": 48
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -1366,8 +1366,8 @@
   },
   "unlockOrder": 300127,
   "position": {
-   "x": 90.08,
-   "y": 41.92
+   "x": 90,
+   "y": 42
   },
   "biome": "coast"
  },
@@ -1398,8 +1398,8 @@
   },
   "unlockOrder": 300128,
   "position": {
-   "x": 89.88,
-   "y": 55.54
+   "x": 90,
+   "y": 55.5
   },
   "biome": "coast"
  },
@@ -1422,8 +1422,8 @@
   },
   "unlockOrder": 300128.5,
   "position": {
-   "x": 97.03,
-   "y": 55.52
+   "x": 97,
+   "y": 55.5
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -1470,8 +1470,8 @@
   },
   "unlockOrder": 300129,
   "position": {
-   "x": 89.44,
-   "y": 62.73
+   "x": 90,
+   "y": 62.5
   },
   "biome": "coast"
  },
@@ -1497,7 +1497,7 @@
   },
   "unlockOrder": 300130,
   "position": {
-   "x": 81.56,
+   "x": 81.5,
    "y": 62.5
   },
   "biome": "coast"
@@ -1532,7 +1532,7 @@
   },
   "unlockOrder": 300131,
   "position": {
-   "x": 71.56,
+   "x": 71.5,
    "y": 62.5
   },
   "biome": "coast"
@@ -1557,8 +1557,8 @@
   },
   "unlockOrder": 300131.5,
   "position": {
-   "x": 64.81,
-   "y": 62.63
+   "x": 65,
+   "y": 62.5
   },
   "mart": {
    "name": "Hoenn Mart",
@@ -1605,7 +1605,7 @@
   },
   "unlockOrder": 300132,
   "position": {
-   "x": 58.13,
+   "x": 58,
    "y": 62.5
   },
   "biome": "coast"
@@ -1633,7 +1633,7 @@
   "unlockOrder": 300133,
   "position": {
    "x": 47.5,
-   "y": 62.31
+   "y": 62.5
   },
   "biome": "coast"
  },
@@ -1664,8 +1664,8 @@
   },
   "unlockOrder": 300134,
   "position": {
-   "x": 37.19,
-   "y": 62.31
+   "x": 37.5,
+   "y": 62.5
   },
   "biome": "coast"
  },
@@ -1690,8 +1690,8 @@
   },
   "unlockOrder": 300135,
   "position": {
-   "x": 78.71,
-   "y": 54.35
+   "x": 78.5,
+   "y": 54.5
   },
   "biome": "coast"
  },
@@ -1724,8 +1724,8 @@
   },
   "unlockOrder": 300136,
   "position": {
-   "x": 97.12,
-   "y": 44.6
+   "x": 97,
+   "y": 45
   },
   "biome": "grassland"
  },
@@ -1750,8 +1750,8 @@
   },
   "unlockOrder": 300106.25,
   "position": {
-   "x": 7.08,
-   "y": 88.61
+   "x": 7,
+   "y": 88.5
   },
   "biome": "cave",
   "background": "/backgrounds/cave.png"
@@ -1777,8 +1777,8 @@
   },
   "unlockOrder": 300113.75,
   "position": {
-   "x": 4.6,
-   "y": 7.4
+   "x": 4.5,
+   "y": 7.5
   },
   "biome": "coast",
   "background": "/backgrounds/beach.png"
@@ -1803,8 +1803,8 @@
   },
   "unlockOrder": 300125.25,
   "position": {
-   "x": 86.54,
-   "y": 21.56
+   "x": 86.5,
+   "y": 21.5
   },
   "biome": "cave",
   "background": "/backgrounds/cave.png"
@@ -1829,8 +1829,8 @@
   },
   "unlockOrder": 300128.25,
   "position": {
-   "x": 89.77,
-   "y": 48.05
+   "x": 90,
+   "y": 48
   },
   "biome": "cave",
   "background": "/backgrounds/cave.png"
@@ -1855,8 +1855,8 @@
   },
   "unlockOrder": 300131.25,
   "position": {
-   "x": 71.71,
-   "y": 56.85
+   "x": 71.5,
+   "y": 57
   },
   "biome": "ruins",
   "background": "/backgrounds/grassland.png"
@@ -1881,8 +1881,8 @@
   },
   "unlockOrder": 300110.25,
   "position": {
-   "x": 37.33,
-   "y": 51.11
+   "x": 37.5,
+   "y": 51
   },
   "biome": "grassland",
   "background": "/backgrounds/grassland.png"
@@ -1908,8 +1908,8 @@
   },
   "unlockOrder": 300112.25,
   "position": {
-   "x": 22.4,
-   "y": 22.65
+   "x": 22.5,
+   "y": 22.5
   },
   "biome": "volcanic",
   "background": "/backgrounds/grassland.png"
@@ -1934,8 +1934,8 @@
   },
   "unlockOrder": 300110.75,
   "position": {
-   "x": 30.49,
-   "y": 20.63
+   "x": 30.5,
+   "y": 20.5
   },
   "biome": "desert",
   "background": "/backgrounds/grassland.png"
@@ -1960,7 +1960,7 @@
   },
   "unlockOrder": 300108.25,
   "position": {
-   "x": 21.41,
+   "x": 21.5,
    "y": 82
   },
   "biome": "coast",
@@ -1986,8 +1986,8 @@
   },
   "unlockOrder": 300126.75,
   "position": {
-   "x": 66.35,
-   "y": 44.03
+   "x": 66.5,
+   "y": 44
   },
   "biome": "cave",
   "background": "/backgrounds/cave.png"
@@ -2012,8 +2012,8 @@
   },
   "unlockOrder": 300121.25,
   "position": {
-   "x": 62.43,
-   "y": 28.44
+   "x": 62.5,
+   "y": 28.5
   },
   "biome": "grassland",
   "background": "/backgrounds/grassland.png"

@@ -855,10 +855,13 @@ One-off scripts used to build the data JSON (not run during dev/build):
 - `map-editor.html` — a hand-written dev page (not in the build) for eyeballing
   and nudging the Town Map layouts: it lists every region, draws the fully
   unlocked map with the same elbow roads as the game, and lets you drag nodes
-  (click + arrow keys to nudge, Shift for whole units). Changes persist in
-  `localStorage` and can be copied as a `{ region: { id: { x, y } } }` block to
-  paste back, so a layout tweak can be requested in words or as coordinates.
-  Open it from the dev server at `/tools/map-editor.html` (it fetches
+  (click + arrow keys to nudge, Shift for whole units). Tick "Edit roads" (or
+  add `?roads=1` to the URL) to click a road and remove it, or click two nodes
+  to add one; removed roads show red/dashed and added ones cyan. Changes persist
+  in `localStorage` and copy out as
+  `{ region: { positions: { id: { x, y } }, roads: { remove: [[a,b]], add: [[a,b]] } } }`
+  to paste back, so a layout tweak can be requested in words or as data. Open it
+  from the dev server at `/tools/map-editor.html` (it fetches
   `/data/map-data/<region>.json`). Not part of the build; no generator needed.
 - `lib/zone-layout.cjs` — shared `spreadSubAreaPositions` ring layout for a
   zone hub's hidden sub-areas; used by `generate-regions.cjs` and

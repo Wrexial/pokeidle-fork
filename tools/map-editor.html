@@ -91,6 +91,22 @@
   #map { background: #3a6cb0; touch-action: none; user-select: none; }
   #map .road { stroke: #7a5a30; stroke-width: .9; stroke-linecap: round; fill: none; }
   #map .road-fill { stroke: #a08040; stroke-width: .42; stroke-linecap: round; fill: none; }
+  #map .edge .road-hit { cursor: pointer; pointer-events: stroke; }
+  #map .edge:hover .road, #map .edge:hover .road-fill { stroke: #ffffff; }
+  #map .edge.removed .road { stroke: #d04040; stroke-dasharray: 1.3 .8; }
+  #map .edge.removed .road-fill { stroke: #d04040; stroke-dasharray: 1.3 .8; opacity: .85; }
+  #map .edge.added .road { stroke: #40d0d0; }
+  #map .edge.added .road-fill { stroke: #9ff5f5; }
+  #map .node.pending .ring { stroke: #40d0d0; stroke-dasharray: none; }
+  #map .node.pending .dot { stroke: #40d0d0; }
+  #road-banner {
+    position: absolute; left: 50%; top: 10px; transform: translateX(-50%);
+    background: #000000cc; border: 1px solid var(--accent); border-radius: 6px;
+    padding: 5px 10px; font-size: 12px; display: none; pointer-events: none; z-index: 5;
+  }
+  #stage.road-mode #road-banner { display: block; }
+  .road-item { display: flex; justify-content: space-between; gap: 6px; padding: 3px 6px; border-radius: 4px; font-size: 12px; }
+  .road-item .tag { color: var(--muted); }
   #map .grid-line { stroke: #ffffff22; stroke-width: .08; }
   #map .grid-text { fill: #ffffff55; font-size: 1.5px; }
   #map .node { cursor: grab; }
@@ -148,6 +164,7 @@
     <label class="hint"><input type="checkbox" id="show-labels" checked /> All labels</label>
     <label class="hint"><input type="checkbox" id="snap" /> Snap 0.5</label>
     <label class="hint"><input type="checkbox" id="show-grid" /> Grid</label>
+    <label class="hint"><input type="checkbox" id="road-mode" /> <b>Edit roads</b></label>
   </div>
 
   <div id="legend"></div>
@@ -157,8 +174,11 @@
 
   <h2>Changes <span id="change-count" class="hint"></span></h2>
   <div id="changes"><div class="hint">No changes yet.</div></div>
+  <h2>Road edits <span id="road-count" class="hint"></span></h2>
+  <div id="road-changes"><div class="hint">No road edits. Tick &ldquo;Edit roads&rdquo;.</div></div>
   <div class="row tight">
     <button id="revert-region">Revert region</button>
+    <button id="revert-roads">Revert roads</button>
     <button id="revert-all" class="danger">Revert all</button>
   </div>
 
@@ -173,6 +193,7 @@
 
 <div id="stage">
   <svg id="map" xmlns="http://www.w3.org/2000/svg"></svg>
+  <div id="road-banner">Road edit mode &mdash; click a road to remove it, or click two nodes to add one</div>
 </div>
 
 <div id="tooltip"></div>
@@ -190,6 +211,7 @@
 
 const SVG_NS = 'http://www.w3.org/2000/svg'
 const STORAGE_KEY = 'pi-map-editor-v1'
+const ROAD_STORAGE_KEY = 'pi-map-road-editor-v1'
 const DOT_R = { town: 1.3, route: 1.0, zone: 1.6, raid: 1.3, facility: 1.1 }
 const LEGEND = [
   ['town', 'Town / league', '#d03020', 'square'],
@@ -211,14 +233,19 @@ const els = {
   showLabels: document.getElementById('show-labels'),
   snap: document.getElementById('snap'),
   showGrid: document.getElementById('show-grid'),
+  roadMode: document.getElementById('road-mode'),
+  stage: document.getElementById('stage'),
   legend: document.getElementById('legend'),
   selected: document.getElementById('selected'),
   changes: document.getElementById('changes'),
   changeCount: document.getElementById('change-count'),
+  roadChanges: document.getElementById('road-changes'),
+  roadCount: document.getElementById('road-count'),
   output: document.getElementById('output'),
   copy: document.getElementById('copy'),
   download: document.getElementById('download'),
   revertRegion: document.getElementById('revert-region'),
+  revertRoads: document.getElementById('revert-roads'),
   revertAll: document.getElementById('revert-all'),
   map: document.getElementById('map'),
   tooltip: document.getElementById('tooltip'),
@@ -233,6 +260,10 @@ let regionId = null
 let selectedId = null
 /** overrides: regionId -> nodeId -> {x, y} */
 let overrides = loadOverrides()
+/** roadEdits: regionId -> "a|b" -> 'removed' | 'added' */
+let roadEdits = loadRoadEdits()
+/** first node picked while adding a road */
+let pendingNode = null
 /** view: centre + size (viewBox is size x size) */
 const view = { cx: 50, cy: 50, size: 100 }
 let drag = null
@@ -247,6 +278,16 @@ function loadOverrides() {
 }
 function saveOverrides() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(overrides))
+}
+function loadRoadEdits() {
+  try {
+    return JSON.parse(localStorage.getItem(ROAD_STORAGE_KEY) || '{}')
+  } catch {
+    return {}
+  }
+}
+function saveRoadEdits() {
+  localStorage.setItem(ROAD_STORAGE_KEY, JSON.stringify(roadEdits))
 }
 
 function pos(id) {
@@ -272,6 +313,39 @@ function round2(n) {
 }
 function clamp(n) {
   return Math.max(-5, Math.min(105, n))
+}
+
+function edgeKey(a, b) {
+  return [a, b].sort().join('|')
+}
+
+/** Every edge the data has, as sorted keys. */
+function originalEdgeSet() {
+  const set = new Set()
+  for (const id of Object.keys(map))
+    for (const other of map[id].connections || [])
+      if (map[other]) set.add(edgeKey(id, other))
+  return set
+}
+
+/** Split the current region's edits into removed / added key arrays. */
+function regionRoadEdits() {
+  const edits = roadEdits[regionId] || {}
+  const removed = []
+  const added = []
+  for (const key of Object.keys(edits)) (edits[key] === 'removed' ? removed : added).push(key)
+  return { removed, added }
+}
+
+function toggleEdge(a, b) {
+  const key = edgeKey(a, b)
+  const original = originalEdgeSet().has(key)
+  const current = roadEdits[regionId]?.[key]
+  roadEdits[regionId] = roadEdits[regionId] || {}
+  if (!current) roadEdits[regionId][key] = original ? 'removed' : 'added'
+  else delete roadEdits[regionId][key]
+  if (!Object.keys(roadEdits[regionId]).length) delete roadEdits[regionId]
+  saveRoadEdits()
 }
 
 function visibleIds() {
@@ -300,6 +374,7 @@ function elbowD(a, b) {
 
 function render() {
   if (!regionId) return
+  els.stage.classList.toggle('road-mode', els.roadMode.checked)
   const ids = visibleIds()
   const active = new Set(ids)
   const svg = els.map
@@ -319,23 +394,46 @@ function render() {
     }
   }
 
-  // roads (dedupe)
-  const seen = new Set()
-  const roadGroup = svgEl('g', {})
-  const fillGroup = svgEl('g', {})
-  for (const id of ids) {
-    for (const other of map[id].connections || []) {
-      if (!map[other] || !active.has(other)) continue
-      const key = [id, other].sort().join('|')
-      if (seen.has(key)) continue
-      seen.add(key)
-      const d = elbowD(pos(id), pos(other))
+  // roads
+  const original = originalEdgeSet()
+  const { removed, added } = regionRoadEdits()
+  const removedSet = new Set(removed)
+  /** @type {{ key: string, state: string }[]} */
+  const edges = []
+  for (const key of original) edges.push({ key, state: removedSet.has(key) ? 'removed' : 'normal' })
+  for (const key of added) edges.push({ key, state: 'added' })
+
+  if (!els.roadMode.checked) {
+    const roadGroup = svgEl('g', {})
+    const fillGroup = svgEl('g', {})
+    for (const { key } of edges) {
+      const [a, b] = key.split('|')
+      if (!map[a] || !map[b] || !active.has(a) || !active.has(b)) continue
+      const d = elbowD(pos(a), pos(b))
       roadGroup.appendChild(svgEl('path', { class: 'road', d }))
       fillGroup.appendChild(svgEl('path', { class: 'road-fill', d }))
     }
+    svg.appendChild(roadGroup)
+    svg.appendChild(fillGroup)
+  } else {
+    for (const { key, state } of edges) {
+      const [a, b] = key.split('|')
+      if (!map[a] || !map[b] || !active.has(a) || !active.has(b)) continue
+      const d = elbowD(pos(a), pos(b))
+      const g = svgEl('g', { class: `edge ${state}`, 'data-key': key })
+      g.appendChild(svgEl('path', { class: 'road', d }))
+      g.appendChild(svgEl('path', { class: 'road-fill', d }))
+      const hit = svgEl('path', { class: 'road-hit', d, stroke: 'transparent', 'stroke-width': 3, fill: 'none' })
+      hit.addEventListener('pointerdown', (event) => event.stopPropagation())
+      hit.addEventListener('click', (event) => {
+        event.stopPropagation()
+        toggleEdge(a, b)
+        render()
+      })
+      g.appendChild(hit)
+      svg.appendChild(g)
+    }
   }
-  svg.appendChild(roadGroup)
-  svg.appendChild(fillGroup)
 
   // nodes
   for (const id of ids) {
@@ -343,9 +441,10 @@ function render() {
     const p = pos(id)
     const r = DOT_R[loc.type] || 1.1
     const g = svgEl('g', { class: `node ${loc.type}${loc.hidden ? ' hidden-sub' : ''}`, 'data-id': id })
-    if (id === selectedId) g.classList.add('selected')
+    if (id === selectedId || id === pendingNode) g.classList.add('selected')
+    if (id === pendingNode) g.classList.add('pending')
     if (searchTerm && matches(loc, id)) g.classList.add('match')
-    if (id === selectedId) g.appendChild(svgEl('circle', { class: 'ring', cx: p.x, cy: p.y, r: r + 1.2 }))
+    if (id === selectedId || id === pendingNode) g.appendChild(svgEl('circle', { class: 'ring', cx: p.x, cy: p.y, r: r + 1.2 }))
     if (loc.type === 'town' || loc.type === 'zone') {
       g.appendChild(svgEl('rect', { class: 'dot', x: p.x - r, y: p.y - r, width: r * 2, height: r * 2, rx: 0.4, transform: loc.type === 'zone' ? `rotate(45 ${p.x} ${p.y})` : '' }))
     } else {
@@ -400,17 +499,51 @@ function renderSidebar() {
   } else {
     els.selected.textContent = 'Nothing selected. Click a node.'
   }
+  // road edits list
+  const { removed, added } = regionRoadEdits()
+  const roadCount = removed.length + added.length
+  els.roadCount.textContent = roadCount ? `(${roadCount})` : ''
+  els.roadChanges.innerHTML = ''
+  if (!roadCount) {
+    els.roadChanges.innerHTML = '<div class="hint">No road edits. Tick &ldquo;Edit roads&rdquo;.</div>'
+  } else {
+    for (const [state, keys] of [['removed', removed], ['added', added]])
+      for (const key of keys) {
+        const [a, b] = key.split('|')
+        const row = document.createElement('div')
+        row.className = 'road-item'
+        row.innerHTML = `${state === 'removed' ? '\u2212' : '+'} ${map[a]?.name || a} \u2014 ${map[b]?.name || b}<span class="tag">${state}</span>`
+        row.addEventListener('click', () => { selectedId = a; centreOn(a); render() })
+        els.roadChanges.appendChild(row)
+      }
+  }
   // output
-  els.output.value = Object.keys(overrides).length ? buildJSON() : ''
+  els.output.value = Object.keys(overrides).length || Object.keys(roadEdits).length ? buildJSON() : ''
 }
 
 function buildJSON() {
   const out = {}
-  for (const rid of Object.keys(overrides).sort()) {
-    if (!Object.keys(overrides[rid]).length) continue
-    out[rid] = overrides[rid]
+  const regionIds = new Set([...Object.keys(overrides), ...Object.keys(roadEdits)])
+  for (const rid of [...regionIds].sort()) {
+    const entry = {}
+    const positions = overrides[rid]
+    if (positions && Object.keys(positions).length) entry.positions = positions
+    const edits = roadEdits[rid]
+    if (edits && Object.keys(edits).length) {
+      const roads = { remove: [], add: [] }
+      for (const [key, state] of Object.entries(edits)) {
+        const [a, b] = key.split('|')
+        ;(state === 'removed' ? roads.remove : roads.add).push([a, b])
+      }
+      entry.roads = roads
+    }
+    if (Object.keys(entry).length) out[rid] = entry
   }
-  return JSON.stringify(out, null, 2)
+  // Keep the edge pairs on one line so the block stays compact to paste.
+  return JSON.stringify(out, null, 2).replace(
+    /\[\s*\n\s*("[^"]*"),\s*\n\s*("[^"]*")\s*\n\s*\]/g,
+    '[$1, $2]'
+  )
 }
 
 function fmt(n) {
@@ -448,6 +581,16 @@ function svgPoint(event) {
 
 function startNodeDrag(event, id) {
   event.stopPropagation()
+  if (els.roadMode.checked) {
+    if (pendingNode === id) pendingNode = null
+    else if (!pendingNode) pendingNode = id
+    else {
+      toggleEdge(pendingNode, id)
+      pendingNode = null
+    }
+    render()
+    return
+  }
   selectedId = id
   const p = pos(id)
   const start = svgPoint(event)
@@ -516,6 +659,7 @@ function zoom(factor) {
 async function loadRegion(id) {
   regionId = id
   selectedId = null
+  pendingNode = null
   const res = await fetch(`/data/map-data/${id}.json`)
   map = await res.json()
   els.region.value = id
@@ -560,6 +704,7 @@ function bind() {
     render()
   })
   for (const key of ['showHidden', 'showLabels', 'showGrid']) els[key].addEventListener('change', render)
+  els.roadMode.addEventListener('change', () => { pendingNode = null; render() })
   els.copy.addEventListener('click', async () => {
     const text = buildJSON()
     if (!text || text === '{}') return
@@ -581,10 +726,18 @@ function bind() {
     saveOverrides()
     render()
   })
+  els.revertRoads.addEventListener('click', () => {
+    if (regionId) delete roadEdits[regionId]
+    saveRoadEdits()
+    pendingNode = null
+    render()
+  })
   els.revertAll.addEventListener('click', () => {
     if (confirm('Discard every change in every region?')) {
       overrides = {}
+      roadEdits = {}
       saveOverrides()
+      saveRoadEdits()
       render()
     }
   })
@@ -606,6 +759,7 @@ async function init() {
   }
   populateRegions()
   bind()
+  if (new URLSearchParams(window.location.search).has('roads')) els.roadMode.checked = true
   const hash = window.location.hash.replace('#', '')
   const first = regions.find((r) => r.id === hash) || regions[0]
   await loadRegion(first.id)

@@ -369,11 +369,13 @@ Data conventions:
   bounding box and shows a “← Region map” bar (clicking the hub inside that view
   travels to the hub panel). Region tabs are hidden while focused; hidden
   sub-areas are travelable from the focused canvas. Roads stay
-  on the right-angle grid: `createRoadPaths` (`src/game/progression/roads.js`)
-  greedily gives each edge the elbow that overlaps the fewest already-placed
-  roads, `apply-road-cleanup.cjs` drops the redundant side of every triangle,
-  and `apply-road-reference.cjs` removes non-reference links that don't split a
-  component, so two roads no longer run along the same line.
+  on the right-angle grid, and each edge takes the elbow that follows its
+  dominant axis (`createRoadPaths` in `src/game/progression/roads.js`); overlap
+  is handled by pruning the graph rather than by flipping elbows into a
+  circuit board. `apply-road-cleanup.cjs` drops the redundant side of every
+  triangle, `apply-road-reference.cjs` removes non-reference links (and moves a
+  scraped orphan off a long road), and `apply-zone-road-cleanup.cjs` trims a zone
+  hub's cross-map links, so two roads no longer run along the same line.
 - Some regions' scraped force-directed layout doesn't match the real map, so
   `REGION_MAP_LAYOUTS` in `generate-regions.cjs` overrides it with
   hand-measured coordinates from a labelled reference map. Every region except
@@ -839,9 +841,17 @@ One-off scripts used to build the data JSON (not run during dev/build):
   each road triangle (a through-area becomes the road, a side-area a stub) so
   the Town Map stops drawing overlapping connectors. Idempotent (`--dry`).
 - `apply-road-reference.cjs` — data-only pass that drops a visible town/route
-  edge the scraped `region-maps.json` doesn't list, as long as its two ends stay
-  connected another way (no isolated node, no split component). Clears
-  town-to-town shortcuts the generator added. Idempotent (`--dry`).
+  edge the scraped `region-maps.json` doesn't list, as long as neither end loses
+  its last connection (so an island or a boat-only Battle Zone can stay a
+  separate component). It also re-points a scraped orphan whose only road is a
+  long non-reference link onto its nearest visible neighbour, so it doesn't drag
+  across the map. Clears town-to-town shortcuts the generator added. Idempotent
+  (`--dry`).
+- `apply-zone-road-cleanup.cjs` — data-only pass that trims the long cross-map
+  roads around zone hubs: it removes a zone hub's visible link to another hub,
+  and any visible link longer than 25 units, as long as neither end loses its
+  last connection. Hidden sub-area links are untouched, and a league or Raid
+  Island keeps its one road. Idempotent (`--dry`).
 - `lib/zone-layout.cjs` — shared `spreadSubAreaPositions` ring layout for a
   zone hub's hidden sub-areas; used by `generate-regions.cjs` and
   `apply-zone-layout.cjs`.

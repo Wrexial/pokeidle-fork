@@ -810,6 +810,41 @@ async function main() {
     await cdp.waitFor(`!!document.querySelector('.location-region-goal')`, 8000, 'region goal')
     await cdp.screenshot(path.join(OUT, '29-region-goal.png'))
     console.log('Region goal card ok')
+
+    // Region-map overviews: seed each region fully open and capture its map, so
+    // road/layout problems are easy to eyeball.
+    const regionDefs = JSON.parse(
+      fs.readFileSync(path.join(__dirname, '..', 'public', 'data', 'regions.json'), 'utf8')
+    )
+    for (const region of regionDefs) {
+      const map = JSON.parse(
+        fs.readFileSync(
+          path.join(__dirname, '..', 'public', 'data', 'map-data', `${region.id}.json`),
+          'utf8'
+        )
+      )
+      const ids = Object.keys(map),
+        location = region.entry ?? ids[0],
+        route = map[location]?.routeKey ?? 'route1'
+      await cdp.eval(
+        `localStorage.setItem('pokemon-idle-save-v2', ${JSON.stringify(
+          JSON.stringify(minigameSave(region.id, location, route, ids))
+        )}); 'ok'`
+      )
+      await cdp.send('Page.navigate', { url: APP_URL })
+      await cdp.waitFor('window.gameDataDebug.status().loaded === true', 20000, 'region map data')
+      await cdp.eval(
+        `(() => { const b = document.querySelector('.patch-notes-dismiss-btn'); if (b) b.click(); return true })()`
+      )
+      await sleep(400)
+      // Fit the whole region so the full road network is in frame.
+      await cdp.eval(
+        `(() => { const b = [...document.querySelectorAll('.map-zoom-btn')].find((el) => el.title === 'Fit whole region'); if (b) b.click(); return !!b })()`
+      )
+      await sleep(500)
+      await cdp.screenshot(path.join(OUT, `region-${region.id}.png`))
+      console.log(`region map ok: ${region.id}`)
+    }
     console.log('done')
   } finally {
     chrome.kill()

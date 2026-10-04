@@ -969,7 +969,6 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "alola-iki-town",
-   "alola-akala-island",
    "alola-hauoli-city",
    "alola-route-1",
    "alola-route-1--hauoli-outskirts",
@@ -1037,8 +1036,6 @@
   "routeKey": "alola-route-4",
   "background": "/backgrounds/grassland.png",
   "connections": [
-   "alola-melemele-island",
-   "alola-poni-island",
    "alola-paniola-town",
    "alola-route-4",
    "alola-route-5",
@@ -1123,7 +1120,6 @@
   "background": "/backgrounds/beach.png",
   "connections": [
    "alola-heahea-city",
-   "alola-poni-island",
    "alola-konikoni-city",
    "alola-malie-city",
    "alola-route-9",
@@ -1210,8 +1206,6 @@
   "routeKey": "alola-route-16",
   "background": "/backgrounds/grassland.png",
   "connections": [
-   "alola-akala-island",
-   "alola-ulaula-island",
    "alola-po-town",
    "alola-raid",
    "alola-league",

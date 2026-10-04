@@ -1182,8 +1182,7 @@
   "connections": [
    "sinnoh-sunyshore-city",
    "sinnoh-route-214",
-   "sinnoh-route-213",
-   "sinnoh-route-228"
+   "sinnoh-route-213"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1420,7 +1419,6 @@
   "connections": [
    "sinnoh-route-229",
    "sinnoh-sea-route-226",
-   "sinnoh-route-222",
    "sinnoh-stark-mountain"
   ],
   "unlock": {

@@ -36,30 +36,12 @@ function elbows(a, b) {
 }
 
 /**
- * How much two axis-aligned segments overlap (in map units). Perpendicular
- * segments, or segments on different lines, score 0.
- * @param {{ x: number, y: number }} a1 @param {{ x: number, y: number }} a2
- * @param {{ x: number, y: number }} b1 @param {{ x: number, y: number }} b2
- * @returns {number}
- */
-function overlap(a1, a2, b1, b2) {
-  const aHorizontal = Math.abs(a1.y - a2.y) < 0.01,
-    bHorizontal = Math.abs(b1.y - b2.y) < 0.01
-  if (aHorizontal !== bHorizontal) return 0
-  if (aHorizontal) {
-    if (Math.abs(a1.y - b1.y) > 0.01) return 0
-    return Math.max(0, Math.min(Math.max(a1.x, a2.x), Math.max(b1.x, b2.x)) - Math.max(Math.min(a1.x, a2.x), Math.min(b1.x, b2.x)))
-  }
-  if (Math.abs(a1.x - b1.x) > 0.01) return 0
-  return Math.max(0, Math.min(Math.max(a1.y, a2.y), Math.max(b1.y, b2.y)) - Math.max(Math.min(a1.y, a2.y), Math.min(b1.y, b2.y)))
-}
-
-/**
- * Lay out every road in a view, choosing each elbow to overlap the roads
- * already placed as little as possible. A single fixed rule (dominant axis
- * first) made several roads from one town share their first leg and read as one;
- * this breaks them apart without leaving the grid. Deterministic: edges are
- * processed in id order, so the same map always draws the same way.
+ * Lay out every road in a view. Each edge takes the dominant-axis elbow (the
+ * direction it mostly travels), matching the original map style: this keeps
+ * roads reading as roads rather than a grid of detours. The alternative would be
+ * to dodge overlaps by flipping elbows, but that turns a dense region into a
+ * circuit board, so overlap is handled by pruning the graph instead.
+ * Deterministic: edges are processed in id order.
  * @param {string[]} locationIds the locations currently drawn
  * @returns {{ from: string, to: string, key: string, d: string }[]}
  */
@@ -78,27 +60,11 @@ export function createRoadPaths(locationIds) {
     }
   }
   edges.sort((left, right) => left.key.localeCompare(right.key))
-  /** @type {{ x: number, y: number }[][]} */
-  const placed = []
   return edges.map(({ key, from, to }) => {
     const a = mapData[from].position,
       b = mapData[to].position,
-      candidates = elbows(a, b)
-    let bestIndex = 0,
-      bestScore = Infinity
-    candidates.forEach((points, index) => {
-      let score = 0
-      for (let segment = 0; segment < points.length - 1; segment++)
-        for (const other of placed)
-          for (let otherSegment = 0; otherSegment < other.length - 1; otherSegment++)
-            score += overlap(points[segment], points[segment + 1], other[otherSegment], other[otherSegment + 1])
-      if (score < bestScore) {
-        bestScore = score
-        bestIndex = index
-      }
-    })
-    const points = candidates[bestIndex]
-    placed.push(points)
+      horizontalFirst = Math.abs(b.x - a.x) >= Math.abs(b.y - a.y),
+      points = elbows(a, b)[horizontalFirst ? 0 : 1]
     return {
       from,
       to,

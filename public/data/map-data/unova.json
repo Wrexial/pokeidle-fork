@@ -219,8 +219,7 @@
   "description": "A town in the Unova region, home to Cilan's Grass Gym.",
   "connections": [
    "unova-route-3",
-   "unova-route-2",
-   "unova-route-19"
+   "unova-route-2"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -335,7 +334,8 @@
   "description": "A town in the Unova region, home to Burgh's Bug Gym.",
   "connections": [
    "unova-route-4",
-   "unova-nacrene-city"
+   "unova-nacrene-city",
+   "unova-route-gate"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -487,8 +487,7 @@
   "description": "A town in the Unova region, home to Clay's Ground Gym.",
   "connections": [
    "unova-route-6",
-   "unova-route-5",
-   "unova-anville-town"
+   "unova-route-5"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -530,7 +529,7 @@
   "region": "unova",
   "description": "A town in the Unova region.",
   "connections": [
-   "unova-driftveil-city"
+   "unova-reversal-mountain"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1337,8 +1336,7 @@
   "routeKey": "unova-route-18",
   "background": "/backgrounds/grassland.png",
   "connections": [
-   "unova-route-17",
-   "unova-route-gate"
+   "unova-route-17"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1364,7 +1362,7 @@
   "routeKey": "unova-route-gate",
   "background": "/backgrounds/grassland.png",
   "connections": [
-   "unova-route-18"
+   "unova-castelia-city"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1398,8 +1396,7 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "unova-aspertia-city",
-   "unova-floccesy-town",
-   "unova-striaton-city"
+   "unova-floccesy-town"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1904,7 +1901,8 @@
   "routeKey": "unova-reversal-mountain",
   "connections": [
    "unova-route-7",
-   "unova-icirrus-city"
+   "unova-icirrus-city",
+   "unova-anville-town"
   ],
   "unlock": {
    "battlesAtLocation": [

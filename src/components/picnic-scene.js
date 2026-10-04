@@ -187,7 +187,10 @@ export function PicnicScene() {
   }
 
   function leave() {
-    dispatch({ type: 'END_MINIGAME' })
+    dispatch({
+      type: 'END_MINIGAME',
+      payload: { score, completed: stage === 'reward' },
+    })
   }
 
   const placedFillings = layers.filter((layer) => layer.ingredientId !== PICNIC_BREAD.id).length,

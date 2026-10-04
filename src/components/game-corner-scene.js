@@ -127,7 +127,10 @@ export function GameCornerScene() {
 
   function leave() {
     if (spinning) return
-    dispatch({ type: 'END_MINIGAME' })
+    dispatch({
+      type: 'END_MINIGAME',
+      payload: { score: state.gameCornerProgress },
+    })
   }
 
   const message = spinning

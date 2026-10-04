@@ -4,8 +4,39 @@
 // CLAIM_ACHIEVEMENT_REWARDS in the reducer).
 
 import { baseRegions, completedGenerations, gymLeaderData, pokedexIndexes, pokemonSpecies, regions } from './gameData.js'
+import { isTmItem, TM_MOVE_IDS } from './tms.js'
 
 const nationalDexSize = pokedexIndexes.filter((entry) => entry[1].id > 0 && entry[1].id <= 1025).length
+
+/**
+ * Fixed minigames that report a record. Poke Pelago is a hub scene rather than
+ * a scored game, so it is left out of the "clear them all" goals.
+ */
+export const RECORDABLE_MINIGAMES = [
+  'gameCorner',
+  'bugContest',
+  'mining',
+  'safari',
+  'academyQuiz',
+  'voltorbFlip',
+  'auctionHouse',
+  'contest',
+  'pokeathlon',
+  'pokeRadar',
+  'battleRoyal',
+  'dynamaxAdventures',
+  'lightsOut',
+  'curry',
+  'pokestar',
+  'puzzleLeague',
+  'memory',
+  'whack',
+  'musical',
+  'picnic',
+  'pokeballFactory',
+  'ruinsPuzzle',
+  'iceSlide',
+]
 
 const totalBattles = (/** @type {GameState} */ state) =>
   state.wildBattlesWon + state.trainerBattlesWon
@@ -27,6 +58,28 @@ const allBadgesOfARegion = (/** @type {GameState} */ state) =>
     const gyms = gymLeaderData.filter((gym) => (gym.region ?? 'kanto') === region.id)
     return gyms.length > 0 && gyms.every((gym) => state.defeatedGyms.includes(gym.id))
   })
+
+const ownedPokemon = (/** @type {GameState} */ state) =>
+  state.party.length + state.box.length
+
+const ownedTms = (/** @type {GameState} */ state) =>
+  Object.keys(state.inventory ?? {}).filter(
+    (itemId) => isTmItem(itemId) && (state.inventory[itemId] ?? 0) > 0
+  ).length
+
+const clearedMinigames = (/** @type {GameState} */ state) =>
+  RECORDABLE_MINIGAMES.filter((id) => state.minigameRecords?.[id]?.completed).length
+
+const hasLevel100 = (/** @type {GameState} */ state) =>
+  [...state.party, ...state.box].some((pokemon) => (pokemon.level ?? 0) >= 100)
+
+const hasMaxFriendship = (/** @type {GameState} */ state) =>
+  // 255 is the maximum friendship a Pokemon can reach (see MAX_FRIENDSHIP).
+  [...state.party, ...state.box].some((pokemon) => (pokemon.friendship ?? 0) >= 255)
+
+const allRegionsPrestiged = (/** @type {GameState} */ state) =>
+  baseRegions.length > 0 &&
+  baseRegions.every((region) => (state.regionPrestige[region.id] ?? 0) >= 1)
 
 /**
  * @typedef {{ money?: number, victoryTokens?: number, items?: Record<string, number> }} AchievementReward
@@ -63,4 +116,29 @@ export const ACHIEVEMENTS = [
   { id: 'tower50', name: 'Tower Master', description: 'Clear Battle Tower floor 50', reward: { victoryTokens: 3, items: { masterball: 1 } }, check: (state) => bestTowerFloor(state) >= 50 },
   // Wealth
   { id: 'rich', name: 'Money Bags', description: 'Hold $1,000,000', reward: { items: { masterball: 1 } }, check: (state) => state.money >= 1e6 },
+  { id: 'rich10m', name: 'Tycoon', description: 'Hold $10,000,000', reward: { victoryTokens: 1, items: { masterball: 1 } }, check: (state) => state.money >= 1e7 },
+  // Collection depth
+  { id: 'owned50', name: 'Box Filler', description: 'Own 50 Pokemon at once', reward: { money: 5000 }, check: (state) => ownedPokemon(state) >= 50 },
+  { id: 'owned150', name: "Professor's Aide", description: 'Own 150 Pokemon at once', reward: { victoryTokens: 1, items: { ultraball: 10 } }, check: (state) => ownedPokemon(state) >= 150 },
+  { id: 'level100', name: 'Peak Performance', description: 'Raise a Pokemon to level 100', reward: { victoryTokens: 2, items: { masterball: 1 } }, check: hasLevel100 },
+  { id: 'maxFriendship', name: 'Best Friends', description: 'Raise a Pokemon to maximum friendship', reward: { items: { ultraball: 5 } }, check: hasMaxFriendship },
+  // TMs
+  { id: 'tmFirst', name: 'Technical Machine', description: 'Find your first TM', reward: { money: 1000 }, check: (state) => ownedTms(state) >= 1 },
+  { id: 'tm25', name: 'Move Tutor', description: 'Collect 25 TMs', reward: { victoryTokens: 1 }, check: (state) => ownedTms(state) >= 25 },
+  { id: 'tm100', name: 'TM Collector', description: 'Collect 100 TMs', reward: { victoryTokens: 2, items: { ultraball: 20 } }, check: (state) => ownedTms(state) >= 100 },
+  { id: 'tmAll', name: 'Full Set', description: `Collect all ${TM_MOVE_IDS.length} TMs`, reward: { victoryTokens: 3, items: { masterball: 1 } }, check: (state) => ownedTms(state) >= TM_MOVE_IDS.length },
+  // Minigames
+  { id: 'minigameFirst', name: 'Attraction Goer', description: 'Clear any minigame', reward: { money: 1500 }, check: (state) => clearedMinigames(state) >= 1 },
+  { id: 'minigameFive', name: 'Minigame Regular', description: 'Clear 5 different minigames', reward: { victoryTokens: 1 }, check: (state) => clearedMinigames(state) >= 5 },
+  { id: 'minigameAll', name: 'Arcade Champion', description: `Clear all ${RECORDABLE_MINIGAMES.length} minigames`, reward: { victoryTokens: 3, items: { masterball: 1 } }, check: (state) => clearedMinigames(state) >= RECORDABLE_MINIGAMES.length },
+  { id: 'whack30', name: 'Lightning Reflexes', description: 'Score 30 in Whack-a-Diglett', reward: { money: 5000, items: { expCandyL: 1 } }, check: (state) => (state.minigameRecords?.whack?.best ?? 0) >= 30 },
+  { id: 'voltorbCoins', name: 'Coin Rush', description: 'Bank 2,500 coins in a Voltorb Flip run', reward: { victoryTokens: 1, items: { expCandyM: 1 } }, check: (state) => (state.minigameRecords?.voltorbFlip?.best ?? 0) >= 2500 },
+  { id: 'battleRoyal10', name: 'Royal Rumble', description: 'Win 10 battles in one Battle Royal run', reward: { victoryTokens: 1 }, check: (state) => (state.minigameRecords?.battleRoyal?.best ?? 0) >= 10 },
+  { id: 'dynamaxClear', name: 'Max Lair Champion', description: 'Clear every stage of a Dynamax Adventure', reward: { victoryTokens: 1, items: { expCandyL: 1 } }, check: (state) => (state.minigameRecords?.dynamaxAdventures?.best ?? 0) >= 3 },
+  { id: 'puzzleLeague1500', name: 'Combo Master', description: 'Score 1,500 in Pokemon Puzzle League', reward: { money: 8000 }, check: (state) => (state.minigameRecords?.puzzleLeague?.best ?? 0) >= 1500 },
+  { id: 'pokestarPerfect', name: 'Box Office Smash', description: 'Score a perfect 9 at Pokestar Studios', reward: { money: 8000, items: { expCandyL: 1 } }, check: (state) => (state.minigameRecords?.pokestar?.best ?? 0) >= 9 },
+  { id: 'contestStar', name: 'Rising Star', description: 'Score 30 in a Pokemon Contest', reward: { money: 6000 }, check: (state) => (state.minigameRecords?.contest?.best ?? 0) >= 30 },
+  // Prestige & Tower extras
+  { id: 'tower100', name: 'Tower Legend', description: 'Clear Battle Tower floor 100', reward: { victoryTokens: 3, items: { masterball: 1 } }, check: (state) => bestTowerFloor(state) >= 100 },
+  { id: 'prestigeAllRegions', name: 'Seasoned Traveller', description: 'Prestige every region once', reward: { victoryTokens: 3 }, check: allRegionsPrestiged },
 ]

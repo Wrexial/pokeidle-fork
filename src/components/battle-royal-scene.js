@@ -197,7 +197,7 @@ export function BattleRoyalScene() {
 
   function leave() {
     collect(
-      { type: 'END_MINIGAME', payload: { minigame: 'battleRoyal', score: wins } },
+      { type: 'END_MINIGAME', payload: { minigame: 'battleRoyal', score: wins, completed: wins > 0 } },
       result ? { type: 'CLAIM_MINIGAME_REWARD', payload: result } : null
     )
   }

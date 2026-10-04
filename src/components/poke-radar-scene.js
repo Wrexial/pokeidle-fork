@@ -129,7 +129,7 @@ export function PokeRadarScene() {
 
   function leave() {
     collect(
-      { type: 'END_MINIGAME' },
+      { type: 'END_MINIGAME', payload: { score: result?.chain ?? 0, completed: !!prize } },
       prize ? { type: 'CLAIM_MINIGAME_REWARD', payload: prize } : null
     )
   }

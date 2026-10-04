@@ -56,12 +56,12 @@ export function MiningScene() {
 
   function requestCollect() {
     if (found.length > 0) setShowReward(true)
-    else collect({ type: 'END_MINIGAME' })
+    else collect({ type: 'END_MINIGAME', payload: { score: found.length, completed: false } })
   }
 
   function leaveAndClaim() {
     collect(
-      { type: 'END_MINIGAME' },
+      { type: 'END_MINIGAME', payload: { score: found.length, completed: found.length > 0 } },
       found.length > 0 ? { type: 'COLLECT_MINING', payload: { rewards: found } } : null
     )
   }

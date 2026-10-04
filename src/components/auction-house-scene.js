@@ -187,7 +187,11 @@ export function AuctionHouseScene() {
         children: [
           jsx('button', {
             className: 'move-panel-btn cancel',
-            onClick: () => dispatch({ type: 'END_MINIGAME' }),
+            onClick: () =>
+              dispatch({
+                type: 'END_MINIGAME',
+                payload: { completed: result === 'won' },
+              }),
             children: 'LEAVE',
           }),
           result === null

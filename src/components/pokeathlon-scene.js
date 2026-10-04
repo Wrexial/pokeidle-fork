@@ -193,7 +193,7 @@ export function PokeathlonScene() {
 
   function leave() {
     collect(
-      { type: 'END_MINIGAME' },
+      { type: 'END_MINIGAME', payload: { score: total, completed: phase === 'done' } },
       phase === 'done' ? { type: 'CLAIM_MINIGAME_REWARD', payload: prize } : null
     )
   }

@@ -82,7 +82,7 @@ export function WhackScene() {
 
   function leave() {
     collect(
-      { type: 'END_MINIGAME', payload: { minigame: 'whack', score } },
+      { type: 'END_MINIGAME', payload: { minigame: 'whack', score, completed: score > 0 } },
       prize ? { type: 'CLAIM_MINIGAME_REWARD', payload: prize } : null
     )
   }

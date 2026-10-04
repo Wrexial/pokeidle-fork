@@ -1,6 +1,6 @@
 // Reducer handlers for minigames actions. Split from game/reducer.js.
 
-import { MATCH3_COST, MEMORY_COST, MUSICAL_COST, PICNIC_COST, POKEBALL_FACTORY_COST, WHACK_COST, BATTLE_ROYAL_COST, BUG_CONTEST_COST, CONTEST_COST, CURRY_COST, DYNAMAX_ADVENTURES_COST, LIGHTS_OUT_COST, MINING_COST, POKEATHLON_COST, POKE_RADAR_COST, POKESTAR_COST, QUIZ_COST, ROUTE_ACTIVITIES, SAFARI_COST, SLIDING_COST, ICE_SLIDE_COST, VOLTORB_FLIP_COST, GAME_CORNER_PRIZE_GOAL, rollGameCornerPrize, routeActivityIds } from '../minigames.js'
+import { MATCH3_COST, MEMORY_COST, MUSICAL_COST, PICNIC_COST, POKEBALL_FACTORY_COST, WHACK_COST, BATTLE_ROYAL_COST, BUG_CONTEST_COST, CONTEST_COST, CURRY_COST, DYNAMAX_ADVENTURES_COST, LIGHTS_OUT_COST, MINING_COST, POKEATHLON_COST, POKE_RADAR_COST, POKESTAR_COST, QUIZ_COST, ROUTE_ACTIVITIES, SAFARI_COST, SLIDING_COST, ICE_SLIDE_COST, VOLTORB_FLIP_COST, GAME_CORNER_PRIZE_GOAL, rollGameCornerPrize, routeActivityIds, minigameIdForPhase } from '../minigames.js'
 import { minigameTmChance } from '../../data/config.js'
 import { mapData, pokemonSpecies } from '../../data/gameData.js'
 import { getTmInfo, tmItemId } from '../../data/tms.js'
@@ -33,7 +33,7 @@ export function startBugContest(state, action) {
  */
 export function endBugContest(state, action) {
   return state.phase === 'bugCatching'
-    ? recordMinigame({ ...state, ...createIdleBattleState() }, action.payload)
+    ? recordMinigame({ ...state, ...createIdleBattleState() }, minigameResult(state, action))
     : state
 }
 
@@ -59,7 +59,12 @@ export function startSafari(state, action) {
  * @returns {GameState}
  */
 export function endSafari(state, action) {
-  return state.phase === 'safari' ? { ...state, ...createIdleBattleState() } : state
+  return state.phase === 'safari'
+    ? recordMinigame(
+        { ...state, ...createIdleBattleState() },
+        minigameResult(state, action)
+      )
+    : state
 }
 
 /**
@@ -362,6 +367,20 @@ export function startIceSlide(state, action) {
 }
 
 /**
+ * Build the `recordMinigame` result for an end action, filling in the minigame
+ * id from the current phase when the scene did not pass one. `completed` is
+ * left exactly as the scene reported it, so a mid-run "leave" never counts as
+ * a clear (the route `unlock.minigame` gates depend on that).
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {{ minigame?: string, score?: number, completed?: boolean } | null | undefined}
+ */
+function minigameResult(state, action) {
+  const minigame = action.payload?.minigame ?? minigameIdForPhase(state.phase)
+  return minigame ? { ...action.payload, minigame } : action.payload
+}
+
+/**
  * Merge a minigame result into `state.minigameRecords`, keeping the best score.
  * @param {GameState} state
  * @param {{ minigame?: string, score?: number, completed?: boolean } | null | undefined} [result]
@@ -411,7 +430,7 @@ export function endMinigame(state, action) {
     state.phase === 'ruinsPuzzle' ||
     state.phase === 'iceSlide' ||
     state.phase === 'pelago'
-    ? recordMinigame({ ...state, ...createIdleBattleState() }, action.payload)
+    ? recordMinigame({ ...state, ...createIdleBattleState() }, minigameResult(state, action))
     : state
 }
 

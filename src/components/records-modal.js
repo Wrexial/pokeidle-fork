@@ -1,7 +1,9 @@
 // Records modal — a read-only summary of the player's journey, opened from the Box.
 
 import { jsx, jsxs } from 'react/jsx-runtime'
-import { ACHIEVEMENTS } from '../data/achievements.js'
+import { ACHIEVEMENTS, RECORDABLE_MINIGAMES } from '../data/achievements.js'
+import { isTmItem, TM_MOVE_IDS } from '../data/tms.js'
+import { MINIGAME_INFO } from '../game/minigames.js'
 import { formatReward } from '../game/progression.js'
 import { completedGenerations, gymLeaderData, pokedexIndexes, regions, speciesKeysByGeneration } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
@@ -16,6 +18,19 @@ export function RecordsModal({ onClose, inline = false }) {
     seenCount = nationalDex.filter(([speciesKey]) => state.pokedexSeen.includes(speciesKey)).length,
     percent = nationalDex.length ? Math.floor((caughtCount / nationalDex.length) * 100) : 0,
     completedGenerationSet = completedGenerations(state.pokedexCaught),
+    pokemonOwned = state.party.length + state.box.length,
+    level100Count = [...state.party, ...state.box].filter(
+      (pokemon) => (pokemon.level ?? 0) >= 100
+    ).length,
+    ownedTms = Object.keys(state.inventory ?? {}).filter(
+      (itemId) => isTmItem(itemId) && (state.inventory[itemId] ?? 0) > 0
+    ).length,
+    minigameRecords = state.minigameRecords ?? {},
+    clearedMinigames = RECORDABLE_MINIGAMES.filter((id) => minigameRecords[id]?.completed).length,
+    playedMinigames = RECORDABLE_MINIGAMES.map((id) => ({
+      id,
+      record: minigameRecords[id],
+    })).filter((entry) => entry.record && (entry.record.completed || entry.record.best > 0)),
     sections = [
       {
         title: 'Battles',
@@ -48,6 +63,25 @@ export function RecordsModal({ onClose, inline = false }) {
         ],
       },
       {
+        title: 'Minigames',
+        rows: [
+          ['Minigames cleared', `${clearedMinigames} / ${RECORDABLE_MINIGAMES.length}`],
+          ...playedMinigames.map(({ id, record }) => {
+            const entry = record ?? { best: 0, completed: false }
+            return [
+              MINIGAME_INFO[id]?.title ?? id,
+              `${entry.completed ? '\u2605 Cleared' : 'Played'}${
+                entry.best > 0 ? ` \u00b7 Best ${entry.best.toLocaleString()}` : ''
+              }`,
+            ]
+          }),
+        ],
+      },
+      {
+        title: 'Technical Machines',
+        rows: [['TMs collected', `${ownedTms} / ${TM_MOVE_IDS.length}`]],
+      },
+      {
         title: 'Shinies',
         rows: [
           ['Shiny forms seen', state.shinySeen.length],
@@ -66,6 +100,8 @@ export function RecordsModal({ onClose, inline = false }) {
       {
         title: 'Collection',
         rows: [
+          ['Pokemon owned', pokemonOwned],
+          ['Level 100 Pokemon', level100Count],
           ['In party', state.party.length],
           ['In box', state.box.length],
         ],

@@ -79,3 +79,54 @@ test('repairSave drops unknown rewarded achievement ids', () => {
   })
   assert.deepEqual(repaired.rewardedAchievements, ['firstBlood'])
 })
+
+test('ending a minigame records its phase result and score', () => {
+  const base = { ...initialGameState, phase: 'musical', minigameRecords: {} },
+    next = gameReducer(base, {
+      type: 'END_MINIGAME',
+      payload: { score: 123, completed: true },
+    })
+  assert.deepEqual(next.minigameRecords.musical, { best: 123, completed: true })
+})
+
+test('leaving the Safari Zone records the catches', () => {
+  const base = { ...initialGameState, phase: 'safari', minigameRecords: {} },
+    next = gameReducer(base, {
+      type: 'END_SAFARI',
+      payload: { score: 3, completed: true },
+    })
+  assert.deepEqual(next.minigameRecords.safari, { best: 3, completed: true })
+})
+
+test('a minigame left without completing is not counted as cleared', () => {
+  const base = { ...initialGameState, phase: 'auctionHouse', minigameRecords: {} },
+    next = gameReducer(base, {
+      type: 'END_MINIGAME',
+      payload: { completed: false },
+    })
+  assert.equal(next.minigameRecords.auctionHouse.completed, false)
+  assert.equal(
+    ACHIEVEMENTS.find((achievement) => achievement.id === 'minigameFirst').check(next),
+    false
+  )
+})
+
+test('clearing minigames unlocks the minigame milestones', () => {
+  const minigameFirst = ACHIEVEMENTS.find((achievement) => achievement.id === 'minigameFirst'),
+    minigameFive = ACHIEVEMENTS.find((achievement) => achievement.id === 'minigameFive')
+  assert.equal(minigameFirst.check({ ...initialGameState }), false)
+  const cleared = {
+    ...initialGameState,
+    minigameRecords: { memory: { best: 0, completed: true } },
+  }
+  assert.equal(minigameFirst.check(cleared), true)
+  assert.equal(minigameFive.check(cleared), false)
+})
+
+test('TM milestones count the distinct TMs in the bag', async () => {
+  const { TM_MOVE_IDS, tmItemId } = await import('../src/data/tms.js'),
+    tmAll = ACHIEVEMENTS.find((achievement) => achievement.id === 'tmAll'),
+    inventory = Object.fromEntries(TM_MOVE_IDS.map((moveId) => [tmItemId(moveId), 1]))
+  assert.equal(tmAll.check({ ...initialGameState, inventory: {} }), false)
+  assert.equal(tmAll.check({ ...initialGameState, inventory }), true)
+})

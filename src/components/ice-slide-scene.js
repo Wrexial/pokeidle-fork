@@ -127,7 +127,7 @@ export function IceSlideScene() {
       setPrize(iceSlidePrize(cleared, totalMoves, templePar, false))
       return
     }
-    collect({ type: 'END_MINIGAME' }, { type: 'CLAIM_MINIGAME_REWARD', payload: prize })
+    collect({ type: 'END_MINIGAME', payload: { score: cleared, completed: !!prize } }, { type: 'CLAIM_MINIGAME_REWARD', payload: prize })
   }
 
   const lead = state.party[0] ?? state.playerPokemon,

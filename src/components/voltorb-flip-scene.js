@@ -98,7 +98,7 @@ export function VoltorbFlipScene() {
 
   function collectReward() {
     collect(
-      { type: 'END_MINIGAME' },
+      { type: 'END_MINIGAME', payload: { score: banked, completed: !!hasPrize } },
       hasPrize ? { type: 'CLAIM_MINIGAME_REWARD', payload: prize } : null
     )
   }

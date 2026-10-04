@@ -106,6 +106,14 @@ export const CHANGELOG = [
           ],
         },
         {
+          heading: 'Records & Achievements',
+          items: [
+            'Every fixed minigame now reports its result when you finish it, so its best score and a cleared mark are saved and shown in the Records, instead of only the handful that route gates happened to use',
+            'The Records panel gained a Minigames section: it shows how many minigames you have cleared out of the full set and your best score in each one, plus a Pokemon-owned / level-100 breakdown in the Collection section and a TMs-collected counter',
+            'A second wave of achievements covers the minigames (clear one, five or all of them, plus score milestones such as 30 in Whack-a-Diglett, a perfect Pokestar film, a 1,500 Puzzle League combo and a 2,500-coin Voltorb Flip run), the TM collection (first, 25, 100 and the full set), owning 50 or 150 Pokemon, raising one to level 100 or maximum friendship, clearing Battle Tower floor 100, prestiging every region once, and holding $10,000,000',
+          ],
+        },
+        {
           heading: 'Fixes',
           items: [
             'The player guide now lists the correct shiny odds: base odds are 1 in 4,096 and the per-generation Shiny Charm runs from 1 in 2,048 for the first completed generation to 1 in 256 when all nine are done (it still said 1 in 8,192), and swarms last 256 battles rather than 50',

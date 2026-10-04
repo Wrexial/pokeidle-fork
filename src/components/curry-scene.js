@@ -38,6 +38,7 @@ export function CurryScene() {
     inBandRef = React.useRef(0),
     holdingRef = React.useRef(false),
     startRef = React.useRef(0),
+    scoreRef = React.useRef(0),
     finishedRef = React.useRef(false)
 
   React.useEffect(() => {
@@ -76,6 +77,7 @@ export function CurryScene() {
         clearInterval(id)
         const quality = Math.min(1, inBandRef.current / CURRY_COOK_MS),
           score = curryScore(matchedRef.current, quality)
+        scoreRef.current = score
         if (state.sfxEnabled) playSfx(score >= 80 ? 'win' : score >= 50 ? 'good' : 'miss')
         setPrize(curryPrize(score))
         setPhase('done')
@@ -96,7 +98,7 @@ export function CurryScene() {
 
   function leave() {
     collect(
-      { type: 'END_MINIGAME' },
+      { type: 'END_MINIGAME', payload: { score: scoreRef.current, completed: !!prize } },
       prize ? { type: 'CLAIM_MINIGAME_REWARD', payload: prize } : null
     )
   }

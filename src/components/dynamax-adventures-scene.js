@@ -168,7 +168,7 @@ export function DynamaxAdventuresScene() {
 
   function leave() {
     collect(
-      { type: 'END_MINIGAME', payload: { minigame: 'dynamaxAdventures', score: stage } },
+      { type: 'END_MINIGAME', payload: { minigame: 'dynamaxAdventures', score: stage, completed: !!result } },
       result ? { type: 'CLAIM_MINIGAME_REWARD', payload: result } : null
     )
   }

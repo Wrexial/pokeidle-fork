@@ -68,6 +68,55 @@ export const MINIGAME_AREAS = Object.fromEntries(
 )
 
 /**
+ * Every fixed minigame id, in registry order.
+ * @type {string[]}
+ */
+export const MINIGAME_IDS = [...new Set(Object.values(MINIGAME_LOCATIONS))]
+
+/**
+ * The reducer phase a minigame runs in, keyed by minigame id. Most phases share
+ * the id; the Bug-Catching Contest and Poke Pelago are the exceptions. Used to
+ * attribute an `END_MINIGAME` (or `END_BUG_CONTEST` / `END_SAFARI`) to its game
+ * without every scene passing the id itself.
+ * @type {Record<string, string>}
+ */
+export const MINIGAME_PHASES = {
+  gameCorner: 'gameCorner',
+  bugContest: 'bugCatching',
+  mining: 'mining',
+  safari: 'safari',
+  academyQuiz: 'academyQuiz',
+  voltorbFlip: 'voltorbFlip',
+  auctionHouse: 'auctionHouse',
+  contest: 'contest',
+  pokeathlon: 'pokeathlon',
+  pokeRadar: 'pokeRadar',
+  battleRoyal: 'battleRoyal',
+  dynamaxAdventures: 'dynamaxAdventures',
+  lightsOut: 'lightsOut',
+  curry: 'curry',
+  pokestar: 'pokestar',
+  puzzleLeague: 'puzzleLeague',
+  memory: 'memory',
+  whack: 'whack',
+  musical: 'musical',
+  picnic: 'picnic',
+  pokeballFactory: 'pokeballFactory',
+  ruinsPuzzle: 'ruinsPuzzle',
+  iceSlide: 'iceSlide',
+  pokePelago: 'pelago',
+}
+
+/**
+ * The minigame id a scene phase belongs to, or null for a non-minigame phase.
+ * @param {string} phase
+ * @returns {string | null}
+ */
+export function minigameIdForPhase(phase) {
+  return MINIGAME_PHASES[phase] ?? null
+}
+
+/**
  * Each minigame's region, read from the home area's `region` field.
  * @type {Record<string, string>}
  */

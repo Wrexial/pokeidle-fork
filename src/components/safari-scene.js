@@ -392,7 +392,11 @@ export function SafariScene() {
                       ]
                     : jsx('button', {
                         className: 'move-panel-btn confirm',
-                        onClick: () => dispatch({ type: 'END_SAFARI' }),
+                        onClick: () =>
+                          dispatch({
+                            type: 'END_SAFARI',
+                            payload: { score: caught.length, completed: caught.length > 0 },
+                          }),
                         children: 'LEAVE THE SAFARI ZONE',
                       }),
           }),

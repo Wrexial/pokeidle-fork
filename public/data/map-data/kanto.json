@@ -616,7 +616,7 @@
   },
   "unlockOrder": 45,
   "position": {
-   "x": 46,
+   "x": 46.08,
    "y": 7.74
   },
   "region": "kanto",
@@ -1395,7 +1395,7 @@
   },
   "unlockOrder": 39,
   "position": {
-   "x": 28.26,
+   "x": 29,
    "y": 88
   },
   "region": "kanto",
@@ -1425,8 +1425,8 @@
   },
   "unlockOrder": 41,
   "position": {
-   "x": 16,
-   "y": 84
+   "x": 13.1,
+   "y": 84.08
   },
   "region": "kanto",
   "biome": "cave"

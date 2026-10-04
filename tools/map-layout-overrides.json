@@ -2,7 +2,7 @@
   "johto": {
     "positions": {
       "johto-whirl-islands": {
-        "x": 21.5,
+        "x": 20.5,
         "y": 49.5
       },
       "johto-route-30": {
@@ -22,44 +22,24 @@
         "y": 44
       },
       "johto-league": {
-        "x": 98,
+        "x": 96.51,
         "y": 44
       },
       "johto-dragons-den": {
         "x": 93.46,
         "y": 17
       },
-      "johto-cianwood-city": {
-        "x": 12.95,
-        "y": 60.73
-      },
       "johto-safari-zone": {
-        "x": -5,
-        "y": 51.5
+        "x": 3.77,
+        "y": 53.6
       },
       "johto-cliff-cave": {
-        "x": 3,
-        "y": 69
-      },
-      "johto-route-47": {
-        "x": 13,
-        "y": 69
+        "x": 12.81,
+        "y": 75.93
       },
       "johto-route-48": {
-        "x": -5,
-        "y": 68.5
-      },
-      "johto-olivine-city": {
-        "x": 20.5,
-        "y": 36.5
-      },
-      "johto-sea-route-40": {
-        "x": 13,
-        "y": 36.5
-      },
-      "johto-sea-route-41": {
-        "x": 13.17,
-        "y": 49.45
+        "x": 3.77,
+        "y": 70.6
       },
       "johto-ruins-of-alph": {
         "x": 49,
@@ -122,8 +102,8 @@
         "y": 15
       },
       "johto-route-42": {
-        "x": 57.75,
-        "y": 20.87
+        "x": 54.68,
+        "y": 21.05
       },
       "johto-route-43": {
         "x": 66.62,
@@ -179,20 +159,59 @@
       },
       "johto-goldenrod-city": {
         "x": 31.5,
-        "y": 53
+        "y": 50.11
       },
       "johto-ilex-forest": {
         "x": 31.75,
         "y": 67
+      },
+      "johto-route-47": {
+        "x": 12.75,
+        "y": 69
+      },
+      "johto-sea-route-41": {
+        "x": 12.74,
+        "y": 49.44
+      },
+      "johto-sea-route-40": {
+        "x": 12.75,
+        "y": 36.5
+      },
+      "johto-cianwood-city": {
+        "x": 12.7,
+        "y": 60.73
+      },
+      "johto-route-35": {
+        "x": 31.65,
+        "y": 44.34
+      },
+      "johto-olivine-city": {
+        "x": 20.5,
+        "y": 36.5
       }
     },
     "roads": {
       "remove": [
-        ["johto-blackthorn-city", "johto-route-44"],
-        ["johto-azalea-town", "johto-route-34"],
-        ["johto-route-31", "johto-route-46"],
-        ["johto-dragons-den", "johto-route-45"],
-        ["johto-ecruteak-city", "johto-mt-mortar"]
+        [
+          "johto-blackthorn-city",
+          "johto-route-44"
+        ],
+        [
+          "johto-azalea-town",
+          "johto-route-34"
+        ],
+        [
+          "johto-route-31",
+          "johto-route-46"
+        ],
+        [
+          "johto-dragons-den",
+          "johto-route-45"
+        ],
+        [
+          "johto-ecruteak-city",
+          "johto-mt-mortar"
+        ]
       ],
       "add": []
     }

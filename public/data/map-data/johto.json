@@ -328,7 +328,7 @@
   "unlockOrder": 200034.5,
   "position": {
    "x": 31.5,
-   "y": 53
+   "y": 50.11
   },
   "mart": {
    "name": "Johto Mart",
@@ -370,8 +370,8 @@
   },
   "unlockOrder": 200035,
   "position": {
-   "x": 31.39,
-   "y": 41.18
+   "x": 31.65,
+   "y": 44.34
   },
   "biome": "coast"
  },
@@ -636,7 +636,7 @@
   },
   "unlockOrder": 200040,
   "position": {
-   "x": 13,
+   "x": 12.75,
    "y": 36.5
   },
   "biome": "coast"
@@ -664,8 +664,8 @@
   },
   "unlockOrder": 200041,
   "position": {
-   "x": 13.17,
-   "y": 49.45
+   "x": 12.74,
+   "y": 49.44
   },
   "biome": "coast"
  },
@@ -690,7 +690,7 @@
   },
   "unlockOrder": 200041.5001,
   "position": {
-   "x": 12.95,
+   "x": 12.7,
    "y": 60.73
   },
   "mart": {
@@ -739,7 +739,7 @@
   },
   "unlockOrder": 200041.5002,
   "position": {
-   "x": 21.5,
+   "x": 20.5,
    "y": 49.5
   },
   "biome": "coast"
@@ -771,8 +771,8 @@
   },
   "unlockOrder": 200042,
   "position": {
-   "x": 57.75,
-   "y": 20.87
+   "x": 54.68,
+   "y": 21.05
   },
   "biome": "grassland"
  },
@@ -1018,7 +1018,7 @@
   },
   "unlockOrder": 200047,
   "position": {
-   "x": 13,
+   "x": 12.75,
    "y": 69
   },
   "biome": "coast"
@@ -1046,8 +1046,8 @@
   },
   "unlockOrder": 200048,
   "position": {
-   "x": -5,
-   "y": 68.5
+   "x": 3.77,
+   "y": 70.6
   },
   "biome": "grassland"
  },
@@ -1135,7 +1135,7 @@
   },
   "unlockOrder": 200092,
   "position": {
-   "x": 98,
+   "x": 96.51,
    "y": 44
   },
   "biome": "grassland"
@@ -1452,8 +1452,8 @@
   },
   "unlockOrder": 200048.25,
   "position": {
-   "x": -5,
-   "y": 51.5
+   "x": 3.77,
+   "y": 53.6
   },
   "biome": "grassland",
   "background": "/backgrounds/grassland.png"
@@ -1479,8 +1479,8 @@
   },
   "unlockOrder": 200047.25,
   "position": {
-   "x": 3,
-   "y": 69
+   "x": 12.81,
+   "y": 75.93
   },
   "biome": "cave",
   "background": "/backgrounds/cave.png"

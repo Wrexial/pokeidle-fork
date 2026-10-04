@@ -12,6 +12,10 @@
  *   node tools/straighten-map.cjs [--regions=hoenn,johto] [--dry]
  *   node tools/straighten-map.cjs --all
  * (defaults to every region when neither is given)
+ *
+ * Regions with zone sub-areas are skipped: moving a hub would decouple it from
+ * the ring its hidden sub-areas are laid out in, and those regions gain little
+ * anyway. Pass --include-zones to straighten the non-hub nodes regardless.
  */
 const fs = require('fs')
 const path = require('path')
@@ -22,6 +26,7 @@ const { loadMapOverrides, applyMapOverrides, OVERRIDES_PATH } = require('./lib/m
 const { straightenCoords } = require('./lib/straighten.cjs')
 
 const DRY = process.argv.includes('--dry')
+const INCLUDE_ZONES = process.argv.includes('--include-zones')
 const regionsArg = process.argv.find((arg) => arg.startsWith('--regions='))
 const targets = regionsArg ? regionsArg.slice('--regions='.length).split(',') : REGION_IDS
 
@@ -31,6 +36,11 @@ const overrides = loadMapOverrides()
 
 let moved = 0
 for (const region of targets) {
+  const hasZones = Object.keys(mapData).some((id) => mapData[id].region === region && mapData[id].hidden)
+  if (hasZones && !INCLUDE_ZONES) {
+    console.warn(`skipping ${region}: has zone sub-areas (use --include-zones to force)`)
+    continue
+  }
   const ids = Object.keys(mapData).filter((id) => mapData[id].region === region && !mapData[id].hidden)
   if (!ids.length) {
     console.warn(`no nodes for region: ${region}`)

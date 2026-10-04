@@ -13,8 +13,8 @@
   },
   "unlockOrder": 599999,
   "position": {
-   "x": 68.67511589935222,
-   "y": 71.61770706941539
+   "x": 68.5,
+   "y": 71.5
   },
   "mart": {
    "name": "Kalos Mart",
@@ -46,8 +46,8 @@
   },
   "unlockOrder": 600001,
   "position": {
-   "x": 66.38985607884018,
-   "y": 65.51131799298459
+   "x": 66.5,
+   "y": 65.5
   },
   "biome": "forest"
  },
@@ -71,8 +71,8 @@
   },
   "unlockOrder": 600001.5,
   "position": {
-   "x": 59.95726428530957,
-   "y": 64.57234288343196
+   "x": 60,
+   "y": 64.5
   },
   "mart": {
    "name": "Kalos Mart",
@@ -108,8 +108,8 @@
   },
   "unlockOrder": 600002,
   "position": {
-   "x": 63.83840400117754,
-   "y": 59.07520539683034
+   "x": 64,
+   "y": 59
   },
   "biome": "grassland"
  },
@@ -135,8 +135,8 @@
   },
   "unlockOrder": 600003,
   "position": {
-   "x": 57.439289037808734,
-   "y": 57.73237089201022
+   "x": 57.5,
+   "y": 57.5
   },
   "biome": "coast"
  },
@@ -169,8 +169,8 @@
   },
   "unlockOrder": 600003.5,
   "position": {
-   "x": 59.56739956063286,
-   "y": 51.58357487720258
+   "x": 60,
+   "y": 51.5
   },
   "mart": {
    "name": "Kalos Mart",
@@ -207,8 +207,8 @@
   },
   "unlockOrder": 600004,
   "position": {
-   "x": 55.757473973144194,
-   "y": 46.316479721943765
+   "x": 56,
+   "y": 46.5
   },
   "biome": "forest"
  },
@@ -236,8 +236,8 @@
   },
   "unlockOrder": 600004.5,
   "position": {
-   "x": 53.029443470516284,
-   "y": 40.390336836609364
+   "x": 53,
+   "y": 40.5
   },
   "mart": {
    "name": "Kalos Mart",
@@ -271,8 +271,8 @@
   },
   "unlockOrder": 600005,
   "position": {
-   "x": 49.29818363953156,
-   "y": 47.204155555848416
+   "x": 49,
+   "y": 47
   },
   "biome": "grassland"
  },
@@ -297,8 +297,8 @@
   },
   "unlockOrder": 600005.5,
   "position": {
-   "x": 44.64,
-   "y": 52.96
+   "x": 44.5,
+   "y": 53
   },
   "mart": {
    "name": "Kalos Mart",
@@ -342,8 +342,8 @@
   },
   "unlockOrder": 600006,
   "position": {
-   "x": 34.74664568647636,
-   "y": 51.29469413665511
+   "x": 34.5,
+   "y": 51.5
   },
   "biome": "grassland"
  },
@@ -372,8 +372,8 @@
   },
   "unlockOrder": 600007,
   "position": {
-   "x": 28.875641205489543,
-   "y": 54.10598162364543
+   "x": 29,
+   "y": 54
   },
   "biome": "grassland"
  },
@@ -405,8 +405,8 @@
   },
   "unlockOrder": 600007.5,
   "position": {
-   "x": 16.93183951341406,
-   "y": 53.894068482601064
+   "x": 17,
+   "y": 54
   },
   "mart": {
    "name": "Kalos Mart",
@@ -456,8 +456,8 @@
   },
   "unlockOrder": 600008,
   "position": {
-   "x": 22.85657514861529,
-   "y": 56.59458351330628
+   "x": 23,
+   "y": 56.5
   },
   "biome": "coast"
  },
@@ -492,8 +492,8 @@
   },
   "unlockOrder": 600008.5,
   "position": {
-   "x": 21.053237483116778,
-   "y": 62.845696498189284
+   "x": 21,
+   "y": 63
   },
   "mart": {
    "name": "Kalos Mart",
@@ -531,8 +531,8 @@
   },
   "unlockOrder": 600009,
   "position": {
-   "x": 19.55171300360158,
-   "y": 69.19044426602187
+   "x": 19.5,
+   "y": 69
   },
   "biome": "mountain"
  },
@@ -562,8 +562,8 @@
   },
   "unlockOrder": 600010,
   "position": {
-   "x": 10.990288046850813,
-   "y": 51.24922392203059
+   "x": 11,
+   "y": 51.5
   },
   "biome": "grassland"
  },
@@ -596,8 +596,8 @@
   },
   "unlockOrder": 600010.5,
   "position": {
-   "x": 4.699970759933593,
-   "y": 49.596487175880384
+   "x": 4.5,
+   "y": 49.5
   },
   "mart": {
    "name": "Kalos Mart",
@@ -635,8 +635,8 @@
   },
   "unlockOrder": 600011,
   "position": {
-   "x": 9.049416430218034,
-   "y": 44.74059143569558
+   "x": 9,
+   "y": 44.5
   },
   "biome": "swamp"
  },
@@ -661,8 +661,8 @@
   },
   "unlockOrder": 600011.5,
   "position": {
-   "x": 12.384672722283941,
-   "y": 39.13822894597441
+   "x": 12.5,
+   "y": 39
   },
   "mart": {
    "name": "Kalos Mart",
@@ -710,8 +710,8 @@
   },
   "unlockOrder": 600012,
   "position": {
-   "x": 25.36,
-   "y": 36.96
+   "x": 25.5,
+   "y": 37
   },
   "biome": "coast"
  },
@@ -736,8 +736,8 @@
   },
   "unlockOrder": 600012.5,
   "position": {
-   "x": 38.93,
-   "y": 33.82
+   "x": 39,
+   "y": 34
   },
   "mart": {
    "name": "Kalos Mart",
@@ -785,8 +785,8 @@
   },
   "unlockOrder": 600013,
   "position": {
-   "x": 46.55950314868646,
-   "y": 37.67214356921405
+   "x": 46.5,
+   "y": 38
   },
   "biome": "desert"
  },
@@ -816,8 +816,8 @@
   },
   "unlockOrder": 600014,
   "position": {
-   "x": 51.72049685131354,
-   "y": 33.68785643078595
+   "x": 51.5,
+   "y": 34
   },
   "biome": "coast"
  },
@@ -841,8 +841,8 @@
   },
   "unlockOrder": 600014.5,
   "position": {
-   "x": 48.93,
-   "y": 26.18
+   "x": 49,
+   "y": 26
   },
   "mart": {
    "name": "Kalos Mart",
@@ -892,8 +892,8 @@
   },
   "unlockOrder": 600015,
   "position": {
-   "x": 60.084694182120245,
-   "y": 30.10541828109001
+   "x": 60,
+   "y": 30
   },
   "biome": "coast"
  },
@@ -918,8 +918,8 @@
   },
   "unlockOrder": 600015.5,
   "position": {
-   "x": 73.29404540595182,
-   "y": 35.672292188813415
+   "x": 73.5,
+   "y": 35.5
   },
   "mart": {
    "name": "Kalos Mart",
@@ -967,8 +967,8 @@
   },
   "unlockOrder": 600016,
   "position": {
-   "x": 58.10617271189277,
-   "y": 36.304455996909546
+   "x": 58,
+   "y": 36.5
   },
   "biome": "coast"
  },
@@ -995,8 +995,8 @@
   },
   "unlockOrder": 600017,
   "position": {
-   "x": 79.18385669811387,
-   "y": 38.43434150157041
+   "x": 79,
+   "y": 38.5
   },
   "weather": "snow",
   "biome": "mountain"
@@ -1023,8 +1023,8 @@
   },
   "unlockOrder": 600017.5,
   "position": {
-   "x": 85.30573759244926,
-   "y": 40.67777064365873
+   "x": 85.5,
+   "y": 40.5
   },
   "mart": {
    "name": "Kalos Mart",
@@ -1073,8 +1073,8 @@
   },
   "unlockOrder": 600018,
   "position": {
-   "x": 89.56670105497807,
-   "y": 45.595721755787
+   "x": 89.5,
+   "y": 45.5
   },
   "biome": "desert"
  },
@@ -1099,8 +1099,8 @@
   },
   "unlockOrder": 600018.5,
   "position": {
-   "x": 95.77136409971412,
-   "y": 49.080263523311174
+   "x": 96,
+   "y": 49
   },
   "mart": {
    "name": "Kalos Mart",
@@ -1146,8 +1146,8 @@
   },
   "unlockOrder": 600019,
   "position": {
-   "x": 90.35928731854284,
-   "y": 52.716171238683884
+   "x": 90.5,
+   "y": 53
   },
   "biome": "coast"
  },
@@ -1179,8 +1179,8 @@
   },
   "unlockOrder": 600019.5,
   "position": {
-   "x": 84.23504189112553,
-   "y": 50.48478023862296
+   "x": 84,
+   "y": 50.5
   },
   "mart": {
    "name": "Kalos Mart",
@@ -1229,8 +1229,8 @@
   },
   "unlockOrder": 600020.0002,
   "position": {
-   "x": 79.63358925547125,
-   "y": 55.70498028974028
+   "x": 79.5,
+   "y": 56
   },
   "biome": "forest"
  },
@@ -1257,8 +1257,8 @@
   },
   "unlockOrder": 600020.0001,
   "position": {
-   "x": 94.29,
-   "y": 37.96
+   "x": 94.5,
+   "y": 38
   },
   "mart": {
    "name": "Kalos Mart",
@@ -1308,8 +1308,8 @@
   },
   "unlockOrder": 600021,
   "position": {
-   "x": 85.89831650208092,
-   "y": 57.44652300026148
+   "x": 86,
+   "y": 57.5
   },
   "biome": "coast"
  },
@@ -1342,8 +1342,8 @@
   },
   "unlockOrder": 600022,
   "position": {
-   "x": 70.86,
-   "y": 53.68
+   "x": 71,
+   "y": 54
   },
   "biome": "coast"
  },
@@ -1368,8 +1368,8 @@
   },
   "unlockOrder": 600023,
   "position": {
-   "x": 66.56079140221101,
-   "y": 30.814440648168365
+   "x": 66.5,
+   "y": 31
   },
   "biome": "coast"
  },
@@ -1402,8 +1402,8 @@
   },
   "unlockOrder": 600024,
   "position": {
-   "x": 66.99797193903514,
-   "y": 37.30934946710613
+   "x": 67,
+   "y": 37
   },
   "biome": "grassland"
  },
@@ -1428,8 +1428,8 @@
   },
   "unlockOrder": 600002.25,
   "position": {
-   "x": 65.7,
-   "y": 48.4
+   "x": 65.5,
+   "y": 48.5
   },
   "biome": "forest",
   "background": "/backgrounds/grassland.png"
@@ -1455,7 +1455,7 @@
   },
   "unlockOrder": 600007.25,
   "position": {
-   "x": 28.9,
+   "x": 29,
    "y": 60.5
   },
   "biome": "cave",
@@ -1482,8 +1482,8 @@
   },
   "unlockOrder": 600008.25,
   "position": {
-   "x": 14.6,
-   "y": 62.8
+   "x": 14.5,
+   "y": 63
   },
   "biome": "cave",
   "background": "/backgrounds/cave.png"
@@ -1535,8 +1535,8 @@
   },
   "unlockOrder": 600017.75,
   "position": {
-   "x": 83.6,
-   "y": 33.9
+   "x": 83.5,
+   "y": 34
   },
   "biome": "cave",
   "background": "/backgrounds/cave.png"
@@ -1562,8 +1562,8 @@
   },
   "unlockOrder": 600015.75,
   "position": {
-   "x": 73.9,
-   "y": 42.6
+   "x": 74,
+   "y": 42.5
   },
   "biome": "tundra",
   "background": "/backgrounds/grassland.png"
@@ -1588,8 +1588,8 @@
   },
   "unlockOrder": 600015.25,
   "position": {
-   "x": 62.9,
-   "y": 42.4
+   "x": 63,
+   "y": 42.5
   },
   "biome": "grassland",
   "background": "/backgrounds/grassland.png"
@@ -1616,7 +1616,7 @@
   "unlockOrder": 600020.2501,
   "position": {
    "x": 96,
-   "y": 56.2
+   "y": 56
   },
   "biome": "coast",
   "background": "/backgrounds/beach.png"
@@ -1641,8 +1641,8 @@
   },
   "unlockOrder": 600020.2502,
   "position": {
-   "x": 79.2,
-   "y": 46.6
+   "x": 79,
+   "y": 46.5
   },
   "biome": "grassland",
   "background": "/backgrounds/grassland.png"
@@ -1668,8 +1668,8 @@
   },
   "unlockOrder": 600008.75,
   "position": {
-   "x": 23.2,
-   "y": 49.9
+   "x": 23,
+   "y": 49.5
   },
   "biome": "coast",
   "background": "/backgrounds/beach.png"

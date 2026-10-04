@@ -863,7 +863,9 @@ One-off scripts used to build the data JSON (not run during dev/build):
   shared lines so the elbow roads read straight (`lib/straighten.cjs`), writing
   the result into `map-layout-overrides.json`; then run `apply-map-layout.cjs`.
   `--regions=hoenn,johto` limits it, `--dry` previews; defaults to every region.
-  Idempotent.
+  Regions with hidden zone sub-areas are skipped (moving a hub would decouple it
+  from the ring its sub-areas sit in, and they barely gain) unless
+  `--include-zones` is passed. Idempotent.
 - `lib/straighten.cjs` — the 1D coordinate clustering behind the straighten
   pass (also mirrored in map-editor.html's Straighten button); values within
   `TOLERANCE` merge onto their rounded mean, kept below the 0.5 grid step so the

@@ -13,8 +13,8 @@
   },
   "unlockOrder": 399999,
   "position": {
-   "x": 9.576354278016044,
-   "y": 78.6080448753724
+   "x": 9.5,
+   "y": 78.5
   },
   "mart": {
    "name": "Sinnoh Mart",
@@ -46,8 +46,8 @@
   },
   "unlockOrder": 400201,
   "position": {
-   "x": 12.776510584954874,
-   "y": 72.93619477109758
+   "x": 13,
+   "y": 73
   },
   "biome": "grassland"
  },
@@ -73,8 +73,8 @@
   },
   "unlockOrder": 400201.5,
   "position": {
-   "x": 20.01794805476597,
-   "y": 69.26552442358667
+   "x": 20,
+   "y": 69.5
   },
   "mart": {
    "name": "Sinnoh Mart",
@@ -110,8 +110,8 @@
   },
   "unlockOrder": 400202,
   "position": {
-   "x": 14.242533711440366,
-   "y": 66.11219204667121
+   "x": 14,
+   "y": 66
   },
   "biome": "grassland"
  },
@@ -137,8 +137,8 @@
   },
   "unlockOrder": 400202.5,
   "position": {
-   "x": 18.38056684884767,
-   "y": 61.096394597019014
+   "x": 18,
+   "y": 61
   },
   "mart": {
    "name": "Sinnoh Mart",
@@ -174,8 +174,8 @@
   },
   "unlockOrder": 400203,
   "position": {
-   "x": 24.75638515074666,
-   "y": 59.808475434940995
+   "x": 24.5,
+   "y": 60
   },
   "biome": "coast"
  },
@@ -200,8 +200,8 @@
   },
   "unlockOrder": 400203.5,
   "position": {
-   "x": 31.29,
-   "y": 59.85
+   "x": 31.5,
+   "y": 60
   },
   "mart": {
    "name": "Sinnoh Mart",
@@ -240,8 +240,8 @@
   },
   "unlockOrder": 400204,
   "position": {
-   "x": 17.664399644318834,
-   "y": 54.62812266198009
+   "x": 17.5,
+   "y": 54.5
   },
   "biome": "coast"
  },
@@ -266,8 +266,8 @@
   },
   "unlockOrder": 400204.5,
   "position": {
-   "x": 18.100011782577315,
-   "y": 48.1226909264992
+   "x": 18,
+   "y": 48
   },
   "mart": {
    "name": "Sinnoh Mart",
@@ -309,8 +309,8 @@
   },
   "unlockOrder": 400205,
   "position": {
-   "x": 25.26,
-   "y": 45.37
+   "x": 25,
+   "y": 45.5
   },
   "biome": "coast"
  },
@@ -345,8 +345,8 @@
   },
   "unlockOrder": 400205.5,
   "position": {
-   "x": 31.429475453552346,
-   "y": 39.80412974880194
+   "x": 31.5,
+   "y": 39.5
   },
   "mart": {
    "name": "Sinnoh Mart",
@@ -389,8 +389,8 @@
   },
   "unlockOrder": 400206,
   "position": {
-   "x": 36.440827870848565,
-   "y": 35.61181752627025
+   "x": 36.5,
+   "y": 35.5
   },
   "biome": "mountain"
  },
@@ -422,8 +422,8 @@
   },
   "unlockOrder": 400207,
   "position": {
-   "x": 33.37,
-   "y": 48.15
+   "x": 33.5,
+   "y": 48
   },
   "biome": "grassland"
  },
@@ -451,8 +451,8 @@
   },
   "unlockOrder": 400208,
   "position": {
-   "x": 41.25,
-   "y": 50.81
+   "x": 41.5,
+   "y": 51
   },
   "biome": "coast"
  },
@@ -477,8 +477,8 @@
   },
   "unlockOrder": 400208.5,
   "position": {
-   "x": 48.05064413877306,
-   "y": 54.23277109710275
+   "x": 48,
+   "y": 54
   },
   "mart": {
    "name": "Sinnoh Mart",
@@ -517,8 +517,8 @@
   },
   "unlockOrder": 400209,
   "position": {
-   "x": 53.54899955340659,
-   "y": 50.75581162175973
+   "x": 53.5,
+   "y": 51
   },
   "biome": "coast"
  },
@@ -543,8 +543,8 @@
   },
   "unlockOrder": 400209.5,
   "position": {
-   "x": 59.196292674587525,
-   "y": 47.49721063307418
+   "x": 59,
+   "y": 47.5
   },
   "mart": {
    "name": "Sinnoh Mart",
@@ -591,8 +591,8 @@
   },
   "unlockOrder": 400210,
   "position": {
-   "x": 53.3,
-   "y": 42.93
+   "x": 53.5,
+   "y": 43
   },
   "biome": "coast"
  },
@@ -616,8 +616,8 @@
   },
   "unlockOrder": 400210.5,
   "position": {
-   "x": 48.217542819378636,
-   "y": 37.9232096721671
+   "x": 48,
+   "y": 38
   },
   "mart": {
    "name": "Sinnoh Mart",
@@ -668,8 +668,8 @@
   },
   "unlockOrder": 400211,
   "position": {
-   "x": 37.30168317320405,
-   "y": 42.59255380430771
+   "x": 37.5,
+   "y": 43
   },
   "biome": "grassland"
  },
@@ -696,8 +696,8 @@
   },
   "unlockOrder": 400212,
   "position": {
-   "x": 53.51677408984054,
-   "y": 58.27927372733503
+   "x": 53.5,
+   "y": 58
   },
   "biome": "coast"
  },
@@ -730,8 +730,8 @@
   },
   "unlockOrder": 400212.5,
   "position": {
-   "x": 57.824069889356515,
-   "y": 63.15653975538562
+   "x": 58,
+   "y": 63
   },
   "mart": {
    "name": "Sinnoh Mart",
@@ -776,8 +776,8 @@
   },
   "unlockOrder": 400213,
   "position": {
-   "x": 62.23915602080295,
-   "y": 67.95418651727935
+   "x": 62,
+   "y": 68
   },
   "biome": "coast"
  },
@@ -807,7 +807,7 @@
   "unlockOrder": 400214,
   "position": {
    "x": 73,
-   "y": 39.56
+   "y": 39.5
   },
   "biome": "coast"
  },
@@ -832,7 +832,7 @@
   "unlockOrder": 400214.5,
   "position": {
    "x": 73,
-   "y": 46.08
+   "y": 46
   },
   "mart": {
    "name": "Sinnoh Mart",
@@ -879,8 +879,8 @@
   },
   "unlockOrder": 400215,
   "position": {
-   "x": 64.00406363323283,
-   "y": 43.11420664806333
+   "x": 64,
+   "y": 43
   },
   "biome": "grassland"
  },
@@ -909,8 +909,8 @@
   },
   "unlockOrder": 400216,
   "position": {
-   "x": 43.8204706830164,
-   "y": 42.718289248453
+   "x": 44,
+   "y": 43
   },
   "weather": "snow",
   "biome": "tundra"
@@ -942,8 +942,8 @@
   },
   "unlockOrder": 400217,
   "position": {
-   "x": 35.23,
-   "y": 25.09
+   "x": 35.5,
+   "y": 25
   },
   "weather": "snow",
   "biome": "tundra"
@@ -980,8 +980,8 @@
   },
   "unlockOrder": 400217.5,
   "position": {
-   "x": 29.9,
-   "y": 7.47
+   "x": 30,
+   "y": 7.5
   },
   "mart": {
    "name": "Sinnoh Mart",
@@ -1033,8 +1033,8 @@
   },
   "unlockOrder": 400218,
   "position": {
-   "x": 11.421838917673805,
-   "y": 58.681958707563844
+   "x": 11.5,
+   "y": 58.5
   },
   "biome": "coast"
  },
@@ -1058,8 +1058,8 @@
   },
   "unlockOrder": 400218.5,
   "position": {
-   "x": 5.0111394484062926,
-   "y": 57.493122169290714
+   "x": 5,
+   "y": 57.5
   },
   "mart": {
    "name": "Sinnoh Mart",
@@ -1109,8 +1109,8 @@
   },
   "unlockOrder": 400219,
   "position": {
-   "x": 18.688330964420814,
-   "y": 75.68588198984287
+   "x": 18.5,
+   "y": 75.5
   },
   "biome": "coast"
  },
@@ -1139,8 +1139,8 @@
   },
   "unlockOrder": 400220,
   "position": {
-   "x": 25.153361876575115,
-   "y": 76.37443818575328
+   "x": 25,
+   "y": 76.5
   },
   "biome": "coast"
  },
@@ -1166,8 +1166,8 @@
   },
   "unlockOrder": 400221,
   "position": {
-   "x": 27.500618737256225,
-   "y": 82.43695921038214
+   "x": 27.5,
+   "y": 82.5
   },
   "biome": "coast"
  },
@@ -1198,8 +1198,8 @@
   },
   "unlockOrder": 400222,
   "position": {
-   "x": 75.09,
-   "y": 55.1
+   "x": 75,
+   "y": 55.5
   },
   "biome": "coast"
  },
@@ -1224,8 +1224,8 @@
   },
   "unlockOrder": 400222.5,
   "position": {
-   "x": 87.10158387434797,
-   "y": 58.08467611398155
+   "x": 87,
+   "y": 58
   },
   "mart": {
    "name": "Sinnoh Mart",
@@ -1276,8 +1276,8 @@
   },
   "unlockOrder": 400223,
   "position": {
-   "x": 93.35705852822676,
-   "y": 56.30882642417882
+   "x": 93.5,
+   "y": 56.5
   },
   "biome": "coast"
  },
@@ -1304,7 +1304,7 @@
   "unlockOrder": 400224,
   "position": {
    "x": 98,
-   "y": 60.86100838718046
+   "y": 61
   },
   "biome": "coast"
  },
@@ -1334,8 +1334,8 @@
   },
   "unlockOrder": 400225,
   "position": {
-   "x": 64.31,
-   "y": 19.29
+   "x": 64,
+   "y": 19.5
   },
   "biome": "coast"
  },
@@ -1366,8 +1366,8 @@
   },
   "unlockOrder": 400226,
   "position": {
-   "x": 70.1,
-   "y": 16.05
+   "x": 70,
+   "y": 16
   },
   "biome": "coast"
  },
@@ -1403,8 +1403,8 @@
   },
   "unlockOrder": 400227,
   "position": {
-   "x": 77.06,
-   "y": 12.34
+   "x": 77,
+   "y": 12.5
   },
   "biome": "volcanic"
  },
@@ -1442,8 +1442,8 @@
   },
   "unlockOrder": 400228,
   "position": {
-   "x": 79.8331335866651,
-   "y": 18.78546467557102
+   "x": 80,
+   "y": 19
   },
   "biome": "desert"
  },
@@ -1476,8 +1476,8 @@
   },
   "unlockOrder": 400229,
   "position": {
-   "x": 82.3868664133349,
-   "y": 24.78453532442898
+   "x": 82.5,
+   "y": 24.5
   },
   "biome": "coast"
  },
@@ -1510,7 +1510,7 @@
   "unlockOrder": 400230,
   "position": {
    "x": 73,
-   "y": 24.51
+   "y": 24.5
   },
   "biome": "coast"
  },
@@ -1535,8 +1535,8 @@
   },
   "unlockOrder": 400231,
   "position": {
-   "x": 83.83674109222618,
-   "y": 45.49241720484085
+   "x": 84,
+   "y": 45.5
   },
   "biome": "coast"
  },
@@ -1569,8 +1569,8 @@
   },
   "unlockOrder": 400232,
   "position": {
-   "x": 85.82122304789964,
-   "y": 51.703071869818324
+   "x": 86,
+   "y": 51.5
   },
   "biome": "grassland"
  },
@@ -1595,8 +1595,8 @@
   },
   "unlockOrder": 400205.25,
   "position": {
-   "x": 23.1,
-   "y": 39.6
+   "x": 23,
+   "y": 39.5
   },
   "biome": "forest",
   "background": "/backgrounds/grassland.png"
@@ -1622,8 +1622,8 @@
   },
   "unlockOrder": 400207.25,
   "position": {
-   "x": 35.3,
-   "y": 55.4
+   "x": 35.5,
+   "y": 55.5
   },
   "biome": "mountain",
   "background": "/backgrounds/mountain.png"
@@ -1649,7 +1649,7 @@
   },
   "unlockOrder": 400203.75,
   "position": {
-   "x": 28.3,
+   "x": 28.5,
    "y": 54
   },
   "biome": "grassland",
@@ -1675,8 +1675,8 @@
   },
   "unlockOrder": 400206.25,
   "position": {
-   "x": 31.1,
-   "y": 32.6
+   "x": 31.5,
+   "y": 32.5
   },
   "biome": "cave",
   "background": "/backgrounds/cave.png"
@@ -1703,7 +1703,7 @@
   "unlockOrder": 400209.75,
   "position": {
    "x": 58.5,
-   "y": 39.7
+   "y": 39.5
   },
   "biome": "ruins",
   "background": "/backgrounds/grassland.png"
@@ -1729,8 +1729,8 @@
   },
   "unlockOrder": 400218.25,
   "position": {
-   "x": 5.9,
-   "y": 63.6
+   "x": 6,
+   "y": 63.5
   },
   "biome": "coast",
   "background": "/backgrounds/beach.png"
@@ -1755,8 +1755,8 @@
   },
   "unlockOrder": 400217.25,
   "position": {
-   "x": 32.6,
-   "y": 16.3
+   "x": 32.5,
+   "y": 16
   },
   "biome": "tundra",
   "background": "/backgrounds/grassland.png"
@@ -1783,7 +1783,7 @@
   "unlockOrder": 400227.25,
   "position": {
    "x": 84,
-   "y": 13.3
+   "y": 13.5
   },
   "biome": "mountain",
   "background": "/backgrounds/mountain.png"
@@ -1809,8 +1809,8 @@
   },
   "unlockOrder": 400201.75,
   "position": {
-   "x": 27.1,
-   "y": 67.7
+   "x": 27,
+   "y": 68
   },
   "biome": "coast",
   "background": "/backgrounds/beach.png"
@@ -1836,7 +1836,7 @@
   },
   "unlockOrder": 400217.25,
   "position": {
-   "x": 28.3,
+   "x": 28.5,
    "y": 20.5
   },
   "biome": "coast",
@@ -1863,8 +1863,8 @@
   },
   "unlockOrder": 400212.75,
   "position": {
-   "x": 55.8,
-   "y": 69.8
+   "x": 56,
+   "y": 70
   },
   "biome": "coast",
   "background": "/backgrounds/beach.png"
@@ -1891,7 +1891,7 @@
   "unlockOrder": 400205.25,
   "position": {
    "x": 24.5,
-   "y": 33.3
+   "y": 33.5
   },
   "biome": "ruins",
   "background": "/backgrounds/grassland.png"
@@ -1917,7 +1917,7 @@
   },
   "unlockOrder": 400214.25,
   "position": {
-   "x": 80.1,
+   "x": 80,
    "y": 40.5
   },
   "biome": "cave",
@@ -1944,8 +1944,8 @@
   },
   "unlockOrder": 400203.25,
   "position": {
-   "x": 10.1,
-   "y": 52.6
+   "x": 10,
+   "y": 52.5
   },
   "biome": "grassland",
   "background": "/backgrounds/grassland.png"
@@ -1972,7 +1972,7 @@
   "unlockOrder": 400204.75,
   "position": {
    "x": 16,
-   "y": 41.1
+   "y": 41
   },
   "biome": "grassland",
   "background": "/backgrounds/grassland.png"
@@ -1998,7 +1998,7 @@
   },
   "unlockOrder": 400212.25,
   "position": {
-   "x": 59.9,
+   "x": 60,
    "y": 56.5
   },
   "biome": "grassland",
@@ -2025,8 +2025,8 @@
   },
   "unlockOrder": 400214.25,
   "position": {
-   "x": 90.6,
-   "y": 44.9
+   "x": 90.5,
+   "y": 45
   },
   "biome": "coast",
   "background": "/backgrounds/beach.png"

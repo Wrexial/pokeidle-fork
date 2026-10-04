@@ -500,16 +500,60 @@
   "kanto": {
     "positions": {
       "pokemonMansion": {
-        "x": 13.1,
-        "y": 84.08
+        "x": 13,
+        "y": 84
       },
       "seafoamIslands": {
         "x": 29,
         "y": 88
       },
       "ceruleanCave": {
-        "x": 46.08,
-        "y": 7.74
+        "x": 46,
+        "y": 8
+      },
+      "cinnabarIsland": {
+        "x": 22,
+        "y": 88
+      },
+      "route4": {
+        "x": 46,
+        "y": 14
+      },
+      "ceruleanCity": {
+        "x": 54,
+        "y": 14
+      },
+      "route9": {
+        "x": 64,
+        "y": 14
+      },
+      "route24": {
+        "x": 54,
+        "y": 8
+      },
+      "route25": {
+        "x": 64,
+        "y": 8
+      },
+      "route7": {
+        "x": 46,
+        "y": 40
+      },
+      "diglettsCave": {
+        "x": 44,
+        "y": 46
+      },
+      "route16": {
+        "x": 38,
+        "y": 48
+      },
+      "fuchsiaCity": {
+        "x": 46,
+        "y": 72
+      },
+      "safariZone": {
+        "x": 46,
+        "y": 65.5
       }
     }
   },
@@ -850,6 +894,462 @@
       "galar-watchtower-ruins": {
         "x": 60.5,
         "y": 53
+      }
+    }
+  },
+  "sinnoh": {
+    "positions": {
+      "sinnoh-twinleaf-town": {
+        "x": 9.5,
+        "y": 78.5
+      },
+      "sinnoh-route-201": {
+        "x": 13,
+        "y": 73
+      },
+      "sinnoh-sandgem-town": {
+        "x": 20,
+        "y": 69.5
+      },
+      "sinnoh-route-202": {
+        "x": 14,
+        "y": 66
+      },
+      "sinnoh-jubilife-city": {
+        "x": 18,
+        "y": 61
+      },
+      "sinnoh-route-203": {
+        "x": 24.5,
+        "y": 60
+      },
+      "sinnoh-oreburgh-city": {
+        "x": 31.5,
+        "y": 60
+      },
+      "sinnoh-route-204": {
+        "x": 17.5,
+        "y": 54.5
+      },
+      "sinnoh-floaroma-town": {
+        "x": 18,
+        "y": 48
+      },
+      "sinnoh-route-205": {
+        "x": 25,
+        "y": 45.5
+      },
+      "sinnoh-eterna-city": {
+        "x": 31.5,
+        "y": 39.5
+      },
+      "sinnoh-route-206": {
+        "x": 36.5,
+        "y": 35.5
+      },
+      "sinnoh-route-207": {
+        "x": 33.5,
+        "y": 48
+      },
+      "sinnoh-route-208": {
+        "x": 41.5,
+        "y": 51
+      },
+      "sinnoh-hearthome-city": {
+        "x": 48,
+        "y": 54
+      },
+      "sinnoh-route-209": {
+        "x": 53.5,
+        "y": 51
+      },
+      "sinnoh-solaceon-town": {
+        "x": 59,
+        "y": 47.5
+      },
+      "sinnoh-route-210": {
+        "x": 53.5,
+        "y": 43
+      },
+      "sinnoh-celestic-town": {
+        "x": 48,
+        "y": 38
+      },
+      "sinnoh-route-211": {
+        "x": 37.5,
+        "y": 43
+      },
+      "sinnoh-route-212": {
+        "x": 53.5,
+        "y": 58
+      },
+      "sinnoh-pastoria-city": {
+        "x": 58,
+        "y": 63
+      },
+      "sinnoh-route-213": {
+        "x": 62,
+        "y": 68
+      },
+      "sinnoh-route-214": {
+        "x": 73,
+        "y": 39.5
+      },
+      "sinnoh-veilstone-city": {
+        "x": 73,
+        "y": 46
+      },
+      "sinnoh-route-215": {
+        "x": 64,
+        "y": 43
+      },
+      "sinnoh-route-216": {
+        "x": 44,
+        "y": 43
+      },
+      "sinnoh-route-217": {
+        "x": 35.5,
+        "y": 25
+      },
+      "sinnoh-snowpoint-city": {
+        "x": 30,
+        "y": 7.5
+      },
+      "sinnoh-route-218": {
+        "x": 11.5,
+        "y": 58.5
+      },
+      "sinnoh-canalave-city": {
+        "x": 5,
+        "y": 57.5
+      },
+      "sinnoh-route-219": {
+        "x": 18.5,
+        "y": 75.5
+      },
+      "sinnoh-sea-route-220": {
+        "x": 25,
+        "y": 76.5
+      },
+      "sinnoh-route-221": {
+        "x": 27.5,
+        "y": 82.5
+      },
+      "sinnoh-route-222": {
+        "x": 75,
+        "y": 55.5
+      },
+      "sinnoh-sunyshore-city": {
+        "x": 87,
+        "y": 58
+      },
+      "sinnoh-sea-route-223": {
+        "x": 93.5,
+        "y": 56.5
+      },
+      "sinnoh-route-224": {
+        "x": 98,
+        "y": 61
+      },
+      "sinnoh-route-225": {
+        "x": 64,
+        "y": 19.5
+      },
+      "sinnoh-sea-route-226": {
+        "x": 70,
+        "y": 16
+      },
+      "sinnoh-route-227": {
+        "x": 77,
+        "y": 12.5
+      },
+      "sinnoh-route-228": {
+        "x": 80,
+        "y": 19
+      },
+      "sinnoh-route-229": {
+        "x": 82.5,
+        "y": 24.5
+      },
+      "sinnoh-sea-route-230": {
+        "x": 73,
+        "y": 24.5
+      },
+      "sinnoh-raid": {
+        "x": 84,
+        "y": 45.5
+      },
+      "sinnoh-league": {
+        "x": 86,
+        "y": 51.5
+      },
+      "sinnoh-eterna-forest": {
+        "x": 23,
+        "y": 39.5
+      },
+      "sinnoh-mt-coronet": {
+        "x": 35.5,
+        "y": 55.5
+      },
+      "sinnoh-oreburgh-gate": {
+        "x": 28.5,
+        "y": 54
+      },
+      "sinnoh-wayward-cave": {
+        "x": 31.5,
+        "y": 32.5
+      },
+      "sinnoh-solaceon-ruins": {
+        "x": 58.5,
+        "y": 39.5
+      },
+      "sinnoh-iron-island": {
+        "x": 6,
+        "y": 63.5
+      },
+      "sinnoh-snowpoint-temple": {
+        "x": 32.5,
+        "y": 16
+      },
+      "sinnoh-stark-mountain": {
+        "x": 84,
+        "y": 13.5
+      },
+      "sinnoh-lake-verity": {
+        "x": 27,
+        "y": 68
+      },
+      "sinnoh-lake-acuity": {
+        "x": 28.5,
+        "y": 20.5
+      },
+      "sinnoh-lake-valor": {
+        "x": 56,
+        "y": 70
+      },
+      "sinnoh-old-chateau": {
+        "x": 24.5,
+        "y": 33.5
+      },
+      "sinnoh-turnback-cave": {
+        "x": 80,
+        "y": 40.5
+      },
+      "sinnoh-ravaged-path": {
+        "x": 10,
+        "y": 52.5
+      },
+      "sinnoh-fuego-ironworks": {
+        "x": 16,
+        "y": 41
+      },
+      "sinnoh-pokemon-mansion": {
+        "x": 60,
+        "y": 56.5
+      },
+      "sinnoh-sendoff-spring": {
+        "x": 90.5,
+        "y": 45
+      }
+    }
+  },
+  "kalos": {
+    "positions": {
+      "kalos-vaniville-town": {
+        "x": 68.5,
+        "y": 71.5
+      },
+      "kalos-route-1": {
+        "x": 66.5,
+        "y": 65.5
+      },
+      "kalos-aquacorde-town": {
+        "x": 60,
+        "y": 64.5
+      },
+      "kalos-route-2": {
+        "x": 64,
+        "y": 59
+      },
+      "kalos-route-3": {
+        "x": 57.5,
+        "y": 57.5
+      },
+      "kalos-santalune-city": {
+        "x": 60,
+        "y": 51.5
+      },
+      "kalos-route-4": {
+        "x": 56,
+        "y": 46.5
+      },
+      "kalos-lumiose-city": {
+        "x": 53,
+        "y": 40.5
+      },
+      "kalos-route-5": {
+        "x": 49,
+        "y": 47
+      },
+      "kalos-camphrier-town": {
+        "x": 44.5,
+        "y": 53
+      },
+      "kalos-route-6": {
+        "x": 34.5,
+        "y": 51.5
+      },
+      "kalos-route-7": {
+        "x": 29,
+        "y": 54
+      },
+      "kalos-cyllage-city": {
+        "x": 17,
+        "y": 54
+      },
+      "kalos-route-8": {
+        "x": 23,
+        "y": 56.5
+      },
+      "kalos-ambrette-town": {
+        "x": 21,
+        "y": 63
+      },
+      "kalos-route-9": {
+        "x": 19.5,
+        "y": 69
+      },
+      "kalos-route-10": {
+        "x": 11,
+        "y": 51.5
+      },
+      "kalos-geosenge-town": {
+        "x": 4.5,
+        "y": 49.5
+      },
+      "kalos-route-11": {
+        "x": 9,
+        "y": 44.5
+      },
+      "kalos-shalour-city": {
+        "x": 12.5,
+        "y": 39
+      },
+      "kalos-route-12": {
+        "x": 25.5,
+        "y": 37
+      },
+      "kalos-coumarine-city": {
+        "x": 39,
+        "y": 34
+      },
+      "kalos-route-13": {
+        "x": 46.5,
+        "y": 38
+      },
+      "kalos-route-14": {
+        "x": 51.5,
+        "y": 34
+      },
+      "kalos-laverre-city": {
+        "x": 49,
+        "y": 26
+      },
+      "kalos-route-15": {
+        "x": 60,
+        "y": 30
+      },
+      "kalos-dendemille-town": {
+        "x": 73.5,
+        "y": 35.5
+      },
+      "kalos-route-16": {
+        "x": 58,
+        "y": 36.5
+      },
+      "kalos-route-17": {
+        "x": 79,
+        "y": 38.5
+      },
+      "kalos-anistar-city": {
+        "x": 85.5,
+        "y": 40.5
+      },
+      "kalos-route-18": {
+        "x": 89.5,
+        "y": 45.5
+      },
+      "kalos-couriway-town": {
+        "x": 96,
+        "y": 49
+      },
+      "kalos-route-19": {
+        "x": 90.5,
+        "y": 53
+      },
+      "kalos-snowbelle-city": {
+        "x": 84,
+        "y": 50.5
+      },
+      "kalos-route-20": {
+        "x": 79.5,
+        "y": 56
+      },
+      "kalos-kiloude-city": {
+        "x": 94.5,
+        "y": 38
+      },
+      "kalos-route-21": {
+        "x": 86,
+        "y": 57.5
+      },
+      "kalos-route-22": {
+        "x": 71,
+        "y": 54
+      },
+      "kalos-raid": {
+        "x": 66.5,
+        "y": 31
+      },
+      "kalos-league": {
+        "x": 67,
+        "y": 37
+      },
+      "kalos-santalune-forest": {
+        "x": 65.5,
+        "y": 48.5
+      },
+      "kalos-connecting-cave": {
+        "x": 29,
+        "y": 60.5
+      },
+      "kalos-glittering-cave": {
+        "x": 14.5,
+        "y": 63
+      },
+      "kalos-terminus-cave": {
+        "x": 83.5,
+        "y": 34
+      },
+      "kalos-frost-cavern": {
+        "x": 74,
+        "y": 42.5
+      },
+      "kalos-lost-hotel": {
+        "x": 63,
+        "y": 42.5
+      },
+      "kalos-sea-spirits-den": {
+        "x": 96,
+        "y": 56
+      },
+      "kalos-pokemon-village": {
+        "x": 79,
+        "y": 46.5
+      },
+      "kalos-azure-bay": {
+        "x": 23,
+        "y": 49.5
       }
     }
   }

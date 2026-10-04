@@ -164,12 +164,14 @@
     <button id="fit">Fit</button>
     <button id="zoom-in">+</button>
     <button id="zoom-out">&minus;</button>
+    <button id="straighten" title="Snap near-aligned nodes onto shared lines so roads read straight">Straighten</button>
   </div>
   <input id="search" type="text" placeholder="Search name or id…" />
   <div class="row tight" style="flex-wrap:wrap">
     <label class="hint"><input type="checkbox" id="show-hidden" /> Show zone sub-areas</label>
     <label class="hint"><input type="checkbox" id="show-labels" checked /> All labels</label>
     <label class="hint"><input type="checkbox" id="snap" /> Snap 0.5</label>
+    <label class="hint"><input type="checkbox" id="clamp" /> <b>Clamp</b></label>
     <label class="hint"><input type="checkbox" id="show-grid" /> Grid</label>
     <label class="hint"><input type="checkbox" id="road-mode" /> <b>Edit roads</b></label>
   </div>
@@ -218,8 +220,7 @@
 'use strict'
 
 const SVG_NS = 'http://www.w3.org/2000/svg'
-const STORAGE_KEY = 'pi-map-editor-v1'
-const ROAD_STORAGE_KEY = 'pi-map-road-editor-v1'
+const CACHE_KEY = 'pi-map-editor-v2'
 const DOT_R = { town: 1.3, route: 1.0, zone: 1.6, raid: 1.3, facility: 1.1 }
 const LEGEND = [
   ['town', 'Town / league', '#d03020', 'square'],
@@ -240,7 +241,9 @@ const els = {
   showHidden: document.getElementById('show-hidden'),
   showLabels: document.getElementById('show-labels'),
   snap: document.getElementById('snap'),
+  clamp: document.getElementById('clamp'),
   showGrid: document.getElementById('show-grid'),
+  straighten: document.getElementById('straighten'),
   roadMode: document.getElementById('road-mode'),
   stage: document.getElementById('stage'),
   legend: document.getElementById('legend'),
@@ -273,10 +276,14 @@ let selectedId = null
 let selectedIds = new Set()
 /** active box-select rectangle in map units, or null */
 let marquee = null
-/** overrides: regionId -> nodeId -> {x, y} */
-let overrides = loadOverrides()
+/** overrides: regionId -> nodeId -> {x, y} — the working, cumulative set */
+let overrides = {}
 /** roadEdits: regionId -> "a|b" -> 'removed' | 'added' */
-let roadEdits = loadRoadEdits()
+let roadEdits = {}
+/** the committed overrides file (tools/map-layout-overrides.json) */
+let fileOverrides = {}
+/** hash of that file's text, so a stale localStorage cache can be dropped */
+let fileHash = null
 /** first node picked while adding a road */
 let pendingNode = null
 /** view: centre + size (viewBox is size x size) */
@@ -286,59 +293,79 @@ const FIT_SIZE = 106
 let drag = null
 let searchTerm = ''
 
-function loadOverrides() {
+function loadCache() {
   try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}')
+    return JSON.parse(localStorage.getItem(CACHE_KEY) || 'null')
   } catch {
-    return {}
+    return null
   }
 }
-function saveOverrides() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(overrides))
-}
-function loadRoadEdits() {
-  try {
-    return JSON.parse(localStorage.getItem(ROAD_STORAGE_KEY) || '{}')
-  } catch {
-    return {}
-  }
-}
-function saveRoadEdits() {
-  localStorage.setItem(ROAD_STORAGE_KEY, JSON.stringify(roadEdits))
+function saveCache() {
+  localStorage.setItem(CACHE_KEY, JSON.stringify({ hash: fileHash, overrides, roadEdits }))
 }
 
-/** Fetch the committed overrides file so the export can stay cumulative. */
+function hashString(text) {
+  let hash = 5381
+  for (let i = 0; i < text.length; i++) hash = ((hash << 5) + hash + text.charCodeAt(i)) | 0
+  return String(hash)
+}
+
+/** Fetch the committed overrides file, recording its hash for cache checks. */
 async function loadFileOverrides() {
   try {
     const res = await fetch('/tools/map-layout-overrides.json')
-    return res.ok ? await res.json() : {}
+    if (!res.ok) return {}
+    const text = await res.text()
+    fileHash = hashString(text)
+    return JSON.parse(text)
   } catch {
     return {}
+  }
+}
+
+/** Pull one region's positions/roads out of the overrides file. */
+function seedRegion(file, region) {
+  const entry = file[region] || {}
+  const positions = {}
+  for (const [id, pos] of Object.entries(entry.positions || {})) positions[id] = { x: pos.x, y: pos.y }
+  const roads = {}
+  for (const [a, b] of entry.roads?.remove || []) roads[edgeKey(a, b)] = 'removed'
+  for (const [a, b] of entry.roads?.add || []) roads[edgeKey(a, b)] = 'added'
+  return { positions, roads }
+}
+
+/** Reset the working set (all of it, or one region) back to the overrides file. */
+function resetFromFile(region) {
+  for (const id of region ? [region] : Object.keys(fileOverrides)) {
+    const seeded = seedRegion(fileOverrides, id)
+    if (Object.keys(seeded.positions).length) overrides[id] = seeded.positions
+    else delete overrides[id]
+    if (Object.keys(seeded.roads).length) roadEdits[id] = seeded.roads
+    else delete roadEdits[id]
   }
 }
 
 /**
- * Seed localStorage from the overrides file, without overwriting anything
- * already there (the current session wins). This is what makes the export
- * cumulative: an override already baked into the committed data would
- * otherwise drop out, because the editor compares against that data.
+ * Start from the overrides file, then restore this browser's session edits if
+ * they were made against the same file (same hash). If the file changed
+ * underneath — e.g. a straighten pass — the stale cache is ignored so the
+ * editor can't silently undo it. The export is therefore always cumulative.
  */
-function mergeFileOverrides(file) {
-  for (const [region, entry] of Object.entries(file)) {
-    overrides[region] = overrides[region] || {}
-    for (const [id, pos] of Object.entries(entry.positions || {}))
-      if (!overrides[region][id]) overrides[region][id] = { x: pos.x, y: pos.y }
-    roadEdits[region] = roadEdits[region] || {}
-    const have = new Set(Object.keys(roadEdits[region]))
-    for (const state of ['remove', 'add']) {
-      for (const [a, b] of entry.roads?.[state] || []) {
-        const key = edgeKey(a, b)
-        if (have.has(key)) continue
-        roadEdits[region][key] = state === 'remove' ? 'removed' : 'added'
-        have.add(key)
-      }
+function initState(file) {
+  fileOverrides = file
+  overrides = {}
+  roadEdits = {}
+  resetFromFile()
+  const cache = loadCache()
+  if (cache && cache.hash === fileHash) {
+    for (const [region, entries] of Object.entries(cache.overrides || {})) {
+      overrides[region] = overrides[region] || {}
+      for (const [id, pos] of Object.entries(entries)) overrides[region][id] = pos
     }
-    if (!Object.keys(roadEdits[region]).length) delete roadEdits[region]
+    for (const [region, entries] of Object.entries(cache.roadEdits || {})) {
+      roadEdits[region] = roadEdits[region] || {}
+      for (const [key, state] of Object.entries(entries)) roadEdits[region][key] = state
+    }
   }
 }
 
@@ -353,12 +380,9 @@ function isChanged(id) {
   return Math.abs(cur.x - base.x) > 1e-6 || Math.abs(cur.y - base.y) > 1e-6
 }
 function setPos(id, x, y) {
-  const base = map[id].position
   overrides[regionId] = overrides[regionId] || {}
-  if (Math.abs(x - base.x) < 1e-6 && Math.abs(y - base.y) < 1e-6) delete overrides[regionId][id]
-  else overrides[regionId][id] = { x: round2(x), y: round2(y) }
-  if (!Object.keys(overrides[regionId]).length) delete overrides[regionId]
-  saveOverrides()
+  overrides[regionId][id] = { x: round2(x), y: round2(y) }
+  saveCache()
 }
 function round2(n) {
   return Math.round(n * 100) / 100
@@ -384,6 +408,74 @@ function setSingleSelection(id) {
 function clearSelection() {
   selectedIds = new Set()
   selectedId = null
+}
+
+/** How close (map units) a dragged node snaps onto another node's x or y. */
+const ALIGN = 1
+/**
+ * Clamp a dragged coordinate into 0..100 and, when it is close, onto another
+ * node's x or y so the road between them comes out straight.
+ * @param {Iterable<string>} movingIds the nodes being dragged (ignored)
+ */
+function alignToNeighbours(movingIds, x, y) {
+  x = Math.max(BOUNDS.min, Math.min(BOUNDS.max, x))
+  y = Math.max(BOUNDS.min, Math.min(BOUNDS.max, y))
+  const moving = new Set(movingIds)
+  let bestX = null
+  let bestY = null
+  let bestXd = ALIGN
+  let bestYd = ALIGN
+  for (const id of Object.keys(map)) {
+    if (moving.has(id)) continue
+    const p = pos(id)
+    const dx = Math.abs(p.x - x)
+    if (dx < bestXd) { bestXd = dx; bestX = p.x }
+    const dy = Math.abs(p.y - y)
+    if (dy < bestYd) { bestYd = dy; bestY = p.y }
+  }
+  return { x: bestX != null ? bestX : x, y: bestY != null ? bestY : y }
+}
+
+/** One-dimensional value clustering, mirrored from tools/lib/straighten.cjs. */
+function clusterAxis(values) {
+  const TOLERANCE = 0.4
+  const sorted = [...values].sort((a, b) => a - b)
+  const clusters = []
+  for (const value of sorted) {
+    let best = null
+    let bestDistance = Infinity
+    for (const cluster of clusters) {
+      const distance = Math.abs(cluster.centre - value)
+      if (distance <= TOLERANCE && distance < bestDistance) {
+        best = cluster
+        bestDistance = distance
+      }
+    }
+    if (best) {
+      best.members.push(value)
+      best.centre = best.members.reduce((sum, member) => sum + member, 0) / best.members.length
+    } else {
+      clusters.push({ members: [value], centre: value })
+    }
+  }
+  const lookup = new Map()
+  for (const cluster of clusters) {
+    const target = Math.round(cluster.centre * 2) / 2
+    for (const member of cluster.members) lookup.set(member, target)
+  }
+  return lookup
+}
+
+/** Snap the current region's visible nodes onto shared lines. */
+function straightenRegion() {
+  const ids = Object.keys(map).filter((id) => !map[id].hidden)
+  const xs = clusterAxis(ids.map((id) => pos(id).x))
+  const ys = clusterAxis(ids.map((id) => pos(id).y))
+  for (const id of ids) {
+    const p = pos(id)
+    setPos(id, xs.get(p.x), ys.get(p.y))
+  }
+  render()
 }
 
 /** Every edge the data has, as sorted keys. */
@@ -412,7 +504,7 @@ function toggleEdge(a, b) {
   if (!current) roadEdits[regionId][key] = original ? 'removed' : 'added'
   else delete roadEdits[regionId][key]
   if (!Object.keys(roadEdits[regionId]).length) delete roadEdits[regionId]
-  saveRoadEdits()
+  saveCache()
 }
 
 function visibleIds() {
@@ -795,17 +887,33 @@ function onMapPointerDown(event) {
 function onPointerMove(event) {
   if (!drag) return
   const p = svgPoint(event)
-  let dx = p.x - drag.start.x
-  let dy = p.y - drag.start.y
+  const grabbed = drag.anchors[drag.grabbed]
+  let targetX = grabbed.x + (p.x - drag.start.x)
+  let targetY = grabbed.y + (p.y - drag.start.y)
   if (els.snap.checked) {
-    // Snap the grabbed node, then move the rest by the same delta.
-    const grabbed = drag.anchors[drag.grabbed]
-    dx = Math.round((grabbed.x + dx) * 2) / 2 - grabbed.x
-    dy = Math.round((grabbed.y + dy) * 2) / 2 - grabbed.y
+    targetX = Math.round(targetX * 2) / 2
+    targetY = Math.round(targetY * 2) / 2
   }
+  if (els.clamp.checked) {
+    // Align the grabbed node to a neighbour, then move the rest by the same delta.
+    const aligned = alignToNeighbours(drag.ids, targetX, targetY)
+    targetX = aligned.x
+    targetY = aligned.y
+  }
+  const dx = targetX - grabbed.x
+  const dy = targetY - grabbed.y
   for (const id of drag.ids) {
     const anchor = drag.anchors[id]
-    setPos(id, clamp(anchor.x + dx), clamp(anchor.y + dy))
+    let nx = anchor.x + dx
+    let ny = anchor.y + dy
+    if (els.clamp.checked) {
+      nx = Math.max(BOUNDS.min, Math.min(BOUNDS.max, nx))
+      ny = Math.max(BOUNDS.min, Math.min(BOUNDS.max, ny))
+    } else {
+      nx = clamp(nx)
+      ny = clamp(ny)
+    }
+    setPos(id, nx, ny)
   }
   render()
 }
@@ -835,7 +943,13 @@ function onKeyDown(event) {
   event.preventDefault()
   for (const id of selectedIds) {
     const p = pos(id)
-    setPos(id, p.x + dx, p.y + dy)
+    let nx = p.x + dx
+    let ny = p.y + dy
+    if (els.clamp.checked) {
+      nx = Math.max(BOUNDS.min, Math.min(BOUNDS.max, nx))
+      ny = Math.max(BOUNDS.min, Math.min(BOUNDS.max, ny))
+    }
+    setPos(id, nx, ny)
   }
   render()
 }
@@ -884,6 +998,7 @@ function bind() {
   els.fit.addEventListener('click', () => { view.cx = 50; view.cy = 50; view.size = FIT_SIZE; render() })
   els.zoomIn.addEventListener('click', () => zoom(0.8))
   els.zoomOut.addEventListener('click', () => zoom(1.25))
+  els.straighten.addEventListener('click', straightenRegion)
   els.search.addEventListener('input', () => { searchTerm = els.search.value.trim(); render() })
   els.search.addEventListener('keydown', (event) => {
     if (event.key !== 'Enter' || !searchTerm) return
@@ -913,22 +1028,24 @@ function bind() {
     URL.revokeObjectURL(a.href)
   })
   els.revertRegion.addEventListener('click', () => {
-    if (regionId) delete overrides[regionId]
-    saveOverrides()
+    if (regionId) resetFromFile(regionId)
+    saveCache()
     render()
   })
   els.revertRoads.addEventListener('click', () => {
-    if (regionId) delete roadEdits[regionId]
-    saveRoadEdits()
+    if (regionId) {
+      const seeded = seedRegion(fileOverrides, regionId)
+      if (Object.keys(seeded.roads).length) roadEdits[regionId] = seeded.roads
+      else delete roadEdits[regionId]
+    }
+    saveCache()
     pendingNode = null
     render()
   })
   els.revertAll.addEventListener('click', () => {
     if (confirm('Discard every change in every region?')) {
-      overrides = {}
-      roadEdits = {}
-      saveOverrides()
-      saveRoadEdits()
+      resetFromFile()
+      saveCache()
       render()
     }
   })
@@ -950,7 +1067,7 @@ async function init() {
   }
   populateRegions()
   bind()
-  mergeFileOverrides(await loadFileOverrides())
+  initState(await loadFileOverrides())
   if (new URLSearchParams(window.location.search).has('roads')) els.roadMode.checked = true
   const hash = window.location.hash.replace('#', '')
   const first = regions.find((r) => r.id === hash) || regions[0]

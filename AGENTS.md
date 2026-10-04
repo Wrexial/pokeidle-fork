@@ -859,6 +859,15 @@ One-off scripts used to build the data JSON (not run during dev/build):
   `tools/map-layout-overrides.json` onto the committed map data (via
   `lib/map-overrides.cjs`). Run it **last**, after a regeneration and the
   automatic road passes, so it wins. Idempotent (`--dry`).
+- `straighten-map.cjs` — data-only pass that snaps near-aligned nodes onto
+  shared lines so the elbow roads read straight (`lib/straighten.cjs`), writing
+  the result into `map-layout-overrides.json`; then run `apply-map-layout.cjs`.
+  `--regions=hoenn,johto` limits it, `--dry` previews; defaults to every region.
+  Idempotent.
+- `lib/straighten.cjs` — the 1D coordinate clustering behind the straighten
+  pass (also mirrored in map-editor.html's Straighten button); values within
+  `TOLERANCE` merge onto their rounded mean, kept below the 0.5 grid step so the
+  pass is idempotent.
 - `map-layout-overrides.json` — the hand-tuning record for the Town Map, in the
   map editor's export shape:
   `{ region: { positions: { id: { x, y } }, roads: { remove: [[a,b]], add: [[a,b]] } } }`.
@@ -871,7 +880,10 @@ One-off scripts used to build the data JSON (not run during dev/build):
   (click + arrow keys to nudge, Shift for whole units). Select several nodes with
   Shift/Ctrl-click, Shift/Ctrl-drag a box, or click a changes/road entry; drag
   any selected node (or nudge) to move them all together, and Escape/Clear
-  deselects. The 0..100 game bounds
+  deselects. "Clamp" keeps dragged nodes inside 0..100 and snaps the grabbed
+  node onto a nearby node's x or y so the road between them comes out straight;
+  "Straighten" runs that alignment (via lib/straighten.cjs) over the whole
+  region at once. The 0..100 game bounds
   are drawn as a dashed frame with the outside shaded, and any node outside them
   gets a red ring plus a sidebar warning (and a "Pull all into bounds" button),
   since the game canvas clips to 0..100. Tick "Edit roads" (or
@@ -879,8 +891,10 @@ One-off scripts used to build the data JSON (not run during dev/build):
   to add one; removed roads show red/dashed and added ones cyan. Changes persist
   in `localStorage` plus the committed `map-layout-overrides.json` (fetched at
   `/tools/map-layout-overrides.json`), so the copy block is always cumulative
-  even for overrides already applied to the data. The "Changes" list still only
-  shows genuine moves. Open it from the dev server at
+  even for overrides already applied to the data. The cache records the file's
+  hash, so a pass that rewrites the file (e.g. straighten) invalidates a stale
+  session instead of being silently undone. The "Changes" list still only shows
+  genuine moves. Open it from the dev server at
   `/tools/map-editor.html` (it fetches `/data/map-data/<region>.json` and the
   overrides file). Not part of the build; no generator needed.
 - `lib/zone-layout.cjs` — shared `spreadSubAreaPositions` ring layout for a

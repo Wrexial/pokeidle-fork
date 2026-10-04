@@ -732,12 +732,12 @@ export function TownMap() {
               transform: `translate(${view.x}px, ${view.y}px) scale(${view.scale})`,
             },
             children: [
-              jsx('svg', {
+              jsxs('svg', {
                 className: 'town-map-terrain',
                 viewBox: '0 0 100 100',
                 preserveAspectRatio: 'none',
                 children: [
-                  jsx('defs', {
+                  jsxs('defs', {
                     children: [
                       jsx('filter', {
                         id: 'town-terrain-water',

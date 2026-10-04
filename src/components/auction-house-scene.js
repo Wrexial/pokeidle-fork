@@ -133,7 +133,7 @@ export function AuctionHouseScene() {
           jsxs('div', {
             className: 'auction-current',
             children: [
-              jsxs('span', {
+              jsx('span', {
                 className: 'auction-price',
                 children: `$${auction.price.toLocaleString()}`,
               }),
@@ -150,7 +150,7 @@ export function AuctionHouseScene() {
           jsx('div', {
             className: 'auction-bidders',
             children: auction.bidders.map((bidder) =>
-              jsxs(
+              jsx(
                 'span',
                 {
                   className: `auction-bidder${

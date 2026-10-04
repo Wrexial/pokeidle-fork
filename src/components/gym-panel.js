@@ -78,7 +78,7 @@ export function GymPanel({ onOpenShop }) {
   return jsxs('div', {
     className: 'gym-panel',
     children: [
-      jsxs('div', {
+      jsx('div', {
         className: 'gym-section-title',
         style: { marginBottom: '4px' },
         children: `${region?.name ?? 'Kanto'} League`,

@@ -226,14 +226,14 @@ export function BattleRoyalScene() {
       jsxs('div', {
         className: 'minigame-scene-body',
         children: phase === 'done'
-          ? jsx(MinigameRewardScreen, {
+          ? [jsx(MinigameRewardScreen, {
               prize: result,
               onCollect: leave,
               summary: jsx('span', {
                 className: 'royal-wave-summary',
                 children: `${wins} opponent${wins === 1 ? '' : 's'} beaten \u00b7 ${battleRoyalRank(wins).label}`,
               }),
-            })
+            })]
           : [
               jsxs('div', {
                 className: 'royal-arena',

@@ -170,14 +170,14 @@ export function PuzzleLeagueScene() {
       jsxs('div', {
         className: 'minigame-scene-body',
         children: done
-          ? jsx(MinigameRewardScreen, {
+          ? [jsx(MinigameRewardScreen, {
               prize,
               onCollect: leave,
               summary: jsx('span', {
                 className: 'puzzle-solved',
                 children: `Score ${score}`,
               }),
-            })
+            })]
           : [
               jsx('div', {
                 className: 'match3-grid',

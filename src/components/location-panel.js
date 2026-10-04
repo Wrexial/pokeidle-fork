@@ -529,7 +529,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
             className: 'location-section-title',
             children: 'Areas',
           }),
-          jsxs('p', {
+          jsx('p', {
             className: 'settings-hint',
             children: 'Pick an area to travel there and battle the Pokemon that live in it.',
           }),

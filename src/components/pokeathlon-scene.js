@@ -274,10 +274,9 @@ export function PokeathlonScene() {
                       children: SPRINT_INSTRUCTION,
                     }),
                     jsx('span', {
-                      key: countdown,
                       className: 'athlon-ready-count',
                       children: countdown > 0 ? countdown : 'GO!',
-                    }),
+                    }, countdown),
                   ],
                 })
               : eventIndex === 0

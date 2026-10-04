@@ -90,11 +90,11 @@ export function MiningScene() {
       jsxs('div', {
         className: 'minigame-scene-body',
         children: showReward
-          ? jsx(MinigameRewardScreen, {
+          ? [jsx(MinigameRewardScreen, {
               prize: { items: found },
               onCollect: leaveAndClaim,
               buttonLabel: 'COLLECT & LEAVE',
-            })
+            })]
           : [
           jsx('div', {
             className: 'mining-grid',

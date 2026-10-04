@@ -166,7 +166,7 @@ export function PokeRadarScene() {
       jsxs('div', {
         className: 'minigame-scene-body',
         children: phase === 'done'
-          ? jsx(MinigameRewardScreen, {
+          ? [jsx(MinigameRewardScreen, {
               prize,
               onCollect: leave,
               summary: jsx('span', {
@@ -175,7 +175,7 @@ export function PokeRadarScene() {
                   ? `Chain of ${result.chain} \u00b7 +${result.points} chain level${result.points === 1 ? '' : 's'}`
                   : '',
               }),
-            })
+            })]
           : [
           jsxs('div', {
             className: 'radar-target',

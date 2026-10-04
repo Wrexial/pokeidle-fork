@@ -206,7 +206,7 @@ export function PicnicScene() {
         className: 'minigame-scene-header',
         children: [
           jsx('span', { className: 'minigame-scene-title', children: 'Picnic' }),
-          jsxs('span', {
+          jsx('span', {
             className: 'minigame-scene-tally',
             children:
               stage === 'choose'

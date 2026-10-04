@@ -116,6 +116,7 @@ export const CHANGELOG = [
         {
           heading: 'Fixes',
           items: [
+            'Milestone rewards are paid the moment they are earned: the achievement checker now also watches the party, box, bag and minigame records, so a TM, a new team member, a maxed friendship or a cleared minigame is rewarded straight away instead of waiting for the next battle stat to tick',
             'The player guide now lists the correct shiny odds: base odds are 1 in 4,096 and the per-generation Shiny Charm runs from 1 in 2,048 for the first completed generation to 1 in 256 when all nine are done (it still said 1 in 8,192), and swarms last 256 battles rather than 50',
             'A location whose name contains "fall" \u2014 a waterfall route, or Fallarbor Town \u2014 no longer makes the battle background tint as if it were autumn',
             'The guaranteed shiny is now Poke Radar-only: a run of ordinary wild encounters builds the odds multiplier again (1\u00d7 / 2\u00d7 / 3\u00d7 / 4\u00d7 at 40 / 80 / 120 in a row) but no longer forces a shiny, and a lucky ordinary shiny no longer raises the radar\u2019s next guaranteed-shiny target',

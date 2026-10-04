@@ -198,7 +198,7 @@ export function DynamaxAdventuresScene() {
       jsxs('div', {
         className: 'minigame-scene-body',
         children: phase === 'done'
-          ? jsx(MinigameRewardScreen, {
+          ? [jsx(MinigameRewardScreen, {
               prize: result,
               onCollect: leave,
               summary: caught
@@ -220,7 +220,7 @@ export function DynamaxAdventuresScene() {
                     ],
                   })
                 : undefined,
-            })
+            })]
           : [
               phase === 'scout'
                 ? jsxs('div', {

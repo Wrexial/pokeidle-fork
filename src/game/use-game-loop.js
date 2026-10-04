@@ -1047,6 +1047,13 @@ export function useGameLoop() {
       state.regionPrestige,
       state.towerBest,
       state.money,
+      // Achievements also read party/box (owned Pokemon, level 100, friendship),
+      // the bag (TMs) and the minigame records, so claim them when any of those
+      // change too instead of waiting for an unrelated battle stat to tick.
+      state.party,
+      state.box,
+      state.inventory,
+      state.minigameRecords,
       state.rewardedAchievements,
       dispatch,
     ]))

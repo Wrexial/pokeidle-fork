@@ -132,14 +132,14 @@ export function VoltorbFlipScene() {
       jsxs('div', {
         className: 'minigame-scene-body',
         children: rewardVisible
-          ? jsx(MinigameRewardScreen, {
+          ? [jsx(MinigameRewardScreen, {
               prize,
               onCollect: collectReward,
               summary: jsx('span', {
                 className: 'voltorb-summary-score',
                 children: `Banked $${banked.toLocaleString()}`,
               }),
-            })
+            })]
           : [
           jsx('div', {
             className: `voltorb-board${exploding ? ' exploded' : ''}${revealed ? ' revealed' : ''}`,

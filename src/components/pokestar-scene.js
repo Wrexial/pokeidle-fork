@@ -61,7 +61,7 @@ export function PokestarScene() {
         className: 'minigame-scene-header',
         children: [
           jsx('span', { className: 'minigame-scene-title', children: 'Pok\u00e9star Studios' }),
-          jsxs('span', {
+          jsx('span', {
             className: 'minigame-scene-tally',
             children:
               phase === 'done'

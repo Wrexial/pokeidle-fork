@@ -197,7 +197,7 @@ export function SafariScene() {
       jsxs('div', {
         className: 'safari-topbar',
         children: [
-          jsxs('span', {
+          jsx('span', {
             className: 'safari-heading',
             children: area ? `Safari Zone \u00b7 ${area.name}` : 'Safari Zone',
           }),

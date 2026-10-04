@@ -114,7 +114,7 @@ export function CurryScene() {
         className: 'minigame-scene-header',
         children: [
           jsx('span', { className: 'minigame-scene-title', children: 'Curry Cooking' }),
-          jsxs('span', {
+          jsx('span', {
             className: 'minigame-scene-tally',
             children:
               phase === 'choose'
@@ -175,9 +175,8 @@ export function CurryScene() {
                   children: [
                     jsx('span', {
                       className: 'curry-countdown-number',
-                      key: countdown,
                       children: countdown,
-                    }),
+                    }, countdown),
                     jsx('span', {
                       className: 'curry-countdown-hint',
                       children: `Get ready to fan!${ingredient ? ` \u00b7 ${ingredient.name}` : ''}`,

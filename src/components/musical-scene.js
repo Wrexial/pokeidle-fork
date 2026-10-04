@@ -202,10 +202,9 @@ export function MusicalScene() {
                 children: [
                   jsx('span', { className: 'musical-hud-label', children: 'SCORE' }),
                   jsx('span', {
-                    key: score,
                     className: 'musical-score-value',
                     children: score,
-                  }),
+                  }, score),
                 ],
               }),
               jsx('span', {
@@ -239,13 +238,11 @@ export function MusicalScene() {
                 }),
                 combo >= 2 &&
                   jsx('div', {
-                    key: combo,
                     className: `musical-combo${combo >= 5 ? ' hot' : ''}`,
                     children: `COMBO \u00d7${combo}`,
-                  }),
+                  }, combo),
                 feedback &&
                   jsxs('div', {
-                    key: feedback.key,
                     className: `musical-feedback grade-${feedback.grade}`,
                     children: [
                       jsx('span', {
@@ -258,7 +255,7 @@ export function MusicalScene() {
                           children: `+${feedback.points}`,
                         }),
                     ],
-                  }),
+                  }, feedback.key),
                 jsx('div', {
                   className: 'musical-track',
                   children: MUSICAL_LANES.map((laneName, lane) => {

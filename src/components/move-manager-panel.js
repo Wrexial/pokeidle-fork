@@ -160,7 +160,7 @@ export function MoveManagerPanel({ pokemon, onClose }) {
                     className: 'move-panel-item-stats',
                     children: formatMoveAccuracy(moveDef.accuracy),
                   }),
-                  jsxs('span', {
+                  jsx('span', {
                     className: 'move-panel-item-level',
                     children: isTm
                       ? locked

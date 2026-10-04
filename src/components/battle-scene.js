@@ -527,9 +527,8 @@ export function BattleScene() {
             damageFloat?.target === 'enemy' &&
               jsx('span', {
                 className: 'damage-float',
-                key: `enemy-float-${damageFloat.key}`,
                 children: `-${damageFloat.amount}`,
-              }),
+              }, `enemy-float-${damageFloat.key}`),
             protectEffect?.target === 'enemy' && !protectEffect.failed &&
               jsx('div', { className: 'protect-shield' }),
             protectEffect?.target === 'enemy' &&
@@ -563,9 +562,8 @@ export function BattleScene() {
           damageFloat?.target === 'player' &&
             jsx('span', {
               className: 'damage-float',
-              key: `player-float-${damageFloat.key}`,
               children: `-${damageFloat.amount}`,
-            }),
+            }, `player-float-${damageFloat.key}`),
           protectEffect?.target === 'player' && !protectEffect.failed &&
             jsx('div', { className: 'protect-shield' }),
           protectEffect?.target === 'player' &&

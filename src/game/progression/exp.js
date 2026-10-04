@@ -1,19 +1,18 @@
 // // Experience awards shared by wild, trainer and Battle Tower battles. Split from game/progression.js.
 
-import { moveData, pokemonSpecies } from '../../data/gameData.js'
+import { pokemonSpecies } from '../../data/gameData.js'
 import { expShareActiveMultiplier, expSharePartyMultiplier } from '../../data/config.js'
 import { calculateExpYield, calculatePokemonStats, getLevelUpResults, isBattleReady } from '../pokemon.js'
 
 /**
- * Build an `APPLY_SHARED_EXP` entry for a party member, dispatching the
- * move-learning logs as a side effect.
- * @param {(action: GameAction) => void} dispatch
+ * Build an `APPLY_SHARED_EXP` entry for a party member. The reducer logs the
+ * moves actually learned once it applies the entry.
  * @param {number} partyIndex
  * @param {Pokemon} member
  * @param {number} expGained
  * @returns {{ partyIndex: number, pokemonId: string, expGained: number, newLevel?: number, newMoves?: string[], newStats?: { maxHp: number, attack: number, defense: number, spAttack: number, spDefense: number, speed: number } }}
  */
-function buildSharedExpEntry(dispatch, partyIndex, member, expGained) {
+function buildSharedExpEntry(partyIndex, member, expGained) {
   const memberSpecies = pokemonSpecies[member.speciesKey],
     memberTotalExp = member.totalExp + expGained,
     memberLevelUps = getLevelUpResults(
@@ -31,16 +30,6 @@ function buildSharedExpEntry(dispatch, partyIndex, member, expGained) {
       member.nature
     ),
     memberNewMoves = memberLevelUps.flatMap((entry) => entry.newMoves)
-  memberNewMoves.forEach((moveId) => {
-    const moveDef = moveData[moveId]
-    moveDef &&
-      dispatch({
-        type: 'ADD_LOG',
-        payload: {
-          message: `${member.name} learned ${moveDef.name}!`,
-        },
-      })
-  })
   return {
     partyIndex,
     pokemonId: member.id,
@@ -116,32 +105,22 @@ export function awardExperience(dispatch, playerPokemon, enemyPokemon, multiplie
     const lastLevelUp = levelUps[levelUps.length - 1],
       newStats = calculatePokemonStats(playerSpecies, lastLevelUp.newLevel, playerPokemon.ivs, playerPokemon.nature),
       newMoves = levelUps.flatMap((moveId) => moveId.newMoves)
-    ;(newMoves.forEach((moveId) => {
-      const moveDef = moveData[moveId]
-      moveDef &&
-        dispatch({
-          type: 'ADD_LOG',
-          payload: {
-            message: `${playerPokemon.name} learned ${moveDef.name}!`,
-          },
-        })
-    }),
-      dispatch({
-        type: 'APPLY_EXP',
-        payload: {
-          expGained: finalExp,
-          newLevel: lastLevelUp.newLevel,
-          newMoves,
-          newStats: {
-            maxHp: newStats.hp,
-            attack: newStats.attack,
-            defense: newStats.defense,
-            spAttack: newStats.spAttack,
-            spDefense: newStats.spDefense,
-            speed: newStats.speed,
-          },
+    dispatch({
+      type: 'APPLY_EXP',
+      payload: {
+        expGained: finalExp,
+        newLevel: lastLevelUp.newLevel,
+        newMoves,
+        newStats: {
+          maxHp: newStats.hp,
+          attack: newStats.attack,
+          defense: newStats.defense,
+          spAttack: newStats.spAttack,
+          spDefense: newStats.spDefense,
+          speed: newStats.speed,
         },
-      }))
+      },
+    })
   } else if (finalExp > 0)
     dispatch({
       type: 'APPLY_EXP',
@@ -158,7 +137,7 @@ export function awardExperience(dispatch, playerPokemon, enemyPokemon, multiplie
     const member = party[index]
     if (!member) continue
     const expGained = participantExp.get(index) ?? 0
-    expGained > 0 && sharedResults.push(buildSharedExpEntry(dispatch, index, member, expGained))
+    expGained > 0 && sharedResults.push(buildSharedExpEntry(index, member, expGained))
   }
   if (hasExpShare && party.length > 1) {
     const sharedExp = Math.floor(gainedExp * expSharePartyMultiplier)
@@ -167,7 +146,7 @@ export function awardExperience(dispatch, playerPokemon, enemyPokemon, multiplie
         if (participantExp.has(memberIndex)) continue
         const member = party[memberIndex]
         if (!isBattleReady(member)) continue
-        sharedResults.push(buildSharedExpEntry(dispatch, memberIndex, member, sharedExp))
+        sharedResults.push(buildSharedExpEntry(memberIndex, member, sharedExp))
       }
   }
   sharedResults.length > 0 &&

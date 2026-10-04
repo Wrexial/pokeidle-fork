@@ -3,7 +3,7 @@
 import { moveLearnsets, pokemonSpecies } from '../../../data/gameData.js'
 import { evolutionItems } from '../../../data/items.js'
 import { genderForPokemon } from '../../breeding.js'
-import { calculatePokemonStats } from '../../pokemon.js'
+import { applyMoveLearning, calculatePokemonStats } from '../../pokemon.js'
 import { prepareNextBattle } from '../../progression.js'
 import { withNotification } from '../../reducer-helpers.js'
 
@@ -99,13 +99,13 @@ export function completeEvolution(state, action) {
       if (member.id !== pokemonId) return member
       const newStats = calculatePokemonStats(toSpecies, member.level, member.ivs, member.nature),
         hpGain = newStats.hp - member.maxHp,
-        newMoveIds = (moveLearnsets[toSpeciesKey] || [])
-          .filter(([moveId]) => moveId <= member.level)
-          .map(([, moveId]) => moveId)
-          .filter((moveId) => !member.moves.includes(moveId))
-      let moves = [...member.moves]
-      for (const moveId of newMoveIds)
-        moves.length >= 4 ? (moves = [...moves.slice(1), moveId]) : (moves = [...moves, moveId])
+        { moves } = applyMoveLearning(
+          toSpeciesKey,
+          member.moves,
+          (moveLearnsets[toSpeciesKey] || [])
+            .filter(([learnLevel]) => learnLevel <= member.level)
+            .map(([, moveId]) => moveId)
+        )
       return {
         ...member,
         speciesKey: toSpeciesKey,

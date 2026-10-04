@@ -82,6 +82,53 @@ export function isTutorMove(speciesKey, moveId) {
 }
 
 /**
+ * Apply newly learned moves to a moveset, with a policy that never silently
+ * throws away a move the player deliberately taught:
+ *
+ * - A free slot just takes the move.
+ * - With four moves, the oldest move that is not a TM for the species (i.e. a
+ *   level-up move) is forgotten to make room.
+ * - When all four slots are TMs, the new move is left `pending` — it stays
+ *   available in the Manage Moves panel, so nothing is lost.
+ *
+ * A move learned earlier in the same call is protected, so a multi-level
+ * gain can't immediately forget the move it just taught.
+ *
+ * @param {string} speciesKey
+ * @param {string[] | null | undefined} currentMoves
+ * @param {string[] | null | undefined} newMoveIds
+ * @returns {{ moves: string[], learned: string[], forgotten: string[], pending: string[] }}
+ */
+export function applyMoveLearning(speciesKey, currentMoves, newMoveIds) {
+  const moves = [...(currentMoves ?? [])],
+    learned = [],
+    forgotten = [],
+    pending = [],
+    protectedMoves = new Set()
+  for (const moveId of newMoveIds ?? []) {
+    if (!moveId || moves.includes(moveId)) continue
+    if (moves.length < 4) {
+      moves.push(moveId)
+      learned.push(moveId)
+      protectedMoves.add(moveId)
+      continue
+    }
+    // Forget the oldest move the player did not choose (a level-up move), and
+    // never one just learned in this same batch.
+    const forgetIndex = moves.findIndex(
+      (existing) => !protectedMoves.has(existing) && !isTutorMove(speciesKey, existing)
+    )
+    if (forgetIndex >= 0) {
+      forgotten.push(moves[forgetIndex])
+      moves[forgetIndex] = moveId
+      learned.push(moveId)
+      protectedMoves.add(moveId)
+    } else pending.push(moveId)
+  }
+  return { moves, learned, forgotten, pending }
+}
+
+/**
  * Whether a species has an ordinary (non-form) evolution left, used by the
  * Eviolite. Megas/Gigantamax and alternate-form ids are ignored.
  * @param {string} speciesKey

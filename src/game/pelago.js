@@ -4,7 +4,7 @@
 // collect what they produced.
 
 import { pokemonSpecies } from '../data/gameData.js'
-import { calculatePokemonStats, getLevelUpResults } from './pokemon.js'
+import { calculatePokemonStats, getLevelUpResults, applyMoveLearning } from './pokemon.js'
 
 /** Pokemon that can be assigned to one island. */
 export const PELAGO_SLOTS = 3
@@ -101,10 +101,12 @@ export function grantExperience(pokemon, expGained) {
     )
   if (levelUps.length === 0) return { ...pokemon, totalExp: newTotalExp }
   const lastLevelUp = levelUps[levelUps.length - 1],
-    stats = calculatePokemonStats(species, lastLevelUp.newLevel, pokemon.ivs, pokemon.nature)
-  let moves = [...(pokemon.moves ?? [])]
-  for (const moveId of levelUps.flatMap((levelUp) => levelUp.newMoves))
-    if (!moves.includes(moveId)) moves = moves.length >= 4 ? [...moves.slice(1), moveId] : [...moves, moveId]
+    stats = calculatePokemonStats(species, lastLevelUp.newLevel, pokemon.ivs, pokemon.nature),
+    { moves } = applyMoveLearning(
+      pokemon.speciesKey,
+      pokemon.moves,
+      levelUps.flatMap((levelUp) => levelUp.newMoves)
+    )
   return {
     ...pokemon,
     totalExp: newTotalExp,

@@ -83,6 +83,7 @@ export const CHANGELOG = [
             'TMs are found rather than bought: the Move Tutor no longer sells any TM for cash. Each Pokemon still shows its real machine move set in the Manage Moves panel, but a TM can only be slotted in once you have found that TM, and teaching it is then repeatable for a small fee',
             'Every gym leader hands over two TMs of its type when you first win its badge, the Underground digs up Rock, Ground and Steel TMs, the Bug-Catching Contest finds Bug TMs, Voltorb Flip electric ones and the other themed minigames follow suit; a handful of achievements grant a specific TM',
             'Wild Pokemon occasionally drop a TM of their own type when defeated, so routes are a steady source as you travel',
+            'Level-ups no longer overwrite a move you taught: when the four slots are full, the oldest level-up move makes room, and if every slot holds a TM the new move waits in the Manage Moves panel instead of replacing one',
             'TMs live in their own bag tab as reusable discs, so you can see the whole collection at a glance',
           ],
         },

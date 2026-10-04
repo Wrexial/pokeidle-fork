@@ -1,7 +1,7 @@
 // // EXP application (including shared EXP) and the debug level-up cheat. Split from game/reducer/battle.js.
 
-import { pokemonSpecies } from '../../../data/gameData.js'
-import { calculatePokemonStats, calculateRequiredExperience, gainFriendship, resolvePokemonMoves } from '../../pokemon.js'
+import { moveData, pokemonSpecies } from '../../../data/gameData.js'
+import { applyMoveLearning, calculatePokemonStats, calculateRequiredExperience, gainFriendship, resolvePokemonMoves } from '../../pokemon.js'
 import { syncActivePokemonIntoParty } from '../../progression.js'
 
 /**
@@ -42,15 +42,25 @@ export function applyExp(state, action) {
       battleLog.push(`${updatedPokemon.name} grew to level ${updatedPokemon.level}!`))
   }
   if (action.payload.newMoves && action.payload.newMoves.length > 0) {
-    let newMoves = [...updatedPokemon.moves]
-    for (const moveId of action.payload.newMoves)
-      newMoves.includes(moveId) ||
-        (newMoves.length >= 4 ? (newMoves = [...newMoves.slice(1), moveId]) : (newMoves = [...newMoves, moveId]),
-        battleLog.push(`${updatedPokemon.name} learned ${moveId}!`))
+    const { moves, learned, forgotten, pending } = applyMoveLearning(
+      updatedPokemon.speciesKey,
+      updatedPokemon.moves,
+      action.payload.newMoves
+    )
     updatedPokemon = {
       ...updatedPokemon,
-      moves: newMoves,
+      moves,
     }
+    for (const moveId of learned)
+      battleLog.push(`${updatedPokemon.name} learned ${moveData[moveId]?.name ?? moveId}!`)
+    for (const moveId of forgotten)
+      battleLog.push(
+        `${updatedPokemon.name} forgot ${moveData[moveId]?.name ?? moveId} to make room.`
+      )
+    for (const moveId of pending)
+      battleLog.push(
+        `${updatedPokemon.name} wants to learn ${moveData[moveId]?.name ?? moveId} — make room in Manage Moves.`
+      )
   }
   return syncActivePokemonIntoParty({
     ...state,
@@ -107,14 +117,23 @@ export function applySharedExp(state, action) {
         battleLog.push(`${member.name} grew to level ${member.level}!`))
     }
     if (entry.newMoves && entry.newMoves.length > 0) {
-      let moves = [...member.moves]
-      for (const moveId of entry.newMoves)
-        moves.includes(moveId) ||
-          (moves.length >= 4 ? (moves = [...moves.slice(1), moveId]) : (moves = [...moves, moveId]))
+      const { moves, learned, forgotten, pending } = applyMoveLearning(
+        member.speciesKey,
+        member.moves,
+        entry.newMoves
+      )
       member = {
         ...member,
         moves,
       }
+      for (const moveId of learned)
+        battleLog.push(`${member.name} learned ${moveData[moveId]?.name ?? moveId}!`)
+      for (const moveId of forgotten)
+        battleLog.push(`${member.name} forgot ${moveData[moveId]?.name ?? moveId} to make room.`)
+      for (const moveId of pending)
+        battleLog.push(
+          `${member.name} wants to learn ${moveData[moveId]?.name ?? moveId} — make room in Manage Moves.`
+        )
     }
     party[partyIndex] = member
   }

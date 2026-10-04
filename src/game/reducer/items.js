@@ -1,10 +1,10 @@
 // Reducer handlers for items actions. Split from game/reducer.js.
 
-import { encounterData, pokemonSpecies } from '../../data/gameData.js'
+import { encounterData, moveData, pokemonSpecies } from '../../data/gameData.js'
 import { activeItems, consumableItems, fossilItems, heldItems, pokeBalls } from '../../data/items.js'
 import { canGigantamax } from '../../data/mega-evolution.js'
 import { natureName, randomNature } from '../../data/natures.js'
-import { MAX_FRIENDSHIP, IV_STAT_ORDER, calculatePokemonStats, calculateRequiredExperience, gainFriendship, getLevelUpResults } from '../pokemon.js'
+import { MAX_FRIENDSHIP, IV_STAT_ORDER, applyMoveLearning, calculatePokemonStats, calculateRequiredExperience, gainFriendship, getLevelUpResults } from '../pokemon.js'
 import { getItemSellPrice, isActiveEffectItem } from '../progression.js'
 import { withNotification } from '../reducer-helpers.js'
 import { markCaught } from './collection.js'
@@ -367,11 +367,20 @@ export function useItemOnPokemon(state, action) {
           spDefense: newStats.spDefense,
           speed: newStats.speed,
         }
-        let moves = [...member.moves]
-        for (const moveId of levelUps.flatMap((levelUp) => levelUp.newMoves))
-          moves.includes(moveId) ||
-            (moves = moves.length >= 4 ? [...moves.slice(1), moveId] : [...moves, moveId])
-        member.moves = moves
+        const learning = applyMoveLearning(
+          member.speciesKey,
+          member.moves,
+          levelUps.flatMap((levelUp) => levelUp.newMoves)
+        )
+        member.moves = learning.moves
+        for (const moveId of learning.learned)
+          log.push(`${member.name} learned ${moveData[moveId]?.name ?? moveId}!`)
+        for (const moveId of learning.forgotten)
+          log.push(`${member.name} forgot ${moveData[moveId]?.name ?? moveId} to make room.`)
+        for (const moveId of learning.pending)
+          log.push(
+            `${member.name} wants to learn ${moveData[moveId]?.name ?? moveId} — make room in Manage Moves.`
+          )
       }
       used++
     }

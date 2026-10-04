@@ -577,6 +577,10 @@ export const bagCategories = [
       label: 'Held Items',
     },
     {
+      id: 'tms',
+      label: 'TMs',
+    },
+    {
       id: 'valuables',
       label: 'Valuables',
     },

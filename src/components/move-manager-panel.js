@@ -4,7 +4,7 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { formatMoveAccuracy } from '../data/moves.js'
 import { moveData } from '../data/gameData.js'
-import { tutorMoveCost } from '../data/config.js'
+import { tmItemId } from '../data/tms.js'
 import { useGame } from '../game/context.js'
 import { getFamilyLearnset, getTutorMoves, pokemonDisplayName } from '../game/pokemon.js'
 import { moveTooltip } from '../game/move-info.js'
@@ -21,16 +21,19 @@ export function MoveManagerPanel({ pokemon, onClose }) {
     [moves, setMoves] = React.useState(() => [...target.moves]),
     availableMoves = getFamilyLearnset(target.speciesKey, target.level),
     tutorMoves = getTutorMoves(target.speciesKey),
+    // TMs are reusable unlocks: a tutor move is only selectable once its TM has
+    // been found, and teaching it costs nothing.
+    ownedTutorSet = new Set(
+      tutorMoves.filter((moveId) => (state.inventory[tmItemId(moveId)] ?? 0) > 0)
+    ),
     tutorSet = new Set(tutorMoves),
     allMoves = [
       ...availableMoves.map(({ moveId, learnLevel }) => ({ moveId, learnLevel })),
       ...tutorMoves.map((moveId) => ({ moveId, learnLevel: -1 })),
-    ],
-    pendingTutorCost =
-      moves.filter((moveId) => tutorSet.has(moveId) && !target.moves.includes(moveId)).length *
-      tutorMoveCost
+    ]
   /** @param {string} moveId */
   function toggleMove(moveId) {
+    if (tutorSet.has(moveId) && !ownedTutorSet.has(moveId)) return
     moves.includes(moveId)
       ? moves.length > 1 && setMoves(moves.filter((existingMoveId) => existingMoveId !== moveId))
       : moves.length < 4 && setMoves([...moves, moveId])
@@ -108,18 +111,20 @@ export function MoveManagerPanel({ pokemon, onClose }) {
         }),
         jsx('div', {
           className: 'move-panel-section-label',
-          children: `Available Moves${tutorMoves.length ? ` \u00b7 Tutor $${tutorMoveCost.toLocaleString()}` : ''}`,
+          children: `Available Moves${tutorMoves.length ? ` \u00b7 TMs ${ownedTutorSet.size}/${tutorMoves.length}` : ''}`,
         }),
         jsx('div', {
           className: 'move-panel-list',
           children: allMoves.map(({ moveId, learnLevel }) => {
             const moveDef = moveData[moveId]
             if (!moveDef) return null
-            const isSelected = moves.includes(moveId)
+            const isSelected = moves.includes(moveId),
+              isTutor = learnLevel < 0,
+              locked = isTutor && !ownedTutorSet.has(moveId)
             return jsxs(
               'div',
               {
-                className: `move-panel-item type-bg-${moveDef.type.toLowerCase()} ${isSelected ? 'selected' : ''}`,
+                className: `move-panel-item type-bg-${moveDef.type.toLowerCase()} ${isSelected ? 'selected' : ''}${locked ? ' locked' : ''}`,
                 'data-tooltip': moveTooltip(moveId, moveDef),
                 onClick: () => toggleMove(moveId),
                 children: [
@@ -143,10 +148,7 @@ export function MoveManagerPanel({ pokemon, onClose }) {
                   }),
                   jsxs('span', {
                     className: 'move-panel-item-level',
-                    children:
-                      learnLevel < 0
-                        ? `TM $${tutorMoveCost.toLocaleString()}`
-                        : `Lv.${learnLevel}`,
+                    children: isTutor ? (locked ? 'No TM' : 'TM') : `Lv.${learnLevel}`,
                   }),
                 ],
               },
@@ -154,11 +156,6 @@ export function MoveManagerPanel({ pokemon, onClose }) {
             )
           }),
         }),
-        pendingTutorCost > 0 &&
-          jsx('div', {
-            className: 'move-panel-tutor-cost',
-            children: `Tutor cost: $${pendingTutorCost.toLocaleString()} \u00b7 you have $${state.money.toLocaleString()}`,
-          }),
         jsxs('div', {
           className: 'move-panel-buttons',
           children: [

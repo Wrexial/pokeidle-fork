@@ -48,8 +48,12 @@ export const offlineMoneyPerHourPerLevel = 40
 /** Battles two daycare parents need to produce an egg. */
 export const daycareEggBattles = 50
 
-/** Money a Move Tutor charges per TM move taught. */
-export const tutorMoveCost = 4000
+/** Chance a wild win yields a TM matching the defeated foe's type. */
+export const wildTmDropChance = 1 / 200
+/** Chance a themed minigame or route activity hands out an unowned TM. */
+export const minigameTmChance = 0.18
+/** TMs a gym leader awards when the player first earns its badge. */
+export const gymTmRewardCount = 2
 /** Shiny odds for a bred egg (1 in 4096), improved if a parent is shiny. */
 export const breedShinyOdds = 4096
 export const breedShinyParentOdds = 512

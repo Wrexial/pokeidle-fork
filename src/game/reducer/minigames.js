@@ -1,9 +1,12 @@
 // Reducer handlers for minigames actions. Split from game/reducer.js.
 
 import { MATCH3_COST, MEMORY_COST, MUSICAL_COST, PICNIC_COST, POKEBALL_FACTORY_COST, WHACK_COST, BATTLE_ROYAL_COST, BUG_CONTEST_COST, CONTEST_COST, CURRY_COST, DYNAMAX_ADVENTURES_COST, LIGHTS_OUT_COST, MINING_COST, POKEATHLON_COST, POKE_RADAR_COST, POKESTAR_COST, QUIZ_COST, ROUTE_ACTIVITIES, SAFARI_COST, SLIDING_COST, ICE_SLIDE_COST, VOLTORB_FLIP_COST, GAME_CORNER_PRIZE_GOAL, rollGameCornerPrize, routeActivityIds } from '../minigames.js'
+import { minigameTmChance } from '../../data/config.js'
 import { mapData, pokemonSpecies } from '../../data/gameData.js'
+import { getTmInfo, tmItemId } from '../../data/tms.js'
 import { createIdleBattleState } from '../progression.js'
 import { enterMinigame, withNotification } from '../reducer-helpers.js'
+import { minigameTmTypes, rollUnownedTm } from '../tms.js'
 import { markCaught } from './collection.js'
 import { catchPokemon } from './pokemon/management.js'
 
@@ -478,6 +481,29 @@ export function claimMinigameReward(state, action) {
     inventory,
     battleLog: [...state.battleLog, 'Minigame reward claimed.'].slice(-50),
   }
+  // A themed minigame can turn up a TM the player has not found yet.
+  const tmTypes = minigameTmTypes(state.phase, state.routeActivity)
+  if (tmTypes !== undefined && Math.random() < minigameTmChance) {
+    const tmMove = rollUnownedTm(tmTypes, inventory)
+    if (tmMove) {
+      const tmId = tmItemId(tmMove),
+        tmName = getTmInfo(tmId).name
+      inventory[tmId] = (inventory[tmId] ?? 0) + 1
+      next = withNotification(
+        {
+          ...next,
+          inventory,
+          battleLog: [...next.battleLog, `Found a ${tmName}!`].slice(-50),
+        },
+        {
+          message: `Found a ${tmName}!`,
+          tone: 'success',
+          icon: '\u{1f4bf}',
+          dedupeKey: `tm:${tmId}`,
+        }
+      )
+    }
+  }
   // Some minigames hand over a fixed Pokemon (the Ruins of Alph's Unown).
   if (pokemon?.speciesKey && pokemonSpecies[pokemon.speciesKey]) {
     const speciesKey = pokemon.speciesKey
@@ -503,9 +529,33 @@ export function collectMining(state, action) {
   for (const reward of rewards)
     if (reward?.itemId && reward.quantity > 0)
       inventory[reward.itemId] = (inventory[reward.itemId] ?? 0) + reward.quantity
-  return {
+  let next = {
     ...state,
     inventory,
     battleLog: [...state.battleLog, 'Collected the Underground finds.'].slice(-50),
   }
+  // The Underground is the Rock/Ground/Steel TM source.
+  const tmTypes = minigameTmTypes('mining', null)
+  if (tmTypes !== undefined && Math.random() < minigameTmChance) {
+    const tmMove = rollUnownedTm(tmTypes, inventory)
+    if (tmMove) {
+      const tmId = tmItemId(tmMove),
+        tmName = getTmInfo(tmId).name
+      inventory[tmId] = (inventory[tmId] ?? 0) + 1
+      next = withNotification(
+        {
+          ...next,
+          inventory,
+          battleLog: [...next.battleLog, `Found a ${tmName}!`].slice(-50),
+        },
+        {
+          message: `Found a ${tmName}!`,
+          tone: 'success',
+          icon: '\u{1f4bf}',
+          dedupeKey: `tm:${tmId}`,
+        }
+      )
+    }
+  }
+  return next
 }

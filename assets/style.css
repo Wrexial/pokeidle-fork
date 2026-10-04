@@ -1600,16 +1600,17 @@ img {
 .move-panel-item-level {
     font-size: 7px;
     opacity: .7;
-    width: 28px;
+    width: 34px;
     text-align: right
 }
 
-.move-panel-tutor-cost {
-    font-size: 8px;
-    font-weight: 700;
-    color: var(--ink);
-    padding: 4px 14px 0;
-    text-align: right
+.move-panel-item.locked {
+    opacity: .4;
+    cursor: not-allowed
+}
+
+.move-panel-item.locked:hover {
+    filter: none
 }
 
 .move-panel-buttons {
@@ -6027,6 +6028,21 @@ img {
     object-fit: contain;
     image-rendering: pixelated;
     filter: drop-shadow(1px 1px 0 #00000066)
+}
+
+.tm-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 2px solid #483828;
+    background: #b8a878;
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: -.5px;
+    text-shadow: 1px 1px 0 #00000066;
+    box-shadow: inset 0 0 0 1px #ffffff55
 }
 
 .shiny-sparkle:before,.shiny-sparkle:after {

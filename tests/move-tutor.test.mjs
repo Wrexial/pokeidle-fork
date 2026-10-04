@@ -9,7 +9,7 @@ const { createPokemon, getFamilyLearnset, getTutorMoves, isTutorMove } = await i
   '../src/game/pokemon.js'
 )
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
-const { tutorMoveCost } = await import('../src/data/config.js')
+const { tmItemId } = await import('../src/data/tms.js')
 
 test('tutor moves are TM moves outside the level-up learnset', () => {
   const tutorMoves = getTutorMoves('pikachu'),
@@ -23,38 +23,41 @@ test('tutor moves are TM moves outside the level-up learnset', () => {
   assert.equal(isTutorMove('pikachu', levelMove), false)
 })
 
-test('the Move Tutor charges for a newly taught TM move', () => {
+test('the Move Tutor refuses a TM the player has not found', () => {
   const pokemon = createPokemon('pikachu', 50, 'a'),
     tutorMove = getTutorMoves('pikachu')[0],
     state = {
       ...initialGameState,
       party: [pokemon],
       playerPokemon: pokemon,
-      money: tutorMoveCost * 2,
-    },
-    next = gameReducer(state, {
-      type: 'SET_MOVES',
-      payload: { pokemonId: 'a', moves: [tutorMove] },
-    })
-  assert.equal(next.money, tutorMoveCost, 'one move was charged')
-  assert.deepEqual(next.party[0].moves, [tutorMove])
-})
-
-test('the Move Tutor refuses when you cannot afford it', () => {
-  const pokemon = createPokemon('pikachu', 50, 'a'),
-    tutorMove = getTutorMoves('pikachu')[0],
-    state = {
-      ...initialGameState,
-      party: [pokemon],
-      playerPokemon: pokemon,
-      money: tutorMoveCost - 1,
+      inventory: {},
+      money: 100000,
     },
     next = gameReducer(state, {
       type: 'SET_MOVES',
       payload: { pokemonId: 'a', moves: [tutorMove] },
     })
   assert.deepEqual(next.party[0].moves, pokemon.moves, 'the change was rejected')
-  assert.equal(next.money, tutorMoveCost - 1)
+  assert.equal(next.money, 100000)
+})
+
+test('an owned TM teaches its move for free', () => {
+  const pokemon = createPokemon('pikachu', 50, 'a'),
+    tutorMove = getTutorMoves('pikachu')[0],
+    state = {
+      ...initialGameState,
+      party: [pokemon],
+      playerPokemon: pokemon,
+      inventory: { [tmItemId(tutorMove)]: 1 },
+      money: 0,
+    },
+    next = gameReducer(state, {
+      type: 'SET_MOVES',
+      payload: { pokemonId: 'a', moves: [tutorMove] },
+    })
+  assert.deepEqual(next.party[0].moves, [tutorMove])
+  assert.equal(next.money, 0, 'teaching from a TM is free')
+  assert.equal(next.inventory[tmItemId(tutorMove)], 1, 'TMs are reusable')
 })
 
 test('re-learning a level-up move is free', () => {

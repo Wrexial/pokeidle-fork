@@ -1,7 +1,7 @@
 // Catching, nicknaming, moves, favourites and releasing. Split from game/reducer/pokemon.js.
 
-import { tutorMoveCost } from '../../../data/config.js'
 import { pokemonSpecies } from '../../../data/gameData.js'
+import { tmItemId } from '../../../data/tms.js'
 import { createPokemon, insertIntoBox, isTutorMove, judgeIVs } from '../../pokemon.js'
 import { advanceShinyTarget, formatReward, loadActivePokemonFromParty, prepareNextBattle, releaseFaintedParty, releaseReward, syncActivePokemonIntoParty } from '../../progression.js'
 import { advanceQuests } from '../../quests.js'
@@ -158,24 +158,24 @@ export function setMoves(state, action) {
       state.party.find((member) => member.id === targetId) ??
       state.box.find((member) => member.id === targetId)
   if (!target) return state
-  // Move Tutor TM moves cost money when they're newly taught.
+  // Move Tutor TM moves are gated on owning the reusable TM, but teaching one
+  // costs nothing once it has been found.
   const knownMoves = new Set(target.moves ?? []),
-    tutorMoves = moves.filter(
+    newTutorMoves = moves.filter(
       (moveId) => !knownMoves.has(moveId) && isTutorMove(target.speciesKey, moveId)
     ),
-    tutorCost = tutorMoves.length * tutorMoveCost
-  if (tutorCost > state.money) return state
+    missingTm = newTutorMoves.some((moveId) => (state.inventory[tmItemId(moveId)] ?? 0) <= 0)
+  if (missingTm) return state
   const playerPokemon =
     state.playerPokemon && state.playerPokemon.id === targetId
       ? { ...state.playerPokemon, moves }
       : state.playerPokemon
   return {
     ...state,
-    money: state.money - tutorCost,
-    battleLog: tutorCost
+    battleLog: newTutorMoves.length
       ? [
           ...state.battleLog,
-          `Taught ${tutorMoves.length} move${tutorMoves.length > 1 ? 's' : ''} for $${tutorCost.toLocaleString()}.`,
+          `Taught ${newTutorMoves.length} move${newTutorMoves.length > 1 ? 's' : ''} from a TM.`,
         ].slice(-50)
       : state.battleLog,
     party: state.party.map(updateMoves),

@@ -1,9 +1,10 @@
 // // Core battle pipeline: start an encounter, run a turn, consume its events. Split from game/reducer/battle.js.
 
-import { daycareEggBattles, expCandyDropChance, rareCandyDropChance, swarmSpawnChance, valuableDropChance, wildMasterBallChance } from '../../../data/config.js'
+import { daycareEggBattles, expCandyDropChance, rareCandyDropChance, swarmSpawnChance, valuableDropChance, wildMasterBallChance, wildTmDropChance } from '../../../data/config.js'
 import { dailyDropMultiplier } from '../../../data/daily-events.js'
 import { mapData } from '../../../data/gameData.js'
 import { consumableItems } from '../../../data/items.js'
+import { getTmInfo, tmItemId } from '../../../data/tms.js'
 import { canBreed } from '../../breeding.js'
 import { tickCompanion } from '../../companion.js'
 import { createVolatileState } from '../../combat.js'
@@ -15,6 +16,7 @@ import { gainFriendship, isBattleReady } from '../../pokemon.js'
 import { advanceShinyTarget, computeUnlockedLocations, rollCandyDrop, rollValuableDrop, syncActivePokemonIntoParty, tickBattleCounters, tickPartyEggs, tickPokerus } from '../../progression.js'
 import { advanceQuests } from '../../quests.js'
 import { rollSwarm, recordSeenPokemon, withNotification } from '../../reducer-helpers.js'
+import { rollUnownedTm } from '../../tms.js'
 
 /**
  * Handle the `START_ENCOUNTER` action.
@@ -305,6 +307,20 @@ export function consumeEvent(state, action) {
         honey: (inventory.honey ?? 0) + 1,
       }
       secretNotices.push('Your Honey Gather found a Honey!')
+    }
+    // TMs are found, not bought: a rare type-appropriate drop from the foe
+    // (only while there is still an unowned TM matching its type).
+    if (Math.random() < dropChance(wildTmDropChance)) {
+      const tmMove = rollUnownedTm(enemyPokemon?.types, inventory)
+      if (tmMove) {
+        const tmId = tmItemId(tmMove),
+          tmName = getTmInfo(tmId).name
+        inventory = {
+          ...inventory,
+          [tmId]: (inventory[tmId] ?? 0) + 1,
+        }
+        secretNotices.push(`You found a ${tmName}!`)
+      }
     }
   }
   let syncedState = syncActivePokemonIntoParty({

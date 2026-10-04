@@ -1,6 +1,7 @@
 // Sinnoh Underground mining runs. Split from game/minigames.js.
 
 import { consumableItems, evolutionItems, fossilItems, heldItems, pokeBalls } from '../../data/items.js'
+import { getTmInfo, isTmItem } from '../../data/tms.js'
 
 /** Money spent to start a mining run. */
 export const MINING_COST = 1500
@@ -117,6 +118,7 @@ export function rollMiningReward() {
 /** Display name for any reward item id. @param {string} itemId */
 export function rewardItemName(itemId) {
   return (
+    (isTmItem(itemId) ? getTmInfo(itemId).name : null) ??
     pokeBalls[itemId]?.name ??
     consumableItems[itemId]?.name ??
     evolutionItems[itemId]?.name ??

@@ -1,12 +1,14 @@
 // // Boss battle lifecycle: start and end (badges, Elite Four, Champion). Split from game/reducer/battle.js.
 
-import { BATTLE_TOWER_REGION } from '../../../data/config.js'
+import { BATTLE_TOWER_REGION, gymTmRewardCount } from '../../../data/config.js'
 import { gymLeaderData, mapData, regions } from '../../../data/gameData.js'
+import { getTmInfo, tmItemId } from '../../../data/tms.js'
 import { createVolatileState } from '../../combat.js'
 import { fieldWeatherFor } from '../../weather.js'
 import { emptyBattleHazards } from '../../hazards.js'
 import { computeUnlockedLocations, prepareNextBattle, syncActivePokemonIntoParty, tickBattleCounters } from '../../progression.js'
 import { settleUnlockTokens, recordSeenPokemon, withNotification } from '../../reducer-helpers.js'
+import { gymTmType, rollUnownedTm } from '../../tms.js'
 
 /**
  * Handle the `START_BOSS_BATTLE` action.
@@ -129,6 +131,7 @@ export function bossBattleEnd(state, action) {
     defeatedEliteFour = state.defeatedEliteFour,
     defeatedChampions = state.defeatedChampions,
     victoryTokens = state.victoryTokens,
+    inventory = state.inventory,
     championJustDefeated = false
   const notifications = [],
     toastNotifications = []
@@ -170,6 +173,28 @@ export function bossBattleEnd(state, action) {
               }))
             ;((victoryTokens += 1), notifications.push('Earned a Victory Token!'))
           })()
+    // A first badge comes with a couple of TMs of the gym's theme type, so a
+    // gym win is a real way to build up the TM case.
+    if (bossType === 'gym' && !state.defeatedGyms.includes(bossId)) {
+      const gymType = gymTmType(gymLeaderData.find((gym) => gym.id === bossId)),
+        awarded = []
+      for (let index = 0; index < gymTmRewardCount; index++) {
+        const tmMove = rollUnownedTm(gymType ? [gymType] : null, inventory)
+        if (!tmMove) break
+        const tmId = tmItemId(tmMove),
+          tmName = getTmInfo(tmId).name
+        inventory = { ...inventory, [tmId]: (inventory[tmId] ?? 0) + 1 }
+        awarded.push(tmName)
+      }
+      for (const tmName of awarded) notifications.push(`Received ${tmName}!`)
+      if (awarded.length > 0)
+        toastNotifications.push({
+          message: `Received ${awarded.join(' \u00b7 ')}!`,
+          tone: 'success',
+          icon: '\u{1f4bf}',
+          dedupeKey: `tm:${bossId}`,
+        })
+    }
   }
   if (won && state.bossQueue.length > 0) {
     const [nextBoss, ...remainingQueue] = state.bossQueue,
@@ -177,6 +202,7 @@ export function bossBattleEnd(state, action) {
       stateWithNextBoss = {
         ...syncActivePokemonIntoParty(state),
         money: newMoney,
+        inventory,
         trainerBattlesWon,
         battlesWonByLocation,
         activeEffects,
@@ -239,6 +265,7 @@ export function bossBattleEnd(state, action) {
   const finalState = {
     ...prepareNextBattle(state),
     money: newMoney,
+    inventory,
     trainerBattlesWon,
     battlesWonByLocation,
     activeEffects,

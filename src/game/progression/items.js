@@ -1,12 +1,14 @@
 // // Item economy and effects: bag metadata, sell prices, drop rolls and reward formatting. Split from game/progression.js.
 
 import { activeItems, consumableItems, evolutionItems, fossilItems, heldItems, pokeBalls, valuableDropTable } from '../../data/items.js'
+import { getTmInfo, isTmItem } from '../../data/tms.js'
 
 /**
  * @param {string} itemId
  * @returns {string}
  */
 export function getItemCategory(itemId) {
+  if (isTmItem(itemId)) return 'tms'
   if (itemId in pokeBalls) return 'pokeballs'
   if (itemId in heldItems) return 'held'
   if (itemId in fossilItems) return 'fossils'
@@ -87,6 +89,7 @@ export function isActiveEffectItem(itemId) {
  * @returns {{ name: string, description: string }}
  */
 export function getItemInfo(itemId) {
+  if (isTmItem(itemId)) return getTmInfo(itemId)
   if (itemId in pokeBalls) {
     const item = pokeBalls[itemId]
     return {

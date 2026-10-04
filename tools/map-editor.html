@@ -113,6 +113,7 @@
   #map .bounds-line { fill: none; stroke: var(--accent); stroke-width: .4; stroke-dasharray: 1.6 .9; pointer-events: none; }
   #map .bounds-label { fill: var(--accent); font-size: 2.2px; opacity: .85; pointer-events: none; }
   #map .node.out-of-bounds .ring { stroke: #ff5555; stroke-dasharray: .7 .5; }
+  #map .marquee { fill: #40d0d022; stroke: #40d0d0; stroke-width: .3; stroke-dasharray: .9 .5; pointer-events: none; }
   #bounds-warning { color: #ff9a9a; font-size: 12px; }
   #bounds-warning button { color: #fff; }
   #map .node { cursor: grab; }
@@ -151,7 +152,7 @@
 <div id="side">
   <div>
     <h1>Map Editor</h1>
-    <div class="hint">Fully-unlocked Town Maps. Drag a node to move it, or click it and nudge with the arrow keys. Then copy the block at the bottom and paste it into chat.</div>
+    <div class="hint">Fully-unlocked Town Maps. Drag a node to move it, click and nudge with the arrow keys, or Shift/Ctrl-click / drag a box to select several and move them together. Then copy the block at the bottom and paste it into chat.</div>
   </div>
 
   <div class="row">
@@ -176,7 +177,7 @@
   <div id="legend"></div>
   <div id="bounds-warning"></div>
 
-  <h2>Selected</h2>
+  <h2>Selected <button id="clear-selection" style="float:right;padding:1px 8px">Clear</button></h2>
   <div id="selected">Nothing selected. Click a node.</div>
 
   <h2>Changes <span id="change-count" class="hint"></span></h2>
@@ -245,6 +246,7 @@ const els = {
   legend: document.getElementById('legend'),
   boundsWarning: document.getElementById('bounds-warning'),
   selected: document.getElementById('selected'),
+  clearSelection: document.getElementById('clear-selection'),
   changes: document.getElementById('changes'),
   changeCount: document.getElementById('change-count'),
   roadChanges: document.getElementById('road-changes'),
@@ -265,7 +267,12 @@ let regions = []
 /** @type {Record<string, any>} */
 let map = {}
 let regionId = null
+/** primary node for the info panel (always in selectedIds while set) */
 let selectedId = null
+/** every node currently selected; drag / nudge move them together */
+let selectedIds = new Set()
+/** active box-select rectangle in map units, or null */
+let marquee = null
 /** overrides: regionId -> nodeId -> {x, y} */
 let overrides = loadOverrides()
 /** roadEdits: regionId -> "a|b" -> 'removed' | 'added' */
@@ -333,6 +340,15 @@ const BOUNDS = { min: 0, max: 100 }
 function outOfBounds(id) {
   const p = pos(id)
   return p.x < BOUNDS.min || p.x > BOUNDS.max || p.y < BOUNDS.min || p.y > BOUNDS.max
+}
+
+function setSingleSelection(id) {
+  selectedIds = new Set([id])
+  selectedId = id
+}
+function clearSelection() {
+  selectedIds = new Set()
+  selectedId = null
 }
 
 /** Every edge the data has, as sorted keys. */
@@ -472,18 +488,19 @@ function render() {
     const r = DOT_R[loc.type] || 1.1
     const g = svgEl('g', { class: `node ${loc.type}${loc.hidden ? ' hidden-sub' : ''}`, 'data-id': id })
     const oob = outOfBounds(id)
+    const isSelected = selectedIds.has(id)
     if (oob) g.classList.add('out-of-bounds')
-    if (id === selectedId || id === pendingNode) g.classList.add('selected')
+    if (isSelected || id === pendingNode) g.classList.add('selected')
     if (id === pendingNode) g.classList.add('pending')
     if (searchTerm && matches(loc, id)) g.classList.add('match')
-    if (id === selectedId || id === pendingNode || oob) g.appendChild(svgEl('circle', { class: 'ring', cx: p.x, cy: p.y, r: r + 1.2 }))
+    if (isSelected || id === pendingNode || oob) g.appendChild(svgEl('circle', { class: 'ring', cx: p.x, cy: p.y, r: r + 1.2 }))
     if (loc.type === 'town' || loc.type === 'zone') {
       g.appendChild(svgEl('rect', { class: 'dot', x: p.x - r, y: p.y - r, width: r * 2, height: r * 2, rx: 0.4, transform: loc.type === 'zone' ? `rotate(45 ${p.x} ${p.y})` : '' }))
     } else {
       g.appendChild(svgEl('circle', { class: 'dot', cx: p.x, cy: p.y, r }))
     }
     g.appendChild(svgEl('circle', { class: 'hit', cx: p.x, cy: p.y, r: r + 1.5 }))
-    if (els.showLabels.checked || id === selectedId || (searchTerm && matches(loc, id))) {
+    if (els.showLabels.checked || isSelected || (searchTerm && matches(loc, id))) {
       const label = svgEl('text', { class: 'label', x: p.x, y: p.y + r + 1.8 })
       label.textContent = loc.name
       g.appendChild(label)
@@ -493,6 +510,15 @@ function render() {
     g.addEventListener('pointermove', (event) => moveTooltip(event))
     g.addEventListener('pointerleave', hideTooltip)
     svg.appendChild(g)
+  }
+  if (marquee) {
+    svg.appendChild(svgEl('rect', {
+      class: 'marquee',
+      x: Math.min(marquee.x0, marquee.x1),
+      y: Math.min(marquee.y0, marquee.y1),
+      width: Math.abs(marquee.x1 - marquee.x0),
+      height: Math.abs(marquee.y1 - marquee.y0),
+    }))
   }
   renderSidebar()
 }
@@ -516,7 +542,7 @@ function renderSidebar() {
       row.className = 'change'
       row.innerHTML = `${map[id]?.name || id}<span class="delta">${fmt(base.x)}→${fmt(p.x)} , ${fmt(base.y)}→${fmt(p.y)}</span>`
       row.addEventListener('click', () => {
-        selectedId = id
+        setSingleSelection(id)
         centreOn(id)
         render()
       })
@@ -524,12 +550,15 @@ function renderSidebar() {
     }
   }
   // selected info
-  if (selectedId && map[selectedId]) {
+  if (selectedIds.size > 1) {
+    const names = [...selectedIds].map((id) => map[id]?.name || id)
+    els.selected.innerHTML = `<b>${selectedIds.size} nodes selected</b><br><span class="hint">Drag any one to move them together, or nudge with the arrow keys.</span><br><span class="id">${names.join(', ')}</span>`
+  } else if (selectedId && map[selectedId]) {
     const loc = map[selectedId]
     const p = pos(selectedId)
     els.selected.innerHTML = `<b>${loc.name}</b> <span class="hint">(${loc.type}${loc.hidden ? ', hidden' : ''})</span><br><span class="id">${selectedId}</span><br>x ${fmt(p.x)}, y ${fmt(p.y)}` + (isChanged(selectedId) ? ' <span class="hint">(moved)</span>' : '') + (outOfBounds(selectedId) ? ' <span class="hint" style="color:#ff9a9a">(outside 0..100)</span>' : '')
   } else {
-    els.selected.textContent = 'Nothing selected. Click a node.'
+    els.selected.textContent = 'Nothing selected. Click a node, Shift+click to add, or Shift+drag a box.'
   }
   // road edits list
   const { removed, added } = regionRoadEdits()
@@ -545,7 +574,7 @@ function renderSidebar() {
         const row = document.createElement('div')
         row.className = 'road-item'
         row.innerHTML = `${state === 'removed' ? '\u2212' : '+'} ${map[a]?.name || a} \u2014 ${map[b]?.name || b}<span class="tag">${state}</span>`
-        row.addEventListener('click', () => { selectedId = a; centreOn(a); render() })
+        row.addEventListener('click', () => { setSingleSelection(a); centreOn(a); render() })
         els.roadChanges.appendChild(row)
       }
   }
@@ -564,7 +593,7 @@ function renderSidebar() {
       b.style.width = '100%'
       b.style.textAlign = 'left'
       b.style.margin = '2px 0'
-      b.addEventListener('click', () => { selectedId = id; centreOn(id); render() })
+      b.addEventListener('click', () => { setSingleSelection(id); centreOn(id); render() })
       els.boundsWarning.appendChild(b)
     }
     const pull = document.createElement('button')
@@ -654,15 +683,63 @@ function startNodeDrag(event, id) {
     render()
     return
   }
-  selectedId = id
-  const p = pos(id)
+  const additive = event.shiftKey || event.ctrlKey || event.metaKey
+  if (additive) {
+    if (selectedIds.has(id)) {
+      selectedIds.delete(id)
+      if (selectedId === id) selectedId = selectedIds.size ? [...selectedIds][selectedIds.size - 1] : null
+    } else {
+      selectedIds.add(id)
+      selectedId = id
+    }
+  } else if (!selectedIds.has(id)) {
+    setSingleSelection(id)
+  } else {
+    selectedId = id
+  }
+  if (!selectedIds.size) {
+    render()
+    return
+  }
   const start = svgPoint(event)
-  drag = { id, dx: p.x - start.x, dy: p.y - start.y }
-  els.map.setPointerCapture(event.pointerId)
+  const anchors = {}
+  for (const sid of selectedIds) anchors[sid] = pos(sid)
+  drag = { ids: [...selectedIds], grabbed: id, start, anchors }
+  try { els.map.setPointerCapture(event.pointerId) } catch {}
   render()
 }
 
 function onMapPointerDown(event) {
+  // Shift/Ctrl-drag on empty space box-selects.
+  if (event.shiftKey || event.ctrlKey || event.metaKey) {
+    const start = svgPoint(event)
+    marquee = { x0: start.x, y0: start.y, x1: start.x, y1: start.y }
+    const move = (e) => {
+      const p = svgPoint(e)
+      marquee.x1 = p.x
+      marquee.y1 = p.y
+      render()
+    }
+    const up = () => {
+      window.removeEventListener('pointermove', move)
+      window.removeEventListener('pointerup', up)
+      const minX = Math.min(marquee.x0, marquee.x1)
+      const maxX = Math.max(marquee.x0, marquee.x1)
+      const minY = Math.min(marquee.y0, marquee.y1)
+      const maxY = Math.max(marquee.y0, marquee.y1)
+      const hits = visibleIds().filter((id) => {
+        const p = pos(id)
+        return p.x >= minX && p.x <= maxX && p.y >= minY && p.y <= maxY
+      })
+      selectedIds = new Set(hits)
+      selectedId = hits.length ? hits[hits.length - 1] : null
+      marquee = null
+      render()
+    }
+    window.addEventListener('pointermove', move)
+    window.addEventListener('pointerup', up)
+    return
+  }
   // background pan
   const start = { x: event.clientX, y: event.clientY, cx: view.cx, cy: view.cy }
   const rect = els.map.getBoundingClientRect()
@@ -683,13 +760,18 @@ function onMapPointerDown(event) {
 function onPointerMove(event) {
   if (!drag) return
   const p = svgPoint(event)
-  let x = clamp(p.x + drag.dx)
-  let y = clamp(p.y + drag.dy)
+  let dx = p.x - drag.start.x
+  let dy = p.y - drag.start.y
   if (els.snap.checked) {
-    x = Math.round(x * 2) / 2
-    y = Math.round(y * 2) / 2
+    // Snap the grabbed node, then move the rest by the same delta.
+    const grabbed = drag.anchors[drag.grabbed]
+    dx = Math.round((grabbed.x + dx) * 2) / 2 - grabbed.x
+    dy = Math.round((grabbed.y + dy) * 2) / 2 - grabbed.y
   }
-  setPos(drag.id, x, y)
+  for (const id of drag.ids) {
+    const anchor = drag.anchors[id]
+    setPos(id, clamp(anchor.x + dx), clamp(anchor.y + dy))
+  }
   render()
 }
 
@@ -698,8 +780,15 @@ function endDrag() {
 }
 
 function onKeyDown(event) {
-  if (!selectedId) return
-  if (event.target.matches('input, select, textarea')) return
+  if (event.target instanceof Element && event.target.matches('input, select, textarea')) return
+  if (event.key === 'Escape') {
+    if (selectedIds.size) {
+      clearSelection()
+      render()
+    }
+    return
+  }
+  if (!selectedIds.size) return
   const step = event.shiftKey ? 1 : 0.25
   let dx = 0
   let dy = 0
@@ -709,8 +798,10 @@ function onKeyDown(event) {
   else if (event.key === 'ArrowDown') dy = step
   else return
   event.preventDefault()
-  const p = pos(selectedId)
-  setPos(selectedId, p.x + dx, p.y + dy)
+  for (const id of selectedIds) {
+    const p = pos(id)
+    setPos(id, p.x + dx, p.y + dy)
+  }
   render()
 }
 
@@ -721,7 +812,8 @@ function zoom(factor) {
 
 async function loadRegion(id) {
   regionId = id
-  selectedId = null
+  clearSelection()
+  marquee = null
   pendingNode = null
   const res = await fetch(`/data/map-data/${id}.json`)
   map = await res.json()
@@ -762,12 +854,13 @@ function bind() {
     if (event.key !== 'Enter' || !searchTerm) return
     const hit = Object.keys(map).find((id) => matches(map[id], id))
     if (!hit) return
-    selectedId = hit
+    setSingleSelection(hit)
     centreOn(hit)
     render()
   })
   for (const key of ['showHidden', 'showLabels', 'showGrid']) els[key].addEventListener('change', render)
   els.roadMode.addEventListener('change', () => { pendingNode = null; render() })
+  els.clearSelection.addEventListener('click', () => { clearSelection(); render() })
   els.copy.addEventListener('click', async () => {
     const text = buildJSON()
     if (!text || text === '{}') return

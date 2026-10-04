@@ -868,7 +868,10 @@ One-off scripts used to build the data JSON (not run during dev/build):
 - `map-editor.html` — a hand-written dev page (not in the build) for eyeballing
   and nudging the Town Map layouts: it lists every region, draws the fully
   unlocked map with the same elbow roads as the game, and lets you drag nodes
-  (click + arrow keys to nudge, Shift for whole units). The 0..100 game bounds
+  (click + arrow keys to nudge, Shift for whole units). Select several nodes with
+  Shift/Ctrl-click, Shift/Ctrl-drag a box, or click a changes/road entry; drag
+  any selected node (or nudge) to move them all together, and Escape/Clear
+  deselects. The 0..100 game bounds
   are drawn as a dashed frame with the outside shaded, and any node outside them
   gets a red ring plus a sidebar warning (and a "Pull all into bounds" button),
   since the game canvas clips to 0..100. Tick "Edit roads" (or

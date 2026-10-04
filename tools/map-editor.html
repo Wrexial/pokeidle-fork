@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pokemon Idle — Map Editor</title>
+<style>
+  :root {
+    --bg: #1b1b24;
+    --panel: #262633;
+    --panel-2: #2f2f40;
+    --line: #45455c;
+    --text: #e8e8f0;
+    --muted: #9a9ab0;
+    --accent: #ffd24a;
+    --water: #4a78c8;
+    --land: #6ba85c;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font: 13px/1.4 -apple-system, "Segoe UI", Roboto, sans-serif;
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+  }
+  #side {
+    width: 340px;
+    flex: 0 0 340px;
+    background: var(--panel);
+    border-right: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+    gap: 10px;
+    overflow-y: auto;
+  }
+  h1 { font-size: 15px; margin: 0 0 2px; }
+  h2 { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 8px 0 4px; }
+  .hint { color: var(--muted); font-size: 12px; }
+  select, button, input[type="text"] {
+    background: var(--panel-2);
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 6px 8px;
+    font: inherit;
+  }
+  button { cursor: pointer; }
+  button:hover { border-color: var(--accent); }
+  button.primary { background: #3a5a2a; border-color: #5a8a3a; }
+  button.primary:hover { border-color: var(--accent); }
+  button.danger { background: #4a2a2a; border-color: #7a3a3a; }
+  .row { display: flex; gap: 8px; align-items: center; }
+  .row > * { flex: 1; }
+  .row.tight > * { flex: 0 0 auto; }
+  #search { width: 100%; }
+  #legend { display: flex; flex-wrap: wrap; gap: 8px 12px; font-size: 12px; color: var(--muted); }
+  #legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .swatch { width: 12px; height: 12px; border-radius: 3px; display: inline-block; border: 1px solid #0008; }
+  .swatch.square { border-radius: 3px; }
+  .swatch.circle { border-radius: 50%; }
+  .swatch.diamond { transform: rotate(45deg); border-radius: 2px; }
+  #selected {
+    background: var(--panel-2);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 12px;
+    min-height: 54px;
+  }
+  #selected b { color: var(--accent); }
+  #selected .id { color: var(--muted); word-break: break-all; }
+  #changes { max-height: 220px; overflow-y: auto; font-size: 12px; }
+  .change {
+    display: flex; justify-content: space-between; gap: 6px;
+    padding: 3px 6px; border-radius: 4px; cursor: pointer;
+  }
+  .change:hover { background: var(--panel-2); }
+  .change .delta { color: var(--muted); font-variant-numeric: tabular-nums; }
+  #output {
+    width: 100%; height: 130px; resize: vertical;
+    background: #14141c; color: #b8e0a0;
+    border: 1px solid var(--line); border-radius: 6px;
+    font: 11px/1.4 ui-monospace, Consolas, monospace;
+    padding: 6px; white-space: pre;
+  }
+  #stage { flex: 1; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  #map { background: #3a6cb0; touch-action: none; user-select: none; }
+  #map .road { stroke: #7a5a30; stroke-width: .9; stroke-linecap: round; fill: none; }
+  #map .road-fill { stroke: #a08040; stroke-width: .42; stroke-linecap: round; fill: none; }
+  #map .grid-line { stroke: #ffffff22; stroke-width: .08; }
+  #map .grid-text { fill: #ffffff55; font-size: 1.5px; }
+  #map .node { cursor: grab; }
+  #map .node:active { cursor: grabbing; }
+  #map .node .dot { stroke: #0007; stroke-width: .25; }
+  #map .node.town .dot { fill: #d03020; stroke: #c8a860; }
+  #map .node.route .dot { fill: #3a8f3a; stroke: #a09070; }
+  #map .node.zone .dot { fill: #3a78c8; stroke: #f0d870; }
+  #map .node.raid .dot { fill: #8a3ac8; stroke: #d0a0f0; }
+  #map .node.facility .dot { fill: #8888a0; stroke: #cccccc; }
+  #map .node.hidden-sub .dot { fill: #6a8f3a; stroke-dasharray: .6 .4; }
+  #map .node .hit { fill: transparent; }
+  #map .node .label {
+    fill: #ffffff; stroke: #000000cc; stroke-width: .45; paint-order: stroke;
+    font-size: 2px; text-anchor: middle; pointer-events: none;
+  }
+  #map .node.selected .ring {
+    fill: none; stroke: var(--accent); stroke-width: .5; stroke-dasharray: .8 .5;
+  }
+  #map .node.match .dot { stroke: #fff; stroke-width: .6; }
+  #tooltip {
+    position: fixed; pointer-events: none; z-index: 20;
+    background: #000000e6; border: 1px solid var(--line); border-radius: 6px;
+    padding: 5px 7px; font-size: 12px; max-width: 280px; display: none;
+  }
+  #tooltip .id { color: var(--accent); font-family: ui-monospace, Consolas, monospace; font-size: 11px; }
+  #overlay {
+    position: fixed; inset: 0; background: #1b1b24ee; z-index: 50;
+    display: none; align-items: center; justify-content: center; text-align: center; padding: 24px;
+  }
+  #overlay.show { display: flex; }
+  #overlay pre { background: #14141c; padding: 12px; border-radius: 8px; text-align: left; }
+</style>
+</head>
+<body>
+<div id="side">
+  <div>
+    <h1>Map Editor</h1>
+    <div class="hint">Fully-unlocked Town Maps. Drag a node to move it, or click it and nudge with the arrow keys. Then copy the block at the bottom and paste it into chat.</div>
+  </div>
+
+  <div class="row">
+    <select id="region"></select>
+  </div>
+  <div class="row tight">
+    <button id="prev" title="Previous region">&larr;</button>
+    <button id="next" title="Next region">&rarr;</button>
+    <button id="fit">Fit</button>
+    <button id="zoom-in">+</button>
+    <button id="zoom-out">&minus;</button>
+  </div>
+  <input id="search" type="text" placeholder="Search name or id…" />
+  <div class="row tight" style="flex-wrap:wrap">
+    <label class="hint"><input type="checkbox" id="show-hidden" /> Show zone sub-areas</label>
+    <label class="hint"><input type="checkbox" id="show-labels" checked /> All labels</label>
+    <label class="hint"><input type="checkbox" id="snap" /> Snap 0.5</label>
+    <label class="hint"><input type="checkbox" id="show-grid" /> Grid</label>
+  </div>
+
+  <div id="legend"></div>
+
+  <h2>Selected</h2>
+  <div id="selected">Nothing selected. Click a node.</div>
+
+  <h2>Changes <span id="change-count" class="hint"></span></h2>
+  <div id="changes"><div class="hint">No changes yet.</div></div>
+  <div class="row tight">
+    <button id="revert-region">Revert region</button>
+    <button id="revert-all" class="danger">Revert all</button>
+  </div>
+
+  <h2>Copy this to chat</h2>
+  <textarea id="output" readonly placeholder="Move some nodes and the block appears here."></textarea>
+  <div class="row tight">
+    <button id="copy" class="primary">Copy moves</button>
+    <button id="download">Download JSON</button>
+  </div>
+  <div class="hint">Also fine: just tell me in words, e.g. &ldquo;move alola-route-5 left of Paniola&rdquo;.</div>
+</div>
+
+<div id="stage">
+  <svg id="map" xmlns="http://www.w3.org/2000/svg"></svg>
+</div>
+
+<div id="tooltip"></div>
+<div id="overlay">
+  <div>
+    <h1>Serve this over the dev server</h1>
+    <p>The editor needs to load <code>/data/…</code>. Run:</p>
+    <pre>npm run dev</pre>
+    <p>then open <b>http://localhost:5173/tools/map-editor.html</b></p>
+  </div>
+</div>
+
+<script>
+'use strict'
+
+const SVG_NS = 'http://www.w3.org/2000/svg'
+const STORAGE_KEY = 'pi-map-editor-v1'
+const DOT_R = { town: 1.3, route: 1.0, zone: 1.6, raid: 1.3, facility: 1.1 }
+const LEGEND = [
+  ['town', 'Town / league', '#d03020', 'square'],
+  ['route', 'Route / area', '#3a8f3a', 'circle'],
+  ['zone', 'Zone hub', '#3a78c8', 'diamond'],
+  ['raid', 'Raid island', '#8a3ac8', 'circle'],
+  ['facility', 'Facility', '#8888a0', 'circle'],
+]
+
+const els = {
+  region: document.getElementById('region'),
+  prev: document.getElementById('prev'),
+  next: document.getElementById('next'),
+  fit: document.getElementById('fit'),
+  zoomIn: document.getElementById('zoom-in'),
+  zoomOut: document.getElementById('zoom-out'),
+  search: document.getElementById('search'),
+  showHidden: document.getElementById('show-hidden'),
+  showLabels: document.getElementById('show-labels'),
+  snap: document.getElementById('snap'),
+  showGrid: document.getElementById('show-grid'),
+  legend: document.getElementById('legend'),
+  selected: document.getElementById('selected'),
+  changes: document.getElementById('changes'),
+  changeCount: document.getElementById('change-count'),
+  output: document.getElementById('output'),
+  copy: document.getElementById('copy'),
+  download: document.getElementById('download'),
+  revertRegion: document.getElementById('revert-region'),
+  revertAll: document.getElementById('revert-all'),
+  map: document.getElementById('map'),
+  tooltip: document.getElementById('tooltip'),
+  overlay: document.getElementById('overlay'),
+}
+
+/** @type {{id:string, name:string, generation:number, isDlc?:boolean}[]} */
+let regions = []
+/** @type {Record<string, any>} */
+let map = {}
+let regionId = null
+let selectedId = null
+/** overrides: regionId -> nodeId -> {x, y} */
+let overrides = loadOverrides()
+/** view: centre + size (viewBox is size x size) */
+const view = { cx: 50, cy: 50, size: 100 }
+let drag = null
+let searchTerm = ''
+
+function loadOverrides() {
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}')
+  } catch {
+    return {}
+  }
+}
+function saveOverrides() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(overrides))
+}
+
+function pos(id) {
+  const o = overrides[regionId]?.[id]
+  return o ? { x: o.x, y: o.y } : { x: map[id].position.x, y: map[id].position.y }
+}
+function isChanged(id) {
+  const base = map[id]?.position
+  const cur = overrides[regionId]?.[id]
+  if (!base || !cur) return false
+  return Math.abs(cur.x - base.x) > 1e-6 || Math.abs(cur.y - base.y) > 1e-6
+}
+function setPos(id, x, y) {
+  const base = map[id].position
+  overrides[regionId] = overrides[regionId] || {}
+  if (Math.abs(x - base.x) < 1e-6 && Math.abs(y - base.y) < 1e-6) delete overrides[regionId][id]
+  else overrides[regionId][id] = { x: round2(x), y: round2(y) }
+  if (!Object.keys(overrides[regionId]).length) delete overrides[regionId]
+  saveOverrides()
+}
+function round2(n) {
+  return Math.round(n * 100) / 100
+}
+function clamp(n) {
+  return Math.max(-5, Math.min(105, n))
+}
+
+function visibleIds() {
+  const ids = []
+  for (const id of Object.keys(map)) {
+    const loc = map[id]
+    if (loc.hidden && !els.showHidden.checked) continue
+    ids.push(id)
+  }
+  return ids
+}
+
+function svgEl(tag, attrs) {
+  const el = document.createElementNS(SVG_NS, tag)
+  for (const key in attrs) el.setAttribute(key, attrs[key])
+  return el
+}
+
+function elbowD(a, b) {
+  const horizontalFirst = Math.abs(b.x - a.x) >= Math.abs(b.y - a.y)
+  const pts = horizontalFirst
+    ? [a, { x: b.x, y: a.y }, b]
+    : [a, { x: a.x, y: b.y }, b]
+  return `M ${pts[0].x} ${pts[0].y} L ${pts[1].x} ${pts[1].y} L ${pts[2].x} ${pts[2].y}`
+}
+
+function render() {
+  if (!regionId) return
+  const ids = visibleIds()
+  const active = new Set(ids)
+  const svg = els.map
+  const w = els.map.parentElement.clientWidth
+  const h = els.map.parentElement.clientHeight
+  const side = Math.min(w, h) - 16
+  svg.setAttribute('width', side)
+  svg.setAttribute('height', side)
+  svg.setAttribute('viewBox', `${view.cx - view.size / 2} ${view.cy - view.size / 2} ${view.size} ${view.size}`)
+  while (svg.firstChild) svg.removeChild(svg.firstChild)
+
+  // grid
+  if (els.showGrid.checked) {
+    for (let i = 0; i <= 100; i += 10) {
+      svg.appendChild(svgEl('line', { class: 'grid-line', x1: i, y1: 0, x2: i, y2: 100 }))
+      svg.appendChild(svgEl('line', { class: 'grid-line', x1: 0, y1: i, x2: 100, y2: i }))
+    }
+  }
+
+  // roads (dedupe)
+  const seen = new Set()
+  const roadGroup = svgEl('g', {})
+  const fillGroup = svgEl('g', {})
+  for (const id of ids) {
+    for (const other of map[id].connections || []) {
+      if (!map[other] || !active.has(other)) continue
+      const key = [id, other].sort().join('|')
+      if (seen.has(key)) continue
+      seen.add(key)
+      const d = elbowD(pos(id), pos(other))
+      roadGroup.appendChild(svgEl('path', { class: 'road', d }))
+      fillGroup.appendChild(svgEl('path', { class: 'road-fill', d }))
+    }
+  }
+  svg.appendChild(roadGroup)
+  svg.appendChild(fillGroup)
+
+  // nodes
+  for (const id of ids) {
+    const loc = map[id]
+    const p = pos(id)
+    const r = DOT_R[loc.type] || 1.1
+    const g = svgEl('g', { class: `node ${loc.type}${loc.hidden ? ' hidden-sub' : ''}`, 'data-id': id })
+    if (id === selectedId) g.classList.add('selected')
+    if (searchTerm && matches(loc, id)) g.classList.add('match')
+    if (id === selectedId) g.appendChild(svgEl('circle', { class: 'ring', cx: p.x, cy: p.y, r: r + 1.2 }))
+    if (loc.type === 'town' || loc.type === 'zone') {
+      g.appendChild(svgEl('rect', { class: 'dot', x: p.x - r, y: p.y - r, width: r * 2, height: r * 2, rx: 0.4, transform: loc.type === 'zone' ? `rotate(45 ${p.x} ${p.y})` : '' }))
+    } else {
+      g.appendChild(svgEl('circle', { class: 'dot', cx: p.x, cy: p.y, r }))
+    }
+    g.appendChild(svgEl('circle', { class: 'hit', cx: p.x, cy: p.y, r: r + 1.5 }))
+    if (els.showLabels.checked || id === selectedId || (searchTerm && matches(loc, id))) {
+      const label = svgEl('text', { class: 'label', x: p.x, y: p.y + r + 1.8 })
+      label.textContent = loc.name
+      g.appendChild(label)
+    }
+    g.addEventListener('pointerdown', (event) => startNodeDrag(event, id))
+    g.addEventListener('pointerenter', (event) => showTooltip(event, id))
+    g.addEventListener('pointermove', (event) => moveTooltip(event))
+    g.addEventListener('pointerleave', hideTooltip)
+    svg.appendChild(g)
+  }
+  renderSidebar()
+}
+
+function matches(loc, id) {
+  const term = searchTerm.toLowerCase()
+  return loc.name.toLowerCase().includes(term) || id.toLowerCase().includes(term)
+}
+
+function renderSidebar() {
+  // changes list
+  const regionChanges = Object.entries(overrides[regionId] || {})
+  els.changeCount.textContent = regionChanges.length ? `(${regionChanges.length})` : ''
+  els.changes.innerHTML = ''
+  if (!regionChanges.length) {
+    els.changes.innerHTML = '<div class="hint">No changes in this region.</div>'
+  } else {
+    for (const [id, p] of regionChanges) {
+      const base = map[id]?.position || { x: 0, y: 0 }
+      const row = document.createElement('div')
+      row.className = 'change'
+      row.innerHTML = `${map[id]?.name || id}<span class="delta">${fmt(base.x)}→${fmt(p.x)} , ${fmt(base.y)}→${fmt(p.y)}</span>`
+      row.addEventListener('click', () => {
+        selectedId = id
+        centreOn(id)
+        render()
+      })
+      els.changes.appendChild(row)
+    }
+  }
+  // selected info
+  if (selectedId && map[selectedId]) {
+    const loc = map[selectedId]
+    const p = pos(selectedId)
+    els.selected.innerHTML = `<b>${loc.name}</b> <span class="hint">(${loc.type}${loc.hidden ? ', hidden' : ''})</span><br><span class="id">${selectedId}</span><br>x ${fmt(p.x)}, y ${fmt(p.y)}` + (isChanged(selectedId) ? ' <span class="hint">(moved)</span>' : '')
+  } else {
+    els.selected.textContent = 'Nothing selected. Click a node.'
+  }
+  // output
+  els.output.value = Object.keys(overrides).length ? buildJSON() : ''
+}
+
+function buildJSON() {
+  const out = {}
+  for (const rid of Object.keys(overrides).sort()) {
+    if (!Object.keys(overrides[rid]).length) continue
+    out[rid] = overrides[rid]
+  }
+  return JSON.stringify(out, null, 2)
+}
+
+function fmt(n) {
+  return Number.isInteger(n) ? String(n) : String(round2(n))
+}
+
+function centreOn(id) {
+  const p = pos(id)
+  view.cx = p.x
+  view.cy = p.y
+}
+
+function showTooltip(event, id) {
+  const loc = map[id]
+  const p = pos(id)
+  els.tooltip.innerHTML = `<b>${loc.name}</b> <span class="hint">${loc.type}${loc.hidden ? ' · hidden' : ''}</span><br><span class="id">${id}</span><br>x ${fmt(p.x)}, y ${fmt(p.y)}`
+  els.tooltip.style.display = 'block'
+  moveTooltip(event)
+}
+function moveTooltip(event) {
+  els.tooltip.style.left = event.clientX + 14 + 'px'
+  els.tooltip.style.top = event.clientY + 14 + 'px'
+}
+function hideTooltip() {
+  els.tooltip.style.display = 'none'
+}
+
+function svgPoint(event) {
+  const rect = els.map.getBoundingClientRect()
+  return {
+    x: (event.clientX - rect.left) / rect.width * view.size + (view.cx - view.size / 2),
+    y: (event.clientY - rect.top) / rect.height * view.size + (view.cy - view.size / 2),
+  }
+}
+
+function startNodeDrag(event, id) {
+  event.stopPropagation()
+  selectedId = id
+  const p = pos(id)
+  const start = svgPoint(event)
+  drag = { id, dx: p.x - start.x, dy: p.y - start.y }
+  els.map.setPointerCapture(event.pointerId)
+  render()
+}
+
+function onMapPointerDown(event) {
+  // background pan
+  const start = { x: event.clientX, y: event.clientY, cx: view.cx, cy: view.cy }
+  const rect = els.map.getBoundingClientRect()
+  const perPx = view.size / rect.width
+  const move = (e) => {
+    view.cx = start.cx - (e.clientX - start.x) * perPx
+    view.cy = start.cy - (e.clientY - start.y) * perPx
+    render()
+  }
+  const up = () => {
+    window.removeEventListener('pointermove', move)
+    window.removeEventListener('pointerup', up)
+  }
+  window.addEventListener('pointermove', move)
+  window.addEventListener('pointerup', up)
+}
+
+function onPointerMove(event) {
+  if (!drag) return
+  const p = svgPoint(event)
+  let x = clamp(p.x + drag.dx)
+  let y = clamp(p.y + drag.dy)
+  if (els.snap.checked) {
+    x = Math.round(x * 2) / 2
+    y = Math.round(y * 2) / 2
+  }
+  setPos(drag.id, x, y)
+  render()
+}
+
+function endDrag() {
+  drag = null
+}
+
+function onKeyDown(event) {
+  if (!selectedId) return
+  if (event.target.matches('input, select, textarea')) return
+  const step = event.shiftKey ? 1 : 0.25
+  let dx = 0
+  let dy = 0
+  if (event.key === 'ArrowLeft') dx = -step
+  else if (event.key === 'ArrowRight') dx = step
+  else if (event.key === 'ArrowUp') dy = -step
+  else if (event.key === 'ArrowDown') dy = step
+  else return
+  event.preventDefault()
+  const p = pos(selectedId)
+  setPos(selectedId, p.x + dx, p.y + dy)
+  render()
+}
+
+function zoom(factor) {
+  view.size = Math.max(12, Math.min(140, view.size * factor))
+  render()
+}
+
+async function loadRegion(id) {
+  regionId = id
+  selectedId = null
+  const res = await fetch(`/data/map-data/${id}.json`)
+  map = await res.json()
+  els.region.value = id
+  view.cx = 50
+  view.cy = 50
+  view.size = 100
+  window.location.hash = id
+  render()
+}
+
+function populateRegions() {
+  els.region.innerHTML = ''
+  for (const region of regions) {
+    const option = document.createElement('option')
+    option.value = region.id
+    option.textContent = region.name + (region.isDlc ? ' (DLC)' : '')
+    els.region.appendChild(option)
+  }
+}
+
+function stepRegion(delta) {
+  const index = regions.findIndex((r) => r.id === regionId)
+  const next = regions[(index + delta + regions.length) % regions.length]
+  if (next) loadRegion(next.id)
+}
+
+function bind() {
+  els.legend.innerHTML = LEGEND.map(([type, text, color, shape]) => `<span><span class="swatch ${shape}" style="background:${color}"></span>${text}</span>`).join('')
+  els.region.addEventListener('change', () => loadRegion(els.region.value))
+  els.prev.addEventListener('click', () => stepRegion(-1))
+  els.next.addEventListener('click', () => stepRegion(1))
+  els.fit.addEventListener('click', () => { view.cx = 50; view.cy = 50; view.size = 100; render() })
+  els.zoomIn.addEventListener('click', () => zoom(0.8))
+  els.zoomOut.addEventListener('click', () => zoom(1.25))
+  els.search.addEventListener('input', () => { searchTerm = els.search.value.trim(); render() })
+  els.search.addEventListener('keydown', (event) => {
+    if (event.key !== 'Enter' || !searchTerm) return
+    const hit = Object.keys(map).find((id) => matches(map[id], id))
+    if (!hit) return
+    selectedId = hit
+    centreOn(hit)
+    render()
+  })
+  for (const key of ['showHidden', 'showLabels', 'showGrid']) els[key].addEventListener('change', render)
+  els.copy.addEventListener('click', async () => {
+    const text = buildJSON()
+    if (!text || text === '{}') return
+    try { await navigator.clipboard.writeText(text) } catch { els.output.select(); document.execCommand('copy') }
+    els.copy.textContent = 'Copied!'
+    setTimeout(() => { els.copy.textContent = 'Copy moves' }, 1200)
+  })
+  els.download.addEventListener('click', () => {
+    const text = buildJSON()
+    const blob = new Blob([text], { type: 'application/json' })
+    const a = document.createElement('a')
+    a.href = URL.createObjectURL(blob)
+    a.download = 'map-editor-moves.json'
+    a.click()
+    URL.revokeObjectURL(a.href)
+  })
+  els.revertRegion.addEventListener('click', () => {
+    if (regionId) delete overrides[regionId]
+    saveOverrides()
+    render()
+  })
+  els.revertAll.addEventListener('click', () => {
+    if (confirm('Discard every change in every region?')) {
+      overrides = {}
+      saveOverrides()
+      render()
+    }
+  })
+  els.map.addEventListener('pointerdown', onMapPointerDown)
+  window.addEventListener('pointermove', onPointerMove)
+  window.addEventListener('pointerup', endDrag)
+  window.addEventListener('keydown', onKeyDown)
+  window.addEventListener('resize', render)
+}
+
+async function init() {
+  try {
+    const res = await fetch('/data/regions.json')
+    if (!res.ok) throw new Error('bad response')
+    regions = await res.json()
+  } catch {
+    els.overlay.classList.add('show')
+    return
+  }
+  populateRegions()
+  bind()
+  const hash = window.location.hash.replace('#', '')
+  const first = regions.find((r) => r.id === hash) || regions[0]
+  await loadRegion(first.id)
+}
+
+init()
+</script>
+</body>
+</html>

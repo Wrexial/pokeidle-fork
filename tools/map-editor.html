@@ -109,6 +109,12 @@
   .road-item .tag { color: var(--muted); }
   #map .grid-line { stroke: #ffffff22; stroke-width: .08; }
   #map .grid-text { fill: #ffffff55; font-size: 1.5px; }
+  #map .bounds-shade { fill: rgba(12,12,20,.5); pointer-events: none; }
+  #map .bounds-line { fill: none; stroke: var(--accent); stroke-width: .4; stroke-dasharray: 1.6 .9; pointer-events: none; }
+  #map .bounds-label { fill: var(--accent); font-size: 2.2px; opacity: .85; pointer-events: none; }
+  #map .node.out-of-bounds .ring { stroke: #ff5555; stroke-dasharray: .7 .5; }
+  #bounds-warning { color: #ff9a9a; font-size: 12px; }
+  #bounds-warning button { color: #fff; }
   #map .node { cursor: grab; }
   #map .node:active { cursor: grabbing; }
   #map .node .dot { stroke: #0007; stroke-width: .25; }
@@ -168,6 +174,7 @@
   </div>
 
   <div id="legend"></div>
+  <div id="bounds-warning"></div>
 
   <h2>Selected</h2>
   <div id="selected">Nothing selected. Click a node.</div>
@@ -236,6 +243,7 @@ const els = {
   roadMode: document.getElementById('road-mode'),
   stage: document.getElementById('stage'),
   legend: document.getElementById('legend'),
+  boundsWarning: document.getElementById('bounds-warning'),
   selected: document.getElementById('selected'),
   changes: document.getElementById('changes'),
   changeCount: document.getElementById('change-count'),
@@ -266,6 +274,8 @@ let roadEdits = loadRoadEdits()
 let pendingNode = null
 /** view: centre + size (viewBox is size x size) */
 const view = { cx: 50, cy: 50, size: 100 }
+// Fit leaves a small margin so the 0..100 bounds frame is visible inside it.
+const FIT_SIZE = 106
 let drag = null
 let searchTerm = ''
 
@@ -317,6 +327,12 @@ function clamp(n) {
 
 function edgeKey(a, b) {
   return [a, b].sort().join('|')
+}
+
+const BOUNDS = { min: 0, max: 100 }
+function outOfBounds(id) {
+  const p = pos(id)
+  return p.x < BOUNDS.min || p.x > BOUNDS.max || p.y < BOUNDS.min || p.y > BOUNDS.max
 }
 
 /** Every edge the data has, as sorted keys. */
@@ -394,6 +410,20 @@ function render() {
     }
   }
 
+  // world bounds (0..100) — the game clips to this, so anything outside is cut
+  svg.appendChild(svgEl('path', {
+    class: 'bounds-shade',
+    'fill-rule': 'evenodd',
+    d: 'M -1000 -1000 H 1100 V 1100 H -1000 Z M 0 0 H 100 V 100 H 0 Z',
+  }))
+  svg.appendChild(svgEl('rect', { class: 'bounds-line', x: 0, y: 0, width: 100, height: 100 }))
+  const boundsMin = svgEl('text', { class: 'bounds-label', x: 1.2, y: 3.4 })
+  boundsMin.textContent = '0,0'
+  svg.appendChild(boundsMin)
+  const boundsMax = svgEl('text', { class: 'bounds-label', x: 98.8, y: 98.4, 'text-anchor': 'end' })
+  boundsMax.textContent = '100,100'
+  svg.appendChild(boundsMax)
+
   // roads
   const original = originalEdgeSet()
   const { removed, added } = regionRoadEdits()
@@ -441,10 +471,12 @@ function render() {
     const p = pos(id)
     const r = DOT_R[loc.type] || 1.1
     const g = svgEl('g', { class: `node ${loc.type}${loc.hidden ? ' hidden-sub' : ''}`, 'data-id': id })
+    const oob = outOfBounds(id)
+    if (oob) g.classList.add('out-of-bounds')
     if (id === selectedId || id === pendingNode) g.classList.add('selected')
     if (id === pendingNode) g.classList.add('pending')
     if (searchTerm && matches(loc, id)) g.classList.add('match')
-    if (id === selectedId || id === pendingNode) g.appendChild(svgEl('circle', { class: 'ring', cx: p.x, cy: p.y, r: r + 1.2 }))
+    if (id === selectedId || id === pendingNode || oob) g.appendChild(svgEl('circle', { class: 'ring', cx: p.x, cy: p.y, r: r + 1.2 }))
     if (loc.type === 'town' || loc.type === 'zone') {
       g.appendChild(svgEl('rect', { class: 'dot', x: p.x - r, y: p.y - r, width: r * 2, height: r * 2, rx: 0.4, transform: loc.type === 'zone' ? `rotate(45 ${p.x} ${p.y})` : '' }))
     } else {
@@ -495,7 +527,7 @@ function renderSidebar() {
   if (selectedId && map[selectedId]) {
     const loc = map[selectedId]
     const p = pos(selectedId)
-    els.selected.innerHTML = `<b>${loc.name}</b> <span class="hint">(${loc.type}${loc.hidden ? ', hidden' : ''})</span><br><span class="id">${selectedId}</span><br>x ${fmt(p.x)}, y ${fmt(p.y)}` + (isChanged(selectedId) ? ' <span class="hint">(moved)</span>' : '')
+    els.selected.innerHTML = `<b>${loc.name}</b> <span class="hint">(${loc.type}${loc.hidden ? ', hidden' : ''})</span><br><span class="id">${selectedId}</span><br>x ${fmt(p.x)}, y ${fmt(p.y)}` + (isChanged(selectedId) ? ' <span class="hint">(moved)</span>' : '') + (outOfBounds(selectedId) ? ' <span class="hint" style="color:#ff9a9a">(outside 0..100)</span>' : '')
   } else {
     els.selected.textContent = 'Nothing selected. Click a node.'
   }
@@ -516,6 +548,37 @@ function renderSidebar() {
         row.addEventListener('click', () => { selectedId = a; centreOn(a); render() })
         els.roadChanges.appendChild(row)
       }
+  }
+  // out-of-bounds warning
+  const oobIds = Object.keys(map).filter((id) => outOfBounds(id))
+  els.boundsWarning.innerHTML = ''
+  if (oobIds.length) {
+    const title = document.createElement('div')
+    title.innerHTML = `<b>${oobIds.length} node${oobIds.length === 1 ? '' : 's'} outside the 0..100 map</b> &mdash; the game clips these:`
+    els.boundsWarning.appendChild(title)
+    for (const id of oobIds) {
+      const p = pos(id)
+      const b = document.createElement('button')
+      b.textContent = `${map[id].name} (${fmt(p.x)}, ${fmt(p.y)})`
+      b.style.display = 'block'
+      b.style.width = '100%'
+      b.style.textAlign = 'left'
+      b.style.margin = '2px 0'
+      b.addEventListener('click', () => { selectedId = id; centreOn(id); render() })
+      els.boundsWarning.appendChild(b)
+    }
+    const pull = document.createElement('button')
+    pull.className = 'primary'
+    pull.textContent = 'Pull all into bounds'
+    pull.style.marginTop = '4px'
+    pull.addEventListener('click', () => {
+      for (const id of oobIds) {
+        const p = pos(id)
+        setPos(id, Math.max(1, Math.min(99, p.x)), Math.max(1, Math.min(99, p.y)))
+      }
+      render()
+    })
+    els.boundsWarning.appendChild(pull)
   }
   // output
   els.output.value = Object.keys(overrides).length || Object.keys(roadEdits).length ? buildJSON() : ''
@@ -665,7 +728,7 @@ async function loadRegion(id) {
   els.region.value = id
   view.cx = 50
   view.cy = 50
-  view.size = 100
+  view.size = FIT_SIZE
   window.location.hash = id
   render()
 }
@@ -691,7 +754,7 @@ function bind() {
   els.region.addEventListener('change', () => loadRegion(els.region.value))
   els.prev.addEventListener('click', () => stepRegion(-1))
   els.next.addEventListener('click', () => stepRegion(1))
-  els.fit.addEventListener('click', () => { view.cx = 50; view.cy = 50; view.size = 100; render() })
+  els.fit.addEventListener('click', () => { view.cx = 50; view.cy = 50; view.size = FIT_SIZE; render() })
   els.zoomIn.addEventListener('click', () => zoom(0.8))
   els.zoomOut.addEventListener('click', () => zoom(1.25))
   els.search.addEventListener('input', () => { searchTerm = els.search.value.trim(); render() })

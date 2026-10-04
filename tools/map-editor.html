@@ -307,6 +307,41 @@ function saveRoadEdits() {
   localStorage.setItem(ROAD_STORAGE_KEY, JSON.stringify(roadEdits))
 }
 
+/** Fetch the committed overrides file so the export can stay cumulative. */
+async function loadFileOverrides() {
+  try {
+    const res = await fetch('/tools/map-layout-overrides.json')
+    return res.ok ? await res.json() : {}
+  } catch {
+    return {}
+  }
+}
+
+/**
+ * Seed localStorage from the overrides file, without overwriting anything
+ * already there (the current session wins). This is what makes the export
+ * cumulative: an override already baked into the committed data would
+ * otherwise drop out, because the editor compares against that data.
+ */
+function mergeFileOverrides(file) {
+  for (const [region, entry] of Object.entries(file)) {
+    overrides[region] = overrides[region] || {}
+    for (const [id, pos] of Object.entries(entry.positions || {}))
+      if (!overrides[region][id]) overrides[region][id] = { x: pos.x, y: pos.y }
+    roadEdits[region] = roadEdits[region] || {}
+    const have = new Set(Object.keys(roadEdits[region]))
+    for (const state of ['remove', 'add']) {
+      for (const [a, b] of entry.roads?.[state] || []) {
+        const key = edgeKey(a, b)
+        if (have.has(key)) continue
+        roadEdits[region][key] = state === 'remove' ? 'removed' : 'added'
+        have.add(key)
+      }
+    }
+    if (!Object.keys(roadEdits[region]).length) delete roadEdits[region]
+  }
+}
+
 function pos(id) {
   const o = overrides[regionId]?.[id]
   return o ? { x: o.x, y: o.y } : { x: map[id].position.x, y: map[id].position.y }
@@ -529,8 +564,8 @@ function matches(loc, id) {
 }
 
 function renderSidebar() {
-  // changes list
-  const regionChanges = Object.entries(overrides[regionId] || {})
+  // changes list — only genuine moves; the copy block stays cumulative
+  const regionChanges = Object.entries(overrides[regionId] || {}).filter(([id]) => isChanged(id))
   els.changeCount.textContent = regionChanges.length ? `(${regionChanges.length})` : ''
   els.changes.innerHTML = ''
   if (!regionChanges.length) {
@@ -915,6 +950,7 @@ async function init() {
   }
   populateRegions()
   bind()
+  mergeFileOverrides(await loadFileOverrides())
   if (new URLSearchParams(window.location.search).has('roads')) els.roadMode.checked = true
   const hash = window.location.hash.replace('#', '')
   const first = regions.find((r) => r.id === hash) || regions[0]

@@ -877,10 +877,12 @@ One-off scripts used to build the data JSON (not run during dev/build):
   since the game canvas clips to 0..100. Tick "Edit roads" (or
   add `?roads=1` to the URL) to click a road and remove it, or click two nodes
   to add one; removed roads show red/dashed and added ones cyan. Changes persist
-  in `localStorage` and copy out as the block above, which is saved into
-  `map-layout-overrides.json`. Open it from the dev server at
-  `/tools/map-editor.html` (it fetches `/data/map-data/<region>.json`). Not part
-  of the build; no generator needed.
+  in `localStorage` plus the committed `map-layout-overrides.json` (fetched at
+  `/tools/map-layout-overrides.json`), so the copy block is always cumulative
+  even for overrides already applied to the data. The "Changes" list still only
+  shows genuine moves. Open it from the dev server at
+  `/tools/map-editor.html` (it fetches `/data/map-data/<region>.json` and the
+  overrides file). Not part of the build; no generator needed.
 - `lib/zone-layout.cjs` — shared `spreadSubAreaPositions` ring layout for a
   zone hub's hidden sub-areas; used by `generate-regions.cjs` and
   `apply-zone-layout.cjs`.

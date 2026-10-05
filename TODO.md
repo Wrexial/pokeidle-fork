@@ -137,10 +137,8 @@ into 21–52 locations per region, with ~100 hand-added landmark areas on top
 
 ### 28a. Post-game regions
 
-The Galar / Paldea DLC and Kanto's Sevii Islands are first-class `isDlc` regions
-(#39, #28a).
-
-- [ ] The remaining Unova Black 2 / White 2 areas.
+The Galar / Paldea DLC, Kanto's Sevii Islands and Unova's Black 2 / White 2
+areas have all shipped (#39, #28a). No open items.
 
 ### 28b. More ordinary areas
 

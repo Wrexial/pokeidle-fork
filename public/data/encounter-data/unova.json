@@ -4584,5 +4584,163 @@
     "maxLevel": 69
    }
   ]
+ },
+ "unova-celestial-tower": {
+  "name": "Celestial Tower",
+  "encounters": [
+   {
+    "speciesKey": "litwick",
+    "weight": 20,
+    "minLevel": 23,
+    "maxLevel": 25
+   },
+   {
+    "speciesKey": "elgyem",
+    "weight": 20,
+    "minLevel": 23,
+    "maxLevel": 25
+   },
+   {
+    "speciesKey": "gothita",
+    "weight": 20,
+    "minLevel": 23,
+    "maxLevel": 25
+   },
+   {
+    "speciesKey": "solosis",
+    "weight": 12,
+    "minLevel": 23,
+    "maxLevel": 25
+   },
+   {
+    "speciesKey": "woobat",
+    "weight": 12,
+    "minLevel": 23,
+    "maxLevel": 25
+   }
+  ]
+ },
+ "unova-liberty-garden": {
+  "name": "Liberty Garden",
+  "encounters": [
+   {
+    "speciesKey": "patrat",
+    "weight": 20,
+    "minLevel": 5,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "purrloin",
+    "weight": 20,
+    "minLevel": 5,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "pidove",
+    "weight": 20,
+    "minLevel": 5,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "audino",
+    "weight": 12,
+    "minLevel": 5,
+    "maxLevel": 7
+   }
+  ]
+ },
+ "unova-nature-sanctuary": {
+  "name": "Nature Sanctuary",
+  "encounters": [
+   {
+    "speciesKey": "audino",
+    "weight": 20,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "sawsbuck",
+    "weight": 20,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "foongus",
+    "weight": 20,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "amoonguss",
+    "weight": 12,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "deerling",
+    "weight": 12,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "minccino",
+    "weight": 12,
+    "minLevel": 43,
+    "maxLevel": 45
+   }
+  ]
+ },
+ "unova-victory-road": {
+  "name": "Victory Road",
+  "encounters": [
+   {
+    "speciesKey": "boldore",
+    "weight": 20,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "woobat",
+    "weight": 20,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "gurdurr",
+    "weight": 20,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "durant",
+    "weight": 12,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "heatmor",
+    "weight": 12,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "sawk",
+    "weight": 12,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "throh",
+    "weight": 12,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "excadrill",
+    "weight": 12,
+    "minLevel": 73,
+    "maxLevel": 75
+   }
+  ]
  }
 }

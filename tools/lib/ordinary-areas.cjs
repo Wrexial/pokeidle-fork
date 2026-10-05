@@ -529,6 +529,34 @@ module.exports = {
         position: { x: 90, y: 48 },
         species: ['klink', 'magnemite', 'voltorb', 'trubbish', 'koffing'],
       },
+      {
+        node: 'celestial-tower',
+        name: 'Celestial Tower',
+        connects: ['unova-route-7', 'unova-mistralton-city'],
+        position: { x: 19, y: 38 },
+        species: ['litwick', 'elgyem', 'gothita', 'solosis', 'woobat'],
+      },
+      {
+        node: 'liberty-garden',
+        name: 'Liberty Garden',
+        connects: ['unova-nacrene-city', 'unova-castelia-city'],
+        position: { x: 84, y: 68 },
+        species: ['patrat', 'purrloin', 'pidove', 'audino'],
+      },
+      {
+        node: 'nature-sanctuary',
+        name: 'Nature Sanctuary',
+        connects: ['unova-route-14'],
+        position: { x: 84, y: 52 },
+        species: ['audino', 'sawsbuck', 'foongus', 'amoonguss', 'deerling', 'minccino'],
+      },
+      {
+        node: 'victory-road',
+        name: 'Victory Road',
+        connects: ['unova-route-23'],
+        position: { x: 93, y: 39 },
+        species: ['boldore', 'woobat', 'gurdurr', 'durant', 'heatmor', 'sawk', 'throh', 'excadrill'],
+      },
     ],
     kalos: [
       {

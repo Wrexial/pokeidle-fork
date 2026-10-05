@@ -291,7 +291,8 @@
   "connections": [
    "unova-castelia-city",
    "unova-pinwheel-forest",
-   "unova-wellspring-cave"
+   "unova-wellspring-cave",
+   "unova-liberty-garden"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -331,7 +332,8 @@
    "unova-nacrene-city",
    "unova-route-gate",
    "unova-castelia-sewers",
-   "unova-relic-passage"
+   "unova-relic-passage",
+   "unova-liberty-garden"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -600,7 +602,8 @@
   "connections": [
    "unova-route-7",
    "unova-chargestone-cave",
-   "unova-mistralton-cave"
+   "unova-mistralton-cave",
+   "unova-celestial-tower"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -653,7 +656,8 @@
   "connections": [
    "unova-mistralton-city",
    "unova-twist-mountain",
-   "unova-reversal-mountain"
+   "unova-reversal-mountain",
+   "unova-celestial-tower"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1063,7 +1067,8 @@
    "unova-black-city",
    "unova-challengers-cave",
    "unova-white-forest",
-   "unova-abundant-shrine"
+   "unova-abundant-shrine",
+   "unova-nature-sanctuary"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1507,7 +1512,8 @@
   "connections": [
    "unova-route-22",
    "unova-raid",
-   "unova-league"
+   "unova-league",
+   "unova-victory-road"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -2256,5 +2262,111 @@
   },
   "biome": "grassland",
   "background": "/backgrounds/grassland.png"
+ },
+ "unova-celestial-tower": {
+  "id": "unova-celestial-tower",
+  "name": "Celestial Tower",
+  "type": "route",
+  "region": "unova",
+  "description": "A wild area in the Unova region.",
+  "routeKey": "unova-celestial-tower",
+  "connections": [
+   "unova-route-7",
+   "unova-mistralton-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-7",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 500006.75,
+  "position": {
+   "x": 19,
+   "y": 38
+  },
+  "biome": "ruins",
+  "background": "/backgrounds/grassland.png"
+ },
+ "unova-liberty-garden": {
+  "id": "unova-liberty-garden",
+  "name": "Liberty Garden",
+  "type": "route",
+  "region": "unova",
+  "description": "A wild area in the Unova region.",
+  "routeKey": "unova-liberty-garden",
+  "connections": [
+   "unova-nacrene-city",
+   "unova-castelia-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-nacrene-city",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 500003.75,
+  "position": {
+   "x": 84,
+   "y": 68
+  },
+  "biome": "grassland",
+  "background": "/backgrounds/grassland.png"
+ },
+ "unova-nature-sanctuary": {
+  "id": "unova-nature-sanctuary",
+  "name": "Nature Sanctuary",
+  "type": "route",
+  "region": "unova",
+  "description": "A wild area in the Unova region.",
+  "routeKey": "unova-nature-sanctuary",
+  "connections": [
+   "unova-route-14"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-14",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 500014.2503,
+  "position": {
+   "x": 84,
+   "y": 52
+  },
+  "biome": "forest",
+  "background": "/backgrounds/grassland.png"
+ },
+ "unova-victory-road": {
+  "id": "unova-victory-road",
+  "name": "Victory Road",
+  "type": "route",
+  "region": "unova",
+  "description": "A wild area in the Unova region.",
+  "routeKey": "unova-victory-road",
+  "connections": [
+   "unova-route-23"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-23",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 500023.25,
+  "position": {
+   "x": 93,
+   "y": 39
+  },
+  "biome": "mountain",
+  "background": "/backgrounds/mountain.png"
  }
 }

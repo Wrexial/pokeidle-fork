@@ -92,7 +92,8 @@
   "region": "unova",
   "description": "A town in the Unova region.",
   "connections": [
-   "unova-route-19"
+   "unova-route-19",
+   "unova-floccesy-ranch"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -152,7 +153,8 @@
   "region": "unova",
   "description": "A town in the Unova region.",
   "connections": [
-   "unova-route-20"
+   "unova-route-20",
+   "unova-virbank-complex"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -186,7 +188,8 @@
   "description": "A town in the Unova region.",
   "connections": [
    "unova-route-20",
-   "unova-route-19"
+   "unova-route-19",
+   "unova-floccesy-ranch"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -326,7 +329,9 @@
   "connections": [
    "unova-route-4",
    "unova-nacrene-city",
-   "unova-route-gate"
+   "unova-route-gate",
+   "unova-castelia-sewers",
+   "unova-relic-passage"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -369,7 +374,9 @@
   "connections": [
    "unova-castelia-city",
    "unova-relic-castle",
-   "unova-desert-resort"
+   "unova-desert-resort",
+   "unova-virbank-complex",
+   "unova-castelia-sewers"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -969,7 +976,8 @@
   "connections": [
    "unova-undella-town",
    "unova-lacunosa-town",
-   "unova-route-22"
+   "unova-route-22",
+   "unova-strange-house"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1073,7 +1081,8 @@
   "description": "A town in the Unova region.",
   "connections": [
    "unova-route-21",
-   "unova-route-22"
+   "unova-route-22",
+   "unova-seaside-cave"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1423,7 +1432,8 @@
   "connections": [
    "unova-humilau-city",
    "unova-undella-town",
-   "unova-opelucid-city"
+   "unova-opelucid-city",
+   "unova-seaside-cave"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1838,7 +1848,8 @@
   "routeKey": "unova-desert-resort",
   "connections": [
    "unova-route-4",
-   "unova-nimbasa-city"
+   "unova-nimbasa-city",
+   "unova-relic-passage"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1910,5 +1921,166 @@
   },
   "biome": "forest",
   "background": "/backgrounds/grassland.png"
+ },
+ "unova-floccesy-ranch": {
+  "id": "unova-floccesy-ranch",
+  "name": "Floccesy Ranch",
+  "type": "route",
+  "region": "unova",
+  "description": "A wild area in the Unova region.",
+  "routeKey": "unova-floccesy-ranch",
+  "connections": [
+   "unova-floccesy-town",
+   "unova-aspertia-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-floccesy-town",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 500002.2501,
+  "position": {
+   "x": 8,
+   "y": 72
+  },
+  "biome": "grassland",
+  "background": "/backgrounds/grassland.png"
+ },
+ "unova-virbank-complex": {
+  "id": "unova-virbank-complex",
+  "name": "Virbank Complex",
+  "type": "route",
+  "region": "unova",
+  "description": "A wild area in the Unova region.",
+  "routeKey": "unova-virbank-complex",
+  "connections": [
+   "unova-virbank-city",
+   "unova-route-4"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-virbank-city",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 500002.2503,
+  "position": {
+   "x": 30,
+   "y": 63
+  },
+  "biome": "grassland",
+  "background": "/backgrounds/grassland.png"
+ },
+ "unova-castelia-sewers": {
+  "id": "unova-castelia-sewers",
+  "name": "Castelia Sewers",
+  "type": "route",
+  "region": "unova",
+  "description": "A wild area in the Unova region.",
+  "routeKey": "unova-castelia-sewers",
+  "connections": [
+   "unova-castelia-city",
+   "unova-route-4"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-castelia-city",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 500004.2501,
+  "position": {
+   "x": 46,
+   "y": 68
+  },
+  "biome": "cave",
+  "background": "/backgrounds/cave.png"
+ },
+ "unova-relic-passage": {
+  "id": "unova-relic-passage",
+  "name": "Relic Passage",
+  "type": "route",
+  "region": "unova",
+  "description": "A wild area in the Unova region.",
+  "routeKey": "unova-relic-passage",
+  "connections": [
+   "unova-castelia-city",
+   "unova-desert-resort"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-castelia-city",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 500004.2501,
+  "position": {
+   "x": 54,
+   "y": 65
+  },
+  "biome": "grassland",
+  "background": "/backgrounds/grassland.png"
+ },
+ "unova-strange-house": {
+  "id": "unova-strange-house",
+  "name": "Strange House",
+  "type": "route",
+  "region": "unova",
+  "description": "A wild area in the Unova region.",
+  "routeKey": "unova-strange-house",
+  "connections": [
+   "unova-route-13"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-13",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 500013.25,
+  "position": {
+   "x": 85,
+   "y": 44
+  },
+  "biome": "ruins",
+  "background": "/backgrounds/grassland.png"
+ },
+ "unova-seaside-cave": {
+  "id": "unova-seaside-cave",
+  "name": "Seaside Cave",
+  "type": "route",
+  "region": "unova",
+  "description": "A wild area in the Unova region.",
+  "routeKey": "unova-seaside-cave",
+  "connections": [
+   "unova-route-21",
+   "unova-humilau-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-21",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 500014.2501,
+  "position": {
+   "x": 88,
+   "y": 33
+  },
+  "biome": "cave",
+  "background": "/backgrounds/cave.png"
  }
 }

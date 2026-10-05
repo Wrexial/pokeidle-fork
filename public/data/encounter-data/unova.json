@@ -4146,5 +4146,227 @@
     "maxLevel": 45
    }
   ]
+ },
+ "unova-floccesy-ranch": {
+  "name": "Floccesy Ranch",
+  "encounters": [
+   {
+    "speciesKey": "mareep",
+    "weight": 20,
+    "minLevel": 5,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "azurill",
+    "weight": 20,
+    "minLevel": 5,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "riolu",
+    "weight": 20,
+    "minLevel": 5,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "patrat",
+    "weight": 12,
+    "minLevel": 5,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "lillipup",
+    "weight": 12,
+    "minLevel": 5,
+    "maxLevel": 7
+   },
+   {
+    "speciesKey": "psyduck",
+    "weight": 12,
+    "minLevel": 5,
+    "maxLevel": 7
+   }
+  ]
+ },
+ "unova-virbank-complex": {
+  "name": "Virbank Complex",
+  "encounters": [
+   {
+    "speciesKey": "magnemite",
+    "weight": 20,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "koffing",
+    "weight": 20,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "growlithe",
+    "weight": 20,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "patrat",
+    "weight": 12,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "purrloin",
+    "weight": 12,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "psyduck",
+    "weight": 12,
+    "minLevel": 14,
+    "maxLevel": 16
+   }
+  ]
+ },
+ "unova-castelia-sewers": {
+  "name": "Castelia Sewers",
+  "encounters": [
+   {
+    "speciesKey": "zubat",
+    "weight": 20,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "rattata",
+    "weight": 20,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "grimer",
+    "weight": 20,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "koffing",
+    "weight": 12,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "woobat",
+    "weight": 12,
+    "minLevel": 14,
+    "maxLevel": 16
+   }
+  ]
+ },
+ "unova-relic-passage": {
+  "name": "Relic Passage",
+  "encounters": [
+   {
+    "speciesKey": "roggenrola",
+    "weight": 20,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "woobat",
+    "weight": 20,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "drilbur",
+    "weight": 20,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "timburr",
+    "weight": 12,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "sandile",
+    "weight": 12,
+    "minLevel": 14,
+    "maxLevel": 16
+   }
+  ]
+ },
+ "unova-strange-house": {
+  "name": "Strange House",
+  "encounters": [
+   {
+    "speciesKey": "litwick",
+    "weight": 20,
+    "minLevel": 40,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "gothita",
+    "weight": 20,
+    "minLevel": 40,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "solosis",
+    "weight": 20,
+    "minLevel": 40,
+    "maxLevel": 42
+   },
+   {
+    "speciesKey": "elgyem",
+    "weight": 12,
+    "minLevel": 40,
+    "maxLevel": 42
+   }
+  ]
+ },
+ "unova-seaside-cave": {
+  "name": "Seaside Cave",
+  "encounters": [
+   {
+    "speciesKey": "woobat",
+    "weight": 20,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "boldore",
+    "weight": 20,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "seel",
+    "weight": 20,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "spheal",
+    "weight": 12,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "frillish",
+    "weight": 12,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "basculin",
+    "weight": 12,
+    "minLevel": 67,
+    "maxLevel": 69
+   }
+  ]
  }
 }

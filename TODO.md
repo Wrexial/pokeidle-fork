@@ -152,9 +152,11 @@ creates) so a regeneration can re-run it.
 
 Still open:
 
-- [ ] Unova's Black/White 2 areas.
-      (Kanto's Sevii Islands shipped as an `isDlc` subregion; see the
-      changelog.)
+- [ ] The remaining Unova Black 2 / White 2 areas.
+      (Kanto's Sevii Islands shipped as an `isDlc` subregion, and six B2W2
+      Unova areas — Floccesy Ranch, Virbank Complex, Castelia Sewers, Relic
+      Passage, Strange House and Seaside Cave — shipped as ordinary areas;
+      see the changelog.)
 
 ### 28b. More ordinary areas
 

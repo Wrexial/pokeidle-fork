@@ -417,6 +417,48 @@ module.exports = {
         position: { x: 79.5, y: 44.5 },
         species: ['deerling', 'foongus', 'petilil', 'cottonee', 'sewaddle', 'minccino', 'venipede'],
       },
+      {
+        node: 'floccesy-ranch',
+        name: 'Floccesy Ranch',
+        connects: ['unova-floccesy-town', 'unova-aspertia-city'],
+        position: { x: 8, y: 72 },
+        species: ['mareep', 'azurill', 'riolu', 'patrat', 'lillipup', 'psyduck'],
+      },
+      {
+        node: 'virbank-complex',
+        name: 'Virbank Complex',
+        connects: ['unova-virbank-city', 'unova-route-4'],
+        position: { x: 30, y: 63 },
+        species: ['magnemite', 'koffing', 'growlithe', 'patrat', 'purrloin', 'psyduck'],
+      },
+      {
+        node: 'castelia-sewers',
+        name: 'Castelia Sewers',
+        connects: ['unova-castelia-city', 'unova-route-4'],
+        position: { x: 46, y: 68 },
+        species: ['zubat', 'rattata', 'grimer', 'koffing', 'woobat'],
+      },
+      {
+        node: 'relic-passage',
+        name: 'Relic Passage',
+        connects: ['unova-castelia-city', 'unova-desert-resort'],
+        position: { x: 54, y: 65 },
+        species: ['roggenrola', 'woobat', 'drilbur', 'timburr', 'sandile'],
+      },
+      {
+        node: 'strange-house',
+        name: 'Strange House',
+        connects: ['unova-route-13'],
+        position: { x: 85, y: 44 },
+        species: ['litwick', 'gothita', 'solosis', 'elgyem'],
+      },
+      {
+        node: 'seaside-cave',
+        name: 'Seaside Cave',
+        connects: ['unova-route-21', 'unova-humilau-city'],
+        position: { x: 88, y: 33 },
+        species: ['woobat', 'boldore', 'seel', 'spheal', 'frillish', 'basculin'],
+      },
     ],
     kalos: [
       {

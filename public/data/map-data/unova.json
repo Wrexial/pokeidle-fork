@@ -1046,7 +1046,8 @@
   "connections": [
    "unova-undella-town",
    "unova-black-city",
-   "unova-challengers-cave"
+   "unova-challengers-cave",
+   "unova-white-forest"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1162,7 +1163,8 @@
   "description": "A town in the Unova region.",
   "connections": [
    "unova-route-14",
-   "unova-route-15"
+   "unova-route-15",
+   "unova-white-forest"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1881,5 +1883,32 @@
   },
   "biome": "mountain",
   "background": "/backgrounds/mountain.png"
+ },
+ "unova-white-forest": {
+  "id": "unova-white-forest",
+  "name": "White Forest",
+  "type": "route",
+  "region": "unova",
+  "description": "A wild area in the Unova region.",
+  "routeKey": "unova-white-forest",
+  "connections": [
+   "unova-black-city",
+   "unova-route-14"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-black-city",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 500014.2503,
+  "position": {
+   "x": 79.5,
+   "y": 44.5
+  },
+  "biome": "forest",
+  "background": "/backgrounds/grassland.png"
  }
 }

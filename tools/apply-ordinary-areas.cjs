@@ -11,7 +11,9 @@
  * merges the same table into POST_AREAS).
  *
  * Idempotent: skips any area already on the map. After adding areas, re-run
- * `node tools/generate-encounter-index.cjs`.
+ * `node tools/generate-encounter-index.cjs` and
+ * `node tools/apply-gate-fixes.mjs` (a new area can make a species that a
+ * `caughtOnRoute` gate called exclusive turn up elsewhere).
  *
  * Usage: node tools/apply-ordinary-areas.cjs [--dry]
  */

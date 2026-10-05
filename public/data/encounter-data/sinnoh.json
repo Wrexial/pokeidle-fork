@@ -5274,5 +5274,58 @@
     "variety": true
    }
   ]
+ },
+ "sinnoh-trophy-garden": {
+  "name": "Trophy Garden",
+  "encounters": [
+   {
+    "speciesKey": "pikachu",
+    "weight": 20,
+    "minLevel": 31,
+    "maxLevel": 33
+   },
+   {
+    "speciesKey": "pichu",
+    "weight": 20,
+    "minLevel": 31,
+    "maxLevel": 33
+   },
+   {
+    "speciesKey": "clefairy",
+    "weight": 20,
+    "minLevel": 31,
+    "maxLevel": 33
+   },
+   {
+    "speciesKey": "jigglypuff",
+    "weight": 12,
+    "minLevel": 31,
+    "maxLevel": 33
+   },
+   {
+    "speciesKey": "roselia",
+    "weight": 12,
+    "minLevel": 31,
+    "maxLevel": 33
+   },
+   {
+    "speciesKey": "kricketune",
+    "weight": 12,
+    "minLevel": 31,
+    "maxLevel": 33
+   },
+   {
+    "speciesKey": "staravia",
+    "weight": 12,
+    "minLevel": 31,
+    "maxLevel": 33
+   },
+   {
+    "speciesKey": "aipom",
+    "weight": 12,
+    "minLevel": 31,
+    "maxLevel": 33
+   }
+  ]
  }
 }

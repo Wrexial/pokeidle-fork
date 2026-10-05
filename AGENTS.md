@@ -831,7 +831,8 @@ One-off scripts used to build the data JSON (not run during dev/build):
   biome), wiring them between their connect locations. A `battlesAtLocation`
   gate never names a zone hub (which spawns no wilds): a hub connect resolves
   to its first sub-area, and existing gates are repaired in place. Idempotent
-  (`--dry`); re-run `generate-encounter-index.cjs` afterwards.
+  (`--dry`); re-run `generate-encounter-index.cjs` and `apply-gate-fixes.mjs`
+  afterwards (a new area can end a route's exclusivity).
 - `apply-zone-areas.cjs` — data-only pass (#36) that appends the extra sub-areas
   from `lib/zone-areas.cjs` to an existing `type: 'zone'` hub (chained behind
   its current sub-areas) and tops their wild tables up with the region's wider

@@ -665,7 +665,8 @@
   "background": "/backgrounds/beach.png",
   "connections": [
    "sinnoh-hearthome-city",
-   "sinnoh-pokemon-mansion"
+   "sinnoh-pokemon-mansion",
+   "sinnoh-trophy-garden"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -690,7 +691,8 @@
   "description": "A town in the Sinnoh region, home to Crasher Wake's Water Gym.",
   "connections": [
    "sinnoh-lake-valor",
-   "sinnoh-pokemon-mansion"
+   "sinnoh-pokemon-mansion",
+   "sinnoh-trophy-garden"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -2003,5 +2005,32 @@
   },
   "biome": "coast",
   "background": "/backgrounds/beach.png"
+ },
+ "sinnoh-trophy-garden": {
+  "id": "sinnoh-trophy-garden",
+  "name": "Trophy Garden",
+  "type": "route",
+  "region": "sinnoh",
+  "description": "A wild area in the Sinnoh region.",
+  "routeKey": "sinnoh-trophy-garden",
+  "connections": [
+   "sinnoh-route-212",
+   "sinnoh-pastoria-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-212",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 400212.25,
+  "position": {
+   "x": 57,
+   "y": 55.5
+  },
+  "biome": "grassland",
+  "background": "/backgrounds/grassland.png"
  }
 }

@@ -3600,5 +3600,93 @@
     "variety": true
    }
   ]
+ },
+ "kalos-chamber-of-emptiness": {
+  "name": "Chamber of Emptiness",
+  "encounters": [
+   {
+    "speciesKey": "gastly",
+    "weight": 20,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "haunter",
+    "weight": 20,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "shuppet",
+    "weight": 20,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "duskull",
+    "weight": 12,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "litwick",
+    "weight": 12,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "golett",
+    "weight": 12,
+    "minLevel": 73,
+    "maxLevel": 75
+   }
+  ]
+ },
+ "kalos-power-plant": {
+  "name": "Kalos Power Plant",
+  "encounters": [
+   {
+    "speciesKey": "voltorb",
+    "weight": 20,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "magnemite",
+    "weight": 20,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "trubbish",
+    "weight": 20,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "koffing",
+    "weight": 12,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "electrode",
+    "weight": 12,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "magneton",
+    "weight": 12,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "growlithe",
+    "weight": 12,
+    "minLevel": 44,
+    "maxLevel": 46
+   }
+  ]
  }
 }

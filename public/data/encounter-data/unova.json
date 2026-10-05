@@ -4099,5 +4099,52 @@
     "variety": true
    }
   ]
+ },
+ "unova-white-forest": {
+  "name": "White Forest",
+  "encounters": [
+   {
+    "speciesKey": "deerling",
+    "weight": 20,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "foongus",
+    "weight": 20,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "petilil",
+    "weight": 20,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "cottonee",
+    "weight": 12,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "sewaddle",
+    "weight": 12,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "minccino",
+    "weight": 12,
+    "minLevel": 43,
+    "maxLevel": 45
+   },
+   {
+    "speciesKey": "venipede",
+    "weight": 12,
+    "minLevel": 43,
+    "maxLevel": 45
+   }
+  ]
  }
 }

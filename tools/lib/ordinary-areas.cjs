@@ -310,6 +310,13 @@ module.exports = {
         position: { x: 90.6, y: 44.9 },
         species: ['psyduck', 'goldeen', 'bronzor'],
       },
+      {
+        node: 'trophy-garden',
+        name: 'Trophy Garden',
+        connects: ['sinnoh-route-212', 'sinnoh-pastoria-city'],
+        position: { x: 57, y: 55.5 },
+        species: ['pikachu', 'pichu', 'clefairy', 'jigglypuff', 'roselia', 'kricketune', 'staravia', 'aipom'],
+      },
     ],
     unova: [
       {
@@ -396,6 +403,13 @@ module.exports = {
         position: { x: 20.2, y: 32.5 },
         species: ['woobat', 'roggenrola', 'trapinch', 'numel'],
       },
+      {
+        node: 'white-forest',
+        name: 'White Forest',
+        connects: ['unova-black-city', 'unova-route-14'],
+        position: { x: 79.5, y: 44.5 },
+        species: ['deerling', 'foongus', 'petilil', 'cottonee', 'sewaddle', 'minccino', 'venipede'],
+      },
     ],
     kalos: [
       {
@@ -467,6 +481,20 @@ module.exports = {
         connects: ['kalos-route-12', 'kalos-ambrette-town'],
         position: { x: 23.2, y: 49.9 },
         species: ['tentacool', 'magikarp', 'wingull', 'frillish'],
+      },
+      {
+        node: 'chamber-of-emptiness',
+        name: 'Chamber of Emptiness',
+        connects: ['kalos-route-22'],
+        position: { x: 75.5, y: 58 },
+        species: ['gastly', 'haunter', 'shuppet', 'duskull', 'litwick', 'golett'],
+      },
+      {
+        node: 'kalos-power-plant',
+        name: 'Kalos Power Plant',
+        connects: ['kalos-route-13', 'kalos-lumiose-city'],
+        position: { x: 49, y: 34.5 },
+        species: ['voltorb', 'magnemite', 'trubbish', 'koffing', 'electrode', 'magneton', 'growlithe'],
       },
     ],
     alola: [

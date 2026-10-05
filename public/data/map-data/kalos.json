@@ -223,7 +223,8 @@
    "kalos-route-14",
    "kalos-route-16",
    "kalos-route-13",
-   "kalos-route-5"
+   "kalos-route-5",
+   "kalos-power-plant"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -755,7 +756,8 @@
   "background": "/backgrounds/mountain.png",
   "connections": [
    "kalos-lumiose-city",
-   "kalos-coumarine-city"
+   "kalos-coumarine-city",
+   "kalos-power-plant"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1309,7 +1311,8 @@
    "kalos-santalune-city",
    "kalos-route-21",
    "kalos-raid",
-   "kalos-league"
+   "kalos-league",
+   "kalos-chamber-of-emptiness"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1657,5 +1660,58 @@
   },
   "biome": "coast",
   "background": "/backgrounds/beach.png"
+ },
+ "kalos-chamber-of-emptiness": {
+  "id": "kalos-chamber-of-emptiness",
+  "name": "Chamber of Emptiness",
+  "type": "route",
+  "region": "kalos",
+  "description": "A wild area in the Kalos region.",
+  "routeKey": "kalos-chamber-of-emptiness",
+  "connections": [
+   "kalos-route-22"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-22",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 600022.25,
+  "position": {
+   "x": 75.5,
+   "y": 58
+  },
+  "biome": "ruins",
+  "background": "/backgrounds/grassland.png"
+ },
+ "kalos-power-plant": {
+  "id": "kalos-power-plant",
+  "name": "Kalos Power Plant",
+  "type": "route",
+  "region": "kalos",
+  "description": "A wild area in the Kalos region.",
+  "routeKey": "kalos-power-plant",
+  "connections": [
+   "kalos-route-13",
+   "kalos-lumiose-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-13",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 600004.75,
+  "position": {
+   "x": 49,
+   "y": 34.5
+  },
+  "biome": "grassland",
+  "background": "/backgrounds/grassland.png"
  }
 }

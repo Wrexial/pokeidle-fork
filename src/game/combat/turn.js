@@ -1358,6 +1358,14 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           type: 'terrain',
           message: `The battlefield became ${TERRAIN_NAMES[moveDef.effect.terrain] ?? moveDef.effect.terrain}!`,
         })
+      } else if (moveDef.effect?.type === 'healingWish') {
+        // The user faints (via `selfDestruct` below); the reducer heals the
+        // next Pokemon sent out when it consumes this event.
+        events.push({
+          type: 'healingWish',
+          message: `${attack.attacker.name} made a wish for its team!`,
+          data: { target: attack.isPlayer ? 'player' : 'enemy' },
+        })
       }
       // Status moves flagged selfDestruct (Memento) faint their user too.
       if (moveDef.selfDestruct && attack.attacker.currentHp > 0) {

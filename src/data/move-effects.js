@@ -45,6 +45,10 @@ const MOVE_OVERRIDES = {
   mistyExplosion: { effect: { type: 'selfDestruct' } },
   // Memento keeps its stat drop and additionally faints the user.
   memento: { selfDestruct: true },
+  // Faint-heals: the user faints and the next Pokemon sent out is fully healed
+  // (and cured of status).
+  healingWish: { selfDestruct: true, effect: { type: 'healingWish' } },
+  lunarDance: { selfDestruct: true, effect: { type: 'healingWish' } },
 
   // --- Protect-style blocking (all get +4 priority below) ---
   protect: { protect: true, priority: 4 },

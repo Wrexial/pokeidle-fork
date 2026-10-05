@@ -112,6 +112,7 @@ const moveEffectText = {
   typeAdd: 'Adds a type to the target.',
   statSwap: 'Swaps stat stages with the target.',
   recycle: 'Restores the user\u2019s consumed held item.',
+  healingWish: 'The next Pokemon sent out is fully healed and cured of status.',
   itemSwap: 'Swaps held items with the target.',
   bestow: 'Gives the target the user\u2019s held item.',
   corrosiveGas: 'Destroys the target\u2019s held item.',

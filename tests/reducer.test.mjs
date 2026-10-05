@@ -419,3 +419,24 @@ test('BATCH with no actions returns the state unchanged', () => {
   assert.equal(gameReducer(state, { type: 'BATCH', payload: { actions: [] } }), state)
   assert.equal(gameReducer(state, { type: 'BATCH' }), state)
 })
+
+test('Healing Wish heals the next Pokemon sent out', () => {
+  const base = startedGame(),
+    active = { ...base.party[0], currentHp: 10 },
+    fainted = { ...createPokemon('pidgey', 5, 'fainted'), currentHp: 0 },
+    next = { ...createPokemon('rattata', 5, 'next'), currentHp: 1, status: 'burn', statusTurns: 0 },
+    state = {
+      ...base,
+      phase: 'battling',
+      party: [active, fainted, next],
+      playerPokemon: active,
+      activePlayerPokemonIndex: 0,
+      enemyPokemon: { speciesKey: 'pidgey', name: 'Pidgey', level: 7, currentHp: 20, maxHp: 20 },
+      pendingEvents: [{ type: 'healingWish', message: 'wish', data: { target: 'player' } }],
+    },
+    result = gameReducer(state, { type: 'CONSUME_EVENT' })
+  assert.equal(result.party[0].currentHp, 10, 'the active member is untouched')
+  assert.equal(result.party[1].currentHp, 0, 'the fainted member stays fainted')
+  assert.equal(result.party[2].currentHp, result.party[2].maxHp, 'the next member is fully healed')
+  assert.equal(result.party[2].status, null, 'and cured of its status')
+})

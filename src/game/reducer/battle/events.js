@@ -173,6 +173,20 @@ export function consumeEvent(state, action) {
     secretNotices = [],
     dropNotifications = [],
     swarmNotice = null
+  // Healing Wish / Lunar Dance heal the next Pokemon sent out: at the moment
+  // the user faints, that is the first battle-ready party member that is not
+  // the active one.
+  if (event.type === 'healingWish' && event.data?.target === 'player') {
+    const activeId = state.playerPokemon?.id
+    let healedOne = false
+    party = party.map((member) => {
+      if (healedOne || member.id === activeId || member.isEgg || (member.currentHp ?? 0) <= 0)
+        return member
+      healedOne = true
+      return { ...member, currentHp: member.maxHp, status: null, statusTurns: 0 }
+    })
+    if (healedOne) secretNotices.push('The healing wish restored the next Pokemon!')
+  }
   if (
     event.type === 'faint' &&
     event.data?.target === 'enemy' &&

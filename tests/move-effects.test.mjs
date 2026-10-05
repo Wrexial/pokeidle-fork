@@ -1377,3 +1377,13 @@ test('Heal Pulse and Floral Healing heal the user in singles', () => {
     assert.equal(player.currentHp, 300, 'Heal Pulse restores 50% max HP')
   })
 })
+
+test('Healing Wish and Lunar Dance are faint-heals', () => {
+  assert.equal(moveData.healingWish.selfDestruct, true)
+  assert.equal(moveData.healingWish.effect.type, 'healingWish')
+  assert.equal(moveData.lunarDance.selfDestruct, true)
+  assert.equal(moveData.lunarDance.effect.type, 'healingWish')
+  const text = describeMove({ ...moveData.healingWish, key: 'healingWish' })
+  assert.match(text, /healed/i)
+  assert.match(text, /faint/i)
+})

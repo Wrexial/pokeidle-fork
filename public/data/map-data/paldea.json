@@ -490,7 +490,8 @@
   "connections": [
    "paldea-medali",
    "paldea-glaseado-mountain",
-   "paldea-gracia-stones"
+   "paldea-gracia-stones",
+   "paldea-dalizapa-passage"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1529,7 +1530,8 @@
   "routeKey": "paldea-glaseado-mountain",
   "connections": [
    "paldea-montenevera",
-   "paldea-zapapico"
+   "paldea-zapapico",
+   "paldea-dalizapa-passage"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1600,5 +1602,32 @@
   },
   "biome": "mountain",
   "background": "/backgrounds/mountain.png"
+ },
+ "paldea-dalizapa-passage": {
+  "id": "paldea-dalizapa-passage",
+  "name": "Dalizapa Passage",
+  "type": "route",
+  "region": "paldea",
+  "description": "A wild area in the Paldea region.",
+  "routeKey": "paldea-dalizapa-passage",
+  "connections": [
+   "paldea-zapapico",
+   "paldea-glaseado-mountain"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "paldea-zapapico",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 910004.2507,
+  "position": {
+   "x": 61,
+   "y": 39
+  },
+  "biome": "grassland",
+  "background": "/backgrounds/grassland.png"
  }
 }

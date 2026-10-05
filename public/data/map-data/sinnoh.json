@@ -60,7 +60,8 @@
   "connections": [
    "sinnoh-route-201",
    "sinnoh-route-219",
-   "sinnoh-lake-verity"
+   "sinnoh-lake-verity",
+   "sinnoh-ramanas-park"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1128,7 +1129,8 @@
   "routeKey": "sinnoh-route-221",
   "background": "/backgrounds/beach.png",
   "connections": [
-   "sinnoh-sea-route-220"
+   "sinnoh-sea-route-220",
+   "sinnoh-ramanas-park"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -2029,6 +2031,33 @@
   "position": {
    "x": 57,
    "y": 55.5
+  },
+  "biome": "grassland",
+  "background": "/backgrounds/grassland.png"
+ },
+ "sinnoh-ramanas-park": {
+  "id": "sinnoh-ramanas-park",
+  "name": "Ramanas Park",
+  "type": "route",
+  "region": "sinnoh",
+  "description": "A wild area in the Sinnoh region.",
+  "routeKey": "sinnoh-ramanas-park",
+  "connections": [
+   "sinnoh-route-221",
+   "sinnoh-sandgem-town"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-221",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 400201.75,
+  "position": {
+   "x": 24,
+   "y": 76
   },
   "biome": "grassland",
   "background": "/backgrounds/grassland.png"

@@ -317,6 +317,13 @@ module.exports = {
         position: { x: 57, y: 55.5 },
         species: ['pikachu', 'pichu', 'clefairy', 'jigglypuff', 'roselia', 'kricketune', 'staravia', 'aipom'],
       },
+      {
+        node: 'ramanas-park',
+        name: 'Ramanas Park',
+        connects: ['sinnoh-route-221', 'sinnoh-sandgem-town'],
+        position: { x: 24, y: 76 },
+        species: ['starly', 'bidoof', 'shinx', 'pachirisu', 'buizel', 'chatot', 'aipom'],
+      },
     ],
     unova: [
       {
@@ -592,6 +599,13 @@ module.exports = {
         connects: ['paldea-alfornada', 'paldea-zapapico'],
         position: { x: 40, y: 65.9 },
         species: ['nacli', 'meditite', 'rolycoly', 'rockruff'],
+      },
+      {
+        node: 'dalizapa-passage',
+        name: 'Dalizapa Passage',
+        connects: ['paldea-zapapico', 'paldea-glaseado-mountain'],
+        position: { x: 61, y: 39 },
+        species: ['nacli', 'glimmet', 'rockruff', 'gible', 'larvitar', 'diglett', 'noibat'],
       },
     ],
   },

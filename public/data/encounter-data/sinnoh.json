@@ -5327,5 +5327,52 @@
     "maxLevel": 33
    }
   ]
+ },
+ "sinnoh-ramanas-park": {
+  "name": "Ramanas Park",
+  "encounters": [
+   {
+    "speciesKey": "starly",
+    "weight": 20,
+    "minLevel": 52,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "bidoof",
+    "weight": 20,
+    "minLevel": 52,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "shinx",
+    "weight": 20,
+    "minLevel": 52,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "pachirisu",
+    "weight": 12,
+    "minLevel": 52,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "buizel",
+    "weight": 12,
+    "minLevel": 52,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "chatot",
+    "weight": 12,
+    "minLevel": 52,
+    "maxLevel": 54
+   },
+   {
+    "speciesKey": "aipom",
+    "weight": 12,
+    "minLevel": 52,
+    "maxLevel": 54
+   }
+  ]
  }
 }

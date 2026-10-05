@@ -171,11 +171,12 @@ hub's first sub-area, since a zone hub never spawns wilds.
 
 Still open:
 
-- [ ] Grow the table (or scrape the remaining landmark locations) with more
-      areas — Johto's Whirl Islands side rooms, Sinnoh's Ramanas Park, and
-      Paldea's Zero Gate and Glaseado's side caves.
-      (Sinnoh's Trophy Garden, Unova's White Forest and Kalos's Chamber of
-      Emptiness / Power Plant shipped; see the changelog.)
+- [ ] Grow the table with more areas — Johto's Whirl Islands side rooms
+      (which need the existing node split into sub-areas) and any further
+      Glaseado side caves.
+      (Trophy Garden, Ramanas Park, White Forest, the Chamber of Emptiness,
+      the Kalos Power Plant and Dalizapa Passage shipped; Paldea's Zero Gate
+      already existed as a location.)
 - [ ] Galar's Wild Area sub-areas (Stony Wilderness, Dusty Bowl, Lake of
       Outrage, ...) belong inside the Wild Area zone, not as standalone routes
       — see #36.

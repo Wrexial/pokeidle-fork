@@ -5,7 +5,8 @@
 // berry patch later. Keeping this as a plain location -> markers table means a
 // new POI is one entry here plus (optionally) a panel card at the location.
 
-import { DAYCARE_LOCATIONS } from '../data/config.js'
+import { BATTLE_TOWER_LOCATION, DAYCARE_LOCATIONS } from '../data/config.js'
+import { mapData } from '../data/gameData.js'
 
 /**
  * @typedef {{ kind: string, icon: string, label: string, hint?: string }} ServicePoi
@@ -33,6 +34,38 @@ for (const locationId of Object.values(DAYCARE_LOCATIONS))
     label: 'Day-Care',
     hint: 'Leave two compatible Pokemon here to breed Eggs.',
   })
+
+// The Berry Garden lives inside the Poke Pelago hub.
+if (mapData['alola-poke-pelago'])
+  addServicePoi('alola-poke-pelago', {
+    kind: 'berryGarden',
+    icon: '\u{1fab0}',
+    label: 'Berry Garden',
+    hint: 'Plant and harvest berries from the Poke Pelago garden.',
+  })
+
+// The Battle Tower is a facility on Hoenn Route 111.
+if (BATTLE_TOWER_LOCATION && mapData[BATTLE_TOWER_LOCATION])
+  addServicePoi(BATTLE_TOWER_LOCATION, {
+    kind: 'battleTower',
+    icon: '\u{1f3db}\ufe0f',
+    label: 'Battle Tower',
+    hint: 'Climb the tower for Victory Tokens and a tower record.',
+  })
+
+/**
+ * The distinct service marker kinds, for the Town Map legend.
+ * @returns {{ kind: string, icon: string, label: string }[]}
+ */
+export function servicePoiKinds() {
+  /** @type {Map<string, { kind: string, icon: string, label: string }>} */
+  const kinds = new Map()
+  for (const list of Object.values(SERVICE_POIS))
+    for (const poi of list)
+      if (!kinds.has(poi.kind))
+        kinds.set(poi.kind, { kind: poi.kind, icon: poi.icon, label: poi.label })
+  return [...kinds.values()]
+}
 
 /**
  * The service markers at a location (empty for the vast majority).

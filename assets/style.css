@@ -3272,6 +3272,14 @@ img {
     background: #2f6fbb
 }
 
+.map-legend-icon {
+    width: 12px;
+    flex: 0 0 auto;
+    font-size: 9px;
+    line-height: 1;
+    text-align: center
+}
+
 .map-search {
     position: relative;
     padding: 4px 8px;

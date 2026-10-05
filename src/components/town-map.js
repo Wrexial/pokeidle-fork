@@ -6,6 +6,7 @@ import { baseRegions, encounterData, raidLegendaryPoolFor, mapAreas, mapData, po
 import { biomeForLocation } from '../data/ui.js'
 import { useGame } from '../game/context.js'
 import { createRoadPaths, getRegionUnlockTokens, pickRaidLegendary, raidProgressFor } from '../game/progression.js'
+import { servicePoiKinds } from '../game/services.js'
 import { MapNode } from './map-node.js'
 import { DayPhaseChip } from './day-phase-chip.js'
 
@@ -929,6 +930,29 @@ export function TownMap() {
                     )
                   ),
                 }),
+                servicePoiKinds().length > 0 &&
+                  jsxs('div', {
+                    className: 'map-legend-items',
+                    children: [
+                      jsx('div', {
+                        className: 'map-legend-title',
+                        children: 'Services',
+                      }),
+                      ...servicePoiKinds().map((poi) =>
+                        jsxs(
+                          'div',
+                          {
+                            className: 'map-legend-item',
+                            children: [
+                              jsx('span', { className: 'map-legend-icon', children: poi.icon }),
+                              poi.label,
+                            ],
+                          },
+                          poi.kind
+                        )
+                      ),
+                    ],
+                  }),
               ],
             }),
           jsx('div', {

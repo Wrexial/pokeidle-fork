@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 installGameData()
 
-const { SERVICE_POIS, servicePoisFor } = await import('../src/game/services.js')
+const { SERVICE_POIS, servicePoiKinds, servicePoisFor } = await import('../src/game/services.js')
 const { DAYCARE_LOCATIONS } = await import('../src/data/config.js')
 const { mapData, regions } = await import('../src/data/gameData.js')
 
@@ -36,4 +36,23 @@ test('service POIs only sit on real map locations and carry a label', () => {
 test('servicePoisFor tolerates an unknown or missing location', () => {
   assert.deepEqual(servicePoisFor('not-a-place'), [])
   assert.deepEqual(servicePoisFor(undefined), [])
+})
+
+test('the facilities beyond the Day-Care carry markers too', () => {
+  assert.ok(
+    servicePoisFor('alola-poke-pelago').some((poi) => poi.kind === 'berryGarden'),
+    'the Poke Pelago is marked as the Berry Garden'
+  )
+  assert.ok(
+    servicePoisFor('hoenn-route-111').some((poi) => poi.kind === 'battleTower'),
+    'the Battle Tower is marked on its route'
+  )
+})
+
+test('servicePoiKinds lists each marker kind once', () => {
+  const kinds = servicePoiKinds(),
+    ids = kinds.map((entry) => entry.kind)
+  assert.equal(ids.length, new Set(ids).size, 'no duplicate kinds')
+  for (const kind of ['daycare', 'berryGarden', 'battleTower'])
+    assert.ok(ids.includes(kind), `${kind} is listed`)
 })

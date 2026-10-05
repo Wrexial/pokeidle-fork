@@ -4140,5 +4140,40 @@
     "variety": true
    }
   ]
+ },
+ "johto-sinjoh-ruins": {
+  "name": "Sinjoh Ruins",
+  "encounters": [
+   {
+    "speciesKey": "unown",
+    "weight": 20,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "sneasel",
+    "weight": 20,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "swinub",
+    "weight": 20,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "snover",
+    "weight": 12,
+    "minLevel": 73,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "meditite",
+    "weight": 12,
+    "minLevel": 73,
+    "maxLevel": 75
+   }
+  ]
  }
 }

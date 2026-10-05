@@ -1583,7 +1583,8 @@
   "description": "A wild area in the Kalos region.",
   "routeKey": "kalos-pokemon-village",
   "connections": [
-   "kalos-route-20"
+   "kalos-route-20",
+   "kalos-unknown-dungeon"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1707,5 +1708,31 @@
   },
   "biome": "coast",
   "background": "/backgrounds/beach.png"
+ },
+ "kalos-unknown-dungeon": {
+  "id": "kalos-unknown-dungeon",
+  "name": "Unknown Dungeon",
+  "type": "route",
+  "region": "kalos",
+  "description": "A wild area in the Kalos region.",
+  "routeKey": "kalos-unknown-dungeon",
+  "connections": [
+   "kalos-pokemon-village"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-pokemon-village",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 600020.5002,
+  "position": {
+   "x": 82,
+   "y": 43
+  },
+  "biome": "ruins",
+  "background": "/backgrounds/grassland.png"
  }
 }

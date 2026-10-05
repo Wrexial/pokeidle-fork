@@ -1060,7 +1060,8 @@
   "connections": [
    "johto-new-bark-town",
    "johto-raid",
-   "johto-league"
+   "johto-league",
+   "johto-sinjoh-ruins"
   ],
   "unlock": {
    "requires": [
@@ -1482,5 +1483,31 @@
   },
   "biome": "cave",
   "background": "/backgrounds/cave.png"
+ },
+ "johto-sinjoh-ruins": {
+  "id": "johto-sinjoh-ruins",
+  "name": "Sinjoh Ruins",
+  "type": "route",
+  "region": "johto",
+  "description": "A wild area in the Johto region.",
+  "routeKey": "johto-sinjoh-ruins",
+  "connections": [
+   "johto-mt-silver"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "johto-mt-silver",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 200090.25,
+  "position": {
+   "x": 91,
+   "y": 47
+  },
+  "biome": "ruins",
+  "background": "/backgrounds/grassland.png"
  }
 }

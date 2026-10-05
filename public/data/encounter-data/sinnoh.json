@@ -5438,5 +5438,69 @@
     "maxLevel": 16
    }
   ]
+ },
+ "sinnoh-spear-pillar": {
+  "name": "Spear Pillar",
+  "encounters": [
+   {
+    "speciesKey": "bronzor",
+    "weight": 20,
+    "minLevel": 24,
+    "maxLevel": 26
+   },
+   {
+    "speciesKey": "chingling",
+    "weight": 20,
+    "minLevel": 24,
+    "maxLevel": 26
+   },
+   {
+    "speciesKey": "meditite",
+    "weight": 20,
+    "minLevel": 24,
+    "maxLevel": 26
+   },
+   {
+    "speciesKey": "machop",
+    "weight": 12,
+    "minLevel": 24,
+    "maxLevel": 26
+   },
+   {
+    "speciesKey": "zubat",
+    "weight": 12,
+    "minLevel": 24,
+    "maxLevel": 26
+   }
+  ]
+ },
+ "sinnoh-spring-path": {
+  "name": "Spring Path",
+  "encounters": [
+   {
+    "speciesKey": "bronzor",
+    "weight": 20,
+    "minLevel": 46,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "chingling",
+    "weight": 20,
+    "minLevel": 46,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "meditite",
+    "weight": 20,
+    "minLevel": 46,
+    "maxLevel": 48
+   },
+   {
+    "speciesKey": "zubat",
+    "weight": 12,
+    "minLevel": 46,
+    "maxLevel": 48
+   }
+  ]
  }
 }

@@ -1360,7 +1360,8 @@
   "description": "A wild area in the Alola region.",
   "routeKey": "alola-vast-poni-canyon",
   "connections": [
-   "alola-poni-island"
+   "alola-poni-island",
+   "alola-resolution-cave"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1846,5 +1847,31 @@
   },
   "biome": "desert",
   "background": "/backgrounds/grassland.png"
+ },
+ "alola-resolution-cave": {
+  "id": "alola-resolution-cave",
+  "name": "Resolution Cave",
+  "type": "route",
+  "region": "alola",
+  "description": "A wild area in the Alola region.",
+  "routeKey": "alola-resolution-cave",
+  "connections": [
+   "alola-vast-poni-canyon"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-vast-poni-canyon",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 700016,
+  "position": {
+   "x": 32,
+   "y": 71
+  },
+  "biome": "cave",
+  "background": "/backgrounds/cave.png"
  }
 }

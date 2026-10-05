@@ -1591,7 +1591,8 @@
   "routeKey": "sinnoh-mt-coronet",
   "connections": [
    "sinnoh-route-207",
-   "sinnoh-route-211"
+   "sinnoh-route-211",
+   "sinnoh-spear-pillar"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1994,7 +1995,8 @@
   "routeKey": "sinnoh-sendoff-spring",
   "connections": [
    "sinnoh-route-214",
-   "sinnoh-sea-route-223"
+   "sinnoh-sea-route-223",
+   "sinnoh-spring-path"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -2118,6 +2120,58 @@
    "y": 50
   },
   "biome": "grassland",
+  "background": "/backgrounds/grassland.png"
+ },
+ "sinnoh-spear-pillar": {
+  "id": "sinnoh-spear-pillar",
+  "name": "Spear Pillar",
+  "type": "route",
+  "region": "sinnoh",
+  "description": "A wild area in the Sinnoh region.",
+  "routeKey": "sinnoh-spear-pillar",
+  "connections": [
+   "sinnoh-mt-coronet"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-mt-coronet",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 400207.5,
+  "position": {
+   "x": 38,
+   "y": 58
+  },
+  "biome": "grassland",
+  "background": "/backgrounds/grassland.png"
+ },
+ "sinnoh-spring-path": {
+  "id": "sinnoh-spring-path",
+  "name": "Spring Path",
+  "type": "route",
+  "region": "sinnoh",
+  "description": "A wild area in the Sinnoh region.",
+  "routeKey": "sinnoh-spring-path",
+  "connections": [
+   "sinnoh-sendoff-spring"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-sendoff-spring",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 400214.5,
+  "position": {
+   "x": 93,
+   "y": 48
+  },
+  "biome": "ruins",
   "background": "/backgrounds/grassland.png"
  }
 }

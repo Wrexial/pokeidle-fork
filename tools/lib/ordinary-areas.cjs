@@ -110,6 +110,13 @@ module.exports = {
         position: { x: 7.7, y: 69.7 },
         species: ['zubat', 'geodude', 'onix', 'machop'],
       },
+      {
+        node: 'sinjoh-ruins',
+        name: 'Sinjoh Ruins',
+        connects: ['johto-mt-silver'],
+        position: { x: 91, y: 47 },
+        species: ['unown', 'sneasel', 'swinub', 'snover', 'meditite'],
+      },
     ],
     hoenn: [
       {
@@ -351,6 +358,20 @@ module.exports = {
         connects: ['sinnoh-route-205', 'sinnoh-floaroma-town'],
         position: { x: 22, y: 50 },
         species: ['shinx', 'pikachu', 'magnemite', 'pachirisu'],
+      },
+      {
+        node: 'spear-pillar',
+        name: 'Spear Pillar',
+        connects: ['sinnoh-mt-coronet'],
+        position: { x: 38, y: 58 },
+        species: ['bronzor', 'chingling', 'meditite', 'machop', 'zubat'],
+      },
+      {
+        node: 'spring-path',
+        name: 'Spring Path',
+        connects: ['sinnoh-sendoff-spring'],
+        position: { x: 93, y: 48 },
+        species: ['bronzor', 'chingling', 'meditite', 'zubat'],
       },
     ],
     unova: [
@@ -650,6 +671,13 @@ module.exports = {
         position: { x: 26, y: 57 },
         species: ['psyduck', 'ducklett', 'croagunk', 'skiddo'],
       },
+      {
+        node: 'unknown-dungeon',
+        name: 'Unknown Dungeon',
+        connects: ['kalos-pokemon-village'],
+        position: { x: 82, y: 43 },
+        species: ['gothita', 'solosis', 'sigilyph', 'elgyem', 'woobat'],
+      },
     ],
     alola: [
       {
@@ -693,6 +721,13 @@ module.exports = {
         connects: ['alola-route-12', 'alola-route-13'],
         position: { x: 75, y: 79 },
         species: ['sandile', 'a-diglett', 'trapinch', 'gible', 'baltoy'],
+      },
+      {
+        node: 'resolution-cave',
+        name: 'Resolution Cave',
+        connects: ['alola-vast-poni-canyon'],
+        position: { x: 32, y: 71 },
+        species: ['zubat', 'roggenrola', 'diglett', 'gible', 'sandile'],
       },
     ],
     galar: [

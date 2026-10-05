@@ -3717,5 +3717,40 @@
     "maxLevel": 25
    }
   ]
+ },
+ "kalos-unknown-dungeon": {
+  "name": "Unknown Dungeon",
+  "encounters": [
+   {
+    "speciesKey": "gothita",
+    "weight": 20,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "solosis",
+    "weight": 20,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "sigilyph",
+    "weight": 20,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "elgyem",
+    "weight": 12,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "woobat",
+    "weight": 12,
+    "minLevel": 67,
+    "maxLevel": 69
+   }
+  ]
  }
 }

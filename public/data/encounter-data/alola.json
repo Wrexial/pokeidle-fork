@@ -4632,5 +4632,40 @@
     "maxLevel": 57
    }
   ]
+ },
+ "alola-resolution-cave": {
+  "name": "Resolution Cave",
+  "encounters": [
+   {
+    "speciesKey": "zubat",
+    "weight": 20,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "roggenrola",
+    "weight": 20,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "diglett",
+    "weight": 20,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "gible",
+    "weight": 12,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "sandile",
+    "weight": 12,
+    "minLevel": 69,
+    "maxLevel": 71
+   }
+  ]
  }
 }

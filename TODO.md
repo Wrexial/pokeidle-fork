@@ -142,18 +142,11 @@ areas have all shipped (#39, #28a). No open items.
 
 ### 28b. More ordinary areas
 
-- [ ] Grow the table with more areas — Johto's Whirl Islands side rooms (which
-      need the existing node split into sub-areas) and any further Glaseado
-      side caves.
+- [ ] Convert Johto's Whirl Islands into a zone with side-room sub-areas (it
+      is a single node today, so its rooms have nowhere to live).
 - [ ] Galar's Wild Area sub-areas (Stony Wilderness, Dusty Bowl, Lake of
       Outrage, ...) belong inside the Wild Area zone, not as standalone routes
       — see #36.
-- [ ] Consider surfacing a real terrain `areaType` on the map node / battle
-      background too. The location panel already labels caves, forests, sea
-      routes, mountains, deserts, volcanic fields, tundra and ruins from the
-      committed `biome` (`areaInfoFor` in `src/data/ui.js`), but the battle
-      background still comes from the `ROUTE_BACKGROUND_RULES` / dominant-type
-      heuristic.
 
 ### 28c. Points of interest (POIs)
 

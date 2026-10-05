@@ -1,6 +1,6 @@
 // Reducer handlers for minigames actions. Split from game/reducer.js.
 
-import { MATCH3_COST, MEMORY_COST, MUSICAL_COST, PICNIC_COST, POKEBALL_FACTORY_COST, WHACK_COST, BATTLE_ROYAL_COST, BUG_CONTEST_COST, CONTEST_COST, CURRY_COST, DYNAMAX_ADVENTURES_COST, LIGHTS_OUT_COST, MINING_COST, POKEATHLON_COST, POKE_RADAR_COST, POKESTAR_COST, QUIZ_COST, ROUTE_ACTIVITIES, SAFARI_COST, SLIDING_COST, ICE_SLIDE_COST, VOLTORB_FLIP_COST, GAME_CORNER_PRIZE_GOAL, rollGameCornerPrize, routeActivityIds, minigameIdForPhase } from '../minigames.js'
+import { MATCH3_COST, MEMORY_COST, MUSICAL_COST, PICNIC_COST, POKEBALL_FACTORY_COST, WHACK_COST, BATTLE_ROYAL_COST, DOUBLES_COST, BUG_CONTEST_COST, CONTEST_COST, CURRY_COST, DYNAMAX_ADVENTURES_COST, LIGHTS_OUT_COST, MINING_COST, POKEATHLON_COST, POKE_RADAR_COST, POKESTAR_COST, QUIZ_COST, ROUTE_ACTIVITIES, SAFARI_COST, SLIDING_COST, ICE_SLIDE_COST, VOLTORB_FLIP_COST, GAME_CORNER_PRIZE_GOAL, rollGameCornerPrize, routeActivityIds, minigameIdForPhase } from '../minigames.js'
 import { minigameTmChance } from '../../data/config.js'
 import { mapData, pokemonSpecies } from '../../data/gameData.js'
 import { getTmInfo, tmItemId } from '../../data/tms.js'
@@ -223,6 +223,21 @@ export function startBattleRoyal(state, action) {
     'battleRoyal',
     BATTLE_ROYAL_COST,
     'You stepped into the Battle Royal ring.'
+  )
+}
+
+/**
+ * Handle the `START_DOUBLES` action.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function startDoubles(state, action) {
+  return enterMinigame(
+    state,
+    'doubles',
+    DOUBLES_COST,
+    'You entered the Battle Maison doubles court.'
   )
 }
 

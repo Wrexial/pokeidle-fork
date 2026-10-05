@@ -234,31 +234,29 @@ Effort: **medium–large** (a small data-model change plus map/encounter UI).
 
 ## 43. Multi-battles (double / triple / rotation) as a minigame
 
-The engine is **singles only** — the move data already flags the doubles-only
-moves (Follow Me, Helping Hand, Quick/Wide Guard, …) as unimplemented (see #24),
-and the ally/doubles abilities are on the #25 list. Make multi-battles a
-**self-contained minigame** (a scene + a `START_*`/`END_MINIGAME` reducer pair
-+ a `MINIGAME_LOCATIONS` entry, following the other minigames), so the main game
-stays singles.
+**Shipped (doubles):** a 2v2 double battle at Kalos's Battle Maison (the
+`doubles` minigame). Two of the party face two foes; every surviving battler
+picks a target and a move, the actions resolve in priority then speed order,
+spread moves hit both foes, and a fainted ally is replaced from the bench
+until one side runs out. It reuses the singles engine one action at a time
+(`resolveBattleTurn` with the defender skipping and `skipEndOfTurn`, then one
+`applyEndOfTurn` pass per round), so it shares all the damage/status/ability
+math without a parallel resolver.
 
-- [ ] Pick the first mode: **double battle** (2v2) is the most legible and the
-      most reusable; triple and rotation battles are stretch goals.
-- [ ] Decide how much of the combat engine is shared: the damage/status math is
-      reusable, but target selection, spread moves and per-slot speed order are
-      new.
-- [ ] Minimal doubles rules: one target chosen per move, spread moves hit both,
-      and the existing ally-targeted moves (#24) can finally do something.
-- [ ] Give it a home location per region (a Battle Maison / Battle Tower-style
-      node) and a reward table, mirroring the Battle Royal.
-- [ ] Consider a "3-way / 4-way" free-for-all variant as a separate mode if the
-      2v2 version lands well.
+Still open:
 
-Likely touch points: `src/game/combat/` (a parallel multi-target turn
-resolver), `src/components/*-scene.js`, `src/game/reducer/minigames.js`, and
+- [ ] Triple and rotation battles.
+- [ ] A 3-way / 4-way free-for-all variant (the Battle Royal is the closest
+      thing today).
+- [ ] A doubles home in more regions (currently only Kalos's Battle Maison).
+- [ ] Ally-targeted moves that heal the *partner* rather than the user
+      (`resolveBattleTurn` still treats them as self-heals in doubles).
+- [ ] Doubles-only moves (Follow Me, Helping Hand, Quick/Wide Guard) and the
+      ally/doubles abilities (#25) still do nothing.
+
+Relevant code: `src/game/minigames/doubles.js`,
+`src/components/doubles-scene.js`, `src/game/reducer/minigames.js`, and
 `src/game/minigames/registry.js`.
-
-Effort: **medium–large** (the shared math helps, but target/order handling is
-genuinely new).
 ## 56. Multi-effect move pass (mostly done)
 
 Shipped (0.23.0): the move data now supports a primary effect plus one

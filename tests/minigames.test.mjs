@@ -1441,6 +1441,7 @@ test('every minigame is linked to a real area in its own region', () => {
     pokeathlon: 'johto',
     pokeRadar: 'sinnoh',
     battleRoyal: 'alola',
+    doubles: 'kalos',
     dynamaxAdventures: 'galar',
     lightsOut: 'hoenn',
     curry: 'galar',

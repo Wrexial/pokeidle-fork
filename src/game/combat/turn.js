@@ -350,9 +350,11 @@ function applyMoveLock(pokemon, moveId) {
  *   manual battle. Forced moves (recharge / charging / locked) still win.
  * @param {boolean} [enemySkipMove] The foe spent its turn switching Pokemon,
  *   so only the player acts.
+ * @param {boolean} [skipEndOfTurn] Don't run the end-of-turn residual pass.
+ *   A doubles round resolves several single actions and runs it once itself.
  * @returns {any[]}
  */
-export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn = !1, weather = null, hazards = null, deterministic = !1, terrain = null, enemySkill = null, playerSkill = null, playerSkipMove = !1, playerMoveChoice = null, enemySkipMove = !1) {
+export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn = !1, weather = null, hazards = null, deterministic = !1, terrain = null, enemySkill = null, playerSkill = null, playerSkipMove = !1, playerMoveChoice = null, enemySkipMove = !1, skipEndOfTurn = !1) {
   const events = /** @type {any[]} */ ([])
   let activeWeather = weather ?? null,
     activeTerrain = terrain ?? null,
@@ -2235,7 +2237,8 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     }
     if (attack.attacker.currentHp <= 0) break
   }
-  applyEndOfTurn(player, enemy, events, effectiveWeather, activeTerrain, deterministic)
+  if (!skipEndOfTurn)
+    applyEndOfTurn(player, enemy, events, effectiveWeather, activeTerrain, deterministic)
   reportFieldEffects(player, enemy, events, activeWeather, activeTerrain, activeHazards, weather, terrain, hazards)
   restoreGas()
   return events

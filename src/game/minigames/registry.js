@@ -7,6 +7,7 @@ import { CONTEST_COST, CONTEST_ROUNDS } from './contest.js'
 import { POKEATHLON_COST, POKEATHLON_ATTEMPTS } from './pokeathlon.js'
 import { POKE_RADAR_COST } from './poke-radar.js'
 import { BATTLE_ROYAL_COST } from './battle-royal.js'
+import { DOUBLES_COST } from './doubles.js'
 import { DYNAMAX_ADVENTURES_COST, DYNAMAX_STAGES } from './dynamax-adventures.js'
 import { LIGHTS_OUT_COST } from './lights-out.js'
 import { CURRY_COST } from './curry.js'
@@ -42,6 +43,7 @@ export const MINIGAME_LOCATIONS = {
   'johto-ecruteak-city': 'pokeathlon',
   'sinnoh-sandgem-town': 'pokeRadar',
   'alola-heahea-city': 'battleRoyal',
+  'kalos-kiloude-city': 'doubles',
   'galar-hammerlocke': 'dynamaxAdventures',
   'hoenn-mauville-city': 'lightsOut',
   'galar-motostoke': 'curry',
@@ -92,6 +94,7 @@ export const MINIGAME_PHASES = {
   pokeathlon: 'pokeathlon',
   pokeRadar: 'pokeRadar',
   battleRoyal: 'battleRoyal',
+  doubles: 'doubles',
   dynamaxAdventures: 'dynamaxAdventures',
   lightsOut: 'lightsOut',
   curry: 'curry',
@@ -161,6 +164,7 @@ export const MINIGAME_START_ACTION = {
   pokeathlon: 'START_POKEATHLON',
   pokeRadar: 'START_POKE_RADAR',
   battleRoyal: 'START_BATTLE_ROYAL',
+  doubles: 'START_DOUBLES',
   dynamaxAdventures: 'START_DYNAMAX_ADVENTURES',
   lightsOut: 'START_LIGHTS_OUT',
   curry: 'START_CURRY',
@@ -250,6 +254,12 @@ export const MINIGAME_INFO = {
     cost: BATTLE_ROYAL_COST,
     action: 'ENTER BATTLE ROYAL',
     hint: `An endless wave gauntlet for your party. Each win heals the squad a little; the deeper you get, the bigger the purse. Entry is $${BATTLE_ROYAL_COST.toLocaleString()}.`,
+  },
+  doubles: {
+    title: 'Battle Maison',
+    cost: DOUBLES_COST,
+    action: 'ENTER DOUBLES',
+    hint: `Two of your Pokemon against two foes at once. Every battler picks its own target, spread moves hit both, and a fainted Pokemon is replaced from the bench until one side runs out. Entry is $${DOUBLES_COST.toLocaleString()}.`,
   },
   dynamaxAdventures: {
     title: 'Dynamax Adventures',

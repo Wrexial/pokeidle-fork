@@ -1,6 +1,6 @@
 # TODO
 
-Open ideas and follow-ups. Current game version: **0.23.0**
+Open ideas and follow-ups. Current game version: **0.24.0**
 (`src/data/changelog.js`). Finished work lives in the changelog, not here — this
 file only tracks what is **still open**. See `AGENTS.md` for architecture,
 commands and data conventions.
@@ -17,28 +17,23 @@ renumbered, so the gaps below are items that shipped.
 
 ### Tier 1 — High impact, worth the effort
 
-1. **#28 More region areas (caves, POIs)** — L · ★★★★½ — real content;
-   data-heavy. Started: the POI marker model shipped with the Day-Care as the
-   first POI (28c), and the DLC areas are now first-class regions (#39);
-   ordinary caves/forests (28b) and more POIs remain. Pairs with #36.
-2. **#24 Move data pass** — M · ★★★ — ally/faint heals, context move-calling,
-   the doubles-only moves, and decisions on unused PP / dead Z-Max data.
-3. **#25 Battle engine pass** — M–L · ★★★ — ally/doubles abilities, a few
-   complex singles ones, item nuances and battle polish (animations / damage
-   numbers).
-4. **#36 Zones (route chunks)** — M–L · ★★★★ — the model is in and zone hubs
-   list each open sub-area's wild table inline; more sub-areas and a distinct
-   zone glyph remain.
-5. **#18 Better settings** — M · ★★★ — sprite-style options, account controls
-   (blocked on #19) and finishing the Gameplay section.
-6. **#43 Multi-battles (double / triple / rotation) as a minigame** — M–L ·
-   ★★½ — a self-contained minigame that reuses the combat pipeline.
+1. **#28 More region areas (caves, POIs)** — L · ★★★★½ — more hand-authored
+   areas and POIs. Pairs with #36.
+2. **#24 Move data pass** — M · ★★★ — the doubles-only moves and the
+   PP / Z-Move keep-or-drop decisions.
+3. **#25 Battle engine pass** — M–L · ★★★ — the remaining doubles abilities,
+   Illusion, more berries / Rocky Helmet, and battle polish.
+4. **#36 Zones (route chunks)** — M · ★★★★ — a few zones still have room for
+   more sub-areas.
+5. **#18 Better settings** — M · ★★★ — cosmetic options, the default catch
+   rule in Settings, auto-heal; account controls blocked on #19.
+6. **#43 Multi-battles (triple / rotation)** — M–L · ★★½ — build on the
+   shipped doubles engine.
 
 ### Tier 2 — Big / low-return, defer
 
-7. **#56 Multi-effect move pass (residual)** — S · ★★ — moves that roll one
-   status out of several (Tri Attack, Dire Claw) or carry a third effect,
-   which the single `secondary` slot cannot express.
+7. **#56 Multi-effect move pass (residual)** — S · ★★ — moves that carry a
+   third effect, which the single `secondary` slot cannot express.
 8. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
    doc and real ops for modest player value today.
 
@@ -55,10 +50,9 @@ Still open:
 - [ ] **Display**: more cosmetic options beyond the sprite style
       (animated / static) that shipped.
 - [ ] **Account**: sign in / sync controls — blocked on #19.
-- [ ] Gameplay still isn't a complete home: the default catch rule lives in
-      the Catch Settings modal, and auto-heal is not modelled yet. (Auto-switch
-      and auto-travel already exist as the Battle Style and Auto-Proceed/
-      Auto-Travel settings.)
+- [ ] **Gameplay**: surface the default catch rule in Settings (it lives only
+      in the Catch Settings modal) and add auto-heal. Auto-switch and
+      auto-travel already exist as the Battle Style and Auto-Proceed settings.
 
 Effort: **medium** (mostly UI plus a small settings slice).
 
@@ -91,45 +85,43 @@ Effort: **large** (auth + conflict handling + a new server to run).
 priority / effect`, and `src/data/move-effects.js` layers richer effects on top.
 Healing, multi-hit, crit stages, Protect, statuses, screens, entry hazards,
 Taunt/Substitute, weather setters, weather accuracy, terrain synergy, phazing,
-swaps and the two-turn/charging moves are all modelled (0.14.0 + 0.21.0).
+swaps, the two-turn/charging moves, the status-condition conditionals, the
+multi-status rolls (Tri Attack, Dire Claw), Retaliate, Round / Echoed Voice and
+the faint-heals all shipped.
 
 Not done:
 
 - [ ] The doubles-only moves (After You, Ally Switch, Follow Me, Helping Hand,
-      Quick/Wide Guard, Rage Powder, …) — the main game is singles, though the
-      doubles minigame (#43) now runs 2v2.
-      (Assist, Me First, Sleep Talk, Heal Pulse, Floral Healing and the
-      Healing Wish / Lunar Dance faint-heals all shipped; see the changelog.)
+      Quick/Wide Guard, Rage Powder, …) — the main game is singles, and the
+      doubles minigame (#43) does not use them yet.
 - [ ] PP is stored but unused; decide whether to implement it or drop it.
 - [ ] Z-moves / G-Max moves are otherwise dead data — decide keep/drop.
 
-Effort: **medium–large** (the effect set is now mostly done).
+Effort: **medium** (the effect set is done; what is left is design calls).
 
 ## 25. Battle engine pass (mostly done)
 
 `resolveBattleTurn` (`src/game/combat.js`) is fairly complete for damage +
 status + stat changes. Healing, multi-hit, Protect, hazards, accuracy/evasion
 stages, the extra statuses, weather/terrain, the crit-rate pass, the
-auto-battler AI, the contact abilities, the mid-battle form-change subsystem and
-the battle-only synthetic-species table all shipped (0.14.0).
+auto-battler AI, the contact abilities, the mid-battle form-change subsystem,
+the battle-only synthetic-species table, and most singles abilities
+(Synchronize, Magic Bounce, Rivalry, Quick Draw, Stakeout, Supreme Overlord,
+Choice locking) have shipped.
 
 Not done:
 
 - [ ] The remaining doubles abilities: Telepathy, Aroma/Flower Veil, Costar,
-      Commander, Hospitality, Symbiosis, Gulp Missile.
-      (Battery, Power Spot, Friend Guard and Healer work in the Battle Maison
-      doubles engine; see the changelog.)
+      Commander, Hospitality, Symbiosis, Gulp Missile. (Battery, Power Spot,
+      Friend Guard and Healer work in the Battle Maison doubles engine.)
 - [ ] Illusion (deferred: its disguise is cosmetic plus an AI read, which an
       idle auto-battler barely shows).
-      (Magic Bounce, Synchronize, Quick Draw, Rivalry, Stakeout and Supreme
-      Overlord shipped; see the changelog.)
 - [ ] Overworld-only abilities (no effect in an idle auto-battler): Illuminate,
       Run Away.
 - [ ] The remaining item nuances: more berries (the pinch berries beyond
       Sitrus/Lum) and Rocky Helmet (blocked on a bag sprite). Choice locking
       shipped.
-- [ ] Battle polish: move animations / damage numbers / hit feedback
-      (also flagged under #42's shipped manual battle mode).
+- [ ] Battle polish: move animations / damage numbers / hit feedback.
 
 *(Switching on a bad matchup is intentionally discarded: an auto-switching
 opponent is frustrating to play against.)*
@@ -140,47 +132,21 @@ Effort: **medium–large** (do it in slices).
 
 The maps are built from PokéAPI/Bulbapedia **towns + numbered routes** only
 (`tools/scrape-region-maps.cjs`), then `tools/generate-regions.cjs` turns them
-into 21–52 locations per region. That leaves three gaps:
+into 21–52 locations per region, with ~100 hand-added landmark areas on top
+(`tools/lib/ordinary-areas.cjs`). See the changelog for what shipped.
 
-### 28a. DLC / expansion areas
+### 28a. Post-game regions
 
-**Shipped:** the Galar (Isle of Armor, Crown Tundra) and Paldea (Kitakami, the
-Terarium / Blueberry Academy) DLC areas are now **first-class regions** (#39):
-they have their own Town Map tab, map, level band and legendary Raid Island,
-and open once their parent region's Champion is beaten. `tools/apply-dlc-regions.cjs`
-lifts them out of the parent region's `ZONES` (which the generator still
-creates) so a regeneration can re-run it.
-
-Still open:
+The Galar / Paldea DLC and Kanto's Sevii Islands are first-class `isDlc` regions
+(#39, #28a).
 
 - [ ] The remaining Unova Black 2 / White 2 areas.
-      (A dozen B2W2 areas — Floccesy Ranch, Virbank Complex, Castelia Sewers,
-      Relic Passage, Strange House, Seaside Cave, Lostlorn Forest, Mistralton
-      Cave, Clay Tunnel, the Abundant Shrine, Undella Bay and the P2
-      Laboratory — shipped as ordinary areas, and Kanto's Sevii Islands
-      shipped as an `isDlc` subregion; see the changelog.)
 
 ### 28b. More ordinary areas
 
-The scraper only keeps towns and routes, so caves, forests, tunnels, ruins,
-towers, lakes/seas and safari zones are absent unless hand-added. The model is
-the shared table `tools/lib/ordinary-areas.cjs`, consumed by both
-`generate-regions.cjs` (merged into `POST_AREAS`) and the idempotent
-`tools/apply-ordinary-areas.cjs` data pass, which wires each area between its
-connect locations with a curated species list, a neighbour-averaged level band
-and a derived biome. Seventy-six landmark areas have shipped across eight
-regions (caves, forests, ruins, towers, lakes and the Safari Zones, from Ilex
-Forest to Gracia Stones). Battle gates on a zone-hub connect resolve to the
-hub's first sub-area, since a zone hub never spawns wilds.
-
-Still open:
-
-- [ ] Grow the table with more areas — Johto's Whirl Islands side rooms
-      (which need the existing node split into sub-areas) and any further
-      Glaseado side caves. A hundred landmarks have shipped so far, most
-      recently Jagged Pass, Scorched Slab, Floaroma Meadow, Valley Windworks,
-      Parfum Palace and Haina Desert; Paldea's Zero Gate already existed as a
-      location.
+- [ ] Grow the table with more areas — Johto's Whirl Islands side rooms (which
+      need the existing node split into sub-areas) and any further Glaseado
+      side caves.
 - [ ] Galar's Wild Area sub-areas (Stony Wilderness, Dusty Bowl, Lake of
       Outrage, ...) belong inside the Wild Area zone, not as standalone routes
       — see #36.
@@ -193,18 +159,12 @@ Still open:
 
 ### 28c. Points of interest (POIs)
 
-**Shipped (0.21.0):** the model is the lightweight-marker one — a service POI is
-a flavour / utility stop overlaid on an existing location, held in
-`src/game/services.js` (`SERVICE_POIS` + `servicePoisFor`). `map-node.js` draws
-the markers beside the minigame badge and adds their labels to the node tooltip,
-and `location-panel.js` shows a **Services** tag row. The first POI is the
-**Day-Care** on every region's breeding route.
+A service POI is a flavour / utility stop overlaid on a location, held in
+`src/game/services.js` (`SERVICE_POIS`); the Day-Care, Berry Garden, Battle
+Tower, Raid Den and Legendary Shrine markers have shipped.
 
-Still open:
-
-- [ ] Add POIs with a real service behind them: a cafe / mart (a Move Tutor
-      is global UI, so it has no single location to mark). The Day-Care, Berry
-      Garden, Battle Tower, Raid Den and Legendary Shrine markers have shipped.
+- [ ] Add POIs with a real service behind them: a cafe / mart. (A Move Tutor
+      is global UI, so it has no single location to mark.)
 
 Relevant code: `tools/scrape-region-maps.cjs` (`MANUAL_BRIDGES`),
 `tools/generate-regions.cjs` (`EXTRA_MAP_AREAS`, `levelRoutes`,
@@ -220,31 +180,22 @@ feature).
 The map is a graph of single nodes joined pair-wise. The zone model shipped in
 0.13.0: `type: 'zone'` nodes group sub-areas that are hidden routes with their
 own encounter buckets, and existing routes can be grouped too (`GROUP_ZONES` —
-Alola's islands, Paldea's provinces). Galar's Wild Area is a zone; the Galar
-and Paldea DLC started as zones and are now their own regions (#39).
-
-Still open:
+Alola's islands, Paldea's provinces). Galar's Wild Area is a zone; the DLC zones
+are now their own regions (#39).
 
 - [ ] More sub-areas (pairs with #28a/#28b). Galar's Wild Area (11 habitats),
-      the four DLC zones (Isle of Armor 9, Crown Tundra 10, Kitakami 9,
-      Terarium 7) and Alola's islands (Melemele 8, Akala 9, Ula'ula 11, Poni 6)
-      are filled out via `tools/lib/zone-areas.cjs` + `apply-zone-areas.cjs`,
-      and sub-area wild tables are behind a Show/Hide toggle on the hub.
-- [ ] Give each zone / area its own zoomed-in map view with a back button — see
-      #60.
+      the four DLC zones and Alola's islands are filled out via
+      `tools/lib/zone-areas.cjs` + `apply-zone-areas.cjs`, and sub-area wild
+      tables are behind a Show/Hide toggle on the hub.
 
 Effort: **medium–large** (a small data-model change plus map/encounter UI).
 
 ## 43. Multi-battles (double / triple / rotation) as a minigame
 
-**Shipped (doubles):** a 2v2 double battle at Kalos's Battle Maison (the
-`doubles` minigame). Two of the party face two foes; every surviving battler
-picks a target and a move, the actions resolve in priority then speed order,
-spread moves hit both foes, and a fainted ally is replaced from the bench
-until one side runs out. It reuses the singles engine one action at a time
-(`resolveBattleTurn` with the defender skipping and `skipEndOfTurn`, then one
-`applyEndOfTurn` pass per round), so it shares all the damage/status/ability
-math without a parallel resolver.
+The **doubles** 2v2 minigame shipped at Kalos's Battle Maison: two of the party
+face two foes, every battler picks a target, spread moves hit both, fainted
+Pokemon tag in from the bench, and the ally abilities (Battery, Power Spot,
+Friend Guard, Healer) work. It reuses the singles engine one action at a time.
 
 Still open:
 
@@ -252,28 +203,24 @@ Still open:
 - [ ] A 3-way / 4-way free-for-all variant (the Battle Royal is the closest
       thing today).
 - [ ] A doubles home in more regions (currently only Kalos's Battle Maison).
-- [ ] Doubles-only moves (Follow Me, Helping Hand, Quick/Wide Guard) and the
-      ally/doubles abilities (#25) still do nothing.
+- [ ] The doubles-only moves (Follow Me, Helping Hand, Quick/Wide Guard) and
+      the remaining ally abilities (#25) still do nothing.
 
 Relevant code: `src/game/minigames/doubles.js`,
 `src/components/doubles-scene.js`, `src/game/reducer/minigames.js`, and
 `src/game/minigames/registry.js`.
+
 ## 56. Multi-effect move pass (mostly done)
 
-Shipped (0.23.0): the move data now supports a primary effect plus one
-`secondary` (a status or stat change), so recoil/drain/recharge moves no longer
-lose their added effect; the recharge flag is back on the ten recharge moves;
-a batch of missing stat-drop/status/self-buff secondaries was filled in; the
-elemental fangs carry both their status and flinch; Fake Out is first-turn-only;
-and `public/reference.html` is the live checklist of every move's implemented
-effects.
+Shipped: the move data supports a primary effect plus one `secondary`, the
+recharge flag is back, the missing secondaries were filled in, the elemental
+fangs carry both effects, Fake Out is first-turn-only, and
+`public/reference.html` is the live checklist of every implemented effect.
 
-Still open (edge cases):
+Still open:
 
 - [ ] Moves that carry a third effect (a primary effect plus two riders), which
       the single `secondary` slot still cannot express.
-      (Everything else — multi-status rolls, conditionals, terrain/order power,
-      Retaliate and Round / Echoed Voice — has shipped; see the changelog.)
 
 Relevant code: `src/data/move-effects.js`, `src/game/combat/turn.js`,
 `src/game/move-info.js`, and `public/reference.html` (regenerate with
@@ -286,11 +233,7 @@ Effort: **small** (the remaining bits are one-offs).
 All eight non-Kanto regions have hand-measured `REGION_MAP_LAYOUTS` overrides.
 `tools/map-compare/overlay-region-maps.py` draws the game's nodes on top of each
 reference image (`tools/map-compare/refs/`, fetched by `fetch-refs.cjs`) to
-check them. As of 0.12.0 the Sinnoh, Galar, Kalos and Unova nodes all land on
-their matching reference places, so there is no outstanding coordinate work for
-these four — the remaining Galar gap was the missing areas, now covered by the
-Wild Area/DLC zones (see #28/#36). Re-run the overlay after moving or adding
-nodes.
+check them. Re-run the overlay after moving or adding nodes.
 
 Reference images kept for future checks:
 
@@ -303,9 +246,9 @@ Reference images kept for future checks:
 
 ## Map polish (visual)
 
-The generated maps are readable graphs. The zone marker now shows its sub-area
+The generated maps are readable graphs. The zone marker shows its sub-area
 count, town and area/zone labels stay on screen, and a legend explains the node
-types, so what is left here is **art**:
+types and services, so what is left here is **art**:
 
 - [ ] Add more battle background art. There are only four base scenes
       (grassland, beach, mountain, cave) plus the biome colour grades; real
@@ -318,8 +261,8 @@ types, so what is left here is **art**:
   fetch, form ids resolved to base species, writes a `public/data/*.json`, then
   add the key to `assets/gameDataInjector.js` and re-export in
   `src/data/gameData.js`.
-- **Battle hooks:** status conditions / drain live in `src/game/combat.js`
-  (`resolveBattleTurn`); volatile state is threaded through `src/hooks.js` and
+- **Battle hooks:** status conditions / drain live in `src/game/combat/turn.js`
+  (`resolveBattleTurn`); volatile state is threaded through the game loop and
   the reducer's `UPDATE_VOLATILE`.
 - **Save shape:** new state fields go in `initialGameState`, `context.js`
   (save + sanitising restore) and `src/types.d.ts`. Bump `SAVE_VERSION`
@@ -327,12 +270,14 @@ types, so what is left here is **art**:
   `LEGACY_SAVE_KEYS`).
 - **Config constants** live in `src/data/config.js`.
 - **Scenes / pausing phases:** the minigames (`mining`, `gameCorner`,
-  `bugCatching`), Wonder Trade, evolution, healing and the Master Ball throw are
-  all phase-driven scenes rendered by `src/components/battle-scene.js`; the
-  idle loop pauses for them in `src/hooks.js`.
-- **Verifying:** `npm run typecheck`, `npm run build`, `npm run validate`, and a
-  headless test (mock `window.gameDataInjector.data` with the JSON files and
-  `import()` the module) works well for reducer/combat logic.
+  `battleRoyal`, `doubles`, …), Wonder Trade, evolution, healing and the Master
+  Ball throw are all phase-driven scenes rendered by
+  `src/components/battle-scene.js`; the idle loop pauses for them in
+  `src/game/use-game-loop.js`.
+- **Verifying:** `npm test`, `npm run typecheck`, `npm run validate`,
+  `npm run quickplay` and `npm run build`. A headless test (mock
+  `window.gameDataInjector.data` with the JSON files and `import()` the module)
+  works well for reducer/combat logic.
 - **Versioning:** fold a change into the top `CHANGELOG` entry; cut a new
   `GAME_VERSION` only at a milestone (secrets stay out of the changelog by
   convention).

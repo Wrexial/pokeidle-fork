@@ -1,10 +1,54 @@
 // Split from src/data/constants.js — see tools/decompile/split-module.mjs
 
-export const GAME_VERSION = '0.23.0'
+export const GAME_VERSION = '0.24.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+    {
+      version: '0.24.0',
+      subtitle: 'Double Battles & the Sevii Islands',
+      sections: [
+        {
+          heading: 'Regions',
+          items: [
+            'Kanto\u2019s Sevii Islands are a post-game subregion now: One Island through Seven Island (Kindle Road, Mt. Ember, Berry Forest, Icefall Cave, Five Isle Meadow, Memorial Pillar, Lost Cave, Pattern Bush, Ruin Valley, Dotted Hole, Sevault Canyon and the Tanoby Ruins), reached from Vermilion City once the Kanto Champion is beaten. Moltres heads their Raid Island',
+            'Twenty-four more landmarks the map scraper used to drop are real wild areas now: the Unova Black 2 / White 2 areas (Floccesy Ranch, Virbank Complex, Castelia Sewers, Relic Passage, Strange House, Seaside Cave, Lostlorn Forest, Mistralton Cave, Clay Tunnel, the Abundant Shrine, Undella Bay and the P2 Laboratory), Hoenn\u2019s Jagged Pass and Scorched Slab, Sinnoh\u2019s Floaroma Meadow and Valley Windworks, Kalos\u2019s Parfum Palace, Alola\u2019s Haina Desert, Sinnoh\u2019s Trophy Garden and Ramanas Park, Paldea\u2019s Dalizapa Passage, Unova\u2019s White Forest and Kalos\u2019s Chamber of Emptiness and Power Plant',
+          ],
+        },
+        {
+          heading: 'Battles',
+          items: [
+            'More moves now do what they say: Tri Attack and Dire Claw roll one of several status conditions, Wake-Up Slap and Smelling Salts double their power against \u2014 and cure \u2014 a sleeping or paralyzed target, and Facade, Hex, Venoshock and Brine double their power when their condition is met',
+            'Terrain and turn-order moves scale their power too: Expanding Force, Rising Voltage and Misty Explosion get their terrain boost, Bolt Beak and Fishious Rend double when they move first, and Payback, Avalanche and Revenge double when the foe has already moved',
+            'Assist and Me First round out the move-calling: Assist borrows a random move known by another party member, Me First steals the foe\u2019s chosen damaging move at 1.5x power, and Retaliate doubles its power when a party member has fainted. In Battle Maison doubles, a heal now mends the most wounded ally instead of the user, and Echoed Voice grows with each consecutive use (Round doubles after the user used it last turn)',
+            'Four more abilities work in battle: Synchronize passes burn, poison or paralysis back to the attacker, Magic Bounce reflects status moves and stat drops at their user, Rivalry hits harder against the same gender and softer against the opposite, and Quick Draw has a 30% chance to move first in its priority bracket',
+            'Three more abilities and the Choice items do their full job now: Stakeout doubles damage against a Pokemon that just switched in, Supreme Overlord boosts Attack and Sp. Atk by 10% for each fainted party member, and the Choice Band, Specs and Scarf lock the holder into the first move it uses (on top of the stat boost they already gave)',
+            'Sleep Talk and Snore work while the user is asleep now \u2014 Sleep Talk calls a random move from the user\u2019s own moveset (and fails if it wakes up first), while Snore lands its hit and can flinch. Heal Pulse and Floral Healing heal the user in singles, like Life Dew, and Healing Wish / Lunar Dance faint the user to fully heal and cure the next Pokemon sent out',
+          ],
+        },
+        {
+          heading: 'Minigames',
+          items: [
+            'The Battle Maison in Kalos runs double battles now: two of your Pokemon face two foes at once, every battler picks its own target, spread moves hit both foes, and a fainted Pokemon is swapped for the next one on the bench. Each bout you win pays a bigger prize, and the ally abilities finally matter: Battery and Power Spot power up a partner, Friend Guard softens hits on it, and Healer can cure it',
+          ],
+        },
+        {
+          heading: 'Interface',
+          items: [
+            'Settings gained a Display section: choose animated sprites (the default) or the lighter static pixel art. The preference is remembered outside your save, like the other settings',
+            'The Town Map marks more facilities and its legend names them: the Day-Care, the Poke Pelago\u2019s Berry Garden, the Battle Tower on Hoenn Route 111, every Raid Island, and the Ruins of Alph and Tanoby Ruins all carry a service marker (Day-Care, Berry Garden, Battle Tower, Raid Den and Legendary Shrine)',
+          ],
+        },
+        {
+          heading: 'Fixes',
+          items: [
+            'Poni Island is reachable again: the island hub used to require Hapu\u2019s trial, but Hapu stands on Poni itself, so the island\u2019s areas, its league and its Raid Island could never open. It now opens after Nanu, the last Ula\u2019ula grand trial',
+            'Route-exclusive catch gates were refreshed against the current wild tables: a gate whose named species had since been spread onto other routes now lists the species that are genuinely exclusive to its route, and a gate whose route has no exclusives left was dropped (its other requirements stay)',
+          ],
+        },
+      ],
+    },
     {
       version: '0.23.0',
       subtitle: 'World, Trainers & Collection',
@@ -42,8 +86,7 @@ export const CHANGELOG = [
             'Alola\u2019s islands have their trials, beaches and caves as areas too: Ten Carat Hill, Hau\u2019oli Cemetery, Kala\u2019e Bay and Melemele Sea on Melemele; Brooklet Hill, Memorial Hill, Diglett\u2019s Tunnel and Akala Outskirts on Akala; Blush Mountain, Thrifty Megamart, Hano Beach and Ula\u2019ula Beach on Ula\u2019ula; and Ancient Poni Path, Poni Wilds, Poni Plains and Exeggutor Island on Poni',
             'The Town Map can zoom into an area: clicking a zone or DLC hub opens a focused map of just that area\u2019s sub-areas, with a \u201c\u2190 Region map\u201d button to return (and the hub marker itself enters the hub panel from there)',
             'The DLC areas are subregions of their base region now: the Galar Expansion Pass (Isle of Armor, Crown Tundra) and the Paldea DLC (Kitakami, the Terarium) appear on their parent\u2019s Town Map (no separate tab), with their own level band and a legendary Raid Island, and open automatically once that region\u2019s Champion is beaten — no Unlock Token needed. Their legendaries moved off the base region\u2019s Raid Island onto their own',
-            'Kanto\u2019s Sevii Islands are a post-game subregion now: One Island through Seven Island (Kindle Road, Mt. Ember, Berry Forest, Icefall Cave, Five Isle Meadow, Memorial Pillar, Lost Cave, Pattern Bush, Ruin Valley, Dotted Hole, Sevault Canyon and the Tanoby Ruins), reached from Vermilion City once the Kanto Champion is beaten. Moltres heads their Raid Island',
-            'One hundred landmarks the map scraper used to drop are real wild areas now, each with its own wild table — caves, forests, ruins, towers and lakes across Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar and Paldea, from Ilex Forest and the Ruins of Alph to the Safari Zones, Stark Mountain, Dragonspiral Tower, Lush Jungle, Casseroya Lake, the Trophy Garden, the Chamber of Emptiness, the Kalos Power Plant, White Forest, Ramanas Park, Dalizapa Passage, Unova\u2019s B2W2 areas (Floccesy Ranch, Virbank Complex, Castelia Sewers, Relic Passage, Strange House and Seaside Cave), plus Lostlorn Forest, Mistralton Cave, Clay Tunnel, the Abundant Shrine, Undella Bay and the P2 Laboratory), Hoenn\u2019s Jagged Pass and Scorched Slab, Sinnoh\u2019s Floaroma Meadow and Valley Windworks, Kalos\u2019s Parfum Palace and Alola\u2019s Haina Desert',
+            'Seventy-six landmarks the map scraper used to drop are real wild areas now, each with its own wild table — caves, forests, ruins, towers and lakes across Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar and Paldea, from Ilex Forest and the Ruins of Alph to the Safari Zones, Stark Mountain, Dragonspiral Tower, Lush Jungle and Casseroya Lake',
           ],
         },
         {
@@ -60,12 +103,6 @@ export const CHANGELOG = [
             'Damaging moves can now carry two effects at once: Flare Blitz still recoils and can burn, Volt Tackle recoils and can paralyse, the elemental fangs can inflict their status and flinch, and Triple Arrows can lower Defense and flinch on the same hit',
             'Recharge moves force a lost turn again — Hyper Beam, Giga Impact, Rock Wrecker, Roar of Time, Blast Burn, Hydro Cannon, Frenzy Plant, Prismatic Laser, Eternabeam and Meteor Assault. The recharge flag had been lost when the move data was rebuilt',
             'Many damaging moves regained the secondary effects the extraction missed: Thunder and Thunder Punch can paralyse, Psychic, Crunch, Bug Buzz, Focus Blast, Earth Power, Energy Ball, Moonblast, Play Rough, Iron Tail, Rock Smash, Liquidation, Aurora Beam, Shadow Ball, Flash Cannon and Seed Flare drop a stat, Muddy Water, Octazooka and Mirror Shot drop accuracy, and Metal Claw, Charge Beam, Meteor Mash, Fiery Dance, Diamond Storm, Ancient Power, Silver Wind and Ominous Wind can raise the user\u2019s own stats',
-            'More moves now do what they say: Tri Attack and Dire Claw roll one of several status conditions, Wake-Up Slap and Smelling Salts double their power against \u2014 and cure \u2014 a sleeping or paralyzed target, and Facade, Hex, Venoshock and Brine double their power when their condition is met',
-            'Terrain and turn-order moves scale their power too: Expanding Force, Rising Voltage and Misty Explosion get their terrain boost, Bolt Beak and Fishious Rend double when they move first, and Payback, Avalanche and Revenge double when the foe has already moved',
-            'Assist and Me First round out the move-calling: Assist borrows a random move known by another party member, Me First steals the foe\u2019s chosen damaging move at 1.5x power, and Retaliate doubles its power when a party member has fainted. In Battle Maison doubles, a heal now mends the most wounded ally instead of the user, and Echoed Voice grows with each consecutive use (Round doubles after the user used it last turn)',
-            'Four more abilities work in battle: Synchronize passes burn, poison or paralysis back to the attacker, Magic Bounce reflects status moves and stat drops at their user, Rivalry hits harder against the same gender and softer against the opposite, and Quick Draw has a 30% chance to move first in its priority bracket',
-            'Three more abilities and the Choice items do their full job now: Stakeout doubles damage against a Pokemon that just switched in, Supreme Overlord boosts Attack and Sp. Atk by 10% for each fainted party member, and the Choice Band, Specs and Scarf lock the holder into the first move it uses (on top of the stat boost they already gave)',
-            'Sleep Talk and Snore work while the user is asleep now — Sleep Talk calls a random move from the user\u2019s own moveset (and fails if it wakes up first), while Snore lands its hit and can flinch. Heal Pulse and Floral Healing heal the user in singles, like Life Dew, and Healing Wish / Lunar Dance faint the user to fully heal and cure the next Pokemon sent out',
             'Fake Out only flinches on the user\u2019s first turn on the field, so it can no longer lock a foe down every turn; Poison Fang now badly poisons instead of plain poisoning; and Esper Wing raises Sp. Atk rather than Speed',
             'Weather now plays out on the battlefield itself: rain streaks, a drifting sandstorm, falling snow or hail, a pulsing sun glare and sweeping strong winds move across the scene behind the combatants (they disappear when reduced motion is on)',
           ],
@@ -77,7 +114,6 @@ export const CHANGELOG = [
             'The Game Corner slots have a prize track: every winning line fills a 20-step bar, and a full bar hands over a random Game Corner prize Pokemon — Scyther, Dratini or Porygon',
             'Dynamax Adventures now open with a scout: pick — or re-roll — one of three legendaries from the Max Lair\u2019s real raid pool before the run. Each cleared stage drops a pickup (Max Honey, Revive or Full Restore), and the run ends early if you rack up too many KOs; beating the legendary also awards a Nature Mint',
             'The Battle Royal is a proper 4-way round now: your Pokemon faces the other three participants (one at a time) and is placed 1st (all three beaten) down to 4th, a cleared round heals the party, and a rank ladder (Normal \u2192 Great \u2192 Ultra \u2192 Master \u2192 Royal) plus your best-ever run is tracked. A 25-win run pays a Nature Mint',
-            'The Battle Maison in Kalos runs double battles now: two of your Pokemon face two foes at once, every battler picks its own target, spread moves hit both foes, and a fainted Pokemon is swapped for the next one on the bench. Each bout you win pays a bigger prize, and the ally abilities finally matter: Battery and Power Spot power up a partner, Friend Guard softens hits on it, and Healer can cure it',
             'The Poke Radar now guarantees shinies: each chain level counts toward a target that starts at 5, so the chained species is shiny at 5, then 10, then 15 levels. Catching (or beating) it banks the shiny, resets the chain and raises the next target by 5',
             'The Poke Pelago companion panel is an interactive buddy stage now: your companion bobs on its mat, shows a mood — happy, hungry, bored, sleepy or mucky — and taps (or care actions) throw up a little reaction',
             'The Ruins of Alph puzzle finally hands over an Unown: every solve unearths a random form you are missing (and a random repeat once the set is complete), and the full 28-form set — A–Z, ! and ? — now exists with its own sprites and Hidden Power kit',
@@ -123,13 +159,6 @@ export const CHANGELOG = [
           ],
         },
         {
-          heading: 'Interface',
-          items: [
-            'Settings gained a Display section: choose animated sprites (the default) or the lighter static pixel art. The preference is remembered outside your save, like the other settings',
-            'The Town Map marks more facilities and its legend names them: the Day-Care, the Poke Pelago\u2019s Berry Garden, the Battle Tower on Hoenn Route 111, every Raid Island, and the Ruins of Alph and Tanoby Ruins all carry a service marker (Day-Care, Berry Garden, Battle Tower, Raid Den and Legendary Shrine)',
-          ],
-        },
-        {
           heading: 'Fixes',
           items: [
             'Milestone rewards are paid the moment they are earned: the achievement checker now also watches the party, box, bag and minigame records, so a TM, a new team member, a maxed friendship or a cleared minigame is rewarded straight away instead of waiting for the next battle stat to tick',
@@ -143,8 +172,6 @@ export const CHANGELOG = [
             'Locked zone areas (Alola\u2019s islands, Paldea\u2019s provinces) now spell out what they still need \u2014 e.g. \u201c3/8 Battles at Route 1 \u00b7 9/11 Team level\u201d \u2014 instead of an unexplained \u201c???\u201d, and they now appear in the Next Unlocks list; travel checks the live unlock state, so a loaded save can no longer strand an area whose gate is already met',
             'Wild encounters and trainer teams no longer field a Pokemon below the level it could evolve at: a Lv. 3 Chesnaught or a Lv. 7 Machamp is stepped back to a form that can exist at that level. The Alola Route 3 gate now asks for an Alolan Sandshrew or Alolan Vulpix (which do spawn there) instead of a Salamence that no longer appears',
             'Route-exclusive catch gates now list every exclusive on the route and ask for only a few of them \u2014 Alola\u2019s gate wants any three of Route 1\u2019s nine exclusives, not three specific ones',
-            'Poni Island is reachable again: the island hub used to require Hapu\u2019s trial, but Hapu stands on Poni itself, so the island\u2019s areas, its league and its Raid Island could never open. It now opens after Nanu, the last Ula\u2019ula grand trial',
-            'Route-exclusive catch gates were refreshed against the current wild tables: a gate whose named species had since been spread onto other routes now lists the species that are genuinely exclusive to its route, and a gate whose route has no exclusives left was dropped (its other requirements stay)',
             'Zone sub-areas now unlock in order behind their hub: you can no longer reach Akala Island\u2019s Route 6 before Route 4 and Route 5 (and Route 4 can\u2019t be skipped past its island)',
             'Zone hubs now show the Next Unlocks list as well as their own areas, so an island or province panel tells you what the next route or town still needs',
             'Alola\u2019s island routes now have varied unlock gates instead of repeating the island\u2019s own requirement \u2014 a mix of battles, Pokedex counts, route-exclusive catches and party levels \u2014 while still unlocking one after another (Route 4, 9 and 16 open as soon as their island does)',

@@ -95,12 +95,11 @@ swaps and the two-turn/charging moves are all modelled (0.14.0 + 0.21.0).
 
 Not done:
 
-- [ ] Move-calling that needs more context beyond Sleep Talk: Assist (a
-      random move from the party) and Me First (steal the foe’s move).
-      (Heal Pulse, Floral Healing, Snore and the Healing Wish / Lunar Dance
-      faint-heals shipped; see the changelog.)
 - [ ] The doubles-only moves (After You, Ally Switch, Follow Me, Helping Hand,
-      Quick/Wide Guard, Rage Powder, …) — the game is singles only.
+      Quick/Wide Guard, Rage Powder, …) — the main game is singles, though the
+      doubles minigame (#43) now runs 2v2.
+      (Assist, Me First, Sleep Talk, Heal Pulse, Floral Healing and the
+      Healing Wish / Lunar Dance faint-heals all shipped; see the changelog.)
 - [ ] PP is stored but unused; decide whether to implement it or drop it.
 - [ ] Z-moves / G-Max moves are otherwise dead data — decide keep/drop.
 
@@ -249,8 +248,6 @@ Still open:
 - [ ] A 3-way / 4-way free-for-all variant (the Battle Royal is the closest
       thing today).
 - [ ] A doubles home in more regions (currently only Kalos's Battle Maison).
-- [ ] Ally-targeted moves that heal the *partner* rather than the user
-      (`resolveBattleTurn` still treats them as self-heals in doubles).
 - [ ] Doubles-only moves (Follow Me, Helping Hand, Quick/Wide Guard) and the
       ally/doubles abilities (#25) still do nothing.
 
@@ -271,10 +268,10 @@ Still open (edge cases):
 
 - [ ] Moves that carry a third effect (a primary effect plus two riders), which
       the single `secondary` slot still cannot express.
-- [ ] Retaliate (needs a fainted ally’s last-turn state) and the multi-turn
-      Round / Echoed Voice (consecutive-use power).
-      (Terrain-boosted and turn-order moves, Tri Attack / Dire Claw and the
-      status-condition conditionals all shipped; see the changelog.)
+- [ ] The multi-turn Round / Echoed Voice (consecutive-use power).
+      (Retaliate, the terrain-boosted and turn-order moves, Tri Attack /
+      Dire Claw and the status-condition conditionals all shipped; see the
+      changelog.)
 
 Relevant code: `src/data/move-effects.js`, `src/game/combat/turn.js`,
 `src/game/move-info.js`, and `public/reference.html` (regenerate with

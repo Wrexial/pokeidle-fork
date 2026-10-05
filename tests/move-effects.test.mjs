@@ -1406,3 +1406,71 @@ test('terrain and turn-order moves scale their power', () => {
   assert.equal(variablePower('avalanche', a, d, { movedFirst: true }), 60)
   assert.equal(variablePower('revenge', a, d, { movedFirst: false }), 120)
 })
+
+test('Retaliate doubles when a party member has fainted', () => {
+  const attacker = battler({ name: 'A' }),
+    defender = battler({ name: 'B' })
+  assert.equal(variablePower('retaliate', attacker, defender), 70)
+  assert.equal(variablePower('retaliate', battler({ faintedAllies: 1 }), defender), 140)
+})
+
+test('Me First borrows the foe\u2019s damaging move', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({ name: 'Player', isPlayer: true, moves: ['meFirst'], speed: 200 }),
+      enemy = battler({ name: 'Foe', moves: ['tackle'], speed: 80, currentHp: 9999, maxHp: 9999 }),
+      events = resolveBattleTurn(
+        player,
+        enemy,
+        false,
+        false,
+        null,
+        null,
+        false,
+        null,
+        null,
+        null,
+        false,
+        'meFirst'
+      )
+    assert.ok(
+      events.some(
+        (/** @type {any} */ event) => event.type === 'attack' && /Player used Tackle/.test(event.message)
+      ),
+      'it uses the foe\u2019s move'
+    )
+  })
+})
+
+test('Assist borrows a party move', () => {
+  withFixedRandom(0, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['assist'],
+        speed: 200,
+        assistPool: ['thunderbolt'],
+      }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], currentHp: 9999, maxHp: 9999 }),
+      events = resolveBattleTurn(
+        player,
+        enemy,
+        false,
+        false,
+        null,
+        null,
+        false,
+        null,
+        null,
+        null,
+        false,
+        'assist'
+      )
+    assert.ok(
+      events.some(
+        (/** @type {any} */ event) =>
+          event.type === 'attack' && /Player used Thunderbolt/.test(event.message)
+      ),
+      'it uses a move from the party pool'
+    )
+  })
+})

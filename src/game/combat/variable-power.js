@@ -128,6 +128,9 @@ export function variablePower(moveId, attacker, defender, options = {}) {
       return defender.status === 'sleep' ? 140 : 70
     case 'smellingSalts':
       return defender.status === 'paralysis' ? 140 : 70
+    // Retaliate doubles when a party member has fainted.
+    case 'retaliate':
+      return (attacker.faintedAllies ?? 0) > 0 ? 140 : 70
     // Terrain-boosted moves.
     case 'mistyExplosion':
       return terrainType === 'misty' ? 150 : 100
@@ -180,6 +183,7 @@ export const VARIABLE_POWER_MOVES = new Set([
   'brine',
   'wakeUpSlap',
   'smellingSalts',
+  'retaliate',
   'mistyExplosion',
   'expandingForce',
   'risingVoltage',

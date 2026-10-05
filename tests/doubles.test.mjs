@@ -105,3 +105,26 @@ test('double-battle prizes scale with bouts won', () => {
   assert.ok(doublesPrize(10).money > doublesPrize(2).money)
   assert.ok(doublesPrize(4).items.length > 0)
 })
+
+test('a doubles heal restores the wounded partner', () => {
+  const healer = battler({
+      name: 'Healer',
+      isPlayer: true,
+      moves: ['recover'],
+      currentHp: 100,
+      maxHp: 400,
+      speed: 200,
+    }),
+    partner = battler({
+      name: 'Partner',
+      isPlayer: true,
+      moves: ['splash'],
+      currentHp: 50,
+      maxHp: 400,
+      speed: 10,
+    }),
+    foeX = battler({ name: 'FoeX', moves: ['splash'] }),
+    foeY = battler({ name: 'FoeY', moves: ['splash'] })
+  runDoublesRound([healer, partner], [foeX, foeY], { deterministic: true })
+  assert.ok(partner.currentHp > 50, 'the most wounded ally is healed')
+})

@@ -86,17 +86,37 @@ export function doublesOpponents(baseLevel, wave = 1) {
 }
 
 /**
- * A battler's chosen action: which move and which foe it aims at. A spread
- * move still names a primary target so the log reads sensibly.
+ * A battler's chosen action: which move and which target. A heal move targets
+ * the most wounded ally; otherwise the attacker picks the foe its best move
+ * hurts the most. A spread move still names a primary target so the log reads
+ * sensibly.
  * @param {any} attacker
+ * @param {any[]} allies
  * @param {any[]} foes
- * @returns {{ attacker: any, moveId: string, target: any, priority: number, speed: number } | null}
+ * @returns {{ attacker: any, moveId: string, target: any, priority: number, speed: number, heal?: boolean } | null}
  */
-function chooseAction(attacker, foes) {
-  const targets = foes.filter(alive)
-  if (targets.length === 0) return null
+function chooseAction(attacker, allies, foes) {
+  // A wounded battler prefers a heal, aimed at the weakest ally (itself or its
+  // partner).
+  const hpRatio = attacker.maxHp > 0 ? attacker.currentHp / attacker.maxHp : 1,
+    healMove = attacker.moves.find((/** @type {string} */ id) => moveData[id]?.effect?.type === 'heal')
+  if (healMove && hpRatio < 0.5) {
+    const wounded = allies
+      .filter(alive)
+      .sort((a, b) => a.currentHp / a.maxHp - b.currentHp / b.maxHp)[0]
+    return {
+      attacker,
+      moveId: healMove,
+      target: wounded ?? attacker,
+      priority: moveData[healMove]?.priority ?? 0,
+      speed: attacker.speed,
+      heal: !0,
+    }
+  }
+  const availableTargets = foes.filter(alive)
+  if (availableTargets.length === 0) return null
   let best = null
-  for (const foe of targets) {
+  for (const foe of availableTargets) {
     const { moveId } = chooseMoveForBattle(attacker, foe, null, AI_SKILL.smartest),
       move = moveData[moveId]
     if (!move) continue
@@ -130,8 +150,8 @@ export function runDoublesRound(allies, foes, options = {}) {
     events = /** @type {any[]} */ ([]),
     log = /** @type {string[]} */ ([]),
     actions = [
-      ...allies.filter(alive).map((attacker) => ({ attacker, allies: !0, action: chooseAction(attacker, foes) })),
-      ...foes.filter(alive).map((attacker) => ({ attacker, allies: !1, action: chooseAction(attacker, allies) })),
+      ...allies.filter(alive).map((attacker) => ({ attacker, allies: !0, action: chooseAction(attacker, allies, foes) })),
+      ...foes.filter(alive).map((attacker) => ({ attacker, allies: !1, action: chooseAction(attacker, foes, allies) })),
     ]
       .filter((entry) => entry.action)
       .sort(
@@ -145,6 +165,31 @@ export function runDoublesRound(allies, foes, options = {}) {
     const moveId = action.moveId,
       move = moveData[moveId]
     if (!move) continue
+    // An ally heal restores the chosen partner directly rather than going
+    // through the (singles) resolver, which would heal the user.
+    if (action.heal) {
+      const target = action.target
+      log.push(`${attacker.name} used ${move.name}!`)
+      if (target && alive(target) && target.currentHp < target.maxHp) {
+        const percentage = move.effect?.percentage ?? 50,
+          healed = Math.min(
+            target.maxHp,
+            target.currentHp + Math.max(1, Math.floor((target.maxHp * percentage) / 100))
+          )
+        target.currentHp = healed
+        if (move.effect?.statusCure) {
+          target.status = null
+          target.statusTurns = 0
+        }
+        events.push({
+          type: 'heal',
+          message: `${target.name} recovered!`,
+          data: { target: isAlly ? 'player' : 'enemy', hpAfter: healed, hpMax: target.maxHp },
+        })
+        log.push(`${target.name} recovered HP.`)
+      }
+      continue
+    }
     const targets =
       SPREAD_MOVES.has(moveId) && move.category !== 'status' ? action.target && alive(action.target)
         ? [action.target, ...((isAlly ? foes : allies).filter((foe) => foe !== action.target && alive(foe)))]

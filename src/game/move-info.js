@@ -151,6 +151,7 @@ export const variablePowerNotes = {
   brine: 'Double power (130) when the target is at or below half HP.',
   wakeUpSlap: 'Double power (140) against a sleeping target, which it wakes.',
   smellingSalts: 'Double power (140) against a paralyzed target, which it cures.',
+  retaliate: 'Double power (140) when a party member has fainted.',
   mistyExplosion: '150 power on Misty Terrain, otherwise 100 (and the user faints).',
   expandingForce: '120 power on Psychic Terrain, otherwise 80.',
   risingVoltage: '140 power on Electric Terrain, otherwise 70.',
@@ -196,6 +197,8 @@ export const callingMoveNotes = {
   mirrorMove: 'Uses the last move the opponent used.',
   naturePower: 'Becomes a move that depends on the terrain.',
   sleepTalk: 'Usable only while asleep; uses a random move from the user\u2019s moveset.',
+  assist: 'Uses a random move known by another party member.',
+  meFirst: 'Borrows the foe\u2019s chosen damaging move at 1.5x power, if the user moves first.',
 }
 
 /**

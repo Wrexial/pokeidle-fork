@@ -223,11 +223,12 @@ function callableMoves() {
 /**
  * Resolve a calling move into the move it actually uses this turn.
  * @param {string} moveId
+ * @param {BattlePokemon} attacker
  * @param {BattlePokemon} target
  * @param {{ type: string } | null} terrain
  * @returns {string}
  */
-function resolveCalledMove(moveId, target, terrain) {
+function resolveCalledMove(moveId, attacker, target, terrain) {
   if (moveId === 'metronome') {
     const pool = callableMoves()
     return pool[Math.floor(Math.random() * pool.length)] ?? moveId
@@ -238,6 +239,13 @@ function resolveCalledMove(moveId, target, terrain) {
   }
   if (moveId === 'naturePower')
     return NATURE_POWER_BY_TERRAIN[terrain?.type ?? 'none'] ?? 'triAttack'
+  // Assist borrows a random move known by another party member.
+  if (moveId === 'assist') {
+    const pool = (attacker?.assistPool ?? []).filter(
+      (/** @type {string} */ id) => moveData[id] && !CALLING_MOVES.has(id)
+    )
+    return pool.length > 0 ? pool[Math.floor(Math.random() * pool.length)] : moveId
+  }
   return moveId
 }
 
@@ -453,11 +461,11 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
   else if (playerMoveChoice && player.moves.includes(playerMoveChoice)) {
     // The player picked this move by hand; Encore / Disable still apply.
     const lockedMove = applyMoveLock(player, respectChoice(player, playerMoveChoice))
-    ;((playerMoveId = resolveCalledMove(lockedMove, enemy, activeTerrain)), (playerMove = moveData[playerMoveId]))
+    ;((playerMoveId = resolveCalledMove(lockedMove, player, enemy, activeTerrain)), (playerMove = moveData[playerMoveId]))
   } else {
     const bestMove = chooseMoveForBattle(player, enemy, activeHazards, playerAiSkill),
       lockedMove = applyMoveLock(player, respectChoice(player, bestMove.moveId))
-    ;((playerMoveId = resolveCalledMove(lockedMove, enemy, activeTerrain)), (playerMove = moveData[playerMoveId]))
+    ;((playerMoveId = resolveCalledMove(lockedMove, player, enemy, activeTerrain)), (playerMove = moveData[playerMoveId]))
   }
   let enemyMoveId, enemyMove
   if (enemyMustRecharge) ((enemyMoveId = enemy.moves[0]), (enemyMove = moveData[enemyMoveId]))
@@ -466,7 +474,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
   else {
     const bestMove = chooseMoveForBattle(enemy, player, activeHazards, enemyAiSkill),
       lockedMove = applyMoveLock(enemy, respectChoice(enemy, bestMove.moveId))
-    ;((enemyMoveId = resolveCalledMove(lockedMove, player, activeTerrain)), (enemyMove = moveData[enemyMoveId]))
+    ;((enemyMoveId = resolveCalledMove(lockedMove, enemy, player, activeTerrain)), (enemyMove = moveData[enemyMoveId]))
   }
   const trickRoomActive = (player.trickRoomTurns ?? 0) > 0 || (enemy.trickRoomTurns ?? 0) > 0,
     playerSpeed = effectiveSpeed(player, effectiveWeather, activeTerrain),
@@ -639,9 +647,27 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       }
       attack.moveId = deterministic ? pool[0] : pool[Math.floor(Math.random() * pool.length)]
     }
-    attack.attacker.lastMove = attack.moveId
-    const moveDef = moveData[attack.moveId]
+    let moveDef = moveData[attack.moveId]
     if (!moveDef) continue
+    // Me First borrows the foe's chosen move (if it is a damaging one) at 1.5x
+    // power. The foe's pick is already known for this turn.
+    if (attack.moveId === 'meFirst') {
+      const targetMoveId = attack.isPlayer ? enemyMoveId : playerMoveId,
+        targetMove = targetMoveId ? moveData[targetMoveId] : null
+      if (targetMove && (targetMove.power ?? 0) > 0) {
+        attack.moveId = targetMoveId
+        moveDef = { ...targetMove, power: Math.floor(targetMove.power * 1.5) }
+        events.push({
+          type: 'status',
+          message: `${attack.attacker.name} seized the moment!`,
+          data: { target: attack.isPlayer ? 'player' : 'enemy' },
+        })
+      } else {
+        events.push({ type: 'status', message: `${attack.attacker.name}'s Me First failed!` })
+        continue
+      }
+    }
+    attack.attacker.lastMove = attack.moveId
     // Truant loafs around every other turn.
     if (abilityOf(attack.attacker) === 'truant') {
       if (attack.attacker.truantSkip) {

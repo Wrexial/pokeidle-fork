@@ -454,6 +454,17 @@ export function useGameLoop() {
               faintedAllies: currentGameState.party.filter(
                 (/** @type {any} */ member) => (member.currentHp ?? 0) <= 0
               ).length,
+              // Moves Assist can borrow from the rest of the party.
+              assistPool: [
+                ...new Set(
+                  currentGameState.party
+                    .filter(
+                      (/** @type {any} */ member) =>
+                        member.id !== currentGameState.playerPokemon?.id
+                    )
+                    .flatMap((/** @type {any} */ member) => member.moves ?? [])
+                ),
+              ],
               ivs: currentGameState.playerPokemon.ivs,
               nature: currentGameState.playerPokemon.nature,
             },

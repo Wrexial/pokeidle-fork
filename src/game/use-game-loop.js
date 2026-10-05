@@ -449,6 +449,11 @@ export function useGameLoop() {
               hangry: playerVolatile.hangry ?? !1,
               cudChewHeal: playerVolatile.cudChewHeal ?? 0,
               nullifiedMoves: playerVolatile.nullifiedMoves ?? {},
+              choiceLock: playerVolatile.choiceLock ?? null,
+              // Supreme Overlord scales off the party members that have fainted.
+              faintedAllies: currentGameState.party.filter(
+                (/** @type {any} */ member) => (member.currentHp ?? 0) <= 0
+              ).length,
               ivs: currentGameState.playerPokemon.ivs,
               nature: currentGameState.playerPokemon.nature,
             },

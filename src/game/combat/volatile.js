@@ -18,6 +18,8 @@ export function createVolatileState() {
     mustRecharge: !1,
     lockedMove: null,
     lockTurnsRemaining: 0,
+    /** Move a Choice item has locked the holder into, or null. */
+    choiceLock: null,
     /** Move being charged for a two-turn attack, or null. */
     chargingMove: null,
     /** Semi-invulnerable charge state (air/ground/water/vanish), or null. */
@@ -83,6 +85,7 @@ export function volatileStateFromBattle(pokemon) {
     mustRecharge: pokemon.mustRecharge ?? !1,
     lockedMove: pokemon.lockedMove ?? null,
     lockTurnsRemaining: pokemon.lockTurnsRemaining ?? 0,
+    choiceLock: pokemon.choiceLock ?? null,
     chargingMove: pokemon.chargingMove ?? null,
     semiInvulnerable: pokemon.semiInvulnerable ?? null,
     status: pokemon.status ?? null,

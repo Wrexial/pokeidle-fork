@@ -3,13 +3,13 @@
 import { moveMakesContact } from '../../data/move-effects.js'
 import { moveData, moveLearnsets } from '../../data/gameData.js'
 import { heldItems } from '../../data/items.js'
-import { abilityAbsorbsType, abilityAttackMultiplier, abilityBlocksMove, abilityBlocksNonSuperEffective, abilityChangesMoveType, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityEffectivenessMultiplier, abilityHalvesSuperEffective, abilityHealsFromType, abilityOf, abilityPreventsStatDrop, abilitySurvivesAtFullHp, fieldAuraMultiplier, onHitStatBoost, onHpThresholdBoost, ruinDefenseMultiplier, ruinOffenseMultiplier, rivalryDamageMultiplier } from '../abilities.js'
+import { abilityAbsorbsType, abilityAttackMultiplier, abilityBlocksMove, abilityBlocksNonSuperEffective, abilityChangesMoveType, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityEffectivenessMultiplier, abilityHalvesSuperEffective, abilityHealsFromType, abilityOf, abilityPreventsStatDrop, abilitySurvivesAtFullHp, fieldAuraMultiplier, onHitStatBoost, onHpThresholdBoost, ruinDefenseMultiplier, ruinOffenseMultiplier, rivalryDamageMultiplier, stakeoutDamageMultiplier } from '../abilities.js'
 import { AI_SKILL, chooseMoveForBattle } from './ai.js'
 import { changeBattleForm } from './setup.js'
 import { calculateDamage, chance, isSelfTargetedMove, normalizeStatKey } from './damage.js'
 import { applyEndOfTurn, reportFieldEffects } from './end-of-turn.js'
 import { emptyBattleHazards } from '../hazards.js'
-import { heldDamageMultiplier, heldLifeOrbRecoil, heldStatMultiplier, heldSurvivesAtFullHp, heldTerrainExtenderTurns } from '../held-items.js'
+import { heldChoiceItem, heldDamageMultiplier, heldLifeOrbRecoil, heldStatMultiplier, heldSurvivesAtFullHp, heldTerrainExtenderTurns } from '../held-items.js'
 import { canEvolveFurther } from '../pokemon.js'
 import { VARIABLE_POWER_MOVES, withVariablePower } from './variable-power.js'
 import { CHARGE_MOVES, hitsSemiInvulnerable } from './charge-moves.js'
@@ -300,6 +300,20 @@ function quickDrawActive(pokemon, deterministic) {
 }
 
 /**
+ * Apply a Choice item's lock: the first move used becomes the only move the
+ * holder can pick (until it switches out).
+ * @param {BattlePokemon} pokemon
+ * @param {string} preferredMoveId
+ * @returns {string}
+ */
+function respectChoice(pokemon, preferredMoveId) {
+  if (!heldChoiceItem(pokemon)) return preferredMoveId
+  if (pokemon.choiceLock && pokemon.moves.includes(pokemon.choiceLock)) return pokemon.choiceLock
+  pokemon.choiceLock = preferredMoveId
+  return preferredMoveId
+}
+
+/**
  * Encore forces a move and Disable blocks one, while the stored move is still
  * in the Pokemon's moveset. Self-inflicted move locks (Outrage etc.) take
  * precedence and are handled before this.
@@ -436,11 +450,11 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
   else if (player.lockedMove) ((playerMoveId = player.lockedMove), (playerMove = moveData[playerMoveId]))
   else if (playerMoveChoice && player.moves.includes(playerMoveChoice)) {
     // The player picked this move by hand; Encore / Disable still apply.
-    const lockedMove = applyMoveLock(player, playerMoveChoice)
+    const lockedMove = applyMoveLock(player, respectChoice(player, playerMoveChoice))
     ;((playerMoveId = resolveCalledMove(lockedMove, enemy, activeTerrain)), (playerMove = moveData[playerMoveId]))
   } else {
     const bestMove = chooseMoveForBattle(player, enemy, activeHazards, playerAiSkill),
-      lockedMove = applyMoveLock(player, bestMove.moveId)
+      lockedMove = applyMoveLock(player, respectChoice(player, bestMove.moveId))
     ;((playerMoveId = resolveCalledMove(lockedMove, enemy, activeTerrain)), (playerMove = moveData[playerMoveId]))
   }
   let enemyMoveId, enemyMove
@@ -449,7 +463,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
   else if (enemy.lockedMove) ((enemyMoveId = enemy.lockedMove), (enemyMove = moveData[enemyMoveId]))
   else {
     const bestMove = chooseMoveForBattle(enemy, player, activeHazards, enemyAiSkill),
-      lockedMove = applyMoveLock(enemy, bestMove.moveId)
+      lockedMove = applyMoveLock(enemy, respectChoice(enemy, bestMove.moveId))
     ;((enemyMoveId = resolveCalledMove(lockedMove, player, activeTerrain)), (enemyMove = moveData[enemyMoveId]))
   }
   const trickRoomActive = (player.trickRoomTurns ?? 0) > 0 || (enemy.trickRoomTurns ?? 0) > 0,
@@ -1565,6 +1579,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       totalDamage *
         abilityDamageDealtMultiplier(attack.attacker, effectiveMove, effectiveWeather) *
         rivalryDamageMultiplier(attack.attacker, attack.defender) *
+        stakeoutDamageMultiplier(attack.attacker, attack.isPlayer ? enemySkipMove : playerSkipMove) *
         abilityDamageTakenMultiplier(attack.defender, effectiveMove, attack.attacker) *
         heldDamageMultiplier(attack.attacker, effectiveMove) *
         weatherDamageMultiplier(effectiveWeather, effectiveMove) *

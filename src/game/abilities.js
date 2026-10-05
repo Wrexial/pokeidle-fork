@@ -252,6 +252,9 @@ export function abilityAttackMultiplier(attacker, moveDef) {
   if (ability === 'guts' && attacker.status) return 1.5
   if (ability === 'hustle') return 1.5
   if (ability === 'gorillaTactics') return 1.5
+  // Supreme Overlord: +10% Attack and Sp. Atk per fainted party member (max 5).
+  if (ability === 'supremeOverlord' && (attacker.faintedAllies ?? 0) > 0)
+    return 1 + 0.1 * Math.min(5, attacker.faintedAllies ?? 0)
   if (ability === 'toxicBoost' && attacker.status && moveDef?.category === 'physical') return 1.5
   if (ability === 'flareBoost' && attacker.status && moveDef?.category === 'special') return 1.5
   return 1
@@ -319,6 +322,16 @@ export function rivalryDamageMultiplier(attacker, defender) {
     defenderGender = genderForPokemon(defender)
   if (attackerGender === 'genderless' || defenderGender === 'genderless') return 1
   return attackerGender === defenderGender ? 1.25 : 0.75
+}
+
+/**
+ * Stakeout: double damage against a foe that switched in this turn.
+ * @param {BattlePokemon} attacker
+ * @param {boolean} defenderSwitchedIn
+ * @returns {number}
+ */
+export function stakeoutDamageMultiplier(attacker, defenderSwitchedIn) {
+  return abilityOf(attacker) === 'stakeout' && defenderSwitchedIn ? 2 : 1
 }
 
 /**

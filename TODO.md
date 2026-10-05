@@ -117,12 +117,15 @@ Not done:
 - [ ] Ally / doubles abilities: Battery, Power Spot, Friend Guard, Healer,
       Telepathy, Aroma/Flower Veil, Costar, Commander, Hospitality, Symbiosis,
       Gulp Missile.
-- [ ] A few complex singles ones: Illusion, Stakeout, Supreme Overlord.
-      (Magic Bounce, Synchronize, Quick Draw and Rivalry shipped; see the
-      changelog.)
+- [ ] Illusion (deferred: its disguise is cosmetic plus an AI read, which an
+      idle auto-battler barely shows).
+      (Magic Bounce, Synchronize, Quick Draw, Rivalry, Stakeout and Supreme
+      Overlord shipped; see the changelog.)
 - [ ] Overworld-only abilities (no effect in an idle auto-battler): Illuminate,
       Run Away.
-- [ ] The remaining item nuances (Choice locking, more berries, Rocky Helmet).
+- [ ] The remaining item nuances: more berries (the pinch berries beyond
+      Sitrus/Lum) and Rocky Helmet (blocked on a bag sprite). Choice locking
+      shipped.
 - [ ] Battle polish: move animations / damage numbers / hit feedback
       (also flagged under #42's shipped manual battle mode).
 

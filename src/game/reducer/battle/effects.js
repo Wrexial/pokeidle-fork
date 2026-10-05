@@ -19,6 +19,7 @@ export function updateVolatile(state, action) {
         mustRecharge: enemyVolatile.mustRecharge,
         lockedMove: enemyVolatile.lockedMove,
         lockTurnsRemaining: enemyVolatile.lockTurnsRemaining,
+        choiceLock: enemyVolatile.choiceLock ?? null,
         chargingMove: enemyVolatile.chargingMove ?? null,
         semiInvulnerable: enemyVolatile.semiInvulnerable ?? null,
         status: enemyVolatile.status,

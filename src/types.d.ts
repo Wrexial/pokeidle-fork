@@ -232,6 +232,8 @@ type VolatileState = {
   mustRecharge: boolean
   lockedMove: string | null
   lockTurnsRemaining: number
+  /** Move a Choice item has locked the holder into, or null. */
+  choiceLock?: string | null
   /** Move being charged for a two-turn attack, or null. */
   chargingMove: string | null
   /** Semi-invulnerable charge state (air/ground/water/vanish), or null. */

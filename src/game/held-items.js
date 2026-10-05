@@ -134,6 +134,15 @@ export function heldStatMultiplier(pokemon, statKey, canEvolve = !1) {
 }
 
 /**
+ * Whether the holder is locked into its first move by a Choice item.
+ * @param {BattlePokemon} pokemon
+ * @returns {boolean}
+ */
+export function heldChoiceItem(pokemon) {
+  return heldItemEffect(pokemon)?.choice === true
+}
+
+/**
  * Damage multiplier for the attacker's held item (Life Orb, type boosters).
  * @param {BattlePokemon} pokemon
  * @param {Move} moveDef

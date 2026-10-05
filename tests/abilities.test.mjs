@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 const data = installGameData()
 
-const { abilityAttackMultiplier, abilityChangesMoveType, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityEffectivenessMultiplier, abilityPreventsStatus, fieldAuraMultiplier, onHitStatBoost, rivalryDamageMultiplier, ruinDefenseMultiplier, ruinOffenseMultiplier } = await import('../src/game/abilities.js')
+const { abilityAttackMultiplier, abilityChangesMoveType, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityEffectivenessMultiplier, abilityPreventsStatus, fieldAuraMultiplier, onHitStatBoost, rivalryDamageMultiplier, ruinDefenseMultiplier, ruinOffenseMultiplier, stakeoutDamageMultiplier } = await import('../src/game/abilities.js')
 const { heldLeftoversHeal } = await import('../src/game/held-items.js')
 const { calculateDamage, resolveBattleTurn } = await import('../src/game/combat.js')
 const { abilityDisplayName, rollAbility } = await import('../src/game/pokemon.js')
@@ -1519,4 +1519,26 @@ test('Magic Bounce reflects a status move back at its user', () => {
     assert.equal(attacker.status, 'paralysis', 'the status is reflected')
     assert.ok(events.some((/** @type {any} */ event) => /Magic Bounce/.test(event.message ?? '')))
   })
+})
+
+test('Stakeout doubles damage against a foe that switched in', () => {
+  const stakeout = battler({ ability: 'stakeout' }),
+    switchedIn = () => true
+  assert.equal(stakeoutDamageMultiplier(stakeout, switchedIn()), 2)
+  assert.equal(stakeoutDamageMultiplier(stakeout, false), 1)
+  assert.equal(stakeoutDamageMultiplier(battler({ ability: 'overgrow' }), true), 1)
+})
+
+test('Supreme Overlord boosts per fainted ally', () => {
+  const move = { name: 'Tackle', category: 'physical', type: 'Normal', power: 40 }
+  assert.equal(abilityAttackMultiplier(battler({ ability: 'supremeOverlord' }), move), 1)
+  assert.equal(
+    abilityAttackMultiplier(battler({ ability: 'supremeOverlord', faintedAllies: 3 }), move),
+    1.3
+  )
+  assert.equal(
+    abilityAttackMultiplier(battler({ ability: 'supremeOverlord', faintedAllies: 9 }), move),
+    1.5,
+    'capped at five fainted allies'
+  )
 })

@@ -1023,6 +1023,14 @@ export const abilityInfo = {
   'quickDraw': {
     'group': 'offense',
     'text': '30% chance to move first within its priority bracket.'
+  },
+  'stakeout': {
+    'group': 'offense',
+    'text': 'Doubles damage against a foe that switched in this turn.'
+  },
+  'supremeOverlord': {
+    'group': 'offense',
+    'text': 'Boosts Attack and Sp. Atk by 10% for each fainted party member (max 5).'
   }
 }
 

@@ -10,6 +10,7 @@ const { resolveBattleTurn } = await import('../src/game/combat.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 const { getItemCategory } = await import('../src/game/progression.js')
 const { createPokemon } = await import('../src/game/pokemon.js')
+const { moveData } = await import('../src/data/gameData.js')
 
 /**
  * @param {Record<string, any>} [overrides]
@@ -333,4 +334,36 @@ test('a held item can be taken back from a boxed Pokemon', () => {
   assert.equal(cleared.box[0].heldItem, null)
   assert.equal(cleared.inventory.leftovers, 1, 'the item returns to the bag')
   assert.deepEqual(cleared.party, [], 'the party is untouched')
+})
+
+test('a Choice item locks the holder into its first move', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['tackle', 'ember'],
+        speed: 200,
+        attack: 200,
+        heldItem: 'choiceBand',
+      }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], currentHp: 9999, maxHp: 9999 }),
+      firstEvents = resolveBattleTurn(player, enemy, false)
+    assert.ok(player.choiceLock, 'the first move is locked in')
+    assert.ok(
+      firstEvents.some(
+        (/** @type {any} */ event) =>
+          event.type === 'attack' && event.message.includes(moveData[player.choiceLock].name)
+      )
+    )
+    const locked = player.choiceLock,
+      secondEvents = resolveBattleTurn(player, enemy, false)
+    assert.equal(player.choiceLock, locked, 'the lock persists')
+    assert.ok(
+      secondEvents.some(
+        (/** @type {any} */ event) =>
+          event.type === 'attack' && event.message.includes(moveData[locked].name)
+      ),
+      'it repeats the locked move'
+    )
+  })
 })

@@ -21,6 +21,7 @@ npm run build      # production build -> dist/  (gitignored)
 npm run preview    # serve the production build
 npm run typecheck  # tsc --noEmit over src/ (jsconfig.json, checkJs)
 npm run validate   # integrity-check the generated public/data JSON
+npm run quickplay  # headless completion test of every region's unlock gates
 npm test           # node --test suite under tests/
 npm run kill-vite  # kill orphaned dev servers (see note below)
 ```
@@ -55,6 +56,8 @@ split per-region files) into `window.gameDataInjector` so `src/` modules can be
 a test must call `installGameData()` and then `await import(...)` the modules
 under test (never a static import). Cover reducer/combat/breeding/unlock
 invariants and keep them deterministic (stub `Math.random` where needed).
+`tests/gates.test.mjs` runs the headless quickplay solver over every region and
+checks the route-exclusive gates stay honest.
 
 **Save recovery:** an incompatible/stuck save self-heals without DevTools.
 There are up to `SAVE_SLOT_COUNT` (3) independent save slots. Slot 1 uses the
@@ -774,6 +777,20 @@ One-off scripts used to build the data JSON (not run during dev/build):
   `minScore` gates to chosen routes (#65): Route 11 on a Whack-a-Diglett score,
   Johto Route 36 on the Bug-Catching Contest, Paldea's South Province (Area
   Three) on the Academy Quiz. Idempotent (`--dry`).
+- `apply-gate-fixes.mjs` — data-only repair of the unlock gates (idempotent,
+  `--dry`): re-points Alola's Poni Island hub off Hapu's trial (which stands on
+  Poni and deadlocked the island, its league and its Raid Island) onto Nanu's
+  Ula'ula grand trial, and refreshes every `caughtOnRoute` "route exclusive"
+  gate to the species still exclusive to its route (dropping a gate whose route
+  has no common exclusive left, since later area passes spread its old targets
+  onto other routes). Uses `lib/gate-exclusives.mjs`.
+- `quickplay.mjs` + `lib/quickplay.mjs` — headless completion test: "play" a
+  region from a fresh save by driving the real `computeUnlockedLocations` with
+  an optimistic-but-honest player (catch every open route, grind battles and
+  levels, beat every open gym/Champion, clear every minigame). Reports any
+  location that can never unlock; non-zero exit when one does. Run
+  `node tools/quickplay.mjs [--region=alola]`; `tests/gates.test.mjs` asserts
+  every region completes.
 - `apply-weather-time.cjs` — data-only pass for #10: tags thematically
   weather-struck routes with a permanent `weather` field (Hoenn Routes 111/119,
   Sinnoh Routes 216/217, Unova Route 4, Galar Route 10, Kalos Route 17 — applied
@@ -912,6 +929,11 @@ One-off scripts used to build the data JSON (not run during dev/build):
 - `lib/route-variety.cjs` — shared route-variety helpers (`buildWildPool`,
   `enrichEncounters`, `collectProtectedSpecies`) used by both
   `generate-regions.cjs` and `apply-route-variety.cjs`.
+- `lib/gate-exclusives.mjs` — shared `buildRouteExclusives` helper (the
+  `caughtOnRoute` exclusivity rule from `generate-regions.cjs`): species on
+  exactly one non-raid bucket, not a legendary/near-uncatchable, with a `common`
+  flag for the weight/starter filters. Used by `apply-gate-fixes.mjs` and
+  `tests/gates.test.mjs`.
 - `lib/ordinary-areas.cjs` — the curated table of ordinary wild areas (caves,
   forests, ...) the scraper drops, keyed by region with `node` / `name` /
   `connects` / `position` / `species`. Used by `generate-regions.cjs` (merged
@@ -1019,11 +1041,13 @@ These scripts hit external sites (Serebii, PokémonDB) and may write large files
 
 1. `npm test` and `npm run typecheck` should pass; `npm run validate` after any
    data regeneration.
-2. `npm run dev` and load the game.
-3. Open the browser console and confirm `window.gameDataDebug.status()` reports
+2. For progression/gate work, `node tools/quickplay.mjs` proves every region is
+   still completable (it is also asserted by `tests/gates.test.mjs`).
+3. `npm run dev` and load the game.
+4. Open the browser console and confirm `window.gameDataDebug.status()` reports
    `loaded: true, hasError: false`.
-4. Play through the affected flow (encounter, battle, evolution, shop, etc.).
-5. `npm run build` should succeed with no errors before finishing.
+5. Play through the affected flow (encounter, battle, evolution, shop, etc.).
+6. `npm run build` should succeed with no errors before finishing.
 
 For layout/UI work, `node tools/screenshot.cjs` (with `npm run dev` running)
 drives headless Chrome over the DevTools Protocol and writes PNGs to

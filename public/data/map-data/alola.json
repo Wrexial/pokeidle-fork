@@ -222,15 +222,11 @@
    "caughtOnRoute": {
     "routeKey": "alola-route-1",
     "species": [
-     "buneary",
-     "zorua",
-     "rockruff",
      "snorlax",
      "munchlax",
-     "pichu",
-     "rowlet",
      "litten",
-     "a-rattata"
+     "pichu",
+     "rowlet"
     ],
     "count": 3
    }
@@ -446,14 +442,7 @@
    "requires": [
     "alola-akala-island",
     "alola-route-6"
-   ],
-   "caughtOnRoute": {
-    "routeKey": "alola-route-6",
-    "species": [
-     "wishiwashi"
-    ],
-    "count": 1
-   }
+   ]
   },
   "unlockOrder": 700007,
   "position": {
@@ -671,13 +660,6 @@
     "alola-ulaula-island",
     "alola-route-10"
    ],
-   "caughtOnRoute": {
-    "routeKey": "alola-route-10",
-    "species": [
-     "jangmo-o"
-    ],
-    "count": 1
-   },
    "gymsRequired": [
     "alola-gym-4"
    ]
@@ -1252,7 +1234,7 @@
    ],
    "partyLevel": 67,
    "gymsRequired": [
-    "alola-gym-8"
+    "alola-grand-nanu"
    ]
   },
   "unlockOrder": 700015.5,

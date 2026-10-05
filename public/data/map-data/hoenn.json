@@ -825,14 +825,7 @@
      "locationId": "hoenn-route-116",
      "count": 5
     }
-   ],
-   "caughtOnRoute": {
-    "routeKey": "hoenn-route-116",
-    "species": [
-     "whismur"
-    ],
-    "count": 1
-   }
+   ]
   },
   "unlockOrder": 300116.5,
   "position": {

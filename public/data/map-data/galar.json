@@ -130,14 +130,7 @@
      "locationId": "galar-route-2",
      "count": 16
     }
-   ],
-   "caughtOnRoute": {
-    "routeKey": "galar-route-2",
-    "species": [
-     "arrokuda"
-    ],
-    "count": 1
-   }
+   ]
   },
   "unlockOrder": 800002.5,
   "position": {
@@ -511,8 +504,9 @@
    "caughtOnRoute": {
     "routeKey": "galar-route-7",
     "species": [
+     "corviknight",
      "galvantula",
-     "corviknight"
+     "seismitoad"
     ],
     "count": 2
    }
@@ -594,8 +588,9 @@
    "caughtOnRoute": {
     "routeKey": "galar-route-7",
     "species": [
+     "corviknight",
      "galvantula",
-     "corviknight"
+     "seismitoad"
     ],
     "count": 2
    },
@@ -627,9 +622,10 @@
    "caughtOnRoute": {
     "routeKey": "galar-route-9",
     "species": [
-     "bergmite",
      "cramorant",
-     "toxapex"
+     "toxapex",
+     "barbaracle",
+     "dhelmise"
     ],
     "count": 3
    }

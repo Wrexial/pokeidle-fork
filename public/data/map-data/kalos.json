@@ -481,11 +481,9 @@
    "caughtOnRoute": {
     "routeKey": "kalos-route-8",
     "species": [
-     "skrelp",
-     "clauncher",
      "spoink"
     ],
-    "count": 3
+    "count": 1
    }
   },
   "unlockOrder": 600008.5,
@@ -580,15 +578,7 @@
      "locationId": "kalos-route-10",
      "count": 5
     }
-   ],
-   "caughtOnRoute": {
-    "routeKey": "kalos-route-10",
-    "species": [
-     "nosepass",
-     "sigilyph"
-    ],
-    "count": 2
-   }
+   ]
   },
   "unlockOrder": 600010.5,
   "position": {

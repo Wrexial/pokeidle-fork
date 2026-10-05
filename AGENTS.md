@@ -277,7 +277,10 @@ Data conventions:
 - **DLC regions** (`isDlc: true` + `parentRegion`) are post-game expansions
   promoted out of their parent region's zones by
   `tools/apply-dlc-regions.cjs`: Galar's Isle of Armor and Crown Tundra, and
-  Paldea's Kitakami and the Terarium. They share their parent's `generation`
+  Paldea's Kitakami and the Terarium. Kanto's **Sevii Islands** is the same
+  kind of region but hand-authored (there is no scraper or zone source) by
+  `tools/add-sevii-islands.mjs`, which adds the region, its map/encounters and
+  a Moltres-headed Raid Island (moving Moltres out of Kanto's pool). They share their parent's `generation`
   (so raid pools / dex / Shiny Charm still group correctly), have no league or
   Champion, and keep a legendary Raid Island as their endgame. Their hub keeps
   a `championDefeated` gate, so they open when the parent Champion is beaten
@@ -825,6 +828,11 @@ One-off scripts used to build the data JSON (not run during dev/build):
   new region id and moving their legendaries off the parent region's raid
   pool. Keeps the hub's `championDefeated` gate. Idempotent (`--dry`); safe to
   re-run after a regeneration (which recreates the zones).
+- `add-sevii-islands.mjs` — one-off (#28a) that hand-authors Kanto's Sevii
+  Islands as an `isDlc` region under Kanto: a 20-area map, its encounter
+  tables and a Moltres Raid Island (removed from Kanto's pool). Idempotent
+  (skips once `sevii-islands` is in `regions.json`); re-run
+  `generate-encounter-index.cjs` afterwards.
 - `apply-ordinary-areas.cjs` — data-only pass (#28b) that inserts the ordinary
   wild areas from `lib/ordinary-areas.cjs` onto the committed data as
   `type: 'route'` nodes (own wild table, neighbour-averaged level band, derived

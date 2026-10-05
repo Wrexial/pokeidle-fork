@@ -12,7 +12,7 @@
 // The map and encounter databases are split one file per region. The `merge`
 // flag combines them back into the single `mapData` / `mapEncounterData`
 // objects the app consumes, preserving region order (kanto -> paldea, then the
-// four post-game DLC regions).
+// five post-game DLC regions, including Kanto's hand-authored Sevii Islands).
 const regionFiles = [
     ['kanto', 'Kanto'],
     ['johto', 'Johto'],
@@ -27,6 +27,7 @@ const regionFiles = [
     ['crown-tundra', 'Crown Tundra'],
     ['kitakami', 'Kitakami'],
     ['terarium', 'Terarium'],
+    ['sevii-islands', 'Sevii Islands'],
 ].flatMap(([regionId, regionName]) => [
     { key: 'mapData', path: `/data/map-data/${regionId}.json`, label: `${regionName} map`, merge: true },
     { key: 'mapEncounterData', path: `/data/encounter-data/${regionId}.json`, label: `${regionName} encounters`, merge: true },

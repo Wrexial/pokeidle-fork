@@ -30,6 +30,7 @@ const REGION_IDS = [
   'crown-tundra',
   'kitakami',
   'terarium',
+  'sevii-islands',
 ]
 
 /**

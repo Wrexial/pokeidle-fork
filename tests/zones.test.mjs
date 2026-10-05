@@ -98,7 +98,7 @@ test('the Galar DLC areas are post-game regions gated on the Galar Champion', ()
 
 test('DLC regions never cost an Unlock Token', () => {
   const dlcIds = regions.filter((region) => region.isDlc).map((region) => region.id)
-  assert.deepEqual(dlcIds, ['isle-of-armor', 'crown-tundra', 'kitakami', 'terarium'])
+  assert.deepEqual(dlcIds, ['isle-of-armor', 'crown-tundra', 'kitakami', 'terarium', 'sevii-islands'])
   for (const id of dlcIds) assert.ok(!baseRegions.some((region) => region.id === id))
 })
 

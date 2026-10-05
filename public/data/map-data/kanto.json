@@ -786,7 +786,8 @@
   "description": "A bustling port city with electric gym.",
   "connections": [
    "route6",
-   "route11"
+   "route11",
+   "sevii-islands-one-island"
   ],
   "unlock": {
    "battlesAtLocation": [

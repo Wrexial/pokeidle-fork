@@ -152,8 +152,9 @@ creates) so a regeneration can re-run it.
 
 Still open:
 
-- [ ] Optional earlier post-games: Kanto's Sevii Islands, Unova's Black/White 2
-      areas.
+- [ ] Unova's Black/White 2 areas.
+      (Kanto's Sevii Islands shipped as an `isDlc` subregion; see the
+      changelog.)
 
 ### 28b. More ordinary areas
 

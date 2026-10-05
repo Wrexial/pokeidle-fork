@@ -16,10 +16,6 @@
     "level": 75
    },
    {
-    "speciesKey": "moltres",
-    "level": 75
-   },
-   {
     "speciesKey": "mewtwo",
     "level": 75
    },
@@ -628,6 +624,22 @@
    },
    {
     "speciesKey": "pecharunt",
+    "level": 75
+   }
+  ]
+ },
+ {
+  "id": "sevii-islands",
+  "name": "Sevii Islands",
+  "generation": 1,
+  "order": 1.1,
+  "entry": "sevii-islands-one-island",
+  "startLevel": 63,
+  "isDlc": true,
+  "parentRegion": "kanto",
+  "raidPool": [
+   {
+    "speciesKey": "moltres",
     "level": 75
    }
   ]

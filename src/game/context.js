@@ -4,7 +4,7 @@ import React from 'react'
 import { jsx } from 'react/jsx-runtime'
 import { gameReducer, initialGameState } from './reducer.js'
 import { SAVED_STATE_KEYS, autosaveSave, loadSavedState, resolveBootSlot } from './save.js'
-import { SETTINGS_KEYS, mergeStoredSettings, storeSettings } from './settings.js'
+import { SETTINGS_KEYS, mergeStoredSettings, setSpriteStyle, storeSettings } from './settings.js'
 
 /** @type {React.Context<{ state: GameState, dispatch: (action: GameAction) => void } | null>} */
 const GameContext = React.createContext(
@@ -33,6 +33,9 @@ export function GameProvider({ children }) {
   // Latest committed state, so a trailing save writes the newest progress
   // rather than the snapshot that scheduled it.
   const latestStateRef = React.useRef(state)
+  // Keep the sprite-style cache in step before children render, so a toggle
+  // takes effect on the same render rather than the next state change.
+  setSpriteStyle(state.spriteStyle)
   React.useEffect(() => {
     latestStateRef.current = state
   })

@@ -119,6 +119,12 @@ export const CHANGELOG = [
           ],
         },
         {
+          heading: 'Interface',
+          items: [
+            'Settings gained a Display section: choose animated sprites (the default) or the lighter static pixel art. The preference is remembered outside your save, like the other settings',
+          ],
+        },
+        {
           heading: 'Fixes',
           items: [
             'Milestone rewards are paid the moment they are earned: the achievement checker now also watches the party, box, bag and minigame records, so a TM, a new team member, a maxed friendship or a cleared minigame is rewarded straight away instead of waiting for the next battle stat to tick',

@@ -52,12 +52,13 @@ and the preferences live outside the save (`pokemon-idle-settings`,
 
 Still open:
 
-- [ ] **Display**: sprite style and other cosmetic options (no sprite-style
-      feature exists yet).
+- [ ] **Display**: more cosmetic options beyond the sprite style
+      (animated / static) that shipped.
 - [ ] **Account**: sign in / sync controls — blocked on #19.
 - [ ] Gameplay still isn't a complete home: the default catch rule lives in
-      the Catch Settings modal, and auto-heal / auto-switch / auto-travel are
-      not modelled yet.
+      the Catch Settings modal, and auto-heal is not modelled yet. (Auto-switch
+      and auto-travel already exist as the Battle Style and Auto-Proceed/
+      Auto-Travel settings.)
 
 Effort: **medium** (mostly UI plus a small settings slice).
 

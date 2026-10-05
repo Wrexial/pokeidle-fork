@@ -451,6 +451,8 @@ type GameState = {
   colourblindTypes: boolean
   /** Uniformly scale the UI up for readability. */
   largeText: boolean
+  /** Sprite style: animated gifs or static pngs. */
+  spriteStyle: 'animated' | 'static'
   /** Background music (off by default). */
   musicEnabled: boolean
   /** Sound effects for notable events (off by default). */

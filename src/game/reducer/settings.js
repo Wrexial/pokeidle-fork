@@ -229,6 +229,20 @@ export function toggleLargeText(state, action) {
 }
 
 /**
+ * Handle the `TOGGLE_SPRITE_STYLE` action: switch between the animated gifs and
+ * the static pngs.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function toggleSpriteStyle(state, action) {
+  return {
+    ...state,
+    spriteStyle: state.spriteStyle === 'static' ? 'animated' : 'static',
+  }
+}
+
+/**
  * Handle the `TOGGLE_MUSIC` action.
  * @param {GameState} state
  * @param {GameAction} action

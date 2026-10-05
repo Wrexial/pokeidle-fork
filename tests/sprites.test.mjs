@@ -88,3 +88,18 @@ test('rollGender respects fixed genders and genderless species', () => {
   assert.equal(rollGender('indeedee'), 'male')
   assert.ok(['male', 'female'].includes(rollGender('pikachu')))
 })
+
+test('the static sprite style forces the png artwork', async () => {
+  const { setSpriteStyle } = await import('../src/game/settings.js')
+  try {
+    setSpriteStyle('static')
+    assert.equal(getPokemonSpriteUrl(PIKACHU, false, false, false), `/sprites/pokemon/${PIKACHU}.png`)
+    assert.equal(
+      getPokemonSpriteUrl(PIKACHU, true, true, true),
+      `/sprites/pokemon/back/shiny/female/${PIKACHU}.png`
+    )
+  } finally {
+    setSpriteStyle('animated')
+  }
+  assert.equal(getPokemonSpriteUrl(PIKACHU, false, false, false), `${ANIMATED}/${PIKACHU}.gif`)
+})

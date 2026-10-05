@@ -1,6 +1,7 @@
 // Sprite URL helpers (Pokemon, eggs and trainers). Split from game/pokemon.js.
 
 import { animatedSprites, genderedSprites, trainerClasses } from '../../data/gameData.js'
+import { getSpriteStyle } from '../settings.js'
 
 /**
  * Animated sprite directory. It is a merged set: the official Gen V
@@ -16,6 +17,9 @@ import { animatedSprites, genderedSprites, trainerClasses } from '../../data/gam
  * @param {boolean} [isFemale]
  */
 export function getPokemonSpriteUrl(spriteId, isBack = !1, isShiny = !1, isFemale = !1) {
+  // The player's sprite-style preference can force the static png set.
+  if (getSpriteStyle() === 'static')
+    return getPokemonSpriteFallbackUrl(spriteId, isBack, isShiny, isFemale)
   const key = Number(spriteId),
     missing = isShiny
       ? isBack

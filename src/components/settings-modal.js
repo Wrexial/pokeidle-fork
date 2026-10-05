@@ -307,6 +307,26 @@ export function SettingsModal({ onClose }) {
                     children: [
                       jsx('div', {
                         className: 'settings-section-title',
+                        children: 'Display',
+                      }),
+                      jsx('p', {
+                        className: 'settings-hint',
+                        children:
+                          'Choose how Pokemon are drawn: animated sprites (the default) or the static pixel art. Static is lighter on older devices and a natural fit with Reduced Motion.',
+                      }),
+                      jsx('button', {
+                        className: `settings-toggle-btn${state.spriteStyle === 'static' ? ' active' : ''}`,
+                        onClick: () => dispatch({ type: 'TOGGLE_SPRITE_STYLE' }),
+                        children:
+                          state.spriteStyle === 'static' ? 'Sprites: Static' : 'Sprites: Animated',
+                      }),
+                    ],
+                  }),
+                  jsxs('div', {
+                    className: 'settings-section',
+                    children: [
+                      jsx('div', {
+                        className: 'settings-section-title',
                         children: 'Notifications',
                       }),
                       jsx('p', {

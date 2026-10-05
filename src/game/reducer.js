@@ -16,7 +16,7 @@ import { claimGift, startStaticEncounter } from './reducer/gifts.js'
 import { claimMinigameReward, collectMining, endBugContest, endMinigame, endRouteActivity, endSafari, payMinigameFee, recordGameCornerWin, startAcademyQuiz, startAuctionHouse, startBattleRoyal, startBugContest, startContest, startCurry, startDynamaxAdventures, startGameCorner, startIceSlide, startLightsOut, startMemory, startMining, startMusical, startPelago, startPicnic, startPokeathlon, startPokeRadar, startPokeballFactory, startPokestar, startPuzzleLeague, startRouteActivity, startRuinsPuzzle, startSafari, startVoltorbFlip, startWhack } from './reducer/minigames.js'
 import { boxToParty, catchPokemon, clearHatchResult, completeEvolution, completeWonderTrade, depositDaycare, evolutionStep, hatchDaycareEgg, partyToBox, releaseDuplicates, releaseFainted, releaseHatchling, releasePokemon, reorderBox, reorderParty, setBoxSort, setMoves, setNickname, startEvolution, swapPartyBox, toggleFavourite, withdrawDaycare, wonderTrade } from './reducer/pokemon.js'
 import { completeHealing, healingStep, nuzlockeGameOver, startHealing } from './reducer/recovery.js'
-import { addLog, clearLevelUp, dismissNotification, markCatchRoute, pushNotification, setBattleMode, setBattleStyle, setChallengeMonotype, setSpeed, toggleAutoProceed, toggleBrowserNotifications, toggleChallengeLevelScale, toggleChallengeNuzlocke, toggleChallengeRandomizer, toggleChallengeRestrictCatches, toggleColourblindTypes, toggleLargeText, toggleMartCollapsed, toggleMusic, toggleNotifyEgg, toggleNotifyRare, toggleNotifyShiny, togglePause, toggleReducedMotion, toggleSfx } from './reducer/settings.js'
+import { addLog, clearLevelUp, dismissNotification, markCatchRoute, pushNotification, setBattleMode, setBattleStyle, setChallengeMonotype, setSpeed, toggleAutoProceed, toggleBrowserNotifications, toggleChallengeLevelScale, toggleChallengeNuzlocke, toggleChallengeRandomizer, toggleChallengeRestrictCatches, toggleColourblindTypes, toggleLargeText, toggleMartCollapsed, toggleMusic, toggleNotifyEgg, toggleNotifyRare, toggleNotifyShiny, togglePause, toggleReducedMotion, toggleSfx, toggleSpriteStyle } from './reducer/settings.js'
 import { phaseIdle, prestigeRegion, resetEliteFour, selectStarter, travel, unlockRegion } from './reducer/world.js'
 
 /** @type {GameState} */
@@ -145,6 +145,8 @@ export const initialGameState = {
   colourblindTypes: !1,
   /** Uniformly scale the UI up for readability. */
   largeText: !1,
+  /** Sprite style: 'animated' gifs (default) or 'static' pngs. */
+  spriteStyle: 'animated',
   /** Whether the town Poke Mart starts collapsed (persisted UI preference). */
   martCollapsed: !1,
   /** Background music (off by default; the AudioContext starts on first use). */
@@ -381,6 +383,8 @@ export function gameReducer(state, action) {
       return toggleColourblindTypes(state, action)
     case 'TOGGLE_LARGE_TEXT':
       return toggleLargeText(state, action)
+    case 'TOGGLE_SPRITE_STYLE':
+      return toggleSpriteStyle(state, action)
     case 'TOGGLE_MART_COLLAPSED':
       return toggleMartCollapsed(state, action)
     case 'TOGGLE_MUSIC':

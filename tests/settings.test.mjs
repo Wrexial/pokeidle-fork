@@ -114,3 +114,12 @@ test('repairSave defaults the accessibility settings off and keeps them on', () 
   assert.equal(repairSave(save({ notifyShiny: false })).notifyShiny, false)
   assert.equal(repairSave(save({ notifyEgg: false })).notifyEgg, false)
 })
+
+test('the sprite style toggle switches between animated and static', () => {
+  const staticSprites = gameReducer(initialGameState, { type: 'TOGGLE_SPRITE_STYLE' })
+  assert.equal(staticSprites.spriteStyle, 'static')
+  assert.equal(
+    gameReducer(staticSprites, { type: 'TOGGLE_SPRITE_STYLE' }).spriteStyle,
+    'animated'
+  )
+})

@@ -10,6 +10,24 @@
 export const SETTINGS_STORAGE_KEY = 'pokemon-idle-settings'
 
 /**
+ * The sprite style currently in effect (`'animated'` or `'static'`). Cached at
+ * module scope so the low-level sprite URL helper can read it without every
+ * call parsing localStorage; the provider refreshes it on each render.
+ * @type {'animated' | 'static'}
+ */
+let spriteStylePreference = 'animated'
+
+/** @returns {'animated' | 'static'} */
+export function getSpriteStyle() {
+  return spriteStylePreference
+}
+
+/** @param {'animated' | 'static'} style */
+export function setSpriteStyle(style) {
+  spriteStylePreference = style === 'static' ? 'static' : 'animated'
+}
+
+/**
  * The state fields that are player preferences rather than run progress.
  * `SAVED_STATE_KEYS` excludes all of them, so they are persisted here instead.
  */
@@ -28,6 +46,7 @@ export const SETTINGS_KEYS = /** @type {const} */ ([
   'reducedMotion',
   'colourblindTypes',
   'largeText',
+  'spriteStyle',
   'martCollapsed',
   'musicEnabled',
   'sfxEnabled',
@@ -62,6 +81,7 @@ export function mergeStoredSettings(state) {
   /** @type {Record<string, any>} */
   const merged = { ...state }
   for (const key of SETTINGS_KEYS) if (stored[key] !== void 0) merged[key] = stored[key]
+  setSpriteStyle(merged.spriteStyle)
   return /** @type {GameState} */ (merged)
 }
 
@@ -76,6 +96,7 @@ export function storeSettings(state) {
     const settings = {}
     for (const key of SETTINGS_KEYS) settings[key] = state[key]
     localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(settings))
+    setSpriteStyle(state.spriteStyle)
   } catch {
     /* storage may be unavailable */
   }

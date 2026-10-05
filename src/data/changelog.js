@@ -85,6 +85,7 @@ export const CHANGELOG = [
             'Wild Pokemon occasionally drop a TM of their own type when defeated, so routes are a steady source as you travel',
             'Level-ups no longer overwrite a move you taught: when the four slots are full, the oldest level-up move makes room, and if every slot holds a TM the new move waits in the Manage Moves panel instead of replacing one',
             'TMs live in their own bag tab as reusable discs, so you can see the whole collection at a glance',
+            'Every TM is numbered now and drawn as a type-coloured disc with its number on it — in the bag, the reward lists and the Move Manager you see “TM89 Flamethrower” rather than a plain “TM”, and the disc finally takes its move type\u2019s colour',
           ],
         },
         {

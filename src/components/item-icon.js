@@ -7,7 +7,7 @@
 import { jsx } from 'react/jsx-runtime'
 import { itemIcons } from '../data/gameData.js'
 import { pokeBalls } from '../data/items.js'
-import { isTmItem, tmMoveType } from '../data/tms.js'
+import { isTmItem, tmMoveType, tmNumber } from '../data/tms.js'
 import { PokeballIcon } from './pokeball-icon.js'
 
 /** @param {{ itemId: string, size?: number, className?: string }} props */
@@ -24,11 +24,15 @@ export function ItemIcon({ itemId, size = 20, className }) {
     })
   if (pokeBalls[itemId]) return jsx(PokeballIcon, { ballId: itemId, size })
   if (isTmItem(itemId)) {
-    const type = tmMoveType(itemId)
+    const type = tmMoveType(itemId),
+      number = tmNumber(itemId)
     return jsx('span', {
       className: `tm-icon${type ? ` type-bg-${type.toLowerCase()}` : ''}${className ? ` ${className}` : ''}`,
-      style: { width: size, height: size, fontSize: Math.max(6, Math.round(size * 0.42)) },
-      children: 'TM',
+      style: { width: size, height: size, fontSize: Math.max(5, Math.round(size * 0.4)) },
+      children: jsx('span', {
+        className: 'tm-icon-number',
+        children: number ?? 'TM',
+      }),
     })
   }
   return null

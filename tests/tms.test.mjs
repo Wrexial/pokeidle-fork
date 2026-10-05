@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 installGameData()
 
-const { TM_MOVE_IDS, TM_MOVES_BY_TYPE, getTmInfo, isTmItem, tmItemId, tmMoveType } = await import(
+const { TM_MOVE_IDS, TM_MOVES_BY_TYPE, getTmInfo, isTmItem, tmItemId, tmMoveType, tmNumber } = await import(
   '../src/data/tms.js'
 )
 const { gymTmType, minigameTmTypes, rollUnownedTm } = await import('../src/game/tms.js')
@@ -23,9 +23,21 @@ test('the TM catalogue covers every machine move group', () => {
   assert.equal(isTmItem(itemId), true)
   assert.equal(isTmItem('potion'), false)
   assert.equal(tmMoveType(itemId), 'Fire')
-  assert.match(getTmInfo(itemId).name, /^TM /)
+  assert.match(getTmInfo(itemId).name, /^TM\d+ /)
   assert.equal(getItemCategory(itemId), 'tms')
   assert.equal(getItemInfo(itemId).name, getTmInfo(itemId).name)
+})
+
+test('every TM has a unique catalogue number shown in its name', () => {
+  const numbers = TM_MOVE_IDS.map((moveId) => tmNumber(moveId))
+  assert.equal(new Set(numbers).size, TM_MOVE_IDS.length, 'numbers are unique')
+  for (const moveId of TM_MOVE_IDS) {
+    const itemId = tmItemId(moveId),
+      number = tmNumber(itemId)
+    assert.ok(number >= 1, `${moveId} has a number`)
+    assert.equal(tmNumber(tmItemId(moveId)), number, 'item id and move id agree')
+    assert.match(getTmInfo(itemId).name, new RegExp(`^TM${number} `))
+  }
 })
 
 test('rollUnownedTm never repeats an owned TM and collapses when exhausted', () => {

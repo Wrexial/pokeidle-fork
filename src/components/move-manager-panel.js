@@ -4,7 +4,7 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { formatMoveAccuracy } from '../data/moves.js'
 import { moveData } from '../data/gameData.js'
-import { tmItemId } from '../data/tms.js'
+import { tmItemId, tmNumber } from '../data/tms.js'
 import { tmTeachCost } from '../data/config.js'
 import { useGame } from '../game/context.js'
 import { getFamilyLearnset, getTutorMoves, pokemonDisplayName } from '../game/pokemon.js'
@@ -165,7 +165,7 @@ export function MoveManagerPanel({ pokemon, onClose }) {
                     children: isTm
                       ? locked
                         ? 'No TM'
-                        : 'TM'
+                        : `TM${tmNumber(moveId) ?? ''}`
                       : kind === 'egg'
                         ? 'Egg'
                         : `Lv.${learnLevel}`,

@@ -1341,95 +1341,131 @@ img {
 .type-bg-normal {
     background: #908860;
     color: var(--text-on-type);
-    text-shadow: none
+    text-shadow: none;
+    --type-color: #908860;
+    --type-ink: var(--text-on-type)
 }
 
 .type-bg-fire {
     background: #c86828;
     color: var(--text-on-type);
-    text-shadow: none
+    text-shadow: none;
+    --type-color: #c86828;
+    --type-ink: var(--text-on-type)
 }
 
 .type-bg-water {
-    background: #4a68b8
+    background: #4a68b8;
+    --type-color: #4a68b8;
+    --type-ink: #fff
 }
 
 .type-bg-electric {
     background: #c8a828;
     color: var(--text-on-type);
-    text-shadow: none
+    text-shadow: none;
+    --type-color: #c8a828;
+    --type-ink: var(--text-on-type)
 }
 
 .type-bg-grass {
     background: #60a040;
     color: var(--text-on-type);
-    text-shadow: none
+    text-shadow: none;
+    --type-color: #60a040;
+    --type-ink: var(--text-on-type)
 }
 
 .type-bg-ice {
     background: #78b0b0;
     color: var(--text-on-type);
-    text-shadow: none
+    text-shadow: none;
+    --type-color: #78b0b0;
+    --type-ink: var(--text-on-type)
 }
 
 .type-bg-fighting {
-    background: #a02820
+    background: #a02820;
+    --type-color: #a02820;
+    --type-ink: #fff
 }
 
 .type-bg-poison {
-    background: #883088
+    background: #883088;
+    --type-color: #883088;
+    --type-ink: #fff
 }
 
 .type-bg-ground {
     background: #c0a050;
     color: var(--text-on-type);
-    text-shadow: none
+    text-shadow: none;
+    --type-color: #c0a050;
+    --type-ink: var(--text-on-type)
 }
 
 .type-bg-flying {
     background: #9078c8;
     color: var(--text-on-type);
-    text-shadow: none
+    text-shadow: none;
+    --type-color: #9078c8;
+    --type-ink: var(--text-on-type)
 }
 
 .type-bg-psychic {
-    background: #c03a62
+    background: #c03a62;
+    --type-color: #c03a62;
+    --type-ink: #fff
 }
 
 .type-bg-bug {
     background: #90a018;
     color: var(--text-on-type);
-    text-shadow: none
+    text-shadow: none;
+    --type-color: #90a018;
+    --type-ink: var(--text-on-type)
 }
 
 .type-bg-rock {
     background: #a08830;
     color: var(--text-on-type);
-    text-shadow: none
+    text-shadow: none;
+    --type-color: #a08830;
+    --type-ink: var(--text-on-type)
 }
 
 .type-bg-ghost {
-    background: #604878
+    background: #604878;
+    --type-color: #604878;
+    --type-ink: #fff
 }
 
 .type-bg-dragon {
-    background: #6030c8
+    background: #6030c8;
+    --type-color: #6030c8;
+    --type-ink: #fff
 }
 
 .type-bg-dark {
-    background: #584038
+    background: #584038;
+    --type-color: #584038;
+    --type-ink: #fff
 }
 
 .type-bg-steel {
     background: #9898b0;
     color: var(--text-on-type);
-    text-shadow: none
+    text-shadow: none;
+    --type-color: #9898b0;
+    --type-ink: var(--text-on-type)
 }
 
 .type-bg-fairy {
     background: #c87890;
     color: var(--text-on-type);
-    text-shadow: none
+    text-shadow: none;
+    --type-color: #c87890;
+    --type-ink: var(--text-on-type)
 }
 
 .move-panel-overlay {
@@ -6055,18 +6091,47 @@ img {
 }
 
 .tm-icon {
+    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
     border-radius: 50%;
-    border: 2px solid #483828;
-    background: #b8a878;
-    color: #fff;
+    border: 2px solid #2a2016;
+    /* Colour comes from the type's `type-bg-*` class; fall back to a plain
+       tan disc for a TM with no move data. */
+    background: var(--type-color, #b8a878);
+    color: var(--type-ink, #fff);
     font-weight: 700;
     letter-spacing: -.5px;
     text-shadow: 1px 1px 0 #00000066;
-    box-shadow: inset 0 0 0 1px #ffffff55
+    box-shadow: inset 0 0 0 1px #ffffff59,0 1px 1px #00000066
+}
+
+/* A glossy top-left highlight and a thin inner ring, so the disc reads as a
+   pressed TM rather than a flat coloured dot. */
+.tm-icon:before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle at 32% 26%,#ffffff66,#ffffff00 58%);
+    pointer-events: none
+}
+
+.tm-icon:after {
+    content: '';
+    position: absolute;
+    inset: 18%;
+    border-radius: 50%;
+    border: 1px solid #ffffff38;
+    pointer-events: none
+}
+
+.tm-icon-number {
+    position: relative;
+    z-index: 1;
+    line-height: 1
 }
 
 .shiny-sparkle:before,.shiny-sparkle:after {

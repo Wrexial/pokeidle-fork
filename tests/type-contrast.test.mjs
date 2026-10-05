@@ -26,7 +26,10 @@ function ruleBody(selector) {
 
 /** @param {string} body @param {string} name @returns {string | null} */
 function prop(body, name) {
-  const match = body.match(new RegExp(`${name}\\s*:\\s*([^;]+)`))
+  // Require the name to start a declaration (after `;` / whitespace / the
+  // block start), so a custom property such as `--type-color` never matches a
+  // lookup for `color`.
+  const match = body.match(new RegExp(`(?:^|[;\\s])${name}\\s*:\\s*([^;]+)`))
   return match ? match[1].trim() : null
 }
 

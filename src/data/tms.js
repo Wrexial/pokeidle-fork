@@ -17,6 +17,13 @@ for (const moveIds of Object.values(tmLearnsets))
 export const TM_MOVE_IDS = [...tmMoveIdSet].filter((moveId) => moveData[moveId]).sort()
 
 /**
+ * 1-based catalogue number for each machine move, in `TM_MOVE_IDS` order. The
+ * number is a stable label ("TM142"), not a game-canonical TM number.
+ * @type {Map<string, number>}
+ */
+const TM_NUMBERS = new Map(TM_MOVE_IDS.map((moveId, index) => [moveId, index + 1]))
+
+/**
  * Machine moves grouped by move type, for type-themed rewards (a gym hands out
  * TMs of its own type, a Bug Catcher minigame hands out Bug TMs, ...).
  * @type {Record<string, string[]>}
@@ -56,6 +63,16 @@ export function tmMoveId(itemId) {
 }
 
 /**
+ * The catalogue number of a TM, by item id (`tm:<moveId>`) or raw move id.
+ * @param {string} itemIdOrMoveId
+ * @returns {number | null}
+ */
+export function tmNumber(itemIdOrMoveId) {
+  const moveId = isTmItem(itemIdOrMoveId) ? tmMoveId(itemIdOrMoveId) : itemIdOrMoveId
+  return (moveId && TM_NUMBERS.get(moveId)) || null
+}
+
+/**
  * Name and effect text for a TM item, shaped like the other `getItemInfo`
  * entries (so the bag, tooltips and reward summaries can show it).
  * @param {string} itemId
@@ -64,9 +81,10 @@ export function tmMoveId(itemId) {
 export function getTmInfo(itemId) {
   const move = moveData[tmMoveId(itemId) ?? '']
   if (!move) return { name: String(itemId), description: '' }
+  const number = tmNumber(itemId)
   return {
-    name: `TM ${move.name}`,
-    description: `Teaches ${move.name} to a compatible Pokemon. Reusable.`,
+    name: number != null ? `TM${number} ${move.name}` : `TM ${move.name}`,
+    description: `TM${number != null ? ` ${number}` : ''} teaches ${move.name} to a compatible Pokemon. Reusable.`,
   }
 }
 

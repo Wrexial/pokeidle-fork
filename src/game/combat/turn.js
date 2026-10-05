@@ -3,7 +3,7 @@
 import { moveMakesContact } from '../../data/move-effects.js'
 import { moveData, moveLearnsets } from '../../data/gameData.js'
 import { heldItems } from '../../data/items.js'
-import { abilityAbsorbsType, abilityAttackMultiplier, abilityBlocksMove, abilityBlocksNonSuperEffective, abilityChangesMoveType, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityEffectivenessMultiplier, abilityHalvesSuperEffective, abilityHealsFromType, abilityOf, abilityPreventsStatDrop, abilitySurvivesAtFullHp, fieldAuraMultiplier, onHitStatBoost, onHpThresholdBoost, ruinDefenseMultiplier, ruinOffenseMultiplier } from '../abilities.js'
+import { abilityAbsorbsType, abilityAttackMultiplier, abilityBlocksMove, abilityBlocksNonSuperEffective, abilityChangesMoveType, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityEffectivenessMultiplier, abilityHalvesSuperEffective, abilityHealsFromType, abilityOf, abilityPreventsStatDrop, abilitySurvivesAtFullHp, fieldAuraMultiplier, onHitStatBoost, onHpThresholdBoost, ruinDefenseMultiplier, ruinOffenseMultiplier, rivalryDamageMultiplier } from '../abilities.js'
 import { AI_SKILL, chooseMoveForBattle } from './ai.js'
 import { changeBattleForm } from './setup.js'
 import { calculateDamage, chance, isSelfTargetedMove, normalizeStatKey } from './damage.js'
@@ -75,8 +75,17 @@ function applyStatChangeEffect(attack, effect, events, deterministic = !1, secon
     )
   )
     return
-  const statTarget = fromOpponent ? attack.defender : attack.attacker,
-    side = statTarget === attack.attacker
+  // Magic Bounce reflects an opponent's stat drop back onto the user.
+  let statTarget = fromOpponent ? attack.defender : attack.attacker
+  if (
+    fromOpponent &&
+    attack.attacker !== attack.defender &&
+    abilityOf(statTarget) === 'magicBounce' &&
+    !['moldBreaker', 'teravolt', 'turboblaze'].includes(abilityOf(attack.attacker) ?? '') &&
+    Object.values(effect.changes).some((delta) => delta < 0)
+  )
+    statTarget = attack.attacker
+  const side = statTarget === attack.attacker
       ? attack.isPlayer
         ? 'player'
         : 'enemy'
@@ -165,14 +174,17 @@ function applySecondaryEffect(attack, moveDef, events, deterministic, activeTerr
     applyStatChangeEffect(attack, secondary, events, deterministic, !0)
     return
   }
-  if (!secondary.status) return
+  if (!secondary.status && !secondary.statuses) return
   if (abilityOf(attack.defender) === 'shieldDust') return
   const odds =
     (secondary.chance ?? 100) * (abilityOf(attack.attacker) === 'sereneGrace' ? 2 : 1)
   if (!chance(odds / 100, deterministic)) return
+  const pool = secondary.statuses ?? [secondary.status],
+    status = deterministic ? pool[0] : pool[Math.floor(Math.random() * pool.length)]
+  if (!status) return
   applyStatus(
     attack.defender,
-    secondary.status,
+    status,
     events,
     !attack.isPlayer,
     deterministic,
@@ -275,6 +287,16 @@ function effectivePriority(pokemon, moveDef) {
   if (ability === 'myceliumMight' && moveDef.category === 'status') priority -= 1
   if (ability === 'stall') priority -= 1
   return priority
+}
+
+/**
+ * Quick Draw: a 30% chance to move first within its priority bracket.
+ * @param {BattlePokemon} pokemon
+ * @param {boolean} deterministic
+ * @returns {boolean}
+ */
+function quickDrawActive(pokemon, deterministic) {
+  return abilityOf(pokemon) === 'quickDraw' && chance(0.3, deterministic)
 }
 
 /**
@@ -437,7 +459,10 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     playerActsFirst = trickRoomActive ? playerSpeed <= enemySpeed : playerSpeed >= enemySpeed,
     attackOrder = [],
     playerPriority = playerMustRecharge ? -10 : effectivePriority(player, playerMove),
-    enemyPriority = enemyMustRecharge ? -10 : effectivePriority(enemy, enemyMove)
+    enemyPriority = enemyMustRecharge ? -10 : effectivePriority(enemy, enemyMove),
+    // Quick Draw is rolled once per side, then breaks a same-priority tie.
+    playerQuickDraw = !playerSkipMove && quickDrawActive(player, deterministic),
+    enemyQuickDraw = !enemySkipMove && quickDrawActive(enemy, deterministic)
   if (playerSkipMove && enemySkipMove) {
     // Both sides spent the turn switching or using an item.
   } else if (playerSkipMove)
@@ -470,6 +495,36 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       }
     )
   else if (enemyPriority > playerPriority)
+    attackOrder.push(
+      {
+        attacker: enemy,
+        defender: player,
+        moveId: enemyMoveId,
+        isPlayer: !1,
+      },
+      {
+        attacker: player,
+        defender: enemy,
+        moveId: playerMoveId,
+        isPlayer: !0,
+      }
+    )
+  else if (playerQuickDraw && !enemyQuickDraw)
+    attackOrder.push(
+      {
+        attacker: player,
+        defender: enemy,
+        moveId: playerMoveId,
+        isPlayer: !0,
+      },
+      {
+        attacker: enemy,
+        defender: player,
+        moveId: enemyMoveId,
+        isPlayer: !1,
+      }
+    )
+  else if (enemyQuickDraw && !playerQuickDraw)
     attackOrder.push(
       {
         attacker: enemy,
@@ -1509,6 +1564,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     totalDamage = Math.floor(
       totalDamage *
         abilityDamageDealtMultiplier(attack.attacker, effectiveMove, effectiveWeather) *
+        rivalryDamageMultiplier(attack.attacker, attack.defender) *
         abilityDamageTakenMultiplier(attack.defender, effectiveMove, attack.attacker) *
         heldDamageMultiplier(attack.attacker, effectiveMove) *
         weatherDamageMultiplier(effectiveWeather, effectiveMove) *
@@ -1715,6 +1771,38 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
             )
           )
             applyStatus(attack.defender, moveDef.effect.status, events, !attack.isPlayer, deterministic, activeTerrain, !0, attack.attacker)
+          break
+        }
+        case 'statusPool': {
+          // One status rolled from a set (Tri Attack, Dire Claw).
+          if (abilityOf(attack.defender) === 'shieldDust') break
+          if (
+            moveDef.effect.chance !== void 0 &&
+            !chance(
+              (moveDef.effect.chance * (abilityOf(attack.attacker) === 'sereneGrace' ? 2 : 1)) /
+                100,
+              deterministic
+            )
+          )
+            break
+          const pool = moveDef.effect.statuses ?? [],
+            status = deterministic ? pool[0] : pool[Math.floor(Math.random() * pool.length)]
+          if (status)
+            applyStatus(attack.defender, status, events, !attack.isPlayer, deterministic, activeTerrain, !0, attack.attacker)
+          break
+        }
+        case 'cureStatus': {
+          // Wake-Up Slap wakes a sleeping target; Smelling Salts cures paralysis.
+          const statuses = moveDef.effect.statuses ?? []
+          if (attack.defender.status && statuses.includes(attack.defender.status)) {
+            attack.defender.status = null
+            attack.defender.statusTurns = 0
+            events.push({
+              type: 'status',
+              message: `${attack.defender.name} was cured of its status!`,
+              data: { target: attack.isPlayer ? 'enemy' : 'player' },
+            })
+          }
           break
         }
         case 'statChange': {

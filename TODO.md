@@ -117,8 +117,9 @@ Not done:
 - [ ] Ally / doubles abilities: Battery, Power Spot, Friend Guard, Healer,
       Telepathy, Aroma/Flower Veil, Costar, Commander, Hospitality, Symbiosis,
       Gulp Missile.
-- [ ] A few complex singles ones: Illusion, Magic Bounce, Synchronize,
-      Stakeout, Supreme Overlord, Quick Draw, Rivalry.
+- [ ] A few complex singles ones: Illusion, Stakeout, Supreme Overlord.
+      (Magic Bounce, Synchronize, Quick Draw and Rivalry shipped; see the
+      changelog.)
 - [ ] Overworld-only abilities (no effect in an idle auto-battler): Illuminate,
       Run Away.
 - [ ] The remaining item nuances (Choice locking, more berries, Rocky Helmet).
@@ -264,10 +265,14 @@ effects.
 
 Still open (edge cases):
 
-- [ ] Moves that roll one status out of several (Tri Attack, Dire Claw) or
-      carry a third effect, which the single `secondary` slot cannot express.
-- [ ] A few signature moves with unusual conditionals outside the generic
-      effect set.
+- [ ] Moves that carry a third effect (a primary effect plus two riders), which
+      the single `secondary` slot still cannot express.
+- [ ] Signature moves whose power depends on turn order or the field rather
+      than a status condition: Payback, Avalanche, Revenge, Retaliate, Bolt
+      Beak, Fishious Rend, Round, Echoed Voice and the terrain-boosted moves.
+      (Tri Attack and Dire Claw now roll one of several statuses, and Facade,
+      Hex, Venoshock, Brine, Wake-Up Slap and Smelling Salts have their
+      conditionals.)
 
 Relevant code: `src/data/move-effects.js`, `src/game/combat/turn.js`,
 `src/game/move-info.js`, and `public/reference.html` (regenerate with

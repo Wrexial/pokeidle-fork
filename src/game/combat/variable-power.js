@@ -112,6 +112,19 @@ export function variablePower(moveId, attacker, defender) {
       return 20 + 20 * positiveStages(attacker)
     case 'punishment':
       return Math.min(200, 60 + 20 * positiveStages(defender))
+    // Conditionals: double power when the relevant condition holds.
+    case 'facade':
+      return attacker.status ? 140 : 70
+    case 'hex':
+      return defender.status ? 130 : 65
+    case 'venoshock':
+      return defender.status === 'poison' || defender.status === 'toxic' ? 130 : 65
+    case 'brine':
+      return defender.currentHp <= defender.maxHp / 2 ? 130 : 65
+    case 'wakeUpSlap':
+      return defender.status === 'sleep' ? 140 : 70
+    case 'smellingSalts':
+      return defender.status === 'paralysis' ? 140 : 70
     default:
       return null
   }
@@ -140,6 +153,12 @@ export const VARIABLE_POWER_MOVES = new Set([
   'storedPower',
   'powerTrip',
   'punishment',
+  'facade',
+  'hex',
+  'venoshock',
+  'brine',
+  'wakeUpSlap',
+  'smellingSalts',
 ])
 
 /**

@@ -328,6 +328,18 @@ const MOVE_OVERRIDES = {
   supersonic: { effect: { type: 'confusion' } },
   sweetKiss: { effect: { type: 'confusion' } },
   teeterDance: { effect: { type: 'confusion' } },
+  // Moves that roll one status out of several (the single `status` slot can't
+  // express this).
+  triAttack: {
+    effect: { type: 'statusPool', statuses: ['burn', 'freeze', 'paralysis'], chance: 20 },
+  },
+  direClaw: {
+    effect: { type: 'statusPool', statuses: ['poison', 'paralysis', 'sleep'], chance: 50 },
+  },
+  // Damaging moves that cure the condition they punish (the power doubles
+  // against it, see variable-power.js).
+  wakeUpSlap: { effect: { type: 'cureStatus', statuses: ['sleep'] } },
+  smellingSalts: { effect: { type: 'cureStatus', statuses: ['paralysis'] } },
   // Damaging moves that can paralyse.
   nuzzle: { effect: { type: 'status', status: 'paralysis', chance: 100 } },
   zapCannon: { effect: { type: 'status', status: 'paralysis', chance: 100 } },

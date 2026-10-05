@@ -10,6 +10,25 @@ import { terrainPreventsStatus } from '../terrain.js'
 /** Major status conditions that persist until cured and tick each turn. */
 const MAJOR_STATUSES = new Set(['poison', 'toxic', 'burn', 'freeze', 'sleep', 'paralysis'])
 
+/** Statuses Synchronize passes to the opponent that inflicted them. */
+const SYNCHRONIZE_STATUSES = new Set(['poison', 'toxic', 'burn', 'paralysis'])
+
+/** Abilities that ignore the target's ability (Mold Breaker family). */
+const IGNORES_TARGET_ABILITY = new Set(['moldBreaker', 'teravolt', 'turboblaze'])
+
+/**
+ * Whether the target's Magic Bounce should reflect this status back at the
+ * inflicter.
+ * @param {BattlePokemon} target
+ * @param {BattlePokemon | null} source
+ * @param {boolean} fromMagicBounce
+ */
+function shouldBounceStatus(target, source, fromMagicBounce) {
+  if (fromMagicBounce || !source || source === target) return false
+  if (abilityOf(target) !== 'magicBounce') return false
+  return !IGNORES_TARGET_ABILITY.has(abilityOf(source) ?? '')
+}
+
 /** Types that can't be afflicted by a given status. */
 
 /** @type {Record<string, string[]>} */
@@ -33,8 +52,10 @@ export const STATUS_IMMUNE_TYPES = {
  * @param {{ type: string } | null} [terrain]
  * @param {boolean} [sourceIsOpponent] Safeguard blocks these
  * @param {BattlePokemon | null} [source] the inflicting Pokemon (for Corrosion)
+ * @param {boolean} [fromSynchronize] Don't chain Synchronize.
+ * @param {boolean} [fromMagicBounce] Don't chain Magic Bounce.
  */
-export function applyStatus(target, status, events, targetIsPlayer, deterministic = !1, terrain = null, sourceIsOpponent = !1, source = null) {
+export function applyStatus(target, status, events, targetIsPlayer, deterministic = !1, terrain = null, sourceIsOpponent = !1, source = null, fromSynchronize = !1, fromMagicBounce = !1) {
   if (!target || target.currentHp <= 0) return
   const side = targetIsPlayer ? 'player' : 'enemy'
   if (status === 'flinching') {
@@ -45,6 +66,16 @@ export function applyStatus(target, status, events, targetIsPlayer, deterministi
   if (sourceIsOpponent && (target.safeguardTurns ?? 0) > 0) return
   if (!MAJOR_STATUSES.has(status) || target.status) return
   if (abilityPreventsStatus(target, status)) return
+  // Magic Bounce reflects the status back at whoever inflicted it.
+  if (source && shouldBounceStatus(target, source, fromMagicBounce)) {
+    applyStatus(source, status, events, !targetIsPlayer, deterministic, terrain, !0, target, !1, !0)
+    events.push({
+      type: 'status',
+      message: `${target.name}'s Magic Bounce reflected the status!`,
+      data: { target: targetIsPlayer ? 'player' : 'enemy' },
+    })
+    return
+  }
   if (terrainPreventsStatus(terrain, target, status)) return
   if (
     !(
@@ -80,6 +111,16 @@ export function applyStatus(target, status, events, targetIsPlayer, deterministi
       target: side,
     },
   })
+  // Synchronize passes burn / poison / paralysis to the opponent that inflicted
+  // it; the `fromSynchronize` guard stops the two holders bouncing it forever.
+  if (
+    !fromSynchronize &&
+    source &&
+    source !== target &&
+    SYNCHRONIZE_STATUSES.has(status) &&
+    abilityOf(target) === 'synchronize'
+  )
+    applyStatus(source, status, events, !targetIsPlayer, deterministic, terrain, !0, target, !0, !0)
   // A held Lum Berry cures the status immediately.
   if (heldCuresStatus(target)) {
     target.heldItemUsed = !0

@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 const data = installGameData()
 
-const { abilityAttackMultiplier, abilityChangesMoveType, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityEffectivenessMultiplier, abilityPreventsStatus, fieldAuraMultiplier, onHitStatBoost, ruinDefenseMultiplier, ruinOffenseMultiplier } = await import('../src/game/abilities.js')
+const { abilityAttackMultiplier, abilityChangesMoveType, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityEffectivenessMultiplier, abilityPreventsStatus, fieldAuraMultiplier, onHitStatBoost, rivalryDamageMultiplier, ruinDefenseMultiplier, ruinOffenseMultiplier } = await import('../src/game/abilities.js')
 const { heldLeftoversHeal } = await import('../src/game/held-items.js')
 const { calculateDamage, resolveBattleTurn } = await import('../src/game/combat.js')
 const { abilityDisplayName, rollAbility } = await import('../src/game/pokemon.js')
@@ -1454,5 +1454,69 @@ test('Ice Face switches Eiscue to its Noice form', () => {
       })
     resolveBattleTurn(player, eiscue, false)
     assert.equal(eiscue.speciesKey, 'eiscue-noice')
+  })
+})
+
+test('Rivalry boosts the same gender and lowers the opposite', () => {
+  const rival = (/** @type {string} */ gender) => battler({ ability: 'rivalry', gender })
+  assert.equal(rivalryDamageMultiplier(rival('male'), battler({ gender: 'male' })), 1.25)
+  assert.equal(rivalryDamageMultiplier(rival('male'), battler({ gender: 'female' })), 0.75)
+  assert.equal(rivalryDamageMultiplier(rival('female'), battler({ gender: 'female' })), 1.25)
+  assert.equal(rivalryDamageMultiplier(rival('male'), battler({ gender: 'genderless' })), 1)
+  assert.equal(
+    rivalryDamageMultiplier(
+      battler({ ability: 'overgrow', gender: 'male' }),
+      battler({ gender: 'female' })
+    ),
+    1
+  )
+})
+
+test('Synchronize passes the status back to the opponent', () => {
+  withFixedRandom(0.5, () => {
+    const attacker = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['thunderWave'],
+        speed: 200,
+        gender: 'male',
+      }),
+      enemy = battler({
+        name: 'Foe',
+        ability: 'synchronize',
+        moves: ['splash'],
+        gender: 'female',
+        types: ['Normal'],
+        currentHp: 9999,
+        maxHp: 9999,
+      })
+    resolveBattleTurn(attacker, enemy, false)
+    assert.equal(enemy.status, 'paralysis', 'the target is paralyzed')
+    assert.equal(attacker.status, 'paralysis', 'and so is the attacker')
+  })
+})
+
+test('Magic Bounce reflects a status move back at its user', () => {
+  withFixedRandom(0.5, () => {
+    const attacker = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['thunderWave'],
+        speed: 200,
+        gender: 'male',
+      }),
+      enemy = battler({
+        name: 'Foe',
+        ability: 'magicBounce',
+        moves: ['splash'],
+        gender: 'female',
+        types: ['Normal'],
+        currentHp: 9999,
+        maxHp: 9999,
+      }),
+      events = resolveBattleTurn(attacker, enemy, false)
+    assert.equal(enemy.status ?? null, null, 'the bouncer is unaffected')
+    assert.equal(attacker.status, 'paralysis', 'the status is reflected')
+    assert.ok(events.some((/** @type {any} */ event) => /Magic Bounce/.test(event.message ?? '')))
   })
 })

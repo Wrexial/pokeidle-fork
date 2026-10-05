@@ -70,6 +70,8 @@ const moveEffectText = {
   recoil: 'The user takes recoil damage.',
   drain: 'Heals the user for {percentage}% of the damage dealt.',
   status: 'May {status} the target.',
+  statusPool: 'May inflict one of several status conditions on the target.',
+  cureStatus: 'Cures the target\u2019s matching status condition.',
   statChange: 'Changes stats ({changes}).',
   statReset: 'Resets the target\u2019s stat stages.',
   selfDestruct: 'The user faints.',
@@ -142,6 +144,12 @@ export const variablePowerNotes = {
   storedPower: '20 power, plus 20 for each of the user\u2019s raised stats.',
   powerTrip: '20 power, plus 20 for each of the user\u2019s raised stats.',
   punishment: '60 power, plus 20 for each of the target\u2019s raised stats (max 200).',
+  facade: 'Double power (140) when the user has a status condition.',
+  hex: 'Double power (130) when the target has a status condition.',
+  venoshock: 'Double power (130) when the target is poisoned.',
+  brine: 'Double power (130) when the target is at or below half HP.',
+  wakeUpSlap: 'Double power (140) against a sleeping target, which it wakes.',
+  smellingSalts: 'Double power (140) against a paralyzed target, which it cures.',
 }
 
 /**
@@ -232,6 +240,20 @@ function describeMoveBase(move) {
         ? `${effect.chance}% chance to ${label} the target.`
         : `Inflicts ${label} on the target.`
     }
+    case 'statusPool': {
+      const labels = (effect.statuses ?? [])
+        .map(/** @param {string} status */ (status) => STATUS_LABELS[status] ?? status)
+        .join(', ')
+      return effect.chance && effect.chance < 100
+        ? `${effect.chance}% chance to inflict one of ${labels} on the target.`
+        : `Inflicts one of ${labels} on the target.`
+    }
+    case 'cureStatus': {
+      const labels = (effect.statuses ?? [])
+        .map(/** @param {string} status */ (status) => STATUS_LABELS[status] ?? status)
+        .join(', ')
+      return `Cures the target of ${labels}.`
+    }
     case 'statChange':
       return describeStatChange(effect)
     case 'confusion':
@@ -301,6 +323,14 @@ function describeMoveBase(move) {
  */
 function describeSecondaryEffect(secondary) {
   if (!secondary) return null
+  if (secondary.statuses) {
+    const labels = secondary.statuses
+      .map(/** @param {string} status */ (status) => STATUS_LABELS[status] ?? status)
+      .join(', ')
+    return secondary.chance && secondary.chance < 100
+      ? `${secondary.chance}% chance to inflict one of ${labels} on the target.`
+      : `Inflicts one of ${labels} on the target.`
+  }
   if (secondary.status) {
     const label = STATUS_LABELS[secondary.status] ?? secondary.status
     return secondary.chance && secondary.chance < 100

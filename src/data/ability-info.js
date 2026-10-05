@@ -1007,6 +1007,22 @@ export const abilityInfo = {
   'compoundEyes': {
     'group': 'misc',
     'text': 'Boosts its accuracy by 30%.'
+  },
+  'magicBounce': {
+    'group': 'defense',
+    'text': 'Reflects status moves and opponent-inflicted stat drops back at the user.'
+  },
+  'synchronize': {
+    'group': 'status',
+    'text': 'Passes burn, poison or paralysis to the opponent that inflicted it.'
+  },
+  'rivalry': {
+    'group': 'offense',
+    'text': 'More damage against the same gender (1.25x), less against the opposite (0.75x).'
+  },
+  'quickDraw': {
+    'group': 'offense',
+    'text': '30% chance to move first within its priority bracket.'
   }
 }
 

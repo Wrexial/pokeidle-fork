@@ -6,6 +6,7 @@
 // PokeAPI fall through to no effect until they are added here.
 
 import { moveMakesContact } from '../data/move-effects.js'
+import { genderForPokemon } from './breeding.js'
 
 /** @param {BattlePokemon} pokemon */
 export function abilityOf(pokemon) {
@@ -304,6 +305,20 @@ export function abilityDamageDealtMultiplier(attacker, moveDef, weather = null) 
     return 1.3
   if (ability === 'solarPower' && weather?.type === 'sun' && moveDef.category === 'special') return 1.5
   return 1
+}
+
+/**
+ * Rivalry: more damage against the same gender, less against the opposite.
+ * @param {BattlePokemon} attacker
+ * @param {BattlePokemon} defender
+ * @returns {number}
+ */
+export function rivalryDamageMultiplier(attacker, defender) {
+  if (abilityOf(attacker) !== 'rivalry') return 1
+  const attackerGender = genderForPokemon(attacker),
+    defenderGender = genderForPokemon(defender)
+  if (attackerGender === 'genderless' || defenderGender === 'genderless') return 1
+  return attackerGender === defenderGender ? 1.25 : 0.75
 }
 
 /**

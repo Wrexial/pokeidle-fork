@@ -6,6 +6,7 @@ import { installGameData } from './helpers/game-data.mjs'
 installGameData()
 
 const { AI_SKILL, calculateDamage, chooseBestSwitch, chooseMoveForBattle, resolveBattleTurn } = await import('../src/game/combat.js')
+const { variablePower } = await import('../src/game/combat/variable-power.js')
 const { moveData } = await import('../src/data/gameData.js')
 const { genderForPokemon } = await import('../src/game/breeding.js')
 const { describeMove, moveTooltip } = await import('../src/game/move-info.js')
@@ -1191,4 +1192,67 @@ test('the multi-effect overrides are present in the move table', () => {
   assert.equal(moveData.poisonFang.effect.status, 'toxic')
   assert.equal(moveData.fakeOut.effect.firstTurnOnly, true)
   assert.equal(moveData.tripleArrows.secondary.status, 'flinching')
+})
+
+test('Tri Attack and Dire Claw roll one status out of several', () => {
+  assert.deepEqual(moveData.triAttack.effect.statuses, ['burn', 'freeze', 'paralysis'])
+  assert.equal(moveData.triAttack.effect.type, 'statusPool')
+  assert.deepEqual(moveData.direClaw.effect.statuses, ['poison', 'paralysis', 'sleep'])
+  assert.match(describeMove({ ...moveData.triAttack, key: 'triAttack' }), /burn.*freeze.*paralyz/i)
+  // A zero roll always picks the pool's first status.
+  withFixedRandom(0, () => {
+    const attacker = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['triAttack'],
+        speed: 200,
+        spAttack: 200,
+      }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], currentHp: 9999, maxHp: 9999 })
+    resolveBattleTurn(attacker, enemy, false)
+    assert.equal(enemy.status, 'burn')
+  })
+})
+
+test('conditionals double power only when their condition holds', () => {
+  const healthy = battler({ name: 'A' }),
+    statused = battler({ name: 'B', status: 'burn' }),
+    poisoned = battler({ name: 'C', status: 'poison' }),
+    sleeping = battler({ name: 'D', status: 'sleep' }),
+    paralyzed = battler({ name: 'E', status: 'paralysis' }),
+    lowHp = battler({ name: 'F', currentHp: 1, maxHp: 100 })
+  assert.equal(variablePower('facade', healthy, healthy), 70)
+  assert.equal(variablePower('facade', statused, healthy), 140)
+  assert.equal(variablePower('hex', healthy, statused), 130)
+  assert.equal(variablePower('hex', healthy, healthy), 65)
+  assert.equal(variablePower('venoshock', healthy, poisoned), 130)
+  assert.equal(variablePower('venoshock', healthy, statused), 65)
+  assert.equal(variablePower('brine', healthy, lowHp), 130)
+  assert.equal(variablePower('wakeUpSlap', healthy, sleeping), 140)
+  assert.equal(variablePower('smellingSalts', healthy, paralyzed), 140)
+})
+
+test('Wake-Up Slap wakes its target after hitting', () => {
+  withFixedRandom(0.99, () => {
+    const attacker = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['wakeUpSlap'],
+        speed: 200,
+        attack: 200,
+      }),
+      enemy = battler({
+        name: 'Foe',
+        status: 'sleep',
+        statusTurns: 2,
+        moves: ['splash'],
+        currentHp: 9999,
+        maxHp: 9999,
+      }),
+      events = resolveBattleTurn(attacker, enemy, false)
+    assert.equal(enemy.status, null)
+    assert.ok(
+      events.some((/** @type {any} */ event) => event.message.includes('cured of its status'))
+    )
+  })
 })

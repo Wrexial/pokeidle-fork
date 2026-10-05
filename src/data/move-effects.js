@@ -241,6 +241,8 @@ const MOVE_OVERRIDES = {
   // Single-target ally heals; in singles they heal the user. Life Dew heals the
   // side, Jungle Healing / Lunar Blessing also cure status.
   lifeDew: { effect: { type: 'heal', percentage: 25 } },
+  healPulse: { effect: { type: 'heal', percentage: 50 } },
+  floralHealing: { effect: { type: 'heal', percentage: 50 } },
   jungleHealing: { effect: { type: 'heal', percentage: 25, statusCure: true } },
   lunarBlessing: { effect: { type: 'heal', percentage: 25, statusCure: true } },
   // Ability manipulation: Gastro Acid suppresses, Worry Seed / Simple Beam
@@ -363,6 +365,8 @@ const MOVE_OVERRIDES = {
   gMaxDrumSolo: { category: 'physical' },
   gMaxFireball: { category: 'physical' },
   gMaxHydrosnipe: { category: 'special' },
+  // Snore can flinch, not put the target to sleep (the extraction mislabelled it).
+  snore: { effect: { type: 'status', status: 'flinching', chance: 30 } },
   // Priority values the extraction missed.
   extremeSpeed: { priority: 2 },
   feint: { priority: 2 },

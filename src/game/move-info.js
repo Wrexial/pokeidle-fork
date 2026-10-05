@@ -176,6 +176,20 @@ export const chargeMoveNotes = {
 }
 
 /**
+ * Moves that call another move (Metronome, Copycat, Mirror Move, Nature Power,
+ * Sleep Talk). The engine resolves them specially in `resolveCalledMove` /
+ * `resolveBattleTurn` rather than through an `effect`.
+ * @type {Record<string, string>}
+ */
+export const callingMoveNotes = {
+  metronome: 'Uses a random move.',
+  copycat: 'Uses the last move the opponent used.',
+  mirrorMove: 'Uses the last move the opponent used.',
+  naturePower: 'Becomes a move that depends on the terrain.',
+  sleepTalk: 'Usable only while asleep; uses a random move from the user\u2019s moveset.',
+}
+
+/**
  * Extra explanation for moves whose effect needs more than the generic line.
  * @type {Record<string, string>}
  */
@@ -200,6 +214,8 @@ export const handledMoveEffectTypes = new Set(Object.keys(moveEffectText))
  * @returns {string | null}
  */
 function describeMoveBase(move) {
+  const callingNote = callingMoveNotes[move.key ?? '']
+  if (callingNote) return callingNote
   const variableNote = variablePowerNotes[move.key ?? '']
   if (variableNote) return variableNote
   const chargeNote = chargeMoveNotes[move.key ?? '']

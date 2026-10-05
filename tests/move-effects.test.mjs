@@ -1256,3 +1256,124 @@ test('Wake-Up Slap wakes its target after hitting', () => {
     )
   })
 })
+
+test('Sleep Talk is usable while asleep and calls a random own move', () => {
+  withFixedRandom(0, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['sleepTalk', 'tackle'],
+        speed: 200,
+        attack: 200,
+        status: 'sleep',
+        statusTurns: 2,
+      }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], currentHp: 9999, maxHp: 9999 }),
+      events = resolveBattleTurn(
+        player,
+        enemy,
+        false,
+        false,
+        null,
+        null,
+        false,
+        null,
+        null,
+        null,
+        false,
+        'sleepTalk'
+      )
+    assert.ok(
+      events.some((/** @type {any} */ event) => event.type === 'attack' && /Tackle/.test(event.message)),
+      'it uses a move from its own moveset'
+    )
+    assert.equal(player.status, 'sleep', 'the user stays asleep')
+    assert.equal(player.statusTurns, 1, 'the sleep counter still ticks')
+  })
+})
+
+test('Sleep Talk fails while awake', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['sleepTalk', 'tackle'],
+        speed: 200,
+        status: null,
+      }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], currentHp: 9999, maxHp: 9999 }),
+      events = resolveBattleTurn(
+        player,
+        enemy,
+        false,
+        false,
+        null,
+        null,
+        false,
+        null,
+        null,
+        null,
+        false,
+        'sleepTalk'
+      )
+    assert.ok(
+      !events.some(
+        (/** @type {any} */ event) => event.type === 'attack' && /Player used/.test(event.message)
+      ),
+      'no move is used'
+    )
+    assert.ok(
+      events.some((/** @type {any} */ event) => /while awake/.test(event.message ?? '')),
+      'it explains the failure'
+    )
+  })
+})
+
+test('Snore is usable while asleep and can flinch', () => {
+  withFixedRandom(0.99, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['snore'],
+        speed: 200,
+        spAttack: 200,
+        status: 'sleep',
+        statusTurns: 2,
+      }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], currentHp: 9999, maxHp: 9999 }),
+      events = resolveBattleTurn(
+        player,
+        enemy,
+        false,
+        false,
+        null,
+        null,
+        false,
+        null,
+        null,
+        null,
+        false,
+        'snore'
+      )
+    assert.ok(events.some((/** @type {any} */ event) => event.type === 'attack' && /Snore/.test(event.message)))
+    assert.ok(events.some((/** @type {any} */ event) => event.type === 'damage'))
+  })
+})
+
+test('Heal Pulse and Floral Healing heal the user in singles', () => {
+  assert.equal(moveData.healPulse.effect.type, 'heal')
+  assert.equal(moveData.floralHealing.effect.percentage, 50)
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['healPulse'],
+        speed: 200,
+        currentHp: 100,
+        maxHp: 400,
+      }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], currentHp: 9999, maxHp: 9999 })
+    resolveBattleTurn(player, enemy, false)
+    assert.equal(player.currentHp, 300, 'Heal Pulse restores 50% max HP')
+  })
+})

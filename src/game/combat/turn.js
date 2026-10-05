@@ -22,7 +22,7 @@ import { WEATHER_ABILITIES, WEATHER_NAMES, WEATHER_TURNS, applyWeatherToMove, we
  * Moves that call another move. They are swapped out for the called move during
  * move selection, so the engine only ever sees a normal move.
  */
-const CALLING_MOVES = new Set(['metronome', 'copycat', 'mirrorMove', 'naturePower'])
+const CALLING_MOVES = new Set(['metronome', 'copycat', 'mirrorMove', 'naturePower', 'sleepTalk', 'assist', 'meFirst'])
 
 /** The move Nature Power becomes, by terrain. @type {Record<string, string>} */
 const NATURE_POWER_BY_TERRAIN = {
@@ -592,9 +592,51 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       })
       continue
     }
-    if (statusPreventsAction(attack.attacker, events, attack.isPlayer, deterministic)) continue
+    // Sleep Talk and Snore are usable while asleep. Tick the sleep counter
+    // here, then let the move through instead of skipping the turn.
+    const sleepOnlyMove = attack.moveId === 'sleepTalk' || attack.moveId === 'snore'
+    let sleepMoveUsable = false
+    if (sleepOnlyMove && attack.attacker.status === 'sleep') {
+      if ((attack.attacker.statusTurns ?? 0) > 0) {
+        attack.attacker.statusTurns = (attack.attacker.statusTurns ?? 0) - 1
+        sleepMoveUsable = true
+      } else {
+        attack.attacker.status = null
+        attack.attacker.statusTurns = 0
+        events.push({
+          type: 'status',
+          message: `${attack.attacker.name} woke up!`,
+          data: { target: attack.isPlayer ? 'player' : 'enemy' },
+        })
+      }
+    }
+    if (
+      !sleepMoveUsable &&
+      statusPreventsAction(attack.attacker, events, attack.isPlayer, deterministic)
+    )
+      continue
+    if (sleepOnlyMove && !sleepMoveUsable) {
+      events.push({
+        type: 'status',
+        message: `${attack.attacker.name} can't use ${
+          moveData[attack.moveId]?.name ?? attack.moveId
+        } while awake!`,
+      })
+      continue
+    }
     if (handleConfusion(attack.attacker, events, attack.isPlayer, deterministic)) continue
     if (handleInfatuation(attack.attacker, events, attack.isPlayer, deterministic)) continue
+    // Sleep Talk calls a random move from the user's own moveset.
+    if (sleepMoveUsable && attack.moveId === 'sleepTalk') {
+      const pool = attack.attacker.moves.filter(
+        (id) => id !== 'sleepTalk' && moveData[id] && !CALLING_MOVES.has(id)
+      )
+      if (pool.length === 0) {
+        events.push({ type: 'status', message: 'But it failed!' })
+        continue
+      }
+      attack.moveId = deterministic ? pool[0] : pool[Math.floor(Math.random() * pool.length)]
+    }
     attack.attacker.lastMove = attack.moveId
     const moveDef = moveData[attack.moveId]
     if (!moveDef) continue

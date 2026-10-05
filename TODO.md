@@ -94,9 +94,12 @@ swaps and the two-turn/charging moves are all modelled (0.14.0 + 0.21.0).
 
 Not done:
 
-- [ ] Ally-targeted heals (Heal Pulse, Floral Healing) and the faint-heals
-      (Healing Wish, Lunar Dance).
-- [ ] Move-calling that needs more context (Sleep Talk, Assist, Me First).
+- [ ] Faint-heals (Healing Wish, Lunar Dance) — the replacement is healed
+      when it is sent out, which needs the effect carried on the game state
+      rather than the active battler.
+- [ ] Move-calling that needs more context beyond Sleep Talk: Assist (a
+      random move from the party) and Me First (steal the foe’s move).
+      (Heal Pulse, Floral Healing and Snore shipped too; see the changelog.)
 - [ ] The doubles-only moves (After You, Ally Switch, Follow Me, Helping Hand,
       Quick/Wide Guard, Rage Powder, …) — the game is singles only.
 - [ ] PP is stored but unused; decide whether to implement it or drop it.

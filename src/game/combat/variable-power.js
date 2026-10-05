@@ -70,9 +70,12 @@ function weightOf(speciesKey) {
  * @param {string} moveId
  * @param {any} attacker
  * @param {any} defender
+ * @param {{ terrain?: { type: string } | null, movedFirst?: boolean }} [options]
  * @returns {number | null}
  */
-export function variablePower(moveId, attacker, defender) {
+export function variablePower(moveId, attacker, defender, options = {}) {
+  const terrainType = options.terrain?.type ?? null,
+    movedFirst = options.movedFirst
   switch (moveId) {
     case 'heatCrash':
     case 'heavySlam':
@@ -125,6 +128,24 @@ export function variablePower(moveId, attacker, defender) {
       return defender.status === 'sleep' ? 140 : 70
     case 'smellingSalts':
       return defender.status === 'paralysis' ? 140 : 70
+    // Terrain-boosted moves.
+    case 'mistyExplosion':
+      return terrainType === 'misty' ? 150 : 100
+    case 'expandingForce':
+      return terrainType === 'psychic' ? 120 : 80
+    case 'risingVoltage':
+      return terrainType === 'electric' ? 140 : 70
+    // Turn-order conditionals: double when the user moves first (Bolt Beak,
+    // Fishious Rend) or when the foe has already moved (Payback, Avalanche,
+    // Revenge).
+    case 'boltBeak':
+    case 'fishiousRend':
+      return movedFirst === true ? 170 : 85
+    case 'payback':
+      return movedFirst === false ? 100 : 50
+    case 'avalanche':
+    case 'revenge':
+      return movedFirst === false ? 120 : 60
     default:
       return null
   }
@@ -159,6 +180,14 @@ export const VARIABLE_POWER_MOVES = new Set([
   'brine',
   'wakeUpSlap',
   'smellingSalts',
+  'mistyExplosion',
+  'expandingForce',
+  'risingVoltage',
+  'boltBeak',
+  'fishiousRend',
+  'payback',
+  'avalanche',
+  'revenge',
 ])
 
 /**
@@ -167,9 +196,10 @@ export const VARIABLE_POWER_MOVES = new Set([
  * @param {any} attacker
  * @param {any} defender
  * @param {Move} move
+ * @param {{ terrain?: { type: string } | null, movedFirst?: boolean }} [options]
  * @returns {Move}
  */
-export function withVariablePower(moveId, attacker, defender, move) {
-  const power = variablePower(moveId, attacker, defender)
+export function withVariablePower(moveId, attacker, defender, move, options = {}) {
+  const power = variablePower(moveId, attacker, defender, options)
   return power == null ? move : { ...move, power }
 }

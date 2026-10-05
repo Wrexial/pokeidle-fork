@@ -583,7 +583,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         isPlayer: !0,
       }
     )
-  for (const attack of attackOrder) {
+  for (const [attackIndex, attack] of attackOrder.entries()) {
     if (attack.attacker.currentHp <= 0) continue
     if (attack.isPlayer ? playerMustRecharge : enemyMustRecharge) {
       events.push({
@@ -1398,7 +1398,8 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         attack.moveId,
         attack.attacker,
         attack.defender,
-        accuracyMove
+        accuracyMove,
+        { terrain: activeTerrain, movedFirst: attackIndex === 0 }
       )
     // Protean / Libero change the user's type to the move it is about to use.
     if (abilityOf(attack.attacker) === 'protean' || abilityOf(attack.attacker) === 'libero') {

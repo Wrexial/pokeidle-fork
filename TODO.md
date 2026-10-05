@@ -272,12 +272,10 @@ Still open (edge cases):
 
 - [ ] Moves that carry a third effect (a primary effect plus two riders), which
       the single `secondary` slot still cannot express.
-- [ ] Signature moves whose power depends on turn order or the field rather
-      than a status condition: Payback, Avalanche, Revenge, Retaliate, Bolt
-      Beak, Fishious Rend, Round, Echoed Voice and the terrain-boosted moves.
-      (Tri Attack and Dire Claw now roll one of several statuses, and Facade,
-      Hex, Venoshock, Brine, Wake-Up Slap and Smelling Salts have their
-      conditionals.)
+- [ ] Retaliate (needs a fainted ally’s last-turn state) and the multi-turn
+      Round / Echoed Voice (consecutive-use power).
+      (Terrain-boosted and turn-order moves, Tri Attack / Dire Claw and the
+      status-condition conditionals all shipped; see the changelog.)
 
 Relevant code: `src/data/move-effects.js`, `src/game/combat/turn.js`,
 `src/game/move-info.js`, and `public/reference.html` (regenerate with

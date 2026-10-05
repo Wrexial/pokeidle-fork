@@ -151,6 +151,14 @@ export const variablePowerNotes = {
   brine: 'Double power (130) when the target is at or below half HP.',
   wakeUpSlap: 'Double power (140) against a sleeping target, which it wakes.',
   smellingSalts: 'Double power (140) against a paralyzed target, which it cures.',
+  mistyExplosion: '150 power on Misty Terrain, otherwise 100 (and the user faints).',
+  expandingForce: '120 power on Psychic Terrain, otherwise 80.',
+  risingVoltage: '140 power on Electric Terrain, otherwise 70.',
+  boltBeak: 'Double power (170) when the user moves first.',
+  fishiousRend: 'Double power (170) when the user moves first.',
+  payback: 'Double power (100) if the target has already moved this turn.',
+  avalanche: 'Double power (120) if the user moves after the target.',
+  revenge: 'Double power (120) if the user moves after the target.',
 }
 
 /**

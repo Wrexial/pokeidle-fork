@@ -1387,3 +1387,22 @@ test('Healing Wish and Lunar Dance are faint-heals', () => {
   assert.match(text, /healed/i)
   assert.match(text, /faint/i)
 })
+
+test('terrain and turn-order moves scale their power', () => {
+  const a = battler({ name: 'A' }),
+    d = battler({ name: 'B' })
+  assert.equal(variablePower('expandingForce', a, d), 80)
+  assert.equal(variablePower('expandingForce', a, d, { terrain: { type: 'psychic' } }), 120)
+  assert.equal(variablePower('risingVoltage', a, d), 70)
+  assert.equal(variablePower('risingVoltage', a, d, { terrain: { type: 'electric' } }), 140)
+  assert.equal(variablePower('mistyExplosion', a, d), 100)
+  assert.equal(variablePower('mistyExplosion', a, d, { terrain: { type: 'misty' } }), 150)
+  assert.equal(variablePower('boltBeak', a, d, { movedFirst: true }), 170)
+  assert.equal(variablePower('boltBeak', a, d, { movedFirst: false }), 85)
+  assert.equal(variablePower('fishiousRend', a, d, { movedFirst: true }), 170)
+  assert.equal(variablePower('payback', a, d, { movedFirst: false }), 100)
+  assert.equal(variablePower('payback', a, d, { movedFirst: true }), 50)
+  assert.equal(variablePower('avalanche', a, d, { movedFirst: false }), 120)
+  assert.equal(variablePower('avalanche', a, d, { movedFirst: true }), 60)
+  assert.equal(variablePower('revenge', a, d, { movedFirst: false }), 120)
+})

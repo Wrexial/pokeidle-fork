@@ -47,12 +47,20 @@ test('the facilities beyond the Day-Care carry markers too', () => {
     servicePoisFor('hoenn-route-111').some((poi) => poi.kind === 'battleTower'),
     'the Battle Tower is marked on its route'
   )
+  assert.ok(
+    servicePoisFor('raidIsland').some((poi) => poi.kind === 'raidDen'),
+    'Kanto\u2019s Raid Island is marked as a Raid Den'
+  )
+  assert.ok(
+    servicePoisFor('johto-ruins-of-alph').some((poi) => poi.kind === 'shrine'),
+    'the Ruins of Alph are a legendary shrine'
+  )
 })
 
 test('servicePoiKinds lists each marker kind once', () => {
   const kinds = servicePoiKinds(),
     ids = kinds.map((entry) => entry.kind)
   assert.equal(ids.length, new Set(ids).size, 'no duplicate kinds')
-  for (const kind of ['daycare', 'berryGarden', 'battleTower'])
+  for (const kind of ['daycare', 'berryGarden', 'battleTower', 'raidDen', 'shrine'])
     assert.ok(ids.includes(kind), `${kind} is listed`)
 })

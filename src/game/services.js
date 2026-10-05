@@ -53,6 +53,26 @@ if (BATTLE_TOWER_LOCATION && mapData[BATTLE_TOWER_LOCATION])
     hint: 'Climb the tower for Victory Tokens and a tower record.',
   })
 
+// Every Raid Island is a den where a legendary can be challenged.
+for (const [locationId, location] of Object.entries(mapData))
+  if (location.type === 'raid')
+    addServicePoi(locationId, {
+      kind: 'raidDen',
+      icon: '\u{1f573}\ufe0f',
+      label: 'Raid Den',
+      hint: 'Start a raid here for a chance at the region\u2019s legendaries.',
+    })
+
+// The Ruins of Alph and the Tanoby Ruins are legendary shrines.
+for (const locationId of ['johto-ruins-of-alph', 'sevii-islands-tanoby-ruins'])
+  if (mapData[locationId])
+    addServicePoi(locationId, {
+      kind: 'shrine',
+      icon: '\u26e9\ufe0f',
+      label: 'Legendary Shrine',
+      hint: 'An ancient ruin said to be tied to legendary Pokemon.',
+    })
+
 /**
  * The distinct service marker kinds, for the Town Map legend.
  * @returns {{ kind: string, icon: string, label: string }[]}

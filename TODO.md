@@ -201,10 +201,9 @@ and `location-panel.js` shows a **Services** tag row. The first POI is the
 
 Still open:
 
-- [ ] Add more POIs beyond the Day-Care, Berry Garden and Battle Tower that
-      shipped: a café / mart, a raid den and a legendary shrine, each with a
-      real service behind it (a Move Tutor is global UI, so it has no single
-      location to mark).
+- [ ] Add POIs with a real service behind them: a cafe / mart (a Move Tutor
+      is global UI, so it has no single location to mark). The Day-Care, Berry
+      Garden, Battle Tower, Raid Den and Legendary Shrine markers have shipped.
 
 Relevant code: `tools/scrape-region-maps.cjs` (`MANUAL_BRIDGES`),
 `tools/generate-regions.cjs` (`EXTRA_MAP_AREAS`, `levelRoutes`,

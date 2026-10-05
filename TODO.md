@@ -115,9 +115,10 @@ the battle-only synthetic-species table all shipped (0.14.0).
 
 Not done:
 
-- [ ] Ally / doubles abilities: Battery, Power Spot, Friend Guard, Healer,
-      Telepathy, Aroma/Flower Veil, Costar, Commander, Hospitality, Symbiosis,
-      Gulp Missile.
+- [ ] The remaining doubles abilities: Telepathy, Aroma/Flower Veil, Costar,
+      Commander, Hospitality, Symbiosis, Gulp Missile.
+      (Battery, Power Spot, Friend Guard and Healer work in the Battle Maison
+      doubles engine; see the changelog.)
 - [ ] Illusion (deferred: its disguise is cosmetic plus an AI read, which an
       idle auto-battler barely shows).
       (Magic Bounce, Synchronize, Quick Draw, Rivalry, Stakeout and Supreme

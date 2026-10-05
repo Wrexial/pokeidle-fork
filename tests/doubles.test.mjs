@@ -128,3 +128,72 @@ test('a doubles heal restores the wounded partner', () => {
   runDoublesRound([healer, partner], [foeX, foeY], { deterministic: true })
   assert.ok(partner.currentHp > 50, 'the most wounded ally is healed')
 })
+
+/** @param {number} value @param {() => void} body */
+function withFixedRandom(value, body) {
+  const originalRandom = Math.random
+  try {
+    Math.random = () => value
+    body()
+  } finally {
+    Math.random = originalRandom
+  }
+}
+
+test('Friend Guard softens hits on its ally', () => {
+  const remaining = (guard) => {
+    const target = battler({ name: 'Ally', isPlayer: true, types: ['Normal'], defense: 100 }),
+      partner = battler({
+        name: 'Partner',
+        isPlayer: true,
+        ability: guard ? 'friendGuard' : undefined,
+        speed: 1,
+      }),
+      attacker = battler({
+        name: 'Attacker',
+        attack: 300,
+        speed: 100,
+        moves: ['tackle'],
+        types: ['Normal'],
+      }),
+      other = battler({ name: 'OtherFoe', speed: 1, moves: ['splash'] })
+    runDoublesRound([target, partner], [attacker, other], { deterministic: true })
+    return target.currentHp
+  }
+  assert.ok(remaining(true) > remaining(false), 'Friend Guard reduces the damage')
+})
+
+test('Battery powers up its ally', () => {
+  const remaining = (battery) => {
+    const attacker = battler({
+        name: 'Attacker',
+        isPlayer: true,
+        moves: ['thunderbolt'],
+        spAttack: 200,
+        speed: 200,
+        types: ['Electric'],
+      }),
+      partner = battler({
+        name: 'Partner',
+        isPlayer: true,
+        ability: battery ? 'battery' : undefined,
+        speed: 1,
+      }),
+      foe = battler({ name: 'Foe', types: ['Water'], spDefense: 100, currentHp: 500, maxHp: 500, moves: ['splash'] }),
+      other = battler({ name: 'Other', speed: 1, moves: ['splash'] })
+    runDoublesRound([attacker, partner], [foe, other], { deterministic: true })
+    return foe.currentHp
+  }
+  assert.ok(remaining(true) < remaining(false), 'Battery increases the damage')
+})
+
+test('Healer cures a statused ally', () => {
+  withFixedRandom(0, () => {
+    const healer = battler({ name: 'Healer', isPlayer: true, ability: 'healer', speed: 200 }),
+      ally = battler({ name: 'Ally', isPlayer: true, status: 'burn', speed: 10 }),
+      foeX = battler({ name: 'FoeX', moves: ['splash'], speed: 1 }),
+      foeY = battler({ name: 'FoeY', moves: ['splash'], speed: 1 })
+    runDoublesRound([healer, ally], [foeX, foeY], { deterministic: false })
+    assert.equal(ally.status, null, 'Healer cured the burn')
+  })
+})

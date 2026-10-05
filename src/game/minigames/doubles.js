@@ -7,7 +7,7 @@
 import { moveData, pokemonSpecies } from '../../data/gameData.js'
 import { AI_SKILL, chooseMoveForBattle } from '../combat/ai.js'
 import { applyEndOfTurn } from '../combat/end-of-turn.js'
-import { getTypeMultiplier } from '../combat/damage.js'
+import { chance, getTypeMultiplier } from '../combat/damage.js'
 import { resolveBattleTurn } from '../combat/turn.js'
 
 /** Money spent to enter the Maison. */
@@ -62,6 +62,17 @@ export const SPREAD_MOVES = new Set([
 /** @param {any} pokemon */
 function alive(pokemon) {
   return !!pokemon && pokemon.currentHp > 0
+}
+
+/**
+ * Whether `pokemon` has a live ally on `side` with `ability` (Friend Guard,
+ * Battery, Power Spot, ...).
+ * @param {any} pokemon
+ * @param {any[]} side
+ * @param {string} ability
+ */
+function hasAllyAbility(pokemon, side, ability) {
+  return side.some((other) => other !== pokemon && alive(other) && other.ability === ability)
 }
 
 /** The strongest non-legendary opponent species key (falls back to Magikarp). */
@@ -160,6 +171,20 @@ export function runDoublesRound(allies, foes, options = {}) {
           (b.action?.speed ?? 0) - (a.action?.speed ?? 0)
       )
 
+  // Healer can cure an ally's status each round (30%).
+  for (const battler of [...allies, ...foes]) {
+    if (!alive(battler) || battler.ability !== 'healer') continue
+    if (!chance(0.3, deterministic)) continue
+    const patient = [...allies, ...foes].find(
+      (other) => other !== battler && alive(other) && other.status
+    )
+    if (patient) {
+      patient.status = null
+      patient.statusTurns = 0
+      log.push(`${battler.name}'s Healer cured ${patient.name}!`)
+    }
+  }
+
   for (const { attacker, allies: isAlly, action } of actions) {
     if (!action || !alive(attacker)) continue
     const moveId = action.moveId,
@@ -198,6 +223,31 @@ export function runDoublesRound(allies, foes, options = {}) {
     log.push(`${attacker.name} used ${move.name}!`)
     for (const target of targets) {
       if (!alive(attacker) || !alive(target)) continue
+      // Ally abilities: Battery / Power Spot power up the attacker, Friend
+      // Guard shields the target. Applied by parking the boost on the raw
+      // stats for the single-action resolver, then restoring them.
+      const attackerSide = isAlly ? allies : foes,
+        targetSide = isAlly ? foes : allies,
+        attackBoost =
+          hasAllyAbility(attacker, attackerSide, 'battery') ||
+          hasAllyAbility(attacker, attackerSide, 'powerSpot')
+            ? 1.3
+            : 1,
+        guard = hasAllyAbility(target, targetSide, 'friendGuard') ? 4 / 3 : 1,
+        saved = {
+          attack: attacker.attack,
+          spAttack: attacker.spAttack,
+          defense: target.defense,
+          spDefense: target.spDefense,
+        }
+      if (attackBoost !== 1) {
+        attacker.attack = Math.floor(attacker.attack * attackBoost)
+        attacker.spAttack = Math.floor(attacker.spAttack * attackBoost)
+      }
+      if (guard !== 1) {
+        target.defense = Math.floor(target.defense * guard)
+        target.spDefense = Math.floor(target.spDefense * guard)
+      }
       const turnEvents = isAlly
         ? resolveBattleTurn(
             attacker,
@@ -238,6 +288,10 @@ export function runDoublesRound(allies, foes, options = {}) {
             attacker.lockedMove = null
             return result
           })()
+      attacker.attack = saved.attack
+      attacker.spAttack = saved.spAttack
+      target.defense = saved.defense
+      target.spDefense = saved.spDefense
       events.push(...turnEvents)
       for (const event of turnEvents) if (event.message && event.type === 'damage') log.push(event.message)
     }

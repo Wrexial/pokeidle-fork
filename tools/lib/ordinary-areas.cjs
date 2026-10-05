@@ -189,6 +189,20 @@ module.exports = {
         position: { x: 65.5, y: 28.7 },
         species: ['pikachu', 'oddish', 'doduo', 'girafarig', 'heracross', 'pinsir', 'wobbuffet'],
       },
+      {
+        node: 'jagged-pass',
+        name: 'Jagged Pass',
+        connects: ['hoenn-route-112', 'hoenn-lavaridge-town'],
+        position: { x: 21, y: 34 },
+        species: ['numel', 'machop', 'spoink', 'grimer', 'torkoal'],
+      },
+      {
+        node: 'scorched-slab',
+        name: 'Scorched Slab',
+        connects: ['hoenn-route-120'],
+        position: { x: 59, y: 18 },
+        species: ['torkoal', 'numel', 'slugma', 'natu'],
+      },
     ],
     sinnoh: [
       {
@@ -323,6 +337,20 @@ module.exports = {
         connects: ['sinnoh-route-221', 'sinnoh-sandgem-town'],
         position: { x: 24, y: 76 },
         species: ['starly', 'bidoof', 'shinx', 'pachirisu', 'buizel', 'chatot', 'aipom'],
+      },
+      {
+        node: 'floaroma-meadow',
+        name: 'Floaroma Meadow',
+        connects: ['sinnoh-route-205', 'sinnoh-floaroma-town'],
+        position: { x: 20, y: 43 },
+        species: ['combee', 'burmy', 'cherubi', 'aipom', 'pachirisu'],
+      },
+      {
+        node: 'valley-windworks',
+        name: 'Valley Windworks',
+        connects: ['sinnoh-route-205', 'sinnoh-floaroma-town'],
+        position: { x: 22, y: 50 },
+        species: ['shinx', 'pikachu', 'magnemite', 'pachirisu'],
       },
     ],
     unova: [
@@ -587,6 +615,13 @@ module.exports = {
         position: { x: 49, y: 34.5 },
         species: ['voltorb', 'magnemite', 'trubbish', 'koffing', 'electrode', 'magneton', 'growlithe'],
       },
+      {
+        node: 'parfum-palace',
+        name: 'Parfum Palace',
+        connects: ['kalos-route-6', 'kalos-route-7'],
+        position: { x: 26, y: 57 },
+        species: ['psyduck', 'ducklett', 'croagunk', 'skiddo'],
+      },
     ],
     alola: [
       {
@@ -623,6 +658,13 @@ module.exports = {
         connects: ['alola-ulaula-island'],
         position: { x: 78, y: 68 },
         species: ['sneasel', 'snorunt', 'absol', 'golbat', 'sandshrew'],
+      },
+      {
+        node: 'haina-desert',
+        name: 'Haina Desert',
+        connects: ['alola-route-12', 'alola-route-13'],
+        position: { x: 75, y: 79 },
+        species: ['sandile', 'a-diglett', 'trapinch', 'gible', 'baltoy'],
       },
     ],
     galar: [

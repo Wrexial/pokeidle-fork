@@ -251,7 +251,9 @@
   "description": "A town in the Sinnoh region.",
   "connections": [
    "sinnoh-route-204",
-   "sinnoh-fuego-ironworks"
+   "sinnoh-fuego-ironworks",
+   "sinnoh-floaroma-meadow",
+   "sinnoh-valley-windworks"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -291,7 +293,9 @@
   "connections": [
    "sinnoh-eterna-forest",
    "sinnoh-old-chateau",
-   "sinnoh-fuego-ironworks"
+   "sinnoh-fuego-ironworks",
+   "sinnoh-floaroma-meadow",
+   "sinnoh-valley-windworks"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -2058,6 +2062,60 @@
   "position": {
    "x": 24,
    "y": 76
+  },
+  "biome": "grassland",
+  "background": "/backgrounds/grassland.png"
+ },
+ "sinnoh-floaroma-meadow": {
+  "id": "sinnoh-floaroma-meadow",
+  "name": "Floaroma Meadow",
+  "type": "route",
+  "region": "sinnoh",
+  "description": "A wild area in the Sinnoh region.",
+  "routeKey": "sinnoh-floaroma-meadow",
+  "connections": [
+   "sinnoh-route-205",
+   "sinnoh-floaroma-town"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-205",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 400204.75,
+  "position": {
+   "x": 20,
+   "y": 43
+  },
+  "biome": "forest",
+  "background": "/backgrounds/grassland.png"
+ },
+ "sinnoh-valley-windworks": {
+  "id": "sinnoh-valley-windworks",
+  "name": "Valley Windworks",
+  "type": "route",
+  "region": "sinnoh",
+  "description": "A wild area in the Sinnoh region.",
+  "routeKey": "sinnoh-valley-windworks",
+  "connections": [
+   "sinnoh-route-205",
+   "sinnoh-floaroma-town"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "sinnoh-route-205",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 400204.75,
+  "position": {
+   "x": 22,
+   "y": 50
   },
   "biome": "grassland",
   "background": "/backgrounds/grassland.png"

@@ -5374,5 +5374,69 @@
     "maxLevel": 54
    }
   ]
+ },
+ "sinnoh-floaroma-meadow": {
+  "name": "Floaroma Meadow",
+  "encounters": [
+   {
+    "speciesKey": "combee",
+    "weight": 20,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "burmy",
+    "weight": 20,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "cherubi",
+    "weight": 20,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "aipom",
+    "weight": 12,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "pachirisu",
+    "weight": 12,
+    "minLevel": 14,
+    "maxLevel": 16
+   }
+  ]
+ },
+ "sinnoh-valley-windworks": {
+  "name": "Valley Windworks",
+  "encounters": [
+   {
+    "speciesKey": "shinx",
+    "weight": 20,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "pikachu",
+    "weight": 20,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "magnemite",
+    "weight": 20,
+    "minLevel": 14,
+    "maxLevel": 16
+   },
+   {
+    "speciesKey": "pachirisu",
+    "weight": 12,
+    "minLevel": 14,
+    "maxLevel": 16
+   }
+  ]
  }
 }

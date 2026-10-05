@@ -3688,5 +3688,34 @@
     "maxLevel": 46
    }
   ]
+ },
+ "kalos-parfum-palace": {
+  "name": "Parfum Palace",
+  "encounters": [
+   {
+    "speciesKey": "psyduck",
+    "weight": 20,
+    "minLevel": 23,
+    "maxLevel": 25
+   },
+   {
+    "speciesKey": "ducklett",
+    "weight": 20,
+    "minLevel": 23,
+    "maxLevel": 25
+   },
+   {
+    "speciesKey": "croagunk",
+    "weight": 20,
+    "minLevel": 23,
+    "maxLevel": 25
+   },
+   {
+    "speciesKey": "skiddo",
+    "weight": 12,
+    "minLevel": 23,
+    "maxLevel": 25
+   }
+  ]
  }
 }

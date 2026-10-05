@@ -4597,5 +4597,40 @@
     "variety": true
    }
   ]
+ },
+ "alola-haina-desert": {
+  "name": "Haina Desert",
+  "encounters": [
+   {
+    "speciesKey": "sandile",
+    "weight": 20,
+    "minLevel": 55,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "a-diglett",
+    "weight": 20,
+    "minLevel": 55,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "trapinch",
+    "weight": 20,
+    "minLevel": 55,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "gible",
+    "weight": 12,
+    "minLevel": 55,
+    "maxLevel": 57
+   },
+   {
+    "speciesKey": "baltoy",
+    "weight": 12,
+    "minLevel": 55,
+    "maxLevel": 57
+   }
+  ]
  }
 }

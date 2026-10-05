@@ -681,7 +681,8 @@
   "routeKey": "alola-route-12",
   "background": "/backgrounds/mountain.png",
   "connections": [
-   "alola-ulaula-island"
+   "alola-ulaula-island",
+   "alola-haina-desert"
   ],
   "unlock": {
    "requires": [
@@ -717,7 +718,8 @@
   "routeKey": "alola-route-13",
   "background": "/backgrounds/beach.png",
   "connections": [
-   "alola-ulaula-island"
+   "alola-ulaula-island",
+   "alola-haina-desert"
   ],
   "unlock": {
    "requires": [
@@ -1817,5 +1819,32 @@
   },
   "biome": "coast",
   "background": "/backgrounds/beach.png"
+ },
+ "alola-haina-desert": {
+  "id": "alola-haina-desert",
+  "name": "Haina Desert",
+  "type": "route",
+  "region": "alola",
+  "description": "A wild area in the Alola region.",
+  "routeKey": "alola-haina-desert",
+  "connections": [
+   "alola-route-12",
+   "alola-route-13"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "alola-route-12",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 700012.25,
+  "position": {
+   "x": 75,
+   "y": 79
+  },
+  "biome": "desert",
+  "background": "/backgrounds/grassland.png"
  }
 }

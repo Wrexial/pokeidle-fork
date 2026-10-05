@@ -176,10 +176,10 @@ Still open:
 
 - [ ] Grow the table with more areas — Johto's Whirl Islands side rooms
       (which need the existing node split into sub-areas) and any further
-      Glaseado side caves.
-      (Trophy Garden, Ramanas Park, White Forest, the Chamber of Emptiness,
-      the Kalos Power Plant and Dalizapa Passage shipped; Paldea's Zero Gate
-      already existed as a location.)
+      Glaseado side caves. A hundred landmarks have shipped so far, most
+      recently Jagged Pass, Scorched Slab, Floaroma Meadow, Valley Windworks,
+      Parfum Palace and Haina Desert; Paldea's Zero Gate already existed as a
+      location.
 - [ ] Galar's Wild Area sub-areas (Stony Wilderness, Dusty Bowl, Lake of
       Outrage, ...) belong inside the Wild Area zone, not as standalone routes
       — see #36.

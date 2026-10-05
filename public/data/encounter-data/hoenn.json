@@ -5002,5 +5002,69 @@
     "variety": true
    }
   ]
+ },
+ "hoenn-jagged-pass": {
+  "name": "Jagged Pass",
+  "encounters": [
+   {
+    "speciesKey": "numel",
+    "weight": 20,
+    "minLevel": 28,
+    "maxLevel": 30
+   },
+   {
+    "speciesKey": "machop",
+    "weight": 20,
+    "minLevel": 28,
+    "maxLevel": 30
+   },
+   {
+    "speciesKey": "spoink",
+    "weight": 20,
+    "minLevel": 28,
+    "maxLevel": 30
+   },
+   {
+    "speciesKey": "grimer",
+    "weight": 12,
+    "minLevel": 28,
+    "maxLevel": 30
+   },
+   {
+    "speciesKey": "torkoal",
+    "weight": 12,
+    "minLevel": 28,
+    "maxLevel": 30
+   }
+  ]
+ },
+ "hoenn-scorched-slab": {
+  "name": "Scorched Slab",
+  "encounters": [
+   {
+    "speciesKey": "torkoal",
+    "weight": 20,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "numel",
+    "weight": 20,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "slugma",
+    "weight": 20,
+    "minLevel": 44,
+    "maxLevel": 46
+   },
+   {
+    "speciesKey": "natu",
+    "weight": 12,
+    "minLevel": 44,
+    "maxLevel": 46
+   }
+  ]
  }
 }

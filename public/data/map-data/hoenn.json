@@ -574,7 +574,8 @@
   "connections": [
    "hoenn-route-111",
    "hoenn-lavaridge-town",
-   "hoenn-fiery-path"
+   "hoenn-fiery-path",
+   "hoenn-jagged-pass"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -582,14 +583,7 @@
      "locationId": "hoenn-route-111",
      "count": 15
     }
-   ],
-   "caughtOnRoute": {
-    "routeKey": "hoenn-route-111",
-    "species": [
-     "baltoy"
-    ],
-    "count": 1
-   }
+   ]
   },
   "unlockOrder": 300112,
   "position": {
@@ -605,7 +599,8 @@
   "region": "hoenn",
   "description": "A town in the Hoenn region, home to Flannery's Fire Gym.",
   "connections": [
-   "hoenn-route-112"
+   "hoenn-route-112",
+   "hoenn-jagged-pass"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -657,14 +652,7 @@
    ],
    "gymsRequired": [
     "hoenn-gym-4"
-   ],
-   "caughtOnRoute": {
-    "routeKey": "hoenn-route-111",
-    "species": [
-     "baltoy"
-    ],
-    "count": 1
-   }
+   ]
   },
   "unlockOrder": 300113,
   "position": {
@@ -997,7 +985,8 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "hoenn-route-121",
-   "hoenn-fortree-city"
+   "hoenn-fortree-city",
+   "hoenn-scorched-slab"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -2007,6 +1996,59 @@
    "y": 28.5
   },
   "biome": "grassland",
+  "background": "/backgrounds/grassland.png"
+ },
+ "hoenn-jagged-pass": {
+  "id": "hoenn-jagged-pass",
+  "name": "Jagged Pass",
+  "type": "route",
+  "region": "hoenn",
+  "description": "A wild area in the Hoenn region.",
+  "routeKey": "hoenn-jagged-pass",
+  "connections": [
+   "hoenn-route-112",
+   "hoenn-lavaridge-town"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-112",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 300112.25,
+  "position": {
+   "x": 21,
+   "y": 34
+  },
+  "biome": "volcanic",
+  "background": "/backgrounds/grassland.png"
+ },
+ "hoenn-scorched-slab": {
+  "id": "hoenn-scorched-slab",
+  "name": "Scorched Slab",
+  "type": "route",
+  "region": "hoenn",
+  "description": "A wild area in the Hoenn region.",
+  "routeKey": "hoenn-scorched-slab",
+  "connections": [
+   "hoenn-route-120"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-120",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 300120.25,
+  "position": {
+   "x": 59,
+   "y": 18
+  },
+  "biome": "volcanic",
   "background": "/backgrounds/grassland.png"
  }
 }

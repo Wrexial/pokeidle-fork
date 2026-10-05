@@ -158,14 +158,7 @@
      "locationId": "kalos-route-3",
      "count": 5
     }
-   ],
-   "caughtOnRoute": {
-    "routeKey": "kalos-route-3",
-    "species": [
-     "burmy"
-    ],
-    "count": 1
-   }
+   ]
   },
   "unlockOrder": 600003.5,
   "position": {
@@ -324,7 +317,8 @@
   "routeKey": "kalos-route-6",
   "background": "/backgrounds/grassland.png",
   "connections": [
-   "kalos-route-7"
+   "kalos-route-7",
+   "kalos-parfum-palace"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -353,7 +347,8 @@
    "kalos-camphrier-town",
    "kalos-route-6",
    "kalos-cyllage-city",
-   "kalos-connecting-cave"
+   "kalos-connecting-cave",
+   "kalos-parfum-palace"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -457,14 +452,7 @@
      "locationId": "kalos-route-8",
      "count": 20
     }
-   ],
-   "caughtOnRoute": {
-    "routeKey": "kalos-route-8",
-    "species": [
-     "spoink"
-    ],
-    "count": 1
-   }
+   ]
   },
   "unlockOrder": 600008.5,
   "position": {
@@ -1692,5 +1680,32 @@
   },
   "biome": "grassland",
   "background": "/backgrounds/grassland.png"
+ },
+ "kalos-parfum-palace": {
+  "id": "kalos-parfum-palace",
+  "name": "Parfum Palace",
+  "type": "route",
+  "region": "kalos",
+  "description": "A wild area in the Kalos region.",
+  "routeKey": "kalos-parfum-palace",
+  "connections": [
+   "kalos-route-6",
+   "kalos-route-7"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "kalos-route-6",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 600006.25,
+  "position": {
+   "x": 26,
+   "y": 57
+  },
+  "biome": "coast",
+  "background": "/backgrounds/beach.png"
  }
 }

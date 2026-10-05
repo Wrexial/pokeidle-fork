@@ -332,14 +332,7 @@
      "locationId": "kalos-route-7",
      "count": 14
     }
-   ],
-   "caughtOnRoute": {
-    "routeKey": "kalos-route-7",
-    "species": [
-     "ducklett"
-    ],
-    "count": 1
-   }
+   ]
   },
   "unlockOrder": 600006,
   "position": {
@@ -395,14 +388,7 @@
      "locationId": "kalos-route-7",
      "count": 17
     }
-   ],
-   "caughtOnRoute": {
-    "routeKey": "kalos-route-7",
-    "species": [
-     "ducklett"
-    ],
-    "count": 1
-   }
+   ]
   },
   "unlockOrder": 600007.5,
   "position": {
@@ -445,14 +431,7 @@
    ],
    "gymsRequired": [
     "kalos-gym-2"
-   ],
-   "caughtOnRoute": {
-    "routeKey": "kalos-route-7",
-    "species": [
-     "ducklett"
-    ],
-    "count": 1
-   }
+   ]
   },
   "unlockOrder": 600008,
   "position": {

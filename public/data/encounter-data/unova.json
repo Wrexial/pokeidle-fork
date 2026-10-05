@@ -4368,5 +4368,221 @@
     "maxLevel": 69
    }
   ]
+ },
+ "unova-lostlorn-forest": {
+  "name": "Lostlorn Forest",
+  "encounters": [
+   {
+    "speciesKey": "zorua",
+    "weight": 20,
+    "minLevel": 49,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "cottonee",
+    "weight": 20,
+    "minLevel": 49,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "petilil",
+    "weight": 20,
+    "minLevel": 49,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "sewaddle",
+    "weight": 12,
+    "minLevel": 49,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "venipede",
+    "weight": 12,
+    "minLevel": 49,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "pansage",
+    "weight": 12,
+    "minLevel": 49,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "pansear",
+    "weight": 12,
+    "minLevel": 49,
+    "maxLevel": 51
+   },
+   {
+    "speciesKey": "panpour",
+    "weight": 12,
+    "minLevel": 49,
+    "maxLevel": 51
+   }
+  ]
+ },
+ "unova-mistralton-cave": {
+  "name": "Mistralton Cave",
+  "encounters": [
+   {
+    "speciesKey": "woobat",
+    "weight": 20,
+    "minLevel": 20,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "roggenrola",
+    "weight": 20,
+    "minLevel": 20,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "axew",
+    "weight": 20,
+    "minLevel": 20,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "drilbur",
+    "weight": 12,
+    "minLevel": 20,
+    "maxLevel": 22
+   }
+  ]
+ },
+ "unova-clay-tunnel": {
+  "name": "Clay Tunnel",
+  "encounters": [
+   {
+    "speciesKey": "roggenrola",
+    "weight": 20,
+    "minLevel": 20,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "woobat",
+    "weight": 20,
+    "minLevel": 20,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "drilbur",
+    "weight": 20,
+    "minLevel": 20,
+    "maxLevel": 22
+   },
+   {
+    "speciesKey": "timburr",
+    "weight": 12,
+    "minLevel": 20,
+    "maxLevel": 22
+   }
+  ]
+ },
+ "unova-abundant-shrine": {
+  "name": "Abundant Shrine",
+  "encounters": [
+   {
+    "speciesKey": "cottonee",
+    "weight": 20,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "petilil",
+    "weight": 20,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "vulpix",
+    "weight": 20,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "growlithe",
+    "weight": 12,
+    "minLevel": 45,
+    "maxLevel": 47
+   },
+   {
+    "speciesKey": "foongus",
+    "weight": 12,
+    "minLevel": 45,
+    "maxLevel": 47
+   }
+  ]
+ },
+ "unova-undella-bay": {
+  "name": "Undella Bay",
+  "encounters": [
+   {
+    "speciesKey": "frillish",
+    "weight": 20,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "alomomola",
+    "weight": 20,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "jellicent",
+    "weight": 20,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "ducklett",
+    "weight": 12,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "basculin",
+    "weight": 12,
+    "minLevel": 67,
+    "maxLevel": 69
+   }
+  ]
+ },
+ "unova-p2-laboratory": {
+  "name": "P2 Laboratory",
+  "encounters": [
+   {
+    "speciesKey": "klink",
+    "weight": 20,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "magnemite",
+    "weight": 20,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "voltorb",
+    "weight": 20,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "trubbish",
+    "weight": 12,
+    "minLevel": 67,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "koffing",
+    "weight": 12,
+    "minLevel": 67,
+    "maxLevel": 69
+   }
+  ]
  }
 }

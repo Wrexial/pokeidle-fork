@@ -408,7 +408,8 @@
    "unova-route-16",
    "unova-route-5",
    "unova-relic-castle",
-   "unova-desert-resort"
+   "unova-desert-resort",
+   "unova-lostlorn-forest"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -476,7 +477,8 @@
   "description": "A town in the Unova region, home to Clay's Ground Gym.",
   "connections": [
    "unova-route-6",
-   "unova-route-5"
+   "unova-route-5",
+   "unova-clay-tunnel"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -567,7 +569,9 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "unova-driftveil-city",
-   "unova-chargestone-cave"
+   "unova-chargestone-cave",
+   "unova-mistralton-cave",
+   "unova-clay-tunnel"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -595,7 +599,8 @@
   "description": "A town in the Unova region, home to Skyla's Flying Gym.",
   "connections": [
    "unova-route-7",
-   "unova-chargestone-cave"
+   "unova-chargestone-cave",
+   "unova-mistralton-cave"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1006,7 +1011,9 @@
    "unova-route-14",
    "unova-route-21",
    "unova-lentimas-town",
-   "unova-giant-chasm"
+   "unova-giant-chasm",
+   "unova-undella-bay",
+   "unova-p2-laboratory"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1055,7 +1062,8 @@
    "unova-undella-town",
    "unova-black-city",
    "unova-challengers-cave",
-   "unova-white-forest"
+   "unova-white-forest",
+   "unova-abundant-shrine"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1220,7 +1228,8 @@
   "background": "/backgrounds/mountain.png",
   "connections": [
    "unova-black-city",
-   "unova-route-16"
+   "unova-route-16",
+   "unova-abundant-shrine"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1248,7 +1257,8 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "unova-nimbasa-city",
-   "unova-route-15"
+   "unova-route-15",
+   "unova-lostlorn-forest"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1433,7 +1443,9 @@
    "unova-humilau-city",
    "unova-undella-town",
    "unova-opelucid-city",
-   "unova-seaside-cave"
+   "unova-seaside-cave",
+   "unova-undella-bay",
+   "unova-p2-laboratory"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -2082,5 +2094,167 @@
   },
   "biome": "cave",
   "background": "/backgrounds/cave.png"
+ },
+ "unova-lostlorn-forest": {
+  "id": "unova-lostlorn-forest",
+  "name": "Lostlorn Forest",
+  "type": "route",
+  "region": "unova",
+  "description": "A wild area in the Unova region.",
+  "routeKey": "unova-lostlorn-forest",
+  "connections": [
+   "unova-route-16",
+   "unova-nimbasa-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-16",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 500004.75,
+  "position": {
+   "x": 56,
+   "y": 56
+  },
+  "biome": "forest",
+  "background": "/backgrounds/grassland.png"
+ },
+ "unova-mistralton-cave": {
+  "id": "unova-mistralton-cave",
+  "name": "Mistralton Cave",
+  "type": "route",
+  "region": "unova",
+  "description": "A wild area in the Unova region.",
+  "routeKey": "unova-mistralton-cave",
+  "connections": [
+   "unova-route-6",
+   "unova-mistralton-city"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-6",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 500006.2502,
+  "position": {
+   "x": 13,
+   "y": 47
+  },
+  "biome": "cave",
+  "background": "/backgrounds/cave.png"
+ },
+ "unova-clay-tunnel": {
+  "id": "unova-clay-tunnel",
+  "name": "Clay Tunnel",
+  "type": "route",
+  "region": "unova",
+  "description": "A wild area in the Unova region.",
+  "routeKey": "unova-clay-tunnel",
+  "connections": [
+   "unova-driftveil-city",
+   "unova-route-6"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-driftveil-city",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 500005.75,
+  "position": {
+   "x": 24,
+   "y": 55
+  },
+  "biome": "cave",
+  "background": "/backgrounds/cave.png"
+ },
+ "unova-abundant-shrine": {
+  "id": "unova-abundant-shrine",
+  "name": "Abundant Shrine",
+  "type": "route",
+  "region": "unova",
+  "description": "A wild area in the Unova region.",
+  "routeKey": "unova-abundant-shrine",
+  "connections": [
+   "unova-route-14",
+   "unova-route-15"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-14",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 500014.2503,
+  "position": {
+   "x": 75,
+   "y": 51
+  },
+  "biome": "ruins",
+  "background": "/backgrounds/grassland.png"
+ },
+ "unova-undella-bay": {
+  "id": "unova-undella-bay",
+  "name": "Undella Bay",
+  "type": "route",
+  "region": "unova",
+  "description": "A wild area in the Unova region.",
+  "routeKey": "unova-undella-bay",
+  "connections": [
+   "unova-undella-town",
+   "unova-route-21"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-undella-town",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 500013.75,
+  "position": {
+   "x": 81,
+   "y": 40
+  },
+  "biome": "coast",
+  "background": "/backgrounds/beach.png"
+ },
+ "unova-p2-laboratory": {
+  "id": "unova-p2-laboratory",
+  "name": "P2 Laboratory",
+  "type": "route",
+  "region": "unova",
+  "description": "A wild area in the Unova region.",
+  "routeKey": "unova-p2-laboratory",
+  "connections": [
+   "unova-route-21",
+   "unova-undella-town"
+  ],
+  "unlock": {
+   "battlesAtLocation": [
+    {
+     "locationId": "unova-route-21",
+     "count": 5
+    }
+   ]
+  },
+  "unlockOrder": 500013.75,
+  "position": {
+   "x": 90,
+   "y": 48
+  },
+  "biome": "grassland",
+  "background": "/backgrounds/grassland.png"
  }
 }

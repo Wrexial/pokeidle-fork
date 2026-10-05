@@ -459,6 +459,48 @@ module.exports = {
         position: { x: 88, y: 33 },
         species: ['woobat', 'boldore', 'seel', 'spheal', 'frillish', 'basculin'],
       },
+      {
+        node: 'lostlorn-forest',
+        name: 'Lostlorn Forest',
+        connects: ['unova-route-16', 'unova-nimbasa-city'],
+        position: { x: 56, y: 56 },
+        species: ['zorua', 'cottonee', 'petilil', 'sewaddle', 'venipede', 'pansage', 'pansear', 'panpour'],
+      },
+      {
+        node: 'mistralton-cave',
+        name: 'Mistralton Cave',
+        connects: ['unova-route-6', 'unova-mistralton-city'],
+        position: { x: 13, y: 47 },
+        species: ['woobat', 'roggenrola', 'axew', 'drilbur'],
+      },
+      {
+        node: 'clay-tunnel',
+        name: 'Clay Tunnel',
+        connects: ['unova-driftveil-city', 'unova-route-6'],
+        position: { x: 24, y: 55 },
+        species: ['roggenrola', 'woobat', 'drilbur', 'timburr'],
+      },
+      {
+        node: 'abundant-shrine',
+        name: 'Abundant Shrine',
+        connects: ['unova-route-14', 'unova-route-15'],
+        position: { x: 75, y: 51 },
+        species: ['cottonee', 'petilil', 'vulpix', 'growlithe', 'foongus'],
+      },
+      {
+        node: 'undella-bay',
+        name: 'Undella Bay',
+        connects: ['unova-undella-town', 'unova-route-21'],
+        position: { x: 81, y: 40 },
+        species: ['frillish', 'alomomola', 'jellicent', 'ducklett', 'basculin'],
+      },
+      {
+        node: 'p2-laboratory',
+        name: 'P2 Laboratory',
+        connects: ['unova-route-21', 'unova-undella-town'],
+        position: { x: 90, y: 48 },
+        species: ['klink', 'magnemite', 'voltorb', 'trubbish', 'koffing'],
+      },
     ],
     kalos: [
       {

@@ -268,10 +268,8 @@ Still open (edge cases):
 
 - [ ] Moves that carry a third effect (a primary effect plus two riders), which
       the single `secondary` slot still cannot express.
-- [ ] The multi-turn Round / Echoed Voice (consecutive-use power).
-      (Retaliate, the terrain-boosted and turn-order moves, Tri Attack /
-      Dire Claw and the status-condition conditionals all shipped; see the
-      changelog.)
+      (Everything else — multi-status rolls, conditionals, terrain/order power,
+      Retaliate and Round / Echoed Voice — has shipped; see the changelog.)
 
 Relevant code: `src/data/move-effects.js`, `src/game/combat/turn.js`,
 `src/game/move-info.js`, and `public/reference.html` (regenerate with

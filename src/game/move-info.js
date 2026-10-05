@@ -152,6 +152,8 @@ export const variablePowerNotes = {
   wakeUpSlap: 'Double power (140) against a sleeping target, which it wakes.',
   smellingSalts: 'Double power (140) against a paralyzed target, which it cures.',
   retaliate: 'Double power (140) when a party member has fainted.',
+  echoedVoice: 'Grows each turn it is used in a row (40 up to 200 power).',
+  round: 'Double power (120) when the user used it on the previous turn.',
   mistyExplosion: '150 power on Misty Terrain, otherwise 100 (and the user faints).',
   expandingForce: '120 power on Psychic Terrain, otherwise 80.',
   risingVoltage: '140 power on Electric Terrain, otherwise 70.',

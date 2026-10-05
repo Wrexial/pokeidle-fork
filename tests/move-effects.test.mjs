@@ -1474,3 +1474,32 @@ test('Assist borrows a party move', () => {
     )
   })
 })
+
+test('Echoed Voice and Round scale with consecutive uses', () => {
+  const defender = battler({ name: 'B' })
+  assert.equal(variablePower('echoedVoice', battler({ sameMoveStreak: 1 }), defender), 40)
+  assert.equal(variablePower('echoedVoice', battler({ sameMoveStreak: 3 }), defender), 120)
+  assert.equal(variablePower('echoedVoice', battler({ sameMoveStreak: 9 }), defender), 200)
+  assert.equal(variablePower('round', battler({ sameMoveStreak: 1 }), defender), 60)
+  assert.equal(variablePower('round', battler({ sameMoveStreak: 2 }), defender), 120)
+})
+
+test('the same-move streak tracks consecutive turns', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['echoedVoice'],
+        speed: 200,
+        spAttack: 200,
+      }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], currentHp: 99999, maxHp: 99999 })
+    resolveBattleTurn(player, enemy, false, false, null, null, false, null, null, null, false, 'echoedVoice')
+    assert.equal(player.sameMoveStreak, 1)
+    resolveBattleTurn(player, enemy, false, false, null, null, false, null, null, null, false, 'echoedVoice')
+    assert.equal(player.sameMoveStreak, 2)
+    player.lastMove = 'splash'
+    resolveBattleTurn(player, enemy, false, false, null, null, false, null, null, null, false, 'echoedVoice')
+    assert.equal(player.sameMoveStreak, 1, 'a different move resets the streak')
+  })
+})

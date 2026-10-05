@@ -450,6 +450,7 @@ export function useGameLoop() {
               cudChewHeal: playerVolatile.cudChewHeal ?? 0,
               nullifiedMoves: playerVolatile.nullifiedMoves ?? {},
               choiceLock: playerVolatile.choiceLock ?? null,
+              sameMoveStreak: playerVolatile.sameMoveStreak ?? 0,
               // Supreme Overlord scales off the party members that have fainted.
               faintedAllies: currentGameState.party.filter(
                 (/** @type {any} */ member) => (member.currentHp ?? 0) <= 0

@@ -131,6 +131,12 @@ export function variablePower(moveId, attacker, defender, options = {}) {
     // Retaliate doubles when a party member has fainted.
     case 'retaliate':
       return (attacker.faintedAllies ?? 0) > 0 ? 140 : 70
+    // Consecutive-use power: Echoed Voice grows each turn, Round doubles after
+    // the same user used it last turn.
+    case 'echoedVoice':
+      return Math.min(200, 40 * Math.max(1, attacker.sameMoveStreak ?? 1))
+    case 'round':
+      return (attacker.sameMoveStreak ?? 1) >= 2 ? 120 : 60
     // Terrain-boosted moves.
     case 'mistyExplosion':
       return terrainType === 'misty' ? 150 : 100
@@ -184,6 +190,8 @@ export const VARIABLE_POWER_MOVES = new Set([
   'wakeUpSlap',
   'smellingSalts',
   'retaliate',
+  'echoedVoice',
+  'round',
   'mistyExplosion',
   'expandingForce',
   'risingVoltage',

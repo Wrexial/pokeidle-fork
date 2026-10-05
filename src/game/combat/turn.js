@@ -667,6 +667,10 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         continue
       }
     }
+    // Track consecutive uses of the same move for Round / Echoed Voice before
+    // `lastMove` is overwritten.
+    attack.attacker.sameMoveStreak =
+      attack.attacker.lastMove === attack.moveId ? (attack.attacker.sameMoveStreak ?? 0) + 1 : 1
     attack.attacker.lastMove = attack.moveId
     // Truant loafs around every other turn.
     if (abilityOf(attack.attacker) === 'truant') {

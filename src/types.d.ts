@@ -234,6 +234,8 @@ type VolatileState = {
   lockTurnsRemaining: number
   /** Move a Choice item has locked the holder into, or null. */
   choiceLock?: string | null
+  /** Consecutive turns the same move has been used (Round / Echoed Voice). */
+  sameMoveStreak?: number
   /** Move being charged for a two-turn attack, or null. */
   chargingMove: string | null
   /** Semi-invulnerable charge state (air/ground/water/vanish), or null. */

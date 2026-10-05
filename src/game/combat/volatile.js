@@ -20,6 +20,8 @@ export function createVolatileState() {
     lockTurnsRemaining: 0,
     /** Move a Choice item has locked the holder into, or null. */
     choiceLock: null,
+    /** Consecutive turns the same move has been used (Round / Echoed Voice). */
+    sameMoveStreak: 0,
     /** Move being charged for a two-turn attack, or null. */
     chargingMove: null,
     /** Semi-invulnerable charge state (air/ground/water/vanish), or null. */
@@ -86,6 +88,7 @@ export function volatileStateFromBattle(pokemon) {
     lockedMove: pokemon.lockedMove ?? null,
     lockTurnsRemaining: pokemon.lockTurnsRemaining ?? 0,
     choiceLock: pokemon.choiceLock ?? null,
+    sameMoveStreak: pokemon.sameMoveStreak ?? 0,
     chargingMove: pokemon.chargingMove ?? null,
     semiInvulnerable: pokemon.semiInvulnerable ?? null,
     status: pokemon.status ?? null,

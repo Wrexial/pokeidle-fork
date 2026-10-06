@@ -27,6 +27,9 @@ import {
   rollActivityEncounters,
   rollActivityHeldItem,
   rollActivityLoot,
+  rollForageBerry,
+  rollDiveTreasure,
+  rollSmashBonus,
 } from '../game/minigames.js'
 import {
   getPokemonSpriteFallbackUrl,
@@ -53,6 +56,7 @@ export function RouteActivityScene() {
       /** @type {{ encounters: any[], quality: ActivityQuality } | null} */ (null)
     ),
     [found, setFound] = React.useState(/** @type {{ itemId: string, quantity: number }[]} */ ([])),
+    [combo, setCombo] = React.useState(0),
     [pendings, setPendings] = React.useState(
       /** @type {{ enemy: any, speciesKey: string, level: number, isShiny: boolean, quality: ActivityQuality, heldItem: string | null, levelBonus: number, shinyMultiplier: number }[]} */ (
         []
@@ -166,6 +170,27 @@ export function RouteActivityScene() {
     setStage('encounter')
   }
 
+  /**
+   * Grant any side-find a clean hit rolls up: sunken treasure on a dive, a gem
+   * (or rarely a fossil) from a smashed boulder.
+   * @param {ActivityQuality} quality
+   */
+  function grantActivityBonus(quality) {
+    const bonusItem =
+      activity?.id === 'diving'
+        ? rollDiveTreasure(quality)
+        : activity?.id === 'rockSmash'
+          ? rollSmashBonus(quality)
+          : null
+    if (!bonusItem) return
+    setFound((current) => [...current, { itemId: bonusItem, quantity: 1 }])
+    setMessage(`You also found ${activityRewardName(bonusItem)}!`)
+    dispatch({
+      type: 'CLAIM_MINIGAME_REWARD',
+      payload: { money: 0, items: [{ itemId: bonusItem, quantity: 1 }] },
+    })
+  }
+
   function fight() {
     if (!pending) return
     const other = pendings.find((_, index) => index !== selectedPending)
@@ -209,6 +234,7 @@ export function RouteActivityScene() {
     setAttemptsLeft(nextAttempts)
     if (!hit) {
       if (state.sfxEnabled) playSfx('miss')
+      setCombo(0)
       setMessage(
         activity.mode === 'encounter' ? 'The Pokemon got away...' : 'You found nothing.'
       )
@@ -244,6 +270,7 @@ export function RouteActivityScene() {
         setStage('reel')
         return
       }
+      grantActivityBonus(quality)
       previewEncounter(encounters, quality)
       return
     }
@@ -255,16 +282,21 @@ export function RouteActivityScene() {
       if (Math.random() < chance) {
         const hidden = rollActivityEncounter(activity.id, routeKey, perfect, undefined, state.challengeMonotype)
         if (hidden) {
+          setCombo(perfect ? combo + 1 : 0)
           previewEncounter([hidden], quality)
           return
         }
       }
     }
-    const reward = rollActivityLoot(perfect),
-      money = perfect ? 200 + Math.floor(Math.random() * 201) : 80 + Math.floor(Math.random() * 121)
+    // A perfect search fills the basket: the berry haul grows with the combo of
+    // consecutive clean searches. A plain search just gathers general supplies.
+    const reward = perfect ? rollForageBerry(combo) : rollActivityLoot(!1),
+      money = perfect ? 200 + Math.floor(Math.random() * 201) : 80 + Math.floor(Math.random() * 121),
+      comboText = perfect ? ` Berry combo x${combo + 1}!` : ''
+    setCombo(perfect ? combo + 1 : 0)
     setFound((current) => [...current, reward])
     setMessage(
-      `${perfect ? 'A great find! ' : ''}You gathered ${activityRewardName(reward.itemId)} x${reward.quantity}.`
+      `${perfect ? 'A great find! ' : ''}You gathered ${activityRewardName(reward.itemId)} x${reward.quantity}.${comboText}`
     )
     dispatch({ type: 'CLAIM_MINIGAME_REWARD', payload: { money, items: [reward] } })
     setStage(nextAttempts <= 0 ? 'done' : 'result')
@@ -577,8 +609,10 @@ export function RouteActivityScene() {
                       ],
                     }),
           message && jsx('div', { className: 'activity-message', children: message }),
-          activity.mode === 'loot' &&
-            found.length > 0 &&
+          activity.id === 'forage' &&
+            combo > 0 &&
+            jsx('div', { className: 'activity-combo', children: `Berry combo x${combo}` }),
+          found.length > 0 &&
             jsx('div', {
               className: 'activity-found',
               children: `Found: ${found

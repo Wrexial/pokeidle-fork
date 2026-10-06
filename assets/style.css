@@ -8343,6 +8343,14 @@ img {
     color: #cbbfa6
 }
 
+.activity-combo {
+    text-align: center;
+    font-size: 9px;
+    font-weight: bold;
+    color: #f0c850;
+    text-shadow: 0 0 4px #f0c85080
+}
+
 .activity-actions {
     display: flex;
     gap: 8px;

@@ -21,6 +21,9 @@ const {
   rollActivityEncounters,
   rollActivityHeldItem,
   rollActivityLoot,
+  rollForageBerry,
+  rollDiveTreasure,
+  rollSmashBonus,
   routeActivityIds,
 } = await import('../src/game/minigames.js')
 const { isWaterLocation } = await import('../src/game/catching.js')
@@ -466,4 +469,33 @@ test('rock smash, headbutt and diving are offered only where their types live', 
     assert.ok(['Normal', 'Flying'].some((type) => pokemonSpecies[butted.speciesKey].types.includes(type)))
     assert.ok(pokemonSpecies[dived.speciesKey].types.includes('Water'))
   }
+})
+
+test('the berry hunt turns up berries and fills the basket with a combo', () => {
+  const berryIds = new Set(['oranBerry', 'sitrusBerry', 'lumBerry']),
+    first = rollForageBerry(0)
+  assert.ok(berryIds.has(first.itemId), `${first.itemId} is a berry`)
+  assert.equal(first.quantity, 1)
+  assert.ok(rollForageBerry(6).quantity > first.quantity, 'a longer combo fills the basket')
+})
+
+test('diving uncovers treasure and rock smash cracks out gems', () => {
+  const original = Math.random,
+    rollMany = (/** @type {() => string | null} */ fn) => {
+      const items = new Set()
+      try {
+        for (let index = 0; index < 200; index++) {
+          Math.random = () => (index + 0.5) / 200
+          const item = fn()
+          if (item) items.add(item)
+        }
+      } finally {
+        Math.random = original
+      }
+      return items
+    }
+  assert.equal(rollDiveTreasure('hit'), null, 'a glancing dive finds no treasure')
+  assert.ok(rollMany(() => rollDiveTreasure('ultra')).size > 0, 'an ultra dive finds treasure')
+  assert.equal(rollSmashBonus('hit'), null, 'a glancing smash cracks nothing open')
+  assert.ok(rollMany(() => rollSmashBonus('perfect')).size > 0, 'a perfect smash cracks out gems')
 })

@@ -6,7 +6,7 @@
 
 import { encounterData, pokemonSpecies } from '../../data/gameData.js'
 import { doubleSpawnChance } from '../../data/config.js'
-import { consumableItems, evolutionItems, heldItems } from '../../data/items.js'
+import { consumableItems, evolutionItems, fossilItems, heldItems, valuableDropTable } from '../../data/items.js'
 import { isCaveLocation, isWaterLocation } from '../catching.js'
 import { rollWildHeldItem } from '../held-items.js'
 import { monotypeSpeciesPool, speciesHasType } from '../pokemon.js'
@@ -59,7 +59,7 @@ export const ROUTE_ACTIVITIES = {
     title: 'Berry Foraging',
     action: 'SEARCH',
     icon: '\u{1fab0}',
-    hint: 'Time the ring as it closes on the centre to find berries and supplies. Now and then a Grass Pokemon is hiding in the bush.',
+    hint: 'Time the ring as it closes on the centre to find berries and supplies. A perfect search fills the basket, and a berry combo grows the longer you keep landing them; now and then a Grass Pokemon is hiding in the bush.',
     mode: 'loot',
     display: 'rings',
     preferTypes: ['Grass'],
@@ -72,7 +72,7 @@ export const ROUTE_ACTIVITIES = {
     title: 'Rock Smash',
     action: 'SMASH',
     icon: '\u{1faa8}',
-    hint: 'Smash a cracked boulder to shake out the Rock and Ground Pokemon sheltering inside.',
+    hint: 'Smash a cracked boulder to shake out the Rock and Ground Pokemon sheltering inside \u2014 a clean hit can also crack out a gem, or rarely a fossil.',
     mode: 'encounter',
     display: 'swing',
     preferTypes: ['Rock', 'Ground'],
@@ -92,7 +92,7 @@ export const ROUTE_ACTIVITIES = {
     title: 'Diving',
     action: 'DIVE',
     icon: '\u{1f93f}',
-    hint: 'Dive under the surface to reach the deeper Water Pokemon that fishing cannot.',
+    hint: 'Dive under the surface to reach the deeper Water Pokemon that fishing cannot \u2014 a perfect dive can uncover sunken treasure.',
     mode: 'encounter',
     display: 'depth',
     preferTypes: ['Water'],
@@ -365,4 +365,81 @@ export function activityRewardName(itemId) {
   return (
     consumableItems[itemId]?.name ?? evolutionItems[itemId]?.name ?? heldItems[itemId]?.name ?? itemId
   )
+}
+
+/**
+ * Weighted pick from a `{ itemId, weight }` table.
+ * @param {{ itemId: string, weight: number }[]} table
+ * @returns {{ itemId: string, weight: number } | null}
+ */
+function weightedItemPick(table) {
+  const total = table.reduce((sum, entry) => sum + entry.weight, 0)
+  if (total <= 0) return null
+  let roll = Math.random() * total
+  for (const entry of table) {
+    roll -= entry.weight
+    if (roll <= 0) return entry
+  }
+  return table[table.length - 1] ?? null
+}
+
+/** Berries the berry hunt turns up, commonest first. */
+const FORAGE_BERRIES = [
+  { itemId: 'oranBerry', weight: 60 },
+  { itemId: 'sitrusBerry', weight: 25 },
+  { itemId: 'lumBerry', weight: 15 },
+]
+
+/**
+ * Roll the berry haul for a perfect forage. A longer combo picks more berries
+ * and leans toward the rarer ones.
+ * @param {number} [combo] Consecutive perfect searches so far.
+ * @returns {{ itemId: string, quantity: number }}
+ */
+export function rollForageBerry(combo = 0) {
+  const bonus = Math.min(3, Math.floor(Math.max(0, combo) / 2)),
+    // The combo shifts weight toward the rarer berries at the end of the table.
+    table = FORAGE_BERRIES.map((entry, index) => ({
+      ...entry,
+      weight: entry.weight + bonus * (index + 1) * 12,
+    }))
+  return {
+    itemId: weightedItemPick(table)?.itemId ?? 'oranBerry',
+    quantity: 1 + bonus,
+  }
+}
+
+/** Chance a dive uncovers treasure, by hit quality. */
+const DIVE_TREASURE_CHANCE = { perfect: 0.4, ultra: 0.8 }
+
+/**
+ * Roll the sunken treasure a dive can turn up, or null. A perfect dive finds
+ * common valuables; a bullseye can reach the rarer ones too.
+ * @param {'hit' | 'perfect' | 'ultra'} quality
+ * @returns {string | null}
+ */
+export function rollDiveTreasure(quality) {
+  const chance = DIVE_TREASURE_CHANCE[/** @type {'perfect'|'ultra'} */ (quality)] ?? 0
+  if (chance <= 0 || Math.random() >= chance) return null
+  const table = quality === 'ultra' ? valuableDropTable : valuableDropTable.filter((entry) => entry.weight >= 10)
+  return weightedItemPick(table)?.itemId ?? null
+}
+
+/** Chance a rock smash cracks open a bonus, by hit quality. */
+const SMASH_BONUS_CHANCE = { perfect: 0.35, ultra: 0.7 }
+
+/**
+ * Roll the gem a rock smash cracks out — occasionally a fossil instead on a
+ * bullseye — or null.
+ * @param {'hit' | 'perfect' | 'ultra'} quality
+ * @returns {string | null}
+ */
+export function rollSmashBonus(quality) {
+  if (quality === 'ultra' && Math.random() < 0.06) {
+    const fossils = Object.keys(fossilItems)
+    if (fossils.length > 0) return fossils[Math.floor(Math.random() * fossils.length)]
+  }
+  const chance = SMASH_BONUS_CHANCE[/** @type {'perfect'|'ultra'} */ (quality)] ?? 0
+  if (chance <= 0 || Math.random() >= chance) return null
+  return weightedItemPick(valuableDropTable)?.itemId ?? null
 }

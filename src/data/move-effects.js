@@ -330,6 +330,10 @@ const MOVE_OVERRIDES = {
   magnetRise: { effect: { type: 'magnetRise', target: 'self' } },
   conversion: { effect: { type: 'conversion', target: 'self' } },
   camouflage: { effect: { type: 'camouflage', target: 'self' } },
+  endure: { effect: { type: 'enduring', target: 'self' }, priority: 4 },
+  tidyUp: { effect: { type: 'tidyUp', target: 'self' } },
+  psychoShift: { effect: { type: 'psychoShift' } },
+  purify: { effect: { type: 'purify' } },
 
   // --- Entry hazards ---
   stealthRock: { effect: { type: 'hazard', hazard: 'stealthRock' } },

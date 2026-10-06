@@ -805,3 +805,63 @@ test('Camouflage matches the terrain type', () => {
   resolveBattleTurn(player, enemy, false, false, null, null, false, { type: 'electric', turns: 5 })
   assert.deepEqual(player.types, ['Electric'])
 })
+
+test('Endure, Tidy Up, Psycho Shift and Purify work', () => {
+  withFixedRandom(0.5, () => {
+    // Endure keeps a would-be KO at 1 HP.
+    const attacker = battler({
+        name: 'Foe',
+        moves: ['tackle'],
+        speed: 200,
+        attack: 9999,
+      }),
+      enduring = battler({
+        name: 'Player',
+        isPlayer: !0,
+        moves: ['endure'],
+        speed: 1,
+        currentHp: 300,
+        maxHp: 300,
+        defense: 1,
+      })
+    resolveBattleTurn(enduring, attacker, false, false, null, null, false, null, null, null, false, 'endure')
+    assert.equal(enduring.currentHp, 1, 'Endure left it with 1 HP')
+
+    const tidier = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['tidyUp'],
+        speed: 200,
+        statStages: {},
+      }),
+      dummy = battler({ name: 'Foe', moves: ['splash'] })
+    turn(tidier, dummy)
+    assert.equal(tidier.statStages.attack, 1)
+    assert.equal(tidier.statStages.speed, 1)
+
+    const shifter = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['psychoShift'],
+        speed: 200,
+        status: 'toxic',
+      }),
+      receiver = battler({ name: 'Foe', moves: ['splash'], types: ['Normal'] })
+    turn(shifter, receiver)
+    assert.equal(receiver.status, 'toxic', 'the status was passed on')
+    assert.equal(shifter.status, null, 'the user was cured')
+
+    const purifier = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['purify'],
+        speed: 200,
+        currentHp: 100,
+        maxHp: 400,
+      }),
+      afflicted = battler({ name: 'Foe', moves: ['splash'], types: ['Normal'], status: 'burn' })
+    turn(purifier, afflicted)
+    assert.equal(afflicted.status, null)
+    assert.ok(purifier.currentHp > 100, 'Purify heals the user')
+  })
+})

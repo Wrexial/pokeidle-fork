@@ -75,6 +75,7 @@ export function createVolatileState() {
     hangry: !1,
     charged: !1,
     magnetRiseTurns: 0,
+    enduring: !1,
     cudChewHeal: 0,
     nullifiedMoves: {},
   }
@@ -141,6 +142,7 @@ export function volatileStateFromBattle(pokemon) {
     hangry: pokemon.hangry ?? !1,
     charged: pokemon.charged ?? !1,
     magnetRiseTurns: pokemon.magnetRiseTurns ?? 0,
+    enduring: pokemon.enduring ?? !1,
     cudChewHeal: pokemon.cudChewHeal ?? 0,
     nullifiedMoves: pokemon.nullifiedMoves ?? {},
   }

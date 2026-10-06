@@ -330,6 +330,8 @@ type VolatileState = {
   charged?: boolean
   /** Turns of Magnet Rise left (immune to Ground moves while above 0). */
   magnetRiseTurns?: number
+  /** Endure is active this turn (survive a hit at 1 HP). */
+  enduring?: boolean
   /** Leaf Guard is active because the sun is shining this turn. */
   leafGuardActive?: boolean
   /** Pending Cud Chew heal (the berry eaten last turn). */

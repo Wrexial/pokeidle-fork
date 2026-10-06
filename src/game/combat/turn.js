@@ -3,7 +3,7 @@
 import { moveMakesContact } from '../../data/move-effects.js'
 import { moveData, moveLearnsets } from '../../data/gameData.js'
 import { heldItems } from '../../data/items.js'
-import { abilityAbsorbsType, abilityAttackMultiplier, abilityAvoidsContact, abilityBlocksMove, abilityBlocksNonSuperEffective, abilityBlocksWind, abilityChangesMoveType, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityEffectivenessMultiplier, abilityHalvesSuperEffective, abilityHealsFromType, abilityHitsGhost, abilityOf, abilityPreventsStatDrop, abilityStatusAccuracyMultiplier, abilitySurvivesAtFullHp, fieldAuraMultiplier, isWindMove, onHitStatBoost, onHpThresholdBoost, onKoBoostStat, ruinDefenseMultiplier, ruinOffenseMultiplier, rivalryDamageMultiplier, stakeoutDamageMultiplier } from '../abilities.js'
+import { abilityAbsorbsType, abilityAttackMultiplier, abilityAvoidsContact, abilityBlocksMove, abilityBlocksNonSuperEffective, abilityBlocksWind, abilityChangesMoveType, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityEffectivenessMultiplier, abilityHalvesSuperEffective, abilityHealsFromType, abilityHitsGhost, abilityOf, abilityPreventsStatDrop, abilityPreventsStatus, abilityStatusAccuracyMultiplier, abilitySurvivesAtFullHp, fieldAuraMultiplier, isWindMove, onHitStatBoost, onHpThresholdBoost, onKoBoostStat, ruinDefenseMultiplier, ruinOffenseMultiplier, rivalryDamageMultiplier, stakeoutDamageMultiplier } from '../abilities.js'
 import { AI_SKILL, chooseMoveForBattle } from './ai.js'
 import { changeBattleForm } from './setup.js'
 import { calculateDamage, chance, isSelfTargetedMove, normalizeStatKey } from './damage.js'
@@ -450,6 +450,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
   ;(player.flinch = !1, enemy.flinch = !1)
   // Protect only lasts the turn it is used; clear any left over.
   ;(player.protecting = !1, enemy.protecting = !1)
+  ;(player.enduring = !1, enemy.enduring = !1)
   // Protect can't be used on consecutive turns: remember whether it was used
   // last turn, then clear the chain (a use this turn sets it again).
   ;(player.protectUsedLastTurn = (player.protectChain ?? 0) > 0,
@@ -952,6 +953,58 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           message: `${attack.attacker.name} changed type to ${camoType}!`,
           data: { target: attack.isPlayer ? 'player' : 'enemy' },
         })
+      } else if (moveDef.effect?.type === 'enduring') {
+        attack.attacker.enduring = !0
+        events.push({
+          type: 'status',
+          message: `${attack.attacker.name} braced itself!`,
+          data: { target: attack.isPlayer ? 'player' : 'enemy' },
+        })
+      } else if (moveDef.effect?.type === 'tidyUp') {
+        const stages = attack.attacker.statStages ?? (attack.attacker.statStages = {})
+        for (const key of ['attack', 'speed'])
+          stages[key] = clampStatStage((stages[key] ?? 0) + 1)
+        const cleared = emptyBattleHazards()
+        activeHazards.player = cleared.player
+        activeHazards.enemy = cleared.enemy
+        events.push({
+          type: 'statChange',
+          message: `${attack.attacker.name} tidied up the battlefield!`,
+          data: { target: attack.isPlayer ? 'player' : 'enemy' },
+        })
+      } else if (moveDef.effect?.type === 'psychoShift') {
+        if (
+          attack.attacker.status &&
+          !attack.defender.status &&
+          !abilityPreventsStatus(attack.defender, attack.attacker.status)
+        ) {
+          const shifted = attack.attacker.status
+          applyStatus(attack.defender, shifted, events, !attack.isPlayer, deterministic, activeTerrain, !0, attack.attacker)
+          if (attack.defender.status === shifted) {
+            attack.attacker.status = null
+            attack.attacker.statusTurns = 0
+          }
+        }
+      } else if (moveDef.effect?.type === 'purify') {
+        if (attack.defender.status) {
+          attack.defender.status = null
+          attack.defender.statusTurns = 0
+          const healed = Math.min(
+            attack.attacker.maxHp,
+            attack.attacker.currentHp + Math.max(1, Math.floor(attack.attacker.maxHp / 2))
+          )
+          attack.attacker.currentHp = healed
+          events.push({
+            type: 'status',
+            message: `${attack.attacker.name} purified ${attack.defender.name}!`,
+            data: { target: attack.isPlayer ? 'enemy' : 'player' },
+          })
+          events.push({
+            type: 'heal',
+            message: `${attack.attacker.name} recovered HP!`,
+            data: { target: attack.isPlayer ? 'player' : 'enemy', hpAfter: healed, hpMax: attack.attacker.maxHp },
+          })
+        }
       } else if (
         moveDef.effect?.type === 'status' &&
         (moveDef.effect.chance === void 0 ||
@@ -1860,6 +1913,9 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       continue
     }
     totalDamage = abilitySurvivesAtFullHp(attack.defender, attack.defender.currentHp, totalDamage, attack.attacker)
+    // Endure keeps the holder alive at 1 HP for the rest of the turn.
+    if (attack.defender.enduring && totalDamage >= attack.defender.currentHp)
+      totalDamage = Math.max(0, attack.defender.currentHp - 1)
     const sashDamage = heldSurvivesAtFullHp(
       attack.defender,
       attack.defender.currentHp,

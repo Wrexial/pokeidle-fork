@@ -119,7 +119,14 @@ async function main() {
     'src/game/pokemon/creation.js',
     'src/game/use-game-loop.js',
   ]
-  const engineText = ENGINE_FILES.map((file) => fs.readFileSync(path.join(ROOT, file), 'utf8')).join('\n')
+  // Strip comments so prose ("the wild pool plus the competitive items",
+  // "cosmetic plus stat changes") never counts as an implemented ability; the
+  // `[^:]` guard leaves URLs in strings alone.
+  const stripComments = (text) =>
+    text.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:])\/\/[^\n]*/g, '$1')
+  const engineText = stripComments(
+    ENGINE_FILES.map((file) => fs.readFileSync(path.join(ROOT, file), 'utf8')).join('\n')
+  )
   const scanned = new Set([...abilityKeys].filter((key) => new RegExp('\\b' + key + '\\b').test(engineText)))
   const missingMeta = [...scanned].filter((key) => !abilityInfo[key])
   const extraMeta = Object.keys(abilityInfo).filter((key) => abilityKeys.has(key) && !scanned.has(key))

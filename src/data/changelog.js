@@ -46,6 +46,7 @@ export const CHANGELOG = [
         {
           heading: 'Fixes',
           items: [
+            'Ten item-manipulating moves no longer look inert: Knock Off, Thief, Covet, Pluck, Bug Bite, Incinerate, Power Split, Guard Split, Speed Swap and Heal Block now show what they do in their tooltip (and the Battle Reference lists them as implemented) instead of being marked as having no effect',
             'Poni Island is reachable again: the island hub used to require Hapu\u2019s trial, but Hapu stands on Poni itself, so the island\u2019s areas, its league and its Raid Island could never open. It now opens after Nanu, the last Ula\u2019ula grand trial',
             'Route-exclusive catch gates were refreshed against the current wild tables: a gate whose named species had since been spread onto other routes now lists the species that are genuinely exclusive to its route, and a gate whose route has no exclusives left was dropped (its other requirements stay)',
           ],

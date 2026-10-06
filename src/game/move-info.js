@@ -111,11 +111,18 @@ const moveEffectText = {
   reflectType: 'Copies the target\u2019s type onto the user.',
   typeAdd: 'Adds a type to the target.',
   statSwap: 'Swaps stat stages with the target.',
+  statSplit: 'Averages the listed stats with the target.',
   recycle: 'Restores the user\u2019s consumed held item.',
   healingWish: 'The next Pokemon sent out is fully healed and cured of status.',
   itemSwap: 'Swaps held items with the target.',
   bestow: 'Gives the target the user\u2019s held item.',
   corrosiveGas: 'Destroys the target\u2019s held item.',
+  stealItem: 'Steals the target\u2019s held item when the user has none.',
+  knockOff: 'Knocks off the target\u2019s held item for the rest of the battle.',
+  incinerate: 'Burns away the target\u2019s held Berry so it cannot be eaten.',
+  eatBerry: 'Eats the target\u2019s held Berry to heal the user.',
+  healBlock: 'Prevents the target from healing for five turns.',
+  speedSwap: 'Swaps raw Speed with the target.',
   hazard: 'Sets an entry hazard on the foe\u2019s side of the field.',
   weather: 'Changes the weather.',
   terrain: 'Changes the terrain.',
@@ -331,6 +338,10 @@ function describeMoveBase(move) {
       return `Adds the ${effect.typeName} type to the target.`
     case 'statSwap':
       return `Swaps ${effect.stats.map(/** @param {string} stat */ (stat) => STAT_LABELS[stat] ?? stat).join(', ')} with the target.`
+    case 'statSplit':
+      return `Averages the user\u2019s and target\u2019s ${effect.stats
+        .map(/** @param {string} stat */ (stat) => STAT_LABELS[stat] ?? stat)
+        .join(' and ')}.`
   }
   if (moveEffectText[effect.type]) {
     // A hand-written note is more precise than the generic line, so prefer it.

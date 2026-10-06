@@ -716,13 +716,18 @@
  "johto-whirl-islands": {
   "id": "johto-whirl-islands",
   "name": "Whirl Islands",
-  "type": "route",
+  "type": "zone",
   "region": "johto",
-  "description": "A route in the Johto region where Water and Poison Pokemon roam around Lv. 48-50.",
-  "routeKey": "johto-whirl-islands",
+  "description": "The Whirl Islands are a cluster of caverns in the sea off Cianwood City.",
+  "routeKey": "johto-whirl-islands--entrance",
   "background": "/backgrounds/beach.png",
   "connections": [
-   "johto-sea-route-41"
+   "johto-sea-route-41",
+   "johto-whirl-islands--entrance",
+   "johto-whirl-islands--northeast-cave",
+   "johto-whirl-islands--northwest-cave",
+   "johto-whirl-islands--southeast-cave",
+   "johto-whirl-islands--southwest-cave"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -740,7 +745,29 @@
    "x": 20.5,
    "y": 49.5
   },
-  "biome": "coast"
+  "biome": "coast",
+  "subAreas": [
+   {
+    "id": "johto-whirl-islands--entrance",
+    "name": "Whirl Islands Entrance"
+   },
+   {
+    "id": "johto-whirl-islands--northeast-cave",
+    "name": "Northeast Cave"
+   },
+   {
+    "id": "johto-whirl-islands--northwest-cave",
+    "name": "Northwest Cave"
+   },
+   {
+    "id": "johto-whirl-islands--southeast-cave",
+    "name": "Southeast Cave"
+   },
+   {
+    "id": "johto-whirl-islands--southwest-cave",
+    "name": "Southwest Cave"
+   }
+  ]
  },
  "johto-route-42": {
   "id": "johto-route-42",
@@ -1509,5 +1536,134 @@
   },
   "biome": "ruins",
   "background": "/backgrounds/grassland.png"
+ },
+ "johto-whirl-islands--entrance": {
+  "id": "johto-whirl-islands--entrance",
+  "name": "Whirl Islands Entrance",
+  "type": "route",
+  "region": "johto",
+  "description": "Whirl Islands Entrance, one of the Whirl Islands' caves.",
+  "routeKey": "johto-whirl-islands--entrance",
+  "background": "/backgrounds/beach.png",
+  "connections": [
+   "johto-whirl-islands"
+  ],
+  "unlock": {
+   "requires": [
+    "johto-whirl-islands"
+   ]
+  },
+  "unlockOrder": 200041.5003,
+  "position": {
+   "x": 20.5,
+   "y": 43.1
+  },
+  "hidden": true,
+  "zone": "johto-whirl-islands",
+  "biome": "coast"
+ },
+ "johto-whirl-islands--northeast-cave": {
+  "id": "johto-whirl-islands--northeast-cave",
+  "name": "Northeast Cave",
+  "type": "route",
+  "region": "johto",
+  "description": "Northeast Cave, one of the Whirl Islands' caves.",
+  "routeKey": "johto-whirl-islands--northeast-cave",
+  "background": "/backgrounds/cave.png",
+  "connections": [
+   "johto-whirl-islands"
+  ],
+  "unlock": {
+   "requires": [
+    "johto-whirl-islands",
+    "johto-whirl-islands--entrance"
+   ]
+  },
+  "unlockOrder": 200041.5004,
+  "position": {
+   "x": 28.11,
+   "y": 47.52
+  },
+  "hidden": true,
+  "zone": "johto-whirl-islands",
+  "biome": "cave"
+ },
+ "johto-whirl-islands--northwest-cave": {
+  "id": "johto-whirl-islands--northwest-cave",
+  "name": "Northwest Cave",
+  "type": "route",
+  "region": "johto",
+  "description": "Northwest Cave, one of the Whirl Islands' caves.",
+  "routeKey": "johto-whirl-islands--northwest-cave",
+  "background": "/backgrounds/beach.png",
+  "connections": [
+   "johto-whirl-islands"
+  ],
+  "unlock": {
+   "requires": [
+    "johto-whirl-islands",
+    "johto-whirl-islands--northeast-cave"
+   ]
+  },
+  "unlockOrder": 200041.5005,
+  "position": {
+   "x": 25.2,
+   "y": 54.68
+  },
+  "hidden": true,
+  "zone": "johto-whirl-islands",
+  "biome": "coast"
+ },
+ "johto-whirl-islands--southeast-cave": {
+  "id": "johto-whirl-islands--southeast-cave",
+  "name": "Southeast Cave",
+  "type": "route",
+  "region": "johto",
+  "description": "Southeast Cave, one of the Whirl Islands' caves.",
+  "routeKey": "johto-whirl-islands--southeast-cave",
+  "background": "/backgrounds/cave.png",
+  "connections": [
+   "johto-whirl-islands"
+  ],
+  "unlock": {
+   "requires": [
+    "johto-whirl-islands",
+    "johto-whirl-islands--northwest-cave"
+   ]
+  },
+  "unlockOrder": 200041.5006,
+  "position": {
+   "x": 15.8,
+   "y": 54.68
+  },
+  "hidden": true,
+  "zone": "johto-whirl-islands",
+  "biome": "cave"
+ },
+ "johto-whirl-islands--southwest-cave": {
+  "id": "johto-whirl-islands--southwest-cave",
+  "name": "Southwest Cave",
+  "type": "route",
+  "region": "johto",
+  "description": "Southwest Cave, one of the Whirl Islands' caves.",
+  "routeKey": "johto-whirl-islands--southwest-cave",
+  "background": "/backgrounds/beach.png",
+  "connections": [
+   "johto-whirl-islands"
+  ],
+  "unlock": {
+   "requires": [
+    "johto-whirl-islands",
+    "johto-whirl-islands--southeast-cave"
+   ]
+  },
+  "unlockOrder": 200041.5007,
+  "position": {
+   "x": 12.89,
+   "y": 47.52
+  },
+  "hidden": true,
+  "zone": "johto-whirl-islands",
+  "biome": "coast"
  }
 }

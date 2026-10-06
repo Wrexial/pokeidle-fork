@@ -142,11 +142,10 @@ areas have all shipped (#39, #28a). No open items.
 
 ### 28b. More ordinary areas
 
-- [ ] Convert Johto's Whirl Islands into a zone with side-room sub-areas (it
-      is a single node today, so its rooms have nowhere to live).
-- [ ] Galar's Wild Area sub-areas (Stony Wilderness, Dusty Bowl, Lake of
-      Outrage, ...) belong inside the Wild Area zone, not as standalone routes
-      — see #36.
+Shipped: the landmark table (`tools/lib/ordinary-areas.cjs`) plus the Sevii
+Islands and the B2W2 regions; Johto's Whirl Islands is a zone with cave
+sub-areas now, and the Galar Wild Area's 11 habitats live inside its zone. No
+open items.
 
 ### 28c. Points of interest (POIs)
 

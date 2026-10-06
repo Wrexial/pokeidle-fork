@@ -1578,117 +1578,6 @@
    }
   ]
  },
- "johto-whirl-islands": {
-  "name": "Whirl Islands",
-  "encounters": [
-   {
-    "speciesKey": "krabby",
-    "weight": 20,
-    "minLevel": 48,
-    "maxLevel": 50
-   },
-   {
-    "speciesKey": "kingler",
-    "weight": 20,
-    "minLevel": 48,
-    "maxLevel": 50
-   },
-   {
-    "speciesKey": "horsea",
-    "weight": 20,
-    "minLevel": 48,
-    "maxLevel": 50
-   },
-   {
-    "speciesKey": "seadra",
-    "weight": 12,
-    "minLevel": 48,
-    "maxLevel": 50
-   },
-   {
-    "speciesKey": "tentacool",
-    "weight": 12,
-    "minLevel": 48,
-    "maxLevel": 50
-   },
-   {
-    "speciesKey": "tentacruel",
-    "weight": 12,
-    "minLevel": 48,
-    "maxLevel": 50
-   },
-   {
-    "speciesKey": "seel",
-    "weight": 12,
-    "minLevel": 48,
-    "maxLevel": 50
-   },
-   {
-    "speciesKey": "dewgong",
-    "weight": 12,
-    "minLevel": 48,
-    "maxLevel": 50
-   },
-   {
-    "speciesKey": "qwilfish",
-    "weight": 8,
-    "minLevel": 48,
-    "maxLevel": 50,
-    "variety": true
-   },
-   {
-    "speciesKey": "weedle",
-    "weight": 8,
-    "minLevel": 48,
-    "maxLevel": 50,
-    "variety": true,
-    "time": "day"
-   },
-   {
-    "speciesKey": "kakuna",
-    "weight": 8,
-    "minLevel": 48,
-    "maxLevel": 50,
-    "variety": true,
-    "time": "day"
-   },
-   {
-    "speciesKey": "ekans",
-    "weight": 8,
-    "minLevel": 48,
-    "maxLevel": 50,
-    "variety": true
-   },
-   {
-    "speciesKey": "arbok",
-    "weight": 8,
-    "minLevel": 48,
-    "maxLevel": 50,
-    "variety": true
-   },
-   {
-    "speciesKey": "nidoranF",
-    "weight": 8,
-    "minLevel": 48,
-    "maxLevel": 50,
-    "variety": true
-   },
-   {
-    "speciesKey": "nidoranM",
-    "weight": 8,
-    "minLevel": 48,
-    "maxLevel": 50,
-    "variety": true
-   },
-   {
-    "speciesKey": "zubat",
-    "weight": 8,
-    "minLevel": 48,
-    "maxLevel": 50,
-    "variety": true
-   }
-  ]
- },
  "johto-route-42": {
   "name": "Route 42",
   "encounters": [
@@ -4173,6 +4062,175 @@
     "weight": 12,
     "minLevel": 73,
     "maxLevel": 75
+   }
+  ]
+ },
+ "johto-whirl-islands--entrance": {
+  "name": "Whirl Islands Entrance",
+  "encounters": [
+   {
+    "speciesKey": "krabby",
+    "weight": 20,
+    "minLevel": 48,
+    "maxLevel": 50
+   },
+   {
+    "speciesKey": "horsea",
+    "weight": 20,
+    "minLevel": 48,
+    "maxLevel": 50
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 20,
+    "minLevel": 48,
+    "maxLevel": 50
+   },
+   {
+    "speciesKey": "seel",
+    "weight": 12,
+    "minLevel": 48,
+    "maxLevel": 50
+   },
+   {
+    "speciesKey": "qwilfish",
+    "weight": 12,
+    "minLevel": 48,
+    "maxLevel": 50
+   }
+  ]
+ },
+ "johto-whirl-islands--northeast-cave": {
+  "name": "Northeast Cave",
+  "encounters": [
+   {
+    "speciesKey": "zubat",
+    "weight": 20,
+    "minLevel": 48,
+    "maxLevel": 50
+   },
+   {
+    "speciesKey": "ekans",
+    "weight": 20,
+    "minLevel": 48,
+    "maxLevel": 50
+   },
+   {
+    "speciesKey": "arbok",
+    "weight": 20,
+    "minLevel": 48,
+    "maxLevel": 50
+   },
+   {
+    "speciesKey": "nidoranF",
+    "weight": 12,
+    "minLevel": 48,
+    "maxLevel": 50
+   },
+   {
+    "speciesKey": "nidoranM",
+    "weight": 12,
+    "minLevel": 48,
+    "maxLevel": 50
+   }
+  ]
+ },
+ "johto-whirl-islands--northwest-cave": {
+  "name": "Northwest Cave",
+  "encounters": [
+   {
+    "speciesKey": "krabby",
+    "weight": 20,
+    "minLevel": 48,
+    "maxLevel": 50
+   },
+   {
+    "speciesKey": "kingler",
+    "weight": 20,
+    "minLevel": 48,
+    "maxLevel": 50
+   },
+   {
+    "speciesKey": "horsea",
+    "weight": 20,
+    "minLevel": 48,
+    "maxLevel": 50
+   },
+   {
+    "speciesKey": "seadra",
+    "weight": 12,
+    "minLevel": 48,
+    "maxLevel": 50
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 12,
+    "minLevel": 48,
+    "maxLevel": 50
+   }
+  ]
+ },
+ "johto-whirl-islands--southeast-cave": {
+  "name": "Southeast Cave",
+  "encounters": [
+   {
+    "speciesKey": "zubat",
+    "weight": 20,
+    "minLevel": 48,
+    "maxLevel": 50
+   },
+   {
+    "speciesKey": "golbat",
+    "weight": 20,
+    "minLevel": 48,
+    "maxLevel": 50
+   },
+   {
+    "speciesKey": "ekans",
+    "weight": 20,
+    "minLevel": 48,
+    "maxLevel": 50
+   },
+   {
+    "speciesKey": "arbok",
+    "weight": 12,
+    "minLevel": 48,
+    "maxLevel": 50
+   }
+  ]
+ },
+ "johto-whirl-islands--southwest-cave": {
+  "name": "Southwest Cave",
+  "encounters": [
+   {
+    "speciesKey": "seel",
+    "weight": 20,
+    "minLevel": 48,
+    "maxLevel": 50
+   },
+   {
+    "speciesKey": "dewgong",
+    "weight": 20,
+    "minLevel": 48,
+    "maxLevel": 50
+   },
+   {
+    "speciesKey": "tentacruel",
+    "weight": 20,
+    "minLevel": 48,
+    "maxLevel": 50
+   },
+   {
+    "speciesKey": "qwilfish",
+    "weight": 12,
+    "minLevel": 48,
+    "maxLevel": 50
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 12,
+    "minLevel": 48,
+    "maxLevel": 50
    }
   ]
  }

@@ -833,6 +833,11 @@ One-off scripts used to build the data JSON (not run during dev/build):
   tables and a Moltres Raid Island (removed from Kanto's pool). Idempotent
   (skips once `sevii-islands` is in `regions.json`); re-run
   `generate-encounter-index.cjs` afterwards.
+- `make-whirl-islands-zone.mjs` — one-off (#36/#28b) that splits Johto's
+  Whirl Islands route node into a `type: 'zone'` hub with an Entrance and four
+  cave sub-areas, re-homing the encounter table. Idempotent; run
+  `enforce-zone-chains.cjs`, `apply-zone-layout.cjs` and
+  `generate-encounter-index.cjs` afterwards.
 - `apply-ordinary-areas.cjs` — data-only pass (#28b) that inserts the ordinary
   wild areas from `lib/ordinary-areas.cjs` onto the committed data as
   `type: 'route'` nodes (own wild table, neighbour-averaged level band, derived

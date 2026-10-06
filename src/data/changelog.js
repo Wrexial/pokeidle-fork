@@ -14,6 +14,7 @@ export const CHANGELOG = [
           items: [
             'Kanto\u2019s Sevii Islands are a post-game subregion now: One Island through Seven Island (Kindle Road, Mt. Ember, Berry Forest, Icefall Cave, Five Isle Meadow, Memorial Pillar, Lost Cave, Pattern Bush, Ruin Valley, Dotted Hole, Sevault Canyon and the Tanoby Ruins), reached from Vermilion City once the Kanto Champion is beaten. Moltres heads their Raid Island',
             'Thirty-three more landmarks the map scraper used to drop are real wild areas now: the Unova Black 2 / White 2 areas (Floccesy Ranch, Virbank Complex, Castelia Sewers, Relic Passage, Strange House, Seaside Cave, Lostlorn Forest, Mistralton Cave, Clay Tunnel, the Abundant Shrine, Undella Bay, the P2 Laboratory, Celestial Tower, Liberty Garden, Nature Sanctuary and Victory Road), Hoenn\u2019s Jagged Pass and Scorched Slab, Sinnoh\u2019s Floaroma Meadow and Valley Windworks, Kalos\u2019s Parfum Palace, Alola\u2019s Haina Desert, Sinnoh\u2019s Trophy Garden and Ramanas Park, Paldea\u2019s Dalizapa Passage, Unova\u2019s White Forest, Kalos\u2019s Chamber of Emptiness and Power Plant, Johto\u2019s Sinjoh Ruins, Sinnoh\u2019s Spear Pillar and Spring Path, Kalos\u2019s Unknown Dungeon and Alola\u2019s Resolution Cave',
+            'Johto\u2019s Whirl Islands are a proper zone now, split into an Entrance and four caves (Northeast, Northwest, Southeast and Southwest), each with its own wild table',
           ],
         },
         {

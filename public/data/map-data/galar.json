@@ -867,8 +867,8 @@
   },
   "unlockOrder": 800005.5002,
   "position": {
-   "x": 53.47,
-   "y": 39.7
+   "x": 53.5,
+   "y": 39.8
   },
   "biome": "grassland"
  },
@@ -893,8 +893,8 @@
   },
   "unlockOrder": 800005.501,
   "position": {
-   "x": 62.39,
-   "y": 41.8
+   "x": 62.42,
+   "y": 41.9
   },
   "biome": "forest"
  },
@@ -919,8 +919,8 @@
   },
   "unlockOrder": 800005.502,
   "position": {
-   "x": 68.48,
-   "y": 47.42
+   "x": 68.51,
+   "y": 47.52
   },
   "biome": "grassland"
  },
@@ -1162,8 +1162,8 @@
   },
   "unlockOrder": 800005.503,
   "position": {
-   "x": 69.8,
-   "y": 54.78
+   "x": 69.83,
+   "y": 54.88
   },
   "biome": "desert",
   "background": "/backgrounds/grassland.png"
@@ -1188,8 +1188,8 @@
   },
   "unlockOrder": 800005.504,
   "position": {
-   "x": 65.94,
-   "y": 61.55
+   "x": 65.97,
+   "y": 61.64
   },
   "biome": "coast",
   "background": "/backgrounds/beach.png"
@@ -1214,8 +1214,8 @@
   },
   "unlockOrder": 800005.505,
   "position": {
-   "x": 58.12,
-   "y": 65.57
+   "x": 58.15,
+   "y": 65.67
   },
   "biome": "mountain",
   "background": "/backgrounds/mountain.png"
@@ -1240,8 +1240,8 @@
   },
   "unlockOrder": 800005.506,
   "position": {
-   "x": 48.82,
-   "y": 65.57
+   "x": 48.85,
+   "y": 65.67
   },
   "biome": "desert",
   "background": "/backgrounds/grassland.png"
@@ -1266,8 +1266,8 @@
   },
   "unlockOrder": 800005.507,
   "position": {
-   "x": 41,
-   "y": 61.55
+   "x": 41.03,
+   "y": 61.64
   },
   "biome": "coast",
   "background": "/backgrounds/beach.png"
@@ -1292,8 +1292,8 @@
   },
   "unlockOrder": 800005.508,
   "position": {
-   "x": 37.14,
-   "y": 54.78
+   "x": 37.17,
+   "y": 54.88
   },
   "biome": "mountain",
   "background": "/backgrounds/mountain.png"
@@ -1318,8 +1318,8 @@
   },
   "unlockOrder": 800005.509,
   "position": {
-   "x": 38.46,
-   "y": 47.42
+   "x": 38.49,
+   "y": 47.52
   },
   "biome": "coast",
   "background": "/backgrounds/beach.png"
@@ -1344,8 +1344,8 @@
   },
   "unlockOrder": 800005.51,
   "position": {
-   "x": 44.55,
-   "y": 41.8
+   "x": 44.58,
+   "y": 41.9
   },
   "biome": "cave",
   "background": "/backgrounds/cave.png"

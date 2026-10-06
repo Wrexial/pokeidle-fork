@@ -3,6 +3,8 @@
 import { moveMakesContact } from '../../data/move-effects.js'
 import { moveData, moveLearnsets } from '../../data/gameData.js'
 import { heldItems } from '../../data/items.js'
+import { MAX_MOVE_BY_TYPE, gmaxMoveFor, maxMoveBasePower } from '../../data/max-moves.js'
+import { Z_CRYSTAL_TYPE, Z_MOVE_BY_TYPE, Z_STATUS_BOOSTS, Z_STATUS_EFFECTS, zMoveBasePower } from '../../data/z-moves.js'
 import { abilityAbsorbsType, abilityAttackMultiplier, abilityAvoidsContact, abilityBlocksMove, abilityBlocksNonSuperEffective, abilityBlocksWind, abilityChangesMoveType, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityEffectivenessMultiplier, abilityHalvesSuperEffective, abilityHealsFromType, abilityHitsGhost, abilityOf, abilityPreventsStatDrop, abilityPreventsStatus, abilityStatusAccuracyMultiplier, abilitySurvivesAtFullHp, fieldAuraMultiplier, isWindMove, onHitStatBoost, onHpThresholdBoost, onKoBoostStat, ruinDefenseMultiplier, ruinOffenseMultiplier, rivalryDamageMultiplier, stakeoutDamageMultiplier } from '../abilities.js'
 import { AI_SKILL, chooseMoveForBattle } from './ai.js'
 import { changeBattleForm } from './setup.js'
@@ -339,6 +341,101 @@ function applyMoveLock(pokemon, moveId) {
   if ((pokemon.disableTurns ?? 0) > 0 && moveId === pokemon.disabledMove)
     return pokemon.moves.find((id) => id !== pokemon.disabledMove) ?? moveId
   return moveId
+}
+
+/**
+ * Apply a Z-Crystal's stat boosts to the user (Z-status effects).
+ * @param {any} attack
+ * @param {Record<string, number>} boost
+ * @param {any[]} events
+ * @returns {boolean}
+ */
+function applyZBoostEffect(attack, boost, events) {
+  const stages = attack.attacker.statStages ?? (attack.attacker.statStages = {})
+  let changed = !1
+  for (const [stat, delta] of Object.entries(boost)) {
+    const current = stages[stat] ?? 0,
+      next = clampStatStage(current + delta)
+    if (next === current) continue
+    stages[stat] = next
+    changed = !0
+    events.push({
+      type: 'statChange',
+      message: `${attack.attacker.name}'s ${getStatLabel(stat)} ${delta > 0 ? 'rose' : 'fell'}!`,
+      data: { target: attack.isPlayer ? 'player' : 'enemy' },
+    })
+  }
+  return changed
+}
+
+/**
+ * Turn the active move into its Max / G-Max / Z-Move form when the holder is
+ * Gigantamaxed or holds a matching Z-Crystal. The Z-Power is consumed once per
+ * battle; Max forms last as long as the Gigantamax does.
+ * @param {any} attack
+ * @param {Move} moveDef
+ * @param {any[]} events
+ * @returns {{ moveDef: Move, transformed: boolean }}
+ */
+function applyMaxOrZMove(attack, moveDef, events) {
+  if (attack.attacker.speciesKey?.startsWith('gx-')) {
+    if (moveDef.category === 'status') return { moveDef: moveData.maxGuard ?? moveDef, transformed: !0 }
+    const gmaxKey = gmaxMoveFor(attack.attacker.speciesKey, moveDef.type),
+      key =
+        gmaxKey && moveData[gmaxKey] && moveData[gmaxKey].type === moveDef.type
+          ? gmaxKey
+          : MAX_MOVE_BY_TYPE[moveDef.type],
+      maxDef = moveData[key]
+    if (!maxDef) return { moveDef, transformed: !1 }
+    const fixed = ['gMaxDrumSolo', 'gMaxFireball', 'gMaxHydrosnipe'].includes(key)
+    return {
+      moveDef: {
+        ...maxDef,
+        category: moveDef.category,
+        power: fixed ? maxDef.power : maxMoveBasePower(moveDef.power ?? 0, moveDef.type),
+        accuracy: 101,
+      },
+      transformed: !0,
+    }
+  }
+  const crystalType = attack.attacker.heldItem ? Z_CRYSTAL_TYPE[attack.attacker.heldItem] : null
+  if (!crystalType || attack.attacker.zMoveUsed || moveDef.type !== crystalType)
+    return { moveDef, transformed: !1 }
+  if (moveDef.category !== 'status' && (moveDef.power ?? 0) > 0) {
+    const zDef = moveData[Z_MOVE_BY_TYPE[crystalType]]
+    if (!zDef) return { moveDef, transformed: !1 }
+    attack.attacker.zMoveUsed = !0
+    return {
+      moveDef: { ...zDef, category: moveDef.category, power: zMoveBasePower(moveDef.power), accuracy: 101 },
+      transformed: !0,
+    }
+  }
+  if (moveDef.category === 'status') {
+    attack.attacker.zMoveUsed = !0
+    const boost = Z_STATUS_BOOSTS[attack.moveId]
+    if (boost) applyZBoostEffect(attack, boost, events)
+    const effect = Z_STATUS_EFFECTS[attack.moveId]
+    if (effect === 'clearnegativeboost') {
+      const stages = attack.attacker.statStages ?? (attack.attacker.statStages = {})
+      for (const stat of ['attack', 'defense', 'spAttack', 'spDefense', 'speed'])
+        if ((stages[stat] ?? 0) < 0) stages[stat] = 0
+    } else if (effect === 'crit2') attack.attacker.focusEnergy = !0
+    else if (effect === 'heal') {
+      const healed = Math.min(
+        attack.attacker.maxHp,
+        attack.attacker.currentHp + Math.floor(attack.attacker.maxHp / 2)
+      )
+      attack.attacker.currentHp = healed
+      events.push({
+        type: 'heal',
+        message: `${attack.attacker.name} restored HP!`,
+        data: { target: attack.isPlayer ? 'player' : 'enemy', hpAfter: healed, hpMax: attack.attacker.maxHp },
+      })
+    }
+    events.push({ type: 'status', message: `${attack.attacker.name} unleashed its Z-Power!` })
+    return { moveDef, transformed: !0 }
+  }
+  return { moveDef, transformed: !1 }
 }
 
 /**
@@ -682,6 +779,10 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         continue
       }
     }
+    // Gigantamax (Max Mushroom) and a matching Z-Crystal rewrite the move.
+    const maxOrZ = applyMaxOrZMove(attack, moveDef, events)
+    moveDef = maxOrZ.moveDef
+    const transformedMove = maxOrZ.transformed
     // Track consecutive uses of the same move for Round / Echoed Voice before
     // `lastMove` is overwritten.
     attack.attacker.sameMoveStreak =
@@ -732,8 +833,9 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         target: attack.isPlayer ? 'enemy' : 'player',
       },
     })
-    // Two-turn moves: the user charges this turn and strikes on the next.
-    const chargeMove = CHARGE_MOVES[attack.moveId]
+    // Two-turn moves: the user charges this turn and strikes on the next. A
+    // Max / Z-Move always resolves in one turn.
+    const chargeMove = transformedMove ? null : CHARGE_MOVES[attack.moveId]
     if (chargeMove) {
       if (attack.attacker.chargingMove !== attack.moveId) {
         attack.attacker.chargingMove = attack.moveId
@@ -2002,6 +2104,102 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       moveDef.effect)
     )
       switch (moveDef.effect.type) {
+        case 'weather': {
+          activeWeather = { type: moveDef.effect.weather, turns: WEATHER_TURNS }
+          events.push({
+            type: 'weather',
+            message: `The weather became ${WEATHER_NAMES[moveDef.effect.weather] ?? moveDef.effect.weather}!`,
+          })
+          break
+        }
+        case 'terrain': {
+          activeTerrain = {
+            type: moveDef.effect.terrain,
+            turns: TERRAIN_TURNS + heldTerrainExtenderTurns(attack.attacker),
+          }
+          events.push({
+            type: 'terrain',
+            message: `The battlefield became ${TERRAIN_NAMES[moveDef.effect.terrain] ?? moveDef.effect.terrain}!`,
+          })
+          break
+        }
+        case 'hazard': {
+          const targetSide = /** @type {any} */ (
+              attack.isPlayer ? activeHazards.enemy : activeHazards.player
+            ),
+            hazard = moveDef.effect.hazard
+          if (hazard === 'spikes') targetSide.spikes = Math.min(3, targetSide.spikes + 1)
+          else if (hazard === 'toxicSpikes')
+            targetSide.toxicSpikes = Math.min(2, targetSide.toxicSpikes + 1)
+          else targetSide[hazard] = !0
+          events.push({ type: 'hazard', message: `${attack.attacker.name} set up a hazard!` })
+          break
+        }
+        case 'leechSeed':
+          applyLeechSeed(attack.defender, events, !attack.isPlayer)
+          break
+        case 'infatuation':
+          applyInfatuation(attack.attacker, attack.defender, events, !attack.isPlayer)
+          break
+        case 'confusion':
+          applyConfusion(attack.defender, events, !attack.isPlayer, deterministic)
+          break
+        case 'heal': {
+          if (healBlocked(attack.attacker)) break
+          const healed = Math.min(
+            attack.attacker.maxHp,
+            attack.attacker.currentHp +
+              Math.max(1, Math.floor((attack.attacker.maxHp * (moveDef.effect.percentage ?? 50)) / 100))
+          )
+          attack.attacker.currentHp = healed
+          events.push({
+            type: 'heal',
+            message: `${attack.attacker.name} restored HP!`,
+            data: { target: attack.isPlayer ? 'player' : 'enemy', hpAfter: healed, hpMax: attack.attacker.maxHp },
+          })
+          break
+        }
+        case 'selfCureStatus': {
+          if (attack.attacker.status) {
+            attack.attacker.status = null
+            attack.attacker.statusTurns = 0
+            events.push({
+              type: 'status',
+              message: `${attack.attacker.name}'s status was cured!`,
+              data: { target: attack.isPlayer ? 'player' : 'enemy' },
+            })
+          }
+          break
+        }
+        case 'focusEnergy':
+          attack.attacker.focusEnergy = !0
+          events.push({
+            type: 'status',
+            message: `${attack.attacker.name} is getting pumped!`,
+            data: { target: attack.isPlayer ? 'player' : 'enemy' },
+          })
+          break
+        case 'screen': {
+          const screens = attack.attacker.screens ?? (attack.attacker.screens = { reflect: 0, lightScreen: 0 })
+          if (moveDef.effect.screen === 'both') {
+            screens.reflect = 5
+            screens.lightScreen = 5
+          } else screens[moveDef.effect.screen] = 5
+          events.push({
+            type: 'statChange',
+            message: `${attack.attacker.name} put up a barrier!`,
+            data: { target: attack.isPlayer ? 'player' : 'enemy' },
+          })
+          break
+        }
+        case 'torment':
+          attack.defender.tormentTurns = 5
+          events.push({
+            type: 'status',
+            message: `${attack.defender.name} was subjected to torment!`,
+            data: { target: attack.isPlayer ? 'enemy' : 'player' },
+          })
+          break
         case 'recoil': {
           // Rock Head ignores recoil damage.
           if (abilityOf(attack.attacker) === 'rockHead') break

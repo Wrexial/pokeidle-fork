@@ -116,6 +116,8 @@ const moveEffectText = {
   powerTrick: 'Swaps the user\u2019s Attack and Defense stats.',
   psychUp: 'Copies the target\u2019s stat changes onto the user.',
   selfCureStatus: 'Cures the user\u2019s status condition.',
+  screen: 'Sets up a barrier that halves damage for five turns.',
+  torment: 'Torments the target so it cannot repeat a move.',
   magnetRise: 'Levitates the user, granting immunity to Ground moves for five turns.',
   conversion: 'Changes the user\u2019s type to that of its first move.',
   camouflage: 'Changes the user\u2019s type to match the terrain.',

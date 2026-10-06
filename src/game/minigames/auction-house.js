@@ -12,6 +12,33 @@
  * lots are weighted up in `rollAuctionLot` since held items are the draw. */
 export const AUCTION_LOTS = [
   {
+    id: 'zCrystalCase',
+    kind: 'held',
+    name: 'Z-Crystal Case',
+    blurb: 'A full set of type Z-Crystals, each good for one Z-Move a battle.',
+    value: 20000,
+    items: [
+      { itemId: 'normaliumZ', quantity: 1 },
+      { itemId: 'firiumZ', quantity: 1 },
+      { itemId: 'wateriumZ', quantity: 1 },
+      { itemId: 'electriumZ', quantity: 1 },
+      { itemId: 'grassiumZ', quantity: 1 },
+      { itemId: 'iciumZ', quantity: 1 },
+      { itemId: 'fightiniumZ', quantity: 1 },
+      { itemId: 'poisoniumZ', quantity: 1 },
+      { itemId: 'groundiumZ', quantity: 1 },
+      { itemId: 'flyiniumZ', quantity: 1 },
+      { itemId: 'psychiumZ', quantity: 1 },
+      { itemId: 'buginiumZ', quantity: 1 },
+      { itemId: 'rockiumZ', quantity: 1 },
+      { itemId: 'ghostiumZ', quantity: 1 },
+      { itemId: 'dragoniumZ', quantity: 1 },
+      { itemId: 'darkiniumZ', quantity: 1 },
+      { itemId: 'steeliumZ', quantity: 1 },
+      { itemId: 'fairiumZ', quantity: 1 },
+    ],
+  },
+  {
     id: 'battleCache',
     kind: 'held',
     name: 'Battle Cache',

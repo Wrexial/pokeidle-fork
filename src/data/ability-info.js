@@ -1127,6 +1127,30 @@ export const abilityInfo = {
   'teraformZero': {
     'group': 'entry',
     'text': 'Clears the weather and terrain on entry.'
+  },
+  'eelevate': {
+    'group': 'absorb',
+    'text': 'Airborne, so Ground moves miss. After a KO, raises its best stat.'
+  },
+  'piercingDrill': {
+    'group': 'contact',
+    'text': 'Contact moves go straight through Protect and Detect.'
+  },
+  'fireMane': {
+    'group': 'offense',
+    'text': 'Boosts the power of its Fire-type moves by 50%.'
+  },
+  'auraGuard': {
+    'group': 'defense',
+    'text': 'Halves the damage of contact moves.'
+  },
+  'megaSol': {
+    'group': 'offense',
+    'text': 'Acts as if the sun were shining for its own moves (boosts Fire, weakens Water).'
+  },
+  'gulpMissile': {
+    'group': 'onhit',
+    'text': 'Surf or Dive makes it swallow a catch; being hit spits it back for 25% damage plus a Defense drop (Gulping) or paralysis (Gorging).'
   }
 }
 

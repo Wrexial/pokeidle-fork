@@ -1744,3 +1744,28 @@ test('Tera Shell halves hits while at full HP', () => {
     assert.equal(damageTaken('teraShell', 200), damageTaken(undefined, 200), 'normal below full HP')
   })
 })
+
+test('Eelevate is airborne like Levitate', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({ name: 'Player', isPlayer: true, moves: ['earthquake'], speed: 200, attack: 200 }),
+      enemy = battler({
+        name: 'Foe',
+        moves: ['splash'],
+        ability: 'eelevate',
+        currentHp: 400,
+        maxHp: 400,
+        types: ['Normal'],
+      })
+    resolveBattleTurn(player, enemy, false)
+    assert.equal(enemy.currentHp, 400, 'the Ground move is blocked')
+  })
+})
+
+test('Fire Mane, Aura Guard and Mega Sol modify the right hits', () => {
+  assert.equal(abilityDamageDealtMultiplier(battler({ ability: 'fireMane' }), moveData.flamethrower), 1.5)
+  assert.equal(abilityDamageDealtMultiplier(battler({ ability: 'fireMane' }), moveData.waterGun), 1)
+  assert.equal(abilityDamageTakenMultiplier(battler({ ability: 'auraGuard' }), moveData.tackle), 0.5)
+  assert.equal(abilityDamageTakenMultiplier(battler({ ability: 'auraGuard' }), moveData.flamethrower), 1)
+  assert.equal(abilityDamageDealtMultiplier(battler({ ability: 'megaSol' }), moveData.flamethrower), 1.5)
+  assert.equal(abilityDamageDealtMultiplier(battler({ ability: 'megaSol' }), moveData.waterGun), 0.5)
+})

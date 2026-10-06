@@ -761,7 +761,11 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     if (
       attack.defender.protecting &&
       !isSelfTargetedMove(moveDef) &&
-      !(abilityOf(attack.attacker) === 'unseenFist' && moveMakesContact(moveDef))
+      !(
+        (abilityOf(attack.attacker) === 'unseenFist' ||
+          abilityOf(attack.attacker) === 'piercingDrill') &&
+        moveMakesContact(moveDef)
+      )
     ) {
       events.push({
         type: 'protect',
@@ -1454,6 +1458,20 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       attack.attacker.types = [effectiveMove.type]
       attack.attacker.typesOverride = [effectiveMove.type]
     }
+    // Gulp Missile: Cramorant swallows its catch when it uses Surf or Dive.
+    if (
+      abilityOf(attack.attacker) === 'gulpMissile' &&
+      attack.attacker.speciesKey === 'cramorant' &&
+      (effectiveMove.name === 'Surf' || effectiveMove.name === 'Dive')
+    )
+      changeBattleForm(
+        attack.attacker,
+        attack.attacker.currentHp <= attack.attacker.maxHp / 2
+          ? 'cramorant-gorging'
+          : 'cramorant-gulping',
+        events,
+        attack.isPlayer
+      )
     // The extreme weathers refuse the opposite elemental type.
     if (
       (effectiveWeather?.type === 'harshSunlight' && effectiveMove.type === 'Water') ||
@@ -2087,6 +2105,43 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         })
       }
     }
+    // Gulp Missile spits its catch at whoever knocks Cramorant out of its form.
+    if (
+      abilityOf(attack.defender) === 'gulpMissile' &&
+      (attack.defender.speciesKey === 'cramorant-gulping' ||
+        attack.defender.speciesKey === 'cramorant-gorging') &&
+      attack.attacker.currentHp > 0
+    ) {
+      const wasGulping = attack.defender.speciesKey === 'cramorant-gulping',
+        missileDamage = Math.max(1, Math.floor(attack.attacker.maxHp / 4))
+      attack.attacker.currentHp = Math.max(0, attack.attacker.currentHp - missileDamage)
+      events.push({
+        type: 'recoil',
+        message: `${attack.attacker.name} was hit by the Gulp Missile! (${missileDamage} damage)`,
+        data: {
+          target: attack.isPlayer ? 'player' : 'enemy',
+          damage: missileDamage,
+          hpAfter: attack.attacker.currentHp,
+          hpMax: attack.attacker.maxHp,
+        },
+      })
+      if (wasGulping) {
+        const stages = attack.attacker.statStages ?? (attack.attacker.statStages = {}),
+          current = stages.defense ?? 0,
+          next = clampStatStage(current - 1)
+        if (next !== current && !abilityPreventsStatDrop(attack.attacker, 'defense')) {
+          stages.defense = next
+          events.push({
+            type: 'statChange',
+            message: `${attack.attacker.name}'s Defense fell!`,
+            data: { target: attack.isPlayer ? 'player' : 'enemy' },
+          })
+        }
+      } else {
+        applyStatus(attack.attacker, 'paralysis', events, attack.isPlayer, deterministic, activeTerrain, !0, attack.defender)
+      }
+      changeBattleForm(attack.defender, 'cramorant', events, !attack.isPlayer)
+    }
     // Lingering Aroma replaces the attacker's ability if the move made contact.
     if (
       abilityOf(attack.defender) === 'lingeringAroma' &&
@@ -2320,7 +2375,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       // Moxie / Chilling Neigh / Grim Neigh / Beast Boost (and As One) reward a KO.
       const koAbility = abilityOf(attack.attacker)
       let koStat = onKoBoostStat(attack.attacker)
-      if (koAbility === 'beastBoost') {
+      if (koAbility === 'beastBoost' || koAbility === 'eelevate') {
         const stats = {
           attack: attack.attacker.attack,
           defense: attack.attacker.defense,

@@ -27,7 +27,7 @@ const SOUND_MOVE =
   /boomburst|buzz|voice|overdrive|snarl|snore|uproar|sing|perish song|round|metal sound|whistle|clanging|torch song|alluring voice/i
 
 /** Abilities whose holder is immune to Ground moves. */
-const GROUND_IMMUNE_ABILITIES = new Set(['levitate'])
+const GROUND_IMMUNE_ABILITIES = new Set(['levitate', 'eelevate'])
 
 /** Abilities that absorb a move type (the holder is immune and heals). */
 const TYPE_ABSORB_ABILITIES = /** @type {Record<string, string>} */ ({
@@ -290,6 +290,13 @@ export function abilityDamageDealtMultiplier(attacker, moveDef, weather = null) 
   })
   if (typeBoost[ability] === moveDef.type) return 1.5
   if (ability === 'waterBubble' && moveDef.type === 'Water') return 2
+  // Fire Mane boosts Fire moves; Mega Sol acts as if the sun were always up
+  // for the holder's own moves.
+  if (ability === 'fireMane' && moveDef.type === 'Fire') return 1.5
+  if (ability === 'megaSol') {
+    if (moveDef.type === 'Fire') return 1.5
+    if (moveDef.type === 'Water') return 0.5
+  }
   if (ability === 'adaptability' && attacker.types?.includes(moveDef.type)) return 4 / 3
   if (ability === 'technician' && (moveDef.power ?? 0) > 0 && moveDef.power <= 60) return 1.5
   if (ability === 'toughClaws' && moveMakesContact(moveDef)) return 1.3
@@ -377,6 +384,8 @@ export function abilityDamageTakenMultiplier(defender, moveDef, attacker) {
   if (ability === 'punkRock' && SOUND_MOVE.test(name)) return 0.5
   if (ability === 'furCoat' && moveDef.category === 'physical') return 0.5
   if (ability === 'drySkin' && moveDef.type === 'Fire') return 1.25
+  // Aura Guard halves contact damage.
+  if (ability === 'auraGuard' && contact) return 0.5
   if (ability === 'marvelScale' && defender.status && moveDef.category === 'physical') return 2 / 3
   return 1
 }

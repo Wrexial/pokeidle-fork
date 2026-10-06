@@ -358,6 +358,12 @@ type VolatileState = {
   wonderRoomTurns?: number
   /** Powdered: the next Fire move explodes. */
   powdered?: boolean
+  /** Ion Deluge is active this turn (Normal moves become Electric). */
+  ionDeluge?: boolean
+  /** Electrified: this battler's next move becomes Electric. */
+  electrified?: boolean
+  /** Magic Coat is up this turn (status moves are reflected). */
+  magicCoat?: boolean
   /** Leaf Guard is active because the sun is shining this turn. */
   leafGuardActive?: boolean
   /** Pending Cud Chew heal (the berry eaten last turn). */

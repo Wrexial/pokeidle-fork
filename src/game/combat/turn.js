@@ -11,7 +11,7 @@ import { changeBattleForm } from './setup.js'
 import { calculateDamage, chance, getTypeEffectiveness, isSelfTargetedMove, normalizeStatKey } from './damage.js'
 import { applyEndOfTurn, reportFieldEffects } from './end-of-turn.js'
 import { emptyBattleHazards } from '../hazards.js'
-import { heldChoiceItem, heldDamageMultiplier, heldLifeOrbRecoil, heldStatMultiplier, heldSurvivesAtFullHp, heldTerrainExtenderTurns } from '../held-items.js'
+import { heldBerryHeal, heldChoiceItem, heldDamageMultiplier, heldLifeOrbRecoil, heldStatMultiplier, heldSurvivesAtFullHp, heldTerrainExtenderTurns } from '../held-items.js'
 import { canEvolveFurther } from '../pokemon.js'
 import { VARIABLE_POWER_MOVES, withVariablePower } from './variable-power.js'
 import { CHARGE_MOVES, hitsSemiInvulnerable } from './charge-moves.js'
@@ -548,6 +548,9 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
   // Protect only lasts the turn it is used; clear any left over.
   ;(player.protecting = !1, enemy.protecting = !1)
   ;(player.enduring = !1, enemy.enduring = !1)
+  ;(player.magicCoat = !1, enemy.magicCoat = !1)
+  ;(player.ionDeluge = !1, enemy.ionDeluge = !1)
+  ;(player.electrified = !1, enemy.electrified = !1)
   // Protect can't be used on consecutive turns: remember whether it was used
   // last turn, then clear the chain (a use this turn sets it again).
   ;(player.protectUsedLastTurn = (player.protectChain ?? 0) > 0,
@@ -1285,6 +1288,41 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         attack.attacker.wonderRoomTurns = 5
         attack.defender.wonderRoomTurns = 5
         events.push({ type: 'status', message: 'The dimensions became strange!' })
+      } else if (moveDef.effect?.type === 'ionDeluge') {
+        attack.attacker.ionDeluge = !0
+        attack.defender.ionDeluge = !0
+        events.push({ type: 'status', message: 'A deluge of ions charges the field!' })
+      } else if (moveDef.effect?.type === 'electrify') {
+        attack.defender.electrified = !0
+        events.push({
+          type: 'status',
+          message: `${attack.defender.name} was electrified!`,
+          data: { target: attack.isPlayer ? 'enemy' : 'player' },
+        })
+      } else if (moveDef.effect?.type === 'magicCoat') {
+        attack.attacker.magicCoat = !0
+        events.push({
+          type: 'status',
+          message: `${attack.attacker.name} shrouded itself in a magic coat!`,
+          data: { target: attack.isPlayer ? 'player' : 'enemy' },
+        })
+      } else if (moveDef.effect?.type === 'teatime') {
+        for (const mon of [attack.attacker, attack.defender]) {
+          const heal = heldBerryHeal(mon)
+          if (heal > 0) {
+            mon.heldItemUsed = !0
+            mon.currentHp = Math.min(mon.maxHp, mon.currentHp + heal)
+            events.push({
+              type: 'heal',
+              message: `${mon.name} ate its held Berry!`,
+              data: {
+                target: mon === attack.attacker ? (attack.isPlayer ? 'player' : 'enemy') : attack.isPlayer ? 'enemy' : 'player',
+                hpAfter: mon.currentHp,
+                hpMax: mon.maxHp,
+              },
+            })
+          }
+        }
       } else if (
         moveDef.effect?.type === 'status' &&
         (moveDef.effect.chance === void 0 ||
@@ -1863,15 +1901,22 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         attack.attacker,
         applyWeatherToMove(effectiveWeather, moveDef)
       ),
+      // Ion Deluge turns Normal moves Electric; Electrify forces Electric on the
+      // target's next move.
+      baseMove2 =
+        (baseMove.type === 'Normal' && (attack.attacker.ionDeluge || attack.defender.ionDeluge)) ||
+        attack.attacker.electrified
+          ? { ...baseMove, type: 'Electric' }
+          : baseMove,
       accuracyMult =
         (abilityOf(attack.attacker) === 'compoundEyes' ? 1.3 : 1) *
         (abilityOf(attack.attacker) === 'victoryStar' ? 1.1 : 1) *
         // Wonder Skin halves the accuracy of status moves aimed at its holder.
         (baseMove.category === 'status' ? abilityStatusAccuracyMultiplier(attack.defender) : 1),
       accuracyMove =
-        accuracyMult === 1 || !(baseMove.accuracy > 0) || baseMove.accuracy > 100
-          ? baseMove
-          : { ...baseMove, accuracy: Math.min(100, baseMove.accuracy * accuracyMult) },
+        accuracyMult === 1 || !(baseMove2.accuracy > 0) || baseMove2.accuracy > 100
+          ? baseMove2
+          : { ...baseMove2, accuracy: Math.min(100, baseMove2.accuracy * accuracyMult) },
       // Heat Crash, Electro Ball, Eruption, Stored Power, ... fill in their base
       // power from the two battlers here.
       effectiveMove = withVariablePower(

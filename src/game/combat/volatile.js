@@ -89,6 +89,9 @@ export function createVolatileState() {
     embargoTurns: 0,
     wonderRoomTurns: 0,
     powdered: !1,
+    ionDeluge: !1,
+    electrified: !1,
+    magicCoat: !1,
     cudChewHeal: 0,
     nullifiedMoves: {},
   }
@@ -169,6 +172,9 @@ export function volatileStateFromBattle(pokemon) {
     embargoTurns: pokemon.embargoTurns ?? 0,
     wonderRoomTurns: pokemon.wonderRoomTurns ?? 0,
     powdered: pokemon.powdered ?? !1,
+    ionDeluge: pokemon.ionDeluge ?? !1,
+    electrified: pokemon.electrified ?? !1,
+    magicCoat: pokemon.magicCoat ?? !1,
     cudChewHeal: pokemon.cudChewHeal ?? 0,
     nullifiedMoves: pokemon.nullifiedMoves ?? {},
   }

@@ -25,6 +25,7 @@ const IGNORES_TARGET_ABILITY = new Set(['moldBreaker', 'teravolt', 'turboblaze']
  */
 function shouldBounceStatus(target, source, fromMagicBounce) {
   if (fromMagicBounce || !source || source === target) return false
+  if (target.magicCoat) return true
   if (abilityOf(target) !== 'magicBounce') return false
   return !IGNORES_TARGET_ABILITY.has(abilityOf(source) ?? '')
 }

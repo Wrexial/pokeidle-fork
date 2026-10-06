@@ -833,6 +833,23 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       })
       continue
     }
+    // Powder: a Fire move detonates the powder instead of landing.
+    if (attack.attacker.powdered && moveDef.type === 'Fire') {
+      const boom = Math.max(1, Math.floor(attack.attacker.maxHp / 4))
+      attack.attacker.currentHp = Math.max(0, attack.attacker.currentHp - boom)
+      attack.attacker.powdered = !1
+      events.push({
+        type: 'recoil',
+        message: `The powder exploded on ${attack.attacker.name}! (${boom} damage)`,
+        data: {
+          target: attack.isPlayer ? 'player' : 'enemy',
+          damage: boom,
+          hpAfter: attack.attacker.currentHp,
+          hpMax: attack.attacker.maxHp,
+        },
+      })
+      continue
+    }
     if (
       attack.attacker.lockedMove &&
       attack.attacker.lockTurnsRemaining !== void 0 &&
@@ -1226,6 +1243,48 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           message: `${attack.defender.name} copied ${attack.attacker.name}'s ability!`,
           data: { target: attack.isPlayer ? 'enemy' : 'player' },
         })
+      } else if (moveDef.effect?.type === 'gravity') {
+        attack.attacker.gravityTurns = 5
+        attack.defender.gravityTurns = 5
+        events.push({ type: 'status', message: 'Gravity intensified!' })
+      } else if (moveDef.effect?.type === 'telekinesis') {
+        attack.defender.telekinesisTurns = 3
+        events.push({
+          type: 'status',
+          message: `${attack.defender.name} was hurled into the air!`,
+          data: { target: attack.isPlayer ? 'enemy' : 'player' },
+        })
+      } else if (moveDef.effect?.type === 'sport') {
+        const turns = 5,
+          sport = moveDef.effect.sport
+        for (const mon of [attack.attacker, attack.defender]) {
+          mon.sportTurns = turns
+          mon.sportType = sport
+        }
+        events.push({
+          type: 'status',
+          message: sport === 'mud' ? 'Electricity was weakened!' : 'Fire was weakened!',
+        })
+      } else if (moveDef.effect?.type === 'powder') {
+        if (!attack.defender.types.includes('Grass')) {
+          attack.defender.powdered = !0
+          events.push({
+            type: 'status',
+            message: `${attack.defender.name} was covered in powder!`,
+            data: { target: attack.isPlayer ? 'enemy' : 'player' },
+          })
+        }
+      } else if (moveDef.effect?.type === 'embargo') {
+        attack.defender.embargoTurns = 5
+        events.push({
+          type: 'status',
+          message: `${attack.defender.name} can't use its held item!`,
+          data: { target: attack.isPlayer ? 'enemy' : 'player' },
+        })
+      } else if (moveDef.effect?.type === 'wonderRoom') {
+        attack.attacker.wonderRoomTurns = 5
+        attack.defender.wonderRoomTurns = 5
+        events.push({ type: 'status', message: 'The dimensions became strange!' })
       } else if (
         moveDef.effect?.type === 'status' &&
         (moveDef.effect.chance === void 0 ||
@@ -1882,7 +1941,10 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       continue
     }
     // Magnet Rise grounds the holder against Ground moves for a few turns.
-    if ((attack.defender.magnetRiseTurns ?? 0) > 0 && effectiveMove.type === 'Ground') {
+    if (
+      ((attack.defender.magnetRiseTurns ?? 0) > 0 || (attack.defender.telekinesisTurns ?? 0) > 0) &&
+      effectiveMove.type === 'Ground'
+    ) {
       events.push({ type: 'miss', message: `${attack.defender.name} is levitating!` })
       continue
     }
@@ -1913,16 +1975,20 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         (abilityOf(attack.attacker) === 'merciless' && !!attack.defender.status),
       neverMiss =
         (attack.attacker.lockOnTurns ?? 0) > 0 ||
+        (attack.defender.telekinesisTurns ?? 0) > 0 ||
         abilityOf(attack.attacker) === 'noGuard' ||
         abilityOf(attack.defender) === 'noGuard'
     if (attack.attacker.laserFocus === !0) attack.attacker.laserFocus = !1
     if ((attack.attacker.lockOnTurns ?? 0) > 0) attack.attacker.lockOnTurns = 0
-    // Scrappy and Mind's Eye let Normal and Fighting moves hit Ghost-types.
-    const defenderTypesForMove =
+    // Scrappy and Mind's Eye let Normal and Fighting moves hit Ghost-types,
+    // Foresight identifies the foe, and Gravity grounds a Flying target.
+    let defenderTypesForMove =
       (abilityHitsGhost(attack.attacker) || attack.defender.identified) &&
       (effectiveMove.type === 'Normal' || effectiveMove.type === 'Fighting')
         ? attack.defender.types.filter((type) => type !== 'Ghost')
         : attack.defender.types
+    if (effectiveMove.type === 'Ground' && (attack.defender.gravityTurns ?? 0) > 0)
+      defenderTypesForMove = defenderTypesForMove.filter((type) => type !== 'Flying')
     const attackStat =
         (moveDef.category === 'physical'
           ? attack.attacker.status === 'burn'
@@ -1955,7 +2021,13 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           canEvolveFurther(attack.attacker.speciesKey)
         ),
       defenseStat =
-        (moveDef.category === 'physical' ? attack.defender.defense : attack.defender.spDefense) *
+        (moveDef.category === 'physical'
+          ? (attack.attacker.wonderRoomTurns ?? 0) > 0 || (attack.defender.wonderRoomTurns ?? 0) > 0
+            ? attack.defender.spDefense
+            : attack.defender.defense
+          : (attack.attacker.wonderRoomTurns ?? 0) > 0 || (attack.defender.wonderRoomTurns ?? 0) > 0
+            ? attack.defender.defense
+            : attack.defender.spDefense) *
         terrainAbilityMultiplier(
           activeTerrain,
           attack.defender,
@@ -2103,6 +2175,13 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     if (attack.attacker.charged && effectiveMove.type === 'Electric') {
       totalDamage = Math.max(1, Math.floor(totalDamage * 2))
       attack.attacker.charged = false
+    }
+    // Mud Sport weakens Electric moves and Water Sport weakens Fire moves.
+    if ((attack.attacker.sportTurns ?? 0) > 0) {
+      if (attack.attacker.sportType === 'mud' && effectiveMove.type === 'Electric')
+        totalDamage = Math.max(1, Math.floor(totalDamage / 2))
+      if (attack.attacker.sportType === 'water' && effectiveMove.type === 'Fire')
+        totalDamage = Math.max(1, Math.floor(totalDamage / 2))
     }
     if (abilityHalvesSuperEffective(attack.defender, attack.attacker) && damageResult.effectiveness > 1)
       totalDamage = Math.max(1, Math.floor(totalDamage / 2))

@@ -344,6 +344,20 @@ type VolatileState = {
   tormentTurns?: number
   /** Nightmare is active (sleeping target takes damage each turn). */
   nightmare?: boolean
+  /** Turns of Gravity left (grounds Flying types). */
+  gravityTurns?: number
+  /** Turns the Pokemon is telekinetically lifted. */
+  telekinesisTurns?: number
+  /** Turns a weakened type (Mud Sport / Water Sport) lasts. */
+  sportTurns?: number
+  /** The weakened type: 'mud' (Electric) or 'water' (Fire). */
+  sportType?: string | null
+  /** Turns the holder cannot use its held item (Embargo). */
+  embargoTurns?: number
+  /** Turns of Wonder Room left (Defense and Sp. Def are swapped). */
+  wonderRoomTurns?: number
+  /** Powdered: the next Fire move explodes. */
+  powdered?: boolean
   /** Leaf Guard is active because the sun is shining this turn. */
   leafGuardActive?: boolean
   /** Pending Cud Chew heal (the berry eaten last turn). */

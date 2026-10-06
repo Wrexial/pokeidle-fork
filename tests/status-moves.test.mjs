@@ -907,3 +907,35 @@ test('the second batch of utility moves works', () => {
     assert.ok((chanter.luckyChantTurns ?? 0) > 0)
   })
 })
+
+test('field moves: Gravity, Telekinesis, Mud Sport, Powder and Wonder Room', () => {
+  withFixedRandom(0.5, () => {
+    // Gravity grounds a Flying target for Ground moves.
+    const quaker = battler({ name: 'Player', isPlayer: true, moves: ['earthquake'], speed: 200, attack: 300 }),
+      flyer = battler({ name: 'Foe', moves: ['splash'], types: ['Normal', 'Flying'], currentHp: 400, maxHp: 400, gravityTurns: 5 })
+    turn(quaker, flyer)
+    assert.ok(flyer.currentHp < 400, 'Gravity grounds the Flying type')
+
+    // Telekinesis blocks Ground moves and sets the timer.
+    const lifter = battler({ name: 'Player', isPlayer: true, moves: ['telekinesis'], speed: 200 }),
+      lifted = battler({ name: 'Foe', moves: ['splash'] })
+    turn(lifter, lifted)
+    assert.ok((lifted.telekinesisTurns ?? 0) > 0)
+
+    // Mud Sport halves Electric damage.
+    const damage = (/** @type {boolean} */ sport) => {
+      const player = battler({ name: 'Player', isPlayer: true, moves: ['thunderbolt'], speed: 200, spAttack: 300, sportTurns: sport ? 5 : 0, sportType: sport ? 'mud' : null }),
+        enemy = battler({ name: 'Foe', moves: ['splash'], types: ['Normal'], currentHp: 4000, maxHp: 4000 })
+      turn(player, enemy)
+      return 4000 - enemy.currentHp
+    }
+    assert.ok(damage(true) < damage(false), 'Mud Sport weakens Electric moves')
+
+    // Powder detonates on a Fire move.
+    const powdered = battler({ name: 'Player', isPlayer: true, moves: ['flamethrower'], speed: 200, spAttack: 300, currentHp: 400, maxHp: 400, powdered: true }),
+      dummy = battler({ name: 'Foe', moves: ['splash'], types: ['Normal'], currentHp: 400, maxHp: 400 })
+    turn(powdered, dummy)
+    assert.ok(powdered.currentHp < 400, 'the powder exploded')
+    assert.equal(dummy.currentHp, 400, 'the Fire move never landed')
+  })
+})

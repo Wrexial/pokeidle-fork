@@ -243,7 +243,7 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
     }
     // Ripen doubles a berry's healing; an opponent's Unnerve blocks it entirely.
     const berryHeal =
-      abilityBlocksBerries(isPlayerSide ? enemy : player)
+      abilityBlocksBerries(isPlayerSide ? enemy : player) || (pokemon.embargoTurns ?? 0) > 0
         ? 0
         : heldBerryHeal(pokemon) * (abilityOf(pokemon) === 'ripen' ? 2 : 1)
     if (berryHeal > 0) {
@@ -441,6 +441,11 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
     if ((pokemon.healBlockTurns ?? 0) > 0) pokemon.healBlockTurns -= 1
     if ((pokemon.magnetRiseTurns ?? 0) > 0) pokemon.magnetRiseTurns -= 1
     if ((pokemon.luckyChantTurns ?? 0) > 0) pokemon.luckyChantTurns -= 1
+    if ((pokemon.gravityTurns ?? 0) > 0) pokemon.gravityTurns -= 1
+    if ((pokemon.telekinesisTurns ?? 0) > 0) pokemon.telekinesisTurns -= 1
+    if ((pokemon.sportTurns ?? 0) > 0) pokemon.sportTurns -= 1
+    if ((pokemon.embargoTurns ?? 0) > 0) pokemon.embargoTurns -= 1
+    if ((pokemon.wonderRoomTurns ?? 0) > 0) pokemon.wonderRoomTurns -= 1
     if ((pokemon.trickRoomTurns ?? 0) > 0) pokemon.trickRoomTurns -= 1
     if ((pokemon.destinyBondTurns ?? 0) > 0) pokemon.destinyBondTurns -= 1
     if ((pokemon.slowStartTurns ?? 0) > 0) pokemon.slowStartTurns -= 1

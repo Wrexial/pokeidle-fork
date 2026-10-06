@@ -25,8 +25,8 @@ Applied: `Pickup`, `Honey Gather`, `Ball Fetch`, `Illuminate` (item drops),
 `Illusion` (wild disguise), `Flame Body` / `Magma Armor` / `Steam Engine`
 (egg hatching), `Static` / `Lightning Rod` / `Magnet Pull` / `Storm Drain`
 (encounter type bias), `Cute Charm` (wild gender), `Super Luck` /
-`Compound Eyes` (wild held items), and `Multitype` / `RKS System`
-(type from the held booster).
+`Compound Eyes` (wild held items), `Suction Cups` / `Sticky Hold` (fishing
+bite chance), and `Multitype` / `RKS System` (type from the held booster).
 
 Intentionally not applied, because the mechanic they hook does not exist here:
 - `Synchronize` (wild nature) — wild Pokemon have no nature in this game, so
@@ -34,8 +34,6 @@ Intentionally not applied, because the mechanic they hook does not exist here:
   stats, so it is out of scope.
 - `Stench` / `Sand Veil` / `Snow Cloak` (lower/alter the wild encounter rate) —
   encounters are tick-driven, not rate-based, so there is no rate to alter.
-- `Suction Cups` / `Sticky Hold` (fishing bite rate) — the fishing minigame has
-  no bite-chance roll.
 
 ## The only thing left: PP (4 entries)
 

@@ -160,6 +160,20 @@ export const ACTIVITY_SHINY_MULTIPLIER = { hit: 2, perfect: 3, ultra: 4 }
 /** Chance a hit / perfect / ultra encounter is holding an item. */
 const ACTIVITY_HELD_ITEM_CHANCE = { hit: 0.25, perfect: 0.6, ultra: 1 }
 
+/** Base chance a fishing cast gets a bite. */
+export const ACTIVITY_BITE_CHANCE = 0.6
+
+/**
+ * The chance a fishing cast gets a bite. Suction Cups and Sticky Hold keep the
+ * line steady and add 25%.
+ * @param {string | null | undefined} ability
+ * @returns {number}
+ */
+export function activityBiteChance(ability) {
+  const bonus = ability === 'suctionCups' || ability === 'stickyHold' ? 0.25 : 0
+  return Math.min(1, ACTIVITY_BITE_CHANCE + bonus)
+}
+
 /**
  * @param {'hit' | 'perfect' | 'ultra'} quality
  * @returns {number}
@@ -200,7 +214,7 @@ export function rollActivityHeldItem(quality, types) {
  * @param {boolean} perfect
  * @param {string} [rodId]
  * @param {string | null} [monotype] Monotype challenge: only this type may appear.
- * @returns {{ speciesKey: string, level: number, isWater: boolean } | null}
+ * @returns {{ speciesKey: string, level: number, isWater: boolean, multi: boolean } | null}
  */
 export function rollActivityEncounter(activityId, routeKey, perfect, rodId = DEFAULT_ROD, monotype = null) {
   const activity = ROUTE_ACTIVITIES[activityId],
@@ -224,6 +238,7 @@ export function rollActivityEncounter(activityId, routeKey, perfect, rodId = DEF
         (perfect ? 1 : 0) +
         (activity.id === 'fishing' ? rod.levelBonus : 0),
       isWater: speciesHasType(speciesKey, 'Water'),
+      multi: false,
     }
   }
   if (table.length === 0) return null
@@ -247,6 +262,10 @@ export function rollActivityEncounter(activityId, routeKey, perfect, rodId = DEF
           .slice(0, Math.max(1, Math.ceil(typePool.length * rod.rarity)))
       : typePool,
     sorted = [...reachable].sort((left, right) => left.weight - right.weight),
+    // The rarest third of the reachable fish are "multi-catch": a first perfect
+    // hook is not enough, the reel must be timed perfectly a second time.
+    multiCutoff =
+      sorted.length >= 3 ? sorted[Math.max(0, Math.floor((sorted.length - 1) / 3))].weight : -1,
     candidates = (perfect || activity.deepWater)
       ? sorted.slice(0, Math.max(1, Math.ceil(sorted.length / 2)))
       : reachable,
@@ -264,6 +283,7 @@ export function rollActivityEncounter(activityId, routeKey, perfect, rodId = DEF
           (perfect ? 1 : 0) +
           levelBonus,
         isWater: (pokemonSpecies[entry.speciesKey]?.types ?? []).includes('Water'),
+        multi: rodGated && entry.weight <= multiCutoff,
       }
   }
   const fallback = candidates[candidates.length - 1]
@@ -271,6 +291,7 @@ export function rollActivityEncounter(activityId, routeKey, perfect, rodId = DEF
     speciesKey: fallback.speciesKey,
     level: fallback.minLevel + levelBonus,
     isWater: false,
+    multi: false,
   }
 }
 
@@ -283,7 +304,7 @@ export function rollActivityEncounter(activityId, routeKey, perfect, rodId = DEF
  * @param {boolean} perfect
  * @param {string} [rodId]
  * @param {string | null} [monotype] Monotype challenge: only this type may appear.
- * @returns {{ speciesKey: string, level: number, isWater: boolean }[]}
+ * @returns {{ speciesKey: string, level: number, isWater: boolean, multi: boolean }[]}
  */
 export function rollActivityEncounters(activityId, routeKey, perfect, rodId = DEFAULT_ROD, monotype = null) {
   const first = rollActivityEncounter(activityId, routeKey, perfect, rodId, monotype)

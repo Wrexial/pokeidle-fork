@@ -18,6 +18,7 @@ import {
   ACTIVITY_ULTRA_ZONE,
   ROUTE_ACTIVITIES,
   activityLevelBonus,
+  activityBiteChance,
   activityRewardName,
   activityShinyMultiplier,
   bestRodId,
@@ -45,9 +46,12 @@ export function RouteActivityScene() {
     [charge, setCharge] = React.useState(0),
     [chargingTree, setChargingTree] = React.useState(/** @type {number | null} */ (null)),
     [stage, setStage] = React.useState(
-      /** @type {'aiming' | 'encounter' | 'result' | 'done'} */ ('aiming')
+      /** @type {'aiming' | 'reel' | 'encounter' | 'result' | 'done'} */ ('aiming')
     ),
     [message, setMessage] = React.useState(''),
+    [reel, setReel] = React.useState(
+      /** @type {{ encounters: any[], quality: ActivityQuality } | null} */ (null)
+    ),
     [found, setFound] = React.useState(/** @type {{ itemId: string, quantity: number }[]} */ ([])),
     [pendings, setPendings] = React.useState(
       /** @type {{ enemy: any, speciesKey: string, level: number, isShiny: boolean, quality: ActivityQuality, heldItem: string | null, levelBonus: number, shinyMultiplier: number }[]} */ (
@@ -61,7 +65,7 @@ export function RouteActivityScene() {
   // Sweep the marker back and forth while the player is aiming. Headbutt drives
   // its own charge bar from the held tree instead.
   React.useEffect(() => {
-    if (stage !== 'aiming' || activity?.display === 'charge') return
+    if ((stage !== 'aiming' && stage !== 'reel') || activity?.display === 'charge') return
     let frame = 0
     const start = performance.now()
     const loop = /** @param {number} now */ (now) => {
@@ -213,12 +217,31 @@ export function RouteActivityScene() {
     }
     if (state.sfxEnabled) playSfx(ultra || perfect ? 'great' : 'good')
     if (activity.mode === 'encounter') {
+      // Fishing can whiff the bite entirely; Suction Cups / Sticky Hold steady
+      // the line. A perfect cast always gets a bite.
+      if (
+        activity.id === 'fishing' &&
+        !perfect &&
+        Math.random() >= activityBiteChance(state.playerPokemon?.ability)
+      ) {
+        setMessage('Nothing is biting...')
+        setStage(nextAttempts <= 0 ? 'done' : 'result')
+        return
+      }
       // A headbutted tree sometimes shakes out a second Pokemon that slips away
       // while you deal with the first.
       const encounters = rollActivityEncounters(activity.id, routeKey, perfect, rod.id, state.challengeMonotype)
       if (encounters.length === 0) {
         setMessage('Nothing is biting here.')
         setStage(nextAttempts <= 0 ? 'done' : 'result')
+        return
+      }
+      // A rare multi-catch fish needs a second, perfect reel before it is
+      // actually hooked.
+      if (activity.id === 'fishing' && encounters[0]?.multi) {
+        setReel({ encounters, quality })
+        setMessage('It\u2019s a big one \u2014 reel it in perfectly again!')
+        setStage('reel')
         return
       }
       previewEncounter(encounters, quality)
@@ -249,6 +272,35 @@ export function RouteActivityScene() {
 
   function stop() {
     resolveAt(position)
+  }
+
+  /**
+   * The second reel for a multi-catch fish: only a perfect timing lands it.
+   * @param {number} aimPosition
+   */
+  function resolveReel(aimPosition) {
+    if (!reel || stage !== 'reel') return
+    const distance = Math.abs(aimPosition - 0.5),
+      perfect = distance <= ACTIVITY_PERFECT_ZONE
+    if (!perfect) {
+      if (state.sfxEnabled) playSfx('miss')
+      setMessage(
+        `The ${
+          pokemonSpecies[reel.encounters[0].speciesKey]?.name ?? 'fish'
+        } thrashed free \u2014 it needed a second perfect reel!`
+      )
+      setReel(null)
+      setStage(attemptsLeft <= 0 ? 'done' : 'result')
+      return
+    }
+    if (state.sfxEnabled) playSfx('great')
+    const { encounters, quality } = reel
+    setReel(null)
+    previewEncounter(encounters, quality)
+  }
+
+  function reelStop() {
+    resolveReel(position)
   }
 
   /** @param {number} index */
@@ -504,7 +556,7 @@ export function RouteActivityScene() {
                       ],
                     })
                   : jsxs('div', {
-                      className: `activity-bar${stage === 'aiming' ? '' : ' locked'}`,
+                      className: `activity-bar${stage === 'aiming' || stage === 'reel' ? '' : ' locked'}`,
                       children: [
                         jsx('div', {
                           className: 'activity-zone activity-zone-hit',
@@ -538,15 +590,15 @@ export function RouteActivityScene() {
       jsx('div', {
         className: 'minigame-scene-footer',
         children:
-          stage === 'aiming'
+          stage === 'aiming' || stage === 'reel'
             ? jsxs('div', {
                 className: 'activity-actions',
                 children: [
                   activity.display !== 'charge' &&
                     jsx('button', {
                       className: 'move-panel-btn confirm',
-                      onClick: stop,
-                      children: activity.action,
+                      onClick: stage === 'reel' ? reelStop : stop,
+                      children: stage === 'reel' ? 'REEL IN' : activity.action,
                     }),
                   jsx('button', {
                     className: 'move-panel-btn',

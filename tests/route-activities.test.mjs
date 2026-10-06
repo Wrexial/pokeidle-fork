@@ -7,11 +7,13 @@ const gameData = installGameData()
 
 const {
   ACTIVITY_ATTEMPTS,
+  ACTIVITY_BITE_CHANCE,
   ACTIVITY_HIT_ZONE,
   ACTIVITY_PERFECT_ZONE,
   ACTIVITY_ULTRA_ZONE,
   FISHING_LOCATIONS,
   ROUTE_ACTIVITIES,
+  activityBiteChance,
   activityLevelBonus,
   activityRewardName,
   activityShinyMultiplier,
@@ -31,6 +33,30 @@ const { mapData, pokemonSpecies, mapEncounterData: encounterData } = gameData,
   waterRoute = locations.find((location) => routeActivityIds(location).includes('fishing')),
   forageRoute = locations.find((location) => routeActivityIds(location).includes('forage')),
   town = locations.find((location) => location.type === 'town')
+
+test('Suction Cups and Sticky Hold improve the fishing bite chance', () => {
+  assert.equal(activityBiteChance(null), ACTIVITY_BITE_CHANCE)
+  assert.equal(activityBiteChance('overgrow'), ACTIVITY_BITE_CHANCE)
+  assert.ok(activityBiteChance('suctionCups') > ACTIVITY_BITE_CHANCE)
+  assert.ok(activityBiteChance('stickyHold') > ACTIVITY_BITE_CHANCE)
+  assert.ok(activityBiteChance('suctionCups') <= 1, 'the chance never exceeds 100%')
+})
+
+test('the rarest fish on a route are flagged multi-catch', () => {
+  const original = Math.random,
+    flags = new Set()
+  try {
+    for (let index = 0; index < 400; index++) {
+      Math.random = () => (index + 0.5) / 400
+      const encounter = rollActivityEncounter('fishing', waterRoute.routeKey, true, 'superRod')
+      if (encounter) flags.add(encounter.multi)
+    }
+  } finally {
+    Math.random = original
+  }
+  assert.ok(flags.has(true), 'some fish need a second perfect reel to land')
+  assert.ok(flags.has(false), 'common fish are hooked on the first perfect')
+})
 
 test('route activities are offered by terrain', () => {
   assert.ok(waterRoute, 'some route supports fishing')

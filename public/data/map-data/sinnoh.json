@@ -1373,14 +1373,7 @@
    ],
    "gymsRequired": [
     "sinnoh-gym-8"
-   ],
-   "caughtOnRoute": {
-    "routeKey": "sinnoh-route-222",
-    "species": [
-     "luxio"
-    ],
-    "count": 1
-   }
+   ]
   },
   "unlockOrder": 400227,
   "position": {
@@ -1412,13 +1405,6 @@
    "gymsRequired": [
     "sinnoh-gym-8"
    ],
-   "caughtOnRoute": {
-    "routeKey": "sinnoh-route-222",
-    "species": [
-     "luxio"
-    ],
-    "count": 1
-   },
    "partyLevel": 62
   },
   "unlockOrder": 400228,

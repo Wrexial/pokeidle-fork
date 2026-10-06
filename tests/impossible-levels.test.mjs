@@ -69,10 +69,12 @@ test('the Akala Island gate asks for a Pokemon that spawns on Route 3', () => {
   assert.equal(gate.count, 1, 'either Alolan form satisfies the gate')
 })
 
-test('the Alola Route 3 gate lists every Route 1 exclusive but only asks for 3', () => {
+test('the Alola Route 3 gate lists every Route 1 exclusive but only asks for the common ones', () => {
   const gate = mapData['alola-route-3']?.unlock?.caughtOnRoute
   assert.ok(gate, 'the Route 3 gate exists')
-  assert.equal(gate.count, 3)
+  // Snorlax and Munchlax are the common exclusives; Litten and Rowlet are
+  // weight-1 starter lines, so the ask must not depend on them.
+  assert.equal(gate.count, 2)
   // Every species exclusive to Route 1 (ignoring raid buckets) is offered.
   const routesBySpecies = {}
   for (const [routeKey, bucket] of Object.entries(encounterData)) {

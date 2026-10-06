@@ -76,8 +76,9 @@ for (const [locationId, location] of Object.entries(mapData)) {
   }
   const keys = exclusives.map((entry) => entry.key)
   // Keep the gate's hand-tuned ask (some gates deliberately want only one of
-  // two forms); only shrink it when the refreshed list can no longer cover it.
-  const count = Math.max(1, Math.min(gate.count ?? keys.length, keys.length))
+  // two forms), but never ask for more than the route's common exclusives:
+  // a rare or night-only find should be a bonus, not a requirement.
+  const count = Math.max(1, Math.min(gate.count ?? keys.length, common.length))
   if (JSON.stringify(gate.species) !== JSON.stringify(keys) || gate.count !== count) {
     location.unlock.caughtOnRoute = { routeKey: gate.routeKey, species: keys, count }
     changedRegions.add(region)

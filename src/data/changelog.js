@@ -63,6 +63,7 @@ export const CHANGELOG = [
             'The Battle Maison\u2019s ally abilities (Battery, Power Spot, Friend Guard and Healer) are listed as implemented on the Battle Reference now instead of inert',
             'Poni Island is reachable again: the island hub used to require Hapu\u2019s trial, but Hapu stands on Poni itself, so the island\u2019s areas, its league and its Raid Island could never open. It now opens after Nanu, the last Ula\u2019ula grand trial',
             'Route-exclusive catch gates were refreshed against the current wild tables: a gate whose named species had since been spread onto other routes now lists the species that are genuinely exclusive to its route, and a gate whose route has no exclusives left was dropped (its other requirements stay)',
+            'Route-exclusive catch gates no longer send you hunting a night-only Pokemon or a 1%-weight starter: a gate now asks for no more than a route\u2019s common finds (Alola\u2019s Route 3 asks for two of four instead of three, Paldea\u2019s North Province and Unova\u2019s Lacunosa Town likewise), and Sinnoh\u2019s Route 222 gate \u2014 whose only exclusive, Luxio, appears solely at night \u2014 was dropped, so Routes 227 and 228 open from their battles and badge instead',
           ],
         },
       ],

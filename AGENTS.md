@@ -686,8 +686,11 @@ One-off scripts used to build the data JSON (not run during dev/build):
   (`caughtCount`) or a party level (`partyLevel`). Where the parent route has
   species that spawn nowhere else in the game, the Pokedex-count gate is
   replaced by `caughtOnRoute` (catch a few of those route-exclusive species),
-  and battle-only gates may gain the same check; legendaries, starters and
-  ultra-rare (weight 1-2) finds are left out so the goal stays reasonable.
+  and battle-only gates may gain the same check; legendaries, starters,
+  ultra-rare (weight 1-2) finds and day/night-gated species are left out of the
+  *ask* (the gate can never demand more than the route's common exclusives, and
+  a route whose only exclusive is one of those keeps its `caughtCount` or the
+  battle gate), so the goal stays reasonable.
   Generated regions reveal any gym whose town is
   unlocked; Kanto keeps its badge-order reveal. Gym, Elite Four and Champion
   teams are type-themed from `GYM_TYPES` / `E4_TYPES` / `CHAMPION_TYPES` (drawn

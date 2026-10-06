@@ -2,11 +2,12 @@
 //
 // "Exclusive" means the species turns up on no other wild route in any region
 // (Raid Islands don't count); legendaries and near-uncatchable finds are
-// skipped. A "common" exclusive is one that isn't a starter line and doesn't
-// have a weight below `MIN_WEIGHT` (a route whose only exclusives are that rare
-// keeps its `caughtCount` instead). Mirrors the pass in
-// `tools/generate-regions.cjs` so the committed data and a fresh generation
-// agree.
+// skipped. A "common" exclusive is one that isn't a starter line, doesn't have
+// a weight below `MIN_WEIGHT`, and isn't day/night-gated (a route whose only
+// exclusives are that rare or phase-locked keeps its `caughtCount` instead, so
+// a gate never forces a hunt for a 1% spawn or a species that only appears at
+// night). Mirrors the pass in `tools/generate-regions.cjs` so the committed
+// data and a fresh generation agree.
 const MIN_WEIGHT = 3
 
 /**
@@ -55,7 +56,8 @@ export function buildRouteExclusives({ mapData, encounterData, species, evolutio
     ;(exclusiveByRoute[routeKey] ??= []).push({
       key: speciesKey,
       weight: wild.weight ?? 0,
-      common: (wild.weight ?? 0) >= MIN_WEIGHT && !starterLines.has(speciesKey),
+      common:
+        (wild.weight ?? 0) >= MIN_WEIGHT && !starterLines.has(speciesKey) && !wild.time,
     })
   }
   for (const list of Object.values(exclusiveByRoute))

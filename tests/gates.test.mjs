@@ -49,9 +49,13 @@ test('caughtOnRoute gates only ask for species still exclusive to their route', 
       exclusives,
       `${locationId} should list exactly ${gate.routeKey}'s current exclusives`
     )
+    // The ask must be satisfiable from the common (not rare, not starter, not
+    // day/night-gated) exclusives, so the player is never forced to hunt a 1%
+    // spawn or wait for nightfall.
+    const common = (exclusiveByRoute[gate.routeKey] ?? []).filter((entry) => entry.common)
     assert.ok(
-      gate.count >= 1 && gate.count <= Math.min(3, exclusives.length),
-      `${locationId} asks for ${gate.count} of ${exclusives.length} exclusives`
+      gate.count >= 1 && gate.count <= Math.min(3, common.length),
+      `${locationId} asks for ${gate.count} of ${common.length} common exclusives`
     )
   }
   assert.ok(checked > 0, 'there are caughtOnRoute gates to check')

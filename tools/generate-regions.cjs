@@ -2231,10 +2231,11 @@ for (const [speciesKey, routes] of Object.entries(routesBySpecies)) {
   const wild = encounterData[routeKey]?.encounters?.find((e) => e.speciesKey === speciesKey)
   if (!wild) continue
   ;(exclusiveSpeciesByRoute[routeKey] ??= []).push(speciesKey)
-  // Ultra-rare finds (weight 1-2) still count as exclusives for the checklist,
-  // but a route whose only exclusives are that rare keeps its `caughtCount`
-  // rather than turning a flavour check into a chore.
-  if (wild.weight >= ROUTE_CATCH_MIN_WEIGHT && !ALL_STARTERS.has(speciesKey))
+  // Ultra-rare finds (weight 1-2), starter lines and day/night-gated species
+  // still count as exclusives for the checklist, but a route whose only
+  // exclusives are that rare or phase-locked keeps its `caughtCount` rather
+  // than turning a flavour check into a chore (or a wait for nightfall).
+  if (wild.weight >= ROUTE_CATCH_MIN_WEIGHT && !ALL_STARTERS.has(speciesKey) && !wild.time)
     (commonExclusiveSpeciesByRoute[routeKey] ??= []).push(speciesKey)
 }
 for (const location of Object.values(mapData)) {
@@ -2244,12 +2245,14 @@ for (const location of Object.values(mapData)) {
   const exclusives = exclusiveSpeciesByRoute[routeKey] ?? []
   if (exclusives.length > 0 && (commonExclusiveSpeciesByRoute[routeKey] ?? []).length > 0) {
     // List every exclusive so the player can catch any few of them, rather
-    // than being forced through a specific handful.
+    // than being forced through a specific handful. The ask never exceeds the
+    // count of common exclusives, so a rare or night-only find is always a
+    // bonus rather than a requirement.
     delete unlockRule.caughtCount
     unlockRule.caughtOnRoute = {
       routeKey,
       species: exclusives,
-      count: Math.min(ROUTE_CATCH_LIMIT, exclusives.length),
+      count: Math.min(ROUTE_CATCH_LIMIT, commonExclusiveSpeciesByRoute[routeKey].length),
     }
   }
   delete unlockRule.routeCatchParent

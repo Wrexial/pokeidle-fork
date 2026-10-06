@@ -6630,6 +6630,14 @@ img {
     cursor: default
 }
 
+.pokedex-route-link.raid:not(.locked) {
+    color: #8a4a2a
+}
+
+.pokedex-route-link.raid:not(.locked):hover {
+    color: #5a2a10
+}
+
 .battle-info-btn {
     position: absolute;
     top: 6px;

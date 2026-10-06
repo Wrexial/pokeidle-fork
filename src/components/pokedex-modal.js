@@ -10,10 +10,13 @@ import {
   formLabelFor,
   formsByBase,
   isSpeciesRegistered,
+  mapData,
   pokedexData,
   pokedexIndexes,
   pokemonSpecies,
+  raidPoolFor,
 } from '../data/gameData.js'
+import { pickRaidLegendary, raidProgressFor } from '../game/progression.js'
 import { useGame } from '../game/context.js'
 import { useUi } from '../game/ui-context.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
@@ -253,10 +256,17 @@ export function PokedexModal({ onClose, inline = false }) {
                   children: [
                     jsx('span', {
                       className: 'pokedex-modal-routes-label',
-                      children: 'Routes: ',
+                      children: 'Found: ',
                     }),
                     pokedexData[activeKey].map((route, index) => {
-                      const unlocked = state.unlockedLocations.includes(route.id)
+                      const location = mapData[route.id],
+                        isRaid = location?.type === 'raid',
+                        unlocked = state.unlockedLocations.includes(route.id),
+                        raidCoolingDown =
+                          isRaid &&
+                          state.raidCooldownEnd != null &&
+                          Date.now() < state.raidCooldownEnd,
+                        canUse = unlocked && !raidCoolingDown
                       return jsxs(
                         'span',
                         {
@@ -265,13 +275,44 @@ export function PokedexModal({ onClose, inline = false }) {
                           },
                           children: [
                             jsx('button', {
-                              className: `pokedex-route-link${unlocked ? '' : ' locked'}`,
-                              disabled: !unlocked,
-                              title: unlocked
-                                ? `Travel to ${route.name}`
-                                : `${route.name} \u2014 not unlocked yet`,
-                              onClick: () =>
-                                dispatch({ type: 'TRAVEL', payload: { locationId: route.id } }),
+                              className: `pokedex-route-link${unlocked ? '' : ' locked'}${isRaid ? ' raid' : ''}`,
+                              disabled: !canUse,
+                              title: !unlocked
+                                ? `${route.name} \u2014 not unlocked yet`
+                                : raidCoolingDown
+                                  ? `${route.name} \u2014 the raid is recharging`
+                                  : isRaid
+                                    ? `Start a raid at ${route.name}`
+                                    : `Travel to ${route.name}`,
+                              onClick: () => {
+                                // A Raid Island isn't a route: start the raid
+                                // (for the species shown, when it is on the
+                                // roster) instead of travelling there.
+                                if (isRaid) {
+                                  const region = location.region ?? 'kanto',
+                                    pool = raidPoolFor(region),
+                                    target =
+                                      pool.find((entry) => entry.speciesKey === activeKey) ??
+                                      pickRaidLegendary(
+                                        pool,
+                                        state.pokedexSeen,
+                                        state.pokedexCaught,
+                                        raidProgressFor(state, region)
+                                      )
+                                  if (!target) return
+                                  dispatch({
+                                    type: 'START_RAID',
+                                    payload: {
+                                      legendary: target.speciesKey,
+                                      level: target.level,
+                                      region,
+                                      location: route.id,
+                                    },
+                                  })
+                                  return
+                                }
+                                dispatch({ type: 'TRAVEL', payload: { locationId: route.id } })
+                              },
                               children: route.name,
                             }),
                             index < pokedexData[activeKey].length - 1 ? ', ' : '',

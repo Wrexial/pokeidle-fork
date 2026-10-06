@@ -68,6 +68,7 @@ export const CHANGELOG = [
           heading: 'Fixes',
           items: [
             'The Pokedex entry panel gained a close (X) button, so a Pokemon whose entry fills the panel can be deselected without having to find the grid tile again',
+            'A Raid Island link in a Pokedex entry starts the raid for the Pokemon shown now, instead of just travelling to the island as if it were a route',
             'Ten item-manipulating moves no longer look inert: Knock Off, Thief, Covet, Pluck, Bug Bite, Incinerate, Power Split, Guard Split, Speed Swap and Heal Block now show what they do in their tooltip (and the Battle Reference lists them as implemented) instead of being marked as having no effect',
             'The Battle Maison\u2019s ally abilities (Battery, Power Spot, Friend Guard and Healer) are listed as implemented on the Battle Reference now instead of inert',
             'Poni Island is reachable again: the island hub used to require Hapu\u2019s trial, but Hapu stands on Poni itself, so the island\u2019s areas, its league and its Raid Island could never open. It now opens after Nanu, the last Ula\u2019ula grand trial',

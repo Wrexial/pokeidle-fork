@@ -8,14 +8,17 @@ inert and what each item needs. **We will pick these up later.**
 
 - **Moves:** 934 total, **14 still inert** (everything else has a real effect or
   is a plain attack).
-- **Abilities:** 313 total, **12 still inert**.
+- **Abilities:** 313 total, **3 still inert**.
 - `public/reference.html` (generated) marks the same items as "Not implemented";
   it is the living source of truth for this list.
-- `npm test` (912), `npm run typecheck`, `npm run validate` and `npm run build`
+- `npm test` (919), `npm run typecheck`, `npm run validate` and `npm run build`
   all pass as of commit `c756d84b`.
 
-The remaining items fall into a few buckets, each of which needs a *system*
-rather than a one-off hook.
+Done since this note was first written: the mid-battle **switch system** and
+all its moves/abilities, the **Battle Maison doubles niches** (Commander,
+Dancer, Flower Veil, Power of Alchemy, Receiver, Symbiosis, Telepathy), and the
+two **out-of-battle abilities** (Illuminate's item-drop bonus, Illusion's wild
+disguise).
 
 ## Remaining moves (14)
 
@@ -34,8 +37,7 @@ rather than a one-off hook.
   and `Instruct` (repeat the ally's last move) needs an action replay the module
   does not model.
 - Everything else doubles-only is done (redirects, Helping Hand, After You,
-  Quash, Gear Up, Coaching, and the ally abilities Battery/Power Spot/Friend
-  Guard/Healer/Hospitality/Costar/Curious Medicine/Steely Spirit/Plus/Minus).
+  Quash, Gear Up, Coaching, Telepathy, and the ally abilities).
 
 ### Move-copy / item-lock (4)
 `Mimic`, `Sketch`, `Snatch`, `Magic Room`
@@ -53,31 +55,13 @@ rather than a one-off hook.
   money; `Fairy Lock` stops switching for a turn in doubles). They are
   deliberately inert and effectively "done".
 
-## Remaining abilities (12)
+## Remaining abilities (3)
 
-### Doubles-only niches (7)
-`Commander`, `Dancer`, `Flower Veil`, `Power of Alchemy`, `Receiver`,
-`Symbiosis`, `Telepathy`
-- `Commander` (Tatsugiri + Dondozo) is a whole duo mechanic.
-- `Dancer` copies a dance move an ally used mid-round.
-- `Flower Veil` blocks allies' stat drops / status (Grass only).
-- `Power of Alchemy` / `Receiver` copy a fainted ally's ability.
-- `Symbiosis` hands the holder's item to an ally.
-- `Telepathy` avoids ally-targeted damage (the Maison has no ally-damaging
-  moves, so there is nothing to dodge).
-- All live in `src/game/minigames/doubles.js`; add a round-start pass or a
-  damage/effect hook there.
-
-### Needs a system (3)
 - `Pressure` — PP (see above). Doubles the foe's PP usage; does nothing else.
 - `Multitype` / `RKS System` — Arceus / Silvally change type with the held
   plate / memory. Only `ironPlate` and `pixiePlate` exist as items today; the
   other 16 plates and all memories would need adding (`src/data/items.js`) plus
   a type-from-item resolution in `createBattlePokemon`/`turn.js`.
-
-### Cosmetic / no battle effect (2)
-`Illusion` (cosmetic disguise — the game shows the real species, so nothing to
-change) and `Illuminate` (no battle effect in the modern games).
 
 ## How to add one (for when we return to this)
 
@@ -94,21 +78,28 @@ change) and `Illuminate` (no battle effect in the modern games).
 
 ### An ability
 1. Add a helper in `src/game/abilities.js`, or inline it where it applies
-   (`turn.js`, `status.js`, `end-of-turn.js`, `reducer/battle/events.js`).
+   (`turn.js`, `status.js`, `end-of-turn.js`, `reducer/battle/events.js`,
+   `minigames/doubles.js`).
 2. Add a curated entry to `src/data/ability-info.js` — **that map is what marks
    an ability as implemented** on the reference page and gives it a tooltip.
-3. Add a test (`tests/abilities.test.mjs`).
+3. Add a test (`tests/abilities.test.mjs`, `tests/doubles.test.mjs`).
 4. `node tools/generate-reference.cjs` (it also cross-checks that an ability
    listed in `ability-info.js` actually appears in the engine source and warns
    otherwise — so no silent mismatches).
 
 ### New volatile battle flags
 Add the field in three places, or it will silently not persist:
-- `src/types.d.ts` (`VolatileState`),
+- `src/types.d.ts` (`VolatileState` / `BattlePokemon`),
 - `src/game/combat/volatile.js` (`createVolatileState` **and**
   `volatileStateFromBattle`),
 - `src/game/reducer/battle/effects.js` (`updateVolatile`, for the enemy).
 And copy it into the player battler in `src/game/use-game-loop.js`.
+
+### Out-of-battle abilities
+These live in the wild-win handler in `src/game/reducer/battle/events.js`
+(Pickup, Honey Gather, and now Illuminate's drop multiplier). Illusion's
+disguise is set in `startEncounter` and broken on the first damaging hit in
+`consumeEvent`; the battle scene renders `enemyPokemon.disguisedAs`.
 
 ## Reference
 
@@ -119,4 +110,5 @@ And copy it into the player battler in `src/game/use-game-loop.js`.
   `tools/fix-stat-changes.cjs`, `tools/fetch-abilities.cjs`.
 - The Z-Move / Max-Move tables: `src/data/z-moves.js`,
   `src/data/max-moves.js` (generated).
-- Switch system notes are in the commit `c756d84b` message.
+- Switch system: `src/game/reducer/battle/switch.js` and the commit `c756d84b`.
+- Maison doubles niches: `src/game/minigames/doubles.js`.

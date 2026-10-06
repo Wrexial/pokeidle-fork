@@ -64,6 +64,72 @@ function alive(pokemon) {
   return !!pokemon && pokemon.currentHp > 0
 }
 
+/** Moves Dancer copies when an ally uses them. */
+const DANCE_MOVES = new Set([
+  'aquaStep',
+  'clangorousSoul',
+  'dragonDance',
+  'featherDance',
+  'fieryDance',
+  'lunarDance',
+  'petalDance',
+  'quiverDance',
+  'rainDance',
+  'revelationDance',
+  'swordsDance',
+  'teeterDance',
+  'victoryDance',
+])
+
+/**
+ * Round-start ally abilities. Commander makes a Tatsugiri ride a Dondozo (which
+gets +2 to every stat while the Tatsugiri cannot act), Flower Veil protects
+ * Grass-type allies, Hospitality heals, Costar copies boosts and Curious
+ * Medicine clears a partner's stat drops.
+ * @param {any[]} allies
+ * @param {any[]} foes
+ * @param {string[]} log
+ */
+function applyRoundStartAbilities(allies, foes, log) {
+  for (const side of [allies, foes]) {
+    // Commander: a Tatsugiri climbs into an ally Dondozo.
+    const commander = side.find(
+        (mon) =>
+          alive(mon) && mon.ability === 'commander' && /tatsugiri/i.test(mon.speciesKey ?? '')
+      ),
+      dondozo = side.find((mon) => alive(mon) && /dondozo/i.test(mon.speciesKey ?? ''))
+    if (commander && dondozo && !commander.commanding) {
+      commander.commanding = !0
+      dondozo.statStages = { ...(dondozo.statStages ?? {}) }
+      for (const stat of ['attack', 'defense', 'spAttack', 'spDefense', 'speed'])
+        dondozo.statStages[stat] = Math.min(6, (dondozo.statStages[stat] ?? 0) + 2)
+      log.push(`${commander.name} commanded ${dondozo.name}!`)
+    }
+    // Flower Veil shields Grass-type allies from stat drops / status.
+    const veil = side.find((mon) => alive(mon) && mon.ability === 'flowerVeil')
+    if (veil)
+      for (const mon of side)
+        if (alive(mon) && (mon.types ?? []).includes('Grass')) mon.flowerVeilProtected = !0
+    for (const battler of side) {
+      if (!alive(battler)) continue
+      const ally = side.find((other) => other !== battler && alive(other))
+      if (battler.ability === 'hospitality' && ally && !battler.hospitalityDone) {
+        battler.hospitalityDone = !0
+        if (ally.currentHp < ally.maxHp) {
+          const healed = Math.min(ally.maxHp, ally.currentHp + Math.max(1, Math.floor(ally.maxHp / 4)))
+          ally.currentHp = healed
+          log.push(`${battler.name}'s Hospitality healed ${ally.name}!`)
+        }
+      }
+      if (battler.ability === 'costar' && ally?.statStages)
+        battler.statStages = { ...(battler.statStages ?? {}), ...ally.statStages }
+      if (battler.ability === 'curiousMedicine' && ally?.statStages)
+        for (const key of Object.keys(ally.statStages))
+          if (ally.statStages[key] < 0) ally.statStages[key] = 0
+    }
+  }
+}
+
 /**
  * Whether `pokemon` has a live ally on `side` with `ability` (Friend Guard,
  * Battery, Power Spot, ...).
@@ -159,10 +225,17 @@ export function runDoublesRound(allies, foes, options = {}) {
     weather = options.weather ?? null,
     terrain = options.terrain ?? null,
     events = /** @type {any[]} */ ([]),
-    log = /** @type {string[]} */ ([]),
-    actions = [
-      ...allies.filter(alive).map((attacker) => ({ attacker, allies: !0, action: chooseAction(attacker, allies, foes) })),
-      ...foes.filter(alive).map((attacker) => ({ attacker, allies: !1, action: chooseAction(attacker, foes, allies) })),
+    log = /** @type {string[]} */ ([])
+  // Round-start abilities first, so Commander removes the Tatsugiri from the
+  // action list and Flower Veil is up before anything resolves.
+  applyRoundStartAbilities(allies, foes, log)
+  const actions = [
+      ...allies
+        .filter((attacker) => alive(attacker) && !attacker.commanding)
+        .map((attacker) => ({ attacker, allies: !0, action: chooseAction(attacker, allies, foes) })),
+      ...foes
+        .filter((attacker) => alive(attacker) && !attacker.commanding)
+        .map((attacker) => ({ attacker, allies: !1, action: chooseAction(attacker, foes, allies) })),
     ]
       .filter((entry) => entry.action)
       .sort(
@@ -205,27 +278,6 @@ export function runDoublesRound(allies, foes, options = {}) {
       (b.action?.priority ?? 0) - (a.action?.priority ?? 0) ||
       (b.action?.speed ?? 0) - (a.action?.speed ?? 0)
   )
-  // Round-start ally abilities: Hospitality heals, Costar copies boosts,
-  // Curious Medicine clears a partner's stat drops.
-  for (const side of [allies, foes]) {
-    for (const battler of side) {
-      if (!alive(battler)) continue
-      const ally = side.find((other) => other !== battler && alive(other))
-      if (battler.ability === 'hospitality' && ally && !battler.hospitalityDone) {
-        battler.hospitalityDone = !0
-        if (ally.currentHp < ally.maxHp) {
-          const healed = Math.min(ally.maxHp, ally.currentHp + Math.max(1, Math.floor(ally.maxHp / 4)))
-          ally.currentHp = healed
-          log.push(`${battler.name}'s Hospitality healed ${ally.name}!`)
-        }
-      }
-      if (battler.ability === 'costar' && ally?.statStages)
-        battler.statStages = { ...(battler.statStages ?? {}), ...ally.statStages }
-      if (battler.ability === 'curiousMedicine' && ally?.statStages)
-        for (const key of Object.keys(ally.statStages))
-          if (ally.statStages[key] < 0) ally.statStages[key] = 0
-    }
-  }
   // Healer can cure an ally's status each round (30%).
   for (const battler of [...allies, ...foes]) {
     if (!alive(battler) || battler.ability !== 'healer') continue
@@ -270,11 +322,18 @@ export function runDoublesRound(allies, foes, options = {}) {
       }
       continue
     }
-    const targets =
-      SPREAD_MOVES.has(moveId) && move.category !== 'status' ? action.target && alive(action.target)
-        ? [action.target, ...((isAlly ? foes : allies).filter((foe) => foe !== action.target && alive(foe)))]
-        : (isAlly ? foes : allies).filter(alive)
-      : [action.target].filter(alive)
+    const selfSide = isAlly ? allies : foes,
+      targets =
+        SPREAD_MOVES.has(moveId) && move.category !== 'status'
+          ? [
+              ...(isAlly ? foes : allies).filter(alive),
+              // Spread moves hit the user's own ally too (as in the games),
+              // unless that ally has Telepathy.
+              ...selfSide.filter(
+                (other) => other !== attacker && alive(other) && other.ability !== 'telepathy'
+              ),
+            ]
+          : [action.target].filter(alive)
     log.push(`${attacker.name} used ${move.name}!`)
     for (const target of targets) {
       if (!alive(attacker) || !alive(target)) continue
@@ -363,6 +422,67 @@ export function runDoublesRound(allies, foes, options = {}) {
       attacker.helpingHand = !1
       events.push(...turnEvents)
       for (const event of turnEvents) if (event.message && event.type === 'damage') log.push(event.message)
+    }
+    // Dancer copies a dance move an ally just used.
+    if (DANCE_MOVES.has(moveId)) {
+      const side = isAlly ? allies : foes,
+        foeSide = isAlly ? foes : allies
+      for (const dancer of side) {
+        if (dancer === attacker || !alive(dancer) || dancer.ability !== 'dancer') continue
+        const target = foeSide.find(alive) ?? attacker,
+          originalMoves = dancer.moves
+        // The engine only honours a chosen move that is in the moveset, so lend
+        // the copied dance to the dancer for this one action.
+        dancer.moves = [...new Set([...(dancer.moves ?? []), moveId])]
+        const dancerEvents = resolveBattleTurn(
+          dancer,
+          target,
+          false,
+          false,
+          weather,
+          null,
+          deterministic,
+          terrain,
+          AI_SKILL.smart,
+          AI_SKILL.smart,
+          false,
+          moveId,
+          true,
+          true
+        )
+        dancer.moves = originalMoves
+        events.push(...dancerEvents)
+        log.push(`${dancer.name} copied the dance with Dancer!`)
+      }
+    }
+  }
+  // Abilities that react to a fainted or itemless ally.
+  for (const side of [allies, foes]) {
+    for (const battler of side) {
+      if (!alive(battler)) continue
+      if (
+        (battler.ability === 'powerOfAlchemy' || battler.ability === 'receiver') &&
+        !battler.abilityCopied
+      ) {
+        const fainted = side.find((other) => other !== battler && !alive(other))
+        if (fainted) {
+          battler.ability = fainted.ability
+          battler.abilityCopied = !0
+          log.push(`${battler.name} copied ${fainted.name}'s ability!`)
+        }
+      }
+      if (battler.ability === 'symbiosis' && battler.heldItem) {
+        const receiver = side.find(
+          (other) => other !== battler && alive(other) && other.heldItemUsed && !other.heldItem
+        )
+        if (receiver) {
+          const itemName = battler.heldItem
+          receiver.heldItem = battler.heldItem
+          receiver.heldItemUsed = !1
+          battler.heldItem = null
+          log.push(`${battler.name} passed its ${itemName} to ${receiver.name} with Symbiosis!`)
+        }
+      }
     }
   }
   for (const battler of [...allies, ...foes]) {

@@ -419,7 +419,10 @@ export function BattleScene() {
           className: 'enemy-info-anchor',
           children: [
             jsx(EnemyInfoBox, {
-              pokemon: enemyPokemon,
+              // A wild Illusion user shows its disguise until it is hit.
+              pokemon: enemyPokemon.disguisedAs
+                ? { ...enemyPokemon, name: enemyPokemon.disguisedAs.name }
+                : enemyPokemon,
               status: enemyPokemon.status ?? null,
               // Trainer teams aren't a catch reward, so only flag wilds with a
               // seen / caught / shiny-caught ball.
@@ -543,18 +546,26 @@ export function BattleScene() {
               }),
             jsx('img', {
               src: getPokemonSpriteUrl(
-                battleSpecies(enemyPokemon.formKey ?? enemyPokemon.speciesKey).id,
+                battleSpecies(
+                  enemyPokemon.disguisedAs?.speciesKey ??
+                    enemyPokemon.formKey ??
+                    enemyPokemon.speciesKey
+                ).id,
                 !1,
                 enemyPokemon.isShiny,
                 isFemalePokemon(enemyPokemon)
               ),
               onError: /** @param {{ target: HTMLImageElement }} event */ (event) => (event.target.src = getPokemonSpriteFallbackUrl(
-                battleSpecies(enemyPokemon.formKey ?? enemyPokemon.speciesKey).id,
+                battleSpecies(
+                  enemyPokemon.disguisedAs?.speciesKey ??
+                    enemyPokemon.formKey ??
+                    enemyPokemon.speciesKey
+                ).id,
                 !1,
                 enemyPokemon.isShiny,
                 isFemalePokemon(enemyPokemon)
               )),
-              alt: enemyPokemon.name,
+              alt: enemyPokemon.disguisedAs?.name ?? enemyPokemon.name,
             }),
           ],
         }),

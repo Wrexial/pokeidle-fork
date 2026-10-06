@@ -370,6 +370,10 @@ type VolatileState = {
   trappedByAbility?: boolean
   /** Emergency Exit / Wimp Out has already requested a switch. */
   emergencySwitched?: boolean
+  /** Flower Veil is protecting this Grass-type ally (Doubles). */
+  flowerVeilProtected?: boolean
+  /** A Commander Tatsugiri is riding its Dondozo ally and cannot act. */
+  commanding?: boolean
   /** Leaf Guard is active because the sun is shining this turn. */
   leafGuardActive?: boolean
   /** Pending Cud Chew heal (the berry eaten last turn). */

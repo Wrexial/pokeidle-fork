@@ -462,3 +462,25 @@ test('a cafe purchase charges the menu price', () => {
   })
   assert.equal(free.money, 5000, 'an invalid price is rejected')
 })
+
+test('a wild Illusion user disguises as the last party member until it is hit', () => {
+  const started = gameReducer(initialGameState, {
+      type: 'SELECT_STARTER',
+      payload: { region: 'kanto', speciesKey: 'bulbasaur' },
+    }),
+    party = [started.party[0], createPokemon('pidgey', 10, 'disguise-target')],
+    state = { ...started, party, playerPokemon: party[0] },
+    enemy = { ...createPokemon('zoroark', 30, 'illusion-foe'), ability: 'illusion', isShiny: false },
+    next = gameReducer(state, { type: 'START_ENCOUNTER', payload: { enemy } })
+  assert.ok(next.enemyPokemon.disguisedAs, 'the foe is disguised')
+  assert.equal(next.enemyPokemon.disguisedAs.speciesKey, 'pidgey', 'as the last party member')
+
+  const hit = {
+      ...next,
+      pendingEvents: [
+        { type: 'damage', message: 'hit', data: { target: 'enemy', hpAfter: 50, hpMax: 100 } },
+      ],
+    },
+    after = gameReducer(hit, { type: 'CONSUME_EVENT' })
+  assert.equal(after.enemyPokemon.disguisedAs ?? null, null, 'the hit broke the disguise')
+})

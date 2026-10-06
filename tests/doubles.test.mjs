@@ -197,3 +197,135 @@ test('Healer cures a statused ally', () => {
     assert.equal(ally.status, null, 'Healer cured the burn')
   })
 })
+
+test('Telepathy shields the ally from a spread move', () => {
+  const remaining = (/** @type {any} */ ability) => {
+    const attacker = battler({
+        name: 'Attacker',
+        isPlayer: true,
+        moves: ['earthquake'],
+        attack: 400,
+        speed: 200,
+        types: ['Ground'],
+      }),
+      partner = battler({
+        name: 'Partner',
+        isPlayer: true,
+        ability,
+        types: ['Normal'],
+        defense: 60,
+        currentHp: 300,
+        maxHp: 300,
+      }),
+      foeX = battler({ name: 'FoeX', types: ['Normal'], defense: 60, currentHp: 300, maxHp: 300 }),
+      foeY = battler({ name: 'FoeY', types: ['Normal'], defense: 60, currentHp: 300, maxHp: 300 })
+    runDoublesRound([attacker, partner], [foeX, foeY], { deterministic: true })
+    return partner.currentHp
+  }
+  assert.equal(remaining('telepathy'), 300, 'Telepathy blocks the ally damage')
+  assert.ok(remaining(undefined) < 300, 'the ally is hit otherwise')
+})
+
+test('Commander boosts its Dondozo and grounds the Tatsugiri', () => {
+  const tatsu = battler({
+      name: 'Tatsugiri',
+      isPlayer: true,
+      speciesKey: 'tatsugiri',
+      ability: 'commander',
+      moves: ['waterGun'],
+      speed: 200,
+      statStages: {},
+    }),
+    dondozo = battler({
+      name: 'Dondozo',
+      isPlayer: true,
+      speciesKey: 'dondozo',
+      moves: ['splash'],
+      speed: 10,
+      statStages: {},
+    }),
+    foeX = battler({ name: 'FoeX', moves: ['splash'], speed: 1 }),
+    foeY = battler({ name: 'FoeY', moves: ['splash'], speed: 1 })
+  runDoublesRound([tatsu, dondozo], [foeX, foeY], { deterministic: true })
+  assert.equal(dondozo.statStages.attack, 2, 'Dondozo got the +2')
+  assert.equal(dondozo.statStages.speed, 2)
+  assert.equal(tatsu.commanding, true, 'Tatsugiri is riding along')
+})
+
+test('Dancer copies an ally dance move', () => {
+  const ally = battler({
+      name: 'Ally',
+      isPlayer: true,
+      moves: ['dragonDance'],
+      speed: 200,
+      statStages: {},
+    }),
+    dancer = battler({
+      name: 'Dancer',
+      isPlayer: true,
+      ability: 'dancer',
+      moves: ['splash'],
+      speed: 10,
+      statStages: {},
+    }),
+    foeX = battler({ name: 'FoeX', moves: ['splash'], speed: 1 }),
+    foeY = battler({ name: 'FoeY', moves: ['splash'], speed: 1 })
+  runDoublesRound([ally, dancer], [foeX, foeY], { deterministic: true })
+  assert.equal(dancer.statStages.attack, 1, 'Dancer copied Dragon Dance')
+})
+
+test('Flower Veil protects a Grass ally from stat drops', () => {
+  const holder = battler({
+      name: 'Veil',
+      isPlayer: true,
+      ability: 'flowerVeil',
+      types: ['Fairy'],
+      moves: ['splash'],
+      speed: 1,
+    }),
+    grass = battler({ name: 'Grass', isPlayer: true, types: ['Grass'], moves: ['splash'], speed: 1 }),
+    foeX = battler({ name: 'FoeX', moves: ['splash'], speed: 1 }),
+    foeY = battler({ name: 'FoeY', moves: ['splash'], speed: 1 })
+  runDoublesRound([holder, grass], [foeX, foeY], { deterministic: true })
+  assert.equal(grass.flowerVeilProtected, true, 'the Grass ally is protected')
+})
+
+test('Power of Alchemy and Receiver copy a fainted ally ability', () => {
+  for (const ability of ['powerOfAlchemy', 'receiver']) {
+    const copier = battler({ name: 'Copier', isPlayer: true, ability, speed: 1 }),
+      fainted = battler({
+        name: 'Fainted',
+        isPlayer: true,
+        ability: 'intimidate',
+        currentHp: 0,
+        maxHp: 400,
+        speed: 1,
+      }),
+      foeX = battler({ name: 'FoeX', moves: ['splash'], speed: 1 }),
+      foeY = battler({ name: 'FoeY', moves: ['splash'], speed: 1 })
+    runDoublesRound([copier, fainted], [foeX, foeY], { deterministic: true })
+    assert.equal(copier.ability, 'intimidate', `${ability} copied the fainted ally`)
+  }
+})
+
+test('Symbiosis passes its item to an itemless ally', () => {
+  const giver = battler({
+      name: 'Giver',
+      isPlayer: true,
+      ability: 'symbiosis',
+      heldItem: 'leftovers',
+      speed: 1,
+    }),
+    receiver = battler({
+      name: 'Receiver',
+      isPlayer: true,
+      heldItem: null,
+      heldItemUsed: true,
+      speed: 1,
+    }),
+    foeX = battler({ name: 'FoeX', moves: ['splash'], speed: 1 }),
+    foeY = battler({ name: 'FoeY', moves: ['splash'], speed: 1 })
+  runDoublesRound([giver, receiver], [foeX, foeY], { deterministic: true })
+  assert.equal(receiver.heldItem, 'leftovers')
+  assert.equal(giver.heldItem, null)
+})

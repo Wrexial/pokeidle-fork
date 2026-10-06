@@ -29,12 +29,21 @@ import { resolveRevive, resolveSwitchRequest } from './switch.js'
 export function startEncounter(state, action) {
   const firstAliveIndex = state.party.findIndex((member) => isBattleReady(member)),
     activeIndex = firstAliveIndex >= 0 ? firstAliveIndex : 0,
-    activePokemon = state.party[activeIndex] || state.playerPokemon
+    activePokemon = state.party[activeIndex] || state.playerPokemon,
+    enemy = action.payload.enemy,
+    // A wild Illusion user hides as the player's last party member until it is
+    // hit (the disguise is purely visual).
+    disguise =
+      enemy?.ability === 'illusion'
+        ? [...(state.party ?? [])].reverse().find((member) => member && !member.isEgg)
+        : null
+  if (disguise) enemy.disguisedAs = { speciesKey: disguise.speciesKey, name: disguise.name }
+  const shownName = disguise?.name ?? enemy?.name
   return recordSeenPokemon(
     {
       ...state,
       phase: 'battling',
-      enemyPokemon: action.payload.enemy,
+      enemyPokemon: enemy,
       playerPokemon: activePokemon,
       activePlayerPokemonIndex: activeIndex,
       battleParticipants: activePokemon?.id ? [activePokemon.id] : [],
@@ -44,9 +53,9 @@ export function startEncounter(state, action) {
       pendingEvents: [
         {
           type: 'encounter',
-          message: action.payload.enemy.isShiny
-            ? `A shiny wild ${action.payload.enemy.name} appeared!`
-            : `Wild ${action.payload.enemy.name} appeared!`,
+          message: enemy.isShiny
+            ? `A shiny wild ${shownName} appeared!`
+            : `Wild ${shownName} appeared!`,
         },
       ],
       currentEventIndex: 0,
@@ -56,7 +65,7 @@ export function startEncounter(state, action) {
       terrain: null,
       playerVolatile: createVolatileState(),
     },
-    action.payload.enemy
+    enemy
   )
 }
 
@@ -202,6 +211,10 @@ export function consumeEvent(state, action) {
           ...enemyPokemon,
           currentHp:
             event.type === 'faint' ? 0 : (event.data.hpAfter ?? enemyPokemon.currentHp),
+          // A damaging hit breaks a wild Illusion disguise.
+          ...(event.type === 'damage' && enemyPokemon.disguisedAs
+            ? { disguisedAs: null }
+            : {}),
         }))
   let activeEffects = state.activeEffects,
     swarm = state.swarm,
@@ -306,7 +319,14 @@ export function consumeEvent(state, action) {
     // Daily quests track wild wins (and route-specific ones).
     quests = advanceQuests(quests, { kind: 'wild', locationId: state.currentLocation })
     // Daily "Harvest Day" doubles the chance of every wild item drop.
-    const dropBonus = dailyDropMultiplier(state.dailyEvent),
+    // Out-of-battle abilities. Illuminate lights up extra item drops, and
+    // Pickup / Honey Gather can find something of their own.
+    const partyAbilities = new Set(
+      [state.playerPokemon, ...state.party].filter(Boolean).map((member) => member?.ability)
+    )
+    const dropBonus =
+        dailyDropMultiplier(state.dailyEvent) *
+        (partyAbilities.has('illuminate') ? 1.5 : 1),
       dropChance = /** @param {number} chance */ (chance) => Math.min(1, chance * dropBonus)
     // A very rare Master Ball find.
     if (Math.random() < dropChance(wildMasterBallChance)) {
@@ -348,10 +368,7 @@ export function consumeEvent(state, action) {
           dedupeKey: 'drop:rareCandy',
         })
     }
-    // Out-of-battle abilities: Pickup and Honey Gather can find something.
-    const partyAbilities = new Set(
-      [state.playerPokemon, ...state.party].filter(Boolean).map((member) => member?.ability)
-    )
+    // Pickup and Honey Gather find their own extras.
     if (partyAbilities.has('pickup') && Math.random() < dropChance(0.1)) {
       const foundId = rollValuableDrop(dropLevel)
       inventory = {

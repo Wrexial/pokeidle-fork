@@ -1211,6 +1211,42 @@ export const abilityInfo = {
   'runAway': {
     'group': 'misc',
     'text': 'Always succeeds at fleeing from a wild Pokemon.'
+  },
+  'commander': {
+    'group': 'misc',
+    'text': 'In Double Battles, a Tatsugiri rides its Dondozo ally, raising every Dondozo stat by two while the Tatsugiri cannot act.'
+  },
+  'dancer': {
+    'group': 'misc',
+    'text': 'In Double Battles, copies a dance move an ally uses.'
+  },
+  'flowerVeil': {
+    'group': 'misc',
+    'text': 'In Double Battles, Grass-type allies cannot have their stats lowered or be given a status condition.'
+  },
+  'powerOfAlchemy': {
+    'group': 'misc',
+    'text': 'In Double Battles, copies the ability of a fainted ally.'
+  },
+  'receiver': {
+    'group': 'misc',
+    'text': 'In Double Battles, copies the ability of a fainted ally.'
+  },
+  'symbiosis': {
+    'group': 'misc',
+    'text': 'In Double Battles, passes its held item to an ally that used its own.'
+  },
+  'telepathy': {
+    'group': 'misc',
+    'text': 'In Double Battles, takes no damage from an ally\u2019s spread moves.'
+  },
+  'illuminate': {
+    'group': 'misc',
+    'text': 'Out of battle, its light draws out 50% more wild item drops.'
+  },
+  'illusion': {
+    'group': 'misc',
+    'text': 'A wild user disguises itself as your last party member until it is hit.'
   }
 }
 

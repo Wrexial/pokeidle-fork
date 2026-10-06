@@ -409,6 +409,8 @@ export function abilityHalvesSuperEffective(defender, attacker) {
  * @returns {boolean}
  */
 export function abilityPreventsStatus(target, status) {
+  // Flower Veil shields a Grass-type ally from the Doubles support abilities.
+  if (target?.flowerVeilProtected) return true
   const ability = abilityOf(target),
     blocked = STATUS_IMMUNE_ABILITIES[ability ?? ''],
     // Badly poisoned still counts as poison for Immunity / Pastel Veil.
@@ -438,6 +440,8 @@ export function abilityIgnoresPoisonImmunity(source) {
  * @returns {boolean}
  */
 export function abilityPreventsStatDrop(target, statKey) {
+  // Flower Veil shields a Grass-type ally from stat drops (Doubles).
+  if (target?.flowerVeilProtected) return true
   const blocked = /** @type {Record<string, string[]>} */ ({
     clearBody: ['all'],
     whiteSmoke: ['all'],

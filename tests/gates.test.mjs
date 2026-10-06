@@ -7,6 +7,7 @@ installGameData()
 
 const { quickplayAll } = await import('../tools/lib/quickplay.mjs')
 const { buildRouteExclusives } = await import('../tools/lib/gate-exclusives.mjs')
+const { computeUnlockedLocations, frontierUnlocks } = await import('../src/game/progression.js')
 const { encounterData, evolutionData, mapData, pokemonSpecies } = await import('../src/data/gameData.js')
 const { regionalStarters } = await import('../src/data/config.js')
 
@@ -59,4 +60,46 @@ test('caughtOnRoute gates only ask for species still exclusive to their route', 
     )
   }
   assert.ok(checked > 0, 'there are caughtOnRoute gates to check')
+})
+
+test('the Next Unlocks frontier stays inside the region the player is in', () => {
+  // A player who started in Kanto, progressed it, then opened Alola with an
+  // Unlock Token. `unlockOrder` is generation-prefixed, so a map-wide frontier
+  // let Kanto's routes crowd Alola's own gates out of the panel entirely.
+  const state = {
+    startRegion: 'kanto',
+    unlockedRegions: ['kanto', 'alola'],
+    unlockedLocations: [
+      'palletTown',
+      'route1',
+      'viridianCity',
+      'route2',
+      'viridianForest',
+      'pewterCity',
+      'alola-iki-town',
+      'alola-melemele-island',
+      'alola-route-1',
+    ],
+    currentLocation: 'alola-route-1',
+    pokedexCaught: ['bulbasaur'],
+    party: [{ level: 20 }],
+    defeatedGyms: [],
+    defeatedChampions: [],
+    battlesWonByLocation: {},
+  }
+  const unlocked = computeUnlockedLocations(state)
+  const frontier = frontierUnlocks(unlocked, 'alola')
+  assert.ok(frontier.length > 0, 'Alola has a frontier')
+  for (const location of frontier)
+    assert.equal(location.region ?? 'kanto', 'alola', `${location.id} is in Alola`)
+  // The region's next step is visible (the old five-item cap hid it behind
+  // Kanto's lower-numbered unlocks).
+  assert.ok(
+    frontier.some((location) => location.id === 'alola-route-1--hauoli-outskirts'),
+    'the next Alola area is listed'
+  )
+  assert.ok(
+    !frontier.some((location) => (location.region ?? 'kanto') === 'kanto'),
+    'no Kanto gates leak into the Alola panel'
+  )
 })

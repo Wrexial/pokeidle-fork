@@ -8,7 +8,7 @@ import { encounterData, gymLeaderData, mapData, pokemonSpecies, regions, raidPoo
 import { areaInfoFor } from '../data/ui.js'
 import { MINIGAME_AREAS, MINIGAME_INFO, MINIGAME_LOCATIONS, MINIGAME_START_ACTION, ROUTE_ACTIVITIES, bestRodId, nextRod, rodForId, routeActivityIds } from '../game/minigames.js'
 import { useGame } from '../game/context.js'
-import { computeUnlockedLocations, minigameRequirementMet, regionProgressionGoal } from '../game/progression.js'
+import { computeUnlockedLocations, frontierUnlocks, minigameRequirementMet, regionProgressionGoal } from '../game/progression.js'
 import { servicePoisFor, cafeFor } from '../game/services.js'
 import { MinigameCard } from './minigame-card.js'
 import { GiftPanel } from './gift-panel.js'
@@ -21,12 +21,6 @@ import { RouteEncounterGrid } from './route-encounter-grid.js'
 import { ShopPanel } from './shop-panel.js'
 import { CafePanel } from './cafe-panel.js'
 
-/** How many upcoming unlocks the panel lists at once. `computeUnlockedLocations`
- * already folds the whole map into the unlocked set, so only the frontier — the
- * locked locations adjacent to somewhere open — is worth showing; listing every
- * locked location would page through far-off regions. */
-const NEXT_UNLOCK_LIMIT = 5
-
 /** @param {{ onOpenCatchSettings: () => void }} props */
 export function LocationPanel({ onOpenCatchSettings }) {
   const { state, dispatch } = useGame(),
@@ -38,38 +32,18 @@ export function LocationPanel({ onOpenCatchSettings }) {
     unlockedNow = computeUnlockedLocations(state),
     unlockedNowSet = new Set(unlockedNow),
     location = mapData[state.currentLocation],
-    // Every locked location on the player's frontier (adjacent to somewhere
-    // already unlocked). Several can become available at once — a town with two
-    // routes, a badge gate plus its neighbour — so list them all instead of one
-    // "next" the game can leap past.
-    frontierLockedLocations = (() => {
-      const unlockedSet = new Set(unlockedNow)
-      const candidates = Object.values(mapData).filter((candidateLocation) => {
-        if (unlockedSet.has(candidateLocation.id)) return false
-        // Zone sub-areas are hidden from the map but are the real next step in
-        // Alola / Paldea; show them once their zone hub is open, so the goal is
-        // visible instead of only living in the zone picker.
-        if (candidateLocation.hidden && !unlockedSet.has(candidateLocation.zone)) return false
-        const unlockRule = candidateLocation.unlock
-        return (
-          unlockRule.battlesAtLocation !== void 0 ||
-          unlockRule.badgesRequired !== void 0 ||
-          unlockRule.gymsRequired !== void 0 ||
-          unlockRule.championDefeated ||
-          unlockRule.requires !== void 0 ||
-          unlockRule.entry !== void 0
-        )
-      })
-      const frontier = candidates.filter((candidateLocation) =>
-        candidateLocation.connections.some((connectionId) => unlockedSet.has(connectionId))
-      )
-      return frontier
-        .sort((left, right) => left.unlockOrder - right.unlockOrder)
-        .slice(0, NEXT_UNLOCK_LIMIT)
-    })(),
-    // When nothing anywhere is on the frontier the region is finished, so point
-    // at its Champion (or a banked Unlock Token) rather than surfacing a locked
-    // region the player cannot reach yet (Kanto, if they started elsewhere).
+    // Every locked location on the current region's frontier (adjacent to
+    // somewhere already unlocked), soonest first. Several can become available
+    // at once — a town with two routes, a badge gate plus its neighbour — so
+    // list them all instead of one "next" the game can leap past. Scoped to
+    // the region the player is standing in: `unlockOrder` is generation-
+    // prefixed, so a map-wide list let an earlier region crowd the current
+    // one's gates (Sinnoh, Alola, Paldea) out of the panel.
+    frontierLockedLocations = frontierUnlocks(unlockedNow, location?.region ?? 'kanto'),
+    // When nothing in the current region is on the frontier the region is
+    // finished, so point at its Champion (or a banked Unlock Token) rather than
+    // surfacing a locked region the player cannot reach yet (Kanto, if they
+    // started elsewhere).
     regionGoal =
       frontierLockedLocations.length === 0
         ? regionProgressionGoal(state, location?.region ?? 'kanto')

@@ -161,3 +161,38 @@ export function regionProgressionGoal(state, regionId) {
     locationId: null,
   }
 }
+
+/**
+ * The locked locations on the player's frontier *within one region*: the places
+ * adjacent to somewhere already open that the panel's "Next Unlocks" list shows.
+ * Scoping to the region the player is standing in matters because `unlockOrder`
+ * is generation-prefixed, so a map-wide list let an earlier region crowd the
+ * region the player is actually in (Sinnoh, Alola, Paldea) out of the panel.
+ * Sorted by `unlockOrder`, the soonest first; nothing is truncated, so a gate
+ * can never be hidden from the player.
+ * @param {string[]} unlocked the current `computeUnlockedLocations` result
+ * @param {string} regionId
+ * @returns {MapLocation[]}
+ */
+export function frontierUnlocks(unlocked, regionId) {
+  const unlockedSet = new Set(unlocked)
+  return Object.values(mapData)
+    .filter((location) => {
+      if (unlockedSet.has(location.id)) return false
+      if ((location.region ?? 'kanto') !== regionId) return false
+      // Zone sub-areas are hidden from the map but are the real next step in
+      // Alola / Paldea; show them once their zone hub is open.
+      if (location.hidden && !unlockedSet.has(location.zone)) return false
+      const unlockRule = location.unlock
+      return (
+        unlockRule.battlesAtLocation !== void 0 ||
+        unlockRule.badgesRequired !== void 0 ||
+        unlockRule.gymsRequired !== void 0 ||
+        unlockRule.championDefeated ||
+        unlockRule.requires !== void 0 ||
+        unlockRule.entry !== void 0
+      )
+    })
+    .filter((location) => location.connections.some((id) => unlockedSet.has(id)))
+    .sort((left, right) => left.unlockOrder - right.unlockOrder)
+}

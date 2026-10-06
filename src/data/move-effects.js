@@ -350,6 +350,24 @@ const MOVE_OVERRIDES = {
   quickGuard: { protect: true, priority: 4 },
   wideGuard: { protect: true, priority: 4 },
   matBlock: { protect: true, priority: 4 },
+  gearUp: {
+    effect: {
+      type: 'statChange',
+      target: 'self',
+      changes: { attack: 1, spAttack: 1 },
+      chance: 100,
+    },
+  },
+  coaching: {
+    effect: {
+      type: 'statChange',
+      target: 'self',
+      changes: { attack: 1, defense: 1 },
+      chance: 100,
+    },
+  },
+  nightmare: { effect: { type: 'nightmare' } },
+  doodle: { effect: { type: 'doodle' } },
   endure: { effect: { type: 'enduring', target: 'self' }, priority: 4 },
   tidyUp: { effect: { type: 'tidyUp', target: 'self' } },
   psychoShift: { effect: { type: 'psychoShift' } },

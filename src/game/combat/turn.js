@@ -1209,6 +1209,23 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           message: `${attack.attacker.name} transformed into ${attack.defender.name}!`,
           data: { target: attack.isPlayer ? 'player' : 'enemy' },
         })
+      } else if (moveDef.effect?.type === 'nightmare') {
+        if (attack.defender.status === 'sleep') {
+          attack.defender.nightmare = !0
+          events.push({
+            type: 'status',
+            message: `${attack.defender.name} began having a nightmare!`,
+            data: { target: attack.isPlayer ? 'enemy' : 'player' },
+          })
+        }
+      } else if (moveDef.effect?.type === 'doodle') {
+        attack.defender.abilityOverride = abilityOf(attack.attacker)
+        attack.defender.abilitySuppressed = !1
+        events.push({
+          type: 'status',
+          message: `${attack.defender.name} copied ${attack.attacker.name}'s ability!`,
+          data: { target: attack.isPlayer ? 'enemy' : 'player' },
+        })
       } else if (
         moveDef.effect?.type === 'status' &&
         (moveDef.effect.chance === void 0 ||

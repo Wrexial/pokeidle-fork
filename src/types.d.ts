@@ -342,6 +342,8 @@ type VolatileState = {
   stockpile?: number
   /** Turns of Torment left (cannot repeat the last move). */
   tormentTurns?: number
+  /** Nightmare is active (sleeping target takes damage each turn). */
+  nightmare?: boolean
   /** Leaf Guard is active because the sun is shining this turn. */
   leafGuardActive?: boolean
   /** Pending Cud Chew heal (the berry eaten last turn). */

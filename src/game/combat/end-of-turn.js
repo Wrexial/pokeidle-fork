@@ -117,6 +117,8 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
       }
     } else if (pokemon.status === 'poison') residual = Math.max(1, Math.floor(pokemon.maxHp / 8))
     else if (pokemon.status === 'burn') residual = Math.max(1, Math.floor(pokemon.maxHp / 16))
+    else if (pokemon.status === 'sleep' && pokemon.nightmare)
+      residual = Math.max(1, Math.floor(pokemon.maxHp / 4))
     else if (pokemon.status === 'toxic') {
       // Badly poisoned damage escalates: 1/16, 2/16, 3/16, ...
       const counter = Math.max(1, pokemon.statusTurns ?? 1)
@@ -146,6 +148,7 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
   }
   // End-of-turn abilities: Speed Boost raises Speed, Shed Skin may cure status.
   for (const [pokemon, isPlayerSide] of residualTargets) {
+    if (pokemon.status !== 'sleep') pokemon.nightmare = !1
     if (pokemon.currentHp <= 0) continue
     if ((pokemon.tauntTurns ?? 0) > 0) pokemon.tauntTurns -= 1
     const ability = abilityOf(pokemon)

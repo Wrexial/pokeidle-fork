@@ -124,6 +124,8 @@ const moveEffectText = {
   stockpile: 'Stores power (up to three) for Spit Up or Swallow.',
   swallow: 'Heals the user based on its Stockpile count.',
   transform: 'Copies the target\u2019s types and stats.',
+  nightmare: 'Gives a sleeping target a nightmare that hurts it each turn.',
+  doodle: 'Copies the user\u2019s ability onto the target.',
   screen: 'Sets up a barrier that halves damage for five turns.',
   removeScreens: 'Blows away the foe\u2019s screens.',
   torment: 'Torments the target so it cannot repeat a move.',

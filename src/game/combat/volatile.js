@@ -81,6 +81,7 @@ export function createVolatileState() {
     luckyChantTurns: 0,
     stockpile: 0,
     tormentTurns: 0,
+    nightmare: !1,
     cudChewHeal: 0,
     nullifiedMoves: {},
   }
@@ -153,6 +154,7 @@ export function volatileStateFromBattle(pokemon) {
     luckyChantTurns: pokemon.luckyChantTurns ?? 0,
     stockpile: pokemon.stockpile ?? 0,
     tormentTurns: pokemon.tormentTurns ?? 0,
+    nightmare: pokemon.nightmare ?? !1,
     cudChewHeal: pokemon.cudChewHeal ?? 0,
     nullifiedMoves: pokemon.nullifiedMoves ?? {},
   }

@@ -13881,3 +13881,13 @@ img {
     overflow: hidden;
     text-overflow: ellipsis
 }
+
+.cafe-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 6px 8px;
+    background: rgba(20,14,6,.5);
+    border: 1px solid #8a7040;
+    border-radius: 4px
+}

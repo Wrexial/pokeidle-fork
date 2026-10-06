@@ -74,6 +74,40 @@ for (const locationId of ['johto-ruins-of-alph', 'sevii-islands-tanoby-ruins'])
     })
 
 /**
+ * Café menus, keyed by the location that hosts them. A café sells drinks that
+ * raise friendship (a Poffin) or top up HP (a Poke Bean).
+ * @type {Record<string, { name: string, items: { itemId: string, price: number }[] }>}
+ */
+export const CAFE_MENUS = {
+  'celadonCity': { name: 'Celadon Cafe', items: [{ itemId: 'poffin', price: 800 }, { itemId: 'pokebean', price: 200 }] },
+  'johto-goldenrod-city': { name: 'Goldenrod Cafe', items: [{ itemId: 'poffin', price: 800 }, { itemId: 'pokebean', price: 200 }] },
+  'hoenn-slateport-city': { name: 'Harbor Cafe', items: [{ itemId: 'poffin', price: 800 }, { itemId: 'pokebean', price: 200 }] },
+  'sinnoh-jubilife-city': { name: 'Jubilife Cafe', items: [{ itemId: 'poffin', price: 800 }, { itemId: 'pokebean', price: 200 }] },
+  'unova-castelia-city': { name: 'Cafe Sonata', items: [{ itemId: 'poffin', price: 800 }, { itemId: 'pokebean', price: 200 }] },
+  'kalos-lumiose-city': { name: 'Cafe Soleil', items: [{ itemId: 'poffin', price: 800 }, { itemId: 'pokebean', price: 200 }] },
+  'alola-hauoli-city': { name: 'Malasada Shop', items: [{ itemId: 'poffin', price: 800 }, { itemId: 'pokebean', price: 200 }] },
+  'galar-motostoke': { name: 'Motostoke Cafe', items: [{ itemId: 'poffin', price: 800 }, { itemId: 'pokebean', price: 200 }] },
+  'paldea-mesagoza': { name: 'Mesagoza Cafe', items: [{ itemId: 'poffin', price: 800 }, { itemId: 'pokebean', price: 200 }] },
+}
+
+for (const [locationId] of Object.entries(CAFE_MENUS))
+  if (mapData[locationId])
+    addServicePoi(locationId, {
+      kind: 'cafe',
+      icon: '\u2615',
+      label: 'Cafe',
+      hint: 'Sit down for a drink \u2014 a Poffin raises friendship and a Poke Bean heals.',
+    })
+
+/**
+ * The café menu at a location, or null.
+ * @param {string | undefined} locationId
+ */
+export function cafeFor(locationId) {
+  return (locationId && CAFE_MENUS[locationId]) || null
+}
+
+/**
  * The distinct service marker kinds, for the Town Map legend.
  * @returns {{ kind: string, icon: string, label: string }[]}
  */

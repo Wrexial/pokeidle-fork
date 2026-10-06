@@ -17,24 +17,22 @@ renumbered, so the gaps below are items that shipped.
 
 ### Tier 1 — High impact, worth the effort
 
-1. **#28 More region areas (caves, POIs)** — L · ★★★★½ — more hand-authored
-   areas and POIs. Pairs with #36.
-2. **#24 Move data pass** — M · ★★★ — the doubles-only moves and the
+1. **#24 Move data pass** — M · ★★★ — the doubles-only moves and the
    PP / Z-Move keep-or-drop decisions.
-3. **#25 Battle engine pass** — M–L · ★★★ — the remaining doubles abilities,
+2. **#25 Battle engine pass** — M–L · ★★★ — the remaining doubles abilities,
    Illusion, more berries / Rocky Helmet, and battle polish.
-4. **#36 Zones (route chunks)** — M · ★★★★ — a few zones still have room for
+3. **#36 Zones (route chunks)** — M · ★★★★ — a few zones still have room for
    more sub-areas.
-5. **#18 Better settings** — M · ★★★ — cosmetic options, the default catch
+4. **#18 Better settings** — M · ★★★ — cosmetic options, the default catch
    rule in Settings, auto-heal; account controls blocked on #19.
-6. **#43 Multi-battles (triple / rotation)** — M–L · ★★½ — build on the
+5. **#43 Multi-battles (triple / rotation)** — M–L · ★★½ — build on the
    shipped doubles engine.
 
 ### Tier 2 — Big / low-return, defer
 
-7. **#56 Multi-effect move pass (residual)** — S · ★★ — moves that carry a
+6. **#56 Multi-effect move pass (residual)** — S · ★★ — moves that carry a
    third effect, which the single `secondary` slot cannot express.
-8. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+7. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
    doc and real ops for modest player value today.
 
 ---
@@ -130,40 +128,11 @@ Effort: **medium–large** (do it in slices).
 
 ## 28. More region areas (DLC, caves, POIs)
 
-The maps are built from PokéAPI/Bulbapedia **towns + numbered routes** only
-(`tools/scrape-region-maps.cjs`), then `tools/generate-regions.cjs` turns them
-into 21–52 locations per region, with ~100 hand-added landmark areas on top
-(`tools/lib/ordinary-areas.cjs`). See the changelog for what shipped.
-
-### 28a. Post-game regions
-
-The Galar / Paldea DLC, Kanto's Sevii Islands and Unova's Black 2 / White 2
-areas have all shipped (#39, #28a). No open items.
-
-### 28b. More ordinary areas
-
-Shipped: the landmark table (`tools/lib/ordinary-areas.cjs`) plus the Sevii
-Islands and the B2W2 regions; Johto's Whirl Islands is a zone with cave
-sub-areas now, and the Galar Wild Area's 11 habitats live inside its zone. No
-open items.
-
-### 28c. Points of interest (POIs)
-
-A service POI is a flavour / utility stop overlaid on a location, held in
-`src/game/services.js` (`SERVICE_POIS`); the Day-Care, Berry Garden, Battle
-Tower, Raid Den and Legendary Shrine markers have shipped.
-
-- [ ] Add POIs with a real service behind them: a cafe / mart. (A Move Tutor
-      is global UI, so it has no single location to mark.)
-
-Relevant code: `tools/scrape-region-maps.cjs` (`MANUAL_BRIDGES`),
-`tools/generate-regions.cjs` (`EXTRA_MAP_AREAS`, `levelRoutes`,
-`ROUTE_BACKGROUND_RULES`, raid pools), `public/data/map-data/*.json`,
-`src/game/services.js`, and the map UI (`src/components/map-node.js`,
-`town-map.js`, `location-panel.js`).
-
-Effort: **large** (data-heavy; 28a/28b mostly data, 28c an ongoing small
-feature).
+The Galar / Paldea DLC and Kanto's Sevii Islands are first-class `isDlc`
+regions, the Unova Black 2 / White 2 areas and ~100 landmark areas are on the
+map (`tools/lib/ordinary-areas.cjs`), Johto's Whirl Islands is a zone, and the
+service POI set (Day-Care, Berry Garden, Battle Tower, Raid Den, Legendary
+Shrine, Cafe) is in. **No open items.**
 
 ## 36. Zones — route-like chunks of areas
 

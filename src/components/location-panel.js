@@ -9,7 +9,7 @@ import { areaInfoFor } from '../data/ui.js'
 import { MINIGAME_AREAS, MINIGAME_INFO, MINIGAME_LOCATIONS, MINIGAME_START_ACTION, ROUTE_ACTIVITIES, bestRodId, nextRod, rodForId, routeActivityIds } from '../game/minigames.js'
 import { useGame } from '../game/context.js'
 import { computeUnlockedLocations, minigameRequirementMet, regionProgressionGoal } from '../game/progression.js'
-import { servicePoisFor } from '../game/services.js'
+import { servicePoisFor, cafeFor } from '../game/services.js'
 import { MinigameCard } from './minigame-card.js'
 import { GiftPanel } from './gift-panel.js'
 import { FossilPanel } from './fossil-panel.js'
@@ -19,6 +19,7 @@ import { LeagueLocationPanel } from './league-location-panel.js'
 import { DaycarePanel } from './daycare-panel.js'
 import { RouteEncounterGrid } from './route-encounter-grid.js'
 import { ShopPanel } from './shop-panel.js'
+import { CafePanel } from './cafe-panel.js'
 
 /** How many upcoming unlocks the panel lists at once. `computeUnlockedLocations`
  * already folds the whole map into the unlocked set, so only the frontier — the
@@ -76,6 +77,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
     routeKey = location?.routeKey,
     routeEncounters = routeKey ? encounterData[routeKey] : null,
     servicePois = servicePoisFor(location?.id),
+    cafe = cafeFor(location?.id),
     // The "Next Unlocks" block is useful from a zone hub too, not just a
     // normal location, so it is built once and rendered by both branches.
     nextUnlocksSection = regionGoal
@@ -689,6 +691,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
         jsx(GymLocationPanel, {}),
         jsx(LeagueLocationPanel, {}),
         jsx(DaycarePanel, {}),
+        cafe && jsx(CafePanel, { cafe }),
         routeEncounters &&
           routeKey &&
           jsx(RouteEncounterGrid, {

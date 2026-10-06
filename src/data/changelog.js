@@ -39,6 +39,7 @@ export const CHANGELOG = [
           items: [
             'Settings gained a Display section: choose animated sprites (the default) or the lighter static pixel art. The preference is remembered outside your save, like the other settings',
             'The Town Map marks more facilities and its legend names them: the Day-Care, the Poke Pelago\u2019s Berry Garden, the Battle Tower on Hoenn Route 111, every Raid Island, and the Ruins of Alph and Tanoby Ruins all carry a service marker (Day-Care, Berry Garden, Battle Tower, Raid Den and Legendary Shrine)',
+            'A cafe has opened in each region\u2019s main city (Celadon, Goldenrod, Slateport, Jubilife, Castelia, Lumiose, Hau\u2019oli, Motostoke and Mesagoza): buy a Poffin to raise a party Pokemon\u2019s friendship by 30, or a Poke Bean to heal it',
           ],
         },
         {

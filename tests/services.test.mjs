@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 installGameData()
 
-const { SERVICE_POIS, servicePoiKinds, servicePoisFor } = await import('../src/game/services.js')
+const { SERVICE_POIS, CAFE_MENUS, cafeFor, servicePoiKinds, servicePoisFor } = await import('../src/game/services.js')
 const { DAYCARE_LOCATIONS } = await import('../src/data/config.js')
 const { mapData, regions } = await import('../src/data/gameData.js')
 
@@ -61,6 +61,22 @@ test('servicePoiKinds lists each marker kind once', () => {
   const kinds = servicePoiKinds(),
     ids = kinds.map((entry) => entry.kind)
   assert.equal(ids.length, new Set(ids).size, 'no duplicate kinds')
-  for (const kind of ['daycare', 'berryGarden', 'battleTower', 'raidDen', 'shrine'])
+  for (const kind of ['daycare', 'berryGarden', 'battleTower', 'raidDen', 'shrine', 'cafe'])
     assert.ok(ids.includes(kind), `${kind} is listed`)
+})
+
+test('every cafe sits on a real location with a menu', () => {
+  for (const [locationId, menu] of Object.entries(CAFE_MENUS)) {
+    assert.ok(mapData[locationId], `${locationId} exists on the map`)
+    assert.ok(menu.name && menu.items.length > 0, `${locationId} has a menu`)
+    for (const entry of menu.items)
+      assert.ok(entry.itemId && entry.price > 0, `${locationId} prices its items`)
+    assert.ok(
+      servicePoisFor(locationId).some((poi) => poi.kind === 'cafe'),
+      `${locationId} carries a cafe marker`
+    )
+  }
+  assert.equal(cafeFor('kalos-lumiose-city')?.items.length, 2)
+  assert.equal(cafeFor('not-a-place'), null)
+  assert.equal(cafeFor(undefined), null)
 })

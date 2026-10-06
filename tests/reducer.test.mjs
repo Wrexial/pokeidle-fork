@@ -440,3 +440,25 @@ test('Healing Wish heals the next Pokemon sent out', () => {
   assert.equal(result.party[2].currentHp, result.party[2].maxHp, 'the next member is fully healed')
   assert.equal(result.party[2].status, null, 'and cured of its status')
 })
+
+test('a cafe purchase charges the menu price', () => {
+  const state = { ...initialGameState, money: 5000, inventory: {} },
+    bought = gameReducer(state, {
+      type: 'BUY_CAFE_ITEM',
+      payload: { itemId: 'poffin', quantity: 1, price: 800 },
+    })
+  assert.equal(bought.money, 4200)
+  assert.equal(bought.inventory.poffin, 1)
+
+  const broke = gameReducer(
+    { ...state, money: 100 },
+    { type: 'BUY_CAFE_ITEM', payload: { itemId: 'poffin', quantity: 1, price: 800 } }
+  )
+  assert.equal(broke.inventory.poffin ?? 0, 0, 'cannot buy without the money')
+
+  const free = gameReducer(state, {
+    type: 'BUY_CAFE_ITEM',
+    payload: { itemId: 'poffin', quantity: 1, price: 0 },
+  })
+  assert.equal(free.money, 5000, 'an invalid price is rejected')
+})

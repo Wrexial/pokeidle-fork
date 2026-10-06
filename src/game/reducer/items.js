@@ -153,6 +153,32 @@ export function buyItem(state, action) {
 }
 
 /**
+ * Handle the `BUY_CAFE_ITEM` action: buy a drink from a cafe menu at the menu's
+ * own price (the item's default `buyPrice` is usually null, so a normal mart
+ * would not stock it).
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function buyCafeItem(state, action) {
+  const { itemId, quantity = 1, price } = action.payload ?? {},
+    item = consumableItems[itemId] ?? heldItems[itemId]
+  if (!item || !Number.isFinite(price) || price <= 0) return state
+  const count = Math.max(1, Math.floor(quantity)),
+    cost = price * count
+  if (state.money < cost) return state
+  return {
+    ...state,
+    money: state.money - cost,
+    inventory: {
+      ...state.inventory,
+      [itemId]: (state.inventory[itemId] ?? 0) + count,
+    },
+    battleLog: [...state.battleLog, `Bought ${count}x ${item.name} at the cafe!`].slice(-50),
+  }
+}
+
+/**
  * Handle the `SELL_ITEM` action.
  * @param {GameState} state
  * @param {GameAction} action

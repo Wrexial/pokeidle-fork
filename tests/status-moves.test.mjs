@@ -655,3 +655,153 @@ test('stat-change data matches the real games', () => {
   // Mountain Gale has no stat change at all.
   assert.equal(moveData.mountainGale.effect, undefined)
 })
+
+test('the newly wired utility moves do their job', () => {
+  withFixedRandom(0.5, () => {
+    const statusFrom = (/** @type {string} */ move) => {
+      const player = battler({ name: 'Player', isPlayer: true, moves: [move], speed: 200 }),
+        enemy = battler({ name: 'Foe', moves: ['splash'], types: ['Normal'] })
+      turn(player, enemy)
+      return enemy.status ?? null
+    }
+    assert.equal(statusFrom('grassWhistle'), 'sleep')
+    assert.equal(statusFrom('poisonGas'), 'poison')
+
+    const booster = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['noRetreat'],
+        speed: 200,
+        statStages: {},
+      }),
+      dummy = battler({ name: 'Foe', moves: ['splash'] })
+    turn(booster, dummy)
+    assert.equal(booster.statStages.attack, 1)
+    assert.equal(booster.statStages.speed, 1)
+
+    const hearter = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['takeHeart'],
+        speed: 200,
+        statStages: {},
+        status: 'burn',
+      }),
+      dummy2 = battler({ name: 'Foe', moves: ['splash'] })
+    turn(hearter, dummy2)
+    assert.equal(hearter.statStages.spAttack, 1)
+    assert.equal(hearter.status, null, 'Take Heart cures the status')
+
+    const souler = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['clangorousSoul'],
+        speed: 200,
+        statStages: {},
+        currentHp: 300,
+        maxHp: 300,
+      }),
+      dummy3 = battler({ name: 'Foe', moves: ['splash'] })
+    turn(souler, dummy3)
+    assert.equal(souler.statStages.attack, 1)
+    assert.ok(souler.currentHp < 300, 'Clangorous Soul costs HP')
+
+    const presser = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['acupressure'],
+        speed: 200,
+        statStages: {},
+      }),
+      dummy4 = battler({ name: 'Foe', moves: ['splash'] })
+    turn(presser, dummy4)
+    assert.ok(Object.values(presser.statStages).includes(2), 'a random stat rises by two')
+
+    const tricky = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['powerTrick'],
+        speed: 200,
+        attack: 100,
+        defense: 250,
+      }),
+      dummy5 = battler({ name: 'Foe', moves: ['splash'] })
+    turn(tricky, dummy5)
+    assert.equal(tricky.attack, 250)
+    assert.equal(tricky.defense, 100)
+
+    const copier = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['psychUp'],
+        speed: 200,
+        statStages: {},
+      }),
+      boosted = battler({ name: 'Foe', moves: ['splash'], statStages: { attack: 3, speed: -2 } })
+    turn(copier, boosted)
+    assert.equal(copier.statStages.attack, 3)
+    assert.equal(copier.statStages.speed, -2)
+
+    const refresher = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['refresh'],
+        speed: 200,
+        status: 'paralysis',
+      }),
+      dummy6 = battler({ name: 'Foe', moves: ['splash'] })
+    turn(refresher, dummy6)
+    assert.equal(refresher.status, null)
+
+    const converter = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['conversion', 'flamethrower'],
+        speed: 200,
+        types: ['Normal'],
+      }),
+      dummy7 = battler({ name: 'Foe', moves: ['splash'] })
+    resolveBattleTurn(converter, dummy7, false, false, null, null, false, null, null, null, false, 'conversion')
+    assert.deepEqual(converter.types, ['Fire'], 'Conversion matches the first move type')
+  })
+})
+
+test('Magnet Rise grants Ground immunity for a few turns', () => {
+  withFixedRandom(0.5, () => {
+    const riser = battler({ name: 'Player', isPlayer: true, moves: ['magnetRise'], speed: 200 }),
+      dummy = battler({ name: 'Foe', moves: ['splash'] })
+    turn(riser, dummy)
+    assert.ok((riser.magnetRiseTurns ?? 0) > 0, 'Magnet Rise is active')
+
+    const attacker = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['earthquake'],
+        speed: 200,
+        attack: 300,
+      }),
+      levitating = battler({
+        name: 'Foe',
+        moves: ['splash'],
+        types: ['Normal'],
+        currentHp: 400,
+        maxHp: 400,
+        magnetRiseTurns: 3,
+      })
+    turn(attacker, levitating)
+    assert.equal(levitating.currentHp, 400, 'the Ground move is blocked')
+  })
+})
+
+test('Camouflage matches the terrain type', () => {
+  const player = battler({
+      name: 'Player',
+      isPlayer: true,
+      moves: ['camouflage'],
+      speed: 200,
+      types: ['Normal'],
+    }),
+    enemy = battler({ name: 'Foe', moves: ['splash'] })
+  resolveBattleTurn(player, enemy, false, false, null, null, false, { type: 'electric', turns: 5 })
+  assert.deepEqual(player.types, ['Electric'])
+})

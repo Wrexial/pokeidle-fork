@@ -294,6 +294,43 @@ const MOVE_OVERRIDES = {
   pluck: { effect: { type: 'eatBerry' } },
   bugBite: { effect: { type: 'eatBerry' } },
   incinerate: { effect: { type: 'incinerate' } },
+  // Moves the extraction left without an effect.
+  grassWhistle: { effect: { type: 'status', status: 'sleep' } },
+  poisonGas: { effect: { type: 'status', status: 'poison' } },
+  noRetreat: {
+    effect: {
+      type: 'statChange',
+      target: 'self',
+      changes: { attack: 1, defense: 1, spAttack: 1, spDefense: 1, speed: 1 },
+      chance: 100,
+    },
+  },
+  takeHeart: {
+    effect: {
+      type: 'statChange',
+      target: 'self',
+      changes: { attack: 1, defense: 1, spAttack: 1, spDefense: 1, speed: 1 },
+      chance: 100,
+      statusCure: true,
+    },
+  },
+  clangorousSoul: {
+    effect: {
+      type: 'statChange',
+      target: 'self',
+      changes: { attack: 1, defense: 1, spAttack: 1, spDefense: 1, speed: 1 },
+      chance: 100,
+      hpCost: 1 / 3,
+    },
+  },
+  acupressure: { effect: { type: 'randomBoost', target: 'self' } },
+  powerTrick: { effect: { type: 'powerTrick', target: 'self' } },
+  psychUp: { effect: { type: 'psychUp', target: 'self' } },
+  refresh: { effect: { type: 'selfCureStatus', target: 'self' } },
+  magnetRise: { effect: { type: 'magnetRise', target: 'self' } },
+  conversion: { effect: { type: 'conversion', target: 'self' } },
+  camouflage: { effect: { type: 'camouflage', target: 'self' } },
+
   // --- Entry hazards ---
   stealthRock: { effect: { type: 'hazard', hazard: 'stealthRock' } },
   spikes: { effect: { type: 'hazard', hazard: 'spikes' } },

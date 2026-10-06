@@ -328,6 +328,8 @@ type VolatileState = {
   hangry?: boolean
   /** Charged by Electromorphosis / Wind Power / Charge: next Electric move doubles. */
   charged?: boolean
+  /** Turns of Magnet Rise left (immune to Ground moves while above 0). */
+  magnetRiseTurns?: number
   /** Leaf Guard is active because the sun is shining this turn. */
   leafGuardActive?: boolean
   /** Pending Cud Chew heal (the berry eaten last turn). */

@@ -857,6 +857,101 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       }
       if (moveDef.effect?.type === 'statChange') {
         applyStatChange(attack, moveDef, events, deterministic)
+        if (moveDef.effect.statusCure && attack.attacker.status) {
+          attack.attacker.status = null
+          attack.attacker.statusTurns = 0
+          events.push({
+            type: 'status',
+            message: `${attack.attacker.name}'s status was cured!`,
+            data: { target: attack.isPlayer ? 'player' : 'enemy' },
+          })
+        }
+        if (moveDef.effect.hpCost) {
+          const cost = Math.max(1, Math.floor(attack.attacker.maxHp * moveDef.effect.hpCost))
+          attack.attacker.currentHp = Math.max(0, attack.attacker.currentHp - cost)
+          events.push({
+            type: 'recoil',
+            message: `${attack.attacker.name} cut its own HP! (${cost} damage)`,
+            data: {
+              target: attack.isPlayer ? 'player' : 'enemy',
+              damage: cost,
+              hpAfter: attack.attacker.currentHp,
+              hpMax: attack.attacker.maxHp,
+            },
+          })
+        }
+      } else if (moveDef.effect?.type === 'randomBoost') {
+        const stats = ['attack', 'defense', 'spAttack', 'spDefense', 'speed'],
+          key = deterministic ? stats[0] : stats[Math.floor(Math.random() * stats.length)],
+          stages = attack.attacker.statStages ?? (attack.attacker.statStages = {})
+        stages[key] = clampStatStage((stages[key] ?? 0) + 2)
+        events.push({
+          type: 'statChange',
+          message: `${attack.attacker.name}'s ${getStatLabel(key)} rose sharply!`,
+          data: { target: attack.isPlayer ? 'player' : 'enemy' },
+        })
+      } else if (moveDef.effect?.type === 'powerTrick') {
+        const attackStat = attack.attacker.attack
+        attack.attacker.attack = attack.attacker.defense
+        attack.attacker.defense = attackStat
+        events.push({
+          type: 'statChange',
+          message: `${attack.attacker.name} swapped its Attack and Defense!`,
+          data: { target: attack.isPlayer ? 'player' : 'enemy' },
+        })
+      } else if (moveDef.effect?.type === 'psychUp') {
+        attack.attacker.statStages = { ...(attack.defender.statStages ?? {}) }
+        events.push({
+          type: 'statChange',
+          message: `${attack.attacker.name} copied ${attack.defender.name}'s stat changes!`,
+          data: { target: attack.isPlayer ? 'player' : 'enemy' },
+        })
+      } else if (moveDef.effect?.type === 'selfCureStatus') {
+        if (attack.attacker.status) {
+          attack.attacker.status = null
+          attack.attacker.statusTurns = 0
+          events.push({
+            type: 'status',
+            message: `${attack.attacker.name}'s status was cured!`,
+            data: { target: attack.isPlayer ? 'player' : 'enemy' },
+          })
+        }
+      } else if (moveDef.effect?.type === 'magnetRise') {
+        attack.attacker.magnetRiseTurns = 5
+        events.push({
+          type: 'status',
+          message: `${attack.attacker.name} levitated with electromagnetism!`,
+          data: { target: attack.isPlayer ? 'player' : 'enemy' },
+        })
+      } else if (moveDef.effect?.type === 'conversion') {
+        const firstMove = attack.attacker.moves
+          ?.filter((/** @type {string} */ id) => id !== attack.moveId)
+          .map((/** @type {string} */ id) => moveData[id])
+          .find(Boolean)
+        if (firstMove) {
+          attack.attacker.types = [firstMove.type]
+          attack.attacker.typesOverride = [firstMove.type]
+          events.push({
+            type: 'status',
+            message: `${attack.attacker.name} changed type to ${firstMove.type}!`,
+            data: { target: attack.isPlayer ? 'player' : 'enemy' },
+          })
+        }
+      } else if (moveDef.effect?.type === 'camouflage') {
+        const camoType =
+          /** @type {Record<string, string>} */ ({
+            electric: 'Electric',
+            grassy: 'Grass',
+            misty: 'Fairy',
+            psychic: 'Psychic',
+          })[activeTerrain?.type ?? ''] ?? 'Normal'
+        attack.attacker.types = [camoType]
+        attack.attacker.typesOverride = [camoType]
+        events.push({
+          type: 'status',
+          message: `${attack.attacker.name} changed type to ${camoType}!`,
+          data: { target: attack.isPlayer ? 'player' : 'enemy' },
+        })
       } else if (
         moveDef.effect?.type === 'status' &&
         (moveDef.effect.chance === void 0 ||
@@ -1510,6 +1605,11 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           message: `${attack.defender.name}'s ability made it immune!`,
         })
       }
+      continue
+    }
+    // Magnet Rise grounds the holder against Ground moves for a few turns.
+    if ((attack.defender.magnetRiseTurns ?? 0) > 0 && effectiveMove.type === 'Ground') {
+      events.push({ type: 'miss', message: `${attack.defender.name} is levitating!` })
       continue
     }
     // Wind Rider is immune to wind moves and gains Attack from them.

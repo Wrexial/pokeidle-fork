@@ -438,102 +438,6 @@ img {
     pointer-events: none
 }
 
-.bg-layer,.bg-sky,.bg-clouds,.bg-mountains,.bg-trees-far,.bg-trees-near,.bg-field,.bg-field-detail {
-    display: none
-}
-
-.bg-sky {
-    top: 0;
-    height: 55%;
-    background: linear-gradient(180deg,#0e1428 0% 14.28%,#1a2848 14.28% 28.56%,#283858 28.56% 42.84%,#384868 42.84% 57.12%,#4a5878 57.12% 71.4%,#5a6888 71.4% 85.68%,#7a88a0 85.68% 100%)
-}
-
-.bg-clouds {
-    top: 0;
-    height: 45%;
-    z-index: 1
-}
-
-.cloud {
-    position: absolute;
-    background: #8c96aa66;
-    border-radius: 0;
-    filter: none
-}
-
-.cloud:before,.cloud:after {
-    content: "";
-    position: absolute;
-    background: #8c96aa66;
-    border-radius: 0
-}
-
-@keyframes cloudDrift {
-    0% {
-        transform: translate(0)
-    }
-
-    to {
-        transform: translate(-120px)
-    }
-}
-
-.bg-mountains {
-    top: 15%;
-    height: 42%;
-    z-index: 2
-}
-
-.bg-mountains:before {
-    content: "";
-    position: absolute;
-    bottom: 18%;
-    left: 0;
-    right: 0;
-    height: 85%;
-    background: linear-gradient(180deg,#4a4060 0% 33%,#3a3050 33% 66%,#2a2040 66% 100%);
-    clip-path: polygon(0% 100%,0% 65%,5% 50%,10% 40%,15% 48%,20% 35%,26% 20%,30% 30%,35% 38%,40% 28%,45% 18%,48% 12%,52% 22%,55% 30%,60% 35%,65% 25%,70% 15%,73% 10%,76% 18%,80% 28%,85% 35%,90% 25%,95% 38%,100% 45%,100% 100%)
-}
-
-.bg-mountains:after {
-    content: "";
-    position: absolute;
-    bottom: 10%;
-    left: 0;
-    right: 0;
-    height: 70%;
-    background: linear-gradient(180deg,#1a3020 0% 33%,#142818 33% 66%,#0e2010 66% 100%);
-    clip-path: polygon(0% 100%,0% 70%,4% 60%,8% 52%,14% 45%,18% 38%,22% 42%,28% 35%,32% 40%,36% 48%,42% 38%,46% 32%,50% 42%,54% 50%,58% 40%,62% 35%,66% 30%,70% 38%,74% 45%,78% 35%,82% 42%,86% 50%,90% 40%,94% 48%,98% 55%,100% 60%,100% 100%)
-}
-
-.bg-trees-far {
-    top: 38%;
-    height: 18%;
-    z-index: 3;
-    background: radial-gradient(ellipse 18px 22px at 5% 80%,#1a3818 90%,transparent 90%),radial-gradient(ellipse 22px 28px at 12% 75%,#1e4020 90%,transparent 90%),radial-gradient(ellipse 20px 25px at 20% 78%,#1a3418 90%,transparent 90%),radial-gradient(ellipse 24px 30px at 30% 72%,#204422 90%,transparent 90%),radial-gradient(ellipse 18px 24px at 38% 80%,#1c3a1a 90%,transparent 90%),radial-gradient(ellipse 22px 26px at 45% 76%,#1e3e1c 90%,transparent 90%),radial-gradient(ellipse 20px 24px at 55% 78%,#1a3218 90%,transparent 90%),radial-gradient(ellipse 26px 30px at 63% 72%,#1e421e 90%,transparent 90%),radial-gradient(ellipse 20px 26px at 72% 77%,#1a3618 90%,transparent 90%),radial-gradient(ellipse 24px 28px at 80% 74%,#1e4020 90%,transparent 90%),radial-gradient(ellipse 22px 26px at 88% 78%,#1a3818 90%,transparent 90%),radial-gradient(ellipse 20px 24px at 95% 80%,#182e16 90%,transparent 90%)
-}
-
-.bg-trees-near {
-    top: 42%;
-    height: 18%;
-    z-index: 4;
-    background: radial-gradient(ellipse 30px 36px at 2% 85%,#1a3818 90%,transparent 90%),radial-gradient(ellipse 35px 42px at 10% 78%,#1e4820 90%,transparent 90%),radial-gradient(ellipse 28px 34px at 18% 82%,#163010 90%,transparent 90%),radial-gradient(ellipse 38px 44px at 82% 78%,#1a4018 90%,transparent 90%),radial-gradient(ellipse 32px 38px at 90% 82%,#1a4618 90%,transparent 90%),radial-gradient(ellipse 30px 36px at 97% 85%,#143010 90%,transparent 90%)
-}
-
-.bg-field {
-    top: 50%;
-    bottom: 0;
-    z-index: 5;
-    background: linear-gradient(180deg,#3a6828 0% 14%,#345e24 14% 28%,#2e5420 28% 42%,#284a1c 42% 57%,#224018 57% 71%,#1c3614 71% 85%,#182808 85% 100%)
-}
-
-.bg-field-detail {
-    top: 50%;
-    bottom: 0;
-    z-index: 6;
-    background: repeating-linear-gradient(90deg,transparent,transparent 31px,rgba(0,0,0,.12) 31px,rgba(0,0,0,.12) 33px),repeating-linear-gradient(0deg,transparent,transparent 31px,rgba(0,0,0,.12) 31px,rgba(0,0,0,.12) 33px),radial-gradient(ellipse 260px 28px at 40% 50%,rgba(100,80,40,.35) 0%,transparent 100%),radial-gradient(ellipse 180px 22px at 60% 70%,rgba(100,80,40,.3) 0%,transparent 100%),radial-gradient(ellipse 18px 10px at 8% 25%,rgba(20,60,10,.5) 60%,transparent 60%),radial-gradient(ellipse 14px 8px at 22% 60%,rgba(20,60,10,.4) 60%,transparent 60%),radial-gradient(ellipse 16px 9px at 48% 35%,rgba(20,60,10,.4) 60%,transparent 60%),radial-gradient(ellipse 20px 11px at 72% 55%,rgba(20,60,10,.5) 60%,transparent 60%),radial-gradient(ellipse 15px 9px at 88% 30%,rgba(20,60,10,.4) 60%,transparent 60%),radial-gradient(ellipse 18px 10px at 35% 80%,rgba(20,60,10,.5) 60%,transparent 60%),radial-gradient(ellipse 16px 9px at 65% 85%,rgba(20,60,10,.4) 60%,transparent 60%),radial-gradient(ellipse 14px 10px at 5% 75%,rgba(80,70,55,.8) 70%,transparent 70%),radial-gradient(ellipse 16px 12px at 92% 68%,rgba(90,75,60,.8) 70%,transparent 70%),radial-gradient(ellipse 12px 9px at 45% 88%,rgba(75,65,50,.7) 70%,transparent 70%),radial-gradient(ellipse 10px 8px at 68% 30%,rgba(85,70,55,.7) 70%,transparent 70%)
-}
-
 .info-box {
     background: url(/ui/parchment.png) repeat;
     background-size: 64px 64px;
@@ -2286,22 +2190,8 @@ img {
     margin: 4px 0 0
 }
 
-.auto-catch-toggle {
-    font-size: 8px;
-    color: var(--text-muted);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 4px;
-    border-bottom: 2px solid #483828
-}
-
 .stats-panel-spacer {
     flex: 1
-}
-
-.auto-catch-toggle input[type=checkbox] {
-    accent-color: var(--gold)
 }
 
 .box-container {
@@ -8166,11 +8056,6 @@ img {
 .prestige-cancel-btn:hover {
     background: #55412c;
     color: var(--parchment)
-}
-
-.tower-section {
-    border-top: 1px solid #ffffff1a;
-    padding-top: 8px
 }
 
 .tower-hint {

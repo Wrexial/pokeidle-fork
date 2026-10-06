@@ -1,6 +1,5 @@
 // Lightweight UI state shared by panels that don't live in the same subtree:
-// the Pokédex selection (so it survives tab swaps) and a request to jump to
-// the Box with its search pre-filled from the Pokédex.
+// the Pokédex selection (so it survives tab swaps and the Box can filter to it).
 
 import React from 'react'
 import { jsx } from 'react/jsx-runtime'
@@ -11,9 +10,6 @@ import { jsx } from 'react/jsx-runtime'
  *   setPokedexSelected: (value: string | null) => void,
  *   pokedexGen: number,
  *   setPokedexGen: (value: number) => void,
- *   boxSearch: string | null,
- *   openBoxSearch: (name: string) => void,
- *   clearBoxSearch: () => void,
  * }} UiState
  */
 
@@ -26,23 +22,14 @@ export function UiProvider({ children }) {
       /** @type {string | null} */ (null)
     ),
     [pokedexGen, setPokedexGen] = React.useState(0),
-    [boxSearch, setBoxSearch] = React.useState(/** @type {string | null} */ (null)),
-    openBoxSearch = React.useCallback(
-      /** @param {string} name */ (name) => setBoxSearch(name),
-      []
-    ),
-    clearBoxSearch = React.useCallback(() => setBoxSearch(null), []),
     value = React.useMemo(
       () => ({
         pokedexSelected,
         setPokedexSelected,
         pokedexGen,
         setPokedexGen,
-        boxSearch,
-        openBoxSearch,
-        clearBoxSearch,
       }),
-      [pokedexSelected, pokedexGen, boxSearch, openBoxSearch, clearBoxSearch]
+      [pokedexSelected, pokedexGen]
     )
   return jsx(UiContext.Provider, {
     value,

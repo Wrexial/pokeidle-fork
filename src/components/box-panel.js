@@ -3,7 +3,7 @@
 import React from 'react'
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
 import { BOX_PAGE_SIZE, BOX_SORT_DIRECTIONS, BOX_SORT_FIELDS } from '../data/ui.js'
-import { pokemonSpecies } from '../data/gameData.js'
+import { baseSpeciesKey, pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { useUi } from '../game/ui-context.js'
 import { getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, nextBoxSortField, parseBoxSort, pokemonDisplayName, toggleBoxSortDirection } from '../game/pokemon.js'
@@ -29,7 +29,7 @@ export function BoxPanel({
   onDragEnd,
 }) {
   const { state, dispatch } = useGame(),
-    { boxSearch, clearBoxSearch } = useUi(),
+    { pokedexSelected } = useUi(),
     [page, setPage] = React.useState(0),
     [query, setQuery] = React.useState(''),
     [filterMode, setFilterMode] = React.useState('all'),
@@ -73,13 +73,25 @@ export function BoxPanel({
       BOX_SORT_FIELDS.find((option) => option.value === boxSort.field)?.label ?? 'Dex',
     boxSortDirection =
       BOX_SORT_DIRECTIONS.find((option) => option.value === boxSort.direction) ??
-      BOX_SORT_DIRECTIONS[0]
-  // The Pokédex can request a Box search; open the controls and fill the
-  // query, then clear the request so it isn't replayed on a later mount.
+      BOX_SORT_DIRECTIONS[0],
+    // The Box follows the Pokédex: selecting a species filters the box to it
+    // (by base name, so every regional form matches).
+    dexSearchName = pokedexSelected
+      ? pokemonSpecies[baseSpeciesKey(pokedexSelected)]?.name ?? null
+      : null
+  // Remember the query the Pokédex set, so closing the entry only clears the
+  // auto-search and leaves a manual Box search alone.
+  const appliedDexName = React.useRef('')
   React.useEffect(() => {
-    if (boxSearch === null) return
-    ;(setSearchOpen(true), setQuery(boxSearch), setFilterMode('all'), setPage(0), clearBoxSearch())
-  }, [boxSearch, clearBoxSearch])
+    if (!dexSearchName) {
+      const applied = appliedDexName.current
+      appliedDexName.current = ''
+      setQuery((current) => (current === applied ? '' : current))
+      return
+    }
+    appliedDexName.current = dexSearchName
+    ;(setSearchOpen(true), setQuery(dexSearchName), setFilterMode('all'), setPage(0))
+  }, [dexSearchName])
   return jsxs(Fragment, {
     children: [
       jsxs('div', {

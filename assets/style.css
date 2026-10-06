@@ -6630,25 +6630,6 @@ img {
     cursor: default
 }
 
-.pokedex-search-box-btn {
-    align-self: flex-start;
-    font-size: 7px;
-    padding: 3px 8px;
-    background: #685040;
-    color: var(--parchment);
-    border: 2px solid #483828;
-    border-radius: 0;
-    cursor: pointer;
-    font-weight: 700;
-    line-height: 1;
-    box-shadow: 1px 1px #0000004d,inset 1px 1px #ffffff1a
-}
-
-.pokedex-search-box-btn:hover {
-    background: #786050;
-    border-color: var(--gold-dark)
-}
-
 .battle-info-btn {
     position: absolute;
     top: 6px;

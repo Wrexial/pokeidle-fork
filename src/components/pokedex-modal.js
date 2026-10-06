@@ -22,7 +22,7 @@ import { PokedexTile } from './pokedex-tile.js'
 /** @param {{ onClose?: () => void, inline?: boolean }} props */
 export function PokedexModal({ onClose, inline = false }) {
   const { state, dispatch } = useGame(),
-    { pokedexSelected: selectedRaw, setPokedexSelected: setSelected, pokedexGen: gen, setPokedexGen: setGen, openBoxSearch } = useUi(),
+    { pokedexSelected: selectedRaw, setPokedexSelected: setSelected, pokedexGen: gen, setPokedexGen: setGen } = useUi(),
     // The selected slot is always a national-dex base; its forms switch in the
     // detail panel without changing the selected tile.
     selected = selectedRaw ? baseSpeciesKey(selectedRaw) : null,
@@ -315,13 +315,6 @@ export function PokedexModal({ onClose, inline = false }) {
                       statRow.key
                     )
                   }),
-                }),
-              activeStatus !== 'unseen' &&
-                jsx('button', {
-                  className: 'pokedex-search-box-btn',
-                  title: `Search your Box for ${activeSpecies.name}`,
-                  onClick: () => openBoxSearch(activeSpecies.name),
-                  children: 'Search Box',
                 }),
             ],
           }),

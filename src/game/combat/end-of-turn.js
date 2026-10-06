@@ -446,6 +446,7 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
     if ((pokemon.sportTurns ?? 0) > 0) pokemon.sportTurns -= 1
     if ((pokemon.embargoTurns ?? 0) > 0) pokemon.embargoTurns -= 1
     if ((pokemon.wonderRoomTurns ?? 0) > 0) pokemon.wonderRoomTurns -= 1
+    if ((pokemon.fairyLockTurns ?? 0) > 0) pokemon.fairyLockTurns -= 1
     if ((pokemon.trickRoomTurns ?? 0) > 0) pokemon.trickRoomTurns -= 1
     if ((pokemon.destinyBondTurns ?? 0) > 0) pokemon.destinyBondTurns -= 1
     if ((pokemon.slowStartTurns ?? 0) > 0) pokemon.slowStartTurns -= 1

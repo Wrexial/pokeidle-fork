@@ -374,6 +374,10 @@ type VolatileState = {
   flowerVeilProtected?: boolean
   /** A Commander Tatsugiri is riding its Dondozo ally and cannot act. */
   commanding?: boolean
+  /** Happy Hour is active: prize money from this battle is doubled. */
+  happyHour?: boolean
+  /** Turns of Fairy Lock left (nobody can switch out). */
+  fairyLockTurns?: number
   /** Leaf Guard is active because the sun is shining this turn. */
   leafGuardActive?: boolean
   /** Pending Cud Chew heal (the berry eaten last turn). */

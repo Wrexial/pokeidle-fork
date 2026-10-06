@@ -222,3 +222,32 @@ test('Run Away always succeeds at fleeing a wild battle', () => {
   assert.equal(next.phase, 'idle')
   assert.equal(next.enemyPokemon, null)
 })
+
+test('Happy Hour doubles the battle prize flag', () => {
+  const player = battler({ name: 'Player', isPlayer: true, moves: ['happyHour'], speed: 200 }),
+    enemy = battler({ name: 'Foe', moves: ['splash'] })
+  resolveBattleTurn(player, enemy, false)
+  assert.equal(player.happyHour, true)
+})
+
+test('Fairy Lock seals the field for a turn', () => {
+  const player = battler({ name: 'Player', isPlayer: true, moves: ['fairyLock'], speed: 200 }),
+    enemy = battler({ name: 'Foe', moves: ['splash'] })
+  resolveBattleTurn(player, enemy, false)
+  assert.ok((player.fairyLockTurns ?? 0) > 0)
+  assert.ok((enemy.fairyLockTurns ?? 0) > 0)
+  assert.equal(isTrapped(enemy), true, 'nobody can switch out')
+})
+
+test('Splash, Celebrate and Hold Hands do nothing', () => {
+  for (const move of ['splash', 'celebrate', 'holdHands']) {
+    const player = battler({ name: 'Player', isPlayer: true, moves: [move], speed: 200 }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], statStages: {} }),
+      events = resolveBattleTurn(player, enemy, false)
+    assert.ok(
+      !events.some((/** @type {any} */ event) => event.type === 'damage'),
+      `${move} deals no damage`
+    )
+    assert.deepEqual(enemy.statStages, {})
+  }
+})

@@ -95,6 +95,10 @@ export function createVolatileState() {
     trappedByMove: !1,
     trappedByAbility: !1,
     emergencySwitched: !1,
+    flowerVeilProtected: !1,
+    commanding: !1,
+    happyHour: !1,
+    fairyLockTurns: 0,
     cudChewHeal: 0,
     nullifiedMoves: {},
   }
@@ -181,6 +185,10 @@ export function volatileStateFromBattle(pokemon) {
     trappedByMove: pokemon.trappedByMove ?? !1,
     trappedByAbility: pokemon.trappedByAbility ?? !1,
     emergencySwitched: pokemon.emergencySwitched ?? !1,
+    flowerVeilProtected: pokemon.flowerVeilProtected ?? !1,
+    commanding: pokemon.commanding ?? !1,
+    happyHour: pokemon.happyHour ?? !1,
+    fairyLockTurns: pokemon.fairyLockTurns ?? 0,
     cudChewHeal: pokemon.cudChewHeal ?? 0,
     nullifiedMoves: pokemon.nullifiedMoves ?? {},
   }

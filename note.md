@@ -6,21 +6,23 @@ inert and what each item needs. **We will pick these up later.**
 
 ## Where we are
 
-- **Moves:** 934 total, **14 still inert** (everything else has a real effect or
+- **Moves:** 934 total, **9 still inert** (everything else has a real effect or
   is a plain attack).
 - **Abilities:** 313 total, **3 still inert**.
 - `public/reference.html` (generated) marks the same items as "Not implemented";
   it is the living source of truth for this list.
-- `npm test` (919), `npm run typecheck`, `npm run validate` and `npm run build`
-  all pass as of commit `c756d84b`.
+- `npm test` (922), `npm run typecheck`, `npm run validate` and `npm run build`
+  all pass.
 
 Done since this note was first written: the mid-battle **switch system** and
 all its moves/abilities, the **Battle Maison doubles niches** (Commander,
-Dancer, Flower Veil, Power of Alchemy, Receiver, Symbiosis, Telepathy), and the
+Dancer, Flower Veil, Power of Alchemy, Receiver, Symbiosis, Telepathy), the
 two **out-of-battle abilities** (Illuminate's item-drop bonus, Illusion's wild
-disguise).
+disguise), and the **flavour moves** (Splash / Celebrate / Hold Hands marked
+as intentional no-ops, Happy Hour's doubled prize money, Fairy Lock's field
+lock).
 
-## Remaining moves (14)
+## Remaining moves (9)
 
 ### Needs a PP system (3)
 `Spite`, `Grudge`, `Imprison`
@@ -48,12 +50,6 @@ disguise).
 - `Magic Room` disables held items for five turns; the engine reads held items
   in many places (`held-items.js` helpers), so it needs a single central
   `itemsDisabled(pokemon)` gate threaded through them.
-
-### Flavour / no battle effect (5)
-`Splash`, `Celebrate`, `Hold Hands`, `Happy Hour`, `Fairy Lock`
-- In the real games these do nothing to the battle (`Happy Hour` doubles prize
-  money; `Fairy Lock` stops switching for a turn in doubles). They are
-  deliberately inert and effectively "done".
 
 ## Remaining abilities (3)
 

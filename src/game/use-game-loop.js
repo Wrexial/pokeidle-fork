@@ -98,6 +98,8 @@ export function useGameLoop() {
         dailyExpBonus = dailyExpMultiplier(currentGameState.dailyEvent),
         expBonus = dailyExpBonus * pokerusExpMultiplier(currentGameState.pokerus) * companionExpMultiplier(currentGameState.companion),
         dailyPrizeBonus = dailyPrizeMultiplier(currentGameState.dailyEvent),
+        // Happy Hour doubles the prize money from this battle.
+        happyHourBonus = currentGameState.playerVolatile?.happyHour ? 2 : 1,
         dailyShinyBonus = dailyShinyMultiplier(currentGameState.dailyEvent)
       switch (currentGameState.phase) {
         case 'idle': {
@@ -473,6 +475,8 @@ export function useGameLoop() {
               trappedByMove: playerVolatile.trappedByMove ?? !1,
               trappedByAbility: playerVolatile.trappedByAbility ?? !1,
               emergencySwitched: playerVolatile.emergencySwitched ?? !1,
+              happyHour: playerVolatile.happyHour ?? !1,
+              fairyLockTurns: playerVolatile.fairyLockTurns ?? 0,
               // Supreme Overlord scales off the party members that have fainted.
               faintedAllies: currentGameState.party.filter(
                 (/** @type {any} */ member) => (member.currentHp ?? 0) <= 0
@@ -534,10 +538,12 @@ export function useGameLoop() {
           // the player decides.
           const playerTrapped =
               !!currentGameState.playerVolatile?.trappedByMove ||
-              !!currentGameState.playerVolatile?.trappedByAbility,
+              !!currentGameState.playerVolatile?.trappedByAbility ||
+              (currentGameState.playerVolatile?.fairyLockTurns ?? 0) > 0,
             enemyTrapped =
               !!currentGameState.enemyPokemon?.trappedByMove ||
-              !!currentGameState.enemyPokemon?.trappedByAbility,
+              !!currentGameState.enemyPokemon?.trappedByAbility ||
+              (currentGameState.enemyPokemon?.fairyLockTurns ?? 0) > 0,
             playerSwitch =
               playerSkipMove ||
               playerTrapped ||
@@ -707,7 +713,7 @@ export function useGameLoop() {
                   const maxLevel = Math.max(
                       ...trainerBattle.trainerTeam.map((member) => member.level)
                     ),
-                    payout = trainerClassPayouts[trainerBattle.trainerClass] * maxLevel * dailyPrizeBonus
+                    payout = trainerClassPayouts[trainerBattle.trainerClass] * maxLevel * dailyPrizeBonus * happyHourBonus
                   currentGameState.bossBattle
                     ? dispatch({
                         type: 'BOSS_BATTLE_END',
@@ -756,7 +762,7 @@ export function useGameLoop() {
               })
             else {
               const maxLevel = Math.max(...trainerBattle.trainerTeam.map((member) => member.level)),
-                payout = trainerClassPayouts[trainerBattle.trainerClass] * maxLevel * dailyPrizeBonus
+                payout = trainerClassPayouts[trainerBattle.trainerClass] * maxLevel * dailyPrizeBonus * happyHourBonus
               currentGameState.bossBattle
                 ? dispatch({
                     type: 'BOSS_BATTLE_END',

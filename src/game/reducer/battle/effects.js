@@ -89,6 +89,10 @@ export function updateVolatile(state, action) {
         trappedByMove: enemyVolatile.trappedByMove ?? !1,
         trappedByAbility: enemyVolatile.trappedByAbility ?? !1,
         emergencySwitched: enemyVolatile.emergencySwitched ?? !1,
+        flowerVeilProtected: enemyVolatile.flowerVeilProtected ?? !1,
+        commanding: enemyVolatile.commanding ?? !1,
+        happyHour: enemyVolatile.happyHour ?? !1,
+        fairyLockTurns: enemyVolatile.fairyLockTurns ?? 0,
       }),
     {
       ...state,

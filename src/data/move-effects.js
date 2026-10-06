@@ -395,6 +395,9 @@ const MOVE_OVERRIDES = {
   meanLook: { effect: { type: 'trap' } },
   spiderWeb: { effect: { type: 'trap' } },
   revivalBlessing: { effect: { type: 'revive' } },
+  // Flavour / field moves.
+  happyHour: { effect: { type: 'happyHour', target: 'self' } },
+  fairyLock: { effect: { type: 'fairyLock' } },
   electrify: { effect: { type: 'electrify' } },
   magicCoat: { effect: { type: 'magicCoat', target: 'self' } },
   teatime: { effect: { type: 'teatime' } },

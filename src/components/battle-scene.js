@@ -195,9 +195,11 @@ export function BattleScene() {
       !state.pendingPlayerMove &&
       !state.playerTurnSpent &&
       !forcedAction,
-    // Trapped by Block / Mean Look / Arena Trap / ... — cannot switch out.
+    // Trapped by Block / Mean Look / Arena Trap / Fairy Lock / ... — cannot switch out.
     playerTrapped =
-      !!state.playerVolatile?.trappedByMove || !!state.playerVolatile?.trappedByAbility,
+      !!state.playerVolatile?.trappedByMove ||
+      !!state.playerVolatile?.trappedByAbility ||
+      (state.playerVolatile?.fairyLockTurns ?? 0) > 0,
     // A fainted active Pokemon in manual mode waits for the player to pick who
     // comes out next (the loop stops there until they do).
     faintReplacement =

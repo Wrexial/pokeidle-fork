@@ -455,7 +455,11 @@ function trapPrevented(pokemon) {
  * @returns {boolean}
  */
 export function isTrapped(pokemon) {
-  return !!(pokemon?.trappedByMove || pokemon?.trappedByAbility)
+  return !!(
+    pokemon?.trappedByMove ||
+    pokemon?.trappedByAbility ||
+    (pokemon?.fairyLockTurns ?? 0) > 0
+  )
 }
 
 /**
@@ -1458,6 +1462,20 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
             })
           }
         }
+      } else if (moveDef.effect?.type === 'happyHour') {
+        attack.attacker.happyHour = !0
+        events.push({
+          type: 'status',
+          message: `Everyone is celebrating \u2014 prize money is doubled!`,
+          data: { target: attack.isPlayer ? 'player' : 'enemy' },
+        })
+      } else if (moveDef.effect?.type === 'fairyLock') {
+        attack.attacker.fairyLockTurns = 2
+        attack.defender.fairyLockTurns = 2
+        events.push({
+          type: 'status',
+          message: 'The battlefield was sealed with a fairy lock!',
+        })
       } else if (
         moveDef.effect?.type === 'status' &&
         (moveDef.effect.chance === void 0 ||

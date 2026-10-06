@@ -831,7 +831,7 @@
   "unlockOrder": 700016,
   "position": {
    "x": 22,
-   "y": 66.8
+   "y": 63.2
   },
   "hidden": true,
   "zone": "alola-poni-island",
@@ -866,8 +866,8 @@
   },
   "unlockOrder": 700017,
   "position": {
-   "x": 29.79,
-   "y": 70.4
+   "x": 30.68,
+   "y": 65.73
   },
   "hidden": true,
   "zone": "alola-poni-island",
@@ -1198,7 +1198,10 @@
    "alola-ancient-poni-path",
    "alola-poni-wilds",
    "alola-poni-plains",
-   "alola-exeggutor-island"
+   "alola-exeggutor-island",
+   "alola-poni-grove",
+   "alola-poni-gauntlet",
+   "alola-poni-meadow"
   ],
   "subAreas": [
    {
@@ -1224,6 +1227,18 @@
    {
     "id": "alola-exeggutor-island",
     "name": "Exeggutor Island"
+   },
+   {
+    "id": "alola-poni-grove",
+    "name": "Poni Grove"
+   },
+   {
+    "id": "alola-poni-gauntlet",
+    "name": "Poni Gauntlet"
+   },
+   {
+    "id": "alola-poni-meadow",
+    "name": "Poni Meadow"
    }
   ],
   "unlock": {
@@ -1737,8 +1752,8 @@
   },
   "unlockOrder": 700017.013,
   "position": {
-   "x": 29.79,
-   "y": 77.6
+   "x": 35.29,
+   "y": 72.12
   },
   "biome": "mountain",
   "background": "/backgrounds/mountain.png"
@@ -1763,8 +1778,8 @@
   },
   "unlockOrder": 700017.014,
   "position": {
-   "x": 22,
-   "y": 81.2
+   "x": 33.69,
+   "y": 79.4
   },
   "biome": "desert",
   "background": "/backgrounds/grassland.png"
@@ -1789,8 +1804,8 @@
   },
   "unlockOrder": 700017.015,
   "position": {
-   "x": 14.21,
-   "y": 77.6
+   "x": 26.62,
+   "y": 84.15
   },
   "biome": "mountain",
   "background": "/backgrounds/mountain.png"
@@ -1815,8 +1830,8 @@
   },
   "unlockOrder": 700017.016,
   "position": {
-   "x": 14.21,
-   "y": 70.4
+   "x": 17.38,
+   "y": 84.15
   },
   "biome": "coast",
   "background": "/backgrounds/beach.png"
@@ -1873,5 +1888,83 @@
   },
   "biome": "cave",
   "background": "/backgrounds/cave.png"
+ },
+ "alola-poni-grove": {
+  "id": "alola-poni-grove",
+  "name": "Poni Grove",
+  "type": "route",
+  "region": "alola",
+  "description": "A sub-area of the Poni Island.",
+  "routeKey": "alola-poni-grove",
+  "connections": [
+   "alola-poni-island"
+  ],
+  "hidden": true,
+  "zone": "alola-poni-island",
+  "unlock": {
+   "requires": [
+    "alola-poni-island",
+    "alola-exeggutor-island"
+   ]
+  },
+  "unlockOrder": 700017.019,
+  "position": {
+   "x": 10.31,
+   "y": 79.4
+  },
+  "biome": "forest",
+  "background": "/backgrounds/grassland.png"
+ },
+ "alola-poni-gauntlet": {
+  "id": "alola-poni-gauntlet",
+  "name": "Poni Gauntlet",
+  "type": "route",
+  "region": "alola",
+  "description": "A sub-area of the Poni Island.",
+  "routeKey": "alola-poni-gauntlet",
+  "connections": [
+   "alola-poni-island"
+  ],
+  "hidden": true,
+  "zone": "alola-poni-island",
+  "unlock": {
+   "requires": [
+    "alola-poni-island",
+    "alola-poni-grove"
+   ]
+  },
+  "unlockOrder": 700017.02,
+  "position": {
+   "x": 8.71,
+   "y": 72.12
+  },
+  "biome": "grassland",
+  "background": "/backgrounds/grassland.png"
+ },
+ "alola-poni-meadow": {
+  "id": "alola-poni-meadow",
+  "name": "Poni Meadow",
+  "type": "route",
+  "region": "alola",
+  "description": "A sub-area of the Poni Island.",
+  "routeKey": "alola-poni-meadow",
+  "connections": [
+   "alola-poni-island"
+  ],
+  "hidden": true,
+  "zone": "alola-poni-island",
+  "unlock": {
+   "requires": [
+    "alola-poni-island",
+    "alola-poni-gauntlet"
+   ]
+  },
+  "unlockOrder": 700017.021,
+  "position": {
+   "x": 13.32,
+   "y": 65.73
+  },
+  "biome": "forest",
+  "background": "/backgrounds/grassland.png"
  }
 }

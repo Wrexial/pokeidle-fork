@@ -2874,5 +2874,231 @@
     "maxLevel": 7
    }
   ]
+ },
+ "paldea-area-zero-station-one": {
+  "name": "Research Station 1",
+  "encounters": [
+   {
+    "speciesKey": "glimmet",
+    "weight": 20,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "greavard",
+    "weight": 20,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "nacli",
+    "weight": 20,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "gible",
+    "weight": 12,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "glimmora",
+    "weight": 8,
+    "minLevel": 68,
+    "maxLevel": 70,
+    "variety": true
+   },
+   {
+    "speciesKey": "grimer",
+    "weight": 8,
+    "minLevel": 68,
+    "maxLevel": 70,
+    "variety": true
+   },
+   {
+    "speciesKey": "haunter",
+    "weight": 8,
+    "minLevel": 68,
+    "maxLevel": 70,
+    "variety": true
+   },
+   {
+    "speciesKey": "sudowoodo",
+    "weight": 8,
+    "minLevel": 68,
+    "maxLevel": 70,
+    "variety": true
+   },
+   {
+    "speciesKey": "larvitar",
+    "weight": 8,
+    "minLevel": 68,
+    "maxLevel": 70,
+    "variety": true
+   },
+   {
+    "speciesKey": "gulpin",
+    "weight": 8,
+    "minLevel": 68,
+    "maxLevel": 70,
+    "variety": true
+   },
+   {
+    "speciesKey": "croagunk",
+    "weight": 8,
+    "minLevel": 68,
+    "maxLevel": 70,
+    "variety": true
+   },
+   {
+    "speciesKey": "foongus",
+    "weight": 8,
+    "minLevel": 68,
+    "maxLevel": 70,
+    "variety": true
+   },
+   {
+    "speciesKey": "skrelp",
+    "weight": 8,
+    "minLevel": 68,
+    "maxLevel": 70,
+    "variety": true
+   },
+   {
+    "speciesKey": "rockruff",
+    "weight": 8,
+    "minLevel": 68,
+    "maxLevel": 70,
+    "variety": true
+   },
+   {
+    "speciesKey": "mareanie",
+    "weight": 8,
+    "minLevel": 68,
+    "maxLevel": 70,
+    "variety": true
+   },
+   {
+    "speciesKey": "salandit",
+    "weight": 8,
+    "minLevel": 68,
+    "maxLevel": 70,
+    "variety": true
+   }
+  ]
+ },
+ "paldea-area-zero-station-three": {
+  "name": "Research Station 3",
+  "encounters": [
+   {
+    "speciesKey": "glimmet",
+    "weight": 20,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "greavard",
+    "weight": 20,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "nacli",
+    "weight": 20,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "gible",
+    "weight": 12,
+    "minLevel": 68,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "glimmora",
+    "weight": 8,
+    "minLevel": 68,
+    "maxLevel": 70,
+    "variety": true
+   },
+   {
+    "speciesKey": "grimer",
+    "weight": 8,
+    "minLevel": 68,
+    "maxLevel": 70,
+    "variety": true
+   },
+   {
+    "speciesKey": "haunter",
+    "weight": 8,
+    "minLevel": 68,
+    "maxLevel": 70,
+    "variety": true
+   },
+   {
+    "speciesKey": "sudowoodo",
+    "weight": 8,
+    "minLevel": 68,
+    "maxLevel": 70,
+    "variety": true
+   },
+   {
+    "speciesKey": "larvitar",
+    "weight": 8,
+    "minLevel": 68,
+    "maxLevel": 70,
+    "variety": true
+   },
+   {
+    "speciesKey": "gulpin",
+    "weight": 8,
+    "minLevel": 68,
+    "maxLevel": 70,
+    "variety": true
+   },
+   {
+    "speciesKey": "croagunk",
+    "weight": 8,
+    "minLevel": 68,
+    "maxLevel": 70,
+    "variety": true
+   },
+   {
+    "speciesKey": "foongus",
+    "weight": 8,
+    "minLevel": 68,
+    "maxLevel": 70,
+    "variety": true
+   },
+   {
+    "speciesKey": "skrelp",
+    "weight": 8,
+    "minLevel": 68,
+    "maxLevel": 70,
+    "variety": true
+   },
+   {
+    "speciesKey": "rockruff",
+    "weight": 8,
+    "minLevel": 68,
+    "maxLevel": 70,
+    "variety": true
+   },
+   {
+    "speciesKey": "mareanie",
+    "weight": 8,
+    "minLevel": 68,
+    "maxLevel": 70,
+    "variety": true
+   },
+   {
+    "speciesKey": "salandit",
+    "weight": 8,
+    "minLevel": 68,
+    "maxLevel": 70,
+    "variety": true
+   }
+  ]
  }
 }

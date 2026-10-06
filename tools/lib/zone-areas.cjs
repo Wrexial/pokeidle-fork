@@ -65,6 +65,18 @@ module.exports = {
         position: { x: 54, y: 60 },
         species: ['blipbug', 'rolycoly', 'gossifleur', 'g-zigzagoon', 'nickit', 'skwovet'],
       },
+      {
+        node: 'wild-area-south-lake-miloch',
+        name: 'South Lake Miloch',
+        position: { x: 50, y: 62 },
+        species: ['wooloo', 'g-zigzagoon', 'nickit', 'blipbug', 'gossifleur', 'chewtle'],
+      },
+      {
+        node: 'wild-area-west-lake-axewell',
+        name: 'West Lake Axewell',
+        position: { x: 46, y: 60 },
+        species: ['magikarp', 'g-yamask', 'rolycoly', 'g-corsola', 'tympole', 'wooloo'],
+      },
     ],
     'galar-isle-of-armor': [
       {
@@ -314,6 +326,38 @@ module.exports = {
         name: 'Exeggutor Island',
         position: { x: 30, y: 72 },
         species: ['exeggcute', 'magikarp', 'wingull'],
+      },
+      {
+        node: 'poni-grove',
+        name: 'Poni Grove',
+        position: { x: 12, y: 76 },
+        species: ['mudbray', 'rockruff', 'golbat', 'a-rattata'],
+      },
+      {
+        node: 'poni-gauntlet',
+        name: 'Poni Gauntlet',
+        position: { x: 10, y: 66 },
+        species: ['mudbray', 'rockruff', 'golbat', 'drampa'],
+      },
+      {
+        node: 'poni-meadow',
+        name: 'Poni Meadow',
+        position: { x: 14, y: 82 },
+        species: ['mudbray', 'cottonee', 'petilil', 'rockruff'],
+      },
+    ],
+    'paldea-area-zero': [
+      {
+        node: 'area-zero-station-one',
+        name: 'Research Station 1',
+        position: { x: 60, y: 80 },
+        species: ['glimmet', 'greavard', 'nacli', 'gible'],
+      },
+      {
+        node: 'area-zero-station-three',
+        name: 'Research Station 3',
+        position: { x: 64, y: 84 },
+        species: ['glimmet', 'greavard', 'nacli', 'gible'],
       },
     ],
   },

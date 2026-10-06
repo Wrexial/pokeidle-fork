@@ -4667,5 +4667,344 @@
     "maxLevel": 71
    }
   ]
+ },
+ "alola-poni-grove": {
+  "name": "Poni Grove",
+  "encounters": [
+   {
+    "speciesKey": "mudbray",
+    "weight": 20,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "rockruff",
+    "weight": 20,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "golbat",
+    "weight": 20,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "a-rattata",
+    "weight": 12,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "larvitar",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "sandshrew",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "diglett",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "cubone",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "corsola",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "trapinch",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "baltoy",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "gible",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "roggenrola",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "boldore",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "sandile",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "carbink",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   }
+  ]
+ },
+ "alola-poni-gauntlet": {
+  "name": "Poni Gauntlet",
+  "encounters": [
+   {
+    "speciesKey": "mudbray",
+    "weight": 20,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "rockruff",
+    "weight": 20,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "golbat",
+    "weight": 20,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "drampa",
+    "weight": 12,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "larvitar",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "sandshrew",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "diglett",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "cubone",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "corsola",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "trapinch",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "baltoy",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "gible",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "roggenrola",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "boldore",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "sandile",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "carbink",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   }
+  ]
+ },
+ "alola-poni-meadow": {
+  "name": "Poni Meadow",
+  "encounters": [
+   {
+    "speciesKey": "mudbray",
+    "weight": 20,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "cottonee",
+    "weight": 20,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "petilil",
+    "weight": 20,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "rockruff",
+    "weight": 12,
+    "minLevel": 69,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "sandshrew",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "paras",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "parasect",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "diglett",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "exeggcute",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "cubone",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "larvitar",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "trapinch",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "baltoy",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "gible",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "sandile",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   },
+   {
+    "speciesKey": "phantump",
+    "weight": 8,
+    "minLevel": 69,
+    "maxLevel": 71,
+    "variety": true
+   }
+  ]
  }
 }

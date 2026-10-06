@@ -2970,5 +2970,227 @@
     "variety": true
    }
   ]
+ },
+ "galar-wild-area-south-lake-miloch": {
+  "name": "South Lake Miloch",
+  "encounters": [
+   {
+    "speciesKey": "wooloo",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "g-zigzagoon",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "nickit",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "blipbug",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "gossifleur",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "chewtle",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "eevee",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "hoothoot",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "nuzleaf",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "stunky",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "purrloin",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "minccino",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "deino",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "stufful",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "skwovet",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "impidimp",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   }
+  ]
+ },
+ "galar-wild-area-west-lake-axewell": {
+  "name": "West Lake Axewell",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "g-yamask",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "rolycoly",
+    "weight": 20,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "g-corsola",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "tympole",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "wooloo",
+    "weight": 12,
+    "minLevel": 35,
+    "maxLevel": 37
+   },
+   {
+    "speciesKey": "goldeen",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "lotad",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "lombre",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "feebas",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "drifloon",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "dewpider",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "chewtle",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "arrokuda",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "sinistea",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   },
+   {
+    "speciesKey": "dreepy",
+    "weight": 8,
+    "minLevel": 35,
+    "maxLevel": 37,
+    "variety": true
+   }
+  ]
  }
 }

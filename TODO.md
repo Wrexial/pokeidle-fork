@@ -21,18 +21,16 @@ renumbered, so the gaps below are items that shipped.
    PP / Z-Move keep-or-drop decisions.
 2. **#25 Battle engine pass** — M–L · ★★★ — the remaining doubles abilities,
    Illusion, more berries / Rocky Helmet, and battle polish.
-3. **#36 Zones (route chunks)** — M · ★★★★ — a few zones still have room for
-   more sub-areas.
-4. **#18 Better settings** — M · ★★★ — cosmetic options, the default catch
+3. **#18 Better settings** — M · ★★★ — cosmetic options, the default catch
    rule in Settings, auto-heal; account controls blocked on #19.
-5. **#43 Multi-battles (triple / rotation)** — M–L · ★★½ — build on the
+4. **#43 Multi-battles (triple / rotation)** — M–L · ★★½ — build on the
    shipped doubles engine.
 
 ### Tier 2 — Big / low-return, defer
 
-6. **#56 Multi-effect move pass (residual)** — S · ★★ — moves that carry a
+5. **#56 Multi-effect move pass (residual)** — S · ★★ — moves that carry a
    third effect, which the single `secondary` slot cannot express.
-7. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+6. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
    doc and real ops for modest player value today.
 
 ---
@@ -139,15 +137,11 @@ Shrine, Cafe) is in. **No open items.**
 The map is a graph of single nodes joined pair-wise. The zone model shipped in
 0.13.0: `type: 'zone'` nodes group sub-areas that are hidden routes with their
 own encounter buckets, and existing routes can be grouped too (`GROUP_ZONES` —
-Alola's islands, Paldea's provinces). Galar's Wild Area is a zone; the DLC zones
-are now their own regions (#39).
+Alola's islands, Paldea's provinces).
 
-- [ ] More sub-areas (pairs with #28a/#28b). Galar's Wild Area (11 habitats),
-      the four DLC zones and Alola's islands are filled out via
-      `tools/lib/zone-areas.cjs` + `apply-zone-areas.cjs`, and sub-area wild
-      tables are behind a Show/Hide toggle on the hub.
-
-Effort: **medium–large** (a small data-model change plus map/encounter UI).
+Shipped: the Galar Wild Area (13 habitats), the four DLC zones, Alola's
+islands, Paldea's provinces and Area Zero, and Johto's Whirl Islands all have
+their sub-areas, spaced in a ring for the focused map view. **No open items.**
 
 ## 43. Multi-battles (double / triple / rotation) as a minigame
 

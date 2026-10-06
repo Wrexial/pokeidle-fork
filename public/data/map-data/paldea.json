@@ -1115,7 +1115,7 @@
   "unlockOrder": 910002.5001,
   "position": {
    "x": 51.28,
-   "y": 57.75
+   "y": 56.95
   },
   "biome": "ruins"
  },
@@ -1140,8 +1140,8 @@
   },
   "unlockOrder": 910002.501,
   "position": {
-   "x": 59.28,
-   "y": 64.15
+   "x": 59.07,
+   "y": 60.55
   },
   "biome": "ruins"
  },
@@ -1166,8 +1166,8 @@
   },
   "unlockOrder": 910002.502,
   "position": {
-   "x": 51.28,
-   "y": 70.55
+   "x": 59.07,
+   "y": 67.75
   },
   "biome": "ruins"
  },
@@ -1192,8 +1192,8 @@
   },
   "unlockOrder": 910002.503,
   "position": {
-   "x": 43.28,
-   "y": 64.15
+   "x": 51.28,
+   "y": 71.35
   },
   "biome": "cave"
  },
@@ -1210,7 +1210,9 @@
    "paldea-area-zero-gate",
    "paldea-area-zero-station-two",
    "paldea-area-zero-station-four",
-   "paldea-area-zero-depths"
+   "paldea-area-zero-depths",
+   "paldea-area-zero-station-one",
+   "paldea-area-zero-station-three"
   ],
   "subAreas": [
    {
@@ -1228,6 +1230,14 @@
    {
     "id": "paldea-area-zero-depths",
     "name": "Area Zero Depths"
+   },
+   {
+    "id": "paldea-area-zero-station-one",
+    "name": "Research Station 1"
+   },
+   {
+    "id": "paldea-area-zero-station-three",
+    "name": "Research Station 3"
    }
   ],
   "unlock": {
@@ -1629,5 +1639,57 @@
   },
   "biome": "grassland",
   "background": "/backgrounds/grassland.png"
+ },
+ "paldea-area-zero-station-one": {
+  "id": "paldea-area-zero-station-one",
+  "name": "Research Station 1",
+  "type": "route",
+  "region": "paldea",
+  "description": "A sub-area of the Area Zero.",
+  "routeKey": "paldea-area-zero-station-one",
+  "connections": [
+   "paldea-area-zero"
+  ],
+  "hidden": true,
+  "zone": "paldea-area-zero",
+  "unlock": {
+   "requires": [
+    "paldea-area-zero",
+    "paldea-area-zero-depths"
+   ]
+  },
+  "unlockOrder": 910002.509,
+  "position": {
+   "x": 43.48,
+   "y": 67.75
+  },
+  "biome": "coast",
+  "background": "/backgrounds/beach.png"
+ },
+ "paldea-area-zero-station-three": {
+  "id": "paldea-area-zero-station-three",
+  "name": "Research Station 3",
+  "type": "route",
+  "region": "paldea",
+  "description": "A sub-area of the Area Zero.",
+  "routeKey": "paldea-area-zero-station-three",
+  "connections": [
+   "paldea-area-zero"
+  ],
+  "hidden": true,
+  "zone": "paldea-area-zero",
+  "unlock": {
+   "requires": [
+    "paldea-area-zero",
+    "paldea-area-zero-station-one"
+   ]
+  },
+  "unlockOrder": 910002.51,
+  "position": {
+   "x": 43.48,
+   "y": 60.55
+  },
+  "biome": "coast",
+  "background": "/backgrounds/beach.png"
  }
 }

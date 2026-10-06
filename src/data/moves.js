@@ -1,4 +1,4 @@
-// Split from src/data/constants.js — see tools/decompile/split-module.mjs
+// Split from src/data/constants.js.
 
 /**
  * Display an accuracy value. The data marks a move that never misses with an

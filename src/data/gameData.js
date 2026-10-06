@@ -1,4 +1,4 @@
-// Split from the former assets/index.js — see tools/decompile/split-modules.mjs
+// Split from the former assets/index.js.
 
 import { applyMoveOverrides } from './move-effects.js'
 

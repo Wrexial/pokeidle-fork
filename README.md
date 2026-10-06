@@ -106,7 +106,7 @@ No environment variables or server-side configuration are needed.
 | `tests/` | `node --test` suite (`npm test`). |
 | `public/data/` | **The game database** — species, moves, maps, encounters, trainers. |
 | `public/sprites/` | Pokémon / trainer sprites and backgrounds. |
-| `tools/` | One-off data scrapers/converters and the decompile tooling. |
+| `tools/` | Data generators, patch passes and cached PokeAPI fetchers. |
 
 `src/` was decompiled from a single minified bundle and split into modules; see
 [`AGENTS.md`](AGENTS.md) before contributing. It documents the architecture,

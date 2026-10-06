@@ -3,8 +3,8 @@
  * Reconcile `statChange` move effects in possible-moves.json with Pokemon
  * Showdown's move table.
  *
- * `convert_moves.py` builds stat changes by substring-matching the scraped
- * description, which is wrong in several systematic ways:
+ * The original move scraper built stat changes by substring-matching the
+ * scraped description, which was wrong in several systematic ways:
  *   - "Special Attack" contains "attack" and "Special Defense" contains
  *     "defense", so special moves also got a bogus physical-stat entry
  *     (Nasty Plot raised Special Attack *and* Attack, Calm Mind added

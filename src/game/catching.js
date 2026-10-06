@@ -1,4 +1,4 @@
-// Split from src/game/logic.js — see tools/decompile/split-logic.mjs
+// Split from src/game/logic.js.
 
 import { ballOrder, pokeBalls } from '../data/items.js'
 import { pokemonSpecies } from '../data/gameData.js'

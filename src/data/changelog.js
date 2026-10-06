@@ -1,4 +1,4 @@
-// Split from src/data/constants.js — see tools/decompile/split-module.mjs
+// Split from src/data/constants.js.
 
 export const GAME_VERSION = '0.24.0'
 

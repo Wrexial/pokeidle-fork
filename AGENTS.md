@@ -88,54 +88,11 @@ style; do not reformat/minify unrelated code.
 
 `src/` was decompiled from a single minified bundle. The vendored React copy has
 been removed (React is now a real dependency), all identifiers were renamed to
-descriptive names, and the monolith was split into modules (see
-`tools/decompile/`).
+descriptive names, and the monolith was split into modules. The one-shot AST
+rename/split tools used for that migration lived in `tools/decompile/` and have
+since been removed; the code is maintained directly now.
 
-`tools/decompile/` holds AST-based, scope-safe rename tools (Babel). They emit
-minimal textual edits (no codegen), so formatting is preserved, and they refuse
-to run on collisions:
-
-```bash
-# top-level identifiers (applied; RENAMES is now empty)
-node tools/decompile/rename.mjs [--write]
-
-# function-scope locals (params + body vars) — see LOCAL_RENAMES
-node tools/decompile/rename-locals.mjs [--write] [--fn SomeFunction]
-
-# nested/block-scoped locals, targeted by declaration line — see NESTED_RENAMES
-node tools/decompile/rename-nested.mjs [--write] [--fn SomeFunction] [--pass2]
-
-# collapse `{ key: key }` object properties to shorthand
-node tools/decompile/collapse-shorthand.mjs [--write]
-
-# reporting
-node tools/decompile/dump-scopes.mjs [FunctionName]   # fn params + scope bindings
-node tools/decompile/dump-nested.mjs                   # nested-report.txt
-node tools/decompile/deps.mjs                          # top-level dependency graph
-
-# split the monolith into src/ modules (already applied)
-node tools/decompile/split-modules.mjs [--write]
-
-# split src/game/logic.js into game sub-modules (already applied)
-node tools/decompile/split-logic.mjs [--write]
-
-# generic module splitter (used for src/data/constants.js)
-node tools/decompile/split-module.mjs [--write]
-
-# split grouped component files into one file per component (already applied)
-node tools/decompile/split-components.mjs [--write]
-```
-
-The whole codebase has now been de-minified and modularised with these tools:
-top-level names, function parameters/body variables, and nested (block/callback)
-bindings are all descriptive, and the code is split into `src/`. The rename
-tools are effectively **one-shot records** of the renames that were applied
-(re-running a pass reports the old names as "not found"); to rename new code,
-add entries targeting the *current* names.
-`rename-nested.mjs` keys entries by declaration line, because short names are
-reused with different roles in sibling scopes (e.g. every `gameReducer` case).
-
-Python tools (the `tools/*.py` scrapers) use the checked-in venv:
+Python tools (currently only `fix_pokemon_ids.py`) use the checked-in venv:
 `.venv/Scripts/python.exe` (Windows). The repo is developed on Windows, so
 prefer cross-platform paths/commands.
 
@@ -207,7 +164,7 @@ in `GameLayout`) dispatches `DEBUG_MAX_LEVEL` when the Konami code
 | `public/backgrounds/` | Battle/location backgrounds. |
 | `public/heal-animation-web.mp4` | Healing animation. |
 | `ui/` | UI textures (parchment, wood button). |
-| `tools/` | One-off scrapers/converters for generating the data JSON, plus `tools/decompile/` (AST rename tool). Not part of the build. |
+| `tools/` | Data generators, patch passes and cached PokeAPI fetchers for `public/data/`. Not part of the build. |
 | `tests/` | `node --test` suite (`npm test`); `tests/helpers/game-data.mjs` (re-exporting `tools/lib/game-data.mjs`) loads `public/data` for headless module tests. |
 | `dist/` | Build output. Gitignored — never edit or commit. |
 
@@ -447,22 +404,12 @@ the code references keys and ids directly, and cross-file references
 - React 19, `jsx`/`jsxs` runtime calls (imported from `react/jsx-runtime`); there
   is no JSX syntax, so no React Vite plugin is needed. Keep changes consistent
   with the existing `jsx('div', { ... })` pattern.
-- `tools/index-backup.js` still contains the original minified 26k-line bundle
-  if you ever need to compare against the pre-decompilation source.
-- `tools/decompile/split-modules.mjs` and the other splitters are historical
-  one-shot records of the original monolith split. `src/` has since been
-  reorganized by hand, so re-running them would clobber the current layout —
-  treat the `MODULES`/rename tables as reference only.
-
 ## Tools (`tools/`)
 
 One-off scripts used to build the data JSON (not run during dev/build):
 
-- `scrape_serebii.py`, `convert_moves.py`, `fix_pokemon_ids.py` — Python
-  (need `requests`, `beautifulsoup4` in `.venv`).
-- `scrape_pokemondb.cjs`, `extract_data.cjs` — Node scripts. `extract_data.cjs`
-  is legacy (it extracts from `tools/index-backup.js` into a stale `data/`
-  directory), so live edits belong in `public/data/`.
+- `fix_pokemon_ids.py` — Python (needs `requests` in `.venv`); reconciles every
+  `pokemon-species.json` id with PokeAPI.
 - `add-gmax-evolutions.cjs` — adds `base -> gx-base` level-100 evolutions for
   every Gigantamax form (idempotent) so they have an acquisition path, like
   Megas already do. The added entries carry `form: true`, which
@@ -484,8 +431,8 @@ One-off scripts used to build the data JSON (not run during dev/build):
   Idempotent; cached under `tools/cache/`.
 - `fix-missing-learnsets.cjs` — fills the ~195 species (every alternate form
   plus a few base species) absent from `possible-learnsets.json` by borrowing
-  the learnset of their base form, pre-evolution or evolution (falling back to
-  the original bundle's table). Without this those Pokemon fight with no moves.
+  the learnset of their base form, pre-evolution or evolution. Without this
+  those Pokemon fight with no moves.
   Idempotent; re-run if `possible-learnsets.json` is regenerated.
 - `add-evolution-items.cjs` — rewrites the level-up evolutions that canonically
   use an item into `{ into, item }` entries: the elemental stones, the trade
@@ -535,8 +482,8 @@ One-off scripts used to build the data JSON (not run during dev/build):
   species data.
 - `fix-stat-changes.cjs` — rewrites every `statChange` move effect's
   `changes`/`target` in `possible-moves.json` from Pokemon Showdown's
-  `moves.json` (cached under `tools/cache/`). `convert_moves.py`
-  substring-matches the scraped description, so "Special Attack" also matched
+  `moves.json` (cached under `tools/cache/`). The original scraper
+  substring-matched the description, so "Special Attack" also matched
   "attack", a missing "user's" keyword defaulted the buff to the opponent, and
   magnitudes/signs were flattened — this corrects ~58 moves (Nasty Plot, Calm
   Mind, Howl, Victory Dance, Shell Smash, Tail Glow, ...). Idempotent (`--dry`);
@@ -969,7 +916,6 @@ One-off scripts used to build the data JSON (not run during dev/build):
   to its `requires`, so a town can't open before the island it sits on
   (Paniola, Heahea and Po Town used to gate on an earlier island's route).
   Idempotent (`--dry`).
-- `RawMoveData`, `index-backup.js` — large reference/backup data; leave alone.
 - `kill-vite.cjs` — kills orphaned Vite dev servers on the port range (Windows
   `taskkill`, else `kill`). Run `npm run kill-vite`, or `--dry` to preview.
 - `lib/region-data.cjs` — `readRegionDir`/`writeRegionDir` for the split
@@ -1000,8 +946,9 @@ One-off scripts used to build the data JSON (not run during dev/build):
   tooltips). Re-run it after changing moves, abilities or held items. Linked
   from the guide, the encounter index and Settings.
 
-These scripts hit external sites (Serebii, PokémonDB) and may write large files
-— only run them when the task is explicitly about re-scraping data.
+These scripts hit external sites (PokeAPI, Serebii's itemdex, Bulbapedia) and
+may write large files — only run them when the task is explicitly about
+re-scraping or regenerating data.
 
 ## Conventions
 
@@ -1010,8 +957,8 @@ These scripts hit external sites (Serebii, PokémonDB) and may write large files
   of `assets/style.css`.
 - Data/asset paths in code are absolute from web root (`/data/...`,
   `/sprites/...`), served out of `public/`.
-- Keep diffs scoped; avoid touching `tools/index-backup.js`, `dist/`, and the
-  committed base64/PNG assets unless the task requires it.
+- Keep diffs scoped; avoid touching `dist/` and the committed base64/PNG assets
+  unless the task requires it.
 - **Changelog & versioning:** record user-facing features and player-visible
   bug fixes in `src/data/changelog.js`, grouped under
   `sections[].heading` with `items[]` one line per change. **Do not bump

@@ -9,8 +9,6 @@
  * level 100 for every `gx-*` species.
  *
  * Idempotent: re-running adds nothing. Writes public/data/evolution-data.json.
- * Note `extract_data.cjs` is a legacy one-off (it writes to a stale `data/`
- * directory), so this patch is applied directly to the live data file.
  *
  * Usage: node tools/add-gmax-evolutions.cjs
  */

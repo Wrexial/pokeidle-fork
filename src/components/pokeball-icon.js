@@ -1,4 +1,4 @@
-// Split from a grouped component file — see tools/decompile/split-components.mjs
+// Split from a grouped component file.
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'

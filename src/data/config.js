@@ -1,4 +1,4 @@
-// Split from src/data/constants.js — see tools/decompile/split-module.mjs
+// Split from src/data/constants.js.
 
 import { autoCatchBallOrder } from './items.js'
 

@@ -1031,6 +1031,22 @@ export const abilityInfo = {
   'supremeOverlord': {
     'group': 'offense',
     'text': 'Boosts Attack and Sp. Atk by 10% for each fainted party member (max 5).'
+  },
+  'battery': {
+    'group': 'offense',
+    'text': 'In Double Battles, boosts an ally\u2019s Attack and Sp. Atk by 30%.'
+  },
+  'powerSpot': {
+    'group': 'offense',
+    'text': 'In Double Battles, boosts an ally\u2019s Attack and Sp. Atk by 30%.'
+  },
+  'friendGuard': {
+    'group': 'defense',
+    'text': 'In Double Battles, reduces the damage an ally takes by 25%.'
+  },
+  'healer': {
+    'group': 'status',
+    'text': 'In Double Battles, has a 30% chance to cure an ally\u2019s status each round.'
   }
 }
 

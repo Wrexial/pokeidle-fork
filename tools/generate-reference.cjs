@@ -118,6 +118,7 @@ async function main() {
     'src/game/reducer/battle/trainer.js',
     'src/game/pokemon/creation.js',
     'src/game/use-game-loop.js',
+    'src/game/minigames/doubles.js',
   ]
   // Strip comments so prose ("the wild pool plus the competitive items",
   // "cosmetic plus stat changes") never counts as an implemented ability; the

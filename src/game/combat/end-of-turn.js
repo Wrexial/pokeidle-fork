@@ -2,7 +2,7 @@
 // focused on the attack sequence.
 
 import { roamerFleeChance } from '../../data/config.js'
-import { abilityIgnoresIndirectDamage, abilityOf } from '../abilities.js'
+import { abilityBlocksBerries, abilityIgnoresIndirectDamage, abilityOf } from '../abilities.js'
 import { emptyBattleHazards } from '../hazards.js'
 import { heldBerryHeal, heldLeftoversHeal } from '../held-items.js'
 import { TERRAIN_NAMES, terrainHeal } from '../terrain.js'
@@ -240,7 +240,7 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
     }
     // Ripen doubles a berry's healing; an opponent's Unnerve blocks it entirely.
     const berryHeal =
-      abilityOf(isPlayerSide ? enemy : player) === 'unnerve'
+      abilityBlocksBerries(isPlayerSide ? enemy : player)
         ? 0
         : heldBerryHeal(pokemon) * (abilityOf(pokemon) === 'ripen' ? 2 : 1)
     if (berryHeal > 0) {

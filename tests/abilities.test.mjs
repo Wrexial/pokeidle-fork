@@ -1542,3 +1542,205 @@ test('Supreme Overlord boosts per fainted ally', () => {
     'capped at five fainted allies'
   )
 })
+
+const { abilityAvoidsContact, abilityBlocksBerries, abilityHitsGhost, abilityStatusAccuracyMultiplier, abilityWeightMultiplier, onKoBoostStat } = await import('../src/game/abilities.js')
+
+test('Long Reach keeps contact abilities from firing', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['tackle'],
+        speed: 200,
+        ability: 'longReach',
+        statStages: { speed: 0 },
+      }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], ability: 'gooey' })
+    resolveBattleTurn(player, enemy, false)
+    assert.equal(player.statStages.speed, 0, 'no contact, so Gooey does not fire')
+    assert.equal(abilityAvoidsContact(player), true)
+  })
+})
+
+test('Heavy Metal and Light Metal scale weight', () => {
+  assert.equal(abilityWeightMultiplier(battler({ ability: 'heavyMetal' })), 2)
+  assert.equal(abilityWeightMultiplier(battler({ ability: 'lightMetal' })), 0.5)
+  assert.equal(abilityWeightMultiplier(battler({})), 1)
+})
+
+test('Wonder Skin halves status-move accuracy', () => {
+  assert.equal(abilityStatusAccuracyMultiplier(battler({ ability: 'wonderSkin' })), 0.5)
+  assert.equal(abilityStatusAccuracyMultiplier(battler({})), 1)
+})
+
+test('Leaf Guard blocks status in the sun', () => {
+  withFixedRandom(0.5, () => {
+    const statusIn = (/** @type {any} */ weather) => {
+      const player = battler({ name: 'Player', isPlayer: true, moves: ['thunderWave'], speed: 200 }),
+        enemy = battler({ name: 'Foe', moves: ['splash'], ability: 'leafGuard', types: ['Normal'] })
+      resolveBattleTurn(player, enemy, false, false, weather)
+      return enemy.status ?? null
+    }
+    assert.equal(statusIn({ type: 'sun', turns: 5 }), null, 'immune in the sun')
+    assert.equal(statusIn(null), 'paralysis', 'statused otherwise')
+  })
+})
+
+test('Supersweet Syrup lowers the foe evasiveness on entry', () => {
+  const player = battler({ name: 'Player', isPlayer: true, moves: ['splash'], speed: 200, ability: 'supersweetSyrup' }),
+    enemy = battler({ name: 'Foe', moves: ['splash'], statStages: {} })
+  resolveBattleTurn(player, enemy, false, !0)
+  assert.equal(enemy.statStages.evasion, -1)
+})
+
+test('Frisk and Forewarn announce what they find', () => {
+  const player = battler({ name: 'Player', isPlayer: true, moves: ['splash'], speed: 200, ability: 'frisk' }),
+    enemy = battler({ name: 'Foe', moves: ['tackle'], heldItem: 'leftovers' }),
+    events = resolveBattleTurn(player, enemy, false, !0)
+  assert.ok(events.some((/** @type {any} */ event) => /frisked/.test(event.message ?? '')))
+
+  const forewarn = battler({ name: 'Player', isPlayer: true, moves: ['splash'], speed: 200, ability: 'forewarn' }),
+    foe = battler({ name: 'Foe', moves: ['tackle'] }),
+    foreEvents = resolveBattleTurn(forewarn, foe, false, !0)
+  assert.ok(foreEvents.some((/** @type {any} */ event) => /foresaw/.test(event.message ?? '')))
+})
+
+test('Lingering Aroma replaces the attacker ability on contact', () => {
+  const player = battler({
+      name: 'Player',
+      isPlayer: true,
+      moves: ['tackle'],
+      speed: 200,
+      ability: 'blaze',
+    }),
+    enemy = battler({ name: 'Foe', moves: ['splash'], ability: 'lingeringAroma' })
+  resolveBattleTurn(player, enemy, false)
+  assert.equal(player.abilityOverride, 'lingeringAroma')
+})
+
+test('Spicy Spray lowers the attacker Attack', () => {
+  const player = battler({
+      name: 'Player',
+      isPlayer: true,
+      moves: ['tackle'],
+      speed: 200,
+      statStages: { attack: 0 },
+    }),
+    enemy = battler({ name: 'Foe', moves: ['splash'], ability: 'spicySpray' })
+  resolveBattleTurn(player, enemy, false)
+  assert.equal(player.statStages.attack, -1)
+})
+
+test('Electromorphosis charges and doubles the next Electric move', () => {
+  withFixedRandom(0.5, () => {
+    const damage = (/** @type {boolean} */ charged) => {
+      const player = battler({
+          name: 'Player',
+          isPlayer: true,
+          moves: ['thunderbolt'],
+          speed: 200,
+          spAttack: 200,
+          charged,
+        }),
+        enemy = battler({ name: 'Foe', moves: ['splash'], types: ['Normal'], currentHp: 2000, maxHp: 2000 })
+      resolveBattleTurn(player, enemy, false)
+      return 2000 - enemy.currentHp
+    }
+    assert.ok(damage(true) > damage(false), 'the charge boosts the Electric move')
+  })
+  withFixedRandom(0.5, () => {
+    const player = battler({ name: 'Player', isPlayer: true, moves: ['tackle'], speed: 200 }),
+      enemy = battler({ name: 'Foe', moves: ['splash'], ability: 'electromorphosis' })
+    resolveBattleTurn(player, enemy, false)
+    assert.equal(enemy.charged, true)
+  })
+})
+
+test('Wind Rider blocks wind moves and raises Attack', () => {
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['gust'],
+        speed: 200,
+        spAttack: 200,
+      }),
+      enemy = battler({
+        name: 'Foe',
+        moves: ['splash'],
+        ability: 'windRider',
+        types: ['Normal'],
+        currentHp: 400,
+        maxHp: 400,
+        statStages: {},
+      })
+    resolveBattleTurn(player, enemy, false)
+    assert.equal(enemy.currentHp, 400, 'immune to the wind move')
+    assert.equal(enemy.statStages.attack, 1, 'Attack rose')
+  })
+})
+
+test("Mind's Eye lets Normal moves hit Ghost-types", () => {
+  assert.equal(abilityHitsGhost(battler({ ability: 'mindsEye' })), true)
+  withFixedRandom(0.5, () => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['tackle'],
+        speed: 200,
+        attack: 200,
+        ability: 'mindsEye',
+      }),
+      ghost = battler({ name: 'Foe', moves: ['splash'], types: ['Ghost'], currentHp: 400, maxHp: 400 })
+    resolveBattleTurn(player, ghost, false)
+    assert.ok(ghost.currentHp < 400)
+  })
+})
+
+test('As One combines Unnerve with the neigh boosts', () => {
+  assert.equal(onKoBoostStat(battler({ ability: 'asOneGlastrier' })), 'attack')
+  assert.equal(onKoBoostStat(battler({ ability: 'asOneSpectrier' })), 'spAttack')
+  assert.equal(abilityBlocksBerries(battler({ ability: 'asOneGlastrier' })), true)
+  assert.equal(abilityBlocksBerries(battler({ ability: 'unnerve' })), true)
+  assert.equal(abilityBlocksBerries(battler({ ability: 'overgrow' })), false)
+})
+
+test('Tera Shift transforms Terapagos into its Terastal forme', () => {
+  const player = battler({
+      name: 'Terapagos',
+      isPlayer: true,
+      moves: ['splash'],
+      speed: 200,
+      ability: 'teraShift',
+      speciesKey: 'terapagos',
+      types: ['Normal'],
+    }),
+    enemy = battler({ name: 'Foe', moves: ['splash'] })
+  resolveBattleTurn(player, enemy, false, !0)
+  assert.equal(player.speciesKey, 'terapagos-t')
+})
+
+test('Tera Shell halves hits while at full HP', () => {
+  withFixedRandom(0.5, () => {
+    const damageTaken = (/** @type {any} */ ability, /** @type {number} */ hp) => {
+      const player = battler({
+          name: 'Player',
+          isPlayer: true,
+          moves: ['tackle'],
+          speed: 200,
+          attack: 200,
+        }),
+        enemy = battler({
+          name: 'Foe',
+          moves: ['splash'],
+          ability,
+          currentHp: hp,
+          maxHp: 400,
+        })
+      resolveBattleTurn(player, enemy, false)
+      return 400 - enemy.currentHp
+    }
+    assert.ok(damageTaken('teraShell', 400) < damageTaken(undefined, 400), 'halved at full HP')
+    assert.equal(damageTaken('teraShell', 200), damageTaken(undefined, 200), 'normal below full HP')
+  })
+})

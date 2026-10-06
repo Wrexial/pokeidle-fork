@@ -848,6 +848,36 @@ export const evolutionItems = {
       description: 'Changes Calyrex between its base and rider forms.',
       reusable: !0,
     },
+    wellspringMask: {
+      id: 'wellspringMask',
+      name: 'Wellspring Mask',
+      description: 'Changes Ogerpon into its Wellspring Mask forme.',
+      reusable: !0,
+    },
+    hearthflameMask: {
+      id: 'hearthflameMask',
+      name: 'Hearthflame Mask',
+      description: 'Changes Ogerpon into its Hearthflame Mask forme.',
+      reusable: !0,
+    },
+    cornerstoneMask: {
+      id: 'cornerstoneMask',
+      name: 'Cornerstone Mask',
+      description: 'Changes Ogerpon into its Cornerstone Mask forme.',
+      reusable: !0,
+    },
+    teraOrb: {
+      id: 'teraOrb',
+      name: 'Tera Orb',
+      description: 'Changes Terapagos between its Normal, Terastal and Stellar Formes.',
+      reusable: !0,
+    },
+    peatBlock: {
+      id: 'peatBlock',
+      name: 'Peat Block',
+      description: 'Changes Ursaluna into its Bloodmoon forme.',
+      reusable: !0,
+    },
   }
 
 /**
@@ -1126,6 +1156,11 @@ export const tokenShopItems = [
     { itemId: 'rustedSword', tokenCost: 4 },
     { itemId: 'rustedShield', tokenCost: 4 },
     { itemId: 'reinsOfUnity', tokenCost: 4 },
+    { itemId: 'wellspringMask', tokenCost: 4 },
+    { itemId: 'hearthflameMask', tokenCost: 4 },
+    { itemId: 'cornerstoneMask', tokenCost: 4 },
+    { itemId: 'teraOrb', tokenCost: 4 },
+    { itemId: 'peatBlock', tokenCost: 4 },
     { itemId: 'megaStone', tokenCost: 5 },
     { itemId: 'maxMushroom', tokenCost: 4 },
     { itemId: 'terrainExtender', tokenCost: 3 },

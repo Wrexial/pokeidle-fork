@@ -404,6 +404,9 @@ export function abilityPreventsStatus(target, status) {
     blocked = STATUS_IMMUNE_ABILITIES[ability ?? ''],
     // Badly poisoned still counts as poison for Immunity / Pastel Veil.
     normalized = status === 'toxic' ? 'poison' : status
+  // Leaf Guard blocks all status while the sun is shining (the engine sets the
+  // flag for the turn from the active weather).
+  if (ability === 'leafGuard' && target.leafGuardActive) return true
   if (blocked === normalized || blocked === 'all') return true
   return false
 }
@@ -474,4 +477,126 @@ export function abilityIgnoresIndirectDamage(pokemon) {
 export function abilityBlocksNonSuperEffective(defender, effectiveness, attacker) {
   if (abilityIgnoresTargetAbility(attacker)) return false
   return abilityOf(defender) === 'wonderGuard' && effectiveness <= 1
+}
+
+/**
+ * Long Reach: the holder's moves do not make contact, so contact-reactive
+ * abilities (Static, Rough Skin, ...) never fire.
+ * @param {BattlePokemon | null | undefined} attacker
+ * @returns {boolean}
+ */
+export function abilityAvoidsContact(attacker) {
+  if (!attacker) return false
+  return abilityOf(attacker) === 'longReach'
+}
+
+/**
+ * Heavy Metal doubles the holder's weight and Light Metal halves it, which
+ * feeds the weight-based moves (Heat Crash, Low Kick, Grass Knot).
+ * @param {BattlePokemon} pokemon
+ * @returns {number}
+ */
+export function abilityWeightMultiplier(pokemon) {
+  const ability = abilityOf(pokemon)
+  if (ability === 'heavyMetal') return 2
+  if (ability === 'lightMetal') return 0.5
+  return 1
+}
+
+/**
+ * Wonder Skin halves the accuracy of status moves aimed at the holder.
+ * @param {BattlePokemon} defender
+ * @returns {number}
+ */
+export function abilityStatusAccuracyMultiplier(defender) {
+  return abilityOf(defender) === 'wonderSkin' ? 0.5 : 1
+}
+
+/** Wind-move display names (Gust, Icy Wind, the storm moves, ...). */
+const WIND_MOVES = new Set([
+  'Gust',
+  'Razor Wind',
+  'Twister',
+  'Whirlwind',
+  'Tailwind',
+  'Icy Wind',
+  'Hurricane',
+  'Fairy Wind',
+  'Bleakwind Storm',
+  'Sandsear Storm',
+  'Springtide Storm',
+  'Wildbolt Storm',
+])
+
+/**
+ * @param {Move | null | undefined} moveDef
+ * @returns {boolean}
+ */
+export function isWindMove(moveDef) {
+  return !!moveDef && WIND_MOVES.has(moveDef.name ?? '')
+}
+
+/**
+ * Wind Rider: the holder is immune to wind moves (and gains Attack when hit).
+ * @param {BattlePokemon} defender
+ * @param {Move} moveDef
+ * @param {BattlePokemon} [attacker]
+ * @returns {boolean}
+ */
+export function abilityBlocksWind(defender, moveDef, attacker) {
+  if (abilityIgnoresTargetAbility(attacker)) return false
+  return abilityOf(defender) === 'windRider' && isWindMove(moveDef)
+}
+
+/**
+ * Whether the holder gains Attack from a wind move (Wind Rider) rather than
+ * taking it. Wind Power charges instead.
+ * @param {BattlePokemon} defender
+ * @param {Move} moveDef
+ * @returns {boolean}
+ */
+export function abilityBoostsFromWind(defender, moveDef) {
+  if (!isWindMove(moveDef)) return false
+  const ability = abilityOf(defender)
+  return ability === 'windRider' || ability === 'windPower'
+}
+
+/**
+ * Mind's Eye / Scrappy let Normal and Fighting moves hit Ghost types.
+ * @param {BattlePokemon} attacker
+ * @returns {boolean}
+ */
+export function abilityHitsGhost(attacker) {
+  const ability = abilityOf(attacker)
+  return ability === 'scrappy' || ability === 'mindsEye'
+}
+
+/**
+ * Whether a KO rewards this ability with a stat boost, and which stat.
+ * As One combines Unnerve with Chilling Neigh / Grim Neigh.
+ * @param {BattlePokemon} attacker
+ * @returns {string | null}
+ */
+export function onKoBoostStat(attacker) {
+  const ability = abilityOf(attacker)
+  if (ability === 'moxie' || ability === 'chillingNeigh' || ability === 'asOneGlastrier')
+    return 'attack'
+  if (
+    ability === 'grimNeigh' ||
+    ability === 'soulHeart' ||
+    ability === 'asOneSpectrier'
+  )
+    return 'spAttack'
+  return null
+}
+
+/**
+ * Whether the holder's ability blocks the foe's held Berry (Unnerve, and the
+ * As One formes that include it).
+ * @param {BattlePokemon} pokemon
+ * @returns {boolean}
+ */
+export function abilityBlocksBerries(pokemon) {
+  const ability = abilityOf(pokemon)
+  return ability === 'unnerve' || ability === 'asOneGlastrier' || ability === 'asOneSpectrier'
 }

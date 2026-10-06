@@ -3,7 +3,7 @@
 import { moveMakesContact } from '../../data/move-effects.js'
 import { moveData, moveLearnsets } from '../../data/gameData.js'
 import { heldItems } from '../../data/items.js'
-import { abilityAbsorbsType, abilityAttackMultiplier, abilityBlocksMove, abilityBlocksNonSuperEffective, abilityChangesMoveType, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityEffectivenessMultiplier, abilityHalvesSuperEffective, abilityHealsFromType, abilityOf, abilityPreventsStatDrop, abilitySurvivesAtFullHp, fieldAuraMultiplier, onHitStatBoost, onHpThresholdBoost, ruinDefenseMultiplier, ruinOffenseMultiplier, rivalryDamageMultiplier, stakeoutDamageMultiplier } from '../abilities.js'
+import { abilityAbsorbsType, abilityAttackMultiplier, abilityAvoidsContact, abilityBlocksMove, abilityBlocksNonSuperEffective, abilityBlocksWind, abilityChangesMoveType, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityEffectivenessMultiplier, abilityHalvesSuperEffective, abilityHealsFromType, abilityHitsGhost, abilityOf, abilityPreventsStatDrop, abilityStatusAccuracyMultiplier, abilitySurvivesAtFullHp, fieldAuraMultiplier, isWindMove, onHitStatBoost, onHpThresholdBoost, onKoBoostStat, ruinDefenseMultiplier, ruinOffenseMultiplier, rivalryDamageMultiplier, stakeoutDamageMultiplier } from '../abilities.js'
 import { AI_SKILL, chooseMoveForBattle } from './ai.js'
 import { changeBattleForm } from './setup.js'
 import { calculateDamage, chance, isSelfTargetedMove, normalizeStatKey } from './damage.js'
@@ -400,12 +400,26 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         type: terrainSetter,
         turns: TERRAIN_TURNS + heldTerrainExtenderTurns(playerTerrain ? player : enemy),
       }
+    // Teraform Zero clears the weather and terrain when it enters.
+    if (abilityOf(player) === 'teraformZero' || abilityOf(enemy) === 'teraformZero') {
+      if (activeWeather) {
+        activeWeather = null
+        events.push({ type: 'weather', message: 'The weather was cleared!', data: { weather: null } })
+      }
+      if (activeTerrain) {
+        activeTerrain = null
+        events.push({ type: 'terrain', message: 'The terrain was cleared!', data: { terrain: null } })
+      }
+    }
   }
   // Air Lock / Cloud Nine suppress the weather's effects entirely.
   const weatherSuppressed =
       ['airLock', 'cloudNine'].includes(abilityOf(player) ?? '') ||
       ['airLock', 'cloudNine'].includes(abilityOf(enemy) ?? ''),
     effectiveWeather = weatherSuppressed ? null : activeWeather
+  // Leaf Guard blocks status while the sun is shining.
+  player.leafGuardActive = abilityOf(player) === 'leafGuard' && effectiveWeather?.type === 'sun'
+  enemy.leafGuardActive = abilityOf(enemy) === 'leafGuard' && effectiveWeather?.type === 'sun'
   // Forecast and Mimicry change the holder's type with the weather / terrain.
   for (const [mon, isPlayerSide] of /** @type {[any, boolean][]} */ ([ [player, !0], [enemy, !1] ])) {
     const ability = abilityOf(mon)
@@ -1419,7 +1433,9 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       ),
       accuracyMult =
         (abilityOf(attack.attacker) === 'compoundEyes' ? 1.3 : 1) *
-        (abilityOf(attack.attacker) === 'victoryStar' ? 1.1 : 1),
+        (abilityOf(attack.attacker) === 'victoryStar' ? 1.1 : 1) *
+        // Wonder Skin halves the accuracy of status moves aimed at its holder.
+        (baseMove.category === 'status' ? abilityStatusAccuracyMultiplier(attack.defender) : 1),
       accuracyMove =
         accuracyMult === 1 || !(baseMove.accuracy > 0) || baseMove.accuracy > 100
           ? baseMove
@@ -1478,6 +1494,26 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       }
       continue
     }
+    // Wind Rider is immune to wind moves and gains Attack from them.
+    if (abilityBlocksWind(attack.defender, effectiveMove, attack.attacker)) {
+      rememberNullifiedMove(attack)
+      const windStages = attack.defender.statStages ?? (attack.defender.statStages = {}),
+        windCurrent = windStages.attack ?? 0,
+        windNext = clampStatStage(windCurrent + 1)
+      if (windNext !== windCurrent) {
+        windStages.attack = windNext
+        events.push({
+          type: 'statChange',
+          message: `${attack.defender.name}'s Attack rose!`,
+          data: { target: attack.isPlayer ? 'enemy' : 'player' },
+        })
+      }
+      events.push({
+        type: 'miss',
+        message: `${attack.defender.name}'s Wind Rider made it immune!`,
+      })
+      continue
+    }
     // Laser Focus guarantees this hit crits; Merciless always crits a statused
     // foe; Lock-On / Mind Reader make it land.
     const guaranteedCrit =
@@ -1489,9 +1525,9 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         abilityOf(attack.defender) === 'noGuard'
     if (attack.attacker.laserFocus === !0) attack.attacker.laserFocus = !1
     if ((attack.attacker.lockOnTurns ?? 0) > 0) attack.attacker.lockOnTurns = 0
-    // Scrappy lets Normal and Fighting moves hit Ghost-types.
+    // Scrappy and Mind's Eye let Normal and Fighting moves hit Ghost-types.
     const defenderTypesForMove =
-      abilityOf(attack.attacker) === 'scrappy' &&
+      abilityHitsGhost(attack.attacker) &&
       (effectiveMove.type === 'Normal' || effectiveMove.type === 'Fighting')
         ? attack.defender.types.filter((type) => type !== 'Ghost')
         : attack.defender.types
@@ -1669,7 +1705,19 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         fieldAuraMultiplier(player, enemy, effectiveMove) *
         terrainDamageMultiplier(activeTerrain, attack.attacker, effectiveMove, attack.defender)
     )
+    // Charge (and Electromorphosis / Wind Power) doubles the next Electric move.
+    if (attack.attacker.charged && effectiveMove.type === 'Electric') {
+      totalDamage = Math.max(1, Math.floor(totalDamage * 2))
+      attack.attacker.charged = false
+    }
     if (abilityHalvesSuperEffective(attack.defender, attack.attacker) && damageResult.effectiveness > 1)
+      totalDamage = Math.max(1, Math.floor(totalDamage / 2))
+    // Tera Shell halves every hit while the holder is at full HP.
+    if (
+      abilityOf(attack.defender) === 'teraShell' &&
+      attack.defender.currentHp >= attack.defender.maxHp &&
+      totalDamage > 0
+    )
       totalDamage = Math.max(1, Math.floor(totalDamage / 2))
     // Tinted Lens / Neuroforce scale the effectiveness-based damage (but never
     // turn an immune hit into damage).
@@ -2025,6 +2073,45 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         })
       }
     }
+    // Spicy Spray lowers the attacker's Attack when the holder is hit.
+    if (abilityOf(attack.defender) === 'spicySpray' && attack.attacker.currentHp > 0) {
+      const sprayStages = attack.attacker.statStages ?? (attack.attacker.statStages = {}),
+        sprayCurrent = sprayStages.attack ?? 0,
+        sprayNext = clampStatStage(sprayCurrent - 1)
+      if (sprayNext !== sprayCurrent && !abilityPreventsStatDrop(attack.attacker, 'attack')) {
+        sprayStages.attack = sprayNext
+        events.push({
+          type: 'statChange',
+          message: `${attack.attacker.name}'s Attack fell!`,
+          data: { target: attack.isPlayer ? 'player' : 'enemy' },
+        })
+      }
+    }
+    // Lingering Aroma replaces the attacker's ability if the move made contact.
+    if (
+      abilityOf(attack.defender) === 'lingeringAroma' &&
+      moveMakesContact(effectiveMove) &&
+      !abilityAvoidsContact(attack.attacker)
+    ) {
+      const attackerAromaAbility = abilityOf(attack.attacker)
+      if (attackerAromaAbility && attackerAromaAbility !== 'lingeringAroma') {
+        attack.attacker.abilityOverride = 'lingeringAroma'
+        attack.attacker.abilitySuppressed = !1
+      }
+    }
+    // Electromorphosis charges on any hit; Wind Power only on a wind move.
+    if (
+      (abilityOf(attack.defender) === 'electromorphosis' ||
+        (abilityOf(attack.defender) === 'windPower' && isWindMove(effectiveMove))) &&
+      !attack.defender.charged
+    ) {
+      attack.defender.charged = !0
+      events.push({
+        type: 'status',
+        message: `${attack.defender.name} became charged!`,
+        data: { target: attack.isPlayer ? 'enemy' : 'player' },
+      })
+    }
     // Power Construct transforms Zygarde into its Complete Forme below half HP.
     if (
       abilityOf(attack.defender) === 'powerConstruct' &&
@@ -2055,7 +2142,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       attack.defender.types = [effectiveMove.type]
       attack.defender.typesOverride = [effectiveMove.type]
     }
-    if (abilityOf(attack.defender) === 'pickpocket' && moveMakesContact(effectiveMove))
+    if (abilityOf(attack.defender) === 'pickpocket' && moveMakesContact(effectiveMove) && !abilityAvoidsContact(attack.attacker))
       stealHeldItem(attack.defender, attack.attacker, events, !attack.isPlayer)
     // Item-targeting moves. Sticky Hold still protects the item.
     if (moveDef.effect?.type === 'stealItem')
@@ -2106,6 +2193,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     if (
       abilityOf(attack.attacker) === 'poisonTouch' &&
       moveMakesContact(effectiveMove) &&
+      !abilityAvoidsContact(attack.attacker) &&
       chance(0.3, deterministic)
     )
       applyStatus(attack.defender, 'poison', events, !attack.isPlayer, deterministic, activeTerrain, !0, attack.attacker)
@@ -2149,7 +2237,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       const side = attack.isPlayer ? activeHazards.player : activeHazards.enemy
       side.toxicSpikes = Math.min(2, side.toxicSpikes + 1)
     }
-    if (defenderAbilityOnHit === 'wanderingSpirit' && moveMakesContact(effectiveMove)) {
+    if (defenderAbilityOnHit === 'wanderingSpirit' && moveMakesContact(effectiveMove) && !abilityAvoidsContact(attack.attacker)) {
       const attackerAbility2 = abilityOf(attack.attacker)
       if (attackerAbility2 && attackerAbility2 !== 'wanderingSpirit') {
         attack.attacker.abilityOverride = defenderAbilityOnHit
@@ -2158,7 +2246,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         attack.defender.abilitySuppressed = !1
       }
     }
-    if (defenderAbilityOnHit === 'perishBody' && moveMakesContact(effectiveMove)) {
+    if (defenderAbilityOnHit === 'perishBody' && moveMakesContact(effectiveMove) && !abilityAvoidsContact(attack.attacker)) {
       if ((attack.attacker.perishTurns ?? 0) <= 0 && (attack.defender.perishTurns ?? 0) <= 0) {
         attack.attacker.perishTurns = 3
         attack.defender.perishTurns = 3
@@ -2177,7 +2265,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         },
       })
       // Aftermath punishes a contact KO.
-      if (abilityOf(attack.defender) === 'aftermath' && moveMakesContact(effectiveMove) && attack.attacker.currentHp > 0) {
+      if (abilityOf(attack.defender) === 'aftermath' && moveMakesContact(effectiveMove) && !abilityAvoidsContact(attack.attacker) && attack.attacker.currentHp > 0) {
         const aftermath = Math.max(1, Math.floor(attack.attacker.maxHp / 4))
         attack.attacker.currentHp = Math.max(0, attack.attacker.currentHp - aftermath)
         events.push({
@@ -2229,14 +2317,9 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           },
         })
       }
-      // Moxie / Chilling Neigh / Grim Neigh / Beast Boost reward a KO.
+      // Moxie / Chilling Neigh / Grim Neigh / Beast Boost (and As One) reward a KO.
       const koAbility = abilityOf(attack.attacker)
-      let koStat =
-        koAbility === 'moxie' || koAbility === 'chillingNeigh'
-          ? 'attack'
-          : koAbility === 'grimNeigh' || koAbility === 'soulHeart'
-            ? 'spAttack'
-            : null
+      let koStat = onKoBoostStat(attack.attacker)
       if (koAbility === 'beastBoost') {
         const stats = {
           attack: attack.attacker.attack,

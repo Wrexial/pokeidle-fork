@@ -1,7 +1,7 @@
 // Status conditions and volatile effects (confusion, infatuation, Leech Seed, contact abilities). Split from game/combat.js.
 
 import { moveMakesContact } from '../../data/move-effects.js'
-import { abilityIgnoresPoisonImmunity, abilityOf, abilityPreventsStatDrop, abilityPreventsStatus } from '../abilities.js'
+import { abilityAvoidsContact, abilityIgnoresPoisonImmunity, abilityOf, abilityPreventsStatDrop, abilityPreventsStatus } from '../abilities.js'
 import { genderForPokemon } from '../breeding.js'
 import { chance } from './damage.js'
 import { heldCuresStatus } from '../held-items.js'
@@ -241,7 +241,8 @@ export function handleConfusion(attacker, events, isPlayer, deterministic = !1) 
  * @param {{ type: string } | null} terrain
  */
 export function applyContactAbility(defender, attacker, moveDef, events, attackerIsPlayer, deterministic, terrain) {
-  if (!moveMakesContact(moveDef)) return
+  // Long Reach keeps the attacker's moves from connecting physically.
+  if (!moveMakesContact(moveDef) || abilityAvoidsContact(attacker)) return
   const ability = abilityOf(defender),
     roll = () => chance(0.3, deterministic)
   switch (ability) {

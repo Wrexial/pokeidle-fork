@@ -5,6 +5,7 @@
 // Punishment) and friendship (Return, Frustration).
 
 import { pokemonSpecies } from '../../data/gameData.js'
+import { abilityWeightMultiplier } from '../abilities.js'
 
 /**
  * Sum of a battler's positive stat stages.
@@ -59,9 +60,9 @@ function flailPower(currentHp, maxHp) {
   return 40
 }
 
-/** @param {string} speciesKey */
-function weightOf(speciesKey) {
-  return pokemonSpecies[speciesKey]?.weight ?? 0
+/** @param {any} pokemon */
+function weightOf(pokemon) {
+  return (pokemonSpecies[pokemon?.speciesKey]?.weight ?? 0) * abilityWeightMultiplier(pokemon)
 }
 
 /**
@@ -79,10 +80,10 @@ export function variablePower(moveId, attacker, defender, options = {}) {
   switch (moveId) {
     case 'heatCrash':
     case 'heavySlam':
-      return weightPower(weightOf(attacker.speciesKey), weightOf(defender.speciesKey))
+      return weightPower(weightOf(attacker), weightOf(defender))
     case 'lowKick':
     case 'grassKnot':
-      return targetWeightPower(weightOf(defender.speciesKey))
+      return targetWeightPower(weightOf(defender))
     case 'electroBall': {
       const ratio = defender.speed / Math.max(1, attacker.speed)
       if (ratio <= 0.25) return 150

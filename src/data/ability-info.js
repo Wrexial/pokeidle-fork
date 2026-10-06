@@ -1047,6 +1047,86 @@ export const abilityInfo = {
   'healer': {
     'group': 'status',
     'text': 'In Double Battles, has a 30% chance to cure an ally\u2019s status each round.'
+  },
+  'anticipation': {
+    'group': 'entry',
+    'text': 'Shudders on entry if the foe has a super-effective or one-hit KO move.'
+  },
+  'forewarn': {
+    'group': 'entry',
+    'text': 'Reveals the foe\u2019s strongest move on entry.'
+  },
+  'frisk': {
+    'group': 'entry',
+    'text': 'Reveals the foe\u2019s held item on entry.'
+  },
+  'supersweetSyrup': {
+    'group': 'entry',
+    'text': 'Lowers the foe\u2019s evasiveness by one stage on entry.'
+  },
+  'longReach': {
+    'group': 'contact',
+    'text': 'The holder\u2019s moves never make contact.'
+  },
+  'lingeringAroma': {
+    'group': 'contact',
+    'text': 'Contact replaces the attacker\u2019s ability with Lingering Aroma.'
+  },
+  'spicySpray': {
+    'group': 'onhit',
+    'text': 'Lowers the attacker\u2019s Attack when the holder is hit.'
+  },
+  'wonderSkin': {
+    'group': 'status',
+    'text': 'Halves the accuracy of status moves aimed at the holder.'
+  },
+  'leafGuard': {
+    'group': 'status',
+    'text': 'Prevents status conditions while the sun is shining.'
+  },
+  'electromorphosis': {
+    'group': 'offense',
+    'text': 'Becomes charged when hit, doubling the power of its next Electric move.'
+  },
+  'windPower': {
+    'group': 'offense',
+    'text': 'Becomes charged when hit by a wind move, doubling its next Electric move.'
+  },
+  'windRider': {
+    'group': 'absorb',
+    'text': 'Immune to wind moves and raises Attack when hit by one.'
+  },
+  'mindsEye': {
+    'group': 'misc',
+    'text': 'Lets its Normal and Fighting moves hit Ghost-types.'
+  },
+  'heavyMetal': {
+    'group': 'stats',
+    'text': 'Doubles its weight.'
+  },
+  'lightMetal': {
+    'group': 'stats',
+    'text': 'Halves its weight.'
+  },
+  'asOneGlastrier': {
+    'group': 'onko',
+    'text': 'Combines Unnerve with Chilling Neigh (Attack rises after a KO).'
+  },
+  'asOneSpectrier': {
+    'group': 'onko',
+    'text': 'Combines Unnerve with Grim Neigh (Sp. Atk rises after a KO).'
+  },
+  'teraShift': {
+    'group': 'form',
+    'text': 'Transforms Terapagos into its Terastal Forme on entry.'
+  },
+  'teraShell': {
+    'group': 'defense',
+    'text': 'Halves the damage of every move while the holder is at full HP.'
+  },
+  'teraformZero': {
+    'group': 'entry',
+    'text': 'Clears the weather and terrain on entry.'
   }
 }
 

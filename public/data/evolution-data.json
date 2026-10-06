@@ -4276,5 +4276,37 @@
       "into": "m-baxcalibur",
       "level": 100
     }
+  ],
+  "ursaluna": [
+    {
+      "into": "ursaluna-b",
+      "item": "peatBlock"
+    }
+  ],
+  "ogerpon": [
+    {
+      "into": "ogerpon-w",
+      "item": "wellspringMask"
+    },
+    {
+      "into": "ogerpon-h",
+      "item": "hearthflameMask"
+    },
+    {
+      "into": "ogerpon-c",
+      "item": "cornerstoneMask"
+    }
+  ],
+  "terapagos": [
+    {
+      "into": "terapagos-t",
+      "item": "teraOrb"
+    }
+  ],
+  "terapagos-t": [
+    {
+      "into": "terapagos-s",
+      "item": "teraOrb"
+    }
   ]
 }

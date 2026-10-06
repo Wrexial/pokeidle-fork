@@ -8299,5 +8299,41 @@
       "levitate"
     ],
     "hidden": null
+  },
+  "ursaluna-b": {
+    "abilities": [
+      "mindsEye"
+    ],
+    "hidden": null
+  },
+  "ogerpon-w": {
+    "abilities": [
+      "waterAbsorb"
+    ],
+    "hidden": null
+  },
+  "ogerpon-h": {
+    "abilities": [
+      "moldBreaker"
+    ],
+    "hidden": null
+  },
+  "ogerpon-c": {
+    "abilities": [
+      "sturdy"
+    ],
+    "hidden": null
+  },
+  "terapagos-t": {
+    "abilities": [
+      "teraShell"
+    ],
+    "hidden": null
+  },
+  "terapagos-s": {
+    "abilities": [
+      "teraformZero"
+    ],
+    "hidden": null
   }
 }

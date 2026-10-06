@@ -1,6 +1,9 @@
 // Volatile battle state, turn-order speed and screens. Split from game/combat.js.
 
 import { abilityOf, abilityPreventsStatDrop } from '../abilities.js'
+import { moveData } from '../../data/gameData.js'
+import { heldItems } from '../../data/items.js'
+import { getTypeEffectiveness } from './damage.js'
 import { heldStatMultiplier } from '../held-items.js'
 import { changeBattleForm } from './setup.js'
 import { weatherSpeedMultiplier } from '../weather.js'
@@ -70,6 +73,7 @@ export function createVolatileState() {
     truantSkip: !1,
     slowStartTurns: 0,
     hangry: !1,
+    charged: !1,
     cudChewHeal: 0,
     nullifiedMoves: {},
   }
@@ -134,6 +138,7 @@ export function volatileStateFromBattle(pokemon) {
     truantSkip: pokemon.truantSkip ?? !1,
     slowStartTurns: pokemon.slowStartTurns ?? 0,
     hangry: pokemon.hangry ?? !1,
+    charged: pokemon.charged ?? !1,
     cudChewHeal: pokemon.cudChewHeal ?? 0,
     nullifiedMoves: pokemon.nullifiedMoves ?? {},
   }
@@ -302,6 +307,59 @@ export function applyEntryAbility(source, target, events, sourceIsPlayer) {
       message: `${source.name} transformed into ${target.name}!`,
       data: { target: sourceIsPlayer ? 'player' : 'enemy' },
     })
+  } else if (ability === 'supersweetSyrup' && target) {
+    // Supersweet Syrup lowers the foe's evasiveness on entry.
+    const stages = target.statStages ?? (target.statStages = {}),
+      current = stages.evasion ?? 0,
+      next = Math.max(-6, current - 1)
+    if (next !== current && !abilityPreventsStatDrop(target, 'evasion')) {
+      stages.evasion = next
+      events.push({
+        type: 'statChange',
+        message: `${target.name}'s evasiveness fell!`,
+        data: { target: sourceIsPlayer ? 'enemy' : 'player' },
+      })
+    }
+  } else if (ability === 'frisk' && target?.heldItem) {
+    events.push({
+      type: 'status',
+      message: `${source.name} frisked ${target.name} and found its ${
+        heldItems[target.heldItem]?.name ?? target.heldItem
+      }!`,
+      data: { target: sourceIsPlayer ? 'player' : 'enemy' },
+    })
+  } else if (ability === 'forewarn' && target?.moves?.length) {
+    // Forewarn reveals the foe's most powerful move.
+    const strongest = target.moves
+      .map((/** @type {string} */ moveId) => moveData[moveId])
+      .filter(Boolean)
+      .sort((/** @type {any} */ left, /** @type {any} */ right) => (right.power ?? 0) - (left.power ?? 0))[0]
+    if (strongest)
+      events.push({
+        type: 'status',
+        message: `${source.name} foresaw ${target.name}'s ${strongest.name}!`,
+        data: { target: sourceIsPlayer ? 'player' : 'enemy' },
+      })
+  } else if (ability === 'anticipation' && target?.moves?.length) {
+    // Anticipation shudders at a super-effective or OHKO move.
+    const OHKO_MOVES = new Set(['Fissure', 'Sheer Cold', 'Horn Drill', 'Guillotine']),
+      threatened = target.moves.some((/** @type {string} */ moveId) => {
+        const move = moveData[moveId]
+        if (!move) return !1
+        return (
+          OHKO_MOVES.has(move.name) ||
+          (move.power > 0 && getTypeEffectiveness(move.type, source.types) > 1)
+        )
+      })
+    if (threatened)
+      events.push({
+        type: 'status',
+        message: `${source.name} shuddered in anticipation!`,
+        data: { target: sourceIsPlayer ? 'player' : 'enemy' },
+      })
+  } else if (ability === 'teraShift' && source.speciesKey === 'terapagos') {
+    // Tera Shift turns Terapagos into its Terastal Forme on entry.
+    changeBattleForm(source, 'terapagos-t', events, sourceIsPlayer)
   }
 }
 

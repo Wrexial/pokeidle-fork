@@ -25242,5 +25242,128 @@
     "growthRate": "mediumFast",
     "catchRate": 225,
     "weight": 5
+  },
+  "ursaluna-b": {
+    "id": 10272,
+    "name": "Ursaluna (Bloodmoon)",
+    "types": [
+      "Ground",
+      "Normal"
+    ],
+    "baseStats": {
+      "hp": 113,
+      "attack": 70,
+      "defense": 120,
+      "spAttack": 135,
+      "spDefense": 65,
+      "speed": 52
+    },
+    "baseExpYield": 275,
+    "growthRate": "mediumFast",
+    "catchRate": 75,
+    "weight": 290
+  },
+  "ogerpon-w": {
+    "id": 10273,
+    "name": "Ogerpon (Wellspring)",
+    "types": [
+      "Grass",
+      "Water"
+    ],
+    "baseStats": {
+      "hp": 80,
+      "attack": 120,
+      "defense": 84,
+      "spAttack": 60,
+      "spDefense": 96,
+      "speed": 110
+    },
+    "baseExpYield": 275,
+    "growthRate": "slow",
+    "catchRate": 5,
+    "weight": 39.8,
+    "legendary": true
+  },
+  "ogerpon-h": {
+    "id": 10274,
+    "name": "Ogerpon (Hearthflame)",
+    "types": [
+      "Grass",
+      "Fire"
+    ],
+    "baseStats": {
+      "hp": 80,
+      "attack": 120,
+      "defense": 84,
+      "spAttack": 60,
+      "spDefense": 96,
+      "speed": 110
+    },
+    "baseExpYield": 275,
+    "growthRate": "slow",
+    "catchRate": 5,
+    "weight": 39.8,
+    "legendary": true
+  },
+  "ogerpon-c": {
+    "id": 10275,
+    "name": "Ogerpon (Cornerstone)",
+    "types": [
+      "Grass",
+      "Rock"
+    ],
+    "baseStats": {
+      "hp": 80,
+      "attack": 120,
+      "defense": 84,
+      "spAttack": 60,
+      "spDefense": 96,
+      "speed": 110
+    },
+    "baseExpYield": 275,
+    "growthRate": "slow",
+    "catchRate": 5,
+    "weight": 39.8,
+    "legendary": true
+  },
+  "terapagos-t": {
+    "id": 10276,
+    "name": "Terapagos (Terastal)",
+    "types": [
+      "Normal"
+    ],
+    "baseStats": {
+      "hp": 95,
+      "attack": 95,
+      "defense": 110,
+      "spAttack": 105,
+      "spDefense": 110,
+      "speed": 85
+    },
+    "baseExpYield": 90,
+    "growthRate": "slow",
+    "catchRate": 255,
+    "weight": 16,
+    "legendary": true
+  },
+  "terapagos-s": {
+    "id": 10277,
+    "name": "Terapagos (Stellar)",
+    "types": [
+      "Normal"
+    ],
+    "baseStats": {
+      "hp": 160,
+      "attack": 105,
+      "defense": 110,
+      "spAttack": 130,
+      "spDefense": 110,
+      "speed": 85
+    },
+    "baseExpYield": 90,
+    "growthRate": "slow",
+    "catchRate": 255,
+    "weight": 77,
+    "legendary": true
   }
 }

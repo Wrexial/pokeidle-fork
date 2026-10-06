@@ -326,6 +326,10 @@ type VolatileState = {
   slowStartTurns?: number
   /** Hunger Switch's alternating Hangry form flag. */
   hangry?: boolean
+  /** Charged by Electromorphosis / Wind Power / Charge: next Electric move doubles. */
+  charged?: boolean
+  /** Leaf Guard is active because the sun is shining this turn. */
+  leafGuardActive?: boolean
   /** Pending Cud Chew heal (the berry eaten last turn). */
   cudChewHeal?: number
   /**

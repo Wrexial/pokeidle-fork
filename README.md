@@ -30,7 +30,9 @@ to your browser's `localStorage`.
 - **Idle battles** — encounters resolve on a timer; speed controls from 1× to
   25×, pause, and optional auto-proceed to the next newly-unlocked location.
 - **9 regions** — Kanto, Johto, Hoenn, Sinnoh, Unova, Kalos, Alola, Galar and
-  Paldea, each with its own route unlock tree and level curve (5–75).
+  Paldea, each with its own route unlock tree and level curve (5–75), plus five
+  post-game expansions (the Sevii Islands, Isle of Armor, Crown Tundra,
+  Kitakami and the Terarium) and ~100 landmark areas.
 - **Gyms / Elite Four / Champion** per region, with real badge names and
   post-game rematch teams.
 - **Catching** — Poké Balls, per-route and global catch rules, auto-catch, and a
@@ -41,13 +43,14 @@ to your browser's `localStorage`.
 - **Evolution** — level-up, item (elemental stones, Link Cable, held-item
   trades) and reversible form changes.
 - **Breeding** — the Daycare respects gender, egg groups and shiny odds.
-- **Shinies** — full 1/8192 odds, a per-generation **Shiny Charm**, and a
+- **Shinies** — full 1/4096 odds, a per-generation **Shiny Charm**, and a
   DexNav-style chain with Honey/Repel support.
 - **Minigames** — a regional minigame in most cities (Safari Zone, Bug Catching
   Contest, Pokéathlon, Puzzle League, Voltorb Flip, Pokémon Contest, Pokémon
   Memory, Poké Radar, Pokémon Musical, Pokéstar Studios, Battle Royal, Dynamax
-  Adventures, Curry, Picnic, Auction House, the Game Corner…) plus route
-  activities (Fishing, Rock Smash, Headbutt, Diving and foraging).
+  Adventures, Curry, Picnic, Auction House, the Game Corner, the **Battle Maison
+  double battles**…) plus route activities (Fishing, Rock Smash, Headbutt,
+  Diving and foraging).
 - **Swarms & roaming legendaries**, **Raid Islands**, and a **Battle Tower**
   with endless scaling.
 - **Wonder Trade**, **region Unlock Tokens**, region **Prestige**, **Records**

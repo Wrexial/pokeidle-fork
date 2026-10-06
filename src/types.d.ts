@@ -378,6 +378,8 @@ type VolatileState = {
   happyHour?: boolean
   /** Turns of Fairy Lock left (nobody can switch out). */
   fairyLockTurns?: number
+  /** Turns of Magic Room left (every held item is disabled). */
+  magicRoomTurns?: number
   /** Leaf Guard is active because the sun is shining this turn. */
   leafGuardActive?: boolean
   /** Pending Cud Chew heal (the berry eaten last turn). */

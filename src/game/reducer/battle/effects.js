@@ -93,6 +93,7 @@ export function updateVolatile(state, action) {
         commanding: enemyVolatile.commanding ?? !1,
         happyHour: enemyVolatile.happyHour ?? !1,
         fairyLockTurns: enemyVolatile.fairyLockTurns ?? 0,
+        magicRoomTurns: enemyVolatile.magicRoomTurns ?? 0,
       }),
     {
       ...state,

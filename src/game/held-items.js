@@ -111,8 +111,10 @@ function heldItemOf(pokemon) {
 
 /** @param {BattlePokemon} pokemon */
 function heldItemEffect(pokemon) {
-  // Klutz ignores the holder's held item entirely.
+  // Klutz ignores the holder's held item entirely, and Magic Room disables
+  // every held item on the field.
   if (abilityOf(pokemon) === 'klutz') return null
+  if ((pokemon?.magicRoomTurns ?? 0) > 0) return null
   const heldItem = heldItemOf(pokemon)
   return heldItem ? (heldItems[heldItem]?.effect ?? null) : null
 }

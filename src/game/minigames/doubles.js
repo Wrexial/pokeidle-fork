@@ -297,6 +297,50 @@ export function runDoublesRound(allies, foes, options = {}) {
     const moveId = action.moveId,
       move = moveData[moveId]
     if (!move) continue
+    // Ally Switch swaps places with the ally, so moves already aimed at either
+    // of them retarget.
+    if (moveId === 'allySwitch') {
+      const ally = (isAlly ? allies : foes).find((other) => other !== attacker && alive(other))
+      log.push(`${attacker.name} used Ally Switch!`)
+      if (ally)
+        for (const entry of actions) {
+          if (!entry.action) continue
+          if (entry.action.target === attacker) entry.action.target = ally
+          else if (entry.action.target === ally) entry.action.target = attacker
+        }
+      continue
+    }
+    // Instruct makes the target ally repeat its last move immediately.
+    if (moveId === 'instruct') {
+      const ally = (isAlly ? allies : foes).find((other) => other !== attacker && alive(other)),
+        reprisedId = ally?.lastMove,
+        reprisedFoe = (isAlly ? foes : allies).find(alive)
+      log.push(`${attacker.name} used Instruct!`)
+      if (ally && reprisedId && moveData[reprisedId] && reprisedFoe) {
+        const originalMoves = ally.moves
+        ally.moves = [...new Set([...(ally.moves ?? []), reprisedId])]
+        const reprised = resolveBattleTurn(
+          ally,
+          reprisedFoe,
+          false,
+          false,
+          weather,
+          null,
+          deterministic,
+          terrain,
+          AI_SKILL.smart,
+          AI_SKILL.smart,
+          false,
+          reprisedId,
+          true,
+          true
+        )
+        ally.moves = originalMoves
+        events.push(...reprised)
+        log.push(`${ally.name} followed the instruction!`)
+      }
+      continue
+    }
     // An ally heal restores the chosen partner directly rather than going
     // through the (singles) resolver, which would heal the user.
     if (action.heal) {

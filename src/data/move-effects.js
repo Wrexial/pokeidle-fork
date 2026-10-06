@@ -398,6 +398,14 @@ const MOVE_OVERRIDES = {
   // Flavour / field moves.
   happyHour: { effect: { type: 'happyHour', target: 'self' } },
   fairyLock: { effect: { type: 'fairyLock' } },
+  // Move-copy / item-lock.
+  mimic: { effect: { type: 'mimic' } },
+  sketch: { effect: { type: 'sketch' } },
+  snatch: { effect: { type: 'snatch', target: 'self' }, priority: 4 },
+  magicRoom: { effect: { type: 'magicRoom', target: 'self' } },
+  // Doubles position / replay moves.
+  allySwitch: { effect: { type: 'allySwitch', target: 'self' }, priority: 2 },
+  instruct: { effect: { type: 'instruct' } },
   electrify: { effect: { type: 'electrify' } },
   magicCoat: { effect: { type: 'magicCoat', target: 'self' } },
   teatime: { effect: { type: 'teatime' } },

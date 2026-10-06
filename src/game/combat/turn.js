@@ -847,6 +847,25 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         isPlayer: !0,
       }
     )
+  // Snatch (+4 priority) steals the foe's status move. Both moves are already
+  // chosen, so swap the queued actions before they resolve.
+  if (playerMoveId === 'snatch' && !playerSkipMove && enemyMove?.category === 'status') {
+    playerMoveId = enemyMoveId
+    playerMove = enemyMove
+    const playerAttack = attackOrder.find((entry) => entry.isPlayer),
+      enemyAttack = attackOrder.find((entry) => !entry.isPlayer)
+    if (playerAttack) playerAttack.moveId = enemyMoveId
+    if (enemyAttack) enemyAttack.moveId = null
+    events.push({ type: 'status', message: `${player.name} snatched the move!` })
+  } else if (enemyMoveId === 'snatch' && !enemySkipMove && playerMove?.category === 'status') {
+    enemyMoveId = playerMoveId
+    enemyMove = playerMove
+    const enemyAttack = attackOrder.find((entry) => !entry.isPlayer),
+      playerAttack = attackOrder.find((entry) => entry.isPlayer)
+    if (enemyAttack) enemyAttack.moveId = playerMoveId
+    if (playerAttack) playerAttack.moveId = null
+    events.push({ type: 'status', message: `${enemy.name} snatched the move!` })
+  }
   for (const [attackIndex, attack] of attackOrder.entries()) {
     if (attack.attacker.currentHp <= 0) continue
     if (attack.isPlayer ? playerMustRecharge : enemyMustRecharge) {
@@ -1475,6 +1494,27 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         events.push({
           type: 'status',
           message: 'The battlefield was sealed with a fairy lock!',
+        })
+      } else if (moveDef.effect?.type === 'mimic' || moveDef.effect?.type === 'sketch') {
+        // Copy the foe's last move into the user's moveset (the reducer edits
+        // the party member; Mimic replaces Mimic, Sketch replaces Sketch).
+        const learned = attack.defender.lastMove
+        if (learned && moveData[learned])
+          events.push({
+            type: 'learnMove',
+            message: `${attack.attacker.name} copied ${moveData[learned].name}!`,
+            data: {
+              moveId: learned,
+              replace: attack.moveId,
+              target: attack.isPlayer ? 'player' : 'enemy',
+            },
+          })
+      } else if (moveDef.effect?.type === 'magicRoom') {
+        attack.attacker.magicRoomTurns = 5
+        attack.defender.magicRoomTurns = 5
+        events.push({
+          type: 'status',
+          message: 'The dimensions became strange \u2014 held items are disabled!',
         })
       } else if (
         moveDef.effect?.type === 'status' &&

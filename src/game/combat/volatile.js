@@ -99,6 +99,7 @@ export function createVolatileState() {
     commanding: !1,
     happyHour: !1,
     fairyLockTurns: 0,
+    magicRoomTurns: 0,
     cudChewHeal: 0,
     nullifiedMoves: {},
   }
@@ -189,6 +190,7 @@ export function volatileStateFromBattle(pokemon) {
     commanding: pokemon.commanding ?? !1,
     happyHour: pokemon.happyHour ?? !1,
     fairyLockTurns: pokemon.fairyLockTurns ?? 0,
+    magicRoomTurns: pokemon.magicRoomTurns ?? 0,
     cudChewHeal: pokemon.cudChewHeal ?? 0,
     nullifiedMoves: pokemon.nullifiedMoves ?? {},
   }

@@ -245,6 +245,17 @@ export function consumeEvent(state, action) {
     })
     if (healedOne) secretNotices.push('The healing wish restored the next Pokemon!')
   }
+  // Mimic / Sketch copy the foe's last move into the active party member's
+  // moveset, replacing Mimic / Sketch itself.
+  if (event.type === 'learnMove' && event.data?.target === 'player' && event.data.moveId) {
+    const replace = event.data.replace,
+      learned = event.data.moveId,
+      updatedMoves = (playerPokemon?.moves ?? []).map((id) => (id === replace ? learned : id))
+    if (playerPokemon) playerPokemon = { ...playerPokemon, moves: updatedMoves }
+    party = party.map((member, index) =>
+      index === state.activePlayerPokemonIndex ? { ...member, moves: updatedMoves } : member
+    )
+  }
   if (
     event.type === 'faint' &&
     event.data?.target === 'enemy' &&

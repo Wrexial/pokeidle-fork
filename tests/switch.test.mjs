@@ -251,3 +251,56 @@ test('Splash, Celebrate and Hold Hands do nothing', () => {
     assert.deepEqual(enemy.statStages, {})
   }
 })
+
+const { heldLeftoversHeal } = await import('../src/game/held-items.js')
+
+test('Snatch steals the foe status move before it resolves', () => {
+  const player = battler({
+      name: 'Player',
+      isPlayer: true,
+      moves: ['snatch'],
+      speed: 200,
+      statStages: {},
+    }),
+    enemy = battler({ name: 'Foe', moves: ['swordsDance'], speed: 1, statStages: {} })
+  resolveBattleTurn(player, enemy, false)
+  assert.equal(player.statStages.attack, 2, 'the snatcher got the boost')
+  assert.equal(enemy.statStages.attack ?? 0, 0, 'the foe did not')
+})
+
+test('Magic Room disables every held item', () => {
+  const player = battler({
+      name: 'Player',
+      isPlayer: true,
+      moves: ['magicRoom'],
+      speed: 200,
+      heldItem: 'leftovers',
+    }),
+    enemy = battler({ name: 'Foe', moves: ['splash'] })
+  resolveBattleTurn(player, enemy, false)
+  assert.ok((player.magicRoomTurns ?? 0) > 0)
+  player.currentHp = 100
+  assert.equal(heldLeftoversHeal(player), 0, 'Leftovers is disabled in Magic Room')
+})
+
+test('Mimic and Sketch copy a move into the party moveset', () => {
+  for (const [move, copied] of [
+    ['mimic', 'flamethrower'],
+    ['sketch', 'surf'],
+  ]) {
+    const base = battlingState([
+        { type: 'learnMove', message: 'x', data: { moveId: copied, replace: move, target: 'player' } },
+      ]),
+      active = base.party[0],
+      state = {
+        ...base,
+        playerPokemon: { ...active, moves: [...active.moves, move] },
+        party: base.party.map((member, index) =>
+          index === 0 ? { ...member, moves: [...member.moves, move] } : member
+        ),
+      },
+      next = gameReducer(state, { type: 'CONSUME_EVENT' })
+    assert.ok(next.playerPokemon.moves.includes(copied), `${move} learned ${copied}`)
+    assert.ok(!next.playerPokemon.moves.includes(move), `${move} was replaced`)
+  }
+})

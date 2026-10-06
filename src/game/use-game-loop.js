@@ -477,6 +477,7 @@ export function useGameLoop() {
               emergencySwitched: playerVolatile.emergencySwitched ?? !1,
               happyHour: playerVolatile.happyHour ?? !1,
               fairyLockTurns: playerVolatile.fairyLockTurns ?? 0,
+              magicRoomTurns: playerVolatile.magicRoomTurns ?? 0,
               // Supreme Overlord scales off the party members that have fainted.
               faintedAllies: currentGameState.party.filter(
                 (/** @type {any} */ member) => (member.currentHp ?? 0) <= 0

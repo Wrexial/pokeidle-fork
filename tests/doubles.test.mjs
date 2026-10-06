@@ -329,3 +329,60 @@ test('Symbiosis passes its item to an itemless ally', () => {
   assert.equal(receiver.heldItem, 'leftovers')
   assert.equal(giver.heldItem, null)
 })
+
+test('Instruct makes the ally repeat its last move', () => {
+  const ally = battler({
+      name: 'Ally',
+      isPlayer: true,
+      moves: ['swordsDance'],
+      speed: 200,
+      statStages: {},
+    }),
+    instructor = battler({
+      name: 'Instructor',
+      isPlayer: true,
+      moves: ['instruct'],
+      speed: 10,
+      statStages: {},
+    }),
+    foeX = battler({ name: 'FoeX', moves: ['splash'], speed: 1 }),
+    foeY = battler({ name: 'FoeY', moves: ['splash'], speed: 1 })
+  runDoublesRound([ally, instructor], [foeX, foeY], { deterministic: true })
+  assert.equal(ally.statStages.attack, 4, 'Swords Dance ran again via Instruct')
+})
+
+test('Ally Switch resolves and redirects the round', () => {
+  const switcher = battler({
+      name: 'Switcher',
+      isPlayer: true,
+      moves: ['allySwitch'],
+      speed: 200,
+      types: ['Normal'],
+      currentHp: 300,
+      maxHp: 300,
+    }),
+    partner = battler({
+      name: 'Partner',
+      isPlayer: true,
+      moves: ['splash'],
+      speed: 5,
+      types: ['Normal'],
+      currentHp: 300,
+      maxHp: 300,
+    }),
+    foeX = battler({
+      name: 'FoeX',
+      moves: ['tackle'],
+      attack: 400,
+      speed: 100,
+      types: ['Normal'],
+    }),
+    foeY = battler({ name: 'FoeY', moves: ['splash'], speed: 1 })
+  const result = runDoublesRound([switcher, partner], [foeX, foeY], { deterministic: true })
+  assert.ok(
+    result.log.some((line) => /Ally Switch/.test(line)),
+    'Ally Switch was used'
+  )
+  // The foes' targets were swapped, so the damage landed on the partner.
+  assert.ok(switcher.currentHp >= partner.currentHp, 'the switch moved the attack off the switcher')
+})

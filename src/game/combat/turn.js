@@ -439,6 +439,133 @@ function applyMaxOrZMove(attack, moveDef, events) {
 }
 
 /**
+ * Abilities / volatile states that make a battler impossible to trap or force
+ * out (Suction Cups, Ingrain).
+ * @param {any} pokemon
+ * @returns {boolean}
+ */
+function trapPrevented(pokemon) {
+  return abilityOf(pokemon) === 'suctionCups' || pokemon?.ingrained === true
+}
+
+/**
+ * Whether a battler is prevented from switching out (trapped by Block / Mean
+ * Look / Spider Web or by Arena Trap / Shadow Tag / Magnet Pull).
+ * @param {any} pokemon
+ * @returns {boolean}
+ */
+export function isTrapped(pokemon) {
+  return !!(pokemon?.trappedByMove || pokemon?.trappedByAbility)
+}
+
+/**
+ * Queue the switch a move asks for: self-switch pivots (Baton Pass, Teleport,
+ * U-turn, Volt Switch, Flip Turn, Shed Tail, Parting Shot), forced switches
+ * (Roar, Whirlwind, Dragon Tail, Circle Throw) and trapping moves (Block,
+ * Mean Look, Spider Web).
+ * @param {any} attack
+ * @param {Move} moveDef
+ * @param {any[]} events
+ * @param {any[]} switchQueue
+ */
+function pushSwitchEffect(attack, moveDef, events, switchQueue) {
+  const effect = moveDef.effect
+  if (effect?.type === 'revive') {
+    events.push({
+      type: 'revive',
+      message: `${attack.attacker.name} blessed the fallen!`,
+      data: { target: attack.isPlayer ? 'player' : 'enemy' },
+    })
+    return
+  }
+  if (effect?.type === 'trap') {
+    if (trapPrevented(attack.defender)) {
+      events.push({ type: 'status', message: `${attack.defender.name} can't be trapped!` })
+      return
+    }
+    attack.defender.trappedByMove = !0
+    events.push({
+      type: 'status',
+      message: `${attack.defender.name} can no longer escape!`,
+      data: { target: attack.isPlayer ? 'enemy' : 'player' },
+    })
+    return
+  }
+  if (effect?.type === 'selfSwitch' || moveDef.selfSwitch) {
+    if (isTrapped(attack.attacker)) {
+      events.push({
+        type: 'status',
+        message: `${attack.attacker.name} can't switch out!`,
+        data: { target: attack.isPlayer ? 'player' : 'enemy' },
+      })
+      return
+    }
+    if (effect?.substituteCost) {
+      const cost = Math.max(1, Math.floor(attack.attacker.maxHp * effect.substituteCost))
+      if (attack.attacker.currentHp <= cost || (attack.attacker.substituteHp ?? 0) > 0) return
+      attack.attacker.currentHp -= cost
+      attack.attacker.substituteHp = cost
+      events.push({
+        type: 'recoil',
+        message: `${attack.attacker.name} shed its tail! (${cost} HP)`,
+        data: {
+          target: attack.isPlayer ? 'player' : 'enemy',
+          damage: cost,
+          hpAfter: attack.attacker.currentHp,
+          hpMax: attack.attacker.maxHp,
+        },
+      })
+    }
+    switchQueue.push({
+      type: 'switchRequest',
+      message: `${attack.attacker.name} is switching out!`,
+      data: {
+        target: attack.isPlayer ? 'player' : 'enemy',
+        passBoosts: effect?.passBoosts ? { ...attack.attacker.statStages } : null,
+      },
+    })
+    return
+  }
+  if (effect?.type === 'forceSwitch') {
+    if (trapPrevented(attack.defender) || isTrapped(attack.defender)) {
+      events.push({
+        type: 'status',
+        message: `${attack.defender.name} can't be dragged out!`,
+        data: { target: attack.isPlayer ? 'enemy' : 'player' },
+      })
+      return
+    }
+    switchQueue.push({
+      type: 'switchRequest',
+      message: `${attack.defender.name} was dragged out!`,
+      data: { target: attack.isPlayer ? 'enemy' : 'player' },
+    })
+  }
+}
+
+/**
+ * Arena Trap / Shadow Tag / Magnet Pull pin the opposing active Pokemon on
+ * entry (Arena Trap only grounds grounded foes, Magnet Pull only Steel types).
+ * @param {any} source
+ * @param {any} target
+ */
+function applyTrapAbility(source, target) {
+  const ability = abilityOf(source)
+  if (!ability) return
+  const grounded =
+    !(target.types ?? []).includes('Flying') && abilityOf(target) !== 'levitate'
+  const traps =
+    ability === 'shadowTag'
+      ? abilityOf(target) !== 'shadowTag'
+      : ability === 'arenaTrap'
+        ? grounded
+        : ability === 'magnetPull'
+          ? (target.types ?? []).includes('Steel')
+          : !1
+  if (traps) target.trappedByAbility = !0
+}
+
+/**
  * @param {BattlePokemon} player
  * @param {BattlePokemon} enemy
  * @param {boolean} [isTrainerBattle]
@@ -461,6 +588,9 @@ function applyMaxOrZMove(attack, moveDef, events) {
  */
 export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn = !1, weather = null, hazards = null, deterministic = !1, terrain = null, enemySkill = null, playerSkill = null, playerSkipMove = !1, playerMoveChoice = null, enemySkipMove = !1, skipEndOfTurn = !1) {
   const events = /** @type {any[]} */ ([])
+  // Switch requests are queued and appended after the end-of-turn residual, so
+  // the residuals still apply to the outgoing Pokemon.
+  const switchQueue = /** @type {any[]} */ ([])
   let activeWeather = weather ?? null,
     activeTerrain = terrain ?? null,
     activeHazards = hazards
@@ -479,6 +609,11 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     if (suppressPlayer) player.abilitySuppressed = !1
     if (suppressEnemy) enemy.abilitySuppressed = !1
   }
+  // Trapping abilities pin the foe every turn (they last only while the
+  // trapper is on the field).
+  ;(player.trappedByAbility = !1, enemy.trappedByAbility = !1)
+  applyTrapAbility(player, enemy)
+  applyTrapAbility(enemy, player)
   // Intimidate fires the first time each side is on the field.
   if (firstTurn) {
     applyIntimidate(player, enemy, events, !0)
@@ -1892,6 +2027,8 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           data: { target: attack.isPlayer ? 'player' : 'enemy' },
         })
       }
+      // Trapping / switching status moves queue their effect.
+      pushSwitchEffect(attack, moveDef, events, switchQueue)
       continue
     }
     // Weather rewrites Weather Ball's type/power, abilities like Normalize and
@@ -2647,6 +2784,8 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         }
       }
     applySecondaryEffect(attack, moveDef, events, deterministic, activeTerrain)
+    // Pivot / force-switch damaging moves (U-turn, Dragon Tail, ...) queue it.
+    pushSwitchEffect(attack, moveDef, events, switchQueue)
     // Life Orb costs the attacker some HP for each hit it lands.
     const orbRecoil = heldLifeOrbRecoil(attack.attacker, totalDamage)
     if (orbRecoil > 0) {
@@ -2773,6 +2912,22 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       events.push({
         type: 'status',
         message: `${attack.defender.name} became charged!`,
+        data: { target: attack.isPlayer ? 'enemy' : 'player' },
+      })
+    }
+    // Emergency Exit / Wimp Out sends the holder out once it drops below half.
+    const exitAbility = abilityOf(attack.defender)
+    if (
+      (exitAbility === 'emergencyExit' || exitAbility === 'wimpOut') &&
+      attack.defender.currentHp > 0 &&
+      attack.defender.currentHp <= attack.defender.maxHp / 2 &&
+      !attack.defender.emergencySwitched &&
+      !isTrapped(attack.defender)
+    ) {
+      attack.defender.emergencySwitched = !0
+      switchQueue.push({
+        type: 'switchRequest',
+        message: `${attack.defender.name} is switching out!`,
         data: { target: attack.isPlayer ? 'enemy' : 'player' },
       })
     }
@@ -3016,6 +3171,8 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
   }
   if (!skipEndOfTurn)
     applyEndOfTurn(player, enemy, events, effectiveWeather, activeTerrain, deterministic)
+  // Pivoting / forced switches resolve once the turn's residuals are done.
+  events.push(...switchQueue)
   reportFieldEffects(player, enemy, events, activeWeather, activeTerrain, activeHazards, weather, terrain, hazards)
   restoreGas()
   return events

@@ -92,6 +92,9 @@ export function createVolatileState() {
     ionDeluge: !1,
     electrified: !1,
     magicCoat: !1,
+    trappedByMove: !1,
+    trappedByAbility: !1,
+    emergencySwitched: !1,
     cudChewHeal: 0,
     nullifiedMoves: {},
   }
@@ -175,6 +178,9 @@ export function volatileStateFromBattle(pokemon) {
     ionDeluge: pokemon.ionDeluge ?? !1,
     electrified: pokemon.electrified ?? !1,
     magicCoat: pokemon.magicCoat ?? !1,
+    trappedByMove: pokemon.trappedByMove ?? !1,
+    trappedByAbility: pokemon.trappedByAbility ?? !1,
+    emergencySwitched: pokemon.emergencySwitched ?? !1,
     cudChewHeal: pokemon.cudChewHeal ?? 0,
     nullifiedMoves: pokemon.nullifiedMoves ?? {},
   }

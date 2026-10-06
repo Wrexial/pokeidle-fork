@@ -2,7 +2,7 @@
 // events, rewards, trainer, boss, balls, effects and raid. Re-exported here so
 // game/reducer.js keeps importing the handlers from one place.
 
-export { startEncounter, executeTurn, consumeEvent, choosePlayerMove } from './battle/events.js'
+export { startEncounter, executeTurn, consumeEvent, choosePlayerMove, fleeBattle } from './battle/events.js'
 export { applyExp, applySharedExp, debugMaxLevel } from './battle/rewards.js'
 export { startTrainerBattle, switchPlayerPokemon, trainerSendNextPokemon, trainerBattleEnd } from './battle/trainer.js'
 export { startBossBattle, bossBattleEnd } from './battle/boss.js'

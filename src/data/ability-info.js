@@ -1183,6 +1183,34 @@ export const abilityInfo = {
   'stalwart': {
     'group': 'misc',
     'text': 'In Double Battles, ignores redirection and hits its chosen target.'
+  },
+  'arenaTrap': {
+    'group': 'misc',
+    'text': 'Traps grounded foes so they cannot switch out.'
+  },
+  'shadowTag': {
+    'group': 'misc',
+    'text': 'Traps the foe so it cannot switch out.'
+  },
+  'magnetPull': {
+    'group': 'misc',
+    'text': 'Traps Steel-type foes so they cannot switch out.'
+  },
+  'suctionCups': {
+    'group': 'misc',
+    'text': 'Cannot be forced out of battle by Roar / Whirlwind and the like.'
+  },
+  'emergencyExit': {
+    'group': 'misc',
+    'text': 'Switches out once its HP drops below half.'
+  },
+  'wimpOut': {
+    'group': 'misc',
+    'text': 'Switches out once its HP drops below half.'
+  },
+  'runAway': {
+    'group': 'misc',
+    'text': 'Always succeeds at fleeing from a wild Pokemon.'
   }
 }
 

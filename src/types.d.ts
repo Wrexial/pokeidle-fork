@@ -364,6 +364,12 @@ type VolatileState = {
   electrified?: boolean
   /** Magic Coat is up this turn (status moves are reflected). */
   magicCoat?: boolean
+  /** Trapped by Block / Mean Look / Spider Web (cannot switch out). */
+  trappedByMove?: boolean
+  /** Trapped by Arena Trap / Shadow Tag / Magnet Pull. */
+  trappedByAbility?: boolean
+  /** Emergency Exit / Wimp Out has already requested a switch. */
+  emergencySwitched?: boolean
   /** Leaf Guard is active because the sun is shining this turn. */
   leafGuardActive?: boolean
   /** Pending Cud Chew heal (the berry eaten last turn). */

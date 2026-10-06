@@ -195,6 +195,9 @@ export function BattleScene() {
       !state.pendingPlayerMove &&
       !state.playerTurnSpent &&
       !forcedAction,
+    // Trapped by Block / Mean Look / Arena Trap / ... — cannot switch out.
+    playerTrapped =
+      !!state.playerVolatile?.trappedByMove || !!state.playerVolatile?.trappedByAbility,
     // A fainted active Pokemon in manual mode waits for the player to pick who
     // comes out next (the loop stops there until they do).
     faintReplacement =
@@ -644,19 +647,29 @@ export function BattleScene() {
                   children: [
                     jsx('button', {
                       className: 'manual-switch-btn',
-                      disabled: !awaitingManual,
+                      disabled: !awaitingManual || playerTrapped,
                       onClick: () => setShowSwitch(!0),
                       children: 'SWITCH',
                     }),
+                    !state.trainerBattle &&
+                      !state.bossBattle &&
+                      jsx('button', {
+                        className: 'manual-switch-btn manual-run-btn',
+                        disabled: !awaitingManual,
+                        onClick: () => dispatch({ type: 'FLEE' }),
+                        children: 'RUN',
+                      }),
                     jsx('span', {
                       className: `manual-status${awaitingManual ? ' your-turn' : ''}`,
                       children: state.pendingPlayerMove
                         ? 'Resolving...'
                         : forcedAction || state.playerTurnSpent
                           ? 'Resolving...'
-                          : awaitingManual
-                            ? 'YOUR MOVE'
-                            : 'Waiting...',
+                          : playerTrapped
+                            ? 'TRAPPED — can\u2019t switch'
+                            : awaitingManual
+                              ? 'YOUR MOVE'
+                              : 'Waiting...',
                     }),
                   ],
                 }),

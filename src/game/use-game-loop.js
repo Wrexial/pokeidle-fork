@@ -451,6 +451,28 @@ export function useGameLoop() {
               nullifiedMoves: playerVolatile.nullifiedMoves ?? {},
               choiceLock: playerVolatile.choiceLock ?? null,
               sameMoveStreak: playerVolatile.sameMoveStreak ?? 0,
+              charged: playerVolatile.charged ?? !1,
+              magnetRiseTurns: playerVolatile.magnetRiseTurns ?? 0,
+              enduring: playerVolatile.enduring ?? !1,
+              zMoveUsed: playerVolatile.zMoveUsed ?? !1,
+              identified: playerVolatile.identified ?? !1,
+              luckyChantTurns: playerVolatile.luckyChantTurns ?? 0,
+              stockpile: playerVolatile.stockpile ?? 0,
+              tormentTurns: playerVolatile.tormentTurns ?? 0,
+              nightmare: playerVolatile.nightmare ?? !1,
+              gravityTurns: playerVolatile.gravityTurns ?? 0,
+              telekinesisTurns: playerVolatile.telekinesisTurns ?? 0,
+              sportTurns: playerVolatile.sportTurns ?? 0,
+              sportType: playerVolatile.sportType ?? null,
+              embargoTurns: playerVolatile.embargoTurns ?? 0,
+              wonderRoomTurns: playerVolatile.wonderRoomTurns ?? 0,
+              powdered: playerVolatile.powdered ?? !1,
+              ionDeluge: playerVolatile.ionDeluge ?? !1,
+              electrified: playerVolatile.electrified ?? !1,
+              magicCoat: playerVolatile.magicCoat ?? !1,
+              trappedByMove: playerVolatile.trappedByMove ?? !1,
+              trappedByAbility: playerVolatile.trappedByAbility ?? !1,
+              emergencySwitched: playerVolatile.emergencySwitched ?? !1,
               // Supreme Overlord scales off the party members that have fainted.
               faintedAllies: currentGameState.party.filter(
                 (/** @type {any} */ member) => (member.currentHp ?? 0) <= 0
@@ -510,12 +532,19 @@ export function useGameLoop() {
           // the Set / Switch battle-style option: Set never switches on its
           // own, Switch (the default) does. Manual mode never auto-switches —
           // the player decides.
-          const playerSwitch =
-            playerSkipMove ||
-            currentGameState.battleMode === 'manual' ||
-            currentGameState.battleStyle === 'set'
-              ? -1
-              : chooseBestSwitch(
+          const playerTrapped =
+              !!currentGameState.playerVolatile?.trappedByMove ||
+              !!currentGameState.playerVolatile?.trappedByAbility,
+            enemyTrapped =
+              !!currentGameState.enemyPokemon?.trappedByMove ||
+              !!currentGameState.enemyPokemon?.trappedByAbility,
+            playerSwitch =
+              playerSkipMove ||
+              playerTrapped ||
+              currentGameState.battleMode === 'manual' ||
+              currentGameState.battleStyle === 'set'
+                ? -1
+                : chooseBestSwitch(
                   playerBattlePokemon,
                   currentGameState.party,
                   enemyBattlePokemon,
@@ -532,9 +561,10 @@ export function useGameLoop() {
             bossType === 'champion' &&
             currentGameState.bossBattle &&
             // Manual mode never auto-switches either side, and a swap already
-            // spent this turn.
+            // spent this turn. A trapped foe cannot leave either.
             currentGameState.battleMode !== 'manual' &&
             !currentGameState.enemyTurnSpent &&
+            !enemyTrapped &&
             (currentGameState.bossBattle.championSwapsRemaining ?? 0) > 0
           ) {
             const championSwitch = chooseBestSwitch(

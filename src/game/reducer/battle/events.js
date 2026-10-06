@@ -6,6 +6,7 @@ import { mapData } from '../../../data/gameData.js'
 import { consumableItems } from '../../../data/items.js'
 import { getTmInfo, tmItemId } from '../../../data/tms.js'
 import { canBreed } from '../../breeding.js'
+import { abilityOf } from '../../abilities.js'
 import { tickCompanion } from '../../companion.js'
 import { createVolatileState } from '../../combat.js'
 import { fieldWeatherFor } from '../../weather.js'
@@ -17,6 +18,7 @@ import { advanceShinyTarget, computeUnlockedLocations, rollCandyDrop, rollValuab
 import { advanceQuests } from '../../quests.js'
 import { rollSwarm, recordSeenPokemon, withNotification } from '../../reducer-helpers.js'
 import { rollUnownedTm } from '../../tms.js'
+import { resolveRevive, resolveSwitchRequest } from './switch.js'
 
 /**
  * Handle the `START_ENCOUNTER` action.
@@ -56,6 +58,44 @@ export function startEncounter(state, action) {
     },
     action.payload.enemy
   )
+}
+
+/**
+ * Handle the `FLEE` action: try to run from a wild battle. Run Away always
+ * succeeds; otherwise the odds scale with the player's Speed against the foe's.
+ * A failed attempt spends the turn, so the foe still attacks.
+ * @param {GameState} state
+ * @returns {GameState}
+ */
+export function fleeBattle(state) {
+  if (state.phase !== 'battling' || state.trainerBattle || state.bossBattle) return state
+  const player = state.playerPokemon,
+    foe = state.enemyPokemon
+  if (!player || !foe) return state
+  const runAway = abilityOf(player) === 'runAway',
+    speed = player.speed ?? 0,
+    foeSpeed = Math.max(1, foe.speed ?? 1),
+    success = runAway || Math.random() < Math.min(0.95, 0.25 + (speed / foeSpeed) * 0.5)
+  if (success)
+    return {
+      ...state,
+      phase: 'idle',
+      enemyPokemon: null,
+      pendingEvents: [
+        ...state.pendingEvents,
+        {
+          type: 'flee',
+          message: runAway
+            ? `${player.name} fled with Run Away!`
+            : 'Got away safely!',
+        },
+      ],
+    }
+  return {
+    ...state,
+    playerTurnSpent: !0,
+    pendingEvents: [...state.pendingEvents, { type: 'status', message: "Couldn't get away!" }],
+  }
 }
 
 /**
@@ -111,8 +151,13 @@ export function choosePlayerMove(state, action) {
  */
 export function consumeEvent(state, action) {
   if (state.pendingEvents.length === 0) return state
-  const [event, ...remainingEvents] = state.pendingEvents,
-    battleLog = event.message
+  const [event, ...remainingEvents] = state.pendingEvents
+  // Switch requests (pivoting / forced / emergency switches) and Revival
+  // Blessing resolve as soon as their event is reached, with the turn's damage
+  // already applied.
+  if (event.type === 'switchRequest') return resolveSwitchRequest(state, event, remainingEvents)
+  if (event.type === 'revive') return resolveRevive(state, event, remainingEvents)
+  const battleLog = event.message
       ? [...state.battleLog, event.message].slice(-50)
       : state.battleLog
   let newPhase = state.phase

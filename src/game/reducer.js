@@ -7,7 +7,7 @@ import { createCompanionCare } from './companion.js'
 import { createGarden } from './garden.js'
 import { createPelago } from './pelago.js'
 import { DEFAULT_ROD } from './minigames.js'
-import { applyExp, applySharedExp, attemptActivityCatch, bossBattleEnd, choosePlayerMove, completeMasterBall, consumeEvent, debugMaxLevel, executeTurn, gmaxEvolve, megaEvolve, startBossBattle, startEncounter, startRaid, startTower, startTrainerBattle, switchPlayerPokemon, throwMasterBall, trainerBattleEnd, trainerSendNextPokemon, updateVolatile, useEffectItem, usePokeball } from './reducer/battle.js'
+import { applyExp, applySharedExp, attemptActivityCatch, bossBattleEnd, choosePlayerMove, completeMasterBall, consumeEvent, debugMaxLevel, executeTurn, fleeBattle, gmaxEvolve, megaEvolve, startBossBattle, startEncounter, startRaid, startTower, startTrainerBattle, switchPlayerPokemon, throwMasterBall, trainerBattleEnd, trainerSendNextPokemon, updateVolatile, useEffectItem, usePokeball } from './reducer/battle.js'
 import { claimAchievementRewards, claimDailyGift, claimDexRewards, claimQuest, clearOfflineReport, completeDexCelebration, markCaught, markSeen, markShinyCaught, markShinySeen, refreshDailyEvent, refreshQuests, startDexCelebration, updateShinyChain } from './reducer/collection.js'
 import { buyCafeItem, buyItem, buyRewardItem, clearHeldItem, reviveFossil, sellItem, setAlwaysCatchShinies, setCatchRule, toggleAutoCatch, toggleRouteCatchAll, useItemOnPokemon } from './reducer/items.js'
 import { blendBerries, careCompanion, harvestBerry, plantBerry, setCompanion } from './reducer/care.js'
@@ -209,6 +209,8 @@ export function gameReducer(state, action) {
       return startEncounter(state, action)
     case 'EXECUTE_TURN':
       return executeTurn(state, action)
+    case 'FLEE':
+      return fleeBattle(state)
     case 'CHOOSE_PLAYER_MOVE':
       return choosePlayerMove(state, action)
     case 'CONSUME_EVENT':

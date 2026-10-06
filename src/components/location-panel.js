@@ -8,7 +8,7 @@ import { encounterData, gymLeaderData, mapData, pokemonSpecies, regions, raidPoo
 import { areaInfoFor } from '../data/ui.js'
 import { MINIGAME_AREAS, MINIGAME_INFO, MINIGAME_LOCATIONS, MINIGAME_START_ACTION, ROUTE_ACTIVITIES, bestRodId, nextRod, rodForId, routeActivityIds } from '../game/minigames.js'
 import { useGame } from '../game/context.js'
-import { computeUnlockedLocations, frontierUnlocks, minigameRequirementMet, regionProgressionGoal } from '../game/progression.js'
+import { computeUnlockedLocations, frontierUnlocks, minigameRequirementMet, regionProgressionGoal, unlockBlockers } from '../game/progression.js'
 import { servicePoisFor, cafeFor } from '../game/services.js'
 import { MinigameCard } from './minigame-card.js'
 import { GiftPanel } from './gift-panel.js'
@@ -29,6 +29,10 @@ export function LocationPanel({ onOpenCatchSettings }) {
     [expandedZoneArea, setExpandedZoneArea] = React.useState(
       /** @type {string | null} */ (null)
     ),
+    // Whether the areas on the frontier that are still waiting on another
+    // locked area are shown. They are tucked behind a toggle so they don't bury
+    // the gates the player can actually work towards.
+    [showBlockedGates, setShowBlockedGates] = React.useState(false),
     unlockedNow = computeUnlockedLocations(state),
     unlockedNowSet = new Set(unlockedNow),
     location = mapData[state.currentLocation],
@@ -39,13 +43,24 @@ export function LocationPanel({ onOpenCatchSettings }) {
     // the region the player is standing in: `unlockOrder` is generation-
     // prefixed, so a map-wide list let an earlier region crowd the current
     // one's gates (Sinnoh, Alola, Paldea) out of the panel.
-    frontierLockedLocations = frontierUnlocks(unlockedNow, location?.region ?? 'kanto'),
+    frontierGates = frontierUnlocks(unlockedNow, location?.region ?? 'kanto').map(
+      (nextLocation) => ({ nextLocation, blockers: unlockBlockers(nextLocation, unlockedNowSet) })
+    ),
+    // A frontier area waits on another locked area (a route behind a route, a
+    // zone sub-area behind its predecessor, ...) when it has blockers; those
+    // are hidden until asked for, so the panel only headlines what the player
+    // can do now.
+    actionableGates = frontierGates.filter((entry) => entry.blockers.length === 0),
+    blockedGates = frontierGates.filter((entry) => entry.blockers.length > 0),
+    // If there is nothing actionable, the blocked areas are the whole story, so
+    // show them without the extra click.
+    blockedGatesExpanded = showBlockedGates || actionableGates.length === 0,
     // When nothing in the current region is on the frontier the region is
     // finished, so point at its Champion (or a banked Unlock Token) rather than
     // surfacing a locked region the player cannot reach yet (Kanto, if they
     // started elsewhere).
     regionGoal =
-      frontierLockedLocations.length === 0
+      frontierGates.length === 0
         ? regionProgressionGoal(state, location?.region ?? 'kanto')
         : null,
     routeKey = location?.routeKey,
@@ -102,15 +117,16 @@ export function LocationPanel({ onOpenCatchSettings }) {
             }),
           ],
         })
-      : frontierLockedLocations.length > 0
+      : frontierGates.length > 0
         ? jsxs('div', {
             className: 'location-next-unlock',
             children: [
-              jsx('div', {
-                className: 'location-section-title',
-                children: frontierLockedLocations.length > 1 ? 'Next Unlocks' : 'Next Unlock',
-              }),
-              frontierLockedLocations.map((nextLockedLocation) => {
+              actionableGates.length > 0 &&
+                jsx('div', {
+                  className: 'location-section-title',
+                  children: actionableGates.length > 1 ? 'Next Unlocks' : 'Next Unlock',
+                }),
+              actionableGates.map(({ nextLocation: nextLockedLocation }) => {
                 const requirements = unlockRequirements(nextLockedLocation),
                   primaryRequirement = requirements.find(
                     (requirement) => !requirement.met && isTravelable(requirement.locationId)
@@ -183,6 +199,57 @@ export function LocationPanel({ onOpenCatchSettings }) {
                   nextLockedLocation.id
                 )
               }),
+              blockedGates.length > 0 &&
+                jsxs('div', {
+                  className: 'location-unlock-blocked',
+                  children: [
+                    actionableGates.length > 0 &&
+                      jsx('button', {
+                        className: 'location-unlock-blocked-toggle',
+                        onClick: () => setShowBlockedGates((shown) => !shown),
+                        children: `${blockedGatesExpanded ? '\u25be Hide' : '\u25b8'} ${blockedGates.length} blocked area${
+                          blockedGates.length === 1 ? '' : 's'
+                        }`,
+                      }),
+                    blockedGatesExpanded &&
+                      blockedGates.map(({ nextLocation: blockedLocation, blockers }) =>
+                        jsxs(
+                          'div',
+                          {
+                            className: 'location-unlock-entry blocked',
+                            children: [
+                              jsxs('div', {
+                                className: 'location-unlock-name',
+                                children: ['\u{1f512} ', blockedLocation.name],
+                              }),
+                              jsx('div', {
+                                className: 'location-unlock-checklist',
+                                children: jsx('div', {
+                                  className: 'location-unlock-check blocked',
+                                  children: jsxs('div', {
+                                    className: 'location-unlock-check-row',
+                                    children: [
+                                      jsx('span', {
+                                        className: 'location-unlock-check-icon',
+                                        children: '\u2190',
+                                      }),
+                                      jsx('span', {
+                                        className: 'location-unlock-check-label',
+                                        children: `Waiting on ${blockers
+                                          .map((id) => mapData[id]?.name ?? id)
+                                          .join(', ')}`,
+                                      }),
+                                    ],
+                                  }),
+                                }),
+                              }),
+                            ],
+                          },
+                          blockedLocation.id
+                        )
+                      ),
+                  ],
+                }),
             ],
           })
         : null

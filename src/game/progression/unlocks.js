@@ -1,6 +1,7 @@
 // // Location unlocking: resolve the unlock graph and spend Region Unlock Tokens. Split from game/progression.js.
 
 import { baseRegions, gymLeaderData, mapData, regions } from '../../data/gameData.js'
+import { MINIGAME_AREAS } from '../minigames/locations.js'
 
 /** @type {Record<string, string[]>} */
 const gymIdsByRegion = {}
@@ -195,4 +196,37 @@ export function frontierUnlocks(unlocked, regionId) {
     })
     .filter((location) => location.connections.some((id) => unlockedSet.has(id)))
     .sort((left, right) => left.unlockOrder - right.unlockOrder)
+}
+
+/**
+ * The areas a locked location is still waiting on: the `requires` entries and
+ * gate targets that are themselves not unlocked yet (a route behind a route,
+ * a hub behind another sub-area, a gym/route/minigame whose home is closed). A
+ * location with any of these can't be worked towards, so the panel tucks it
+ * away as "blocked" instead of showing a checklist of things the player cannot
+ * do anything about yet. Order is preserved and duplicates dropped, so the
+ * first entry is the nearest gate.
+ * @param {MapLocation} location
+ * @param {Set<string>} unlockedSet
+ * @returns {string[]}
+ */
+export function unlockBlockers(location, unlockedSet) {
+  const rule = location.unlock ?? {},
+    /** @type {string[]} */ blockers = []
+  const add = (/** @type {string | null | undefined} */ id) => {
+    if (id && mapData[id] && !unlockedSet.has(id)) blockers.push(id)
+  }
+  for (const id of rule.requires ?? []) add(id)
+  for (const gate of rule.battlesAtLocation ?? []) add(gate.locationId)
+  if (rule.caughtOnRoute) add(rule.caughtOnRoute.routeKey)
+  for (const gymId of rule.gymsRequired ?? []) {
+    const gym = gymLeaderData.find((candidate) => candidate.id === gymId)
+    if (gym) add(gym.locationKey)
+  }
+  if (rule.minigame) add(MINIGAME_AREAS[rule.minigame])
+  if (rule.championDefeated) {
+    const regionId = rule.championDefeated === true ? 'kanto' : rule.championDefeated
+    add(regions.find((candidate) => candidate.id === regionId)?.leagueLocationKey)
+  }
+  return [...new Set(blockers)]
 }

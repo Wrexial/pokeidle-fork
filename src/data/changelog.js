@@ -65,6 +65,7 @@ export const CHANGELOG = [
             'Route-exclusive catch gates were refreshed against the current wild tables: a gate whose named species had since been spread onto other routes now lists the species that are genuinely exclusive to its route, and a gate whose route has no exclusives left was dropped (its other requirements stay)',
             'Route-exclusive catch gates no longer send you hunting a night-only Pokemon or a 1%-weight starter: a gate now asks for no more than a route\u2019s common finds (Alola\u2019s Route 3 asks for two of four instead of three, Paldea\u2019s North Province and Unova\u2019s Lacunosa Town likewise), and Sinnoh\u2019s Route 222 gate \u2014 whose only exclusive, Luxio, appears solely at night \u2014 was dropped, so Routes 227 and 228 open from their battles and badge instead',
             'The Next Unlocks list follows the region you are standing in again: it gathered locked areas from every open region and kept only the five soonest, so in Sinnoh, Alola or Paldea earlier regions\u2019 routes crowded the local gates off the list entirely. It now lists the current region\u2019s whole frontier',
+            'The Next Unlocks list tucks away areas you cannot work towards yet: a route chained behind a route, a zone sub-area behind its predecessor, or a gate whose gym, route or minigame home is still closed now sits behind a \u201cblocked areas\u201d toggle that names exactly what each one is waiting on, so the list only headlines the gates that are actually open to you',
           ],
         },
       ],

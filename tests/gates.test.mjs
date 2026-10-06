@@ -7,7 +7,7 @@ installGameData()
 
 const { quickplayAll } = await import('../tools/lib/quickplay.mjs')
 const { buildRouteExclusives } = await import('../tools/lib/gate-exclusives.mjs')
-const { computeUnlockedLocations, frontierUnlocks } = await import('../src/game/progression.js')
+const { computeUnlockedLocations, frontierUnlocks, unlockBlockers } = await import('../src/game/progression.js')
 const { encounterData, evolutionData, mapData, pokemonSpecies } = await import('../src/data/gameData.js')
 const { regionalStarters } = await import('../src/data/config.js')
 
@@ -102,4 +102,31 @@ test('the Next Unlocks frontier stays inside the region the player is in', () =>
     !frontier.some((location) => (location.region ?? 'kanto') === 'kanto'),
     'no Kanto gates leak into the Alola panel'
   )
+})
+
+test('blocked frontier areas report the locked area they wait on', () => {
+  const state = {
+    startRegion: 'alola',
+    unlockedRegions: ['alola'],
+    unlockedLocations: ['alola-iki-town', 'alola-melemele-island', 'alola-route-1'],
+    currentLocation: 'alola-route-1',
+    pokedexCaught: ['rowlet'],
+    party: [{ level: 5 }],
+    defeatedGyms: [],
+    defeatedChampions: [],
+    battlesWonByLocation: {},
+  }
+  const unlocked = computeUnlockedLocations(state)
+  const unlockedSet = new Set(unlocked)
+  const frontier = frontierUnlocks(unlocked, 'alola')
+  const nextArea = frontier.find((location) => location.id === 'alola-route-1--hauoli-outskirts')
+  assert.ok(nextArea, 'the next area is on the frontier')
+  assert.deepEqual(unlockBlockers(nextArea, unlockedSet), [], 'the next area is actionable')
+  // Route 2 is adjacent to the zone hub, so it is on the frontier, but it waits
+  // on the outskirts opening first.
+  const chained = frontier.find((location) => location.id === 'alola-route-2')
+  assert.ok(chained, 'Route 2 is on the frontier')
+  assert.deepEqual(unlockBlockers(chained, unlockedSet), [
+    'alola-route-1--hauoli-outskirts',
+  ], 'Route 2 waits on the outskirts')
 })

@@ -4279,6 +4279,42 @@ img {
     text-decoration: underline
 }
 
+/* Frontier areas that are still waiting on another locked area: tucked behind
+   a toggle so they don't bury the gates the player can work towards now. */
+.location-unlock-blocked {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px solid #48382866
+}
+
+.location-unlock-blocked-toggle {
+    align-self: flex-start;
+    padding: 2px 0;
+    font: inherit;
+    font-size: 7px;
+    color: var(--parchment);
+    background: none;
+    border: none;
+    cursor: pointer;
+    opacity: .75
+}
+
+.location-unlock-blocked-toggle:hover {
+    color: var(--gold);
+    opacity: 1
+}
+
+.location-unlock-entry.blocked .location-unlock-name {
+    opacity: .85
+}
+
+.location-unlock-check.blocked {
+    color: #b08a6a
+}
+
 .location-panel-scroll {
     width: 100%;
     min-width: 0;

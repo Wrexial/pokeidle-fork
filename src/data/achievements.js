@@ -3,7 +3,7 @@
 // Claimed rewards are tracked in `state.rewardedAchievements` (see
 // CLAIM_ACHIEVEMENT_REWARDS in the reducer).
 
-import { baseRegions, completedGenerations, gymLeaderData, pokedexIndexes, pokemonSpecies, regions } from './gameData.js'
+import { baseRegions, completedGenerations, gymLeaderData, isSpeciesRegistered, pokedexIndexes, regions } from './gameData.js'
 import { isTmItem, TM_MOVE_IDS } from './tms.js'
 
 const nationalDexSize = pokedexIndexes.filter((entry) => entry[1].id > 0 && entry[1].id <= 1025).length
@@ -41,11 +41,11 @@ export const RECORDABLE_MINIGAMES = [
 const totalBattles = (/** @type {GameState} */ state) =>
   state.wildBattlesWon + state.trainerBattlesWon
 
-const caughtCount = (/** @type {GameState} */ state) =>
-  state.pokedexCaught.filter((speciesKey) => {
-    const species = pokemonSpecies[speciesKey]
-    return species && species.id > 0 && species.id <= 1025
-  }).length
+const caughtCount = (/** @type {GameState} */ state) => {
+  const registered = new Set(state.pokedexCaught),
+    nationalDex = pokedexIndexes.filter((entry) => entry[1].id > 0 && entry[1].id <= 1025)
+  return nationalDex.filter(([speciesKey]) => isSpeciesRegistered(registered, speciesKey)).length
+}
 
 const totalPrestige = (/** @type {GameState} */ state) =>
   Object.values(state.regionPrestige).reduce((sum, level) => sum + level, 0)

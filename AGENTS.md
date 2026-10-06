@@ -132,7 +132,8 @@ in `GameLayout`) dispatches `DEBUG_MAX_LEVEL` when the Konami code
 | --- | --- |
 | `index.html` | Entry point; wires the two scripts above. |
 | `src/main.js` | App entry: mounts `App` (plus `AppContent`). Renders the root. |
-| `src/data/gameData.js` | Loads and re-exports all game JSON + derived maps (including the per-generation national-dex sets behind the Shiny Charm). |
+| `src/data/gameData.js` | Loads and re-exports all game JSON + derived maps (including the per-generation national-dex sets behind the Shiny Charm and the form-grouping helpers). |
+| `src/data/pokemon-forms.js` | `buildFormModel` — derives each alternate form's national-dex base, its forms and its display label (see the forms bullet below). |
 | `src/data/items.js` | Items/balls/evolution items, mart stock, bag categories. |
 | `src/data/config.js` | Tuning constants: shiny odds, cooldowns, starters/legendaries, save keys. |
 | `src/data/moves.js` | Type chart + move-category icons. |
@@ -222,6 +223,19 @@ Data conventions:
   PokeAPI (it derives each key's PokeAPI name, so re-run it after adding a
   form). Region wild encounters only use species with `id > 0` (forms with ids
   above 1025 are excluded).
+- **Alternate forms** are grouped in the Pokédex by national dex number.
+  `src/data/pokemon-forms.js` (`buildFormModel`) resolves each form key to its
+  base species from the key's form affix (`a-`/`g-`/`h-`/`p-`/`m-`/`gx-`,
+  trailing forme affixes, ...), with `FORM_BASE_OVERRIDES` for the cases the
+  convention can't express (`p-kyogre`/`p-groudon` are Primal while `p-*` is
+  normally Paldean, Rotom's appliance prefixes, `urshifu-rss` -> `urshifu-sss`).
+  `src/data/gameData.js` exposes `formBaseMap`, `formsByBase`, `baseSpeciesKey`,
+  `formLabelFor`, `dexIdForSpecies` and `isSpeciesRegistered`. `pokedexIndexes`
+  therefore holds one slot per national-dex species (plus `missingno`), the
+  Pokédex detail panel switches between a species' forms, and registering any
+  form registers the species for the dex (and the Shiny Charm). Add a form by
+  adding it to `pokemon-species.json` with the usual sprite/learnset tooling —
+  its base is derived automatically unless its key needs an override entry.
 - `regions.json` entries carry `entry` (the starting town's location id),
   `startLevel` (5 for every region now that each runs its own 5-75 curve) and
   `leagueLocationKey` (the region's Pokémon League, e.g.

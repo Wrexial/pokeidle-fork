@@ -5,7 +5,7 @@ import { ACHIEVEMENTS, RECORDABLE_MINIGAMES } from '../data/achievements.js'
 import { isTmItem, TM_MOVE_IDS } from '../data/tms.js'
 import { MINIGAME_INFO } from '../game/minigames.js'
 import { formatReward } from '../game/progression.js'
-import { completedGenerations, gymLeaderData, pokedexIndexes, regions, speciesKeysByGeneration } from '../data/gameData.js'
+import { completedGenerations, gymLeaderData, isSpeciesRegistered, pokedexIndexes, regions, speciesKeysByGeneration } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 
 /** @param {{ onClose?: () => void, inline?: boolean }} props */
@@ -14,8 +14,10 @@ export function RecordsModal({ onClose, inline = false }) {
     rewardedAchievements = new Set(state.rewardedAchievements ?? []),
     achieved = ACHIEVEMENTS.filter((achievement) => achievement.check(state)),
     nationalDex = pokedexIndexes.filter((entry) => entry[1].id > 0 && entry[1].id <= 1025),
-    caughtCount = nationalDex.filter(([speciesKey]) => state.pokedexCaught.includes(speciesKey)).length,
-    seenCount = nationalDex.filter(([speciesKey]) => state.pokedexSeen.includes(speciesKey)).length,
+    caughtSet = new Set(state.pokedexCaught),
+    seenSet = new Set([...state.pokedexSeen, ...state.pokedexCaught]),
+    caughtCount = nationalDex.filter(([speciesKey]) => isSpeciesRegistered(caughtSet, speciesKey)).length,
+    seenCount = nationalDex.filter(([speciesKey]) => isSpeciesRegistered(seenSet, speciesKey)).length,
     percent = nationalDex.length ? Math.floor((caughtCount / nationalDex.length) * 100) : 0,
     completedGenerationSet = completedGenerations(state.pokedexCaught),
     pokemonOwned = state.party.length + state.box.length,
@@ -58,7 +60,7 @@ export function RecordsModal({ onClose, inline = false }) {
             `Gen ${generationIndex + 1}`,
             completedGenerationSet.has(generationIndex)
               ? '★ Complete'
-              : `${speciesKeys.filter((speciesKey) => state.pokedexCaught.includes(speciesKey)).length} / ${speciesKeys.length}`,
+              : `${speciesKeys.filter((speciesKey) => isSpeciesRegistered(caughtSet, speciesKey)).length} / ${speciesKeys.length}`,
           ]),
         ],
       },

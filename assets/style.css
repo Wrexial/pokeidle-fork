@@ -6174,6 +6174,18 @@ img {
     z-index: 5
 }
 
+.pokedex-forms-badge {
+    position: absolute;
+    top: 1px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 7px;
+    line-height: 1;
+    color: #c8a8f0;
+    text-shadow: 0 0 2px #000;
+    z-index: 6
+}
+
 .pokedex-time-badge {
     position: absolute;
     top: 1px;
@@ -6479,6 +6491,33 @@ img {
     display: flex;
     flex-direction: column;
     gap: 4px
+}
+
+.pokedex-form-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px
+}
+
+.pokedex-form-tab {
+    font-family: var(--font-pixel);
+    font-size: 7px;
+    padding: 2px 6px;
+    color: #5a4838;
+    background: #e8dcc0;
+    border: 1px solid #b8a878;
+    cursor: pointer;
+    transition: .1s
+}
+
+.pokedex-form-tab:hover {
+    border-color: #8a6820
+}
+
+.pokedex-form-tab.active {
+    color: #f0e0b0;
+    background: #6a4e30;
+    border-color: #8a6820
 }
 
 .pokedex-modal-detail .stats-panel-identity {

@@ -7,7 +7,7 @@ import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemo
 import { DexBallBadge } from './dex-ball-badge.js'
 
 export let PokedexTile = React.memo(
-  /** @param {{ speciesKey: string, status: string, rarity: string, isSelected: boolean, onClick: () => void, isShinyCaught: boolean, isExclusive?: boolean, time?: 'day' | 'night', chainCount?: number, activeEffect: any, selectorMode: any }} props */
+  /** @param {{ speciesKey: string, status: string, rarity: string, isSelected: boolean, onClick: () => void, isShinyCaught: boolean, isExclusive?: boolean, time?: 'day' | 'night', chainCount?: number, activeEffect: any, selectorMode: any, formCount?: number }} props */
   function ({
     speciesKey,
     status,
@@ -20,6 +20,7 @@ export let PokedexTile = React.memo(
     chainCount,
     activeEffect,
     selectorMode,
+    formCount = 0,
   }) {
     const species = pokemonSpecies[speciesKey],
       ballStatus = isShinyCaught
@@ -44,6 +45,12 @@ export let PokedexTile = React.memo(
                 className: 'pokedex-exclusive-badge',
                 title: 'Only found on this route',
                 children: '◆',
+              }),
+            formCount > 0 &&
+              jsx('span', {
+                className: 'pokedex-forms-badge',
+                title: `${formCount} alternate form${formCount === 1 ? '' : 's'}`,
+                children: '◈',
               }),
             time &&
               jsx('span', {

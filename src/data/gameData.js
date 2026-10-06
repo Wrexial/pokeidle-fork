@@ -1,6 +1,7 @@
 // Split from the former assets/index.js.
 
 import { applyMoveOverrides } from './move-effects.js'
+import { buildFormModel } from './pokemon-forms.js'
 
 async function startApp() {
   await window.gameDataReady
@@ -12,6 +13,60 @@ async function startApp() {
 const loadedGameData = await startApp()
 
 export let pokemonSpecies = /** @type {Record<string, Species>} */ (loadedGameData.pokemonSpecies)
+
+/**
+ * Form relationships, built once from the species table (see
+ * `src/data/pokemon-forms.js`). Forms (Megas, regional variants, ...) map back
+ * to their national-dex base so the Pokédex can group them under one slot.
+ */
+const formModel = buildFormModel(pokemonSpecies)
+
+/** Form species key -> its national-dex base species key. */
+export const formBaseMap = formModel.baseForKey
+
+/** National-dex base key -> its form keys (the base itself is excluded). */
+export const formsByBase = formModel.formsByBase
+
+/**
+ * The national-dex base species a key belongs to (a base maps to itself).
+ * @param {string} speciesKey
+ * @returns {string}
+ */
+export function baseSpeciesKey(speciesKey) {
+  return formBaseMap[speciesKey] ?? speciesKey
+}
+
+/**
+ * The display label for a form (e.g. "Alolan", "Mega X"), or null for a base.
+ * @param {string} speciesKey
+ * @returns {string | null}
+ */
+export function formLabelFor(speciesKey) {
+  return formModel.labelForKey[speciesKey] ?? null
+}
+
+/**
+ * The national-dex number a species key belongs to (forms share their base's).
+ * @param {string} speciesKey
+ * @returns {number}
+ */
+export function dexIdForSpecies(speciesKey) {
+  const base = baseSpeciesKey(speciesKey)
+  return pokemonSpecies[base]?.id ?? 0
+}
+
+/**
+ * Whether a national-dex base is registered (caught or seen), counting any of
+ * its forms.
+ * @param {Set<string>} registered
+ * @param {string} baseKey
+ * @returns {boolean}
+ */
+export function isSpeciesRegistered(registered, baseKey) {
+  if (registered.has(baseKey)) return true
+  const forms = formsByBase[baseKey]
+  return !!forms && forms.some((formKey) => registered.has(formKey))
+}
 
 /** Gender rate + egg groups per species (see tools/fetch-breeding-data.cjs). */
 export let breedingData = /** @type {Record<string, BreedingData>} */ (
@@ -237,8 +292,7 @@ function generationIndexForDexId(dexId) {
  * @returns {number}
  */
 function generationIndexForSpecies(speciesKey) {
-  const species = pokemonSpecies[speciesKey]
-  return species ? generationIndexForDexId(species.id) : -1
+  return generationIndexForDexId(dexIdForSpecies(speciesKey))
 }
 
 /**
@@ -264,7 +318,7 @@ export function completedGenerations(pokedexCaught) {
   /** @type {Set<number>} */
   const completed = new Set()
   speciesKeysByGeneration.forEach((speciesKeys, generationIndex) => {
-    if (speciesKeys.length > 0 && speciesKeys.every((speciesKey) => caught.has(speciesKey)))
+    if (speciesKeys.length > 0 && speciesKeys.every((speciesKey) => isSpeciesRegistered(caught, speciesKey)))
       completed.add(generationIndex)
   })
   completedGenerationsCache = { input: pokedexCaught, result: completed }
@@ -283,10 +337,15 @@ export function isSpeciesCharmed(speciesKey, completedGenerationSet) {
   return generationIndex >= 0 && completedGenerationSet.has(generationIndex)
 }
 
-/** @type {[string, Species][]} */
-export let pokedexIndexes = Object.entries(pokemonSpecies).sort(
-  (left, right) => left[1].id - right[1].id
-)
+/**
+ * One entry per national-dex species (id 1-1025), in dex order, plus the
+ * MissingNo. placeholder (id 0). Alternate forms (ids above 1025) are grouped
+ * under their base entry via `formsByBase` rather than listed here.
+ * @type {[string, Species][]}
+ */
+export let pokedexIndexes = Object.entries(pokemonSpecies)
+  .filter(([, species]) => species.id === 0 || (species.id > 0 && species.id <= 1025))
+  .sort((left, right) => left[1].id - right[1].id)
 
 /** @type {string[]} */
 export const mapAreas = Object.keys(mapData)

@@ -3,7 +3,17 @@
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { STAT_DISPLAY_MAX, statBarColors } from '../data/ui.js'
-import { GENERATION_DEX_RANGES, pokedexData, pokedexIndexes, pokemonSpecies } from '../data/gameData.js'
+import {
+  GENERATION_DEX_RANGES,
+  baseSpeciesKey,
+  dexIdForSpecies,
+  formLabelFor,
+  formsByBase,
+  isSpeciesRegistered,
+  pokedexData,
+  pokedexIndexes,
+  pokemonSpecies,
+} from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { useUi } from '../game/ui-context.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
@@ -12,15 +22,22 @@ import { PokedexTile } from './pokedex-tile.js'
 /** @param {{ onClose?: () => void, inline?: boolean }} props */
 export function PokedexModal({ onClose, inline = false }) {
   const { state, dispatch } = useGame(),
-    { pokedexSelected: selected, setPokedexSelected: setSelected, pokedexGen: gen, setPokedexGen: setGen, openBoxSearch } = useUi(),
-    getStatus = /** @param {string} speciesKey */ (speciesKey) =>
-      state.pokedexCaught.includes(speciesKey)
-        ? 'caught'
-        : state.pokedexSeen.includes(speciesKey)
-          ? 'seen'
-          : 'unseen',
+    { pokedexSelected: selectedRaw, setPokedexSelected: setSelected, pokedexGen: gen, setPokedexGen: setGen, openBoxSearch } = useUi(),
+    // The selected slot is always a national-dex base; its forms switch in the
+    // detail panel without changing the selected tile.
+    selected = selectedRaw ? baseSpeciesKey(selectedRaw) : null,
     caughtSet = new Set(state.pokedexCaught),
     seenSet = new Set([...state.pokedexSeen, ...state.pokedexCaught]),
+    /** Species-level status for a dex slot (any of its forms counts). */
+    getSlotStatus = /** @param {string} baseKey */ (baseKey) =>
+      isSpeciesRegistered(caughtSet, baseKey)
+        ? 'caught'
+        : isSpeciesRegistered(seenSet, baseKey)
+          ? 'seen'
+          : 'unseen',
+    /** Individual status for one species/form key. */
+    getFormStatus = /** @param {string} speciesKey */ (speciesKey) =>
+      caughtSet.has(speciesKey) ? 'caught' : seenSet.has(speciesKey) ? 'seen' : 'unseen',
     filteredIndexes = React.useMemo(
       () =>
         gen === 0
@@ -32,52 +49,53 @@ export function PokedexModal({ onClose, inline = false }) {
             ),
       [gen]
     ),
-    // The "All" tab also lists alternate forms (ids above 1025), and
-    // MissingNo. (id 0) as a pure easter egg. They still render, but the
-    // completion count only covers the national dex so it can reach 100%.
+    // The "All" tab also lists MissingNo. (id 0) as a pure easter egg; the
+    // completion count excludes it so the national dex can read 100%.
     countedIndexes =
       gen === 0
         ? filteredIndexes.filter((entry) => entry[1].id > 0 && entry[1].id <= 1025)
         : filteredIndexes,
-    caughtCount = countedIndexes.filter(([speciesKey]) => caughtSet.has(speciesKey)).length,
-    seenCount = countedIndexes.filter(([speciesKey]) => seenSet.has(speciesKey)).length,
+    caughtCount = countedIndexes.filter(([speciesKey]) => isSpeciesRegistered(caughtSet, speciesKey)).length,
+    seenCount = countedIndexes.filter(([speciesKey]) => isSpeciesRegistered(seenSet, speciesKey)).length,
     totalEntries = countedIndexes.length,
-    selectedSpecies = selected ? pokemonSpecies[selected] : null,
-    selectedStatus = selected ? getStatus(selected) : 'unseen',
-    statRows = selectedSpecies
+    slotForms = selected ? formsByBase[selected] ?? [] : [],
+    [formKey, setFormKey] = React.useState(/** @type {string | null} */ (null)),
+    // Default to a form the player has actually registered when the base form
+    // itself is still unseen, so selecting a caught regional form from the grid
+    // opens on something they have.
+    defaultKey = React.useCallback(
+      /** @param {string | null} slot @returns {string | null} */
+      (slot) => {
+        if (!slot) return null
+        if (caughtSet.has(slot) || seenSet.has(slot)) return null
+        const forms = formsByBase[slot] ?? []
+        const caughtForm = forms.find((key) => caughtSet.has(key))
+        if (caughtForm) return caughtForm
+        return forms.find((key) => seenSet.has(key)) ?? null
+      },
+      [state.pokedexCaught, state.pokedexSeen]
+    ),
+    activeKey = formKey && slotForms.includes(formKey) ? formKey : selected,
+    activeSpecies = activeKey ? pokemonSpecies[activeKey] : null,
+    activeStatus = activeKey ? getFormStatus(activeKey) : 'unseen',
+    statRows = activeSpecies
       ? [
-          {
-            label: 'HP',
-            key: 'hp',
-            value: selectedSpecies.baseStats.hp,
-          },
-          {
-            label: 'Atk',
-            key: 'attack',
-            value: selectedSpecies.baseStats.attack,
-          },
-          {
-            label: 'Def',
-            key: 'defense',
-            value: selectedSpecies.baseStats.defense,
-          },
-          {
-            label: 'SpA',
-            key: 'spAttack',
-            value: selectedSpecies.baseStats.spAttack,
-          },
-          {
-            label: 'SpD',
-            key: 'spDefense',
-            value: selectedSpecies.baseStats.spDefense,
-          },
-          {
-            label: 'Spd',
-            key: 'speed',
-            value: selectedSpecies.baseStats.speed,
-          },
+          { label: 'HP', key: 'hp', value: activeSpecies.baseStats.hp },
+          { label: 'Atk', key: 'attack', value: activeSpecies.baseStats.attack },
+          { label: 'Def', key: 'defense', value: activeSpecies.baseStats.defense },
+          { label: 'SpA', key: 'spAttack', value: activeSpecies.baseStats.spAttack },
+          { label: 'SpD', key: 'spDefense', value: activeSpecies.baseStats.spDefense },
+          { label: 'Spd', key: 'speed', value: activeSpecies.baseStats.speed },
         ]
       : []
+
+  // Reset the form view whenever the selected slot changes.
+  React.useEffect(() => {
+    setFormKey(null)
+    const fallback = defaultKey(selected)
+    if (fallback) setFormKey(fallback)
+  }, [selected])
+
   const panel = jsxs('div', {
     className: inline ? 'pokedex-inline' : 'pokedex-modal',
     ...(inline
@@ -124,7 +142,7 @@ export function PokedexModal({ onClose, inline = false }) {
           children: jsx('div', {
             className: 'pokedex-grid',
             children: filteredIndexes.map(([speciesKey]) => {
-              const status = getStatus(speciesKey)
+              const status = getSlotStatus(speciesKey)
               return jsx(
                 PokedexTile,
                 {
@@ -133,7 +151,8 @@ export function PokedexModal({ onClose, inline = false }) {
                   rarity: 'common',
                   isSelected: selected === speciesKey,
                   onClick: () => setSelected(selected === speciesKey ? null : speciesKey),
-                  isShinyCaught: state.shinyCaught.includes(speciesKey),
+                  isShinyCaught: isSpeciesRegistered(new Set(state.shinyCaught), speciesKey),
+                  formCount: formsByBase[speciesKey]?.length ?? 0,
                 },
                 speciesKey
               )
@@ -141,39 +160,63 @@ export function PokedexModal({ onClose, inline = false }) {
           }),
         }),
         selected &&
-          selectedSpecies &&
+          activeKey &&
+          activeSpecies &&
           jsxs('div', {
             className: 'pokedex-modal-detail',
             children: [
+              slotForms.length > 0 &&
+                jsx('div', {
+                  className: 'pokedex-form-tabs',
+                  children: [
+                    jsx('button', {
+                      className: `pokedex-form-tab${activeKey === selected ? ' active' : ''}`,
+                      onClick: () => setFormKey(null),
+                      children: formLabelFor(selected) ?? 'Base',
+                    }),
+                    ...slotForms.map((formKey) =>
+                      jsx(
+                        'button',
+                        {
+                          className: `pokedex-form-tab${activeKey === formKey ? ' active' : ''}`,
+                          onClick: () => setFormKey(formKey),
+                          title: pokemonSpecies[formKey].name,
+                          children: formLabelFor(formKey) ?? pokemonSpecies[formKey].name,
+                        },
+                        formKey
+                      )
+                    ),
+                  ],
+                }),
               jsxs('div', {
                 className: 'stats-panel-identity',
                 children: [
                   jsx('img', {
-                    className: `stats-panel-sprite ${selectedStatus}`,
-                    src: getPokemonSpriteUrl(selectedSpecies.id),
-                    onError: /** @param {{ target: HTMLImageElement }} event */ (event) => (event.target.src = getPokemonSpriteFallbackUrl(selectedSpecies.id)),
-                    alt: selectedStatus === 'unseen' ? '???' : selectedSpecies.name,
+                    className: `stats-panel-sprite ${activeStatus}`,
+                    src: getPokemonSpriteUrl(activeSpecies.id),
+                    onError: /** @param {{ target: HTMLImageElement }} event */ (event) => (event.target.src = getPokemonSpriteFallbackUrl(activeSpecies.id)),
+                    alt: activeStatus === 'unseen' ? '???' : activeSpecies.name,
                   }),
                   jsxs('div', {
                     className: 'stats-panel-name-block',
                     children: [
                       jsx('span', {
                         className: 'stats-panel-name',
-                        children: selectedStatus === 'unseen' ? '???' : selectedSpecies.name,
+                        children: activeStatus === 'unseen' ? '???' : activeSpecies.name,
                       }),
                       jsxs('span', {
                         className: 'stats-panel-level',
-                        children: ['#', String(selectedSpecies.id).padStart(3, '0')],
+                        children: ['#', String(dexIdForSpecies(activeKey)).padStart(3, '0')],
                       }),
                       jsx('div', {
                         className: 'stats-panel-types',
                         children:
-                          selectedStatus === 'unseen'
+                          activeStatus === 'unseen'
                             ? jsx('span', {
                                 className: 'type-badge type-unknown',
                                 children: '???',
                               })
-                            : selectedSpecies.types.map((type) =>
+                            : activeSpecies.types.map((type) =>
                                 jsx(
                                   'span',
                                   {
@@ -188,8 +231,8 @@ export function PokedexModal({ onClose, inline = false }) {
                   }),
                 ],
               }),
-              selectedStatus !== 'unseen' &&
-                pokedexData[selected] &&
+              activeStatus !== 'unseen' &&
+                pokedexData[activeKey] &&
                 jsxs('div', {
                   className: 'pokedex-modal-routes',
                   children: [
@@ -197,7 +240,7 @@ export function PokedexModal({ onClose, inline = false }) {
                       className: 'pokedex-modal-routes-label',
                       children: 'Routes: ',
                     }),
-                    pokedexData[selected].map((route, index) => {
+                    pokedexData[activeKey].map((route, index) => {
                       const unlocked = state.unlockedLocations.includes(route.id)
                       return jsxs(
                         'span',
@@ -216,7 +259,7 @@ export function PokedexModal({ onClose, inline = false }) {
                                 dispatch({ type: 'TRAVEL', payload: { locationId: route.id } }),
                               children: route.name,
                             }),
-                            index < pokedexData[selected].length - 1 ? ', ' : '',
+                            index < pokedexData[activeKey].length - 1 ? ', ' : '',
                           ],
                         },
                         route.id
@@ -224,7 +267,7 @@ export function PokedexModal({ onClose, inline = false }) {
                     }),
                   ],
                 }),
-              selectedStatus !== 'unseen' &&
+              activeStatus !== 'unseen' &&
                 jsx('div', {
                   className: 'stats-panel-grid',
                   children: statRows.map((statRow) => {
@@ -258,11 +301,11 @@ export function PokedexModal({ onClose, inline = false }) {
                     )
                   }),
                 }),
-              selectedStatus !== 'unseen' &&
+              activeStatus !== 'unseen' &&
                 jsx('button', {
                   className: 'pokedex-search-box-btn',
-                  title: `Search your Box for ${selectedSpecies.name}`,
-                  onClick: () => openBoxSearch(selectedSpecies.name),
+                  title: `Search your Box for ${activeSpecies.name}`,
+                  onClick: () => openBoxSearch(activeSpecies.name),
                   children: 'Search Box',
                 }),
             ],

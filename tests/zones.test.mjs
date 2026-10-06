@@ -62,28 +62,22 @@ test('the extra Galar wild areas exist with their own encounters', () => {
   }
 })
 
-test('the Galar DLC areas are post-game regions gated on the Galar Champion', () => {
-  for (const [id, regionId] of [
-    ['galar-isle-of-armor', 'isle-of-armor'],
-    ['galar-crown-tundra', 'crown-tundra'],
-  ]) {
+test('the Galar DLC areas are post-game zones in Galar, gated on the Galar Champion', () => {
+  for (const id of ['galar-isle-of-armor', 'galar-crown-tundra']) {
     const hub = mapData[id]
     assert.ok(hub, `${id} exists`)
     assert.equal(hub.type, 'zone')
-    assert.equal(hub.region, regionId, `${id} belongs to its DLC region`)
+    assert.equal(hub.region, 'galar', `${id} belongs to Galar`)
     assert.deepEqual(hub.unlock, { championDefeated: 'galar' })
     assert.ok(hub.subAreas.length >= 2, `${id} has sub-areas`)
     for (const subArea of hub.subAreas) {
       assert.equal(mapData[subArea.id].hidden, true)
-      assert.equal(mapData[subArea.id].region, regionId)
+      assert.equal(mapData[subArea.id].region, 'galar')
       assert.ok(encounterData[subArea.id]?.encounters?.length, `${subArea.id} has encounters`)
     }
-    const region = regions.find((candidate) => candidate.id === regionId)
-    assert.ok(region?.isDlc, `${regionId} is a DLC region`)
-    assert.equal(region.parentRegion, 'galar')
-    assert.ok(!region.league, `${regionId} has no gym league`)
-    assert.ok(region.raidPool.length > 0, `${regionId} keeps a legendary raid island`)
-    assert.ok(mapData[`${regionId}-raid`], `${regionId} has a Raid Island location`)
+    // The DLC is a zone now, not its own region, and has no Raid Island.
+    assert.ok(!regions.some((region) => region.id === id.replace('galar-', '')))
+    assert.ok(!mapData[`${id}-raid`], `${id} has no Raid Island`)
   }
 
   const locked = computeUnlockedLocations(stateWith(['galar-hulbury', 'galar-wyndon']))
@@ -98,7 +92,7 @@ test('the Galar DLC areas are post-game regions gated on the Galar Champion', ()
 
 test('DLC regions never cost an Unlock Token', () => {
   const dlcIds = regions.filter((region) => region.isDlc).map((region) => region.id)
-  assert.deepEqual(dlcIds, ['isle-of-armor', 'crown-tundra', 'kitakami', 'terarium', 'sevii-islands'])
+  assert.deepEqual(dlcIds, ['sevii-islands'])
   for (const id of dlcIds) assert.ok(!baseRegions.some((region) => region.id === id))
 })
 
@@ -135,21 +129,19 @@ test('the Alolan forms are wild in Alola and its raid pool is legendaries only',
   assert.deepEqual(ordinary, [], 'Alola raid pool holds only legendaries')
 })
 
-test('Paldea’s DLC areas are regions, and Area Zero stays a zone', () => {
-  for (const [id, regionId] of [
-    ['paldea-kitakami', 'kitakami'],
-    ['paldea-terarium', 'terarium'],
+test('Paldea’s DLC areas are zones in Paldea, and Area Zero stays a zone', () => {
+  for (const [id, raidId] of [
+    ['paldea-kitakami', 'kitakami-raid'],
+    ['paldea-terarium', 'terarium-raid'],
   ]) {
     const hub = mapData[id]
     assert.ok(hub, `${id} exists`)
     assert.equal(hub.type, 'zone')
-    assert.equal(hub.region, regionId)
+    assert.equal(hub.region, 'paldea')
     assert.deepEqual(hub.unlock, { championDefeated: 'paldea' })
     assert.ok(hub.subAreas.length >= 2, `${id} has sub-areas`)
-    const region = regions.find((candidate) => candidate.id === regionId)
-    assert.ok(region?.isDlc, `${regionId} is a DLC region`)
-    assert.equal(region.parentRegion, 'paldea')
-    assert.ok(region.raidPool.length > 0, `${regionId} keeps a legendary raid island`)
+    assert.ok(!regions.some((region) => region.id === id.replace('paldea-', '')), `${id} is not a region`)
+    assert.ok(!mapData[raidId], `${id} has no Raid Island`)
   }
   const areaZero = mapData['paldea-area-zero']
   assert.ok(areaZero, 'Area Zero still exists')

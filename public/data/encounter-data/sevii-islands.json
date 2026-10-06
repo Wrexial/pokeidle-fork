@@ -561,16 +561,5 @@
     "maxLevel": 75
    }
   ]
- },
- "sevii-islands-raid": {
-  "name": "Sevii Islands Raid Island",
-  "encounters": [
-   {
-    "speciesKey": "moltres",
-    "weight": 1,
-    "minLevel": 75,
-    "maxLevel": 75
-   }
-  ]
  }
 }

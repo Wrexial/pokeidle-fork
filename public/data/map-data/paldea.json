@@ -1691,5 +1691,545 @@
   },
   "biome": "coast",
   "background": "/backgrounds/beach.png"
+ },
+ "paldea-kitakami-revelers-road": {
+  "id": "paldea-kitakami-revelers-road",
+  "name": "Reveler's Road",
+  "type": "route",
+  "region": "paldea",
+  "description": "A sub-area of the Kitakami.",
+  "routeKey": "paldea-kitakami-revelers-road",
+  "background": "/backgrounds/grassland.png",
+  "connections": [
+   "paldea-kitakami"
+  ],
+  "hidden": true,
+  "zone": "paldea-kitakami",
+  "unlock": {
+   "requires": [
+    "paldea-kitakami"
+   ]
+  },
+  "unlockOrder": 910007,
+  "position": {
+   "x": 19.29,
+   "y": 6
+  },
+  "biome": "autumn"
+ },
+ "paldea-kitakami-apple-hills": {
+  "id": "paldea-kitakami-apple-hills",
+  "name": "Apple Hills",
+  "type": "route",
+  "region": "paldea",
+  "description": "A sub-area of the Kitakami.",
+  "routeKey": "paldea-kitakami-apple-hills",
+  "background": "/backgrounds/grassland.png",
+  "connections": [
+   "paldea-kitakami"
+  ],
+  "hidden": true,
+  "zone": "paldea-kitakami",
+  "unlock": {
+   "requires": [
+    "paldea-kitakami",
+    "paldea-kitakami-revelers-road"
+   ]
+  },
+  "unlockOrder": 910007.001,
+  "position": {
+   "x": 27.97,
+   "y": 8.53
+  },
+  "biome": "autumn"
+ },
+ "paldea-kitakami-oni-mountain": {
+  "id": "paldea-kitakami-oni-mountain",
+  "name": "Oni Mountain",
+  "type": "route",
+  "region": "paldea",
+  "description": "A sub-area of the Kitakami.",
+  "routeKey": "paldea-kitakami-oni-mountain",
+  "background": "/backgrounds/mountain.png",
+  "connections": [
+   "paldea-kitakami"
+  ],
+  "hidden": true,
+  "zone": "paldea-kitakami",
+  "unlock": {
+   "requires": [
+    "paldea-kitakami",
+    "paldea-kitakami-apple-hills"
+   ]
+  },
+  "unlockOrder": 910007.002,
+  "position": {
+   "x": 32.59,
+   "y": 14.92
+  },
+  "biome": "mountain"
+ },
+ "paldea-kitakami": {
+  "id": "paldea-kitakami",
+  "name": "Kitakami",
+  "type": "zone",
+  "region": "paldea",
+  "description": "The Kitakami is a wide-open stretch with several distinct habitats.",
+  "routeKey": "paldea-kitakami-revelers-road",
+  "background": "/backgrounds/grassland.png",
+  "connections": [
+   "paldea-kitakami-revelers-road",
+   "paldea-kitakami-apple-hills",
+   "paldea-kitakami-oni-mountain",
+   "kitakami-wistful-fields",
+   "kitakami-fellhorn-gorge",
+   "kitakami-crystal-pool",
+   "kitakami-timeless-woods",
+   "kitakami-paradise-barrens",
+   "kitakami-infernal-pass",
+   "paldea-mossui-town"
+  ],
+  "subAreas": [
+   {
+    "id": "paldea-kitakami-revelers-road",
+    "name": "Reveler's Road"
+   },
+   {
+    "id": "paldea-kitakami-apple-hills",
+    "name": "Apple Hills"
+   },
+   {
+    "id": "paldea-kitakami-oni-mountain",
+    "name": "Oni Mountain"
+   },
+   {
+    "id": "kitakami-wistful-fields",
+    "name": "Wistful Fields"
+   },
+   {
+    "id": "kitakami-fellhorn-gorge",
+    "name": "Fellhorn Gorge"
+   },
+   {
+    "id": "kitakami-crystal-pool",
+    "name": "Crystal Pool"
+   },
+   {
+    "id": "kitakami-timeless-woods",
+    "name": "Timeless Woods"
+   },
+   {
+    "id": "kitakami-paradise-barrens",
+    "name": "Paradise Barrens"
+   },
+   {
+    "id": "kitakami-infernal-pass",
+    "name": "Infernal Pass"
+   }
+  ],
+  "unlock": {
+   "championDefeated": "paldea"
+  },
+  "unlockOrder": 910006.9,
+  "position": {
+   "x": 3.92990188513551,
+   "y": 2
+  },
+  "biome": "autumn"
+ },
+ "kitakami-wistful-fields": {
+  "id": "kitakami-wistful-fields",
+  "name": "Wistful Fields",
+  "type": "route",
+  "region": "paldea",
+  "description": "A sub-area of the Kitakami.",
+  "routeKey": "kitakami-wistful-fields",
+  "connections": [
+   "paldea-kitakami"
+  ],
+  "hidden": true,
+  "zone": "paldea-kitakami",
+  "unlock": {
+   "requires": [
+    "paldea-kitakami",
+    "paldea-kitakami-oni-mountain"
+   ]
+  },
+  "unlockOrder": 910007.016,
+  "position": {
+   "x": 30.99,
+   "y": 22.2
+  },
+  "biome": "forest",
+  "background": "/backgrounds/grassland.png"
+ },
+ "kitakami-fellhorn-gorge": {
+  "id": "kitakami-fellhorn-gorge",
+  "name": "Fellhorn Gorge",
+  "type": "route",
+  "region": "paldea",
+  "description": "A sub-area of the Kitakami.",
+  "routeKey": "kitakami-fellhorn-gorge",
+  "connections": [
+   "paldea-kitakami"
+  ],
+  "hidden": true,
+  "zone": "paldea-kitakami",
+  "unlock": {
+   "requires": [
+    "paldea-kitakami",
+    "kitakami-wistful-fields"
+   ]
+  },
+  "unlockOrder": 910007.017,
+  "position": {
+   "x": 23.91,
+   "y": 26.95
+  },
+  "biome": "mountain",
+  "background": "/backgrounds/mountain.png"
+ },
+ "kitakami-crystal-pool": {
+  "id": "kitakami-crystal-pool",
+  "name": "Crystal Pool",
+  "type": "route",
+  "region": "paldea",
+  "description": "A sub-area of the Kitakami.",
+  "routeKey": "kitakami-crystal-pool",
+  "connections": [
+   "paldea-kitakami"
+  ],
+  "hidden": true,
+  "zone": "paldea-kitakami",
+  "unlock": {
+   "requires": [
+    "paldea-kitakami",
+    "kitakami-fellhorn-gorge"
+   ]
+  },
+  "unlockOrder": 910007.018,
+  "position": {
+   "x": 14.68,
+   "y": 26.95
+  },
+  "biome": "forest",
+  "background": "/backgrounds/grassland.png"
+ },
+ "kitakami-timeless-woods": {
+  "id": "kitakami-timeless-woods",
+  "name": "Timeless Woods",
+  "type": "route",
+  "region": "paldea",
+  "description": "A sub-area of the Kitakami.",
+  "routeKey": "kitakami-timeless-woods",
+  "connections": [
+   "paldea-kitakami"
+  ],
+  "hidden": true,
+  "zone": "paldea-kitakami",
+  "unlock": {
+   "requires": [
+    "paldea-kitakami",
+    "kitakami-crystal-pool"
+   ]
+  },
+  "unlockOrder": 910007.019,
+  "position": {
+   "x": 7.6,
+   "y": 22.2
+  },
+  "biome": "forest",
+  "background": "/backgrounds/grassland.png"
+ },
+ "kitakami-paradise-barrens": {
+  "id": "kitakami-paradise-barrens",
+  "name": "Paradise Barrens",
+  "type": "route",
+  "region": "paldea",
+  "description": "A sub-area of the Kitakami.",
+  "routeKey": "kitakami-paradise-barrens",
+  "connections": [
+   "paldea-kitakami"
+  ],
+  "hidden": true,
+  "zone": "paldea-kitakami",
+  "unlock": {
+   "requires": [
+    "paldea-kitakami",
+    "kitakami-timeless-woods"
+   ]
+  },
+  "unlockOrder": 910007.02,
+  "position": {
+   "x": 6,
+   "y": 14.92
+  },
+  "biome": "volcanic",
+  "background": "/backgrounds/grassland.png"
+ },
+ "kitakami-infernal-pass": {
+  "id": "kitakami-infernal-pass",
+  "name": "Infernal Pass",
+  "type": "route",
+  "region": "paldea",
+  "description": "A sub-area of the Kitakami.",
+  "routeKey": "kitakami-infernal-pass",
+  "connections": [
+   "paldea-kitakami"
+  ],
+  "hidden": true,
+  "zone": "paldea-kitakami",
+  "unlock": {
+   "requires": [
+    "paldea-kitakami",
+    "kitakami-paradise-barrens"
+   ]
+  },
+  "unlockOrder": 910007.021,
+  "position": {
+   "x": 10.62,
+   "y": 8.53
+  },
+  "biome": "grassland",
+  "background": "/backgrounds/grassland.png"
+ },
+ "paldea-terarium-savanna-biome": {
+  "id": "paldea-terarium-savanna-biome",
+  "name": "Savanna Biome",
+  "type": "route",
+  "region": "paldea",
+  "description": "A sub-area of the Terarium.",
+  "routeKey": "paldea-terarium-savanna-biome",
+  "background": "/backgrounds/mountain.png",
+  "connections": [
+   "paldea-terarium"
+  ],
+  "hidden": true,
+  "zone": "paldea-terarium",
+  "unlock": {
+   "requires": [
+    "paldea-terarium"
+   ]
+  },
+  "unlockOrder": 910009,
+  "position": {
+   "x": 83.76,
+   "y": 12.01
+  },
+  "biome": "grassland"
+ },
+ "paldea-terarium-coastal-biome": {
+  "id": "paldea-terarium-coastal-biome",
+  "name": "Coastal Biome",
+  "type": "route",
+  "region": "paldea",
+  "description": "A sub-area of the Terarium.",
+  "routeKey": "paldea-terarium-coastal-biome",
+  "background": "/backgrounds/beach.png",
+  "connections": [
+   "paldea-terarium"
+  ],
+  "hidden": true,
+  "zone": "paldea-terarium",
+  "unlock": {
+   "requires": [
+    "paldea-terarium",
+    "paldea-terarium-savanna-biome"
+   ]
+  },
+  "unlockOrder": 910009.001,
+  "position": {
+   "x": 91.97,
+   "y": 15.17
+  },
+  "biome": "coast"
+ },
+ "paldea-terarium-polar-biome": {
+  "id": "paldea-terarium-polar-biome",
+  "name": "Polar Biome",
+  "type": "route",
+  "region": "paldea",
+  "description": "A sub-area of the Terarium.",
+  "routeKey": "paldea-terarium-polar-biome",
+  "background": "/backgrounds/mountain.png",
+  "connections": [
+   "paldea-terarium"
+  ],
+  "hidden": true,
+  "zone": "paldea-terarium",
+  "unlock": {
+   "requires": [
+    "paldea-terarium",
+    "paldea-terarium-coastal-biome"
+   ]
+  },
+  "unlockOrder": 910009.002,
+  "position": {
+   "x": 92.56,
+   "y": 22.95
+  },
+  "biome": "tundra"
+ },
+ "paldea-terarium": {
+  "id": "paldea-terarium",
+  "name": "Terarium",
+  "type": "zone",
+  "region": "paldea",
+  "description": "The Terarium is a wide-open stretch with several distinct habitats.",
+  "routeKey": "paldea-terarium-savanna-biome",
+  "background": "/backgrounds/grassland.png",
+  "connections": [
+   "paldea-terarium-savanna-biome",
+   "paldea-terarium-coastal-biome",
+   "paldea-terarium-polar-biome",
+   "terarium-canyon-biome",
+   "terarium-chargestone-cavern",
+   "terarium-torchlit-labyrinth",
+   "terarium-central-plaza",
+   "paldea-league"
+  ],
+  "subAreas": [
+   {
+    "id": "paldea-terarium-savanna-biome",
+    "name": "Savanna Biome"
+   },
+   {
+    "id": "paldea-terarium-coastal-biome",
+    "name": "Coastal Biome"
+   },
+   {
+    "id": "paldea-terarium-polar-biome",
+    "name": "Polar Biome"
+   },
+   {
+    "id": "terarium-canyon-biome",
+    "name": "Canyon Biome"
+   },
+   {
+    "id": "terarium-chargestone-cavern",
+    "name": "Chargestone Cavern"
+   },
+   {
+    "id": "terarium-torchlit-labyrinth",
+    "name": "Torchlit Labyrinth"
+   },
+   {
+    "id": "terarium-central-plaza",
+    "name": "Central Plaza"
+   }
+  ],
+  "unlock": {
+   "championDefeated": "paldea"
+  },
+  "unlockOrder": 910008.9,
+  "position": {
+   "x": 98,
+   "y": 20.40804594294962
+  },
+  "biome": "grassland"
+ },
+ "terarium-canyon-biome": {
+  "id": "terarium-canyon-biome",
+  "name": "Canyon Biome",
+  "type": "route",
+  "region": "paldea",
+  "description": "A sub-area of the Terarium.",
+  "routeKey": "terarium-canyon-biome",
+  "connections": [
+   "paldea-terarium"
+  ],
+  "hidden": true,
+  "zone": "paldea-terarium",
+  "unlock": {
+   "requires": [
+    "paldea-terarium",
+    "paldea-terarium-polar-biome"
+   ]
+  },
+  "unlockOrder": 910009.022,
+  "position": {
+   "x": 88.32,
+   "y": 27.98
+  },
+  "biome": "mountain",
+  "background": "/backgrounds/mountain.png"
+ },
+ "terarium-chargestone-cavern": {
+  "id": "terarium-chargestone-cavern",
+  "name": "Chargestone Cavern",
+  "type": "route",
+  "region": "paldea",
+  "description": "A sub-area of the Terarium.",
+  "routeKey": "terarium-chargestone-cavern",
+  "connections": [
+   "paldea-terarium"
+  ],
+  "hidden": true,
+  "zone": "paldea-terarium",
+  "unlock": {
+   "requires": [
+    "paldea-terarium",
+    "terarium-canyon-biome"
+   ]
+  },
+  "unlockOrder": 910009.023,
+  "position": {
+   "x": 79.21,
+   "y": 27.98
+  },
+  "biome": "cave",
+  "background": "/backgrounds/cave.png"
+ },
+ "terarium-torchlit-labyrinth": {
+  "id": "terarium-torchlit-labyrinth",
+  "name": "Torchlit Labyrinth",
+  "type": "route",
+  "region": "paldea",
+  "description": "A sub-area of the Terarium.",
+  "routeKey": "terarium-torchlit-labyrinth",
+  "connections": [
+   "paldea-terarium"
+  ],
+  "hidden": true,
+  "zone": "paldea-terarium",
+  "unlock": {
+   "requires": [
+    "paldea-terarium",
+    "terarium-chargestone-cavern"
+   ]
+  },
+  "unlockOrder": 910009.024,
+  "position": {
+   "x": 73.53,
+   "y": 22.28
+  },
+  "biome": "volcanic",
+  "background": "/backgrounds/grassland.png"
+ },
+ "terarium-central-plaza": {
+  "id": "terarium-central-plaza",
+  "name": "Central Plaza",
+  "type": "route",
+  "region": "paldea",
+  "description": "A sub-area of the Terarium.",
+  "routeKey": "terarium-central-plaza",
+  "connections": [
+   "paldea-terarium"
+  ],
+  "hidden": true,
+  "zone": "paldea-terarium",
+  "unlock": {
+   "requires": [
+    "paldea-terarium",
+    "terarium-torchlit-labyrinth"
+   ]
+  },
+  "unlockOrder": 910009.025,
+  "position": {
+   "x": 75.55,
+   "y": 15.17
+  },
+  "biome": "grassland",
+  "background": "/backgrounds/grassland.png"
  }
 }

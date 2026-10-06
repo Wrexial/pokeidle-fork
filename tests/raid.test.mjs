@@ -28,6 +28,11 @@ function baseState(overrides = {}) {
 
 test('every region keeps a legendary-only Raid Island', () => {
   for (const region of regions) {
+    // A DLC subregion (the Sevii Islands) shares its parent's single raid.
+    if (region.isDlc) {
+      assert.equal(region.raidPool?.length ?? 0, 0, `${region.id} has no raid of its own`)
+      continue
+    }
     const legendary = region.raidPool ?? []
     assert.ok(legendary.length > 0, `${region.id} keeps its legendaries`)
     for (const entry of legendary)
@@ -45,6 +50,7 @@ test('every region keeps a legendary-only Raid Island', () => {
 
 test('a raid boss is always a legendary', () => {
   for (const region of regions) {
+    if (region.isDlc) continue
     const picked = pickRaidLegendary(raidLegendaryPoolFor(region.id), [], [])
     assert.ok(picked, `${region.id} can pick a raid boss`)
     assert.equal(pokemonSpecies[picked.speciesKey]?.legendary, true)
@@ -98,6 +104,7 @@ test('roamers only roll legendaries', () => {
   try {
     Math.random = () => 0
     for (const region of regions) {
+      if (region.isDlc) continue
       const roamer = resolveRoamer(region.id, [], [], new Set())
       assert.ok(roamer, `${region.id} can roll a roamer`)
       assert.equal(pokemonSpecies[roamer.speciesKey]?.legendary, true)

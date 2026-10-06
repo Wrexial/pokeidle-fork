@@ -1411,5 +1411,638 @@
   },
   "biome": "cave",
   "background": "/backgrounds/cave.png"
+ },
+ "galar-isle-of-armor-fields-of-honor": {
+  "id": "galar-isle-of-armor-fields-of-honor",
+  "name": "Fields of Honor",
+  "type": "route",
+  "region": "galar",
+  "description": "A sub-area of the Isle of Armor.",
+  "routeKey": "galar-isle-of-armor-fields-of-honor",
+  "background": "/backgrounds/grassland.png",
+  "connections": [
+   "galar-isle-of-armor"
+  ],
+  "hidden": true,
+  "zone": "galar-isle-of-armor",
+  "unlock": {
+   "requires": [
+    "galar-isle-of-armor"
+   ]
+  },
+  "unlockOrder": 800006.0001,
+  "position": {
+   "x": 62.24,
+   "y": 48.32
+  },
+  "biome": "grassland"
+ },
+ "galar-isle-of-armor-soothing-wetlands": {
+  "id": "galar-isle-of-armor-soothing-wetlands",
+  "name": "Soothing Wetlands",
+  "type": "route",
+  "region": "galar",
+  "description": "A sub-area of the Isle of Armor.",
+  "routeKey": "galar-isle-of-armor-soothing-wetlands",
+  "background": "/backgrounds/beach.png",
+  "connections": [
+   "galar-isle-of-armor"
+  ],
+  "hidden": true,
+  "zone": "galar-isle-of-armor",
+  "unlock": {
+   "requires": [
+    "galar-isle-of-armor",
+    "galar-isle-of-armor-fields-of-honor"
+   ]
+  },
+  "unlockOrder": 800006.001,
+  "position": {
+   "x": 70.92,
+   "y": 50.85
+  },
+  "biome": "swamp"
+ },
+ "galar-isle-of-armor-brawlers-cave": {
+  "id": "galar-isle-of-armor-brawlers-cave",
+  "name": "Brawlers' Cave",
+  "type": "route",
+  "region": "galar",
+  "description": "A sub-area of the Isle of Armor.",
+  "routeKey": "galar-isle-of-armor-brawlers-cave",
+  "background": "/backgrounds/cave.png",
+  "connections": [
+   "galar-isle-of-armor"
+  ],
+  "hidden": true,
+  "zone": "galar-isle-of-armor",
+  "unlock": {
+   "requires": [
+    "galar-isle-of-armor",
+    "galar-isle-of-armor-soothing-wetlands"
+   ]
+  },
+  "unlockOrder": 800006.002,
+  "position": {
+   "x": 75.53,
+   "y": 57.25
+  },
+  "biome": "cave"
+ },
+ "galar-isle-of-armor": {
+  "id": "galar-isle-of-armor",
+  "name": "Isle of Armor",
+  "type": "zone",
+  "region": "galar",
+  "description": "The Isle of Armor is a wide-open stretch with several distinct habitats.",
+  "routeKey": "galar-isle-of-armor-fields-of-honor",
+  "background": "/backgrounds/beach.png",
+  "connections": [
+   "galar-isle-of-armor-fields-of-honor",
+   "galar-isle-of-armor-soothing-wetlands",
+   "galar-isle-of-armor-brawlers-cave",
+   "isle-of-armor-forest-of-focus",
+   "isle-of-armor-challenge-beach",
+   "isle-of-armor-loop-lagoon",
+   "isle-of-armor-potbottom-desert",
+   "isle-of-armor-training-lowlands",
+   "isle-of-armor-workout-sea",
+   "galar-hulbury"
+  ],
+  "subAreas": [
+   {
+    "id": "galar-isle-of-armor-fields-of-honor",
+    "name": "Fields of Honor"
+   },
+   {
+    "id": "galar-isle-of-armor-soothing-wetlands",
+    "name": "Soothing Wetlands"
+   },
+   {
+    "id": "galar-isle-of-armor-brawlers-cave",
+    "name": "Brawlers' Cave"
+   },
+   {
+    "id": "isle-of-armor-forest-of-focus",
+    "name": "Forest of Focus"
+   },
+   {
+    "id": "isle-of-armor-challenge-beach",
+    "name": "Challenge Beach"
+   },
+   {
+    "id": "isle-of-armor-loop-lagoon",
+    "name": "Loop Lagoon"
+   },
+   {
+    "id": "isle-of-armor-potbottom-desert",
+    "name": "Potbottom Desert"
+   },
+   {
+    "id": "isle-of-armor-training-lowlands",
+    "name": "Training Lowlands"
+   },
+   {
+    "id": "isle-of-armor-workout-sea",
+    "name": "Workout Sea"
+   }
+  ],
+  "unlock": {
+   "championDefeated": "galar"
+  },
+  "unlockOrder": 800005.9,
+  "position": {
+   "x": 62.23866952184723,
+   "y": 59.12197207444398
+  },
+  "biome": "grassland"
+ },
+ "isle-of-armor-forest-of-focus": {
+  "id": "isle-of-armor-forest-of-focus",
+  "name": "Forest of Focus",
+  "type": "route",
+  "region": "galar",
+  "description": "A sub-area of the Isle of Armor.",
+  "routeKey": "isle-of-armor-forest-of-focus",
+  "connections": [
+   "galar-isle-of-armor"
+  ],
+  "hidden": true,
+  "zone": "galar-isle-of-armor",
+  "unlock": {
+   "requires": [
+    "galar-isle-of-armor",
+    "galar-isle-of-armor-brawlers-cave"
+   ]
+  },
+  "unlockOrder": 800006.003,
+  "position": {
+   "x": 73.93,
+   "y": 64.52
+  },
+  "biome": "forest",
+  "background": "/backgrounds/grassland.png"
+ },
+ "isle-of-armor-challenge-beach": {
+  "id": "isle-of-armor-challenge-beach",
+  "name": "Challenge Beach",
+  "type": "route",
+  "region": "galar",
+  "description": "A sub-area of the Isle of Armor.",
+  "routeKey": "isle-of-armor-challenge-beach",
+  "connections": [
+   "galar-isle-of-armor"
+  ],
+  "hidden": true,
+  "zone": "galar-isle-of-armor",
+  "unlock": {
+   "requires": [
+    "galar-isle-of-armor",
+    "isle-of-armor-forest-of-focus"
+   ]
+  },
+  "unlockOrder": 800006.004,
+  "position": {
+   "x": 66.86,
+   "y": 69.27
+  },
+  "biome": "coast",
+  "background": "/backgrounds/beach.png"
+ },
+ "isle-of-armor-loop-lagoon": {
+  "id": "isle-of-armor-loop-lagoon",
+  "name": "Loop Lagoon",
+  "type": "route",
+  "region": "galar",
+  "description": "A sub-area of the Isle of Armor.",
+  "routeKey": "isle-of-armor-loop-lagoon",
+  "connections": [
+   "galar-isle-of-armor"
+  ],
+  "hidden": true,
+  "zone": "galar-isle-of-armor",
+  "unlock": {
+   "requires": [
+    "galar-isle-of-armor",
+    "isle-of-armor-challenge-beach"
+   ]
+  },
+  "unlockOrder": 800006.005,
+  "position": {
+   "x": 57.62,
+   "y": 69.27
+  },
+  "biome": "grassland",
+  "background": "/backgrounds/grassland.png"
+ },
+ "isle-of-armor-potbottom-desert": {
+  "id": "isle-of-armor-potbottom-desert",
+  "name": "Potbottom Desert",
+  "type": "route",
+  "region": "galar",
+  "description": "A sub-area of the Isle of Armor.",
+  "routeKey": "isle-of-armor-potbottom-desert",
+  "connections": [
+   "galar-isle-of-armor"
+  ],
+  "hidden": true,
+  "zone": "galar-isle-of-armor",
+  "unlock": {
+   "requires": [
+    "galar-isle-of-armor",
+    "isle-of-armor-loop-lagoon"
+   ]
+  },
+  "unlockOrder": 800006.006,
+  "position": {
+   "x": 50.55,
+   "y": 64.52
+  },
+  "biome": "desert",
+  "background": "/backgrounds/grassland.png"
+ },
+ "isle-of-armor-training-lowlands": {
+  "id": "isle-of-armor-training-lowlands",
+  "name": "Training Lowlands",
+  "type": "route",
+  "region": "galar",
+  "description": "A sub-area of the Isle of Armor.",
+  "routeKey": "isle-of-armor-training-lowlands",
+  "connections": [
+   "galar-isle-of-armor"
+  ],
+  "hidden": true,
+  "zone": "galar-isle-of-armor",
+  "unlock": {
+   "requires": [
+    "galar-isle-of-armor",
+    "isle-of-armor-potbottom-desert"
+   ]
+  },
+  "unlockOrder": 800006.007,
+  "position": {
+   "x": 48.94,
+   "y": 57.25
+  },
+  "biome": "grassland",
+  "background": "/backgrounds/grassland.png"
+ },
+ "isle-of-armor-workout-sea": {
+  "id": "isle-of-armor-workout-sea",
+  "name": "Workout Sea",
+  "type": "route",
+  "region": "galar",
+  "description": "A sub-area of the Isle of Armor.",
+  "routeKey": "isle-of-armor-workout-sea",
+  "connections": [
+   "galar-isle-of-armor"
+  ],
+  "hidden": true,
+  "zone": "galar-isle-of-armor",
+  "unlock": {
+   "requires": [
+    "galar-isle-of-armor",
+    "isle-of-armor-training-lowlands"
+   ]
+  },
+  "unlockOrder": 800006.008,
+  "position": {
+   "x": 53.56,
+   "y": 50.85
+  },
+  "biome": "coast",
+  "background": "/backgrounds/beach.png"
+ },
+ "galar-crown-tundra-snowslide-slope": {
+  "id": "galar-crown-tundra-snowslide-slope",
+  "name": "Snowslide Slope",
+  "type": "route",
+  "region": "galar",
+  "description": "A sub-area of the Crown Tundra.",
+  "routeKey": "galar-crown-tundra-snowslide-slope",
+  "background": "/backgrounds/grassland.png",
+  "connections": [
+   "galar-crown-tundra"
+  ],
+  "hidden": true,
+  "zone": "galar-crown-tundra",
+  "unlock": {
+   "requires": [
+    "galar-crown-tundra"
+   ]
+  },
+  "unlockOrder": 800011,
+  "position": {
+   "x": 56.81,
+   "y": 6
+  },
+  "biome": "tundra"
+ },
+ "galar-crown-tundra-frigid-sea": {
+  "id": "galar-crown-tundra-frigid-sea",
+  "name": "Frigid Sea",
+  "type": "route",
+  "region": "galar",
+  "description": "A sub-area of the Crown Tundra.",
+  "routeKey": "galar-crown-tundra-frigid-sea",
+  "background": "/backgrounds/beach.png",
+  "connections": [
+   "galar-crown-tundra"
+  ],
+  "hidden": true,
+  "zone": "galar-crown-tundra",
+  "unlock": {
+   "requires": [
+    "galar-crown-tundra",
+    "galar-crown-tundra-snowslide-slope"
+   ]
+  },
+  "unlockOrder": 800011.001,
+  "position": {
+   "x": 65.63,
+   "y": 8.29
+  },
+  "biome": "coast"
+ },
+ "galar-crown-tundra-giants-bed": {
+  "id": "galar-crown-tundra-giants-bed",
+  "name": "Giant's Bed",
+  "type": "route",
+  "region": "galar",
+  "description": "A sub-area of the Crown Tundra.",
+  "routeKey": "galar-crown-tundra-giants-bed",
+  "background": "/backgrounds/mountain.png",
+  "connections": [
+   "galar-crown-tundra"
+  ],
+  "hidden": true,
+  "zone": "galar-crown-tundra",
+  "unlock": {
+   "requires": [
+    "galar-crown-tundra",
+    "galar-crown-tundra-frigid-sea"
+   ]
+  },
+  "unlockOrder": 800011.002,
+  "position": {
+   "x": 71.08,
+   "y": 14.29
+  },
+  "biome": "mountain"
+ },
+ "galar-crown-tundra": {
+  "id": "galar-crown-tundra",
+  "name": "Crown Tundra",
+  "type": "zone",
+  "region": "galar",
+  "description": "The Crown Tundra is a wide-open stretch with several distinct habitats.",
+  "routeKey": "galar-crown-tundra-snowslide-slope",
+  "background": "/backgrounds/mountain.png",
+  "connections": [
+   "galar-crown-tundra-snowslide-slope",
+   "galar-crown-tundra-frigid-sea",
+   "galar-crown-tundra-giants-bed",
+   "crown-tundra-slippery-slope",
+   "crown-tundra-frostpoint-field",
+   "crown-tundra-old-cemetery",
+   "crown-tundra-giants-foot",
+   "crown-tundra-roaring-sea-caves",
+   "crown-tundra-ballimere-lake",
+   "crown-tundra-three-point-pass",
+   "galar-wyndon"
+  ],
+  "subAreas": [
+   {
+    "id": "galar-crown-tundra-snowslide-slope",
+    "name": "Snowslide Slope"
+   },
+   {
+    "id": "galar-crown-tundra-frigid-sea",
+    "name": "Frigid Sea"
+   },
+   {
+    "id": "galar-crown-tundra-giants-bed",
+    "name": "Giant's Bed"
+   },
+   {
+    "id": "crown-tundra-slippery-slope",
+    "name": "Slippery Slope"
+   },
+   {
+    "id": "crown-tundra-frostpoint-field",
+    "name": "Frostpoint Field"
+   },
+   {
+    "id": "crown-tundra-old-cemetery",
+    "name": "Old Cemetery"
+   },
+   {
+    "id": "crown-tundra-giants-foot",
+    "name": "Giant's Foot"
+   },
+   {
+    "id": "crown-tundra-roaring-sea-caves",
+    "name": "Roaring-Sea Caves"
+   },
+   {
+    "id": "crown-tundra-ballimere-lake",
+    "name": "Ballimere Lake"
+   },
+   {
+    "id": "crown-tundra-three-point-pass",
+    "name": "Three-Point Pass"
+   }
+  ],
+  "unlock": {
+   "championDefeated": "galar"
+  },
+  "unlockOrder": 800010.9,
+  "position": {
+   "x": 56.81493093133369,
+   "y": 13.907692139150027
+  },
+  "biome": "tundra"
+ },
+ "crown-tundra-slippery-slope": {
+  "id": "crown-tundra-slippery-slope",
+  "name": "Slippery Slope",
+  "type": "route",
+  "region": "galar",
+  "description": "A sub-area of the Crown Tundra.",
+  "routeKey": "crown-tundra-slippery-slope",
+  "connections": [
+   "galar-crown-tundra"
+  ],
+  "hidden": true,
+  "zone": "galar-crown-tundra",
+  "unlock": {
+   "requires": [
+    "galar-crown-tundra",
+    "galar-crown-tundra-giants-bed"
+   ]
+  },
+  "unlockOrder": 800011.009,
+  "position": {
+   "x": 71.08,
+   "y": 21.71
+  },
+  "biome": "tundra",
+  "background": "/backgrounds/grassland.png"
+ },
+ "crown-tundra-frostpoint-field": {
+  "id": "crown-tundra-frostpoint-field",
+  "name": "Frostpoint Field",
+  "type": "route",
+  "region": "galar",
+  "description": "A sub-area of the Crown Tundra.",
+  "routeKey": "crown-tundra-frostpoint-field",
+  "connections": [
+   "galar-crown-tundra"
+  ],
+  "hidden": true,
+  "zone": "galar-crown-tundra",
+  "unlock": {
+   "requires": [
+    "galar-crown-tundra",
+    "crown-tundra-slippery-slope"
+   ]
+  },
+  "unlockOrder": 800011.01,
+  "position": {
+   "x": 65.63,
+   "y": 27.71
+  },
+  "biome": "tundra",
+  "background": "/backgrounds/grassland.png"
+ },
+ "crown-tundra-old-cemetery": {
+  "id": "crown-tundra-old-cemetery",
+  "name": "Old Cemetery",
+  "type": "route",
+  "region": "galar",
+  "description": "A sub-area of the Crown Tundra.",
+  "routeKey": "crown-tundra-old-cemetery",
+  "connections": [
+   "galar-crown-tundra"
+  ],
+  "hidden": true,
+  "zone": "galar-crown-tundra",
+  "unlock": {
+   "requires": [
+    "galar-crown-tundra",
+    "crown-tundra-frostpoint-field"
+   ]
+  },
+  "unlockOrder": 800011.011,
+  "position": {
+   "x": 56.81,
+   "y": 30
+  },
+  "biome": "ruins",
+  "background": "/backgrounds/grassland.png"
+ },
+ "crown-tundra-giants-foot": {
+  "id": "crown-tundra-giants-foot",
+  "name": "Giant's Foot",
+  "type": "route",
+  "region": "galar",
+  "description": "A sub-area of the Crown Tundra.",
+  "routeKey": "crown-tundra-giants-foot",
+  "connections": [
+   "galar-crown-tundra"
+  ],
+  "hidden": true,
+  "zone": "galar-crown-tundra",
+  "unlock": {
+   "requires": [
+    "galar-crown-tundra",
+    "crown-tundra-old-cemetery"
+   ]
+  },
+  "unlockOrder": 800011.012,
+  "position": {
+   "x": 48,
+   "y": 27.71
+  },
+  "biome": "mountain",
+  "background": "/backgrounds/mountain.png"
+ },
+ "crown-tundra-roaring-sea-caves": {
+  "id": "crown-tundra-roaring-sea-caves",
+  "name": "Roaring-Sea Caves",
+  "type": "route",
+  "region": "galar",
+  "description": "A sub-area of the Crown Tundra.",
+  "routeKey": "crown-tundra-roaring-sea-caves",
+  "connections": [
+   "galar-crown-tundra"
+  ],
+  "hidden": true,
+  "zone": "galar-crown-tundra",
+  "unlock": {
+   "requires": [
+    "galar-crown-tundra",
+    "crown-tundra-giants-foot"
+   ]
+  },
+  "unlockOrder": 800011.013,
+  "position": {
+   "x": 42.55,
+   "y": 21.71
+  },
+  "biome": "cave",
+  "background": "/backgrounds/cave.png"
+ },
+ "crown-tundra-ballimere-lake": {
+  "id": "crown-tundra-ballimere-lake",
+  "name": "Ballimere Lake",
+  "type": "route",
+  "region": "galar",
+  "description": "A sub-area of the Crown Tundra.",
+  "routeKey": "crown-tundra-ballimere-lake",
+  "connections": [
+   "galar-crown-tundra"
+  ],
+  "hidden": true,
+  "zone": "galar-crown-tundra",
+  "unlock": {
+   "requires": [
+    "galar-crown-tundra",
+    "crown-tundra-roaring-sea-caves"
+   ]
+  },
+  "unlockOrder": 800011.014,
+  "position": {
+   "x": 42.55,
+   "y": 14.29
+  },
+  "biome": "coast",
+  "background": "/backgrounds/beach.png"
+ },
+ "crown-tundra-three-point-pass": {
+  "id": "crown-tundra-three-point-pass",
+  "name": "Three-Point Pass",
+  "type": "route",
+  "region": "galar",
+  "description": "A sub-area of the Crown Tundra.",
+  "routeKey": "crown-tundra-three-point-pass",
+  "connections": [
+   "galar-crown-tundra"
+  ],
+  "hidden": true,
+  "zone": "galar-crown-tundra",
+  "unlock": {
+   "requires": [
+    "galar-crown-tundra",
+    "crown-tundra-ballimere-lake"
+   ]
+  },
+  "unlockOrder": 800011.015,
+  "position": {
+   "x": 48,
+   "y": 8.29
+  },
+  "biome": "mountain",
+  "background": "/backgrounds/mountain.png"
  }
 }

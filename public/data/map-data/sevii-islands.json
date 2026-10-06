@@ -8,8 +8,7 @@
   "connections": [
    "vermilionCity",
    "sevii-islands-kindle-road",
-   "sevii-islands-two-island",
-   "sevii-islands-raid"
+   "sevii-islands-two-island"
   ],
   "unlock": {
    "championDefeated": "kanto"
@@ -500,34 +499,5 @@
   "biome": "ruins",
   "background": "/backgrounds/grassland.png",
   "routeKey": "sevii-islands-tanoby-ruins"
- },
- "sevii-islands-raid": {
-  "id": "sevii-islands-raid",
-  "name": "Sevii Islands Raid Island",
-  "type": "raid",
-  "region": "sevii-islands",
-  "description": "A mysterious island where the Sevii Islands' rarest Pokemon dwell.",
-  "routeKey": "sevii-islands-raid",
-  "background": "/backgrounds/cave.png",
-  "connections": [
-   "sevii-islands-one-island"
-  ],
-  "unlock": {
-   "requires": [
-    "sevii-islands-one-island"
-   ],
-   "battlesAtLocation": [
-    {
-     "locationId": "sevii-islands-tanoby-ruins",
-     "count": 10
-    }
-   ]
-  },
-  "unlockOrder": 900020,
-  "position": {
-   "x": 90,
-   "y": 97
-  },
-  "biome": "cave"
  }
 }

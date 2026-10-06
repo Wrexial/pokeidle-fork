@@ -178,8 +178,8 @@ for (const region of regions) {
 // gyms can be challenged in any order. Check each region describes its track so
 // the panel can label it instead of assuming "8 gyms + Elite Four".
 for (const region of regions) {
-  // DLC expansions are post-game and have no gym/league track: their endgame
-  // is the Raid Island (see tools/apply-dlc-regions.cjs).
+  // DLC subregions are post-game and have no gym/league track (the Sevii
+  // Islands are Kanto's post-game).
   if (region.isDlc) continue
   const league = region.league
   if (!league) {

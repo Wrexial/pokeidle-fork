@@ -4345,6 +4345,12 @@
     "weight": 1,
     "minLevel": 70,
     "maxLevel": 70
+   },
+   {
+    "speciesKey": "moltres",
+    "weight": 1,
+    "minLevel": 75,
+    "maxLevel": 75
    }
   ]
  }

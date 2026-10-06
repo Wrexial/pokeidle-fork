@@ -46,7 +46,7 @@ test('a DLC sub-region cannot be started in', () => {
   // with no league track.
   const state = gameReducer(initialGameState, {
     type: 'SELECT_STARTER',
-    payload: { region: 'isle-of-armor', speciesKey: 'bulbasaur' },
+    payload: { region: 'sevii-islands', speciesKey: 'bulbasaur' },
   })
   assert.equal(state.startRegion, 'kanto')
   assert.deepEqual(state.unlockedRegions, ['kanto'])

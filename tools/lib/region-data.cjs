@@ -23,13 +23,8 @@ const REGION_IDS = [
   'alola',
   'galar',
   'paldea',
-  // Post-game DLC expansions, promoted from Galar/Paldea zones to first-class
-  // regions (see tools/apply-dlc-regions.cjs). They share their parent's
-  // generation and sit after it in order.
-  'isle-of-armor',
-  'crown-tundra',
-  'kitakami',
-  'terarium',
+  // Kanto's hand-authored post-game subregion. The Galar/Paldea DLC are
+  // ordinary zones inside their parent region now, not separate files.
   'sevii-islands',
 ]
 

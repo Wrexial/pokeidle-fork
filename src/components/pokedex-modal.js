@@ -165,29 +165,42 @@ export function PokedexModal({ onClose, inline = false }) {
           jsxs('div', {
             className: 'pokedex-modal-detail',
             children: [
-              slotForms.length > 0 &&
-                jsx('div', {
-                  className: 'pokedex-form-tabs',
-                  children: [
-                    jsx('button', {
-                      className: `pokedex-form-tab${activeKey === selected ? ' active' : ''}`,
-                      onClick: () => setFormKey(null),
-                      children: formLabelFor(selected) ?? 'Base',
-                    }),
-                    ...slotForms.map((formKey) =>
-                      jsx(
-                        'button',
-                        {
-                          className: `pokedex-form-tab${activeKey === formKey ? ' active' : ''}`,
-                          onClick: () => setFormKey(formKey),
-                          title: pokemonSpecies[formKey].name,
-                          children: formLabelFor(formKey) ?? pokemonSpecies[formKey].name,
-                        },
-                        formKey
-                      )
-                    ),
-                  ],
-                }),
+              jsxs('div', {
+                className: 'pokedex-detail-header',
+                children: [
+                  slotForms.length > 0
+                    ? jsx('div', {
+                        className: 'pokedex-form-tabs',
+                        children: [
+                          jsx('button', {
+                            className: `pokedex-form-tab${activeKey === selected ? ' active' : ''}`,
+                            onClick: () => setFormKey(null),
+                            children: formLabelFor(selected) ?? 'Base',
+                          }),
+                          ...slotForms.map((formKey) =>
+                            jsx(
+                              'button',
+                              {
+                                className: `pokedex-form-tab${activeKey === formKey ? ' active' : ''}`,
+                                onClick: () => setFormKey(formKey),
+                                title: pokemonSpecies[formKey].name,
+                                children: formLabelFor(formKey) ?? pokemonSpecies[formKey].name,
+                              },
+                              formKey
+                            )
+                          ),
+                        ],
+                      })
+                    : null,
+                  jsx('button', {
+                    className: 'pokedex-detail-close',
+                    onClick: () => setSelected(null),
+                    title: 'Close',
+                    'aria-label': 'Close Pokemon details',
+                    children: 'X',
+                  }),
+                ],
+              }),
               jsxs('div', {
                 className: 'stats-panel-identity',
                 children: [

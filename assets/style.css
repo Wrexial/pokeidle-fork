@@ -6520,6 +6520,35 @@ img {
     border-color: #8a6820
 }
 
+.pokedex-detail-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 4px
+}
+
+.pokedex-detail-header .pokedex-form-tabs {
+    flex: 1;
+    min-width: 0
+}
+
+.pokedex-detail-close {
+    margin-left: auto;
+    flex: 0 0 auto;
+    font-family: var(--font-pixel);
+    font-size: 7px;
+    line-height: 1;
+    padding: 1px 4px;
+    color: #3a2818;
+    background: none;
+    border: 1px solid #483828;
+    cursor: pointer
+}
+
+.pokedex-detail-close:hover {
+    background: #483828;
+    color: var(--parchment)
+}
+
 .pokedex-modal-detail .stats-panel-identity {
     display: flex;
     align-items: center;

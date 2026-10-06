@@ -3,7 +3,7 @@
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { useGame } from '../game/context.js'
 import { UiProvider } from '../game/ui-context.js'
-import { useIsMobile, useKonamiCode, useDailyEvent, useQuests, useBrowserNotifications, useAwayAlert, useAccessibilitySettings, useGameAudio, useDayPhase } from '../hooks.js'
+import { useIsMobile, useKonamiCode, useDailyEvent, useQuests, useBrowserNotifications, useAwayAlert, useAccessibilitySettings, useGameAudio, useDayPhase, useScreenWakeLock } from '../hooks.js'
 import { BattleScreen } from './battle-screen.js'
 import { TownMap } from './town-map.js'
 import { PartyBoxPanel } from './party-box-panel.js'
@@ -28,6 +28,8 @@ export function GameLayout() {
   useAwayAlert()
   // Reduced-motion / colourblind display preferences.
   useAccessibilitySettings()
+  // Keep phones/tablets from sleeping mid-battle.
+  useScreenWakeLock()
   // Synthesized region music + event sound effects (opt-in).
   useGameAudio()
   return jsx(UiProvider, {

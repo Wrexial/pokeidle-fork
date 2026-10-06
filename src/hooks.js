@@ -326,3 +326,42 @@ export function useQuests() {
     return () => clearInterval(intervalId)
   }, [dispatch])
 }
+
+/**
+ * Keep the screen awake while the game is open (the Screen Wake Lock API), so a
+ * phone or tablet doesn't dim and sleep mid-battle. Browsers drop the lock
+ * whenever the tab is hidden and may refuse it entirely (unsupported browser,
+ * insecure origin, battery saver), so it is re-requested on `visibilitychange`
+ * and every failure is ignored.
+ */
+export function useScreenWakeLock() {
+  React.useEffect(() => {
+    const wakeLock = /** @type {any} */ (navigator).wakeLock
+    if (!wakeLock?.request) return
+    /** @type {any} */
+    let sentinel = null
+    let cancelled = false
+    const request = async () => {
+      if (cancelled || document.visibilityState !== 'visible') return
+      // The browser already released the previous lock (or none was taken yet).
+      if (sentinel && !sentinel.released) return
+      try {
+        sentinel = await wakeLock.request('screen')
+        if (cancelled) sentinel.release().catch(() => {})
+      } catch {
+        // Refused (backgrounded, low battery, permission): try again the next
+        // time the tab becomes visible.
+      }
+    }
+    const onVisibilityChange = () => {
+      if (document.visibilityState === 'visible') request()
+    }
+    request()
+    document.addEventListener('visibilitychange', onVisibilityChange)
+    return () => {
+      cancelled = true
+      document.removeEventListener('visibilitychange', onVisibilityChange)
+      if (sentinel && !sentinel.released) sentinel.release().catch(() => {})
+    }
+  }, [])
+}

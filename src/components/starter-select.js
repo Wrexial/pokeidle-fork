@@ -14,7 +14,12 @@ export function StarterSelect() {
   const { state, dispatch } = useGame()
   const [step, setStep] = React.useState(/** @type {'mode' | 'challenge' | 'starter'} */ ('mode')),
     [regionId, setRegionId] = React.useState('kanto'),
-    regionOrder = React.useMemo(() => [...regions].sort((a, b) => a.order - b.order), []),
+    regionOrder = React.useMemo(
+      // DLC sub-regions are post-game expansions with no starter track, so they
+      // are never a place to begin a journey.
+      () => [...regions].filter((candidate) => !candidate.isDlc).sort((a, b) => a.order - b.order),
+      []
+    ),
     region = regions.find((candidate) => candidate.id === regionId),
     starters = regionalStarters[regionId] ?? regionalStarters.kanto,
     startLevel = region?.startLevel ?? 5,

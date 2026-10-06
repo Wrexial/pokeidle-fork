@@ -21,8 +21,18 @@ import { settleUnlockTokens, withNotification } from '../reducer-helpers.js'
  * @returns {GameState}
  */
 export function selectStarter(state, action) {
-  const regionId = action.payload.region ?? 'kanto',
-    region = regions.find((candidate) => candidate.id === regionId),
+  const requestedRegion = regions.find(
+      (candidate) => candidate.id === (action.payload.region ?? 'kanto')
+    ),
+    // DLC sub-regions are post-game expansions opened by beating their parent's
+    // Champion, so they can never start a run. A stale/forged request for one
+    // falls back to Kanto rather than stranding the player in a region with no
+    // league track.
+    region =
+      requestedRegion && !requestedRegion.isDlc
+        ? requestedRegion
+        : regions.find((candidate) => candidate.id === 'kanto'),
+    regionId = region?.id ?? 'kanto',
     entryTown = region?.entry,
     entryPath = entryRoutePath(entryTown),
     firstRoute = entryPath.route,

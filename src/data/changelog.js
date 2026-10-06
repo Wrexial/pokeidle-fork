@@ -54,6 +54,7 @@ export const CHANGELOG = [
             'Settings gained a Display section: choose animated sprites (the default) or the lighter static pixel art. The preference is remembered outside your save, like the other settings',
             'The Town Map marks more facilities and its legend names them: the Day-Care, the Poke Pelago\u2019s Berry Garden, the Battle Tower on Hoenn Route 111, every Raid Island, and the Ruins of Alph and Tanoby Ruins all carry a service marker (Day-Care, Berry Garden, Battle Tower, Raid Den and Legendary Shrine)',
             'A cafe has opened in each region\u2019s main city (Celadon, Goldenrod, Slateport, Jubilife, Castelia, Lumiose, Hau\u2019oli, Motostoke and Mesagoza): buy a Poffin to raise a party Pokemon\u2019s friendship by 30, or a Poke Bean to heal it',
+            'The game now keeps the screen awake while it is open (where the browser supports the Screen Wake Lock API), so a phone or tablet no longer dims and sleeps mid-battle',
           ],
         },
         {
@@ -66,6 +67,7 @@ export const CHANGELOG = [
             'Route-exclusive catch gates no longer send you hunting a night-only Pokemon or a 1%-weight starter: a gate now asks for no more than a route\u2019s common finds (Alola\u2019s Route 3 asks for two of four instead of three, Paldea\u2019s North Province and Unova\u2019s Lacunosa Town likewise), and Sinnoh\u2019s Route 222 gate \u2014 whose only exclusive, Luxio, appears solely at night \u2014 was dropped, so Routes 227 and 228 open from their battles and badge instead',
             'The Next Unlocks list follows the region you are standing in again: it gathered locked areas from every open region and kept only the five soonest, so in Sinnoh, Alola or Paldea earlier regions\u2019 routes crowded the local gates off the list entirely. It now lists the current region\u2019s whole frontier',
             'The Next Unlocks list tucks away areas you cannot work towards yet: a route chained behind a route, a zone sub-area behind its predecessor, or a gate whose gym, route or minigame home is still closed now sits behind a \u201cblocked areas\u201d toggle that names exactly what each one is waiting on, so the list only headlines the gates that are actually open to you',
+            'Post-game sub-regions (the Galar and Paldea DLC and Kanto\u2019s Sevii Islands) can no longer be picked as a starting region: the starter select only offers the nine base regions, and a request for a sub-region is ignored rather than stranding the run somewhere with no league track',
           ],
         },
       ],

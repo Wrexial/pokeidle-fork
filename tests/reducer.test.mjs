@@ -40,6 +40,19 @@ test('starting in a zone region opens the entry hub and its first area', () => {
   assert.equal(state.currentRoute, 'alola-route-1')
 })
 
+test('a DLC sub-region cannot be started in', () => {
+  // The starter select hides them, and the reducer refuses one that arrives
+  // anyway, falling back to Kanto instead of stranding the run in a region
+  // with no league track.
+  const state = gameReducer(initialGameState, {
+    type: 'SELECT_STARTER',
+    payload: { region: 'isle-of-armor', speciesKey: 'bulbasaur' },
+  })
+  assert.equal(state.startRegion, 'kanto')
+  assert.deepEqual(state.unlockedRegions, ['kanto'])
+  assert.equal(state.currentLocation, 'route1')
+})
+
 test('TRAVEL reaches a location whose gate is met even if the saved list is stale', () => {
   // A loaded save can meet a gate without having recomputed its unlock list
   // yet, so TRAVEL checks the freshly-computed set rather than only the save.

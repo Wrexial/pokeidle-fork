@@ -49,8 +49,8 @@ export function PokedexModal({ onClose, inline = false }) {
             ),
       [gen]
     ),
-    // The "All" tab also lists MissingNo. (id 0) as a pure easter egg; the
-    // completion count excludes it so the national dex can read 100%.
+    // The completion count excludes MissingNo. (id 0); the grid also hides it
+    // entirely until the glitch is first seen.
     countedIndexes =
       gen === 0
         ? filteredIndexes.filter((entry) => entry[1].id > 0 && entry[1].id <= 1025)
@@ -141,7 +141,9 @@ export function PokedexModal({ onClose, inline = false }) {
           className: 'pokedex-modal-grid-scroll',
           children: jsx('div', {
             className: 'pokedex-grid',
-            children: filteredIndexes.map(([speciesKey]) => {
+            children: filteredIndexes
+              .filter(([speciesKey, species]) => species.id !== 0 || seenSet.has(speciesKey))
+              .map(([speciesKey]) => {
               const status = getSlotStatus(speciesKey)
               return jsx(
                 PokedexTile,

@@ -222,6 +222,8 @@ async function runPool(tasks, ids, concurrency = 8) {
 
 async function main() {
   const species = JSON.parse(fs.readFileSync(SPECIES_PATH, 'utf8'))
+  // id 0 is MissingNo.: its glitch sprite is checked in by hand (PokeAPI's
+  // /0.png is the generic `?` placeholder), so it is deliberately skipped here.
   const ids = [...new Set(Object.values(species).map((entry) => entry.id))].filter((id) => id > 0).sort((a, b) => a - b)
   console.log(`Filling sprites for ${ids.length} species ids (ids > 0).\n`)
 

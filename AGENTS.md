@@ -218,8 +218,11 @@ Data conventions:
 - Learnsets map `species -> [[level, moveKey], ...]`.
 - Every entry's `id` is the PokeAPI *pokemon* id: the national dex number for
   base species and the 10000+ form id for alternate forms (megas, regional
-  forms, Gigantamax, ...). Only `missingno` keeps `id: 0`, which renders the
-  `?` placeholder sprite. `tools/fix_pokemon_ids.py` reconciles every id with
+  forms, Gigantamax, ...). Only `missingno` keeps `id: 0`; its glitch sprite is
+  checked in by hand (`public/sprites/pokemon/0.png` and its back/shiny
+  variants), because the sprite downloader only fetches ids above 0. The
+  Pokedex hides the MissingNo. slot until it has been seen. `tools/fix_pokemon_ids.py`
+  reconciles every other id with
   PokeAPI (it derives each key's PokeAPI name, so re-run it after adding a
   form). Region wild encounters only use species with `id > 0` (forms with ids
   above 1025 are excluded).

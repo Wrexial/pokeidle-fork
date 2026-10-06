@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 installGameData()
 
-const { breedingCompatibility, canBreed, eggSpeciesKey, genderForPokemon, inheritBreedingTraits, inheritEggMoves, inheritIVs, inheritMoves, inheritNature } = await import(
+const { breedingCompatibility, canBreed, eggSpeciesKey, genderForPokemon, inheritBreedingTraits, inheritEggMoves, inheritIVs, inheritMoves, inheritNature, rollGender } = await import(
   '../src/game/breeding.js'
 )
 const { createEgg, createPokemon } = await import('../src/game/pokemon.js')
@@ -18,6 +18,18 @@ const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
  * @param {string} [id]
  */
 const parent = (speciesKey, id = '1') => ({ speciesKey, id })
+
+test('Cute Charm biases a wild roll toward the requested gender', () => {
+  const original = Math.random
+  Math.random = () => 0.5
+  try {
+    assert.equal(rollGender('pidgey'), 'male', 'a 50/50 roll lands male at 0.5')
+    assert.equal(rollGender('pidgey', 'female'), 'female', 'the bias pushes it female')
+    assert.equal(rollGender('pidgey', 'male'), 'male')
+  } finally {
+    Math.random = original
+  }
+})
 
 const IV_STAT_KEYS = ['hp', 'attack', 'defense', 'spAttack', 'spDefense', 'speed']
 

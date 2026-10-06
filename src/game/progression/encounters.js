@@ -419,6 +419,19 @@ function shinyOddsForEncounter(encounter, completedGenerationSet, chainMultiplie
 }
 
 /**
+ * Lead abilities that make a type twice as common in wild encounters
+ * (Static / Lightning Rod -> Electric, Magnet Pull -> Steel, Storm Drain ->
+ * Water).
+ * @type {Record<string, string>}
+ */
+export const ENCOUNTER_TYPE_ABILITY = {
+  static: 'Electric',
+  lightningRod: 'Electric',
+  magnetPull: 'Steel',
+  stormDrain: 'Water',
+}
+
+/**
  * @param {EncounterData} encounterData
  * @param {{ speciesKey: string, multiplier: number }[]} modifiers
  * @param {Set<number>} completedGenerationSet
@@ -427,9 +440,11 @@ function shinyOddsForEncounter(encounter, completedGenerationSet, chainMultiplie
  * @param {boolean} [randomize] Randomizer challenge: pick any species.
  * @param {number} [levelOverride] Level-scaling challenge: force this level.
  * @param {string | null} [monotype] Monotype challenge: only this type may appear.
+ * @param {string | null} [biasType] A lead ability's type: those species are
+ *   twice as likely (Static / Magnet Pull / ...).
  * @returns {{ species: Species, speciesKey: string, level: number, isShiny: boolean, isRoamer?: boolean }}
  */
-export function resolvePokemonEncounter(encounterData, modifiers, completedGenerationSet, shinyChain, shinyBonus = 1, randomize = !1, levelOverride = 0, monotype = null) {
+export function resolvePokemonEncounter(encounterData, modifiers, completedGenerationSet, shinyChain, shinyBonus = 1, randomize = !1, levelOverride = 0, monotype = null, biasType = null) {
   if (randomize)
     return resolveRandomEncounter(encounterData, completedGenerationSet, shinyBonus, levelOverride, monotype)
   const weightedEncounters = applyEncounterModifiers(
@@ -453,7 +468,15 @@ export function resolvePokemonEncounter(encounterData, modifiers, completedGener
       monotype,
       !0
     )
-  const pool = monotypePool.length > 0 ? monotypePool : weightedEncounters,
+  const basePool = monotypePool.length > 0 ? monotypePool : weightedEncounters,
+    // A lead ability can make one type twice as common on the route.
+    pool = biasType
+      ? basePool.map((encounter) =>
+          speciesHasType(encounter.speciesKey, biasType)
+            ? { ...encounter, weight: encounter.weight * 2 }
+            : encounter
+        )
+      : basePool,
     totalWeight = pool.reduce((accumulator, encounter) => accumulator + encounter.weight, 0)
   let roll = Math.random() * totalWeight
   for (const encounter of pool)

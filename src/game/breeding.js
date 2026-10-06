@@ -137,16 +137,21 @@ export function isFemalePokemon(pokemon) {
  * Roll a fresh gender from a species' gender rate. Battle-only rivals have no
  * id to derive a stable gender from, so this is rolled once when they appear.
  * @param {string} speciesKey
+ * @param {'male' | 'female' | null} [bias] Cute Charm's requested gender.
  * @returns {'male' | 'female' | 'genderless'}
  */
-export function rollGender(speciesKey) {
+export function rollGender(speciesKey, bias = null) {
   const fixedGender = GENDER_FORM_SPECIES[speciesKey]
   if (fixedGender) return fixedGender
   const data = breedingData[speciesKey]
   if (!data || data.genderRate === -1) return 'genderless'
   if (data.genderRate === 0) return 'male'
   if (data.genderRate === 8) return 'female'
-  return Math.random() < data.genderRate / 8 ? 'female' : 'male'
+  // Cute Charm biases the roll toward the requested gender (2/3).
+  const base = data.genderRate / 8,
+    femaleChance =
+      bias === 'female' ? Math.max(base, 2 / 3) : bias === 'male' ? Math.min(base, 1 / 3) : base
+  return Math.random() < femaleChance ? 'female' : 'male'
 }
 
 /**

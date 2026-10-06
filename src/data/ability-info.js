@@ -134,7 +134,7 @@ export const abilityInfo = {
   },
   'lightningRod': {
     'group': 'absorb',
-    'text': 'Absorbs Electric moves and heals 1/4 max HP.'
+    'text': 'Absorbs Electric moves and heals 1/4 max HP. In the lead, it finds more Electric-type wild Pokemon.'
   },
   'motorDrive': {
     'group': 'absorb',
@@ -154,7 +154,7 @@ export const abilityInfo = {
   },
   'stormDrain': {
     'group': 'absorb',
-    'text': 'Absorbs Water moves and heals 1/4 max HP.'
+    'text': 'Absorbs Water moves and heals 1/4 max HP. In the lead, it finds more Water-type wild Pokemon.'
   },
   'earthEater': {
     'group': 'absorb',
@@ -350,7 +350,7 @@ export const abilityInfo = {
   },
   'superLuck': {
     'group': 'offense',
-    'text': 'Raises its critical-hit stage by one.'
+    'text': 'Raises its critical-hit stage by one. In the lead, wild Pokemon are more likely to hold an item.'
   },
   'merciless': {
     'group': 'offense',
@@ -634,7 +634,7 @@ export const abilityInfo = {
   },
   'magmaArmor': {
     'group': 'status',
-    'text': 'Cannot be frozen.'
+    'text': 'Cannot be frozen. In the party, it halves egg hatching time.'
   },
   'comatose': {
     'group': 'status',
@@ -714,11 +714,11 @@ export const abilityInfo = {
   },
   'static': {
     'group': 'contact',
-    'text': '30% chance to paralyze an attacker on contact.'
+    'text': '30% chance to paralyze an attacker on contact. In the lead, it finds more Electric-type wild Pokemon.'
   },
   'flameBody': {
     'group': 'contact',
-    'text': '30% chance to burn an attacker on contact.'
+    'text': '30% chance to burn an attacker on contact. In the party, it halves egg hatching time.'
   },
   'poisonPoint': {
     'group': 'contact',
@@ -734,7 +734,7 @@ export const abilityInfo = {
   },
   'cuteCharm': {
     'group': 'contact',
-    'text': '30% chance to infatuate an attacker on contact.'
+    'text': '30% chance to infatuate an attacker on contact. In the lead, wild Pokemon are more likely to be the opposite gender.'
   },
   'roughSkin': {
     'group': 'contact',
@@ -786,7 +786,7 @@ export const abilityInfo = {
   },
   'steamEngine': {
     'group': 'onhit',
-    'text': 'Raises Speed by six stages when hit by Water or Fire.'
+    'text': 'Raises Speed by six stages when hit by Water or Fire. In the party, it halves egg hatching time.'
   },
   'weakArmor': {
     'group': 'onhit',
@@ -1006,7 +1006,7 @@ export const abilityInfo = {
   },
   'compoundEyes': {
     'group': 'misc',
-    'text': 'Boosts its accuracy by 30%.'
+    'text': 'Boosts its accuracy by 30%. In the lead, wild Pokemon are more likely to hold an item.'
   },
   'magicBounce': {
     'group': 'defense',
@@ -1194,7 +1194,7 @@ export const abilityInfo = {
   },
   'magnetPull': {
     'group': 'misc',
-    'text': 'Traps Steel-type foes so they cannot switch out.'
+    'text': 'Traps Steel-type foes so they cannot switch out. In the lead, it finds more Steel-type wild Pokemon.'
   },
   'suctionCups': {
     'group': 'misc',

@@ -19,6 +19,24 @@ flavour moves, the move-copy / item-lock moves (Mimic, Sketch, Snatch,
 Magic Room), Ally Switch / Instruct, and Multitype / RKS System (which reuse
 the existing type-boosting items as plates).
 
+## Out-of-battle abilities (audited, all that fit are done)
+
+Applied: `Pickup`, `Honey Gather`, `Ball Fetch`, `Illuminate` (item drops),
+`Illusion` (wild disguise), `Flame Body` / `Magma Armor` / `Steam Engine`
+(egg hatching), `Static` / `Lightning Rod` / `Magnet Pull` / `Storm Drain`
+(encounter type bias), `Cute Charm` (wild gender), `Super Luck` /
+`Compound Eyes` (wild held items), and `Multitype` / `RKS System`
+(type from the held booster).
+
+Intentionally not applied, because the mechanic they hook does not exist here:
+- `Synchronize` (wild nature) — wild Pokemon have no nature in this game, so
+  there is nothing to pass on. Adding one would change every wild battle's
+  stats, so it is out of scope.
+- `Stench` / `Sand Veil` / `Snow Cloak` (lower/alter the wild encounter rate) —
+  encounters are tick-driven, not rate-based, so there is no rate to alter.
+- `Suction Cups` / `Sticky Hold` (fishing bite rate) — the fishing minigame has
+  no bite-chance roll.
+
 ## The only thing left: PP (4 entries)
 
 - **Moves:** `Spite`, `Grudge`, `Imprison`.

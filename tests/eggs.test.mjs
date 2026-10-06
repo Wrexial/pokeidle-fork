@@ -118,3 +118,16 @@ test('an egg in the box does not progress or battle', () => {
   assert.equal(next.box[0].eggStepsRemaining, 5)
   assert.equal(next.hatchResult, null)
 })
+
+test('Flame Body / Magma Armor / Steam Engine halve the egg wait', () => {
+  const egg = { isEgg: true, eggStepsRemaining: 10, speciesKey: 'pidgey' }
+  assert.equal(tickPartyEggs([egg]).party[0].eggStepsRemaining, 9, 'one step normally')
+  for (const ability of ['flameBody', 'magmaArmor', 'steamEngine']) {
+    const party = [egg, { isEgg: false, ability, speciesKey: 'magcargo' }]
+    assert.equal(
+      tickPartyEggs(party).party[0].eggStepsRemaining,
+      8,
+      `${ability} counts as two steps`
+    )
+  }
+})

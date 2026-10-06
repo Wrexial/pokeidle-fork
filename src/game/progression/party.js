@@ -152,12 +152,21 @@ export function tickBattleCounters(effects) {
  * @returns {{ party: Pokemon[], hatched: Pokemon[] }}
  */
 export function tickPartyEggs(party) {
+  // Flame Body / Magma Armor / Steam Engine warm the eggs: they hatch twice as
+  // fast (one step counts as two).
+  const warmed = party.some(
+    (member) =>
+      member &&
+      !member.isEgg &&
+      ['flameBody', 'magmaArmor', 'steamEngine'].includes(member.ability ?? '')
+  )
+  const step = warmed ? 2 : 1
   let /** @type {Pokemon[]} */ hatched = [],
     changed = false
   const nextParty = party.map((member) => {
     if (!member.isEgg) return member
     changed = true
-    const remaining = (member.eggStepsRemaining ?? 1) - 1
+    const remaining = (member.eggStepsRemaining ?? step) - step
     if (remaining > 0) return { ...member, eggStepsRemaining: remaining }
     const hatchedMember = {
       ...member,

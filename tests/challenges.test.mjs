@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 installGameData()
 
-const { resolvePokemonEncounter, minLevelForSpecies } = await import('../src/game/progression.js')
+const { resolvePokemonEncounter, minLevelForSpecies, ENCOUNTER_TYPE_ABILITY } = await import('../src/game/progression.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 const { repairSave } = await import('../src/game/context.js')
 const { generateIVs } = await import('../src/game/pokemon.js')
@@ -244,4 +244,26 @@ test('Nuzlocke releases a fainted party member straight away', () => {
     activePlayerPokemonIndex: 0,
   }
   assert.equal(gameReducer(off, { type: 'RELEASE_FAINTED' }).party.length, party.length)
+})
+
+test('a lead ability can bias wild encounters toward a type', () => {
+  const data = {
+    encounters: [
+      { speciesKey: 'pikachu', weight: 1, minLevel: 5, maxLevel: 5 },
+      { speciesKey: 'rattata', weight: 1, minLevel: 5, maxLevel: 5 },
+    ],
+  }
+  const roll = (/** @type {number} */ value, /** @type {string | null} */ biasType) => {
+    const original = Math.random
+    Math.random = () => value
+    try {
+      return resolvePokemonEncounter(data, [], new Set(), undefined, 1, false, 0, null, biasType)
+        .speciesKey
+    } finally {
+      Math.random = original
+    }
+  }
+  assert.equal(roll(0.6, null), 'rattata', 'no bias picks the second entry')
+  assert.equal(roll(0.6, 'Electric'), 'pikachu', 'an Electric bias makes Pikachu commoner')
+  assert.equal(ENCOUNTER_TYPE_ABILITY.static, 'Electric')
 })

@@ -15,15 +15,36 @@ import { calculatePokemonStats, generateIVs, getPerfectIVs, resolvePokemonMoves,
  *   perfectIvs?: boolean,
  *   gender?: boolean,
  *   wild?: boolean,
+ *   leadAbility?: string | null,
+ *   leadGender?: string | null,
  * }} [options] `wild` rolls an ability, held item and gender; `gender` rolls
  * only the gender (trainer teams). `perfectIvs` uses 31 IVs instead of random.
+ * `leadAbility` / `leadGender` let out-of-combat lead abilities bias the wild
+ * roll (Super Luck / Compound Eyes hold items, Cute Charm gender).
  * @returns {any}
  */
 export function createBattlePokemon(speciesKey, level, options = {}) {
-  const { isShiny = false, isRoamer = false, perfectIvs = false, gender = false, wild = false } = options,
+  const {
+      isShiny = false,
+      isRoamer = false,
+      perfectIvs = false,
+      gender = false,
+      wild = false,
+      leadAbility = null,
+      leadGender = null,
+    } = options,
     species = pokemonSpecies[speciesKey],
     ivs = perfectIvs ? getPerfectIVs() : generateIVs(),
-    stats = calculatePokemonStats(species, level, ivs)
+    stats = calculatePokemonStats(species, level, ivs),
+    // Super Luck / Compound Eyes make the foe twice as likely to hold an item.
+    heldItemChance = leadAbility === 'superLuck' || leadAbility === 'compoundEyes' ? 0.2 : 0.05,
+    // Cute Charm biases the wild toward the opposite gender to the lead.
+    genderBias =
+      leadAbility === 'cuteCharm' && (leadGender === 'male' || leadGender === 'female')
+        ? leadGender === 'male'
+          ? 'female'
+          : 'male'
+        : null
   return {
     speciesKey,
     name: species.name,
@@ -42,8 +63,8 @@ export function createBattlePokemon(speciesKey, level, options = {}) {
     ...(wild
       ? {
           ability: rollAbility(speciesKey),
-          heldItem: rollWildHeldItem(species.types),
-          gender: rollGender(speciesKey),
+          heldItem: rollWildHeldItem(species.types, heldItemChance),
+          gender: rollGender(speciesKey, genderBias),
           isRoamer,
         }
       : gender

@@ -15,7 +15,7 @@ import { abilityOf } from './abilities.js'
 import { companionExpMultiplier } from './companion.js'
 import { applyBattleForm, createBattlePokemon, createVolatileState, resolveBattleTurn, volatileStateFromBattle, AI_SKILL, chooseBestSwitch } from './combat.js'
 import { isBattleReady } from './pokemon.js'
-import { awardExperience, checkShinyOdds, encountersForPhase, pokerusExpMultiplier, raidProgressFor, resolveActiveModifiers, resolvePokemonEncounter, resolveRoamer, shinyOddsForSpecies } from './progression.js'
+import { awardExperience, checkShinyOdds, encountersForPhase, pokerusExpMultiplier, raidProgressFor, resolveActiveModifiers, resolvePokemonEncounter, resolveRoamer, shinyOddsForSpecies, ENCOUNTER_TYPE_ABILITY } from './progression.js'
 
 export function useGameLoop() {
   const { state, dispatch: rawDispatch } = useGame(),
@@ -293,7 +293,9 @@ export function useGameLoop() {
                 currentGameState.challengeLevelScale
                   ? currentGameState.playerPokemon?.level ?? 0
                   : 0,
-                currentGameState.challengeMonotype
+                currentGameState.challengeMonotype,
+                // Static / Magnet Pull / Lightning Rod / Storm Drain bias the roll.
+                ENCOUNTER_TYPE_ABILITY[currentGameState.playerPokemon?.ability ?? ''] ?? null
               ),
             catchRouteKey = currentGameState.currentRoute ?? '',
             routeCatchUsed =
@@ -304,6 +306,8 @@ export function useGameLoop() {
                 isShiny: spawningPokemonData.isShiny,
                 isRoamer: spawningPokemonData.isRoamer ?? !1,
                 wild: !0,
+                leadAbility: currentGameState.playerPokemon?.ability ?? null,
+                leadGender: currentGameState.playerPokemon?.gender ?? null,
               }),
               // Restrict Catches: only the first wild on a route can be caught.
               ...(currentGameState.challengeRestrictCatches

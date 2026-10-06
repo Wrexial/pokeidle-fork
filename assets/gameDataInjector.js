@@ -11,9 +11,9 @@
 
 // The map and encounter databases are split one file per region. The `merge`
 // flag combines them back into the single `mapData` / `mapEncounterData`
-// objects the app consumes, preserving region order (kanto -> paldea, then
-// Kanto's hand-authored Sevii Islands subregion). The Galar/Paldea DLC are
-// ordinary zones inside their parent region, so they live in galar/paldea.
+// objects the app consumes, preserving region order (kanto -> paldea). The
+// post-game DLC and the Sevii Islands are ordinary zones inside their parent
+// region, so they live in galar/paldea/kanto.
 const regionFiles = [
     ['kanto', 'Kanto'],
     ['johto', 'Johto'],
@@ -24,7 +24,6 @@ const regionFiles = [
     ['alola', 'Alola'],
     ['galar', 'Galar'],
     ['paldea', 'Paldea'],
-    ['sevii-islands', 'Sevii Islands'],
 ].flatMap(([regionId, regionName]) => [
     { key: 'mapData', path: `/data/map-data/${regionId}.json`, label: `${regionName} map`, merge: true },
     { key: 'mapEncounterData', path: `/data/encounter-data/${regionId}.json`, label: `${regionName} encounters`, merge: true },

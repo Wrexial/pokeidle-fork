@@ -583,15 +583,5 @@
     "level": 75
    }
   ]
- },
- {
-  "id": "sevii-islands",
-  "name": "Sevii Islands",
-  "generation": 1,
-  "order": 1.1,
-  "entry": "sevii-islands-one-island",
-  "startLevel": 63,
-  "isDlc": true,
-  "parentRegion": "kanto"
  }
 ]

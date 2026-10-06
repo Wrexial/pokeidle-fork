@@ -4353,5 +4353,568 @@
     "maxLevel": 75
    }
   ]
+ },
+ "sevii-islands-kindle-road": {
+  "name": "Kindle Road",
+  "encounters": [
+   {
+    "speciesKey": "ponyta",
+    "weight": 20,
+    "minLevel": 63,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "rapidash",
+    "weight": 20,
+    "minLevel": 63,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "growlithe",
+    "weight": 20,
+    "minLevel": 63,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "machop",
+    "weight": 12,
+    "minLevel": 63,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "mankey",
+    "weight": 12,
+    "minLevel": 63,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "spearow",
+    "weight": 12,
+    "minLevel": 63,
+    "maxLevel": 66
+   }
+  ]
+ },
+ "sevii-islands-mt-ember": {
+  "name": "Mt. Ember",
+  "encounters": [
+   {
+    "speciesKey": "ponyta",
+    "weight": 20,
+    "minLevel": 66,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "rapidash",
+    "weight": 20,
+    "minLevel": 66,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "magmar",
+    "weight": 20,
+    "minLevel": 66,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "slugma",
+    "weight": 12,
+    "minLevel": 66,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "machop",
+    "weight": 12,
+    "minLevel": 66,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "geodude",
+    "weight": 12,
+    "minLevel": 66,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "onix",
+    "weight": 12,
+    "minLevel": 66,
+    "maxLevel": 69
+   }
+  ]
+ },
+ "sevii-islands-bond-bridge": {
+  "name": "Bond Bridge",
+  "encounters": [
+   {
+    "speciesKey": "pidgey",
+    "weight": 20,
+    "minLevel": 63,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "pidgeotto",
+    "weight": 20,
+    "minLevel": 63,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "spearow",
+    "weight": 20,
+    "minLevel": 63,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "fearow",
+    "weight": 12,
+    "minLevel": 63,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "venonat",
+    "weight": 12,
+    "minLevel": 63,
+    "maxLevel": 66
+   },
+   {
+    "speciesKey": "oddish",
+    "weight": 12,
+    "minLevel": 63,
+    "maxLevel": 66
+   }
+  ]
+ },
+ "sevii-islands-berry-forest": {
+  "name": "Berry Forest",
+  "encounters": [
+   {
+    "speciesKey": "caterpie",
+    "weight": 20,
+    "minLevel": 66,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "metapod",
+    "weight": 20,
+    "minLevel": 66,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "butterfree",
+    "weight": 20,
+    "minLevel": 66,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "weedle",
+    "weight": 12,
+    "minLevel": 66,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "kakuna",
+    "weight": 12,
+    "minLevel": 66,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "beedrill",
+    "weight": 12,
+    "minLevel": 66,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "oddish",
+    "weight": 12,
+    "minLevel": 66,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "gloom",
+    "weight": 12,
+    "minLevel": 66,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "venonat",
+    "weight": 6,
+    "minLevel": 66,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "exeggcute",
+    "weight": 6,
+    "minLevel": 66,
+    "maxLevel": 69
+   }
+  ]
+ },
+ "sevii-islands-icefall-cave": {
+  "name": "Icefall Cave",
+  "encounters": [
+   {
+    "speciesKey": "zubat",
+    "weight": 20,
+    "minLevel": 68,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "golbat",
+    "weight": 20,
+    "minLevel": 68,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "seel",
+    "weight": 20,
+    "minLevel": 68,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "psyduck",
+    "weight": 12,
+    "minLevel": 68,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "slowpoke",
+    "weight": 12,
+    "minLevel": 68,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "swinub",
+    "weight": 12,
+    "minLevel": 68,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "sneasel",
+    "weight": 12,
+    "minLevel": 68,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "lapras",
+    "weight": 12,
+    "minLevel": 68,
+    "maxLevel": 71
+   }
+  ]
+ },
+ "sevii-islands-five-isle-meadow": {
+  "name": "Five Isle Meadow",
+  "encounters": [
+   {
+    "speciesKey": "pidgey",
+    "weight": 20,
+    "minLevel": 65,
+    "maxLevel": 68
+   },
+   {
+    "speciesKey": "pidgeotto",
+    "weight": 20,
+    "minLevel": 65,
+    "maxLevel": 68
+   },
+   {
+    "speciesKey": "sentret",
+    "weight": 20,
+    "minLevel": 65,
+    "maxLevel": 68
+   },
+   {
+    "speciesKey": "furret",
+    "weight": 12,
+    "minLevel": 65,
+    "maxLevel": 68
+   },
+   {
+    "speciesKey": "meowth",
+    "weight": 12,
+    "minLevel": 65,
+    "maxLevel": 68
+   },
+   {
+    "speciesKey": "hoppip",
+    "weight": 12,
+    "minLevel": 65,
+    "maxLevel": 68
+   },
+   {
+    "speciesKey": "sunkern",
+    "weight": 12,
+    "minLevel": 65,
+    "maxLevel": 68
+   }
+  ]
+ },
+ "sevii-islands-memorial-pillar": {
+  "name": "Memorial Pillar",
+  "encounters": [
+   {
+    "speciesKey": "hoppip",
+    "weight": 20,
+    "minLevel": 67,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "skiploom",
+    "weight": 20,
+    "minLevel": 67,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "sunkern",
+    "weight": 20,
+    "minLevel": 67,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "sunflora",
+    "weight": 12,
+    "minLevel": 67,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "pidgeotto",
+    "weight": 12,
+    "minLevel": 67,
+    "maxLevel": 70
+   },
+   {
+    "speciesKey": "sentret",
+    "weight": 12,
+    "minLevel": 67,
+    "maxLevel": 70
+   }
+  ]
+ },
+ "sevii-islands-lost-cave": {
+  "name": "Lost Cave",
+  "encounters": [
+   {
+    "speciesKey": "zubat",
+    "weight": 20,
+    "minLevel": 65,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "golbat",
+    "weight": 20,
+    "minLevel": 65,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "gastly",
+    "weight": 20,
+    "minLevel": 65,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "haunter",
+    "weight": 12,
+    "minLevel": 65,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "cubone",
+    "weight": 12,
+    "minLevel": 65,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "marowak",
+    "weight": 12,
+    "minLevel": 65,
+    "maxLevel": 69
+   }
+  ]
+ },
+ "sevii-islands-pattern-bush": {
+  "name": "Pattern Bush",
+  "encounters": [
+   {
+    "speciesKey": "caterpie",
+    "weight": 20,
+    "minLevel": 66,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "metapod",
+    "weight": 20,
+    "minLevel": 66,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "weedle",
+    "weight": 20,
+    "minLevel": 66,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "kakuna",
+    "weight": 12,
+    "minLevel": 66,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "heracross",
+    "weight": 12,
+    "minLevel": 66,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "ledyba",
+    "weight": 12,
+    "minLevel": 66,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "spinarak",
+    "weight": 12,
+    "minLevel": 66,
+    "maxLevel": 69
+   },
+   {
+    "speciesKey": "beedrill",
+    "weight": 12,
+    "minLevel": 66,
+    "maxLevel": 69
+   }
+  ]
+ },
+ "sevii-islands-ruin-valley": {
+  "name": "Ruin Valley",
+  "encounters": [
+   {
+    "speciesKey": "natu",
+    "weight": 20,
+    "minLevel": 68,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "xatu",
+    "weight": 20,
+    "minLevel": 68,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "phanpy",
+    "weight": 20,
+    "minLevel": 68,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "donphan",
+    "weight": 12,
+    "minLevel": 68,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "machop",
+    "weight": 12,
+    "minLevel": 68,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "geodude",
+    "weight": 12,
+    "minLevel": 68,
+    "maxLevel": 71
+   },
+   {
+    "speciesKey": "cubone",
+    "weight": 12,
+    "minLevel": 68,
+    "maxLevel": 71
+   }
+  ]
+ },
+ "sevii-islands-dotted-hole": {
+  "name": "Dotted Hole",
+  "encounters": [
+   {
+    "speciesKey": "unown",
+    "weight": 20,
+    "minLevel": 70,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "natu",
+    "weight": 20,
+    "minLevel": 70,
+    "maxLevel": 72
+   }
+  ]
+ },
+ "sevii-islands-sevault-canyon": {
+  "name": "Sevault Canyon",
+  "encounters": [
+   {
+    "speciesKey": "phanpy",
+    "weight": 20,
+    "minLevel": 70,
+    "maxLevel": 73
+   },
+   {
+    "speciesKey": "donphan",
+    "weight": 20,
+    "minLevel": 70,
+    "maxLevel": 73
+   },
+   {
+    "speciesKey": "skarmory",
+    "weight": 20,
+    "minLevel": 70,
+    "maxLevel": 73
+   },
+   {
+    "speciesKey": "gligar",
+    "weight": 12,
+    "minLevel": 70,
+    "maxLevel": 73
+   },
+   {
+    "speciesKey": "rhyhorn",
+    "weight": 12,
+    "minLevel": 70,
+    "maxLevel": 73
+   },
+   {
+    "speciesKey": "cubone",
+    "weight": 12,
+    "minLevel": 70,
+    "maxLevel": 73
+   },
+   {
+    "speciesKey": "geodude",
+    "weight": 12,
+    "minLevel": 70,
+    "maxLevel": 73
+   },
+   {
+    "speciesKey": "onix",
+    "weight": 12,
+    "minLevel": 70,
+    "maxLevel": 73
+   }
+  ]
+ },
+ "sevii-islands-tanoby-ruins": {
+  "name": "Tanoby Ruins",
+  "encounters": [
+   {
+    "speciesKey": "unown",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 75
+   },
+   {
+    "speciesKey": "natu",
+    "weight": 20,
+    "minLevel": 72,
+    "maxLevel": 75
+   }
+  ]
  }
 }

@@ -40,10 +40,10 @@ test('starting in a zone region opens the entry hub and its first area', () => {
   assert.equal(state.currentRoute, 'alola-route-1')
 })
 
-test('a DLC sub-region cannot be started in', () => {
-  // The starter select hides them, and the reducer refuses one that arrives
-  // anyway, falling back to Kanto instead of stranding the run in a region
-  // with no league track.
+test('an unknown or sub-region start request falls back to Kanto', () => {
+  // The starter select only offers the nine base regions; a stale/forged
+  // SELECT_STARTER for anything else (a removed subregion id, a typo) falls
+  // back to Kanto rather than stranding the run.
   const state = gameReducer(initialGameState, {
     type: 'SELECT_STARTER',
     payload: { region: 'sevii-islands', speciesKey: 'bulbasaur' },

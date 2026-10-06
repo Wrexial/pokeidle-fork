@@ -274,23 +274,21 @@ Data conventions:
   `SELECT_STARTER` uses `entry` to place the player: choosing a
   region's starter starts the run on that region's first route. Regional
   starters live in `regionalStarters` in `src/data/config.js`.
-- **DLC areas** are ordinary zones: Galar's Isle of Armor and Crown Tundra, and
-  Paldea's Kitakami and the Terarium are `type: 'zone'` hubs inside their parent
-  region (the generator's `ZONES`), just like Galar's Wild Area. Their hub keeps
-  a `championDefeated` gate on the parent's Champion, so they open post-game and
-  their locations carry the parent's `region`. They used to be promoted to
-  first-class `isDlc` regions with their own entry, tab and Raid Island;
-  `tools/revert-dlc-regions.cjs` folded them back so each base region has a
-  single Raid Island again (the DLC legendaries moved into the parent's
-  `raidPool`). Kanto's **Sevii Islands** is the one remaining hand-authored
-  `isDlc` region (`tools/add-sevii-islands.mjs`), a 20-area subregion under
-  Kanto; its raid was removed too, so Moltres is back in Kanto's pool. For that
-  subregion `isDlc` + `parentRegion`/`dlcParentRegion` (`src/data/gameData.js`)
-  keep it out of token, World Tour and per-generation counts, `save.js` never
-  adds it to `unlockedRegions`, and the Town Map draws it as a **subregion on
-  the parent map** rather than a separate tab: its One Island entry links back to
-  Vermilion City, and the Town Map groups its locations under the parent
-  (`displayRegionFor`) while `regionOrder` uses `baseRegions`.
+- **DLC and post-game areas** are ordinary zones: Galar's Isle of Armor and
+  Crown Tundra, Paldea's Kitakami and the Terarium, and Kanto's Sevii Islands
+  are `type: 'zone'` hubs inside their parent region (the generator's `ZONES`,
+  plus the hand-authored Sevii fold), just like Galar's Wild Area. Their hub
+  keeps a `championDefeated` gate on the parent's Champion, so they open
+  post-game, and their locations carry the parent's `region`. No `isDlc`
+  subregions remain: `tools/revert-dlc-regions.cjs` folded the Galar/Paldea DLC
+  back and `tools/fold-sevii-into-kanto.cjs` folded the Sevii Islands, and each
+  base region now has a single Raid Island (the DLC and Sevii legendaries moved
+  into the parent's `raidPool`). The Sevii sub-areas keep their hand-authored
+  positions and the roads *within* each island (so the focused zone view reads
+  as island shapes) but drop the inter-island links. The `isDlc` /
+  `parentRegion` / `dlcParentRegion` machinery (`src/data/gameData.js` and
+  `displayRegionFor` in `town-map.js`) is kept for a future subregion but is
+  unused today.
 - `map-data/<region>.json` locations carry a `region` id; wild routes also
   reference an `encounter-data/<region>.json` bucket via `routeKey`. Generated
   routes carry a `background` (a coarse base scene — grassland / beach /
@@ -828,12 +826,12 @@ One-off scripts used to build the data JSON (not run during dev/build):
   (with Kanto's Moltres returning from the Sevii Islands' raid). Idempotent
   (no-op once no promoted DLC region remains); it also reconciles each base
   region's Raid Island encounter bucket with its `raidPool`.
-- `add-sevii-islands.mjs` — one-off (#28a) that hand-authors Kanto's Sevii
-  Islands as an `isDlc` region under Kanto: a 20-area map and its encounter
-  tables. It originally added a Moltres Raid Island; `revert-dlc-regions.cjs`
-  removed it so Kanto keeps its single raid (Moltres is in Kanto's pool).
-  Idempotent (skips once `sevii-islands` is in `regions.json`); re-run
-  `generate-encounter-index.cjs` afterwards.
+- `fold-sevii-into-kanto.cjs` — one-off data migration that folds Kanto's
+  hand-authored Sevii Islands into a single `sevii-islands` zone on the Kanto
+  map: a `championDefeated`-gated hub whose sub-areas keep their positions and
+  each island's internal roads, with the inter-island links removed. Also drops
+  the `sevii-islands` region so the region-list helpers no longer carry it.
+  Idempotent (no-op once the hub exists / the region is gone).
 - `make-whirl-islands-zone.mjs` — one-off (#36/#28b) that splits Johto's
   Whirl Islands route node into a `type: 'zone'` hub with an Entrance and four
   cave sub-areas, re-homing the encounter table. Idempotent; run

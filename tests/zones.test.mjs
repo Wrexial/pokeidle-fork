@@ -91,9 +91,36 @@ test('the Galar DLC areas are post-game zones in Galar, gated on the Galar Champ
 })
 
 test('DLC regions never cost an Unlock Token', () => {
+  // There are currently no `isDlc` subregions (the Galar/Paldea DLC and the
+  // Sevii Islands are ordinary zones now); if one is ever added it must not be
+  // counted among the regions an Unlock Token opens.
   const dlcIds = regions.filter((region) => region.isDlc).map((region) => region.id)
-  assert.deepEqual(dlcIds, ['sevii-islands'])
+  assert.deepEqual(dlcIds, [])
   for (const id of dlcIds) assert.ok(!baseRegions.some((region) => region.id === id))
+})
+
+test('Kanto\u2019s Sevii Islands are a zone on the Kanto map', () => {
+  const hub = mapData['sevii-islands']
+  assert.ok(hub, 'the Sevii hub exists')
+  assert.equal(hub.type, 'zone')
+  assert.equal(hub.region, 'kanto')
+  assert.deepEqual(hub.unlock, { championDefeated: 'kanto' })
+  assert.ok(hub.subAreas.length >= 20, 'the hub groups every island area')
+  assert.ok(!regions.some((region) => region.id === 'sevii-islands'), 'not a separate region')
+  assert.ok(!mapData['sevii-islands-raid'], 'no Raid Island of its own')
+  // The port enters the hub, and the hub the first island.
+  assert.ok(mapData['vermilionCity'].connections.includes('sevii-islands'))
+  assert.ok(hub.connections.includes('sevii-islands-one-island'))
+  // Each island keeps its internal roads; the long inter-island links are gone
+  // so the focused zone view reads as island shapes.
+  assert.ok(
+    mapData['sevii-islands-three-island'].connections.includes('sevii-islands-bond-bridge'),
+    'an island road is kept'
+  )
+  assert.ok(
+    !mapData['sevii-islands-one-island'].connections.includes('sevii-islands-two-island'),
+    'the One Island -> Two Island link is removed'
+  )
 })
 
 test('DLC subregions group under their parent and link onto its map', () => {

@@ -23,9 +23,6 @@ const REGION_IDS = [
   'alola',
   'galar',
   'paldea',
-  // Kanto's hand-authored post-game subregion. The Galar/Paldea DLC are
-  // ordinary zones inside their parent region now, not separate files.
-  'sevii-islands',
 ]
 
 /**

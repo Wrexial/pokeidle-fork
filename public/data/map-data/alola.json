@@ -881,9 +881,7 @@
   "description": "A mysterious island where Alola's rarest Pokemon dwell.",
   "routeKey": "alola-raid",
   "background": "/backgrounds/cave.png",
-  "connections": [
-   "alola-poni-island"
-  ],
+  "connections": [],
   "unlock": {
    "battlesAtLocation": [
     {
@@ -908,9 +906,7 @@
   "type": "town",
   "region": "alola",
   "description": "The Alola Pokémon League.",
-  "connections": [
-   "alola-poni-island"
-  ],
+  "connections": [],
   "unlock": {
    "battlesAtLocation": [
     {
@@ -1190,8 +1186,6 @@
   "background": "/backgrounds/grassland.png",
   "connections": [
    "alola-po-town",
-   "alola-raid",
-   "alola-league",
    "alola-route-16",
    "alola-route-17",
    "alola-vast-poni-canyon",

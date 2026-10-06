@@ -99,6 +99,15 @@ test('DLC regions never cost an Unlock Token', () => {
   for (const id of dlcIds) assert.ok(!baseRegions.some((region) => region.id === id))
 })
 
+test('Alola\u2019s islands stand alone on the Town Map', () => {
+  // The long roads from Poni Island out to the Alola League and the Raid
+  // Island crossed the water between islands; the Town Map drops them so each
+  // island reads as its own landmass (travel is direct either way).
+  const poni = mapData['alola-poni-island']
+  assert.ok(!poni.connections.includes('alola-league'), 'no Poni -> League road')
+  assert.ok(!poni.connections.includes('alola-raid'), 'no Poni -> Raid Island road')
+})
+
 test('Kanto\u2019s Sevii Islands are a zone on the Kanto map', () => {
   const hub = mapData['sevii-islands']
   assert.ok(hub, 'the Sevii hub exists')

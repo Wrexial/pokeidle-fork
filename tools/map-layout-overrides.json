@@ -1352,5 +1352,20 @@
         "y": 49.5
       }
     }
+  },
+  "alola": {
+    "positions": {},
+    "roads": {
+      "remove": [
+        [
+          "alola-league",
+          "alola-poni-island"
+        ],
+        [
+          "alola-raid",
+          "alola-poni-island"
+        ]
+      ]
+    }
   }
 }

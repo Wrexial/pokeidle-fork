@@ -116,7 +116,16 @@ const moveEffectText = {
   powerTrick: 'Swaps the user\u2019s Attack and Defense stats.',
   psychUp: 'Copies the target\u2019s stat changes onto the user.',
   selfCureStatus: 'Cures the user\u2019s status condition.',
+  conversion2: 'Changes the user\u2019s type to resist the target\u2019s last move.',
+  courtChange: 'Swaps the entry hazards on both sides of the field.',
+  foresight: 'Identifies the target: its evasion is ignored and Normal / Fighting moves can hit it.',
+  luckyChant: 'Prevents critical hits against the user\u2019s side for five turns.',
+  powerShift: 'Swaps the user\u2019s Attack and Sp. Atk stats.',
+  stockpile: 'Stores power (up to three) for Spit Up or Swallow.',
+  swallow: 'Heals the user based on its Stockpile count.',
+  transform: 'Copies the target\u2019s types and stats.',
   screen: 'Sets up a barrier that halves damage for five turns.',
+  removeScreens: 'Blows away the foe\u2019s screens.',
   torment: 'Torments the target so it cannot repeat a move.',
   magnetRise: 'Levitates the user, granting immunity to Ground moves for five turns.',
   conversion: 'Changes the user\u2019s type to that of its first move.',
@@ -224,6 +233,36 @@ export const callingMoveNotes = {
 }
 
 /**
+ * Notes for moves the engine handles by conversion (Max / G-Max / Z-Moves)
+ * rather than through a plain `effect`.
+ * @type {Record<string, string>}
+ */
+export const specialMoveNotes = {
+  breakneckBlitz: 'Z-Move: a devastating Normal-type attack.',
+  infernoOverdrive: 'Z-Move: a devastating Fire-type attack.',
+  hydroVortex: 'Z-Move: a devastating Water-type attack.',
+  gigavoltHavoc: 'Z-Move: a devastating Electric-type attack.',
+  bloomDoom: 'Z-Move: a devastating Grass-type attack.',
+  subzeroSlammer: 'Z-Move: a devastating Ice-type attack.',
+  allOutPummeling: 'Z-Move: a devastating Fighting-type attack.',
+  acidDownpour: 'Z-Move: a devastating Poison-type attack.',
+  tectonicRage: 'Z-Move: a devastating Ground-type attack.',
+  supersonicSkystrike: 'Z-Move: a devastating Flying-type attack.',
+  shatteredPsyche: 'Z-Move: a devastating Psychic-type attack.',
+  savageSpinOut: 'Z-Move: a devastating Bug-type attack.',
+  continentalCrush: 'Z-Move: a devastating Rock-type attack.',
+  neverEndingNightmare: 'Z-Move: a devastating Ghost-type attack.',
+  devastatingDrake: 'Z-Move: a devastating Dragon-type attack.',
+  blackHoleEclipse: 'Z-Move: a devastating Dark-type attack.',
+  corkscrewCrash: 'Z-Move: a devastating Steel-type attack.',
+  twinkleTackle: 'Z-Move: a devastating Fairy-type attack.',
+  gMaxDepletion: 'G-Max Move: hits hard and drains the foe\u2019s PP.',
+  gMaxGravitas: 'G-Max Move: intensifies gravity for five turns.',
+  gMaxReplenish: 'G-Max Move: may restore a held Berry.',
+  gMaxTerror: 'G-Max Move: prevents the foe from switching out.',
+}
+
+/**
  * Extra explanation for moves whose effect needs more than the generic line.
  * @type {Record<string, string>}
  */
@@ -252,6 +291,8 @@ function describeMoveBase(move) {
   if (callingNote) return callingNote
   const variableNote = variablePowerNotes[move.key ?? '']
   if (variableNote) return variableNote
+  const specialNote = specialMoveNotes[move.key ?? '']
+  if (specialNote) return specialNote
   const chargeNote = chargeMoveNotes[move.key ?? '']
   if (chargeNote && !move.effect) return chargeNote
   // Memento keeps its stat drop but also faints the user.

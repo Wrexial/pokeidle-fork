@@ -437,6 +437,7 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
     if ((pokemon.tailwindTurns ?? 0) > 0) pokemon.tailwindTurns -= 1
     if ((pokemon.healBlockTurns ?? 0) > 0) pokemon.healBlockTurns -= 1
     if ((pokemon.magnetRiseTurns ?? 0) > 0) pokemon.magnetRiseTurns -= 1
+    if ((pokemon.luckyChantTurns ?? 0) > 0) pokemon.luckyChantTurns -= 1
     if ((pokemon.trickRoomTurns ?? 0) > 0) pokemon.trickRoomTurns -= 1
     if ((pokemon.destinyBondTurns ?? 0) > 0) pokemon.destinyBondTurns -= 1
     if ((pokemon.slowStartTurns ?? 0) > 0) pokemon.slowStartTurns -= 1

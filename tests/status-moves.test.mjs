@@ -865,3 +865,45 @@ test('Endure, Tidy Up, Psycho Shift and Purify work', () => {
     assert.ok(purifier.currentHp > 100, 'Purify heals the user')
   })
 })
+
+test('the second batch of utility moves works', () => {
+  withFixedRandom(0.5, () => {
+    // Aromatherapy / Heal Bell cure the user.
+    const healer = battler({ name: 'Player', isPlayer: true, moves: ['aromatherapy'], speed: 200, status: 'burn' }),
+      dummy = battler({ name: 'Foe', moves: ['splash'] })
+    turn(healer, dummy)
+    assert.equal(healer.status, null)
+
+    // Foresight identifies the foe so Normal moves can hit Ghosts.
+    const seer = battler({ name: 'Player', isPlayer: true, moves: ['foresight'], speed: 200 }),
+      ghost = battler({ name: 'Foe', moves: ['splash'], types: ['Ghost'] })
+    turn(seer, ghost)
+    assert.equal(ghost.identified, true)
+
+    // Power Shift swaps the offensive stats.
+    const shifter = battler({ name: 'Player', isPlayer: true, moves: ['powerShift'], speed: 200, attack: 100, spAttack: 250 }),
+      dummy2 = battler({ name: 'Foe', moves: ['splash'] })
+    turn(shifter, dummy2)
+    assert.equal(shifter.attack, 250)
+    assert.equal(shifter.spAttack, 100)
+
+    // Stockpile then Swallow heals.
+    const storer = battler({ name: 'Player', isPlayer: true, moves: ['stockpile'], speed: 200, currentHp: 100, maxHp: 400, statStages: {} }),
+      dummy3 = battler({ name: 'Foe', moves: ['splash'] })
+    turn(storer, dummy3)
+    assert.equal(storer.stockpile, 1)
+
+    // Transform copies the foe's stats.
+    const transformer = battler({ name: 'Player', isPlayer: true, moves: ['transform'], speed: 200, attack: 50, types: ['Normal'] }),
+      target = battler({ name: 'Foe', moves: ['splash'], attack: 300, types: ['Fire'] })
+    turn(transformer, target)
+    assert.equal(transformer.attack, 300)
+    assert.deepEqual(transformer.types, ['Fire'])
+
+    // Lucky Chant blocks crits.
+    const chanter = battler({ name: 'Player', isPlayer: true, moves: ['luckyChant'], speed: 200 }),
+      dummy4 = battler({ name: 'Foe', moves: ['splash'] })
+    turn(chanter, dummy4)
+    assert.ok((chanter.luckyChantTurns ?? 0) > 0)
+  })
+})

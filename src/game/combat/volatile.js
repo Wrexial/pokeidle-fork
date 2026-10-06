@@ -77,6 +77,10 @@ export function createVolatileState() {
     magnetRiseTurns: 0,
     enduring: !1,
     zMoveUsed: !1,
+    identified: !1,
+    luckyChantTurns: 0,
+    stockpile: 0,
+    tormentTurns: 0,
     cudChewHeal: 0,
     nullifiedMoves: {},
   }
@@ -145,6 +149,10 @@ export function volatileStateFromBattle(pokemon) {
     magnetRiseTurns: pokemon.magnetRiseTurns ?? 0,
     enduring: pokemon.enduring ?? !1,
     zMoveUsed: pokemon.zMoveUsed ?? !1,
+    identified: pokemon.identified ?? !1,
+    luckyChantTurns: pokemon.luckyChantTurns ?? 0,
+    stockpile: pokemon.stockpile ?? 0,
+    tormentTurns: pokemon.tormentTurns ?? 0,
     cudChewHeal: pokemon.cudChewHeal ?? 0,
     nullifiedMoves: pokemon.nullifiedMoves ?? {},
   }

@@ -8,7 +8,7 @@ import { Z_CRYSTAL_TYPE, Z_MOVE_BY_TYPE, Z_STATUS_BOOSTS, Z_STATUS_EFFECTS, zMov
 import { abilityAbsorbsType, abilityAttackMultiplier, abilityAvoidsContact, abilityBlocksMove, abilityBlocksNonSuperEffective, abilityBlocksWind, abilityChangesMoveType, abilityDamageDealtMultiplier, abilityDamageTakenMultiplier, abilityEffectivenessMultiplier, abilityHalvesSuperEffective, abilityHealsFromType, abilityHitsGhost, abilityOf, abilityPreventsStatDrop, abilityPreventsStatus, abilityStatusAccuracyMultiplier, abilitySurvivesAtFullHp, fieldAuraMultiplier, isWindMove, onHitStatBoost, onHpThresholdBoost, onKoBoostStat, ruinDefenseMultiplier, ruinOffenseMultiplier, rivalryDamageMultiplier, stakeoutDamageMultiplier } from '../abilities.js'
 import { AI_SKILL, chooseMoveForBattle } from './ai.js'
 import { changeBattleForm } from './setup.js'
-import { calculateDamage, chance, isSelfTargetedMove, normalizeStatKey } from './damage.js'
+import { calculateDamage, chance, getTypeEffectiveness, isSelfTargetedMove, normalizeStatKey } from './damage.js'
 import { applyEndOfTurn, reportFieldEffects } from './end-of-turn.js'
 import { emptyBattleHazards } from '../hazards.js'
 import { heldChoiceItem, heldDamageMultiplier, heldLifeOrbRecoil, heldStatMultiplier, heldSurvivesAtFullHp, heldTerrainExtenderTurns } from '../held-items.js'
@@ -820,6 +820,19 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       })
       continue
     }
+    // Torment blocks using the same move twice in a row.
+    if (
+      (attack.attacker.tormentTurns ?? 0) > 0 &&
+      attack.attacker.lastMove &&
+      attack.moveId === attack.attacker.lastMove
+    ) {
+      events.push({
+        type: 'status',
+        message: `${attack.attacker.name} can't use the same move twice in a row!`,
+        data: { target: attack.isPlayer ? 'player' : 'enemy' },
+      })
+      continue
+    }
     if (
       attack.attacker.lockedMove &&
       attack.attacker.lockTurnsRemaining !== void 0 &&
@@ -865,9 +878,11 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       attack.defender.protecting &&
       !isSelfTargetedMove(moveDef) &&
       !(
-        (abilityOf(attack.attacker) === 'unseenFist' ||
+        ((abilityOf(attack.attacker) === 'unseenFist' ||
           abilityOf(attack.attacker) === 'piercingDrill') &&
-        moveMakesContact(moveDef)
+          moveMakesContact(moveDef)) ||
+        moveDef.name === 'G-Max One Blow' ||
+        moveDef.name === 'G-Max Rapid Flow'
       )
     ) {
       events.push({
@@ -1107,6 +1122,93 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
             data: { target: attack.isPlayer ? 'player' : 'enemy', hpAfter: healed, hpMax: attack.attacker.maxHp },
           })
         }
+      } else if (moveDef.effect?.type === 'conversion2') {
+        // Conversion 2 picks a type that resists the foe's last move.
+        const lastMove = moveData[attack.defender.lastMove ?? '']
+        if (lastMove) {
+          const TYPE_CHART = [
+            'Normal', 'Fire', 'Water', 'Electric', 'Grass', 'Ice', 'Fighting', 'Poison',
+            'Ground', 'Flying', 'Psychic', 'Bug', 'Rock', 'Ghost', 'Dragon', 'Dark', 'Steel', 'Fairy',
+          ]
+          const resist = TYPE_CHART.find((type) => getTypeEffectiveness(lastMove.type, [type]) < 1)
+          if (resist) {
+            attack.attacker.types = [resist]
+            attack.attacker.typesOverride = [resist]
+            events.push({
+              type: 'status',
+              message: `${attack.attacker.name} changed type to ${resist}!`,
+              data: { target: attack.isPlayer ? 'player' : 'enemy' },
+            })
+          }
+        }
+      } else if (moveDef.effect?.type === 'courtChange') {
+        const swap = activeHazards.player
+        activeHazards.player = activeHazards.enemy
+        activeHazards.enemy = swap
+        events.push({ type: 'status', message: `${attack.attacker.name} swapped the battlefield hazards!` })
+      } else if (moveDef.effect?.type === 'foresight') {
+        attack.defender.identified = !0
+        events.push({
+          type: 'status',
+          message: `${attack.attacker.name} identified ${attack.defender.name}!`,
+          data: { target: attack.isPlayer ? 'enemy' : 'player' },
+        })
+      } else if (moveDef.effect?.type === 'luckyChant') {
+        attack.attacker.luckyChantTurns = 5
+        events.push({
+          type: 'status',
+          message: `${attack.attacker.name} shielded itself from critical hits!`,
+          data: { target: attack.isPlayer ? 'player' : 'enemy' },
+        })
+      } else if (moveDef.effect?.type === 'powerShift') {
+        const attackStat = attack.attacker.attack
+        attack.attacker.attack = attack.attacker.spAttack
+        attack.attacker.spAttack = attackStat
+        events.push({
+          type: 'statChange',
+          message: `${attack.attacker.name} shifted its power!`,
+          data: { target: attack.isPlayer ? 'player' : 'enemy' },
+        })
+      } else if (moveDef.effect?.type === 'stockpile') {
+        attack.attacker.stockpile = Math.min(3, (attack.attacker.stockpile ?? 0) + 1)
+        events.push({
+          type: 'status',
+          message: `${attack.attacker.name} stockpiled ${attack.attacker.stockpile}!`,
+          data: { target: attack.isPlayer ? 'player' : 'enemy' },
+        })
+      } else if (moveDef.effect?.type === 'swallow') {
+        const stock = attack.attacker.stockpile ?? 0
+        if (stock > 0 && !healBlocked(attack.attacker)) {
+          const percent = stock === 1 ? 25 : stock === 2 ? 50 : 100,
+            healed = Math.min(
+              attack.attacker.maxHp,
+              attack.attacker.currentHp + Math.max(1, Math.floor((attack.attacker.maxHp * percent) / 100))
+            )
+          attack.attacker.currentHp = healed
+          attack.attacker.stockpile = 0
+          events.push({
+            type: 'heal',
+            message: `${attack.attacker.name} swallowed its stockpile!`,
+            data: { target: attack.isPlayer ? 'player' : 'enemy', hpAfter: healed, hpMax: attack.attacker.maxHp },
+          })
+        }
+      } else if (moveDef.effect?.type === 'torment') {
+        attack.defender.tormentTurns = 5
+        events.push({
+          type: 'status',
+          message: `${attack.defender.name} was subjected to torment!`,
+          data: { target: attack.isPlayer ? 'enemy' : 'player' },
+        })
+      } else if (moveDef.effect?.type === 'transform') {
+        attack.attacker.types = [...attack.defender.types]
+        attack.attacker.typesOverride = [...attack.defender.types]
+        for (const stat of ['attack', 'defense', 'spAttack', 'spDefense', 'speed'])
+          attack.attacker[stat] = attack.defender[stat]
+        events.push({
+          type: 'status',
+          message: `${attack.attacker.name} transformed into ${attack.defender.name}!`,
+          data: { target: attack.isPlayer ? 'player' : 'enemy' },
+        })
       } else if (
         moveDef.effect?.type === 'status' &&
         (moveDef.effect.chance === void 0 ||
@@ -1800,7 +1902,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     if ((attack.attacker.lockOnTurns ?? 0) > 0) attack.attacker.lockOnTurns = 0
     // Scrappy and Mind's Eye let Normal and Fighting moves hit Ghost-types.
     const defenderTypesForMove =
-      abilityHitsGhost(attack.attacker) &&
+      (abilityHitsGhost(attack.attacker) || attack.defender.identified) &&
       (effectiveMove.type === 'Normal' || effectiveMove.type === 'Fighting')
         ? attack.defender.types.filter((type) => type !== 'Ghost')
         : attack.defender.types
@@ -1885,7 +1987,8 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         evasionStage,
         deterministic,
         abilityOf(attack.attacker) === 'sniper' ? 2.25 : 2,
-        ['battleArmor', 'shellArmor'].includes(abilityOf(attack.defender) ?? '')
+        ['battleArmor', 'shellArmor'].includes(abilityOf(attack.defender) ?? '') ||
+          (attack.defender.luckyChantTurns ?? 0) > 0
       )
     if (damageResult.effectivenessLabel === 'miss') {
       if (
@@ -1954,7 +2057,8 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           evasionStage,
           deterministic,
           abilityOf(attack.attacker) === 'sniper' ? 2.25 : 2,
-          ['battleArmor', 'shellArmor'].includes(abilityOf(attack.defender) ?? '')
+          ['battleArmor', 'shellArmor'].includes(abilityOf(attack.defender) ?? '') ||
+            (attack.defender.luckyChantTurns ?? 0) > 0
         )
         totalDamage += hitResult.damage
         anyCrit = anyCrit || hitResult.isCrit
@@ -2199,6 +2303,16 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
             message: `${attack.defender.name} was subjected to torment!`,
             data: { target: attack.isPlayer ? 'enemy' : 'player' },
           })
+          break
+        case 'removeScreens':
+          if (attack.defender.screens) {
+            attack.defender.screens = { reflect: 0, lightScreen: 0 }
+            events.push({
+              type: 'status',
+              message: `${attack.attacker.name} blew away the barriers!`,
+              data: { target: attack.isPlayer ? 'enemy' : 'player' },
+            })
+          }
           break
         case 'recoil': {
           // Rock Head ignores recoil damage.

@@ -334,6 +334,14 @@ type VolatileState = {
   enduring?: boolean
   /** The holder has spent its one Z-Move this battle. */
   zMoveUsed?: boolean
+  /** The foe is identified (Foresight / Odor Sleuth / Miracle Eye). */
+  identified?: boolean
+  /** Turns of Lucky Chant left (no critical hits taken). */
+  luckyChantTurns?: number
+  /** Stockpile count (0-3) for Stockpile / Spit Up / Swallow. */
+  stockpile?: number
+  /** Turns of Torment left (cannot repeat the last move). */
+  tormentTurns?: number
   /** Leaf Guard is active because the sun is shining this turn. */
   leafGuardActive?: boolean
   /** Pending Cud Chew heal (the berry eaten last turn). */

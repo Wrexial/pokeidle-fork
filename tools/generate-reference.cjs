@@ -20,6 +20,7 @@ const {
   chargeMoveNotes,
   describeMove,
   handledMoveEffectTypes,
+  specialMoveNotes,
   variablePowerNotes,
 } = require('../src/game/move-info.js')
 
@@ -53,7 +54,7 @@ async function main() {
     const effect = move.effect
     const hasField = !!(move.protect || move.screen || move.multiHit || move.critStage)
     let status
-    let text = variablePowerNotes[key] ?? chargeMoveNotes[key] ?? callingMoveNotes[key] ?? null
+    let text = variablePowerNotes[key] ?? chargeMoveNotes[key] ?? callingMoveNotes[key] ?? specialMoveNotes[key] ?? null
     if (text) {
       // Variable-power / two-turn moves carry no `effect`; the engine handles
       // them specially.

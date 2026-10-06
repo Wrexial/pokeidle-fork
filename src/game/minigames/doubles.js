@@ -171,6 +171,61 @@ export function runDoublesRound(allies, foes, options = {}) {
           (b.action?.speed ?? 0) - (a.action?.speed ?? 0)
       )
 
+  // Redirecting moves (Follow Me / Rage Powder / Spotlight) pull the foes'
+  // single-target moves onto the user. Propeller Tail / Stalwart ignore it.
+  for (const isAlly of [!0, !1]) {
+    const redirector = actions.find(
+      (entry) =>
+        entry.allies === isAlly &&
+        entry.action &&
+        ['followMe', 'ragePowder', 'spotlight'].includes(entry.action.moveId) &&
+        alive(entry.attacker)
+    )
+    if (!redirector) continue
+    for (const entry of actions) {
+      if (entry.allies === isAlly || !entry.action) continue
+      if (entry.attacker.ability === 'propellerTail' || entry.attacker.ability === 'stalwart') continue
+      entry.action.target = redirector.attacker
+    }
+  }
+  // Helping Hand boosts the ally's next move by 50%; After You / Quash reorder.
+  for (const entry of actions) {
+    const action = entry.action
+    if (!action) continue
+    const id = action.moveId
+    if (id === 'helpingHand' && action.target && alive(action.target))
+      action.target.helpingHand = !0
+    else if (id === 'afterYou' && action.target) action.target.actedNext = !0
+    else if (id === 'quash' && action.target) action.target.quashed = !0
+  }
+  actions.sort(
+    (a, b) =>
+      (b.attacker.actedNext ? 1 : 0) - (a.attacker.actedNext ? 1 : 0) ||
+      (a.attacker.quashed ? 1 : 0) - (b.attacker.quashed ? 1 : 0) ||
+      (b.action?.priority ?? 0) - (a.action?.priority ?? 0) ||
+      (b.action?.speed ?? 0) - (a.action?.speed ?? 0)
+  )
+  // Round-start ally abilities: Hospitality heals, Costar copies boosts,
+  // Curious Medicine clears a partner's stat drops.
+  for (const side of [allies, foes]) {
+    for (const battler of side) {
+      if (!alive(battler)) continue
+      const ally = side.find((other) => other !== battler && alive(other))
+      if (battler.ability === 'hospitality' && ally && !battler.hospitalityDone) {
+        battler.hospitalityDone = !0
+        if (ally.currentHp < ally.maxHp) {
+          const healed = Math.min(ally.maxHp, ally.currentHp + Math.max(1, Math.floor(ally.maxHp / 4)))
+          ally.currentHp = healed
+          log.push(`${battler.name}'s Hospitality healed ${ally.name}!`)
+        }
+      }
+      if (battler.ability === 'costar' && ally?.statStages)
+        battler.statStages = { ...(battler.statStages ?? {}), ...ally.statStages }
+      if (battler.ability === 'curiousMedicine' && ally?.statStages)
+        for (const key of Object.keys(ally.statStages))
+          if (ally.statStages[key] < 0) ally.statStages[key] = 0
+    }
+  }
   // Healer can cure an ally's status each round (30%).
   for (const battler of [...allies, ...foes]) {
     if (!alive(battler) || battler.ability !== 'healer') continue
@@ -229,10 +284,23 @@ export function runDoublesRound(allies, foes, options = {}) {
       const attackerSide = isAlly ? allies : foes,
         targetSide = isAlly ? foes : allies,
         attackBoost =
-          hasAllyAbility(attacker, attackerSide, 'battery') ||
+          (hasAllyAbility(attacker, attackerSide, 'battery') ||
           hasAllyAbility(attacker, attackerSide, 'powerSpot')
             ? 1.3
-            : 1,
+            : 1) *
+          (attacker.helpingHand ? 1.5 : 1) *
+          (move.type === 'Steel' && hasAllyAbility(attacker, attackerSide, 'steelySpirit')
+            ? 1.5
+            : 1) *
+          ((attacker.ability === 'plus' || attacker.ability === 'minus') &&
+          attackerSide.some(
+            (other) =>
+              other !== attacker &&
+              alive(other) &&
+              (other.ability === 'plus' || other.ability === 'minus')
+          )
+            ? 1.5
+            : 1),
         guard = hasAllyAbility(target, targetSide, 'friendGuard') ? 4 / 3 : 1,
         saved = {
           attack: attacker.attack,
@@ -292,9 +360,14 @@ export function runDoublesRound(allies, foes, options = {}) {
       attacker.spAttack = saved.spAttack
       target.defense = saved.defense
       target.spDefense = saved.spDefense
+      attacker.helpingHand = !1
       events.push(...turnEvents)
       for (const event of turnEvents) if (event.message && event.type === 'damage') log.push(event.message)
     }
+  }
+  for (const battler of [...allies, ...foes]) {
+    battler.actedNext = !1
+    battler.quashed = !1
   }
   // Residual damage (status, Leftovers, Leech Seed, screens) once per round.
   for (const [ally, foe] of [[allies[0], foes[0]], [allies[1], foes[1]]])

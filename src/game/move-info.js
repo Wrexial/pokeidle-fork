@@ -270,6 +270,12 @@ export const specialMoveNotes = {
   gMaxGravitas: 'G-Max Move: intensifies gravity for five turns.',
   gMaxReplenish: 'G-Max Move: may restore a held Berry.',
   gMaxTerror: 'G-Max Move: prevents the foe from switching out.',
+  helpingHand: 'In Double Battles, powers up an ally\u2019s next move by 50%.',
+  followMe: 'In Double Battles, pulls the foes\u2019 single-target moves onto the user.',
+  ragePowder: 'In Double Battles, pulls the foes\u2019 single-target moves onto the user.',
+  spotlight: 'In Double Battles, pulls the foes\u2019 single-target moves onto the target.',
+  afterYou: 'In Double Battles, makes the target ally act next.',
+  quash: 'In Double Battles, makes the target act last.',
 }
 
 /**

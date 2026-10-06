@@ -1151,6 +1151,38 @@ export const abilityInfo = {
   'gulpMissile': {
     'group': 'onhit',
     'text': 'Surf or Dive makes it swallow a catch; being hit spits it back for 25% damage plus a Defense drop (Gulping) or paralysis (Gorging).'
+  },
+  'hospitality': {
+    'group': 'entry',
+    'text': 'In Double Battles, heals an ally when it enters.'
+  },
+  'costar': {
+    'group': 'entry',
+    'text': 'In Double Battles, copies an ally\u2019s stat boosts on entry.'
+  },
+  'curiousMedicine': {
+    'group': 'entry',
+    'text': 'In Double Battles, clears an ally\u2019s stat drops on entry.'
+  },
+  'steelySpirit': {
+    'group': 'offense',
+    'text': 'In Double Battles, boosts an ally\u2019s Steel-type moves by 50%.'
+  },
+  'plus': {
+    'group': 'offense',
+    'text': 'In Double Battles, boosts Sp. Atk by 50% while an ally has Plus or Minus.'
+  },
+  'minus': {
+    'group': 'offense',
+    'text': 'In Double Battles, boosts Sp. Atk by 50% while an ally has Plus or Minus.'
+  },
+  'propellerTail': {
+    'group': 'misc',
+    'text': 'In Double Battles, ignores redirection and hits its chosen target.'
+  },
+  'stalwart': {
+    'group': 'misc',
+    'text': 'In Double Battles, ignores redirection and hits its chosen target.'
   }
 }
 

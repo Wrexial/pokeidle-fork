@@ -38,7 +38,7 @@ export const CHANGELOG = [
         {
           heading: 'Minigames',
           items: [
-            'The Battle Maison in Kalos runs double battles now: two of your Pokemon face two foes at once, every battler picks its own target, spread moves hit both foes, and a fainted Pokemon is swapped for the next one on the bench. Each bout you win pays a bigger prize, and the ally abilities finally matter: Battery and Power Spot power up a partner, Friend Guard softens hits on it, and Healer can cure it',
+            'The Battle Maison in Kalos runs double battles now: two of your Pokemon face two foes at once, every battler picks its own target, spread moves hit both foes, and a fainted Pokemon is swapped for the next one on the bench. Each bout you win pays a bigger prize, and the ally abilities finally matter: Battery and Power Spot power up a partner, Friend Guard softens hits on it, and Healer can cure it. The Maison\u2019s ally play is deeper now too: Helping Hand, Follow Me, Rage Powder, Spotlight, After You and Quash join the move pool, and Hospitality, Costar, Curious Medicine, Steely Spirit, Plus / Minus and Propeller Tail / Stalwart all work',
           ],
         },
         {

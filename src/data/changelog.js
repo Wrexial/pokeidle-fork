@@ -36,6 +36,7 @@ export const CHANGELOG = [
             'Two out-of-battle abilities came with it: Illuminate draws out 50% more wild item drops, and a wild Illusion user disguises itself as your last party member until it takes a hit',
             'The flavour moves are accounted for too: Splash, Celebrate and Hold Hands are acknowledged as the no-op moves they are, Happy Hour doubles the prize money from the battle, and Fairy Lock seals the field so nobody can switch out on the next turn',
             'The move-copy and item-lock moves work now: Mimic and Sketch copy the foe\u2019s last move into your moveset (Sketch permanently), Snatch steals the foe\u2019s next status move and uses it instead, and Magic Room disables every held item for five turns. In the Battle Maison, Ally Switch swaps places with your ally to redirect attacks, and Instruct makes an ally repeat its last move',
+            'Arceus\u2019s Multitype and Silvally\u2019s RKS System work now \u2014 and they reuse the type-boosting items you already own as their plates: give Arceus a Charcoal and it becomes Fire-type, Mystic Water makes it Water, and so on (Steel and Fairy use the Iron and Pixie Plates). Those items still power up the matching type as before',
           ],
         },
         {

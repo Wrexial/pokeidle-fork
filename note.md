@@ -6,40 +6,38 @@ inert and what each item needs. **We will pick these up later.**
 
 ## Where we are
 
-- **Moves:** 934 total, **3 still inert** — and all three are the same blocker.
-- **Abilities:** 313 total, **3 still inert** — two of them the same blocker.
+- **Moves:** 934 total, **3 still inert**.
+- **Abilities:** 313 total, **1 still inert**.
 - `public/reference.html` (generated) marks the same items as "Not implemented";
   it is the living source of truth for this list.
-- `npm test` (927), `npm run typecheck`, `npm run validate` and `npm run build`
+- `npm test` (928), `npm run typecheck`, `npm run validate` and `npm run build`
   all pass.
 
 Everything else is done: the mid-battle switch system, the Battle Maison
 doubles niches, the out-of-battle abilities (Illuminate / Illusion), the five
-flavour moves, and the move-copy / item-lock moves (Mimic, Sketch, Snatch,
-Magic Room) plus Ally Switch / Instruct.
+flavour moves, the move-copy / item-lock moves (Mimic, Sketch, Snatch,
+Magic Room), Ally Switch / Instruct, and Multitype / RKS System (which reuse
+the existing type-boosting items as plates).
 
-## The last six, all PP or item-driven
+## The only thing left: PP (4 entries)
 
-### Needs a PP system (4)
-`Spite`, `Grudge`, `Imprison` (moves) and `Pressure` (ability).
-- All four interact with PP — reduce it / disable the move on KO / block shared
-  moves / double the foe's PP usage.
-- The engine does not track PP, so they cannot do anything yet.
-- This is the single remaining *system* worth adding. It touches
-  `resolveBattleTurn` (per-move PP on the battler) and the reducer (persist PP
-  in the party / restore on heal / refill on switching in and healing).
-- Once PP exists, these four can be one small follow-up.
+- **Moves:** `Spite`, `Grudge`, `Imprison`.
+- **Ability:** `Pressure`.
 
-### Needs item-driven types (2)
-`Multitype` (Arceus) and `RKS System` (Silvally).
-- The holder's type follows its held plate / memory. Only `ironPlate` and
-  `pixiePlate` exist as items today, so the other 16 plates and all the
-  memories would need adding (`src/data/items.js`) plus a type-from-item
-  resolution in `createBattlePokemon` / `turn.js`.
-- `Multitype` / `RKS System` are not registered in `ability-info.js` yet, so
-  they still show as inert on the reference page. Once the plates / memories
-  exist, add the type lookup and register them (the engine cross-check in
-  `generate-reference.cjs` will confirm it found them).
+All four interact with PP — reduce it / disable the move on KO / block shared
+moves / double the foe's PP usage. The engine does not track PP, so they cannot
+do anything yet.
+
+Adding PP is the single change that closes the whole sweep. It touches:
+
+- `resolveBattleTurn` (`src/game/combat/turn.js`) — per-move PP on the battler,
+  decremented on use, checked before selecting a move (a move at 0 PP is
+  skipped). `Pressure` doubles the enemy's PP cost; `Spite` removes PP;
+  `Grudge` empties the move on KO; `Imprison` blocks moves the user also knows.
+- The save/party shape (`src/types.d.ts`, `src/game/save.js`) to persist PP per
+  move, and the reducer (`src/game/reducer/…`) to refill on heal / switch-in.
+- `src/game/move-info.js` / `src/data/ability-info.js` to describe them, and
+  `tools/generate-reference.cjs` will pick them up automatically.
 
 ## How to add one (for when we return to this)
 
@@ -79,6 +77,12 @@ These live in the wild-win handler in `src/game/reducer/battle/events.js`
 (Pickup, Honey Gather, Illuminate's drop multiplier). Illusion's disguise is
 set in `startEncounter` and broken on the first damaging hit in `consumeEvent`;
 the battle scene renders `enemyPokemon.disguisedAs`.
+
+### Item-driven types
+`Multitype` / `RKS System` read `heldItemBoostType` (`src/game/held-items.js`)
+at the top of each turn, next to Forecast / Mimicry in `turn.js`. The mapping
+is the inverted `TYPE_BOOST_ITEM` table, so the existing type boosters double
+as plates. Add a new "plate" by adding its type to `TYPE_BOOST_ITEM`.
 
 ## Reference
 

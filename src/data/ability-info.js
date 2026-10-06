@@ -1247,6 +1247,14 @@ export const abilityInfo = {
   'illusion': {
     'group': 'misc',
     'text': 'A wild user disguises itself as your last party member until it is hit.'
+  },
+  'multitype': {
+    'group': 'form',
+    'text': 'Arceus takes the type of the type-boosting item it holds (Charcoal makes it Fire, and so on).'
+  },
+  'rksSystem': {
+    'group': 'form',
+    'text': 'Silvally takes the type of the type-boosting item it holds (Charcoal makes it Fire, and so on).'
   }
 }
 

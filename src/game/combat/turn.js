@@ -11,7 +11,7 @@ import { changeBattleForm } from './setup.js'
 import { calculateDamage, chance, getTypeEffectiveness, isSelfTargetedMove, normalizeStatKey } from './damage.js'
 import { applyEndOfTurn, reportFieldEffects } from './end-of-turn.js'
 import { emptyBattleHazards } from '../hazards.js'
-import { heldBerryHeal, heldChoiceItem, heldDamageMultiplier, heldLifeOrbRecoil, heldStatMultiplier, heldSurvivesAtFullHp, heldTerrainExtenderTurns } from '../held-items.js'
+import { heldBerryHeal, heldChoiceItem, heldDamageMultiplier, heldItemBoostType, heldLifeOrbRecoil, heldStatMultiplier, heldSurvivesAtFullHp, heldTerrainExtenderTurns } from '../held-items.js'
 import { canEvolveFurther } from '../pokemon.js'
 import { VARIABLE_POWER_MOVES, withVariablePower } from './variable-power.js'
 import { CHARGE_MOVES, hitsSemiInvulnerable } from './charge-moves.js'
@@ -676,6 +676,13 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         misty: 'Fairy',
         psychic: 'Psychic',
       })[activeTerrain?.type ?? '']
+      if (type) {
+        mon.types = [type]
+        mon.typesOverride = [type]
+      }
+    } else if (ability === 'multitype' || ability === 'rksSystem') {
+      // Arceus / Silvally take the type of the type-boosting item they hold.
+      const type = heldItemBoostType(mon.heldItem)
       if (type) {
         mon.types = [type]
         mon.typesOverride = [type]

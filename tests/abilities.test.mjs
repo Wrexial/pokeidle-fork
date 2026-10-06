@@ -1769,3 +1769,36 @@ test('Fire Mane, Aura Guard and Mega Sol modify the right hits', () => {
   assert.equal(abilityDamageDealtMultiplier(battler({ ability: 'megaSol' }), moveData.flamethrower), 1.5)
   assert.equal(abilityDamageDealtMultiplier(battler({ ability: 'megaSol' }), moveData.waterGun), 0.5)
 })
+
+test('Multitype and RKS System take the type of a type-boosting item', () => {
+  const typeFor = (
+    /** @type {string} */ speciesKey,
+    /** @type {string} */ ability,
+    /** @type {any} */ heldItem
+  ) => {
+    const mon = battler({
+        name: 'Mon',
+        isPlayer: true,
+        speciesKey,
+        ability,
+        heldItem,
+        moves: ['splash'],
+        types: ['Normal'],
+      }),
+      enemy = battler({ name: 'Foe', moves: ['splash'] })
+    resolveBattleTurn(mon, enemy, false)
+    return mon.types
+  }
+  assert.deepEqual(typeFor('arceus', 'multitype', 'charcoal'), ['Fire'], 'Arceus matches Charcoal')
+  assert.deepEqual(typeFor('silvally', 'rksSystem', 'mysticWater'), ['Water'], 'Silvally matches Mystic Water')
+  assert.deepEqual(
+    typeFor('arceus', 'multitype', 'sitrusBerry'),
+    ['Normal'],
+    'a non-booster leaves the type alone'
+  )
+  assert.deepEqual(
+    typeFor('pidgey', 'overgrow', 'charcoal'),
+    ['Normal'],
+    'only Multitype / RKS System read the item'
+  )
+})

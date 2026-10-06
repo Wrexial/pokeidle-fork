@@ -37,6 +37,25 @@ const TYPE_BOOST_ITEM = {
 
 const TYPE_BOOST_ITEMS = [...new Set(Object.values(TYPE_BOOST_ITEM))]
 
+/**
+ * Type-boosting item -> the type it stands in for. Multitype (Arceus) and RKS
+ * System (Silvally) reuse these as their plates / memories rather than adding
+ * a whole separate item set.
+ * @type {Record<string, string>}
+ */
+const BOOST_ITEM_TYPE = Object.fromEntries(
+  Object.entries(TYPE_BOOST_ITEM).map(([type, item]) => [item, type])
+)
+
+/**
+ * The type a held type-boosting item stands in for, or null.
+ * @param {string | null | undefined} itemId
+ * @returns {string | null}
+ */
+export function heldItemBoostType(itemId) {
+  return itemId ? (BOOST_ITEM_TYPE[itemId] ?? null) : null
+}
+
 /** @type {string[]} */
 export const WILD_HELD_ITEMS = [...WILD_BERRIES, ...TYPE_BOOST_ITEMS]
 

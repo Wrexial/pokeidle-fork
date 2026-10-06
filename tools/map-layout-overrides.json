@@ -554,6 +554,86 @@
       "safariZone": {
         "x": 46,
         "y": 65.5
+      },
+      "sevii-islands-one-island": {
+        "x": 74,
+        "y": 80
+      },
+      "sevii-islands-kindle-road": {
+        "x": 80,
+        "y": 77
+      },
+      "sevii-islands-mt-ember": {
+        "x": 85,
+        "y": 72
+      },
+      "sevii-islands-two-island": {
+        "x": 64,
+        "y": 86
+      },
+      "sevii-islands-three-island": {
+        "x": 62,
+        "y": 72
+      },
+      "sevii-islands-bond-bridge": {
+        "x": 56,
+        "y": 68
+      },
+      "sevii-islands-berry-forest": {
+        "x": 50,
+        "y": 74
+      },
+      "sevii-islands-four-island": {
+        "x": 48,
+        "y": 84
+      },
+      "sevii-islands-icefall-cave": {
+        "x": 42,
+        "y": 88
+      },
+      "sevii-islands-five-island": {
+        "x": 40,
+        "y": 66
+      },
+      "sevii-islands-five-isle-meadow": {
+        "x": 34,
+        "y": 72
+      },
+      "sevii-islands-memorial-pillar": {
+        "x": 28,
+        "y": 78
+      },
+      "sevii-islands-lost-cave": {
+        "x": 42,
+        "y": 76
+      },
+      "sevii-islands-six-island": {
+        "x": 26,
+        "y": 56
+      },
+      "sevii-islands-pattern-bush": {
+        "x": 20,
+        "y": 62
+      },
+      "sevii-islands-ruin-valley": {
+        "x": 14,
+        "y": 56
+      },
+      "sevii-islands-dotted-hole": {
+        "x": 8,
+        "y": 62
+      },
+      "sevii-islands-seven-island": {
+        "x": 20,
+        "y": 34
+      },
+      "sevii-islands-sevault-canyon": {
+        "x": 14,
+        "y": 28
+      },
+      "sevii-islands-tanoby-ruins": {
+        "x": 8,
+        "y": 34
       }
     }
   },
@@ -1354,7 +1434,12 @@
     }
   },
   "alola": {
-    "positions": {},
+    "positions": {
+      "alola-league": {
+        "x": 76,
+        "y": 52
+      }
+    },
     "roads": {
       "remove": [
         [

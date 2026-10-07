@@ -11,7 +11,7 @@ installGameData()
 // @ts-ignore -- the Node helper's window stub does not declare `paths`.
 window.gameDataInjector.paths = ['/data/pokemon-species.json', '/data/regions.json']
 
-const { OFFLINE_CACHE, collectAppShellAssets, collectOfflineAssets, offlineAvailable } =
+const { OFFLINE_CACHE, collectAppShellAssets, collectOfflineAssets, estimateOfflineBytes, offlineAvailable } =
   await import('../src/game/offline.js')
 const { pokemonSpecies } = await import('../src/data/gameData.js')
 
@@ -82,4 +82,20 @@ test('every enumerated item, trainer and backdrop file exists on disk', () => {
     )
     .filter((url) => !existsSync(publicPath(url)))
   assert.deepEqual(missing, [], 'manifest points at missing files')
+})
+
+test('estimateOfflineBytes gives a plausible rough cache size', () => {
+  assert.equal(estimateOfflineBytes([]), 0)
+  const megabytes = estimateOfflineBytes() / (1024 * 1024)
+  assert.ok(megabytes > 300, `estimate ${megabytes.toFixed(0)} MB is too low`)
+  assert.ok(megabytes < 800, `estimate ${megabytes.toFixed(0)} MB is too high`)
+})
+
+test('estimateOfflineBytes weights categories by their real file sizes', () => {
+  // A backdrop is megabytes, an item icon a couple of KB.
+  const backdrop = estimateOfflineBytes(['/backgrounds/forest.jpeg'])
+  const item = estimateOfflineBytes(['/sprites/items/potion.png'])
+  const animated = estimateOfflineBytes(['/sprites/pokemon/versions/generation-v/black-white/animated/25.gif'])
+  assert.ok(backdrop > animated, 'backdrops should outweigh animated sprites')
+  assert.ok(animated > item, 'animated sprites should outweigh item icons')
 })

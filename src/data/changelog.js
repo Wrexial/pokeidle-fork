@@ -67,7 +67,7 @@ export const CHANGELOG = [
         {
           heading: 'Offline Play',
           items: [
-            'The game works with no internet now: a browser service worker caches the app, and a new Offline Play section in Settings downloads every Pokemon sprite, battle backdrop, item icon and data file in one go (with a progress bar). Once it finishes you can turn off Wi-Fi and keep playing',
+            'The game works with no internet now: a browser service worker caches the app, and a new Offline Play section in Settings shows the rough download size and then fetches every Pokemon sprite, battle backdrop, item icon and data file in one go (with a progress bar). Once it finishes you can turn off Wi-Fi and keep playing',
           ],
         },
         {

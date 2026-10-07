@@ -8,6 +8,7 @@ import {
   clearOfflineAssets,
   collectOfflineAssets,
   downloadOfflineAssets,
+  estimateOfflineBytes,
   getOfflineSummary,
   offlineAvailable,
   offlineSupported,
@@ -42,9 +43,14 @@ export function OfflinePanel() {
   const [error, setError] = React.useState('')
   /** @type {React.MutableRefObject<AbortController | null>} */
   const abortRef = React.useRef(null)
-  const plannedFiles = React.useMemo(
-    () => (available ? collectOfflineAssets().length : 0),
+  const assets = React.useMemo(
+    () => (available ? collectOfflineAssets() : []),
     [available]
+  )
+  const plannedFiles = assets.length
+  const plannedBytes = React.useMemo(
+    () => (available ? estimateOfflineBytes(assets) : 0),
+    [available, assets]
   )
 
   async function refresh() {
@@ -146,8 +152,9 @@ export function OfflinePanel() {
       jsx('div', { className: 'settings-section-title', children: 'Offline Play' }),
       jsx('p', {
         className: 'settings-hint',
-        children:
-          'Download every Pokemon sprite, battle backdrop, item icon and data file into this browser. After that the game runs with no internet at all.',
+        children: `Download every Pokemon sprite, battle backdrop, item icon and data file into this browser (about ${formatBytes(
+          plannedBytes
+        )}). After that the game runs with no internet at all.`,
       }),
       phase === 'running'
         ? jsxs('div', {
@@ -185,7 +192,9 @@ export function OfflinePanel() {
                 onClick: startDownload,
                 children: downloadedAll
                   ? '↻ Re-check / Update Files'
-                  : `⬇ Download ${plannedFiles.toLocaleString()} Files`,
+                  : `⬇ Download ${plannedFiles.toLocaleString()} Files (≈${formatBytes(
+                      plannedBytes
+                    )})`,
               }),
               summary.count > 0
                 ? jsx('button', {
@@ -211,7 +220,7 @@ export function OfflinePanel() {
             children: `Cached ${summary.count.toLocaleString()} files (${formatBytes(
               summary.bytes
             )})${
-              downloadedAll ? '' : ` of ${plannedFiles.toLocaleString()}`
+              downloadedAll ? '' : ` of ${plannedFiles.toLocaleString()} (≈${formatBytes(plannedBytes)})`
             }.`,
           })
         : null,

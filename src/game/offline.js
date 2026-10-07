@@ -282,6 +282,44 @@ export function collectOfflineAssets() {
 }
 
 /**
+ * Rough per-file byte averages by asset group. The offline set is dominated by
+ * the animated sprites (~80 KB each) and the painted backdrops (~4 MB each), so
+ * a count x average estimate lands within a few percent without probing every
+ * file. Regenerate these if the art pipeline changes noticeably.
+ * @type {Record<string, number>}
+ */
+const AVERAGE_BYTES = {
+  animated: 80 * 1024,
+  pokemon: 2 * 1024,
+  items: 2 * 1024,
+  trainers: 1 * 1024,
+  backgrounds: 4 * 1024 * 1024,
+  shell: 200 * 1024,
+}
+
+/** @param {string} url */
+function offlineAssetGroup(url) {
+  if (url.startsWith('/sprites/pokemon/versions/')) return 'animated'
+  if (url.startsWith('/sprites/pokemon/')) return 'pokemon'
+  if (url.startsWith('/sprites/items/')) return 'items'
+  if (url.startsWith('/sprites/trainers/')) return 'trainers'
+  if (url.startsWith('/backgrounds/')) return 'backgrounds'
+  return 'shell'
+}
+
+/**
+ * A rough size in bytes of the offline cache for a set of asset URLs (defaults
+ * to the full manifest). Used to warn how much data a download will use before
+ * the player starts it.
+ * @param {string[]} [urls]
+ */
+export function estimateOfflineBytes(urls = collectOfflineAssets()) {
+  let total = 0
+  for (const url of urls) total += AVERAGE_BYTES[offlineAssetGroup(url)] ?? AVERAGE_BYTES.shell
+  return total
+}
+
+/**
  * @typedef {Object} OfflineProgress
  * @property {number} total
  * @property {number} done

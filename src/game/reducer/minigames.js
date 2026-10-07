@@ -1,6 +1,6 @@
 // Reducer handlers for minigames actions. Split from game/reducer.js.
 
-import { MATCH3_COST, MEMORY_COST, MUSICAL_COST, PICNIC_COST, POKEBALL_FACTORY_COST, WHACK_COST, BATTLE_ROYAL_COST, DOUBLES_COST, BUG_CONTEST_COST, CONTEST_COST, CURRY_COST, DYNAMAX_ADVENTURES_COST, LIGHTS_OUT_COST, MINING_COST, POKEATHLON_COST, POKE_RADAR_COST, POKESTAR_COST, QUIZ_COST, ROUTE_ACTIVITIES, SAFARI_COST, SLIDING_COST, ICE_SLIDE_COST, VOLTORB_FLIP_COST, GAME_CORNER_PRIZE_GOAL, rollGameCornerPrize, routeActivityIds, minigameIdForPhase } from '../minigames.js'
+import { MATCH3_COST, MEMORY_COST, MUSICAL_COST, PICNIC_COST, POKEBALL_FACTORY_COST, WHACK_COST, BATTLE_ROYAL_COST, DOUBLES_COST, BUG_CONTEST_COST, CONTEST_COST, CURRY_COST, DYNAMAX_ADVENTURES_COST, LIGHTS_OUT_COST, MINING_COST, POKEATHLON_COST, POKE_RADAR_COST, POKESTAR_COST, QUIZ_COST, ROUTE_ACTIVITIES, SAFARI_COST, SLIDING_COST, ICE_SLIDE_COST, VOLTORB_FLIP_COST, MANTINE_SURF_COST, ROTOM_RALLY_COST, OGRE_OUSTIN_COST, GAME_CORNER_PRIZE_GOAL, rollGameCornerPrize, routeActivityIds, minigameIdForPhase } from '../minigames.js'
 import { minigameTmChance } from '../../data/config.js'
 import { mapData, pokemonSpecies } from '../../data/gameData.js'
 import { getTmInfo, tmItemId } from '../../data/tms.js'
@@ -382,6 +382,36 @@ export function startIceSlide(state, action) {
 }
 
 /**
+ * Handle the `START_MANTINE_SURF` action.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function startMantineSurf(state, action) {
+  return enterMinigame(state, 'mantineSurf', MANTINE_SURF_COST, 'You paddled out for Mantine Surf.')
+}
+
+/**
+ * Handle the `START_ROTOM_RALLY` action.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function startRotomRally(state, action) {
+  return enterMinigame(state, 'rotomRally', ROTOM_RALLY_COST, 'You set off on the Rotom Rally.')
+}
+
+/**
+ * Handle the `START_OGRE_OUSTIN` action.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function startOgreOustin(state, action) {
+  return enterMinigame(state, 'ogreOustin', OGRE_OUSTIN_COST, "You joined a round of Ogre Oustin'.")
+}
+
+/**
  * Build the `recordMinigame` result for an end action, filling in the minigame
  * id from the current phase when the scene did not pass one. `completed` is
  * left exactly as the scene reported it, so a mid-run "leave" never counts as
@@ -444,7 +474,10 @@ export function endMinigame(state, action) {
     state.phase === 'pokeballFactory' ||
     state.phase === 'ruinsPuzzle' ||
     state.phase === 'iceSlide' ||
-    state.phase === 'pelago'
+    state.phase === 'pelago' ||
+    state.phase === 'mantineSurf' ||
+    state.phase === 'rotomRally' ||
+    state.phase === 'ogreOustin'
     ? recordMinigame({ ...state, ...createIdleBattleState() }, minigameResult(state, action))
     : state
 }

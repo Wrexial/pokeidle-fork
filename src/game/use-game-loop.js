@@ -1002,6 +1002,9 @@ export function useGameLoop() {
       state.phase === 'ruinsPuzzle' ||
       state.phase === 'iceSlide' ||
       state.phase === 'pelago' ||
+      state.phase === 'mantineSurf' ||
+      state.phase === 'rotomRally' ||
+      state.phase === 'ogreOustin' ||
       state.phase === 'routeActivity' ||
       state.phase === 'wonderTrade' ||
       state.paused

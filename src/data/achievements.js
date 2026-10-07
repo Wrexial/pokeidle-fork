@@ -36,6 +36,9 @@ export const RECORDABLE_MINIGAMES = [
   'pokeballFactory',
   'ruinsPuzzle',
   'iceSlide',
+  'mantineSurf',
+  'rotomRally',
+  'ogreOustin',
 ]
 
 const totalBattles = (/** @type {GameState} */ state) =>

@@ -35,6 +35,9 @@ export const MINIGAME_LOCATIONS = {
   'johto-violet-city': 'ruinsPuzzle',
   'sinnoh-snowpoint-city': 'iceSlide',
   'alola-poke-pelago': 'pokePelago',
+  'alola-hauoli-city': 'mantineSurf',
+  'galar-wild-area': 'rotomRally',
+  'paldea-kitakami': 'ogreOustin',
 }
 
 /**

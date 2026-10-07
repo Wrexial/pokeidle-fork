@@ -25,6 +25,9 @@ import { VOLTORB_FLIP_COST } from './voltorb-flip.js'
 import { BATTLE_TOWER_LOCATION } from '../../data/config.js'
 import { SLOT_SPIN_COST } from './game-corner.js'
 import { MINING_COST, MINING_DIGS } from './mining.js'
+import { MANTINE_SURF_COST, MANTINE_SURF_WAVES } from './mantine-surf.js'
+import { ROTOM_RALLY_COST, ROTOM_RALLY_DISTANCE, ROTOM_RALLY_SECONDS } from './rotom-rally.js'
+import { OGRE_OUSTIN_COST, OGRE_OUSTIN_SECONDS } from './ogre-oustin.js'
 
 import { MINIGAME_AREAS, MINIGAME_IDS, MINIGAME_LOCATIONS } from './locations.js'
 export { MINIGAME_AREAS, MINIGAME_IDS, MINIGAME_LOCATIONS }
@@ -62,6 +65,9 @@ export const MINIGAME_PHASES = {
   ruinsPuzzle: 'ruinsPuzzle',
   iceSlide: 'iceSlide',
   pokePelago: 'pelago',
+  mantineSurf: 'mantineSurf',
+  rotomRally: 'rotomRally',
+  ogreOustin: 'ogreOustin',
 }
 
 /**
@@ -132,6 +138,9 @@ export const MINIGAME_START_ACTION = {
   ruinsPuzzle: 'START_RUINS_PUZZLE',
   iceSlide: 'START_ICE_SLIDE',
   pokePelago: 'START_PELAGO',
+  mantineSurf: 'START_MANTINE_SURF',
+  rotomRally: 'START_ROTOM_RALLY',
+  ogreOustin: 'START_OGRE_OUSTIN',
 }
 
 /**
@@ -292,6 +301,24 @@ export const MINIGAME_INFO = {
     cost: 0,
     action: 'VISIT POKÉ PELAGO',
     hint: 'Care for your companion, tend the Berry Garden, and staff the passive islands that gather resources while you battle.',
+  },
+  mantineSurf: {
+    title: 'Mantine Surf',
+    cost: MANTINE_SURF_COST,
+    action: 'RIDE THE WAVES',
+    hint: `Ride ${MANTINE_SURF_WAVES} waves and jump the moment the rider crosses the swell. A dead-centre jump is worth the most, and the swell narrows with every wave. Entry is $${MANTINE_SURF_COST.toLocaleString()}.`,
+  },
+  rotomRally: {
+    title: 'Rotom Rally',
+    cost: ROTOM_RALLY_COST,
+    action: 'START THE RALLY',
+    hint: `Cover ${ROTOM_RALLY_DISTANCE} units of the Wild Area in ${ROTOM_RALLY_SECONDS} seconds. Hold the throttle to build speed, but the motor heat climbs with it \u2014 redline and you stall. A quick, clean ride pays best. Entry is $${ROTOM_RALLY_COST.toLocaleString()}.`,
+  },
+  ogreOustin: {
+    title: "Ogre Oustin'",
+    cost: OGRE_OUSTIN_COST,
+    action: 'FILL THE BASKET',
+    hint: `Berries tumble down the field \u2014 move the basket under them before they land. Golden berries are worth a fistful, while catching a rock costs you. You have ${OGRE_OUSTIN_SECONDS} seconds. Entry is $${OGRE_OUSTIN_COST.toLocaleString()}.`,
   },
 }
 

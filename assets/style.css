@@ -12592,6 +12592,259 @@ img {
     image-rendering: pixelated
 }
 
+/* --- Mantine Surf (Alola) ----------------------------------------------- */
+.mantine-surf-scene {
+    background-image: url(/backgrounds/beach.webp)
+}
+
+.surf-play {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    max-width: 540px
+}
+
+.surf-ocean {
+    width: 100%;
+    height: 40px;
+    background: linear-gradient(#3aa0d8,#1a6a9a);
+    border-radius: 10px 10px 0 0;
+    box-shadow: inset 0 -8px 16px #0a3a5a88
+}
+
+.surf-bar {
+    position: relative;
+    width: 100%;
+    height: 46px;
+    background: linear-gradient(#1a6a9a,#0a3a5a);
+    border: 2px solid #7fd0ee88;
+    border-radius: 8px;
+    overflow: hidden
+}
+
+.surf-zone {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background: #6ee07a55;
+    box-shadow: inset 0 0 0 2px #6ee07a
+}
+
+.surf-zone-core {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background: #ffe066aa
+}
+
+.surf-marker {
+    position: absolute;
+    top: -10%;
+    width: 6px;
+    height: 120%;
+    background: #fff;
+    box-shadow: 0 0 10px #fff, 0 0 4px #ffe066;
+    transform: translateX(-50%)
+}
+
+.surf-rider {
+    font-size: 42px;
+    line-height: 1
+}
+
+.surf-jump-btn {
+    min-width: 220px;
+    font-size: 18px;
+    letter-spacing: 2px
+}
+
+.surf-hint,
+.surf-score-line {
+    color: #dbeaff;
+    font-size: 12px;
+    text-align: center
+}
+
+/* --- Rotom Rally (Galar) ------------------------------------------------ */
+.rotom-rally-scene {
+    background-image: url(/backgrounds/grassland.webp)
+}
+
+.rally-play {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    width: 100%;
+    max-width: 540px
+}
+
+.rally-track {
+    position: relative;
+    height: 18px;
+    margin-top: 44px;
+    background: #2a2a2a;
+    border: 2px solid #666;
+    border-radius: 9px
+}
+
+.rally-track-fill {
+    height: 100%;
+    background: linear-gradient(#ffe066,#e0a020);
+    border-radius: 9px
+}
+
+.rally-checkpoint {
+    position: absolute;
+    top: -20px;
+    font-size: 18px;
+    transform: translateX(-50%)
+}
+
+.rally-bike {
+    position: absolute;
+    top: 2px;
+    width: 52px;
+    height: 52px;
+    image-rendering: pixelated;
+    transform: translateX(-50%);
+    transition: left .05s linear
+}
+
+.rally-heat {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #eee
+}
+
+.rally-heat-track {
+    position: relative;
+    flex: 1;
+    height: 16px;
+    background: #222;
+    border: 2px solid #555;
+    border-radius: 8px;
+    overflow: hidden
+}
+
+.rally-heat-fill {
+    height: 100%;
+    background: linear-gradient(#ffe066,#e04038);
+}
+
+.rally-heat-redline {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #ff3030
+}
+
+.rally-heat.hot .rally-heat-state {
+    color: #ffcc33
+}
+
+.rally-heat.stalled .rally-heat-state {
+    color: #ff5252;
+    animation: rallyStall .3s ease-in-out infinite alternate
+}
+
+.rally-heat.hot .rally-heat-track {
+    box-shadow: 0 0 10px #ff663388
+}
+
+.rally-throttle-btn {
+    min-height: 52px;
+    font-size: 16px;
+    letter-spacing: 1px
+}
+
+.rally-hint,
+.rally-score-line {
+    color: #dbeaff;
+    font-size: 12px;
+    text-align: center
+}
+
+/* --- Ogre Oustin' (Paldea) --------------------------------------------- */
+.ogre-oustin-scene {
+    background-image: url(/backgrounds/forest.webp)
+}
+
+.ogre-field-wrap {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 460px
+}
+
+.ogre-field {
+    position: relative;
+    width: 100%;
+    height: 340px;
+    background: linear-gradient(#3a6a3a,#1a3a1a);
+    border: 2px solid #7aa05a88;
+    border-radius: 10px;
+    overflow: hidden
+}
+
+.ogre-drop {
+    position: absolute;
+    font-size: 26px;
+    line-height: 1;
+    transform: translate(-50%,-50%)
+}
+
+.ogre-drop.gold {
+    filter: drop-shadow(0 0 6px #ffe066)
+}
+
+.ogre-drop.rock {
+    filter: grayscale(.4) drop-shadow(0 0 4px #000)
+}
+
+.ogre-basket-row {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    margin-top: 6px
+}
+
+.ogre-basket-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 42px;
+    font-size: 26px;
+    background: #00000033;
+    border: 1px solid #ffffff22;
+    border-radius: 6px
+}
+
+.ogre-basket-cell.active {
+    background: #ffe06633;
+    border-color: #ffe066;
+    box-shadow: 0 0 10px #ffe06666
+}
+
+.ogre-controls {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 10px
+}
+
+.ogre-score-line {
+    color: #dbeaff;
+    font-size: 12px;
+    text-align: center
+}
+
 /* --- Pokemon Musical (Unova) -------------------------------------------- */
 .musical-scene {
     background-image: url(/backgrounds/town_port.webp)
@@ -13420,6 +13673,7 @@ img {
 @keyframes whackRise { from { transform: scale(.7) } to { transform: scale(1) } }
 @keyframes whackFlee { from { filter: brightness(1.6) } to { filter: brightness(1) } }
 @keyframes whackPop { from { transform: translateY(10px) scale(.8) } to { transform: translateY(0) scale(1) } }
+@keyframes rallyStall { from { opacity: 1 } to { opacity: .4 } }
 
 /* Global hover tooltip (see src/components/global-tooltip.js) */
 .global-tooltip {

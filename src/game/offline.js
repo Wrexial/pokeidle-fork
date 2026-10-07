@@ -289,6 +289,7 @@ const AVERAGE_BYTES = {
   items: 2 * 1024,
   trainers: 1 * 1024,
   backgrounds: 250 * 1024,
+  data: 70 * 1024,
   shell: 200 * 1024,
 }
 
@@ -299,6 +300,9 @@ function offlineAssetGroup(url) {
   if (url.startsWith('/sprites/items/')) return 'items'
   if (url.startsWith('/sprites/trainers/')) return 'trainers'
   if (url.startsWith('/backgrounds/')) return 'backgrounds'
+  // The data JSON is minified at build time, so the served files are smaller
+  // than the pretty-printed ones in the repo.
+  if (url.startsWith('/data/')) return 'data'
   return 'shell'
 }
 

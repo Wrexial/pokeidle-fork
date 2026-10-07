@@ -165,12 +165,20 @@ export function regionProgressionGoal(state, regionId) {
 
 /**
  * The locked locations on the player's frontier *within one region*: the places
- * adjacent to somewhere already open that the panel's "Next Unlocks" list shows.
- * Scoping to the region the player is standing in matters because `unlockOrder`
- * is generation-prefixed, so a map-wide list let an earlier region crowd the
- * region the player is actually in (Sinnoh, Alola, Paldea) out of the panel.
- * Sorted by `unlockOrder`, the soonest first; nothing is truncated, so a gate
- * can never be hidden from the player.
+ * that are next in the unlock dependency graph and that the panel's "Next
+ * Unlocks" list shows. Scoping to the region the player is standing in matters
+ * because `unlockOrder` is generation-prefixed, so a map-wide list let an
+ * earlier region crowd the region the player is actually in (Sinnoh, Alola,
+ * Paldea) out of the panel. Sorted by `unlockOrder`, the soonest first; nothing
+ * is truncated, so a gate can never be hidden from the player.
+ *
+ * A locked area is on the frontier when it has no location requirements left at
+ * all (only the non-location gates the player can still work on) or at least
+ * one of its requirement locations is already open, i.e. it is one step away in
+ * `unlockDependencies`. Roads are deliberately *not* required: islands, leagues
+ * and Raid Islands unlock with no connecting road, so the old road-based
+ * frontier left them invisible and made a region that still had something to
+ * open look finished.
  * @param {string[]} unlocked the current `computeUnlockedLocations` result
  * @param {string} regionId
  * @returns {MapLocation[]}
@@ -184,18 +192,46 @@ export function frontierUnlocks(unlocked, regionId) {
       // Zone sub-areas are hidden from the map but are the real next step in
       // Alola / Paldea; show them once their zone hub is open.
       if (location.hidden && !unlockedSet.has(location.zone)) return false
-      const unlockRule = location.unlock
+      const dependencies = unlockDependencies(location)
       return (
-        unlockRule.battlesAtLocation !== void 0 ||
-        unlockRule.badgesRequired !== void 0 ||
-        unlockRule.gymsRequired !== void 0 ||
-        unlockRule.championDefeated ||
-        unlockRule.requires !== void 0 ||
-        unlockRule.entry !== void 0
+        dependencies.length === 0 ||
+        dependencies.some((id) => unlockedSet.has(id)) ||
+        location.connections.some((id) => unlockedSet.has(id))
       )
     })
-    .filter((location) => location.connections.some((id) => unlockedSet.has(id)))
     .sort((left, right) => left.unlockOrder - right.unlockOrder)
+}
+
+/**
+ * Every location a locked area's unlock rule refers to, whether or not it is
+ * unlocked yet: the `requires` list plus the home of each gate (battles at a
+ * route, a required gym, a route-exclusive catch, a minigame, a Champion's
+ * league). These are the dependency-graph edges behind
+ * `computeUnlockedLocations`; a location's road `connections` are unrelated to
+ * unlocking, which is why islands, leagues and Raid Islands have none.
+ * Order is preserved and duplicates dropped.
+ * @param {MapLocation} location
+ * @returns {string[]}
+ */
+export function unlockDependencies(location) {
+  const rule = location.unlock ?? {},
+    /** @type {string[]} */ dependencies = []
+  const add = (/** @type {string | null | undefined} */ id) => {
+    if (id && mapData[id]) dependencies.push(id)
+  }
+  for (const id of rule.requires ?? []) add(id)
+  for (const gate of rule.battlesAtLocation ?? []) add(gate.locationId)
+  if (rule.caughtOnRoute) add(rule.caughtOnRoute.routeKey)
+  for (const gymId of rule.gymsRequired ?? []) {
+    const gym = gymLeaderData.find((candidate) => candidate.id === gymId)
+    if (gym) add(gym.locationKey)
+  }
+  if (rule.minigame) add(MINIGAME_AREAS[rule.minigame])
+  if (rule.championDefeated) {
+    const regionId = rule.championDefeated === true ? 'kanto' : rule.championDefeated
+    add(regions.find((candidate) => candidate.id === regionId)?.leagueLocationKey)
+  }
+  return [...new Set(dependencies)]
 }
 
 /**
@@ -211,22 +247,5 @@ export function frontierUnlocks(unlocked, regionId) {
  * @returns {string[]}
  */
 export function unlockBlockers(location, unlockedSet) {
-  const rule = location.unlock ?? {},
-    /** @type {string[]} */ blockers = []
-  const add = (/** @type {string | null | undefined} */ id) => {
-    if (id && mapData[id] && !unlockedSet.has(id)) blockers.push(id)
-  }
-  for (const id of rule.requires ?? []) add(id)
-  for (const gate of rule.battlesAtLocation ?? []) add(gate.locationId)
-  if (rule.caughtOnRoute) add(rule.caughtOnRoute.routeKey)
-  for (const gymId of rule.gymsRequired ?? []) {
-    const gym = gymLeaderData.find((candidate) => candidate.id === gymId)
-    if (gym) add(gym.locationKey)
-  }
-  if (rule.minigame) add(MINIGAME_AREAS[rule.minigame])
-  if (rule.championDefeated) {
-    const regionId = rule.championDefeated === true ? 'kanto' : rule.championDefeated
-    add(regions.find((candidate) => candidate.id === regionId)?.leagueLocationKey)
-  }
-  return [...new Set(blockers)]
+  return unlockDependencies(location).filter((id) => !unlockedSet.has(id))
 }

@@ -104,6 +104,48 @@ test('the Next Unlocks frontier stays inside the region the player is in', () =>
   )
 })
 
+test('roadless actionable areas stay on the frontier', () => {
+  // Alola's league and Raid Island have no road connections: they open on
+  // Poni Island plus a battle count / badges. The frontier used to require a
+  // road to an already-open area, so they were invisible and a region with
+  // everything else open looked finished (the panel fell back to "beat the
+  // Champion") even though both were one step away.
+  const allAlola = Object.keys(mapData).filter(
+    (id) => (mapData[id].region ?? 'kanto') === 'alola'
+  )
+  const state = {
+    startRegion: 'alola',
+    unlockedRegions: ['alola'],
+    unlockedLocations: allAlola.filter((id) => id !== 'alola-league' && id !== 'alola-raid'),
+    currentLocation: 'alola-route-17',
+    pokedexCaught: ['rowlet'],
+    party: [{ level: 80 }],
+    defeatedGyms: [
+      'alola-gym-1',
+      'alola-grand-hala',
+      'alola-gym-2',
+      'alola-gym-3',
+      'alola-gym-4',
+      'alola-grand-olivia',
+      'alola-gym-5',
+      'alola-gym-6',
+      'alola-grand-nanu',
+      'alola-gym-7',
+      'alola-gym-8',
+    ],
+    defeatedChampions: [],
+    battlesWonByLocation: {},
+  }
+  const unlocked = computeUnlockedLocations(state)
+  const unlockedSet = new Set(unlocked)
+  const frontier = frontierUnlocks(unlocked, 'alola')
+  for (const id of ['alola-league', 'alola-raid']) {
+    const area = frontier.find((location) => location.id === id)
+    assert.ok(area, `${id} is on the frontier despite having no road`)
+    assert.deepEqual(unlockBlockers(area, unlockedSet), [], `${id} is actionable`)
+  }
+})
+
 test('blocked frontier areas report the locked area they wait on', () => {
   const state = {
     startRegion: 'alola',

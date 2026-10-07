@@ -79,6 +79,9 @@ export const MINIGAME_TM_TYPES = {
   typeFusion: null,
   unownPicross: null,
   pokeshot: ['Flying'],
+  teraRaid: null,
+  pokeword: null,
+  berryBlender: ['Grass'],
 }
 
 /** TM type pool per route activity (only the loot activity pays out here).

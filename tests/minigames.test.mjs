@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 const gameData = installGameData()
 
-const { BATTLE_ROYAL_COST, BATTLE_ROYAL_POOL, BATTLE_ROYAL_ROUND_SIZE, BATTLE_ROYAL_RANKS, BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL, BUG_CONTEST_RUSTLES, CONTEST_COST, CONTEST_THEMES, DYNAMAX_ADVENTURES_COST, DYNAMAX_STAGES, MINIGAME_LOCATIONS, MINIGAME_INFO, MINIGAME_AREAS, MINIGAME_REGIONS, MINIGAME_START_ACTION, minigameForLocation, minigamesInRegion, minigameNameForLocation, MINING_COST, POKEATHLON_COST, POKEATHLON_SPRINT_MS, POKE_RADAR_CHAIN_STEP, POKE_RADAR_COST, POKE_RADAR_SIZE, SLOT_JACKPOT, SLOT_PAYLINES, SLOT_REELS, SLOT_ROWS, SLOT_SPIN_COST, SLOT_SYMBOLS, VOLTORB_FLIP_COST, VOLTORB_MAX_LEVEL, VOLTORB_SIZE, AUCTION_LOTS, accuracyScore, auctionAppraisal, battleRoyalOpponent, battleRoyalPlacement, battleRoyalPrize, battleRoyalRank, boardCleared, boardExploded, boardHints, bugCatchChance, bugContestPrize, bugFleeChance, bugStays, buildContestResults, canAuctionBid, contestAppeal, contestPlacement, contestPlayerRank, contestPrize, contestRank, contestScore, contestTheme, createAuction, createOpponent, createVoltorbBoard, dynamaxBoss, dynamaxBossOptions, dynamaxPaths, dynamaxPickup, dynamaxPrize, dynamaxKoLimit, applyDynamaxPickup, DYNAMAX_PICKUPS, flipVoltorbCell, healSquad, moveBaseAppeal, pickRadarTarget, placeAuctionBid, pokeathlonPrize, pokeRadarPrize, radarChainPoints, radarSequence, rewardItemName, rollContestBug, rollContestBugs, rollContestRivalRound, rollContestTheme, rollMiningReward, simulateBattle, spinSlots, sprintScore, throwNetBall, toBattlePokemon, toggleVoltorbMark, voltorbBoardCoins, voltorbCountForLevel, voltorbFlipPrize, LIGHTS_OUT_COST, LIGHTS_OUT_SCRAMBLE, LIGHTS_OUT_SIZE, CURRY_COST, CURRY_FLAVORS, CURRY_INGREDIENTS, CURRY_ZONE, POKESTAR_COST, POKESTAR_SHOT_COUNT, createLightsOut, toggleLights, lightsSolved, lightsOutPrize, rollCurryRequest, curryScore, curryPrize, pickPokestarShots, pokestarPrize, MATCH3_COST, MATCH3_MOVES, MATCH3_SIZE, MEMORY_COST, MEMORY_PAIRS, WHACK_COST, WHACK_DURATION_MS, WHACK_POP_MIN_MS, WHACK_TARGETS, whackPopupMs, GAME_CORNER_PRIZE_GOAL, GAME_CORNER_PRIZE_POOL, createMatch3Board, findMatches, tryMatch3Swap, resolveMatch3, match3Prize, createMemoryDeck, memoryPrize, rollWhackTarget, whackPrize, MUSICAL_COST, MUSICAL_NOTES, MUSICAL_MAX_SCORE, generateMusicalPattern, judgeMusicalHit, musicalPrize, musicalTotalMs, PICNIC_COST, PICNIC_PICKS, PICNIC_INGREDIENTS, PICNIC_SHINY_MULTIPLIER, ingredientById, sandwichTypes, rollSandwichType, picnicDropScore, picnicSpeciesPool, rollPicnicEncounter, POKEBALL_FACTORY_COST, FACTORY_SIZE, connectionsFor, createFactoryPuzzle, rotateFactoryTile, factoryPowered, factorySolved, factoryPrize, FACTORY_BALL_POOL, rollFactoryBalls, SLIDING_COST, SLIDING_SIZE, solvedSlidingBoard, canSlide, slideTile, isSlidingSolved, createSlidingPuzzle, slidingTileForDirection, slidingPrize, UNOWN_FORMS, randomUnownForm, ICE_SLIDE_COST, ICE_SLIDE_ROOMS, ICE_SLIDE_TOTAL_PAR, iceSlidePosition, iceSlideSolved, iceSlidePrize, MANTINE_SURF_COST, MANTINE_SURF_WAVES, MANTINE_SURF_MAX_SCORE, surfWaveZone, surfWaveScore, surfMarkerPosition, mantineSurfPrize, ROTOM_RALLY_COST, ROTOM_RALLY_DISTANCE, rotomRallyScore, rotomRallyPrize, OGRE_OUSTIN_COST, OGRE_OUSTIN_LANES, rollOgreDrop, ogreFallMs, ogreSpawnMs, ogreOustinPrize, TYPE_FUSION_COST, TYPE_FUSION_SIZE, TYPE_FUSION_MOVES, createTypeFusionBoard, slideTypeFusion, typeFusionCanMove, typeFusionLabel, typeFusionPrize, UNOWN_PICROSS_COST, createPicrossPuzzle, picrossClues, picrossMatches, picrossWrongFills, picrossScore, picrossPrize, POKESHOT_COST, POKESHOT_FRAME, rollPokeshotTarget, pokeshotShotScore, pokeshotShotPoints, pokeshotPrize } = await import(
+const { BATTLE_ROYAL_COST, BATTLE_ROYAL_POOL, BATTLE_ROYAL_ROUND_SIZE, BATTLE_ROYAL_RANKS, BUG_CONTEST_BALL, BUG_CONTEST_BUSHES, BUG_CONTEST_COST, BUG_CONTEST_POOL, BUG_CONTEST_RUSTLES, CONTEST_COST, CONTEST_THEMES, DYNAMAX_ADVENTURES_COST, DYNAMAX_STAGES, MINIGAME_LOCATIONS, MINIGAME_INFO, MINIGAME_AREAS, MINIGAME_REGIONS, MINIGAME_START_ACTION, minigameForLocation, minigamesInRegion, minigameNameForLocation, MINING_COST, POKEATHLON_COST, POKEATHLON_SPRINT_MS, POKE_RADAR_CHAIN_STEP, POKE_RADAR_COST, POKE_RADAR_SIZE, SLOT_JACKPOT, SLOT_PAYLINES, SLOT_REELS, SLOT_ROWS, SLOT_SPIN_COST, SLOT_SYMBOLS, VOLTORB_FLIP_COST, VOLTORB_MAX_LEVEL, VOLTORB_SIZE, AUCTION_LOTS, accuracyScore, auctionAppraisal, battleRoyalOpponent, battleRoyalPlacement, battleRoyalPrize, battleRoyalRank, boardCleared, boardExploded, boardHints, bugCatchChance, bugContestPrize, bugFleeChance, bugStays, buildContestResults, canAuctionBid, contestAppeal, contestPlacement, contestPlayerRank, contestPrize, contestRank, contestScore, contestTheme, createAuction, createOpponent, createVoltorbBoard, dynamaxBoss, dynamaxBossOptions, dynamaxPaths, dynamaxPickup, dynamaxPrize, dynamaxKoLimit, applyDynamaxPickup, DYNAMAX_PICKUPS, flipVoltorbCell, healSquad, moveBaseAppeal, pickRadarTarget, placeAuctionBid, pokeathlonPrize, pokeRadarPrize, radarChainPoints, radarSequence, rewardItemName, rollContestBug, rollContestBugs, rollContestRivalRound, rollContestTheme, rollMiningReward, simulateBattle, spinSlots, sprintScore, throwNetBall, toBattlePokemon, toggleVoltorbMark, voltorbBoardCoins, voltorbCountForLevel, voltorbFlipPrize, LIGHTS_OUT_COST, LIGHTS_OUT_SCRAMBLE, LIGHTS_OUT_SIZE, CURRY_COST, CURRY_FLAVORS, CURRY_INGREDIENTS, CURRY_ZONE, POKESTAR_COST, POKESTAR_SHOT_COUNT, createLightsOut, toggleLights, lightsSolved, lightsOutPrize, rollCurryRequest, curryScore, curryPrize, pickPokestarShots, pokestarPrize, MATCH3_COST, MATCH3_MOVES, MATCH3_SIZE, MEMORY_COST, MEMORY_PAIRS, WHACK_COST, WHACK_DURATION_MS, WHACK_POP_MIN_MS, WHACK_TARGETS, whackPopupMs, GAME_CORNER_PRIZE_GOAL, GAME_CORNER_PRIZE_POOL, createMatch3Board, findMatches, tryMatch3Swap, resolveMatch3, match3Prize, createMemoryDeck, memoryPrize, rollWhackTarget, whackPrize, MUSICAL_COST, MUSICAL_NOTES, MUSICAL_MAX_SCORE, generateMusicalPattern, judgeMusicalHit, musicalPrize, musicalTotalMs, PICNIC_COST, PICNIC_PICKS, PICNIC_INGREDIENTS, PICNIC_SHINY_MULTIPLIER, ingredientById, sandwichTypes, rollSandwichType, picnicDropScore, picnicSpeciesPool, rollPicnicEncounter, POKEBALL_FACTORY_COST, FACTORY_SIZE, connectionsFor, createFactoryPuzzle, rotateFactoryTile, factoryPowered, factorySolved, factoryPrize, FACTORY_BALL_POOL, rollFactoryBalls, SLIDING_COST, SLIDING_SIZE, solvedSlidingBoard, canSlide, slideTile, isSlidingSolved, createSlidingPuzzle, slidingTileForDirection, slidingPrize, UNOWN_FORMS, randomUnownForm, ICE_SLIDE_COST, ICE_SLIDE_ROOMS, ICE_SLIDE_TOTAL_PAR, iceSlidePosition, iceSlideSolved, iceSlidePrize, MANTINE_SURF_COST, MANTINE_SURF_WAVES, MANTINE_SURF_MAX_SCORE, surfWaveZone, surfWaveScore, surfMarkerPosition, mantineSurfPrize, ROTOM_RALLY_COST, ROTOM_RALLY_DISTANCE, rotomRallyScore, rotomRallyPrize, OGRE_OUSTIN_COST, OGRE_OUSTIN_LANES, rollOgreDrop, ogreFallMs, ogreSpawnMs, ogreOustinPrize, TYPE_FUSION_COST, TYPE_FUSION_SIZE, TYPE_FUSION_MOVES, createTypeFusionBoard, slideTypeFusion, typeFusionCanMove, typeFusionLabel, typeFusionPrize, UNOWN_PICROSS_COST, createPicrossPuzzle, picrossClues, picrossMatches, picrossWrongFills, picrossScore, picrossPrize, POKESHOT_COST, POKESHOT_FRAME, rollPokeshotTarget, pokeshotShotScore, pokeshotShotPoints, pokeshotPrize, TERA_RAID_COST, TERA_TYPES, teraRaidStars, teraRaidBoss, teraRaidHpMultiplier, createTeraRaidBoss, simulateTeraRaid, teraRaidScore, teraRaidPrize, POKEWORD_COST, POKEWORD_ROUNDS, scrambleLetters, rollPokewordChallenge, pokewordMatches, pokewordPrize, BERRY_BLENDER_COST, BERRY_BLENDER_MS, blenderSweetSpot, blenderInZone, blenderScore, blenderPrize } = await import(
   '../src/game/minigames.js'
 )
 const { match3SwapFrames, MATCH3_SPECIES, MATCH3_TYPES, radarFaces, STRENGTH_ROOMS, STRENGTH_TOTAL_PAR, createStrengthState, strengthMove, strengthSolved, buildIceTempleStages, buildIceTempleRoomPool, generateIceRoom, isIceRoomFair, iceTempleRunSize, ICE_GENERATOR_MIN_PAR, ICE_TEMPLE_ICE_STAGES, ICE_TEMPLE_PRESTIGE_MAX, ICE_TEMPLE_STRENGTH_STAGES, parseIceLevel } = await import(
@@ -1461,6 +1461,9 @@ test('every minigame is linked to a real area in its own region', () => {
     typeFusion: 'unova',
     unownPicross: 'sinnoh',
     pokeshot: 'kalos',
+    teraRaid: 'paldea',
+    pokeword: 'unova',
+    berryBlender: 'sinnoh',
   }
   // Every catalogued minigame has exactly one home area, and vice versa: no
   // orphaned info entries and no locations pointing at missing metadata.
@@ -1490,9 +1493,9 @@ test('minigamesInRegion groups them by region', () => {
   assert.ok(minigamesInRegion('hoenn').includes('contest'))
   assert.deepEqual(minigamesInRegion('alola').sort(), ['battleRoyal', 'mantineSurf', 'pokePelago'])
   assert.deepEqual(minigamesInRegion('galar').sort(), ['curry', 'dynamaxAdventures', 'rotomRally'])
-  assert.deepEqual(minigamesInRegion('paldea').sort(), ['academyQuiz', 'ogreOustin', 'picnic'])
-  assert.deepEqual(minigamesInRegion('sinnoh').sort(), ['iceSlide', 'mining', 'pokeRadar', 'unownPicross'])
-  assert.deepEqual(minigamesInRegion('unova').sort(), ['musical', 'pokestar', 'typeFusion', 'voltorbFlip'])
+  assert.deepEqual(minigamesInRegion('paldea').sort(), ['academyQuiz', 'ogreOustin', 'picnic', 'teraRaid'])
+  assert.deepEqual(minigamesInRegion('sinnoh').sort(), ['berryBlender', 'iceSlide', 'mining', 'pokeRadar', 'unownPicross'])
+  assert.deepEqual(minigamesInRegion('unova').sort(), ['musical', 'pokestar', 'pokeword', 'typeFusion', 'voltorbFlip'])
   assert.deepEqual(minigamesInRegion('kalos').sort(), ['auctionHouse', 'doubles', 'pokeballFactory', 'pokeshot'])
   assert.deepEqual(minigamesInRegion('nope'), [])
 })
@@ -1563,6 +1566,54 @@ test('pokeshot framing scores centred, rare and shiny shots higher', () => {
   const target = rollPokeshotTarget()
   assert.ok(target.speciesKey && target.stars >= 1 && target.stars <= 3)
   assert.ok(pokeshotPrize(120).money > pokeshotPrize(0).money)
+})
+
+test('tera raid bosses, HP inflation and payouts scale with stars', () => {
+  const info = teraRaidBoss(50)
+  assert.ok(info.speciesKey && info.name, 'a boss has a species')
+  assert.ok(info.stars >= 1 && info.stars <= 5)
+  assert.ok(TERA_TYPES.includes(info.teraType), `${info.teraType} is a real type`)
+  assert.ok(teraRaidHpMultiplier(5) > teraRaidHpMultiplier(1))
+  assert.equal(teraRaidScore(5, true), 5)
+  assert.equal(teraRaidScore(5, false), 4)
+  const prize = teraRaidPrize(5, true, info.speciesKey, info.level)
+  assert.equal(prize.pokemon.speciesKey, info.speciesKey)
+  assert.equal(teraRaidPrize(3, false).pokemon, null, 'a failed raid catches nothing')
+  const boss = createTeraRaidBoss({ speciesKey: 'magikarp', level: 50, stars: 5 }),
+    plain = createOpponent('magikarp', 50)
+  assert.ok(boss.maxHp > plain.maxHp, 'raid bosses have inflated HP')
+})
+
+test('simulateTeraRaid resolves a whole party against one boss', () => {
+  const winBoss = createOpponent('magikarp', 5),
+    win = simulateTeraRaid([createOpponent('mewtwo', 100)], winBoss)
+  assert.equal(win.won, true, 'a maxed squad breaks a weak crystal')
+  const loseBoss = createOpponent('mewtwo', 100),
+    lose = simulateTeraRaid([createOpponent('magikarp', 5)], loseBoss)
+  assert.equal(lose.won, false, 'a lone weakling cannot')
+})
+
+test('pokeword scrambles a name and checks the spelling', () => {
+  const letters = scrambleLetters('Pikachu')
+  assert.equal(letters.length, 7)
+  assert.deepEqual([...letters].sort(), ['A', 'C', 'H', 'I', 'K', 'P', 'U'])
+  assert.notEqual(letters.join(''), 'PIKACHU', 'the letters are actually scrambled')
+  const challenge = rollPokewordChallenge()
+  assert.equal(challenge.letters.length, challenge.name.replace(/[^A-Za-z]/g, '').length)
+  assert.equal(pokewordMatches('pikachu', 'Pikachu'), true)
+  assert.equal(pokewordMatches('pikachuu', 'Pikachu'), false)
+  assert.ok(pokewordPrize(POKEWORD_ROUNDS).money > pokewordPrize(0).money)
+})
+
+test('berry blender sweet spot sweeps and scores by time in the zone', () => {
+  assert.equal(blenderSweetSpot(0).center, 0.5)
+  assert.ok(blenderInZone(0.5, blenderSweetSpot(0)))
+  assert.ok(!blenderInZone(0, blenderSweetSpot(0)))
+  assert.equal(blenderScore(0.5), 50)
+  assert.equal(blenderScore(2), 100)
+  assert.equal(blenderScore(-1), 0)
+  assert.ok(blenderPrize(90).money > blenderPrize(0).money)
+  assert.ok(BERRY_BLENDER_MS > 0)
 })
 
 test('mantine surf zones stay on the face and narrow with the waves', () => {

@@ -42,6 +42,9 @@ export const RECORDABLE_MINIGAMES = [
   'typeFusion',
   'unownPicross',
   'pokeshot',
+  'teraRaid',
+  'pokeword',
+  'berryBlender',
 ]
 
 const totalBattles = (/** @type {GameState} */ state) =>

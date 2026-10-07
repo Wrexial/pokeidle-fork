@@ -31,6 +31,9 @@ import { OGRE_OUSTIN_COST, OGRE_OUSTIN_SECONDS } from './ogre-oustin.js'
 import { TYPE_FUSION_COST, TYPE_FUSION_MOVES } from './type-fusion.js'
 import { UNOWN_PICROSS_COST } from './unown-picross.js'
 import { POKESHOT_COST, POKESHOT_SECONDS } from './pokeshot.js'
+import { TERA_RAID_COST } from './tera-raid.js'
+import { POKEWORD_COST, POKEWORD_ROUNDS, POKEWORD_SECONDS } from './pokeword.js'
+import { BERRY_BLENDER_COST, BERRY_BLENDER_MS } from './berry-blender.js'
 
 import { MINIGAME_AREAS, MINIGAME_IDS, MINIGAME_LOCATIONS } from './locations.js'
 export { MINIGAME_AREAS, MINIGAME_IDS, MINIGAME_LOCATIONS }
@@ -74,6 +77,9 @@ export const MINIGAME_PHASES = {
   typeFusion: 'typeFusion',
   unownPicross: 'unownPicross',
   pokeshot: 'pokeshot',
+  teraRaid: 'teraRaid',
+  pokeword: 'pokeword',
+  berryBlender: 'berryBlender',
 }
 
 /**
@@ -150,6 +156,9 @@ export const MINIGAME_START_ACTION = {
   typeFusion: 'START_TYPE_FUSION',
   unownPicross: 'START_UNOWN_PICROSS',
   pokeshot: 'START_POKESHOT',
+  teraRaid: 'START_TERA_RAID',
+  pokeword: 'START_POKEWORD',
+  berryBlender: 'START_BERRY_BLENDER',
 }
 
 /**
@@ -346,6 +355,24 @@ export const MINIGAME_INFO = {
     cost: POKESHOT_COST,
     action: 'START PHOTOSHOOT',
     hint: `Pokemon flit across the palace gardens for ${POKESHOT_SECONDS} seconds \u2014 snap each one while it is inside the frame. Centred shots score best, and rarer or shiny Pokemon are worth far more. Entry is $${POKESHOT_COST.toLocaleString()}.`,
+  },
+  teraRaid: {
+    title: 'Tera Raid',
+    cost: TERA_RAID_COST,
+    action: 'BREAK THE CRYSTAL',
+    hint: `A crystal boss with a Tera type and inflated HP. Your healthy party fights it in turn, each member until it faints; shatter the crystal and you catch the boss. Higher stars pay far more. Entry is $${TERA_RAID_COST.toLocaleString()}.`,
+  },
+  pokeword: {
+    title: 'Trainer School',
+    cost: POKEWORD_COST,
+    action: 'SIT THE CLASS',
+    hint: `Spell the Pokemon from its silhouette: the letters of its name are jumbled, and you tap (or type) them back into order before the ${POKEWORD_SECONDS}-second clock runs out. You get ${POKEWORD_ROUNDS} words. Entry is $${POKEWORD_COST.toLocaleString()}.`,
+  },
+  berryBlender: {
+    title: 'Berry Blender',
+    cost: BERRY_BLENDER_COST,
+    action: 'START BLENDING',
+    hint: `The blender's speed always sags, so tap to rev it back up \u2014 but keep the needle inside the sweet spot as it sweeps back and forth over ${BERRY_BLENDER_MS / 1000} seconds. A smoother blend pays better. Entry is $${BERRY_BLENDER_COST.toLocaleString()}.`,
   },
 }
 

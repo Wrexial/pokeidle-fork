@@ -1008,6 +1008,9 @@ export function useGameLoop() {
       state.phase === 'typeFusion' ||
       state.phase === 'unownPicross' ||
       state.phase === 'pokeshot' ||
+      state.phase === 'teraRaid' ||
+      state.phase === 'pokeword' ||
+      state.phase === 'berryBlender' ||
       state.phase === 'routeActivity' ||
       state.phase === 'wonderTrade' ||
       state.paused

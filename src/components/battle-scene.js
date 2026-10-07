@@ -57,6 +57,9 @@ import { OgreOustinScene } from './ogre-oustin-scene.js'
 import { TypeFusionScene } from './type-fusion-scene.js'
 import { UnownPicrossScene } from './unown-picross-scene.js'
 import { PokeshotScene } from './pokeshot-scene.js'
+import { TeraRaidScene } from './tera-raid-scene.js'
+import { PokewordScene } from './pokeword-scene.js'
+import { BerryBlenderScene } from './berry-blender-scene.js'
 import { MiningScene } from './mining-scene.js'
 import { GameCornerScene } from './game-corner-scene.js'
 import { RouteActivityScene } from './route-activity-scene.js'
@@ -102,6 +105,9 @@ export function BattleScene({ onOpenMenu }) {
   if (state.phase === 'typeFusion') return jsx(TypeFusionScene, {})
   if (state.phase === 'unownPicross') return jsx(UnownPicrossScene, {})
   if (state.phase === 'pokeshot') return jsx(PokeshotScene, {})
+  if (state.phase === 'teraRaid') return jsx(TeraRaidScene, {})
+  if (state.phase === 'pokeword') return jsx(PokewordScene, {})
+  if (state.phase === 'berryBlender') return jsx(BerryBlenderScene, {})
   if (state.phase === 'mining') return jsx(MiningScene, {})
   if (state.phase === 'gameCorner') return jsx(GameCornerScene, {})
   if (state.phase === 'routeActivity') return jsx(RouteActivityScene, {})

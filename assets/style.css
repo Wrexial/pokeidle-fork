@@ -13052,6 +13052,185 @@ img {
     text-align: center
 }
 
+/* --- Tera Raid (Paldea) ------------------------------------------------- */
+.tera-raid-scene {
+    background-image: url(/backgrounds/cave.webp)
+}
+
+.raid-stars {
+    color: #ffe066;
+    font-size: 14px;
+    letter-spacing: 2px
+}
+
+.raid-tera-chip {
+    padding: 1px 6px;
+    background: #7038f8;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 10px;
+    text-transform: uppercase
+}
+
+.raid-summary {
+    color: #dbeaff;
+    font-size: 12px
+}
+
+/* --- Trainer School / Pokeword (Unova) ---------------------------------- */
+.pokeword-scene {
+    background-image: url(/backgrounds/town.webp)
+}
+
+.pokeword-play {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%
+}
+
+.pokeword-silhouette {
+    width: 120px;
+    height: 120px;
+    image-rendering: pixelated;
+    filter: brightness(0)
+}
+
+.pokeword-slots {
+    display: flex;
+    gap: 6px
+}
+
+.pokeword-slot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 38px;
+    border-bottom: 3px solid #55617e;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700
+}
+
+.pokeword-slot.filled {
+    border-color: #ffe066
+}
+
+.pokeword-letters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    max-width: 320px
+}
+
+.pokeword-letter {
+    width: 38px;
+    height: 38px;
+    background: #2a3247;
+    border: 2px solid #55617e;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer
+}
+
+.pokeword-letter:hover:not(:disabled) {
+    filter: brightness(1.2)
+}
+
+.pokeword-letter.used {
+    opacity: .35
+}
+
+.pokeword-controls {
+    display: flex;
+    gap: 10px
+}
+
+.pokeword-hint,
+.pokeword-score-line {
+    color: #dbeaff;
+    font-size: 12px;
+    text-align: center
+}
+
+/* --- Berry Blender (Sinnoh) --------------------------------------------- */
+.berry-blender-scene {
+    background-image: url(/backgrounds/autumn.webp)
+}
+
+.blender-play {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    max-width: 520px
+}
+
+.blender-recipe {
+    display: flex;
+    gap: 8px
+}
+
+.blender-berry {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    box-shadow: inset -3px -3px 0 #00000033, 0 0 6px #00000055
+}
+
+.blender-bar {
+    position: relative;
+    width: 100%;
+    height: 44px;
+    background: linear-gradient(#2a3247,#1c2333);
+    border: 2px solid #ffffff33;
+    border-radius: 8px;
+    overflow: hidden
+}
+
+.blender-zone {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background: #6ee07a66;
+    box-shadow: inset 0 0 0 2px #6ee07a
+}
+
+.blender-marker {
+    position: absolute;
+    top: -6%;
+    width: 6px;
+    height: 112%;
+    background: #fff;
+    box-shadow: 0 0 10px #fff;
+    transform: translateX(-50%)
+}
+
+.blender-marker.hot {
+    background: #ffe066;
+    box-shadow: 0 0 12px #ffe066
+}
+
+.blender-tap-btn {
+    min-width: 220px;
+    min-height: 52px;
+    font-size: 18px;
+    letter-spacing: 2px
+}
+
+.blender-hint,
+.blender-score-line {
+    color: #dbeaff;
+    font-size: 12px;
+    text-align: center
+}
+
 /* --- Pokemon Musical (Unova) -------------------------------------------- */
 .musical-scene {
     background-image: url(/backgrounds/town_port.webp)

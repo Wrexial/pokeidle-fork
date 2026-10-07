@@ -41,6 +41,9 @@ export const MINIGAME_LOCATIONS = {
   'unova-nacrene-city': 'typeFusion',
   'sinnoh-solaceon-ruins': 'unownPicross',
   'kalos-parfum-palace': 'pokeshot',
+  'paldea-area-zero': 'teraRaid',
+  'unova-aspertia-city': 'pokeword',
+  'sinnoh-hearthome-city': 'berryBlender',
 }
 
 /**

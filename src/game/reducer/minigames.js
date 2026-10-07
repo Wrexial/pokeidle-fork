@@ -1,6 +1,6 @@
 // Reducer handlers for minigames actions. Split from game/reducer.js.
 
-import { MATCH3_COST, MEMORY_COST, MUSICAL_COST, PICNIC_COST, POKEBALL_FACTORY_COST, WHACK_COST, BATTLE_ROYAL_COST, DOUBLES_COST, BUG_CONTEST_COST, CONTEST_COST, CURRY_COST, DYNAMAX_ADVENTURES_COST, LIGHTS_OUT_COST, MINING_COST, POKEATHLON_COST, POKE_RADAR_COST, POKESTAR_COST, QUIZ_COST, ROUTE_ACTIVITIES, SAFARI_COST, SLIDING_COST, ICE_SLIDE_COST, VOLTORB_FLIP_COST, MANTINE_SURF_COST, ROTOM_RALLY_COST, OGRE_OUSTIN_COST, TYPE_FUSION_COST, UNOWN_PICROSS_COST, POKESHOT_COST, GAME_CORNER_PRIZE_GOAL, rollGameCornerPrize, routeActivityIds, minigameIdForPhase } from '../minigames.js'
+import { MATCH3_COST, MEMORY_COST, MUSICAL_COST, PICNIC_COST, POKEBALL_FACTORY_COST, WHACK_COST, BATTLE_ROYAL_COST, DOUBLES_COST, BUG_CONTEST_COST, CONTEST_COST, CURRY_COST, DYNAMAX_ADVENTURES_COST, LIGHTS_OUT_COST, MINING_COST, POKEATHLON_COST, POKE_RADAR_COST, POKESTAR_COST, QUIZ_COST, ROUTE_ACTIVITIES, SAFARI_COST, SLIDING_COST, ICE_SLIDE_COST, VOLTORB_FLIP_COST, MANTINE_SURF_COST, ROTOM_RALLY_COST, OGRE_OUSTIN_COST, TYPE_FUSION_COST, UNOWN_PICROSS_COST, POKESHOT_COST, TERA_RAID_COST, POKEWORD_COST, BERRY_BLENDER_COST, GAME_CORNER_PRIZE_GOAL, rollGameCornerPrize, routeActivityIds, minigameIdForPhase } from '../minigames.js'
 import { minigameTmChance } from '../../data/config.js'
 import { mapData, pokemonSpecies } from '../../data/gameData.js'
 import { getTmInfo, tmItemId } from '../../data/tms.js'
@@ -442,6 +442,36 @@ export function startPokeshot(state, action) {
 }
 
 /**
+ * Handle the `START_TERA_RAID` action.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function startTeraRaid(state, action) {
+  return enterMinigame(state, 'teraRaid', TERA_RAID_COST, 'You stepped up to a Tera crystal.')
+}
+
+/**
+ * Handle the `START_POKEWORD` action.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function startPokeword(state, action) {
+  return enterMinigame(state, 'pokeword', POKEWORD_COST, 'You sat down at the Trainer School.')
+}
+
+/**
+ * Handle the `START_BERRY_BLENDER` action.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function startBerryBlender(state, action) {
+  return enterMinigame(state, 'berryBlender', BERRY_BLENDER_COST, 'You loaded the Berry Blender.')
+}
+
+/**
  * Build the `recordMinigame` result for an end action, filling in the minigame
  * id from the current phase when the scene did not pass one. `completed` is
  * left exactly as the scene reported it, so a mid-run "leave" never counts as
@@ -510,7 +540,10 @@ export function endMinigame(state, action) {
     state.phase === 'ogreOustin' ||
     state.phase === 'typeFusion' ||
     state.phase === 'unownPicross' ||
-    state.phase === 'pokeshot'
+    state.phase === 'pokeshot' ||
+    state.phase === 'teraRaid' ||
+    state.phase === 'pokeword' ||
+    state.phase === 'berryBlender'
     ? recordMinigame({ ...state, ...createIdleBattleState() }, minigameResult(state, action))
     : state
 }

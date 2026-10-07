@@ -7558,6 +7558,40 @@ img {
     margin-top: 6px
 }
 
+.offline-progress {
+    margin-bottom: 10px
+}
+
+.offline-progress-bar {
+    height: 12px;
+    background: #3a2818;
+    border: 2px solid #483828;
+    overflow: hidden
+}
+
+.offline-progress-fill {
+    height: 100%;
+    background: var(--gold);
+    transition: width 0.15s linear
+}
+
+.offline-progress-label {
+    font-size: 9px;
+    color: #3a2818;
+    margin: 6px 0
+}
+
+.offline-status {
+    font-size: 9px;
+    color: #3a2818;
+    margin: 8px 0 0
+}
+
+.offline-status.ok {
+    color: #2e7d32;
+    font-weight: 700
+}
+
 .settings-speed {
     display: flex;
     align-items: center;

@@ -1,0 +1,343 @@
+// Offline play support. The game has no backend, so caching every static file
+// it can request is enough to run with no network at all. This module
+// enumerates those files from the loaded game data and warms the shared Cache
+// Storage bucket that `public/sw.js` serves from.
+//
+// Keep OFFLINE_CACHE in sync with public/sw.js.
+
+import {
+  animatedSprites,
+  championData,
+  elite4Data,
+  genderedSprites,
+  gymLeaderData,
+  itemIcons,
+  pokemonSpecies,
+  trainerClasses,
+} from '../data/gameData.js'
+import { BIOME_SCENE_IMAGES, locationImages } from '../data/ui.js'
+
+/** Shared cache name. Must match public/sw.js. */
+export const OFFLINE_CACHE = 'pokemon-idle-offline-v1'
+
+/** Marks a request the page will store itself (the worker must not). */
+export const OFFLINE_PREFETCH_HEADER = 'x-offline-prefetch'
+
+const POKEMON_SPRITE_ROOT = '/sprites/pokemon'
+const ANIMATED_SPRITE_ROOT = `${POKEMON_SPRITE_ROOT}/versions/generation-v/black-white/animated`
+
+/** App pages and shared files every session needs. */
+const SHELL_FILES = [
+  '/',
+  '/index.html',
+  '/guide.html',
+  '/reference.html',
+  '/encounter-index.html',
+  '/heal-animation-web.mp4',
+  '/sprites/pokemon/egg.png',
+]
+
+/** The battle backdrops checked into public/backgrounds. */
+const BACKGROUND_FILES = [
+  '/backgrounds/autumn.jpeg',
+  '/backgrounds/beach.png',
+  '/backgrounds/cave.png',
+  '/backgrounds/desert.jpeg',
+  '/backgrounds/forest.jpeg',
+  '/backgrounds/grassland.png',
+  '/backgrounds/mountain.png',
+  '/backgrounds/ruins.jpeg',
+  '/backgrounds/swamp.jpeg',
+  '/backgrounds/town.png',
+  '/backgrounds/town_port.png',
+  '/backgrounds/tundra.jpeg',
+  '/backgrounds/volcano.jpeg',
+]
+
+// vite replaces import.meta.env at build time; under Node it is undefined.
+const IS_DEV = Boolean(import.meta.env && import.meta.env.DEV)
+
+/** Is the Cache Storage + service worker API available? */
+export function offlineSupported() {
+  return (
+    typeof navigator !== 'undefined' &&
+    'serviceWorker' in navigator &&
+    typeof caches !== 'undefined'
+  )
+}
+
+/**
+ * Offline play needs a real service worker, which the Vite dev server cannot
+ * serve reliably (it streams per-module requests for HMR). The built app is
+ * the supported target.
+ */
+export function offlineAvailable() {
+  return offlineSupported() && !IS_DEV
+}
+
+/** @type {Promise<ServiceWorkerRegistration | null> | null} */
+let registrationPromise = null
+
+/** Register the offline worker. Resolves to null when unsupported. */
+export function registerServiceWorker() {
+  if (!offlineSupported()) return Promise.resolve(null)
+  if (!registrationPromise) {
+    registrationPromise = navigator.serviceWorker
+      .register('/sw.js')
+      .catch(() => null)
+  }
+  return registrationPromise
+}
+
+/**
+ * Register the worker and wait until it is active and ready to serve, asking
+ * the browser to keep the cache instead of evicting it.
+ */
+export async function ensureOfflineCaches() {
+  if (!offlineSupported())
+    throw new Error('This browser cannot store offline files.')
+  const registration = await registerServiceWorker()
+  if (!registration)
+    throw new Error('Could not start the offline service worker.')
+  await navigator.serviceWorker.ready
+  try {
+    await navigator.storage?.persist?.()
+  } catch {
+    // Persistence is best-effort; the cache still works without it.
+  }
+  return registration
+}
+
+/** Data JSON URLs the injector loaded (populated by assets/gameDataInjector.js). */
+function dataFilePaths() {
+  const paths = /** @type {any} */ (globalThis.window)?.gameDataInjector?.paths
+  return Array.isArray(paths) ? paths : []
+}
+
+/** Same-origin files this session has already fetched (bundled JS/CSS, fonts, ...). */
+function collectLoadedAssetPaths() {
+  const urls = new Set()
+  if (typeof performance === 'undefined' || !performance.getEntriesByType) return urls
+  if (typeof location === 'undefined') return urls
+  for (const entry of performance.getEntriesByType('resource')) {
+    try {
+      const url = new URL(entry.name)
+      if (url.origin === location.origin) urls.add(url.pathname)
+    } catch {
+      // Ignore malformed performance entries.
+    }
+  }
+  return urls
+}
+
+/** Named trainer sprites (gym leaders, Elite Four, Champions). */
+function bossSpriteKeys() {
+  const keys = new Set()
+  for (const list of [gymLeaderData, elite4Data, championData]) {
+    if (!Array.isArray(list)) continue
+    for (const entry of list) {
+      if (entry && typeof entry.spriteKey === 'string' && entry.spriteKey) {
+        keys.add(entry.spriteKey)
+      }
+    }
+  }
+  return [...keys]
+}
+
+/**
+ * Every static sprite variant a species id can resolve to (see
+ * `getPokemonSpriteUrl` in src/game/pokemon/sprites.js).
+ * @param {Set<string>} urls
+ * @param {number} id
+ */
+function addPokemonSpriteUrls(urls, id) {
+  const key = Number(id)
+  if (!Number.isFinite(key)) return
+  urls.add(`${POKEMON_SPRITE_ROOT}/${key}.png`)
+  urls.add(`${POKEMON_SPRITE_ROOT}/back/${key}.png`)
+  urls.add(`${POKEMON_SPRITE_ROOT}/shiny/${key}.png`)
+  urls.add(`${POKEMON_SPRITE_ROOT}/back/shiny/${key}.png`)
+  if (genderedSprites.front?.includes(key))
+    urls.add(`${POKEMON_SPRITE_ROOT}/female/${key}.png`)
+  if (genderedSprites.back?.includes(key))
+    urls.add(`${POKEMON_SPRITE_ROOT}/back/female/${key}.png`)
+  if (genderedSprites.shiny?.includes(key))
+    urls.add(`${POKEMON_SPRITE_ROOT}/shiny/female/${key}.png`)
+  if (genderedSprites.backShiny?.includes(key))
+    urls.add(`${POKEMON_SPRITE_ROOT}/back/shiny/female/${key}.png`)
+  if (key > 0) {
+    // The manifests list the ids *missing* each animated variant.
+    if (!animatedSprites.front?.includes(key))
+      urls.add(`${ANIMATED_SPRITE_ROOT}/${key}.gif`)
+    if (!animatedSprites.back?.includes(key))
+      urls.add(`${ANIMATED_SPRITE_ROOT}/back/${key}.gif`)
+    if (!animatedSprites.shiny?.includes(key))
+      urls.add(`${ANIMATED_SPRITE_ROOT}/shiny/${key}.gif`)
+    if (!animatedSprites.backShiny?.includes(key))
+      urls.add(`${ANIMATED_SPRITE_ROOT}/back/shiny/${key}.gif`)
+  }
+  if (genderedSprites.animatedFront?.includes(key))
+    urls.add(`${ANIMATED_SPRITE_ROOT}/female/${key}.gif`)
+  if (genderedSprites.animatedBack?.includes(key))
+    urls.add(`${ANIMATED_SPRITE_ROOT}/back/female/${key}.gif`)
+  if (genderedSprites.animatedShiny?.includes(key))
+    urls.add(`${ANIMATED_SPRITE_ROOT}/shiny/female/${key}.gif`)
+  if (genderedSprites.animatedBackShiny?.includes(key))
+    urls.add(`${ANIMATED_SPRITE_ROOT}/back/shiny/female/${key}.gif`)
+}
+
+/**
+ * The small set needed to boot and start a save offline: the app shell, its
+ * data, and whatever this session already loaded.
+ * @returns {string[]}
+ */
+export function collectAppShellAssets() {
+  const urls = new Set(SHELL_FILES)
+  for (const path of dataFilePaths()) urls.add(path)
+  for (const path of collectLoadedAssetPaths()) urls.add(path)
+  return [...urls].sort()
+}
+
+/**
+ * Every static asset the game can request, ready to prefetch for full offline
+ * play.
+ * @returns {string[]}
+ */
+export function collectOfflineAssets() {
+  const urls = new Set(collectAppShellAssets())
+  const speciesIds = new Set()
+  for (const species of Object.values(pokemonSpecies)) {
+    if (species && typeof species.id === 'number') speciesIds.add(species.id)
+  }
+  for (const id of speciesIds) addPokemonSpriteUrls(urls, id)
+  for (const file of Object.values(itemIcons)) {
+    if (file) urls.add(`/sprites/items/${file}`)
+  }
+  for (const file of Object.values(trainerClasses)) {
+    if (file) urls.add(`/sprites/trainers/${file}.png`)
+  }
+  for (const key of bossSpriteKeys()) urls.add(`/sprites/trainers/${key}.png`)
+  for (const file of BACKGROUND_FILES) urls.add(file)
+  for (const map of [locationImages, BIOME_SCENE_IMAGES]) {
+    for (const file of Object.values(map)) {
+      if (file && file.startsWith('/')) urls.add(file)
+    }
+  }
+  return [...urls].sort()
+}
+
+/**
+ * @typedef {Object} OfflineProgress
+ * @property {number} total
+ * @property {number} done
+ * @property {number} downloaded
+ * @property {number} skipped
+ * @property {number} failed
+ * @property {number} bytes
+ * @property {string} current
+ */
+
+/**
+ * Store a list of URLs in the offline cache, skipping anything already there.
+ * Fetched with the prefetch header so the service worker hands the response
+ * back untouched and this function owns the cache write.
+ * @param {string[]} urls
+ * @param {(progress: OfflineProgress) => void} [onProgress]
+ * @param {{ signal?: AbortSignal }} [options]
+ */
+async function cacheAssetUrls(urls, onProgress = () => {}, options = {}) {
+  const cache = await caches.open(OFFLINE_CACHE)
+  const total = urls.length
+  let done = 0
+  let downloaded = 0
+  let skipped = 0
+  let failed = 0
+  let bytes = 0
+  let nextIndex = 0
+  const report = (/** @type {string} */ current) =>
+    onProgress({ total, done, downloaded, skipped, failed, bytes, current })
+  report('')
+  const workerCount = Math.max(1, Math.min(8, total))
+  async function worker() {
+    while (nextIndex < total) {
+      if (options.signal?.aborted) return
+      const url = urls[nextIndex++]
+      try {
+        if (await cache.match(url)) {
+          skipped += 1
+        } else {
+          const response = await fetch(url, {
+            headers: { [OFFLINE_PREFETCH_HEADER]: '1' },
+            signal: options.signal,
+          })
+          if (!response.ok) throw new Error(`HTTP ${response.status}`)
+          bytes += Number(response.headers.get('content-length')) || 0
+          await cache.put(url, response)
+          downloaded += 1
+        }
+      } catch {
+        if (options.signal?.aborted) return
+        failed += 1
+      }
+      done += 1
+      report(url)
+    }
+  }
+  await Promise.all(Array.from({ length: workerCount }, () => worker()))
+  if (options.signal?.aborted) throw new DOMException('Cancelled', 'AbortError')
+  report('')
+  return { total, done, downloaded, skipped, failed, bytes }
+}
+
+/**
+ * Download the whole asset set for offline play, reporting progress as it goes.
+ * @param {(progress: OfflineProgress) => void} [onProgress]
+ * @param {{ signal?: AbortSignal }} [options]
+ */
+export async function downloadOfflineAssets(onProgress, options = {}) {
+  await ensureOfflineCaches()
+  return cacheAssetUrls(collectOfflineAssets(), onProgress, options)
+}
+
+/**
+ * Quietly warm the boot-essential files in the background so the game still
+ * opens offline after a normal visit (before the player uses the full button).
+ */
+export async function precacheAppShell(options = {}) {
+  if (!offlineAvailable()) return null
+  await ensureOfflineCaches()
+  return cacheAssetUrls(collectAppShellAssets(), () => {}, options)
+}
+
+/** Cache usage summary for the settings panel. */
+export async function getOfflineSummary() {
+  if (typeof caches === 'undefined') {
+    return { supported: false, controlled: false, count: 0, bytes: 0, quota: 0 }
+  }
+  const cache = await caches.open(OFFLINE_CACHE)
+  const keys = await cache.keys()
+  let bytes = 0
+  let quota = 0
+  try {
+    if (navigator.storage?.estimate) {
+      const estimate = await navigator.storage.estimate()
+      bytes = estimate.usage ?? 0
+      quota = estimate.quota ?? 0
+    }
+  } catch {
+    // Storage estimates are optional.
+  }
+  return {
+    supported: offlineSupported(),
+    controlled: Boolean(navigator.serviceWorker?.controller),
+    count: keys.length,
+    bytes,
+    quota,
+  }
+}
+
+/** Drop every cached offline file (the save is untouched). */
+export async function clearOfflineAssets() {
+  if (typeof caches === 'undefined') return false
+  return caches.delete(OFFLINE_CACHE)
+}

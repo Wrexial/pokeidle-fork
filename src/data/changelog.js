@@ -65,6 +65,12 @@ export const CHANGELOG = [
           ],
         },
         {
+          heading: 'Offline Play',
+          items: [
+            'The game works with no internet now: a browser service worker caches the app, and a new Offline Play section in Settings downloads every Pokemon sprite, battle backdrop, item icon and data file in one go (with a progress bar). Once it finishes you can turn off Wi-Fi and keep playing',
+          ],
+        },
+        {
           heading: 'Fixes',
           items: [
             'The Pokedex entry panel gained a close (X) button, so a Pokemon whose entry fills the panel can be deselected without having to find the grid tile again',

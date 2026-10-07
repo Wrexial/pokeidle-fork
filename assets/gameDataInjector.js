@@ -63,6 +63,9 @@ class GameDataInjector {
     });
     window.gameDataInjector = {
       data: this.data,
+      // Every data URL this injector loads, so the offline cache can warm them
+      // all up (see src/game/offline.js).
+      paths: dataFilesToLoad.map((fileInfo) => fileInfo.path),
       isLoading: () => this.isLoading,
       isError: () => this.error !== null,
       getError: () => this.error,

@@ -727,3 +727,11 @@ interface Window {
   }
   gameDataDebug: Record<string, any>
 }
+
+/**
+ * Vite replaces `import.meta.env` in a bundled build. It is undefined when a
+ * module is imported directly under Node (tests/tools), so keep it optional.
+ */
+interface ImportMeta {
+  readonly env?: { readonly DEV?: boolean; readonly PROD?: boolean }
+}

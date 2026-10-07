@@ -10,6 +10,7 @@ import { StarterSelect } from './components/starter-select.js'
 import { PatchNotesModal } from './components/patch-notes-modal.js'
 import { PatchNotesPage } from './components/patch-notes-page.js'
 import { GameProvider, useGame } from './game/context.js'
+import { precacheAppShell } from './game/offline.js'
 import { needsSlotChoice, suspendAutosave } from './game/save.js'
 import { clearSave } from './data/config.js'
 
@@ -38,6 +39,9 @@ function App() {
       } catch {
         /* ignore */
       }
+      // Warm the boot-essential files so the game can reopen offline later.
+      // No-op while running the dev server (offline needs a built worker).
+      precacheAppShell().catch(() => {})
     }, []),
     React.useEffect(() => {
       const handleHashChange = () => setHash(window.location.hash)

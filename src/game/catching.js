@@ -103,7 +103,7 @@ export function isWaterLocation(location) {
   if (location.biome === 'coast') return !0
   const text = `${location.name ?? ''} ${location.description ?? ''}`.toLowerCase()
   return (
-    location.background === '/backgrounds/beach.png' ||
+    location.background === '/backgrounds/beach.webp' ||
     /sea|ocean|lake|bay|river|water|cove|harbou?r|coast|beach|island|surf|whirl/.test(text)
   )
 }
@@ -114,7 +114,7 @@ export function isCaveLocation(location) {
   // Ruins and towers are dark, enclosed spaces too, so the Dusk Ball boosts there.
   if (location.biome === 'cave' || location.biome === 'ruins') return !0
   const text = `${location.name ?? ''} ${location.description ?? ''}`.toLowerCase()
-  return location.background === '/backgrounds/cave.png' || /cave|tunnel|mine|cavern|grotto/.test(text)
+  return location.background === '/backgrounds/cave.webp' || /cave|tunnel|mine|cavern|grotto/.test(text)
 }
 
 /**

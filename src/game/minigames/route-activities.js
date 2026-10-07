@@ -126,7 +126,7 @@ function isForageLocation(location) {
   if (location.biome && FORAGE_BIOMES.has(location.biome)) return true
   const name = location.name ?? ''
   return (
-    location.background === '/backgrounds/grassland.png' ||
+    location.background === '/backgrounds/grassland.webp' ||
     /forest|woods|grove|park|meadow|garden|tangle|jungle|safari|plain|prairie|field/i.test(name)
   )
 }

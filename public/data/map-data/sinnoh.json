@@ -33,7 +33,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Normal and Flying Pokemon roam around Lv. 3-5.",
   "routeKey": "sinnoh-route-201",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "sinnoh-twinleaf-town",
    "sinnoh-sandgem-town"
@@ -93,7 +93,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Normal and Electric Pokemon roam around Lv. 7-9.",
   "routeKey": "sinnoh-route-202",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "sinnoh-jubilife-city",
    "sinnoh-lake-verity"
@@ -156,7 +156,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 10-12.",
   "routeKey": "sinnoh-route-203",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "sinnoh-jubilife-city",
    "sinnoh-oreburgh-city",
@@ -218,7 +218,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 12-14.",
   "routeKey": "sinnoh-route-204",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "sinnoh-floaroma-town",
    "sinnoh-jubilife-city",
@@ -289,7 +289,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 14-16.",
   "routeKey": "sinnoh-route-205",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "connections": [
    "sinnoh-eterna-forest",
    "sinnoh-old-chateau",
@@ -359,7 +359,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Ground and Flying Pokemon roam around Lv. 17-19.",
   "routeKey": "sinnoh-route-206",
-  "background": "/backgrounds/mountain.png",
+  "background": "/backgrounds/mountain.webp",
   "connections": [
    "sinnoh-eterna-city",
    "sinnoh-route-207",
@@ -391,7 +391,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Fighting and Fire Pokemon roam around Lv. 19-21.",
   "routeKey": "sinnoh-route-207",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "sinnoh-route-206",
    "sinnoh-route-208",
@@ -423,7 +423,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Ground Pokemon roam around Lv. 21-23.",
   "routeKey": "sinnoh-route-208",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "sinnoh-hearthome-city",
    "sinnoh-route-211",
@@ -490,7 +490,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 24-26.",
   "routeKey": "sinnoh-route-209",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "sinnoh-solaceon-town",
    "sinnoh-hearthome-city"
@@ -561,7 +561,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 26-28.",
   "routeKey": "sinnoh-route-210",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "sinnoh-route-215",
    "sinnoh-celestic-town",
@@ -633,7 +633,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Fighting and Psychic Pokemon roam around Lv. 28-30.",
   "routeKey": "sinnoh-route-211",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "sinnoh-eterna-city",
    "sinnoh-celestic-town",
@@ -667,7 +667,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Ground Pokemon roam around Lv. 31-33.",
   "routeKey": "sinnoh-route-212",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "connections": [
    "sinnoh-hearthome-city",
    "sinnoh-pokemon-mansion",
@@ -746,7 +746,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 33-35.",
   "routeKey": "sinnoh-route-213",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "connections": [
    "sinnoh-route-222",
    "sinnoh-lake-valor"
@@ -773,7 +773,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Rock Pokemon roam around Lv. 35-37.",
   "routeKey": "sinnoh-route-214",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "sinnoh-veilstone-city",
    "sinnoh-route-222",
@@ -848,7 +848,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Flying and Normal Pokemon roam around Lv. 38-40.",
   "routeKey": "sinnoh-route-215",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "sinnoh-route-210",
    "sinnoh-veilstone-city"
@@ -876,7 +876,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Ice and Fighting Pokemon roam around Lv. 40-42.",
   "routeKey": "sinnoh-route-216",
-  "background": "/backgrounds/mountain.png",
+  "background": "/backgrounds/mountain.webp",
   "connections": [
    "sinnoh-route-217",
    "sinnoh-route-211"
@@ -907,7 +907,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Ice and Fighting Pokemon roam around Lv. 43-45.",
   "routeKey": "sinnoh-route-217",
-  "background": "/backgrounds/mountain.png",
+  "background": "/backgrounds/mountain.webp",
   "connections": [
    "sinnoh-route-216",
    "sinnoh-lake-acuity"
@@ -994,7 +994,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 45-47.",
   "routeKey": "sinnoh-route-218",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "connections": [
    "sinnoh-jubilife-city",
    "sinnoh-iron-island"
@@ -1070,7 +1070,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 47-49.",
   "routeKey": "sinnoh-route-219",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "connections": [
    "sinnoh-sandgem-town",
    "sinnoh-sea-route-220"
@@ -1101,7 +1101,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 50-52.",
   "routeKey": "sinnoh-sea-route-220",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "connections": [
    "sinnoh-route-219",
    "sinnoh-route-221"
@@ -1131,7 +1131,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Poison Pokemon roam around Lv. 52-54.",
   "routeKey": "sinnoh-route-221",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "connections": [
    "sinnoh-sea-route-220",
    "sinnoh-ramanas-park"
@@ -1159,7 +1159,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 54-56.",
   "routeKey": "sinnoh-route-222",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "sinnoh-sunyshore-city",
    "sinnoh-route-214",
@@ -1237,7 +1237,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 57-59.",
   "routeKey": "sinnoh-sea-route-223",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "connections": [
    "sinnoh-sunyshore-city",
    "sinnoh-route-224",
@@ -1269,7 +1269,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 59-61.",
   "routeKey": "sinnoh-route-224",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "sinnoh-sea-route-223"
   ],
@@ -1296,7 +1296,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 61-63.",
   "routeKey": "sinnoh-route-225",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "sinnoh-sea-route-230",
    "sinnoh-sea-route-226"
@@ -1327,7 +1327,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 64-66.",
   "routeKey": "sinnoh-sea-route-226",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "sinnoh-route-227",
    "sinnoh-route-228",
@@ -1359,7 +1359,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Ground Pokemon roam around Lv. 66-68.",
   "routeKey": "sinnoh-route-227",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "sinnoh-sea-route-226",
    "sinnoh-stark-mountain"
@@ -1389,7 +1389,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Ground Pokemon roam around Lv. 68-70.",
   "routeKey": "sinnoh-route-228",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "sinnoh-route-229",
    "sinnoh-sea-route-226",
@@ -1421,7 +1421,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 71-73.",
   "routeKey": "sinnoh-route-229",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "sinnoh-route-228",
    "sinnoh-sea-route-230"
@@ -1455,7 +1455,7 @@
   "region": "sinnoh",
   "description": "A route in the Sinnoh region where Water and Flying Pokemon roam around Lv. 73-75.",
   "routeKey": "sinnoh-sea-route-230",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "connections": [
    "sinnoh-route-229",
    "sinnoh-route-225",
@@ -1488,7 +1488,7 @@
   "region": "sinnoh",
   "description": "A mysterious island where Sinnoh's rarest Pokemon dwell.",
   "routeKey": "sinnoh-raid",
-  "background": "/backgrounds/cave.png",
+  "background": "/backgrounds/cave.webp",
   "connections": [
    "sinnoh-sea-route-230"
   ],
@@ -1566,7 +1566,7 @@
    "y": 39.5
   },
   "biome": "forest",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "sinnoh-mt-coronet": {
   "id": "sinnoh-mt-coronet",
@@ -1594,7 +1594,7 @@
    "y": 55.5
   },
   "biome": "mountain",
-  "background": "/backgrounds/mountain.png"
+  "background": "/backgrounds/mountain.webp"
  },
  "sinnoh-oreburgh-gate": {
   "id": "sinnoh-oreburgh-gate",
@@ -1621,7 +1621,7 @@
    "y": 54
   },
   "biome": "grassland",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "sinnoh-wayward-cave": {
   "id": "sinnoh-wayward-cave",
@@ -1647,7 +1647,7 @@
    "y": 32.5
   },
   "biome": "cave",
-  "background": "/backgrounds/cave.png"
+  "background": "/backgrounds/cave.webp"
  },
  "sinnoh-solaceon-ruins": {
   "id": "sinnoh-solaceon-ruins",
@@ -1674,7 +1674,7 @@
    "y": 39.5
   },
   "biome": "ruins",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "sinnoh-iron-island": {
   "id": "sinnoh-iron-island",
@@ -1701,7 +1701,7 @@
    "y": 63.5
   },
   "biome": "coast",
-  "background": "/backgrounds/beach.png"
+  "background": "/backgrounds/beach.webp"
  },
  "sinnoh-snowpoint-temple": {
   "id": "sinnoh-snowpoint-temple",
@@ -1727,7 +1727,7 @@
    "y": 16
   },
   "biome": "tundra",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "sinnoh-stark-mountain": {
   "id": "sinnoh-stark-mountain",
@@ -1754,7 +1754,7 @@
    "y": 13.5
   },
   "biome": "mountain",
-  "background": "/backgrounds/mountain.png"
+  "background": "/backgrounds/mountain.webp"
  },
  "sinnoh-lake-verity": {
   "id": "sinnoh-lake-verity",
@@ -1781,7 +1781,7 @@
    "y": 68
   },
   "biome": "coast",
-  "background": "/backgrounds/beach.png"
+  "background": "/backgrounds/beach.webp"
  },
  "sinnoh-lake-acuity": {
   "id": "sinnoh-lake-acuity",
@@ -1808,7 +1808,7 @@
    "y": 20.5
   },
   "biome": "coast",
-  "background": "/backgrounds/beach.png"
+  "background": "/backgrounds/beach.webp"
  },
  "sinnoh-lake-valor": {
   "id": "sinnoh-lake-valor",
@@ -1835,7 +1835,7 @@
    "y": 70
   },
   "biome": "coast",
-  "background": "/backgrounds/beach.png"
+  "background": "/backgrounds/beach.webp"
  },
  "sinnoh-old-chateau": {
   "id": "sinnoh-old-chateau",
@@ -1862,7 +1862,7 @@
    "y": 33.5
   },
   "biome": "ruins",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "sinnoh-turnback-cave": {
   "id": "sinnoh-turnback-cave",
@@ -1889,7 +1889,7 @@
    "y": 40.5
   },
   "biome": "cave",
-  "background": "/backgrounds/cave.png"
+  "background": "/backgrounds/cave.webp"
  },
  "sinnoh-ravaged-path": {
   "id": "sinnoh-ravaged-path",
@@ -1916,7 +1916,7 @@
    "y": 52.5
   },
   "biome": "grassland",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "sinnoh-fuego-ironworks": {
   "id": "sinnoh-fuego-ironworks",
@@ -1943,7 +1943,7 @@
    "y": 41
   },
   "biome": "grassland",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "sinnoh-pokemon-mansion": {
   "id": "sinnoh-pokemon-mansion",
@@ -1970,7 +1970,7 @@
    "y": 56.5
   },
   "biome": "grassland",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "sinnoh-sendoff-spring": {
   "id": "sinnoh-sendoff-spring",
@@ -1998,7 +1998,7 @@
    "y": 45
   },
   "biome": "coast",
-  "background": "/backgrounds/beach.png"
+  "background": "/backgrounds/beach.webp"
  },
  "sinnoh-trophy-garden": {
   "id": "sinnoh-trophy-garden",
@@ -2025,7 +2025,7 @@
    "y": 55.5
   },
   "biome": "grassland",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "sinnoh-ramanas-park": {
   "id": "sinnoh-ramanas-park",
@@ -2052,7 +2052,7 @@
    "y": 76
   },
   "biome": "grassland",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "sinnoh-floaroma-meadow": {
   "id": "sinnoh-floaroma-meadow",
@@ -2079,7 +2079,7 @@
    "y": 43
   },
   "biome": "forest",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "sinnoh-valley-windworks": {
   "id": "sinnoh-valley-windworks",
@@ -2106,7 +2106,7 @@
    "y": 50
   },
   "biome": "grassland",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "sinnoh-spear-pillar": {
   "id": "sinnoh-spear-pillar",
@@ -2132,7 +2132,7 @@
    "y": 58
   },
   "biome": "grassland",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "sinnoh-spring-path": {
   "id": "sinnoh-spring-path",
@@ -2158,6 +2158,6 @@
    "y": 48
   },
   "biome": "ruins",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  }
 }

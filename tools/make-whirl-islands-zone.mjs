@@ -23,8 +23,8 @@ const write = (file, value) =>
   fs.writeFileSync(path.join(DATA, file), JSON.stringify(value, null, 1) + '\n')
 
 const BACKGROUND_BY_BIOME = {
-  cave: '/backgrounds/cave.png',
-  coast: '/backgrounds/beach.png',
+  cave: '/backgrounds/cave.webp',
+  coast: '/backgrounds/beach.webp',
 }
 
 /** Sub-areas, in travel order. Levels match the original route (48-50). */
@@ -61,7 +61,7 @@ AREAS.forEach((area, index) => {
     region: 'johto',
     description: `${area.name}, one of the Whirl Islands' caves.`,
     routeKey: id,
-    background: BACKGROUND_BY_BIOME[area.biome] ?? '/backgrounds/grassland.png',
+    background: BACKGROUND_BY_BIOME[area.biome] ?? '/backgrounds/grassland.webp',
     connections: [HUB],
     // `enforce-zone-chains.cjs` will add the previous sub-area to `requires`.
     unlock: { requires: [HUB] },

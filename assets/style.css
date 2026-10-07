@@ -425,7 +425,7 @@ img {
     width: 560px;
     height: 480px;
     overflow: hidden;
-    background-image: url(/backgrounds/grassland.png);
+    background-image: url(/backgrounds/grassland.webp);
     background-size: cover;
     background-position: center bottom
 }
@@ -8217,11 +8217,11 @@ img {
 }
 
 .mining-scene {
-    background-image: url(/backgrounds/cave.png)
+    background-image: url(/backgrounds/cave.webp)
 }
 
 .game-corner-scene {
-    background-image: url(/backgrounds/town_port.png)
+    background-image: url(/backgrounds/town_port.webp)
 }
 
 .minigame-scene-header {
@@ -8270,11 +8270,11 @@ img {
 }
 
 .route-activity-scene {
-    background-image: url(/backgrounds/beach.png)
+    background-image: url(/backgrounds/beach.webp)
 }
 
 .route-activity-scene.activity-forage {
-    background-image: url(/backgrounds/grassland.png)
+    background-image: url(/backgrounds/grassland.webp)
 }
 
 .activity-hint {
@@ -8600,7 +8600,7 @@ img {
     justify-content: space-between;
     box-sizing: border-box;
     padding: 10px 14px;
-    background-image: url(/backgrounds/grassland.png);
+    background-image: url(/backgrounds/grassland.webp);
     background-size: cover;
     background-position: center bottom;
     color: var(--parchment)
@@ -10052,7 +10052,7 @@ img {
     height: 480px;
     overflow: hidden;
     padding: 10px 14px;
-    background-image: url(/backgrounds/grassland.png);
+    background-image: url(/backgrounds/grassland.webp);
     background-size: cover;
     background-position: center bottom;
     color: var(--parchment)
@@ -10340,31 +10340,31 @@ img {
 }
 
 .safari-area-center {
-    background-image: linear-gradient(rgba(120,200,120,.18),rgba(120,200,120,.18)),url(/backgrounds/grassland.png)
+    background-image: linear-gradient(rgba(120,200,120,.18),rgba(120,200,120,.18)),url(/backgrounds/grassland.webp)
 }
 
 .safari-area-east {
-    background-image: linear-gradient(rgba(80,150,220,.22),rgba(80,150,220,.22)),url(/backgrounds/grassland.png)
+    background-image: linear-gradient(rgba(80,150,220,.22),rgba(80,150,220,.22)),url(/backgrounds/grassland.webp)
 }
 
 .safari-area-north {
-    background-image: linear-gradient(rgba(180,140,80,.22),rgba(180,140,80,.22)),url(/backgrounds/grassland.png)
+    background-image: linear-gradient(rgba(180,140,80,.22),rgba(180,140,80,.22)),url(/backgrounds/grassland.webp)
 }
 
 .safari-area-west {
-    background-image: linear-gradient(rgba(90,160,90,.28),rgba(40,90,50,.3)),url(/backgrounds/grassland.png)
+    background-image: linear-gradient(rgba(90,160,90,.28),rgba(40,90,50,.3)),url(/backgrounds/grassland.webp)
 }
 
 .route-activity-scene.activity-rockSmash {
-    background-image: url(/backgrounds/cave.png)
+    background-image: url(/backgrounds/cave.webp)
 }
 
 .route-activity-scene.activity-headbutt {
-    background-image: url(/backgrounds/grassland.png)
+    background-image: url(/backgrounds/grassland.webp)
 }
 
 .route-activity-scene.activity-diving {
-    background-image: url(/backgrounds/beach.png)
+    background-image: url(/backgrounds/beach.webp)
 }
 
 .activity-diving .minigame-scene-bg {
@@ -10538,7 +10538,7 @@ img {
     height: 480px;
     overflow: hidden;
     padding: 10px 14px;
-    background-image: url(/backgrounds/town.png);
+    background-image: url(/backgrounds/town.webp);
     background-size: cover;
     background-position: center;
     color: var(--parchment)
@@ -10677,7 +10677,7 @@ img {
 }
 
 .pelago-scene {
-    background-image: url(/backgrounds/beach.png)
+    background-image: url(/backgrounds/beach.webp)
 }
 
 .pelago-scene-body {
@@ -11095,7 +11095,7 @@ img {
 }
 
 .voltorb-scene {
-    background-image: url(/backgrounds/town_port.png)
+    background-image: url(/backgrounds/town_port.webp)
 }
 
 .voltorb-board {
@@ -11210,7 +11210,7 @@ img {
 }
 
 .auction-scene {
-    background-image: url(/backgrounds/town_port.png)
+    background-image: url(/backgrounds/town_port.webp)
 }
 
 .auction-podium {
@@ -11339,7 +11339,7 @@ img {
 }
 
 .contest-scene {
-    background-image: url(/backgrounds/town_port.png)
+    background-image: url(/backgrounds/town_port.webp)
 }
 
 .contest-theme {
@@ -11466,7 +11466,7 @@ img {
 .contest-rank-score { font-weight: 700 }
 
 .pokeathlon-scene {
-    background-image: url(/backgrounds/grassland.png)
+    background-image: url(/backgrounds/grassland.webp)
 }
 
 .athlon-event {
@@ -11630,7 +11630,7 @@ img {
 }
 
 .radar-scene {
-    background-image: url(/backgrounds/grassland.png)
+    background-image: url(/backgrounds/grassland.webp)
 }
 
 .radar-target {
@@ -11708,7 +11708,7 @@ img {
 }
 
 .royal-scene {
-    background-image: url(/backgrounds/town.png)
+    background-image: url(/backgrounds/town.webp)
 }
 
 .royal-arena {
@@ -11916,7 +11916,7 @@ img {
 }
 
 .dynamax-scene {
-    background-image: url(/backgrounds/cave.png)
+    background-image: url(/backgrounds/cave.webp)
 }
 
 .dynamax-paths {
@@ -12189,7 +12189,7 @@ img {
 }
 
 .lights-out-scene {
-    background-image: url(/backgrounds/cave.png)
+    background-image: url(/backgrounds/cave.webp)
 }
 
 .lights-grid {
@@ -12220,7 +12220,7 @@ img {
 }
 
 .curry-scene {
-    background-image: url(/backgrounds/grassland.png)
+    background-image: url(/backgrounds/grassland.webp)
 }
 
 .curry-choose,
@@ -12359,7 +12359,7 @@ img {
 }
 
 .pokestar-scene {
-    background-image: url(/backgrounds/town_port.png)
+    background-image: url(/backgrounds/town_port.webp)
 }
 
 .pokestar-brief {
@@ -12425,7 +12425,7 @@ img {
 }
 
 .puzzle-league-scene {
-    background-image: url(/backgrounds/town_port.png)
+    background-image: url(/backgrounds/town_port.webp)
 }
 
 .match3-grid {
@@ -12489,7 +12489,7 @@ img {
 .match3-normal .match3-tile-inner { background: #a8a878 }
 
 .memory-scene {
-    background-image: url(/backgrounds/beach.png)
+    background-image: url(/backgrounds/beach.webp)
 }
 
 .memory-grid {
@@ -12534,7 +12534,7 @@ img {
 }
 
 .whack-scene {
-    background-image: url(/backgrounds/grassland.png)
+    background-image: url(/backgrounds/grassland.webp)
 }
 
 .whack-grid {
@@ -12594,7 +12594,7 @@ img {
 
 /* --- Pokemon Musical (Unova) -------------------------------------------- */
 .musical-scene {
-    background-image: url(/backgrounds/town_port.png)
+    background-image: url(/backgrounds/town_port.webp)
 }
 
 .musical-board {
@@ -12822,7 +12822,7 @@ img {
 
 /* --- Picnic (Paldea) ---------------------------------------------------- */
 .picnic-scene {
-    background-image: url(/backgrounds/grassland.png)
+    background-image: url(/backgrounds/grassland.webp)
 }
 
 .picnic-board {
@@ -13055,7 +13055,7 @@ img {
 
 /* --- Poke Ball Factory (Kalos) ------------------------------------------ */
 .factory-scene {
-    background-image: url(/backgrounds/town.png)
+    background-image: url(/backgrounds/town.webp)
 }
 
 .factory-wrap {
@@ -13508,7 +13508,7 @@ img {
 
 /* --- Ruins of Alph (Johto) ------------------------------------------------ */
 .ruins-scene {
-    background-image: url(/backgrounds/cave.png)
+    background-image: url(/backgrounds/cave.webp)
 }
 
 .ruins-wrap,
@@ -13588,7 +13588,7 @@ img {
 
 /* --- Snowpoint Temple (Sinnoh) ------------------------------------------- */
 .ice-scene {
-    background-image: url(/backgrounds/cave.png)
+    background-image: url(/backgrounds/cave.webp)
 }
 
 .ice-grid {

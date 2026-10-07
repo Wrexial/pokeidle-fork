@@ -32,10 +32,10 @@ const clampLevel = (n) => Math.max(2, Math.min(100, n))
 const encounterWeight = (index) => (index < 3 ? 20 : index < 8 ? 12 : 6)
 const backgroundForBiome = (biome) =>
   ({
-    cave: '/backgrounds/cave.png',
-    mountain: '/backgrounds/mountain.png',
-    coast: '/backgrounds/beach.png',
-  })[biome] ?? '/backgrounds/grassland.png'
+    cave: '/backgrounds/cave.webp',
+    mountain: '/backgrounds/mountain.webp',
+    coast: '/backgrounds/beach.webp',
+  })[biome] ?? '/backgrounds/grassland.webp'
 
 const species = read('pokemon-species.json')
 const regions = read('regions.json')

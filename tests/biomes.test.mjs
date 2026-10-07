@@ -15,11 +15,11 @@ test('biomeForLocation picks a tint from the name and background', () => {
   assert.equal(biomeForLocation({ name: 'Galar Mine' }), 'cave')
   assert.equal(biomeForLocation({ name: 'Snowslide Slope' }), 'tundra')
   assert.equal(
-    biomeForLocation({ name: 'Route 5', background: '/backgrounds/beach.png' }),
+    biomeForLocation({ name: 'Route 5', background: '/backgrounds/beach.webp' }),
     'coast'
   )
   assert.equal(
-    biomeForLocation({ name: 'Route 1', background: '/backgrounds/grassland.png' }),
+    biomeForLocation({ name: 'Route 1', background: '/backgrounds/grassland.webp' }),
     'grassland'
   )
   assert.equal(biomeForLocation(undefined), 'grassland')
@@ -27,7 +27,7 @@ test('biomeForLocation picks a tint from the name and background', () => {
 
 test('biomeForLocation prefers a declared biome over its heuristics', () => {
   assert.equal(
-    biomeForLocation({ name: 'Route 111', background: '/backgrounds/grassland.png', biome: 'desert' }),
+    biomeForLocation({ name: 'Route 111', background: '/backgrounds/grassland.webp', biome: 'desert' }),
     'desert'
   )
   // An unknown biome is ignored so old data still renders.
@@ -41,13 +41,13 @@ test('biomeForLocation no longer mistakes "fall" for autumn', () => {
 })
 
 test('dedicated biome scenes take over once the art is installed', () => {
-  const scenes = { forest: '/backgrounds/forest.jpeg' }
+  const scenes = { forest: '/backgrounds/forest.webp' }
   assert.deepEqual(biomeBackgroundFor({ name: 'Glimwood Tangle' }, scenes), {
-    image: '/backgrounds/forest.jpeg',
+    image: '/backgrounds/forest.webp',
     biome: 'forest',
   })
   assert.deepEqual(biomeBackgroundFor({ name: 'Glimwood Tangle' }), {
-    image: '/backgrounds/forest.jpeg',
+    image: '/backgrounds/forest.webp',
     biome: 'forest',
   })
   assert.equal(
@@ -60,7 +60,7 @@ test('dedicated biome scenes take over once the art is installed', () => {
 test('every installed biome scene has a filter fallback and a background path', () => {
   for (const [biome, image] of Object.entries(BIOME_SCENE_IMAGES)) {
     assert.equal(typeof BIOME_FILTERS[biome], 'string', `${biome} needs a filter fallback`)
-    assert.match(image, /^\/backgrounds\/.+\.(png|jpe?g)$/)
+    assert.match(image, /^\/backgrounds\/.+\.(png|jpe?g|webp)$/)
   }
 })
 
@@ -112,5 +112,5 @@ test('deriveBiome reads the wild table when the name gives nothing away', () => 
     'tundra'
   )
   // No signal at all falls back to the base background.
-  assert.equal(deriveBiome({ id: 'x', name: 'Route 1', background: '/backgrounds/beach.png' }, [], species), 'coast')
+  assert.equal(deriveBiome({ id: 'x', name: 'Route 1', background: '/backgrounds/beach.webp' }, [], species), 'coast')
 })

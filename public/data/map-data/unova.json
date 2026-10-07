@@ -33,7 +33,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Normal and Water Pokemon roam around Lv. 3-5.",
   "routeKey": "unova-route-1",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "unova-nuvema-town",
    "unova-accumula-town",
@@ -126,7 +126,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Normal and Dark Pokemon roam around Lv. 8-10.",
   "routeKey": "unova-route-2",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "unova-accumula-town",
    "unova-striaton-city"
@@ -259,7 +259,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Normal and Water Pokemon roam around Lv. 11-13.",
   "routeKey": "unova-route-3",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "unova-striaton-city",
    "unova-pinwheel-forest"
@@ -372,7 +372,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Water and Poison Pokemon roam around Lv. 14-16.",
   "routeKey": "unova-route-4",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "unova-castelia-city",
    "unova-relic-castle",
@@ -447,7 +447,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Normal and Psychic Pokemon roam around Lv. 17-19.",
   "routeKey": "unova-route-5",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "unova-nimbasa-city",
    "unova-driftveil-city"
@@ -568,7 +568,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Water and Normal Pokemon roam around Lv. 20-22.",
   "routeKey": "unova-route-6",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "unova-driftveil-city",
    "unova-chargestone-cave",
@@ -652,7 +652,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Normal and Flying Pokemon roam around Lv. 23-25.",
   "routeKey": "unova-route-7",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "unova-mistralton-city",
    "unova-twist-mountain",
@@ -730,7 +730,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Ground and Water Pokemon roam around Lv. 26-28.",
   "routeKey": "unova-route-8",
-  "background": "/backgrounds/mountain.png",
+  "background": "/backgrounds/mountain.webp",
   "connections": [
    "unova-route-9",
    "unova-dragonspiral-tower",
@@ -761,7 +761,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Normal and Psychic Pokemon roam around Lv. 29-31.",
   "routeKey": "unova-route-9",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "unova-opelucid-city",
    "unova-route-8"
@@ -840,7 +840,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Normal and Flying Pokemon roam around Lv. 32-34.",
   "routeKey": "unova-route-10",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "unova-opelucid-city"
   ],
@@ -870,7 +870,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Water and Normal Pokemon roam around Lv. 35-37.",
   "routeKey": "unova-route-11",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "unova-opelucid-city",
    "unova-route-12"
@@ -900,7 +900,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Bug and Grass Pokemon roam around Lv. 38-40.",
   "routeKey": "unova-route-12",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "unova-lacunosa-town",
    "unova-route-11"
@@ -981,7 +981,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Water and Flying Pokemon roam around Lv. 40-42.",
   "routeKey": "unova-route-13",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "unova-undella-town",
    "unova-lacunosa-town",
@@ -1061,7 +1061,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Water and Normal Pokemon roam around Lv. 43-45.",
   "routeKey": "unova-route-14",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "unova-undella-town",
    "unova-black-city",
@@ -1230,7 +1230,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Ground and Normal Pokemon roam around Lv. 46-48.",
   "routeKey": "unova-route-15",
-  "background": "/backgrounds/mountain.png",
+  "background": "/backgrounds/mountain.webp",
   "connections": [
    "unova-black-city",
    "unova-route-16",
@@ -1259,7 +1259,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Normal and Psychic Pokemon roam around Lv. 49-51.",
   "routeKey": "unova-route-16",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "unova-nimbasa-city",
    "unova-route-15",
@@ -1291,7 +1291,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Water and Poison Pokemon roam around Lv. 52-54.",
   "routeKey": "unova-route-17",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "connections": [
    "unova-route-1",
    "unova-route-18"
@@ -1322,7 +1322,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Water and Fighting Pokemon roam around Lv. 55-57.",
   "routeKey": "unova-route-18",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "unova-route-17"
   ],
@@ -1348,7 +1348,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Electric and Psychic Pokemon roam around Lv. 58-60.",
   "routeKey": "unova-route-gate",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "unova-castelia-city"
   ],
@@ -1381,7 +1381,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Normal and Water Pokemon roam around Lv. 61-63.",
   "routeKey": "unova-route-19",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "unova-aspertia-city",
    "unova-floccesy-town"
@@ -1412,7 +1412,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Normal and Water Pokemon roam around Lv. 64-66.",
   "routeKey": "unova-route-20",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "unova-virbank-city",
    "unova-floccesy-town"
@@ -1443,7 +1443,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Water and Flying Pokemon roam around Lv. 67-69.",
   "routeKey": "unova-route-21",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "connections": [
    "unova-humilau-city",
    "unova-undella-town",
@@ -1478,7 +1478,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Water and Fairy Pokemon roam around Lv. 70-72.",
   "routeKey": "unova-route-22",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "unova-humilau-city",
    "unova-route-13",
@@ -1508,7 +1508,7 @@
   "region": "unova",
   "description": "A route in the Unova region where Water and Normal Pokemon roam around Lv. 73-75.",
   "routeKey": "unova-route-23",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "unova-route-22",
    "unova-raid",
@@ -1537,7 +1537,7 @@
   "region": "unova",
   "description": "A mysterious island where Unova's rarest Pokemon dwell.",
   "routeKey": "unova-raid",
-  "background": "/backgrounds/cave.png",
+  "background": "/backgrounds/cave.webp",
   "connections": [
    "unova-route-23"
   ],
@@ -1616,7 +1616,7 @@
    "y": 69.5
   },
   "biome": "forest",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "unova-chargestone-cave": {
   "id": "unova-chargestone-cave",
@@ -1643,7 +1643,7 @@
    "y": 51
   },
   "biome": "cave",
-  "background": "/backgrounds/cave.png"
+  "background": "/backgrounds/cave.webp"
  },
  "unova-wellspring-cave": {
   "id": "unova-wellspring-cave",
@@ -1669,7 +1669,7 @@
    "y": 57.5
   },
   "biome": "cave",
-  "background": "/backgrounds/cave.png"
+  "background": "/backgrounds/cave.webp"
  },
  "unova-twist-mountain": {
   "id": "unova-twist-mountain",
@@ -1696,7 +1696,7 @@
    "y": 42.5
   },
   "biome": "mountain",
-  "background": "/backgrounds/mountain.png"
+  "background": "/backgrounds/mountain.webp"
  },
  "unova-dragonspiral-tower": {
   "id": "unova-dragonspiral-tower",
@@ -1723,7 +1723,7 @@
    "y": 37
   },
   "biome": "ruins",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "unova-relic-castle": {
   "id": "unova-relic-castle",
@@ -1750,7 +1750,7 @@
    "y": 55.5
   },
   "biome": "grassland",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "unova-giant-chasm": {
   "id": "unova-giant-chasm",
@@ -1776,7 +1776,7 @@
    "y": 42
   },
   "biome": "grassland",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "unova-challengers-cave": {
   "id": "unova-challengers-cave",
@@ -1802,7 +1802,7 @@
    "y": 51
   },
   "biome": "cave",
-  "background": "/backgrounds/cave.png"
+  "background": "/backgrounds/cave.webp"
  },
  "unova-moor-of-icirrus": {
   "id": "unova-moor-of-icirrus",
@@ -1829,7 +1829,7 @@
    "y": 28.5
   },
   "biome": "swamp",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "unova-ns-castle": {
   "id": "unova-ns-castle",
@@ -1855,7 +1855,7 @@
    "y": 5
   },
   "biome": "grassland",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "unova-desert-resort": {
   "id": "unova-desert-resort",
@@ -1883,7 +1883,7 @@
    "y": 59
   },
   "biome": "desert",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "unova-reversal-mountain": {
   "id": "unova-reversal-mountain",
@@ -1911,7 +1911,7 @@
    "y": 32.5
   },
   "biome": "mountain",
-  "background": "/backgrounds/mountain.png"
+  "background": "/backgrounds/mountain.webp"
  },
  "unova-white-forest": {
   "id": "unova-white-forest",
@@ -1938,7 +1938,7 @@
    "y": 44.5
   },
   "biome": "forest",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "unova-floccesy-ranch": {
   "id": "unova-floccesy-ranch",
@@ -1965,7 +1965,7 @@
    "y": 72
   },
   "biome": "grassland",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "unova-virbank-complex": {
   "id": "unova-virbank-complex",
@@ -1992,7 +1992,7 @@
    "y": 63
   },
   "biome": "grassland",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "unova-castelia-sewers": {
   "id": "unova-castelia-sewers",
@@ -2019,7 +2019,7 @@
    "y": 68
   },
   "biome": "cave",
-  "background": "/backgrounds/cave.png"
+  "background": "/backgrounds/cave.webp"
  },
  "unova-relic-passage": {
   "id": "unova-relic-passage",
@@ -2046,7 +2046,7 @@
    "y": 65
   },
   "biome": "grassland",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "unova-strange-house": {
   "id": "unova-strange-house",
@@ -2072,7 +2072,7 @@
    "y": 44
   },
   "biome": "ruins",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "unova-seaside-cave": {
   "id": "unova-seaside-cave",
@@ -2099,7 +2099,7 @@
    "y": 33
   },
   "biome": "cave",
-  "background": "/backgrounds/cave.png"
+  "background": "/backgrounds/cave.webp"
  },
  "unova-lostlorn-forest": {
   "id": "unova-lostlorn-forest",
@@ -2126,7 +2126,7 @@
    "y": 56
   },
   "biome": "forest",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "unova-mistralton-cave": {
   "id": "unova-mistralton-cave",
@@ -2153,7 +2153,7 @@
    "y": 47
   },
   "biome": "cave",
-  "background": "/backgrounds/cave.png"
+  "background": "/backgrounds/cave.webp"
  },
  "unova-clay-tunnel": {
   "id": "unova-clay-tunnel",
@@ -2180,7 +2180,7 @@
    "y": 55
   },
   "biome": "cave",
-  "background": "/backgrounds/cave.png"
+  "background": "/backgrounds/cave.webp"
  },
  "unova-abundant-shrine": {
   "id": "unova-abundant-shrine",
@@ -2207,7 +2207,7 @@
    "y": 51
   },
   "biome": "ruins",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "unova-undella-bay": {
   "id": "unova-undella-bay",
@@ -2234,7 +2234,7 @@
    "y": 40
   },
   "biome": "coast",
-  "background": "/backgrounds/beach.png"
+  "background": "/backgrounds/beach.webp"
  },
  "unova-p2-laboratory": {
   "id": "unova-p2-laboratory",
@@ -2261,7 +2261,7 @@
    "y": 48
   },
   "biome": "grassland",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "unova-celestial-tower": {
   "id": "unova-celestial-tower",
@@ -2288,7 +2288,7 @@
    "y": 38
   },
   "biome": "ruins",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "unova-liberty-garden": {
   "id": "unova-liberty-garden",
@@ -2315,7 +2315,7 @@
    "y": 68
   },
   "biome": "grassland",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "unova-nature-sanctuary": {
   "id": "unova-nature-sanctuary",
@@ -2341,7 +2341,7 @@
    "y": 52
   },
   "biome": "forest",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "unova-victory-road": {
   "id": "unova-victory-road",
@@ -2367,6 +2367,6 @@
    "y": 39
   },
   "biome": "mountain",
-  "background": "/backgrounds/mountain.png"
+  "background": "/backgrounds/mountain.webp"
  }
 }

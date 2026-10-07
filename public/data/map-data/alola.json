@@ -33,7 +33,7 @@
   "region": "alola",
   "description": "A route in the Alola region where Normal and Water Pokemon roam around Lv. 3-5.",
   "routeKey": "alola-route-1",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "alola-melemele-island"
   ],
@@ -59,7 +59,7 @@
   "region": "alola",
   "description": "A route in the Alola region where Normal and Flying Pokemon roam around Lv. 9-11.",
   "routeKey": "alola-route-1--hauoli-outskirts",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "alola-melemele-island"
   ],
@@ -92,7 +92,7 @@
   "region": "alola",
   "description": "A route in the Alola region where Psychic and Poison Pokemon roam around Lv. 13-15.",
   "routeKey": "alola-route-2",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "alola-melemele-island"
   ],
@@ -204,7 +204,7 @@
   "region": "alola",
   "description": "A route in the Alola region where Flying and Normal Pokemon roam around Lv. 17-19.",
   "routeKey": "alola-route-3",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "alola-melemele-island"
   ],
@@ -292,7 +292,7 @@
   "region": "alola",
   "description": "A route in the Alola region where Normal and Flying Pokemon roam around Lv. 21-23.",
   "routeKey": "alola-route-4",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "alola-akala-island"
   ],
@@ -363,7 +363,7 @@
   "region": "alola",
   "description": "A route in the Alola region where Bug and Flying Pokemon roam around Lv. 25-27.",
   "routeKey": "alola-route-5",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "alola-akala-island"
   ],
@@ -399,7 +399,7 @@
   "region": "alola",
   "description": "A route in the Alola region where Normal and Flying Pokemon roam around Lv. 29-31.",
   "routeKey": "alola-route-6",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "alola-akala-island"
   ],
@@ -433,7 +433,7 @@
   "region": "alola",
   "description": "A route in the Alola region where Water and Flying Pokemon roam around Lv. 33-35.",
   "routeKey": "alola-route-7",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "connections": [
    "alola-akala-island"
   ],
@@ -459,7 +459,7 @@
   "region": "alola",
   "description": "A route in the Alola region where Water and Normal Pokemon roam around Lv. 37-39.",
   "routeKey": "alola-route-8",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "alola-akala-island"
   ],
@@ -491,7 +491,7 @@
   "region": "alola",
   "description": "A route in the Alola region where Water and Flying Pokemon roam around Lv. 41-43.",
   "routeKey": "alola-route-9",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "connections": [
    "alola-ulaula-island"
   ],
@@ -564,7 +564,7 @@
   "region": "alola",
   "description": "A route in the Alola region where Flying and Normal Pokemon roam around Lv. 45-47.",
   "routeKey": "alola-route-10",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "alola-ulaula-island"
   ],
@@ -650,7 +650,7 @@
   "region": "alola",
   "description": "A route in the Alola region where Normal and Bug Pokemon roam around Lv. 49-51.",
   "routeKey": "alola-route-11",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "alola-ulaula-island"
   ],
@@ -679,7 +679,7 @@
   "region": "alola",
   "description": "A route in the Alola region where Ground and Electric Pokemon roam around Lv. 53-55.",
   "routeKey": "alola-route-12",
-  "background": "/backgrounds/mountain.png",
+  "background": "/backgrounds/mountain.webp",
   "connections": [
    "alola-ulaula-island",
    "alola-haina-desert"
@@ -716,7 +716,7 @@
   "region": "alola",
   "description": "A route in the Alola region where Water and Flying Pokemon roam around Lv. 57-59.",
   "routeKey": "alola-route-13",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "connections": [
    "alola-ulaula-island",
    "alola-haina-desert"
@@ -753,7 +753,7 @@
   "region": "alola",
   "description": "A route in the Alola region where Water and Flying Pokemon roam around Lv. 61-63.",
   "routeKey": "alola-route-14",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "connections": [
    "alola-ulaula-island"
   ],
@@ -784,7 +784,7 @@
   "region": "alola",
   "description": "A route in the Alola region where Water and Flying Pokemon roam around Lv. 65-67.",
   "routeKey": "alola-route-15",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "connections": [
    "alola-ulaula-island"
   ],
@@ -819,7 +819,7 @@
   "region": "alola",
   "description": "A route in the Alola region where Water and Flying Pokemon roam around Lv. 69-71.",
   "routeKey": "alola-route-16",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "alola-poni-island"
   ],
@@ -844,7 +844,7 @@
   "region": "alola",
   "description": "A route in the Alola region where Normal and Dark Pokemon roam around Lv. 73-75.",
   "routeKey": "alola-route-17",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "alola-poni-island"
   ],
@@ -880,7 +880,7 @@
   "region": "alola",
   "description": "A mysterious island where Alola's rarest Pokemon dwell.",
   "routeKey": "alola-raid",
-  "background": "/backgrounds/cave.png",
+  "background": "/backgrounds/cave.webp",
   "connections": [],
   "unlock": {
    "battlesAtLocation": [
@@ -945,7 +945,7 @@
   "region": "alola",
   "description": "Melemele Island is made up of several areas, each with its own Pokemon.",
   "routeKey": "alola-route-1",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "alola-iki-town",
    "alola-hauoli-city",
@@ -1013,7 +1013,7 @@
   "region": "alola",
   "description": "Akala Island is made up of several areas, each with its own Pokemon.",
   "routeKey": "alola-route-4",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "alola-paniola-town",
    "alola-route-4",
@@ -1096,7 +1096,7 @@
   "region": "alola",
   "description": "Ula'ula Island is made up of several areas, each with its own Pokemon.",
   "routeKey": "alola-route-9",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "connections": [
    "alola-heahea-city",
    "alola-konikoni-city",
@@ -1183,7 +1183,7 @@
   "region": "alola",
   "description": "Poni Island is made up of several areas, each with its own Pokemon.",
   "routeKey": "alola-route-16",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "alola-po-town",
    "alola-route-16",
@@ -1280,7 +1280,7 @@
    "x": 14,
    "y": 10
   },
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "biome": "coast"
  },
  "alola-verdant-cavern": {
@@ -1307,7 +1307,7 @@
    "y": 10.3
   },
   "biome": "cave",
-  "background": "/backgrounds/cave.png"
+  "background": "/backgrounds/cave.webp"
  },
  "alola-wela-volcano-park": {
   "id": "alola-wela-volcano-park",
@@ -1333,7 +1333,7 @@
    "y": 15.1
   },
   "biome": "volcanic",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "alola-lush-jungle": {
   "id": "alola-lush-jungle",
@@ -1359,7 +1359,7 @@
    "y": 15.1
   },
   "biome": "forest",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "alola-vast-poni-canyon": {
   "id": "alola-vast-poni-canyon",
@@ -1386,7 +1386,7 @@
    "y": 68
   },
   "biome": "mountain",
-  "background": "/backgrounds/mountain.png"
+  "background": "/backgrounds/mountain.webp"
  },
  "alola-mount-lanakila": {
   "id": "alola-mount-lanakila",
@@ -1412,7 +1412,7 @@
    "y": 68
   },
   "biome": "mountain",
-  "background": "/backgrounds/mountain.png"
+  "background": "/backgrounds/mountain.webp"
  },
  "alola-ten-carat-hill": {
   "id": "alola-ten-carat-hill",
@@ -1438,7 +1438,7 @@
    "y": 29.61
   },
   "biome": "mountain",
-  "background": "/backgrounds/mountain.png"
+  "background": "/backgrounds/mountain.webp"
  },
  "alola-hauoli-cemetery": {
   "id": "alola-hauoli-cemetery",
@@ -1464,7 +1464,7 @@
    "y": 26.8
   },
   "biome": "ruins",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "alola-kalae-bay": {
   "id": "alola-kalae-bay",
@@ -1490,7 +1490,7 @@
    "y": 20.01
   },
   "biome": "coast",
-  "background": "/backgrounds/beach.png"
+  "background": "/backgrounds/beach.webp"
  },
  "alola-melemele-sea": {
   "id": "alola-melemele-sea",
@@ -1516,7 +1516,7 @@
    "y": 13.22
   },
   "biome": "coast",
-  "background": "/backgrounds/beach.png"
+  "background": "/backgrounds/beach.webp"
  },
  "alola-brooklet-hill": {
   "id": "alola-brooklet-hill",
@@ -1542,7 +1542,7 @@
    "y": 31.22
   },
   "biome": "coast",
-  "background": "/backgrounds/beach.png"
+  "background": "/backgrounds/beach.webp"
  },
  "alola-memorial-hill": {
   "id": "alola-memorial-hill",
@@ -1568,7 +1568,7 @@
    "y": 26.47
   },
   "biome": "ruins",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "alola-digletts-tunnel": {
   "id": "alola-digletts-tunnel",
@@ -1594,7 +1594,7 @@
    "y": 19.19
   },
   "biome": "cave",
-  "background": "/backgrounds/cave.png"
+  "background": "/backgrounds/cave.webp"
  },
  "alola-akala-outskirts": {
   "id": "alola-akala-outskirts",
@@ -1620,7 +1620,7 @@
    "y": 12.79
   },
   "biome": "volcanic",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "alola-blush-mountain": {
   "id": "alola-blush-mountain",
@@ -1646,7 +1646,7 @@
    "y": 82.64
   },
   "biome": "mountain",
-  "background": "/backgrounds/mountain.png"
+  "background": "/backgrounds/mountain.webp"
  },
  "alola-thrifty-megamart": {
   "id": "alola-thrifty-megamart",
@@ -1672,7 +1672,7 @@
    "y": 75.88
   },
   "biome": "ruins",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "alola-hano-beach": {
   "id": "alola-hano-beach",
@@ -1698,7 +1698,7 @@
    "y": 68.52
   },
   "biome": "coast",
-  "background": "/backgrounds/beach.png"
+  "background": "/backgrounds/beach.webp"
  },
  "alola-ulaula-beach": {
   "id": "alola-ulaula-beach",
@@ -1724,7 +1724,7 @@
    "y": 62.9
   },
   "biome": "coast",
-  "background": "/backgrounds/beach.png"
+  "background": "/backgrounds/beach.webp"
  },
  "alola-ancient-poni-path": {
   "id": "alola-ancient-poni-path",
@@ -1750,7 +1750,7 @@
    "y": 72.12
   },
   "biome": "mountain",
-  "background": "/backgrounds/mountain.png"
+  "background": "/backgrounds/mountain.webp"
  },
  "alola-poni-wilds": {
   "id": "alola-poni-wilds",
@@ -1776,7 +1776,7 @@
    "y": 79.4
   },
   "biome": "desert",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "alola-poni-plains": {
   "id": "alola-poni-plains",
@@ -1802,7 +1802,7 @@
    "y": 84.15
   },
   "biome": "mountain",
-  "background": "/backgrounds/mountain.png"
+  "background": "/backgrounds/mountain.webp"
  },
  "alola-exeggutor-island": {
   "id": "alola-exeggutor-island",
@@ -1828,7 +1828,7 @@
    "y": 84.15
   },
   "biome": "coast",
-  "background": "/backgrounds/beach.png"
+  "background": "/backgrounds/beach.webp"
  },
  "alola-haina-desert": {
   "id": "alola-haina-desert",
@@ -1855,7 +1855,7 @@
    "y": 79
   },
   "biome": "desert",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "alola-resolution-cave": {
   "id": "alola-resolution-cave",
@@ -1881,7 +1881,7 @@
    "y": 71
   },
   "biome": "cave",
-  "background": "/backgrounds/cave.png"
+  "background": "/backgrounds/cave.webp"
  },
  "alola-poni-grove": {
   "id": "alola-poni-grove",
@@ -1907,7 +1907,7 @@
    "y": 79.4
   },
   "biome": "forest",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "alola-poni-gauntlet": {
   "id": "alola-poni-gauntlet",
@@ -1933,7 +1933,7 @@
    "y": 72.12
   },
   "biome": "grassland",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "alola-poni-meadow": {
   "id": "alola-poni-meadow",
@@ -1959,6 +1959,6 @@
    "y": 65.73
   },
   "biome": "forest",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  }
 }

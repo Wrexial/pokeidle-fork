@@ -33,7 +33,7 @@
   "region": "galar",
   "description": "A route in the Galar region where Normal and Bug Pokemon roam around Lv. 3-5.",
   "routeKey": "galar-route-1",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "galar-wedgehurst",
    "galar-postwick",
@@ -92,7 +92,7 @@
   "region": "galar",
   "description": "A route in the Galar region where Water and Grass Pokemon roam around Lv. 13-15.",
   "routeKey": "galar-route-2",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "galar-wedgehurst",
    "galar-motostoke"
@@ -154,7 +154,7 @@
   "region": "galar",
   "description": "A route in the Galar region where Rock and Fighting Pokemon roam around Lv. 20-22.",
   "routeKey": "galar-route-3",
-  "background": "/backgrounds/mountain.png",
+  "background": "/backgrounds/mountain.webp",
   "connections": [
    "galar-motostoke",
    "galar-mine"
@@ -182,7 +182,7 @@
   "region": "galar",
   "description": "A route in the Galar region where Water and Electric Pokemon roam around Lv. 28-30.",
   "routeKey": "galar-route-4",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "galar-turffield",
    "galar-mine"
@@ -247,7 +247,7 @@
   "region": "galar",
   "description": "A route in the Galar region where Water and Fairy Pokemon roam around Lv. 35-37.",
   "routeKey": "galar-route-5",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "galar-hulbury",
    "galar-turffield",
@@ -322,7 +322,7 @@
   "region": "galar",
   "description": "A route in the Galar region where Water and Ground Pokemon roam around Lv. 43-45.",
   "routeKey": "galar-route-6",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "galar-hammerlocke",
    "galar-motostoke",
@@ -457,7 +457,7 @@
   "region": "galar",
   "description": "A route in the Galar region where Dark and Steel Pokemon roam around Lv. 50-52.",
   "routeKey": "galar-route-7",
-  "background": "/backgrounds/cave.png",
+  "background": "/backgrounds/cave.webp",
   "connections": [
    "galar-route-8",
    "galar-hammerlocke",
@@ -489,7 +489,7 @@
   "region": "galar",
   "description": "A route in the Galar region where Ice and Ground Pokemon roam around Lv. 58-60.",
   "routeKey": "galar-route-8",
-  "background": "/backgrounds/mountain.png",
+  "background": "/backgrounds/mountain.webp",
   "connections": [
    "galar-route-7",
    "galar-circhester"
@@ -569,7 +569,7 @@
   "region": "galar",
   "description": "A route in the Galar region where Water and Ice Pokemon roam around Lv. 65-67.",
   "routeKey": "galar-route-9",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "galar-circhester",
    "galar-spikemuth",
@@ -664,7 +664,7 @@
   "region": "galar",
   "description": "A route in the Galar region where Ice and Grass Pokemon roam around Lv. 73-75.",
   "routeKey": "galar-route-10",
-  "background": "/backgrounds/mountain.png",
+  "background": "/backgrounds/mountain.webp",
   "connections": [
    "galar-wyndon",
    "galar-hammerlocke",
@@ -794,7 +794,7 @@
   "region": "galar",
   "description": "A mysterious island where Galar's rarest Pokemon dwell.",
   "routeKey": "galar-raid",
-  "background": "/backgrounds/cave.png",
+  "background": "/backgrounds/cave.webp",
   "connections": [
    "galar-route-10"
   ],
@@ -854,7 +854,7 @@
   "region": "galar",
   "description": "A sub-area of the Wild Area.",
   "routeKey": "galar-wild-area-rolling-fields",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "galar-wild-area"
   ],
@@ -879,7 +879,7 @@
   "region": "galar",
   "description": "A sub-area of the Wild Area.",
   "routeKey": "galar-wild-area-dappled-grove",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "galar-wild-area"
   ],
@@ -905,7 +905,7 @@
   "region": "galar",
   "description": "A sub-area of the Wild Area.",
   "routeKey": "galar-wild-area-giants-mirror",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "galar-wild-area"
   ],
@@ -931,7 +931,7 @@
   "region": "galar",
   "description": "The Wild Area is a wide-open stretch with several distinct habitats.",
   "routeKey": "galar-wild-area-rolling-fields",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "galar-route-5",
    "galar-route-6",
@@ -1026,7 +1026,7 @@
   "region": "galar",
   "description": "A wild area in the Galar region.",
   "routeKey": "galar-slumbering-weald",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "galar-route-1"
   ],
@@ -1052,7 +1052,7 @@
   "region": "galar",
   "description": "A wild area in the Galar region.",
   "routeKey": "galar-mine",
-  "background": "/backgrounds/cave.png",
+  "background": "/backgrounds/cave.webp",
   "connections": [
    "galar-route-3",
    "galar-route-4"
@@ -1079,7 +1079,7 @@
   "region": "galar",
   "description": "A wild area in the Galar region.",
   "routeKey": "galar-glimwood-tangle",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "galar-stow-on-side",
    "galar-ballonlea"
@@ -1124,7 +1124,7 @@
    "y": 56
   },
   "biome": "cave",
-  "background": "/backgrounds/cave.png"
+  "background": "/backgrounds/cave.webp"
  },
  "galar-watchtower-ruins": {
   "id": "galar-watchtower-ruins",
@@ -1150,7 +1150,7 @@
    "y": 53
   },
   "biome": "ruins",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "galar-wild-area-stony-wilderness": {
   "id": "galar-wild-area-stony-wilderness",
@@ -1176,7 +1176,7 @@
    "y": 51.12
   },
   "biome": "desert",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "galar-wild-area-north-lake-miloch": {
   "id": "galar-wild-area-north-lake-miloch",
@@ -1202,7 +1202,7 @@
    "y": 58.53
   },
   "biome": "coast",
-  "background": "/backgrounds/beach.png"
+  "background": "/backgrounds/beach.webp"
  },
  "galar-wild-area-bridge-field": {
   "id": "galar-wild-area-bridge-field",
@@ -1228,7 +1228,7 @@
    "y": 64.68
   },
   "biome": "mountain",
-  "background": "/backgrounds/mountain.png"
+  "background": "/backgrounds/mountain.webp"
  },
  "galar-wild-area-dusty-bowl": {
   "id": "galar-wild-area-dusty-bowl",
@@ -1254,7 +1254,7 @@
    "y": 68.15
   },
   "biome": "desert",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "galar-wild-area-giants-seat": {
   "id": "galar-wild-area-giants-seat",
@@ -1280,7 +1280,7 @@
    "y": 68.15
   },
   "biome": "coast",
-  "background": "/backgrounds/beach.png"
+  "background": "/backgrounds/beach.webp"
  },
  "galar-wild-area-hammerlocke-hills": {
   "id": "galar-wild-area-hammerlocke-hills",
@@ -1306,7 +1306,7 @@
    "y": 64.68
   },
   "biome": "mountain",
-  "background": "/backgrounds/mountain.png"
+  "background": "/backgrounds/mountain.webp"
  },
  "galar-wild-area-lake-of-outrage": {
   "id": "galar-wild-area-lake-of-outrage",
@@ -1332,7 +1332,7 @@
    "y": 58.53
   },
   "biome": "coast",
-  "background": "/backgrounds/beach.png"
+  "background": "/backgrounds/beach.webp"
  },
  "galar-wild-area-east-lake-axewell": {
   "id": "galar-wild-area-east-lake-axewell",
@@ -1358,7 +1358,7 @@
    "y": 51.12
   },
   "biome": "cave",
-  "background": "/backgrounds/cave.png"
+  "background": "/backgrounds/cave.webp"
  },
  "galar-wild-area-south-lake-miloch": {
   "id": "galar-wild-area-south-lake-miloch",
@@ -1384,7 +1384,7 @@
    "y": 44.14
   },
   "biome": "coast",
-  "background": "/backgrounds/beach.png"
+  "background": "/backgrounds/beach.webp"
  },
  "galar-wild-area-west-lake-axewell": {
   "id": "galar-wild-area-west-lake-axewell",
@@ -1410,7 +1410,7 @@
    "y": 39.19
   },
   "biome": "cave",
-  "background": "/backgrounds/cave.png"
+  "background": "/backgrounds/cave.webp"
  },
  "galar-isle-of-armor-fields-of-honor": {
   "id": "galar-isle-of-armor-fields-of-honor",
@@ -1419,7 +1419,7 @@
   "region": "galar",
   "description": "A sub-area of the Isle of Armor.",
   "routeKey": "galar-isle-of-armor-fields-of-honor",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "galar-isle-of-armor"
   ],
@@ -1444,7 +1444,7 @@
   "region": "galar",
   "description": "A sub-area of the Isle of Armor.",
   "routeKey": "galar-isle-of-armor-soothing-wetlands",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "connections": [
    "galar-isle-of-armor"
   ],
@@ -1470,7 +1470,7 @@
   "region": "galar",
   "description": "A sub-area of the Isle of Armor.",
   "routeKey": "galar-isle-of-armor-brawlers-cave",
-  "background": "/backgrounds/cave.png",
+  "background": "/backgrounds/cave.webp",
   "connections": [
    "galar-isle-of-armor"
   ],
@@ -1496,7 +1496,7 @@
   "region": "galar",
   "description": "The Isle of Armor is a wide-open stretch with several distinct habitats.",
   "routeKey": "galar-isle-of-armor-fields-of-honor",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "connections": [
    "galar-isle-of-armor-fields-of-honor",
    "galar-isle-of-armor-soothing-wetlands",
@@ -1581,7 +1581,7 @@
    "y": 64.52
   },
   "biome": "forest",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "isle-of-armor-challenge-beach": {
   "id": "isle-of-armor-challenge-beach",
@@ -1607,7 +1607,7 @@
    "y": 69.27
   },
   "biome": "coast",
-  "background": "/backgrounds/beach.png"
+  "background": "/backgrounds/beach.webp"
  },
  "isle-of-armor-loop-lagoon": {
   "id": "isle-of-armor-loop-lagoon",
@@ -1633,7 +1633,7 @@
    "y": 69.27
   },
   "biome": "grassland",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "isle-of-armor-potbottom-desert": {
   "id": "isle-of-armor-potbottom-desert",
@@ -1659,7 +1659,7 @@
    "y": 64.52
   },
   "biome": "desert",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "isle-of-armor-training-lowlands": {
   "id": "isle-of-armor-training-lowlands",
@@ -1685,7 +1685,7 @@
    "y": 57.25
   },
   "biome": "grassland",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "isle-of-armor-workout-sea": {
   "id": "isle-of-armor-workout-sea",
@@ -1711,7 +1711,7 @@
    "y": 50.85
   },
   "biome": "coast",
-  "background": "/backgrounds/beach.png"
+  "background": "/backgrounds/beach.webp"
  },
  "galar-crown-tundra-snowslide-slope": {
   "id": "galar-crown-tundra-snowslide-slope",
@@ -1720,7 +1720,7 @@
   "region": "galar",
   "description": "A sub-area of the Crown Tundra.",
   "routeKey": "galar-crown-tundra-snowslide-slope",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "galar-crown-tundra"
   ],
@@ -1745,7 +1745,7 @@
   "region": "galar",
   "description": "A sub-area of the Crown Tundra.",
   "routeKey": "galar-crown-tundra-frigid-sea",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "connections": [
    "galar-crown-tundra"
   ],
@@ -1771,7 +1771,7 @@
   "region": "galar",
   "description": "A sub-area of the Crown Tundra.",
   "routeKey": "galar-crown-tundra-giants-bed",
-  "background": "/backgrounds/mountain.png",
+  "background": "/backgrounds/mountain.webp",
   "connections": [
    "galar-crown-tundra"
   ],
@@ -1797,7 +1797,7 @@
   "region": "galar",
   "description": "The Crown Tundra is a wide-open stretch with several distinct habitats.",
   "routeKey": "galar-crown-tundra-snowslide-slope",
-  "background": "/backgrounds/mountain.png",
+  "background": "/backgrounds/mountain.webp",
   "connections": [
    "galar-crown-tundra-snowslide-slope",
    "galar-crown-tundra-frigid-sea",
@@ -1887,7 +1887,7 @@
    "y": 21.71
   },
   "biome": "tundra",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "crown-tundra-frostpoint-field": {
   "id": "crown-tundra-frostpoint-field",
@@ -1913,7 +1913,7 @@
    "y": 27.71
   },
   "biome": "tundra",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "crown-tundra-old-cemetery": {
   "id": "crown-tundra-old-cemetery",
@@ -1939,7 +1939,7 @@
    "y": 30
   },
   "biome": "ruins",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "crown-tundra-giants-foot": {
   "id": "crown-tundra-giants-foot",
@@ -1965,7 +1965,7 @@
    "y": 27.71
   },
   "biome": "mountain",
-  "background": "/backgrounds/mountain.png"
+  "background": "/backgrounds/mountain.webp"
  },
  "crown-tundra-roaring-sea-caves": {
   "id": "crown-tundra-roaring-sea-caves",
@@ -1991,7 +1991,7 @@
    "y": 21.71
   },
   "biome": "cave",
-  "background": "/backgrounds/cave.png"
+  "background": "/backgrounds/cave.webp"
  },
  "crown-tundra-ballimere-lake": {
   "id": "crown-tundra-ballimere-lake",
@@ -2017,7 +2017,7 @@
    "y": 14.29
   },
   "biome": "coast",
-  "background": "/backgrounds/beach.png"
+  "background": "/backgrounds/beach.webp"
  },
  "crown-tundra-three-point-pass": {
   "id": "crown-tundra-three-point-pass",
@@ -2043,6 +2043,6 @@
    "y": 8.29
   },
   "biome": "mountain",
-  "background": "/backgrounds/mountain.png"
+  "background": "/backgrounds/mountain.webp"
  }
 }

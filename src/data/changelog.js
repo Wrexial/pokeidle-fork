@@ -69,6 +69,7 @@ export const CHANGELOG = [
           items: [
             'The game works with no internet now: a browser service worker caches the app, and a new Offline Play section in Settings shows the rough download size and then fetches every Pokemon sprite, battle backdrop, item icon and data file in one go (with a progress bar). Once it finishes you can turn off Wi-Fi and keep playing',
             'The art was right-sized for what the game actually draws: the base route backdrops were 3264x1312 images shown at about a quarter of that, and the shared parchment and wood UI textures were far larger than the sizes the stylesheet asks for. Resizing them cuts the full offline download by roughly 50 MB (the backdrops alone went from 46 MB to 9 MB) and speeds up the first load, with no change to how anything looks',
+            'Battle backdrops are WebP now: the 13 route and biome scenes went from 15 MB to 3 MB with no visible change, taking the whole offline download from about 28 MB to about 16 MB',
             'Offline play uses the static sprites now, which keeps the offline download under 50 MB instead of ~500 MB: the animated sprite set (~440 MB) is left out and is never written to the offline cache, so with no connection the game shows the static pixel art (turning the connection back on restores the animated sprites)',
             'Fixed a service worker bug where a failed cache write (for example when the browser storage is full) could turn a perfectly good data or script response into an error and break the game\u2019s startup',
           ],

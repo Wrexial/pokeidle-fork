@@ -125,7 +125,7 @@ test('the shell cache drops animated gifs picked up from loaded resources', () =
 
 test('estimateOfflineBytes weights categories by their real file sizes', () => {
   // A backdrop is megabytes, an item icon a couple of KB.
-  const backdrop = estimateOfflineBytes(['/backgrounds/forest.jpeg'])
+  const backdrop = estimateOfflineBytes(['/backgrounds/forest.webp'])
   const item = estimateOfflineBytes(['/sprites/items/potion.png'])
   const animated = estimateOfflineBytes(['/sprites/pokemon/versions/generation-v/black-white/animated/25.gif'])
   assert.ok(backdrop > animated, 'backdrops should outweigh animated sprites')

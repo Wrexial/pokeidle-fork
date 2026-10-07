@@ -4,42 +4,42 @@ export const SPEED_OPTIONS = [1, 2, 5, 25]
 
 /** @type {Record<string, string>} */
 export let locationImages = {
-    route1: '/backgrounds/grassland.png',
-    route2: '/backgrounds/grassland.png',
-    route4: '/backgrounds/grassland.png',
-    route5: '/backgrounds/grassland.png',
-    route6: '/backgrounds/grassland.png',
-    route7: '/backgrounds/grassland.png',
-    route8: '/backgrounds/grassland.png',
-    route9: '/backgrounds/grassland.png',
-    route11: '/backgrounds/grassland.png',
-    route12: '/backgrounds/grassland.png',
-    route13: '/backgrounds/grassland.png',
-    route14: '/backgrounds/grassland.png',
-    route15: '/backgrounds/grassland.png',
-    route16: '/backgrounds/grassland.png',
-    route17: '/backgrounds/grassland.png',
-    route18: '/backgrounds/grassland.png',
-    route22: '/backgrounds/grassland.png',
-    route24: '/backgrounds/grassland.png',
-    route25: '/backgrounds/grassland.png',
-    safariZone: '/backgrounds/grassland.png',
-    viridianForest: '/backgrounds/grassland.png',
-    route3: '/backgrounds/mountain.png',
-    route10: '/backgrounds/mountain.png',
-    route23: '/backgrounds/mountain.png',
-    mtMoon: '/backgrounds/cave.png',
-    rockTunnel: '/backgrounds/cave.png',
-    diglettsCave: '/backgrounds/cave.png',
-    victoryRoad: '/backgrounds/cave.png',
-    ceruleanCave: '/backgrounds/cave.png',
-    pokemonTower: '/backgrounds/cave.png',
-    pokemonMansion: '/backgrounds/cave.png',
-    powerPlant: '/backgrounds/cave.png',
-    route19: '/backgrounds/beach.png',
-    route20: '/backgrounds/beach.png',
-    route21: '/backgrounds/beach.png',
-    seafoamIslands: '/backgrounds/cave.png',
+    route1: '/backgrounds/grassland.webp',
+    route2: '/backgrounds/grassland.webp',
+    route4: '/backgrounds/grassland.webp',
+    route5: '/backgrounds/grassland.webp',
+    route6: '/backgrounds/grassland.webp',
+    route7: '/backgrounds/grassland.webp',
+    route8: '/backgrounds/grassland.webp',
+    route9: '/backgrounds/grassland.webp',
+    route11: '/backgrounds/grassland.webp',
+    route12: '/backgrounds/grassland.webp',
+    route13: '/backgrounds/grassland.webp',
+    route14: '/backgrounds/grassland.webp',
+    route15: '/backgrounds/grassland.webp',
+    route16: '/backgrounds/grassland.webp',
+    route17: '/backgrounds/grassland.webp',
+    route18: '/backgrounds/grassland.webp',
+    route22: '/backgrounds/grassland.webp',
+    route24: '/backgrounds/grassland.webp',
+    route25: '/backgrounds/grassland.webp',
+    safariZone: '/backgrounds/grassland.webp',
+    viridianForest: '/backgrounds/grassland.webp',
+    route3: '/backgrounds/mountain.webp',
+    route10: '/backgrounds/mountain.webp',
+    route23: '/backgrounds/mountain.webp',
+    mtMoon: '/backgrounds/cave.webp',
+    rockTunnel: '/backgrounds/cave.webp',
+    diglettsCave: '/backgrounds/cave.webp',
+    victoryRoad: '/backgrounds/cave.webp',
+    ceruleanCave: '/backgrounds/cave.webp',
+    pokemonTower: '/backgrounds/cave.webp',
+    pokemonMansion: '/backgrounds/cave.webp',
+    powerPlant: '/backgrounds/cave.webp',
+    route19: '/backgrounds/beach.webp',
+    route20: '/backgrounds/beach.webp',
+    route21: '/backgrounds/beach.webp',
+    seafoamIslands: '/backgrounds/cave.webp',
   }
 
 export const BATTLE_LOG_MIN_HEIGHT = 30
@@ -326,13 +326,13 @@ export const BIOME_FILTERS = {
  * @type {Record<string, string>}
  */
 export const BIOME_SCENE_IMAGES = {
-  forest: '/backgrounds/forest.jpeg',
-  autumn: '/backgrounds/autumn.jpeg',
-  desert: '/backgrounds/desert.jpeg',
-  swamp: '/backgrounds/swamp.jpeg',
-  volcanic: '/backgrounds/volcano.jpeg',
-  tundra: '/backgrounds/tundra.jpeg',
-  ruins: '/backgrounds/ruins.jpeg',
+  forest: '/backgrounds/forest.webp',
+  autumn: '/backgrounds/autumn.webp',
+  desert: '/backgrounds/desert.webp',
+  swamp: '/backgrounds/swamp.webp',
+  volcanic: '/backgrounds/volcano.webp',
+  tundra: '/backgrounds/tundra.webp',
+  ruins: '/backgrounds/ruins.webp',
 }
 
 /**
@@ -387,7 +387,7 @@ export function biomeForLocation(location) {
     return 'coast'
   if (/\bmt\b|mt\.|mount|peak|summit|highland|ridge|cliff|gorge|canyon|quarry|spire/i.test(name))
     return 'mountain'
-  const background = (location?.background ?? '').match(/\/([a-z_]+)\.png/)?.[1]
+  const background = (location?.background ?? '').match(/\/([a-z_]+)\.(?:png|jpe?g|webp)/)?.[1]
   if (!background) return 'grassland'
   return { beach: 'coast', town_port: 'town' }[background] ?? background
 }

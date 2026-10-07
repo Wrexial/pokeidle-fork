@@ -967,7 +967,7 @@ const ROUTE_BACKGROUND_RULES = [
 ]
 const routeBackground = (routeName, encounters) => {
   for (const [pattern, background] of ROUTE_BACKGROUND_RULES)
-    if (pattern.test(routeName)) return `/backgrounds/${background}.png`
+    if (pattern.test(routeName)) return `/backgrounds/${background}.webp`
   const typeWeights = {}
   let totalWeight = 0
   for (const encounter of encounters) {
@@ -979,11 +979,11 @@ const routeBackground = (routeName, encounters) => {
   // Only an overwhelmingly aquatic table counts as a beach/sea route; most
   // routes have some fishing and would otherwise all look like beaches.
   if (totalWeight > 0 && (typeWeights.Water ?? 0) / totalWeight >= 0.8)
-    return '/backgrounds/beach.png'
+    return '/backgrounds/beach.webp'
   if (dominant === 'Ice' || dominant === 'Rock' || dominant === 'Ground' || dominant === 'Steel')
-    return '/backgrounds/mountain.png'
-  if (dominant === 'Ghost' || dominant === 'Dark') return '/backgrounds/cave.png'
-  return '/backgrounds/grassland.png'
+    return '/backgrounds/mountain.webp'
+  if (dominant === 'Ghost' || dominant === 'Dark') return '/backgrounds/cave.webp'
+  return '/backgrounds/grassland.webp'
 }
 /**
  * Pick a themed team from a species pool. `types` biases the pool to matching
@@ -1664,7 +1664,7 @@ for (const region of REGIONS) {
       region: regionId,
       description: `A mysterious island where ${name}'s rarest Pokemon dwell.`,
       routeKey: raidId,
-      background: '/backgrounds/cave.png',
+      background: '/backgrounds/cave.webp',
       connections: [locId(regionId, finaleRoute)],
       unlock: {
         battlesAtLocation: [{ locationId: locId(regionId, finaleRoute), count: 20 }],
@@ -1859,7 +1859,7 @@ const ZONES = {
       node: 'isle-of-armor',
       name: 'Isle of Armor',
       position: { x: 69, y: 60 },
-      background: '/backgrounds/beach.png',
+      background: '/backgrounds/beach.webp',
       connections: ['galar-hulbury'],
       level: 72,
       unlock: { championDefeated: 'galar' },
@@ -1888,7 +1888,7 @@ const ZONES = {
       node: 'crown-tundra',
       name: 'Crown Tundra',
       position: { x: 60, y: 12 },
-      background: '/backgrounds/mountain.png',
+      background: '/backgrounds/mountain.webp',
       connections: ['galar-wyndon'],
       level: 75,
       unlock: { championDefeated: 'galar' },
@@ -1921,7 +1921,7 @@ const ZONES = {
       node: 'kitakami',
       name: 'Kitakami',
       position: { x: 7, y: 4 },
-      background: '/backgrounds/grassland.png',
+      background: '/backgrounds/grassland.webp',
       connections: ['paldea-mossui-town'],
       level: 72,
       unlock: { championDefeated: 'paldea' },
@@ -1951,7 +1951,7 @@ const ZONES = {
       node: 'terarium',
       name: 'Terarium',
       position: { x: 96, y: 20 },
-      background: '/backgrounds/grassland.png',
+      background: '/backgrounds/grassland.webp',
       connections: ['paldea-league'],
       level: 78,
       unlock: { championDefeated: 'paldea' },
@@ -1982,7 +1982,7 @@ const ZONES = {
       node: 'area-zero',
       name: 'Area Zero',
       position: { x: 53, y: 61 },
-      background: '/backgrounds/cave.png',
+      background: '/backgrounds/cave.webp',
       connections: ['paldea-mesagoza'],
       level: 68,
       unlock: { championDefeated: 'paldea' },
@@ -2086,7 +2086,7 @@ for (const [regionId, zones] of Object.entries(ZONES)) {
       region: regionId,
       description: `The ${zone.name} is a wide-open stretch with several distinct habitats.`,
       routeKey: subAreaIds[0],
-      background: zone.background ?? '/backgrounds/grassland.png',
+      background: zone.background ?? '/backgrounds/grassland.webp',
       connections: [...zone.connections, ...subAreaIds],
       subAreas: subAreaIds.map((id) => ({ id, name: mapData[id].name })),
       unlock: zone.unlock ?? { battlesAtLocation: [{ locationId: zone.connections[0], count: 3 }] },
@@ -2111,7 +2111,7 @@ const POST_AREAS = {
       position: { x: 14, y: 10 },
       connects: ['alola-hauoli-city'],
       description: 'Four small islands where your Pokemon relax, train and grow berries.',
-      background: '/backgrounds/beach.png',
+      background: '/backgrounds/beach.webp',
       // No wild encounters: Pelago is a facility, not a route.
       species: [],
     },
@@ -2497,7 +2497,7 @@ for (const [regionId, groups] of Object.entries(GROUP_ZONES)) {
       region: regionId,
       description: `${group.name} is made up of several areas, each with its own Pokemon.`,
       routeKey: areas[0],
-      background: first.background ?? '/backgrounds/grassland.png',
+      background: first.background ?? '/backgrounds/grassland.webp',
       connections: [...entryConnections, ...areas],
       subAreas: areas.map((id) => ({ id, name: mapData[id].name })),
       unlock: JSON.parse(JSON.stringify(first.unlock)),

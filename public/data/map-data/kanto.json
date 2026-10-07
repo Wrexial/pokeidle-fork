@@ -1473,7 +1473,7 @@
    "y": 80
   },
   "biome": "coast",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "hidden": true,
   "zone": "sevii-islands"
  },
@@ -1499,7 +1499,7 @@
    "y": 77
   },
   "biome": "coast",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "routeKey": "sevii-islands-kindle-road",
   "hidden": true,
   "zone": "sevii-islands"
@@ -1531,7 +1531,7 @@
    "y": 72
   },
   "biome": "volcanic",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "routeKey": "sevii-islands-mt-ember",
   "hidden": true,
   "zone": "sevii-islands"
@@ -1555,7 +1555,7 @@
    "y": 86
   },
   "biome": "coast",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "hidden": true,
   "zone": "sevii-islands"
  },
@@ -1580,7 +1580,7 @@
    "y": 72
   },
   "biome": "coast",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "hidden": true,
   "zone": "sevii-islands"
  },
@@ -1606,7 +1606,7 @@
    "y": 68
   },
   "biome": "coast",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "routeKey": "sevii-islands-bond-bridge",
   "hidden": true,
   "zone": "sevii-islands"
@@ -1638,7 +1638,7 @@
    "y": 74
   },
   "biome": "forest",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "routeKey": "sevii-islands-berry-forest",
   "hidden": true,
   "zone": "sevii-islands"
@@ -1664,7 +1664,7 @@
    "y": 84
   },
   "biome": "coast",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "hidden": true,
   "zone": "sevii-islands"
  },
@@ -1690,7 +1690,7 @@
    "y": 88
   },
   "biome": "tundra",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "routeKey": "sevii-islands-icefall-cave",
   "hidden": true,
   "zone": "sevii-islands"
@@ -1716,7 +1716,7 @@
    "y": 66
   },
   "biome": "coast",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "hidden": true,
   "zone": "sevii-islands"
  },
@@ -1743,7 +1743,7 @@
    "y": 72
   },
   "biome": "grassland",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "routeKey": "sevii-islands-five-isle-meadow",
   "hidden": true,
   "zone": "sevii-islands"
@@ -1775,7 +1775,7 @@
    "y": 78
   },
   "biome": "ruins",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "routeKey": "sevii-islands-memorial-pillar",
   "hidden": true,
   "zone": "sevii-islands"
@@ -1801,7 +1801,7 @@
    "y": 76
   },
   "biome": "cave",
-  "background": "/backgrounds/cave.png",
+  "background": "/backgrounds/cave.webp",
   "routeKey": "sevii-islands-lost-cave",
   "hidden": true,
   "zone": "sevii-islands"
@@ -1828,7 +1828,7 @@
    "y": 56
   },
   "biome": "coast",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "hidden": true,
   "zone": "sevii-islands"
  },
@@ -1853,7 +1853,7 @@
    "y": 62
   },
   "biome": "forest",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "routeKey": "sevii-islands-pattern-bush",
   "hidden": true,
   "zone": "sevii-islands"
@@ -1880,7 +1880,7 @@
    "y": 56
   },
   "biome": "ruins",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "routeKey": "sevii-islands-ruin-valley",
   "hidden": true,
   "zone": "sevii-islands"
@@ -1912,7 +1912,7 @@
    "y": 62
   },
   "biome": "ruins",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "routeKey": "sevii-islands-dotted-hole",
   "hidden": true,
   "zone": "sevii-islands"
@@ -1938,7 +1938,7 @@
    "y": 34
   },
   "biome": "coast",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "hidden": true,
   "zone": "sevii-islands"
  },
@@ -1964,7 +1964,7 @@
    "y": 28
   },
   "biome": "mountain",
-  "background": "/backgrounds/mountain.png",
+  "background": "/backgrounds/mountain.webp",
   "routeKey": "sevii-islands-sevault-canyon",
   "hidden": true,
   "zone": "sevii-islands"
@@ -1996,7 +1996,7 @@
    "y": 34
   },
   "biome": "ruins",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "routeKey": "sevii-islands-tanoby-ruins",
   "hidden": true,
   "zone": "sevii-islands"
@@ -2008,7 +2008,7 @@
   "region": "kanto",
   "description": "The Sevii Islands, a post-game archipelago reached from Vermilion City.",
   "routeKey": "sevii-islands-kindle-road",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "biome": "coast",
   "connections": [
    "vermilionCity",

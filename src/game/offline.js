@@ -49,19 +49,19 @@ const SHELL_FILES = [
 
 /** The battle backdrops checked into public/backgrounds. */
 const BACKGROUND_FILES = [
-  '/backgrounds/autumn.jpeg',
-  '/backgrounds/beach.png',
-  '/backgrounds/cave.png',
-  '/backgrounds/desert.jpeg',
-  '/backgrounds/forest.jpeg',
-  '/backgrounds/grassland.png',
-  '/backgrounds/mountain.png',
-  '/backgrounds/ruins.jpeg',
-  '/backgrounds/swamp.jpeg',
-  '/backgrounds/town.png',
-  '/backgrounds/town_port.png',
-  '/backgrounds/tundra.jpeg',
-  '/backgrounds/volcano.jpeg',
+  '/backgrounds/autumn.webp',
+  '/backgrounds/beach.webp',
+  '/backgrounds/cave.webp',
+  '/backgrounds/desert.webp',
+  '/backgrounds/forest.webp',
+  '/backgrounds/grassland.webp',
+  '/backgrounds/mountain.webp',
+  '/backgrounds/ruins.webp',
+  '/backgrounds/swamp.webp',
+  '/backgrounds/town.webp',
+  '/backgrounds/town_port.webp',
+  '/backgrounds/tundra.webp',
+  '/backgrounds/volcano.webp',
 ]
 
 // vite replaces import.meta.env at build time; under Node it is undefined.
@@ -288,7 +288,7 @@ const AVERAGE_BYTES = {
   pokemon: 2 * 1024,
   items: 2 * 1024,
   trainers: 1 * 1024,
-  backgrounds: 1200 * 1024,
+  backgrounds: 250 * 1024,
   shell: 200 * 1024,
 }
 

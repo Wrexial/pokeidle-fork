@@ -71,7 +71,7 @@ mapData[HUB_ID] = {
   region: 'kanto',
   description: 'The Sevii Islands, a post-game archipelago reached from Vermilion City.',
   routeKey: 'sevii-islands-kindle-road',
-  background: '/backgrounds/beach.png',
+  background: '/backgrounds/beach.webp',
   biome: 'coast',
   connections: ['vermilionCity', 'sevii-islands-one-island'],
   unlock: { championDefeated: 'kanto' },

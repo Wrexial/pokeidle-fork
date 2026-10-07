@@ -34,7 +34,7 @@
   "region": "paldea",
   "description": "A route in the Paldea region where Water and Normal Pokemon roam around Lv. 3-5.",
   "routeKey": "paldea-south-province-area-one",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "paldea-south-province"
   ],
@@ -163,7 +163,7 @@
   "region": "paldea",
   "description": "A route in the Paldea region where Flying and Ghost Pokemon roam around Lv. 10-12.",
   "routeKey": "paldea-south-province-area-three",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "paldea-south-province"
   ],
@@ -198,7 +198,7 @@
   "region": "paldea",
   "description": "A route in the Paldea region where Normal and Grass Pokemon roam around Lv. 15-17.",
   "routeKey": "paldea-south-province-area-two",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "paldea-south-province"
   ],
@@ -230,7 +230,7 @@
   "region": "paldea",
   "description": "A route in the Paldea region where Water and Normal Pokemon roam around Lv. 20-22.",
   "routeKey": "paldea-west-province-area-three",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "paldea-west-province"
   ],
@@ -262,7 +262,7 @@
   "region": "paldea",
   "description": "A route in the Paldea region where Water and Flying Pokemon roam around Lv. 24-26.",
   "routeKey": "paldea-west-province-area-one",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "paldea-west-province"
   ],
@@ -579,7 +579,7 @@
   "region": "paldea",
   "description": "A route in the Paldea region where Normal and Water Pokemon roam around Lv. 29-31.",
   "routeKey": "paldea-east-province-area-one",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "paldea-east-province"
   ],
@@ -611,7 +611,7 @@
   "region": "paldea",
   "description": "A route in the Paldea region where Flying and Poison Pokemon roam around Lv. 34-36.",
   "routeKey": "paldea-north-province-area-one",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "paldea-north-province"
   ],
@@ -643,7 +643,7 @@
   "region": "paldea",
   "description": "A route in the Paldea region where Water and Ground Pokemon roam around Lv. 39-41.",
   "routeKey": "paldea-south-province-area-four",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "paldea-south-province"
   ],
@@ -677,7 +677,7 @@
   "region": "paldea",
   "description": "A route in the Paldea region where Water and Ghost Pokemon roam around Lv. 44-46.",
   "routeKey": "paldea-east-province-area-three",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "paldea-east-province"
   ],
@@ -710,7 +710,7 @@
   "region": "paldea",
   "description": "A route in the Paldea region where Water and Ghost Pokemon roam around Lv. 49-51.",
   "routeKey": "paldea-south-province-area-six",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "paldea-south-province"
   ],
@@ -743,7 +743,7 @@
   "region": "paldea",
   "description": "A route in the Paldea region where Water and Flying Pokemon roam around Lv. 54-56.",
   "routeKey": "paldea-west-province-area-two",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "paldea-west-province"
   ],
@@ -775,7 +775,7 @@
   "region": "paldea",
   "description": "A route in the Paldea region where Flying and Bug Pokemon roam around Lv. 58-60.",
   "routeKey": "paldea-north-province-area-two",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "paldea-north-province"
   ],
@@ -852,7 +852,7 @@
   "region": "paldea",
   "description": "A route in the Paldea region where Normal and Water Pokemon roam around Lv. 63-65.",
   "routeKey": "paldea-south-province-area-five",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "paldea-south-province"
   ],
@@ -930,7 +930,7 @@
   "region": "paldea",
   "description": "A route in the Paldea region where Flying and Grass Pokemon roam around Lv. 68-70.",
   "routeKey": "paldea-north-province-area-three",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "paldea-north-province"
   ],
@@ -971,7 +971,7 @@
   "region": "paldea",
   "description": "A route in the Paldea region where Water and Flying Pokemon roam around Lv. 73-75.",
   "routeKey": "paldea-east-province-area-two",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "paldea-east-province"
   ],
@@ -1049,7 +1049,7 @@
   "region": "paldea",
   "description": "A mysterious island where Paldea's rarest Pokemon dwell.",
   "routeKey": "paldea-raid",
-  "background": "/backgrounds/cave.png",
+  "background": "/backgrounds/cave.webp",
   "connections": [
    "paldea-east-province"
   ],
@@ -1101,7 +1101,7 @@
   "region": "paldea",
   "description": "A sub-area of the Area Zero.",
   "routeKey": "paldea-area-zero-gate",
-  "background": "/backgrounds/mountain.png",
+  "background": "/backgrounds/mountain.webp",
   "connections": [
    "paldea-area-zero"
   ],
@@ -1126,7 +1126,7 @@
   "region": "paldea",
   "description": "A sub-area of the Area Zero.",
   "routeKey": "paldea-area-zero-station-two",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "connections": [
    "paldea-area-zero"
   ],
@@ -1152,7 +1152,7 @@
   "region": "paldea",
   "description": "A sub-area of the Area Zero.",
   "routeKey": "paldea-area-zero-station-four",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "connections": [
    "paldea-area-zero"
   ],
@@ -1178,7 +1178,7 @@
   "region": "paldea",
   "description": "A sub-area of the Area Zero.",
   "routeKey": "paldea-area-zero-depths",
-  "background": "/backgrounds/cave.png",
+  "background": "/backgrounds/cave.webp",
   "connections": [
    "paldea-area-zero"
   ],
@@ -1204,7 +1204,7 @@
   "region": "paldea",
   "description": "The Area Zero is a wide-open stretch with several distinct habitats.",
   "routeKey": "paldea-area-zero-gate",
-  "background": "/backgrounds/cave.png",
+  "background": "/backgrounds/cave.webp",
   "connections": [
    "paldea-mesagoza",
    "paldea-area-zero-gate",
@@ -1257,7 +1257,7 @@
   "region": "paldea",
   "description": "South Province is made up of several areas, each with its own Pokemon.",
   "routeKey": "paldea-south-province-area-one",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "paldea-los-platos",
    "paldea-cortondo",
@@ -1315,7 +1315,7 @@
   "region": "paldea",
   "description": "West Province is made up of several areas, each with its own Pokemon.",
   "routeKey": "paldea-west-province-area-one",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "paldea-porto-marinada",
    "paldea-west-province-area-one",
@@ -1368,7 +1368,7 @@
   "region": "paldea",
   "description": "East Province is made up of several areas, each with its own Pokemon.",
   "routeKey": "paldea-east-province-area-one",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "paldea-artazon",
    "paldea-levincia",
@@ -1415,7 +1415,7 @@
   "region": "paldea",
   "description": "North Province is made up of several areas, each with its own Pokemon.",
   "routeKey": "paldea-north-province-area-one",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "paldea-montenevera",
    "paldea-north-province-area-one",
@@ -1476,7 +1476,7 @@
    "y": 87.5
   },
   "biome": "cave",
-  "background": "/backgrounds/cave.png"
+  "background": "/backgrounds/cave.webp"
  },
  "paldea-alfornada-cavern": {
   "id": "paldea-alfornada-cavern",
@@ -1502,7 +1502,7 @@
    "y": 79.8
   },
   "biome": "cave",
-  "background": "/backgrounds/cave.png"
+  "background": "/backgrounds/cave.webp"
  },
  "paldea-casseroya-lake": {
   "id": "paldea-casseroya-lake",
@@ -1529,7 +1529,7 @@
    "y": 47.3
   },
   "biome": "coast",
-  "background": "/backgrounds/beach.png"
+  "background": "/backgrounds/beach.webp"
  },
  "paldea-glaseado-mountain": {
   "id": "paldea-glaseado-mountain",
@@ -1557,7 +1557,7 @@
    "y": 32
   },
   "biome": "coast",
-  "background": "/backgrounds/beach.png"
+  "background": "/backgrounds/beach.webp"
  },
  "paldea-socarrat-trail": {
   "id": "paldea-socarrat-trail",
@@ -1584,7 +1584,7 @@
    "y": 45.4
   },
   "biome": "grassland",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "paldea-gracia-stones": {
   "id": "paldea-gracia-stones",
@@ -1611,7 +1611,7 @@
    "y": 65.9
   },
   "biome": "mountain",
-  "background": "/backgrounds/mountain.png"
+  "background": "/backgrounds/mountain.webp"
  },
  "paldea-dalizapa-passage": {
   "id": "paldea-dalizapa-passage",
@@ -1638,7 +1638,7 @@
    "y": 39
   },
   "biome": "grassland",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "paldea-area-zero-station-one": {
   "id": "paldea-area-zero-station-one",
@@ -1664,7 +1664,7 @@
    "y": 67.75
   },
   "biome": "coast",
-  "background": "/backgrounds/beach.png"
+  "background": "/backgrounds/beach.webp"
  },
  "paldea-area-zero-station-three": {
   "id": "paldea-area-zero-station-three",
@@ -1690,7 +1690,7 @@
    "y": 60.55
   },
   "biome": "coast",
-  "background": "/backgrounds/beach.png"
+  "background": "/backgrounds/beach.webp"
  },
  "paldea-kitakami-revelers-road": {
   "id": "paldea-kitakami-revelers-road",
@@ -1699,7 +1699,7 @@
   "region": "paldea",
   "description": "A sub-area of the Kitakami.",
   "routeKey": "paldea-kitakami-revelers-road",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "paldea-kitakami"
   ],
@@ -1724,7 +1724,7 @@
   "region": "paldea",
   "description": "A sub-area of the Kitakami.",
   "routeKey": "paldea-kitakami-apple-hills",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "paldea-kitakami"
   ],
@@ -1750,7 +1750,7 @@
   "region": "paldea",
   "description": "A sub-area of the Kitakami.",
   "routeKey": "paldea-kitakami-oni-mountain",
-  "background": "/backgrounds/mountain.png",
+  "background": "/backgrounds/mountain.webp",
   "connections": [
    "paldea-kitakami"
   ],
@@ -1776,7 +1776,7 @@
   "region": "paldea",
   "description": "The Kitakami is a wide-open stretch with several distinct habitats.",
   "routeKey": "paldea-kitakami-revelers-road",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "paldea-kitakami-revelers-road",
    "paldea-kitakami-apple-hills",
@@ -1861,7 +1861,7 @@
    "y": 22.2
   },
   "biome": "forest",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "kitakami-fellhorn-gorge": {
   "id": "kitakami-fellhorn-gorge",
@@ -1887,7 +1887,7 @@
    "y": 26.95
   },
   "biome": "mountain",
-  "background": "/backgrounds/mountain.png"
+  "background": "/backgrounds/mountain.webp"
  },
  "kitakami-crystal-pool": {
   "id": "kitakami-crystal-pool",
@@ -1913,7 +1913,7 @@
    "y": 26.95
   },
   "biome": "forest",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "kitakami-timeless-woods": {
   "id": "kitakami-timeless-woods",
@@ -1939,7 +1939,7 @@
    "y": 22.2
   },
   "biome": "forest",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "kitakami-paradise-barrens": {
   "id": "kitakami-paradise-barrens",
@@ -1965,7 +1965,7 @@
    "y": 14.92
   },
   "biome": "volcanic",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "kitakami-infernal-pass": {
   "id": "kitakami-infernal-pass",
@@ -1991,7 +1991,7 @@
    "y": 8.53
   },
   "biome": "grassland",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "paldea-terarium-savanna-biome": {
   "id": "paldea-terarium-savanna-biome",
@@ -2000,7 +2000,7 @@
   "region": "paldea",
   "description": "A sub-area of the Terarium.",
   "routeKey": "paldea-terarium-savanna-biome",
-  "background": "/backgrounds/mountain.png",
+  "background": "/backgrounds/mountain.webp",
   "connections": [
    "paldea-terarium"
   ],
@@ -2025,7 +2025,7 @@
   "region": "paldea",
   "description": "A sub-area of the Terarium.",
   "routeKey": "paldea-terarium-coastal-biome",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "connections": [
    "paldea-terarium"
   ],
@@ -2051,7 +2051,7 @@
   "region": "paldea",
   "description": "A sub-area of the Terarium.",
   "routeKey": "paldea-terarium-polar-biome",
-  "background": "/backgrounds/mountain.png",
+  "background": "/backgrounds/mountain.webp",
   "connections": [
    "paldea-terarium"
   ],
@@ -2077,7 +2077,7 @@
   "region": "paldea",
   "description": "The Terarium is a wide-open stretch with several distinct habitats.",
   "routeKey": "paldea-terarium-savanna-biome",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "paldea-terarium-savanna-biome",
    "paldea-terarium-coastal-biome",
@@ -2152,7 +2152,7 @@
    "y": 27.98
   },
   "biome": "mountain",
-  "background": "/backgrounds/mountain.png"
+  "background": "/backgrounds/mountain.webp"
  },
  "terarium-chargestone-cavern": {
   "id": "terarium-chargestone-cavern",
@@ -2178,7 +2178,7 @@
    "y": 27.98
   },
   "biome": "cave",
-  "background": "/backgrounds/cave.png"
+  "background": "/backgrounds/cave.webp"
  },
  "terarium-torchlit-labyrinth": {
   "id": "terarium-torchlit-labyrinth",
@@ -2204,7 +2204,7 @@
    "y": 22.28
   },
   "biome": "volcanic",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "terarium-central-plaza": {
   "id": "terarium-central-plaza",
@@ -2230,6 +2230,6 @@
    "y": 15.17
   },
   "biome": "grassland",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  }
 }

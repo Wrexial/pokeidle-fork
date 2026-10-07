@@ -35,7 +35,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Normal and Flying Pokemon roam around Lv. 3-5.",
   "routeKey": "johto-route-29",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "johto-cherrygrove-city",
    "johto-new-bark-town",
@@ -94,7 +94,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Water and Bug Pokemon roam around Lv. 8-10.",
   "routeKey": "johto-route-30",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "johto-cherrygrove-city",
    "johto-route-31"
@@ -122,7 +122,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Water and Bug Pokemon roam around Lv. 11-13.",
   "routeKey": "johto-route-31",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "johto-route-30",
    "johto-violet-city",
@@ -185,7 +185,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Water and Poison Pokemon roam around Lv. 14-16.",
   "routeKey": "johto-route-32",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "johto-union-cave",
    "johto-ruins-of-alph"
@@ -215,7 +215,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Flying and Normal Pokemon roam around Lv. 17-19.",
   "routeKey": "johto-route-33",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "johto-azalea-town",
    "johto-union-cave"
@@ -281,7 +281,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Water and Poison Pokemon roam around Lv. 20-22.",
   "routeKey": "johto-route-34",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "johto-goldenrod-city",
    "johto-ilex-forest"
@@ -349,7 +349,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Water and Fairy Pokemon roam around Lv. 24-26.",
   "routeKey": "johto-route-35",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "johto-goldenrod-city",
    "johto-national-park"
@@ -380,7 +380,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Poison and Normal Pokemon roam around Lv. 27-29.",
   "routeKey": "johto-route-36",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "johto-route-37",
    "johto-violet-city",
@@ -413,7 +413,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Flying and Normal Pokemon roam around Lv. 30-32.",
   "routeKey": "johto-route-37",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "johto-ecruteak-city",
    "johto-route-36"
@@ -487,7 +487,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Poison and Ghost Pokemon roam around Lv. 33-35.",
   "routeKey": "johto-bell-tower",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "johto-ecruteak-city"
   ],
@@ -517,7 +517,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Normal and Flying Pokemon roam around Lv. 36-38.",
   "routeKey": "johto-route-38",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "johto-ecruteak-city",
    "johto-route-39"
@@ -547,7 +547,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Normal and Flying Pokemon roam around Lv. 39-41.",
   "routeKey": "johto-route-39",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "johto-olivine-city",
    "johto-route-38"
@@ -618,7 +618,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Water and Poison Pokemon roam around Lv. 42-44.",
   "routeKey": "johto-sea-route-40",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "connections": [
    "johto-olivine-city",
    "johto-sea-route-41"
@@ -646,7 +646,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Water and Poison Pokemon roam around Lv. 45-47.",
   "routeKey": "johto-sea-route-41",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "connections": [
    "johto-cianwood-city",
    "johto-sea-route-40",
@@ -720,7 +720,7 @@
   "region": "johto",
   "description": "The Whirl Islands are a cluster of caverns in the sea off Cianwood City.",
   "routeKey": "johto-whirl-islands--entrance",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "connections": [
    "johto-sea-route-41",
    "johto-whirl-islands--entrance",
@@ -776,7 +776,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Water and Normal Pokemon roam around Lv. 51-53.",
   "routeKey": "johto-route-42",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "johto-ecruteak-city",
    "johto-mahogany-town",
@@ -854,7 +854,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Water and Normal Pokemon roam around Lv. 54-56.",
   "routeKey": "johto-route-43",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "johto-mahogany-town"
   ],
@@ -884,7 +884,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Water and Grass Pokemon roam around Lv. 58-60.",
   "routeKey": "johto-route-44",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "johto-mahogany-town",
    "johto-ice-path"
@@ -961,7 +961,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Water and Ground Pokemon roam around Lv. 61-63.",
   "routeKey": "johto-route-45",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "johto-blackthorn-city",
    "johto-route-46",
@@ -992,7 +992,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Normal and Flying Pokemon roam around Lv. 64-66.",
   "routeKey": "johto-route-46",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "johto-route-29",
    "johto-route-45"
@@ -1024,7 +1024,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Water and Poison Pokemon roam around Lv. 67-69.",
   "routeKey": "johto-route-47",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "johto-cianwood-city",
    "johto-cliff-cave"
@@ -1055,7 +1055,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Normal and Flying Pokemon roam around Lv. 70-72.",
   "routeKey": "johto-route-48",
-  "background": "/backgrounds/grassland.png",
+  "background": "/backgrounds/grassland.webp",
   "connections": [
    "johto-safari-zone",
    "johto-cliff-cave"
@@ -1083,7 +1083,7 @@
   "region": "johto",
   "description": "A route in the Johto region where Ground and Rock Pokemon roam around Lv. 73-75.",
   "routeKey": "johto-mt-silver",
-  "background": "/backgrounds/mountain.png",
+  "background": "/backgrounds/mountain.webp",
   "connections": [
    "johto-new-bark-town",
    "johto-raid",
@@ -1113,7 +1113,7 @@
   "region": "johto",
   "description": "A mysterious island where Johto's rarest Pokemon dwell.",
   "routeKey": "johto-raid",
-  "background": "/backgrounds/cave.png",
+  "background": "/backgrounds/cave.webp",
   "connections": [
    "johto-mt-silver"
   ],
@@ -1191,7 +1191,7 @@
    "y": 67
   },
   "biome": "forest",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "johto-union-cave": {
   "id": "johto-union-cave",
@@ -1218,7 +1218,7 @@
    "y": 63
   },
   "biome": "cave",
-  "background": "/backgrounds/cave.png"
+  "background": "/backgrounds/cave.webp"
  },
  "johto-ruins-of-alph": {
   "id": "johto-ruins-of-alph",
@@ -1245,7 +1245,7 @@
    "y": 45.5
   },
   "biome": "ruins",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "johto-dark-cave": {
   "id": "johto-dark-cave",
@@ -1272,7 +1272,7 @@
    "y": 31
   },
   "biome": "cave",
-  "background": "/backgrounds/cave.png"
+  "background": "/backgrounds/cave.webp"
  },
  "johto-slowpoke-well": {
   "id": "johto-slowpoke-well",
@@ -1298,7 +1298,7 @@
    "y": 66
   },
   "biome": "cave",
-  "background": "/backgrounds/cave.png"
+  "background": "/backgrounds/cave.webp"
  },
  "johto-ice-path": {
   "id": "johto-ice-path",
@@ -1325,7 +1325,7 @@
    "y": 16.5
   },
   "biome": "tundra",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "johto-dragons-den": {
   "id": "johto-dragons-den",
@@ -1351,7 +1351,7 @@
    "y": 17
   },
   "biome": "grassland",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "johto-mt-mortar": {
   "id": "johto-mt-mortar",
@@ -1377,7 +1377,7 @@
    "y": 9
   },
   "biome": "mountain",
-  "background": "/backgrounds/mountain.png"
+  "background": "/backgrounds/mountain.webp"
  },
  "johto-burned-tower": {
   "id": "johto-burned-tower",
@@ -1403,7 +1403,7 @@
    "y": 15
   },
   "biome": "ruins",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "johto-national-park": {
   "id": "johto-national-park",
@@ -1430,7 +1430,7 @@
    "y": 37
   },
   "biome": "forest",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "johto-tohjo-falls": {
   "id": "johto-tohjo-falls",
@@ -1456,7 +1456,7 @@
    "y": 57
   },
   "biome": "coast",
-  "background": "/backgrounds/beach.png"
+  "background": "/backgrounds/beach.webp"
  },
  "johto-safari-zone": {
   "id": "johto-safari-zone",
@@ -1482,7 +1482,7 @@
    "y": 53.5
   },
   "biome": "grassland",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "johto-cliff-cave": {
   "id": "johto-cliff-cave",
@@ -1509,7 +1509,7 @@
    "y": 76
   },
   "biome": "cave",
-  "background": "/backgrounds/cave.png"
+  "background": "/backgrounds/cave.webp"
  },
  "johto-sinjoh-ruins": {
   "id": "johto-sinjoh-ruins",
@@ -1535,7 +1535,7 @@
    "y": 47
   },
   "biome": "ruins",
-  "background": "/backgrounds/grassland.png"
+  "background": "/backgrounds/grassland.webp"
  },
  "johto-whirl-islands--entrance": {
   "id": "johto-whirl-islands--entrance",
@@ -1544,7 +1544,7 @@
   "region": "johto",
   "description": "Whirl Islands Entrance, one of the Whirl Islands' caves.",
   "routeKey": "johto-whirl-islands--entrance",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "connections": [
    "johto-whirl-islands"
   ],
@@ -1569,7 +1569,7 @@
   "region": "johto",
   "description": "Northeast Cave, one of the Whirl Islands' caves.",
   "routeKey": "johto-whirl-islands--northeast-cave",
-  "background": "/backgrounds/cave.png",
+  "background": "/backgrounds/cave.webp",
   "connections": [
    "johto-whirl-islands"
   ],
@@ -1595,7 +1595,7 @@
   "region": "johto",
   "description": "Northwest Cave, one of the Whirl Islands' caves.",
   "routeKey": "johto-whirl-islands--northwest-cave",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "connections": [
    "johto-whirl-islands"
   ],
@@ -1621,7 +1621,7 @@
   "region": "johto",
   "description": "Southeast Cave, one of the Whirl Islands' caves.",
   "routeKey": "johto-whirl-islands--southeast-cave",
-  "background": "/backgrounds/cave.png",
+  "background": "/backgrounds/cave.webp",
   "connections": [
    "johto-whirl-islands"
   ],
@@ -1647,7 +1647,7 @@
   "region": "johto",
   "description": "Southwest Cave, one of the Whirl Islands' caves.",
   "routeKey": "johto-whirl-islands--southwest-cave",
-  "background": "/backgrounds/beach.png",
+  "background": "/backgrounds/beach.webp",
   "connections": [
    "johto-whirl-islands"
   ],

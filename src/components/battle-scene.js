@@ -149,10 +149,10 @@ export function BattleScene({ onOpenMenu }) {
     townBattle = activeTrainerBattle || isTown,
     townBackground =
       {
-        vermilionCity: '/backgrounds/town_port.png',
-        cinnabarIsland: '/backgrounds/town_port.png',
-        fuchsiaCity: '/backgrounds/town_port.png',
-      }[state.currentLocation] || '/backgrounds/town.png',
+        vermilionCity: '/backgrounds/town_port.webp',
+        cinnabarIsland: '/backgrounds/town_port.webp',
+        fuchsiaCity: '/backgrounds/town_port.webp',
+      }[state.currentLocation] || '/backgrounds/town.webp',
     // Wild routes can use dedicated biome art when it exists, otherwise their
     // base scene plus the biome grade (see src/data/ui.js).
     biomeScene = townBattle ? null : biomeBackgroundFor(mapData[state.currentLocation]),

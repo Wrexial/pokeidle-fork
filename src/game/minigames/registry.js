@@ -28,6 +28,9 @@ import { MINING_COST, MINING_DIGS } from './mining.js'
 import { MANTINE_SURF_COST, MANTINE_SURF_WAVES } from './mantine-surf.js'
 import { ROTOM_RALLY_COST, ROTOM_RALLY_DISTANCE, ROTOM_RALLY_SECONDS } from './rotom-rally.js'
 import { OGRE_OUSTIN_COST, OGRE_OUSTIN_SECONDS } from './ogre-oustin.js'
+import { TYPE_FUSION_COST, TYPE_FUSION_MOVES } from './type-fusion.js'
+import { UNOWN_PICROSS_COST } from './unown-picross.js'
+import { POKESHOT_COST, POKESHOT_SECONDS } from './pokeshot.js'
 
 import { MINIGAME_AREAS, MINIGAME_IDS, MINIGAME_LOCATIONS } from './locations.js'
 export { MINIGAME_AREAS, MINIGAME_IDS, MINIGAME_LOCATIONS }
@@ -68,6 +71,9 @@ export const MINIGAME_PHASES = {
   mantineSurf: 'mantineSurf',
   rotomRally: 'rotomRally',
   ogreOustin: 'ogreOustin',
+  typeFusion: 'typeFusion',
+  unownPicross: 'unownPicross',
+  pokeshot: 'pokeshot',
 }
 
 /**
@@ -141,6 +147,9 @@ export const MINIGAME_START_ACTION = {
   mantineSurf: 'START_MANTINE_SURF',
   rotomRally: 'START_ROTOM_RALLY',
   ogreOustin: 'START_OGRE_OUSTIN',
+  typeFusion: 'START_TYPE_FUSION',
+  unownPicross: 'START_UNOWN_PICROSS',
+  pokeshot: 'START_POKESHOT',
 }
 
 /**
@@ -319,6 +328,24 @@ export const MINIGAME_INFO = {
     cost: OGRE_OUSTIN_COST,
     action: 'FILL THE BASKET',
     hint: `Berries tumble down the field \u2014 move the basket under them before they land. Golden berries are worth a fistful, while catching a rock costs you. You have ${OGRE_OUSTIN_SECONDS} seconds. Entry is $${OGRE_OUSTIN_COST.toLocaleString()}.`,
+  },
+  typeFusion: {
+    title: 'Type Fusion',
+    cost: TYPE_FUSION_COST,
+    action: 'START FUSING',
+    hint: `A 2048-style slide puzzle: swipe a direction and every tile glides that way \u2014 two of a type fuse into the next one up. You get ${TYPE_FUSION_MOVES} moves to score as much as you can. Entry is $${TYPE_FUSION_COST.toLocaleString()}.`,
+  },
+  unownPicross: {
+    title: 'Unown Picross',
+    cost: UNOWN_PICROSS_COST,
+    action: 'DECIPHER THE GLYPH',
+    hint: 'Read the row and column clues and fill the cells that match the hidden glyph, then check your work. Wrong fills and slow solves score lower. Entry is $' + UNOWN_PICROSS_COST.toLocaleString() + '.',
+  },
+  pokeshot: {
+    title: 'Pok\u00e9shot',
+    cost: POKESHOT_COST,
+    action: 'START PHOTOSHOOT',
+    hint: `Pokemon flit across the palace gardens for ${POKESHOT_SECONDS} seconds \u2014 snap each one while it is inside the frame. Centred shots score best, and rarer or shiny Pokemon are worth far more. Entry is $${POKESHOT_COST.toLocaleString()}.`,
   },
 }
 

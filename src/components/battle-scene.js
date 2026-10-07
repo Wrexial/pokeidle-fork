@@ -54,6 +54,9 @@ import { PokePelagoScene } from './poke-pelago-scene.js'
 import { MantineSurfScene } from './mantine-surf-scene.js'
 import { RotomRallyScene } from './rotom-rally-scene.js'
 import { OgreOustinScene } from './ogre-oustin-scene.js'
+import { TypeFusionScene } from './type-fusion-scene.js'
+import { UnownPicrossScene } from './unown-picross-scene.js'
+import { PokeshotScene } from './pokeshot-scene.js'
 import { MiningScene } from './mining-scene.js'
 import { GameCornerScene } from './game-corner-scene.js'
 import { RouteActivityScene } from './route-activity-scene.js'
@@ -96,6 +99,9 @@ export function BattleScene({ onOpenMenu }) {
   if (state.phase === 'mantineSurf') return jsx(MantineSurfScene, {})
   if (state.phase === 'rotomRally') return jsx(RotomRallyScene, {})
   if (state.phase === 'ogreOustin') return jsx(OgreOustinScene, {})
+  if (state.phase === 'typeFusion') return jsx(TypeFusionScene, {})
+  if (state.phase === 'unownPicross') return jsx(UnownPicrossScene, {})
+  if (state.phase === 'pokeshot') return jsx(PokeshotScene, {})
   if (state.phase === 'mining') return jsx(MiningScene, {})
   if (state.phase === 'gameCorner') return jsx(GameCornerScene, {})
   if (state.phase === 'routeActivity') return jsx(RouteActivityScene, {})

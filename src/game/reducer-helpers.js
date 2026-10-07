@@ -73,6 +73,9 @@ export function enterMinigame(state, phase, cost = 0, log) {
     state.phase === 'mantineSurf' ||
     state.phase === 'rotomRally' ||
     state.phase === 'ogreOustin' ||
+    state.phase === 'typeFusion' ||
+    state.phase === 'unownPicross' ||
+    state.phase === 'pokeshot' ||
     state.phase === 'routeActivity' ||
     state.phase === 'wonderTrade'
   )

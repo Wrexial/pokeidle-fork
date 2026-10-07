@@ -76,6 +76,9 @@ export const MINIGAME_TM_TYPES = {
   mantineSurf: ['Water', 'Flying'],
   rotomRally: ['Electric'],
   ogreOustin: ['Grass'],
+  typeFusion: null,
+  unownPicross: null,
+  pokeshot: ['Flying'],
 }
 
 /** TM type pool per route activity (only the loot activity pays out here).

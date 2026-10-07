@@ -38,6 +38,9 @@ export const MINIGAME_LOCATIONS = {
   'alola-hauoli-city': 'mantineSurf',
   'galar-wild-area': 'rotomRally',
   'paldea-kitakami': 'ogreOustin',
+  'unova-nacrene-city': 'typeFusion',
+  'sinnoh-solaceon-ruins': 'unownPicross',
+  'kalos-parfum-palace': 'pokeshot',
 }
 
 /**

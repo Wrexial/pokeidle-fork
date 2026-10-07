@@ -1,6 +1,6 @@
 // Reducer handlers for minigames actions. Split from game/reducer.js.
 
-import { MATCH3_COST, MEMORY_COST, MUSICAL_COST, PICNIC_COST, POKEBALL_FACTORY_COST, WHACK_COST, BATTLE_ROYAL_COST, DOUBLES_COST, BUG_CONTEST_COST, CONTEST_COST, CURRY_COST, DYNAMAX_ADVENTURES_COST, LIGHTS_OUT_COST, MINING_COST, POKEATHLON_COST, POKE_RADAR_COST, POKESTAR_COST, QUIZ_COST, ROUTE_ACTIVITIES, SAFARI_COST, SLIDING_COST, ICE_SLIDE_COST, VOLTORB_FLIP_COST, MANTINE_SURF_COST, ROTOM_RALLY_COST, OGRE_OUSTIN_COST, GAME_CORNER_PRIZE_GOAL, rollGameCornerPrize, routeActivityIds, minigameIdForPhase } from '../minigames.js'
+import { MATCH3_COST, MEMORY_COST, MUSICAL_COST, PICNIC_COST, POKEBALL_FACTORY_COST, WHACK_COST, BATTLE_ROYAL_COST, DOUBLES_COST, BUG_CONTEST_COST, CONTEST_COST, CURRY_COST, DYNAMAX_ADVENTURES_COST, LIGHTS_OUT_COST, MINING_COST, POKEATHLON_COST, POKE_RADAR_COST, POKESTAR_COST, QUIZ_COST, ROUTE_ACTIVITIES, SAFARI_COST, SLIDING_COST, ICE_SLIDE_COST, VOLTORB_FLIP_COST, MANTINE_SURF_COST, ROTOM_RALLY_COST, OGRE_OUSTIN_COST, TYPE_FUSION_COST, UNOWN_PICROSS_COST, POKESHOT_COST, GAME_CORNER_PRIZE_GOAL, rollGameCornerPrize, routeActivityIds, minigameIdForPhase } from '../minigames.js'
 import { minigameTmChance } from '../../data/config.js'
 import { mapData, pokemonSpecies } from '../../data/gameData.js'
 import { getTmInfo, tmItemId } from '../../data/tms.js'
@@ -412,6 +412,36 @@ export function startOgreOustin(state, action) {
 }
 
 /**
+ * Handle the `START_TYPE_FUSION` action.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function startTypeFusion(state, action) {
+  return enterMinigame(state, 'typeFusion', TYPE_FUSION_COST, 'You stepped up to the Type Fusion table.')
+}
+
+/**
+ * Handle the `START_UNOWN_PICROSS` action.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function startUnownPicross(state, action) {
+  return enterMinigame(state, 'unownPicross', UNOWN_PICROSS_COST, 'You studied the glyphs in Solaceon Ruins.')
+}
+
+/**
+ * Handle the `START_POKESHOT` action.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function startPokeshot(state, action) {
+  return enterMinigame(state, 'pokeshot', POKESHOT_COST, 'You readied your camera in the palace gardens.')
+}
+
+/**
  * Build the `recordMinigame` result for an end action, filling in the minigame
  * id from the current phase when the scene did not pass one. `completed` is
  * left exactly as the scene reported it, so a mid-run "leave" never counts as
@@ -477,7 +507,10 @@ export function endMinigame(state, action) {
     state.phase === 'pelago' ||
     state.phase === 'mantineSurf' ||
     state.phase === 'rotomRally' ||
-    state.phase === 'ogreOustin'
+    state.phase === 'ogreOustin' ||
+    state.phase === 'typeFusion' ||
+    state.phase === 'unownPicross' ||
+    state.phase === 'pokeshot'
     ? recordMinigame({ ...state, ...createIdleBattleState() }, minigameResult(state, action))
     : state
 }

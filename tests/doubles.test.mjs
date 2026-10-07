@@ -100,6 +100,28 @@ test('simulateDoubles resolves a whole bout', () => {
   assert.ok(outcome.log.length > 0)
 })
 
+test('a side down to a single battler still resolves the round', () => {
+  const ally = battler({
+      name: 'Ally',
+      isPlayer: true,
+      moves: ['thunderbolt'],
+      spAttack: 200,
+      speed: 200,
+      types: ['Electric'],
+    }),
+    foeX = battler({ name: 'FoeX', types: ['Water'], currentHp: 300, maxHp: 300, moves: ['splash'] }),
+    foeY = battler({ name: 'FoeY', types: ['Water'], currentHp: 300, maxHp: 300, moves: ['splash'] })
+  // The scene used to drop a fainted foe from the array, which left the
+  // residual pass (allies[1], foes[1]) dereferencing undefined; and a fainted
+  // ally with an empty bench left only one ally. Neither may throw.
+  assert.doesNotThrow(() => runDoublesRound([ally], [foeX, foeY], { deterministic: true }))
+  assert.doesNotThrow(() => runDoublesRound([ally], [foeX], { deterministic: true }))
+  const downed = battler({ name: 'Downed', isPlayer: true, currentHp: 0, moves: ['splash'] })
+  assert.doesNotThrow(() =>
+    runDoublesRound([ally, downed], [foeX, foeY], { deterministic: true })
+  )
+})
+
 test('double-battle prizes scale with bouts won', () => {
   assert.equal(doublesPrize(0).label, 'Knocked out early')
   assert.ok(doublesPrize(10).money > doublesPrize(2).money)

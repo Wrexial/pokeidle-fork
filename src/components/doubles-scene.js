@@ -104,13 +104,14 @@ export function DoublesScene() {
     setHit(round.log.some((line) => /used/.test(line)) ? 'foe' : null)
     window.setTimeout(() => setHit(null), 500)
 
-    // Tag a fresh bench Pokemon in for any fainted ally.
-    let benchLeft = [...bench],
-      activeAllies = nextAllies.filter((member) => member.currentHp > 0)
-    while (activeAllies.length < 2 && benchLeft.length > 0) {
-      const next = benchLeft.shift()
-      activeAllies = [...activeAllies, next]
-    }
+    // Tag a fresh bench Pokemon in for any fainted ally. Both slots are kept
+    // (a fainted slot stays as a downed placeholder when the bench is empty),
+    // so the round engine and its residual pass always see a full pair.
+    let benchLeft = [...bench]
+    const activeAllies = nextAllies.map((member) => {
+      if (member.currentHp > 0 || benchLeft.length === 0) return member
+      return /** @type {BattlePokemon} */ (benchLeft.shift())
+    })
     setBench(benchLeft)
     setAllies(activeAllies)
 
@@ -121,13 +122,17 @@ export function DoublesScene() {
     }
     if (foesDown) {
       const nextWins = wins + 1,
-        healed = activeAllies.map((member) => ({
-          ...member,
-          currentHp: Math.min(
-            member.maxHp,
-            member.currentHp + Math.round(member.maxHp * DOUBLES_HEAL)
-          ),
-        }))
+        healed = activeAllies.map((member) =>
+          member.currentHp > 0
+            ? {
+                ...member,
+                currentHp: Math.min(
+                  member.maxHp,
+                  member.currentHp + Math.round(member.maxHp * DOUBLES_HEAL)
+                ),
+              }
+            : member
+        )
       setAllies(healed)
       setWins(nextWins)
       setFoes(
@@ -139,8 +144,9 @@ export function DoublesScene() {
       if (state.sfxEnabled) playSfx('good')
       return
     }
-    // One foe down but the other is still standing: fight on.
-    setFoes(nextFoes.filter((foe) => foe.currentHp > 0))
+    // One foe down but the other is still standing: fight on. The fainted slot
+    // stays in place so the next round still sees a pair.
+    setFoes(nextFoes)
     setLog(`The round ends \u2014 ${nextFoes.filter((foe) => foe.currentHp > 0).length} foe(s) left.`)
     if (state.sfxEnabled) playSfx('good')
   }

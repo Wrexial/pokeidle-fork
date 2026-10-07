@@ -534,8 +534,9 @@ export function runDoublesRound(allies, foes, options = {}) {
     battler.quashed = !1
   }
   // Residual damage (status, Leftovers, Leech Seed, screens) once per round.
+  // Guard the slots in case a side is ever shorter than a pair.
   for (const [ally, foe] of [[allies[0], foes[0]], [allies[1], foes[1]]])
-    applyEndOfTurn(ally, foe, events, weather, terrain, deterministic)
+    if (ally && foe) applyEndOfTurn(ally, foe, events, weather, terrain, deterministic)
   return { events, log }
 }
 

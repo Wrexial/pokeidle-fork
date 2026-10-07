@@ -273,7 +273,25 @@ export function LocationPanel({ onOpenCatchSettings }) {
       'wonderTrade',
     ].includes(state.phase),
     bestRod = rodForId(bestRodId(state.rods)),
-    upcomingRod = nextRod(state.rods)
+    upcomingRod = nextRod(state.rods),
+    // The fixed minigame card is shared by the normal panel and the zone-hub
+    // panel, since some minigames (Galar's Rotom Rally, Paldea's Ogre Oustin'
+    // and Tera Raid) are based at a zone hub.
+    fixedMinigameCard =
+      fixedMinigame &&
+      jsx(MinigameCard, {
+        icon: '⭐',
+        title: fixedMinigame.title,
+        hint: fixedMinigame.hint,
+        actionLabel:
+          state.money < fixedMinigame.cost
+            ? 'NOT ENOUGH MONEY'
+            : fixedMinigame.cost > 0
+              ? `${fixedMinigame.action} ($${fixedMinigame.cost.toLocaleString()})`
+              : fixedMinigame.action,
+        disabled: minigameBusy || state.money < fixedMinigame.cost,
+        onStart: () => dispatch({ type: MINIGAME_START_ACTION[fixedMinigameId] }),
+      })
 
   /**
    * Whether a location is somewhere the player can travel to right now.
@@ -643,6 +661,19 @@ export function LocationPanel({ onOpenCatchSettings }) {
               )
             }),
           }),
+          // A zone hub can host a fixed minigame (Galar's Wild Area, Paldea's
+          // Kitakami and Area Zero), so offer it from the hub panel too.
+          fixedMinigameCard &&
+            jsxs('div', {
+              className: 'location-minigames',
+              children: [
+                jsx('div', {
+                  className: 'location-section-title',
+                  children: 'Minigame',
+                }),
+                fixedMinigameCard,
+              ],
+            }),
           // A zone hub can host a gym / trial (Alola's Poni Island holds Mina
           // and Hapu), so offer the challenge from the hub panel too.
           jsx(GymLocationPanel, {}),
@@ -748,20 +779,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
                 className: 'location-section-title',
                 children: fixedMinigame ? 'Minigame' : 'Activities',
               }),
-              fixedMinigame &&
-                jsx(MinigameCard, {
-                  icon: '⭐',
-                  title: fixedMinigame.title,
-                  hint: fixedMinigame.hint,
-                  actionLabel:
-                    state.money < fixedMinigame.cost
-                      ? 'NOT ENOUGH MONEY'
-                      : fixedMinigame.cost > 0
-                        ? `${fixedMinigame.action} ($${fixedMinigame.cost.toLocaleString()})`
-                        : fixedMinigame.action,
-                  disabled: minigameBusy || state.money < fixedMinigame.cost,
-                  onStart: () => dispatch({ type: MINIGAME_START_ACTION[fixedMinigameId] }),
-                }),
+              fixedMinigameCard,
               activityIds.map((activityId) => {
                 const activity = ROUTE_ACTIVITIES[activityId]
                 if (!activity) return null

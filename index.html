@@ -17,6 +17,7 @@
         // schema version, so scan by prefix instead of hard-coding one.
         var SAVE_KEY_PREFIX = 'pokemon-idle-save'
         var FLAG = 'pokemon-idle-recovery-attempts'
+        var BOOT_BACKUP_KEY = 'pi-save-boot-backup'
         var recovering = false
         window.__piBooted = false
 
@@ -29,6 +30,26 @@
             }
           } catch (e) {}
           return keys
+        }
+
+        // Copy every save (and the active-slot marker) aside before anything
+        // clears them, so a startup failure can never permanently destroy
+        // progress. Recoverable from the console with
+        // pokemonIdleRestoreBootBackup().
+        function backupSaves() {
+          try {
+            var keys = liveSaveKeys()
+            if (keys.length === 0) return
+            var snapshot = {}
+            for (var i = 0; i < keys.length; i++) {
+              snapshot[keys[i]] = localStorage.getItem(keys[i])
+            }
+            var activeSlot = localStorage.getItem('pokemon-idle-active-slot')
+            localStorage.setItem(
+              BOOT_BACKUP_KEY,
+              JSON.stringify({ savedAt: Date.now(), activeSlot: activeSlot, saves: snapshot })
+            )
+          } catch (e) {}
         }
 
         function clearSaves() {
@@ -70,6 +91,17 @@
           try {
             sessionStorage.setItem(FLAG, String(attempts + 1))
           } catch (e) {}
+          backupSaves()
+          // The first failure may be transient (a flaky network or a service
+          // worker hiccup), so reload once without touching the save. Only a
+          // repeat failure is treated as a stuck save and cleared.
+          if (attempts === 0) {
+            showMessage('Reloading&hellip;')
+            setTimeout(function () {
+              location.reload()
+            }, 800)
+            return
+          }
           clearSaves()
           showMessage('Resetting save data and reloading&hellip;')
           setTimeout(function () {

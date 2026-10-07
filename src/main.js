@@ -12,7 +12,29 @@ import { PatchNotesPage } from './components/patch-notes-page.js'
 import { GameProvider, useGame } from './game/context.js'
 import { precacheAppShell } from './game/offline.js'
 import { needsSlotChoice, suspendAutosave } from './game/save.js'
-import { clearSave } from './data/config.js'
+import { BOOT_BACKUP_KEY, clearSave } from './data/config.js'
+
+// If a startup failure made the inline boot guard clear the saves, it left a
+// backup behind (index.html). Bring them back before the app reads storage, so
+// a transient boot failure (a flaky network, a service worker hiccup) can't
+// silently cost the player their progress.
+;(function restoreBootBackup() {
+  try {
+    const raw = localStorage.getItem(BOOT_BACKUP_KEY)
+    if (!raw) return
+    const hasSave = Object.keys(localStorage).some((key) => key.indexOf('pokemon-idle-save') === 0)
+    if (hasSave) return
+    const backup = JSON.parse(raw)
+    const saves = backup && backup.saves ? backup.saves : {}
+    const keys = Object.keys(saves)
+    if (keys.length === 0) return
+    for (const key of keys) localStorage.setItem(key, String(saves[key]))
+    if (backup.activeSlot) localStorage.setItem('pokemon-idle-active-slot', backup.activeSlot)
+    console.warn(`[pokemon-idle] restored ${keys.length} save slot(s) from the boot backup`)
+  } catch {
+    /* storage may be unavailable */
+  }
+})()
 
 // Console helper for stuck saves: `pokemonIdleResetSave()`
 // @ts-ignore
@@ -20,6 +42,25 @@ window.pokemonIdleResetSave = () => {
   suspendAutosave()
   clearSave()
   window.location.reload()
+}
+
+// Recover a save the inline boot guard backed up before clearing it (see
+// BOOT_BACKUP_KEY in index.html). Run it in the browser console.
+// @ts-ignore
+window.pokemonIdleRestoreBootBackup = () => {
+  try {
+    const raw = localStorage.getItem(BOOT_BACKUP_KEY)
+    if (!raw) return 'No boot backup found.'
+    const backup = JSON.parse(raw)
+    if (!backup || !backup.saves) return 'The boot backup is empty.'
+    for (const [key, value] of Object.entries(backup.saves)) {
+      localStorage.setItem(key, String(value))
+    }
+    if (backup.activeSlot) localStorage.setItem('pokemon-idle-active-slot', backup.activeSlot)
+    return `Restored ${Object.keys(backup.saves).length} save slot(s). Reload to play them.`
+  } catch {
+    return 'Could not restore the boot backup.'
+  }
 }
 
 function AppContent() {

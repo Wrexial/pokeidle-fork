@@ -128,6 +128,13 @@ export function setActiveSlot(slot) {
 }
 
 /**
+ * Key the inline boot guard (index.html) copies every save into before it
+ * clears them and reloads. `clearSave` drops it too, so an intentional reset
+ * never leaves a stale backup behind for the next boot to resurrect.
+ */
+export const BOOT_BACKUP_KEY = 'pi-save-boot-backup'
+
+/**
  * Remove a slot's save. Defaults to the active slot; the legacy keys are only
  * read for (and cleared with) slot 1.
  * @param {number} [slot]
@@ -140,6 +147,12 @@ export function clearSave(slot = getActiveSlot() || 1) {
     } catch {
       /* storage may be unavailable */
     }
+  }
+  // An explicit reset also forgets the boot-guard backup.
+  try {
+    localStorage.removeItem(BOOT_BACKUP_KEY)
+  } catch {
+    /* storage may be unavailable */
   }
 }
 

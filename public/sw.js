@@ -97,21 +97,26 @@ self.addEventListener('fetch', (event) => {
   if (request.mode === 'navigate') {
     event.respondWith(
       (async () => {
-        const cache = await caches.open(OFFLINE_CACHE)
         try {
           const fresh = await fetch(request)
           if (fresh && fresh.ok) {
-            cache.put(request, fresh.clone())
-            if (url.pathname === '/' || url.pathname === '/index.html') {
-              cache.put('/index.html', fresh.clone())
+            // Caching is best effort: a write failure (e.g. a full cache) must
+            // never change the response the page gets.
+            const cache = await caches.open(OFFLINE_CACHE).catch(() => null)
+            if (cache) {
+              cache.put(request, fresh.clone()).catch(() => {})
+              if (url.pathname === '/' || url.pathname === '/index.html') {
+                cache.put('/index.html', fresh.clone()).catch(() => {})
+              }
             }
           }
           return fresh
         } catch {
+          const cache = await caches.open(OFFLINE_CACHE).catch(() => null)
           return (
-            (await cache.match(request)) ||
-            (await cache.match('/index.html')) ||
-            (await cache.match('/')) ||
+            (cache && (await cache.match(request).catch(() => null))) ||
+            (cache && (await cache.match('/index.html').catch(() => null))) ||
+            (cache && (await cache.match('/').catch(() => null))) ||
             new Response('Offline', { status: 503, statusText: 'Offline' })
           )
         }
@@ -124,16 +129,16 @@ self.addEventListener('fetch', (event) => {
   if (isNetworkFirst(url)) {
     event.respondWith(
       (async () => {
-        const cache = await caches.open(OFFLINE_CACHE)
-        const cached = await cache.match(request)
+        const cache = await caches.open(OFFLINE_CACHE).catch(() => null)
+        const cached = cache ? await cache.match(request).catch(() => null) : null
         try {
           const fresh = await fetch(request)
-          if (fresh && fresh.ok) cache.put(request, fresh.clone())
+          if (fresh && fresh.ok && cache) cache.put(request, fresh.clone()).catch(() => {})
           return fresh
         } catch {
           return (
             cached ||
-            (await cache.match(request, { ignoreSearch: true })) ||
+            (cache && (await cache.match(request, { ignoreSearch: true }).catch(() => null))) ||
             new Response('Offline', { status: 503, statusText: 'Offline' })
           )
         }
@@ -148,15 +153,15 @@ self.addEventListener('fetch', (event) => {
       // Animated sprites are served straight from the network / HTTP cache and
       // never stored; offline play uses the static art instead.
       if (isAnimatedSprite(url)) return fetch(request)
-      const cache = await caches.open(OFFLINE_CACHE)
-      const cached = await cache.match(request)
+      const cache = await caches.open(OFFLINE_CACHE).catch(() => null)
+      const cached = cache ? await cache.match(request).catch(() => null) : null
       if (cached) return cached
       // Range requests (media seeking) cannot be stored; pass them through.
       if (request.headers.has('range')) return fetch(request)
       try {
         const fresh = await fetch(request)
-        if (fresh && fresh.ok && fresh.type === 'basic') {
-          cache.put(request, fresh.clone())
+        if (fresh && fresh.ok && fresh.type === 'basic' && cache) {
+          cache.put(request, fresh.clone()).catch(() => {})
         }
         return fresh
       } catch {

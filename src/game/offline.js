@@ -78,12 +78,67 @@ export function offlineAvailable() {
 /** @type {Promise<ServiceWorkerRegistration | null> | null} */
 let registrationPromise = null
 
-/** Register the offline worker. Resolves to null when unsupported. */
+/** Throttle update checks so tab switches do not spam the network. */
+let lastUpdateCheck = 0
+
+/**
+ * Register the offline worker. Resolves to null when unsupported.
+ *
+ * `updateViaCache: 'none'` plus an explicit `update()` means a changed sw.js is
+ * picked up promptly instead of sitting in the HTTP cache for up to a day.
+ * When a newer worker replaces the one that loaded the page we remember it, and
+ * a backgrounded tab reloads into the new build by itself, so updates land
+ * without the player ever refreshing by hand.
+ */
 export function registerServiceWorker() {
   if (!offlineSupported()) return Promise.resolve(null)
   if (!registrationPromise) {
+    const hadController = Boolean(navigator.serviceWorker.controller)
+    let updatePending = false
+
+    const checkForUpdate = () => {
+      const now = Date.now()
+      if (now - lastUpdateCheck < 60_000) return
+      lastUpdateCheck = now
+      navigator.serviceWorker.ready
+        .then((registration) => registration.update())
+        .catch(() => {})
+    }
+
+    const reloadWhenBackgrounded = () => {
+      if (
+        updatePending &&
+        typeof document !== 'undefined' &&
+        document.visibilityState === 'hidden'
+      ) {
+        window.location.reload()
+      }
+    }
+
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      // Ignore the very first worker claiming the page; only a *replacement*
+      // worker means a newer build is ready.
+      if (!hadController) return
+      updatePending = true
+      reloadWhenBackgrounded()
+    })
+
+    if (typeof document !== 'undefined') {
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') checkForUpdate()
+        else reloadWhenBackgrounded()
+      })
+    }
+    if (typeof window !== 'undefined') {
+      window.addEventListener('online', checkForUpdate)
+    }
+
     registrationPromise = navigator.serviceWorker
-      .register('/sw.js')
+      .register('/sw.js', { updateViaCache: 'none' })
+      .then((registration) => {
+        registration.update().catch(() => {})
+        return registration
+      })
       .catch(() => null)
   }
   return registrationPromise

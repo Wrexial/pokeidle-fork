@@ -293,7 +293,7 @@ const AVERAGE_BYTES = {
   pokemon: 2 * 1024,
   items: 2 * 1024,
   trainers: 1 * 1024,
-  backgrounds: 4 * 1024 * 1024,
+  backgrounds: 1200 * 1024,
   shell: 200 * 1024,
 }
 

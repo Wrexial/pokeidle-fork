@@ -68,6 +68,7 @@ export const CHANGELOG = [
           heading: 'Offline Play',
           items: [
             'The game works with no internet now: a browser service worker caches the app, and a new Offline Play section in Settings shows the rough download size and then fetches every Pokemon sprite, battle backdrop, item icon and data file in one go (with a progress bar). Once it finishes you can turn off Wi-Fi and keep playing',
+            'The art was right-sized for what the game actually draws: the base route backdrops were 3264x1312 images shown at about a quarter of that, and the shared parchment and wood UI textures were far larger than the sizes the stylesheet asks for. Resizing them cuts the full offline download by roughly 50 MB (the backdrops alone went from 46 MB to 9 MB) and speeds up the first load, with no change to how anything looks',
           ],
         },
         {

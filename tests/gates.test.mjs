@@ -172,3 +172,32 @@ test('blocked frontier areas report the locked area they wait on', () => {
     'alola-route-1--hauoli-outskirts',
   ], 'Route 2 waits on the outskirts')
 })
+
+test('Paldea wild levels ramp with its unlock order', () => {
+  // Paldea is reordered into one linear Victory Road path by
+  // tools/apply-paldea-progression.cjs, so the wild level never drops back down
+  // after a high-level area (the standalone landmarks used to sit at Lv. 5).
+  const paldeaRoutes = Object.values(mapData)
+    .filter((location) => (location.region ?? 'kanto') === 'paldea')
+    .filter((location) => location.type === 'route' && location.routeKey)
+    // The DLC and Area Zero are post-game, gated on the Champion; they reuse
+    // their own high bands and aren't part of the base curve.
+    .filter((location) => !/kitakami|area-zero|terarium/.test(location.id))
+    .sort((left, right) => left.unlockOrder - right.unlockOrder)
+  assert.ok(paldeaRoutes.length > 10, 'Paldea has a base wild route')
+  const levels = paldeaRoutes.map((location) =>
+    Math.min(...(encounterData[location.routeKey]?.encounters ?? []).map((entry) => entry.minLevel))
+  )
+  for (let i = 1; i < levels.length; i++) {
+    const drop = levels[i - 1] - levels[i],
+      jump = levels[i] - levels[i - 1]
+    assert.ok(
+      drop <= 0,
+      `${paldeaRoutes[i].id} (Lv.${levels[i]}) drops below ${paldeaRoutes[i - 1].id} (Lv.${levels[i - 1]})`
+    )
+    assert.ok(
+      jump <= 12,
+      `${paldeaRoutes[i].id} (Lv.${levels[i]}) jumps from ${paldeaRoutes[i - 1].id} (Lv.${levels[i - 1]})`
+    )
+  }
+})

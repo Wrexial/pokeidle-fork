@@ -527,7 +527,7 @@
   "entry": "paldea-los-platos",
   "startLevel": 5,
   "league": {
-   "badgeOrder": "free",
+   "badgeOrder": "ordered",
    "badgeTrack": "Gym Leaders",
    "badgeName": "Badge",
    "eliteTrack": "Elite Four & Champion"

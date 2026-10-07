@@ -678,9 +678,10 @@ const LEAGUES = {
   },
   paldea: {
     ...DEFAULT_LEAGUE,
-    // Paldea's 8 gyms can be challenged in any order, so the generator lays no
-    // ordered badge gates and the league is gated on a badge count instead.
-    badgeOrder: 'free',
+    // Paldea is open-world, but the committed data is reordered into one linear
+    // Victory Road path by tools/apply-paldea-progression.cjs; regeneration
+    // lays ordered badge gates like every other region (see that pass for the
+    // canonical order and the hub / gym-town gates).
   },
 }
 // Only these fields are written to `regions.json`; the titles live on the
@@ -1274,8 +1275,8 @@ for (const region of REGIONS) {
     }
   })
   const leagueConfig = LEAGUES[regionId] ?? DEFAULT_LEAGUE
-  // Paldea challenges its gyms in any order, so no badge is laid on the route
-  // tree; the league itself is gated on a badge count instead (see below).
+  // A region can opt out of ordered badge gates (none do today; Paldea used to
+  // be open-world, now linearized by tools/apply-paldea-progression.cjs).
   const freeBadgeOrder = leagueConfig.badgeOrder === 'free'
   // Attach each gym's badge gate to the point in the route order where the
   // badge is actually needed. Gyms sit in their real cities, which are visited

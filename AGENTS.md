@@ -701,7 +701,9 @@ One-off scripts used to build the data JSON (not run during dev/build):
   going backwards is penalised. That stops shortcuts opening late areas early
   (Johto's Blackthorn via Route 46/45, Hoenn's sea routes off Slateport, Kalos
   routes radiating from Lumiose) and keeps the path matching the real route
-  order. Paldea has no numbered routes, so it falls back to BFS depth order.
+  order. Paldea has no numbered routes, so it falls back to BFS depth order;
+  `tools/apply-paldea-progression.cjs` re-orders the committed Paldea data onto
+  the canonical Victory Road path (see below).
   A final pass also gives a route a `partyLevel` gate when its wilds jump far
   above the area that unlocks it, so a high-level branch (Paldea's province
   areas, Alola's island hubs) can't be entered under-levelled. Because the
@@ -783,6 +785,14 @@ One-off scripts used to build the data JSON (not run during dev/build):
   / Champion initial teams with `lib/team-builder.cjs` (keeping canonical
   levels), and swaps the leader gen3 sprites for current-gen art (Lorelei and
   Agatha keep gen3, the only art available). Idempotent (`--dry`).
+- `apply-paldea-progression.cjs` — data-only pass that turns open-world Paldea
+  into one linear Victory Road route: it re-orders every Paldea location by the
+  canonical gym order, gates the province hubs / gym towns / landmarks behind
+  the previous badge plus a party level, and re-levels the ordinary landmarks
+  that `apply-ordinary-areas.cjs` inserted at the Lv. 5 fallback band. Run it
+  after `apply-ordinary-areas.cjs` and before `generate-encounter-index.cjs`.
+  Idempotent (`--dry`). Its `ORDER` table is the source of truth for Paldea's
+  progression until a regeneration carries the same order.
 - `revert-dlc-regions.cjs` — one-off data migration (#39) that folded the
   promoted Galar / Paldea DLC regions back into their parent regions as
   ordinary zones (like Galar's Wild Area): re-homes the hub/sub-areas, drops

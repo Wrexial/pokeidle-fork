@@ -63,25 +63,33 @@ test('Galar treats its endgame as the Champion Cup', () => {
     assert.equal(member.title, 'Galar Champion Cup')
 })
 
-test('Paldea gyms are free-order and the league gates on a badge count', () => {
+test('Paldea gyms run in Victory Road order and the league wants every badge', () => {
   const paldea = region('paldea')
-  assert.equal(paldea.league.badgeOrder, 'free')
-
-  const paldeaLocations = Object.values(mapData).filter(
-    (location) => (location.region ?? 'kanto') === 'paldea'
-  )
-  for (const location of paldeaLocations)
-    assert.equal(
-      location.unlock?.gymsRequired,
-      undefined,
-      `${location.id} should not name an ordered badge gate`
-    )
+  assert.equal(paldea.league.badgeOrder, 'ordered')
 
   const paldeaGyms = gymLeaderData.filter((gym) => (gym.region ?? 'kanto') === 'paldea')
   const league = mapData[paldea.leagueLocationKey]
   assert.ok(league, 'the Paldea league location exists')
   assert.equal(league.unlock.badgesRequired, paldeaGyms.length)
 
+  // Each gym town waits on the previous badge, so the open-world gyms are
+  // fought in order (see tools/apply-paldea-progression.cjs).
+  paldeaGyms.forEach((gym, index) => {
+    const town = mapData[gym.locationKey]
+    assert.ok(town, `${gym.id} has a town`)
+    if (index === 0) {
+      assert.equal(town.unlock?.gymsRequired, undefined, `${gym.id} needs no previous badge`)
+      return
+    }
+    assert.deepEqual(
+      town.unlock?.gymsRequired,
+      [paldeaGyms[index - 1].id],
+      `${gym.id} waits on ${paldeaGyms[index - 1].id}`
+    )
+  })
+
+  // The league still opens on a badge count, so the count of defeated gyms is
+  // what matters once they are all earned.
   /** @param {string[]} defeatedGyms */
   const state = (defeatedGyms) => ({
     unlockedLocations: ['paldea-east-province-area-two'],
@@ -100,6 +108,6 @@ test('Paldea gyms are free-order and the league gates on a badge count', () => {
   )
   assert.ok(
     computeUnlockedLocations(state(paldeaGyms.map((gym) => gym.id))).includes(league.id),
-    'the league opens once every Paldea badge is earned (in any order)'
+    'the league opens once every Paldea badge is earned'
   )
 })

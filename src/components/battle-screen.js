@@ -7,6 +7,7 @@ import { useGame } from '../game/context.js'
 import { useGameLoop } from '../game/use-game-loop.js'
 import { useIsMobile } from '../hooks.js'
 import { BattleLog } from './battle-log.js'
+import { BattleMenuModals } from './battle-menu-modals.js'
 import { BattleScene } from './battle-scene.js'
 import { LevelUpNotification } from './level-up-notification.js'
 
@@ -21,6 +22,9 @@ const MAX_SCENE_SCALE = 1.6
 export function BattleScreen() {
   const { state } = useGame(),
     isMobile = useIsMobile(),
+    [menu, setMenu] = React.useState(
+      /** @type {import('./battle-menu-modals.js').BattleMenuKey | null} */ (null)
+    ),
     containerRef = React.useRef(/** @type {HTMLDivElement | null} */ (null)),
     [scale, setScale] = React.useState(1)
   useGameLoop()
@@ -68,18 +72,21 @@ export function BattleScreen() {
       style: {
         transform: `scale(${scale})`,
       },
-      children: jsx(BattleScene, {}),
+      children: jsx(BattleScene, { onOpenMenu: setMenu }),
     }),
   })
+  // The menus live here, not inside BattleScene, so swapping in a phase scene
+  // (healing, evolution, a minigame) no longer closes one that is already open.
+  const menus = jsx(BattleMenuModals, { menu, onClose: () => setMenu(null) })
   if (isMobile)
     return jsxs('div', {
       className: 'battle-screen',
       ref: containerRef,
-      children: [scene, jsx(LevelUpNotification, {})],
+      children: [scene, menus, jsx(LevelUpNotification, {})],
     })
   return jsxs('div', {
     className: 'battle-screen',
     ref: containerRef,
-    children: [scene, jsx(BattleLog, {}), jsx(LevelUpNotification, {})],
+    children: [scene, jsx(BattleLog, {}), menus, jsx(LevelUpNotification, {})],
   })
 }

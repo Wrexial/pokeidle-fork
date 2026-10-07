@@ -10,28 +10,22 @@ import { dailyEventByKey } from '../data/daily-events.js'
 import { hasClaimableQuests } from '../game/quests.js'
 import { biomeBackgroundFor, biomeForLocation, BIOME_FILTERS, DAY_NIGHT_FILTERS, locationImages } from '../data/ui.js'
 import { useDayPhase } from '../hooks.js'
-import { shinyFullOddsChance } from '../data/config.js'
 import { getDexStatus, shouldOfferMasterBall } from '../game/catching.js'
 import { battleSpecies } from '../game/combat.js'
 import { BattleWeatherOverlay } from './battle-weather-overlay.js'
 import { isFemalePokemon } from '../game/breeding.js'
 import { WEATHER_ICONS, WEATHER_NAMES } from '../game/weather.js'
 import { TERRAIN_ICONS, TERRAIN_NAMES } from '../game/terrain.js'
-import { completedGenerations, mapData, moveData, speciesKeysByGeneration } from '../data/gameData.js'
+import { mapData, moveData } from '../data/gameData.js'
 import { gmaxEvolveReady, megaEvolveReady } from '../data/mega-evolution.js'
 import { useGame } from '../game/context.js'
-import { shinyOddsForCompletedGenerations } from '../game/progression.js'
 import { getBossTrainerSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, getTrainerSpriteUrl, isBattleReady } from '../game/pokemon.js'
 import { EnemyInfoBox } from './enemy-info-box.js'
 import { PlayerInfoBox } from './player-info-box.js'
-import { SettingsModal } from './settings-modal.js'
 import { BattleTextBox } from './battle-text-box.js'
 import { EvolutionScene } from './evolution-scene.js'
-import { DailyEventModal } from './daily-event-modal.js'
 import { DexCompleteScene } from './dex-complete-scene.js'
 import { GameOverScene } from './game-over-scene.js'
-import { QuestsModal } from './quests-modal.js'
-import { CompanionCarePanel } from './companion-panel.js'
 import { HealingScene } from './healing-scene.js'
 import { MasterBallScene } from './master-ball-scene.js'
 import { BugContestScene } from './bug-contest-scene.js'
@@ -64,22 +58,12 @@ import { WonderTradeScene } from './wonder-trade-scene.js'
 import { PokeballIcon } from './pokeball-icon.js'
 import { SpeedControls } from './speed-controls.js'
 
-export function BattleScene() {
-  const [showInfo, setShowInfo] = React.useState(!1),
-    [showSettings, setShowSettings] = React.useState(!1),
-    [showSwitch, setShowSwitch] = React.useState(!1),
-    [showDaily, setShowDaily] = React.useState(!1),
-    [showQuests, setShowQuests] = React.useState(!1),
-    [showCompanion, setShowCompanion] = React.useState(!1),
+/** @param {{ onOpenMenu: (menu: import('./battle-menu-modals.js').BattleMenuKey) => void }} props */
+export function BattleScene({ onOpenMenu }) {
+  const [showSwitch, setShowSwitch] = React.useState(!1),
     { state, dispatch } = useGame(),
     dayPhase = useDayPhase(),
-    { playerPokemon, enemyPokemon, battleEvents } = state,
-    completedGenerationSet = completedGenerations(state.pokedexCaught),
-    caughtSpeciesSet = new Set(state.pokedexCaught),
-    shinyCharmOdds = shinyOddsForCompletedGenerations(
-      completedGenerationSet.size,
-      speciesKeysByGeneration.length
-    )
+    { playerPokemon, enemyPokemon, battleEvents } = state
   if (state.phase === 'evolving') return jsx(EvolutionScene, {})
   if (state.phase === 'healing') return jsx(HealingScene, {})
   if (state.phase === 'catching') return jsx(MasterBallScene, {})
@@ -257,7 +241,7 @@ export function BattleScene() {
         children: [
           jsx('button', {
             className: 'battle-info-btn',
-            onClick: () => setShowInfo(!0),
+            onClick: () => onOpenMenu('info'),
             children: '?',
           }),
           jsx('button', {
@@ -273,7 +257,7 @@ export function BattleScene() {
             className: `battle-info-btn daily-event-btn${
               state.dailyEvent && !state.dailyEvent.claimed ? ' claimable' : ''
             }`,
-            onClick: () => setShowDaily(!0),
+            onClick: () => onOpenMenu('daily'),
             title: state.dailyEvent
               ? dailyEventByKey[state.dailyEvent.kind]?.name ?? 'Daily Event'
               : 'Daily Event',
@@ -285,7 +269,7 @@ export function BattleScene() {
             className: `battle-info-btn daily-event-btn${
               hasClaimableQuests(state.quests) ? ' claimable' : ''
             }`,
-            onClick: () => setShowQuests(!0),
+            onClick: () => onOpenMenu('quests'),
             title: 'Daily Quests',
             children: '📜',
           }),
@@ -298,13 +282,13 @@ export function BattleScene() {
                   ? ' claimable'
                   : ''
               }`,
-              onClick: () => setShowCompanion(!0),
+              onClick: () => onOpenMenu('companion'),
               title: 'Companion',
               children: '🐾',
             }),
           jsx('button', {
             className: 'battle-info-btn',
-            onClick: () => setShowSettings(!0),
+            onClick: () => onOpenMenu('settings'),
             children: jsx('span', {
               className: 'settings-icon',
               children: '⚙',
@@ -312,104 +296,6 @@ export function BattleScene() {
           }),
         ],
       }),
-      showInfo &&
-        createPortal(
-          jsx('div', {
-            className: 'battle-info-overlay',
-            onClick: () => setShowInfo(!1),
-            children: jsxs('div', {
-              className: 'battle-info-modal',
-              onClick: /** @param {React.MouseEvent} event */ (event) => event.stopPropagation(),
-              children: [
-                jsxs('div', {
-                  className: 'battle-info-header',
-                  children: [
-                    jsx('span', {
-                      className: 'battle-info-title',
-                      children: 'Info',
-                    }),
-                    jsx('button', {
-                      className: 'battle-info-close',
-                      onClick: () => setShowInfo(!1),
-                      children: 'X',
-                    }),
-                  ],
-                }),
-                jsxs('div', {
-                  className: 'battle-info-content',
-                  children: [
-                    jsxs('p', {
-                      children: [
-                        "Hello and welcome to Pokemon Idle! Please be aware that this game is still in the very early stages of development so I welcome any and all feedback. I apologize for the lack of detailed tutorial system but I just haven't had a chance. Feel free to join the ",
-                        jsx('a', {
-                          href: 'https://www.reddit.com/r/PkmnIdle/',
-                          target: '_blank',
-                          rel: 'noopener noreferrer',
-                          children: 'Pokemon Idle subreddit',
-                        }),
-                        ' to ask questions or find answers to questions others have asked.',
-                      ],
-                    }),
-                    jsx('p', {
-                      children:
-                        'Head out to a route to begin your Pokemon adventure!',
-                    }),
-                    jsxs('div', {
-                      className: 'info-shiny-stats',
-                      children: [
-                        jsxs('span', {
-                          children: ['Shinies seen: ', state.shinySeen.length],
-                        }),
-                        jsxs('span', {
-                          children: ['Shinies caught: ', state.shinyCaught.length],
-                        }),
-                        jsx('span', {
-                          children:
-                            completedGenerationSet.size > 0
-                              ? `Shiny odds: 1/${shinyFullOddsChance}, or 1/${shinyCharmOdds} for a completed generation (${completedGenerationSet.size}/${speciesKeysByGeneration.length} charms)`
-                              : `Shiny odds: 1/${shinyFullOddsChance} - complete a generation to unlock its Shiny Charm`,
-                        }),
-                        jsx('div', {
-                          className: 'info-shiny-generations',
-                          children: speciesKeysByGeneration.map((requiredSpecies, generationIndex) => {
-                            const isComplete = completedGenerationSet.has(generationIndex),
-                              caughtCount = requiredSpecies.filter((speciesKey) =>
-                                caughtSpeciesSet.has(speciesKey)
-                              ).length
-                            return jsxs(
-                              'span',
-                              {
-                                className: `info-shiny-gen${isComplete ? ' complete' : ''}`,
-                                children: [
-                                  `Gen ${generationIndex + 1} `,
-                                  isComplete ? '✓ Shiny Charm' : `${caughtCount}/${requiredSpecies.length}`,
-                                ],
-                              },
-                              generationIndex
-                            )
-                          }),
-                        }),
-                        jsx('span', {
-                          className: 'info-shiny-hint',
-                          children:
-                            'Catch every Pokemon in a generation to unlock its Shiny Charm (2x shiny rate)',
-                        }),
-                      ],
-                    }),
-                    jsx('button', {
-                      className: 'patch-notes-link-btn',
-                      onClick: () => {
-                        window.location.hash = 'patchnotes'
-                      },
-                      children: 'View Patch Notes',
-                    }),
-                  ],
-                }),
-              ],
-            }),
-          }),
-          document.body
-        ),
       activeTrainerBattle &&
         jsx('div', {
           className: 'trainer-name-display',
@@ -757,59 +643,6 @@ export function BattleScene() {
           }),
         ],
       }),
-      showSettings &&
-        createPortal(
-          jsx(SettingsModal, {
-            onClose: () => setShowSettings(!1),
-          }),
-          document.body
-        ),
-      showDaily &&
-        createPortal(
-          jsx(DailyEventModal, {
-            onClose: () => setShowDaily(!1),
-          }),
-          document.body
-        ),
-      showQuests &&
-        createPortal(
-          jsx(QuestsModal, {
-            onClose: () => setShowQuests(!1),
-          }),
-          document.body
-        ),
-      showCompanion &&
-        createPortal(
-          jsx('div', {
-            className: 'battle-info-overlay',
-            onClick: () => setShowCompanion(!1),
-            children: jsxs('div', {
-              className: 'battle-info-modal companion-modal',
-              onClick: /** @param {React.MouseEvent} event */ (event) => event.stopPropagation(),
-              children: [
-                jsxs('div', {
-                  className: 'battle-info-header',
-                  children: [
-                    jsx('span', {
-                      className: 'battle-info-title',
-                      children: 'Companion',
-                    }),
-                    jsx('button', {
-                      className: 'battle-info-close',
-                      onClick: () => setShowCompanion(!1),
-                      children: 'X',
-                    }),
-                  ],
-                }),
-                jsx('div', {
-                  className: 'battle-info-content companion-modal-content',
-                  children: jsx(CompanionCarePanel, {}),
-                }),
-              ],
-            }),
-          }),
-          document.body
-        ),
       switchPickerOpen &&
         createPortal(
           jsx('div', {

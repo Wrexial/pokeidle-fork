@@ -313,7 +313,7 @@ export function SettingsModal({ onClose }) {
                       jsx('p', {
                         className: 'settings-hint',
                         children:
-                          'Choose how Pokemon are drawn: animated sprites (the default) or the static pixel art. Static is lighter on older devices and a natural fit with Reduced Motion.',
+                          'Choose how Pokemon are drawn: animated sprites (the default) or the static pixel art. Static is lighter on older devices and a natural fit with Reduced Motion. Offline play always uses the static sprites.',
                       }),
                       jsx('button', {
                         className: `settings-toggle-btn${state.spriteStyle === 'static' ? ' active' : ''}`,

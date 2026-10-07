@@ -152,9 +152,9 @@ export function OfflinePanel() {
       jsx('div', { className: 'settings-section-title', children: 'Offline Play' }),
       jsx('p', {
         className: 'settings-hint',
-        children: `Download every Pokemon sprite, battle backdrop, item icon and data file into this browser (about ${formatBytes(
+        children: `Download the static sprite for every Pokemon, plus every battle backdrop, item icon and data file (about ${formatBytes(
           plannedBytes
-        )}). After that the game runs with no internet at all.`,
+        )}). While offline the game uses the static sprites.`,
       }),
       phase === 'running'
         ? jsxs('div', {

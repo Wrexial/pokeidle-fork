@@ -1,6 +1,7 @@
 // Sprite URL helpers (Pokemon, eggs and trainers). Split from game/pokemon.js.
 
 import { animatedSprites, genderedSprites, trainerClasses } from '../../data/gameData.js'
+import { isOnline } from '../network.js'
 import { getSpriteStyle } from '../settings.js'
 
 /**
@@ -17,8 +18,10 @@ import { getSpriteStyle } from '../settings.js'
  * @param {boolean} [isFemale]
  */
 export function getPokemonSpriteUrl(spriteId, isBack = !1, isShiny = !1, isFemale = !1) {
-  // The player's sprite-style preference can force the static png set.
-  if (getSpriteStyle() === 'static')
+  // The player's sprite-style preference can force the static png set, and the
+  // animated set is not part of the offline download, so offline play uses the
+  // static art too (no 404s for uncached gifs).
+  if (getSpriteStyle() === 'static' || !isOnline())
     return getPokemonSpriteFallbackUrl(spriteId, isBack, isShiny, isFemale)
   const key = Number(spriteId),
     missing = isShiny

@@ -6,7 +6,6 @@
 // Keep OFFLINE_CACHE in sync with public/sw.js.
 
 import {
-  animatedSprites,
   championData,
   elite4Data,
   genderedSprites,
@@ -18,13 +17,24 @@ import {
 import { BIOME_SCENE_IMAGES, locationImages } from '../data/ui.js'
 
 /** Shared cache name. Must match public/sw.js. */
-export const OFFLINE_CACHE = 'pokemon-idle-offline-v1'
+export const OFFLINE_CACHE = 'pokemon-idle-offline-v2'
 
 /** Marks a request the page will store itself (the worker must not). */
 export const OFFLINE_PREFETCH_HEADER = 'x-offline-prefetch'
 
 const POKEMON_SPRITE_ROOT = '/sprites/pokemon'
-const ANIMATED_SPRITE_ROOT = `${POKEMON_SPRITE_ROOT}/versions/generation-v/black-white/animated`
+const ANIMATED_SPRITE_PREFIX =
+  '/sprites/pokemon/versions/generation-v/black-white/animated'
+
+/**
+ * The animated gif set is never part of the offline cache (offline play uses
+ * the static art), wherever a URL comes from -- the explicit manifest or the
+ * files this session happened to load.
+ * @param {string} path
+ */
+function isAnimatedSpritePath(path) {
+  return path.startsWith(ANIMATED_SPRITE_PREFIX)
+}
 
 /** App pages and shared files every session needs. */
 const SHELL_FILES = [
@@ -177,7 +187,8 @@ function collectLoadedAssetPaths() {
   for (const entry of performance.getEntriesByType('resource')) {
     try {
       const url = new URL(entry.name)
-      if (url.origin === location.origin) urls.add(url.pathname)
+      if (url.origin === location.origin && !isAnimatedSpritePath(url.pathname))
+        urls.add(url.pathname)
     } catch {
       // Ignore malformed performance entries.
     }
@@ -202,6 +213,9 @@ function bossSpriteKeys() {
 /**
  * Every static sprite variant a species id can resolve to (see
  * `getPokemonSpriteUrl` in src/game/pokemon/sprites.js).
+ *
+ * The animated gif set (~440 MB) is deliberately left out: offline play uses
+ * the static art, so prefetching it would dwarf the rest of the cache.
  * @param {Set<string>} urls
  * @param {number} id
  */
@@ -220,25 +234,6 @@ function addPokemonSpriteUrls(urls, id) {
     urls.add(`${POKEMON_SPRITE_ROOT}/shiny/female/${key}.png`)
   if (genderedSprites.backShiny?.includes(key))
     urls.add(`${POKEMON_SPRITE_ROOT}/back/shiny/female/${key}.png`)
-  if (key > 0) {
-    // The manifests list the ids *missing* each animated variant.
-    if (!animatedSprites.front?.includes(key))
-      urls.add(`${ANIMATED_SPRITE_ROOT}/${key}.gif`)
-    if (!animatedSprites.back?.includes(key))
-      urls.add(`${ANIMATED_SPRITE_ROOT}/back/${key}.gif`)
-    if (!animatedSprites.shiny?.includes(key))
-      urls.add(`${ANIMATED_SPRITE_ROOT}/shiny/${key}.gif`)
-    if (!animatedSprites.backShiny?.includes(key))
-      urls.add(`${ANIMATED_SPRITE_ROOT}/back/shiny/${key}.gif`)
-  }
-  if (genderedSprites.animatedFront?.includes(key))
-    urls.add(`${ANIMATED_SPRITE_ROOT}/female/${key}.gif`)
-  if (genderedSprites.animatedBack?.includes(key))
-    urls.add(`${ANIMATED_SPRITE_ROOT}/back/female/${key}.gif`)
-  if (genderedSprites.animatedShiny?.includes(key))
-    urls.add(`${ANIMATED_SPRITE_ROOT}/shiny/female/${key}.gif`)
-  if (genderedSprites.animatedBackShiny?.includes(key))
-    urls.add(`${ANIMATED_SPRITE_ROOT}/back/shiny/female/${key}.gif`)
 }
 
 /**
@@ -254,8 +249,8 @@ export function collectAppShellAssets() {
 }
 
 /**
- * Every static asset the game can request, ready to prefetch for full offline
- * play.
+ * Every static asset the game can request, ready to prefetch for offline play.
+ * The animated sprites are excluded on purpose (see `addPokemonSpriteUrls`).
  * @returns {string[]}
  */
 export function collectOfflineAssets() {

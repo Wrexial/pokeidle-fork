@@ -89,6 +89,24 @@ test('rollGender respects fixed genders and genderless species', () => {
   assert.ok(['male', 'female'].includes(rollGender('pikachu')))
 })
 
+test('offline play falls back to the static sprites', async () => {
+  // The animated set is not downloaded for offline, so with no connection the
+  // helper must return the static pngs even while the style preference is
+  // animated.
+  const { setOnline } = await import('../src/game/network.js')
+  try {
+    setOnline(false)
+    assert.equal(getPokemonSpriteUrl(PIKACHU, false, false, false), `/sprites/pokemon/${PIKACHU}.png`)
+    assert.equal(
+      getPokemonSpriteUrl(PIKACHU, true, true, true),
+      `/sprites/pokemon/back/shiny/female/${PIKACHU}.png`
+    )
+  } finally {
+    setOnline(true)
+  }
+  assert.equal(getPokemonSpriteUrl(PIKACHU, false, false, false), `${ANIMATED}/${PIKACHU}.gif`)
+})
+
 test('the static sprite style forces the png artwork', async () => {
   const { setSpriteStyle } = await import('../src/game/settings.js')
   try {

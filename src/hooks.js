@@ -8,6 +8,7 @@ import { useGame } from './game/context.js'
 import { playSfx, startMusic, stopMusic, unlockAudio } from './game/audio.js'
 import { awaySummary } from './game/progression.js'
 import { dayPhaseAt, msUntilPhaseChange } from './game/day-night.js'
+import { isOnline, subscribeOnline } from './game/network.js'
 
 /**
  * The current day/night phase, re-rendering only when the phase changes.
@@ -29,6 +30,22 @@ export function useDayPhase() {
     return () => clearTimeout(timer)
   }, [])
   return phase
+}
+
+/**
+ * Whether the browser currently has a network connection. Offline play uses the
+ * static sprites, so this re-renders the app when the connection changes.
+ * @returns {boolean}
+ */
+export function useOnlineStatus() {
+  const [online, setOnline] = React.useState(isOnline())
+  return (
+    React.useEffect(
+      () => subscribeOnline(() => setOnline(isOnline())),
+      []
+    ),
+    online
+  )
 }
 
 /**

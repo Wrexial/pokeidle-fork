@@ -10,18 +10,34 @@
  *     cache, so a new deployment (or regenerated data) is picked up while
  *     online but the game still boots offline.
  *   - Everything else (sprites, backgrounds, fonts, hashed JS/CSS) is
- *     cache-first, because those files are effectively immutable.
+ *     cache-first, because those files are effectively immutable. The animated
+ *     gif set is the exception: it is never persisted (see below).
  *
  * The page owns the cache during a "Download for offline play" run: it sends
  * requests tagged with `x-offline-prefetch: 1`, which this worker passes
  * straight to the network so the page can store the response itself.
  *
+ * The animated sprite set (~440 MB) is not part of the offline download, and
+ * offline play falls back to the static art, so it is served network-only and
+ * never written to the cache.
+ *
  * Keep OFFLINE_CACHE in sync with src/game/offline.js.
  */
 
-const OFFLINE_CACHE = 'pokemon-idle-offline-v1'
+const OFFLINE_CACHE = 'pokemon-idle-offline-v2'
 const CACHE_PREFIX = 'pokemon-idle-offline-'
 const PREFETCH_HEADER = 'x-offline-prefetch'
+const ANIMATED_SPRITE_PREFIX =
+  '/sprites/pokemon/versions/generation-v/black-white/animated'
+
+/**
+ * The animated gifs are large and only used online (offline play is static), so
+ * they bypass the cache entirely.
+ * @param {URL} url
+ */
+function isAnimatedSprite(url) {
+  return url.pathname.startsWith(ANIMATED_SPRITE_PREFIX)
+}
 
 /** Is this a same-origin GET worth caching? @param {Request} request */
 function isCacheableRequest(request) {
@@ -129,6 +145,9 @@ self.addEventListener('fetch', (event) => {
   // Static assets: cache first, then network (storing what we fetch).
   event.respondWith(
     (async () => {
+      // Animated sprites are served straight from the network / HTTP cache and
+      // never stored; offline play uses the static art instead.
+      if (isAnimatedSprite(url)) return fetch(request)
       const cache = await caches.open(OFFLINE_CACHE)
       const cached = await cache.match(request)
       if (cached) return cached

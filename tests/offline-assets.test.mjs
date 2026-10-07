@@ -20,7 +20,7 @@ const publicPath = (/** @type {string} */ url) => join(ROOT, 'public', url)
 
 test('offline cache name matches the service worker constant', () => {
   // Keep in sync with public/sw.js; a mismatch would silently split the cache.
-  assert.equal(OFFLINE_CACHE, 'pokemon-idle-offline-v1')
+  assert.equal(OFFLINE_CACHE, 'pokemon-idle-offline-v2')
   const worker = readFileSync(join(ROOT, 'public', 'sw.js'), 'utf8')
   assert.match(worker, new RegExp(`OFFLINE_CACHE = '${OFFLINE_CACHE}'`))
 })
@@ -37,7 +37,7 @@ test('the app shell includes the injected data URLs and shared pages', () => {
   assert.ok(shell.includes('/guide.html'))
 })
 
-test('the full manifest covers every sprite variant the game can request', () => {
+test('the manifest covers every static sprite variant but no animated gifs', () => {
   const assets = collectOfflineAssets()
   assert.ok(assets.length > 5000, `expected a large manifest, got ${assets.length}`)
   for (const url of [
@@ -46,10 +46,12 @@ test('the full manifest covers every sprite variant the game can request', () =>
     '/sprites/pokemon/shiny/25.png',
     '/sprites/pokemon/back/shiny/25.png',
     '/sprites/pokemon/egg.png',
-    '/sprites/pokemon/versions/generation-v/black-white/animated/25.gif',
   ]) {
     assert.ok(assets.includes(url), `manifest is missing ${url}`)
   }
+  // Offline play ships the static art only; the animated set is ~440 MB.
+  const animated = assets.filter((url) => url.endsWith('.gif'))
+  assert.deepEqual(animated, [], 'manifest should not include animated sprites')
   assert.equal(new Set(assets).size, assets.length, 'manifest has duplicate URLs')
 })
 
@@ -87,8 +89,38 @@ test('every enumerated item, trainer and backdrop file exists on disk', () => {
 test('estimateOfflineBytes gives a plausible rough cache size', () => {
   assert.equal(estimateOfflineBytes([]), 0)
   const megabytes = estimateOfflineBytes() / (1024 * 1024)
-  assert.ok(megabytes > 300, `estimate ${megabytes.toFixed(0)} MB is too low`)
-  assert.ok(megabytes < 800, `estimate ${megabytes.toFixed(0)} MB is too high`)
+  assert.ok(megabytes > 15, `estimate ${megabytes.toFixed(0)} MB is too low`)
+  assert.ok(megabytes < 150, `estimate ${megabytes.toFixed(0)} MB is too high`)
+})
+
+test('the shell cache drops animated gifs picked up from loaded resources', () => {
+  // The app renders sprites while online, so those gifs show up in the
+  // performance timeline; they must not leak into the offline cache.
+  const previousPerformance = globalThis.performance
+  const previousLocation = globalThis.location
+  try {
+    // @ts-ignore - stub the globals the module reads at call time
+    globalThis.location = { origin: 'http://localhost' }
+    // @ts-ignore
+    globalThis.performance = {
+      getEntriesByType: () => [
+        { name: 'http://localhost/assets/app.js' },
+        { name: 'http://localhost/sprites/pokemon/25.png' },
+        {
+          name: 'http://localhost/sprites/pokemon/versions/generation-v/black-white/animated/25.gif',
+        },
+      ],
+    }
+    const shell = collectAppShellAssets()
+    assert.ok(shell.includes('/assets/app.js'))
+    assert.ok(shell.includes('/sprites/pokemon/25.png'))
+    assert.ok(!shell.some((url) => url.endsWith('.gif')), 'shell cache included an animated gif')
+  } finally {
+    // @ts-ignore
+    globalThis.performance = previousPerformance
+    // @ts-ignore
+    globalThis.location = previousLocation
+  }
 })
 
 test('estimateOfflineBytes weights categories by their real file sizes', () => {

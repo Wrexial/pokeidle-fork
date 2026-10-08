@@ -12,13 +12,21 @@ export const BERRY_BLENDER_MS = 12000
 export const BERRY_BLENDER_TICK_MS = 50
 
 /** Half-width of the moving sweet spot (0-1 of the bar). */
-export const BERRY_BLENDER_ZONE = 0.16
+export const BERRY_BLENDER_ZONE = 0.19
 
 /** Speed added by one tap. */
-export const BERRY_BLENDER_TAP = 0.06
+export const BERRY_BLENDER_TAP = 0.075
 
-/** Speed lost each tick while coasting. */
-export const BERRY_BLENDER_DECAY = 0.028
+/**
+ * Speed lost each tick while coasting. Kept below a comfortable tap rate (six
+ * taps a second) so the needle can actually be held in the zone: the old 0.028
+ * drained faster than any realistic tapping could refill, making a good blend
+ * impossible. At this decay a steady six-tap rhythm out-paces the drain.
+ */
+export const BERRY_BLENDER_DECAY = 0.015
+
+/** Divisor on the elapsed time for the sweet-spot sweep (higher is slower). */
+export const BERRY_BLENDER_SWEEP_MS = 1000
 
 /**
  * Berries on offer, purely for the recipe display.
@@ -43,7 +51,7 @@ export const BERRY_BLENDER_BERRIES = [
  */
 export function blenderSweetSpot(elapsedMs) {
   return {
-    center: 0.5 + Math.sin(Math.max(0, elapsedMs) / 900) * 0.24,
+    center: 0.5 + Math.sin(Math.max(0, elapsedMs) / BERRY_BLENDER_SWEEP_MS) * 0.24,
     halfWidth: BERRY_BLENDER_ZONE,
   }
 }

@@ -12854,7 +12854,18 @@ img {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 14px;
+    justify-content: center;
+    gap: 10px;
+    width: 100%
+}
+
+/* The grid and the direction pad sit side by side, so the 4x4 board can stay
+   large without the pad pushing it past the bottom of the scene. */
+.fusion-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
     width: 100%
 }
 
@@ -12863,10 +12874,11 @@ img {
     grid-template-columns: repeat(4, 1fr);
     gap: 8px;
     width: 100%;
-    max-width: 340px;
+    max-width: 300px;
     padding: 8px;
     background: #1c2333;
-    border-radius: 10px
+    border-radius: 10px;
+    box-sizing: border-box
 }
 
 .fusion-tile {
@@ -12878,7 +12890,9 @@ img {
     background: #2a3247;
     border-radius: 8px;
     color: #20242e;
-    font-size: 11px;
+    font-size: 9px;
+    line-height: 1.1;
+    overflow-wrap: anywhere;
     font-weight: 700;
     text-align: center
 }

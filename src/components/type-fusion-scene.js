@@ -132,47 +132,52 @@ export function TypeFusionScene() {
           : jsxs('div', {
               className: 'fusion-play',
               children: [
-                jsx('div', {
-                  className: 'fusion-grid',
-                  children: board.flatMap((row, rowIndex) =>
-                    row.map((level, columnIndex) =>
-                      jsx(
-                        'div',
-                        {
-                          className: `fusion-tile${level > 0 ? ' filled' : ''}`,
-                          style: level > 0 ? { background: TYPE_COLORS[level - 1] } : undefined,
-                          children: level > 0 ? typeFusionLabel(level) : '',
-                        },
-                        `${rowIndex}-${columnIndex}`
-                      )
-                    )
-                  ),
-                }),
                 jsxs('div', {
-                  className: 'fusion-pad',
+                  className: 'fusion-main',
                   children: [
-                    jsx('button', {
-                      className: 'move-panel-btn',
-                      onClick: () => move('up'),
-                      children: '\u25b2',
+                    jsx('div', {
+                      className: 'fusion-grid',
+                      children: board.flatMap((row, rowIndex) =>
+                        row.map((level, columnIndex) =>
+                          jsx(
+                            'div',
+                            {
+                              className: `fusion-tile${level > 0 ? ' filled' : ''}`,
+                              style: level > 0 ? { background: TYPE_COLORS[level - 1] } : undefined,
+                              children: level > 0 ? typeFusionLabel(level) : '',
+                            },
+                            `${rowIndex}-${columnIndex}`
+                          )
+                        )
+                      ),
                     }),
                     jsxs('div', {
-                      className: 'fusion-pad-row',
+                      className: 'fusion-pad',
                       children: [
                         jsx('button', {
                           className: 'move-panel-btn',
-                          onClick: () => move('left'),
-                          children: '\u25c0',
+                          onClick: () => move('up'),
+                          children: '\u25b2',
                         }),
-                        jsx('button', {
-                          className: 'move-panel-btn',
-                          onClick: () => move('down'),
-                          children: '\u25bc',
-                        }),
-                        jsx('button', {
-                          className: 'move-panel-btn',
-                          onClick: () => move('right'),
-                          children: '\u25b6',
+                        jsxs('div', {
+                          className: 'fusion-pad-row',
+                          children: [
+                            jsx('button', {
+                              className: 'move-panel-btn',
+                              onClick: () => move('left'),
+                              children: '\u25c0',
+                            }),
+                            jsx('button', {
+                              className: 'move-panel-btn',
+                              onClick: () => move('down'),
+                              children: '\u25bc',
+                            }),
+                            jsx('button', {
+                              className: 'move-panel-btn',
+                              onClick: () => move('right'),
+                              children: '\u25b6',
+                            }),
+                          ],
                         }),
                       ],
                     }),

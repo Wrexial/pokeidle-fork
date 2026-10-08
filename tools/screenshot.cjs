@@ -627,6 +627,16 @@ async function main() {
         '23-memory.png',
       ],
       [
+        'Type Fusion',
+        'unova',
+        'unova-nacrene-city',
+        'unova-route-3',
+        ['unova-nuvema-town', 'unova-route-3', 'unova-nacrene-city'],
+        '.fusion-grid',
+        '33-type-fusion.png',
+        '.fusion-pad .move-panel-btn',
+      ],
+      [
         'Whack',
         'kanto',
         'vermilionCity',

@@ -10,7 +10,7 @@ export const TYPE_FUSION_COST = 350
 export const TYPE_FUSION_SIZE = 4
 
 /** Swipes allowed in one run. */
-export const TYPE_FUSION_MOVES = 45
+export const TYPE_FUSION_MOVES = 100
 
 /**
  * The merge ladder: level 1 is Normal, and two of a level fuse into the next.

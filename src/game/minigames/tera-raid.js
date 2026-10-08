@@ -2,7 +2,7 @@
 // a Tera type: your healthy party chips away at its inflated HP, each Pokemon
 // fighting until it faints. Break the crystal and you catch the boss.
 
-import { pokemonSpecies, regions } from '../../data/gameData.js'
+import { pokemonSpecies } from '../../data/gameData.js'
 import { createOpponent, simulateBattle } from './gauntlet.js'
 
 /** Money spent to enter a raid. */
@@ -10,6 +10,18 @@ export const TERA_RAID_COST = 600
 
 /** Hard cap on the whole raid so a stall war can never hang the scene. */
 export const TERA_RAID_MAX_TURNS = 160
+
+/**
+ * The species a Tera Raid can hide. Any base-species Pokemon in the national dex
+ * can turn up, so a crystal is as likely to hold a common route find as a
+ * legendary; the star rating (from base-stat total) decides how hard it is.
+ * Alternate forms (the 10000+ ids) are left out so a raid never spawns a Mega or
+ * a Gigantamax.
+ * @type {string[]}
+ */
+export const TERA_RAID_POOL = Object.entries(pokemonSpecies)
+  .filter(([, species]) => species.id > 0 && species.id <= 1025)
+  .map(([speciesKey]) => speciesKey)
 
 /**
  * The 18 Tera types a crystal can carry.
@@ -52,20 +64,15 @@ export function teraRaidStars(speciesKey) {
 }
 
 /**
- * The boss for a raid: a species from the region's raid pool with a Tera type and
- * a star rating. Its level scales above the party's best so it stays a boss.
+ * The boss for a raid: any species from the Tera Raid pool, with a Tera type and
+ * a star rating from its base-stat total. Its level scales above the party's
+ * best so it stays a boss.
  * @param {number} baseLevel The party's best level.
- * @param {string} [regionId]
  * @returns {{ speciesKey: string, name: string, level: number, stars: number, teraType: string }}
  */
-export function teraRaidBoss(baseLevel, regionId = 'paldea') {
-  const region = regions.find((candidate) => candidate.id === regionId),
-    pool = (region?.raidPool ?? []).filter((entry) => pokemonSpecies[entry.speciesKey])
-  const entry =
-    pool.length > 0
-      ? pool[Math.floor(Math.random() * pool.length)]
-      : { speciesKey: 'garganacl', level: 60 }
-  const speciesKey = entry.speciesKey ?? 'garganacl',
+export function teraRaidBoss(baseLevel) {
+  const pool = TERA_RAID_POOL.length > 0 ? TERA_RAID_POOL : ['garganacl'],
+    speciesKey = pool[Math.floor(Math.random() * pool.length)],
     stars = teraRaidStars(speciesKey),
     species = pokemonSpecies[speciesKey],
     // Prefer one of the boss's own types for a STAB-style crystal.
@@ -77,7 +84,7 @@ export function teraRaidBoss(baseLevel, regionId = 'paldea') {
   return {
     speciesKey,
     name: species?.name ?? speciesKey,
-    level: Math.max(5, Math.min(100, Math.round(baseLevel + stars * 2))),
+    level: Math.max(5, Math.min(100, Math.round(baseLevel + stars * 3))),
     stars,
     teraType,
   }
@@ -89,7 +96,7 @@ export function teraRaidBoss(baseLevel, regionId = 'paldea') {
  * @returns {number}
  */
 export function teraRaidHpMultiplier(stars) {
-  return 1.4 + Math.max(1, stars) * 0.25
+  return 1.5 + Math.max(1, stars) * 0.55
 }
 
 /**

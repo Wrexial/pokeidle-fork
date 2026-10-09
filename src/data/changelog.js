@@ -91,6 +91,7 @@ export const CHANGELOG = [
             'A failed startup can no longer cost you your save: the self-heal that resets a stuck save now copies every slot aside first and puts them back on the next successful load, and a single transient failure just reloads instead of erasing anything',
             'The battle menus stay open during the healing animation now: an automatic party heal swapped out the scene that held the Info, Settings, daily event, quests and Companion menus, so it closed whichever one you had open',
             'The Pokedex entry panel gained a close (X) button, so a Pokemon whose entry fills the panel can be deselected without having to find the grid tile again',
+            'Clicking a still-unseen Pokedex entry no longer fills the Box search with its name, so a "???" slot cannot reveal what it is',
             'A Raid Island link in a Pokedex entry starts the raid for the Pokemon shown now, instead of just travelling to the island as if it were a route',
             'Ten item-manipulating moves no longer look inert: Knock Off, Thief, Covet, Pluck, Bug Bite, Incinerate, Power Split, Guard Split, Speed Swap and Heal Block now show what they do in their tooltip (and the Battle Reference lists them as implemented) instead of being marked as having no effect',
             'The Battle Maison\u2019s ally abilities (Battery, Power Spot, Friend Guard and Healer) are listed as implemented on the Battle Reference now instead of inert',

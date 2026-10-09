@@ -3,7 +3,7 @@
 import React from 'react'
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
 import { BOX_PAGE_SIZE, BOX_SORT_DIRECTIONS, BOX_SORT_FIELDS } from '../data/ui.js'
-import { baseSpeciesKey, pokemonSpecies } from '../data/gameData.js'
+import { baseSpeciesKey, isSpeciesRegistered, pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { useUi } from '../game/ui-context.js'
 import { getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, nextBoxSortField, parseBoxSort, pokemonDisplayName, toggleBoxSortDirection } from '../game/pokemon.js'
@@ -36,6 +36,10 @@ export function BoxPanel({
     [filterMode, setFilterMode] = React.useState('all'),
     [confirmDupes, setConfirmDupes] = React.useState(!1),
     [searchOpen, setSearchOpen] = React.useState(!1),
+    dexSeenSet = React.useMemo(
+      () => new Set([...state.pokedexSeen, ...state.pokedexCaught]),
+      [state.pokedexSeen, state.pokedexCaught]
+    ),
     searchActive = query.trim() !== '' || filterMode !== 'all',
     visibleBox = React.useMemo(() => {
       if (!searchActive) return state.box
@@ -77,11 +81,14 @@ export function BoxPanel({
     boxSortDirection =
       BOX_SORT_DIRECTIONS.find((option) => option.value === boxSort.direction) ??
       BOX_SORT_DIRECTIONS[0],
-    // The Box follows the Pokédex: selecting a species filters the box to it
-    // (by base name, so every regional form matches).
-    dexSearchName = pokedexSelected
-      ? pokemonSpecies[baseSpeciesKey(pokedexSelected)]?.name ?? null
-      : null
+    // The Box follows the Pokédex: selecting a seen species filters the box to
+    // it (by base name, so every regional form matches). An unseen slot is left
+    // alone, so clicking a "???" entry can't reveal its name through the Box
+    // search.
+    dexSearchName =
+      pokedexSelected && isSpeciesRegistered(dexSeenSet, pokedexSelected)
+        ? pokemonSpecies[baseSpeciesKey(pokedexSelected)]?.name ?? null
+        : null
   // Remember the query the Pokédex set, so closing the entry only clears the
   // auto-search and leaves a manual Box search alone.
   const appliedDexName = React.useRef('')

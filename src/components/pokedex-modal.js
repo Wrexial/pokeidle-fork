@@ -17,7 +17,8 @@ import {
   raidPoolFor,
 } from '../data/gameData.js'
 import { pickRaidLegendary, raidProgressFor } from '../game/progression.js'
-import { speciesSources } from '../game/pokedex-sources.js'
+import { pokedexSourceLabels } from '../game/pokedex-sources.js'
+import { speciesMatchingSearch } from '../game/species-search.js'
 import { useGame } from '../game/context.js'
 import { useUi } from '../game/ui-context.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
@@ -62,6 +63,22 @@ export function PokedexModal({ onClose, inline = false }) {
     caughtCount = countedIndexes.filter(([speciesKey]) => isSpeciesRegistered(caughtSet, speciesKey)).length,
     seenCount = countedIndexes.filter(([speciesKey]) => isSpeciesRegistered(seenSet, speciesKey)).length,
     totalEntries = countedIndexes.length,
+    [query, setQuery] = React.useState(''),
+    gridIndexes = React.useMemo(() => {
+      const matches = speciesMatchingSearch(query)
+      if (!matches) return filteredIndexes
+      // A slot matches when its base species or any of its forms is in a
+      // matching family, so searching "Bulbasaur" keeps Ivysaur and Venusaur.
+      return filteredIndexes.filter(([speciesKey]) => {
+        if (matches.has(speciesKey)) return true
+        const forms = formsByBase[speciesKey] ?? []
+        return forms.some((formKey) => matches.has(formKey))
+      })
+    }, [filteredIndexes, query]),
+    // MissingNo. stays hidden until it has been seen.
+    pokedexTiles = gridIndexes.filter(
+      ([speciesKey, species]) => species.id !== 0 || seenSet.has(speciesKey)
+    ),
     slotForms = selected ? formsByBase[selected] ?? [] : [],
     [formKey, setFormKey] = React.useState(/** @type {string | null} */ (null)),
     // Default to a form the player has actually registered when the base form
@@ -82,7 +99,7 @@ export function PokedexModal({ onClose, inline = false }) {
     activeKey = formKey && slotForms.includes(formKey) ? formKey : selected,
     activeSpecies = activeKey ? pokemonSpecies[activeKey] : null,
     activeStatus = activeKey ? getFormStatus(activeKey) : 'unseen',
-    sourceLabels = activeKey ? speciesSources(activeKey) : [],
+    sourceLabels = activeKey ? pokedexSourceLabels(activeKey) : [],
     statRows = activeSpecies
       ? [
           { label: 'HP', key: 'hp', value: activeSpecies.baseStats.hp },
@@ -143,27 +160,43 @@ export function PokedexModal({ onClose, inline = false }) {
             ),
         }),
         jsx('div', {
+          className: 'pokedex-search',
+          children: jsx('input', {
+            className: 'pokedex-search-input',
+            type: 'search',
+            placeholder: 'Search name\u2026',
+            value: query,
+            onChange: /** @param {React.ChangeEvent<HTMLInputElement>} event */ (event) =>
+              setQuery(event.target.value),
+          }),
+        }),
+        jsx('div', {
           className: 'pokedex-modal-grid-scroll',
           children: jsx('div', {
             className: 'pokedex-grid',
-            children: filteredIndexes
-              .filter(([speciesKey, species]) => species.id !== 0 || seenSet.has(speciesKey))
-              .map(([speciesKey]) => {
-              const status = getSlotStatus(speciesKey)
-              return jsx(
-                PokedexTile,
-                {
-                  speciesKey,
-                  status,
-                  rarity: 'common',
-                  isSelected: selected === speciesKey,
-                  onClick: () => setSelected(selected === speciesKey ? null : speciesKey),
-                  isShinyCaught: isSpeciesRegistered(new Set(state.shinyCaught), speciesKey),
-                  formCount: formsByBase[speciesKey]?.length ?? 0,
-                },
-                speciesKey
-              )
-            }),
+            children: [
+              ...pokedexTiles.map(([speciesKey]) => {
+                const status = getSlotStatus(speciesKey)
+                return jsx(
+                  PokedexTile,
+                  {
+                    speciesKey,
+                    status,
+                    rarity: 'common',
+                    isSelected: selected === speciesKey,
+                    onClick: () => setSelected(selected === speciesKey ? null : speciesKey),
+                    isShinyCaught: isSpeciesRegistered(new Set(state.shinyCaught), speciesKey),
+                    formCount: formsByBase[speciesKey]?.length ?? 0,
+                  },
+                  speciesKey
+                )
+              }),
+              pokedexTiles.length === 0 &&
+                jsx('span', {
+                  className: 'pokedex-grid-empty',
+                  children: 'No Pokemon match your search.',
+                }),
+            ],
           }),
         }),
         selected &&

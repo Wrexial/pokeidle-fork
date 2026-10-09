@@ -6452,6 +6452,33 @@ img {
     border-color: #8a6820
 }
 
+.pokedex-search {
+    margin: 0 0 6px
+}
+
+.pokedex-search-input {
+    width: 100%;
+    box-sizing: border-box;
+    font-family: var(--font-pixel);
+    font-size: 7px;
+    padding: 4px 6px;
+    color: #3a2818;
+    background: #f4ecd8;
+    border: 2px solid #b8a878
+}
+
+.pokedex-search-input:focus {
+    outline: none;
+    border-color: #8a6820
+}
+
+.pokedex-grid-empty {
+    grid-column: 1 / -1;
+    font-size: 7px;
+    color: #5a4838;
+    padding: 6px
+}
+
 .pokedex-modal-close {
     background: none;
     border: 1px solid #483828;

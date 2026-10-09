@@ -4,6 +4,7 @@
 // a species with no wild table doesn't look unobtainable.
 
 import { fossilItems } from '../data/items.js'
+import { pokedexData, pokemonSpecies, preEvolutionMap } from '../data/gameData.js'
 import { GAME_CORNER_PRIZE_POOL } from './minigames/game-corner.js'
 import { UNOWN_FORMS } from './minigames/sliding-puzzle.js'
 
@@ -39,4 +40,19 @@ addSource(UNOWN_FORMS, 'Ruins of Alph puzzle')
  */
 export function speciesSources(speciesKey) {
   return sourcesBySpecies.get(speciesKey) ?? []
+}
+
+/**
+ * The Pokedex source labels for a species: the non-wild methods above, plus
+ * `Evolves from <base>` when there is no wild route to fall back on.
+ * @param {string} speciesKey
+ * @returns {string[]}
+ */
+export function pokedexSourceLabels(speciesKey) {
+  const labels = [...speciesSources(speciesKey)]
+  if (!pokedexData[speciesKey]) {
+    const base = preEvolutionMap[speciesKey]
+    if (base) labels.push(`Evolves from ${pokemonSpecies[base]?.name ?? base}`)
+  }
+  return labels
 }

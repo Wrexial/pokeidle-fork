@@ -8,6 +8,7 @@ import { useGame } from '../game/context.js'
 import { useUi } from '../game/ui-context.js'
 import { getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, nextBoxSortField, parseBoxSort, pokemonDisplayName, toggleBoxSortDirection } from '../game/pokemon.js'
 import { isFemalePokemon } from '../game/breeding.js'
+import { fuzzyNameMatch, normalizeSearchName, speciesMatchingSearch } from '../game/species-search.js'
 import { itemTooltip } from '../game/progression.js'
 import { ItemIcon } from './item-icon.js'
 
@@ -38,18 +39,20 @@ export function BoxPanel({
     searchActive = query.trim() !== '' || filterMode !== 'all',
     visibleBox = React.useMemo(() => {
       if (!searchActive) return state.box
-      const needle = query.trim().toLowerCase()
+      const needle = normalizeSearchName(query),
+        familyMatches = speciesMatchingSearch(query)
       return state.box.filter((pokemon) => {
         if (filterMode === 'shiny' && (!pokemon.isShiny || pokemon.isEgg)) return false
         if (filterMode === 'favourite' && !pokemon.favourite) return false
         if (!needle) return true
         // Never let a search reveal a hidden egg's species.
         if (pokemon.isEgg) return 'egg'.includes(needle)
-        const speciesName = pokemonSpecies[pokemon.speciesKey]?.name ?? pokemon.name
+        // Match the Pokemon's own name, or any species in its evolution family
+        // (so searching "Bulbasaur" also surfaces Ivysaur and Venusaur).
         return (
-          (pokemon.nickname ?? '').toLowerCase().includes(needle) ||
-          pokemon.name.toLowerCase().includes(needle) ||
-          speciesName.toLowerCase().includes(needle)
+          fuzzyNameMatch(pokemon.nickname ?? '', needle) ||
+          fuzzyNameMatch(pokemon.name, needle) ||
+          Boolean(familyMatches?.has(pokemon.speciesKey))
         )
       })
     }, [state.box, query, filterMode, searchActive]),

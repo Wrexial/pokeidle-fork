@@ -4876,36 +4876,39 @@ img {
 .stats-panel-evolve-btn {
     font-size: 8px;
     padding: 2px 10px;
-    background: #40a040;
+    background: #2f7f3a;
     color: #fff;
-    border: 2px solid #2a7a2a;
+    border: 2px solid #1e5a28;
     border-radius: 0;
     cursor: pointer;
     font-weight: 700;
     letter-spacing: .5px;
     box-shadow: 1px 1px #0000004d,inset 1px 1px #fff3;
     animation: evolvePulse 1.5s ease-in-out infinite;
+    text-shadow: 0 1px 0 #00000073;
     z-index: 1
 }
 
 .stats-panel-evolve-btn:hover:not(.disabled) {
-    background: #50b850
+    background: #3f9a4a
 }
 
 .stats-panel-evolve-btn.form {
-    background: #3a6ea8;
-    border-color: #274d78
+    background: #2f5f97;
+    border-color: #1f4268
 }
 
 .stats-panel-evolve-btn.form:hover:not(.disabled) {
-    background: #4a80bd
+    background: #3f74b0
 }
 
 .stats-panel-evolve-btn.disabled {
-    opacity: .45;
+    opacity: 1;
     cursor: not-allowed;
-    background-color: #666;
-    border-color: #444;
+    background-color: #6b6455;
+    border-color: #453f33;
+    color: #f0e8d4;
+    text-shadow: none;
     animation: none
 }
 
@@ -4918,7 +4921,7 @@ img {
 .evolve-btn-req {
     display: block;
     font-size: .75em;
-    opacity: .85;
+    opacity: .92;
     line-height: 1
 }
 

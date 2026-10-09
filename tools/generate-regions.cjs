@@ -2376,6 +2376,30 @@ for (const [regionId, routes] of Object.entries(RAID_FINAL_HABITATS)) {
   }
 }
 
+// --- minigame-only species as native wilds -----------------------------------
+// A few lines (Wimpod/Golisopod, Rellor/Rabsca, Slither Wing) were only
+// reachable through Johto's Bug-Catching Contest, so they get a native route
+// home rather than being catchable from a single minigame. Mirrored on the
+// committed data by apply-minigame-habitats.cjs.
+const MINIGAME_HABITATS = {
+  alola: { 'alola-ulaula-beach': [['wimpod', 12]] },
+  paldea: {
+    'paldea-west-province-area-two': [['rellor', 12]],
+    'paldea-area-zero-station-four': [['slither wing', 12]],
+  },
+}
+for (const routes of Object.values(MINIGAME_HABITATS)) {
+  for (const [locationId, entries] of Object.entries(routes)) {
+    const bucket = encounterData[locationId]
+    if (!bucket) continue
+    const level = bucket.encounters[0]?.minLevel ?? 5,
+      maxLevel = bucket.encounters[0]?.maxLevel ?? clampLevel(level + 2)
+    for (const [key, weight] of entries)
+      if (species[key] && !bucket.encounters.some((entry) => entry.speciesKey === key))
+        bucket.encounters.push({ speciesKey: key, weight, minLevel: level, maxLevel })
+  }
+}
+
 // --- group existing routes into zones ----------------------------------------
 // Alola's islands and Paldea's provinces read badly as long chains of single
 // route nodes, so wrap each group behind one `type: 'zone'` hub; the routes

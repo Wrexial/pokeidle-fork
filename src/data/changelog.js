@@ -21,6 +21,7 @@ export const CHANGELOG = [
             'More zone habitats: the Galar Wild Area adds South Lake Miloch and West Lake Axewell, Poni Island adds Poni Grove, Poni Gauntlet and Poni Meadow, and Area Zero adds Research Stations 1 and 3',
             'Ogerpon\u2019s three mask formes (Wellspring, Hearthflame and Cornerstone), Terapagos\u2019s Terastal and Stellar formes, and Bloodmoon Ursaluna are obtainable now. The masks, a Tera Orb and a Peat Block are sold in the Reward Shop and switch the forme from the party screen',
             'Paldea is a linear Victory Road route now instead of an open jumble: its province zones, gym towns and landmarks open in the real gym order (Katy, Brassius, Iono, Kofu, Larry, Ryme, Tulip, Grusha), each behind the previous badge and a party level, so the wilds ramp smoothly from Lv. 3 to Lv. 75. Before, the map let you reach a Lv. 40/60 area from the Lv. 10 south province and challenge a high-level gym under-levelled. The standalone landmarks (Alfornada Cavern, Casseroya Lake, Glaseado Mountain, Socarrat Trail, Gracia Stones and Dalizapa Passage) were left at the Lv. 5 fallback band and are re-levelled to their place in the curve',
+            'Wimpod, Rellor and Slither Wing have real wild homes now instead of being catchable only in the Bug-Catching Contest: Wimpod on Alola\u2019s Ula\u2019ula Beach, Rellor on Paldea\u2019s West Province (Area Two), and Slither Wing with the other Area Zero paradoxes at Research Station 4. Golisopod, Rabsca and Mega Golisopod evolve from those catches',
           ],
         },
         {

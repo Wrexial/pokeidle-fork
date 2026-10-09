@@ -1205,6 +1205,12 @@
     "weight": 12,
     "minLevel": 54,
     "maxLevel": 56
+   },
+   {
+    "speciesKey": "rellor",
+    "weight": 12,
+    "minLevel": 54,
+    "maxLevel": 56
    }
   ]
  },
@@ -1966,6 +1972,12 @@
     "minLevel": 68,
     "maxLevel": 70,
     "variety": true
+   },
+   {
+    "speciesKey": "slither wing",
+    "weight": 12,
+    "minLevel": 68,
+    "maxLevel": 70
    }
   ]
  },

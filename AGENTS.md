@@ -725,6 +725,12 @@ One-off scripts used to build the data JSON (not run during dev/build):
   thematically fitting route (base stages, so the evolution chain stays native)
   and drops the now-redundant `raidOrdinaryPool` roster. The generator mirrors
   the same `RAID_FINAL_HABITATS` table on regeneration. Idempotent (`--dry`).
+- `apply-minigame-habitats.cjs` — data-only pass for the species that were only
+  catchable in Johto's Bug-Catching Contest: Wimpod on Alola's Ula'ula Beach,
+  Rellor on Paldea's West Province (Area Two) and Slither Wing with the other
+  Area Zero paradoxes at Research Station 4. The finals (Golisopod, Rabsca and
+  Mega Golisopod) evolve from those route catches. The generator mirrors the
+  same `MINIGAME_HABITATS` table on regeneration. Idempotent (`--dry`).
 - `apply-fossil-loop.cjs` — data-only pass for the fossil loop (#50): drops the
   fossil final evolutions (Omastar, Kabutops, Aerodactyl, Rampardos, ...) from
   every region's (now retired) `raidOrdinaryPool`, since the fossils are now

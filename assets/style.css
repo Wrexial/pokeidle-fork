@@ -6475,6 +6475,29 @@ img {
     border-color: #8a6820
 }
 
+.pokedex-search-toggle {
+    flex: 0 0 auto;
+    margin-left: auto;
+    font-family: var(--font-pixel);
+    font-size: 7px;
+    padding: 3px 6px;
+    color: #5a4838;
+    background: #e8dcc0;
+    border: 2px solid #b8a878;
+    cursor: pointer;
+    transition: .1s
+}
+
+.pokedex-search-toggle:hover {
+    border-color: #8a6820
+}
+
+.pokedex-search-toggle.active {
+    color: #f0e0b0;
+    background: #6a4e30;
+    border-color: #8a6820
+}
+
 .pokedex-grid-empty {
     grid-column: 1 / -1;
     font-size: 7px;

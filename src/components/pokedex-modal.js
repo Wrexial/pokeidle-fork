@@ -64,6 +64,7 @@ export function PokedexModal({ onClose, inline = false }) {
     seenCount = countedIndexes.filter(([speciesKey]) => isSpeciesRegistered(seenSet, speciesKey)).length,
     totalEntries = countedIndexes.length,
     [query, setQuery] = React.useState(''),
+    [searchOpen, setSearchOpen] = React.useState(!1),
     gridIndexes = React.useMemo(() => {
       const matches = speciesMatchingSearch(query)
       if (!matches) return filteredIndexes
@@ -145,31 +146,50 @@ export function PokedexModal({ onClose, inline = false }) {
         }),
         jsx('div', {
           className: 'pokedex-gen-tabs',
-          children: [{ id: 0, label: 'All' }]
-            .concat(Array.from({ length: 9 }, (_, i) => ({ id: i + 1, label: String(i + 1) })))
-            .map((option) =>
-              jsx(
-                'button',
-                {
-                  className: `pokedex-gen-tab${gen === option.id ? ' active' : ''}`,
-                  onClick: () => setGen(option.id),
-                  children: option.label,
+          children: [
+            ...[{ id: 0, label: 'All' }]
+              .concat(Array.from({ length: 9 }, (_, i) => ({ id: i + 1, label: String(i + 1) })))
+              .map((option) =>
+                jsx(
+                  'button',
+                  {
+                    className: `pokedex-gen-tab${gen === option.id ? ' active' : ''}`,
+                    onClick: () => setGen(option.id),
+                    children: option.label,
+                  },
+                  option.id
+                )
+              ),
+            jsx(
+              'button',
+              {
+                className: `pokedex-search-toggle${searchOpen ? ' active' : ''}`,
+                onClick: () => {
+                  // Collapsing clears the query so the grid isn't left filtered
+                  // with the control hidden.
+                  if (searchOpen) setQuery('')
+                  setSearchOpen(!searchOpen)
                 },
-                option.id
-              )
+                title: searchOpen ? 'Hide search' : 'Search by name',
+                'aria-label': searchOpen ? 'Hide search' : 'Search by name',
+                children: searchOpen ? 'Hide' : 'Search',
+              },
+              'pokedex-search-toggle'
             ),
+          ],
         }),
-        jsx('div', {
-          className: 'pokedex-search',
-          children: jsx('input', {
-            className: 'pokedex-search-input',
-            type: 'search',
-            placeholder: 'Search name\u2026',
-            value: query,
-            onChange: /** @param {React.ChangeEvent<HTMLInputElement>} event */ (event) =>
-              setQuery(event.target.value),
+        searchOpen &&
+          jsx('div', {
+            className: 'pokedex-search',
+            children: jsx('input', {
+              className: 'pokedex-search-input',
+              type: 'search',
+              placeholder: 'Search name\u2026',
+              value: query,
+              onChange: /** @param {React.ChangeEvent<HTMLInputElement>} event */ (event) =>
+                setQuery(event.target.value),
+            }),
           }),
-        }),
         jsx('div', {
           className: 'pokedex-modal-grid-scroll',
           children: jsx('div', {

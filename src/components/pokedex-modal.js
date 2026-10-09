@@ -17,6 +17,7 @@ import {
   raidPoolFor,
 } from '../data/gameData.js'
 import { pickRaidLegendary, raidProgressFor } from '../game/progression.js'
+import { speciesSources } from '../game/pokedex-sources.js'
 import { useGame } from '../game/context.js'
 import { useUi } from '../game/ui-context.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
@@ -81,6 +82,7 @@ export function PokedexModal({ onClose, inline = false }) {
     activeKey = formKey && slotForms.includes(formKey) ? formKey : selected,
     activeSpecies = activeKey ? pokemonSpecies[activeKey] : null,
     activeStatus = activeKey ? getFormStatus(activeKey) : 'unseen',
+    sourceLabels = activeKey ? speciesSources(activeKey) : [],
     statRows = activeSpecies
       ? [
           { label: 'HP', key: 'hp', value: activeSpecies.baseStats.hp },
@@ -321,6 +323,18 @@ export function PokedexModal({ onClose, inline = false }) {
                         route.id
                       )
                     }),
+                  ],
+                }),
+              activeStatus !== 'unseen' &&
+                sourceLabels.length > 0 &&
+                jsxs('div', {
+                  className: 'pokedex-modal-sources',
+                  children: [
+                    jsx('span', {
+                      className: 'pokedex-modal-routes-label',
+                      children: 'Source: ',
+                    }),
+                    sourceLabels.join(' \u00b7 '),
                   ],
                 }),
               activeStatus !== 'unseen' &&

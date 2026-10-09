@@ -14,6 +14,7 @@ const { GIFTS } = await import('../src/game/gifts.js')
 const { eggSpeciesKey } = await import('../src/game/breeding.js')
 const { GAME_CORNER_PRIZE_POOL } = await import('../src/game/minigames/game-corner.js')
 const { regionalStarters } = await import('../src/data/config.js')
+const { speciesSources } = await import('../src/game/pokedex-sources.js')
 
 /** Every species that appears in a wild encounter table. */
 function wildSpecies() {
@@ -64,6 +65,20 @@ test('Game Corner-exclusive lines come from the prize track', () => {
   assert.ok(!wildSpecies().has('porygon'), 'porygon is not a wild encounter')
   // Scyther and Dratini are also prizes, though the Safari Zone can also yield them.
   for (const speciesKey of ['scyther', 'dratini']) assert.ok(prizes.has(speciesKey))
+})
+
+test('the Pokedex labels each non-wild source', () => {
+  // Game Corner prize track.
+  assert.deepEqual(speciesSources('porygon'), ['Game Corner'])
+  assert.deepEqual(speciesSources('scyther'), ['Game Corner'])
+  // Fossil revives at Cinnabar Island.
+  assert.deepEqual(speciesSources('omanyte'), ['Fossil revive'])
+  assert.deepEqual(speciesSources('aerodactyl'), ['Fossil revive'])
+  // The Ruins of Alph puzzle hands out the whole Unown set.
+  assert.deepEqual(speciesSources('unown'), ['Ruins of Alph puzzle'])
+  assert.deepEqual(speciesSources('unown-question'), ['Ruins of Alph puzzle'])
+  // A plain wild species has no extra source line.
+  assert.deepEqual(speciesSources('bulbasaur'), [])
 })
 
 test('baby lines are bred from an obtainable evolved parent', () => {

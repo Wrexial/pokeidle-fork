@@ -64,6 +64,7 @@ export const CHANGELOG = [
           items: [
             'The Pokedex groups alternate forms under one slot now: a species with regional variants, a Mega, a Gigantamax or another forme is a single national-dex entry, with a form switcher in the detail panel (Alolan, Galarian, Hisuian, Paldean, Mega X, Gigantamax, Origin, ...) instead of every form sitting after the national dex',
             'Registering any form registers its species: catching an Alolan Rattata fills Rattata\u2019s Pokedex slot and counts towards that generation\u2019s completion and Shiny Charm, and the grid marks a slot that has alternate forms',
+            'Pokedex entries name their non-wild source now: Game Corner prizes, fossil revives at Cinnabar Island and the Ruins of Alph puzzle show under a Source line, so Porygon, the fossils and the Unown forms no longer look unobtainable',
             'MissingNo. has its real glitch sprite now (front, back and shiny) instead of the generic `?` placeholder, and its Pokedex slot stays hidden until you first run into the Cinnabar Island glitch',
             'The Pokedex no longer needs its Search Box button: while a Pokemon is selected the Box filters to that species automatically (all of its regional forms match), and closing the entry restores the full Box',
             'Settings gained a Display section: choose animated sprites (the default) or the lighter static pixel art. The preference is remembered outside your save, like the other settings',

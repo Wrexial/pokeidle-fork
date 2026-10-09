@@ -167,8 +167,8 @@ export const EncounterDetailPanel = React.memo(
                 onClick: applyHoney,
                 disabled: honeyCount <= 0,
                 title: activeHoney
-                  ? `Honey active: ${activeHoney.battlesRemaining} battles left`
-                  : `Use Honey (x${honeyCount})`,
+                  ? `Honey active: ${activeHoney.battlesRemaining} battles left \u2014 more common and easier to catch`
+                  : `Use Honey (x${honeyCount}) \u2014 doubles encounters and boosts the catch rate`,
                 children: activeHoney ? `Honey (${activeHoney.battlesRemaining})` : `Honey (x${honeyCount})`,
               }),
             ],

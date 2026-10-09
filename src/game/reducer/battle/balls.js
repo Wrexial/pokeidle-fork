@@ -12,7 +12,7 @@ import {
   selectBestBall,
 } from '../../catching.js'
 import { createPokemon, insertIntoBox } from '../../pokemon.js'
-import { prepareNextBattle } from '../../progression.js'
+import { isHoneyActive, prepareNextBattle } from '../../progression.js'
 import { markCaught, markShinyCaught } from '../collection.js'
 import { catchPokemon } from '../pokemon/management.js'
 import { withNotification } from '../../reducer-helpers.js'
@@ -61,6 +61,7 @@ export function attemptActivityCatch(state, action) {
       isWater: isWaterLocation(mapData[state.currentLocation]),
       isCave: isCaveLocation(mapData[state.currentLocation]),
       isNight: isNightTime(),
+      honey: isHoneyActive(state.activeEffects, state.currentRoute, enemy.speciesKey),
     },
     ballId =
       selectAutoCatchBall(state, state.currentRoute, enemy.speciesKey, catchContext) ??

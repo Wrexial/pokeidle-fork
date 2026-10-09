@@ -147,7 +147,8 @@ export function RouteEncounterGrid({
                   ;(setApplyingItem((encounter) => (encounter === 'honey' ? null : 'honey')), setSelected(null))
                 },
                 disabled: honeyCount <= 0 && applyingItem !== 'honey',
-                title: 'Click then select a pokemon to apply Honey',
+                title:
+                  'Click then select a pokemon to apply Honey \u2014 doubles its encounters and boosts its catch rate',
                 children: applyingItem === 'honey' ? 'Applying...' : `Honey (${honeyCount})`,
               }),
               jsxs('button', {

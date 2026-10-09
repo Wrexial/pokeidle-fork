@@ -44,6 +44,7 @@ export const CHANGELOG = [
             'Arceus\u2019s Multitype and Silvally\u2019s RKS System work now \u2014 and they reuse the type-boosting items you already own as their plates: give Arceus a Charcoal and it becomes Fire-type, Mystic Water makes it Water, and so on (Steel and Fairy use the Iron and Pixie Plates). Those items still power up the matching type as before',
             'A pass on the out-of-battle abilities: Flame Body, Magma Armor and Steam Engine halve the time an Egg needs to hatch; Static and Lightning Rod draw in Electric-type wild Pokemon, Magnet Pull Steel and Storm Drain Water (about twice as common); Cute Charm makes a wild Pokemon more likely to be the opposite gender to your lead; and Super Luck and Compound Eyes make wild Pokemon twice as likely to hold an item',
             'Fishing has proper bite rolls now: a cast can come up empty, and Suction Cups or Sticky Hold steady the line for a much better bite chance. The rarest fish on a route are \u201cmulti-catch\u201d \u2014 you have to land the perfect reel twice to haul one in, with a REEL IN beat after the first bite',
+            'Honey does more than draw the species out now: the honied Pokemon is also easier to catch (a 1.5x catch-rate bonus), so a Honey hunt is quicker to land as well as easier to find',
           ],
         },
         {

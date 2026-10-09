@@ -22,7 +22,7 @@ export const activeItems = {
       id: 'honey',
       name: 'Honey',
       description:
-        "Doubles a wild Pokemon's encounter weight on the current route for 500 battles.",
+        "Doubles a wild Pokemon's encounter weight and makes it easier to catch (1.5x catch rate) on the current route for 500 battles.",
       duration: 500,
       buyPrice: 2e3,
     },

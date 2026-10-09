@@ -15,7 +15,7 @@ import { abilityOf } from './abilities.js'
 import { companionExpMultiplier } from './companion.js'
 import { applyBattleForm, createBattlePokemon, createVolatileState, resolveBattleTurn, volatileStateFromBattle, AI_SKILL, chooseBestSwitch } from './combat.js'
 import { isBattleReady } from './pokemon.js'
-import { awardExperience, checkShinyOdds, encountersForPhase, pokerusExpMultiplier, raidProgressFor, resolveActiveModifiers, resolvePokemonEncounter, resolveRoamer, shinyOddsForSpecies, ENCOUNTER_TYPE_ABILITY } from './progression.js'
+import { awardExperience, checkShinyOdds, encountersForPhase, isHoneyActive, pokerusExpMultiplier, raidProgressFor, resolveActiveModifiers, resolvePokemonEncounter, resolveRoamer, shinyOddsForSpecies, ENCOUNTER_TYPE_ABILITY } from './progression.js'
 
 export function useGameLoop() {
   const { state, dispatch: rawDispatch } = useGame(),
@@ -795,6 +795,11 @@ export function useGameLoop() {
             isWater: isWaterLocation(mapData[currentGameState.currentLocation]),
             isCave: isCaveLocation(mapData[currentGameState.currentLocation]),
             isNight: isNightTime(),
+            honey: isHoneyActive(
+              currentGameState.activeEffects,
+              currentGameState.currentRoute,
+              enemyPokemon.speciesKey
+            ),
           }
           awardExperience(
             dispatch,

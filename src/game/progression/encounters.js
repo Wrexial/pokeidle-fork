@@ -166,6 +166,21 @@ export function resolveActiveModifiers(activeEffects, routeKey, shinyChain) {
   return modifiers
 }
 
+/**
+ * Whether Honey is currently boosting a species on a route (making it more
+ * common and easier to catch).
+ * @param {ActiveEffect[]} activeEffects
+ * @param {string} routeKey
+ * @param {string} speciesKey
+ * @returns {boolean}
+ */
+export function isHoneyActive(activeEffects, routeKey, speciesKey) {
+  return activeEffects.some(
+    (effect) =>
+      effect.type === 'honey' && effect.routeKey === routeKey && effect.speciesKey === speciesKey
+  )
+}
+
 /** How many same-species encounters add 1x to the shiny-odds multiplier. */
 const SHINY_CHAIN_STEP = 40
 

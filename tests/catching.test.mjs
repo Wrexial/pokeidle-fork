@@ -5,11 +5,27 @@ import { installGameData } from './helpers/game-data.mjs'
 
 installGameData()
 
-const { calculateCatchChance, getBallModifier, getDexStatus, isCaveLocation, isNightTime, isWaterLocation, selectBestBall, shouldOfferMasterBall } = await import(
+const { calculateCatchChance, getBallModifier, getDexStatus, isCaveLocation, isNightTime, isWaterLocation, selectBestBall, shouldOfferMasterBall, HONEY_CATCH_BONUS } = await import(
   '../src/game/catching.js'
 )
+const { isHoneyActive } = await import('../src/game/progression.js')
 const { initialGameState } = await import('../src/game/reducer.js')
 const { autoCatchBallOrder } = await import('../src/data/items.js')
+
+test('Honey makes the species it is applied to easier to catch', () => {
+  const base = calculateCatchChance('bulbasaur', 'pokeball', {}),
+    honied = calculateCatchChance('bulbasaur', 'pokeball', { honey: true })
+  assert.ok(honied > base, 'the honied species has a higher catch chance')
+  assert.equal(honied, Math.min(1, base * HONEY_CATCH_BONUS))
+})
+
+test('isHoneyActive only matches the honied species on its route', () => {
+  const effects = [{ type: 'honey', routeKey: 'route1', speciesKey: 'pidgey' }]
+  assert.equal(isHoneyActive(effects, 'route1', 'pidgey'), true)
+  assert.equal(isHoneyActive(effects, 'route1', 'rattata'), false)
+  assert.equal(isHoneyActive(effects, 'route2', 'pidgey'), false)
+  assert.equal(isHoneyActive([], 'route1', 'pidgey'), false)
+})
 
 test('every auto-catch ball is enabled by default', () => {
   assert.deepEqual(initialGameState.globalCatchDefaults.enabledBalls, autoCatchBallOrder)

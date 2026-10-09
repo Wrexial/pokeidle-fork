@@ -48,6 +48,9 @@ export function getBallModifier(ballId, context = {}) {
   }
 }
 
+/** Catch-rate multiplier Honey gives the species it is applied to. */
+export const HONEY_CATCH_BONUS = 1.5
+
 /**
  * @param {string} speciesKey
  * @param {string} ballId
@@ -57,7 +60,9 @@ export function getBallModifier(ballId, context = {}) {
 export function calculateCatchChance(speciesKey, ballId, context) {
   const catchRate = getCatchRate(speciesKey),
     modifier = getBallModifier(ballId, context)
-  return modifier > 0 ? Math.min(1, (catchRate * modifier) / 255) : 0
+  if (modifier <= 0) return 0
+  const honeyBonus = context?.honey ? HONEY_CATCH_BONUS : 1
+  return Math.min(1, (catchRate * modifier * honeyBonus) / 255)
 }
 
 /**

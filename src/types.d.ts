@@ -225,6 +225,8 @@ type CatchContext = {
   isCave?: boolean
   /** Whether it is night locally (Dusk Ball). */
   isNight?: boolean
+  /** Whether Honey is boosting this species on the route (catch bonus). */
+  honey?: boolean
 }
 
 type VolatileState = {

@@ -1431,6 +1431,7 @@ test('START_ICE_SLIDE charges entry and END_MINIGAME returns to idle', () => {
 test('every minigame is linked to a real area in its own region', () => {
   const expectedRegions = {
     gameCorner: 'kanto',
+    championGauntlet: 'kanto',
     bugContest: 'johto',
     mining: 'sinnoh',
     safari: 'kanto',
@@ -1488,7 +1489,7 @@ test('every minigame is linked to a real area in its own region', () => {
 })
 
 test('minigamesInRegion groups them by region', () => {
-  assert.deepEqual(minigamesInRegion('kanto').sort(), ['gameCorner', 'safari', 'whack'])
+  assert.deepEqual(minigamesInRegion('kanto').sort(), ['championGauntlet', 'gameCorner', 'safari', 'whack'])
   assert.deepEqual(minigamesInRegion('johto').sort(), ['bugContest', 'pokeathlon', 'puzzleLeague', 'ruinsPuzzle'])
   assert.ok(minigamesInRegion('hoenn').includes('contest'))
   assert.deepEqual(minigamesInRegion('alola').sort(), ['battleRoyal', 'mantineSurf', 'pokePelago'])

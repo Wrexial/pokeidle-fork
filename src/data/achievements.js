@@ -24,6 +24,7 @@ export const RECORDABLE_MINIGAMES = [
   'pokeathlon',
   'pokeRadar',
   'battleRoyal',
+  'championGauntlet',
   'dynamaxAdventures',
   'lightsOut',
   'curry',

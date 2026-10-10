@@ -13,7 +13,7 @@ import { buyCafeItem, buyItem, buyRewardItem, clearHeldItem, reviveFossil, sellI
 import { blendBerries, careCompanion, harvestBerry, plantBerry, setCompanion } from './reducer/care.js'
 import { assignPelago, collectPelago, dismissPelagoCollect, unassignPelago } from './reducer/pelago.js'
 import { claimGift, startStaticEncounter } from './reducer/gifts.js'
-import { claimMinigameReward, collectMining, endBugContest, endMinigame, endRouteActivity, endSafari, payMinigameFee, recordGameCornerWin, startAcademyQuiz, startAuctionHouse, startBattleRoyal, startBugContest, startContest, startCurry, startDoubles, startDynamaxAdventures, startGameCorner, startIceSlide, startLightsOut, startMemory, startMining, startMusical, startPelago, startPicnic, startPokeathlon, startPokeRadar, startPokeballFactory, startPokestar, startPuzzleLeague, startRouteActivity, startRuinsPuzzle, startSafari, startVoltorbFlip, startWhack, startMantineSurf, startRotomRally, startOgreOustin, startTypeFusion, startUnownPicross, startPokeshot, startTeraRaid, startPokeword, startBerryBlender } from './reducer/minigames.js'
+import { claimMinigameReward, collectMining, endBugContest, endMinigame, endRouteActivity, endSafari, payMinigameFee, recordGameCornerWin, startAcademyQuiz, startAuctionHouse, startBattleRoyal, startChampionGauntlet, startBugContest, startContest, startCurry, startDoubles, startDynamaxAdventures, startGameCorner, startIceSlide, startLightsOut, startMemory, startMining, startMusical, startPelago, startPicnic, startPokeathlon, startPokeRadar, startPokeballFactory, startPokestar, startPuzzleLeague, startRouteActivity, startRuinsPuzzle, startSafari, startVoltorbFlip, startWhack, startMantineSurf, startRotomRally, startOgreOustin, startTypeFusion, startUnownPicross, startPokeshot, startTeraRaid, startPokeword, startBerryBlender } from './reducer/minigames.js'
 import { boxToParty, catchPokemon, clearHatchResult, completeEvolution, completeWonderTrade, depositDaycare, evolutionStep, hatchDaycareEgg, partyToBox, releaseDuplicates, releaseFainted, releaseHatchling, releasePokemon, reorderBox, reorderParty, setBoxSort, setMoves, setNickname, startEvolution, swapPartyBox, toggleFavourite, withdrawDaycare, wonderTrade } from './reducer/pokemon.js'
 import { completeHealing, healingStep, nuzlockeGameOver, startHealing } from './reducer/recovery.js'
 import { addLog, clearLevelUp, dismissNotification, markCatchRoute, markTutorialSeen, pushNotification, setBattleMode, setBattleStyle, setChallengeMonotype, setSpeed, toggleAutoProceed, toggleBrowserNotifications, toggleChallengeLevelScale, toggleChallengeNuzlocke, toggleChallengeRandomizer, toggleChallengeRestrictCatches, toggleColourblindTypes, toggleLargeText, toggleMartCollapsed, toggleMusic, toggleNotifyEgg, toggleNotifyRare, toggleNotifyShiny, togglePause, toggleReducedMotion, toggleSfx, toggleSpriteStyle } from './reducer/settings.js'
@@ -433,6 +433,8 @@ export function gameReducer(state, action) {
       return startPokeRadar(state, action)
     case 'START_BATTLE_ROYAL':
       return startBattleRoyal(state, action)
+    case 'START_CHAMPION_GAUNTLET':
+      return startChampionGauntlet(state, action)
     case 'START_DOUBLES':
       return startDoubles(state, action)
     case 'START_DYNAMAX_ADVENTURES':

@@ -37,6 +37,7 @@ import { ContestScene } from './contest-scene.js'
 import { PokeathlonScene } from './pokeathlon-scene.js'
 import { PokeRadarScene } from './poke-radar-scene.js'
 import { BattleRoyalScene } from './battle-royal-scene.js'
+import { ChampionGauntletScene } from './champion-gauntlet-scene.js'
 import { DoublesScene } from './doubles-scene.js'
 import { DynamaxAdventuresScene } from './dynamax-adventures-scene.js'
 import { LightsOutScene } from './lights-out-scene.js'
@@ -85,6 +86,7 @@ export function BattleScene({ onOpenMenu }) {
   if (state.phase === 'pokeathlon') return jsx(PokeathlonScene, {})
   if (state.phase === 'pokeRadar') return jsx(PokeRadarScene, {})
   if (state.phase === 'battleRoyal') return jsx(BattleRoyalScene, {})
+  if (state.phase === 'championGauntlet') return jsx(ChampionGauntletScene, {})
   if (state.phase === 'doubles') return jsx(DoublesScene, {})
   if (state.phase === 'dynamaxAdventures') return jsx(DynamaxAdventuresScene, {})
   if (state.phase === 'lightsOut') return jsx(LightsOutScene, {})

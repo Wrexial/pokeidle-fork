@@ -21,6 +21,7 @@ export const MINIGAME_LOCATIONS = {
   'johto-ecruteak-city': 'pokeathlon',
   'sinnoh-sandgem-town': 'pokeRadar',
   'alola-heahea-city': 'battleRoyal',
+  indigoPlat: 'championGauntlet',
   'kalos-kiloude-city': 'doubles',
   'galar-hammerlocke': 'dynamaxAdventures',
   'hoenn-mauville-city': 'lightsOut',

@@ -37,21 +37,19 @@ renumbered, so the gaps below are items that shipped.
 
 7. **#60 Idle job assignments** — M · ★★★★★ — assign Pokemon to auto-run
    activities online/offline.
-8. **#64 Champions' Gauntlet** — M · ★★★★★ — a bracket of every gym leader /
-   Elite Four / Champion, reusing the rematch teams.
-9. **#63 Field research tasks** — M–L · ★★★★ — per-species tasks and a
+8. **#63 Field research tasks** — M–L · ★★★★ — per-species tasks and a
    research shop.
-10. **#69 Legendary quests** — M · ★★★.
-11. **#65 Prestige perks** — M–L · ★★★.
-12. **#71 Breeding project queue** — M · ★★★.
-13. **#62 Offline depth** — M · ★★★.
-14. **#72 QoL pass** — S–M · ★★★.
-15. **#67 Ribbons + ribbon case** — S–M · ★★½.
-16. **#68 Generation-completion rewards** — S · ★★.
-17. **#59 Activity goals & per-route mastery** — S–M · ★★.
-18. **#61 Focus / target hunting** — S–M · ★★½.
-19. **#66 Battle Frontier facilities** — M–L · ★★½.
-20. **#70 Recurring rival** — M · ★★½.
+9. **#69 Legendary quests** — M · ★★★.
+10. **#65 Prestige perks** — M–L · ★★★.
+11. **#71 Breeding project queue** — M · ★★★.
+12. **#62 Offline depth** — M · ★★★.
+13. **#72 QoL pass** — S–M · ★★★.
+14. **#67 Ribbons + ribbon case** — S–M · ★★½.
+15. **#68 Generation-completion rewards** — S · ★★.
+16. **#59 Activity goals & per-route mastery** — S–M · ★★.
+17. **#61 Focus / target hunting** — S–M · ★★½.
+18. **#66 Battle Frontier facilities** — M–L · ★★½.
+19. **#70 Recurring rival** — M · ★★½.
 
 ---
 
@@ -245,14 +243,6 @@ a type, land a bullseye, evolve) award research points that spend in a research
 shop. New state; reuse `pokedex-sources.js` and the achievement-queue pattern.
 
 Effort: **medium–large**.
-
-## 64. Champions' Gauntlet / Pokemon World Tournament
-
-A bracket drawn from every `gymLeaderData` / `elite4Data` / `championData`
-entry, with scaling rematch teams from `lib/team-builder.cjs`. The biggest
-content multiplier for a finished save.
-
-Effort: **medium**.
 
 ## 65. Prestige perks
 

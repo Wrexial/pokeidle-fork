@@ -1003,6 +1003,7 @@ export function useGameLoop() {
       state.phase === 'pokeathlon' ||
       state.phase === 'pokeRadar' ||
       state.phase === 'battleRoyal' ||
+      state.phase === 'championGauntlet' ||
       state.phase === 'doubles' ||
       state.phase === 'dynamaxAdventures' ||
       state.phase === 'lightsOut' ||

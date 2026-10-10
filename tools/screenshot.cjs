@@ -632,6 +632,7 @@ async function main() {
       ['Overcharge', 'kanto', 'rockTunnel', 'rockTunnel', '28c-overcharge.png', '.activity-coil'],
       ['S\u00e9ance', 'kanto', 'ceruleanCave', 'ceruleanCave', '28d-seance.png', '.activity-rune-grid'],
       ["Summit Roost", 'johto', 'johto-dragons-den', 'johto-dragons-den', '28e-summit.png', '.activity-sky'],
+      ["Champions' Gauntlet", 'kanto', 'indigoPlat', 'indigoPlat', '29-gauntlet.png', '.gauntlet-bracket'],
     ]
     for (const [title, region, location, route, file, selector] of routeScenes) {
       await cdp.eval(
@@ -667,6 +668,17 @@ async function main() {
       } else {
         console.log(`WARNING: no ${title} activity card found`)
       }
+    }
+
+    // Click FIGHT in the Gauntlet to exercise the run loop (the fresh save's
+    // Charmander will lose, which still shows the result + reward screens).
+    if (await cdp.eval(`!!document.querySelector('.gauntlet-bracket')`)) {
+      await cdp.eval(
+        `(() => { const b = document.querySelector('.move-panel-btn.confirm'); if (b) b.click(); return true })()`
+      )
+      await sleep(600)
+      await cdp.screenshot(path.join(OUT, '29b-gauntlet-result.png'))
+      console.log('Gauntlet fight ok')
     }
 
     // Stats-panel form chips: G-MAX lights up with the mushroom factor, MEGA

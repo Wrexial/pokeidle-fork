@@ -62,6 +62,7 @@ export const MINIGAME_TM_TYPES = {
   contest: null,
   safari: null,
   battleRoyal: null,
+  championGauntlet: null,
   lightsOut: null,
   curry: null,
   pokestar: null,

@@ -12515,6 +12515,192 @@ img {
     filter: brightness(1.5)
 }
 
+/* Champions' Gauntlet: a named-trainer bracket. */
+.gauntlet-scene {
+    background-image: url(/backgrounds/town.webp)
+}
+
+.gauntlet-layout {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    min-height: 0;
+    flex: 1
+}
+
+.gauntlet-bracket {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    width: 168px;
+    flex: 0 0 auto;
+    overflow-y: auto;
+    padding: 6px;
+    background: rgba(20,14,6,.55);
+    border: 2px solid #8a7040;
+    border-radius: 6px
+}
+
+.gauntlet-entry {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 5px;
+    border-radius: 4px;
+    background: rgba(255,255,255,.04)
+}
+
+.gauntlet-entry.current {
+    background: rgba(240,200,80,.18);
+    box-shadow: inset 0 0 0 1px var(--gold)
+}
+
+.gauntlet-entry.beaten {
+    opacity: .5
+}
+
+.gauntlet-entry-sprite {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    flex: 0 0 auto
+}
+
+.gauntlet-entry-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0
+}
+
+.gauntlet-entry-name {
+    font-size: 8px;
+    color: var(--parchment);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+.gauntlet-entry-tier {
+    font-size: 6px;
+    letter-spacing: .3px;
+    text-transform: uppercase;
+    color: #b9a06a
+}
+
+.gauntlet-stage {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px
+}
+
+.gauntlet-current {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: linear-gradient(180deg,rgba(20,14,6,.5),rgba(20,14,6,.8));
+    border: 2px solid #8a7040;
+    border-radius: 6px
+}
+
+.gauntlet-trainer-sprite {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    flex: 0 0 auto
+}
+
+.gauntlet-current-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px
+}
+
+.gauntlet-current-name {
+    font-size: 11px;
+    color: var(--gold)
+}
+
+.gauntlet-current-title {
+    font-size: 7px;
+    letter-spacing: .4px;
+    color: #cbbfa6
+}
+
+.gauntlet-team {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    max-width: 260px
+}
+
+.gauntlet-mon {
+    image-rendering: pixelated
+}
+
+.gauntlet-mon-sm {
+    width: 26px;
+    height: 26px
+}
+
+.gauntlet-mon-lg {
+    width: 34px;
+    height: 34px
+}
+
+.gauntlet-result {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    text-align: center
+}
+
+.gauntlet-result-title {
+    font-size: 10px;
+    color: var(--parchment)
+}
+
+.gauntlet-result.win .gauntlet-result-title {
+    color: #8fdc6a
+}
+
+.gauntlet-result.loss .gauntlet-result-title {
+    color: #e88a8a
+}
+
+.gauntlet-result-sub {
+    font-size: 7px;
+    color: #cbbfa6
+}
+
+.gauntlet-party-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    width: 100%
+}
+
+.gauntlet-party-label {
+    font-size: 7px;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    color: #b9a06a
+}
+
+.gauntlet-party {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px
+}
+
 .royal-scene {
     background-image: url(/backgrounds/town.webp)
 }

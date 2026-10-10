@@ -7,6 +7,7 @@ import { CONTEST_COST, CONTEST_ROUNDS } from './contest.js'
 import { POKEATHLON_COST, POKEATHLON_ATTEMPTS } from './pokeathlon.js'
 import { POKE_RADAR_COST } from './poke-radar.js'
 import { BATTLE_ROYAL_COST } from './battle-royal.js'
+import { CHAMPION_GAUNTLET_COST, CHAMPION_GAUNTLET_SIZE } from './champion-gauntlet.js'
 import { DOUBLES_COST } from './doubles.js'
 import { DYNAMAX_ADVENTURES_COST, DYNAMAX_STAGES } from './dynamax-adventures.js'
 import { LIGHTS_OUT_COST } from './lights-out.js'
@@ -57,6 +58,7 @@ export const MINIGAME_PHASES = {
   pokeathlon: 'pokeathlon',
   pokeRadar: 'pokeRadar',
   battleRoyal: 'battleRoyal',
+  championGauntlet: 'championGauntlet',
   doubles: 'doubles',
   dynamaxAdventures: 'dynamaxAdventures',
   lightsOut: 'lightsOut',
@@ -146,6 +148,7 @@ export const MINIGAME_START_ACTION = {
   pokeathlon: 'START_POKEATHLON',
   pokeRadar: 'START_POKE_RADAR',
   battleRoyal: 'START_BATTLE_ROYAL',
+  championGauntlet: 'START_CHAMPION_GAUNTLET',
   doubles: 'START_DOUBLES',
   dynamaxAdventures: 'START_DYNAMAX_ADVENTURES',
   lightsOut: 'START_LIGHTS_OUT',
@@ -245,6 +248,12 @@ export const MINIGAME_INFO = {
     cost: BATTLE_ROYAL_COST,
     action: 'ENTER BATTLE ROYAL',
     hint: `An endless wave gauntlet for your party. Each win heals the squad a little; the deeper you get, the bigger the purse. Entry is $${BATTLE_ROYAL_COST.toLocaleString()}.`,
+  },
+  championGauntlet: {
+    title: "Champions' Gauntlet",
+    cost: CHAMPION_GAUNTLET_COST,
+    action: 'ENTER GAUNTLET',
+    hint: `Face a bracket of ${CHAMPION_GAUNTLET_SIZE} named trainers from every region \u2014 gym leaders, then Elite Four, then a Champion, all with their endgame teams. Your surviving party is fully healed between trainers, so it is a war of attrition. Entry is $${CHAMPION_GAUNTLET_COST.toLocaleString()}.`,
   },
   doubles: {
     title: 'Battle Maison',
@@ -447,6 +456,11 @@ export const MINIGAME_TUTORIALS = {
     'An endless wave gauntlet for your whole party.',
     'Each win heals the squad a little.',
     'The deeper you get, the bigger the purse.',
+  ],
+  championGauntlet: [
+    `Face a bracket of ${CHAMPION_GAUNTLET_SIZE} named trainers, one at a time.`,
+    'Each trainer sends out their whole team; your active Pokemon carries its HP through the fight.',
+    'Between trainers the surviving party is fully healed \u2014 a fainted Pokemon stays down, so the run ends when the whole party is out.',
   ],
   doubles: [
     'Two of your Pok\u00e9mon face two foes at once.',

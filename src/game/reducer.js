@@ -6,12 +6,14 @@ import { emptyBattleHazards } from './hazards.js'
 import { createCompanionCare } from './companion.js'
 import { createGarden } from './garden.js'
 import { createPelago } from './pelago.js'
+import { createJobs } from './jobs.js'
 import { DEFAULT_ROD } from './minigames.js'
 import { applyExp, applySharedExp, attemptActivityCatch, bossBattleEnd, choosePlayerMove, completeMasterBall, consumeEvent, debugMaxLevel, executeTurn, fleeBattle, gmaxEvolve, megaEvolve, startBossBattle, startEncounter, startRaid, startTower, startTrainerBattle, switchPlayerPokemon, throwMasterBall, trainerBattleEnd, trainerSendNextPokemon, updateVolatile, useEffectItem, usePokeball } from './reducer/battle.js'
 import { claimAchievementRewards, claimDailyGift, claimDexRewards, claimQuest, clearOfflineReport, completeDexCelebration, markCaught, markSeen, markShinyCaught, markShinySeen, refreshDailyEvent, refreshQuests, startDexCelebration, updateShinyChain } from './reducer/collection.js'
 import { buyCafeItem, buyItem, buyRewardItem, clearHeldItem, reviveFossil, sellItem, setAlwaysCatchShinies, setCatchRule, toggleAutoCatch, toggleRouteCatchAll, useItemOnPokemon } from './reducer/items.js'
 import { blendBerries, careCompanion, harvestBerry, plantBerry, setCompanion } from './reducer/care.js'
 import { assignPelago, collectPelago, dismissPelagoCollect, unassignPelago } from './reducer/pelago.js'
+import { assignJob, collectJob, takeJobEncounter, unassignJob, accrueJobFinds } from './reducer/jobs.js'
 import { claimGift, startStaticEncounter } from './reducer/gifts.js'
 import { claimMinigameReward, collectMining, endBugContest, endMinigame, endRouteActivity, endSafari, payMinigameFee, recordGameCornerWin, startAcademyQuiz, startAuctionHouse, startBattleRoyal, startChampionGauntlet, startBugContest, startContest, startCurry, startDoubles, startDynamaxAdventures, startGameCorner, startIceSlide, startLightsOut, startMemory, startMining, startMusical, startPelago, startPicnic, startPokeathlon, startPokeRadar, startPokeballFactory, startPokestar, startPuzzleLeague, startRouteActivity, startRuinsPuzzle, startSafari, startVoltorbFlip, startWhack, startMantineSurf, startRotomRally, startOgreOustin, startTypeFusion, startUnownPicross, startPokeshot, startTeraRaid, startPokeword, startBerryBlender } from './reducer/minigames.js'
 import { boxToParty, catchPokemon, clearHatchResult, completeEvolution, completeWonderTrade, depositDaycare, evolutionStep, hatchDaycareEgg, partyToBox, releaseDuplicates, releaseFainted, releaseHatchling, releasePokemon, reorderBox, reorderParty, setBoxSort, setMoves, setNickname, startEvolution, swapPartyBox, toggleFavourite, withdrawDaycare, wonderTrade } from './reducer/pokemon.js'
@@ -86,6 +88,8 @@ export const initialGameState = {
   garden: createGarden(),
   /** The Poké Pelago passive islands (see game/pelago.js). */
   pelago: createPelago(),
+  /** Field Jobs: Pokemon posted to auto-run route activities (see game/jobs.js). */
+  jobs: createJobs(),
   /** The last Pelago collection, shown in a result card until dismissed. */
   pelagoCollect: null,
   trainerBattle: null,
@@ -519,6 +523,16 @@ export function gameReducer(state, action) {
       return collectPelago(state, action)
     case 'DISMISS_PELAGO_COLLECT':
       return dismissPelagoCollect(state, action)
+    case 'ASSIGN_JOB':
+      return assignJob(state, action)
+    case 'UNASSIGN_JOB':
+      return unassignJob(state, action)
+    case 'COLLECT_JOB':
+      return collectJob(state, action)
+    case 'TAKE_JOB_ENCOUNTER':
+      return takeJobEncounter(state, action)
+    case 'ACCRUE_JOBS':
+      return accrueJobFinds(state, action)
     case 'COLLECT_MINING':
       return collectMining(state, action)
     case 'BUY_REWARD_ITEM':

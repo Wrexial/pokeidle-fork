@@ -118,6 +118,19 @@ type Garden = { plots: GardenPlot[] }
 type PelagoIsland = { assigned: string[]; progress: number; ready: number }
 type Pelago = Record<string, PelagoIsland>
 
+/** Field Jobs: a Pokemon auto-running a route activity (see game/jobs.js). */
+type FieldJob = {
+  locationId: string
+  activityId: string
+  pokemonId: string
+  progressMs: number
+  money: number
+  items: Record<string, number>
+  encounters: { speciesKey: string; level: number }[]
+  cycles: number
+}
+type FieldJobs = Record<string, FieldJob>
+
 /** The result of collecting a Pelago island, shown once in a card. */
 type PelagoCollect = {
   islandId: string
@@ -566,6 +579,8 @@ type GameState = {
   garden: Garden
   /** Poké Pelago's passive islands (see game/pelago.js). */
   pelago: Pelago
+  /** Field Jobs: Pokemon auto-running route activities (see game/jobs.js). */
+  jobs: FieldJobs
   /** The last Pelago collection, shown in a result card until dismissed. */
   pelagoCollect: PelagoCollect | null
   defeatedGyms: string[]

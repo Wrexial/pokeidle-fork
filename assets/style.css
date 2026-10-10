@@ -4030,6 +4030,126 @@ img {
     color: var(--gold)
 }
 
+/* Field Jobs controls under a route-activity card. */
+.job-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin: -2px 0 8px;
+    padding: 6px 8px;
+    background: rgba(10,14,10,.4);
+    border: 1px dashed #6b5a34;
+    border-radius: 4px
+}
+
+.job-hint {
+    font-size: 7px;
+    line-height: 1.4;
+    color: #a99a7d
+}
+
+.job-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px
+}
+
+.job-worker {
+    font-size: 8px;
+    color: #8fd0ff
+}
+
+.job-btn {
+    font-family: inherit;
+    font-size: 7px;
+    letter-spacing: .3px;
+    text-transform: uppercase;
+    padding: 3px 6px;
+    color: var(--parchment);
+    background: linear-gradient(180deg,#4a4034,#2a241c);
+    border: 1px solid #8d8478;
+    border-radius: 3px;
+    cursor: pointer;
+    white-space: nowrap
+}
+
+.job-btn:hover:not(:disabled) {
+    filter: brightness(1.15)
+}
+
+.job-btn:disabled {
+    opacity: .5;
+    cursor: default
+}
+
+.job-btn.assign,
+.job-btn.collect,
+.job-btn.fight {
+    border-color: var(--gold);
+    color: var(--gold)
+}
+
+.job-progress {
+    position: relative;
+    height: 6px;
+    overflow: hidden;
+    background: rgba(10,14,10,.7);
+    border: 1px solid #6b5a34;
+    border-radius: 3px
+}
+
+.job-progress-fill {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(90deg,#6ab04c,#54e0ff)
+}
+
+.job-ready {
+    display: flex;
+    flex-direction: column;
+    gap: 4px
+}
+
+.job-ready-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px
+}
+
+.job-ready-items {
+    font-size: 7px;
+    line-height: 1.4;
+    color: #cbbfa6
+}
+
+.job-encounters {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px
+}
+
+.job-encounters-label {
+    font-size: 7px;
+    color: #b9a06a
+}
+
+.job-encounter {
+    display: flex;
+    align-items: center;
+    gap: 3px
+}
+
+.job-encounter-sprite {
+    width: 22px;
+    height: 22px;
+    image-rendering: pixelated
+}
+
 .location-minigame-start {
     width: 100%;
     padding: 6px 8px;

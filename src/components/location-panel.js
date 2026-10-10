@@ -13,6 +13,7 @@ import { useGame } from '../game/context.js'
 import { computeUnlockedLocations, frontierUnlocks, minigameRequirementMet, regionProgressionGoal, unlockBlockers } from '../game/progression.js'
 import { servicePoisFor, cafeFor } from '../game/services.js'
 import { MinigameCard } from './minigame-card.js'
+import { JobControls } from './job-controls.js'
 import { GiftPanel } from './gift-panel.js'
 import { FossilPanel } from './fossil-panel.js'
 import { BattleTowerPanel } from './battle-tower-panel.js'
@@ -790,26 +791,38 @@ export function LocationPanel({ onOpenCatchSettings }) {
               activityIds.map((activityId) => {
                 const activity = ROUTE_ACTIVITIES[activityId]
                 if (!activity) return null
-                return jsx(
-                  MinigameCard,
+                return jsxs(
+                  Fragment,
                   {
-                    icon: activity.icon,
-                    title: activity.title,
-                    types: activity.preferTypes,
-                    steps: ROUTE_ACTIVITY_TUTORIALS[activityId],
-                    conditionLabel: activityConditionLabel(activity),
-                    conditionActive: activityConditionMatches(activity, activityConditionContext),
-                    hint:
-                      activity.id === 'fishing'
-                        ? `${activity.hint} Current rod: ${bestRod.name}.${upcomingRod ? ` Open more regions to find the ${upcomingRod.name}.` : ''}`
-                        : activity.hint,
-                    actionLabel: activity.action,
-                    disabled:
-                      minigameBusy ||
-                      (activity.mode === 'encounter' &&
-                        !state.party.some((member) => member.currentHp > 0)),
-                    onStart: () =>
-                      dispatch({ type: 'START_ROUTE_ACTIVITY', payload: { activityId } }),
+                    children: [
+                      jsx(
+                        MinigameCard,
+                        {
+                          icon: activity.icon,
+                          title: activity.title,
+                          types: activity.preferTypes,
+                          steps: ROUTE_ACTIVITY_TUTORIALS[activityId],
+                          conditionLabel: activityConditionLabel(activity),
+                          conditionActive: activityConditionMatches(
+                            activity,
+                            activityConditionContext
+                          ),
+                          hint:
+                            activity.id === 'fishing'
+                              ? `${activity.hint} Current rod: ${bestRod.name}.${upcomingRod ? ` Open more regions to find the ${upcomingRod.name}.` : ''}`
+                              : activity.hint,
+                          actionLabel: activity.action,
+                          disabled:
+                            minigameBusy ||
+                            (activity.mode === 'encounter' &&
+                              !state.party.some((member) => member.currentHp > 0)),
+                          onStart: () =>
+                            dispatch({ type: 'START_ROUTE_ACTIVITY', payload: { activityId } }),
+                        },
+                        activityId
+                      ),
+                      jsx(JobControls, { locationId: location.id, activityId }),
+                    ],
                   },
                   activityId
                 )

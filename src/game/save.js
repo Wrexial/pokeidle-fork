@@ -15,7 +15,8 @@ import { COMPANION_MAX_CARE, createCompanionCare } from './companion.js'
 import { GARDEN_BERRIES, createGarden } from './garden.js'
 import { GAME_CORNER_PRIZE_GOAL } from './minigames/game-corner.js'
 import { PELAGO_MAX_READY, PELAGO_SLOTS, createPelago } from './pelago.js'
-import { RODS, rodsForRegionCount } from './minigames.js'
+import { RODS, rodsForRegionCount, routeActivityIds } from './minigames.js'
+import { JOB_CYCLE_MS, JOB_MAX_READY, accrueJobs, jobKey } from './jobs.js'
 import { GIFTS, STATIC_ENCOUNTERS } from './gifts.js'
 import { initialGameState } from './reducer.js'
 import { SHINY_CHAIN_FIRST_TARGET, computeOfflineReward, entryRoutePath } from './progression.js'
@@ -464,6 +465,39 @@ export function repairSave(saved) {
     }
   }
 
+  // Field Jobs: keep only jobs for a real activity whose worker still exists.
+  const jobs = /** @type {Record<string, any>} */ ({}),
+    savedJobs = saved.jobs && typeof saved.jobs === 'object' ? saved.jobs : {}
+  for (const rawJob of Object.values(savedJobs)) {
+    if (!rawJob || typeof rawJob !== 'object') continue
+    if (!rawJob.locationId || !rawJob.activityId || !companionIds.has(rawJob.pokemonId)) continue
+    const location = mapData[rawJob.locationId]
+    if (!location || !routeActivityIds(location).includes(rawJob.activityId)) continue
+    const items = /** @type {Record<string, number>} */ ({})
+    if (rawJob.items && typeof rawJob.items === 'object')
+      for (const [itemId, quantity] of Object.entries(rawJob.items))
+        if (Number.isFinite(quantity) && quantity > 0) items[itemId] = Math.floor(quantity)
+    const encounters = Array.isArray(rawJob.encounters)
+      ? rawJob.encounters
+          .filter((/** @type {any} */ entry) => entry && pokemonSpecies[entry.speciesKey])
+          .slice(0, JOB_MAX_READY)
+          .map((/** @type {any} */ entry) => ({
+            speciesKey: entry.speciesKey,
+            level: Math.max(1, Math.min(100, Math.floor(Number(entry.level) || 5))),
+          }))
+      : []
+    jobs[jobKey(rawJob.locationId, rawJob.activityId)] = {
+      locationId: rawJob.locationId,
+      activityId: rawJob.activityId,
+      pokemonId: rawJob.pokemonId,
+      progressMs: Math.max(0, Math.min(JOB_CYCLE_MS - 1, Math.floor(Number(rawJob.progressMs) || 0))),
+      money: Math.max(0, Math.floor(Number(rawJob.money) || 0)),
+      items,
+      encounters,
+      cycles: Math.max(0, Math.floor(Number(rawJob.cycles) || 0)),
+    }
+  }
+
   // Repair save data that references content which no longer exists (regions,
   // routes and locations have been rebuilt several times), so an old save can't
   // put the game loop into an unknown location and crash.
@@ -657,6 +691,7 @@ export function repairSave(saved) {
     ),
     garden,
     pelago,
+    jobs,
     shinySeen,
     alwaysCatchShinies: saved.alwaysCatchShinies ?? true,
     defeatedGyms,
@@ -759,18 +794,19 @@ export function loadSavedState(slot = getActiveSlot() || 1) {
     return null
   }
   // Grant offline progress for the time the game was closed (one-off, not saved
-  // back into the save, so it isn't re-awarded on the next load).
-  const offlineReward = computeOfflineReward(
-    repaired,
-    typeof saved.savedAt === 'number' ? Date.now() - saved.savedAt : 0
-  )
-  if (!offlineReward) return repaired
-  const inventory = { ...repaired.inventory }
+  // back into the save, so it isn't re-awarded on the next load). Field Jobs
+  // also bank for the away window (self-capped by JOB_MAX_READY).
+  const awayMs = typeof saved.savedAt === 'number' ? Date.now() - saved.savedAt : 0,
+    accruedJobs = accrueJobs(repaired.jobs ?? {}, awayMs),
+    withJobs = accruedJobs === repaired.jobs ? repaired : { ...repaired, jobs: accruedJobs },
+    offlineReward = computeOfflineReward(withJobs, awayMs)
+  if (!offlineReward) return withJobs
+  const inventory = { ...withJobs.inventory }
   for (const [itemId, quantity] of Object.entries(offlineReward.items))
     inventory[itemId] = (inventory[itemId] ?? 0) + quantity
   return {
-    ...repaired,
-    money: repaired.money + offlineReward.money,
+    ...withJobs,
+    money: withJobs.money + offlineReward.money,
     inventory,
     offlineReport: offlineReward,
   }
@@ -817,6 +853,7 @@ export const SAVED_STATE_KEYS = [
   'gameCornerProgress',
   'garden',
   'pelago',
+  'jobs',
   'shinySeen',
   'defeatedGyms',
   'defeatedEliteFour',

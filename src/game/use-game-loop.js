@@ -1042,6 +1042,19 @@ export function useGameLoop() {
       }
     )
   }, [state.phase, state.speed, state.paused, tick, getTickDelay])
+  // Field Jobs bank on real time, independent of the battle tick and the
+  // current phase (they keep working while a minigame is open), so they get
+  // their own interval that hands the reducer the elapsed wall-clock time.
+  React.useEffect(() => {
+    let last = Date.now()
+    const id = setInterval(() => {
+      const now = Date.now(),
+        elapsed = now - last
+      last = now
+      dispatch({ type: 'ACCRUE_JOBS', payload: { elapsedMs: elapsed } })
+    }, 10_000)
+    return () => clearInterval(id)
+  }, [dispatch])
   // Resolve a manual turn the moment the player acts, rather than waiting for
   // the next idle tick. Event consumption stays on the interval above, so the
   // battle text still plays out at the normal speed.

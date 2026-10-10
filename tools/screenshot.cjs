@@ -670,6 +670,36 @@ async function main() {
       }
     }
 
+    // Field Jobs: assign a Pokemon to a route activity from its card.
+    await cdp.eval(
+      `localStorage.setItem('pokemon-idle-save-v2', ${JSON.stringify(
+        JSON.stringify(
+          minigameSave('kanto', 'viridianForest', 'viridianForest', ['palletTown', 'viridianForest'])
+        )
+      )}); 'ok'`
+    )
+    await cdp.send('Page.navigate', { url: APP_URL })
+    await cdp.waitFor('window.gameDataDebug.status().loaded === true', 20000, 'jobs data')
+    await cdp.eval(
+      `(() => { const b = document.querySelector('.patch-notes-dismiss-btn'); if (b) b.click(); return true })()`
+    )
+    await sleep(600)
+    const assignedJob = await cdp.eval(
+      `(() => { const b = document.querySelector('.job-btn.assign'); if (!b) return false; b.click(); return true })()`
+    )
+    if (assignedJob) {
+      await sleep(500)
+      const jobInfo = await cdp.eval(
+        `(() => { const el = document.querySelector('.job-controls.active'); if (el) el.scrollIntoView({ block: 'center' }); const w = document.querySelector('.job-controls.active .job-worker'); return w ? w.textContent.trim() : null })()`
+      )
+      console.log('job worker:', JSON.stringify(jobInfo))
+      await sleep(300)
+      await cdp.screenshot(path.join(OUT, '30-jobs.png'))
+      console.log('Field jobs ok')
+    } else {
+      console.log('WARNING: no assign-a-job button found')
+    }
+
     // Click FIGHT in the Gauntlet to exercise the run loop (the fresh save's
     // Charmander will lose, which still shows the result + reward screens).
     if (await cdp.eval(`!!document.querySelector('.gauntlet-bracket')`)) {

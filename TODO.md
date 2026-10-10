@@ -35,21 +35,19 @@ renumbered, so the gaps below are items that shipped.
 
 ### Tier 3 — New ideas (route activities, idle depth, endgame)
 
-7. **#60 Idle job assignments** — M · ★★★★★ — assign Pokemon to auto-run
-   activities online/offline.
-8. **#63 Field research tasks** — M–L · ★★★★ — per-species tasks and a
+7. **#63 Field research tasks** — M–L · ★★★★ — per-species tasks and a
    research shop.
-9. **#69 Legendary quests** — M · ★★★.
-10. **#65 Prestige perks** — M–L · ★★★.
-11. **#71 Breeding project queue** — M · ★★★.
-12. **#62 Offline depth** — M · ★★★.
-13. **#72 QoL pass** — S–M · ★★★.
-14. **#67 Ribbons + ribbon case** — S–M · ★★½.
-15. **#68 Generation-completion rewards** — S · ★★.
-16. **#59 Activity goals & per-route mastery** — S–M · ★★.
-17. **#61 Focus / target hunting** — S–M · ★★½.
-18. **#66 Battle Frontier facilities** — M–L · ★★½.
-19. **#70 Recurring rival** — M · ★★½.
+8. **#69 Legendary quests** — M · ★★★.
+9. **#65 Prestige perks** — M–L · ★★★.
+10. **#71 Breeding project queue** — M · ★★★.
+11. **#62 Offline depth** — M · ★★★.
+12. **#72 QoL pass** — S–M · ★★★.
+13. **#67 Ribbons + ribbon case** — S–M · ★★½.
+14. **#68 Generation-completion rewards** — S · ★★.
+15. **#59 Activity goals & per-route mastery** — S–M · ★★.
+16. **#61 Focus / target hunting** — S–M · ★★½.
+17. **#66 Battle Frontier facilities** — M–L · ★★½.
+18. **#70 Recurring rival** — M · ★★½.
 
 ---
 
@@ -205,22 +203,6 @@ Persist the best hit quality per route/activity, grant a mastery bonus once a
 route's activities are all cleared, and add activity-flavoured daily quests.
 
 Effort: **small–medium**.
-
-## 60. Idle job assignments (auto-activities)
-
-Assign a party/box Pokemon to auto-run a route activity while online and
-offline, banking rewards like the Pelago islands do. This is the natural idle
-loop the game is missing and the highest-value new feature.
-
-- [ ] Job model: one assignment per activity per location, `{ activityId,
-      locationId, pokemonId, startedAt }` in game state + save.
-- [ ] Offline accrual: fold elapsed time into rolls on load / on a timer,
-      respecting the activity's own quality/reward rules.
-- [ ] Surface it: a Pelago island or a Jobs panel, with a claim/collect action.
-- [ ] Balance: an assigned Pokemon contributes its level/ability so a stronger
-      mon earns better rolls; cap idle rate vs. active play.
-
-Effort: **medium**.
 
 ## 61. Focus / target hunting
 

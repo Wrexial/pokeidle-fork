@@ -4,9 +4,9 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 
 /**
- * @param {{ icon?: string, title: string, hint: string, steps?: string[], actionLabel: string, disabled?: boolean, onStart: () => void }} props
+ * @param {{ icon?: string, title: string, hint: string, types?: string[], steps?: string[], actionLabel: string, disabled?: boolean, onStart: () => void }} props
  */
-export function MinigameCard({ icon, title, hint, steps, actionLabel, disabled, onStart }) {
+export function MinigameCard({ icon, title, hint, types, steps, actionLabel, disabled, onStart }) {
   const [helpOpen, setHelpOpen] = React.useState(false)
   return jsxs('div', {
     className: 'location-minigame-card',
@@ -18,6 +18,18 @@ export function MinigameCard({ icon, title, hint, steps, actionLabel, disabled, 
           jsx('span', { className: 'location-minigame-title', children: title }),
         ],
       }),
+      types?.length
+        ? jsx('div', {
+            className: 'location-minigame-types',
+            children: types.map((type) =>
+              jsx(
+                'span',
+                { className: `type-badge type-${type.toLowerCase()}`, children: type },
+                type
+              )
+            ),
+          })
+        : null,
       jsx('p', { className: 'location-minigame-hint', children: hint }),
       steps?.length
         ? jsx('button', {

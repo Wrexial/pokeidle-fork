@@ -9,21 +9,26 @@ const {
   ACTIVITY_ATTEMPTS,
   ACTIVITY_BITE_CHANCE,
   ACTIVITY_BUG_FLEE_MS,
+  ACTIVITY_CIRCUIT_SPARKS,
   ACTIVITY_DIG_TRIES,
   ACTIVITY_HIT_ZONE,
   ACTIVITY_MASH_TAPS,
   ACTIVITY_PERFECT_ZONE,
+  ACTIVITY_RUNE_LENGTH,
   ACTIVITY_ULTRA_ZONE,
   FISHING_LOCATIONS,
   ROUTE_ACTIVITIES,
+  activityBandQuality,
   activityBiteChance,
   activityBugQuality,
+  activityCircuitQuality,
   activityDigQuality,
   activityGripQuality,
   activityLevelBonus,
   activityMashQuality,
   activityQualityForDistance,
   activityRewardName,
+  activityRuneQuality,
   activityShinyMultiplier,
   rollActivityEncounter,
   rollActivityEncounters,
@@ -246,11 +251,12 @@ test('forage loot is always a real item', () => {
   }
 })
 
-test('foraging uses a ring display and can flush out a Grass Pokemon', () => {
+test('foraging uses a ring display and can flush out a Grass, Poison or Fairy Pokemon', () => {
   assert.equal(ROUTE_ACTIVITIES.forage.display, 'rings')
   assert.equal(ROUTE_ACTIVITIES.fishing.display, 'bar', 'fishing keeps the bar')
   assert.equal(ROUTE_ACTIVITIES.forage.mode, 'loot')
-  assert.ok(ROUTE_ACTIVITIES.forage.preferTypes.includes('Grass'))
+  for (const type of ['Grass', 'Poison', 'Fairy'])
+    assert.ok(ROUTE_ACTIVITIES.forage.preferTypes.includes(type), `forage hooks ${type}`)
   assert.ok(ROUTE_ACTIVITIES.forage.encounterChance > 0)
   assert.ok(
     ROUTE_ACTIVITIES.forage.perfectEncounterChance > ROUTE_ACTIVITIES.forage.encounterChance,
@@ -267,8 +273,13 @@ test('foraging uses a ring display and can flush out a Grass Pokemon', () => {
   assert.ok(grassyForage, 'a forage route with a Grass Pokemon exists')
   for (let roll = 0; roll < 20; roll++) {
     const hidden = rollActivityEncounter('forage', grassyForage.routeKey, roll % 2 === 0)
-    assert.ok(hidden, 'a Grass Pokemon can be flushed out')
-    assert.ok(pokemonSpecies[hidden.speciesKey].types.includes('Grass'))
+    assert.ok(hidden, 'a Pokemon can be flushed out')
+    assert.ok(
+      ['Grass', 'Poison', 'Fairy'].some((type) =>
+        pokemonSpecies[hidden.speciesKey].types.includes(type)
+      ),
+      `${hidden.speciesKey} should be one of foraging's types`
+    )
   }
 })
 
@@ -456,9 +467,9 @@ test('rock smash, headbutt and diving are offered only where their types live', 
 
   // Every offered route holds at least one matching-type species.
   const activityTypes = [
-    ['rockSmash', ['Rock', 'Ground']],
+    ['rockSmash', ['Rock', 'Ground', 'Steel', 'Ice', 'Fighting']],
     ['headbutt', ['Normal', 'Flying']],
-    ['diving', ['Water']],
+    ['diving', ['Water', 'Ice']],
   ]
   for (const [activityId, types] of activityTypes)
     for (const location of locations.filter((candidate) =>
@@ -475,9 +486,15 @@ test('rock smash, headbutt and diving are offered only where their types live', 
     const smashed = rollActivityEncounter('rockSmash', smash.routeKey, roll % 2 === 0),
       butted = rollActivityEncounter('headbutt', headbutt.routeKey, roll % 2 === 0),
       dived = rollActivityEncounter('diving', diving.routeKey, roll % 2 === 0)
-    assert.ok(['Rock', 'Ground'].some((type) => pokemonSpecies[smashed.speciesKey].types.includes(type)))
+    assert.ok(
+      ['Rock', 'Ground', 'Steel', 'Ice', 'Fighting'].some((type) =>
+        pokemonSpecies[smashed.speciesKey].types.includes(type)
+      )
+    )
     assert.ok(['Normal', 'Flying'].some((type) => pokemonSpecies[butted.speciesKey].types.includes(type)))
-    assert.ok(pokemonSpecies[dived.speciesKey].types.includes('Water'))
+    assert.ok(
+      ['Water', 'Ice'].some((type) => pokemonSpecies[dived.speciesKey].types.includes(type))
+    )
   }
 })
 
@@ -610,7 +627,7 @@ test('START_ROUTE_ACTIVITY starts the new activities where they are offered', ()
 
 test('every route activity has its own interaction', () => {
   const displays = Object.values(ROUTE_ACTIVITIES).map((activity) => activity.display)
-  assert.equal(displays.length, 8, 'all eight activities are accounted for')
+  assert.equal(displays.length, 12, 'all twelve activities are accounted for')
   assert.equal(
     new Set(displays).size,
     displays.length,
@@ -652,4 +669,78 @@ test('the mash, net, grip and dig interactions grade their own metrics', () => {
   assert.equal(activityDigQuality(1), 'ultra', 'the first hole is gold')
   assert.equal(activityDigQuality(2), 'perfect')
   assert.equal(activityDigQuality(ACTIVITY_DIG_TRIES), 'hit')
+})
+
+test('every Pokemon type is hooked to at least one route activity', () => {
+  const TYPES = [
+    'Normal', 'Fire', 'Water', 'Grass', 'Electric', 'Ice', 'Fighting', 'Poison',
+    'Ground', 'Flying', 'Psychic', 'Bug', 'Rock', 'Ghost', 'Dragon', 'Dark',
+    'Steel', 'Fairy',
+  ]
+  const hooked = new Map()
+  for (const activity of Object.values(ROUTE_ACTIVITIES))
+    for (const type of activity.preferTypes ?? [])
+      hooked.set(type, [...(hooked.get(type) ?? []), activity.id])
+
+  for (const type of TYPES)
+    assert.ok(hooked.has(type), `${type} is hooked to a route activity`)
+
+  // The stronger check: for every type, the offer actually surfaces on a real
+  // location whose wild table holds a species of that type.
+  for (const type of TYPES) {
+    const offered = locations.some((location) => {
+      const ids = routeActivityIds(location)
+      if (ids.length === 0) return false
+      const hasType = (encounterData[location.routeKey]?.encounters ?? []).some((entry) =>
+        pokemonSpecies[entry.speciesKey].types.includes(type)
+      )
+      return hasType && ids.some((id) => (ROUTE_ACTIVITIES[id]?.preferTypes ?? []).includes(type))
+    })
+    assert.ok(offered, `${type} wild Pokemon can be reached through an activity`)
+  }
+})
+
+test('the campfire, overcharge and s\u00e9ance interactions grade their metrics', () => {
+  assert.equal(ROUTE_ACTIVITIES.kindle.display, 'stoke')
+  assert.equal(ROUTE_ACTIVITIES.kindle.preferTypes.join(','), 'Fire')
+  assert.equal(ROUTE_ACTIVITIES.overcharge.display, 'circuit')
+  assert.equal(ROUTE_ACTIVITIES.overcharge.preferTypes.join(','), 'Electric')
+  assert.deepEqual(ROUTE_ACTIVITIES.seance.preferTypes, ['Psychic', 'Ghost', 'Dark'])
+  assert.equal(ROUTE_ACTIVITIES.summit.display, 'soar')
+  assert.equal(ROUTE_ACTIVITIES.summit.preferTypes.join(','), 'Dragon')
+
+  assert.equal(activityBandQuality(0), null, 'never on the band finds nothing')
+  assert.equal(activityBandQuality(1), 'ultra')
+  assert.equal(activityBandQuality(0.4), 'perfect')
+  assert.equal(activityBandQuality(0.2), 'hit')
+
+  assert.equal(activityCircuitQuality(0), null, 'missing every spark fizzles')
+  assert.equal(activityCircuitQuality(ACTIVITY_CIRCUIT_SPARKS), 'ultra')
+  assert.equal(activityCircuitQuality(2), 'perfect')
+  assert.equal(activityCircuitQuality(1), 'hit')
+
+  assert.equal(activityRuneQuality(0), null, 'a wrong reading draws nothing')
+  assert.equal(activityRuneQuality(ACTIVITY_RUNE_LENGTH), 'ultra')
+  assert.equal(activityRuneQuality(ACTIVITY_RUNE_LENGTH - 1), 'perfect')
+  assert.equal(activityRuneQuality(ACTIVITY_RUNE_LENGTH - 2), 'hit')
+})
+
+test('the new activities start where their terrain and types meet', () => {
+  for (const activityId of ['kindle', 'overcharge', 'seance', 'summit']) {
+    const location = locations.find((candidate) =>
+      routeActivityIds(candidate).includes(activityId)
+    )
+    assert.ok(location, `${activityId} is offered somewhere`)
+    const started = gameReducer(
+      {
+        ...initialGameState,
+        phase: 'idle',
+        currentLocation: location.id,
+        unlockedLocations: [location.id],
+      },
+      { type: 'START_ROUTE_ACTIVITY', payload: { activityId } }
+    )
+    assert.equal(started.phase, 'routeActivity')
+    assert.equal(started.routeActivity, activityId)
+  }
 })

@@ -579,18 +579,26 @@ async function main() {
       console.log('WARNING: no Headbutt activity card found')
     }
 
-    // The other route activities: Bug Catching, Rock Smash, Rock Climbing and
-    // Prospecting, each with its own interaction.
+    // The other route activities: Bug Catching, Rock Smash, Rock Climbing,
+    // Prospecting, Campfire, Overcharge, S\u00e9ance and Summit Roost, each with
+    // its own interaction.
+    const regionEntries = { kanto: 'palletTown', johto: 'johto-new-bark-town' }
     const routeScenes = [
-      ['Bug Catching', 'viridianForest', 'viridianForest', '26-bugCatch.png', '.activity-bugfield'],
-      ['Rock Smash', 'mtMoon', 'mtMoon', '26b-rockSmash.png', '.activity-boulder'],
-      ['Rock Climbing', 'mtMoon', 'mtMoon', '27-climb.png', '.activity-wall'],
-      ['Prospecting', 'mtMoon', 'mtMoon', '28-prospecting.png', '.activity-dig'],
+      ['Bug Catching', 'kanto', 'viridianForest', 'viridianForest', '26-bugCatch.png', '.activity-bugfield'],
+      ['Rock Smash', 'kanto', 'mtMoon', 'mtMoon', '26b-rockSmash.png', '.activity-boulder'],
+      ['Rock Climbing', 'kanto', 'mtMoon', 'mtMoon', '27-climb.png', '.activity-wall'],
+      ['Prospecting', 'kanto', 'mtMoon', 'mtMoon', '28-prospecting.png', '.activity-dig'],
+      ['Campfire', 'kanto', 'pokemonMansion', 'pokemonMansion', '28b-kindle.png', '.activity-stoke'],
+      ['Overcharge', 'kanto', 'rockTunnel', 'rockTunnel', '28c-overcharge.png', '.activity-coil'],
+      ['S\u00e9ance', 'kanto', 'ceruleanCave', 'ceruleanCave', '28d-seance.png', '.activity-rune-grid'],
+      ["Summit Roost", 'johto', 'johto-dragons-den', 'johto-dragons-den', '28e-summit.png', '.activity-sky'],
     ]
-    for (const [title, location, route, file, selector] of routeScenes) {
+    for (const [title, region, location, route, file, selector] of routeScenes) {
       await cdp.eval(
         `localStorage.setItem('pokemon-idle-save-v2', ${JSON.stringify(
-          JSON.stringify(minigameSave('kanto', location, route, ['palletTown', 'route1', location]))
+          JSON.stringify(
+            minigameSave(region, location, route, [regionEntries[region], location])
+          )
         )}); 'ok'`
       )
       await cdp.send('Page.navigate', { url: APP_URL })

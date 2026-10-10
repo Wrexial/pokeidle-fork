@@ -15,6 +15,8 @@ import {
   ACTIVITY_BUG_FLEE_MS,
   ACTIVITY_BUG_SPOTS,
   ACTIVITY_CHARGE_MS,
+  ACTIVITY_CIRCUIT_MS,
+  ACTIVITY_CIRCUIT_SPARKS,
   ACTIVITY_DIG_SIZE,
   ACTIVITY_DIG_TRIES,
   ACTIVITY_GRIP_BAND,
@@ -24,17 +26,26 @@ import {
   ACTIVITY_MASH_MS,
   ACTIVITY_MASH_TAPS,
   ACTIVITY_PERFECT_ZONE,
+  ACTIVITY_RUNE_LENGTH,
+  ACTIVITY_RUNE_SHOW_MS,
+  ACTIVITY_SOAR,
+  ACTIVITY_SOAR_MS,
+  ACTIVITY_STOKE,
+  ACTIVITY_STOKE_MS,
   ACTIVITY_SWEEP_MS,
   ACTIVITY_ULTRA_ZONE,
   ROUTE_ACTIVITIES,
+  activityBandQuality,
   activityBiteChance,
   activityBugQuality,
+  activityCircuitQuality,
   activityDigQuality,
   activityGripQuality,
   activityLevelBonus,
   activityMashQuality,
   activityQualityForDistance,
   activityRewardName,
+  activityRuneQuality,
   activityShinyMultiplier,
   bestRodId,
   rodForId,
@@ -68,6 +79,9 @@ const BUG_SPOT_POSITIONS = [
 /** Gravity pulling the climber down and the grip pulling it back up (per s). */
 const GRIP_GRAVITY = 0.4
 const GRIP_PULL = 0.72
+
+/** Runes the s\u00e9ance lights, in the order they appear on the board. */
+const RUNES = ['\u{1f319}', '\u2b50', '\u{1f52e}', '\u{1f320}']
 
 /** @param {number} value */
 const clamp01 = (value) => Math.max(0, Math.min(1, value))
@@ -111,6 +125,22 @@ export function RouteActivityScene() {
       Array(ACTIVITY_DIG_SIZE * ACTIVITY_DIG_SIZE).fill(0)
     ),
     [digTries, setDigTries] = React.useState(0),
+    // Campfire: the heat level and how much of the run is done.
+    [heat, setHeat] = React.useState(0.5),
+    [stokeProgress, setStokeProgress] = React.useState(0),
+    // Overcharge: the orbiting spark, sparks landed and their score.
+    [circuitAngle, setCircuitAngle] = React.useState(0),
+    [circuitSparks, setCircuitSparks] = React.useState(0),
+    // Séance: the rune sequence, the player's repeat and the shown rune.
+    [runeSequence, setRuneSequence] = React.useState(
+      /** @type {number[]} */ ([])
+    ),
+    [runeInput, setRuneInput] = React.useState(/** @type {number[]} */ ([])),
+    [runePhase, setRunePhase] = React.useState(/** @type {'show' | 'input'} */ ('show')),
+    [runeActive, setRuneActive] = React.useState(-1),
+    // Summit: the flier's altitude and how much of the climb is done.
+    [soar, setSoar] = React.useState(0.4),
+    [soarProgress, setSoarProgress] = React.useState(0),
     // Bumped on every new attempt so timed CSS animations restart.
     [attemptNonce, setAttemptNonce] = React.useState(0),
     chargingTreeRef = React.useRef(/** @type {number | null} */ (null)),
@@ -122,6 +152,15 @@ export function RouteActivityScene() {
     gripStatsRef = React.useRef({ elapsed: 0, inBand: 0 }),
     bugShownAtRef = React.useRef(0),
     digTreasureRef = React.useRef(0),
+    heatRef = React.useRef(0.5),
+    stokeStatsRef = React.useRef({ elapsed: 0, inBand: 0 }),
+    circuitSparksRef = React.useRef(0),
+    circuitScoreRef = React.useRef(0),
+    soarRef = React.useRef(0.4),
+    soarVelocityRef = React.useRef(0),
+    soarStatsRef = React.useRef({ elapsed: 0, inBand: 0 }),
+    runeSequenceRef = React.useRef(/** @type {number[]} */ ([])),
+    runeInputRef = React.useRef(/** @type {number[]} */ ([])),
     // Set once an attempt is resolved so a timer and a tap can't both score it.
     resolvedRef = React.useRef(false),
     // Every render refreshes this so timer-driven loops resolve against the
@@ -154,6 +193,28 @@ export function RouteActivityScene() {
     digTreasureRef.current = Math.floor(
       Math.random() * ACTIVITY_DIG_SIZE * ACTIVITY_DIG_SIZE
     )
+    heatRef.current = 0.5
+    setHeat(0.5)
+    stokeStatsRef.current = { elapsed: 0, inBand: 0 }
+    setStokeProgress(0)
+    circuitSparksRef.current = 0
+    circuitScoreRef.current = 0
+    setCircuitSparks(0)
+    setCircuitAngle(0)
+    const sequence = Array.from({ length: ACTIVITY_RUNE_LENGTH }, () =>
+      Math.floor(Math.random() * RUNES.length)
+    )
+    runeSequenceRef.current = sequence
+    setRuneSequence(sequence)
+    runeInputRef.current = []
+    setRuneInput([])
+    setRunePhase('show')
+    setRuneActive(-1)
+    soarRef.current = 0.4
+    soarVelocityRef.current = 0
+    soarStatsRef.current = { elapsed: 0, inBand: 0 }
+    setSoar(0.4)
+    setSoarProgress(0)
     bugShownAtRef.current = performance.now()
     setBugSpot(Math.floor(Math.random() * ACTIVITY_BUG_SPOTS))
     resolvedRef.current = false
@@ -292,6 +353,113 @@ export function RouteActivityScene() {
       window.removeEventListener('pointercancel', release)
     }
   }, [gripHeld])
+
+  // Campfire: heat drains away, so the player stokes it to stay in the band.
+  // Flaring over the top spoils the attempt.
+  React.useEffect(() => {
+    if (stage !== 'aiming' || activity?.display !== 'stoke') return
+    let frame = 0,
+      done = false,
+      last = performance.now()
+    const loop = /** @param {number} now */ (now) => {
+      const delta = Math.min(50, now - last)
+      last = now
+      heatRef.current = Math.max(0, heatRef.current - ACTIVITY_STOKE.drain * (delta / 1000))
+      stokeStatsRef.current.elapsed += delta
+      if (heatRef.current >= ACTIVITY_STOKE.min && heatRef.current <= ACTIVITY_STOKE.max)
+        stokeStatsRef.current.inBand += delta
+      setHeat(heatRef.current)
+      setStokeProgress(Math.min(1, stokeStatsRef.current.elapsed / ACTIVITY_STOKE_MS))
+      if (heatRef.current >= ACTIVITY_STOKE.overheat && !done) {
+        done = true
+        finishRef.current(null)
+        return
+      }
+      if (stokeStatsRef.current.elapsed >= ACTIVITY_STOKE_MS && !done) {
+        done = true
+        finishRef.current(
+          activityBandQuality(stokeStatsRef.current.inBand / stokeStatsRef.current.elapsed)
+        )
+        return
+      }
+      frame = requestAnimationFrame(loop)
+    }
+    frame = requestAnimationFrame(loop)
+    return () => cancelAnimationFrame(frame)
+  }, [stage, activity?.display])
+
+  // Overcharge: a spark orbits the coil so the player can time a discharge.
+  React.useEffect(() => {
+    if (stage !== 'aiming' || activity?.display !== 'circuit') return
+    let frame = 0
+    const start = performance.now()
+    const loop = /** @param {number} now */ (now) => {
+      setCircuitAngle(((now - start) % ACTIVITY_CIRCUIT_MS) / ACTIVITY_CIRCUIT_MS)
+      frame = requestAnimationFrame(loop)
+    }
+    frame = requestAnimationFrame(loop)
+    return () => cancelAnimationFrame(frame)
+  }, [stage, activity?.display])
+
+  // Summit: each flap gives an impulse, gravity pulls the flier back down, and
+  // the player rides a thermal that climbs across the attempt.
+  React.useEffect(() => {
+    if (stage !== 'aiming' || activity?.display !== 'soar') return
+    let frame = 0,
+      done = false,
+      last = performance.now()
+    const loop = /** @param {number} now */ (now) => {
+      const delta = Math.min(50, now - last)
+      last = now
+      soarVelocityRef.current -= ACTIVITY_SOAR.gravity * (delta / 1000)
+      soarRef.current = clamp01(soarRef.current + soarVelocityRef.current * (delta / 1000))
+      soarStatsRef.current.elapsed += delta
+      const center = 0.38 + 0.24 * (soarStatsRef.current.elapsed / ACTIVITY_SOAR_MS)
+      if (Math.abs(soarRef.current - center) <= ACTIVITY_SOAR.band / 2)
+        soarStatsRef.current.inBand += delta
+      setSoar(soarRef.current)
+      setSoarProgress(Math.min(1, soarStatsRef.current.elapsed / ACTIVITY_SOAR_MS))
+      if (soarStatsRef.current.elapsed >= ACTIVITY_SOAR_MS && !done) {
+        done = true
+        finishRef.current(
+          activityBandQuality(soarStatsRef.current.inBand / soarStatsRef.current.elapsed)
+        )
+        return
+      }
+      frame = requestAnimationFrame(loop)
+    }
+    frame = requestAnimationFrame(loop)
+    return () => cancelAnimationFrame(frame)
+  }, [stage, activity?.display])
+
+  // Séance: flash the rune sequence, then hand over to the player.
+  React.useEffect(() => {
+    if (stage !== 'aiming' || activity?.display !== 'runes' || runeSequence.length === 0) return
+    let cancelled = false,
+      index = 0,
+      timer = 0
+    setRunePhase('show')
+    const step = () => {
+      if (cancelled) return
+      if (index >= runeSequence.length) {
+        setRuneActive(-1)
+        setRunePhase('input')
+        return
+      }
+      setRuneActive(runeSequence[index])
+      timer = setTimeout(() => {
+        if (cancelled) return
+        setRuneActive(-1)
+        index += 1
+        timer = setTimeout(step, 200)
+      }, ACTIVITY_RUNE_SHOW_MS)
+    }
+    timer = setTimeout(step, 450)
+    return () => {
+      cancelled = true
+      clearTimeout(timer)
+    }
+  }, [stage, activity?.display, runeSequence])
 
   // Keep the auto-resolving loops pointed at the current finish function.
   React.useEffect(() => {
@@ -631,6 +799,55 @@ export function RouteActivityScene() {
     )
   }
 
+  // Campfire: each stoke drops a burst of heat into the fire.
+  function stokeTap() {
+    if (stage !== 'aiming' || activity?.display !== 'stoke') return
+    heatRef.current = Math.min(
+      ACTIVITY_STOKE.overheat + 0.05,
+      heatRef.current + ACTIVITY_STOKE.tap
+    )
+    setHeat(heatRef.current)
+  }
+
+  // Overcharge: discharge where the spark crosses the contact; three timed
+  // sparks make the round and the average decides the quality.
+  function circuitTap() {
+    if (stage !== 'aiming' || activity?.display !== 'circuit') return
+    const distance = Math.min(circuitAngle, 1 - circuitAngle),
+      quality = activityQualityForDistance(distance),
+      score = quality === 'ultra' ? 3 : quality === 'perfect' ? 2 : quality === 'hit' ? 1 : 0
+    if (state.sfxEnabled) playSfx(quality ? (quality === 'hit' ? 'good' : 'great') : 'miss')
+    circuitScoreRef.current += score
+    circuitSparksRef.current += 1
+    setCircuitSparks(circuitSparksRef.current)
+    if (circuitSparksRef.current >= ACTIVITY_CIRCUIT_SPARKS)
+      finishAttempt(activityCircuitQuality(circuitScoreRef.current / ACTIVITY_CIRCUIT_SPARKS))
+  }
+
+  // Séance: record the player's repeat; the reading is graded once all the
+  // runes are placed.
+  /** @param {number} index */
+  function runeTap(index) {
+    if (stage !== 'aiming' || activity?.display !== 'runes' || runePhase !== 'input') return
+    const input = [...runeInputRef.current, index]
+    runeInputRef.current = input
+    setRuneInput(input)
+    setRuneActive(index)
+    setTimeout(() => setRuneActive(-1), 140)
+    if (input.length >= ACTIVITY_RUNE_LENGTH) {
+      const correct = input.filter(
+        (value, position) => value === runeSequenceRef.current[position]
+      ).length
+      finishAttempt(activityRuneQuality(correct))
+    }
+  }
+
+  // Summit: a flap gives the flier an upward impulse.
+  function soarTap() {
+    if (stage !== 'aiming' || activity?.display !== 'soar') return
+    soarVelocityRef.current = ACTIVITY_SOAR.flap
+  }
+
   const liveZone =
       Math.abs((activity.display === 'charge' ? charge : position) - 0.5) <= ACTIVITY_ULTRA_ZONE
         ? 'ultra'
@@ -693,6 +910,14 @@ export function RouteActivityScene() {
         return renderGrip()
       case 'dig':
         return renderDig()
+      case 'stoke':
+        return renderStoke()
+      case 'circuit':
+        return renderCircuit()
+      case 'runes':
+        return renderRunes()
+      case 'soar':
+        return renderSoar()
       default:
         return null
     }
@@ -944,6 +1169,175 @@ export function RouteActivityScene() {
         jsx('div', {
           className: 'activity-dig-tries',
           children: `Holes dug: ${digTries} / ${ACTIVITY_DIG_TRIES}`,
+        }),
+      ],
+    })
+  }
+
+  function renderStoke() {
+    const inBand = heat >= ACTIVITY_STOKE.min && heat <= ACTIVITY_STOKE.max
+    return jsxs('div', {
+      className: `activity-stoke${stage === 'aiming' ? '' : ' locked'}`,
+      children: [
+        jsx('div', { className: 'activity-fire', children: '\u{1f525}' }),
+        jsxs('div', {
+          className: 'activity-stoke-bar',
+          children: [
+            jsx('div', {
+              className: 'activity-stoke-band',
+              style: {
+                left: `${ACTIVITY_STOKE.min * 100}%`,
+                width: `${(ACTIVITY_STOKE.max - ACTIVITY_STOKE.min) * 100}%`,
+              },
+            }),
+            jsx('div', {
+              className: `activity-stoke-fill${heat > ACTIVITY_STOKE.max ? ' hot' : ''}`,
+              style: { width: `${heat * 100}%` },
+            }),
+            jsx('div', {
+              className: `activity-stoke-marker${inBand ? ' perfect' : ''}`,
+              style: { left: `${heat * 100}%` },
+            }),
+          ],
+        }),
+        jsx('div', {
+          className: 'activity-band-progress',
+          children: jsx('div', {
+            className: 'activity-band-progress-fill',
+            style: { transform: `scaleX(${stokeProgress})` },
+          }),
+        }),
+        jsx('button', {
+          className: 'activity-tap-btn',
+          disabled: stage !== 'aiming',
+          onPointerDown: (/** @type {React.PointerEvent<HTMLButtonElement>} */ event) => {
+            event.preventDefault()
+            stokeTap()
+          },
+          onContextMenu: (/** @type {React.MouseEvent} */ event) => event.preventDefault(),
+          children: 'STOKE',
+        }),
+      ],
+    })
+  }
+
+  function renderCircuit() {
+    const charged = Math.min(circuitAngle, 1 - circuitAngle) <= ACTIVITY_PERFECT_ZONE
+    return jsxs('div', {
+      className: `activity-circuit${stage === 'aiming' ? '' : ' locked'}`,
+      children: [
+        jsxs('div', {
+          className: 'activity-coil',
+          children: [
+            jsx('div', { className: 'activity-contact' }),
+            jsx('div', {
+              className: `activity-spark${charged ? ' charged' : ''}`,
+              style: {
+                transform: `translate(-50%,-50%) rotate(${circuitAngle * 360}deg) translateY(-74px)`,
+              },
+            }),
+          ],
+        }),
+        jsx('div', {
+          className: 'activity-spark-pips',
+          children: Array.from({ length: ACTIVITY_CIRCUIT_SPARKS }, (_, index) =>
+            jsx(
+              'span',
+              { className: `activity-spark-pip${index < circuitSparks ? ' charged' : ''}` },
+              index
+            )
+          ),
+        }),
+        jsx('button', {
+          className: 'activity-tap-btn',
+          disabled: stage !== 'aiming',
+          onPointerDown: (/** @type {React.PointerEvent<HTMLButtonElement>} */ event) => {
+            event.preventDefault()
+            circuitTap()
+          },
+          onContextMenu: (/** @type {React.MouseEvent} */ event) => event.preventDefault(),
+          children: 'DISCHARGE',
+        }),
+      ],
+    })
+  }
+
+  function renderRunes() {
+    const showing = runePhase === 'show'
+    return jsxs('div', {
+      className: `activity-runes${stage === 'aiming' ? '' : ' locked'}`,
+      children: [
+        jsx('div', {
+          className: 'activity-rune-status',
+          children: showing ? 'Watch the runes\u2026' : 'Repeat the runes!',
+        }),
+        jsxs('div', {
+          className: 'activity-rune-grid',
+          children: RUNES.map((rune, index) =>
+            jsx(
+              'button',
+              {
+                className: `activity-rune${runeActive === index ? ' active' : ''}`,
+                disabled: stage !== 'aiming' || showing,
+                onClick: () => runeTap(index),
+                'aria-label': `Rune ${index + 1}`,
+                children: rune,
+              },
+              index
+            )
+          ),
+        }),
+        jsxs('div', {
+          className: 'activity-rune-dots',
+          children: Array.from({ length: ACTIVITY_RUNE_LENGTH }, (_, index) =>
+            jsx(
+              'span',
+              { className: `activity-rune-dot${index < runeInput.length ? ' done' : ''}` },
+              index
+            )
+          ),
+        }),
+      ],
+    })
+  }
+
+  function renderSoar() {
+    const center = 0.38 + 0.24 * soarProgress,
+      bandTop = (1 - (center + ACTIVITY_SOAR.band / 2)) * 100,
+      bandHeight = ACTIVITY_SOAR.band * 100
+    return jsxs('div', {
+      className: `activity-soar${stage === 'aiming' ? '' : ' locked'}`,
+      children: [
+        jsxs('div', {
+          className: 'activity-sky',
+          children: [
+            jsx('div', {
+              className: 'activity-thermal',
+              style: { top: `${bandTop}%`, height: `${bandHeight}%` },
+            }),
+            jsx('div', {
+              className: 'activity-flier',
+              style: { top: `${(1 - soar) * 100}%` },
+              children: activity?.icon,
+            }),
+          ],
+        }),
+        jsx('div', {
+          className: 'activity-band-progress',
+          children: jsx('div', {
+            className: 'activity-band-progress-fill',
+            style: { transform: `scaleX(${soarProgress})` },
+          }),
+        }),
+        jsx('button', {
+          className: 'activity-tap-btn',
+          disabled: stage !== 'aiming',
+          onPointerDown: (/** @type {React.PointerEvent<HTMLButtonElement>} */ event) => {
+            event.preventDefault()
+            soarTap()
+          },
+          onContextMenu: (/** @type {React.MouseEvent} */ event) => event.preventDefault(),
+          children: 'FLAP',
         }),
       ],
     })

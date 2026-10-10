@@ -41,7 +41,8 @@ export const ACTIVITY_ULTRA_ZONE = 0.055
  * @type {Record<string, {
  *   id: string, title: string, action: string, icon: string, hint: string,
  *   mode: 'encounter' | 'loot',
- *   display: 'bar' | 'rings' | 'mash' | 'charge' | 'depth' | 'net' | 'grip' | 'dig',
+ *   display: 'bar' | 'rings' | 'mash' | 'charge' | 'depth' | 'net' | 'grip' | 'dig' |
+ *     'stoke' | 'circuit' | 'runes' | 'soar',
  *   preferTypes?: string[], encounterChance?: number, perfectEncounterChance?: number,
  *   deepWater?: boolean, propIcon?: string,
  * }>}
@@ -62,10 +63,10 @@ export const ROUTE_ACTIVITIES = {
     title: 'Berry Foraging',
     action: 'SEARCH',
     icon: '\u{1fab0}',
-    hint: 'Time the ring as it closes on the centre to find berries and supplies. A perfect search fills the basket, and a berry combo grows the longer you keep landing them; now and then a Grass Pokemon is hiding in the bush.',
+    hint: 'Time the ring as it closes on the centre to find berries and supplies. A perfect search fills the basket, and a berry combo grows the longer you keep landing them; now and then a Grass, Poison or Fairy Pokemon is hiding in the bush.',
     mode: 'loot',
     display: 'rings',
-    preferTypes: ['Grass'],
+    preferTypes: ['Grass', 'Poison', 'Fairy'],
     // A successful search can flush out a hidden Grass-type instead of loot.
     encounterChance: 0.3,
     perfectEncounterChance: 0.6,
@@ -75,10 +76,10 @@ export const ROUTE_ACTIVITIES = {
     title: 'Rock Smash',
     action: 'SMASH',
     icon: '\u{1faa8}',
-    hint: 'Mash the cracked boulder to shatter it open \u2014 the harder you smash, the better the Rock and Ground Pokemon shaken loose, and a clean break can crack out a gem, or rarely a fossil.',
+    hint: 'Mash the cracked boulder to shatter it open \u2014 the harder you smash, the better the Pokemon shaken loose, and a clean break can crack out a gem, or rarely a fossil.',
     mode: 'encounter',
     display: 'mash',
-    preferTypes: ['Rock', 'Ground'],
+    preferTypes: ['Rock', 'Ground', 'Steel', 'Ice', 'Fighting'],
   },
   headbutt: {
     id: 'headbutt',
@@ -95,10 +96,10 @@ export const ROUTE_ACTIVITIES = {
     title: 'Diving',
     action: 'DIVE',
     icon: '\u{1f93f}',
-    hint: 'Dive under the surface to reach the deeper Water Pokemon that fishing cannot \u2014 a perfect dive can uncover sunken treasure.',
+    hint: 'Dive under the surface to reach the deeper Water and Ice Pokemon that fishing cannot \u2014 a perfect dive can uncover sunken treasure.',
     mode: 'encounter',
     display: 'depth',
-    preferTypes: ['Water'],
+    preferTypes: ['Water', 'Ice'],
     // Diving skips the fishing-rod gate and reaches the rarer, deeper species.
     deepWater: true,
   },
@@ -118,10 +119,10 @@ export const ROUTE_ACTIVITIES = {
     title: 'Rock Climbing',
     action: 'CLIMB',
     icon: '\u{1f9d7}',
-    hint: 'Hold to haul yourself up the cliff and release to steady \u2014 keep the climber on the ledge band as the grip meter fills to reach the Rock, Ground and Flying Pokemon nesting overhead.',
+    hint: 'Hold to haul yourself up the cliff and release to steady \u2014 keep the climber on the ledge band as the grip meter fills to reach the Rock, Ground, Flying and Fighting Pokemon nesting overhead.',
     mode: 'encounter',
     display: 'grip',
-    preferTypes: ['Rock', 'Ground', 'Flying'],
+    preferTypes: ['Rock', 'Ground', 'Flying', 'Fighting'],
     propIcon: '\u26f0\ufe0f',
   },
   prospecting: {
@@ -132,6 +133,46 @@ export const ROUTE_ACTIVITIES = {
     hint: 'Dig the relics out of the buried grid \u2014 the fewer holes it takes to strike treasure, the richer the haul, and a clean dig can unearth an ancient fossil.',
     mode: 'loot',
     display: 'dig',
+  },
+  kindle: {
+    id: 'kindle',
+    title: 'Campfire',
+    action: 'STOKE',
+    icon: '\u{1f525}',
+    hint: 'Feed the campfire to keep its heat in the sweet band without letting it flare over \u2014 the steadier the flame, the better the Fire Pokemon drawn to it.',
+    mode: 'encounter',
+    display: 'stoke',
+    preferTypes: ['Fire'],
+  },
+  overcharge: {
+    id: 'overcharge',
+    title: 'Overcharge',
+    action: 'DISCHARGE',
+    icon: '\u26a1',
+    hint: 'Time your discharge for the moment the spark crosses the contact \u2014 clean hits pull the Electric Pokemon out of the wiring.',
+    mode: 'encounter',
+    display: 'circuit',
+    preferTypes: ['Electric'],
+  },
+  seance: {
+    id: 'seance',
+    title: 'S\u00e9ance',
+    action: 'ATTUNE',
+    icon: '\u{1f52e}',
+    hint: 'Watch the runes light in order, then repeat the pattern \u2014 a clean reading draws out the Psychic, Ghost and Dark Pokemon lingering nearby.',
+    mode: 'encounter',
+    display: 'runes',
+    preferTypes: ['Psychic', 'Ghost', 'Dark'],
+  },
+  summit: {
+    id: 'summit',
+    title: 'Summit Roost',
+    action: 'SOAR',
+    icon: '\u{1f409}',
+    hint: 'Flap to ride the rising thermal and hold the band \u2014 reach the Dragon roost at the top before you stall.',
+    mode: 'encounter',
+    display: 'soar',
+    preferTypes: ['Dragon'],
   },
 }
 
@@ -204,6 +245,70 @@ function isProspectLocation(location) {
   )
 }
 
+/** Biomes dry or hot enough to light a campfire in. */
+const KINDLE_BIOMES = new Set(['volcanic', 'desert', 'cave', 'ruins', 'mountain'])
+
+/**
+ * Whether a location is dry enough to light a campfire.
+ * @param {MapLocation | undefined} location
+ * @returns {boolean}
+ */
+function isKindleLocation(location) {
+  if (!location || isWaterLocation(location)) return false
+  if (location.biome && KINDLE_BIOMES.has(location.biome)) return true
+  return /volcan|crater|ember|cinder|ash|magma|caldera|desert|sand|dune|furnace|forge|kiln|pyre|blaze|hot spring/i.test(
+    location.name ?? ''
+  )
+}
+
+/** Biomes where wiring or machinery can be overcharged. */
+const OVERCHARGE_BIOMES = new Set(['cave', 'ruins', 'desert', 'mountain'])
+
+/**
+ * Whether a location has wiring or machinery to overcharge.
+ * @param {MapLocation | undefined} location
+ * @returns {boolean}
+ */
+function isOverchargeLocation(location) {
+  if (!location || isWaterLocation(location)) return false
+  if (location.biome && OVERCHARGE_BIOMES.has(location.biome)) return true
+  return /power|plant|factory|generator|substation|reactor|lab|tower|magnet|circuit|grid|works|mill|spark|electr/i.test(
+    location.name ?? ''
+  )
+}
+
+/** Biomes where the veil is thin enough for a s\u00e9ance. */
+const SEANCE_BIOMES = new Set(['ruins', 'cave', 'forest', 'autumn', 'swamp'])
+
+/**
+ * Whether a location is eerie enough for a s\u00e9ance.
+ * @param {MapLocation | undefined} location
+ * @returns {boolean}
+ */
+function isSeanceLocation(location) {
+  if (!location || isWaterLocation(location)) return false
+  if (location.biome && SEANCE_BIOMES.has(location.biome)) return true
+  return /ruin|temple|shrine|tower|catacomb|grave|cemetery|spirit|haunt|shadow|forest|wood|grove|tangle|marsh|bog/i.test(
+    location.name ?? ''
+  )
+}
+
+/** Biomes high or steep enough to ride a thermal. */
+const SUMMIT_BIOMES = new Set(['mountain', 'volcanic', 'ruins', 'cave'])
+
+/**
+ * Whether a location has a high roost to soar to.
+ * @param {MapLocation | undefined} location
+ * @returns {boolean}
+ */
+function isSummitLocation(location) {
+  if (!location || isWaterLocation(location)) return false
+  if (location.biome && SUMMIT_BIOMES.has(location.biome)) return true
+  return /\bmt\b|mt\.|mount|peak|summit|highland|ridge|canyon|gorge|dragon|den|spire|tower|crater|sky/i.test(
+    location.name ?? ''
+  )
+}
+
 /**
  * The route activities available at a location.
  * @param {MapLocation | undefined} location
@@ -216,18 +321,25 @@ export function routeActivityIds(location) {
   const ids = []
   // Water
   if (FISHING_LOCATIONS.has(location.id) && routeHasWaterSpecies(routeKey)) ids.push('fishing')
-  if (isWaterLocation(location) && routeHasType(routeKey, ['Water'])) ids.push('diving')
+  if (isWaterLocation(location) && routeHasType(routeKey, ['Water', 'Ice'])) ids.push('diving')
   // Overgrown land
   if (isForageLocation(location)) ids.push('forage')
   if (isForageLocation(location) && routeHasType(routeKey, ['Bug'])) ids.push('bugCatch')
   if (isForageLocation(location) && routeHasType(routeKey, ['Normal', 'Flying']))
     ids.push('headbutt')
   // Rock and underground
-  if (isCaveLocation(location) && routeHasType(routeKey, ['Rock', 'Ground']))
+  if (isCaveLocation(location) && routeHasType(routeKey, ['Rock', 'Ground', 'Steel', 'Ice', 'Fighting']))
     ids.push('rockSmash')
-  if (isClimbLocation(location) && routeHasType(routeKey, ['Rock', 'Ground', 'Flying']))
+  if (isClimbLocation(location) && routeHasType(routeKey, ['Rock', 'Ground', 'Flying', 'Fighting']))
     ids.push('climb')
   if (isProspectLocation(location)) ids.push('prospecting')
+  // Elemental and psychic landmarks
+  if (isKindleLocation(location) && routeHasType(routeKey, ['Fire'])) ids.push('kindle')
+  if (isOverchargeLocation(location) && routeHasType(routeKey, ['Electric']))
+    ids.push('overcharge')
+  if (isSeanceLocation(location) && routeHasType(routeKey, ['Psychic', 'Ghost', 'Dark']))
+    ids.push('seance')
+  if (isSummitLocation(location) && routeHasType(routeKey, ['Dragon'])) ids.push('summit')
   return ids
 }
 
@@ -361,6 +473,69 @@ export function activityDigQuality(tries) {
   if (tries === 2) return 'perfect'
   return 'hit'
 }
+
+/**
+ * Grade "keep a value inside its band for a while" mechanics (the campfire's
+ * heat, the summit's thermal) by the fraction of the run spent on the band.
+ * @param {number} ratio Fraction of the attempt spent inside the band.
+ * @returns {'hit' | 'perfect' | 'ultra' | null}
+ */
+export function activityBandQuality(ratio) {
+  if (ratio >= 0.55) return 'ultra'
+  if (ratio >= 0.35) return 'perfect'
+  if (ratio >= 0.15) return 'hit'
+  return null
+}
+
+/** How long the campfire heat must be kept in its band, in ms. */
+export const ACTIVITY_STOKE_MS = 2400
+
+/** Heat a stoke adds, the per-second drain, the band and the overheat point. */
+export const ACTIVITY_STOKE = { tap: 0.16, drain: 0.34, min: 0.4, max: 0.75, overheat: 1 }
+
+/** Sparks that make up one overcharge round. */
+export const ACTIVITY_CIRCUIT_SPARKS = 3
+
+/** How long one spark takes to orbit the coil, in ms. */
+export const ACTIVITY_CIRCUIT_MS = 1080
+
+/**
+ * Grade an overcharge round by the average score of its timed sparks, where
+ * each spark scores 3 (bullseye), 2 (perfect), 1 (hit) or 0 (miss).
+ * @param {number} average
+ * @returns {'hit' | 'perfect' | 'ultra' | null}
+ */
+export function activityCircuitQuality(average) {
+  if (average >= 2.4) return 'ultra'
+  if (average >= 1.4) return 'perfect'
+  if (average >= 0.6) return 'hit'
+  return null
+}
+
+/** Runes that make up a s\u00e9ance sequence. */
+export const ACTIVITY_RUNE_LENGTH = 4
+
+/** How long each rune lights for while the sequence is shown, in ms. */
+export const ACTIVITY_RUNE_SHOW_MS = 620
+
+/**
+ * Grade a s\u00e9ance reading by how many of the shown runes were repeated in
+ * the right place.
+ * @param {number} correct
+ * @returns {'hit' | 'perfect' | 'ultra' | null}
+ */
+export function activityRuneQuality(correct) {
+  if (correct >= ACTIVITY_RUNE_LENGTH) return 'ultra'
+  if (correct >= ACTIVITY_RUNE_LENGTH - 1) return 'perfect'
+  if (correct >= ACTIVITY_RUNE_LENGTH - 2) return 'hit'
+  return null
+}
+
+/** How long the flier must hold the thermal, in ms. */
+export const ACTIVITY_SOAR_MS = 2400
+
+/** Upward impulse a flap gives and the per-second gravity pulling back down. */
+export const ACTIVITY_SOAR = { flap: 1, gravity: 2.1, band: 0.24 }
 
 /**
  * Roll a held item for an activity encounter, or null when it carries none.

@@ -789,6 +789,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
                   {
                     icon: activity.icon,
                     title: activity.title,
+                    types: activity.preferTypes,
                     hint:
                       activity.id === 'fishing'
                         ? `${activity.hint} Current rod: ${bestRod.name}.${upcomingRod ? ` Open more regions to find the ${upcomingRod.name}.` : ''}`

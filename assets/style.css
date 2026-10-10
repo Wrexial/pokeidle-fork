@@ -3140,6 +3140,11 @@ img {
     background: radial-gradient(circle at 38% 38%,#5cb85c,#3a8f3a,#2d7a2d)
 }
 
+.map-legend-swatch.legend-complete {
+    border-radius: 50%;
+    background: radial-gradient(circle at 38% 38%,#8ff0e0,#26b6a4,#138070)
+}
+
 .map-legend-swatch.legend-zone {
     border-radius: 2px;
     transform: rotate(45deg);
@@ -3537,6 +3542,12 @@ img {
     border: 2px solid #a09070;
     position: relative;
     box-shadow: 0 0 0 .5px #1a4a1a,1px 1px 0 .5px #00000040
+}
+
+.map-node.route.complete .map-node-dot {
+    background: radial-gradient(circle at 38% 38%,#8ff0e0,#26b6a4,#138070);
+    border-color: #d8f8f0;
+    box-shadow: 0 0 0 .5px #0a4a40,0 0 6px 2px #4ae0cc73,1px 1px 0 .5px #00000040
 }
 
 .map-node.zone .map-node-dot {

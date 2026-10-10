@@ -195,7 +195,21 @@ export function TownMap() {
           )
         : (locationsByRegion[activeRegion] ?? [])
     ),
-    activeLocationSet = new Set(activeLocationIds)
+    activeLocationSet = new Set(activeLocationIds),
+    // Routes whose entire wild table is registered in the Pokedex. The Town Map
+    // tints these so a finished route is obvious at a glance.
+    completedRoutes = React.useMemo(() => {
+      const completed = new Set()
+      if (!state.pokedexCaught?.length) return completed
+      const caught = new Set(state.pokedexCaught)
+      for (const locationId of activeLocationIds) {
+        const location = mapData[locationId],
+          encounters = location?.routeKey ? encounterData[location.routeKey]?.encounters : null
+        if (location?.type !== 'route' || !encounters?.length) continue
+        if (encounters.every((entry) => caught.has(entry.speciesKey))) completed.add(locationId)
+      }
+      return completed
+    }, [activeLocationIds, state.pokedexCaught])
 
   // Terrain blobs, one per visible location, split into water and land so the
   // renderer can lay down oceans, a coastline and land as separate blurred
@@ -843,6 +857,7 @@ export function TownMap() {
                       travelTo(locationId)
                     },
                     cooldownEnd: location.type === 'raid' ? state.raidCooldownEnd : void 0,
+                    allCaught: completedRoutes.has(locationId),
                     forceLabel: Boolean(focusZone),
                     // Deliberately omits the species: the Town Map should only
                     // say a swarm is active here, not spoil which Pokemon.
@@ -910,6 +925,7 @@ export function TownMap() {
                   children: [
                     ['legend-town', 'Town'],
                     ['legend-route', 'Route'],
+                    ['legend-complete', 'All Pokemon caught'],
                     ['legend-zone', 'Area / zone hub'],
                     ['legend-raid', 'Raid Island'],
                     ['legend-current', 'You are here'],

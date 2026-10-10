@@ -6,7 +6,7 @@ import { formatCooldown } from '../game/progression.js'
 import { POI_LOCATIONS, minigameNameForLocation } from '../game/minigames.js'
 import { servicePoisFor } from '../game/services.js'
 
-/** @param {{ location: MapLocation, isCurrent: boolean, isUnlocked: boolean, isClickable: boolean, onClick: () => void, cooldownEnd?: number, swarmLabel?: string | null, forceLabel?: boolean }} props */
+/** @param {{ location: MapLocation, isCurrent: boolean, isUnlocked: boolean, isClickable: boolean, onClick: () => void, cooldownEnd?: number, allCaught?: boolean, swarmLabel?: string | null, forceLabel?: boolean }} props */
 export
 function MapNode({
   location,
@@ -15,6 +15,7 @@ function MapNode({
   isClickable,
   onClick,
   cooldownEnd,
+  allCaught,
   swarmLabel,
   forceLabel,
 }) {
@@ -40,6 +41,7 @@ function MapNode({
   return (
     isRaid ? (className += ' raid') : isTown ? (className += ' town') : isZone ? (className += ' zone') : (className += ' route'),
     raidOnCooldown && (className += ' cooldown'),
+    isUnlocked && allCaught && (className += ' complete'),
     swarmLabel && (className += ' swarm'),
     isCurrent
       ? (className += ' current')
@@ -56,6 +58,7 @@ function MapNode({
       title: isUnlocked
         ? [
             location.description,
+            allCaught ? 'All wild Pokemon here are caught' : null,
             isZone && zoneCount > 0 ? `Zone hub \u2014 ${zoneCount} areas (click to open the area map)` : null,
             minigameName ? `Minigame: ${minigameName}` : null,
             servicePois.length > 0

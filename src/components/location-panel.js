@@ -6,7 +6,9 @@ import { BATTLE_TOWER_LOCATION } from '../data/config.js'
 import { martShopItems } from '../data/items.js'
 import { encounterData, gymLeaderData, mapData, pokemonSpecies, regions, raidPoolFor } from '../data/gameData.js'
 import { areaInfoFor } from '../data/ui.js'
-import { MINIGAME_AREAS, MINIGAME_INFO, MINIGAME_LOCATIONS, MINIGAME_START_ACTION, MINIGAME_TUTORIALS, ROUTE_ACTIVITIES, bestRodId, nextRod, rodForId, routeActivityIds } from '../game/minigames.js'
+import { MINIGAME_AREAS, MINIGAME_INFO, MINIGAME_LOCATIONS, MINIGAME_START_ACTION, MINIGAME_TUTORIALS, ROUTE_ACTIVITIES, ROUTE_ACTIVITY_TUTORIALS, activityConditionLabel, activityConditionMatches, bestRodId, nextRod, rodForId, routeActivityIds } from '../game/minigames.js'
+import { dayPhaseAt } from '../game/day-night.js'
+import { fieldWeatherFor } from '../game/weather.js'
 import { useGame } from '../game/context.js'
 import { computeUnlockedLocations, frontierUnlocks, minigameRequirementMet, regionProgressionGoal, unlockBlockers } from '../game/progression.js'
 import { servicePoisFor, cafeFor } from '../game/services.js'
@@ -260,6 +262,10 @@ export function LocationPanel({ onOpenCatchSettings }) {
   const fixedMinigameId = MINIGAME_LOCATIONS[location.id],
     fixedMinigame = fixedMinigameId ? MINIGAME_INFO[fixedMinigameId] : null,
     activityIds = routeActivityIds(location),
+    activityConditionContext = {
+      time: /** @type {'day' | 'night'} */ (dayPhaseAt().isNight ? 'night' : 'day'),
+      weather: fieldWeatherFor(location)?.type ?? null,
+    },
     minigameBusy = [
       'evolving',
       'healing',
@@ -790,6 +796,9 @@ export function LocationPanel({ onOpenCatchSettings }) {
                     icon: activity.icon,
                     title: activity.title,
                     types: activity.preferTypes,
+                    steps: ROUTE_ACTIVITY_TUTORIALS[activityId],
+                    conditionLabel: activityConditionLabel(activity),
+                    conditionActive: activityConditionMatches(activity, activityConditionContext),
                     hint:
                       activity.id === 'fishing'
                         ? `${activity.hint} Current rod: ${bestRod.name}.${upcomingRod ? ` Open more regions to find the ${upcomingRod.name}.` : ''}`

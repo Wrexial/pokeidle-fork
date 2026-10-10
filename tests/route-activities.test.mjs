@@ -18,10 +18,13 @@ const {
   ACTIVITY_ULTRA_ZONE,
   FISHING_LOCATIONS,
   ROUTE_ACTIVITIES,
+  ROUTE_ACTIVITY_TUTORIALS,
   activityBandQuality,
   activityBiteChance,
   activityBugQuality,
   activityCircuitQuality,
+  activityConditionLabel,
+  activityConditionMatches,
   activityDigQuality,
   activityGripQuality,
   activityLevelBonus,
@@ -30,6 +33,7 @@ const {
   activityRewardName,
   activityRuneQuality,
   activityShinyMultiplier,
+  bumpActivityQuality,
   rollActivityEncounter,
   rollActivityEncounters,
   rollActivityHeldItem,
@@ -743,4 +747,44 @@ test('the new activities start where their terrain and types meet', () => {
     assert.equal(started.phase, 'routeActivity')
     assert.equal(started.routeActivity, activityId)
   }
+})
+
+test('every route activity has a "how to play" tutorial', () => {
+  for (const activity of Object.values(ROUTE_ACTIVITIES)) {
+    const steps = ROUTE_ACTIVITY_TUTORIALS[activity.id]
+    assert.ok(
+      Array.isArray(steps) && steps.length >= 2,
+      `${activity.id} has a tutorial with at least two steps`
+    )
+    for (const step of steps) {
+      assert.equal(typeof step, 'string')
+      assert.ok(step.length > 0)
+    }
+  }
+  // No stray tutorials for activities that do not exist.
+  for (const id of Object.keys(ROUTE_ACTIVITY_TUTORIALS))
+    assert.ok(ROUTE_ACTIVITIES[id], `${id} is a real activity`)
+})
+
+test('day/night and weather favour an activity and lift a landed hit', () => {
+  const night = { time: /** @type {'night'} */ ('night'), weather: null },
+    day = { time: /** @type {'day'} */ ('day'), weather: null }
+  assert.ok(activityConditionMatches(ROUTE_ACTIVITIES.seance, night))
+  assert.ok(!activityConditionMatches(ROUTE_ACTIVITIES.seance, day))
+  assert.ok(activityConditionMatches(ROUTE_ACTIVITIES.forage, day))
+  assert.ok(activityConditionMatches(ROUTE_ACTIVITIES.fishing, { time: 'day', weather: 'rain' }))
+  assert.ok(!activityConditionMatches(ROUTE_ACTIVITIES.fishing, { time: 'day', weather: 'sun' }))
+  // An activity with no favoured condition never qualifies.
+  assert.ok(!activityConditionMatches(ROUTE_ACTIVITIES.rockSmash, night))
+  assert.ok(!activityConditionMatches(undefined, night))
+
+  assert.equal(activityConditionLabel(ROUTE_ACTIVITIES.seance), 'at night')
+  assert.equal(activityConditionLabel(ROUTE_ACTIVITIES.forage), 'during the day')
+  assert.equal(activityConditionLabel(ROUTE_ACTIVITIES.fishing), 'in the rain')
+  assert.equal(activityConditionLabel(ROUTE_ACTIVITIES.rockSmash), null)
+
+  assert.equal(bumpActivityQuality('hit'), 'perfect')
+  assert.equal(bumpActivityQuality('perfect'), 'ultra')
+  assert.equal(bumpActivityQuality('ultra'), 'ultra')
+  assert.equal(bumpActivityQuality(null), null)
 })

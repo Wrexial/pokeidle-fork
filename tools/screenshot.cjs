@@ -526,6 +526,10 @@ async function main() {
     await sleep(600)
     await cdp.click('.location-minigame-start')
     await sleep(400)
+    // The first start opens the "how to play" tutorial; dismiss it.
+    await cdp.eval(
+      `(() => { const b = document.querySelector('.minigame-tutorial-close'); if (b) b.click(); return true })()`
+    )
     let gotEncounter = false
     for (let attempt = 0; attempt < 8 && !gotEncounter; attempt++) {
       await cdp.click('.move-panel-btn.confirm')
@@ -572,6 +576,10 @@ async function main() {
       })()`
     )
     if (startedHeadbutt) {
+      await sleep(300)
+      await cdp.eval(
+        `(() => { const b = document.querySelector('.minigame-tutorial-close'); if (b) b.click(); return true })()`
+      )
       await cdp.waitFor(`!!document.querySelector('.activity-trees')`, 5000, 'headbutt scene')
       await cdp.screenshot(path.join(OUT, '25-headbutt.png'))
       console.log('Headbutt scene ok')
@@ -583,6 +591,38 @@ async function main() {
     // Prospecting, Campfire, Overcharge, S\u00e9ance and Summit Roost, each with
     // its own interaction.
     const regionEntries = { kanto: 'palletTown', johto: 'johto-new-bark-town' }
+
+    // A route activity's "how to play" tutorial opens on first start. Capture
+    // the Campfire's (which also shows its night-favoured condition tag).
+    await cdp.eval(
+      `localStorage.setItem('pokemon-idle-save-v2', ${JSON.stringify(
+        JSON.stringify(minigameSave('kanto', 'pokemonMansion', 'pokemonMansion', ['palletTown', 'pokemonMansion']))
+      )}); 'ok'`
+    )
+    await cdp.send('Page.navigate', { url: APP_URL })
+    await cdp.waitFor('window.gameDataDebug.status().loaded === true', 20000, 'tutorial data')
+    await cdp.eval(
+      `(() => { const b = document.querySelector('.patch-notes-dismiss-btn'); if (b) b.click(); return true })()`
+    )
+    await sleep(500)
+    const startedTutorial = await cdp.eval(
+      `(() => {
+        const card = [...document.querySelectorAll('.location-minigame-card')].find((el) => /Campfire/.test(el.textContent))
+        if (!card) return false
+        card.querySelector('.location-minigame-start').click()
+        return true
+      })()`
+    )
+    if (startedTutorial) {
+      await cdp.waitFor(`!!document.querySelector('.minigame-tutorial')`, 5000, 'activity tutorial')
+      await cdp.screenshot(path.join(OUT, '26a-activity-tutorial.png'))
+      await cdp.eval(
+        `(() => { const b = document.querySelector('.minigame-tutorial-close'); if (b) b.click(); return true })()`
+      )
+      console.log('Activity tutorial ok')
+    } else {
+      console.log('WARNING: no Campfire card for the tutorial')
+    }
     const routeScenes = [
       ['Bug Catching', 'kanto', 'viridianForest', 'viridianForest', '26-bugCatch.png', '.activity-bugfield'],
       ['Rock Smash', 'kanto', 'mtMoon', 'mtMoon', '26b-rockSmash.png', '.activity-boulder'],
@@ -616,6 +656,11 @@ async function main() {
         })()`
       )
       if (started) {
+        // The first start opens the "how to play" tutorial; dismiss it.
+        await sleep(300)
+        await cdp.eval(
+          `(() => { const b = document.querySelector('.minigame-tutorial-close'); if (b) b.click(); return true })()`
+        )
         await cdp.waitFor(`!!document.querySelector('${selector}')`, 5000, file)
         await cdp.screenshot(path.join(OUT, file))
         console.log(`${title} scene ok`)

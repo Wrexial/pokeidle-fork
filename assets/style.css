@@ -4018,6 +4018,18 @@ img {
     padding: 1px 4px
 }
 
+.location-minigame-condition {
+    margin-bottom: 5px;
+    font-size: 7px;
+    letter-spacing: .3px;
+    text-transform: uppercase;
+    color: #8a9bb0
+}
+
+.location-minigame-condition.active {
+    color: var(--gold)
+}
+
 .location-minigame-start {
     width: 100%;
     padding: 6px 8px;
@@ -8520,6 +8532,17 @@ img {
     text-align: center;
     font-size: 8px;
     color: #9fd0ff
+}
+
+.activity-condition {
+    text-align: center;
+    font-size: 8px;
+    color: #8a9bb0
+}
+
+.activity-condition.active {
+    color: var(--gold);
+    text-shadow: 0 0 4px rgba(240,200,80,.5)
 }
 
 .activity-bar {

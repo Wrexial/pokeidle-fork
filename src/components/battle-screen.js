@@ -4,7 +4,7 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { BATTLE_LOG_RESERVE, DESIGN_HEIGHT, DESIGN_WIDTH } from '../data/ui.js'
 import { useGame } from '../game/context.js'
-import { MINIGAME_TUTORIALS, minigameIdForPhase } from '../game/minigames.js'
+import { MINIGAME_INFO, MINIGAME_TUTORIALS, ROUTE_ACTIVITIES, ROUTE_ACTIVITY_TUTORIALS, minigameIdForPhase } from '../game/minigames.js'
 import { useGameLoop } from '../game/use-game-loop.js'
 import { useIsMobile } from '../hooks.js'
 import { BattleLog } from './battle-log.js'
@@ -70,16 +70,27 @@ export function BattleScreen() {
   // A minigame's "how to play" tutorial takes over the stage until dismissed,
   // so the scene doesn't start its timers underneath it. It only auto-opens
   // once per save-agnostic preference (see `seenTutorials`).
-  const minigameId = minigameIdForPhase(state.phase),
-    tutorialSteps = minigameId ? MINIGAME_TUTORIALS[minigameId] : null,
-    tutorialSeen = minigameId ? Boolean(state.seenTutorials?.includes(minigameId)) : true,
+  const routeActivityId = state.phase === 'routeActivity' ? state.routeActivity : null,
+    minigameId = minigameIdForPhase(state.phase),
+    tutorialKey = routeActivityId ? `activity:${routeActivityId}` : minigameId,
+    tutorialTitle = routeActivityId
+      ? ROUTE_ACTIVITIES[routeActivityId]?.title
+      : minigameId
+        ? MINIGAME_INFO[minigameId]?.title
+        : null,
+    tutorialSteps = routeActivityId
+      ? ROUTE_ACTIVITY_TUTORIALS[routeActivityId]
+      : minigameId
+        ? MINIGAME_TUTORIALS[minigameId]
+        : null,
+    tutorialSeen = tutorialKey ? Boolean(state.seenTutorials?.includes(tutorialKey)) : true,
     showTutorial = Boolean(
-      tutorialSteps?.length && !tutorialSeen && tutorialDismissedId !== minigameId
+      tutorialSteps?.length && !tutorialSeen && tutorialDismissedId !== tutorialKey
     ),
     closeTutorial = () => {
-      if (minigameId && !tutorialSeen)
-        dispatch({ type: 'MARK_TUTORIAL_SEEN', payload: { minigameId } })
-      setTutorialDismissedId(minigameId)
+      if (tutorialKey && !tutorialSeen)
+        dispatch({ type: 'MARK_TUTORIAL_SEEN', payload: { minigameId: tutorialKey } })
+      setTutorialDismissedId(tutorialKey)
     }
   const scene = jsx('div', {
     className: 'battle-scene-scaler',
@@ -98,8 +109,12 @@ export function BattleScreen() {
   // (healing, evolution, a minigame) no longer closes one that is already open.
   const menus = jsx(BattleMenuModals, { menu, onClose: () => setMenu(null) })
   const tutorial =
-    showTutorial && minigameId
-      ? jsx(MinigameTutorial, { minigameId, onClose: closeTutorial })
+    showTutorial && tutorialTitle && tutorialSteps
+      ? jsx(MinigameTutorial, {
+          title: tutorialTitle,
+          steps: tutorialSteps,
+          onClose: closeTutorial,
+        })
       : null
   if (isMobile)
     return jsxs('div', {

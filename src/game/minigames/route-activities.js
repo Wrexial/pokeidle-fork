@@ -43,6 +43,7 @@ export const ACTIVITY_ULTRA_ZONE = 0.055
  *   mode: 'encounter' | 'loot',
  *   display: 'bar' | 'rings' | 'mash' | 'charge' | 'depth' | 'net' | 'grip' | 'dig' |
  *     'stoke' | 'circuit' | 'runes' | 'soar',
+ *   condition?: { time?: 'day' | 'night', weather?: string[] },
  *   preferTypes?: string[], encounterChance?: number, perfectEncounterChance?: number,
  *   deepWater?: boolean, propIcon?: string,
  * }>}
@@ -56,6 +57,7 @@ export const ROUTE_ACTIVITIES = {
     hint: 'Cast into the water and reel in on the sweet spot to hook a Water Pokemon. A perfect cast in the tiny centre boosts the shiny odds and level.',
     mode: 'encounter',
     display: 'bar',
+    condition: { weather: ['rain', 'heavyRain'] },
     preferTypes: ['Water'],
   },
   forage: {
@@ -66,6 +68,7 @@ export const ROUTE_ACTIVITIES = {
     hint: 'Time the ring as it closes on the centre to find berries and supplies. A perfect search fills the basket, and a berry combo grows the longer you keep landing them; now and then a Grass, Poison or Fairy Pokemon is hiding in the bush.',
     mode: 'loot',
     display: 'rings',
+    condition: { time: 'day' },
     preferTypes: ['Grass', 'Poison', 'Fairy'],
     // A successful search can flush out a hidden Grass-type instead of loot.
     encounterChance: 0.3,
@@ -89,6 +92,7 @@ export const ROUTE_ACTIVITIES = {
     hint: 'Hold one of the three trees to charge your headbutt, then let go in the sweet spot to shake loose the Normal and Flying Pokemon roosting in it.',
     mode: 'encounter',
     display: 'charge',
+    condition: { time: 'day' },
     preferTypes: ['Normal', 'Flying'],
   },
   diving: {
@@ -111,6 +115,7 @@ export const ROUTE_ACTIVITIES = {
     hint: 'A Bug darts out of the undergrowth \u2014 sweep your net over it before it flits away. A quicker catch turns up a rarer bug, or one carrying an item.',
     mode: 'encounter',
     display: 'net',
+    condition: { time: 'day' },
     preferTypes: ['Bug'],
     propIcon: '\u{1f41b}',
   },
@@ -142,6 +147,7 @@ export const ROUTE_ACTIVITIES = {
     hint: 'Feed the campfire to keep its heat in the sweet band without letting it flare over \u2014 the steadier the flame, the better the Fire Pokemon drawn to it.',
     mode: 'encounter',
     display: 'stoke',
+    condition: { time: 'night' },
     preferTypes: ['Fire'],
   },
   overcharge: {
@@ -152,6 +158,7 @@ export const ROUTE_ACTIVITIES = {
     hint: 'Time your discharge for the moment the spark crosses the contact \u2014 clean hits pull the Electric Pokemon out of the wiring.',
     mode: 'encounter',
     display: 'circuit',
+    condition: { weather: ['rain', 'heavyRain'] },
     preferTypes: ['Electric'],
   },
   seance: {
@@ -162,6 +169,7 @@ export const ROUTE_ACTIVITIES = {
     hint: 'Watch the runes light in order, then repeat the pattern \u2014 a clean reading draws out the Psychic, Ghost and Dark Pokemon lingering nearby.',
     mode: 'encounter',
     display: 'runes',
+    condition: { time: 'night' },
     preferTypes: ['Psychic', 'Ghost', 'Dark'],
   },
   summit: {
@@ -172,8 +180,77 @@ export const ROUTE_ACTIVITIES = {
     hint: 'Flap to ride the rising thermal and hold the band \u2014 reach the Dragon roost at the top before you stall.',
     mode: 'encounter',
     display: 'soar',
+    condition: { time: 'day' },
     preferTypes: ['Dragon'],
   },
+}
+
+/**
+ * Short "how to play" steps for each route activity, shown the first time it
+ * is started (and reopenable from its location card). Keyed by activity id.
+ * @type {Record<string, string[]>}
+ */
+export const ROUTE_ACTIVITY_TUTORIALS = {
+  fishing: [
+    'Tap CAST LINE to sweep the marker, then tap again to stop it on the sweet spot.',
+    'The tiny centre is a bullseye: a better hit means a higher level and better shiny odds.',
+    'A rare fish needs a second, perfect reel before it is yours.',
+  ],
+  forage: [
+    'Tap SEARCH to close the ring, then tap when it meets the target ring.',
+    'A perfect search fills the basket with berries and grows a berry combo.',
+    'A miss resets the combo, and now and then a Pokemon is hiding in the bush.',
+  ],
+  rockSmash: [
+    'Tap the boulder to start the timer, then mash it as fast as you can.',
+    'More taps before the timer drains means a better hit.',
+    'A clean break can crack out a gem, or rarely a fossil.',
+  ],
+  headbutt: [
+    'Press and hold a tree to charge the headbutt.',
+    'Let go in the sweet spot to shake a Pokemon loose.',
+    'Sometimes two fall out at once, and you choose one.',
+  ],
+  diving: [
+    'Tap DIVE to sweep the marker down the gauge.',
+    'Stop it on the sweet spot to reach the deeper Pokemon.',
+    'A clean dive can also uncover sunken treasure.',
+  ],
+  bugCatch: [
+    'A bug darts out of one of the bushes.',
+    'Tap it before it flits away.',
+    'The quicker the catch, the better the reward.',
+  ],
+  climb: [
+    'Press and hold to pull the climber up, release to let it drop.',
+    'Keep it on the green ledge band as the grip meter fills.',
+    'A steadier climb reaches stronger Pokemon.',
+  ],
+  prospecting: [
+    'Tap a hole to dig for buried relics.',
+    'The fewer holes it takes to strike treasure, the richer the haul.',
+    `You have three holes before the dig is a miss, and a clean dig can find a fossil.`,
+  ],
+  kindle: [
+    'Tap STOKE to feed the campfire and raise its heat.',
+    'Keep the flame inside the green band as the meter fills.',
+    'Let it flare over the top and the attempt is spoiled.',
+  ],
+  overcharge: [
+    'A spark orbits the coil.',
+    'Tap DISCHARGE the instant it crosses the contact at the top.',
+    'Three well-timed sparks make a clean round.',
+  ],
+  seance: [
+    'Watch the runes light in order.',
+    'When they stop, tap the same runes back in the same order.',
+    'A clean reading draws out rarer Pokemon.',
+  ],
+  summit: [
+    'Tap FLAP to give the dragon a burst of height.',
+    'Keep it inside the rising thermal band as it climbs.',
+    'Stay on the band to reach the roost.',
+  ],
 }
 
 /**
@@ -536,6 +613,48 @@ export const ACTIVITY_SOAR_MS = 2400
 
 /** Upward impulse a flap gives and the per-second gravity pulling back down. */
 export const ACTIVITY_SOAR = { flap: 1, gravity: 2.1, band: 0.24 }
+
+/**
+ * Whether an activity's favoured condition is active. Activities without a
+ * condition never qualify.
+ * @param {{ condition?: { time?: 'day' | 'night', weather?: string[] } } | null | undefined} activity
+ * @param {{ time?: 'day' | 'night', weather?: string | null }} [context]
+ * @returns {boolean}
+ */
+export function activityConditionMatches(activity, context = {}) {
+  const condition = activity?.condition
+  if (!condition) return false
+  if (condition.time && context.time !== condition.time) return false
+  if (condition.weather && !condition.weather.includes(context.weather ?? '')) return false
+  return true
+}
+
+/**
+ * A short human label for an activity's favoured condition, or null.
+ * @param {{ condition?: { time?: 'day' | 'night', weather?: string[] } } | null | undefined} activity
+ * @returns {string | null}
+ */
+export function activityConditionLabel(activity) {
+  const condition = activity?.condition
+  if (!condition) return null
+  if (condition.time === 'night') return 'at night'
+  if (condition.time === 'day') return 'during the day'
+  if (condition.weather?.some((weather) => /rain/i.test(weather))) return 'in the rain'
+  if (condition.weather?.length) return `in ${condition.weather[0]}`
+  return null
+}
+
+/**
+ * Bump a landed hit one tier when an activity's condition is favoured; a miss
+ * stays a miss.
+ * @param {'hit' | 'perfect' | 'ultra' | null} quality
+ * @returns {'hit' | 'perfect' | 'ultra' | null}
+ */
+export function bumpActivityQuality(quality) {
+  if (quality === 'hit') return 'perfect'
+  if (quality === 'perfect') return 'ultra'
+  return quality
+}
 
 /**
  * Roll a held item for an activity encounter, or null when it carries none.

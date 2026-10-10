@@ -39,6 +39,8 @@ import {
   activityBiteChance,
   activityBugQuality,
   activityCircuitQuality,
+  activityConditionLabel,
+  activityConditionMatches,
   activityDigQuality,
   activityGripQuality,
   activityLevelBonus,
@@ -48,6 +50,7 @@ import {
   activityRuneQuality,
   activityShinyMultiplier,
   bestRodId,
+  bumpActivityQuality,
   rodForId,
   rollActivityEncounter,
   rollActivityEncounters,
@@ -61,6 +64,8 @@ import {
 } from '../game/minigames.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
 import { checkShinyOdds, shinyOddsForSpecies } from '../game/progression.js'
+import { dayPhaseAt } from '../game/day-night.js'
+import { fieldWeatherFor } from '../game/weather.js'
 
 /** @typedef {'hit' | 'perfect' | 'ultra'} ActivityQuality */
 
@@ -470,7 +475,9 @@ export function RouteActivityScene() {
 
   // Fishing uses the best rod the player owns; other activities ignore it.
   const rod = rodForId(bestRodId(state.rods)),
-    pending = pendings[selectedPending] ?? null
+    pending = pendings[selectedPending] ?? null,
+    conditionLabel = activityConditionLabel(activity),
+    favoured = conditionFavoured()
 
   function leave() {
     dispatch({ type: 'END_ROUTE_ACTIVITY' })
@@ -571,6 +578,14 @@ export function RouteActivityScene() {
     setStage(attemptsLeft <= 0 ? 'done' : 'result')
   }
 
+  /** Whether the current time/weather favours this activity. */
+  function conditionFavoured() {
+    return activityConditionMatches(activity, {
+      time: dayPhaseAt().isNight ? 'night' : 'day',
+      weather: fieldWeatherFor(mapData[state.currentLocation])?.type ?? null,
+    })
+  }
+
   /**
    * Resolve an attempt at `quality` (`null` is a miss). All the outcome logic
    * lives here so every mechanic only has to grade its own interaction.
@@ -579,6 +594,8 @@ export function RouteActivityScene() {
   function finishAttempt(quality) {
     if (!activity || resolvedRef.current) return
     resolvedRef.current = true
+    // A favoured time or weather lifts a landed hit one tier.
+    if (conditionFavoured()) quality = bumpActivityQuality(quality)
     const nextAttempts = attemptsLeft - 1
     setAttemptsLeft(nextAttempts)
     if (!quality) {
@@ -1372,6 +1389,13 @@ export function RouteActivityScene() {
             jsxs('div', {
               className: 'activity-rod',
               children: [`Rod: `, rod.name, ` — `, rod.hint],
+            }),
+          conditionLabel &&
+            jsx('div', {
+              className: `activity-condition${favoured ? ' active' : ''}`,
+              children: favoured
+                ? `Favoured ${conditionLabel} \u2014 rewards boosted!`
+                : `Best ${conditionLabel}`,
             }),
           stage === 'encounter' && pendings.length > 0
             ? jsx('div', {

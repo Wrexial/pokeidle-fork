@@ -4,9 +4,9 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 
 /**
- * @param {{ icon?: string, title: string, hint: string, types?: string[], steps?: string[], actionLabel: string, disabled?: boolean, onStart: () => void }} props
+ * @param {{ icon?: string, title: string, hint: string, types?: string[], conditionLabel?: string | null, conditionActive?: boolean, steps?: string[], actionLabel: string, disabled?: boolean, onStart: () => void }} props
  */
-export function MinigameCard({ icon, title, hint, types, steps, actionLabel, disabled, onStart }) {
+export function MinigameCard({ icon, title, hint, types, conditionLabel, conditionActive, steps, actionLabel, disabled, onStart }) {
   const [helpOpen, setHelpOpen] = React.useState(false)
   return jsxs('div', {
     className: 'location-minigame-card',
@@ -28,6 +28,12 @@ export function MinigameCard({ icon, title, hint, types, steps, actionLabel, dis
                 type
               )
             ),
+          })
+        : null,
+      conditionLabel
+        ? jsx('div', {
+            className: `location-minigame-condition${conditionActive ? ' active' : ''}`,
+            children: conditionActive ? `\u2b50 Favoured ${conditionLabel}` : `Best ${conditionLabel}`,
           })
         : null,
       jsx('p', { className: 'location-minigame-hint', children: hint }),

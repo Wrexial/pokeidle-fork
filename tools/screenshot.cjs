@@ -579,11 +579,13 @@ async function main() {
       console.log('WARNING: no Headbutt activity card found')
     }
 
-    // The other route activities: Bug Catching, Rock Climbing and Prospecting.
+    // The other route activities: Bug Catching, Rock Smash, Rock Climbing and
+    // Prospecting, each with its own interaction.
     const routeScenes = [
-      ['Bug Catching', 'viridianForest', 'viridianForest', '26-bugCatch.png', '.activity-swing'],
-      ['Rock Climbing', 'mtMoon', 'mtMoon', '27-climb.png', '.activity-trees'],
-      ['Prospecting', 'mtMoon', 'mtMoon', '28-prospecting.png', '.activity-gauge-prospecting'],
+      ['Bug Catching', 'viridianForest', 'viridianForest', '26-bugCatch.png', '.activity-bugfield'],
+      ['Rock Smash', 'mtMoon', 'mtMoon', '26b-rockSmash.png', '.activity-boulder'],
+      ['Rock Climbing', 'mtMoon', 'mtMoon', '27-climb.png', '.activity-wall'],
+      ['Prospecting', 'mtMoon', 'mtMoon', '28-prospecting.png', '.activity-dig'],
     ]
     for (const [title, location, route, file, selector] of routeScenes) {
       await cdp.eval(

@@ -34,13 +34,16 @@ export const ACTIVITY_ULTRA_ZONE = 0.055
 /**
  * Route activities. `mode` picks the outcome: `encounter` starts a normal wild
  * battle from the route's table, `loot` pays out items and money. `display`
- * picks the timing visual (`bar` for fishing, `rings` for foraging) so the two
- * activities don't look alike.
+ * picks the interaction, and every activity has its own so none of them look
+ * or play alike: `bar` (sweep and stop), `rings` (closing ring), `mash`
+ * (rapid taps), `charge` (hold and release), `depth` (vertical sweep), `net`
+ * (reaction tap), `grip` (balanced hold) and `dig` (hidden grid).
  * @type {Record<string, {
  *   id: string, title: string, action: string, icon: string, hint: string,
- *   mode: 'encounter' | 'loot', display: 'bar' | 'rings' | 'swing' | 'charge' | 'depth',
+ *   mode: 'encounter' | 'loot',
+ *   display: 'bar' | 'rings' | 'mash' | 'charge' | 'depth' | 'net' | 'grip' | 'dig',
  *   preferTypes?: string[], encounterChance?: number, perfectEncounterChance?: number,
- *   deepWater?: boolean, markerIcon?: string, propIcon?: string,
+ *   deepWater?: boolean, propIcon?: string,
  * }>}
  */
 export const ROUTE_ACTIVITIES = {
@@ -72,9 +75,9 @@ export const ROUTE_ACTIVITIES = {
     title: 'Rock Smash',
     action: 'SMASH',
     icon: '\u{1faa8}',
-    hint: 'Smash a cracked boulder to shake out the Rock and Ground Pokemon sheltering inside \u2014 a clean hit can also crack out a gem, or rarely a fossil.',
+    hint: 'Mash the cracked boulder to shatter it open \u2014 the harder you smash, the better the Rock and Ground Pokemon shaken loose, and a clean break can crack out a gem, or rarely a fossil.',
     mode: 'encounter',
-    display: 'swing',
+    display: 'mash',
     preferTypes: ['Rock', 'Ground'],
   },
   headbutt: {
@@ -104,11 +107,10 @@ export const ROUTE_ACTIVITIES = {
     title: 'Bug Catching',
     action: 'SWEEP NET',
     icon: '\u{1f98b}',
-    hint: 'Sweep the net over the sweet spot as a Bug flits past \u2014 a clean catch can turn up a rarer bug, or one carrying an item.',
+    hint: 'A Bug darts out of the undergrowth \u2014 sweep your net over it before it flits away. A quicker catch turns up a rarer bug, or one carrying an item.',
     mode: 'encounter',
-    display: 'swing',
+    display: 'net',
     preferTypes: ['Bug'],
-    markerIcon: '\u{1f945}',
     propIcon: '\u{1f41b}',
   },
   climb: {
@@ -116,9 +118,9 @@ export const ROUTE_ACTIVITIES = {
     title: 'Rock Climbing',
     action: 'CLIMB',
     icon: '\u{1f9d7}',
-    hint: 'Hold a cliff face to climb, then let go in the sweet spot to reach the nest on the ledge \u2014 the Rock, Ground and Flying Pokemon roost up there.',
+    hint: 'Hold to haul yourself up the cliff and release to steady \u2014 keep the climber on the ledge band as the grip meter fills to reach the Rock, Ground and Flying Pokemon nesting overhead.',
     mode: 'encounter',
-    display: 'charge',
+    display: 'grip',
     preferTypes: ['Rock', 'Ground', 'Flying'],
     propIcon: '\u26f0\ufe0f',
   },
@@ -127,9 +129,9 @@ export const ROUTE_ACTIVITIES = {
     title: 'Prospecting',
     action: 'DIG',
     icon: '\u26cf\ufe0f',
-    hint: 'Dig at the sweet spot to unearth buried treasure \u2014 valuables, evolution stones and, on a perfect dig, an ancient fossil.',
+    hint: 'Dig the relics out of the buried grid \u2014 the fewer holes it takes to strike treasure, the richer the haul, and a clean dig can unearth an ancient fossil.',
     mode: 'loot',
-    display: 'depth',
+    display: 'dig',
   },
 }
 
@@ -266,6 +268,98 @@ export function activityLevelBonus(quality) {
  */
 export function activityShinyMultiplier(quality) {
   return ACTIVITY_SHINY_MULTIPLIER[quality] ?? 1
+}
+
+/**
+ * Grade a distance from the sweet spot shared by the sweep interactions
+ * (fishing's bar, foraging's ring, diving's depth gauge). A bullseye is the
+ * tightest centre, then a perfect hit, then the wider hit zone; anything
+ * outside that is a miss (`null`).
+ * @param {number} distance Distance from the 0.5 sweet spot.
+ * @returns {'hit' | 'perfect' | 'ultra' | null}
+ */
+export function activityQualityForDistance(distance) {
+  if (distance <= ACTIVITY_ULTRA_ZONE) return 'ultra'
+  if (distance <= ACTIVITY_PERFECT_ZONE) return 'perfect'
+  if (distance <= ACTIVITY_HIT_ZONE) return 'hit'
+  return null
+}
+
+/** How long a rock-smash mash window stays open, in ms. */
+export const ACTIVITY_MASH_MS = 1600
+
+/** Taps needed inside the mash window for each hit quality. */
+export const ACTIVITY_MASH_TAPS = { hit: 3, perfect: 6, ultra: 10 }
+
+/**
+ * Grade how hard a boulder was mashed.
+ * @param {number} taps
+ * @returns {'hit' | 'perfect' | 'ultra' | null}
+ */
+export function activityMashQuality(taps) {
+  if (taps >= ACTIVITY_MASH_TAPS.ultra) return 'ultra'
+  if (taps >= ACTIVITY_MASH_TAPS.perfect) return 'perfect'
+  if (taps >= ACTIVITY_MASH_TAPS.hit) return 'hit'
+  return null
+}
+
+/** How long a bug stays out before it flits away, in ms. */
+export const ACTIVITY_BUG_FLEE_MS = 1800
+
+/** How many bushes a bug can dart out of in a sweep. */
+export const ACTIVITY_BUG_SPOTS = 5
+
+/** Reaction time (ms) that still lands each hit quality. */
+export const ACTIVITY_BUG_REACTION = { ultra: 380, perfect: 750, hit: 1300 }
+
+/**
+ * Grade how quickly the net met the bug.
+ * @param {number} elapsedMs Time between the bug appearing and the sweep.
+ * @returns {'hit' | 'perfect' | 'ultra' | null}
+ */
+export function activityBugQuality(elapsedMs) {
+  if (elapsedMs <= ACTIVITY_BUG_REACTION.ultra) return 'ultra'
+  if (elapsedMs <= ACTIVITY_BUG_REACTION.perfect) return 'perfect'
+  if (elapsedMs <= ACTIVITY_BUG_REACTION.hit) return 'hit'
+  return null
+}
+
+/** How long the climber must hang on before the attempt resolves, in ms. */
+export const ACTIVITY_GRIP_MS = 2200
+
+/** Where the ledge band sits on the cliff (0 = top, 1 = bottom). */
+export const ACTIVITY_GRIP_CENTER = 0.5
+
+/** How wide the ledge band is, in 0..1 cliff units. */
+export const ACTIVITY_GRIP_BAND = 0.24
+
+/**
+ * Grade how steadily the climber held the ledge band.
+ * @param {number} ratio Fraction of the climb spent inside the band.
+ * @returns {'hit' | 'perfect' | 'ultra' | null}
+ */
+export function activityGripQuality(ratio) {
+  if (ratio >= 0.45) return 'ultra'
+  if (ratio >= 0.28) return 'perfect'
+  if (ratio >= 0.1) return 'hit'
+  return null
+}
+
+/** The prospecting grid is this many cells square. */
+export const ACTIVITY_DIG_SIZE = 3
+
+/** Holes that can be dug before a prospecting attempt misses. */
+export const ACTIVITY_DIG_TRIES = 3
+
+/**
+ * Grade a prospecting dig by how few holes it took to strike treasure.
+ * @param {number} tries
+ * @returns {'hit' | 'perfect' | 'ultra'}
+ */
+export function activityDigQuality(tries) {
+  if (tries <= 1) return 'ultra'
+  if (tries === 2) return 'perfect'
+  return 'hit'
 }
 
 /**

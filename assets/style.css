@@ -10598,56 +10598,8 @@ img {
     background-image: url(/backgrounds/ruins.webp)
 }
 
-.activity-climb .activity-tree {
-    background: linear-gradient(180deg,#6f675b,#38332c);
-    border-color: #8d8478;
-    border-radius: 18px 18px 8px 8px
-}
-
 .activity-diving .minigame-scene-bg {
     background: linear-gradient(180deg,rgba(10,40,80,.45),rgba(4,16,40,.82))
-}
-
-.activity-swing {
-    position: relative;
-    width: 90%;
-    height: 66px;
-    overflow: hidden;
-    background: rgba(20,14,6,.6);
-    border: 2px solid #8a7040;
-    border-radius: 4px
-}
-
-.activity-swing-marker {
-    position: absolute;
-    top: 3px;
-    transform: translateX(-50%);
-    font-size: 18px;
-    line-height: 1
-}
-
-.activity-swing-marker.hit {
-    filter: drop-shadow(0 0 4px #6ab04c)
-}
-
-.activity-swing-marker.perfect {
-    filter: drop-shadow(0 0 6px #f0c850)
-}
-
-.activity-swing-marker.ultra {
-    filter: drop-shadow(0 0 8px #54e0ff)
-}
-
-.activity-swing.locked .activity-swing-marker {
-    opacity: 0.5
-}
-
-.activity-swing-prop {
-    position: absolute;
-    bottom: 2px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 22px
 }
 
 .activity-gauge {
@@ -10741,10 +10693,6 @@ img {
     background: linear-gradient(180deg,#0b3a6a,#062038)
 }
 
-.activity-gauge-prospecting {
-    background: linear-gradient(180deg,#6b4a2a,#2e1c10)
-}
-
 .activity-gauge-marker {
     position: absolute;
     left: 50%;
@@ -10767,6 +10715,304 @@ img {
 
 .activity-gauge.locked .activity-gauge-marker {
     opacity: 0.5
+}
+
+/* Rock smash: mash the boulder before the timer drains. */
+.activity-mash {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%
+}
+
+.activity-mash-timer {
+    position: relative;
+    width: 80%;
+    height: 10px;
+    overflow: hidden;
+    background: rgba(10,14,10,.8);
+    border: 2px solid #8a7040;
+    border-radius: 4px
+}
+
+.activity-mash-timer-fill {
+    position: absolute;
+    inset: 0;
+    transform: scaleX(1);
+    transform-origin: left;
+    background: linear-gradient(90deg,#f0c850,#ff6a3d)
+}
+
+.activity-mash-timer-fill.running {
+    animation-name: activityMashDrain;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards
+}
+
+@keyframes activityMashDrain {
+    from { transform: scaleX(1) }
+    to { transform: scaleX(0) }
+}
+
+.activity-boulder {
+    width: 132px;
+    height: 108px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 70px;
+    line-height: 1;
+    background: linear-gradient(180deg,#8a8578,#4a463d);
+    border: 2px solid #b3ab98;
+    border-radius: 46% 54% 48% 52%;
+    cursor: pointer;
+    touch-action: none;
+    user-select: none;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,.5));
+    transition: transform .06s ease, filter .06s ease
+}
+
+.activity-boulder.active {
+    box-shadow: 0 0 0 3px var(--gold), 0 0 18px rgba(255,214,90,.6)
+}
+
+.activity-boulder:active:not(:disabled) {
+    transform: scale(.93)
+}
+
+.activity-boulder:disabled {
+    cursor: default;
+    opacity: .75
+}
+
+.activity-mash-power {
+    position: relative;
+    width: 80%;
+    height: 16px;
+    overflow: hidden;
+    background: rgba(10,14,10,.8);
+    border: 2px solid #8a7040;
+    border-radius: 4px
+}
+
+.activity-mash-power-fill {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(90deg,#6ab04c,#f0c850,#54e0ff);
+    transition: width .05s linear
+}
+
+.activity-mash-count {
+    font-size: 9px;
+    color: var(--gold)
+}
+
+/* Bug catching: tap the bug before it flits away. */
+.activity-bugfield {
+    position: relative;
+    width: 90%;
+    height: 172px;
+    overflow: hidden;
+    background: linear-gradient(180deg,rgba(20,50,25,.45),rgba(8,22,12,.6));
+    border: 2px solid #5a7d3a;
+    border-radius: 6px
+}
+
+.activity-bug-bush {
+    position: absolute;
+    transform: translate(-50%,-50%);
+    font-size: 30px;
+    opacity: .75;
+    pointer-events: none
+}
+
+.activity-bug {
+    position: absolute;
+    box-sizing: border-box;
+    padding: 0;
+    transform: translate(-50%,-50%);
+    font-size: 34px;
+    line-height: 1;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    touch-action: manipulation;
+    filter: drop-shadow(0 0 6px rgba(255,255,255,.55));
+    animation: activityBugWiggle .4s ease-in-out infinite alternate
+}
+
+.activity-bugfield.locked .activity-bug {
+    opacity: .45;
+    cursor: default;
+    animation-play-state: paused
+}
+
+@keyframes activityBugWiggle {
+    from { transform: translate(-50%,-50%) rotate(-9deg) }
+    to { transform: translate(-50%,-50%) rotate(9deg) }
+}
+
+.activity-bug-timer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 5px;
+    background: rgba(255,255,255,.16)
+}
+
+.activity-bug-timer-fill {
+    height: 100%;
+    transform: scaleX(1);
+    transform-origin: left;
+    background: #f0c850;
+    animation-name: activityBugDrain;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards
+}
+
+@keyframes activityBugDrain {
+    from { transform: scaleX(1) }
+    to { transform: scaleX(0) }
+}
+
+/* Rock climbing: hold the grip to keep the climber on the ledge band. */
+.activity-grip {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%
+}
+
+.activity-wall {
+    position: relative;
+    width: 124px;
+    height: 186px;
+    overflow: hidden;
+    background: linear-gradient(180deg,#6f675b,#2e2a24);
+    border: 2px solid #8d8478;
+    border-radius: 8px
+}
+
+.activity-wall-band {
+    position: absolute;
+    left: 0;
+    right: 0;
+    background: rgba(106,176,76,.32);
+    border-top: 1px solid #6ab04c;
+    border-bottom: 1px solid #6ab04c
+}
+
+.activity-climber {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 26px;
+    line-height: 1
+}
+
+.activity-grip-progress {
+    position: relative;
+    width: 70%;
+    height: 12px;
+    overflow: hidden;
+    background: rgba(10,14,10,.8);
+    border: 2px solid #8a7040;
+    border-radius: 4px
+}
+
+.activity-grip-progress-fill {
+    position: absolute;
+    inset: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+    background: linear-gradient(90deg,#6ab04c,#54e0ff)
+}
+
+.activity-hold {
+    width: 70%;
+    padding: 8px 10px;
+    font-family: inherit;
+    font-size: 9px;
+    color: var(--parchment);
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    background: linear-gradient(180deg,#4a4034,#2a241c);
+    border: 2px solid #8d8478;
+    border-radius: 6px;
+    cursor: pointer;
+    touch-action: none;
+    user-select: none
+}
+
+.activity-hold.holding {
+    color: #101408;
+    background: linear-gradient(180deg,#ffd65a,#c89020);
+    border-color: #ffe89a;
+    box-shadow: 0 0 14px rgba(255,214,90,.6)
+}
+
+.activity-hold:disabled {
+    cursor: default;
+    opacity: .6
+}
+
+/* Prospecting: dig the buried grid, beating the hole limit. */
+.activity-dig {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px
+}
+
+.activity-dig-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 64px);
+    gap: 8px
+}
+
+.activity-dig-cell {
+    box-sizing: border-box;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    background: linear-gradient(180deg,#6b4a2a,#2e1c10);
+    border: 2px solid #8a7040;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: filter .1s ease, transform .1s ease
+}
+
+.activity-dig-cell:hover:not(:disabled) {
+    filter: brightness(1.15);
+    transform: translateY(-1px)
+}
+
+.activity-dig-cell.dug {
+    background: linear-gradient(180deg,#3a2a1a,#1c120a);
+    border-color: #5a4528
+}
+
+.activity-dig-cell.treasure {
+    background: linear-gradient(180deg,#f0c850,#c89020);
+    border-color: #ffe89a;
+    box-shadow: 0 0 12px rgba(240,200,80,.7)
+}
+
+.activity-dig-cell:disabled {
+    cursor: default
+}
+
+.activity-dig-tries {
+    font-size: 9px;
+    color: var(--gold)
 }
 
 .academy-scene {

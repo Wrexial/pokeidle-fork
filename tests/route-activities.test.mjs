@@ -8,13 +8,21 @@ const gameData = installGameData()
 const {
   ACTIVITY_ATTEMPTS,
   ACTIVITY_BITE_CHANCE,
+  ACTIVITY_BUG_FLEE_MS,
+  ACTIVITY_DIG_TRIES,
   ACTIVITY_HIT_ZONE,
+  ACTIVITY_MASH_TAPS,
   ACTIVITY_PERFECT_ZONE,
   ACTIVITY_ULTRA_ZONE,
   FISHING_LOCATIONS,
   ROUTE_ACTIVITIES,
   activityBiteChance,
+  activityBugQuality,
+  activityDigQuality,
+  activityGripQuality,
   activityLevelBonus,
+  activityMashQuality,
+  activityQualityForDistance,
   activityRewardName,
   activityShinyMultiplier,
   rollActivityEncounter,
@@ -431,7 +439,7 @@ test('END_ROUTE_ACTIVITY returns to idle', () => {
 })
 
 test('rock smash, headbutt and diving are offered only where their types live', () => {
-  assert.equal(ROUTE_ACTIVITIES.rockSmash.display, 'swing')
+  assert.equal(ROUTE_ACTIVITIES.rockSmash.display, 'mash')
   assert.equal(ROUTE_ACTIVITIES.headbutt.display, 'charge')
   assert.equal(ROUTE_ACTIVITIES.diving.display, 'depth')
   for (const activity of [ROUTE_ACTIVITIES.rockSmash, ROUTE_ACTIVITIES.headbutt, ROUTE_ACTIVITIES.diving]) {
@@ -504,9 +512,9 @@ test('diving uncovers treasure and rock smash cracks out gems', () => {
 
 test('bug catching and climbing roll their terrain types', () => {
   assert.equal(ROUTE_ACTIVITIES.bugCatch.mode, 'encounter')
-  assert.equal(ROUTE_ACTIVITIES.bugCatch.display, 'swing')
+  assert.equal(ROUTE_ACTIVITIES.bugCatch.display, 'net')
   assert.equal(ROUTE_ACTIVITIES.climb.mode, 'encounter')
-  assert.equal(ROUTE_ACTIVITIES.climb.display, 'charge')
+  assert.equal(ROUTE_ACTIVITIES.climb.display, 'grip')
 
   const find = (/** @type {string} */ id) =>
     locations.find((location) => routeActivityIds(location).includes(id))
@@ -549,7 +557,7 @@ test('bug catching and climbing roll their terrain types', () => {
 
 test('prospecting digs up real relics and can turn up a bonus', () => {
   assert.equal(ROUTE_ACTIVITIES.prospecting.mode, 'loot')
-  assert.equal(ROUTE_ACTIVITIES.prospecting.display, 'depth')
+  assert.equal(ROUTE_ACTIVITIES.prospecting.display, 'dig')
   assert.ok(
     locations.some((location) => routeActivityIds(location).includes('prospecting')),
     'some route supports prospecting'
@@ -598,4 +606,50 @@ test('START_ROUTE_ACTIVITY starts the new activities where they are offered', ()
     })
   assert.equal(started.phase, 'routeActivity')
   assert.equal(started.routeActivity, 'prospecting')
+})
+
+test('every route activity has its own interaction', () => {
+  const displays = Object.values(ROUTE_ACTIVITIES).map((activity) => activity.display)
+  assert.equal(displays.length, 8, 'all eight activities are accounted for')
+  assert.equal(
+    new Set(displays).size,
+    displays.length,
+    'no two activities share an interaction'
+  )
+  for (const activity of Object.values(ROUTE_ACTIVITIES))
+    assert.ok(activity.display, `${activity.id} declares a display`)
+})
+
+test('the sweep interactions grade by distance from the sweet spot', () => {
+  assert.equal(activityQualityForDistance(0), 'ultra')
+  assert.equal(activityQualityForDistance(ACTIVITY_ULTRA_ZONE), 'ultra')
+  assert.equal(activityQualityForDistance(ACTIVITY_ULTRA_ZONE + 0.001), 'perfect')
+  assert.equal(activityQualityForDistance(ACTIVITY_PERFECT_ZONE), 'perfect')
+  assert.equal(activityQualityForDistance(ACTIVITY_PERFECT_ZONE + 0.001), 'hit')
+  assert.equal(activityQualityForDistance(ACTIVITY_HIT_ZONE), 'hit')
+  assert.equal(activityQualityForDistance(ACTIVITY_HIT_ZONE + 0.001), null)
+})
+
+test('the mash, net, grip and dig interactions grade their own metrics', () => {
+  assert.equal(activityMashQuality(0), null, 'an untouched boulder resists')
+  assert.equal(activityMashQuality(ACTIVITY_MASH_TAPS.hit), 'hit')
+  assert.equal(activityMashQuality(ACTIVITY_MASH_TAPS.perfect), 'perfect')
+  assert.equal(activityMashQuality(ACTIVITY_MASH_TAPS.ultra), 'ultra')
+  assert.equal(activityMashQuality(999), 'ultra', 'over-smashing tops out at ultra')
+
+  assert.equal(activityBugQuality(0), 'ultra', 'an instant sweep is a bullseye')
+  assert.equal(
+    activityBugQuality(ACTIVITY_BUG_FLEE_MS),
+    null,
+    'a bug that sat out the whole window flees'
+  )
+
+  assert.equal(activityGripQuality(0), null, 'falling the whole way finds nothing')
+  assert.equal(activityGripQuality(1), 'ultra', 'a steady climb tops out at ultra')
+  assert.equal(activityGripQuality(0.3), 'perfect')
+  assert.equal(activityGripQuality(0.15), 'hit')
+
+  assert.equal(activityDigQuality(1), 'ultra', 'the first hole is gold')
+  assert.equal(activityDigQuality(2), 'perfect')
+  assert.equal(activityDigQuality(ACTIVITY_DIG_TRIES), 'hit')
 })

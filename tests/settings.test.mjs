@@ -45,13 +45,18 @@ test('audio defaults: music off, sound effects on', () => {
   assert.equal(initialGameState.sfxEnabled, true)
 })
 
-test('battle style defaults to Switch and can be set to Set', () => {
+test('battle style defaults to Switch and can be set to Set or Training', () => {
   assert.equal(initialGameState.battleStyle, 'switch')
   const setStyle = gameReducer(initialGameState, {
     type: 'SET_BATTLE_STYLE',
     payload: { style: 'set' },
   })
   assert.equal(setStyle.battleStyle, 'set')
+  const trainingStyle = gameReducer(initialGameState, {
+    type: 'SET_BATTLE_STYLE',
+    payload: { style: 'training' },
+  })
+  assert.equal(trainingStyle.battleStyle, 'training')
   assert.equal(
     gameReducer(setStyle, { type: 'SET_BATTLE_STYLE', payload: { style: 'switch' } }).battleStyle,
     'switch'
@@ -106,6 +111,7 @@ test('repairSave defaults the accessibility settings off and keeps them on', () 
   assert.equal(repairSave(save({ musicEnabled: true, sfxEnabled: false })).sfxEnabled, false)
   assert.equal(defaults.battleStyle, 'switch')
   assert.equal(repairSave(save({ battleStyle: 'set' })).battleStyle, 'set')
+  assert.equal(repairSave(save({ battleStyle: 'training' })).battleStyle, 'training')
   assert.equal(repairSave(save({ battleStyle: 'garbage' })).battleStyle, 'switch')
   // The notification category toggles default on and keep an explicit off.
   assert.equal(defaults.notifyShiny, true)

@@ -45,6 +45,7 @@ export const CHANGELOG = [
             'A pass on the out-of-battle abilities: Flame Body, Magma Armor and Steam Engine halve the time an Egg needs to hatch; Static and Lightning Rod draw in Electric-type wild Pokemon, Magnet Pull Steel and Storm Drain Water (about twice as common); Cute Charm makes a wild Pokemon more likely to be the opposite gender to your lead; and Super Luck and Compound Eyes make wild Pokemon twice as likely to hold an item',
             'Fishing has proper bite rolls now: a cast can come up empty, and Suction Cups or Sticky Hold steady the line for a much better bite chance. The rarest fish on a route are \u201cmulti-catch\u201d \u2014 you have to land the perfect reel twice to haul one in, with a REEL IN beat after the first bite',
             'Honey does more than draw the species out now: the honied Pokemon is also easier to catch (a 1.5x catch-rate bonus), so a Honey hunt is quicker to land as well as easier to find',
+            'A third battle style joins Set and Switch: Training. It keeps your lead in so it earns the EXP \u2014 no switching away just for a better type matchup \u2014 but pulls it out for the healthiest teammate once it drops below a third of its HP, so a bad turn doesn\u2019t faint the Pokemon you are levelling. And once that lead reaches level 100 its wins share EXP with the rest of the party instead of wasting it',
           ],
         },
         {

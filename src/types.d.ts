@@ -493,8 +493,8 @@ type GameState = {
   unlockedRegions: string[]
   speed: number
   paused: boolean
-  /** Set never auto-switches; Switch lets the auto-battler pick a better matchup. */
-  battleStyle: 'set' | 'switch'
+  /** Set never auto-switches; Switch picks a better matchup; Training protects a low-HP lead and shares a maxed one's EXP. */
+  battleStyle: 'set' | 'switch' | 'training'
   /** Auto battles run by themselves; manual waits for the player to choose. */
   battleMode: 'auto' | 'manual'
   autoCatch: boolean

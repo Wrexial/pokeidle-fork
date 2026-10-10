@@ -11,6 +11,15 @@ import { MonotypeSelect } from './monotype-select.js'
 import { OfflinePanel } from './offline-panel.js'
 import { SaveSlotsPanel } from './save-slots.js'
 
+/** @type {Record<string, string>} */
+const BATTLE_STYLE_LABELS = { switch: 'Switch', set: 'Set', training: 'Training' }
+
+/**
+ * The style the Settings toggle advances to, cycling Switch -> Set -> Training.
+ * @type {Record<string, string>}
+ */
+const NEXT_BATTLE_STYLE = { switch: 'set', set: 'training', training: 'switch' }
+
 /** @param {{ onClose: () => void }} props */
 export function SettingsModal({ onClose }) {
   const { state, dispatch } = useGame()
@@ -270,19 +279,16 @@ export function SettingsModal({ onClose }) {
                       jsx('p', {
                         className: 'settings-hint',
                         children:
-                          'Switch (the default) lets your auto-battler switch to a better type matchup on its own; Set never switches automatically. Your Pokemon still send the next one out after a faint either way.',
+                          'Switch (the default) lets your auto-battler switch to a better type matchup on its own; Set never switches automatically. Training keeps your lead in to level it \u2014 it only switches away when the lead is badly hurt, and shares a level-100 lead\u2019s EXP with the rest of the party. Your Pokemon still send the next one out after a faint either way.',
                       }),
                       jsx('button', {
                         className: `settings-toggle-btn${state.battleStyle === 'switch' ? ' active' : ''}`,
                         onClick: () =>
                           dispatch({
                             type: 'SET_BATTLE_STYLE',
-                            payload: { style: state.battleStyle === 'switch' ? 'set' : 'switch' },
+                            payload: { style: NEXT_BATTLE_STYLE[state.battleStyle] ?? 'switch' },
                           }),
-                        children:
-                          state.battleStyle === 'switch'
-                            ? 'Battle Style: Switch'
-                            : 'Battle Style: Set',
+                        children: `Battle Style: ${BATTLE_STYLE_LABELS[state.battleStyle] ?? 'Switch'}`,
                       }),
                       jsx('button', {
                         className: `settings-toggle-btn${state.battleMode === 'manual' ? ' active' : ''}`,

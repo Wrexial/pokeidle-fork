@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 installGameData()
 
-const { AI_SKILL, calculateDamage, chooseBestSwitch, chooseMoveForBattle, resolveBattleTurn } = await import('../src/game/combat.js')
+const { AI_SKILL, calculateDamage, chooseBestSwitch, chooseTrainingSwitch, chooseMoveForBattle, resolveBattleTurn } = await import('../src/game/combat.js')
 const { variablePower } = await import('../src/game/combat/variable-power.js')
 const { moveData } = await import('../src/data/gameData.js')
 const { genderForPokemon } = await import('../src/game/breeding.js')
@@ -741,6 +741,35 @@ test('the AI switches out of a losing matchup when a teammate lines up better', 
   assert.equal(chooseBestSwitch(charizard, [charizard, venusaur, fainted], foe, 0), 1)
   // Grass already wins the matchup, and a fainted teammate is never chosen.
   assert.equal(chooseBestSwitch(venusaur, [charizard, venusaur, fainted], foe, 1), -1)
+})
+
+test('Training mode keeps a safe lead in but pulls a hurt one out', () => {
+  const hurtLead = battler({
+      speciesKey: 'charizard',
+      types: ['Fire', 'Flying'],
+      currentHp: 80,
+      maxHp: 400,
+    }),
+    healthyMate = battler({ speciesKey: 'venusaur', currentHp: 400, maxHp: 400 }),
+    mediumMate = battler({ speciesKey: 'blastoise', currentHp: 200, maxHp: 400 }),
+    woundedMate = battler({ speciesKey: 'pidgey', currentHp: 120, maxHp: 400 }),
+    fainted = battler({ speciesKey: 'caterpie', currentHp: 0 })
+  // Not in danger: even a losing matchup stays in so it keeps earning EXP.
+  assert.equal(
+    chooseTrainingSwitch(
+      battler({ speciesKey: 'charizard', types: ['Fire', 'Flying'] }),
+      [hurtLead, healthyMate],
+      0
+    ),
+    -1
+  )
+  // Low on HP: hand the field to the healthiest battle-ready teammate.
+  assert.equal(chooseTrainingSwitch(hurtLead, [hurtLead, healthyMate, mediumMate, fainted], 0), 1)
+  // Any teammate out of danger will do, not only the healthiest one.
+  assert.equal(chooseTrainingSwitch(hurtLead, [hurtLead, mediumMate, woundedMate], 0), 1)
+  // Nobody out of danger: stay in rather than ping-pong between hurt Pokemon.
+  assert.equal(chooseTrainingSwitch(hurtLead, [hurtLead, woundedMate, fainted], 0), -1)
+  assert.equal(chooseTrainingSwitch(woundedMate, [woundedMate, fainted], 0), -1)
 })
 
 test('AI skill tiers change how a battler plays', () => {

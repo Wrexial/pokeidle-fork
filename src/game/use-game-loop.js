@@ -13,7 +13,7 @@ import { useGame } from './context.js'
 import { attemptCatch, isCaveLocation, isNightTime, isWaterLocation, selectAutoCatchBall, selectBestBall, shouldAutoCatch } from './catching.js'
 import { abilityOf } from './abilities.js'
 import { companionExpMultiplier } from './companion.js'
-import { applyBattleForm, createBattlePokemon, createVolatileState, resolveBattleTurn, volatileStateFromBattle, AI_SKILL, chooseBestSwitch } from './combat.js'
+import { applyBattleForm, createBattlePokemon, createVolatileState, resolveBattleTurn, volatileStateFromBattle, AI_SKILL, chooseBestSwitch, chooseTrainingSwitch } from './combat.js'
 import { isBattleReady } from './pokemon.js'
 import { awardExperience, checkShinyOdds, encountersForPhase, isHoneyActive, pokerusExpMultiplier, raidProgressFor, resolveActiveModifiers, resolvePokemonEncounter, resolveRoamer, shinyOddsForSpecies, ENCOUNTER_TYPE_ABILITY } from './progression.js'
 
@@ -536,11 +536,12 @@ export function useGameLoop() {
             // If the player already switched or used an item this turn, their
             // Pokemon does not attack — only the foe acts.
             playerSkipMove = !!currentGameState.playerTurnSpent
-          // The Champion and the player's auto-battler may switch to a better
-          // type matchup before the turn resolves. The player's switching is
-          // the Set / Switch battle-style option: Set never switches on its
-          // own, Switch (the default) does. Manual mode never auto-switches —
-          // the player decides.
+          // The Champion and the player's auto-battler may switch before the
+          // turn resolves. The player's switching is the Set / Switch battle
+          // style: Set never switches on its own, Switch (the default) swaps to
+          // a better type matchup, and Training only pulls its lead out when
+          // that lead is in danger so it can keep levelling. Manual mode never
+          // auto-switches — the player decides.
           const playerTrapped =
               !!currentGameState.playerVolatile?.trappedByMove ||
               !!currentGameState.playerVolatile?.trappedByAbility ||
@@ -555,12 +556,18 @@ export function useGameLoop() {
               currentGameState.battleMode === 'manual' ||
               currentGameState.battleStyle === 'set'
                 ? -1
-                : chooseBestSwitch(
-                  playerBattlePokemon,
-                  currentGameState.party,
-                  enemyBattlePokemon,
-                  currentGameState.activePlayerPokemonIndex
-                )
+                : currentGameState.battleStyle === 'training'
+                  ? chooseTrainingSwitch(
+                      playerBattlePokemon,
+                      currentGameState.party,
+                      currentGameState.activePlayerPokemonIndex
+                    )
+                  : chooseBestSwitch(
+                      playerBattlePokemon,
+                      currentGameState.party,
+                      enemyBattlePokemon,
+                      currentGameState.activePlayerPokemonIndex
+                    )
           if (playerSwitch >= 0) {
             dispatch({
               type: 'SWITCH_PLAYER_POKEMON',
@@ -662,9 +669,12 @@ export function useGameLoop() {
             })
             return
           }
-          const hasExpShare = currentGameState.activeEffects.some(
-            (effect) => effect.type === 'expShare'
-          )
+          const hasExpShare =
+            currentGameState.activeEffects.some((effect) => effect.type === 'expShare') ||
+            // Training mode hands a maxed-out lead's EXP to the rest of the
+            // party instead of letting it go to waste at level 100.
+            (currentGameState.battleStyle === 'training' &&
+              (currentGameState.playerPokemon.level ?? 0) >= 100)
           if (currentGameState.playerPokemon.currentHp <= 0) {
             // A double knockout (Explosion, recoil or residual felled the user
             // after the foe): the encounter is already won, so release the

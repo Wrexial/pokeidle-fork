@@ -168,6 +168,12 @@ export function chooseMoveForBattle(attacker, defender, hazards, skill = AI_SKIL
 const SWITCH_MARGIN = 40
 
 /**
+ * Training mode pulls the Pokemon it is levelling out once its HP drops below
+ * this fraction, so a bad turn can't faint it and waste the training.
+ */
+const TRAINING_DANGER_HP = 1 / 3
+
+/**
  * The best power-weighted attack `attacker` can land on `defender`, by type
  * matchup. Status moves count as 0.
  * @param {BattlePokemon} attacker
@@ -215,6 +221,34 @@ export function chooseBestSwitch(active, party, foe, activeIndex) {
     const score = matchupScore(member, foe)
     if (score > bestScore) {
       bestScore = score
+      bestIndex = index
+    }
+  })
+  return bestIndex
+}
+
+/**
+ * Training mode's switch: unlike {@link chooseBestSwitch}, the active Pokemon
+ * is only pulled out when it is actually in danger (low HP), never just for a
+ * better type matchup - the point is to let it keep fighting and earning
+ * EXP. It hands the field to the healthiest battle-ready teammate that is
+ * itself out of danger, and returns -1 to stay in when the active Pokemon is
+ * safe (or nobody is in better shape).
+ * @param {BattlePokemon} active
+ * @param {BattlePokemon[]} party
+ * @param {number} activeIndex
+ * @returns {number}
+ */
+export function chooseTrainingSwitch(active, party, activeIndex) {
+  const activeHp = active.maxHp > 0 ? active.currentHp / active.maxHp : 1
+  if (activeHp > TRAINING_DANGER_HP) return -1
+  let bestIndex = -1,
+    bestHp = TRAINING_DANGER_HP
+  ;(party ?? []).forEach((member, index) => {
+    if (index === activeIndex || !member || member.currentHp <= 0) return
+    const hp = member.maxHp > 0 ? member.currentHp / member.maxHp : 0
+    if (hp > bestHp) {
+      bestHp = hp
       bestIndex = index
     }
   })

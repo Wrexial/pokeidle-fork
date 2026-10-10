@@ -678,7 +678,10 @@ export function repairSave(saved) {
     minigameRecords,
     victoryTokens: saved.victoryTokens ?? 0,
     autoProceed: saved.autoProceed ?? false,
-    battleStyle: saved.battleStyle === 'set' ? 'set' : 'switch',
+    battleStyle:
+      saved.battleStyle === 'set' || saved.battleStyle === 'training'
+        ? saved.battleStyle
+        : 'switch',
     battleMode: saved.battleMode === 'manual' ? 'manual' : 'auto',
     browserNotifications: !!saved.browserNotifications,
     notifyShiny: saved.notifyShiny !== !1,

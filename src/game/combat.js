@@ -5,6 +5,6 @@
 
 export { createVolatileState, volatileStateFromBattle, getStatStage, clampStatStage, getStatLabel } from './combat/volatile.js'
 export { getTypeEffectiveness, getTypeMultiplier, statStageMultiplier, calculateDamage, estimateMoveDamage } from './combat/damage.js'
-export { AI_SKILL, chooseBestMove, chooseBestSwitch, chooseMoveForBattle, chooseRandomMove, matchupScore } from './combat/ai.js'
+export { AI_SKILL, chooseBestMove, chooseBestSwitch, chooseTrainingSwitch, chooseMoveForBattle, chooseRandomMove, matchupScore } from './combat/ai.js'
 export { createBattlePokemon, applyBattleForm, changeBattleForm, battleSpecies } from './combat/setup.js'
 export { resolveBattleTurn } from './combat/turn.js'

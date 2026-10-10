@@ -19,13 +19,15 @@ export function setSpeed(state, action) {
 /**
  * Handle the `SET_BATTLE_STYLE` action. Switch (the default) lets the
  * auto-battler switch to a better matchup on its own; Set never switches
- * automatically.
+ * automatically; Training only switches its lead out when it is in danger,
+ * and shares a level-100 lead's EXP with the rest of the party.
  * @param {GameState} state
  * @param {GameAction} action
  * @returns {GameState}
  */
 export function setBattleStyle(state, action) {
-  const style = action.payload?.style === 'set' ? 'set' : 'switch'
+  const requested = action.payload?.style
+  const style = requested === 'set' || requested === 'training' ? requested : 'switch'
   return {
     ...state,
     battleStyle: style,

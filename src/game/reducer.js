@@ -41,7 +41,7 @@ export const initialGameState = {
   battleHazards: emptyBattleHazards(),
   speed: 1,
   paused: !1,
-  /** Mainline Set / Switch battle style: Switch lets the auto-battler pick a better matchup, Set never switches on its own. */
+  /** Mainline Set / Switch battle style: Switch lets the auto-battler pick a better matchup, Set never switches on its own. Training keeps the lead in to level it, pulling it out only when it is in danger. */
   battleStyle: 'switch',
   /** Auto battles run by themselves; manual waits for the player to pick a move. */
   battleMode: 'auto',

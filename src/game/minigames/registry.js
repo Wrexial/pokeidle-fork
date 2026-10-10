@@ -83,12 +83,22 @@ export const MINIGAME_PHASES = {
 }
 
 /**
+ * Reverse of {@link MINIGAME_PHASES}: the minigame id for each scene phase.
+ * Most phases share the id, but the Bug-Catching Contest (`bugCatching`) and
+ * Poke Pelago (`pelago`) do not, so a lookup by phase has to invert the map.
+ * @type {Record<string, string>}
+ */
+const MINIGAME_ID_BY_PHASE = Object.fromEntries(
+  Object.entries(MINIGAME_PHASES).map(([minigameId, phase]) => [phase, minigameId])
+)
+
+/**
  * The minigame id a scene phase belongs to, or null for a non-minigame phase.
  * @param {string} phase
  * @returns {string | null}
  */
 export function minigameIdForPhase(phase) {
-  return MINIGAME_PHASES[phase] ?? null
+  return MINIGAME_ID_BY_PHASE[phase] ?? null
 }
 
 /**
@@ -374,6 +384,185 @@ export const MINIGAME_INFO = {
     action: 'START BLENDING',
     hint: `The blender's speed always sags, so tap to rev it back up \u2014 but keep the needle inside the sweet spot as it sweeps back and forth over ${BERRY_BLENDER_MS / 1000} seconds. A smoother blend pays better. Entry is $${BERRY_BLENDER_COST.toLocaleString()}.`,
   },
+}
+
+/**
+ * Short "how to play" steps for each minigame, shown the first time it is
+ * started (and reopenable from its location card). Keyed by the same minigame
+ * id as {@link MINIGAME_INFO}.
+ * @type {Record<string, string[]>}
+ */
+export const MINIGAME_TUTORIALS = {
+  mining: [
+    'Tap a buried tile to dig it up \u2014 some tiles hide an item, the rest are empty.',
+    `You get ${MINING_DIGS} digs a run, so spend them on the spots you want.`,
+    'COLLECT & LEAVE banks everything you found; leaving early forfeits the rest.',
+  ],
+  bugContest: [
+    'Rustle a bush to scare out a bug, then throw a free Net Ball or let it go.',
+    `You get ${BUG_CONTEST_RUSTLES} rustles and keep everything you catch.`,
+    'Rarer bugs flee more often, and your best catch is ranked against the rivals for a prize.',
+  ],
+  gameCorner: [
+    `Each spin costs $${SLOT_SPIN_COST.toLocaleString()} and rolls a 3\u00d73 grid of Pok\u00e9mon.`,
+    'Match three along any of the 8 lines: 3 rows, 3 columns and 2 diagonals.',
+    'The rarer the Pok\u00e9mon, the bigger the payout, and the prize track fills as you win.',
+  ],
+  safari: [
+    `You get ${SAFARI_BALLS} Safari Balls; a throw that misses can let the Pok\u00e9mon flee.`,
+    'Bait calms a Pok\u00e9mon but lowers your catch odds; a Rock raises the odds but may scare it off.',
+    'The reserve\u2019s four areas each hold different species, and Safari shinies are twice as likely.',
+  ],
+  academyQuiz: [
+    `Answer ${QUIZ_QUESTIONS} type-matchup questions against a 10-second clock.`,
+    `A wrong answer or a timeout costs one of your ${QUIZ_LIVES} lives.`,
+    'A good score earns money and candy.',
+  ],
+  voltorbFlip: [
+    'Flip tiles on the 5\u00d75 board to reveal coins \u2014 but never a Voltorb.',
+    'Each row and column says how many Voltorbs and how many points it hides, so you can deduce the safe tiles.',
+    'A Voltorb ends the run; clearing every 2 and 3 banks the board and moves you up a level.',
+  ],
+  auctionHouse: [
+    'Bid against the rivals for a lot of items \u2014 the appraiser gives a value range.',
+    'Each rival drops out at their own hidden budget.',
+    'Win the hammer and you pay what you bid, even if that is over the odds.',
+  ],
+  contest: [
+    `Pick a move each round for ${CONTEST_ROUNDS} rounds.`,
+    'On-theme moves score best, and chaining two different moves of the same type adds a combo.',
+    'Repeating a move is penalised \u2014 you are ranked against the rivals at the end.',
+  ],
+  pokeathlon: [
+    'Three events: mash to Sprint, time your jumps in the Hurdles, and throw at the moving target.',
+    `The last two events give ${POKEATHLON_ATTEMPTS} attempts each, and every event scores out of 100.`,
+    'A medal pays money and candy.',
+  ],
+  pokeRadar: [
+    'Watch the grass light up, then tap the patches back in the order they flashed.',
+    'Every completed round adds one more patch to remember.',
+    'Each round builds a chain that boosts a rare species\u2019 shiny odds \u2014 a wrong tap breaks it.',
+  ],
+  battleRoyal: [
+    'An endless wave gauntlet for your whole party.',
+    'Each win heals the squad a little.',
+    'The deeper you get, the bigger the purse.',
+  ],
+  doubles: [
+    'Two of your Pok\u00e9mon face two foes at once.',
+    'Every battler picks its own target, and spread moves hit both foes.',
+    'A fainted Pok\u00e9mon is replaced from the bench until one side runs out.',
+  ],
+  dynamaxAdventures: [
+    `Choose a path through ${DYNAMAX_STAGES} encounters, then face a legendary from the Max Lair.`,
+    'Win the legendary battle and you catch it; lose the party and you go home empty-handed.',
+    'Cleared stages drop pickups along the way.',
+  ],
+  lightsOut: [
+    'Tap a tile to toggle it and its four neighbours.',
+    'Turn every light back on.',
+    'Fewer taps scores better \u2014 a flawless solve pays best.',
+  ],
+  curry: [
+    'Pick the ingredient that matches the customer\u2019s flavour.',
+    'After the 3-2-1 countdown, hold the fan to keep the campfire in the narrow sweet spot while it simmers.',
+    'A great curry is worth money and a full-heal Curry.',
+  ],
+  pokestar: [
+    'The director calls each shot.',
+    'Pick the take that best matches the brief.',
+    'Three shots, scored out of nine.',
+  ],
+  puzzleLeague: [
+    'Swap adjacent tiles to line up three or more and clear them.',
+    'Cleared tiles cascade for a bigger score.',
+    `You get ${MATCH3_MOVES} swaps.`,
+  ],
+  memory: [
+    'Flip two cards at a time to find matching pairs.',
+    `Find all ${MEMORY_PAIRS} pairs.`,
+    'Fewer attempts scores better.',
+  ],
+  whack: [
+    'Tap each Diglett before it ducks back down.',
+    'Leave the Zubat alone \u2014 it costs you a point.',
+    `You have ${WHACK_DURATION_MS / 1000} seconds.`,
+  ],
+  musical: [
+    'Notes fall down four lanes.',
+    'Tap the matching arrow on the beat.',
+    `Perfect timing scores the most; a routine is ${MUSICAL_NOTES} notes.`,
+  ],
+  picnic: [
+    'Drop each filling between the bottom and top slice of Bread without toppling the stack.',
+    `Pick ${PICNIC_PICKS} fillings.`,
+    'The finished sandwich lures a Pok\u00e9mon of one of their types, with tripled shiny odds.',
+  ],
+  pokeballFactory: [
+    'Tap a conveyor tile to spin it a quarter-turn.',
+    'Link a line from the left inlet to the right outlet.',
+    `The ${FACTORY_SIZE}\u00d7${FACTORY_SIZE} grid is scrambled every shift.`,
+  ],
+  ruinsPuzzle: [
+    'Tap a tile beside the gap to slide it, or use the arrow keys.',
+    `Slide the ${SLIDING_SIZE}\u00d7${SLIDING_SIZE} picture back into order.`,
+    'A quicker solve pays better, and every solve unearths the next Unown form you are missing.',
+  ],
+  iceSlide: [
+    'Shove each boulder onto its pressure plate to unseal the exit.',
+    'Then slide through the ice rooms \u2014 you keep moving until a wall stops you.',
+    'Every visit rolls new rooms; fewer moves scores better.',
+  ],
+  pokePelago: [
+    'Care for your companion on the companion isle.',
+    'Tend the Berry Garden.',
+    'Staff the passive islands (Bean Farm, Training Isle, Isle Caves) to bank rewards while you battle.',
+  ],
+  mantineSurf: [
+    `Ride ${MANTINE_SURF_WAVES} waves.`,
+    'Jump the moment the rider crosses the swell \u2014 a dead-centre jump scores the most.',
+    'The swell narrows every wave, so time it carefully.',
+  ],
+  rotomRally: [
+    `Cover ${ROTOM_RALLY_DISTANCE} units of the Wild Area in ${ROTOM_RALLY_SECONDS} seconds.`,
+    'Hold the throttle to build speed, but the motor heat climbs with it.',
+    'Redline and you stall \u2014 a quick, clean ride pays best.',
+  ],
+  ogreOustin: [
+    'Berries tumble down the field \u2014 move the basket under them before they land.',
+    'Golden berries are worth a fistful, but catching a rock costs you.',
+    `You have ${OGRE_OUSTIN_SECONDS} seconds.`,
+  ],
+  typeFusion: [
+    'Swipe a direction and every tile slides that way.',
+    'Two tiles of the same type fuse into the next type up.',
+    `You get ${TYPE_FUSION_MOVES} moves to score as much as you can.`,
+  ],
+  unownPicross: [
+    'Read the row and column clues.',
+    'Fill the cells that match the hidden glyph, then check your work.',
+    'Wrong fills and slow solves score lower.',
+  ],
+  pokeshot: [
+    `Pok\u00e9mon flit across the palace gardens for ${POKESHOT_SECONDS} seconds.`,
+    'Snap each one while it is inside the frame \u2014 centred shots score best.',
+    'Rarer or shiny Pok\u00e9mon are worth far more.',
+  ],
+  teraRaid: [
+    'A crystal boss has a Tera type and inflated HP.',
+    'Your healthy party fights it in turn, each member until it faints.',
+    'Shatter the crystal and you catch the boss; higher stars pay far more.',
+  ],
+  pokeword: [
+    'A silhouette appears with its name\u2019s letters jumbled.',
+    'Tap (or type) the letters back into order.',
+    `Beat the ${POKEWORD_SECONDS}-second clock for ${POKEWORD_ROUNDS} words.`,
+  ],
+  berryBlender: [
+    'The blender\u2019s speed always sags \u2014 tap to rev it back up.',
+    'Keep the needle inside the sweet spot as it sweeps back and forth.',
+    `A smoother blend over ${BERRY_BLENDER_MS / 1000} seconds pays better.`,
+  ],
 }
 
 /**

@@ -100,6 +100,18 @@ class Cdp {
     if (!clicked) throw new Error(`no element for ${selector}`)
     await sleep(250)
   }
+
+  /** Dismiss a minigame's "how to play" tutorial if it is covering the scene. */
+  async dismissTutorial() {
+    const dismissed = await this.eval(`(() => {
+      const b = document.querySelector('.minigame-tutorial-close')
+      if (!b) return false
+      b.click()
+      return true
+    })()`)
+    if (dismissed) await sleep(300)
+    return dismissed
+  }
 }
 
 async function connect() {
@@ -377,6 +389,11 @@ async function main() {
     // Poké Pelago modal (opened from the location panel card).
     await cdp.click('.location-minigame-start')
     await sleep(400)
+    // A minigame's first-run "how to play" tutorial covers the scene. Capture
+    // it once, then dismiss it so the Pelago captures below are not blocked.
+    if (await cdp.eval(`!!document.querySelector('.minigame-tutorial-close')`))
+      await cdp.screenshot(path.join(OUT, '02a-minigame-tutorial.png'))
+    await cdp.dismissTutorial()
     await cdp.screenshot(path.join(OUT, '02-pelago-companion.png'))
     await cdp.eval(
       `(() => { const t = [...document.querySelectorAll('.pelago-tab')].find((el) => /Islands/.test(el.textContent)); t && t.click(); return !!t })()`
@@ -716,6 +733,7 @@ async function main() {
       )
       await sleep(600)
       await cdp.click('.location-minigame-start')
+      await cdp.dismissTutorial()
       await cdp.waitFor(`!!document.querySelector(${JSON.stringify(selector)})`, 5000, name)
       await cdp.screenshot(path.join(OUT, file))
       if (action) {
@@ -746,6 +764,7 @@ async function main() {
     )
     await sleep(600)
     await cdp.click('.location-minigame-start')
+    await cdp.dismissTutorial()
     await cdp.waitFor(`!!document.querySelector('.picnic-choose')`, 5000, 'picnic choose')
     await cdp.eval(
       `(() => { [...document.querySelectorAll('.picnic-ingredient')].slice(0, 3).forEach((b) => b.click()); return true })()`

@@ -4,12 +4,14 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { BATTLE_LOG_RESERVE, DESIGN_HEIGHT, DESIGN_WIDTH } from '../data/ui.js'
 import { useGame } from '../game/context.js'
+import { MINIGAME_TUTORIALS, minigameIdForPhase } from '../game/minigames.js'
 import { useGameLoop } from '../game/use-game-loop.js'
 import { useIsMobile } from '../hooks.js'
 import { BattleLog } from './battle-log.js'
 import { BattleMenuModals } from './battle-menu-modals.js'
 import { BattleScene } from './battle-scene.js'
 import { LevelUpNotification } from './level-up-notification.js'
+import { MinigameTutorial } from './minigame-tutorial.js'
 
 // Never shrink the battle scene past this — on an extremely short viewport the
 // bottom of the scene clips rather than the whole scene becoming unreadable.
@@ -20,13 +22,16 @@ const MIN_SCENE_SCALE = 0.5
 const MAX_SCENE_SCALE = 1.6
 
 export function BattleScreen() {
-  const { state } = useGame(),
+  const { state, dispatch } = useGame(),
     isMobile = useIsMobile(),
     [menu, setMenu] = React.useState(
       /** @type {import('./battle-menu-modals.js').BattleMenuKey | null} */ (null)
     ),
     containerRef = React.useRef(/** @type {HTMLDivElement | null} */ (null)),
-    [scale, setScale] = React.useState(1)
+    [scale, setScale] = React.useState(1),
+    [tutorialDismissedId, setTutorialDismissedId] = React.useState(
+      /** @type {string | null} */ (null)
+    )
   useGameLoop()
   const recalcSize = React.useCallback(() => {
     if (!containerRef.current) return
@@ -62,6 +67,20 @@ export function BattleScreen() {
     return () => window.removeEventListener('resize', recalcSize)
   }, [recalcSize])
   if (!state.playerPokemon) return null
+  // A minigame's "how to play" tutorial takes over the stage until dismissed,
+  // so the scene doesn't start its timers underneath it. It only auto-opens
+  // once per save-agnostic preference (see `seenTutorials`).
+  const minigameId = minigameIdForPhase(state.phase),
+    tutorialSteps = minigameId ? MINIGAME_TUTORIALS[minigameId] : null,
+    tutorialSeen = minigameId ? Boolean(state.seenTutorials?.includes(minigameId)) : true,
+    showTutorial = Boolean(
+      tutorialSteps?.length && !tutorialSeen && tutorialDismissedId !== minigameId
+    ),
+    closeTutorial = () => {
+      if (minigameId && !tutorialSeen)
+        dispatch({ type: 'MARK_TUTORIAL_SEEN', payload: { minigameId } })
+      setTutorialDismissedId(minigameId)
+    }
   const scene = jsx('div', {
     className: 'battle-scene-scaler',
     style: {
@@ -72,21 +91,25 @@ export function BattleScreen() {
       style: {
         transform: `scale(${scale})`,
       },
-      children: jsx(BattleScene, { onOpenMenu: setMenu }),
+      children: showTutorial ? null : jsx(BattleScene, { onOpenMenu: setMenu }),
     }),
   })
   // The menus live here, not inside BattleScene, so swapping in a phase scene
   // (healing, evolution, a minigame) no longer closes one that is already open.
   const menus = jsx(BattleMenuModals, { menu, onClose: () => setMenu(null) })
+  const tutorial =
+    showTutorial && minigameId
+      ? jsx(MinigameTutorial, { minigameId, onClose: closeTutorial })
+      : null
   if (isMobile)
     return jsxs('div', {
       className: 'battle-screen',
       ref: containerRef,
-      children: [scene, menus, jsx(LevelUpNotification, {})],
+      children: [scene, menus, jsx(LevelUpNotification, {}), tutorial],
     })
   return jsxs('div', {
     className: 'battle-screen',
     ref: containerRef,
-    children: [scene, jsx(BattleLog, {}), menus, jsx(LevelUpNotification, {})],
+    children: [scene, jsx(BattleLog, {}), menus, jsx(LevelUpNotification, {}), tutorial],
   })
 }

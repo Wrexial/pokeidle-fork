@@ -154,6 +154,24 @@ export function toggleMartCollapsed(state, action) {
 }
 
 /**
+ * Handle the `MARK_TUTORIAL_SEEN` action: remember that a minigame's "how to
+ * play" tutorial has been shown, so it only auto-opens once. Persisted with the
+ * other preferences (shared across saves).
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function markTutorialSeen(state, action) {
+  const minigameId = action.payload?.minigameId,
+    seenTutorials = state.seenTutorials ?? []
+  if (!minigameId || seenTutorials.includes(minigameId)) return state
+  return {
+    ...state,
+    seenTutorials: [...seenTutorials, minigameId],
+  }
+}
+
+/**
  * Handle the `TOGGLE_NOTIFY_SHINY` action.
  * @param {GameState} state
  * @returns {GameState}

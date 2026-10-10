@@ -6,7 +6,7 @@ import { BATTLE_TOWER_LOCATION } from '../data/config.js'
 import { martShopItems } from '../data/items.js'
 import { encounterData, gymLeaderData, mapData, pokemonSpecies, regions, raidPoolFor } from '../data/gameData.js'
 import { areaInfoFor } from '../data/ui.js'
-import { MINIGAME_AREAS, MINIGAME_INFO, MINIGAME_LOCATIONS, MINIGAME_START_ACTION, ROUTE_ACTIVITIES, bestRodId, nextRod, rodForId, routeActivityIds } from '../game/minigames.js'
+import { MINIGAME_AREAS, MINIGAME_INFO, MINIGAME_LOCATIONS, MINIGAME_START_ACTION, MINIGAME_TUTORIALS, ROUTE_ACTIVITIES, bestRodId, nextRod, rodForId, routeActivityIds } from '../game/minigames.js'
 import { useGame } from '../game/context.js'
 import { computeUnlockedLocations, frontierUnlocks, minigameRequirementMet, regionProgressionGoal, unlockBlockers } from '../game/progression.js'
 import { servicePoisFor, cafeFor } from '../game/services.js'
@@ -283,6 +283,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
         icon: '⭐',
         title: fixedMinigame.title,
         hint: fixedMinigame.hint,
+        steps: MINIGAME_TUTORIALS[fixedMinigameId],
         actionLabel:
           state.money < fixedMinigame.cost
             ? 'NOT ENOUGH MONEY'

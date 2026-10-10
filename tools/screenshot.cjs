@@ -237,7 +237,7 @@ function kantoSave() {
  * the Max Mushroom factor. Used to check the stats-panel G-MAX indicator.
  * @param {boolean} withFactor
  */
-function gmaxStatsSave(withFactor) {
+function gmaxStatsSave(withFactor, withMegaStone = false) {
   const charizard = {
     id: '1',
     speciesKey: 'charizard',
@@ -257,7 +257,7 @@ function gmaxStatsSave(withFactor) {
     nature: 'modest',
     friendship: 70,
     ability: 'blaze',
-    heldItem: null,
+    heldItem: withMegaStone ? 'megaStone' : null,
     isShiny: false,
     gmax: withFactor,
   }
@@ -614,14 +614,16 @@ async function main() {
       }
     }
 
-    // Stats panel G-MAX indicator: greyed without the mushroom, lit with it.
-    for (const [withFactor, fileName] of [
-      [false, '33-gmax-locked.png'],
-      [true, '34-gmax-active.png'],
+    // Stats-panel form chips: G-MAX lights up with the mushroom factor, MEGA
+    // with the held Mega Stone, both greyed without their item.
+    for (const [withFactor, withMegaStone, fileName] of [
+      [false, false, '33-gmax-locked.png'],
+      [true, false, '34-gmax-active.png'],
+      [false, true, '35-mega-active.png'],
     ]) {
       await cdp.eval(
         `localStorage.setItem('pokemon-idle-save-v2', ${JSON.stringify(
-          JSON.stringify(gmaxStatsSave(withFactor))
+          JSON.stringify(gmaxStatsSave(withFactor, withMegaStone))
         )}); 'ok'`
       )
       await cdp.send('Page.navigate', { url: APP_URL })
@@ -637,11 +639,17 @@ async function main() {
         await cdp.waitFor(`!!document.querySelector('.stats-panel')`, 5000, fileName)
         await cdp.screenshot(path.join(OUT, fileName))
         const indicator = await cdp.eval(
-          `(() => { const el = document.querySelector('.stats-panel-gmax'); return el ? { text: el.textContent.trim(), locked: el.classList.contains('locked') } : null })()`
+          `(() => {
+            const g = document.querySelector('.stats-panel-gmax'), m = document.querySelector('.stats-panel-mega')
+            return {
+              gmax: g ? { text: g.textContent.trim(), locked: g.classList.contains('locked') } : null,
+              mega: m ? { text: m.textContent.trim(), locked: m.classList.contains('locked') } : null,
+            }
+          })()`
         )
-        console.log(`G-MAX indicator (factor=${withFactor}):`, JSON.stringify(indicator))
+        console.log(`form chips (factor=${withFactor}, stone=${withMegaStone}):`, JSON.stringify(indicator))
       } else {
-        console.log('WARNING: no party slot to open for the G-MAX indicator')
+        console.log('WARNING: no party slot to open for the form chips')
       }
     }
 

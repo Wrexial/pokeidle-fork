@@ -18,7 +18,7 @@ const NATURE_STAT_NAMES = {
 }
 import { moveData, pokemonSpecies } from '../data/gameData.js'
 import { abilityTooltip } from '../data/ability-info.js'
-import { canGigantamax } from '../data/mega-evolution.js'
+import { canGigantamax, MEGA_STONE_ITEM, megaFormsFor } from '../data/mega-evolution.js'
 import { moveTooltip } from '../game/move-info.js'
 import { itemTooltip } from '../game/progression.js'
 import { useGame } from '../game/context.js'
@@ -381,6 +381,17 @@ export function StatsPanel({
                         ? 'Gigantamax Factor \u2014 this Pokemon can Gigantamax in battle.'
                         : 'Can Gigantamax, but needs a Max Mushroom (Reward Shop) first.',
                       children: '\u2601 G-MAX',
+                    }),
+                  // Mega / Primal species get a marker while they hold the
+                  // reusable Mega Stone that triggers the transformation.
+                  megaFormsFor(pokemon.speciesKey).length > 0 &&
+                    jsx('span', {
+                      className: `stats-panel-mega${pokemon.heldItem === MEGA_STONE_ITEM ? '' : ' locked'}`,
+                      'data-tooltip':
+                        pokemon.heldItem === MEGA_STONE_ITEM
+                          ? 'Holding a Mega Stone \u2014 this Pokemon can Mega Evolve in battle.'
+                          : 'Can Mega Evolve, but must hold a Mega Stone first.',
+                      children: '\u2726 MEGA',
                     }),
                   pokemon.heldItem &&
                     jsxs('span', {

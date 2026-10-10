@@ -10554,6 +10554,24 @@ img {
     background-image: url(/backgrounds/beach.webp)
 }
 
+.route-activity-scene.activity-bugCatch {
+    background-image: url(/backgrounds/forest.webp)
+}
+
+.route-activity-scene.activity-climb {
+    background-image: url(/backgrounds/mountain.webp)
+}
+
+.route-activity-scene.activity-prospecting {
+    background-image: url(/backgrounds/ruins.webp)
+}
+
+.activity-climb .activity-tree {
+    background: linear-gradient(180deg,#6f675b,#38332c);
+    border-color: #8d8478;
+    border-radius: 18px 18px 8px 8px
+}
+
 .activity-diving .minigame-scene-bg {
     background: linear-gradient(180deg,rgba(10,40,80,.45),rgba(4,16,40,.82))
 }
@@ -10592,7 +10610,7 @@ img {
     opacity: 0.5
 }
 
-.activity-swing-rock {
+.activity-swing-prop {
     position: absolute;
     bottom: 2px;
     left: 50%;
@@ -10689,6 +10707,10 @@ img {
 
 .activity-gauge-depth {
     background: linear-gradient(180deg,#0b3a6a,#062038)
+}
+
+.activity-gauge-prospecting {
+    background: linear-gradient(180deg,#6b4a2a,#2e1c10)
 }
 
 .activity-gauge-marker {

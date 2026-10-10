@@ -24,10 +24,12 @@ const {
   rollForageBerry,
   rollDiveTreasure,
   rollSmashBonus,
+  rollProspectLoot,
+  rollProspectBonus,
   routeActivityIds,
 } = await import('../src/game/minigames.js')
 const { isWaterLocation } = await import('../src/game/catching.js')
-const { consumableItems, evolutionItems, heldItems } = await import('../src/data/items.js')
+const { consumableItems, evolutionItems, heldItems, fossilItems } = await import('../src/data/items.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 const { createPokemon } = await import('../src/game/pokemon.js')
 
@@ -498,4 +500,102 @@ test('diving uncovers treasure and rock smash cracks out gems', () => {
   assert.ok(rollMany(() => rollDiveTreasure('ultra')).size > 0, 'an ultra dive finds treasure')
   assert.equal(rollSmashBonus('hit'), null, 'a glancing smash cracks nothing open')
   assert.ok(rollMany(() => rollSmashBonus('perfect')).size > 0, 'a perfect smash cracks out gems')
+})
+
+test('bug catching and climbing roll their terrain types', () => {
+  assert.equal(ROUTE_ACTIVITIES.bugCatch.mode, 'encounter')
+  assert.equal(ROUTE_ACTIVITIES.bugCatch.display, 'swing')
+  assert.equal(ROUTE_ACTIVITIES.climb.mode, 'encounter')
+  assert.equal(ROUTE_ACTIVITIES.climb.display, 'charge')
+
+  const find = (/** @type {string} */ id) =>
+    locations.find((location) => routeActivityIds(location).includes(id))
+  const bug = find('bugCatch'),
+    climb = find('climb')
+  assert.ok(bug, 'some route supports bug catching')
+  assert.ok(climb, 'some route supports climbing')
+
+  // Every offered route holds at least one matching-type species.
+  for (const [activityId, types] of [
+    ['bugCatch', ['Bug']],
+    ['climb', ['Rock', 'Ground', 'Flying']],
+  ])
+    for (const location of locations.filter((candidate) =>
+      routeActivityIds(candidate).includes(activityId)
+    ))
+      assert.ok(
+        encounterData[location.routeKey].encounters.some((entry) =>
+          types.some((type) => pokemonSpecies[entry.speciesKey].types.includes(type))
+        ),
+        `${location.id} offers ${activityId} but has no ${types.join('/')}`
+      )
+
+  for (let roll = 0; roll < 20; roll++) {
+    const caught = rollActivityEncounter('bugCatch', bug.routeKey, roll % 2 === 0),
+      climbed = rollActivityEncounter('climb', climb.routeKey, roll % 2 === 0)
+    assert.ok(pokemonSpecies[caught.speciesKey].types.includes('Bug'))
+    assert.ok(
+      ['Rock', 'Ground', 'Flying'].some((type) =>
+        pokemonSpecies[climbed.speciesKey].types.includes(type)
+      )
+    )
+  }
+
+  const townActivity = routeActivityIds(locations.find((location) => location.type === 'town'))
+  assert.ok(!townActivity.includes('bugCatch'), 'towns have no bugs to sweep')
+  assert.ok(!townActivity.includes('climb'), 'towns have no cliffs')
+  assert.ok(!townActivity.includes('prospecting'), 'towns have nothing to dig for')
+})
+
+test('prospecting digs up real relics and can turn up a bonus', () => {
+  assert.equal(ROUTE_ACTIVITIES.prospecting.mode, 'loot')
+  assert.equal(ROUTE_ACTIVITIES.prospecting.display, 'depth')
+  assert.ok(
+    locations.some((location) => routeActivityIds(location).includes('prospecting')),
+    'some route supports prospecting'
+  )
+  for (let roll = 0; roll < 80; roll++) {
+    const reward = rollProspectLoot(roll % 2 === 0)
+    assert.ok(
+      consumableItems[reward.itemId] ||
+        evolutionItems[reward.itemId] ||
+        heldItems[reward.itemId],
+      `${reward.itemId} should be a real item`
+    )
+    assert.ok(reward.quantity >= 1)
+    assert.equal(typeof activityRewardName(reward.itemId), 'string')
+  }
+  const original = Math.random
+  try {
+    Math.random = () => 0
+    assert.equal(rollProspectBonus('hit'), null, 'a glancing dig finds no bonus')
+    const bonus = rollProspectBonus('ultra')
+    assert.ok(
+      fossilItems[bonus] ||
+        consumableItems[bonus] ||
+        heldItems[bonus] ||
+        evolutionItems[bonus],
+      `${bonus} should be a real item`
+    )
+  } finally {
+    Math.random = original
+  }
+})
+
+test('START_ROUTE_ACTIVITY starts the new activities where they are offered', () => {
+  const prospect = locations.find((location) =>
+      routeActivityIds(location).includes('prospecting')
+    ),
+    base = {
+      ...initialGameState,
+      phase: 'idle',
+      currentLocation: prospect.id,
+      unlockedLocations: [prospect.id],
+    },
+    started = gameReducer(base, {
+      type: 'START_ROUTE_ACTIVITY',
+      payload: { activityId: 'prospecting' },
+    })
+  assert.equal(started.phase, 'routeActivity')
+  assert.equal(started.routeActivity, 'prospecting')
 })

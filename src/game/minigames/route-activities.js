@@ -40,7 +40,7 @@ export const ACTIVITY_ULTRA_ZONE = 0.055
  *   id: string, title: string, action: string, icon: string, hint: string,
  *   mode: 'encounter' | 'loot', display: 'bar' | 'rings' | 'swing' | 'charge' | 'depth',
  *   preferTypes?: string[], encounterChance?: number, perfectEncounterChance?: number,
- *   deepWater?: boolean,
+ *   deepWater?: boolean, markerIcon?: string, propIcon?: string,
  * }>}
  */
 export const ROUTE_ACTIVITIES = {
@@ -99,6 +99,38 @@ export const ROUTE_ACTIVITIES = {
     // Diving skips the fishing-rod gate and reaches the rarer, deeper species.
     deepWater: true,
   },
+  bugCatch: {
+    id: 'bugCatch',
+    title: 'Bug Catching',
+    action: 'SWEEP NET',
+    icon: '\u{1f98b}',
+    hint: 'Sweep the net over the sweet spot as a Bug flits past \u2014 a clean catch can turn up a rarer bug, or one carrying an item.',
+    mode: 'encounter',
+    display: 'swing',
+    preferTypes: ['Bug'],
+    markerIcon: '\u{1f945}',
+    propIcon: '\u{1f41b}',
+  },
+  climb: {
+    id: 'climb',
+    title: 'Rock Climbing',
+    action: 'CLIMB',
+    icon: '\u{1f9d7}',
+    hint: 'Hold a cliff face to climb, then let go in the sweet spot to reach the nest on the ledge \u2014 the Rock, Ground and Flying Pokemon roost up there.',
+    mode: 'encounter',
+    display: 'charge',
+    preferTypes: ['Rock', 'Ground', 'Flying'],
+    propIcon: '\u26f0\ufe0f',
+  },
+  prospecting: {
+    id: 'prospecting',
+    title: 'Prospecting',
+    action: 'DIG',
+    icon: '\u26cf\ufe0f',
+    hint: 'Dig at the sweet spot to unearth buried treasure \u2014 valuables, evolution stones and, on a perfect dig, an ancient fossil.',
+    mode: 'loot',
+    display: 'depth',
+  },
 }
 
 /**
@@ -131,6 +163,45 @@ function isForageLocation(location) {
   )
 }
 
+/** Biomes with cliffs worth climbing. */
+const CLIMB_BIOMES = new Set(['mountain', 'volcanic'])
+
+/**
+ * Whether a location has cliff faces to climb.
+ * @param {MapLocation | undefined} location
+ * @returns {boolean}
+ */
+function isClimbLocation(location) {
+  if (!location || isWaterLocation(location)) return false
+  if (location.biome && CLIMB_BIOMES.has(location.biome)) return true
+  return /\bmt\b|mt\.|mount|peak|summit|highland|ridge|cliff|gorge|canyon|volcan|crater/i.test(
+    location.name ?? ''
+  )
+}
+
+/** Biomes worth digging for buried relics. */
+const PROSPECT_BIOMES = new Set([
+  'cave',
+  'ruins',
+  'desert',
+  'volcanic',
+  'mountain',
+  'tundra',
+])
+
+/**
+ * Whether a location has ground worth prospecting (digging) in.
+ * @param {MapLocation | undefined} location
+ * @returns {boolean}
+ */
+function isProspectLocation(location) {
+  if (!location || isWaterLocation(location)) return false
+  if (location.biome && PROSPECT_BIOMES.has(location.biome)) return true
+  return /cave|cavern|tunnel|mine|grotto|ruins|tower|temple|shrine|catacomb|desert|sand|dune|wasteland|\bmt\b|mt\.|mount|peak|summit|volcan|glacier|icefall/i.test(
+    location.name ?? ''
+  )
+}
+
 /**
  * The route activities available at a location.
  * @param {MapLocation | undefined} location
@@ -141,13 +212,20 @@ export function routeActivityIds(location) {
   const routeKey = location.routeKey ?? ''
   /** @type {string[]} */
   const ids = []
+  // Water
   if (FISHING_LOCATIONS.has(location.id) && routeHasWaterSpecies(routeKey)) ids.push('fishing')
+  if (isWaterLocation(location) && routeHasType(routeKey, ['Water'])) ids.push('diving')
+  // Overgrown land
   if (isForageLocation(location)) ids.push('forage')
-  if (isCaveLocation(location) && routeHasType(routeKey, ['Rock', 'Ground']))
-    ids.push('rockSmash')
+  if (isForageLocation(location) && routeHasType(routeKey, ['Bug'])) ids.push('bugCatch')
   if (isForageLocation(location) && routeHasType(routeKey, ['Normal', 'Flying']))
     ids.push('headbutt')
-  if (isWaterLocation(location) && routeHasType(routeKey, ['Water'])) ids.push('diving')
+  // Rock and underground
+  if (isCaveLocation(location) && routeHasType(routeKey, ['Rock', 'Ground']))
+    ids.push('rockSmash')
+  if (isClimbLocation(location) && routeHasType(routeKey, ['Rock', 'Ground', 'Flying']))
+    ids.push('climb')
+  if (isProspectLocation(location)) ids.push('prospecting')
   return ids
 }
 
@@ -442,4 +520,77 @@ export function rollSmashBonus(quality) {
   const chance = SMASH_BONUS_CHANCE[/** @type {'perfect'|'ultra'} */ (quality)] ?? 0
   if (chance <= 0 || Math.random() >= chance) return null
   return weightedItemPick(valuableDropTable)?.itemId ?? null
+}
+
+/**
+ * Weighted relic table for the `prospecting` activity. Common finds are
+ * sellable valuables; the rarer end holds the evolution stones (which are
+ * otherwise shop-only).
+ * @type {{ itemId: string, weight: number, min: number, max: number }[]}
+ */
+const PROSPECT_TABLE = [
+  { itemId: 'stardust', weight: 22, min: 1, max: 2 },
+  { itemId: 'pearl', weight: 16, min: 1, max: 1 },
+  { itemId: 'hardStone', weight: 12, min: 1, max: 1 },
+  { itemId: 'nugget', weight: 12, min: 1, max: 1 },
+  { itemId: 'fireStone', weight: 5, min: 1, max: 1 },
+  { itemId: 'waterStone', weight: 5, min: 1, max: 1 },
+  { itemId: 'thunderStone', weight: 5, min: 1, max: 1 },
+  { itemId: 'leafStone', weight: 5, min: 1, max: 1 },
+  { itemId: 'bigPearl', weight: 6, min: 1, max: 1 },
+  { itemId: 'moonStone', weight: 3, min: 1, max: 1 },
+  { itemId: 'starPiece', weight: 3, min: 1, max: 1 },
+  { itemId: 'sunStone', weight: 2, min: 1, max: 1 },
+  { itemId: 'duskStone', weight: 2, min: 1, max: 1 },
+  { itemId: 'shinyStone', weight: 2, min: 1, max: 1 },
+  { itemId: 'dawnStone', weight: 2, min: 1, max: 1 },
+  { itemId: 'iceStone', weight: 2, min: 1, max: 1 },
+  { itemId: 'rareCandy', weight: 2, min: 1, max: 1 },
+  { itemId: 'bigNugget', weight: 1, min: 1, max: 1 },
+]
+
+/**
+ * Roll one prospecting find. A perfect dig only rolls the better (rarer, lower
+ * weight) half of the table.
+ * @param {boolean} perfect
+ * @returns {{ itemId: string, quantity: number }}
+ */
+export function rollProspectLoot(perfect) {
+  const sorted = [...PROSPECT_TABLE].sort((left, right) => left.weight - right.weight),
+    candidates = perfect
+      ? sorted.slice(0, Math.max(1, Math.ceil(sorted.length / 2)))
+      : PROSPECT_TABLE,
+    totalWeight = candidates.reduce((sum, entry) => sum + entry.weight, 0)
+  let roll = Math.random() * totalWeight
+  for (const entry of candidates) {
+    roll -= entry.weight
+    if (roll <= 0)
+      return {
+        itemId: entry.itemId,
+        quantity: entry.min + Math.floor(Math.random() * (entry.max - entry.min + 1)),
+      }
+  }
+  const fallback = candidates[candidates.length - 1]
+  return { itemId: fallback.itemId, quantity: fallback.min }
+}
+
+/** Chance a clean dig turns up a bonus relic, by hit quality. */
+const PROSPECT_BONUS_CHANCE = { perfect: 0.35, ultra: 0.7 }
+
+/**
+ * Roll a bonus relic a clean dig turns up — occasionally a fossil — or null.
+ * @param {'hit' | 'perfect' | 'ultra'} quality
+ * @returns {string | null}
+ */
+export function rollProspectBonus(quality) {
+  const chance = PROSPECT_BONUS_CHANCE[/** @type {'perfect'|'ultra'} */ (quality)] ?? 0
+  if (chance <= 0 || Math.random() >= chance) return null
+  // Digging can turn up a fossil; a bullseye is likelier to.
+  if (Math.random() < (quality === 'ultra' ? 0.15 : 0.05)) {
+    const fossils = Object.keys(fossilItems)
+    if (fossils.length > 0) return fossils[Math.floor(Math.random() * fossils.length)]
+  }
+  return (
+    weightedItemPick(valuableDropTable.filter((entry) => entry.weight <= 10))?.itemId ?? null
+  )
 }

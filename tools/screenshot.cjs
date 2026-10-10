@@ -530,6 +530,41 @@ async function main() {
       console.log('WARNING: no Headbutt activity card found')
     }
 
+    // The other route activities: Bug Catching, Rock Climbing and Prospecting.
+    const routeScenes = [
+      ['Bug Catching', 'viridianForest', 'viridianForest', '26-bugCatch.png', '.activity-swing'],
+      ['Rock Climbing', 'mtMoon', 'mtMoon', '27-climb.png', '.activity-trees'],
+      ['Prospecting', 'mtMoon', 'mtMoon', '28-prospecting.png', '.activity-gauge-prospecting'],
+    ]
+    for (const [title, location, route, file, selector] of routeScenes) {
+      await cdp.eval(
+        `localStorage.setItem('pokemon-idle-save-v2', ${JSON.stringify(
+          JSON.stringify(minigameSave('kanto', location, route, ['palletTown', 'route1', location]))
+        )}); 'ok'`
+      )
+      await cdp.send('Page.navigate', { url: APP_URL })
+      await cdp.waitFor('window.gameDataDebug.status().loaded === true', 20000, `${title} data`)
+      await cdp.eval(
+        `(() => { const b = document.querySelector('.patch-notes-dismiss-btn'); if (b) b.click(); return true })()`
+      )
+      await sleep(500)
+      const started = await cdp.eval(
+        `(() => {
+          const card = [...document.querySelectorAll('.location-minigame-card')].find((el) => new RegExp(${JSON.stringify(title)}).test(el.textContent))
+          if (!card) return false
+          card.querySelector('.location-minigame-start').click()
+          return true
+        })()`
+      )
+      if (started) {
+        await cdp.waitFor(`!!document.querySelector('${selector}')`, 5000, file)
+        await cdp.screenshot(path.join(OUT, file))
+        console.log(`${title} scene ok`)
+      } else {
+        console.log(`WARNING: no ${title} activity card found`)
+      }
+    }
+
     // Fixed minigames: Voltorb Flip (Unova) and the Auction House (Kalos).
     const fixedScenes = [
       [

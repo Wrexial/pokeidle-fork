@@ -30,6 +30,8 @@ import {
   rollForageBerry,
   rollDiveTreasure,
   rollSmashBonus,
+  rollProspectLoot,
+  rollProspectBonus,
 } from '../game/minigames.js'
 import {
   getPokemonSpriteFallbackUrl,
@@ -274,6 +276,26 @@ export function RouteActivityScene() {
       previewEncounter(encounters, quality)
       return
     }
+    // Prospecting pays out buried relics (valuables, evolution stones) rather
+    // than berries; a clean dig can also turn up a bonus relic or a fossil.
+    if (activity.id === 'prospecting') {
+      const reward = rollProspectLoot(perfect),
+        bonusItem = rollProspectBonus(quality),
+        money = perfect
+          ? 260 + Math.floor(Math.random() * 241)
+          : 100 + Math.floor(Math.random() * 141),
+        items = [{ itemId: reward.itemId, quantity: reward.quantity }]
+      if (bonusItem) items.push({ itemId: bonusItem, quantity: 1 })
+      setFound((current) => [...current, ...items])
+      setMessage(
+        `${perfect ? 'A rich vein! ' : ''}You dug up ${activityRewardName(reward.itemId)} x${reward.quantity}.${
+          bonusItem ? ` Also found ${activityRewardName(bonusItem)}!` : ''
+        }`
+      )
+      dispatch({ type: 'CLAIM_MINIGAME_REWARD', payload: { money, items } })
+      setStage(nextAttempts <= 0 ? 'done' : 'result')
+      return
+    }
     // Foraging can flush out a hidden Grass-type before it pays out loot.
     if (activity.encounterChance) {
       const chance = perfect
@@ -484,7 +506,7 @@ export function RouteActivityScene() {
                 })
               : activity.display === 'swing'
                 ? jsxs('div', {
-                    className: `activity-swing${stage === 'aiming' ? '' : ' locked'}`,
+                    className: `activity-swing activity-swing-${activity.id}${stage === 'aiming' ? '' : ' locked'}`,
                     children: [
                       jsx('div', {
                         className: 'activity-zone activity-zone-hit',
@@ -501,9 +523,12 @@ export function RouteActivityScene() {
                       jsx('div', {
                         className: `activity-swing-marker${liveZone ? ` ${liveZone}` : ''}`,
                         style: { left: `${position * 100}%` },
-                        children: '\u26cf\ufe0f',
+                        children: activity.markerIcon ?? '\u26cf\ufe0f',
                       }),
-                      jsx('div', { className: 'activity-swing-rock', children: '\u{1faa8}' }),
+                      jsx('div', {
+                        className: 'activity-swing-prop',
+                        children: activity.propIcon ?? '\u{1faa8}',
+                      }),
                     ],
                   })
                 : activity.display === 'charge'
@@ -527,8 +552,8 @@ export function RouteActivityScene() {
                                 onContextMenu: (
                                   /** @type {React.MouseEvent} */ event
                                 ) => event.preventDefault(),
-                                'aria-label': `Headbutt tree ${index + 1}`,
-                                children: '\u{1f333}',
+                                'aria-label': `${activity.action} ${index + 1}`,
+                                children: activity.propIcon ?? '\u{1f333}',
                               },
                               index
                             )
@@ -566,7 +591,7 @@ export function RouteActivityScene() {
                     })
                   : activity.display === 'depth'
                     ? jsxs('div', {
-                        className: `activity-gauge activity-gauge-${activity.display}${stage === 'aiming' ? '' : ' locked'}`,
+                        className: `activity-gauge activity-gauge-${activity.display} activity-gauge-${activity.id}${stage === 'aiming' ? '' : ' locked'}`,
                         children: [
                         jsx('div', {
                           className: 'activity-zone activity-zone-hit',

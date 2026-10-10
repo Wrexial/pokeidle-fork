@@ -67,6 +67,7 @@ export const CHANGELOG = [
         {
           heading: 'Interface',
           items: [
+            'A Pokemon with a Gigantamax form shows a G-MAX chip in its stats panel: it reads pink once it has eaten a Max Mushroom and greyed out while it still needs one, with the requirement in the hover tooltip',
             'The Town Map marks a route whose entire wild table is in your Pokedex with a teal marker and an "All Pokemon caught" legend entry, so a finished route stands out from the ones still missing a species',
             'The Pokedex groups alternate forms under one slot now: a species with regional variants, a Mega, a Gigantamax or another forme is a single national-dex entry, with a form switcher in the detail panel (Alolan, Galarian, Hisuian, Paldean, Mega X, Gigantamax, Origin, ...) instead of every form sitting after the national dex',
             'Registering any form registers its species: catching an Alolan Rattata fills Rattata\u2019s Pokedex slot and counts towards that generation\u2019s completion and Shiny Charm, and the grid marks a slot that has alternate forms',

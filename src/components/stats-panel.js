@@ -18,6 +18,7 @@ const NATURE_STAT_NAMES = {
 }
 import { moveData, pokemonSpecies } from '../data/gameData.js'
 import { abilityTooltip } from '../data/ability-info.js'
+import { canGigantamax } from '../data/mega-evolution.js'
 import { moveTooltip } from '../game/move-info.js'
 import { itemTooltip } from '../game/progression.js'
 import { useGame } from '../game/context.js'
@@ -370,6 +371,16 @@ export function StatsPanel({
                       title: 'Ability',
                       'data-tooltip': abilityTooltip(pokemon.ability),
                       children: abilityDisplayName(pokemon.ability),
+                    }),
+                  // Only species with a Gigantamax form get the marker; it lights
+                  // up once the Pokemon has eaten a Max Mushroom.
+                  canGigantamax(pokemon.speciesKey) &&
+                    jsx('span', {
+                      className: `stats-panel-gmax${pokemon.gmax ? '' : ' locked'}`,
+                      'data-tooltip': pokemon.gmax
+                        ? 'Gigantamax Factor \u2014 this Pokemon can Gigantamax in battle.'
+                        : 'Can Gigantamax, but needs a Max Mushroom (Reward Shop) first.',
+                      children: '\u2601 G-MAX',
                     }),
                   pokemon.heldItem &&
                     jsxs('span', {

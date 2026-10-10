@@ -2560,6 +2560,22 @@ img {
     padding: 1px 6px
 }
 
+.stats-panel-gmax {
+    font-size: 8px;
+    font-weight: 700;
+    color: #ffe0f0;
+    background: linear-gradient(#a02060,#601038);
+    border: 1px solid #ff4d94;
+    padding: 1px 6px
+}
+
+.stats-panel-gmax.locked {
+    color: #b9b2b6;
+    background: linear-gradient(#4a4448,#2e2a2d);
+    border-color: #6a6266;
+    opacity: .75
+}
+
 .stats-panel-held {
     display: inline-flex;
     align-items: center;

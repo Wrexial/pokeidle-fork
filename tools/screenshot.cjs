@@ -232,6 +232,55 @@ function kantoSave() {
   }
 }
 
+/**
+ * A Kanto save whose party holds a Gigantamax-able Charizard, with or without
+ * the Max Mushroom factor. Used to check the stats-panel G-MAX indicator.
+ * @param {boolean} withFactor
+ */
+function gmaxStatsSave(withFactor) {
+  const charizard = {
+    id: '1',
+    speciesKey: 'charizard',
+    name: 'Charizard',
+    types: ['Fire', 'Flying'],
+    level: 50,
+    totalExp: 0,
+    moves: ['flamethrower', 'dragonClaw'],
+    currentHp: 170,
+    maxHp: 170,
+    attack: 100,
+    defense: 90,
+    spAttack: 120,
+    spDefense: 95,
+    speed: 115,
+    ivs: { hp: 31, attack: 31, defense: 31, spAttack: 31, spDefense: 31, speed: 31 },
+    nature: 'modest',
+    friendship: 70,
+    ability: 'blaze',
+    heldItem: null,
+    isShiny: false,
+    gmax: withFactor,
+  }
+  return {
+    version: 2,
+    savedAt: Date.now(),
+    startRegion: 'kanto',
+    playerPokemon: charizard,
+    party: [charizard],
+    box: [],
+    nextPokemonId: 2,
+    currentLocation: 'route21',
+    currentRoute: 'route21',
+    unlockedLocations: ['palletTown', 'route1', 'route21'],
+    unlockedRegions: ['kanto'],
+    inventory: {},
+    money: 50000,
+    pokedexSeen: ['charizard'],
+    pokedexCaught: ['charizard'],
+    battleLog: ['Screenshot run'],
+  }
+}
+
 /** A minimal save stood at a fixed minigame location, for scene smoke tests. */
 function minigameSave(region, location, route, unlocked) {
   const pokemon = {
@@ -562,6 +611,37 @@ async function main() {
         console.log(`${title} scene ok`)
       } else {
         console.log(`WARNING: no ${title} activity card found`)
+      }
+    }
+
+    // Stats panel G-MAX indicator: greyed without the mushroom, lit with it.
+    for (const [withFactor, fileName] of [
+      [false, '33-gmax-locked.png'],
+      [true, '34-gmax-active.png'],
+    ]) {
+      await cdp.eval(
+        `localStorage.setItem('pokemon-idle-save-v2', ${JSON.stringify(
+          JSON.stringify(gmaxStatsSave(withFactor))
+        )}); 'ok'`
+      )
+      await cdp.send('Page.navigate', { url: APP_URL })
+      await cdp.waitFor('window.gameDataDebug.status().loaded === true', 20000, 'gmax data')
+      await cdp.eval(
+        `(() => { const b = document.querySelector('.patch-notes-dismiss-btn'); if (b) b.click(); return true })()`
+      )
+      await sleep(500)
+      const opened = await cdp.eval(
+        `(() => { const slot = document.querySelector('.party-slot'); if (!slot) return false; slot.click(); return true })()`
+      )
+      if (opened) {
+        await cdp.waitFor(`!!document.querySelector('.stats-panel')`, 5000, fileName)
+        await cdp.screenshot(path.join(OUT, fileName))
+        const indicator = await cdp.eval(
+          `(() => { const el = document.querySelector('.stats-panel-gmax'); return el ? { text: el.textContent.trim(), locked: el.classList.contains('locked') } : null })()`
+        )
+        console.log(`G-MAX indicator (factor=${withFactor}):`, JSON.stringify(indicator))
+      } else {
+        console.log('WARNING: no party slot to open for the G-MAX indicator')
       }
     }
 

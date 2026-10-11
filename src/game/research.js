@@ -189,22 +189,21 @@ export function creditResearchMove(state, speciesKey) {
 }
 
 /**
- * What the Research Shop sells, and for how many Research Points.
+ * What the Research Shop sells, and for how many Research Points. The stock is
+ * deliberately research-flavoured — growing, feeding and polishing the Pokemon
+ * you have studied — so it doesn't just restock the evolution stones the
+ * Kecleon Shop already sells for Victory Tokens.
  * @type {{ itemId: string, cost: number }[]}
  */
 export const RESEARCH_SHOP = [
-  { itemId: 'expCandyL', cost: 4 },
+  { itemId: 'expCandyS', cost: 1 },
+  { itemId: 'expCandyM', cost: 3 },
+  { itemId: 'expCandyL', cost: 6 },
+  { itemId: 'expCandyXL', cost: 12 },
   { itemId: 'rareCandy', cost: 8 },
-  { itemId: 'fireStone', cost: 6 },
-  { itemId: 'waterStone', cost: 6 },
-  { itemId: 'thunderStone', cost: 6 },
-  { itemId: 'leafStone', cost: 6 },
-  { itemId: 'moonStone', cost: 10 },
-  { itemId: 'sunStone', cost: 10 },
-  { itemId: 'shinyStone', cost: 10 },
-  { itemId: 'duskStone', cost: 10 },
-  { itemId: 'dawnStone', cost: 10 },
-  { itemId: 'iceStone', cost: 10 },
+  { itemId: 'poffin', cost: 3 },
+  { itemId: 'abilityCapsule', cost: 12 },
+  { itemId: 'abilityPatch', cost: 20 },
   { itemId: 'bottleCap', cost: 15 },
   { itemId: 'goldBottleCap', cost: 30 },
   { itemId: 'masterball', cost: 100 },

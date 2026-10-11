@@ -529,6 +529,26 @@ export const consumableItems = {
       sellPrice: null,
       ivTraining: 'all',
     },
+    abilityCapsule: {
+      id: 'abilityCapsule',
+      name: 'Ability Capsule',
+      description:
+        "Switches a party Pokemon between its normal abilities (never the hidden ability). Does nothing if it has only one.",
+      category: 'medicine',
+      buyPrice: null,
+      sellPrice: null,
+      abilityChange: 'capsule',
+    },
+    abilityPatch: {
+      id: 'abilityPatch',
+      name: 'Ability Patch',
+      description:
+        "Switches a party Pokemon to its hidden ability, or back to a normal one if it already has the hidden ability.",
+      category: 'medicine',
+      buyPrice: null,
+      sellPrice: null,
+      abilityChange: 'patch',
+    },
   }
 
 /**

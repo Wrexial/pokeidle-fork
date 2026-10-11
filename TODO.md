@@ -63,8 +63,9 @@ renumbered, so the gaps below are items that shipped.
     and the seven Apricorn balls.
 25. **#80 Companion affection perks** — shipped; the optional status-shake /
     dodge / crit extras remain.
-26. **#81 Research Shop diversification** — S–M · ★★ — the shop mostly
-    restocks the evolution stones the Kecleon Shop already sells.
+26. **#81 Research Shop diversification** — shipped; the shop now stocks the
+    candy ladder, Poffin, the Ability Capsule/Patch and the caps instead of the
+    Kecleon stones.
 27. **#82 Research tasks for non-wild species** — shipped; only optional extra
     Legends-style tasks remain.
 
@@ -489,42 +490,26 @@ exists).
 
 ## 81. Research Shop diversification (overlaps Kecleon Wares)
 
-The Research Shop (`RESEARCH_SHOP` in `src/game/research.js`) spends Research
-Points on `expCandyL` / `rareCandy`, ten evolution stones (fire, water, thunder,
-leaf, moon, sun, shiny, dusk, dawn, ice), `bottleCap`, `goldBottleCap` and
-`masterball`. But the Kecleon Shop (`tokenShopItems` in `src/data/items.js`)
-already sells those same evolution stones for Victory Tokens, so most of the
-Research shelf reads as a duplicate of the Kecleon Wares tab and the only
-genuinely research-specific stock is the candy ladder and the Master Ball. Two
-different currencies selling the same goods makes the shops feel
-interchangeable.
+The Research Shop used to sell the same ten evolution stones as the Kecleon Shop
+(for Victory Tokens), so most of the shelf read as a duplicate.
 
-Goal: give the Research Shop its own identity, themed around field research and
-the species you have actually studied. A coherent subset of:
+Done: the shop has its own “raise and observe the Pokemon you studied” identity:
 
-- [ ] Drop the ten evolution stones (Kecleon already stocks them) and replace
-      them with research-flavoured goods.
-- [ ] **Species rewards**: a Let's-Go-style species candy, a Friendship boost,
-      or a one-off nature / ability re-roll tied to the species the points came
+- Dropped the ten evolution stones (Kecleon still stocks every one).
+- Stock: the full Exp. Candy ladder (S / M / L / XL), Rare Candy, Poffin
+  (friendship), the new **Ability Capsule** and **Ability Patch**, Bottle Caps
+  and a Master Ball.
+- `abilityCapsule` / `abilityPatch` are new items (`src/data/items.js`) whose
+  ability change is handled in `useItemOnPokemon`: the Capsule cycles the
+  normal abilities, the Patch toggles the hidden one (and back). Their sprites
+  came from `tools/download-item-sprites.cjs`.
+
+Still open (optional):
+
+- [ ] Training items (PP Up / PP Max, vitamins) or research-only held items
+      (Lucky Egg, Amulet Coin) once PP / EVs are modelled.
+- [ ] A species-specific research reward tied to the species the points came
       from.
-- [ ] **Ability & nature items** (new items where needed): an Ability Capsule /
-      Patch or a hidden-ability unlock. Kecleon already sells `natureMint`, so
-      decide which shop owns natures rather than selling it in both.
-- [ ] **Training items** (new items): PP Up / PP Max, vitamins (HP Up, Protein,
-      …), or a bigger EXP-candy ladder beside the existing candies and caps.
-- [ ] **Research-only held items** (Lucky Egg, Amulet Coin) or breeding
-      conveniences (Destiny Knot, Everstone, the Power items), none of which
-      are modelled yet.
-- [ ] Tune the costs so a species' five tasks buy something meaningful, keeping
-      the Bottle Caps and Master Ball as the long-term sinks.
-
-Relevant code: `RESEARCH_SHOP` (`src/game/research.js`),
-`src/components/research-panel.js`, `buyResearchItem`
-(`src/game/reducer/research.js`), and the item / icon tables in
-`src/data/items.js` + `tools/download-item-sprites.cjs` for any new items.
-
-Effort: **small–medium** (mostly a data-table reshuffle; the shop UI is already
-generic, but brand-new items also need sprites).
 
 ## 82. Research tasks for non-wild species (Legends-style tasks)
 

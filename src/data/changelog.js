@@ -43,6 +43,13 @@ export const CHANGELOG = [
         ],
       },
       {
+        heading: 'Items',
+        items: [
+          'Two ability items join the game: the Ability Capsule switches a Pokemon between its normal abilities, and the Ability Patch toggles its hidden ability (and back again). Both are Research Shop rewards.',
+          'The Research Shop has its own identity now instead of restocking the evolution stones the Kecleon Shop already sells: it offers the full Exp. Candy ladder (S / M / L / XL), Rare Candy, Poffin, the Ability Capsule and Patch, Bottle Caps and a Master Ball.',
+        ],
+      },
+      {
         heading: 'Minigames',
         items: [
           'The Battle Maison in Kalos runs double battles now: two of your Pokemon face two foes, every battler picks its own target, spread moves hit both, and a fainted Pokemon is replaced from the bench. Its ally play works too — Battery, Power Spot, Friend Guard, Healer, Helping Hand, Follow Me, Rage Powder, Spotlight, After You, Quash, Commander, Dancer, Flower Veil, Power of Alchemy, Receiver, Symbiosis and Telepathy.',
@@ -60,7 +67,7 @@ export const CHANGELOG = [
         items: [
           'The game works offline now: a service worker caches the app, and an Offline Play section in Settings shows the download size and fetches every sprite, backdrop, item icon and data file with a progress bar. The art and data were right-sized and minified for it (the backdrops moved to WebP) and offline uses the static sprites, keeping the download well under 50 MB.',
           'The cached app also keeps itself up to date: it checks for a new service worker on boot, when the network returns and when the tab becomes visible, and reloads a backgrounded tab into the new build, so an active battle is never interrupted.',
-          'Field research: every species has five tasks that earn Research Points. It reads the Pokedex plus a per-species wild-defeat count, tracks a research level up to 10 in the Pokedex detail, and spends the points in a Research Shop on candy, evolution stones, Bottle Caps and a Master Ball.',
+          'Field research: every species has five tasks that earn Research Points. It reads the Pokedex plus a per-species wild-defeat count, tracks a research level up to 10 in the Pokedex detail, and spends the points in a Research Shop on candies, ability items, Bottle Caps and a Master Ball.',
           'A species with no wild route (evolved forms, starters, fossils, gifts, statics and the rest) no longer shows impossible “defeat it in the wild” research tasks: it observes the species instead — obtain it, feed it a berry, and use its moves in battle — for the same points.',
         ],
       },

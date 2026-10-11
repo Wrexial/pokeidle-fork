@@ -1,11 +1,11 @@
 // Reducer handlers for items actions. Split from game/reducer.js.
 
-import { encounterData, moveData, pokemonSpecies } from '../../data/gameData.js'
+import { abilityData, encounterData, moveData, pokemonSpecies } from '../../data/gameData.js'
 import { activeItems, consumableItems, fossilItems, heldItems, pokeBalls } from '../../data/items.js'
 import { canGigantamax } from '../../data/mega-evolution.js'
 import { natureName, randomNature } from '../../data/natures.js'
 import { isPlantableBerry } from '../garden.js'
-import { MAX_FRIENDSHIP, IV_STAT_ORDER, applyMoveLearning, calculatePokemonStats, calculateRequiredExperience, gainFriendship, getLevelUpResults } from '../pokemon.js'
+import { MAX_FRIENDSHIP, IV_STAT_ORDER, abilityDisplayName, applyMoveLearning, calculatePokemonStats, calculateRequiredExperience, gainFriendship, getLevelUpResults } from '../pokemon.js'
 import { getItemSellPrice, isActiveEffectItem } from '../progression.js'
 import { withNotification } from '../reducer-helpers.js'
 import { creditResearchFeed } from '../research.js'
@@ -340,6 +340,29 @@ export function useItemOnPokemon(state, action) {
       speed: newStats.speed,
     }
     log.push(`${member.name} was hyper-trained!`)
+  } else if (item.abilityChange) {
+    const entry = abilityData[member.speciesKey],
+      normals = entry?.abilities ?? [],
+      hidden = entry?.hidden ?? null,
+      currentIndex = normals.indexOf(member.ability ?? ''),
+      // A Capsule cycles the normal abilities (from a hidden/unknown ability it
+      // lands on the first normal one); a Patch toggles the hidden ability.
+      candidate =
+        item.abilityChange === 'capsule'
+          ? normals.length < 2
+            ? null
+            : currentIndex === -1
+              ? normals[0]
+              : normals[(currentIndex + 1) % normals.length]
+          : !hidden
+            ? null
+            : member.ability === hidden
+              ? (normals[0] ?? null)
+              : hidden,
+      nextAbility = /** @type {string | null} */ (candidate)
+    if (!nextAbility || nextAbility === member.ability) return state
+    member.ability = nextAbility
+    log.push(`${member.name}'s ability became ${abilityDisplayName(nextAbility)}!`)
   } else if (item.category === 'medicine') {
     if (item.revive) {
       if (member.currentHp > 0) return state

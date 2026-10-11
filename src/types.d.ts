@@ -194,6 +194,8 @@ type ConsumableItem = {
   grantsGmax?: boolean
   /** Hyper-trains the target: `lowest` caps its lowest IV at 31, `all` caps every IV. */
   ivTraining?: 'lowest' | 'all'
+  /** Changes the target's ability: `capsule` cycles its normal abilities, `patch` toggles the hidden one. */
+  abilityChange?: 'capsule' | 'patch'
 }
 
 type PokeBall = {

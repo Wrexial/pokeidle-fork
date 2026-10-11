@@ -4,7 +4,7 @@
 import { roamerFleeChance } from '../../data/config.js'
 import { abilityBlocksBerries, abilityIgnoresIndirectDamage, abilityOf } from '../abilities.js'
 import { emptyBattleHazards } from '../hazards.js'
-import { heldBerryHeal, heldLeftoversHeal } from '../held-items.js'
+import { heldBerryHeal, heldLeftoversHeal, heldPinchBoost } from '../held-items.js'
 import { TERRAIN_NAMES, terrainHeal } from '../terrain.js'
 import { WEATHER_NAMES, weatherAbilityHeal, weatherResidualDamage } from '../weather.js'
 import { chance } from './damage.js'
@@ -241,15 +241,16 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
         })
       }
     }
-    // Ripen doubles a berry's healing; an opponent's Unnerve blocks it entirely.
-    const berryHeal =
-      abilityBlocksBerries(isPlayerSide ? enemy : player) || (pokemon.embargoTurns ?? 0) > 0
-        ? 0
-        : heldBerryHeal(pokemon) * (abilityOf(pokemon) === 'ripen' ? 2 : 1)
-    if (berryHeal > 0) {
+    // Ripen doubles a berry's effect; an opponent's Unnerve blocks it entirely.
+    const berriesBlocked =
+        abilityBlocksBerries(isPlayerSide ? enemy : player) || (pokemon.embargoTurns ?? 0) > 0,
+      ripen = abilityOf(pokemon) === 'ripen',
+      berryHeal = berriesBlocked ? 0 : heldBerryHeal(pokemon) * (ripen ? 2 : 1),
+      pinchBoost = berriesBlocked ? null : heldPinchBoost(pokemon, deterministic)
+    if (berryHeal > 0 || pinchBoost) {
       // The berry is still consumed under Heal Block, but restores no HP.
       pokemon.heldItemUsed = !0
-      if (!healBlocked(pokemon)) {
+      if (berryHeal > 0 && !healBlocked(pokemon)) {
         pokemon.currentHp = Math.min(pokemon.maxHp, pokemon.currentHp + berryHeal)
         events.push({
           type: 'heal',
@@ -260,22 +261,36 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
             hpMax: pokemon.maxHp,
           },
         })
-        // Cheek Pouch heals extra when a berry is eaten.
-        if (abilityOf(pokemon) === 'cheekPouch' && pokemon.currentHp < pokemon.maxHp) {
-          const pouchHeal = Math.max(1, Math.floor(pokemon.maxHp / 3))
-          pokemon.currentHp = Math.min(pokemon.maxHp, pokemon.currentHp + pouchHeal)
-          events.push({
-            type: 'heal',
-            message: `${pokemon.name}'s Cheek Pouch restored HP!`,
-            data: {
-              target: isPlayerSide ? 'player' : 'enemy',
-              hpAfter: pokemon.currentHp,
-              hpMax: pokemon.maxHp,
-            },
-          })
-        }
         // Cud Chew schedules a second helping next turn.
         if (abilityOf(pokemon) === 'cudChew') pokemon.cudChewHeal = berryHeal
+      }
+      if (pinchBoost) {
+        pokemon.statStages || (pokemon.statStages = {})
+        const stages = pinchBoost.stages * (ripen ? 2 : 1),
+          current = pokemon.statStages[pinchBoost.stat] ?? 0,
+          next = clampStatStage(current + stages)
+        if (next !== current) {
+          pokemon.statStages[pinchBoost.stat] = next
+          events.push({
+            type: 'statChange',
+            message: `${pokemon.name}'s ${getStatLabel(pinchBoost.stat)} rose!`,
+            data: { target: isPlayerSide ? 'player' : 'enemy' },
+          })
+        }
+      }
+      // Cheek Pouch heals extra when any held berry is eaten.
+      if (abilityOf(pokemon) === 'cheekPouch' && !healBlocked(pokemon) && pokemon.currentHp < pokemon.maxHp) {
+        const pouchHeal = Math.max(1, Math.floor(pokemon.maxHp / 3))
+        pokemon.currentHp = Math.min(pokemon.maxHp, pokemon.currentHp + pouchHeal)
+        events.push({
+          type: 'heal',
+          message: `${pokemon.name}'s Cheek Pouch restored HP!`,
+          data: {
+            target: isPlayerSide ? 'player' : 'enemy',
+            hpAfter: pokemon.currentHp,
+            hpMax: pokemon.maxHp,
+          },
+        })
       }
     }
     // Harvest restores a consumed berry (always in sun, else 50%).

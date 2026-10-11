@@ -214,6 +214,42 @@ export function heldCuresStatus(pokemon) {
   return heldItemEffect(pokemon)?.type === 'lumBerry' && !pokemon.heldItemUsed
 }
 
+/**
+ * Rocky Helmet recoil a contact attacker takes from the holder (0 when not
+ * held). The damage is a sixth of the *attacker's* max HP.
+ * @param {BattlePokemon} holder
+ * @param {BattlePokemon} attacker
+ * @returns {number}
+ */
+export function heldContactRecoil(holder, attacker) {
+  return heldItemEffect(holder)?.type === 'rockyHelmet'
+    ? Math.max(1, Math.floor(attacker.maxHp / 6))
+    : 0
+}
+
+/** The stats a Starf Berry can pick from. */
+const PINCH_STATS = ['attack', 'defense', 'spAttack', 'spDefense', 'speed']
+
+/**
+ * A pinch berry the holder has dropped low enough to eat: the stat it raises
+ * and the stage count. Returns null when no pinch berry is ready. Gluttony
+ * changes the threshold from a quarter of max HP to half.
+ * @param {BattlePokemon} pokemon
+ * @param {boolean} [deterministic]
+ * @returns {{ stat: string, stages: number } | null}
+ */
+export function heldPinchBoost(pokemon, deterministic = !1) {
+  const effect = heldItemEffect(pokemon)
+  if (effect?.type !== 'pinch' || pokemon.heldItemUsed || pokemon.currentHp <= 0) return null
+  const threshold = abilityOf(pokemon) === 'gluttony' ? 0.5 : 0.25
+  if (pokemon.currentHp > pokemon.maxHp * threshold) return null
+  const stat =
+    effect.stat === 'random'
+      ? PINCH_STATS[deterministic ? 0 : Math.floor(Math.random() * PINCH_STATS.length)]
+      : effect.stat
+  return { stat, stages: effect.stages ?? 1 }
+}
+
 /** Life Orb recoil for a hit that dealt `damage`. @param {BattlePokemon} pokemon @param {number} damage */
 export function heldLifeOrbRecoil(pokemon, damage) {
   const effect = heldItemEffect(pokemon)

@@ -11,7 +11,7 @@ import { changeBattleForm } from './setup.js'
 import { calculateDamage, chance, getTypeEffectiveness, isSelfTargetedMove, normalizeStatKey } from './damage.js'
 import { applyEndOfTurn, reportFieldEffects } from './end-of-turn.js'
 import { emptyBattleHazards } from '../hazards.js'
-import { heldBerryHeal, heldChoiceItem, heldDamageMultiplier, heldItemBoostType, heldLifeOrbRecoil, heldStatMultiplier, heldSurvivesAtFullHp, heldTerrainExtenderTurns } from '../held-items.js'
+import { heldBerryHeal, heldChoiceItem, heldContactRecoil, heldDamageMultiplier, heldItemBoostType, heldLifeOrbRecoil, heldStatMultiplier, heldSurvivesAtFullHp, heldTerrainExtenderTurns } from '../held-items.js'
 import { canEvolveFurther } from '../pokemon.js'
 import { VARIABLE_POWER_MOVES, withVariablePower } from './variable-power.js'
 import { CHARGE_MOVES, hitsSemiInvulnerable } from './charge-moves.js'
@@ -2904,6 +2904,30 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       deterministic,
       activeTerrain
     )
+    // A Rocky Helmet hurts the contact attacker for 1/6 of its max HP.
+    const helmetRecoil =
+      moveMakesContact(effectiveMove) && !abilityAvoidsContact(attack.attacker)
+        ? heldContactRecoil(attack.defender, attack.attacker)
+        : 0
+    if (helmetRecoil > 0 && attack.attacker.currentHp > 0) {
+      attack.attacker.currentHp = Math.max(0, attack.attacker.currentHp - helmetRecoil)
+      events.push({
+        type: 'recoil',
+        message: `${attack.attacker.name} was hurt by the Rocky Helmet! (${helmetRecoil} damage)`,
+        data: {
+          target: attack.isPlayer ? 'player' : 'enemy',
+          damage: helmetRecoil,
+          hpAfter: attack.attacker.currentHp,
+          hpMax: attack.attacker.maxHp,
+        },
+      })
+      attack.attacker.currentHp <= 0 &&
+        events.push({
+          type: 'faint',
+          message: `${attack.attacker.name} fainted!`,
+          data: { target: attack.isPlayer ? 'player' : 'enemy' },
+        })
+    }
     // The defender's ability may reward it for being hit (Justified, Weak
     // Armor, ...) or react to dropping below half HP (Berserk, Anger Shell).
     const onHit = {

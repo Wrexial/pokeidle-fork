@@ -47,6 +47,7 @@ export const CHANGELOG = [
         items: [
           'Two ability items join the game: the Ability Capsule switches a Pokemon between its normal abilities, and the Ability Patch toggles its hidden ability (and back again). Both are Research Shop rewards.',
           'The Research Shop has its own identity now instead of restocking the evolution stones the Kecleon Shop already sells: it offers the full Exp. Candy ladder (S / M / L / XL), Rare Candy, Poffin, the Ability Capsule and Patch, Bottle Caps and a Master Ball.',
+          'More battle held items: the Rocky Helmet hurts a foe that makes contact for a sixth of its HP, and the six pinch Berries (Liechi, Ganlon, Salac, Petaya, Apicot, Starf) boost a stat when the holder drops to a quarter of its HP (half with Gluttony). Both are Grand Auction lots.',
         ],
       },
       {

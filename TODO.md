@@ -19,8 +19,8 @@ renumbered, so the gaps below are items that shipped.
 
 1. **#24 Move data pass** — M · ★★★ — only the PP / Z-Move keep-or-drop
    decisions remain (Quick/Wide Guard side protection shipped).
-2. **#25 Battle engine pass** — M–L · ★★★ — Illusion, more berries / Rocky
-   Helmet, and battle polish.
+2. **#25 Battle engine pass** — M–L · ★★★ — Illusion and battle polish (the
+   pinch berries and Rocky Helmet shipped).
 3. **#18 Better settings** — M · ★★★ — more cosmetic options if wanted;
    account controls blocked on #19 (auto-heal, the default catch rule and two
    Display toggles shipped).
@@ -150,15 +150,16 @@ Done: the ally ability set is complete in the doubles engine — Battery, Power
 Spot, Friend Guard, Healer, Telepathy, Aroma/Flower Veil, Costar, Commander,
 Hospitality, Symbiosis and Gulp Missile all act.
 
+Done: the remaining item nuances ship — Rocky Helmet (contact recoil for a
+sixth of the attacker's HP) and the six pinch berries (Liechi / Ganlon / Salac /
+Petaya / Apicot / Starf), both Grand Auction lots.
+
 Not done:
 
 - [ ] Illusion (deferred: its disguise is cosmetic plus an AI read, which an
       idle auto-battler barely shows).
 - [ ] Overworld-only abilities (no effect in an idle auto-battler): Illuminate,
       Run Away.
-- [ ] The remaining item nuances: more berries (the pinch berries beyond
-      Sitrus/Lum) and Rocky Helmet (blocked on a bag sprite). Choice locking
-      shipped.
 - [ ] Battle polish: move animations / hit feedback (damage numbers already
       float over the sprite and have a Settings toggle).
 

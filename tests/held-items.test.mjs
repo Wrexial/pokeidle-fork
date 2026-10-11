@@ -367,3 +367,58 @@ test('a Choice item locks the holder into its first move', () => {
     )
   })
 })
+
+test('a Rocky Helmet hurts a contact attacker but not a ranged one', () => {
+  const run = (/** @type {string} */ moveId) => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: [moveId],
+        attack: 200,
+        spAttack: 200,
+        speed: 200,
+      }),
+      enemy = battler({
+        name: 'Foe',
+        heldItem: 'rockyHelmet',
+        defense: 200,
+        spDefense: 200,
+        currentHp: 9999,
+        maxHp: 9999,
+      })
+    resolveBattleTurn(player, enemy, false, false, null, null, true)
+    return player.currentHp
+  }
+  // Tackle makes contact, so the helmet bites for 1/6 of max HP.
+  assert.equal(run('tackle'), 400 - Math.floor(400 / 6))
+  // A special move does not make contact.
+  assert.equal(run('thunderbolt'), 400)
+})
+
+test('a pinch berry boosts its stat at a quarter HP, once', () => {
+  const run = (/** @type {number} */ hp) => {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['splash'],
+        heldItem: 'liechiBerry',
+        currentHp: hp,
+        maxHp: 400,
+        speed: 200,
+      }),
+      enemy = battler({ name: 'Foe', moves: ['splash'] })
+    resolveBattleTurn(player, enemy, false, false, null, null, true)
+    return player
+  }
+  const low = run(100)
+  assert.equal(low.statStages.attack, 1, 'Liechi raises Attack at a quarter HP')
+  assert.equal(low.heldItemUsed, true, 'the berry is consumed')
+  // A second end-of-turn does not raise it again.
+  const again = run(100)
+  resolveBattleTurn(again, battler({ name: 'Foe', moves: ['splash'] }), false, false, null, null, true)
+  assert.equal(again.statStages.attack, 1)
+  // Above the threshold the berry is untouched.
+  const healthy = run(300)
+  assert.equal(healthy.statStages.attack ?? 0, 0)
+  assert.ok(!healthy.heldItemUsed, 'the berry is not consumed above the threshold')
+})

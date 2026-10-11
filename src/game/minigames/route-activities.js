@@ -144,7 +144,7 @@ export const ROUTE_ACTIVITIES = {
     title: 'Campfire',
     action: 'STOKE',
     icon: '\u{1f525}',
-    hint: 'Feed the campfire to keep its heat in the sweet band without letting it flare over \u2014 the steadier the flame, the better the Fire Pokemon drawn to it.',
+    hint: 'Add a log to raise the blaze \u2014 the higher it burns, the better the Fire Pokemon it draws, but every log risks a flare-over. Bank the fire before it flares to keep what you have built.',
     mode: 'encounter',
     display: 'stoke',
     condition: { time: 'night' },
@@ -232,9 +232,9 @@ export const ROUTE_ACTIVITY_TUTORIALS = {
     `You have three holes before the dig is a miss, and a clean dig can find a fossil.`,
   ],
   kindle: [
-    'Tap STOKE to feed the campfire and raise its heat.',
-    'Keep the flame inside the green band as the meter fills.',
-    'Let it flare over the top and the attempt is spoiled.',
+    'Tap ADD A LOG to stoke the fire higher.',
+    'Every log raises the blaze but also the chance it flares over, which costs you the last log.',
+    'Tap BANK to keep your blaze, or push on to the max for the best find.',
   ],
   overcharge: [
     'A spark orbits the coil.',
@@ -551,24 +551,23 @@ export function activityDigQuality(tries) {
   return 'hit'
 }
 
+/** Blaze a log adds, the flare-over risk it carries, and the max blaze. */
+export const ACTIVITY_STOKE = { step: 1, flareRisk: 0.1, max: 8 }
+
 /**
- * Grade "keep a value inside its band for a while" mechanics (the campfire's
- * heat) by the fraction of the run spent on the band.
- * @param {number} ratio Fraction of the attempt spent inside the band.
+ * Grade a campfire attempt: the blaze you banked, or one log less if it flared
+ * over before you could bank it.
+ * @param {number} blaze
+ * @param {boolean} [flared]
  * @returns {'hit' | 'perfect' | 'ultra' | null}
  */
-export function activityBandQuality(ratio) {
-  if (ratio >= 0.55) return 'ultra'
-  if (ratio >= 0.35) return 'perfect'
-  if (ratio >= 0.15) return 'hit'
+export function activityStokeQuality(blaze, flared = false) {
+  const level = flared ? blaze - ACTIVITY_STOKE.step : blaze
+  if (level >= ACTIVITY_STOKE.max) return 'ultra'
+  if (level >= 6) return 'perfect'
+  if (level >= 3) return 'hit'
   return null
 }
-
-/** How long the campfire heat must be kept in its band, in ms. */
-export const ACTIVITY_STOKE_MS = 2400
-
-/** Heat a stoke adds, the per-second drain, the band and the overheat point. */
-export const ACTIVITY_STOKE = { tap: 0.16, drain: 0.34, min: 0.4, max: 0.75, overheat: 1 }
 
 /** Sparks that make up one overcharge round. */
 export const ACTIVITY_CIRCUIT_SPARKS = 3

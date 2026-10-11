@@ -19,7 +19,6 @@ const {
   FISHING_LOCATIONS,
   ROUTE_ACTIVITIES,
   ROUTE_ACTIVITY_TUTORIALS,
-  activityBandQuality,
   activityBiteChance,
   activityBugQuality,
   activityCircuitQuality,
@@ -34,6 +33,7 @@ const {
   activityRuneQuality,
   activityShinyMultiplier,
   activitySoarQuality,
+  activityStokeQuality,
   bumpActivityQuality,
   rollActivityEncounter,
   rollActivityEncounters,
@@ -714,10 +714,12 @@ test('the campfire, overcharge and s\u00e9ance interactions grade their metrics'
   assert.equal(ROUTE_ACTIVITIES.summit.display, 'soar')
   assert.equal(ROUTE_ACTIVITIES.summit.preferTypes.join(','), 'Dragon')
 
-  assert.equal(activityBandQuality(0), null, 'never on the band finds nothing')
-  assert.equal(activityBandQuality(1), 'ultra')
-  assert.equal(activityBandQuality(0.4), 'perfect')
-  assert.equal(activityBandQuality(0.2), 'hit')
+  assert.equal(activityStokeQuality(0), null, 'banking nothing finds nothing')
+  assert.equal(activityStokeQuality(3), 'hit')
+  assert.equal(activityStokeQuality(6), 'perfect')
+  assert.equal(activityStokeQuality(8), 'ultra')
+  assert.equal(activityStokeQuality(6, true), 'hit', 'a flare-over costs the last log')
+  assert.equal(activityStokeQuality(1, true), null)
 
   assert.equal(activityCircuitQuality(0), null, 'missing every spark fizzles')
   assert.equal(activityCircuitQuality(ACTIVITY_CIRCUIT_SPARKS), 'ultra')

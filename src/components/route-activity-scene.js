@@ -31,11 +31,9 @@ import {
   ACTIVITY_SOAR,
   ACTIVITY_SOAR_MS,
   ACTIVITY_STOKE,
-  ACTIVITY_STOKE_MS,
   ACTIVITY_SWEEP_MS,
   ACTIVITY_ULTRA_ZONE,
   ROUTE_ACTIVITIES,
-  activityBandQuality,
   activityBiteChance,
   activityBugQuality,
   activityCircuitQuality,
@@ -50,6 +48,7 @@ import {
   activityRuneQuality,
   activityShinyMultiplier,
   activitySoarQuality,
+  activityStokeQuality,
   bestRodId,
   bumpActivityQuality,
   rodForId,
@@ -131,9 +130,8 @@ export function RouteActivityScene() {
       Array(ACTIVITY_DIG_SIZE * ACTIVITY_DIG_SIZE).fill(0)
     ),
     [digTries, setDigTries] = React.useState(0),
-    // Campfire: the heat level and how much of the run is done.
-    [heat, setHeat] = React.useState(0.5),
-    [stokeProgress, setStokeProgress] = React.useState(0),
+    // Campfire: the blaze built up so far (a push-your-luck count).
+    [stokeBlaze, setStokeBlaze] = React.useState(0),
     // Overcharge: the orbiting spark, sparks landed and their score.
     [circuitAngle, setCircuitAngle] = React.useState(0),
     [circuitSparks, setCircuitSparks] = React.useState(0),
@@ -159,8 +157,7 @@ export function RouteActivityScene() {
     gripStatsRef = React.useRef({ elapsed: 0, inBand: 0 }),
     bugShownAtRef = React.useRef(0),
     digTreasureRef = React.useRef(0),
-    heatRef = React.useRef(0.5),
-    stokeStatsRef = React.useRef({ elapsed: 0, inBand: 0 }),
+    stokeBlazeRef = React.useRef(0),
     circuitSparksRef = React.useRef(0),
     circuitScoreRef = React.useRef(0),
     soarRef = React.useRef(0.2),
@@ -202,10 +199,7 @@ export function RouteActivityScene() {
     digTreasureRef.current = Math.floor(
       Math.random() * ACTIVITY_DIG_SIZE * ACTIVITY_DIG_SIZE
     )
-    heatRef.current = 0.5
-    setHeat(0.5)
-    stokeStatsRef.current = { elapsed: 0, inBand: 0 }
-    setStokeProgress(0)
+    setStokeBlaze(0)
     circuitSparksRef.current = 0
     circuitScoreRef.current = 0
     setCircuitSparks(0)
@@ -365,40 +359,6 @@ export function RouteActivityScene() {
       window.removeEventListener('pointercancel', release)
     }
   }, [gripHeld])
-
-  // Campfire: heat drains away, so the player stokes it to stay in the band.
-  // Flaring over the top spoils the attempt.
-  React.useEffect(() => {
-    if (stage !== 'aiming' || activity?.display !== 'stoke') return
-    let frame = 0,
-      done = false,
-      last = performance.now()
-    const loop = /** @param {number} now */ (now) => {
-      const delta = Math.min(50, now - last)
-      last = now
-      heatRef.current = Math.max(0, heatRef.current - ACTIVITY_STOKE.drain * (delta / 1000))
-      stokeStatsRef.current.elapsed += delta
-      if (heatRef.current >= ACTIVITY_STOKE.min && heatRef.current <= ACTIVITY_STOKE.max)
-        stokeStatsRef.current.inBand += delta
-      setHeat(heatRef.current)
-      setStokeProgress(Math.min(1, stokeStatsRef.current.elapsed / ACTIVITY_STOKE_MS))
-      if (heatRef.current >= ACTIVITY_STOKE.overheat && !done) {
-        done = true
-        finishRef.current(null)
-        return
-      }
-      if (stokeStatsRef.current.elapsed >= ACTIVITY_STOKE_MS && !done) {
-        done = true
-        finishRef.current(
-          activityBandQuality(stokeStatsRef.current.inBand / stokeStatsRef.current.elapsed)
-        )
-        return
-      }
-      frame = requestAnimationFrame(loop)
-    }
-    frame = requestAnimationFrame(loop)
-    return () => cancelAnimationFrame(frame)
-  }, [stage, activity?.display])
 
   // Overcharge: a spark orbits the coil so the player can time a discharge.
   React.useEffect(() => {
@@ -824,13 +784,28 @@ export function RouteActivityScene() {
   }
 
   // Campfire: each stoke drops a burst of heat into the fire.
+  // Campfire: add a log to raise the blaze, but every log risks a flare-over that
+  // costs the last one. Reaching the max blaze resolves straight away.
   function stokeTap() {
     if (stage !== 'aiming' || activity?.display !== 'stoke') return
-    heatRef.current = Math.min(
-      ACTIVITY_STOKE.overheat + 0.05,
-      heatRef.current + ACTIVITY_STOKE.tap
-    )
-    setHeat(heatRef.current)
+    const blaze = stokeBlazeRef.current + ACTIVITY_STOKE.step
+    stokeBlazeRef.current = blaze
+    setStokeBlaze(blaze)
+    if (state.sfxEnabled) playSfx('good')
+    if (blaze >= ACTIVITY_STOKE.max) {
+      finishRef.current(activityStokeQuality(blaze, false))
+      return
+    }
+    if (Math.random() < blaze * ACTIVITY_STOKE.flareRisk) {
+      if (state.sfxEnabled) playSfx('miss')
+      finishRef.current(activityStokeQuality(blaze, true))
+    }
+  }
+
+  // Campfire: bank the blaze you have built instead of risking another log.
+  function bankFire() {
+    if (stage !== 'aiming' || activity?.display !== 'stoke') return
+    finishRef.current(activityStokeQuality(stokeBlazeRef.current, false))
   }
 
   // Overcharge: discharge where the spark crosses the contact; three timed
@@ -1205,47 +1180,56 @@ export function RouteActivityScene() {
   }
 
   function renderStoke() {
-    const inBand = heat >= ACTIVITY_STOKE.min && heat <= ACTIVITY_STOKE.max
+    const nextRisk = Math.min(1, (stokeBlaze + ACTIVITY_STOKE.step) * ACTIVITY_STOKE.flareRisk)
     return jsxs('div', {
       className: `activity-stoke${stage === 'aiming' ? '' : ' locked'}`,
       children: [
-        jsx('div', { className: 'activity-fire', children: '\u{1f525}' }),
+        jsx('div', {
+          className: 'activity-fire',
+          style: { fontSize: `${30 + stokeBlaze * 5}px` },
+          children: '\u{1f525}',
+        }),
         jsxs('div', {
-          className: 'activity-stoke-bar',
+          className: 'activity-blaze',
           children: [
+            jsx('span', { className: 'activity-blaze-label', children: 'BLAZE' }),
             jsx('div', {
-              className: 'activity-stoke-band',
-              style: {
-                left: `${ACTIVITY_STOKE.min * 100}%`,
-                width: `${(ACTIVITY_STOKE.max - ACTIVITY_STOKE.min) * 100}%`,
-              },
+              className: 'activity-blaze-track',
+              children: jsx('div', {
+                className: 'activity-blaze-fill',
+                style: { width: `${(stokeBlaze / ACTIVITY_STOKE.max) * 100}%` },
+              }),
             }),
-            jsx('div', {
-              className: `activity-stoke-fill${heat > ACTIVITY_STOKE.max ? ' hot' : ''}`,
-              style: { width: `${heat * 100}%` },
-            }),
-            jsx('div', {
-              className: `activity-stoke-marker${inBand ? ' perfect' : ''}`,
-              style: { left: `${heat * 100}%` },
+            jsx('span', {
+              className: 'activity-blaze-count',
+              children: `${stokeBlaze}/${ACTIVITY_STOKE.max}`,
             }),
           ],
         }),
-        jsx('div', {
-          className: 'activity-band-progress',
-          children: jsx('div', {
-            className: 'activity-band-progress-fill',
-            style: { transform: `scaleX(${stokeProgress})` },
-          }),
+        jsx('span', {
+          className: `activity-risk${nextRisk >= 0.5 ? ' high' : ''}`,
+          children: `Next log: ${Math.round(nextRisk * 100)}% flare risk`,
         }),
-        jsx('button', {
-          className: 'activity-tap-btn',
-          disabled: stage !== 'aiming',
-          onPointerDown: (/** @type {React.PointerEvent<HTMLButtonElement>} */ event) => {
-            event.preventDefault()
-            stokeTap()
-          },
-          onContextMenu: (/** @type {React.MouseEvent} */ event) => event.preventDefault(),
-          children: 'STOKE',
+        jsxs('div', {
+          className: 'activity-stoke-actions',
+          children: [
+            jsx('button', {
+              className: 'activity-tap-btn',
+              disabled: stage !== 'aiming',
+              onPointerDown: (/** @type {React.PointerEvent<HTMLButtonElement>} */ event) => {
+                event.preventDefault()
+                stokeTap()
+              },
+              onContextMenu: (/** @type {React.MouseEvent} */ event) => event.preventDefault(),
+              children: 'ADD A LOG',
+            }),
+            jsx('button', {
+              className: 'activity-tap-btn',
+              disabled: stage !== 'aiming' || stokeBlaze <= 0,
+              onClick: bankFire,
+              children: `BANK (${stokeBlaze})`,
+            }),
+          ],
         }),
       ],
     })

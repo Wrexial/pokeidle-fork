@@ -42,7 +42,7 @@ renumbered, so the gaps below are items that shipped.
 10. **#62 Offline depth** — M · ★★★.
 11. **#72 QoL pass** — S–M · ★★★ — IV sort, move preview and team presets
     shipped; box bulk-release remains.
-12. **#67 Ribbons + ribbon case** — S–M · ★★½.
+12. **#67 Ribbons + ribbon case** — shipped.
 13. **#68 Generation-completion rewards** — done.
 14. **#59 Activity goals & per-route mastery** — S–M · ★★.
 15. **#61 Focus / target hunting** — S–M · ★★½.
@@ -264,8 +264,17 @@ Effort: **medium–large**.
 
 ## 67. Ribbons + ribbon case
 
-Award ribbons for contest wins, tower clears, gym sweeps and the like, with a
-per-Pokemon ribbon case UI. Contest minigame already exists.
+Done: `src/game/ribbons.js` defines eight ribbons (Effort at Lv. 100, Best
+Friends at max friendship, Gym, Elite, League, Tower, Contest and Gauntlet) and
+`awardRibbon` / `awardRibbonToParty` / `syncMilestoneRibbons` grant them
+idempotently. They are attached to the individual in the save, dropped if
+unknown on load, and shown in a ribbon case on the stats panel
+(`ribbon-case.js`).
+
+Still open (optional):
+
+- [ ] More ribbons: a shiny ribbon, a first-catch ribbon, per-region League
+      ribbons, or a ribbon for a full Field-research species.
 
 Effort: **small–medium**.
 

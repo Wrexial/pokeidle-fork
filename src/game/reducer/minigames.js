@@ -5,6 +5,7 @@ import { minigameTmChance } from '../../data/config.js'
 import { mapData, pokemonSpecies } from '../../data/gameData.js'
 import { getTmInfo, tmItemId } from '../../data/tms.js'
 import { createIdleBattleState } from '../progression.js'
+import { awardRibbonToParty } from '../pokemon.js'
 import { enterMinigame, withNotification } from '../reducer-helpers.js'
 import { minigameTmTypes, rollUnownedTm } from '../tms.js'
 import { markCaught } from './collection.js'
@@ -528,39 +529,56 @@ function recordMinigame(state, result) {
  * @returns {GameState}
  */
 export function endMinigame(state, action) {
-  return state.phase === 'mining' ||
-    state.phase === 'gameCorner' ||
-    state.phase === 'academyQuiz' ||
-    state.phase === 'voltorbFlip' ||
-    state.phase === 'auctionHouse' ||
-    state.phase === 'contest' ||
-    state.phase === 'pokeathlon' ||
-    state.phase === 'pokeRadar' ||
-    state.phase === 'battleRoyal' ||
-    state.phase === 'dynamaxAdventures' ||
-    state.phase === 'lightsOut' ||
-    state.phase === 'curry' ||
-    state.phase === 'pokestar' ||
-    state.phase === 'puzzleLeague' ||
-    state.phase === 'memory' ||
-    state.phase === 'whack' ||
-    state.phase === 'musical' ||
-    state.phase === 'picnic' ||
-    state.phase === 'pokeballFactory' ||
-    state.phase === 'ruinsPuzzle' ||
-    state.phase === 'iceSlide' ||
-    state.phase === 'pelago' ||
-    state.phase === 'mantineSurf' ||
-    state.phase === 'rotomRally' ||
-    state.phase === 'ogreOustin' ||
-    state.phase === 'typeFusion' ||
-    state.phase === 'unownPicross' ||
-    state.phase === 'pokeshot' ||
-    state.phase === 'teraRaid' ||
-    state.phase === 'pokeword' ||
-    state.phase === 'berryBlender'
-    ? recordMinigame({ ...state, ...createIdleBattleState() }, minigameResult(state, action))
-    : state
+  if (
+    !(
+      state.phase === 'mining' ||
+      state.phase === 'gameCorner' ||
+      state.phase === 'academyQuiz' ||
+      state.phase === 'voltorbFlip' ||
+      state.phase === 'auctionHouse' ||
+      state.phase === 'contest' ||
+      state.phase === 'pokeathlon' ||
+      state.phase === 'pokeRadar' ||
+      state.phase === 'battleRoyal' ||
+      state.phase === 'dynamaxAdventures' ||
+      state.phase === 'lightsOut' ||
+      state.phase === 'curry' ||
+      state.phase === 'pokestar' ||
+      state.phase === 'puzzleLeague' ||
+      state.phase === 'memory' ||
+      state.phase === 'whack' ||
+      state.phase === 'musical' ||
+      state.phase === 'picnic' ||
+      state.phase === 'pokeballFactory' ||
+      state.phase === 'ruinsPuzzle' ||
+      state.phase === 'iceSlide' ||
+      state.phase === 'pelago' ||
+      state.phase === 'mantineSurf' ||
+      state.phase === 'rotomRally' ||
+      state.phase === 'ogreOustin' ||
+      state.phase === 'typeFusion' ||
+      state.phase === 'unownPicross' ||
+      state.phase === 'pokeshot' ||
+      state.phase === 'teraRaid' ||
+      state.phase === 'pokeword' ||
+      state.phase === 'berryBlender'
+    )
+  )
+    return state
+  const result = minigameResult(state, action)
+  let next = recordMinigame({ ...state, ...createIdleBattleState() }, result)
+  // A cleared Contest / Gauntlet earns the party a ribbon.
+  const achievementRibbon =
+    result?.completed && result.minigame === 'contest'
+      ? 'contest'
+      : result?.completed && result.minigame === 'championGauntlet'
+        ? 'gauntlet'
+        : null
+  if (achievementRibbon) {
+    const party = awardRibbonToParty(next.party, achievementRibbon)
+    if (party !== next.party) next = { ...next, party }
+  }
+  return next
 }
 
 /**

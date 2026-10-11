@@ -6,7 +6,7 @@ import { BATTLE_TOWER_REGION, LEGACY_SAVE_KEYS, MAX_TEAM_PRESETS, SAVE_BACKUP_KE
 import { dailyEventByKey, todayKey } from '../data/daily-events.js'
 import { activeItems, autoCatchBallOrder, pokeBalls } from '../data/items.js'
 import { elite4Data, encounterData, gymLeaderData, mapData, moveData, pokemonSpecies, preEvolutionMap, regions, speciesKeysByGeneration } from '../data/gameData.js'
-import { BASE_FRIENDSHIP, generateIVs, calculatePokemonStats, resolvePokemonMoves, rollAbility, rollSize } from './pokemon.js'
+import { BASE_FRIENDSHIP, generateIVs, calculatePokemonStats, resolvePokemonMoves, rollAbility, rollSize, RIBBONS } from './pokemon.js'
 import { ACHIEVEMENTS } from '../data/achievements.js'
 import { natureByKey, randomNature } from '../data/natures.js'
 import { isTerminalForm } from '../data/mega-evolution.js'
@@ -153,15 +153,24 @@ export function repairSave(saved) {
   playerPokemon.ivs || (playerPokemon.ivs = generateIVs())
   // Older saves predate per-individual sizes, so roll one in.
   if (playerPokemon.size === void 0) playerPokemon.size = rollSize()
-  /** @param {any} pokemon */
-  const withDerivedPokemonFields = (pokemon) =>
-    pokemon.ivs && pokemon.size !== void 0
-      ? pokemon
-      : {
-          ...pokemon,
-          ...(pokemon.ivs ? {} : { ivs: generateIVs() }),
-          ...(pokemon.size === void 0 ? { size: rollSize() } : {}),
-        }
+  /**
+   * Fill in the per-individual fields an old save may lack and drop unknown
+   * ribbon ids. Returns the same reference when nothing changed.
+   * @param {any} pokemon
+   */
+  const withDerivedPokemonFields = (pokemon) => {
+    const ribbons = Array.isArray(pokemon.ribbons)
+        ? pokemon.ribbons.filter((/** @type {string} */ id) => RIBBONS[id])
+        : null,
+      needsRibbonFix = ribbons && ribbons.length !== pokemon.ribbons.length
+    if (pokemon.ivs && pokemon.size !== void 0 && !needsRibbonFix) return pokemon
+    return {
+      ...pokemon,
+      ...(pokemon.ivs ? {} : { ivs: generateIVs() }),
+      ...(pokemon.size === void 0 ? { size: rollSize() } : {}),
+      ...(needsRibbonFix ? { ribbons } : {}),
+    }
+  }
   party = party.map(withDerivedPokemonFields)
   box = box.map(withDerivedPokemonFields)
 

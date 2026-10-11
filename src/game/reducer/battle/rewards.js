@@ -1,7 +1,7 @@
 // // EXP application (including shared EXP) and the debug level-up cheat. Split from game/reducer/battle.js.
 
 import { moveData, pokemonSpecies } from '../../../data/gameData.js'
-import { applyMoveLearning, calculatePokemonStats, calculateRequiredExperience, gainFriendship, resolvePokemonMoves } from '../../pokemon.js'
+import { applyMoveLearning, calculatePokemonStats, calculateRequiredExperience, gainFriendship, resolvePokemonMoves, syncMilestoneRibbons } from '../../pokemon.js'
 import { syncActivePokemonIntoParty } from '../../progression.js'
 
 /**
@@ -63,6 +63,8 @@ export function applyExp(state, action) {
         `${updatedPokemon.name} wants to learn ${moveData[moveId]?.name ?? moveId} — make room in Manage Moves.`
       )
   }
+  // Award the milestone ribbons a level-up or friendship gain may have earned.
+  updatedPokemon = syncMilestoneRibbons(updatedPokemon)
   return syncActivePokemonIntoParty({
     ...state,
     playerPokemon: updatedPokemon,
@@ -137,7 +139,7 @@ export function applySharedExp(state, action) {
           `${member.name} wants to learn ${moveData[moveId]?.name ?? moveId} — make room in Manage Moves.`
         )
     }
-    party[partyIndex] = member
+    party[partyIndex] = syncMilestoneRibbons(member)
   }
   const activeIndex = state.activePlayerPokemonIndex,
     playerPokemon = party[activeIndex] || state.playerPokemon

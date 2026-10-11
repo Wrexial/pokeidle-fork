@@ -25,6 +25,7 @@ import { useGame } from '../game/context.js'
 import { genderForPokemon, genderSymbol, isFemalePokemon } from '../game/breeding.js'
 import { abilityDisplayName, getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, isAlphaPokemon, IV_STAT_LABELS, IV_STAT_ORDER, judgeIVs, pokemonDisplayName, sizeRating, sizeTooltip } from '../game/pokemon.js'
 import { MoveManagerPanel } from './move-manager-panel.js'
+import { RibbonCase } from './ribbon-case.js'
 
 /** @param {{ pokemon: Pokemon, source: 'party' | 'box', partyLength: number, onAction: () => void, onClose: () => void, evolutionInfo?: { entries: { targetName: string, canEvolve: boolean, requirementLabel: string, targetKey: string, itemId?: string, isForm: boolean }[] } | null, onEvolve?: (index: number) => void, onRelease?: () => void, canRelease?: boolean, reorder?: { index: number, length: number, onMove: (toIndex: number) => void } | null }} props */
 export function StatsPanel({
@@ -508,6 +509,7 @@ export function StatsPanel({
           }),
         ],
       }),
+      jsx(RibbonCase, { pokemon }),
       jsxs('div', {
         className: 'stats-panel-moves',
         children: [

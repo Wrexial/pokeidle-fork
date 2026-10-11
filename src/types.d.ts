@@ -96,6 +96,8 @@ type Pokemon = BattlePokemon & {
   eggMoves?: string[]
   /** Per-individual size (0-255), shown as an XS-XL rating (see game/pokemon/sizes.js). */
   size?: number
+  /** Ribbon ids this individual has earned (see game/ribbons.js). */
+  ribbons?: string[]
   isShiny: boolean
 }
 

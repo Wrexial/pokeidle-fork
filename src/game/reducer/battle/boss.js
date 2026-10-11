@@ -7,6 +7,7 @@ import { createVolatileState } from '../../combat.js'
 import { fieldWeatherFor } from '../../weather.js'
 import { emptyBattleHazards } from '../../hazards.js'
 import { computeUnlockedLocations, prepareNextBattle, syncActivePokemonIntoParty, tickBattleCounters } from '../../progression.js'
+import { awardRibbonToParty } from '../../pokemon.js'
 import { settleUnlockTokens, recordSeenPokemon, withNotification } from '../../reducer-helpers.js'
 import { gymTmType, rollUnownedTm } from '../../tms.js'
 
@@ -75,6 +76,33 @@ export function startBossBattle(state, action) {
 }
 
 /**
+ * The ribbon a beaten boss awards the party, or null for an untracked one.
+ * @param {string | undefined} bossType
+ * @returns {string | null}
+ */
+function ribbonForBossType(bossType) {
+  return bossType === 'gym'
+    ? 'gym'
+    : bossType === 'e4'
+      ? 'elite'
+      : bossType === 'champion'
+        ? 'league'
+        : null
+}
+
+/**
+ * Give a ribbon to the whole party on a win, returning a new state only when
+ * the party actually changed.
+ * @param {GameState} state
+ * @param {string} ribbonId
+ * @returns {GameState}
+ */
+function withPartyRibbon(state, ribbonId) {
+  const party = awardRibbonToParty(state.party, ribbonId)
+  return party === state.party ? state : { ...state, party }
+}
+
+/**
  * Handle the `BOSS_BATTLE_END` action.
  * @param {GameState} state
  * @param {GameAction} action
@@ -91,28 +119,29 @@ export function bossBattleEnd(state, action) {
       regionId = BATTLE_TOWER_REGION,
       floor = state.towerFloor,
       best = state.towerBest[regionId] ?? 0,
-      reward = Math.floor(floor / 10)
-    return {
-      ...prepareNextBattle(state),
-      money: Math.max(0, state.money + towerMoneyDelta),
-      trainerBattlesWon: towerWon ? state.trainerBattlesWon + 1 : state.trainerBattlesWon,
-      victoryTokens: towerWon ? state.victoryTokens + reward : state.victoryTokens,
-      towerFloor: towerWon ? floor + 1 : Math.max(1, floor),
-      towerBest: {
-        ...state.towerBest,
-        [regionId]: Math.max(best, towerWon ? floor : floor - 1),
-      },
-      battleLog: [
-        ...state.battleLog,
-        towerWon
-          ? `Tower floor ${floor} cleared!${
-              reward > 0
-                ? ` Earned ${reward} Victory Token${reward > 1 ? 's' : ''}.`
-                : ''
-            }`
-          : `Tower floor ${floor} failed \u2014 your team can try again.`,
-      ].slice(-50),
-    }
+      reward = Math.floor(floor / 10),
+      towerState = {
+        ...prepareNextBattle(state),
+        money: Math.max(0, state.money + towerMoneyDelta),
+        trainerBattlesWon: towerWon ? state.trainerBattlesWon + 1 : state.trainerBattlesWon,
+        victoryTokens: towerWon ? state.victoryTokens + reward : state.victoryTokens,
+        towerFloor: towerWon ? floor + 1 : Math.max(1, floor),
+        towerBest: {
+          ...state.towerBest,
+          [regionId]: Math.max(best, towerWon ? floor : floor - 1),
+        },
+        battleLog: [
+          ...state.battleLog,
+          towerWon
+            ? `Tower floor ${floor} cleared!${
+                reward > 0
+                  ? ` Earned ${reward} Victory Token${reward > 1 ? 's' : ''}.`
+                  : ''
+              }`
+            : `Tower floor ${floor} failed \u2014 your team can try again.`,
+        ].slice(-50),
+      }
+    return towerWon ? withPartyRibbon(towerState, 'tower') : towerState
   }
   const { won, moneyDelta } = action.payload,
     newMoney = Math.max(0, state.money + moneyDelta),
@@ -258,6 +287,9 @@ export function bossBattleEnd(state, action) {
       unlockedLocations: computeUnlockedLocations(stateWithNextBoss),
     })
     if (championJustDefeated) result = settleUnlockTokens(result)
+    // A win hands the party the boss's ribbon.
+    const queueRibbon = won ? ribbonForBossType(state.bossBattle?.bossType) : null
+    if (queueRibbon) result = withPartyRibbon(result, queueRibbon)
     for (const toastNotification of toastNotifications)
       result = withNotification(result, toastNotification)
     return result
@@ -289,6 +321,8 @@ export function bossBattleEnd(state, action) {
     unlockedLocations: computeUnlockedLocations(finalState),
   })
   if (championJustDefeated) finalResult = settleUnlockTokens(finalResult)
+  const bossRibbon = won ? ribbonForBossType(state.bossBattle?.bossType) : null
+  if (bossRibbon) finalResult = withPartyRibbon(finalResult, bossRibbon)
   for (const toastNotification of toastNotifications)
     finalResult = withNotification(finalResult, toastNotification)
   return finalResult

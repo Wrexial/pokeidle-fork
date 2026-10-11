@@ -76,6 +76,7 @@ export const CHANGELOG = [
           'The cached app also keeps itself up to date: it checks for a new service worker on boot, when the network returns and when the tab becomes visible, and reloads a backgrounded tab into the new build, so an active battle is never interrupted.',
           'Field research: every species has five tasks that earn Research Points. It reads the Pokedex plus a per-species wild-defeat count, tracks a research level up to 10 in the Pokedex detail, and spends the points in a Research Shop on candies, ability items, Bottle Caps and a Master Ball.',
           'A species with no wild route (evolved forms, starters, fossils, gifts, statics and the rest) no longer shows impossible “defeat it in the wild” research tasks: it observes the species instead — obtain it, feed it a berry, and use its moves in battle — for the same points.',
+          'Ribbons are in: a Pokemon earns a permanent award for milestones (Effort at Lv. 100, Best Friends at max friendship), Gym / Elite Four / Champion wins, Battle Tower floors and cleared Contests or the Champions’ Gauntlet. A ribbon case on the stats panel lists everything an individual has earned.',
         ],
       },
       {

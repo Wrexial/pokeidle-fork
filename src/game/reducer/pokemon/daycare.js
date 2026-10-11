@@ -4,6 +4,7 @@ import { breedShinyOdds, breedShinyParentOdds, daycareEggBattles } from '../../.
 import { canBreed, eggHatchSteps, eggSpeciesKey, inheritBreedingTraits } from '../../breeding.js'
 import { createEgg, insertIntoBox } from '../../pokemon.js'
 import { checkShinyOdds } from '../../progression.js'
+import { prestigeMultipliers } from '../../prestige.js'
 import { withNotification } from '../../reducer-helpers.js'
 
 /**
@@ -60,11 +61,16 @@ export function hatchDaycareEgg(state, action) {
   const baseSpeciesKey = eggSpeciesKey(parents)
   if (!baseSpeciesKey) return state
   const shinyParent = parents.some((parent) => parent.isShiny),
+    // The Incubation prestige perk shortens the hatch.
+    hatchSteps = Math.max(
+      1,
+      Math.round(eggHatchSteps(baseSpeciesKey) / prestigeMultipliers(state).hatch)
+    ),
     egg = createEgg(
       baseSpeciesKey,
       state.nextPokemonId,
       checkShinyOdds(shinyParent ? breedShinyParentOdds : breedShinyOdds),
-      eggHatchSteps(baseSpeciesKey),
+      hatchSteps,
       inheritBreedingTraits(parents, baseSpeciesKey)
     ),
     toParty = state.party.length < 6

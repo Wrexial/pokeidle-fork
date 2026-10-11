@@ -17,6 +17,7 @@ const { calculateCatchChance } = await import('../src/game/catching.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 const { repairSave, serializeSave } = await import('../src/game/save.js')
 const { elite4Data } = await import('../src/data/gameData.js')
+const { createPokemon } = await import('../src/game/pokemon.js')
 
 /** A Kanto run that has beaten the Champion and its Elite Four. */
 function championRun() {
@@ -66,15 +67,17 @@ test('prestigeMultipliers scale with the owned ranks', () => {
     capture: 1,
     shiny: 1,
     drops: 1,
+    hatch: 1,
   })
   const multipliers = prestigeMultipliers({
-    prestigePerks: { experience: 5, fortune: 2, capture: 4, radiant: 3, scavenger: 5 },
+    prestigePerks: { experience: 5, fortune: 2, capture: 4, radiant: 3, scavenger: 5, incubation: 4 },
   })
   assert.ok(Math.abs(multipliers.experience - 1.4) < 1e-9)
   assert.ok(Math.abs(multipliers.fortune - 1.2) < 1e-9)
   assert.ok(Math.abs(multipliers.capture - 1.2) < 1e-9)
   assert.ok(Math.abs(multipliers.shiny - 1.3) < 1e-9)
   assert.ok(Math.abs(multipliers.drops - 1.5) < 1e-9)
+  assert.ok(Math.abs(multipliers.hatch - 1.48) < 1e-9)
 })
 
 test('a region prestige awards Prestige Points', () => {
@@ -131,6 +134,26 @@ test('resetting prestige perks refunds exactly what was spent', () => {
   // Nothing invested: the action is a no-op and returns the same state.
   const noop = { ...base, prestigePerks: {} }
   assert.equal(gameReducer(noop, { type: 'RESET_PRESTIGE_PERKS' }), noop)
+})
+
+test('the Incubation perk shortens the daycare egg', () => {
+  const base = {
+      ...initialGameState,
+      party: [createPokemon('charmander', 10, 1)],
+      daycare: {
+        parents: [createPokemon('ditto', 10, 2), createPokemon('bulbasaur', 10, 3)],
+        progress: 50,
+      },
+    },
+    plain = gameReducer(base, { type: 'HATCH_DAYCARE_EGG' }),
+    boosted = gameReducer(
+      { ...base, prestigePerks: { incubation: 5 } },
+      { type: 'HATCH_DAYCARE_EGG' }
+    )
+  assert.ok(
+    boosted.party[1].eggStepsRemaining < plain.party[1].eggStepsRemaining,
+    'the perk hatches the egg in fewer battles'
+  )
 })
 
 test('the Capture perk raises the catch chance', () => {

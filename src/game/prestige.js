@@ -7,7 +7,7 @@ export const PRESTIGE_POINT_REWARD = 2
 
 /**
  * The perks, and which global multiplier each feeds.
- * @type {{ id: string, name: string, description: string, effect: 'experience' | 'fortune' | 'capture' | 'shiny' | 'drops', maxRank: number, baseCost: number, costStep: number }[]}
+ * @type {{ id: string, name: string, description: string, effect: 'experience' | 'fortune' | 'capture' | 'shiny' | 'drops' | 'hatch', maxRank: number, baseCost: number, costStep: number }[]}
  */
 export const PRESTIGE_PERKS = [
   {
@@ -55,6 +55,15 @@ export const PRESTIGE_PERKS = [
     baseCost: 1,
     costStep: 1,
   },
+  {
+    id: 'incubation',
+    name: 'Incubation',
+    description: '+12% egg hatching speed per rank.',
+    effect: 'hatch',
+    maxRank: 5,
+    baseCost: 1,
+    costStep: 1,
+  },
 ]
 
 /**
@@ -82,7 +91,7 @@ export function perkCost(perkId, currentRank) {
 /**
  * The global multipliers the owned perks grant. All 1 when no perks are owned.
  * @param {{ prestigePerks?: Record<string, number> }} state
- * @returns {{ experience: number, fortune: number, capture: number, shiny: number, drops: number }}
+ * @returns {{ experience: number, fortune: number, capture: number, shiny: number, drops: number, hatch: number }}
  */
 export function prestigeMultipliers(state) {
   const rank = (/** @type {string} */ id) => state.prestigePerks?.[id] ?? 0
@@ -92,6 +101,7 @@ export function prestigeMultipliers(state) {
     capture: 1 + rank('capture') * 0.05,
     shiny: 1 + rank('radiant') * 0.1,
     drops: 1 + rank('scavenger') * 0.1,
+    hatch: 1 + rank('incubation') * 0.12,
   }
 }
 

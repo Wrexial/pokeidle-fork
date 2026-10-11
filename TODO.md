@@ -27,7 +27,7 @@ _(empty — the last Tier 1 item, #77, shipped.)_
 
 ### Tier 3 — Small follow-ups on shipped systems
 
-See the numbered sections below: #24, #25, #56, #62, #65, #67, #69, #71–#76,
+See the numbered sections below: #24, #25, #56, #62, #67, #69, #71–#76,
 #79, #81. They are optional extras rather than missing features.
 
 ---
@@ -134,16 +134,6 @@ Still open:
       win, so they don't tick offline today).
 
 Effort: **medium**.
-
-## 65. Prestige perks
-
-A persistent perk tree bought with Prestige Points (2 per region prestige) is in
-(`src/game/prestige.js`): Experience, Fortune and Capture, up to rank 5 each.
-
-Still open (optional):
-
-- [ ] More perk ideas: egg hatch rate or a starting-level perk (the item-drop
-      and shiny-odds ideas shipped as Scavenger and Radiant).
 
 ## 67. Ribbons + ribbon case
 

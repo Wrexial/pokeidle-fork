@@ -994,10 +994,14 @@ re-scraping or regenerating data.
   unless the task requires it.
 - **Changelog & versioning:** record user-facing features and player-visible
   bug fixes in `src/data/changelog.js`, grouped under
-  `sections[].heading` with `items[]` one line per change. **Do not bump
+  `sections[].heading` with `items[]` one line per change. Use one of the
+  canonical headings, in this order, and only those:
+  `Regions`, `Pokemon`, `Trainers`, `Battles`, `Items`, `Minigames`,
+  `Features`, `Interface`, `Fixes`. **Do not bump
   `GAME_VERSION` or add a new version entry per task/commit.** Fold the change
-  into the existing top `CHANGELOG` entry, adding an item (or a new
-  `sections[]` heading) as needed. Only cut a new version — a new top entry
+  into the existing top `CHANGELOG` entry, adding an item under the matching
+  canonical section (or the closest one) as needed. Only cut a new version — a
+  new top entry
   with a `subtitle`, and `GAME_VERSION` set to its `version` — at a coherent
   milestone, or when the maintainer asks to release. One version should cover
   a batch of work, not a single change. `LAST_SEEN_VERSION_KEY` makes the

@@ -36,7 +36,7 @@ renumbered, so the gaps below are items that shipped.
 
 ### Tier 3 — New ideas (route activities, idle depth, endgame)
 
-7. **#69 Legendary quests** — M · ★★★.
+7. **#69 Legendary quests** — shipped (badges / Champion / dex steps).
 8. **#65 Prestige perks** — shipped; more perks and a respec remain optional.
 9. **#71 Breeding project queue** — shipped; optional Masuda odds and
    per-project hatch counters remain.
@@ -321,7 +321,20 @@ Records, and feeds the per-generation Shiny Charm. **No open items.**
 
 ## 69. Legendary quests
 
-Multi-step relic hunts for the box legendaries instead of pure Raid RNG.
+Done: `src/game/legendary-quests.js` gives each region a multi-step hunt for its
+box legendary (Kanto's Mewtwo, Johto's Lugia, Hoenn's Rayquaza, Sinnoh's
+Giratina, Unova's Kyurem, Kalos's Xerneas, Alola's Necrozma, Galar's Eternatus,
+Paldea's Terapagos): earn every badge, beat the Champion, and register 40% of
+that generation. The `LegendaryQuestPanel` on the Raid Island shows the steps and
+unlocks a direct `START_RAID` challenge once they are done; the quest is complete
+once the legendary is caught. It derives everything from existing state, so no
+new save fields.
+
+Still open (optional):
+
+- [ ] Relic-collecting steps (new items found on routes) instead of the
+      Pokédex-percentage step.
+- [ ] Per-legendary boss battles with dialogue rather than a standard raid.
 
 Effort: **medium**.
 

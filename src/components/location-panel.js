@@ -21,6 +21,7 @@ import { FossilPanel } from './fossil-panel.js'
 import { BattleTowerPanel } from './battle-tower-panel.js'
 import { GymLocationPanel } from './gym-location-panel.js'
 import { RivalPanel } from './rival-panel.js'
+import { LegendaryQuestPanel } from './legendary-quest-panel.js'
 import { LeagueLocationPanel } from './league-location-panel.js'
 import { DaycarePanel } from './daycare-panel.js'
 import { KurtPanel } from './kurt-panel.js'
@@ -549,6 +550,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
             onOpenCatchSettings: onOpenCatchSettings ?? (() => {}),
             forceRarity: 'very_rare',
           }),
+          jsx(LegendaryQuestPanel, { regionId: location.region ?? 'kanto' }),
           jsx('button', {
             className: 'raid-leave-btn',
             onClick: () =>

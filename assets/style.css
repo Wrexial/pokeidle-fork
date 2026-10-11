@@ -16369,3 +16369,69 @@ img {
     font-size: 8px;
     color: #5a4838
 }
+
+/* Legendary quest (Raid Island panel). */
+.legendary-quest-panel {
+    margin: 10px 0;
+    padding: 8px;
+    background: #00000014;
+    border: 1px solid #8a7a60;
+    border-radius: 3px
+}
+
+.legendary-quest-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px
+}
+
+.legendary-quest-sprite {
+    width: 40px;
+    height: 40px;
+    image-rendering: pixelated
+}
+
+.legendary-quest-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px
+}
+
+.legendary-quest-title {
+    font-size: 9px;
+    font-weight: 700;
+    color: #3a2818
+}
+
+.legendary-quest-target {
+    font-size: 8px;
+    color: #6a4a20
+}
+
+.legendary-quest-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-bottom: 8px
+}
+
+.legendary-quest-step {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 8px;
+    color: #5a4838
+}
+
+.legendary-quest-step.done {
+    color: #2e7d32;
+    font-weight: 700
+}
+
+.legendary-quest-done {
+    text-align: center;
+    font-size: 9px;
+    font-weight: 700;
+    color: #b8860b
+}

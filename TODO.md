@@ -40,7 +40,8 @@ renumbered, so the gaps below are items that shipped.
 8. **#65 Prestige perks** — M–L · ★★★.
 9. **#71 Breeding project queue** — shipped; optional Masuda odds and
    per-project hatch counters remain.
-10. **#62 Offline depth** — M · ★★★.
+10. **#62 Offline depth** — shipped (richer job report); a full idle-loop
+    catch-up simulation remains.
 11. **#72 QoL pass** — S–M · ★★★ — IV sort, move preview and team presets
     shipped; box bulk-release remains.
 12. **#67 Ribbons + ribbon case** — shipped.
@@ -253,8 +254,19 @@ Effort: **small–medium**.
 
 ## 62. Offline depth
 
-Richer offline reports and queued work: which routes/activities ran, what was
-caught, and a catch-up simulation that matches `offline.js`.
+Done: the "while you were away" report is richer. `summarizeJobAccrual`
+(`src/game/jobs.js`) diffs the Field Jobs before/after the away window and the
+save loader attaches the result to `offlineReport.jobs`; the modal lists each
+job's activity and location, the cycles it finished, what it banked (money,
+items) and the Pokemon that wandered in, on top of the money + candy reward.
+
+Still open:
+
+- [ ] A full catch-up simulation that replays the idle loop offline (battles,
+      encounters, auto-catches) instead of the flat money + candy reward, so the
+      report can name what was caught.
+- [ ] Include the Pelago / garden / daycare in the report (they advance per wild
+      win, so they don't tick offline today).
 
 Effort: **medium**.
 

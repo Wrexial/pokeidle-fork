@@ -18,7 +18,7 @@ import { GARDEN_BERRIES, createGarden } from './garden.js'
 import { GAME_CORNER_PRIZE_GOAL } from './minigames/game-corner.js'
 import { PELAGO_MAX_READY, PELAGO_SLOTS, createPelago } from './pelago.js'
 import { RODS, rodsForRegionCount, routeActivityIds } from './minigames.js'
-import { JOB_MAX_READY, accrueJobs, jobCycleMs, jobKey } from './jobs.js'
+import { JOB_MAX_READY, accrueJobs, jobCycleMs, jobKey, summarizeJobAccrual } from './jobs.js'
 import { RESEARCH_MAX_POINTS } from './research.js'
 import { GIFTS, STATIC_ENCOUNTERS } from './gifts.js'
 import { initialGameState } from './reducer.js'
@@ -925,6 +925,7 @@ export function loadSavedState(slot = getActiveSlot() || 1) {
   // also bank for the away window (self-capped by JOB_MAX_READY).
   const awayMs = typeof saved.savedAt === 'number' ? Date.now() - saved.savedAt : 0,
     accruedJobs = accrueJobs(repaired.jobs ?? {}, awayMs),
+    jobReport = summarizeJobAccrual(repaired.jobs ?? {}, accruedJobs),
     withJobs = accruedJobs === repaired.jobs ? repaired : { ...repaired, jobs: accruedJobs },
     offlineReward = computeOfflineReward(withJobs, awayMs)
   if (!offlineReward) return withJobs
@@ -935,7 +936,7 @@ export function loadSavedState(slot = getActiveSlot() || 1) {
     ...withJobs,
     money: withJobs.money + offlineReward.money,
     inventory,
-    offlineReport: offlineReward,
+    offlineReport: { ...offlineReward, jobs: jobReport },
   }
 }
 /**

@@ -611,7 +611,22 @@ type GameState = {
   /** A pending region-dex-completion celebration shown in the `dexComplete` phase. */
   dexCelebration?: { generation: number } | null
   /** Offline-progress summary shown on return (transient). */
-  offlineReport?: { awayMs: number, money: number, items: Record<string, number> } | null
+  offlineReport?: {
+    awayMs: number
+    money: number
+    items: Record<string, number>
+    /** Field Jobs that banked while away (see summarizeJobAccrual). */
+    jobs?: {
+      title: string
+      icon: string
+      location: string
+      activityId?: string
+      cycles: number
+      money: number
+      items: Record<string, number>
+      encounters: number
+    }[]
+  } | null
   /** Daycare parents (up to 2) and battles toward the next egg. */
   daycare: { parents: Pokemon[]; progress: number }
   /** Breeding tracker (eggs / shinies hatched) and the project queue (see game/breeding-projects.js). */

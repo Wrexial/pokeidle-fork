@@ -186,6 +186,45 @@ export function accrueJobs(jobs, elapsedMs) {
 }
 
 /**
+ * Summarise what a set of jobs banked over a window (used by the offline
+ * report). Compares the before/after job maps and returns one entry per job
+ * that changed, with its display label.
+ * @param {Record<string, Job>} before
+ * @param {Record<string, Job>} after
+ * @returns {{ title: string, icon: string, location: string, activityId: string, cycles: number, money: number, items: Record<string, number>, encounters: number }[]}
+ */
+export function summarizeJobAccrual(before, after) {
+  /** @type {ReturnType<typeof summarizeJobAccrual>} */
+  const summary = []
+  for (const [key, job] of Object.entries(after ?? {})) {
+    const prior = /** @type {Job | undefined} */ (before?.[key]),
+      cycles = (job.cycles ?? 0) - (prior?.cycles ?? 0),
+      money = (job.money ?? 0) - (prior?.money ?? 0),
+      encounters = (job.encounters?.length ?? 0) - (prior?.encounters?.length ?? 0)
+    /** @type {Record<string, number>} */
+    const items = {}
+    let changed = cycles > 0
+    for (const [itemId, quantity] of Object.entries(job.items ?? {})) {
+      const delta = quantity - (prior?.items?.[itemId] ?? 0)
+      if (delta > 0) {
+        items[itemId] = delta
+        changed = true
+      }
+    }
+    if (!changed) continue
+    summary.push({
+      ...jobLabel(job),
+      activityId: job.activityId,
+      cycles,
+      money,
+      items,
+      encounters,
+    })
+  }
+  return summary
+}
+
+/**
  * Human label for a job's activity/location, for the panel.
  * @param {Job} job
  * @returns {{ title: string, icon: string, location: string }}

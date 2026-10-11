@@ -33,6 +33,7 @@ const {
   activityRewardName,
   activityRuneQuality,
   activityShinyMultiplier,
+  activitySoarQuality,
   bumpActivityQuality,
   rollActivityEncounter,
   rollActivityEncounters,
@@ -727,6 +728,14 @@ test('the campfire, overcharge and s\u00e9ance interactions grade their metrics'
   assert.equal(activityRuneQuality(ACTIVITY_RUNE_LENGTH), 'ultra')
   assert.equal(activityRuneQuality(ACTIVITY_RUNE_LENGTH - 1), 'perfect')
   assert.equal(activityRuneQuality(ACTIVITY_RUNE_LENGTH - 2), 'hit')
+
+  // Summit Roost is a stamina climb, not a band: reaching the roost scores by
+  // the stamina left, and a high peak still finds something.
+  assert.equal(activitySoarQuality(true, 1, 60), 'ultra', 'the roost with stamina to spare')
+  assert.equal(activitySoarQuality(true, 1, 25), 'perfect')
+  assert.equal(activitySoarQuality(true, 1, 5), 'hit', 'reaching the roost always lands')
+  assert.equal(activitySoarQuality(false, 0.7, 0), 'hit', 'a high peak still finds a Pokemon')
+  assert.equal(activitySoarQuality(false, 0.3, 0), null, 'a low stall finds nothing')
 })
 
 test('the new activities start where their terrain and types meet', () => {

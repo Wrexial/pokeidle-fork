@@ -49,6 +49,7 @@ import {
   activityRewardName,
   activityRuneQuality,
   activityShinyMultiplier,
+  activitySoarQuality,
   bestRodId,
   bumpActivityQuality,
   rodForId,
@@ -143,9 +144,10 @@ export function RouteActivityScene() {
     [runeInput, setRuneInput] = React.useState(/** @type {number[]} */ ([])),
     [runePhase, setRunePhase] = React.useState(/** @type {'show' | 'input'} */ ('show')),
     [runeActive, setRuneActive] = React.useState(-1),
-    // Summit: the flier's altitude and how much of the climb is done.
-    [soar, setSoar] = React.useState(0.4),
-    [soarProgress, setSoarProgress] = React.useState(0),
+    // Summit: the flier's altitude, remaining stamina and climb time.
+    [soar, setSoar] = React.useState(0.2),
+    [soarStamina, setSoarStamina] = React.useState(ACTIVITY_SOAR.maxStamina),
+    [soarTime, setSoarTime] = React.useState(0),
     // Bumped on every new attempt so timed CSS animations restart.
     [attemptNonce, setAttemptNonce] = React.useState(0),
     chargingTreeRef = React.useRef(/** @type {number | null} */ (null)),
@@ -161,9 +163,11 @@ export function RouteActivityScene() {
     stokeStatsRef = React.useRef({ elapsed: 0, inBand: 0 }),
     circuitSparksRef = React.useRef(0),
     circuitScoreRef = React.useRef(0),
-    soarRef = React.useRef(0.4),
+    soarRef = React.useRef(0.2),
     soarVelocityRef = React.useRef(0),
-    soarStatsRef = React.useRef({ elapsed: 0, inBand: 0 }),
+    soarStaminaRef = React.useRef(ACTIVITY_SOAR.maxStamina),
+    soarElapsedRef = React.useRef(0),
+    soarPeakRef = React.useRef(0.2),
     runeSequenceRef = React.useRef(/** @type {number[]} */ ([])),
     runeInputRef = React.useRef(/** @type {number[]} */ ([])),
     // Set once an attempt is resolved so a timer and a tap can't both score it.
@@ -215,11 +219,14 @@ export function RouteActivityScene() {
     setRuneInput([])
     setRunePhase('show')
     setRuneActive(-1)
-    soarRef.current = 0.4
+    soarRef.current = 0.2
     soarVelocityRef.current = 0
-    soarStatsRef.current = { elapsed: 0, inBand: 0 }
-    setSoar(0.4)
-    setSoarProgress(0)
+    soarStaminaRef.current = ACTIVITY_SOAR.maxStamina
+    soarElapsedRef.current = 0
+    soarPeakRef.current = 0.2
+    setSoar(0.2)
+    setSoarStamina(ACTIVITY_SOAR.maxStamina)
+    setSoarTime(0)
     bugShownAtRef.current = performance.now()
     setBugSpot(Math.floor(Math.random() * ACTIVITY_BUG_SPOTS))
     resolvedRef.current = false
@@ -406,8 +413,9 @@ export function RouteActivityScene() {
     return () => cancelAnimationFrame(frame)
   }, [stage, activity?.display])
 
-  // Summit: each flap gives an impulse, gravity pulls the flier back down, and
-  // the player rides a thermal that climbs across the attempt.
+  // Summit: each flap adds upward velocity at the cost of stamina, gravity pulls
+  // the flier back down, and the climb ends at the roost or when the stamina or
+  // the thermal runs out.
   React.useEffect(() => {
     if (stage !== 'aiming' || activity?.display !== 'soar') return
     let frame = 0,
@@ -417,17 +425,16 @@ export function RouteActivityScene() {
       const delta = Math.min(50, now - last)
       last = now
       soarVelocityRef.current -= ACTIVITY_SOAR.gravity * (delta / 1000)
-      soarRef.current = clamp01(soarRef.current + soarVelocityRef.current * (delta / 1000))
-      soarStatsRef.current.elapsed += delta
-      const center = 0.38 + 0.24 * (soarStatsRef.current.elapsed / ACTIVITY_SOAR_MS)
-      if (Math.abs(soarRef.current - center) <= ACTIVITY_SOAR.band / 2)
-        soarStatsRef.current.inBand += delta
+      soarRef.current = Math.max(0, soarRef.current + soarVelocityRef.current * (delta / 1000))
+      soarPeakRef.current = Math.max(soarPeakRef.current, soarRef.current)
+      soarElapsedRef.current += delta
       setSoar(soarRef.current)
-      setSoarProgress(Math.min(1, soarStatsRef.current.elapsed / ACTIVITY_SOAR_MS))
-      if (soarStatsRef.current.elapsed >= ACTIVITY_SOAR_MS && !done) {
+      setSoarTime(Math.min(1, soarElapsedRef.current / ACTIVITY_SOAR_MS))
+      const reached = soarRef.current >= 1
+      if ((reached || soarElapsedRef.current >= ACTIVITY_SOAR_MS) && !done) {
         done = true
         finishRef.current(
-          activityBandQuality(soarStatsRef.current.inBand / soarStatsRef.current.elapsed)
+          activitySoarQuality(reached, soarPeakRef.current, soarStaminaRef.current)
         )
         return
       }
@@ -859,10 +866,16 @@ export function RouteActivityScene() {
     }
   }
 
-  // Summit: a flap gives the flier an upward impulse.
+  // Summit: a flap costs stamina and gives the flier an upward impulse. Running
+  // out of stamina stalls the climb, so the run ends right away.
   function soarTap() {
     if (stage !== 'aiming' || activity?.display !== 'soar') return
+    if (soarStaminaRef.current <= 0) return
+    soarStaminaRef.current = Math.max(0, soarStaminaRef.current - ACTIVITY_SOAR.flapCost)
+    setSoarStamina(soarStaminaRef.current)
     soarVelocityRef.current = ACTIVITY_SOAR.flap
+    if (soarStaminaRef.current <= 0)
+      finishRef.current(activitySoarQuality(false, soarPeakRef.current, 0))
   }
 
   const liveZone =
@@ -1319,9 +1332,7 @@ export function RouteActivityScene() {
   }
 
   function renderSoar() {
-    const center = 0.38 + 0.24 * soarProgress,
-      bandTop = (1 - (center + ACTIVITY_SOAR.band / 2)) * 100,
-      bandHeight = ACTIVITY_SOAR.band * 100
+    const staminaRatio = soarStamina / ACTIVITY_SOAR.maxStamina
     return jsxs('div', {
       className: `activity-soar${stage === 'aiming' ? '' : ' locked'}`,
       children: [
@@ -1329,8 +1340,9 @@ export function RouteActivityScene() {
           className: 'activity-sky',
           children: [
             jsx('div', {
-              className: 'activity-thermal',
-              style: { top: `${bandTop}%`, height: `${bandHeight}%` },
+              className: 'activity-roost',
+              title: 'The roost',
+              children: '\u{1f3d4}\ufe0f',
             }),
             jsx('div', {
               className: 'activity-flier',
@@ -1339,22 +1351,48 @@ export function RouteActivityScene() {
             }),
           ],
         }),
-        jsx('div', {
-          className: 'activity-band-progress',
-          children: jsx('div', {
-            className: 'activity-band-progress-fill',
-            style: { transform: `scaleX(${soarProgress})` },
-          }),
+        jsxs('div', {
+          className: 'activity-soar-bars',
+          children: [
+            jsxs('div', {
+              className: 'activity-soar-bar',
+              children: [
+                jsx('span', { className: 'activity-soar-bar-label', children: 'STA' }),
+                jsx('div', {
+                  className: 'activity-soar-bar-track',
+                  children: jsx('div', {
+                    className: `activity-soar-bar-fill stamina${
+                      staminaRatio <= 0.25 ? ' low' : ''
+                    }`,
+                    style: { width: `${staminaRatio * 100}%` },
+                  }),
+                }),
+              ],
+            }),
+            jsxs('div', {
+              className: 'activity-soar-bar',
+              children: [
+                jsx('span', { className: 'activity-soar-bar-label', children: 'AIR' }),
+                jsx('div', {
+                  className: 'activity-soar-bar-track',
+                  children: jsx('div', {
+                    className: 'activity-soar-bar-fill thermal',
+                    style: { width: `${(1 - soarTime) * 100}%` },
+                  }),
+                }),
+              ],
+            }),
+          ],
         }),
         jsx('button', {
           className: 'activity-tap-btn',
-          disabled: stage !== 'aiming',
+          disabled: stage !== 'aiming' || soarStamina <= 0,
           onPointerDown: (/** @type {React.PointerEvent<HTMLButtonElement>} */ event) => {
             event.preventDefault()
             soarTap()
           },
           onContextMenu: (/** @type {React.MouseEvent} */ event) => event.preventDefault(),
-          children: 'FLAP',
+          children: soarStamina > 0 ? 'FLAP' : 'STALLED',
         }),
       ],
     })

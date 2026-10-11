@@ -11656,13 +11656,19 @@ img {
     border-radius: 8px
 }
 
-.activity-thermal {
+.activity-roost {
     position: absolute;
     left: 0;
     right: 0;
-    background: rgba(84,224,255,.22);
-    border-top: 1px dashed #54e0ff;
-    border-bottom: 1px dashed #54e0ff
+    top: 0;
+    height: 14%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    line-height: 1;
+    background: rgba(106,176,76,.3);
+    border-bottom: 2px solid #6ab04c
 }
 
 .activity-flier {
@@ -11672,6 +11678,55 @@ img {
     font-size: 28px;
     line-height: 1;
     filter: drop-shadow(0 0 6px rgba(255,255,255,.5))
+}
+
+.activity-soar-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 76%
+}
+
+.activity-soar-bar {
+    display: flex;
+    align-items: center;
+    gap: 6px
+}
+
+.activity-soar-bar-label {
+    width: 26px;
+    font-size: 7px;
+    letter-spacing: .4px;
+    color: #8fa3b8
+}
+
+.activity-soar-bar-track {
+    position: relative;
+    flex: 1;
+    height: 8px;
+    overflow: hidden;
+    background: rgba(10,14,10,.7);
+    border: 1px solid #6a7a9a;
+    border-radius: 3px
+}
+
+.activity-soar-bar-fill {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0
+}
+
+.activity-soar-bar-fill.stamina {
+    background: linear-gradient(90deg,#6ab04c,#8fdc6a)
+}
+
+.activity-soar-bar-fill.stamina.low {
+    background: linear-gradient(90deg,#e8874a,#e85a5a)
+}
+
+.activity-soar-bar-fill.thermal {
+    background: linear-gradient(90deg,#54e0ff,#8fd0ff)
 }
 
 .academy-scene {

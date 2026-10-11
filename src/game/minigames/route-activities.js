@@ -177,7 +177,7 @@ export const ROUTE_ACTIVITIES = {
     title: 'Summit Roost',
     action: 'SOAR',
     icon: '\u{1f409}',
-    hint: 'Flap to ride the rising thermal and hold the band \u2014 reach the Dragon roost at the top before you stall.',
+    hint: 'Tap to flap up the cliff, spending your stamina, and reach the Dragon roost at the top before the thermal dies \u2014 the more stamina you have left, the better the Pokemon waiting there.',
     mode: 'encounter',
     display: 'soar',
     condition: { time: 'day' },
@@ -247,9 +247,9 @@ export const ROUTE_ACTIVITY_TUTORIALS = {
     'A clean reading draws out rarer Pokemon.',
   ],
   summit: [
-    'Tap FLAP to give the dragon a burst of height.',
-    'Keep it inside the rising thermal band as it climbs.',
-    'Stay on the band to reach the roost.',
+    'Tap FLAP to beat your wings and rise; gravity pulls you back down.',
+    'Every flap spends stamina, so time your taps instead of mashing.',
+    'Reach the roost at the top before the stamina or the thermal runs out \u2014 the more stamina left, the better the find.',
   ],
 }
 
@@ -553,7 +553,7 @@ export function activityDigQuality(tries) {
 
 /**
  * Grade "keep a value inside its band for a while" mechanics (the campfire's
- * heat, the summit's thermal) by the fraction of the run spent on the band.
+ * heat) by the fraction of the run spent on the band.
  * @param {number} ratio Fraction of the attempt spent inside the band.
  * @returns {'hit' | 'perfect' | 'ultra' | null}
  */
@@ -608,11 +608,28 @@ export function activityRuneQuality(correct) {
   return null
 }
 
-/** How long the flier must hold the thermal, in ms. */
-export const ACTIVITY_SOAR_MS = 2400
+/** How long the summit climb lasts before the thermal dies, in ms. */
+export const ACTIVITY_SOAR_MS = 7000
 
-/** Upward impulse a flap gives and the per-second gravity pulling back down. */
-export const ACTIVITY_SOAR = { flap: 1, gravity: 2.1, band: 0.24 }
+/**
+ * Summit Roost physics: each flap adds upward velocity at the cost of stamina,
+ * gravity pulls the flier back down, and the run ends at the roost, when the
+ * stamina runs out, or when the thermal dies.
+ */
+export const ACTIVITY_SOAR = { flap: 1, gravity: 2.2, maxStamina: 100, flapCost: 10 }
+
+/**
+ * Grade a summit climb: reaching the roost scores by how much stamina is left,
+ * and a high peak without quite reaching it still finds something.
+ * @param {boolean} reached
+ * @param {number} peakAltitude 0..1
+ * @param {number} staminaLeft 0..100
+ * @returns {'hit' | 'perfect' | 'ultra' | null}
+ */
+export function activitySoarQuality(reached, peakAltitude, staminaLeft) {
+  if (reached) return staminaLeft >= 40 ? 'ultra' : staminaLeft >= 15 ? 'perfect' : 'hit'
+  return peakAltitude >= 0.65 ? 'hit' : null
+}
 
 /**
  * Whether an activity's favoured condition is active. Activities without a

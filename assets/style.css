@@ -16328,3 +16328,44 @@ img {
     font-size: 8px;
     color: #6a4a20
 }
+
+/* Prestige perks (League panel). */
+.prestige-perks {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #00000022
+}
+
+.prestige-perk-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 6px;
+    background: #00000012;
+    padding: 5px 7px;
+    border-radius: 3px
+}
+
+.prestige-perk-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1px
+}
+
+.prestige-perk-name {
+    font-size: 9px;
+    font-weight: 700;
+    color: #3a2818
+}
+
+.prestige-perk-rank {
+    font-weight: 400;
+    color: #6a4a20
+}
+
+.prestige-perk-desc {
+    font-size: 8px;
+    color: #5a4838
+}

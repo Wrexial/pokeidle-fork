@@ -271,6 +271,8 @@ type CatchContext = {
   leadGender?: 'male' | 'female' | 'genderless'
   /** The target's gender (Love Ball). */
   enemyGender?: 'male' | 'female' | 'genderless'
+  /** Global catch-rate multiplier from prestige perks (Capture). */
+  catchMultiplier?: number
   /** Whether Honey is boosting this species on the route (catch bonus). */
   honey?: boolean
 }
@@ -666,6 +668,10 @@ type GameState = {
   claimedGifts: string[]
   /** Times each region has been prestiged (map progress reset). */
   regionPrestige: Record<string, number>
+  /** Prestige Points earned from region prestiges, spent on perks. */
+  prestigePoints: number
+  /** Owned prestige perk ranks (see game/prestige.js). */
+  prestigePerks: Record<string, number>
   /** Best result per minigame, for `unlock.minigame` gates (see endMinigame). */
   minigameRecords: Record<string, { best: number; completed: boolean }>
   /** Best activity hit quality per route, for route mastery (see game/route-mastery.js). */

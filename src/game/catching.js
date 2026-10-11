@@ -91,8 +91,10 @@ export function calculateCatchChance(speciesKey, ballId, context) {
   const catchRate = getCatchRate(speciesKey),
     modifier = getBallModifier(ballId, context)
   if (modifier <= 0) return 0
-  const honeyBonus = context?.honey ? HONEY_CATCH_BONUS : 1
-  return Math.min(1, (catchRate * modifier * honeyBonus) / 255)
+  const honeyBonus = context?.honey ? HONEY_CATCH_BONUS : 1,
+    // The Capture prestige perk raises the catch rate a little.
+    prestigeBonus = context?.catchMultiplier ?? 1
+  return Math.min(1, (catchRate * modifier * honeyBonus * prestigeBonus) / 255)
 }
 
 /**

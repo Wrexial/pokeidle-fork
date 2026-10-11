@@ -88,6 +88,7 @@ export const CHANGELOG = [
           'Route activities track mastery: the best hit quality you\u2019ve scored for each activity on a route is remembered, the location panel shows how many are at a perfect hit or better, and clearing every activity on a route pays a one-time bonus and marks it mastered.',
           'The Day-Care tracks your breeding now: it counts eggs and shinies hatched and eggs since the last shiny, and you can queue breeding projects \u2014 hatch a shiny, all-31 IVs, or a specific nature \u2014 that complete the moment a matching Egg hatches.',
           'The “while you were away” report is richer: it lists the Field Jobs that kept running, how many cycles each finished and what it banked (money, items and the Pokemon that wandered in), alongside the offline reward.',
+          'Prestiging a region now earns Prestige Points for a permanent perk tree that survives every reset: Experience (+8% EXP per rank), Fortune (+10% prize money per rank) and Capture (+5% catch rate per rank), up to rank 5 each. The League panel shows the tree.',
         ],
       },
       {

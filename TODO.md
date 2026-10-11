@@ -37,7 +37,7 @@ renumbered, so the gaps below are items that shipped.
 ### Tier 3 — New ideas (route activities, idle depth, endgame)
 
 7. **#69 Legendary quests** — M · ★★★.
-8. **#65 Prestige perks** — M–L · ★★★.
+8. **#65 Prestige perks** — shipped; more perks and a respec remain optional.
 9. **#71 Breeding project queue** — shipped; optional Masuda odds and
    per-project hatch counters remain.
 10. **#62 Offline depth** — shipped (richer job report); a full idle-loop
@@ -273,8 +273,19 @@ Effort: **medium**.
 
 ## 65. Prestige perks
 
-Prestige currently only resets map progress for Victory Tokens; add a
-persistent talent tree so prestiging invests in something across runs.
+Done: `src/game/prestige.js` defines a persistent perk tree bought with
+**Prestige Points** (2 per region prestige). Three perks, up to rank 5 each:
+**Experience** (+8% EXP/rank), **Fortune** (+10% prize money/rank) and
+**Capture** (+5% catch rate/rank). `prestigeMultipliers(state)` feeds the idle
+loop's EXP bonus (game loop), prize payouts and the catch chance
+(`calculateCatchChance` context); the League panel renders the tree.
+`prestigePoints` / `prestigePerks` persist in the save and repair.
+
+Still open (optional):
+
+- [ ] More perk ideas: egg hatch rate, item drop rate, a starting-level or
+      shiny-odds perk.
+- [ ] Respec / refund points.
 
 Effort: **medium–large**.
 

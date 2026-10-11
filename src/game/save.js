@@ -9,6 +9,7 @@ import { elite4Data, encounterData, gymLeaderData, mapData, moveData, pokemonSpe
 import { ROUTE_ACTIVITIES } from './minigames/route-activities.js'
 import { BREEDING_GOALS, MAX_BREEDING_PROJECTS } from './breeding-projects.js'
 import { RIVAL_MILESTONES } from './rival.js'
+import { PRESTIGE_PERKS } from './prestige.js'
 import { BASE_FRIENDSHIP, generateIVs, calculatePokemonStats, resolvePokemonMoves, rollAbility, rollSize, RIBBONS } from './pokemon.js'
 import { ACHIEVEMENTS } from '../data/achievements.js'
 import { natureByKey, randomNature } from '../data/natures.js'
@@ -656,6 +657,23 @@ export function repairSave(saved) {
     defeatedChampions = [
       ...new Set(savedChampions.filter(/** @param {string} id */ (id) => regionIds.has(id))),
     ],
+    // Prestige perks: keep known perk ids, clamped to each perk's max rank.
+    prestigePerks = Object.fromEntries(
+      Object.entries(
+        saved.prestigePerks && typeof saved.prestigePerks === 'object' ? saved.prestigePerks : {}
+      )
+        .filter(
+          ([perkId, rank]) =>
+            PRESTIGE_PERKS.some((perk) => perk.id === perkId) &&
+            typeof rank === 'number' &&
+            rank > 0
+        )
+        .map(([perkId, rank]) => {
+          const perk = PRESTIGE_PERKS.find((entry) => entry.id === perkId)
+          return [perkId, Math.min(perk?.maxRank ?? 0, Math.floor(/** @type {number} */ (rank)))]
+        })
+    ),
+    prestigePoints = Math.max(0, Math.floor(Number(saved.prestigePoints) || 0)),
     // Rival wins per region, clamped to the number of milestones.
     rivals = Object.fromEntries(
       Object.entries(saved.rivals && typeof saved.rivals === 'object' ? saved.rivals : {})
@@ -842,6 +860,8 @@ export function repairSave(saved) {
         ([regionId, level]) => regionIds.has(regionId) && typeof level === 'number' && level > 0
       )
     ),
+    prestigePoints,
+    prestigePerks,
     towerFloor: repairedTowerFloor,
     towerBest: repairedTowerBest,
     minigameRecords,
@@ -1012,6 +1032,8 @@ export const SAVED_STATE_KEYS = [
   'rewardedAchievements',
   'claimedGifts',
   'regionPrestige',
+  'prestigePoints',
+  'prestigePerks',
   'minigameRecords',
   'routeMastery',
   'masteredRoutes',

@@ -23,7 +23,7 @@ import { claimMinigameReward, collectMining, endBugContest, endMinigame, endRout
 import { applyTeamPreset, boxToParty, catchPokemon, clearHatchResult, completeEvolution, completeWonderTrade, deleteTeamPreset, depositDaycare, evolutionStep, hatchDaycareEgg, partyToBox, releaseDuplicates, releaseFainted, releaseHatchling, releasePokemon, reorderBox, reorderParty, saveTeamPreset, setBoxSort, setMoves, setNickname, startEvolution, swapPartyBox, toggleFavourite, withdrawDaycare, wonderTrade } from './reducer/pokemon.js'
 import { completeHealing, healingStep, nuzlockeGameOver, startHealing } from './reducer/recovery.js'
 import { addLog, clearLevelUp, dismissNotification, markCatchRoute, markTutorialSeen, pushNotification, setBattleMode, setBattleStyle, setChallengeMonotype, setSpeed, toggleAutoHeal, toggleAutoProceed, toggleBrowserNotifications, toggleChallengeLevelScale, toggleChallengeNuzlocke, toggleChallengeRandomizer, toggleChallengeRestrictCatches, toggleColourblindTypes, toggleDamageNumbers, toggleLargeText, toggleMartCollapsed, toggleMusic, toggleNotifyEgg, toggleNotifyRare, toggleNotifyShiny, togglePause, toggleReducedMotion, toggleSfx, toggleShinySparkles, toggleSpriteStyle } from './reducer/settings.js'
-import { phaseIdle, prestigeRegion, resetEliteFour, selectStarter, travel, unlockRegion } from './reducer/world.js'
+import { buyPrestigePerk, phaseIdle, prestigeRegion, resetEliteFour, selectStarter, travel, unlockRegion } from './reducer/world.js'
 
 /** @type {GameState} */
 export const initialGameState = {
@@ -151,6 +151,10 @@ export const initialGameState = {
   /** NPC gift / static-encounter ids already claimed this save. */
   claimedGifts: [],
   regionPrestige: {},
+  /** Prestige Points earned from region prestiges, spent on perks. */
+  prestigePoints: 0,
+  /** Owned prestige perk ranks (see game/prestige.js). */
+  prestigePerks: {},
   /** Best result per minigame, used by `unlock.minigame` route gates. */
   minigameRecords: {},
   /** Best activity hit quality per route, for route mastery (see game/route-mastery.js). */
@@ -417,6 +421,8 @@ export function gameReducer(state, action) {
       return resetEliteFour(state, action)
     case 'PRESTIGE_REGION':
       return prestigeRegion(state, action)
+    case 'BUY_PRESTIGE_PERK':
+      return buyPrestigePerk(state, action)
     case 'TOGGLE_AUTO_PROCEED':
       return toggleAutoProceed(state, action)
     case 'TOGGLE_AUTO_HEAL':

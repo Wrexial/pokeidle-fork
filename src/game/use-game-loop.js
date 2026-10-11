@@ -16,6 +16,7 @@ import { companionExpMultiplier, companionToughOutChance } from './companion.js'
 import { applyBattleForm, createBattlePokemon, createVolatileState, resolveBattleTurn, volatileStateFromBattle, AI_SKILL, chooseBestSwitch, chooseTrainingSwitch } from './combat.js'
 import { isBattleReady } from './pokemon.js'
 import { genderForPokemon } from './breeding.js'
+import { prestigeMultipliers } from './prestige.js'
 import { awardExperience, checkShinyOdds, encountersForPhase, isHoneyActive, partyNeedsHealing, pokerusExpMultiplier, raidProgressFor, resolveActiveModifiers, resolvePokemonEncounter, resolveRoamer, shinyOddsForSpecies, ENCOUNTER_TYPE_ABILITY } from './progression.js'
 
 export function useGameLoop() {
@@ -96,9 +97,15 @@ export function useGameLoop() {
       // The Shiny Charm is per generation: a species gets the boosted odds once
       // its own generation's national dex is complete.
       const completedGenerationSet = completedGenerations(currentGameState.pokedexCaught),
+        // Prestige perks: global EXP / money / catch multipliers.
+        prestige = prestigeMultipliers(currentGameState),
         dailyExpBonus = dailyExpMultiplier(currentGameState.dailyEvent),
-        expBonus = dailyExpBonus * pokerusExpMultiplier(currentGameState.pokerus) * companionExpMultiplier(currentGameState.companion),
-        dailyPrizeBonus = dailyPrizeMultiplier(currentGameState.dailyEvent),
+        expBonus =
+          dailyExpBonus *
+          pokerusExpMultiplier(currentGameState.pokerus) *
+          companionExpMultiplier(currentGameState.companion) *
+          prestige.experience,
+        dailyPrizeBonus = dailyPrizeMultiplier(currentGameState.dailyEvent) * prestige.fortune,
         // Happy Hour doubles the prize money from this battle.
         happyHourBonus = currentGameState.playerVolatile?.happyHour ? 2 : 1,
         dailyShinyBonus = dailyShinyMultiplier(currentGameState.dailyEvent)
@@ -836,6 +843,7 @@ export function useGameLoop() {
             isWater: isWaterLocation(mapData[currentGameState.currentLocation]),
             isCave: isCaveLocation(mapData[currentGameState.currentLocation]),
             isNight: isNightTime(),
+            catchMultiplier: prestige.capture,
             honey: isHoneyActive(
               currentGameState.activeEffects,
               currentGameState.currentRoute,

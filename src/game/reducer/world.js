@@ -5,6 +5,7 @@ import { POKEMON_TYPES } from '../../data/moves.js'
 import { elite4Data, gymLeaderData, mapData, regions } from '../../data/gameData.js'
 import { emptyBattleHazards } from '../hazards.js'
 import { createPokemon, isBattleReady } from '../pokemon.js'
+import { PRESTIGE_PERKS, PRESTIGE_POINT_REWARD, perkCost } from '../prestige.js'
 import {
   computeUnlockedLocations,
   entryRoutePath,
@@ -233,6 +234,7 @@ export function prestigeRegion(state, action) {
         [regionId]: prestigeLevel,
       },
       victoryTokens: state.victoryTokens + prestigeTokenReward,
+      prestigePoints: (state.prestigePoints ?? 0) + PRESTIGE_POINT_REWARD,
       currentLocation: firstRoute ?? entryId ?? state.currentLocation,
       currentRoute: firstRoute ?? state.currentRoute,
       phase: 'idle',
@@ -261,7 +263,7 @@ export function prestigeRegion(state, action) {
       battleLog: [
         ...state.battleLog,
         `${region.name} prestiged to level ${prestigeLevel}! Its map progress has been reset.`,
-        `Earned ${prestigeTokenReward} Victory Tokens!`,
+        `Earned ${prestigeTokenReward} Victory Tokens and ${PRESTIGE_POINT_REWARD} Prestige Points!`,
       ].slice(-50),
     }
   return {
@@ -284,4 +286,33 @@ export function phaseIdle(state, action) {
         raidLevel: Math.min(state.raidLevel + 1, RAID_LEVEL_MAX),
       }
     : nextState
+}
+
+/**
+ * Handle the `BUY_PRESTIGE_PERK` action: spend Prestige Points on the next
+ * rank of a perk.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function buyPrestigePerk(state, action) {
+  const perkId = action.payload?.perkId,
+    perk = PRESTIGE_PERKS.find((entry) => entry.id === perkId),
+    rank = state.prestigePerks?.[perkId] ?? 0,
+    cost = perkCost(perkId, rank)
+  if (!perk || cost == null || (state.prestigePoints ?? 0) < cost) return state
+  return withNotification(
+    {
+      ...state,
+      prestigePoints: state.prestigePoints - cost,
+      prestigePerks: { ...state.prestigePerks, [perkId]: rank + 1 },
+      battleLog: [...state.battleLog, `${perk.name} reached rank ${rank + 1}!`].slice(-50),
+    },
+    {
+      message: `Prestige perk: ${perk.name} rank ${rank + 1}!`,
+      tone: 'success',
+      icon: '\u2605',
+      dedupeKey: `prestigeperk:${perkId}:${rank + 1}`,
+    }
+  )
 }

@@ -5,6 +5,7 @@ import { jsx, jsxs } from 'react/jsx-runtime'
 import { championData, elite4Data, gymLeaderData, mapData, regions } from '../data/gameData.js'
 import { BATTLE_TOWER_LOCATION, BATTLE_TOWER_REGION } from '../data/config.js'
 import { useGame } from '../game/context.js'
+import { PrestigePerks } from './prestige-perks.js'
 
 /**
  * "Lv.12-16" for a team, or an empty string when it has no members.
@@ -399,6 +400,7 @@ export function GymPanel({ onOpenShop }) {
                     ? `PRESTIGE ${region?.name?.toUpperCase() ?? 'REGION'}`
                     : 'BEAT THE ELITE FOUR FIRST',
                 }),
+            jsx(PrestigePerks, {}),
           ],
         }),
     ],
